@@ -39,7 +39,6 @@ import javax.swing.JScrollPane;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.common.clientside.UiBasicLocalization;
 import org.martus.swing.ParagraphLayout;
-import org.martus.swing.UiTextArea;
 import org.martus.swing.UiWrappedTextArea;
 import org.martus.swing.Utilities;
 import org.martus.util.TokenReplacement;
@@ -75,13 +74,10 @@ public class UiShowScrollableTextDlg extends JDialog implements ActionListener
 				cancel.addActionListener(this);
 			}
 			
-			details = new UiTextArea(15, 65);
-			details.setLineWrap(true);
-			details.setWrapStyleWord(true);
+			details = new UiWrappedTextArea(TokenReplacement.replaceTokens(text, tokenReplacement), 65);
 			details.setEditable(false);
 			JScrollPane detailScrollPane = new JScrollPane(details, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
 					JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-			details.setText(TokenReplacement.replaceTokens(text, tokenReplacement));
 			
 			getContentPane().setLayout(new ParagraphLayout());
 			getContentPane().add(new JLabel(""), ParagraphLayout.NEW_PARAGRAPH);
@@ -90,13 +86,12 @@ public class UiShowScrollableTextDlg extends JDialog implements ActionListener
 			getContentPane().add(new UiWrappedTextArea(fieldLabel));
 			getContentPane().add(new JLabel(""), ParagraphLayout.NEW_PARAGRAPH);
 			getContentPane().add(detailScrollPane);
+			getContentPane().add(new JLabel("    "));
 			
 			getContentPane().add(new JLabel(""), ParagraphLayout.NEW_PARAGRAPH);
 			getContentPane().add(ok);
 			if(cancelButtonTag.length() != 0)
-			{
 				getContentPane().add(cancel);
-			}
 			
 			getRootPane().setDefaultButton(ok);
 			Utilities.centerDlg(this);
@@ -122,7 +117,7 @@ public class UiShowScrollableTextDlg extends JDialog implements ActionListener
 	}
 	
 	JButton ok;
-	UiTextArea details;
+	UiWrappedTextArea details;
 	boolean result;
 	UiMainWindow mainWindow;
 }

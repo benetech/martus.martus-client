@@ -209,7 +209,6 @@ public class EnglishStrings
 "wintitle:LoadDefaultDetails=Load Default Details Field Content",
 "wintitle:ExportBulletins=Export Bulletins",
 "wintitle:ExportBulletinsSaveAs=Export Bulletins",
-"wintitle:BackupKeyPairToMultipleUnencryptedFilesInformation=Information on Sharing Your KeyPair",
 "wintitle:SaveShareKeyPair=Saving Share Disk",
 "wintitle:SaveRecoverShareKeyPairOf=of",
 "wintitle:BackupKeyShareCompleteInformation=Backup Complete",				
@@ -221,6 +220,8 @@ public class EnglishStrings
 "wintitle:VerifyingKeyPairShare=Verifying Disk",
 "wintitle:RemoveServer=Remove Server",
 "wintitle:RecoverKeyPair=Recover Keypair from Backup File",
+"wintitle:BackupKeyPairGeneralInformation=Backup KeyPair Information",
+"wintitle:BackupKeyPairToMultipleUnencryptedFilesInformation=Information on Sharing Your KeyPair",
 
 "button:help=Help",
 "button:create=Create",
@@ -448,14 +449,14 @@ public class EnglishStrings
 "field:DefaultDetailFiles=Default Details",
 "field:ServerComplianceDescription=The server you have selected has provided the following statement describing its compliance with the official guidelines for the secure and reliable operation of a Martus server.  You can accept or reject this server based on its compliance statement.",
 "field:ServerComplianceChangedDescription=The current server has updated its statement describing its compliance with the official guidelines for the secure and reliable operation of a Martus server.  The new statement appears below. You can accept or reject this server based on its compliance statement.",
-"field:BackupKeyPairToMultipleUnencryptedFilesInformation=This method breaks up your keypair into #M# 'secret share' pieces, any #N# of which will be required to reconstruct the keypair without requiring a passphrase.  If you forget your login name or your passphrase, this method is the only way you can recover your keypair.  Once the #M# floppies have been written, you should distribute them to #M# different people whom you will remember, but each of whom don’t know who you have given the other secret-share floppies to.  To restore this keypair, first retrieve any #N# of the original #M# floppies, and then select 'Restore Account' and 'Recover account from multiple disks' when signing into Martus.",
 "field:ErrorPreviousBackupShareExists=A previous share file exists.  You must save each file on its own removable media disk.",		
 "field:ErrorRecoverNoAppropriateFileFound=No appropriate share file was found on this disk, please try a different disk.",
 "field:ErrorRecoverShareDisk=An error occured reading this keyshare file.",
 "field:ErrorVerifyingKeyPairShare=An error occured verifying this keyshare file.",
 "field:RecoverAccount=Recover your existing account from floppy or a backup file.",
 "field:ErrorBackingupKeyPair=Unable to back up the key pair file on this disk.",
-
+"field:BackupKeyPairGeneralInformation=Your private key is required to read your private bulletin information or to create new bulletins.  The private key is a part of your keypair.  You will now have the opportunity to back up your keypair in two different ways.  You may use either or both, but both ways are strongly recommended.\n\nYour first opportunity will be to save your keypair, encrypted using your login name and your passphrase, onto a floppy disk or other removable media, which you should keep handy in case your computer is damaged or unavailable.  Select 'Restore Account' and 'Recover account from backup keypair file' when signing into Martus to restore this passphrase-protected keypair in the future.\n\nThe second opportunity requires #M# floppy disks.\n",
+"field:BackupKeyPairToMultipleUnencryptedFilesInformation=This method breaks up your keypair into #M# 'secret share' pieces, any #N# of which will be required to reconstruct the keypair without requiring a passphrase.  If you forget your login name or your passphrase, this method is the only way you can recover your keypair.\n\nOnce the #M# floppies have been written, you should distribute them to #M# different people whom you will remember, but each of whom don’t know who you have given the other secret-share floppies to.\n\nTo restore this keypair, first retrieve any #N# of the original #M# floppies, and then select 'Restore Account' and 'Recover account from multiple disks' when signing into Martus.\n",
 
 "field:VirtualUserNameDescription=(Enter using regular keyboard)",
 "field:VirtualPasswordDescription=Enter Password using mouse with on-screen keyboard below",
@@ -638,7 +639,7 @@ public class EnglishStrings
 "field:notifyRecoveryProcessBackupFilecause=To recover your keypair file, first you must find the backup file you saved previously.  Using the 'Recover Key Pair from Backup File' dialog box find the file on your computer’s hard drive or on a floppy disk then click the Open button.  Martus will then ask you for your user name and password and restore your key pair so you can log in normally and access your account.",
 "field:notifyRecoveryOfKeyPairCompletecause=Recovery of your keypair file is complete, you will now be logged into Martus.",
 "field:notifyErrorRecoveringAccountDirectorycause=Error during keypair recovery. This keypair backup copy may be damaged.",
-"field:notifyChoosingQuickEraseKeyPaircause=By choosing to erase your keypair file Martus will exit after it completes the quick erase operation.  Also by choosing to erase your keypair file Martus will also delete the following information: any server or HQ you have configured, any custom fields or default details, and your personal pereferences.  This information will be lost and restoring your keypair from a backup will not recover these settings.",
+"field:notifyChoosingQuickEraseKeyPaircause=By choosing to erase your keypair file Martus will exit after it completes the quick erase operation.  Also by choosing to erase your keypair file Martus will also delete the following information: any server or HQ you have configured, any custom fields or default details, and your personal preferences.  This information will be lost and restoring your keypair from a backup will not recover these settings.",
 	
 "field:messageServerNewscause=The current server has sent this message:",
 "field:messageErrorDateInFuturecause=This date occurs in the future:",

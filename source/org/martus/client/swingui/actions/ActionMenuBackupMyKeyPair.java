@@ -27,7 +27,9 @@ package org.martus.client.swingui.actions;
 
 import java.awt.event.ActionEvent;
 
+import org.martus.client.swingui.UiBackupRecoverSharedKeyPair;
 import org.martus.client.swingui.UiMainWindow;
+import org.martus.common.MartusConstants;
 
 
 public class ActionMenuBackupMyKeyPair extends UiMenuAction
@@ -41,7 +43,11 @@ public class ActionMenuBackupMyKeyPair extends UiMenuAction
 	{
 		if(!mainWindow.reSignIn())
 			return;
-		mainWindow.notifyDlg("BackupKeyPairGeneralInformation");
+		String message =  mainWindow.getLocalization().getFieldLabel("BackupKeyPairGeneralInformation");
+//		message += MartusConstants.NEWLINE;
+		message += mainWindow.getLocalization().getFieldLabel("BackupKeyPairToMultipleUnencryptedFilesInformation");
+		mainWindow.displayScrollableMessage("BackupKeyPairGeneralInformation", message, "Continue", UiBackupRecoverSharedKeyPair.getTokenReplacement());
+		
 		mainWindow.doBackupKeyPairToSingleEncryptedFile();
 		mainWindow.askToBackupKeyPareToSecretShareFiles();
 		}
