@@ -665,16 +665,13 @@ public class MartusApp
 		if(foundOrphanCount == 0)
 			return 0;
 
-		String name = store.getOrphanFolderName();
-		BulletinFolder orphanFolder = store.createOrFindFolder(name);
-
 		Iterator it = orphans.iterator();
 		while(it.hasNext())
 		{
 			UniversalId uid = (UniversalId)it.next();
 			try
 			{
-				store.addBulletinToFolder(uid, orphanFolder);
+				store.addRepairBulletinToFolders(uid);
 			}
 			catch (BulletinAlreadyExistsException e)
 			{

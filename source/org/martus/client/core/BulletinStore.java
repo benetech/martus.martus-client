@@ -926,6 +926,21 @@ public class BulletinStore
 		folder.add(b);
 	}
 	
+	public synchronized void addRepairBulletinToFolders(UniversalId uId) throws BulletinAlreadyExistsException, IOException
+	{
+		Bulletin b = findBulletinByUniversalId(uId);
+		if(b == null)
+			return;
+			
+		String name = getOrphanFolderName();
+		BulletinFolder orphanFolder = createOrFindFolder(name);
+		orphanFolder.add(b);
+		
+		BulletinFolder outboxFolder =  (b.isDraft())? getFolderDraftOutbox():getFolderSealedOutbox();
+		if (outboxFolder != null)
+			outboxFolder.add(b);
+	}
+	
 
 	private void initializeFolders()
 	{

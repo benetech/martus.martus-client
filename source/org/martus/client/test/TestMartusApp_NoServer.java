@@ -1500,12 +1500,18 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 
 	public void testRepairOrphans() throws Exception
 	{
-		assertEquals("already have orphans?", 0, appWithAccount.repairOrphans());
+		assertEquals("already have orphans?", 0, appWithAccount.repairOrphans());		
 		assertNull("Orphan Folder exists?", appWithAccount.getStore().findFolder(BulletinStore.RECOVERED_BULLETIN_FOLDER));
+		int draftCount = appWithAccount.getStore().getFolderDraftOutbox().getBulletinCount();
+		assertEquals("is draft outbox folder empty?", 0,draftCount);
+		
 		Bulletin b1 = appWithAccount.createBulletin();
+		b1.setDraft();
 		appWithAccount.getStore().saveBulletin(b1);
 		assertEquals("didn't find the orphan?", 1, appWithAccount.repairOrphans());
-		assertEquals("didn't fix the orphan?", 0, appWithAccount.repairOrphans());
+		draftCount = appWithAccount.getStore().getFolderDraftOutbox().getBulletinCount();
+		assertEquals("is draft outbox folder not empty?", 1, draftCount);				
+		assertEquals("didn't fix the orphan?", 0, appWithAccount.repairOrphans());		
 
 		BulletinFolder orphanFolder = appWithAccount.getStore().findFolder(BulletinStore.RECOVERED_BULLETIN_FOLDER);
 		assertEquals("where did the orphan go?", 1, orphanFolder.getBulletinCount());
