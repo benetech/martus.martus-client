@@ -47,10 +47,11 @@ public class UiProgressMeter extends JPanel implements ProgressMeterInterface
 		
 		setLayout( new BoxLayout( this, BoxLayout.X_AXIS) );
 		parentDlg = dlg;
-		statusMessage = new JLabel("     ", JLabel.LEFT );
+		statusMessage = new JLabel("     ", localizationToUse.getHorizontalAlignment());
 		statusMessage.setMinimumSize(new Dimension(60, 25));
 
 		progressMeter = new JProgressBar(0, 10);
+		progressMeter.setComponentOrientation(localizationToUse.getComponentOrientation());
 		Dimension meterSize = new Dimension(100, 20);
 		progressMeter.setMinimumSize(meterSize);
 		progressMeter.setMaximumSize(meterSize);
