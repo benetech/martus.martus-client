@@ -36,6 +36,7 @@ import javax.swing.JLabel;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
+import org.martus.client.swingui.UiLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.fields.UiChoiceEditor;
 import org.martus.common.clientside.DateUtilities;
@@ -105,10 +106,16 @@ getContentPane().add(directionRtoL);
 	{
 		if(ae.getSource() == ok)
 		{
-			owner.getLocalization().setCurrentDateFormatCode(dateFormatDropdown.getText());
-			owner.getLocalization().setCurrentLanguageCode(languageDropdown.getText());
-			owner.getLocalization().languageDirectionRightToLeft = directionRtoL.isSelected();
+			UiLocalization localization = owner.getLocalization();
+			localization.setCurrentDateFormatCode(dateFormatDropdown.getText());
+			localization.setCurrentLanguageCode(languageDropdown.getText());
 			owner.setBulletinsAlwaysPrivate(allPrivate.isSelected());
+
+//TODO:Remove later			
+if(directionRtoL.isSelected())
+	localization.addRightToLeftLanguage(localization.currentLanguageCode);
+else
+	localization.rightToLeftLanguages.remove(localization.currentLanguageCode);
 		}
 		dispose();
 	}

@@ -26,6 +26,7 @@ Boston, MA 02111-1307, USA.
 
 package org.martus.client.test;
 
+import java.io.File;
 import java.util.Vector;
 
 import org.martus.client.core.MartusApp;
@@ -40,6 +41,7 @@ import org.martus.common.clientside.UiBasicLocalization;
 import org.martus.util.StringInputStream;
 import org.martus.util.TestCaseEnhanced;
 import org.martus.util.UnicodeStringWriter;
+import org.martus.util.UnicodeWriter;
 
 public class TestLocalization extends TestCaseEnhanced
 {
@@ -79,13 +81,42 @@ public class TestLocalization extends TestCaseEnhanced
 		assertFalse("Unknown should not be recognized", Localization.isRecognizedLanguage("XX"));
 	}
 	
-	public void testIsRightToLeftLanguage()
+	public static String test = "test";
+	public static String button = "button:"+test+"=";
+	public static class EnglishTestStrings
 	{
-		bd.setCurrentLanguageCode("en");
-		assertFalse("English is a Left To Right language.", bd.isRightToLeftLanguage());
-		bd.setCurrentLanguageCode("ar");
-		assertTrue("Arabic should be a Right to Left language.", bd.isRightToLeftLanguage());
+		public static String strings[] = {button+"Test Button English"};
+	}
+
+	public void testIsRightToLeftLanguage() throws Exception
+	{
+		File tmpDir = createTempDirectory();
+		tmpDir.deleteOnExit();
 		
+		UiLocalization directionalLanguages = new UiLocalization(tmpDir, EnglishTestStrings.strings);
+		directionalLanguages.setCurrentLanguageCode("en");
+		assertFalse("English is a Left To Right language.", directionalLanguages.isRightToLeftLanguage());
+
+		File spanish = new File(tmpDir, "Martus-es.mtf");
+		spanish.deleteOnExit();
+		UnicodeWriter writer = new UnicodeWriter(spanish);
+		String spanishButtonText = "My button";
+		writer.writeln(button+spanishButtonText);
+		writer.close();
+		directionalLanguages.setCurrentLanguageCode("es");
+		assertEquals("test Button for spanish not correct?", spanishButtonText, directionalLanguages.getButtonLabel(test));
+		assertFalse("Spanish should be a Left to Right language.", directionalLanguages.isRightToLeftLanguage());
+		
+		String arabicButtonText = "Some other translation";
+		File arabic = new File(tmpDir, "Martus-ar.mtf");
+		arabic.deleteOnExit();
+		writer = new UnicodeWriter(arabic);
+		writer.writeln(button+arabicButtonText);
+		writer.writeln(Localization.MTF_RIGHT_TO_LEFT_LANGUAGE_FLAG);
+		writer.close();
+		directionalLanguages.setCurrentLanguageCode("ar");
+		assertEquals("test Button for arabic not correct?", arabicButtonText, directionalLanguages.getButtonLabel(test));
+		assertTrue("Arabic should be a Right to Left language.", directionalLanguages.isRightToLeftLanguage());
 	}
 
 	public void testToFileNameForeignChars()
