@@ -86,6 +86,7 @@ public class EnglishStrings
 "wintitle:confirmRemoveMartus=Delete All Data and Remove Martus",
 "wintitle:confirmDeleteMyData=Delete My Data",
 "wintitle:confirmNewerConfigInfoFileFound=Version Warning",
+"wintitle:confirmdeletefolder=Confirm Delete Folder",
 
 "wintitle:notifyDropErrorBulletinExists=Cannot Move Bulletin(s)",
 "wintitle:notifyDropErrors=Error Moving Bulletin(s)",
