@@ -61,7 +61,6 @@ import org.martus.common.MartusUtilities.FileVerificationException;
 import org.martus.common.MartusUtilities.PublicInformationInvalidException;
 import org.martus.common.MartusUtilities.ServerErrorException;
 import org.martus.common.bulletin.Bulletin;
-import org.martus.common.bulletin.BulletinZipUtilities;
 import org.martus.common.clientside.ClientSideNetworkGateway;
 import org.martus.common.clientside.ClientSideNetworkHandlerUsingXmlRpcForNonSSL;
 import org.martus.common.clientside.CurrentUiState;
@@ -1044,19 +1043,7 @@ public class MartusApp
 	public void retrieveOneBulletinToFolder(UniversalId uid, BulletinFolder retrievedFolder, ProgressMeterInterface progressMeter) throws
 		Exception
 	{
-		File tempFile = File.createTempFile("$$$MartusApp", null);
-		tempFile.deleteOnExit();
-		FileOutputStream outputStream = new FileOutputStream(tempFile);
-
-		int masterTotalSize = BulletinZipUtilities.retrieveBulletinZipToStream(uid, outputStream,
-						serverChunkSize, getCurrentNetworkInterfaceGateway(),  getSecurity(),
-						progressMeter);
-
-		outputStream.close();
-
-		if(tempFile.length() != masterTotalSize)
-			throw new ServerErrorException("totalSize didn't match data length");
-
+		File tempFile = getCurrentNetworkInterfaceGateway().retrieveBulletin(uid, getSecurity(), serverChunkSize, progressMeter);
 		store.importZipFileBulletin(tempFile, retrievedFolder, true);
 		tempFile.delete();
 		
