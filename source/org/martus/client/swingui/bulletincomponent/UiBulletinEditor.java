@@ -67,70 +67,64 @@ public class UiBulletinEditor extends UiBulletinComponent
 		}
 	}
 	
-	public void contentDataHasChanged() throws
-		IOException,
-		MartusCrypto.EncryptionException
-	{				
-		Bulletin tempBulletin = new Bulletin(owner.getApp().getSecurity());		
-		setBulletinModified(false);	
-
-		boolean isAllPrivate = false;
-		if(allPrivateField.getText().equals(UiField.TRUESTRING))
-			isAllPrivate = true;
-			
-		tempBulletin.setAllPrivate(isAllPrivate);
+	public boolean isBulletinModified() throws
+			IOException,
+			MartusCrypto.EncryptionException
+	{		
+		
+		Bulletin tempBulletin = new Bulletin(owner.getApp().getSecurity());					
+		copyDataToBulletin(tempBulletin);
 		for(int fieldNum = 0; fieldNum < fields.length; ++fieldNum)
-		{
+		{			
 			String fieldTag = fieldTags[fieldNum];
-			String oldFieldText =  currentBulletin.get(fieldTag);			
-						
-			tempBulletin.set(fieldTag, fields[fieldNum].getText());
+			String oldFieldText =  currentBulletin.get(fieldTag);									
 			if (!oldFieldText.equals(tempBulletin.get(fieldTag)))
-			{	
-				setBulletinModified(true);								
-				return;
+			{									
+				return true;
 			}																
 		}		
-		
-		if (contentDataPublicSectionHasChanged() ||
-		    contentDataPrivateSectionHasChanged())
-		{	
-			setBulletinModified(true);								
-			return;
-		}				
+			
+		return contentDataSectionHasChanged();
+	}	
+	
+	private boolean contentDataSectionHasChanged()
+	{	
+		UiBulletinComponentEditorSection section = (UiBulletinComponentEditorSection)publicStuff;
+		AttachmentProxy[] publicAttachments = section.attachmentEditor.getAttachments();
+		AttachmentProxy[] currentAttachments = currentBulletin.getPublicAttachments();
+	
+		if (contentDataSection(currentAttachments, publicAttachments))
+			return true;
+	
+		section = (UiBulletinComponentEditorSection)privateStuff;
+		AttachmentProxy[] privateAttachments = section.attachmentEditor.getAttachments();
+		currentAttachments = currentBulletin.getPrivateAttachments();	
+			
+		if (contentDataSection(currentAttachments, privateAttachments))
+			return true;
+
+		return false;		
 	}
 	
-	private boolean contentDataPrivateSectionHasChanged()
-	{
-		UiBulletinComponentEditorSection privateSection = (UiBulletinComponentEditorSection)privateStuff;
-		AttachmentProxy[] privateAttachments = privateSection.attachmentEditor.getAttachments();
-		AttachmentProxy[] currentPrivateAttachments = currentBulletin.getPrivateAttachments();
-	
-		for(int aIndex = 0; aIndex < privateAttachments.length; ++aIndex)
-		{
-			if (!privateAttachments[aIndex].getLabel().equals(currentPrivateAttachments[aIndex].getLabel()))
-					return true;
-		}
-		return false;
-	}
-	
-	private boolean contentDataPublicSectionHasChanged()
-	{
-		UiBulletinComponentEditorSection publicSection = (UiBulletinComponentEditorSection)publicStuff;
-		AttachmentProxy[] publicAttachments = publicSection.attachmentEditor.getAttachments();
-		AttachmentProxy[] currentPublicAttachments = currentBulletin.getPublicAttachments();
-		
-		if (publicAttachments.length != currentPublicAttachments.length)						
+	private boolean contentDataSection(AttachmentProxy[] proxy, AttachmentProxy[]rawProxy)
+	{					
+		if (proxy.length != rawProxy.length)						
 			return true;
 		
-		for(int aIndex = 0; aIndex < publicAttachments.length; ++aIndex)
-		{			
-			if (!publicAttachments[aIndex].getLabel().equals(currentPublicAttachments[aIndex].getLabel()))
-					return true;
-		}
-		
-		return false;
-	}
+		for(int aIndex = 0; aIndex < proxy.length; ++aIndex)
+		{	
+			if (!rawProxy[aIndex].getLabel().equals(proxy[aIndex].getLabel()))
+				return true;
+						
+			String rawAccountId = rawProxy[aIndex].getUniversalId().getAccountId();
+			String accountId = proxy[aIndex].getUniversalId().getAccountId();			
+						
+			if (!rawAccountId.equals(accountId))
+				return true;								
+
+		}		
+		return false;	
+	}		
 
 	public void copyDataToBulletin(Bulletin bulletin) throws
 		IOException,

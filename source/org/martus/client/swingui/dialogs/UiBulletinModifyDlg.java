@@ -131,19 +131,18 @@ public class UiBulletinModifyDlg extends JFrame implements ActionListener, Windo
 
 	public void actionPerformed(ActionEvent ae)
 	{		
-
 		try
-		{			
-			view.validateData();
+		{	
 			if(ae.getSource() == cancel)
-			{
-				view.contentDataHasChanged();
+			{				
 				if (!view.isBulletinModified())			
 					cleanupAndExit();				
 				else					
 				  closeWindowUponConfirmation();
 				return;
 			}	
+					
+			view.validateData();
 			view.copyDataToBulletin(bulletin);			
 		}
 		catch(UiDateEditor.DateFutureException e)

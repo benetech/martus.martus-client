@@ -101,28 +101,18 @@ abstract public class UiBulletinComponent extends JPanel implements Scrollable, 
 			IOException,
 			MartusCrypto.EncryptionException
 	{
-	}
-	
-	public void contentDataHasChanged() throws
-				IOException,
-				MartusCrypto.EncryptionException
-	{
-	}
-	
+	}		
 
 	public void validateData() throws UiField.DataInvalidException 
 	{
 	}
 	
-	public boolean isBulletinModified()
-	{
-		return isBulletinModified;
-	}
-	
-	public void setBulletinModified(boolean flag)
-	{
-		isBulletinModified = flag;
-	}
+	public boolean isBulletinModified() throws
+			IOException,
+			MartusCrypto.EncryptionException
+	{				
+		return false;
+	}	
 
 	public void copyDataFromBulletin(Bulletin bulletinToShow) throws IOException
 	{
@@ -263,8 +253,7 @@ abstract public class UiBulletinComponent extends JPanel implements Scrollable, 
 	boolean wasEncrypted;
 	boolean isEditable;
 	UiBulletinComponentSection publicStuff;
-	UiBulletinComponentSection privateStuff;
-	boolean isBulletinModified=false;
+	UiBulletinComponentSection privateStuff;	
 
 	abstract public UiField createBoolField();
 	abstract public UiBulletinComponentSection createBulletinComponentSection(boolean encrypted);
