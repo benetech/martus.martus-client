@@ -76,12 +76,7 @@ public class UiGridEditor extends UiGrid
 							table.transferFocus();
 						}
 					}
-/*					else if(table.getSelectedColumn() >= table.getColumnCount()-1)
-					{
-						e.consume();
-						table.changeSelection(table.getSelectedRow()+1, 1, false, false);
-					}
-*/				}
+				}
 			}
 		}
 
