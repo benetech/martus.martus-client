@@ -1,9 +1,9 @@
 ﻿# Martus Client Translation File
 # Language code:  ru
 # Language name:  Russian
-# Exported date:  Fri Jan 28 14:18:09 PST 2005
+# Exported date:  Tue Feb 15 15:21:45 PST 2005
 # Client version: Internal 2.6.0
-# Client build:   20050125.1517
+# Client build:   20050211.1523
 #
 # This file MUST be saved in UTF-8 format!
 # Lines beginning with # are comments and are ignored by Martus
@@ -402,7 +402,7 @@
 -1ef6-field:CreateCustomFieldsHelp1=Вид сводки определяется в документе формата XML. По умолчанию описания стандартных полей сводки появляются вверху экрана редактирования описаний полей, но при желании можно переместить их.  Однако есть четыре обязательных элемента, которые нельзя исключить из списка полей: 'author' (имя автора), 'entrydate' (дата создания сводки), 'language'(язык) и 'title'(заголовок).\n\n
 
 #__________________________________=For custom (non-standard) fields, you first select the type of field you want.  The possible choices are 'BOOLEAN', 'DATE', 'DATERANGE', 'GRID', 'LANGUAGE', 'MULTILINE', and 'STRING'. \n\nFor each custom field you will need a unique identification tag.  This tag can be any word except those already used by the system (eg. 'author', 'summary', 'location', 'title' etc.), and cannot contain spaces or special characters.  Examples of choices are 'custom1', 'custom2', etc, or tags that are more descriptive like 'VictimsName'.\n Then you need a label which is displayed next to your custom field.  An example might be 'Name of 1st Witness'.\n\nAdditional Comments\n1. XML is case-sensitive ('Witness' is not the same as 'witness') \n2. quotes around type name can be single or double as long as they match (e.g. 'STRING" is not valid. It must be 'STRING' or "STRING") \n3. A Boolean field will be displayed as a checkbox when editing and Yes/No when previewed or printed.\n\nSee examples below:\n\n
--676b-field:CreateCustomFieldsHelp2=Чтобы создать пользовательское (нестандартное) поле, прежде всего задайте желаемый тип поля. Возможные типы: 'BOOLEAN'(логический), 'DATE'(дата), 'DATERANGE'(диапазон дат), 'GRID'(таблица), 'LANGUAGE'(язык), 'MULTILINE'(многострочный экран редактирования) и 'STRING'(редактируемая строка).\n\nКаждое пользовательское поле должно иметь свой уникальный идентификационный тег. В качестве такого тега может использоваться любое слово, кроме тех, которые уже зарезервированы системой - например, 'author' (автор), 'summary'(краткая информация), 'location'(место события), 'title'(заголовок) и т.д. Тег не может содержать пробелы и специальные символы. Например, возможны теги 'поле1', 'поле2' и т.д., или же более наглядные, такие как 'ИмяПострадавшего'.\n Затем следует определить метку поля, которая будет выводиться рядом с пользовательским полем.  Например, возможна метка "Имя 1-го свидетеля".\n\nДополнительные пояснения\n1. XML различает прописные и строчные буквы (например, 'Имя' и 'имя' - не одно и то же)\n2. Cлово, обозначающее тип поля, может заключаться в одиночные или парные кавычки (кавычки перед словом и после него должны быть одинаковыми, например, можно набрать 'STRING' или "STRING", но не 'STRING")\n3. Поле типа Boolean (логического) будет выводиться в виде флажка в окне редактирования и в виде "Да/Нет" при распечатке.\n\nНиже приводятся примеры полей:\n\n
+-676b-field:CreateCustomFieldsHelp2=Чтобы создать пользовательское (нестандартное) поле, прежде всего задайте желаемый тип поля. Возможные типы: 'BOOLEAN'(логический), 'DATE'(дата), 'DATERANGE'(диапазон дат), 'GRID'(таблица), 'LANGUAGE'(язык), 'MULTILINE'(многострочный экран редактирования) и 'STRING'(редактируемая строка).\n\nКаждое пользовательское поле должно иметь свой уникальный идентификационный тег. В качестве такого тега может использоваться любое слово, кроме тех, которые уже зарезервированы системой - например, 'author' (автор), 'summary'(краткая информация), 'location'(место события), 'title'(заголовок) и т.д. Тег не может содержать пробелы и специальные символы. Например, возможны теги 'поле1', 'поле2' и т.д., или же более наглядные, такие как 'ИмяПострадавшего'.\n\nЗатем следует определить метку поля, которая будет выводиться рядом с пользовательским полем.  Например, возможна метка "Имя 1-го свидетеля".\n\nДополнительные пояснения\n1. XML различает прописные и строчные буквы (например, 'Имя' и 'имя' - не одно и то же)\n2. Cлово, обозначающее тип поля, может заключаться в одиночные или парные кавычки (кавычки перед словом и после него должны быть одинаковыми, например, можно набрать 'STRING' или "STRING", но не 'STRING")\n3. Поле типа Boolean (логического) будет выводиться в виде флажка в окне редактирования и в виде "Да/Нет" при распечатке.\n\nНиже приводятся примеры полей:\n\n
 
 #__________________________________=<Field type='STRING'>\n<Tag>custom1</Tag>\n<Label>Witness Name</Label>\n</Field>\n\n<Field type='LANGUAGE'>\n<Tag>new2</Tag>\n<Label>Witness Speaks</Label>\n</Field>\n\n<Field type='BOOLEAN'>\n<Tag>new3</Tag>\n<Label>Were guns used?</Label>\n</Field>\n\n<Field type='GRID'>\n<Tag>customgrid</Tag>\n<Label>Victim Information</Label>\n<GridSpecDetails>\n<Column><Label>Name of Victim</Label></Column>\n<Column><Label>Victim Age</Label></Column>\n<Column><Label>Victim Gender</Label></Column>\n<Column><Label>Victim Ethnicity</Label></Column>\n</GridSpecDetails>\n</Field>\n
 -c0a8-field:CreateCustomFieldsHelp3=<Field type='STRING'>\n<Tag>поле1</Tag>\n<Label>Имя свидетеля</Label>\n</Field>\n\n<Field type='LANGUAGE'>\n<Tag>поле2</Tag>\n<Label>Родной язык свидетеля</Label>\n</Field>\n\n<Field type='BOOLEAN'>\n<Tag>поле3</Tag>\n<Label>Применялось ли огнестрельное оружие?</Label>\n</Field>\n\n<Field type='GRID'>\n<Tag>НоваяТаблица</Tag>\n<Label>Информация о пострадавших</Label>\n<GridSpecDetails>\n<Column><Label>Имя</Label></Column>\n<Column><Label>Возраст</Label></Column>\n<Column><Label>Пол</Label></Column>\n<Column><Label>Национальность</Label></Column>\n</GridSpecDetails>\n</Field>\n
@@ -1448,8 +1448,8 @@
 #________________=Title
 -768e-field:title=Заголовок
 
-#_____________________________=English 2.5
--b0f3-field:translationVersion=Русский 2.6
+#_____________________________=Russian 2.6
+-26a2-field:translationVersion=Русский 2.6
 
 #___________________=Username
 -84c2-field:username=Имя пользователя
@@ -2503,6 +2503,3 @@
 
 #_________________________________=Confirm Delete Folder
 -1a75-wintitle:warningdeletefolder=Подтверждение удаления папки
-
-
-

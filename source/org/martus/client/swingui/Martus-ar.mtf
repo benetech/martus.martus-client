@@ -1,9 +1,9 @@
 ﻿# Martus Client Translation File
 # Language code:  ar
 # Language name:  Arabic
-# Exported date:  Thu Feb 03 11:16:50 PST 2005
+# Exported date:  Tue Feb 15 15:21:21 PST 2005
 # Client version: Internal 2.6.0
-# Client build:   20050125.1517
+# Client build:   20050211.1523
 #
 # This file MUST be saved in UTF-8 format!
 # Lines beginning with # are comments and are ignored by Martus
@@ -974,7 +974,6 @@
 #______________________________________________=Benetech recommends that you do not use this server until a compliance statement is made available for you to read.  Continuing will select this non-compliant server anyway.
 -8731-field:confirmServerComplianceFailedeffect=توصي شركة Benetech بألاّ تستخدم هذا الخادم حتى يُصدر بيان توافق تقرأه. بالاستمرار سيتم اختيار هذا الخادم غير المتوافق على أية حال.
 
-
 #_________________________________________=You have chosen to allow this client the ability to view your public and PRIVATE data.
 -4059-field:confirmSetImportPublicKeycause=لقد اخترت أن تمنح هذا العميل صلاحية استعراض بياناتك العامة و الخاصة. 
 
@@ -1067,7 +1066,6 @@
 
 #_______________________________=You have chosen to retrieve all bulletins from the Martus server.  
 -0330-field:confirmretrievecause=لقد اخترت استرجاع جميع النشرات من خادم Martus.
-
 
 #________________________________=This will restore all the discarded bulletins that were sent to the server.  
 -8dbd-field:confirmretrieveeffect=سيتم بذلك استعادة جميع النشرات المُلغاة التي تم إرسالها للخادم. 
@@ -1451,7 +1449,7 @@
 -768e-field:title=العنوان 
 
 #_____________________________=Arabic 2.6
--b0f3-field:translationVersion=2.6  العربية
+-26a2-field:translationVersion=2.6  العربية
 
 #___________________=Username
 -84c2-field:username=اسم المستخدم 
@@ -1628,7 +1626,6 @@
 -c98b-language:ps=الباشتو 
 
 #________________=Portuguese
-
 -2388-language:pt=البرتغالية 
 
 #________________=Romanian
@@ -2206,7 +2203,6 @@
 
 #____________________________________=Export My Public Account Id
 -2b8a-wintitle:inputExportMyPublicKey=تصدير هوية حسابي العام 
-
 
 #_____________________________=HQ Label
 -bd52-wintitle:inputGetHQLabel=العنوان التعريفي للمركز الرئيسي
