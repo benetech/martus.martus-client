@@ -535,6 +535,10 @@ public class EnglishStrings
 "field:confirmExportUnknownTagscause=One or more of the bulletins you have chosen to export contain information that this version of Martus cannot understand. They may have been created by a newer version of Martus, so you should ensure that you are running the latest version.",
 "field:confirmExportUnknownTagseffect=If you continue with the export, any unknown information will not be exported.",
 
+"field:confirmQuickEraseDeleteKeyPaircause=This will scrub and delete keypair files on this computer.",
+"field:confirmQuestionDeleteKeypair=Are you really sure?",
+"field:confirmQuestionDeleteSubDirectory=Do you want to delete ALL files in packets directory?",
+
 "field:notifyDropErrorNotAllowedcause=One or more bulletins cannot be moved to that folder. This may be because of their Draft/Sealed status, or their author.",
 "field:notifyDropErrorscause=An unexpected error occured while moving the bulletin(s). One or more files may be damaged.",
 "field:notifyPasteErrorNotAllowedcause=One or more bulletins cannot be pasted in that folder. This may be because of their Draft/Sealed status, or their author.",
@@ -609,6 +613,7 @@ public class EnglishStrings
 "field:notifyOperationCompletedcause=Operation completed.",
 "field:notifyErrorBackingupKeyPaircause=Unable to back up the key pair file on this disk.",
 "field:notifycontactRejectedcause=The current Martus Server has refused to accept your contact info",
+"field:notifyQuickEraseScrubWorkedcause=All bulletins and folders were successfully scrubbed and deleted.",
 		
 "field:messageServerNewscause=The current server has sent this message:",
 "field:messageErrorDateInFuturecause=This date occures in the future:",
@@ -659,12 +664,9 @@ public class EnglishStrings
 "field:BackupKeyShareCompleteInformation=Backup complete, please give each disk to people you trust, so that you can in the future if you forget your user name and or password you can recreate your account.  You will need #N# of these disks to recreate your account.",
 "field:BackupRecoverKeyPairInsertNextDiskMessage=Please insert disk #",
 
-"field:notifyQuickEraseScrubWorkedcause=All bulletins and folders were successfully scrubbed and deleted.",
 "field:ScrubDataBeforeDelete=Scrub data before deleting",
 "field:DeleteKeypair=Delete Keypair",
 "field:ExitWhenComplete=Exit when complete",
-"field:confirmQuickEraseDeleteKeyPaircause=This will scrub and delete keypair files on this computer.",
-"field:confirmQuestionDeleteKeypair=Are you really sure?",
 
 "field:RemoveServerLabel1=The following server will be removed:",
 "field:RemoveServerLabel2=Are you sure you want to do this?",

@@ -28,11 +28,13 @@ package org.martus.client.swingui.actions;
 
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
+import java.io.File;
 
 import org.martus.client.core.QuickEraseOptions;
 import org.martus.client.swingui.UiLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.dialogs.UiQuickEraseConfirmDlg;
+import org.martus.util.DirectoryTreeRemover;
 
 public class ActionMenuQuickErase extends UiMenuAction 
 {
@@ -53,14 +55,20 @@ public class ActionMenuQuickErase extends UiMenuAction
 			return;
 			
 		QuickEraseOptions options = loadQuickEraseOptions(dlg); 		
-		checkScrubData(mainWindow, options);
-		checkDeleteKeyPair(mainWindow, options);	
-		checkExitWhenComplete(mainWindow, options);
+		checkScrubData(options);
+		checkDeleteKeyPair(options);	
+		checkExitWhenComplete(options);
 												
 	}	
 
-	private void checkScrubData(UiMainWindow parent, QuickEraseOptions options)
-	{
+	private void checkScrubData(QuickEraseOptions options)
+	{	
+		File packetDir = mainWindow.getApp().getPacketsDirectory();
+		if (packetDir == null)
+			return;
+			
+		confirmDeleteSubDirectory(packetDir, options);
+								
 		if(mainWindow.getApp().deleteAllBulletinsAndUserFolders(options))
 		{	
 			String baseTag = (options.isScrubSelected())? "QuickEraseScrubWorked":"QuickEraseWorked";		
@@ -71,8 +79,29 @@ public class ActionMenuQuickErase extends UiMenuAction
 			
 		mainWindow.folderTreeContentsHaveChanged();		
 	}
+	
+	private void confirmDeleteSubDirectory(File packetDir, QuickEraseOptions options)
+	{
 
-	private void checkExitWhenComplete(UiMainWindow parent, QuickEraseOptions options)
+		if (!DirectoryTreeRemover.isContainSubDir(packetDir))
+			return;
+		
+		UiLocalization localization = mainWindow.getLocalization();			
+		String title = localization.getWindowTitle("confirmDoQuickErase");			
+		String question = localization.getFieldLabel("confirmQuestionDeleteSubDirectory");
+		String[] contents = {question};
+		
+		Toolkit.getDefaultToolkit().beep();
+		if (mainWindow.confirmDlg(mainWindow, title, contents))
+		{
+			if (options.isScrubSelected())	
+				DirectoryTreeRemover.scrubAndDeleteEntireDirectoryTree(packetDir);
+			else
+				DirectoryTreeRemover.deleteEntireDirectoryTree(packetDir);
+		}		
+	}
+
+	private void checkExitWhenComplete(QuickEraseOptions options)
 	{
 		if (options.isExitWhenCompleteSelected())
 		{	
@@ -81,7 +110,7 @@ public class ActionMenuQuickErase extends UiMenuAction
 		}		
 	}
 
-	private void checkDeleteKeyPair(UiMainWindow parent, QuickEraseOptions options)
+	private void checkDeleteKeyPair(QuickEraseOptions options)
 	{
 		if (options.isDeleteKeyPairSelected())
 		{

@@ -294,6 +294,11 @@ public class MartusApp
 	{
 		return currentAccountDirectory;
 	}
+	
+	public File getPacketsDirectory()
+	{
+		return new File(getCurrentAccountDirectory(), "packets");
+	}
 
 	public String getCurrentAccountDirectoryName()
 	{
@@ -850,7 +855,7 @@ public class MartusApp
 		System.out.println("Moving bulletin to damaged");
 		BulletinFolder damaged = createOrFindFolder(store.getNameOfFolderDamaged());
 		Bulletin b = store.findBulletinByUniversalId(uid);
-		store.moveBulletin(b, outbox, damaged);
+		store.moveBulletin(b, outbox, damaged);		
 	}
 
 	public static class DamagedBulletinException extends Exception
