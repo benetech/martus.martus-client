@@ -91,11 +91,8 @@ public class UiBulletinComponentViewSection extends UiBulletinComponentSection
 
 	public void createAttachmentTable()
 	{
-		if (attachmentViewer == null)
-		{	
-			attachmentViewer = new UiAttachmentViewer(getMainWindow());
-			add(attachmentViewer);
-		}
+		attachmentViewer = new UiAttachmentViewer(getMainWindow());
+		add(attachmentViewer);
 	}
 
 	public void addAttachment(AttachmentProxy a)
