@@ -72,6 +72,7 @@ public class ExportTranslationFile
 		catch(Exception e)
 		{
 			System.out.println("FAILED: " + e);
+			e.printStackTrace();
 			System.exit(3);
 		}
 	
