@@ -157,7 +157,7 @@ abstract public class RetrieveTableModel extends AbstractTableModel
 	{
 		try
 		{
-			NetworkResponse response = app.getCurrentNetworkInterfaceGateway().getSealedBulletinIds(app.security, fieldOfficeAccountId, MartusUtilities.getRetrieveBulletinSummaryTags());
+			NetworkResponse response = app.getCurrentNetworkInterfaceGateway().getSealedBulletinIds(app.getSecurity(), fieldOfficeAccountId, MartusUtilities.getRetrieveBulletinSummaryTags());
 			if(response.getResultCode().equals(NetworkInterfaceConstants.OK))
 			{
 				createSummariesFromStrings(fieldOfficeAccountId, response.getResultVector());
@@ -175,7 +175,7 @@ abstract public class RetrieveTableModel extends AbstractTableModel
 	{
 		try
 		{
-			NetworkResponse response = app.getCurrentNetworkInterfaceGateway().getDraftBulletinIds(app.security, fieldOfficeAccountId, MartusUtilities.getRetrieveBulletinSummaryTags());
+			NetworkResponse response = app.getCurrentNetworkInterfaceGateway().getDraftBulletinIds(app.getSecurity(), fieldOfficeAccountId, MartusUtilities.getRetrieveBulletinSummaryTags());
 			if(response.getResultCode().equals(NetworkInterfaceConstants.OK))
 			{
 				createSummariesFromStrings(fieldOfficeAccountId, response.getResultVector());

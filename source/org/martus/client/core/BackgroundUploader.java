@@ -292,7 +292,7 @@ public class BackgroundUploader
 		String result = "";
 		try
 		{
-			result = putContactInfoOnServer(info.getContactInfo(app.security));
+			result = putContactInfoOnServer(info.getContactInfo(app.getSecurity()));
 		}
 		catch (MartusCrypto.MartusSignatureException e)
 		{

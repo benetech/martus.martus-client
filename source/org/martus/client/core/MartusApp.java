@@ -54,7 +54,6 @@ import org.martus.common.bulletin.Bulletin;
 import org.martus.common.bulletin.BulletinZipUtilities;
 import org.martus.common.crypto.MartusCrypto;
 import org.martus.common.crypto.MartusSecurity;
-import org.martus.common.crypto.MartusCrypto.CryptoInitializationException;
 import org.martus.common.crypto.MartusCrypto.MartusSignatureException;
 import org.martus.common.database.FileDatabase.MissingAccountMapException;
 import org.martus.common.database.FileDatabase.MissingAccountMapSignatureException;
@@ -93,7 +92,7 @@ public class MartusApp
 			if(cryptoToUse == null)
 				cryptoToUse = new MartusSecurity();
 
-			security = cryptoToUse;
+			setSecurity(cryptoToUse);
 			configInfo = new ConfigInfo();
 			currentUserName = "";
 			maxNewFolders = MAXFOLDERS;
@@ -210,7 +209,7 @@ public class MartusApp
 
 			ByteArrayInputStream encryptedConfigInputStream = new ByteArrayInputStream(encryptedConfigInfo);
 			FileOutputStream configFileOutputStream = new FileOutputStream(fileName);
-			security.encrypt(encryptedConfigInputStream, configFileOutputStream);
+			getSecurity().encrypt(encryptedConfigInputStream, configFileOutputStream);
 
 			configFileOutputStream.close();
 			encryptedConfigInputStream.close();
@@ -218,7 +217,7 @@ public class MartusApp
 
 
 			FileInputStream in = new FileInputStream(fileName);
-			byte[] signature = security.createSignatureOfStream(in);
+			byte[] signature = getSecurity().createSignatureOfStream(in);
 			in.close();
 
 			FileOutputStream out = new FileOutputStream(getConfigInfoSignatureFilename());
@@ -255,14 +254,14 @@ public class MartusApp
 			inSignature.close();
 
 			FileInputStream inData = new FileInputStream(dataFile);
-			boolean verified = security.isValidSignatureOfStream(security.getPublicKeyString(), inData, signature);
+			boolean verified = getSecurity().isValidSignatureOfStream(getSecurity().getPublicKeyString(), inData, signature);
 			inData.close();
 			if(!verified)
 				throw new LoadConfigInfoException();
 
 			InputStreamWithSeek encryptedConfigFileInputStream = new FileInputStreamWithSeek(new File(fileName));
 			ByteArrayOutputStream plainTextConfigOutputStream = new ByteArrayOutputStream();
-			security.decrypt(encryptedConfigFileInputStream, plainTextConfigOutputStream);
+			getSecurity().decrypt(encryptedConfigFileInputStream, plainTextConfigOutputStream);
 
 			byte[] plainTextConfigInfo = plainTextConfigOutputStream.toByteArray();
 			ByteArrayInputStream plainTextConfigInputStream = new ByteArrayInputStream(plainTextConfigInfo);
@@ -283,7 +282,7 @@ public class MartusApp
 
 	public void doAfterSigninInitalization() throws MartusAppInitializationException
 	{
-		store = new BulletinStore(currentAccountDirectory, security);
+		store = new BulletinStore(currentAccountDirectory, getSecurity());
 		try
 		{
 			store.doAfterSigninInitalization();
@@ -761,7 +760,7 @@ public class MartusApp
 
 	public boolean isSignedIn()
 	{
-		return security.hasKeyPair();
+		return getSecurity().hasKeyPair();
 	}
 
 	public String getServerPublicCode(String serverName) throws
@@ -802,7 +801,7 @@ public class MartusApp
 
 		String accountId = (String)serverInformation.get(1);
 		String sig = (String)serverInformation.get(2);
-		MartusUtilities.validatePublicInfo(accountId, sig, security);
+		MartusUtilities.validatePublicInfo(accountId, sig, getSecurity());
 		return accountId;
 	}
 
@@ -810,7 +809,7 @@ public class MartusApp
 	{
 		try
 		{
-			NetworkResponse response = getCurrentNetworkInterfaceGateway().getUploadRights(security, magicWord);
+			NetworkResponse response = getCurrentNetworkInterfaceGateway().getUploadRights(getSecurity(), magicWord);
 			if(response.getResultCode().equals(NetworkInterfaceConstants.OK))
 				return true;
 		}
@@ -829,7 +828,7 @@ public class MartusApp
 
 		try
 		{
-			NetworkResponse response = getCurrentNetworkInterfaceGateway().getNews(security);
+			NetworkResponse response = getCurrentNetworkInterfaceGateway().getNews(getSecurity());
 			if(response.getResultCode().equals(NetworkInterfaceConstants.OK))
 				return response.getResultVector();
 		}
@@ -847,7 +846,7 @@ public class MartusApp
 			throw new ServerNotAvailableException();
 		try
 		{
-			NetworkResponse response = gateway.getServerCompliance(security);
+			NetworkResponse response = gateway.getServerCompliance(getSecurity());
 			if(response.getResultCode().equals(NetworkInterfaceConstants.OK))
 				return (String)response.getResultVector().get(0);
 		}
@@ -883,7 +882,7 @@ public class MartusApp
 		String resultCode = "?";
 		try
 		{
-			NetworkResponse response = getCurrentNetworkInterfaceGateway().getSealedBulletinIds(security, getAccountId(), MartusUtilities.getRetrieveBulletinSummaryTags());
+			NetworkResponse response = getCurrentNetworkInterfaceGateway().getSealedBulletinIds(getSecurity(), getAccountId(), MartusUtilities.getRetrieveBulletinSummaryTags());
 			resultCode = response.getResultCode();
 			if(resultCode.equals(NetworkInterfaceConstants.OK))
 				return response.getResultVector();
@@ -904,7 +903,7 @@ public class MartusApp
 		String resultCode = "?";
 		try
 		{
-			NetworkResponse response = getCurrentNetworkInterfaceGateway().getDraftBulletinIds(security, getAccountId(), MartusUtilities.getRetrieveBulletinSummaryTags());
+			NetworkResponse response = getCurrentNetworkInterfaceGateway().getDraftBulletinIds(getSecurity(), getAccountId(), MartusUtilities.getRetrieveBulletinSummaryTags());
 			resultCode = response.getResultCode();
 			if(resultCode.equals(NetworkInterfaceConstants.OK))
 				return response.getResultVector();
@@ -958,7 +957,7 @@ public class MartusApp
 
 		try
 		{
-			NetworkResponse response = getCurrentNetworkInterfaceGateway().getFieldOfficeAccountIds(security, getAccountId());
+			NetworkResponse response = getCurrentNetworkInterfaceGateway().getFieldOfficeAccountIds(getSecurity(), getAccountId());
 			String resultCode = response.getResultCode();
 			if(!resultCode.equals(NetworkInterfaceConstants.OK))
 				throw new ServerErrorException(resultCode);
@@ -973,7 +972,7 @@ public class MartusApp
 
 	public FieldDataPacket retrieveFieldDataPacketFromServer(String authorAccountId, String bulletinLocalId, String dataPacketLocalId) throws Exception
 	{
-		NetworkResponse response = getCurrentNetworkInterfaceGateway().getPacket(security, authorAccountId, bulletinLocalId, dataPacketLocalId);
+		NetworkResponse response = getCurrentNetworkInterfaceGateway().getPacket(getSecurity(), authorAccountId, bulletinLocalId, dataPacketLocalId);
 		String resultCode = response.getResultCode();
 		if(!resultCode.equals(NetworkInterfaceConstants.OK))
 			throw new ServerErrorException(resultCode);
@@ -983,7 +982,7 @@ public class MartusApp
 		FieldDataPacket fdp = new FieldDataPacket(uid , FieldSpec.getDefaultPublicFieldSpecs());
 		byte[] xmlBytes = xml.getBytes("UTF-8");
 		ByteArrayInputStreamWithSeek in =  new ByteArrayInputStreamWithSeek(xmlBytes);
-		fdp.loadFromXml(in, security);
+		fdp.loadFromXml(in, getSecurity());
 		return fdp;
 	}
 
@@ -995,7 +994,7 @@ public class MartusApp
 		FileOutputStream outputStream = new FileOutputStream(tempFile);
 
 		int masterTotalSize = BulletinZipUtilities.retrieveBulletinZipToStream(uid, outputStream,
-						serverChunkSize, getCurrentNetworkInterfaceGateway(),  security,
+						serverChunkSize, getCurrentNetworkInterfaceGateway(),  getSecurity(),
 						progressMeter);
 
 		outputStream.close();
@@ -1046,7 +1045,7 @@ public class MartusApp
 		Base64.InvalidBase64Exception,
 		MartusCrypto.MartusSignatureException
 	{
-		MartusUtilities.exportClientPublicKey(security, exportFile);
+		MartusUtilities.exportClientPublicKey(getSecurity(), exportFile);
 	}
 
 	public String extractPublicInfo(File file) throws
@@ -1057,7 +1056,7 @@ public class MartusApp
 		Vector importedPublicKeyInfo = MartusUtilities.importClientPublicKeyFromFile(file);
 		String publicKey = (String) importedPublicKeyInfo.get(0);
 		String signature = (String) importedPublicKeyInfo.get(1);
-		MartusUtilities.validatePublicInfo(publicKey, signature, security);
+		MartusUtilities.validatePublicInfo(publicKey, signature, getSecurity());
 		return publicKey;
 	}
 
@@ -1072,13 +1071,16 @@ public class MartusApp
 	{
 		return attemptSignInInternal(getKeyPairFile(getMartusDataRootDirectory()), userName, userPassPhrase);
 	}
-
+	
+	public void attemptReSignIn(String userName, char[] userPassPhrase) throws Exception
+	{
+		attemptReSignInInternal(getKeyPairFile(getMartusDataRootDirectory()), userName, userPassPhrase);
+	}
+	
 	private String getCurrentLanguage()
 	{
 		return localization.getCurrentLanguageCode();
 	}
-
-
 
 	public String getAccountId()
 	{
@@ -1098,15 +1100,15 @@ public class MartusApp
 		File keyPairFile = getKeyPairFile(accountDataDirectory);
 		if(keyPairFile.exists())
 			throw(new AccountAlreadyExistsException());
-		security.clearKeyPair();
-		security.createKeyPair();
+		getSecurity().clearKeyPair();
+		getSecurity().createKeyPair();
 		try
 		{
 			writeKeyPairFileWithBackup(keyPairFile, userName, userPassPhrase);
 		}
 		catch(IOException e)
 		{
-			security.clearKeyPair();
+			getSecurity().clearKeyPair();
 			throw(e);
 		}
 	}
@@ -1134,7 +1136,7 @@ public class MartusApp
 		try
 		{
 			FileOutputStream outputStream = new FileOutputStream(keyPairFile);
-			security.writeKeyPair(outputStream, getCombinedPassPhrase(userName, userPassPhrase));
+			getSecurity().writeKeyPair(outputStream, getCombinedPassPhrase(userName, userPassPhrase));
 			outputStream.close();
 		}
 		catch(FileNotFoundException e)
@@ -1146,69 +1148,40 @@ public class MartusApp
 
 	public boolean attemptSignInInternal(File keyPairFile, String userName, char[] userPassPhrase)
 	{
-		FileInputStream inputStream = null;
-		MartusCrypto attemptSignInSecurityToUse = null;
 		try
 		{
-			 attemptSignInSecurityToUse = new MartusSecurity();
-		}
-		catch (CryptoInitializationException e1)
-		{
-			return clearCurrentUserNameKeyPair();
-		}
-
-		try
-		{
-			inputStream = new FileInputStream(keyPairFile);
-		}
-		catch(IOException e)
-		{
-			return clearCurrentUserNameKeyPair();
-		}
-
-		try
-		{
-			attemptSignInSecurityToUse.readKeyPair(inputStream, getCombinedPassPhrase(userName, userPassPhrase));
+			FileInputStream inputStream = new FileInputStream(keyPairFile);
+			getSecurity().readKeyPair(inputStream, getCombinedPassPhrase(userName, userPassPhrase));
+			inputStream.close();
+			setCurrentAccount(userName);
+			return true;
 		}
 		catch(Exception e)
 		{
-			return clearCurrentUserNameKeyPair();
+			getSecurity().clearKeyPair();
+			currentUserName = "";
+			return false;
 		}
-
+	}
+	
+	public void attemptReSignInInternal(File keyPairFile, String userName, char[] userPassPhrase) throws Exception
+	{
 		try
 		{
+			if(!userName.equals(currentUserName))
+				throw new MartusCrypto.AuthorizationFailedException();
+			MartusCrypto securityOfReSignin = new MartusSecurity();
+			FileInputStream inputStream = new FileInputStream(keyPairFile);
+			securityOfReSignin.readKeyPair(inputStream, getCombinedPassPhrase(userName, userPassPhrase));
 			inputStream.close();
+			if(!getSecurity().hasKeyPair())
+				setSecurity(securityOfReSignin);
 		}
-		catch(IOException e)
+		catch(Exception e)
 		{
-			return clearCurrentUserNameKeyPair();
-		}
-			
-		if(!doesSecurityMatch(attemptSignInSecurityToUse))
-		{
-			return clearCurrentUserNameKeyPair();
-		}
-		
-		if(!security.hasKeyPair())
-		{
-			security = attemptSignInSecurityToUse;
-			setCurrentAccount(userName);
-		}
-		return true;
-	}
-
-	private boolean doesSecurityMatch(MartusCrypto attemptSignInSecurityToUse)
-	{
-		if(!security.hasKeyPair())
-			return true;
-		return security.getPublicKeyString().equals(attemptSignInSecurityToUse.getPublicKeyString());
-	}
-
-	private boolean clearCurrentUserNameKeyPair()
-	{
-		security.clearKeyPair();
-		currentUserName = "";
-		return false;
+			getSecurity().clearKeyPair();
+			throw e;
+		}	
 	}
 
 	public void setCurrentAccount(String userName)
@@ -1230,6 +1203,13 @@ public class MartusApp
 	public MartusCrypto getSecurity()
 	{
 		return security;
+	}
+
+	public void setSecurity(MartusCrypto securityToUse)
+	{
+		security = securityToUse;
+		if(store != null)
+			store.setSignatureGenerator(getSecurity());
 	}
 
 	public void setSSLNetworkInterfaceHandlerForTesting(NetworkInterface server)
@@ -1347,7 +1327,7 @@ public class MartusApp
 	public NetworkInterface currentNetworkInterfaceHandler;
 	public ClientSideNetworkGateway currentNetworkInterfaceGateway;
 	boolean logUploads;
-	public MartusCrypto security;
+	private MartusCrypto security;
 	private String currentUserName;
 	private int maxNewFolders;
 

@@ -529,7 +529,7 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		assertEquals("bad file", false, appWithAccount.attemptSignInInternal(badFile, userName, userPassword));
 		assertEquals("keypair not cleared?", false, mockSecurityForApp.hasKeyPair());
 		assertEquals("non-blank username?", "", appWithAccount.getUserName());
-		appWithAccount.security.createKeyPair();
+		appWithAccount.getSecurity().createKeyPair();
 		TRACE_END();
 	}	
 	
@@ -570,11 +570,47 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		assertEquals("should fai1", false, appWithAccount.attemptSignIn(userName, userPassword));
 		assertEquals("keypair not cleared?", false, mockSecurityForApp.hasKeyPair());
 		mockSecurityForApp.fakeAuthorizationFailure = false;
-		appWithAccount.security.createKeyPair();
+		appWithAccount.getSecurity().createKeyPair();
 
 		TRACE_END();
 	}
 
+	public void testAttemptReSignInAuthorizationFailure() throws Exception
+	{
+		TRACE_BEGIN("testAttemptReSignInAuthorizationFailure");
+		MockMartusApp app = MockMartusApp.create();
+		app.createAccount(userName, userPassword);
+		app.getSecurity().clearKeyPair();
+		app.setCurrentAccount("");
+		try
+		{
+			app.attemptReSignIn(userName, userPassword);
+			fail("Before Signin should throw");
+		}
+		catch (Exception expected)
+		{
+		}		
+		assertNull("keypair not empty?", app.getAccountId());
+		assertEquals("signin", true, app.attemptSignIn(userName, userPassword));
+		assertNotNull("keypair empty?", app.getAccountId());
+		app.attemptReSignIn(userName, userPassword);
+		assertNotNull("keypair cleared?", app.getAccountId());
+		try
+		{
+			app.attemptReSignIn(userName+"x", userPassword);
+			fail("wrong resignin should throw");
+		}
+		catch (Exception expected)
+		{
+		}	
+		
+		assertNull("keypair not cleared?", app.getAccountId());
+		app.attemptReSignIn(userName, userPassword);
+		assertNotNull("keypair not restored?", app.getAccountId());
+		
+		TRACE_END();
+	}
+	
 	public void testAttemptSignInKeyPairVersionFailure() throws Exception
 	{
 		TRACE_BEGIN("testAttemptSignInKeyPairVersionFailure");
@@ -583,7 +619,7 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		assertEquals("should fail2", false, appWithAccount.attemptSignIn(userName, userPassword));
 		assertEquals("keypair not cleared?", false, mockSecurityForApp.hasKeyPair());
 		mockSecurityForApp.fakeKeyPairVersionFailure = false;
-		appWithAccount.security.createKeyPair();
+		appWithAccount.getSecurity().createKeyPair();
 
 		TRACE_END();
 	}
