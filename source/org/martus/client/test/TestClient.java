@@ -46,7 +46,8 @@ public class TestClient
 	public static Test suite ( )
 	{
 		TestSuite suite= new TestSuite("All Client Martus Tests");
-
+		
+		suite.addTest(new TestSuite(TestBulletinCache.class));
 		suite.addTest(new TestSuite(TestBulletinFolder.class));
 		suite.addTest(new TestSuite(TestBulletinSearcher.class));
 		suite.addTest(new TestSuite(TestBulletinStore.class));

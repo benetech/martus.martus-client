@@ -89,6 +89,7 @@ public class BulletinStore
 	public BulletinStore(MartusCrypto cryptoToUse)
 	{
 		setSignatureGenerator(cryptoToUse);
+		cache = new BulletinCache();
 	}
 	
 	public File getStoreRootDir()
@@ -311,6 +312,7 @@ public class BulletinStore
 
 	public synchronized void removeBulletinFromStore(UniversalId uid) throws IOException
 	{
+		cache.remove(uid);
 		Bulletin foundBulletin = findBulletinByUniversalId(uid);
 		MartusCrypto crypto = getSignatureVerifier();
 		try
@@ -369,11 +371,18 @@ public class BulletinStore
 		Bulletin.DamagedBulletinException,
 		MartusCrypto.NoKeyPairException
 	{
-		return BulletinLoader.loadFromDatabase(getDatabase(), key, getSignatureVerifier());
+		Bulletin fromCache = cache.find(key.getUniversalId());
+		if(fromCache != null)
+			return fromCache;
+		
+		Bulletin b = BulletinLoader.loadFromDatabase(getDatabase(), key, getSignatureVerifier());
+		cache.add(b);
+		return b;
 	}
 
 	public void saveBulletin(Bulletin b) throws IOException, CryptoException
 	{
+		cache.remove(b.getUniversalId());
 		BulletinSaver.saveToClientDatabase(b, database, mustEncryptPublicData(), getSignatureGenerator());
 	}
 
@@ -1109,7 +1118,7 @@ public class BulletinStore
 	{
 		final MartusCrypto security = getSignatureGenerator();
 		Bulletin imported = BulletinZipImporter.loadFromFile(security, inputFile);
-		BulletinSaver.saveToClientDatabase(imported, getDatabase(), mustEncryptPublicData(), security);
+		saveBulletin(imported);
 		return imported.getUniversalId();
 	}
 	
@@ -1150,6 +1159,7 @@ public class BulletinStore
 	private BulletinFolder folderDiscarded;
 	private BulletinFolder folderDraftOutbox;
 	boolean loadedLegacyFolders;
+	private BulletinCache cache;
 
 	FieldSpec[] publicFieldTags;
 	FieldSpec[] privateFieldTags;	
