@@ -25,33 +25,20 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.dialogs;
 
-import java.awt.BorderLayout;
-import java.awt.Dimension;
-import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
-
-import javax.swing.JButton;
-import javax.swing.JDialog;
-import javax.swing.JPanel;
-import javax.swing.JViewport;
-
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.bulletincomponent.UiBulletinVersionView;
 import org.martus.common.bulletin.Bulletin;
-import org.martus.swing.UiButton;
-import org.martus.swing.UiLabel;
-import org.martus.swing.UiScrollPane;
-import org.martus.swing.Utilities;
 
-public class UiBulletinVersionPreviewDlg extends JDialog implements ActionListener
+public class UiBulletinVersionPreviewDlg extends UiBulletinPreviewDlg implements ActionListener
 {
 
 	public UiBulletinVersionPreviewDlg(UiMainWindow owner, Bulletin b)
 	{
-		super(owner, owner.getLocalization().getWindowTitle("BulletinPreview"), true);	
-		getContentPane().setLayout(new BorderLayout());
+		super(owner, owner.getLocalization(), "BulletinPreview");	
+
 		UiBulletinVersionView view = new UiBulletinVersionView(owner);
 		try
 		{
@@ -65,32 +52,7 @@ public class UiBulletinVersionPreviewDlg extends JDialog implements ActionListen
 			return;
 		}
 
-		UiScrollPane scrollPane = new UiScrollPane();
-		scrollPane.getViewport().setScrollMode(JViewport.SIMPLE_SCROLL_MODE);
-		scrollPane.getViewport().add(view);		
-
-		JPanel buttonPane = new JPanel();
-		buttonPane.setLayout(new GridLayout(1,7));
-		JButton ok = new UiButton(owner.getLocalization().getButtonLabel("ok"));
-		ok.addActionListener(this);
-		Dimension okSize = ok.getPreferredSize();
-		okSize.width += 40;
-		ok.setPreferredSize(okSize);
-		buttonPane.add(new UiLabel(" "));
-		buttonPane.add(new UiLabel(" "));
-		buttonPane.add(new UiLabel(" "));
-		buttonPane.add(ok);
-		buttonPane.add(new UiLabel(" "));
-		buttonPane.add(new UiLabel(" "));
-		buttonPane.add(new UiLabel(" "));
-
-		getContentPane().add(scrollPane, BorderLayout.CENTER);
-		getContentPane().add(buttonPane, BorderLayout.SOUTH);
-		Utilities.centerDlg(this);
-		setResizable(true);		
-		ok.requestFocus();
-		getRootPane().setDefaultButton(ok);
-		show();
+		initalizeView(view);
 	}
 
 	public void actionPerformed(ActionEvent ae)

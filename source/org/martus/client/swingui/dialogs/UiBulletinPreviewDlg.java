@@ -30,12 +30,12 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
+import javax.swing.Box;
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.JViewport;
-
 import org.martus.client.core.LanguageChangeListener;
 import org.martus.client.swingui.UiLocalization;
 import org.martus.client.swingui.UiMainWindow;
@@ -50,43 +50,54 @@ import org.martus.swing.Utilities;
 public class UiBulletinPreviewDlg extends JDialog implements ActionListener, LanguageChangeListener
 {
 
+	public UiBulletinPreviewDlg(UiMainWindow owner, UiLocalization localizationToUse, String windowTitleTag)
+	{
+		super(owner, localizationToUse.getWindowTitle(windowTitleTag), true);	
+		getContentPane().setLayout(new BorderLayout());
+		localization = localizationToUse;
+	}
+
 	public UiBulletinPreviewDlg(UiMainWindow owner, FieldDataPacket fdp)
 	{
-		super(owner, owner.getLocalization().getWindowTitle("BulletinPreview"), true);	
-		getContentPane().setLayout(new BorderLayout());
+		this(owner, owner.getLocalization(), "BulletinPreview");
 
 		UiBulletinComponentViewSection view = new UiBulletinComponentViewSection(owner);
 		FieldSpec[] standardFieldTags = StandardFieldSpecs.getDefaultPublicFieldSpecs();
-
-		UiLocalization localization = owner.getLocalization();
 		
 		view.createLabelsAndFields(standardFieldTags, this);
 		view.copyDataFromPacket(fdp);
 		view.attachmentViewer.saveButton.setVisible(false);
 		view.attachmentViewer.viewButton.setVisible(false);
+		view.updateEncryptedIndicator(fdp.isEncrypted());	
+		
+		initalizeView(view);
+	}
 
-		view.updateEncryptedIndicator(fdp.isEncrypted());		
+
+	protected void initalizeView(JPanel view)
+	{
 		UiScrollPane scrollPane = new UiScrollPane();
 		scrollPane.getViewport().setScrollMode(JViewport.SIMPLE_SCROLL_MODE);
-		scrollPane.getViewport().add(view);		
-
-		JPanel buttonPane = new JPanel();		
+		scrollPane.getViewport().add(view);
+		JPanel buttonPane = new JPanel();
+		buttonPane.setLayout(new BoxLayout(buttonPane, BoxLayout.X_AXIS));
 		JButton ok = new UiButton(localization.getButtonLabel("ok"));
 		ok.addActionListener(this);
 		Dimension okSize = ok.getPreferredSize();
 		okSize.width += 40;
 		ok.setPreferredSize(okSize);
+		buttonPane.add(Box.createHorizontalGlue());
 		buttonPane.add(ok);
-
+		buttonPane.add(Box.createHorizontalGlue());
 		getContentPane().add(scrollPane, BorderLayout.CENTER);
 		getContentPane().add(buttonPane, BorderLayout.SOUTH);
-		
 		getRootPane().setDefaultButton(ok);
 		Utilities.centerDlg(this);
-		setResizable(true);		
+		setResizable(true);
+		ok.requestFocus(true);
 		show();
 	}
-
+	
 	public void actionPerformed(ActionEvent ae)
 	{
 		dispose();
@@ -96,5 +107,7 @@ public class UiBulletinPreviewDlg extends JDialog implements ActionListener, Lan
 	{
 		//read-only nothing to do
 	}
+
+	private UiLocalization localization;
 
 }
