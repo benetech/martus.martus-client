@@ -61,12 +61,12 @@ abstract public class UiBulletinComponentSection extends JPanel
 		encryptedIndicator.setVerticalTextPosition(JLabel.TOP);
 		encryptedIndicator.setFont(encryptedIndicator.getFont().deriveFont(Font.BOLD));
 
-		damagedIndicator = new UiWarningLabel();
+		warningIndicator = new UiWarningLabel();
 
 		updateEncryptedIndicator(encrypted);
-		clearDamagedIndicator();
+		clearWarningIndicator();
 		add(encryptedIndicator);
-		add(damagedIndicator);
+		add(warningIndicator);
 	}
 
 	public UiField[] createLabelsAndFields(JPanel target, FieldSpec[] specs)
@@ -176,15 +176,15 @@ abstract public class UiBulletinComponentSection extends JPanel
 		}
 	}
 	
-	public void clearDamagedIndicator()
+	public void clearWarningIndicator()
 	{
-		damagedIndicator.setVisible(false);
+		warningIndicator.setVisible(false);
 	}
 
-	public void updateDamagedIndicator(String text)
+	public void updateWarningIndicator(String text)
 	{
-		damagedIndicator.setText(text);
-		damagedIndicator.setVisible(true);
+		warningIndicator.setText(text);
+		warningIndicator.setVisible(true);
 	}
 
 	ParagraphLayout getParagraphLayout()
@@ -207,7 +207,7 @@ abstract public class UiBulletinComponentSection extends JPanel
 
 	UiLocalization localization;
 	JLabel encryptedIndicator;
-	JLabel damagedIndicator;
+	JLabel warningIndicator;
 	UiField[] fields;
 	FieldSpec[] fieldTags;
 

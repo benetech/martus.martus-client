@@ -393,6 +393,7 @@ public class EnglishStrings
 "field:publicsection=Public Information",
 "field:privatesection=Private Information",
 "field:MayBeDamaged=Warning: Portions may be missing or damaged",
+"field:BulletinNotYours=Field Office Bulletin",
 "field:BulletinHasUnknownStuff=Warning: Some information in this bulletin is not visible",
 "field:retrieveflag=Retrieve?",
 "field:DeleteFlag=Delete?",
