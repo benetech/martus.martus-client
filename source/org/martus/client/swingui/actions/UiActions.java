@@ -139,16 +139,6 @@ public class UiActions
 		return new ActionMenuConfigureHQs(mainWindowToUse);
 	}
 
-	static public UiMartusAction newActionMenuImportHeadquarterPublicKey(UiMainWindow mainWindowToUse)
-	{
-		return new ActionMenuImportHeadquarterPublicKey(mainWindowToUse);
-	}
-
-	static public UiMartusAction newActionMenuRemoveExistingHeadquaterPublicKey(UiMainWindow mainWindowToUse)
-	{
-		return new ActionMenuRemoveExistingHeadquaterPublicKey(mainWindowToUse);
-	}
-	
 	static public UiMartusAction newActionMenuSearch(UiMainWindow mainWindowToUse)
 	{
 		return new ActionMenuSearch(mainWindowToUse);
@@ -736,32 +726,6 @@ public class UiActions
 		public void actionPerformed(ActionEvent ae)
 		{
 			mainWindow.doConfigureHQs();
-		}
-	}
-	
-	private static class ActionMenuImportHeadquarterPublicKey extends UiMenuAction
-	{
-		public ActionMenuImportHeadquarterPublicKey(UiMainWindow mainWindowToUse)
-		{
-			super(mainWindowToUse, "ImportHQPublicKey");
-		}
-
-		public void actionPerformed(ActionEvent ae)
-		{
-			mainWindow.doImportHQPublicKey();
-		}
-	}
-
-	private static class ActionMenuRemoveExistingHeadquaterPublicKey extends UiMenuAction
-	{
-		public ActionMenuRemoveExistingHeadquaterPublicKey(UiMainWindow mainWindowToUse)
-		{
-			super(mainWindowToUse, "RemoveExistingHQPublicKey");
-		}
-
-		public void actionPerformed(ActionEvent ae)
-		{
-			mainWindow.doClearPublicAccountInfo();
 		}
 	}
 }

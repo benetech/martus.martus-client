@@ -175,6 +175,7 @@ public class EnglishStrings
 "wintitle:notifyAttachmentNotAFile=Attachment Chosen Not a File",
 "wintitle:notifyFilesWillNotBeDeleted=Files Not Deleted",
 "wintitle:notifyChoosingUninstallMartus=Uninstalling Martus Warning",
+"wintitle:notifyHQKeyAlradyExists=HQ Key Already Exists",
 
 "wintitle:inputservername=Server Name",
 "wintitle:inputserverpubliccode=Server Identification",
@@ -326,9 +327,7 @@ public class EnglishStrings
 "menu:QuickErase=Quick Erase",
 "menu:BackupMyKeyPairFile=Backup My Keypair",
 "menu:ExportMyPublicKey=Export My Public Key",
-"menu:ImportHQPublicKey=Import Headquarters Key",
 "menu:ConfigureHQs=Configure HQ's",
-"menu:RemoveExistingHQPublicKey=Remove Existing Headquarters",
 "menu:CustomFields=Customize Fields",
 "menu:help=Help",
 "menu:helpMessage=Help",
@@ -674,6 +673,7 @@ public class EnglishStrings
 "field:notifyAttachmentNotAFilecause=The item you choose was not a file, please choose a file to add as an attachment to this bulletin.",
 "field:notifyFilesWillNotBeDeletedcause=The original files have not been deleted from your computer, you must delete them manually if you wish.",
 "field:notifyChoosingUninstallMartuscause=By choosing to uninstall Martus we will need to erase your keypair file and Martus will exit after it completes the quick erase operation then bring up the uninstall wizard.  Since this will erase your keypair file Martus will also delete the following information: any server or HQ you have configured, any custom fields or default details, and your personal preferences.  This information will be lost and restoring your keypair from a backup will not recover these settings.",
+"field:notifyHQKeyAlradyExistscause=You have already added this key to your list of HQ's.",
 
 "field:messageServerNewscause=The current server has sent this message:",
 "field:messageErrorDateInFuturecause=This date occurs in the future:",

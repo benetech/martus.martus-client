@@ -112,8 +112,6 @@ public class UiMenuBar extends JMenuBar
 		tools.add(new ActionMenuBackupMyKeyPair(mainWindow));
 		tools.add(UiActions.newActionMenuExportMyPublicKey(mainWindow));
 		tools.addSeparator();
-		tools.add(UiActions.newActionMenuImportHeadquarterPublicKey(mainWindow));
-		tools.add(UiActions.newActionMenuRemoveExistingHeadquaterPublicKey(mainWindow));
 		tools.add(UiActions.newActionMenuConfigureHQs(mainWindow));
 		
 		JMenu help = new JMenu(localization.getMenuLabel("help"));

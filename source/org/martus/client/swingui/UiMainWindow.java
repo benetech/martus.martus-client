@@ -67,7 +67,6 @@ import javax.swing.JPopupMenu;
 import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
 import javax.swing.SwingUtilities;
-import javax.swing.filechooser.FileFilter;
 
 import org.martus.client.core.BackgroundUploader;
 import org.martus.client.core.BulletinFolder;
@@ -1591,62 +1590,13 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	{
 		new UiShowScrollableTextDlg(this, titleTag, okButtonTag, Localization.UNUSED_TAG, Localization.UNUSED_TAG, message, tokenReplacement);
 	}
-
-	class PublicInfoFileFilter extends FileFilter
-	{
-		public boolean accept(File pathname)
-		{
-			if(pathname.isDirectory())
-				return true;
-			return(pathname.getName().endsWith(MartusApp.PUBLIC_INFO_EXTENSION));
-		}
-
-		public String getDescription()
-		{
-			return getLocalization().getFieldLabel("PublicInformationFiles");
-		}
-	}
 	
 	public void doConfigureHQs()
 	{
-		if(!reSignIn())
-			return;
+//TODO:remove comments
+//		if(!reSignIn())
+//			return;
 		new UiConfigureHQs(this);
-	}
-
-	public void doImportHQPublicKey()
-	{
-		if(!reSignIn())
-			return;
-
-		String windowTitle = localization.getWindowTitle("ImportHQPublicKey");
-		String buttonLabel = localization.getButtonLabel("inputImportPublicCodeok");
-		
-		File currentDirectory = new File(app.getCurrentAccountDirectoryName());
-		FileFilter filter = new PublicInfoFileFilter();
-		UiFileChooser.FileDialogResults results = UiFileChooser.displayFileOpenDialog(this, windowTitle, null, currentDirectory, buttonLabel, filter);
-		if (results.wasCancelChoosen())
-			return;
-		
-		File importFile = results.getFileChoosen();
-		try
-		{
-			String publicKey = app.extractPublicInfo(importFile);
-			String publicCode = MartusCrypto.computePublicCode(publicKey);
-			if(confirmPublicCode(publicCode, "ImportPublicCode", "AccountCodeWrong"))
-			{
-				if(confirmDlg("SetImportPublicKey"))
-					app.setHQKey(publicKey);
-			}
-		}
-		catch(MartusApp.SaveConfigInfoException e)
-		{
-			notifyDlg("ErrorSavingConfig");
-		}
-		catch(Exception e)
-		{
-			notifyDlg("PublicInfoFileError");
-		}
 	}
 
 	public void doClearPublicAccountInfo()
@@ -1665,27 +1615,6 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		catch(Exception e)
 		{
 			notifyDlg("PublicInfoFileError");
-		}
-	}
-
-
-	private boolean confirmPublicCode(String publicCode, String baseTag, String errorBaseTag)
-	{
-		String userEnteredPublicCode = "";
-		//System.out.println("Public code required:" + publicCode);
-		while(true)
-		{
-			userEnteredPublicCode = getStringInput(baseTag, "", userEnteredPublicCode);
-			if(userEnteredPublicCode == null)
-				return false; // user hit cancel
-			String normalizedPublicCode = MartusCrypto.removeNonDigits(userEnteredPublicCode);
-
-			if(publicCode.equals(normalizedPublicCode))
-				return true;
-
-			//System.out.println("Entered:     " + userEnteredPublicCode);
-			//System.out.println("Normalized:   " + normalizedPublicCode);
-			notifyDlg(errorBaseTag);
 		}
 	}
 
