@@ -131,6 +131,9 @@ class BackgroundUploadTimerTask extends TimerTask
 		if(gotUpdatedOnServerUids)
 			return;
 		
+		if(!getApp().isSSLServerAvailable())
+			return;
+		
 		System.out.println("Entering BackgroundUploadTimerTask.getUpdatedListOfBulletinsOnServer");
 		String myAccountId = getApp().getAccountId();
 		HashSet uidsOnServer = new HashSet(1000);
