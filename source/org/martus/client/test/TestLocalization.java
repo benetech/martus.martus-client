@@ -128,6 +128,7 @@ public class TestLocalization extends TestCaseEnhanced
 		tmpDir.deleteOnExit();
 		
 		UiLocalization directionalLanguages = new UiLocalization(tmpDir, EnglishTestStrings.strings);
+		directionalLanguages.includeOfficialLanguagesOnly = false;
 		directionalLanguages.setCurrentLanguageCode("en");
 		assertFalse("English is a Left To Right language.", UiLanguageDirection.isRightToLeftLanguage());
 		assertEquals("Components for English should be Left To Right", UiLanguageDirection.getComponentOrientation(), ComponentOrientation.LEFT_TO_RIGHT);
@@ -174,7 +175,26 @@ public class TestLocalization extends TestCaseEnhanced
 		assertTrue("must have english", foundEnglish);
 	}
 	
-	public void testGetTranslationFile() throws Exception
+	public void testGetTranslationFileAllowUnofficial() throws Exception
+	{
+		File translationDirectory = createTempDirectory();
+		UiLocalization tmpLocalization = new UiLocalization(translationDirectory, EnglishStrings.strings);
+		tmpLocalization.includeOfficialLanguagesOnly = false;
+		String languageCode = "ff";
+		assertNull("Language doesn't exists should return null", tmpLocalization.getTranslationFile(languageCode));
+		File mlpkTranslation = new File(translationDirectory, UiBasicLocalization.getMlpkFilename(languageCode));
+		mlpkTranslation.deleteOnExit();
+		String data = "test";
+		writeDataToFile(mlpkTranslation, data);
+		assertEquals("MLP file exists should return it.", mlpkTranslation, tmpLocalization.getTranslationFile(languageCode));
+		File mtfTranslation = new File(translationDirectory, UiBasicLocalization.getMtfFilename(languageCode));
+		mtfTranslation.deleteOnExit();
+		writeDataToFile(mtfTranslation, data);
+		assertEquals("MTF file exists should superceed MLP file.", mtfTranslation, tmpLocalization.getTranslationFile(languageCode));
+		
+	}
+	
+	public void testGetTranslationFileAllowOfficialOnly() throws Exception
 	{
 		File translationDirectory = createTempDirectory();
 		UiLocalization tmpLocalization = new UiLocalization(translationDirectory, EnglishStrings.strings);
@@ -184,14 +204,14 @@ public class TestLocalization extends TestCaseEnhanced
 		mlpkTranslation.deleteOnExit();
 		String data = "test";
 		writeDataToFile(mlpkTranslation, data);
-		assertEquals("MLPK file exists should return it.", mlpkTranslation, tmpLocalization.getTranslationFile(languageCode));
+		assertNull("MLP file exists but isn't signed should return null", tmpLocalization.getTranslationFile(languageCode));
 		File mtfTranslation = new File(translationDirectory, UiBasicLocalization.getMtfFilename(languageCode));
 		mtfTranslation.deleteOnExit();
 		writeDataToFile(mtfTranslation, data);
-		assertEquals("MTF file exists should superceed MLPK file.", mtfTranslation, tmpLocalization.getTranslationFile(languageCode));
+		assertNull("MTF file exists but we don't allow unofficial translations", tmpLocalization.getTranslationFile(languageCode));
 		
 	}
-	
+
 	private void writeDataToFile(File mlpkTranslation, String data) throws IOException
 	{
 		UnicodeWriter out = new UnicodeWriter(mlpkTranslation);
@@ -203,6 +223,7 @@ public class TestLocalization extends TestCaseEnhanced
 	{
 		File translationDirectory = createTempDirectory();
 		UiLocalization myLocalization = new UiLocalization(translationDirectory, EnglishStrings.strings);
+		myLocalization.includeOfficialLanguagesOnly = false;
 		assertTrue("Default English should always be trusted.", myLocalization.isOfficialTranslation("en"));
 
 		String someTestLanguageCode = "zz";
@@ -222,6 +243,23 @@ public class TestLocalization extends TestCaseEnhanced
 		assertEquals("Incorrect translation", someLanguageTranslationOfOk, myLocalization.getButtonLabel(buttonName));
 	}
 
+	public void testAddedUnsignedMTFLanguageFileOfficialOnly() throws Exception
+	{
+		File translationDirectory = createTempDirectory();
+		UiLocalization myLocalization = new UiLocalization(translationDirectory, EnglishStrings.strings);
+
+		String someTestLanguageCode = "zz";
+		
+		File someTestLanguageFile = new File(translationDirectory,UiBasicLocalization.getMtfFilename(someTestLanguageCode));
+		someTestLanguageFile.deleteOnExit();
+		String buttonName = "ok";
+		String someLanguageTranslationOfOk = "dkjfl";
+		writeDataToFile(someTestLanguageFile, "button:"+buttonName+"="+someLanguageTranslationOfOk);
+		
+		myLocalization.setCurrentLanguageCode(someTestLanguageCode);
+		assertEquals("Incorrect translation", "<OK>", myLocalization.getButtonLabel(buttonName));
+	}
+
 	public void testJarVerifier() throws Exception
 	{
 		assertEquals("no file", JarVerifier.ERROR_INVALID_JAR, JarVerifier.verify("nonexistentFile", false));
@@ -233,10 +271,11 @@ public class TestLocalization extends TestCaseEnhanced
 		assertEquals("A valid signed jar didn't pass?", JarVerifier.JAR_VERIFIED_TRUE, JarVerifier.verify(getClass().getResource("Martus-xx.mlp").getFile(), false));
 	}
 	
-	public void testAddedMTPKLanguagePack() throws Exception
+	public void testAddedMTPKLanguagePackWhenWeAllowUnofficialTranslations() throws Exception
 	{
 		File translationDirectory = createTempDirectory();
 		UiLocalization myLocalization = new UiLocalization(translationDirectory, EnglishStrings.strings);
+		myLocalization.includeOfficialLanguagesOnly = false;
 
 		String someTestLanguageCode = "xx";
 		boolean foundSomeTestLanguage = doesLanguageExist(myLocalization, someTestLanguageCode);
@@ -251,10 +290,11 @@ public class TestLocalization extends TestCaseEnhanced
 		myLocalization.setCurrentLanguageCode(someTestLanguageCode);
 		assertEquals("Incorrect translation OK from within language pack", "OK", myLocalization.getButtonLabel("ok"));
 		assertEquals("Incorrect translation No from within language pack", "No", myLocalization.getButtonLabel("no"));
-		assertTrue("A signed MLPK file should be trusted", myLocalization.isOfficialTranslation(someTestLanguageCode));
+		assertTrue("A signed MLP file should be trusted", myLocalization.isOfficialTranslation(someTestLanguageCode));
 
 		File translationDirectory2 = createTempDirectory();
 		UiLocalization myLocalization2 = new UiLocalization(translationDirectory2, EnglishStrings.strings);
+		myLocalization2.includeOfficialLanguagesOnly = false;
 		File someTestLanguage2 = new File(translationDirectory2,UiBasicLocalization.getMlpkFilename(someTestLanguageCode));
 		someTestLanguage2.deleteOnExit();
 		copyResourceFileToLocalFile(someTestLanguage2, "Martus-xx-notSigned.mlp");
@@ -265,6 +305,37 @@ public class TestLocalization extends TestCaseEnhanced
 		assertEquals("Incorrect translation No from within unsigned language pack", "No", myLocalization2.getButtonLabel("no"));
 		assertFalse("A unsigned MLPK file should not be trusted", myLocalization2.isOfficialTranslation(someTestLanguageCode));
 		
+		assertFalse("A non existant translation should not be trusted.",myLocalization2.isOfficialTranslation("dx"));
+	}
+
+	public void testAddedMTPKLanguagePackWhenWeAllowONLYOfficialTranslations() throws Exception
+	{
+		File translationDirectory = createTempDirectory();
+		UiLocalization myLocalization = new UiLocalization(translationDirectory, EnglishStrings.strings);
+
+		String someTestLanguageCode = "xx";
+		boolean foundSomeTestLanguage = doesLanguageExist(myLocalization, someTestLanguageCode);
+		assertFalse("must not have testLanguage from pack yet", foundSomeTestLanguage);
+
+		File someTestLanguage = new File(translationDirectory,UiBasicLocalization.getMlpkFilename(someTestLanguageCode));
+		someTestLanguage.deleteOnExit();
+		copyResourceFileToLocalFile(someTestLanguage, "Martus-xx.mlp");
+		
+		foundSomeTestLanguage = doesLanguageExist(myLocalization, someTestLanguageCode);
+		assertTrue("should have testLanguage since it is official", foundSomeTestLanguage);
+		myLocalization.setCurrentLanguageCode(someTestLanguageCode);
+		assertEquals("Incorrect translation OK from within language pack", "OK", myLocalization.getButtonLabel("ok"));
+		assertEquals("Incorrect translation No from within language pack", "No", myLocalization.getButtonLabel("no"));
+		assertTrue("A signed MLP file should be trusted", myLocalization.isOfficialTranslation(someTestLanguageCode));
+
+		File translationDirectory2 = createTempDirectory();
+		UiLocalization myLocalization2 = new UiLocalization(translationDirectory2, EnglishStrings.strings);
+		File someTestLanguage2 = new File(translationDirectory2,UiBasicLocalization.getMlpkFilename(someTestLanguageCode));
+		someTestLanguage2.deleteOnExit();
+		copyResourceFileToLocalFile(someTestLanguage2, "Martus-xx-notSigned.mlp");
+		foundSomeTestLanguage = doesLanguageExist(myLocalization2, someTestLanguageCode);
+		assertFalse("should not have testLanguage because its not signed.", foundSomeTestLanguage);
+		assertFalse("A unsigned MLPK file should not be trusted", myLocalization2.isOfficialTranslation(someTestLanguageCode));
 		assertFalse("A non existant translation should not be trusted.",myLocalization2.isOfficialTranslation("dx"));
 	}
 

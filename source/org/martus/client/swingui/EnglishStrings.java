@@ -717,7 +717,7 @@ public class EnglishStrings
 "field:warningDeleteMultipleUnsentBulletins=WARNING: One or more of these bulletins have not been sent to a server since they were last modified. Deleting them will prevent the latest changes from being backed up.",
 "field:warningDeleteSingleBulletinWithCopies=NOTE: A copy of this bulletin exists in one or more other folders, and those copies will not be removed.",
 "field:warningDeleteMultipleBulletinsWithCopies=NOTE: Copies of one or more of these bulletins exist in one or more other folders. Those copies will not be removed.",
-"field:warningUnofficialTranslation=Warning this translation was not created by the Martus team, and therefore may not be trustworthy.\nIf you only want official languages only then exit Martus, remove the file #UseUnofficialTranslationFile# from your Martus directory, and restart Martus.\n\n",
+"field:warningUnofficialTranslation=WARNING:  This translation was not created by the Martus team, and therefore may not be trustworthy.\nIf you only want to use official translations then exit Martus, remove the file #UseUnofficialTranslationFiles# from your Martus directory, and restart Martus.\n\n",
 
 
 "field:username=Username",

@@ -130,6 +130,9 @@ public class MartusApp
 			maxNewFolders = MAXFOLDERS;
 			martusDataRootDirectory = dataDirectoryToUse;
 			store = new ClientBulletinStore(cryptoToUse);
+			if(shouldUseUnofficialTranslations())
+				localization.includeOfficialLanguagesOnly = false;
+			
 		}
 		catch(MartusCrypto.CryptoInitializationException e)
 		{

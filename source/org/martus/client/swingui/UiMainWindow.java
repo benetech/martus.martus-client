@@ -241,7 +241,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		try
 		{
 			HashMap replacement = new HashMap();
-			replacement.put("#UseUnofficialTranslationFile#", "\"" + MartusApp.USE_UNOFFICIAL_TRANSLATIONS_NAME + "\"");
+			replacement.put("#UseUnofficialTranslationFiles#", "\"" + MartusApp.USE_UNOFFICIAL_TRANSLATIONS_NAME + "\"");
 			originalMessage = TokenReplacement.replaceTokens(originalMessage, replacement);
 		}
 		catch(TokenInvalidException e)
