@@ -29,6 +29,7 @@ package org.martus.client.test;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
@@ -47,6 +48,7 @@ import org.martus.common.bulletin.BulletinConstants;
 import org.martus.common.bulletin.BulletinForTesting;
 import org.martus.common.bulletin.BulletinSaver;
 import org.martus.common.crypto.MockMartusSecurity;
+import org.martus.common.crypto.MartusCrypto.CryptoException;
 import org.martus.common.database.Database;
 import org.martus.common.database.DatabaseKey;
 import org.martus.common.database.MockDatabase;
@@ -107,6 +109,17 @@ public class TestBulletinStore extends TestCaseEnhanced
 		assertEquals("wrong author?", "", b.get("Author"));
 		assertEquals("wrong account?", security.getPublicKeyString(), b.getAccount());
 	}
+    
+    public void testNeedsFolderMigration()
+    {
+    	assertFalse("normal store needs migration?", store.needsFolderMigration());
+		store.createSystemFolder(BulletinStore.OBSOLETE_OUTBOX_FOLDER);
+    	assertTrue("outbox doesn't trigger migration?", store.needsFolderMigration());
+    	store.deleteFolder(BulletinStore.OBSOLETE_OUTBOX_FOLDER);
+		store.createSystemFolder(BulletinStore.OBSOLETE_DRAFT_FOLDER);
+    	assertTrue("drafts doesn't trigger migration?", store.needsFolderMigration());
+    	store.deleteFolder(BulletinStore.OBSOLETE_DRAFT_FOLDER);
+    }
     
 	public void testGetStandardFieldNames()
 	{
@@ -387,11 +400,6 @@ public class TestBulletinStore extends TestCaseEnhanced
 		assertNotNull("Should have created Sent folder", fSent);
 		assertEquals("Sent/Draft", true, fSent.canAdd(Bulletin.STATUSDRAFT));
 		assertEquals("Sent/Sealed", true, fSent.canAdd(Bulletin.STATUSSEALED));
-
-		BulletinFolder fDrafts = store.getFolderDrafts();
-		assertNotNull("Should have created Drafts folder", fDrafts);
-		assertEquals("Drafts/Draft", true, fDrafts.canAdd(Bulletin.STATUSDRAFT));
-		assertEquals("Drafts/Sealed", false, fDrafts.canAdd(Bulletin.STATUSSEALED));
 
 		BulletinFolder fDiscarded = store.getFolderDiscarded();
 		assertNotNull("Should have created Discarded folder", fDiscarded);
@@ -778,76 +786,88 @@ public class TestBulletinStore extends TestCaseEnhanced
 		assertEquals("Didn't keep time saved?", firstSavedTime, loadedTime);
 	}
 
-	public void testAutomaticSaving() throws Exception
+	public void testClearFolderCausesSave() throws Exception
 	{
-		TRACE("testAutomaticSaving");
+		TRACE("testClearFolderCausesSave");
+
+		store.deleteAllData();
+		Bulletin b = store.createEmptyBulletin();
+		BulletinFolder f = store.getFolderSaved();
+		store.addBulletinToFolder(b.getUniversalId(), f);
+
+		store.getDatabase().deleteAllData();
+		store.clearFolder(f.getName());
+		assertTrue("clearFolder f ", store.getFoldersFile().exists());
+		DatabaseKey bulletinKey = new DatabaseKey(b.getUniversalId());
+		assertNull("clearFolder b ", store.getDatabase().readRecord(bulletinKey, security));
+
+		store.saveBulletin(b);
+		store.destroyBulletin(b);
+		assertNull("destroyBulletin b ", store.getDatabase().readRecord(bulletinKey, security));
+	}
+
+	public void testDeleteFolderCausesSave() throws Exception, IOException, CryptoException
+	{
+		TRACE("testDeleteFolderCausesSave");
+		
+		DatabaseKey foldersKey = new DatabaseKey(UniversalId.createDummyUniversalId());
+		store.deleteAllData();
+		Bulletin b = store.createEmptyBulletin();
+		store.createFolder("z");
+		db.discardRecord(foldersKey);
+		store.deleteFolder("z");
+		assertTrue("deleteFolder f ", store.getFoldersFile().exists());
+		DatabaseKey bulletinKey = new DatabaseKey(b.getUniversalId());
+		assertNull("deleteFolder b ", store.getDatabase().readRecord(bulletinKey, security));
+	}
+
+	public void testRenameFolderCausesSave() throws Exception, IOException, CryptoException
+	{
+		TRACE("testRenameFolderCausesSave");
+
 		Database db = store.getDatabase();
 		DatabaseKey foldersKey = new DatabaseKey(UniversalId.createDummyUniversalId());
+		store.deleteAllData();
+		Bulletin b = store.createEmptyBulletin();
+		store.createFolder("x");
+		db.discardRecord(foldersKey);
+		store.renameFolder("x", "b");
+		assertTrue("renameFolder f ", store.getFoldersFile().exists());
+		DatabaseKey bulletinKey = new DatabaseKey(b.getUniversalId());
+		assertNull("renameFolder b ", store.getDatabase().readRecord(bulletinKey, security));
+	}
 
-		{
-			store.deleteAllData();
-			Bulletin b = store.createEmptyBulletin();
-			store.saveBulletin(b);
+	public void testSaveFoldersDoesNotSaveBulletins() throws Exception, IOException, CryptoException
+	{
+		TRACE("testSaveFoldersDoesNotSaveBulletins");
 
-			assertEquals("save bulletin f ", false, store.getFoldersFile().exists());
+		store.deleteAllData();
+		Bulletin b = store.createEmptyBulletin();
+		store.createFolder("a");
+		store.saveFolders();
+		assertTrue("createFolder f ", store.getFoldersFile().exists());
+		DatabaseKey bulletinKey = new DatabaseKey(b.getUniversalId());
+		assertNull("createFolder b ", store.getDatabase().readRecord(bulletinKey, security));
+	}
 
-			DatabaseKey bulletinKey = new DatabaseKey(b.getUniversalId());
-			assertNotNull("save bulletin b ", store.getDatabase().readRecord(bulletinKey, security));
-		}
+	public void testSaveBulletinDoesNotSaveFolders() throws Exception, IOException, CryptoException
+	{
+		TRACE("testSaveBulletinDoesNotSaveFolders");
 
-		{
-			store.deleteAllData();
-			Bulletin b = store.createEmptyBulletin();
-			store.createFolder("a");
-			store.saveFolders();
-			assertTrue("createFolder f ", store.getFoldersFile().exists());
-			DatabaseKey bulletinKey = new DatabaseKey(b.getUniversalId());
-			assertNull("createFolder b ", store.getDatabase().readRecord(bulletinKey, security));
-		}
+		store.deleteAllData();
+		Bulletin b = store.createEmptyBulletin();
+		store.saveBulletin(b);
 
-		{
-			store.deleteAllData();
-			Bulletin b = store.createEmptyBulletin();
-			BulletinFolder drafts = store.getFolderDrafts();
-			store.addBulletinToFolder(b.getUniversalId(), drafts);
+		assertEquals("save bulletin f ", false, store.getFoldersFile().exists());
 
-			store.getDatabase().deleteAllData();
-			store.clearFolder(drafts.getName());
-			assertTrue("clearFolder f ", store.getFoldersFile().exists());
-			DatabaseKey bulletinKey = new DatabaseKey(b.getUniversalId());
-			assertNull("clearFolder b ", store.getDatabase().readRecord(bulletinKey, security));
-
-			store.saveBulletin(b);
-			store.destroyBulletin(b);
-			assertNull("destroyBulletin b ", store.getDatabase().readRecord(bulletinKey, security));
-		}
-
-		{
-			store.deleteAllData();
-			Bulletin b = store.createEmptyBulletin();
-			store.createFolder("x");
-			db.discardRecord(foldersKey);
-			store.renameFolder("x", "b");
-			assertTrue("renameFolder f ", store.getFoldersFile().exists());
-			DatabaseKey bulletinKey = new DatabaseKey(b.getUniversalId());
-			assertNull("renameFolder b ", store.getDatabase().readRecord(bulletinKey, security));
-		}
-
-		{
-			store.deleteAllData();
-			Bulletin b = store.createEmptyBulletin();
-			store.createFolder("z");
-			db.discardRecord(foldersKey);
-			store.deleteFolder("z");
-			assertTrue("deleteFolder f ", store.getFoldersFile().exists());
-			DatabaseKey bulletinKey = new DatabaseKey(b.getUniversalId());
-			assertNull("deleteFolder b ", store.getDatabase().readRecord(bulletinKey, security));
-		}
+		DatabaseKey bulletinKey = new DatabaseKey(b.getUniversalId());
+		assertNotNull("save bulletin b ", store.getDatabase().readRecord(bulletinKey, security));
 	}
 
 	public void testImportZipFileWithAttachmentSealed() throws Exception
 	{
 		TRACE("testImportZipFileWithAttachmentSealed");
+		
 		Bulletin original = store.createEmptyBulletin();
 		DatabaseKey originalKey = new DatabaseKey(original.getUniversalId());
 		AttachmentProxy a = new AttachmentProxy(tempFile1);
@@ -1100,7 +1120,7 @@ public class TestBulletinStore extends TestCaseEnhanced
 		Set stillEmptySet = store.getSetOfBulletinUniversalIdsInFolders();
 		assertTrue("not still empty", stillEmptySet.isEmpty());
 
-		store.getFolderDrafts().add(b1);
+		store.getFolderSaved().add(b1);
 		store.getFolderDiscarded().add(b1);
 		store.getFolderDiscarded().add(b2);
 		Set two = store.getSetOfBulletinUniversalIdsInFolders();
@@ -1126,7 +1146,7 @@ public class TestBulletinStore extends TestCaseEnhanced
 		assertTrue("two Missing b1?", two.contains(b1.getUniversalId()));
 		assertTrue("two Missing b2?", two.contains(b2.getUniversalId()));
 
-		store.getFolderDrafts().add(b1);
+		store.getFolderSaved().add(b1);
 		store.getFolderDiscarded().add(b1);
 		Set one = store.getSetOfOrphanedBulletinUniversalIds();
 		assertEquals("not one?", 1, one.size());
@@ -1136,7 +1156,7 @@ public class TestBulletinStore extends TestCaseEnhanced
 		one = store.getSetOfOrphanedBulletinUniversalIds();
 		assertEquals("A bulletin only existing in a hidden folder is orphaned", 1,  one.size());
 
-		store.getFolderDrafts().add(b2);
+		store.getFolderSaved().add(b2);
 		Set empty = store.getSetOfOrphanedBulletinUniversalIds();
 		assertTrue("now b2 is in a visable folder so we should not have any orphans", empty.isEmpty());
 	}
@@ -1152,7 +1172,7 @@ public class TestBulletinStore extends TestCaseEnhanced
 		store.getFolderDraftOutbox().add(b1);
 		assertEquals("hidden-only not an orphan?", true, store.isOrphan(b1));
 
-		store.getFolderDrafts().add(b2);
+		store.getFolderSaved().add(b2);
 		store.getFolderDraftOutbox().add(b2);
 		assertEquals("hidden-plus is an orphan?", false, store.isOrphan(b2));
 	}
@@ -1164,7 +1184,7 @@ public class TestBulletinStore extends TestCaseEnhanced
 		store.saveBulletin(b1);
 
 		assertEquals("Not in any folder, bulletin not orphaned?", true, store.isOrphan(b1));
-		store.getFolderDrafts().add(b1);
+		store.getFolderSaved().add(b1);
 		assertEquals("In a visible folder, bulletin is orphaned?", false, store.isOrphan(b1));
 	}
 	

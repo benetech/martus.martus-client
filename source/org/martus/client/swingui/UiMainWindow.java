@@ -31,6 +31,7 @@ import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Frame;
 import java.awt.GridLayout;
+import java.awt.Image;
 import java.awt.Point;
 import java.awt.Toolkit;
 import java.awt.datatransfer.Clipboard;
@@ -76,6 +77,7 @@ import org.martus.client.core.ClientSideNetworkGateway;
 import org.martus.client.core.ConfigInfo;
 import org.martus.client.core.MartusApp;
 import org.martus.client.core.TransferableBulletinList;
+import org.martus.client.core.MartusApp.LoadConfigInfoException;
 import org.martus.client.core.MartusApp.MartusAppInitializationException;
 import org.martus.client.core.MartusApp.SaveConfigInfoException;
 import org.martus.client.swingui.bulletincomponent.UiBulletinPreviewPane;
@@ -140,6 +142,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	public UiMainWindow()
 	{
 		super();
+		setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 		setCurrentActiveFrame(this);
 		try
 		{
@@ -159,20 +162,105 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 
 		initalizeUiState();
 	}
+	
+	static class HiddenFrame extends JFrame
+	{
+		HiddenFrame(UiLocalization localization, String programName)
+		{
+			super(programName);
+			UiMainWindow.updateIcon(this);
+			setTitle(UiSigninDlg.getInitialSigninTitle(localization));
+			setState(Frame.ICONIFIED);
+			show();
+		}
+	}
 
 	public boolean run()
 	{
-		UiLocalization localization = getLocalization();
-		JFrame hiddenFrame = new JFrame(UiConstants.programName);
-		UiMainWindow.updateIcon(hiddenFrame);
-		hiddenFrame.setState(Frame.ICONIFIED);
-		hiddenFrame.show();
+		JFrame hiddenFrame = new HiddenFrame(getLocalization(), UiConstants.programName);
 		setCurrentActiveFrame(hiddenFrame);
+		{
+			preventTwoInstances();
+			notifyClientCompliance();
+	
+			mainWindowInitalizing = true;
+	
+			if(!sessionSignIn())
+				return false;
+			
+			loadConfigInfo();
+			
+			if(!createdNewAccount)
+				askAndBackupKeypairIfRequired();
+			
+			UiModelessBusyDlg waitingForBulletinsToLoad = new UiModelessBusyDlg(getLocalization().getFieldLabel("waitingForBulletinsToLoad"));
+			{
+				if(!loadFoldersAndBulletins())
+					return false;
+		
+				initializeViews();
+				restoreState();
+			}
+			waitingForBulletinsToLoad.endDialog();
 
-		preventTwoInstances();
-		notifyClientCompliance(hiddenFrame);
-		hiddenFrame.setTitle(UiSigninDlg.getInitialSigninTitle(localization));
-		mainWindowInitalizing = true;
+			requestContactInfo();
+			
+			addWindowListener(new WindowEventHandler());
+			show();
+			toFront();
+		}
+
+		setCurrentActiveFrame(this);
+		hiddenFrame.dispose();
+
+		createBackgroundUploadTasks();
+
+		mainWindowInitalizing = false;
+		return true;
+    }
+	
+	private void createBackgroundUploadTasks()
+	{
+		uploader = new java.util.Timer(true);
+		uploader.schedule(new BackgroundUploadTimerTask(this), 0, BACKGROUND_UPLOAD_CHECK_MILLIS);
+
+		errorChecker = new javax.swing.Timer(10*1000, new UploadErrorChecker());
+		errorChecker.start();
+	}
+
+	private void loadConfigInfo()
+	{
+		try
+		{
+			app.loadConfigInfo();
+		}
+		catch (LoadConfigInfoException e)
+		{
+			notifyDlg("corruptconfiginfo");
+		}
+		
+		if(createdNewAccount)
+		{
+			File bulletinDefaultDetailsFile = app.getBulletinDefaultDetailsFile();
+			if(bulletinDefaultDetailsFile.exists())
+				updateBulletinDetails(bulletinDefaultDetailsFile);
+		}
+	}
+
+	private void requestContactInfo()
+	{
+		ConfigInfo info = app.getConfigInfo();
+		if(!info.hasEnoughContactInfo())
+			doContactInfo();
+		else if(info.promptUserRequestSendToServer())
+		{
+			requestToUpdateContactInfoOnServerAndSaveInfo();
+			info.clearPromptUserRequestSendToServer();
+		}
+	}
+
+	private boolean sessionSignIn()
+	{
 		boolean wantsNewAccount = false;
 		int signInType = UiSigninDlg.INITIAL;
 		if(!app.doesAnyAccountExist())
@@ -203,8 +291,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 				return false;
 			createdNewAccount = true;
 		}
-
-		UiModelessBusyDlg waitingForBulletinsToLoad = new UiModelessBusyDlg(getLocalization().getFieldLabel("waitingForBulletinsToLoad"));
+		
 		initalizeUiState();
 		
 		try
@@ -232,40 +319,8 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		timeoutChecker = new java.util.Timer(true);
 		timeoutChecker.schedule(new TimeoutTimerTask(), 0, BACKGROUND_TIMEOUT_CHECK_EVERY_X_MILLIS);
 
-		doAfterSignInConfigInfoSetup(createdNewAccount);
-		setCurrentActiveFrame(this);
-		hiddenFrame.dispose();
-
-		int quarantineCount = app.quarantineUnreadableBulletins();
-
-		app.loadFolders();
-		int orphanCount = app.repairOrphans();
-
-		setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-		addWindowListener(new WindowEventHandler());
-
-		initializeViews();
-		restoreState();
-
-		if(quarantineCount > 0)
-			notifyDlg("FoundDamagedBulletins");
-
-		if(orphanCount > 0)
-			notifyDlg("FoundOrphans");
-
-		show();
-		toFront();
-
-		uploader = new java.util.Timer(true);
-		uploader.schedule(new BackgroundUploadTimerTask(this), 0, BACKGROUND_UPLOAD_CHECK_MILLIS);
-
-		errorChecker = new javax.swing.Timer(10*1000, new UploadErrorChecker());
-		errorChecker.start();
-
-		waitingForBulletinsToLoad.endDialog();
-		mainWindowInitalizing = false;
 		return true;
-    }
+	}
     
  	private void askToRepairMissingOrCorruptAccountMapSignature()
 	{
@@ -333,38 +388,26 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		}
 	}
 
-	private void doAfterSignInConfigInfoSetup(boolean createdNewAccount)
+	private boolean loadFoldersAndBulletins()
 	{
-		try
-		{
-			app.loadConfigInfo();
-		}
-		catch (MartusApp.LoadConfigInfoException e)
-		{
-			notifyDlg("corruptconfiginfo");
-		}
-		
-		ConfigInfo info = app.getConfigInfo();
-		if(createdNewAccount)
-		{
-			File bulletinDefaultDetailsFile = app.getBulletinDefaultDetailsFile();
-			if(bulletinDefaultDetailsFile.exists())
-				updateBulletinDetails(bulletinDefaultDetailsFile);
-		}
-		else
-		{
-			askAndBackupKeypairIfRequired();
-		}
-		
-		if(!info.hasEnoughContactInfo())
-			doContactInfo();
-		else if(info.promptUserRequestSendToServer())
-		{
-			requestToUpdateContactInfoOnServerAndSaveInfo();
-			info.clearPromptUserRequestSendToServer();
-		}
-	}
+		int quarantineCount = app.quarantineUnreadableBulletins();
+		if(quarantineCount > 0)
+			notifyDlg("FoundDamagedBulletins");
 
+		app.loadFolders();
+		if(getStore().needsFolderMigration())
+		{
+			if(!confirmDlg("NeedsFolderMigration"))
+				return false;
+		}
+		
+		int orphanCount = app.repairOrphans();
+		if(orphanCount > 0)
+			notifyDlg("FoundOrphans");
+
+		return true;
+	}
+	
 	private void askAndBackupKeypairIfRequired()
 	{
 		ConfigInfo info = app.getConfigInfo();
@@ -382,7 +425,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 				backupShare = localization.getFieldLabel("confirmbackupIncompleteShareNeeded");
 
 			String[] contents = {generalMsg, "", backupEncrypted, backupShare, "", generalMsgEffect}; 
-			if(confirmDlg(this, localization.getWindowTitle("askToBackupKeyPair"), contents))
+			if(confirmDlg(getCurrentActiveFrame(), localization.getWindowTitle("askToBackupKeyPair"), contents))
 			{
 				if(!hasBackedUpEncrypted)
 					askToBackupKeyPairEncryptedSingleFile();
@@ -392,7 +435,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		}
 	}
 
-	void notifyClientCompliance(Frame owner)
+	void notifyClientCompliance()
 	{
 		String productDescription = MartusUtilities.getXmlEncoded(getLocalization().getFieldLabel("SplashProductDescription"));
 		// NOTE: If this program contains ANY changes that have 
@@ -423,7 +466,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 			productDescription +
 			END_HTML_TAGS;
 		}
-		new UiSplashDlg(owner, getLocalization(), complianceStatementAlwaysEnglish);
+		new UiSplashDlg(getCurrentActiveFrame(), getLocalization(), complianceStatementAlwaysEnglish);
 	}
 	public final static String BEGIN_HTML_TAGS = "<font size='5'>";
 	public final static String END_HTML_TAGS = "</font>";
@@ -578,7 +621,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	
 	public boolean confirmDlg(String baseTag)
 	{
-		return confirmDlg(this, baseTag);
+		return confirmDlg(getCurrentActiveFrame(), baseTag);
 	}
 	
 	public boolean confirmDlg(JFrame parent, String baseTag)
@@ -616,7 +659,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	public void notifyDlg(String baseTag)
 	{
 		HashMap emptyTokenReplacement = new HashMap();
-		notifyDlg(this, baseTag, emptyTokenReplacement);
+		notifyDlg(getCurrentActiveFrame(), baseTag, emptyTokenReplacement);
 	}
 	
 	public void notifyDlg(JFrame parent, String baseTag)
@@ -1960,14 +2003,23 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		return uiState;
 	}
 	
-	static public void updateIcon(JFrame window)
+	static public Image getMartusIconImage()
 	{
 		URL imageURL = UiMainWindow.class.getResource("Martus.png");
 		if(imageURL == null)
-			return;
+			return null;
 		ImageIcon imageicon = new ImageIcon(imageURL);
-		if(imageicon != null)
-			window.setIconImage(imageicon.getImage());
+		if(imageicon == null)
+			return null;
+		
+		return imageicon.getImage();
+	}
+	
+	static public void updateIcon(JFrame window)
+	{
+		Image image = getMartusIconImage();
+		if(image != null)
+			window.setIconImage(image);
 	}
 
 	void setCurrentActiveFrame(JFrame currentActiveFrame)

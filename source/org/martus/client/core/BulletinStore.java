@@ -586,11 +586,6 @@ public class BulletinStore
 		return folderSaved;
 	}
 
-	public BulletinFolder getFolderDrafts()
-	{
-		return folderDrafts;
-	}
-
 	public BulletinFolder getFolderDraftOutbox()
 	{
 		return folderDraftOutbox;
@@ -600,12 +595,19 @@ public class BulletinStore
 	{
 		return folderSealedOutbox;
 	}
+	
+	public boolean needsFolderMigration()
+	{
+		if(findFolder(OBSOLETE_DRAFT_FOLDER) != null)
+			return true;
+		if(findFolder(OBSOLETE_OUTBOX_FOLDER) != null)
+			return true;
+		return false;
+	}
 
 	public void createSystemFolders()
 	{
 		folderSaved = createSystemFolder(SAVED_FOLDER);
-		folderDrafts = createSystemFolder(DRAFT_FOLDER);
-		folderDrafts.setStatusAllowed(Bulletin.STATUSDRAFT);
 		folderDiscarded = createSystemFolder(DISCARDED_FOLDER);
 		folderDraftOutbox = createSystemFolder(DRAFT_OUTBOX);
 		folderDraftOutbox.setStatusAllowed(Bulletin.STATUSDRAFT);
@@ -977,11 +979,11 @@ public class BulletinStore
 		String convertLegacyFolder(String name)
 		{
 			if(name.equals("Outbox"))
-				name = OUTBOX_FOLDER;
+				name = OBSOLETE_OUTBOX_FOLDER;
 			else if(name.equals("Sent Bulletins"))
 				name = SAVED_FOLDER;
 			else if(name.equals("Draft Bulletins"))
-				name = DRAFT_FOLDER;
+				name = OBSOLETE_DRAFT_FOLDER;
 			else if(name.equals("Discarded Bulletins"))
 				name = DISCARDED_FOLDER;
 			return name;
@@ -1141,9 +1143,7 @@ public class BulletinStore
 
 	public static int maxCachedBulletinCount = 100;
 
-	public static final String OUTBOX_FOLDER = "%OutBox";
 	public static final String SAVED_FOLDER = "%Sent";
-	public static final String DRAFT_FOLDER = "%Draft";
 	public static final String DISCARDED_FOLDER = "%Discarded";
 	public static final String SEARCH_RESULTS_BULLETIN_FOLDER = "%SearchResults";
 	public static final String RECOVERED_BULLETIN_FOLDER = "%RecoveredBulletins";
@@ -1155,6 +1155,9 @@ public class BulletinStore
 	private static final String DRAFT_OUTBOX = "*DraftOutbox";
 	private static final String SEALED_OUTBOX = "*SealedOutbox";
 
+	public static final String OBSOLETE_OUTBOX_FOLDER = "%OutBox";
+	public static final String OBSOLETE_DRAFT_FOLDER = "%Draft";
+
 	private static final String CACHE_FILE_NAME = "skcache.dat";
 	private static final String OBSOLETE_CACHE_FILE_NAME = "sfcache.dat";
 	private MartusCrypto signer;
@@ -1162,7 +1165,6 @@ public class BulletinStore
 	Database database;
 	private Vector folders;
 	private BulletinFolder folderSaved;
-	private BulletinFolder folderDrafts;
 	private BulletinFolder folderDiscarded;
 	private BulletinFolder folderDraftOutbox;
 	private BulletinFolder folderSealedOutbox;
