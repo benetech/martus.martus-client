@@ -45,8 +45,6 @@ import org.martus.swing.UiTableWithCellEditingProtection;
 
 public class UiGrid extends UiField
 {
-
-	private static final int ROW_HEIGHT_PADDING = 5;
 	public UiGrid(GridFieldSpec fieldSpec)
 	{
 		super();
@@ -144,6 +142,8 @@ public class UiGrid extends UiField
 			e.printStackTrace();
 		}
 	}
+
+	private static final int ROW_HEIGHT_PADDING = 5;
 
 	UiScrollPane widget;
 	UiTable table;
