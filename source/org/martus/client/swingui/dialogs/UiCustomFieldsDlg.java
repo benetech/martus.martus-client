@@ -78,15 +78,14 @@ public class UiCustomFieldsDlg extends JDialog
 
 		Box buttons = Box.createHorizontalBox();
 		Dimension preferredSize = textPane.getPreferredSize();
-		preferredSize.height = ok.getPreferredSize().height;
-		buttons.setPreferredSize(preferredSize);
-		buttons.add(ok);
-		buttons.add(Box.createHorizontalGlue());
+		preferredSize.height = ok.getPreferredSize().height;				
+		buttons.setPreferredSize(preferredSize);	
 		buttons.add(defaults);
+
 		buttons.add(Box.createHorizontalGlue());
-		buttons.add(help);
-		buttons.add(Box.createHorizontalGlue());
+		buttons.add(ok);				
 		buttons.add(cancel);
+		buttons.add(help);
 
 		JPanel customFieldsPanel = new JPanel();
 		customFieldsPanel.setBorder(new EmptyBorder(10,10,10,10));
