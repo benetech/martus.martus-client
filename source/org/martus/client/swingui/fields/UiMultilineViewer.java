@@ -32,6 +32,7 @@ import javax.swing.JComponent;
 import javax.swing.text.JTextComponent;
 import org.martus.client.swingui.UiConstants;
 import org.martus.client.swingui.UiLocalization;
+import org.martus.common.clientside.UiLanguageDirection;
 import org.martus.swing.UiTextArea;
 
 public class UiMultilineViewer extends UiTextField
@@ -68,7 +69,7 @@ public class UiMultilineViewer extends UiTextField
 	{
 		PreviewTextArea(int rows, int cols)
 		{
-			super(rows, cols, localization.getComponentOrientation());
+			super(rows, cols, UiLanguageDirection.getComponentOrientation());
 			setLineWrap(true);
 			setWrapStyleWord(true);
 			setAutoscrolls(false);

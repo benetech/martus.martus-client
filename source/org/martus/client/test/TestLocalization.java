@@ -41,6 +41,7 @@ import org.martus.common.clientside.ChoiceItem;
 import org.martus.common.clientside.DateUtilities;
 import org.martus.common.clientside.Localization;
 import org.martus.common.clientside.UiBasicLocalization;
+import org.martus.common.clientside.UiLanguageDirection;
 import org.martus.util.StringInputStream;
 import org.martus.util.TestCaseEnhanced;
 import org.martus.util.UnicodeStringWriter;
@@ -115,9 +116,9 @@ public class TestLocalization extends TestCaseEnhanced
 		
 		UiLocalization directionalLanguages = new UiLocalization(tmpDir, EnglishTestStrings.strings);
 		directionalLanguages.setCurrentLanguageCode("en");
-		assertFalse("English is a Left To Right language.", directionalLanguages.isRightToLeftLanguage());
-		assertEquals("Components for English should be Left To Right", directionalLanguages.getComponentOrientation(), ComponentOrientation.LEFT_TO_RIGHT);
-		assertEquals("Horizontal Alignment for English should be Left", directionalLanguages.getHorizontalAlignment(), SwingConstants.LEFT);
+		assertFalse("English is a Left To Right language.", UiLanguageDirection.isRightToLeftLanguage());
+		assertEquals("Components for English should be Left To Right", UiLanguageDirection.getComponentOrientation(), ComponentOrientation.LEFT_TO_RIGHT);
+		assertEquals("Horizontal Alignment for English should be Left", UiLanguageDirection.getHorizontalAlignment(), SwingConstants.LEFT);
 
 		File spanish = new File(tmpDir, "Martus-es.mtf");
 		spanish.deleteOnExit();
@@ -127,9 +128,9 @@ public class TestLocalization extends TestCaseEnhanced
 		writer.close();
 		directionalLanguages.setCurrentLanguageCode("es");
 		assertEquals("test Button for spanish not correct?", spanishButtonText, directionalLanguages.getButtonLabel(test));
-		assertFalse("Spanish should be a Left to Right language.", directionalLanguages.isRightToLeftLanguage());
-		assertEquals("Components for Spanish should be Left To Right", directionalLanguages.getComponentOrientation(), ComponentOrientation.LEFT_TO_RIGHT);
-		assertEquals("Horizontal Alignment for Spanish should be Left", directionalLanguages.getHorizontalAlignment(), SwingConstants.LEFT);
+		assertFalse("Spanish should be a Left to Right language.", UiLanguageDirection.isRightToLeftLanguage());
+		assertEquals("Components for Spanish should be Left To Right", UiLanguageDirection.getComponentOrientation(), ComponentOrientation.LEFT_TO_RIGHT);
+		assertEquals("Horizontal Alignment for Spanish should be Left", UiLanguageDirection.getHorizontalAlignment(), SwingConstants.LEFT);
 		
 		String arabicButtonText = "Some other translation";
 		File arabic = new File(tmpDir, "Martus-ar.mtf");
@@ -140,9 +141,9 @@ public class TestLocalization extends TestCaseEnhanced
 		writer.close();
 		directionalLanguages.setCurrentLanguageCode("ar");
 		assertEquals("test Button for arabic not correct?", arabicButtonText, directionalLanguages.getButtonLabel(test));
-		assertTrue("Arabic should be a Right to Left language.", directionalLanguages.isRightToLeftLanguage());
-		assertEquals("Components for Arabic should be Right To Left", directionalLanguages.getComponentOrientation(), ComponentOrientation.RIGHT_TO_LEFT);
-		assertEquals("Horizontal Alignment for Arabic should be Right", directionalLanguages.getHorizontalAlignment(), SwingConstants.RIGHT);
+		assertTrue("Arabic should be a Right to Left language.", UiLanguageDirection.isRightToLeftLanguage());
+		assertEquals("Components for Arabic should be Right To Left", UiLanguageDirection.getComponentOrientation(), ComponentOrientation.RIGHT_TO_LEFT);
+		assertEquals("Horizontal Alignment for Arabic should be Right", UiLanguageDirection.getHorizontalAlignment(), SwingConstants.RIGHT);
 	}
 
 	public void testToFileNameForeignChars()

@@ -42,6 +42,7 @@ import org.martus.common.FieldSpec;
 import org.martus.common.GridFieldSpec;
 import org.martus.common.bulletin.AttachmentProxy;
 import org.martus.common.clientside.ChoiceItem;
+import org.martus.common.clientside.UiLanguageDirection;
 
 public class UiBulletinComponentViewSection extends UiBulletinComponentDataSection
 {
@@ -90,7 +91,7 @@ public class UiBulletinComponentViewSection extends UiBulletinComponentDataSecti
 	{
 		UiLocalization localization = mainWindow.getLocalization();
 		fieldSpec.setColumnZeroLabel(localization.getFieldLabel("ColumnGridRowNumber"));
-		return new UiGridViewer(fieldSpec, localization.getComponentOrientation());
+		return new UiGridViewer(fieldSpec, UiLanguageDirection.getComponentOrientation());
 	}
 
 	public JComponent createAttachmentTable()

@@ -56,6 +56,7 @@ import org.martus.common.HQKey;
 import org.martus.common.HQKeys;
 import org.martus.common.HQKeys.HQsException;
 import org.martus.common.clientside.UiBasicLocalization;
+import org.martus.common.clientside.UiLanguageDirection;
 import org.martus.common.clientside.UiSingleTextField;
 import org.martus.common.crypto.MartusCrypto;
 import org.martus.swing.UiFileChooser;
@@ -127,7 +128,7 @@ public class UiConfigureHQs extends JDialog
 			table.setRowSelectionInterval(0,0);
 		
 		table.resizeTable(DEFAULT_VIEABLE_ROWS);
-		UiScrollPane scroller = new UiScrollPane(table, localization.getComponentOrientation());
+		UiScrollPane scroller = new UiScrollPane(table, UiLanguageDirection.getComponentOrientation());
 		
 		panel.add(scroller);
 		panel.add(new JLabel(" "));
@@ -200,7 +201,7 @@ public class UiConfigureHQs extends JDialog
 	{
 		public Component getTableCellRendererComponent(JTable tableToUse, Object value, boolean isSelected, boolean hasFocus, int row, int column)
 		{
-			UiSingleTextField cell = new UiSingleTextField((String)value, localization.getComponentOrientation());
+			UiSingleTextField cell = new UiSingleTextField((String)value, UiLanguageDirection.getComponentOrientation());
 			cell.setBorder(new EmptyBorder(0,0,0,0));
 
 			if(hasFocus)

@@ -38,6 +38,7 @@ import org.martus.client.core.ConfigInfo;
 import org.martus.client.core.MartusApp;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.common.clientside.UiBasicLocalization;
+import org.martus.common.clientside.UiLanguageDirection;
 import org.martus.common.clientside.UiSingleTextField;
 import org.martus.common.crypto.MartusCrypto;
 import org.martus.swing.ParagraphLayout;
@@ -58,7 +59,7 @@ public class UiConfigServerDlg extends JDialog implements ActionListener
 		
 		setTitle(localization.getWindowTitle("ConfigServer"));
 		getContentPane().setLayout(new ParagraphLayout());
-		ComponentOrientation orientation = localization.getComponentOrientation();
+		ComponentOrientation orientation = UiLanguageDirection.getComponentOrientation();
 		fieldIPAddress = new UiSingleTextField(25, orientation);
 		fieldPublicCode = new UiSingleTextField(25, orientation);
 

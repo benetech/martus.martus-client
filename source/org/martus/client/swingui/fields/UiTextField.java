@@ -53,7 +53,7 @@ public abstract class UiTextField extends UiField
 		actionDelete = new ActionDelete();
 		actionSelectAll = new ActionSelectAll();
 
-		menu = new UiPopupMenu(localization);
+		menu = new UiPopupMenu();
 		menu.add(actionCut);
 		menu.add(actionCopy);
 		menu.add(actionPaste);

@@ -56,6 +56,7 @@ import javax.swing.text.DefaultHighlighter.DefaultHighlightPainter;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.UiScrollPane;
 import org.martus.common.clientside.UiBasicLocalization;
+import org.martus.common.clientside.UiLanguageDirection;
 import org.martus.common.clientside.UiSingleTextField;
 import org.martus.swing.UiWrappedTextArea;
 import org.martus.swing.Utilities;
@@ -87,14 +88,14 @@ public class UiDisplayHelpDlg extends JDialog
 		}
 		lowercaseMessage = fileContents.toLowerCase();
 
-		msgArea = new UiWrappedTextArea(fileContents, localization.getComponentOrientation());
+		msgArea = new UiWrappedTextArea(fileContents, UiLanguageDirection.getComponentOrientation());
 		highliter = new BasicTextUI.BasicHighlighter();
 		msgArea.setHighlighter(highliter);
 		msgArea.addKeyListener(new TabToOkButton());
 		msgArea.setRows(14);
 		msgArea.setColumns(80);
 		msgAreaScrollPane = new UiScrollPane(msgArea, UiScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
-				UiScrollPane.HORIZONTAL_SCROLLBAR_NEVER,localization.getComponentOrientation());
+				UiScrollPane.HORIZONTAL_SCROLLBAR_NEVER,UiLanguageDirection.getComponentOrientation());
 
 		Vector messageTOC = getFileVectorContents(fileStreamToc);
 		if(messageTOC != null)
@@ -103,7 +104,7 @@ public class UiDisplayHelpDlg extends JDialog
 			tocList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 			tocList.addListSelectionListener(new ListHandler());
 			UiScrollPane tocMsgAreaScrollPane = new UiScrollPane(tocList, UiScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
-					UiScrollPane.HORIZONTAL_SCROLLBAR_NEVER, localization.getComponentOrientation());
+					UiScrollPane.HORIZONTAL_SCROLLBAR_NEVER, UiLanguageDirection.getComponentOrientation());
 			tocMsgAreaScrollPane.setPreferredSize(new Dimension(580, 100));
 			helpPanel.add(tocMsgAreaScrollPane);
 			tocList.setSelectedIndex(0);
@@ -114,7 +115,7 @@ public class UiDisplayHelpDlg extends JDialog
 		close.addKeyListener(new MakeEnterKeyExit());
 		helpPanel.add(msgAreaScrollPane);
 		
-		searchField = new UiSingleTextField(20, localization.getComponentOrientation());
+		searchField = new UiSingleTextField(20, UiLanguageDirection.getComponentOrientation());
 		searchField.setMaximumSize(searchField.getPreferredSize());
 		searchField.addActionListener(new searchFieldListener());
 		searchButton = new JButton(localization.getButtonLabel("inputsearchok"));

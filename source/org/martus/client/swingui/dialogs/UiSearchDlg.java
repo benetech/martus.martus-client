@@ -39,6 +39,7 @@ import org.martus.client.swingui.fields.UiDateEditor;
 import org.martus.common.FieldSpec;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.clientside.UiBasicLocalization;
+import org.martus.common.clientside.UiLanguageDirection;
 import org.martus.common.clientside.UiSingleTextField;
 import org.martus.swing.ParagraphLayout;
 import org.martus.swing.UiWrappedTextArea;
@@ -60,7 +61,7 @@ public class UiSearchDlg extends JDialog  implements ActionListener
 		getContentPane().setLayout(new ParagraphLayout());
 
 		getContentPane().add(new JLabel(""), ParagraphLayout.NEW_PARAGRAPH);
-		ComponentOrientation orientation = localization.getComponentOrientation();
+		ComponentOrientation orientation = UiLanguageDirection.getComponentOrientation();
 		getContentPane().add(new UiWrappedTextArea(localization.getFieldLabel("SearchBulletinRules"), orientation));
 
 		searchField = new UiSingleTextField(40, orientation);

@@ -32,6 +32,7 @@ import javax.swing.text.JTextComponent;
 import org.martus.client.swingui.UiConstants;
 import org.martus.client.swingui.UiLocalization;
 import org.martus.client.swingui.UiScrollPane;
+import org.martus.common.clientside.UiLanguageDirection;
 import org.martus.swing.UiTextArea;
 
 public class UiMultilineTextEditor extends UiTextField
@@ -39,13 +40,13 @@ public class UiMultilineTextEditor extends UiTextField
 	public UiMultilineTextEditor(UiLocalization localizationToUse)
 	{
 		super(localizationToUse);
-		editor = new UiTextArea(5, UiConstants.textFieldColumns, localization.getComponentOrientation());
+		editor = new UiTextArea(5, UiConstants.textFieldColumns, UiLanguageDirection.getComponentOrientation());
 		editor.setLineWrap(true);
 		editor.setWrapStyleWord(true);
 		editor.setFont(new Font("SansSerif", Font.PLAIN, UiConstants.defaultFontSize));
 
 		widget = new UiScrollPane(editor, UiScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
-				UiScrollPane.HORIZONTAL_SCROLLBAR_NEVER, localization.getComponentOrientation());
+				UiScrollPane.HORIZONTAL_SCROLLBAR_NEVER, UiLanguageDirection.getComponentOrientation());
 		widget.getVerticalScrollBar().setFocusable(false);
 		supportContextMenu();
 	}

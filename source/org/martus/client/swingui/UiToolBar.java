@@ -30,12 +30,13 @@ import javax.swing.AbstractAction;
 import javax.swing.JToolBar;
 
 import org.martus.client.swingui.actions.UiActions;
+import org.martus.common.clientside.UiLanguageDirection;
 
 public class UiToolBar extends JToolBar
 {
 	UiToolBar(UiMainWindow mainWindow)
 	{
-		setComponentOrientation(mainWindow.getLocalization().getComponentOrientation());
+		setComponentOrientation(UiLanguageDirection.getComponentOrientation());
 		createToolbarActions(mainWindow);
 
 		setFloatable(false);

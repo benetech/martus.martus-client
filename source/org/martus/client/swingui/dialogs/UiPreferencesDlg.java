@@ -41,6 +41,7 @@ import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.fields.UiChoiceEditor;
 import org.martus.common.clientside.DateUtilities;
 import org.martus.common.clientside.UiBasicLocalization;
+import org.martus.common.clientside.UiLanguageDirection;
 import org.martus.swing.ParagraphLayout;
 import org.martus.swing.Utilities;
 
@@ -69,7 +70,7 @@ public class UiPreferencesDlg extends JDialog implements ActionListener, ChangeL
 //TODO: Remove before the 2.x release
 directionRtoL = new JCheckBox();
 directionRtoL.setText("Language Right to Left");
-directionRtoL.setSelected(owner.getLocalization().isRightToLeftLanguage());
+directionRtoL.setSelected(UiLanguageDirection.isRightToLeftLanguage());
 
 		ok = new JButton(localization.getButtonLabel("ok"));
 		ok.addActionListener(this);
@@ -113,9 +114,9 @@ getContentPane().add(directionRtoL);
 
 //TODO:Remove later			
 if(directionRtoL.isSelected())
-	localization.addRightToLeftLanguage(localization.currentLanguageCode);
+	UiLanguageDirection.setDirection((UiLanguageDirection.RIGHT_TO_LEFT));
 else
-	localization.rightToLeftLanguages.remove(localization.currentLanguageCode);
+	UiLanguageDirection.setDirection((UiLanguageDirection.LEFT_TO_RIGHT));
 		}
 		dispose();
 	}

@@ -45,6 +45,7 @@ import org.martus.client.core.MartusApp;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.UiScrollPane;
 import org.martus.common.clientside.UiBasicLocalization;
+import org.martus.common.clientside.UiLanguageDirection;
 import org.martus.swing.ParagraphLayout;
 import org.martus.swing.UiNotifyDlg;
 import org.martus.swing.UiTextArea;
@@ -72,7 +73,7 @@ public class UiTemplateDlg extends JDialog implements ActionListener
 		help.addActionListener(new helpHandler());
 		JButton loadFromFile = new JButton(localization.getButtonLabel("ResetContents"));
 		loadFromFile.addActionListener(new loadFileHandler());
-		ComponentOrientation orientation = localization.getComponentOrientation();
+		ComponentOrientation orientation = UiLanguageDirection.getComponentOrientation();
 		details = new UiTextArea(15, 65, orientation);
 		details.setLineWrap(true);
 		details.setWrapStyleWord(true);
@@ -121,7 +122,7 @@ public class UiTemplateDlg extends JDialog implements ActionListener
 			String[] contents = {helpMsg, "", "",helpMsgExample, helpMsgExample1, "", helpMsgExample2, "", helpMsgExampleEtc};
 			String[] buttons = {ok};
 
-			new UiNotifyDlg(mainWindow, title, contents, buttons, localization.getComponentOrientation());
+			new UiNotifyDlg(mainWindow, title, contents, buttons, UiLanguageDirection.getComponentOrientation());
 		}
 	}
 

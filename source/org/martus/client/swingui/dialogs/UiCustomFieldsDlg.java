@@ -42,6 +42,7 @@ import org.martus.client.swingui.UiLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.UiScrollPane;
 import org.martus.common.clientside.Localization;
+import org.martus.common.clientside.UiLanguageDirection;
 import org.martus.swing.UiTextArea;
 import org.martus.swing.UiWrappedTextArea;
 import org.martus.swing.Utilities;
@@ -57,13 +58,13 @@ public class UiCustomFieldsDlg extends JDialog
 		UiLocalization localization = owner.getLocalization();
 		setTitle(localization.getWindowTitle("input" + baseTag));
 
-		UiWrappedTextArea label = new UiWrappedTextArea(localization.getFieldLabel("input" + baseTag + "Info"), localization.getComponentOrientation());
-		text = new UiTextArea(20, 80, localization.getComponentOrientation());
+		UiWrappedTextArea label = new UiWrappedTextArea(localization.getFieldLabel("input" + baseTag + "Info"), UiLanguageDirection.getComponentOrientation());
+		text = new UiTextArea(20, 80, UiLanguageDirection.getComponentOrientation());
 		text.setText(xmlFieldSpecs);
 		text.setLineWrap(true);
 		text.setWrapStyleWord(true);
 		UiScrollPane textPane = new UiScrollPane(text, UiScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
-				UiScrollPane.HORIZONTAL_SCROLLBAR_NEVER, localization.getComponentOrientation());
+				UiScrollPane.HORIZONTAL_SCROLLBAR_NEVER, UiLanguageDirection.getComponentOrientation());
 		textPane.getVerticalScrollBar().setFocusable(false);
 
 		JButton ok = new JButton(localization.getButtonLabel("input" + baseTag + "ok"));

@@ -28,15 +28,15 @@ package org.martus.client.swingui;
 import javax.swing.AbstractAction;
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
+import org.martus.common.clientside.UiLanguageDirection;
 
 
 public class UiPopupMenu extends JPopupMenu
 {
-	public UiPopupMenu(UiLocalization localizationToUse)
+	public UiPopupMenu()
 	{
 		super();
-		localization = localizationToUse;
-		setComponentOrientation(localization.getComponentOrientation());
+		setComponentOrientation(UiLanguageDirection.getComponentOrientation());
 	}
 	
 	public void add(AbstractAction menuItemAction)
@@ -46,10 +46,9 @@ public class UiPopupMenu extends JPopupMenu
 	
 	public JMenuItem add(JMenuItem menuItem)
 	{
-		menuItem.setHorizontalAlignment(localization.getHorizontalAlignment());
-		menuItem.setComponentOrientation(localization.getComponentOrientation());
+		menuItem.setHorizontalAlignment(UiLanguageDirection.getHorizontalAlignment());
+		menuItem.setComponentOrientation(UiLanguageDirection.getComponentOrientation());
 		return super.add(menuItem);
 	}
 	
-	private UiLocalization localization;
 }

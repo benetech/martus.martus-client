@@ -43,6 +43,7 @@ import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.UiWarningLabel;
 import org.martus.client.swingui.fields.UiField;
 import org.martus.common.FieldSpec;
+import org.martus.common.clientside.UiLanguageDirection;
 import org.martus.swing.ParagraphLayout;
 
 abstract public class UiBulletinComponentSection extends JPanel
@@ -123,7 +124,7 @@ abstract public class UiBulletinComponentSection extends JPanel
 
 	public void addComponents(JComponent item1, JComponent item2)
 	{
-		if(mainWindow.getLocalization().getComponentOrientation().equals(ComponentOrientation.LEFT_TO_RIGHT))
+		if(UiLanguageDirection.getComponentOrientation().equals(ComponentOrientation.LEFT_TO_RIGHT))
 		{
 			add(item1, ParagraphLayout.NEW_PARAGRAPH);
 			add(item2);

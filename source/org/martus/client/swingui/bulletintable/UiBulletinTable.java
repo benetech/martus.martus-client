@@ -68,6 +68,7 @@ import org.martus.client.swingui.foldertree.FolderNode;
 import org.martus.common.FieldSpec;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.clientside.UiBasicLocalization;
+import org.martus.common.clientside.UiLanguageDirection;
 import org.martus.common.packet.UniversalId;
 import org.martus.swing.UiNotifyDlg;
 import org.martus.swing.UiTable;
@@ -425,7 +426,7 @@ public class UiBulletinTable extends JTable implements ListSelectionListener, Dr
 		String leave = localization.getButtonLabel("Leave");
 		String[] buttons = {delete, leave};
 
-		UiNotifyDlg notify = new UiNotifyDlg(mainWindow, title, contents, buttons, localization.getComponentOrientation());
+		UiNotifyDlg notify = new UiNotifyDlg(mainWindow, title, contents, buttons, UiLanguageDirection.getComponentOrientation());
 		String result = notify.getResult();
 		if(result != null && result.equals(delete))
 			return true;

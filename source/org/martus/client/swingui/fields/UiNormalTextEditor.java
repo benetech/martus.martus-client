@@ -30,6 +30,7 @@ import java.awt.Font;
 import javax.swing.JComponent;
 import org.martus.client.swingui.UiConstants;
 import org.martus.client.swingui.UiLocalization;
+import org.martus.common.clientside.UiLanguageDirection;
 import org.martus.swing.UiTextArea;
 
 public class UiNormalTextEditor extends UiNormalTextField
@@ -37,7 +38,7 @@ public class UiNormalTextEditor extends UiNormalTextField
 	public UiNormalTextEditor(UiLocalization localizationToUse)
 	{
 		super(localizationToUse);
-		widget = new UiTextArea(1, UiConstants.textFieldColumns, localization.getComponentOrientation());
+		widget = new UiTextArea(1, UiConstants.textFieldColumns, UiLanguageDirection.getComponentOrientation());
 		widget.setLineWrap(true);
 		widget.setWrapStyleWord(true);
 		widget.setFont(new Font("SansSerif", Font.PLAIN, UiConstants.defaultFontSize));

@@ -37,6 +37,7 @@ import javax.swing.JLabel;
 import org.martus.client.core.ConfigInfo;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.common.clientside.UiBasicLocalization;
+import org.martus.common.clientside.UiLanguageDirection;
 import org.martus.common.clientside.UiSingleTextField;
 import org.martus.swing.ParagraphLayout;
 import org.martus.swing.UiTextArea;
@@ -58,7 +59,7 @@ class UiSetupDlg extends JDialog implements ActionListener
 		JButton cancel = new JButton(localization.getButtonLabel("cancel"));
 		cancel.addActionListener(this);
 
-		ComponentOrientation componentOrientation = localization.getComponentOrientation();
+		ComponentOrientation componentOrientation = UiLanguageDirection.getComponentOrientation();
 		UiTextArea description = new UiTextArea(localization.getFieldLabel("setupdescription"), componentOrientation);
 		description.setEditable(false);
 		description.setLineWrap(true);

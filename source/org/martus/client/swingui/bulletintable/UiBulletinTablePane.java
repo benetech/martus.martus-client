@@ -37,13 +37,14 @@ import org.martus.client.core.BulletinFolder;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.UiScrollPane;
 import org.martus.common.bulletin.Bulletin;
+import org.martus.common.clientside.UiLanguageDirection;
 import org.martus.common.packet.UniversalId;
 
 public class UiBulletinTablePane extends UiScrollPane
 {
     public UiBulletinTablePane(UiMainWindow mainWindow)
 	{
-    	super(mainWindow.getLocalization().getComponentOrientation());
+    	super(UiLanguageDirection.getComponentOrientation());
 		parent = mainWindow;
 
 		table = new UiBulletinTable(parent);

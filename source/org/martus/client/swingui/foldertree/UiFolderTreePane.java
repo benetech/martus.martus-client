@@ -40,12 +40,13 @@ import org.martus.client.swingui.UiLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.UiPopupMenu;
 import org.martus.client.swingui.UiScrollPane;
+import org.martus.common.clientside.UiLanguageDirection;
 
 public class UiFolderTreePane extends UiScrollPane
 {
 	public UiFolderTreePane(UiMainWindow mainWindow)
 	{
-		super(mainWindow.getLocalization().getComponentOrientation());
+		super(UiLanguageDirection.getComponentOrientation());
 		parent = mainWindow;
 		localization = mainWindow.getLocalization();
 		store = parent.getStore();
@@ -150,7 +151,7 @@ public class UiFolderTreePane extends UiScrollPane
 				node = (FolderTreeNode)path.getLastPathComponent();
 			}
 
-			UiPopupMenu menu = new UiPopupMenu(localization);
+			UiPopupMenu menu = new UiPopupMenu();
 			menu.add(new JMenuItem(new ActionNewFolder()));
 			menu.add(new JMenuItem(new ActionRename(node)));
 			menu.add(new JMenuItem(new ActionDelete(node)));

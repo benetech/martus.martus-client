@@ -35,6 +35,7 @@ import org.martus.client.swingui.actions.ActionMenuCustomFields;
 import org.martus.client.swingui.actions.ActionMenuQuickEraseDeleteMyData;
 import org.martus.client.swingui.actions.ActionMenuQuickEraseRemoveMartus;
 import org.martus.client.swingui.actions.UiActions;
+import org.martus.common.clientside.UiLanguageDirection;
 
 public class UiMenuBar extends JMenuBar
 {
@@ -42,7 +43,7 @@ public class UiMenuBar extends JMenuBar
 	{
 		mainWindow = mainWindowToUse;
 		UiLocalization localization = mainWindow.getLocalization();
-		applyComponentOrientation(localization.getComponentOrientation());
+		applyComponentOrientation(UiLanguageDirection.getComponentOrientation());
 		createMenuActions();
 
 		UiMenu file = new UiMenu(localization, "file");
