@@ -52,7 +52,7 @@ public class BulletinHtmlGenerator
 		localization = localizationToUse;
 	}
 
-	public String getHtmlString(Bulletin b, Database database, boolean includePrivateData)
+	public String getHtmlString(Bulletin b, Database database, boolean includePrivateData, boolean yourBulletin)
 	{
 		bulletin = b;
 		StringBuffer html = new StringBuffer(1000);
@@ -61,7 +61,15 @@ public class BulletinHtmlGenerator
 		html.append("<table width='");
 		html.append(Integer.toString(width));
 		html.append("'>");
-	
+		
+		if(!yourBulletin)
+		{
+			html.append("<tr></tr>");
+			String bulletinNotYoursText = localization.getFieldLabel("BulletinNotYours");
+			html.append(bulletinNotYoursText+" ");		
+			html.append("<tr></tr>");	
+		}
+
 		String publicSectionTitle =  localization.getFieldLabel("publicsection");
 		String allPrivateValueTag = "no";
 		if(b.isAllPrivate())

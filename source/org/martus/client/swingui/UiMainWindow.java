@@ -1054,9 +1054,11 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		dlg.show();
 		if (!dlg.isContinueButtonPressed())
 			return;			
-			
+		
+		
+		boolean yourBulletin = currentBulletin.getAccount().equals(getApp().getAccountId());	
 		BulletinHtmlGenerator generator = new BulletinHtmlGenerator(width, getLocalization() );
-		String html = generator.getHtmlString(currentBulletin, getStore().getDatabase(), dlg.isIncludePrivateChecked());
+		String html = generator.getHtmlString(currentBulletin, getStore().getDatabase(), dlg.isIncludePrivateChecked(), yourBulletin);
 		JComponent view = new JLabel(html);
 		
 		JFrame frame = new JFrame();
@@ -1065,7 +1067,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		frame.getContentPane().add(scroller);
 		frame.pack();
 		//If you want to see what is being printed uncomment out this next line
-		//frame.show();
+		frame.show();
 		PrintPageFormat format = new PrintPageFormat();
 		JComponentVista vista = new JComponentVista(view, format);
 		PrinterJob job = PrinterJob.getPrinterJob();
