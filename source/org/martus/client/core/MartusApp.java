@@ -67,7 +67,6 @@ import org.martus.common.clientside.ClientSideNetworkHandlerUsingXmlRpcForNonSSL
 import org.martus.common.clientside.CurrentUiState;
 import org.martus.common.clientside.DateUtilities;
 import org.martus.common.clientside.Localization;
-import org.martus.common.clientside.ServerUtilities;
 import org.martus.common.clientside.Exceptions.ServerCallFailedException;
 import org.martus.common.clientside.Exceptions.ServerNotAvailableException;
 import org.martus.common.crypto.MartusCrypto;
@@ -78,7 +77,7 @@ import org.martus.common.database.FileDatabase.MissingAccountMapException;
 import org.martus.common.database.FileDatabase.MissingAccountMapSignatureException;
 import org.martus.common.network.NetworkInterface;
 import org.martus.common.network.NetworkInterfaceConstants;
-import org.martus.common.network.NetworkInterfaceForNonSSL;
+import org.martus.common.network.NonSSLNetworkAPI;
 import org.martus.common.network.NetworkResponse;
 import org.martus.common.packet.FieldDataPacket;
 import org.martus.common.packet.UniversalId;
@@ -828,7 +827,7 @@ public class MartusApp
 		if(serverName.length() == 0)
 			return false;
 
-		NetworkInterfaceForNonSSL server = new ClientSideNetworkHandlerUsingXmlRpcForNonSSL(serverName);
+		NonSSLNetworkAPI server = new ClientSideNetworkHandlerUsingXmlRpcForNonSSL(serverName);
 		return ClientSideNetworkHandlerUsingXmlRpcForNonSSL.isNonSSLServerAvailable(server);
 	}
 
@@ -854,15 +853,15 @@ public class MartusApp
 		ServerNotAvailableException,
 		PublicInformationInvalidException
 	{
-		NetworkInterfaceForNonSSL server = new ClientSideNetworkHandlerUsingXmlRpcForNonSSL(serverName);
+		NonSSLNetworkAPI server = new ClientSideNetworkHandlerUsingXmlRpcForNonSSL(serverName);
 		return getServerPublicKey(server);
 	}
 
-	public String getServerPublicKey(NetworkInterfaceForNonSSL server) throws
+	public String getServerPublicKey(NonSSLNetworkAPI server) throws
 		ServerNotAvailableException,
 		PublicInformationInvalidException
 	{
-		return ServerUtilities.getServerPublicKey(server, getSecurity());
+		return NonSSLNetworkAPI.getServerPublicKey(server, getSecurity());
 	}
 
 	public boolean requestServerUploadRights(String magicWord)
@@ -985,7 +984,7 @@ public class MartusApp
 		MartusCrypto security = getSecurity();
 		String myAccountId = getAccountId();
 
-		return ServerUtilities.downloadFieldOfficeAccountIds(networkInterfaceGateway, security, myAccountId);
+		return ClientSideNetworkGateway.downloadFieldOfficeAccountIds(networkInterfaceGateway, security, myAccountId);
 	}
 
 	public FieldDataPacket retrieveFieldDataPacketFromServer(String authorAccountId, String bulletinLocalId, String dataPacketLocalId) throws Exception
