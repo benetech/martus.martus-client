@@ -505,21 +505,14 @@ public class ClientBulletinStore extends BulletinStore
 	
 	private BulletinFolder getFolderOnServer()
 	{
-		return createOrFindUnsortableFolder(ON_SERVER_FOLDER);
+		return createOrFindFolder(ON_SERVER_FOLDER);
 	}
 	
 	private BulletinFolder getFolderNotOnServer()
 	{
-		return createOrFindUnsortableFolder(NOT_ON_SERVER_FOLDER);
+		return createOrFindFolder(NOT_ON_SERVER_FOLDER);
 	}
 	
-	private BulletinFolder createOrFindUnsortableFolder(String name)
-	{
-		BulletinFolder folder = createOrFindFolder(name);
-		folder.setUnsortable();
-		return folder;
-	}
-
 	public boolean needsFolderMigration()
 	{
 		if(findFolder(OBSOLETE_DRAFT_FOLDER) != null)
@@ -1060,30 +1053,32 @@ public class ClientBulletinStore extends BulletinStore
 
 	public synchronized String foldersToXml()
 	{
-		String xml = MartusClientXml.getFolderListTagStart();
+		StringBuffer xml = new StringBuffer();
+		xml.append(MartusClientXml.getFolderListTagStart());
 
 		for(int index=0; index < getFolderCount(); ++index)
 		{
 			BulletinFolder folder = getFolder(index);
-			xml += folderToXml(folder);
+			xml.append(folderToXml(folder));
 		}
 
-		xml += MartusClientXml.getFolderListTagEnd();
-		return xml;
+		xml.append(MartusClientXml.getFolderListTagEnd());
+		return new String(xml);
 	}
 
 	public String folderToXml(BulletinFolder folder)
 	{
-		String xml = MartusClientXml.getFolderTagStart(folder.getName());
+		StringBuffer xml = new StringBuffer();
+		xml.append(MartusClientXml.getFolderTagStart(folder.getName()));
 		for(int index=0; index < folder.getBulletinCount(); ++index)
 		{
 			UniversalId uid = folder.getBulletinUniversalIdSorted(index);
 			if(uid == null)
 				System.out.println("WARNING: Unexpected null id");
-			xml += MartusXml.getIdTag(uid.toString());
+			xml.append(MartusXml.getIdTag(uid.toString()));
 		}
-		xml += MartusClientXml.getFolderTagEnd();
-		return xml;
+		xml.append(MartusClientXml.getFolderTagEnd());
+		return new String(xml);
 	}
 
 	public synchronized void internalLoadFolders(String folderXml)

@@ -96,11 +96,6 @@ public class BulletinFolder
 		return canDelete;
 	}
 	
-	public void setUnsortable()
-	{
-		canSort = false;
-	}
-
 	public int getBulletinCount()
 	{
 		return rawIdList.size();
@@ -244,7 +239,7 @@ public class BulletinFolder
 		if(sortedIdList == null)
 			return;
 		
-		if(!canSort)
+		if(!canSort())
 		{
 			sortedIdList.add(uid);
 			return;
@@ -277,6 +272,11 @@ public class BulletinFolder
 		if(sortedIdList == null)
 			sortExisting();
 	}
+	
+	private boolean canSort()
+	{
+		return (isVisible());
+	}
 
 	private ClientBulletinStore store;
 	private String name;
@@ -285,7 +285,6 @@ public class BulletinFolder
 	private Vector sortedIdList;
 	private boolean canRename = true;
 	private boolean canDelete = true;
-	private boolean canSort = true;
 	private String sortTag = "eventdate";
 	private int sortDir = ASCENDING;
 }
