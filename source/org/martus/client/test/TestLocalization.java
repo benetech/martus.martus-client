@@ -136,6 +136,7 @@ public class TestLocalization extends TestCaseEnhanced
 		assertFalse("English is a Left To Right language.", LanguageOptions.isRightToLeftLanguage());
 		assertEquals("Components for English should be Left To Right", UiLanguageDirection.getComponentOrientation(), ComponentOrientation.LEFT_TO_RIGHT);
 		assertEquals("Horizontal Alignment for English should be Left", UiLanguageDirection.getHorizontalAlignment(), SwingConstants.LEFT);
+		assertFalse("English should not require Text Padding", LanguageOptions.needsLanguagePadding());
 
 		File spanish = new File(tmpDir, "Martus-es.mtf");
 		spanish.deleteOnExit();
@@ -148,6 +149,7 @@ public class TestLocalization extends TestCaseEnhanced
 		assertFalse("Spanish should be a Left to Right language.", LanguageOptions.isRightToLeftLanguage());
 		assertEquals("Components for Spanish should be Left To Right", UiLanguageDirection.getComponentOrientation(), ComponentOrientation.LEFT_TO_RIGHT);
 		assertEquals("Horizontal Alignment for Spanish should be Left", UiLanguageDirection.getHorizontalAlignment(), SwingConstants.LEFT);
+		assertFalse("Spanish should not require Text Padding", LanguageOptions.needsLanguagePadding());
 		
 		String arabicButtonText = "Some other translation";
 		File arabic = new File(tmpDir, "Martus-ar.mtf");
@@ -161,6 +163,7 @@ public class TestLocalization extends TestCaseEnhanced
 		assertTrue("Arabic should be a Right to Left language.", LanguageOptions.isRightToLeftLanguage());
 		assertEquals("Components for Arabic should be Right To Left", UiLanguageDirection.getComponentOrientation(), ComponentOrientation.RIGHT_TO_LEFT);
 		assertEquals("Horizontal Alignment for Arabic should be Right", UiLanguageDirection.getHorizontalAlignment(), SwingConstants.RIGHT);
+		assertTrue("Arabic should require Text Padding", LanguageOptions.needsLanguagePadding());
 	}
 
 	public void testToFileNameForeignChars()
