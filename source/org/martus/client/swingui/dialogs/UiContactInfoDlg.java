@@ -121,7 +121,8 @@ public class UiContactInfoDlg extends JDialog implements ActionListener
 
 		Utilities.centerDlg(this);
 		setResizable(true);
-		show();
+		setVisible(true);
+		toFront();
 	}
 
 	public boolean getResult()
