@@ -290,7 +290,6 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 				return false;
 			
 			loadConfigInfo();
-			
 			if(!createdNewAccount && !justRecovered)
 				askAndBackupKeypairIfRequired();
 			
@@ -533,6 +532,16 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		if(orphanCount > 0)
 			notifyDlg("FoundOrphans");
 
+		ConfigInfo configInfo = app.getConfigInfo();
+		if(!configInfo.isBulletinVersioningAware())
+		{
+			if(!confirmDlg("NeedsBulletinVersioningMigration"))
+				return false;
+			
+			configInfo.setBulletinVersioningAware(true);
+			saveConfigInfo();
+		}
+		
 		return true;
 	}
 	

@@ -71,6 +71,7 @@ public class ConfigInfo implements Serializable
 	public void setBackedUpKeypairEncrypted(boolean newBackedUpKeypairEncrypted)	{backedUpKeypairEncrypted = newBackedUpKeypairEncrypted; }
 	public void setBackedUpKeypairShare(boolean newBackedUpKeypairShare)	{backedUpKeypairShare = newBackedUpKeypairShare; }
 	public void setAllHQKeysXml(String allHQKeysXml){this.allHQKeysXml = allHQKeysXml;}
+	public void setBulletinVersioningAware(boolean newBulletinVersioningAware){this.bulletinVersioningAware = newBulletinVersioningAware;}
 
 	public void clearHQKey()						{ legacyHQKey = ""; }
 	public void clearPromptUserRequestSendToServer() { mustAskUserToSendToServer = false; }
@@ -95,7 +96,8 @@ public class ConfigInfo implements Serializable
 	public boolean hasUserBackedUpKeypairEncrypted()	{ return backedUpKeypairEncrypted;}
 	public boolean hasUserBackedUpKeypairShare()	{ return backedUpKeypairShare;}
 	public String getAllHQKeysXml()		{return allHQKeysXml;}
-
+	public boolean isBulletinVersioningAware()	{return bulletinVersioningAware;}
+	
 	public boolean isServerConfigured()
 	{
 		return (serverName.length()>0 && serverPublicKey.length()>0);
@@ -127,6 +129,7 @@ public class ConfigInfo implements Serializable
 		forceBulletinsAllPrivate = false;
 		backedUpKeypairEncrypted = false;
 		backedUpKeypairShare = false;
+		bulletinVersioningAware = false;
 		allHQKeysXml = "";
 	}
 
@@ -172,6 +175,9 @@ public class ConfigInfo implements Serializable
 			}
 			if(loaded.version >= 9)
 				loaded.allHQKeysXml = in.readUTF();
+			
+			if(loaded.version >= 10)
+				loaded.bulletinVersioningAware = in.readBoolean();
 
 			in.close();
 		}
@@ -206,6 +212,7 @@ public class ConfigInfo implements Serializable
 			out.writeBoolean(backedUpKeypairEncrypted);
 			out.writeBoolean(backedUpKeypairShare);
 			out.writeUTF(allHQKeysXml);
+			out.writeBoolean(bulletinVersioningAware);
 			out.close();
 		}
 		catch(Exception e)
@@ -215,8 +222,8 @@ public class ConfigInfo implements Serializable
 	}
 	
 	private boolean mustAskUserToSendToServer;
-	
-	public static final short VERSION = 9;
+
+	public static final short VERSION = 10;
 	//Version 1
 	private short version;
 	private String author;
@@ -245,5 +252,7 @@ public class ConfigInfo implements Serializable
 	private boolean backedUpKeypairShare;
 	//Version 9
 	private String allHQKeysXml;
+	//Version 10 
+	private boolean bulletinVersioningAware;
 	
 }

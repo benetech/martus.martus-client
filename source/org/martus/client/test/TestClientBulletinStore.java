@@ -121,6 +121,65 @@ public class TestClientBulletinStore extends TestCaseEnhanced
 		assertEquals("wrong account?", security.getPublicKeyString(), b.getAccount());
 	}
     
+    public void testGetAllVisibleFolders() throws Exception
+	{
+		MockBulletinStore clientStore = new MockBulletinStore(security);
+		assertEquals("Should only have 4 folders", 4, clientStore.getAllFolders().size());
+		assertEquals("Should only have 2 visible folders", 2, clientStore.getAllVisibleFolders().size());
+		clientStore.createFolder("visible1");
+		clientStore.createFolder("visible2");
+		clientStore.createFolder("*invisible1");
+		assertEquals("Should now have 7 folders", 7, clientStore.getAllFolders().size());
+		assertEquals("Should now have 4 visible folders", 4, clientStore.getAllVisibleFolders().size());
+	}
+    
+   public void testMigrateFoldersForBulletinVersioning() throws Exception
+   {
+		MockBulletinStore clientStore = new MockBulletinStore(security);
+		Bulletin original = store.createEmptyBulletin();
+		original.setSealed();
+		clientStore.saveBulletin(original);
+		BulletinFolder folderA = clientStore.createFolder("A");
+		BulletinFolder folderB = clientStore.createFolder("B");
+		BulletinFolder invisiblefolderC = clientStore.createFolder("*C");
+		
+		UniversalId originalUid = original.getUniversalId();
+		clientStore.addBulletinToFolder(folderA,originalUid);
+		clientStore.addBulletinToFolder(folderB,originalUid);
+		clientStore.addBulletinToFolder(invisiblefolderC,originalUid);
+		
+		assertTrue("original not in folder A?", folderA.contains(original));
+		assertTrue("original not in folder B?", folderB.contains(original));
+		assertTrue("original not in folder C?", invisiblefolderC.contains(original));
+	
+		Bulletin newVersion = store.createClone(original, customSpecs, customSpecs);
+		clientStore.saveBulletin(newVersion);
+		assertTrue("original should still be in folder A?", folderA.contains(original));
+		assertTrue("original should still be in folder B?", folderB.contains(original));
+		assertTrue("original should be in folder C?", invisiblefolderC.contains(original));
+	
+		folderA.add(newVersion);
+		folderB.add(newVersion);
+		invisiblefolderC.add(newVersion);
+		
+		assertTrue("original should still be in folder A for this test?", folderA.contains(original));
+		assertTrue("original should still be in folder B for this test?", folderB.contains(original));
+		assertTrue("original should still be in folder C?", invisiblefolderC.contains(original));
+		assertTrue("newVersion not in folder A?", folderA.contains(newVersion));
+		assertTrue("newVersion not in folder B?", folderB.contains(newVersion));
+		assertTrue("newVersion not in folder C?", invisiblefolderC.contains(newVersion));
+		
+		clientStore.migrateFoldersForBulletinVersioning();
+		assertFalse("original should not be in folder A after migration", folderA.contains(original));
+		assertFalse("original should not be in folder B after migration", folderB.contains(original));
+		assertTrue("original should still be in folder C after migration?", invisiblefolderC.contains(original));
+		assertTrue("newVersion not in folder A after migration?", folderA.contains(newVersion));
+		assertTrue("newVersion not in folder B after migration?", folderB.contains(newVersion));
+		assertTrue("newVersion not in folder C after migration?", invisiblefolderC.contains(newVersion));
+		
+   }
+
+    
     public void testRemoveBulletinFromAllFolders() throws Exception
 	{
     	Bulletin original = store.createEmptyBulletin();

@@ -142,18 +142,16 @@ public class ClientBulletinStore extends BulletinStore
 	{
 		Set setOfUniversalIds = new HashSet();
 
-		for(int f = 0; f < getFolderCount(); ++f)
+		Vector visibleFolders = getAllVisibleFolders();
+		for(Iterator f = visibleFolders.iterator(); f.hasNext();)
 		{
-			BulletinFolder folder = getFolder(f);
-			if(!folder.isVisible())
-				continue;
+			BulletinFolder folder = (BulletinFolder) f.next();
 			for(int b = 0; b < folder.getBulletinCount(); ++b)
 			{
 				UniversalId uid = folder.getBulletinUniversalIdUnsorted(b);
 				setOfUniversalIds.add(uid);
 			}
 		}
-
 		return setOfUniversalIds;
 	}
 
@@ -412,6 +410,19 @@ public class ClientBulletinStore extends BulletinStore
 		return allFolders;
 	}
 	
+	public synchronized Vector getAllVisibleFolders()
+	{
+		Vector allFolders = getAllFolders();
+		Vector visibleFolders = new Vector();
+		for(Iterator f = allFolders.iterator(); f.hasNext();)
+		{
+			BulletinFolder folder = (BulletinFolder) f.next();
+			if(folder.isVisible())
+				visibleFolders.add(folder);
+		}
+		return visibleFolders;
+	}
+	
 	public synchronized Vector getAllFolderNames()
 	{
 		Vector names = new Vector();
@@ -426,12 +437,12 @@ public class ClientBulletinStore extends BulletinStore
 	public synchronized Vector getVisibleFolderNames()
 	{
 		Vector names = new Vector();
-		for(int f = 0; f < getFolderCount(); ++f)
+		Vector visibleFolders = getAllVisibleFolders();
+		for(Iterator f = visibleFolders.iterator(); f.hasNext();)
 		{
-			BulletinFolder folder = getFolder(f);
+			BulletinFolder folder = (BulletinFolder) f.next();
 			String folderName = folder.getName();
-			if(BulletinFolder.isNameVisible(folderName))
-				names.add(folderName);
+			names.add(folderName);
 		}
 		return names;
 	}
@@ -901,11 +912,10 @@ public class ClientBulletinStore extends BulletinStore
 		{
 			String localId = history.get(i);
 			UniversalId uidToRemove = UniversalId.createFromAccountAndLocalId(accountId, localId);
-			for(int f = 0; f < getFolderCount(); ++f)
+			Vector visibleFolders = getAllVisibleFolders();
+			for(Iterator f = visibleFolders.iterator(); f.hasNext();)
 			{
-				BulletinFolder folderToFix = getFolder(f);
-				if(!folderToFix.isVisible())
-					continue;
+				BulletinFolder folderToFix = (BulletinFolder) f.next();
 				if( folderToFix.contains(uidToRemove))
 				{
 					try
@@ -917,7 +927,30 @@ public class ClientBulletinStore extends BulletinStore
 					}
 					removeBulletinFromFolder(folderToFix, uidToRemove);
 				}
-				
+			}
+		}
+	}
+	
+	public void migrateFoldersForBulletinVersioning()
+	{
+		Vector allBulletinUids = getUidsOfAllBulletinRevisions();
+		Vector visibleFolders = getAllVisibleFolders();
+		for(Iterator i = allBulletinUids.iterator(); i.hasNext();)
+		{
+			UniversalId bId = (UniversalId) i.next();
+			Bulletin b = getBulletinRevision(bId);
+			if(b == null)
+			{
+				System.out.println("Migration Error: Unable to find bulletin: "+bId);
+				continue;
+			}
+			if(!isLeaf(b))
+			{
+				for(Iterator f = visibleFolders.iterator(); f.hasNext();)
+				{
+					BulletinFolder folderToFix = (BulletinFolder) f.next();
+					folderToFix.remove(bId);
+				}
 			}
 		}
 	}

@@ -54,7 +54,7 @@ public class TestConfigInfo extends TestCaseEnhanced
 		ConfigInfo info = new ConfigInfo();
 		verifyEmptyInfo(info, "constructor");
 		
-		assertEquals(9, ConfigInfo.VERSION);
+		assertEquals(10, ConfigInfo.VERSION);
 
 		info.setAuthor("fred");
 		assertEquals("fred", info.getAuthor());
@@ -212,6 +212,7 @@ public class TestConfigInfo extends TestCaseEnhanced
 		info.setBackedUpKeypairEncrypted(sampleBackedUpKeypairEncrypted);
 		info.setBackedUpKeypairShare(sampleBackedUpKeypairShare);
 		info.setAllHQKeysXml(sampleAllHQKeysXml);
+		info.setBulletinVersioningAware(sampleBulletinVersioningAware);
 	}
 
 	void verifyEmptyInfo(ConfigInfo info, String label)
@@ -235,6 +236,7 @@ public class TestConfigInfo extends TestCaseEnhanced
 		assertEquals(label + ": sampleBackedUpKeypairEncrypted", false, info.hasUserBackedUpKeypairEncrypted());
 		assertEquals(label + ": sampleBackedUpKeypairShare", false, info.hasUserBackedUpKeypairShare());
 		assertEquals(label + ": sampleAllHQKeysXml", "", info.getAllHQKeysXml());
+		assertEquals(label + ": sampleBulletinVersioningAware", false, info.isBulletinVersioningAware());
 		
 	}
 
@@ -301,6 +303,12 @@ public class TestConfigInfo extends TestCaseEnhanced
 			assertEquals(label + ": sampleAllHQKeysXml", sampleAllHQKeysXml, info.getAllHQKeysXml());	
 		else
 			assertEquals(label + ": sampleAllHQKeysXml", "", info.getAllHQKeysXml());
+		
+		if(VERSION >= 10)
+			assertEquals(label + ": sampleBulletinVersioningAware", sampleBulletinVersioningAware, info.isBulletinVersioningAware());	
+		else
+			assertEquals(label + ": sampleBulletinVersioningAware", false, info.isBulletinVersioningAware());
+		
 			
 	}
 
@@ -358,6 +366,10 @@ public class TestConfigInfo extends TestCaseEnhanced
 		{
 			out.writeUTF(sampleAllHQKeysXml);
 		}
+		if(VERSION >= 10)
+		{
+			out.writeBoolean(sampleBulletinVersioningAware);
+		}
 		out.close();
 		return outputStream.toByteArray();
 	}
@@ -392,5 +404,6 @@ public class TestConfigInfo extends TestCaseEnhanced
 	final boolean sampleBackedUpKeypairShare = true;
 //Version 9
 	final String sampleAllHQKeysXml = "<HQs></HQs>";
-
+//Version 10
+	final boolean sampleBulletinVersioningAware = true;
 }
