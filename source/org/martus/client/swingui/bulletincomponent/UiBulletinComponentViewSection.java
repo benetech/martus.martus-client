@@ -98,5 +98,9 @@ public class UiBulletinComponentViewSection extends UiBulletinComponentSection
 		attachmentViewer.clearAttachments();
 	}
 
+	public void validateAttachments()
+	{
+		// read-only view can't have invalid attachments
+	}
 	public UiAttachmentViewer attachmentViewer;
 }

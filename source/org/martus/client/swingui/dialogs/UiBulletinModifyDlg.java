@@ -49,6 +49,7 @@ import org.martus.client.core.MartusApp;
 import org.martus.client.core.BulletinStore.BulletinAlreadyExistsException;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.bulletincomponent.UiBulletinComponent;
+import org.martus.client.swingui.bulletincomponent.UiBulletinComponentEditorSection;
 import org.martus.client.swingui.bulletincomponent.UiBulletinEditor;
 import org.martus.client.swingui.fields.UiDateEditor;
 import org.martus.client.swingui.fields.UiField.DataInvalidException;
@@ -147,7 +148,7 @@ public class UiBulletinModifyDlg extends JFrame implements ActionListener, Windo
 			observer.messageDlg(this,"ErrorDateInFuture", e.getlocalizedTag());
 			return;
 		}
-		catch(UiBulletinEditor.AttachmentMissing e)
+		catch(UiBulletinComponentEditorSection.AttachmentMissingException e)
 		{
 			observer.messageDlg(this,"ErrorAttachmentMissing", e.getlocalizedTag());
 			return;

@@ -249,6 +249,8 @@ abstract public class UiBulletinComponentSection extends JPanel
 				throw new UiDateEditor.DateFutureException(getLocalization().getFieldLabel(tag));
 			}
 		}
+		
+		validateAttachments();
 	}
 
 	public boolean isAnyFieldModified(Bulletin original, Bulletin newBulletin)
@@ -268,6 +270,14 @@ abstract public class UiBulletinComponentSection extends JPanel
 		return false;
 	}
 
+	public static class AttachmentMissingException extends DataInvalidException
+	{
+		public AttachmentMissingException(String localizedTag)
+		{
+			super(localizedTag);
+		}
+	}
+	
 
 
 	private UiMainWindow mainWindow;
@@ -287,5 +297,6 @@ abstract public class UiBulletinComponentSection extends JPanel
 	abstract public void createAttachmentTable();
 	abstract public void addAttachment(AttachmentProxy a);
 	abstract public void clearAttachments();
+	abstract public void validateAttachments() throws DataInvalidException;
 
 }

@@ -26,7 +26,6 @@ Boston, MA 02111-1307, USA.
 
 package org.martus.client.swingui.bulletincomponent;
 
-import java.io.File;
 import java.io.IOException;
 
 import javax.swing.event.ChangeEvent;
@@ -51,37 +50,12 @@ public class UiBulletinEditor extends UiBulletinComponent
 		return new UiBulletinComponentEditorSection(mainWindow);
 	}
 
-	public class AttachmentMissing extends UiField.DataInvalidException
-	{
-		public AttachmentMissing(String localizedTag)
-		{
-			super(localizedTag);
-		}
-	}
-	
 	public void validateData() throws UiField.DataInvalidException 
 	{
 		publicStuff.validateData();
 		privateStuff.validateData();
-		
-		validateAttachments((UiBulletinComponentEditorSection)publicStuff);
-		validateAttachments((UiBulletinComponentEditorSection)privateStuff);
 	}
 	
-	private void validateAttachments(UiBulletinComponentEditorSection section) throws AttachmentMissing
-	{
-		AttachmentProxy[] publicAttachments = section.attachmentEditor.getAttachments();
-		for(int aIndex = 0; aIndex < publicAttachments.length; ++aIndex)
-		{
-			File file = publicAttachments[aIndex].getFile();
-			if (file != null)
-			{
-				if(!file.exists())
-					throw new AttachmentMissing(file.getAbsolutePath());
-			}
-		}
-	}
-
 	public boolean isBulletinModified() throws
 			IOException,
 			MartusCrypto.EncryptionException
