@@ -126,7 +126,7 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		assertNull("Language pack doesn't exists help toc should return null", helpTOC);
 
 		File mlpkTranslation = new File(translationDirectory, UiBasicLocalization.getMlpkFilename(languageCode));
-		copyResourceFileToLocalFile(mlpkTranslation, "Martus-xx-NotSigned.mlp");
+		copyResourceFileToLocalFile(mlpkTranslation, "Martus-xx-notSigned.mlp");
 		mlpkTranslation.deleteOnExit();
 		helpMain = appWithAccount.getHelpMain(languageCode);
 		helpTOC = appWithAccount.getHelpTOC(languageCode);
