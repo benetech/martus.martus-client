@@ -42,6 +42,7 @@ import org.martus.client.swingui.fields.UiChoiceEditor;
 import org.martus.common.clientside.DateUtilities;
 import org.martus.common.clientside.UiBasicLocalization;
 import org.martus.swing.ParagraphLayout;
+import org.martus.swing.UiCheckBox;
 import org.martus.swing.UiLanguageDirection;
 import org.martus.swing.Utilities;
 
@@ -63,12 +64,12 @@ public class UiPreferencesDlg extends JDialog implements ActionListener, ChangeL
 		languageDropdown = new UiChoiceEditor(localization.getUiLanguages());
 		languageDropdown.setText(localization.getCurrentLanguageCode());
 		
-		allPrivate = new JCheckBox();
+		allPrivate = new UiCheckBox();
 		allPrivate.setText(localization.getFieldLabel("preferencesAllPrivate"));
 		allPrivate.setSelected(owner.getBulletinsAlwaysPrivate());
 
 //TODO: Remove before the 2.x release
-directionRtoL = new JCheckBox();
+directionRtoL = new UiCheckBox();
 directionRtoL.setText("Language Right to Left");
 directionRtoL.setSelected(UiLanguageDirection.isRightToLeftLanguage());
 

@@ -39,6 +39,7 @@ import javax.swing.border.EmptyBorder;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.common.clientside.UiBasicLocalization;
 import org.martus.swing.ParagraphLayout;
+import org.martus.swing.UiCheckBox;
 import org.martus.swing.UiWrappedTextArea;
 import org.martus.swing.Utilities;
 
@@ -58,7 +59,7 @@ public class UiPrintBulletinDlg extends JDialog implements ActionListener
 		UiBasicLocalization localization = mainWindow.getLocalization();
 		setTitle(localization.getWindowTitle("PrintPrivateData"));
 		
-		includePrivate = new JCheckBox(localization.getFieldLabel("PrintPrivateData"));
+		includePrivate = new UiCheckBox(localization.getFieldLabel("PrintPrivateData"));
 		ok = new JButton(localization.getButtonLabel("Continue"));
 		ok.addActionListener(this);		
 		cancel = new JButton(localization.getButtonLabel("cancel"));
