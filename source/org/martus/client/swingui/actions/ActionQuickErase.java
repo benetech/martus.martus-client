@@ -173,7 +173,7 @@ public abstract class ActionQuickErase extends UiMenuAction
 			warningMessage += localization.getFieldLabel("QuickEraseWillExitMartus");
 			vBox.add(new JLabel(" "));
 			
-			UiWrappedTextArea text = new UiWrappedTextArea(warningMessage);
+			UiWrappedTextArea text = new UiWrappedTextArea(warningMessage, localization.getComponentOrientation());
 			text.setBackground(Color.WHITE);
 			text.setForeground(Color.BLACK);
 			text.setEditable(false);

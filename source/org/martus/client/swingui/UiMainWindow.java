@@ -663,7 +663,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 
 	public boolean confirmDlg(JFrame parent, String title, String[] contents, String[] buttons)
 	{
-		return UiUtilities.confirmDlg(parent, title, contents, buttons);
+		return UiUtilities.confirmDlg(parent, title, contents, buttons, localization.getComponentOrientation());
 	}
 
 	public void notifyDlgBeep(String baseTag)
@@ -1022,7 +1022,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		String[] contents = {userName, " ", keyDescription, keyContents," ", codeDescription, formattedCodeContents, " ", accountDirectory};
 		String[] buttons = {ok};
 
-		new UiNotifyDlg(this, title, contents, buttons);
+		new UiNotifyDlg(this, title, contents, buttons, localization.getComponentOrientation());
 	}
 
 	public void displayHelpMessage()
@@ -1230,7 +1230,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 			String[] contents = {serverSelected, uploadGranted};
 			String[] buttons = {ok};
 		
-			new UiNotifyDlg(getCurrentActiveFrame(), title, contents, buttons);
+			new UiNotifyDlg(getCurrentActiveFrame(), title, contents, buttons, localization.getComponentOrientation());
 			if(magicAccepted)
 				requestToUpdateContactInfoOnServerAndSaveInfo();
 			
@@ -1587,7 +1587,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 			String ok = getLocalization().getButtonLabel("ok");
 			String[] contents = {msg, export.getCanonicalPath()};
 			String[] buttons = {ok};
-			new UiNotifyDlg(getCurrentActiveFrame(), title, contents, buttons);
+			new UiNotifyDlg(getCurrentActiveFrame(), title, contents, buttons, localization.getComponentOrientation());
 		}
 		catch(Exception e)
 		{

@@ -32,6 +32,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import org.martus.client.core.ConfigInfo;
@@ -76,47 +77,49 @@ public class UiContactInfoDlg extends JDialog implements ActionListener
 		phone.setText(info.getPhone());
 		address.setText(info.getAddress());
 
-		getContentPane().setLayout(new ParagraphLayout());
+		JPanel panel = new JPanel();
+		panel.setLayout(new ParagraphLayout());
 		JLabel space = new JLabel(" ");
-		getContentPane().add(space, ParagraphLayout.NEW_PARAGRAPH);
-		getContentPane().add(new JLabel());
+		panel.add(space, ParagraphLayout.NEW_PARAGRAPH);
+		panel.add(new JLabel());
 
-		UiWrappedTextArea infoRequired = new UiWrappedTextArea(localization.getFieldLabel("ContactInfoRequiredFields"), 60);
+		UiWrappedTextArea infoRequired = new UiWrappedTextArea(localization.getFieldLabel("ContactInfoRequiredFields"), 60, localization.getComponentOrientation());
 		infoRequired.setFont(space.getFont());
 		infoRequired.setRows(2);
-		getContentPane().add(infoRequired);
+		panel.add(infoRequired);
 
 		String authorPrompt = localization.getFieldLabel("AuthorRequired");
-		getContentPane().add(new JLabel(authorPrompt), ParagraphLayout.NEW_PARAGRAPH);
-		getContentPane().add(source);
+		panel.add(new JLabel(authorPrompt), ParagraphLayout.NEW_PARAGRAPH);
+		panel.add(source);
 
 		String organizationPrompt = localization.getFieldLabel("OrganizationRequired");
-		getContentPane().add(new JLabel(organizationPrompt), ParagraphLayout.NEW_PARAGRAPH);
-		getContentPane().add(organization);
-		getContentPane().add(new JLabel(localization.getFieldLabel("email")), ParagraphLayout.NEW_PARAGRAPH);
-		getContentPane().add(email);
-		getContentPane().add(new JLabel(localization.getFieldLabel("webpage")), ParagraphLayout.NEW_PARAGRAPH);
-		getContentPane().add(webpage);
-		getContentPane().add(new JLabel(localization.getFieldLabel("phone")), ParagraphLayout.NEW_PARAGRAPH);
-		getContentPane().add(phone);
-		getContentPane().add(new JLabel(localization.getFieldLabel("address")), ParagraphLayout.NEW_PARAGRAPH);
-		getContentPane().add(addressScrollPane);
-		getContentPane().add(new JLabel(" "), ParagraphLayout.NEW_PARAGRAPH);
-		getContentPane().add(new JLabel(localization.getFieldLabel("ContactInfoDescriptionOfFields")));
+		panel.add(new JLabel(organizationPrompt), ParagraphLayout.NEW_PARAGRAPH);
+		panel.add(organization);
+		panel.add(new JLabel(localization.getFieldLabel("email")), ParagraphLayout.NEW_PARAGRAPH);
+		panel.add(email);
+		panel.add(new JLabel(localization.getFieldLabel("webpage")), ParagraphLayout.NEW_PARAGRAPH);
+		panel.add(webpage);
+		panel.add(new JLabel(localization.getFieldLabel("phone")), ParagraphLayout.NEW_PARAGRAPH);
+		panel.add(phone);
+		panel.add(new JLabel(localization.getFieldLabel("address")), ParagraphLayout.NEW_PARAGRAPH);
+		panel.add(addressScrollPane);
+		panel.add(new JLabel(" "), ParagraphLayout.NEW_PARAGRAPH);
+		panel.add(new JLabel(localization.getFieldLabel("ContactInfoDescriptionOfFields")));
 
-		getContentPane().add(new JLabel(" "), ParagraphLayout.NEW_PARAGRAPH);
-		UiWrappedTextArea infoFuture = new UiWrappedTextArea(localization.getFieldLabel("ContactInfoFutureUseOfFields"), 60);
+		panel.add(new JLabel(" "), ParagraphLayout.NEW_PARAGRAPH);
+		UiWrappedTextArea infoFuture = new UiWrappedTextArea(localization.getFieldLabel("ContactInfoFutureUseOfFields"), 60, localization.getComponentOrientation());
 		infoFuture.setFont(space.getFont());
 		infoFuture.setRows(3);
-		getContentPane().add(infoFuture);
+		panel.add(infoFuture);
 
-		getContentPane().add(new JLabel(" "), ParagraphLayout.NEW_PARAGRAPH);
-		getContentPane().add(new JLabel(localization.getFieldLabel("ContactInfoUpdateLater")));
+		panel.add(new JLabel(" "), ParagraphLayout.NEW_PARAGRAPH);
+		panel.add(new JLabel(localization.getFieldLabel("ContactInfoUpdateLater")));
 
-		getContentPane().add(new JLabel(""), ParagraphLayout.NEW_PARAGRAPH);
-		getContentPane().add(ok);
-		getContentPane().add(cancel);
-
+		panel.add(new JLabel(""), ParagraphLayout.NEW_PARAGRAPH);
+		panel.add(ok);
+		panel.add(cancel);
+		
+		getContentPane().add(panel);
 		getRootPane().setDefaultButton(ok);
 
 		Utilities.centerDlg(this);

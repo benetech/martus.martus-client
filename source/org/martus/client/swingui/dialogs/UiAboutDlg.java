@@ -100,7 +100,7 @@ public class UiAboutDlg extends JDialog implements ActionListener
 		final String notice = "\n" + disclaimer + "\n\n" + credits + "\n\n" + APACHENOTICE;
 
 		Box vBoxDetails = Box.createVerticalBox();
-		vBoxDetails.add(new UiWrappedTextArea(notice));
+		vBoxDetails.add(new UiWrappedTextArea(notice, localization.getComponentOrientation()));
 		vBoxDetails.add(hBoxOk);
 
 		Box hBoxDetails = Box.createHorizontalBox();

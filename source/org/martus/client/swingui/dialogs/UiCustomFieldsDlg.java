@@ -58,7 +58,7 @@ public class UiCustomFieldsDlg extends JDialog
 		UiLocalization localization = owner.getLocalization();
 		setTitle(localization.getWindowTitle("input" + baseTag));
 
-		UiWrappedTextArea label = new UiWrappedTextArea(localization.getFieldLabel("input" + baseTag + "Info"));
+		UiWrappedTextArea label = new UiWrappedTextArea(localization.getFieldLabel("input" + baseTag + "Info"), localization.getComponentOrientation());
 		text = new UiTextArea(20, 80, localization.getComponentOrientation());
 		text.setText(xmlFieldSpecs);
 		text.setLineWrap(true);
