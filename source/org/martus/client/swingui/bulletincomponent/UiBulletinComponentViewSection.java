@@ -33,6 +33,7 @@ import org.martus.client.swingui.fields.UiChoiceViewer;
 import org.martus.client.swingui.fields.UiDateViewer;
 import org.martus.client.swingui.fields.UiField;
 import org.martus.client.swingui.fields.UiFlexiDateViewer;
+import org.martus.client.swingui.fields.UiGridViewer;
 import org.martus.client.swingui.fields.UiMultilineViewer;
 import org.martus.client.swingui.fields.UiNormalTextViewer;
 import org.martus.client.swingui.fields.UiUnknownViewer;
@@ -80,6 +81,11 @@ public class UiBulletinComponentViewSection extends UiBulletinComponentSection
 	public UiField createBoolField()
 	{
 		return new UiBoolViewer(getLocalization());
+	}
+
+	public UiField createGridField()
+	{
+		return new UiGridViewer();
 	}
 
 	public void createAttachmentTable()

@@ -162,6 +162,9 @@ abstract public class UiBulletinComponentSection extends JPanel
 			case FieldSpec.TYPE_BOOLEAN:
 				field = createBoolField();
 				break;
+			case FieldSpec.TYPE_GRID:
+				field = createGridField();
+				break;
 			case FieldSpec.TYPE_UNKNOWN:
 			default:
 				field = createUnknownField();
@@ -293,6 +296,7 @@ abstract public class UiBulletinComponentSection extends JPanel
 	abstract public UiField createFlexiDateField();
 	abstract public UiField createUnknownField();
 	abstract public UiField createBoolField();
+	abstract public UiField createGridField();
 
 	abstract public void createAttachmentTable();
 	abstract public void addAttachment(AttachmentProxy a);

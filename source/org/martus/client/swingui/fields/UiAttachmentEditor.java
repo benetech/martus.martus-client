@@ -26,7 +26,6 @@ Boston, MA 02111-1307, USA.
 
 package org.martus.client.swingui.fields;
 
-import java.awt.Dimension;
 import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.Transferable;
 import java.awt.dnd.DropTarget;
@@ -53,6 +52,7 @@ import org.martus.common.bulletin.AttachmentProxy;
 import org.martus.common.clientside.UiBasicLocalization;
 import org.martus.swing.ParagraphLayout;
 import org.martus.swing.UiFileChooser;
+import org.martus.swing.UiTable;
 
 
 
@@ -66,7 +66,7 @@ public class UiAttachmentEditor extends JPanel
 
 		model = new EditorAttachmentTableModel(mainWindow, attachmentTable);
 
-		attachmentTable = new JTable(model);
+		attachmentTable = new UiTable(model);
 		new DropTarget(this, new attachmentDropAdapter());
 		attachmentTable.setFocusable(false);
 		attachmentTable.createDefaultColumnsFromModel();
@@ -96,10 +96,7 @@ public class UiAttachmentEditor extends JPanel
 		vbox.add(hbox);
 		add(vbox);
 
-		Dimension d = attachmentTable.getPreferredScrollableViewportSize();
-		int rowHeight = attachmentTable.getRowHeight() + attachmentTable.getRowMargin() ;
-		d.height = VISIBLE_ROW_COUNT * rowHeight;
-		attachmentTable.setPreferredScrollableViewportSize(d);
+		attachmentTable.resizeTable(VISIBLE_ROW_COUNT);
 	}
 
 	class attachmentDropAdapter implements DropTargetListener
@@ -265,7 +262,7 @@ public class UiAttachmentEditor extends JPanel
 		}
 	}
 
-	JTable attachmentTable;
+	UiTable attachmentTable;
 	JButton remove;
 	EditorAttachmentTableModel model;
 	UiMainWindow mainWindow;

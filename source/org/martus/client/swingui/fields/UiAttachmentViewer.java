@@ -27,7 +27,6 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.swingui.fields;
 
 import java.awt.Cursor;
-import java.awt.Dimension;
 import java.awt.dnd.DnDConstants;
 import java.awt.dnd.DragGestureEvent;
 import java.awt.dnd.DragGestureListener;
@@ -44,7 +43,6 @@ import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 
 import org.martus.client.core.MartusApp;
@@ -57,9 +55,8 @@ import org.martus.common.clientside.UiBasicLocalization;
 import org.martus.common.database.Database;
 import org.martus.swing.ParagraphLayout;
 import org.martus.swing.UiFileChooser;
+import org.martus.swing.UiTable;
 import org.martus.swing.Utilities;
-
-
 
 public class UiAttachmentViewer extends JPanel  implements DragGestureListener, DragSourceListener
 {
@@ -71,7 +68,7 @@ public class UiAttachmentViewer extends JPanel  implements DragGestureListener, 
 		ParagraphLayout layout = new ParagraphLayout();
 		setLayout(layout);
 
-		attachmentTable = new JTable(model);
+		attachmentTable = new UiTable(model);
 		attachmentTable.createDefaultColumnsFromModel();
 		attachmentTable.setColumnSelectionAllowed(false);
 		UiBulletinTable.setColumnWidthToHeaderWidth(attachmentTable,1);
@@ -102,33 +99,29 @@ public class UiAttachmentViewer extends JPanel  implements DragGestureListener, 
 		vbox.add(buttonBox);
 		add(vbox);
 
-		resizeTable();
+		updateTable();
 		attachmentTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		dragSource.createDefaultDragGestureRecognizer(attachmentTable,
 							DnDConstants.ACTION_COPY_OR_MOVE, this);
 	}
 
-	public void resizeTable()
+	public void updateTable()
 	{
-		Dimension d = attachmentTable.getPreferredScrollableViewportSize();
-		int rowHeight = attachmentTable.getRowHeight() + attachmentTable.getRowMargin() ;
+		attachmentTable.resizeTable();
 		int rowCount = model.getRowCount();
-		d.height = rowCount * rowHeight;
-		attachmentTable.setPreferredScrollableViewportSize(d);
 		saveButton.setEnabled(rowCount > 0);
 		viewButton.setEnabled(rowCount > 0);
 	}
-
 	public void addAttachment(AttachmentProxy a)
 	{
 		model.add(a);
-		resizeTable();
+		updateTable();
 	}
 
 	public void clearAttachments()
 	{
 		model.clear();
-		resizeTable();
+		updateTable();
 	}
 
 
@@ -294,7 +287,7 @@ public class UiAttachmentViewer extends JPanel  implements DragGestureListener, 
 	UiMainWindow mainWindow;
 	MartusApp app;
 	AttachmentTableModel model;
-	JTable attachmentTable;
+	UiTable attachmentTable;
 	public JButton saveButton;
 	public JButton viewButton;
 	JScrollPane attachmentPane;
