@@ -289,11 +289,13 @@ public class BackgroundUploader
 		if(!app.isSSLServerAvailable())
 			return uploadResult;
 	
-		ConfigInfo info = app.getConfigInfo();
 		String result = "";
+		ConfigInfo configInfo = app.getConfigInfo();
 		try
 		{
-			result = putContactInfoOnServer(info.getEncodedContactInfo(app.getSecurity()));
+			Vector contactInfo = configInfo.getRawContactInfo(app.getSecurity());
+			Vector encodedContactInfo = ContactInfo.encodeContactInfoVector(contactInfo);
+			result = putContactInfoOnServer(encodedContactInfo);
 		}
 		catch (MartusCrypto.MartusSignatureException e)
 		{
@@ -315,7 +317,7 @@ public class BackgroundUploader
 	
 		try
 		{
-			info.setSendContactInfoToServer(false);
+			configInfo.setSendContactInfoToServer(false);
 			app.saveConfigInfo();
 		}
 		catch (SaveConfigInfoException e)

@@ -35,6 +35,7 @@ import java.util.Vector;
 import org.martus.common.ConfigInfo;
 import org.martus.common.ContactInfo;
 import org.martus.common.FieldSpec;
+import org.martus.common.crypto.MartusCrypto;
 import org.martus.common.crypto.MartusSecurity;
 import org.martus.common.network.NetworkInterfaceConstants;
 import org.martus.common.test.TestCaseEnhanced;
@@ -148,7 +149,9 @@ public class TestConfigInfo extends TestCaseEnhanced
 		newInfo.setPhone(samplePhone);
 		MartusSecurity signer = new MartusSecurity();
 		signer.createKeyPair(512);
-		Vector contactInfo = newInfo.getEncodedContactInfo(signer);
+		MartusCrypto signer1 = signer;
+		Vector contactInfo1 = newInfo.getRawContactInfo(signer1);
+		Vector contactInfo = ContactInfo.encodeContactInfoVector(contactInfo1);
 		assertEquals("Not encoded?",NetworkInterfaceConstants.BASE_64_ENCODED,contactInfo.get(0));
 		assertEquals("Wrong contactinfo size", 10, contactInfo.size());
 		String publicKey = (String)contactInfo.get(1);
