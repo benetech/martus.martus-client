@@ -54,8 +54,8 @@ public class ActionMenuQuickErase extends UiMenuAction
 		dlg.show();
 			
 		if (!dlg.isOkayPressed())
-			return;			
-						
+			return;		
+		
 		QuickEraseOptions quickEraseOptions = dlg.getQuickEraseOptions();
 		
 		if (quickEraseOptions.isDeleteKeyPairSelected())

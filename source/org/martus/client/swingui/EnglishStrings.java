@@ -87,7 +87,7 @@ public class EnglishStrings
 "wintitle:confirmCancelBackupRecovery=Cancel Backup Recovery",
 "wintitle:confirmUnableToRecoverFromBackupFile=Unable to Recover from Backup File",
 "wintitle:confirmWarningPathChoosenMayNotBeRemoveable=Questionable Media Choosen",
-
+"wintitle:confirmQuickEraseActionOkPressed=Quick Erase Warning",
 
 "wintitle:notifyDropErrorNotAllowed=Cannot Move Bulletin(s)",
 "wintitle:notifyDropErrors=Error Moving Bulletin(s)",
@@ -559,6 +559,10 @@ public class EnglishStrings
 "field:confirmUnableToRecoverFromBackupFileeffect=Choosing Yes will begin the recovery process again.",
 "field:confirmWarningPathChoosenMayNotBeRemoveablecause=Are you sure the directory you chose to save your backup files to is removable?  You cannot save all #M# files to the same location without inserting a new disk for each backup file.",
 "field:confirmWarningPathChoosenMayNotBeRemoveableeffect=Choosing Yes will begin the backup process as instructed.",
+"field:confirmQuickEraseActionOkPressedcause=Martus will now delete all your bulletins from this computer only.",
+"field:confirmQuickEraseActionOkPressedeffect=Choosing Yes will begin the deletion process.",
+
+
 
 "field:notifyDropErrorNotAllowedcause=One or more bulletins cannot be moved to that folder. This may be because of their Draft/Sealed status, or their author.",
 "field:notifyDropErrorscause=An unexpected error occured while moving the bulletin(s). One or more files may be damaged.",

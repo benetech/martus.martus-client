@@ -107,6 +107,8 @@ public class UiQuickEraseConfirmDlg extends JDialog
 	{
 		public void actionPerformed(ActionEvent ae)
 		{
+			if(!donotPrompt.isSelected() && !mainWindow.confirmDlgBeep("QuickEraseActionOkPressed"))
+				return;
 			action=true;
 			setQuickEraseOptions();
 			dispose();
