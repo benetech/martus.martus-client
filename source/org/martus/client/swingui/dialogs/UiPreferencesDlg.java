@@ -32,8 +32,6 @@ import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
 import org.martus.client.swingui.UiLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.fields.UiChoiceEditor;
@@ -46,43 +44,43 @@ import org.martus.swing.Utilities;
 
 
 
-public class UiPreferencesDlg extends JDialog implements ActionListener, ChangeListener
+public class UiPreferencesDlg extends JDialog implements ActionListener
 {
 	public UiPreferencesDlg(UiMainWindow mainWindow)
 	{
 		super(mainWindow, "", true);
 		owner = mainWindow;
 		UiBasicLocalization localization = owner.getLocalization();
-
+		
 		setTitle(localization.getMenuLabel("Preferences"));
-
+		
 		dateFormatDropdown = new UiChoiceEditor(DateUtilities.getDateFormats());
 		dateFormatDropdown.setText(localization.getCurrentDateFormatCode());
-
+		
 		languageDropdown = new UiChoiceEditor(localization.getUiLanguages());
 		languageDropdown.setText(localization.getCurrentLanguageCode());
 		
 		allPrivate = new UiCheckBox();
 		allPrivate.setText(localization.getFieldLabel("preferencesAllPrivate"));
 		allPrivate.setSelected(owner.getBulletinsAlwaysPrivate());
-
+		
 //TODO: Remove before the 2.x release
 directionRtoL = new UiCheckBox();
 directionRtoL.setText("Language Right to Left");
 directionRtoL.setSelected(UiLanguageDirection.isRightToLeftLanguage());
-
+		
 		UiParagraphPanel preferences = new UiParagraphPanel();
 		preferences.addComponents(new JLabel(localization.getFieldLabel("language")), languageDropdown.getComponent());
 		preferences.addComponents(new JLabel(localization.getFieldLabel("dateformat")), dateFormatDropdown.getComponent());
-
-		preferences.addBlankLine();
-		preferences.addOnNewLine(allPrivate);
-
-//		TODO: Remove before the 2.x release
-		preferences.addOnNewLine(directionRtoL);
 		
 		preferences.addBlankLine();
-
+		preferences.addOnNewLine(allPrivate);
+		
+//		TODO: Remove before the 2.x release
+preferences.addOnNewLine(directionRtoL);
+		
+		preferences.addBlankLine();
+		
 		ok = new JButton(localization.getButtonLabel("ok"));
 		ok.addActionListener(this);
 		cancel = new JButton(localization.getButtonLabel("cancel"));
@@ -91,7 +89,7 @@ directionRtoL.setSelected(UiLanguageDirection.isRightToLeftLanguage());
 		
 		getContentPane().add(preferences);
 		getRootPane().setDefaultButton(ok);
-
+		
 		Utilities.centerDlg(this);
 		setResizable(true);
 		show();
@@ -99,9 +97,22 @@ directionRtoL.setSelected(UiLanguageDirection.isRightToLeftLanguage());
 
 	public void actionPerformed(ActionEvent ae)
 	{
+		
 		if(ae.getSource() == ok)
 		{
 			UiLocalization localization = owner.getLocalization();
+			String languageCodeSelected = languageDropdown.getText();
+			if(!localization.isTranslationTrusted(languageCodeSelected))
+			{
+				if(!owner.confirmDlgBeep("UntrustedTranslation"))
+				{
+					localization.hideUntrustedTranslationFiles(languageCodeSelected);
+					languageDropdown.updateChoices(localization.getUiLanguages());
+					String currentLanguageCode = localization.getCurrentLanguageCode();
+					languageDropdown.setText(currentLanguageCode);
+					return;
+				}
+			}
 			localization.setCurrentDateFormatCode(dateFormatDropdown.getText());
 			localization.setCurrentLanguageCode(languageDropdown.getText());
 			owner.setBulletinsAlwaysPrivate(allPrivate.isSelected());
@@ -115,11 +126,8 @@ else
 		dispose();
 	}
 
-	// ChangeListener interface
-	public void stateChanged(ChangeEvent event) {}
-
-	private UiMainWindow owner;
-	private UiChoiceEditor languageDropdown;
+	UiMainWindow owner;
+	UiChoiceEditor languageDropdown;
 	private UiChoiceEditor dateFormatDropdown;
 	private JCheckBox allPrivate;
 	private JCheckBox directionRtoL;

@@ -44,6 +44,15 @@ public class UiChoiceEditor extends UiField
 	{
 		return widget;
 	}
+	
+	public void updateChoices(ChoiceItem[] choicesToUse)
+	{
+		widget.removeAllItems();
+		choices = choicesToUse;
+		for(int i = 0; i < choicesToUse.length; ++i)
+			widget.addItem(choicesToUse[i]);
+		widget.updateUI();
+	}
 
 	public JComponent[] getFocusableComponents()
 	{

@@ -179,7 +179,7 @@ public class TestLocalization extends TestCaseEnhanced
 	{
 		File translationDirectory = createTempDirectory();
 		UiLocalization myLocalization = new UiLocalization(translationDirectory, EnglishStrings.strings);
-		assertTrue("Default English should always be trusted.", myLocalization.isTranslationTrusted());
+		assertTrue("Default English should always be trusted.", myLocalization.isTranslationTrusted("en"));
 
 		String someTestLanguageCode = "zz";
 		boolean foundSomeTestLanguage = doesLanguageExist(myLocalization, someTestLanguageCode);
@@ -195,8 +195,8 @@ public class TestLocalization extends TestCaseEnhanced
 		
 		foundSomeTestLanguage = doesLanguageExist(myLocalization, someTestLanguageCode);
 		assertTrue("should now have testLanguage", foundSomeTestLanguage);
+		assertFalse("An mtf file should always be untrusted", myLocalization.isTranslationTrusted(someTestLanguageCode));
 		myLocalization.setCurrentLanguageCode(someTestLanguageCode);
-		assertFalse("An mtf file should always be untrusted", myLocalization.isTranslationTrusted());
 		assertEquals("Incorrect translation", someLanguageTranslationOfOk, myLocalization.getButtonLabel(buttonName));
 	}
 
@@ -229,17 +229,21 @@ public class TestLocalization extends TestCaseEnhanced
 		myLocalization.setCurrentLanguageCode(someTestLanguageCode);
 		assertEquals("Incorrect translation OK from within language pack", "OK", myLocalization.getButtonLabel("ok"));
 		assertEquals("Incorrect translation No from within language pack", "No", myLocalization.getButtonLabel("no"));
-		assertTrue("A signed MLPK file should be trusted", myLocalization.isTranslationTrusted());
+		assertTrue("A signed MLPK file should be trusted", myLocalization.isTranslationTrusted(someTestLanguageCode));
 
-		File someTestLanguage2 = new File(translationDirectory,UiBasicLocalization.getMlpkFilename(someTestLanguageCode));
+		File translationDirectory2 = createTempDirectory();
+		UiLocalization myLocalization2 = new UiLocalization(translationDirectory2, EnglishStrings.strings);
+		File someTestLanguage2 = new File(translationDirectory2,UiBasicLocalization.getMlpkFilename(someTestLanguageCode));
 		someTestLanguage2.deleteOnExit();
 		copyResourceFileToLocalFile(someTestLanguage2, "Martus-xx-NotSigned.mlpk");
-		foundSomeTestLanguage = doesLanguageExist(myLocalization, someTestLanguageCode);
+		foundSomeTestLanguage = doesLanguageExist(myLocalization2, someTestLanguageCode);
 		assertTrue("should still have testLanguage even if its not signed.", foundSomeTestLanguage);
-		myLocalization.setCurrentLanguageCode(someTestLanguageCode);
-		assertEquals("Incorrect translation OK from within unsigned language pack", "OK", myLocalization.getButtonLabel("ok"));
-		assertEquals("Incorrect translation No from within unsigned language pack", "No", myLocalization.getButtonLabel("no"));
-		assertFalse("A unsigned MLPK file should not be trusted", myLocalization.isTranslationTrusted());
+		myLocalization2.setCurrentLanguageCode(someTestLanguageCode);
+		assertEquals("Incorrect translation OK from within unsigned language pack", "OK", myLocalization2.getButtonLabel("ok"));
+		assertEquals("Incorrect translation No from within unsigned language pack", "No", myLocalization2.getButtonLabel("no"));
+		assertFalse("A unsigned MLPK file should not be trusted", myLocalization2.isTranslationTrusted(someTestLanguageCode));
+		
+		assertFalse("A non existant translation should not be trusted.",myLocalization2.isTranslationTrusted("dx"));
 	}
 
 	
