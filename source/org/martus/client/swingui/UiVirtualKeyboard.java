@@ -105,6 +105,9 @@ public class UiVirtualKeyboard
 			}
 			else
 				passwordField.appendChar(passChar.charAt(0));
+			handler.virtualPasswordHasChanged();
+
+
 		}
 	}
 	VirtualKeyboardHandler handler;

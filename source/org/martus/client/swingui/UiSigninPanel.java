@@ -197,13 +197,6 @@ public class UiSigninPanel extends JPanel implements VirtualKeyboardHandler
 		owner.sizeHasChanged();
 	}
 
-	public void setPassword(String virtualPassword)
-	{
-		passwordField.setText(virtualPassword);
-		passwordField.updateUI();
-		owner.virtualPasswordHasChanged();
-	}
-
 	public void switchKeyboards()
 	{
 		boolean viewingVirtualKeyboard = mainWindow.isCurrentDefaultKeyboardVirtual();
@@ -231,6 +224,12 @@ public class UiSigninPanel extends JPanel implements VirtualKeyboardHandler
 		{
 			switchKeyboards();
 		}
+	}
+	
+	public void virtualPasswordHasChanged()
+	{
+		passwordField.updateUI();
+		owner.virtualPasswordHasChanged();
 	}
 
 	UiSigninDlg owner;
