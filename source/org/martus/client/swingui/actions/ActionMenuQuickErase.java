@@ -48,22 +48,33 @@ public class ActionMenuQuickErase extends UiMenuAction
 		
 		if (!dlg.isOkayPressed())
 			return;
-
-		boolean scrubSelected = dlg.isScrubCheckBoxSelected();
-		boolean deletKeyPairSelected = dlg.isDeleteKeypairSelected();
-					
-		QuickEraseOptions options = new QuickEraseOptions();			
-		options.setScrubOption(scrubSelected);
-		options.setDeleteKeyPairOption(deletKeyPairSelected);	
-		
-		if(mainWindow.getApp().deleteAllBulletinsAndUserFolders(options))
+				
+		if(mainWindow.getApp().deleteAllBulletinsAndUserFolders(loadQuickEraseOptions(dlg)))
 		{	
-			String baseTag = (scrubSelected)? "QuickEraseScrubWorked":"QuickEraseWorked";		
+			String baseTag = (dlg.isScrubCheckBoxSelected())? "QuickEraseScrubWorked":"QuickEraseWorked";		
 			mainWindow.notifyDlg(mainWindow, baseTag);
+			
+			if (dlg.isExitWhenCompleteSelected())
+				mainWindow.exitWithoutSavingState();
 		}						
 		else
 			mainWindow.notifyDlg(mainWindow, "QuickEraseFailed");
 			
 		mainWindow.folderTreeContentsHaveChanged();		
+	}
+	
+	private QuickEraseOptions loadQuickEraseOptions(UiQuickEraseConfirmDlg dlg)
+	{
+		QuickEraseOptions options = new QuickEraseOptions();
+			
+		boolean scrubSelected = dlg.isScrubCheckBoxSelected();
+		boolean deletKeyPairSelected = dlg.isDeleteKeypairSelected();
+		boolean exitWhenCompleteSelected = dlg.isExitWhenCompleteSelected();
+				
+		options.setScrubOption(scrubSelected);
+		options.setDeleteKeyPairOption(deletKeyPairSelected);
+		options.setExitWhenCompleteOption(exitWhenCompleteSelected);
+		
+		return options;	
 	}
 }

@@ -650,6 +650,7 @@ public class EnglishStrings
 "field:notifyQuickEraseScrubWorkedcause=All bulletins and folders were successfully scrubbed and deleted.",
 "field:ScrubDataBeforeDelete=Scrub data before deleting",
 "field:DeleteKeypair=Delete Keypair",
+"field:ExitWhenComplete=Exit when complete",
 
 
 "field:DateRangeFrom=Between",

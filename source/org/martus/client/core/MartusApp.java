@@ -482,11 +482,13 @@ public class MartusApp
 	public boolean deleteAllBulletinsAndUserFolders(QuickEraseOptions opts)
 	{
 		try
-		{
+		{						
+			store.resetFolders((opts.isExitWhenCompleteSelected())? false:true);
+				
 			if (opts.isScrubSelected())
 				store.scrubAllData();
 				
-			store.deleteAllData();
+			store.deleteAllData();							
 		}
 		catch (Exception e)
 		{

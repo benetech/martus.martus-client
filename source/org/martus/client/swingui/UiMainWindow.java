@@ -1608,7 +1608,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		exitWithoutSavingState();
 	}
 
-	void exitWithoutSavingState()
+	public void exitWithoutSavingState()
 	{
 		System.exit(0);
 	}

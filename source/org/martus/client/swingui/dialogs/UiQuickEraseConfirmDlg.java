@@ -51,9 +51,11 @@ public class UiQuickEraseConfirmDlg extends JDialog
 		
 		String scrubStr = localization.getFieldLabel("ScrubDataBeforeDelete");
 		String deleteKeyPairStr = localization.getFieldLabel("DeleteKeypair");
+		String exitWhenCompleteStr = localization.getFieldLabel("ExitWhenComplete");
 		
 		scrubBeforeDelete 	= new JCheckBox(scrubStr, false);
-		deleteKeyPair 		= new JCheckBox(deleteKeyPairStr, false);			
+		deleteKeyPair 		= new JCheckBox(deleteKeyPairStr, false);
+		exitWhenComplete	= new JCheckBox(exitWhenCompleteStr, false);			
 
 		JButton ok = new JButton(localization.getButtonLabel("ok"));
 		ok.addActionListener(new OkHandler());
@@ -67,6 +69,7 @@ public class UiQuickEraseConfirmDlg extends JDialog
 		getContentPane().add(new JLabel(""), ParagraphLayout.NEW_LINE);	
 		getContentPane().add(deleteKeyPair, ParagraphLayout.NEW_LINE);		
 		getContentPane().add(scrubBeforeDelete, ParagraphLayout.NEW_LINE);
+		getContentPane().add(exitWhenComplete, ParagraphLayout.NEW_LINE);
 		
 		getContentPane().add(new JLabel(""), ParagraphLayout.NEW_PARAGRAPH);		
 		getContentPane().add(ok);
@@ -110,8 +113,14 @@ public class UiQuickEraseConfirmDlg extends JDialog
 	{
 		return deleteKeyPair.isSelected(); 
 	}
+	
+	public boolean isExitWhenCompleteSelected()
+	{
+		return exitWhenComplete.isSelected(); 
+	}
 
 	JCheckBox scrubBeforeDelete;
 	JCheckBox deleteKeyPair;
+	JCheckBox exitWhenComplete;
 	boolean action;
 }

@@ -584,14 +584,15 @@ public class BulletinStore
 	{
 		database.deleteAllData();
 		deleteAndResetFolders();
-	}
+	}		
 	
 	private void deleteAndResetFolders()
 	{
 		getFoldersFile().delete();
-		setUpStore(dir, database);
-	}
-
+		if (resetFolder)
+			setUpStore(dir, database);
+	}	
+	
 	public void scrubAllData() throws Exception
 	{
 		class PacketScrubber implements Database.PacketVisitor 
@@ -614,7 +615,11 @@ public class BulletinStore
 		database.visitAllRecords(ac);
 		deleteAndResetFolders();
 	}
-
+	
+	public void resetFolders(boolean reset)
+	{
+		resetFolder = reset;	
+	}
 
 	public Database getDatabase()
 	{
@@ -1071,4 +1076,5 @@ public class BulletinStore
 
 	FieldSpec[] publicFieldTags;
 	FieldSpec[] privateFieldTags;
+	boolean resetFolder=true;	
 }
