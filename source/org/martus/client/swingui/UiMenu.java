@@ -28,7 +28,7 @@ package org.martus.client.swingui;
 import javax.swing.AbstractAction;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
-import org.martus.common.clientside.UiLanguageDirection;
+import org.martus.swing.UiLanguageDirection;
 
 public class UiMenu extends JMenu
 {

@@ -25,18 +25,17 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.fields;
 
-import java.awt.ComponentOrientation;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-
-
 import org.martus.common.GridFieldSpec;
+
+
 
 public class UiGridEditor extends UiGrid
 {
-	public UiGridEditor(GridFieldSpec fieldSpec, ComponentOrientation orientation)
+	public UiGridEditor(GridFieldSpec fieldSpec)
 	{
-		super(fieldSpec, orientation);
+		super(fieldSpec);
 		table.resizeTable(DEFAULT_VIEABLE_ROWS);
 		table.addKeyListener(new GridKeyListener());
 	}

@@ -45,7 +45,6 @@ import org.martus.client.swingui.UiScrollPane;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.bulletin.BulletinConstants;
 import org.martus.common.clientside.UiBasicLocalization;
-import org.martus.common.clientside.UiLanguageDirection;
 import org.martus.common.packet.UniversalId;
 import org.martus.swing.UiFileChooser;
 import org.martus.swing.UiWrappedTextArea;
@@ -84,12 +83,12 @@ public class UiExportBulletinsDlg extends JDialog implements ActionListener
 		JList bulletinList = new JList(titles);
 		UiScrollPane tocMsgAreaScrollPane = new UiScrollPane(bulletinList,
 				UiScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
-				UiScrollPane.HORIZONTAL_SCROLLBAR_NEVER, UiLanguageDirection.getComponentOrientation());
+				UiScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 		tocMsgAreaScrollPane.setPreferredSize(new Dimension(580, 100));
 		
 		Box upperStuff = Box.createVerticalBox();
 		upperStuff.add(new JLabel(" "));
-		upperStuff.add(new UiWrappedTextArea(localization.getFieldLabel("ExportBulletinDetails"), UiLanguageDirection.getComponentOrientation()));
+		upperStuff.add(new UiWrappedTextArea(localization.getFieldLabel("ExportBulletinDetails")));
 		upperStuff.add(new JLabel(" "));
 		upperStuff.add(tocMsgAreaScrollPane);
 		upperStuff.add(new JLabel(" "));

@@ -121,7 +121,6 @@ import org.martus.common.clientside.ClientSideNetworkGateway;
 import org.martus.common.clientside.CurrentUiState;
 import org.martus.common.clientside.Localization;
 import org.martus.common.clientside.UiBasicLocalization;
-import org.martus.common.clientside.UiLanguageDirection;
 import org.martus.common.clientside.UiPasswordField;
 import org.martus.common.clientside.UiUtilities;
 import org.martus.common.crypto.MartusCrypto;
@@ -668,7 +667,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 
 	public boolean confirmDlg(JFrame parent, String title, String[] contents, String[] buttons)
 	{
-		return UiUtilities.confirmDlg(parent, title, contents, buttons, UiLanguageDirection.getComponentOrientation());
+		return UiUtilities.confirmDlg(parent, title, contents, buttons);
 	}
 
 	public void notifyDlgBeep(String baseTag)
@@ -1027,7 +1026,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		String[] contents = {userName, " ", keyDescription, keyContents," ", codeDescription, formattedCodeContents, " ", accountDirectory};
 		String[] buttons = {ok};
 
-		new UiNotifyDlg(this, title, contents, buttons, UiLanguageDirection.getComponentOrientation());
+		new UiNotifyDlg(this, title, contents, buttons);
 	}
 
 	public void displayHelpMessage()
@@ -1088,7 +1087,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		JComponent view = new JLabel(html);
 		
 		JFrame frame = new JFrame();
-		UiScrollPane scroller = new UiScrollPane(UiLanguageDirection.getComponentOrientation());
+		UiScrollPane scroller = new UiScrollPane();
 		scroller.getViewport().add(view);
 		frame.getContentPane().add(scroller);
 		frame.pack();
@@ -1235,7 +1234,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 			String[] contents = {serverSelected, uploadGranted};
 			String[] buttons = {ok};
 		
-			new UiNotifyDlg(getCurrentActiveFrame(), title, contents, buttons, UiLanguageDirection.getComponentOrientation());
+			new UiNotifyDlg(getCurrentActiveFrame(), title, contents, buttons);
 			if(magicAccepted)
 				requestToUpdateContactInfoOnServerAndSaveInfo();
 			
@@ -1588,7 +1587,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 			String ok = getLocalization().getButtonLabel("ok");
 			String[] contents = {msg, export.getCanonicalPath()};
 			String[] buttons = {ok};
-			new UiNotifyDlg(getCurrentActiveFrame(), title, contents, buttons, UiLanguageDirection.getComponentOrientation());
+			new UiNotifyDlg(getCurrentActiveFrame(), title, contents, buttons);
 		}
 		catch(Exception e)
 		{

@@ -45,7 +45,6 @@ import org.martus.client.swingui.UiScrollPane;
 import org.martus.common.HQKey;
 import org.martus.common.HQKeys;
 import org.martus.common.bulletin.Bulletin;
-import org.martus.common.clientside.UiLanguageDirection;
 import org.martus.common.crypto.MartusCrypto;
 import org.martus.common.packet.BulletinHistory;
 import org.martus.common.packet.UniversalId;
@@ -132,7 +131,7 @@ public class UiBulletinDetailsDialog extends JDialog
 		versionTable.setShowGrid(true);
 		versionTable.resizeTable();
 		versionTable.setEnabled(false);
-		UiScrollPane versionScroller = new UiScrollPane(versionTable, UiLanguageDirection.getComponentOrientation());
+		UiScrollPane versionScroller = new UiScrollPane(versionTable);
 		return versionScroller;
 	}
 
@@ -165,7 +164,7 @@ public class UiBulletinDetailsDialog extends JDialog
 		hqTable.setShowGrid(true);
 		hqTable.resizeTable();
 		hqTable.setEnabled(false);
-		UiScrollPane hqScroller = new UiScrollPane(hqTable, UiLanguageDirection.getComponentOrientation());
+		UiScrollPane hqScroller = new UiScrollPane(hqTable);
 		return hqScroller;
 	}
 
@@ -188,7 +187,7 @@ public class UiBulletinDetailsDialog extends JDialog
 
 	private JComponent createField(String text)
 	{
-		UiTextArea component = new UiTextArea(text, UiLanguageDirection.getComponentOrientation());
+		UiTextArea component = new UiTextArea(text);
 		component.setEditable(false);
 		return component;
 	}

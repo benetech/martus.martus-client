@@ -35,7 +35,7 @@ import org.martus.client.swingui.actions.ActionMenuCustomFields;
 import org.martus.client.swingui.actions.ActionMenuQuickEraseDeleteMyData;
 import org.martus.client.swingui.actions.ActionMenuQuickEraseRemoveMartus;
 import org.martus.client.swingui.actions.UiActions;
-import org.martus.common.clientside.UiLanguageDirection;
+import org.martus.swing.UiLanguageDirection;
 
 public class UiMenuBar extends JMenuBar
 {

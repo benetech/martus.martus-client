@@ -46,7 +46,6 @@ import org.martus.client.swingui.UiConstants;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.common.VersionBuildDate;
 import org.martus.common.clientside.UiBasicLocalization;
-import org.martus.common.clientside.UiLanguageDirection;
 import org.martus.swing.UiWrappedTextArea;
 import org.martus.swing.Utilities;
 
@@ -101,7 +100,7 @@ public class UiAboutDlg extends JDialog implements ActionListener
 		final String notice = "\n" + disclaimer + "\n\n" + credits + "\n\n" + APACHENOTICE;
 
 		Box vBoxDetails = Box.createVerticalBox();
-		vBoxDetails.add(new UiWrappedTextArea(notice, UiLanguageDirection.getComponentOrientation()));
+		vBoxDetails.add(new UiWrappedTextArea(notice));
 		vBoxDetails.add(hBoxOk);
 
 		Box hBoxDetails = Box.createHorizontalBox();

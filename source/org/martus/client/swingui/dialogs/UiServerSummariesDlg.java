@@ -53,7 +53,6 @@ import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.UiScrollPane;
 import org.martus.client.swingui.tablemodels.RetrieveTableModel;
 import org.martus.common.clientside.UiBasicLocalization;
-import org.martus.common.clientside.UiLanguageDirection;
 import org.martus.common.packet.FieldDataPacket;
 import org.martus.swing.ParagraphLayout;
 import org.martus.swing.UiTable;
@@ -78,7 +77,7 @@ public abstract class UiServerSummariesDlg extends JDialog
 		disabledBackgroundColor = getBackground();
 
 		String topMessageText = localization.getFieldLabel(topMessageTag);
-		UiWrappedTextArea retrieveMessage = new UiWrappedTextArea(topMessageText, UiLanguageDirection.getComponentOrientation());
+		UiWrappedTextArea retrieveMessage = new UiWrappedTextArea(topMessageText);
 		tableBox = Box.createVerticalBox();
 		table = new RetrieveJTable(model);
 		oldBooleanRenderer = table.getDefaultRenderer(Boolean.class);
@@ -89,7 +88,7 @@ public abstract class UiServerSummariesDlg extends JDialog
 
 		table.createDefaultColumnsFromModel();
 		tableBox.add(table.getTableHeader());
-		tableBox.add(new UiScrollPane(table, UiLanguageDirection.getComponentOrientation()));
+		tableBox.add(new UiScrollPane(table));
 
 		JPanel topPanel = new JPanel();
 		topPanel.setBorder(new EmptyBorder(5, 5, 5, 5));

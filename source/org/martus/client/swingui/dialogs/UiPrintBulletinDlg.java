@@ -38,7 +38,6 @@ import javax.swing.border.EmptyBorder;
 
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.common.clientside.UiBasicLocalization;
-import org.martus.common.clientside.UiLanguageDirection;
 import org.martus.swing.ParagraphLayout;
 import org.martus.swing.UiWrappedTextArea;
 import org.martus.swing.Utilities;
@@ -74,7 +73,7 @@ public class UiPrintBulletinDlg extends JDialog implements ActionListener
 		panel.setBorder(new EmptyBorder(10,10,10,10));
 		panel.setLayout(new ParagraphLayout());
 		panel.add(new JLabel(""), ParagraphLayout.NEW_PARAGRAPH);
-		panel.add(new UiWrappedTextArea(localization.getFieldLabel("PrintPrivateDataMessage"), UiLanguageDirection.getComponentOrientation()));
+		panel.add(new UiWrappedTextArea(localization.getFieldLabel("PrintPrivateDataMessage")));
 		panel.add(new JLabel(""), ParagraphLayout.NEW_PARAGRAPH);
 		panel.add(includePrivate);
 		panel.add(new JLabel(""), ParagraphLayout.NEW_PARAGRAPH);

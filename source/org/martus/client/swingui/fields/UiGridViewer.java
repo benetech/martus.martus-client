@@ -25,14 +25,14 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.fields;
 
-import java.awt.ComponentOrientation;
 import org.martus.common.GridFieldSpec;
+
 
 public class UiGridViewer extends UiGrid
 {
-	public UiGridViewer(GridFieldSpec fieldSpec, ComponentOrientation orientation)
+	public UiGridViewer(GridFieldSpec fieldSpec)
 	{
-		super(fieldSpec, orientation);
+		super(fieldSpec);
 		table.resizeTable();
 		table.setEnabled(false);
 	}

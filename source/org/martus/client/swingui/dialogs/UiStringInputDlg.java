@@ -26,7 +26,6 @@ Boston, MA 02111-1307, USA.
 
 package org.martus.client.swingui.dialogs;
 
-import java.awt.ComponentOrientation;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
@@ -34,7 +33,6 @@ import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import org.martus.common.clientside.UiBasicLocalization;
-import org.martus.common.clientside.UiLanguageDirection;
 import org.martus.common.clientside.UiSingleTextField;
 import org.martus.swing.ParagraphLayout;
 import org.martus.swing.UiWrappedTextArea;
@@ -47,9 +45,8 @@ public class UiStringInputDlg extends JDialog
 		super(owner, "", true);
 
 		setTitle(localization.getWindowTitle("input" + baseTag));
-		ComponentOrientation orientation = UiLanguageDirection.getComponentOrientation();
-		UiWrappedTextArea label = new UiWrappedTextArea(localization.getFieldLabel("input" + baseTag + "entry"), orientation);
-		text = new UiSingleTextField(30, UiLanguageDirection.getComponentOrientation());
+		UiWrappedTextArea label = new UiWrappedTextArea(localization.getFieldLabel("input" + baseTag + "entry"));
+		text = new UiSingleTextField(30);
 		text.setText(defaultText);
 
 		JButton ok = new JButton(localization.getButtonLabel("input" + baseTag + "ok"));
@@ -61,12 +58,12 @@ public class UiStringInputDlg extends JDialog
 		if(descriptionTag.length() > 0)
 		{
 			getContentPane().add(new JLabel(""), ParagraphLayout.NEW_PARAGRAPH);
-			getContentPane().add(new UiWrappedTextArea(localization.getFieldLabel(descriptionTag), UiLanguageDirection.getComponentOrientation()));
+			getContentPane().add(new UiWrappedTextArea(localization.getFieldLabel(descriptionTag)));
 		}
 		if(rawDescriptionText.length() > 0)
 		{
 			getContentPane().add(new JLabel(""), ParagraphLayout.NEW_PARAGRAPH);
-			getContentPane().add(new UiWrappedTextArea(rawDescriptionText, UiLanguageDirection.getComponentOrientation()));
+			getContentPane().add(new UiWrappedTextArea(rawDescriptionText));
 			
 		}
 		getContentPane().add(new JLabel(""), ParagraphLayout.NEW_PARAGRAPH);

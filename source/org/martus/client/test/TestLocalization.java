@@ -41,7 +41,7 @@ import org.martus.common.clientside.ChoiceItem;
 import org.martus.common.clientside.DateUtilities;
 import org.martus.common.clientside.Localization;
 import org.martus.common.clientside.UiBasicLocalization;
-import org.martus.common.clientside.UiLanguageDirection;
+import org.martus.swing.UiLanguageDirection;
 import org.martus.util.StringInputStream;
 import org.martus.util.TestCaseEnhanced;
 import org.martus.util.UnicodeStringWriter;

@@ -27,8 +27,6 @@ package org.martus.client.swingui.fields;
 
 import java.awt.Color;
 import java.awt.Component;
-import java.awt.ComponentOrientation;
-
 import javax.swing.JComponent;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
@@ -36,7 +34,6 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableModel;
-
 import org.martus.client.swingui.UiScrollPane;
 import org.martus.common.GridFieldSpec;
 import org.martus.common.clientside.UiSingleTextField;
@@ -46,17 +43,16 @@ import org.martus.swing.UiTable;
 public class UiGrid extends UiField
 {
 
-	public UiGrid(GridFieldSpec fieldSpec, ComponentOrientation orientationToUse)
+	public UiGrid(GridFieldSpec fieldSpec)
 	{
 		super();
-		orientation = orientationToUse;
 		model = new GridTableModel(fieldSpec);
 		table = new GridTable(model);
 		table.setColumnSelectionAllowed(false);
 		table.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
 		table.setShowGrid(true);
 		table.changeSelection(0, 1, false, false);		
-		widget = new UiScrollPane(table, orientation);
+		widget = new UiScrollPane(table);
 		
 	}	
 	
@@ -89,7 +85,7 @@ public class UiGrid extends UiField
 	{
 		public Component getTableCellRendererComponent(JTable tableToUse, Object value, boolean isSelected, boolean hasFocus, int row, int column)
 		{
-			UiSingleTextField cell = new UiSingleTextField((String)value, orientation);
+			UiSingleTextField cell = new UiSingleTextField((String)value);
 			cell.setBorder(new EmptyBorder(0,0,0,0));
 			if(column == 0)
 			{
@@ -144,5 +140,4 @@ public class UiGrid extends UiField
 	UiScrollPane widget;
 	UiTable table;
 	GridTableModel model;
-	ComponentOrientation orientation;
 }

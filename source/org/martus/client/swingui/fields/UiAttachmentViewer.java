@@ -49,7 +49,6 @@ import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.UiScrollPane;
 import org.martus.common.bulletin.AttachmentProxy;
 import org.martus.common.bulletin.BulletinSaver;
-import org.martus.common.clientside.UiLanguageDirection;
 import org.martus.common.database.Database;
 import org.martus.swing.ParagraphLayout;
 import org.martus.swing.UiFileChooser;
@@ -75,7 +74,7 @@ public class UiAttachmentViewer extends JPanel  implements DragGestureListener, 
 		Box vbox = Box.createVerticalBox();
 		UiLocalization localization = mainWindowToUse.getLocalization();
 
-		attachmentPane = new UiScrollPane(attachmentTable, UiScrollPane.VERTICAL_SCROLLBAR_NEVER, UiScrollPane.HORIZONTAL_SCROLLBAR_NEVER, UiLanguageDirection.getComponentOrientation());
+		attachmentPane = new UiScrollPane(attachmentTable, UiScrollPane.VERTICAL_SCROLLBAR_NEVER, UiScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 		vbox.add(attachmentPane);
 
 		saveButton = new JButton(localization.getButtonLabel("saveattachment"));

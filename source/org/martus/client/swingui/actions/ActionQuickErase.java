@@ -39,7 +39,6 @@ import javax.swing.border.LineBorder;
 import org.martus.client.core.MartusApp;
 import org.martus.client.swingui.UiLocalization;
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.common.clientside.UiLanguageDirection;
 import org.martus.swing.UiWrappedTextArea;
 import org.martus.swing.Utilities;
 
@@ -174,7 +173,7 @@ public abstract class ActionQuickErase extends UiMenuAction
 			warningMessage += localization.getFieldLabel("QuickEraseWillExitMartus");
 			vBox.add(new JLabel(" "));
 			
-			UiWrappedTextArea text = new UiWrappedTextArea(warningMessage, UiLanguageDirection.getComponentOrientation());
+			UiWrappedTextArea text = new UiWrappedTextArea(warningMessage);
 			text.setBackground(Color.WHITE);
 			text.setForeground(Color.BLACK);
 			text.setEditable(false);

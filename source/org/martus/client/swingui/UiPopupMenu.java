@@ -28,7 +28,7 @@ package org.martus.client.swingui;
 import javax.swing.AbstractAction;
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
-import org.martus.common.clientside.UiLanguageDirection;
+import org.martus.swing.UiLanguageDirection;
 
 
 public class UiPopupMenu extends JPopupMenu

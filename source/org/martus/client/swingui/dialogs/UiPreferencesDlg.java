@@ -41,8 +41,8 @@ import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.fields.UiChoiceEditor;
 import org.martus.common.clientside.DateUtilities;
 import org.martus.common.clientside.UiBasicLocalization;
-import org.martus.common.clientside.UiLanguageDirection;
 import org.martus.swing.ParagraphLayout;
+import org.martus.swing.UiLanguageDirection;
 import org.martus.swing.Utilities;
 
 

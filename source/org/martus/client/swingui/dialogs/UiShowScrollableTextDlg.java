@@ -45,7 +45,6 @@ import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.UiScrollPane;
 import org.martus.common.clientside.Localization;
 import org.martus.common.clientside.UiBasicLocalization;
-import org.martus.common.clientside.UiLanguageDirection;
 import org.martus.swing.UiWrappedTextArea;
 import org.martus.swing.Utilities;
 import org.martus.util.TokenReplacement;
@@ -81,11 +80,11 @@ public class UiShowScrollableTextDlg extends JDialog implements ActionListener
 				cancel.addActionListener(this);
 			}
 			
-			details = new UiWrappedTextArea(TokenReplacement.replaceTokens(text, tokenReplacement), 85, UiLanguageDirection.getComponentOrientation());
+			details = new UiWrappedTextArea(TokenReplacement.replaceTokens(text, tokenReplacement), 85);
 			Rectangle rect = details.getVisibleRect();
 			details.setEditable(false);
 			UiScrollPane detailScrollPane = new UiScrollPane(details, UiScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
-					UiScrollPane.HORIZONTAL_SCROLLBAR_NEVER, UiLanguageDirection.getComponentOrientation());
+					UiScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 			detailScrollPane.setPreferredSize(new Dimension(rect.x, 400));		
 
 			JPanel panel = new JPanel();
@@ -97,7 +96,7 @@ public class UiShowScrollableTextDlg extends JDialog implements ActionListener
 				String fieldLabel = localization.getFieldLabel(descriptionTag);
 				fieldLabel = TokenReplacement.replaceTokens(fieldLabel, tokenReplacement);
 				panel.add(new JLabel(" "));
-				panel.add(new UiWrappedTextArea(fieldLabel, UiLanguageDirection.getComponentOrientation()));
+				panel.add(new UiWrappedTextArea(fieldLabel));
 			}
 			panel.add(new JLabel(" "));
 			panel.add(detailScrollPane);

@@ -40,13 +40,12 @@ import org.martus.client.swingui.UiLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.UiPopupMenu;
 import org.martus.client.swingui.UiScrollPane;
-import org.martus.common.clientside.UiLanguageDirection;
 
 public class UiFolderTreePane extends UiScrollPane
 {
 	public UiFolderTreePane(UiMainWindow mainWindow)
 	{
-		super(UiLanguageDirection.getComponentOrientation());
+		super();
 		parent = mainWindow;
 		localization = mainWindow.getLocalization();
 		store = parent.getStore();

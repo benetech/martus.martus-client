@@ -43,8 +43,8 @@ import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.UiWarningLabel;
 import org.martus.client.swingui.fields.UiField;
 import org.martus.common.FieldSpec;
-import org.martus.common.clientside.UiLanguageDirection;
 import org.martus.swing.ParagraphLayout;
+import org.martus.swing.UiLanguageDirection;
 
 abstract public class UiBulletinComponentSection extends JPanel
 {

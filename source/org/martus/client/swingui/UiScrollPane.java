@@ -26,30 +26,30 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.swingui;
 
 import java.awt.Component;
-import java.awt.ComponentOrientation;
 import javax.swing.JScrollPane;
+import org.martus.swing.UiLanguageDirection;
 
 
 public class UiScrollPane extends JScrollPane
 {
-	public UiScrollPane(ComponentOrientation orientation)
+	public UiScrollPane()
 	{
-		this(null, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED, orientation);
+		this(null, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 	}
 	
-	public UiScrollPane(Component view, ComponentOrientation orientation)
+	public UiScrollPane(Component view)
 	{
-		this(view, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED, orientation);
+		this(view, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 	}
 
-	public UiScrollPane(int vsbPolicy, int hsbPolicy, ComponentOrientation orientation)
+	public UiScrollPane(int vsbPolicy, int hsbPolicy)
 	{
-		this(null, vsbPolicy, hsbPolicy, orientation);
+		this(null, vsbPolicy, hsbPolicy);
 	}
 
-	public UiScrollPane(Component view, int vsbPolicy, int hsbPolicy, ComponentOrientation orientation)
+	public UiScrollPane(Component view, int vsbPolicy, int hsbPolicy)
 	{
 		super(view, vsbPolicy, hsbPolicy);
-		setComponentOrientation(orientation);
+		setComponentOrientation(UiLanguageDirection.getComponentOrientation());
 	}
 }

@@ -26,7 +26,6 @@ Boston, MA 02111-1307, USA.
 
 package org.martus.client.swingui.dialogs;
 
-import java.awt.ComponentOrientation;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -45,7 +44,6 @@ import org.martus.client.core.MartusApp;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.UiScrollPane;
 import org.martus.common.clientside.UiBasicLocalization;
-import org.martus.common.clientside.UiLanguageDirection;
 import org.martus.swing.ParagraphLayout;
 import org.martus.swing.UiNotifyDlg;
 import org.martus.swing.UiTextArea;
@@ -73,12 +71,11 @@ public class UiTemplateDlg extends JDialog implements ActionListener
 		help.addActionListener(new helpHandler());
 		JButton loadFromFile = new JButton(localization.getButtonLabel("ResetContents"));
 		loadFromFile.addActionListener(new loadFileHandler());
-		ComponentOrientation orientation = UiLanguageDirection.getComponentOrientation();
-		details = new UiTextArea(15, 65, orientation);
+		details = new UiTextArea(15, 65);
 		details.setLineWrap(true);
 		details.setWrapStyleWord(true);
 		UiScrollPane detailScrollPane = new UiScrollPane(details, UiScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
-				UiScrollPane.HORIZONTAL_SCROLLBAR_NEVER, orientation);
+				UiScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 
 		details.setText(info.getTemplateDetails());
 		
@@ -122,7 +119,7 @@ public class UiTemplateDlg extends JDialog implements ActionListener
 			String[] contents = {helpMsg, "", "",helpMsgExample, helpMsgExample1, "", helpMsgExample2, "", helpMsgExampleEtc};
 			String[] buttons = {ok};
 
-			new UiNotifyDlg(mainWindow, title, contents, buttons, UiLanguageDirection.getComponentOrientation());
+			new UiNotifyDlg(mainWindow, title, contents, buttons);
 		}
 	}
 

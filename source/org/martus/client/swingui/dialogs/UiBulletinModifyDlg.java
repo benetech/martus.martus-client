@@ -53,7 +53,6 @@ import org.martus.client.swingui.fields.UiDateEditor;
 import org.martus.client.swingui.fields.UiFlexiDateEditor;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.clientside.UiBasicLocalization;
-import org.martus.common.clientside.UiLanguageDirection;
 import org.martus.common.crypto.MartusCrypto.CryptoException;
 import org.martus.common.crypto.MartusCrypto.EncryptionException;
 import org.martus.swing.Utilities;
@@ -84,7 +83,7 @@ public class UiBulletinModifyDlg extends JFrame implements ActionListener, Windo
 			cancel = new JButton(localization.getButtonLabel("cancel"));
 			cancel.addActionListener(this);
 
-			scroller = new UiScrollPane(UiLanguageDirection.getComponentOrientation());
+			scroller = new UiScrollPane();
 			scroller.getVerticalScrollBar().setFocusable(false);
 			scroller.getViewport().add(view);
 			scroller.getViewport().setScrollMode(JViewport.SIMPLE_SCROLL_MODE);

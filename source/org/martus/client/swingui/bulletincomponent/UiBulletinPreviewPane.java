@@ -34,13 +34,12 @@ import javax.swing.JViewport;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.UiScrollPane;
 import org.martus.common.bulletin.Bulletin;
-import org.martus.common.clientside.UiLanguageDirection;
 
 public class UiBulletinPreviewPane extends UiScrollPane
 {
     public UiBulletinPreviewPane(UiMainWindow mainWindow)
 	{
-    	super(UiLanguageDirection.getComponentOrientation());
+    	super();
 		
     	view = new UiBulletinView(mainWindow);
 		getViewport().setScrollMode(JViewport.SIMPLE_SCROLL_MODE);

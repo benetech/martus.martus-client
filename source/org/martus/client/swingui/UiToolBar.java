@@ -30,7 +30,7 @@ import javax.swing.AbstractAction;
 import javax.swing.JToolBar;
 
 import org.martus.client.swingui.actions.UiActions;
-import org.martus.common.clientside.UiLanguageDirection;
+import org.martus.swing.UiLanguageDirection;
 
 public class UiToolBar extends JToolBar
 {

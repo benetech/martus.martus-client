@@ -42,7 +42,6 @@ import org.martus.client.swingui.UiScrollPane;
 import org.martus.client.swingui.bulletincomponent.UiBulletinComponentViewSection;
 import org.martus.common.FieldSpec;
 import org.martus.common.StandardFieldSpecs;
-import org.martus.common.clientside.UiLanguageDirection;
 import org.martus.common.packet.FieldDataPacket;
 import org.martus.swing.Utilities;
 
@@ -64,7 +63,7 @@ public class UiBulletinPreviewDlg extends JDialog implements ActionListener
 		view.attachmentViewer.viewButton.setVisible(false);
 
 		view.updateEncryptedIndicator(fdp.isEncrypted());		
-		UiScrollPane scrollPane = new UiScrollPane(UiLanguageDirection.getComponentOrientation());
+		UiScrollPane scrollPane = new UiScrollPane();
 		scrollPane.getViewport().setScrollMode(JViewport.SIMPLE_SCROLL_MODE);
 		scrollPane.getViewport().add(view);		
 

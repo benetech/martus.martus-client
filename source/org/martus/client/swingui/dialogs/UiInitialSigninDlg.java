@@ -70,7 +70,7 @@ public class UiInitialSigninDlg extends UiSigninDlg
 		if(currentMode == INITIAL_NEW_RECOVER_ACCOUNT)
 			message = "HowToCreateInitialAccount";
 		String text = localization.getFieldLabel(message);
-		return new UiWrappedTextArea("\n" + text, UiLanguageDirection.getComponentOrientation());
+		return new UiWrappedTextArea("\n" + text);
 	}
 	
 	JPanel createRecoverAccountPanel()

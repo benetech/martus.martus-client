@@ -49,7 +49,6 @@ import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.UiScrollPane;
 import org.martus.common.bulletin.AttachmentProxy;
 import org.martus.common.clientside.UiBasicLocalization;
-import org.martus.common.clientside.UiLanguageDirection;
 import org.martus.swing.ParagraphLayout;
 import org.martus.swing.UiFileChooser;
 import org.martus.swing.UiTable;
@@ -77,7 +76,7 @@ public class UiAttachmentEditor extends JPanel
 		Box vbox = Box.createVerticalBox();
 
 		UiBasicLocalization localization = mainWindowToUse.getLocalization();
-		UiScrollPane scrollPane = new UiScrollPane(attachmentTable, UiLanguageDirection.getComponentOrientation());
+		UiScrollPane scrollPane = new UiScrollPane(attachmentTable);
 		scrollPane.getHorizontalScrollBar().setFocusable(false);
 		scrollPane.getVerticalScrollBar().setFocusable(false);
 		vbox.add(scrollPane);
