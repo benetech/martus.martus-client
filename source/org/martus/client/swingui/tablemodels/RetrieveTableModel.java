@@ -284,9 +284,11 @@ abstract public class RetrieveTableModel extends AbstractTableModel
 	}
 
 
-	Object getSizeInKbytes(int sizeKb)
+	public static Object getSizeInKbytes(int sizeKb)
 	{
 		sizeKb /= 1000;
+		if(sizeKb <= 0)
+			sizeKb = 1;
 		Integer sizeInK = new Integer(sizeKb);
 		return sizeInK;
 	}

@@ -50,6 +50,8 @@ public abstract class RetrieveTableModelHQ extends RetrieveTableModel {
 				return getLocalization().getFieldLabel(Bulletin.TAGAUTHOR);
 			case 3:
 				return getLocalization().getFieldLabel("BulletinSize");
+			case 4:
+				return getLocalization().getFieldLabel("BulletinDateSaved");
 			default:
 				return "";
 		}
@@ -57,7 +59,7 @@ public abstract class RetrieveTableModelHQ extends RetrieveTableModel {
 
 	public int getColumnCount()
 	{
-		return 4;
+		return 5;
 	}
 
 	public Object getValueAt(int row, int column)
@@ -72,7 +74,9 @@ public abstract class RetrieveTableModelHQ extends RetrieveTableModel {
 			case 2:
 				return summary.getAuthor();
 			case 3:
-				return getSizeInKbytes(summary.getSize());
+				return  getSizeInKbytes(summary.getSize());
+			case 4:
+				return getLocalization().convertStoredDateTimeToDisplay(summary.getDateTimeSaved());
 			default:
 				return "";
 		}
@@ -100,6 +104,8 @@ public abstract class RetrieveTableModelHQ extends RetrieveTableModel {
 				return String.class;
 			case 3:
 				return Integer.class;
+			case 4:
+				return String.class;
 			default:
 				return null;
 		}

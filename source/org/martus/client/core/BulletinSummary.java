@@ -27,12 +27,16 @@ Boston, MA 02111-1307, USA.
 
 package org.martus.client.core;
 
+import java.text.DateFormat;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.packet.FieldDataPacket;
 
 public class BulletinSummary
 {
-	public BulletinSummary(String accountIdToUse, String localIdToUse, FieldDataPacket fdpToUse, int sizeToUse)
+	public BulletinSummary(String accountIdToUse, String localIdToUse, FieldDataPacket fdpToUse, int sizeToUse, String dateSavedToUse)
 	{
 		accountId = accountIdToUse;
 		localId = localIdToUse;
@@ -40,6 +44,7 @@ public class BulletinSummary
 		title = fdpToUse.get(Bulletin.TAGTITLE);
 		author = fdpToUse.get(Bulletin.TAGAUTHOR);
 		fdp = fdpToUse;
+		dateTimeSaved = dateSavedToUse; 
 	}
 
 	public void setChecked(boolean newValue)
@@ -72,6 +77,22 @@ public class BulletinSummary
 	{
 		return author;
 	}
+	
+	
+	public String getDateTimeSaved()
+	{
+		String dateToConvert = dateTimeSaved;
+		return getLastDateTimeSaved(dateToConvert);
+	}
+
+	static public String getLastDateTimeSaved(String dateToConvert)
+	{
+		if(dateToConvert.length() == 0)
+			return "";
+		Calendar cal = new GregorianCalendar();
+		cal.setTimeInMillis(Long.parseLong(dateToConvert));		
+		return DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT).format(cal.getTime());
+	}
 
 	public boolean isDownloadable()
 	{
@@ -98,6 +119,7 @@ public class BulletinSummary
 	String localId;
 	String title;
 	String author;
+	String dateTimeSaved;
 	int size;
 	boolean checkedFlag;
 	boolean downloadable;

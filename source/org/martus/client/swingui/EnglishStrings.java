@@ -454,6 +454,7 @@ public class EnglishStrings
 "field:ServerNotConfiguredProgressMessage=Server needs to be configured.",
 "field:UploadFailedProgressMessage=Upload Failed",
 "field:BulletinSize=Size (Kb)",
+"field:BulletinDateSaved=Date Saved",
 "field:ChunkProgressStatusMessage=Download Progress",
 "field:RetrieveMySealedBulletinSummaries=Retrieving My Sealed Bulletin Summaries",
 "field:RetrieveMyDraftBulletinSummaries=Retrieving My Draft Bulletin Summaries",
@@ -757,6 +758,7 @@ public class EnglishStrings
 "field:DateRangeTo=and",
 "field:DateExact=Exact Date",
 "field:DateRange=Date Range",
+"field:UnknownDateSave=Unknown",
 
 "field:WasSentYes=Yes",
 "field:WasSentNo=No",

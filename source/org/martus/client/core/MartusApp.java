@@ -985,11 +985,14 @@ public class MartusApp
 	{
 		FieldDataPacket fdp = null;
 		String args[] = parameters.split(MartusConstants.regexEqualsDelimeter, -1);
-		if(args.length != 3)
+		if(args.length < 3)
 			throw new ServerErrorException("MartusApp.retrieveSummaryFromString invalid # params: " + parameters);
 		String bulletinLocalId= args[0];
 		String packetlocalId = args[1];
 		int size = Integer.parseInt(args[2]);
+		String date = "";
+		if(args.length > 3)
+			date = args[3];
 
 		if(!FieldDataPacket.isValidLocalId(packetlocalId))
 			throw new ServerErrorException();
@@ -1010,7 +1013,7 @@ public class MartusApp
 			//e.printStackTrace();
 			throw new ServerErrorException();
 		}
-		BulletinSummary bulletinSummary = new BulletinSummary(accountId, bulletinLocalId, fdp, size);
+		BulletinSummary bulletinSummary = new BulletinSummary(accountId, bulletinLocalId, fdp, size, date);
 		return bulletinSummary;
 	}
 

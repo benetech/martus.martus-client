@@ -49,14 +49,17 @@ abstract public class RetrieveTableModelNonHQ extends RetrieveTableModel {
 		case 1:
 			return getLocalization().getFieldLabel(Bulletin.TAGTITLE);
 		case 2:
-		default:
 			return getLocalization().getFieldLabel("BulletinSize");
+		case 3:
+			return getLocalization().getFieldLabel("BulletinDateSaved");
+		default:
+			return "";
 		}
 	}
 
 	public int getColumnCount()
 	{
-		return 3;
+		return 4;
 	}
 
 	public Object getValueAt(int row, int column)
@@ -69,7 +72,9 @@ abstract public class RetrieveTableModelNonHQ extends RetrieveTableModel {
 		case 1:
 			return summary.getTitle();
 		case 2:
-				return getSizeInKbytes(summary.getSize());
+			return getSizeInKbytes(summary.getSize());
+		case 3:
+			return getLocalization().convertStoredDateTimeToDisplay(summary.getDateTimeSaved());
 		default:
 			return "";
 		}
@@ -92,6 +97,8 @@ abstract public class RetrieveTableModelNonHQ extends RetrieveTableModel {
 			return String.class;
 		case 2:
 			return Integer.class;
+		case 3:
+			return String.class;
 		default:
 			return null;
 		}
