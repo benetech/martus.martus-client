@@ -164,7 +164,7 @@ public class TestBulletinFolder extends TestCaseEnhanced
 		assertEquals(count, scratchFolder.getBulletinCount());
 		assertEquals(0, folder.getBulletinCount());
 
-		Vector v = store.getAllBulletinUids();
+		Vector v = store.getAllBulletinLeafUids();
 		UniversalId uid0 = (UniversalId)v.get(0);
 		b = store.getBulletinRevision(uid0);
 		folder.add(b);

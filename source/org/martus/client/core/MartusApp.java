@@ -915,7 +915,7 @@ public class MartusApp
 		BulletinFolder searchFolder = createOrFindFolder(store.getSearchFolderName());
 		searchFolder.removeAll();
 
-		Vector uids = store.getAllBulletinUids();
+		Vector uids = store.getAllBulletinLeafUids();
 		for(int i = 0; i < uids.size(); ++i)
 		{
 			UniversalId uid = (UniversalId)uids.get(i);

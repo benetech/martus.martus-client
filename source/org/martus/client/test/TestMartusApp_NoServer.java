@@ -1335,7 +1335,7 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		assertNull("Search results already exists?", store.findFolder(store.getSearchFolderName()));
 
 		appWithAccount.loadSampleData(); //SLOW!!!
-		Bulletin b = store.getBulletinRevision((UniversalId)store.getAllBulletinUids().get(0));
+		Bulletin b = store.getBulletinRevision((UniversalId)store.getAllBulletinLeafUids().get(0));
 		String andKeyword = "and";
 		String orKeyword = "or";
 		appWithAccount.search(b.get("title"), startDate, endDate, andKeyword, orKeyword);

@@ -157,7 +157,7 @@ public class ClientBulletinStore extends BulletinStore
 
 	public Set getSetOfOrphanedBulletinUniversalIds()
 	{
-		Set possibleOrphans = new HashSet(getAllBulletinUids());
+		Set possibleOrphans = new HashSet(getAllBulletinLeafUids());
 		Set inFolders = getSetOfBulletinUniversalIdsInFolders();
 		possibleOrphans.removeAll(inFolders);
 		return possibleOrphans;
@@ -915,19 +915,13 @@ public class ClientBulletinStore extends BulletinStore
 		}
 	}
 	
-	public boolean isLeaf(Bulletin b)
-	{
-		Vector bulletinUidsInSystem  = getAllBulletinUids();
-		return bulletinUidsInSystem.contains(b.getUniversalId());
-	}
-
 	public synchronized void addBulletinToFolder(BulletinFolder folder, UniversalId uidToAdd) throws BulletinAlreadyExistsException, IOException, BulletinOlderException
 	{
 		Bulletin b = getBulletinRevision(uidToAdd);
 		if(b == null)
 			return;
 		
-		if(folder.isVisible() && !isLeaf(b))
+		if(folder.isVisible() && !isLeaf(uidToAdd))
 			throw new BulletinOlderException();
 		
 		folder.add(uidToAdd);
@@ -970,7 +964,7 @@ public class ClientBulletinStore extends BulletinStore
 				System.out.println("Migration Error: Unable to find bulletin: "+bId);
 				continue;
 			}
-			if(!isLeaf(b))
+			if(!isLeaf(b.getUniversalId()))
 			{
 				for(Iterator f = visibleFolders.iterator(); f.hasNext();)
 				{
