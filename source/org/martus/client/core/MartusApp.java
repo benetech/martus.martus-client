@@ -1017,43 +1017,6 @@ public class MartusApp
 		throw new ServerErrorException(resultCode);
 	}
 
-	public BulletinSummary retrieveSummaryFromString(String accountId, String parameters)
-		throws ServerErrorException
-	{
-		FieldDataPacket fdp = null;
-		String args[] = parameters.split(MartusConstants.regexEqualsDelimeter, -1);
-		if(args.length < 3)
-			throw new ServerErrorException("MartusApp.retrieveSummaryFromString invalid # params: " + parameters);
-		String bulletinLocalId= args[0];
-		String packetlocalId = args[1];
-		int size = Integer.parseInt(args[2]);
-		String date = "";
-		if(args.length > 3)
-			date = args[3];
-
-		if(!FieldDataPacket.isValidLocalId(packetlocalId))
-			throw new ServerErrorException();
-
-		UniversalId uId = UniversalId.createFromAccountAndLocalId(accountId, bulletinLocalId);
-		Bulletin bulletin = store.findBulletinByUniversalId(uId);
-		if (bulletin != null)
-			fdp = bulletin.getFieldDataPacket();
-
-		try
-		{
-			if(fdp == null)
-				fdp = retrieveFieldDataPacketFromServer(accountId, bulletinLocalId, packetlocalId);
-		}
-		catch(Exception e)
-		{
-			//System.out.println("MartusApp.retrieveSummaryFromString Exception: bulletinLocalId=" + bulletinLocalId + " packetlocalId=" + packetlocalId );
-			//e.printStackTrace();
-			throw new ServerErrorException();
-		}
-		BulletinSummary bulletinSummary = new BulletinSummary(accountId, bulletinLocalId, fdp, size, date);
-		return bulletinSummary;
-	}
-
 	public Vector downloadFieldOfficeAccountIds() throws ServerErrorException
 	{
 		if(!isSSLServerAvailable())
@@ -1090,6 +1053,43 @@ public class MartusApp
 		fdp.loadFromXml(in, getSecurity());
 		return fdp;
 	}
+
+	public BulletinSummary retrieveSummaryFromString(String accountId, String parameters)
+		throws ServerErrorException
+	{
+		FieldDataPacket fdp = null;
+		String args[] = parameters.split(MartusConstants.regexEqualsDelimeter, -1);
+		if(args.length < 3)
+			throw new ServerErrorException("MartusApp.retrieveSummaryFromString invalid # params: " + parameters);
+		String bulletinLocalId= args[0];
+		String packetlocalId = args[1];
+		int size = Integer.parseInt(args[2]);
+		String date = "";
+		if(args.length > 3)
+			date = args[3];
+	
+		if(!FieldDataPacket.isValidLocalId(packetlocalId))
+			throw new ServerErrorException();
+	
+		UniversalId uId = UniversalId.createFromAccountAndLocalId(accountId, bulletinLocalId);
+		Bulletin bulletin = store.findBulletinByUniversalId(uId);
+		if (bulletin != null)
+			fdp = bulletin.getFieldDataPacket();
+	
+		try
+		{
+			if(fdp == null)
+				fdp = retrieveFieldDataPacketFromServer(accountId, bulletinLocalId, packetlocalId);
+		}
+		catch(Exception e)
+		{
+			//System.out.println("MartusApp.retrieveSummaryFromString Exception: bulletinLocalId=" + bulletinLocalId + " packetlocalId=" + packetlocalId );
+			//e.printStackTrace();
+			throw new ServerErrorException();
+		}
+		BulletinSummary bulletinSummary = new BulletinSummary(accountId, bulletinLocalId, fdp, size, date);
+		return bulletinSummary;
+}
 
 	public void retrieveOneBulletinToFolder(UniversalId uid, BulletinFolder retrievedFolder, ProgressMeterInterface progressMeter) throws
 		Exception
