@@ -67,6 +67,7 @@ import org.martus.common.clientside.ClientSideNetworkHandlerUsingXmlRpcForNonSSL
 import org.martus.common.clientside.CurrentUiState;
 import org.martus.common.clientside.DateUtilities;
 import org.martus.common.clientside.Localization;
+import org.martus.common.clientside.ServerUtilities;
 import org.martus.common.clientside.Exceptions.ServerCallFailedException;
 import org.martus.common.clientside.Exceptions.ServerNotAvailableException;
 import org.martus.common.crypto.MartusCrypto;
@@ -82,7 +83,6 @@ import org.martus.common.network.NetworkResponse;
 import org.martus.common.packet.FieldDataPacket;
 import org.martus.common.packet.UniversalId;
 import org.martus.common.packet.Packet.WrongAccountException;
-import org.martus.common.utilities.MartusServerUtilities;
 import org.martus.util.Base64;
 import org.martus.util.ByteArrayInputStreamWithSeek;
 import org.martus.util.DirectoryUtils;
@@ -862,7 +862,7 @@ public class MartusApp
 		ServerNotAvailableException,
 		PublicInformationInvalidException
 	{
-		return MartusServerUtilities.getServerPublicKey(server, getSecurity());
+		return ServerUtilities.getServerPublicKey(server, getSecurity());
 	}
 
 	public boolean requestServerUploadRights(String magicWord)
@@ -981,19 +981,11 @@ public class MartusApp
 		if(!isSSLServerAvailable())
 			throw new ServerErrorException();
 
-		try
-		{
-			NetworkResponse response = getCurrentNetworkInterfaceGateway().getFieldOfficeAccountIds(getSecurity(), getAccountId());
-			String resultCode = response.getResultCode();
-			if(!resultCode.equals(NetworkInterfaceConstants.OK))
-				throw new ServerErrorException(resultCode);
-			return response.getResultVector();
-		}
-		catch(MartusCrypto.MartusSignatureException e)
-		{
-			System.out.println("MartusApp.getFieldOfficeAccounts: " + e);
-			throw new ServerErrorException();
-		}
+		ClientSideNetworkGateway networkInterfaceGateway = getCurrentNetworkInterfaceGateway();
+		MartusCrypto security = getSecurity();
+		String myAccountId = getAccountId();
+
+		return ServerUtilities.downloadFieldOfficeAccountIds(networkInterfaceGateway, security, myAccountId);
 	}
 
 	public FieldDataPacket retrieveFieldDataPacketFromServer(String authorAccountId, String bulletinLocalId, String dataPacketLocalId) throws Exception
