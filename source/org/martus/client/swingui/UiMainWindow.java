@@ -528,10 +528,6 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		toolBar.actionEdit.setEnabled(b != null);
 		toolBar.actionPrint.setEnabled(b != null);
 		preview.setCurrentBulletin(b);
-		if(b == null)
-			statusBar.setBulletinId("");
-		else
-			statusBar.setBulletinId(b.getLocalId());
 	}
 
 	public void bulletinContentsHaveChanged(Bulletin b)
