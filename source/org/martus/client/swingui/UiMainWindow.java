@@ -493,7 +493,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		{
 			complianceStatementAlwaysEnglish =
 			BEGIN_HTML_TAGS +
-			"Martus™<br></br>" +
+			"Martus?<br></br>" +
 			productDescription +
 			END_HTML_TAGS;
 		}
@@ -1201,6 +1201,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 					app.setServerInfo("","","");
 				return;
 			}
+			getStore().clearOnServerLists();
 			boolean magicAccepted = false;
 			app.setServerInfo(serverIPAddress, serverPublicKey, newServerCompliance);
 			if(app.requestServerUploadRights(""))
