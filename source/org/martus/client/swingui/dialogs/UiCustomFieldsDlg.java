@@ -53,7 +53,7 @@ public class UiCustomFieldsDlg extends JDialog
 		setTitle(localization.getWindowTitle("input" + baseTag));
 
 		UiWrappedTextArea label = new UiWrappedTextArea(localization.getFieldLabel("input" + baseTag + "entry"));
-		text = new UiTextArea(15, 60);
+		text = new UiTextArea(15, 80);
 		text.setText(xmlFieldSpecs);
 		text.setLineWrap(true);
 		text.setWrapStyleWord(true);
@@ -71,7 +71,7 @@ public class UiCustomFieldsDlg extends JDialog
 		getContentPane().add(new JLabel(""), ParagraphLayout.NEW_PARAGRAPH);
 		getContentPane().add(label);
 		getContentPane().add(new JLabel(""), ParagraphLayout.NEW_PARAGRAPH);
-		getContentPane().add(text);
+		getContentPane().add(textPane);
 		getContentPane().add(new JLabel(""), ParagraphLayout.NEW_PARAGRAPH);
 		getContentPane().add(ok);
 		getContentPane().add(cancel);
