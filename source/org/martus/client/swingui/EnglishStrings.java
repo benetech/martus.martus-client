@@ -689,8 +689,8 @@ public class EnglishStrings
 
 "field:notifyErrorRenameFoldercause=Folder names cannot contain punctuation.  They also cannot begin with a space.",
 
-"field:ViewViewBulletinDetailsHQList=The following headquarter account(s) can view the private information in this bulletin, and can send this bulletin to a server:\n\n#L#",
-"field:ModifyViewBulletinDetailsHQList=The following headquarter account(s) will be able to view the private information in this bulletin, or send this bulletin to a server, after you save it:\n\n#L#\n\nTo add or remove an account, use the Tools/Configure Headquarters menu option.",
+"field:ViewViewBulletinDetailsHQList=The following Headquarter account(s) can view the private information in this bulletin, and can send this bulletin to a server:\n\n#L#",
+"field:ModifyViewBulletinDetailsHQList=The following Headquarter account(s) will be able to view the private information in this bulletin, or send this bulletin to a server, after you save it:\n\n#L#\n\nTo add or remove an account, use the Tools/Configure Headquarters menu option.",
 
 "field:messageServerNewscause=The current server has sent this message:",
 "field:messageErrorDateInFuturecause=This date occurs in the future:",
@@ -785,8 +785,8 @@ public class EnglishStrings
 "field:WasSentNo=No",
 
 "field:BulletinViewHeading=Martus Bulletin",
-"field:ViewBulletinHQInfo=#N# headquarter account(s) can view this private information",
-"field:ModifyBulletinHQInfo=#N# headquarter account(s) will be able to view this private information",
+"field:ViewBulletinHQInfo=#N# Headquarter account(s) can view this private information",
+"field:ModifyBulletinHQInfo=#N# Headquarter account(s) will be able to view this private information",
 "field:RemoveMartusFromSystemWarning=WARNING!",
 "field:RemoveMartusFromSystemMultipleAccountsWarning1=IMPORTANT: There are other Martus accounts on this system.",
 "field:RemoveMartusFromSystemMultipleAccountsWarning2=All of their data will be removed as well!",
