@@ -87,32 +87,10 @@ abstract public class UiBulletinComponent extends JPanel implements Scrollable, 
 		privateStuff.matchFirstColumnWidth(publicStuff);
 	}
 
-	public UiMainWindow getMainWindow()
-	{
-		return mainWindow;
-	}
-
 	public Bulletin getCurrentBulletin()
 	{
 		return currentBulletin;
 	}
-
-	public void copyDataToBulletin(Bulletin bulletin) throws
-			IOException,
-			MartusCrypto.EncryptionException
-	{
-	}		
-
-	public void validateData() throws UiField.DataInvalidException 
-	{
-	}
-	
-	public boolean isBulletinModified() throws
-			IOException,
-			MartusCrypto.EncryptionException
-	{				
-		return false;
-	}	
 
 	public void copyDataFromBulletin(Bulletin bulletinToShow) throws IOException
 	{
@@ -170,13 +148,16 @@ abstract public class UiBulletinComponent extends JPanel implements Scrollable, 
 
 	public void updateEncryptedIndicator(boolean isEncrypted)
 	{
-		if(publicStuff == null)
-			return;
-			
-		publicStuff.updateEncryptedIndicator(isEncrypted);
-		publicStuff.updateSectionBorder(isEncrypted);
-
-		privateStuff.updateSectionBorder(true);
+		if(publicStuff != null)
+		{
+			publicStuff.updateEncryptedIndicator(isEncrypted);
+			publicStuff.updateSectionBorder(isEncrypted);
+		}
+		
+		if(privateStuff != null)
+		{
+			privateStuff.updateSectionBorder(true);
+		}
 	}
 
 	public void setEncryptionChangeListener(EncryptionChangeListener listener)
@@ -244,4 +225,9 @@ abstract public class UiBulletinComponent extends JPanel implements Scrollable, 
 	private static final int ALWAYS_ENCRYPTED = 2;
 
 	abstract public UiBulletinComponentSection createBulletinComponentSection();
+	abstract public void copyDataToBulletin(Bulletin bulletin) throws
+			IOException, MartusCrypto.EncryptionException;
+	abstract public void validateData() throws UiField.DataInvalidException; 
+	abstract public boolean isBulletinModified() throws
+			IOException, MartusCrypto.EncryptionException;
 }
