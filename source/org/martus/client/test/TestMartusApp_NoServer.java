@@ -1456,30 +1456,6 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 
 	}
 
-	public void testShouldShowSealedUploadReminderOnExit() throws Exception
-	{
-		TRACE_BEGIN("testShouldShowSealedUploadReminderOnExit");
-		File file = appWithAccount.getUploadInfoFile();
-		file.delete();
-		BulletinStore store = appWithAccount.getStore();
-
-		store.deleteAllData();
-		BulletinFolder outbox = appWithAccount.getFolderSealedOutbox();
-		assertEquals("Outbox not empty on exit", 0, outbox.getBulletinCount());
-		assertEquals("No file and outbox empty on exit", false,
-			appWithAccount.shouldShowSealedUploadReminderOnExit());
-
-		Bulletin b = appWithAccount.createBulletin();
-		appWithAccount.getStore().saveBulletin(b);
-		store.addBulletinToFolder(b.getUniversalId(), outbox);
-		assertEquals("File got created somehow on exit?", false, file.exists());
-		assertEquals("Outbox empty on exit", 1, outbox.getBulletinCount());
-		assertEquals("No file and outbox contains data on exit", true,
-						appWithAccount.shouldShowSealedUploadReminderOnExit());
-
-		TRACE_END();
-	}
-
 	public void testRepairOrphans() throws Exception
 	{
 		assertEquals("already have orphans?", 0, appWithAccount.repairOrphans());

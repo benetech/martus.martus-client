@@ -633,25 +633,18 @@ public class MartusApp
 		return store.findBulletinInAllVisibleFolders(b);
 	}
 
-	public boolean shouldShowDraftUploadReminder()
+	public boolean isDraftOutboxEmpty()
 	{
 		if(getFolderDraftOutbox().getBulletinCount() == 0)
-			return false;
-		return true;
-	}
-
-	public boolean isSealedOutboxFolderEmpty()
-	{
-		if(getFolderSealedOutbox().getBulletinCount() == 0)
 			return true;
 		return false;
 	}
 
-	public boolean shouldShowSealedUploadReminderOnExit()
+	public boolean isSealedOutboxEmpty()
 	{
-		if(isSealedOutboxFolderEmpty())
-			return false;
-		return true;
+		if(getFolderSealedOutbox().getBulletinCount() == 0)
+			return true;
+		return false;
 	}
 
 	public BulletinFolder discardBulletinsFromFolder(BulletinFolder folderToDiscardFrom, Bulletin[] bulletinsToDiscard) throws IOException 

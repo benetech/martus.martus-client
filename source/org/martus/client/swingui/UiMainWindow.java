@@ -1800,14 +1800,14 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	private boolean doUploadReminderOnExit()
 	{
 		boolean dontExitApplication = false;
-		if(app.shouldShowSealedUploadReminderOnExit())
+		if(!app.isSealedOutboxEmpty())
 		{
 			if(confirmDlg("UploadReminder"))
 				app.resetLastUploadRemindedTime();
 			else
 				dontExitApplication = true;
 		}
-		else if(app.shouldShowDraftUploadReminder())
+		else if(!app.isDraftOutboxEmpty())
 		{
 			if(!confirmDlg("DraftUploadReminder"))
 				dontExitApplication = true;
