@@ -67,7 +67,6 @@ public class UiConfigureHQs extends JDialog
 		super(owner, "", true);
 		mainWindow = owner;
 		localization = mainWindow.getLocalization();
-		hQKeys = new HQKeys();
 		
 		setTitle(localization.getWindowTitle("ConfigureHQs"));
 		JPanel panel = new JPanel();
@@ -206,20 +205,11 @@ public class UiConfigureHQs extends JDialog
 				{
 					if(table.isRowSelected(i))
 					{
-						Object hQCodeToBeReNamed = table.getValueAt(i, model.COLUMN_PUBLIC_CODE);
-						for(int j = 0; j<hQKeys.size(); ++j)
-						{
-							HQKey thisKey = hQKeys.get(j);
-							if ( thisKey.getPublicCode().equals(hQCodeToBeReNamed))
-							{
-								String newLabel = getHQLabel(thisKey.getPublicCode(), thisKey.getLabel());
-								if(newLabel== null)
-									break;
-								thisKey.setLabel(newLabel);
-								model.setValueAt(newLabel, i, model.COLUMN_LABEL);
-								break;
-							}
-						}
+						HQKey thisKey = model.getHQKey(i);
+						String newLabel = getHQLabel(thisKey.getPublicCode(), thisKey.getLabel());
+						if(newLabel== null)
+							break;
+						model.setValueAt(newLabel, i, model.COLUMN_LABEL);
 					}
 				}
 				updateConfigInfo();
@@ -264,30 +254,12 @@ public class UiConfigureHQs extends JDialog
 				return;
 			
 			int rowCount = model.getRowCount();
-			try
+			for(int i = rowCount-1; i >=0 ; --i)
 			{
-				for(int i = rowCount-1; i >=0 ; --i)
-				{
-					if(table.isRowSelected(i))
-					{
-						Object hQCodeToBeRemoved = table.getValueAt(i,model.COLUMN_PUBLIC_CODE);
-						for(int j = 0; j<hQKeys.size(); ++j)
-						{
-							if (hQKeys.get(j).getPublicCode().equals(hQCodeToBeRemoved))
-							{
-								hQKeys.remove(j);
-								break;
-							}
-						}
-						model.removeRow(i);
-					}
-				}
-				updateConfigInfo();
+				if(table.isRowSelected(i))
+					model.removeRow(i);
 			}
-			catch (InvalidBase64Exception e)
-			{
-				e.printStackTrace();
-			}
+			updateConfigInfo();
 		}
 	}
 
@@ -306,7 +278,6 @@ public class UiConfigureHQs extends JDialog
 			}
 			HeadQuarterEntry entry = new HeadQuarterEntry(publicKey);
 			model.addNewHeadQuarterEntry(entry);
-			hQKeys.add(publicKey);
 		}
 		catch (InvalidBase64Exception e)
 		{
@@ -317,7 +288,7 @@ public class UiConfigureHQs extends JDialog
 	void updateConfigInfo()
 	{
 		enableDisableButtons();
-		mainWindow.setAndSaveHQKeysInConfigInfo(hQKeys);
+		mainWindow.setAndSaveHQKeysInConfigInfo(model.getAllKeys());
 	}
 	
 	public HQKey getPublicKey() throws Exception
@@ -357,6 +328,7 @@ public class UiConfigureHQs extends JDialog
 
 	private String getUniqueLabel(String publicCode, String label) 
 	{
+		HQKeys hQKeys = model.getAllKeys();
 		for(int i = 0; i < hQKeys.size(); ++i)
 		{
 			HQKey hqKey = hQKeys.get(i);
@@ -418,5 +390,4 @@ public class UiConfigureHQs extends JDialog
 	JButton renameLabel;
 	UiBasicLocalization localization;
 	private static final int DEFAULT_VIEABLE_ROWS = 5;
-	HQKeys hQKeys;
 }

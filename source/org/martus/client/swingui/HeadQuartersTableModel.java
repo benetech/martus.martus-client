@@ -31,6 +31,7 @@ import java.util.Vector;
 
 
 import org.martus.client.swingui.tablemodels.UiTableModel;
+import org.martus.common.HQKey;
 import org.martus.common.HQKeys;
 import org.martus.common.clientside.UiBasicLocalization;
 
@@ -82,6 +83,21 @@ public abstract class HeadQuartersTableModel extends UiTableModel
 				keys.add(hqEntry.getKey());
 		}
 		return keys;
+	}
+	
+	public HQKeys getAllKeys()
+	{
+		HQKeys keys = new HQKeys();
+		for (Iterator iter = entries.iterator(); iter.hasNext();) 
+		{
+			keys.add(((HeadQuarterEntry) iter.next()).getKey());
+		}	
+		return keys;
+	}
+	
+	public HQKey getHQKey(int row)
+	{
+		return ((HeadQuarterEntry)entries.get(row)).getKey();
 	}
 
 	public int getNumberOfSelectedHQs()
