@@ -32,8 +32,8 @@ import java.util.Vector;
 import org.martus.client.core.ClientBulletinStore.BulletinAlreadyExistsException;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.clientside.UiBasicLocalization;
-import org.martus.common.database.Database;
 import org.martus.common.database.DatabaseKey;
+import org.martus.common.database.ReadableDatabase;
 import org.martus.common.packet.UniversalId;
 
 public class BulletinFolder
@@ -134,7 +134,7 @@ public class BulletinFolder
 	synchronized void add(UniversalId id) throws BulletinAlreadyExistsException, IOException
 	{
 		DatabaseKey key = new DatabaseKey(id);
-		Database db = store.getDatabase();
+		ReadableDatabase db = store.getDatabase();
 		if(!db.doesRecordExist(key))
 			throw new IOException();
 

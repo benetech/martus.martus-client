@@ -124,7 +124,6 @@ import org.martus.common.clientside.UiBasicLocalization;
 import org.martus.common.clientside.UiPasswordField;
 import org.martus.common.clientside.UiUtilities;
 import org.martus.common.crypto.MartusCrypto;
-import org.martus.common.database.Database;
 import org.martus.common.database.FileDatabase.MissingAccountMapException;
 import org.martus.common.database.FileDatabase.MissingAccountMapSignatureException;
 import org.martus.common.network.NetworkInterfaceConstants;
@@ -344,8 +343,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 			exitWithoutSavingState();
 		try 
 		{
-			Database database = app.getStore().getDatabase();
-			database.signAccountMap();	
+			app.getStore().signAccountMap();
 			app.doAfterSigninInitalization();
 			
 		} 

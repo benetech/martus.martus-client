@@ -47,8 +47,8 @@ import org.martus.common.crypto.MartusCrypto.CryptoException;
 import org.martus.common.crypto.MartusCrypto.DecryptionException;
 import org.martus.common.crypto.MartusCrypto.MartusSignatureException;
 import org.martus.common.crypto.MartusCrypto.NoKeyPairException;
-import org.martus.common.database.Database;
 import org.martus.common.database.DatabaseKey;
+import org.martus.common.database.ReadableDatabase;
 import org.martus.common.network.NetworkInterfaceConstants;
 import org.martus.common.network.NetworkResponse;
 import org.martus.common.packet.Packet;
@@ -96,7 +96,7 @@ public class BackgroundUploader
 			tempFile.deleteOnExit();
 			UniversalId uid = b.getUniversalId();
 
-			Database db = app.getStore().getDatabase();
+			ReadableDatabase db = app.getStore().getDatabase();
 			DatabaseKey headerKey = DatabaseKey.createKey(uid, b.getStatus());
 			MartusCrypto security = app.getSecurity();
 			BulletinZipUtilities.exportBulletinPacketsFromDatabaseToZipFile(db, headerKey, tempFile, security);

@@ -24,7 +24,7 @@ Boston, MA 02111-1307, USA.
 
 */
 
-package org.martus.client.test;
+package org.martus.client.tools;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -39,6 +39,7 @@ import org.martus.common.bulletin.BulletinSaver;
 import org.martus.common.clientside.Localization;
 import org.martus.common.crypto.MartusCrypto;
 import org.martus.common.crypto.MartusCrypto.CryptoException;
+import org.martus.common.database.Database;
 import org.martus.common.test.BulletinForTesting;
 import org.martus.util.UnicodeReader;
 
@@ -99,7 +100,7 @@ public class CreateBadBulletins
 		b.setAllPrivate(false);
 		b.set(BulletinConstants.TAGTITLE, title);
 		b.set("extra", "Data in custom field with unknown stuff");
-		BulletinSaver.saveToClientDatabase(b, store.getDatabase(), false, security);
+		BulletinSaver.saveToClientDatabase(b, (Database)store.getDatabase(), false, security);
 		store.createOrFindFolder("Bad Bulletins").add(b);
 		return store;
 	}

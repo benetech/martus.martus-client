@@ -224,7 +224,7 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		assertEquals("removed from draft outbox?", 1, draftOutbox.getBulletinCount());
 		assertEquals("removed from sealed outbox?", 1, sealedOutbox.getBulletinCount());
 		
-		Database db = appWithAccount.getStore().getDatabase();
+		Database db = appWithAccount.getWriteableDatabase();
 		DatabaseKey key = new DatabaseKey(b1.getBulletinHeaderPacket().getUniversalId());
 		db.discardRecord(key);
 

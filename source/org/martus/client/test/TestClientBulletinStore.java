@@ -999,7 +999,7 @@ public class TestClientBulletinStore extends TestCaseEnhanced
 		assertEquals("keys", 3*store.getBulletinCount(), db.getRecordCount());
 
 		File storeRootDir = store.getStoreRootDir();
-		store = new ClientBulletinStore(security);
+		ClientBulletinStore store = new ClientBulletinStore(security);
 		store.doAfterSigninInitialization(storeRootDir, db);
 		assertEquals("before load", systemFolderCount, store.getFolderCount());
 		store.loadFolders();
@@ -1103,7 +1103,7 @@ public class TestClientBulletinStore extends TestCaseEnhanced
 		BulletinFolder f = store.getFolderSaved();
 		store.addBulletinToFolder(f, b.getUniversalId());
 
-		store.getDatabase().deleteAllData();
+		store.getWriteableDatabase().deleteAllData();
 		store.clearFolder(f.getName());
 		assertTrue("clearFolder f ", store.getFoldersFile().exists());
 		DatabaseKey bulletinKey = new DatabaseKey(b.getUniversalId());
@@ -1133,7 +1133,7 @@ public class TestClientBulletinStore extends TestCaseEnhanced
 	{
 		TRACE("testRenameFolderCausesSave");
 
-		Database db = store.getDatabase();
+		Database db = store.getWriteableDatabase();
 		DatabaseKey foldersKey = new DatabaseKey(UniversalId.createDummyUniversalId());
 		store.deleteAllData();
 		Bulletin b = store.createEmptyBulletin();
@@ -1508,7 +1508,7 @@ public class TestClientBulletinStore extends TestCaseEnhanced
 	{
 		UniversalId uid = b.getUniversalId();
 		DatabaseKey key = new DatabaseKey(uid);
-		Database db = store.getDatabase();
+		Database db = store.getWriteableDatabase();
 		String goodData = db.readRecord(key, security);
 		String badData = "x" + goodData;
 		db.writeRecord(key, badData);
@@ -1538,7 +1538,7 @@ public class TestClientBulletinStore extends TestCaseEnhanced
 
 	final int sampleRecordCount = 5;
 
-	static ClientBulletinStore store;
+	static MockBulletinStore store;
 	static MockMartusSecurity security;
 	static MockDatabase db;
 	static FieldSpec[] customSpecs;

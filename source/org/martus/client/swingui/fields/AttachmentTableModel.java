@@ -33,8 +33,8 @@ import javax.swing.table.AbstractTableModel;
 import org.martus.client.swingui.UiLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.common.bulletin.AttachmentProxy;
-import org.martus.common.database.Database;
 import org.martus.common.database.DatabaseKey;
+import org.martus.common.database.ReadableDatabase;
 import org.martus.common.packet.UniversalId;
 
 
@@ -124,7 +124,7 @@ class AttachmentTableModel extends AbstractTableModel
 			return getSizeInKb(size);
 		}
 		
-		Database database = mainWindow.getStore().getDatabase();
+		ReadableDatabase database = mainWindow.getStore().getDatabase();
 		int size = 0;
 		UniversalId id = a.getUniversalId();
 		try

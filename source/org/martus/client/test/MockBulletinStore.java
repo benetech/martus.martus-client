@@ -64,4 +64,9 @@ public class MockBulletinStore extends ClientBulletinStore
 		if(getFoldersFile().exists())
 			throw new IOException("Didn't delete folders.dat!");
 	}
+	
+	public Database getWriteableDatabase()
+	{
+		return (Database)getDatabase();
+	}
 }

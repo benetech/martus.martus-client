@@ -80,6 +80,11 @@ public class MockMartusApp extends MartusApp
 		super(crypto, dataDirectoryToUse, new UiBasicLocalization(dataDirectoryToUse, new String[0]));
 	}
 	
+	public Database getWriteableDatabase()
+	{
+		return (Database)store.getDatabase();
+	}
+	
 	public void deleteAllFiles() throws Exception
 	{
 		getStore().deleteAllData();
@@ -143,7 +148,7 @@ public class MockMartusApp extends MartusApp
 			b.set("summary",	"El d"+UnicodeConstants.ACCENT_I_LOWER+"a 19 de diciembre de 1989, un avi"+UnicodeConstants.ACCENT_O_LOWER+"n Cessna A-37B, " +
 								"de la Fuerza A"+UnicodeConstants.ACCENT_E_LOWER+"rea Guatemalteca sobrevol"+UnicodeConstants.ACCENT_O_LOWER+" la comunidad " +
 								"Santa Rosa Xeputul de la CPR de la Sierra... a las 11 de " +
-								"la mañana la unidad a"+UnicodeConstants.ACCENT_E_LOWER+"rea lanz"+UnicodeConstants.ACCENT_O_LOWER+" una bomba de 550 libras " +
+								"la ma"+UnicodeConstants.TILDE_N_LOWER+"ana la unidad a"+UnicodeConstants.ACCENT_E_LOWER+"rea lanz"+UnicodeConstants.ACCENT_O_LOWER+" una bomba de 550 libras " +
 								"... murieron cuatro civiles, mujeres.  Otros dos " +
 								"fallecieron ese mismo d"+UnicodeConstants.ACCENT_I_LOWER+"a en Chax"+UnicodeConstants.ACCENT_A_LOWER+", aldea cercana a Santa " +
 								"Rosa, a causa de otra bomba arrojada por el avi"+UnicodeConstants.ACCENT_O_LOWER+"n.");

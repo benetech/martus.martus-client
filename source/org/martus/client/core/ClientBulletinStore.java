@@ -40,6 +40,7 @@ import java.util.Iterator;
 import java.util.Set;
 import java.util.Vector;
 import java.util.zip.ZipFile;
+
 import org.martus.common.BulletinStore;
 import org.martus.common.FieldSpec;
 import org.martus.common.MartusUtilities;
@@ -53,6 +54,7 @@ import org.martus.common.bulletin.BulletinZipImporter;
 import org.martus.common.bulletin.Bulletin.DamagedBulletinException;
 import org.martus.common.crypto.MartusCrypto;
 import org.martus.common.crypto.MartusCrypto.CryptoException;
+import org.martus.common.crypto.MartusCrypto.MartusSignatureException;
 import org.martus.common.crypto.MartusCrypto.NoKeyPairException;
 import org.martus.common.database.ClientFileDatabase;
 import org.martus.common.database.Database;
@@ -253,7 +255,7 @@ public class ClientBulletinStore extends BulletinStore
 	public void saveBulletin(Bulletin b) throws IOException, CryptoException
 	{
 		cache.remove(b.getUniversalId());
-		BulletinSaver.saveToClientDatabase(b, getDatabase(), mustEncryptPublicData(), getSignatureGenerator());
+		BulletinSaver.saveToClientDatabase(b, getWriteableDatabase(), mustEncryptPublicData(), getSignatureGenerator());
 	}
 
 	public synchronized void discardBulletin(BulletinFolder f, Bulletin b) throws IOException
@@ -731,24 +733,36 @@ public class ClientBulletinStore extends BulletinStore
 	{
 		class PacketScrubber implements Database.PacketVisitor 
 		{
+			PacketScrubber(Database databaseToUse)
+			{
+				db = databaseToUse;
+			}
+			
 			public void visit(DatabaseKey key)
 			{
 				try
 				{
-					getDatabase().scrubRecord(key);
-					getDatabase().discardRecord(key);
+					db.scrubRecord(key);
+					db.discardRecord(key);
 				}
 				catch (Exception e)
 				{				
 					e.printStackTrace();
 				}				
-			}			
+			}
+			
+			Database db;
 		}
 	
-		PacketScrubber ac = new PacketScrubber();
+		PacketScrubber ac = new PacketScrubber(getWriteableDatabase());
 		getDatabase().visitAllRecords(ac);
 		deleteFoldersDatFile();
 	}	
+
+	public void signAccountMap() throws MartusSignatureException, IOException
+	{
+		getWriteableDatabase().signAccountMap();
+	}
 
 	public synchronized void loadFolders()
 	{
@@ -922,15 +936,21 @@ public class ClientBulletinStore extends BulletinStore
 	{
 		class Quarantiner implements Database.PacketVisitor
 		{
+			public Quarantiner(Database databaseToUse)
+			{
+				db = databaseToUse;
+			}
+			
 			public void visit(DatabaseKey key)
 			{
 				InputStreamWithSeek in = null;
 				try
 				{
-					in = getDatabase().openInputStream(key, getSignatureVerifier());
+					in = db.openInputStream(key, getSignatureVerifier());
 					Packet.validateXml(in, key.getAccountId(), key.getLocalId(), null, getSignatureVerifier());
 					in.close();
 				}
+				
 				catch(Exception e)
 				{
 					++quarantinedCount;
@@ -940,7 +960,7 @@ public class ClientBulletinStore extends BulletinStore
 					}
 					try
 					{
-						getDatabase().moveRecordToQuarantine(key);
+						db.moveRecordToQuarantine(key);
 					}
 					catch (RecordHiddenException shouldNeverHappen)
 					{
@@ -949,10 +969,11 @@ public class ClientBulletinStore extends BulletinStore
 				}
 			}
 
+			Database db;
 			int quarantinedCount;
 		}
 
-		Quarantiner visitor = new Quarantiner();
+		Quarantiner visitor = new Quarantiner(getWriteableDatabase());
 		visitAllBulletinRevisions(visitor);
 		return visitor.quarantinedCount;
 	}
@@ -1249,7 +1270,7 @@ public class ClientBulletinStore extends BulletinStore
 	public Bulletin createClone(Bulletin original, FieldSpec[] publicFieldSpecsToUse, FieldSpec[] privateFieldSpecsToUse) throws CryptoException, InvalidPacketException, SignatureVerificationException, WrongPacketTypeException, IOException, InvalidBase64Exception, DamagedBulletinException, NoKeyPairException
 	{
 		Bulletin clone = createEmptyBulletin(publicFieldSpecsToUse, privateFieldSpecsToUse);
-		clone.createDraftCopyOf(original, getDatabase());
+		clone.createDraftCopyOf(original, getWriteableDatabase());
 		saveBulletin(clone);
 		
 		DatabaseKey key = DatabaseKey.createKey(clone.getUniversalId(),clone.getStatus());

@@ -195,7 +195,7 @@ public class TestBulletinTableModel extends TestCaseEnhanced
 
 		MockMartusSecurity otherSecurity = MockMartusSecurity.createOtherClient();
 		Bulletin notMine = new Bulletin(otherSecurity);
-		BulletinSaver.saveToClientDatabase(notMine, store.getDatabase(), false, otherSecurity);
+		BulletinSaver.saveToClientDatabase(notMine, app.getWriteableDatabase(), false, otherSecurity);
 		UniversalId uid = notMine.getUniversalId();
 		store.addBulletinToFolder(folderSaved, uid);
 		int row = folderSaved.find(uid);

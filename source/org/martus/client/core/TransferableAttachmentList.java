@@ -36,11 +36,11 @@ import java.util.Vector;
 import org.martus.common.bulletin.AttachmentProxy;
 import org.martus.common.bulletin.BulletinSaver;
 import org.martus.common.crypto.MartusCrypto;
-import org.martus.common.database.Database;
+import org.martus.common.database.ReadableDatabase;
 
 public class TransferableAttachmentList implements Transferable
 {
-	public TransferableAttachmentList(Database dbToUse, MartusCrypto securityToUse, AttachmentProxy[] attachmentsToUse)
+	public TransferableAttachmentList(ReadableDatabase dbToUse, MartusCrypto securityToUse, AttachmentProxy[] attachmentsToUse)
 	{
 		db = dbToUse;
 		security = securityToUse;
@@ -135,6 +135,6 @@ public class TransferableAttachmentList implements Transferable
 
 	Vector files;
 	AttachmentProxy[] attachments;
-	Database db;
+	ReadableDatabase db;
 	MartusCrypto security;
 }

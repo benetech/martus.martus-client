@@ -38,9 +38,11 @@ import java.awt.dnd.DragSourceListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+
 import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.ListSelectionModel;
+
 import org.martus.client.core.MartusApp;
 import org.martus.client.core.TransferableAttachmentList;
 import org.martus.client.swingui.UiLocalization;
@@ -48,7 +50,7 @@ import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.UiScrollPane;
 import org.martus.common.bulletin.AttachmentProxy;
 import org.martus.common.bulletin.BulletinSaver;
-import org.martus.common.database.Database;
+import org.martus.common.database.ReadableDatabase;
 import org.martus.swing.UiFileChooser;
 import org.martus.swing.UiParagraphPanel;
 import org.martus.swing.UiTable;
@@ -189,7 +191,7 @@ public class UiAttachmentViewer extends UiParagraphPanel  implements DragGesture
 				File temp = File.createTempFile(extractFileNameOnly(fileName), extractExtentionOnly(fileName));
 				temp.deleteOnExit();
 			
-				Database db = mainWindow.getApp().getStore().getDatabase();
+				ReadableDatabase db = mainWindow.getApp().getStore().getDatabase();
 				BulletinSaver.extractAttachmentToFile(db, proxy, app.getSecurity(), temp);
 
 				Runtime runtimeViewer = Runtime.getRuntime();
@@ -233,7 +235,7 @@ public class UiAttachmentViewer extends UiParagraphPanel  implements DragGesture
 			AttachmentProxy proxy = model.getAttachmentProxyAt(selectedRow);
 			try
 			{
-				Database db = mainWindow.getApp().getStore().getDatabase();
+				ReadableDatabase db = mainWindow.getApp().getStore().getDatabase();
 				BulletinSaver.extractAttachmentToFile(db, proxy, app.getSecurity(), outputFile);
 			}
 			catch(Exception e)

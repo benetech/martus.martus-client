@@ -39,8 +39,8 @@ import org.martus.common.StandardFieldSpecs;
 import org.martus.common.bulletin.AttachmentProxy;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.clientside.UiBasicLocalization;
-import org.martus.common.database.Database;
 import org.martus.common.database.DatabaseKey;
+import org.martus.common.database.ReadableDatabase;
 import org.martus.common.database.Database.RecordHiddenException;
 import org.martus.common.packet.UniversalId;
 
@@ -52,7 +52,7 @@ public class BulletinHtmlGenerator
 		localization = localizationToUse;
 	}
 
-	public String getHtmlString(Bulletin b, Database database, boolean includePrivateData, boolean yourBulletin)
+	public String getHtmlString(Bulletin b, ReadableDatabase database, boolean includePrivateData, boolean yourBulletin)
 	{
 		bulletin = b;
 		StringBuffer html = new StringBuffer(1000);
@@ -216,7 +216,7 @@ public class BulletinHtmlGenerator
 		return Integer.toString(sizeInKb);
 	}
 
-	private String getAttachmentSize(Database db, UniversalId uid)
+	private String getAttachmentSize(ReadableDatabase db, UniversalId uid)
 	{
 		// TODO :This is a duplicate code from AttachmentTableModel.java. 
 		// Ideally, the AttachmentProxy should self-describe of file size and file description.
@@ -247,7 +247,7 @@ public class BulletinHtmlGenerator
 		return size;
 	}
 
-	private String getAttachmentsHtmlString(AttachmentProxy[] attachments, Database db)
+	private String getAttachmentsHtmlString(AttachmentProxy[] attachments, ReadableDatabase db)
 	{
 		String attachmentList = "";
 	

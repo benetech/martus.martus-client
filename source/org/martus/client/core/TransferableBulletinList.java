@@ -39,8 +39,8 @@ import java.util.Vector;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.bulletin.BulletinZipUtilities;
 import org.martus.common.crypto.MartusCrypto;
-import org.martus.common.database.Database;
 import org.martus.common.database.DatabaseKey;
+import org.martus.common.database.ReadableDatabase;
 
 
 public class TransferableBulletinList implements Transferable
@@ -218,7 +218,7 @@ public class TransferableBulletinList implements Transferable
 	static DataFlavor bulletinListDataFlavor = new DataFlavor(TransferableBulletinList.class, "Martus Bulletins");
 	Vector files;
 	MartusCrypto sigVerifier;
-	Database db;
+	ReadableDatabase db;
 	BulletinFolder folder;
 	Bulletin[] bulletins;
 }
