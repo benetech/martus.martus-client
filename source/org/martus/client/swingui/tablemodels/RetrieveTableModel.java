@@ -416,7 +416,7 @@ abstract public class RetrieveTableModel extends AbstractTableModel
 	Vector allSummaries;
 	ServerErrorException errorThrown;
 	
-	public static final int COLUMN_RETRIEVE_FLAG = 0;
-	public static final int COLUMN_TITLE = 1;
+	public int COLUMN_RETRIEVE_FLAG = 0;
+	public int COLUMN_TITLE = 1;
 	
 }

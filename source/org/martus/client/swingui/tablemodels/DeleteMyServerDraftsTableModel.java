@@ -57,5 +57,5 @@ public class DeleteMyServerDraftsTableModel extends RetrieveTableModelNonHQ
 		return "";
 	}
 	
-	public static final int COLUMN_DELETE_FLAG = 0;
+	public int COLUMN_DELETE_FLAG = 0;
 }

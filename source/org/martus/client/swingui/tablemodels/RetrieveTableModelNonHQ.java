@@ -42,19 +42,15 @@ abstract public class RetrieveTableModelNonHQ extends RetrieveTableModel {
 
 	public String getColumnName(int column)
 	{
-		switch(column)
-		{
-		case COLUMN_RETRIEVE_FLAG:
+		if(column == COLUMN_RETRIEVE_FLAG)
 			return getLocalization().getFieldLabel("retrieveflag");
-		case COLUMN_TITLE:
+		if(column == COLUMN_TITLE)
 			return getLocalization().getFieldLabel(Bulletin.TAGTITLE);
-		case COLUMN_LAST_DATE_SAVED:
+		if(column == COLUMN_LAST_DATE_SAVED)
 			return getLocalization().getFieldLabel(Bulletin.TAGLASTSAVED);
-		case COLUMN_BULLETIN_SIZE:
+		if(column == COLUMN_BULLETIN_SIZE)
 			return getLocalization().getFieldLabel("BulletinSize");
-		default:
-			return "";
-		}
+		return "";
 	}
 
 	public int getColumnCount()
@@ -65,19 +61,15 @@ abstract public class RetrieveTableModelNonHQ extends RetrieveTableModel {
 	public Object getValueAt(int row, int column)
 	{
 		BulletinSummary summary = (BulletinSummary)currentSummaries.get(row);
-		switch(column)
-		{
-		case COLUMN_RETRIEVE_FLAG:
+		if(column == COLUMN_RETRIEVE_FLAG)
 			return new Boolean(summary.isChecked());
-		case COLUMN_TITLE:
+		if(column == COLUMN_TITLE)
 			return summary.getTitle();
-		case COLUMN_LAST_DATE_SAVED:
+		if(column == COLUMN_LAST_DATE_SAVED)
 			return getLocalization().convertStoredDateTimeToDisplay(summary.getDateTimeSaved());
-		case COLUMN_BULLETIN_SIZE:
+		if(column == COLUMN_BULLETIN_SIZE)
 			return getSizeInKbytes(summary.getSize());
-		default:
-			return "";
-		}
+		return "";
 	}
 
 	public void setValueAt(Object value, int row, int column)
@@ -89,20 +81,17 @@ abstract public class RetrieveTableModelNonHQ extends RetrieveTableModel {
 
 	public Class getColumnClass(int column)
 	{
-		switch(column)
-		{
-		case COLUMN_RETRIEVE_FLAG:
+		if(column == COLUMN_RETRIEVE_FLAG)
 			return Boolean.class;
-		case COLUMN_TITLE:
+		if(column == COLUMN_TITLE)
 			return String.class;
-		case COLUMN_LAST_DATE_SAVED:
+		if(column == COLUMN_LAST_DATE_SAVED)
 			return String.class;
-		case COLUMN_BULLETIN_SIZE:
+		if(column == COLUMN_BULLETIN_SIZE)
 			return Integer.class;
-		default:
-			return null;
-		}
+		return null;
 	}
-	public static final int COLUMN_LAST_DATE_SAVED = 2;
-	public static final int COLUMN_BULLETIN_SIZE = 3;
+	
+	public int COLUMN_LAST_DATE_SAVED = 2;
+	public int COLUMN_BULLETIN_SIZE = 3;
 }
