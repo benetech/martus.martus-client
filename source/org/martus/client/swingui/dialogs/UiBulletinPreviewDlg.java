@@ -38,7 +38,7 @@ import javax.swing.JViewport;
 
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.bulletincomponent.UiBulletinComponentViewSection;
-import org.martus.common.CustomFields;
+import org.martus.common.StandardFieldSpecs;
 import org.martus.common.FieldSpec;
 import org.martus.common.packet.FieldDataPacket;
 import org.martus.swing.ParagraphLayout;
@@ -53,7 +53,7 @@ public class UiBulletinPreviewDlg extends JDialog implements ActionListener
 		getContentPane().setLayout(new ParagraphLayout());
 
 		UiBulletinComponentViewSection view = new UiBulletinComponentViewSection(owner);
-		FieldSpec[] standardFieldTags = CustomFields.getDefaultPublicFieldSpecs();
+		FieldSpec[] standardFieldTags = StandardFieldSpecs.getDefaultPublicFieldSpecs();
 		view.createLabelsAndFields(standardFieldTags);
 		view.createAttachmentTable();
 		view.copyDataFromPacket(fdp);

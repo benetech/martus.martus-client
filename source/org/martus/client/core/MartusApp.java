@@ -45,7 +45,7 @@ import org.martus.client.core.ClientSideNetworkHandlerUsingXmlRpc.SSLSocketSetup
 import org.martus.client.core.Exceptions.ServerCallFailedException;
 import org.martus.client.core.Exceptions.ServerNotAvailableException;
 import org.martus.common.ConfigInfo;
-import org.martus.common.CustomFields;
+import org.martus.common.StandardFieldSpecs;
 import org.martus.common.LegacyCustomFields;
 import org.martus.common.MartusConstants;
 import org.martus.common.MartusUtilities;
@@ -1001,7 +1001,7 @@ public class MartusApp
 		String xmlencoded = (String)response.getResultVector().get(0);
 		String xml = new String(Base64.decode(xmlencoded), "UTF-8");
 		UniversalId uid = UniversalId.createFromAccountAndLocalId(authorAccountId, dataPacketLocalId);
-		FieldDataPacket fdp = new FieldDataPacket(uid , CustomFields.getDefaultPublicFieldSpecs());
+		FieldDataPacket fdp = new FieldDataPacket(uid , StandardFieldSpecs.getDefaultPublicFieldSpecs());
 		byte[] xmlBytes = xml.getBytes("UTF-8");
 		ByteArrayInputStreamWithSeek in =  new ByteArrayInputStreamWithSeek(xmlBytes);
 		fdp.loadFromXml(in, getSecurity());
