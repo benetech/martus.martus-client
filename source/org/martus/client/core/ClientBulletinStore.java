@@ -254,7 +254,7 @@ public class ClientBulletinStore extends BulletinStore
 	public void saveBulletin(Bulletin b) throws IOException, CryptoException
 	{
 		cache.remove(b.getUniversalId());
-		saveToClientDatabase(b, getWriteableDatabase(), mustEncryptPublicData(), getSignatureGenerator());
+		saveBulletin(b, mustEncryptPublicData());
 	}
 
 	public synchronized void discardBulletin(BulletinFolder f, Bulletin b) throws IOException
