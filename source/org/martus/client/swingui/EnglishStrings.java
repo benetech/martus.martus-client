@@ -442,7 +442,7 @@ public class EnglishStrings
 "field:HelpDefaultDetails=Enter questions, details, or other information your organization wants to have answered in future bulletins created.",
 "field:HelpExampleDefaultDetails=Example:",
 "field:HelpExample1DefaultDetails=Were there any witnesses?",
-"field:HelpExample2DefaultDetails=Describe the weather.",
+"field:HelpExample2DefaultDetails=List Victim Names and Ages:",
 "field:HelpExampleEtcDefaultDetails=etc...",
 "field:PublicInformationFiles=Public Information Files",
 "field:NormalKeyboardMsg1=Remember: Entering your password using the regular keyboard may reduce security.",
