@@ -1823,13 +1823,6 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 			folderSplitter = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, previewSplitter, folders);
 		else
 			folderSplitter = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, folders, previewSplitter);
-		
-		folderSplitter.setDividerLocation(uiState.getCurrentFolderSplitterPosition());
-
-		getContentPane().add(folderSplitter);
-		statusBar = new UiStatusBar(getLocalization());		
-		checkServerStatus();	
-		getContentPane().add(statusBar, BorderLayout.SOUTH ); 
 
 		Dimension screenSize = Utilities.getViewableScreenSize();
 		Dimension appDimension = uiState.getCurrentAppDimension();
@@ -1849,6 +1842,14 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 			setSize(screenSize.width - 50 , screenSize.height - 50);
 			Utilities.maximizeWindow(this);
 		}
+
+		uiState.setCurrentAppDimension(getSize());
+		folderSplitter.setDividerLocation(uiState.getCurrentFolderSplitterPosition());
+
+		getContentPane().add(folderSplitter);
+		statusBar = new UiStatusBar(getLocalization());		
+		checkServerStatus();	
+		getContentPane().add(statusBar, BorderLayout.SOUTH ); 
 	}
 	
 	public void checkServerStatus()
