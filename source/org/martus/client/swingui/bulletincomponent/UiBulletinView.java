@@ -51,7 +51,7 @@ public class UiBulletinView extends UiBulletinComponent
 	
 	public UiBulletinComponentSection createBulletinComponentSection()
 	{
-		return new UiBulletinComponentViewSection(this, mainWindow);
+		return new UiBulletinComponentViewSection(mainWindow);
 	}
 
 	public void copyDataToBulletin(Bulletin bulletin) throws

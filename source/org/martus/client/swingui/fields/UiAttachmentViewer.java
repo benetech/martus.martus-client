@@ -50,7 +50,6 @@ import javax.swing.ListSelectionModel;
 import org.martus.client.core.MartusApp;
 import org.martus.client.core.TransferableAttachmentList;
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.client.swingui.bulletincomponent.UiBulletinComponent;
 import org.martus.client.swingui.bulletintable.UiBulletinTable;
 import org.martus.common.bulletin.AttachmentProxy;
 import org.martus.common.bulletin.BulletinSaver;
@@ -64,10 +63,9 @@ import org.martus.swing.Utilities;
 
 public class UiAttachmentViewer extends JPanel  implements DragGestureListener, DragSourceListener
 {
-	public UiAttachmentViewer(UiMainWindow mainWindowToUse, UiBulletinComponent bulletinComponentToUse)
+	public UiAttachmentViewer(UiMainWindow mainWindowToUse)
 	{
 		mainWindow = mainWindowToUse;
-		bulletinComponent = bulletinComponentToUse;
 		app = mainWindow.getApp();
 		model = new AttachmentTableModel(mainWindow, attachmentTable);
 		ParagraphLayout layout = new ParagraphLayout();
@@ -193,7 +191,9 @@ public class UiAttachmentViewer extends JPanel  implements DragGestureListener, 
 			int selectedRow = GetSelection();
 			if(selectedRow == -1)
 				return;
-			if(!mainWindow.getApp().isOurBulletin(bulletinComponent.getCurrentBulletin()))
+			AttachmentProxy proxy = model.getAttachmentProxyAt(selectedRow);
+			String author = proxy.getUniversalId().getAccountId();
+			if(!author.equals(mainWindow.getApp().getAccountId()))
 			{
 				if(!mainWindow.confirmDlg("NotYourBulletinViewAttachmentAnyways"))
 					return;
@@ -205,7 +205,6 @@ public class UiAttachmentViewer extends JPanel  implements DragGestureListener, 
 				File temp = File.createTempFile(extractFileNameOnly(fileName), extractExtentionOnly(fileName));
 				temp.deleteOnExit();
 			
-				AttachmentProxy proxy = model.getAttachmentProxyAt(selectedRow);
 				Database db = mainWindow.getApp().getStore().getDatabase();
 				BulletinSaver.extractAttachmentToFile(db, proxy, app.getSecurity(), temp);
 
@@ -293,7 +292,6 @@ public class UiAttachmentViewer extends JPanel  implements DragGestureListener, 
 	
 	
 	UiMainWindow mainWindow;
-	UiBulletinComponent bulletinComponent;
 	MartusApp app;
 	AttachmentTableModel model;
 	JTable attachmentTable;

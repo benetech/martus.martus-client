@@ -42,11 +42,10 @@ import org.martus.common.clientside.ChoiceItem;
 public class UiBulletinComponentEditorSection extends UiBulletinComponentSection
 {
 
-	public UiBulletinComponentEditorSection(UiBulletinComponent bulletinComponentToUse, UiMainWindow ownerToUse)
+	public UiBulletinComponentEditorSection(UiMainWindow ownerToUse)
 	{
 		super(ownerToUse.getLocalization());
 		owner = ownerToUse;
-		bulletinComponent = bulletinComponentToUse;
 	}
 
 	public UiField createUnknownField()
@@ -102,5 +101,4 @@ public class UiBulletinComponentEditorSection extends UiBulletinComponentSection
 
 	UiAttachmentEditor attachmentEditor;
 	UiMainWindow owner;
-	UiBulletinComponent bulletinComponent;
 }

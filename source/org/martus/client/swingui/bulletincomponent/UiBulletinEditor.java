@@ -48,7 +48,7 @@ public class UiBulletinEditor extends UiBulletinComponent
 
 	public UiBulletinComponentSection createBulletinComponentSection()
 	{
-		return new UiBulletinComponentEditorSection(this, mainWindow);
+		return new UiBulletinComponentEditorSection(mainWindow);
 	}
 
 	public class AttachmentMissing extends UiField.DataInvalidException

@@ -42,11 +42,10 @@ import org.martus.common.clientside.ChoiceItem;
 public class UiBulletinComponentViewSection extends UiBulletinComponentSection
 {
 
-	public UiBulletinComponentViewSection(UiBulletinComponent bulletinComponentToUse, UiMainWindow ownerToUse)
+	public UiBulletinComponentViewSection(UiMainWindow ownerToUse)
 	{
 		super(ownerToUse.getLocalization());
 		owner = ownerToUse;
-		bulletinComponent = bulletinComponentToUse;
 	}
 
 	public UiField createUnknownField()
@@ -86,7 +85,7 @@ public class UiBulletinComponentViewSection extends UiBulletinComponentSection
 
 	public void createAttachmentTable()
 	{
-		attachmentViewer = new UiAttachmentViewer(owner, bulletinComponent);
+		attachmentViewer = new UiAttachmentViewer(owner);
 		add(attachmentViewer);
 	}
 
@@ -102,5 +101,4 @@ public class UiBulletinComponentViewSection extends UiBulletinComponentSection
 
 	public UiAttachmentViewer attachmentViewer;
 	UiMainWindow owner;
-	UiBulletinComponent bulletinComponent;
 }
