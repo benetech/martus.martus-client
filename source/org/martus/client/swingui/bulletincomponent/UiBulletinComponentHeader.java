@@ -26,18 +26,15 @@ Boston, MA 02111-1307, USA.
 
 package org.martus.client.swingui.bulletincomponent;
 
-import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.DateFormat;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
-
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.border.EtchedBorder;
-
 import org.martus.client.swingui.UiLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.dialogs.UiBulletinDetailsDialog;
@@ -70,7 +67,6 @@ public class UiBulletinComponentHeader extends UiBulletinComponentSection
 		
 		hqLabel = new JLabel(localization.getFieldLabel("HQSummaryLabel"));
 		hqSummary = new JLabel("");
-		hqSummary.setFont(hqSummary.getFont().deriveFont(Font.BOLD));
 		addComponents(hqLabel, hqSummary);
 
 	}
