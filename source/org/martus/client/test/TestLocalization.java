@@ -178,11 +178,15 @@ public class TestLocalization extends TestCaseEnhanced
 		File someTestLanguage = new File(translationDirectory,UiBasicLocalization.MARTUS_LANGUAGE_FILE_PREFIX + someTestLanguageCode + UiBasicLocalization.MARTUS_LANGUAGE_FILE_SUFFIX);
 		someTestLanguage.deleteOnExit();
 		UnicodeWriter out = new UnicodeWriter(someTestLanguage);
-		out.write("#");
+		String buttonName = "ok";
+		String someLanguageTranslationOfOk = "dkjfl";
+		out.write("button:"+buttonName+"="+someLanguageTranslationOfOk);
 		out.close();
 		
 		foundSomeTestLanguage = doesLanguageExist(myLocalization, someTestLanguageCode);
 		assertTrue("should now have testLanguage", foundSomeTestLanguage);
+		myLocalization.setCurrentLanguageCode(someTestLanguageCode);
+		assertEquals("Incorrect translation", someLanguageTranslationOfOk, myLocalization.getButtonLabel(buttonName));
 	}
 
 		
