@@ -33,10 +33,14 @@ import java.util.Vector;
 
 import org.martus.client.core.BulletinStore;
 import org.martus.client.core.BulletinXmlExporter;
+import org.martus.common.CustomFields;
+import org.martus.common.FieldSpec;
+import org.martus.common.StandardFieldSpecs;
 import org.martus.common.bulletin.AttachmentProxy;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.bulletin.BulletinConstants;
 import org.martus.common.crypto.MartusCrypto.EncryptionException;
+import org.martus.common.packet.FieldDataPacket;
 import org.martus.util.TestCaseEnhanced;
 
 public class TestBulletinXmlExporter extends TestCaseEnhanced
@@ -126,17 +130,17 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 		final String samplePrivate = "shhhhh! it's private!";
 
 		b.set(BulletinConstants.TAGPUBLICINFO, samplePublic);
-		b.set(BulletinConstants.TAGPRIVATEINFO, samplePrivate);
+		b.set(BulletinConstants.TAGPRIVATEINFO, samplePrivate);		
 
 		Vector list = new Vector();
 		list.add(b);
 		String publicOnly = doExport(list, false);
-		assertContains("<PublicDataOnly></PublicDataOnly>", publicOnly);
+		assertContains("<Field><Tag>PublicDataOnly</Tag>", publicOnly);
 		assertContains(samplePublic, publicOnly);
 		assertNotContains(samplePrivate, publicOnly);
 
 		String publicAndPrivate = doExport(list, true);
-		assertContains("<PublicAndPrivateData></PublicAndPrivateData>", publicAndPrivate);
+		assertContains("<Field><Tag>PublicAndPrivateData</Tag>", publicAndPrivate);
 		assertContains(samplePublic, publicAndPrivate);
 		assertContains(samplePrivate, publicAndPrivate);
 	}
@@ -171,17 +175,61 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 
 		assertContains(b.getAccount(), publicOnly);
 		assertContains(b.getLocalId(), publicOnly);
-		assertContains("<AllPrivate></AllPrivate>", publicOnly);
+		assertContains("<Field><Tag>AllPrivate</Tag>", publicOnly);
 		assertNotContains(sampleAuthor, publicOnly);
 		assertNotContains("<PublicData>", publicOnly);
 		assertNotContains("<PrivateData>", publicOnly);
 
 		assertContains(b.getAccount(), publicAndPrivate);
 		assertContains(b.getLocalId(), publicAndPrivate);
-		assertContains("<AllPrivate></AllPrivate>", publicAndPrivate);
+		assertContains("<Field><Tag>AllPrivate</Tag>", publicAndPrivate);
 		assertContains(sampleAuthor, publicAndPrivate);
 		assertContains("<PublicData>", publicAndPrivate);
 		assertContains("<PrivateData>", publicAndPrivate);
+	}
+
+	public void testExportCustomFileds() throws Exception
+	{
+		CustomFields fields = new CustomFields(StandardFieldSpecs.getDefaultPublicFieldSpecs());
+		String customTag1 = "custom1";
+		String customTag2 = "custom2";
+		String label1 = "Witness1 name";
+		String label2 = "Witness2 name";					
+		
+		String xmlFieldType = "<CustomFields><Field><Tag>"+customTag1+"</Tag>" +
+			"<Label>" + label1 + "</Label></Field></CustomFields>";
+		FieldSpec newSpec = CustomFields.parseXml(xmlFieldType)[0]; 
+		fields.add(newSpec);		
+		xmlFieldType = "<CustomFields><Field><Tag>"+customTag2+"</Tag>" +
+			"<Label>" + label2 + "</Label></Field></CustomFields>";
+		newSpec = CustomFields.parseXml(xmlFieldType)[0]; 
+		fields.add(newSpec);				
+		
+		Bulletin b = new Bulletin(store.getSignatureGenerator(), fields.getSpecs(), StandardFieldSpecs.getDefaultPrivateFieldSpecs());
+		b.setAllPrivate(false);
+		
+		FieldDataPacket fdp = b.getFieldDataPacket();
+		assertTrue("contain custom fied?", fdp.fieldExists(customTag1));
+		assertTrue("contain custom field?", fdp.fieldExists(customTag2));
+		
+		final String samplePublic = "public name";		
+		b.set(BulletinConstants.TAGPUBLICINFO, samplePublic);				
+		final String sampleAuthor = "John Smith";
+		b.set(BulletinConstants.TAGAUTHOR, sampleAuthor);				
+										
+		b.set(customTag1, "a<bc");
+		b.set(customTag2, "&test");			
+
+		Vector list = new Vector();
+		list.add(b);
+
+		String result = doExport(list, false);
+
+		assertContains(samplePublic, result);
+		assertContains("<PublicData>", result);
+		assertContains("<Value>a&lt;bc</Value>", result);
+		assertContains("<Value>&amp;test</Value>", result);				
+		
 	}
 
 	String doExport(Vector list, boolean includePrivateData) throws IOException
