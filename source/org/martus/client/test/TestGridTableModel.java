@@ -45,15 +45,22 @@ public class TestGridTableModel extends TestCaseEnhanced
 		spec.addColumn(label1);
 		spec.addColumn(label2);
 		GridTableModel model = new GridTableModel(spec);
-		assertEquals(2, model.getColumnCount());
-		assertEquals(label1, model.getColumnName(0));
-		assertEquals(label2, model.getColumnName(1));
+		int columnsIncludingRowCount = 3;
+		assertEquals(columnsIncludingRowCount, model.getColumnCount());
+		assertEquals(" ", model.getColumnName(0));
+		assertEquals(label1, model.getColumnName(1));
+		assertEquals(label2, model.getColumnName(2));
 		assertEquals(0, model.getRowCount());
 		model.addEmptyRow();
 		assertEquals(1, model.getRowCount());
 		String value = "Yeah";
-		model.setValueAt(value, 0,0);
-		assertEquals(value, model.getValueAt(0,0));
+		model.setValueAt(value, 0,1);
+		assertEquals(value, model.getValueAt(0,1));
+		int rowOne = 1;
+		assertEquals(Integer.toString(rowOne), model.getValueAt(0,0));
+		model.addEmptyRow();
+		int rowTwo = 2;
+		assertEquals(Integer.toString(rowTwo), model.getValueAt(1,0));
 	}
 	
 	
