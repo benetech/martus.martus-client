@@ -26,9 +26,7 @@ Boston, MA 02111-1307, USA.
 
 package org.martus.client.swingui.bulletintable;
 
-import java.awt.Component;
 import java.awt.Cursor;
-import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.Transferable;
@@ -55,9 +53,6 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.event.TableModelEvent;
 import javax.swing.table.JTableHeader;
-import javax.swing.table.TableCellRenderer;
-import javax.swing.table.TableColumn;
-import javax.swing.table.TableColumnModel;
 
 import org.martus.client.core.BulletinFolder;
 import org.martus.client.core.BulletinStore;
@@ -76,6 +71,7 @@ import org.martus.common.clientside.UiBasicLocalization;
 import org.martus.common.database.DatabaseKey;
 import org.martus.common.packet.UniversalId;
 import org.martus.swing.UiNotifyDlg;
+import org.martus.swing.UiTable;
 
 
 public class UiBulletinTable extends JTable implements ListSelectionListener, DragGestureListener, DragSourceListener
@@ -87,9 +83,9 @@ public class UiBulletinTable extends JTable implements ListSelectionListener, Dr
 		setModel(model);
 
 		// set widths for first three columns (status, wassent, and date)
-		setColumnWidthToHeaderWidth(this,0);
-		setColumnWidthToHeaderWidth(this, 1);
-		setColumnWidthToHeaderWidth(this, 2);
+		UiTable.setColumnWidthToHeaderWidth(this, 0);
+		UiTable.setColumnWidthToHeaderWidth(this, 1);
+		UiTable.setColumnWidthToHeaderWidth(this, 2);
 //		setColumnWidthToHeaderWidth(this, 4);
 
 		addMouseListener(new TableMouseAdapter());
@@ -666,26 +662,6 @@ public class UiBulletinTable extends JTable implements ListSelectionListener, Dr
 	{
 		if(rowIndex >= 0 && rowIndex < getRowCount())
 			setRowSelectionInterval(rowIndex, rowIndex);
-	}
-
-	static public void setColumnWidthToHeaderWidth(JTable table, int column)
-	{
-		TableColumnModel columnModel = table.getColumnModel();
-		TableColumn statusColumn = columnModel.getColumn(column);
-		String padding = "    ";
-		String value = (String)statusColumn.getHeaderValue() + padding;
-
-		TableCellRenderer renderer = statusColumn.getHeaderRenderer();
-		if(renderer == null)
-		{
-			JTableHeader header = table.getTableHeader();
-			renderer = header.getDefaultRenderer();
-		}
-		Component c = renderer.getTableCellRendererComponent(table, value, true, true, -1, column);
-		Dimension size = c.getPreferredSize();
-
-		statusColumn.setPreferredWidth(size.width);
-		statusColumn.setMaxWidth(size.width);
 	}
 
 	UiMainWindow mainWindow;

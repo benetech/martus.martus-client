@@ -44,14 +44,14 @@ abstract public class RetrieveTableModelNonHQ extends RetrieveTableModel {
 	{
 		switch(column)
 		{
-		case 0:
+		case COLUMN_RETRIEVE_FLAG:
 			return getLocalization().getFieldLabel("retrieveflag");
-		case 1:
+		case COLUMN_TITLE:
 			return getLocalization().getFieldLabel(Bulletin.TAGTITLE);
-		case 2:
-			return getLocalization().getFieldLabel("BulletinSize");
-		case 3:
+		case COLUMN_DATE:
 			return getLocalization().getFieldLabel("BulletinDateSaved");
+		case COLUMN_SIZE:
+			return getLocalization().getFieldLabel("BulletinSize");
 		default:
 			return "";
 		}
@@ -67,14 +67,14 @@ abstract public class RetrieveTableModelNonHQ extends RetrieveTableModel {
 		BulletinSummary summary = (BulletinSummary)currentSummaries.get(row);
 		switch(column)
 		{
-		case 0:
+		case COLUMN_RETRIEVE_FLAG:
 			return new Boolean(summary.isChecked());
-		case 1:
+		case COLUMN_TITLE:
 			return summary.getTitle();
-		case 2:
-			return getSizeInKbytes(summary.getSize());
-		case 3:
+		case COLUMN_DATE:
 			return getLocalization().convertStoredDateTimeToDisplay(summary.getDateTimeSaved());
+		case COLUMN_SIZE:
+			return getSizeInKbytes(summary.getSize());
 		default:
 			return "";
 		}
@@ -83,7 +83,7 @@ abstract public class RetrieveTableModelNonHQ extends RetrieveTableModel {
 	public void setValueAt(Object value, int row, int column)
 	{
 		BulletinSummary summary = (BulletinSummary)currentSummaries.get(row);
-		if(column == 0)
+		if(column == COLUMN_RETRIEVE_FLAG)
 			summary.setChecked(((Boolean)value).booleanValue());
 	}
 
@@ -91,16 +91,18 @@ abstract public class RetrieveTableModelNonHQ extends RetrieveTableModel {
 	{
 		switch(column)
 		{
-		case 0:
+		case COLUMN_RETRIEVE_FLAG:
 			return Boolean.class;
-		case 1:
+		case COLUMN_TITLE:
 			return String.class;
-		case 2:
+		case COLUMN_DATE:
+			return String.class;
+		case COLUMN_SIZE:
 			return Integer.class;
-		case 3:
-			return String.class;
 		default:
 			return null;
 		}
 	}
+	public static final int COLUMN_DATE = 2;
+	public static final int COLUMN_SIZE = 3;
 }

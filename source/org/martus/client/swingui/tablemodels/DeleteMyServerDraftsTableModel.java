@@ -49,14 +49,16 @@ public class DeleteMyServerDraftsTableModel extends RetrieveTableModelNonHQ
 
 	public String getColumnName(int column)
 	{
-		if(column == 0)
+		if(column == COLUMN_DELETE_FLAG)
 			return getLocalization().getFieldLabel("DeleteFlag");
-		if(column == 1)
+		if(column == COLUMN_TITLE)
 			return getLocalization().getFieldLabel(Bulletin.TAGTITLE);
-		if(column == 2)
-			return getLocalization().getFieldLabel("BulletinSize");
-		if(column == 3)
+		if(column == COLUMN_DATE)
 			return getLocalization().getFieldLabel("BulletinDateSaved");
+		if(column == COLUMN_SIZE)
+			return getLocalization().getFieldLabel("BulletinSize");
 		return "";
 	}
+	
+	public static final int COLUMN_DELETE_FLAG = 0;
 }

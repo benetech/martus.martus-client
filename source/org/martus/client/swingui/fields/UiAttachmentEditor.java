@@ -47,7 +47,6 @@ import javax.swing.JTable;
 
 import org.martus.client.swingui.UiFocusListener;
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.client.swingui.bulletintable.UiBulletinTable;
 import org.martus.common.bulletin.AttachmentProxy;
 import org.martus.common.clientside.UiBasicLocalization;
 import org.martus.swing.ParagraphLayout;
@@ -71,7 +70,7 @@ public class UiAttachmentEditor extends JPanel
 		attachmentTable.setFocusable(false);
 		attachmentTable.createDefaultColumnsFromModel();
 		attachmentTable.setColumnSelectionAllowed(false);
-		UiBulletinTable.setColumnWidthToHeaderWidth(attachmentTable,1);
+		UiTable.setColumnWidthToHeaderWidth(attachmentTable,1);
 
 		Box hbox = Box.createHorizontalBox();
 		Box vbox = Box.createVerticalBox();

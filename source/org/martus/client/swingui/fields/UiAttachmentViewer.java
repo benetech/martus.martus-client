@@ -48,7 +48,6 @@ import javax.swing.ListSelectionModel;
 import org.martus.client.core.MartusApp;
 import org.martus.client.core.TransferableAttachmentList;
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.client.swingui.bulletintable.UiBulletinTable;
 import org.martus.common.bulletin.AttachmentProxy;
 import org.martus.common.bulletin.BulletinSaver;
 import org.martus.common.clientside.UiBasicLocalization;
@@ -71,7 +70,7 @@ public class UiAttachmentViewer extends JPanel  implements DragGestureListener, 
 		attachmentTable = new UiTable(model);
 		attachmentTable.createDefaultColumnsFromModel();
 		attachmentTable.setColumnSelectionAllowed(false);
-		UiBulletinTable.setColumnWidthToHeaderWidth(attachmentTable,1);
+		UiTable.setColumnWidthToHeaderWidth(attachmentTable,1);
 
 		Box buttonBox = Box.createHorizontalBox();
 		Box vbox = Box.createVerticalBox();

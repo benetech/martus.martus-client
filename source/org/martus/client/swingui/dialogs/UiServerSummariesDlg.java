@@ -49,7 +49,6 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableCellRenderer;
-import javax.swing.table.TableColumn;
 import javax.swing.table.TableModel;
 
 import org.martus.client.swingui.UiMainWindow;
@@ -57,6 +56,7 @@ import org.martus.client.swingui.tablemodels.RetrieveTableModel;
 import org.martus.common.clientside.UiBasicLocalization;
 import org.martus.common.packet.FieldDataPacket;
 import org.martus.swing.ParagraphLayout;
+import org.martus.swing.UiTable;
 import org.martus.swing.UiWrappedTextArea;
 import org.martus.swing.Utilities;
 
@@ -181,16 +181,9 @@ public class UiServerSummariesDlg extends JDialog
 
 		public void doLayout()
 		{
-			Dimension tableBoxSize = tableBox.getPreferredSize();
-			TableColumn firstColumn = getColumnModel().getColumn(0);
+			UiTable.setColumnWidthToHeaderWidth(this,0);
 			int numberOfColumns = getColumnModel().getColumnCount();
-			firstColumn.setMaxWidth(tableBoxSize.width/2);
-			firstColumn.setPreferredWidth(tableBoxSize.width/(numberOfColumns+1));
-
-			TableColumn lastColumn = getColumnModel().getColumn(numberOfColumns-1);
-			lastColumn.setMaxWidth(tableBoxSize.width/2);
-			lastColumn.setPreferredWidth(tableBoxSize.width/(numberOfColumns+1));
-
+			UiTable.setColumnWidthToHeaderWidth(this,numberOfColumns-1);
 			super.doLayout();
 		}
 	}
