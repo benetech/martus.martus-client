@@ -207,11 +207,36 @@ public class MartusApp
 		}
 	}
 	
+	public void setHQLabelsIfPresent(HQKeys keys)
+	{
+		for(int i = 0; i < keys.size(); ++i)
+		{
+			HQKey key = keys.get(i);
+			key.setLabel(getHQLabelIfPresent(key));
+		}
+	}
+
+	
 	public String getHQLabelIfPresent(HQKey hqKey)
 	{
 		try
 		{
-			return getHQKeys().getLabelIfPresent(hqKey);
+			String hqLabelIfPresent = getHQKeys().getLabelIfPresent(hqKey);
+			if(hqLabelIfPresent.length() == 0)
+			{
+				String publicCode = hqKey.getPublicKey();
+				try
+				{
+					publicCode = hqKey.getPublicCode();
+				}
+				catch (InvalidBase64Exception e)
+				{
+					e.printStackTrace();
+				}
+				String hqNotConfigured = localization.getFieldLabel("HQNotConfigured");
+				hqLabelIfPresent = publicCode + " " + hqNotConfigured;
+			}
+			return hqLabelIfPresent;
 		}
 		catch (HQsException e)
 		{

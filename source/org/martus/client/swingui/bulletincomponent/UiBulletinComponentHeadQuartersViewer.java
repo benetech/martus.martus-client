@@ -47,9 +47,10 @@ public class UiBulletinComponentHeadQuartersViewer extends UiBulletinComponentHe
 		}
 		
 		tableModel = new HeadQuartersTableModelView(getLocalization());
+		mainWindow.getApp().setHQLabelsIfPresent(authorizedToReadKeys);
 		for (int i = 0; i < authorizedToReadKeys.size(); ++i) 
 		{
-			tableModel.addNewHeadQuarterEntry(new HeadQuarterEntry(mainWindowToUse.getApp(), getLocalization(), authorizedToReadKeys.get(i)));
+			tableModel.addNewHeadQuarterEntry(new HeadQuarterEntry(authorizedToReadKeys.get(i)));
 		}
 		UiTable hqTable = createHeadquartersTable(tableModel);
 		hqTable.setEnabled(false);

@@ -57,10 +57,11 @@ public class UiBulletinComponentHeadQuartersEditor extends UiBulletinComponentHe
 		tableModel = new HeadQuartersTableModelEdit(getLocalization());
 		Vector autorizedKeys = new Vector();
 		MartusApp app = mainWindow.getApp();
+		app.setHQLabelsIfPresent(authorizedToReadKeys);
 		for (int i = 0; i < authorizedToReadKeys.size(); ++i) 
 		{
 			HQKey hqKeyToAddAuthorized = authorizedToReadKeys.get(i);
-			HeadQuarterEntry headQuarterEntry = new HeadQuarterEntry(app, getLocalization(), hqKeyToAddAuthorized);
+			HeadQuarterEntry headQuarterEntry = new HeadQuarterEntry(hqKeyToAddAuthorized);
 			headQuarterEntry.setSelected(true);
 			tableModel.addNewHeadQuarterEntry(headQuarterEntry);
 			autorizedKeys.add(hqKeyToAddAuthorized.getPublicKey());
@@ -71,7 +72,7 @@ public class UiBulletinComponentHeadQuartersEditor extends UiBulletinComponentHe
 			HQKey hqKeyToCheck = allHQKeysConfigured.get(j);
 			if(!autorizedKeys.contains(hqKeyToCheck.getPublicKey()))
 			{
-				HeadQuarterEntry headQuarterEntry = new HeadQuarterEntry(app, getLocalization(), hqKeyToCheck);
+				HeadQuarterEntry headQuarterEntry = new HeadQuarterEntry(hqKeyToCheck);
 				tableModel.addNewHeadQuarterEntry(headQuarterEntry);
 			}
 		}

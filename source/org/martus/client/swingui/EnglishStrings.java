@@ -436,8 +436,6 @@ public class EnglishStrings
 "field:BackupKeyPairToSecretShareInformation=This method breaks up your key into #M# pieces, any #N# of which will be required to reconstruct the key without requiring a password.  If you forget your login name or your password, this method is the only way you can restore your key.\n\nOnce the #M# files have been written to removable media disks, you should distribute them to #M# different people whom you will remember, but each of whom don't know who you have given the other files to.  Do not store any of the disks together.\n\nTo restore your key, first retrieve any #N# of the original #M# disks, and then select 'Restore Account' and 'Restore account from multiple disks' when signing into Martus.\n",
 "field:BulletinWasSent=Sent",
 "field:preferencesAllPrivate=Prevent creating public bulletins",
-"field:HQNotConfigured=(not currently configured)",
-"field:NoHQsConfigured=No Headquarter accounts currently configured",
 "field:HeadQuartersSelected=Selected?",
 
 "field:PrintPrivateData=Include private data in print out.",
@@ -723,7 +721,6 @@ public class EnglishStrings
 "field:ErrorCustomFieldHeader2=TYPE",
 "field:ErrorCustomFieldHeader3=TAG",
 "field:ErrorCustomFieldHeader4=LABEL",
-"field:ConfigureHQsCurrentHQs=Current Headquarters",
 "field:ConfigureHQColumnHeaderPublicCode=Public Code",
 "field:ConfigureHQColumnHeaderLabel=Label",
 "field:SplashProductDescription=Human Rights Bulletin System",
@@ -732,7 +729,7 @@ public class EnglishStrings
 "field:DateRange=Date Range",
 "field:UnknownDateSave=Unknown",
 "field:AttachmentSizeUnknown=Unknown",
-"field:HQSummaryLabel=Headquarters",
+"field:ConfigureHQsCurrentHQs=Current Headquarters",
 "field:ColumnGridRowNumber=Row #",
 
 "field:WasSentYes=Yes",

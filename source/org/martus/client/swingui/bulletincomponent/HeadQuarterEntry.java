@@ -26,17 +26,12 @@ Boston, MA 02111-1307, USA.
 
 package org.martus.client.swingui.bulletincomponent;
 
-import org.martus.client.core.MartusApp;
 import org.martus.common.HQKey;
-import org.martus.common.clientside.UiBasicLocalization;
-import org.martus.util.Base64.InvalidBase64Exception;
 
 public class HeadQuarterEntry 
 {
-	public HeadQuarterEntry(MartusApp appToUse, UiBasicLocalization localizationToUse, HQKey keyToUse)
+	public HeadQuarterEntry(HQKey keyToUse)
 	{
-		app = appToUse;
-		localization = localizationToUse;
 		key = keyToUse;
 	}
 	
@@ -52,22 +47,7 @@ public class HeadQuarterEntry
 	
 	public String getLabel()
 	{
-		String hqLabelIfPresent = app.getHQLabelIfPresent(key);
-		if(hqLabelIfPresent.length() == 0)
-		{
-			String publicCode = key.getPublicKey();
-			try
-			{
-				publicCode = key.getPublicCode();
-			}
-			catch (InvalidBase64Exception e)
-			{
-				e.printStackTrace();
-			}
-			String hqNotConfigured = localization.getFieldLabel("HQNotConfigured");
-			hqLabelIfPresent = publicCode + " " + hqNotConfigured;
-		}
-		return hqLabelIfPresent;
+		return key.getLabel();
 	}
 	
 	public HQKey getKey()
@@ -77,6 +57,4 @@ public class HeadQuarterEntry
 	
 	HQKey key;
 	boolean isSelected;
-	MartusApp app;
-	UiBasicLocalization localization;
 }

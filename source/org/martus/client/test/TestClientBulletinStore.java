@@ -208,7 +208,7 @@ public class TestClientBulletinStore extends TestCaseEnhanced
 	    	assertEquals("wrong account?", store.getAccountId(), clone.getAccount());
 	    	assertNotEquals("not new local id?", original.getLocalId(), clone.getLocalId());
 	    	assertEquals("no data?", original.get(Bulletin.TAGTITLE), clone.get(Bulletin.TAGTITLE));
-	    	assertEquals("kept hq?", 0, clone.getAuthorizedToReadKeys().size());
+	    	assertEquals("Did not kept hq?", 1, clone.getAuthorizedToReadKeys().size());
 	    	assertTrue("not draft?", clone.isDraft());
 	    	assertEquals("wrong public field specs?", customSpecs.length, clone.getPublicFieldSpecs().length);
 	    	assertEquals("wrong private field specs?", customSpecs.length, clone.getPrivateFieldSpecs().length);
@@ -228,7 +228,7 @@ public class TestClientBulletinStore extends TestCaseEnhanced
 	    	assertEquals("wrong account?", store.getAccountId(), clone.getAccount());
 	    	assertNotEquals("not new local id?", original.getLocalId(), clone.getLocalId());
 	    	assertEquals("no data?", original.get(Bulletin.TAGTITLE), clone.get(Bulletin.TAGTITLE));
-	    	assertEquals("kept hq?", 0, clone.getAuthorizedToReadKeys().size());
+	    	assertEquals("did not keep hq?", 1, clone.getAuthorizedToReadKeys().size());
 	    	assertTrue("not draft?", clone.isDraft());
 	    	assertEquals("wrong public field specs?", customSpecs.length, clone.getPublicFieldSpecs().length);
 	    	assertEquals("wrong private field specs?", customSpecs.length, clone.getPrivateFieldSpecs().length);
@@ -248,7 +248,7 @@ public class TestClientBulletinStore extends TestCaseEnhanced
 	    	assertEquals("wrong account?", store.getAccountId(), clone.getAccount());
 	    	assertNotEquals("not new local id?", original.getLocalId(), clone.getLocalId());
 	    	assertEquals("no data?", original.get(Bulletin.TAGTITLE), clone.get(Bulletin.TAGTITLE));
-	    	assertEquals("kept hq?", 0, clone.getAuthorizedToReadKeys().size());
+	    	assertEquals("Did not keep hq?", 1, clone.getAuthorizedToReadKeys().size());
 	    	assertTrue("not draft?", clone.isDraft());
 	    	assertEquals("wrong public field specs?", customSpecs.length, clone.getPublicFieldSpecs().length);
 	    	assertEquals("wrong private field specs?", customSpecs.length, clone.getPrivateFieldSpecs().length);
