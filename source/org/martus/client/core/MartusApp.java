@@ -1302,22 +1302,18 @@ public class MartusApp
 	
 	public void attemptReSignInInternal(File keyPairFile, String userName, char[] userPassPhrase) throws Exception
 	{
+		if(!userName.equals(currentUserName))
+			throw new MartusCrypto.AuthorizationFailedException();
+		MartusCrypto securityOfReSignin = new MartusSecurity();
+		FileInputStream inputStream = new FileInputStream(keyPairFile);
 		try
 		{
-			if(!userName.equals(currentUserName))
-				throw new MartusCrypto.AuthorizationFailedException();
-			MartusCrypto securityOfReSignin = new MartusSecurity();
-			FileInputStream inputStream = new FileInputStream(keyPairFile);
 			securityOfReSignin.readKeyPair(inputStream, getCombinedPassPhrase(userName, userPassPhrase));
-			inputStream.close();
-			if(!getSecurity().hasKeyPair())
-				setSecurity(securityOfReSignin);
 		}
-		catch(Exception e)
+		finally
 		{
-			getSecurity().clearKeyPair();
-			throw e;
-		}	
+			inputStream.close();
+		}
 	}
 
 	public void setCurrentAccount(String userName, File accountDirectory) throws IOException

@@ -724,6 +724,8 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		assertNotNull("keypair empty?", app.getAccountId());
 		app.attemptReSignIn(userName, userPassword);
 		assertNotNull("keypair cleared?", app.getAccountId());
+
+		String oldAccountId = app.getAccountId();
 		try
 		{
 			app.attemptReSignIn(userName+"x", userPassword);
@@ -732,10 +734,20 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		catch (Exception expected)
 		{
 		}	
-		
-		assertNull("keypair not cleared?", app.getAccountId());
+		assertEquals("keypair cleared for bad username?", oldAccountId, app.getAccountId());
+
+		try
+		{
+			app.attemptReSignIn(userName, "wrong passphrase by a mile".toCharArray());
+			fail("Should have thrown for missing keypair");
+		}
+		catch(Exception ignoreExpectedException)
+		{
+		}
+		assertEquals("keypair cleared for missing keypair file?", oldAccountId, app.getAccountId());
+
 		app.attemptReSignIn(userName, userPassword);
-		assertNotNull("keypair not restored?", app.getAccountId());
+		assertEquals("keypair not still there?", oldAccountId, app.getAccountId());
 		app.deleteAllFiles();
 		TRACE_END();
 	}
