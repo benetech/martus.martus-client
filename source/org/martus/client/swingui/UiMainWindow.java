@@ -172,13 +172,13 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 			wantsNewAccount = true;
 		if(result == UiSigninDlg.RECOVER_ACCOUNT_BY_SHARE)
 		{	
-			UiBackupRecoverKeyPair recover = new UiBackupRecoverKeyPair(this);
+			UiBackupRecoverSharedKeyPair recover = new UiBackupRecoverSharedKeyPair(this);
 			if(!recover.recoverKeyPairFromMultipleUnencryptedFiles())
 				return false;
 		}
 		if(result == UiSigninDlg.RECOVER_ACCOUNT_BY_BACKUP_FILE)
 		{
-			//TODO:Finish this section
+				return false;
 		}
 
 		boolean createdNewAccount = false;
@@ -1337,9 +1337,9 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	{
 		if(confirmDlg(this,"BackupKeyPairSingle"))
 			doBackupKeyPairToSingleEncryptedFile();
-		if(confirmDlg(this,"BackupKeyPairMultiple", UiBackupRecoverKeyPair.getTokenReplacement()))
+		if(confirmDlg(this,"BackupKeyPairMultiple", UiBackupRecoverSharedKeyPair.getTokenReplacement()))
 		{
-			UiBackupRecoverKeyPair backup = new UiBackupRecoverKeyPair(this);
+			UiBackupRecoverSharedKeyPair backup = new UiBackupRecoverSharedKeyPair(this);
 			backup.backupKeyPairToMultipleUnencryptedFiles();
 		}
 	}

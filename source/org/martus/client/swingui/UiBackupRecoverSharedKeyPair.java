@@ -44,9 +44,9 @@ import org.martus.swing.UiFileChooser;
 import org.martus.util.UnicodeReader;
 import org.martus.util.UnicodeWriter;
 
-public class UiBackupRecoverKeyPair 
+public class UiBackupRecoverSharedKeyPair 
 {
-	public UiBackupRecoverKeyPair(UiMainWindow windowToUse)
+	public UiBackupRecoverSharedKeyPair(UiMainWindow windowToUse)
 	{
 		mainWindow = windowToUse;
 		localization = mainWindow.getLocalization();
@@ -62,7 +62,7 @@ public class UiBackupRecoverKeyPair
 
 	public boolean recoverKeyPairFromMultipleUnencryptedFiles()
 	{
-		mainWindow.notifyDlg(mainWindow, "RecoveryProcessKeyShare",UiBackupRecoverKeyPair.getTokenReplacement());
+		mainWindow.notifyDlg(mainWindow, "RecoveryProcessKeyShare",UiBackupRecoverSharedKeyPair.getTokenReplacement());
 		
 		File firstShareFile = getRecoveryDriveToUse();
 		if(firstShareFile == null)
