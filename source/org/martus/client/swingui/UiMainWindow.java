@@ -1041,11 +1041,6 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	private void requestToUpdateContactInfoOnServerAndSaveInfo()
 	{
 		ConfigInfo configInfo = app.getConfigInfo();
-		if(!configInfo.isServerConfigured())
-			return;
-		
-		boolean sendInfo = confirmDlg(this, "RequestToSendContactInfoToServer");
-		configInfo.setSendContactInfoToServer(sendInfo);
 		try
 		{
 			app.saveConfigInfo();
@@ -1054,6 +1049,12 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		{
 			notifyDlg(this, "ErrorSavingConfig");
 		}
+		
+		if(!configInfo.isServerConfigured())
+			return;
+		
+		boolean sendInfo = confirmDlg(this, "RequestToSendContactInfoToServer");
+		configInfo.setSendContactInfoToServer(sendInfo);
 	}
 
 	public boolean reSignIn()
