@@ -517,7 +517,7 @@ public class MartusApp
 	public void cleanupWhenCompleteQuickErase(QuickEraseOptions opts)
 	{
 		if (opts.isExitWhenCompleteSelected())
-			store.deleteFolders();	
+			store.deleteFoldersDatFile();	
 	}
 	
 	public boolean deleteKeypair(QuickEraseOptions opts)

@@ -587,11 +587,11 @@ public class BulletinStore
 	public void deleteAllData() throws Exception
 	{
 		database.deleteAllData();
-		deleteFolders();
+		deleteFoldersDatFile();
 		resetFolders();
 	}			
 	
-	public void deleteFolders()
+	public void deleteFoldersDatFile()
 	{
 		getFoldersFile().delete();
 	}	
@@ -621,7 +621,7 @@ public class BulletinStore
 	
 		PacketScrubber ac = new PacketScrubber();
 		database.visitAllRecords(ac);
-		deleteFolders();
+		deleteFoldersDatFile();
 	}	
 
 	public Database getDatabase()
