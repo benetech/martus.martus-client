@@ -608,11 +608,11 @@ public class TestBulletinStore extends TestCaseEnhanced
 		TRACE("testLoadXmlNoFolders");
 
 		int count = store.getFolderCount();
-		String xml = "<Folder name='fromxml'></Folder>";
+		String xml = "<FolderList></FolderList>";
 		store.loadFolders(new StringReader(xml));
 		assertEquals(0, store.getBulletinCount());
-		assertEquals(count+1, store.getFolderCount());
-		assertNotNull("not found?", store.findFolder("fromxml"));
+		assertEquals(count, store.getFolderCount());
+		assertNull("found?", store.findFolder("fromxml"));
 	}
 
 	public void testLoadXmlFolders()

@@ -42,10 +42,12 @@ import java.util.TreeMap;
 import java.util.Vector;
 import java.util.zip.ZipFile;
 
-import org.martus.common.StandardFieldSpecs;
+import javax.xml.parsers.ParserConfigurationException;
+
 import org.martus.common.FieldSpec;
 import org.martus.common.MartusUtilities;
 import org.martus.common.MartusXml;
+import org.martus.common.StandardFieldSpecs;
 import org.martus.common.MartusUtilities.FileVerificationException;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.bulletin.BulletinLoader;
@@ -66,12 +68,16 @@ import org.martus.common.packet.Packet.InvalidPacketException;
 import org.martus.common.packet.Packet.SignatureVerificationException;
 import org.martus.common.packet.Packet.WrongAccountException;
 import org.martus.common.packet.Packet.WrongPacketTypeException;
+import org.martus.common.packet.UniversalId.NotUniversalIdException;
 import org.martus.util.FileInputStreamWithSeek;
 import org.martus.util.InputStreamWithSeek;
 import org.martus.util.Base64.InvalidBase64Exception;
+import org.martus.util.xml.SimpleXmlDefaultLoader;
+import org.martus.util.xml.SimpleXmlParser;
+import org.martus.util.xml.SimpleXmlStringLoader;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
-import org.xml.sax.helpers.DefaultHandler;
+import org.xml.sax.SAXParseException;
 
 
 /*
@@ -905,90 +911,137 @@ public class BulletinStore
 		return xml;
 	}
 
-	private static class FolderXmlHandler extends DefaultHandler
-	{
-		public FolderXmlHandler(BulletinStore storeToUse)
-		{
-			store = storeToUse;
-			startLoadingFolders = true;
-		}
-
-		public void startElement(String namespaceURI, String sName, String qName,
-				Attributes attrs) throws SAXException
-		{
-			if(qName.equals(MartusClientXml.tagFolder))
-			{
-				handleFolderStartTag(attrs);
-			}
-
-			buffer = "";
-		}
-
-		public void endElement(String namespaceURI, String sName, String qName)
-		{
-			if(qName.equals(MartusClientXml.tagFolder))
-			{
-				currentFolder = null;
-			}
-			else if(qName.equals(MartusClientXml.tagId))
-			{
-				try
-				{
-					UniversalId bId = UniversalId.createFromString(buffer);
-					currentFolder.add(bId);
-				}
-				catch(Exception e)
-				{
-					System.out.println("BulletinStore::endElement : " + e);
-				}
-			}
-
-			buffer = "";
-		}
-
-		public void characters(char buf[], int offset, int len) throws SAXException
-		{
-			buffer += new String(buf, offset, len);
-		}
-
-		void handleFolderStartTag(Attributes attrs)
-		{
-			String name = attrs.getValue(MartusClientXml.attrFolder);
-			if(startLoadingFolders)
-			{
-				startLoadingFolders = false;
-				if(name.equals("Outbox"))
-					legacyFolders = true;
-			}
-			if(legacyFolders)
-			{
-				if(name.equals("Outbox"))
-					name = OUTBOX_FOLDER;
-				if(name.equals("Sent Bulletins"))
-					name = SENT_FOLDER;
-				if(name.equals("Draft Bulletins"))
-					name = DRAFT_FOLDER;
-				if(name.equals("Discarded Bulletins"))
-					name = DISCARDED_FOLDER;
-			}
-			currentFolder = store.createOrFindFolder(name);
-		}
-
-		BulletinStore store;
-		BulletinFolder currentFolder;
-		String buffer = "";
-
-		boolean startLoadingFolders;
-		public boolean legacyFolders;
-	}
-
 	public synchronized boolean loadFolders(Reader xml)
 	{
 		folders.clear();
+		loadedLegacyFolders = false;
 		createSystemFolders();
-		FolderXmlHandler handler = new FolderXmlHandler(this);
-		MartusXml.loadXml(xml, handler);
-		return handler.legacyFolders;
+		XmlFolderListLoader loader = new XmlFolderListLoader(this);
+		try
+		{
+			SimpleXmlParser.parse(loader, xml);
+			return needsLegacyFolderConversion();
+		}
+		catch (IOException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		catch (ParserConfigurationException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		catch (SAXException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		// if we had an error, claim we don't need to do a 
+		// legacy conversion
+		return false;
+	}
+	
+	class XmlFolderListLoader extends SimpleXmlDefaultLoader
+	{
+		public XmlFolderListLoader(BulletinStore storeToFill)
+		{
+			super(MartusClientXml.tagFolderList);
+			store = storeToFill;
+		}
+		
+		public SimpleXmlDefaultLoader startElement(String tag)
+			throws SAXParseException
+		{
+			if(tag.equals(MartusClientXml.tagFolder))
+			{
+				return new XmlFolderLoader(tag, store);
+			}
+			else
+				return super.startElement(tag);
+		}
+
+		public void endElement(SimpleXmlDefaultLoader ended)
+			throws SAXParseException
+		{
+			if(ended.getTag().equals(MartusClientXml.tagFolder))
+				;
+			else
+				super.endElement(ended);
+		}
+		
+		BulletinStore store;
+	}
+	
+	class XmlFolderLoader extends SimpleXmlDefaultLoader
+	{
+		public XmlFolderLoader(String tag, BulletinStore storeToFill)
+		{
+			super(tag);
+			store = storeToFill;
+		}
+		
+		String convertLegacyFolder(String name)
+		{
+			if(name.equals("Outbox"))
+				name = OUTBOX_FOLDER;
+			else if(name.equals("Sent Bulletins"))
+				name = SENT_FOLDER;
+			else if(name.equals("Draft Bulletins"))
+				name = DRAFT_FOLDER;
+			else if(name.equals("Discarded Bulletins"))
+				name = DISCARDED_FOLDER;
+			return name;
+		}
+		
+		public void startDocument(Attributes attrs)
+		{
+			String name = attrs.getValue(MartusClientXml.attrFolder);
+			String convertedName = convertLegacyFolder(name);
+			if(!convertedName.equals(name))
+				store.setNeedsLegacyFolderConversion();
+					
+			folder = store.createOrFindFolder(convertedName);
+		}
+
+		public SimpleXmlDefaultLoader startElement(String tag)
+			throws SAXParseException
+		{
+			if(tag.equals(MartusClientXml.tagId))
+				return new SimpleXmlStringLoader(tag);
+			else
+				return super.startElement(tag);
+		}
+
+		public void endElement(SimpleXmlDefaultLoader ended)
+			throws SAXParseException
+		{
+			if(ended.getTag().equals(MartusClientXml.tagId))
+			{
+				String uidText = ((SimpleXmlStringLoader)ended).getText();
+				try
+				{
+					UniversalId bulletinId = UniversalId.createFromString(uidText);
+					folder.add(bulletinId);
+				}
+				catch (NotUniversalIdException e)
+				{
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				catch (BulletinAlreadyExistsException e)
+				{
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			else
+				super.endElement(ended);
+		}
+		
+		BulletinStore store;
+		BulletinFolder folder;
 	}
 
 	public static class StatusNotAllowedException extends Exception {}
@@ -1089,6 +1142,16 @@ public class BulletinStore
 		BulletinSaver.saveToClientDatabase(imported, getDatabase(), mustEncryptPublicData(), security);
 		return imported.getUniversalId();
 	}
+	
+	void setNeedsLegacyFolderConversion()
+	{
+		loadedLegacyFolders = true;
+	}
+	
+	boolean needsLegacyFolderConversion()
+	{
+		return loadedLegacyFolders;
+	}
 
 	public static int maxCachedBulletinCount = 100;
 
@@ -1118,6 +1181,7 @@ public class BulletinStore
 	public Map bulletinCache;
 	CacheOfSortableFields cacheOfSortableFields;
 	File cacheOfSortableFieldsFile;
+	boolean loadedLegacyFolders;
 
 	FieldSpec[] publicFieldTags;
 	FieldSpec[] privateFieldTags;	
