@@ -60,10 +60,7 @@ public class UiExportBulletinsDlg extends JDialog implements ActionListener
 		super(mainWindowToUse, "", true);
 		mainWindow = mainWindowToUse;
 		bulletins = bulletinsToExport;
-		if(defaultName==null && bulletins.size()==1)
-			defaultFileName = extractTitles(bulletins)[0];
-		else
-			defaultFileName = defaultName;
+		defaultFileName = defaultName;
 		constructDialog();
 	}
 
@@ -84,7 +81,7 @@ public class UiExportBulletinsDlg extends JDialog implements ActionListener
 		hBoxButtons.add(cancel);
 		hBoxButtons.add(Box.createHorizontalGlue());
 		
-		String[] titles = extractTitles(bulletins);
+		String[] titles = extractTitles(mainWindow, bulletins);
 		JList bulletinList = new JList(titles);
 		JScrollPane tocMsgAreaScrollPane = new JScrollPane(bulletinList,
 				JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
@@ -126,7 +123,7 @@ public class UiExportBulletinsDlg extends JDialog implements ActionListener
 		return bulletins;
 	}
 
-	String[] extractTitles(Vector bulletins)
+	public static String[] extractTitles(UiMainWindow window, Vector bulletins)
 	{
 		String[] titles = new String[bulletins.size()];
 		for (int i = 0; i < titles.length; i++)
@@ -134,7 +131,7 @@ public class UiExportBulletinsDlg extends JDialog implements ActionListener
 			Bulletin b = (Bulletin)bulletins.get(i);
 			String bulletinTitle = b.get(BulletinConstants.TAGTITLE);
 			if(bulletinTitle == null || bulletinTitle.length() == 0)
-				bulletinTitle = mainWindow.getLocalization().getFieldLabel("UntitledBulletin");
+				bulletinTitle = window.getLocalization().getFieldLabel("UntitledBulletin");
 			titles[i] = bulletinTitle;
 		}
 		return titles;

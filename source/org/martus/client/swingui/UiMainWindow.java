@@ -1760,7 +1760,10 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		}
 
 		Vector bulletins = UiExportBulletinsDlg.findBulletins(getStore(), uids);
-		new UiExportBulletinsDlg(this, bulletins, null);
+		String defaultFileName = null;
+		if(bulletins.size()==1)
+			defaultFileName = UiExportBulletinsDlg.extractTitles(this, bulletins)[0];
+		new UiExportBulletinsDlg(this, bulletins, defaultFileName);
 	}
 
 	public static boolean isAnyBulletinSelected(UiMainWindow window)
