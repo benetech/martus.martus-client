@@ -40,6 +40,7 @@ public class CurrentUiState implements Serializable
 {
 	public CurrentUiState()
 	{
+		modifyingBulletin = false;
 		currentFolderName = "";
 		currentDateFormat = "";
 		currentLanguage = "";
@@ -199,11 +200,17 @@ public class CurrentUiState implements Serializable
 	{
 		this.currentEditorPosition = currentEditorPosition;
 	}
+	
+	public void save()
+	{
+		save(currentUiStateFile);
+	}
 
 	public void save(File file)
 	{
 		try
 		{
+			currentUiStateFile = file;
 			FileOutputStream outputStream = new FileOutputStream(file);
 			DataOutputStream out = new DataOutputStream(outputStream);
 			out.writeInt(uiStateFirstIntegerInFile);
@@ -245,6 +252,7 @@ public class CurrentUiState implements Serializable
 
 	public void load(File file)
 	{
+		currentUiStateFile = file;
 		try
 		{
 			FileInputStream inputStream = new FileInputStream(file);
@@ -298,6 +306,21 @@ public class CurrentUiState implements Serializable
 		return (firstIntegerIn == uiStateFirstIntegerInFile);
 	}
 
+	//Non Persistant variables.
+	public boolean isModifyingBulletin()
+	{
+		return modifyingBulletin;
+	}
+
+	public void setModifyingBulletin(boolean modifyingBulletin)
+	{
+		this.modifyingBulletin = modifyingBulletin;
+	}
+	
+	File currentUiStateFile;
+	boolean modifyingBulletin;
+	
+	
 	public static final short VERSION = 5;
 	//Version 1
 	protected static int uiStateFirstIntegerInFile = 2002;
@@ -330,5 +353,5 @@ public class CurrentUiState implements Serializable
 	
 	//Version 5 
 	//Removed currentOperatingState
-
+	
 }

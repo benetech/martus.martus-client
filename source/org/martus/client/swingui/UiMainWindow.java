@@ -199,7 +199,8 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		currentActiveFrame = this;
 		hiddenFrame.dispose();
 		UiModelessBusyDlg waitingForBulletinsToLoad = new UiModelessBusyDlg(getLocalization().getFieldLabel("waitingForBulletinsToLoad"));
-
+		initalizeUiState();
+		
 		try
 		{
 			app.doAfterSigninInitalization();
@@ -598,7 +599,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		uiState.setCurrentEditorMaximized(maximized);
 	}
 
-	public void saveCurrentUiState() throws IOException
+	public void saveCurrentUiState()
 	{
 		uiState.save(app.getUiStateFile());
 	}
@@ -666,13 +667,19 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 
 	private void initalizeUiState()
 	{
-		UiLocalization localization = getLocalization();
-
 		uiState = new CurrentUiState();
-		File stateFile = app.getUiStateFile();
-		uiState.load(stateFile);
-		uiState.setCurrentLanguage(localization.getCurrentLanguageCode());
-		uiState.setCurrentDateFormat(localization.getCurrentDateFormatCode());
+		File uiStateFile = app.getUiStateFile();
+		if(!uiStateFile.exists())
+		{
+			UiLocalization localization = getLocalization();
+			uiState.setCurrentLanguage(localization.getCurrentLanguageCode());
+			uiState.setCurrentDateFormat(localization.getCurrentDateFormatCode());
+			uiState.save(uiStateFile);
+			return;
+		}
+		uiState.load(uiStateFile);
+		localization.setCurrentDateFormatCode(uiState.getCurrentDateFormat());
+		localization.setCurrentLanguageCode(uiState.getCurrentLanguage());
 	}
 
 	public void selectBulletinInCurrentFolderIfExists(UniversalId id)
@@ -1553,9 +1560,9 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 			while(userChoice == UiSigninDlg.LANGUAGE_CHANGED)
 			{	
 				if(mode==UiSigninDlg.INITIAL)
-					signinDlg = new UiInitialSigninDlg(this, currentActiveFrame);
+					signinDlg = new UiInitialSigninDlg(getLocalization(), getCurrentUiState(), currentActiveFrame);
 				else
-					signinDlg = new UiSigninDlg(this, currentActiveFrame, mode);
+					signinDlg = new UiSigninDlg(getLocalization(), getCurrentUiState(), currentActiveFrame, mode);
 				userChoice = signinDlg.getUserChoice();
 			}
 			if (userChoice == UiSigninDlg.NEW_ACCOUNT)
@@ -1650,7 +1657,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 
 	public boolean modifyBulletin(Bulletin b, CancelHandler cancelHandler)
 	{
-		modifyingBulletin = true;
+		getCurrentUiState().setModifyingBulletin(true);
 		setEnabled(false);
 		UiBulletinModifyDlg dlg = new UiBulletinModifyDlg(b, cancelHandler, this);
 		currentActiveFrame = dlg;
@@ -1660,15 +1667,10 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 
 	public void doneModifyingBulletin()
 	{
-		modifyingBulletin = false;
+		getCurrentUiState().setModifyingBulletin(false);
 		setEnabled(true);
 		setVisible(true);
 		currentActiveFrame = this;
-	}
-
-	public boolean isModifyingBulletin()
-	{
-		return modifyingBulletin;
 	}
 
 	public void doExportFolder()
@@ -1791,7 +1793,12 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		boolean rejectedErrorShown;
 		boolean contactInfoErrorShown;
 	}
-
+	
+	public CurrentUiState getCurrentUiState()
+	{
+		return uiState;
+	}
+	
 	private MartusApp app;
 	private CurrentUiState uiState;
 	private UiBulletinPreview preview;
@@ -1820,10 +1827,8 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	private static final int MAX_KEYPAIRFILE_SIZE = 32000;
 	private static final int BACKGROUND_UPLOAD_CHECK_MILLIS = 5*1000;
 	private static final int BACKGROUND_TIMEOUT_CHECK_EVERY_X_MILLIS = 5*1000;
-	private boolean modifyingBulletin;
 	private boolean mainWindowInitalizing;
 	public final static int CANCELLED = 10;
 	public final static int SIGNED_IN = 11;
 	public final static int NEW_ACCOUNT = 12;
-
 }

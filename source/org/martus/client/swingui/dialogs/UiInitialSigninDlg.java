@@ -30,19 +30,19 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 
+import org.martus.client.core.CurrentUiState;
 import org.martus.client.swingui.UiLocalization;
-import org.martus.client.swingui.UiMainWindow;
 import org.martus.swing.UiWrappedTextArea;
 
 
 public class UiInitialSigninDlg extends UiSigninDlg
 {
-	public UiInitialSigninDlg(UiMainWindow window, JFrame owner)
+	public UiInitialSigninDlg(UiLocalization localizationToUse, CurrentUiState uiStateToUse, JFrame owner)
 	{
-		super(window, owner, INITIAL);
+		super(localizationToUse, uiStateToUse, owner, INITIAL);
 	}
 
-	JPanel createMainPanel(UiLocalization localization)
+	JPanel createMainPanel()
 	{
 		JPanel scrolledPanel = new JPanel(); 
 		tabbedPane = new JTabbedPane();
@@ -56,7 +56,7 @@ public class UiInitialSigninDlg extends UiSigninDlg
 
 	JComponent createNewAccountPane()
 	{
-		String text = mainWindow.getLocalization().getFieldLabel("HowToCreateNewAccount");
+		String text = localization.getFieldLabel("HowToCreateNewAccount");
 		return new UiWrappedTextArea("\n" + text);
 	}
 }

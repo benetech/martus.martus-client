@@ -42,9 +42,9 @@ import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.border.EmptyBorder;
 
+import org.martus.client.core.CurrentUiState;
 import org.martus.client.swingui.UiConstants;
 import org.martus.client.swingui.UiLocalization;
-import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.UiSigninPanel;
 import org.martus.client.swingui.fields.UiChoiceEditor;
 import org.martus.swing.Utilities;
@@ -53,22 +53,21 @@ import org.martus.swing.Utilities;
 
 public class UiSigninDlg extends JDialog
 {
-	public UiSigninDlg(UiMainWindow window, JFrame owner, int mode)
+	public UiSigninDlg(UiLocalization localizationToUse, CurrentUiState uiStateToUse , JFrame owner, int mode)
 	{
-		this(window, owner, mode, "");
+		this(localizationToUse, uiStateToUse, owner, mode, "");
 	}
 
-	public UiSigninDlg(UiMainWindow window, JFrame owner, int mode, String username)
+	public UiSigninDlg(UiLocalization localizationToUse, CurrentUiState uiStateToUse, JFrame owner, int mode, String username)
 	{
 		super(owner, true);
-		initalize(window, owner, mode, username);
+		initalize(localizationToUse, uiStateToUse, owner, mode, username);
 	}
 
-	public void initalize(UiMainWindow window, JFrame owner, int mode, String username)
+	public void initalize(UiLocalization localizationToUse, CurrentUiState uiStateToUse, JFrame owner, int mode, String username)
 	{
-		mainWindow = window;
-		UiLocalization localization = mainWindow.getLocalization();
-
+		localization = localizationToUse;
+		uiState = uiStateToUse;
 		String title = getTextForTitle(localization, mode);
 		setTitle(title);
 		
@@ -89,7 +88,7 @@ public class UiSigninDlg extends JDialog
 		buttonBox.add(Box.createHorizontalGlue());
 		
 		buttonBox.setBorder(new EmptyBorder(5,5,5,5));
-		JPanel scrolledPanel = createMainPanel(localization);
+		JPanel scrolledPanel = createMainPanel();
 
 		Container scrollingPane = new JScrollPane(scrolledPanel);
 		getContentPane().add(scrollingPane);
@@ -111,18 +110,13 @@ public class UiSigninDlg extends JDialog
 		show();
 	}
 
-	JPanel createMainPanel(UiLocalization localization)
+	JPanel createMainPanel()
 	{
 		JPanel scrolledPanel = new JPanel(); 
 		scrolledPanel.add(signinPane);
 		return scrolledPanel;
 	}
 
-	public UiMainWindow getMainWindow()
-	{
-		return mainWindow;
-	}
-	
 	public String getTextForTitle(UiLocalization localization, int mode)
 	{
 		String versionInfo = UiConstants.programName;
@@ -198,7 +192,10 @@ public class UiSigninDlg extends JDialog
 	{
 		public void actionPerformed(ActionEvent ae)
 		{
-			mainWindow.getLocalization().setCurrentLanguageCode(languageDropdown.getText());
+			String languageCode = languageDropdown.getText();
+			localization.setCurrentLanguageCode(languageCode);
+			uiState.setCurrentLanguage(languageCode);
+			uiState.save();
 			languageChanged = true;
 			dispose();
 		}
@@ -211,10 +208,21 @@ public class UiSigninDlg extends JDialog
 			dispose();
 		}
 	}
-
+	
+	public UiLocalization getLocalization()
+	{
+		return localization;
+	}
+	
+	public CurrentUiState getCurrentUiState()
+	{
+		return uiState;
+	}
+	
 	UiSigninPanel signinPane;
 	JTabbedPane tabbedPane;
-	protected UiMainWindow mainWindow;
+	UiLocalization localization;
+	CurrentUiState uiState;
 	boolean okPressedForSignin;
 	boolean okPressedForNewAccount;
 	boolean languageChanged;

@@ -147,7 +147,7 @@ public class UigetSigninResults
 		int userChoice = UiSigninDlg.LANGUAGE_CHANGED;
 		while(userChoice == UiSigninDlg.LANGUAGE_CHANGED)
 		{	
-			signinDlg1 = new UiSigninDlg(mainWindow, mainWindow, mode, originalUserName);
+			signinDlg1 = new UiSigninDlg(mainWindow.getLocalization(), mainWindow.getCurrentUiState(), mainWindow, mode, originalUserName);
 			userChoice = signinDlg1.getUserChoice();
 		}
 		return signinDlg1;

@@ -29,7 +29,6 @@ package org.martus.client.swingui;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
-import java.io.IOException;
 
 import javax.swing.AbstractAction;
 import javax.swing.JButton;
@@ -38,6 +37,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.LineBorder;
 
+import org.martus.client.core.CurrentUiState;
 import org.martus.client.swingui.dialogs.UiSigninDlg;
 import org.martus.swing.ParagraphLayout;
 import org.martus.swing.UiWrappedTextArea;
@@ -47,8 +47,8 @@ public class UiSigninPanel extends JPanel implements VirtualKeyboardHandler
 	public UiSigninPanel(UiSigninDlg dialogToUse, int mode, String username)
 	{
 		owner = dialogToUse;
-		mainWindow = owner.getMainWindow();
-		UiLocalization localization = mainWindow.getLocalization();
+		localization = owner.getLocalization();
+		uiState = owner.getCurrentUiState();
 		setLayout(new ParagraphLayout());
 		
 		if(mode == UiSigninDlg.TIMED_OUT)
@@ -56,7 +56,7 @@ public class UiSigninPanel extends JPanel implements VirtualKeyboardHandler
 			add(new JLabel(""), ParagraphLayout.NEW_PARAGRAPH);
 			JLabel timedOutNote1 = new JLabel(localization.getFieldLabel("timedout1"));
 			add(timedOutNote1);
-			if(mainWindow.isModifyingBulletin())
+			if(owner.getCurrentUiState().isModifyingBulletin())
 			{
 				add(new JLabel(""), ParagraphLayout.NEW_PARAGRAPH);
 				JLabel timedOutNote2 = new JLabel(localization.getFieldLabel("timedout2"));
@@ -130,7 +130,7 @@ public class UiSigninPanel extends JPanel implements VirtualKeyboardHandler
 
 	public void UpdatePasswordArea()
 	{
-		boolean viewingVirtualKeyboard = mainWindow.isCurrentDefaultKeyboardVirtual();
+		boolean viewingVirtualKeyboard = uiState.isCurrentDefaultKeyboardVirtual();
 		if(viewingVirtualKeyboard)
 			displayPasswordAreaUsingVirtualKeyboard();
 		else
@@ -144,8 +144,6 @@ public class UiSigninPanel extends JPanel implements VirtualKeyboardHandler
 
 	public void displayPasswordAreaUsingVirtualKeyboard()
 	{
-		UiLocalization localization = mainWindow.getLocalization();
-
 		passwordArea.removeAll();
 		userNameDescription.setText(localization.getFieldLabel("VirtualUserNameDescription"));
 		passwordDescription.setText(localization.getFieldLabel("VirtualPasswordDescription"));
@@ -170,8 +168,6 @@ public class UiSigninPanel extends JPanel implements VirtualKeyboardHandler
 
 	public void displayPasswordAreaUsingNormalKeyboard()
 	{
-		UiLocalization localization = mainWindow.getLocalization();
-
 		passwordArea.removeAll();
 		passwordArea.updateUI();
 		userNameDescription.setText("");
@@ -199,22 +195,15 @@ public class UiSigninPanel extends JPanel implements VirtualKeyboardHandler
 
 	public void switchKeyboards()
 	{
-		boolean viewingVirtualKeyboard = mainWindow.isCurrentDefaultKeyboardVirtual();
+		boolean viewingVirtualKeyboard = uiState.isCurrentDefaultKeyboardVirtual();
 		if(viewingVirtualKeyboard)
 		{
-			if(!mainWindow.confirmDlg(null, "WarningSwitchToNormalKeyboard"))
+			if(!UiUtilities.confirmDlg(localization, null, "WarningSwitchToNormalKeyboard"))
 				return;
 		}
-		mainWindow.setCurrentDefaultKeyboardVirtual(!viewingVirtualKeyboard);
-		try
-		{
-			mainWindow.saveCurrentUiState();
-		}
-		catch(IOException e)
-		{
-			System.out.println("UiSigninDialog SwitchKeyboards :" + e);
-		}
 
+		uiState.setCurrentDefaultKeyboardVirtual(!viewingVirtualKeyboard);
+		uiState.save();
 		UpdatePasswordArea();
 	}
 
@@ -233,7 +222,8 @@ public class UiSigninPanel extends JPanel implements VirtualKeyboardHandler
 	}
 
 	UiSigninDlg owner;
-	UiMainWindow mainWindow;
+	UiLocalization localization;
+	CurrentUiState uiState;
 	private JLabel userNameDescription;
 	private JLabel passwordDescription;
 	private JTextField nameField;
