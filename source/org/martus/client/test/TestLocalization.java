@@ -30,7 +30,9 @@ import java.awt.ComponentOrientation;
 import java.io.File;
 import java.io.IOException;
 import java.util.Vector;
+
 import javax.swing.SwingConstants;
+
 import org.martus.client.swingui.EnglishStrings;
 import org.martus.client.swingui.UiConstants;
 import org.martus.client.swingui.UiLocalization;
@@ -277,13 +279,42 @@ public class TestLocalization extends TestCaseEnhanced
 
 	public void testJarVerifier() throws Exception
 	{
+		
 		assertEquals("no file", JarVerifier.ERROR_INVALID_JAR, JarVerifier.verify(new File("nonexistentFile"), false));
-		assertEquals("no maifest", JarVerifier.ERROR_JAR_NOT_SIGNED, JarVerifier.verify(getClass().getResource("Martus-xx-noManifest.mlp"), false));
-		assertEquals("Missing Entry", JarVerifier.ERROR_MISSING_ENTRIES, JarVerifier.verify(getClass().getResource("Martus-xx-MissingEntry.mlp"), false));
-		assertEquals("Modified Entry", JarVerifier.ERROR_JAR_NOT_SIGNED, JarVerifier.verify(getClass().getResource("Martus-xx-ModifiedEntry.mlp"), false));
-		assertEquals("Not Signed", JarVerifier.ERROR_JAR_NOT_SIGNED, JarVerifier.verify(getClass().getResource("Martus-xx-notSigned.mlp"), false));
-		assertEquals("Not sealed", JarVerifier.ERROR_JAR_NOT_SEALED, JarVerifier.verify(getClass().getResource("Martus-xx-notSealed.mlp"), false));
-		assertEquals("A valid signed jar didn't pass?", JarVerifier.JAR_VERIFIED_TRUE, JarVerifier.verify(getClass().getResource("Martus-xx.mlp"), false));
+		
+		File tmpResourceFile = returnTmpFileFromResourceWithDeleteOnExit("Martus-xx-noManifest.mlp");
+		assertEquals("no manifest", JarVerifier.ERROR_JAR_NOT_SIGNED, JarVerifier.verify(tmpResourceFile, false));
+		tmpResourceFile.delete();
+		
+		tmpResourceFile = returnTmpFileFromResourceWithDeleteOnExit("Martus-xx-MissingEntry.mlp");
+		assertEquals("Missing Entry", JarVerifier.ERROR_MISSING_ENTRIES, JarVerifier.verify(tmpResourceFile, false));
+		tmpResourceFile.delete();
+		
+		tmpResourceFile = returnTmpFileFromResourceWithDeleteOnExit("Martus-xx-ModifiedEntry.mlp");
+		assertEquals("Modified Entry", JarVerifier.ERROR_JAR_NOT_SIGNED, JarVerifier.verify(tmpResourceFile, false));
+		tmpResourceFile.delete();
+		
+		tmpResourceFile = returnTmpFileFromResourceWithDeleteOnExit("Martus-xx-notSigned.mlp");
+		assertEquals("Not Signed", JarVerifier.ERROR_JAR_NOT_SIGNED, JarVerifier.verify(tmpResourceFile, false));
+		tmpResourceFile.delete();
+		
+		tmpResourceFile = returnTmpFileFromResourceWithDeleteOnExit("Martus-xx-notSealed.mlp");
+		assertEquals("Not sealed", JarVerifier.ERROR_JAR_NOT_SEALED, JarVerifier.verify(tmpResourceFile, false));
+		tmpResourceFile.delete();
+		
+		tmpResourceFile = returnTmpFileFromResourceWithDeleteOnExit("Martus-xx.mlp");
+		assertEquals("A valid signed jar didn't pass?", JarVerifier.JAR_VERIFIED_TRUE, JarVerifier.verify(tmpResourceFile, false));
+		tmpResourceFile.delete();
+	}
+	
+	private File returnTmpFileFromResourceWithDeleteOnExit(String resourceName) throws Exception
+	{
+		File tmpResourceFile = createTempFile();
+		tmpResourceFile.delete();
+		copyResourceFileToLocalFile(tmpResourceFile, resourceName);
+		tmpResourceFile.deleteOnExit();
+		
+		return tmpResourceFile;
 	}
 	
 	public void testAddedMTPKLanguagePackWhenWeAllowUnofficialTranslations() throws Exception
