@@ -36,7 +36,7 @@ public class UiGridViewer extends UiGrid
 		super(fieldSpec);
 		table.resizeTable();
 		table.setEnabled(false);
-		widget.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+		widget.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		widget.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_NEVER);
 	}
 
