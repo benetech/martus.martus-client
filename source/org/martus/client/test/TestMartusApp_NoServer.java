@@ -230,6 +230,7 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 			{
 				new File(fakeDataDirectory, "MartusConfig.dat").delete();
 				new File(fakeDataDirectory, "MartusConfig.sig").delete();
+				new File(fakeDataDirectory, "AccountToken.txt").delete();
 				fakeDataDirectory.delete();
 			}
 		}
@@ -286,6 +287,7 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 			{
 				new File(fakeDataDirectory, "MartusConfig.dat").delete();
 				new File(fakeDataDirectory, "MartusConfig.sig").delete();
+				new File(fakeDataDirectory, "AccountToken.txt").delete();
 				fakeDataDirectory.delete();
 			}
 		}
@@ -351,6 +353,7 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 			{
 				new File(fakeDataDirectory, "MartusConfig.dat").delete();
 				new File(fakeDataDirectory, "MartusConfig.sig").delete();
+				new File(fakeDataDirectory, "AccountToken.txt").delete();
 				fakeDataDirectory.delete();
 			}
 		}
@@ -485,6 +488,7 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		app.createAccount(newUserName, newUserPassword);
 		File keyPairFile = app.getCurrentKeyPairFile();
 		assertEquals("not root dir?", app.getMartusDataRootDirectory(), keyPairFile.getParentFile());
+		assertEquals("accountDir not where the keypair file is?", keyPairFile.getParentFile(), app.getAccountDirectoryForUser(newUserName, newUserPassword));
 		File backupKeyPairFile = MartusApp.getBackupFile(keyPairFile);
 		assertEquals("no backup key file?", true, backupKeyPairFile.exists());
 
@@ -508,6 +512,7 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		assertNotEquals("account id's should be different", accountId1, accountId2);
 		
 		File account2KeypairFile = app.getKeyPairFile(app.getCurrentAccountDirectory());
+		assertEquals("accountDir2 not where the keypair file is?", account2KeypairFile.getParentFile(), app.getAccountDirectoryForUser(userName2, userPassword));
 		account2KeypairFile.delete();
 		try
 		{
@@ -532,6 +537,11 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		assertTrue("Must already have default account", app.doesDefaultAccountExist());
 		app.createAccount(thisUserName, userPassword);
 		File keyPairFile = app.getCurrentKeyPairFile();
+		assertTrue("Keypair File for new user doesn't exist?", keyPairFile.exists());
+		File accountDirectoryForUser = app.getAccountDirectoryForUser(thisUserName, userPassword);
+		assertNotNull("accountDirectoryForUser should not be null :Username ="+thisUserName, accountDirectoryForUser);
+		assertEquals("We dont own this directory?", keyPairFile.getParent(), accountDirectoryForUser.getPath());
+
 		File currentAccountDirectory = app.getCurrentAccountDirectory();
 		assertEquals("The directory holding the keypair file & current account directory should match",keyPairFile.getParent(), currentAccountDirectory.getAbsolutePath());
 		assertTrue("Keypair file does not exist? " + keyPairFile.getPath(), keyPairFile.exists());
@@ -672,7 +682,7 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		MockMartusApp app = MockMartusApp.create();
 		app.createAccount(userName, userPassword);
 		app.getSecurity().clearKeyPair();
-		app.setCurrentAccount("", app.getMartusDataRootDirectory());
+		app.currentUserName = "";
 		try
 		{
 			app.attemptReSignIn(userName, userPassword);
@@ -701,16 +711,36 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		app.deleteAllFiles();
 		TRACE_END();
 	}
+
+	public void testAttemptSignInToAdditionalAccount() throws Exception
+	{
+		TRACE_BEGIN("testAttemptSignInToAdditionalAccount");
+		MockMartusApp app = MockMartusApp.create();
+		app.createAccount(userName, userPassword);
+		String userName2 = "user2";
+		char[] userPassword2 = "pass2".toCharArray();
+		app.createAccount(userName2, userPassword2);
+		
+		app.attemptSignIn(userName2, userPassword2);
+		app.attemptSignIn(userName, userPassword);
+		app.deleteAllFiles();
+		TRACE_END();
+	}
+	
 	
 	public void testIsUserOwnerOfThisAccountDirectory() throws Exception
 	{
 		MockMartusApp app = MockMartusApp.create();
 		File tempDirectory = createTempDirectory();
-		File hashFile = app.getUserNameHashFile(tempDirectory); 
+		tempDirectory.deleteOnExit();
+		File hashFile = app.getUserNameHashFile(tempDirectory);
+		hashFile.deleteOnExit();
 		assertFalse("Should not have this hash file yet", hashFile.exists());
 		String username = "chuck";
 		assertFalse("This user should not own this directory", app.isUserOwnerOfThisAccountDirectory(mockSecurityForApp, username, null, app.getCurrentAccountDirectory()));
+		
 		app.setCurrentAccount(username, tempDirectory);
+		assertEquals("Current Account Directory not set?", tempDirectory, app.getCurrentAccountDirectory());
 		assertTrue("Hash File should now exist", hashFile.exists());
 		assertTrue("This user should be the owner of this directory", app.isUserOwnerOfThisAccountDirectory(mockSecurityForApp, username, null, app.getCurrentAccountDirectory()));
 
@@ -718,10 +748,11 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		char[] myPassword = "goodM".toCharArray();
 		app.createAccount(myUserName,myPassword);
 		assertTrue("My new user should be the owner of this directory", app.isUserOwnerOfThisAccountDirectory(mockSecurityForApp, myUserName, myPassword, app.getCurrentAccountDirectory()));
-		File myHashFile = app.getUserNameHashFile(tempDirectory); 
+		File myHashFile = app.getUserNameHashFile(app.getCurrentAccountDirectory()); 
 		myHashFile.delete();
 		assertTrue("My new user should still be the owner of this directory even without a hashFile", app.isUserOwnerOfThisAccountDirectory(mockSecurityForApp, myUserName, myPassword, app.getCurrentAccountDirectory()));
-		
+		hashFile.delete();
+		tempDirectory.delete();
 		app.deleteAllFiles();
 	}
 	
@@ -808,7 +839,9 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		wrongAccountLengthDir.delete();
 		notADirectory.delete();
 		nonAccountDir.delete();
+		new File(thirdAccountDir, "AccountToken.txt").delete();
 		thirdAccountDir.delete();
+		new File(newAccountDir, "AccountToken.txt").delete();
 		newAccountDir.delete();
 		accountsDir.delete();
 		TRACE_END();
@@ -836,6 +869,7 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		out.close();
 		assertEquals("account in a sub folder doesn't exist with a file?", true, app.doesAnyAccountExist());
 		
+		new File(newAccountDir, "AccountToken.txt").delete();
 		keyPairFile.delete();
 		newAccountDir.delete();
 		accountsDir.delete();
@@ -988,6 +1022,8 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		assertTrue("Doesn't contain f2 for bulletin b2?", v2.contains(f2));
 		assertTrue("Doesn't contain f3 for bulletin b2?", v2.contains(f3));
 		assertTrue("Doesn't contain Discarded for bulletin b2?", v2.contains(discarded));
+
+		app.deleteAllFiles();
 		TRACE_END();
 	}
 
@@ -999,6 +1035,17 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		assertEquals("wrong code?", "71887634433124687372", publicCode);
 	}
 
+	public void testgetHexDigest() throws Exception
+	{
+		
+		byte[] completelyNegativeString;
+		completelyNegativeString = new byte[20];
+		Arrays.fill(completelyNegativeString,(byte)0xff);
+		String digest = MartusUtilities.byteArrayToHexString(completelyNegativeString);
+		assertEquals("should still be 40 char's long", 40, digest.length());
+		assertEquals("any normal string should return a digest of 40 characters", 40, MartusCrypto.getHexDigest("hi1234fdsfjlk").length());
+		
+	}
 	public void testGetFileLength() throws Exception
 	{
 		class MockFile extends File

@@ -1050,33 +1050,44 @@ public class MartusApp
 
 	public boolean doesAccountExist(String userName, char[] userPassPhrase) throws Exception
 	{
+		return (getAccountDirectoryForUser(userName, userPassPhrase) != null);
+	}
+
+	public File getAccountDirectoryForUser(String userName, char[] userPassPhrase) throws Exception
+	{
 		Vector allAccountDirs = getAllAccountDirectories();
 		MartusSecurity tempSecurity = new MartusSecurity();
 		for(int i = 0; i<allAccountDirs.size(); ++i )
 		{
-			if(isUserOwnerOfThisAccountDirectory(tempSecurity, userName, userPassPhrase, (File)allAccountDirs.get(i)))
-				return true;
+			File testAccountDirectory = (File)allAccountDirs.get(i);
+			if(isUserOwnerOfThisAccountDirectory(tempSecurity, userName, userPassPhrase, testAccountDirectory))
+				return testAccountDirectory;
 		}
-		return false;
+		return null;
 	}
 
 	private void createAdditionalAccount(String userName, char[] userPassPhrase) throws Exception
 	{
-		File accountsDirectory = getAccountsDirectory();
-		accountsDirectory.mkdirs();
-		File tempAccountDir = File.createTempFile("temp", null, accountsDirectory);
+		File tempAccountDir = null;
 		try
 		{
+			File accountsDirectory = getAccountsDirectory();
+			accountsDirectory.mkdirs();
+			tempAccountDir = File.createTempFile("temp", null, accountsDirectory);
 			tempAccountDir.delete();
 			tempAccountDir.mkdirs();
 			createAccountInternal(tempAccountDir, userName, userPassPhrase);
 			String realAccountDirName = MartusCrypto.getHexDigest(getAccountId());
 			File realAccountDir = new File(accountsDirectory, realAccountDirName);
-			tempAccountDir.renameTo(realAccountDir);
-			setCurrentAccount(userName, realAccountDir);
+
+			if(tempAccountDir.renameTo(realAccountDir))
+				setCurrentAccount(userName, realAccountDir);
+			else
+				System.out.println("createAdditionalAccount rename failed.");
 		}
 		catch (Exception e)
 		{
+			System.out.println("createAdditionalAccount failed.");
 			DirectoryUtils.deleteEntireDirectoryTree(tempAccountDir);
 			throw(e);
 		}
@@ -1112,16 +1123,22 @@ public class MartusApp
 			return accountDirectories;
 		for (int i = 0; i < contents.length; i++)
 		{
+			File thisFile = contents[i];
 			try
 			{
-				File thisFile = contents[i];
 				if(!thisFile.isDirectory())
+				{	
 					continue;
+				}
 				String name = thisFile.getName();
 				if(name.length() != 40)
+				{	
 					continue;
+				}
 				if(name.startsWith("-"))
+				{	
 					continue;
+				}
 				new BigInteger(name, 16);
 				accountDirectories.add(thisFile);
 			}
@@ -1185,7 +1202,8 @@ public class MartusApp
 
 	public void attemptSignIn(String userName, char[] userPassPhrase) throws Exception
 	{
-		attemptSignInInternal(getKeyPairFile(getMartusDataRootDirectory()), userName, userPassPhrase);
+		File keyPairFile = getAccountDirectoryForUser(userName, userPassPhrase);
+		attemptSignInInternal(getKeyPairFile(keyPairFile), userName, userPassPhrase);
 	}
 	
 	public void attemptReSignIn(String userName, char[] userPassPhrase) throws Exception
@@ -1307,7 +1325,8 @@ public class MartusApp
 			try
 			{
 				String hashOfUserName = reader.readLine();
-				if(hashOfUserName.equals(MartusSecurity.getHexDigest(userName)))
+				String hexDigest = MartusSecurity.getHexDigest(userName);
+				if(hashOfUserName.equals(hexDigest))
 					return true;
 			}
 			finally
@@ -1472,7 +1491,7 @@ public class MartusApp
 	public ClientSideNetworkGateway currentNetworkInterfaceGateway;
 	boolean logUploads;
 	private MartusCrypto security;
-	private String currentUserName;
+	public String currentUserName;
 	private int maxNewFolders;
 
 	public static final String PUBLIC_INFO_EXTENSION = ".mpi";

@@ -1012,6 +1012,7 @@ public class TestBulletinStore extends TestCaseEnhanced
 		}
 		assertEquals("imported even though the folder prevented it?", 0, thisApp.getStore().getBulletinCount());
 		tempFile.delete();
+		thisApp.deleteAllFiles();
 	}
 
 	public void testImportDraftZipFile() throws Exception

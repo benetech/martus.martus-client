@@ -50,7 +50,6 @@ public class MockMartusApp extends MartusApp
 
 		MockMartusApp app = new MockMartusApp(crypto, fakeDataDirectory);
 		app.setCurrentAccount("some user", app.getMartusDataRootDirectory());
-
 		return app;
 	}
 
@@ -59,11 +58,11 @@ public class MockMartusApp extends MartusApp
 		return create(MockMartusSecurity.createClient());
 	}
 
-	MockMartusApp(MartusCrypto crypto, File dataDirectoryToUse) throws MartusAppInitializationException
+	private MockMartusApp(MartusCrypto crypto, File dataDirectoryToUse) throws MartusAppInitializationException
 	{
 		super(crypto, dataDirectoryToUse, new UiLocalization(dataDirectoryToUse));
 	}
-
+	
 	public void deleteAllFiles() throws Exception
 	{
 		getStore().deleteAllData();
@@ -285,5 +284,4 @@ public class MockMartusApp extends MartusApp
 	}
 
 	String testDataDirectory;
-
 }

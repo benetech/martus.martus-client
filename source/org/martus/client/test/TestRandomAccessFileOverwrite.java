@@ -52,6 +52,7 @@ public class TestRandomAccessFileOverwrite extends TestCaseEnhanced
 	public void tearDown() throws Exception
 	{		
 		tempFile.delete();
+		assertFalse("tempFile Not deleted?", tempFile.exists());
 		super.tearDown();
 	}
 
@@ -88,6 +89,7 @@ public class TestRandomAccessFileOverwrite extends TestCaseEnhanced
 		{
 			assertEquals("wrong byte?", 0x55, randomFile.read());
 		}
+		randomFile.close();
     }
     
 	protected File createTempFile(String name) throws IOException
