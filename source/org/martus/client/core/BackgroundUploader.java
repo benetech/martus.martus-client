@@ -90,13 +90,16 @@ public class BackgroundUploader
 	public String uploadBulletin(Bulletin b) throws
 			InvalidPacketException, WrongPacketTypeException, SignatureVerificationException, DecryptionException, NoKeyPairException, CryptoException, FileNotFoundException, MartusSignatureException, FileTooLargeException, IOException
 	{
+		ClientBulletinStore store = app.getStore();
+		if(b.isSealed() && store.isProbablyOnServer(b))
+			return NetworkInterfaceConstants.DUPLICATE;
 		File tempFile = File.createTempFile("$$$MartusUploadBulletin", null);
 		try
 		{
 			tempFile.deleteOnExit();
 			UniversalId uid = b.getUniversalId();
 
-			ReadableDatabase db = app.getStore().getDatabase();
+			ReadableDatabase db = store.getDatabase();
 			DatabaseKey headerKey = DatabaseKey.createKey(uid, b.getStatus());
 			MartusCrypto security = app.getSecurity();
 			BulletinZipUtilities.exportBulletinPacketsFromDatabaseToZipFile(db, headerKey, tempFile, security);
