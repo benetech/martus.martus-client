@@ -489,19 +489,7 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		assertEquals("non-blank username?", "", appWithAccount.getUserName());
 		appWithAccount.security.createKeyPair();
 		TRACE_END();
-	}
-	
-	public void testScrubKeyPairFile() throws Exception
-	{
-		TRACE_BEGIN("testScrubKeyPairFile");
-		appWithAccount.scrubKeypair();	
-		
-		File keyPairFile = appWithAccount.getCurrentKeyPairFile();	
-		checkScrubbedData(keyPairFile);
-		checkScrubbedData(MartusApp.getBackupFile(keyPairFile));
-
-		TRACE_END();
-	}
+	}	
 	
 	public void testScrubAndDeleteKeyPairFile() throws Exception
 	{

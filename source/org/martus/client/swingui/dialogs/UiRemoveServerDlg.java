@@ -40,55 +40,55 @@ import org.martus.swing.ParagraphLayout;
 import org.martus.swing.Utilities;
 
 
-public class UiRemoveServerDlg extends JDialog
+public class UiRemoveServerDlg extends JDialog implements ActionListener
 {
 	public UiRemoveServerDlg(UiMainWindow owner,ConfigInfo info)
-		{
-			super(owner, "", true);
-			UiLocalization localization = owner.getLocalization();			
-			
-			setTitle(localization.getWindowTitle("RemoveServer"));		
-			String selServer = localization.getFieldLabel("SelectServer");		
-			JLabel selServerLabel = new JLabel(selServer);
-			String[] serverIPAddress = {info.getServerName()};
-									
-			JComboBox serversCombo 	= new JComboBox(serverIPAddress);
-			serversCombo.setEditable(false);						
-
-			JButton ok = new JButton(localization.getButtonLabel("ok"));
-			ok.addActionListener(new OkHandler());
-			JButton cancel = new JButton(localization.getButtonLabel("cancel"));
-			cancel.addActionListener(new CancelHandler());
-
-			getContentPane().setLayout(new ParagraphLayout());	
-			getContentPane().add(new JLabel(""), ParagraphLayout.NEW_PARAGRAPH);		
-			getContentPane().add(selServerLabel);	
-			getContentPane().add(serversCombo);			
+	{
+		super(owner, "", true);
+		UiLocalization localization = owner.getLocalization();			
 		
-			getContentPane().add(new JLabel(""), ParagraphLayout.NEW_PARAGRAPH);		
-			getContentPane().add(ok);
-			getContentPane().add(cancel);
+		setTitle(localization.getWindowTitle("RemoveServer"));		
+		String selServer = localization.getFieldLabel("SelectServer");		
+		JLabel selServerLabel = new JLabel(selServer);
+		String[] serverIPAddress = {info.getServerName()};
+								
+		JComboBox serversCombo 	= new JComboBox(serverIPAddress);
+		serversCombo.setEditable(false);						
 
-			getRootPane().setDefaultButton(ok);
+		ok = new JButton(localization.getButtonLabel("ok"));		
+		ok.addActionListener(this);
+		JButton cancel = new JButton(localization.getButtonLabel("cancel"));
 
-			Utilities.centerDlg(this);
-			setResizable(false);
-		}	
+		getContentPane().setLayout(new ParagraphLayout());	
+		getContentPane().add(new JLabel(""), ParagraphLayout.NEW_PARAGRAPH);		
+		getContentPane().add(selServerLabel);	
+		getContentPane().add(serversCombo);			
 	
-		class OkHandler implements ActionListener
-		{
-			public void actionPerformed(ActionEvent ae)
-			{			
-				dispose();
-			}
-		}
+		getContentPane().add(new JLabel(""), ParagraphLayout.NEW_PARAGRAPH);		
+		getContentPane().add(ok);
+		getContentPane().add(cancel);
 
-		class CancelHandler implements ActionListener
-		{
-			public void actionPerformed(ActionEvent ae)
-			{				
-				dispose();
-			}
-		}	
+		getRootPane().setDefaultButton(ok);
+
+		Utilities.centerDlg(this);
+		setResizable(false);
+	}	
+
+	public void actionPerformed(ActionEvent ae)
+	{	
+		action=false;
+		if(ae.getSource() == ok)
+		{			
+			action = true;
+		}			
+		dispose();
+	}
+		
+	public boolean isOkayPressed()
+	{
+		return action;
+	}
 	
+	boolean action;
+	JButton ok;		
 }

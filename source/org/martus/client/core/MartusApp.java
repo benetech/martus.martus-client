@@ -368,7 +368,7 @@ public class MartusApp
 		return new File(original.getPath() + ".bak");
 	}
 	
-	public void scrubKeypair() throws IOException
+	private void scrubKeypair() throws IOException
 	{
 		File file = getCurrentKeyPairFile();	
 		File backupFile = getBackupFile(file);	
