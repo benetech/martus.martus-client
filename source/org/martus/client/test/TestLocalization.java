@@ -205,13 +205,7 @@ public class TestLocalization extends TestCaseEnhanced
 		File mtfTranslation = new File(translationDirectory, UiBasicLocalization.getMtfFilename(languageCode));
 		mtfTranslation.deleteOnExit();
 		writeDataToFile(mtfTranslation, data);
-/*		File mtfHelpFile = new File(translationDirectory, UiBasicLocalization.getMlpkFilename(languageCode));
-		mtfHelpFile.deleteOnExit();
-		writeDataToFile(mtfHelpFile, data);
-		File mtfHelpTOCFile = new File(translationDirectory, UiBasicLocalization.getMlpkFilename(languageCode));
-		mtfHelpTOCFile.deleteOnExit();
-		writeDataToFile(mtfHelpTOCFile, data);
-*/
+
 		assertTrue("mtf file should exist", mtfTranslation.exists());
 		assertTrue("mlp file should exist", mlpkTranslation.exists());
 		tmpLocalization.hideUnofficialTranslationFiles(languageCode);

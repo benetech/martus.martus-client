@@ -30,13 +30,13 @@ import java.awt.Dimension;
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.io.File;
+import java.io.FileFilter;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.RandomAccessFile;
 import java.util.Arrays;
 import java.util.Vector;
-
 import org.martus.client.core.BulletinFolder;
 import org.martus.client.core.ClientBulletinStore;
 import org.martus.client.core.ConfigInfo;
@@ -158,6 +158,119 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		TRACE_END();
 	}	
 	
+	public void testUpdateDocsFromMLPFiles() throws Exception
+	{
+		TRACE_BEGIN("testUpdateDocsFromMLPFiles");
+		File translationDirectory = appWithAccount.martusDataRootDirectory;
+		File mlpkTranslationxx = new File(translationDirectory, UiBasicLocalization.getMlpkFilename("xx"));
+		copyResourceFileToLocalFile(mlpkTranslationxx, "Martus-xx-notSigned.mlp");
+		mlpkTranslationxx.deleteOnExit();
+		File mlpkTranslationyy = new File(translationDirectory, UiBasicLocalization.getMlpkFilename("yy"));
+		copyResourceFileToLocalFile(mlpkTranslationyy, "Martus-yy-notSigned.mlp");
+		mlpkTranslationyy.deleteOnExit();
+		appWithAccount.UpdateDocsIfNecessaryFromMLPFiles();
+		File documentsDirectory = appWithAccount.getDocumentsDirectory();
+		assertFalse("Shouldn't have a docs directory yet, those mlp files were not signed.", documentsDirectory.exists());
+		mlpkTranslationxx.delete();
+		mlpkTranslationyy.delete();
+
+		copyResourceFileToLocalFile(mlpkTranslationxx, "Martus-xx.mlp");
+		mlpkTranslationxx.deleteOnExit();
+		copyResourceFileToLocalFile(mlpkTranslationyy, "Martus-yy.mlp");
+		mlpkTranslationyy.deleteOnExit();
+		appWithAccount.UpdateDocsIfNecessaryFromMLPFiles();
+		assertTrue("Should now have a docs directory,with 4 files within.", documentsDirectory.exists());
+		File[] pdfFiles = GetPdfFiles(documentsDirectory);
+		assertEquals("Should have 4 pdf files", 4, pdfFiles.length);
+		appWithAccount.UpdateDocsIfNecessaryFromMLPFiles();
+		pdfFiles = GetPdfFiles(documentsDirectory);
+		assertEquals("Should still have just 4 pdf files", 4, pdfFiles.length);
+
+		mlpkTranslationxx.delete();
+		mlpkTranslationyy.delete();
+		DirectoryUtils.deleteEntireDirectoryTree(documentsDirectory);
+
+		TRACE_END();
+	}	
+
+	public void testUpdateNewerDocsFromMLPFiles() throws Exception
+	{
+		TRACE_BEGIN("testUpdateNewerDocsFromMLPFiles");
+		File translationDirectory = appWithAccount.martusDataRootDirectory;
+		File mlpkTranslationyy = new File(translationDirectory, UiBasicLocalization.getMlpkFilename("yy"));
+		copyResourceFileToLocalFile(mlpkTranslationyy, "Martus-yy.mlp");
+		mlpkTranslationyy.deleteOnExit();
+		appWithAccount.UpdateDocsIfNecessaryFromMLPFiles();
+		File documentsDirectory = appWithAccount.getDocumentsDirectory();
+		mlpkTranslationyy.delete();
+		File quickStartGuide_yy = new File(documentsDirectory, "quickstartguide_yy.pdf");
+
+		String firstLineInGuide_yy = readLineFromFile(quickStartGuide_yy);
+		assertEquals("not the same pdf file?",textInsideYYQuickStartGuideMLPFile, firstLineInGuide_yy);
+
+		copyResourceFileToLocalFile(mlpkTranslationyy, "Martus-updated-yy.mlp");
+		mlpkTranslationyy.deleteOnExit();
+		appWithAccount.UpdateDocsIfNecessaryFromMLPFiles();
+		mlpkTranslationyy.delete();
+		String firstLineInUpdatedQuickStartGuide_yy = readLineFromFile(quickStartGuide_yy);
+		
+		DirectoryUtils.deleteEntireDirectoryTree(documentsDirectory);
+		assertEquals("not the updated pdf file?",textInsideUpdatedYYQuickStartGuideMLPFile, firstLineInUpdatedQuickStartGuide_yy);
+
+		TRACE_END();
+	}	
+	
+	public void testDowngradingDocsFromMLPFiles() throws Exception
+	{
+		TRACE_BEGIN("testDowngradingDocsFromMLPFiles");
+		File translationDirectory = appWithAccount.martusDataRootDirectory;
+		File mlpkTranslationyy = new File(translationDirectory, UiBasicLocalization.getMlpkFilename("yy"));
+		copyResourceFileToLocalFile(mlpkTranslationyy, "Martus-updated-yy.mlp");
+		mlpkTranslationyy.deleteOnExit();
+		appWithAccount.UpdateDocsIfNecessaryFromMLPFiles();
+		mlpkTranslationyy.delete();
+		File documentsDirectory = appWithAccount.getDocumentsDirectory();
+		File quickStartGuide_yy = new File(documentsDirectory, "quickstartguide_yy.pdf");
+
+		String firstLineInUpdatedQuickStartGuide_yy = readLineFromFile(quickStartGuide_yy);
+		assertEquals("not the same pdf file as the updated file?",textInsideUpdatedYYQuickStartGuideMLPFile, firstLineInUpdatedQuickStartGuide_yy);
+
+		copyResourceFileToLocalFile(mlpkTranslationyy, "Martus-yy.mlp");
+		mlpkTranslationyy.deleteOnExit();
+		appWithAccount.UpdateDocsIfNecessaryFromMLPFiles();
+		mlpkTranslationyy.delete();
+
+		String firstLineInGuide_yy = readLineFromFile(quickStartGuide_yy);
+		
+		DirectoryUtils.deleteEntireDirectoryTree(documentsDirectory);
+		assertEquals("Should still be the updated pdf file, it shouldn't downgrade?",textInsideUpdatedYYQuickStartGuideMLPFile, firstLineInGuide_yy);
+		
+		
+		TRACE_END();
+	}	
+
+	private String readLineFromFile(File file) throws IOException
+	{
+		UnicodeReader reader = new UnicodeReader(file);
+		String text = reader.readLine();
+		reader.close();
+		return text;
+	}
+
+	
+	private File[] GetPdfFiles(File documentsDirectory)
+	{
+		File[] mpiFiles = documentsDirectory.listFiles(new FileFilter()
+		{
+			public boolean accept(File file)
+			{
+				return (file.isFile() && file.getName().endsWith(".pdf"));	
+			}
+		});
+		return mpiFiles;
+	}
+	
+
 	public void testSaveBulletin() throws Exception
 	{
 		ClientBulletinStore store = appWithAccount.getStore();
@@ -1681,4 +1794,7 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 	static final String userName2 = "testuse!";
 	static final char[] userPassword = "12345".toCharArray();
 	static final char[] userPassword2 = "12347".toCharArray();
+	static final String textInsideYYQuickStartGuideMLPFile = "fake pdf file for testing";
+	static final String textInsideUpdatedYYQuickStartGuideMLPFile = "updated fake pdf file for testing.";
+
 }

@@ -39,12 +39,14 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.UnsupportedEncodingException;
 import java.util.Date;
+import java.util.Enumeration;
 import java.util.Iterator;
 import java.util.Set;
 import java.util.Vector;
+import java.util.jar.JarEntry;
+import java.util.jar.JarFile;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
-
 import org.martus.client.core.ClientBulletinStore.BulletinAlreadyExistsException;
 import org.martus.client.search.BulletinSearcher;
 import org.martus.client.search.SearchParser;
@@ -98,6 +100,7 @@ import org.martus.common.packet.Packet.WrongPacketTypeException;
 import org.martus.jarverifier.JarVerifier;
 import org.martus.util.Base64;
 import org.martus.util.DirectoryUtils;
+import org.martus.util.StreamCopier;
 import org.martus.util.UnicodeReader;
 import org.martus.util.UnicodeWriter;
 import org.martus.util.Base64.InvalidBase64Exception;
@@ -136,6 +139,7 @@ public class MartusApp
 		}
 
 		initializeCurrentLanguage();
+		UpdateDocsIfNecessaryFromMLPFiles();
 	}
 
 	private void initializeCurrentLanguage()
@@ -403,7 +407,11 @@ public class MartusApp
 	public File getAccountsDirectory()
 	{
 		return new File(getMartusDataRootDirectory(), ACCOUNTS_DIRECTORY_NAME);
-		
+	}
+	
+	public File getDocumentsDirectory()
+	{
+		return new File(getMartusDataRootDirectory(), DOCUMENTS_DIRECTORY_NAME);
 	}
 
 	public String getCurrentAccountDirectoryName()
@@ -507,6 +515,58 @@ public class MartusApp
 	{
 		String helpFile = "MartusHelpTOC-" + languageCode + ".txt";
 		return helpFile;
+	}
+	
+	public void UpdateDocsIfNecessaryFromMLPFiles()
+	{
+		File[] mlpFiles = GetMlpFiles();
+		for(int i = 0; i < mlpFiles.length; ++i)
+		{
+			if(JarVerifier.verify(mlpFiles[i], false) == JarVerifier.JAR_VERIFIED_TRUE)
+			{
+				try
+				{
+					JarFile jar = new JarFile(mlpFiles[i]);
+					Enumeration enum = jar.entries();
+					while(enum.hasMoreElements())
+					{
+						JarEntry entry = (JarEntry) enum.nextElement();
+						String jarEntryName = entry.getName();
+						if(jarEntryName.endsWith(".pdf"))
+						{
+							File documentsDirectory = getDocumentsDirectory();
+							File newPdf = new File(documentsDirectory, jarEntryName);
+							if(newPdf.exists())
+							{
+								Date zipPdfDate = new Date(entry.getTime());
+								Date currentFileDate = new Date(newPdf.lastModified());
+								if(zipPdfDate.before(currentFileDate))
+									continue;
+								newPdf.delete();
+							}
+							documentsDirectory.mkdirs();
+							copyJarEntryToFile(jar, entry, newPdf);
+						}
+					}
+					jar.close();
+				}
+				catch(IOException e)
+				{
+					e.printStackTrace();
+				}
+			}
+		}
+	}
+
+	private void copyJarEntryToFile(JarFile jar, JarEntry entry, File outputFile) throws IOException, FileNotFoundException
+	{
+		InputStream in = jar.getInputStream(entry);
+		FileOutputStream out = new FileOutputStream(outputFile);
+		StreamCopier copier = new StreamCopier();
+		copier.copyStream(in, out);
+		in.close();
+		out.close();
+		outputFile.setLastModified(entry.getTime());
 	}
 
 	public static File getTranslationsDirectory()
@@ -675,6 +735,18 @@ public class MartusApp
 			public boolean accept(File file)
 			{
 				return (file.isFile() && file.getName().endsWith(".mpi"));	
+			}
+		});
+		return mpiFiles;
+	}
+
+	private File[] GetMlpFiles()
+	{
+		File[] mpiFiles = martusDataRootDirectory.listFiles(new FileFilter()
+		{
+			public boolean accept(File file)
+			{
+				return (file.isFile() && file.getName().endsWith(Localization.MARTUS_LANGUAGE_PACK_SUFFIX));	
 			}
 		});
 		return mpiFiles;
@@ -1565,6 +1637,7 @@ public class MartusApp
 	public static final String KEYPAIR_FILENAME = "MartusKeyPair.dat";
 	public static final String ACCOUNTS_DIRECTORY_NAME = "accounts";
 	public static final String PACKETS_DIRECTORY_NAME = "packets";
+	public static final String DOCUMENTS_DIRECTORY_NAME = "Docs";
 	
 	private final int MAXFOLDERS = 50;
 	public int serverChunkSize = NetworkInterfaceConstants.MAX_CHUNK_SIZE;
