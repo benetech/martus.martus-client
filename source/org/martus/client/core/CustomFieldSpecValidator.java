@@ -47,6 +47,7 @@ public class CustomFieldSpecValidator
 		checkForDuplicateFields(specsToCheck);
 		checkForMissingCustomLabels(specsToCheck);
 		checkForLabelsOnStandardFields(specsToCheck);
+		checkForUnknownTypes(specsToCheck);
 	}
 		
 	public boolean isValid()
@@ -67,6 +68,9 @@ public class CustomFieldSpecValidator
 			return false;
 			
 		if(standardTagsWithLabels.size() != 0)
+			return false;
+			
+		if(tagsWithInvalidTypes.size() != 0)
 			return false;
 			
 		return true;
@@ -135,10 +139,22 @@ public class CustomFieldSpecValidator
 		}
 	}
 	
+	private void checkForUnknownTypes(FieldSpec[] specsToCheck)
+	{
+		tagsWithInvalidTypes = new Vector();
+		for (int i = 0; i < specsToCheck.length; i++)
+		{
+			FieldSpec spec = specsToCheck[i]; 
+			if(spec.getType() == FieldSpec.TYPE_UNKNOWN)
+			tagsWithInvalidTypes.add(spec.getTag());
+		}
+	}
+	
 	boolean isNull;
 	int blankTagCount;
 	Vector missingTags;
 	Vector duplicateTags;
 	Vector customTagsWithoutLabels;
 	Vector standardTagsWithLabels;
+	Vector tagsWithInvalidTypes;
 }

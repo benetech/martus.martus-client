@@ -27,6 +27,7 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.test;
 
 import org.martus.client.core.CustomFieldSpecValidator;
+import org.martus.common.CustomFields;
 import org.martus.common.StandardFieldSpecs;
 import org.martus.common.FieldSpec;
 import org.martus.common.LegacyCustomFields;
@@ -87,6 +88,20 @@ public class TestCustomFieldSpecValidator extends TestCaseEnhanced
 		specs = addFieldSpec(specs, LegacyCustomFields.createFromLegacy("b"));
 		CustomFieldSpecValidator checker2 = new CustomFieldSpecValidator(specs);
 		assertFalse("valid?", checker2.isValid());
+	}
+	
+	public void testUnknownType() throws Exception
+	{
+		FieldSpec[] specs = StandardFieldSpecs.getDefaultPublicFieldSpecs();
+		CustomFields fields = new CustomFields(specs);
+		String xmlFieldUnknownType = "<CustomFields><Field><Tag>weird</Tag>" +
+			"<Label>blah</Label><Type>xxx</Type>" +
+			"</Field></CustomFields>";
+		FieldSpec badSpec = CustomFields.parseXml(xmlFieldUnknownType)[0]; 
+		fields.add(badSpec);
+		specs = addFieldSpec(specs, badSpec);
+		CustomFieldSpecValidator checker = new CustomFieldSpecValidator(specs);
+		assertFalse("didn't detect unknown?", checker.isValid());
 	}
 
 	public void testStandardFieldWithLabel() throws Exception
