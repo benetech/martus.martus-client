@@ -342,7 +342,7 @@ public class MartusApp
 		return new File(getMartusDataRootDirectory(), "UiState.dat");
 	}
 
-	public File getDefaultDetailsFile()
+	public File getBulletinDefaultDetailsFile()
 	{
 		return new File(getCurrentAccountDirectoryName(), "DefaultDetails" + DEFAULT_DETAILS_EXTENSION);
 	}

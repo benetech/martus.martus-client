@@ -285,9 +285,9 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		ConfigInfo info = app.getConfigInfo();
 		if(createdNewAccount)
 		{
-			File defaultDetailsFile = app.getDefaultDetailsFile();
-			if(defaultDetailsFile.exists())
-				updateBulletinDetails(defaultDetailsFile);
+			File bulletinDefaultDetailsFile = app.getBulletinDefaultDetailsFile();
+			if(bulletinDefaultDetailsFile.exists())
+				updateBulletinDetails(bulletinDefaultDetailsFile);
 		}
 		
 		if(!info.hasContactInfo())
@@ -1101,7 +1101,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	public void updateBulletinDetails(File defaultFile)
 	{
 		ConfigInfo info = app.getConfigInfo();
-		File details = app.getDefaultDetailsFile();
+		File details = app.getBulletinDefaultDetailsFile();
 		UiTemplateDlg templateDlg = new UiTemplateDlg(this, info, details);
 		try
 		{
