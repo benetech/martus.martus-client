@@ -28,13 +28,11 @@ package org.martus.client.swingui.bulletincomponent;
 
 import java.awt.Color;
 import java.awt.Font;
-
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.LineBorder;
-
 import org.martus.client.swingui.UiLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.UiWarningLabel;
@@ -54,7 +52,7 @@ abstract public class UiBulletinComponentSection extends UiParagraphPanel
 		sectionHeading = new UiLabel("", null, JLabel.LEFT);
 		sectionHeading.setVerticalTextPosition(JLabel.TOP);
 		sectionHeading.setFont(sectionHeading.getFont().deriveFont(Font.BOLD));
-		add(sectionHeading);
+		addComponents(sectionHeading, new UiLabel(""));
 		
 		warningIndicator = new UiWarningLabel();
 		add(warningIndicator);
