@@ -53,8 +53,8 @@ import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableModel;
 
 import org.martus.client.core.MartusApp;
-import org.martus.client.core.HQKeys.HQsException;
 import org.martus.client.swingui.UiMainWindow;
+import org.martus.common.HQKeys.HQsException;
 import org.martus.common.clientside.UiBasicLocalization;
 import org.martus.common.crypto.MartusCrypto;
 import org.martus.swing.UiFileChooser;

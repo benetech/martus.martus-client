@@ -27,7 +27,7 @@ package org.martus.client.test;
 
 import java.util.Vector;
 
-import org.martus.client.core.HQKeys;
+import org.martus.common.HQKeys;
 import org.martus.common.MartusXml;
 import org.martus.util.TestCaseEnhanced;
 
