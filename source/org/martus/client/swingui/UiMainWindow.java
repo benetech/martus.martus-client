@@ -1647,9 +1647,8 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	
 	public void doConfigureHQs()
 	{
-//TODO:remove comments
-//		if(!reSignIn())
-//			return;
+		if(!reSignIn())
+			return;
 		new UiConfigureHQs(this);
 	}
 	

@@ -338,7 +338,6 @@ public class UiConfigureHQs extends JDialog
 	boolean confirmPublicCode(String publicCode, String baseTag, String errorBaseTag)
 	{
 		String userEnteredPublicCode = "";
-System.out.println("Public code required:" + publicCode);
 		while(true)
 		{
 			userEnteredPublicCode = mainWindow.getStringInput(baseTag, "", userEnteredPublicCode);
