@@ -40,7 +40,7 @@ public class EnglishStrings
 "wintitle:ErrorBackingupKeyPair=Error",
 "wintitle:askToBackupKeyPair=Key Backup Needed",
 
-"wintitle:confirmsend=Confirm Send Bulletin",
+"wintitle:confirmsend=Confirm Save Bulletin",
 "wintitle:confirmretrieve=Confirm Retrieve Bulletins",
 "wintitle:confirmRemoveAttachment=Confirm Remove Attachments",
 "wintitle:confirmOverWriteExistingFile=Confirm Replace Existing File",
@@ -240,7 +240,7 @@ public class EnglishStrings
 "wintitle:warningDeleteMultipleBulletins=Confirm Delete Bulletins",
 
 "wintitle:PrintPrivateData=Confirm Print Private Data",
-"wintitle:confirmSendWithPublicData=Confirm Send With Public Data",
+"wintitle:confirmSendWithPublicData=Confirm Save With Public Data",
 "wintitle:DeleteMyDataFromThisComputer=Delete My Data From This Computer",
 "wintitle:RemoveMartsFromThisComputer=Remove Martus From This Computer",
 
