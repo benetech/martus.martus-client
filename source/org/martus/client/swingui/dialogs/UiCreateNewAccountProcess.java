@@ -35,7 +35,7 @@ import org.martus.client.core.Exceptions.PasswordTooShortException;
 import org.martus.client.swingui.UiMainWindow;
 
 /**
- * UigetSigninResults
+ * UiCreateNewAccountProcess
  *
  * Class encapusulates all aspects of creating a new username and password combo
  * - Displays the username and password entry dialog
@@ -46,16 +46,16 @@ import org.martus.client.swingui.UiMainWindow;
  * @author dchu
  *
  */
-public class UigetSigninResults
+public class UiCreateNewAccountProcess
 {
-	public UigetSigninResults(
+	public UiCreateNewAccountProcess(
 		UiMainWindow window,
 		String originalUserName)
 	{
 		mainWindow = window;
 		while (true)
 		{
-			UiSigninDlg signinDlg1 = startSignIn(UiSigninDlg.CREATE_NEW, originalUserName);
+			UiSigninDlg signinDlg1 = getSigninResults(UiSigninDlg.CREATE_NEW, originalUserName);
 			if (signinDlg1.getUserChoice() != UiSigninDlg.SIGN_IN)
 				return;
 
@@ -86,7 +86,7 @@ public class UigetSigninResults
 			if (userName1.equals(originalUserName))
 				defaultUserName = originalUserName;
 
-			UiSigninDlg signinDlg2 = startSignIn( UiSigninDlg.RETYPE_USERNAME_PASSWORD, defaultUserName);
+			UiSigninDlg signinDlg2 = getSigninResults( UiSigninDlg.RETYPE_USERNAME_PASSWORD, defaultUserName);
 			if (signinDlg1.getUserChoice() != UiSigninDlg.SIGN_IN)
 				
 			
@@ -141,7 +141,7 @@ public class UigetSigninResults
 		}
 	}
 
-	private UiSigninDlg startSignIn(int mode, String originalUserName)
+	private UiSigninDlg getSigninResults(int mode, String originalUserName)
 	{
 		UiSigninDlg signinDlg1 = null;
 		int userChoice = UiSigninDlg.LANGUAGE_CHANGED;
