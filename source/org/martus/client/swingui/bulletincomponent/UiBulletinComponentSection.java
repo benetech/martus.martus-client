@@ -97,21 +97,6 @@ abstract public class UiBulletinComponentSection extends JPanel
 		return fields;
 	}
 
-	public UiBulletinComponentSection.Field[] createFieldEntries(
-		FieldSpec[] fieldSpecs)
-	{
-		UiField[] fields = getFields();
-		int numFields = fieldSpecs.length;
-		Field[] fieldEntries = new Field[numFields];
-		for(int fieldNum = 0; fieldNum < numFields; ++fieldNum)
-		{
-			fieldEntries[fieldNum] = new Field();
-			fieldEntries[fieldNum].tag = fieldSpecs[fieldNum].getTag();
-			fieldEntries[fieldNum].field = fields[fieldNum];
-		}
-		return fieldEntries;
-	}
-
 	public void copyDataFromPacket(FieldDataPacket fdp)
 	{
 		for(int fieldNum = 0; fieldNum < fields.length; ++fieldNum)
@@ -287,13 +272,6 @@ abstract public class UiBulletinComponentSection extends JPanel
 		return storedDateFormat+MartusFlexidate.DATE_RANGE_SEPARATER+martusFlexidate.getMatusFlexidate();		
 	}		
 	
-
-	public static class Field
-	{
-		public String tag;
-		public UiField field;
-	}
-
 
 
 	UiBasicLocalization localization;
