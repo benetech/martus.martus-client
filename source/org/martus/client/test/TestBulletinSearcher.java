@@ -26,6 +26,9 @@ Boston, MA 02111-1307, USA.
 
 package org.martus.client.test;
 
+import java.text.DateFormat;
+import java.util.Date;
+
 import org.martus.client.search.BulletinSearcher;
 import org.martus.client.search.SearchParser;
 import org.martus.client.search.SearchTreeNode;
@@ -33,7 +36,7 @@ import org.martus.common.bulletin.Bulletin;
 import org.martus.common.crypto.MartusCrypto;
 import org.martus.common.crypto.MockMartusSecurity;
 import org.martus.common.test.UnicodeConstants;
-import org.martus.util.*;
+import org.martus.util.TestCaseEnhanced;
 
 
 public class TestBulletinSearcher extends TestCaseEnhanced
@@ -133,6 +136,31 @@ public class TestBulletinSearcher extends TestCaseEnhanced
 		BulletinSearcher stringMatchesAndBothDatesMatch = new BulletinSearcher(new SearchTreeNode("Dave"), bothInRangeBeginDate, bothInRangeEndDate);
 		assertEquals("both event and entry in range and string matchs", true, stringMatchesAndBothDatesMatch.doesMatch(b));
 
+	}
+	
+	public void testDateMatchesLastSaved() throws Exception
+	{
+		Bulletin b = new Bulletin(MockMartusSecurity.createClient());
+		b.set(Bulletin.TAGEVENTDATE, "2002-04-04");
+		b.set(Bulletin.TAGENTRYDATE, "2002-10-15");
+		b.getBulletinHeaderPacket().updateLastSavedTime();
+		long savedAt = b.getLastSavedTime();
+		final long oneDay = 60*60*24*1000;
+		DateFormat df = Bulletin.getStoredDateFormat();
+		String today = df.format(new Date(savedAt));
+		String dayBefore = df.format(new Date(savedAt - oneDay));
+		String  dayAfter = df.format(new Date(savedAt + oneDay));
+		
+		SearchTreeNode noString = new SearchTreeNode("");
+
+		BulletinSearcher searchBefore = new BulletinSearcher(noString, dayBefore, dayBefore);
+		assertFalse("before matches?", searchBefore.doesMatch(b));
+		BulletinSearcher searchAfter = new BulletinSearcher(noString, dayAfter, dayAfter);
+		assertFalse("after matches?", searchAfter.doesMatch(b));
+		BulletinSearcher searchWithBefore = new BulletinSearcher(noString, dayBefore, today);
+		assertTrue("with before doesn't match?", searchWithBefore.doesMatch(b));
+		BulletinSearcher searchWithAfter = new BulletinSearcher(noString, today, dayAfter);
+		assertTrue("with after doesn't match?", searchWithAfter.doesMatch(b));
 	}
 		
 	public void testFlexiDateMatches() throws Exception
