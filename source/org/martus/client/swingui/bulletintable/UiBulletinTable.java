@@ -375,8 +375,10 @@ public class UiBulletinTable extends JTable implements ListSelectionListener, Dr
 	
 	public void doResendBulletins()
 	{
-		BulletinFolder draftOutBox = mainWindow.getApp().getFolderDraftOutbox();
-		BulletinFolder sealedOutBox = mainWindow.getApp().getFolderSealedOutbox();
+		BulletinFolder draftOutBox = getStore().getFolderDraftOutbox();
+		BulletinFolder sealedOutBox = getStore().getFolderSealedOutbox();
+		BulletinFolder onServer = getStore().getFolderOnServer();
+		BulletinFolder notOnServer = getStore().getFolderNotOnServer();
 
 		Bulletin[] selected = getSelectedBulletins();
 		boolean notAllowedToSend = false;
@@ -386,7 +388,7 @@ public class UiBulletinTable extends JTable implements ListSelectionListener, Dr
 			try
 			{
 				Bulletin bulletin = selected[i];
-				String accountId = mainWindow.getApp().getAccountId();
+				String accountId = getStore().getAccountId();
 				if(!bulletin.getBulletinHeaderPacket().isAuthorizedToUpload(accountId))
 				{
 					notAllowedToSend = true;
@@ -397,6 +399,9 @@ public class UiBulletinTable extends JTable implements ListSelectionListener, Dr
 					draftOutBox.add(bulletin);
 				if(bulletin.isSealed())
 					sealedOutBox.add(bulletin);
+				
+				getStore().moveBulletin(bulletin, onServer, notOnServer);
+				mainWindow.bulletinContentsHaveChanged(bulletin);
 			}
 			catch (BulletinAlreadyExistsException harmless)
 			{
