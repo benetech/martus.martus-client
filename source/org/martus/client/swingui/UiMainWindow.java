@@ -394,6 +394,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 
 	void notifyClientCompliance(Frame owner)
 	{
+		String productDescription = MartusUtilities.getXmlEncoded(getLocalization().getFieldLabel("SplashProductDescription"));
 		// NOTE: If this program contains ANY changes that have 
 		// not been officially released by Benetech, you MUST 
 		// change the splash screen text as required by the 
@@ -406,7 +407,8 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		{
 			complianceStatementAlwaysEnglish =
 			BEGIN_HTML_TAGS + 
-			"Welcome to [*your product name*].  <br></br>" +
+			"[*your product name*].  <br></br>" +
+			productDescription + "<br></br>" +
 			"This software is not a standard Martus(TM) program, <br></br>" +
 			"because it has been modified by someone other than Benetech, <br></br>" +
 			"the copyright owner and original author of the Martus software.  <br></br>" +
@@ -417,15 +419,14 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		{
 			complianceStatementAlwaysEnglish =
 			BEGIN_HTML_TAGS +
-			"Welcome to the Martus™<br></br>" +
-			"Human Rights Bulletin System,<br></br>" +
-			"created by Benetech." +
+			"Martus™<br></br>" +
+			productDescription +
 			END_HTML_TAGS;
 		}
 		new UiSplashDlg(owner, getLocalization(), complianceStatementAlwaysEnglish);
 	}
-	public final static String BEGIN_HTML_TAGS = "<html><p align='center'><font size='5'>";
-	public final static String END_HTML_TAGS = "</font></p></html>";
+	public final static String BEGIN_HTML_TAGS = "<font size='5'>";
+	public final static String END_HTML_TAGS = "</font>";
 	
     public boolean isMainWindowInitalizing()
     {

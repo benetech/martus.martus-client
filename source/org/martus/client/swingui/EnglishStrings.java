@@ -745,6 +745,7 @@ public class EnglishStrings
 "field:ErrorCustomFieldHeader4=LABEL",
 "field:ConfigureHQsCurrentHQs=Current HQ's",
 "field:ConfigureHQColumnHeaderPublicCode=Public Code",
+"field:SplashProductDescription=Human Rights Bulletin System",
 
 "field:DateRangeFrom=Between",
 "field:DateRangeTo=and",

@@ -47,31 +47,35 @@ public class UiSplashDlg extends JDialog implements ActionListener
 	public UiSplashDlg(Frame owner, UiBasicLocalization localization, String text)
 	{
 		super(owner, owner.getTitle(), true);
-		Container contents = getContentPane();
 		
-		JLabel body = new JLabel(text);
-		body.setBorder(new EmptyBorder(20, 40, 20, 20));
 		String versionInfo = UiMainWindow.getDisplayVersionInfo(localization);
 		String copyrightInfo = UiConstants.copyright;
 		String websiteInfo = UiConstants.website;
-		String htmlBreak = "<BR></BR>";
-		String htmlVersionInfo = "<html><center>" + versionInfo + htmlBreak + 
-				copyrightInfo +htmlBreak+ websiteInfo + htmlBreak + "</center></html>";
+		String fullVersionInfo = "<html>" +
+				"<p align='center'>" + text + "</p>" + 
+				"<p align='center'></p>" + 
+				"<p align='center'>" + versionInfo + "</p>" + 
+				"<p align='center'>" + copyrightInfo + "</p>" + 
+				"<p align='center'>" + websiteInfo + "</p>" +
+				"</html>";
 		
-		contents.add(body,BorderLayout.NORTH);
-		contents.add(new JLabel(htmlVersionInfo),BorderLayout.CENTER);
+		JLabel body = new JLabel(fullVersionInfo);
+		body.setBorder(new EmptyBorder(10, 10, 10, 10));
 		
-		contents.add(new JLabel("   "), BorderLayout.EAST);
-		contents.add(new JLabel("   "), BorderLayout.WEST);
 		Box hbox = Box.createHorizontalBox();
 		hbox.add(Box.createHorizontalGlue());
 		JButton ok = new JButton(localization.getButtonLabel("ok"));
 		ok.addActionListener(this);
 		hbox.add(ok);
 		hbox.add(Box.createHorizontalGlue());
-		hbox.setBorder(new EmptyBorder(5, 5, 5, 5));
+		hbox.setBorder(new EmptyBorder(10, 10, 10, 10));
+
+		Container contents = getContentPane();
+		contents.add(body);
 		contents.add(hbox, BorderLayout.SOUTH);
+		
 		Utilities.centerDlg(this);
+		setResizable(false);
 		show();
 	}
 
