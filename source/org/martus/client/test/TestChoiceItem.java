@@ -26,11 +26,10 @@ Boston, MA 02111-1307, USA.
 
 package org.martus.client.test;
 
-import junit.framework.TestCase;
-
 import org.martus.client.core.ChoiceItem;
+import org.martus.common.test.TestCaseEnhanced;
 
-public class TestChoiceItem extends TestCase
+public class TestChoiceItem extends TestCaseEnhanced
 {
     public TestChoiceItem(String name)
 	{

@@ -26,16 +26,15 @@ Boston, MA 02111-1307, USA.
 
 package org.martus.client.test;
 
-import junit.framework.TestCase;
-
 import org.martus.client.core.BulletinFolder;
 import org.martus.client.core.BulletinStore;
 import org.martus.client.swingui.bulletintable.BulletinTableModel;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.database.MockClientDatabase;
 import org.martus.common.packet.UniversalId;
+import org.martus.common.test.TestCaseEnhanced;
 
-public class TestBulletinTableModel extends TestCase
+public class TestBulletinTableModel extends TestCaseEnhanced
 {
     public TestBulletinTableModel(String name)
 	{

@@ -30,10 +30,10 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.RandomAccessFile;
 
-import junit.framework.TestCase;
+import org.martus.common.test.TestCaseEnhanced;
 
 
-public class TestRandomAccessFileOverwrite extends TestCase
+public class TestRandomAccessFileOverwrite extends TestCaseEnhanced
 {
 	public TestRandomAccessFileOverwrite(String name)
 	{
