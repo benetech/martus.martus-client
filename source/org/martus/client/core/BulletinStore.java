@@ -583,9 +583,38 @@ public class BulletinStore
 	public void deleteAllData() throws Exception
 	{
 		database.deleteAllData();
+		deleteAndResetFolders();
+	}
+	
+	private void deleteAndResetFolders()
+	{
 		getFoldersFile().delete();
 		setUpStore(dir, database);
 	}
+
+	public void scrubAllData() throws Exception
+	{
+		class PacketScrubber implements Database.PacketVisitor 
+		{
+			public void visit(DatabaseKey key)
+			{
+				try
+				{
+					database.scrubRecord(key);
+					database.discardRecord(key);
+				}
+				catch (Exception e)
+				{				
+					e.printStackTrace();
+				}				
+			}			
+		}
+
+		PacketScrubber ac = new PacketScrubber();
+		database.visitAllRecords(ac);
+		deleteAndResetFolders();
+	}
+
 
 	public Database getDatabase()
 	{

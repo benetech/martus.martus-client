@@ -1243,6 +1243,22 @@ public class TestBulletinStore extends TestCaseEnhanced
 		tempStore.setSignatureGenerator(tempSecurity);
 		return tempStore;
 	}
+	
+	public void testScrubAllRecordForAccount() throws Exception
+	{		
+		TRACE("testScrubAllRecordForAccount");
+		
+		Bulletin b = store.createEmptyBulletin();
+		store.saveBulletin(b);
+		
+		Vector one = store.getAllBulletinUids();
+		assertEquals("not one?", 1, one.size());		
+		
+		store.scrubAllData();
+		Vector empty = store.getAllBulletinUids();
+		assertEquals("not empty?", 0, empty.size());			
+	}	
+
 
 	final int sampleRecordCount = 5;
 
