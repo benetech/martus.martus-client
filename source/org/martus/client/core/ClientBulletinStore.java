@@ -1270,7 +1270,7 @@ public class ClientBulletinStore extends BulletinStore
 	public Bulletin createClone(Bulletin original, FieldSpec[] publicFieldSpecsToUse, FieldSpec[] privateFieldSpecsToUse) throws CryptoException, InvalidPacketException, SignatureVerificationException, WrongPacketTypeException, IOException, InvalidBase64Exception, DamagedBulletinException, NoKeyPairException
 	{
 		Bulletin clone = createEmptyBulletin(publicFieldSpecsToUse, privateFieldSpecsToUse);
-		clone.createDraftCopyOf(original, getWriteableDatabase());
+		clone.createDraftCopyOf(original, getDatabase());
 		saveBulletin(clone);
 		
 		DatabaseKey key = DatabaseKey.createKey(clone.getUniversalId(),clone.getStatus());

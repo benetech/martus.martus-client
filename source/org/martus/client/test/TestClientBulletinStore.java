@@ -53,7 +53,6 @@ import org.martus.common.bulletin.BulletinSaver;
 import org.martus.common.crypto.MartusCrypto;
 import org.martus.common.crypto.MockMartusSecurity;
 import org.martus.common.crypto.MartusCrypto.CryptoException;
-import org.martus.common.database.Database;
 import org.martus.common.database.DatabaseKey;
 import org.martus.common.database.MockDatabase;
 import org.martus.common.packet.BulletinHeaderPacket;
@@ -1103,7 +1102,7 @@ public class TestClientBulletinStore extends TestCaseEnhanced
 		BulletinFolder f = store.getFolderSaved();
 		store.addBulletinToFolder(f, b.getUniversalId());
 
-		store.getWriteableDatabase().deleteAllData();
+		store.deleteAllData();
 		store.clearFolder(f.getName());
 		assertTrue("clearFolder f ", store.getFoldersFile().exists());
 		DatabaseKey bulletinKey = DatabaseKey.createLegacyKey(b.getUniversalId());
@@ -1133,7 +1132,6 @@ public class TestClientBulletinStore extends TestCaseEnhanced
 	{
 		TRACE("testRenameFolderCausesSave");
 
-		Database db = store.getWriteableDatabase();
 		DatabaseKey foldersKey = DatabaseKey.createLegacyKey(UniversalId.createDummyUniversalId());
 		store.deleteAllData();
 		Bulletin b = store.createEmptyBulletin();
@@ -1508,7 +1506,6 @@ public class TestClientBulletinStore extends TestCaseEnhanced
 	{
 		UniversalId uid = b.getUniversalId();
 		DatabaseKey key = DatabaseKey.createLegacyKey(uid);
-		Database db = store.getWriteableDatabase();
 		String goodData = db.readRecord(key, security);
 		String badData = "x" + goodData;
 		db.writeRecord(key, badData);
