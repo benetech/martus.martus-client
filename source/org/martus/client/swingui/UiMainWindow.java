@@ -1070,8 +1070,11 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		UiCreateNewAccountProcess newUserInfo = new UiCreateNewAccountProcess(this, originalUserName);
 		if(!newUserInfo.isDataValid())
 			return false;
-		String userName = newUserInfo.getUserName();
-		char[] userPassword = newUserInfo.getPassword();
+		return saveKeyPairFile(keyPairFile, newUserInfo.getUserName(), newUserInfo.getPassword());
+	}
+
+	public boolean saveKeyPairFile(File keyPairFile, String userName, char[] userPassword)
+	{
 		try
 		{
 			app.writeKeyPairFileWithBackup(keyPairFile, userName, userPassword);
