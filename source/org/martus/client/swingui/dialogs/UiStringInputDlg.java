@@ -42,7 +42,7 @@ import org.martus.swing.Utilities;
 
 public class UiStringInputDlg extends JDialog
 {
-	public UiStringInputDlg(JFrame owner, UiBasicLocalization localization, String baseTag, String descriptionTag, String defaultText)
+	public UiStringInputDlg(JFrame owner, UiBasicLocalization localization, String baseTag, String descriptionTag, String rawDescriptionText, String defaultText)
 	{
 		super(owner, "", true);
 
@@ -62,6 +62,12 @@ public class UiStringInputDlg extends JDialog
 		{
 			getContentPane().add(new JLabel(""), ParagraphLayout.NEW_PARAGRAPH);
 			getContentPane().add(new UiWrappedTextArea(localization.getFieldLabel(descriptionTag)));
+		}
+		if(rawDescriptionText.length() > 0)
+		{
+			getContentPane().add(new JLabel(""), ParagraphLayout.NEW_PARAGRAPH);
+			getContentPane().add(new UiWrappedTextArea(rawDescriptionText));
+			
 		}
 		getContentPane().add(new JLabel(""), ParagraphLayout.NEW_PARAGRAPH);
 		getContentPane().add(label);

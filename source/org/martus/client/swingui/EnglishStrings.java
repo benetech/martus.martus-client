@@ -181,6 +181,7 @@ public class EnglishStrings
 "wintitle:inputImportPublicCode=Import Headquarter's Public Key",
 "wintitle:inputCustomFields=Customize Fields",
 "wintitle:inputGetShareFileName=Default File Share Name",
+"wintitle:inputGetHQLabel=HQ Label",
 
 "wintitle:ErrorDateInFuture=Date Invalid",
 "wintitle:ErrorDateRangeInverted=Date Range Invalid",
@@ -258,6 +259,7 @@ public class EnglishStrings
 "button:inputLoadDefaultDetailsok=Load",
 "button:inputCustomFieldsok=OK",
 "button:inputGetShareFileNameok=OK",
+"button:inputGetHQLabelok=OK",
 "button:close=Close",
 "button:customDefault=Restore Defaults",
 "button:customHelp=Help",
@@ -296,6 +298,7 @@ public class EnglishStrings
 "button:RecoverAccountByBackup=Recover account from backup keypair file",
 "button:ConfigureHQsAdd=Add...",
 "button:ConfigureHQsRemove=Remove",
+"button:ConfigureHQsReLabel=Change Label",
 "button:HQDetails=Details...",
 
 "menu:file=File",
@@ -701,7 +704,7 @@ public class EnglishStrings
 "field:inputImportPublicCodeentry=Enter the Public Identification Code for this account:",
 "field:inputExportMyPublicKeyentry=",
 "field:inputGetShareFileNameentry=Enter the name of the file you wish to export.",
-"field:inputCustomFieldsInfo=Enter the XML representation for the layout of new and modified bulletins.",
+"field:inputGetHQLabelentry=Enter the label you wish to associate with this headquaters.",
 
 "field:warningDeleteSingleBulletin=You have chosen to permanently delete a bulletin from the Discarded Bulletins folder. Even if this bulletin was recently cut or copied, you will not be able to paste it. If this bulletin has already been sent to a server, it will remain on the server. This action will only delete it from this computer.",
 "field:warningDeleteMultipleBulletins=You have chosen to permanently delete bulletins from the Discarded Bulletins folder. Even if these bulletins were recently cut or copied, you will not be able to paste them. If they have already been sent to a server, they will remain on the server. This action will only delete them from this computer.",
@@ -766,6 +769,7 @@ public class EnglishStrings
 "field:ErrorCustomFieldHeader4=LABEL",
 "field:ConfigureHQsCurrentHQs=Current Headquarters",
 "field:ConfigureHQColumnHeaderPublicCode=Public Code",
+"field:ConfigureHQColumnHeaderLabel=Label",
 "field:SplashProductDescription=Human Rights Bulletin System",
 "field:HQsSetAsProxyUploader=These Headquarters accounts are allowed to send bulletins to a server on your behalf.",
 "field:DateRangeFrom=Between",

@@ -44,9 +44,10 @@ import javax.swing.border.EtchedBorder;
 
 import org.martus.client.swingui.UiLocalization;
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.common.crypto.MartusCrypto;
+import org.martus.common.HQKey;
 import org.martus.swing.ParagraphLayout;
 import org.martus.util.TokenReplacement;
+import org.martus.util.Base64.InvalidBase64Exception;
 
 
 public class UiBulletinComponentHeader extends UiBulletinComponentSection
@@ -180,8 +181,19 @@ public class UiBulletinComponentHeader extends UiBulletinComponentSection
 				String listOfHqPublicKeys = information;
 				for(int i=0; i < hqList.size(); ++i)
 				{
-					String thisHqCode = getHqPublicCode(i);
-					listOfHqPublicKeys += thisHqCode + "\n";
+					String thisHqCode;
+					HQKey hqKey = getHqPublicCode(i);
+					String thisHqlabel = hqKey.getLabel();
+					try
+					{
+						thisHqCode = hqKey.getPublicCode();
+					}
+					catch (InvalidBase64Exception e1)
+					{
+						e1.printStackTrace();
+						thisHqCode = hqKey.getPublicKey();
+					}
+					listOfHqPublicKeys += thisHqCode +" : " + thisHqlabel+ "\n";
 				}
 				HashMap map = new HashMap();
 				map.put("#L#", listOfHqPublicKeys);
@@ -190,18 +202,18 @@ public class UiBulletinComponentHeader extends UiBulletinComponentSection
 				mainWindow.notifyDlg(parent, tagQualifier + "ViewHqList", map);
 			}
 
-			private String getHqPublicCode(int i)
+			private HQKey getHqPublicCode(int i)
 			{
 				try
 				{
-					String thisHqKey = (String)hqList.get(i);
-					return MartusCrypto.getFormattedPublicCode(thisHqKey);
+					return (HQKey)hqList.get(i);
 				}
 				catch (Exception e)
 				{
 					e.printStackTrace();
 				}
-				return "???";
+				HQKey unknown = new HQKey("???", "???");
+				return unknown;
 			}
 		}
 		

@@ -32,7 +32,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.io.File;
-import java.util.HashMap;
 import java.util.Vector;
 
 import javax.swing.Box;
@@ -54,6 +53,7 @@ import javax.swing.table.TableModel;
 
 import org.martus.client.core.MartusApp;
 import org.martus.client.swingui.UiMainWindow;
+import org.martus.common.HQKey;
 import org.martus.common.HQKeys.HQsException;
 import org.martus.common.clientside.UiBasicLocalization;
 import org.martus.common.crypto.MartusCrypto;
@@ -71,19 +71,21 @@ public class UiConfigureHQs extends JDialog
 		mainWindow = owner;
 		localization = mainWindow.getLocalization();
 		hQKeys = new Vector();
-		mapOfKeysToCodes = new HashMap();
 		
 		setTitle(localization.getWindowTitle("ConfigureHQs"));
 		JPanel panel = new JPanel();
 		panel.setBorder(new EmptyBorder(10,10,10,10));
 		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 		
-		add = new JButton(localization.getButtonLabel("ConfigureHQsAdd"));
+		JButton add = new JButton(localization.getButtonLabel("ConfigureHQsAdd"));
 		add.addActionListener(new AddHandler());
 		remove = new JButton(localization.getButtonLabel("ConfigureHQsRemove"));
 		remove.addActionListener(new RemoveHandler());
 		remove.setEnabled(false);
 
+		renameLabel = new JButton(localization.getButtonLabel("ConfigureHQsReLabel"));
+		renameLabel.addActionListener(new RenameHandler());
+		renameLabel.setEnabled(false);
 		
 		Box hBox1 = Box.createHorizontalBox();
 		hBox1.add(new JLabel(localization.getFieldLabel("HQsSetAsProxyUploader")));
@@ -95,10 +97,12 @@ public class UiConfigureHQs extends JDialog
 		hBox2.add(Box.createHorizontalGlue());
 		panel.add(hBox2);
 		
-		model = new DefaultTableModel();
+		model = new HQTableModel();
 		Vector columnHeaders = new Vector();
-		String fieldLabel = localization.getFieldLabel("ConfigureHQColumnHeaderPublicCode");
-		columnHeaders.add(fieldLabel);
+		String publicCodeColumnHeader = localization.getFieldLabel("ConfigureHQColumnHeaderPublicCode");
+		columnHeaders.add(publicCodeColumnHeader);
+		String userLabelColumnHeader = localization.getFieldLabel("ConfigureHQColumnHeaderLabel");
+		columnHeaders.add(userLabelColumnHeader);
 		model.setColumnIdentifiers(columnHeaders);
 		
 		
@@ -107,12 +111,12 @@ public class UiConfigureHQs extends JDialog
 		table.setColumnSelectionAllowed(false);
 		table.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
 		table.setShowGrid(true);
-
+		
 		try
 		{
 			Vector hQKeys = mainWindow.getApp().getHQKeys();
 			for(int i = 0; i<hQKeys.size();++i)
-				addHQKeyToTable((String)hQKeys.get(i));
+				addHQKeyToTable((HQKey)hQKeys.get(i));
 		}
 		catch (HQsException e)
 		{
@@ -131,6 +135,7 @@ public class UiConfigureHQs extends JDialog
 
 		hBox.add(add);
 		hBox.add(remove);
+		hBox.add(renameLabel);
 		hBox.add(Box.createHorizontalGlue());
 		JButton close = new JButton(localization.getButtonLabel("close"));
 		close.addActionListener(new CancelHandler());
@@ -141,6 +146,14 @@ public class UiConfigureHQs extends JDialog
 		Utilities.centerDlg(this);
 		setResizable(true);
 		show();
+	}
+	
+	class HQTableModel extends DefaultTableModel
+	{
+		public boolean isCellEditable(int row, int column)
+		{
+			return false;
+		}
 	}
 	
 	class HQTable extends UiTable
@@ -197,7 +210,7 @@ public class UiConfigureHQs extends JDialog
 				cell.setBackground(Color.DARK_GRAY);
 				cell.setForeground(Color.WHITE);
 				remove.setEnabled(true);
-
+				renameLabel.setEnabled(true);
 			}
 			else
 			{
@@ -217,24 +230,54 @@ public class UiConfigureHQs extends JDialog
 		}
 	}
 	
+	
+	class RenameHandler implements ActionListener
+	{
+		public void actionPerformed(ActionEvent ae)
+		{
+			int rowCount = model.getRowCount();
+			try
+			{
+				for(int i = 0; i <rowCount ; ++i)
+				{
+					if(table.isRowSelected(i))
+					{
+						Object hQCodeToBeRemoved = table.getValueAt(i,PUBLIC_CODE_COLUMN);
+						for(int j = 0; j<hQKeys.size(); ++j)
+						{
+							HQKey thisKey = ((HQKey)hQKeys.get(j));
+							if ( thisKey.getPublicCode().equals(hQCodeToBeRemoved))
+							{
+								String newLabel = getHQLabel(thisKey.getPublicCode(), thisKey.getLabel());
+								if(newLabel== null)
+									break;
+								thisKey.setLabel(newLabel);
+								model.setValueAt(newLabel, i, LABEL_COLUMN);
+								break;
+							}
+						}
+					}
+				}
+				updateConfigInfo();
+			}
+			catch (InvalidBase64Exception e)
+			{
+				e.printStackTrace();
+			}
+		}
+	}
+	
 	class AddHandler implements ActionListener
 	{
 		public void actionPerformed(ActionEvent ae)
 		{
 			try
 			{
-				String publicKey = getPublicKey();
+				HQKey publicKey = getPublicKey();
 				if(publicKey==null)
 					return;
-				String publicCode = MartusCrypto.computePublicCode(publicKey);
-				if(confirmPublicCode(publicCode, "ImportPublicCode", "AccountCodeWrong"))
-				{
-					if(mainWindow.confirmDlg("SetImportPublicKey"))
-					{
-						addHQKeyToTable(publicKey);
-						updateConfigInfo();
-					}
-				}
+				addHQKeyToTable(publicKey);
+				updateConfigInfo();
 			}
 			catch (Exception e)
 			{
@@ -251,48 +294,54 @@ public class UiConfigureHQs extends JDialog
 				return;
 			
 			int rowCount = model.getRowCount();
-			for(int i = rowCount-1; i >=0 ; --i)
+			try
 			{
-				if(table.isRowSelected(i))
+				for(int i = rowCount-1; i >=0 ; --i)
 				{
-					
-					Object hQKeyToBeRemoved = table.getValueAt(i,PUBLIC_CODE_COLUMN);
-					for(int j = 0; j<hQKeys.size(); ++j)
+					if(table.isRowSelected(i))
 					{
-						if (((String)hQKeys.get(j)).equals(mapOfKeysToCodes.get(hQKeyToBeRemoved)))
+						Object hQCodeToBeRemoved = table.getValueAt(i,PUBLIC_CODE_COLUMN);
+						for(int j = 0; j<hQKeys.size(); ++j)
 						{
-							hQKeys.remove(j);
-							break;
+							if ( ((HQKey)hQKeys.get(j)).getPublicCode().equals(hQCodeToBeRemoved))
+							{
+								hQKeys.remove(j);
+								break;
+							}
 						}
+						model.removeRow(i);
 					}
-					model.removeRow(i);
 				}
+				remove.setEnabled(false);
+				renameLabel.setEnabled(false);
+				updateConfigInfo();
 			}
-			remove.setEnabled(false);
-			updateConfigInfo();
+			catch (InvalidBase64Exception e)
+			{
+				e.printStackTrace();
+			}
 		}
 	}
 
-	void addHQKeyToTable(String publicKey)
+	void addHQKeyToTable(HQKey publicKey)
 	{
 		try
 		{
-			String rawCode = MartusCrypto.computePublicCode(publicKey);
-			String formattedCode = MartusCrypto.formatPublicCode(rawCode);
+			String publicCode = publicKey.getPublicCode();
 			for(int i = 0; i < table.getRowCount(); ++i)
 			{
-				if(((String)model.getValueAt(i, PUBLIC_CODE_COLUMN)).equals(formattedCode))
+				if(((String)model.getValueAt(i, PUBLIC_CODE_COLUMN)).equals(publicCode))
 				{
 					mainWindow.notifyDlg("HQKeyAlradyExists");
 					table.setRowSelectionInterval(i,i);
 					return;
 				}
 			}
-			
 			Vector row = new Vector();
-			row.add(formattedCode);
+			row.add(publicCode);
+			String label = publicKey.getLabel();
+			row.add(label);
 			model.addRow(row);
-			mapOfKeysToCodes.put(formattedCode, publicKey);
 			hQKeys.add(publicKey);
 			int current = table.getRowCount()-1;
 			table.setRowSelectionInterval(current,current);
@@ -308,7 +357,7 @@ public class UiConfigureHQs extends JDialog
 		mainWindow.setAndSaveHQKeysInConfigInfo(hQKeys);
 	}
 	
-	public String getPublicKey() throws Exception
+	public HQKey getPublicKey() throws Exception
 	{
 		String windowTitle = localization.getWindowTitle("ImportHQPublicKey");
 		String buttonLabel = localization.getButtonLabel("inputImportPublicCodeok");
@@ -320,8 +369,27 @@ public class UiConfigureHQs extends JDialog
 			return null;
 		
 		File importFile = results.getFileChoosen();
-		String publicKey = mainWindow.getApp().extractPublicInfo(importFile);
-		return publicKey;
+		String publicKeyString = mainWindow.getApp().extractPublicInfo(importFile);
+
+		String publicCode = MartusCrypto.computePublicCode(publicKeyString);
+		if(confirmPublicCode(publicCode, "ImportPublicCode", "AccountCodeWrong"))
+		{
+			if(!mainWindow.confirmDlg("SetImportPublicKey"))
+				return null;
+		}
+		else
+			return null;
+		String label = getHQLabel(MartusCrypto.computeFormattedPublicCode(publicKeyString), "");
+		HQKey newKey = new HQKey(publicKeyString, label);
+		return newKey;
+	}
+
+	public String getHQLabel(String publicCode, String previousValue)
+	{
+		String label = mainWindow.getStringInput("GetHQLabel", "", publicCode, previousValue);
+		if(label == null)
+			return null;
+		return label;
 	}
 	
 	class PublicInfoFileFilter extends FileFilter
@@ -340,17 +408,17 @@ public class UiConfigureHQs extends JDialog
 	}
 
 
-	boolean confirmPublicCode(String publicCode, String baseTag, String errorBaseTag)
+	boolean confirmPublicCode(String rawPublicCode, String baseTag, String errorBaseTag)
 	{
 		String userEnteredPublicCode = "";
 		while(true)
 		{
-			userEnteredPublicCode = mainWindow.getStringInput(baseTag, "", userEnteredPublicCode);
+			userEnteredPublicCode = mainWindow.getStringInput(baseTag, "", "", userEnteredPublicCode);
 			if(userEnteredPublicCode == null)
 				return false; // user hit cancel
 			String normalizedPublicCode = MartusCrypto.removeNonDigits(userEnteredPublicCode);
 
-			if(publicCode.equals(normalizedPublicCode))
+			if(rawPublicCode.equals(normalizedPublicCode))
 				return true;
 
 			mainWindow.notifyDlg(errorBaseTag);
@@ -361,10 +429,10 @@ public class UiConfigureHQs extends JDialog
 	UiTable table;
 	DefaultTableModel model;
 	JButton remove;
-	JButton add;
+	JButton renameLabel;
 	UiBasicLocalization localization;
 	private static final int DEFAULT_VIEABLE_ROWS = 5;
 	private static final int PUBLIC_CODE_COLUMN = 0;
+	private static final int LABEL_COLUMN = 1;
 	Vector hQKeys;
-	HashMap mapOfKeysToCodes;
 }

@@ -707,9 +707,9 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		System.exit(1);
 	}
 
-	public String getStringInput(String baseTag, String descriptionTag, String defaultText)
+	public String getStringInput(String baseTag, String descriptionTag, String rawDescriptionText, String defaultText)
 	{
-		UiStringInputDlg inputDlg = new UiStringInputDlg(this, getLocalization(), baseTag, descriptionTag, defaultText);
+		UiStringInputDlg inputDlg = new UiStringInputDlg(this, getLocalization(), baseTag, descriptionTag, rawDescriptionText, defaultText);
 		inputDlg.setFocusToInputField();
 		inputDlg.show();
 		return inputDlg.getResult();
@@ -988,12 +988,10 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		String keyDescription = localization.getFieldLabel("AccountInfoPublicKey");
 		String keyContents = app.getAccountId();
 		String codeDescription = localization.getFieldLabel("AccountInfoPublicCode");
-		String codeContents = null;
 		String formattedCodeContents = null;
 		try
 		{
-			codeContents = MartusCrypto.computePublicCode(keyContents);
-			formattedCodeContents = MartusCrypto.formatPublicCode(codeContents);
+			formattedCodeContents = MartusCrypto.computeFormattedPublicCode(keyContents);
 		}
 		catch(InvalidBase64Exception e)
 		{
@@ -1186,7 +1184,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 			{
 				while (true)
 				{
-					String magicWord = getStringInput("servermagicword", "", "");
+					String magicWord = getStringInput("servermagicword", "", "", "");
 					if(magicWord == null)
 						break;
 					if(app.requestServerUploadRights(magicWord))
@@ -1546,7 +1544,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 			File export;
 			do
 			{
-				String fileName = getStringInput("ExportMyPublicKey", "NameOfExportedFile", "");
+				String fileName = getStringInput("ExportMyPublicKey", "NameOfExportedFile", "", "");
 				if(fileName == null)
 					return;
 				export = app.getPublicInfoFile(fileName);

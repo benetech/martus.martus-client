@@ -74,10 +74,7 @@ public class UiConfigServerDlg extends JDialog implements ActionListener
 		try
 		{
 			if(serverPublicKey.length() > 0)
-			{
-				serverCode = MartusCrypto.computePublicCode(serverPublicKey);
-				serverCode = MartusCrypto.formatPublicCode(serverCode);
-			}
+				serverCode = MartusCrypto.computeFormattedPublicCode(serverPublicKey);
 		}
 		catch (InvalidBase64Exception e)
 		{

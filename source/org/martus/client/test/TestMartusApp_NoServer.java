@@ -47,6 +47,8 @@ import org.martus.client.swingui.EnglishStrings;
 import org.martus.client.swingui.UiLocalization;
 import org.martus.common.CustomFields;
 import org.martus.common.FieldSpec;
+import org.martus.common.HQKey;
+import org.martus.common.HQKeys;
 import org.martus.common.LegacyCustomFields;
 import org.martus.common.MartusUtilities;
 import org.martus.common.bulletin.Bulletin;
@@ -594,8 +596,10 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		configFile.deleteOnExit();
 		assertEquals("already exists?", false, configFile.exists());
 		String sampleHQKey = "abc123";
+		String sampleLabel = "Fred";
 		Vector keys = new Vector();
-		keys.add(sampleHQKey);
+		HQKey key = new HQKey(sampleHQKey, sampleLabel);
+		keys.add(key);
 		appWithAccount.setAndSaveHQKeys(keys);
 		assertEquals("Incorrect public key", sampleHQKey, appWithAccount.getLegacyHQKey());
 		assertEquals("Didn't save?", true, configFile.exists());
@@ -606,15 +610,19 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		File configFile = appWithAccount.getConfigInfoFile();
 		configFile.deleteOnExit();
 		String sampleHQKey1 = "abc123";
+		String sampleLabel1 = "Fred";
 		String sampleHQKey2 = "234567";
+		String sampleLabel2 = "Bev";
 		Vector keys = new Vector();
-		keys.add(sampleHQKey1);
-		keys.add(sampleHQKey2);
+		HQKey key1 = new HQKey(sampleHQKey1, sampleLabel1);
+		HQKey key2 = new HQKey(sampleHQKey2, sampleLabel2);
+		keys.add(key1);
+		keys.add(key2);
 		appWithAccount.setAndSaveHQKeys(keys);
 		assertEquals("Incorrect default public key", sampleHQKey1, appWithAccount.getLegacyHQKey());
 		Vector returnedKeys = appWithAccount.getHQKeys();
-		assertContains(sampleHQKey1, returnedKeys);
-		assertContains(sampleHQKey2, returnedKeys);
+		assertTrue(HQKeys.containsKey(returnedKeys, sampleHQKey1));
+		assertTrue(HQKeys.containsKey(returnedKeys, sampleHQKey2));
 	}
 
 	public void testClearHQKey() throws Exception
@@ -627,11 +635,14 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		assertEquals("HQ key exists?", "", appWithAccount.getLegacyHQKey());
 		assertEquals("Didn't save?", true, configFile.exists());
 
-		String sampleHQKey = "abc123";
-		Vector key = new Vector();
-		key.add(sampleHQKey);
-		appWithAccount.setAndSaveHQKeys(key);
-		assertEquals("Incorrect public key", sampleHQKey, appWithAccount.getLegacyHQKey());
+		String sampleHQKey1 = "abc123";
+		String sampleLabel1 = "Fred";
+		Vector keys = new Vector();
+		HQKey key1 = new HQKey(sampleHQKey1, sampleLabel1);
+		keys.add(key1);
+
+		appWithAccount.setAndSaveHQKeys(keys);
+		assertEquals("Incorrect public key", sampleHQKey1, appWithAccount.getLegacyHQKey());
 		appWithAccount.setAndSaveHQKeys(empty);
 		assertEquals("HQ not cleared", "", appWithAccount.getLegacyHQKey());
 	}
@@ -1459,6 +1470,8 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		String formattedCode = MartusCrypto.formatPublicCode(publicCode);
 		assertNotEquals("formatted code is the same as the public code?", formattedCode, publicCode);
 		assertEquals("Not formatted correctly", "1234.5678.9012.3456", MartusCrypto.formatPublicCode("1234567890123456"));
+		String formattedCode2 = MartusCrypto.computeFormattedPublicCode(clientId);
+		assertEquals("Not formatted the same", formattedCode, formattedCode2);
 		TRACE_END();
 
 	}
@@ -1483,15 +1496,22 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 
 	public void testSetBulletinHQKey() throws Exception
 	{
-		String key = "aabcc";
+		String sampleHQKey1 = "abc123";
+		String sampleLabel1 = "Fred";
 		Vector keys = new Vector();
-		keys.add(key);
+		HQKey key1 = new HQKey(sampleHQKey1, sampleLabel1);
+		keys.add(key1);
 		appWithAccount.setAndSaveHQKeys(keys);
+		Vector returnedKeys = appWithAccount.getHQKeys();
+		HQKey returnedKey1 = (HQKey)returnedKeys.get(0);
+		assertEquals("Public Key not set?", sampleHQKey1, returnedKey1.getPublicKey());
+		assertEquals("Label not set?", sampleLabel1, returnedKey1.getLabel());
 
 		Bulletin b1 = appWithAccount.createBulletin();
 		assertEquals("key already set?", 0, b1.getAuthorizedToReadKeys().size());
 		appWithAccount.setHQKeysInBulletin(b1);
-		assertEquals("Key not set?", key, b1.getAuthorizedToReadKeys().get(0));
+		assertEquals("Key not set?", sampleHQKey1, ((HQKey)b1.getAuthorizedToReadKeys().get(0)).getPublicKey());
+		assertEquals("Label not set?", sampleLabel1, ((HQKey)b1.getAuthorizedToReadKeys().get(0)).getLabel());
 	}
 
 	private MockMartusSecurity mockSecurityForApp;

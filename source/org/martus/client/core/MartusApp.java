@@ -47,9 +47,10 @@ import org.martus.client.core.Exceptions.ServerNotAvailableException;
 import org.martus.client.search.BulletinSearcher;
 import org.martus.client.search.SearchParser;
 import org.martus.client.search.SearchTreeNode;
-import org.martus.common.*;
 import org.martus.common.CustomFields;
 import org.martus.common.FieldSpec;
+import org.martus.common.HQKey;
+import org.martus.common.HQKeys;
 import org.martus.common.LegacyCustomFields;
 import org.martus.common.MartusConstants;
 import org.martus.common.MartusUtilities;
@@ -202,7 +203,8 @@ public class MartusApp
 		catch (HQsException e)
 		{
 			e.printStackTrace();
-			hqKeys.add(getLegacyHQKey());
+			HQKey legacyKey = new HQKey(getLegacyHQKey(), null);
+			hqKeys.add(legacyKey);
 		}
 		return hqKeys;
 	}
@@ -219,7 +221,7 @@ public class MartusApp
 		if(hQKeys.isEmpty())
 			configInfo.clearHQKey();
 		else
-			configInfo.setLegacyHQKey((String)hQKeys.get(0));
+			configInfo.setLegacyHQKey(((HQKey)hQKeys.get(0)).getPublicKey());
 		saveConfigInfo();
 	}
 
@@ -306,16 +308,18 @@ public class MartusApp
 			throw new LoadConfigInfoException();
 		}
 	}
-
+	
 	private void convertLegacyHQToMultipleHQs() throws HQsException
 	{
 		String legacyHQKey = configInfo.getLegacyHQKey();
 		if(legacyHQKey.length()>0)
 		{
 			Vector hqKeys = getHQKeys();
-			if(!hqKeys.contains(legacyHQKey))
+			if(!HQKeys.containsKey(hqKeys, legacyHQKey))
 			{
-				hqKeys.add(legacyHQKey);
+				String emptyLabel = "";
+				HQKey legacy = new HQKey(legacyHQKey, emptyLabel);
+				hqKeys.add(legacy);
 				try
 				{
 					setAndSaveHQKeys(hqKeys);

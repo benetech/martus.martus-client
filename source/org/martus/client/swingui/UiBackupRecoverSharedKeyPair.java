@@ -257,7 +257,7 @@ public class UiBackupRecoverSharedKeyPair
 	private String getDefaultKeyShareFileName() 
 	{
 		String defaultInputText = "";
-		String enteredFileName = mainWindow.getStringInput("GetShareFileName","GetShareFileNameDescription",defaultInputText);
+		String enteredFileName = mainWindow.getStringInput("GetShareFileName","GetShareFileNameDescription","", defaultInputText);
 		if(enteredFileName == null)
 			return null;
 		String defaultFileName = MartusUtilities.createValidFileName(enteredFileName);
