@@ -34,7 +34,6 @@ import java.awt.event.KeyEvent;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.util.Vector;
 
 import javax.swing.JButton;
@@ -51,6 +50,7 @@ import org.martus.client.swingui.UiMainWindow;
 import org.martus.swing.ParagraphLayout;
 import org.martus.swing.UiWrappedTextArea;
 import org.martus.swing.Utilities;
+import org.martus.util.UnicodeReader;
 
 
 
@@ -120,7 +120,7 @@ public class UiDisplayFileDlg extends JDialog
 		}
 		try
 		{
-			BufferedReader reader = new BufferedReader(new InputStreamReader(fileStream));
+			BufferedReader reader = new BufferedReader(new UnicodeReader(fileStream));
 			while(true)
 			{
 				String lineIn = reader.readLine();
@@ -149,7 +149,7 @@ public class UiDisplayFileDlg extends JDialog
 		}
 		try
 		{
-			BufferedReader reader = new BufferedReader(new InputStreamReader(fileStream));
+			BufferedReader reader = new BufferedReader(new UnicodeReader(fileStream));
 			while(true)
 			{
 				String lineIn = reader.readLine();

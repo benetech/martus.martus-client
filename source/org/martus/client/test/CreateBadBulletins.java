@@ -29,7 +29,6 @@ package org.martus.client.test;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStreamReader;
 
 import org.martus.client.core.BulletinStore;
 import org.martus.client.core.Localization;
@@ -40,6 +39,7 @@ import org.martus.common.bulletin.BulletinSaver;
 import org.martus.common.crypto.MartusCrypto;
 import org.martus.common.crypto.MartusCrypto.CryptoException;
 import org.martus.common.test.BulletinForTesting;
+import org.martus.util.UnicodeReader;
 
 public class CreateBadBulletins
 {
@@ -107,7 +107,7 @@ public class CreateBadBulletins
 	{
 		System.out.print(prompt);
 		System.out.flush();
-		InputStreamReader rawReader = new InputStreamReader(System.in);	
+		UnicodeReader rawReader = new UnicodeReader(System.in);	
 		BufferedReader reader = new BufferedReader(rawReader);
 		String result = reader.readLine();
 		return result;
