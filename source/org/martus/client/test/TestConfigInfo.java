@@ -35,7 +35,6 @@ import java.util.Vector;
 import org.martus.common.ConfigInfo;
 import org.martus.common.ContactInfo;
 import org.martus.common.FieldSpec;
-import org.martus.common.crypto.MartusCrypto;
 import org.martus.common.crypto.MartusSecurity;
 import org.martus.common.network.NetworkInterfaceConstants;
 import org.martus.common.test.TestCaseEnhanced;
@@ -149,21 +148,20 @@ public class TestConfigInfo extends TestCaseEnhanced
 		newInfo.setPhone(samplePhone);
 		MartusSecurity signer = new MartusSecurity();
 		signer.createKeyPair(512);
-		MartusCrypto signer1 = signer;
-		Vector contactInfo1 = newInfo.getRawContactInfo(signer1);
-		Vector contactInfo = ContactInfo.encodeContactInfoVector(contactInfo1);
-		assertEquals("Not encoded?",NetworkInterfaceConstants.BASE_64_ENCODED,contactInfo.get(0));
-		assertEquals("Wrong contactinfo size", 10, contactInfo.size());
-		String publicKey = (String)contactInfo.get(1);
+		ContactInfo contactInfo = new ContactInfo(newInfo);
+		Vector contactInfoVector = contactInfo.getSignedEncodedVector(signer);
+		assertEquals("Not encoded?",NetworkInterfaceConstants.BASE_64_ENCODED,contactInfoVector.get(0));
+		assertEquals("Wrong contactinfo size", 10, contactInfoVector.size());
+		String publicKey = (String)contactInfoVector.get(1);
 
 		assertEquals("Not the publicKey?", signer.getPublicKeyString(), publicKey);
-		int contentSize = ((Integer)(contactInfo.get(2))).intValue();
-		assertEquals("Not the encoded correct size?", contentSize + 4, contactInfo.size());
-		assertEquals("encoded Author not correct?", sampleAuthor, new String(Base64.decode((String)contactInfo.get(3))));
-		assertEquals("encoded Address not correct?", sampleAddress,  new String(Base64.decode((String)contactInfo.get(8))));
-		assertEquals("encoded phone not correct?", samplePhone,  new String(Base64.decode((String)contactInfo.get(7))));
+		int contentSize = ((Integer)(contactInfoVector.get(2))).intValue();
+		assertEquals("Not the encoded correct size?", contentSize + 4, contactInfoVector.size());
+		assertEquals("encoded Author not correct?", sampleAuthor, new String(Base64.decode((String)contactInfoVector.get(3))));
+		assertEquals("encoded Address not correct?", sampleAddress,  new String(Base64.decode((String)contactInfoVector.get(8))));
+		assertEquals("encoded phone not correct?", samplePhone,  new String(Base64.decode((String)contactInfoVector.get(7))));
 		
-		Vector decodedContactInfo = ContactInfo.decodeContactInfoVectorIfNecessary(contactInfo);
+		Vector decodedContactInfo = ContactInfo.decodeContactInfoVectorIfNecessary(contactInfoVector);
 		Vector alreadyDecodedContactInfo = ContactInfo.decodeContactInfoVectorIfNecessary(decodedContactInfo);
 		assertEquals("Backward compatibility test, a decoded vector should be equal", decodedContactInfo, alreadyDecodedContactInfo);
 		

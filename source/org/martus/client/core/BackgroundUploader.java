@@ -293,9 +293,10 @@ public class BackgroundUploader
 		ConfigInfo configInfo = app.getConfigInfo();
 		try
 		{
-			Vector contactInfo = configInfo.getRawContactInfo(app.getSecurity());
-			Vector encodedContactInfo = ContactInfo.encodeContactInfoVector(contactInfo);
-			result = putContactInfoOnServer(encodedContactInfo);
+			MartusCrypto signer = app.getSecurity();
+			ContactInfo contactInfo = new ContactInfo(configInfo);
+			Vector contactInfoVector = contactInfo.getSignedEncodedVector(signer);
+			result = putContactInfoOnServer(contactInfoVector);
 		}
 		catch (MartusCrypto.MartusSignatureException e)
 		{
