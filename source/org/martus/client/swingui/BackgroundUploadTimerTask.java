@@ -92,7 +92,7 @@ class BackgroundUploadTimerTask extends TimerTask
 				BackgroundUploader.UploadResult uploadResult = uploader.backgroundUpload(); 
 				mainWindow.uploadResult = uploadResult.result;
 				
-				if (uploadResult.result != null && uploadResult.result.equals(NetworkInterfaceConstants.UNKNOW))
+				if (uploadResult.result != null && uploadResult.result.equals(NetworkInterfaceConstants.UNKNOWN))
 				{
 					tag = "";
 				}	
