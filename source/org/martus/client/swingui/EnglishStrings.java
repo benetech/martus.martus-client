@@ -361,6 +361,7 @@ public class EnglishStrings
 "language:en=English",
 "language:ar=Arabic",
 "language:az=Azerbaijani",
+"language:bg=Bulgarian",
 "language:bn=Bengali, Bangla",
 "language:my=Burmese",
 "language:zh=Chinese",
