@@ -48,6 +48,7 @@ public class TestClient
 		TestSuite suite= new TestSuite("All Client Martus Tests");
 
 		suite.addTest(new TestSuite(TestBulletinFolder.class));
+		suite.addTest(new TestSuite(TestBulletinSearcher.class));
 		suite.addTest(new TestSuite(TestBulletinStore.class));
 		suite.addTest(new TestSuite(TestBulletinTableModel.class));
 		suite.addTest(new TestSuite(TestBulletinXmlExporter.class));
@@ -64,6 +65,8 @@ public class TestClient
 		suite.addTest(new TestSuite(TestMartusFlexidate.class));
 		suite.addTest(new TestSuite(TestMartusLocalization.class));
 		suite.addTest(new TestSuite(TestMartusUserNameAndPassword.class));
+		suite.addTest(new TestSuite(TestSearchParser.class));
+		suite.addTest(new TestSuite(TestSearchTreeNode.class));
 		suite.addTest(new TestSuite(TestTokenReplacement.class));
 		suite.addTest(new TestSuite(TestTransferableAttachments.class));
 		suite.addTest(new TestSuite(TestTransferableBulletin.class));
