@@ -46,7 +46,7 @@ abstract public class UiBulletinComponentSection extends UiParagraphPanel
 	{
 		mainWindow = mainWindowToUse;
 		setBorder(new EtchedBorder());
-		getParagraphLayout().outdentFirstField();
+		outdentFirstField();
 
 		sectionHeading = new JLabel("", null, JLabel.LEFT);
 		sectionHeading.setVerticalTextPosition(JLabel.TOP);
@@ -89,7 +89,7 @@ abstract public class UiBulletinComponentSection extends UiParagraphPanel
 
 	int getFirstColumnWidth()
 	{
-		return getParagraphLayout().getFirstColumnMaxWidth(this);
+		return getFirstColumnMaxWidth(this);
 	}
 
 	void matchFirstColumnWidth(UiBulletinComponentSection otherSection)
@@ -97,7 +97,7 @@ abstract public class UiBulletinComponentSection extends UiParagraphPanel
 		int thisWidth = getFirstColumnWidth();
 		int otherWidth = otherSection.getFirstColumnWidth();
 		if(otherWidth > thisWidth)
-			getParagraphLayout().setFirstColumnWidth(otherWidth);
+			setFirstColumnWidth(otherWidth);
 	}
 
 	protected void setSectionIconAndTitle(String iconFileName, String title)
