@@ -58,6 +58,7 @@ import org.martus.common.database.MockDatabase;
 import org.martus.common.packet.BulletinHeaderPacket;
 import org.martus.common.packet.FieldDataPacket;
 import org.martus.common.packet.UniversalId;
+import org.martus.common.test.UniversalIdForTesting;
 import org.martus.util.Stopwatch;
 import org.martus.util.TestCaseEnhanced;
 
@@ -723,7 +724,7 @@ public class TestBulletinStore extends TestCaseEnhanced
 		{
 		}
 		assertEquals("still in folder", true, folder.contains(b));
-		UniversalId bFakeId = UniversalId.createFromAccountAndPrefix("aa", "abc");
+		UniversalId bFakeId = UniversalIdForTesting.createFromAccountAndPrefix("aa", "abc");
 		store.addBulletinToFolder(folder, bFakeId);
 		UniversalId badId2 = UniversalId.createDummyUniversalId();
 		assertEquals("bad bulletin", -1, folder.find(badId2));
