@@ -55,10 +55,10 @@ import javax.swing.event.TableModelEvent;
 import javax.swing.table.JTableHeader;
 
 import org.martus.client.core.BulletinFolder;
-import org.martus.client.core.BulletinStore;
+import org.martus.client.core.ClientBulletinStore;
 import org.martus.client.core.MartusApp;
 import org.martus.client.core.TransferableBulletinList;
-import org.martus.client.core.BulletinStore.BulletinAlreadyExistsException;
+import org.martus.client.core.ClientBulletinStore.BulletinAlreadyExistsException;
 import org.martus.client.swingui.UiClipboardUtilities;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.dialogs.UiBulletinModifyDlg.CancelHandler;
@@ -109,7 +109,7 @@ public class UiBulletinTable extends JTable implements ListSelectionListener, Dr
 		return dropAdapter;
 	}
 
-	public BulletinStore getStore()
+	public ClientBulletinStore getStore()
 	{
 		return mainWindow.getStore();
 	}
@@ -262,7 +262,7 @@ public class UiBulletinTable extends JTable implements ListSelectionListener, Dr
 			if(!mainWindow.confirmDlg("EditBulletinWithUnknownTags"))
 				return;
 
-		BulletinStore store = mainWindow.getApp().getStore();
+		ClientBulletinStore store = mainWindow.getApp().getStore();
 		CancelHandler handler = new DoNothingOnCancel();
 		if(createClone)
 		{

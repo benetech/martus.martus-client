@@ -72,7 +72,7 @@ import javax.swing.SwingUtilities;
 import org.martus.client.core.BackgroundUploader;
 import org.martus.client.core.BulletinFolder;
 import org.martus.client.core.BulletinHtmlGenerator;
-import org.martus.client.core.BulletinStore;
+import org.martus.client.core.ClientBulletinStore;
 import org.martus.client.core.ClientSideNetworkGateway;
 import org.martus.client.core.ConfigInfo;
 import org.martus.client.core.MartusApp;
@@ -493,7 +493,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		{
 			complianceStatementAlwaysEnglish =
 			BEGIN_HTML_TAGS +
-			"Martus™<br></br>" +
+			"Martus(TM)<br></br>" +
 			productDescription +
 			END_HTML_TAGS;
 		}
@@ -517,7 +517,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		return localization;
 	}
 
-	public BulletinStore getStore()
+	public ClientBulletinStore getStore()
 	{
 		return getApp().getStore();
 	}
@@ -621,7 +621,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 
 	public void selectSentFolder()
 	{
-		BulletinStore store = getStore();
+		ClientBulletinStore store = getStore();
 		BulletinFolder folder = store.getFolderSaved();
 		folders.selectFolder(folder.getName());
 	}
@@ -974,7 +974,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		String andKeyword = getLocalization().getKeyword("and");
 		String orKeyword = getLocalization().getKeyword("or");
 		app.search(searchDlg.getSearchString(), searchDlg.getStartDate(), searchDlg.getEndDate(), andKeyword, orKeyword);
-		BulletinStore store = getStore();
+		ClientBulletinStore store = getStore();
 		BulletinFolder searchFolder = store.findFolder(store.getSearchFolderName());
 		folders.folderTreeContentsHaveChanged();
 		folders.folderContentsHaveChanged(searchFolder);

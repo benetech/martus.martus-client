@@ -29,14 +29,14 @@ package org.martus.client.test;
 import java.io.File;
 import java.io.IOException;
 
-import org.martus.client.core.BulletinStore;
+import org.martus.client.core.ClientBulletinStore;
 import org.martus.common.crypto.MartusCrypto;
 import org.martus.common.crypto.MockMartusSecurity;
 import org.martus.common.database.Database;
 import org.martus.common.database.MockClientDatabase;
 
 
-public class MockBulletinStore extends BulletinStore
+public class MockBulletinStore extends ClientBulletinStore
 {
 	public MockBulletinStore() throws Exception
 	{

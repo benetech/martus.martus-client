@@ -30,8 +30,8 @@ import java.io.IOException;
 import java.util.Vector;
 
 import org.martus.client.core.BulletinFolder;
-import org.martus.client.core.BulletinStore;
-import org.martus.client.core.BulletinStore.BulletinAlreadyExistsException;
+import org.martus.client.core.ClientBulletinStore;
+import org.martus.client.core.ClientBulletinStore.BulletinAlreadyExistsException;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.packet.UniversalId;
 import org.martus.util.TestCaseEnhanced;
@@ -63,7 +63,7 @@ public class TestBulletinFolder extends TestCaseEnhanced
 
     public void testBasics() throws Exception
     {
-		BulletinStore tempStore = new MockBulletinStore();
+		ClientBulletinStore tempStore = new MockBulletinStore();
 		assertEquals(false, (tempStore == null));
 
 		// shouldn't normally create a folder this way!
@@ -81,7 +81,7 @@ public class TestBulletinFolder extends TestCaseEnhanced
 
 	public void testSetName() throws Exception
 	{
-		BulletinStore store = new MockBulletinStore();
+		ClientBulletinStore store = new MockBulletinStore();
 
 		final String name = "Interesting folder name";
 		BulletinFolder folder = store.createFolder(name);
@@ -99,7 +99,7 @@ public class TestBulletinFolder extends TestCaseEnhanced
 
 	public void testCanDelete() throws Exception
 	{
-		BulletinStore store = new MockBulletinStore();
+		ClientBulletinStore store = new MockBulletinStore();
 		BulletinFolder folder = store.createFolder("blah");
 		assertEquals(true, folder.canDelete());
 		folder.preventDelete();
@@ -108,7 +108,7 @@ public class TestBulletinFolder extends TestCaseEnhanced
 
 	public void testIsVisible() throws Exception
 	{
-		BulletinStore store = new MockBulletinStore();
+		ClientBulletinStore store = new MockBulletinStore();
 		BulletinFolder normalFolder = store.createFolder("blah");
 		assertEquals("not visible?", true, normalFolder.isVisible());
 
@@ -309,7 +309,7 @@ public class TestBulletinFolder extends TestCaseEnhanced
 
 	void createEmptyBulletins(BulletinFolder folder, int count) throws Exception
 	{
-		BulletinStore store = folder.getStore();
+		ClientBulletinStore store = folder.getStore();
 		for(int i = 0; i < count; ++i)
 		{
 			Bulletin b = store.createEmptyBulletin();
@@ -318,7 +318,7 @@ public class TestBulletinFolder extends TestCaseEnhanced
 		}
 	}
 
-	static BulletinStore store;
+	static ClientBulletinStore store;
 	static BulletinFolder testFolder;
 	static Bulletin b;
 	static Bulletin b2;

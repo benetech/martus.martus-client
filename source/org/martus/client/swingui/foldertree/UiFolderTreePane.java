@@ -39,7 +39,7 @@ import javax.swing.JViewport;
 import javax.swing.tree.TreePath;
 
 import org.martus.client.core.BulletinFolder;
-import org.martus.client.core.BulletinStore;
+import org.martus.client.core.ClientBulletinStore;
 import org.martus.client.swingui.UiMainWindow;
 
 public class UiFolderTreePane extends JScrollPane
@@ -285,7 +285,7 @@ public class UiFolderTreePane extends JScrollPane
 	}
 
 	UiMainWindow parent;
-	BulletinStore store;
+	ClientBulletinStore store;
 	FolderList model;
 	UiFolderTree tree;
 }

@@ -41,7 +41,7 @@ import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JScrollPane;
 
-import org.martus.client.core.BulletinStore;
+import org.martus.client.core.ClientBulletinStore;
 import org.martus.client.core.BulletinXmlExporter;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.common.bulletin.Bulletin;
@@ -111,7 +111,7 @@ public class UiExportBulletinsDlg extends JDialog implements ActionListener
 		show();
 	}
 
-	public static Vector findBulletins(BulletinStore store, UniversalId[] selectedBulletins)
+	public static Vector findBulletins(ClientBulletinStore store, UniversalId[] selectedBulletins)
 	{
 		Vector bulletins = new Vector();
 		for (int i = 0; i < selectedBulletins.length; i++)

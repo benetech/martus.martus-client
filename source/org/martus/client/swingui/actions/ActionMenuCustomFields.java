@@ -29,7 +29,7 @@ package org.martus.client.swingui.actions;
 import java.awt.event.ActionEvent;
 import java.util.Vector;
 
-import org.martus.client.core.BulletinStore;
+import org.martus.client.core.ClientBulletinStore;
 import org.martus.client.core.CustomFieldError;
 import org.martus.client.core.CustomFieldSpecValidator;
 import org.martus.client.core.MartusApp;
@@ -57,7 +57,7 @@ public class ActionMenuCustomFields extends UiMenuAction
 			return;
 		
 		MartusApp app = mainWindow.getApp();
-		BulletinStore store = app.getStore();
+		ClientBulletinStore store = app.getStore();
 		FieldSpec[] existingSpecs = store.getPublicFieldSpecs();
 		FieldSpec[] newSpecs = getCustomizedFieldsFromUser(existingSpecs);
 		if(newSpecs == null)

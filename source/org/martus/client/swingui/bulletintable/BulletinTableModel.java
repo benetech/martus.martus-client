@@ -29,7 +29,7 @@ package org.martus.client.swingui.bulletintable;
 import javax.swing.table.AbstractTableModel;
 
 import org.martus.client.core.BulletinFolder;
-import org.martus.client.core.BulletinStore;
+import org.martus.client.core.ClientBulletinStore;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.bulletin.BulletinConstants;
 import org.martus.common.clientside.UiBasicLocalization;
@@ -127,7 +127,7 @@ public class BulletinTableModel extends AbstractTableModel
 
 	private String getSentTag(Bulletin b)
 	{
-		BulletinStore store = folder.getStore();
+		ClientBulletinStore store = folder.getStore();
 		boolean knownNotOnServer = store.isProbablyNotOnServer(b);
 
 		if(store.getFolderDraftOutbox().contains(b))

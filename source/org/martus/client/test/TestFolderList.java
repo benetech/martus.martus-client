@@ -26,7 +26,7 @@ Boston, MA 02111-1307, USA.
 
 package org.martus.client.test;
 
-import org.martus.client.core.BulletinStore;
+import org.martus.client.core.ClientBulletinStore;
 import org.martus.client.swingui.foldertree.FolderList;
 import org.martus.client.swingui.foldertree.FolderTreeNode;
 import org.martus.common.clientside.UiBasicLocalization;
@@ -57,7 +57,7 @@ public class TestFolderList extends TestCaseEnhanced
 	public void testBasics() throws Exception
 	{
 		app.loadSampleData();
-		BulletinStore store = app.getStore();
+		ClientBulletinStore store = app.getStore();
 		FolderList list = new FolderList(getLocalization());
 		list.loadFolders(store);
 
@@ -94,7 +94,7 @@ public class TestFolderList extends TestCaseEnhanced
 	public void testLocalizedFolders() throws Exception
 	{
 		app.loadSampleData();
-		BulletinStore store = app.getStore();
+		ClientBulletinStore store = app.getStore();
 		FolderList list = new FolderList(getLocalization());
 		list.loadFolders(store);
 
@@ -119,7 +119,7 @@ public class TestFolderList extends TestCaseEnhanced
 	public void testLoadFolders() throws Exception
 	{
 		app.loadSampleData();
-		BulletinStore store = app.getStore();
+		ClientBulletinStore store = app.getStore();
 		assertTrue("Need sample folders", getVisibleFolderCount(store) > 0);
 
 		FolderList ourList = new FolderList(getLocalization());
@@ -130,7 +130,7 @@ public class TestFolderList extends TestCaseEnhanced
 
 	}
 
-	private int getVisibleFolderCount(BulletinStore store)
+	private int getVisibleFolderCount(ClientBulletinStore store)
 	{
 		return store.getVisibleFolderNames().size();
 	}

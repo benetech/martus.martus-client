@@ -37,7 +37,7 @@ import java.util.Arrays;
 import java.util.Vector;
 
 import org.martus.client.core.BulletinFolder;
-import org.martus.client.core.BulletinStore;
+import org.martus.client.core.ClientBulletinStore;
 import org.martus.client.core.ConfigInfo;
 import org.martus.client.core.MartusApp;
 import org.martus.client.core.MartusApp.AccountAlreadyExistsException;
@@ -106,14 +106,14 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 	{
 		TRACE_BEGIN("testBasics");
 
-		BulletinStore store = appWithAccount.getStore();
+		ClientBulletinStore store = appWithAccount.getStore();
 		assertNotNull("BulletinStore", store);
 		TRACE_END();
 	}
 	
 	public void testSaveBulletin() throws Exception
 	{
-		BulletinStore store = appWithAccount.getStore();
+		ClientBulletinStore store = appWithAccount.getStore();
 		BulletinFolder outbox = store.getFolderDraftOutbox();
 		BulletinFolder discarded = store.getFolderDiscarded();
 		
@@ -735,8 +735,8 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		File configInfoSigFile = appWithAccount.getConfigInfoSignatureFile();
 		File uploadedFile = appWithAccount.getUploadInfoFile();
 		File uiStateFile = appWithAccount.getUiStateFileForAccount(accountsDirectory);
-		File foldersFile = BulletinStore.getFoldersFileForAccount(accountsDirectory);
-		File cacheFile = BulletinStore.getCacheFileForAccount(accountsDirectory);
+		File foldersFile = ClientBulletinStore.getFoldersFileForAccount(accountsDirectory);
+		File cacheFile = ClientBulletinStore.getCacheFileForAccount(accountsDirectory);
 		File key1File = new File(accountsDirectory, "Key1.mpi");
 		File key2File = new File(accountsDirectory, "Key2.mpi");
 		
@@ -1149,7 +1149,7 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 
 		appWithAccount.loadSampleData(); //SLOW!!!
 
-		BulletinStore store = appWithAccount.getStore();
+		ClientBulletinStore store = appWithAccount.getStore();
 		int sampleCount = store.getBulletinCount();
 		assertTrue("Should start with samples", sampleCount > 0);
 
@@ -1168,7 +1168,7 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 	public void testSearch() throws Exception
 	{
 		TRACE_BEGIN("testSearch");
-		BulletinStore store = appWithAccount.getStore();
+		ClientBulletinStore store = appWithAccount.getStore();
 		String startDate = "1900-01-01";
 		String endDate = "2099-12-31";
 		assertNull("Search results already exists?", store.findFolder(store.getSearchFolderName()));
@@ -1567,7 +1567,7 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 	public void testRepairOrphans() throws Exception
 	{
 		assertEquals("already have orphans?", 0, appWithAccount.repairOrphans());		
-		assertNull("Orphan Folder exists?", appWithAccount.getStore().findFolder(BulletinStore.RECOVERED_BULLETIN_FOLDER));
+		assertNull("Orphan Folder exists?", appWithAccount.getStore().findFolder(ClientBulletinStore.RECOVERED_BULLETIN_FOLDER));
 		int draftCount = appWithAccount.getStore().getFolderDraftOutbox().getBulletinCount();
 		assertEquals("is draft outbox folder empty?", 0,draftCount);
 		
@@ -1579,12 +1579,12 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		assertEquals("is draft outbox folder not empty?", 1, draftCount);				
 		assertEquals("didn't fix the orphan?", 0, appWithAccount.repairOrphans());		
 
-		BulletinFolder orphanFolder = appWithAccount.getStore().findFolder(BulletinStore.RECOVERED_BULLETIN_FOLDER);
+		BulletinFolder orphanFolder = appWithAccount.getStore().findFolder(ClientBulletinStore.RECOVERED_BULLETIN_FOLDER);
 		assertEquals("where did the orphan go?", 1, orphanFolder.getBulletinCount());
 		assertTrue("wrong bulletin?", orphanFolder.contains(b1));
 
 		appWithAccount.loadFolders();
-		BulletinFolder orphanFolder2 = appWithAccount.getStore().findFolder(BulletinStore.RECOVERED_BULLETIN_FOLDER);
+		BulletinFolder orphanFolder2 = appWithAccount.getStore().findFolder(ClientBulletinStore.RECOVERED_BULLETIN_FOLDER);
 		assertEquals("forgot to save folders?", 1, orphanFolder2.getBulletinCount());
 	}
 

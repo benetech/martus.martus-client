@@ -37,9 +37,9 @@ import java.util.Vector;
 
 import org.martus.client.core.BulletinCache;
 import org.martus.client.core.BulletinFolder;
-import org.martus.client.core.BulletinStore;
+import org.martus.client.core.ClientBulletinStore;
 import org.martus.client.core.MartusClientXml;
-import org.martus.client.core.BulletinStore.BulletinAlreadyExistsException;
+import org.martus.client.core.ClientBulletinStore.BulletinAlreadyExistsException;
 import org.martus.common.FieldSpec;
 import org.martus.common.HQKey;
 import org.martus.common.HQKeys;
@@ -63,11 +63,11 @@ import org.martus.util.Stopwatch;
 import org.martus.util.TestCaseEnhanced;
 
 
-public class TestBulletinStore extends TestCaseEnhanced
+public class TestClientBulletinStore extends TestCaseEnhanced
 {
 	static Stopwatch sw = new Stopwatch();
 	
-    public TestBulletinStore(String name) {
+    public TestClientBulletinStore(String name) {
         super(name);
     }
 
@@ -177,23 +177,23 @@ public class TestBulletinStore extends TestCaseEnhanced
     public void testNeedsFolderMigration()
     {
     	assertFalse("normal store needs migration?", store.needsFolderMigration());
-		store.createSystemFolder(BulletinStore.OBSOLETE_OUTBOX_FOLDER);
+		store.createSystemFolder(ClientBulletinStore.OBSOLETE_OUTBOX_FOLDER);
     	assertTrue("outbox doesn't trigger migration?", store.needsFolderMigration());
-    	store.deleteFolder(BulletinStore.OBSOLETE_OUTBOX_FOLDER);
-		store.createSystemFolder(BulletinStore.OBSOLETE_DRAFT_FOLDER);
+    	store.deleteFolder(ClientBulletinStore.OBSOLETE_OUTBOX_FOLDER);
+		store.createSystemFolder(ClientBulletinStore.OBSOLETE_DRAFT_FOLDER);
     	assertTrue("drafts doesn't trigger migration?", store.needsFolderMigration());
-    	store.deleteFolder(BulletinStore.OBSOLETE_DRAFT_FOLDER);
+    	store.deleteFolder(ClientBulletinStore.OBSOLETE_DRAFT_FOLDER);
     }
     
     public void testMigrateFolders() throws Exception
     {
 
-		BulletinFolder outbox = store.createSystemFolder(BulletinStore.OBSOLETE_OUTBOX_FOLDER);
+		BulletinFolder outbox = store.createSystemFolder(ClientBulletinStore.OBSOLETE_OUTBOX_FOLDER);
     	Bulletin saved = store.createEmptyBulletin();
     	store.saveBulletin(saved);
     	store.addBulletinToFolder(outbox, saved.getUniversalId());
 
-    	BulletinFolder drafts = store.createSystemFolder(BulletinStore.OBSOLETE_DRAFT_FOLDER);
+    	BulletinFolder drafts = store.createSystemFolder(ClientBulletinStore.OBSOLETE_DRAFT_FOLDER);
     	Bulletin draft = store.createEmptyBulletin();
     	store.saveBulletin(draft);
     	store.addBulletinToFolder(drafts, draft.getUniversalId());
@@ -206,8 +206,8 @@ public class TestBulletinStore extends TestCaseEnhanced
     	assertEquals(1, store.getFolderSealedOutbox().getBulletinCount());
     	assertEquals(0, store.getFolderSealedOutbox().find(saved.getUniversalId()));
 
-    	assertNull("Didn't remove outbox?", store.findFolder(BulletinStore.OBSOLETE_OUTBOX_FOLDER));
-    	assertNull("Didn't remove drafts folder?", store.findFolder(BulletinStore.OBSOLETE_DRAFT_FOLDER));
+    	assertNull("Didn't remove outbox?", store.findFolder(ClientBulletinStore.OBSOLETE_OUTBOX_FOLDER));
+    	assertNull("Didn't remove drafts folder?", store.findFolder(ClientBulletinStore.OBSOLETE_DRAFT_FOLDER));
     	
     }
     
@@ -260,7 +260,7 @@ public class TestBulletinStore extends TestCaseEnhanced
 
 		class BulletinUidCollector implements Database.PacketVisitor
 		{
-			BulletinUidCollector(BulletinStore store)
+			BulletinUidCollector(ClientBulletinStore store)
 			{
 				store.visitAllBulletins(this);
 			}
@@ -837,7 +837,7 @@ public class TestBulletinStore extends TestCaseEnhanced
 
 		int systemFolderCount = store.getFolderCount();
 
-		BulletinStore tempStore = new MockBulletinStore();
+		ClientBulletinStore tempStore = new MockBulletinStore();
 		String xml = "<FolderList><Folder name='Sent Bulletins'></Folder><Folder name='new two'></Folder></FolderList>";
 		tempStore.internalLoadFolders(xml);
 		assertTrue("Legacy folder not detected?", tempStore.needsLegacyFolderConversion());
@@ -881,7 +881,7 @@ public class TestBulletinStore extends TestCaseEnhanced
 		assertEquals("saving", 1, store.getBulletinCount());
 		assertEquals("keys", 3*store.getBulletinCount(), db.getRecordCount());
 
-		BulletinStore newStoreSameDatabase = new MockBulletinStore(db, store.getSignatureGenerator());
+		ClientBulletinStore newStoreSameDatabase = new MockBulletinStore(db, store.getSignatureGenerator());
 		newStoreSameDatabase.loadFolders();
 		assertEquals("loaded", 1, newStoreSameDatabase.getBulletinCount());
 		Bulletin b2 = newStoreSameDatabase.findBulletinByUniversalId(b.getUniversalId());
@@ -906,7 +906,7 @@ public class TestBulletinStore extends TestCaseEnhanced
 		assertEquals("keys", 3*store.getBulletinCount(), db.getRecordCount());
 
 		File storeRootDir = store.getStoreRootDir();
-		store = new BulletinStore(security);
+		store = new ClientBulletinStore(security);
 		store.doAfterSigninInitialization(storeRootDir, db);
 		assertEquals("before load", systemFolderCount, store.getFolderCount());
 		store.loadFolders();
@@ -1181,7 +1181,7 @@ public class TestBulletinStore extends TestCaseEnhanced
 		Bulletin original = store.createEmptyBulletin();
 		BulletinForTesting.saveToFile(db,original, tempFile, store.getSignatureVerifier());
 
-		BulletinStore importer = createTempStore();
+		ClientBulletinStore importer = createTempStore();
 		BulletinFolder folder = importer.createFolder("test");
 		importer.importZipFileBulletin(tempFile, folder, false);
 
@@ -1195,7 +1195,7 @@ public class TestBulletinStore extends TestCaseEnhanced
 		TRACE("testImportZipFileFieldOffice");
 		File tempFile = createTempFile();
 
-		BulletinStore hqStore = createTempStore();
+		ClientBulletinStore hqStore = createTempStore();
 
 		Bulletin original = store.createEmptyBulletin();
 		HQKeys keys = new HQKeys();
@@ -1437,7 +1437,7 @@ public class TestBulletinStore extends TestCaseEnhanced
 		db.writeRecord(key, badData);
 	}
 
-	private BulletinStore createTempStore() throws Exception
+	private ClientBulletinStore createTempStore() throws Exception
 	{
 		MockMartusSecurity tempSecurity = MockMartusSecurity.createOtherClient();
 		return new MockBulletinStore(tempSecurity);
@@ -1461,7 +1461,7 @@ public class TestBulletinStore extends TestCaseEnhanced
 
 	final int sampleRecordCount = 5;
 
-	static BulletinStore store;
+	static ClientBulletinStore store;
 	static MockMartusSecurity security;
 	static MockDatabase db;
 

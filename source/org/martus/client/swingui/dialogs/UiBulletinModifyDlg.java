@@ -42,7 +42,7 @@ import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 import javax.swing.JViewport;
 import org.martus.client.core.BulletinFolder;
-import org.martus.client.core.BulletinStore;
+import org.martus.client.core.ClientBulletinStore;
 import org.martus.client.core.EncryptionChangeListener;
 import org.martus.client.core.MartusApp;
 import org.martus.client.swingui.UiMainWindow;
@@ -199,7 +199,7 @@ public class UiBulletinModifyDlg extends JFrame implements ActionListener, Windo
 		try 
 		{
 			MartusApp app = observer.getApp();
-			BulletinStore store = app.getStore();
+			ClientBulletinStore store = app.getStore();
 			BulletinFolder outboxToUse = null;
 			BulletinFolder draftOutbox = store.getFolderDraftOutbox();
 
@@ -235,7 +235,7 @@ public class UiBulletinModifyDlg extends JFrame implements ActionListener, Windo
 		}
 	}
 
-	private void saveBulletinAndUpdateFolders(BulletinStore store, BulletinFolder outboxToUse) throws IOException, CryptoException
+	private void saveBulletinAndUpdateFolders(ClientBulletinStore store, BulletinFolder outboxToUse) throws IOException, CryptoException
 	{
 		observer.getApp().saveBulletin(bulletin, outboxToUse);
 
@@ -314,12 +314,12 @@ public class UiBulletinModifyDlg extends JFrame implements ActionListener, Windo
 
 	public interface CancelHandler
 	{
-		public void onCancel(BulletinStore store,Bulletin b);
+		public void onCancel(ClientBulletinStore store,Bulletin b);
 	}
 
 	public static class DoNothingOnCancel implements CancelHandler
 	{
-		public void onCancel(BulletinStore store,Bulletin b)
+		public void onCancel(ClientBulletinStore store,Bulletin b)
 		{
 			// do nothing
 		}
@@ -327,7 +327,7 @@ public class UiBulletinModifyDlg extends JFrame implements ActionListener, Windo
 
 	public static class DeleteBulletinOnCancel implements CancelHandler
 	{
-		public void onCancel(BulletinStore store, Bulletin b)
+		public void onCancel(ClientBulletinStore store, Bulletin b)
 		{
 			try
 			{

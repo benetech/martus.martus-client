@@ -27,7 +27,7 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.test;
 
 import org.martus.client.core.BulletinFolder;
-import org.martus.client.core.BulletinStore;
+import org.martus.client.core.ClientBulletinStore;
 import org.martus.client.swingui.bulletintable.BulletinTableModel;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.bulletin.BulletinConstants;
@@ -292,7 +292,7 @@ public class TestBulletinTableModel extends TestCaseEnhanced
 
 	MockMartusApp app;
 	MockUiLocalization localization;
-	BulletinStore store;
+	ClientBulletinStore store;
 	BulletinFolder folderSaved;
 
 }

@@ -40,9 +40,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.zip.ZipFile;
 import org.martus.client.core.BulletinFolder;
-import org.martus.client.core.BulletinStore;
+import org.martus.client.core.ClientBulletinStore;
 import org.martus.client.core.TransferableBulletinList;
-import org.martus.client.core.BulletinStore.BulletinAlreadyExistsException;
+import org.martus.client.core.ClientBulletinStore.BulletinAlreadyExistsException;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.crypto.MartusCrypto.CryptoException;
 import org.martus.common.packet.BulletinHeaderPacket;
@@ -126,7 +126,7 @@ public abstract class UiBulletinDropAdapter implements DropTargetListener
 		{
 			attemptDropBulletins(tb.getBulletins(), toFolder);
 			
-			BulletinStore store = observer.getStore();
+			ClientBulletinStore store = observer.getStore();
 			Bulletin[] wereDropped = tb.getBulletins();
 			for (int i = 0; i < wereDropped.length; i++)
 			{
@@ -257,7 +257,7 @@ public abstract class UiBulletinDropAdapter implements DropTargetListener
 		InvalidBase64Exception, 
 		BulletinAlreadyExistsException
 	{
-		BulletinStore store = toFolder.getStore();
+		ClientBulletinStore store = toFolder.getStore();
 		if(!deleteOldUnAuthoredBulletinIfRequired(file, store))
 			return;
 		Cursor originalCursor = observer.setWaitingCursor();
@@ -272,7 +272,7 @@ public abstract class UiBulletinDropAdapter implements DropTargetListener
 		}
 	}
 	
-	private boolean deleteOldUnAuthoredBulletinIfRequired(File file, BulletinStore store) throws SignatureVerificationException, IOException
+	private boolean deleteOldUnAuthoredBulletinIfRequired(File file, ClientBulletinStore store) throws SignatureVerificationException, IOException
 	{
 		ZipFile zip = new ZipFile(file);
 		BulletinHeaderPacket bhp = BulletinHeaderPacket.loadFromZipFile(zip, store.getSignatureVerifier());
@@ -297,7 +297,7 @@ public abstract class UiBulletinDropAdapter implements DropTargetListener
 	{
 		System.out.println("attemptDropBulletin");
 
-		BulletinStore store = toFolder.getStore();
+		ClientBulletinStore store = toFolder.getStore();
 		int errorThrown = noError;
 		for (int i = 0; i < bulletins.length; i++)
 		{

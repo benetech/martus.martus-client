@@ -30,9 +30,9 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
 
-import org.martus.client.core.BulletinStore;
+import org.martus.client.core.ClientBulletinStore;
 import org.martus.client.core.MartusApp;
-import org.martus.client.core.BulletinStore.BulletinAlreadyExistsException;
+import org.martus.client.core.ClientBulletinStore.BulletinAlreadyExistsException;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.bulletin.BulletinConstants;
 import org.martus.common.bulletin.BulletinSaver;
@@ -90,11 +90,11 @@ public class CreateBadBulletins
 		System.out.println("Completed successfully");
 	}
 
-	private BulletinStore createAndSaveBulletin(MartusApp app, String title)
+	private ClientBulletinStore createAndSaveBulletin(MartusApp app, String title)
 		throws IOException, CryptoException, BulletinAlreadyExistsException
 	{
 		MartusCrypto security = app.getSecurity();
-		BulletinStore store = app.getStore();
+		ClientBulletinStore store = app.getStore();
 		Bulletin b = new BulletinForTesting(security);
 		b.setAllPrivate(false);
 		b.set(BulletinConstants.TAGTITLE, title);

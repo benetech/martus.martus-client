@@ -32,6 +32,7 @@ import junit.framework.TestSuite;
 import org.martus.common.clientside.test.TestChoiceItem;
 import org.martus.common.clientside.test.TestCurrentUiState;
 import org.martus.common.clientside.test.TestDateUtilities;
+import org.martus.common.test.TestBulletinStore;
 
 public class TestClient
 {

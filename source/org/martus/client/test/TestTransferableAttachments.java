@@ -35,7 +35,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.martus.client.core.BulletinFolder;
-import org.martus.client.core.BulletinStore;
+import org.martus.client.core.ClientBulletinStore;
 import org.martus.client.core.TransferableAttachmentList;
 import org.martus.common.bulletin.AttachmentProxy;
 import org.martus.common.bulletin.Bulletin;
@@ -137,7 +137,7 @@ public class TestTransferableAttachments extends TestCaseEnhanced
 		return file;
 	}
 
-	BulletinStore store;
+	ClientBulletinStore store;
 	BulletinFolder folder;
 	TransferableAttachmentList drag;
 	static MartusCrypto security;

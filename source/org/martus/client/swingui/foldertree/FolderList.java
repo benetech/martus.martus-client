@@ -29,7 +29,7 @@ package org.martus.client.swingui.foldertree;
 import java.util.Vector;
 import javax.swing.tree.DefaultTreeModel;
 
-import org.martus.client.core.BulletinStore;
+import org.martus.client.core.ClientBulletinStore;
 import org.martus.common.clientside.UiBasicLocalization;
 
 public class FolderList extends DefaultTreeModel
@@ -46,7 +46,7 @@ public class FolderList extends DefaultTreeModel
 		return root.getChildCount();
 	}
 
-	public void loadFolders(BulletinStore store)
+	public void loadFolders(ClientBulletinStore store)
 	{
 		while(getCount() > 0)
 		{

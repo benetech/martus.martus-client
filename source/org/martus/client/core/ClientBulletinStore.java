@@ -41,6 +41,7 @@ import java.util.Set;
 import java.util.Vector;
 import java.util.zip.ZipFile;
 
+import org.martus.common.BulletinStore;
 import org.martus.common.FieldSpec;
 import org.martus.common.MartusUtilities;
 import org.martus.common.MartusXml;
@@ -50,7 +51,6 @@ import org.martus.common.bulletin.Bulletin;
 import org.martus.common.bulletin.BulletinLoader;
 import org.martus.common.bulletin.BulletinSaver;
 import org.martus.common.bulletin.BulletinZipImporter;
-import org.martus.common.bulletin.BulletinZipUtilities;
 import org.martus.common.crypto.MartusCrypto;
 import org.martus.common.crypto.MartusCrypto.CryptoException;
 import org.martus.common.database.ClientFileDatabase;
@@ -64,7 +64,6 @@ import org.martus.common.packet.Packet;
 import org.martus.common.packet.UniversalId;
 import org.martus.common.packet.Packet.InvalidPacketException;
 import org.martus.common.packet.Packet.SignatureVerificationException;
-import org.martus.common.packet.Packet.WrongAccountException;
 import org.martus.common.packet.Packet.WrongPacketTypeException;
 import org.martus.common.packet.UniversalId.NotUniversalIdException;
 import org.martus.util.FileInputStreamWithSeek;
@@ -86,40 +85,33 @@ import org.xml.sax.SAXParseException;
 	both bulletins and folders, including saving and
 	loading them to/from disk.
 */
-public class BulletinStore
+public class ClientBulletinStore extends BulletinStore
 {
-	public BulletinStore(MartusCrypto cryptoToUse)
+	public ClientBulletinStore(MartusCrypto cryptoToUse)
 	{
 		setSignatureGenerator(cryptoToUse);
 		cache = new BulletinCache();
 	}
 	
-	public File getStoreRootDir()
-	{
-		return dir;
-	}
-
 	public void doAfterSigninInitialization(File dataRootDirectory) throws FileVerificationException, MissingAccountMapException, MissingAccountMapSignatureException
 	{
 		File dbDirectory = new File(dataRootDirectory, "packets");
-		Database db = new ClientFileDatabase(dbDirectory, signer);
+		Database db = new ClientFileDatabase(dbDirectory, getSignatureGenerator());
 		doAfterSigninInitialization(dataRootDirectory, db);
 	}
 
 	public void doAfterSigninInitialization(File dataRootDirectory, Database db) throws FileVerificationException, MissingAccountMapException, MissingAccountMapSignatureException
 	{
-		dir = dataRootDirectory;
-		database = db;
+		super.doAfterSigninInitialization(dataRootDirectory, db);
+		
 		initializeFolders();
-
-		database.initialize();
 
 		publicFieldSpecs = StandardFieldSpecs.getDefaultPublicFieldSpecs();
 		privateFieldSpecs = StandardFieldSpecs.getDefaultPrivateFieldSpecs();
 		
 		loadCache();
 		
-		File obsoleteCacheFile = new File(dir, OBSOLETE_CACHE_FILE_NAME);
+		File obsoleteCacheFile = new File(getStoreRootDir(), OBSOLETE_CACHE_FILE_NAME);
 		obsoleteCacheFile.delete();
 	}
 
@@ -134,71 +126,6 @@ public class BulletinStore
 		getSignatureGenerator().flushSessionKeyCache();
 	}
 	
-	public static File getCacheFileForAccount(File accountDir)
-	{
-		return new File(accountDir, CACHE_FILE_NAME);
-	}
-	
-	private void loadCache()
-	{
-		//System.out.println("BulletinStore.loadCache");
-		File cacheFile = getCacheFileForAccount(dir);
-		if(!cacheFile.exists())
-			return;
-		
-		byte[] sessionKeyCache = new byte[(int)cacheFile.length()];
-		try
-		{
-			FileInputStream in = new FileInputStream(cacheFile);
-			in.read(sessionKeyCache);
-			in.close();
-			getSignatureGenerator().setSessionKeyCache(sessionKeyCache);
-		}
-		catch (Exception e)
-		{
-			e.printStackTrace();
-			cacheFile.delete();
-		}
-	}
-
-	private void saveCache()
-	{
-		System.out.println("BulletinStore.saveCache");
-		try
-		{
-			byte[] sessionKeyCache = getSignatureGenerator().getSessionKeyCache();
-			File cacheFile = new File(dir, CACHE_FILE_NAME);
-			FileOutputStream out = new FileOutputStream(cacheFile);
-			out.write(sessionKeyCache);
-			out.close();
-		}
-		catch (Exception e)
-		{
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
-
-	public String getAccountId()
-	{
-		return signer.getPublicKeyString();
-	}
-
-	public void setSignatureGenerator(MartusCrypto signerToUse)
-	{
-		signer = signerToUse;
-	}
-
-	public MartusCrypto getSignatureGenerator()
-	{
-		return signer;
-	}
-
-	public MartusCrypto getSignatureVerifier()
-	{
-		return signer;
-	}
-
 	public boolean mustEncryptPublicData()
 	{
 		return getDatabase().mustEncryptLocalData();
@@ -207,64 +134,6 @@ public class BulletinStore
 	public boolean isMyBulletin(UniversalId uid)
 	{
 		return(uid.getAccountId().equals(getAccountId()));
-	}
-
-	public int getBulletinCount()
-	{
-		class BulletinCounter implements Database.PacketVisitor
-		{
-			public void visit(DatabaseKey key)
-			{
-				++count;
-			}
-
-			int count = 0;
-		}
-
-		BulletinCounter counter = new BulletinCounter();
-		visitAllBulletins(counter);
-		return counter.count;
-	}
-
-	public Vector getAllBulletinUids()
-	{
-		class UidCollector implements Database.PacketVisitor
-		{
-			public void visit(DatabaseKey key)
-			{
-				uidList.add(key.getUniversalId());
-			}
-			Vector uidList = new Vector();
-		}
-
-		UidCollector uidCollector = new UidCollector();
-		visitAllBulletins(uidCollector);
-		return uidCollector.uidList;
-	}
-
-	public void visitAllBulletins(Database.PacketVisitor visitorToUse)
-	{
-		class BulletinKeyFilter implements Database.PacketVisitor
-		{
-			BulletinKeyFilter(Database db, Database.PacketVisitor visitorToUse2)
-			{
-				visitor = visitorToUse2;
-				db.visitAllRecords(this);
-			}
-
-			public void visit(DatabaseKey key)
-			{
-				if(BulletinHeaderPacket.isValidLocalId(key.getLocalId()))
-				{
-					++count;
-					visitor.visit(key);
-				}
-			}
-			Database.PacketVisitor visitor;
-			int count;
-		}
-
-		new BulletinKeyFilter(getDatabase(), visitorToUse);
 	}
 
 	public Set getSetOfAllBulletinUniversalIds()
@@ -334,24 +203,13 @@ public class BulletinStore
 		MartusCrypto crypto = getSignatureVerifier();
 		try
 		{
-			MartusUtilities.deleteBulletinFromDatabase(foundBulletin.getBulletinHeaderPacket(), database, crypto);
+			MartusUtilities.deleteBulletinFromDatabase(foundBulletin.getBulletinHeaderPacket(), getDatabase(), crypto);
 		}
 		catch(Exception e)
 		{
 			//e.printStackTrace();
 			throw new IOException("Unable to delete bulletin");
 		}
-	}
-
-	public boolean doesBulletinExist(UniversalId uid)
-	{
-		DatabaseKey key = new DatabaseKey(uid);
-		return doesBulletinExist(key);
-	}
-	
-	private boolean doesBulletinExist(DatabaseKey key)
-	{
-		return getDatabase().doesRecordExist(key);
 	}
 
 	public Bulletin findBulletinByUniversalId(UniversalId uid)
@@ -412,7 +270,7 @@ public class BulletinStore
 	public void saveBulletin(Bulletin b) throws IOException, CryptoException
 	{
 		cache.remove(b.getUniversalId());
-		BulletinSaver.saveToClientDatabase(b, database, mustEncryptPublicData(), getSignatureGenerator());
+		BulletinSaver.saveToClientDatabase(b, getDatabase(), mustEncryptPublicData(), getSignatureGenerator());
 	}
 
 	public synchronized void discardBulletin(BulletinFolder f, Bulletin b) throws IOException
@@ -873,16 +731,11 @@ public class BulletinStore
 
 	public void deleteAllData() throws Exception
 	{
-		deleteAllBulletins();
+		super.deleteAllData();
 		deleteFoldersDatFile();
 		resetFolders();
 	}			
 	
-	public void deleteAllBulletins() throws Exception
-	{
-		database.deleteAllData();
-	}
-
 	public void deleteFoldersDatFile()
 	{
 		getFoldersFile().delete();
@@ -901,8 +754,8 @@ public class BulletinStore
 			{
 				try
 				{
-					database.scrubRecord(key);
-					database.discardRecord(key);
+					getDatabase().scrubRecord(key);
+					getDatabase().discardRecord(key);
 				}
 				catch (Exception e)
 				{				
@@ -912,19 +765,9 @@ public class BulletinStore
 		}
 	
 		PacketScrubber ac = new PacketScrubber();
-		database.visitAllRecords(ac);
+		getDatabase().visitAllRecords(ac);
 		deleteFoldersDatFile();
 	}	
-
-	public Database getDatabase()
-	{
-		return database;
-	}
-
-	public void setDatabase(Database toUse)
-	{
-		database = toUse;
-	}
 
 	public synchronized void loadFolders()
 	{
@@ -986,7 +829,7 @@ public class BulletinStore
 
 	public File getFoldersFile()
 	{
-		return getFoldersFileForAccount(dir);
+		return getFoldersFileForAccount(getStoreRootDir());
 	}
 
 	static public File getFoldersFileForAccount(File AccountDir)
@@ -1078,7 +921,7 @@ public class BulletinStore
 				InputStreamWithSeek in = null;
 				try
 				{
-					in = database.openInputStream(key, getSignatureVerifier());
+					in = getDatabase().openInputStream(key, getSignatureVerifier());
 					Packet.validateXml(in, key.getAccountId(), key.getLocalId(), null, getSignatureVerifier());
 					in.close();
 				}
@@ -1091,7 +934,7 @@ public class BulletinStore
 					}
 					try
 					{
-						database.moveRecordToQuarantine(key);
+						getDatabase().moveRecordToQuarantine(key);
 					}
 					catch (RecordHiddenException shouldNeverHappen)
 					{
@@ -1178,7 +1021,7 @@ public class BulletinStore
 	
 	class XmlFolderListLoader extends SimpleXmlDefaultLoader
 	{
-		public XmlFolderListLoader(BulletinStore storeToFill)
+		public XmlFolderListLoader(ClientBulletinStore storeToFill)
 		{
 			super(MartusClientXml.tagFolderList);
 			store = storeToFill;
@@ -1201,12 +1044,12 @@ public class BulletinStore
 				super.endElement(tag, ended);
 		}
 		
-		BulletinStore store;
+		ClientBulletinStore store;
 	}
 	
 	class XmlFolderLoader extends SimpleXmlDefaultLoader
 	{
-		public XmlFolderLoader(String tag, BulletinStore storeToFill)
+		public XmlFolderLoader(String tag, ClientBulletinStore storeToFill)
 		{
 			super(tag);
 			store = storeToFill;
@@ -1274,7 +1117,7 @@ public class BulletinStore
 				super.endElement(tag, ended);
 		}
 		
-		BulletinStore store;
+		ClientBulletinStore store;
 		BulletinFolder folder;
 	}
 
@@ -1318,32 +1161,6 @@ public class BulletinStore
 		return getAccountId().equals(bhp.getAccountId());
 	}
 
-	public void importZipFileToStoreWithSameUids(File inputFile) throws
-		IOException,
-		MartusCrypto.CryptoException,
-		Packet.InvalidPacketException,
-		Packet.SignatureVerificationException
-	{
-		ZipFile zip = new ZipFile(inputFile);
-		try
-		{
-			BulletinZipUtilities.importBulletinPacketsFromZipFileToDatabase(getDatabase(), null, zip, getSignatureVerifier());
-		}
-		catch (Database.RecordHiddenException shouldBeImpossible)
-		{
-			shouldBeImpossible.printStackTrace();
-			throw new IOException(shouldBeImpossible.toString());
-		}
-		catch(WrongAccountException shouldBeImpossible)
-		{
-			throw new Packet.InvalidPacketException("Wrong account???");
-		}
-		finally
-		{
-			zip.close();
-		}
-	}
-
 	public UniversalId importZipFileToStoreWithNewUids(File inputFile) throws
 		InvalidPacketException,
 		SignatureVerificationException,
@@ -1368,9 +1185,54 @@ public class BulletinStore
 		return loadedLegacyFolders;
 	}
 	
+	protected void loadCache()
+	{
+		//System.out.println("BulletinStore.loadCache");
+		File cacheFile = getCacheFileForAccount(getStoreRootDir());
+		if(!cacheFile.exists())
+			return;
+		
+		byte[] sessionKeyCache = new byte[(int)cacheFile.length()];
+		try
+		{
+			FileInputStream in = new FileInputStream(cacheFile);
+			in.read(sessionKeyCache);
+			in.close();
+			getSignatureGenerator().setSessionKeyCache(sessionKeyCache);
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+			cacheFile.delete();
+		}
+	}
+
+	protected void saveCache()
+	{
+		System.out.println("BulletinStore.saveCache");
+		try
+		{
+			byte[] sessionKeyCache = getSignatureGenerator().getSessionKeyCache();
+			File cacheFile = new File(getStoreRootDir(), CACHE_FILE_NAME);
+			FileOutputStream out = new FileOutputStream(cacheFile);
+			out.write(sessionKeyCache);
+			out.close();
+		}
+		catch (Exception e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
 	public BulletinCache getCache()
 	{
 		return cache;
+	}
+
+	public static File getCacheFileForAccount(File accountDir)
+	{
+		return new File(accountDir, CACHE_FILE_NAME);
 	}
 
 	public static int maxCachedBulletinCount = 100;
@@ -1394,17 +1256,14 @@ public class BulletinStore
 
 	private static final String CACHE_FILE_NAME = "skcache.dat";
 	private static final String OBSOLETE_CACHE_FILE_NAME = "sfcache.dat";
-	private MartusCrypto signer;
-	private File dir;
-	Database database;
 	private Vector folders;
 	private BulletinFolder folderSaved;
 	private BulletinFolder folderDiscarded;
 	private BulletinFolder folderDraftOutbox;
 	private BulletinFolder folderSealedOutbox;
 	private boolean loadedLegacyFolders;
-	private BulletinCache cache;
 
 	private FieldSpec[] publicFieldSpecs;
-	private FieldSpec[] privateFieldSpecs;	
+	private FieldSpec[] privateFieldSpecs;
+	BulletinCache cache;	
 }

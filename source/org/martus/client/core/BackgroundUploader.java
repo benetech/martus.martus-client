@@ -71,7 +71,7 @@ public class BackgroundUploader
 		UploadResult uploadResult = new UploadResult();
 		uploadResult.result = NetworkInterfaceConstants.UNKNOWN;
 	
-		BulletinStore store = app.getStore();
+		ClientBulletinStore store = app.getStore();
 		BulletinFolder folderSealedOutbox = app.getFolderSealedOutbox();
 		BulletinFolder folderDraftOutbox = app.getFolderDraftOutbox();
 		if(store.hasAnyNonDiscardedBulletins(folderSealedOutbox))
@@ -162,7 +162,7 @@ public class BackgroundUploader
 			return uploadResult;
 	
 		int index = new Random().nextInt(uploadFromFolder.getBulletinCount());
-		BulletinStore store = app.getStore();
+		ClientBulletinStore store = app.getStore();
 		Bulletin b = store.chooseBulletinToUpload(uploadFromFolder, index);
 		uploadResult.uid = b.getUniversalId();
 		try

@@ -29,7 +29,7 @@ package org.martus.client.core;
 import java.io.IOException;
 import java.util.Vector;
 
-import org.martus.client.core.BulletinStore.BulletinAlreadyExistsException;
+import org.martus.client.core.ClientBulletinStore.BulletinAlreadyExistsException;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.clientside.UiBasicLocalization;
 import org.martus.common.database.Database;
@@ -41,7 +41,7 @@ public class BulletinFolder
 	public final int ASCENDING = 1;
 	public final int DESCENDING = -ASCENDING;
 
-	public BulletinFolder(BulletinStore storeToUse, String nameToUse)
+	public BulletinFolder(ClientBulletinStore storeToUse, String nameToUse)
 	{
 		store = storeToUse;
 		name = nameToUse;
@@ -50,7 +50,7 @@ public class BulletinFolder
 		sortedIdList = null;
 	}
 
-	public BulletinStore getStore()
+	public ClientBulletinStore getStore()
 	{
 		return store;
 	}
@@ -142,7 +142,7 @@ public class BulletinFolder
 		{
 			//System.out.println("already contains " + id);
 			sortExisting();
-			throw new BulletinStore.BulletinAlreadyExistsException();
+			throw new ClientBulletinStore.BulletinAlreadyExistsException();
 		}
 
 		rawIdList.add(id);
@@ -279,7 +279,7 @@ public class BulletinFolder
 			sortExisting();
 	}
 
-	private BulletinStore store;
+	private ClientBulletinStore store;
 	private String name;
 
 	private Vector rawIdList;

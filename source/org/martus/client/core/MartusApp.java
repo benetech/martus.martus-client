@@ -40,7 +40,7 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.Set;
 import java.util.Vector;
-import org.martus.client.core.BulletinStore.BulletinAlreadyExistsException;
+import org.martus.client.core.ClientBulletinStore.BulletinAlreadyExistsException;
 import org.martus.client.core.ClientSideNetworkHandlerUsingXmlRpc.SSLSocketSetupException;
 import org.martus.client.core.Exceptions.ServerCallFailedException;
 import org.martus.client.core.Exceptions.ServerNotAvailableException;
@@ -111,7 +111,7 @@ public class MartusApp
 			currentUserName = "";
 			maxNewFolders = MAXFOLDERS;
 			martusDataRootDirectory = dataDirectoryToUse;
-			store = new BulletinStore(cryptoToUse);
+			store = new ClientBulletinStore(cryptoToUse);
 		}
 		catch(MartusCrypto.CryptoInitializationException e)
 		{
@@ -494,7 +494,7 @@ public class MartusApp
 		store.loadFolders();
 	}
 
-	public BulletinStore getStore()
+	public ClientBulletinStore getStore()
 	{
 		return store;
 	}
@@ -612,8 +612,8 @@ public class MartusApp
 		DirectoryUtils.scrubAndDeleteFile(getConfigInfoSignatureFileForAccount(accountDirectory));
 		DirectoryUtils.scrubAndDeleteFile(getUploadInfoFileForAccount(accountDirectory));
 		DirectoryUtils.scrubAndDeleteFile(getUiStateFileForAccount(accountDirectory));
-		DirectoryUtils.scrubAndDeleteFile(BulletinStore.getFoldersFileForAccount(accountDirectory));
-		DirectoryUtils.scrubAndDeleteFile(BulletinStore.getCacheFileForAccount(accountDirectory));
+		DirectoryUtils.scrubAndDeleteFile(ClientBulletinStore.getFoldersFileForAccount(accountDirectory));
+		DirectoryUtils.scrubAndDeleteFile(ClientBulletinStore.getCacheFileForAccount(accountDirectory));
 		File[] exportedKeys = exportedPublicKeyFiles(accountDirectory);
 		for (int i = 0; i < exportedKeys.length; i++)
 		{
@@ -1631,7 +1631,7 @@ public class MartusApp
 	public File martusDataRootDirectory;
 	protected File currentAccountDirectory;
 	private Localization localization;
-	public BulletinStore store;
+	public ClientBulletinStore store;
 	private ConfigInfo configInfo;
 	public NetworkInterface currentNetworkInterfaceHandler;
 	public ClientSideNetworkGateway currentNetworkInterfaceGateway;

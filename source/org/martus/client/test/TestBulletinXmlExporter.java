@@ -31,7 +31,7 @@ import java.io.IOException;
 import java.io.StringWriter;
 import java.util.Vector;
 
-import org.martus.client.core.BulletinStore;
+import org.martus.client.core.ClientBulletinStore;
 import org.martus.client.core.BulletinXmlExporter;
 import org.martus.common.CustomFields;
 import org.martus.common.FieldSpec;
@@ -304,5 +304,5 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 		return sampleAttachmentFile;
 	}
 
-	static BulletinStore store;
+	static ClientBulletinStore store;
 }

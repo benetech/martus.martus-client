@@ -31,7 +31,7 @@ import java.util.Vector;
 
 import javax.swing.table.AbstractTableModel;
 
-import org.martus.client.core.BulletinStore;
+import org.martus.client.core.ClientBulletinStore;
 import org.martus.client.core.BulletinSummary;
 import org.martus.client.core.ClientSideNetworkGateway;
 import org.martus.client.core.MartusApp;
@@ -383,7 +383,7 @@ abstract public class RetrieveTableModel extends AbstractTableModel
 	MartusApp app;
 	UiBasicLocalization localization;
 	
-	BulletinStore store;
+	ClientBulletinStore store;
 	UiProgressRetrieveSummariesDlg retrieverDlg;
 	protected Vector currentSummaries;
 	private Vector downloadableSummaries;

@@ -45,7 +45,7 @@ import org.martus.common.database.DatabaseKey;
 
 public class TransferableBulletinList implements Transferable
 {
-	public TransferableBulletinList(BulletinStore store, Bulletin[] bulletinsToUse, BulletinFolder fromFolder)
+	public TransferableBulletinList(ClientBulletinStore store, Bulletin[] bulletinsToUse, BulletinFolder fromFolder)
 	{
 		db = store.getDatabase();
 		sigVerifier = store.getSignatureVerifier();

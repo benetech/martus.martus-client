@@ -33,7 +33,7 @@ import java.util.TimerTask;
 import java.util.Vector;
 import javax.swing.SwingUtilities;
 import org.martus.client.core.BackgroundUploader;
-import org.martus.client.core.BulletinStore;
+import org.martus.client.core.ClientBulletinStore;
 import org.martus.client.core.ClientSideNetworkGateway;
 import org.martus.client.core.MartusApp;
 import org.martus.client.core.Exceptions.ServerCallFailedException;
@@ -375,7 +375,7 @@ class BackgroundUploadTimerTask extends TimerTask
 		return mainWindow.getApp();
 	}
 		
-	BulletinStore getStore()
+	ClientBulletinStore getStore()
 	{
 		return getApp().getStore();
 	}

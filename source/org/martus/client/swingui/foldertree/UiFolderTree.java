@@ -49,13 +49,13 @@ import javax.swing.tree.TreePath;
 import javax.swing.tree.TreeSelectionModel;
 
 import org.martus.client.core.BulletinFolder;
-import org.martus.client.core.BulletinStore;
+import org.martus.client.core.ClientBulletinStore;
 import org.martus.client.swingui.UiMainWindow;
 
 
 class UiFolderTree extends JTree implements TreeSelectionListener
 {
-	public UiFolderTree(UiFolderTreePane parentToUse, TreeModel model, BulletinStore storeToUse, UiMainWindow mainWindow)
+	public UiFolderTree(UiFolderTreePane parentToUse, TreeModel model, ClientBulletinStore storeToUse, UiMainWindow mainWindow)
 	{
 		super(model);
 		parent = parentToUse;
@@ -261,7 +261,7 @@ class UiFolderTree extends JTree implements TreeSelectionListener
 	}
 
 	UiFolderTreePane parent;
-	BulletinStore store;
+	ClientBulletinStore store;
 	UiMainWindow observer;
 	DropTarget dropTarget;
 }
