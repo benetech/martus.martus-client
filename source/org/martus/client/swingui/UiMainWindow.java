@@ -112,6 +112,7 @@ import org.martus.client.swingui.tablemodels.RetrieveMyTableModel;
 import org.martus.client.swingui.tablemodels.RetrieveTableModel;
 import org.martus.common.HQKeys;
 import org.martus.common.MartusUtilities;
+import org.martus.common.Version;
 import org.martus.common.MartusUtilities.FileVerificationException;
 import org.martus.common.MartusUtilities.ServerErrorException;
 import org.martus.common.bulletin.Bulletin;
@@ -258,8 +259,18 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 			super(programName);
 			UiMainWindow.updateIcon(this);
 			setTitle(UiSigninDlg.getInitialSigninTitle(localization));
-			setState(Frame.ICONIFIED);
-			show();
+			if(Version.isRunningUnderWindows())
+			{
+				setState(Frame.ICONIFIED);
+				show();
+			}
+			else
+			{
+				Dimension screenSize = Utilities.getRectangle().getSize();
+				setLocation(screenSize.width + 1, screenSize.height + 1);
+				show();
+				toFront();
+			}
 		}
 	}
 

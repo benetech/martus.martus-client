@@ -69,6 +69,7 @@ public class UiSplashDlg extends JDialog implements ActionListener
 		hbox.add(ok);
 		hbox.add(Box.createHorizontalGlue());
 		hbox.setBorder(new EmptyBorder(10, 10, 10, 10));
+		getRootPane().setDefaultButton(ok);
 
 		Container contents = getContentPane();
 		contents.add(body);
