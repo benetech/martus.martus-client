@@ -63,9 +63,9 @@ import org.martus.util.UnicodeReader.BOMNotFoundException;
 
 
 
-public class UiDisplayHelpDlg extends JDialog
+public class UiOnlineHelpDlg extends JDialog
 {
-	public UiDisplayHelpDlg(UiMainWindow owner, String baseTag, InputStream fileStream, String tagMessage, InputStream fileStreamToc, String tagTOCMessage)
+	public UiOnlineHelpDlg(UiMainWindow owner, String baseTag, InputStream fileStream, String tagMessage, InputStream fileStreamToc, String tagTOCMessage)
 	{
 		super(owner, "", true);
 		mainWindow = owner;

@@ -84,7 +84,7 @@ import org.martus.client.swingui.dialogs.UiConfigServerDlg;
 import org.martus.client.swingui.dialogs.UiConfigureHQs;
 import org.martus.client.swingui.dialogs.UiContactInfoDlg;
 import org.martus.client.swingui.dialogs.UiCreateNewAccountProcess;
-import org.martus.client.swingui.dialogs.UiDisplayHelpDlg;
+import org.martus.client.swingui.dialogs.UiOnlineHelpDlg;
 import org.martus.client.swingui.dialogs.UiExportBulletinsDlg;
 import org.martus.client.swingui.dialogs.UiInitialSigninDlg;
 import org.martus.client.swingui.dialogs.UiModelessBusyDlg;
@@ -1151,7 +1151,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 			helpStreamTOC = app.getHelpTOC(Localization.ENGLISH);
 		}
 
-		new UiDisplayHelpDlg(this, "Help", helpStream, "OnlineHelpMessage", helpStreamTOC, "OnlineHelpTOCMessage");
+		new UiOnlineHelpDlg(this, "Help", helpStream, "OnlineHelpMessage", helpStreamTOC, "OnlineHelpTOCMessage");
 		try 
 		{
 			if(helpStream != null)
