@@ -47,6 +47,7 @@ import org.martus.common.FieldSpec;
 import org.martus.common.MartusConstants;
 import org.martus.common.MartusUtilities;
 import org.martus.common.ProgressMeterInterface;
+import org.martus.common.Version;
 import org.martus.common.MartusUtilities.FileVerificationException;
 import org.martus.common.MartusUtilities.PublicInformationInvalidException;
 import org.martus.common.MartusUtilities.ServerErrorException;
@@ -1475,7 +1476,7 @@ public class MartusApp
 	private static File determineMartusDataRootDirectory()
 	{
 		String dir;
-		if(System.getProperty("os.name").indexOf("Windows") >= 0)
+		if(Version.isRunningUnderWindows())
 		{
 			dir = "C:/Martus/";
 		}
