@@ -28,7 +28,10 @@ package org.martus.client.swingui;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.border.EtchedBorder;
 
 public class UiStatusBar extends JPanel
 {
@@ -42,7 +45,18 @@ public class UiStatusBar extends JPanel
 		backgroundProgressMeter = new UiProgressMeter(null, localization);
 		statusBarBox.add(backgroundProgressMeter);
 		statusBarBox.add(Box.createHorizontalGlue());
+		statusBarBox.add(new JLabel(localization.getFieldLabel("BulletinId")));
+		bulletinId = new JTextField(20);
+		bulletinId.setMaximumSize(bulletinId.getPreferredSize());
+		bulletinId.setEditable(false);
+		bulletinId.setBorder(new EtchedBorder());
+		statusBarBox.add(bulletinId);
 		add(statusBarBox);
+	}
+	
+	public void setBulletinId(String id)
+	{
+		bulletinId.setText(id);
 	}
 
 	public UiProgressMeter getBackgroundProgressMeter()
@@ -52,4 +66,5 @@ public class UiStatusBar extends JPanel
 
 	private UiProgressMeter backgroundProgressMeter;
 	private Box statusBarBox;
+	private JTextField bulletinId;
 }

@@ -27,17 +27,12 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.swingui.bulletincomponent;
 
 import java.awt.BorderLayout;
-import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Rectangle;
 import java.io.IOException;
 
-import javax.swing.Box;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
 import javax.swing.Scrollable;
-import javax.swing.border.EmptyBorder;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
@@ -75,24 +70,10 @@ abstract public class UiBulletinComponent extends JPanel implements Scrollable, 
 	{
 		publicStuff = createSection(currentBulletin.getPublicFieldSpecs(), SOMETIMES_ENCRYPTED);
 		privateStuff = createSection(currentBulletin.getPrivateFieldSpecs(), ALWAYS_ENCRYPTED);
-		Component bulletinId = getBulletinIdComponent();
 		ensureBothSectionsLineUp();
 		setLayout(new BorderLayout());
-		add(bulletinId, BorderLayout.NORTH);
 		add(publicStuff, BorderLayout.CENTER);
 		add(privateStuff, BorderLayout.SOUTH);
-	}
-	
-	private Component getBulletinIdComponent()
-	{
-		JTextField bulletinId = new JTextField();
-		bulletinId.setEditable(false);
-		bulletinId.setBorder(new EmptyBorder(0,0,0,0));
-		bulletinId.setText(currentBulletin.getLocalId());
-		Box hbox = Box.createHorizontalBox();
-		hbox.add(new JLabel(" " + mainWindow.getLocalization().getFieldLabel("BulletinId")+" "));
-		hbox.add(bulletinId);
-		return hbox;
 	}
 
 	private UiBulletinComponentSection createSection(
