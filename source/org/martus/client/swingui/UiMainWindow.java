@@ -190,6 +190,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	{
 		CurrentUiState previouslySavedState = new CurrentUiState();
 		previouslySavedState.load(getUiStateFile());
+		
 		if(previouslySavedState.getCurrentLanguage() != "")
 		{	
 			localization.setCurrentLanguageCode(previouslySavedState.getCurrentLanguage());
@@ -204,8 +205,6 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 			localization.setCurrentLanguageCode(Localization.ENGLISH);
 			localization.setCurrentDateFormatCode(DateUtilities.getDefaultDateFormatCode());
 		}
-		if(!localization.isCurrentTranslationOfficial())
-			displayDefaultUnofficialTranslationMessage(currentActiveFrame);
 	}
 
 	public File getUiStateFile()
@@ -287,6 +286,9 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		JFrame hiddenFrame = new HiddenFrame(getLocalization(), UiConstants.programName);
 		setCurrentActiveFrame(hiddenFrame);
 		{
+			if(!localization.isCurrentTranslationOfficial())
+				displayDefaultUnofficialTranslationMessage(currentActiveFrame);
+			
 			preventTwoInstances();
 			notifyClientCompliance();
 	
