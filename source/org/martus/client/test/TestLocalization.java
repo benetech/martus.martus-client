@@ -277,13 +277,13 @@ public class TestLocalization extends TestCaseEnhanced
 
 	public void testJarVerifier() throws Exception
 	{
-		assertEquals("no file", JarVerifier.ERROR_INVALID_JAR, JarVerifier.verify("nonexistentFile", false));
-		assertEquals("no maifest", JarVerifier.ERROR_JAR_NOT_SIGNED, JarVerifier.verify(getClass().getResource("Martus-xx-noManifest.mlp").getFile(), false));
-		assertEquals("Missing Entry", JarVerifier.ERROR_MISSING_ENTRIES, JarVerifier.verify(getClass().getResource("Martus-xx-MissingEntry.mlp").getFile(), false));
-		assertEquals("Modified Entry", JarVerifier.ERROR_JAR_NOT_SIGNED, JarVerifier.verify(getClass().getResource("Martus-xx-ModifiedEntry.mlp").getFile(), false));
-		assertEquals("Not Signed", JarVerifier.ERROR_JAR_NOT_SIGNED, JarVerifier.verify(getClass().getResource("Martus-xx-notSigned.mlp").getFile(), false));
-		assertEquals("Not sealed", JarVerifier.ERROR_JAR_NOT_SEALED, JarVerifier.verify(getClass().getResource("Martus-xx-notSealed.mlp").getFile(), false));
-		assertEquals("A valid signed jar didn't pass?", JarVerifier.JAR_VERIFIED_TRUE, JarVerifier.verify(getClass().getResource("Martus-xx.mlp").getFile(), false));
+		assertEquals("no file", JarVerifier.ERROR_INVALID_JAR, JarVerifier.verify(new File("nonexistentFile"), false));
+		assertEquals("no maifest", JarVerifier.ERROR_JAR_NOT_SIGNED, JarVerifier.verify(getClass().getResource("Martus-xx-noManifest.mlp"), false));
+		assertEquals("Missing Entry", JarVerifier.ERROR_MISSING_ENTRIES, JarVerifier.verify(getClass().getResource("Martus-xx-MissingEntry.mlp"), false));
+		assertEquals("Modified Entry", JarVerifier.ERROR_JAR_NOT_SIGNED, JarVerifier.verify(getClass().getResource("Martus-xx-ModifiedEntry.mlp"), false));
+		assertEquals("Not Signed", JarVerifier.ERROR_JAR_NOT_SIGNED, JarVerifier.verify(getClass().getResource("Martus-xx-notSigned.mlp"), false));
+		assertEquals("Not sealed", JarVerifier.ERROR_JAR_NOT_SEALED, JarVerifier.verify(getClass().getResource("Martus-xx-notSealed.mlp"), false));
+		assertEquals("A valid signed jar didn't pass?", JarVerifier.JAR_VERIFIED_TRUE, JarVerifier.verify(getClass().getResource("Martus-xx.mlp"), false));
 	}
 	
 	public void testAddedMTPKLanguagePackWhenWeAllowUnofficialTranslations() throws Exception

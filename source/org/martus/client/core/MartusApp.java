@@ -468,7 +468,7 @@ public class MartusApp
 		{
 			File mlpFile = localization.getMlpkFile(currentLanguageCode);
 			if(mlpFile.exists() && 
-			   JarVerifier.verify(mlpFile.getAbsolutePath(),false) == JarVerifier.JAR_VERIFIED_TRUE)
+			   JarVerifier.verify(mlpFile,false) == JarVerifier.JAR_VERIFIED_TRUE)
 			{
 				ZipFile zip = new ZipFile(mlpFile);
 				ZipEntry zipEntry = zip.getEntry(helpFileName);
