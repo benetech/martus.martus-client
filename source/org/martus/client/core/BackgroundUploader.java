@@ -294,7 +294,7 @@ public class BackgroundUploader
 		try
 		{
 			MartusCrypto signer = app.getSecurity();
-			ContactInfo contactInfo = new ContactInfo(configInfo);
+			ContactInfo contactInfo = createContactInfo(configInfo);
 			Vector contactInfoVector = contactInfo.getSignedEncodedVector(signer);
 			result = putContactInfoOnServer(contactInfoVector);
 		}
@@ -335,6 +335,17 @@ public class BackgroundUploader
 		public String exceptionThrown;
 		public boolean isHopelesslyDamaged;
 	}
+	
+	private ContactInfo createContactInfo(ConfigInfo sourceOfInfo)
+	{
+		return new ContactInfo(sourceOfInfo.getAuthor(),
+				sourceOfInfo.getOrganization(),
+				sourceOfInfo.getEmail(),
+				sourceOfInfo.getWebPage(),
+				sourceOfInfo.getPhone(),
+				sourceOfInfo.getAddress());
+	}
+	
 	public static final String CONTACT_INFO_NOT_SENT="Contact Info Not Sent";
 
 	MartusApp app;

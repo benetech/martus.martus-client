@@ -44,7 +44,6 @@ import org.martus.client.core.BulletinStore.BulletinAlreadyExistsException;
 import org.martus.client.core.ClientSideNetworkHandlerUsingXmlRpc.SSLSocketSetupException;
 import org.martus.client.core.Exceptions.ServerCallFailedException;
 import org.martus.client.core.Exceptions.ServerNotAvailableException;
-import org.martus.common.ConfigInfo;
 import org.martus.common.StandardFieldSpecs;
 import org.martus.common.LegacyCustomFields;
 import org.martus.common.MartusConstants;

@@ -32,7 +32,7 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.util.Vector;
 
-import org.martus.common.ConfigInfo;
+import org.martus.client.core.ConfigInfo;
 import org.martus.common.ContactInfo;
 import org.martus.common.StandardFieldSpecs;
 import org.martus.common.LegacyCustomFields;
@@ -143,13 +143,9 @@ public class TestConfigInfo extends TestCaseEnhanced
 
 	public void testGetContactInfo() throws Exception
 	{
-		ConfigInfo newInfo = new ConfigInfo();
-		newInfo.setAuthor(sampleAuthor);
-		newInfo.setAddress(sampleAddress);
-		newInfo.setPhone(samplePhone);
 		MartusSecurity signer = new MartusSecurity();
 		signer.createKeyPair(512);
-		ContactInfo contactInfo = new ContactInfo(newInfo);
+		ContactInfo contactInfo = new ContactInfo(sampleAuthor, "org", "email", "web", samplePhone, sampleAddress);
 		Vector contactInfoVector = contactInfo.getSignedEncodedVector(signer);
 		assertEquals("Not encoded?",NetworkInterfaceConstants.BASE_64_ENCODED,contactInfoVector.get(0));
 		assertEquals("Wrong contactinfo size", 10, contactInfoVector.size());
