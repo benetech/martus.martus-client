@@ -742,13 +742,18 @@ public class BulletinStore
 		return getFolderNotOnServer().contains(b);
 	}
 	
-	// synchronized because updateOnServerLists is called from background thread
-	public synchronized void setIsOnServer(Bulletin b)
+	public  void setIsOnServer(Bulletin b)
 	{
-		removeBulletinFromFolder(getFolderNotOnServer(), b);
+		setIsOnServer(b.getUniversalId());
+	}
+
+	// synchronized because updateOnServerLists is called from background thread
+	public synchronized void setIsOnServer(UniversalId uid)
+	{
+		removeBulletinFromFolder(getFolderNotOnServer(), uid);
 		try
 		{
-			ensureBulletinIsInFolder(getFolderOnServer(), b.getUniversalId());
+			ensureBulletinIsInFolder(getFolderOnServer(), uid);
 		}
 		catch(IOException ignoreForNow)
 		{
@@ -757,13 +762,19 @@ public class BulletinStore
 		}
 	}
 
-	// synchronized because updateOnServerLists is called from background thread
-	public synchronized void setIsNotOnServer(Bulletin b)
+	public  void setIsNotOnServer(Bulletin b)
 	{
-		removeBulletinFromFolder(getFolderOnServer(), b);
+		UniversalId uid = b.getUniversalId();
+		setIsNotOnServer(uid);
+	}
+	
+	// synchronized because updateOnServerLists is called from background thread
+	public synchronized void setIsNotOnServer(UniversalId uid)
+	{
+		removeBulletinFromFolder(getFolderOnServer(), uid);
 		try
 		{
-			ensureBulletinIsInFolder(getFolderNotOnServer(), b.getUniversalId());
+			ensureBulletinIsInFolder(getFolderNotOnServer(), uid);
 		}
 		catch(IOException ignoreForNow)
 		{
@@ -771,7 +782,7 @@ public class BulletinStore
 			ignoreForNow.printStackTrace();
 		}
 	}
-	
+
 	// synchronized because updateOnServerLists is called from background thread
 	public synchronized void clearOnServerLists()
 	{
@@ -792,16 +803,15 @@ public class BulletinStore
 			public void visit(DatabaseKey key)
 			{
 				UniversalId uid = key.getUniversalId();
-				Bulletin b = findBulletinByUniversalId(uid);
 				if(knownOnServer.contains(uid))
 				{
-					if(!getFolderDraftOutbox().contains(b))
+					if(!getFolderDraftOutbox().contains(uid))
 					{
-						setIsOnServer(b);
+						setIsOnServer(uid);
 					}
 				}
 				else
-					setIsNotOnServer(b);
+					setIsNotOnServer(uid);
 			}
 			
 			Vector knownOnServer;

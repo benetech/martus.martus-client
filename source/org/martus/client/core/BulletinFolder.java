@@ -195,9 +195,13 @@ public class BulletinFolder
 		return  (UniversalId)rawIdList.get(index);
 	}
 
-	public synchronized boolean contains(Bulletin b)
+	public boolean contains(Bulletin b)
 	{
-		UniversalId id = b.getUniversalId();
+		return contains(b.getUniversalId());
+	}
+
+	public synchronized boolean contains(UniversalId id)
+	{
 		return rawIdList.contains(id);
 	}
 
