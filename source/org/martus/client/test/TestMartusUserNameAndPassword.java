@@ -27,10 +27,10 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.test;
 
 import org.martus.client.core.MartusUserNameAndPassword;
-import org.martus.client.core.Exceptions.BlankUserNameException;
-import org.martus.client.core.Exceptions.MartusClientApplicationException;
-import org.martus.client.core.Exceptions.PasswordMatchedUserNameException;
-import org.martus.client.core.Exceptions.PasswordTooShortException;
+import org.martus.common.clientside.Exceptions.BlankUserNameException;
+import org.martus.common.clientside.Exceptions.MartusClientApplicationException;
+import org.martus.common.clientside.Exceptions.PasswordMatchedUserNameException;
+import org.martus.common.clientside.Exceptions.PasswordTooShortException;
 import org.martus.util.TestCaseEnhanced;
 
 public class TestMartusUserNameAndPassword extends TestCaseEnhanced

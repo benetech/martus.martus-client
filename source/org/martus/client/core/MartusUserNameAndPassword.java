@@ -28,9 +28,9 @@ package org.martus.client.core;
 
 import java.util.Arrays;
 
-import org.martus.client.core.Exceptions.BlankUserNameException;
-import org.martus.client.core.Exceptions.PasswordMatchedUserNameException;
-import org.martus.client.core.Exceptions.PasswordTooShortException;
+import org.martus.common.clientside.Exceptions.BlankUserNameException;
+import org.martus.common.clientside.Exceptions.PasswordMatchedUserNameException;
+import org.martus.common.clientside.Exceptions.PasswordTooShortException;
 
 /**
  *
