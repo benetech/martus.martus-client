@@ -41,6 +41,7 @@ import org.martus.common.clientside.ClientSideNetworkGateway;
 import org.martus.common.clientside.UiBasicLocalization;
 import org.martus.common.crypto.MartusCrypto;
 import org.martus.common.crypto.MartusCrypto.MartusSignatureException;
+import org.martus.common.database.DatabaseKey;
 import org.martus.common.network.NetworkInterfaceConstants;
 import org.martus.common.network.NetworkResponse;
 import org.martus.common.packet.BulletinHistory;
@@ -274,7 +275,8 @@ abstract public class RetrieveTableModel extends AbstractTableModel
 		String accountId = currentSummary.getAccountId();
 		String localId = currentSummary.getLocalId();
 		UniversalId uid = UniversalId.createFromAccountAndLocalId(accountId, localId);
-		if(store.doesBulletinRevisionExist(uid))
+		DatabaseKey key = DatabaseKey.createLegacyKey(uid);
+		if(store.doesBulletinRevisionExist(key))
 			return false;
 		
 		if(store.hasNewerRevision(uid))
@@ -435,7 +437,8 @@ abstract public class RetrieveTableModel extends AbstractTableModel
 		{
 			String localId = history.get(j);
 			UniversalId uidBeingChecked = UniversalId.createFromAccountAndLocalId(accountId, localId);
-			if(store.doesBulletinRevisionExist(uidBeingChecked))
+			DatabaseKey key = DatabaseKey.createLegacyKey(uidBeingChecked);
+			if(store.doesBulletinRevisionExist(key))
 				return true;
 		}
 		return false;

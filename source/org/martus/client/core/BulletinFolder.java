@@ -133,7 +133,7 @@ public class BulletinFolder
 
 	synchronized void add(UniversalId id) throws BulletinAlreadyExistsException, IOException
 	{
-		DatabaseKey key = new DatabaseKey(id);
+		DatabaseKey key = DatabaseKey.createLegacyKey(id);
 		ReadableDatabase db = store.getDatabase();
 		if(!db.doesRecordExist(key))
 			throw new IOException();

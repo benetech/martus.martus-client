@@ -199,7 +199,7 @@ public class ClientBulletinStore extends BulletinStore
 
 	public Bulletin getBulletinRevision(UniversalId uid)
 	{
-		DatabaseKey key = new DatabaseKey(uid);
+		DatabaseKey key = DatabaseKey.createLegacyKey(uid);
 		if(!doesBulletinRevisionExist(key))
 		{
 			//System.out.println("BulletinStore.findBulletinByUniversalId: !doesRecordExist");

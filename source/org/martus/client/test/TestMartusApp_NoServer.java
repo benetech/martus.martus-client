@@ -225,7 +225,7 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		assertEquals("removed from sealed outbox?", 1, sealedOutbox.getBulletinCount());
 		
 		Database db = appWithAccount.getWriteableDatabase();
-		DatabaseKey key = new DatabaseKey(b1.getBulletinHeaderPacket().getUniversalId());
+		DatabaseKey key = DatabaseKey.createLegacyKey(b1.getBulletinHeaderPacket().getUniversalId());
 		db.discardRecord(key);
 
 		BulletinFolder trash = appWithAccount.getFolderDiscarded();

@@ -31,6 +31,7 @@ import java.util.Vector;
 import org.martus.client.core.BulletinFolder;
 import org.martus.client.core.MartusApp;
 import org.martus.client.swingui.dialogs.UiProgressRetrieveBulletinsDlg;
+import org.martus.common.database.DatabaseKey;
 import org.martus.common.network.NetworkInterfaceConstants;
 import org.martus.common.packet.UniversalId;
 
@@ -115,7 +116,8 @@ public class Retriever
 						progressDlg.updateBulletinCountMeter(i, size);
 					}
 					UniversalId uid = (UniversalId)uidList.get(i);
-					if(app.getStore().doesBulletinRevisionExist(uid))
+					DatabaseKey key = DatabaseKey.createLegacyKey(uid);
+					if(app.getStore().doesBulletinRevisionExist(key))
 						continue;
 					app.retrieveOneBulletinToFolder(uid, retrievedFolder, progressMeter);
 				}

@@ -1018,7 +1018,7 @@ public class TestClientBulletinStore extends TestCaseEnhanced
 		store.saveBulletin(b);
 		BulletinHeaderPacket bhp = b.getBulletinHeaderPacket();
 		FieldDataPacket fdp = b.getFieldDataPacket();
-		DatabaseKey headerKey = new DatabaseKey(b.getUniversalId());
+		DatabaseKey headerKey = DatabaseKey.createLegacyKey(b.getUniversalId());
 		UniversalId.createFromAccountAndLocalId(b.getAccount(), fdp.getLocalId());
 
 		security.fakeSigVerifyFailure = true;
@@ -1089,7 +1089,7 @@ public class TestClientBulletinStore extends TestCaseEnhanced
 		assertTrue("time wrong?", delta2 < 1000);
 
 		Thread.sleep(200);
-		Bulletin b2 = store.loadFromDatabase(new DatabaseKey(b.getUniversalId()));
+		Bulletin b2 = store.loadFromDatabase(DatabaseKey.createLegacyKey(b.getUniversalId()));
 		long loadedTime = b2.getLastSavedTime();
 		assertEquals("Didn't keep time saved?", firstSavedTime, loadedTime);
 	}
@@ -1106,7 +1106,7 @@ public class TestClientBulletinStore extends TestCaseEnhanced
 		store.getWriteableDatabase().deleteAllData();
 		store.clearFolder(f.getName());
 		assertTrue("clearFolder f ", store.getFoldersFile().exists());
-		DatabaseKey bulletinKey = new DatabaseKey(b.getUniversalId());
+		DatabaseKey bulletinKey = DatabaseKey.createLegacyKey(b.getUniversalId());
 		assertNull("clearFolder b ", store.getDatabase().readRecord(bulletinKey, security));
 
 		store.saveBulletin(b);
@@ -1118,14 +1118,14 @@ public class TestClientBulletinStore extends TestCaseEnhanced
 	{
 		TRACE("testDeleteFolderCausesSave");
 		
-		DatabaseKey foldersKey = new DatabaseKey(UniversalId.createDummyUniversalId());
+		DatabaseKey foldersKey = DatabaseKey.createLegacyKey(UniversalId.createDummyUniversalId());
 		store.deleteAllData();
 		Bulletin b = store.createEmptyBulletin();
 		store.createFolder("z");
 		db.discardRecord(foldersKey);
 		store.deleteFolder("z");
 		assertTrue("deleteFolder f ", store.getFoldersFile().exists());
-		DatabaseKey bulletinKey = new DatabaseKey(b.getUniversalId());
+		DatabaseKey bulletinKey = DatabaseKey.createLegacyKey(b.getUniversalId());
 		assertNull("deleteFolder b ", store.getDatabase().readRecord(bulletinKey, security));
 	}
 
@@ -1134,14 +1134,14 @@ public class TestClientBulletinStore extends TestCaseEnhanced
 		TRACE("testRenameFolderCausesSave");
 
 		Database db = store.getWriteableDatabase();
-		DatabaseKey foldersKey = new DatabaseKey(UniversalId.createDummyUniversalId());
+		DatabaseKey foldersKey = DatabaseKey.createLegacyKey(UniversalId.createDummyUniversalId());
 		store.deleteAllData();
 		Bulletin b = store.createEmptyBulletin();
 		store.createFolder("x");
 		db.discardRecord(foldersKey);
 		store.renameFolder("x", "b");
 		assertTrue("renameFolder f ", store.getFoldersFile().exists());
-		DatabaseKey bulletinKey = new DatabaseKey(b.getUniversalId());
+		DatabaseKey bulletinKey = DatabaseKey.createLegacyKey(b.getUniversalId());
 		assertNull("renameFolder b ", store.getDatabase().readRecord(bulletinKey, security));
 	}
 
@@ -1154,7 +1154,7 @@ public class TestClientBulletinStore extends TestCaseEnhanced
 		store.createFolder("a");
 		store.saveFolders();
 		assertTrue("createFolder f ", store.getFoldersFile().exists());
-		DatabaseKey bulletinKey = new DatabaseKey(b.getUniversalId());
+		DatabaseKey bulletinKey = DatabaseKey.createLegacyKey(b.getUniversalId());
 		assertNull("createFolder b ", store.getDatabase().readRecord(bulletinKey, security));
 	}
 
@@ -1168,7 +1168,7 @@ public class TestClientBulletinStore extends TestCaseEnhanced
 
 		assertEquals("save bulletin f ", false, store.getFoldersFile().exists());
 
-		DatabaseKey bulletinKey = new DatabaseKey(b.getUniversalId());
+		DatabaseKey bulletinKey = DatabaseKey.createLegacyKey(b.getUniversalId());
 		assertNotNull("save bulletin b ", store.getDatabase().readRecord(bulletinKey, security));
 	}
 
@@ -1177,7 +1177,7 @@ public class TestClientBulletinStore extends TestCaseEnhanced
 		TRACE("testImportZipFileWithAttachmentSealed");
 		
 		Bulletin original = store.createEmptyBulletin();
-		DatabaseKey originalKey = new DatabaseKey(original.getUniversalId());
+		DatabaseKey originalKey = DatabaseKey.createLegacyKey(original.getUniversalId());
 		AttachmentProxy a = new AttachmentProxy(tempFile1);
 		AttachmentProxy aPrivate = new AttachmentProxy(tempFile2);
 		original.set(Bulletin.TAGTITLE, "abbc");
@@ -1195,13 +1195,13 @@ public class TestClientBulletinStore extends TestCaseEnhanced
 		store.importZipFileToStoreWithSameUids(zipFile);
 		assertEquals("Packet count incorrect", 5, db.getRecordCount());
 
-		DatabaseKey headerKey = new DatabaseKey(loaded.getBulletinHeaderPacket().getUniversalId());
-		DatabaseKey dataKey = new DatabaseKey(loaded.getFieldDataPacket().getUniversalId());
-		DatabaseKey privateKey = new DatabaseKey(loaded.getPrivateFieldDataPacket().getUniversalId());
+		DatabaseKey headerKey = DatabaseKey.createLegacyKey(loaded.getBulletinHeaderPacket().getUniversalId());
+		DatabaseKey dataKey = DatabaseKey.createLegacyKey(loaded.getFieldDataPacket().getUniversalId());
+		DatabaseKey privateKey = DatabaseKey.createLegacyKey(loaded.getPrivateFieldDataPacket().getUniversalId());
 		AttachmentProxy gotAttachment = loaded.getPublicAttachments()[0];
-		DatabaseKey attachmentKey = new DatabaseKey(gotAttachment.getUniversalId());
+		DatabaseKey attachmentKey = DatabaseKey.createLegacyKey(gotAttachment.getUniversalId());
 		AttachmentProxy gotPrivateAttachment = loaded.getPrivateAttachments()[0];
-		DatabaseKey attachmentPrivateKey = new DatabaseKey(gotPrivateAttachment.getUniversalId());
+		DatabaseKey attachmentPrivateKey = DatabaseKey.createLegacyKey(gotPrivateAttachment.getUniversalId());
 
 		assertTrue("Header Packet missing", db.doesRecordExist(headerKey));
 		assertTrue("Data Packet missing", db.doesRecordExist(dataKey));
@@ -1329,7 +1329,7 @@ public class TestClientBulletinStore extends TestCaseEnhanced
 	{
 		TRACE("testImportZipFileWithAttachmentDraft");
 		Bulletin original = store.createEmptyBulletin();
-		DatabaseKey originalKey = new DatabaseKey(original.getUniversalId());
+		DatabaseKey originalKey = DatabaseKey.createLegacyKey(original.getUniversalId());
 		AttachmentProxy a = new AttachmentProxy(tempFile1);
 		AttachmentProxy aPrivate = new AttachmentProxy(tempFile2);
 		original.set(Bulletin.TAGTITLE, "abc");
@@ -1349,13 +1349,13 @@ public class TestClientBulletinStore extends TestCaseEnhanced
 		UniversalId savedAsId = store.importZipFileToStoreWithNewUids(zipFile);
 		assertEquals("record count not 5?", 5, db.getRecordCount());
 
-		DatabaseKey headerKey = new DatabaseKey(loaded.getBulletinHeaderPacket().getUniversalId());
-		DatabaseKey dataKey = new DatabaseKey(loaded.getFieldDataPacket().getUniversalId());
-		DatabaseKey privateKey = new DatabaseKey(loaded.getPrivateFieldDataPacket().getUniversalId());
+		DatabaseKey headerKey = DatabaseKey.createLegacyKey(loaded.getBulletinHeaderPacket().getUniversalId());
+		DatabaseKey dataKey = DatabaseKey.createLegacyKey(loaded.getFieldDataPacket().getUniversalId());
+		DatabaseKey privateKey = DatabaseKey.createLegacyKey(loaded.getPrivateFieldDataPacket().getUniversalId());
 		AttachmentProxy gotAttachment = loaded.getPublicAttachments()[0];
 		AttachmentProxy gotAttachmentPrivate = loaded.getPrivateAttachments()[0];
-		DatabaseKey attachmentKey = new DatabaseKey(gotAttachment.getUniversalId());
-		DatabaseKey attachmentPrivateKey = new DatabaseKey(gotAttachmentPrivate.getUniversalId());
+		DatabaseKey attachmentKey = DatabaseKey.createLegacyKey(gotAttachment.getUniversalId());
+		DatabaseKey attachmentPrivateKey = DatabaseKey.createLegacyKey(gotAttachmentPrivate.getUniversalId());
 
 		assertEquals("Header Packet present?", false, db.doesRecordExist(headerKey));
 		assertEquals("Data Packet present?", false, db.doesRecordExist(dataKey));
@@ -1363,12 +1363,12 @@ public class TestClientBulletinStore extends TestCaseEnhanced
 		assertEquals("Attachment Public Packet present?", false, db.doesRecordExist(attachmentKey));
 		assertEquals("Attachment Private Packet present?", false, db.doesRecordExist(attachmentPrivateKey));
 
-		Bulletin reloaded = store.loadFromDatabase(new DatabaseKey(savedAsId));
+		Bulletin reloaded = store.loadFromDatabase(DatabaseKey.createLegacyKey(savedAsId));
 
 		assertEquals("public?", original.get(Bulletin.TAGTITLE), reloaded.get(Bulletin.TAGTITLE));
 		assertEquals("private?", original.get(Bulletin.TAGPRIVATEINFO), reloaded.get(Bulletin.TAGPRIVATEINFO));
-		assertEquals("attachment", true, db.doesRecordExist(new DatabaseKey(reloaded.getPublicAttachments()[0].getUniversalId())));
-		assertEquals("attachment Private", true, db.doesRecordExist(new DatabaseKey(reloaded.getPrivateAttachments()[0].getUniversalId())));
+		assertEquals("attachment", true, db.doesRecordExist(DatabaseKey.createLegacyKey(reloaded.getPublicAttachments()[0].getUniversalId())));
+		assertEquals("attachment Private", true, db.doesRecordExist(DatabaseKey.createLegacyKey(reloaded.getPrivateAttachments()[0].getUniversalId())));
 
 		ByteArrayOutputStream publicStream = new ByteArrayOutputStream();
 		BulletinSaver.extractAttachmentToStream(db, reloaded.getPublicAttachments()[0], security, publicStream);
@@ -1474,7 +1474,7 @@ public class TestClientBulletinStore extends TestCaseEnhanced
 		assertEquals("quarantined a good record?", 0, store.quarantineUnreadableBulletins());
 		corruptBulletinHeader(b1);
 		assertEquals("didn't claim to quarantine 1 record?", 1, store.quarantineUnreadableBulletins());
-		DatabaseKey key = new DatabaseKey(b1.getUniversalId());
+		DatabaseKey key = DatabaseKey.createLegacyKey(b1.getUniversalId());
 		assertTrue("didn't actually quarantine our record?", store.getDatabase().isInQuarantine(key));
 	}
 
@@ -1495,7 +1495,7 @@ public class TestClientBulletinStore extends TestCaseEnhanced
 		{
 			int bulletinIndex = i * (totalCount/badCount);
 			Bulletin b = bulletins[bulletinIndex];
-			badKeys[i] = new DatabaseKey(b.getUniversalId());
+			badKeys[i] = DatabaseKey.createLegacyKey(b.getUniversalId());
 			corruptBulletinHeader(b);
 		}
 
@@ -1507,7 +1507,7 @@ public class TestClientBulletinStore extends TestCaseEnhanced
 	private void corruptBulletinHeader(Bulletin b) throws Exception
 	{
 		UniversalId uid = b.getUniversalId();
-		DatabaseKey key = new DatabaseKey(uid);
+		DatabaseKey key = DatabaseKey.createLegacyKey(uid);
 		Database db = store.getWriteableDatabase();
 		String goodData = db.readRecord(key, security);
 		String badData = "x" + goodData;
