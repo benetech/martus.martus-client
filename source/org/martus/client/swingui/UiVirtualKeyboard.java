@@ -45,10 +45,10 @@ import org.martus.swing.Utilities;
 public class UiVirtualKeyboard
 {
 
-	public UiVirtualKeyboard(UiLocalization localization, VirtualKeyboardHandler uiHandler)
+	public UiVirtualKeyboard(UiLocalization localization, VirtualKeyboardHandler uiHandler, UiPasswordField passwordFieldToUse)
 	{
 		handler = uiHandler;
-		password = "";
+		passwordField = passwordFieldToUse;
 		String keys = localization.getFieldLabel("VirtualKeyboardKeys");
 		space = localization.getFieldLabel("VirtualKeyboardSpace");
 		delete = localization.getFieldLabel("VirtualKeyboardBackSpace");
@@ -98,19 +98,17 @@ public class UiVirtualKeyboard
 			JButton buttonPressed = (JButton)(e.getSource());
 			String passChar = buttonPressed.getText();
 			if(passChar.equals(space))
-				password += " ";
+				passwordField.appendChar(' ');
 			else if(passChar.equals(delete))
 			{
-				if(password.length() > 0)
-					password = password.substring(0,password.length()-1);
+				passwordField.deleteLastChar();
 			}
 			else
-				password += passChar;
-			handler.setPassword(password);
+				passwordField.appendChar(passChar.charAt(0));
 		}
 	}
 	VirtualKeyboardHandler handler;
-	String password;
 	String space;
 	String delete;
+	UiPasswordField passwordField;
 }

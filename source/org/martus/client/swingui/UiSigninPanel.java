@@ -103,7 +103,7 @@ public class UiSigninPanel extends JPanel implements VirtualKeyboardHandler
 		switchToNormalKeyboard.addActionListener(new SwitchKeyboardHandler());
 		passwordArea = new JPanel();
 		add(passwordArea);
-		new UiVirtualKeyboard(localization, this);
+		new UiVirtualKeyboard(localization, this, passwordField);
 		UpdatePasswordArea();
 		
 		if(username.length() > 0)
@@ -150,11 +150,12 @@ public class UiSigninPanel extends JPanel implements VirtualKeyboardHandler
 		userNameDescription.setText(localization.getFieldLabel("VirtualUserNameDescription"));
 		passwordDescription.setText(localization.getFieldLabel("VirtualPasswordDescription"));
 
+		passwordField.setVirtualMode(true);
+
 		passwordArea.setLayout(new ParagraphLayout());
 		passwordArea.setBorder(new LineBorder(Color.black, 2));
 		passwordArea.add(new JLabel(""));
 		passwordArea.add(passwordDescription);
-		passwordField.setEditable(false);
 		passwordArea.add(passwordField);
 
 		passwordArea.add(new JLabel(""), ParagraphLayout.NEW_PARAGRAPH);
@@ -178,7 +179,7 @@ public class UiSigninPanel extends JPanel implements VirtualKeyboardHandler
 		passwordArea.setLayout(new ParagraphLayout());
 		passwordArea.setBorder(new LineBorder(Color.black, 2));
 
-		passwordField.setEditable(true);
+		passwordField.setVirtualMode(false);
 		passwordArea.add(new JLabel(""), ParagraphLayout.NEW_PARAGRAPH);
 		passwordArea.add(passwordField);
 
