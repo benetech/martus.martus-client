@@ -409,6 +409,10 @@ public class TestBulletinStore extends TestCaseEnhanced
 		assertEquals("Discarded/Draft", true, fDraftOutbox.canAdd(Bulletin.STATUSDRAFT));
 		assertEquals("Discarded/Sealed", false, fDraftOutbox.canAdd(Bulletin.STATUSSEALED));
 
+		BulletinFolder fSealedOutbox = store.getFolderSealedOutbox();
+		assertNotNull("No SealedOutbox?", fSealedOutbox);
+		assertEquals("draft in SealedOutbox?", false, fSealedOutbox.canAdd(Bulletin.STATUSDRAFT));
+		assertEquals("no sealed in SealedOutbox?", true, fSealedOutbox.canAdd(Bulletin.STATUSSEALED));
 	}
 
 	public void testFindFolder()

@@ -600,6 +600,11 @@ public class BulletinStore
 	{
 		return folderDraftOutbox;
 	}
+	
+	public BulletinFolder getFolderSealedOutbox()
+	{
+		return folderSealedOutbox;
+	}
 
 	public void createSystemFolders()
 	{
@@ -612,6 +617,9 @@ public class BulletinStore
 		folderDiscarded = createSystemFolder(DISCARDED_FOLDER);
 		folderDraftOutbox = createSystemFolder(DRAFT_OUTBOX);
 		folderDraftOutbox.setStatusAllowed(Bulletin.STATUSDRAFT);
+		
+		folderSealedOutbox = createSystemFolder(SEALED_OUTBOX);
+		folderSealedOutbox.setStatusAllowed(Bulletin.STATUSSEALED);
 	}
 
 	public BulletinFolder createSystemFolder(String name)
@@ -1155,21 +1163,23 @@ public class BulletinStore
 	public static final String RETRIEVE_DRAFT_FIELD_OFFICE_BULLETIN_FOLDER = "%RetrievedFieldOfficeBulletinDraft";
 	public static final String DAMAGED_BULLETIN_FOLDER = "%DamagedBulletins";
 	private static final String DRAFT_OUTBOX = "*DraftOutbox";
+	private static final String SEALED_OUTBOX = "*SealedOutbox";
 
 	private static final String CACHE_FILE_NAME = "skcache.dat";
 	private static final String OBSOLETE_CACHE_FILE_NAME = "sfcache.dat";
 	private MartusCrypto signer;
 	private File dir;
-	Database database;
+	private Database database;
 	private Vector folders;
 	private BulletinFolder folderOutbox;
 	private BulletinFolder folderSent;
 	private BulletinFolder folderDrafts;
 	private BulletinFolder folderDiscarded;
 	private BulletinFolder folderDraftOutbox;
-	boolean loadedLegacyFolders;
+	private BulletinFolder folderSealedOutbox;
+	private boolean loadedLegacyFolders;
 	private BulletinCache cache;
 
-	FieldSpec[] publicFieldTags;
-	FieldSpec[] privateFieldTags;	
+	private FieldSpec[] publicFieldTags;
+	private FieldSpec[] privateFieldTags;	
 }
