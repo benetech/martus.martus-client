@@ -1,9 +1,9 @@
 ﻿# Martus Client Translation File
 # Language code:  es
 # Language name:  Spanish
-# Exported date:  Wed Jun 16 13:46:48 PDT 2004
+# Exported date:  Fri Jul 02 14:27:21 PDT 2004
 # Client version: Internal 2.0-prerelease
-# Client build:   #{BUILDDATE}
+# Client build:   20040701.1206
 #
 # This file MUST be saved in UTF-8 format!
 # Lines beginning with # are comments and are ignored by Martus
@@ -11,12 +11,16 @@
 #    text, and the second line consists of: KEY=VALUE
 #    (e.g. -c47a-button:customHelp=<Help> )
 # Do not modify any KEY. Do localize every VALUE.
-# Each VALUE that needs to be translated has <> around it. 
+# Each VALUE that needs to be translated has <> around it.
 #    As you translate each VALUE, remove its <>
-# When a non-English VALUE appears inside <> it is because the English 
+# When a non-English VALUE appears inside <> it is because the English
 #    translation has changed. Verify or update the translation to 
 #    match the new English text, and remove the <>
-# If you name it Martus-es.mtf and put the file in 
+# If there is an English VALUE inside <> , it is because it is a field
+#    added after the last release. Remove the english, insert/update the
+#    VALUE translation to match the new English text which is in the
+#    comment line directly above it, and remove the <>
+# If you name it Martus-es.mtf and put the file in
 #     c:\Martus, then Martus will automatically read it.
 # In Martus, to choose a language, pick one from the drop-down list
 #    in the lower left-hand corner of the signin screen, or after you
@@ -24,26 +28,23 @@
 #
 #  1.  do NOT translate "\n" (used for new lines)
 #  2.  do NOT translate "#N#" or "#M#" (though move them as appropriate
-#      grammatically for the language to make "N of M" [eg "2 of 5"] make sense
-#      for creating/restoring secret share key files).
-#      grammatically for the language to make "N of M" make sense for
-#      creating/restoring secret share).
+#      grammatically for the language to make "N of M" [eg "2 of 5"] make
+#      sense for creating/restoring secret share key files).
 #  3.  in field:VirtualKeyboardKeys, keep the english alphabet, but include any
 #      non-english characters at the end of the english alphabet/numbers/special
 #      characters (e.g. attach entire Thai alphabet at the end of the line)
 #  4.  in field:SearchBulletinRules, make sure to translate the english "and"
 #      and "or" in the text to exactly match the keyword:and= and 
-#      keyword:or= translations.  
-Also, the translation of the first sentence should
-#      not exactly match the english version because Martus can handle both english
-#      "and"/"or" and the translations of those keywords for bulletin searching,
-#      since for some languages keyboards are not available to all users in those alphabets.
-
-#      So please translate the following for the first sentence:   "When searching for
-#      bulletins you can add key words either in english or the-language-you-are-translating
-#      (or/or-translated, and/and-translated) between multiple search term words
+#      keyword:or= translations.  Also, the translation of the first sentence
+#      should not exactly match the english version because Martus can handle
+#      both english "and"/"or" and the translations of those keywords for
+#      bulletin searching, since for some languages keyboards are not available
+#      to all users in those alphabets. So please translate the following for the
+#      first sentence: "When searching for bulletins you can add key words either
+#      in english or the-language-you-are-translating (or/or-translated,
+#      and/and-translated) between multiple search term words
 #      (e.g. prison or jail, prison and assault).
-#  5.  in field:inputCustomFieldsentry, you can translate tags into foreign
+#  5.  in CreateCustomFieldsHelp2/3 fields, you can translate tags into foreign
 #      characters (but without punctuation or spaces)
 #  6.  when there are file or directory names, do not translate them
 #      (e.g.  "acctmap.txt" and "packets"
@@ -51,12 +52,24 @@ Also, the translation of the first sentence should
 #      file in your account's packets directory...)
 #  7.  do not translate the words "Martus" or "Benetech"
 #  8.  do NOT translate "#S#" (used for search string entry)
-#  9.  do not translate "#L#" as is it used to populate lists of values on various dialogs.
+#  9.  do not translate "#L#" as is it used to populate lists of values on
+#      various dialogs.
 # 10.  do not translate "#Title#" (used for bulletin title entry)
 # 11.  do not translate "#A#" (used for bulletin details: Author Public Code)
 # 12.  do not translate "#I#" (used for bulletin details: Bulletin ID)
 # 13.  do not translate "#H#" (used for bulletin details: Headquarter entries)
 # 14.  do not translate "#NumberOfHQs#" in various dialogs
+# 15.  Leave standard field tags in English in CreateCustomFieldsHelp1 and
+#      CreateCustomFieldsHelp2, but put translation in parentheses after
+#      english : e.g.  'author' (autor), so users know what they refer to
+# 16.  Leave field types in English in CreateCustomFieldsHelp2 (e.g. BOOLEAN,
+#      DATE), but put translation in parentheses after english, so users know
+#      what they refer to.
+# 17.  Leave field types in English in CreateCustomFieldsHelp3 examples
+#      (e.g. BOOLEAN, DATE)
+# 18.  Do not translate words used in XML for custom fields such as:
+#      <Field type='GRID'>, </Field>, <Tag>, </Tag>, <Label>, </Label>,
+#      <GridSpecDetails>, </GridSpecDetails>, <Column>, </Column>
 #
 
 #________________________=Show all bulletins on this server and on this computer.
@@ -269,8 +282,8 @@ Also, the translation of the first sentence should
 #____________________________=Last Saved
 -eb05-field:BulletinLastSaved=Este boletín fue modificado:
 
-#___________________________=Field Office Bulletin
--5425-field:BulletinNotYours=Boletín de oficina regional
+#___________________________=Field Desk Bulletin
+-f61d-field:BulletinNotYours=Boletín de oficina regional
 
 #_______________________=Size (Kb)
 -fa2e-field:BulletinSize=Tamaño (Kb)
@@ -311,8 +324,8 @@ Also, the translation of the first sentence should
 #_________________________________=You can change any of this information later, by choosing Options/Contact Info.
 -e924-field:ContactInfoUpdateLater=Puede cambiar su información en cualquier momento usando el menú Opciones/Información de contacto.
 
-#__________________________________=The layout of the bulletins is dictated by an XML document.  At the start of the document you must have <CustomFields> and at the end of the document you must have its corresponding end tag namely </CustomFields>.  By default the standard bulletin fields occur at the top of the Custom Field declaration, but they can be moved if desired.  However, there are four required fields that cannot be removed:  'author', 'entrydate', 'language' and 'title'.  For example for 'author' you will have\n<Field><Tag>author</Tag><Label></Label><Type>STRING</Type></Field>\n\n
--3a60-field:CreateCustomFieldsHelp1=La presentación de los boletines está dictada por un documento en XML. AL inicio de su documento necesita la etiqueta <CustomFields> y al final del documento necesita la etiqueta corespondiente, </CustomFields>. Normalmente los campos de un boletín estandar ocurren al inicio del documento de presentación, pero si lo desea puede moverlos a otra posición. Aún así hay cuatro nombres de identificación que son requeridos en la presentación de un boletín y no pueden ser removidos, estas son 'author' (autor), 'entrydate' (fecha de introducción), 'language' (idioma) y 'title' (título). Por ejemplo para 'author' va a escribirlo \n<Field type='STRING'><Tag>author</Tag><Label></Label></Field>\n\n
+#__________________________________=The layout of the bulletins is dictated by an XML document.  At the start of the document you must have <CustomFields> and at the end of the document you must have its corresponding end tag namely </CustomFields>.  By default the standard bulletin fields occur at the top of the Custom Field declaration, but they can be moved if desired.  However, there are four required fields that cannot be removed:  'author', 'entrydate', 'language' and 'title'.  For example for 'author' you will have\n<Field type='STRING'><Tag>author</Tag><Label></Label></Field>\n\n
+-2398-field:CreateCustomFieldsHelp1=La presentación de los boletines está dictada por un documento en XML. AL inicio de su documento necesita la etiqueta <CustomFields> y al final del documento necesita la etiqueta corespondiente, </CustomFields>. Normalmente los campos de un boletín estandar ocurren al inicio del documento de presentación, pero si lo desea puede moverlos a otra posición. Aún así hay cuatro nombres de identificación que son requeridos en la presentación de un boletín y no pueden ser removidos, estas son 'author' (autor), 'entrydate' (fecha de introducción), 'language' (idioma) y 'title' (título). Por ejemplo para 'author' va a escribirlo \n<Field type='STRING'><Tag>author</Tag><Label></Label></Field>\n\n
 
 #__________________________________=For custom (non-standard) fields, you first select the type of field you want.  The possible choices are 'BOOLEAN', 'DATE', 'DATERANGE', 'GRID', 'LANGUAGE', 'MULTILINE', and 'STRING'.  This type is defined by <Field type='type of field goes here'>. \n\nFor each custom field you will need a unique identification tag.  This tag can be any word except those already used by the system (eg. 'author', 'summary', 'location', 'title' etc.), and cannot contain spaces or special characters.  Examples of choices are 'custom1', 'custom2', etc, or tags that are more descriptive like 'VictimsName'.  This unique tag looks like <Tag>yourtag</Tag>. \n Then you need a label which is displayed next to your custom field.  An example might be 'Name of 1st Witness'.  This label is surrounded by <Label>your label goes here</Label>\nEach field description ends with </Field>\n\n
 -c18a-field:CreateCustomFieldsHelp2=Para crear sus campos personalizados, necesita primero identificar que tipo de campo desea. Los tipos de campo disponibles son 'BOOLEAN' (Verdadero/Falso), 'DATE' (Fecha), 'DATERANGE' (Rango de fechas), 'GRID' (Mapa), 'LANGUAGE' (Idioma), 'MULTILINE' (Múltiples lineas), and 'STRING' (Palabra). El tipo de campo va dentro de la etiqueta <Field> de esta manera: <Field type='DATE'>.\n\nPara cada campo personalizado va a necesitar un nombre de dentificación único. El nombre de identificación de un campo puede ser cualquier palabra a excepción de aquellas en uso por Martus ('author', 'summary', 'location', 'title' etc.) y no puede contener espacios o letras especiales. Por ejemplo puede usar los nombres 'personalizado1', 'personalizado2', etc o pueden ser más descriptivos como 'NombreDeVictima'. Este nombre de identificación único esta dentro de las etiquetas <Tag> de esta manera <Tag>NombreDeVictima</Tag>. Luego necesita un título para su campo personalizado. Por ejemplo podria ser 'Nombre de primer testigo'. Este título va dentro de la etiqueta <Label> de esta manera: <Label>Nombre de primer testigo</Label>.\nCada definición de un campo termina con la etiqueta </Field>.\n\n
@@ -711,7 +724,7 @@ Also, the translation of the first sentence should
 -a7e1-field:confirmCancelShareRecovercause=¿Desea cancelar la recuperación del su clave?
 
 #__________________________________________=By choosing Yes, you will exit Martus.
--49e1-field:confirmCancelShareRecovereffect=Oprima Si para salir de Martus.>
+-49e1-field:confirmCancelShareRecovereffect=Oprima Si para salir de Martus.
 
 #________________________________________=Do you wish to cancel the verification?
 -40ae-field:confirmCancelShareVerifycause=¿Desea cancelar la verificación?
@@ -719,17 +732,17 @@ Also, the translation of the first sentence should
 #_________________________________________=By choosing Yes, you will exit this verification step.
 -5b61-field:confirmCancelShareVerifyeffect=Oprima Si para salir del proceso de verificación.
 
-#_________________________________________=You have chosen to remove your headquarter's account.  Any existing saved bulletins will still be visible by the old headquarters.  If you want to disallow Headquarters viewing access to previously created Draft bulletins they must be re-saved after revoking the headquarters.  Any sealed bulletins CANNOT be reset to be non-viewable by the headquarters.
--e284-field:confirmClearHQInformationcause=Ha escogido eliminar la cuenta de la oficina central.  Los boletines que estén guardados pueden todavía ser vistos por la oficina central eliminada. Si no quiere que la oficina central eliminada pueda ver sus borradores tendrá que guardarlos nuevamente una vez que elimine la cuenta de la oficina central. Los boletines que están sellados NO pueden ser reconfigurados para que no le sean visibles a la oficina central eliminada.
+#_________________________________________=You have chosen to remove your Headquarters account.  Any existing saved bulletins will still be visible by the old Headquarters.  If you want to disallow Headquarters viewing access to previously created Draft bulletins they must be re-saved after revoking the Headquarters.  Any sealed bulletins CANNOT be reset to be non-viewable by the Headquarters.
+-6076-field:confirmClearHQInformationcause=Ha escogido eliminar la cuenta de la oficina central.  Los boletines que estén guardados pueden todavía ser vistos por la oficina central eliminada. Si no quiere que la oficina central eliminada pueda ver sus borradores tendrá que guardarlos nuevamente una vez que elimine la cuenta de la oficina central. Los boletines que están sellados NO pueden ser reconfigurados para que no le sean visibles a la oficina central eliminada.
 
-#__________________________________________=By clicking on Yes, any draft or sealed bulletins saved in the future will no longer be accessible by your headquarters.
--9c72-field:confirmClearHQInformationeffect=Al oprimir Sí los boletines que selle o borradores que guarde en el futuro no podrán ser vistos por la oficina central.
+#__________________________________________=By clicking on Yes, any draft or sealed bulletins saved in the future will no longer be accessible by your Headquarters.
+-4a87-field:confirmClearHQInformationeffect=Al oprimir Sí los boletines que selle o borradores que guarde en el futuro no podrán ser vistos por la oficina central.
 
 #__________________________________________=You have chosen to modify a bulletin that was created by someone else.
 -b384-field:confirmCloneBulletinAsMinecause=Ha elegido editar un boletín que fue creado por otra persona.
 
-#___________________________________________=Clicking on Yes will create a new bulletin that contains a copy of all the same information. You will be the official author of this new bulletin, and any private data in it will only be visible by you (and your headquarters, if you have one). The original bulletin will remain unchanged.
--4acd-field:confirmCloneBulletinAsMineeffect=Al oprimir Sí se va a crear un nuevo boletín con una copia de la misma información. usted. va a ser el autor oficial de este nuevo boletín y la información privada va a ser visible solo por usted. (y su oficina central si es que tiene una). El boletín oficial se va a mantener sin cambios.
+#___________________________________________=Clicking on Yes will create a new bulletin that contains a copy of all the same information. You will be the official author of this new bulletin, and any private data in it will only be visible by you (and your Headquarters, if you have one). The original bulletin will remain unchanged.
+-f291-field:confirmCloneBulletinAsMineeffect=Al oprimir Sí se va a crear un nuevo boletín con una copia de la misma información. usted. va a ser el autor oficial de este nuevo boletín y la información privada va a ser visible solo por usted. (y su oficina central si es que tiene una). El boletín oficial se va a mantener sin cambios.
 
 #___________________________________________=You have chosen to modify one of your sealed bulletins, but sealed bulletins cannot be modified.
 -55b1-field:confirmCloneMySealedAsDraftcause=Ha elegido editar un boletín que ya ha sido sellado pero los boletines no pueden ser editados una vez sellados.
@@ -797,8 +810,8 @@ Also, the translation of the first sentence should
 #________________________________________________=Answering Yes will continue to use this older version of Martus.  Answering No will exit Martus so you can upgrade to the latest version.
 -3170-field:confirmNewerConfigInfoFileFoundeffect=Oprima Si para continuar usando la versión anterior de Martus.  Oprima No para salir de Martus y pueda actualizar si copia a la versión más reciente.
 
-#___________________________________________________________=Warning the bulletin you are currently viewing is not yours.  Attachments can contain viruses, or malicious programs harmful to your computer.
--ae0f-field:confirmNotYourBulletinViewAttachmentAnywayscause=Advertencia: El  boletín que está examinando no le pertenece.  Verifique que los archivos adjuntos no tienen un virus o programas que puedan dañar su ordenador.
+#___________________________________________________________=Warning: the bulletin you are currently viewing is not yours.  Attachments can contain viruses, or malicious programs harmful to your computer.
+-8e42-field:confirmNotYourBulletinViewAttachmentAnywayscause=Advertencia: El  boletín que está examinando no le pertenece.  Verifique que los archivos adjuntos no tienen un virus o programas que puedan dañar su ordenador.
 
 #____________________________________________________________=Clicking on Yes will display the attachment, clicking on No will not try to display the attachment.
 -b6bf-field:confirmNotYourBulletinViewAttachmentAnywayseffect=Oprima Si para ver el contenido del archivo adjunto, oprima No para continuar sin ver el contenido.
@@ -887,11 +900,11 @@ Also, the translation of the first sentence should
 #___________________________________________________________=Answering Yes will replace the old bulletin with this bulletin.  Answering on No will leave the original bulletin and skip this file.
 -6bf3-field:confirmUnAuthoredBulletinDeleteBeforePasteeffect=Oprima Si para reemplazar el boletín existente con la copia nueva. Oprima No para mantener el boletín existente sin reemplazarlo.
 
-#____________________________________________________=Key Restore failed, we suggest you try again with a different backup file. Choose Yes to try again, No to exit Martus.
--ec27-field:confirmUnableToRecoverFromBackupFilecause=Falló la recuperación de su clave. Le sugerimos volver a intentarlo con una copia de seguridad diferente.
+#____________________________________________________=Key restore failed, we suggest you try again with a different backup file.
+-f6c1-field:confirmUnableToRecoverFromBackupFilecause=Falló la recuperación de su clave. Le sugerimos volver a intentarlo con una copia de seguridad diferente.
 
-#_____________________________________________________=Choosing Yes will begin the restore process again.
--cb49-field:confirmUnableToRecoverFromBackupFileeffect=Oprima Si para intentar nuevamente, oprima No para salir de Martus.
+#_____________________________________________________=Yes to begin the restore process again, No to exit Martus.
+-aff2-field:confirmUnableToRecoverFromBackupFileeffect=Oprima Si para intentar nuevamente, oprima No para salir de Martus.
 
 #_______________________________________=You have chosen to revert to the standard set of Martus fields.
 -61a6-field:confirmUndoCustomFieldscause=Ha escogido revertir a los campos de boletines originales de Martus.
@@ -932,8 +945,8 @@ Also, the translation of the first sentence should
 #____________________________________________________=Warning! Using the regular keyboard to enter your password greatly reduces the security of the Martus system, and could make it easier for an attacker to view your private data.
 -f068-field:confirmWarningSwitchToNormalKeyboardcause=¡Advertencia! El usar el teclado de hardware pare escribir su contraseña reduce la seguridad del sistema de Martus y facilita el acceso a su información privada a terceras personas.
 
-#_____________________________________________________=If this is a headquarters computer, it is especially important to use the on-screen keyboard, because an attacker could gain access to all the private data that you are authorized to view.
--f61f-field:confirmWarningSwitchToNormalKeyboardeffect=Si este ordenador es de su oficina central es importante que utilice el teclado en la pantalla de otra manera un intruso podría acceder a los boletines que usted. está autorizado a ver.
+#_____________________________________________________=If this is a Headquarters computer, it is especially important to use the on-screen keyboard, because an attacker could gain access to all the private data that you are authorized to view.
+-4379-field:confirmWarningSwitchToNormalKeyboardeffect=Si este ordenador es de su oficina central es importante que utilice el teclado en la pantalla de otra manera un intruso podría acceder a los boletines que usted. está autorizado a ver.
 
 #_________________________________________________=A single encrypted backup file of your key has yet to be created.
 -71c0-field:confirmbackupIncompleteEncryptedNeeded=Todavia no a creado una copia de seguridad cifrada de su clave.
@@ -1061,8 +1074,8 @@ Also, the translation of the first sentence should
 #_________________________________________=An error occurred while trying to create your account.
 -c8e7-field:notifyCreateAccountFailedcause=Occurrió un error al intentar crear su cuenta.
 
-#_____________________________________________________=An error occurred during upload, and the damaged bulletin has been moved to the damaged bulletin folder.
--52f4-field:notifyDamagedBulletinMovedToDiscardedcause=Ocurrió un error durante el envío. El boletín dañado se a movido a la carpeta de boletines dañados.
+#_____________________________________________________=An error occurred during upload, and the damaged bulletin has been moved to the Damaged Bulletin folder.
+-ae32-field:notifyDamagedBulletinMovedToDiscardedcause=Ocurrió un error durante el envío. El boletín dañado se a movido a la carpeta de boletines dañados.
 
 #______________________________________________=Error: Unable to delete all of those draft bulletins from the server. Some of them may have been deleted.
 -916e-field:notifyDeleteServerDraftsFailedcause=Error: No se pudo eliminar todos los borradores del servidor. Algunos de ellos pueden se hayan borrado.
@@ -1248,7 +1261,7 @@ Also, the translation of the first sentence should
 -7d7f-field:notifyVerifyKeyPairSharePassedcause=Disquetes verificados.
 
 #_____________________________________________=Bulletin ID:        #I#\nAuthor Public Code: #A#\n\n#H#
--485a-field:notifyViewViewBulletinDetailscause=Ident. de boletín:        #I#\nCódigo público del autor: #A#\n\n#H#>
+-485a-field:notifyViewViewBulletinDetailscause=Ident. de boletín:        #I#\nCódigo público del autor: #A#\n\n#H#
 
 #_____________________________________=Welcome!\n\nTo start using Martus, create an account. Choose any username you like and a password that contains at least 8 characters. Keep the following information in mind as you create your username and password:\n\n * We recommend using a password that has 15 characters.\n * Include some characters that aren't letters or numbers in your password.\n   (That is, use punctuation or other special characters.)\n * Use a password that other people won't be able to guess;\n   anyone who knows your username and password can view your private data,\n   and can create bulletins that everyone will believe were created by you.\n * Write down your username and password and store them in a safe place.\n * You'll need to enter your username and password whenever you start Martus.\n * Martus will also sometimes prompt you to re-enter your username\n   and password to prevent someone else from using your account\n   after you've logged in.\n\nIMPORTANT: You are the only one who has your username and password. If you lose either of them, you won't be able to retrieve your data. Your username and password are not stored or backed up anywhere, so they cannot be reset for you.
 -da34-field:notifyWelcomeToMartuscause=Bienvenido al sistema de Martus.\n\nPara poder usar Martus es necesario crear una cuenta. Escoja el nombre de usuario que deseé y una contraseña con un mínimo de 8 letras y números. Tome lo siguiente a consideración al crear su nombre de usuario y contraseña:\n\n * Le recomendamos escoja una contraseña con un mínimo de 15 letras o números.\n * Incluya puntuación y otros símbolos en su contraseña.\n * Use una contraseña que otras personas no puedan adivinar pues con su nombre de usuario y contraseña cualquier persona puede ver y editar su información privada y crear boletines bajo su nombre.\n * Escriba su nombre y contraseña y guardela en un lugar seguro.\n * Necesitará ingresar su nombre y contraseña cada vez que inicie Martus.\n * Martus también le pedirá que ingrese su nombre de usuario y contraseña en oportunidades adicionales durante el uso del programa para prevenir que otra persona use su cuenta en su ausencia.\n\nIMPORTANTE: Usted es la única persona que tiene su nombre de usuario y contraseña. Si los pierde no podrá acceder a la información que haya ingresado. Martus no guarda su nombre de usuario o su contraseña por lo que de perderse estos no pueden ser cambiados o recuperados.\n
@@ -1757,8 +1770,8 @@ Also, the translation of the first sentence should
 #______________________________________=Backup Key Information
 -f733-wintitle:BackupKeyPairGeneralInfo=Información sobre copia de seguridad
 
-#___________________________________________________=Information on Sharing Your Key
--cf77-wintitle:BackupKeyPairToSecretShareInformation=Información sobre copia de seguridad
+#___________________________________________________=Backup Key Information 
+-53df-wintitle:BackupKeyPairToSecretShareInformation=Información sobre copia de seguridad
 
 #__________________________________________________=Backup Complete
 -8b15-wintitle:BackupSecretShareCompleteInformation=Copia de seguridad completa
@@ -1868,8 +1881,8 @@ Also, the translation of the first sentence should
 #______________________________________________=Retrieving Bulletin Summaries
 -2a45-wintitle:RetrieveHQDraftBulletinSummaries=Bajando resúmenes de boletines
 
-#______________________________________=Retrieve Field Office Draft Bulletins
--f2ea-wintitle:RetrieveHQDraftBulletins=Bajar borradores de oficinas regionales
+#______________________________________=Retrieve Field Desk Draft Bulletins
+-a45d-wintitle:RetrieveHQDraftBulletins=Bajar borradores de oficinas regionales
 
 #______________________________________________=Retrieving Bulletins
 -b7aa-wintitle:RetrieveHQSealedBulletinProgress=Bajando boletines
@@ -1877,8 +1890,8 @@ Also, the translation of the first sentence should
 #_______________________________________________=Retrieving Bulletin Summaries
 -2a45-wintitle:RetrieveHQSealedBulletinSummaries=Bajando resúmenes de boletines
 
-#_______________________________________=Retrieve Field Office Sealed Bulletins
--30a2-wintitle:RetrieveHQSealedBulletins=Bajar boletines sellados de oficinas regionales
+#_______________________________________=Retrieve Field Desk Sealed Bulletins
+-2e56-wintitle:RetrieveHQSealedBulletins=Bajar boletines sellados de oficinas regionales
 
 #_____________________________________________=Retrieving Bulletins
 -b7aa-wintitle:RetrieveMyDraftBulletinProgress=Bajando boletines
@@ -2027,8 +2040,8 @@ Also, the translation of the first sentence should
 #_______________________________________=Confirm Import of Public Account Id
 -0a90-wintitle:confirmSetImportPublicKey=Confirmar importación de identificación de cuenta pública
 
-#________________________________________________________=UnAuthored Bulletin Already Exists
--a33a-wintitle:confirmUnAuthoredBulletinDeleteBeforePaste=Boletín ya existe
+#________________________________________________________=Bulletin Already Exists
+-c839-wintitle:confirmUnAuthoredBulletinDeleteBeforePaste=Boletín ya existe
 
 #__________________________________________________=Unable to Restore from Backup File
 -79e5-wintitle:confirmUnableToRecoverFromBackupFile=No se pudo recuperar de la copia de seguridad
