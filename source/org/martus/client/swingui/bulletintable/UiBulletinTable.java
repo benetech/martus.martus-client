@@ -314,18 +314,24 @@ public class UiBulletinTable extends JTable implements ListSelectionListener, Dr
 			
 		if(tb == null)
 		{			
-			File file = UiClipboardUtilities.getClipboardTransferableFile();
+			File[] files = UiClipboardUtilities.getClipboardTransferableFiles();
 			try
 			{
-				if(file != null)
-					dropAdapter.attemptDropFile(file, folder);
+				if(files != null)
+					dropAdapter.attemptDropFiles(files, folder);
 				worked = true;
-				if(confirmDeletionOfFile(file.getPath()))
-					file.delete();
+				mainWindow.notifyDlg("OperationCompleted");
+				mainWindow.notifyDlg("FilesWillNotBeDeleted");
+				//if(confirmDeletionOfFile(file.getPath()))
+					//file.delete();
 			}
 			catch (StatusNotAllowedException e)
 			{
 				resultMessageTag = "PasteErrorNotAllowed";
+			}
+			catch (BulletinAlreadyExistsException e)
+			{
+				resultMessageTag = "PasteErrorBulletinAlreadyExists";
 			}
 			catch (Exception e)
 			{

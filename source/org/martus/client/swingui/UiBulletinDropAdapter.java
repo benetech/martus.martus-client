@@ -227,7 +227,44 @@ public abstract class UiBulletinDropAdapter implements DropTargetListener
 		if(!worked)
 			observer.notifyDlgBeep(observer, resultMessageTag);
 	}
-
+	final int noError = 0;
+	final int statusNotAllowed = 1;
+	final int bulletinExists = 2;
+	final int otherError = 3;
+	
+	public void attemptDropFiles(File[] files, BulletinFolder toFolder) throws
+		StatusNotAllowedException, BulletinAlreadyExistsException, Exception
+	{
+		int errorThrown = noError;
+		for(int i = 0; i<files.length; ++i)
+		{
+			try
+			{
+				attemptDropFile(files[i], toFolder);
+			}
+			catch (BulletinAlreadyExistsException e)
+			{
+				if(errorThrown == noError)
+					errorThrown = bulletinExists;
+			}
+			catch (StatusNotAllowedException e)
+			{
+				if(errorThrown != otherError)
+					errorThrown = statusNotAllowed;
+			}
+			catch (Exception e)
+			{
+				errorThrown = otherError;
+			}
+		}
+		if(errorThrown == statusNotAllowed)
+			throw new StatusNotAllowedException();
+		if(errorThrown == bulletinExists)
+			throw new BulletinAlreadyExistsException();
+		if(errorThrown == otherError)
+			throw new Exception();
+	}
+	
 	public void attemptDropFile(File file, BulletinFolder toFolder) throws
 		InvalidPacketException, SignatureVerificationException, WrongPacketTypeException, StatusNotAllowedException, CryptoException, IOException, InvalidBase64Exception, BulletinAlreadyExistsException
 	{
@@ -250,9 +287,7 @@ public abstract class UiBulletinDropAdapter implements DropTargetListener
 		System.out.println("attemptDropBulletin");
 
 		BulletinStore store = toFolder.getStore();
-		final int statusNotAllowed = 1;
-		final int bulletinExists = 2;
-		int errorThrown = 0;
+		int errorThrown = noError;
 		for (int i = 0; i < bulletins.length; i++)
 		{
 			Bulletin bulletin = bulletins[i];
@@ -271,7 +306,7 @@ public abstract class UiBulletinDropAdapter implements DropTargetListener
 			}
 			catch (BulletinAlreadyExistsException e)
 			{
-				if(errorThrown == 0)
+				if(errorThrown == noError)
 					errorThrown = bulletinExists;
 			}
 		}

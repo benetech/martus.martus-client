@@ -43,11 +43,11 @@ public class UiClipboardUtilities
 		return tb;
 	}
 
-	public static File getClipboardTransferableFile()
+	public static File[] getClipboardTransferableFiles()
 	{
 		Transferable t = getTransferableFromClipboard();
-		File file = TransferableBulletinList.extractFileFrom(t);
-		return file;
+		File[] files = TransferableBulletinList.extractFilesFrom(t);
+		return files;
 	}
 
 	public static Transferable getTransferableFromClipboard()

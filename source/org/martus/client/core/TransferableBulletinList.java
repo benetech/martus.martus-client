@@ -159,19 +159,22 @@ public class TransferableBulletinList implements Transferable
 		return bulletinListDataFlavor;
 	}
 
-	static public File extractFileFrom(Transferable t)
+	static public File[] extractFilesFrom(Transferable t)
 	{
 		if(t==null || !t.isDataFlavorSupported(DataFlavor.javaFileListFlavor))
 			return null;
 		try
 		{
 			Collection fileList = (Collection)t.getTransferData(DataFlavor.javaFileListFlavor);
-			if(fileList.size() != 1)
-				return null;
-
+			File[] files = null;
 			Iterator iterator = fileList.iterator();
-			File file = (File)iterator.next();
-			return file;
+			files = new File[fileList.size()];
+			int element = 0;
+			while(iterator.hasNext())
+			{	
+				files[element++] = ((File)iterator.next());
+			}
+			return files;
 		}
 		catch (Exception e)
 		{

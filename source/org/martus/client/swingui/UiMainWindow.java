@@ -472,7 +472,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		if(UiClipboardUtilities.getClipboardTransferableBulletin() != null)
 			return true;
 
-		if(UiClipboardUtilities.getClipboardTransferableFile() != null)
+		if(UiClipboardUtilities.getClipboardTransferableFiles() != null)
 			return true;
 
 		return false;
