@@ -129,8 +129,8 @@ public class ConfigInfo implements Serializable
 		forceBulletinsAllPrivate = false;
 		backedUpKeypairEncrypted = false;
 		backedUpKeypairShare = false;
-		bulletinVersioningAware = false;
 		allHQKeysXml = "";
+		bulletinVersioningAware = true;
 	}
 
 	public static ConfigInfo load(InputStream inputStream)
@@ -178,6 +178,8 @@ public class ConfigInfo implements Serializable
 			
 			if(loaded.version >= 10)
 				loaded.bulletinVersioningAware = in.readBoolean();
+			else
+				loaded.bulletinVersioningAware = false;
 
 			in.close();
 		}

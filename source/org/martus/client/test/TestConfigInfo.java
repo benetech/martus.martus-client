@@ -236,7 +236,7 @@ public class TestConfigInfo extends TestCaseEnhanced
 		assertEquals(label + ": sampleBackedUpKeypairEncrypted", false, info.hasUserBackedUpKeypairEncrypted());
 		assertEquals(label + ": sampleBackedUpKeypairShare", false, info.hasUserBackedUpKeypairShare());
 		assertEquals(label + ": sampleAllHQKeysXml", "", info.getAllHQKeysXml());
-		assertEquals(label + ": sampleBulletinVersioningAware", false, info.isBulletinVersioningAware());
+		assertEquals(label + ": sampleBulletinVersioningAware", true, info.isBulletinVersioningAware());
 		
 	}
 
