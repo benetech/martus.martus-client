@@ -107,6 +107,69 @@ public class TestBulletinStore extends TestCaseEnhanced
 		assertEquals("wrong account?", security.getPublicKeyString(), b.getAccount());
 	}
     
+    public void testChooseBulletinToUpload() throws Exception
+	{
+    	BulletinFolder outbox = store.createFolder("*My outbox");
+    	BulletinFolder normal = store.createFolder("Normal Folder");
+    	int count = 10;
+    	Bulletin[] bulletins = new Bulletin[count];
+    	for(int i=0; i < count; ++i)
+    	{
+    		bulletins[i] = store.createEmptyBulletin();
+    		store.saveBulletin(bulletins[i]);
+        	store.addBulletinToFolder(bulletins[i].getUniversalId(), outbox);
+        	store.addBulletinToFolder(bulletins[i].getUniversalId(), normal);
+    	}
+    	
+    	store.removeBulletinFromFolder(bulletins[3].getUniversalId(), normal);
+    	store.removeBulletinFromFolder(bulletins[9].getUniversalId(), normal);
+    	
+    	BulletinFolder discarded = store.getFolderDiscarded();
+    	store.addBulletinToFolder(bulletins[3].getUniversalId(), discarded);
+    	store.addBulletinToFolder(bulletins[6].getUniversalId(), discarded);
+    	store.addBulletinToFolder(bulletins[9].getUniversalId(), discarded);
+
+    	int expected[] = {1, 2, 4, 4, 5, 6, 7, 8, 0, 0};
+    	for(int startIndex=0; startIndex < count; ++startIndex)
+    	{
+    		UniversalId gotUid = store.chooseBulletinToUpload(outbox, startIndex).getUniversalId();
+    		int gotIndex = -1;
+    		for(int i=0; i < bulletins.length; ++i)
+    			if(gotUid.equals(bulletins[i].getUniversalId()))
+    				gotIndex = i;
+    		assertEquals("wrong for " + startIndex, expected[startIndex], gotIndex);
+    	}
+    	
+	}
+    
+	public void testHasAnyNonDiscardedBulletins() throws Exception
+	{
+		Bulletin b1 = store.createEmptyBulletin();
+		Bulletin b2 = store.createEmptyBulletin();
+		store.saveBulletin(b1);
+		store.saveBulletin(b2);
+		
+		BulletinFolder outbox = store.createFolder("*My Outbox");
+		store.addBulletinToFolder(b1.getUniversalId(), outbox);
+		store.addBulletinToFolder(b2.getUniversalId(), outbox);
+
+		BulletinFolder visible = store.createFolder("Other Folder");
+		store.addBulletinToFolder(b1.getUniversalId(), visible);
+		store.addBulletinToFolder(b2.getUniversalId(), visible);
+
+		assertTrue("thinks some are discarded?", store.hasAnyNonDiscardedBulletins(outbox));
+		
+		BulletinFolder discarded = store.getFolderDiscarded();
+		store.addBulletinToFolder(b1.getUniversalId(), discarded);
+		assertTrue("2 in x but all discarded?", store.hasAnyNonDiscardedBulletins(outbox));
+
+		store.addBulletinToFolder(b2.getUniversalId(), discarded);
+		assertTrue("all in x and discarded means discarded?", store.hasAnyNonDiscardedBulletins(outbox));
+		store.removeBulletinFromFolder(b1, visible);
+		store.removeBulletinFromFolder(b2, visible);
+		assertFalse("doesn't see all are discarded?", store.hasAnyNonDiscardedBulletins(outbox));
+	}
+	
     public void testNeedsFolderMigration()
     {
     	assertFalse("normal store needs migration?", store.needsFolderMigration());

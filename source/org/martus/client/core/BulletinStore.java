@@ -408,6 +408,40 @@ public class BulletinStore
 			destroyBulletin(b);
 	}
 
+	public Bulletin chooseBulletinToUpload(BulletinFolder hiddenFolder, int startIndex)
+	{
+		int bulletinCount = hiddenFolder.getBulletinCount();
+		for(int i=0; i < bulletinCount; ++i)
+		{
+			++startIndex;
+			if(startIndex >= bulletinCount)
+				startIndex = 0;
+			
+			Bulletin b = hiddenFolder.getBulletinUnsorted(startIndex);
+			if(isInVisibleNonDiscardedFolder(b))
+				return b;
+		}
+		return null;
+	}
+
+	public boolean hasAnyNonDiscardedBulletins(BulletinFolder hiddenFolder)
+	{
+		for(int i=0; i < hiddenFolder.getBulletinCount(); ++i)
+		{
+			Bulletin b = hiddenFolder.getBulletinSorted(i);
+			if(isInVisibleNonDiscardedFolder(b))
+				return true;
+		}
+		return false;
+	}
+	
+	private boolean isInVisibleNonDiscardedFolder(Bulletin b)
+	{
+		Vector folders = findBulletinInAllVisibleFolders(b);
+		folders.remove(getFolderDiscarded());
+		return (folders.size() > 0);
+	}
+
 	public synchronized BulletinFolder createFolder(String name)
 	{
 		BulletinFolder folder = rawCreateFolder(name);

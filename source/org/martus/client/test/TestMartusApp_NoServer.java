@@ -189,8 +189,8 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		appWithAccount.discardBulletinsFromFolder(f1, new Bulletin[] {b1, b3});
 		assertEquals(3, appWithAccount.getStore().getBulletinCount());
 		assertEquals(1, f1.getBulletinCount());
-		assertEquals("didn't remove from draft outbox?", 0, draftOutbox.getBulletinCount());
-		assertEquals("didn't remove from sealed outbox?", 0, sealedOutbox.getBulletinCount());
+		assertEquals("removed from draft outbox?", 1, draftOutbox.getBulletinCount());
+		assertEquals("removed from sealed outbox?", 1, sealedOutbox.getBulletinCount());
 		
 		Database db = appWithAccount.getStore().getDatabase();
 		DatabaseKey key = new DatabaseKey(b1.getBulletinHeaderPacket().getUniversalId());

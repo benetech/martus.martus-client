@@ -646,16 +646,12 @@ public class MartusApp
 			return true;
 		return false;
 	}
-
+	
 	public void discardBulletinsFromFolder(BulletinFolder folderToDiscardFrom, Bulletin[] bulletinsToDiscard) throws IOException 
 	{
-		BulletinFolder draftOutBox = getFolderDraftOutbox();
-		BulletinFolder sealedOutbox = getFolderSealedOutbox();
 		for (int i = 0; i < bulletinsToDiscard.length; i++)
 		{
 			Bulletin b = bulletinsToDiscard[i];
-			getStore().removeBulletinFromFolder(b, draftOutBox);
-			getStore().removeBulletinFromFolder(b, sealedOutbox);
 			getStore().discardBulletin(folderToDiscardFrom, b);
 		}
 		getStore().saveFolders();

@@ -537,21 +537,27 @@ public class UiBulletinTable extends JTable implements ListSelectionListener, Dr
 
 		MartusApp app = mainWindow.getApp();
 		BulletinFolder draftOutBox = app.getFolderDraftOutbox();
+		BulletinFolder sealedOutBox = app.getFolderSealedOutbox();
 
 		Vector visibleFoldersContainingThisBulletin = app.findBulletinInAllVisibleFolders(b);
 		visibleFoldersContainingThisBulletin.remove(folderToDiscardFrom);
 
-		String dialogTag = "";
-		if(visibleFoldersContainingThisBulletin.size() > 0)
-			dialogTag = "confirmDeleteDiscardedBulletinWithCopies";
-		else if (b.isSealed())
-			dialogTag = "confirmDiscardSealedBulletins";
-		else if(draftOutBox.contains(b))
-			dialogTag = "confirmDeleteDiscardedDraftBulletinWithOutboxCopy";
-		else
-			dialogTag = "confirmDiscardDraftBulletins";
 
-		return confirmDeleteBulletins(dialogTag, visibleFoldersContainingThisBulletin);
+		String tagUnsent = null;
+		String tagInOtherFolders = null;
+		if(visibleFoldersContainingThisBulletin.size() > 0)
+		{
+			tagInOtherFolders = "warningDeleteSingleBulletinWithCopies";
+		}
+		else
+		{
+			if(draftOutBox.contains(b) || sealedOutBox.contains(b))
+				tagUnsent = "warningDeleteSingleUnsentBulletin";
+		}
+		
+		String tagMain = "warningDeleteSingleBulletin";
+
+		return confirmDeleteBulletins(tagMain, tagUnsent, tagInOtherFolders, visibleFoldersContainingThisBulletin);
 	}
 
 	private boolean confirmDiscardMultipleBulletins()
@@ -561,6 +567,11 @@ public class UiBulletinTable extends JTable implements ListSelectionListener, Dr
 			return true;
 
 		MartusApp app = mainWindow.getApp();
+
+		BulletinFolder draftOutBox = app.getFolderDraftOutbox();
+		BulletinFolder sealedOutBox = app.getFolderSealedOutbox();
+
+		boolean aBulletinIsUnsent = false;
 		Vector visibleFoldersContainingAnyBulletin = new Vector();
 		Bulletin[] bulletins = getSelectedBulletins();
 		for (int i = 0; i < bulletins.length; i++)
@@ -569,15 +580,22 @@ public class UiBulletinTable extends JTable implements ListSelectionListener, Dr
 			Vector visibleFoldersContainingThisBulletin = app.findBulletinInAllVisibleFolders(b);
 			visibleFoldersContainingThisBulletin.remove(folderToDiscardFrom);
 			addUniqueEntriesOnly(visibleFoldersContainingAnyBulletin, visibleFoldersContainingThisBulletin);
+			
+			if(draftOutBox.contains(b) || sealedOutBox.contains(b))
+				aBulletinIsUnsent = true;
 		}
 
-		String dialogTag = "";
-		if(visibleFoldersContainingAnyBulletin.size() > 0)
-			dialogTag = "confirmDeleteMultipleDiscardedBulletinsWithCopies";
-		else
-			dialogTag = "confirmDeleteMultipleDiscardedBulletins";
+		String tagUnsent = null;
+		if(aBulletinIsUnsent)
+			tagUnsent = "warningDeleteMultipleUnsentBulletins";
 
-		return confirmDeleteBulletins(dialogTag, visibleFoldersContainingAnyBulletin);
+		String tagInOtherFolders = null;
+		if(visibleFoldersContainingAnyBulletin.size() > 0)
+			tagInOtherFolders = "warningDeleteMultipleBulletinsWithCopies";
+		
+		String tagMain = "warningDeleteMultipleBulletins";
+
+		return confirmDeleteBulletins(tagMain, tagUnsent, tagInOtherFolders, visibleFoldersContainingAnyBulletin);
 	}
 
 	private void addUniqueEntriesOnly(Vector to, Vector from)
@@ -590,15 +608,28 @@ public class UiBulletinTable extends JTable implements ListSelectionListener, Dr
 		}
 	}
 
-	private boolean confirmDeleteBulletins(String dialogTag, Vector foldersToList)
+	private boolean confirmDeleteBulletins(String tagMain, String tagUnsent, String tagInOtherFolders, Vector foldersToList)
 	{
 		UiBasicLocalization localization = mainWindow.getLocalization();
-		String title = localization.getWindowTitle(dialogTag);
-		String cause = localization.getFieldLabel(dialogTag + "cause");
-		String folders = buildFolderNameList(foldersToList);
-		String effect = localization.getFieldLabel(dialogTag + "effect");
-		String question = localization.getFieldLabel("confirmquestion");
-		String[] contents = {cause, "", effect, folders, "", question};
+		String title = localization.getWindowTitle(tagMain);
+
+		Vector strings = new Vector();
+		strings.add(localization.getFieldLabel(tagMain));
+		strings.add("");
+		if(tagUnsent != null)
+		{
+			strings.add(localization.getFieldLabel(tagUnsent));
+			strings.add("");
+		}
+		if(tagInOtherFolders != null)
+		{
+			strings.add(localization.getFieldLabel(tagInOtherFolders));
+			strings.add(buildFolderNameList(foldersToList));
+			strings.add("");
+		}
+		strings.add(localization.getFieldLabel("confirmquestion"));
+		String[] contents = new String[strings.size()];
+		strings.toArray(contents);
 		return mainWindow.confirmDlg(mainWindow, title, contents);
 	}
 
@@ -610,7 +641,7 @@ public class UiBulletinTable extends JTable implements ListSelectionListener, Dr
 		{
 			BulletinFolder thisFolder = (BulletinFolder)visibleFoldersContainingThisBulletin.get(i);
 			FolderNode node = new FolderNode(thisFolder.getName(), localization);
-			names += node.getLocalizedName() + "\n";
+			names += " - " + node.getLocalizedName() + "\n";
 		}
 		return names;
 	}

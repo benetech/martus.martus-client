@@ -35,22 +35,27 @@ import java.util.Random;
 import java.util.Vector;
 
 import org.martus.client.core.MartusApp.SaveConfigInfoException;
-import org.martus.common.*;
+import org.martus.common.ContactInfo;
 import org.martus.common.MartusUtilities;
+import org.martus.common.ProgressMeterInterface;
 import org.martus.common.MartusUtilities.FileTooLargeException;
-import org.martus.common.bulletin.*;
-import org.martus.common.crypto.*;
+import org.martus.common.bulletin.Bulletin;
+import org.martus.common.bulletin.BulletinZipUtilities;
+import org.martus.common.crypto.MartusCrypto;
 import org.martus.common.crypto.MartusCrypto.CryptoException;
 import org.martus.common.crypto.MartusCrypto.DecryptionException;
 import org.martus.common.crypto.MartusCrypto.MartusSignatureException;
 import org.martus.common.crypto.MartusCrypto.NoKeyPairException;
-import org.martus.common.database.*;
-import org.martus.common.network.*;
-import org.martus.common.packet.*;
+import org.martus.common.database.Database;
+import org.martus.common.database.DatabaseKey;
+import org.martus.common.network.NetworkInterfaceConstants;
+import org.martus.common.network.NetworkResponse;
+import org.martus.common.packet.Packet;
+import org.martus.common.packet.UniversalId;
 import org.martus.common.packet.Packet.InvalidPacketException;
 import org.martus.common.packet.Packet.SignatureVerificationException;
 import org.martus.common.packet.Packet.WrongPacketTypeException;
-import org.martus.util.*;
+import org.martus.util.Base64;
 
 public class BackgroundUploader
 {
@@ -66,11 +71,12 @@ public class BackgroundUploader
 		UploadResult uploadResult = new UploadResult();
 		uploadResult.result = NetworkInterfaceConstants.OK;
 	
+		BulletinStore store = app.getStore();
 		BulletinFolder folderSealedOutbox = app.getFolderSealedOutbox();
 		BulletinFolder folderDraftOutbox = app.getFolderDraftOutbox();
-		if(folderSealedOutbox.getBulletinCount() > 0)
+		if(store.hasAnyNonDiscardedBulletins(folderSealedOutbox))
 			uploadResult = backgroundUploadOneSealedBulletin(folderSealedOutbox);
-		else if(folderDraftOutbox.getBulletinCount() > 0)
+		else if(store.hasAnyNonDiscardedBulletins(folderDraftOutbox))
 			uploadResult = backgroundUploadOneDraftBulletin(folderDraftOutbox);
 		else if(app.getConfigInfo().shouldContactInfoBeSentToServer())
 			uploadResult = sendContactInfoToServer();
@@ -149,16 +155,15 @@ public class BackgroundUploader
 		return result;
 	}
 
-	BackgroundUploader.UploadResult uploadOneBulletin(
-		BulletinFolder uploadFromFolder)
+	BackgroundUploader.UploadResult uploadOneBulletin(BulletinFolder uploadFromFolder)
 	{
 		BackgroundUploader.UploadResult uploadResult = new BackgroundUploader.UploadResult();
 	
 		if(!app.isSSLServerAvailable())
 			return uploadResult;
 	
-		int randomBulletin = new Random().nextInt(uploadFromFolder.getBulletinCount());
-		Bulletin b = uploadFromFolder.getBulletinSorted(randomBulletin);
+		int index = new Random().nextInt(uploadFromFolder.getBulletinCount());
+		Bulletin b = app.getStore().chooseBulletinToUpload(uploadFromFolder, index);
 		uploadResult.uid = b.getUniversalId();
 		try
 		{

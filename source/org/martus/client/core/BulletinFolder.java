@@ -175,6 +175,14 @@ public class BulletinFolder
 		return  (UniversalId)sortedIdList.get(index);
 	}
 
+	public Bulletin getBulletinUnsorted(int index)
+	{
+		UniversalId uid = getBulletinUniversalIdUnsorted(index);
+		if(uid == null)
+			return null;
+		return store.findBulletinByUniversalId(uid);
+	}
+
 	public UniversalId getBulletinUniversalIdUnsorted(int index)
 	{
 		if(index < 0 || index >= rawIdList.size())
