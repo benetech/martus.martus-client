@@ -112,8 +112,8 @@ public class BulletinStore
 
 		database.initialize();
 
-		publicFieldTags = StandardFieldSpecs.getDefaultPublicFieldSpecs();
-		privateFieldTags = StandardFieldSpecs.getDefaultPrivateFieldSpecs();
+		publicFieldSpecs = StandardFieldSpecs.getDefaultPublicFieldSpecs();
+		privateFieldSpecs = StandardFieldSpecs.getDefaultPrivateFieldSpecs();
 		
 		loadCache();
 		
@@ -871,20 +871,25 @@ public class BulletinStore
 
 	public Bulletin createEmptyBulletin()
 	{
-		FieldSpec[] standardFieldNames = getPublicFieldTags();
-		FieldSpec[] privateFieldNames = getPrivateFieldTags();
-		Bulletin b = new Bulletin(getSignatureGenerator(), standardFieldNames, privateFieldNames);
+		FieldSpec[] publicFieldSpecs = getPublicFieldSpecs();
+		FieldSpec[] privateFieldSpecs = getPrivateFieldSpecs();
+		return createEmptyBulletin(publicFieldSpecs, privateFieldSpecs);
+	}
+	
+	public Bulletin createEmptyBulletin(FieldSpec[] publicFieldSpecs, FieldSpec[] privateFieldSpecs)
+	{
+		Bulletin b = new Bulletin(getSignatureGenerator(), publicFieldSpecs, privateFieldSpecs);
 		return b;
 	}
 
-	private FieldSpec[] getPrivateFieldTags()
+	private FieldSpec[] getPrivateFieldSpecs()
 	{
-		return privateFieldTags;
+		return privateFieldSpecs;
 	}
 
-	public FieldSpec[] getPublicFieldTags()
+	public FieldSpec[] getPublicFieldSpecs()
 	{
-		return publicFieldTags;
+		return publicFieldSpecs;
 	}
 
 	public synchronized BulletinFolder createOrFindFolder(String name)
@@ -913,7 +918,7 @@ public class BulletinStore
 	
 	public void setPublicFieldTags(FieldSpec[] newTags)
 	{
-		publicFieldTags = newTags;
+		publicFieldSpecs = newTags;
 	}
 
 	public int quarantineUnreadableBulletins()
@@ -1244,6 +1249,6 @@ public class BulletinStore
 	private boolean loadedLegacyFolders;
 	private BulletinCache cache;
 
-	private FieldSpec[] publicFieldTags;
-	private FieldSpec[] privateFieldTags;	
+	private FieldSpec[] publicFieldSpecs;
+	private FieldSpec[] privateFieldSpecs;	
 }

@@ -86,6 +86,7 @@ public class EnglishStrings
 "wintitle:confirmQuickEraseUninstallMartus=Uninstall Martus",
 "wintitle:confirmhelpStringNotFound=Text Not Found",
 "wintitle:confirmNeedsFolderMigration=Folder Migration Required",
+"wintitle:confirmUseBulletinsCustomFields=Custom Fields Selection",
 
 "wintitle:notifyDropErrorBulletinExists=Cannot Move Bulletin(s)",
 "wintitle:notifyDropErrors=Error Moving Bulletin(s)",
@@ -581,6 +582,10 @@ public class EnglishStrings
 "field:confirmbackupIncompleteShareNeeded=A multiple disk 'secret share' of your keypair has yet to be created.",
 "field:confirmNeedsFolderMigrationcause=This account was created with an older version of Martus, which used a different set of folders. The folders need to be migrated to the new format. The migration is automatic, fast, and safe. You cannot run this version of Martus unless you allow this migration.",
 "field:confirmNeedsFolderMigrationeffect=Answering Yes will allow the migration to proceed.",
+"field:confirmUseBulletinsCustomFieldscause=The bulletin you are about to create is based on a previous bulletin whos custom fields are different from your current custom fields.  Do you wish to use the original bulletins custom fields?",
+"field:confirmUseBulletinsCustomFieldseffect=Answering Yes will use the old custom fields and all bulletin data.  Answering No will use your current custom fields and copy all similar fields to the new bulletin but you will loose some of the orignial bulletins data.",
+
+
 
 "field:notifyDropErrorBulletinExistscause=One or more bulletins cannot be moved to that folder, because it already exists in that folder.",
 "field:notifyDropErrorscause=An unexpected error occurred while moving the bulletin(s). One or more files may be damaged.",

@@ -70,6 +70,7 @@ import org.martus.client.swingui.dialogs.UiBulletinModifyDlg.CancelHandler;
 import org.martus.client.swingui.dialogs.UiBulletinModifyDlg.DeleteBulletinOnCancel;
 import org.martus.client.swingui.dialogs.UiBulletinModifyDlg.DoNothingOnCancel;
 import org.martus.client.swingui.foldertree.FolderNode;
+import org.martus.common.FieldSpec;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.clientside.UiBasicLocalization;
 import org.martus.common.database.DatabaseKey;
@@ -261,7 +262,17 @@ public class UiBulletinTable extends JTable implements ListSelectionListener, Dr
 		CancelHandler handler = new DoNothingOnCancel();
 		if(createClone)
 		{
-			Bulletin clone = store.createEmptyBulletin();
+			Bulletin clone = null;
+			FieldSpec[] originalBulletinsPublicFieldSpecs = b.getPublicFieldSpecs();
+			FieldSpec[] currentPublicFieldSpecs = store.getPublicFieldSpecs();
+			if(!FieldSpec.isAllFieldsPresent(originalBulletinsPublicFieldSpecs, currentPublicFieldSpecs))
+			{
+				if(mainWindow.confirmDlg(mainWindow, "UseBulletinsCustomFields"))
+					clone = store.createEmptyBulletin(originalBulletinsPublicFieldSpecs, b.getPrivateFieldSpecs());
+			}
+			if(clone == null)
+				clone = store.createEmptyBulletin();
+
 			try
 			{
 				clone.createDraftCopyOf(b, store.getDatabase());

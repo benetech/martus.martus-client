@@ -58,7 +58,7 @@ public class ActionMenuCustomFields extends UiMenuAction
 		
 		MartusApp app = mainWindow.getApp();
 		BulletinStore store = app.getStore();
-		FieldSpec[] existingSpecs = store.getPublicFieldTags();
+		FieldSpec[] existingSpecs = store.getPublicFieldSpecs();
 		FieldSpec[] newSpecs = getCustomizedFieldsFromUser(existingSpecs);
 		if(newSpecs == null)
 			return;
