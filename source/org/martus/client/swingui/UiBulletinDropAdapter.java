@@ -119,23 +119,11 @@ public abstract class UiBulletinDropAdapter implements DropTargetListener
 		dtde.acceptDrop(dtde.getDropAction());
 		//System.out.println("dropTransferableBulletin: accepted");
 
-		boolean worked = true;
+		String errorTag = null;
 		try
 		{
 			attemptDropBulletins(tb.getBulletins(), toFolder);
-		}
-		catch (BulletinAlreadyExistsException e)
-		{
-			worked = false;
-		}
-		catch (IOException e)
-		{
-			worked = false;
-		}
-		//System.out.println("dropTransferableBulletin: Drop Complete!");
-		
-		if(worked)
-		{
+			
 			BulletinStore store = observer.getStore();
 			Bulletin[] wereDropped = tb.getBulletins();
 			for (int i = 0; i < wereDropped.length; i++)
@@ -151,12 +139,22 @@ public abstract class UiBulletinDropAdapter implements DropTargetListener
 			store.saveFolders();
 			observer.folderContentsHaveChanged(fromFolder);
 		}
-
+		catch (BulletinAlreadyExistsException e)
+		{
+			errorTag = "DropErrorBulletinExists";
+		}
+		catch (Exception e)
+		{
+			errorTag = "DropErrors";
+		}
+		//System.out.println("dropTransferableBulletin: Drop Complete!");
+		
+		boolean worked = (errorTag == null);
 		tb.dispose();
 		dtde.dropComplete(worked);
 		observer.resetCursor(originalCursor);
 		if(!worked)
-			observer.notifyDlgBeep(observer, "DropErrorNotAllowed");
+			observer.notifyDlgBeep(observer, errorTag);
 	}
 
 	private void dropFiles(DropTargetDropEvent dtde)
