@@ -888,9 +888,9 @@ public class ClientBulletinStore extends BulletinStore
 					catch (BulletinAlreadyExistsException ignoreHarmless)
 					{
 					}
+					removeBulletinFromFolder(folderToFix, uidToRemove);
 				}
 				
-				removeBulletinFromFolder(folderToFix, uidToRemove);
 			}
 		}
 	}
