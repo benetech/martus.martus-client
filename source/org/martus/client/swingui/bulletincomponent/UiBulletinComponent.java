@@ -37,6 +37,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.Scrollable;
+import javax.swing.border.EmptyBorder;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
@@ -86,6 +87,7 @@ abstract public class UiBulletinComponent extends JPanel implements Scrollable, 
 	{
 		JTextField bulletinId = new JTextField();
 		bulletinId.setEditable(false);
+		bulletinId.setBorder(new EmptyBorder(0,0,0,0));
 		bulletinId.setText(currentBulletin.getLocalId());
 		Box hbox = Box.createHorizontalBox();
 		hbox.add(new JLabel(" " + mainWindow.getLocalization().getFieldLabel("BulletinId")+" "));
