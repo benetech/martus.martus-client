@@ -76,13 +76,16 @@ public class BulletinHtmlGenerator
 		{	
 			allPrivateValueTag = "yes";				
 			publicSectionTitle =  localization.getFieldLabel("privatesection");
+			if (!includePrivateData)
+			{
+				appendPublicHeader(html, publicSectionTitle);	
+				appendTailHtml(html, b);
+				return html.toString();
+			}
 		}
 		
-		html.append("<tr><td colspan='2'><u><b>");
-		html.append(publicSectionTitle);
-		html.append("</b></u></td></tr>");
-		html.append("\n");
 
+		appendPublicHeader(html, publicSectionTitle);
 		html.append(getFieldHtmlString(localization.getFieldLabel("allprivate"), localization.getButtonLabel(allPrivateValueTag)));
 
 		FieldSpec[] standardFieldTags = b.getPublicFieldSpecs();
@@ -101,6 +104,21 @@ public class BulletinHtmlGenerator
 			html.append(getSectionHtmlString(b, privateFieldTags));
 			html.append(getAttachmentsHtmlString(b.getPrivateAttachments(), database));
 		}
+		
+		appendTailHtml(html, b);
+		return html.toString();
+	}
+	
+	private void appendPublicHeader(StringBuffer html, String title)
+	{
+		html.append("<tr><td colspan='2'><u><b>");
+		html.append(title);
+		html.append("</b></u></td></tr>");
+		html.append("\n");
+	}
+	
+	private void appendTailHtml(StringBuffer html, Bulletin b )
+	{
 		html.append("<tr></tr>");
 		html.append(localization.getFieldLabel("BulletinId")+" ");
 		html.append(b.getLocalId());
@@ -112,7 +130,6 @@ public class BulletinHtmlGenerator
 		html.append(b.getLastSavedDateTime());
 		html.append("</table>");
 		html.append("</html>");
-		return html.toString();
 	}
 
 	private String getSectionHtmlString(Bulletin b, FieldSpec[] standardFieldTags)

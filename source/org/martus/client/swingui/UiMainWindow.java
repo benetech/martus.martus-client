@@ -1067,7 +1067,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		frame.getContentPane().add(scroller);
 		frame.pack();
 		//If you want to see what is being printed uncomment out this next line
-		frame.show();
+		//frame.show();
 		PrintPageFormat format = new PrintPageFormat();
 		JComponentVista vista = new JComponentVista(view, format);
 		PrinterJob job = PrinterJob.getPrinterJob();
