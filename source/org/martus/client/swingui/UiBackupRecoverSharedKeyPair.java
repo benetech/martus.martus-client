@@ -183,7 +183,7 @@ public class UiBackupRecoverSharedKeyPair
 		while(true)
 		{
 			String windowTitle = localization.getWindowTitle("SaveShareKeyPair");
-			UiFileChooser.FileDialogResults results = UiFileChooser.displayFileOpenDialog(mainWindow, windowTitle, new File("", " "));
+			UiFileChooser.FileDialogResults results = UiFileChooser.displayFileOpenDialog(mainWindow, windowTitle, " ");
 			
 			if (!results.wasCancelChoosen())
 			{
@@ -257,7 +257,7 @@ public class UiBackupRecoverSharedKeyPair
 		{
 			String windowTitle = localization.getWindowTitle("SaveShareKeyPair");
 			String fileName = defaultFileName + "-1" + MartusApp.SHARE_KEYPAIR_FILENAME_EXTENSION;
-			UiFileChooser.FileDialogResults results = UiFileChooser.displayFileSaveDialog(mainWindow, windowTitle, new File("", fileName));
+			UiFileChooser.FileDialogResults results = UiFileChooser.displayFileSaveDialog(mainWindow, windowTitle, fileName);
 			
 			if (!results.wasCancelChoosen())
 			{	

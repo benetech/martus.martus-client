@@ -49,13 +49,13 @@ public class UiRecoverKeyPairFromBackup
 	public boolean recoverPrivateKey()
 	{
 		mainWindow.notifyDlg("RecoveryProcessBackupFile");
-		File startingDirectory = new File("");
+		File startingDirectory = UiFileChooser.createFileInUsersHomeDirectory(" ");
 		while(true)
 		{
 			String windowTitle = localization.getWindowTitle("RecoverKeyPair");
 			boolean showCancelDlg = true;
 			boolean showUnableToRecoverDlg = false;
-			UiFileChooser.FileDialogResults results = UiFileChooser.displayFileOpenDialog(mainWindow, windowTitle, new File("", " "), startingDirectory);
+			UiFileChooser.FileDialogResults results = UiFileChooser.displayFileOpenDialog(mainWindow, windowTitle, startingDirectory);
 			if (!results.wasCancelChoosen())
 			{
 				File backupFile = results.getFileChoosen();

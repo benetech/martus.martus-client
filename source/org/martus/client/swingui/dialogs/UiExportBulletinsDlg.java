@@ -58,9 +58,12 @@ public class UiExportBulletinsDlg extends JDialog implements ActionListener
 	public UiExportBulletinsDlg(UiMainWindow mainWindowToUse, Vector bulletinsToExport, String defaultName)
 	{
 		super(mainWindowToUse, "", true);
-		defaultFileName = defaultName;
 		mainWindow = mainWindowToUse;
 		bulletins = bulletinsToExport;
+		if(defaultName==null && bulletins.size()==1)
+			defaultFileName = extractTitles(bulletins)[0];
+		else
+			defaultFileName = defaultName;
 		constructDialog();
 	}
 
@@ -142,8 +145,10 @@ public class UiExportBulletinsDlg extends JDialog implements ActionListener
 		String windowTitle = mainWindow.getLocalization().getWindowTitle("ExportBulletinsSaveAs");
 		if(defaultFileName != null && defaultFileName.length() > 0)
 			defaultFileName += ".xml";
+		else
+			defaultFileName = " ";
 	
-		UiFileChooser.FileDialogResults results = UiFileChooser.displayFileSaveDialog(UiExportBulletinsDlg.this, windowTitle, new File("", defaultFileName));
+		UiFileChooser.FileDialogResults results = UiFileChooser.displayFileSaveDialog(UiExportBulletinsDlg.this, windowTitle, defaultFileName);
 		if (results.wasCancelChoosen())
 			return null;
 

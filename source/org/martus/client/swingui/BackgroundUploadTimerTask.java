@@ -73,35 +73,42 @@ class BackgroundUploadTimerTask extends TimerTask
 	{
 		UiProgressMeter progressMeter = mainWindow.statusBar.getBackgroundProgressMeter();
 		String tag = "StatusReady";
-		try
-		{
-			BackgroundUploader.UploadResult uploadResult = uploader.backgroundUpload(); 
-			mainWindow.uploadResult = uploadResult.result;
-			if(uploadResult.result == null)
+		if(mainWindow.isServerConfigured())
+		{	
+			try
 			{
-				tag = "UploadFailedProgressMessage"; 
-				if(uploadResult.exceptionThrown == null)
-					tag = "NoServerAvailableProgressMessage";
+				BackgroundUploader.UploadResult uploadResult = uploader.backgroundUpload(); 
+				mainWindow.uploadResult = uploadResult.result;
+				if(uploadResult.result == null)
+				{
+					tag = "UploadFailedProgressMessage"; 
+					if(uploadResult.exceptionThrown == null)
+						tag = "NoServerAvailableProgressMessage";
+				}
+				else if(uploadResult.uid != null)
+				{
+					//System.out.println("UiMainWindow.Tick.run: " + uploadResult);
+					mainWindow.folderContentsHaveChanged(getStore().getFolderSent());
+					mainWindow.folderContentsHaveChanged(getStore().getFolderOutbox());
+					mainWindow.folderContentsHaveChanged(getStore().getFolderDraftOutbox());
+					mainWindow.folderContentsHaveChanged(getApp().createOrFindFolder(getStore().getNameOfFolderDamaged()));
+				}
 			}
-			else if(uploadResult.uid != null)
+			catch (MartusApp.DamagedBulletinException e)
 			{
-				//System.out.println("UiMainWindow.Tick.run: " + uploadResult);
-				mainWindow.folderContentsHaveChanged(getStore().getFolderSent());
+				ThreadedNotify damagedBulletin = new ThreadedNotify("DamagedBulletinMovedToDiscarded");
+				SwingUtilities.invokeAndWait(damagedBulletin);
 				mainWindow.folderContentsHaveChanged(getStore().getFolderOutbox());
 				mainWindow.folderContentsHaveChanged(getStore().getFolderDraftOutbox());
 				mainWindow.folderContentsHaveChanged(getApp().createOrFindFolder(getStore().getNameOfFolderDamaged()));
+				mainWindow.folderTreeContentsHaveChanged();
 			}
 		}
-		catch (MartusApp.DamagedBulletinException e)
+		else
 		{
-			ThreadedNotify damagedBulletin = new ThreadedNotify("DamagedBulletinMovedToDiscarded");
-			SwingUtilities.invokeAndWait(damagedBulletin);
-			mainWindow.folderContentsHaveChanged(getStore().getFolderOutbox());
-			mainWindow.folderContentsHaveChanged(getStore().getFolderDraftOutbox());
-			mainWindow.folderContentsHaveChanged(getApp().createOrFindFolder(getStore().getNameOfFolderDamaged()));
-			mainWindow.folderTreeContentsHaveChanged();
+			tag = "ServerNotConfiguredProgressMessage";
 		}
-		
+			
 		progressMeter.setStatusMessageTag(tag);
 		progressMeter.hideProgressMeter();
 	}

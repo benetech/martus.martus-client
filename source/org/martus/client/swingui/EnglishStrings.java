@@ -435,6 +435,7 @@ public class EnglishStrings
 "field:RetrieveHQSealedBulletinProgress=Retrieving Field Desk Sealed Bulletins",
 "field:RetrieveHQDraftBulletinProgress=Retrieving Field Desk Draft Bulletins",
 "field:NoServerAvailableProgressMessage=Server Not Available",
+"field:ServerNotConfiguredProgressMessage=Server needs to be configured.",
 "field:UploadFailedProgressMessage=Upload Failed",
 "field:BulletinSize=Size (Kb)",
 "field:ChunkProgressStatusMessage=Download Progress",

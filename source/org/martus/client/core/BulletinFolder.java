@@ -29,6 +29,7 @@ package org.martus.client.core;
 import java.util.Vector;
 
 import org.martus.common.bulletin.Bulletin;
+import org.martus.common.clientside.UiBasicLocalization;
 import org.martus.common.database.Database;
 import org.martus.common.database.DatabaseKey;
 import org.martus.common.packet.UniversalId;
@@ -64,6 +65,14 @@ public class BulletinFolder
 	{
 		return name;
 	}
+	
+	public String getLocalizedName(UiBasicLocalization localization)
+	{
+		if(isNameLocalized(name))
+			return localization.getLocalizedFolderName(name);
+		return name;
+	}
+	
 
 	public void preventRename()
 	{

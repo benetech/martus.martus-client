@@ -228,10 +228,14 @@ public class UiAttachmentEditor extends JPanel
 		public void actionPerformed(ActionEvent ae)
 		{
 			File last = getLastAttachmentLoadDirectory();
+			if(last == null)
+				last = UiFileChooser.createFileInUsersHomeDirectory(null);
+			File attachmentFileToAdd = new File(last, " ");
+			
 			UiBasicLocalization localization = mainWindow.getLocalization();
 			String buttonLabel = localization.getButtonLabel("addattachment");
 
-			UiFileChooser.FileDialogResults results = UiFileChooser.displayFileOpenDialog(UiAttachmentEditor.this, null, new File("", " "), last, buttonLabel, null);
+			UiFileChooser.FileDialogResults results = UiFileChooser.displayFileOpenDialog(UiAttachmentEditor.this, null, attachmentFileToAdd, last, buttonLabel, null);
 			if (results.wasCancelChoosen())
 				return;
 			

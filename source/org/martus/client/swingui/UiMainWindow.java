@@ -1086,6 +1086,11 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		boolean sendInfo = confirmDlg("RequestToSendContactInfoToServer");
 		configInfo.setSendContactInfoToServer(sendInfo);
 	}
+	
+	public boolean isServerConfigured()
+	{
+		return app.getConfigInfo().isServerConfigured();
+	}
 
 	public boolean reSignIn()
 	{
@@ -1407,7 +1412,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 			return;
 		
 		String windowTitle = getLocalization().getWindowTitle("saveBackupKeyPair");
-		UiFileChooser.FileDialogResults results = UiFileChooser.displayFileSaveDialog(this, windowTitle, new File("", MartusApp.KEYPAIR_FILENAME));
+		UiFileChooser.FileDialogResults results = UiFileChooser.displayFileSaveDialog(this, windowTitle, MartusApp.KEYPAIR_FILENAME);
 		
 		if (results.wasCancelChoosen())
 			return;
@@ -1741,7 +1746,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		{
 			bulletins.add(selectedFolder.getBulletinSorted(i));
 		}
-		String defaultFileName = MartusUtilities.createValidFileName(selectedFolder.getName());
+		String defaultFileName = MartusUtilities.createValidFileName(selectedFolder.getLocalizedName(localization));
 		new UiExportBulletinsDlg(this, bulletins, defaultFileName);
 	}
 
@@ -1755,7 +1760,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		}
 
 		Vector bulletins = UiExportBulletinsDlg.findBulletins(getStore(), uids);
-		new UiExportBulletinsDlg(this, bulletins, "");
+		new UiExportBulletinsDlg(this, bulletins, null);
 	}
 
 	public static boolean isAnyBulletinSelected(UiMainWindow window)
