@@ -1152,6 +1152,17 @@ public class MartusApp
 		return accountDirectories;
 	}
 	
+	public File getAccountDirectory(String digestOfAccountsPublicCode)
+	{
+		File accountDir = new File(getAccountsDirectory(), digestOfAccountsPublicCode);
+		if(accountDir.exists() && accountDir.isDirectory())
+			return accountDir;
+		if(!getKeyPairFile(getMartusDataRootDirectory()).exists())
+			return getMartusDataRootDirectory();
+		accountDir.mkdirs();
+		return accountDir;
+	}
+	
 	public boolean doesAnyAccountExist()
 	{
 		Vector accountDirectories = getAllAccountDirectories();
