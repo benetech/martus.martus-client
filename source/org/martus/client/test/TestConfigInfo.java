@@ -54,7 +54,7 @@ public class TestConfigInfo extends TestCaseEnhanced
 		ConfigInfo info = new ConfigInfo();
 		verifyEmptyInfo(info, "constructor");
 		
-		assertEquals(6, ConfigInfo.VERSION);
+		assertEquals(7, ConfigInfo.VERSION);
 
 		info.setAuthor("fred");
 		assertEquals("fred", info.getAuthor());
@@ -189,8 +189,6 @@ public class TestConfigInfo extends TestCaseEnhanced
 		assertTrue("Server should be setup now", newInfo.isServerConfigured());
 	}
 	
-	
-	
 	void setConfigToSampleData(ConfigInfo info)
 	{
 		info.setAuthor(sampleAuthor);
@@ -207,6 +205,7 @@ public class TestConfigInfo extends TestCaseEnhanced
 		info.setServerCompliance(sampleServerCompliance);
 		info.setCustomFieldSpecs(MartusConstants.deprecatedCustomFieldSpecs);
 		info.setCustomFieldXml(sampleCustomFieldXml);
+		info.setForceBulletinsAllPrivate(sampleForceAllPrivate);
 	}
 
 	void verifyEmptyInfo(ConfigInfo info, String label)
@@ -226,7 +225,7 @@ public class TestConfigInfo extends TestCaseEnhanced
 		assertEquals(label + ": sampleServerComplicance", "", info.getServerCompliance());
 		assertEquals(label + ": sampleCustomFieldSpecs", defaultCustomFieldSpecs, info.getCustomFieldSpecs());
 		assertEquals(label + ": sampleCustomFieldXml", "", info.getCustomFieldXml());
-
+		assertEquals(label + ": sampleForceAllPrivate", false, info.shouldForceBulletinsAllPrivate());
 	}
 
 	void verifySampleInfo(ConfigInfo info, String label, int VERSION)
@@ -267,6 +266,11 @@ public class TestConfigInfo extends TestCaseEnhanced
 			assertEquals(label + ": sampleCustomFieldXml", sampleCustomFieldXml, info.getCustomFieldXml());	
 		else
 			assertEquals(label + ": sampleCustomFieldXml", "", info.getCustomFieldXml());
+		
+		if(VERSION >= 7)
+			assertEquals(label + ": sampleForceAllPrivate", sampleForceAllPrivate, info.shouldForceBulletinsAllPrivate());
+		else
+			assertEquals(label + ": sampleForceAllPrivate", false, info.shouldForceBulletinsAllPrivate());
 	}
 
 	void verifyLoadSpecificVersion(ByteArrayInputStream inputStream, short VERSION)
@@ -311,6 +315,10 @@ public class TestConfigInfo extends TestCaseEnhanced
 			out.writeUTF(MartusConstants.deprecatedCustomFieldSpecs);
 			out.writeUTF(sampleCustomFieldXml);
 		}
+		if(VERSION >= 7)
+		{
+			out.writeBoolean(sampleForceAllPrivate);
+		}
 		out.close();
 		return outputStream.toByteArray();
 	}
@@ -338,4 +346,6 @@ public class TestConfigInfo extends TestCaseEnhanced
 	final String sampleCustomFieldSpecs = "language;author;custom,Custom Field;title;entrydate";
 //Version 6
 	final String sampleCustomFieldXml = "<CustomFields></CustomFields>";
+//Version 7
+	final boolean sampleForceAllPrivate = true;
 }

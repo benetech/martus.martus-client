@@ -68,6 +68,7 @@ public class ConfigInfo implements Serializable
 	public void setServerCompliance(String newCompliance) {serverCompliance = newCompliance;}
 	public void setCustomFieldSpecs(String newSpecs)	{customFieldSpecs = newSpecs;}
 	public void setCustomFieldXml(String newXml)	{customFieldXml = newXml;}
+	public void setForceBulletinsAllPrivate(boolean newForceBulletinsAllPrivate)	{forceBulletinsAllPrivate = newForceBulletinsAllPrivate; }
 
 	public void clearHQKey()						{ hqKey = ""; }
 	public void clearPromptUserRequestSendToServer() { mustAskUserToSendToServer = false; }
@@ -88,6 +89,7 @@ public class ConfigInfo implements Serializable
 	public String getServerCompliance() {return serverCompliance;}
 	public String getCustomFieldSpecs() {return customFieldSpecs;}
 	public String getCustomFieldXml()	{return customFieldXml;}
+	public boolean shouldForceBulletinsAllPrivate()	{ return forceBulletinsAllPrivate;}
 
 	public boolean isServerConfigured()
 	{
@@ -112,6 +114,7 @@ public class ConfigInfo implements Serializable
 		serverCompliance = "";
 		customFieldSpecs = LegacyCustomFields.buildFieldListString(StandardFieldSpecs.getDefaultPublicFieldSpecs());
 		customFieldXml = "";
+		forceBulletinsAllPrivate = false;
 	}
 
 	public static ConfigInfo load(InputStream inputStream)
@@ -146,6 +149,9 @@ public class ConfigInfo implements Serializable
 			if(loaded.version >= 6)
 				loaded.customFieldXml = in.readUTF();
 
+			if(loaded.version >= 7)
+				loaded.forceBulletinsAllPrivate = in.readBoolean();
+
 			in.close();
 		}
 		catch (Exception e)
@@ -175,6 +181,7 @@ public class ConfigInfo implements Serializable
 			out.writeUTF(serverCompliance);
 			out.writeUTF(MartusConstants.deprecatedCustomFieldSpecs);
 			out.writeUTF(customFieldXml);
+			out.writeBoolean(forceBulletinsAllPrivate);
 			out.close();
 		}
 		catch(Exception e)
@@ -185,7 +192,7 @@ public class ConfigInfo implements Serializable
 	
 	private boolean mustAskUserToSendToServer;
 	
-	public static final short VERSION = 6;
+	public static final short VERSION = 7;
 	//Version 1
 	private short version;
 	private String author;
@@ -207,4 +214,6 @@ public class ConfigInfo implements Serializable
 	private String customFieldSpecs;
 	//Version 6
 	private String customFieldXml;
+	//Version 7
+	private boolean forceBulletinsAllPrivate; 
 }

@@ -78,6 +78,7 @@ import org.martus.client.core.ConfigInfo;
 import org.martus.client.core.MartusApp;
 import org.martus.client.core.TransferableBulletinList;
 import org.martus.client.core.MartusApp.MartusAppInitializationException;
+import org.martus.client.core.MartusApp.SaveConfigInfoException;
 import org.martus.client.swingui.bulletincomponent.UiBulletinPreviewPane;
 import org.martus.client.swingui.bulletintable.UiBulletinTablePane;
 import org.martus.client.swingui.dialogs.UiAboutDlg;
@@ -1851,12 +1852,20 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	
 	public boolean getBulletinsAlwaysPrivate()
 	{
-		return bulletinsAlwaysPrivate;
+		return app.getConfigInfo().shouldForceBulletinsAllPrivate();
 	}
 
 	public void setBulletinsAlwaysPrivate(boolean newAllPrivateState)
 	{
-		bulletinsAlwaysPrivate = newAllPrivateState;
+		app.getConfigInfo().setForceBulletinsAllPrivate(newAllPrivateState);
+		try
+		{
+			app.saveConfigInfo();
+		}
+		catch (SaveConfigInfoException e)
+		{
+			notifyDlg("ErrorSavingConfig");
+		}
 		
 	}
 
@@ -2014,6 +2023,4 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	private static final int BACKGROUND_UPLOAD_CHECK_MILLIS = 5*1000;
 	private static final int BACKGROUND_TIMEOUT_CHECK_EVERY_X_MILLIS = 5*1000;
 	private boolean mainWindowInitalizing;
-	private boolean bulletinsAlwaysPrivate;
-
 }
