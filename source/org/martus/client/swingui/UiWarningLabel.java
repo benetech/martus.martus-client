@@ -28,11 +28,10 @@ package org.martus.client.swingui;
 
 import java.awt.Color;
 import java.awt.Font;
-
-import javax.swing.JLabel;
 import javax.swing.border.LineBorder;
+import org.martus.swing.UiLabel;
 
-public class UiWarningLabel extends JLabel
+public class UiWarningLabel extends UiLabel
 {
 	public UiWarningLabel()
 	{
