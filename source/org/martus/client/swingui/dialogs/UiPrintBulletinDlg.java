@@ -73,7 +73,7 @@ public class UiPrintBulletinDlg extends JDialog implements ActionListener
 		panel.setBorder(new EmptyBorder(10,10,10,10));
 		panel.setLayout(new ParagraphLayout());
 		panel.add(new JLabel(""), ParagraphLayout.NEW_PARAGRAPH);
-		panel.add(new UiWrappedTextArea(localization.getFieldLabel("PrintPrivateDataMessage")));
+		panel.add(new UiWrappedTextArea(localization.getFieldLabel("PrintPrivateDataMessage"), localization.getComponentOrientation()));
 		panel.add(new JLabel(""), ParagraphLayout.NEW_PARAGRAPH);
 		panel.add(includePrivate);
 		panel.add(new JLabel(""), ParagraphLayout.NEW_PARAGRAPH);

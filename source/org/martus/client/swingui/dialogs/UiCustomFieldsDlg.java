@@ -36,7 +36,6 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextArea;
 import javax.swing.border.EmptyBorder;
 
 import org.martus.client.swingui.UiLocalization;
@@ -152,7 +151,7 @@ public class UiCustomFieldsDlg extends JDialog
 		return result;
 	}
 
-	JTextArea text;
+	UiTextArea text;
 	String result = null;
 	UiMainWindow mainWindow;
 }

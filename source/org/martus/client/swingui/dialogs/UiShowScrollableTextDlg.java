@@ -80,7 +80,7 @@ public class UiShowScrollableTextDlg extends JDialog implements ActionListener
 				cancel.addActionListener(this);
 			}
 			
-			details = new UiWrappedTextArea(TokenReplacement.replaceTokens(text, tokenReplacement), 85);
+			details = new UiWrappedTextArea(TokenReplacement.replaceTokens(text, tokenReplacement), 85, localization.getComponentOrientation());
 			Rectangle rect = details.getVisibleRect();
 			details.setEditable(false);
 			UiScrollPane detailScrollPane = new UiScrollPane(details, UiScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
@@ -96,7 +96,7 @@ public class UiShowScrollableTextDlg extends JDialog implements ActionListener
 				String fieldLabel = localization.getFieldLabel(descriptionTag);
 				fieldLabel = TokenReplacement.replaceTokens(fieldLabel, tokenReplacement);
 				panel.add(new JLabel(" "));
-				panel.add(new UiWrappedTextArea(fieldLabel));
+				panel.add(new UiWrappedTextArea(fieldLabel, localization.getComponentOrientation()));
 			}
 			panel.add(new JLabel(" "));
 			panel.add(detailScrollPane);

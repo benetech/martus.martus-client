@@ -87,7 +87,7 @@ public class UiDisplayHelpDlg extends JDialog
 		}
 		lowercaseMessage = fileContents.toLowerCase();
 
-		msgArea = new UiWrappedTextArea(fileContents);
+		msgArea = new UiWrappedTextArea(fileContents, localization.getComponentOrientation());
 		highliter = new BasicTextUI.BasicHighlighter();
 		msgArea.setHighlighter(highliter);
 		msgArea.addKeyListener(new TabToOkButton());

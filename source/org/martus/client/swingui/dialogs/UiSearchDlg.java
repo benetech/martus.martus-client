@@ -59,7 +59,7 @@ public class UiSearchDlg extends JDialog  implements ActionListener
 		getContentPane().setLayout(new ParagraphLayout());
 
 		getContentPane().add(new JLabel(""), ParagraphLayout.NEW_PARAGRAPH);
-		getContentPane().add(new UiWrappedTextArea(localization.getFieldLabel("SearchBulletinRules")));
+		getContentPane().add(new UiWrappedTextArea(localization.getFieldLabel("SearchBulletinRules"), localization.getComponentOrientation()));
 
 		searchField = new JTextField(40);
 		searchField.setText(searchString);

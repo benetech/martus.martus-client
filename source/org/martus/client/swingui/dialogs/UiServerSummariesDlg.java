@@ -79,7 +79,7 @@ public class UiServerSummariesDlg extends JDialog
 		disabledBackgroundColor = getBackground();
 
 		String topMessageText = localization.getFieldLabel(topMessageTag);
-		UiWrappedTextArea retrieveMessage = new UiWrappedTextArea(topMessageText);
+		UiWrappedTextArea retrieveMessage = new UiWrappedTextArea(topMessageText, localization.getComponentOrientation());
 		tableBox = Box.createVerticalBox();
 		table = new RetrieveJTable(model);
 		oldBooleanRenderer = table.getDefaultRenderer(Boolean.class);

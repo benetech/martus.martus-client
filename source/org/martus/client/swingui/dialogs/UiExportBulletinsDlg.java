@@ -88,7 +88,7 @@ public class UiExportBulletinsDlg extends JDialog implements ActionListener
 		
 		Box upperStuff = Box.createVerticalBox();
 		upperStuff.add(new JLabel(" "));
-		upperStuff.add(new UiWrappedTextArea(localization.getFieldLabel("ExportBulletinDetails")));
+		upperStuff.add(new UiWrappedTextArea(localization.getFieldLabel("ExportBulletinDetails"), localization.getComponentOrientation()));
 		upperStuff.add(new JLabel(" "));
 		upperStuff.add(tocMsgAreaScrollPane);
 		upperStuff.add(new JLabel(" "));

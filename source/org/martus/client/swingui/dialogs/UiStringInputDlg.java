@@ -26,15 +26,14 @@ Boston, MA 02111-1307, USA.
 
 package org.martus.client.swingui.dialogs;
 
+import java.awt.ComponentOrientation;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
-
 import org.martus.common.clientside.UiBasicLocalization;
 import org.martus.swing.ParagraphLayout;
 import org.martus.swing.UiWrappedTextArea;
@@ -47,8 +46,8 @@ public class UiStringInputDlg extends JDialog
 		super(owner, "", true);
 
 		setTitle(localization.getWindowTitle("input" + baseTag));
-
-		UiWrappedTextArea label = new UiWrappedTextArea(localization.getFieldLabel("input" + baseTag + "entry"));
+		ComponentOrientation orientation = localization.getComponentOrientation();
+		UiWrappedTextArea label = new UiWrappedTextArea(localization.getFieldLabel("input" + baseTag + "entry"), orientation);
 		text = new JTextField(30);
 		text.setText(defaultText);
 
@@ -61,12 +60,12 @@ public class UiStringInputDlg extends JDialog
 		if(descriptionTag.length() > 0)
 		{
 			getContentPane().add(new JLabel(""), ParagraphLayout.NEW_PARAGRAPH);
-			getContentPane().add(new UiWrappedTextArea(localization.getFieldLabel(descriptionTag)));
+			getContentPane().add(new UiWrappedTextArea(localization.getFieldLabel(descriptionTag), localization.getComponentOrientation()));
 		}
 		if(rawDescriptionText.length() > 0)
 		{
 			getContentPane().add(new JLabel(""), ParagraphLayout.NEW_PARAGRAPH);
-			getContentPane().add(new UiWrappedTextArea(rawDescriptionText));
+			getContentPane().add(new UiWrappedTextArea(rawDescriptionText, localization.getComponentOrientation()));
 			
 		}
 		getContentPane().add(new JLabel(""), ParagraphLayout.NEW_PARAGRAPH);
