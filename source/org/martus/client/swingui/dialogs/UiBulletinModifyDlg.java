@@ -60,12 +60,14 @@ import org.martus.common.crypto.MartusCrypto.CryptoException;
 import org.martus.common.crypto.MartusCrypto.EncryptionException;
 import org.martus.swing.UiScrollPane;
 import org.martus.swing.Utilities;
+import org.martus.util.language.LanguageOptions;
 
 public class UiBulletinModifyDlg extends JFrame implements ActionListener, WindowListener, EncryptionChangeListener, LanguageChangeListener
 {
 	public UiBulletinModifyDlg(Bulletin b, UiMainWindow observerToUse)
 	{
 		observer = observerToUse;
+		initialNeedsLanguagePadding = LanguageOptions.needsLanguagePadding();
 
 		UiBasicLocalization localization = observer.getLocalization();
 		setTitle(localization.getWindowTitle("create"));
@@ -88,10 +90,7 @@ public class UiBulletinModifyDlg extends JFrame implements ActionListener, Windo
 			cancel = new JButton(localization.getButtonLabel("cancel"));
 			cancel.addActionListener(this);
 
-			scroller = new UiScrollPane();
-			scroller.getVerticalScrollBar().setFocusable(false);
-			scroller.getViewport().add(view);
-			scroller.getViewport().setScrollMode(JViewport.SIMPLE_SCROLL_MODE);
+			addScrollerView();
 
 			if(observer.getBulletinsAlwaysPrivate())
 				view.encryptAndDisableAllPrivate();
@@ -102,7 +101,6 @@ public class UiBulletinModifyDlg extends JFrame implements ActionListener, Windo
 			Box box = Box.createHorizontalBox();
 			Component buttons[] = {send, draft, cancel, Box.createHorizontalGlue()};
 			Utilities.addComponentsRespectingOrientation(box, buttons);
-			getContentPane().add(scroller);
 			getContentPane().add(box, BorderLayout.SOUTH);
 
 			setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
@@ -132,6 +130,17 @@ public class UiBulletinModifyDlg extends JFrame implements ActionListener, Windo
 		{
 			System.out.println(e);
 		}
+	}
+
+	private void addScrollerView() 
+	{
+		scroller = new UiScrollPane();
+		scroller.getVerticalScrollBar().setFocusable(false);
+		scroller.getViewport().add(view);
+		scroller.getViewport().setScrollMode(JViewport.SIMPLE_SCROLL_MODE);
+		getContentPane().add(scroller, BorderLayout.CENTER);
+		getContentPane().invalidate();
+		getContentPane().doLayout();
 	}
 
 	public void actionPerformed(ActionEvent ae)
@@ -280,20 +289,22 @@ public class UiBulletinModifyDlg extends JFrame implements ActionListener, Windo
 
 	public void languageChanged(String newLanguage) 
 	{
-		//TODO uncomment this out and implement this functionality correctly
-/*		if(MiniLocalization.doesLanguageRequirePadding(newLanguage))
+		if(observer.getLocalization().doesLanguageRequirePadding(newLanguage))
 			LanguageOptions.setLanguagePaddingRequired();
 		else
 			LanguageOptions.setLanguagePaddingNotRequired();
-		view.invalidate();
-		view.validate();
-		view.repaint();
-*/
+		getContentPane().remove(scroller);
+		addScrollerView();
 	}
+	
 	public void cleanupAndExit()
 	{
 		observer.doneModifyingBulletin();
 		saveEditorState(getSize(), getLocation());
+		if(initialNeedsLanguagePadding)
+			LanguageOptions.setLanguagePaddingRequired();
+		else
+			LanguageOptions.setLanguagePaddingNotRequired();
 		dispose();
 	}
 
@@ -334,6 +345,7 @@ public class UiBulletinModifyDlg extends JFrame implements ActionListener, Windo
 	JButton cancel;
 
 	boolean wasBulletinSavedFlag;
+	boolean initialNeedsLanguagePadding;
 
 }
 
