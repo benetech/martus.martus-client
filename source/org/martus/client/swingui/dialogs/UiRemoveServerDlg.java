@@ -81,7 +81,6 @@ public class UiRemoveServerDlg extends JDialog implements ActionListener
 		getRootPane().setDefaultButton(yes);
 
 		Utilities.centerDlg(this);
-		setResizable(false);
 		show();
 	}	
 

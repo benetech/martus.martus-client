@@ -91,7 +91,6 @@ public class UiTemplateDlg extends JDialog implements ActionListener
 
 		getRootPane().setDefaultButton(ok);
 		Utilities.centerDlg(this);
-		setResizable(false);
 	}
 
 
