@@ -32,7 +32,6 @@ import junit.framework.TestSuite;
 import org.martus.common.clientside.test.TestChoiceItem;
 import org.martus.common.clientside.test.TestCurrentUiState;
 import org.martus.common.clientside.test.TestDateUtilities;
-import org.martus.common.test.TestBulletinStore;
 
 public class TestClient
 {
@@ -53,10 +52,10 @@ public class TestClient
 		suite.addTest(new TestSuite(TestBulletinCache.class));
 		suite.addTest(new TestSuite(TestBulletinFolder.class));
 		suite.addTest(new TestSuite(TestBulletinSearcher.class));
-		suite.addTest(new TestSuite(TestBulletinStore.class));
 		suite.addTest(new TestSuite(TestBulletinTableModel.class));
 		suite.addTest(new TestSuite(TestBulletinXmlExporter.class));
 		suite.addTest(new TestSuite(TestChoiceItem.class));
+		suite.addTest(new TestSuite(TestClientBulletinStore.class));
 		suite.addTest(new TestSuite(TestClientSideNetworkHandler.class));
 		suite.addTest(new TestSuite(TestConfigInfo.class));
 		suite.addTest(new TestSuite(TestCurrentUiState.class));
