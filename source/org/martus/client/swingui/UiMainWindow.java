@@ -86,7 +86,7 @@ import org.martus.client.swingui.dialogs.UiBulletinModifyDlg;
 import org.martus.client.swingui.dialogs.UiConfigServerDlg;
 import org.martus.client.swingui.dialogs.UiContactInfoDlg;
 import org.martus.client.swingui.dialogs.UiCreateNewAccountProcess;
-import org.martus.client.swingui.dialogs.UiDisplayFileDlg;
+import org.martus.client.swingui.dialogs.UiDisplayHelpDlg;
 import org.martus.client.swingui.dialogs.UiExportBulletinsDlg;
 import org.martus.client.swingui.dialogs.UiInitialSigninDlg;
 import org.martus.client.swingui.dialogs.UiModelessBusyDlg;
@@ -946,7 +946,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 			else
 				helpStreamTOC = getClass().getResourceAsStream(helpTOCFileShortName);
 
-			new UiDisplayFileDlg(this, "Help", helpStream, "OnlineHelpMessage", helpStreamTOC, "OnlineHelpTOCMessage");
+			new UiDisplayHelpDlg(this, "Help", helpStream, "OnlineHelpMessage", helpStreamTOC, "OnlineHelpTOCMessage");
 		}
 		catch (IOException e)
 		{

@@ -63,9 +63,9 @@ import org.martus.util.UnicodeReader;
 
 
 
-public class UiDisplayFileDlg extends JDialog
+public class UiDisplayHelpDlg extends JDialog
 {
-	public UiDisplayFileDlg(UiMainWindow owner, String baseTag, InputStream fileStream, String tagMessage, InputStream fileStreamToc, String tagTOCMessage)
+	public UiDisplayHelpDlg(UiMainWindow owner, String baseTag, InputStream fileStream, String tagMessage, InputStream fileStreamToc, String tagTOCMessage)
 	{
 		super(owner, "", true);
 		mainWindow = owner;
@@ -238,7 +238,7 @@ public class UiDisplayFileDlg extends JDialog
 			{
 				HashMap tokenReplacement = new HashMap();
 				tokenReplacement.put("#S#", searchString);
-				if(mainWindow.confirmDlg(null, "helpStringNotFound", tokenReplacement))
+				if(mainWindow.confirmDlg(mainWindow, "helpStringNotFound", tokenReplacement))
 				{
 					msgArea.setCaretPosition(0);
 					previouslyFoundIndex = 0;
