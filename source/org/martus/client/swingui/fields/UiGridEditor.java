@@ -45,6 +45,25 @@ public class UiGridEditor extends UiGrid
 	{
 		public void keyPressed(KeyEvent e)
 		{
+			if(e.getKeyCode() ==  KeyEvent.VK_TAB && !e.isControlDown())
+			{
+				if(e.isShiftDown())
+				{
+					if(table.getSelectedRow()==0 && table.getSelectedColumn() == 0)
+					{
+						e.consume();
+						table.transferFocusBackward();
+					}
+				}
+				else if(table.getSelectedRow()== table.getRowCount()-1)
+				{
+					if(table.getSelectedColumn() == table.getColumnCount() -1)
+					{
+						e.consume();
+						table.transferFocus();
+					}
+				}
+			}
 		}
 
 		public void keyReleased(KeyEvent e)
@@ -54,7 +73,10 @@ public class UiGridEditor extends UiGrid
 		public void keyTyped(KeyEvent e)
 		{
 			if(e.getKeyChar()==KeyEvent.VK_ENTER)
+			{
 				model.addEmptyRow();
+				table.changeSelection(table.getRowCount()-1,0,false,false);
+			}
 		}
 	}
 }
