@@ -41,6 +41,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.AbstractTableModel;
 
+import org.martus.client.swingui.UiFocusListener;
 import org.martus.client.swingui.UiLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.common.bulletin.AttachmentProxy;
@@ -60,18 +61,25 @@ public class UiAttachmentEditor extends JPanel
 		model = new AttachmentTableModel();
 
 		table = new JTable(model);
+		table.setFocusable(false);
 		table.createDefaultColumnsFromModel();
 		table.setColumnSelectionAllowed(false);
 		Box hbox = Box.createHorizontalBox();
 		Box vbox = Box.createVerticalBox();
 
-		vbox.add(new JScrollPane(table));
+		JScrollPane scrollPane = new JScrollPane(table);
+		scrollPane.getHorizontalScrollBar().setFocusable(false);
+		scrollPane.getVerticalScrollBar().setFocusable(false);
+		vbox.add(scrollPane);
 
 		UiLocalization localization = mainWindowToUse.getLocalization();
 		JButton add = new JButton(localization.getButtonLabel("addattachment"));
+	
+		add.addFocusListener(new UiFocusListener(this));		
 		add.addActionListener(new AddHandler());
 		hbox.add(add);
 		remove = new JButton(localization.getButtonLabel("removeattachment"));
+		remove.addFocusListener(new UiFocusListener(this));		
 		remove.addActionListener(new RemoveHandler());
 		remove.setEnabled(false);
 		hbox.add(remove);

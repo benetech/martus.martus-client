@@ -26,11 +26,9 @@ Boston, MA 02111-1307, USA.
 
 package org.martus.client.swingui.fields;
 
-import java.awt.Rectangle;
-import java.awt.event.FocusEvent;
-import java.awt.event.FocusListener;
-
 import javax.swing.JComponent;
+
+import org.martus.client.swingui.UiFocusListener;
 
 abstract public class UiField
 {
@@ -75,26 +73,6 @@ abstract public class UiField
 		}
 	}
 	
-	class UiFocusListener implements FocusListener
-	{
-		 UiFocusListener(JComponent componentToUse)			
-		{
-			component = componentToUse;
-		}
-		
-		public void focusGained(FocusEvent arg0) 
-		{
-			Rectangle rect = component.getBounds();
-			JComponent parent = (JComponent)component.getParent();
-			parent.scrollRectToVisible(rect);
-		}
-
-		public void focusLost(FocusEvent arg0) 
-		{
-		}
-		
-		JComponent component;
-	}
 
 	public static final String TRUESTRING = "1";
 	public static final String FALSESTRING = "0";
