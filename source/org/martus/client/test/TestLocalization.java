@@ -63,7 +63,7 @@ public class TestLocalization extends TestCaseEnhanced
 	protected void tearDown() throws Exception
 	{
 		DirectoryUtils.deleteEntireDirectoryTree(translationDirectory);
-		assertFalse(translationDirectory.exists());
+		assertFalse("Translation directory still exists?", translationDirectory.exists());
 		super.tearDown();
 	}
 	public void testNonAsciiEnglishTranslations() throws Exception
@@ -162,31 +162,33 @@ public class TestLocalization extends TestCaseEnhanced
 	{
 		ChoiceItem[] languages = bd.getUiLanguages();
 		assertTrue("Should have multiple languages", languages.length > 1);
-		boolean foundEnglish = doesLanguageExist(Localization.ENGLISH);
+		boolean foundEnglish = doesLanguageExist(bd, Localization.ENGLISH);
 		assertTrue("must have english", foundEnglish);
 	}
 	
-	public void testAddedMTFLanguageFiles() throws Exception
+	public void testAddedMTFLanguageFile() throws Exception
 	{
+		translationDirectory = createTempDirectory();
+		UiLocalization myLocalization = new UiLocalization(translationDirectory, EnglishStrings.strings);
+
 		String someTestLanguageCode = "zz";
-		boolean foundSomeTestLanguage = doesLanguageExist(someTestLanguageCode);
+		boolean foundSomeTestLanguage = doesLanguageExist(myLocalization, someTestLanguageCode);
 		assertFalse("must not have testLanguage yet", foundSomeTestLanguage);
 		
 		File someTestLanguage = new File(translationDirectory,UiBasicLocalization.MARTUS_LANGUAGE_FILE_PREFIX + someTestLanguageCode + UiBasicLocalization.MARTUS_LANGUAGE_FILE_SUFFIX);
 		someTestLanguage.deleteOnExit();
 		UnicodeWriter out = new UnicodeWriter(someTestLanguage);
-		String fieldName = "test";
-		String germanTest = "german for test";
-		out.write("field:"+fieldName+"="+germanTest);
+		out.write("#");
 		out.close();
 		
-		foundSomeTestLanguage = doesLanguageExist(someTestLanguageCode);
+		foundSomeTestLanguage = doesLanguageExist(myLocalization, someTestLanguageCode);
 		assertTrue("should now have testLanguage", foundSomeTestLanguage);
 	}
 
-	private boolean doesLanguageExist(String languageCode)
+		
+	private boolean doesLanguageExist(UiLocalization dbToUse, String languageCode)
 	{
-		ChoiceItem[] languages = bd.getUiLanguages();
+		ChoiceItem[] languages = dbToUse.getUiLanguages();
 		boolean foundSomeTestLanguage = false;
 		for(int i = 0; i < languages.length; ++i)
 		{
