@@ -501,6 +501,7 @@ public class EnglishStrings
 "field:BulletinId=Bulletin Id:",
 "field:BulletinWasSent=Sent",
 "field:preferencesAllPrivate=Prevent creating public bulletins",
+"field:attachmentSizeForPrinting=Kb",
 
 "field:BulletinStatus=Bulletin Status:",
 "field:PrintPrivateData=Include private data in print out.",

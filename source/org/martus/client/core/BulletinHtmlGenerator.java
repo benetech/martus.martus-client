@@ -29,7 +29,6 @@ package org.martus.client.core;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.StringReader;
-
 import org.martus.client.swingui.fields.UiFlexiDateViewer;
 import org.martus.common.FieldSpec;
 import org.martus.common.GridData;
@@ -43,6 +42,7 @@ import org.martus.common.database.DatabaseKey;
 import org.martus.common.database.ReadableDatabase;
 import org.martus.common.database.Database.RecordHiddenException;
 import org.martus.common.packet.UniversalId;
+import org.martus.swing.UiLanguageDirection;
 
 public class BulletinHtmlGenerator
 {
@@ -66,8 +66,7 @@ public class BulletinHtmlGenerator
 		if(!yourBulletin)
 		{
 			html.append("<tr></tr>");
-			String bulletinNotYoursText = localization.getFieldLabel("BulletinNotYours");
-			html.append(bulletinNotYoursText+" ");		
+			html.append(getHtmlEscapedFieldHtmlString(localization.getFieldLabel("BulletinNotYours"),""));		
 			html.append("<tr></tr>");	
 		}
 
@@ -79,15 +78,15 @@ public class BulletinHtmlGenerator
 			publicSectionTitle =  localization.getFieldLabel("privatesection");
 			if (!includePrivateData)
 			{
-				appendPublicHeader(html, publicSectionTitle);	
+				appendTitleOfSection(html, publicSectionTitle);	
 				appendTailHtml(html, b);
 				return html.toString();
 			}
 		}
 		
 
-		appendPublicHeader(html, publicSectionTitle);
-		html.append(getFieldHtmlString(localization.getFieldLabel("allprivate"), localization.getButtonLabel(allPrivateValueTag)));
+		appendTitleOfSection(html, publicSectionTitle);
+		html.append(getHtmlEscapedFieldHtmlString(localization.getFieldLabel("allprivate"), localization.getButtonLabel(allPrivateValueTag)));
 
 		FieldSpec[] standardFieldTags = b.getPublicFieldSpecs();
 		html.append(getSectionHtmlString(b, standardFieldTags));
@@ -96,11 +95,7 @@ public class BulletinHtmlGenerator
 		if (includePrivateData)
 		{	
 			html.append("<tr></tr>");
-			String privateSectionTitle = localization.getFieldLabel("privatesection");
-			html.append("<tr><td colspan='2'><u><b>");
-			html.append(privateSectionTitle);
-			html.append("</b></u></td></tr>");
-			html.append("\n");
+			appendTitleOfSection(html, localization.getFieldLabel("privatesection"));
 			FieldSpec[] privateFieldTags = b.getPrivateFieldSpecs();
 			html.append(getSectionHtmlString(b, privateFieldTags));
 			html.append(getAttachmentsHtmlString(b.getPrivateAttachments(), database));
@@ -110,33 +105,26 @@ public class BulletinHtmlGenerator
 		return html.toString();
 	}
 	
-	private void appendPublicHeader(StringBuffer html, String title)
+	private void appendTitleOfSection(StringBuffer html, String title)
 	{
-		html.append("<tr><td colspan='2'><u><b>");
-		html.append(title);
-		html.append("</b></u></td></tr>");
+		html.append("<tr><td colspan='2'>");
+		html.append(getFieldHtmlString("<u><b>"+title+"</b></u>",""));
+		html.append("</td></tr>");
 		html.append("\n");
 	}	
 	
 	private void appendHeadHtml(StringBuffer html, Bulletin b )
 	{
-		html.append("<tr>");		
-		html.append(localization.getFieldLabel("BulletinLastSaved")+" ");			
-		html.append(b.getLastSavedDateTime());
-		html.append("</tr><tr>");		
-		html.append(localization.getFieldLabel("BulletinVersionNumber")+" ");			
-		html.append(b.getVersion());
-		html.append("</tr><tr>");		
-		html.append(localization.getFieldLabel("BulletinStatus")+" ");	
-		html.append(b.getStatus());
+		html.append(getHtmlEscapedFieldHtmlString(localization.getFieldLabel("BulletinLastSaved"), b.getLastSavedDateTime()));
+		html.append(getHtmlEscapedFieldHtmlString(localization.getFieldLabel("BulletinVersionNumber"), (new Integer(b.getVersion())).toString()));
+		html.append(getHtmlEscapedFieldHtmlString(localization.getFieldLabel("BulletinStatus"), b.getStatus()));
 		html.append("<tr></tr>");		
 	}
 	
 	private void appendTailHtml(StringBuffer html, Bulletin b )
 	{
 		html.append("<tr></tr>");
-		html.append(localization.getFieldLabel("BulletinId")+" ");
-		html.append(b.getLocalId());
+		html.append(getHtmlEscapedFieldHtmlString(localization.getFieldLabel("BulletinId"),b.getLocalId()));
 		html.append("</table>");
 		html.append("</html>");
 	}
@@ -148,13 +136,13 @@ public class BulletinHtmlGenerator
 		{
 			FieldSpec spec = standardFieldTags[fieldNum];
 			String tag = spec.getTag();
-			String label = spec.getLabel();			
+			String label = getHTMLEscaped(spec.getLabel());			
 		
-			String value = MartusUtilities.getXmlEncoded(b.get(tag));
+			String value = getHTMLEscaped(b.get(tag));
 			if(spec.getType() == FieldSpec.TYPE_DATE)
 				value = localization.convertStoredDateToDisplay(value);
 			else if(spec.getType() == FieldSpec.TYPE_LANGUAGE)
-				value = localization.getLanguageName(value);
+				value = getHTMLEscaped(localization.getLanguageName(value));
 			else if(spec.getType() == FieldSpec.TYPE_MULTILINE)
 				value = insertNewlines(value);
 			else if(spec.getType() == FieldSpec.TYPE_DATERANGE)
@@ -162,40 +150,52 @@ public class BulletinHtmlGenerator
 			else if(spec.getType() == FieldSpec.TYPE_BOOLEAN)
 			{
 				if(value.equals(FieldSpec.TRUESTRING))
-					value = localization.getButtonLabel("yes");
+					value = getHTMLEscaped(localization.getButtonLabel("yes"));
 				else
-					value = localization.getButtonLabel("no");
+					value = getHTMLEscaped(localization.getButtonLabel("no"));
 			}
 			else if(spec.getType() == FieldSpec.TYPE_GRID)
 			{
 				GridFieldSpec grid = (GridFieldSpec)spec;
-				value = "<table border='1'><tr>";
-				value += "<th>";
-				value +=grid.getColumnZeroLabel();
-				value +="</th>";
-				for(int i = 0; i < grid.getColumnCount(); ++i)
+				value = "<table border='1' align='right'><tr>";
+				String justification = "center";
+				if(!UiLanguageDirection.isRightToLeftLanguage())
+					value += getItemToAddForTable(grid.getColumnZeroLabel(),TABLE_HEADER, justification);
+				int columnCount = grid.getColumnCount();
+				for(int i = 0; i < columnCount; ++i)
 				{
-					value += "<th>";
-					value += grid.getColumnLabel(i);
-					value += "</th>";
+					String data = grid.getColumnLabel(i);
+					if(UiLanguageDirection.isRightToLeftLanguage())
+						data = grid.getColumnLabel((columnCount-1)-i);
+					value += getItemToAddForTable(data,TABLE_HEADER, justification);
 				}
+				if(UiLanguageDirection.isRightToLeftLanguage())
+					value += getItemToAddForTable(grid.getColumnZeroLabel(),TABLE_HEADER, justification);
 				value += "</tr>";
 				try
 				{
 					GridData gridData = new GridData();
 					gridData.setFromXml(b.get(tag));
-					for(int r =  0; r<gridData.getRowCount(); ++r)
+					int rowCount = gridData.getRowCount();
+
+					justification = "left";
+					if(UiLanguageDirection.isRightToLeftLanguage())
+						justification = "right";
+					
+					for(int r =  0; r<rowCount; ++r)
 					{
 						value += "<tr>";
-						value +="<td>";
-						value += Integer.toString(r+1);
-						value +="</td>";
-						for(int c = 0; c<gridData.getColumnCount(); ++c)
+						if(!UiLanguageDirection.isRightToLeftLanguage())
+							value += getItemToAddForTable(Integer.toString(r+1),TABLE_DATA, justification);
+						for(int c = 0; c<columnCount; ++c)
 						{
-							value +="<td>";
-							value += gridData.getValueAt(r, c);
-							value +="</td>";
+							String data = gridData.getValueAt(r, c);
+							if(UiLanguageDirection.isRightToLeftLanguage())
+								data = gridData.getValueAt(r, ((columnCount-1)-c));
+							value += getItemToAddForTable(data, TABLE_DATA, justification);
 						}
+						if(UiLanguageDirection.isRightToLeftLanguage())
+							value += getItemToAddForTable(Integer.toString(r+1),TABLE_DATA, justification);
 						value += "</tr>";
 					}
 				}
@@ -209,12 +209,17 @@ public class BulletinHtmlGenerator
 			}
 			
 			if(StandardFieldSpecs.isStandardFieldTag(tag))
-				label = localization.getFieldLabel(tag);
+				label = getHTMLEscaped(localization.getFieldLabel(tag));
 							
 			String fieldHtml = getFieldHtmlString(label, value);
 			sectionHtml += fieldHtml;
 		}
 		return sectionHtml;
+	}
+
+	private String getItemToAddForTable(String data, String type, String justification)
+	{
+		return "<"+type+" align='"+justification+"'>"+getHTMLEscaped(data)+"</"+type+">";
 	}
 
 	private String getSizeInKb(int sizeBytes)
@@ -264,16 +269,36 @@ public class BulletinHtmlGenerator
 		{
 			AttachmentProxy aProxy = attachments[i];
 			String label = aProxy.getLabel();
-			String size = getAttachmentSize(db, aProxy.getUniversalId());
-			attachmentList += "<p>" + label + "    ("+size+ "Kb)</p>";
+			String size = "( " + getAttachmentSize(db, aProxy.getUniversalId())+ " " + localization.getFieldLabel("attachmentSizeForPrinting")+ " )";
+			if(UiLanguageDirection.isRightToLeftLanguage())
+			{
+				String tmp = label;
+				label = size;
+				size = tmp;
+			}
+
+			attachmentList += "<p>" + getHTMLEscaped(label) + "    " + getHTMLEscaped(size) + "</p>";
 		}
 		return getFieldHtmlString(localization.getFieldLabel("attachments"), attachmentList);
+	}
+
+	private String getHtmlEscapedFieldHtmlString(String label, String value)
+	{
+		return getFieldHtmlString(getHTMLEscaped(label), getHTMLEscaped(value));
 	}
 
 	private String getFieldHtmlString(String label, String value)
 	{
 		StringBuffer fieldHtml = new StringBuffer(value.length() + 100);
-		fieldHtml.append("<tr><td width='15%' align='right' valign='top'>");		
+		String width = "15%";
+		if(UiLanguageDirection.isRightToLeftLanguage())
+		{
+			String tmp = label;
+			label = value;
+			value = tmp;
+			width = "70%";
+		}
+		fieldHtml.append("<tr><td width='"+width+"' align='right' valign='top'>");		
 		fieldHtml.append(label);
 		fieldHtml.append("</td>");
 		fieldHtml.append("<td valign='top'>");
@@ -292,7 +317,7 @@ public class BulletinHtmlGenerator
 
 		try
 		{
-			BufferedReader reader = new BufferedReader(new StringReader(value));
+			BufferedReader reader = new BufferedReader(new StringReader(getHTMLEscaped(value)));
 			String thisParagraph = null;
 			while((thisParagraph = reader.readLine()) != null)
 			{
@@ -309,8 +334,17 @@ public class BulletinHtmlGenerator
 		html.append(P_TAG_END);
 		return new String(html);
 	}
+	
+	private String getHTMLEscaped(String text)
+	{
+		return MartusUtilities.getXmlEncoded(text);
+	}
 
 	int width;
 	UiBasicLocalization localization;
 	Bulletin bulletin;
+
+	private static final String TABLE_HEADER = "th";
+	private static final String TABLE_DATA = "td";
+	
 }
