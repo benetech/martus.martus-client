@@ -35,6 +35,7 @@ public class UiToolBar extends JToolBar
 {
 	UiToolBar(UiMainWindow mainWindow)
 	{
+		setComponentOrientation(mainWindow.getLocalization().getComponentOrientation());
 		createToolbarActions(mainWindow);
 
 		setFloatable(false);
