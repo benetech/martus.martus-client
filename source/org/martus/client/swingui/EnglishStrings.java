@@ -213,7 +213,7 @@ public class EnglishStrings
 
 "wintitle:notifyQuickEraseScrubWorked=Quick Erase",
 "wintitle:RemoveServer=Remove Server",
-"wintitle:confirmQuickEraseReminder=Quick Erase Reminder",
+"wintitle:confirmQuickEraseOutboxNotEmpty=Quick Erase Reminder",
 
 
 "button:help=Help",
@@ -539,8 +539,8 @@ public class EnglishStrings
 "field:confirmExportUnknownTagseffect=If you continue with the export, any unknown information will not be exported.",
 "field:confirmQuickEraseDeleteKeyPaircause=This will delete your keypair file on this computer.",
 "field:confirmQuickEraseDeleteKeyPaireffect=Clicking on yes will delete your keypair file which means you will not be able to open Martus with the same account unless you have a backup of your keypair on a floppy disk.",
-"field:confirmQuickEraseRemindercause=Please Note: There are bulletins in your outbox that have not been sent to a server. If you continue these bulletins will be lost.",
-"field:confirmQuickEraseRemindereffect=Clicking on yes will bring you to the Quick Erase Options dialog, no will return you to Martus without erasing anything.",
+"field:confirmQuickEraseOutboxNotEmptycause=Please Note: There are bulletins in your outbox that have not been sent to a server. If you continue these bulletins will be lost.",
+"field:confirmQuickEraseOutboxNotEmptyeffect=Clicking on yes will bring you to the Quick Erase Options dialog, no will return you to Martus without erasing anything.",
 "field:confirmDeleteSubDirectorycause=There are still backup files and or directories in the Martus/Packets directory.  Do you wish to delete these files and folders as well?",
 "field:confirmDeleteSubDirectoryeffect=Clicking on yes will delete ALL files and folders in this directory.",
 		

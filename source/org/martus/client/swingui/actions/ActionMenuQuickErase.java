@@ -48,7 +48,7 @@ public class ActionMenuQuickErase extends UiMenuAction
 			
 		if (mainWindow.getApp().getFolderOutbox().getBulletinCount() > 0)
 		{				
-			if (!mainWindow.confirmDlgBeep(mainWindow, "QuickEraseReminder"))
+			if (!mainWindow.confirmDlgBeep(mainWindow, "QuickEraseOutboxNotEmpty"))
 				return;
 		}		
 		
