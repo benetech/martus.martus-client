@@ -43,12 +43,12 @@ public class UiSigninDlg extends UiBasicSigninDlg
 {
 	public UiSigninDlg(UiBasicLocalization localizationToUse, CurrentUiState uiStateToUse , JFrame owner, int mode)
 	{
-		this(localizationToUse, uiStateToUse, owner, mode, "");
+		this(localizationToUse, uiStateToUse, owner, mode, "", new char[0]);
 	}
 
-	public UiSigninDlg(UiBasicLocalization localizationToUse, CurrentUiState uiStateToUse, JFrame owner, int mode, String username)
+	public UiSigninDlg(UiBasicLocalization localizationToUse, CurrentUiState uiStateToUse, JFrame owner, int mode, String username, char[] password)
 	{
-		super(localizationToUse, uiStateToUse, owner, mode, username);
+		super(localizationToUse, uiStateToUse, owner, mode, username, password);
 	}
 
 	protected JComponent getLanguageComponent()

@@ -44,9 +44,9 @@ import org.martus.swing.UiWrappedTextArea;
 
 public class UiInitialSigninDlg extends UiSigninDlg
 {
-	public UiInitialSigninDlg(UiBasicLocalization localizationToUse, CurrentUiState uiStateToUse, JFrame owner, int mode)
+	public UiInitialSigninDlg(UiBasicLocalization localizationToUse, CurrentUiState uiStateToUse, JFrame owner, int mode, String userName, char[] password)
 	{
-		super(localizationToUse, uiStateToUse, owner, mode);
+		super(localizationToUse, uiStateToUse, owner, mode, userName, password);
 	}
 
 	protected JPanel createMainPanel()

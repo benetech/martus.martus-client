@@ -1593,27 +1593,29 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 			}
 			UiSigninDlg signinDlg = null;
 			int userChoice = UiSigninDlg.LANGUAGE_CHANGED;
+			String userName = "";
+			char[] userPassword = "".toCharArray();
 			while(userChoice == UiSigninDlg.LANGUAGE_CHANGED)
 			{	
 				if(mode==UiSigninDlg.INITIAL || mode == UiSigninDlg.INITIAL_NEW_RECOVER_ACCOUNT)
-					signinDlg = new UiInitialSigninDlg(getLocalization(), getCurrentUiState(), currentActiveFrame, mode);
+					signinDlg = new UiInitialSigninDlg(getLocalization(), getCurrentUiState(), currentActiveFrame, mode, userName, userPassword);
 				else
-					signinDlg = new UiSigninDlg(getLocalization(), getCurrentUiState(), currentActiveFrame, mode);
+					signinDlg = new UiSigninDlg(getLocalization(), getCurrentUiState(), currentActiveFrame, mode, userName, userPassword);
 				userChoice = signinDlg.getUserChoice();
+				userName = signinDlg.getName();
+				userPassword = signinDlg.getPassword();
 			}
 			if (userChoice != UiSigninDlg.SIGN_IN)
 				return userChoice;
 			try
 			{
-				String userName = signinDlg.getName();
-				char[] password = signinDlg.getPassword();
 				if(mode == UiSigninDlg.INITIAL)
 				{	
-					app.attemptSignIn(userName, password);
+					app.attemptSignIn(userName, userPassword);
 				}
 				else
 				{	
-					app.attemptReSignIn(userName, password);
+					app.attemptReSignIn(userName, userPassword);
 					currentActiveFrame.setState(NORMAL);
 				}
 				return UiSigninDlg.SIGN_IN;
@@ -1622,6 +1624,10 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 			{
 				notifyDlg(currentActiveFrame, "incorrectsignin");
 				busyDlg = new UiModelessBusyDlg(getLocalization().getFieldLabel("waitAfterFailedSignIn"));
+			}
+			finally
+			{
+				UiPasswordField.scrubData(userPassword);
 			}
 		}
 	}

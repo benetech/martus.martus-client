@@ -33,6 +33,7 @@ import javax.swing.JFileChooser;
 
 import org.martus.client.core.MartusApp;
 import org.martus.client.swingui.dialogs.UiSigninDlg;
+import org.martus.common.clientside.UiPasswordField;
 import org.martus.swing.UiFileChooser;
 import org.martus.util.Base64.InvalidBase64Exception;
 
@@ -112,8 +113,10 @@ public class UiRecoverKeyPairFromBackup
 		int userChoice = UiSigninDlg.LANGUAGE_CHANGED;
 		while(userChoice == UiSigninDlg.LANGUAGE_CHANGED)
 		{	
-			 signinDlg = new UiSigninDlg(localization, mainWindow.getCurrentUiState(), mainWindow, UiSigninDlg.SECURITY_VALIDATE);
+			signinDlg = new UiSigninDlg(localization, mainWindow.getCurrentUiState(), mainWindow, UiSigninDlg.SECURITY_VALIDATE, userName, userPassword);
 			userChoice = signinDlg.getUserChoice();
+			userName = signinDlg.getName();
+			userPassword = signinDlg.getPassword();
 		}
 		if(userChoice != UiSigninDlg.SIGN_IN)
 			throw new AbortedSignInException();
@@ -121,8 +124,6 @@ public class UiRecoverKeyPairFromBackup
 		FileInputStream inputStream = new FileInputStream(backupFile);
 		try
 		{
-			userName = signinDlg.getName();
-			userPassword = signinDlg.getPassword();
 			app.getSecurity().readKeyPair(inputStream, app.getCombinedPassPhrase(userName, userPassword));
 		}
 		catch (Exception e)
@@ -132,6 +133,7 @@ public class UiRecoverKeyPairFromBackup
 		finally
 		{
 			inputStream.close();
+			UiPasswordField.scrubData(userPassword);
 		}
 	}
 	

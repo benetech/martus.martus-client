@@ -33,6 +33,7 @@ import org.martus.client.core.Exceptions.BlankUserNameException;
 import org.martus.client.core.Exceptions.PasswordMatchedUserNameException;
 import org.martus.client.core.Exceptions.PasswordTooShortException;
 import org.martus.client.swingui.UiMainWindow;
+import org.martus.common.clientside.UiPasswordField;
 
 /**
  * UiCreateNewAccountProcess
@@ -141,16 +142,20 @@ public class UiCreateNewAccountProcess
 		}
 	}
 
-	private UiSigninDlg getSigninResults(int mode, String originalUserName)
+	private UiSigninDlg getSigninResults(int mode, String userName)
 	{
-		UiSigninDlg signinDlg1 = null;
+		UiSigninDlg signinDlg = null;
 		int userChoice = UiSigninDlg.LANGUAGE_CHANGED;
+		char[] userPassword = "".toCharArray();
 		while(userChoice == UiSigninDlg.LANGUAGE_CHANGED)
 		{	
-			signinDlg1 = new UiSigninDlg(mainWindow.getLocalization(), mainWindow.getCurrentUiState(), mainWindow, mode, originalUserName);
-			userChoice = signinDlg1.getUserChoice();
+			signinDlg = new UiSigninDlg(mainWindow.getLocalization(), mainWindow.getCurrentUiState(), mainWindow, mode, userName, userPassword);
+			userChoice = signinDlg.getUserChoice();
+			userName = signinDlg.getName();
+			userPassword = signinDlg.getPassword();
 		}
-		return signinDlg1;
+		UiPasswordField.scrubData(userPassword);
+		return signinDlg;
 	}
 
 	private void remindUsersToRememberPassword()
