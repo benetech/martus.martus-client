@@ -53,23 +53,56 @@ public class UiDateEditor extends UiField
 		monthCombo = new JComboBox(localizationToUse.getMonthLabels());
 		yearCombo = new JComboBox();
 		
-		buildDate(box, localizationToUse, yearCombo, monthCombo, dayCombo);
+		buildCustomDate(box, localizationToUse, yearCombo, monthCombo, dayCombo);
 		spec = specToUse;
-		
+ 				
 		component.add(box);
+	}
+	
+	public static void buildCustomDate(Box box, UiBasicLocalization localizationToUse,
+			JComboBox yCombo, JComboBox mCombo, JComboBox dCombo)
+	{							
+		buildDay(dCombo);
+		buildCustomYear(yCombo);
+		buildMonth(box,localizationToUse, yCombo, mCombo,dCombo);
 	}
 	
 	public static void buildDate(Box box, UiBasicLocalization localizationToUse,
 			JComboBox yCombo, JComboBox mCombo, JComboBox dCombo)
-	{						
-		for(int day=1; day <= 31; ++day)
-			dCombo.addItem(new Integer(day).toString());
-	
+	{							
+		buildDay(dCombo);
+		buildYear(yCombo);
+		buildMonth(box,localizationToUse, yCombo, mCombo,dCombo);
+	}
+		
+	private static void buildCustomYear(JComboBox yCombo)	
+	{
 		Calendar cal = new GregorianCalendar();
-		int thisYear = cal.get(Calendar.YEAR);
-		for(int year = 1900; year <= thisYear; ++year)
+		int thisYear = cal.get(Calendar.YEAR);			
+		
+		for(int year = 1900; year <= thisYear+10;++year)
 			yCombo.addItem(new Integer(year).toString());
-
+		
+		yCombo.setSelectedItem(new Integer(thisYear).toString());	
+	}		
+	
+	private static void buildYear(JComboBox yCombo)	
+	{
+		Calendar cal = new GregorianCalendar();
+		int thisYear = cal.get(Calendar.YEAR);			
+		
+		for(int year = 1900; year <= thisYear; ++year)
+			yCombo.addItem(new Integer(year).toString());			
+	}		
+	
+	private static void buildDay(JComboBox dCombo)
+	{
+		for(int day=1; day <= 31; ++day)
+			dCombo.addItem(new Integer(day).toString());	
+	}
+	
+	private static void buildMonth(Box box, UiBasicLocalization localizationToUse,JComboBox yCombo, JComboBox mCombo, JComboBox dCombo)
+	{
 		String mdyOrder = DateUtilities.getMdyOrder(localizationToUse.getCurrentDateFormatCode());
 		for(int i = 0; i < mdyOrder.length(); ++i)
 		{
@@ -80,7 +113,7 @@ public class UiDateEditor extends UiField
 				case 'y': box.add(yCombo);	break;
 			}
 		}			
-	}			
+	}
 
 	public JComponent getComponent()
 	{
@@ -165,6 +198,7 @@ public class UiDateEditor extends UiField
 	JComboBox monthCombo;
 	JComboBox dayCombo;
 	JComboBox yearCombo;	
-	FieldSpec spec;
+	static FieldSpec spec;
+	boolean isCustomField;
 }
 

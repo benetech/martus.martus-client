@@ -114,8 +114,11 @@ public class UiFlexiDateEditor extends UiField
 			bgDateBox = Box.createHorizontalBox();								
 			bgDayCombo = new JComboBox();	
 			bgMonthCombo = new JComboBox(localization.getMonthLabels());
-			bgYearCombo = new JComboBox();					
-			UiDateEditor.buildDate(bgDateBox, localization, bgYearCombo, bgMonthCombo, bgDayCombo);
+			bgYearCombo = new JComboBox();
+			if(StandardFieldSpecs.isCustomFieldTag(spec.getTag()))					
+				UiDateEditor.buildCustomDate(bgDateBox, localization, bgYearCombo, bgMonthCombo, bgDayCombo);
+			else
+				UiDateEditor.buildDate(bgDateBox, localization, bgYearCombo, bgMonthCombo, bgDayCombo);	
 		}		
 		
 		return bgDateBox;											
@@ -130,8 +133,12 @@ public class UiFlexiDateEditor extends UiField
 			endDayCombo = new JComboBox();	
 			endMonthCombo = new JComboBox(localization.getMonthLabels());
 			endYearCombo = new JComboBox();
-			needToSetDefaultValue=true;						
-			UiDateEditor.buildDate(endDateBox, localization, endYearCombo, endMonthCombo, endDayCombo);
+			needToSetDefaultValue=true;	
+			
+			if(StandardFieldSpecs.isCustomFieldTag(spec.getTag()))					
+				UiDateEditor.buildCustomDate(endDateBox, localization, endYearCombo, endMonthCombo, endDayCombo);
+			else					
+				UiDateEditor.buildDate(endDateBox, localization, endYearCombo, endMonthCombo, endDayCombo);
 		}
 		
 		if (needToSetDefaultValue)
@@ -195,6 +202,7 @@ public class UiFlexiDateEditor extends UiField
 
 	public void validate() throws UiField.DataInvalidException 
 	{
+		
 		if(isFlexiDate())
 		{
 			if(getEndDate().before(getBeginDate()))
@@ -202,10 +210,10 @@ public class UiFlexiDateEditor extends UiField
 				bgDayCombo.requestFocus();
 				throw new DateRangeInvertedException();
 			}
-		}		
-
+		}
+		
 		if(StandardFieldSpecs.isCustomFieldTag(spec.getTag()))
-			return;
+			return;		
 		
 		Date today = new Date();
 		if (getBeginDate().after(today))
