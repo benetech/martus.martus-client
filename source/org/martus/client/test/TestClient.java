@@ -62,6 +62,7 @@ public class TestClient
 		suite.addTest(new TestSuite(TestDateUtilities.class));
 		suite.addTest(new TestSuite(TestFolderList.class));
 		suite.addTest(new TestSuite(TestGridTableModel.class));
+		suite.addTest(new TestSuite(testHQKeys.class));
 		suite.addTest(new TestSuite(TestMartusApp_NoServer.class));
 		suite.addTest(new TestSuite(TestMartusFlexidate.class));
 		suite.addTest(new TestSuite(TestLocalization.class));
