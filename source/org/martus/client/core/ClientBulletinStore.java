@@ -168,12 +168,17 @@ public class ClientBulletinStore extends BulletinStore
 	public synchronized void destroyBulletin(Bulletin b) throws IOException
 	{
 		UniversalId id = b.getUniversalId();
-		for(int f = 0; f < getFolderCount(); ++f)
-		{
-			removeBulletinFromFolder(getFolder(f), b);
-		}
+		removeFromAllFolders(id);
 		saveFolders();
 		removeBulletinFromStore(id);
+	}
+
+	private void removeFromAllFolders(UniversalId id)
+	{
+		for(int f = 0; f < getFolderCount(); ++f)
+		{
+			removeBulletinFromFolder(getFolder(f), id);
+		}
 	}
 
 	public synchronized void removeBulletinFromStore(UniversalId uid) throws IOException
@@ -857,12 +862,37 @@ public class ClientBulletinStore extends BulletinStore
 		}
 	}
 
-	public synchronized void addBulletinToFolder(BulletinFolder folder, UniversalId uId) throws BulletinAlreadyExistsException, IOException
+	public synchronized void addBulletinToFolder(BulletinFolder folder, UniversalId uidToAdd) throws BulletinAlreadyExistsException, IOException
 	{
-		if(!doesBulletinRevisionExist(uId))
+		Bulletin b = findBulletinByUniversalId(uidToAdd);
+		if(b == null)
 			return;
+		
+		folder.add(uidToAdd);
 
-		folder.add(uId);
+		String accountId = uidToAdd.getAccountId();
+		Vector history = b.getHistory();
+		for(int i = 0; i < history.size(); ++i)
+		{
+			String localId = (String)history.get(i);
+			UniversalId uidToRemove = UniversalId.createFromAccountAndLocalId(accountId, localId);
+			for(int f = 0; f < getFolderCount(); ++f)
+			{
+				BulletinFolder folderToFix = getFolder(f);
+				if(folderToFix.contains(uidToRemove))
+				{
+					try
+					{
+						folderToFix.add(uidToAdd);
+					}
+					catch (BulletinAlreadyExistsException ignoreHarmless)
+					{
+					}
+				}
+				
+				removeBulletinFromFolder(folderToFix, uidToRemove);
+			}
+		}
 	}
 	
 	public synchronized void addRepairBulletinToFolders(UniversalId uId) throws BulletinAlreadyExistsException, IOException

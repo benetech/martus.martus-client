@@ -794,6 +794,42 @@ public class TestClientBulletinStore extends TestCaseEnhanced
 		assertEquals("bad bulletin", -1, folder.find(badId2));
 
 	}
+	
+	public void testAddBulletinToFolderRemovesAncestors() throws Exception
+	{
+		FieldSpec[] publicFields = StandardFieldSpecs.getDefaultPublicFieldSpecs();
+		FieldSpec[] privateFields = StandardFieldSpecs.getDefaultPrivateFieldSpecs();
+		
+		Bulletin original = store.createEmptyBulletin();
+		original.setSealed();
+		store.saveBulletin(original);
+
+		Bulletin firstClone = store.createClone(original, publicFields, privateFields);
+		firstClone.setSealed();
+		store.saveBulletin(firstClone);
+		
+		Bulletin lastClone = store.createClone(firstClone, publicFields, privateFields);
+		lastClone.setSealed();
+		store.saveBulletin(lastClone);
+		
+		Bulletin unrelated = store.createEmptyBulletin();
+		store.saveBulletin(unrelated);
+		
+		BulletinFolder aFolder = store.createFolder("blah");
+		BulletinFolder otherFolder = store.getFolderDiscarded();
+
+		store.addBulletinToFolder(aFolder, unrelated.getUniversalId());
+		store.addBulletinToFolder(aFolder, original.getUniversalId());
+		store.addBulletinToFolder(aFolder, firstClone.getUniversalId());
+		assertEquals(2, aFolder.getBulletinCount());
+		assertTrue("lost unrelated (1)?", aFolder.contains(unrelated));
+		assertTrue("didn't update to first clone?", aFolder.contains(firstClone));
+		
+		store.addBulletinToFolder(otherFolder, lastClone.getUniversalId());
+		assertEquals(2, aFolder.getBulletinCount());
+		assertTrue("lost unrelated (2)?", aFolder.contains(unrelated));
+		assertTrue("didn't update to later clone?", aFolder.contains(lastClone));
+	}
 
 	public void testFolderToXml() throws Exception
 	{
