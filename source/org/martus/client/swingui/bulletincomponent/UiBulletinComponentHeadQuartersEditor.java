@@ -57,7 +57,7 @@ public class UiBulletinComponentHeadQuartersEditor extends UiBulletinComponentHe
 		tableModel = new HeadQuartersTableModelEdit(getLocalization());
 		Vector autorizedKeys = new Vector();
 		MartusApp app = mainWindow.getApp();
-		app.setHQLabelsIfPresent(authorizedToReadKeys);
+		app.addHQLabelsWherePossible(authorizedToReadKeys);
 		for (int i = 0; i < authorizedToReadKeys.size(); ++i) 
 		{
 			HQKey hqKeyToAddAuthorized = authorizedToReadKeys.get(i);

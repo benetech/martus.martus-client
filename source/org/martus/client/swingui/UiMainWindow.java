@@ -1182,7 +1182,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		Bulletin currentBulletin = table.getSingleSelectedBulletin();
 		if(currentBulletin == null)
 			return;
-		app.setHQLabelsIfPresent(currentBulletin.getAuthorizedToReadKeys());
+		app.addHQLabelsWherePossible(currentBulletin.getAuthorizedToReadKeys());
 		printBulletin(currentBulletin);
 		requestFocus(true);
 	}

@@ -207,7 +207,7 @@ public class MartusApp
 		}
 	}
 	
-	public void setHQLabelsIfPresent(HQKeys keys)
+	public void addHQLabelsWherePossible(HQKeys keys)
 	{
 		for(int i = 0; i < keys.size(); ++i)
 		{
