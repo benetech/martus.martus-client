@@ -988,6 +988,13 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		String serverIPAddress = serverInfoDlg.getServerIPAddress();
 		String serverPublicKey = serverInfoDlg.getServerPublicKey();
 		ClientSideNetworkGateway gateway = app.buildGateway(serverIPAddress, serverPublicKey);
+		
+		if(!app.isSSLServerAvailable(gateway))
+		{
+			notifyDlg("ServerSSLNotResponding");
+			inConfigServer = false;
+			return;
+		}
 	
 		String newServerCompliance = getServerCompliance(gateway);
 		if(!confirmServerCompliance("ServerComplianceDescription", newServerCompliance))
