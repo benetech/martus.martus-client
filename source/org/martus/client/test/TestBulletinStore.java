@@ -672,7 +672,7 @@ public class TestBulletinStore extends TestCaseEnhanced
 		Bulletin unsentToAndNotOnServer = createAndSaveBulletin();
 		store.setIsNotOnServer(unsentToAndNotOnServer);
 		
-		Vector onServer = new Vector();
+		HashSet onServer = new HashSet();
 
 		Bulletin sentAndOnServer = createAndSaveBulletin();
 		store.setIsOnServer(sentAndOnServer);

@@ -27,6 +27,7 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.swingui;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.TimerTask;
 import java.util.Vector;
@@ -132,7 +133,7 @@ class BackgroundUploadTimerTask extends TimerTask
 		
 		System.out.println("Entering BackgroundUploadTimerTask.getUpdatedListOfBulletinsOnServer");
 		String myAccountId = getApp().getAccountId();
-		Vector uidsOnServer = new Vector();
+		HashSet uidsOnServer = new HashSet(1000);
 		try
 		{
 			uidsOnServer.addAll(getUidsFromServer(myAccountId));

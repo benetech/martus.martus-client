@@ -95,6 +95,11 @@ public class BulletinFolder
 	{
 		return canDelete;
 	}
+	
+	public void setUnsortable()
+	{
+		canSort = false;
+	}
 
 	public int getBulletinCount()
 	{
@@ -239,7 +244,13 @@ public class BulletinFolder
 	{
 		if(sortedIdList == null)
 			return;
-
+		
+		if(!canSort)
+		{
+			sortedIdList.add(uid);
+			return;
+		}
+		
 		String thisValue = store.getFieldData(uid, sortTag);
 		int index;
 		for(index = 0; index < sortedIdList.size(); ++index)
@@ -275,6 +286,7 @@ public class BulletinFolder
 	private Vector sortedIdList;
 	private boolean canRename = true;
 	private boolean canDelete = true;
+	private boolean canSort = true;
 	private String sortTag = "eventdate";
 	private int sortDir = ASCENDING;
 }

@@ -36,6 +36,7 @@ import java.io.IOException;
 import java.io.StringReader;
 import java.io.UnsupportedEncodingException;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Set;
 import java.util.Vector;
 import java.util.zip.ZipFile;
@@ -651,12 +652,19 @@ public class BulletinStore
 	
 	private BulletinFolder getFolderOnServer()
 	{
-		return createOrFindFolder(ON_SERVER_FOLDER);
+		return createOrFindUnsortableFolder(ON_SERVER_FOLDER);
 	}
 	
 	private BulletinFolder getFolderNotOnServer()
 	{
-		return createOrFindFolder(NOT_ON_SERVER_FOLDER);
+		return createOrFindUnsortableFolder(NOT_ON_SERVER_FOLDER);
+	}
+	
+	private BulletinFolder createOrFindUnsortableFolder(String name)
+	{
+		BulletinFolder folder = createOrFindFolder(name);
+		folder.setUnsortable();
+		return folder;
 	}
 
 	public boolean needsFolderMigration()
@@ -790,38 +798,33 @@ public class BulletinStore
 		getFolderNotOnServer().removeAll();
 	}
 	
-	// synchronized because updateOnServerLists is called from background thread
-	public synchronized void updateOnServerLists(Vector uidsOnServer)
+	public void updateOnServerLists(Set uidsOnServer)
 	{
-		class Adjuster implements Database.PacketVisitor
-		{
-			Adjuster(Vector uidsOnServer)
-			{
-				knownOnServer = uidsOnServer;
-			}
-			
-			public void visit(DatabaseKey key)
-			{
-				UniversalId uid = key.getUniversalId();
-				if(knownOnServer.contains(uid))
-				{
-					if(!getFolderDraftOutbox().contains(uid))
-					{
-						setIsOnServer(uid);
-					}
-				}
-				else
-					setIsNotOnServer(uid);
-			}
-			
-			Vector knownOnServer;
-		}
-		
-		Adjuster onServerAdjuster = new Adjuster(uidsOnServer);
-		visitAllBulletins(onServerAdjuster);
+		HashSet uids = new HashSet(1000);
+		uids.addAll(getAllBulletinUids());
+		internalUpdateOnServerLists(uidsOnServer, uids);
 		saveFolders();
 	}
 	
+	//	 synchronized because updateOnServerLists is called from background thread
+	private synchronized void internalUpdateOnServerLists(Set uidsOnServer, HashSet uidsInStore)
+	{
+		BulletinFolder draftOutbox = getFolderDraftOutbox();
+		for(Iterator iter = uidsInStore.iterator(); iter.hasNext();)
+		{
+			UniversalId uid = (UniversalId) iter.next();
+			if(uidsOnServer.contains(uid))
+			{
+				if(!draftOutbox.contains(uid))
+				{
+					setIsOnServer(uid);
+				}
+			}
+			else
+				setIsNotOnServer(uid);
+		}
+	}
+
 	public synchronized void moveBulletin(Bulletin b, BulletinFolder from, BulletinFolder to)
 	{
 		if(from.equals(to))
@@ -1032,11 +1035,10 @@ public class BulletinStore
 
 	public synchronized void addBulletinToFolder(BulletinFolder folder, UniversalId uId) throws BulletinAlreadyExistsException, IOException
 	{
-		Bulletin b = findBulletinByUniversalId(uId);
-		if(b == null)
+		if(!doesBulletinExist(uId))
 			return;
 
-		folder.add(b);
+		folder.add(uId);
 	}
 	
 	public synchronized void addRepairBulletinToFolders(UniversalId uId) throws BulletinAlreadyExistsException, IOException
