@@ -101,12 +101,17 @@ public class MockMartusApp extends MartusApp
 			throw new IOException("AccountsDirectory");
 
 		File rootDir = getMartusDataRootDirectory();
+		File hashFile = getUserNameHashFile(rootDir);
+		hashFile.delete();
+		if(hashFile.exists())
+			throw new IOException("UserHashFile");
+		
 		rootDir.delete();
 		if(rootDir.exists())
 			throw new IOException("MartusRootDirectory");
 	}
 
-	public void setCurrentAccount(String userName, File accountDirectory)
+	public void setCurrentAccount(String userName, File accountDirectory) throws IOException
 	{
 		super.setCurrentAccount(userName, accountDirectory);
 		store = new BulletinStore(new MockClientDatabase());

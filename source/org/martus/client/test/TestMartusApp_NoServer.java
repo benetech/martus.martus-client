@@ -50,6 +50,7 @@ import org.martus.client.swingui.UiLocalization;
 import org.martus.common.MartusUtilities;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.crypto.MartusCrypto;
+import org.martus.common.crypto.MartusSecurity;
 import org.martus.common.crypto.MockMartusSecurity;
 import org.martus.common.database.Database;
 import org.martus.common.database.DatabaseKey;
@@ -683,6 +684,24 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		assertNotNull("keypair not restored?", app.getAccountId());
 		app.deleteAllFiles();
 		TRACE_END();
+	}
+	
+	public void testSetUserNameHashFile() throws Exception
+	{
+		MockMartusApp app = MockMartusApp.create();
+		File tempDirectory = createTempDirectory();
+		File hashFile = app.getUserNameHashFile(tempDirectory); 
+		assertFalse("Should not have this hash file yet", hashFile.exists());
+		String username = "chuck";
+		app.setCurrentAccount(username, tempDirectory);
+		assertTrue("Hash File should now exist", hashFile.exists());
+		UnicodeReader reader = new UnicodeReader(hashFile);
+		String hashOfUserName = reader.readLine();
+		reader.close();
+		assertEquals("Hash of user name should match file", MartusSecurity.getHexDigest(username), hashOfUserName);
+		
+		app.deleteAllFiles();
+		
 	}
 	
 	public void testAttemptSignInKeyPairVersionFailure() throws Exception

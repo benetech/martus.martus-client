@@ -76,6 +76,7 @@ import org.martus.util.FileInputStreamWithSeek;
 import org.martus.util.InputStreamWithSeek;
 import org.martus.util.ScrubFile;
 import org.martus.util.UnicodeReader;
+import org.martus.util.UnicodeWriter;
 
 
 public class MartusApp
@@ -1078,7 +1079,7 @@ public class MartusApp
 			tempAccountDir.delete();
 			tempAccountDir.mkdirs();
 			createAccountInternal(tempAccountDir, userName, userPassPhrase);
-			String realAccountDirName = MartusCrypto.getHexDigest(getSecurity().getPublicKeyString());
+			String realAccountDirName = MartusCrypto.getHexDigest(getAccountId());
 			File realAccountDir = new File(accountsDirectory, realAccountDirName);
 			tempAccountDir.renameTo(realAccountDir);
 			setCurrentAccount(userName, realAccountDir);
@@ -1208,7 +1209,7 @@ public class MartusApp
 
 	public String getAccountId()
 	{
-		return store.getAccountId();
+		return getSecurity().getPublicKeyString();
 	}
 	
 	public boolean isOurBulletin(Bulletin b)
@@ -1283,10 +1284,32 @@ public class MartusApp
 		}	
 	}
 
-	public void setCurrentAccount(String userName, File accountDirectory)
+	public void setCurrentAccount(String userName, File accountDirectory) throws IOException
 	{
 		currentUserName = userName;
-		currentAccountDirectory = accountDirectory; 
+		currentAccountDirectory = accountDirectory;
+		updateUserNameHashFile();
+	}
+
+	private void updateUserNameHashFile() throws IOException
+	{
+		File hashUserName = getUserNameHashFile(currentAccountDirectory);
+		hashUserName.delete();
+		String hashOfUserName = MartusSecurity.getHexDigest(currentUserName);
+		UnicodeWriter writer = new UnicodeWriter(hashUserName);
+		try
+		{
+			writer.writeln(hashOfUserName);
+		}
+		finally
+		{
+			writer.close();
+		}
+	}
+
+	public File getUserNameHashFile(File accountDirectory)
+	{
+		return new File(accountDirectory, "AccountToken.txt");
 	}
 
 	public char[] getCombinedPassPhrase(String userName, char[] userPassPhrase)
