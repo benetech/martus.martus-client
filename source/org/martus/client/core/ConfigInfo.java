@@ -101,6 +101,11 @@ public class ConfigInfo implements Serializable
 		return (serverName.length()>0 && serverPublicKey.length()>0);
 	}
 	
+	public boolean isOldVersion()
+	{
+		return version < VERSION;
+	}
+	
 	public void clear()
 	{
 		version = VERSION;

@@ -63,6 +63,7 @@ public class TestConfigInfo extends TestCaseEnhanced
 
 		info.clear();
 		verifyEmptyInfo(info, "clear");
+		assertFalse("A blank config Info can't be old", info.isOldVersion());
 	}
 
 	public void testHasEnoughContactInfo() throws Exception
@@ -251,6 +252,11 @@ public class TestConfigInfo extends TestCaseEnhanced
 		assertEquals(label + ": sampleTemplateDetails", sampleTemplateDetails, info.getTemplateDetails());
 		assertEquals(label + ": sampleHQKey", sampleHQKey, info.getLegacyHQKey());
 
+		if(VERSION != ConfigInfo.VERSION)
+			assertTrue(label+":Should be an old Config file", info.isOldVersion());
+		else
+			assertFalse(label+":Current Version can't be old", info.isOldVersion());
+		
 		if(VERSION >= 2)
 			assertEquals(label + ": sampleSendContactInfoToServer", sampleSendContactInfoToServer, info.shouldContactInfoBeSentToServer());
 		else

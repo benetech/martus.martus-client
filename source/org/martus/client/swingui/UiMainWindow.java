@@ -237,10 +237,20 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		try
 		{
 			app.loadConfigInfo();
+			if(app.getConfigInfo().isOldVersion())
+			{
+				if(!confirmDlg("NewerConfigInfoFileFound"))
+					exitWithoutSavingState();
+				app.saveConfigInfo();
+			}
 		}
 		catch (LoadConfigInfoException e)
 		{
 			notifyDlg("corruptconfiginfo");
+		}
+		catch(SaveConfigInfoException e)
+		{
+			notifyDlg("ErrorSavingConfig");
 		}
 		
 		if(createdNewAccount)

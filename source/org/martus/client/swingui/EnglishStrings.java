@@ -85,6 +85,7 @@ public class EnglishStrings
 "wintitle:confirmUnAuthoredBulletinDeleteBeforePaste=UnAuthored Bulletin Already Exists",
 "wintitle:confirmRemoveMartus=Delete All Data and Remove Martus",
 "wintitle:confirmDeleteMyData=Delete My Data",
+"wintitle:confirmNewerConfigInfoFileFound=Downgrade Warning",
 
 "wintitle:notifyDropErrorBulletinExists=Cannot Move Bulletin(s)",
 "wintitle:notifyDropErrors=Error Moving Bulletin(s)",
@@ -601,6 +602,8 @@ public class EnglishStrings
 "field:confirmRemoveMartuseffect=Answering Yes will delete all data, uninstall Martus and exit the program.  Answering No will return you to Martus with nothing deleted.",
 "field:confirmDeleteMyDatacause=You are about to delete your Martus data from this computer.",
 "field:confirmDeleteMyDataeffect=Answering Yes will delete your data and exit Martus.  Answering No will return you to Martus with nothing deleted.",
+"field:confirmNewerConfigInfoFileFoundcause=It appears that you are trying to run an older version of Martus.  Running this version of Martus may result in reduced functionality.",
+"field:confirmNewerConfigInfoFileFoundeffect=Answering Yes will continue to use this older version of Martus.  Answering No will exit Martus so you can upgrade to the latest version.",
 
 
 
