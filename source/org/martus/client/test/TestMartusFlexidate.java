@@ -31,8 +31,8 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 
 import org.martus.common.bulletin.Bulletin;
-import org.martus.common.test.TestCaseEnhanced;
 import org.martus.common.utilities.MartusFlexidate;
+import org.martus.util.TestCaseEnhanced;
 
 public class TestMartusFlexidate extends TestCaseEnhanced
 {

@@ -33,7 +33,7 @@ import org.martus.common.bulletin.Bulletin;
 import org.martus.common.clientside.test.*;
 import org.martus.common.database.MockClientDatabase;
 import org.martus.common.packet.UniversalId;
-import org.martus.common.test.TestCaseEnhanced;
+import org.martus.util.TestCaseEnhanced;
 
 public class TestBulletinTableModel extends TestCaseEnhanced
 {

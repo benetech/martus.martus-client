@@ -60,8 +60,8 @@ import org.martus.common.database.Database;
 import org.martus.common.database.DatabaseKey;
 import org.martus.common.database.FileDatabase;
 import org.martus.common.packet.UniversalId;
-import org.martus.common.test.TestCaseEnhanced;
 import org.martus.swing.Utilities;
+import org.martus.util.TestCaseEnhanced;
 import org.martus.util.UnicodeReader;
 import org.martus.util.UnicodeWriter;
 

@@ -30,7 +30,7 @@ import org.martus.client.core.CustomFieldSpecValidator;
 import org.martus.common.StandardFieldSpecs;
 import org.martus.common.FieldSpec;
 import org.martus.common.LegacyCustomFields;
-import org.martus.common.test.TestCaseEnhanced;
+import org.martus.util.TestCaseEnhanced;
 
 public class TestCustomFieldSpecValidator extends TestCaseEnhanced
 {

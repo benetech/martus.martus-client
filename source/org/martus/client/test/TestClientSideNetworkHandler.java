@@ -35,7 +35,7 @@ import org.apache.xmlrpc.XmlRpcException;
 import org.martus.client.core.ClientSideNetworkHandlerUsingXmlRpc;
 import org.martus.client.core.ClientSideNetworkHandlerUsingXmlRpcForNonSSL;
 import org.martus.common.crypto.MockMartusSecurity;
-import org.martus.common.test.TestCaseEnhanced;
+import org.martus.util.TestCaseEnhanced;
 
 public class TestClientSideNetworkHandler extends TestCaseEnhanced 
 {

@@ -38,8 +38,8 @@ import org.martus.common.clientside.ChoiceItem;
 import org.martus.common.clientside.DateUtilities;
 import org.martus.common.clientside.Localization;
 import org.martus.common.clientside.UiBasicLocalization;
-import org.martus.common.test.TestCaseEnhanced;
 import org.martus.util.StringInputStream;
+import org.martus.util.TestCaseEnhanced;
 import org.martus.util.UnicodeStringWriter;
 
 public class TestMartusLocalization extends TestCaseEnhanced

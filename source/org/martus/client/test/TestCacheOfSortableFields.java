@@ -37,8 +37,8 @@ import org.martus.common.crypto.MartusSecurity;
 import org.martus.common.crypto.MockMartusSecurity;
 import org.martus.common.database.MockClientDatabase;
 import org.martus.common.packet.UniversalId;
-import org.martus.common.test.TestCaseEnhanced;
 import org.martus.util.ByteArrayInputStreamWithSeek;
+import org.martus.util.TestCaseEnhanced;
 
 public class TestCacheOfSortableFields extends TestCaseEnhanced
 {

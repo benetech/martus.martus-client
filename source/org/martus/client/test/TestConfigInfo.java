@@ -39,8 +39,8 @@ import org.martus.common.MartusConstants;
 import org.martus.common.StandardFieldSpecs;
 import org.martus.common.crypto.MartusSecurity;
 import org.martus.common.network.NetworkInterfaceConstants;
-import org.martus.common.test.TestCaseEnhanced;
 import org.martus.util.Base64;
+import org.martus.util.TestCaseEnhanced;
 
 public class TestConfigInfo extends TestCaseEnhanced
 {

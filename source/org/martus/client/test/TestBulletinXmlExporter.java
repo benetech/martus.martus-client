@@ -39,7 +39,7 @@ import org.martus.common.bulletin.BulletinConstants;
 import org.martus.common.crypto.MockMartusSecurity;
 import org.martus.common.crypto.MartusCrypto.EncryptionException;
 import org.martus.common.database.MockClientDatabase;
-import org.martus.common.test.TestCaseEnhanced;
+import org.martus.util.TestCaseEnhanced;
 
 public class TestBulletinXmlExporter extends TestCaseEnhanced
 {

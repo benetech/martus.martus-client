@@ -28,7 +28,7 @@ package org.martus.client.test;
 
 import java.util.HashMap;
 
-import org.martus.common.test.TestCaseEnhanced;
+import org.martus.util.TestCaseEnhanced;
 import org.martus.util.TokenReplacement;
 import org.martus.util.TokenReplacement.TokenInvalidException;
 
