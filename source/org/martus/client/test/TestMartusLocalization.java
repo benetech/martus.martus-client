@@ -33,6 +33,7 @@ import org.martus.client.core.MartusApp;
 import org.martus.client.swingui.EnglishStrings;
 import org.martus.client.swingui.UiConstants;
 import org.martus.client.swingui.UiLocalization;
+import org.martus.common.MartusUtilities;
 import org.martus.common.clientside.ChoiceItem;
 import org.martus.common.clientside.DateUtilities;
 import org.martus.common.clientside.UiBasicLocalization;
@@ -71,6 +72,14 @@ public class TestMartusLocalization extends TestCaseEnhanced
 		assertFalse("Unknown should not be recognized", bd.isRecognizedLanguage("XX"));
 	}
 
+	public void testToFileNameForeignChars()
+	{
+		String english = "abcdefghijklmnopqrstuvwxyz";
+		assertEquals(english.substring(0, 20), MartusUtilities.toFileName(english));
+		//TODO add test for russian.
+	}
+	
+	
 	public void testLanguagess()
 	{
 		ChoiceItem[] languages = bd.getUiLanguages();

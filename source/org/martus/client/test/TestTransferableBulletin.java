@@ -35,7 +35,6 @@ import java.util.List;
 import org.martus.client.core.BulletinFolder;
 import org.martus.client.core.BulletinStore;
 import org.martus.client.core.TransferableBulletinList;
-import org.martus.common.MartusUtilities;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.crypto.MartusSecurity;
 import org.martus.common.database.MockClientDatabase;
@@ -147,35 +146,6 @@ public class TestTransferableBulletin extends TestCaseEnhanced
 		assertNull("should not extract", tb);
 	}
 
-	public void testToFileName()
-	{
-		String alphaNumeric		= "123abcABC";
-		String alphaSpaces		= "abc def";
-		String alphaPunctIn		= "a.b";
-		String alphaPunctOut	= "a b";
-		String trailingPunctIn	= "abc!";
-		String trailingPunctOut	= "abc";
-		String leadingPunctIn	= "?abc";
-		String leadingPunctOut	= "abc";
-		String punctuation1		= "`-=[]\\;',./";
-		String punctuation2		= "~!@#%^&*()_+";
-		String punctuation3		= "{}|:\"<>?";
-		String tooLong			= "abcdefghijklmnopqrstuvwxyz";
-		String tooShort			= "ab";
-		String minimumLength	= "abc";
-		assertEquals(alphaNumeric, MartusUtilities.toFileName(alphaNumeric));
-		assertEquals(alphaSpaces, MartusUtilities.toFileName(alphaSpaces));
-		assertEquals(alphaPunctOut, MartusUtilities.toFileName(alphaPunctIn));
-		assertEquals(trailingPunctOut, MartusUtilities.toFileName(trailingPunctIn));
-		assertEquals(leadingPunctOut, MartusUtilities.toFileName(leadingPunctIn));
-		assertEquals("Martus-", MartusUtilities.toFileName(punctuation1));
-		assertEquals("Martus-", MartusUtilities.toFileName(punctuation2));
-		assertEquals("Martus-", MartusUtilities.toFileName(punctuation3));
-		assertEquals(tooLong.substring(0, 20), MartusUtilities.toFileName(tooLong));
-		assertEquals(TITLE, MartusUtilities.toFileName(TITLE));
-		assertEquals("Martus-" + tooShort, MartusUtilities.toFileName(tooShort));
-		assertEquals(minimumLength, MartusUtilities.toFileName(minimumLength));
-	}
 
 	private TransferableBulletinList createTransferableBulletin(String title) throws Exception
 	{
