@@ -75,7 +75,7 @@ public class BulletinHtmlGenerator
 		html.append("</b></u></td></tr>");
 		html.append("\n");
 
-		html.append(getFieldHtmlString("allprivate", localization.getButtonLabel(allPrivateValueTag)));
+		html.append(getFieldHtmlString(localization.getFieldLabel("allprivate"), localization.getButtonLabel(allPrivateValueTag)));
 
 		FieldSpec[] standardFieldTags = b.getPublicFieldSpecs();
 		html.append(getSectionHtmlString(b, standardFieldTags));
@@ -231,7 +231,7 @@ public class BulletinHtmlGenerator
 			String size = getAttachmentSize(db, aProxy.getUniversalId());
 			attachmentList += "<p>" + label + "    ("+size+ "Kb)</p>";
 		}
-		return getFieldHtmlString("attachments", attachmentList);
+		return getFieldHtmlString(localization.getFieldLabel("attachments"), attachmentList);
 	}
 
 	private String getFieldHtmlString(String label, String value)
