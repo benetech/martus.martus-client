@@ -1,9 +1,9 @@
 ﻿# Martus Client Translation File
 # Language code:  th
 # Language name:  Thai
-# Exported date:  Tue Feb 15 15:49:02 PST 2005
-# Client version: Internal 2.6.0
-# Client build:   20050211.1523
+# Exported date:  Fri Feb 18 10:47:12 PST 2005
+# Client version: 2.6
+# Client build:   20050218.1527
 #
 # This file MUST be saved in UTF-8 format!
 # Lines beginning with # are comments and are ignored by Martus
@@ -135,10 +135,10 @@
 -6f62-button:ResetContents=เริ่มใหม่
 
 #_______________________________=Retrieve all bulletin revisions
--6965-button:RetrieveAllVersions=<Retrieve all bulletin revisions>
+-6965-button:RetrieveAllVersions=เอาคืนรายงานที่ปรับแก้ทั้งหมด
 
 #______________________________________________=Retrieve latest bulletin revision only
--9c45-button:RetrieveLatestBulletinRevisionOnly=<Retrieve latest bulletin revision only>
+-9c45-button:RetrieveLatestBulletinRevisionOnly=เอาคืนรายงานที่ปรับแก้ล่าสุดเท่านั้น
 
 #__________________________________=Accept
 -bb54-button:ServerComplianceAccept=ยอมรับ
@@ -150,7 +150,7 @@
 -f849-button:SignIn=เข้าสู่ระบบ
 
 #_______________________________________=View Selected Version...
--f943-button:ViewPreviousBulletinVersion=<View Selected Version...>
+-f943-button:ViewPreviousBulletinVersion=แสดงรายงานฉบับที่เลือก
 
 #_________________________________________=Switch to using regular keyboard
 -c1ee-button:VirtualKeyboardSwitchToNormal=เปลี่ยนไปใช้คีย์บอร์ดปกติ
@@ -402,7 +402,7 @@
 -1ef6-field:CreateCustomFieldsHelp1=รูปแบบรายงานถูกกำหนดได้โดยเอกสาร XML โดยปกติแล้วช่องข้อมูลมาตรฐานจะอยู่บนสุดของการประกาศช่องข้อมูลกำหนดเอง แต่ก็สามารถเอาออกได้ถ้าต้องการ อย่างไรก็ตาม มีอยู่ช่องข้อมูล 4 ช่องที่ไม่สามารถเอาออกได้คือ 'author' (ผู้รายงาน) 'entrydate' (วันที่ป้อนข้อมูล) 'language' (ภาษา) และ 'title' (ชื่อเรื่อง)\n\n
 
 #__________________________________=For custom (non-standard) fields, you first select the type of field you want.  The possible choices are 'BOOLEAN', 'DATE', 'DATERANGE', 'GRID', 'LANGUAGE', 'MULTILINE', and 'STRING'. \n\nFor each custom field you will need a unique identification tag.  This tag can be any word except those already used by the system (eg. 'author', 'summary', 'location', 'title' etc.), and cannot contain spaces or special characters.  Examples of choices are 'custom1', 'custom2', etc, or tags that are more descriptive like 'VictimsName'.\n Then you need a label which is displayed next to your custom field.  An example might be 'Name of 1st Witness'.\n\nAdditional Comments\n1. XML is case-sensitive ('Witness' is not the same as 'witness') \n2. quotes around type name can be single or double as long as they match (e.g. 'STRING" is not valid. It must be 'STRING' or "STRING") \n3. A Boolean field will be displayed as a checkbox when editing and Yes/No when previewed or printed.\n\nSee examples below:\n\n
--676b-field:CreateCustomFieldsHelp2=<สำหรับช่องข้อมูลกำหนดเอง (ไม่ใช่ช่องข้อมูลมาตรฐาน) คุณต้องเลือกชนิดของช่องข้อมูลที่คุณต้องการก่อน ทางเลือกที่เป็นไปได้มีดังนี้ 'BOOLEAN' (ใช่/ไม่ใช่), 'DATE' (วันที่), 'DATERANGE' (ช่วงวันที่), 'GRID' (ตาราง), 'LANGUAGE' (ภาษา), 'MULTILINE' (ข้อความหลายบรรทัด), และ 'STRING' (ข้อความบรรทัดเดียว) \n\nสำหรับแต่ละช่องข้อมูลกำหนดเอง คุณจะต้องระบุแท็กแต่ละช่องให้แตกต่างกัน แท็กนี้สามารถเป็นคำอะไรก็ได้ยกเว้นที่ระบบใช้แล้ว (เช่น 'author', 'summary', 'location', 'title' หรืออื่นๆ) และไม่สามารถมีช่องว่างหรืออักขระพิเศษได้ ตัวอย่างที่สามารใช้ได้เช่น 'custom1', 'custom2', อื่นๆ หรือแท็กที่อธิบายความหมายเช่น 'VictimsName' (ผู้รับเคราะห์) \n\nจากนั้นคุณต้องการป้ายชื่อซึ่งจะแสดงถัดจากช่องข้อมูลกำหนดเองของคุณ ตัวอย่างเช่น 'ชื่อของพยานปากที่หนึ่ง' \n\n อธิบายเพิ่มเติม\n1. ใน XML ตัวพิมพ์เล็ก และ ตัวพิมพ์ใหญ่มีความแตกต่างกัน\n2. เครื่องหมายคำพูดที่คร่อมชื่อสามารถเป็นได้ทั้ง เขาเดียว หรือ สองเขา(แต่ทั้งสองอันต้องเหมือนกัน)\n3. ช่องข้อมูลที่เป็น BOOLEAN (ใช่/ไม่ใช่) จะแสดงเป็น ช่องทำเครื่องหมายถูก เมื่อแก้ไข และแสดงเป็น ใช่/ไม่ใช่ เมื่อพิมพ์\n\nดูตัวอย่างด้านล่าง:\n\n>
+-676b-field:CreateCustomFieldsHelp2=<สำหรับช่องข้อมูลกำหนดเอง (ไม่ใช่ช่องข้อมูลมาตรฐาน) คุณต้องเลือกชนิดของช่องข้อมูลที่คุณต้องการก่อน ทางเลือกที่เป็นไปได้มีดังนี้ 'BOOLEAN' (ใช่/ไม่ใช่), 'DATE' (วันที่), 'DATERANGE' (ช่วงวันที่), 'GRID' (ตาราง), 'LANGUAGE' (ภาษา), 'MULTILINE' (ข้อความหลายบรรทัด), และ 'STRING' (ข้อความบรรทัดเดียว) \n\nสำหรับแต่ละช่องข้อมูลกำหนดเอง คุณจะต้องระบุแท็กแต่ละช่องให้แตกต่างกัน แท็กนี้สามารถเป็นคำอะไรก็ได้ยกเว้นที่ระบบใช้แล้ว (เช่น 'author', 'summary', 'location', 'title' หรืออื่นๆ) และไม่สามารถมีช่องว่างหรืออักขระพิเศษได้ ตัวอย่างที่สามารใช้ได้เช่น 'custom1', 'custom2', อื่นๆ หรือแท็กที่อธิบายความหมายเช่น 'VictimsName' (ผู้รับเคราะห์) \nจากนั้นคุณต้องการป้ายชื่อซึ่งจะแสดงถัดจากช่องข้อมูลกำหนดเองของคุณ ตัวอย่างเช่น 'ชื่อของพยานปากที่หนึ่ง' \n\n อธิบายเพิ่มเติม\n1. ใน XML ตัวพิมพ์เล็ก และ ตัวพิมพ์ใหญ่มีความแตกต่างกัน\n2. เครื่องหมายคำพูดที่คร่อมชื่อสามารถเป็นได้ทั้ง เขาเดียว หรือ สองเขา(แต่ทั้งสองอันต้องเหมือนกัน)\n3. ช่องข้อมูลที่เป็น BOOLEAN (ใช่/ไม่ใช่) จะแสดงเป็น ช่องทำเครื่องหมายถูก เมื่อแก้ไข และแสดงเป็น ใช่/ไม่ใช่ เมื่อพิมพ์\n\nดูตัวอย่างด้านล่าง:\n\n>
 
 #__________________________________=<Field type='STRING'>\n<Tag>custom1</Tag>\n<Label>Witness Name</Label>\n</Field>\n\n<Field type='LANGUAGE'>\n<Tag>new2</Tag>\n<Label>Witness Speaks</Label>\n</Field>\n\n<Field type='BOOLEAN'>\n<Tag>new3</Tag>\n<Label>Were guns used?</Label>\n</Field>\n\n<Field type='GRID'>\n<Tag>customgrid</Tag>\n<Label>Victim Information</Label>\n<GridSpecDetails>\n<Column><Label>Name of Victim</Label></Column>\n<Column><Label>Victim Age</Label></Column>\n<Column><Label>Victim Gender</Label></Column>\n<Column><Label>Victim Ethnicity</Label></Column>\n</GridSpecDetails>\n</Field>\n
 -c0a8-field:CreateCustomFieldsHelp3=<Field type='STRING'>\n<Tag>custom1</Tag>\n<Label>ชื่อพยาน</Label>\n</Field>\n\n<Field type='LANGUAGE'>\n<Tag>new2</Tag>\n<Label>คำให้การของพยาน</Label>\n</Field>\n\n<Field type='BOOLEAN'>\n<Tag>new3</Tag>\n<Label>มีการใช้อาวุธหรือไม่</Label>\n</Field>\n\n<Field type='GRID'>\n<Tag>customgrid</Tag>\n<Label>ข้อมูลเกี่ยวกับผู้เสียหาย</Label>\n<GridSpecDetails>\n<Column><Label>ชื่อผู้เสียหาย</Label></Column>\n<Column><Label>อายุ</Label></Column>\n<Column><Label>เพศ</Label></Column>\n<Column><Label>เชื้อชาติ</Label></Column>\n</GridSpecDetails>\n</Field>\n
@@ -1448,7 +1448,7 @@
 #________________=Title
 -768e-field:title=ชื่อเรื่อง
 
-#_____________________________=Thai 2.5
+#_____________________________=Thai 2.5 (only partial 2.6 update)
 -26a2-field:translationVersion=ไทย 2.5
 
 #___________________=Username
