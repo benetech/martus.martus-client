@@ -120,9 +120,9 @@ public class HeadQuartersTableModel extends UiTableModel
 
 	public Class getColumnClass(int column)
 	{
-		if(column == COLUMN_SELECTED)
+		if(column == COLUMN_SELECTED || column == COLUMN_DEFAULT)
 			return Boolean.class;
-		if(column == COLUMN_LABEL)
+		if(column == COLUMN_LABEL || column == COLUMN_PUBLIC_CODE)
 			return String.class;
 		return null;
 	}
@@ -134,15 +134,16 @@ public class HeadQuartersTableModel extends UiTableModel
 	
 	public boolean isCellEditable(int row, int column)
 	{
-		if(column == COLUMN_SELECTED)
+		if(column == COLUMN_SELECTED || column == COLUMN_DEFAULT)
 			return true;
 		return false;
 	}
 	
 
-	//UiMainWindow mainWindow;
 	Vector entries;
+	public int COLUMN_DEFAULT = -1;
 	public int COLUMN_SELECTED = -1;
+	public int COLUMN_PUBLIC_CODE = -1;
 	public int COLUMN_LABEL = -1;
 	int columnCount;
 	UiBasicLocalization localization;

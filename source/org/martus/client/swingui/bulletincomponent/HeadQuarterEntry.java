@@ -27,6 +27,7 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.swingui.bulletincomponent;
 
 import org.martus.common.HQKey;
+import org.martus.util.Base64.InvalidBase64Exception;
 
 public class HeadQuarterEntry 
 {
@@ -39,17 +40,40 @@ public class HeadQuarterEntry
 	{
 		return isSelected;
 	}
-	
+
+	public boolean isDefault()
+	{
+		return isDefault;
+	}
+
 	public void setSelected(boolean selected)
 	{
 		isSelected = selected;
 	}
 	
+	public void setDefault(boolean defaultHQ)
+	{
+		isDefault = defaultHQ;
+	}
+
 	public String getLabel()
 	{
 		return key.getLabel();
 	}
 	
+	public String getPublicCode()
+	{
+		try
+		{
+			return key.getPublicCode();
+		}
+		catch(InvalidBase64Exception e)
+		{
+			e.printStackTrace();
+			return "";
+		}
+	}
+
 	public HQKey getKey()
 	{
 		return key;
@@ -57,4 +81,5 @@ public class HeadQuarterEntry
 	
 	HQKey key;
 	boolean isSelected;
+	boolean isDefault;
 }
