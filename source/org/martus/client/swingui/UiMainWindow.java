@@ -82,7 +82,7 @@ import org.martus.client.swingui.dialogs.UiAboutDlg;
 import org.martus.client.swingui.dialogs.UiBulletinModifyDlg;
 import org.martus.client.swingui.dialogs.UiConfigServerDlg;
 import org.martus.client.swingui.dialogs.UiContactInfoDlg;
-import org.martus.client.swingui.dialogs.UiCreateNewAccountProcess;
+import org.martus.client.swingui.dialogs.UigetSigninResults;
 import org.martus.client.swingui.dialogs.UiDisplayFileDlg;
 import org.martus.client.swingui.dialogs.UiExportBulletinsDlg;
 import org.martus.client.swingui.dialogs.UiInitialSigninDlg;
@@ -1067,7 +1067,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	boolean getAndSaveUserNamePassword(File keyPairFile) 
 	{
 		String originalUserName = app.getUserName();
-		UiCreateNewAccountProcess newUserInfo = new UiCreateNewAccountProcess(this, originalUserName);
+		UigetSigninResults newUserInfo = new UigetSigninResults(this, originalUserName);
 		if(!newUserInfo.isDataValid())
 			return false;
 		String userName = newUserInfo.getUserName();
@@ -1588,7 +1588,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	private boolean createAccount()
 	{
 		notifyDlg(this, "WelcomeToMartus");
-		UiCreateNewAccountProcess newUserInfo = new UiCreateNewAccountProcess(this, "");
+		UigetSigninResults newUserInfo = new UigetSigninResults(this, "");
 		if(!newUserInfo.isDataValid())
 			return false;
 		String userName = newUserInfo.getUserName();

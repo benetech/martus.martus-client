@@ -35,7 +35,7 @@ import org.martus.client.core.Exceptions.PasswordTooShortException;
 import org.martus.client.swingui.UiMainWindow;
 
 /**
- * UiCreateNewUserNameAndPasswordDlg
+ * UigetSigninResults
  *
  * Class encapusulates all aspects of creating a new username and password combo
  * - Displays the username and password entry dialog
@@ -46,9 +46,9 @@ import org.martus.client.swingui.UiMainWindow;
  * @author dchu
  *
  */
-public class UiCreateNewAccountProcess
+public class UigetSigninResults
 {
-	public UiCreateNewAccountProcess(
+	public UigetSigninResults(
 		UiMainWindow window,
 		String originalUserName)
 	{
