@@ -881,20 +881,6 @@ public class MartusApp
 		return getSecurity().hasKeyPair();
 	}
 
-	public String getServerPublicCode(String serverName) throws
-		ServerNotAvailableException,
-		PublicInformationInvalidException
-	{
-		try
-		{
-			return MartusCrypto.computePublicCode(getServerPublicKey(serverName));
-		}
-		catch(Base64.InvalidBase64Exception e)
-		{
-			throw new PublicInformationInvalidException();
-		}
-	}
-
 	public String getServerPublicKey(String serverName) throws
 		ServerNotAvailableException,
 		PublicInformationInvalidException
