@@ -53,6 +53,7 @@ public class TestClient
 		suite.addTest(new TestSuite(TestClientBulletinStore.class));
 		suite.addTest(new TestSuite(TestConfigInfo.class));
 		suite.addTest(new TestSuite(TestCustomFieldSpecValidator.class));
+		suite.addTest(new TestSuite(TestCustomFieldTemplate.class));
 		suite.addTest(new TestSuite(TestFolderList.class));
 		suite.addTest(new TestSuite(TestGridTableModel.class));
 		suite.addTest(new TestSuite(TestMartusApp_NoServer.class));
