@@ -846,7 +846,7 @@
 -b602-field:confirmWarnMissingAccountMapFileeffect=Al oprimir Si, todos sus boletines se borrarán rápidamente y Martus continuará cargando. Oprima No para salir de Martus para que intente recuperar o reparar el archivo manualmente.
 
 #__________________________________________________________________=Warning: acctmap.txt.sig file is missing or is corrupt in your account's packets directory.  If you have just upgraded to a new version of Martus this warning is harmless and you should click on No.  Otherwise this may indicate someone has tried to tamper with your data or could be caused by a hardware error.
--e1b1-field:confirmWarnMissingOrCorruptAccountMapSignatureFilecause=Advertencia: El archivo acctmap.txt.sig de su carpeta de paquetes está dañado o no se encontró. Puede ignorar esta advertencia y oprimir No si es que acaba de actualizar su copia de Martus. Si no es así entonces puede que esto signifique que alguien a intentado modificar su información o puede que haya sido causado por una falla de hardware.
+-e1b1-field:confirmWarnMissingOrCorruptAccountMapSignatureFilecause=Advertencia: El archivo acctmap.txt.sig de la carpeta de paquetes de su cuenta está dañado o no se encontró. Puede ignorar esta advertencia y oprimir No si es que acaba de actualizar su copia de Martus. Si no es así entonces puede que esto signifique que alguien a intentado modificar su información o puede que haya sido causado por una falla de hardware.
 
 #___________________________________________________________________=Clicking on Yes will try to generate a new accountmap.txt.sig file and continue to load Martus.  Clicking on No will exit Martus.
 -ba60-field:confirmWarnMissingOrCorruptAccountMapSignatureFileeffect=Oprima Si para generar un nuevo archivo accountmap.txt.sig y continuar cargando Martus. Oprima No para salir de Martus.
@@ -978,7 +978,7 @@
 -f27c-field:notifyAuthenticateServerFailedcause=Martus no pudo autenticar el servidor. Es posible que el servidor no este operacional. Verifique su configuración y este en contacto con el operador del servidor.
 
 #_______________________________________________=By choosing to erase your keypair file Martus will exit after it completes the quick erase operation.  Also by choosing to erase your keypair file Martus will also delete the following information: any server or Headquarters you have configured, any custom fields or default details, and your personal preferences.  This information will be lost and restoring your keypair from a backup will not recover these settings.
--bd58-field:notifyChoosingQuickEraseKeyPaircause=Si escoge eliminar su archivo de claves, Martus lo borrará rápidamente y luego el programa se cerrará. También se eliminará información sobre servidores que haya configurado, campos personalizados que haya creado, detalles predeterminados que haya configurado y sus preferencias personales. Esta información no puede ser recuperada una vez haya sido eliminada, aún si intenta recuperar su archivo de claves de una copia de seguridad.
+-bd58-field:notifyChoosingQuickEraseKeyPaircause=Si escoge eliminar su archivo de claves, Martus lo borrará rápidamente y luego el programa se cerrará. También se eliminará información sobre servidores y oficinas centrales que haya configurado, campos personalizados que haya creado, detalles predeterminados que haya configurado y sus preferencias personales. Esta información no puede ser recuperada una vez haya sido eliminada, aún si intenta recuperar su archivo de claves de una copia de seguridad.
 
 #_____________________________________________=By choosing to uninstall Martus we will need to erase your keypair file and Martus will exit after it completes the quick erase operation then bring up the uninstall wizard.  Since this will erase your keypair file Martus will also delete the following information: any server or Headquarters you have configured, any custom fields or default details, and your personal preferences.  This information will be lost and restoring your keypair from a backup will not recover these settings.
 -979a-field:notifyChoosingUninstallMartuscause=Si decide desinstalar Martus su archivo de claves será eliminado y luego Martus desinstalado.  Como esta operación elimina su archivo de claves tambien se eliminará la siguiente información: servidores u oficinas centrales que tenga configuradas, campos personalizados o detalles predeterminados y sus preferencias personales.  Esta información va a ser eliminada y no podrá ser recuperada, aún si recupera su archivo de claves.
@@ -1119,7 +1119,7 @@
 -a1af-field:notifyRecoveryProcessKeySharecause=Necesita tener #N# de las #M# partes de la copia de seguridad compartida creadas al hacer una copia de seguridad de su archivo de claves.
 
 #______________________________________=Please remember your username and password. It cannot be recovered.
--e9e0-field:notifyRememberPasswordcause=Por favor tome nota de su nombre de usuario y contraseña, de perderlos no los podrá recuperar.
+-e9e0-field:notifyRememberPasswordcause=Por favor tome nota de su nombre de usuario y contraseña, de perderlos, no los podrá recuperar.
 
 #____________________________________________________=One or more bulletins were unable to be resent because you are not authorized to upload them.
 -d248-field:notifyResendErrorNotAuthorizedToSendcause=Uno o más boletines no pudieron ser enviados porque no tiene autorización para enviarlos al servidor.
@@ -1182,7 +1182,7 @@
 -5b28-field:notifyViewViewHqListcause=Esta es una lista de códigos públicos de cuentas de Martus que pueden ver la información privada en este boletín.\n\n#L#
 
 #_____________________________________=Welcome!\n\nTo start using Martus, create an account. Choose any username you like and a password that contains at least 8 characters. Keep the following information in mind as you create your username and password:\n\n * We recommend using a password that has 15 characters.\n * Include some characters that aren't letters or numbers in your password.\n   (That is, use punctuation or other special characters.)\n * Use a password that other people won't be able to guess;\n   anyone who knows your username and password can view your private data,\n   and can create bulletins that everyone will believe were created by you.\n * Write down your username and password and store them in a safe place.\n * You'll need to enter your username and password whenever you start Martus.\n * Martus will also sometimes prompt you to re-enter your username\n   and password to prevent someone else from using your account\n   after you've logged in.\n\nIMPORTANT: You are the only one who has your username and password. If you lose either of them, you won't be able to retrieve your data. Your username and password are not stored or backed up anywhere, so they cannot be reset for you.
--da34-field:notifyWelcomeToMartuscause=Bienvenido al sistema de Martus.\n\nPara poder usar Martus es necesario crear una cuenta. Escoja el nombre de usuario que deseé y una contraseña con un mínimo de 8 letras y números. Tome lo siguiente a consideración al crear su nombre de usuario y contraseña:\n\n * Le recomendamos escoja una contraseña con un mínimo de 15 letras o números.\n * Incluya puntuación y otros símbolos en su contraseña.\n * Use una contraseña que otras personas no puedan adivinar pues con su nombre de usuario y contraseña cualquier persona puede ver y editar su información privada y crear boletines bajo su nombre.\n * Escriba su nombre y contraseña y guardela en un lugar seguro.\n * Necesitará ingresar su nombre y contraseña cada vez que inicie Martus.\n * Martus también le pedirá que ingrese su nombre de usuario y contraseña en oportunidades adicionales durante el uso del programa para prevenir que otra persona use su cuenta en su ausencia.\n\nIMPORTANTE: usted es la única persona que tiene su nombre de usuario y contraseña. Si los pierde no podrá acceder a la información que haya ingresado. Martus no guarda su nombre de usuario o su contraseña por lo que de perderse estos no pueden ser cambiados o recuperados.\n\n
+-da34-field:notifyWelcomeToMartuscause=Bienvenido al sistema de Martus.\n\nPara poder usar Martus es necesario crear una cuenta. Escoja el nombre de usuario que deseé y una contraseña con un mínimo de 8 letras y números. Tome lo siguiente a consideración al crear su nombre de usuario y contraseña:\n\n * Le recomendamos escoja una contraseña con un mínimo de 15 letras o números.\n * Incluya puntuación y otros símbolos en su contraseña.\n * Use una contraseña que otras personas no puedan adivinar pues con su nombre de usuario y contraseña cualquier persona puede ver y editar su información privada y crear boletines bajo su nombre.\n * Escriba su nombre y contraseña y guardela en un lugar seguro.\n * Necesitará ingresar su nombre y contraseña cada vez que inicie Martus.\n * Martus también le pedirá que ingrese su nombre de usuario y contraseña en oportunidades adicionales durante el uso del programa para prevenir que otra persona use su cuenta en su ausencia.\n\nIMPORTANTE: Usted es la única persona que tiene su nombre de usuario y contraseña. Si los pierde no podrá acceder a la información que haya ingresado. Martus no guarda su nombre de usuario o su contraseña por lo que de perderse estos no pueden ser cambiados o recuperados.\n
 
 #_____________________________________=The current Martus Server has refused to accept your contact info
 -156f-field:notifycontactRejectedcause=El servidor de Martus a rehusado su información de contacto.
@@ -1200,7 +1200,7 @@
 -2baa-field:notifymagicwordrejectedcause=El servidor le a negado permiso para enviar boletines. Probablemente escribió la palabra mágica incorrecta.
 
 #________________________________________=You must enter the same password twice
--dcba-field:notifypasswordsdontmatchcause=Es necesario ingresar la contraseña dos veces
+-dcba-field:notifypasswordsdontmatchcause=Es necesario ingresar la misma contraseña dos veces
 
 #____________________________________=Error: Unable to retrieve bulletins from the server
 -33d7-field:notifyretrievefailedcause=Error: No se pudo bajar los boletines del servidor
@@ -1221,7 +1221,7 @@
 -8629-field:notifyuploadrejectedcause=El Servidor de Martus a rechazado un boletín
 
 #_________________________________________=You must enter the same username twice
--8812-field:notifyusernamessdontmatchcause=Tiene que escribir su nombre de usuario dos veces
+-8812-field:notifyusernamessdontmatchcause=Tiene que escribir el mismo nombre de usuario dos veces
 
 #_______________________=Organization
 -5192-field:organization=Organización
@@ -1692,7 +1692,7 @@
 -8b15-wintitle:BackupSecretShareCompleteInformation=Copia de reserva completa
 
 #_____________________________=Details Field Default Content
--a39b-wintitle:BulletinDetails=Detalles personalizados
+-a39b-wintitle:BulletinDetails=Detalles predeterminados
 
 #_____________________________=Bulletin Preview
 -9d3b-wintitle:BulletinPreview=Vista previa
@@ -1797,7 +1797,7 @@
 -2a45-wintitle:RetrieveHQSealedBulletinSummaries=Bajando resúmenes de boletines
 
 #_______________________________________=Retrieve Field Office Sealed Bulletins
--30a2-wintitle:RetrieveHQSealedBulletins=Bajar boletines de oficinas regionales
+-30a2-wintitle:RetrieveHQSealedBulletins=Bajar boletines sellados de oficinas regionales
 
 #_____________________________________________=Retrieving Bulletins
 -b7aa-wintitle:RetrieveMyDraftBulletinProgress=Bajando boletines
