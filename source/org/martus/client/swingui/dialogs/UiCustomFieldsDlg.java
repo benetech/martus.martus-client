@@ -27,6 +27,7 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.swingui.dialogs;
 
 import java.awt.Component;
+import java.awt.ComponentOrientation;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -35,6 +36,7 @@ import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JDialog;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -59,13 +61,8 @@ public class UiCustomFieldsDlg extends JDialog
 		setTitle(localization.getWindowTitle("input" + baseTag));
 
 		UiWrappedTextArea label = new UiWrappedTextArea(localization.getFieldLabel("input" + baseTag + "Info"));
-		text = new UiTextArea(20, 80);
-		text.setText(xmlFieldSpecs);
-		text.setLineWrap(true);
-		text.setWrapStyleWord(true);
-		UiScrollPane textPane = new UiScrollPane(text, UiScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
-				UiScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-		textPane.getVerticalScrollBar().setFocusable(false);
+		text = createXMLTextArea(xmlFieldSpecs);
+		UiScrollPane textPane = createScrollPane(text);
 
 		JButton ok = new JButton(localization.getButtonLabel("input" + baseTag + "ok"));
 		ok.addActionListener(new OkHandler());
@@ -137,10 +134,34 @@ public class UiCustomFieldsDlg extends JDialog
 			UiLocalization localization = mainWindow.getLocalization();
 			String message = localization.getFieldLabel("CreateCustomFieldsHelp1");
 			message += localization.getFieldLabel("CreateCustomFieldsHelp2");
-			message += localization.getFieldLabel("CreateCustomFieldsHelp3");
+			String examples = localization.getFieldLabel("CreateCustomFieldsHelp3");
+			UiTextArea xmlExamples = createXMLTextArea(examples);
+			xmlExamples.setCaretPosition(0);
+			xmlExamples.setBackground(new JFrame().getBackground());
+			
+			xmlExamples.setEditable(false);
+			UiScrollPane pane = createScrollPane(xmlExamples);
 
-			new UiShowScrollableTextDlg(mainWindow, "CreateCustomFieldsHelp", "ok", Localization.UNUSED_TAG, Localization.UNUSED_TAG, message);
+			new UiShowScrollableTextDlg(mainWindow, "CreateCustomFieldsHelp", "ok", Localization.UNUSED_TAG, Localization.UNUSED_TAG, message, pane);
 		}
+	}
+
+	UiTextArea createXMLTextArea(String text)
+	{
+		UiTextArea msgArea = new UiTextArea(20, 80);
+		msgArea.setText(text);
+		msgArea.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
+		msgArea.setLineWrap(true);
+		msgArea.setWrapStyleWord(true);
+		return msgArea;
+	}
+
+	UiScrollPane createScrollPane(UiTextArea textArea)
+	{
+		UiScrollPane textPane = new UiScrollPane(textArea, UiScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
+				UiScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+		textPane.getVerticalScrollBar().setFocusable(false);
+		return textPane;
 	}
 
 	public String getResult()

@@ -229,6 +229,8 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		String newMessage = getWarningMessageAboutUnofficialTranslations(rawMessage);
 		msg.setText(newMessage);
 		msg.setEditable(false);
+		msg.setCaretPosition(0);
+
 		UiScrollPane messagePane = new UiScrollPane(msg, UiScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,UiScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 		UiOptionPane pane = new UiOptionPane(messagePane, UiOptionPane.WARNING_MESSAGE, UiOptionPane.DEFAULT_OPTION,
 								null, buttons);
@@ -1357,7 +1359,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		if(newServerCompliance.equals(""))
 			return confirmDlg("ServerComplianceFailed");
 			
-		UiShowScrollableTextDlg dlg = new UiShowScrollableTextDlg(this, "ServerCompliance", "ServerComplianceAccept", "ServerComplianceReject", descriptionTag, newServerCompliance);
+		UiShowScrollableTextDlg dlg = new UiShowScrollableTextDlg(this, "ServerCompliance", "ServerComplianceAccept", "ServerComplianceReject", descriptionTag, newServerCompliance, null);
 		return dlg.getResult();
 	}
 
@@ -1762,7 +1764,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	
 	public void displayScrollableMessage(String titleTag, String message, String okButtonTag, Map tokenReplacement) 
 	{
-		new UiShowScrollableTextDlg(this, titleTag, okButtonTag, Localization.UNUSED_TAG, Localization.UNUSED_TAG, message, tokenReplacement);
+		new UiShowScrollableTextDlg(this, titleTag, okButtonTag, Localization.UNUSED_TAG, Localization.UNUSED_TAG, message, tokenReplacement, null);
 	}
 	
 	public void doConfigureHQs()

@@ -133,7 +133,7 @@ public class ActionMenuCustomFields extends UiMenuAction
 					errorMessage += thisErrorMessage;
 					errorMessage += '\n';
 				}
-				new UiShowScrollableTextDlg(mainWindow,"ErrorCustomFields", "ok", Localization.UNUSED_TAG, "ErrorCustomFields", errorMessage); 
+				new UiShowScrollableTextDlg(mainWindow,"ErrorCustomFields", "ok", Localization.UNUSED_TAG, "ErrorCustomFields", errorMessage, null); 
 				existingCustomFieldXml = newCustomFieldXml;
 			}
 		}

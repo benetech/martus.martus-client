@@ -36,6 +36,7 @@ import java.util.Map;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JComponent;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -54,12 +55,12 @@ import org.martus.util.TokenReplacement.TokenInvalidException;
 
 public class UiShowScrollableTextDlg extends JDialog implements ActionListener
 {
-	public UiShowScrollableTextDlg(UiMainWindow owner, String titleTag, String okButtonTag, String cancelButtonTag, String descriptionTag, String text)
+	public UiShowScrollableTextDlg(UiMainWindow owner, String titleTag, String okButtonTag, String cancelButtonTag, String descriptionTag, String text, JComponent bottomPanel)
 	{
-		this(owner, titleTag, okButtonTag, cancelButtonTag, descriptionTag, text, new HashMap());
+		this(owner, titleTag, okButtonTag, cancelButtonTag, descriptionTag, text, new HashMap(), bottomPanel);
 	}
 	
-	public UiShowScrollableTextDlg(UiMainWindow owner, String titleTag, String okButtonTag, String cancelButtonTag, String descriptionTag, String text, Map tokenReplacement)
+	public UiShowScrollableTextDlg(UiMainWindow owner, String titleTag, String okButtonTag, String cancelButtonTag, String descriptionTag, String text, Map tokenReplacement, JComponent bottomPanel)
 	{
 		super(owner, "", true);
 		mainWindow = owner;
@@ -101,6 +102,11 @@ public class UiShowScrollableTextDlg extends JDialog implements ActionListener
 			panel.add(new JLabel(" "));
 			panel.add(detailScrollPane);
 			panel.add(new JLabel(" "));
+			if(bottomPanel != null)
+			{
+				panel.add(bottomPanel);
+				panel.add(new JLabel(" "));
+			}
 			
 			Box buttons = Box.createHorizontalBox();
 			Dimension preferredSize = details.getPreferredSize();
@@ -113,7 +119,6 @@ public class UiShowScrollableTextDlg extends JDialog implements ActionListener
 				buttons.add(cancel);
 			}
 			panel.add(buttons);
-			
 			getContentPane().add(panel);
 			getRootPane().setDefaultButton(ok);
 			Utilities.centerDlg(this);
