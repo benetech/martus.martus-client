@@ -26,6 +26,8 @@ Boston, MA 02111-1307, USA.
 
 package org.martus.client.swingui.dialogs;
 
+import java.awt.Color;
+import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -41,9 +43,14 @@ import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JScrollPane;
+import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+import javax.swing.plaf.basic.BasicTextUI;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.DefaultHighlighter;
+import javax.swing.text.DefaultHighlighter.DefaultHighlightPainter;
 
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.common.clientside.UiBasicLocalization;
@@ -59,11 +66,13 @@ public class UiDisplayFileDlg extends JDialog
 	public UiDisplayFileDlg(UiMainWindow owner, String baseTag, InputStream fileStream, String tagMessage, InputStream fileStreamToc, String tagTOCMessage)
 	{
 		super(owner, "", true);
+		previouslyFoundIndex = -1;
 		tocList = null;
 		UiBasicLocalization localization = owner.getLocalization();
 
 		setTitle(localization.getWindowTitle(baseTag));
-		getContentPane().setLayout(new ParagraphLayout());
+		Container contentPane = getContentPane();
+		contentPane.setLayout(new ParagraphLayout());
 
 		message = getFileContents(fileStream);
 		if(message == null)
@@ -71,8 +80,11 @@ public class UiDisplayFileDlg extends JDialog
 			dispose();
 			return;
 		}
+		lowercaseMessage = message.toLowerCase();
 
 		msgArea = new UiWrappedTextArea(message);
+		highliter = new BasicTextUI.BasicHighlighter();
+		msgArea.setHighlighter(highliter);
 		msgArea.addKeyListener(new TabToOkButton());
 		msgArea.setRows(14);
 		msgArea.setColumns(80);
@@ -88,10 +100,10 @@ public class UiDisplayFileDlg extends JDialog
 			JScrollPane tocMsgAreaScrollPane = new JScrollPane(tocList, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
 					JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 			tocMsgAreaScrollPane.setPreferredSize(new Dimension(580, 100));
-			getContentPane().add(new JLabel(" "), ParagraphLayout.NEW_PARAGRAPH);
-			getContentPane().add(new JLabel(localization.getFieldLabel(tagTOCMessage+"Description")));
-			getContentPane().add(new JLabel(localization.getFieldLabel(tagTOCMessage)), ParagraphLayout.NEW_PARAGRAPH);
-			getContentPane().add(tocMsgAreaScrollPane);
+			contentPane.add(new JLabel(" "), ParagraphLayout.NEW_PARAGRAPH);
+			contentPane.add(new JLabel(localization.getFieldLabel(tagTOCMessage+"Description")));
+			contentPane.add(new JLabel(localization.getFieldLabel(tagTOCMessage)), ParagraphLayout.NEW_PARAGRAPH);
+			contentPane.add(tocMsgAreaScrollPane);
 			tocList.setSelectedIndex(0);
 		}
 
@@ -99,9 +111,16 @@ public class UiDisplayFileDlg extends JDialog
 		close.addActionListener(new CloseHandler());
 		close.addKeyListener(new MakeEnterKeyExit());
 
-		getContentPane().add(new JLabel(localization.getFieldLabel(tagMessage)), ParagraphLayout.NEW_PARAGRAPH);
-		getContentPane().add(msgAreaScrollPane);
-		getContentPane().add(close, ParagraphLayout.NEW_PARAGRAPH);
+		contentPane.add(new JLabel(localization.getFieldLabel(tagMessage)), ParagraphLayout.NEW_PARAGRAPH);
+		contentPane.add(msgAreaScrollPane);
+		contentPane.add(close, ParagraphLayout.NEW_PARAGRAPH);
+		
+		searchField = new JTextField(20);
+		searchField.addActionListener(new searchFieldListener());
+		searchButton = new JButton(localization.getButtonLabel("inputsearchok"));
+		searchButton.addActionListener(new SearchActionListener());
+		contentPane.add(searchField);
+		contentPane.add(searchButton);
 		
 		getRootPane().setDefaultButton(close);
 		close.requestFocus();
@@ -169,21 +188,67 @@ public class UiDisplayFileDlg extends JDialog
 	}
 
 
-	public void findAndScrollToItem(String searchString)
-	{
-		msgArea.setCaretPosition(message.length());
-		msgAreaScrollPane.getVerticalScrollBar().setValue(msgAreaScrollPane.getVerticalScrollBar().getMaximum());
-		int foundAt = message.indexOf(searchString);
-		if(foundAt < 0)
-			foundAt = 0;
-		msgArea.setCaretPosition(foundAt);
-	}
 
 	class ListHandler implements ListSelectionListener
 	{
 		public void valueChanged(ListSelectionEvent arg0)
 		{
-			findAndScrollToItem("-\n" + (String)tocList.getSelectedValue());
+			String searchString = "-\n" + (String)tocList.getSelectedValue();
+			int foundAt = message.indexOf(searchString);
+			if(foundAt < 0)
+				foundAt = 0;
+			scrollToPosition(foundAt);
+		}
+		
+	}
+	
+	class SearchActionListener implements ActionListener
+	{
+		public void actionPerformed(ActionEvent e)
+		{
+			String lowerCaseSearchText = searchField.getText().toLowerCase();
+			lowerCaseSearchText += " ";
+			
+			if(previouslyFoundIndex != msgArea.getCaretPosition())
+				previouslyFoundIndex = msgArea.getCaretPosition();
+			int startIndex = lowercaseMessage.indexOf(lowerCaseSearchText,previouslyFoundIndex+1);
+			if(startIndex < 0)
+				return;
+			
+			tocList.clearSelection();
+			previouslyFoundIndex = startIndex;
+			scrollToPosition(startIndex);
+			int endIndex = startIndex+lowerCaseSearchText.length()-1;
+			highlightText(startIndex, endIndex);
+		}
+
+		private void highlightText(int startIndex, int endIndex)
+		{
+			try
+			{
+				highliter.removeAllHighlights();
+				Color highlightColor = new Color(22,88,212);
+				DefaultHighlightPainter painter = new DefaultHighlighter.DefaultHighlightPainter(highlightColor);
+				highliter.addHighlight(startIndex, endIndex, painter);
+			}
+			catch (BadLocationException e1)
+			{
+			}
+		}
+	}
+
+	public void scrollToPosition(int position)
+	{
+		msgArea.setCaretPosition(message.length());
+		msgAreaScrollPane.getVerticalScrollBar().setValue(msgAreaScrollPane.getVerticalScrollBar().getMaximum());
+		msgArea.setCaretPosition(position);
+	}
+	
+	class searchFieldListener implements ActionListener
+	{
+		public void actionPerformed(ActionEvent e)
+		{
+			searchButton.doClick();
 		}
 	}
 
@@ -214,8 +279,13 @@ public class UiDisplayFileDlg extends JDialog
 		}
 	}
 	String message;
+	String lowercaseMessage;
+	JButton searchButton;
+	JTextField searchField;
 	JButton close;
 	JList tocList;
 	UiWrappedTextArea msgArea;
 	JScrollPane msgAreaScrollPane;
+	BasicTextUI.BasicHighlighter highliter;
+	int previouslyFoundIndex;
 }
