@@ -135,10 +135,7 @@ public class UiBulletinModifyDlg extends JFrame implements ActionListener, Windo
 		{	
 			if(ae.getSource() == cancel)
 			{				
-				if (!view.isBulletinModified())			
-					cleanupAndExit();				
-				else					
-				  closeWindowUponConfirmation();
+				closeWindowUponConfirmationIfRequired();
 				return;
 			}	
 					
@@ -249,7 +246,7 @@ public class UiBulletinModifyDlg extends JFrame implements ActionListener, Windo
 
 	public void windowClosing(WindowEvent event)
 	{
-		closeWindowUponConfirmation();
+		closeWindowUponConfirmationIfRequired();
 	}
 	// end WindowListener interface
 
@@ -292,13 +289,32 @@ public class UiBulletinModifyDlg extends JFrame implements ActionListener, Windo
 		view.updateEncryptedIndicator(isEncrypted);
 	}
 
-	private void closeWindowUponConfirmation()
+	private void closeWindowUponConfirmationIfRequired()
 	{	
-		if(observer.confirmDlg(this, "CancelModifyBulletin"))
+		try
 		{
-			cancelHandler.onCancel(observer.getStore(), bulletin);
-			cleanupAndExit();
+			if(!view.isBulletinModified())
+			{
+				cleanupAndExit();
+				return;
+			}
+				
+			if(observer.confirmDlg(this, "CancelModifyBulletin"))
+			{
+				cancelHandler.onCancel(observer.getStore(), bulletin);
+				cleanupAndExit();
+			}
 		}
+		catch(IOException e)
+		{
+			System.out.println("UiModifyBulletinDlg.actionPerformed: " + e);
+			return;
+		}
+		catch(MartusCrypto.EncryptionException e)
+		{
+			System.out.println("UiModifyBulletinDlg.actionPerformed: " + e);
+			return;
+		} 
 	}
 
 	public interface CancelHandler
