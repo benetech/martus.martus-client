@@ -1706,9 +1706,8 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		folderSplitter.setDividerLocation(uiState.getCurrentFolderSplitterPosition());
 
 		getContentPane().add(folderSplitter);
-		statusBar = new UiStatusBar(getLocalization());
-		UiProgressMeter r = statusBar.getBackgroundProgressMeter();
-		r.setStatusMessageTag("StatusReady");
+		statusBar = new UiStatusBar(getLocalization());	
+		UiProgressMeter r = statusBar.getBackgroundProgressMeter();		
 		r.hideProgressMeter();
 		getContentPane().add(statusBar, BorderLayout.SOUTH );
 
@@ -1731,6 +1730,13 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 			setSize(screenSize.width - 50 , screenSize.height - 50);
 			Utilities.maximizeWindow(this);
 		}
+	}
+	
+	public void setStatusMessageTag(String tag)
+	{
+		UiProgressMeter r = statusBar.getBackgroundProgressMeter();
+		r.setStatusMessageTag(tag);
+		r.hideProgressMeter();
 	}
 
 	int signIn(int mode)

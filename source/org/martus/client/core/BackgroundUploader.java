@@ -69,7 +69,7 @@ public class BackgroundUploader
 		MartusApp.DamagedBulletinException
 	{
 		UploadResult uploadResult = new UploadResult();
-		uploadResult.result = NetworkInterfaceConstants.OK;
+		uploadResult.result = NetworkInterfaceConstants.UNKNOW;
 	
 		BulletinStore store = app.getStore();
 		BulletinFolder folderSealedOutbox = app.getFolderSealedOutbox();

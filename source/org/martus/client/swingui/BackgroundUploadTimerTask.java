@@ -83,8 +83,7 @@ class BackgroundUploadTimerTask extends TimerTask
 
 	private void doUploading()
 		throws InterruptedException, InvocationTargetException
-	{
-		UiProgressMeter progressMeter = mainWindow.statusBar.getBackgroundProgressMeter();
+	{		
 		String tag = "StatusReady";
 		if(mainWindow.isServerConfigured())
 		{	
@@ -92,7 +91,12 @@ class BackgroundUploadTimerTask extends TimerTask
 			{
 				BackgroundUploader.UploadResult uploadResult = uploader.backgroundUpload(); 
 				mainWindow.uploadResult = uploadResult.result;
-				if(uploadResult.result == null)
+				
+				if (uploadResult.result != null && uploadResult.result.equals(NetworkInterfaceConstants.UNKNOW))
+				{
+					tag = "";
+				}	
+				else if(uploadResult.result == null)
 				{
 					tag = "UploadFailedProgressMessage"; 
 					if(uploadResult.exceptionThrown == null)
@@ -118,9 +122,9 @@ class BackgroundUploadTimerTask extends TimerTask
 		{
 			tag = "ServerNotConfiguredProgressMessage";
 		}
-			
-		progressMeter.setStatusMessageTag(tag);
-		progressMeter.hideProgressMeter();
+
+		if (tag != "")			
+		 mainWindow.setStatusMessageTag(tag);
 	}
 	
 	private void getUpdatedListOfBulletinsOnServer()
@@ -256,6 +260,9 @@ class BackgroundUploadTimerTask extends TimerTask
 			ClientSideNetworkGateway gateway = getApp().getCurrentNetworkInterfaceGateway();
 			String compliance = getApp().getServerCompliance(gateway);
 			alreadyCheckedCompliance = true;
+			if (compliance != null)
+				mainWindow.setStatusMessageTag("StatusReady");
+			
 			if(!compliance.equals(getApp().getConfigInfo().getServerCompliance()))
 			{
 				ThreadedServerComplianceDlg dlg = new ThreadedServerComplianceDlg(compliance);
@@ -264,11 +271,12 @@ class BackgroundUploadTimerTask extends TimerTask
 		}
 		catch (ServerCallFailedException userAlreadyKnows)
 		{
-			alreadyCheckedCompliance = true;
+			alreadyCheckedCompliance = true;			
 			return;
 		}
 		catch (ServerNotAvailableException weWillTryAgainLater)
 		{
+			mainWindow.setStatusMessageTag("NoServerAvailableProgressMessage");
 			return;
 		} 
 		catch (InterruptedException e)
@@ -286,6 +294,9 @@ class BackgroundUploadTimerTask extends TimerTask
 		if(alreadyGotNews)
 			return;
 		Vector newsItems = getApp().getNewsFromServer();
+		if (newsItems.size() > 0)
+			mainWindow.setStatusMessageTag("StatusReady");
+			
 		for (Iterator iter = newsItems.iterator(); iter.hasNext();)
 		{
 			String newsItem = (String) iter.next();
@@ -296,6 +307,7 @@ class BackgroundUploadTimerTask extends TimerTask
 			}
 			catch (Exception e)
 			{
+				mainWindow.setStatusMessageTag("NoServerAvailableProgressMessage");
 				e.printStackTrace();
 			}
 		}
