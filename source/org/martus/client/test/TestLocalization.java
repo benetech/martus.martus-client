@@ -29,7 +29,9 @@ package org.martus.client.test;
 import java.awt.ComponentOrientation;
 import java.io.File;
 import java.util.Vector;
+
 import javax.swing.SwingConstants;
+
 import org.martus.client.core.MartusApp;
 import org.martus.client.swingui.EnglishStrings;
 import org.martus.client.swingui.UiConstants;
@@ -57,6 +59,22 @@ public class TestLocalization extends TestCaseEnhanced
 		super.setUp();
 		bd = new UiLocalization(MartusApp.getTranslationsDirectory(), EnglishStrings.strings);
  	}
+	
+	public void testNonAsciiEnglishTranslations() throws Exception
+	{
+		String[] strings = EnglishStrings.strings;
+		for(int i=0; i < strings.length; ++i)
+		{
+			String thisString = EnglishStrings.strings[i];
+			char[] mtfEntry = thisString.toCharArray();
+			for(int c = 0; c < mtfEntry.length - 1; ++c)
+			{
+				if(mtfEntry[c] == '?')
+					if(Character.isLetter(mtfEntry[c+1]))
+						System.out.println("Likely non-ASCII character in: " + thisString);
+			}
+		}
+	}
 	
 	public void testDefaultDateFormats()
 	{
