@@ -1788,6 +1788,9 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 
 	public void testSetBulletinHQKey() throws Exception
 	{
+		Bulletin b0 = appWithAccount.createBulletin();
+		assertEquals("No keys should be configured", 0, b0.getAuthorizedToReadKeys().size());
+
 		String sampleHQKey1 = "abc123";
 		String sampleLabel1 = "Fred";
 		HQKeys keys = new HQKeys();
@@ -1800,8 +1803,7 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		assertEquals("Label not set?", sampleLabel1, returnedKey1.getLabel());
 
 		Bulletin b1 = appWithAccount.createBulletin();
-		assertEquals("key already set?", 0, b1.getAuthorizedToReadKeys().size());
-		appWithAccount.setHQKeysInBulletin(b1);
+		assertEquals("HQ key not set?", 1, b1.getAuthorizedToReadKeys().size());
 		assertEquals("Key not set?", sampleHQKey1, (b1.getAuthorizedToReadKeys().get(0)).getPublicKey());
 		assertEquals("Label not set?", sampleLabel1, (b1.getAuthorizedToReadKeys().get(0)).getLabel());
 	}

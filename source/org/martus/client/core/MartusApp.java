@@ -612,6 +612,7 @@ public class MartusApp
 		b.set(Bulletin.TAGORGANIZATION, configInfo.getOrganization());
 		b.set(Bulletin.TAGPUBLICINFO, configInfo.getTemplateDetails());
 		b.set(Bulletin.TAGLANGUAGE, getCurrentLanguage());
+		setHQKeysInBulletin(b);
 		b.setDraft();
 		b.setAllPrivate(true);
 		return b;
