@@ -377,8 +377,6 @@ public class UiBulletinTable extends JTable implements ListSelectionListener, Dr
 	{
 		BulletinFolder draftOutBox = getStore().getFolderDraftOutbox();
 		BulletinFolder sealedOutBox = getStore().getFolderSealedOutbox();
-		BulletinFolder onServer = getStore().getFolderOnServer();
-		BulletinFolder notOnServer = getStore().getFolderNotOnServer();
 
 		Bulletin[] selected = getSelectedBulletins();
 		boolean notAllowedToSend = false;
@@ -400,8 +398,6 @@ public class UiBulletinTable extends JTable implements ListSelectionListener, Dr
 				if(bulletin.isSealed())
 					sealedOutBox.add(bulletin);
 				
-				getStore().moveBulletin(bulletin, onServer, notOnServer);
-				mainWindow.bulletinContentsHaveChanged(bulletin);
 			}
 			catch (BulletinAlreadyExistsException harmless)
 			{
