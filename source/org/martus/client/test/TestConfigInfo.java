@@ -34,7 +34,8 @@ import java.util.Vector;
 
 import org.martus.common.ConfigInfo;
 import org.martus.common.ContactInfo;
-import org.martus.common.FieldSpec;
+import org.martus.common.CustomFields;
+import org.martus.common.LegacyCustomFields;
 import org.martus.common.crypto.MartusSecurity;
 import org.martus.common.network.NetworkInterfaceConstants;
 import org.martus.common.test.TestCaseEnhanced;
@@ -298,7 +299,7 @@ public class TestConfigInfo extends TestCaseEnhanced
 		return outputStream.toByteArray();
 	}
 	
-	final String defaultCustomFieldSpecs = FieldSpec.buildFieldListString(FieldSpec.getDefaultPublicFieldSpecs());
+	final String defaultCustomFieldSpecs = LegacyCustomFields.buildFieldListString(CustomFields.getDefaultPublicFieldSpecs());
 
 //Version 1
 	final String sampleAuthor = "author";

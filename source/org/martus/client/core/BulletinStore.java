@@ -42,6 +42,7 @@ import java.util.TreeMap;
 import java.util.Vector;
 import java.util.zip.ZipFile;
 
+import org.martus.common.CustomFields;
 import org.martus.common.FieldSpec;
 import org.martus.common.MartusUtilities;
 import org.martus.common.MartusXml;
@@ -773,8 +774,8 @@ public class BulletinStore
 
 		createSystemFolders();
 	
-		publicFieldTags = FieldSpec.getDefaultPublicFieldSpecs();
-		privateFieldTags = FieldSpec.getDefaultPrivateFieldSpecs();
+		publicFieldTags = CustomFields.getDefaultPublicFieldSpecs();
+		privateFieldTags = CustomFields.getDefaultPrivateFieldSpecs();
 	}
 	
 	private File getCacheOfSortableFieldsFile()

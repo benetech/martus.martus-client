@@ -27,6 +27,7 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.test;
 
 import org.martus.client.core.CustomFieldSpecValidator;
+import org.martus.common.CustomFields;
 import org.martus.common.FieldSpec;
 import org.martus.common.test.TestCaseEnhanced;
 
@@ -39,7 +40,7 @@ public class TestCustomFieldSpecValidator extends TestCaseEnhanced
 	
 	public void testAllValid() throws Exception
 	{
-		FieldSpec[] specs = FieldSpec.getDefaultPublicFieldSpecs();
+		FieldSpec[] specs = CustomFields.getDefaultPublicFieldSpecs();
 		CustomFieldSpecValidator checker = new CustomFieldSpecValidator(specs);
 		assertTrue("not valid?", checker.isValid());
 	}
@@ -60,36 +61,36 @@ public class TestCustomFieldSpecValidator extends TestCaseEnhanced
 
 	public void testBlankTag() throws Exception
 	{
-		FieldSpec[] specs = FieldSpec.getDefaultPublicFieldSpecs();
-		specs = FieldSpec.addFieldSpec(specs, new FieldSpec(",label"));
+		FieldSpec[] specs = CustomFields.getDefaultPublicFieldSpecs();
+		specs = CustomFields.addFieldSpec(specs, new FieldSpec(",label"));
 		CustomFieldSpecValidator checker = new CustomFieldSpecValidator(specs);
 		assertFalse("valid?", checker.isValid());
 	}
 
 	public void testDuplicateTags() throws Exception
 	{
-		FieldSpec[] specs = FieldSpec.getDefaultPublicFieldSpecs();
-		specs = FieldSpec.addFieldSpec(specs, new FieldSpec("a"));
-		specs = FieldSpec.addFieldSpec(specs, new FieldSpec("a"));
+		FieldSpec[] specs = CustomFields.getDefaultPublicFieldSpecs();
+		specs = CustomFields.addFieldSpec(specs, new FieldSpec("a"));
+		specs = CustomFields.addFieldSpec(specs, new FieldSpec("a"));
 		CustomFieldSpecValidator checker = new CustomFieldSpecValidator(specs);
 		assertFalse("valid?", checker.isValid());
 	}
 
 	public void testMissingCustomLabel() throws Exception
 	{
-		FieldSpec[] specs = FieldSpec.getDefaultPublicFieldSpecs();
-		specs = FieldSpec.addFieldSpec(specs, new FieldSpec("a,label"));
+		FieldSpec[] specs = CustomFields.getDefaultPublicFieldSpecs();
+		specs = CustomFields.addFieldSpec(specs, new FieldSpec("a,label"));
 		CustomFieldSpecValidator checker = new CustomFieldSpecValidator(specs);
 		assertTrue("not valid?", checker.isValid());
 
-		specs = FieldSpec.addFieldSpec(specs, new FieldSpec("b"));
+		specs = CustomFields.addFieldSpec(specs, new FieldSpec("b"));
 		CustomFieldSpecValidator checker2 = new CustomFieldSpecValidator(specs);
 		assertFalse("valid?", checker2.isValid());
 	}
 
 	public void testStandardFieldWithLabel() throws Exception
 	{
-		FieldSpec[] specs = FieldSpec.getDefaultPublicFieldSpecs();
+		FieldSpec[] specs = CustomFields.getDefaultPublicFieldSpecs();
 		specs[3] = new FieldSpec(specs[3].getTag() + ",illegal label");
 		CustomFieldSpecValidator checker = new CustomFieldSpecValidator(specs);
 		assertFalse("valid?", checker.isValid());

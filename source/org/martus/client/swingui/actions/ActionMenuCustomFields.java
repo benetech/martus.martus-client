@@ -33,7 +33,10 @@ import org.martus.client.core.CustomFieldSpecValidator;
 import org.martus.client.core.MartusApp;
 import org.martus.client.core.MartusApp.SaveConfigInfoException;
 import org.martus.client.swingui.UiMainWindow;
+import org.martus.client.swingui.dialogs.UiCustomFieldsDlg;
+import org.martus.common.CustomFields;
 import org.martus.common.FieldSpec;
+import org.martus.common.LegacyCustomFields;
 
 public class ActionMenuCustomFields extends UiMenuAction
 {
@@ -55,7 +58,7 @@ public class ActionMenuCustomFields extends UiMenuAction
 			return;
 			
 		store.setPublicFieldTags(newSpecs);
-		String fieldSpecString = FieldSpec.buildFieldListString(newSpecs);
+		String fieldSpecString = LegacyCustomFields.buildFieldListString(newSpecs);
 		app.getConfigInfo().setCustomFieldSpecs(fieldSpecString);
 
 		try
@@ -70,27 +73,31 @@ public class ActionMenuCustomFields extends UiMenuAction
 
 	private FieldSpec[] getCustomizedFieldsFromUser(FieldSpec[] existingSpecs)
 	{
-		String existingTags = FieldSpec.buildFieldListString(existingSpecs);
+		String existingCustomFieldXml = LegacyCustomFields.buildFieldListString(existingSpecs);
 		while(true)
 		{
-			String newTags = mainWindow.getStringInput("CustomFields", "", existingTags);
-			if(newTags == null)
+			UiCustomFieldsDlg inputDlg = new UiCustomFieldsDlg(mainWindow, existingCustomFieldXml);
+			inputDlg.setFocusToInputField();
+			inputDlg.show();
+			String newCustomFieldXml = inputDlg.getResult();
+
+			if(newCustomFieldXml == null)
 				return null;
 				
-			if(newTags.length() == 0)
+			if(newCustomFieldXml.length() == 0)
 			{
 				if(mainWindow.confirmDlg("UndoCustomFields"))
-					return FieldSpec.getDefaultPublicFieldSpecs();
+					return CustomFields.getDefaultPublicFieldSpecs();
 				continue;
 			}
  
-			FieldSpec[] newSpecs = FieldSpec.parseFieldSpecsFromString(newTags);
+			FieldSpec[] newSpecs = LegacyCustomFields.parseFieldSpecsFromString(newCustomFieldXml);
 			CustomFieldSpecValidator checker = new CustomFieldSpecValidator(newSpecs);
 			if(checker.isValid())
 				return newSpecs;
 				
 			mainWindow.notifyDlg("ErrorInCustomFields");
-			existingTags = newTags;
+			existingCustomFieldXml = newCustomFieldXml;
 		}
 	}
 	

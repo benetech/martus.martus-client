@@ -39,6 +39,7 @@ import org.martus.client.core.BulletinFolder;
 import org.martus.client.core.BulletinStore;
 import org.martus.client.core.MartusClientXml;
 import org.martus.client.core.BulletinStore.BulletinAlreadyExistsException;
+import org.martus.common.CustomFields;
 import org.martus.common.FieldSpec;
 import org.martus.common.MartusXml;
 import org.martus.common.bulletin.AttachmentProxy;
@@ -111,7 +112,7 @@ public class TestBulletinStore extends TestCaseEnhanced
 
 	public void testGetStandardFieldNames()
 	{
-		FieldSpec[] publicFields = FieldSpec.getDefaultPublicFieldSpecs();
+		FieldSpec[] publicFields = CustomFields.getDefaultPublicFieldSpecs();
 		Set publicTags = new HashSet();
 		for(int i = 0; i < publicFields.length; ++i)
 			publicTags.add(publicFields[i].getTag());
@@ -121,7 +122,7 @@ public class TestBulletinStore extends TestCaseEnhanced
 		assertEquals(true, publicTags.contains("language"));
 		assertEquals(true, publicTags.contains("organization"));
 
-		FieldSpec[] privateFields = FieldSpec.getDefaultPrivateFieldSpecs();
+		FieldSpec[] privateFields = CustomFields.getDefaultPrivateFieldSpecs();
 		Set privateTags = new HashSet();
 		for(int i = 0; i < privateFields.length; ++i)
 			privateTags.add(privateFields[i].getTag());
