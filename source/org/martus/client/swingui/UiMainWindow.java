@@ -1086,11 +1086,8 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 				job.setPageable(vista);
 				break;
 			}
-			else
-			{
-				printCancelled = true;
-				break;
-			}
+			printCancelled = true;
+			break;
 		}
 		if(!printCancelled)
 		{

@@ -114,8 +114,7 @@ public class BackgroundUploader
 	{
 		if(b.isDraft())
 			return "UploadingDraftBulletin";
-		else
-			return "UploadingSealedBulletin";
+		return "UploadingSealedBulletin";
 	}
 	
 	private String uploadBulletinZipFile(UniversalId uid, File tempFile)

@@ -79,8 +79,7 @@ class AttachmentTableModel extends AbstractTableModel
 	{
 		if(column == 0)
 			return getLocalization().getButtonLabel("attachmentLabel");
-		else
-			return getLocalization().getButtonLabel("attachmentSize");
+		return getLocalization().getButtonLabel("attachmentSize");
 	}
 
 	public AttachmentProxy getAttachmentProxyAt(int row)

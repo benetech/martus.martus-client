@@ -393,8 +393,7 @@ public class MartusApp
 	{
 		if(isSignedIn())
 			return new File(getCurrentAccountDirectory(), "UserUiState.dat");
-		else
-			return new File(getMartusDataRootDirectory(), "UiState.dat");
+		return new File(getMartusDataRootDirectory(), "UiState.dat");
 	}
 
 	public File getBulletinDefaultDetailsFile()

@@ -1040,11 +1040,8 @@ public class BulletinStore
 			throws SAXParseException
 		{
 			if(tag.equals(MartusClientXml.tagFolder))
-			{
 				return new XmlFolderLoader(tag, store);
-			}
-			else
-				return super.startElement(tag);
+			return super.startElement(tag);
 		}
 
 		public void endElement(String tag, SimpleXmlDefaultLoader ended)
@@ -1095,8 +1092,7 @@ public class BulletinStore
 		{
 			if(tag.equals(MartusClientXml.tagId))
 				return new SimpleXmlStringLoader(tag);
-			else
-				return super.startElement(tag);
+			return super.startElement(tag);
 		}
 
 		public void endElement(String tag, SimpleXmlDefaultLoader ended)
