@@ -301,7 +301,7 @@ public class UiAttachmentViewer extends JPanel  implements DragGestureListener, 
 	AttachmentTableModel model;
 	JTable attachmentTable;
 	public JButton saveButton;
-	JButton viewButton;
+	public JButton viewButton;
 	JScrollPane attachmentPane;
 
 	private static File lastAttachmentSaveDirectory;
