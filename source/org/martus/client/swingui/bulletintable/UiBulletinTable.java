@@ -60,6 +60,7 @@ import org.martus.client.core.TransferableBulletinList;
 import org.martus.client.core.ClientBulletinStore.BulletinAlreadyExistsException;
 import org.martus.client.core.ClientBulletinStore.BulletinOlderException;
 import org.martus.client.swingui.UiClipboardUtilities;
+import org.martus.client.swingui.UiLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.foldertree.FolderNode;
 import org.martus.common.FieldSpec;
@@ -77,12 +78,9 @@ public class UiBulletinTable extends UiTable implements ListSelectionListener, D
 		mainWindow = mainWindowToUse;
 		model = new BulletinTableModel(mainWindow.getLocalization());
 		setModel(model);
-
-		// set widths for first three columns (status, wassent, and date)
-		UiTable.setMaxColumnWidthToHeaderWidth(this, COLUMN_STATUS);
-		UiTable.setMaxColumnWidthToHeaderWidth(this, COLUMN_SENT);
-		UiTable.setMaxColumnWidthToHeaderWidth(this, COLUMN_EVENTDATE);
-//		setColumnWidthToHeaderWidth(this, 4);
+		setStatusColumnWidth();
+		setSentColumnWidth();
+		setEventDateWidth();
 		
 		addMouseListener(new TableMouseAdapter());
 		keyListener = new TableKeyAdapter();
@@ -99,7 +97,47 @@ public class UiBulletinTable extends UiTable implements ListSelectionListener, D
 
 		dropAdapter = new UiBulletinTableDropAdapter(this, mainWindow);
 	}
+    
+    public void setStatusColumnWidth()
+    {
+    	int width = getColumnHeaderWidth(COLUMN_STATUS);
 
+    	UiLocalization localization = mainWindow.getLocalization();
+		int draftWidth = getRenderedWidth(COLUMN_STATUS, localization.getStatusLabel(Bulletin.STATUSDRAFT));
+    	if(draftWidth > width)
+    		width = draftWidth;
+    	
+    	int sealedWidth = getRenderedWidth(COLUMN_STATUS, localization.getStatusLabel(Bulletin.STATUSSEALED));
+    	if(sealedWidth > width)
+    		width = sealedWidth;
+    	setColumnMaxWidth(COLUMN_STATUS, width);
+    }
+
+    public void setSentColumnWidth()
+    {
+    	int width = getColumnHeaderWidth(COLUMN_SENT);
+
+    	UiLocalization localization = mainWindow.getLocalization();
+		int sentYes = getRenderedWidth(COLUMN_SENT, localization.getFieldLabel(ClientBulletinStore.WAS_SENT_YES));
+    	if(sentYes > width)
+    		width = sentYes;
+    	
+    	int sentNo = getRenderedWidth(COLUMN_SENT, localization.getFieldLabel(ClientBulletinStore.WAS_SENT_NO));
+    	if(sentNo > width)
+    		width = sentNo;
+    	setColumnMaxWidth(COLUMN_SENT, width);
+    }
+    
+    public void setEventDateWidth()
+    {
+       	int width = getColumnHeaderWidth(COLUMN_EVENTDATE);
+    	int dateWidth = getRenderedWidth(COLUMN_EVENTDATE, mainWindow.getLocalization().convertStoredDateToDisplayReverseIfNecessary("2004-12-23"));
+    	if(dateWidth > width)
+    		width = dateWidth;
+    	setColumnMaxWidth(COLUMN_EVENTDATE, width);
+    }
+    
+    
 	public UiBulletinTableDropAdapter getDropAdapter()
 	{
 		return dropAdapter;

@@ -188,9 +188,9 @@ public abstract class UiServerSummariesDlg extends JDialog
 
 		public void doLayout()
 		{
-			UiTable.setMaxColumnWidthToHeaderWidth(this,0);
+			setMaxColumnWidthToHeaderWidth(0);
 			int numberOfColumns = getColumnModel().getColumnCount();
-			UiTable.setMaxColumnWidthToHeaderWidth(this,numberOfColumns-1);
+			setMaxColumnWidthToHeaderWidth(numberOfColumns-1);
 			super.doLayout();
 		}
 	}
