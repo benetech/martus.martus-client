@@ -93,6 +93,7 @@ import org.martus.client.swingui.dialogs.UiExportBulletinsDlg;
 import org.martus.client.swingui.dialogs.UiInitialSigninDlg;
 import org.martus.client.swingui.dialogs.UiModelessBusyDlg;
 import org.martus.client.swingui.dialogs.UiPreferencesDlg;
+import org.martus.client.swingui.dialogs.UiPrintBulletinDlg;
 import org.martus.client.swingui.dialogs.UiProgressRetrieveBulletinsDlg;
 import org.martus.client.swingui.dialogs.UiProgressRetrieveSummariesDlg;
 import org.martus.client.swingui.dialogs.UiRemoveServerDlg;
@@ -1052,10 +1053,13 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	void printBulletin(Bulletin currentBulletin)
 	{
 		int width = preview.getView().getWidth();
-		boolean includePrivateData = confirmDlg("PrintPrivateData");		
+		UiPrintBulletinDlg dlg = new UiPrintBulletinDlg(this);
+		dlg.show();
+		if (!dlg.isContinueButtonPressed())
+			return;			
 			
 		BulletinHtmlGenerator generator = new BulletinHtmlGenerator(width, getLocalization() );
-		String html = generator.getHtmlString(currentBulletin, getStore().getDatabase(), includePrivateData);
+		String html = generator.getHtmlString(currentBulletin, getStore().getDatabase(), dlg.isIncludePrivateChecked());
 		JComponent view = new JLabel(html);
 		
 		JFrame frame = new JFrame();

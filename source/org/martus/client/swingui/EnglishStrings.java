@@ -235,7 +235,7 @@ public class EnglishStrings
 "wintitle:warningDeleteSingleBulletin=Confirm Delete Bulletin",
 "wintitle:warningDeleteMultipleBulletins=Confirm Delete Bulletins",
 
-"wintitle:confirmPrintPrivateData=Confirm Print Private Data",
+"wintitle:PrintPrivateData=Confirm Print Private Data",
 "wintitle:confirmSendWithPublicData=Confirm Send With Public Data",
 
 "button:help=Help",
@@ -482,6 +482,9 @@ public class EnglishStrings
 "field:BulletinWasSent=Sent",
 "field:preferencesAllPrivate=Prevent creating public bulletins",
 
+"field:PrintPrivateData=Include private data in print",
+"field:PrintPrivateDataMessage=You have an option to print all private information in a selected bulletin to printer. Anyone who gets a copy of this print out will be able to read all the private data.\n\nYou may select the checkbox below to include all private data in print.",
+
 "field:VirtualUserNameDescription=(Enter using regular keyboard)",
 "field:VirtualPasswordDescription=Enter Password using mouse with on-screen keyboard below",
 "field:VirtualKeyboardKeys=ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890-+=!@#$%^&*()_,.[]{}<>\\/?|;:~",
@@ -591,9 +594,6 @@ public class EnglishStrings
 
 "field:confirmSendWithPublicDatacause=You have chosen to save a completed bulletin.",
 "field:confirmSendWithPublicDataeffect=This will permanently seal the bulletin and you will not be allowed to make any further modifications to it except by creating a new copy of the bulletin.\n\nThe public information in this bulletin will be released for possible publication on the Martus Search Engine, and may be viewed by people outside your organization.\n\nIf there is information you do not want to be publicly available, either move that data to the private section of the bulletin or check the 'Keep ALL Information Private' box before saving the bulletin.",
-
-"field:confirmPrintPrivateDatacause=Choosing Yes will print the private information in the selected bulletin to printer.",
-"field:confirmPrintPrivateDataeffect=Anyone who gets a copy of this print out will be able to read all the private data.",
 
 "field:notifyDropErrorBulletinExistscause=One or more bulletins cannot be moved to that folder, because it already exists in that folder.",
 "field:notifyDropErrorscause=An unexpected error occurred while moving the bulletin(s). One or more files may be damaged.",
