@@ -26,7 +26,6 @@ Boston, MA 02111-1307, USA.
 
 package org.martus.client.swingui.bulletincomponent;
 
-import org.martus.client.core.ChoiceItem;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.fields.UiAttachmentViewer;
 import org.martus.client.swingui.fields.UiChoiceViewer;
@@ -37,6 +36,7 @@ import org.martus.client.swingui.fields.UiMultilineViewer;
 import org.martus.client.swingui.fields.UiNormalTextViewer;
 import org.martus.client.swingui.fields.UiUnknownViewer;
 import org.martus.common.bulletin.AttachmentProxy;
+import org.martus.common.clientside.ChoiceItem;
 
 public class UiBulletinComponentViewSection extends UiBulletinComponentSection
 {

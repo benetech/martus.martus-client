@@ -29,13 +29,13 @@ package org.martus.client.swingui.fields;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
 
-import org.martus.client.swingui.UiLocalization;
+import org.martus.common.clientside.UiBasicLocalization;
 import org.martus.common.utilities.MartusFlexidate;
 
 
 public class UiFlexiDateViewer extends UiField
 {
-	public UiFlexiDateViewer(UiLocalization localizationToUse)
+	public UiFlexiDateViewer(UiBasicLocalization localizationToUse)
 	{
 		localization = localizationToUse;
 		label = new JLabel();
@@ -57,7 +57,7 @@ public class UiFlexiDateViewer extends UiField
 		label.setText(SPACE + display + SPACE);
 	}	
 
-	static public String getViewableDateRange(String newText, UiLocalization localization)
+	static public String getViewableDateRange(String newText, UiBasicLocalization localization)
 	{
 		MartusFlexidate mfd = MartusFlexidate.createFromMartusDateString(newText);
 		
@@ -82,7 +82,7 @@ public class UiFlexiDateViewer extends UiField
 	{
 	}
 
-	UiLocalization localization;
+	UiBasicLocalization localization;
 	JLabel label;
 	private static String	SPACE = "  ";	
 }

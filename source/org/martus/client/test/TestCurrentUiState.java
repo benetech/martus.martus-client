@@ -33,7 +33,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.ObjectOutputStream;
 
-import org.martus.client.core.CurrentUiState;
+import org.martus.common.clientside.CurrentUiState;
 import org.martus.common.test.TestCaseEnhanced;
 
 

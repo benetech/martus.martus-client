@@ -35,14 +35,14 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
-import org.martus.client.swingui.UiLocalization;
+import org.martus.common.clientside.UiBasicLocalization;
 import org.martus.swing.ParagraphLayout;
 import org.martus.swing.UiWrappedTextArea;
 import org.martus.swing.Utilities;
 
 public class UiStringInputDlg extends JDialog
 {
-	public UiStringInputDlg(JFrame owner, UiLocalization localization, String baseTag, String descriptionTag, String defaultText)
+	public UiStringInputDlg(JFrame owner, UiBasicLocalization localization, String baseTag, String descriptionTag, String defaultText)
 	{
 		super(owner, "", true);
 

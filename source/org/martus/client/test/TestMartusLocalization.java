@@ -29,10 +29,13 @@ package org.martus.client.test;
 import java.util.Map;
 import java.util.Vector;
 
-import org.martus.client.core.ChoiceItem;
-import org.martus.client.core.DateUtilities;
 import org.martus.client.core.MartusApp;
+import org.martus.client.swingui.EnglishStrings;
+import org.martus.client.swingui.UiConstants;
 import org.martus.client.swingui.UiLocalization;
+import org.martus.common.clientside.ChoiceItem;
+import org.martus.common.clientside.DateUtilities;
+import org.martus.common.clientside.UiBasicLocalization;
 import org.martus.common.test.TestCaseEnhanced;
 import org.martus.util.StringInputStream;
 import org.martus.util.UnicodeStringWriter;
@@ -48,23 +51,23 @@ public class TestMartusLocalization extends TestCaseEnhanced
 	{
 		super.setUp();
 		if(bd == null)
-			bd = new UiLocalization(MartusApp.getTranslationsDirectory());
+			bd = new UiLocalization(MartusApp.getTranslationsDirectory(), EnglishStrings.strings);
  	}
 	
 	public void testDefaultDateFormats()
 	{
-		assertEquals("English should always return the default date format", DateUtilities.getDefaultDateFormatCode(), bd.getDefaultDateFormatForLanguage(UiLocalization.ENGLISH));
-		assertEquals("Spanish should always return Slash DMY", DateUtilities.DMY_SLASH.getCode(), bd.getDefaultDateFormatForLanguage(UiLocalization.SPANISH));
-		assertEquals("Russian should always return Dot DMY", DateUtilities.DMY_DOT.getCode(), bd.getDefaultDateFormatForLanguage(UiLocalization.RUSSIAN));
+		assertEquals("English should always return the default date format", DateUtilities.getDefaultDateFormatCode(), bd.getDefaultDateFormatForLanguage(UiBasicLocalization.ENGLISH));
+		assertEquals("Spanish should always return Slash DMY", DateUtilities.DMY_SLASH.getCode(), bd.getDefaultDateFormatForLanguage(UiBasicLocalization.SPANISH));
+		assertEquals("Russian should always return Dot DMY", DateUtilities.DMY_DOT.getCode(), bd.getDefaultDateFormatForLanguage(UiBasicLocalization.RUSSIAN));
 		assertEquals("An unknown Language should always return the default date format", DateUtilities.getDefaultDateFormatCode(), bd.getDefaultDateFormatForLanguage("ZZ"));
 	}
 	
 	public void testValidLanguageCodes()
 	{
 		assertFalse("null should not be recognized", bd.isRecognizedLanguage(null));
-		assertTrue("English should be recognized", bd.isRecognizedLanguage(UiLocalization.ENGLISH));
-		assertTrue("Spanish should be recognized", bd.isRecognizedLanguage(UiLocalization.SPANISH));
-		assertTrue("Russian should be recognized", bd.isRecognizedLanguage(UiLocalization.RUSSIAN));
+		assertTrue("English should be recognized", bd.isRecognizedLanguage(UiBasicLocalization.ENGLISH));
+		assertTrue("Spanish should be recognized", bd.isRecognizedLanguage(UiBasicLocalization.SPANISH));
+		assertTrue("Russian should be recognized", bd.isRecognizedLanguage(UiBasicLocalization.RUSSIAN));
 		assertFalse("Unknown should not be recognized", bd.isRecognizedLanguage("XX"));
 	}
 
@@ -131,7 +134,7 @@ public class TestMartusLocalization extends TestCaseEnhanced
 	public void testExportTranslations() throws Exception
 	{
 		UnicodeStringWriter writer = UnicodeStringWriter.create();
-		bd.exportTranslations("en", writer);
+		bd.exportTranslations("en", UiConstants.versionLabel, writer);
 		String result = writer.toString();
 		assertEquals("no leading ByteOrderMark?", 0xFEFF, result.charAt(0));
 		assertEquals("no leading comment?", 1, result.indexOf("#"));

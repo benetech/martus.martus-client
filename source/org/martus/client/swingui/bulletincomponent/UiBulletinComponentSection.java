@@ -36,18 +36,18 @@ import javax.swing.JPanel;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.LineBorder;
 
-import org.martus.client.core.ChoiceItem;
-import org.martus.client.swingui.UiLocalization;
 import org.martus.client.swingui.UiWarningLabel;
 import org.martus.client.swingui.fields.UiField;
 import org.martus.common.FieldSpec;
 import org.martus.common.bulletin.AttachmentProxy;
+import org.martus.common.clientside.ChoiceItem;
+import org.martus.common.clientside.UiBasicLocalization;
 import org.martus.common.packet.FieldDataPacket;
 import org.martus.swing.ParagraphLayout;
 
 abstract public class UiBulletinComponentSection extends JPanel
 {
-	UiBulletinComponentSection(UiLocalization localizationToUse, boolean encrypted)
+	UiBulletinComponentSection(UiBasicLocalization localizationToUse, boolean encrypted)
 	{
 		localization = localizationToUse;
 
@@ -205,7 +205,7 @@ abstract public class UiBulletinComponentSection extends JPanel
 			getParagraphLayout().setFirstColumnWidth(otherWidth);
 	}
 
-	UiLocalization localization;
+	UiBasicLocalization localization;
 	JLabel encryptedIndicator;
 	JLabel warningIndicator;
 	UiField[] fields;

@@ -31,7 +31,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JComboBox;
 import javax.swing.JComponent;
 
-import org.martus.client.core.ChoiceItem;
+import org.martus.common.clientside.ChoiceItem;
 
 public class UiChoiceEditor extends UiField
 {

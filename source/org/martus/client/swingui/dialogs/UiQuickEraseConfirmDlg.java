@@ -38,13 +38,13 @@ import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 
 import org.martus.client.core.QuickEraseOptions;
-import org.martus.client.swingui.UiLocalization;
+import org.martus.common.clientside.UiBasicLocalization;
 import org.martus.swing.ParagraphLayout;
 import org.martus.swing.Utilities;
 
 public class UiQuickEraseConfirmDlg extends JDialog
 {
-	public UiQuickEraseConfirmDlg(JFrame owner, UiLocalization localization, String baseTag)
+	public UiQuickEraseConfirmDlg(JFrame owner, UiBasicLocalization localization, String baseTag)
 	{
 		super(owner, "", true);
 
@@ -75,7 +75,7 @@ public class UiQuickEraseConfirmDlg extends JDialog
 		setResizable(false);
 	}	
 	
-	private JPanel quickEraseOptioinsLayout(UiLocalization localization, String baseTag)
+	private JPanel quickEraseOptioinsLayout(UiBasicLocalization localization, String baseTag)
 	{
 		String cause = localization.getFieldLabel("confirm" + baseTag + "effect");	
 		String effect = localization.getFieldLabel("confirm" + baseTag + "cause");	

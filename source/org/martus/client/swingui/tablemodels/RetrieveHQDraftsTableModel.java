@@ -29,15 +29,15 @@ package org.martus.client.swingui.tablemodels;
 import java.util.Vector;
 
 import org.martus.client.core.MartusApp;
-import org.martus.client.swingui.UiLocalization;
 import org.martus.client.swingui.dialogs.UiProgressRetrieveSummariesDlg;
 import org.martus.common.MartusUtilities.ServerErrorException;
+import org.martus.common.clientside.UiBasicLocalization;
 
 
 
 public class RetrieveHQDraftsTableModel extends RetrieveTableModelHQ
 {
-	public RetrieveHQDraftsTableModel(MartusApp appToUse, UiLocalization localizationToUse)
+	public RetrieveHQDraftsTableModel(MartusApp appToUse, UiBasicLocalization localizationToUse)
 	{
 		super(appToUse, localizationToUse);
 	}

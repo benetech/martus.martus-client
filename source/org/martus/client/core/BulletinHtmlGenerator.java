@@ -30,17 +30,17 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.StringReader;
 
-import org.martus.client.swingui.UiLocalization;
-import org.martus.client.swingui.fields.UiFlexiDateViewer;
 import org.martus.common.FieldSpec;
 import org.martus.common.MartusUtilities;
 import org.martus.common.bulletin.AttachmentProxy;
 import org.martus.common.bulletin.Bulletin;
+import org.martus.common.clientside.UiBasicLocalization;
 import org.martus.common.packet.FieldDataPacket;
+import org.martus.client.swingui.fields.UiFlexiDateViewer;
 
 public class BulletinHtmlGenerator
 {
-	public BulletinHtmlGenerator(int widthToUse, UiLocalization localizationToUse)
+	public BulletinHtmlGenerator(int widthToUse, UiBasicLocalization localizationToUse)
 	{
 		width = widthToUse;
 		localization = localizationToUse;
@@ -160,5 +160,5 @@ public class BulletinHtmlGenerator
 	}
 
 	int width;
-	UiLocalization localization;
+	UiBasicLocalization localization;
 }

@@ -37,13 +37,13 @@ import javax.swing.JComboBox;
 import javax.swing.JComponent;
 import javax.swing.JPanel;
 
-import org.martus.client.core.DateUtilities;
-import org.martus.client.swingui.UiLocalization;
 import org.martus.common.bulletin.Bulletin;
+import org.martus.common.clientside.DateUtilities;
+import org.martus.common.clientside.UiBasicLocalization;
 
 public class UiDateEditor extends UiField
 {
-	public UiDateEditor(UiLocalization localizationToUse)
+	public UiDateEditor(UiBasicLocalization localizationToUse)
 	{				
 		component = new JPanel();
 		Box box = Box.createHorizontalBox();
@@ -56,7 +56,7 @@ public class UiDateEditor extends UiField
 		component.add(box);
 	}
 	
-	public static void buildDate(Box box, UiLocalization localizationToUse,
+	public static void buildDate(Box box, UiBasicLocalization localizationToUse,
 			JComboBox yCombo, JComboBox mCombo, JComboBox dCombo)
 	{						
 		for(int day=1; day <= 31; ++day)

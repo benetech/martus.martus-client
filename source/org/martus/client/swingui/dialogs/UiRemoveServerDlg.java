@@ -35,8 +35,8 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 
 import org.martus.client.core.ConfigInfo;
-import org.martus.client.swingui.UiLocalization;
 import org.martus.client.swingui.UiMainWindow;
+import org.martus.common.clientside.UiBasicLocalization;
 import org.martus.swing.ParagraphLayout;
 import org.martus.swing.Utilities;
 
@@ -46,7 +46,7 @@ public class UiRemoveServerDlg extends JDialog implements ActionListener
 	public UiRemoveServerDlg(UiMainWindow owner,ConfigInfo info)
 	{
 		super(owner, "", true);
-		UiLocalization localization = owner.getLocalization();			
+		UiBasicLocalization localization = owner.getLocalization();			
 		
 		setTitle(localization.getWindowTitle("RemoveServer"));
 				

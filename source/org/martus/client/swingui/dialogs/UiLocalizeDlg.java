@@ -35,10 +35,10 @@ import javax.swing.JLabel;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
-import org.martus.client.core.DateUtilities;
-import org.martus.client.swingui.UiLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.fields.UiChoiceEditor;
+import org.martus.common.clientside.DateUtilities;
+import org.martus.common.clientside.UiBasicLocalization;
 import org.martus.swing.ParagraphLayout;
 import org.martus.swing.Utilities;
 
@@ -50,7 +50,7 @@ public class UiLocalizeDlg extends JDialog implements ActionListener, ChangeList
 	{
 		super(mainWindow, "", true);
 		owner = mainWindow;
-		UiLocalization localization = owner.getLocalization();
+		UiBasicLocalization localization = owner.getLocalization();
 
 		setTitle(localization.getMenuLabel("Preferences"));
 

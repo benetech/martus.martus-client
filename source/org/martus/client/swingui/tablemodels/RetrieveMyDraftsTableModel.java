@@ -27,15 +27,15 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.swingui.tablemodels;
 
 import org.martus.client.core.MartusApp;
-import org.martus.client.swingui.UiLocalization;
 import org.martus.client.swingui.dialogs.UiProgressRetrieveSummariesDlg;
 import org.martus.common.MartusUtilities.ServerErrorException;
+import org.martus.common.clientside.UiBasicLocalization;
 
 
 
 public class RetrieveMyDraftsTableModel extends RetrieveTableModelNonHQ
 {
-	public RetrieveMyDraftsTableModel(MartusApp appToUse, UiLocalization localizationToUse)
+	public RetrieveMyDraftsTableModel(MartusApp appToUse, UiBasicLocalization localizationToUse)
 	{
 		super(appToUse, localizationToUse);
 	}

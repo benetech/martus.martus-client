@@ -47,6 +47,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.TimerTask;
@@ -54,6 +55,7 @@ import java.util.Vector;
 
 import javax.print.attribute.HashPrintRequestAttributeSet;
 import javax.swing.AbstractAction;
+import javax.swing.ImageIcon;
 import javax.swing.JComponent;
 import javax.swing.JDialog;
 import javax.swing.JFileChooser;
@@ -72,12 +74,12 @@ import org.martus.client.core.BulletinHtmlGenerator;
 import org.martus.client.core.BulletinStore;
 import org.martus.client.core.ClientSideNetworkGateway;
 import org.martus.client.core.ConfigInfo;
-import org.martus.client.core.CurrentUiState;
 import org.martus.client.core.MartusApp;
 import org.martus.client.core.TransferableBulletinList;
 import org.martus.client.core.MartusApp.MartusAppInitializationException;
 import org.martus.client.swingui.bulletincomponent.UiBulletinPreview;
 import org.martus.client.swingui.bulletintable.UiBulletinTablePane;
+import org.martus.client.swingui.dialogs.*;
 import org.martus.client.swingui.dialogs.UiAboutDlg;
 import org.martus.client.swingui.dialogs.UiBulletinModifyDlg;
 import org.martus.client.swingui.dialogs.UiConfigServerDlg;
@@ -94,7 +96,6 @@ import org.martus.client.swingui.dialogs.UiRemoveServerDlg;
 import org.martus.client.swingui.dialogs.UiSearchDlg;
 import org.martus.client.swingui.dialogs.UiServerSummariesDlg;
 import org.martus.client.swingui.dialogs.UiShowScrollableTextDlg;
-import org.martus.client.swingui.dialogs.UiSigninDlg;
 import org.martus.client.swingui.dialogs.UiSplashDlg;
 import org.martus.client.swingui.dialogs.UiStringInputDlg;
 import org.martus.client.swingui.dialogs.UiTemplateDlg;
@@ -110,6 +111,7 @@ import org.martus.client.swingui.tablemodels.RetrieveTableModel;
 import org.martus.common.MartusUtilities;
 import org.martus.common.MartusUtilities.ServerErrorException;
 import org.martus.common.bulletin.Bulletin;
+import org.martus.common.clientside.*;
 import org.martus.common.crypto.MartusCrypto;
 import org.martus.common.database.Database;
 import org.martus.common.network.NetworkInterfaceConstants;
@@ -132,14 +134,14 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		currentActiveFrame = this;
 		try
 		{
-			localization = new UiLocalization(MartusApp.getTranslationsDirectory());
+			localization = new UiLocalization(MartusApp.getTranslationsDirectory(), EnglishStrings.strings);
 			app = new MartusApp(localization);
 		}
 		catch(MartusApp.MartusAppInitializationException e)
 		{
 			initializationErrorDlg(e.getMessage());
 		}
-		UiUtilities.updateIcon(this);
+		UiMainWindow.updateIcon(this);
 		
 		timeoutInXSeconds = TIMEOUT_SECONDS;
 		File timeoutDebug = new File("C:/Martus/timeout.1min");
@@ -153,7 +155,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	{
 		UiLocalization localization = getLocalization();
 		JFrame hiddenFrame = new JFrame(UiConstants.programName);
-		UiUtilities.updateIcon(hiddenFrame);
+		UiMainWindow.updateIcon(hiddenFrame);
 		hiddenFrame.setState(Frame.ICONIFIED);
 		hiddenFrame.show();
 		currentActiveFrame = hiddenFrame;
@@ -1803,6 +1805,17 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	{
 		return uiState;
 	}
+	
+	static public void updateIcon(JFrame window)
+	{
+		URL imageURL = UiMainWindow.class.getResource("Martus.png");
+		if(imageURL == null)
+			return;
+		ImageIcon imageicon = new ImageIcon(imageURL);
+		if(imageicon != null)
+			window.setIconImage(imageicon.getImage());
+	}
+
 	
 	private MartusApp app;
 	private CurrentUiState uiState;

@@ -50,12 +50,12 @@ import javax.swing.ListSelectionModel;
 
 import org.martus.client.core.MartusApp;
 import org.martus.client.core.TransferableAttachmentList;
-import org.martus.client.swingui.UiLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.bulletincomponent.UiBulletinComponent;
 import org.martus.client.swingui.bulletintable.UiBulletinTable;
 import org.martus.common.bulletin.AttachmentProxy;
 import org.martus.common.bulletin.BulletinSaver;
+import org.martus.common.clientside.UiBasicLocalization;
 import org.martus.common.database.Database;
 import org.martus.swing.ParagraphLayout;
 import org.martus.swing.UiFileChooser;
@@ -87,7 +87,7 @@ public class UiAttachmentViewer extends JPanel  implements DragGestureListener, 
 
 		vbox.add(attachmentPane);
 
-		UiLocalization localization = mainWindowToUse.getLocalization();
+		UiBasicLocalization localization = mainWindowToUse.getLocalization();
 
 		saveButton = new JButton(localization.getButtonLabel("saveattachment"));
 		saveButton.addActionListener(new SaveHandler());

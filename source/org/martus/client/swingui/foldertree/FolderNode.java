@@ -27,16 +27,16 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.swingui.foldertree;
 
 import org.martus.client.core.BulletinFolder;
-import org.martus.client.swingui.UiLocalization;
+import org.martus.common.clientside.UiBasicLocalization;
 
 public class FolderNode
 {
-	FolderNode(UiLocalization localizationToUse)
+	FolderNode(UiBasicLocalization localizationToUse)
 	{
 		this("??", localizationToUse);
 	}
 
-	public FolderNode(String internalNameToUse, UiLocalization localizationToUse)
+	public FolderNode(String internalNameToUse, UiBasicLocalization localizationToUse)
 	{
 		setInternalName(internalNameToUse);
 		localization = localizationToUse;
@@ -66,5 +66,5 @@ public class FolderNode
 	}
 	
 	String internalName;
-	UiLocalization localization;
+	UiBasicLocalization localization;
 }

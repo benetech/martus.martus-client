@@ -33,12 +33,12 @@ import javax.swing.JScrollPane;
 import javax.swing.text.JTextComponent;
 
 import org.martus.client.swingui.UiConstants;
-import org.martus.client.swingui.UiLocalization;
+import org.martus.common.clientside.UiBasicLocalization;
 import org.martus.swing.UiTextArea;
 
 public class UiMultilineTextEditor extends UiTextField
 {
-	public UiMultilineTextEditor(UiLocalization localizationToUse)
+	public UiMultilineTextEditor(UiBasicLocalization localizationToUse)
 	{
 		super(localizationToUse);
 		editor = new UiTextArea(5, UiConstants.textFieldColumns);

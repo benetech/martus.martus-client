@@ -36,16 +36,16 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 
-import org.martus.client.swingui.UiLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.UiProgressMeter;
+import org.martus.common.clientside.UiBasicLocalization;
 
 public class UiProgressRetrieveDlg extends JDialog
 {
 	public UiProgressRetrieveDlg(UiMainWindow window, String tag)
 	{
 		super(window, window.getLocalization().getWindowTitle(tag), true);
-		UiLocalization localization = window.getLocalization();
+		UiBasicLocalization localization = window.getLocalization();
 		setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 		addWindowListener(new WindowEventHandler());
 		cancel = new JButton(localization.getButtonLabel("cancel"));

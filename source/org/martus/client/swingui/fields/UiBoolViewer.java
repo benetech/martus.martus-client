@@ -32,11 +32,11 @@ import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.border.LineBorder;
 
-import org.martus.client.swingui.UiLocalization;
+import org.martus.common.clientside.UiBasicLocalization;
 
 public class UiBoolViewer extends UiField
 {
-	public UiBoolViewer(UiLocalization localizationToUse)
+	public UiBoolViewer(UiBasicLocalization localizationToUse)
 	{
 		localization = localizationToUse;
 		widget = new JLabel();
@@ -68,7 +68,7 @@ public class UiBoolViewer extends UiField
 	{
 	}
 
-	UiLocalization localization;
+	UiBasicLocalization localization;
 	JLabel widget;
 }
 

@@ -28,12 +28,12 @@ package org.martus.client.swingui.tablemodels;
 
 import org.martus.client.core.BulletinSummary;
 import org.martus.client.core.MartusApp;
-import org.martus.client.swingui.UiLocalization;
 import org.martus.common.bulletin.Bulletin;
+import org.martus.common.clientside.UiBasicLocalization;
 
 public abstract class RetrieveTableModelHQ extends RetrieveTableModel {
 
-	public RetrieveTableModelHQ(MartusApp appToUse, UiLocalization localizationToUse)
+	public RetrieveTableModelHQ(MartusApp appToUse, UiBasicLocalization localizationToUse)
 	{
 		super(appToUse, localizationToUse);
 	}

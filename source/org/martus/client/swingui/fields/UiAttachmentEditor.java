@@ -48,10 +48,10 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
 import org.martus.client.swingui.UiFocusListener;
-import org.martus.client.swingui.UiLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.bulletintable.UiBulletinTable;
 import org.martus.common.bulletin.AttachmentProxy;
+import org.martus.common.clientside.UiBasicLocalization;
 import org.martus.swing.ParagraphLayout;
 import org.martus.swing.UiFileChooser;
 
@@ -82,7 +82,7 @@ public class UiAttachmentEditor extends JPanel
 		scrollPane.getVerticalScrollBar().setFocusable(false);
 		vbox.add(scrollPane);
 
-		UiLocalization localization = mainWindowToUse.getLocalization();
+		UiBasicLocalization localization = mainWindowToUse.getLocalization();
 		JButton add = new JButton(localization.getButtonLabel("addattachment"));
 	
 		add.addFocusListener(new UiFocusListener(this));		
@@ -232,7 +232,7 @@ public class UiAttachmentEditor extends JPanel
 			File last = getLastAttachmentLoadDirectory();
 			if(last != null)
 				chooser.setCurrentDirectory(last);
-			UiLocalization localization = mainWindow.getLocalization();
+			UiBasicLocalization localization = mainWindow.getLocalization();
 			chooser.setApproveButtonText(localization.getButtonLabel("addattachment"));
 			int returnVal = chooser.showOpenDialog(UiAttachmentEditor.this);
 			if(returnVal == JFileChooser.APPROVE_OPTION)

@@ -29,9 +29,9 @@ package org.martus.client.test;
 import java.io.File;
 import java.io.IOException;
 
-import org.martus.client.swingui.UiLocalization;
+import org.martus.common.clientside.UiBasicLocalization;
 
-public class MockUiLocalization extends UiLocalization
+public class MockUiLocalization extends UiBasicLocalization
 {
 
 	public MockUiLocalization() throws IOException

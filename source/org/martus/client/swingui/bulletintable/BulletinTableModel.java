@@ -29,14 +29,14 @@ package org.martus.client.swingui.bulletintable;
 import javax.swing.table.AbstractTableModel;
 
 import org.martus.client.core.BulletinFolder;
-import org.martus.client.swingui.UiLocalization;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.bulletin.BulletinConstants;
+import org.martus.common.clientside.UiBasicLocalization;
 import org.martus.common.packet.UniversalId;
 
 public class BulletinTableModel extends AbstractTableModel
 {
-    public BulletinTableModel(UiLocalization localizationToUse)
+    public BulletinTableModel(UiBasicLocalization localizationToUse)
     {
 		localization = localizationToUse;
     }
@@ -129,6 +129,6 @@ public class BulletinTableModel extends AbstractTableModel
 		folder.sortBy(getFieldName(columnIndex));
 	}
 
-	UiLocalization localization;
+	UiBasicLocalization localization;
 	BulletinFolder folder;
 }

@@ -36,10 +36,11 @@ import javax.swing.border.BevelBorder;
 
 import org.martus.client.swingui.dialogs.UiProgressRetrieveDlg;
 import org.martus.common.ProgressMeterInterface;
+import org.martus.common.clientside.UiBasicLocalization;
 
 public class UiProgressMeter extends JPanel implements ProgressMeterInterface
 {
-	public UiProgressMeter(UiProgressRetrieveDlg dlg, UiLocalization localizationToUse)
+	public UiProgressMeter(UiProgressRetrieveDlg dlg, UiBasicLocalization localizationToUse)
 	{
 		super();
 		localization = localizationToUse;
@@ -89,5 +90,5 @@ public class UiProgressMeter extends JPanel implements ProgressMeterInterface
 	private JLabel statusMessage;
 	private JProgressBar progressMeter;
 	private UiProgressRetrieveDlg parentDlg;
-	private UiLocalization localization;
+	private UiBasicLocalization localization;
 }

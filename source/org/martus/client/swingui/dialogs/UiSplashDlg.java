@@ -37,12 +37,12 @@ import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.border.EmptyBorder;
 
-import org.martus.client.swingui.UiLocalization;
+import org.martus.common.clientside.UiBasicLocalization;
 import org.martus.swing.Utilities;
 
 public class UiSplashDlg extends JDialog implements ActionListener
 {
-	public UiSplashDlg(Frame owner, UiLocalization localization, String text)
+	public UiSplashDlg(Frame owner, UiBasicLocalization localization, String text)
 	{
 		super(owner, owner.getTitle(), true);
 		Container contents = getContentPane();

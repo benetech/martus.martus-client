@@ -44,10 +44,10 @@ import javax.swing.JScrollPane;
 
 import org.martus.client.core.BulletinStore;
 import org.martus.client.core.BulletinXmlExporter;
-import org.martus.client.swingui.UiLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.bulletin.BulletinConstants;
+import org.martus.common.clientside.UiBasicLocalization;
 import org.martus.common.packet.UniversalId;
 import org.martus.swing.UiFileChooser;
 import org.martus.swing.UiWrappedTextArea;
@@ -67,7 +67,7 @@ public class UiExportBulletinsDlg extends JDialog implements ActionListener
 
 	private void constructDialog()
 	{
-		UiLocalization localization = mainWindow.getLocalization();
+		UiBasicLocalization localization = mainWindow.getLocalization();
 		setTitle(localization.getWindowTitle("ExportBulletins"));
 		
 		includePrivate = new JCheckBox(localization.getFieldLabel("ExportPrivateData"));

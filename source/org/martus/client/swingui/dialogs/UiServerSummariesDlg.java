@@ -52,9 +52,9 @@ import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableModel;
 
-import org.martus.client.swingui.UiLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.tablemodels.RetrieveTableModel;
+import org.martus.common.clientside.UiBasicLocalization;
 import org.martus.common.packet.FieldDataPacket;
 import org.martus.swing.ParagraphLayout;
 import org.martus.swing.UiWrappedTextArea;
@@ -74,7 +74,7 @@ public class UiServerSummariesDlg extends JDialog
 
 	void initialize(String topMessageTag, String okButtonTag)
 	{
-		UiLocalization localization = mainWindow.getLocalization();
+		UiBasicLocalization localization = mainWindow.getLocalization();
 
 		disabledBackgroundColor = getBackground();
 
@@ -116,7 +116,7 @@ public class UiServerSummariesDlg extends JDialog
 		setSize(dim);
 	}
 
-	private JPanel createActionsPanel(UiLocalization localization, String okButtonTag)
+	private JPanel createActionsPanel(UiBasicLocalization localization, String okButtonTag)
 	{
 		JButton ok = new JButton(localization.getButtonLabel(okButtonTag));
 		ok.addActionListener(new OkHandler());
@@ -146,7 +146,7 @@ public class UiServerSummariesDlg extends JDialog
 		return southPanel;
 	}
 
-	private JPanel createSummariesPanel(UiLocalization localization)
+	private JPanel createSummariesPanel(UiBasicLocalization localization)
 	{
 		JRadioButton downloadableSummaries = new JRadioButton(localization.getButtonLabel("DownloadableSummaries"), true);
 		downloadableSummaries.addActionListener(new ChangeDownloadableSummariesHandler());

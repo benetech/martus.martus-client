@@ -38,17 +38,19 @@ import java.util.Vector;
 
 import org.martus.client.core.BulletinFolder;
 import org.martus.client.core.BulletinStore;
-import org.martus.client.core.ChoiceItem;
 import org.martus.client.core.ConfigInfo;
-import org.martus.client.core.DateUtilities;
-import org.martus.client.core.Localization;
 import org.martus.client.core.MartusApp;
 import org.martus.client.core.QuickEraseOptions;
 import org.martus.client.core.MartusApp.AccountAlreadyExistsException;
 import org.martus.client.core.MartusApp.CannotCreateAccountFileException;
+import org.martus.client.swingui.EnglishStrings;
 import org.martus.client.swingui.UiLocalization;
 import org.martus.common.MartusUtilities;
 import org.martus.common.bulletin.Bulletin;
+import org.martus.common.clientside.ChoiceItem;
+import org.martus.common.clientside.DateUtilities;
+import org.martus.common.clientside.Localization;
+import org.martus.common.clientside.UiBasicLocalization;
 import org.martus.common.crypto.MartusCrypto;
 import org.martus.common.crypto.MockMartusSecurity;
 import org.martus.common.database.Database;
@@ -74,7 +76,7 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 
 		mockSecurityForApp = MockMartusSecurity.createClient();
 
-		localization = new UiLocalization(null);
+		localization = new UiLocalization(null, EnglishStrings.strings);
 		localization.setCurrentLanguageCode("en");
 		appWithAccount = MockMartusApp.create(mockSecurityForApp);
 		appWithAccount.setSSLNetworkInterfaceHandlerForTesting(new ServerSideNetworkHandlerNotAvailable());
@@ -104,7 +106,7 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 	
 	public void testSetDefaultUiState() throws Exception
 	{
-		UiLocalization testLocalization = new UiLocalization(null);
+		UiBasicLocalization testLocalization = new UiBasicLocalization(null);
 		File tmpFile = createTempFile();
 		MartusApp.setInitialUiDefaultsFromFileIfPresent(testLocalization, tmpFile);
 		assertNull("File doesn't exist localization should not be set", testLocalization.getCurrentLanguageCode());
@@ -207,7 +209,7 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 
 			try
 			{
-				UiLocalization localization = new UiLocalization(fakeDataDirectory);
+				UiBasicLocalization localization = new UiBasicLocalization(fakeDataDirectory);
 				MartusApp app = new MartusApp(mockSecurityForApp, fakeDataDirectory, localization);
 				app.setCurrentAccount("some user", app.getMartusDataRootDirectory());
 				app.doAfterSigninInitalization();
@@ -263,7 +265,7 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 
 			try
 			{
-				UiLocalization localization = new UiLocalization(fakeDataDirectory);
+				UiBasicLocalization localization = new UiBasicLocalization(fakeDataDirectory);
 				MartusApp app = new MartusApp(mockSecurityForApp, fakeDataDirectory, localization);
 				app.setCurrentAccount("some user", app.getMartusDataRootDirectory());
 				app.doAfterSigninInitalization();
@@ -327,7 +329,7 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 
 			try
 			{
-				UiLocalization localization = new UiLocalization(fakeDataDirectory);
+				UiBasicLocalization localization = new UiBasicLocalization(fakeDataDirectory);
 				MartusApp app = new MartusApp(mockSecurityForApp, fakeDataDirectory, localization);
 				app.setCurrentAccount("some user", app.getMartusDataRootDirectory());
 				app.doAfterSigninInitalization();

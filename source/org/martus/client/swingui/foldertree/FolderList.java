@@ -30,11 +30,11 @@ import java.util.Vector;
 import javax.swing.tree.DefaultTreeModel;
 
 import org.martus.client.core.BulletinStore;
-import org.martus.client.swingui.UiLocalization;
+import org.martus.common.clientside.UiBasicLocalization;
 
 public class FolderList extends DefaultTreeModel
 {
-	public FolderList(UiLocalization localizationToUse)
+	public FolderList(UiBasicLocalization localizationToUse)
 	{
 		super(new FolderTreeNode("?", localizationToUse));
 		localization = localizationToUse;
@@ -87,5 +87,5 @@ public class FolderList extends DefaultTreeModel
 	}
 
 	FolderTreeNode root;
-	UiLocalization localization;
+	UiBasicLocalization localization;
 }

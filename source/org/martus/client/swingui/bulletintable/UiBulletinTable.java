@@ -65,13 +65,13 @@ import org.martus.client.core.MartusApp;
 import org.martus.client.core.TransferableBulletinList;
 import org.martus.client.core.BulletinStore.StatusNotAllowedException;
 import org.martus.client.swingui.UiClipboardUtilities;
-import org.martus.client.swingui.UiLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.dialogs.UiBulletinModifyDlg.CancelHandler;
 import org.martus.client.swingui.dialogs.UiBulletinModifyDlg.DeleteBulletinOnCancel;
 import org.martus.client.swingui.dialogs.UiBulletinModifyDlg.DoNothingOnCancel;
 import org.martus.client.swingui.foldertree.FolderNode;
 import org.martus.common.bulletin.Bulletin;
+import org.martus.common.clientside.UiBasicLocalization;
 import org.martus.common.database.DatabaseKey;
 import org.martus.common.packet.UniversalId;
 import org.martus.swing.UiNotifyDlg;
@@ -355,7 +355,7 @@ public class UiBulletinTable extends JTable implements ListSelectionListener, Dr
 
 	public boolean confirmDeletionOfFile(String filePath)
 	{
-		UiLocalization localization = mainWindow.getLocalization();
+		UiBasicLocalization localization = mainWindow.getLocalization();
 		String title = localization.getWindowTitle("DeleteBulletinFile");
 		String msg1 = localization.getFieldLabel("DeleteBulletinFileMsg1");
 		String msg2 = localization.getFieldLabel("DeleteBulletinFileMsg2");
@@ -587,7 +587,7 @@ public class UiBulletinTable extends JTable implements ListSelectionListener, Dr
 
 	private boolean confirmDeleteBulletins(String dialogTag, Vector foldersToList)
 	{
-		UiLocalization localization = mainWindow.getLocalization();
+		UiBasicLocalization localization = mainWindow.getLocalization();
 		String title = localization.getWindowTitle(dialogTag);
 		String cause = localization.getFieldLabel(dialogTag + "cause");
 		String folders = buildFolderNameList(foldersToList);
@@ -599,7 +599,7 @@ public class UiBulletinTable extends JTable implements ListSelectionListener, Dr
 
 	private String buildFolderNameList(Vector visibleFoldersContainingThisBulletin)
 	{
-		UiLocalization localization = mainWindow.getLocalization();
+		UiBasicLocalization localization = mainWindow.getLocalization();
 		String names = "";
 		for(int i = 0 ; i < visibleFoldersContainingThisBulletin.size() ; ++i)
 		{

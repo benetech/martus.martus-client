@@ -36,8 +36,8 @@ import javax.swing.JTextField;
 
 import org.martus.client.core.ConfigInfo;
 import org.martus.client.core.MartusApp;
-import org.martus.client.swingui.UiLocalization;
 import org.martus.client.swingui.UiMainWindow;
+import org.martus.common.clientside.UiBasicLocalization;
 import org.martus.common.crypto.MartusCrypto;
 import org.martus.swing.ParagraphLayout;
 import org.martus.swing.Utilities;
@@ -53,7 +53,7 @@ public class UiConfigServerDlg extends JDialog implements ActionListener
 		info = infoToUse;
 		mainWindow = owner;
 		app = owner.getApp();
-		UiLocalization localization = mainWindow.getLocalization();
+		UiBasicLocalization localization = mainWindow.getLocalization();
 		
 		setTitle(localization.getWindowTitle("ConfigServer"));
 		getContentPane().setLayout(new ParagraphLayout());

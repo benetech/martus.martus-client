@@ -29,7 +29,7 @@ package org.martus.client.swingui.fields;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
 
-import org.martus.client.core.ChoiceItem;
+import org.martus.common.clientside.ChoiceItem;
 
 public class UiChoiceViewer extends UiField
 {

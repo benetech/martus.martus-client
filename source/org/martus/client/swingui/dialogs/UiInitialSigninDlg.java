@@ -38,19 +38,18 @@ import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTabbedPane;
 
-import org.martus.client.core.CurrentUiState;
-import org.martus.client.swingui.UiLocalization;
+import org.martus.common.clientside.*;
 import org.martus.swing.UiWrappedTextArea;
 
 
 public class UiInitialSigninDlg extends UiSigninDlg
 {
-	public UiInitialSigninDlg(UiLocalization localizationToUse, CurrentUiState uiStateToUse, JFrame owner, int mode)
+	public UiInitialSigninDlg(UiBasicLocalization localizationToUse, CurrentUiState uiStateToUse, JFrame owner, int mode)
 	{
 		super(localizationToUse, uiStateToUse, owner, mode);
 	}
 
-	JPanel createMainPanel()
+	protected JPanel createMainPanel()
 	{
 		JPanel scrolledPanel = new JPanel(); 
 		tabbedPane = new JTabbedPane();

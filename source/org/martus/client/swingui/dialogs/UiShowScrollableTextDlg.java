@@ -36,8 +36,8 @@ import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 
-import org.martus.client.swingui.UiLocalization;
 import org.martus.client.swingui.UiMainWindow;
+import org.martus.common.clientside.UiBasicLocalization;
 import org.martus.swing.ParagraphLayout;
 import org.martus.swing.UiTextArea;
 import org.martus.swing.UiWrappedTextArea;
@@ -61,7 +61,7 @@ public class UiShowScrollableTextDlg extends JDialog implements ActionListener
 
 		try 
 		{
-			UiLocalization localization = mainWindow.getLocalization();
+			UiBasicLocalization localization = mainWindow.getLocalization();
 			String windowTitle = localization.getWindowTitle(titleTag);
 			setTitle(TokenReplacement.replaceTokens(windowTitle, tokenReplacement));
 			String buttonLabel = localization.getButtonLabel(okButtonTag);

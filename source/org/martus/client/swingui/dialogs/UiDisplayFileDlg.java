@@ -45,8 +45,8 @@ import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
-import org.martus.client.swingui.UiLocalization;
 import org.martus.client.swingui.UiMainWindow;
+import org.martus.common.clientside.UiBasicLocalization;
 import org.martus.swing.ParagraphLayout;
 import org.martus.swing.UiWrappedTextArea;
 import org.martus.swing.Utilities;
@@ -60,7 +60,7 @@ public class UiDisplayFileDlg extends JDialog
 	{
 		super(owner, "", true);
 		tocList = null;
-		UiLocalization localization = owner.getLocalization();
+		UiBasicLocalization localization = owner.getLocalization();
 
 		setTitle(localization.getWindowTitle(baseTag));
 		getContentPane().setLayout(new ParagraphLayout());

@@ -41,14 +41,14 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 
-import org.martus.client.swingui.UiLocalization;
 import org.martus.common.bulletin.Bulletin;
+import org.martus.common.clientside.UiBasicLocalization;
 import org.martus.common.utilities.MartusFlexidate;
 import org.martus.swing.ParagraphLayout;
 
 public class UiFlexiDateEditor extends UiField
 {
-	public UiFlexiDateEditor(UiLocalization localization)
+	public UiFlexiDateEditor(UiBasicLocalization localization)
 	{
 		localizationToUse = localization;
 		init();
@@ -276,7 +276,7 @@ public class UiFlexiDateEditor extends UiField
 	JComboBox 					endDayCombo;
 	JComboBox 					endYearCombo;
 		
-	private UiLocalization 		localizationToUse;	
+	private UiBasicLocalization 		localizationToUse;	
 	private JRadioButton 		exactDateRB;
 	private JRadioButton 		flexiDateRB;
 	private JPanel 				flexiDatePanel;

@@ -46,14 +46,13 @@ import javax.swing.JViewport;
 import org.martus.client.core.BulletinStore;
 import org.martus.client.core.EncryptionChangeListener;
 import org.martus.client.core.MartusApp;
-import org.martus.client.swingui.UiLocalization;
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.client.swingui.UiUtilities;
 import org.martus.client.swingui.bulletincomponent.UiBulletinComponent;
 import org.martus.client.swingui.bulletincomponent.UiBulletinEditor;
 import org.martus.client.swingui.fields.UiDateEditor;
 import org.martus.client.swingui.fields.UiField.DataInvalidException;
 import org.martus.common.bulletin.Bulletin;
+import org.martus.common.clientside.UiBasicLocalization;
 import org.martus.common.crypto.MartusCrypto;
 import org.martus.common.crypto.MartusCrypto.CryptoException;
 import org.martus.swing.Utilities;
@@ -65,9 +64,9 @@ public class UiBulletinModifyDlg extends JFrame implements ActionListener, Windo
 		observer = observerToUse;
 		cancelHandler = cancelHandlerToUse;
 
-		UiLocalization localization = observer.getLocalization();
+		UiBasicLocalization localization = observer.getLocalization();
 		setTitle(localization.getWindowTitle("create"));
-		UiUtilities.updateIcon(this);
+		UiMainWindow.updateIcon(this);
 		try
 		{
 			bulletin = b;

@@ -29,11 +29,11 @@ package org.martus.client.swingui.fields;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
 
-import org.martus.client.swingui.UiLocalization;
+import org.martus.common.clientside.UiBasicLocalization;
 
 public class UiDateViewer extends UiField
 {
-	public UiDateViewer(UiLocalization localizationToUse)
+	public UiDateViewer(UiBasicLocalization localizationToUse)
 	{
 		localization = localizationToUse;
 		label = new JLabel();
@@ -59,7 +59,7 @@ public class UiDateViewer extends UiField
 	{
 	}
 
-	UiLocalization localization;
+	UiBasicLocalization localization;
 	JLabel label;
 	String value;
 }

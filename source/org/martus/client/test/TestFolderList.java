@@ -27,9 +27,9 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.test;
 
 import org.martus.client.core.BulletinStore;
-import org.martus.client.swingui.UiLocalization;
 import org.martus.client.swingui.foldertree.FolderList;
 import org.martus.client.swingui.foldertree.FolderTreeNode;
+import org.martus.common.clientside.UiBasicLocalization;
 import org.martus.common.database.MockClientDatabase;
 import org.martus.common.test.TestCaseEnhanced;
 
@@ -136,7 +136,7 @@ public class TestFolderList extends TestCaseEnhanced
 		return store.getVisibleFolderNames().size();
 	}
 	
-	private UiLocalization getLocalization()
+	private UiBasicLocalization getLocalization()
 	{
 		return localization;
 

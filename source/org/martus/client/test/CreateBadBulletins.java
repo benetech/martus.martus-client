@@ -31,11 +31,11 @@ import java.io.File;
 import java.io.IOException;
 
 import org.martus.client.core.BulletinStore;
-import org.martus.client.core.Localization;
 import org.martus.client.core.MartusApp;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.bulletin.BulletinConstants;
 import org.martus.common.bulletin.BulletinSaver;
+import org.martus.common.clientside.Localization;
 import org.martus.common.crypto.MartusCrypto;
 import org.martus.common.crypto.MartusCrypto.CryptoException;
 import org.martus.common.test.BulletinForTesting;

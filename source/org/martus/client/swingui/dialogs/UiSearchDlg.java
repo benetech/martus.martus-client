@@ -34,10 +34,10 @@ import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
-import org.martus.client.swingui.UiLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.fields.UiDateEditor;
 import org.martus.common.bulletin.Bulletin;
+import org.martus.common.clientside.UiBasicLocalization;
 import org.martus.swing.ParagraphLayout;
 import org.martus.swing.UiWrappedTextArea;
 import org.martus.swing.Utilities;
@@ -47,7 +47,7 @@ public class UiSearchDlg extends JDialog  implements ActionListener
 	public UiSearchDlg(UiMainWindow owner)
 	{
 		super(owner, "", true);
-		UiLocalization localization = owner.getLocalization();
+		UiBasicLocalization localization = owner.getLocalization();
 
 		setTitle(localization.getWindowTitle("search"));
 		search = new JButton(localization.getButtonLabel("search"));

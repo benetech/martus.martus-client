@@ -28,12 +28,12 @@ package org.martus.client.swingui.foldertree;
 
 import javax.swing.tree.DefaultMutableTreeNode;
 
-import org.martus.client.swingui.UiLocalization;
+import org.martus.common.clientside.UiBasicLocalization;
 
 public class FolderTreeNode extends DefaultMutableTreeNode
 {
 
-	public FolderTreeNode(Object obj, UiLocalization localizationToUse)
+	public FolderTreeNode(Object obj, UiBasicLocalization localizationToUse)
 	{
 		super();
 		internalNode = new FolderNode(localizationToUse);

@@ -34,10 +34,10 @@ import javax.swing.table.AbstractTableModel;
 import org.martus.client.core.BulletinStore;
 import org.martus.client.core.BulletinSummary;
 import org.martus.client.core.MartusApp;
-import org.martus.client.swingui.UiLocalization;
 import org.martus.client.swingui.dialogs.UiProgressRetrieveSummariesDlg;
 import org.martus.common.MartusUtilities;
 import org.martus.common.MartusUtilities.ServerErrorException;
+import org.martus.common.clientside.UiBasicLocalization;
 import org.martus.common.crypto.MartusCrypto.MartusSignatureException;
 import org.martus.common.network.NetworkInterfaceConstants;
 import org.martus.common.network.NetworkResponse;
@@ -45,7 +45,7 @@ import org.martus.common.packet.UniversalId;
 
 abstract public class RetrieveTableModel extends AbstractTableModel
 {
-	public RetrieveTableModel(MartusApp appToUse, UiLocalization localizationToUse)
+	public RetrieveTableModel(MartusApp appToUse, UiBasicLocalization localizationToUse)
 	{
 		app = appToUse;
 		localization = localizationToUse;
@@ -57,7 +57,7 @@ abstract public class RetrieveTableModel extends AbstractTableModel
 
 	abstract public void initialize(UiProgressRetrieveSummariesDlg progressDlg) throws ServerErrorException;
 	
-	UiLocalization getLocalization()
+	UiBasicLocalization getLocalization()
 	{
 		return localization;
 	}
@@ -292,7 +292,7 @@ abstract public class RetrieveTableModel extends AbstractTableModel
 	}
 
 	MartusApp app;
-	UiLocalization localization;
+	UiBasicLocalization localization;
 	
 	BulletinStore store;
 	UiProgressRetrieveSummariesDlg retrieverDlg;

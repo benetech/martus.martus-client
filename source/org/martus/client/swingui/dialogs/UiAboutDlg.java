@@ -43,9 +43,9 @@ import javax.swing.JDialog;
 import javax.swing.JLabel;
 
 import org.martus.client.swingui.UiConstants;
-import org.martus.client.swingui.UiLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.common.VersionBuildDate;
+import org.martus.common.clientside.UiBasicLocalization;
 import org.martus.swing.UiWrappedTextArea;
 import org.martus.swing.Utilities;
 
@@ -55,7 +55,7 @@ public class UiAboutDlg extends JDialog implements ActionListener
 		throws HeadlessException
 	{
 		super(owner, "" , true);
-		UiLocalization localization = owner.getLocalization();
+		UiBasicLocalization localization = owner.getLocalization();
 		
 		setTitle(localization.getWindowTitle("about"));
 

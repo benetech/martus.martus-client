@@ -36,8 +36,8 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 
 import org.martus.client.core.ConfigInfo;
-import org.martus.client.swingui.UiLocalization;
 import org.martus.client.swingui.UiMainWindow;
+import org.martus.common.clientside.UiBasicLocalization;
 import org.martus.swing.ParagraphLayout;
 import org.martus.swing.UiTextArea;
 import org.martus.swing.UiWrappedTextArea;
@@ -50,7 +50,7 @@ public class UiContactInfoDlg extends JDialog implements ActionListener
 		super(mainWindow, "", true);
 		info = infoToUse;
 
-		UiLocalization localization = mainWindow.getLocalization();
+		UiBasicLocalization localization = mainWindow.getLocalization();
 	
 		setTitle(localization.getWindowTitle("setupcontact"));
 		ok = new JButton(localization.getButtonLabel("ok"));
