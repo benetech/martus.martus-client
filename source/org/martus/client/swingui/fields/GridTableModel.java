@@ -26,9 +26,8 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.swingui.fields;
 
 import java.io.IOException;
-import java.util.Vector;
 
-import javax.swing.table.DefaultTableModel;
+import javax.swing.table.AbstractTableModel;
 import javax.xml.parsers.ParserConfigurationException;
 
 import org.martus.common.GridData;
@@ -36,8 +35,13 @@ import org.martus.common.GridFieldSpec;
 import org.xml.sax.SAXException;
 
 
-public class GridTableModel extends DefaultTableModel
+public class GridTableModel extends AbstractTableModel
 {
+	public GridTableModel(GridFieldSpec fieldSpecToUse)
+	{
+		fieldSpec = fieldSpecToUse;
+		gridData = new GridData(fieldSpec.getColumnCount());
+	}
 	
 	public int getColumnCount() 
 	{
@@ -49,22 +53,14 @@ public class GridTableModel extends DefaultTableModel
 	{
 		if(column == 0)
 			return false;
-		return super.isCellEditable(row, column);
-	}
-	public GridTableModel(GridFieldSpec fieldSpec)
-	{
-		Vector columnLabels = new Vector();
-		columnLabels.add(fieldSpec.getColumnZeroLabel());
-		columnLabels.addAll(fieldSpec.getAllColumnLabels());
-		setColumnIdentifiers(columnLabels);
-		gridData = new GridData(fieldSpec.getColumnCount());
+		return true;
 	}
 	
 	public void addEmptyRow()
 	{
 		gridData.addEmptyRow();
 		int newRowIndex = getRowCount()-1;
-		this.fireTableRowsInserted(newRowIndex, newRowIndex);
+		fireTableRowsInserted(newRowIndex, newRowIndex);
 	}
 	
 	public int getRowCount()
@@ -74,6 +70,13 @@ public class GridTableModel extends DefaultTableModel
 		return gridData.getRowCount();
 	}
 
+	public String getColumnName(int column) 
+	{
+		if(column == 0)
+			return fieldSpec.getColumnZeroLabel();
+		return (String)fieldSpec.getAllColumnLabels().get(column - EXTRA_COLUMN);
+	}
+	
 	public Object getValueAt(int row, int column)
 	{
 		if(column == 0)
@@ -99,6 +102,8 @@ public class GridTableModel extends DefaultTableModel
 		gridData.setFromXml(xmlText);
 		fireTableDataChanged();
 	}
+	
 	private int EXTRA_COLUMN = 1;
 	private GridData gridData;
+	private GridFieldSpec fieldSpec;
 }
