@@ -137,6 +137,7 @@ import org.martus.swing.UiNotifyDlg;
 import org.martus.swing.Utilities;
 import org.martus.swing.Utilities.Delay;
 import org.martus.util.FileVerifier;
+import org.martus.util.OneEntryMap;
 import org.martus.util.Base64.InvalidBase64Exception;
 
 public class UiMainWindow extends JFrame implements ClipboardOwner
@@ -1321,7 +1322,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		catch(Exception e)
 		{
 			e.printStackTrace();
-			notifyDlg("RewriteKeyPairFailed");
+			notifyDlg(currentActiveFrame, "RewriteKeyPairFailed", new OneEntryMap("#S#", keyPairFile.getAbsolutePath()));
 			return false;
 			//TODO eventually try to restore keypair from backup.
 		}

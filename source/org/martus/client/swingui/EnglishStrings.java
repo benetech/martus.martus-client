@@ -624,7 +624,7 @@ public class EnglishStrings
 "field:notifyserverokcause=The Server has been selected.",
 "field:notifymagicwordokcause=The Server has accepted your request for permission to upload bulletins.",
 "field:notifymagicwordrejectedcause=The Server has rejected your request. The magic word is probably not correct.",
-"field:notifyRewriteKeyPairFailedcause=An error occurred.  Unable to change user name or password.  You may need to restore your backup key pair file.",
+"field:notifyRewriteKeyPairFailedcause=An error occurred.  Unable to change user name or password.  Please check to make sure the file #S# is not read only.  You may need to restore from your backup key pair file.",
 "field:notifyRewriteKeyPairSavedcause=Successfully saved your new username and password.",
 "field:notifyUnableToSaveAttachmentcause=Unable to save the selected attachment for some reason.  Try saving it to a different file.",
 "field:notifyUnableToViewAttachmentcause=Unable to view the selected attachment for some reason.",

@@ -678,6 +678,22 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		TRACE_END();
 	}	
 	
+	public void testFileOutputStreamReadOnly() throws Exception
+	{
+		TRACE_BEGIN("testFileOutputStreamReadOnly");
+		File readOnlyFile = File.createTempFile("test", "tst");
+		readOnlyFile.setReadOnly();
+		try
+		{
+			new FileOutputStream(readOnlyFile);
+			fail("Should have thrown IO exception on ReadOnly File");
+		}
+		catch (IOException expected)
+		{
+		}
+		TRACE_END();
+	}
+	
 	public void testScrubAndDeleteKeyPairFileAndRelatedFiles() throws Exception
 	{
 		TRACE_BEGIN("testScrubAndDeleteKeyPairFileAndRelatedFiles");
@@ -715,7 +731,8 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		FileOutputStream out6 = new FileOutputStream(key2File);
 		out6.write(1);
 		out6.close();
-
+		key1File.setReadOnly();
+	 
 		assertTrue("keypair file doesn't exist?", keyPairFile.exists());
 		assertTrue("backup keypair file doesn't exist?", backupKeyPairFile.exists());
 		assertTrue("account Token file doesn't exist?", accountTokenFile.exists());

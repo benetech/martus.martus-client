@@ -31,7 +31,6 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileFilter;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -40,7 +39,6 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.Set;
 import java.util.Vector;
-
 import org.martus.client.core.BulletinStore.BulletinAlreadyExistsException;
 import org.martus.client.core.ClientSideNetworkHandlerUsingXmlRpc.SSLSocketSetupException;
 import org.martus.client.core.Exceptions.ServerCallFailedException;
@@ -86,7 +84,6 @@ import org.martus.util.ByteArrayInputStreamWithSeek;
 import org.martus.util.DirectoryUtils;
 import org.martus.util.FileInputStreamWithSeek;
 import org.martus.util.InputStreamWithSeek;
-import org.martus.util.ScrubFile;
 import org.martus.util.UnicodeReader;
 import org.martus.util.UnicodeWriter;
 import org.martus.util.Base64.InvalidBase64Exception;
@@ -594,20 +591,20 @@ public class MartusApp
 	public void deleteKeypairAndRelatedFilesForAccount(File accountDirectory)
 	{
 		File keyPairFile = getKeyPairFile(accountDirectory);
-		deleteAndScrubFile(keyPairFile);
-		deleteAndScrubFile(getBackupFile(keyPairFile));
-		deleteAndScrubFile(getUserNameHashFile(keyPairFile.getParentFile()));
-		deleteAndScrubFile(getConfigInfoFileForAccount(accountDirectory));
-		deleteAndScrubFile(getConfigInfoSignatureFileForAccount(accountDirectory));
-		deleteAndScrubFile(getUploadInfoFileForAccount(accountDirectory));
-		deleteAndScrubFile(getUiStateFileForAccount(accountDirectory));
-		deleteAndScrubFile(BulletinStore.getFoldersFileForAccount(accountDirectory));
-		deleteAndScrubFile(BulletinStore.getCacheFileForAccount(accountDirectory));
+		DirectoryUtils.scrubAndDeleteFile(keyPairFile);
+		DirectoryUtils.scrubAndDeleteFile(getBackupFile(keyPairFile));
+		DirectoryUtils.scrubAndDeleteFile(getUserNameHashFile(keyPairFile.getParentFile()));
+		DirectoryUtils.scrubAndDeleteFile(getConfigInfoFileForAccount(accountDirectory));
+		DirectoryUtils.scrubAndDeleteFile(getConfigInfoSignatureFileForAccount(accountDirectory));
+		DirectoryUtils.scrubAndDeleteFile(getUploadInfoFileForAccount(accountDirectory));
+		DirectoryUtils.scrubAndDeleteFile(getUiStateFileForAccount(accountDirectory));
+		DirectoryUtils.scrubAndDeleteFile(BulletinStore.getFoldersFileForAccount(accountDirectory));
+		DirectoryUtils.scrubAndDeleteFile(BulletinStore.getCacheFileForAccount(accountDirectory));
 		File[] exportedKeys = exportedPublicKeyFiles(accountDirectory);
 		for (int i = 0; i < exportedKeys.length; i++)
 		{
 			File file = exportedKeys[i];
-			deleteAndScrubFile(file);
+			DirectoryUtils.scrubAndDeleteFile(file);
 		}
 	}
 
@@ -621,21 +618,6 @@ public class MartusApp
 			}
 		});
 		return mpiFiles;
-	}
-
-	
-	private void deleteAndScrubFile(File file)
-	{
-		try
-		{
-			ScrubFile.scrub(file);
-			if(file.exists() && !file.delete())
-				System.out.println("File not deleted! " + file.getPath());
-		}
-		catch (IOException e)
-		{
-			e.printStackTrace();
-		}
 	}
 
 	public boolean deleteAllBulletinsAndUserFolders()
@@ -1347,7 +1329,6 @@ public class MartusApp
 	}
 	
 	public void writeKeyPairFileWithBackup(File keyPairFile, String userName, char[] userPassPhrase) throws
-		IOException,
 		CannotCreateAccountFileException
 	{
 		writeKeyPairFileInternal(keyPairFile, userName, userPassPhrase);
@@ -1362,16 +1343,21 @@ public class MartusApp
 	}
 
 	protected void writeKeyPairFileInternal(File keyPairFile, String userName, char[] userPassPhrase) throws
-		IOException,
 		CannotCreateAccountFileException
 	{
 		try
 		{
 			FileOutputStream outputStream = new FileOutputStream(keyPairFile);
-			getSecurity().writeKeyPair(outputStream, getCombinedPassPhrase(userName, userPassPhrase));
-			outputStream.close();
+			try
+			{
+				getSecurity().writeKeyPair(outputStream, getCombinedPassPhrase(userName, userPassPhrase));
+			}
+			finally
+			{
+				outputStream.close();
+			}
 		}
-		catch(FileNotFoundException e)
+		catch(IOException e)
 		{
 			throw(new CannotCreateAccountFileException());
 		}
