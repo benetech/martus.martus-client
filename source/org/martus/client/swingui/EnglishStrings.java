@@ -435,6 +435,8 @@ public class EnglishStrings
 "field:BackupKeyPairToSecretShareInformation=This method breaks up your key into #M# pieces, any #N# of which will be required to reconstruct the key without requiring a password.  If you forget your login name or your password, this method is the only way you can restore your key.\n\nOnce the #M# files have been written to removable media disks, you should distribute them to #M# different people whom you will remember, but each of whom don't know who you have given the other files to.  Do not store any of the disks together.\n\nTo restore your key, first retrieve any #N# of the original #M# disks, and then select 'Restore Account' and 'Restore account from multiple disks' when signing into Martus.\n",
 "field:BulletinWasSent=Sent",
 "field:preferencesAllPrivate=Prevent creating public bulletins",
+"field:HQNotConfigured=(not currently configured)",
+"field:NoHQsConfigured=No Headquarter accounts currently configured",
 
 "field:PrintPrivateData=Include private data in print out.",
 "field:PrintPrivateDataMessage=You have the option to include or exclude the selected bulletin's private information in this print out.\n\nTo only print public information, do not mark the checkbox below.\n\nIf you do mark the checkbox, anyone who sees the print out will be able to read your private data.",

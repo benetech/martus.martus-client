@@ -204,7 +204,7 @@ public class UiBulletinEditor extends UiBulletinComponent
 	
 	UiBulletinComponentHeadQuarters createHeadQuartersSection()
 	{
-		return new UiBulletinComponentHeadQuarters(mainWindow, "Modify", currentBulletin);
+		return new UiBulletinComponentHeadQuartersViewer(mainWindow, "Modify", currentBulletin);
 	}
 
 	boolean wasEncrypted;
