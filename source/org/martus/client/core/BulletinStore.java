@@ -201,6 +201,11 @@ public class BulletinStore
 	{
 		return getDatabase().mustEncryptLocalData();
 	}
+	
+	public boolean isMyBulletin(UniversalId uid)
+	{
+		return(uid.getAccountId().equals(getAccountId()));
+	}
 
 	public int getBulletinCount()
 	{
@@ -737,12 +742,61 @@ public class BulletinStore
 	
 	public void setIsOnServer(Bulletin b)
 	{
-		moveBulletin(b, getFolderNotOnServer(), getFolderOnServer());
+		removeBulletinFromFolder(getFolderNotOnServer(), b);
+		try
+		{
+			ensureBulletinIsInFolder(getFolderOnServer(), b.getUniversalId());
+		}
+		catch(IOException ignoreForNow)
+		{
+			// TODO: Figure out if this should be propagated
+			ignoreForNow.printStackTrace();
+		}
 	}
 
 	public void setIsNotOnServer(Bulletin b)
 	{
-		moveBulletin(b, getFolderOnServer(), getFolderNotOnServer());
+		removeBulletinFromFolder(getFolderOnServer(), b);
+		try
+		{
+			ensureBulletinIsInFolder(getFolderNotOnServer(), b.getUniversalId());
+		}
+		catch(IOException ignoreForNow)
+		{
+			// TODO: Figure out if this should be propagated
+			ignoreForNow.printStackTrace();
+		}
+	}
+	
+	public void updateOnServerLists(Vector uidsOnServer)
+	{
+		class Adjuster implements Database.PacketVisitor
+		{
+			Adjuster(Vector uidsOnServer)
+			{
+				knownOnServer = uidsOnServer;
+			}
+			
+			public void visit(DatabaseKey key)
+			{
+				UniversalId uid = key.getUniversalId();
+				Bulletin b = findBulletinByUniversalId(uid);
+				if(knownOnServer.contains(uid))
+				{
+					if(!getFolderDraftOutbox().contains(b))
+					{
+						setIsOnServer(b);
+					}
+				}
+				else
+					setIsNotOnServer(b);
+			}
+			
+			Vector knownOnServer;
+		}
+		
+		Adjuster onServerAdjuster = new Adjuster(uidsOnServer);
+		visitAllBulletins(onServerAdjuster);
 	}
 	
 	public synchronized void moveBulletin(Bulletin b, BulletinFolder from, BulletinFolder to)

@@ -40,6 +40,11 @@ import org.martus.client.core.MartusApp;
 import org.martus.client.core.Exceptions.ServerCallFailedException;
 import org.martus.client.core.Exceptions.ServerNotAvailableException;
 import org.martus.common.ProgressMeterInterface;
+import org.martus.common.crypto.MartusCrypto;
+import org.martus.common.crypto.MartusCrypto.MartusSignatureException;
+import org.martus.common.network.NetworkInterfaceConstants;
+import org.martus.common.network.NetworkResponse;
+import org.martus.common.packet.UniversalId;
 
 class BackgroundUploadTimerTask extends TimerTask
 {
@@ -48,6 +53,11 @@ class BackgroundUploadTimerTask extends TimerTask
 		mainWindow = mainWindowToUse;
 		ProgressMeterInterface progressMeter = mainWindow.statusBar.getBackgroundProgressMeter();
 		uploader = new BackgroundUploader(mainWindow.getApp(), progressMeter);
+	}
+	
+	public void forceRecheckOfUidsOnServer()
+	{
+		gotUpdatedOnServerUids = false;
 	}
 
 	public void run()
@@ -62,6 +72,7 @@ class BackgroundUploadTimerTask extends TimerTask
 		{
 			checkComplianceStatement();
 			checkForNewsFromServer();
+			getUpdatedListOfBulletinsOnServer();
 			doUploading();
 		}
 		catch(Exception e)
@@ -110,6 +121,86 @@ class BackgroundUploadTimerTask extends TimerTask
 			
 		progressMeter.setStatusMessageTag(tag);
 		progressMeter.hideProgressMeter();
+	}
+	
+	private void getUpdatedListOfBulletinsOnServer()
+	{
+		if(gotUpdatedOnServerUids)
+			return;
+		
+		System.out.println("Entering BackgroundUploadTimerTask.getUpdatedListOfBulletinsOnServer");
+		Vector uidsOnServer = new Vector();
+		String myAccountId = getApp().getAccountId();
+		try
+		{
+			Vector mySealedUids = tryToGetSealedUidsFromServer(myAccountId);
+			System.out.println("My sealed uids: " + mySealedUids.size());
+			uidsOnServer.addAll(mySealedUids);
+
+			Vector myDraftUids = tryToGetDraftUidsFromServer(myAccountId);
+			System.out.println("My draft uids: " + myDraftUids.size());
+			uidsOnServer.addAll(myDraftUids);
+			
+			ClientSideNetworkGateway gateway = getApp().getCurrentNetworkInterfaceGateway();
+			MartusCrypto security = getApp().getSecurity();
+			NetworkResponse myFieldOfficesResponse = gateway.getFieldOfficeAccountIds(security, getApp().getAccountId());
+			if(NetworkInterfaceConstants.OK.equals(myFieldOfficesResponse.getResultCode()))
+			{
+				Vector fieldOfficeAccounts = myFieldOfficesResponse.getResultVector();
+				System.out.println("My FO accounts: " + fieldOfficeAccounts.size());
+				for(int i = 0; i < fieldOfficeAccounts.size(); ++i)
+				{
+					String fieldOfficeAccountId = (String)fieldOfficeAccounts.get(i);
+					
+					Vector fieldOfficeSealedUids = tryToGetSealedUidsFromServer(fieldOfficeAccountId);
+					System.out.println("FO sealed uids: " + fieldOfficeSealedUids.size());
+					uidsOnServer.addAll(fieldOfficeSealedUids);
+
+					Vector fieldOfficeDraftUids = tryToGetDraftUidsFromServer(fieldOfficeAccountId);
+					System.out.println("FO draft uids: " + fieldOfficeDraftUids.size());
+					uidsOnServer.addAll(fieldOfficeDraftUids);
+				}
+			}
+			
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		gotUpdatedOnServerUids = true;
+		System.out.println("Exiting BackgroundUploadTimerTask.getUpdatedListOfBulletinsOnServer");
+	}
+	
+	private Vector tryToGetDraftUidsFromServer(String accountId) throws MartusSignatureException
+	{
+		ClientSideNetworkGateway gateway = getApp().getCurrentNetworkInterfaceGateway();
+		MartusCrypto security = getApp().getSecurity();
+		NetworkResponse myDraftResponse = gateway.getDraftBulletinIds(security, accountId, new Vector());
+		if(NetworkInterfaceConstants.OK.equals(myDraftResponse.getResultCode()))
+			return buildUidVector(accountId, myDraftResponse.getResultVector());
+		return new Vector();
+	}
+
+	private Vector tryToGetSealedUidsFromServer(String accountId) throws MartusSignatureException
+	{
+		ClientSideNetworkGateway gateway = getApp().getCurrentNetworkInterfaceGateway();
+		MartusCrypto security = getApp().getSecurity();
+		NetworkResponse mySealedResponse = gateway.getSealedBulletinIds(security, accountId, new Vector());
+		if(NetworkInterfaceConstants.OK.equals(mySealedResponse.getResultCode()))
+			return buildUidVector(accountId, mySealedResponse.getResultVector());
+		return new Vector();
+	}
+
+	private Vector buildUidVector(String accountId, Vector localIds)
+	{
+		Vector result = new Vector();
+		for(int i=0; i < localIds.size(); ++i)
+		{
+			String localId = (String)localIds.get(i);
+			result.add(UniversalId.createFromAccountAndLocalId(accountId, localId));
+		}
+		
+		return result;
 	}
 		
 	private void updateDisplay()
@@ -271,5 +362,6 @@ class BackgroundUploadTimerTask extends TimerTask
 	boolean alreadyCheckedCompliance;
 	boolean inComplianceDialog;
 	boolean alreadyGotNews;
+	boolean gotUpdatedOnServerUids;
 }
 

@@ -158,6 +158,11 @@ public class BulletinFolder
 		rawIdList.clear();
 		sortedIdList = null;
 	}
+	
+	public Vector getAllUniversalIdsUnsorted()
+	{
+		return (Vector)rawIdList.clone();
+	}
 
 	public Bulletin getBulletinSorted(int index)
 	{

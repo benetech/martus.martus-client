@@ -225,7 +225,8 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	private void createBackgroundUploadTasks()
 	{
 		uploader = new java.util.Timer(true);
-		uploader.schedule(new BackgroundUploadTimerTask(this), 0, BACKGROUND_UPLOAD_CHECK_MILLIS);
+		backgroundUploadTimerTask = new BackgroundUploadTimerTask(this);
+		uploader.schedule(backgroundUploadTimerTask, 0, BACKGROUND_UPLOAD_CHECK_MILLIS);
 
 		errorChecker = new javax.swing.Timer(10*1000, new UploadErrorChecker());
 		errorChecker.start();
@@ -1211,6 +1212,8 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 			new UiNotifyDlg(getCurrentActiveFrame(), title, contents, buttons);
 			if(magicAccepted)
 				requestToUpdateContactInfoOnServerAndSaveInfo();
+			
+			backgroundUploadTimerTask.forceRecheckOfUidsOnServer();
 			repaint();
 		}
 		finally
@@ -2077,4 +2080,5 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	private static final int BACKGROUND_TIMEOUT_CHECK_EVERY_X_MILLIS = 5*1000;
 	private boolean mainWindowInitalizing;
 	private boolean createdNewAccount;
+	private BackgroundUploadTimerTask backgroundUploadTimerTask;
 }

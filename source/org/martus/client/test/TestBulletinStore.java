@@ -642,6 +642,67 @@ public class TestBulletinStore extends TestCaseEnhanced
 		assertTrue("not again in not on?", store.isProbablyNotOnServer(b));
 		assertFalse("still in on?", store.isProbablyOnServer(b));
 	}
+	
+	public void testUpdateOnServerLists() throws Exception
+	{
+		Bulletin sentButNotOnServer = createAndSaveBulletin();
+		store.setIsOnServer(sentButNotOnServer);
+		
+		Bulletin unknownAndNotOnServer = createAndSaveBulletin();
+		
+		Bulletin unsentToAndNotOnServer = createAndSaveBulletin();
+		store.setIsNotOnServer(unsentToAndNotOnServer);
+		
+		Vector onServer = new Vector();
+
+		Bulletin sentAndOnServer = createAndSaveBulletin();
+		store.setIsOnServer(sentAndOnServer);
+		onServer.add(sentAndOnServer.getUniversalId());
+		
+		Bulletin unknownButOnServer = createAndSaveBulletin();
+		onServer.add(unknownButOnServer.getUniversalId());
+
+		Bulletin unsentButOnServer = createAndSaveBulletin();
+		store.setIsNotOnServer(unsentButOnServer);
+		onServer.add(unsentButOnServer.getUniversalId());
+		
+		BulletinFolder draftOutbox = store.getFolderDraftOutbox();
+		Bulletin draftInOutboxSentAndOnServer = createAndSaveBulletin();
+		store.setIsOnServer(draftInOutboxSentAndOnServer);
+		onServer.add(draftInOutboxSentAndOnServer.getUniversalId());
+		store.ensureBulletinIsInFolder(draftOutbox, draftInOutboxSentAndOnServer.getUniversalId());
+		
+		Bulletin draftInOutboxUnknownButOnServer = createAndSaveBulletin();
+		onServer.add(draftInOutboxUnknownButOnServer.getUniversalId());
+		store.ensureBulletinIsInFolder(draftOutbox, draftInOutboxUnknownButOnServer.getUniversalId());
+
+		Bulletin draftInOutboxUnsentButOnServer = createAndSaveBulletin();
+		store.setIsNotOnServer(draftInOutboxUnsentButOnServer);
+		onServer.add(draftInOutboxUnsentButOnServer.getUniversalId());
+		store.ensureBulletinIsInFolder(draftOutbox, draftInOutboxUnsentButOnServer.getUniversalId());
+		
+		store.updateOnServerLists(onServer);
+		
+		assertTrue("thought sent; not on server", store.isProbablyNotOnServer(sentButNotOnServer));
+		assertTrue("unknown; is on server", store.isProbablyNotOnServer(unknownAndNotOnServer));
+		assertTrue("thought unsent; not on server", store.isProbablyNotOnServer(unsentToAndNotOnServer));
+		
+		assertTrue("thought sent; is on server", store.isProbablyOnServer(sentAndOnServer));
+		assertTrue("unknown; is on server", store.isProbablyOnServer(unknownButOnServer));
+		assertTrue("thought unsent; is on server", store.isProbablyOnServer(unsentButOnServer));
+		
+		assertTrue("thought sent; in draft outbox; on server", store.isProbablyOnServer(draftInOutboxSentAndOnServer));
+		assertFalse("(1) unknown; in draft outbox; on server", store.isProbablyOnServer(draftInOutboxUnknownButOnServer));
+		assertFalse("(2) unknown; in draft outbox; on server", store.isProbablyNotOnServer(draftInOutboxUnknownButOnServer));
+		assertTrue("thought unsent; in draft outbox; on server", store.isProbablyNotOnServer(draftInOutboxUnsentButOnServer));
+	}
+	
+	private Bulletin createAndSaveBulletin() throws Exception
+	{
+		Bulletin b = store.createEmptyBulletin();
+		store.saveBulletin(b);
+		return b;
+	}
 
 	public void testAddBulletinToFolder() throws Exception
 	{
