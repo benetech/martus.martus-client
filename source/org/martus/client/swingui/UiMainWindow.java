@@ -978,63 +978,68 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		if(!reSignIn())
 			return;
 		inConfigServer = true;
-		ConfigInfo info = app.getConfigInfo();
-		UiConfigServerDlg serverInfoDlg = new UiConfigServerDlg(this, info);
-		if(serverInfoDlg.getResult())
+		ConfigInfo previousServerInfo = app.getConfigInfo();
+		UiConfigServerDlg serverInfoDlg = new UiConfigServerDlg(this, previousServerInfo);
+		if(!serverInfoDlg.getResult())
 		{
-			String serverIPAddress = serverInfoDlg.getServerIPAddress();
-			String serverPublicKey = serverInfoDlg.getServerPublicKey();
-			ClientSideNetworkGateway gateway = app.buildGateway(serverIPAddress, serverPublicKey);
-
-			String newServerCompliance = getServerCompliance(gateway);
-			if(!confirmServerCompliance("ServerComplianceDescription", newServerCompliance))
-			{
-				//TODO:The following line shouldn't be necessary but without it, the trustmanager 
-				//will reject the old server, we don't know why.
-				app.buildGateway(info.getServerName(), info.getServerPublicKey()); 
-				notifyDlg("UserRejectedServerCompliance");
-				inConfigServer = false;
-				return;
-			}
-			boolean magicAccepted = false;
-			app.setServerInfo(serverIPAddress, serverPublicKey, newServerCompliance);
-			if(app.requestServerUploadRights(""))
-				magicAccepted = true;
-			else
-			{
-				while (true)
-				{
-					String magicWord = getStringInput("servermagicword", "", "");
-					if(magicWord == null)
-						break;
-					if(app.requestServerUploadRights(magicWord))
-					{
-						magicAccepted = true;
-						break;
-					}
-					notifyDlg("magicwordrejected");
-				}
-			}
-
-			String title = getLocalization().getWindowTitle("ServerSelectionResults");
-			String serverSelected = getLocalization().getFieldLabel("ServerSelectionResults") + serverIPAddress;
-			String uploadGranted = "";
-			if(magicAccepted)
-				uploadGranted = getLocalization().getFieldLabel("ServerAcceptsUploads");
-			else
-				uploadGranted = getLocalization().getFieldLabel("ServerDeclinesUploads");
-
-			String ok = getLocalization().getButtonLabel("ok");
-			String[] contents = {serverSelected, uploadGranted};
-			String[] buttons = {ok};
-
-			new UiNotifyDlg(currentActiveFrame, title, contents, buttons);
-			if(magicAccepted)
-				requestToUpdateContactInfoOnServerAndSaveInfo();
 			inConfigServer = false;
+			return;		
 		}
+		String serverIPAddress = serverInfoDlg.getServerIPAddress();
+		String serverPublicKey = serverInfoDlg.getServerPublicKey();
+		ClientSideNetworkGateway gateway = app.buildGateway(serverIPAddress, serverPublicKey);
+	
+		String newServerCompliance = getServerCompliance(gateway);
+		if(!confirmServerCompliance("ServerComplianceDescription", newServerCompliance))
+		{
+			//TODO:The following line shouldn't be necessary but without it, the trustmanager 
+			//will reject the old server, we don't know why.
+			app.buildGateway(previousServerInfo.getServerName(), previousServerInfo.getServerPublicKey()); 
+			notifyDlg("UserRejectedServerCompliance");
+			if(serverIPAddress.equals(previousServerInfo.getServerName()) &&
+			   serverPublicKey.equals(previousServerInfo.getServerPublicKey()))
+				app.setServerInfo("","","");
+			inConfigServer = false;
+			return;
+		}
+		boolean magicAccepted = false;
+		app.setServerInfo(serverIPAddress, serverPublicKey, newServerCompliance);
+		if(app.requestServerUploadRights(""))
+			magicAccepted = true;
+		else
+		{
+			while (true)
+			{
+				String magicWord = getStringInput("servermagicword", "", "");
+				if(magicWord == null)
+					break;
+				if(app.requestServerUploadRights(magicWord))
+				{
+					magicAccepted = true;
+					break;
+				}
+				notifyDlg("magicwordrejected");
+			}
+		}
+	
+		String title = getLocalization().getWindowTitle("ServerSelectionResults");
+		String serverSelected = getLocalization().getFieldLabel("ServerSelectionResults") + serverIPAddress;
+		String uploadGranted = "";
+		if(magicAccepted)
+			uploadGranted = getLocalization().getFieldLabel("ServerAcceptsUploads");
+		else
+			uploadGranted = getLocalization().getFieldLabel("ServerDeclinesUploads");
+	
+		String ok = getLocalization().getButtonLabel("ok");
+		String[] contents = {serverSelected, uploadGranted};
+		String[] buttons = {ok};
+	
+		new UiNotifyDlg(currentActiveFrame, title, contents, buttons);
+		if(magicAccepted)
+			requestToUpdateContactInfoOnServerAndSaveInfo();
+		inConfigServer = false;
 	}
-
+	
 	private String getServerCompliance(ClientSideNetworkGateway gateway)
 	{
 		try
