@@ -1637,7 +1637,7 @@ public class MartusApp
 	public static final String ACCOUNTS_DIRECTORY_NAME = "accounts";
 	public static final String PACKETS_DIRECTORY_NAME = "packets";
 	public static final String DOCUMENTS_DIRECTORY_NAME = "Docs";
-	public static final String USE_UNOFFICIAL_TRANSLATIONS_NAME = "use unofficial translations.txt";
+	public static final String USE_UNOFFICIAL_TRANSLATIONS_NAME = "use_unofficial_translations.txt";
 	private final int MAXFOLDERS = 50;
 	public int serverChunkSize = NetworkInterfaceConstants.MAX_CHUNK_SIZE;
 }
