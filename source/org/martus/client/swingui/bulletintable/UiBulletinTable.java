@@ -86,8 +86,8 @@ public class UiBulletinTable extends JTable implements ListSelectionListener, Dr
 		setModel(model);
 
 		// set widths for first two columns (status and date)
-		setColumnWidthToHeaderWidth(0);
-		setColumnWidthToHeaderWidth(1);
+		setColumnWidthToHeaderWidth(this,0);
+		setColumnWidthToHeaderWidth(this, 1);
 
 		addMouseListener(new TableMouseAdapter());
 		keyListener = new TableKeyAdapter();
@@ -621,20 +621,20 @@ public class UiBulletinTable extends JTable implements ListSelectionListener, Dr
 			setRowSelectionInterval(rowIndex, rowIndex);
 	}
 
-	private void setColumnWidthToHeaderWidth(int colIndex)
+	static public void setColumnWidthToHeaderWidth(JTable table, int column)
 	{
-		TableColumnModel columnModel = getColumnModel();
-		TableColumn statusColumn = columnModel.getColumn(colIndex);
+		TableColumnModel columnModel = table.getColumnModel();
+		TableColumn statusColumn = columnModel.getColumn(column);
 		String padding = "    ";
 		String value = (String)statusColumn.getHeaderValue() + padding;
 
 		TableCellRenderer renderer = statusColumn.getHeaderRenderer();
 		if(renderer == null)
 		{
-			JTableHeader header = getTableHeader();
+			JTableHeader header = table.getTableHeader();
 			renderer = header.getDefaultRenderer();
 		}
-		Component c = renderer.getTableCellRendererComponent(this, value, true, true, -1, colIndex);
+		Component c = renderer.getTableCellRendererComponent(table, value, true, true, -1, column);
 		Dimension size = c.getPreferredSize();
 
 		statusColumn.setPreferredWidth(size.width);

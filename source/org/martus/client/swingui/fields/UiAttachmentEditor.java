@@ -50,6 +50,7 @@ import javax.swing.JTable;
 import org.martus.client.swingui.UiFocusListener;
 import org.martus.client.swingui.UiLocalization;
 import org.martus.client.swingui.UiMainWindow;
+import org.martus.client.swingui.bulletintable.UiBulletinTable;
 import org.martus.common.bulletin.AttachmentProxy;
 import org.martus.swing.ParagraphLayout;
 import org.martus.swing.UiFileChooser;
@@ -64,19 +65,19 @@ public class UiAttachmentEditor extends JPanel
 		ParagraphLayout layout = new ParagraphLayout();
 		setLayout(layout);
 
-		model = new EditorAttachmentTableModel(mainWindow, table);
+		model = new EditorAttachmentTableModel(mainWindow, attachmentTable);
 
-		table = new JTable(model);
+		attachmentTable = new JTable(model);
 		new DropTarget(this, new attachmentDropAdapter());
-		table.setFocusable(false);
-		table.createDefaultColumnsFromModel();
-		table.setColumnSelectionAllowed(false);
-		model.setColumnWidthToHeader(table,1);
+		attachmentTable.setFocusable(false);
+		attachmentTable.createDefaultColumnsFromModel();
+		attachmentTable.setColumnSelectionAllowed(false);
+		UiBulletinTable.setColumnWidthToHeaderWidth(attachmentTable,1);
 
 		Box hbox = Box.createHorizontalBox();
 		Box vbox = Box.createVerticalBox();
 
-		JScrollPane scrollPane = new JScrollPane(table);
+		JScrollPane scrollPane = new JScrollPane(attachmentTable);
 		scrollPane.getHorizontalScrollBar().setFocusable(false);
 		scrollPane.getVerticalScrollBar().setFocusable(false);
 		vbox.add(scrollPane);
@@ -96,10 +97,10 @@ public class UiAttachmentEditor extends JPanel
 		vbox.add(hbox);
 		add(vbox);
 
-		Dimension d = table.getPreferredScrollableViewportSize();
-		int rowHeight = table.getRowHeight() + table.getRowMargin() ;
+		Dimension d = attachmentTable.getPreferredScrollableViewportSize();
+		int rowHeight = attachmentTable.getRowHeight() + attachmentTable.getRowMargin() ;
 		d.height = VISIBLE_ROW_COUNT * rowHeight;
-		table.setPreferredScrollableViewportSize(d);
+		attachmentTable.setPreferredScrollableViewportSize(d);
 	}
 
 	class attachmentDropAdapter implements DropTargetListener
@@ -166,7 +167,7 @@ public class UiAttachmentEditor extends JPanel
 	
 	public JComponent[] getFocusableComponents()
 	{
-		return new JComponent[]{table};
+		return new JComponent[]{attachmentTable};
 	}
 
 	public AttachmentProxy[] getAttachments()
@@ -248,7 +249,7 @@ public class UiAttachmentEditor extends JPanel
 	{
 		public void actionPerformed(ActionEvent ae)
 		{
-			int[] rows = table.getSelectedRows();
+			int[] rows = attachmentTable.getSelectedRows();
 			if(rows.length == 0)
 				rows = new int[]{0};
 			if(!mainWindow.confirmDlg(null,"RemoveAttachment"))
@@ -260,7 +261,7 @@ public class UiAttachmentEditor extends JPanel
 		}
 	}
 
-	JTable table;
+	JTable attachmentTable;
 	JButton remove;
 	EditorAttachmentTableModel model;
 	UiMainWindow mainWindow;

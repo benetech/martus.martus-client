@@ -25,16 +25,10 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.fields;
 
-import java.awt.Component;
-import java.awt.Dimension;
 import java.util.Vector;
 
 import javax.swing.JTable;
 import javax.swing.table.AbstractTableModel;
-import javax.swing.table.JTableHeader;
-import javax.swing.table.TableCellRenderer;
-import javax.swing.table.TableColumn;
-import javax.swing.table.TableColumnModel;
 
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.common.bulletin.AttachmentProxy;
@@ -162,28 +156,6 @@ class AttachmentTableModel extends AbstractTableModel
 	{
 		return false;
 	}
-	
-	public void setColumnWidthToHeader(JTable table, int column)
-	{
-		TableColumnModel columnModel = table.getColumnModel();
-		TableColumn statusColumn = columnModel.getColumn(column);
-		String padding = "    ";
-		String value = (String)statusColumn.getHeaderValue() + padding;
-
-		TableCellRenderer renderer = statusColumn.getHeaderRenderer();
-		if(renderer == null)
-		{
-			JTableHeader header = table.getTableHeader();
-			renderer = header.getDefaultRenderer();
-		}
-		Component c = renderer.getTableCellRendererComponent(table, value, true, true, -1, column);
-		Dimension size = c.getPreferredSize();
-
-		statusColumn.setPreferredWidth(size.width);
-		statusColumn.setMaxWidth(size.width);
-	}
-
-
 	
 	Vector attachmentList;
 	UiMainWindow mainWindow;
