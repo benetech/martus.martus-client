@@ -26,11 +26,10 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.tools;
 
 import java.io.File;
-
 import org.martus.client.core.MartusApp;
-import org.martus.client.swingui.EnglishStrings;
 import org.martus.client.swingui.UiConstants;
 import org.martus.client.swingui.UiLocalization;
+import org.martus.client.swingui.UiMainWindow;
 import org.martus.util.UnicodeWriter;
 
 
@@ -60,7 +59,7 @@ public class ExportTranslationFile
 		}
 	
 		System.out.println("Exporting translations for: " + languageCode);
-		UiLocalization bd = new UiLocalization(MartusApp.getTranslationsDirectory(), EnglishStrings.strings);
+		UiLocalization bd = new UiLocalization(MartusApp.getTranslationsDirectory(), UiMainWindow.getAllEnglishStrings());
 		bd.includeOfficialLanguagesOnly = false;
 		bd.loadTranslationFile(languageCode);
 		File outputFile = new File(args[1]);
