@@ -78,7 +78,7 @@ abstract public class UiBulletinComponent extends JPanel implements Scrollable, 
 		add(publicSection, BorderLayout.CENTER);
 		add(privateSection, BorderLayout.SOUTH);
 	}
-
+	
 	private UiBulletinComponentHeader createHeaderSection()
 	{
 		return new UiBulletinComponentHeader(mainWindow);
@@ -189,6 +189,14 @@ abstract public class UiBulletinComponent extends JPanel implements Scrollable, 
 		updateEncryptedIndicator(true);
 	}
 
+	public boolean isAllPrivateBoxChecked()
+	{
+		boolean isAllPrivate = false;
+		if(allPrivateField.getText().equals(FieldSpec.TRUESTRING))
+			isAllPrivate = true;
+		return isAllPrivate;
+	}
+
 	// Scrollable interface
 	public Dimension getPreferredScrollableViewportSize()
 	{
@@ -226,5 +234,4 @@ abstract public class UiBulletinComponent extends JPanel implements Scrollable, 
 
 	private static final int SOMETIMES_ENCRYPTED = 1;
 	private static final int ALWAYS_ENCRYPTED = 2;
-
 }

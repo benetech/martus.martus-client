@@ -149,6 +149,16 @@ public class UiBulletinModifyDlg extends JFrame implements ActionListener, Windo
 				return;
 
 			boolean userChoseSeal = (ae.getSource() == send);
+			
+			if(userChoseSeal)
+			{
+				String tag = view.isAllPrivateBoxChecked() ? 
+						"send" : "SendWithPublicData";
+					
+				if (!observer.confirmDlg(this, tag))
+					return;
+			}
+												
 			saveBulletin(userChoseSeal);
 		}
 		catch (Exception e) 
@@ -188,26 +198,19 @@ public class UiBulletinModifyDlg extends JFrame implements ActionListener, Windo
 	private void saveBulletin(boolean userChoseSeal)
 	{
 		Cursor originalCursor = getCursor();
+		setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
 		try 
 		{
 			MartusApp app = observer.getApp();
 			BulletinStore store = app.getStore();
 			BulletinFolder outboxToUse = null;
 			BulletinFolder draftOutbox = store.getFolderDraftOutbox();
-			
+
+			// NOTE: must copyDataToBulletin before setSealed or setDraft
+			// NOTE: after copyDataToBulletin, should not allow user to cancel
+			view.copyDataToBulletin(bulletin);
 			if(userChoseSeal)
 			{
-				boolean result = true;		
-				view.copyDataToBulletin(bulletin);
-								
-				if (bulletin.isAllPrivate())
-					result = confirmSealBulletin();		
-				else
-					result = confirmSealWithPublicData();
-						
-				if (!result)
-					return;
-														
 				store.removeBulletinFromFolder(bulletin, draftOutbox);
 				
 				bulletin.setSealed();
@@ -219,7 +222,6 @@ public class UiBulletinModifyDlg extends JFrame implements ActionListener, Windo
 				outboxToUse = draftOutbox;
 			}
 			
-			setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
 			app.setHQKeysInBulletin(bulletin);
 			saveBulletinAndUpdateFolders(store, outboxToUse);
 			wasBulletinSavedFlag = true;
@@ -312,16 +314,6 @@ public class UiBulletinModifyDlg extends JFrame implements ActionListener, Windo
 		observer.setBulletinEditorPosition(location);
 		observer.setBulletinEditorMaximized(maximized);
 		observer.saveState();
-	}
-
-	public boolean confirmSealBulletin()
-	{
-		return observer.confirmDlg(this, "send");
-	}
-	
-	public boolean confirmSealWithPublicData()
-	{
-		return observer.confirmDlg(this, "SendWithPublicData");
 	}
 
 	private void indicateEncrypted(boolean isEncrypted)

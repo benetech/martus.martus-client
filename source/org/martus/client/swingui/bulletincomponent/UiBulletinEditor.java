@@ -129,9 +129,7 @@ public class UiBulletinEditor extends UiBulletinComponent
 	{				
 		bulletin.clear();
 			
-		boolean isAllPrivate = false;
-		if(allPrivateField.getText().equals(FieldSpec.TRUESTRING))
-			isAllPrivate = true;
+		boolean isAllPrivate = isAllPrivateBoxChecked();
 		bulletin.setAllPrivate(isAllPrivate);
 		
 		publicSection.copyDataToBulletin(bulletin);
