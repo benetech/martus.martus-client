@@ -28,22 +28,20 @@ package org.martus.client.swingui.dialogs;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
-
 import org.martus.client.swingui.UiLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.fields.UiChoiceEditor;
 import org.martus.common.clientside.DateUtilities;
 import org.martus.common.clientside.UiBasicLocalization;
-import org.martus.swing.ParagraphLayout;
 import org.martus.swing.UiCheckBox;
 import org.martus.swing.UiLanguageDirection;
+import org.martus.swing.UiParagraphPanel;
 import org.martus.swing.Utilities;
 
 
@@ -73,30 +71,25 @@ directionRtoL = new UiCheckBox();
 directionRtoL.setText("Language Right to Left");
 directionRtoL.setSelected(UiLanguageDirection.isRightToLeftLanguage());
 
+		UiParagraphPanel preferences = new UiParagraphPanel();
+		preferences.addComponents(new JLabel(localization.getFieldLabel("language")), languageDropdown.getComponent());
+		preferences.addComponents(new JLabel(localization.getFieldLabel("dateformat")), dateFormatDropdown.getComponent());
+
+		preferences.addBlankLine();
+		preferences.addOnNewLine(allPrivate);
+
+//		TODO: Remove before the 2.x release
+		preferences.addOnNewLine(directionRtoL);
+		
+		preferences.addBlankLine();
+
 		ok = new JButton(localization.getButtonLabel("ok"));
 		ok.addActionListener(this);
 		cancel = new JButton(localization.getButtonLabel("cancel"));
 		cancel.addActionListener(this);
-
-		getContentPane().setLayout(new ParagraphLayout());
-
-		getContentPane().add(new JLabel(localization.getFieldLabel("language")), ParagraphLayout.NEW_PARAGRAPH);
-		getContentPane().add(languageDropdown.getComponent());
-
-		getContentPane().add(new JLabel(localization.getFieldLabel("dateformat")), ParagraphLayout.NEW_PARAGRAPH);
-		getContentPane().add(dateFormatDropdown.getComponent());
-
-		getContentPane().add(new JLabel(""), ParagraphLayout.NEW_PARAGRAPH);
-		getContentPane().add(allPrivate);
-
-//		TODO: Remove before the 2.x release
-getContentPane().add(new JLabel(""), ParagraphLayout.NEW_PARAGRAPH);
-getContentPane().add(directionRtoL);
-
-		getContentPane().add(new JLabel(""), ParagraphLayout.NEW_PARAGRAPH);
-		getContentPane().add(ok);
-		getContentPane().add(cancel);
-
+		preferences.addComponents(ok, cancel);
+		
+		getContentPane().add(preferences);
 		getRootPane().setDefaultButton(ok);
 
 		Utilities.centerDlg(this);

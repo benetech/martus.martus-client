@@ -31,13 +31,12 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 import org.martus.client.core.ConfigInfo;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.UiScrollPane;
 import org.martus.common.clientside.UiBasicLocalization;
 import org.martus.common.clientside.UiSingleTextField;
-import org.martus.swing.ParagraphLayout;
+import org.martus.swing.UiParagraphPanel;
 import org.martus.swing.UiTextArea;
 import org.martus.swing.UiWrappedTextArea;
 import org.martus.swing.Utilities;
@@ -75,47 +74,38 @@ public class UiContactInfoDlg extends JDialog implements ActionListener
 		phone.setText(info.getPhone());
 		address.setText(info.getAddress());
 
-		JPanel panel = new JPanel();
-		panel.setLayout(new ParagraphLayout());
-		JLabel space = new JLabel(" ");
-		panel.add(space, ParagraphLayout.NEW_PARAGRAPH);
-		panel.add(new JLabel());
+		UiParagraphPanel panel = new UiParagraphPanel();
 
 		UiWrappedTextArea infoRequired = new UiWrappedTextArea(localization.getFieldLabel("ContactInfoRequiredFields"), 60);
+		JLabel space = new JLabel(" ");
 		infoRequired.setFont(space.getFont());
 		infoRequired.setRows(2);
-		panel.add(infoRequired);
+		panel.addOnNewLine(infoRequired);
+		panel.addBlankLine();
 
 		String authorPrompt = localization.getFieldLabel("AuthorRequired");
-		panel.add(new JLabel(authorPrompt), ParagraphLayout.NEW_PARAGRAPH);
-		panel.add(source);
+		panel.addComponents(new JLabel(authorPrompt), source);
 
 		String organizationPrompt = localization.getFieldLabel("OrganizationRequired");
-		panel.add(new JLabel(organizationPrompt), ParagraphLayout.NEW_PARAGRAPH);
-		panel.add(organization);
-		panel.add(new JLabel(localization.getFieldLabel("email")), ParagraphLayout.NEW_PARAGRAPH);
-		panel.add(email);
-		panel.add(new JLabel(localization.getFieldLabel("webpage")), ParagraphLayout.NEW_PARAGRAPH);
-		panel.add(webpage);
-		panel.add(new JLabel(localization.getFieldLabel("phone")), ParagraphLayout.NEW_PARAGRAPH);
-		panel.add(phone);
-		panel.add(new JLabel(localization.getFieldLabel("address")), ParagraphLayout.NEW_PARAGRAPH);
-		panel.add(addressScrollPane);
-		panel.add(new JLabel(" "), ParagraphLayout.NEW_PARAGRAPH);
-		panel.add(new JLabel(localization.getFieldLabel("ContactInfoDescriptionOfFields")));
+		panel.addComponents(new JLabel(organizationPrompt), organization);
+		panel.addComponents(new JLabel(localization.getFieldLabel("email")), email);
+		panel.addComponents(new JLabel(localization.getFieldLabel("webpage")), webpage);
+		panel.addComponents(new JLabel(localization.getFieldLabel("phone")), phone);
+		panel.addComponents(new JLabel(localization.getFieldLabel("address")), addressScrollPane);
+		panel.addBlankLine();
+		panel.addOnNewLine(new JLabel(localization.getFieldLabel("ContactInfoDescriptionOfFields")));
+		panel.addBlankLine();
 
-		panel.add(new JLabel(" "), ParagraphLayout.NEW_PARAGRAPH);
 		UiWrappedTextArea infoFuture = new UiWrappedTextArea(localization.getFieldLabel("ContactInfoFutureUseOfFields"), 60);
 		infoFuture.setFont(space.getFont());
 		infoFuture.setRows(3);
-		panel.add(infoFuture);
+		panel.addOnNewLine(infoFuture);
 
-		panel.add(new JLabel(" "), ParagraphLayout.NEW_PARAGRAPH);
-		panel.add(new JLabel(localization.getFieldLabel("ContactInfoUpdateLater")));
+		panel.addBlankLine();
+		panel.addOnNewLine(new JLabel(localization.getFieldLabel("ContactInfoUpdateLater")));
+		panel.addBlankLine();
 
-		panel.add(new JLabel(""), ParagraphLayout.NEW_PARAGRAPH);
-		panel.add(ok);
-		panel.add(cancel);
+		panel.addComponents(ok, cancel);
 		
 		getContentPane().add(panel);
 		getRootPane().setDefaultButton(ok);
