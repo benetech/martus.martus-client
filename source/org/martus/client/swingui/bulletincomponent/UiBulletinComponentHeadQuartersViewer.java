@@ -38,7 +38,7 @@ import org.martus.util.Base64.InvalidBase64Exception;
 
 public class UiBulletinComponentHeadQuartersViewer extends UiBulletinComponentHeadQuarters
 {
-	public UiBulletinComponentHeadQuartersViewer(UiMainWindow mainWindowToUse, String tagQualifierToUse, Bulletin bulletinToUse)
+	public UiBulletinComponentHeadQuartersViewer(UiMainWindow mainWindowToUse, Bulletin bulletinToUse, String tagQualifierToUse)
 	{
 		super(mainWindowToUse, bulletinToUse, tagQualifierToUse);
 
