@@ -763,46 +763,60 @@ You should change your password for security purposes if you feel your account h
 Frequently Asked Questions
 These are the most common issues you’re likely to encounter using Martus. 
 
-I’ve sent a bulletin, but it’s staying in my Outbox, instead of moving to the Sent folder.
+1. I’ve sent a bulletin, but it’s staying in my Outbox, instead of moving to the Sent folder.
+
 Ensure you have an active Internet connection, and that you’ve set up a server. Bulletins remain in the Outbox folder until they have been successfully sent to the server. Bulletins may also remain in the Outbox for up to an hour if you are sending a large attachment, or if the connection is slow. While Martus is sending the bulletin, it displays a progress meter in the status bar at the bottom of the screen. 
 
-Martus won’t accept my password.
+2. Martus won’t accept my password.
+
 Make sure you’re entering the correct user name and password, especially if you changed the password recently. Your user name and password are case-sensitive. Make sure you’re entering capital letters, as well as spaces and punctuation, exactly as you entered them when you created the username and password. Each time you enter an incorrect username or password, the system delays for a longer period before displaying the Martus Signin dialog box again. Since Martus does not store your password anywhere, and it uses strong encryption, there is no way to get access to your account without your username and password. 
 
-I want to use Martus on a co-worker’s computer, but it won’t accept my username and password.
+3. I want to use Martus on a co-worker’s computer, but it won’t accept my username and password.
+
 You can access Martus only on a computer that contains your key pair file. Your username and password activate your key pair, which may not be present on your co-worker’s computer. Using Martus 1.5 and later, there can be multiple accounts on a single computer, but your key pair must be available on that computer for you to access it. To access your account on your co-worker’s computer, click the Restore Account tab in the Martus Signin dialog box, and then use your backup key pair file to create the account. And, though you can install your key pair on more than one computer at a time, remember that you need to update each key pair if you change your password, and that your data is only as secure as the least secure computer on which you have your account.  
 
-The bulletins in my account on a co-worker’s computer do not match those on my computer. 
+4. The bulletins in my account on a co-worker’s computer do not match those on my computer. 
+
 If you have set up your account on multiple computers, you can’t access your draft or sealed bulletins from a different computer unless they were saved to the server and retrieved to the current computer.  If you overwrite a draft on the server from one computer, the version on the server will not match the version on the other computer because the server saves the last version of the draft.  To retrieve most recent versions of a draft from the backup server, you will be required to delete any older versions from your computer.  If you want to keep a backup copy of the old version of the draft, you can drag the bulletin to your desktop before deleting it. If you delete a draft from one computer and from the server, it will still be on the other computer. On that other computer, if you modify the draft, it will re-upload it to the server, but if you never modify the draft, it will never get re-uploaded.  
 
-There are multiple active Martus accounts on my computer. How can I tell which account folder is mine? Log in to Martus using your username and password. Then choose Help > View My Account Details. The folder Martus uses to store the information for your account is listed below your public code. 
+5. There are multiple active Martus accounts on my computer. How can I tell which account folder is mine? 
 
-I’ve sent a bulletin to the server, but I need to make a few changes to it.
+Log in to Martus using your username and password. Then choose Help > View My Account Details. The folder Martus uses to store the information for your account is listed below your public code. 
+
+6. I’ve sent a bulletin to the server, but I need to make a few changes to it.
+
 Once you’ve sent a bulletin to the server, it’s sealed. Neither you nor anyone else can ever edit the original bulletin again. It’s typically best to save bulletins as drafts until you’re certain they’re complete. However, if you have information to add to a sealed bulletin, or need to make an important correction, you can modify and upload a copy of the bulletin. Both the original and the modified copy will then be available on the server.
 
-When I try to retrieve bulletins from the server, the ones I want are not listed.
+7. When I try to retrieve bulletins from the server, the ones I want are not listed.
+
 By default, the Retrieve Bulletins dialog box does not list bulletins that are already present on your computer, because you cannot download those bulletins. To see all your bulletins on the server, whether they’re on your computer or not, check Show All Buttons On This Computer And On The Server. You may also want to search the bulletins on your computer; it’s possible that the bulletin you’re looking for hasn’t been uploaded to the server.
 
-How can I open an attachment?
+8. How can I open an attachment?
+
 If you are using Windows, you can view an attachment without saving it to your hard drive: click View Attachment. The application associated with the attachment’s file type opens the attachment. (You can change the file type’s association in Windows Explorer.)
 
 If you are using Mac OS or Linux, or if you want to save the attachment to your hard drive, click Save Attachment. Save the file to any location on your computer, and then open the file in an application that can read the file’s format. For example, if a .doc file is attached, open the file in Microsoft Word. If a .pdf file is attached, open the file in Adobe Acrobat Reader.
 
-I deleted a bulletin from the Discarded Bulletins folder, but it still appears in another folder.
+9. I deleted a bulletin from the Discarded Bulletins folder, but it still appears in another folder.
+
 Discard the bulletin from all folders before you delete it from the Discarded Bulletins folder. 
 
-Can I back up my Martus data onto a floppy disk or tape drive?
+10. Can I back up my Martus data onto a floppy disk or tape drive?
+
 Yes, if you have a back-up device large enough to hold all your data. Copy the entire c:\Martus folder onto your back-up media. This folder contains the Martus application, the Java runtime environment, encrypted key pair files, configuration data, and bulletins for all Martus accounts on the computer. For a minimal back-up, copy only the MartusKeyPair.dat file and the packets and accounts folders from the Martus folder. 
 
-Why are there more languages available when creating bulletins than in the Signin screen or Options dialog box?
+11. Why are there more languages available when creating bulletins than in the Signin screen or Options dialog box?
+
 The Options dialog box lets you choose a language for the user interface; currently the interface has been translated only into English, Spanish, and Russian. We hope to translate the interface into more languages in the future; if you are interested in translating Martus into another language, please contact us at help@martus.org. 
 
 As you noticed, there are several languages available in the Language pop-up menu when you create a bulletin. That option specifies the language you use to enter the data into your bulletin. You do not need to type the bulletin in the same language used in your user interface.
 
-Why does Martus seem so slow when I’m doing some tasks?
+12. Why does Martus seem so slow when I’m doing some tasks?
+
 In the current version of the application, we have been focusing on adding features and security. Later, we will improve the performance, so that tasks in Martus will be faster.
 
-I don’t have a Martus shortcut on my desktop. How can I start Martus?
+13. I don’t have a Martus shortcut on my desktop. How can I start Martus?
+
 In Windows, choose Run from the Start menu, and type C:\Martus\bin\javaw.exe  -jar C:\Martus\Martus.jar to start Martus.
 
 In Mac OS, double-click the Martus.jar file in the /Library/Java/Martus folder.
@@ -812,15 +826,18 @@ In Linux, type java  -jar  ~/Martus/Martus.jar
 The Martus Welcome dialog box is slow to appear.
 Depending on your computer system, there may be a delay of several seconds between the time you double-click the Martus icon and the time the Martus Welcome dialog box appears. Exactly how long it takes depends on the speed of your computer.
 
-Can I customize my screen by changing the colors or saving changes to the screen layout?
+14. Can I customize my screen by changing the colors or saving changes to the screen layout?
+
 In this version of Martus, you cannot save most changes to the screen layout. However, Martus uses your Windows system colors, so if you select a different color scheme for Windows, it will affect Martus, too. To change the colors Windows uses, right-click your Windows desktop, choose Properties, and select the Appearance tab. Then select the color scheme you want to use. 
 
 You can customize the fields in bulletins you create, as well. See “Customizing bulletin fields” on page 18 for information.
 
-When I start Martus, the screens are all gray with no text visible.  
+15. When I start Martus, the screens are all gray with no text visible.  
+
 This may indicate a problem with your video driver.  If you can not get access to an updated driver or you still see this problem, try setting Martus properties to use 256 color (instead of 16 or 32 bit color) in Windows XP, or using 256 color under Control Panel Display Settings for pre-XP Windows operating systems.
 
-I’m seeing unexpected behavior in Martus. How can I find out what’s going on?
+16. I’m seeing unexpected behavior in Martus. How can I find out what’s going on?
+
 In Windows, instead of starting Martus by double-clicking the Martus icon on your desktop, choose Run from the Start menu and type the following text to launch Martus: C:\Martus\bin\java.exe -jar C:\Martus\Martus.jar. Then note the error messages you receive as you work in Martus, and e-mail those to help@martus.org.
 
 In Linux, start Martus from the command-shell line. Then note the error messages you receive as you work in Martus, and e-mail those to help@martus.org.
