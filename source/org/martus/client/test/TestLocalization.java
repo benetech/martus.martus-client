@@ -26,7 +26,6 @@ Boston, MA 02111-1307, USA.
 
 package org.martus.client.test;
 
-import java.util.Map;
 import java.util.Vector;
 
 import org.martus.client.core.MartusApp;
@@ -52,8 +51,7 @@ public class TestLocalization extends TestCaseEnhanced
 	public void setUp() throws Exception
 	{
 		super.setUp();
-		if(bd == null)
-			bd = new UiLocalization(MartusApp.getTranslationsDirectory(), EnglishStrings.strings);
+		bd = new UiLocalization(MartusApp.getTranslationsDirectory(), EnglishStrings.strings);
  	}
 	
 	public void testDefaultDateFormats()
@@ -99,14 +97,7 @@ public class TestLocalization extends TestCaseEnhanced
 		{
 			String code = languages[i].getCode();
 			if(code.equals("en"))
-			{
-				assertEquals("English", true, bd.isLanguageLoaded("en"));
 				foundEnglish = true;
-			}
-			else
-			{
-				assertEquals(code, false, bd.isLanguageLoaded(code));
-			}
 		}
 
 		assertTrue("must have english", foundEnglish);
@@ -130,7 +121,7 @@ public class TestLocalization extends TestCaseEnhanced
 		assertEquals("Imprimir", bd.getLabel("es", "button", "print"));
 
 		assertEquals("<category:sillytag>", bd.getLabel("en", "category", "sillytag"));
-		assertEquals("<<category:sillytag>>", bd.getLabel("es", "category", "sillytag"));
+		assertEquals("<category:sillytag>", bd.getLabel("es", "category", "sillytag"));
 		bd.addTranslation("en", "category:sillytag=something");
 		assertEquals("<something>", bd.getLabel("es", "category", "sillytag"));
 		assertEquals("something", bd.getLabel("en", "category", "sillytag"));
@@ -142,12 +133,16 @@ public class TestLocalization extends TestCaseEnhanced
 	
 	public void testLoadTranslations() throws Exception
 	{
-		String sampleFileContents = "# This is a comment with =\na:b=c\nd:e=f";
+		bd.addTranslation(Localization.ENGLISH, "a:b=jfjfj");
+		bd.addTranslation(Localization.ENGLISH, "d:e=83838");
+		String sampleFileContents = 
+				"# This is a comment with =\n" +
+				"a:b=c\n" +
+				"d:e=f";
 		StringInputStream in = new StringInputStream(sampleFileContents);
 		bd.loadTranslations("qq", in);
 		assertEquals("c", bd.getLabel("qq", "a", "b"));
-		Map qq = bd.getStringMap("qq");
-		assertEquals("not 2?", 2, qq.size());
+		assertEquals("f", bd.getLabel("qq", "d", "e"));
 	}
 	
 	public void testExportTranslations() throws Exception
@@ -161,8 +156,7 @@ public class TestLocalization extends TestCaseEnhanced
 
 	public void testAddTranslation()
 	{
-		// must call getLabel first, to initialize the hash (this should go away soon!)
-		assertEquals("<<b:c>>", bd.getLabel("xx", "b", "c"));
+		assertEquals("<b:c>", bd.getLabel("xx", "b", "c"));
 		bd.addTranslation("en", "b:c=bc");
 		assertEquals("<bc>", bd.getLabel("xx", "b", "c"));
 		bd.addTranslation("a", "invalid=because-bad-language");
@@ -225,7 +219,7 @@ public class TestLocalization extends TestCaseEnhanced
 		bd.addTranslation("en", sillyEnglish);
 		strings = bd.getAllTranslationStrings("eo");
 		assertEquals("Should have added one string", count+1, strings.size());
-		assertEquals("Should now contain esperanto silly key", true, strings.contains(sillyEsperanto));
+		assertEquals("But still no esperanto silly key", false, strings.contains(sillyEsperanto));
 	}
 
 	static UiLocalization bd;
