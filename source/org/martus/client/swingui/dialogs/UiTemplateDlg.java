@@ -32,20 +32,18 @@ import java.awt.event.ActionListener;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
-
 import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.filechooser.FileFilter;
-
 import org.martus.client.core.ConfigInfo;
 import org.martus.client.core.MartusApp;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.UiScrollPane;
 import org.martus.common.clientside.UiBasicLocalization;
-import org.martus.swing.ParagraphLayout;
 import org.martus.swing.UiNotifyDlg;
+import org.martus.swing.UiParagraphPanel;
 import org.martus.swing.UiTextArea;
 import org.martus.swing.Utilities;
 import org.martus.util.UnicodeReader;
@@ -79,11 +77,9 @@ public class UiTemplateDlg extends JDialog implements ActionListener
 
 		details.setText(info.getTemplateDetails());
 		
-		getContentPane().setLayout(new ParagraphLayout());
-
-		getContentPane().setLayout(new ParagraphLayout());
-		getContentPane().add(new JLabel(localization.getFieldLabel("TemplateDetails")), ParagraphLayout.NEW_PARAGRAPH);
-		getContentPane().add(detailScrollPane);
+		UiParagraphPanel panel = new UiParagraphPanel();
+		
+		panel.addComponents(new JLabel(localization.getFieldLabel("TemplateDetails")), detailScrollPane);
 
 		Box buttons = Box.createHorizontalBox();
 		Dimension preferredSize = details.getPreferredSize();
@@ -95,9 +91,9 @@ public class UiTemplateDlg extends JDialog implements ActionListener
 		buttons.add(okButton);				
 		buttons.add(cancel);
 		buttons.add(help);
-		
-		getContentPane().add(new JLabel(""), ParagraphLayout.NEW_PARAGRAPH);
-		getContentPane().add(buttons);
+		panel.addOnNewLine(buttons);
+
+		getContentPane().add(panel);
 		
 		getRootPane().setDefaultButton(okButton);
 		Utilities.centerDlg(this);

@@ -37,7 +37,7 @@ import org.martus.client.core.ConfigInfo;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.common.clientside.UiBasicLocalization;
 import org.martus.common.clientside.UiSingleTextField;
-import org.martus.swing.ParagraphLayout;
+import org.martus.swing.UiParagraphPanel;
 import org.martus.swing.Utilities;
 
 
@@ -68,18 +68,15 @@ public class UiRemoveServerDlg extends JDialog implements ActionListener
 		JButton no = new JButton(localization.getButtonLabel("no"));
 		no.addActionListener(this);
 
-		getContentPane().setLayout(new ParagraphLayout());	
-		getContentPane().add(new JLabel(""), ParagraphLayout.NEW_PARAGRAPH);		
-		getContentPane().add(msgLabel1);	
-		getContentPane().add(serverField);
-		getContentPane().add(msgLabel2, ParagraphLayout.NEW_LINE);			
-	
-		getContentPane().add(new JLabel(""), ParagraphLayout.NEW_PARAGRAPH);		
-		getContentPane().add(yes);
-		getContentPane().add(no);
+		UiParagraphPanel panel = new UiParagraphPanel();
+		panel.addBlankLine();
+		panel.addComponents(msgLabel1, serverField);
+		panel.addLabelOnly(msgLabel2);			
+		panel.addBlankLine();		
+		panel.addComponents(yes, no);
 
+		getContentPane().add(panel);
 		getRootPane().setDefaultButton(yes);
-
 		Utilities.centerDlg(this);
 		show();
 	}	

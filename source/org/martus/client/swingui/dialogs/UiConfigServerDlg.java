@@ -37,7 +37,7 @@ import org.martus.client.swingui.UiMainWindow;
 import org.martus.common.clientside.UiBasicLocalization;
 import org.martus.common.clientside.UiSingleTextField;
 import org.martus.common.crypto.MartusCrypto;
-import org.martus.swing.ParagraphLayout;
+import org.martus.swing.UiParagraphPanel;
 import org.martus.swing.Utilities;
 import org.martus.util.Base64.InvalidBase64Exception;
 
@@ -54,18 +54,16 @@ public class UiConfigServerDlg extends JDialog implements ActionListener
 		UiBasicLocalization localization = mainWindow.getLocalization();
 		
 		setTitle(localization.getWindowTitle("ConfigServer"));
-		getContentPane().setLayout(new ParagraphLayout());
 		fieldIPAddress = new UiSingleTextField(25);
 		fieldPublicCode = new UiSingleTextField(25);
 
-		getContentPane().add(new JLabel(localization.getFieldLabel("ServerNameEntry")), ParagraphLayout.NEW_PARAGRAPH);
-		getContentPane().add(fieldIPAddress);
+		UiParagraphPanel panel = new UiParagraphPanel();
+		panel.addComponents(new JLabel(localization.getFieldLabel("ServerNameEntry")), fieldIPAddress);
 		serverIPAddress = info.getServerName();
 		fieldIPAddress.setText(serverIPAddress);
 		fieldIPAddress.requestFocus();
 
-		getContentPane().add(new JLabel(localization.getFieldLabel("ServerPublicCodeEntry")), ParagraphLayout.NEW_PARAGRAPH);
-		getContentPane().add(fieldPublicCode);
+		panel.addComponents(new JLabel(localization.getFieldLabel("ServerPublicCodeEntry")), fieldPublicCode);
 		String knownServerPublicKey = info.getServerPublicKey();
 		String knownServerPublicCode = "";
 		try
@@ -78,16 +76,16 @@ public class UiConfigServerDlg extends JDialog implements ActionListener
 		}
 		fieldPublicCode.setText(knownServerPublicCode);
 
-		getContentPane().add(new JLabel(""), ParagraphLayout.NEW_PARAGRAPH);
+		panel.addBlankLine();
 
 		ok = new JButton(localization.getButtonLabel("ok"));
 		ok.addActionListener(this);
 		JButton cancel = new JButton(localization.getButtonLabel("cancel"));
 		cancel.addActionListener(this);
-		getContentPane().add(ok);
-		getContentPane().add(cancel);
-		getRootPane().setDefaultButton(ok);
+		panel.addComponents(ok, cancel);
 
+		getContentPane().add(panel);
+		getRootPane().setDefaultButton(ok);
 		Utilities.centerDlg(this);
 		setResizable(true);
 		show();
