@@ -31,11 +31,12 @@ import java.util.Vector;
 
 import org.martus.util.UnicodeReader;
 import org.martus.util.UnicodeWriter;
+import org.martus.util.UnicodeReader.BOMNotFoundException;
 
 
 public class BuildHelp
 {
-	public static void main(String[] args) throws IOException
+	public static void main(String[] args) throws IOException, BOMNotFoundException
 	{
 		if(args.length != 1)
 		{
@@ -66,7 +67,9 @@ public class BuildHelp
 		martusHelpTOC.delete();
 		
 		UnicodeReader in = new UnicodeReader(helpTxt);
+		in.skipBOM();
 		UnicodeWriter out = new UnicodeWriter(martusHelpTOC);
+		out.writeBOM();
 
 		Vector tableOfContents = new Vector();
 		
@@ -85,6 +88,7 @@ public class BuildHelp
 
 		in = new UnicodeReader(helpTxt);
 		out = new UnicodeWriter(martusHelp);
+		out.writeBOM();
 		
 		//Skip past TOC
 		while(true)

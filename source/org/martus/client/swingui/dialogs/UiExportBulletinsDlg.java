@@ -37,7 +37,6 @@ import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
-import javax.swing.JList;
 import org.martus.client.core.BulletinXmlExporter;
 import org.martus.client.core.ClientBulletinStore;
 import org.martus.client.swingui.UiMainWindow;
@@ -47,6 +46,7 @@ import org.martus.common.clientside.UiBasicLocalization;
 import org.martus.common.packet.UniversalId;
 import org.martus.swing.UiCheckBox;
 import org.martus.swing.UiFileChooser;
+import org.martus.swing.UiList;
 import org.martus.swing.UiScrollPane;
 import org.martus.swing.UiWrappedTextArea;
 import org.martus.swing.Utilities;
@@ -81,7 +81,7 @@ public class UiExportBulletinsDlg extends JDialog implements ActionListener
 		hBoxButtons.add(Box.createHorizontalGlue());
 		
 		String[] titles = extractTitles(mainWindow, bulletins);
-		JList bulletinList = new JList(titles);
+		UiList bulletinList = new UiList(titles);
 		UiScrollPane tocMsgAreaScrollPane = new UiScrollPane(bulletinList,
 				UiScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
 				UiScrollPane.HORIZONTAL_SCROLLBAR_NEVER);

@@ -1,4 +1,7 @@
-﻿1. Introduction to the Martus™ Software 
+﻿--------
+1. Introduction to the Martus™ Software 
+Martus 2.0 User Guide
+
 --------
 1a. What is Martus™?
 Named after the Greek word for witness, the Martus Project provides an efficient and secure way to store and retrieve information about human rights abuses. Using the Martus application, you can create bulletins that record human rights abuses, attach supporting documents, specify whether the information should be public or private, and store the information on a secure server. To learn more about the problems the Martus Project addresses and future plans for the project, visit http://www.martus.org.

@@ -38,12 +38,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Vector;
-
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JDialog;
-import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.ListSelectionModel;
 import javax.swing.border.EmptyBorder;
@@ -53,14 +51,15 @@ import javax.swing.plaf.basic.BasicTextUI;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.DefaultHighlighter;
 import javax.swing.text.DefaultHighlighter.DefaultHighlightPainter;
-
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.common.clientside.UiBasicLocalization;
 import org.martus.common.clientside.UiSingleTextField;
+import org.martus.swing.UiList;
 import org.martus.swing.UiScrollPane;
 import org.martus.swing.UiWrappedTextArea;
 import org.martus.swing.Utilities;
 import org.martus.util.UnicodeReader;
+import org.martus.util.UnicodeReader.BOMNotFoundException;
 
 
 
@@ -100,7 +99,7 @@ public class UiDisplayHelpDlg extends JDialog
 		Vector messageTOC = getFileVectorContents(fileStreamToc);
 		if(messageTOC != null)
 		{
-			tocList = new JList(messageTOC);
+			tocList = new UiList(messageTOC);
 			tocList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 			tocList.addListSelectionListener(new ListHandler());
 			UiScrollPane tocMsgAreaScrollPane = new UiScrollPane(tocList, UiScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
@@ -177,7 +176,9 @@ public class UiDisplayHelpDlg extends JDialog
 		}
 		try
 		{
-			BufferedReader reader = new BufferedReader(new UnicodeReader(fileStream));
+			UnicodeReader unicodeReader = new UnicodeReader(fileStream);
+			unicodeReader.skipBOM();
+			BufferedReader reader = new BufferedReader(unicodeReader);
 			while(true)
 			{
 				String lineIn = reader.readLine();
@@ -188,6 +189,11 @@ public class UiDisplayHelpDlg extends JDialog
 			reader.close();
 		}
 		catch(IOException e)
+		{
+			System.out.println("UiDisplayFileDlg: " + e);
+			return null;
+		}
+		catch(BOMNotFoundException e)
 		{
 			System.out.println("UiDisplayFileDlg: " + e);
 			return null;
@@ -259,7 +265,7 @@ public class UiDisplayHelpDlg extends JDialog
 		try
 		{
 			highliter.removeAllHighlights();
-			Color highlightColor = new Color(255,255,0);
+			Color highlightColor = Color.BLUE;
 			DefaultHighlightPainter painter = new DefaultHighlighter.DefaultHighlightPainter(highlightColor);
 			highliter.addHighlight(startIndex, endIndex, painter);
 		}
@@ -314,7 +320,7 @@ public class UiDisplayHelpDlg extends JDialog
 	JButton searchButton;
 	UiSingleTextField searchField;
 	JButton close;
-	JList tocList;
+	UiList tocList;
 	UiWrappedTextArea msgArea;
 	UiScrollPane msgAreaScrollPane;
 	BasicTextUI.BasicHighlighter highliter;
