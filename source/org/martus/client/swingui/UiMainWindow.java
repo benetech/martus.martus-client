@@ -1030,33 +1030,30 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 
 	public void displayHelpMessage()
 	{
-
 		InputStream helpStream = null;
 		InputStream helpStreamTOC = null;
 		String currentLanguage = getLocalization().getCurrentLanguageCode();
-		String helpFileShortName = app.getHelpFilename(currentLanguage);
-		String helpTOCFileShortName = app.getHelpTOCFilename(currentLanguage);
-		File helpFile = new File(MartusApp.getTranslationsDirectory(), helpFileShortName);
-		File helpTOCFile = new File(MartusApp.getTranslationsDirectory(), helpTOCFileShortName);
-		try
+
+		helpStream = app.getHelpMain(currentLanguage);
+		if(helpStream != null)
+			helpStreamTOC = app.getHelpTOC(currentLanguage);
+		else
 		{
-			if(helpFile.exists())
-				helpStream = new FileInputStream(helpFile);
-			else
-				helpStream = getClass().getResourceAsStream(helpFileShortName);
-			if(helpStream == null)
-				helpStream = getClass().getResourceAsStream(app.getEnglishHelpFilename());
-
-			if(helpTOCFile.exists())
-				helpStreamTOC = new FileInputStream(helpTOCFile);
-			else
-				helpStreamTOC = getClass().getResourceAsStream(helpTOCFileShortName);
-
-			new UiDisplayHelpDlg(this, "Help", helpStream, "OnlineHelpMessage", helpStreamTOC, "OnlineHelpTOCMessage");
+			helpStream = app.getHelpMain(Localization.ENGLISH);
+			helpStreamTOC = app.getHelpTOC(Localization.ENGLISH);
 		}
-		catch (IOException e)
+
+		new UiDisplayHelpDlg(this, "Help", helpStream, "OnlineHelpMessage", helpStreamTOC, "OnlineHelpTOCMessage");
+		try 
 		{
-			System.out.println("UiMainWIndow.displayHelpMessage " + e);
+			if(helpStream != null)
+				helpStream.close();
+			if(helpStreamTOC != null)
+				helpStreamTOC.close();
+		} 
+		catch (IOException e) 
+		{
+			System.out.println("UiMainWindow: DisplayHelpMessage:"+e.getMessage());
 		}
 	}
 

@@ -34,6 +34,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.UnsupportedEncodingException;
@@ -41,11 +42,14 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.Set;
 import java.util.Vector;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipFile;
 
 import org.martus.client.core.ClientBulletinStore.BulletinAlreadyExistsException;
 import org.martus.client.search.BulletinSearcher;
 import org.martus.client.search.SearchParser;
 import org.martus.client.search.SearchTreeNode;
+import org.martus.client.swingui.EnglishStrings;
 import org.martus.client.swingui.UiConstants;
 import org.martus.common.BulletinSummary;
 import org.martus.common.CustomFields;
@@ -91,6 +95,7 @@ import org.martus.common.packet.Packet.InvalidPacketException;
 import org.martus.common.packet.Packet.SignatureVerificationException;
 import org.martus.common.packet.Packet.WrongAccountException;
 import org.martus.common.packet.Packet.WrongPacketTypeException;
+import org.martus.jarverifier.JarVerifier;
 import org.martus.util.Base64;
 import org.martus.util.ByteArrayInputStreamWithSeek;
 import org.martus.util.DirectoryUtils;
@@ -98,6 +103,7 @@ import org.martus.util.FileInputStreamWithSeek;
 import org.martus.util.InputStreamWithSeek;
 import org.martus.util.UnicodeReader;
 import org.martus.util.UnicodeWriter;
+import org.martus.util.ZipEntryInputStreamThatClosesZipFile;
 import org.martus.util.Base64.InvalidBase64Exception;
 
 
@@ -456,11 +462,40 @@ public class MartusApp
 		return  getCurrentAccountDirectoryName() + "MartusUploadLog.txt";
 	}
 
-	public String getEnglishHelpFilename()
+	public InputStream getHelpMain(String currentLanguageCode)
 	{
-		return(getHelpFilename(Localization.ENGLISH));
+		return getHelp(currentLanguageCode, getHelpFilename(currentLanguageCode));
 	}
+	
+	public InputStream getHelpTOC(String currentLanguageCode)
+	{
+		return getHelp(currentLanguageCode, getHelpTOCFilename(currentLanguageCode));
+	}
+	
+	private InputStream getHelp(String currentLanguageCode, String helpFileName)
+	{
+		if(!localization.isOfficialTranslation(currentLanguageCode))
+			return null;
 
+		try 
+		{
+			File mlpFile = localization.getMlpkFile(currentLanguageCode);
+			if(mlpFile.exists() && 
+			   JarVerifier.verify(mlpFile.getAbsolutePath(),false) == JarVerifier.JAR_VERIFIED_TRUE)
+			{
+				ZipFile zip = new ZipFile(mlpFile);
+				ZipEntry zipEntry = zip.getEntry(helpFileName);
+				ZipEntryInputStreamThatClosesZipFile stream = new ZipEntryInputStreamThatClosesZipFile(zip, zipEntry);
+				return stream;
+			}
+		} 
+		catch (Exception e) 
+		{
+			e.printStackTrace();
+		}
+		return EnglishStrings.class.getResourceAsStream(helpFileName);
+	}
+	
 	public String getHelpFilename(String languageCode)
 	{
 		String helpFile = "MartusHelp-" + languageCode + ".txt";

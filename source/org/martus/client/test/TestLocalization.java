@@ -28,12 +28,11 @@ package org.martus.client.test;
 
 import java.awt.ComponentOrientation;
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.Vector;
+
 import javax.swing.SwingConstants;
+
 import org.martus.client.swingui.EnglishStrings;
 import org.martus.client.swingui.UiConstants;
 import org.martus.client.swingui.UiLocalization;
@@ -45,7 +44,6 @@ import org.martus.common.clientside.UiBasicLocalization;
 import org.martus.jarverifier.JarVerifier;
 import org.martus.swing.UiLanguageDirection;
 import org.martus.util.DirectoryUtils;
-import org.martus.util.StreamCopier;
 import org.martus.util.StringInputStream;
 import org.martus.util.TestCaseEnhanced;
 import org.martus.util.UnicodeStringWriter;
@@ -299,17 +297,6 @@ public class TestLocalization extends TestCaseEnhanced
 		assertFalse("A unsigned MLPK file should not be trusted", myLocalization2.isOfficialTranslation(someTestLanguageCode));
 		
 		assertFalse("A non existant translation should not be trusted.",myLocalization2.isOfficialTranslation("dx"));
-	}
-
-	
-	private void copyResourceFileToLocalFile(File someTestLanguage, String mlpkFileToUse) throws FileNotFoundException, IOException
-	{
-		FileOutputStream out = new FileOutputStream(someTestLanguage);
-		InputStream in = getClass().getResource(mlpkFileToUse).openStream();
-		StreamCopier copier = new StreamCopier();
-		copier.copyStream(in, out);
-		in.close();
-		out.close();
 	}
 
 	private boolean doesLanguageExist(UiLocalization dbToUse, String languageCode)

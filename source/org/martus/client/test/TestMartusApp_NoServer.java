@@ -32,6 +32,7 @@ import java.awt.Rectangle;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.RandomAccessFile;
 import java.util.Arrays;
 import java.util.Vector;
@@ -112,6 +113,51 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		assertNotNull("BulletinStore", store);
 		TRACE_END();
 	}
+	
+	public void testGetHelp() throws Exception
+	{
+		TRACE_BEGIN("testGetHelp");
+		File translationDirectory = appWithAccount.martusDataRootDirectory;
+		UiLocalization tmpLocalization = new UiLocalization(translationDirectory, EnglishStrings.strings);
+		String languageCode = "xx";
+		InputStream helpMain = appWithAccount.getHelpMain(languageCode);
+		assertNull("Language pack doesn't exists help should return null", helpMain);
+		InputStream helpTOC = appWithAccount.getHelpTOC(languageCode);
+		assertNull("Language pack doesn't exists help toc should return null", helpTOC);
+
+		File mlpkTranslation = new File(translationDirectory, UiBasicLocalization.getMlpkFilename(languageCode));
+		copyResourceFileToLocalFile(mlpkTranslation, "Martus-xx-NotSigned.mlp");
+		mlpkTranslation.deleteOnExit();
+		helpMain = appWithAccount.getHelpMain(languageCode);
+		helpTOC = appWithAccount.getHelpTOC(languageCode);
+		assertNull("Language pack exists but isn't signed help should return null", helpMain);
+		assertNull("Language pack exists but isn't signed help toc should return null", helpTOC);
+		mlpkTranslation.delete();
+
+		copyResourceFileToLocalFile(mlpkTranslation, "Martus-xx.mlp");
+		mlpkTranslation.deleteOnExit();
+		helpMain = appWithAccount.getHelpMain(languageCode);
+		UnicodeReader reader = new UnicodeReader(helpMain);
+		reader.read();//unused char.
+		String line1InFile = reader.readLine(); 
+		reader.close();
+		String helpTextInFile = "Temp Help File for testing";
+		
+		helpTOC = appWithAccount.getHelpTOC(languageCode);
+		reader = new UnicodeReader(helpTOC);
+		reader.read();//unused char.
+		String line1InTOCFile = reader.readLine();
+		reader.close();
+		String helpTextInTOCFile = "chapter 1";
+
+		mlpkTranslation.delete();
+
+		assertNotNull("Language pack exists and is signed help should return not null", helpMain);
+		assertNotNull("Language pack exists and is signed help toc should return not null", helpTOC);
+		assertEquals("Contents of help didn't match?", helpTextInFile, line1InFile);
+		assertEquals("Contents of help TOC didn't match?", helpTextInTOCFile, line1InTOCFile);
+		TRACE_END();
+	}	
 	
 	public void testSaveBulletin() throws Exception
 	{
@@ -1477,7 +1523,6 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 
 		assertEquals("en", localization.getCurrentLanguageCode());
 		assertEquals("MartusHelp-en.txt", appWithAccount.getHelpFilename("en"));
-		assertEquals("MartusHelp-en.txt", appWithAccount.getEnglishHelpFilename());
 		localization.setCurrentLanguageCode("es");
 		assertEquals("es", localization.getCurrentLanguageCode());
 		assertEquals("MartusHelp-es.txt", appWithAccount.getHelpFilename("es"));
@@ -1487,6 +1532,7 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		localization.setCurrentLanguageCode("en");
 		TRACE_END();
 	}
+
 
 	public void testDateConvert()
 	{
