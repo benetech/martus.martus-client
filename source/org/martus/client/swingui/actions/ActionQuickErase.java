@@ -112,7 +112,7 @@ public abstract class ActionQuickErase extends UiMenuAction
 		ConfirmQuickEraseDlg(boolean uninstallMartus)
 		{
 			super(mainWindow, "", true);
-			confirmUninstall = uninstallMartus;
+			uninstallChoosen = uninstallMartus;
 			martusAccounts = app.getAllAccountDirectories();
 			UiLocalization localization = mainWindow.getLocalization();
 			if(uninstallMartus)
@@ -203,7 +203,7 @@ public abstract class ActionQuickErase extends UiMenuAction
 		{
 			if(okButton.hasFocus())
 			{
-				if(confirmUninstall)
+				if(uninstallChoosen)
 				{
 					if(mainWindow.confirmDlgBeep("RemoveMartus"))
 						okPressed = true;
@@ -224,7 +224,7 @@ public abstract class ActionQuickErase extends UiMenuAction
 
 		private JButton okButton;
 		private boolean okPressed;
-		private boolean confirmUninstall;
+		private boolean uninstallChoosen;
 	}
 
 	final boolean WILL_UNINSTALL_MARTUS = true;
