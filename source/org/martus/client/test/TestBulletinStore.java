@@ -29,7 +29,6 @@ package org.martus.client.test;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.StringReader;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
@@ -39,9 +38,9 @@ import org.martus.client.core.BulletinFolder;
 import org.martus.client.core.BulletinStore;
 import org.martus.client.core.MartusClientXml;
 import org.martus.client.core.BulletinStore.BulletinAlreadyExistsException;
-import org.martus.common.StandardFieldSpecs;
 import org.martus.common.FieldSpec;
 import org.martus.common.MartusXml;
+import org.martus.common.StandardFieldSpecs;
 import org.martus.common.bulletin.AttachmentProxy;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.bulletin.BulletinConstants;
@@ -609,7 +608,7 @@ public class TestBulletinStore extends TestCaseEnhanced
 
 		int count = store.getFolderCount();
 		String xml = "<FolderList></FolderList>";
-		store.loadFolders(new StringReader(xml));
+		store.internalLoadFolders(xml);
 		assertEquals(0, store.getBulletinCount());
 		assertEquals(count, store.getFolderCount());
 		assertNull("found?", store.findFolder("fromxml"));
@@ -621,7 +620,7 @@ public class TestBulletinStore extends TestCaseEnhanced
 
 		int count = store.getFolderCount();
 		String xml = "<FolderList><Folder name='one'></Folder><Folder name='two'></Folder></FolderList>";
-		store.loadFolders(new StringReader(xml));
+		store.internalLoadFolders(xml);
 		assertEquals(count+2, store.getFolderCount());
 		assertNotNull("Folder one must exist", store.findFolder("one"));
 		assertNotNull("Folder two must exist", store.findFolder("two"));
@@ -632,16 +631,20 @@ public class TestBulletinStore extends TestCaseEnhanced
 	{
 		TRACE("testLoadXmlFolders");
 
-		int count = store.getFolderCount();
+		int systemFolderCount = store.getFolderCount();
+
+		BulletinStore tempStore = new BulletinStore(db);
 		String xml = "<FolderList><Folder name='Outbox'></Folder><Folder name='new two'></Folder></FolderList>";
-		assertTrue("Legacy folder didn't return true on load", store.loadFolders(new StringReader(xml)));
-		assertEquals(count+1, store.getFolderCount());
-		assertNotNull("Folder %OutBox must exist", store.findFolder("%OutBox"));
-		assertNull("Folder Outbox must not exist", store.findFolder("Outbox"));
-		assertNotNull("Folder two new must exist", store.findFolder("new two"));
-		assertNull("Folder three must not exist", store.findFolder("three"));
+		tempStore.internalLoadFolders(xml);
+		assertTrue("Legacy folder not detected?", tempStore.needsLegacyFolderConversion());
+		assertEquals(systemFolderCount + 1, tempStore.getFolderCount());
+		assertNotNull("Folder %OutBox must exist", tempStore.findFolder("%OutBox"));
+		assertNull("Folder Outbox must not exist", tempStore.findFolder("Outbox"));
+		assertNotNull("Folder two new must exist", tempStore.findFolder("new two"));
+		assertNull("Folder three must not exist", tempStore.findFolder("three"));
 		xml = "<FolderList><Folder name='%OutBox'></Folder><Folder name='new two'></Folder></FolderList>";
-		assertFalse("Not Legacy folder didn't return false on load", store.loadFolders(new StringReader(xml)));
+		tempStore.internalLoadFolders(xml);
+		assertFalse("Not Legacy folder didn't return false on load", tempStore.needsLegacyFolderConversion());
 	}
 
 	/* missing tests:

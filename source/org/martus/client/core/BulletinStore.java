@@ -32,7 +32,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.Reader;
 import java.io.StringReader;
 import java.io.UnsupportedEncodingException;
 import java.util.HashSet;
@@ -41,8 +40,6 @@ import java.util.Set;
 import java.util.TreeMap;
 import java.util.Vector;
 import java.util.zip.ZipFile;
-
-import javax.xml.parsers.ParserConfigurationException;
 
 import org.martus.common.FieldSpec;
 import org.martus.common.MartusUtilities;
@@ -76,7 +73,6 @@ import org.martus.util.xml.SimpleXmlDefaultLoader;
 import org.martus.util.xml.SimpleXmlParser;
 import org.martus.util.xml.SimpleXmlStringLoader;
 import org.xml.sax.Attributes;
-import org.xml.sax.SAXException;
 import org.xml.sax.SAXParseException;
 
 
@@ -684,9 +680,15 @@ public class BulletinStore
 			in.close();
 
 			String folderXml = new String(out.toByteArray(), "UTF-8");
-			if(folderXml != null)
-				if(loadFolders(new StringReader(folderXml)))
-					saveFolders();
+			if(folderXml == null)
+				return;
+				
+			internalLoadFolders(folderXml);
+			if(needsLegacyFolderConversion())
+			{
+				saveFolders();
+				loadedLegacyFolders = false;
+			}
 		}
 		catch(UnsupportedEncodingException e)
 		{
@@ -913,7 +915,7 @@ public class BulletinStore
 		return xml;
 	}
 
-	public synchronized boolean loadFolders(Reader xml)
+	public synchronized void internalLoadFolders(String folderXml)
 	{
 		folders.clear();
 		loadedLegacyFolders = false;
@@ -921,28 +923,13 @@ public class BulletinStore
 		XmlFolderListLoader loader = new XmlFolderListLoader(this);
 		try
 		{
-			SimpleXmlParser.parse(loader, xml);
-			return needsLegacyFolderConversion();
+			SimpleXmlParser.parse(loader, new StringReader(folderXml));
 		}
-		catch (IOException e)
+		catch (Exception e)
 		{
-			// TODO Auto-generated catch block
+			// TODO Improve error handling!!!
 			e.printStackTrace();
 		}
-		catch (ParserConfigurationException e)
-		{
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		catch (SAXException e)
-		{
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		// if we had an error, claim we don't need to do a 
-		// legacy conversion
-		return false;
 	}
 	
 	class XmlFolderListLoader extends SimpleXmlDefaultLoader
@@ -1150,7 +1137,7 @@ public class BulletinStore
 		loadedLegacyFolders = true;
 	}
 	
-	boolean needsLegacyFolderConversion()
+	public boolean needsLegacyFolderConversion()
 	{
 		return loadedLegacyFolders;
 	}
