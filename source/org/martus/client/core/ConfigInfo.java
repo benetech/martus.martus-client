@@ -172,7 +172,7 @@ public class ConfigInfo implements Serializable
 			out.writeUTF(serverPublicKey);
 			out.writeBoolean(sendContactInfoToServer);
 			out.writeUTF(serverCompliance);
-			out.writeUTF(customFieldSpecs);
+			out.writeUTF(deprecatedCustomFieldSpecs);
 			out.writeUTF(customFieldXml);
 			out.close();
 		}
@@ -181,6 +181,8 @@ public class ConfigInfo implements Serializable
 			System.out.println("ConfigInfo.save error: " + e);
 		}
 	}
+	
+	public static final String deprecatedCustomFieldSpecs = "Error,Config written by a newer version of Martus, upgrade";
 
 	private boolean mustAskUserToSendToServer;
 	

@@ -204,7 +204,7 @@ public class TestConfigInfo extends TestCaseEnhanced
 		info.setHQKey(sampleHQKey);
 		info.setSendContactInfoToServer(sampleSendContactInfoToServer);
 		info.setServerCompliance(sampleServerCompliance);
-		info.setCustomFieldSpecs(sampleCustomFieldSpecs);
+		info.setCustomFieldSpecs(ConfigInfo.deprecatedCustomFieldSpecs);
 		info.setCustomFieldXml(sampleCustomFieldXml);
 	}
 
@@ -255,8 +255,10 @@ public class TestConfigInfo extends TestCaseEnhanced
 		else
 			assertEquals(label + ": sampleServerComplicance", "", info.getServerCompliance());
 
-		if(VERSION >= 5)
-			assertEquals(label + ": sampleCustomFieldSpecs", sampleCustomFieldSpecs, info.getCustomFieldSpecs());	
+		if(VERSION == 5)
+			assertEquals(label + ": sampleCustomFieldSpecs", sampleCustomFieldSpecs, info.getCustomFieldSpecs());
+		else if(VERSION >= 6)
+			assertEquals(label + ": sampleCustomFieldSpecs", ConfigInfo.deprecatedCustomFieldSpecs, info.getCustomFieldSpecs());
 		else
 			assertEquals(label + ": sampleCustomFieldSpecs", defaultCustomFieldSpecs, info.getCustomFieldSpecs());
 
@@ -299,12 +301,13 @@ public class TestConfigInfo extends TestCaseEnhanced
 		{
 			out.writeUTF(sampleServerCompliance);
 		}
-		if(VERSION >= 5)
+		if(VERSION == 5)
 		{
 			out.writeUTF(sampleCustomFieldSpecs);
 		}
 		if(VERSION >= 6)
 		{
+			out.writeUTF(ConfigInfo.deprecatedCustomFieldSpecs);
 			out.writeUTF(sampleCustomFieldXml);
 		}
 		out.close();

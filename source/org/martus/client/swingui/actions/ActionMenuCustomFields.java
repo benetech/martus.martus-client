@@ -29,14 +29,16 @@ package org.martus.client.swingui.actions;
 import java.awt.event.ActionEvent;
 
 import org.martus.client.core.BulletinStore;
+import org.martus.client.core.ConfigInfo;
 import org.martus.client.core.CustomFieldSpecValidator;
 import org.martus.client.core.MartusApp;
 import org.martus.client.core.MartusApp.SaveConfigInfoException;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.dialogs.UiCustomFieldsDlg;
-import org.martus.common.StandardFieldSpecs;
+import org.martus.common.CustomFields;
 import org.martus.common.FieldSpec;
-import org.martus.common.LegacyCustomFields;
+import org.martus.common.StandardFieldSpecs;
+import org.martus.common.CustomFields.CustomFieldsParseException;
 
 public class ActionMenuCustomFields extends UiMenuAction
 {
@@ -58,8 +60,8 @@ public class ActionMenuCustomFields extends UiMenuAction
 			return;
 			
 		store.setPublicFieldTags(newSpecs);
-		String fieldSpecString = LegacyCustomFields.buildFieldListString(newSpecs);
-		app.getConfigInfo().setCustomFieldSpecs(fieldSpecString);
+		app.getConfigInfo().setCustomFieldSpecs(ConfigInfo.deprecatedCustomFieldSpecs);
+		app.getConfigInfo().setCustomFieldXml(new CustomFields(newSpecs).toString());
 
 		try
 		{
@@ -73,31 +75,40 @@ public class ActionMenuCustomFields extends UiMenuAction
 
 	private FieldSpec[] getCustomizedFieldsFromUser(FieldSpec[] existingSpecs)
 	{
-		String existingCustomFieldXml = LegacyCustomFields.buildFieldListString(existingSpecs);
+		CustomFields existingFields = new CustomFields(existingSpecs);
+		String existingCustomFieldXml = existingFields.toString();
 		while(true)
 		{
 			UiCustomFieldsDlg inputDlg = new UiCustomFieldsDlg(mainWindow, existingCustomFieldXml);
 			inputDlg.setFocusToInputField();
 			inputDlg.show();
 			String newCustomFieldXml = inputDlg.getResult();
-
 			if(newCustomFieldXml == null)
 				return null;
-				
+			
 			if(newCustomFieldXml.length() == 0)
 			{
 				if(mainWindow.confirmDlg("UndoCustomFields"))
-					return StandardFieldSpecs.getDefaultPublicFieldSpecs();
-				continue;
+				existingFields = new CustomFields(StandardFieldSpecs.getDefaultPublicFieldSpecs());
+				existingCustomFieldXml = existingFields.toString();
 			}
- 
-			FieldSpec[] newSpecs = LegacyCustomFields.parseFieldSpecsFromString(newCustomFieldXml);
-			CustomFieldSpecValidator checker = new CustomFieldSpecValidator(newSpecs);
-			if(checker.isValid())
-				return newSpecs;
-				
-			mainWindow.notifyDlg("ErrorInCustomFields");
-			existingCustomFieldXml = newCustomFieldXml;
+			else
+			{
+				try
+				{
+					FieldSpec[] newSpecs = CustomFields.parseXml(newCustomFieldXml);
+					CustomFieldSpecValidator checker = new CustomFieldSpecValidator(newSpecs);
+					if(checker.isValid())
+						return newSpecs;
+				}
+				catch (CustomFieldsParseException e)
+				{
+					e.printStackTrace();
+				}
+
+				mainWindow.notifyDlg("ErrorInCustomFields");
+				existingCustomFieldXml = newCustomFieldXml;
+			}
 		}
 	}
 	

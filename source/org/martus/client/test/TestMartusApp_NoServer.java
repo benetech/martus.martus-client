@@ -45,6 +45,9 @@ import org.martus.client.core.MartusApp.AccountAlreadyExistsException;
 import org.martus.client.core.MartusApp.CannotCreateAccountFileException;
 import org.martus.client.swingui.EnglishStrings;
 import org.martus.client.swingui.UiLocalization;
+import org.martus.common.CustomFields;
+import org.martus.common.FieldSpec;
+import org.martus.common.LegacyCustomFields;
 import org.martus.common.MartusUtilities;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.clientside.ChoiceItem;
@@ -103,6 +106,30 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		BulletinStore store = appWithAccount.getStore();
 		assertNotNull("BulletinStore", store);
 		TRACE_END();
+	}
+	
+	public void testLoadOldCustomFieldConfigInfo() throws Exception
+	{
+		ConfigInfo infoToConvert = new ConfigInfo();
+		String sampleLegacyFields = "tag1;tag2";
+		infoToConvert.setCustomFieldSpecs(sampleLegacyFields);
+		CustomFields fields = new CustomFields(MartusApp.getCustomFieldSpecs(infoToConvert));
+
+		CustomFields expected = new CustomFields(LegacyCustomFields.parseFieldSpecsFromString(sampleLegacyFields));
+		assertEquals(expected.toString(), fields.toString());
+	}
+	
+	public void testLoadConvertedCustomFieldInfo() throws Exception
+	{
+		ConfigInfo convertedInfo = new ConfigInfo();
+		String newFields = "new,label;another,show";
+		FieldSpec[] newSpecs = LegacyCustomFields.parseFieldSpecsFromString(newFields);
+		CustomFields convertedFields = new CustomFields(newSpecs);
+		convertedInfo.setCustomFieldXml(convertedFields.toString());
+		CustomFields fields = new CustomFields(MartusApp.getCustomFieldSpecs(convertedInfo));
+
+		CustomFields expected = new CustomFields(LegacyCustomFields.parseFieldSpecsFromString(newFields));
+		assertEquals(expected.toString(), fields.toString());
 	}
 	
 	public void testSetDefaultUiState() throws Exception

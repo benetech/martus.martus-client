@@ -44,12 +44,15 @@ import org.martus.client.core.BulletinStore.BulletinAlreadyExistsException;
 import org.martus.client.core.ClientSideNetworkHandlerUsingXmlRpc.SSLSocketSetupException;
 import org.martus.client.core.Exceptions.ServerCallFailedException;
 import org.martus.client.core.Exceptions.ServerNotAvailableException;
-import org.martus.common.StandardFieldSpecs;
+import org.martus.common.CustomFields;
+import org.martus.common.FieldSpec;
 import org.martus.common.LegacyCustomFields;
 import org.martus.common.MartusConstants;
 import org.martus.common.MartusUtilities;
 import org.martus.common.ProgressMeterInterface;
+import org.martus.common.StandardFieldSpecs;
 import org.martus.common.Version;
+import org.martus.common.CustomFields.CustomFieldsParseException;
 import org.martus.common.MartusUtilities.FileVerificationException;
 import org.martus.common.MartusUtilities.PublicInformationInvalidException;
 import org.martus.common.MartusUtilities.ServerErrorException;
@@ -277,13 +280,25 @@ public class MartusApp
 			plainTextContactOutputStream.close();
 			encryptedContactFileInputStream.close();
 			
-			store.setPublicFieldTags(LegacyCustomFields.parseFieldSpecsFromString(configInfo.getCustomFieldSpecs()));
+			FieldSpec[] specs = getCustomFieldSpecs(configInfo);
+			store.setPublicFieldTags(specs);
 		}
 		catch (Exception e)
 		{
 			//System.out.println("Loadcontactinfo: " + e);
 			throw new LoadConfigInfoException();
 		}
+	}
+
+	public static FieldSpec[] getCustomFieldSpecs(ConfigInfo configInfo) throws CustomFieldsParseException
+	{
+		String xmlSpecs = configInfo.getCustomFieldXml();
+		if(xmlSpecs.length() > 0)
+			return CustomFields.parseXml(xmlSpecs);
+			
+		String legacySpecs = configInfo.getCustomFieldSpecs();
+		FieldSpec[] specs = LegacyCustomFields.parseFieldSpecsFromString(legacySpecs);
+		return specs;
 	}
 
 	public void doAfterSigninInitalization() throws MartusAppInitializationException, FileVerificationException, MissingAccountMapException, MissingAccountMapSignatureException
