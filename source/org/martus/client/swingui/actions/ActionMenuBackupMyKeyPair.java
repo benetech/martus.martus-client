@@ -29,7 +29,6 @@ import java.awt.event.ActionEvent;
 
 import org.martus.client.swingui.UiBackupRecoverSharedKeyPair;
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.common.MartusConstants;
 
 
 public class ActionMenuBackupMyKeyPair extends UiMenuAction
