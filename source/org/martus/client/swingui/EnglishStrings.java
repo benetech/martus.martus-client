@@ -292,6 +292,7 @@ public class EnglishStrings
 "button:RecoverAccountByBackup=Recover account from backup keypair file",
 "button:ConfigureHQsAdd=Add...",
 "button:ConfigureHQsRemove=Remove",
+"button:HQDetails=Details...",
 
 "menu:file=File",
 "menu:CreateNewBulletin=Create New Bulletin",
@@ -766,7 +767,7 @@ public class EnglishStrings
 "field:WasSentNo=No",
 
 "field:BulletinViewHeading=Martus Bulletin",
-"field:BulletinViewHQInfo=#N# Headquarter account(s) will be able to view the private information in this bulletin",
+"field:BulletinViewHQInfo=#N# other account(s) can view this private information",
 
 "folder:%OutBox=Unsent Bulletins",
 "folder:%Sent=Saved Bulletins",
