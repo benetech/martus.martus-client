@@ -30,11 +30,13 @@ import java.awt.event.KeyListener;
 
 import javax.swing.JScrollPane;
 
+import org.martus.common.GridFieldSpec;
+
 public class UiGridEditor extends UiGrid
 {
-	public UiGridEditor()
+	public UiGridEditor(GridFieldSpec fieldSpec)
 	{
-		super(3);
+		super(fieldSpec);
 		table.resizeTable(DEFAULT_VIEABLE_ROWS);
 		
 		table.addKeyListener(new GridKeyListener());

@@ -39,6 +39,7 @@ import org.martus.client.swingui.fields.UiGridEditor;
 import org.martus.client.swingui.fields.UiMultilineTextEditor;
 import org.martus.client.swingui.fields.UiNormalTextEditor;
 import org.martus.client.swingui.fields.UiUnknownViewer;
+import org.martus.common.GridFieldSpec;
 import org.martus.common.bulletin.AttachmentProxy;
 import org.martus.common.clientside.ChoiceItem;
 
@@ -85,9 +86,9 @@ public class UiBulletinComponentEditorSection extends UiBulletinComponentSection
 		return new UiBoolEditor();
 	}
 
-	public UiField createGridField()
+	public UiField createGridField(GridFieldSpec fieldSpec)
 	{
-		return new UiGridEditor();
+		return new UiGridEditor(fieldSpec);
 	}
 	
 	public void addAttachment(AttachmentProxy a)

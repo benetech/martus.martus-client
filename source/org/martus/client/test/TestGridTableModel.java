@@ -23,27 +23,38 @@ Software Foundation, Inc., 59 Temple Place - Suite 330,
 Boston, MA 02111-1307, USA.
 
 */
-package org.martus.client.swingui.fields;
+package org.martus.client.test;
 
-import javax.swing.JScrollPane;
-
+import org.martus.client.swingui.fields.GridTableModel;
 import org.martus.common.GridFieldSpec;
+import org.martus.util.TestCaseEnhanced;
 
-public class UiGridViewer extends UiGrid
+
+public class TestGridTableModel extends TestCaseEnhanced
 {
-	public UiGridViewer(GridFieldSpec fieldSpec)
+	public TestGridTableModel(String name)
 	{
-		super(fieldSpec);
-		table.resizeTable();
-		table.setEnabled(false);
-		widget.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-		widget.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_NEVER);
+		super(name);
 	}
-
-	public void setText(String newText)
+	
+	public void testBasics() throws Exception
 	{
-		super.setText(newText);
-		table.resizeTable();
+		GridFieldSpec spec = new GridFieldSpec();
+		String label1 = "column 1";
+		String label2 = "column 2";
+		spec.addColumn(label1);
+		spec.addColumn(label2);
+		GridTableModel model = new GridTableModel(spec);
+		assertEquals(2, model.getColumnCount());
+		assertEquals(label1, model.getColumnName(0));
+		assertEquals(label2, model.getColumnName(1));
+		assertEquals(0, model.getRowCount());
+		model.addEmptyRow();
+		assertEquals(1, model.getRowCount());
+		String value = "Yeah";
+		model.setValueAt(value, 0,0);
+		assertEquals(value, model.getValueAt(0,0));
 	}
+	
 	
 }

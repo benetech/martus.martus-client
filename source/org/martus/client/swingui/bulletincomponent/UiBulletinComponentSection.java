@@ -43,6 +43,7 @@ import org.martus.client.swingui.fields.UiDateEditor;
 import org.martus.client.swingui.fields.UiField;
 import org.martus.client.swingui.fields.UiField.DataInvalidException;
 import org.martus.common.FieldSpec;
+import org.martus.common.GridFieldSpec;
 import org.martus.common.bulletin.AttachmentProxy;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.clientside.ChoiceItem;
@@ -163,7 +164,7 @@ abstract public class UiBulletinComponentSection extends JPanel
 				field = createBoolField();
 				break;
 			case FieldSpec.TYPE_GRID:
-				field = createGridField();
+				field = createGridField((GridFieldSpec)fieldSpec);
 				break;
 			case FieldSpec.TYPE_UNKNOWN:
 			default:
@@ -296,7 +297,7 @@ abstract public class UiBulletinComponentSection extends JPanel
 	abstract public UiField createFlexiDateField();
 	abstract public UiField createUnknownField();
 	abstract public UiField createBoolField();
-	abstract public UiField createGridField();
+	abstract public UiField createGridField(GridFieldSpec fieldSpec);
 
 	abstract public void createAttachmentTable();
 	abstract public void addAttachment(AttachmentProxy a);

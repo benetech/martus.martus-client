@@ -31,15 +31,16 @@ import javax.swing.table.DefaultTableModel;
 import javax.xml.parsers.ParserConfigurationException;
 
 import org.martus.common.GridData;
+import org.martus.common.GridFieldSpec;
 import org.xml.sax.SAXException;
 
 
 public class GridTableModel extends DefaultTableModel
 {
-	public GridTableModel(int columnCount)
+	public GridTableModel(GridFieldSpec fieldSpec)
 	{
-		super(0, columnCount);
-		gridData = new GridData(columnCount);
+		setColumnIdentifiers(fieldSpec.getAllColumnLabels());
+		gridData = new GridData(fieldSpec.getColumnCount());
 	}
 	
 	public void addEmptyRow()

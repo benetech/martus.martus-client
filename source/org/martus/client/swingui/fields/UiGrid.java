@@ -35,20 +35,20 @@ import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
-import javax.swing.event.ChangeEvent;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableModel;
 
+import org.martus.common.GridFieldSpec;
 import org.martus.swing.UiTable;
 
 
 public class UiGrid extends UiField
 {
 
-	public UiGrid(int columns)
+	public UiGrid(GridFieldSpec fieldSpec)
 	{
 		super();
-		model = new GridTableModel(columns);
+		model = new GridTableModel(fieldSpec);
 		table = new GridTable(model);
 		table.setColumnSelectionAllowed(false);
 		table.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
@@ -105,8 +105,6 @@ public class UiGrid extends UiField
 	
 	public String getText()
 	{
-		if(table.isEditing())
-			table.editingStopped(new ChangeEvent(this));
 		return model.getXmlRepresentation();
 	}
 

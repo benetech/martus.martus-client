@@ -37,6 +37,7 @@ import org.martus.client.swingui.fields.UiGridViewer;
 import org.martus.client.swingui.fields.UiMultilineViewer;
 import org.martus.client.swingui.fields.UiNormalTextViewer;
 import org.martus.client.swingui.fields.UiUnknownViewer;
+import org.martus.common.GridFieldSpec;
 import org.martus.common.bulletin.AttachmentProxy;
 import org.martus.common.clientside.ChoiceItem;
 
@@ -83,9 +84,9 @@ public class UiBulletinComponentViewSection extends UiBulletinComponentSection
 		return new UiBoolViewer(getLocalization());
 	}
 
-	public UiField createGridField()
+	public UiField createGridField(GridFieldSpec fieldSpec)
 	{
-		return new UiGridViewer();
+		return new UiGridViewer(fieldSpec);
 	}
 
 	public void createAttachmentTable()
