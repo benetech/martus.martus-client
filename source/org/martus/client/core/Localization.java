@@ -61,9 +61,9 @@ public class Localization
 	public static final String ENGLISH = "en";
 	public static final String[] ALL_LANGUAGE_CODES = {
 				"?", "en", "ar",
-				"az", "bn", "my","zh", "nl", "eo", "fr", "de","gu","ha","he","hi","hu",
-				"it", "ja","jv","kn","ko","ml","mr","or","pa","pl","pt","ro","ru","sr",
-				"sr", "sd","si","es","ta","te", "th","tr","uk","ur","vi"};
+				"az", "bn", "my","zh", "nl", "eo", "fa", "fr", "de","gu","ha","he","hi","hu",
+				"it", "ja","jv","kn","kk","ky","ko","ml","mr","or","pa","ps","pl","pt","ro","ru","sr",
+				"sr", "sd","si","es","ta","tg","te","th","tr","tk","uk","ur","uz","vi"};
 	public String getCurrentDateFormatCode()
 	{
 		return currentDateFormat;
