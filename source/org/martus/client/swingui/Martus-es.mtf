@@ -378,13 +378,13 @@ Also, the translation of the first sentence should
 -db93-field:ErrorPreviousBackupShareExists=Una pieza de un archivo de seguridad ya existe en este medio. Cada pieza tiene que ser guardada en su propio medio removible.
 
 #_____________________________________________=No appropriate backup file was found on this disk, please try a different disk.
--618a-field:ErrorRecoverNoAppropriateFileFound=No se encontró la pieza del archivo de clave necesaria, por favor intente con otro disquete.
+-618a-field:ErrorRecoverNoAppropriateFileFound=No se encontró la pieza del archivo de seguridad necesario, por favor intente con otro disquete.
 
 #________________________________=An error occurred reading this key backup file.
--b106-field:ErrorRecoverShareDisk=Ocurrió un error al leer la pieza del archivo de claves.
+-b106-field:ErrorRecoverShareDisk=Ocurrió un error al leer la pieza de su clave del archivo de seguridad.
 
 #_____________________________________=An error occurred verifying this key backup file.
--df17-field:ErrorVerifyingKeyPairShare=Ocurrió un error al verificar la pieza del archivo de claves.
+-df17-field:ErrorVerifyingKeyPairShare=Ocurrió un error al verificar la pieza de su clave del archivo de seguridad.
 
 #___________________________=Exit when complete
 -30e3-field:ExitWhenComplete=Salir al acabar
@@ -504,7 +504,7 @@ Also, the translation of the first sentence should
 -9a43-field:RemoveMartusWillDeleteMartusDirectory=Elimine la carpeta de Martus y todo su contenido.
 
 #_________________________________________________=Delete all other Martus accounts, including their key, folders, and bulletins.
--224e-field:RemoveMartusWillRemoveAllOtherAccounts=Elimine todas las cuentas de Martus, incluyendo sus claves, carpetas y boletines.
+-224e-field:RemoveMartusWillRemoveAllOtherAccounts=Elimine todas las cuentas de Martus, incluyendo las claves, carpetas y boletines.
 
 #____________________________________=Uninstall the Martus program.
 -2001-field:RemoveMartusWillUninstall=Desinstalar el programa Martus.
@@ -762,7 +762,7 @@ Also, the translation of the first sentence should
 -1483-field:confirmEnterCustomFieldseffect=Modificar los campos de los boletines es una operación avanzada y puede tener consecuencias inesperadas. Continúe solo si entiende característica del programa.
 
 #_________________________________________________=The file you chose is not part of a key backup set.  These files are named '<name you picked>-#.dat' where # is the sequence number in the disk set previously created.
--2e41-field:confirmErrorRecoverIvalidFileNamecause=El archivo que eligió no es parte de las copias de resguardo de su clave de Martus.  Los archivos de las copias de resguardo se llaman '<nombre que eligió>-#.dat' donde # es el número del archivo en la secuencia de copias removidas.
+-2e41-field:confirmErrorRecoverIvalidFileNamecause=El archivo que eligió no es parte de las copias de seguridad de su clave de Martus.  Los archivos de las copias de seguridad se llaman '<nombre que eligió>-#.dat' donde # es el número del archivo en la secuencia de copias removidas.
 
 #__________________________________________________=Choosing yes will bring up the file selection dialog again so you may pick a different file.
 -c237-field:confirmErrorRecoverIvalidFileNameeffect=Oprima Si para elegir un archivo diferente.
@@ -2244,7 +2244,7 @@ Also, the translation of the first sentence should
 -cb87-wintitle:notifyRecoveryProcessBackupFile=Recuperar clave
 
 #___________________________________________=Restore Account from Key Backup
--428a-wintitle:notifyRecoveryProcessKeyShare=Recuperar cuenta de archivo de seguridad de clave
+-428a-wintitle:notifyRecoveryProcessKeyShare=Recuperar cuenta de un archivo de seguridad de su clave
 
 #____________________________________=Remember Your Password
 -2bc6-wintitle:notifyRememberPassword=Acuerdese de su contraseña
