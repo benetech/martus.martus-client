@@ -27,12 +27,32 @@ package org.martus.client.swingui.fields;
 
 import javax.swing.table.DefaultTableModel;
 
+import org.martus.common.GridData;
+
 
 public class GridTableModel extends DefaultTableModel
 {
 	public GridTableModel(int rowCount, int columnCount)
 	{
 		super(rowCount, columnCount);
-		
+		gridData = new GridData(columnCount);
 	}
+	
+	public void addEmptyRow()
+	{
+		gridData.addEmptyRow();
+	}
+	
+	public Object getValueAt(int row, int column)
+	{
+		return gridData.getValueAt(row, column);
+	}
+
+	public void setValueAt(Object aValue, int row, int column)
+	{
+		super.setValueAt(aValue, row, column);
+		gridData.setValueAt((String)aValue, row, column);
+	}
+	
+	GridData gridData;
 }

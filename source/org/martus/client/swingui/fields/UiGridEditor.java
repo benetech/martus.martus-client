@@ -36,10 +36,11 @@ public class UiGridEditor extends UiField
 	public UiGridEditor()
 	{
 		super();
-		GridTableModel model = new GridTableModel(5,3);
+		GridTableModel model = new GridTableModel(1,3);
+		model.addEmptyRow();
 		table = new UiTable(model);
 		table.setColumnSelectionAllowed(false);
-		table.resizeTable();
+		table.resizeTable(5);
 		table.setShowGrid(true);
 		widget = new JScrollPane(table);
 		widget.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);

@@ -37,7 +37,8 @@ public class UiGridViewer extends UiField
 	public UiGridViewer()
 	{
 		super();
-		GridTableModel model = new GridTableModel(5,3);
+		GridTableModel model = new GridTableModel(1,3);
+		model.addEmptyRow();
 		table = new UiTable(model);
 		table.resizeTable();
 		table.setEnabled(false);
