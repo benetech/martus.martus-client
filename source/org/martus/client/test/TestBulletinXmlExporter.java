@@ -188,7 +188,7 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 		assertContains("<PrivateData>", publicAndPrivate);
 	}
 
-	public void testExportCustomFileds() throws Exception
+	public void testExportCustomFiledValue() throws Exception
 	{
 		CustomFields fields = new CustomFields(StandardFieldSpecs.getDefaultPublicFieldSpecs());
 		String customTag1 = "custom1";
@@ -228,8 +228,54 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 		assertContains(samplePublic, result);
 		assertContains("<PublicData>", result);
 		assertContains("<Value>a&lt;bc</Value>", result);
-		assertContains("<Value>&amp;test</Value>", result);				
+		assertContains("<Value>&amp;test</Value>", result);
+
+		b.set(customTag1, ">");
+		b.set(customTag2, "&");			
+
+		list = new Vector();
+		list.add(b);
+
+		result = doExport(list, false);
+
+		assertContains(samplePublic, result);
+		assertContains("<PublicData>", result);
+		assertContains("<Value>&gt;</Value>", result);
+		assertContains("<Value>&amp;</Value>", result);						
 		
+	}
+
+	public void testExportCustomFiledSignalCharacterOfTagAndLabel() throws Exception
+	{
+		CustomFields fields = new CustomFields(StandardFieldSpecs.getDefaultPublicFieldSpecs());
+		String customTag1 = "A";
+		String customTag2 = "custom";
+		String label1 = "Witness1 name";
+		String label2 = "N";					
+		
+		String xmlFieldType = "<CustomFields><Field><Tag>"+customTag1+"</Tag>" +
+			"<Label>" + label1 + "</Label></Field></CustomFields>";
+		FieldSpec newSpec = CustomFields.parseXml(xmlFieldType)[0]; 
+		fields.add(newSpec);		
+		xmlFieldType = "<CustomFields><Field><Tag>"+customTag2+"</Tag>" +
+			"<Label>" + label2 + "</Label></Field></CustomFields>";
+		newSpec = CustomFields.parseXml(xmlFieldType)[0]; 
+		fields.add(newSpec);				
+		
+		Bulletin b = new Bulletin(store.getSignatureGenerator(), fields.getSpecs(), StandardFieldSpecs.getDefaultPrivateFieldSpecs());
+		b.setAllPrivate(false);				
+										
+		b.set(customTag1, "abc");
+		b.set(customTag2, "test");			
+
+		Vector list = new Vector();
+		list.add(b);
+
+		String result = doExport(list, false);
+		
+		assertContains("<PublicData>", result);
+		assertContains("<Tag>A</Tag>", result);
+		assertContains("<Label>N</Label>", result);		
 	}
 
 	String doExport(Vector list, boolean includePrivateData) throws IOException

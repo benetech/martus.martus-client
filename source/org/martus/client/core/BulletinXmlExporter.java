@@ -119,24 +119,14 @@ public class BulletinXmlExporter
 
 	static void writeElement(Writer dest, String tag, String rawLabel, String rawFieldData) throws IOException
 	{						
-		dest.write(MartusXml.getTagStart("Field"));		
-		dest.write(MartusXml.getTagStart(TAG));
-		dest.write(tag);
-		dest.write(MartusXml.getTagEnd(TAG));
+		dest.write(MartusXml.getTagStart("Field"));	
+		dest.write(MartusXml.getTagWithData(TAG, MartusUtilities.getXmlEncoded(tag)));
 			
-		if (rawLabel.length() > 1)
-		{
-			dest.write(MartusXml.getTagStart(LABEL));
-			dest.write(MartusUtilities.getXmlEncoded(rawLabel));
-			dest.write(MartusXml.getTagEnd(LABEL));
-		}	
+		if (rawLabel.length() > 0)
+			dest.write(MartusXml.getTagWithData(LABEL, MartusUtilities.getXmlEncoded(rawLabel)));
 		
-		if (rawFieldData.length() > 1)
-		{	
-			dest.write(MartusXml.getTagStart(VALUE));
-			dest.write(MartusUtilities.getXmlEncoded(rawFieldData));
-			dest.write(MartusXml.getTagEnd(VALUE));
-		}		
+		if (rawFieldData.length() > 0)
+			dest.write(MartusXml.getTagWithData(VALUE, MartusUtilities.getXmlEncoded(rawFieldData)));
 				
 		dest.write(MartusXml.getTagEnd(MartusXml.tagField));		
 	}	
