@@ -45,10 +45,11 @@ import org.martus.swing.Utilities;
 
 public class UiPrintBulletinDlg extends JDialog implements ActionListener
 {
-	public UiPrintBulletinDlg(UiMainWindow mainWindowToUse)
+	public UiPrintBulletinDlg(UiMainWindow mainWindowToUse, boolean allPrivate)
 	{
 		super(mainWindowToUse, "", true);
-		mainWindow = mainWindowToUse;	
+		mainWindow = mainWindowToUse;
+		allPrivateData = allPrivate;	
 		init();	
 	}
 	
@@ -97,7 +98,15 @@ public class UiPrintBulletinDlg extends JDialog implements ActionListener
 	public void actionPerformed(ActionEvent ae)
 	{
 		if(ae.getSource().equals(ok))
+		{
+			if (!isIncludePrivateChecked() && allPrivateData)
+			{		
+				mainWindow.notifyDlg("PrintAllPrivateData");
+				return;
+			}	
+					
 			pressContinue = true;
+		}
 			
 		dispose();
 	}
@@ -108,5 +117,6 @@ public class UiPrintBulletinDlg extends JDialog implements ActionListener
 	JButton ok;
 	JButton cancel;
 	boolean pressContinue=false;
+	private boolean allPrivateData;
 	
 }

@@ -692,7 +692,6 @@ public class EnglishStrings
 "field:notifyResendErrorcause=One or more bulletins were unable to be resent due to an unexpected error.",
 
 "field:notifyPrintAllPrivateDatacause=This bulletin will not be printed because all the information is private.  If you wish to print the private data, please mark the \"Include private data in print out\" checkbox.",
-"field:NoDataInPrintOutMessage=This bulletin will not be printed because all the information is private.",
 
 "field:notifyErrorRenameFoldercause=Folder names cannot contain punctuation.  They also cannot begin with a space.",
 

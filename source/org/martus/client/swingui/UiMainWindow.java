@@ -1065,14 +1065,13 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 
 	void printBulletin(Bulletin currentBulletin)
 	{
-		int width = preview.getView().getWidth();
-		if (currentBulletin.isAllPrivate())	
-			notifyDlg("PrintAllPrivateData");
+		int width = preview.getView().getWidth();		
 	
-		UiPrintBulletinDlg dlg = new UiPrintBulletinDlg(this);
-		dlg.show();
+		UiPrintBulletinDlg dlg = new UiPrintBulletinDlg(this, currentBulletin.isAllPrivate());
+		dlg.show();		
+			
 		if (!dlg.isContinueButtonPressed())
-			return;					
+			return;							
 		
 		boolean yourBulletin = currentBulletin.getAccount().equals(getApp().getAccountId());	
 		BulletinHtmlGenerator generator = new BulletinHtmlGenerator(width, getLocalization() );
