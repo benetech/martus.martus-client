@@ -28,31 +28,26 @@ package org.martus.client.swingui.bulletincomponent;
 
 import java.io.File;
 import java.io.IOException;
-import java.text.DateFormat;
 
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.fields.UiBoolEditor;
-import org.martus.client.swingui.fields.UiDateEditor;
 import org.martus.client.swingui.fields.UiField;
-import org.martus.client.swingui.fields.UiFlexiDateEditor;
 import org.martus.common.bulletin.AttachmentProxy;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.crypto.MartusCrypto;
-import org.martus.common.utilities.MartusFlexidate;
 
 public class UiBulletinEditor extends UiBulletinComponent
 {
 	public UiBulletinEditor(UiMainWindow mainWindowToUse)
 	{
 		super(mainWindowToUse);
-		owner = mainWindowToUse;
 		isEditable = true;
 		// ensure that attachmentEditor gets initialized
 	}
 
 	public UiBulletinComponentSection createBulletinComponentSection(boolean encrypted)
 	{
-		return new UiBulletinComponentEditorSection(this, owner, encrypted);
+		return new UiBulletinComponentEditorSection(this, mainWindow, encrypted);
 	}
 
 	public class AttachmentMissing extends UiField.DataInvalidException
@@ -65,17 +60,8 @@ public class UiBulletinEditor extends UiBulletinComponent
 	
 	public void validateData() throws UiField.DataInvalidException 
 	{
-		for(int fieldNum = 0; fieldNum < fields.length; ++fieldNum)
-		{
-			try 
-			{
-				fields[fieldNum].field.validate();
-			} 
-			catch (UiDateEditor.DateFutureException e) 
-			{
-				throw new UiDateEditor.DateFutureException(owner.getLocalization().getFieldLabel(fields[fieldNum].tag));
-			}
-		}
+		publicStuff.validateData();
+		privateStuff.validateData();
 		
 		validateAttachments((UiBulletinComponentEditorSection)publicStuff);
 		validateAttachments((UiBulletinComponentEditorSection)privateStuff);
@@ -100,27 +86,15 @@ public class UiBulletinEditor extends UiBulletinComponent
 			MartusCrypto.EncryptionException
 	{		
 		
-		Bulletin tempBulletin = new Bulletin(owner.getApp().getSecurity());					
+		Bulletin tempBulletin = new Bulletin(mainWindow.getApp().getSecurity());					
 		copyDataToBulletin(tempBulletin);
 			
-		String currentFieldText = null;
+		if(publicStuff.isAnyFieldModified(currentBulletin, tempBulletin))
+			return true;
 			
-		for(int fieldNum = 0; fieldNum < fields.length; ++fieldNum)
-		{			
-			String fieldTag = fields[fieldNum].tag;			
-			String oldFieldText = currentBulletin.get(fieldTag);
-			
-			if (fields[fieldNum].field instanceof UiFlexiDateEditor)							
-				currentFieldText = getBulletinFlexidateFormat(oldFieldText);					
-			else
-				currentFieldText = oldFieldText;		
-																								
-			if (!currentFieldText.equals(tempBulletin.get(fieldTag)))
-			{									
-				return true;
-			}																
-		}		
-				
+		if(privateStuff.isAnyFieldModified(currentBulletin, tempBulletin))
+			return true;
+
 		if (isPublicAttachmentModified())	
 			return true;						
 		
@@ -130,14 +104,6 @@ public class UiBulletinEditor extends UiBulletinComponent
 		return false;			
 	}	
 	
-	
-	private String getBulletinFlexidateFormat(String fieldValue)
-	{
-		MartusFlexidate martusFlexidate = MartusFlexidate.createFromMartusDateString(fieldValue);
-		DateFormat df = Bulletin.getStoredDateFormat();	
-		String storedDateFormat = df.format(martusFlexidate.getBeginDate());
-		return storedDateFormat+MartusFlexidate.DATE_RANGE_SEPARATER+martusFlexidate.getMatusFlexidate();		
-	}		
 	
 	private boolean isPublicAttachmentModified()
 	{
@@ -188,10 +154,9 @@ public class UiBulletinEditor extends UiBulletinComponent
 		if(allPrivateField.getText().equals(UiField.TRUESTRING))
 			isAllPrivate = true;
 		bulletin.setAllPrivate(isAllPrivate);
-		for(int fieldNum = 0; fieldNum < fields.length; ++fieldNum)
-		{						
-			bulletin.set(fields[fieldNum].tag, fields[fieldNum].field.getText());													
-		}
+		
+		publicStuff.copyDataToBulletin(bulletin);
+		privateStuff.copyDataToBulletin(bulletin);
 
 		UiBulletinComponentEditorSection publicSection = (UiBulletinComponentEditorSection)publicStuff;
 		AttachmentProxy[] publicAttachments = publicSection.attachmentEditor.getAttachments();
@@ -215,6 +180,4 @@ public class UiBulletinEditor extends UiBulletinComponent
 	{
 		return new UiBoolEditor(this);
 	}
-
-	UiMainWindow owner;
 }

@@ -28,6 +28,7 @@ package org.martus.client.swingui.bulletincomponent;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.text.DateFormat;
 
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
@@ -37,12 +38,17 @@ import javax.swing.border.EtchedBorder;
 import javax.swing.border.LineBorder;
 
 import org.martus.client.swingui.UiWarningLabel;
+import org.martus.client.swingui.fields.UiDateEditor;
 import org.martus.client.swingui.fields.UiField;
+import org.martus.client.swingui.fields.UiFlexiDateEditor;
+import org.martus.client.swingui.fields.UiField.DataInvalidException;
 import org.martus.common.FieldSpec;
 import org.martus.common.bulletin.AttachmentProxy;
+import org.martus.common.bulletin.Bulletin;
 import org.martus.common.clientside.ChoiceItem;
 import org.martus.common.clientside.UiBasicLocalization;
 import org.martus.common.packet.FieldDataPacket;
+import org.martus.common.utilities.MartusFlexidate;
 import org.martus.swing.ParagraphLayout;
 
 abstract public class UiBulletinComponentSection extends JPanel
@@ -69,7 +75,7 @@ abstract public class UiBulletinComponentSection extends JPanel
 		add(warningIndicator);
 	}
 
-	public UiField[] createLabelsAndFields(JPanel target, FieldSpec[] specs)
+	public void createLabelsAndFields(FieldSpec[] specs)
 	{
 		fieldTags = specs;
 
@@ -78,12 +84,32 @@ abstract public class UiBulletinComponentSection extends JPanel
 		{
 			fields[fieldNum] = createField(specs[fieldNum]);
 			fields[fieldNum].initalize();
-			target.add(createLabel(specs[fieldNum]), ParagraphLayout.NEW_PARAGRAPH);
-			target.add(fields[fieldNum].getComponent());
+			add(createLabel(specs[fieldNum]), ParagraphLayout.NEW_PARAGRAPH);
+			add(fields[fieldNum].getComponent());
 		}
 		JLabel attachments = new JLabel(localization.getFieldLabel("attachments"));
-		target.add(attachments, ParagraphLayout.NEW_PARAGRAPH);
+		add(attachments, ParagraphLayout.NEW_PARAGRAPH);
+		createAttachmentTable();
+	}
+	
+	public UiField[] getFields()
+	{
 		return fields;
+	}
+
+	public UiBulletinComponentSection.Field[] createFieldEntries(
+		FieldSpec[] fieldSpecs)
+	{
+		UiField[] fields = getFields();
+		int numFields = fieldSpecs.length;
+		Field[] fieldEntries = new Field[numFields];
+		for(int fieldNum = 0; fieldNum < numFields; ++fieldNum)
+		{
+			fieldEntries[fieldNum] = new Field();
+			fieldEntries[fieldNum].tag = fieldSpecs[fieldNum].getTag();
+			fieldEntries[fieldNum].field = fields[fieldNum];
+		}
+		return fieldEntries;
 	}
 
 	public void copyDataFromPacket(FieldDataPacket fdp)
@@ -205,6 +231,71 @@ abstract public class UiBulletinComponentSection extends JPanel
 			getParagraphLayout().setFirstColumnWidth(otherWidth);
 	}
 
+	public void copyDataToBulletin(Bulletin bulletin)
+	{	
+		for(int fieldNum = 0; fieldNum < fields.length; ++fieldNum)
+		{						
+			bulletin.set(fieldTags[fieldNum].getTag(), fields[fieldNum].getText());													
+		}
+	}
+
+	
+	public void validateData() throws DataInvalidException
+	{
+		for(int fieldNum = 0; fieldNum < fields.length; ++fieldNum)
+		{
+			try 
+			{
+				fields[fieldNum].validate();
+			} 
+			catch (UiDateEditor.DateFutureException e) 
+			{
+				String tag = fieldTags[fieldNum].getTag();
+				throw new UiDateEditor.DateFutureException(localization.getFieldLabel(tag));
+			}
+		}
+	}
+
+	public boolean isAnyFieldModified(Bulletin original, Bulletin newBulletin)
+	{
+		for(int fieldNum = 0; fieldNum < fields.length; ++fieldNum)
+		{			
+			String fieldTag = fieldTags[fieldNum].getTag();			
+			String oldFieldText = original.get(fieldTag);
+			
+			String currentFieldText = null;
+		
+			if (fields[fieldNum] instanceof UiFlexiDateEditor)							
+				currentFieldText = getBulletinFlexidateFormat(oldFieldText);					
+			else
+				currentFieldText = oldFieldText;		
+																								
+			if (!currentFieldText.equals(newBulletin.get(fieldTag)))
+			{									
+				return true;
+			}																
+		}		
+		
+		return false;
+	}
+
+	private String getBulletinFlexidateFormat(String fieldValue)
+	{
+		MartusFlexidate martusFlexidate = MartusFlexidate.createFromMartusDateString(fieldValue);
+		DateFormat df = Bulletin.getStoredDateFormat();	
+		String storedDateFormat = df.format(martusFlexidate.getBeginDate());
+		return storedDateFormat+MartusFlexidate.DATE_RANGE_SEPARATER+martusFlexidate.getMatusFlexidate();		
+	}		
+	
+
+	public static class Field
+	{
+		public String tag;
+		public UiField field;
+	}
+
+
+
 	UiBasicLocalization localization;
 	JLabel encryptedIndicator;
 	JLabel warningIndicator;
@@ -223,4 +314,5 @@ abstract public class UiBulletinComponentSection extends JPanel
 	abstract public void createAttachmentTable();
 	abstract public void addAttachment(AttachmentProxy a);
 	abstract public void clearAttachments();
+
 }

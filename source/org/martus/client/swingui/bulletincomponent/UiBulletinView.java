@@ -26,8 +26,6 @@ Boston, MA 02111-1307, USA.
 
 package org.martus.client.swingui.bulletincomponent;
 
-import java.util.Vector;
-
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.fields.UiBoolViewer;
 import org.martus.client.swingui.fields.UiField;
@@ -37,16 +35,12 @@ public class UiBulletinView extends UiBulletinComponent
 	UiBulletinView(UiMainWindow mainWindowToUse)
 	{
 		super(mainWindowToUse);
-		mainWindow = mainWindowToUse;
-		bulletinViewSections = new Vector();
 		// ensure that attachmentViewer gets initialized
 	}
 
 	public UiBulletinComponentSection createBulletinComponentSection(boolean encrypted)
 	{
-		UiBulletinComponentViewSection section = new UiBulletinComponentViewSection(this, mainWindow, encrypted);
-		bulletinViewSections.add(section);
-		return section;
+		return new UiBulletinComponentViewSection(this, mainWindow, encrypted);
 	}
 
 	public UiField createBoolField()
@@ -54,5 +48,4 @@ public class UiBulletinView extends UiBulletinComponent
 		return new UiBoolViewer(mainWindow.getLocalization());
 	}
 
-	private Vector bulletinViewSections;
 }

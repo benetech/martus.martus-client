@@ -31,6 +31,7 @@ import java.awt.Dimension;
 import java.awt.Rectangle;
 import java.io.IOException;
 
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.Scrollable;
 import javax.swing.event.ChangeEvent;
@@ -55,73 +56,43 @@ abstract public class UiBulletinComponent extends JPanel implements Scrollable, 
 
 	public void createSections()
 	{
-		publicStuff = createPublicSection();
-		FieldSpec[] publicFieldSpecs = currentBulletin.getPublicFieldSpecs();
-		Field[] publicFieldEntries = createFieldEntries(publicStuff, publicFieldSpecs);
+		boolean sometimesEncrypted = UiBulletinComponentSection.NOT_ENCRYPTED;
+		boolean alwaysEncrypted = UiBulletinComponentSection.ENCRYPTED;
 
-		privateStuff = createPrivateSection();
-		FieldSpec[] privateFieldSpecs = currentBulletin.getPrivateFieldSpecs();
-		Field[] privateFieldEntries = createFieldEntries(privateStuff, privateFieldSpecs);
+		publicStuff = createSection(currentBulletin.getPublicFieldSpecs(), sometimesEncrypted);
+		privateStuff = createSection(currentBulletin.getPrivateFieldSpecs(), alwaysEncrypted);
 		
-		fields = combineArraysOfFields(publicFieldEntries, privateFieldEntries);
-
 		ensureBothSectionsLineUp();
 		setLayout(new BorderLayout());
 		add(publicStuff, BorderLayout.NORTH);
 		add(privateStuff, BorderLayout.SOUTH);
 	}
 
-	private Field[] combineArraysOfFields(
-		Field[] publicFieldEntries,
-		Field[] privateFieldEntries)
+	private UiBulletinComponentSection createSection(
+		FieldSpec[] fieldSpecs,
+		boolean isAlwaysEncrypted)
 	{
-		int numPublicFields = publicFieldEntries.length;
-		int numPrivateFields = privateFieldEntries.length;
-		Field[] combined = new Field[numPublicFields + numPrivateFields];
-		System.arraycopy(publicFieldEntries, 0, combined, 0, numPublicFields);
-		System.arraycopy(privateFieldEntries, 0, combined, numPublicFields, numPrivateFields);
-		return combined;
-	}
+		UiBulletinComponentSection target = createBulletinComponentSection(isAlwaysEncrypted);
+		if(!isAlwaysEncrypted)
+		{
+			allPrivateField = createBoolField();
+			allPrivateField.initalize();
+			FieldSpec allPrivateFieldSpec = new FieldSpec("allprivate", FieldSpec.TYPE_BOOLEAN);
+			JLabel allPrivateLabel = target.createLabel(allPrivateFieldSpec);
+			target.add(allPrivateLabel, ParagraphLayout.NEW_PARAGRAPH);
+			target.add(allPrivateField.getComponent());
+		}
+		target.createLabelsAndFields(fieldSpecs);
+		if(!isEditable)
+			target.disableEdits();
 
-	private UiBulletinComponentSection createPrivateSection()
-	{
-		return createBulletinComponentSection(UiBulletinComponentSection.ENCRYPTED);
-	}
-
-	private UiBulletinComponentSection createPublicSection()
-	{
-		UiBulletinComponentSection publicSection = createBulletinComponentSection(UiBulletinComponentSection.NOT_ENCRYPTED);
-		allPrivateField = createBoolField();
-		allPrivateField.initalize();
-		publicSection.add(publicSection.createLabel(new FieldSpec("allprivate", FieldSpec.TYPE_BOOLEAN)), ParagraphLayout.NEW_PARAGRAPH);
-		publicSection.add(allPrivateField.getComponent());
-		return publicSection;
+		return target;
 	}
 
 	private void ensureBothSectionsLineUp()
 	{
 		publicStuff.matchFirstColumnWidth(privateStuff);
 		privateStuff.matchFirstColumnWidth(publicStuff);
-	}
-
-	private Field[] createFieldEntries(
-		UiBulletinComponentSection target,
-		FieldSpec[] publicFieldSpecs
-		)
-	{
-		int numPublicFields = publicFieldSpecs.length;
-		UiField[] publicFields = target.createLabelsAndFields(target, publicFieldSpecs);
-		target.createAttachmentTable();
-		if(!isEditable)
-			publicStuff.disableEdits();
-		Field[] publicFieldEntries = new Field[numPublicFields];
-		for(int fieldNum = 0; fieldNum < numPublicFields; ++fieldNum)
-		{
-			publicFieldEntries[fieldNum] = new Field();
-			publicFieldEntries[fieldNum].tag = publicFieldSpecs[fieldNum].getTag();
-			publicFieldEntries[fieldNum].field = publicFields[fieldNum];
-		}
-		return publicFieldEntries;
 	}
 
 	public UiMainWindow getMainWindow()
@@ -170,17 +141,14 @@ abstract public class UiBulletinComponent extends JPanel implements Scrollable, 
 			isAllPrivate = UiField.TRUESTRING;
 		allPrivateField.setText(isAllPrivate);
 
+		FieldDataPacket publicData = currentBulletin.getFieldDataPacket();
 		publicStuff.clearAttachments();
-		privateStuff.clearAttachments();
-
-		FieldDataPacket publicData = null;
-		FieldDataPacket privateData = null;
-		publicData = currentBulletin.getFieldDataPacket();
-		privateData = currentBulletin.getPrivateFieldDataPacket();
 		publicStuff.copyDataFromPacket(publicData);
-		privateStuff.copyDataFromPacket(privateData);
-
 		publicStuff.clearWarningIndicator();
+
+		FieldDataPacket privateData = currentBulletin.getPrivateFieldDataPacket();
+		privateStuff.clearAttachments();
+		privateStuff.copyDataFromPacket(privateData);
 		privateStuff.clearWarningIndicator();
 
 		if(!currentBulletin.isValid())
@@ -270,15 +238,8 @@ abstract public class UiBulletinComponent extends JPanel implements Scrollable, 
 	}
 	// End scrollable interface
 	
-	class Field
-	{
-		public String tag;
-		public UiField field;
-	}
-
 	UiMainWindow mainWindow;
 
-	Field[] fields;
 	UiField allPrivateField;
 	Bulletin currentBulletin;
 	EncryptionChangeListener encryptionListener;
