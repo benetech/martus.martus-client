@@ -233,14 +233,18 @@ public class UiAttachmentEditor extends JPanel
 			
 			UiBasicLocalization localization = mainWindow.getLocalization();
 			String buttonLabel = localization.getButtonLabel("addattachment");
-
-			UiFileChooser.FileDialogResults results = UiFileChooser.displayFileOpenDialog(UiAttachmentEditor.this, null, UiFileChooser.NO_FILE_SELECTED, last, buttonLabel, null);
-			if (results.wasCancelChoosen())
-				return;
-			
-			File newAttachmentFile = results.getFileChoosen();
+			UiFileChooser.FileDialogResults results = null;
+			while(true)
+			{	
+				results = UiFileChooser.displayFileOpenDialog(UiAttachmentEditor.this, null, UiFileChooser.NO_FILE_SELECTED, last, buttonLabel, null);
+				if (results.wasCancelChoosen())
+					return;
+				if(results.getFileChoosen().isFile())
+					break;
+				mainWindow.notifyDlg("AttachmentNotAFile");
+			}
 			setLastAttachmentLoadDirectory(results.getCurrentDirectory());
-			AttachmentProxy a = new AttachmentProxy(newAttachmentFile);
+			AttachmentProxy a = new AttachmentProxy(results.getFileChoosen());
 			model.add(a);
 		}
 	}

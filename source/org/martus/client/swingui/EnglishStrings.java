@@ -173,6 +173,7 @@ public class EnglishStrings
 "wintitle:notifyChoosingQuickEraseKeyPair=Erase KeyPair Warning",
 "wintitle:notifyServerSSLNotResponding=Unable to connect",
 "wintitle:notifyAlreadyRunning=Martus Already Running",
+"wintitle:notifyAttachmentNotAFile=Attachment Choosen Not a File",
 
 "wintitle:inputservername=Server Name",
 "wintitle:inputserverpubliccode=Server Identification",
@@ -655,6 +656,7 @@ public class EnglishStrings
 "field:notifyChoosingQuickEraseKeyPaircause=By choosing to erase your keypair file Martus will exit after it completes the quick erase operation.  Also by choosing to erase your keypair file Martus will also delete the following information: any server or HQ you have configured, any custom fields or default details, and your personal preferences.  This information will be lost and restoring your keypair from a backup will not recover these settings.",
 "field:notifyServerSSLNotRespondingcause=Unable to make a secure connection with the Martus backup server.\n\nMartus can connect to a server using either of two ports.  When trying to connect to this server, neither port is accessible, probably because both ports are being blocked by a local firewall or by your ISP.\n\nWe recommend that any firewalls be configured to allow outgoing connections on both TCP port 443 and 987.  Please contact your LAN administrator or office technical support staff to verify that your firewall configuration allows this.\n\nIf the problem persists, you may need to select a different server.",
 "field:notifyAlreadyRunningcause=A copy of Martus is already running on this computer. You must close that copy before starting a new copy.",
+"field:notifyAttachmentNotAFilecause=The item you choose was not a file, please choose a file to add as an attachment to this bulletin.",
 	
 "field:messageServerNewscause=The current server has sent this message:",
 "field:messageErrorDateInFuturecause=This date occurs in the future:",
