@@ -297,7 +297,7 @@ public class UiBackupRecoverSharedKeyPair
 			if(rootFiles[i].equals(pathChoosen))
 				return pathToUse;
 		}
-		if(mainWindow.confirmDlg(mainWindow, "WarningPathChoosenMayNotBeRemoveable", UiBackupRecoverSharedKeyPair.getTokenReplacement()))
+		if(mainWindow.confirmDlg(mainWindow, "WarningPathChosenMayNotBeRemoveable", UiBackupRecoverSharedKeyPair.getTokenReplacement()))
 			return pathToUse;
 		return null;
 	}
