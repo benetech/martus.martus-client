@@ -368,6 +368,12 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		table.bulletinContentsHaveChanged(b);
 		preview.bulletinContentsHaveChanged(b);
 	}
+	
+	public void eraseAllBulletinsInTableAndPreview()
+	{
+		table.removeAll();
+		preview.removeAll();
+	}
 
 	public void folderSelectionHasChanged(BulletinFolder f)
 	{

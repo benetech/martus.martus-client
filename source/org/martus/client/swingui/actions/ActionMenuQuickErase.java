@@ -27,7 +27,6 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.swingui.actions;
 
 import java.awt.event.ActionEvent;
-import java.io.File;
 
 import org.martus.client.core.QuickEraseOptions;
 import org.martus.client.swingui.UiMainWindow;
@@ -72,13 +71,10 @@ public class ActionMenuQuickErase extends UiMenuAction
 
 	private void erasePacketData(QuickEraseOptions options)
 	{	
-		File packetDir = mainWindow.getApp().getPacketsDirectory();
-		if (!packetDir.exists())
-			return;			
-								
 		String baseTag = "QuickEraseFailed";						
 		if(mainWindow.getApp().deleteAllBulletinsAndUserFolders(options))
-		{	
+		{
+			mainWindow.eraseAllBulletinsInTableAndPreview();
 			if(options.isScrubSelected())
 				baseTag = "QuickEraseScrubWorked";
 			else
