@@ -235,6 +235,8 @@ public class EnglishStrings
 "wintitle:warningDeleteSingleBulletin=Confirm Delete Bulletin",
 "wintitle:warningDeleteMultipleBulletins=Confirm Delete Bulletins",
 
+"wintitle:confirmPrintPrivateData=Confirm Print Private Data",
+
 "button:help=Help",
 "button:create=Create",
 "button:search=Search",
@@ -585,7 +587,8 @@ public class EnglishStrings
 "field:confirmUseBulletinsCustomFieldscause=The bulletin you are about to create is based on a previous bulletin whos custom fields are different from your current custom fields.  Do you wish to use the original bulletins custom fields?",
 "field:confirmUseBulletinsCustomFieldseffect=Answering Yes will use the old custom fields and all bulletin data.  Answering No will use your current custom fields and copy all similar fields to the new bulletin but you will loose some of the orignial bulletins data.",
 
-
+"field:confirmPrintPrivateDatacause=Choosing Yes will print the private information in the selected bulletin to printer.",
+"field:confirmPrintPrivateDataeffect=Anyone who gets a copy of this print out will be able to read all the private data.",
 
 "field:notifyDropErrorBulletinExistscause=One or more bulletins cannot be moved to that folder, because it already exists in that folder.",
 "field:notifyDropErrorscause=An unexpected error occurred while moving the bulletin(s). One or more files may be damaged.",

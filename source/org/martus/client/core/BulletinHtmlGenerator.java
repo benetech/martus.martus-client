@@ -52,7 +52,7 @@ public class BulletinHtmlGenerator
 		localization = localizationToUse;
 	}
 
-	public String getHtmlString(Bulletin b, Database database)
+	public String getHtmlString(Bulletin b, Database database, boolean includePrivateData)
 	{
 		bulletin = b;
 		StringBuffer html = new StringBuffer(1000);
@@ -77,16 +77,18 @@ public class BulletinHtmlGenerator
 		html.append(getSectionHtmlString(b, standardFieldTags));
 		html.append(getAttachmentsHtmlString(b.getPublicAttachments(), database));
 
-		html.append("<tr></tr>");
-		String privateSectionTitle = localization.getFieldLabel("privatesection");
-		html.append("<tr><td colspan='2'><u><b>");
-		html.append(privateSectionTitle);
-		html.append("</b></u></td></tr>");
-		html.append("\n");
-		FieldSpec[] privateFieldTags = b.getPrivateFieldSpecs();
-		html.append(getSectionHtmlString(b, privateFieldTags));
-		html.append(getAttachmentsHtmlString(b.getPrivateAttachments(), database));
-
+		if (includePrivateData)
+		{	
+			html.append("<tr></tr>");
+			String privateSectionTitle = localization.getFieldLabel("privatesection");
+			html.append("<tr><td colspan='2'><u><b>");
+			html.append(privateSectionTitle);
+			html.append("</b></u></td></tr>");
+			html.append("\n");
+			FieldSpec[] privateFieldTags = b.getPrivateFieldSpecs();
+			html.append(getSectionHtmlString(b, privateFieldTags));
+			html.append(getAttachmentsHtmlString(b.getPrivateAttachments(), database));
+		}
 		html.append("<tr></tr>");
 		html.append(localization.getFieldLabel("BulletinId")+" ");
 		html.append(b.getLocalId());

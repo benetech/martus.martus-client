@@ -1044,7 +1044,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		Bulletin currentBulletin = table.getSingleSelectedBulletin();
 		if(currentBulletin == null)
 			return;
-
+		
 		printBulletin(currentBulletin);
 		requestFocus(true);
 	}
@@ -1052,9 +1052,10 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	void printBulletin(Bulletin currentBulletin)
 	{
 		int width = preview.getView().getWidth();
-		
-		BulletinHtmlGenerator generator = new BulletinHtmlGenerator(width, getLocalization());
-		String html = generator.getHtmlString(currentBulletin, getStore().getDatabase());
+		boolean includePrivateData = confirmDlg("PrintPrivateData");		
+			
+		BulletinHtmlGenerator generator = new BulletinHtmlGenerator(width, getLocalization() );
+		String html = generator.getHtmlString(currentBulletin, getStore().getDatabase(), includePrivateData);
 		JComponent view = new JLabel(html);
 		
 		JFrame frame = new JFrame();
