@@ -1287,7 +1287,7 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		assertEquals("Title", localization.getFieldLabel("title"));
 		assertEquals("Location", localization.getFieldLabel("location"));
 		assertEquals("Date of Event", localization.getFieldLabel("eventdate"));
-		assertEquals("Date Entered", localization.getFieldLabel("entrydate"));
+		assertEquals("Date Created", localization.getFieldLabel("entrydate"));
 		assertEquals("Keywords", localization.getFieldLabel("keywords"));
 		assertEquals("Summary", localization.getFieldLabel("summary"));
 		assertEquals("Details", localization.getFieldLabel("publicinfo"));
