@@ -23,33 +23,13 @@ Software Foundation, Inc., 59 Temple Place - Suite 330,
 Boston, MA 02111-1307, USA.
 
 */
-package org.martus.client.swingui;
 
-import java.io.File;
-import java.util.Vector;
+package org.martus.client.tools;
 
-import org.martus.common.clientside.UiBasicLocalization;
 
-public class UiLocalization extends UiBasicLocalization 
+public class MigrateAllTranslationFiles
 {
-	public UiLocalization(File directoryToUse, String[] englishTranslations)
+	public static void main(String[] args)
 	{
-		super(directoryToUse, englishTranslations);		
-	}
-
-	protected Vector getAllCompiledLanguageResources()
-	{
-		String filename = null;
-		Vector internalLanguages = new Vector();
-		for(int i = 0; i < AVAILABLE_MTF_LANGUAGE_RESOURCES.length; ++i)
-		{
-			String languageCode = AVAILABLE_MTF_LANGUAGE_RESOURCES[i];
-			filename = getMtfFilename(languageCode);
-			if(getClass().getResource(filename) != null)
-			{
-				internalLanguages.addElement(getLanguageChoiceItem(filename));
-			}
-		}
-		return internalLanguages;
 	}
 }
