@@ -181,7 +181,7 @@ public class MartusApp
 		invalidateCurrentHandlerAndGateway();
 	}
 
-	public String getHQKey()
+	public String getLegacyHQKey()
 	{
 		return configInfo.getLegacyHQKey();
 	}
@@ -190,6 +190,21 @@ public class MartusApp
 	{
 		String xml = configInfo.getAllHQKeysXml();
 		return HQKeys.parseXml(xml);
+	}
+
+	public Vector getHQKeysWithFallback()
+	{
+		Vector hqKeys = new Vector();
+		try
+		{
+			hqKeys = getHQKeys();
+		}
+		catch (HQsException e)
+		{
+			e.printStackTrace();
+			hqKeys.add(getLegacyHQKey());
+		}
+		return hqKeys;
 	}
 
 	public ConfigInfo getConfigInfo()
@@ -455,18 +470,8 @@ public class MartusApp
 
 	public void setHQKeysInBulletin(Bulletin b)
 	{
-		try
-		{
-			//System.out.println("App.setHQKeyInBulletin Setting HQ:" + getHQKey());
-			b.setAuthorizedToReadKeys(getHQKeys());
-		}
-		catch (HQsException e)
-		{
-			e.printStackTrace();
-			Vector legacy = new Vector();
-			legacy.add(getHQKey());
-			b.setAuthorizedToReadKeys(legacy);
-		}
+		Vector hqKeys = getHQKeysWithFallback();
+		b.setAuthorizedToReadKeys(hqKeys);
 	}
 
 	public BulletinFolder getFolderSaved()

@@ -597,7 +597,7 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		Vector keys = new Vector();
 		keys.add(sampleHQKey);
 		appWithAccount.setAndSaveHQKeys(keys);
-		assertEquals("Incorrect public key", sampleHQKey, appWithAccount.getHQKey());
+		assertEquals("Incorrect public key", sampleHQKey, appWithAccount.getLegacyHQKey());
 		assertEquals("Didn't save?", true, configFile.exists());
 	}
 	
@@ -611,7 +611,7 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		keys.add(sampleHQKey1);
 		keys.add(sampleHQKey2);
 		appWithAccount.setAndSaveHQKeys(keys);
-		assertEquals("Incorrect default public key", sampleHQKey1, appWithAccount.getHQKey());
+		assertEquals("Incorrect default public key", sampleHQKey1, appWithAccount.getLegacyHQKey());
 		Vector returnedKeys = appWithAccount.getHQKeys();
 		assertContains(sampleHQKey1, returnedKeys);
 		assertContains(sampleHQKey2, returnedKeys);
@@ -624,16 +624,16 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		assertEquals("already exists?", false, configFile.exists());
 		Vector empty = new Vector();
 		appWithAccount.setAndSaveHQKeys(empty);
-		assertEquals("HQ key exists?", "", appWithAccount.getHQKey());
+		assertEquals("HQ key exists?", "", appWithAccount.getLegacyHQKey());
 		assertEquals("Didn't save?", true, configFile.exists());
 
 		String sampleHQKey = "abc123";
 		Vector key = new Vector();
 		key.add(sampleHQKey);
 		appWithAccount.setAndSaveHQKeys(key);
-		assertEquals("Incorrect public key", sampleHQKey, appWithAccount.getHQKey());
+		assertEquals("Incorrect public key", sampleHQKey, appWithAccount.getLegacyHQKey());
 		appWithAccount.setAndSaveHQKeys(empty);
-		assertEquals("HQ not cleared", "", appWithAccount.getHQKey());
+		assertEquals("HQ not cleared", "", appWithAccount.getLegacyHQKey());
 	}
 
 	public void testGetCombinedPassPhrase()

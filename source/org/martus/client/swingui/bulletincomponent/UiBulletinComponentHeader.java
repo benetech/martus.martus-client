@@ -40,7 +40,6 @@ import javax.swing.JPanel;
 
 import org.martus.client.swingui.UiLocalization;
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.common.bulletin.Bulletin;
 import org.martus.common.crypto.MartusCrypto;
 import org.martus.swing.ParagraphLayout;
 import org.martus.util.TokenReplacement;
@@ -48,7 +47,7 @@ import org.martus.util.TokenReplacement;
 
 public class UiBulletinComponentHeader extends UiBulletinComponentSection
 {
-	UiBulletinComponentHeader(UiMainWindow mainWindowToUse)
+	UiBulletinComponentHeader(UiMainWindow mainWindowToUse, String tagQualifierToUse)
 	{
 		super(mainWindowToUse);
 		UiMainWindow mainWindow = getMainWindow();
@@ -58,21 +57,22 @@ public class UiBulletinComponentHeader extends UiBulletinComponentSection
 		UiLocalization localization = mainWindow.getLocalization();
 		setSectionIconAndTitle(iconFileName, localization.getFieldLabel("BulletinViewHeading"));
 
-		summary = new HqSummary(mainWindow);
+		summary = new HqSummary(mainWindow, tagQualifierToUse);
 		add(new JLabel(""), ParagraphLayout.NEW_PARAGRAPH);
 		add(summary);
 	}
 
-	void copyDataFromBulletin(Bulletin currentBulletin)
+	public void setHqKeys(Vector hqKeys)
 	{
-		summary.setBulletin(currentBulletin);
+		summary.setHqKeys(hqKeys);
 	}
 
 	static class HqSummary extends JPanel
 	{
-		HqSummary(UiMainWindow mainWindowToUse)
+		HqSummary(UiMainWindow mainWindowToUse, String tagQualifierToUse)
 		{
 			mainWindow = mainWindowToUse;
+			tagQualifier = tagQualifierToUse;
 			
 			label = new JLabel();
 			label.setFont(label.getFont().deriveFont(Font.BOLD));
@@ -84,9 +84,9 @@ public class UiBulletinComponentHeader extends UiBulletinComponentSection
 			add(detailsButton, BorderLayout.EAST);
 		}
 		
-		void setBulletin(Bulletin bulletin)
+		void setHqKeys(Vector hqKeys)
 		{
-			hqList = bulletin.getAuthorizedToReadKeys();
+			hqList = hqKeys;
 			int numberOfHqs = hqList.size();
 			if(numberOfHqs > 0)
 			{
@@ -107,7 +107,7 @@ public class UiBulletinComponentHeader extends UiBulletinComponentSection
 		
 		private String getSummaryString(int numberOfHqs)
 		{
-			String summaryText = getLocalization().getFieldLabel("BulletinViewHQInfo");
+			String summaryText = getLocalization().getFieldLabel(tagQualifier + "BulletinHQInfo");
 			try
 			{
 				HashMap tokenReplacement = new HashMap();
@@ -135,7 +135,7 @@ public class UiBulletinComponentHeader extends UiBulletinComponentSection
 				map.put("#L#", listOfHqPublicKeys);
 				
 				JFrame parent = mainWindow.getCurrentActiveFrame();
-				mainWindow.notifyDlg(parent, "ViewHqList", map);
+				mainWindow.notifyDlg(parent, tagQualifier + "ViewHqList", map);
 			}
 
 			private String getHqPublicCode(int i)
@@ -154,6 +154,7 @@ public class UiBulletinComponentHeader extends UiBulletinComponentSection
 		}
 		
 		UiMainWindow mainWindow;
+		String tagQualifier;
 		JLabel label;
 		Vector hqList;
 	}

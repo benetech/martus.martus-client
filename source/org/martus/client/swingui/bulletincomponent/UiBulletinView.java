@@ -27,6 +27,7 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.swingui.bulletincomponent;
 
 import java.io.IOException;
+import java.util.Vector;
 
 import javax.swing.event.ChangeEvent;
 
@@ -77,5 +78,16 @@ public class UiBulletinView extends UiBulletinComponent
 	public void stateChanged(ChangeEvent event)
 	{
 		// read-only view cannot change state
+	}
+
+	Vector getHqKeys()
+	{
+		Vector hqKeys = currentBulletin.getAuthorizedToReadKeys();
+		return hqKeys;
+	}
+
+	UiBulletinComponentHeader createHeaderSection()
+	{
+		return new UiBulletinComponentHeader(mainWindow, "View");
 	}
 }

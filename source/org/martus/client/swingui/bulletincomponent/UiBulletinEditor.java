@@ -27,6 +27,7 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.swingui.bulletincomponent;
 
 import java.io.IOException;
+import java.util.Vector;
 
 import javax.swing.event.ChangeEvent;
 
@@ -174,6 +175,16 @@ public class UiBulletinEditor extends UiBulletinComponent
 			wasEncrypted = nowEncrypted;
 			fireEncryptionChange(nowEncrypted);
 		}
+	}
+
+	Vector getHqKeys()
+	{
+		return mainWindow.getApp().getHQKeysWithFallback();
+	}
+
+	UiBulletinComponentHeader createHeaderSection()
+	{
+		return new UiBulletinComponentHeader(mainWindow, "Modify");
 	}
 
 	boolean wasEncrypted;

@@ -30,6 +30,7 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Rectangle;
 import java.io.IOException;
+import java.util.Vector;
 
 import javax.swing.JCheckBox;
 import javax.swing.JPanel;
@@ -54,6 +55,8 @@ abstract public class UiBulletinComponent extends JPanel implements Scrollable, 
 	abstract public void validateData() throws UiField.DataInvalidException; 
 	abstract public boolean isBulletinModified() throws
 			IOException, MartusCrypto.EncryptionException;
+	abstract UiBulletinComponentHeader createHeaderSection();
+	abstract Vector getHqKeys();
 
 	// ChangeListener interface
 	abstract public void stateChanged(ChangeEvent event);
@@ -77,11 +80,6 @@ abstract public class UiBulletinComponent extends JPanel implements Scrollable, 
 		add(headerSection, BorderLayout.NORTH);
 		add(publicSection, BorderLayout.CENTER);
 		add(privateSection, BorderLayout.SOUTH);
-	}
-	
-	private UiBulletinComponentHeader createHeaderSection()
-	{
-		return new UiBulletinComponentHeader(mainWindow);
 	}
 	
 	private UiBulletinComponentDataSection createDataSection(
@@ -130,7 +128,7 @@ abstract public class UiBulletinComponent extends JPanel implements Scrollable, 
 		
 		createSections();
 		
-		headerSection.copyDataFromBulletin(currentBulletin);
+		headerSection.setHqKeys(getHqKeys());
 
 		String isAllPrivate = FieldSpec.FALSESTRING;
 		if(currentBulletin.isAllPrivate())

@@ -169,7 +169,8 @@ public class EnglishStrings
 "wintitle:notifyChoosingUninstallMartus=Uninstalling Martus Warning",
 "wintitle:notifyHQKeyAlradyExists=HQ Key Already Exists",
 "wintitle:notifyFolderMigrationFailed=Folder Migration Error",
-"wintitle:notifyViewHqList=HQ Details",
+"wintitle:notifyViewViewHqList=HQ Details",
+"wintitle:notifyModifyViewHqList=HQ Details",
 
 "wintitle:inputservername=Server Name",
 "wintitle:inputserverpubliccode=Server Identification",
@@ -677,7 +678,8 @@ public class EnglishStrings
 "field:notifyChoosingUninstallMartuscause=By choosing to uninstall Martus we will need to erase your keypair file and Martus will exit after it completes the quick erase operation then bring up the uninstall wizard.  Since this will erase your keypair file Martus will also delete the following information: any server or HQ you have configured, any custom fields or default details, and your personal preferences.  This information will be lost and restoring your keypair from a backup will not recover these settings.",
 "field:notifyHQKeyAlradyExistscause=You have already added this key to your list of HQ's.",
 "field:notifyFolderMigrationFailedcause=An error occurred during the conversion of your folders. You can still use Martus, but if the Outbox or Drafts folders still exist, do not use them.",
-"field:notifyViewHqListcause=Here is a list of public codes of Martus accounts that can view your private information. To add or remove an account, use the Tools/HQ menu option.\n\n#L#",
+"field:notifyViewViewHqListcause=Here is a list of public codes of Martus accounts that can view the private information in this bulletin.\n\n#L#",
+"field:notifyModifyViewHqListcause=Here is a list of public codes of Martus accounts that will be able to view the private information in this bulletin after you save it. To add or remove an account, use the Tools/Configure HQ's menu option.\n\n#L#",
 
 "field:messageServerNewscause=The current server has sent this message:",
 "field:messageErrorDateInFuturecause=This date occurs in the future:",
@@ -769,7 +771,8 @@ public class EnglishStrings
 "field:WasSentNo=No",
 
 "field:BulletinViewHeading=Martus Bulletin",
-"field:BulletinViewHQInfo=#N# other account(s) can view this private information",
+"field:ViewBulletinHQInfo=#N# other account(s) can view this private information",
+"field:ModifyBulletinHQInfo=#N# other account(s) will be able to view this private information",
 
 "folder:%OutBox=Unsent Bulletins",
 "folder:%Sent=Saved Bulletins",
