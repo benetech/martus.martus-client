@@ -27,7 +27,6 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.swingui.bulletintable;
 
 import javax.swing.table.AbstractTableModel;
-
 import org.martus.client.core.BulletinFolder;
 import org.martus.client.core.ClientBulletinStore;
 import org.martus.common.bulletin.Bulletin;
@@ -101,9 +100,10 @@ public class BulletinTableModel extends AbstractTableModel
 		if(fieldTag.equals(Bulletin.TAGSTATUS))
 		 	return localization.getStatusLabel(b.getStatus());	
 		
+		ClientBulletinStore store = getFolder().getStore();
 		if(fieldTag.equals(Bulletin.TAGWASSENT))
 		{
-			String tag = getSentTag(b);
+			String tag = store.getSentTag(b);
 			if(tag == null)
 				return "";
 			return localization.getFieldLabel(tag);
@@ -112,7 +112,7 @@ public class BulletinTableModel extends AbstractTableModel
 		if (fieldTag.equals(Bulletin.TAGLASTSAVED))			 
 			return localization.convertStoredDateTimeToDisplay(b.getLastSavedDateTime());
 		
-		String value = getFolder().getStore().getFieldData(uid, fieldTag);
+		String value = store.getFieldData(uid, fieldTag);
 		if (fieldTag.equals(Bulletin.TAGENTRYDATE) || 
 			fieldTag.equals(Bulletin.TAGEVENTDATE))				
 		{
@@ -125,27 +125,6 @@ public class BulletinTableModel extends AbstractTableModel
 		return value;
 	}
 
-	private String getSentTag(Bulletin b)
-	{
-		ClientBulletinStore store = folder.getStore();
-		boolean knownNotOnServer = store.isProbablyNotOnServer(b);
-
-		if(store.getFolderDraftOutbox().contains(b))
-		{
-			if(store.isMyBulletin(b.getBulletinHeaderPacket()))
-				return "WasSentNo";
-			if(!knownNotOnServer)
-				return null;
-		}
-
-		if(knownNotOnServer)
-			return "WasSentNo";
-
-		if(store.isProbablyOnServer(b))
-			return "WasSentYes";
-		
-		return null;
-	}
 
 	public String getColumnName(int columnIndex)
 	{

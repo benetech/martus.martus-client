@@ -221,10 +221,39 @@ public class ClientBulletinStore extends BulletinStore
 		}
 	}
 
+	public String getSentTag(Bulletin b)
+	{
+		boolean knownNotOnServer = isProbablyNotOnServer(b);
+
+		if(getFolderDraftOutbox().contains(b))
+		{
+			if(isMyBulletin(b.getBulletinHeaderPacket()))
+				return WAS_SENT_NO;
+			if(!knownNotOnServer)
+				return null;
+		}
+
+		if(knownNotOnServer)
+			return WAS_SENT_NO;
+
+		if(isProbablyOnServer(b))
+			return WAS_SENT_YES;
+		
+		return null;
+	}
+
 	public String getFieldData(UniversalId uid, String fieldTag)
 	{
 		Bulletin b = getBulletinRevision(uid);
 		
+		if(fieldTag.equals(Bulletin.TAGWASSENT))
+		{
+			String tag = getSentTag(b);
+			if(tag == null)
+				return "";
+			return tag;
+		}
+			
 		if(fieldTag.equals(Bulletin.TAGSTATUS))
 			return b.getStatus();
 			
@@ -1363,9 +1392,12 @@ public class ClientBulletinStore extends BulletinStore
 
 	public static final String OBSOLETE_OUTBOX_FOLDER = "%OutBox";
 	public static final String OBSOLETE_DRAFT_FOLDER = "%Draft";
+	public static final String WAS_SENT_YES = "WasSentYes";
+	public static final String WAS_SENT_NO = "WasSentNo";
 
 	private static final String CACHE_FILE_NAME = "skcache.dat";
 	private static final String OBSOLETE_CACHE_FILE_NAME = "sfcache.dat";
+
 	private Vector folders;
 	private BulletinFolder folderSaved;
 	private BulletinFolder folderDiscarded;

@@ -452,6 +452,11 @@ public class TestClientBulletinStore extends TestCaseEnhanced
 		assertEquals("Wrong summary?", sampleSummary, store.getFieldData(uId, Bulletin.TAGSUMMARY));
 		assertEquals("Wrong event date?", sampleEventDate, store.getFieldData(uId, Bulletin.TAGEVENTDATE));
 		assertEquals("Wrong status?", b.getStatus(), store.getFieldData(uId, Bulletin.TAGSTATUS));
+		assertEquals("Unknown status not set?", "", store.getFieldData(uId, Bulletin.TAGWASSENT));
+		store.setIsOnServer(b);
+		assertEquals("Status not Sent?", ClientBulletinStore.WAS_SENT_YES, store.getFieldData(uId, Bulletin.TAGWASSENT));
+		store.setIsNotOnServer(b);
+		assertEquals("Status not unSent?", ClientBulletinStore.WAS_SENT_NO, store.getFieldData(uId, Bulletin.TAGWASSENT));
 
 	}
 	public void testSaveBulletin() throws Exception
