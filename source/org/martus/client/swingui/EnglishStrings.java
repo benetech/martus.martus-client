@@ -549,7 +549,7 @@ public class EnglishStrings
 "field:confirmUndoCustomFieldscause=You have chosen to revert to the standard set of Martus fields.",
 "field:confirmUndoCustomFieldseffect=New bulletins created with this account will not have any custom fields.",
 "field:confirmRecoverUsingKeySharecause=Welcome to Martus.  What would you like to do?",
-"field:confirmRecoverUsingKeyShareeffect=Create a new account, or recover an old account from floppy?",
+"field:confirmRecoverUsingKeyShareeffect=Create a new account, or recover an old account from removable disks?",
 "field:confirmCancelShareRecovercause=Do you wish to cancel the keypair restore process?",
 "field:confirmCancelShareRecovereffect=By choosing Yes, you will exit Martus.",
 "field:confirmRecoveredKeyShareFailedTryAgaincause=Recovery of Keypair failed, we suggest you try again with a different set of files. Choose Yes to try again, No to exit Martus.",
