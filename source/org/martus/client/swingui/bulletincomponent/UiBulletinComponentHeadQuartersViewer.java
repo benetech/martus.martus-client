@@ -29,12 +29,10 @@ import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.common.HQKey;
-import org.martus.common.HQKeys;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.swing.UiLabel;
 import org.martus.swing.UiScrollPane;
 import org.martus.swing.UiTable;
-import org.martus.util.Base64.InvalidBase64Exception;
 
 public class UiBulletinComponentHeadQuartersViewer extends UiBulletinComponentHeadQuarters
 {
@@ -45,24 +43,22 @@ public class UiBulletinComponentHeadQuartersViewer extends UiBulletinComponentHe
 		UiLabel hqLabel = new UiLabel(getLabel("Headquarters"));
 		if(hqKeysAuthorizedToReadThisBulletin.size() > 0)
 		{
-			UiScrollPane hqScroller = createHeadquartersTable(hqKeysAuthorizedToReadThisBulletin);
+			UiScrollPane hqScroller = createHeadquartersTable();
 			addComponents(hqLabel, hqScroller);
 		}
 		else
 			addComponents(hqLabel, new UiLabel(getLocalization().getFieldLabel("NoHQsConfigured")));
-		
 	}
 
-	private UiScrollPane createHeadquartersTable(HQKeys hqKeys)
+	private UiScrollPane createHeadquartersTable()
 	{
 		DefaultTableModel hqModel = new DefaultTableModel();
 		hqModel.addColumn(getLabel("HQLabel"));
-		hqModel.setRowCount(hqKeys.size());
-		
-		for(int i=0; i < hqKeys.size(); ++i)
+		int numberOfHQsConfigured = hqKeysAuthorizedToReadThisBulletin.size();
+		for(int i=0; i < numberOfHQsConfigured; ++i)
 		{
-			HQKey key = hqKeys.get(i);
-			hqModel.setValueAt(getHQLabelIfPresent(key), i, 0);
+			HQKey key = hqKeysAuthorizedToReadThisBulletin.get(i);
+			hqModel.addRow(new Object[]{getHQLabelIfPresent(key)});
 		}
 		UiTable hqTable = new UiTable(hqModel);
 		hqTable.setColumnSelectionAllowed(false);
@@ -72,26 +68,6 @@ public class UiBulletinComponentHeadQuartersViewer extends UiBulletinComponentHe
 		hqTable.setEnabled(false);
 		UiScrollPane hqScroller = new UiScrollPane(hqTable);
 		return hqScroller;
-	}
-
-	private String getHQLabelIfPresent(HQKey key)
-	{
-		String hqLabelIfPresent = mainWindow.getApp().getHQLabelIfPresent(key);
-		if(hqLabelIfPresent.length() == 0)
-		{
-			String publicCode = key.getPublicKey();
-			try
-			{
-				publicCode = key.getPublicCode();
-			}
-			catch (InvalidBase64Exception e)
-			{
-				e.printStackTrace();
-			}
-			String hqNotConfigured = getLocalization().getFieldLabel("HQNotConfigured");
-			hqLabelIfPresent = publicCode + " " + hqNotConfigured;
-		}
-		return hqLabelIfPresent;
 	}
 
 }

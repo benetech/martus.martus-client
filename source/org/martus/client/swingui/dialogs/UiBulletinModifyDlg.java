@@ -74,7 +74,6 @@ public class UiBulletinModifyDlg extends JFrame implements ActionListener, Windo
 		try
 		{
 			bulletin = b;
-			observer.getApp().setHQKeysInBulletin(bulletin);
 
 			view = new UiBulletinEditor(observer);
 			view.copyDataFromBulletin(bulletin);

@@ -110,7 +110,6 @@ abstract public class UiBulletinComponent extends JPanel implements Scrollable, 
 
 	private void ensureSectionsLineUp()
 	{
-		headerSection.matchFirstColumnWidth(publicSection);
 		publicSection.matchFirstColumnWidth(privateSection);
 		privateSection.matchFirstColumnWidth(publicSection);
 	}

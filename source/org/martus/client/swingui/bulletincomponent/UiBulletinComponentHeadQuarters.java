@@ -26,9 +26,12 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.swingui.bulletincomponent;
 
 import org.martus.client.swingui.UiMainWindow;
+import org.martus.common.HQKey;
 import org.martus.common.HQKeys;
 import org.martus.common.bulletin.Bulletin;
+import org.martus.swing.UiLabel;
 import org.martus.swing.UiWrappedTextArea;
+import org.martus.util.Base64.InvalidBase64Exception;
 
 public class UiBulletinComponentHeadQuarters extends UiBulletinComponentSection
 {
@@ -39,9 +42,9 @@ public class UiBulletinComponentHeadQuarters extends UiBulletinComponentSection
 		hqKeysAuthorizedToReadThisBulletin = bulletin.getAuthorizedToReadKeys();
 		
 		String hqText = getLabel("HQInfoFor" + tagQualifierToUse); 
-		UiWrappedTextArea hqInfo = new UiWrappedTextArea(hqText);
+		UiWrappedTextArea hqInfo = new UiWrappedTextArea(hqText, 85);
 		hqInfo.setEditable(false);
-		add(hqInfo);
+		addComponents(new UiLabel(""),hqInfo);
 	}
 
 	protected String getLabel(String tag)
@@ -49,6 +52,26 @@ public class UiBulletinComponentHeadQuarters extends UiBulletinComponentSection
 		return getLocalization().getFieldLabel("BulletinHeadQuarters" + tag);
 	}
 	
+	protected String getHQLabelIfPresent(HQKey key)
+	{
+		String hqLabelIfPresent = mainWindow.getApp().getHQLabelIfPresent(key);
+		if(hqLabelIfPresent.length() == 0)
+		{
+			String publicCode = key.getPublicKey();
+			try
+			{
+				publicCode = key.getPublicCode();
+			}
+			catch (InvalidBase64Exception e)
+			{
+				e.printStackTrace();
+			}
+			String hqNotConfigured = getLocalization().getFieldLabel("HQNotConfigured");
+			hqLabelIfPresent = publicCode + " " + hqNotConfigured;
+		}
+		return hqLabelIfPresent;
+	}
+
 	Bulletin bulletin;
 	HQKeys hqKeysAuthorizedToReadThisBulletin;
 }
