@@ -587,6 +587,7 @@ public class BulletinStore
 	public void deleteAllData() throws Exception
 	{
 		database.deleteAllData();
+		getCacheOfSortableFieldsFile().delete();
 		deleteFoldersDatFile();
 		resetFolders();
 	}			
@@ -725,11 +726,12 @@ public class BulletinStore
 
 		folder.add(b);
 	}
+	
 
 	private void setUpStore(File baseDirectory, Database db)
 	{
 		dir = baseDirectory;
-		cacheOfSortableFieldsFile = new File(dir, CACHE_FILE_NAME);
+		cacheOfSortableFieldsFile = getCacheOfSortableFieldsFile();
 
 		database = db;
 		bulletinCache = new TreeMap();
@@ -742,6 +744,11 @@ public class BulletinStore
 		privateFieldTags = FieldSpec.getDefaultPrivateFieldSpecs();
 	}
 	
+	private File getCacheOfSortableFieldsFile()
+	{
+		return new File(dir, CACHE_FILE_NAME);
+	}
+
 	public void setPublicFieldTags(FieldSpec[] newTags)
 	{
 		publicFieldTags = newTags;
