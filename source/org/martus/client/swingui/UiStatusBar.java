@@ -39,6 +39,7 @@ public class UiStatusBar extends JPanel
 	public UiStatusBar(UiLocalization localization)
 	{
 		super();
+		local = localization;
 		setLayout( new BoxLayout( this, BoxLayout.X_AXIS) );
 
 		statusBarBox = Box.createHorizontalBox();
@@ -68,8 +69,8 @@ public class UiStatusBar extends JPanel
 	}
 	
 	public void setBulletinLastSaved(String time)
-	{
-
+	{		
+		local.convertStoredDateToDisplay(time);
 		bulletinLastSaved.setText(time);
 	}
 
@@ -83,4 +84,5 @@ public class UiStatusBar extends JPanel
 	private JTextField bulletinId;
 	
 	private JTextField bulletinLastSaved;
+	private UiLocalization local;
 }
