@@ -211,7 +211,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 			message = reader.readAll();
 			reader.close();
 		}
-		catch(IOException e)
+		catch(Exception e)
 		{
 			e.printStackTrace();
 		}
