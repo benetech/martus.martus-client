@@ -53,7 +53,7 @@ public class TestConfigInfo extends TestCaseEnhanced
 		ConfigInfo info = new ConfigInfo();
 		verifyEmptyInfo(info, "constructor");
 		
-		assertEquals(8, ConfigInfo.VERSION);
+		assertEquals(9, ConfigInfo.VERSION);
 
 		info.setAuthor("fred");
 		assertEquals("fred", info.getAuthor());
@@ -210,6 +210,7 @@ public class TestConfigInfo extends TestCaseEnhanced
 		info.setForceBulletinsAllPrivate(sampleForceAllPrivate);
 		info.setBackedUpKeypairEncrypted(sampleBackedUpKeypairEncrypted);
 		info.setBackedUpKeypairShare(sampleBackedUpKeypairShare);
+		info.setAllHQKeysXml(sampleAllHQKeysXml);
 	}
 
 	void verifyEmptyInfo(ConfigInfo info, String label)
@@ -232,6 +233,8 @@ public class TestConfigInfo extends TestCaseEnhanced
 		assertEquals(label + ": sampleForceAllPrivate", false, info.shouldForceBulletinsAllPrivate());
 		assertEquals(label + ": sampleBackedUpKeypairEncrypted", false, info.hasUserBackedUpKeypairEncrypted());
 		assertEquals(label + ": sampleBackedUpKeypairShare", false, info.hasUserBackedUpKeypairShare());
+		assertEquals(label + ": sampleAllHQKeysXml", "", info.getAllHQKeysXml());
+		
 	}
 
 	void verifySampleInfo(ConfigInfo info, String label, int VERSION)
@@ -286,6 +289,12 @@ public class TestConfigInfo extends TestCaseEnhanced
 			assertEquals(label + ": sampleBackedUpKeypairEncrypted", false, info.hasUserBackedUpKeypairEncrypted());
 			assertEquals(label + ": sampleBackedUpKeypairShared", false, info.hasUserBackedUpKeypairShare());
 		}
+		
+		if(VERSION >= 9)
+			assertEquals(label + ": sampleAllHQKeysXml", sampleAllHQKeysXml, info.getAllHQKeysXml());	
+		else
+			assertEquals(label + ": sampleAllHQKeysXml", "", info.getAllHQKeysXml());
+			
 	}
 
 	void verifyLoadSpecificVersion(ByteArrayInputStream inputStream, short VERSION)
@@ -338,6 +347,10 @@ public class TestConfigInfo extends TestCaseEnhanced
 			out.writeBoolean(sampleBackedUpKeypairEncrypted);
 			out.writeBoolean(sampleBackedUpKeypairShare);
 		}
+		if(VERSION >= 9)
+		{
+			out.writeUTF(sampleAllHQKeysXml);
+		}
 		out.close();
 		return outputStream.toByteArray();
 	}
@@ -370,4 +383,7 @@ public class TestConfigInfo extends TestCaseEnhanced
 //Version 8
 	final boolean sampleBackedUpKeypairEncrypted = true;
 	final boolean sampleBackedUpKeypairShare = true;
+//Version 9
+	final String sampleAllHQKeysXml = "<HQs></HQs>";
+
 }

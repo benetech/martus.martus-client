@@ -70,6 +70,7 @@ public class ConfigInfo implements Serializable
 	public void setForceBulletinsAllPrivate(boolean newForceBulletinsAllPrivate)	{forceBulletinsAllPrivate = newForceBulletinsAllPrivate; }
 	public void setBackedUpKeypairEncrypted(boolean newBackedUpKeypairEncrypted)	{backedUpKeypairEncrypted = newBackedUpKeypairEncrypted; }
 	public void setBackedUpKeypairShare(boolean newBackedUpKeypairShare)	{backedUpKeypairShare = newBackedUpKeypairShare; }
+	public void setAllHQKeysXml(String allHQKeysXml){this.allHQKeysXml = allHQKeysXml;}
 
 	public void clearHQKey()						{ hqKey = ""; }
 	public void clearPromptUserRequestSendToServer() { mustAskUserToSendToServer = false; }
@@ -93,6 +94,7 @@ public class ConfigInfo implements Serializable
 	public boolean shouldForceBulletinsAllPrivate()	{ return forceBulletinsAllPrivate;}
 	public boolean hasUserBackedUpKeypairEncrypted()	{ return backedUpKeypairEncrypted;}
 	public boolean hasUserBackedUpKeypairShare()	{ return backedUpKeypairShare;}
+	public String getAllHQKeysXml()		{return allHQKeysXml;}
 
 	public boolean isServerConfigured()
 	{
@@ -120,6 +122,7 @@ public class ConfigInfo implements Serializable
 		forceBulletinsAllPrivate = false;
 		backedUpKeypairEncrypted = false;
 		backedUpKeypairShare = false;
+		allHQKeysXml = "";
 	}
 
 	public static ConfigInfo load(InputStream inputStream)
@@ -162,6 +165,8 @@ public class ConfigInfo implements Serializable
 				loaded.backedUpKeypairEncrypted = in.readBoolean();
 				loaded.backedUpKeypairShare = in.readBoolean();
 			}
+			if(loaded.version >= 9)
+				loaded.allHQKeysXml = in.readUTF();
 
 			in.close();
 		}
@@ -195,6 +200,7 @@ public class ConfigInfo implements Serializable
 			out.writeBoolean(forceBulletinsAllPrivate);
 			out.writeBoolean(backedUpKeypairEncrypted);
 			out.writeBoolean(backedUpKeypairShare);
+			out.writeUTF(allHQKeysXml);
 			out.close();
 		}
 		catch(Exception e)
@@ -205,7 +211,7 @@ public class ConfigInfo implements Serializable
 	
 	private boolean mustAskUserToSendToServer;
 	
-	public static final short VERSION = 8;
+	public static final short VERSION = 9;
 	//Version 1
 	private short version;
 	private String author;
@@ -232,4 +238,7 @@ public class ConfigInfo implements Serializable
 	//Version 8
 	private boolean backedUpKeypairEncrypted;
 	private boolean backedUpKeypairShare;
+	//Version 9
+	private String allHQKeysXml;
+	
 }
