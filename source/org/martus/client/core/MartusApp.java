@@ -458,14 +458,14 @@ public class MartusApp
 		try
 		{
 			//System.out.println("App.setHQKeyInBulletin Setting HQ:" + getHQKey());
-			b.setHQPublicKeys(getHQKeys());
+			b.setAuthorizedToReadKeys(getHQKeys());
 		}
 		catch (HQsException e)
 		{
 			e.printStackTrace();
 			Vector legacy = new Vector();
 			legacy.add(getHQKey());
-			b.setHQPublicKeys(legacy);
+			b.setAuthorizedToReadKeys(legacy);
 		}
 	}
 

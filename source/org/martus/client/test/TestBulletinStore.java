@@ -1063,7 +1063,7 @@ public class TestBulletinStore extends TestCaseEnhanced
 		Bulletin original = store.createEmptyBulletin();
 		Vector keys = new Vector();
 		keys.add(hqStore.getAccountId());
-		original.setHQPublicKeys(keys);
+		original.setAuthorizedToReadKeys(keys);
 		original.setSealed();
 		BulletinForTesting.saveToFile(db,original, tempFile, store.getSignatureVerifier());
 

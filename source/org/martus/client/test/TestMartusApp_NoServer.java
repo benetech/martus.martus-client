@@ -1489,9 +1489,9 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		appWithAccount.setAndSaveHQKeys(keys);
 
 		Bulletin b1 = appWithAccount.createBulletin();
-		assertEquals("key already set?", "", b1.getHQPublicKey());
+		assertEquals("key already set?", 0, b1.getAuthorizedToReadKeys().size());
 		appWithAccount.setHQKeysInBulletin(b1);
-		assertEquals("Key not set?", key, b1.getHQPublicKey());
+		assertEquals("Key not set?", key, b1.getAuthorizedToReadKeys().get(0));
 	}
 
 	private MockMartusSecurity mockSecurityForApp;
