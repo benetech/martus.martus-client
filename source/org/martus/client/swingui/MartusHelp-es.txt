@@ -1,6 +1,5 @@
 Introducción al software Martus™ 
---------
-¿QUÉ ES MARTUS™?
+¿Qué es Martus™?
 El nombre deriva del término griego para “testigo”. El proyecto Martus ofrece una forma segura y eficiente de almacenar y obtener información acerca de abusos de los derechos humanos. Usando la aplicación Martus, se pueden crear boletines que registran abusos de los derechos humanos, incorporar documentos de apoyo, especificar si esta información ha de ser pública o privada y almacenar esa información en un servidor seguro. Para saber más acerca de los problemas que se quieren solventar desde el proyecto Martus, así como planes futuros de desarrollo puede visitar http://www.martus.org
 --------
 ¿POR QUÉ ES TAN IMPORTANTE LA SEGURIDAD EN MARTUS?
@@ -442,7 +441,7 @@ OTRAS CARPETAS CREADAS POR MARTUS
 El programa Martus crea carpetas adicionales durante su uso, estas son Resultados de búsqueda, Boletines bajados, Boletines recuperados y Boletines dañados. Estas carpetas pueden ser eliminadas o renombradas. 
 
 Resultados de búsqueda	
-Cuando se busca algún boletín específico en su ordenador, Martus muestra los resultados en la carpeta “Resultados de búsqueda”. Los contenidos de esta carpeta  quedarán sobrescritos en la próxima búsqueda que lleve a cabo. Si quiere guardar los resultados de la búsqueda, cambie el nombre de esta carpeta. Martus volverá a crear una carpeta de “Resultados de búsqueda” nueva la próxima vez que lleve a cabo una búsqueda. Para cambiar de nombre a la carpeta de “Resultados de búsqueda” haga clic con el botón de la derecha y seleccione “Renombrar carpeta” o haga clic sobre el nombre de la carpeta y escriba el nuevo nombre que desea darle.  También puede usar el menú Carpeta > Renombrar carpeta.  
+Cuando se busca algún boletín específico en su ordenador, Martus muestra los resultados en la carpeta “Resultados de búsqueda”. Los contenidos de esta carpeta  quedarán sobrescritos en la próxima búsqueda que lleve a cabo. Si quiere guardar los resultados de la búsqueda, cambie el nombre de esta carpeta. Martus volverá a crear una carpeta de “Resultados de búsqueda” nueva la próxima vez que lleve a cabo una búsqueda. Para cambiar de nombre a la carpeta de “Resultados de búsqueda” haga clic con el botón de la derecha y seleccione “Renombrar carpeta” o haga clic sobre el nombre de la carpeta y escriba el nuevo nombre que desea darle.  También puede usar el menú Carpetas > Renombrar carpeta.  
 
 Boletines bajados 
 Esta carpeta contiene boletines que se ha descargado del servidor. Estos boletines están incluidos en búsquedas y pueden copiarse o moverse a carpetas diferentes. Los boletines recuperados están sellados, de manera que no pueden modificarse.
@@ -757,7 +756,7 @@ Para abrir un archivo adjunto en Mac OS o Linux oprima “Guardar adjunto”, gr
 Deseche el boletín de todas las carpetas antes de eliminarlo de la carpeta de boletines desechados. 
 
 10. ¿Puedo hacer una copia de los datos de mi Martus en un disco flexible u otro medio de copia?
-Sí, si dispone de un dispositivo de copia de seguridad capaz de almacenar todos sus datos. Copia la carpeta C:\Martus entera en su medio de copia. Esta carpeta contiene la aplicación Martus, el entorno de ejecución Java, su par de claves cifradas, y los datos de configuración y boletines de todos los usuarios con cuentas en Martus. Para hacer una copia de seguridad mínima, copie solo el archivo  MartusKeyPair.dat y las carpetas  “packets” y “cuentas” de la carpeta de Martus. 
+Sí, si dispone de un dispositivo de copia de seguridad capaz de almacenar todos sus datos. Copia la carpeta C:\Martus entera en su medio de copia. Esta carpeta contiene la aplicación Martus, el entorno de ejecución Java, su par de claves cifradas, y los datos de configuración y boletines de todos los usuarios con cuentas en Martus. Para hacer una copia de seguridad mínima, copie solo el archivo  MartusKeyPair.dat y las carpetas  “packets” y “accounts” de la carpeta de Martus. 
 
 11. ¿Por qué hay más lenguajes disponibles cuando se crean boletines que en la ventana de inicio de Martus o en la ventana de preferencias?
 La ventana de preferencias le deja seleccionar el idioma del programa. Actualmente, el programa Martus se ha traducido al inglés y al español. Esperamos traducirlo a más idiomas en el futuro. Si está interesado en traducir Martus, por favor contáctenos a través de help@martus.org. 
@@ -787,4 +786,5 @@ Esto puede que indique un problema con su tarjeta de video o con el driver de vi
 
 17. Me parece observar un comportamiento extraño en Martus. ¿Cómo puedo averiguar qué está pasando? 
 En lugar de arrancar Martus haciendo doble clic en el icono de Martus en su escritorio, seleccione Ejecutar del menú Inicio y teclee el siguiente texto para lanzar Martus: C:\Martus\bin\java.exe -jar C:\Martus\Martus.jar. Anote los mensajes de error que aparezcan según va trabajando con Martus y envíelos por correo electrónico a help@martus.org.
+35
 
