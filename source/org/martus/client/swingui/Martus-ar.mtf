@@ -1,0 +1,2471 @@
+﻿# Martus Client Translation File
+# Language code:  ar
+# Language name:  Arabic
+# Exported date:  Mon Aug 23 16:44:55 PDT 2004
+# Client version: internal pre-release 2.0.1
+# Client build:   20040823.1226
+#
+# This file MUST be saved in UTF-8 format!
+# Lines beginning with # are comments and are ignored by Martus
+# Each entry has two lines. The first line is the current English
+#    text, and the second line consists of: KEY=VALUE
+#    (e.g. -c47a-button:customHelp=<Help> )
+# Do not modify any KEY. Do localize every VALUE.
+# Each VALUE that needs to be translated has <> around it.
+#    As you translate each VALUE, remove its <>
+# When a non-English VALUE appears inside <> it is because the English
+#    translation has changed. Verify or update the translation to 
+#    match the new English text, and remove the <>
+# If there is an English VALUE inside <> , it is because it is a field
+#    added after the last release. Remove the english, insert/update the
+#    VALUE translation to match the new English text which is in the
+#    comment line directly above it, and remove the <>
+# If you name it Martus-ar.mtf and put the file in
+#     c:\Martus, then Martus will automatically read it.
+# In Martus, to choose a language, pick one from the drop-down list
+#    in the lower left-hand corner of the signin screen, or after you
+#    are logged in, go to Options/Preferences.
+#
+#  1.  do NOT translate "\n" (used for new lines)
+#  2.  do NOT translate "#N#" or "#M#" (though move them as appropriate
+
+#      grammatically for the language to make "N of M" [eg "2 of 5"] make
+#      sense for creating/restoring multiple key backup files).
+#  3.  in field:VirtualKeyboardKeys, keep the english alphabet, but include any
+#      non-english characters at the end of the english alphabet/numbers/special
+#      characters (e.g. attach entire Thai alphabet at the end of the line)
+#  4.  in field:SearchBulletinRules, make sure to translate the english "and"
+#      and "or" in the text to exactly match the keyword:and= and 
+#      keyword:or= translations.  Also, the translation of the first sentence
+#      should not exactly match the english version because Martus can handle
+#      both english "and"/"or" and the translations of those keywords for
+#      bulletin searching, since for some languages keyboards are not available
+#      to all users in those alphabets. So please translate the following for 
+#      the first sentence: "When searching for bulletins you can add key words 
+#      either in english or the-language-you-are-translating (or/or-translated,
+#      and/and-translated) between multiple search term words
+#      (e.g. prison or jail, prison and assault).
+#  5.  in CreateCustomFieldsHelp2/3 fields, you can translate tags into foreign
+
+#      characters (but without punctuation or spaces)
+#  6.  when there are file or directory names, do not translate them
+#      (e.g.  "acctmap.txt" and "packets"
+#      in field:confirmWarnMissingAccountMapFilecause=Warning: acctmap.txt
+
+#      file in your account's packets directory...)
+#  7.  do not translate the words "Martus" or "Benetech"
+#  8.  do NOT translate "#S#" (used for search string entry)
+#  9.  do not translate "#L#" as is it used to populate lists of values on
+#      various dialogs.
+# 10.  do not translate "#Title#" (used for bulletin title entry)
+# 11.  do not translate "#A#" (used for bulletin details: Author Public Code)
+# 12.  do not translate "#I#" (used for bulletin details: Bulletin ID)
+# 13.  do not translate "#H#" (used for bulletin details: Headquarter entries)
+# 14.  do not translate "#NumberOfHQs#" in various dialogs
+# 15.  Leave standard field tags in English in CreateCustomFieldsHelp1 and
+#      CreateCustomFieldsHelp2, but put translation in parentheses after
+
+#      english : e.g.  'author' (autor), so users know what they refer to
+# 16.  Leave field types in English in CreateCustomFieldsHelp2 (e.g. BOOLEAN,
+#      DATE), but put translation in parentheses after english, so users know
+#      what they refer to.
+# 17.  Leave field types in English in CreateCustomFieldsHelp3 examples
+#      (e.g. BOOLEAN, DATE)
+# 18.  Do not translate words used in XML for custom fields such as:
+#      <Field type='GRID'>, </Field>, <Tag>, </Tag>, <Label>, </Label>,
+#      <GridSpecDetails>, </GridSpecDetails>, <Column>, </Column>
+# 19.  Do NOT create any user-entered new-lines/carriage-returns (by using 
+#      the enter key) in any mtf entry (from the field:xxx to the end of the 
+#      translated text), since a continuous block of text is needed.
+#
+!right-to-left
+#________________________=Show all bulletins on this server and on this computer.
+-e9a2-button:AllSummaries=عرض جميع النشرات على هذا الحاسوب و على الخادم
+
+#___________________________=Bulletin Details...
+
+-d012-button:BulletinDetails=تفاصيل النشرة...
+
+#___________________________=Add...
+-2cce-button:ConfigureHQsAdd=إضافة...
+
+#_______________________________=Change Label
+-8a69-button:ConfigureHQsReLabel=تغيير العنوان 
+
+#______________________________=Remove
+-e963-button:ConfigureHQsRemove=إزالة
+
+#____________________=Continue
+-2e02-button:Continue=استمر
+
+#__________________=Delete
+-f6fd-button:Delete=حذف 
+
+#______________________________=Delete
+-f6fd-button:DeleteServerDrafts=حذف
+
+#_________________________________=Show bulletins that are only on the server.
+-b795-button:DownloadableSummaries=عرض النشرات الموجودة على الخادم فقط
+
+#_________________=Leave
+-7e35-button:Leave=ترك
+
+#_________________________=New Account
+-1d19-button:NewAccountTab=حساب جديد 
+
+#___________________=Preview
+-f1fb-button:Preview=عرض 
+
+#__________________________________=Restore account from backup key file
+-f447-button:RecoverAccountByBackup=استعادة حساب بملف شفرتي دخول احتياطي 
+
+#_________________________________=Restore account from multiple disks
+-ad8d-button:RecoverAccountByShare=استعادة حساب من عدة أقراص
+
+#_____________________________=Restore Account
+-d7da-button:RecoverAccountTab=استعادة حساب 
+
+#_________________________=Reset Contents
+-6f62-button:ResetContents=حذف المحتويات 
+
+#__________________________________=Accept
+-bb54-button:ServerComplianceAccept=قبول 
+
+#__________________________________=Reject
+-2b03-button:ServerComplianceReject=إلغاء
+
+#__________________=Sign In
+-f849-button:SignIn=دخول 
+
+#_________________________________________=Switch to using regular keyboard
+-c1ee-button:VirtualKeyboardSwitchToNormal=استخدام لوحة المفاتيح العادية
+
+#__________________________________________=Switch to using on-screen keyboard
+-bca9-button:VirtualKeyboardSwitchToVirtual=استخدام لوحة المفاتيح الافتراضية بالنافذة
+
+#_________________________=Add Attachment
+-f3aa-button:addattachment=إضافة مرفق
+
+#___________________________=Name
+-709a-button:attachmentLabel=الاسم 
+
+#__________________________=Size(Kb)
+-4470-button:attachmentSize=الحجم (كيلو بايت)
+
+#__________________=Browse...
+-7d7f-button:browse=تصفح...
+
+#__________________=Cancel
+-77df-button:cancel=إلغاء
+
+#____________________=Check All
+-fab2-button:checkall=اختر الكل
+
+#_________________=Close
+-bbfa-button:close=غلق 
+
+#_________________________=Connect
+-b654-button:connectserver=اتصال 
+
+#__________________=Create
+-6e15-button:create=إنشاء
+
+#_________________________=Restore Defaults
+-8e80-button:customDefault=استعادة العناصر التلقائية
+
+#______________________=Help
+-c47a-button:customHelp=مساعدة 
+
+#________________=Help
+-c47a-button:help=مساعدة
+
+#_______________________________=OK
+-9ce3-button:inputCustomFieldsok=استمر 
+
+#____________________________________=Export
+-f3e4-button:inputExportMyPublicKeyok=تصدير 
+
+#_____________________________=OK
+-9ce3-button:inputGetHQLabelok=استمر
+
+#___________________________________=OK
+-9ce3-button:inputGetShareFileNameok=استمر
+
+#___________________________________=Import
+-d6fb-button:inputImportPublicCodeok=استيراد
+
+#_____________________________________=Load
+-ddcb-button:inputLoadDefaultDetailsok=تفريغ 
+
+#_________________________=Search
+-bce0-button:inputsearchok=بحث 
+
+#__________________________________=OK
+-9ce3-button:inputservermagicwordok=استمر
+
+#_____________________________=OK
+-9ce3-button:inputservernameok=استمر
+
+#___________________________________=OK
+-9ce3-button:inputserverpubliccodeok=استمر
+
+#________________________________=Load From File
+-30fe-button:loadTemplateFromFile=تفريغ من ملف 
+
+#__________________=Modify
+-9fe4-button:modify=تعديل 
+
+#______________=No
+-816c-button:no=لا 
+
+#______________=OK
+-9ce3-button:ok=استمر 
+
+#_________________=Print
+-5b22-button:print=طباعة 
+
+#____________________________=Remove Attachment
+-6f6d-button:removeattachment=إزالة مرفق
+
+#____________________=Retrieve
+-eb55-button:retrieve=استرجاع 
+
+#__________________________=Save Attachment
+-f513-button:saveattachment=حفظ مرفق 
+
+
+#_____________________=Save Draft
+-cc13-button:savedraft=حفظ مسودة 
+
+#__________________=Search
+-bce0-button:search=بحث 
+
+#________________=Save Sealed
+-110f-button:send=حفظ المختوم
+
+#______________________=Uncheck All
+-bc6d-button:uncheckall=اترك الكل 
+
+#__________________________=View Attachment
+-b24c-button:viewattachment=استعرض مرفقا
+
+#_______________=Yes
+-5397-button:yes=نعم 
+
+#_______________________________=Account Directory: 
+-c354-field:AccountInfoDirectory=مسار الحساب: 
+
+
+#________________________________=Public Code:
+-63bc-field:AccountInfoPublicCode=الكود العام:
+
+#_______________________________=Public Account Id:
+-6723-field:AccountInfoPublicKey=هوية الحساب العام
+
+#______________________________=User Name: 
+-b58e-field:AccountInfoUserName=اسم المستخدم: 
+
+#________________________________=Unknown
+-bc78-field:AttachmentSizeUnknown=مجهول
+
+#_________________________=Author (required)
+-4a0b-field:AuthorRequired=الكاتب (ضروري)
+
+#___________________________________=Your key is required to read your private bulletin information or to create new bulletins.  To ensure that you’ll always have access to your data, it is extremely important to keep a backup of your key.\n\nMartus offers two methods for backing up your key, either of which may be used, but we strongly recommend using both backup methods.  The first method creates a single, password encrypted key back up file onto removable media (e.g. floppy disk, cd, USB storage) or a network drive; the second method backs up the key in #M# separate pieces (not encrypted with your password) onto multiple floppy disks (or other removable media).\n
+-667a-field:BackupKeyPairGeneralInfo=شفرتك الخاصة هي جزء من شفرتي دخولك، وهي ضرورية للإطلاع على معلومات نشراتك الخاصة أو لإنشاء نشرات جديدة. لضمان الوصول لبياناتك بشكل مستمر، من المهم جدا أن تحتفظ بنسخة احتياطية من شفرتي دخولك. \n\n يوفر Martus طريقتين للاحتفاظ بنسخة احتياطية من ملف شفرتي دخولك، ويمكن استخدام أي منها ولكننا نوصي بشدة باستخدام كليهما. تعتمد الطريقة الأولى على إنشاء نسخة احتياطية واحدة من ملف شفرتي دخولك يتم تشفيرها بكلمة مرور ويتم تخزينها على وسائط تخزينية متنقلة (مثل الأقراص المرنة و الاسطوانات المدمجة و خزان USB) أو قرص صلب شبكي. أما الطريقة الأخرى، طريقة التجزيء السري، فتعتمد على حفظ نسخة احتياطية من ملف شفرتي دخولك على #M# قطع منفصلة (غير مُشفرة بكلمة مرورك) من الأقراص المرنة (أو أية وسائط تخزينية متنقلة أخرى). 
+
+#________________________________________________=This method breaks up your key into #M# pieces, any #N# of which will be required to reconstruct the key without requiring a password.  If you forget your login name or your password, this method is the only way you can restore your key.\n\nOnce the #M# files have been written to removable media disks, you should distribute them to #M# different people whom you will remember, but each of whom don’t know who you have given the other files to.  Do not store any of the disks together.\n\nTo restore your key, first retrieve any #N# of the original #M# disks, and then select 'Restore Account' and 'Restore account from multiple disks' when signing into Martus.\n
+-e44a-field:BackupKeyPairToSecretShareInformation=تُقسّم هذه الطريقة ملف شفرتي دخولك إلى #M# قطع "مجزئة سريا" يلزم الجمع بين أي من #N# منهم لإعادة إنشاء ملف شفرتي دخولك دون الحاجة لكلمة مرور. إذا نسيت اسم المستخدم أو كلمة مرورك، هذه هي الطريقة الوحيدة التي تستطيع من خلالها استعادة ملف شفرتي دخولك. \n\n بمجرد تجزئة الملف على #M# أقراص متنقلة يجب عليك توزيعها على #M# أشخاص مختلفين يسهل عليك تذكرهم ولكن لا يعلم أي منهم من أعطيت الأجزاء السرية الأخرى لهم. لا تقم بتخزين أي من الأقراص معا في مكان واحد. \n\n لاستعادة ملف شفرتي دخولك، قم أولا باستعادة أية #N# من #M# أقراص الأصلية ثم اختر "استعادة حساب" و "استعادة حساب بملف شفرتي دخول احتياطي" عند فتح Martus. 
+
+#____________________________________________________=Please insert disk #
+-b877-field:BackupRecoverKeyPairInsertNextDiskMessage=لطفا قم بإدخال قرص
+
+#_______________________________________________=Backup complete, please give each disk to someone you trust, so that if you forget your user name and/or password in the future you can recreate your account.  You will need #N# of these disks to recreate your account.
+-30ee-field:BackupSecretShareCompleteInformation=تم النسخ الاحتياطي، لطفا اعط كل قرص لشخص تأتمنه، حتى إذا نسيت اسم المستخدم و كلمة المرور الخاصيّن بك في المستقبل، تستطيع إعادة إنشاء حسابك. ستحتاج إلى #N# من أقراص الأجزاء السرية هذه لإعادة إنشاء حسابك. 
+
+#__________________________________=Warning: Some information in this bulletin is not visible
+-eba1-field:BulletinHasUnknownStuff=تحذير: لا يمكن قراءة بعض المعلومات في هذه النشرة
+
+#_____________________=Bulletin Id:
+-a081-field:BulletinId=هوية النشرة: 
+
+#____________________________=Last Saved
+-eb05-field:BulletinLastSaved=الحفظ الأخير
+
+#___________________________=Field Desk Bulletin
+-f61d-field:BulletinNotYours=نشرة مكتب الموقع
+
+#_______________________=Size (Kb)
+-fa2e-field:BulletinSize=الحجم (كيلو بايت) 
+
+#_________________________=Bulletin Status:
+-c567-field:BulletinStatus=حالة النشرة:
+
+#______________________________=Martus Bulletin
+-1ded-field:BulletinViewHeading= نشرة Martus
+
+
+#__________________________=Sent
+-35f4-field:BulletinWasSent=تم الإرسال
+
+#_____________________________________=Download Progress
+-8b0e-field:ChunkProgressStatusMessage=جاري التحميل
+
+#______________________________=Row #
+-4946-field:ColumnGridRowNumber=صف #
+
+#_______________________________________=Label
+-7434-field:ConfigureHQColumnHeaderLabel=عنوان
+
+#____________________________________________=Public Code
+-a1a2-field:ConfigureHQColumnHeaderPublicCode=الكود العام
+
+#_________________________________=Current Headquarters
+-6bd3-field:ConfigureHQsCurrentHQs=المركز الرئيسي الحالي
+
+#_________________________________________=All other fields currently are stored on disk
+.
+
+-7e7c-field:ContactInfoDescriptionOfFields= تم تخزين جميع الحقول الأخرى حاليا على وحدة التخزين. 
+#_______________________________________=This information will be available to anyone who can view your public bulletin information.\nThis allows people to contact you for further information.
+-1f49-field:ContactInfoFutureUseOfFields=سيتم إتاحة هذه المعلومات في المستقبل لأي شخص له صلاحية الإطلاع على المعلومات العامة بنشراتك. \nيتيح ذلك للآخرين الاتصال بك لمزيد من المعلومات. 
+
+#____________________________________=This information identifies your organization.\nYou must enter either an Author or Organization, and both are shown in every bulletin you create.
+-ea39-field:ContactInfoRequiredFields=تقوم هذه المعلومات بتعريف منظمتك. \nيجب عليك إدخال اسم الكاتب أو المنظمة، وكلاهما يظهر في كل نشرة تقوم بإنشائها.
+
+#_________________________________=You can change any of this information later, by choosing Options/Contact Info.
+-e924-field:ContactInfoUpdateLater=يمكنك تغيير أيا من هذه المعلومات فيما بعد، بالنقر على خيارات/معلومات الاتصال.
+
+#__________________________________=The layout of the bulletins is dictated by an XML document.  At the start of the document you must have <CustomFields> and at the end of the document you must have its corresponding end tag namely </CustomFields>.  By default the standard bulletin fields occur at the top of the Custom Field declaration, but they can be moved if desired.  However, there are four required fields that cannot be removed:  'author', 'entrydate', 'language' and 'title'.  For example for 'author' you will have\n<Field type='STRING'><Tag>author</Tag><Label></Label></Field>\n\n
+-2398-field:CreateCustomFieldsHelp1=يتم إملاء نموذج تصميم النشرات عن طريق وثيقة XML.  ترى في بداية الوثيقة الرمز <CustomFields> و ترى في نهايتها إغلاق هذا الرمز، ألا و هو </CustomFields>. توجد أربع رموز ضرورية وهي  "Author"(الكاتب)، "EntryDate" (تاريخ الإنشاء)، "Language" (اللغة) و "Title" (العنوان). تلقائيا توضع الحقول الأساسية للنشرة فوق الحقول المعدلة ولكن يمكن تغيير أماكنها حسب الرغبة. فعلى سبيل المثال، يتم إنشاء حقل "الكاتب" بهذه الطريقة\n <Field type='STRING'><Tag>كاتب </Tag><Label></Label></Field>\n\n 
+
+
+#__________________________________=For custom (non-standard) fields, you first select the type of field you want.  The possible choices are 'BOOLEAN', 'DATE', 'DATERANGE', 'GRID', 'LANGUAGE', 'MULTILINE', and 'STRING'.  This type is defined by <Field type='type of field goes here'>. \n\nFor each custom field you will need a unique identification tag.  This tag can be any word except those already used by the system (eg. 'author', 'summary', 'location', 'title' etc.), and cannot contain spaces or special characters.  Examples of choices are 'custom1', 'custom2', etc, or tags that are more descriptive like 'VictimsName'.  This unique tag looks like <Tag>yourtag</Tag>. \n Then you need a label which is displayed next to your custom field.  An example might be 'Name of 1st Witness'.  This label is surrounded by <Label>your label goes here</Label>\nEach field description ends with </Field>\n\n
+-c18a-field:CreateCustomFieldsHelp2=بالنسبة للحقول المعدلة (غير الأساسية) تقوم أولا باختيار الحقل الذي تريده. قد يكون النوع'BOOLEAN'(موجب أو سالب)، 'DATE'(تاريخ)، 'DATERANGE'(المدى التاريخي)، 'GRID'(شبكة متسامتة)، 'LANGUAGE'(اللغة)، 'MULTILINE'(عدة سطور)، و'STRING'(تسلسل حرفي). يتم تعريف هذا النوع كالآتي <Field type=' ضع اسم الحقل هنا'>. \n\n ستحتاج لكل حقل معدل رمزا فريدا من نوعه لكي يميزه. يمكن لهذا الرمز أن يكون أية كلمة ماعدا الكلمات التي يستخدمها البرنامج (مثل 'author' (الكاتب)، 'summary' (الملخص)، 'location' (الموقع)، 'title' (العنوان) إلخ.) يمكنك اختيار كلمات مثل "جديد1" و "جديد2" و "جديد3"، إلخ. ويحيط بهذا الرمز الفريد علامتي <Tag>yourtag</Tag>. ثم تحتاج اسما يتم عرضه بجانب حقلك الجديد. وقد يكون هذا الاسم "اسم الشاهد" مثلا. يحيط بهذا الاسم علامتي <Label>ضع الاسم هنا </Label>  \n\n ويحيط بكل حقل علامتي </Field>.
+
+#__________________________________=Additional Comments\n1. XML is case-sensitive\n2. quotes around type name can be single or double (as long as they match)\n3. A Boolean field will be displayed as a checkbox when editing and Yes/No when printed.\n\nHere are some examples:\n\n<Field type='STRING'>\n<Tag>custom1</Tag>\n<Label>Witness Name</Label>\n</Field>\n\n<Field type='LANGUAGE'>\n<Tag>new2</Tag>\n<Label>Witness Speaks</Label>\n</Field>\n\n<Field type='BOOLEAN'>\n<Tag>new3</Tag>\n<Label>Were guns used?</Label>\n</Field>\n\n<Field type='GRID'>\n<Tag>customgrid</Tag>\n<Label>Victim Information</Label>\n<GridSpecDetails>\n<Column><Label>Name of Victim</Label></Column>\n<Column><Label>Victim Age</Label></Column>\n<Column><Label>Victim Gender</Label></Column>\n<Column><Label>Victim Ethnicity</Label></Column>\n</GridSpecDetails>\n</Field>\n
+-eac7-field:CreateCustomFieldsHelp3=تعليقات إضافية\n1. تعتبر ملفات XML حساسة لنوع الحروف اللاتينية كبيرة كانت أم صغيرة\n2. يمكن لعلامتي التنصيص أن تكونا مفردتين أو مزدوجتين (طالما كانتا من نوع واحد) \n3. سيتم عرض حقل الإثبات أو النفي كمربع اختيار عند التحرير و يتم عرضه ككلمتي "نعم أو لا" عند الطباعة. \n\n وها هي بعض الأمثلة: \n\n<Field type='STRING'>\n<Tag>جديد1</Tag>\n<Label>اسم الشاهد</Label>\n\n </Field>\n\n<Field type='LANGUAGE'>\n<Tag>جديد2</Tag>\n<Label>الشاهد يتحدث</Label>\n\n</Field>\n\n<Field type='BOOLEAN'>\n<Tag>جديد3</Tag>\n<Label>هل تم استخدام أسلحة؟</Label>\n</Field>\n\n<Field type='GRID'>\n<Tag>customgrid</Tag>\n<Label>معلومات عن الضحية </Label>\n<GridSpecDetails>\n<Column><Label>اسم الضحية </Label></Column>\n<Column><Label>عمر الضحية </Label></Column>\n<Column><Label>نوع الضحية </Label></Column>\n<Column><Label>عرق الضحية </Label></Column>\n</GridSpecDetails>\n</Field>\n 
+
+#____________________________________=Please enter your new username and password.
+-aec2-field:CreateNewUserNamePassword=لطفا قم بإدخال اسم المستخدم وكلمة المرور 
+
+#____________________=Exact Date
+-8a81-field:DateExact=التاريخ الفعلي
+
+#____________________=Date Range
+-6bb4-field:DateRange=المدى الزمني
+
+#________________________=Between
+-1b22-field:DateRangeFrom=بين 
+
+#______________________=and
+-cffa-field:DateRangeTo=و 
+
+#_____________________________=Default Details
+-4a82-field:DefaultDetailFiles=التفاصيل التلقائية
+
+#_________________________________=This bulletin has been pasted into Martus from the file:
+-ce4c-field:DeleteBulletinFileMsg1=لقد تم نسخ هذه النشرة في Martus من الملف:
+
+#_________________________________=Do you want to delete the original file, or leave it in place?
+-3425-field:DeleteBulletinFileMsg2=هل تريد حذف الملف الأصلي أم تتركه مكانه؟
+
+#_____________________=Delete?
+-042d-field:DeleteFlag=حذف؟ 
+
+#________________________=Delete key File
+-5c38-field:DeleteKeypair=حذف ملف شفرتي الدخول 
+
+#____________________________________=You can only delete draft bulletins from the server that are not currently on your computer.
+-8ded-field:DeleteServerDraftsMessage=يمكنك فقط حذف المسودات الموجودة على الخادم ولا توجد حاليا على حاسوبك.
+
+#______________________=Do not prompt
+-448d-field:DonotPrompt=لا تنبيه
+
+#________________________________=Unable to back up the key file on this disk.
+-bda3-field:ErrorBackingupKeyPair=فشل النسخ الاحتياطي لملف شفرتي الدخول على هذا القرص. 
+
+#__________________________________=CODE
+-16de-field:ErrorCustomFieldHeader1=كود
+
+
+#__________________________________=TYPE
+-6e98-field:ErrorCustomFieldHeader2=نوع
+
+#__________________________________=TAG
+-41ea-field:ErrorCustomFieldHeader3=رمز
+
+#__________________________________=LABEL
+-64b8-field:ErrorCustomFieldHeader4=عنوان
+
+#____________________________=There is an error in the custom field definitions. Each problem is identified with the following codes:\n   100 - Required standard field is missing\n   101 - Custom field does not have a correct tag.\n   102 - A previous Tag already exists with this name.\n   103 - Custom field does not have a label.\n   104 - Unrecognized Field Type.\n   105 - A label was found in a standard field.\n   106 - XML Parse Error.\n   107 - Tag contains illegal characters
+-943a-field:ErrorCustomFields=توجد مشكلة في تعريفات الحقول المُعدلة. يتم تعريف كل مشكلة بكل من الرموز الآتية:\n  100 – لم يتم العثور على الحقل الأساسي المطلوب\n  101 – الحقل المعدل ليس له رمز صحيح.\n  102 – يوجد رمز سابق بنفس الاسم.\n  103 – الحقل المعدل لا يحمل عنوانا.\n  104 – نوع حقل لم يتم التعرف عليه.  105 – لقد تم العثور على عنوان في الحقل الأساسي.\n  106 – مشكلة تحويل XML.\n  107 – يحتو الرمز على حروف غير مسموح بها
+
+#_________________________________________=A previous backup file exists.  You must save each file on its own removable media disk.
+-db93-field:ErrorPreviousBackupShareExists=يوجد ملف مجزأ سابق. يجب عليك حفظ كل ملف على قرص بمفرده. 
+
+#_____________________________________________=No appropriate backup file was found on this disk, please try a different disk.
+-618a-field:ErrorRecoverNoAppropriateFileFound=لم يتم العثور على ملف مجزأ صالح على هذا القرص، لطفا جرّب قرصا آخر. 
+
+#________________________________=An error occurred reading this key backup file.
+-b106-field:ErrorRecoverShareDisk=توجد مشكلة في قراءة هذا الملف المجزأ. 
+
+#_____________________________________=An error occurred verifying this key backup file.
+-df17-field:ErrorVerifyingKeyPairShare=توجد مشكلة في التحقق من هذا الملف المجزأ. 
+
+#___________________________=Exit when complete
+-30e3-field:ExitWhenComplete=اخرج بعد الانتهاء 
+
+#________________________________=Information from the selected bulletins (listed below) will be exported to an XML file that you specify.\n\nPlease Note: This is a one way operation, you will not be able to import the XML file saved back into Martus.  This operation exists so you can bring Martus Bulletins into another application that does import XML files.
+-7ae7-field:ExportBulletinDetails=سيتم تصدير المعلومات الموجودة في النشرات المُختارة (المصنفة أسفله) إلى ملف XML تقوم بتحديده. \n\nرجاء ملاحظة: هذه عملية ذات مسار واحد، أي أنه لن يمكنك استيراد ملف XML مرة أخرى إلى Martus. تتوافر هذه العملية حتى يمكنك جلب نشرات Martus إلى تطبيق آخر يدعم استيراد ملفات XML.
+
+#____________________________=Include private data in export
+-4bb6-field:ExportPrivateData=تضمين بيانات خاصة في التصدير
+
+#____________________________=Exported Bulletins
+-0b4e-field:ExportedBulletins=النشرات المُصّدرة
+
+#______________________________________=This file name should be unique and identifiable to you but we recommend not using your user name.  Each file will be generated with this name and its number sequence.
+-02b6-field:GetShareFileNameDescription=يجب أن يكون اسم هذا الملف فريدا و يسهل عليك معرفته ولكننا لا نوصي باستخدام اسم المستخدم الخاص بك. سيتم إنشاء كل ملف بهذا الاسم بالإضافة إلى رقم الترتيب.
+
+#_________________________=Headquarters
+-6222-field:HQSummaryLabel=المركز الرئيسي
+
+#________________________________=These Headquarters accounts are allowed to view the private information in this bulletin, and to send this bulletin to a server on your behalf.
+-2274-field:HQsSetAsProxyUploader=حسابات المركز الرئيسي هذه يُسمح لها بالإطلاع على المعلومات الخاصة بهذه النشرة و بإرسال هذه النشرة إلى الخادم نيابة عنك.
+
+#_____________________________=Enter questions, details, or other information your organization wants to have answered in future bulletins created.
+-704c-field:HelpDefaultDetails=قم بإدخال أسئلة وتفاصيل ومعلومات أخرى تريد منظمتك إجابة لها في نشرات تقوم بإنشائها في المستقبل.
+
+
+#_____________________________________=Were there any witnesses?
+-d8c8-field:HelpExample1DefaultDetails=هل كان هناك أي شهود؟ 
+
+#_____________________________________=List Victim Names and Ages:
+-d4c9-field:HelpExample2DefaultDetails=اذكر أسماء و أعمار الضحايا:
+
+#____________________________________=Example:
+-c637-field:HelpExampleDefaultDetails=مثال: 
+
+#_______________________________________=etc...
+-5e9b-field:HelpExampleEtcDefaultDetails=إلخ...
+
+#____________________________________=When choosing a password, it is important not to use a password that is easy to guess like names, important dates of events or simple words.  Try adding numbers to random letters and making the password long.  Remember your password, but do not share it.  No one else has access to the password if you forget it, so if you write it down, put it in a safe place.
+-65cc-field:HelpOnCreatingNewPassword=عندما تختار كلمة مرور، من المهم ألاّ تستخدم كلمة مرور يسهل على الغير تخمينها، مثل الأسماء وتواريخ الأحداث الهامة أو كلمات بسيطة. قم بإضافة أرقام لحروف عشوائية واجعل كلمة المرور طويلة. تذكر كلمة مرورك ولا تبوح بها لأحد. لن يصل أحد لكلمة مرورك إذا نسيتها، لذا إذا كتبتها على ورقة، ضعها في مكان آمن.
+
+#____________________________________=No accounts exist on this computer.  To create a new account click OK.  Otherwise you can click on the Restore Account tab to restore an account which was previously backed up.
+-7d69-field:HowToCreateInitialAccount=لا توجد حسابات على هذا الحاسوب. لإنشاء حساب جديد انقر "استمر." و إلاّ فانقُر على زر "استعادة حساب" لاستعادة حساب قمت بحفظه احتياطيا مسبقا. 
+
+#________________________________=One or more accounts already exist on this computer. To create an additional account with a new username and passphrase, click OK.
+-02f2-field:HowToCreateNewAccount=يوجد حسابا أو أكثر على هذا الحاسوب بالفعل. لإنشاء حساب إضافي باسم مستخدم و كلمة مرور جديدين، انقر "استمر."
+
+#_______________________=Warning: Portions may be missing or damaged
+-00a9-field:MayBeDamaged=تحذير: قد تكون بها أجزاء ناقصة أو خربة. 
+
+
+#_______________________________=#NumberOfHQs# Headquarter account(s) will be able to view this private information
+-da24-field:ModifyBulletinHQInfo=يمكن لعدد #NumberOfHQs# من حسابات المركز الرئيسي أن يطلع على هذه المعلومات الخاصة
+
+#__________________________________________=The following Headquarter account(s) will be able to view the private information in this bulletin, or send this bulletin to a server, after you save it:\n\n#L#\n\nTo add or remove an account, use the Tools/Configure Headquarters menu option.
+-df1d-field:ModifyViewBulletinDetailsHQList=حسابات المركز الرئيسي الآتية ستكون لها إمكانية الإطلاع على المعلومات الخاصة بهذه النشرة أو إرسال النشرة للخادم بعدما تقوم بحفظها: \n\n#L#\n\n لإضافة أو حذف حساب، قم باستخدام قائمة أدوات/تهيئة المركز الرئيسي.
+
+#_____________________________=Please enter a name for the file you wish to export.
+-95ed-field:NameOfExportedFile=لطفا قم بإدخال اسما للملف الذي تود تصديره.
+
+#___________________________________________=Server Not Available
+-c79c-field:NoServerAvailableProgressMessage=الخادم غير متاح
+
+#_____________________________=Remember: Entering your password using the regular keyboard may reduce security.
+-55fa-field:NormalKeyboardMsg1=تذكر: إدخال كلمة مرورك باستخدام لوحة المفاتيح العادية قد يعرضها للسرقة.
+
+#_____________________________=For maximum security switch to the on-screen keyboard.
+-8167-field:NormalKeyboardMsg2=لأقصي درجة أمن، استخدم لوحة مفاتيح النافذة.
+
+#_____________________________________=The author has not given you permission to view the private portions of this bulletin.
+-ba2f-field:NotAuthorizedToViewPrivate=لم يمنحك المؤلف حق الإطلاع على الأجزاء الخاصة بهذه النشرة.
+
+#____________________________=Details:
+-1daa-field:OnlineHelpMessage=التفاصيل:
+
+#_______________________________=Topics:
+-3a8c-field:OnlineHelpTOCMessage=الموضوعات:
+
+#__________________________________________=Click on topic to display details.
+-2a14-field:OnlineHelpTOCMessageDescription=انقر على موضوع لعرض التفاصيل
+
+#_______________________________=Organization (required)
+-2f27-field:OrganizationRequired=المنظمة (ضروري)
+
+#___________________________=Include private data in print out.
+-c6f6-field:PrintPrivateData=السماح للبيانات الخاصة بأن تظهر في الطباعة.
+
+#__________________________________=You have the option to include or exclude the selected bulletin’s private information in this print out.\n\nTo only print public information, do not mark the checkbox below.\n\nIf you do mark the checkbox, anyone who sees the print out will be able to read your private data.
+-602c-field:PrintPrivateDataMessage=لك أن تختار إما تضمين أو استثناء المعلومات الخاصة في النشرة المختارة من هذا المطبوع.\n\nلكي تطبع المعلومات العامة فقط، لا تقم بالنقر على مربع الاختيار أسفله.\n\nأما إذا قمت بالنقر عليه فإن كل من يقرأ المطبوع سيطلع على بياناتك الخاصة.
+
+#_________________________________=Public Information Files
+-90f9-field:PublicInformationFiles=ملفات المعلومات العامة
+
+#___________________________________=Clicking on Ok will do the following on this computer:
+-70e6-field:QuickEraseFollowingItems=إذا نقرت على "استمر" فسيحدث الآتي على هذا الحاسوب:
+
+#___________________________________=Exit Martus when complete.
+-23dc-field:QuickEraseWillExitMartus=قم بإنهاء   Martusبعد إتمام العمل.
+
+#_______________________________________=This will NOT remove any bulletins from the server, any Martus files copied outside of the Martus directory, or any of your bulletins or Martus files on another computer.
+-8ee9-field:QuickEraseWillNotRemoveItems=لن يتم بذلك إزالة أية نشرات من الخادم أو أية ملفات تابعة لبرنامج Martus تم نسخها خارج مساره أو أية نشرات أو ملفات تخص برنامج Martus على حاسوب آخر.
+
+
+#____________________________________=Delete your Martus key, bulletins, folders, and configuration information (such as your Headquarters, server, and custom field settings).
+-cf3b-field:QuickEraseWillRemoveItems=حذف شفرة و نشرات و مجلدات و معلومات التهيئة (مثل الخادم و مركزك الرئيسي و أوضاع الحقول المعدلة) لبرنامج Martus الخاص بك.
+
+
+#_________________________=Restore your existing account from a backup file.
+-c2a2-field:RecoverAccount=استرجع حسابك القائم من ملف احتياطي. 
+
+#_________________________________________________________=IMPORTANT: There are other Martus accounts on this system.
+-e62e-field:RemoveMartusFromSystemMultipleAccountsWarning1=توجد حسابات أخرى لبرنامج Martus على هذا النظام.
+
+
+#_________________________________________________________=All of their data will be removed as well!
+-8e74-field:RemoveMartusFromSystemMultipleAccountsWarning2=سيتم حذف بياناتهم كلها كذلك!
+
+#________________________________________=WARNING!
+-83d3-field:RemoveMartusFromSystemWarning=تحذير!
+
+#________________________________________________=Delete the Martus directory and all of its contents.
+-9a43-field:RemoveMartusWillDeleteMartusDirectory=قم بحذف مجلد Martus و جميع ما يحتويه.
+
+
+#_________________________________________________=Delete all other Martus accounts, including their key, folders, and bulletins.
+-224e-field:RemoveMartusWillRemoveAllOtherAccounts=حذف جميع حسابات Martus الأخرى بما فيها شفرتها و مجلداتها و نشراتها.
+
+
+#____________________________________=Uninstall the Martus program.
+-2001-field:RemoveMartusWillUninstall=إزالة برنامج Martus.
+
+#_____________________________=The following server will be removed:
+
+-5316-field:RemoveServerLabel1=سيتم إزالة الخادم التالي: 
+
+#_____________________________=Are you sure you want to do this?
+-bfb8-field:RemoveServerLabel2=هل تريد فعلا القيام بذلك؟
+
+#__________________________________________=Retrieving Field Desk Draft Bulletins
+-c881-field:RetrieveHQDraftBulletinProgress=استرجاع مسودات الموقع 
+
+#___________________________________________=Retrieving Field Desk Draft Bulletin Summaries
+-b700-field:RetrieveHQDraftBulletinSummaries=استرجاع ملخصات مسودات الموقع
+
+#___________________________________________=Retrieving Field Desk Sealed Bulletins
+-d2bb-field:RetrieveHQSealedBulletinProgress=استرجاع نشرات الموقع المختومة
+
+#____________________________________________=Retrieving Field Desk Sealed Bulletin Summaries
+
+-0221-field:RetrieveHQSealedBulletinSummaries=استرجاع ملخصات نشرات الموقع المختومة
+
+#__________________________________________=Retrieving My Draft Bulletins
+-61c0-field:RetrieveMyDraftBulletinProgress=استرجاع مسوداتي
+
+#___________________________________________=Retrieving My Draft Bulletin Summaries
+-58e0-field:RetrieveMyDraftBulletinSummaries=استرجاع ملخصات مسوداتي
+
+#___________________________________________=Retrieving My Sealed Bulletins
+-cec0-field:RetrieveMySealedBulletinProgress=استرجاع نشراتي المختومة
+
+#____________________________________________=Retrieving My Sealed Bulletin Summaries
+-828a-field:RetrieveMySealedBulletinSummaries=استرجاع ملخصات نشراتي المختومة
+
+#___________________________________=All bulletins retrieved will still remain on the server.\nYou can only retrieve bulletins that are not currently on your computer.
+-fdb6-field:RetrieveSummariesMessage=جميع النشرات التي تم استرجاعها لا تزال باقية على الخادم. \nيمكنك فقط استرجاع النشرات غير المتواجدة على حاسوبك.
+
+#____________________________________=Please retype your username and password for verification.
+-67cd-field:RetypeUserNameAndPassword=لطفا أعد كتابة اسم المستخدم و كلمة المرور للتأكيد
+
+
+#________________________________=Scrub data before deleting
+-7a0b-field:ScrubDataBeforeDelete=كشط البيانات قبل الحذف
+
+#______________________________=When searching for bulletins you can add key words (or, and) between multiple search term words (e.g. prison or jail, prison and assault).  If you enter multiple search terms without keywords, Martus will search for the exact phrase you entered.  Do not use quotation marks in your search.  The 'starting on' and 'ending on' dates will further refine your search matching either the event date or the date entered.  If you leave the search text blank Martus will perform only a date search.
+-ac8c-field:SearchBulletinRules=عند البحث عن نشرات يمكنك إضافة الكلمات الاستدلالية "أو / or "، "و/ and " سواء بالإنجليزية أو العربية بين عدة كلمات (مثل: سجن أو معتقل، سجن و اعتداء). إذا أدخلت عدة كلمات للبحث عنها بدون كلمات إستدلالية، سوف يقوم Martus بالبحث عن العبارة التي أدخلتها بالضبط. لا تستخدم أية علامات تنصيص في البحث. سوف تغربل تواريخ "بداية من" و "حتى يوم" البحث الذي تقوم به فتجد النشرة بتاريخ الحدث الذي تتناوله أو بتاريخ إنشائها. إذا تركت نص البحث فارغا سيقوم Martus ببحث تأريخي. 
+
+
+#________________________=Ending on:
+-2412-field:SearchEndDate=:حتى يوم
+
+#______________________=Search for:
+-0c73-field:SearchEntry=بحث عن: 
+
+#__________________________=Starting on:
+-6fa2-field:SearchStartDate=:بداية من
+
+#_______________________________=You will be allowed to upload bulletins to this server.
+-0718-field:ServerAcceptsUploads=يسمح لك بإرسال النشرات لهذا الخادم.
+
+#_____________________________________________=The current server has updated its statement describing its compliance with the official guidelines for the secure and reliable operation of a Martus server.  The new statement appears below. You can accept or reject this server based on its compliance statement.
+-2acb-field:ServerComplianceChangedDescription=قام الخادم الحالي بتحديث بيانه واصفا تماشيه مع الإرشادات الرسمية التي يتبعها خادم Martus للقيام بعمله بكفاءة و سريّة. يظهر البيان الجديد بالأسفل. يمكنك قبول أو رفض هذا الخادم بناء على بيان توافقه.
+
+#______________________________________=The server you have selected has provided the following statement describing its compliance with the official guidelines for the secure and reliable operation of a Martus server.  You can accept or reject this server based on its compliance statement.
+-276f-field:ServerComplianceDescription=قام الخادم الذي اخترته بإصدار البيان التالي الذي يصف تماشيه مع الإرشادات الرسمية التي يتبعها خادم Martus للقيام بعمله بكفاءة و سريّة. يمكنك قبول أو رفض هذا الخادم بناء على بيان توافقه.
+
+#________________________________=You will not be allowed to upload bulletins to this server.
+-3a97-field:ServerDeclinesUploads=لا يُسمح لك بإرسال نشرات لهذا الخادم.
+
+#_______________________________=Server Magic Word:
+-ad90-field:ServerMagicWordEntry=كلمة الخادم السحرية: 
+
+#__________________________=Server name or IP address:
+-aa94-field:ServerNameEntry=اسم الخادم أو عنوان IP الخاص به: 
+
+#_____________________________________________=Server needs to be configured.
+-26de-field:ServerNotConfiguredProgressMessage=يلزم تهيئة الخادم. 
+
+#________________________________=Server Public Identification Code:
+-0cf3-field:ServerPublicCodeEntry=:كود التعريف العام للخادم
+
+#_________________________________=The following server has been selected:
+-d09b-field:ServerSelectionResults=تم اختيار الخادم التالي: 
+
+
+#___________________________________=Human Rights Bulletin System
+-fe5b-field:SplashProductDescription=نظام Martus لنشرات حقوق الإنسان 
+
+
+#______________________=Ready
+-20c7-field:StatusReady=جاهز
+
+#__________________________=Details
+-dc3d-field:TemplateDetails=التفاصيل 
+
+#__________________________=Uninstall Martus
+-08ea-field:UninstallMartus=إزالة Martus
+
+#__________________________=Unknown
+-bc78-field:UnknownDateSave=مجهول
+
+#___________________________=WARNING: This field requires a newer version of Martus to be viewed
+-390c-field:UnknownFieldType=تحذير: يتطلب هذا الحقل إصدارا أحدث من برنامج Martus حتى يتم استعراضه
+
+#___________________________=Untitled Bulletin
+-5ea8-field:UntitledBulletin=نشرة غير معنونة 
+
+#______________________________________=Upload Failed
+-88c1-field:UploadFailedProgressMessage=فشل الإرسال
+
+#_________________________________=Sending Draft Bulletin
+-8ea2-field:UploadingDraftBulletin=إرسال مسودة نشرة
+
+#__________________________________=Sending Sealed Bulletin
+-6231-field:UploadingSealedBulletin=إرسال نشرة مختومة 
+
+#_____________________________=#NumberOfHQs# Headquarter account(s) can view this private information
+-5ffa-field:ViewBulletinHQInfo=عدد #NumberOfHQs# من حسابات المركز الرئيسي يمكنه الإطلاع على هذه المعلومات الخاصة
+
+
+#________________________________________=The following Headquarter account(s) can view the private information in this bulletin, and can send this bulletin to a server:\n\n#L#
+-4500-field:ViewViewBulletinDetailsHQList=حسابات المركز الرئيسي التالية يمكنها الإطلاع على المعلومات الخاصة بهذه النشرة و يمكنها إرسال هذه النشرة إلى خادم: #L#\n\n
+
+
+#___________________________________=Back Space
+-7ae6-field:VirtualKeyboardBackSpace=رجوع للخلف
+
+#______________________________=ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890-+=!@#$%^&*()_,.[]{}<>\/?|;:~
+-25df-field:VirtualKeyboardKeys=ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890-+=!@$%^&*()_,.[]{}<>\/?|;:~ أبتثجحخدذرزسشصضطظعغفقكلمنهوي
+
+
+#_______________________________=Space
+-6d8c-field:VirtualKeyboardSpace=مسافة 
+
+#_____________________________________=Enter Password using mouse with on-screen keyboard below
+-d6ef-field:VirtualPasswordDescription=قم بإدخال كلمة المرور باستخدام الفأرة و لوحة مفاتيح النافذة بالأسفل 
+
+#_____________________________________=(Enter using regular keyboard)
+-6332-field:VirtualUserNameDescription=إدخال باستخدام لوحة المفاتيح العادية
+
+#____________________=No
+-816c-field:WasSentNo=لا
+
+#_____________________=Yes
+-5397-field:WasSentYes=نعم
+
+#____________________________=Built on
+-5342-field:aboutDlgBuildDate=إنشاء في
+
+#__________________________=Martus Software is developed by Benetech in partnership with the Information Program of the Open Society Institute, Aspiration, and the John D. and Catherine T. MacArthur Foundation.
+-3033-field:aboutDlgCredits=قامت شركة Benetech بتطوير برنامج Martus بالتعاون مع برنامج المعلومات بمعهد المجتمع المفتوح (Open Society Institute)، و منظمة أسبيريشن (Aspiration)، و مؤسسة جون دي و كاترين تي. ماك أرثر (John D. and Catherine T. MacArthur Foundation). 
+
+
+#_____________________________=Martus comes with ABSOLUTELY NO WARRANTY, and is made available under license terms in the file named license.txt in the Martus directory. This is free software, and you are welcome to redistribute it under certain conditions discussed in license.txt. 
+-8b41-field:aboutDlgDisclaimer=ليس لبرنامج Martus أية ضمانات، ويتم إصداره تحت شروط الترخيص المذكورة في ملف license.txt الموجود في مجلد Martus. هذا البرنامج برنامج مجاني ونرحب بتوزيعك إياه تحت شروط معينة مذكورة في license.txt.
+
+#______________________________=software version
+-f2cc-field:aboutDlgVersionInfo=إصدار البرنامج
+
+#__________________=Mailing Address
+-e6af-field:address=العنوان البريدي 
+
+#_____________________=Keep ALL Information Private
+-9b5e-field:allprivate=اجعل جميع المعلومات خاصة 
+
+#______________________=Attachments
+-6771-field:attachments=مرفقات
+
+#_________________=Author
+-5fda-field:author=الكاتب
+
+#______________________=Authorizing...
+-5086-field:authorizing=... تفويض
+
+#_______________________________________________=Save your password encrypted key backup file to a single floppy disk or other removable media.  Then store this disk in a safe place. You will use this disk, with your username and password, to restore your data if your system files are ever damaged.  To restore this password-protected key in the future, select 'Restore Account' and 'Restore account from backup key file' when signing into Martus.
+-e692-field:confirmBackupKeyPairInformationcause=قم بحفظ ملف شفرتي دخولك المُشفر بكلمة مرور إلى قرص مرن واحد أو أي وسيط متنقل. ثم قم بتخزين القرص في مكان آمن. سوف تستخدم هذا القرص مع كلمة مرورك واسم المستخدم لاستعادة بياناتك إذا حدث و تلفت ملفات النظام. لاستعادة هذا الملف المُشفر بكلمة مرور في المستقبل، اختر "استعادة حساب" و "استعادة حساب بملف شفرتي دخول احتياطي" عندما تدخل لحسابك في برنامج Martus.
+
+#________________________________________________=Choosing Yes will begin the backup process.
+-0b47-field:confirmBackupKeyPairInformationeffect=باختيار نعم ستبدأ عملية النسخ الاحتياطي.
+
+#_______________________________________________=We recommend that you now create #M# separate key backup files of which any #N# can be used to reconstruct your key without a user name or password being required.
+-a4d8-field:confirmBackupKeyPairSecretSharecause=نوصي بإنشاء #M# ملفات "مجزئة سريا" يمكن استخدام #N# منها لإعادة إنشاء ملف شفرتي دخولك دون الحاجة لاسم مستخدم أو كلمة مرور. 
+
+#________________________________________________=By choosing Yes, you will be prompted to save pieces of your key onto removable disks.
+-efaa-field:confirmBackupKeyPairSecretShareeffect=باختيار نعم سيُطلب منك حفظ قطع ملف شفرتي دخولك على أقراص متنقلة. 
+
+#________________________________________________=We strongly recommend that you now verify all disks to make sure the data was written correctly.
+-ee28-field:confirmBackupKeyShareVerifyDiskscause=نوصي بشدة بأن تقوم الآن بالتأكد من صلاحية جميع الأقراص حتى تتم كتابة البيانات عليها بطريقة صحيحة.
+
+#_________________________________________________=By choosing Yes, the verification process will begin.
+-fdd0-field:confirmBackupKeyShareVerifyDiskseffect=باختيار نعم ستبدأ عملية التحقق من صلاحية الأقراص.
+
+#___________________________________________=Do you wish to cancel the key  restore process?
+-16cb-field:confirmCancelBackupRecoverycause=هل تود إلغاء عملية استرجاع ملف شفرتي الدخول؟
+
+#____________________________________________=By choosing Yes, you will exit Martus.
+-49e1-field:confirmCancelBackupRecoveryeffect=باختيار نعم، سينغلق برنامج Martus. 
+
+#___________________________________________=You have chosen to cancel modifying this bulletin.
+-deab-field:confirmCancelModifyBulletincause=لقد اخترت إلغاء تعديل هذه النشرة.
+
+#____________________________________________=Any changes you have made to this bulletin will be discarded.
+-3819-field:confirmCancelModifyBulletineffect=سيتم التغاضي عن أية تغييرات قمت بإجرائها في هذه النشرة.
+
+#________________________________________=Do you wish to cancel this backup?
+-7b46-field:confirmCancelShareBackupcause=هل تود إلغاء هذا النسخ الاحتياطي؟
+
+#_________________________________________=By choosing Yes, you will exit this backup.
+-5319-field:confirmCancelShareBackupeffect=باختيار نعم سيلغ البرنامج عملية النسخ الاحتياطي. 
+
+#_________________________________________=Do you wish to cancel the key restore process?
+-a7e1-field:confirmCancelShareRecovercause=هل تود إلغاء عملية استعادة ملف شفرتي الدخول؟
+
+#__________________________________________=By choosing Yes, you will exit Martus.
+-49e1-field:confirmCancelShareRecovereffect=باختيار نعم، سينغلق برنامج Martus. 
+
+#________________________________________=Do you wish to cancel the verification?
+-40ae-field:confirmCancelShareVerifycause=هل تود إلغاء عملية التحقق؟
+
+#_________________________________________=By choosing Yes, you will exit this verification step.
+-5b61-field:confirmCancelShareVerifyeffect=باختيار نعم، سينته البرنامج من خطوة التحقق هذه. 
+
+#_________________________________________=You have chosen to remove your Headquarters account.  Any existing saved bulletins will still be visible by the old Headquarters.  If you want to disallow Headquarters viewing access to previously created Draft bulletins they must be re-saved after revoking the Headquarters.  Any sealed bulletins CANNOT be reset to be non-viewable by the Headquarters.
+-6076-field:confirmClearHQInformationcause=لقد اخترت إزالة حساب المركز الرئيسي. ومع ذلك، سيزال هذا الحساب يطلّع على النشرات التي سبق حفظها. إذا أردت أن تمنع المركز الرئيسي من الإطلاع على المسودات التي تم إنشائها مسبقا فيجب عليك إعادة حفظها بعدما تحجب المركز الرئيسي عن رؤيتها. و لن تستطيع حجب أية نشرات مختومة عن إطلاع المركز الرئيسي. 
+#__________________________________________=By clicking on Yes, any draft or sealed bulletins saved in the future will no longer be accessible by your Headquarters.
+-4a87-field:confirmClearHQInformationeffect=بنقرك على نعم لن يستطع المركز الرئيسي الوصول إلى أية نشرات يتم حفظها أو ختمها في المستقبل. 
+
+#__________________________________________=You have chosen to modify a bulletin that was created by someone else.
+-b384-field:confirmCloneBulletinAsMinecause=لقد اخترت تعديل نشرة أنشئها شخص آخر.
+
+#___________________________________________=Clicking on Yes will create a new bulletin that contains a copy of all the same information. You will be the official author of this new bulletin, and any private data in it will only be visible by you (and your Headquarters, if you have one). The original bulletin will remain unchanged.
+-f291-field:confirmCloneBulletinAsMineeffect=بالنقر على نعم سيتم إنشاء نشرة جديدة تحتوي على نسخة من نفس المعلومات. ستصبح أنت الكاتب الرسمي لهذه النشرة الجديدة، و لن يستطيع الوصول إلى أية بيانات خاصة فيها غيرك (و مركزك الرئيسي، إن كان لك مثل ذلك المركز). و ستبقى النشرة الأصلية دون تغيير. 
+
+#___________________________________________=You have chosen to modify one of your sealed bulletins, but sealed bulletins cannot be modified.
+-55b1-field:confirmCloneMySealedAsDraftcause=لقد اخترت تعديل واحدة من نشراتك المختومة، ولكن لا يمكن تعديل النشرات المختومة.
+
+#____________________________________________=Clicking on Yes will create a new bulletin that contains all the same information, and the original sealed bulletin will remain unchanged.
+-bec9-field:confirmCloneMySealedAsDrafteffect=بالنقر على نعم سيتم إنشاء نشرة جديدة تحتوي على جميع المعلومات ذاتها، ولكن النشرة المختومة الأصلية ستبقى دون تغيير.
+
+#___________________________________=You are about to delete your Martus data from this computer.
+-ee9a-field:confirmDeleteMyDatacause=سوف تحذف بيانات برنامج Martus الخاصة بك من على هذا الحاسوب.
+
+#____________________________________=Answering Yes will delete your data and exit Martus.  Answering No will return you to Martus with nothing deleted.
+-7f90-field:confirmDeleteMyDataeffect=إذا أجبت ب"نعم" فسوف يتم حذف بياناتك و يُغلق برنامج Martus. أما إذا أجبت ب"لا" فسوف تعود لبرنامج Martus دون حذف شيء. 
+
+
+#__________________________________________=Please Note: There are draft bulletins that have been modified and not yet sent to a server.  Do you still want to exit?
+-49ee-field:confirmDraftUploadRemindercause=لطفا ملاحظة: توجد مسودات تم تعديلها و لم يتم إرسالها لخادم. هل مازلت تريد الإنهاء؟
+
+#___________________________________________=Clicking on Yes will exit Martus, and leave the unsent bulletins.  They will be sent the next time you run Martus and connect to a server.
+-7c7f-field:confirmDraftUploadRemindereffect=بالنقر على نعم سينغلق Martus و سوف تُترك النشرات التي لم ترسل. ولكن سيتم إرسال هذه النشرات إلى الخادم عندما تقوم بتشغيل Martus مرة أخرى. 
+
+#__________________________________________________=The bulletin you have chosen to modify contains information that this version of Martus cannot understand. It may have been created by a newer version of Martus, so you should ensure that you are running the latest version.
+-1233-field:confirmEditBulletinWithUnknownTagscause=تحتوي النشرة التي تريد تعديلها على معلومات لا يستطيع هذا الإصدار من Martus فهمها. ربما قد تم إنشائها بإصدار أحدث من البرنامج، لذا ينبغي عليك التأكد من استخدام آخر إصدار.
+
+#___________________________________________________=If you modify this bulletin, the unknown information will be lost.
+-d72b-field:confirmEditBulletinWithUnknownTagseffect=إذا قمت بتعديل هذه النشرة فستضيع المعلومات غير المعروفة.  
+
+#________________________________________=You have chosen to customize the fields that will be used in any new bulletins created by this account.
+-2f98-field:confirmEnterCustomFieldscause=لقد اخترت تعديل الحقول التي سيتم استخدامها في أية نشرات جديدة يقوم هذا الحساب بإنشائها.
+
+#_________________________________________=Customizing fields is an advanced operation, and can be dangerous. You should only proceed if you are certain that you understand the feature.
+-1483-field:confirmEnterCustomFieldseffect=عملية تعديل الحقول هي عملية متقدمة، و قد تسبب مشكلات. ينبغي عليك الاستمرار فقط إذا كنت تفهم هذه الخاصية.
+
+#_________________________________________________=The file you chose is not part of a key backup set.  These files are named '<name you picked>-#.dat' where # is the sequence number in the disk set previously created.
+-2e41-field:confirmErrorRecoverIvalidFileNamecause=لا يعتبر الملف الذي اخترته أحد الملفات الاحتياطية لشفرتي الدخول. تسمى هذه الملفات بهذه الطريقة  >-#.dat"الاسم الذي تختاره<" حيث # هو الرقم التسلسلي في مجموعة الأقراص التي أنشأتها مسبقا.
+
+
+#__________________________________________________=Choosing yes will bring up the file selection dialog again so you may pick a different file.
+-c237-field:confirmErrorRecoverIvalidFileNameeffect=باختيارك نعم سيظهر مربع اختيار الملفات مرة أخرى حتى يتسنى لك اختيار ملف مختلف.
+
+#________________________________________=This will save the private information in the selected bulletins in plain text.
+-817c-field:confirmExportPrivateDatacause=سيتم بذلك حفظ المعلومات الخاصة المتواجدة في النشرات المُختارة في صورة نص بحت.
+
+
+#_________________________________________=Anyone who gets a copy of this file will be able to read all the private data.
+-9965-field:confirmExportPrivateDataeffect=سيتمكن أي شخص يحصل على نسخة من هذا الملف من الإطلاع على جميع البيانات الخاصة.
+
+#________________________________________=One or more of the bulletins you have chosen to export contain information that this version of Martus cannot understand. They may have been created by a newer version of Martus, so you should ensure that you are running the latest version.
+-56f8-field:confirmExportUnknownTagscause=واحدة أو أكثر من النشرات التي تريد تصديرها تحتوي على معلومات يصعُب على هذا الإصدار من Martus فهمها. ربما قد تم إنشائها بإصدار أحدث من البرنامج، لذا ينبغي عليك التأكد من استخدام آخر إصدار.
+
+#_________________________________________=If you continue with the export, any unknown information will not be exported.
+-232e-field:confirmExportUnknownTagseffect=إذا واصلت التصدير فلن يتم تصدير أية معلومات غير معروفة.
+
+#_________________________________________________=A key file already exists for this account.  Do you wish to overwrite it?
+-6829-field:confirmKeyPairFileExistsOverWritecause=يوجد ملف شفرتي دخول بالفعل لهذا الحساب. هل تريد استبداله؟
+
+#__________________________________________________=Clicking on Yes will delete the old key file and replace it with your restored key.
+-167f-field:confirmKeyPairFileExistsOverWriteeffect=بنقرك على نعم سيتم حذف ملف شفرتي الدخول القديم و استبداله بالملف الذي استرجعته. 
+
+#___________________________________________=This account was created with an older version of Martus, which used a different set of folders. The folders need to be migrated to the new format. The migration is automatic, fast, and safe. You cannot run this version of Martus unless you allow this migration.
+-39ae-field:confirmNeedsFolderMigrationcause=لقد تم إنشاء هذا الحساب بإصدار قديم من برنامج Martus و الذي كان يستخدم مجموعة مختلفة من المجلدات. يتوجب تهجير هذه المجلدات إلى هيئة ملفات الإصدار الجديد. عملية التهجير هذه آلية و سريعة و آمنة. لن تتمكن من تشغيل هذا الإصدار من Martus حتى تسمح بهذا التهجير.
+
+#____________________________________________=Answering Yes will allow the migration to proceed.
+-1b41-field:confirmNeedsFolderMigrationeffect=إذا أجبت ب "نعم" سوف تسمح لعملية التهجير بالاستمرار.
+
+#_______________________________________________=Warning: It appears that you are trying to run an older version of Martus.  Running this version of Martus may result in reduced functionality, and some configuration settings created in the newer version will be ignored. We recommend that you upgrade your software.
+-f251-field:confirmNewerConfigInfoFileFoundcause=تحذير: يبدو أنك تحاول تشغيل إصدار قديم من Martus. قد يتسبب تشغيل هذا الإصدار في إيقاف بعض الوظائف، كما أنه سيتم إغفال بعض أوضاع التهيئة التي تم إنشائها في الإصدار الجديد. لذا نوصي بتحديث البرنامج.
+
+#________________________________________________=Answering Yes will continue to use this older version of Martus.  Answering No will exit Martus so you can upgrade to the latest version.
+-3170-field:confirmNewerConfigInfoFileFoundeffect=إذا أجبت ب "نعم" فسوف تستمر في استخدام الإصدار القديم من Martus. أما إذا أجبت ب "لا" فسوف تخرج من البرنامج حتى يتسن لك تحديثه للإصدار الأحدث.
+
+#___________________________________________________________=Warning: the bulletin you are currently viewing is not yours.  Attachments can contain viruses, or malicious programs harmful to your computer.
+-8e42-field:confirmNotYourBulletinViewAttachmentAnywayscause=تحذير: النشرة التي تستعرضها الآن لا تخصك. قد تحتوي المرفقات على فيروسات أو برامج خبيثة تضر بحاسوبك. 
+
+
+#____________________________________________________________=Clicking on Yes will display the attachment, clicking on No will not try to display the attachment.
+-b6bf-field:confirmNotYourBulletinViewAttachmentAnywayseffect=بالنقر على نعم سيتم استعراض المرفق، بالنقر على لا لن يتم استعراضه.
+
+#____________________________________________=A file already exists with that name.
+-8fa3-field:confirmOverWriteExistingFilecause=يوجد ملف بنفس الاسم.
+
+#_____________________________________________=The existing file will be deleted and replaced with the new information.
+-0863-field:confirmOverWriteExistingFileeffect=سيتم حذف الملف الموجود و استبداله بالمعلومات الجديدة.
+
+#_____________________________________=Since you have changed from the default print tray your print out may be incorrect, if you also changed the size of paper used.  You must first select the paper tray and then select the paper size in that order, for both to get set correctly.  If you only wanted to change the paper tray then disregard this message and select 'No'.
+-401e-field:confirmPrinterWarningcause=بما أنك قمت بتغيير إطار الطباعة التلقائي فقد لا تكون طباعتك صحيحة، و أيضا إذا قمت بتغيير حجم الورق المستخدم. يجب عليك الوقوف على   إطار الورق أولا ثم على حجم الورق بذلك الترتيب حتى يتم إعداهما بطريقة صحيحة. إذا كنت تريد تغيير إطار الورق فحسب لا تعبأ بهذه الرسالة و اختر "لا".
+
+#______________________________________=Clicking on Yes will bring back the Printer Dialog so you can reselect your default paper tray and size.  Clicking on 'No' will print the document.
+-824f-field:confirmPrinterWarningeffect=بالنقر على نعم سيتم عرض مربع الطابعة مرة أخرى حتى تستطيع إعادة اختيار إطار و حجم الورق التلقائي. بالنقر على لا سيتم طبع الوثيقة.
+
+#_______________________________________________=Please Note: There are bulletins that have not been sent to a server. If you continue these bulletins will be lost.
+-1c29-field:confirmQuickEraseOutboxNotEmptycause=لطفا ملاحظة: توجد نشرات بمجلد الصادر لم يتم إرسالها للخادم. إذا واصلت هذا الإجراء فسوف تضيع هذه النشرات. 
+
+#________________________________________________=Clicking on Yes will bring you to a confirmation dialog, Clicking on No will return you to Martus without erasing anything.
+-ffe3-field:confirmQuickEraseOutboxNotEmptyeffect=
+بالنقر على "نعم" سيظهر مربع حوار تأكيدي، بالنقر على "لا" ستعود لبرنامجMartus  دون حذف شيء. 
+
+#___________________________________________=Welcome to Martus.  What would you like to do?
+-dd0e-field:confirmRecoverUsingKeySharecause=مرحبا بك في Martus. ماذا تريد أن تفعل؟
+
+#____________________________________________=Create a new account, or restore a previously created account?
+-f6a6-field:confirmRecoverUsingKeyShareeffect=إنشاء حساب جديد أم استرجاع حساب قديم من قرص مرن؟
+
+#______________________________________________________=Key Restore failed, we suggest you try again with a different set of files. Choose Yes to try again, No to exit Martus.
+-cf94-field:confirmRecoveredKeyShareFailedTryAgaincause=فشل استرجاع ملف شفرتي الدخول، نقترح المحاولة ثانية بمجموعة أخرى من الملفات. اختر نعم لتحاول ثانية، اختر لا للخروج من Martus. 
+
+#_______________________________________________________=Choosing Yes will begin the restore process again.
+-cb49-field:confirmRecoveredKeyShareFailedTryAgaineffect=باختيار نعم ستعود عملية الاسترجاع مرة أخرى. 
+
+#_______________________________________=The password you chose has fewer than 15 characters and less than 2 non-alphanumeric characters. We recommend choosing a stronger password.
+-73a6-field:confirmRedoWeakPasswordcause=كلمة المرور التي اخترتها تحتوي على أقل من 15 حرفا و أقل من علامتين ليستا بحروف و لا أرقام. نوصي باختيار كلمة مرور أشد صلابة.
+
+
+#________________________________________=Clicking on Yes will continue with the password you just entered.
+-86eb-field:confirmRedoWeakPasswordeffect=بالنقر على نعم سيتم الاستمرار بكلمة المرور التي أدخلتها للتو.
+
+#_______________________________________=You have chosen to remove the selected attachments from this bulletin.
+-a1a7-field:confirmRemoveAttachmentcause=لقد اخترت إزالة المرفقات المُختارة من هذه النشرة.
+
+#________________________________________=The selected attachments will be permanently removed from this bulletin.
+-3252-field:confirmRemoveAttachmenteffect=ستتم إزالة المرفقات المُختارة إلى الأبد من هذه النشرة.
+
+
+#___________________________________=You are about to delete all Martus data from this computer.
+-af45-field:confirmRemoveMartuscause=سوف تقوم بحذف جميع بيانات Martus من هذا الحاسوب.
+
+#____________________________________=Answering Yes will delete all data, uninstall Martus and exit the program.  Answering No will return you to Martus with nothing deleted.
+-b6a1-field:confirmRemoveMartuseffect=إذا أجبت ب"نعم" سوف تحذف جميع البيانات و ستتم إزالة Martus و الخروج من البرنامج. أما إذا أجبت ب"لا" فسوف تعود لبرنامج Martus دون حذف شيء.
+
+#_______________________________________________________=Do you want to have your contact information sent to the current server?  This information may be sent to other servers, and will be viewable by anyone who has access to your public bulletin information.
+-4809-field:confirmRequestToSendContactInfoToServercause=هل تريد إرسال معلومات الاتصال بك إلى الخادم الحالي؟ قد يتم إرسال هذه المعلومات لخوادم أخرى، و ستكون عرضة لإطلاع أي شخص له صلاحية الوصول للمعلومات العامة بنشراتك.
+
+
+#________________________________________________________=Clicking on Yes will send your contact information to the current server.
+-9c28-field:confirmRequestToSendContactInfoToServereffect=بالنقر على نعم سيتم إرسال معلومات الاتصال بك إلى الخادم الحالي.
+
+#__________________________________________=This will reset the current Default Details contents to the original contents. After resetting the contents, you should review them to be sure they are correct.
+-37bf-field:confirmResetDefaultDetailscause=سيتم بذلك استبدال التفاصيل التلقائية الحالية بالمحتويات الأصلية. بعد استبدال المحتويات يجب عليك استعراضها لضمان صحتها. 
+
+#___________________________________________=After you review the contents, you can accept them, modify them, or press cancel to keep the existing default details.
+-bbcf-field:confirmResetDefaultDetailseffect=بعدما تستعرض المحتويات، يمكنك قبولها أو تعديلها أو النقر على إلغاء للاحتفاظ بالتفاصيل التلقائية الموجودة.
+
+#_________________________________________=You have chosen to save a completed bulletin.
+-a3fe-field:confirmSendWithPublicDatacause=لقد اخترت حفظ نشرة تم استكمالها.
+
+#__________________________________________=This will permanently seal the bulletin and you will not be allowed to make any further modifications to it except by creating a new copy of the bulletin.\n\nThe public information in this bulletin will be released for possible publication on the Martus Search Engine, and may be viewed by people outside your organization.\n\nIf there is information you do not want to be publicly available, either move that data to the private section of the bulletin or check the 'Keep ALL Information Private' box before saving the bulletin.
+-4964-field:confirmSendWithPublicDataeffect=سيتم بذلك ختم النشرة نهائيا و لن تستطيع القيام بأية تعديلات فيها بعد ذلك اللهم إلا قمت بإنشاء نسخة جديدة من تلك النشرة.\n\nسيتم طرح المعلومات العامة بهذه النشرة لكي تُنشر في ميكنة بحث Martus و بذلك قد يطلع عليها أناس من خارج المنظمة التي تعمل لحسابها.\n\nإذا كانت هناك معلومات لا تريد إتاحتها للعامة عليك أن تنقل هذه المعلومات إلى القطاع الخاص من النشرة أو أن تنقر مربع "اجعل جميع المعلومات خاصة" قبلما تقوم بحفظ النشرة. 
+
+
+#_____________________________________________=Martus software is unable to determine whether this server complies with the official guidelines for operating a secure and reliable Martus server.
+-ab16-field:confirmServerComplianceFailedcause=لا يستطيع برنامج Martus تحديد ما إذا كان هذا الخادم يتماشى مع الإرشادات الرسمية لتشغيل خادم Martus يتسم بالأمن و الكفاءة.
+
+#______________________________________________=Benetech recommends that you do not use this server until a compliance statement is made available for you to read.  Continuing will select this non-compliant server anyway.
+-8731-field:confirmServerComplianceFailedeffect=توصي شركة Benetech بألاّ تستخدم هذا الخادم حتى يُصدر بيان توافق تقرأه. بالاستمرار سيتم اختيار هذا الخادم غير المتوافق على أية حال.
+
+#_________________________________________=You have chosen to allow this client the ability to view your public and PRIVATE data.
+-4059-field:confirmSetImportPublicKeycause=لقد اخترت أن تمنح هذا العميل صلاحية استعراض بياناتك العامة و الخاصة. 
+
+#__________________________________________=By clicking on Yes you are authorizing this client to view all portions of your bulletins.
+-9ff2-field:confirmSetImportPublicKeyeffect=بالنقر على نعم ستمنح هذا العميل صلاحية استعراض أجزاء من نشراتك.
+
+#__________________________________________________________=The bulletin entitled "#Title#" already exists in this system.  Do you wish to delete the old bulletin and replace it with this bulletin?
+-2692-field:confirmUnAuthoredBulletinDeleteBeforePastecause=النشرة ذات العنوان "#Title#" تتواجد بالفعل في هذا النظام. هل تريد حذف النشرة القديمة و استبدالها بهذه النشرة؟
+
+
+#___________________________________________________________=Answering Yes will replace the old bulletin with this bulletin.  Answering on No will leave the original bulletin and skip this file.
+-6bf3-field:confirmUnAuthoredBulletinDeleteBeforePasteeffect=إذا أجبت ب"نعم" سيتم استبدال النشرة القديمة بهذه النشرة. أما إذا أجبت ب"لا" فسوف تبقى النشرة الأصلية و سيتم التغاضي عن هذا الملف.
+
+
+#____________________________________________________=Key restore failed, we suggest you try again with a different backup file.
+
+-f6c1-field:confirmUnableToRecoverFromBackupFilecause=فشل استرجاع شفرتي دخولك، نقترح أن تحاول ثانية بملف احتياطي بديل. 
+
+#_____________________________________________________=Choose Yes to begin the restore process again, No to exit Martus.
+-0e22-field:confirmUnableToRecoverFromBackupFileeffect=باختيار نعم ستبدأ عملية الاسترجاع مرة أخرى. و باختيار "لا" سوف يتم الخروج من Martus.
+
+#_______________________________________=You have chosen to revert to the standard set of Martus fields.
+-61a6-field:confirmUndoCustomFieldscause=لقد اخترت التحول لمجموعة حقول Martus الأساسية.
+
+#________________________________________=New bulletins created with this account will not have any custom fields.
+-bf33-field:confirmUndoCustomFieldseffect=لن تحتوي النشرات الجديدة التي ينشئها هذا الحساب على أية حقول مُعدّلة.
+
+#_____________________________________=Please Note: There are bulletins that have not been sent to a server.  Do you still want to exit?
+-d0f3-field:confirmUploadRemindercause=لطفا ملاحظة: توجد نشرات بمجلد الصادر لم يتم إرسالها لخادم بعد. هل مازلت تريد الإنهاء. 
+
+#______________________________________=Clicking on Yes will exit Martus, and leave the unsent bulletins.  They will be sent the next time you run Martus and connect to a server.
+-7c7f-field:confirmUploadRemindereffect=بالنقر على نعم سيتم إنهاء عمل Martus، و ستبقى النشرات التي لم تُرسل وسيتم إرسالها في المرة القادمة التي تبدأ فيها عمل Martus. 
+
+#_______________________________________________=The bulletin you are about to create is based on a previous bulletin whose custom fields are different from your current custom fields.  Do you wish to use the original bulletins custom fields?
+-6d10-field:confirmUseBulletinsCustomFieldscause=النشرة التي تريد إنشائها تعتمد على نشرة سابقة حقولها المعدلة تختلف عن حقولك المعدلة الحالية. هل تريد استخدام الحقول المعدلة للنشرة الأصلية؟ 
+
+
+#________________________________________________=Answering Yes will use the old custom fields and all bulletin data.  Answering No will use your current custom fields and copy all similar fields to the new bulletin but you will loose some of the original bulletins data.
+-3e26-field:confirmUseBulletinsCustomFieldseffect=
+إذا اخترت "نعم" فسوف تستخدم الحقول المعدلة و جميع بيانات النشرة القديمة. إذا أجبت ب"لا" فسوف تستخدم حقولك المعدلة الحالية و سيتم نسخ جميع الحقول المشابهة إلى النشرة الجديدة و لكنك ستفقد بعض بيانات النشرة القديمة. 
+
+
+
+#________________________________________________=Warning: acctmap.txt file in your account's packets directory is missing or is corrupt.  This may indicate someone has tried to tamper with your data or could be caused by a hardware error.
+-61cb-field:confirmWarnMissingAccountMapFilecause=تحذير: لقد ضاع أو تم إتلاف ملف acctmap.txt الموجود في مجلد packets بحسابك. يُشير ذلك إلى أن شخصا حاول العبث ببياناتك أو أن هناك مشكلة بمكونات حاسوبك الصلبة.
+
+#_________________________________________________=Clicking on Yes will delete all of your bulletins and continue to load Martus.  Clicking on No will exit Martus so you can try to recover or repair this file manually.
+-20ee-field:confirmWarnMissingAccountMapFileeffect=بالنقر على نعم سيتم حذف جميع نشراتك و سيستمر تحميل  Martus. بالنقر على لا سيتم غلق Martus حتى يتسنى لك استرجاع أو إصلاح هذا الملف يدويا. 
+
+#__________________________________________________________________=Warning: acctmap.txt.sig file is missing or is corrupt in your account's packets directory.  If you have just upgraded to a new version of Martus this warning is harmless and you should click on No.  Otherwise this may indicate someone has tried to tamper with your data or could be caused by a hardware error.
+-e1b1-field:confirmWarnMissingOrCorruptAccountMapSignatureFilecause=تحذير: لقد ضاع أو تم إتلاف ملف acctmap.txt.sig الموجود في مجلد packets بحسابك. إذا كنت قد قمت بتحديث إصدار Martus بإصدار جديد فلا تعبأ بهذا التحذير و ينبغي عليك النقر على لا. و إلاّ فقد يُشير ذلك إلى أن شخصا حاول العبث ببياناتك أو أن هناك مشكلة بمكونات حاسوبك الصلبة. 
+
+#___________________________________________________________________=Clicking on Yes will try to generate a new acctmap.txt.sig file and continue to load Martus.  Clicking on No will exit Martus.
+-3ca4-field:confirmWarnMissingOrCorruptAccountMapSignatureFileeffect=بالنقر على نعم ستتم محاولة تكوين ملف acctmap.txt.sig و الاستمرار في تفعيل Martus. بالنقر على لا سينتهي عمل البرنامج. 
+
+#__________________________________________________________=Are you sure the directory you chose to save your backup files to is removable?  You cannot save all #M# files to the same location without inserting a new disk for each backup file.
+-75ec-field:confirmWarningPathChosenMayNotBeRemoveablecause=هل أنت متأكد من أن المسار الذي اخترته لحفظ ملفاتك الاحتياطية موجود على وسيط متنقل؟ لا يمكنك حفظ الملفات #M# جميعهم في نفس المكان دون إدخال قرص جديد لكل ملف احتياطي على حدة. 
+
+#___________________________________________________________=Choosing Yes will begin the backup process as instructed.
+-7744-field:confirmWarningPathChosenMayNotBeRemoveableeffect=باختيار "نعم" ستبدأ عملية النسخ الاحتياطي كما أشرنا.
+
+#____________________________________________________=Warning! Using the regular keyboard to enter your password greatly reduces the security of the Martus system, and could make it easier for an attacker to view your private data.
+-f068-field:confirmWarningSwitchToNormalKeyboardcause=تحذير! إن استخدام لوحة المفاتيح العادية لإدخال كلمة المرور يُحد من أمن نظام Martus بشدة، و يجعل من السهل لأي متطفل استعراض بياناتك الخاصة.
+
+#_____________________________________________________=If this is a Headquarters computer, it is especially important to use the on-screen keyboard, because an attacker could gain access to all the private data that you are authorized to view.
+-4379-field:confirmWarningSwitchToNormalKeyboardeffect=إذا كان هذا حاسوب مركز رئيسي، من الأهمية بمكان أن تستخدم لوحة مفاتيح النافذة لأن متطفلا قد يصل إلى جميع البيانات الخاصة المصرح لك فقط بالإطلاع عليها. 
+
+#_________________________________________________=A single encrypted backup file of your key has yet to be created.
+-71c0-field:confirmbackupIncompleteEncryptedNeeded=ما زال يجب عليك إنشاء ملف احتياطي لشفرتي دخولك مُشفر بكلمة مرور. 
+
+#_____________________________________________=A multiple disk backup of your key has yet to be created.
+-b185-field:confirmbackupIncompleteShareNeeded=ما زال يجب عليك إنشاء ملف احتياطي لشفرتي دخولك على عدة أقراص مجزئة سريا. 
+
+#___________________________________=You have chosen to permanently delete a folder.  
+-76fa-field:confirmdeletefoldercause=لقد اخترت أن تحذف مجلدا إلى الأبد.
+
+#____________________________________=Any bulletins in the folder will be moved to Discarded Bulletins.  
+-8d2c-field:confirmdeletefoldereffect=سيتم نقل أية نشرات بالمجلد إلى مجلد النشرات المُلغاة.
+
+#______________________________________________=Martus has noticed that you have not completed the backup procedure of your key.  It is strongly recommended that you complete the backup procedure at this time.\n\nIf something happens to the original key file, and you don't have a backup you will not be able to open any bulletins you have created with this key.
+-e7f4-field:confirmgeneralBackupKeyPairMsgcause=لاحَظَ Martus أنك لم تُكمل عملية النسخ الاحتياطي لشفرتي دخولك. يوصي بشدة بإكمال عملية النسخ الاحتياطي الآن. \n\nإذا حدث شيء لملف شفرتي الدخول الأصلي، و صادف أنك لا تحتفظ بنسخة احتياطية منه، لن تتمكن من فتح أية نشرة قمت بإنشائها بزوج الشفرات هذا. 
+
+#_______________________________________________=Selecting Yes will guide you through the backup procedure, selecting No will skip this important step.
+-8571-field:confirmgeneralBackupKeyPairMsgeffect=باختيارك نعم سيتم إرشادك خلال عملية النسخ الاحتياطي، أما باختيار لا فسيتم التغاضي عن هذه الخطوة الهامة.
+
+#_________________________________________=The text "#S#" was not found.  Do you wish to search from the beginning?
+-cf53-field:confirmhelpStringNotFoundcause=لم يتم العثور على النص #S#. هل تريد البحث من البداية؟
+
+#__________________________________________=Clicking on Yes will search for "#S#" from the beginning.
+-f445-field:confirmhelpStringNotFoundeffect=بالنقر على نعم سَيَتم البحث عن #S# من البداية. 
+
+#_____________________=Confirming...
+-a4f3-field:confirming=تأكيد...
+
+#__________________________=Are you sure you want to do this?
+-bfb8-field:confirmquestion=هل أنت متأكد من أنك تريد القيام بذلك؟ 
+
+#_______________________________=You have chosen to retrieve all bulletins from the Martus server.  
+-0330-field:confirmretrievecause=لقد اخترت استرجاع جميع النشرات من خادم Martus.
+
+#________________________________=This will restore all the discarded bulletins that were sent to the server.  
+-8dbd-field:confirmretrieveeffect=سيتم بذلك استعادة جميع النشرات المُلغاة التي تم إرسالها للخادم. 
+
+#___________________________=You have chosen to save a completed bulletin.
+-a3fe-field:confirmsendcause=لقد اخترت حفظ نشرة تم الانتهاء منها. 
+
+#____________________________=This will permanently seal the bulletin and you will not be allowed to make any further modifications to it except by creating a new copy of the bulletin.
+-daea-field:confirmsendeffect=سيتم بذلك ختم النشرة و لن تتمكن من تعديلها مستقبلا إلا إذا قمت بذلك على نسخة جديدة من النشرة. 
+
+#_____________________=Connecting...
+-b98e-field:connecting=جاري الاتصال... 
+
+#_____________________=Date Format
+-4827-field:dateformat=هيئة التاريخ 
+
+#____________________________=New Folder
+-d8ed-field:defaultFolderName=مجلد جديد 
+
+#________________________=Disconnecting...
+-257e-field:disconnecting=إلغاء الاتصال...
+
+
+#________________=Email Address
+-09ba-field:email=عنوان البريد الإلكتروني 
+
+#____________________=Date Created
+-dda2-field:entrydate=تاريخ الإنشاء
+
+#____________________=Date of Event
+-2026-field:eventdate=تاريخ الحدث 
+
+#_________________________=Dates of Event
+-a13c-field:eventdaterange=تواريخ الحدث 
+
+#________________________________=Enter the XML representation for the layout of new and modified bulletins.
+-cf9a-field:inputCustomFieldsInfo=قم بإدخال تمثيل XML لنموذج تصميم النشرات الجديدة و المُعدلة.
+
+#______________________________________=
+-da39-field:inputExportMyPublicKeyentry=<>
+
+#_______________________________=Enter the label you wish to associate with this Headquarters.
+-ba5f-field:inputGetHQLabelentry=قم بإدخال العنوان الذي تريد إطلاقه على هذا المركز الرئيسي.
+
+#_____________________________________=Enter the name of the file you wish to export.
+-6507-field:inputGetShareFileNameentry=قم بإدخال اسم الملف الذي تريد تصديره
+
+#_____________________________________=Enter the Public Identification Code for this account:
+-830a-field:inputImportPublicCodeentry=قم بإدخال كود التعريف العام لهذا الحساب: 
+
+#____________________________________=If you want to request permission to upload to this server, enter the 'magic word' now:
+-3ea8-field:inputservermagicwordentry=إذا كنت تريد طلب تصريح لإرسال ملف لهذا الخادم، قم بإدخال "الكلمة السحرية" الآن:
+
+#___________________=Keywords
+-f530-field:keywords=كلمات استدلالية 
+
+#___________________=Language
+-89b8-field:language=اللغة 
+
+#___________________=Location
+-d219-field:location=الموقع 
+
+#_____________________________________________=The attachment could not be located.
+-65b1-field:messageErrorAttachmentMissingcause=لم يتم العثور على المُرفق 
+
+#________________________________________=This date occurs in the future:
+-438b-field:messageErrorDateInFuturecause=يحدث هذا التاريخ في المستقبل: 
+
+#_____________________________________________=This date range has an end date that is earlier than the start date:
+-e4dc-field:messageErrorDateRangeInvertedcause=هذا المدى التاريخي له تاريخ نهاية يبدأ قبل تاريخ البداية:
+
+#_________________________________=The current server has sent this message:
+-fd76-field:messageServerNewscause=لقد أرسل الخادم الحالي هذه الرسالة: 
+
+
+#______________________________________=The Public Code does not match the one you entered.
+-040a-field:notifyAccountCodeWrongcause=لا يتفق الكود العام مع الذي أدخلته.
+
+#____________________________________=A copy of Martus is already running on this computer. You must close that copy before starting a new copy.
+-614e-field:notifyAlreadyRunningcause=تعمل نسخة من Martus بالفعل على هذا الحاسوب. يجب أن تقوم بإغلاق تلك النسخة قبلما تقوم بتشغيل نسخة جديدة.
+
+#________________________________________=The item you choose was not a file, please choose a file to add as an attachment to this bulletin.
+-5362-field:notifyAttachmentNotAFilecause=المفردة التي اخترتها ليست بملف، لطفا اختر ملف لإضافته كمرفق لهذه النشرة.
+
+
+#______________________________________________=Martus could not authenticate the server. The server may have been compromised.  Please verify your server configuration and contact the server operator.
+-f27c-field:notifyAuthenticateServerFailedcause=لم يستطع Martus التحقق من هوية الخادم. ربما تم اختراق هذا الخادم. لطفا تحقق من تهيئة الخادم و اتصل بالقائم عليه.
+
+#____________________________________=The selected server is not responding. Before you choose a server, you must be connected to the internet, and that server must be available.
+-38fd-field:notifyConfigNoServercause=الخادم المُختار لا يستجيب. قبلما تختار خادما، يجب عليك الاتصال بالانترنت وبذلك يصبح هذا الخادم متاحا.
+
+#______________________________________________________=Please confirm that the default details retrieved are correct.
+-af6b-field:notifyConfirmCorrectDefaultDetailsDatacause=لطفا قم بتأكيد أن التفاصيل التلقائية التي تم استرجاعها صحيحة.
+
+#_________________________________________=An error occurred while trying to create your account.
+-c8e7-field:notifyCreateAccountFailedcause=حدثت مشكلة أثناء محاولة إنشاء حسابك. 
+
+#_____________________________________________________=An error occurred during upload, and the damaged bulletin has been moved to the Damaged Bulletin folder.
+-ae32-field:notifyDamagedBulletinMovedToDiscardedcause=حدثت مشكلة أثناء الإرسال وتم نقل النشرة الخربة إلى مجلد النشرات الخربة. 
+
+#______________________________________________=Error: Unable to delete all of those draft bulletins from the server. Some of them may have been deleted.
+-916e-field:notifyDeleteServerDraftsFailedcause=مشكلة: غير قادر على حذف جميع هذه المسودات من الخادم. ربما قد تم حذف بعضها.
+
+#____________________________________________=No bulletins were selected
+-3dbb-field:notifyDeleteServerDraftsNonecause=لم يتم اختيار أية نشرات. 
+
+
+#______________________________________________=All of the selected draft bulletins have been deleted from the server.
+-aee3-field:notifyDeleteServerDraftsWorkedcause=لقد تم حذف جميع المسودات التي تم اختيارها من الخادم.
+
+#_____________________________________________=One or more bulletins cannot be moved to that folder, because it already exists in that folder.
+-178b-field:notifyDropErrorBulletinExistscause=لا يمكن نقل واحدة أو أكثر من هذه النشرات إلى ذلك المجلد لأنها توجد بالفعل في ذلك المجلد. 
+
+#________________________________=An unexpected error occurred while moving the bulletin(s). One or more files may be damaged.
+-9ca2-field:notifyDropErrorscause=حدثت مشكلة غير متوقعة أثناء نقل النشرة أو النشرات. ربما تم إتلاف ملفا أو أكثر.
+
+#____________________________________________=An unexpected error occurred in generating the key backup files.
+-d237-field:notifyErrorBackingUpKeySharecause=حدثت مشكلة غير متوقعة أثناء تكوين الملفات الاحتياطية لشفرتي الدخول. 
+
+#______________________________________=An error prevented the file from being read.
+-1ad3-field:notifyErrorReadingFilecause=توجد مشكلة في قراءة الملف 
+
+#_____________________________________________________=Error during key restore. This key backup copy may be damaged.
+-299c-field:notifyErrorRecoveringAccountDirectorycause=حدثت مشكلة أثناء استرجاع شفرتي الدخول. قد تكون هذه النسخة الاحتياطية من شفرتي الدخول نسخة تالفة. 
+
+#_____________________________________________=You already have a folder with that name.
+-f897-field:notifyErrorRenameFolderExistscause=يوجد لديك مجلد بهذا الاسم بالفعل.
+
+
+#_______________________________________=Folder names cannot contain punctuation.  They also cannot begin with a space.
+-1538-field:notifyErrorRenameFoldercause=لا يمكن لأسماء المجلدات أن تحتو على علامات تنصيص. و لا يمكن لها أن تبدأ بمسافة فارغة.   
+
+#_________________________________________=An error prevented the bulletin from being saved. Check to make sure the disk is not full or write protected.
+-f4c4-field:notifyErrorSavingBulletincause=حدثت مشكلة أثناء حفظ النشرة. تأكد أن القرص به مساحة فارغة و أنه مسموح بالكتابة عليه.
+
+#_______________________________________=Unable to save configuration file.
+-896e-field:notifyErrorSavingConfigcause=غير قادر على حفظ ملف التهيئة. 
+
+#______________________________________=Unable to save current screen layout.
+-2bad-field:notifyErrorSavingStatecause=غير قادر على حفظ نموذج تصميم النافذة الحالي.
+
+#______________________________________=An error prevented the file from being written. Check to make sure the disk is not full or write protected.
+-2a84-field:notifyErrorWritingFilecause=حدثت مشكلة أثناء كتابة الملف. تأكد أن القرص به مساحة فارغة و أنه مسموح بالكتابة عليه. 
+
+#___________________________________________=You will have to select a server for any bulletins to be backed up to that server, or to retrieve bulletins from that server.
+-83c4-field:notifyExistingServerRemovedcause=سيتحتم عليك اختيار خادم للاحتفاظ عليه بأية نشرات و استرجاعها منه عند الضرورة. 
+
+#____________________________________=Export completed successfully
+-65b9-field:notifyExportCompletecause=تم التصدير بنجاح
+
+#_______________________________________=The folder you are trying to export does not contain any bulletins.  Select a folder which has bulletins before exporting the folder.
+-c5f5-field:notifyExportFolderEmptycause=المجلد الذي تحاول تصديره لا يحتوي على أية نشرات. قم باختيار مجلد به نشرات حتى يمكنك تصديره.
+
+
+#_______________________________________=The following file has been exported.
+
+-fdb5-field:notifyExportMyPublicKeycause=تم تصدير الملف التالي 
+
+#_________________________________________=To export bulletins, select them first, and then perform the export operation.
+-944e-field:notifyExportZeroBulletinscause=لتصدير نشرات، قم باختيارها أولا ثم قم بإجراء عملية التصدير.
+
+#___________________________________________=The original files have not been deleted from your computer, you must delete them manually if you wish.
+-8965-field:notifyFilesWillNotBeDeletedcause=لم يتم حذف الملفات الأصلية من حاسوبك، يجب عليك حذفهم يدويا إن شئت.
+
+
+#___________________________________________=An error occurred during the conversion of your folders. You can still use Martus, but if the Outbox or Drafts folders still exist, do not use them.
+-73de-field:notifyFolderMigrationFailedcause= حدثت مشكلة أثناء تحويل مجلداتك. مازال يمكنك استخدام Martus و لكن لا تستخدم مجلد الصادر أو مجلد المسودات إذا كانوا موجودين.
+
+#___________________________________________=One or more bulletins were severely damaged, and cannot be displayed. If these bulletins were backed up to a server, you may be able to retrieve undamaged copies from there.
+-399f-field:notifyFoundDamagedBulletinscause=لقد أُتلفت نشرة أو أكثر بدرجة كبيرة و لا يمكن عرضها. إن كانت هذه النشرات قد تم حفظها احتياطيا على خادم فقد يمكنك استرجاع نُسخ غير تالفة من هناك.
+
+#__________________________________=One or more bulletins were not in any folder. These lost bulletins have been placed into the Recovered Bulletins folder.
+-0b0c-field:notifyFoundOrphanscause=نشرة أو أكثر لم تكن بالمجلد. لقد تم وضع هذه النشرات الضائعة في مجلد النشرات المُستعادة.
+
+#_______________________________________=You have already added this account to your Headquarters list.
+-0785-field:notifyHQKeyAlradyExistscause= لقد قمت بإضافة هذا الحساب بالفعل إلى قائمة مركزك الرئيسي.
+
+#_______________________________________=You must have a server public code.
+-2fde-field:notifyInvalidServerCodecause=يجب أن يكون لديك كود عام للخادم. 
+
+#_______________________________________=You must have a server name or IP address.
+-984b-field:notifyInvalidServerNamecause=يجب أن يكون لديك اسم للخادم أو عنوان IP له.
+
+#_______________________________________________=Bulletin ID:        #I#\nAuthor Public Code: #A#\n\n#H#
+
+-485a-field:notifyModifyViewBulletinDetailscause= هوية النشرة:     #I# \n الكود العام: #H#\n\n#A#
+
+#________________________________________=Operation completed.
+-1a65-field:notifyOperationCompletedcause=تم إنجاز العملية 
+
+#_____________________________________=Not a valid password, passwords must be at least 8 characters long
+-c9fa-field:notifyPasswordInvalidcause=كلمة مرور غير صالحة، تحتوي كلمات المرور على 8 حروف على الأقل
+
+#_____________________________________________=Your password can not be your username
+-0acb-field:notifyPasswordMatchesUserNamecause=لا يمكن لكلمة مرورك أن تكون اسم المستخدم الخاص بك
+
+#_____________________________________________________=One or more bulletins cannot be pasted in that folder, because they already exist in this folder.
+-6181-field:notifyPasteErrorBulletinAlreadyExistscause=لا يمكن لصق نشرة أو أكثر في هذا المجلد لأنها موجودة بالفعل فيه. 
+
+#________________________________=An unexpected error occurred while pasting the bulletin(s). One or more files may be damaged.
+-eb6e-field:notifyPasteErrorcause=حدثت مشكلة أثناء لصق النشرة(ات). قد يكون ملفا أو أكثر تالفا.
+
+#________________________________________________=No bulletin selected.  Please select the bulletin you wish to preview.
+-b51e-field:notifyPreviewNoBulletinsSelectedcause=لم يتم استعراض أية نشرة. لطفا اختر النشرة التي تريد استعراضها.
+
+
+#____________________________________________=You may only preview one bulletin at a time.  Please only select one bulletin to preview.
+-fbee-field:notifyPreviewOneBulletinOnlycause=يمكنك استعراض نشرة واحدة فقط في المرة. لطفا اختر نشرة واحدة فقط لاستعراضها.
+
+#_________________________________________=This bulletin will not be printed because all the information is private.  If you wish to print the private data, please mark the "Include private data in print out" checkbox.
+-459d-field:notifyPrintAllPrivateDatacause= لن يتم طبع هذه النشرة لأن جميع المعلومات بها خاصة. إذا كنت تريد طبع البيانات الخاصة، لطفا انقر مربع الاختيار "تضمين بيانات خاصة في الطباعة."
+
+#_________________________________________=The file does not contain valid public information.
+-f5b5-field:notifyPublicInfoFileErrorcause=لا يحتوي الملف على معلومات عامة صالحة.
+
+#___________________________________________________________________________=Key restore succeeded!  You now have to enter a user name and password.
+-2527-field:notifyRecoveredKeyShareSucceededNewUserNamePasswordRequiredcause=تم استرجاع شفرتي الدخول بنجاح! عليك الآن إدخال اسم مستخدم و كلمة مرور. 
+
+#_______________________________________________=Key restore is complete, you will now be logged into Martus.
+-efa0-field:notifyRecoveryOfKeyPairCompletecause=لقد تم استرجاع شفرتي دخولك، سيتم السماح لك الآن بدخول Martus. 
+
+#________________________________________________=You have successfully restored your key from your backup files.  It is very important that you now re-distribute your backup files.  We also recommend you backup your key as a single password-encrypted file, though you do not need to recreate the multiple file backup.
+-f50c-field:notifyRecoveryOfKeyShareCompletecause=لقد قمت باسترجاع شفرتي دخولك من ملفات التجزئة السرية بنجاح. من المهم جدا أن تقوم الآن بإعادة توزيع ملفات التجزئة السرية الخاصة بك. نوصي كذلك بنسخ شفرتي دخولك احتياطيا كملف مُشفَر، على الرغم من أنك لن تحتاج إعادة إنشاء ملفات التجزئة السرية ثانية. 
+
+#_______________________________________________=To restore your key, first you must find the backup file you saved previously.  Using the 'Restore Key from Backup File' dialog box find the file on your computer’s hard drive, a network drive, or removable media disk then click the Open button.  Martus will then ask you for your user name and password and restore your key so you can log in normally and access your account.
+-83c2-field:notifyRecoveryProcessBackupFilecause=لاستعادة ملف شفرتي دخولك، يجب أولا أن تجد الملف الاحتياطي الذي سبق لك حفظه. باستخدام مربع حوار "استعادة حساب بملف شفرتي دخول احتياطي"، قم بإيجاد الملف على القرص الصلب لحاسوبك أو على قرص بالشبكة أو على قرص مرن ثم انقر زر الفتح. سيطلب منك Martus بعد ذلك اسم المستخدم و كلمة المرور لاستعادة شفرتي دخولك حتى يتسنى لك الدخول لحسابك بشكل عادي. 
+
+#_____________________________________________=You will now have to provide #N# out of the #M# files you previously saved when you backed up your key.
+-d5c2-field:notifyRecoveryProcessKeySharecause=يجب عليك الآن إبراز #N# من #M# ملفات التي سبق لك حفظها عندما نسخت شفرتي دخولك احتياطيا. 
+
+#______________________________________=Please remember your username and password. It cannot be recovered.
+-e9e0-field:notifyRememberPasswordcause=لطفا تذكر دائما اسم المستخدم و كلمة المرور. فلن يمكن استعادتهما.
+
+#____________________________________________________=One or more bulletins were unable to be resent because you are not authorized to upload them.
+-d248-field:notifyResendErrorNotAuthorizedToSendcause= م يتسن إعادة إرسال واحدة أو أكثر من النشرات لأنه غير مصرح لك بإرسالها للخادم.
+
+#_________________________________=One or more bulletins were unable to be resent due to an unexpected error.
+-28b0-field:notifyResendErrorcause= لم يتسن إعادة إرسال واحدة أو أكثر من النشرات بسبب مشكلة غير متوقعة.
+
+#______________________________________=Bulletin download cancelled.  Some bulletins may have already been downloaded.
+-87b3-field:notifyRetrieveCanceledcause=تم إلغاء تحميل النشرة. ربما قد تم تحميل بعض النشرات بالفعل.
+
+#________________________________________________=Errors occurred while retrieving bulletin summaries.  Some of the bulletins on the server will not be shown.
+-6f6f-field:notifyRetrievedOnlySomeSummariescause=حدثت مشكلات أثناء استرجاع الملخصات. لن يتم عرض بعض النشرات الموجودة على الخادم.
+
+#__________________________________________=An error occurred.  Unable to change user name or password.  You may need to restore your backup key file.
+-e3a0-field:notifyRewriteKeyPairFailedcause=حدثت مشكلة. غير قادر على تغيير اسم المستخدم أو كلمة المرور. قد تحتاج لاستعادة الملف الاحتياطي لشفرتي دخولك. 
+
+#_________________________________________=Successfully saved your new username and password.
+-0398-field:notifyRewriteKeyPairSavedcause=تم حفظ اسم المستخدم و كلمة المرور الخاصيّن بك بنجاح. 
+
+#__________________________________=Sorry, no bulletins were found.
+-5bd8-field:notifySearchFailedcause=نأسف، لم يتم العثور على نشرات.
+
+
+#_________________________________=Number of bulletins found = 
+-f301-field:notifySearchFoundcause=عدد النشرات التي تم العثور عليها=
+
+#_____________________________________=The Server Public Code does not match the one you entered.
+-efe3-field:notifyServerCodeWrongcause= الكود العام للخادم لا يضاهي الكود الذي أدخلته.
+
+#_________________________________=Server Error, the server may be down, please try again later
+-7d92-field:notifyServerErrorcause=مشكلة خادم، قد يكون الخادم مُعطل، لطفا حاول ثانية لاحقا
+
+#_______________________________________=The Server has responded with invalid account information.
+-76c7-field:notifyServerInfoInvalidcause=لقد استجاب الخادم بمعلومات حساب غير صالحة.
+
+#____________________________________________=Unable to make a secure connection with the Martus backup server.\n\nMartus can connect to a server using either of two ports.  When trying to connect to this server, neither port is accessible, probably because both ports are being blocked by a local firewall or by your ISP.\n\nWe recommend that any firewalls be configured to allow outgoing connections on both TCP port 443 and 987.  Please contact your LAN administrator or office technical support staff to verify that your firewall configuration allows this.\n\nIf the problem persists, you may need to select a different server.
+-8dc9-field:notifyServerSSLNotRespondingcause=غير قادر على إقامة اتصال آمن بخادم Martus الاحتياطي. \n\nيمكن للبرنامج الاتصال بخادم عبر منفذيّن. عند محاولة الاتصال بهذا الخادم، لا أجد أي من المنفذيّن مفتوحا، ربما لأن حائط ناري على حاسوبك أو ISP الخاص بك كانا قد سدا هاذين المنفذيّن. \n\nنوصي بتهيئة أية حوائط نارية حتى تسمح بالاتصال الصادر على منفذي TCP رقم 443 و 987. لطفا اتصل بمدير الشبكة الداخلية LAN أو أفراد الدعم التقني بالمكتب للتحقق من أن تهيئة حائطك الناري يسمح بذلك. \n\nإذا استمرت المشكلة، ربما قد تحتاج لاختيار خادم مختلف.
+
+#____________________________________________=Unable to save the selected attachment for some reason.  Try saving it to a different file.
+-4a93-field:notifyUnableToSaveAttachmentcause=غير قادر على حفظ المرفق المُختار لسبب ما. حاول حفظه بملف آخر. 
+
+#____________________________________________=Unable to view the selected attachment for some reason.
+-db36-field:notifyUnableToViewAttachmentcause=غير قادر على استعراض المرفق المُختار لسبب ما.
+
+#_____________________________________=An unexpected error has occurred. Please report this problem to help@martus.org.
+-3cb4-field:notifyUnexpectedErrorcause=حدثت مشكلة غير متوقعة. لطفا أبلغ عن هذه المشكلة للعنوان التالي: help@martus.org
+
+#_______________________________________=The user name you chose already exists on this system, please choose a different user name.
+-bbb0-field:notifyUserAlreadyExistscause=اسم المستخدم الذي اخترته يتواجد بالفعل على هذا النظام، لطفا اختر اسم مستخدم مختلف.
+
+#___________________________________=User Name must not be blank
+-d8fe-field:notifyUserNameBlankcause=لا يمكن أن يكون اسم المستخدم فارغا 
+
+#__________________________________________________=You have chosen not to use this server
+-91af-field:notifyUserRejectedServerCompliancecause=لقد اخترت ألاّ تستخدم هذا الخادم
+
+#______________________________________________=Verification of all disks passed.
+-7d7f-field:notifyVerifyKeyPairSharePassedcause=تم التحقق من صلاحية جميع الأقراص 
+
+#_____________________________________________=Bulletin ID:        #I#\nAuthor Public Code: #A#\n\n#H#
+-485a-field:notifyViewViewBulletinDetailscause= هوية النشرة:     #I# \n الكود العام: #H#\n\n#A#
+
+#_____________________________________=Welcome!\n\nTo start using Martus, create an account. Choose any username you like and a password that contains at least 8 characters. Keep the following information in mind as you create your username and password:\n\n * We recommend using a password that has 15 characters.\n * Include some characters that aren't letters or numbers in your password.\n   (That is, use punctuation or other special characters.)\n * Use a password that other people won't be able to guess;\n   anyone who knows your username and password can view your private data,\n   and can create bulletins that everyone will believe were created by you.\n * Write down your username and password and store them in a safe place.\n * You'll need to enter your username and password whenever you start Martus.\n * Martus will also sometimes prompt you to re-enter your username\n   and password to prevent someone else from using your account\n   after you've logged in.\n\nIMPORTANT: You are the only one who has your username and password. If you lose either of them, you won't be able to retrieve your data. Your username and password are not stored or backed up anywhere, so they cannot be reset for you.
+-da34-field:notifyWelcomeToMartuscause=مرحبا! \n\nلكي تبدأ في استخدام Martus قم بإنشاء حساب. اختر اسم مستخدم و كلمة مرور تحتوي على 8 حروف على الأقل. ضع هذه المعلومات في اعتبارك عند تكوين اسم المستخدم و كلمة المرور: \n\n* نوصي باستخدام كلمة مرور تحتوي على 15 حرفا. \n * قم بإدخال علامات ليست بحروف و لا أرقام في كلمة مرورك. \n (أي استخدم علامات تنصيص أو أية علامات خاصة أخرى.) \n * استخدم كلمة مرور يصعب على الآخرين تخمينها، \n  يمكن لأي شخص يعرف اسم المستخدم الخاص بك و كلمة مرورك أن يطّلع على بياناتك الخاصة، \n  ويمكنه إنشاء نشرات يعتقد أي فرد أن من قام بإنشائها هو أنت. \n * اكتب اسم المستخدم الخاص بك و كلمة مرورك على ورقة و احفظها في مكان آمن. \n* ستحتاج إلى إدخال اسم المستخدم الخاص بك و كلمة مرورك كلما بدأت العمل في Martus. \n * سيطلب منك Martus أحيانا إعادة إدخال اسم المستخدم الخاص بك\n  وكلمة مرورك لمنع أي شخص آخر من استخدام حسابك\n  بعدما تدخل فيه. \n\nهام: يجب أن تكون أنت الشخص الوحيد الذي يعرف اسم المستخدم الخاص بك و كلمة مرورك. فإذا ما فقدت أيهما، لن تستطيع استرجاع بياناتك. لا يقوم Martus بتخزين اسم المستخدم الخاص بك و كلمة مرورك بأي مكان، لذا لن يمكن استعادتهما إليك.
+
+
+#_____________________________________=The current Martus Server has refused to accept your contact info
+-156f-field:notifycontactRejectedcause=لقد رفض خادم Martus الحالي قبول معلومات الاتصال بك.
+
+#_______________________________________=The configuration file may be corrupted
+-d84d-field:notifycorruptconfiginfocause=قد يكون ملف التهيئة تالفا
+
+#_____________________________________=Username or Password incorrect
+-7b2d-field:notifyincorrectsignincause=اسم مستخدم خاطئ أو كلمة مرور خاطئة 
+
+#_________________________________=The Server has accepted your request for permission to upload bulletins.
+-e9d8-field:notifymagicwordokcause=لقد قَبَل الخادم طلب التصريح لك بإرسال نشرات إليه.
+
+#_______________________________________=The Server has rejected your request. The magic word is probably not correct.
+-2baa-field:notifymagicwordrejectedcause=لقد رفض الخادم طلبك. قد تكون الكلمة السحرية غير صحيحة.
+
+#________________________________________=You must enter the same password twice
+-dcba-field:notifypasswordsdontmatchcause=يجب عليك إدخال نفس كلمة المرور مرتين
+
+#____________________________________=Error: Unable to retrieve bulletins from the server
+-33d7-field:notifyretrievefailedcause=مشكلة: غير قادر على استرجاع النشرات من الخادم
+
+#______________________________________=The current server is not responding or may need to be configured from the server menu.
+-9b3c-field:notifyretrievenoservercause=الخادم الحالي لا يستجيب أو قد يحتاج للتهيئة من خلال قائمة الخادم.
+
+
+#_____________________________________=No bulletins were selected
+-3dbb-field:notifyretrievenothingcause=لم يتم اختيار أية نشرات 
+
+#____________________________________=All of the selected bulletins were successfully retrieved from the server
+-824a-field:notifyretrieveworkedcause=تم استرجاع جميع النشرات المُختارة من الخادم بنجاح 
+
+#______________________________=The Server has been selected.
+-e7a0-field:notifyserverokcause=تم اختيار الخادم 
+
+#____________________________________=The current Martus Server has refused to accept a bulletin
+-8629-field:notifyuploadrejectedcause=لقد رفض خادم Martus الحالي قبول النشرة
+
+#_________________________________________=You must enter the same username twice
+
+-8812-field:notifyusernamessdontmatchcause=يجب عليك إدخال نفس اسم المستخدم مرتين
+
+#_______________________=Organization
+-5192-field:organization=المنظمة 
+
+#___________________=Password
+-8be3-field:password=كلمة المرور 
+
+#____________________=Password
+-8be3-field:password1=كلمة المرور
+
+#____________________=(same password again)
+-71c7-field:password2=(نفس كلمة المرور مرة أخرى) 
+
+#________________=Phone Number
+-ab25-field:phone=رقم الهاتف 
+
+#________________________________=Prevent creating public bulletins
+-7c9e-field:preferencesAllPrivate=منع إنشاء نشرات عامة
+
+#______________________=Private
+-237d-field:privateinfo=خاص 
+
+#_________________________=Private Information
+-4ca1-field:privatesection=معلومات خاصة 
+
+#_____________________=Details
+-dc3d-field:publicinfo=التفاصيل 
+
+#________________________=Public Information
+-251b-field:publicsection=معلومات عامة 
+
+#_______________________=Retrieve?
+-460d-field:retrieveflag=استرجاع؟ 
+
+#_______________________________________=For security reasons, we must validate your username and password.
+-0381-field:securityServerConfigValidate=لأسباب أمنية، يجب التحقق من اسم المستخدم الخاص بك و كلمة مرورك.
+
+#_________________=Status
+-bae7-field:status=وضع
+
+#__________________=Summary
+-12b7-field:summary=ملخص
+
+#____________________=For security reasons, you must sign into Martus again.
+-a575-field:timedout1=لأسباب أمنية، يجب أن تدخل لبرنامج Martus مرة أخرى.
+
+#____________________=Any unsaved bulletins will be lost unless you sign in and save them.
+-24c5-field:timedout2=سوف تضيع أية نشرات لم يتم حفظها إلا إذا قمت بالدخول و حفظتها.
+
+#________________=Title
+-768e-field:title=العنوان 
+
+#___________________=Username
+-84c2-field:username=اسم المستخدم 
+
+#________________________________=Please wait to sign in again ...
+-d901-field:waitAfterFailedSignIn=لطفا انتظر لتدخل مرة أخرى... 
+
+#____________________________________=Loading Martus.  Please wait...
+-4d07-field:waitingForBulletinsToLoad=جاري تحميل Martus. رجاء الانتظار...
+
+#______________________________________=Please wait a minute while your account is being created...
+-cc6d-field:waitingForKeyPairGeneration=لطفا انتظر دقيقة حتى يتم إنشاء حسابك... 
+
+#_________________________________________=You have chosen to permanently delete bulletins from the Discarded Bulletins folder. Even if these bulletins were recently cut or copied, you will not be able to paste them. If they have already been sent to a server, they will remain on the server. This action will only delete them from this computer.
+-3fc8-field:warningDeleteMultipleBulletins= لقد اخترت حذف نشرات بصورة نهائية من مجلد النشرات المُلغاة. إذا كنت قد نسخت أو قصصت تلك النشرات حديثا لن يمكنك لصقها بعد ذلك. إذا كان قد تم إرسالها إلى خادم، فسوف تبقى على الخادم. سوف يحذف هذا الفعل تلك النشرات من حاسوبك فقط.
+
+#___________________________________________________=NOTE: Copies of one or more of these bulletins exist in one or more other folders. Those copies will not be removed.
+-7d03-field:warningDeleteMultipleBulletinsWithCopies= ملحوظة: توجد نسخ من واحدة أو أكثر من تلك النشرات في مجلد آخر أو أكثر. لن تتم إزالة هذه النسخ.
+
+#_______________________________________________=WARNING: One or more of these bulletins have not been sent to a server since they were last modified. Deleting them will prevent the latest changes from being backed up.
+-97ce-field:warningDeleteMultipleUnsentBulletins= تحذير: لم يتم إرسال واحدة أو أكثر من هذه النشرات إلى الخادم منذ أن تم إجراء تعديل عليها آخر مرة. سوف يؤد حذفها إلى الحيلولة دون النسخ الاحتياطي لآخر التعديلات التي أجريت عليها.
+
+#______________________________________=You have chosen to permanently delete a bulletin from the Discarded Bulletins folder. Even if this bulletin was recently cut or copied, you will not be able to paste it. If this bulletin has already been sent to a server, it will remain on the server. This action will only delete it from this computer.
+-06b6-field:warningDeleteSingleBulletin= لقد اخترت حذف نشرة بصورة نهائية من مجلد النشرات المُلغاة. إذا كنت قد نسخت أو قصصت تلك النشرة حديثا لن يمكنك لصقها بعد ذلك. إذا كان قد تم إرسالها إلى خادم، فسوف تبقى على الخادم. سوف يحذف هذا الفعل تلك النشرة من حاسوبك فقط.
+
+#________________________________________________=NOTE: A copy of this bulletin exists in one or more other folders, and those copies will not be removed.
+-c4bc-field:warningDeleteSingleBulletinWithCopies= ملحوظة: توجد نسخة من هذه النشرة في مجلد آخر أو أكثر. لن تتم إزالة هذه النسخ.
+
+#____________________________________________=WARNING: This bulletin has not been sent to a server since it was last modified. Deleting it will prevent the latest changes from being backed up.
+-523e-field:warningDeleteSingleUnsentBulletin= تحذير: لم يتم إرسال هذه النشرة إلى الخادم منذ أن تم إجراء تعديل عليها آخر مرة. سوف يؤد حذفها إلى الحيلولة دون النسخ الاحتياطي لآخر التعديلات التي أجريت عليها.
+
+#__________________=Web Page
+-0163-field:webpage=صفحة ويب
+
+#_____________________________=Damaged Bulletins
+-32db-folder:%DamagedBulletins=النشرات الخربة
+
+#______________________=Discarded Bulletins
+-0de3-folder:%Discarded=النشرات المُلغاة 
+
+#__________________=Old Draft Bulletins
+-bacc-folder:%Draft=مسودات نشرات قديمة
+
+#___________________=Unsent Bulletins
+-2c10-folder:%OutBox=نشرات لم ترُسل
+
+#_______________________________=Recovered Bulletins
+-f926-folder:%RecoveredBulletins=النشرات المُستعادة
+
+#_________________________________________=Field Desk Bulletins
+-647f-folder:%RetrievedFieldOfficeBulletin=نشرات مكتب الموقع 
+
+#______________________________________________=Field Desk Draft Bulletins
+-204a-folder:%RetrievedFieldOfficeBulletinDraft=مسودات مكتب الموقع 
+
+#________________________________=Retrieved Bulletins
+-6539-folder:%RetrievedMyBulletin=النشرات المُسترجعة
+
+#_____________________________________=Retrieved Draft Bulletins
+-4ff2-folder:%RetrievedMyBulletinDraft=المسودات المُسترجعة 
+
+#__________________________=Search Results
+-5e05-folder:%SearchResults=نتائج البحث 
+
+#_________________=Saved Bulletins
+-da0b-folder:%Sent=نشرات تم حفظها 
+
+#________________=and
+-cffa-keyword:and=و 
+
+#_______________=or
+-1758-keyword:or=أو 
+
+#_______________=-Other-
+-d367-language:?=-لغة أخرى- 
+
+#________________=Arabic
+-af4f-language:ar=العربية 
+
+#________________=Azerbaijani
+-6885-language:az=الأذربيجانية 
+
+#________________=Bengali, Bangla
+-4b7b-language:bn= البنغالية، بانغلا 
+
+#________________=German
+-da91-language:de=الألمانية 
+
+#________________=English
+-649d-language:en=الإنجليزية 
+
+#________________=Esperanto
+-4c2c-language:eo=إسبرانتو 
+
+#________________=Spanish
+-8df7-language:es=الأسبانية 
+
+#________________=Farsi, Dari
+-e768-language:fa=الفارسية، الدارية 
+
+#________________=French
+-4438-language:fr=الفرنسية 
+
+#________________=Gujarati
+-c06c-language:gu=الجوغاراتية 
+
+#________________=Hausa
+-c619-language:ha=الهاوساوية 
+
+#________________=Hebrew
+-348d-language:he=العبرية 
+
+#________________=Hindi
+-c9e6-language:hi=الهندية 
+
+#________________=Hungarian
+-80cb-language:hu=المجرية 
+
+#________________=Italian
+-485b-language:it=الإيطالية 
+
+#________________=Japanese
+-9239-language:ja=اليابانية 
+
+#________________=Javanese
+-4d3b-language:jv=الجاوية 
+
+#________________=Kazakh
+-b9fe-language:kk=الكازاخستانية 
+
+#________________=Khmer
+-3db4-language:km=الخميرية
+
+#________________=Kannada
+-c3ed-language:kn=الكانادية 
+
+#________________=Korean
+-dec6-language:ko=الكورية 
+
+#________________=Kirghiz
+-1848-language:ky=الكرغستانية 
+
+#________________=Malayalam
+-c730-language:ml=المالايام 
+
+#________________=Marathi
+-6bb4-language:mr=المراثية 
+
+
+#________________=Burmese
+-460c-language:my=البورمية 
+
+#________________=Nepali
+
+-16e3-language:ne=النيبالية
+
+#________________=Dutch
+-334a-language:nl=الهولندية 
+
+
+#________________=Oriya
+-c106-language:or=الأورية 
+
+#________________=Panjabi
+-bde2-language:pa=البنغابية
+
+
+#________________=Polish
+-d011-language:pl=البولندية 
+
+
+#________________=Pashto, Pushto
+-c98b-language:ps=الباشتو 
+
+#________________=Portuguese
+-2388-language:pt=البرتغالية 
+
+#________________=Romanian
+-cfd5-language:ro=الرومانية 
+
+#________________=Russian
+-74ad-language:ru=الروسية 
+
+#________________=Sindhi
+-e033-language:sd=السندية 
+
+#________________=Sinhalese
+-6d55-language:si=السينهالية
+
+#________________=Serbian
+-a75e-language:sr=الصربية 
+
+#________________=Tamil
+-86c2-language:ta=التاميل 
+
+#________________=Telugu
+-ea6c-language:te=تيلوجو 
+
+#________________=Tajik
+-e301-language:tg=التاجيكية
+
+#________________=Thai
+-c327-language:th=التايلندية 
+
+#________________=Turkmen
+-24a4-language:tk=التركمانية 
+
+#________________=Turkish
+-ab65-language:tr=التركية
+
+#________________=Ukranian
+-68de-language:uk=الأوكرانية
+
+#________________=Urdu
+-412e-language:ur=الأردية
+
+#________________=Uzbek
+-d67a-language:uz=الأوزبكية
+
+#________________=Vietnamese
+-1d6b-language:vi=الفيتنامية
+
+#________________=Chinese
+-15dc-language:zh=الصينية
+
+#_____________________________=Backup My Key
+-2852-menu:BackupMyKeyPairFile=نسخ احتياطي لملف شفرتي الدخول
+
+#______________________=Configure Headquarters
+-bf2f-menu:ConfigureHQs= تهيئة المركز الرئيسي 
+
+#_______________________=Copy Bulletin(s)
+-a57a-menu:CopyBulletins=نسخ نشرة(ات) 
+
+#___________________________=Create New Bulletin
+-d799-menu:CreateNewBulletin=إنشاء نشرة جديدة 
+
+#_________________________=Create New Folder
+-a0d8-menu:CreateNewFolder=إنشاء مجلد جديد
+
+#______________________=Customize Fields
+-1cb1-menu:CustomFields=تحوير حقول 
+
+#______________________=Cut Bulletin(s)
+-33c2-menu:CutBulletins=قص نشرة(ات)
+
+#____________________________________=Default Details Field Content
+-8ae0-menu:DefaultDetailsFieldContent=محتوى حقل التفاصيل التلقائية 
+
+#_________________________=Delete Bulletin(s)
+-9079-menu:DeleteBulletins=حذف نشرة(ات)
+
+#______________________=Delete Folder
+-2880-menu:DeleteFolder=حذف مجلد 
+
+#______________________________=Delete My Drafts From Server
+-b43a-menu:DeleteMyServerDrafts=حذف مسوداتي من الخادم 
+
+#__________________________=Discard Bulletin(s)
+-65eb-menu:DiscardBulletins=إلغاء نشرة(ات) 
+
+#_________________________=Export Bulletins
+-a86c-menu:ExportBulletins=تصدير نشرات 
+
+
+#______________________=Export Folder
+-3f96-menu:ExportFolder=تصدير مجلد 
+
+#___________________________=Export My Public Account Id
+-2b8a-menu:ExportMyPublicKey=تصدير هوية حسابي العام 
+
+#________________________=Paste Bulletin(s)
+-178b-menu:PasteBulletins=لصق نشرة(ات)
+
+#_____________________=Preferences
+-9dfd-menu:Preferences=أفضليات 
+
+#____________________________________=Delete My Data
+-07c3-menu:QuickEraseDeleteMyDataOnly= حذف بياناتي 
+
+#________________________________=Delete All Data And Remove Martus
+-a0f7-menu:QuickEraseRemoveMartus= حذف جميع البيانات و إزالةMartus 
+
+#______________________=Remove Martus Server
+-dc3d-menu:RemoveServer=إزالة خادم Martus
+
+#______________________=Rename Folder
+-5e31-menu:RenameFolder=إعادة تسمية مجلد 
+
+#_________________________=Resend Bulletin(s)
+
+-21a8-menu:ResendBulletins= إعادة إرسال النشرة(ات)
+
+#__________________________________=Retrieve Field Desk Draft Bulletins
+-a45d-menu:RetrieveHQDraftBulletins=استرجع مسودات الموقع
+
+#___________________________________=Retrieve Field Desk Sealed Bulletins
+-2e56-menu:RetrieveHQSealedBulletins=استرجع نشرات الموقع المختومة 
+
+#___________________________________=Retrieve My Draft Bulletins
+-eea7-menu:RetrieveMyDraftsBulletins=استرجع مسوداتي 
+
+#___________________________________=Retrieve My Sealed Bulletins
+-68b9-menu:RetrieveMySealedBulletins=استرجع نشراتي المختومة 
+
+#____________________________=Select All Bulletins
+-6279-menu:SelectAllBulletins=اختر جميع النشرات 
+
+#______________________=Select Martus Server
+-2461-menu:SelectServer=اختر خادم Martus
+
+#______________________________=View My Account Details
+-264b-menu:ViewMyAccountDetails=استعرض تفاصيل حسابي
+
+#_______________=About Martus
+-ceff-menu:about=عن Martus
+
+#________________________________=Change User Name or Password
+-08e8-menu:changeUserNamePassword=تغيير اسم المستخدم أو كلمة المرور 
+
+#_____________________=Contact Information
+-a34b-menu:contactinfo=معلومات الاتصال  
+
+#______________=Copy
+-af74-menu:copy=نسخ 
+
+#_____________=Cut
+-38d1-menu:cut=قص
+
+#________________=Delete
+-f6fd-menu:delete=حذف
+
+#______________=Edit
+-5301-menu:edit=تحرير 
+
+#______________=Exit
+-f83b-menu:exit=إنهاء 
+
+#______________=File
+-2c3c-menu:file=ملف 
+
+#_________________=Folders
+-19ad-menu:folders=مجلدات 
+
+#______________=Help
+-c47a-menu:help=مساعدة 
+
+#_____________________=Help
+-c47a-menu:helpMessage=مساعدة 
+
+#________________________=Modify Bulletin
+-e125-menu:modifyBulletin=تعديل نشرة 
+
+#_________________=Options
+-6bf5-menu:options=خيارات 
+
+#_______________=Paste
+-db24-menu:paste=لصق
+
+
+#_______________________=Print Bulletin
+-ed97-menu:printBulletin=طباعة نشرة 
+
+#________________=Search
+-bce0-menu:search=بحث 
+
+#___________________=Select All
+-86a5-menu:selectall=اختر الكل 
+
+#________________=Server
+-cb0c-menu:server=خادم 
+
+
+#_______________=Tools
+-4fa8-menu:tools=أدوات 
+
+#______________=Apr
+-befd-month:apr=أبريل 
+
+#______________=Aug
+-7562-month:aug=أغسطس 
+
+#______________=Dec
+-997f-month:dec=ديسمبر 
+
+#______________=Feb
+-dc84-month:feb=فبراير 
+
+#______________=Jan
+-efed-month:jan=يناير
+
+#______________=Jul
+-b737-month:jul=يوليو 
+
+#______________=Jun
+-6d90-month:jun=يونيو 
+
+#______________=Mar
+-c4ba-month:mar=مارس 
+
+#______________=May
+-c94f-month:may=مايو 
+
+#______________=Nov
+-bb9b-month:nov=نوفمبر 
+
+#______________=Oct
+-5132-month:oct=أكتوبر 
+
+#______________=Sep
+-fdd2-month:sep=سبتمبر
+
+#_________________=Draft
+-23d3-status:draft= مسودة 
+
+#__________________=Sealed
+-66c9-status:sealed= مختومة 
+
+#_________________________=Account Information
+-0cbd-wintitle:AccountInfo=معلومات الحساب 
+
+#______________________________________=Backup Key Information
+-f733-wintitle:BackupKeyPairGeneralInfo=نسخ احتياطي لمعلومات شفرتي الدخول 
+
+#___________________________________________________=Backup Key Information 
+-53df-wintitle:BackupKeyPairToSecretShareInformation= نسخ احتياطي لمعلومات شفرتي الدخول 
+
+#__________________________________________________=Backup Complete
+-8b15-wintitle:BackupSecretShareCompleteInformation=تم النسخ الاحتياطي
+
+#_____________________________=Details Field Default Content
+-a39b-wintitle:BulletinDetails=المحتوى التلقائي لحقل التفاصيل 
+
+#_____________________________=Bulletin Preview
+-9d3b-wintitle:BulletinPreview=استعراض نشرة 
+
+#__________________________=Server Configuration
+-add5-wintitle:ConfigServer=تهيئة الخادم
+
+#__________________________=Headquarters Editor
+-7fb9-wintitle:ConfigureHQs= محرر المركز الرئيسي 
+
+#____________________________________=Help on Creating Custom Fields
+-ed1d-wintitle:CreateCustomFieldsHelp=تعليمات عن إنشاء حقول مُعدلة 
+
+#________________________________=Delete Bulletin File
+-9de4-wintitle:DeleteBulletinFile=حذف ملف النشرة 
+
+#__________________________________________=Delete My Data From This Computer
+-216c-wintitle:DeleteMyDataFromThisComputer= حذف بياناتي من هذا الحاسوب
+
+#______________________________________=Delete My Drafts From Server
+-b43a-wintitle:DeleteMyDraftsFromServer=احذف مسوداتي من الخادم 
+
+#_________________________________________________=Retrieving Bulletin Summaries
+-2a45-wintitle:DeleteServerDraftsBulletinSummaries=استرجاع ملخصات النشرات 
+
+#____________________________________=Attachment Missing
+
+-11e1-wintitle:ErrorAttachmentMissing=لا يوجد ملف مرفق 
+
+#___________________________________=Error
+-7f2f-wintitle:ErrorBackingupKeyPair=حدثت مشكلة 
+
+#_______________________________=Customize Fields Error
+-41ec-wintitle:ErrorCustomFields= مشكلة تعديل حقول
+
+#_______________________________=Date Invalid
+-3af5-wintitle:ErrorDateInFuture=تاريخ غير صالح 
+
+#____________________________________=Date Range Invalid
+-1228-wintitle:ErrorDateRangeInverted= مدى التاريخ غير صالح 
+
+#____________________________________________=Previous File Exists
+-a449-wintitle:ErrorPreviousBackupShareExists=يوجد ملف سابق 
+
+#________________________________________________=No Appropriate File Found
+-c15e-wintitle:ErrorRecoverNoAppropriateFileFound=لا يوجد ملف مناسب 
+
+#___________________________________=Key backup File Error
+-13ae-wintitle:ErrorRecoverShareDisk=حدثت مشكلة بملف شفرتي الدخول 
+
+#________________________________________=Verification Error
+-5e89-wintitle:ErrorVerifyingKeyPairShare=حدثت مشكلة أثناء التحقُق 
+
+#_____________________________=Export Bulletins
+-a86c-wintitle:ExportBulletins=تصدير نشرات 
+
+#___________________________________=Export Bulletins
+-a86c-wintitle:ExportBulletinsSaveAs=تصدير نشرات 
+
+#__________________=Help on Martus
+-b414-wintitle:Help=تعليمات عن Martus
+
+#________________________________=Help on Bulletin Details Field Default Content
+-96cb-wintitle:HelpDefaultDetails=تعليمات عن المحتوى التلقائي لحقل التفاصيل بالنشرة
+
+#_______________________________=Import Headquarters Public Account Id File
+-9300-wintitle:ImportHQPublicKey=استيراد ملف هوية الحساب العام للمركز الرئيسي
+
+#________________________________=Load Default Details Field Content
+-4e2f-wintitle:LoadDefaultDetails=تحميل محتوى حقل التفاصيل التلقائية 
+
+
+#__________________________=Martus SignIn
+
+-0615-wintitle:MartusSignIn=الدخول لبرنامج Martus
+
+#________________________________________=Confirm Password
+-c2d4-wintitle:MartusSignInRetypePassword=تأكيد كلمة المرور 
+
+#__________________________________=Validate User
+-6030-wintitle:MartusSignInValidate=التحقق من المستخدم
+
+#______________________________=Confirm Print Private Data
+-5b7b-wintitle:PrintPrivateData= تأكيد طباعة بيانات خاصة 
+
+#____________________________=Restore Key from Backup File
+-08b0-wintitle:RecoverKeyPair=استعادة شفرتي الدخول من ملف احتياطي
+
+#_________________________________=Restore from Backup Disk
+-f910-wintitle:RecoverShareKeyPair=استعادة من قرص احتياطي 
+
+#_________________________________________=Remove Martus From This Computer
+-31b5-wintitle:RemoveMartsFromThisComputer= إزالة Martus من هذا الحاسوب
+
+#__________________________=Remove Server
+-49c2-wintitle:RemoveServer=إزالة خادم 
+
+#_____________________________=Resend Bulletins
+-273f-wintitle:ResendBulletins= إعادة إرسال نشرات 
+
+#_____________________________________________=Retrieving Bulletins
+-b7aa-wintitle:RetrieveHQDraftBulletinProgress=جاري استرجاع النشرات 
+
+#______________________________________________=Retrieving Bulletin Summaries
+-2a45-wintitle:RetrieveHQDraftBulletinSummaries=استرجاع ملخصات النشرات
+
+#______________________________________=Retrieve Field Desk Draft Bulletins
+-a45d-wintitle:RetrieveHQDraftBulletins=استرجع مسودات مكتب الموقع
+
+#______________________________________________=Retrieving Bulletins
+-b7aa-wintitle:RetrieveHQSealedBulletinProgress=جاري استرجاع النشرات
+
+#_______________________________________________=Retrieving Bulletin Summaries
+-2a45-wintitle:RetrieveHQSealedBulletinSummaries=استرجاع ملخصات النشرات
+
+
+#_______________________________________=Retrieve Field Desk Sealed Bulletins
+-2e56-wintitle:RetrieveHQSealedBulletins=استرجع نشرات مكتب الموقع المختومة
+
+#_____________________________________________=Retrieving Bulletins
+-b7aa-wintitle:RetrieveMyDraftBulletinProgress=جاري استرجاع النشرات
+
+#______________________________________________=Retrieving Bulletin Summaries
+-2a45-wintitle:RetrieveMyDraftBulletinSummaries=استرجاع ملخصات النشرات
+
+#______________________________________=Retrieve My Draft Bulletins
+-eea7-wintitle:RetrieveMyDraftBulletins=استرجع مسوداتي 
+
+#______________________________________________=Retrieving Bulletins
+-b7aa-wintitle:RetrieveMySealedBulletinProgress=جاري استرجاع النشرات
+
+#_______________________________________________=Retrieving Bulletin Summaries
+-2a45-wintitle:RetrieveMySealedBulletinSummaries=استرجاع ملخصات النشرات
+
+#_______________________________________=Retrieve My Sealed Bulletins
+-68b9-wintitle:RetrieveMySealedBulletins=استرجع نشراتي المختومة  
+
+#_______________________________________=of
+-de04-wintitle:SaveRecoverShareKeyPairOf=من
+
+#______________________________=Saving Backup Disk
+-9204-wintitle:SaveShareKeyPair=جاري حفظ القرص الاحتياطي
+
+#______________________________=Server Compliance Statement
+-20f8-wintitle:ServerCompliance=بيان توافق الخادم 
+
+#________________________=Server News
+-d231-wintitle:ServerNews=أخبار الخادم  
+
+#____________________________________=Server Configuration Results
+-788c-wintitle:ServerSelectionResults=نتائج تهيئة الخادم 
+
+#___________________________________=Verifying Disk
+-6387-wintitle:VerifyingKeyPairShare=التحقق من صلاحية القرص 
+
+#___________________=About Martus
+-ceff-wintitle:about=عن Martus
+
+#________________________________=Key Backup Needed
+-e570-wintitle:askToBackupKeyPair=يلزم وجود ملف احتياطي لشفرتي الدخول 
+
+#_____________________________________________=Backing Up Your Key
+-52f3-wintitle:confirmBackupKeyPairInformation=حفظ شفرتي الدخول احتياطيا
+
+#_____________________________________________=Backing Up Your Key Files
+-cdb1-wintitle:confirmBackupKeyPairSecretShare=جاري نسخ ملفات شفرتي دخولك احتياطيا. 
+
+#______________________________________________=Verify Disks
+-f38d-wintitle:confirmBackupKeyShareVerifyDisks=تحقق من صلاحية الأقراص
+
+#_________________________________________=Cancel Backup Restore
+-3b7c-wintitle:confirmCancelBackupRecovery=إلغاء استعادة الملف الاحتياطي 
+
+#_________________________________________=Cancel Modify Bulletin
+-276b-wintitle:confirmCancelModifyBulletin=إلغاء تعديل النشرة 
+
+#______________________________________=Cancel Backup
+-bba5-wintitle:confirmCancelShareBackup=إلغاء النسخ الاحتياطي 
+
+#_______________________________________=Cancel Restore
+-3889-wintitle:confirmCancelShareRecover=إلغاء الاستعادة
+
+#______________________________________=Cancel Verification
+-8a03-wintitle:confirmCancelShareVerify=إلغاء التحقق من الصلاحية 
+
+#_______________________________________=Confirm Removal of Headquarters
+-2574-wintitle:confirmClearHQInformation=تأكيد إزالة المركز الرئيسي 
+
+#________________________________________=Confirm Create Copy of Someone Else's Bulletin
+-7a92-wintitle:confirmCloneBulletinAsMine=تأكيد إنشاء نسخة من نشرة شخص آخر 
+
+#_________________________________________=Confirm Create Copy of Sealed Bulletin
+-8038-wintitle:confirmCloneMySealedAsDraft=تأكيد إنشاء نسخة من نشرة مختومة 
+
+#_________________________________=Delete My Data
+-07c3-wintitle:confirmDeleteMyData= حذف بياناتي 
+
+#________________________________________=Unsent Draft Reminder
+-7657-wintitle:confirmDraftUploadReminder=تذكير بمسودة لم ترسل 
+
+#________________________________________________=Modify Bulletin
+-e125-wintitle:confirmEditBulletinWithUnknownTags=تعديل نشرة 
+
+#______________________________________=Customize Fields
+-1cb1-wintitle:confirmEnterCustomFields=تحوير حقول 
+
+#_______________________________________________=Invalid File
+-cd3f-wintitle:confirmErrorRecoverIvalidFileName=ملف غير صالح 
+
+#______________________________________=Confirm Export Private Data
+-fa1c-wintitle:confirmExportPrivateData= تأكيد تصدير بيانات خاصة 
+
+#______________________________________=Export Bulletins
+-a86c-wintitle:confirmExportUnknownTags=تصدير نشرات 
+
+#_______________________________________________=Key file Exists
+-493d-wintitle:confirmKeyPairFileExistsOverWrite=ملف شفرتي الدخول موجود 
+
+#_________________________________________=Folder Migration Required
+-72d3-wintitle:confirmNeedsFolderMigration= يلزم تهجير مجلد
+
+#_____________________________________________=Version Warning
+-86f7-wintitle:confirmNewerConfigInfoFileFound= تحذير الإصدار 
+
+#_________________________________________________________=View Attachment
+-b24c-wintitle:confirmNotYourBulletinViewAttachmentAnyways=استعرض مرفقا
+
+#__________________________________________=Confirm Replace Existing File
+-e2b2-wintitle:confirmOverWriteExistingFile=تأكيد استبدال الملف الموجود 
+
+#___________________________________=Print Configuration Warning
+-30d9-wintitle:confirmPrinterWarning=تحذير تهيئة الطباعة 
+
+
+#_____________________________________________=Unsent Bulletins Reminder
+-1a10-wintitle:confirmQuickEraseOutboxNotEmpty=تذكير بالنشرات التي لم ترسل 
+
+#_________________________________________=Create New Account / Restore Old Account
+-ab12-wintitle:confirmRecoverUsingKeyShare=إنشاء حساب جديد / استعادة حساب قديم
+
+#____________________________________________________=Restore Failed
+-b6bc-wintitle:confirmRecoveredKeyShareFailedTryAgain=فشلت الاستعادة 
+
+#_____________________________________=Weak Password Warning
+-0295-wintitle:confirmRedoWeakPassword=تحذير كلمة مرور ضعيفة 
+
+#_____________________________________=Confirm Remove Attachments
+-8739-wintitle:confirmRemoveAttachment=تأكيد إزالة المرفقات 
+
+#_________________________________=Delete All Data and Remove Martus
+-6fef-wintitle:confirmRemoveMartus= حذف جميع البيانات و إزالة Martus
+
+#_____________________________________________________=Request to Send Contact Info to Server
+-4f40-wintitle:confirmRequestToSendContactInfoToServer=طلب إرسال معلومات الاتصال للخادم 
+
+#________________________________________=Reset Contents
+-6f62-wintitle:confirmResetDefaultDetails=إزالة المحتويات 
+
+#_______________________________________=Confirm Save With Public Data
+-1e77-wintitle:confirmSendWithPublicData= تأكيد الحفظ مع البيانات العامة 
+
+#___________________________________________=Server Compliance Statement
+-20f8-wintitle:confirmServerComplianceFailed=بيان توافق الخادم 
+
+#_______________________________________=Confirm Import of Public Account Id
+-0a90-wintitle:confirmSetImportPublicKey=تأكيد استيراد هوية الحساب العام 
+
+#________________________________________________________=Bulletin Already Exists
+-c839-wintitle:confirmUnAuthoredBulletinDeleteBeforePaste= النشرة موجودة بالفعل
+
+#__________________________________________________=Unable to Restore from Backup File
+-79e5-wintitle:confirmUnableToRecoverFromBackupFile=غير قادر على استعادة الملف من النسخة الاحتياطية
+
+#_____________________________________=Customize Fields
+-1cb1-wintitle:confirmUndoCustomFields=تحوير حقول 
+
+#___________________________________=Upload Reminder
+-5b14-wintitle:confirmUploadReminder=تذكير بإرسال للخادم 
+
+#_____________________________________________=Custom Fields Selection
+-0b6f-wintitle:confirmUseBulletinsCustomFields= انتقاء حقول معدلة
+
+#______________________________________________=Accountmap File Missing Or Corrupt
+-e8e7-wintitle:confirmWarnMissingAccountMapFile=ملف Accountmap ضائع أو تالف
+
+#________________________________________________________________=Accountmap Signature File Missing Or Corrupt
+-9993-wintitle:confirmWarnMissingOrCorruptAccountMapSignatureFile=ملف التحقق من ملف Accountmap ضائع أو تالف
+
+#________________________________________________________=Questionable Media Chosen
+-8c18-wintitle:confirmWarningPathChosenMayNotBeRemoveable= تم اختيار وسيط غريب
+
+#__________________________________________________=Security Warning
+-a8f2-wintitle:confirmWarningSwitchToNormalKeyboard=تحذير أمني 
+
+#_________________________________=Confirm Delete Folder
+-1a75-wintitle:confirmdeletefolder=تأكيد حذف مجلد 
+
+#_______________________________________=Text Not Found
+-5592-wintitle:confirmhelpStringNotFound=لم يتم العثور على النص 
+
+#_____________________________=Confirm Retrieve Bulletins
+-ec90-wintitle:confirmretrieve=تأكيد استرجاع نشرات 
+
+#_________________________=Confirm Save Bulletin
+-7bd0-wintitle:confirmsend=تأكيد حفظ نشرة 
+
+#____________________=Create Bulletin
+-de5e-wintitle:create=إنشاء نشرة 
+
+#________________________________=Search Text Not Found
+-daf7-wintitle:helpStringNotFound=لم يتم العثور على نص البحث 
+
+#_______________________________=Customize Fields
+-1cb1-wintitle:inputCustomFields=تحوير حقول 
+
+#____________________________________=Export My Public Account Id
+-2b8a-wintitle:inputExportMyPublicKey=تصدير هوية حسابي العام 
+
+#_____________________________=HQ Label
+-bd52-wintitle:inputGetHQLabel=العنوان التعريفي للمركز الرئيسي
+
+#___________________________________=Default Backup File Name
+-ac3c-wintitle:inputGetShareFileName=الاسم التلقائي للملف الاحتياطي
+
+#___________________________________=Import Headquarters Public Account Id
+
+-6d05-wintitle:inputImportPublicCode=استيراد هوية الحساب العام للمركز الرئيسي
+
+#__________________________________=Request Upload Permission
+-7e44-wintitle:inputservermagicword=طلب السماح بإرسال ملفات للخادم
+
+#_____________________________=Server Name
+
+-563c-wintitle:inputservername=اسم الخادم 
+
+#___________________________________=Server Identification
+-569e-wintitle:inputserverpubliccode=كود تعريف الخادم 
+
+
+#__________________=Martus Human Rights Bulletin System
+-e5ae-wintitle:main=نظام Martus لنشرات حقوق الإنسان
+
+#____________________________________=Incorrect Public Code
+-f994-wintitle:notifyAccountCodeWrong=كود عام غير صحيح
+
+#__________________________________=Martus Already Running
+-cfce-wintitle:notifyAlreadyRunning=Martus يعمل بالفعل
+
+#______________________________________=Attachment Chosen Not a File
+-8023-wintitle:notifyAttachmentNotAFile=المرفق المُختار ليس بملف
+
+#____________________________________________=Security Alert!
+-4938-wintitle:notifyAuthenticateServerFailed=تنبيه أمني! 
+
+#__________________________________=Unable to Connect to Server
+-1b07-wintitle:notifyConfigNoServer=غير قادر على الاتصال بالخادم 
+
+#____________________________________________________=Confirm Correct Default Details Content
+-c770-wintitle:notifyConfirmCorrectDefaultDetailsData=تأكيد صحة محتوي التفاصيل التلقائية 
+
+#_______________________________________=Error Creating New Account
+-1141-wintitle:notifyCreateAccountFailed=حدثت مشكلة أثناء إنشاء حساب جديد 
+
+#___________________________________________________=Moved Damaged Bulletin
+-61c0-wintitle:notifyDamagedBulletinMovedToDiscarded=تم نقل النشرة الخربة
+
+#____________________________________________=Delete Drafts From Server
+-ec04-wintitle:notifyDeleteServerDraftsFailed=حذف مسودات من الخادم
+
+#__________________________________________=Delete Drafts From Server
+-ec04-wintitle:notifyDeleteServerDraftsNone=حذف مسودات من الخادم
+
+#____________________________________________=Delete Drafts From Server
+-ec04-wintitle:notifyDeleteServerDraftsWorked=حذف مسودات من الخادم 
+
+#___________________________________________=Cannot Move Bulletin(s)
+-771a-wintitle:notifyDropErrorBulletinExists=غير قادر على نقل النشرة(ات) 
+
+#______________________________=Error Moving Bulletin(s)
+-4cd9-wintitle:notifyDropErrors=حدثت مشكلة أثناء نقل النشرة(ات)
+
+#__________________________________________=Error Backing Up Key
+-ee40-wintitle:notifyErrorBackingUpKeyShare=حدثت مشكلة أثناء النسخ الاحتياطي لشفرتي الدخول 
+
+#____________________________________=Error Reading File
+-73ad-wintitle:notifyErrorReadingFile=حدثت مشكلة في قراءة الملف 
+
+#___________________________________________________=Error During Restore
+-af9a-wintitle:notifyErrorRecoveringAccountDirectory=حدثت مشكلة أثناء الاستعادة 
+
+#_____________________________________=Unable to Rename Folder
+-1ce2-wintitle:notifyErrorRenameFolder= غير قادر على إعادة تسمية المجلد 
+
+#___________________________________________=Unable to Rename Folder
+-1ce2-wintitle:notifyErrorRenameFolderExists= غير قادر على إعادة تسمية المجلد 
+
+#_______________________________________=Error Saving
+-9dc8-wintitle:notifyErrorSavingBulletin=حدثت مشكلة أثناء الحفظ 
+
+#_____________________________________=Error Saving Configuration File
+-1287-wintitle:notifyErrorSavingConfig=حدثت مشكلة أثناء حفظ ملف التهيئة 
+
+#____________________________________=Error Saving State
+-884d-wintitle:notifyErrorSavingState=حدثت مشكلة أثناء حفظ الحالة 
+
+#____________________________________=Error Writing File
+-fabf-wintitle:notifyErrorWritingFile=حدثت مشكلة في كتابة الملف
+
+#_________________________________________=Server Removed
+-1820-wintitle:notifyExistingServerRemoved=تمت إزالة الخادم 
+
+#__________________________________=Export Bulletins
+-a86c-wintitle:notifyExportComplete=تصدير نشرات 
+
+#_____________________________________=Error Exporting Folder
+-d6d7-wintitle:notifyExportFolderEmpty=حدثت مشكلة أثناء تصدير النشرات
+
+#_____________________________________=Public Account Id Exported
+-4d09-wintitle:notifyExportMyPublicKey=تم تصدير هوية الحساب العام 
+
+#_______________________________________=No Bulletins Selected
+-c1d6-wintitle:notifyExportZeroBulletins=لم يتم اختيار أية نشرة 
+
+#_________________________________________=Files Not Deleted
+-a001-wintitle:notifyFilesWillNotBeDeleted=لن يتم حذف الملفات 
+
+#_________________________________________=Folder Migration Error
+-3bcb-wintitle:notifyFolderMigrationFailed= مشكلة تهجير مجلد
+
+#_________________________________________=Detected Damaged Bulletins
+-4579-wintitle:notifyFoundDamagedBulletins=تم العثور على نشرات خربة
+
+
+#________________________________=Recovered Lost Bulletins
+-704d-wintitle:notifyFoundOrphans=تم استعادة نشرات مفقودة 
+
+#_____________________________________=Headquarters Key Already Exists
+-03e9-wintitle:notifyHQKeyAlradyExists= شفرة المركز الرئيسي موجودة بالفعل 
+
+#_____________________________________=Invalid Server Public Code
+-08ad-wintitle:notifyInvalidServerCode=كود عام للخادم غير صحيح
+
+#_____________________________________=Invalid Server Name or IP Address
+-3376-wintitle:notifyInvalidServerName=اسم خادم أو عنوان IP غير صحيح
+
+#_____________________________________________=Bulletin Details
+-6fa9-wintitle:notifyModifyViewBulletinDetails= تفاصيل النشرة
+
+#______________________________________=Finished
+-355b-wintitle:notifyOperationCompleted=تم الانتهاء من الإجراء 
+
+#___________________________________=Invalid Setup Information
+-2e9b-wintitle:notifyPasswordInvalid=معلومات إقامة حساب غير صحيحة 
+
+#___________________________________________=Invalid Setup Information
+-2e9b-wintitle:notifyPasswordMatchesUserName=معلومات إقامة حساب غير صحيحة 
+
+#______________________________=Error Pasting Bulletin(s)
+-9288-wintitle:notifyPasteError=حدثت مشكلة أثناء لصق النشرة(ات)
+
+#___________________________________________________=Cannot Paste Bulletin(s)
+-c05f-wintitle:notifyPasteErrorBulletinAlreadyExists=غير قادر على لصق النشرة(ات) 
+
+#______________________________________________=No Bulletin Selected
+-27cd-wintitle:notifyPreviewNoBulletinsSelected=لم يتم اختيار أية نشرة
+
+#__________________________________________=Preview One Bulletin Only
+-5b0a-wintitle:notifyPreviewOneBulletinOnly=استعرض نشرة واحدة فقط 
+
+#_______________________________________=Print All Private Data
+-180b-wintitle:notifyPrintAllPrivateData= طباعة جميع البيانات الخاصة 
+
+#_______________________________________=Error Importing Public Information
+-913d-wintitle:notifyPublicInfoFileError=حدثت مشكلة أثناء استيراد معلومات عامة 
+
+#_________________________________________________________________________=Restore Succeeded
+-7352-wintitle:notifyRecoveredKeyShareSucceededNewUserNamePasswordRequired=تمت الاستعادة بنجاح 
+
+#_____________________________________________=Successful Key Restore
+-b5ca-wintitle:notifyRecoveryOfKeyPairComplete=تمت استعادة شفرتي الدخول بنجاح 
+
+#______________________________________________=Restore Complete
+-6ad3-wintitle:notifyRecoveryOfKeyShareComplete=تمت الاستعادة
+
+#_____________________________________________=Restore Key
+-cb87-wintitle:notifyRecoveryProcessBackupFile=استعادة شفرتي الدخول 
+
+#___________________________________________=Restore Account from Key Backup
+-428a-wintitle:notifyRecoveryProcessKeyShare=استعادة حساب من نسخة احتياطية لشفرتي الدخول 
+
+#____________________________________=Remember Your Password
+-2bc6-wintitle:notifyRememberPassword=تذكر كلمة مرورك 
+
+#_______________________________=Error Sending Bulletin
+-eaab-wintitle:notifyResendError= مشكلة في إرسال النشرة 
+
+#__________________________________________________=Not Authorized To Send
+-a870-wintitle:notifyResendErrorNotAuthorizedToSend= غير مصرح لك بالإرسال 
+
+#____________________________________=Bulletin Download Canceled
+-f8d3-wintitle:notifyRetrieveCanceled=تم إلغاء تنزيل النشرة 
+
+#______________________________________________=Error During Retrieve
+-f2d7-wintitle:notifyRetrievedOnlySomeSummaries=حدثت مشكلة أثناء الاسترجاع 
+
+#________________________________________=Error Changing User Name or Password
+-787e-wintitle:notifyRewriteKeyPairFailed=حدثت مشكلة أثناء تغيير اسم المستخدم أو كلمة المرور
+
+#_______________________________________=Changed User Name or Password
+-b5b9-wintitle:notifyRewriteKeyPairSaved=تم تغيير اسم المستخدم أو كلمة المرور 
+
+#________________________________=Search Results
+-5e05-wintitle:notifySearchFailed=نتائج البحث 
+
+#_______________________________=Search Results
+-5e05-wintitle:notifySearchFound=نتائج البحث
+
+#___________________________________=Incorrect Server Public Code
+-7b1b-wintitle:notifyServerCodeWrong=كود عام للخادم غير صحيح
+
+
+#_______________________________=Server Error
+-076a-wintitle:notifyServerError=مشكلة بالخادم 
+
+#_____________________________________=Server Response Invalid
+-77bd-wintitle:notifyServerInfoInvalid=استجابة خادم غير صالحة 
+
+
+#__________________________________________=Unable to connect
+-8207-wintitle:notifyServerSSLNotResponding=غير قادر على الاتصال 
+
+#__________________________________________=Saving Attachment Failed
+-fdf7-wintitle:notifyUnableToSaveAttachment=فشل حفظ المرفق 
+
+#__________________________________________=Viewing Attachment Failed
+-bd14-wintitle:notifyUnableToViewAttachment=فشل استعراض المرفق  wintitle:notifyUnexpectedError=مشكلة غير متوقعة 
+
+#___________________________________=Unexpected Error
+-d17c-wintitle:notifyUnexpectedError= مشكلة غير متوقعة 
+
+#_____________________________________=User Already Exists
+-eecc-wintitle:notifyUserAlreadyExists=المستخدم موجود بالفعل 
+
+#_________________________________=Invalid Setup Information
+-2e9b-wintitle:notifyUserNameBlank=معلومات إقامة حساب غير صالحة
+
+#________________________________________________=Server Compliance Statement
+-20f8-wintitle:notifyUserRejectedServerCompliance=بيان توافق خادم 
+
+#____________________________________________=Verification Succeeded
+-9195-wintitle:notifyVerifyKeyPairSharePassed=تم التحقق بنجاح 
+
+#___________________________________________=Bulletin Details
+-6fa9-wintitle:notifyViewViewBulletinDetails= تفاصيل النشرة 
+
+#___________________________________=Welcome To Martus
+-423f-wintitle:notifyWelcomeToMartus=مرحبا بك في Martus
+
+#___________________________________=Error Sending ContactInfo
+-be22-wintitle:notifycontactRejected=حدثت مشكلة أثناء إرسال معلومات الاتصال
+
+#_____________________________________=Error Loading Configuration File
+-fa56-wintitle:notifycorruptconfiginfo=حدثت مشكلة أثناء تحميل ملف التهيئة 
+
+#___________________________________=Incorrect Signin
+-81bc-wintitle:notifyincorrectsignin=دخول غير صحيح 
+
+#_______________________________=Upload Permission Granted
+-dc27-wintitle:notifymagicwordok=تم منح التصريح بإرسال ملفات للخادم 
+
+#_____________________________________=Upload Permission Rejected
+-0be7-wintitle:notifymagicwordrejected=تم رفض التصريح بإرسال ملفات للخادم 
+
+#______________________________________=Invalid Setup Information
+-2e9b-wintitle:notifypasswordsdontmatch=معلومات إقامة حساب غير صالحة
+
+#__________________________________=Retrieve Bulletins
+-9245-wintitle:notifyretrievefailed=استرجاع نشرات 
+
+#____________________________________=Retrieve Bulletins
+-9245-wintitle:notifyretrievenoserver=استرجاع نشرات
+
+#___________________________________=Retrieve Bulletins
+-9245-wintitle:notifyretrievenothing=استرجاع نشرات
+
+#__________________________________=Retrieve Bulletins
+
+-9245-wintitle:notifyretrieveworked=استرجاع نشرات 
+
+#____________________________=Server Selection Complete
+-21ee-wintitle:notifyserverok=تم اختيار خادم 
+
+
+#__________________________________=Error Sending Bulletin
+-eaab-wintitle:notifyuploadrejected=حدثت مشكلة أثناء إرسال النشرة 
+
+#_______________________________________=Invalid Setup Information
+-2e9b-wintitle:notifyusernamessdontmatch=معلومات إقامة حساب غير صالحة
+
+#_____________________=Options
+-6bf5-wintitle:options=خيارات 
+
+#_______________________________=Back up key file
+-d004-wintitle:saveBackupKeyPair=نسخ ملف شفرتي الدخول احتياطيا 
+
+#____________________=Search
+-bce0-wintitle:search=بحث
+
+#__________________________=Martus Setup Contact Information
+-2f63-wintitle:setupcontact=معلومات اتصال لإقامة حساب ببرنامج Martus
+
+#_________________________=Martus Setup Signin
+-7b6e-wintitle:setupsignin=دخول إقامة حساب ببرنامج Martus
+
+#____________________________________________=Confirm Delete Bulletins
+-4016-wintitle:warningDeleteMultipleBulletins= تأكيد حذف نشرات
+
+#_________________________________________=Confirm Delete Bulletin
+-6b4a-wintitle:warningDeleteSingleBulletin= تأكيد حذف نشرة
+
+#_________________________________=Confirm Delete Folder
+-1a75-wintitle:warningdeletefolder= تأكيد حذف مجلد 
