@@ -530,6 +530,13 @@ public class UiActions
 			else
 				putValue(ActionMenuDiscardBulletins.NAME, mainWindow.getLocalization().getMenuLabel("DiscardBulletins"));
 		}
+		
+		public Object getValue(String key)
+		{
+			if(key.equals(ActionMenuDiscardBulletins.NAME))
+				updateName();
+			return super.getValue(key);
+		}
 	}
 
 	private static class ActionMenuPasteBulletins extends UiMenuAction
