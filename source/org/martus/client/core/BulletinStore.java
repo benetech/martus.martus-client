@@ -644,12 +644,12 @@ public class BulletinStore
 		return folderSealedOutbox;
 	}
 	
-	public BulletinFolder getFolderOnServer()
+	private BulletinFolder getFolderOnServer()
 	{
 		return createOrFindFolder(ON_SERVER_FOLDER);
 	}
 	
-	public BulletinFolder getFolderNotOnServer()
+	private BulletinFolder getFolderNotOnServer()
 	{
 		return createOrFindFolder(NOT_ON_SERVER_FOLDER);
 	}
@@ -723,6 +723,16 @@ public class BulletinStore
 		folder.preventRename();
 		folder.preventDelete();
 		return folder;
+	}
+	
+	public boolean isProbablyOnServer(Bulletin b)
+	{
+		return getFolderOnServer().contains(b);
+	}
+	
+	public boolean isProbablyNotOnServer(Bulletin b)
+	{
+		return getFolderNotOnServer().contains(b);
 	}
 	
 	public void setIsOnServer(Bulletin b)

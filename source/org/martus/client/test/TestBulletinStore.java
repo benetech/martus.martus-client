@@ -611,42 +611,36 @@ public class TestBulletinStore extends TestCaseEnhanced
 	
 	public void testSetIsOnServer() throws Exception
 	{
-		BulletinFolder on = store.getFolderOnServer();
-		BulletinFolder notOn = store.getFolderNotOnServer();
-		
 		Bulletin b = store.createEmptyBulletin();
 		store.saveBulletin(b);
 		store.setIsOnServer(b);
-		assertTrue("not in on?", on.contains(b));
-		assertFalse("in not on?", notOn.contains(b));
+		assertTrue("not in on?", store.isProbablyOnServer(b));
+		assertFalse("in not on?", store.isProbablyNotOnServer(b));
 		store.setIsOnServer(b);
-		assertTrue("not still in on?", on.contains(b));
-		assertFalse("now in not on?", notOn.contains(b));
+		assertTrue("not still in on?", store.isProbablyOnServer(b));
+		assertFalse("now in not on?", store.isProbablyNotOnServer(b));
 		
-		store.moveBulletin(b, on, notOn);
+		store.setIsNotOnServer(b);
 		store.setIsOnServer(b);
-		assertTrue("not again in on?", on.contains(b));
-		assertFalse("still in not on?", notOn.contains(b));
+		assertTrue("not again in on?", store.isProbablyOnServer(b));
+		assertFalse("still in not on?", store.isProbablyNotOnServer(b));
 	}
 
 	public void testSetIsNotOnServer() throws Exception
 	{
-		BulletinFolder on = store.getFolderOnServer();
-		BulletinFolder notOn = store.getFolderNotOnServer();
-		
 		Bulletin b = store.createEmptyBulletin();
 		store.saveBulletin(b);
 		store.setIsNotOnServer(b);
-		assertTrue("not in not on?", notOn.contains(b));
-		assertFalse("in on?", on.contains(b));
+		assertTrue("not in not on?", store.isProbablyNotOnServer(b));
+		assertFalse("in on?", store.isProbablyOnServer(b));
 		store.setIsNotOnServer(b);
-		assertTrue("not still in not on?", notOn.contains(b));
-		assertFalse("now in on?", on.contains(b));
+		assertTrue("not still in not on?", store.isProbablyNotOnServer(b));
+		assertFalse("now in on?", store.isProbablyOnServer(b));
 		
-		store.moveBulletin(b, notOn, on);
+		store.setIsOnServer(b);
 		store.setIsNotOnServer(b);
-		assertTrue("not again in not on?", notOn.contains(b));
-		assertFalse("still in on?", on.contains(b));
+		assertTrue("not again in not on?", store.isProbablyNotOnServer(b));
+		assertFalse("still in on?", store.isProbablyOnServer(b));
 	}
 
 	public void testAddBulletinToFolder() throws Exception

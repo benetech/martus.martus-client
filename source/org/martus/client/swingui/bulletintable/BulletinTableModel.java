@@ -128,7 +128,7 @@ public class BulletinTableModel extends AbstractTableModel
 	private String getSentTag(Bulletin b)
 	{
 		BulletinStore store = folder.getStore();
-		boolean knownNotOnServer = store.getFolderNotOnServer().contains(b);
+		boolean knownNotOnServer = store.isProbablyNotOnServer(b);
 
 		if(store.getFolderDraftOutbox().contains(b))
 		{
@@ -141,7 +141,7 @@ public class BulletinTableModel extends AbstractTableModel
 		if(knownNotOnServer)
 			return "WasSentNo";
 
-		if(store.getFolderOnServer().contains(b))
+		if(store.isProbablyOnServer(b))
 			return "WasSentYes";
 		
 		return null;

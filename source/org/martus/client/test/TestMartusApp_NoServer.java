@@ -114,8 +114,6 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		BulletinStore store = appWithAccount.getStore();
 		BulletinFolder outbox = store.getFolderDraftOutbox();
 		BulletinFolder discarded = store.getFolderDiscarded();
-		BulletinFolder onServer = store.getFolderOnServer();
-		BulletinFolder notOnServer = store.getFolderNotOnServer();
 		
 		store.getFoldersFile().delete();
 		assertFalse("couldn't delete folders?", store.getFoldersFile().exists());
@@ -127,15 +125,15 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		assertTrue("didn't put in outbox?", outbox.contains(b));
 		assertTrue("didn't put in saved?", appWithAccount.getFolderSaved().contains(b));
 		assertTrue("didn't save folders?", store.getFoldersFile().exists());
-		assertFalse("marked as sent?", onServer.contains(b));
-		assertTrue("didn't mark as unsent?", notOnServer.contains(b));
+		assertFalse("marked as sent?", store.isProbablyOnServer(b));
+		assertTrue("didn't mark as unsent?", store.isProbablyNotOnServer(b));
 		
 		store.setIsOnServer(b);
 		store.moveBulletin(b, outbox, discarded);
 		appWithAccount.saveBulletin(b, outbox);
 		assertFalse("didn't remove from discarded?", discarded.contains(b));
-		assertFalse("not unmarked as sent?", onServer.contains(b));
-		assertTrue("didn't remark as unsent?", notOnServer.contains(b));
+		assertFalse("not unmarked as sent?", store.isProbablyOnServer(b));
+		assertTrue("didn't remark as unsent?", store.isProbablyNotOnServer(b));
 	}
 	
 	public void testLoadOldCustomFieldConfigInfo() throws Exception

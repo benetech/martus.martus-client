@@ -154,16 +154,10 @@ public class TestBulletinTableModel extends TestCaseEnhanced
 		assertTrue("not sealed?", b.isSealed());
 		assertEquals("already sent?", "", list.getValueAt(row, WASSENT));
 		
-		BulletinFolder onServer = store.getFolderOnServer();
-		BulletinFolder notOnServer = store.getFolderNotOnServer();
-
-		store.addBulletinToFolder(onServer, b.getUniversalId());
+		store.setIsOnServer(b);
 		assertEquals("not sent?", localization.getFieldLabel("WasSentYes"), list.getValueAt(row, WASSENT));
 		
-		store.addBulletinToFolder(notOnServer, b.getUniversalId());
-		assertEquals("sent if in both?", localization.getFieldLabel("WasSentNo"), list.getValueAt(row, WASSENT));
-		
-		store.removeBulletinFromFolder(onServer, b);
+		store.setIsNotOnServer(b);
 		assertEquals("sent?", localization.getFieldLabel("WasSentNo"), list.getValueAt(row, WASSENT));
 	}
 	
@@ -208,9 +202,8 @@ public class TestBulletinTableModel extends TestCaseEnhanced
 		assertEquals("should be unknown", "", list.getValueAt(row, WASSENT));
 
 		BulletinFolder draftOutbox = store.getFolderDraftOutbox();
-		BulletinFolder onServer = store.getFolderOnServer();
 
-		store.addBulletinToFolder(onServer, uid);
+		store.setIsOnServer(notMine);
 		assertEquals("on server should be respected", localization.getFieldLabel("WasSentYes"), list.getValueAt(row, WASSENT));
 		
 		store.setIsNotOnServer(notMine);
