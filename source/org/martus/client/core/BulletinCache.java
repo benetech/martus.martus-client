@@ -48,6 +48,9 @@ public class BulletinCache
 	
 	public void add(Bulletin b)
 	{
+		if(indexOf(b.getUniversalId()) >= 0)
+			return;
+			
 		if(addNextAt >= MAX_SIZE)
 			addNextAt = 0;
 		cache[addNextAt++] = b;

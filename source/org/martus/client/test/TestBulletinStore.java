@@ -35,6 +35,7 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.Vector;
 
+import org.martus.client.core.BulletinCache;
 import org.martus.client.core.BulletinFolder;
 import org.martus.client.core.BulletinStore;
 import org.martus.client.core.MartusClientXml;
@@ -308,6 +309,9 @@ public class TestBulletinStore extends TestCaseEnhanced
 		assertEquals(0, store.getBulletinCount());
 		assertEquals(0, f.getBulletinCount());
 		assertEquals(originalRecordCount, db.getRecordCount());
+		
+		BulletinCache cache = store.getCache();
+		assertNull("found destroyed bulletin?", cache.find(b.getUniversalId()));
 	}
 
 	public void testGetFieldData() throws Exception

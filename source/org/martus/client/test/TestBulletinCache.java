@@ -30,6 +30,7 @@ import org.martus.client.core.BulletinCache;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.crypto.MartusCrypto;
 import org.martus.common.crypto.MockMartusSecurity;
+import org.martus.common.packet.UniversalId;
 import org.martus.util.TestCaseEnhanced;
 
 
@@ -80,5 +81,19 @@ public class TestBulletinCache extends TestCaseEnhanced
 		
 		assertNull("Can still find first?", cache.find(first.getUniversalId()));
 		assertEquals("Can't find last?", last, cache.find(last.getUniversalId()));
+	}
+	
+	public void testAddTwiceRemoveOnce() throws Exception
+	{
+		MartusCrypto security = MockMartusSecurity.createClient();
+		BulletinCache cache = new BulletinCache();
+
+		Bulletin b = new Bulletin(security);
+		UniversalId uid = b.getUniversalId();
+
+		cache.add(b);
+		cache.add(b);
+		cache.remove(uid);
+		assertNull("Didn't remove all copies?", cache.find(uid));
 	}
 }

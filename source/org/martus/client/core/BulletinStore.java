@@ -317,8 +317,8 @@ public class BulletinStore
 
 	public synchronized void removeBulletinFromStore(UniversalId uid) throws IOException
 	{
-		cache.remove(uid);
 		Bulletin foundBulletin = findBulletinByUniversalId(uid);
+		cache.remove(uid);
 		MartusCrypto crypto = getSignatureVerifier();
 		try
 		{
@@ -1217,6 +1217,11 @@ public class BulletinStore
 	public boolean needsLegacyFolderConversion()
 	{
 		return loadedLegacyFolders;
+	}
+	
+	public BulletinCache getCache()
+	{
+		return cache;
 	}
 
 	public static int maxCachedBulletinCount = 100;
