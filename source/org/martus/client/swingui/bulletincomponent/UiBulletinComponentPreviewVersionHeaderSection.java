@@ -29,7 +29,7 @@ import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.dialogs.UiBulletinDetailsDialog;
 
 
-public class UiBulletinComponentPreviewVersionHeaderSection extends UiBulletinComponentHeader
+public class UiBulletinComponentPreviewVersionHeaderSection extends UiBulletinComponentHeaderSection
 {
 	UiBulletinComponentPreviewVersionHeaderSection(UiMainWindow mainWindowToUse, String tagQualifierToUse)
 	{

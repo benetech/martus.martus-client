@@ -98,9 +98,9 @@ public class UiBulletinView extends UiBulletinComponent
 		return currentBulletin.getAuthorizedToReadKeys();
 	}
 
-	UiBulletinComponentHeader createHeaderSection()
+	UiBulletinComponentHeaderSection createHeaderSection()
 	{
-		return new UiBulletinComponentHeader(mainWindow, "View");
+		return new UiBulletinComponentHeaderSection(mainWindow, "View");
 	}
 
 	UiBulletinComponentHeadQuarters createHeadQuartersSection()

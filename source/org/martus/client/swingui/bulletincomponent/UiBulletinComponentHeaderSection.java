@@ -43,9 +43,9 @@ import org.martus.swing.UiLabel;
 import org.martus.util.TokenReplacement;
 
 
-public class UiBulletinComponentHeader extends UiBulletinComponentSection
+public class UiBulletinComponentHeaderSection extends UiBulletinComponentSection
 {
-	UiBulletinComponentHeader(UiMainWindow mainWindowToUse, String tagQualifierToUse)
+	UiBulletinComponentHeaderSection(UiMainWindow mainWindowToUse, String tagQualifierToUse)
 	{
 		super(mainWindowToUse);
 		tagQualifier = tagQualifierToUse;

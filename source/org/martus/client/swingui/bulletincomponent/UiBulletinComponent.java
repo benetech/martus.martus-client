@@ -56,7 +56,7 @@ abstract public class UiBulletinComponent extends JPanel implements Scrollable, 
 	abstract public void validateData() throws UiField.DataInvalidException; 
 	abstract public boolean isBulletinModified() throws
 			IOException, MartusCrypto.EncryptionException;
-	abstract UiBulletinComponentHeader createHeaderSection();
+	abstract UiBulletinComponentHeaderSection createHeaderSection();
 	abstract UiBulletinComponentHeadQuarters createHeadQuartersSection();
 	abstract HQKeys getHqKeys();
 
@@ -244,7 +244,7 @@ abstract public class UiBulletinComponent extends JPanel implements Scrollable, 
 
 	UiField allPrivateField;
 	Bulletin currentBulletin;
-	UiBulletinComponentHeader headerSection;
+	UiBulletinComponentHeaderSection headerSection;
 	UiBulletinComponentDataSection publicSection;
 	UiBulletinComponentDataSection privateSection;	
 	UiBulletinComponentHeadQuarters headquartersSection;

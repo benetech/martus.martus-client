@@ -197,9 +197,9 @@ public class UiBulletinEditor extends UiBulletinComponent
 		return mainWindow.getApp().getHQKeysWithFallback();
 	}
 
-	UiBulletinComponentHeader createHeaderSection()
+	UiBulletinComponentHeaderSection createHeaderSection()
 	{
-		return new UiBulletinComponentHeader(mainWindow, "Modify");
+		return new UiBulletinComponentHeaderSection(mainWindow, "Modify");
 	}
 	
 	UiBulletinComponentHeadQuarters createHeadQuartersSection()
