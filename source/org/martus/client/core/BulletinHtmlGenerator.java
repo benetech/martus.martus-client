@@ -61,6 +61,7 @@ public class BulletinHtmlGenerator
 		html.append("<table width='");
 		html.append(Integer.toString(width));
 		html.append("'>");		
+		appendHeadHtml(html, b);
 		
 		if(!yourBulletin)
 		{
@@ -117,21 +118,25 @@ public class BulletinHtmlGenerator
 		html.append("\n");
 	}	
 	
+	private void appendHeadHtml(StringBuffer html, Bulletin b )
+	{
+		html.append("<tr>");		
+		html.append(localization.getFieldLabel("BulletinLastSaved")+" ");			
+		html.append(b.getLastSavedDateTime());
+		html.append("</tr><tr>");		
+		html.append(localization.getFieldLabel("BulletinVersionNumber")+" ");			
+		html.append(b.getVersion());
+		html.append("</tr><tr>");		
+		html.append(localization.getFieldLabel("BulletinStatus")+" ");	
+		html.append(b.getStatus());
+		html.append("<tr></tr>");		
+	}
+	
 	private void appendTailHtml(StringBuffer html, Bulletin b )
 	{
 		html.append("<tr></tr>");
 		html.append(localization.getFieldLabel("BulletinId")+" ");
 		html.append(b.getLocalId());
-		html.append("<tr></tr>");		
-		html.append(localization.getFieldLabel("BulletinStatus")+" ");	
-		html.append(b.getStatus());
-		html.append("<tr></tr>");	
-		html.append(localization.getFieldLabel("BulletinLastSaved")+" ");			
-		html.append(b.getLastSavedDateTime());
-		html.append("<tr></tr>");	
-		html.append(localization.getFieldLabel("BulletinVersionNumber")+" ");			
-		html.append(b.getVersion());
-		
 		html.append("</table>");
 		html.append("</html>");
 	}
