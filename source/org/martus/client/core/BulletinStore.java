@@ -460,27 +460,29 @@ public class BulletinStore
 	{
 		BulletinFolder folder = rawCreateFolder(name);
 		return folder;
-	}
+	}	
 
 	public synchronized boolean renameFolder(String oldName, String newName)
-	{
-		if(!BulletinFolder.isNameVisible(newName))
+	{		
+		if (newName.length() == 0)
 			return false;
+			
+		char[] strOfArray = newName.toCharArray();								
+		for(int i = 0; i < strOfArray.length; ++i)
+		{			
+			if (!MartusUtilities.isValidCharInFolder(strOfArray[i]))
+				strOfArray[i] = ' ';
+		}	
 
-		if(newName.length() == 0 || newName.charAt(0) < '0')
-			return false;
-		
-		if(!MartusUtilities.isFileNameValid(newName))
-			return false;
-
-		if(findFolder(newName) != null)
+		String newFolder = MartusUtilities.removeExtraSpacesAtFirstPosition(new String(strOfArray));
+		if(findFolder(newFolder) != null)
 			return false;
 
 		BulletinFolder folder = findFolder(oldName);
 		if(folder == null)
 			return false;
 
-		folder.setName(newName);
+		folder.setName(newFolder);
 		saveFolders();
 		return true;
 	}

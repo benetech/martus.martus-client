@@ -532,14 +532,21 @@ public class TestBulletinStore extends TestCaseEnhanced
 		assertEquals(false, store.renameFolder("a", "b"));
 		assertEquals(folder, store.findFolder("b"));
 		assertEquals(f2, store.findFolder("a"));
-
-		assertEquals("allowed rename to *?", false, store.renameFolder("a", "*a"));
-		for(char c = ' '; c < '0'; ++c)
-		{
-			char[] illegalPrefixChars = {c};
-			String illegalPrefix = new String(illegalPrefixChars);
-			assertEquals("allowed rename to " + illegalPrefix + "?", false, store.renameFolder("a", illegalPrefix + "a"));
-		}
+		
+		BulletinFolder f3 = store.createFolder("abc");
+		assertEquals(true, store.renameFolder("abc", "*-   abcd"));
+		assertEquals(f3, store.findFolder("abcd"));
+		
+		BulletinFolder f4 = store.createFolder("folder1");
+		assertEquals(true, store.renameFolder("folder1", "fo--d"));
+		assertEquals(null, store.findFolder("folder1"));
+		assertEquals(f4, store.findFolder("fo  d"));
+		
+		BulletinFolder f5 = store.createFolder("folder2");
+		assertEquals("is an existing folder name? (fo  d == fo--d@\\)",
+					 false, store.renameFolder("folder2", "fo--d@\\"));
+		assertEquals(f5, store.findFolder("folder2"));
+		
 	}
 
 	public void testDeleteFolder() throws Exception
