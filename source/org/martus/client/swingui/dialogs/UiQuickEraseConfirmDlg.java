@@ -86,10 +86,11 @@ public class UiQuickEraseConfirmDlg extends JDialog
 		String deleteKeyPairStr = localization.getFieldLabel("DeleteKeypair");
 		String exitWhenCompleteStr = localization.getFieldLabel("ExitWhenComplete");
 		
-		scrubBeforeDelete 	= new JCheckBox(scrubStr, false);
-		deleteKeyPair 		= new JCheckBox(deleteKeyPairStr, false);
-		exitWhenComplete	= new JCheckBox(exitWhenCompleteStr, false);
-		
+		scrubBeforeDelete = new JCheckBox(scrubStr, false);
+		deleteKeyPair = new JCheckBox(deleteKeyPairStr, false);
+		deleteKeyPair.addActionListener(new KeyPairEraseHandler());
+		exitWhenComplete = new JCheckBox(exitWhenCompleteStr, false);
+		exitWhenComplete.addActionListener(new ExitWhenCompleteHandler());
 		JPanel panel = new JPanel();
 		panel.setLayout(new ParagraphLayout());
 		panel.setBorder(new TitledBorder(LineBorder.createGrayLineBorder(),""));
@@ -114,7 +115,25 @@ public class UiQuickEraseConfirmDlg extends JDialog
 			dispose();
 		}
 	}
-
+	
+	class KeyPairEraseHandler implements ActionListener
+	{
+		public void actionPerformed(ActionEvent ae)
+		{
+			if(deleteKeyPair.isSelected())
+				exitWhenComplete.setSelected(true);
+		}
+	}
+	
+	class ExitWhenCompleteHandler implements ActionListener
+	{
+		public void actionPerformed(ActionEvent ae)
+		{
+			if(!exitWhenComplete.isSelected())
+				deleteKeyPair.setSelected(false);
+		}
+	}
+	
 	class CancelHandler implements ActionListener
 	{
 		public void actionPerformed(ActionEvent ae)
