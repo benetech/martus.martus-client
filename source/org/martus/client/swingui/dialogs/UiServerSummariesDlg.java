@@ -26,10 +26,12 @@ Boston, MA 02111-1307, USA.
 
 package org.martus.client.swingui.dialogs;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Vector;
@@ -44,6 +46,7 @@ import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumn;
@@ -74,7 +77,7 @@ public class UiServerSummariesDlg extends JDialog
 		UiLocalization localization = mainWindow.getLocalization();
 
 		disabledBackgroundColor = getBackground();
-		JLabel label = new JLabel("");
+
 		String topMessageText = localization.getFieldLabel(topMessageTag);
 		UiWrappedTextArea retrieveMessage = new UiWrappedTextArea(topMessageText);
 		tableBox = Box.createVerticalBox();
@@ -88,22 +91,33 @@ public class UiServerSummariesDlg extends JDialog
 		table.createDefaultColumnsFromModel();
 		tableBox.add(table.getTableHeader());
 		tableBox.add(new JScrollPane(table));
-		Dimension tableBoxSize = tableBox.getPreferredSize();
-		tableBoxSize.height = 350; //To fit in 800x600
-		tableBox.setPreferredSize(tableBoxSize);
 
-		JRadioButton downloadableSummaries = new JRadioButton(localization.getButtonLabel("DownloadableSummaries"), true);
-		downloadableSummaries.addActionListener(new ChangeDownloadableSummariesHandler());
-		JRadioButton allSummaries = new JRadioButton(localization.getButtonLabel("AllSummaries"), false);
-		allSummaries.addActionListener(new ChangeAllSummariesHandler());
-		ButtonGroup summariesGroup = new ButtonGroup();
-		summariesGroup.add(downloadableSummaries);
-		summariesGroup.add(allSummaries);
-		JPanel radioPanel = new JPanel();
-		radioPanel.setLayout(new GridLayout(0, 1));
-		radioPanel.add(downloadableSummaries);
-		radioPanel.add(allSummaries);
+		JPanel topPanel = new JPanel();
+		topPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
+		topPanel.setLayout(new BorderLayout());
+		topPanel.add(retrieveMessage, BorderLayout.NORTH);
+		topPanel.add(tableBox, BorderLayout.CENTER);
+		topPanel.add(createActionsPanel(localization, okButtonTag), BorderLayout.SOUTH);
 
+		getContentPane().add(topPanel);	
+		Utilities.centerDlg(this);
+
+		setScreenSize();				
+		setLocation(mainWindow.getLocation());
+		show();
+	}
+
+
+	private void setScreenSize()
+	{
+		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+		double width = dim.getWidth()- (dim.getWidth()* 0.25);
+		dim.setSize(width, getSize().getHeight());
+		setSize(dim);
+	}
+
+	private JPanel createActionsPanel(UiLocalization localization, String okButtonTag)
+	{
 		JButton ok = new JButton(localization.getButtonLabel(okButtonTag));
 		ok.addActionListener(new OkHandler());
 		JButton cancel = new JButton(localization.getButtonLabel("cancel"));
@@ -116,28 +130,36 @@ public class UiServerSummariesDlg extends JDialog
 		JButton unCheckAll = new JButton(localization.getButtonLabel("uncheckall"));
 		unCheckAll.addActionListener(new UnCheckAllHandler());
 
-		getContentPane().setLayout(new ParagraphLayout());
-		getContentPane().add(new JLabel(""), ParagraphLayout.NEW_PARAGRAPH);
-		getContentPane().add(retrieveMessage);
-		getContentPane().add(new JLabel(""), ParagraphLayout.NEW_PARAGRAPH);
-		getContentPane().add(label);
-		getContentPane().add(new JLabel(""), ParagraphLayout.NEW_PARAGRAPH);
-		getContentPane().add(tableBox);
-		getContentPane().add(new JLabel(""), ParagraphLayout.NEW_PARAGRAPH);
-		getContentPane().add(radioPanel);
-		getContentPane().add(new JLabel(""), ParagraphLayout.NEW_PARAGRAPH);
-		getContentPane().add(checkAll);
-		getContentPane().add(unCheckAll);
-		getContentPane().add(preview);
-		getContentPane().add(new JLabel(""), ParagraphLayout.NEW_PARAGRAPH);
-		getContentPane().add(ok);
-		getContentPane().add(cancel);
-
+		JPanel southPanel = new JPanel();
+		southPanel.setLayout(new ParagraphLayout());		
+		southPanel.add(new JLabel(""), ParagraphLayout.NEW_PARAGRAPH);
+		southPanel.add(createSummariesPanel(localization));
+		southPanel.add(new JLabel(""), ParagraphLayout.NEW_PARAGRAPH);
+		southPanel.add(checkAll);
+		southPanel.add(unCheckAll);
+		southPanel.add(preview);
+		southPanel.add(new JLabel(""), ParagraphLayout.NEW_PARAGRAPH);
+		southPanel.add(ok);
+		southPanel.add(cancel);
 
 		getRootPane().setDefaultButton(ok);
-		Utilities.centerDlg(this);
-		setResizable(true);
-		show();
+		return southPanel;
+	}
+
+	private JPanel createSummariesPanel(UiLocalization localization)
+	{
+		JRadioButton downloadableSummaries = new JRadioButton(localization.getButtonLabel("DownloadableSummaries"), true);
+		downloadableSummaries.addActionListener(new ChangeDownloadableSummariesHandler());
+		JRadioButton allSummaries = new JRadioButton(localization.getButtonLabel("AllSummaries"), false);
+		allSummaries.addActionListener(new ChangeAllSummariesHandler());
+		ButtonGroup summariesGroup = new ButtonGroup();
+		summariesGroup.add(downloadableSummaries);
+		summariesGroup.add(allSummaries);
+		JPanel radioPanel = new JPanel();		
+		radioPanel.setLayout(new GridLayout(0, 1));
+		radioPanel.add(downloadableSummaries);
+		radioPanel.add(allSummaries);
+		return radioPanel;
 	}
 
 	public boolean getResult()

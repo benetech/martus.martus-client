@@ -1294,11 +1294,11 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 			notifyDlg(this, "RetrievedOnlySomeSummaries", dlgTitleTag);
 		}
 		UiServerSummariesDlg summariesDlg = new UiServerSummariesDlg(this, model, dlgTitleTag, topMessageTag, okButtonTag, noneSelectedTag);
-
+		
 		// the following is required (for unknown reasons)
 		// to get the window to redraw after the dialog
 		// is closed. Yuck! kbs.
-		repaint();
+//		repaint();
 
 		if(!summariesDlg.getResult())
 			return null;

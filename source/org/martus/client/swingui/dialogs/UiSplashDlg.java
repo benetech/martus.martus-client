@@ -55,6 +55,7 @@ public class UiSplashDlg extends JDialog implements ActionListener
 		ok.addActionListener(this);
 		hbox.add(ok);
 		hbox.add(Box.createHorizontalGlue());
+		hbox.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contents.add(hbox, BorderLayout.SOUTH);
 		Utilities.centerDlg(this);
 		show();
