@@ -27,6 +27,7 @@ package org.martus.client.swingui.dialogs;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
@@ -40,6 +41,7 @@ import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.bulletincomponent.UiBulletinVersionView;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.swing.UiButton;
+import org.martus.swing.UiLabel;
 import org.martus.swing.UiScrollPane;
 import org.martus.swing.Utilities;
 
@@ -67,13 +69,20 @@ public class UiBulletinVersionPreviewDlg extends JDialog implements ActionListen
 		scrollPane.getViewport().setScrollMode(JViewport.SIMPLE_SCROLL_MODE);
 		scrollPane.getViewport().add(view);		
 
-		JPanel buttonPane = new JPanel();		
+		JPanel buttonPane = new JPanel();
+		buttonPane.setLayout(new GridLayout(1,7));
 		JButton ok = new UiButton(owner.getLocalization().getButtonLabel("ok"));
 		ok.addActionListener(this);
 		Dimension okSize = ok.getPreferredSize();
 		okSize.width += 40;
 		ok.setPreferredSize(okSize);
+		buttonPane.add(new UiLabel(" "));
+		buttonPane.add(new UiLabel(" "));
+		buttonPane.add(new UiLabel(" "));
 		buttonPane.add(ok);
+		buttonPane.add(new UiLabel(" "));
+		buttonPane.add(new UiLabel(" "));
+		buttonPane.add(new UiLabel(" "));
 
 		getContentPane().add(scrollPane, BorderLayout.CENTER);
 		getContentPane().add(buttonPane, BorderLayout.SOUTH);
