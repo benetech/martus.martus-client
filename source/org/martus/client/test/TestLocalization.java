@@ -44,10 +44,11 @@ import org.martus.common.clientside.UiBasicLocalization;
 import org.martus.jarverifier.JarVerifier;
 import org.martus.swing.UiLanguageDirection;
 import org.martus.util.DirectoryUtils;
-import org.martus.util.StringInputStream;
 import org.martus.util.TestCaseEnhanced;
 import org.martus.util.UnicodeStringWriter;
 import org.martus.util.UnicodeWriter;
+import org.martus.util.inputstreamwithseek.StringInputStreamWithSeek;
+
 
 public class TestLocalization extends TestCaseEnhanced
 {
@@ -348,7 +349,7 @@ public class TestLocalization extends TestCaseEnhanced
 				"# This is a comment with =\n" +
 				"a:b=c\n" +
 				"d:e=f";
-		StringInputStream in = new StringInputStream(sampleFileContents);
+		StringInputStreamWithSeek in = new StringInputStreamWithSeek(sampleFileContents);
 		bd.loadTranslations("qq", in);
 		assertEquals("c", bd.getLabel("qq", "a", "b"));
 		assertEquals("f", bd.getLabel("qq", "d", "e"));

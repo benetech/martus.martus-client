@@ -97,14 +97,15 @@ import org.martus.common.packet.Packet.WrongAccountException;
 import org.martus.common.packet.Packet.WrongPacketTypeException;
 import org.martus.jarverifier.JarVerifier;
 import org.martus.util.Base64;
-import org.martus.util.ByteArrayInputStreamWithSeek;
 import org.martus.util.DirectoryUtils;
-import org.martus.util.FileInputStreamWithSeek;
-import org.martus.util.InputStreamWithSeek;
 import org.martus.util.UnicodeReader;
 import org.martus.util.UnicodeWriter;
-import org.martus.util.ZipEntryInputStreamThatClosesZipFile;
 import org.martus.util.Base64.InvalidBase64Exception;
+import org.martus.util.inputstreamwithseek.ByteArrayInputStreamWithSeek;
+import org.martus.util.inputstreamwithseek.FileInputStreamWithSeek;
+import org.martus.util.inputstreamwithseek.InputStreamWithSeek;
+import org.martus.util.inputstreamwithseek.ZipEntryInputStreamWithSeekThatClosesZipFile;
+
 
 
 public class MartusApp
@@ -485,7 +486,7 @@ public class MartusApp
 			{
 				ZipFile zip = new ZipFile(mlpFile);
 				ZipEntry zipEntry = zip.getEntry(helpFileName);
-				ZipEntryInputStreamThatClosesZipFile stream = new ZipEntryInputStreamThatClosesZipFile(zip, zipEntry);
+				ZipEntryInputStreamWithSeekThatClosesZipFile stream = new ZipEntryInputStreamWithSeekThatClosesZipFile(zip, zipEntry);
 				return stream;
 			}
 		} 
