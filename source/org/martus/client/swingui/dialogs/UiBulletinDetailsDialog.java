@@ -28,18 +28,14 @@ package org.martus.client.swingui.dialogs;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JDialog;
 import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
-
 import org.martus.client.swingui.UiLocalization;
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.common.HQKey;
-import org.martus.common.HQKeys;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.crypto.MartusCrypto;
 import org.martus.common.packet.BulletinHistory;
@@ -69,18 +65,6 @@ public class UiBulletinDetailsDialog extends JDialog
 		panel.addComponents(new UiLabel(getLabel("AuthorPublicCode")), createField(getPublicCode()));
 		panel.addComponents(new UiLabel(getLabel("BulletinId")),createField(bulletin.getLocalId()));
 
-		HQKeys hqKeys = bulletin.getAuthorizedToReadKeys();
-		if(hqKeys.size() > 0)
-		{
-			String hqText = getLabel("HQInfoFor" + tagQualifier); 
-			JComponent hqInfo = createField(hqText);
-			UiScrollPane hqScroller = createHeadquartersTable(hqKeys);
-
-			panel.addBlankLine();
-			panel.addOnNewLine(hqInfo);
-			panel.addComponents(new UiLabel(getLabel("Headquarters")), hqScroller);
-		}
-		
 		UiScrollPane historyScroller = createHistoryTable();
 		panel.addComponents(new UiLabel(getLabel("History")), historyScroller);
 		
@@ -170,39 +154,6 @@ public class UiBulletinDetailsDialog extends JDialog
 	}
 	
 	
-	private UiScrollPane createHeadquartersTable(HQKeys hqKeys)
-	{
-		DefaultTableModel hqModel = new DefaultTableModel();
-		hqModel.addColumn(getLabel("HQLabel"));
-		hqModel.addColumn(getLabel("HQPublicCode"));
-		hqModel.setRowCount(hqKeys.size());
-		
-		for(int i=0; i < hqKeys.size(); ++i)
-		{
-			HQKey key = hqKeys.get(i);
-			String publicCode = key.getPublicKey();
-			try
-			{
-				publicCode = key.getPublicCode();
-			}
-			catch (InvalidBase64Exception e)
-			{
-				e.printStackTrace();
-			}
-			
-			hqModel.setValueAt(mainWindow.getApp().getHQLabelIfPresent(key), i, 0);
-			hqModel.setValueAt(publicCode, i, 1);
-		}
-		UiTable hqTable = new UiTable(hqModel);
-		hqTable.setColumnSelectionAllowed(false);
-		hqTable.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
-		hqTable.setShowGrid(true);
-		hqTable.resizeTable();
-		hqTable.setEnabled(false);
-		UiScrollPane hqScroller = new UiScrollPane(hqTable);
-		return hqScroller;
-	}
-
 	private void populateVersionRow(DefaultTableModel versionModel, int i, UniversalId uid)
 	{
 		int column = 0;

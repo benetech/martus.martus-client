@@ -26,7 +26,6 @@ Boston, MA 02111-1307, USA.
 
 package org.martus.client.swingui.bulletincomponent;
 
-import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Rectangle;
 import java.io.IOException;
@@ -44,6 +43,8 @@ import org.martus.common.HQKeys;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.crypto.MartusCrypto;
 import org.martus.common.packet.FieldDataPacket;
+import org.martus.swing.ParagraphLayout;
+import org.martus.swing.UiLabel;
 
 abstract public class UiBulletinComponent extends JPanel implements Scrollable, ChangeListener, LanguageChangeListener 
 {
@@ -56,6 +57,7 @@ abstract public class UiBulletinComponent extends JPanel implements Scrollable, 
 	abstract public boolean isBulletinModified() throws
 			IOException, MartusCrypto.EncryptionException;
 	abstract UiBulletinComponentHeader createHeaderSection();
+	abstract UiBulletinComponentHeadQuarters createHeadQuartersSection();
 	abstract HQKeys getHqKeys();
 
 	// ChangeListener interface
@@ -77,11 +79,15 @@ abstract public class UiBulletinComponent extends JPanel implements Scrollable, 
 		headerSection = createHeaderSection();
 		publicSection = createDataSection(currentBulletin.getPublicFieldSpecs(), SOMETIMES_ENCRYPTED);
 		privateSection = createDataSection(currentBulletin.getPrivateFieldSpecs(), ALWAYS_ENCRYPTED);
-		ensureBothSectionsLineUp();
-		setLayout(new BorderLayout());
-		add(headerSection, BorderLayout.NORTH);
-		add(publicSection, BorderLayout.CENTER);
-		add(privateSection, BorderLayout.SOUTH);
+		headquartersSection = createHeadQuartersSection();
+		
+		ensureSectionsLineUp();
+		setLayout(new ParagraphLayout());
+		add(new UiLabel(""),ParagraphLayout.NEW_LINE);
+		add(headerSection,ParagraphLayout.NEW_LINE);
+		add(publicSection,ParagraphLayout.NEW_LINE);
+		add(privateSection,ParagraphLayout.NEW_LINE);
+		add(headquartersSection,ParagraphLayout.NEW_LINE);
 	}
 	
 	private UiBulletinComponentDataSection createDataSection(
@@ -102,14 +108,12 @@ abstract public class UiBulletinComponent extends JPanel implements Scrollable, 
 		allPrivateField.setListener(this);
 	}
 
-	private void ensureBothSectionsLineUp()
+	private void ensureSectionsLineUp()
 	{
 		headerSection.matchFirstColumnWidth(publicSection);
-		headerSection.matchFirstColumnWidth(privateSection);
-		publicSection.matchFirstColumnWidth(headerSection);
 		publicSection.matchFirstColumnWidth(privateSection);
-		privateSection.matchFirstColumnWidth(headerSection);
 		privateSection.matchFirstColumnWidth(publicSection);
+		headquartersSection.validate();
 	}
 
 	public Bulletin getCurrentBulletin()
@@ -126,6 +130,7 @@ abstract public class UiBulletinComponent extends JPanel implements Scrollable, 
 			headerSection = null;
 			publicSection = null;
 			privateSection = null;
+			headquartersSection = null;
 			repaint();
 			return;
 		}
@@ -244,6 +249,7 @@ abstract public class UiBulletinComponent extends JPanel implements Scrollable, 
 	UiBulletinComponentHeader headerSection;
 	UiBulletinComponentDataSection publicSection;
 	UiBulletinComponentDataSection privateSection;	
+	UiBulletinComponentHeadQuarters headquartersSection;
 
 	private static final int SOMETIMES_ENCRYPTED = 1;
 	private static final int ALWAYS_ENCRYPTED = 2;

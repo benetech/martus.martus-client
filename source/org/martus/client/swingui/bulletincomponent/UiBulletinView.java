@@ -102,4 +102,9 @@ public class UiBulletinView extends UiBulletinComponent
 	{
 		return new UiBulletinComponentHeader(mainWindow, "View");
 	}
+
+	UiBulletinComponentHeadQuarters createHeadQuartersSection()
+	{
+		return new UiBulletinComponentHeadQuarters(mainWindow, "View", currentBulletin);
+	}
 }
