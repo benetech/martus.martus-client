@@ -133,7 +133,8 @@ public class TestMartusLocalization extends TestCaseEnhanced
 		UnicodeStringWriter writer = UnicodeStringWriter.create();
 		bd.exportTranslations("en", writer);
 		String result = writer.toString();
-		assertEquals("no leading comment?", 0, result.indexOf("#"));
+		assertEquals("no leading ByteOrderMark?", 0xFEFF, result.charAt(0));
+		assertEquals("no leading comment?", 1, result.indexOf("#"));
 	}
 
 	public void testAddTranslation()

@@ -98,7 +98,8 @@ public class UiLocalization extends Localization
 		throws IOException 
 	{
 		setCurrentLanguageCode("en");
-		writer.writeln("# Martus Client Translation File");
+		String byteOrderMark = new String(new char[] {0xFEFF});
+		writer.writeln(byteOrderMark + "# Martus Client Translation File");
 		writer.writeln("# Language code:  " + languageCode);
 		writer.writeln("# Language name:  " + getLanguageName(languageCode));
 		writer.writeln("# Exported date:  " + new Date().toString());
