@@ -223,22 +223,18 @@ class UiFolderTree extends JTree implements TreeSelectionListener
 		public void editingStopped(ChangeEvent e)
 		{
 			String newFolderName = getCellEditorValue().toString();
-			System.out.println("editingStopped: " + newFolderName);
 
 			if(newFolderName.equals(oldLocalizedFolderName))
 			{
-				System.out.println("Same name");
 				newFolderName = oldInternalFolderName;
 			}
 			else if(store.findFolder(newFolderName)!=null)
 			{
-				System.out.println("rename failed folder already exists");
 				observer.notifyDlg("ErrorRenameFolderExists");
 				newFolderName = oldInternalFolderName;				
 			}
 			else if(!store.renameFolder(oldInternalFolderName, newFolderName))
 			{
-				System.out.println("rename failed");
 				observer.notifyDlg("ErrorRenameFolder");
 				newFolderName = oldInternalFolderName;				
 			}
