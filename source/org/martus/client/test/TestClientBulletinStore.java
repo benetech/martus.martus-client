@@ -120,6 +120,21 @@ public class TestClientBulletinStore extends TestCaseEnhanced
 		assertEquals("wrong account?", security.getPublicKeyString(), b.getAccount());
 	}
     
+    public void testRemoveBulletinFromAllFolders() throws Exception
+	{
+    	Bulletin original = store.createEmptyBulletin();
+    	original.setSealed();
+    	store.saveBulletin(original);
+    	Bulletin clone = store.createClone(original, customSpecs, customSpecs);
+    	store.saveBulletin(clone);
+    	
+    	store.setIsOnServer(original);
+    	assertTrue("huh?", store.isProbablyOnServer(original));
+    	
+    	store.removeBulletinFromAllFolders(clone);
+    	assertFalse("didn't remove original?", store.isProbablyOnServer(original));
+	}
+    
     public void testCreateCloneOfMySealed() throws Exception
 	{
     	Bulletin original = createSealedBulletin(security);

@@ -167,15 +167,29 @@ public class ClientBulletinStore extends BulletinStore
 
 	public synchronized void destroyBulletin(Bulletin b) throws IOException
 	{
-		UniversalId id = b.getUniversalId();
-		removeFromAllFolders(id);
+		removeBulletinFromAllFolders(b);
 		saveFolders();
 
+		UniversalId id = b.getUniversalId();
 		cache.remove(id);
 		removeBulletinFromStore(b);
 	}
 
-	private void removeFromAllFolders(UniversalId id)
+	public void removeBulletinFromAllFolders(Bulletin b) throws IOException
+	{
+		Vector history = b.getHistory();
+		for(int i = 0; i < history.size(); ++i)
+		{
+			String localId = (String)history.get(i);
+			UniversalId uidOfAncestor = UniversalId.createFromAccountAndLocalId(b.getAccount(), localId);
+			removeRevisionFromAllFolders(uidOfAncestor);
+		}
+		
+		UniversalId uid = b.getUniversalId();
+		removeRevisionFromAllFolders(uid);
+	}
+
+	private void removeRevisionFromAllFolders(UniversalId id)
 	{
 		for(int f = 0; f < getFolderCount(); ++f)
 		{
