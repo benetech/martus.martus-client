@@ -32,10 +32,9 @@ import java.util.Vector;
 import javax.swing.table.AbstractTableModel;
 
 import org.martus.client.core.ClientBulletinStore;
-import org.martus.client.core.BulletinSummary;
 import org.martus.client.core.MartusApp;
 import org.martus.client.swingui.dialogs.UiProgressRetrieveSummariesDlg;
-import org.martus.common.MartusConstants;
+import org.martus.common.BulletinSummary;
 import org.martus.common.MartusUtilities;
 import org.martus.common.MartusUtilities.ServerErrorException;
 import org.martus.common.bulletin.Bulletin;
@@ -300,7 +299,7 @@ abstract public class RetrieveTableModel extends AbstractTableModel
 				
 			// TODO: The following two lines were copied from MartusApp.retrieveSummaryFromString,
 			// so they should be refactored out to a common class
-			String args[] = parameters.split(MartusConstants.regexEqualsDelimeter, -1);
+			String args[] = parameters.split(BulletinSummary.fieldDelimeter, -1);
 			String bulletinLocalId = args[0];
 			
 			

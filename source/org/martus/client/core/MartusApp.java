@@ -41,17 +41,18 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.Set;
 import java.util.Vector;
+
 import org.martus.client.core.ClientBulletinStore.BulletinAlreadyExistsException;
 import org.martus.client.search.BulletinSearcher;
 import org.martus.client.search.SearchParser;
 import org.martus.client.search.SearchTreeNode;
 import org.martus.client.swingui.UiConstants;
+import org.martus.common.BulletinSummary;
 import org.martus.common.CustomFields;
 import org.martus.common.FieldSpec;
 import org.martus.common.HQKey;
 import org.martus.common.HQKeys;
 import org.martus.common.LegacyCustomFields;
-import org.martus.common.MartusConstants;
 import org.martus.common.MartusUtilities;
 import org.martus.common.ProgressMeterInterface;
 import org.martus.common.StandardFieldSpecs;
@@ -80,8 +81,8 @@ import org.martus.common.database.FileDatabase.MissingAccountMapException;
 import org.martus.common.database.FileDatabase.MissingAccountMapSignatureException;
 import org.martus.common.network.NetworkInterface;
 import org.martus.common.network.NetworkInterfaceConstants;
-import org.martus.common.network.NonSSLNetworkAPI;
 import org.martus.common.network.NetworkResponse;
+import org.martus.common.network.NonSSLNetworkAPI;
 import org.martus.common.packet.BulletinHeaderPacket;
 import org.martus.common.packet.FieldDataPacket;
 import org.martus.common.packet.Packet;
@@ -1027,7 +1028,7 @@ public class MartusApp
 	public BulletinSummary retrieveSummaryFromString(String accountId, String parameters)
 		throws ServerErrorException
 	{
-		String args[] = parameters.split(MartusConstants.regexEqualsDelimeter, -1);
+		String args[] = parameters.split(BulletinSummary.fieldDelimeter, -1);
 		if(args.length < 3)
 			throw new ServerErrorException("MartusApp.retrieveSummaryFromString invalid # params: " + parameters);
 		String bulletinLocalId= args[0];

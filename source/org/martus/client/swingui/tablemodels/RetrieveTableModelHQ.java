@@ -26,8 +26,8 @@ Boston, MA 02111-1307, USA.
 
 package org.martus.client.swingui.tablemodels;
 
-import org.martus.client.core.BulletinSummary;
 import org.martus.client.core.MartusApp;
+import org.martus.common.BulletinSummary;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.clientside.UiBasicLocalization;
 
