@@ -65,7 +65,7 @@ public class UiBulletinDetailsDialog extends JDialog
 		bulletin = bulletinToShow;
 		tagQualifier = tagQualifierToUse;
 		
-		setTitle(getLocalization().getWindowTitle("BulletinDetails"));
+		setTitle(getLocalization().getWindowTitle("BulletinDetailsDialog"));
 
 		JPanel panel = new JPanel();
 		panel.setLayout(new ParagraphLayout());

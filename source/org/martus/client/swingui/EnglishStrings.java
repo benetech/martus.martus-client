@@ -39,7 +39,7 @@ public class EnglishStrings
 "wintitle:ServerCompliance=Server Compliance Statement",
 "wintitle:ErrorBackingupKeyPair=Error",
 "wintitle:askToBackupKeyPair=Key Backup Needed",
-"wintitle:BulletinDetails=Bulletin Details",
+"wintitle:BulletinDetailsDialog=Bulletin Details",
 
 "wintitle:confirmsend=Confirm Save Bulletin",
 "wintitle:confirmretrieve=Confirm Retrieve Bulletins",
