@@ -54,7 +54,7 @@ public class UiStatusBar extends JPanel
 		statusBarBox.add(bulletinId);
 		
 		statusBarBox.add(new JLabel(" "+localization.getFieldLabel("BulletinLastSaved")));
-		bulletinLastSaved = new JTextField(12);
+		bulletinLastSaved = new JTextField(15);
 		bulletinLastSaved.setMaximumSize(bulletinId.getPreferredSize());
 		bulletinLastSaved.setEditable(false);
 		bulletinLastSaved.setBorder(new EtchedBorder());

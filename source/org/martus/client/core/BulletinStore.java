@@ -331,9 +331,14 @@ public class BulletinStore
 	public String getFieldData(UniversalId uid, String fieldTag)
 	{
 		String data = cacheOfSortableFields.getFieldData(uid, fieldTag);
-		if(data != null)
+		if(data != null && data.trim().length() > 0)
 			return data;
+								
 		Bulletin b = findBulletinByUniversalId(uid);
+		
+		if(fieldTag.equals(Bulletin.TAGSTATUS))
+			return b.getStatus();		
+		
 		return b.get(fieldTag);
 	}
 

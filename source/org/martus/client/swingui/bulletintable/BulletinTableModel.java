@@ -93,23 +93,22 @@ public class BulletinTableModel extends AbstractTableModel
 		UniversalId uid = folder.getBulletinUniversalIdSorted(rowIndex);
 		if(uid == null)
 			return "";
-
+		
+		Bulletin b = getBulletin(rowIndex);
 		String fieldTag = BulletinConstants.sortableFieldTags[columnIndex];
-		String value = getFolder().getStore().getFieldData(uid, fieldTag);
-			
-								
+											
 		if(fieldTag.equals(Bulletin.TAGSTATUS))
-		{
-		 	return localization.getStatusLabel(value);
-		}
-	 	if(fieldTag.equals(Bulletin.TAGENTRYDATE) || 
-				fieldTag.equals(Bulletin.TAGEVENTDATE))				
+		 	return localization.getStatusLabel(b.getStatus());	
+			
+		if (fieldTag.equals(Bulletin.TAGLASTSAVED))			 
+			return localization.convertStoredDateTimeToDisplay(b.getLastSavedDateTime());
+		
+		String value = getFolder().getStore().getFieldData(uid, fieldTag);
+		if (fieldTag.equals(Bulletin.TAGENTRYDATE) || 
+			fieldTag.equals(Bulletin.TAGEVENTDATE))				
 		{
 			return localization.convertStoredDateToDisplay(value);
-		}		
-		
-		if (fieldTag.equals(Bulletin.TAGLASTSAVED))
-			return localization.convertStoredDateTimeToDisplay(value);
+		}	
 		
 		if (value.startsWith("<"))
 			return " "+value;				
