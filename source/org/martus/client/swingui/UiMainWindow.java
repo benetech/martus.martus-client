@@ -133,11 +133,15 @@ import org.martus.swing.PrintPageFormat;
 import org.martus.swing.UiFileChooser;
 import org.martus.swing.UiLanguageDirection;
 import org.martus.swing.UiNotifyDlg;
+import org.martus.swing.UiTextArea;
 import org.martus.swing.Utilities;
 import org.martus.swing.Utilities.Delay;
 import org.martus.util.FileVerifier;
 import org.martus.util.OneEntryMap;
+import org.martus.util.TokenReplacement;
+import org.martus.util.UnicodeReader;
 import org.martus.util.Base64.InvalidBase64Exception;
+import org.martus.util.TokenReplacement.TokenInvalidException;
 
 public class UiMainWindow extends JFrame implements ClipboardOwner
 {
@@ -184,6 +188,8 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 			localization.setCurrentLanguageCode(Localization.ENGLISH);
 			localization.setCurrentDateFormatCode(DateUtilities.getDefaultDateFormatCode());
 		}
+		if(!localization.isOfficialTranslation(localization.getCurrentLanguageCode()))
+			displayDefaultUnofficialTranslationMessage();
 	}
 
 	public File getUiStateFile()
@@ -191,6 +197,58 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		if(app.isSignedIn())
 			return app.getUiStateFileForAccount(app.getCurrentAccountDirectory());
 		return new File(app.getMartusDataRootDirectory(), "UiState.dat");
+	}
+	
+	static public void displayDefaultUnofficialTranslationMessage()
+	{
+		URL untranslatedURL = UiMainWindow.class.getResource("UnofficialTranslationMessage.txt");
+		
+		String message = "Unofficial Martus Translation";
+		try
+		{
+			InputStream in = untranslatedURL.openStream();
+			UnicodeReader reader = new UnicodeReader(in);
+			message = reader.readAll();
+			reader.close();
+		}
+		catch(IOException e)
+		{
+			e.printStackTrace();
+		}
+		
+		displayUnofficialTranslationMessage(message);
+	}
+	
+	static public void displayUnofficialTranslationMessage(String rawMessage)
+	{
+		String[] buttons = { "OK" };
+		UiTextArea msg = new UiTextArea(10,100);
+		msg.setLineWrap(true);
+		msg.setWrapStyleWord(true);
+		String newMessage = getWarningMessageAboutUnofficialTranslations(rawMessage);
+		msg.setText(newMessage);
+		msg.setEditable(false);
+		UiScrollPane messagePane = new UiScrollPane(msg, UiScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,UiScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+		JOptionPane pane = new JOptionPane(messagePane, JOptionPane.WARNING_MESSAGE, JOptionPane.DEFAULT_OPTION,
+								null, buttons);
+		Toolkit.getDefaultToolkit().beep();
+		JDialog dialog = pane.createDialog(null, null);
+		dialog.show();
+	}
+
+	private static String getWarningMessageAboutUnofficialTranslations(String originalMessage)
+	{
+		try
+		{
+			HashMap replacement = new HashMap();
+			replacement.put("#UseUnofficialTranslationFile#", "\"" + MartusApp.USE_UNOFFICIAL_TRANSLATIONS_NAME + "\"");
+			originalMessage = TokenReplacement.replaceTokens(originalMessage, replacement);
+		}
+		catch(TokenInvalidException e)
+		{
+			e.printStackTrace();
+		}
+		return originalMessage;
 	}
 
 	static class HiddenFrame extends JFrame

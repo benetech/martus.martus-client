@@ -104,7 +104,7 @@ preferences.addOnNewLine(directionRtoL);
 			String languageCodeSelected = languageDropdown.getText();
 			if(!localization.isOfficialTranslation(languageCodeSelected))
 			{
-				owner.notifyDlgBeep("UnofficialTranslation");
+				UiMainWindow.displayUnofficialTranslationMessage(localization.getFieldLabel("warningUnofficialTranslation"));
 				languageDropdown.updateChoices(localization.getUiLanguages());
 				languageDropdown.setText(localization.getCurrentLanguageCode());
 				return;

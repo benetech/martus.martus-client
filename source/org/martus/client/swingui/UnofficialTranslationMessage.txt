@@ -1,0 +1,3 @@
+﻿Warning this translation was not created by the Martus team, and therefore may not be trustworthy.
+If you only want official languages only then exit Martus, remove the file #UseUnofficialTranslationFile# from your Martus directory, and restart Martus.
+

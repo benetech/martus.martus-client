@@ -172,7 +172,6 @@ public class EnglishStrings
 "wintitle:notifyErrorRenameFolder=Unable to Rename Folder",
 "wintitle:notifyErrorRenameFolderExists=Unable to Rename Folder",
 "wintitle:notifyPrintAllPrivateData=Print All Private Data",
-"wintitle:notifyUnofficialTranslation=Unofficial Martus Translation",
 
 "wintitle:inputservername=Server Name",
 "wintitle:inputserverpubliccode=Server Identification",
@@ -695,7 +694,6 @@ public class EnglishStrings
 "field:notifyPrintAllPrivateDatacause=This bulletin will not be printed because all the information is private.  If you wish to print the private data, please mark the \"Include private data in print out\" checkbox.",
 "field:notifyErrorRenameFoldercause=Folder names cannot contain punctuation.  They also cannot begin with a space.",
 "field:notifyErrorRenameFolderExistscause=You already have a folder with that name.",
-"field:notifyUnofficialTranslationcause=Warning this translation was not created by the Martus team, and therefore may not be trustworthy.  If you only want official languages then turn off 'allow unofficial translations' in your user preferences.",
 
 "field:messageServerNewscause=The current server has sent this message:",
 "field:messageErrorDateInFuturecause=This date occurs in the future:",
@@ -719,6 +717,7 @@ public class EnglishStrings
 "field:warningDeleteMultipleUnsentBulletins=WARNING: One or more of these bulletins have not been sent to a server since they were last modified. Deleting them will prevent the latest changes from being backed up.",
 "field:warningDeleteSingleBulletinWithCopies=NOTE: A copy of this bulletin exists in one or more other folders, and those copies will not be removed.",
 "field:warningDeleteMultipleBulletinsWithCopies=NOTE: Copies of one or more of these bulletins exist in one or more other folders. Those copies will not be removed.",
+"field:warningUnofficialTranslation=Warning this translation was not created by the Martus team, and therefore may not be trustworthy.\nIf you only want official languages only then exit Martus, remove the file #UseUnofficialTranslationFile# from your Martus directory, and restart Martus.\n\n",
 
 
 "field:username=Username",

@@ -30,11 +30,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
+import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.fields.UiChoiceEditor;
 import org.martus.common.clientside.CurrentUiState;
 import org.martus.common.clientside.UiBasicLocalization;
 import org.martus.common.clientside.UiBasicSigninDlg;
-import org.martus.swing.UiNotifyDlg;
 
 
 
@@ -86,10 +86,7 @@ public class UiSigninDlg extends UiBasicSigninDlg
 	{
 		if(localization.isOfficialTranslation(languageCodeChangingTo))
 			return;
-		String title = localization.getWindowTitle("notifyUnofficialTranslation");
-		String content[] = {localization.getFieldLabel("notifyUnofficialTranslationcause")}; 
-		String buttons[] = {localization.getButtonLabel("ok")};
-		new UiNotifyDlg(owner, title, content, buttons);
+		UiMainWindow.displayUnofficialTranslationMessage(localization.getFieldLabel("warningUnofficialTranslation"));
 	}
 
 	UiChoiceEditor languageDropdown;
