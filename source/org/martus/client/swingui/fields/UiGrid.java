@@ -38,6 +38,7 @@ import org.martus.client.swingui.UiScrollPane;
 import org.martus.common.GridFieldSpec;
 import org.martus.common.clientside.UiSingleTextField;
 import org.martus.swing.UiTable;
+import org.martus.swing.UiTableWithCellEditingProtection;
 
 
 public class UiGrid extends UiField
@@ -53,10 +54,9 @@ public class UiGrid extends UiField
 		table.setShowGrid(true);
 		table.changeSelection(0, 1, false, false);		
 		widget = new UiScrollPane(table);
-		
 	}	
 	
-	class GridTable extends UiTable
+	class GridTable extends UiTableWithCellEditingProtection
 	{
 		public GridTable(TableModel model)
 		{
