@@ -42,6 +42,7 @@ public class UiMultilineViewer extends UiTextField
 	{
 		super(localizationToUse);
 		text = new PreviewTextArea(1, UiConstants.textFieldColumns);
+		text.setEditable(false);
 		supportContextMenu();
 	}
 

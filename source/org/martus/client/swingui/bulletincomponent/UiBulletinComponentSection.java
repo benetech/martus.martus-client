@@ -174,9 +174,11 @@ abstract public class UiBulletinComponentSection extends JPanel
 		Icon icon = new ImageIcon(UiBulletinComponentSection.class.getResource(iconFileName));
 		encryptedIndicator.setIcon(icon);
 		encryptedIndicator.setText(title);
+
+		updateSectionBorder(isEncrypted);
 	}
 
-	public void updateSectionBorder(boolean isEncrypted)
+	private void updateSectionBorder(boolean isEncrypted)
 	{
 		if(isEncrypted)
 			setBorder(new LineBorder(Color.red, 5));
@@ -184,14 +186,6 @@ abstract public class UiBulletinComponentSection extends JPanel
 			setBorder(new LineBorder(Color.lightGray, 5));
 	}
 
-	public void disableEdits()
-	{
-		for(int fieldNum = 0; fieldNum < fields.length; ++fieldNum)
-		{
-			fields[fieldNum].disableEdits();
-		}
-	}
-	
 	public void clearWarningIndicator()
 	{
 		warningIndicator.setVisible(false);

@@ -46,6 +46,20 @@ import org.martus.common.packet.FieldDataPacket;
 
 abstract public class UiBulletinComponent extends JPanel implements Scrollable, ChangeListener
 {
+	abstract public void setEncryptionChangeListener(EncryptionChangeListener listener);
+	abstract public UiBulletinComponentSection createBulletinComponentSection();
+	abstract public void copyDataToBulletin(Bulletin bulletin) throws
+			IOException, MartusCrypto.EncryptionException;
+	abstract public void validateData() throws UiField.DataInvalidException; 
+	abstract public boolean isBulletinModified() throws
+			IOException, MartusCrypto.EncryptionException;
+
+	// ChangeListener interface
+	abstract public void stateChanged(ChangeEvent event);
+
+
+
+
 	public UiBulletinComponent(UiMainWindow mainWindowToUse)
 	{
 		super();
@@ -69,16 +83,17 @@ abstract public class UiBulletinComponent extends JPanel implements Scrollable, 
 	{
 		UiBulletinComponentSection target = createBulletinComponentSection();
 		if(encryptionStatus == SOMETIMES_ENCRYPTED)
-		{
-			FieldSpec allPrivateFieldSpec = new FieldSpec("allprivate", FieldSpec.TYPE_BOOLEAN);
-			allPrivateField = target.createAndAddLabelAndField(allPrivateFieldSpec);
-			allPrivateField.setListener(this);
-		}
+			createAllPrivateField(target);
+
 		target.createLabelsAndFields(fieldSpecs);
-		if(!isEditable)
-			target.disableEdits();
 
 		return target;
+	}
+	private void createAllPrivateField(UiBulletinComponentSection target)
+	{
+		FieldSpec allPrivateFieldSpec = new FieldSpec("allprivate", FieldSpec.TYPE_BOOLEAN);
+		allPrivateField = target.createAndAddLabelAndField(allPrivateFieldSpec);
+		allPrivateField.setListener(this);
 	}
 
 	private void ensureBothSectionsLineUp()
@@ -149,40 +164,11 @@ abstract public class UiBulletinComponent extends JPanel implements Scrollable, 
 	public void updateEncryptedIndicator(boolean isEncrypted)
 	{
 		if(publicStuff != null)
-		{
 			publicStuff.updateEncryptedIndicator(isEncrypted);
-			publicStuff.updateSectionBorder(isEncrypted);
-		}
 		
 		if(privateStuff != null)
-		{
-			privateStuff.updateSectionBorder(true);
-		}
+			privateStuff.updateEncryptedIndicator(true);
 	}
-
-	public void setEncryptionChangeListener(EncryptionChangeListener listener)
-	{
-		encryptionListener = listener;
-	}
-
-	protected void fireEncryptionChange(boolean newState)
-	{
-		if(encryptionListener != null)
-			encryptionListener.encryptionChanged(newState);
-	}
-
-	// ChangeListener interface
-	public void stateChanged(ChangeEvent event)
-	{
-		String flagString = allPrivateField.getText();
-		boolean nowEncrypted = (flagString.equals(UiField.TRUESTRING));
-		if(wasEncrypted != nowEncrypted)
-		{
-			wasEncrypted = nowEncrypted;
-			fireEncryptionChange(nowEncrypted);
-		}
-	}
-
 
 	// Scrollable interface
 	public Dimension getPreferredScrollableViewportSize()
@@ -215,19 +201,10 @@ abstract public class UiBulletinComponent extends JPanel implements Scrollable, 
 
 	UiField allPrivateField;
 	Bulletin currentBulletin;
-	EncryptionChangeListener encryptionListener;
-	boolean wasEncrypted;
-	boolean isEditable;
 	UiBulletinComponentSection publicStuff;
 	UiBulletinComponentSection privateStuff;	
 
 	private static final int SOMETIMES_ENCRYPTED = 1;
 	private static final int ALWAYS_ENCRYPTED = 2;
 
-	abstract public UiBulletinComponentSection createBulletinComponentSection();
-	abstract public void copyDataToBulletin(Bulletin bulletin) throws
-			IOException, MartusCrypto.EncryptionException;
-	abstract public void validateData() throws UiField.DataInvalidException; 
-	abstract public boolean isBulletinModified() throws
-			IOException, MartusCrypto.EncryptionException;
 }

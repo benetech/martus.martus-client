@@ -28,6 +28,9 @@ package org.martus.client.swingui.bulletincomponent;
 
 import java.io.IOException;
 
+import javax.swing.event.ChangeEvent;
+
+import org.martus.client.core.EncryptionChangeListener;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.fields.UiField;
 import org.martus.common.bulletin.Bulletin;
@@ -41,6 +44,11 @@ public class UiBulletinView extends UiBulletinComponent
 		// ensure that attachmentViewer gets initialized
 	}
 
+	public void setEncryptionChangeListener(EncryptionChangeListener listener)
+	{
+		// read-only view cannot change encryption status
+	}
+	
 	public UiBulletinComponentSection createBulletinComponentSection()
 	{
 		return new UiBulletinComponentViewSection(this, mainWindow);
@@ -50,17 +58,24 @@ public class UiBulletinView extends UiBulletinComponent
 			IOException,
 			MartusCrypto.EncryptionException
 	{
+		// read-only view cannot update the bulletin
 	}		
 
 	public void validateData() throws UiField.DataInvalidException 
 	{
+		// read-only view is always valid
 	}
 	
 	public boolean isBulletinModified() throws
 			IOException,
 			MartusCrypto.EncryptionException
-	{				
+	{
 		return false;
 	}	
 
+	// ChangeListener interface
+	public void stateChanged(ChangeEvent event)
+	{
+		// read-only view cannot change state
+	}
 }

@@ -38,6 +38,7 @@ public class UiNormalTextViewer extends UiNormalTextField
 	{
 		super(localizationToUse);
 		widget = new UiTextArea(1, UiConstants.textFieldColumns);
+		widget.setEditable(false);
 		widget.setLineWrap(true);
 		widget.setWrapStyleWord(true);
 		widget.setFont(new Font("SansSerif", Font.PLAIN, UiConstants.defaultFontSize));

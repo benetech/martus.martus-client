@@ -56,13 +56,10 @@ public class UiBulletinPreviewDlg extends JDialog implements ActionListener
 		view.createLabelsAndFields(standardFieldTags);
 		view.createAttachmentTable();
 		view.copyDataFromPacket(fdp);
-		view.disableEdits();
 		view.attachmentViewer.saveButton.setVisible(false);
 		view.attachmentViewer.viewButton.setVisible(false);
 
-		boolean isEncrypted = fdp.isEncrypted();
-		view.updateEncryptedIndicator(isEncrypted);		
-		view.updateSectionBorder(isEncrypted);
+		view.updateEncryptedIndicator(fdp.isEncrypted());		
 
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.getViewport().setScrollMode(JViewport.SIMPLE_SCROLL_MODE);

@@ -29,6 +29,9 @@ package org.martus.client.swingui.bulletincomponent;
 import java.io.File;
 import java.io.IOException;
 
+import javax.swing.event.ChangeEvent;
+
+import org.martus.client.core.EncryptionChangeListener;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.fields.UiField;
 import org.martus.common.bulletin.AttachmentProxy;
@@ -40,7 +43,6 @@ public class UiBulletinEditor extends UiBulletinComponent
 	public UiBulletinEditor(UiMainWindow mainWindowToUse)
 	{
 		super(mainWindowToUse);
-		isEditable = true;
 		// ensure that attachmentEditor gets initialized
 	}
 
@@ -175,4 +177,29 @@ public class UiBulletinEditor extends UiBulletinComponent
 
 	}	
 
+	public void setEncryptionChangeListener(EncryptionChangeListener listener)
+	{
+		encryptionListener = listener;
+	}
+
+	protected void fireEncryptionChange(boolean newState)
+	{
+		if(encryptionListener != null)
+			encryptionListener.encryptionChanged(newState);
+	}
+
+	// ChangeListener interface
+	public void stateChanged(ChangeEvent event)
+	{
+		String flagString = allPrivateField.getText();
+		boolean nowEncrypted = (flagString.equals(UiField.TRUESTRING));
+		if(wasEncrypted != nowEncrypted)
+		{
+			wasEncrypted = nowEncrypted;
+			fireEncryptionChange(nowEncrypted);
+		}
+	}
+
+	boolean wasEncrypted;
+	EncryptionChangeListener encryptionListener;
 }
