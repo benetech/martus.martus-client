@@ -1637,7 +1637,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	{
 		if(!retrieveSummaries(model, dlgTitleTag, summariesProgressTag))
 			return null;
-		
+	
 		summariesDlg.initialize();
 		if(!summariesDlg.getResult())
 			return null;
