@@ -62,6 +62,8 @@ public class HQKeys
 	public static Vector parseXml(String xml) throws HQsException
 	{
 		Vector hQs = new Vector();
+		if(xml.length() == 0)
+			return hQs;
 		XmlHQsLoader loader = new XmlHQsLoader(hQs);
 		try
 		{

@@ -187,7 +187,7 @@ public class MartusApp
 
 	public String getHQKey()
 	{
-		return configInfo.getHQKey();
+		return configInfo.getLegacyHQKey();
 	}
 	
 	public Vector getHQKeys() throws HQsException
@@ -208,7 +208,7 @@ public class MartusApp
 		if(hQKeys.isEmpty())
 			configInfo.clearHQKey();
 		else
-			configInfo.setHQKey((String)hQKeys.get(0));
+			configInfo.setLegacyHQKey((String)hQKeys.get(0));
 		saveConfigInfo();
 	}
 
@@ -285,11 +285,35 @@ public class MartusApp
 			
 			FieldSpec[] specs = getCustomFieldSpecs(configInfo);
 			store.setPublicFieldTags(specs);
+			
+			convertLegacyHQToMultipleHQs();
+			
 		}
 		catch (Exception e)
 		{
 			//System.out.println("Loadcontactinfo: " + e);
 			throw new LoadConfigInfoException();
+		}
+	}
+
+	private void convertLegacyHQToMultipleHQs() throws HQsException
+	{
+		String legacyHQKey = configInfo.getLegacyHQKey();
+		if(legacyHQKey.length()>0)
+		{
+			Vector hqKeys = getHQKeys();
+			if(!hqKeys.contains(legacyHQKey))
+			{
+				hqKeys.add(legacyHQKey);
+				try
+				{
+					setAndSaveHQKeys(hqKeys);
+				}
+				catch(MartusApp.SaveConfigInfoException e)
+				{
+					System.out.println("SaveConfigInfoException: " + e);						
+				}
+			}
 		}
 	}
 

@@ -134,15 +134,15 @@ public class TestConfigInfo extends TestCaseEnhanced
 	{
 		ConfigInfo info = new ConfigInfo();
 		String hqKey = "HQKey";
-		info.setHQKey(hqKey);
+		info.setLegacyHQKey(hqKey);
 		ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
 		info.save(outputStream);
 		info.clearHQKey();
-		assertEquals("HQ Key Should be cleared", "", info.getHQKey());
+		assertEquals("HQ Key Should be cleared", "", info.getLegacyHQKey());
 
 		ByteArrayInputStream inputStream = new ByteArrayInputStream(outputStream.toByteArray());
 		info = ConfigInfo.load(inputStream);
-		assertEquals("HQ key should have reverted", hqKey, info.getHQKey());
+		assertEquals("HQ key should have reverted", hqKey, info.getLegacyHQKey());
 	}
 
 
@@ -202,7 +202,7 @@ public class TestConfigInfo extends TestCaseEnhanced
 		info.setServerName(sampleServerName);
 		info.setServerPublicKey(sampleServerKey);
 		info.setTemplateDetails(sampleTemplateDetails);
-		info.setHQKey(sampleHQKey);
+		info.setLegacyHQKey(sampleHQKey);
 		info.setSendContactInfoToServer(sampleSendContactInfoToServer);
 		info.setServerCompliance(sampleServerCompliance);
 		info.setCustomFieldSpecs(sampleCustomFieldSpecs);
@@ -225,7 +225,7 @@ public class TestConfigInfo extends TestCaseEnhanced
 		assertEquals(label + ": sampleServerName", "", info.getServerName());
 		assertEquals(label + ": sampleServerKey", "", info.getServerPublicKey());
 		assertEquals(label + ": sampleTemplateDetails", "", info.getTemplateDetails());
-		assertEquals(label + ": sampleHQKey", "", info.getHQKey());
+		assertEquals(label + ": sampleHQKey", "", info.getLegacyHQKey());
 		assertEquals(label + ": sampleSendContactInfoToServer", false, info.shouldContactInfoBeSentToServer());
 		assertEquals(label + ": sampleServerComplicance", "", info.getServerCompliance());
 		assertEquals(label + ": sampleCustomFieldSpecs", defaultCustomFieldSpecs, info.getCustomFieldSpecs());
@@ -249,7 +249,7 @@ public class TestConfigInfo extends TestCaseEnhanced
 		assertEquals(label + ": sampleServerName", sampleServerName, info.getServerName());
 		assertEquals(label + ": sampleServerKey", sampleServerKey, info.getServerPublicKey());
 		assertEquals(label + ": sampleTemplateDetails", sampleTemplateDetails, info.getTemplateDetails());
-		assertEquals(label + ": sampleHQKey", sampleHQKey, info.getHQKey());
+		assertEquals(label + ": sampleHQKey", sampleHQKey, info.getLegacyHQKey());
 
 		if(VERSION >= 2)
 			assertEquals(label + ": sampleSendContactInfoToServer", sampleSendContactInfoToServer, info.shouldContactInfoBeSentToServer());

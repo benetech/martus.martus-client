@@ -62,7 +62,7 @@ public class ConfigInfo implements Serializable
 	public void setServerName(String newServerName){ serverName = newServerName; }
 	public void setServerPublicKey(String newServerPublicKey){serverPublicKey = newServerPublicKey; }
 	public void setTemplateDetails(String newTemplateDetails){ templateDetails = newTemplateDetails; }
-	public void setHQKey(String newHQKey)			{ hqKey = newHQKey; }
+	public void setLegacyHQKey(String newHQKey)			{ legacyHQKey = newHQKey; }
 	public void setSendContactInfoToServer(boolean newSendContactInfoToServer) {sendContactInfoToServer = newSendContactInfoToServer; }
 	public void setServerCompliance(String newCompliance) {serverCompliance = newCompliance;}
 	public void setCustomFieldSpecs(String newSpecs)	{customFieldSpecs = newSpecs;}
@@ -72,7 +72,7 @@ public class ConfigInfo implements Serializable
 	public void setBackedUpKeypairShare(boolean newBackedUpKeypairShare)	{backedUpKeypairShare = newBackedUpKeypairShare; }
 	public void setAllHQKeysXml(String allHQKeysXml){this.allHQKeysXml = allHQKeysXml;}
 
-	public void clearHQKey()						{ hqKey = ""; }
+	public void clearHQKey()						{ legacyHQKey = ""; }
 	public void clearPromptUserRequestSendToServer() { mustAskUserToSendToServer = false; }
 
 	public short getVersion()			{ return version; }
@@ -85,7 +85,7 @@ public class ConfigInfo implements Serializable
 	public String getServerName()		{ return serverName; }
 	public String getServerPublicKey()	{ return serverPublicKey; }
 	public String getTemplateDetails() { return templateDetails; }
-	public String getHQKey() 			{ return hqKey; }
+	public String getLegacyHQKey() 			{ return legacyHQKey; }
 	public boolean shouldContactInfoBeSentToServer() { return sendContactInfoToServer; }
 	public boolean promptUserRequestSendToServer() { return mustAskUserToSendToServer; }
 	public String getServerCompliance() {return serverCompliance;}
@@ -113,7 +113,7 @@ public class ConfigInfo implements Serializable
 		serverName = "";
 		serverPublicKey="";
 		templateDetails = "";
-		hqKey = "";
+		legacyHQKey = "";
 		sendContactInfoToServer = false;
 		mustAskUserToSendToServer = false;
 		serverCompliance = "";
@@ -140,7 +140,7 @@ public class ConfigInfo implements Serializable
 			loaded.address = in.readUTF();
 			loaded.serverName = in.readUTF();
 			loaded.templateDetails = in.readUTF();
-			loaded.hqKey = in.readUTF();
+			loaded.legacyHQKey = in.readUTF();
 			loaded.serverPublicKey = in.readUTF();
 			
 			if(loaded.version >= 2)
@@ -191,7 +191,7 @@ public class ConfigInfo implements Serializable
 			out.writeUTF(address);
 			out.writeUTF(serverName);
 			out.writeUTF(templateDetails);
-			out.writeUTF(hqKey);
+			out.writeUTF(legacyHQKey);
 			out.writeUTF(serverPublicKey);
 			out.writeBoolean(sendContactInfoToServer);
 			out.writeUTF(serverCompliance);
@@ -223,7 +223,7 @@ public class ConfigInfo implements Serializable
 	private String serverName;
 	private String serverPublicKey;
 	private String templateDetails;
-	private String hqKey;
+	private String legacyHQKey;
 	//Version 2
 	private boolean sendContactInfoToServer;
 	//Version 3 flag to indicate AccountMap.txt is signed.
