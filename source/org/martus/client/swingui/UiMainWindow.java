@@ -62,7 +62,6 @@ import javax.swing.JComponent;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JSplitPane;
 import javax.swing.SwingUtilities;
@@ -134,6 +133,7 @@ import org.martus.swing.PrintPageFormat;
 import org.martus.swing.UiFileChooser;
 import org.martus.swing.UiLanguageDirection;
 import org.martus.swing.UiNotifyDlg;
+import org.martus.swing.UiOptionPane;
 import org.martus.swing.UiTextArea;
 import org.martus.swing.Utilities;
 import org.martus.swing.Utilities.Delay;
@@ -230,7 +230,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		msg.setText(newMessage);
 		msg.setEditable(false);
 		UiScrollPane messagePane = new UiScrollPane(msg, UiScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,UiScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-		JOptionPane pane = new JOptionPane(messagePane, JOptionPane.WARNING_MESSAGE, JOptionPane.DEFAULT_OPTION,
+		UiOptionPane pane = new UiOptionPane(messagePane, UiOptionPane.WARNING_MESSAGE, UiOptionPane.DEFAULT_OPTION,
 								null, buttons);
 		Toolkit.getDefaultToolkit().beep();
 		JDialog dialog = pane.createDialog(null, null);
@@ -816,7 +816,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		String cause = "Unable to start Martus: " + message;
 		String ok = "OK";
 		String[] buttons = { ok };
-		JOptionPane pane = new JOptionPane(cause, JOptionPane.INFORMATION_MESSAGE, JOptionPane.DEFAULT_OPTION,
+		UiOptionPane pane = new UiOptionPane(cause, UiOptionPane.INFORMATION_MESSAGE, UiOptionPane.DEFAULT_OPTION,
 								null, buttons);
 		JDialog dialog = pane.createDialog(null, title);
 		dialog.show();
@@ -1083,7 +1083,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 			String ok = getLocalization().getButtonLabel("ok");
 			String[] buttons = { ok };
 			cause = cause + bulletinsFound;
-			JOptionPane pane = new JOptionPane(cause, JOptionPane.INFORMATION_MESSAGE, JOptionPane.DEFAULT_OPTION,
+			UiOptionPane pane = new UiOptionPane(cause, UiOptionPane.INFORMATION_MESSAGE, UiOptionPane.DEFAULT_OPTION,
 									null, buttons);
 			JDialog dialog = pane.createDialog(this, title);
 			dialog.show();
