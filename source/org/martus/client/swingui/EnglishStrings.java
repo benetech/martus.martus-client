@@ -682,6 +682,7 @@ public class EnglishStrings
 "field:ExportPrivateData=Include private data in export",
 "field:ExportBulletinDetails=Information from the selected bulletins (listed below) will be exported to an XML file that you specify.\n\nPlease Note: This is a one way opperation, you will not be able to import the XML file saved back into Martus.  This opperation exists so you can bring Martus Bulletins into another application that does import XML files.",
 "field:HowToCreateNewAccount=One or more accounts already exist on this computer. To create an additional account with a new username and passphrase, click OK.",
+"field:HowToCreateInitialAccount=No accounts exist on this computer.  To create a new account click OK.  Otherwise you can click on the Restore Account tab to recover an account which was previously backed up.",
 "field:UntitledBulletin=Untitled Bulletin",
 "field:GetShareFileNameDescription=This file name should be unique and identifiable to you but we recommend not using your user name.  Each file will be generated with this name and its number sequence.",
 "field:UnknownFieldType=WARNING: This field requires a newer version of Martus to be viewed",
