@@ -169,6 +169,7 @@ public class EnglishStrings
 "wintitle:notifyErrorRecoveringAccountDirectory=Error During Recovery",
 "wintitle:notifyChoosingQuickEraseKeyPair=Erase KeyPair Warning",
 "wintitle:notifyServerSSLNotResponding=Unable to connect",
+"wintitle:notifyAlreadyRunning=Martus Already Running",
 
 "wintitle:inputservername=Server Name",
 "wintitle:inputserverpubliccode=Server Identification",
@@ -645,6 +646,7 @@ public class EnglishStrings
 "field:notifyErrorRecoveringAccountDirectorycause=Error during keypair recovery. This keypair backup copy may be damaged.",
 "field:notifyChoosingQuickEraseKeyPaircause=By choosing to erase your keypair file Martus will exit after it completes the quick erase operation.  Also by choosing to erase your keypair file Martus will also delete the following information: any server or HQ you have configured, any custom fields or default details, and your personal preferences.  This information will be lost and restoring your keypair from a backup will not recover these settings.",
 "field:notifyServerSSLNotRespondingcause=Unable to make a secure connection with the server.\n\nThis might be caused by a firewall blocking ports 443 or 987, or it could be caused by problems in the internet. You may need to use a different server.",
+"field:notifyAlreadyRunningcause=A copy of Martus is already running on this computer. You must close that copy before starting a new copy.",
 	
 "field:messageServerNewscause=The current server has sent this message:",
 "field:messageErrorDateInFuturecause=This date occurs in the future:",

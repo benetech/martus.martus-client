@@ -48,6 +48,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
+import java.nio.channels.FileLock;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.TimerTask;
@@ -159,6 +160,8 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		hiddenFrame.setState(Frame.ICONIFIED);
 		hiddenFrame.show();
 		setCurrentActiveFrame(hiddenFrame);
+
+		PreventTwoInstances();
 		notifyClientCompliance(hiddenFrame);
 		hiddenFrame.setTitle(UiSigninDlg.getInitialSigninTitle(localization));
 		mainWindowInitalizing = true;
@@ -258,6 +261,25 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		mainWindowInitalizing = false;
 		return true;
     }
+    
+    private void PreventTwoInstances()
+    {
+		try
+		{
+			File lockFile = new File(app.getMartusDataRootDirectory(), "lock");
+			lockToPreventTwoInstances = new FileOutputStream(lockFile).getChannel().tryLock();
+		}
+		catch (Exception e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	   	if(lockToPreventTwoInstances == null)
+	   	{
+	   		notifyDlg("AlreadyRunning");
+	   		System.exit(1);
+	   	}
+	}
 
 	private void doAfterSignInConfigInfoSetup(boolean createdNewAccount)
 	{
@@ -1913,6 +1935,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 
 	private JFrame currentActiveFrame;
 	boolean inConfigServer;
+	private FileLock lockToPreventTwoInstances; 
 
 	int timeoutInXSeconds;
 	private static final int TIMEOUT_SECONDS = (10 * 60);
