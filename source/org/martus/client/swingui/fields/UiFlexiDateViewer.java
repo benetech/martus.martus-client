@@ -30,7 +30,6 @@ import javax.swing.JComponent;
 import javax.swing.JLabel;
 
 import org.martus.common.clientside.UiBasicLocalization;
-import org.martus.common.utilities.MartusFlexidate;
 
 
 public class UiFlexiDateViewer extends UiField
@@ -53,30 +52,9 @@ public class UiFlexiDateViewer extends UiField
 
 	public void setText(String newText)
 	{
-		String display = getViewableDateRange(newText, localization);
+		String display = localization.getViewableDateRange(newText);
 		label.setText(SPACE + display + SPACE);
 	}	
-
-	static public String getViewableDateRange(String newText, UiBasicLocalization localization)
-	{
-		MartusFlexidate mfd = MartusFlexidate.createFromMartusDateString(newText);
-		
-		String rawBeginDate = MartusFlexidate.toStoredDateFormat(mfd.getBeginDate());
-		String rawEndDate = MartusFlexidate.toStoredDateFormat(mfd.getEndDate());
-		
-		String beginDate = localization.convertStoredDateToDisplay(rawBeginDate);
-		String endDate = localization.convertStoredDateToDisplay(rawEndDate);
-				
-		String display = "";
-		
-		if (mfd.hasDateRange())
-			display = localization.getFieldLabel("DateRangeFrom")+ SPACE + 
-				beginDate + SPACE + localization.getFieldLabel("DateRangeTo")+
-				SPACE + endDate;		
-		else
-			display = beginDate;
-		return display;
-	}
 
 	UiBasicLocalization localization;
 	JLabel label;
