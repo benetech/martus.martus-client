@@ -962,7 +962,7 @@ public class MartusApp
 		}
 		catch(Exception e)
 		{
-			//System.out.println("MartusApp.createSummaryFromString: " + e);
+System.out.println("MartusApp.createSummaryFromString Exception: bulletinLocalId=" + bulletinLocalId + " packetlocalId=" + packetlocalId );
 			//e.printStackTrace();
 			throw new ServerErrorException();
 		}
