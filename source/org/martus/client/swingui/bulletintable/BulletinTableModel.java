@@ -95,7 +95,7 @@ public class BulletinTableModel extends AbstractTableModel
 			return "";
 
 		String fieldTag = BulletinConstants.sortableFieldTags[columnIndex];
-		String value = getFolder().getStore().getFieldData(uid, fieldTag);
+		String value = getFolder().getStore().getFieldData(uid, fieldTag);			
 		if(fieldTag.equals(Bulletin.TAGSTATUS))
 		{
 			value = localization.getStatusLabel(value);
@@ -105,6 +105,10 @@ public class BulletinTableModel extends AbstractTableModel
 		{
 			value = localization.convertStoredDateToDisplay(value);
 		}
+		
+		if (value.startsWith("<"))
+			return " "+value;
+			
 		return value;
 	}
 
