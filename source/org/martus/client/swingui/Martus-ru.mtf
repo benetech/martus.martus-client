@@ -1,4 +1,4 @@
-&#65279;# Martus Client Translation File
+﻿# Martus Client Translation File
 # Language code:  ru
 # Language name:  Russian
 # Exported date:  Wed Feb 18 17:16:34 PST 2004
@@ -78,9 +78,9 @@ field:BulletinNotYours=Сводка создана подчиненной уче
 field:BulletinSize=Размер (Кб)
 field:ChunkProgressStatusMessage=Загружается
 field:ContactInfoDescriptionOfFields=Все остальные поля в данной версии сохраняются на диске, но не используются.
-field:ContactInfoFutureUseOfFields=В дальнейшем эти данные будут доступны каждому, кто имеет доступ к общей информации из Ваших сводок.\nЭто позволит лицам, заинтересованным в более подробной информации, связаться с Вами.
-field:ContactInfoRequiredFields=Эти данные определяют Вашу организацию.\nВы должны заполнить либо поле "Автор", либо поле "Организация". Оба поля будут показаны во всех сводках, которые Вы создаете.
-field:ContactInfoUpdateLater=Вы всегда сможете изменить эти данные с помощью команды "Контактные данные" меню "Параметры".\n\n\n\n
+field:ContactInfoFutureUseOfFields=В дальнейшем эти данные будут доступны каждому, кто имеет доступ к общей информации из Ваших сводок.  Это позволит лицам, заинтересованным в более подробной информации, связаться с Вами.
+field:ContactInfoRequiredFields=Эти данные определяют Вашу организацию.  Вы должны заполнить либо поле "Автор", либо поле "Организация". Оба поля будут показаны во всех сводках, которые Вы создаете.
+field:ContactInfoUpdateLater=Вы всегда сможете изменить эти данные с помощью команды "Контактные данные" меню "Параметры". 
 field:CreateNewUserNamePassword=Введите Ваше новое имя пользователя и новый пароль.
 field:DateExact=Точная дата
 field:DateRange=Интервал
