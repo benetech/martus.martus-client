@@ -1768,12 +1768,13 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		if(doUploadReminderOnExit())
 			return;
 		saveState();
-		getStore().prepareToExit();
+		getStore().prepareToExitNormally();
 		exitWithoutSavingState();
 	}
 
 	public void exitWithoutSavingState()
 	{
+		getStore().prepareToExitWithoutSavingState();
 		System.exit(0);
 	}
 

@@ -121,9 +121,15 @@ public class BulletinStore
 		obsoleteCacheFile.delete();
 	}
 
-	public void prepareToExit()
+	public void prepareToExitNormally()
 	{
 		saveCache();
+		getSignatureGenerator().flushSessionKeyCache();
+	}
+	
+	public void prepareToExitWithoutSavingState()
+	{
+		getSignatureGenerator().flushSessionKeyCache();
 	}
 	
 	private void loadCache()
