@@ -823,20 +823,21 @@ In Mac OS, double-click the Martus.jar file in the /Library/Java/Martus folder.
 
 In Linux, type java  -jar  ~/Martus/Martus.jar
 
-The Martus Welcome dialog box is slow to appear.
+14. The Martus Welcome dialog box is slow to appear.
+
 Depending on your computer system, there may be a delay of several seconds between the time you double-click the Martus icon and the time the Martus Welcome dialog box appears. Exactly how long it takes depends on the speed of your computer.
 
-14. Can I customize my screen by changing the colors or saving changes to the screen layout?
+15. Can I customize my screen by changing the colors or saving changes to the screen layout?
 
 In this version of Martus, you cannot save most changes to the screen layout. However, Martus uses your Windows system colors, so if you select a different color scheme for Windows, it will affect Martus, too. To change the colors Windows uses, right-click your Windows desktop, choose Properties, and select the Appearance tab. Then select the color scheme you want to use. 
 
 You can customize the fields in bulletins you create, as well. See “Customizing bulletin fields” on page 18 for information.
 
-15. When I start Martus, the screens are all gray with no text visible.  
+16. When I start Martus, the screens are all gray with no text visible.  
 
 This may indicate a problem with your video driver.  If you can not get access to an updated driver or you still see this problem, try setting Martus properties to use 256 color (instead of 16 or 32 bit color) in Windows XP, or using 256 color under Control Panel Display Settings for pre-XP Windows operating systems.
 
-16. I’m seeing unexpected behavior in Martus. How can I find out what’s going on?
+17. I’m seeing unexpected behavior in Martus. How can I find out what’s going on?
 
 In Windows, instead of starting Martus by double-clicking the Martus icon on your desktop, choose Run from the Start menu and type the following text to launch Martus: C:\Martus\bin\java.exe -jar C:\Martus\Martus.jar. Then note the error messages you receive as you work in Martus, and e-mail those to help@martus.org.
 
