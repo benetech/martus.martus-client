@@ -26,6 +26,7 @@ Boston, MA 02111-1307, USA.
 
 package org.martus.client.swingui;
 
+import java.awt.Component;
 import java.awt.Dimension;
 
 import javax.swing.BoxLayout;
@@ -38,6 +39,7 @@ import org.martus.client.swingui.dialogs.UiProgressRetrieveDlg;
 import org.martus.common.ProgressMeterInterface;
 import org.martus.common.clientside.UiBasicLocalization;
 import org.martus.swing.UiLanguageDirection;
+import org.martus.swing.Utilities;
 
 public class UiProgressMeter extends JPanel implements ProgressMeterInterface
 {
@@ -59,9 +61,9 @@ public class UiProgressMeter extends JPanel implements ProgressMeterInterface
 		progressMeter.setPreferredSize(meterSize);
 		progressMeter.setBorder( new BevelBorder( BevelBorder.LOWERED ));
 		progressMeter.setStringPainted(true);
-
-		add( statusMessage );
-		add( progressMeter );
+		
+		Component items[] = {statusMessage, progressMeter};
+		Utilities.addComponentsRespectingOrientation(this, items);
 	}
 	
 	public void setStatusMessage(String tagToShow)
