@@ -28,6 +28,8 @@ package org.martus.client.swingui.dialogs;
 
 import javax.swing.JComponent;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
+
 import org.martus.client.core.LanguageChangeListener;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.fields.UiChoiceEditor;
@@ -37,11 +39,6 @@ import org.martus.common.clientside.UiBasicSigninDlg;
 
 public class UiSigninDlg extends UiBasicSigninDlg implements LanguageChangeListener
 {
-	public UiSigninDlg(UiBasicLocalization localizationToUse, CurrentUiState uiStateToUse , JFrame owner, int mode)
-	{
-		this(localizationToUse, uiStateToUse, owner, mode, "", new char[0]);
-	}
-
 	public UiSigninDlg(UiBasicLocalization localizationToUse, CurrentUiState uiStateToUse, JFrame owner, int mode, String username, char[] password)
 	{
 		super(localizationToUse, uiStateToUse, owner, mode, username, password);
@@ -49,6 +46,9 @@ public class UiSigninDlg extends UiBasicSigninDlg implements LanguageChangeListe
 	
 	protected JComponent getLanguageComponent()
 	{
+		if(currentMode == TIMED_OUT || currentMode == SECURITY_VALIDATE)
+			return new JLabel();
+		
 		languageDropdown = new UiChoiceEditor(localization.getUiLanguages());
 		languageDropdown.setText(localization.getCurrentLanguageCode());
 		languageDropdown.setLanguageListener(this);
