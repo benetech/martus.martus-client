@@ -1078,7 +1078,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 			return;
 
 		notifyDlg(this, "RewriteKeyPairSaved");
-		askToBackupKeyPair();
+		askToBackupKeyPairEncryptedSingleFile();
 	}
 
 	boolean getAndSaveUserNamePassword(File keyPairFile) 
@@ -1350,10 +1350,14 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		}
 	}
 
-	public void askToBackupKeyPair()
+	public void askToBackupKeyPairEncryptedSingleFile()
 	{
 		if(confirmDlg(this,"BackupKeyPairSingle"))
 			doBackupKeyPairToSingleEncryptedFile();
+	}
+
+	public void askToBackupKeyPareToSecretShareFiles()
+	{
 		if(confirmDlg(this,"BackupKeyPairMultiple", UiBackupRecoverSharedKeyPair.getTokenReplacement()))
 		{
 			UiBackupRecoverSharedKeyPair backup = new UiBackupRecoverSharedKeyPair(this);
@@ -1361,7 +1365,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		}
 	}
 
-	private void doBackupKeyPairToSingleEncryptedFile() 
+	public void doBackupKeyPairToSingleEncryptedFile() 
 	{
 		File keypairFile = app.getCurrentKeyPairFile();
 		if(keypairFile.length() > MAX_KEYPAIRFILE_SIZE)
@@ -1627,7 +1631,8 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 			return false;
 		}
 		waitingForKeyPair.endDialog();
-		askToBackupKeyPair();
+		askToBackupKeyPairEncryptedSingleFile();
+		askToBackupKeyPareToSecretShareFiles();
 		return true;
 	}
 
