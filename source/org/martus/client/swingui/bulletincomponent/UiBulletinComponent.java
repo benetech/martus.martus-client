@@ -91,7 +91,7 @@ abstract public class UiBulletinComponent extends JPanel implements Scrollable, 
 	}
 	private void createAllPrivateField(UiBulletinComponentSection target)
 	{
-		FieldSpec allPrivateFieldSpec = new FieldSpec("allprivate", FieldSpec.TYPE_BOOLEAN);
+		FieldSpec allPrivateFieldSpec = FieldSpec.createStandardField("allprivate", FieldSpec.TYPE_BOOLEAN);
 		allPrivateField = target.createAndAddLabelAndField(allPrivateFieldSpec);
 		allPrivateField.setListener(this);
 	}

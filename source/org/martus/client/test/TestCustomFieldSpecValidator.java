@@ -29,6 +29,7 @@ package org.martus.client.test;
 import org.martus.client.core.CustomFieldSpecValidator;
 import org.martus.common.CustomFields;
 import org.martus.common.FieldSpec;
+import org.martus.common.LegacyCustomFields;
 import org.martus.common.test.TestCaseEnhanced;
 
 public class TestCustomFieldSpecValidator extends TestCaseEnhanced
@@ -62,7 +63,7 @@ public class TestCustomFieldSpecValidator extends TestCaseEnhanced
 	public void testBlankTag() throws Exception
 	{
 		FieldSpec[] specs = CustomFields.getDefaultPublicFieldSpecs();
-		specs = CustomFields.addFieldSpec(specs, new FieldSpec(",label"));
+		specs = CustomFields.addFieldSpec(specs, LegacyCustomFields.createFromLegacy(",label"));
 		CustomFieldSpecValidator checker = new CustomFieldSpecValidator(specs);
 		assertFalse("valid?", checker.isValid());
 	}
@@ -70,8 +71,8 @@ public class TestCustomFieldSpecValidator extends TestCaseEnhanced
 	public void testDuplicateTags() throws Exception
 	{
 		FieldSpec[] specs = CustomFields.getDefaultPublicFieldSpecs();
-		specs = CustomFields.addFieldSpec(specs, new FieldSpec("a"));
-		specs = CustomFields.addFieldSpec(specs, new FieldSpec("a"));
+		specs = CustomFields.addFieldSpec(specs, LegacyCustomFields.createFromLegacy("a"));
+		specs = CustomFields.addFieldSpec(specs, LegacyCustomFields.createFromLegacy("a"));
 		CustomFieldSpecValidator checker = new CustomFieldSpecValidator(specs);
 		assertFalse("valid?", checker.isValid());
 	}
@@ -79,11 +80,11 @@ public class TestCustomFieldSpecValidator extends TestCaseEnhanced
 	public void testMissingCustomLabel() throws Exception
 	{
 		FieldSpec[] specs = CustomFields.getDefaultPublicFieldSpecs();
-		specs = CustomFields.addFieldSpec(specs, new FieldSpec("a,label"));
+		specs = CustomFields.addFieldSpec(specs, LegacyCustomFields.createFromLegacy("a,label"));
 		CustomFieldSpecValidator checker = new CustomFieldSpecValidator(specs);
 		assertTrue("not valid?", checker.isValid());
 
-		specs = CustomFields.addFieldSpec(specs, new FieldSpec("b"));
+		specs = CustomFields.addFieldSpec(specs, LegacyCustomFields.createFromLegacy("b"));
 		CustomFieldSpecValidator checker2 = new CustomFieldSpecValidator(specs);
 		assertFalse("valid?", checker2.isValid());
 	}
@@ -91,7 +92,7 @@ public class TestCustomFieldSpecValidator extends TestCaseEnhanced
 	public void testStandardFieldWithLabel() throws Exception
 	{
 		FieldSpec[] specs = CustomFields.getDefaultPublicFieldSpecs();
-		specs[3] = new FieldSpec(specs[3].getTag() + ",illegal label");
+		specs[3] = LegacyCustomFields.createFromLegacy(specs[3].getTag() + ",illegal label");
 		CustomFieldSpecValidator checker = new CustomFieldSpecValidator(specs);
 		assertFalse("valid?", checker.isValid());
 	}
