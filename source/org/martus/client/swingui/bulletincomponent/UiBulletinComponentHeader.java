@@ -33,7 +33,6 @@ import java.text.DateFormat;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
-import java.util.Vector;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -46,6 +45,7 @@ import org.martus.common.HQKey;
 import org.martus.common.HQKeys;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.crypto.MartusCrypto;
+import org.martus.common.packet.BulletinHistory;
 import org.martus.common.packet.UniversalId;
 import org.martus.util.TokenReplacement;
 import org.martus.util.Base64.InvalidBase64Exception;
@@ -105,7 +105,7 @@ public class UiBulletinComponentHeader extends UiBulletinComponentSection
 		}
 	}
 	
-	public void setHistory(Vector localIds)
+	public void setHistory(BulletinHistory localIds)
 	{
 		history = localIds;
 		versionNumber.setText("  " + Integer.toString(1 + history.size())+ "  ");
@@ -260,5 +260,5 @@ public class UiBulletinComponentHeader extends UiBulletinComponentSection
 	JLabel versionNumber;
 	UniversalId currentUid;
 	HQKeys hqList;
-	Vector history;
+	BulletinHistory history;
 }

@@ -57,6 +57,7 @@ import org.martus.common.database.Database;
 import org.martus.common.database.DatabaseKey;
 import org.martus.common.database.MockDatabase;
 import org.martus.common.packet.BulletinHeaderPacket;
+import org.martus.common.packet.BulletinHistory;
 import org.martus.common.packet.FieldDataPacket;
 import org.martus.common.packet.UniversalId;
 import org.martus.common.test.UniversalIdForTesting;
@@ -148,7 +149,7 @@ public class TestClientBulletinStore extends TestCaseEnhanced
 	    	assertTrue("not draft?", clone.isDraft());
 	    	assertEquals("wrong public field specs?", customSpecs.length, clone.getPublicFieldSpecs().length);
 	    	assertEquals("wrong private field specs?", customSpecs.length, clone.getPrivateFieldSpecs().length);
-	    	Vector history = clone.getHistory();
+	    	BulletinHistory history = clone.getHistory();
 			assertEquals("no history?", 1, history.size());
 	    	assertEquals("wrong ancestor?", original.getLocalId(), history.get(0));
     	}
@@ -168,7 +169,7 @@ public class TestClientBulletinStore extends TestCaseEnhanced
 	    	assertTrue("not draft?", clone.isDraft());
 	    	assertEquals("wrong public field specs?", customSpecs.length, clone.getPublicFieldSpecs().length);
 	    	assertEquals("wrong private field specs?", customSpecs.length, clone.getPrivateFieldSpecs().length);
-	    	Vector history = clone.getHistory();
+	    	BulletinHistory history = clone.getHistory();
 			assertEquals("has history?", 0, history.size());
     	}
 	}

@@ -35,6 +35,7 @@ import org.martus.common.MartusUtilities;
 import org.martus.common.MartusXml;
 import org.martus.common.bulletin.AttachmentProxy;
 import org.martus.common.bulletin.Bulletin;
+import org.martus.common.packet.BulletinHistory;
 
 public class BulletinXmlExporter
 {
@@ -66,7 +67,7 @@ public class BulletinXmlExporter
 		if(b.isAllPrivate())
 			writeElement(dest, AllPrivateElementName, "", "");
 		
-		Vector history = b.getHistory();
+		BulletinHistory history = b.getHistory();
 		if(history.size() > 0)
 		{
 			dest.write(MartusXml.getTagStart(HistoryElementName));

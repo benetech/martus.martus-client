@@ -31,8 +31,8 @@ import java.io.IOException;
 import java.io.StringWriter;
 import java.util.Vector;
 
-import org.martus.client.core.ClientBulletinStore;
 import org.martus.client.core.BulletinXmlExporter;
+import org.martus.client.core.ClientBulletinStore;
 import org.martus.common.CustomFields;
 import org.martus.common.FieldSpec;
 import org.martus.common.StandardFieldSpecs;
@@ -40,6 +40,7 @@ import org.martus.common.bulletin.AttachmentProxy;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.bulletin.BulletinConstants;
 import org.martus.common.crypto.MartusCrypto.EncryptionException;
+import org.martus.common.packet.BulletinHistory;
 import org.martus.common.packet.FieldDataPacket;
 import org.martus.util.TestCaseEnhanced;
 
@@ -89,7 +90,7 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 		String localId1 = "pretend local id";
 		String localId2 = "another fake local id";
 
-		Vector fakeHistory = new Vector();
+		BulletinHistory fakeHistory = new BulletinHistory();
 		fakeHistory.add(localId1);
 		fakeHistory.add(localId2);
 		

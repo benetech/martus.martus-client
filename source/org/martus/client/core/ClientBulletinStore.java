@@ -62,6 +62,7 @@ import org.martus.common.database.Database.RecordHiddenException;
 import org.martus.common.database.FileDatabase.MissingAccountMapException;
 import org.martus.common.database.FileDatabase.MissingAccountMapSignatureException;
 import org.martus.common.packet.BulletinHeaderPacket;
+import org.martus.common.packet.BulletinHistory;
 import org.martus.common.packet.Packet;
 import org.martus.common.packet.UniversalId;
 import org.martus.common.packet.Packet.InvalidPacketException;
@@ -176,7 +177,7 @@ public class ClientBulletinStore extends BulletinStore
 
 	public void removeBulletinFromAllFolders(Bulletin b) throws IOException
 	{
-		Vector history = b.getHistory();
+		BulletinHistory history = b.getHistory();
 		for(int i = 0; i < history.size(); ++i)
 		{
 			String localId = (String)history.get(i);
@@ -867,7 +868,7 @@ public class ClientBulletinStore extends BulletinStore
 		folder.add(uidToAdd);
 
 		String accountId = uidToAdd.getAccountId();
-		Vector history = b.getHistory();
+		BulletinHistory history = b.getHistory();
 		for(int i = 0; i < history.size(); ++i)
 		{
 			String localId = (String)history.get(i);
