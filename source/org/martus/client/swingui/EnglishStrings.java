@@ -704,7 +704,7 @@ public class EnglishStrings
 
 "field:RemoveServerLabel1=The following server will be removed:",
 "field:RemoveServerLabel2=Are you sure you want to do this?",
-
+"field:ExportedBulletins=Exported Bulletins",
 
 "field:DateRangeFrom=Between",
 "field:DateRangeTo=and",
