@@ -230,7 +230,6 @@ public class TestLocalization extends TestCaseEnhanced
 		assertEquals("Incorrect translation OK from within language pack", "OK", myLocalization.getButtonLabel("ok"));
 		assertEquals("Incorrect translation No from within language pack", "No", myLocalization.getButtonLabel("no"));
 		assertTrue("A signed MLPK file should be trusted", myLocalization.isTranslationTrusted());
-		assertTrue(someTestLanguage.delete());
 
 		File someTestLanguage2 = new File(translationDirectory,UiBasicLocalization.getMlpkFilename(someTestLanguageCode));
 		someTestLanguage2.deleteOnExit();
