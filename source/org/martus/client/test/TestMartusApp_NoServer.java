@@ -38,13 +38,13 @@ import java.util.Vector;
 
 import org.martus.client.core.BulletinFolder;
 import org.martus.client.core.BulletinStore;
-import org.martus.client.core.ConfigInfo;
 import org.martus.client.core.MartusApp;
 import org.martus.client.core.QuickEraseOptions;
 import org.martus.client.core.MartusApp.AccountAlreadyExistsException;
 import org.martus.client.core.MartusApp.CannotCreateAccountFileException;
 import org.martus.client.swingui.EnglishStrings;
 import org.martus.client.swingui.UiLocalization;
+import org.martus.common.ConfigInfo;
 import org.martus.common.MartusUtilities;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.clientside.ChoiceItem;

@@ -35,8 +35,8 @@ import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 
-import org.martus.client.core.ConfigInfo;
 import org.martus.client.swingui.UiMainWindow;
+import org.martus.common.ConfigInfo;
 import org.martus.common.clientside.UiBasicLocalization;
 import org.martus.swing.ParagraphLayout;
 import org.martus.swing.UiTextArea;

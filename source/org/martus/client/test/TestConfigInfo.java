@@ -32,7 +32,7 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.util.Vector;
 
-import org.martus.client.core.ConfigInfo;
+import org.martus.common.ConfigInfo;
 import org.martus.common.FieldSpec;
 import org.martus.common.crypto.MartusSecurity;
 import org.martus.common.test.TestCaseEnhanced;
