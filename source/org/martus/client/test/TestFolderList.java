@@ -30,6 +30,7 @@ import org.martus.client.core.BulletinStore;
 import org.martus.client.swingui.foldertree.FolderList;
 import org.martus.client.swingui.foldertree.FolderTreeNode;
 import org.martus.common.clientside.UiBasicLocalization;
+import org.martus.common.clientside.test.*;
 import org.martus.common.database.MockClientDatabase;
 import org.martus.common.test.TestCaseEnhanced;
 
