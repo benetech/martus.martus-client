@@ -815,9 +815,25 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		HQKeys returnedKeys = appWithAccount.getAllHQKeys();
 		assertTrue(returnedKeys.containsKey(sampleHQKey1));
 		assertTrue(returnedKeys.containsKey(sampleHQKey2));
+		HQKeys returnedKeysWithFallBack = appWithAccount.getAllHQKeysWithFallback();
+		assertTrue(returnedKeysWithFallBack.containsKey(sampleHQKey1));
+		assertTrue(returnedKeysWithFallBack.containsKey(sampleHQKey2));
+		
+		
 		HQKeys returnedDefaultKeys = appWithAccount.getDefaultHQKeys();
 		assertTrue(returnedDefaultKeys.containsKey(sampleHQKey1));
 		assertFalse(returnedDefaultKeys.containsKey(sampleHQKey2));
+		HQKeys returnedDefaultKeysWithFallBack = appWithAccount.getDefaultHQKeysWithFallback();
+		assertTrue(returnedDefaultKeysWithFallBack.containsKey(sampleHQKey1));
+		assertFalse(returnedDefaultKeysWithFallBack.containsKey(sampleHQKey2));
+
+		HQKeys empty = new HQKeys();
+		appWithAccount.setAndSaveHQKeys(empty, empty);
+		HQKeys noFallbackKeys = appWithAccount.getAllHQKeysWithFallback();
+		assertEquals(0, noFallbackKeys.size());
+		HQKeys noDefaultKeys = appWithAccount.getDefaultHQKeysWithFallback();
+		assertEquals(0, noDefaultKeys.size());
+
 	}
 
 	public void testClearHQKey() throws Exception

@@ -212,6 +212,20 @@ public class MartusApp
 		}
 	}
 	
+	public HQKeys getDefaultHQKeysWithFallback()
+	{
+		try
+		{
+			return getDefaultHQKeys();
+		}
+		catch (HQsException e)
+		{
+			e.printStackTrace();
+			HQKey legacyKey = new HQKey(getLegacyHQKey());
+			return new HQKeys(legacyKey);
+		}
+	}
+
 	public void addHQLabelsWherePossible(HQKeys keys)
 	{
 		for(int i = 0; i < keys.size(); ++i)
