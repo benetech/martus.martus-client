@@ -28,7 +28,6 @@ package org.martus.client.test;
 
 import java.io.File;
 import java.io.IOException;
-
 import org.martus.client.core.BulletinFolder;
 import org.martus.client.core.MartusApp;
 import org.martus.common.MartusUtilities.FileVerificationException;
@@ -42,22 +41,18 @@ import org.martus.common.database.FileDatabase.MissingAccountMapException;
 import org.martus.common.database.FileDatabase.MissingAccountMapSignatureException;
 import org.martus.common.test.UnicodeConstants;
 import org.martus.util.DirectoryUtils;
+import org.martus.util.TestCaseEnhanced;
 
 public class MockMartusApp extends MartusApp
 {
 	public static MockMartusApp create(MartusCrypto crypto) throws Exception
 	{
-		File fakeDataDirectory = File.createTempFile("$$$MockMartusApp", null);
-		fakeDataDirectory.deleteOnExit();
-		fakeDataDirectory.delete();
-		fakeDataDirectory.mkdir();
-
-		return create(fakeDataDirectory, crypto);
+		return create(createFakeDataDirectory(), crypto);
 	}
 
 	public static MockMartusApp create(Database db) throws Exception
 	{
-		MockMartusApp app = create(MockMartusSecurity.createClient());
+		MockMartusApp app = create(createFakeDataDirectory(), MockMartusSecurity.createClient());
 		app.store = new MockBulletinStore(db, app.getSecurity());
 		return app;
 	}
@@ -72,7 +67,7 @@ public class MockMartusApp extends MartusApp
 
 	public static MockMartusApp create() throws Exception
 	{
-		return create(MockMartusSecurity.createClient());
+		return create(createFakeDataDirectory(), MockMartusSecurity.createClient());
 	}
 
 	private MockMartusApp(MartusCrypto crypto, File dataDirectoryToUse) throws MartusAppInitializationException
@@ -80,6 +75,15 @@ public class MockMartusApp extends MartusApp
 		super(crypto, dataDirectoryToUse, new UiBasicLocalization(dataDirectoryToUse, new String[0]));
 	}
 	
+	private static File createFakeDataDirectory() throws IOException
+	{
+		File fakeDataDirectory = File.createTempFile("$$$MockMartusApp_" + TestCaseEnhanced.getCallingTestClass(), null);
+		fakeDataDirectory.deleteOnExit();
+		fakeDataDirectory.delete();
+		fakeDataDirectory.mkdir();
+		return fakeDataDirectory;
+	}
+
 	public Database getWriteableDatabase()
 	{
 		return (Database)store.getDatabase();

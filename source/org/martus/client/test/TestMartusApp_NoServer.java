@@ -712,7 +712,7 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 	public void testFileOutputStreamReadOnly() throws Exception
 	{
 		TRACE_BEGIN("testFileOutputStreamReadOnly");
-		File readOnlyFile = File.createTempFile("test", "tst");
+		File readOnlyFile = createTempFileFromName("FileOutputStreamReadOnly_"+TestCaseEnhanced.getCallingTestClass());
 		readOnlyFile.setReadOnly();
 		try
 		{
@@ -722,6 +722,7 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		catch (IOException expected)
 		{
 		}
+		readOnlyFile.delete();
 		TRACE_END();
 	}
 	
