@@ -27,7 +27,7 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.swingui.bulletincomponent;
 
 import java.io.File;
-
+import javax.swing.JComponent;
 import org.martus.client.swingui.UiLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.fields.UiAttachmentEditor;
@@ -105,10 +105,10 @@ public class UiBulletinComponentEditorSection extends UiBulletinComponentDataSec
 		attachmentEditor.clearAttachments();
 	}
 
-	public void createAttachmentTable()
+	public JComponent createAttachmentTable()
 	{
 		attachmentEditor = new UiAttachmentEditor(getMainWindow());
-		add(attachmentEditor);
+		return attachmentEditor;
 	}
 
 	public void validateAttachments() throws AttachmentMissingException

@@ -81,13 +81,11 @@ abstract public class UiBulletinComponent extends JPanel implements Scrollable, 
 	}
 	
 	private UiBulletinComponentDataSection createDataSection(
-		FieldSpec[] fieldSpecs,
-		int encryptionStatus)
+			FieldSpec[] fieldSpecs, int encryptionStatus)
 	{
 		UiBulletinComponentDataSection target = createBulletinComponentDataSection();
 		if(encryptionStatus == SOMETIMES_ENCRYPTED)
 			createAllPrivateField(target);
-
 		target.createLabelsAndFields(fieldSpecs);
 
 		return target;

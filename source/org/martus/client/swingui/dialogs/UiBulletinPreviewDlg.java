@@ -36,6 +36,7 @@ import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.JViewport;
 
+import org.martus.client.swingui.UiLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.UiScrollPane;
 import org.martus.client.swingui.bulletincomponent.UiBulletinComponentViewSection;
@@ -54,18 +55,20 @@ public class UiBulletinPreviewDlg extends JDialog implements ActionListener
 
 		UiBulletinComponentViewSection view = new UiBulletinComponentViewSection(owner);
 		FieldSpec[] standardFieldTags = StandardFieldSpecs.getDefaultPublicFieldSpecs();
+
+		UiLocalization localization = owner.getLocalization();
 		view.createLabelsAndFields(standardFieldTags);
 		view.copyDataFromPacket(fdp);
 		view.attachmentViewer.saveButton.setVisible(false);
 		view.attachmentViewer.viewButton.setVisible(false);
 
 		view.updateEncryptedIndicator(fdp.isEncrypted());		
-		UiScrollPane scrollPane = new UiScrollPane(owner.getLocalization().getComponentOrientation());
+		UiScrollPane scrollPane = new UiScrollPane(localization.getComponentOrientation());
 		scrollPane.getViewport().setScrollMode(JViewport.SIMPLE_SCROLL_MODE);
 		scrollPane.getViewport().add(view);		
 
 		JPanel buttonPane = new JPanel();		
-		JButton ok = new JButton(owner.getLocalization().getButtonLabel("ok"));
+		JButton ok = new JButton(localization.getButtonLabel("ok"));
 		ok.addActionListener(this);
 		Dimension okSize = ok.getPreferredSize();
 		okSize.width += 40;

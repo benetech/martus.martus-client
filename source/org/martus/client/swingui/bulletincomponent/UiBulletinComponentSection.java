@@ -27,10 +27,12 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.swingui.bulletincomponent;
 
 import java.awt.Color;
+import java.awt.ComponentOrientation;
 import java.awt.Font;
 
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EtchedBorder;
@@ -119,6 +121,22 @@ abstract public class UiBulletinComponentSection extends JPanel
 		sectionHeading.setText(title);
 	}
 
+	public void addComponents(JComponent item1, JComponent item2)
+	{
+		if(mainWindow.getLocalization().getComponentOrientation().equals(ComponentOrientation.LEFT_TO_RIGHT))
+		{
+			add(item1, ParagraphLayout.NEW_PARAGRAPH);
+			add(item2);
+		}
+		else
+		{
+			if(!item2.isVisible())
+				add(new JLabel(""),ParagraphLayout.NEW_PARAGRAPH);
+			else
+				add(item2, ParagraphLayout.NEW_PARAGRAPH);
+			add(item1);
+		}
+	}
 
 
 	protected UiMainWindow mainWindow;

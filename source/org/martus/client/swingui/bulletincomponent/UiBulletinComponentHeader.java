@@ -33,19 +33,17 @@ import java.text.DateFormat;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
-
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.border.EtchedBorder;
-
+import org.martus.client.swingui.UiLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.common.HQKey;
 import org.martus.common.HQKeys;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.crypto.MartusCrypto;
 import org.martus.common.packet.UniversalId;
-import org.martus.swing.ParagraphLayout;
 import org.martus.util.TokenReplacement;
 import org.martus.util.Base64.InvalidBase64Exception;
 import org.martus.util.TokenReplacement.TokenInvalidException;
@@ -57,25 +55,23 @@ public class UiBulletinComponentHeader extends UiBulletinComponentSection
 	{
 		super(mainWindowToUse);
 		tagQualifier = tagQualifierToUse;
-		
-		String buttonText = getLocalization().getButtonLabel("BulletinDetails");
+		UiLocalization localization = getLocalization();
+		String buttonText = localization.getButtonLabel("BulletinDetails");
 		JButton detailsButton = new JButton(buttonText);
 		detailsButton.addActionListener(new DetailsListener());
-		add(detailsButton, ParagraphLayout.NEW_PARAGRAPH);
-		add(warningIndicator);
+		addComponents(detailsButton, warningIndicator);
 
-		lastSavedLabel = new JLabel(getLocalization().getFieldLabel(Bulletin.TAGLASTSAVED));
-		add(lastSavedLabel, ParagraphLayout.NEW_PARAGRAPH);
+		lastSavedLabel = new JLabel(localization.getFieldLabel(Bulletin.TAGLASTSAVED));
 		dateTime = new JLabel("");
 		EtchedBorder b = new EtchedBorder();
 		dateTime.setBorder(b);
-		add(dateTime);
+		addComponents(lastSavedLabel, dateTime);
 
-		hqLabel = new JLabel(getLocalization().getFieldLabel("HQSummaryLabel"));
-		add(hqLabel, ParagraphLayout.NEW_PARAGRAPH);
+		hqLabel = new JLabel(localization.getFieldLabel("HQSummaryLabel"));
 		hqSummary = new JLabel("");
 		hqSummary.setFont(hqSummary.getFont().deriveFont(Font.BOLD));
-		add(hqSummary);
+		addComponents(hqLabel, hqSummary);
+
 	}
 	
 	public void setBulletinId(UniversalId uid)

@@ -27,10 +27,9 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.swingui.bulletincomponent;
 
 import java.awt.Color;
-
+import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.border.LineBorder;
-
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.fields.UiDateEditor;
 import org.martus.client.swingui.fields.UiDateViewer;
@@ -44,7 +43,6 @@ import org.martus.common.bulletin.AttachmentProxy;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.clientside.ChoiceItem;
 import org.martus.common.packet.FieldDataPacket;
-import org.martus.swing.ParagraphLayout;
 
 
 abstract public class UiBulletinComponentDataSection extends UiBulletinComponentSection
@@ -64,19 +62,17 @@ abstract public class UiBulletinComponentDataSection extends UiBulletinComponent
 			fields[fieldNum] = createAndAddLabelAndField(specs[fieldNum]);
 		}
 		JLabel attachments = new JLabel(getLocalization().getFieldLabel("attachments"));
-		add(attachments, ParagraphLayout.NEW_PARAGRAPH);
-		createAttachmentTable();
+		addComponents(attachments, createAttachmentTable());
 	}
 
 	public UiField createAndAddLabelAndField(FieldSpec spec)
 	{
 		UiField field = createField(spec);
 		field.initalize();
-		add(createLabel(spec), ParagraphLayout.NEW_PARAGRAPH);
-		add(field.getComponent());
+		addComponents(createLabel(spec), field.getComponent());
 		return field;
 	}
-	
+
 	public UiField[] getFields()
 	{
 		return fields;
@@ -240,7 +236,7 @@ abstract public class UiBulletinComponentDataSection extends UiBulletinComponent
 	abstract public UiField createBoolField();
 	abstract public UiField createGridField(GridFieldSpec fieldSpec);
 
-	abstract public void createAttachmentTable();
+	abstract public JComponent createAttachmentTable();
 	abstract public void addAttachment(AttachmentProxy a);
 	abstract public void clearAttachments();
 	abstract public void validateAttachments() throws DataInvalidException;
