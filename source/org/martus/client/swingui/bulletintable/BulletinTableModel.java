@@ -95,19 +95,21 @@ public class BulletinTableModel extends AbstractTableModel
 			return "";
 
 		String fieldTag = BulletinConstants.sortableFieldTags[columnIndex];
-		String value = getFolder().getStore().getFieldData(uid, fieldTag);			
+		String value = getFolder().getStore().getFieldData(uid, fieldTag);
+			
+								
 		if(fieldTag.equals(Bulletin.TAGSTATUS))
 		{
-			value = localization.getStatusLabel(value);
+		 	return localization.getStatusLabel(value);
 		}
 	 	if(fieldTag.equals(Bulletin.TAGENTRYDATE) || 
 				fieldTag.equals(Bulletin.TAGEVENTDATE))
 		{
-			value = localization.convertStoredDateToDisplay(value);
+			return localization.convertStoredDateToDisplay(value);
 		}
 		
 		if (value.startsWith("<"))
-			return " "+value;
+			return " "+value;				
 			
 		return value;
 	}

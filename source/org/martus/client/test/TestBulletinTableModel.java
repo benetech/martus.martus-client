@@ -69,6 +69,7 @@ public class TestBulletinTableModel extends TestCase
 		doTestSetFolder();
 		doTestFindBulletin();
 		doTestSortByColumn();
+		doTestHtmlTags();
 	}
 
     public void doTestColumns()
@@ -200,6 +201,23 @@ public class TestBulletinTableModel extends TestCase
 		list.sortByColumn(col);
 		assertEquals(tag, folderSent.sortedBy());
 		assertEquals(false, first.equals(list.getValueAt(0,col)));
+	}
+	
+	public void doTestHtmlTags() throws Exception
+	{
+		BulletinTableModel list = new BulletinTableModel(localization);
+		list.setFolder(folderSent);
+
+		Bulletin b = list.getBulletin(0);
+		b.set("title", "<HTML><body><H1><center>Charles</center></H1></BODY></HTML>");
+
+		store.saveBulletin(b);
+		assertEquals(" <HTML><body><H1><center>Charles</center></H1></BODY></HTML>", list.getValueAt(0,2));
+		
+		b = list.getBulletin(0);
+		assertEquals("<HTML><body><H1><center>Charles</center></H1></BODY></HTML>", b.get("title"));
+
+
 	}
 
 	MockMartusApp app;
