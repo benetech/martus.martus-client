@@ -33,7 +33,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
@@ -147,7 +146,7 @@ public class UiOnlineHelpDlg extends JDialog
 		}
 		try
 		{
-			BufferedReader reader = new BufferedReader(new UnicodeReader(fileStream));
+			UnicodeReader reader = new UnicodeReader(fileStream);
 			while(true)
 			{
 				String lineIn = reader.readLine();
@@ -176,9 +175,8 @@ public class UiOnlineHelpDlg extends JDialog
 		}
 		try
 		{
-			UnicodeReader unicodeReader = new UnicodeReader(fileStream);
-			unicodeReader.skipBOM();
-			BufferedReader reader = new BufferedReader(unicodeReader);
+			UnicodeReader reader = new UnicodeReader(fileStream);
+			reader.skipBOM();
 			while(true)
 			{
 				String lineIn = reader.readLine();
