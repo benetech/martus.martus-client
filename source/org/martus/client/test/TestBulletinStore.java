@@ -77,12 +77,9 @@ public class TestBulletinStore extends TestCaseEnhanced
     public void setUp() throws Exception
     {
     	super.setUp();
-    	if(store == null)
-    	{
-    		store = new MockBulletinStore();
-    		db = (MockDatabase)store.getDatabase();
-			security = (MockMartusSecurity)store.getSignatureGenerator();
-    	}
+		store = new MockBulletinStore();
+		db = (MockDatabase)store.getDatabase();
+		security = (MockMartusSecurity)store.getSignatureGenerator();
 
     	if(tempFile1 == null)
     	{
@@ -119,6 +116,32 @@ public class TestBulletinStore extends TestCaseEnhanced
 		store.createSystemFolder(BulletinStore.OBSOLETE_DRAFT_FOLDER);
     	assertTrue("drafts doesn't trigger migration?", store.needsFolderMigration());
     	store.deleteFolder(BulletinStore.OBSOLETE_DRAFT_FOLDER);
+    }
+    
+    public void testMigrateFolders() throws Exception
+    {
+
+		BulletinFolder outbox = store.createSystemFolder(BulletinStore.OBSOLETE_OUTBOX_FOLDER);
+    	Bulletin saved = store.createEmptyBulletin();
+    	store.saveBulletin(saved);
+    	store.addBulletinToFolder(saved.getUniversalId(), outbox);
+
+    	BulletinFolder drafts = store.createSystemFolder(BulletinStore.OBSOLETE_DRAFT_FOLDER);
+    	Bulletin draft = store.createEmptyBulletin();
+    	store.saveBulletin(draft);
+    	store.addBulletinToFolder(draft.getUniversalId(), drafts);
+    	
+		assertFalse("Already saved folders?", store.getFoldersFile().exists());
+    	assertTrue("Migration failed?", store.migrateFolders());
+		assertTrue("Didn't save changes?", store.getFoldersFile().exists());
+
+    	assertEquals(2, store.getFolderSaved().getBulletinCount());
+    	assertEquals(1, store.getFolderSealedOutbox().getBulletinCount());
+    	assertEquals(0, store.getFolderSealedOutbox().find(saved.getUniversalId()));
+
+    	assertNull("Didn't remove outbox?", store.findFolder(BulletinStore.OBSOLETE_OUTBOX_FOLDER));
+    	assertNull("Didn't remove drafts folder?", store.findFolder(BulletinStore.OBSOLETE_DRAFT_FOLDER));
+    	
     }
     
 	public void testGetStandardFieldNames()

@@ -92,6 +92,7 @@ public class EnglishStrings
 "wintitle:confirmBackupKeyPairInformation=Backing Up Your Keypair",
 "wintitle:confirmQuickEraseUninstallMartus=Uninstall Martus",
 "wintitle:confirmhelpStringNotFound=Text Not Found",
+"wintitle:confirmNeedsFolderMigration=Folder Migration Required",
 
 "wintitle:notifyDropErrorNotAllowed=Cannot Move Bulletin(s)",
 "wintitle:notifyDropErrorBulletinExists=Cannot Move Bulletin(s)",
@@ -176,6 +177,7 @@ public class EnglishStrings
 "wintitle:notifyFilesWillNotBeDeleted=Files Not Deleted",
 "wintitle:notifyChoosingUninstallMartus=Uninstalling Martus Warning",
 "wintitle:notifyHQKeyAlradyExists=HQ Key Already Exists",
+"wintitle:notifyFolderMigrationFailed=Folder Migration Error",
 
 "wintitle:inputservername=Server Name",
 "wintitle:inputserverpubliccode=Server Identification",
@@ -592,6 +594,8 @@ public class EnglishStrings
 "field:confirmgeneralBackupKeyPairMsgeffect=Selecting Yes will guide you through the backup procedure, selecting No will skip this important step.",
 "field:confirmbackupIncompleteEncryptedNeeded=A single encrypted backup file of your keypair has yet to be created.",
 "field:confirmbackupIncompleteShareNeeded=A multiple disk 'secret share' of your keypair has yet to be created.",
+"field:confirmNeedsFolderMigrationcause=This account was created with an older version of Martus, which used a different set of folders. The folders need to be migrated to the new format. The migration is automatic, fast, and safe. You cannot run this version of Martus unless you allow this migration.",
+"field:confirmNeedsFolderMigrationeffect=Answering Yes will allow the migration to proceed.",
 
 "field:notifyDropErrorNotAllowedcause=One or more bulletins cannot be moved to that folder. This may be because of their Draft/Sealed status, or their author.",
 "field:notifyDropErrorBulletinExistscause=One or more bulletins cannot be moved to that folder, because it already exists in that folder.",
@@ -676,6 +680,7 @@ public class EnglishStrings
 "field:notifyFilesWillNotBeDeletedcause=The original files have not been deleted from your computer, you must delete them manually if you wish.",
 "field:notifyChoosingUninstallMartuscause=By choosing to uninstall Martus we will need to erase your keypair file and Martus will exit after it completes the quick erase operation then bring up the uninstall wizard.  Since this will erase your keypair file Martus will also delete the following information: any server or HQ you have configured, any custom fields or default details, and your personal preferences.  This information will be lost and restoring your keypair from a backup will not recover these settings.",
 "field:notifyHQKeyAlradyExistscause=You have already added this key to your list of HQ's.",
+"field:notifyFolderMigrationFailedcause=An error occurred during the conversion of your folders. You can still use Martus, but if the Outbox folder still exists, do not use it.",
 
 "field:messageServerNewscause=The current server has sent this message:",
 "field:messageErrorDateInFuturecause=This date occurs in the future:",

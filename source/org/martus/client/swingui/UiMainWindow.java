@@ -399,6 +399,16 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		{
 			if(!confirmDlg("NeedsFolderMigration"))
 				return false;
+			
+			try
+			{
+				getStore().migrateFolders();
+			}
+			catch (Exception e)
+			{
+				e.printStackTrace();
+				notifyDlg("FolderMigrationFailed");
+			}
 		}
 		
 		int orphanCount = app.repairOrphans();

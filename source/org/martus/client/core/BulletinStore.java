@@ -604,6 +604,57 @@ public class BulletinStore
 			return true;
 		return false;
 	}
+	
+	public boolean migrateFolders() throws IOException
+	{
+		// NOTE: Perform the steps from most critical to least!
+		BulletinFolder oldOutbox = findFolder(OBSOLETE_OUTBOX_FOLDER);
+		BulletinFolder newSealedOutbox = getFolderSealedOutbox();
+		BulletinFolder saved = getFolderSaved();
+		Vector oldSavedBulletinIds = pullBulletinUidsOutOfFolder(oldOutbox);
+		addBulletinIdsToFolder(newSealedOutbox, oldSavedBulletinIds);
+		folders.remove(oldOutbox);
+		addBulletinIdsToFolder(saved, oldSavedBulletinIds);
+		
+		BulletinFolder oldDraftFolder = findFolder(OBSOLETE_DRAFT_FOLDER);
+		Vector oldDraftBulletinIds = pullBulletinUidsOutOfFolder(oldDraftFolder);
+		folders.remove(oldDraftFolder);
+		addBulletinIdsToFolder(saved, oldDraftBulletinIds);
+		
+		saveFolders();
+
+		return true;
+	}
+
+	public void addBulletinIdsToFolder(BulletinFolder folder, Vector bulletinUids) throws IOException
+	{
+		for (int i = 0; i < bulletinUids.size(); i++) 
+		{
+			UniversalId uid = (UniversalId)bulletinUids.get(i);
+			try
+			{
+				addBulletinToFolder(uid, folder);
+			}
+			catch (BulletinAlreadyExistsException ignoreHarmless)
+			{
+			}
+		}
+	}
+
+	private Vector pullBulletinUidsOutOfFolder(BulletinFolder folder)
+	{
+		Vector bulletinUids = new Vector();
+		if(folder != null)
+		{
+			for(int i=0; i < folder.getBulletinCount(); ++i)
+			{
+				UniversalId uid = folder.getBulletinUniversalIdUnsorted(i);
+				bulletinUids.add(uid);
+				removeBulletinFromFolder(uid, folder, false);
+			}
+		}
+		return bulletinUids;
+	}
 
 	public void createSystemFolders()
 	{
@@ -647,7 +698,13 @@ public class BulletinStore
 
 	public synchronized void removeBulletinFromFolder(Bulletin b, BulletinFolder from, boolean saveFolders)
 	{
-		from.remove(b.getUniversalId());
+		UniversalId uid = b.getUniversalId();
+		removeBulletinFromFolder(uid, from, saveFolders);
+	}
+
+	public void removeBulletinFromFolder(UniversalId uid, BulletinFolder from, boolean saveFolders)
+	{
+		from.remove(uid);
 		if(saveFolders)
 			saveFolders();
 	}
