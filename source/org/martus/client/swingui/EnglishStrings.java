@@ -712,7 +712,7 @@ public class EnglishStrings
 "field:UnknownFieldType=WARNING: This field requires a newer version of Martus to be viewed",
 "field:BackupSecretShareCompleteInformation=Backup complete, please give each disk to someone you trust, so that if you forget your user name and or password in the future you can recreate your account.  You will need #N# of these secret share disks to recreate your account.",
 "field:BackupRecoverKeyPairInsertNextDiskMessage=Please insert disk #",
-
+"field:SaveShareKeyPair=",
 "field:DeleteKeypair=Delete key pair",
 "field:ScrubDataBeforeDelete=Scrub data before deleting",
 "field:ExitWhenComplete=Exit when complete",
