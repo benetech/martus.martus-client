@@ -513,7 +513,7 @@ public class EnglishStrings
 "field:confirmCancelShareBackupcause=Do you wish to cancel this backup?",
 "field:confirmCancelShareBackupeffect=By choosing Yes, you will exit this backup.",
 "field:confirmEnterCustomFieldscause=You have chosen to customize the fields that will be used in any new bulletins created by this account.",
-"field:confirmEnterCustomFieldseffect=Customizing fields is an advanced operation, and can be dangerous. You should only proceed if you are certain that you understand the feature.",
+"field:confirmEnterCustomFieldseffect=Customizing fields is an advanced operation. You should only proceed if you are certain that you understand the feature.",
 "field:confirmUndoCustomFieldscause=You have chosen to revert to the standard set of Martus fields.",
 "field:confirmUndoCustomFieldseffect=New bulletins created with this account will not have any custom fields.",
 "field:confirmRecoverUsingKeySharecause=Welcome to Martus.  What would you like to do?",
