@@ -1,53 +1,56 @@
-﻿Introduction to the Martus™ Software
-What is Martus™?
-Why is security so important when using Martus?
-How does Martus keep the data secure?
-What does an individual need to do to keep data secure?
-What are the limitations to Martus security?
-Why send bulletins to the server?
-Why is Martus an open source application?
-Getting Started
-Installing
-Uninstalling
-Setting up your account
-Choosing a password
-Setting up a server connection
-Setting your preferences
-Updating the Martus application
-The Martus Workspace
-Creating a Bulletin
-Completing fields in a bulletin
-Using a template in the Details field
-Customizing bulletin fields
-Saving and Modifying Bulletins
-Sending a bulletin to the Martus server
-Saving a draft
-Modifying a copy of a sealed bulletin
-Modifying a draft
-Discarding a draft
-Managing Bulletins
-Default folders
-Other folders created by Martus
-Creating folders
-Discarding and deleting bulletins
-Organizing bulletins
-Dragging bulletins to the Windows desktop
-Retrieving sealed bulletins
-Retrieving draft bulletins
-Retrieving bulletins created by field desks
-Viewing and saving attachments
-Viewing damaged bulletins
-Searching for specific bulletins
-Printing bulletins
-Exporting bulletin data
-Deleting All Bulletin Data, Folders, and Your Key Pair File
-Keeping Your Data Secure
-How Martus security works
-Backing up your key pair file
-Deleting your key pair
-Restoring your key pair file
-Using your password wisely
-Using safe computing practices
-Sharing your private data with your organization
-Changing your user name or password
-Frequently Asked Questions
+﻿1 Introduction to the Martus™ Software
+1a. What is Martus™?
+1b. Why is security so important when using Martus?
+1c. How does Martus keep the data secure?
+1d. What does an individual need to do to keep data secure?
+1e. What are the limitations to Martus security?
+1f. Why send bulletins to the server?
+1g. Why is Martus an open source application?
+2. Getting Started
+2a. Installing
+2b. Uninstalling
+2c. Updating the Martus application
+2d. Setting up your account
+2e. Choosing a password
+2f. Setting up a server connection
+2g. Setting your preferences
+3. The Martus Workspace
+4. Creating a Bulletin
+4a. Completing fields in a bulletin
+4b. Customizing your bulletins
+5. Saving and Modifying Bulletins
+5a. Saving a sealed bulletin
+5b. Saving a draft
+5c. Modifying a copy of a sealed bulletin
+5d. Modifying a draft
+5e. Discarding a draft
+6. Managing Bulletins
+6a. Default folders
+6b. Other folders created by Martus
+6c. Creating folders
+6d. Discarding and deleting bulletins
+6e. Organizing bulletins
+6f. Placing bulletins on the desktop
+6g. Retrieving sealed bulletins
+6h. Retrieving draft bulletins
+6i. Retrieving bulletins created by field desks
+6j. Viewing and saving attachments
+6k. Viewing damaged bulletins
+6l. Searching for specific bulletins
+6m. Printing bulletins
+6n. Exporting bulletin data
+7. Deleting Your Bulletins and Account Information
+8. Deleting All Martus Data, Including the Application
+9. Keeping Your Data Secure
+9a. How Martus security works
+9b. Backing up your key
+9c. Restoring your key
+9d. Using your password wisely
+9e. Using safe computing practices
+9f. Sharing your private data with colleagues
+9g. Enabling other accounts to send your bulletins to a server
+9h. Changing your user name or password
+10. Customizing Martus
+10a. Using a template in the Details field
+10b. Customizing bulletin fields
+11. Frequently Asked Questions
