@@ -759,9 +759,9 @@ public class EnglishStrings
 "field:WasSentYes=Yes",
 "field:WasSentNo=No",
 
-"folder:%OutBox=Outbox",
-"folder:%Sent=Sent Bulletins",
-"folder:%Draft=Draft Bulletins",
+"folder:%OutBox=Unsent Bulletins",
+"folder:%Sent=Saved Bulletins",
+"folder:%Draft=Old Draft Bulletins",
 "folder:%Discarded=Discarded Bulletins",
 "folder:%RetrievedMyBulletin=Retrieved Bulletins",
 "folder:%RetrievedFieldOfficeBulletin=Field Desk Bulletins",
