@@ -29,7 +29,6 @@ package org.martus.client.swingui.actions;
 import java.awt.event.ActionEvent;
 
 import org.martus.client.core.BulletinStore;
-import org.martus.client.core.ConfigInfo;
 import org.martus.client.core.CustomFieldSpecValidator;
 import org.martus.client.core.MartusApp;
 import org.martus.client.core.MartusApp.SaveConfigInfoException;
@@ -37,6 +36,7 @@ import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.dialogs.UiCustomFieldsDlg;
 import org.martus.common.CustomFields;
 import org.martus.common.FieldSpec;
+import org.martus.common.MartusConstants;
 import org.martus.common.StandardFieldSpecs;
 import org.martus.common.CustomFields.CustomFieldsParseException;
 
@@ -60,7 +60,7 @@ public class ActionMenuCustomFields extends UiMenuAction
 			return;
 			
 		store.setPublicFieldTags(newSpecs);
-		app.getConfigInfo().setCustomFieldSpecs(ConfigInfo.deprecatedCustomFieldSpecs);
+		app.getConfigInfo().setCustomFieldSpecs(MartusConstants.deprecatedCustomFieldSpecs);
 		app.getConfigInfo().setCustomFieldXml(new CustomFields(newSpecs).toString());
 
 		try

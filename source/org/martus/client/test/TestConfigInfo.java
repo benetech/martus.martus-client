@@ -34,8 +34,9 @@ import java.util.Vector;
 
 import org.martus.client.core.ConfigInfo;
 import org.martus.common.ContactInfo;
-import org.martus.common.StandardFieldSpecs;
 import org.martus.common.LegacyCustomFields;
+import org.martus.common.MartusConstants;
+import org.martus.common.StandardFieldSpecs;
 import org.martus.common.crypto.MartusSecurity;
 import org.martus.common.network.NetworkInterfaceConstants;
 import org.martus.common.test.TestCaseEnhanced;
@@ -204,7 +205,7 @@ public class TestConfigInfo extends TestCaseEnhanced
 		info.setHQKey(sampleHQKey);
 		info.setSendContactInfoToServer(sampleSendContactInfoToServer);
 		info.setServerCompliance(sampleServerCompliance);
-		info.setCustomFieldSpecs(ConfigInfo.deprecatedCustomFieldSpecs);
+		info.setCustomFieldSpecs(MartusConstants.deprecatedCustomFieldSpecs);
 		info.setCustomFieldXml(sampleCustomFieldXml);
 	}
 
@@ -258,7 +259,7 @@ public class TestConfigInfo extends TestCaseEnhanced
 		if(VERSION == 5)
 			assertEquals(label + ": sampleCustomFieldSpecs", sampleCustomFieldSpecs, info.getCustomFieldSpecs());
 		else if(VERSION >= 6)
-			assertEquals(label + ": sampleCustomFieldSpecs", ConfigInfo.deprecatedCustomFieldSpecs, info.getCustomFieldSpecs());
+			assertEquals(label + ": sampleCustomFieldSpecs", MartusConstants.deprecatedCustomFieldSpecs, info.getCustomFieldSpecs());
 		else
 			assertEquals(label + ": sampleCustomFieldSpecs", defaultCustomFieldSpecs, info.getCustomFieldSpecs());
 
@@ -307,7 +308,7 @@ public class TestConfigInfo extends TestCaseEnhanced
 		}
 		if(VERSION >= 6)
 		{
-			out.writeUTF(ConfigInfo.deprecatedCustomFieldSpecs);
+			out.writeUTF(MartusConstants.deprecatedCustomFieldSpecs);
 			out.writeUTF(sampleCustomFieldXml);
 		}
 		out.close();

@@ -33,6 +33,7 @@ import java.io.OutputStream;
 import java.io.Serializable;
 
 import org.martus.common.LegacyCustomFields;
+import org.martus.common.MartusConstants;
 import org.martus.common.StandardFieldSpecs;
 
 public class ConfigInfo implements Serializable
@@ -172,7 +173,7 @@ public class ConfigInfo implements Serializable
 			out.writeUTF(serverPublicKey);
 			out.writeBoolean(sendContactInfoToServer);
 			out.writeUTF(serverCompliance);
-			out.writeUTF(deprecatedCustomFieldSpecs);
+			out.writeUTF(MartusConstants.deprecatedCustomFieldSpecs);
 			out.writeUTF(customFieldXml);
 			out.close();
 		}
@@ -182,8 +183,6 @@ public class ConfigInfo implements Serializable
 		}
 	}
 	
-	public static final String deprecatedCustomFieldSpecs = "Error,Config written by a newer version of Martus, upgrade";
-
 	private boolean mustAskUserToSendToServer;
 	
 	public static final short VERSION = 6;
