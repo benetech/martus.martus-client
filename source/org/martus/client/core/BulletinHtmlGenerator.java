@@ -33,6 +33,7 @@ import java.io.StringReader;
 import org.martus.client.swingui.fields.UiFlexiDateViewer;
 import org.martus.common.FieldSpec;
 import org.martus.common.MartusUtilities;
+import org.martus.common.StandardFieldSpecs;
 import org.martus.common.bulletin.AttachmentProxy;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.clientside.UiBasicLocalization;
@@ -102,7 +103,7 @@ public class BulletinHtmlGenerator
 		{
 			FieldSpec spec = standardFieldTags[fieldNum];
 			String tag = spec.getTag();
-			String label = spec.getLabel();
+			String label = spec.getLabel();			
 		
 			String value = MartusUtilities.getXmlEncoded(b.get(tag));
 			if(spec.getType() == FieldSpec.TYPE_DATE)
@@ -114,9 +115,9 @@ public class BulletinHtmlGenerator
 			else if(spec.getType() == FieldSpec.TYPE_DATERANGE)
 				value = UiFlexiDateViewer.getViewableDateRange(value, localization);
 			
-			if(label.equals(""))
+			if(StandardFieldSpecs.isStandardFieldTag(tag))
 				label = localization.getFieldLabel(tag);
-				
+							
 			String fieldHtml = getFieldHtmlString(label, value);
 			sectionHtml += fieldHtml;
 		}
