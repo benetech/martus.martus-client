@@ -31,25 +31,24 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JDialog;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 
 import org.martus.client.core.QuickEraseOptions;
+import org.martus.client.swingui.UiMainWindow;
 import org.martus.common.clientside.UiBasicLocalization;
 import org.martus.swing.ParagraphLayout;
 import org.martus.swing.Utilities;
 
 public class UiQuickEraseConfirmDlg extends JDialog
 {
-	public UiQuickEraseConfirmDlg(JFrame owner, UiBasicLocalization localization, String baseTag)
+	public UiQuickEraseConfirmDlg(UiMainWindow mainWIndowToUse, UiBasicLocalization localization, String baseTag)
 	{
-		super(owner, "", true);
-
-		setTitle(localization.getWindowTitle("confirm" + baseTag));			
-
+		super(mainWIndowToUse, localization.getWindowTitle("confirm" + baseTag), true);
+		mainWindow = mainWIndowToUse;
+		
 		JButton ok = new JButton(localization.getButtonLabel("ok"));
 		ok.addActionListener(new OkHandler());
 		JButton cancel = new JButton(localization.getButtonLabel("cancel"));
@@ -72,7 +71,6 @@ public class UiQuickEraseConfirmDlg extends JDialog
 		getRootPane().setDefaultButton(ok);
 
 		Utilities.centerDlg(this);
-		setResizable(false);
 	}	
 	
 	private JPanel quickEraseOptioinsLayout(UiBasicLocalization localization, String baseTag)
@@ -90,7 +88,6 @@ public class UiQuickEraseConfirmDlg extends JDialog
 		deleteKeyPair = new JCheckBox(deleteKeyPairStr, false);
 		deleteKeyPair.addActionListener(new KeyPairEraseHandler());
 		exitWhenComplete = new JCheckBox(exitWhenCompleteStr, false);
-		exitWhenComplete.addActionListener(new ExitWhenCompleteHandler());
 		JPanel panel = new JPanel();
 		panel.setLayout(new ParagraphLayout());
 		panel.setBorder(new TitledBorder(LineBorder.createGrayLineBorder(),""));
@@ -121,16 +118,15 @@ public class UiQuickEraseConfirmDlg extends JDialog
 		public void actionPerformed(ActionEvent ae)
 		{
 			if(deleteKeyPair.isSelected())
+			{	
 				exitWhenComplete.setSelected(true);
-		}
-	}
-	
-	class ExitWhenCompleteHandler implements ActionListener
-	{
-		public void actionPerformed(ActionEvent ae)
-		{
-			if(!exitWhenComplete.isSelected())
-				deleteKeyPair.setSelected(false);
+				exitWhenComplete.setEnabled(false);
+				mainWindow.notifyDlg(mainWindow,"ChoosingQuickEraseKeyPair");
+			}
+			else
+			{
+				exitWhenComplete.setEnabled(true);
+			}
 		}
 	}
 	
@@ -167,6 +163,6 @@ public class UiQuickEraseConfirmDlg extends JDialog
 	JCheckBox exitWhenComplete;
 	JCheckBox donotPrompt;
 	QuickEraseOptions options;
-		
+	UiMainWindow mainWindow;
 	boolean action;
 }

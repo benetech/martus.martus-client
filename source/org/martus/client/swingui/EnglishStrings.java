@@ -167,6 +167,7 @@ public class EnglishStrings
 "wintitle:notifyRecoveryProcessBackupFile=Recover Keypair",
 "wintitle:notifyRecoveryOfKeyPairComplete=Successful Recovery of Keypair",
 "wintitle:notifyErrorRecoveringAccountDirectory=Error During Recovery",
+"wintitle:notifyChoosingQuickEraseKeyPair=Erase KeyPair Warning",
 
 "wintitle:inputservername=Server Name",
 "wintitle:inputserverpubliccode=Server Identification",
@@ -517,7 +518,7 @@ public class EnglishStrings
 "field:confirmDoQuickEraseeffect=Bulletins that have not been backed up will be permanently lost.",
 "field:confirmServerComplianceFailedcause=Martus software is unable to determine whether this server complies with the official guidelines for operating a secure and reliable Martus server.",
 "field:confirmServerComplianceFailedeffect=Benetech recommends that you do not use this server until a compliance statement is made available for you to read.  Continuing will select this non-compliant server anyway.",
-"field:confirmBackupKeyPairSinglecause=We strongly recommend that your backup your keypair file.  If something happens to the original keypair file, and you don't have a backup you will not be able to open any bulletins you have created with this keypair.",
+"field:confirmBackupKeyPairSinglecause=We strongly recommend that you backup your keypair file.  If something happens to the original keypair file, and you don't have a backup you will not be able to open any bulletins you have created with this keypair.",
 "field:confirmBackupKeyPairSingleeffect=By choosing Yes, the next screen will prompt you to save a copy of your keypair onto a floppy disk or other removable media.",
 "field:confirmWarnMissingAccountMapSignatureFilecause=Warning: accountmap.txt.sig file is missing.\n\nIf you have just upgraded to a new version of Martus this warning is harmless and you should click on No.  Otherwise this may indicate someone has tried to tamper with your data or could be caused by a hardware error.",		
 "field:confirmWarnMissingAccountMapSignatureFileeffect=Clicking on Yes will exit Martus.  Clicking on No will try to generate a new accountmap.txt.sig file and continue to load Martus.",		
@@ -636,7 +637,8 @@ public class EnglishStrings
 "field:notifyUserAlreadyExistscause=The user name you chose already exists on this system, please choose a different user name.",
 "field:notifyRecoveryProcessBackupFilecause=To recover your keypair file, first you must find the backup file you saved previously, it should be called MartusKeyPair.dat.bak.  Note Martus automatically saves a backup file in your account directory, so even if you forgot to save your own backup file all is not lost.  Using the file open dialog box find the file on your computer's hard drive or on a floppy disk then click on open.  Martus will then ask you for your user name and password and restore your account so you can log in normally.",
 "field:notifyRecoveryOfKeyPairCompletecause=Recovery of your keypair file is complete, you will now be logged into Martus.",
-"field:notifyErrorRecoveringAccountDirectory=Error during keypair recovery. This keypair backup copy may be damaged.",
+"field:notifyErrorRecoveringAccountDirectorycause=Error during keypair recovery. This keypair backup copy may be damaged.",
+"field:notifyChoosingQuickEraseKeyPaircause=By choosing to erase your keypair file Martus will exit after it completes the quick erase operation.  Also by choosing to erase your keypair file Martus will also delete the following information: any server or HQ you have configured, any custom fields or default details, and your personal pereferences.  This information will be lost and restoring your keypair from a backup will not recover these settings.",
 	
 "field:messageServerNewscause=The current server has sent this message:",
 "field:messageErrorDateInFuturecause=This date occurs in the future:",
