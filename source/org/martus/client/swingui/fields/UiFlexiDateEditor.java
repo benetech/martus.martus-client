@@ -221,8 +221,12 @@ public class UiFlexiDateEditor extends UiField
 
 	public String getText()
 	{
-		DateFormat df = Bulletin.getStoredDateFormat();				
-		String dateText = df.format(getBeginDate())+ MartusFlexidate.DATE_RANGE_SEPARATER+
+		DateFormat df = Bulletin.getStoredDateFormat();
+		String dateText = null;
+		if(isExactDate())
+			dateText = df.format(getBeginDate());
+		else
+			dateText = df.format(getBeginDate())+ MartusFlexidate.DATE_RANGE_SEPARATER+
 						MartusFlexidate.toFlexidateFormat(getBeginDate(), (isFlexiDate())? getEndDate():getBeginDate());						
 		return dateText;
 	}	
