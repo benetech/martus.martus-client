@@ -64,12 +64,12 @@ public class TestCustomFieldTemplate extends TestCaseEnhanced
 		CustomFields fields = new CustomFields(StandardFieldSpecs.getDefaultPublicFieldSpecs());
 		CustomFieldTemplate template = new CustomFieldTemplate();
 		
-		assertTrue("not valid?", template.validateXml(fields.toString()));
+		assertTrue("not valid?", template.isvalidTemplateXml(fields.toString()));
 		assertEquals(0, template.getErrors().size());
 		
 		FieldSpec invalidField = FieldSpec.createCustomField("myTag", "myLabel", 55);
 		fields.add(invalidField);
-		assertFalse("Should not be a valid template", template.validateXml(fields.toString()));
+		assertFalse("Should not be a valid template", template.isvalidTemplateXml(fields.toString()));
 		assertEquals(1, template.getErrors().size());
 		assertEquals(CustomFieldError.CODE_UNKNOWN_TYPE,((CustomFieldError)template.getErrors().get(0)).getCode());
 	}

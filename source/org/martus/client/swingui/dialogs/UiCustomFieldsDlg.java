@@ -257,7 +257,7 @@ public class UiCustomFieldsDlg extends JDialog
 	public boolean validateXml(String xmlToValidate)
 	{
 		CustomFieldTemplate template = new CustomFieldTemplate();
-		if(template.validateXml(xmlToValidate))
+		if(template.isvalidTemplateXml(xmlToValidate))
 			return true;
 
 		displayXMLError(template); 

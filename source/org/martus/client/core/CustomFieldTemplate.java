@@ -62,7 +62,7 @@ public class CustomFieldTemplate
 			in.close();
 			byte[] xmlBytes = security.extractFromSignedBundle(dataBundle, authroizedKeys);
 			String templateXMLToImport = new String(xmlBytes, "UTF-8");
-			if(validateXml(templateXMLToImport))
+			if(isvalidTemplateXml(templateXMLToImport))
 			{
 				xmlImportedText = templateXMLToImport;
 				return true;
@@ -87,7 +87,7 @@ public class CustomFieldTemplate
 	public boolean ExportTemplate(MartusCrypto security, File fileToExportXml, String xmlToExport)
 	{
 		clearData();
-		if(!validateXml(xmlToExport))
+		if(!isvalidTemplateXml(xmlToExport))
 			return false;
 		try
 		{
@@ -105,7 +105,7 @@ public class CustomFieldTemplate
 		return false;
 	}
 	
-	public boolean validateXml(String xmlToValidate)
+	public boolean isvalidTemplateXml(String xmlToValidate)
 	{
 		try
 		{
