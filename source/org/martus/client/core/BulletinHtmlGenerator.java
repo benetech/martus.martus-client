@@ -50,11 +50,16 @@ public class BulletinHtmlGenerator
 	{
 		StringBuffer html = new StringBuffer(1000);
 		html.append("<html>");
+		
 		html.append("<table width='");
 		html.append(Integer.toString(width));
 		html.append("'>");
 
-		String publicSectionTitle = localization.getFieldLabel("publicsection");
+		html.append(localization.getFieldLabel("BulletinId")+" ");
+		html.append(b.getLocalId());
+		html.append("<tr></tr>");
+
+		String publicSectionTitle =  localization.getFieldLabel("publicsection");
 		html.append("<tr><td colspan='2'><u><b>");
 		html.append(publicSectionTitle);
 		html.append("</b></u></td></tr>");
