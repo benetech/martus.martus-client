@@ -237,6 +237,7 @@ public class UiBackupRecoverSharedKeyPair
 			if(mainWindow.getAndSaveUserNamePassword(keyPairFile))
 			{					
 				mainWindow.notifyDlg("RecoveryOfKeyShareComplete");
+				mainWindow.askToBackupKeyPairEncryptedSingleFile();
 				return true;
 			}	
 			if(mainWindow.confirmDlg("CancelShareRecover"))
