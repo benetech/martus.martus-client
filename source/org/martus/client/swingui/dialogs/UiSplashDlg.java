@@ -30,13 +30,11 @@ import java.awt.Container;
 import java.awt.Frame;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.border.EmptyBorder;
-
 import org.martus.client.swingui.UiConstants;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.common.clientside.UiBasicLocalization;
@@ -47,7 +45,6 @@ public class UiSplashDlg extends JDialog implements ActionListener
 	public UiSplashDlg(Frame owner, UiBasicLocalization localization, String text)
 	{
 		super(owner, owner.getTitle(), true);
-		
 		String versionInfo = UiMainWindow.getDisplayVersionInfo(localization);
 		String copyrightInfo = UiConstants.copyright;
 		String websiteInfo = UiConstants.website;
@@ -76,7 +73,6 @@ public class UiSplashDlg extends JDialog implements ActionListener
 		contents.add(hbox, BorderLayout.SOUTH);
 		
 		Utilities.centerDlg(this);
-		setResizable(false);
 		show();
 	}
 
