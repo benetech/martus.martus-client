@@ -74,7 +74,8 @@ public class UiAboutDlg extends JDialog implements ActionListener
 
 		Box vBoxVersionInfo = Box.createVerticalBox();
 		vBoxVersionInfo.add(new JLabel(versionInfo));
-		vBoxVersionInfo.add(new JLabel(localization.getFieldLabel("aboutDlgCopyright")));
+		vBoxVersionInfo.add(new JLabel(UiConstants.copyright));
+		vBoxVersionInfo.add(new JLabel(UiConstants.website));
 		vBoxVersionInfo.add(new JLabel(buildDate));
 
 		Box hBoxVersionAndIcon = Box.createHorizontalBox();

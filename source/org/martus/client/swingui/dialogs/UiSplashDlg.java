@@ -37,6 +37,7 @@ import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.border.EmptyBorder;
 
+import org.martus.client.swingui.UiConstants;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.common.clientside.UiBasicLocalization;
 import org.martus.swing.Utilities;
@@ -47,13 +48,19 @@ public class UiSplashDlg extends JDialog implements ActionListener
 	{
 		super(owner, owner.getTitle(), true);
 		Container contents = getContentPane();
-		String versionInfoText = UiMainWindow.getDisplayVersionInfo(localization);
-		JLabel versionInfo = new JLabel(versionInfoText,JLabel.CENTER);
-		contents.add(versionInfo,BorderLayout.CENTER);
 		
 		JLabel body = new JLabel(text);
-		body.setBorder(new EmptyBorder(20, 20, 20, 20));
-		contents.add(body, BorderLayout.NORTH);
+		body.setBorder(new EmptyBorder(20, 30, 20, 20));
+		String versionInfo = UiMainWindow.getDisplayVersionInfo(localization);
+		String copyrightInfo = UiConstants.copyright;
+		String websiteInfo = UiConstants.website;
+		String htmlBreak = "<BR></BR>";
+		String htmlVersionInfo = "<html><center>" + versionInfo + htmlBreak + 
+				copyrightInfo +htmlBreak+ websiteInfo + htmlBreak + "</center></html>";
+		
+		contents.add(body,BorderLayout.NORTH);
+		contents.add(new JLabel(htmlVersionInfo),BorderLayout.CENTER);
+		
 		contents.add(new JLabel("   "), BorderLayout.EAST);
 		contents.add(new JLabel("   "), BorderLayout.WEST);
 		Box hbox = Box.createHorizontalBox();
