@@ -36,9 +36,10 @@ public class CustomFieldSpecValidator
 {
 	public CustomFieldSpecValidator(FieldSpec[] specsToCheck)
 	{
+		errors = new Vector();
 		if(specsToCheck == null)
 		{
-			isNull = true;
+			errors.add(CustomFieldError.errorNoSpecs());
 			return;
 		}
 		
@@ -46,39 +47,25 @@ public class CustomFieldSpecValidator
 		checkForBlankTags(specsToCheck);
 		checkForDuplicateFields(specsToCheck);
 		checkForMissingCustomLabels(specsToCheck);
-		checkForLabelsOnStandardFields(specsToCheck);
 		checkForUnknownTypes(specsToCheck);
+		checkForLabelsOnStandardFields(specsToCheck);
 	}
 		
 	public boolean isValid()
 	{
-		if(isNull)
+		if(errors.size()>0)
 			return false;
-		
-		if(blankTagCount != 0)
-			return false;
-			
-		if(missingTags.size() != 0)
-			return false;
-			
-		if(duplicateTags.size() != 0)
-			return false;
-			
-		if(customTagsWithoutLabels.size() != 0)
-			return false;
-			
-		if(standardTagsWithLabels.size() != 0)
-			return false;
-			
-		if(tagsWithInvalidTypes.size() != 0)
-			return false;
-			
 		return true;
 	}
 	
+	public Vector getAllErrors()
+	{
+		return errors;
+	}
+
 	private void checkForRequiredFields(FieldSpec[] specsToCheck)
 	{
-		missingTags = new Vector();
+		Vector missingTags = new Vector();
 		missingTags.add(BulletinConstants.TAGAUTHOR);
 		missingTags.add(BulletinConstants.TAGLANGUAGE);
 		missingTags.add(BulletinConstants.TAGENTRYDATE);
@@ -89,72 +76,71 @@ public class CustomFieldSpecValidator
 			if(missingTags.contains(tag))
 			missingTags.remove(tag);
 		}
+		
+		for (int j = 0; j < missingTags.size(); j++)
+			errors.add(CustomFieldError.errorRequiredField((String)missingTags.get(j)));
 	}
 	
 	private void checkForBlankTags(FieldSpec[] specsToCheck)
 	{
-		blankTagCount = 0;
 		for (int i = 0; i < specsToCheck.length; i++)
 		{
-			String tag = specsToCheck[i].getTag();
+			FieldSpec thisSpec = specsToCheck[i];
+			String tag = thisSpec.getTag();
 			if(tag.length() == 0)
-				++blankTagCount;
+				errors.add(CustomFieldError.errorBlankTag(thisSpec.getLabel(), getType(thisSpec)));				
 		}
 	}
 	
 	private void checkForDuplicateFields(FieldSpec[] specsToCheck)
 	{
 		Vector foundTags = new Vector();
-		duplicateTags = new Vector();
 		for (int i = 0; i < specsToCheck.length; i++)
 		{
-			String tag = specsToCheck[i].getTag();
+			FieldSpec thisSpec = specsToCheck[i];
+			String tag = thisSpec.getTag();
 			if(foundTags.contains(tag))
-				duplicateTags.add(tag);
+				errors.add(CustomFieldError.errorDuplicateFields(thisSpec.getTag(), thisSpec.getLabel(), getType(thisSpec)));				
 			foundTags.add(tag);
 		}
 	}
 	
 	private void checkForMissingCustomLabels(FieldSpec[] specsToCheck)
 	{
-		customTagsWithoutLabels = new Vector();
 		for (int i = 0; i < specsToCheck.length; i++)
 		{
-			FieldSpec spec = specsToCheck[i]; 
-			String tag = spec.getTag();
-			if(StandardFieldSpecs.isCustomFieldTag(tag) && spec.getLabel().equals(""))
-				customTagsWithoutLabels.add(tag);
+			FieldSpec thisSpec = specsToCheck[i]; 
+			String tag = thisSpec.getTag();
+			if(StandardFieldSpecs.isCustomFieldTag(tag) && thisSpec.getLabel().equals(""))
+				errors.add(CustomFieldError.errorMissingLabel(thisSpec.getTag(), getType(thisSpec)));				
 		}
 	}
 
-	private void checkForLabelsOnStandardFields(FieldSpec[] specsToCheck)
-	{
-		standardTagsWithLabels = new Vector();
-		for (int i = 0; i < specsToCheck.length; i++)
-		{
-			FieldSpec spec = specsToCheck[i]; 
-			String tag = spec.getTag();
-			if(!StandardFieldSpecs.isCustomFieldTag(tag) && !spec.getLabel().equals(""))
-				standardTagsWithLabels.add(tag);
-		}
-	}
-	
 	private void checkForUnknownTypes(FieldSpec[] specsToCheck)
 	{
-		tagsWithInvalidTypes = new Vector();
 		for (int i = 0; i < specsToCheck.length; i++)
 		{
-			FieldSpec spec = specsToCheck[i]; 
-			if(spec.getType() == FieldSpec.TYPE_UNKNOWN)
-			tagsWithInvalidTypes.add(spec.getTag());
+			FieldSpec thisSpec = specsToCheck[i]; 
+			if(thisSpec.getType() == FieldSpec.TYPE_UNKNOWN)
+				errors.add(CustomFieldError.errorUnknownType(thisSpec.getTag(), thisSpec.getLabel()));				
 		}
 	}
 	
-	boolean isNull;
-	int blankTagCount;
-	Vector missingTags;
-	Vector duplicateTags;
-	Vector customTagsWithoutLabels;
-	Vector standardTagsWithLabels;
-	Vector tagsWithInvalidTypes;
+	private void checkForLabelsOnStandardFields(FieldSpec[] specsToCheck)
+	{
+		for (int i = 0; i < specsToCheck.length; i++)
+		{
+			FieldSpec thisSpec = specsToCheck[i]; 
+			String tag = thisSpec.getTag();
+			if(!StandardFieldSpecs.isCustomFieldTag(tag) && !thisSpec.getLabel().equals(""))
+				errors.add(CustomFieldError.errorLabelOnStandardField(thisSpec.getTag(), thisSpec.getLabel(), getType(thisSpec)));				
+		}
+	}
+	
+	private String getType(FieldSpec thisSpec)
+	{
+		return FieldSpec.getTypeString( thisSpec.getType());
+	}
+
+	private Vector errors;
 }
