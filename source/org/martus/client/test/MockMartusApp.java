@@ -60,7 +60,7 @@ public class MockMartusApp extends MartusApp
 
 	private MockMartusApp(MartusCrypto crypto, File dataDirectoryToUse) throws MartusAppInitializationException
 	{
-		super(crypto, dataDirectoryToUse, new UiBasicLocalization(dataDirectoryToUse));
+		super(crypto, dataDirectoryToUse, new UiBasicLocalization(dataDirectoryToUse, new String[0]));
 	}
 	
 	public void deleteAllFiles() throws Exception

@@ -134,7 +134,7 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 	
 	public void testSetDefaultUiState() throws Exception
 	{
-		UiBasicLocalization testLocalization = new UiBasicLocalization(null);
+		UiBasicLocalization testLocalization = new UiBasicLocalization(null, noEnglishStrings);
 		File tmpFile = createTempFile();
 		MartusApp.setInitialUiDefaultsFromFileIfPresent(testLocalization, tmpFile);
 		assertNull("File doesn't exist localization should not be set", testLocalization.getCurrentLanguageCode());
@@ -237,7 +237,7 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 
 			try
 			{
-				UiBasicLocalization localization = new UiBasicLocalization(fakeDataDirectory);
+				UiBasicLocalization localization = new UiBasicLocalization(fakeDataDirectory, noEnglishStrings);
 				MartusApp app = new MartusApp(mockSecurityForApp, fakeDataDirectory, localization);
 				app.setCurrentAccount("some user", app.getMartusDataRootDirectory());
 				app.doAfterSigninInitalization();
@@ -292,7 +292,7 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 
 			try
 			{
-				UiBasicLocalization localization = new UiBasicLocalization(fakeDataDirectory);
+				UiBasicLocalization localization = new UiBasicLocalization(fakeDataDirectory, noEnglishStrings);
 				MartusApp app = new MartusApp(mockSecurityForApp, fakeDataDirectory, localization);
 				app.setCurrentAccount("some user", app.getMartusDataRootDirectory());
 				app.doAfterSigninInitalization();
@@ -356,7 +356,7 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 
 			try
 			{
-				UiBasicLocalization localization = new UiBasicLocalization(fakeDataDirectory);
+				UiBasicLocalization localization = new UiBasicLocalization(fakeDataDirectory, noEnglishStrings);
 				MartusApp app = new MartusApp(mockSecurityForApp, fakeDataDirectory, localization);
 				app.setCurrentAccount("some user", app.getMartusDataRootDirectory());
 				app.doAfterSigninInitalization();
@@ -1492,6 +1492,8 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 
 	UiLocalization localization;
 	private MockMartusApp appWithAccount;
+	
+	static final String[] noEnglishStrings = {};
 
 	static final String userName = "testuser";
 	static final String userName2 = "testuse!";

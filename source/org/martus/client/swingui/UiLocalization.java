@@ -34,12 +34,7 @@ public class UiLocalization extends UiBasicLocalization
 {
 	public UiLocalization(File directoryToUse, String[] englishTranslations)
 	{
-		super(directoryToUse);		
-		
-		for(int i=0; i < englishTranslations.length; ++i)
-		{
-			addTranslation(ENGLISH, englishTranslations[i]);
-		}
+		super(directoryToUse, englishTranslations);		
 	}
 
 	protected Vector getAllCompiledLanguageResources()
