@@ -37,8 +37,8 @@ import javax.swing.JPanel;
 import org.martus.common.FieldSpec;
 import org.martus.common.StandardFieldSpecs;
 import org.martus.common.bulletin.Bulletin;
-import org.martus.common.clientside.DateUtilities;
 import org.martus.common.clientside.UiBasicLocalization;
+import org.martus.common.utilities.DateUtilities;
 import org.martus.swing.UiComboBox;
 import org.martus.swing.Utilities;
 

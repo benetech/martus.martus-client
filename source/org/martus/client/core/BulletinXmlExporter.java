@@ -35,8 +35,8 @@ import org.martus.common.MartusUtilities;
 import org.martus.common.MartusXml;
 import org.martus.common.bulletin.AttachmentProxy;
 import org.martus.common.bulletin.Bulletin;
-import org.martus.common.clientside.DateUtilities;
 import org.martus.common.packet.BulletinHistory;
+import org.martus.common.utilities.DateUtilities;
 
 public class BulletinXmlExporter
 {

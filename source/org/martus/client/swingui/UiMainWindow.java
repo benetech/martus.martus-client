@@ -115,7 +115,6 @@ import org.martus.common.bulletin.Bulletin;
 import org.martus.common.bulletin.BulletinHtmlGenerator;
 import org.martus.common.clientside.ClientSideNetworkGateway;
 import org.martus.common.clientside.CurrentUiState;
-import org.martus.common.clientside.DateUtilities;
 import org.martus.common.clientside.Localization;
 import org.martus.common.clientside.UiBasicLocalization;
 import org.martus.common.clientside.UiPasswordField;
@@ -126,6 +125,7 @@ import org.martus.common.database.FileDatabase.MissingAccountMapSignatureExcepti
 import org.martus.common.network.NetworkInterfaceConstants;
 import org.martus.common.packet.Packet;
 import org.martus.common.packet.UniversalId;
+import org.martus.common.utilities.DateUtilities;
 import org.martus.swing.JComponentVista;
 import org.martus.swing.PrintPageFormat;
 import org.martus.swing.UiFileChooser;
