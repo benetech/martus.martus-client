@@ -81,7 +81,27 @@ public class UiCreateNewAccountProcess
 					continue;
 				}
 			}
-				
+			
+			// next make sure the username and password is valid
+			try
+			{
+				MartusUserNameAndPassword.validateUserNameAndPassword(userName1, userPassword1);
+			}
+			catch (BlankUserNameException bune)
+			{
+				mainWindow.notifyDlg(mainWindow, "UserNameBlank");
+				continue;
+			}
+			catch (PasswordTooShortException ptse)
+			{
+				mainWindow.notifyDlg(mainWindow, "PasswordInvalid");
+				continue;
+			}
+			catch (PasswordMatchedUserNameException pmune)
+			{
+				mainWindow.notifyDlg(mainWindow, "PasswordMatchesUserName");
+				continue;
+			}
 			
 			String defaultUserName = "";
 			if (userName1.equals(originalUserName))
@@ -105,27 +125,6 @@ public class UiCreateNewAccountProcess
 			if (!userName1.equals(userName2))
 			{
 				window.notifyDlg(window, "usernamessdontmatch");
-				continue;
-			}
-
-			// next make sure the username and password is valid
-			try
-			{
-				MartusUserNameAndPassword.validateUserNameAndPassword(userName1, userPassword1);
-			}
-			catch (BlankUserNameException bune)
-			{
-				window.notifyDlg(window, "UserNameBlank");
-				continue;
-			}
-			catch (PasswordTooShortException ptse)
-			{
-				window.notifyDlg(window, "PasswordInvalid");
-				continue;
-			}
-			catch (PasswordMatchedUserNameException pmune)
-			{
-				window.notifyDlg(window, "PasswordMatchesUserName");
 				continue;
 			}
 
