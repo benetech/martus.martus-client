@@ -26,6 +26,7 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.swingui.dialogs;
 
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -111,17 +112,14 @@ public class UiConfigureHQs extends JDialog
 		panel.add(new UiLabel(" "));
 		
 		Box hBox = Box.createHorizontalBox();
-
-		hBox.add(add);
-		hBox.add(remove);
-		hBox.add(renameLabel);
-		hBox.add(Box.createHorizontalGlue());
-		JButton close = new UiButton(localization.getButtonLabel("close"));
-		close.addActionListener(new CancelHandler());
-		hBox.add(close);
+		JButton save = new UiButton(localization.getButtonLabel("save"));
+		save.addActionListener(new SaveHandler());
+		JButton cancel = new UiButton(localization.getButtonLabel("cancel"));
+		cancel.addActionListener(new CancelHandler());
+		Utilities.addComponentsRespectingOrientation(hBox, new Component[]{add,remove,renameLabel,Box.createHorizontalGlue(),save,cancel});
 		panel.add(hBox);
 		getContentPane().add(panel);
-		getRootPane().setDefaultButton(close);
+		getRootPane().setDefaultButton(cancel);
 		Utilities.centerDlg(this);
 		setResizable(true);
 		setVisible(true);
@@ -179,6 +177,7 @@ public class UiConfigureHQs extends JDialog
 		}
 	}
 
+	
 	class CancelHandler implements ActionListener
 	{
 		public void actionPerformed(ActionEvent ae)
@@ -187,12 +186,20 @@ public class UiConfigureHQs extends JDialog
 		}
 	}
 	
+	class SaveHandler implements ActionListener
+	{
+		public void actionPerformed(ActionEvent ae)
+		{
+			updateConfigInfo();
+			dispose();
+		}
+	}
 	
 	class RenameHandler implements ActionListener
 	{
 		public void actionPerformed(ActionEvent ae)
 		{
-			if(table.getSelectedRowCount()>0)
+			if(table.getSelectedRowCount()==0)
 			{
 				mainWindow.notifyDlg("NoHQsSelected");
 				return;
@@ -208,7 +215,6 @@ public class UiConfigureHQs extends JDialog
 					model.setLabel(i, newLabel);
 				}
 			}
-			updateConfigInfo();
 		}
 	}
 	
@@ -222,7 +228,6 @@ public class UiConfigureHQs extends JDialog
 				if(publicKey==null)
 					return;
 				addHQKeyToTable(publicKey);
-				updateConfigInfo();
 			}
 			catch (Exception e)
 			{
@@ -235,7 +240,7 @@ public class UiConfigureHQs extends JDialog
 	{
 		public void actionPerformed(ActionEvent ae)
 		{
-			if(table.getSelectedRowCount()>0)
+			if(table.getSelectedRowCount()==0)
 			{
 				mainWindow.notifyDlg("NoHQsSelected");
 				return;
@@ -249,7 +254,6 @@ public class UiConfigureHQs extends JDialog
 				if(table.isRowSelected(i))
 					model.removeRow(i);
 			}
-			updateConfigInfo();
 		}
 	}
 

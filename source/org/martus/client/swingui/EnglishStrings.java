@@ -277,6 +277,7 @@ public class EnglishStrings
 "button:customHelp=Help",
 
 "button:cancel=Cancel",
+"button:save=Save",
 "button:browse=Browse...",
 "button:retrieve=Retrieve",
 "button:DeleteServerDrafts=Delete",
