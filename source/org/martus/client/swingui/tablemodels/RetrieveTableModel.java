@@ -36,8 +36,10 @@ import org.martus.client.core.BulletinSummary;
 import org.martus.client.core.ClientSideNetworkGateway;
 import org.martus.client.core.MartusApp;
 import org.martus.client.swingui.dialogs.UiProgressRetrieveSummariesDlg;
+import org.martus.common.MartusConstants;
 import org.martus.common.MartusUtilities;
 import org.martus.common.MartusUtilities.ServerErrorException;
+import org.martus.common.bulletin.Bulletin;
 import org.martus.common.clientside.UiBasicLocalization;
 import org.martus.common.crypto.MartusCrypto;
 import org.martus.common.crypto.MartusCrypto.MartusSignatureException;
@@ -146,13 +148,17 @@ abstract public class RetrieveTableModel extends AbstractTableModel
 	public void getMySummaries() throws ServerErrorException
 	{
 		Vector summaryStrings = app.getMyServerBulletinSummaries();
+		String accountId = app.getAccountId();
+		markAsOnServer(accountId, summaryStrings);
 		createSummariesFromStrings(app.getAccountId(), summaryStrings);
 	}
 
 	public void getMyDraftSummaries() throws ServerErrorException
 	{
 		Vector summaryStrings = app.getMyDraftServerBulletinSummaries();
-		createSummariesFromStrings(app.getAccountId(), summaryStrings);
+		String accountId = app.getAccountId();
+		markAsOnServer(accountId, summaryStrings);
+		createSummariesFromStrings(accountId, summaryStrings);
 	}
 
 	public void getFieldOfficeSealedSummaries(String fieldOfficeAccountId) throws ServerErrorException
@@ -160,6 +166,8 @@ abstract public class RetrieveTableModel extends AbstractTableModel
 		FieldOfficeSummaryRetriever retriever = new SealedFieldOfficeSummaryRetriever(app, fieldOfficeAccountId);
 
 		Vector summaryStrings = getFieldOfficeSummaryStringsFromServer(retriever);
+		String accountId = fieldOfficeAccountId;
+		markAsOnServer(accountId, summaryStrings);
 		createSummariesFromStrings(fieldOfficeAccountId, summaryStrings);
 	}
 
@@ -168,6 +176,8 @@ abstract public class RetrieveTableModel extends AbstractTableModel
 		FieldOfficeSummaryRetriever retriever = new DraftFieldOfficeSummaryRetriever(app, fieldOfficeAccountId);
 
 		Vector summaryStrings = getFieldOfficeSummaryStringsFromServer(retriever);
+		String accountId = fieldOfficeAccountId;
+		markAsOnServer(accountId, summaryStrings);
 		createSummariesFromStrings(fieldOfficeAccountId, summaryStrings);
 	}
 
@@ -280,6 +290,25 @@ abstract public class RetrieveTableModel extends AbstractTableModel
 	public BulletinSummary getBulletinSummary(int row)
 	{
 		return (BulletinSummary)currentSummaries.get(row);
+	}
+	
+	void markAsOnServer(String authorAccountId, Vector summaryStrings)
+	{
+		for(int i=0; i < summaryStrings.size(); ++i)
+		{
+			String parameters = (String)summaryStrings.get(i);
+				
+			// TODO: The following two lines were copied from MartusApp.retrieveSummaryFromString,
+			// so they should be refactored out to a common class
+			String args[] = parameters.split(MartusConstants.regexEqualsDelimeter, -1);
+			String bulletinLocalId = args[0];
+			
+			
+			UniversalId uid = UniversalId.createFromAccountAndLocalId(authorAccountId, bulletinLocalId);
+			Bulletin b = app.getStore().findBulletinByUniversalId(uid);
+			if(b != null)
+				app.getStore().setIsOnServer(b);
+		}
 	}
 
 
