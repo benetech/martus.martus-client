@@ -66,7 +66,7 @@ public class ActionMenuQuickEraseRemoveMartus extends ActionQuickErase
 			File uninstallFile = new File(martusDataRootDirectory,"/bin/uninst.exe");
 			try
 			{
-				File silentUnInstallNotificationFile = new File(uninstallFile.getParentFile(),"silent");
+				File silentUnInstallNotificationFile = new File(martusDataRootDirectory,"silent");
 				FileOutputStream out = new FileOutputStream(silentUnInstallNotificationFile);
 				out.write(1);
 				out.close();
