@@ -194,10 +194,20 @@ public class UiBulletinModifyDlg extends JFrame implements ActionListener, Windo
 			BulletinStore store = app.getStore();
 			BulletinFolder outboxToUse = null;
 			BulletinFolder draftOutbox = store.getFolderDraftOutbox();
+			
 			if(userChoseSeal)
 			{
-				if(!confirmSealBulletin())
+				boolean result = true;		
+				view.copyDataToBulletin(bulletin);
+								
+				if (bulletin.isAllPrivate())
+					result = confirmSealBulletin();		
+				else
+					result = confirmSealWithPublicData();
+						
+				if (!result)
 					return;
+														
 				store.removeBulletinFromFolder(bulletin, draftOutbox);
 				
 				bulletin.setSealed();
@@ -208,7 +218,7 @@ public class UiBulletinModifyDlg extends JFrame implements ActionListener, Windo
 				bulletin.setDraft();
 				outboxToUse = draftOutbox;
 			}
-			view.copyDataToBulletin(bulletin);
+			
 			setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
 			app.setHQKeysInBulletin(bulletin);
 			saveBulletinAndUpdateFolders(store, outboxToUse);
@@ -307,6 +317,11 @@ public class UiBulletinModifyDlg extends JFrame implements ActionListener, Windo
 	public boolean confirmSealBulletin()
 	{
 		return observer.confirmDlg(this, "send");
+	}
+	
+	public boolean confirmSealWithPublicData()
+	{
+		return observer.confirmDlg(this, "SendWithPublicData");
 	}
 
 	private void indicateEncrypted(boolean isEncrypted)

@@ -235,6 +235,7 @@ public class EnglishStrings
 "wintitle:warningDeleteMultipleBulletins=Confirm Delete Bulletins",
 
 "wintitle:confirmPrintPrivateData=Confirm Print Private Data",
+"wintitle:confirmSendWithPublicData=Confirm Send With Public Data",
 
 "button:help=Help",
 "button:create=Create",
@@ -585,6 +586,9 @@ public class EnglishStrings
 "field:confirmNeedsFolderMigrationeffect=Answering Yes will allow the migration to proceed.",
 "field:confirmUseBulletinsCustomFieldscause=The bulletin you are about to create is based on a previous bulletin whos custom fields are different from your current custom fields.  Do you wish to use the original bulletins custom fields?",
 "field:confirmUseBulletinsCustomFieldseffect=Answering Yes will use the old custom fields and all bulletin data.  Answering No will use your current custom fields and copy all similar fields to the new bulletin but you will loose some of the orignial bulletins data.",
+
+"field:confirmSendWithPublicDatacause=You have chosen to save a completed bulletin.",
+"field:confirmSendWithPublicDataeffect=This will permanently seal the bulletin and you will not be allowed to make any further modifications to it except by creating a new copy of the bulletin.\n\nThe public information in this bulletin will be released for possible publication on the Martus Search Engine, and may be viewed by people outside your organization.\n\nIf there is information you do not want to be publicly available, either move that data to the private section of the bulletin or check the 'Keep ALL Information Private' box before saving the bulletin.",
 
 "field:confirmPrintPrivateDatacause=Choosing Yes will print the private information in the selected bulletin to printer.",
 "field:confirmPrintPrivateDataeffect=Anyone who gets a copy of this print out will be able to read all the private data.",
