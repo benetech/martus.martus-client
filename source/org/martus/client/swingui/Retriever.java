@@ -92,7 +92,7 @@ public class Retriever
 			if(progressDlg != null)
 			{
 				String progressTag = "ChunkProgressStatusMessage";
-				progressDlg.getChunkCountMeter().setStatusMessageTag(progressTag);
+				progressDlg.getChunkCountMeter().setStatusMessage(progressTag);
 			}
 		}
 

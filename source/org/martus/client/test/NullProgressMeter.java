@@ -35,7 +35,7 @@ public class NullProgressMeter implements ProgressMeterInterface
 	{
 	}
 
-	public void setStatusMessageTag(String message)
+	public void setStatusMessage(String message)
 	{
 
 	}

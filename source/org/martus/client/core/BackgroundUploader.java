@@ -102,7 +102,7 @@ public class BackgroundUploader
 			BulletinZipUtilities.exportBulletinPacketsFromDatabaseToZipFile(db, headerKey, tempFile, security);
 			
 			String tag = getUploadProgressTag(b);
-			progressMeter.setStatusMessageTag(tag);
+			progressMeter.setStatusMessage(tag);
 			return uploadBulletinZipFile(uid, tempFile);
 		}
 		finally

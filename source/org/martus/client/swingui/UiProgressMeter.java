@@ -63,7 +63,7 @@ public class UiProgressMeter extends JPanel implements ProgressMeterInterface
 		add( progressMeter );
 	}
 	
-	public void setStatusMessageTag(String tagToShow)
+	public void setStatusMessage(String tagToShow)
 	{
 		String message = localization.getFieldLabel(tagToShow);
 		statusMessage.setText(" " + message + " ");
