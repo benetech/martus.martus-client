@@ -66,6 +66,7 @@ public class ConfigInfo implements Serializable
 	public void setSendContactInfoToServer(boolean newSendContactInfoToServer) {sendContactInfoToServer = newSendContactInfoToServer; }
 	public void setServerCompliance(String newCompliance) {serverCompliance = newCompliance;}
 	public void setCustomFieldSpecs(String newSpecs)	{customFieldSpecs = newSpecs;}
+	public void setCustomFieldXml(String newXml)	{customFieldXml = newXml;}
 
 	public void clearHQKey()						{ hqKey = ""; }
 	public void clearPromptUserRequestSendToServer() { mustAskUserToSendToServer = false; }
@@ -85,6 +86,7 @@ public class ConfigInfo implements Serializable
 	public boolean promptUserRequestSendToServer() { return mustAskUserToSendToServer; }
 	public String getServerCompliance() {return serverCompliance;}
 	public String getCustomFieldSpecs() {return customFieldSpecs;}
+	public String getCustomFieldXml()	{return customFieldXml;}
 
 	public boolean isServerConfigured()
 	{
@@ -108,6 +110,7 @@ public class ConfigInfo implements Serializable
 		mustAskUserToSendToServer = false;
 		serverCompliance = "";
 		customFieldSpecs = LegacyCustomFields.buildFieldListString(StandardFieldSpecs.getDefaultPublicFieldSpecs());
+		customFieldXml = "";
 	}
 
 	public static ConfigInfo load(InputStream inputStream)
@@ -127,14 +130,20 @@ public class ConfigInfo implements Serializable
 			loaded.templateDetails = in.readUTF();
 			loaded.hqKey = in.readUTF();
 			loaded.serverPublicKey = in.readUTF();
+			
 			if(loaded.version >= 2)
 				loaded.sendContactInfoToServer = in.readBoolean();
 			else
 				loaded.mustAskUserToSendToServer = true;
+				
 			if(loaded.version >= 4)
 				loaded.serverCompliance = in.readUTF();
+				
 			if(loaded.version >= 5)
 				loaded.customFieldSpecs = in.readUTF();
+				
+			if(loaded.version >= 6)
+				loaded.customFieldXml = in.readUTF();
 
 			in.close();
 		}
@@ -164,6 +173,7 @@ public class ConfigInfo implements Serializable
 			out.writeBoolean(sendContactInfoToServer);
 			out.writeUTF(serverCompliance);
 			out.writeUTF(customFieldSpecs);
+			out.writeUTF(customFieldXml);
 			out.close();
 		}
 		catch(Exception e)
@@ -174,7 +184,7 @@ public class ConfigInfo implements Serializable
 
 	private boolean mustAskUserToSendToServer;
 	
-	public static final short VERSION = 5;
+	public static final short VERSION = 6;
 	//Version 1
 	private short version;
 	private String author;
@@ -194,4 +204,6 @@ public class ConfigInfo implements Serializable
 	private String serverCompliance;
 	//Version 5
 	private String customFieldSpecs;
+	//Version 6
+	private String customFieldXml;
 }

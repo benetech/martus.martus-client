@@ -52,6 +52,8 @@ public class TestConfigInfo extends TestCaseEnhanced
 	{
 		ConfigInfo info = new ConfigInfo();
 		verifyEmptyInfo(info, "constructor");
+		
+		assertEquals(6, ConfigInfo.VERSION);
 
 		info.setAuthor("fred");
 		assertEquals("fred", info.getAuthor());
@@ -203,6 +205,7 @@ public class TestConfigInfo extends TestCaseEnhanced
 		info.setSendContactInfoToServer(sampleSendContactInfoToServer);
 		info.setServerCompliance(sampleServerCompliance);
 		info.setCustomFieldSpecs(sampleCustomFieldSpecs);
+		info.setCustomFieldXml(sampleCustomFieldXml);
 	}
 
 	void verifyEmptyInfo(ConfigInfo info, String label)
@@ -221,6 +224,7 @@ public class TestConfigInfo extends TestCaseEnhanced
 		assertEquals(label + ": sampleSendContactInfoToServer", false, info.shouldContactInfoBeSentToServer());
 		assertEquals(label + ": sampleServerComplicance", "", info.getServerCompliance());
 		assertEquals(label + ": sampleCustomFieldSpecs", defaultCustomFieldSpecs, info.getCustomFieldSpecs());
+		assertEquals(label + ": sampleCustomFieldXml", "", info.getCustomFieldXml());
 
 	}
 
@@ -237,10 +241,12 @@ public class TestConfigInfo extends TestCaseEnhanced
 		assertEquals(label + ": sampleServerKey", sampleServerKey, info.getServerPublicKey());
 		assertEquals(label + ": sampleTemplateDetails", sampleTemplateDetails, info.getTemplateDetails());
 		assertEquals(label + ": sampleHQKey", sampleHQKey, info.getHQKey());
+
 		if(VERSION >= 2)
 			assertEquals(label + ": sampleSendContactInfoToServer", sampleSendContactInfoToServer, info.shouldContactInfoBeSentToServer());
 		else
 			assertEquals(label + ": sampleSendContactInfoToServer", false, info.shouldContactInfoBeSentToServer());
+
 		if(VERSION >= 3)
 			; // Version 3 added no data fields
 
@@ -248,10 +254,16 @@ public class TestConfigInfo extends TestCaseEnhanced
 			assertEquals(label + ": sampleServerComplicance", sampleServerCompliance, info.getServerCompliance());
 		else
 			assertEquals(label + ": sampleServerComplicance", "", info.getServerCompliance());
+
 		if(VERSION >= 5)
 			assertEquals(label + ": sampleCustomFieldSpecs", sampleCustomFieldSpecs, info.getCustomFieldSpecs());	
 		else
 			assertEquals(label + ": sampleCustomFieldSpecs", defaultCustomFieldSpecs, info.getCustomFieldSpecs());
+
+		if(VERSION >= 6)
+			assertEquals(label + ": sampleCustomFieldXml", sampleCustomFieldXml, info.getCustomFieldXml());	
+		else
+			assertEquals(label + ": sampleCustomFieldXml", "", info.getCustomFieldXml());
 	}
 
 	void verifyLoadSpecificVersion(ByteArrayInputStream inputStream, short VERSION)
@@ -291,6 +303,10 @@ public class TestConfigInfo extends TestCaseEnhanced
 		{
 			out.writeUTF(sampleCustomFieldSpecs);
 		}
+		if(VERSION >= 6)
+		{
+			out.writeUTF(sampleCustomFieldXml);
+		}
 		out.close();
 		return outputStream.toByteArray();
 	}
@@ -316,4 +332,6 @@ public class TestConfigInfo extends TestCaseEnhanced
 	final String sampleServerCompliance = "I am compliant";
 //Version 5
 	final String sampleCustomFieldSpecs = "language;author;custom,Custom Field;title;entrydate";
+//Version 6
+	final String sampleCustomFieldXml = "<CustomFields></CustomFields>";
 }
