@@ -62,8 +62,9 @@ public class UiGrid extends UiField
 		public GridTable(TableModel model)
 		{
 			super(model);
-			if(model.getColumnCount() > 5)
-				setAutoResizeMode(AUTO_RESIZE_OFF);
+			for(int i=0; i < model.getColumnCount(); ++i)
+				setColumnWidthToHeaderWidth(this, i);
+			setAutoResizeMode(AUTO_RESIZE_OFF);
 		}
 		
 		public TableCellRenderer getCellRenderer(int row, int column)
