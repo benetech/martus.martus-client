@@ -1,9 +1,9 @@
 ﻿# Martus Client Translation File
 # Language code:  es
 # Language name:  Spanish
-# Exported date:  Fri Oct 29 17:48:22 PDT 2004
-# Client version: internal pre-release 2.x
-# Client build:   20041029.1501
+# Exported date:  Mon Jan 24 14:21:38 PST 2005
+# Client version: Internal 2.6.0
+# Client build:   20050124.1516
 #
 # This file MUST be saved in UTF-8 format!
 # Lines beginning with # are comments and are ignored by Martus
@@ -27,6 +27,9 @@
 #    are logged in, go to Options/Preferences.
 #
 #  1.  do NOT translate "\n" (used for new lines)
+#      And do NOT put spaces before the  equal sign after field:xxx.
+#      [should be "field:fieldtag=fieldtext" instead of
+#  	   "field:fieldtag = fieldtext" (space before the equals sign)]
 #  2.  do NOT create any user-entered new-lines/carriage-returns
 #      (by using the enter key) in any mtf entry
 #      (from the field:xxx to the end of the translated text),
@@ -59,25 +62,27 @@
 # 10.  do not translate "#L#" as is it used to populate lists of values on
 #      various dialogs.
 # 11.  do not translate "#Title#" (used for bulletin title entry)
-# 12.  do not translate "#A#" (used for bulletin details: Author Public Code)
-# 13.  do not translate "#I#" (used for bulletin details: Bulletin ID)
-# 14.  do not translate "#H#" (used for bulletin details: Headquarter entries)
-# 15.  do not translate "#NumberOfHQs#" in various dialogs
-# 16.  Leave standard field tags in English in CreateCustomFieldsHelp1 and
+# 12.  do not translate "#TITLES#" (used for a list of the titles of previous
+#      versions of the bulletin.
+# 13.  do not translate "#A#" (used for bulletin details: Author Public Code)
+# 14.  do not translate "#I#" (used for bulletin details: Bulletin ID)
+# 15.  do not translate "#H#" (used for bulletin details: Headquarter entries)
+# 16.  do not translate "#NumberOfHQs#" in various dialogs
+# 17.  Leave standard field tags in English in CreateCustomFieldsHelp1 and
 #      CreateCustomFieldsHelp2, but put translation in parentheses after
 #      english : e.g.  'author' (autor), so users know what they refer to
-# 17.  Leave field types in English in CreateCustomFieldsHelp2 (e.g. BOOLEAN,
+# 18.  Leave field types in English in CreateCustomFieldsHelp2 (e.g. BOOLEAN,
 #      DATE), but put translation in parentheses after english, so users know
 #      what they refer to.
-# 18.  Leave field types in English in CreateCustomFieldsHelp3 examples
+# 19.  Leave field types in English in CreateCustomFieldsHelp3 examples
 #      (e.g. BOOLEAN, DATE)
-# 19.  Do not translate words used in XML for custom fields such as:
+# 20.  Do not translate words used in XML for custom fields such as:
 #      <Field type='GRID'>, </Field>, <Tag>, </Tag>, <Label>, </Label>,
 #      <GridSpecDetails>, </GridSpecDetails>, <Column>, </Column>
-# 20.  do not translate "#UseUnofficialTranslationFiles#" in
+# 21.  do not translate "#UseUnofficialTranslationFiles#" in
 #      field:warningUnofficialTranslation since it contains a file name
-# 21.  If you want your language to appear right to left,
-#      Uncomment the next line (by removing the # infront of #!right-to-left)
+# 22.  If you want your language to appear right to left,
+#      Uncomment the next line (by removing the # in front of #!right-to-left)
 #!right-to-left
 #
 
@@ -129,6 +134,12 @@
 #_________________________=Reset Contents
 -6f62-button:ResetContents=Revertir contenido
 
+#_______________________________=Retrieve all bulletin revisions
+-6965-button:RetrieveAllVersions=Bajar todas las revisiones del boletín
+
+#______________________________________________=Retrieve latest bulletin revision only
+-9c45-button:RetrieveLatestBulletinRevisionOnly=Bajar la última revisión del boletín
+
 #__________________________________=Accept
 -bb54-button:ServerComplianceAccept=Aceptar
 
@@ -137,6 +148,9 @@
 
 #__________________=Sign In
 -f849-button:SignIn=Iniciar sesión
+
+#_______________________________________=View Selected Version...
+-f943-button:ViewPreviousBulletinVersion=Ver la revisión seleccionada...
 
 #_________________________________________=Switch to using regular keyboard
 -c1ee-button:VirtualKeyboardSwitchToNormal=Cambiar al teclado normal
@@ -325,7 +339,7 @@
 -89f8-field:BulletinDetailsVersionId=Identificación
 
 #_______________________________________=Version #
--8548-field:BulletinDetailsVersionNumber=Versión #
+-8548-field:BulletinDetailsVersionNumber=Revisión #
 
 #______________________________________=Title
 -768e-field:BulletinDetailsVersionTitle=Título
@@ -349,7 +363,7 @@
 -c567-field:BulletinStatus=Estado del boletín
 
 #________________________________=Version
--2da6-field:BulletinVersionNumber=Versión
+-2da6-field:BulletinVersionNumber=Revisión
 
 #______________________________=Martus Bulletin
 -1ded-field:BulletinViewHeading=Boletín de Martus
@@ -387,11 +401,11 @@
 #__________________________________=The layout of the bulletins is dictated by an XML document.  By default the standard bulletin fields occur at the top of the Custom Field declaration, but they can be moved if desired.  However, there are four required fields that cannot be removed:  'author', 'entrydate', 'language' and 'title'.\n\n
 -1ef6-field:CreateCustomFieldsHelp1=La presentación de los boletines está dictada por un documento en XML. Normalmente los campos de un boletín estándar ocurren al inicio del documento, pero puede moverlos a otra posición si lo desea. Hay cuatro campos que son requeridos en la presentación de un boletín y no pueden ser removidos, estas son 'author' (autor), 'entrydate' (fecha de creación), 'language' (idioma) y 'title' (título).\n\n
 
-#__________________________________=For custom (non-standard) fields, you first select the type of field you want.  The possible choices are 'BOOLEAN', 'DATE', 'DATERANGE', 'GRID', 'LANGUAGE', 'MULTILINE', and 'STRING'. \n\nFor each custom field you will need a unique identification tag.  This tag can be any word except those already used by the system (eg. 'author', 'summary', 'location', 'title' etc.), and cannot contain spaces or special characters.  Examples of choices are 'custom1', 'custom2', etc, or tags that are more descriptive like 'VictimsName'.\n Then you need a label which is displayed next to your custom field.  An example might be 'Name of 1st Witness'.\n\nAdditional Comments\n1. XML is case-sensitive\n2. quotes around type name can be single or double (as long as they match)\n3. A Boolean field will be displayed as a checkbox when editing and Yes/No when printed.\n\nSee examples below:\n\n
--d300-field:CreateCustomFieldsHelp2=Para crear sus campos personalizados (no estándar), necesita primero identificar qué tipo de campo desea. Los tipos de campo disponibles son 'BOOLEAN' (Verdadero/Falso), 'DATE' (Fecha), 'DATERANGE' (Rango de fechas), 'GRID' (Mapa), 'LANGUAGE' (Idioma), 'MULTILINE' (Múltiples lineas), and 'STRING' (Palabra).\n\nPara cada campo personalizado va a necesitar un nombre de identificación único. El nombre de identificación de un campo puede ser cualquier palabra a excepción de aquellas en uso por Martus ('author' (autor), 'summary' (resúmen), 'location' (lugar), 'title' (título) etc.) y no puede contener espacios o caracteres especiales. Por ejemplo puede usar los nombres de identificación 'personalizado1', 'personalizado2', etc o pueden ser más descriptivos como 'NombreDeVictima'.\nLuego necesita un título para su campo personalizado. Por ejemplo podria ser 'Nombre de primer testigo'.\n\nNotas adicionales\n1. XML toma en cuenta las mayúsculas y minúsculas. 'Testigo' no es lo mismo que 'testigo'\n2. Las comillas alrededor de los tipos de campos pueden ser dobles o singulares, pero tiene que corresponder. ( ej. 'STRING" no es válido. Tiene que ser 'STRING' o "STRING")\n3. Un campo BOOLEAN muestra como una casilla de verificación cuando se edita y Si/No en la vista previa o cuando se imprime.\n\nConsulte los siguientes ejemplos:\n\n
+#__________________________________=For custom (non-standard) fields, you first select the type of field you want.  The possible choices are 'BOOLEAN', 'DATE', 'DATERANGE', 'GRID', 'LANGUAGE', 'MULTILINE', and 'STRING'. \n\nFor each custom field you will need a unique identification tag.  This tag can be any word except those already used by the system (eg. 'author', 'summary', 'location', 'title' etc.), and cannot contain spaces or special characters.  Examples of choices are 'custom1', 'custom2', etc, or tags that are more descriptive like 'VictimsName'.\n Then you need a label which is displayed next to your custom field.  An example might be 'Name of 1st Witness'.\n\nAdditional Comments\n1. XML is case-sensitive ('Witness' is not the same as 'witness') \n2. quotes around type name can be single or double as long as they match (e.g. 'STRING" is not valid. It must be 'STRING' or "STRING") \n3. A Boolean field will be displayed as a checkbox when editing and Yes/No when previewed or printed.\n\nSee examples below:\n\n
+-676b-field:CreateCustomFieldsHelp2=Para crear sus campos personalizados (no estándar), necesita primero identificar qué tipo de campo desea. Los tipos de campo disponibles son 'BOOLEAN' (Verdadero/Falso), 'DATE' (Fecha), 'DATERANGE' (Rango de fechas), 'GRID' (Mapa), 'LANGUAGE' (Idioma), 'MULTILINE' (Múltiples lineas), and 'STRING' (Palabra).\n\nPara cada campo personalizado va a necesitar un nombre de identificación único. El nombre de identificación de un campo puede ser cualquier palabra a excepción de aquellas en uso por Martus ('author' (autor), 'summary' (resúmen), 'location' (lugar), 'title' (título) etc.) y no puede contener espacios o caracteres especiales. Por ejemplo puede usar los nombres de identificación 'personalizado1', 'personalizado2', etc o pueden ser más descriptivos como 'NombreDeVictima'.\nLuego necesita un título para su campo personalizado. Por ejemplo podria ser 'Nombre de primer testigo'.\n\nNotas adicionales\n1. XML toma en cuenta las mayúsculas y minúsculas. 'Testigo' no es lo mismo que 'testigo'\n2. Las comillas alrededor de los tipos de campos pueden ser dobles o singulares, pero tiene que corresponder. ( ej. 'STRING" no es válido. Tiene que ser 'STRING' o "STRING")\n3. Un campo BOOLEAN se muestra como una casilla de verificación cuando se edita y se muestra Si/No en la vista previa o cuando se imprime.\n\nConsulte los siguientes ejemplos:\n\n
 
 #__________________________________=<Field type='STRING'>\n<Tag>custom1</Tag>\n<Label>Witness Name</Label>\n</Field>\n\n<Field type='LANGUAGE'>\n<Tag>new2</Tag>\n<Label>Witness Speaks</Label>\n</Field>\n\n<Field type='BOOLEAN'>\n<Tag>new3</Tag>\n<Label>Were guns used?</Label>\n</Field>\n\n<Field type='GRID'>\n<Tag>customgrid</Tag>\n<Label>Victim Information</Label>\n<GridSpecDetails>\n<Column><Label>Name of Victim</Label></Column>\n<Column><Label>Victim Age</Label></Column>\n<Column><Label>Victim Gender</Label></Column>\n<Column><Label>Victim Ethnicity</Label></Column>\n</GridSpecDetails>\n</Field>\n
--c0a8-field:CreateCustomFieldsHelp3=<Field type='STRING'>\n<Tag>personalizado1</Tag>\n<Label>Nombre de testigo</Label>\n</Field>\n\n<Field type='LANGUAGE'>\n<Tag>nueva2</Tag>\n<Label>Idioma de testigo</Label>\n</Field>\n\n<Field type='BOOLEAN'>\n<Tag>nueva3</Tag>\n<Label>¿Se usaron armas?</Label>\n</Field>\n\n<Field type='GRID'>\n<Tag>mapapersonalizado</Tag>\n<Label>Información de la víctima</Label>\n<GridSpecDetails>\n<Column><Label>Nombre de la víctima</Label></Column>\n<Column><Label>Edad de la víctima</Label></Column>\n<Column><Label>Sexo de la víctima</Label></Column>\n<Column><Label>Etnia de la víctima</Label></Column>\n</GridSpecDetails>\n</Field>\n
+-c0a8-field:CreateCustomFieldsHelp3=<Field type='STRING'>\n<Tag>personalizado1</Tag>\n<Label>Nombre de testigo</Label>\n</Field>\n\n<Field type='LANGUAGE'>\n<Tag>nueva2</Tag>\n<Label>Idioma del testigo</Label>\n</Field>\n\n<Field type='BOOLEAN'>\n<Tag>nueva3</Tag>\n<Label>¿Se usaron armas?</Label>\n</Field>\n\n<Field type='GRID'>\n<Tag>mapapersonalizado</Tag>\n<Label>Información de la víctima</Label>\n<GridSpecDetails>\n<Column><Label>Nombre de la víctima</Label></Column>\n<Column><Label>Edad de la víctima</Label></Column>\n<Column><Label>Sexo de la víctima</Label></Column>\n<Column><Label>Etnia de la víctima</Label></Column>\n</GridSpecDetails>\n</Field>\n
 
 #____________________________________=Please enter your new username and password.
 -aec2-field:CreateNewUserNamePassword=Escriba su nuevo nombre de usuario y contraseña.
@@ -805,10 +819,10 @@
 -f291-field:confirmCloneBulletinAsMineeffect=Al oprimir Sí, se va a crear un nuevo boletín con una copia de la misma información. Usted va a ser el autor oficial de este nuevo boletín y la información privada va a ser visible sólo por usted (y su oficina central si tiene una). El boletín oficial se va a mantener sin cambios.
 
 #___________________________________________=You have chosen to modify one of your sealed bulletins, thus creating a new version of that bulletin.
--fcb6-field:confirmCloneMySealedAsDraftcause=Escogió modificar un boletín que ha sido sellado por lo que una nueva versión de este boletín ha sido creada.
+-fcb6-field:confirmCloneMySealedAsDraftcause=Escogió modificar un boletín que ya ha sido sellado por lo que una nueva revisión de este boletín ha sido creada.
 
 #____________________________________________=Clicking on Yes will create a new version of this bulletin that initially contains all the same information. In this release of Martus you will only be able to view the most current version.
--1c29-field:confirmCloneMySealedAsDrafteffect=Al oprimir Sí, se va a crear una nueva versión de este boletín con la misma información. En esta versión de Martus solo puede ver la versión más reciente de cada boletín.
+-1c29-field:confirmCloneMySealedAsDrafteffect=Al oprimir Sí, se va a crear una nueva revisión de este boletín con la misma información. 
 
 #___________________________________=You are about to delete your Martus data from this computer.
 -ee9a-field:confirmDeleteMyDatacause=Está a punto de eliminar su información de Martus de este ordenador.
@@ -823,7 +837,7 @@
 -7c7f-field:confirmDraftUploadRemindereffect=Oprima Sí para salir de Martus sin enviar los boletines y borradores modificados. Estos serán enviados al servidor cuando vuelva a iniciar Martus y se conecte a un servidor.
 
 #__________________________________________________=The bulletin you have chosen to modify contains information that this version of Martus cannot understand. It may have been created by a newer version of Martus, so you should ensure that you are running the latest version.
--1233-field:confirmEditBulletinWithUnknownTagscause=El boletín que desea modificar contiene información que esta versión de Martus no puede entender. Puede que el boletín haya sido creado por una versión más reciente. Verifique que esta usando la versión más reciente del programa Martus.
+-1233-field:confirmEditBulletinWithUnknownTagscause=El boletín que desea modificar contiene información que esta versión de Martus no puede entender. Puede que el boletín haya sido creado por una versión de Martus más reciente. Verifique que esta usando la versión más reciente del programa Martus.
 
 #___________________________________________________=If you modify this bulletin, the unknown information will be lost.
 -d72b-field:confirmEditBulletinWithUnknownTagseffect=Si modifica este boletín perderá la información que el programa no puede reconocer.
@@ -847,7 +861,7 @@
 -9965-field:confirmExportPrivateDataeffect=Cualquier persona que abra el archivo podrá leer la inforamción privada.
 
 #________________________________________=One or more of the bulletins you have chosen to export contain information that this version of Martus cannot understand. They may have been created by a newer version of Martus, so you should ensure that you are running the latest version.
--56f8-field:confirmExportUnknownTagscause=Uno o más de los boletines que desea modificar contiene información que esta versión de Martus no entiende. Puede que el boletín haya sido creado por una versión más reciente. Verifique que esta usando la versión más reciente del programa Martus.
+-56f8-field:confirmExportUnknownTagscause=Uno o más de los boletines que desea modificar contiene información que esta versión de Martus no entiende. Puede que el boletín haya sido creado por una versión de Martus más reciente. Verifique que esta usando la versión más reciente del programa Martus.
 
 #_________________________________________=If you continue with the export, any unknown information will not be exported.
 -232e-field:confirmExportUnknownTagseffect=Si continua con la exportación la información que Martus no entiende no será exportada.
@@ -858,23 +872,23 @@
 #__________________________________________________=Clicking on Yes will delete the old key file and replace it with your restored key.
 -167f-field:confirmKeyPairFileExistsOverWriteeffect=Al oprimir Sí, la clave existente será reemplazada por la copia recuperada.
 
-#_______________________________________________________=This account was created with an older version of Martus, which was unaware of multiple sealed bulletin versions. We need to update your system to recognize bulletins with versions.  The migration is automatic, fast, and safe. You cannot run this version of Martus unless you allow this migration.
--6c3f-field:confirmNeedsBulletinVersioningMigrationcause=Esta cuenta fue creada con una versión anterior de Martus que no tiene conocimiento de versiones múltiples de un boletín sellado. Es necesario actualizar su cuenta para reconocer boletines que tienen varias versiones. Esta actualización es automática, rápida y segura. No puede continuar usando esta versión de Martus a menos que permita esta conversión.
+#_______________________________________________________=This account was created with an older release of Martus, which was unaware of multiple sealed bulletin versions. We need to update your system to recognize bulletins with versions.  The migration is automatic, fast, and safe. You cannot run this release of Martus unless you allow this migration.
+-d89c-field:confirmNeedsBulletinVersioningMigrationcause=Esta cuenta fue creada con una versión anterior de Martus que no tiene conocimiento de revisiones múltiples de un boletín sellado. Es necesario actualizar su cuenta para reconocer boletines que tienen varias revisiones. La actualización es automática, rápida y segura. No puede continuar usando esta versión de Martus a menos que permita la actualización.
 
 #________________________________________________________=Answering Yes will allow the migration to proceed, answering No will exit Martus.
 -2a34-field:confirmNeedsBulletinVersioningMigrationeffect=Oprima Sí para continuar con la conversión, oprima No para salir de Martus.
 
 #___________________________________________=This account was created with an older version of Martus, which used a different set of folders. The folders need to be migrated to the new format. The migration is automatic, fast, and safe. You cannot run this version of Martus unless you allow this migration.
--39ae-field:confirmNeedsFolderMigrationcause=Esta cuenta se creo con una versión anterior de Martus que usó diferentes carpetas. Sus boletines tienen que ser convertidos al nuevo formato para usar las nuevas carpetas. Este cambio es automático, rápido y seguro. No podrá usar esta versión de Martus a menos que continue con esta conversión.
+-39ae-field:confirmNeedsFolderMigrationcause=Esta cuenta se creó con una versión anterior de Martus que usó diferentes carpetas. Sus boletines tienen que ser convertidos al nuevo formato para usar las nuevas carpetas. La conversión es automática, rápida y segura. No podrá usar esta versión de Martus a menos que continue con esta conversión.
 
 #____________________________________________=Answering Yes will allow the migration to proceed, answering No will exit Martus.
 -2a34-field:confirmNeedsFolderMigrationeffect=Oprima Sí para continuar con la conversión, oprima No para salir de Martus.
 
 #_______________________________________________=Warning: It appears that you are trying to run an older version of Martus.  Running this version of Martus may result in reduced functionality, and some configuration settings created in the newer version will be ignored. We recommend that you upgrade your software.
--f251-field:confirmNewerConfigInfoFileFoundcause=Advertencia: Parece esta usando una versión anterior de Martus.  Configuraciones y caracteristicas de la nueva versión de Martus no podrán ser usadas en la versión anterior y serán ignoradas. Le recomendamos actualice su copia de Martus.
+-f251-field:confirmNewerConfigInfoFileFoundcause=Advertencia: Parece está usando una versión anterior de Martus.  Configuraciones y características de la nueva versión de Martus no podrán ser usadas en la versión anterior y serán ignoradas. Le recomendamos actualice su copia de Martus.
 
 #________________________________________________=Answering Yes will continue to use this older version of Martus.  Answering No will exit Martus so you can upgrade to the latest version.
--3170-field:confirmNewerConfigInfoFileFoundeffect=Oprima Sí para continuar usando la versión anterior de Martus.  Oprima No para salir de Martus y pueda actualizar si copia a la versión más reciente.
+-3170-field:confirmNewerConfigInfoFileFoundeffect=Oprima Sí para continuar usando la versión anterior de Martus.  Oprima No para salir de Martus y pueda actualizar su copia a la versión más reciente.
 
 #___________________________________________________________=Warning: the bulletin you are currently viewing is not yours.  Attachments can contain viruses, or malicious programs harmful to your computer.
 -8e42-field:confirmNotYourBulletinViewAttachmentAnywayscause=Advertencia: El  boletín que está examinando no le pertenece.  Verifique que los archivos adjuntos no tienen un virus o programas que puedan dañar su ordenador.
@@ -942,17 +956,17 @@
 #___________________________________________=After you review the contents, you can accept them, modify them, or press cancel to keep the existing default details.
 -bbcf-field:confirmResetDefaultDetailseffect=Después de verificar el contenido puede aceptarlo, modificarlo u oprimir Cancelar para mantener el contenido original.
 
-#____________________________________________=The following bulletin(s) selected for retrieval are newer versions of bulletins already on this system:\n\n#TITLES#
--b7e9-field:confirmRetrieveNewerVersionscause=El(Los) siguiente(s) boletín(es) seleccionados para bajarlos son nuevas versiones de boletines que ya tiene en su sistema:\n\n#TITLES#
+#____________________________________________=The following bulletin(s) selected for retrieval are newer versions of bulletins already on this computer:\n\n#TITLES#
+-c5e3-field:confirmRetrieveNewerVersionscause=El(Los) siguiente(s) boletín(es) seleccionados para bajar son nuevas revisiones de boletines que ya tiene en su ordenador:\n\n#TITLES#>
 
 #_____________________________________________=Each older version will be replaced by the newer version from the server.
--1d86-field:confirmRetrieveNewerVersionseffect=Cada versión anterior va a ser reemplazada por la nueva versión del servidor.
+-1d86-field:confirmRetrieveNewerVersionseffect=Cada revisión anterior va a ser reemplazada por la nueva revisión del servidor.
 
 #_________________________________________=You have chosen to save a completed bulletin.
 -a3fe-field:confirmSendWithPublicDatacause=Escogió guardar un boletín completado.
 
 #__________________________________________=This will permanently seal the bulletin and you will not be allowed to make any further modifications to it except by creating a new version of the bulletin.\n\nThe public information in this bulletin will be released for possible publication on the Martus Search Engine, and may be viewed by people outside your organization.\n\nIf there is information you do not want to be publicly available, either move that data to the private section of the bulletin or check the 'Keep ALL Information Private' box before saving the bulletin.
--2df3-field:confirmSendWithPublicDataeffect=Esto sellará permanentemente el boletín y no podrá hacer modificaciones adicionales sin tener que crear una nueva versión del boletin.\n\nLa información pública de este boletín podrá ser vista por personas fuera de su organización si es que el Buscador de Martus lo publica.\n\nSi es que tiene infomación que quiere no sea vista publicamente, mueva la información al area privada del boletín o active la casilla 'Mantener TODA la información privada' antes de guardar el boletín.
+-2df3-field:confirmSendWithPublicDataeffect=Esto sellará permanentemente el boletín y no podrá hacer modificaciones adicionales sin tener que crear una nueva revisión del boletin.\n\nLa información pública de este boletín podrá ser vista por personas fuera de su organización si es que el Buscador de Martus lo publica.\n\nSi es que tiene infomación que quiere no sea vista publicamente, mueva la información al area privada del boletín o active la casilla 'Mantener TODA la información privada' antes de guardar el boletín.
 
 #_____________________________________________=Martus software is unable to determine whether this server complies with the official guidelines for operating a secure and reliable Martus server.
 -ab16-field:confirmServerComplianceFailedcause=Martus no pudo determinar si el servidor elegido se conforma a las pautas de conformidad para que un servidor de Martus sea seguro y confiable.
@@ -990,11 +1004,11 @@
 #______________________________________=Clicking on Yes will exit Martus, and leave the unsent bulletins.  They will be sent the next time you run Martus and connect to a server.
 -7c7f-field:confirmUploadRemindereffect=Oprima Sí para salir de Martus sin enviar los boletines nuevos o los borradores modificados. Estos serán enviados al servidor cuando vuelva a iniciar Martus y se conecte a un servidor.
 
-#_______________________________________________=The bulletin you are about to create is based on a previous bulletin whose custom fields are different from your current custom fields.  Do you wish to use the original bulletins custom fields?
--6d10-field:confirmUseBulletinsCustomFieldscause=El boletín que está a punto de crear está basado en un boletín previo que tiene campos personalizados diferentes a los que tiene ahora. ¿Desea usar los campos personalizados del boletín original?
+#_______________________________________________=The bulletin you are about to create is based on a previous bulletin whose custom fields are different from your current custom fields.  Do you wish to use the original bulletin's custom fields?
+-a6ca-field:confirmUseBulletinsCustomFieldscause=El boletín que está a punto de crear está basado en un boletín previo que tiene campos personalizados diferentes a los que tiene ahora. ¿Desea usar los campos personalizados del boletín original?
 
-#________________________________________________=Answering Yes will use the old custom fields and all bulletin data.  Answering No will use your current custom fields and copy all similar fields to the new bulletin but you will lose some of the original bulletins data.
--a313-field:confirmUseBulletinsCustomFieldseffect=Oprima Sí para usar los campos personalizados anteriores y toda la información del boletín. Oprima No para usar sus campos personalizados actuales, transferir la información a los campos similares del boletín nuevo pero perdiendo partes de la información original.
+#________________________________________________=Answering Yes will use the old custom fields and all bulletin data.  Answering No will use your current custom fields and copy all similar fields to the new bulletin but you will lose some of the original bulletin's data.
+-afbe-field:confirmUseBulletinsCustomFieldseffect=Oprima Sí para usar los campos personalizados anteriores y toda la información del boletín. Oprima No para usar sus campos personalizados actuales, transferir la información a los campos similares del boletín nuevo pero perdiendo partes de la información original.
 
 #________________________________________________=Warning: acctmap.txt file in your account's packets directory is missing or is corrupt.  This may indicate someone has tried to tamper with your data or could be caused by a hardware error.
 -61cb-field:confirmWarnMissingAccountMapFilecause=Advertencia: El archivo acctmap.txt en la carpeta de su cuenta esta dañado o no existe.  Esto puede indicar que alguien a intentado modificar su información o que su computador sufrió de fallas de hardware.
@@ -1060,7 +1074,7 @@
 -a3fe-field:confirmsendcause=Escogió guardar un boletín que ha completado.
 
 #____________________________=This will permanently seal the bulletin and you will not be allowed to make any further modifications to it except by creating a new version of the bulletin.
--0de0-field:confirmsendeffect=Esto sellará el boletín permanentemente y no podrá hacer más modificaciones sin tener que crear una nueva versión de este boletín.
+-0de0-field:confirmsendeffect=Esto sellará el boletín permanentemente y no podrá hacer más modificaciones sin tener que crear una nueva revisión de este boletín.
 
 #_____________________=Connecting...
 -b98e-field:connecting=Comunicandose...
@@ -1131,11 +1145,17 @@
 #____________________________________=A copy of Martus is already running on this computer. You must close that copy before starting a new copy.
 -614e-field:notifyAlreadyRunningcause=Ya existe una copia de Martus activa en este ordenador. Tiene que salir de esa copia antes de intentar iniciar Martus nuevamente.
 
+#_______________________________________________=You currently are viewing this version of the bulletin.
+-8a02-field:notifyAlreadyViewingThisVersioncause=Está viendo esta revisión del boletín.
+
 #________________________________________=The item you chose was not a file, please choose a file to add as an attachment to this bulletin.
 -0de2-field:notifyAttachmentNotAFilecause=Lo que escogió no es un archivo, por favor escoja un archivo para adjuntar a este boletín.
 
 #______________________________________________=Martus could not authenticate the server. The server may have been compromised.  Please verify your server configuration and contact the server operator.
 -f27c-field:notifyAuthenticateServerFailedcause=Martus no pudo autenticar el servidor. Es posible que el servidor no este operacional. Por favor verifique su configuración y este en contacto con el operador del servidor.
+
+#________________________________________________=The bulletin version you are trying to view is currently not on your system.
+-8579-field:notifyBulletinVersionNotInSystemcause=La revisión del boletín que intenta ver no se encuentra en su sistema.
 
 #____________________________________=The selected server is not responding. Before you choose a server, you must be connected to the internet, and that server must be available.
 -38fd-field:notifyConfigNoServercause=El servidor no responde. Antes de poder elegir un servidor es necesario que se conecte al Internet y el servidor tiene que estar disponible.
@@ -1162,7 +1182,7 @@
 -178b-field:notifyDropErrorBulletinExistscause=Uno o más boletines no pueden moverse porque ya existe una copia en la carpeta indicada.
 
 #____________________________________________=One or more bulletins cannot be moved to that folder, because a newer version of this bulletin already exists.
--834b-field:notifyDropErrorBulletinOldercause=No se pudo mover uno o más boletines porque existen versiónes más recientes.
+-834b-field:notifyDropErrorBulletinOldercause=No se pudo mover uno o más boletines porque existen revisiones más recientes.
 
 #________________________________=An unexpected error occurred while moving the bulletin(s). One or more files may be damaged.
 -9ca2-field:notifyDropErrorscause=Ocurrió un error inesperado al mover el (los) boletin(es). Puede que alguno de ellos se haya dañado.
@@ -1243,7 +1263,7 @@
 -6181-field:notifyPasteErrorBulletinAlreadyExistscause=Uno o más boletines no pudieron ser pegados porque ya existen en la carpeta indicada.
 
 #_____________________________________________=One or more bulletins cannot be pasted in that folder, because a newer version of this bulletin already exists.
--cbb5-field:notifyPasteErrorBulletinOldercause=Uno o más boletines no pudieron ser pegados porque versiones más recientes ya existen en la carpeta indicada.
+-cbb5-field:notifyPasteErrorBulletinOldercause=Uno o más boletines no pudieron ser pegados porque revisiones más recientes ya existen en la carpeta indicada.
 
 #________________________________=An unexpected error occurred while pasting the bulletin(s). One or more files may be damaged.
 -eb6e-field:notifyPasteErrorcause=Ocurrió un error inesperado al mover el (los) boletin(es). Puede que alguno de ellos se haya dañado.
@@ -1428,8 +1448,8 @@
 #________________=Title
 -768e-field:title=Título
 
-#_____________________________=English 2.5
--b0f3-field:translationVersion=Español 2.5
+#_____________________________=Spanish 2.6
+-b0f3-field:translationVersion=Español 2.6
 
 #___________________=Username
 -84c2-field:username=Nombre de usuario
@@ -1514,6 +1534,9 @@
 
 #________________=Azerbaijani
 -6885-language:az=Azerbaijani
+
+#________________=Bulgarian
+-cebe-language:bg=Búlgaro
 
 #________________=Bengali, Bangla
 -4b7b-language:bn=Bengalí, Bangla
@@ -2050,7 +2073,7 @@
 -7a92-wintitle:confirmCloneBulletinAsMine=Confirme creación de copia de boletín ajeno
 
 #_________________________________________=Confirm Create New Version of Sealed Bulletin
--1260-wintitle:confirmCloneMySealedAsDraft=Confirme creación de nueva versión del boletín sellado
+-1260-wintitle:confirmCloneMySealedAsDraft=Confirme creación de nueva revisión del boletín sellado
 
 #_________________________________=Delete My Data
 -07c3-wintitle:confirmDeleteMyData=Eliminar mis datos
@@ -2077,7 +2100,7 @@
 -493d-wintitle:confirmKeyPairFileExistsOverWrite=Clave ya existe
 
 #_____________________________________________________=Bulletin Versioning Migration Required
--4371-wintitle:confirmNeedsBulletinVersioningMigration=Conversión para soporte de versiones de los boletines es requerido
+-4371-wintitle:confirmNeedsBulletinVersioningMigration=Conversión para soporte de revisiones de boletines es requerido
 
 #_________________________________________=Folder Migration Required
 -72d3-wintitle:confirmNeedsFolderMigration=Conversión de carpetas requerido
@@ -2119,7 +2142,7 @@
 -6f62-wintitle:confirmResetDefaultDetails=Revertir contenido
 
 #__________________________________________=Confirm Retrieving Newer Versions
--80c8-wintitle:confirmRetrieveNewerVersions=Confirme bajar versiones más recientes
+-80c8-wintitle:confirmRetrieveNewerVersions=Confirme bajar revisiones más recientes
 
 #_______________________________________=Confirm Save With Public Data
 -1e77-wintitle:confirmSendWithPublicData=Confirmar guardar datos públicos
@@ -2208,11 +2231,17 @@
 #__________________________________=Martus Already Running
 -cfce-wintitle:notifyAlreadyRunning=Martus ya está cargado
 
+#_____________________________________________=Bulletin Version Already Being Viewed
+-c778-wintitle:notifyAlreadyViewingThisVersion=Ya está viendo la revisión del boletín
+
 #______________________________________=Attachment Chosen Not a File
 -8023-wintitle:notifyAttachmentNotAFile=No es un archivo
 
 #____________________________________________=Security Alert!
 -4938-wintitle:notifyAuthenticateServerFailed=¡Advertencia de seguridad!
+
+#______________________________________________=Bulletin Version Not Found
+-a60d-wintitle:notifyBulletinVersionNotInSystem=No se encontró revisión del boletín
 
 #__________________________________=Unable to Connect to Server
 -1b07-wintitle:notifyConfigNoServer=No se pudo conectar al servidor
