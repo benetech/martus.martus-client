@@ -969,7 +969,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		int width = preview.getView().getWidth();
 		
 		BulletinHtmlGenerator generator = new BulletinHtmlGenerator(width, getLocalization());
-		String html = generator.getHtmlString(currentBulletin);
+		String html = generator.getHtmlString(currentBulletin, getStore().getDatabase());
 		JComponent view = new JLabel(html);
 		
 		JFrame frame = new JFrame();

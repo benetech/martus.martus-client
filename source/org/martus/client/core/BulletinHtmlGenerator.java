@@ -30,13 +30,16 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.StringReader;
 
+import org.martus.client.swingui.fields.UiFlexiDateViewer;
 import org.martus.common.FieldSpec;
 import org.martus.common.MartusUtilities;
 import org.martus.common.bulletin.AttachmentProxy;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.clientside.UiBasicLocalization;
-import org.martus.common.packet.FieldDataPacket;
-import org.martus.client.swingui.fields.UiFlexiDateViewer;
+import org.martus.common.database.Database;
+import org.martus.common.database.DatabaseKey;
+import org.martus.common.database.Database.RecordHiddenException;
+import org.martus.common.packet.UniversalId;
 
 public class BulletinHtmlGenerator
 {
@@ -46,8 +49,9 @@ public class BulletinHtmlGenerator
 		localization = localizationToUse;
 	}
 
-	public String getHtmlString(Bulletin b)
+	public String getHtmlString(Bulletin b, Database database)
 	{
+		bulletin = b;
 		StringBuffer html = new StringBuffer(1000);
 		html.append("<html>");
 		
@@ -68,7 +72,7 @@ public class BulletinHtmlGenerator
 
 		FieldSpec[] standardFieldTags = b.getPublicFieldSpecs();
 		html.append(getSectionHtmlString(b, standardFieldTags));
-		html.append(getAttachmentsHtmlString(b.getFieldDataPacket()));
+		html.append(getAttachmentsHtmlString(b.getPublicAttachments(), database));
 
 		html.append("<tr></tr>");
 		String privateSectionTitle = localization.getFieldLabel("privatesection");
@@ -78,16 +82,15 @@ public class BulletinHtmlGenerator
 		html.append("\n");
 		FieldSpec[] privateFieldTags = b.getPrivateFieldSpecs();
 		html.append(getSectionHtmlString(b, privateFieldTags));
-		html.append(getAttachmentsHtmlString(b.getPrivateFieldDataPacket()));
+		html.append(getAttachmentsHtmlString(b.getPrivateAttachments(), database));
 
 		html.append("<tr></tr>");
 		html.append(localization.getFieldLabel("BulletinId")+" ");
 		html.append(b.getLocalId());
 		html.append("<tr></tr>");		
 		html.append(localization.getFieldLabel("BulletinLastSaved")+" ");	
-		String date = b.getLastSavedDateTime();
-		localization.convertStoredDateToDisplay(date);
-		html.append(b.getLastSavedDateTime());
+		String date = localization.convertStoredDateToDisplay(b.getLastSavedDateTime());
+		html.append(date);
 		html.append("</table>");
 		html.append("</html>");
 		return html.toString();
@@ -116,14 +119,55 @@ public class BulletinHtmlGenerator
 		return sectionHtml;
 	}
 
-	private String getAttachmentsHtmlString(FieldDataPacket fdp)
+	private String getSizeInKb(int sizeBytes)
+	{
+		int sizeInKb = sizeBytes / 1024;
+		if (sizeInKb == 0)
+			sizeInKb = 1;
+		return Integer.toString(sizeInKb);
+	}
+
+	private String getAttachmentSize(Database db, UniversalId uid)
+	{
+		// TODO :This is a duplicate code from AttachmentTableModel.java. 
+		// Ideally, the AttachmentProxy should self-describe of file size and file description.
+
+		String size = "";
+		try
+		{
+			int rawSize = 0;
+			if (bulletin.getStatus().equals(Bulletin.STATUSDRAFT))
+				rawSize = db.getRecordSize(DatabaseKey.createDraftKey(uid));
+			else
+				rawSize = db.getRecordSize(DatabaseKey.createSealedKey(uid));
+
+			rawSize -= 1024;//Public code & overhead
+			rawSize = rawSize * 3 / 4;//Base64 overhead
+			size = getSizeInKb(rawSize);
+		}
+		catch (IOException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		catch (RecordHiddenException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return size;
+	}
+
+	private String getAttachmentsHtmlString(AttachmentProxy[] attachments, Database db)
 	{
 		String attachmentList = "";
-		AttachmentProxy[] attachments = fdp.getAttachments();
+	
 		for(int i = 0 ; i < attachments.length ; ++i)
 		{
-			String label = attachments[i].getLabel();
-			attachmentList += "<p>" + label + "</p>";
+			AttachmentProxy aProxy = attachments[i];
+			String label = aProxy.getLabel();
+			String size = getAttachmentSize(db, aProxy.getUniversalId());
+			attachmentList += "<p>" + label + "    ("+size+ "Kb)</p>";
 		}
 		return getFieldHtmlString("attachments", attachmentList);
 	}
@@ -170,4 +214,5 @@ public class BulletinHtmlGenerator
 
 	int width;
 	UiBasicLocalization localization;
+	Bulletin bulletin;
 }
