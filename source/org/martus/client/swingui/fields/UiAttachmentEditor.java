@@ -71,6 +71,8 @@ public class UiAttachmentEditor extends JPanel
 		table.setFocusable(false);
 		table.createDefaultColumnsFromModel();
 		table.setColumnSelectionAllowed(false);
+		model.setColumnWidthToHeader(table,1);
+
 		Box hbox = Box.createHorizontalBox();
 		Box vbox = Box.createVerticalBox();
 

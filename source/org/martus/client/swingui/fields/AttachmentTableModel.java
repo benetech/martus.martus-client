@@ -25,13 +25,22 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.fields;
 
+import java.awt.Component;
+import java.awt.Dimension;
 import java.util.Vector;
 
 import javax.swing.JTable;
 import javax.swing.table.AbstractTableModel;
+import javax.swing.table.JTableHeader;
+import javax.swing.table.TableCellRenderer;
+import javax.swing.table.TableColumn;
+import javax.swing.table.TableColumnModel;
 
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.common.bulletin.AttachmentProxy;
+import org.martus.common.database.Database;
+import org.martus.common.database.DatabaseKey;
+import org.martus.common.packet.UniversalId;
 
 
 class AttachmentTableModel extends AbstractTableModel
@@ -50,7 +59,7 @@ class AttachmentTableModel extends AbstractTableModel
 
 	public int getColumnCount()
 	{
-		return 1;
+		return 2;
 	}
 
 	void clear()
@@ -73,7 +82,10 @@ class AttachmentTableModel extends AbstractTableModel
 
 	public String getColumnName(int column)
 	{
-		return mainWindow.getLocalization().getButtonLabel("attachmentlabel");
+		if(column == 0)
+			return mainWindow.getLocalization().getButtonLabel("attachmentLabel");
+		else
+			return mainWindow.getLocalization().getButtonLabel("attachmentSize");
 	}
 
 	public AttachmentProxy getAttachmentProxyAt(int row, int column)
@@ -104,7 +116,42 @@ class AttachmentTableModel extends AbstractTableModel
 	public Object getValueAt(int row, int column)
 	{
 		AttachmentProxy a = (AttachmentProxy)attachmentList.get(row);
-		return a.getLabel();
+		if(column == 0)
+			return a.getLabel();
+
+		if(a.getFile() != null)
+		{	
+			int size = (int)a.getFile().length();
+			return getSizeInKb(size);
+		}
+		
+		Database database = mainWindow.getStore().getDatabase();
+		int size = 0;
+		UniversalId id = a.getUniversalId();
+		try
+		{
+			DatabaseKey key = DatabaseKey.createDraftKey(id);
+			if(!database.doesRecordExist(key))
+				key = DatabaseKey.createSealedKey(id);
+			size = database.getRecordSize(key);
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+		}
+		
+		size -= 1024;//Public code & overhead
+		size = size * 3 / 4;//Base64 overhead
+		return getSizeInKb(size);
+		
+	}
+
+	private Object getSizeInKb(int sizeBytes)
+	{
+		int sizeInKb = sizeBytes / 1024;
+		if (sizeInKb == 0)
+			sizeInKb = 1;
+		return Integer.toString(sizeInKb);
 	}
 
 	public void setValueAt(Object value, int row, int column)
@@ -115,6 +162,27 @@ class AttachmentTableModel extends AbstractTableModel
 	{
 		return false;
 	}
+	
+	public void setColumnWidthToHeader(JTable table, int column)
+	{
+		TableColumnModel columnModel = table.getColumnModel();
+		TableColumn statusColumn = columnModel.getColumn(column);
+		String padding = "    ";
+		String value = (String)statusColumn.getHeaderValue() + padding;
+
+		TableCellRenderer renderer = statusColumn.getHeaderRenderer();
+		if(renderer == null)
+		{
+			JTableHeader header = table.getTableHeader();
+			renderer = header.getDefaultRenderer();
+		}
+		Component c = renderer.getTableCellRendererComponent(table, value, true, true, -1, column);
+		Dimension size = c.getPreferredSize();
+
+		statusColumn.setPreferredWidth(size.width);
+		statusColumn.setMaxWidth(size.width);
+	}
+
 
 	
 	Vector attachmentList;

@@ -76,7 +76,7 @@ public class UiAttachmentViewer extends JPanel  implements DragGestureListener, 
 		attachmentTable = new JTable(model);
 		attachmentTable.createDefaultColumnsFromModel();
 		attachmentTable.setColumnSelectionAllowed(false);
-
+		model.setColumnWidthToHeader(attachmentTable,1);
 		Box buttonBox = Box.createHorizontalBox();
 		Box vbox = Box.createVerticalBox();
 		attachmentPane = new JScrollPane(attachmentTable);
