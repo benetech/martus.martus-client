@@ -35,7 +35,6 @@ import java.awt.event.ActionListener;
 
 import javax.swing.Box;
 import javax.swing.JButton;
-import javax.swing.JComponent;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -47,7 +46,6 @@ import org.martus.client.swingui.UiConstants;
 import org.martus.client.swingui.UiLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.UiSigninPanel;
-import org.martus.swing.UiWrappedTextArea;
 import org.martus.swing.Utilities;
 
 
@@ -64,7 +62,6 @@ public class UiSigninDlg extends JDialog
 		super(owner, true);
 		initalize(window, owner, mode, username);
 	}
-
 
 	public void initalize(UiMainWindow window, JFrame owner, int mode, String username)
 	{
@@ -87,20 +84,7 @@ public class UiSigninDlg extends JDialog
 		buttonBox.add(cancel);
 		buttonBox.add(Box.createHorizontalGlue());
 		buttonBox.setBorder(new EmptyBorder(5,5,5,5));
-		JPanel scrolledPanel = new JPanel(); 
-		if(shouldUseTabs(mode))
-		{
-			tabbedPane = new JTabbedPane();
-			tabbedPane.add(signinPane);
-			tabbedPane.setTitleAt(0, localization.getButtonLabel("SignIn"));  
-			tabbedPane.add(createNewAccountPane());
-			tabbedPane.setTitleAt(1, localization.getButtonLabel("NewAccount"));
-			scrolledPanel.add(tabbedPane);
-		}
-		else
-		{
-			scrolledPanel.add(signinPane);
-		}
+		JPanel scrolledPanel = createMainPanel(localization);
 
 		Container scrollingPane = new JScrollPane(scrolledPanel);
 		getContentPane().add(scrollingPane);
@@ -122,20 +106,19 @@ public class UiSigninDlg extends JDialog
 		show();
 	}
 
+	JPanel createMainPanel(UiLocalization localization)
+	{
+		JPanel scrolledPanel = new JPanel(); 
+		scrolledPanel.add(signinPane);
+		return scrolledPanel;
+	}
+
 	public UiMainWindow getMainWindow()
 	{
 		return mainWindow;
 	}
 	
-	public boolean shouldUseTabs(int mode)
-	{
-//		if(mode == INITIAL)
-//			return true;
-			
-		return false;
-	}
-	
-	public static String getTextForTitle(UiLocalization localization, int mode)
+	public String getTextForTitle(UiLocalization localization, int mode)
 	{
 		String versionInfo = UiConstants.programName;
 		versionInfo += " " + localization.getFieldLabel("aboutDlgVersionInfo");
@@ -150,7 +133,7 @@ public class UiSigninDlg extends JDialog
 				title = localization.getWindowTitle("MartusSignInRetypePassword"); 
 				break;
 			default:
-				title = localization.getWindowTitle("MartusSignIn"); 
+				title = getInitialSigninTitle(localization); 
 				break;
 		}
 		
@@ -158,6 +141,11 @@ public class UiSigninDlg extends JDialog
 		return completeTitle;
 	}
 	
+	static public String getInitialSigninTitle(UiLocalization localization)
+	{
+		return localization.getWindowTitle("MartusSignIn");
+	}
+
 	public int getUserChoice()
 	{
 		if(okPressedForSignin)
@@ -187,12 +175,6 @@ public class UiSigninDlg extends JDialog
 		getRootPane().setDefaultButton(ok);
 	}
 	
-	JComponent createNewAccountPane()
-	{
-		String text = mainWindow.getLocalization().getFieldLabel("HowToCreateNewAccount");
-		return new UiWrappedTextArea("\n" + text);
-	}
-
 	class OkHandler implements ActionListener
 	{
 		public void actionPerformed(ActionEvent ae)
@@ -215,7 +197,7 @@ public class UiSigninDlg extends JDialog
 
 	UiSigninPanel signinPane;
 	JTabbedPane tabbedPane;
-	private UiMainWindow mainWindow;
+	protected UiMainWindow mainWindow;
 	boolean okPressedForSignin;
 	boolean okPressedForNewAccount;
 	private JButton ok;

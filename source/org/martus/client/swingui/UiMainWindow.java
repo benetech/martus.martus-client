@@ -82,9 +82,10 @@ import org.martus.client.swingui.dialogs.UiAboutDlg;
 import org.martus.client.swingui.dialogs.UiBulletinModifyDlg;
 import org.martus.client.swingui.dialogs.UiConfigServerDlg;
 import org.martus.client.swingui.dialogs.UiContactInfoDlg;
-import org.martus.client.swingui.dialogs.UiCreateNewUserNameAndPasswordDlg;
+import org.martus.client.swingui.dialogs.UiCreateNewAccountProcess;
 import org.martus.client.swingui.dialogs.UiDisplayFileDlg;
 import org.martus.client.swingui.dialogs.UiExportBulletinsDlg;
+import org.martus.client.swingui.dialogs.UiInitialSigninDlg;
 import org.martus.client.swingui.dialogs.UiLocalizeDlg;
 import org.martus.client.swingui.dialogs.UiModelessBusyDlg;
 import org.martus.client.swingui.dialogs.UiProgressRetrieveBulletinsDlg;
@@ -157,7 +158,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		hiddenFrame.show();
 		currentActiveFrame = hiddenFrame;
 		notifyClientCompliance(hiddenFrame);
-		hiddenFrame.setTitle(UiSigninDlg.getTextForTitle(localization, UiSigninDlg.INITIAL));
+		hiddenFrame.setTitle(UiSigninDlg.getInitialSigninTitle(localization));
 		mainWindowInitalizing = true;
 		boolean wantsNewAccount = true;
 		if(app.doesAnyAccountExist())
@@ -166,7 +167,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 			if(result == CANCELLED)
 				return false;
 			if(result == NEW_ACCOUNT)
-				return false;
+				wantsNewAccount = true;
 			if(result == SIGNED_IN)
 				wantsNewAccount = false;
 		}
@@ -1080,7 +1081,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	boolean getAndSaveUserNamePassword(File keyPairFile) 
 	{
 		String originalUserName = app.getUserName();
-		UiCreateNewUserNameAndPasswordDlg newUserInfo = new UiCreateNewUserNameAndPasswordDlg(this, originalUserName);
+		UiCreateNewAccountProcess newUserInfo = new UiCreateNewAccountProcess(this, originalUserName);
 		if(!newUserInfo.isDataValid())
 			return false;
 		String userName = newUserInfo.getUserName();
@@ -1560,7 +1561,12 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 				//currentActiveFrame.setState(NORMAL);
 				//currentActiveFrame.setVisible(false);
 			}
-			UiSigninDlg signinDlg = new UiSigninDlg(this, currentActiveFrame, mode);
+			UiSigninDlg signinDlg;
+			if(mode==UiSigninDlg.INITIAL)
+				signinDlg = new UiInitialSigninDlg(this, currentActiveFrame);
+			else
+				signinDlg = new UiSigninDlg(this, currentActiveFrame, mode);
+
 			int userChoice = signinDlg.getUserChoice();
 			if (userChoice == UiSigninDlg.NEW_ACCOUNT)
 				return NEW_ACCOUNT;
@@ -1592,7 +1598,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	private boolean createAccount()
 	{
 		notifyDlg(this, "WelcomeToMartus");
-		UiCreateNewUserNameAndPasswordDlg newUserInfo = new UiCreateNewUserNameAndPasswordDlg(this, "");
+		UiCreateNewAccountProcess newUserInfo = new UiCreateNewAccountProcess(this, "");
 		if(!newUserInfo.isDataValid())
 			return false;
 		String userName = newUserInfo.getUserName();

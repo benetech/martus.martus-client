@@ -44,9 +44,9 @@ import org.martus.client.swingui.UiMainWindow;
  * @author dchu
  *
  */
-public class UiCreateNewUserNameAndPasswordDlg
+public class UiCreateNewAccountProcess
 {
-	public UiCreateNewUserNameAndPasswordDlg(
+	public UiCreateNewAccountProcess(
 		UiMainWindow window,
 		String originalUserName)
 	{

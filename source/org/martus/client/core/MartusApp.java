@@ -1074,7 +1074,7 @@ public class MartusApp
 	
 	public void attemptReSignIn(String userName, char[] userPassPhrase) throws Exception
 	{
-		attemptReSignInInternal(getKeyPairFile(getMartusDataRootDirectory()), userName, userPassPhrase);
+		attemptReSignInInternal(getCurrentKeyPairFile(), userName, userPassPhrase);
 	}
 	
 	private String getCurrentLanguage()
