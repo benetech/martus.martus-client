@@ -25,12 +25,14 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.test;
 
+import java.io.File;
 import org.martus.client.core.CustomFieldError;
 import org.martus.client.core.CustomFieldTemplate;
 import org.martus.common.CustomFields;
 import org.martus.common.FieldSpec;
 import org.martus.common.StandardFieldSpecs;
 import org.martus.util.TestCaseEnhanced;
+import org.martus.util.UnicodeWriter;
 
 public class TestCustomFieldTemplate extends TestCaseEnhanced
 {
@@ -52,11 +54,9 @@ public class TestCustomFieldTemplate extends TestCaseEnhanced
 	public void testValidateXml() throws Exception
 	{
 		CustomFields fields = new CustomFields(StandardFieldSpecs.getDefaultPublicFieldSpecs());
-		
-		String xml = fields.toString();
 		CustomFieldTemplate template = new CustomFieldTemplate();
 		
-		assertTrue("not valid?", template.validateXml(xml));
+		assertTrue("not valid?", template.validateXml(fields.toString()));
 		assertNull(template.getErrors());
 		
 		FieldSpec invalidField = FieldSpec.createCustomField("myTag", "myLabel", 55);
@@ -66,5 +66,46 @@ public class TestCustomFieldTemplate extends TestCaseEnhanced
 		assertEquals(CustomFieldError.CODE_UNKNOWN_TYPE,((CustomFieldError)template.getErrors().get(0)).getCode());
 	}
 	
+	public void testExportXml() throws Exception
+	{
+		CustomFields fields = new CustomFields(StandardFieldSpecs.getDefaultPublicFieldSpecs());
+		CustomFieldTemplate template = new CustomFieldTemplate();
+		File exportFile = createTempFileFromName("$$$testExportXml");
+		exportFile.delete();
+		assertFalse(exportFile.exists());
+		assertTrue(template.ExportTemplate(exportFile, fields.toString()));
+		assertTrue(exportFile.exists());
+		exportFile.delete();
+
+		FieldSpec invalidField = FieldSpec.createCustomField("myTag", "myLabel", 55);
+		fields.add(invalidField);
+		assertFalse(exportFile.exists());
+		assertFalse(template.ExportTemplate(exportFile, fields.toString()));
+		assertFalse(exportFile.exists());
+		exportFile.delete();
+	}
+	
+	public void testImportXml() throws Exception
+	{
+		CustomFields fields = new CustomFields(StandardFieldSpecs.getDefaultPublicFieldSpecs());
+		CustomFieldTemplate template = new CustomFieldTemplate();
+		File exportFile = createTempFileFromName("$$$testExportXml");
+		exportFile.delete();
+		template.ExportTemplate(exportFile, fields.toString());
+		assertEquals("", template.getImportedText());
+		assertTrue(template.importTemplate(exportFile));
+		exportFile.delete();
+
+		FieldSpec invalidField = FieldSpec.createCustomField("myTag", "myLabel", 55);
+		fields.add(invalidField);
+		UnicodeWriter writer = new UnicodeWriter(exportFile);
+		writer.write(fields.toString());
+		writer.close();
+		CustomFieldTemplate template2 = new CustomFieldTemplate();
+		assertFalse(template2.importTemplate(exportFile));
+		exportFile.delete();
+		assertEquals("", template2.getImportedText());
+	}
+
 	
 }
