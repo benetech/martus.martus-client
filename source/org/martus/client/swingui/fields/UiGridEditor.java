@@ -59,10 +59,6 @@ public class UiGridEditor extends UiField
 	{
 	}
 	
-	public void disableEdits()
-	{
-	}
-	
 	JScrollPane widget;
 	UiTable table;
 }

@@ -54,9 +54,5 @@ public class UiUnknownViewer extends UiField
 	{
 	}
 
-	public void disableEdits()
-	{
-	}
-	
 	JLabel component;
 }

@@ -66,10 +66,6 @@ public class UiMultilineViewer extends UiTextField
 		text.setText(newText);
 	}
 
-	public void disableEdits()
-	{
-	}
-
 	class PreviewTextArea extends UiTextArea
 	{
 		PreviewTextArea(int rows, int cols)

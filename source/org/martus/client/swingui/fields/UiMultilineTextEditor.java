@@ -78,11 +78,6 @@ public class UiMultilineTextEditor extends UiTextField
 		editor.updateUI(); //Resets view position to top of scroll pane
 	}
 
-	public void disableEdits()
-	{
-		editor.setEditable(false);
-	}
-
 	JScrollPane widget;
 	UiTextArea editor;
 }

@@ -76,11 +76,6 @@ public class UiChoiceEditor extends UiField
 		widget.setSelectedItem(item);
 	}
 
-	public void disableEdits()
-	{
-		widget.setEnabled(false);
-	}
-
 	JComboBox widget;
 	ChoiceItem[] choices;
 }

@@ -64,10 +64,6 @@ public class UiBoolViewer extends UiField
 		widget.setText(" " + text + " ");
 	}
 
-	public void disableEdits()
-	{
-	}
-
 	UiBasicLocalization localization;
 	JLabel widget;
 }

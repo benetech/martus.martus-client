@@ -63,10 +63,6 @@ public class UiChoiceViewer extends UiField
 		widget.setText(" " + item.toString() + " ");
 	}
 
-	public void disableEdits()
-	{
-	}
-
 	JLabel widget;
 	ChoiceItem[] choices;
 }

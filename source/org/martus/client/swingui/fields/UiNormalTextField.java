@@ -59,11 +59,6 @@ public abstract class UiNormalTextField extends UiTextField
 		widget.setText(newText);
 	}
 
-	public void disableEdits()
-	{
-		widget.setEditable(false);
-	}
-
 	UiTextArea widget;
 }
 

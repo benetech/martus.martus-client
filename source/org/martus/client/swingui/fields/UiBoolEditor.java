@@ -68,11 +68,6 @@ public class UiBoolEditor extends UiField implements ChangeListener
 		widget.setSelected(selected);
 	}
 
-	public void disableEdits()
-	{
-		widget.setEnabled(false);
-	}
-
 	public void stateChanged(ChangeEvent event)
 	{
 		if(observer != null)

@@ -155,17 +155,6 @@ public class UiDateEditor extends UiField
 		}
 	}	
 
-	public void disableEdits()
-	{
-		yearCombo.setEnabled(false);
-		monthCombo.setEnabled(false);
-		dayCombo.setEnabled(false);
-	}
-
-	public void indicateEncrypted(boolean isEncrypted)
-	{
-	}
-
 	JComponent component;
 	JComboBox monthCombo;
 	JComboBox dayCombo;

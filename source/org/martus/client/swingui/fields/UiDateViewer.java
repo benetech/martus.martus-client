@@ -55,10 +55,6 @@ public class UiDateViewer extends UiField
 		label.setText("  " + value + "  ");
 	}
 
-	public void disableEdits()
-	{
-	}
-
 	UiBasicLocalization localization;
 	JLabel label;
 	String value;

@@ -249,24 +249,6 @@ public class UiFlexiDateEditor extends UiField
 		}		
 	}
 		
-	public void disableEdits()
-	{
-		if (isFlexiDate())
-		{
-			endYearCombo.setEnabled(false);
-			endMonthCombo.setEnabled(false);
-			endDayCombo.setEnabled(false);	
-		}
-				
-		bgYearCombo.setEnabled(false);
-		bgMonthCombo.setEnabled(false);
-		bgDayCombo.setEnabled(false);		
-	}	
-
-	public void indicateEncrypted(boolean isEncrypted)
-	{
-	}	
-
 	JComponent 					component;
 	
 	JComboBox 					bgMonthCombo;

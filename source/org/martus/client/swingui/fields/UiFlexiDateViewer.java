@@ -78,10 +78,6 @@ public class UiFlexiDateViewer extends UiField
 		return display;
 	}
 
-	public void disableEdits()
-	{
-	}
-
 	UiBasicLocalization localization;
 	JLabel label;
 	private static String	SPACE = "  ";	

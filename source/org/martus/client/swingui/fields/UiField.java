@@ -36,7 +36,6 @@ abstract public class UiField
 	abstract public JComponent getComponent();
 	abstract public String getText();
 	abstract public void setText(String newText);
-	abstract public void disableEdits();
 
 	public static class DataInvalidException extends Exception
 	{
