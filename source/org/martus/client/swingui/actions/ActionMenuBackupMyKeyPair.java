@@ -39,9 +39,8 @@ public class ActionMenuBackupMyKeyPair extends UiMenuAction
 	
 	public void actionPerformed(ActionEvent ae)
 	{
-//		logi put back in after 30 day wait
-//		if(!mainWindow.reSignIn())
-//			return;
+		if(!mainWindow.reSignIn())
+			return;
 		mainWindow.askToBackupKeyPair();
 	}
 }
