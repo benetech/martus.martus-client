@@ -102,14 +102,13 @@ preferences.addOnNewLine(directionRtoL);
 		{
 			UiLocalization localization = owner.getLocalization();
 			String languageCodeSelected = languageDropdown.getText();
-			if(!localization.isTranslationTrusted(languageCodeSelected))
+			if(!localization.isOfficialTranslation(languageCodeSelected))
 			{
-				if(!owner.confirmDlgBeep("UntrustedTranslation"))
+				if(!owner.confirmDlgBeep("UnofficialTranslation"))
 				{
-					localization.hideUntrustedTranslationFiles(languageCodeSelected);
+					localization.hideUnofficialTranslationFiles(languageCodeSelected);
 					languageDropdown.updateChoices(localization.getUiLanguages());
-					String currentLanguageCode = localization.getCurrentLanguageCode();
-					languageDropdown.setText(currentLanguageCode);
+					languageDropdown.setText(localization.getCurrentLanguageCode());
 					return;
 				}
 			}

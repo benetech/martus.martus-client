@@ -101,10 +101,10 @@ public class TestLocalization extends TestCaseEnhanced
 		assertTrue(Localization.isLanguageFile("Martus-ab.mtf"));
 		assertTrue(Localization.isLanguageFile("martus-ab.mtf"));
 		assertTrue(Localization.isLanguageFile("MARTUS-ab.MTF"));
-		assertTrue(Localization.isLanguageFile("Martus-en.mlpk"));
-		assertTrue(Localization.isLanguageFile("Martus-ab.mlpk"));
-		assertTrue(Localization.isLanguageFile("martus-ab.mlpk"));
-		assertTrue(Localization.isLanguageFile("MARTUS-ab.MLPK"));
+		assertTrue(Localization.isLanguageFile("Martus-en.mlp"));
+		assertTrue(Localization.isLanguageFile("Martus-ab.mlp"));
+		assertTrue(Localization.isLanguageFile("martus-ab.mlp"));
+		assertTrue(Localization.isLanguageFile("MARTUS-ab.MLP"));
 	}
 	
 	public void testValidLanguageCodes()
@@ -224,12 +224,12 @@ public class TestLocalization extends TestCaseEnhanced
 	public void testJarVerifier() throws Exception
 	{
 		assertEquals("no file", JarVerifier.ERROR_INVALID_JAR, JarVerifier.verify("nonexistentFile", false));
-		assertEquals("no maifest", JarVerifier.ERROR_JAR_NOT_SIGNED, JarVerifier.verify(getClass().getResource("Martus-xx-noManifest.mlpk").getFile(), false));
-		assertEquals("Missing Entry", JarVerifier.ERROR_MISSING_ENTRIES, JarVerifier.verify(getClass().getResource("Martus-xx-MissingEntry.mlpk").getFile(), false));
-		assertEquals("Modified Entry", JarVerifier.ERROR_JAR_NOT_SIGNED, JarVerifier.verify(getClass().getResource("Martus-xx-ModifiedEntry.mlpk").getFile(), false));
-		assertEquals("Not Signed", JarVerifier.ERROR_JAR_NOT_SIGNED, JarVerifier.verify(getClass().getResource("Martus-xx-notSigned.mlpk").getFile(), false));
-		assertEquals("Not sealed", JarVerifier.ERROR_JAR_NOT_SEALED, JarVerifier.verify(getClass().getResource("Martus-xx-notSealed.mlpk").getFile(), false));
-		assertEquals("A valid signed jar didn't pass?", JarVerifier.JAR_VERIFIED_TRUE, JarVerifier.verify(getClass().getResource("Martus-xx.mlpk").getFile(), false));
+		assertEquals("no maifest", JarVerifier.ERROR_JAR_NOT_SIGNED, JarVerifier.verify(getClass().getResource("Martus-xx-noManifest.mlp").getFile(), false));
+		assertEquals("Missing Entry", JarVerifier.ERROR_MISSING_ENTRIES, JarVerifier.verify(getClass().getResource("Martus-xx-MissingEntry.mlp").getFile(), false));
+		assertEquals("Modified Entry", JarVerifier.ERROR_JAR_NOT_SIGNED, JarVerifier.verify(getClass().getResource("Martus-xx-ModifiedEntry.mlp").getFile(), false));
+		assertEquals("Not Signed", JarVerifier.ERROR_JAR_NOT_SIGNED, JarVerifier.verify(getClass().getResource("Martus-xx-notSigned.mlp").getFile(), false));
+		assertEquals("Not sealed", JarVerifier.ERROR_JAR_NOT_SEALED, JarVerifier.verify(getClass().getResource("Martus-xx-notSealed.mlp").getFile(), false));
+		assertEquals("A valid signed jar didn't pass?", JarVerifier.JAR_VERIFIED_TRUE, JarVerifier.verify(getClass().getResource("Martus-xx.mlp").getFile(), false));
 	}
 	
 	public void testAddedMTPKLanguagePack() throws Exception
@@ -243,7 +243,7 @@ public class TestLocalization extends TestCaseEnhanced
 
 		File someTestLanguage = new File(translationDirectory,UiBasicLocalization.getMlpkFilename(someTestLanguageCode));
 		someTestLanguage.deleteOnExit();
-		copyResourceFileToLocalFile(someTestLanguage, "Martus-xx.mlpk");
+		copyResourceFileToLocalFile(someTestLanguage, "Martus-xx.mlp");
 		
 		foundSomeTestLanguage = doesLanguageExist(myLocalization, someTestLanguageCode);
 		assertTrue("should now have testLanguage", foundSomeTestLanguage);
@@ -256,7 +256,7 @@ public class TestLocalization extends TestCaseEnhanced
 		UiLocalization myLocalization2 = new UiLocalization(translationDirectory2, EnglishStrings.strings);
 		File someTestLanguage2 = new File(translationDirectory2,UiBasicLocalization.getMlpkFilename(someTestLanguageCode));
 		someTestLanguage2.deleteOnExit();
-		copyResourceFileToLocalFile(someTestLanguage2, "Martus-xx-NotSigned.mlpk");
+		copyResourceFileToLocalFile(someTestLanguage2, "Martus-xx-NotSigned.mlp");
 		foundSomeTestLanguage = doesLanguageExist(myLocalization2, someTestLanguageCode);
 		assertTrue("should still have testLanguage even if its not signed.", foundSomeTestLanguage);
 		myLocalization2.setCurrentLanguageCode(someTestLanguageCode);

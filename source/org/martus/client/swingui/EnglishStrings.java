@@ -89,7 +89,7 @@ public class EnglishStrings
 "wintitle:confirmNewerConfigInfoFileFound=Version Warning",
 "wintitle:confirmdeletefolder=Confirm Delete Folder",
 "wintitle:confirmRetrieveNewerVersions=Confirm Retrieving Newer Versions",
-"wintitle:confirmUntrustedTranslation=Untrusted Martus Translation",
+"wintitle:confirmUnofficialTranslation=Unofficial Martus Translation",
 
 "wintitle:notifyDropErrorBulletinExists=Cannot Move Bulletin(s)",
 "wintitle:notifyDropErrors=Error Moving Bulletin(s)",
@@ -613,8 +613,8 @@ public class EnglishStrings
 "field:confirmNewerConfigInfoFileFoundeffect=Answering Yes will continue to use this older version of Martus.  Answering No will exit Martus so you can upgrade to the latest version.",
 "field:confirmRetrieveNewerVersionscause=The following bulletin(s) selected for retrieval are newer versions of bulletins already on this system:\n\n#TITLES#",
 "field:confirmRetrieveNewerVersionseffect=Each older version will be replaced by the newer version from the server.",
-"field:confirmUntrustedTranslationcause=The chosen translation is untrusted by Martus.",
-"field:confirmUntrustedTranslationeffect=Choose Yes to use this unofficial translation.  Choose No to place this translation in the Unofficial Translations directory, and you may either download the official translation from the Martus website, or choose a different language.",
+"field:confirmUnofficialTranslationcause=This translation was not created by the Martus team, and therefore may not be trustworthy.  If you continue to see this message please download an official translation from the www.martus.org",
+"field:confirmUnofficialTranslationeffect=Choose Yes to use this unofficial translation.  Choose No to place this translation in the Unofficial Translations directory, and you may either download the official translation from the Martus website, or choose a different language.",
 
 "field:notifyDropErrorBulletinExistscause=One or more bulletins cannot be moved to that folder, because it already exists in that folder.",
 "field:notifyDropErrorscause=An unexpected error occurred while moving the bulletin(s). One or more files may be damaged.",
