@@ -72,7 +72,7 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 		Vector list = new Vector();
 		list.add(b);
 		String result = doExport(list, false);
-
+		assertContains("<XMLVersionNumber>2</XMLVersionNumber>", result);
 		assertContains("<ExportedMartusBulletins>", result);
 		assertContains("<MartusBulletin>", result);
 		assertContains(b.getAccount(), result);
@@ -159,12 +159,12 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 		Vector list = new Vector();
 		list.add(b);
 		String publicOnly = doExport(list, false);
-		assertContains("<Field><Tag>PublicDataOnly</Tag>", publicOnly);
+		assertContains("<Field>\n<Tag>PublicDataOnly</Tag>", publicOnly);
 		assertContains(samplePublic, publicOnly);
 		assertNotContains(samplePrivate, publicOnly);
 
 		String publicAndPrivate = doExport(list, true);
-		assertContains("<Field><Tag>PublicAndPrivateData</Tag>", publicAndPrivate);
+		assertContains("<Field>\n<Tag>PublicAndPrivateData</Tag>", publicAndPrivate);
 		assertContains(samplePublic, publicAndPrivate);
 		assertContains(samplePrivate, publicAndPrivate);
 	}
@@ -199,14 +199,14 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 
 		assertContains(b.getAccount(), publicOnly);
 		assertContains(b.getLocalId(), publicOnly);
-		assertContains("<Field><Tag>AllPrivate</Tag>", publicOnly);
+		assertContains("<Field>\n<Tag>AllPrivate</Tag>", publicOnly);
 		assertNotContains(sampleAuthor, publicOnly);
 		assertNotContains("<PublicData>", publicOnly);
 		assertNotContains("<PrivateData>", publicOnly);
 
 		assertContains(b.getAccount(), publicAndPrivate);
 		assertContains(b.getLocalId(), publicAndPrivate);
-		assertContains("<Field><Tag>AllPrivate</Tag>", publicAndPrivate);
+		assertContains("<Tag>AllPrivate</Tag>", publicAndPrivate);
 		assertContains(sampleAuthor, publicAndPrivate);
 		assertContains("<PublicData>", publicAndPrivate);
 		assertContains("<PrivateData>", publicAndPrivate);

@@ -43,7 +43,9 @@ public class BulletinXmlExporter
 	public static void exportBulletins(Writer dest, Vector bulletins, boolean includePrivateData)
 		throws IOException
 	{
-		dest.write(MartusXml.getTagStart(ExportedBulletinsElementName));
+		dest.write(MartusXml.getTagStartWithNewline(ExportedBulletinsElementName));
+		writeXMLVersion(dest);
+		
 		if(includePrivateData)
 			writeElement(dest, PublicAndPrivateElementName, "", "");
 		else
@@ -58,10 +60,16 @@ public class BulletinXmlExporter
 		dest.write(MartusXml.getTagEnd(ExportedBulletinsElementName));
 	}
 
+	private static void writeXMLVersion(Writer dest) throws IOException
+	{
+		dest.write(MartusXml.getTagStart(VersionXMLElementName));
+		dest.write(VersionNumber);
+		dest.write(MartusXml.getTagEnd(VersionXMLElementName));
+	}
+
 	static void exportOneBulletin(Bulletin b, Writer dest, boolean includePrivateData) throws IOException
 	{
-		dest.write(MartusXml.getTagStart(BulletinElementName));
-		dest.write("\n");
+		dest.write(MartusXml.getTagStartWithNewline(BulletinElementName));
 
 		writeElement(dest, LocalIdElementName, "", b.getLocalId());
 		writeElement(dest, AccountIdElementName, "", b.getAccount());
@@ -71,8 +79,7 @@ public class BulletinXmlExporter
 		BulletinHistory history = b.getHistory();
 		if(history.size() > 0)
 		{
-			dest.write(MartusXml.getTagStart(HistoryElementName));
-			dest.write("\n");
+			dest.write(MartusXml.getTagStartWithNewline(HistoryElementName));
 			for(int i=0; i < history.size(); ++i)
 			{
 				dest.write(MartusXml.getTagStart(AncestorElementName));
@@ -150,7 +157,7 @@ public class BulletinXmlExporter
 
 	static void writeElement(Writer dest, String tag, String rawLabel, String rawFieldData) throws IOException
 	{						
-		dest.write(MartusXml.getTagStart("Field"));	
+		dest.write(MartusXml.getTagStartWithNewline("Field"));	
 		dest.write(MartusXml.getTagWithData(TAG, MartusUtilities.getXmlEncoded(tag)));
 			
 		if (rawLabel.length() > 0)
@@ -163,6 +170,7 @@ public class BulletinXmlExporter
 	}	
 
 	public final static String ExportedBulletinsElementName = "ExportedMartusBulletins";
+	public final static String VersionXMLElementName = "XMLVersionNumber";
 	public final static String PublicOnlyElementName = "PublicDataOnly";
 	public final static String PublicAndPrivateElementName = "PublicAndPrivateData";
 	public final static String BulletinElementName = "MartusBulletin";
@@ -179,4 +187,8 @@ public class BulletinXmlExporter
 	private final static String TAG = "Tag";
 	private final static String VALUE = "Value";
 	private final static String LABEL = "Label";
+
+	//Version 1 had no XML tag for XMLVersionNumber
+	//Version 2 added Grid column headers
+	private final static String VersionNumber = "2";
 }
