@@ -26,12 +26,10 @@ Boston, MA 02111-1307, USA.
 
 package org.martus.client.swingui.actions;
 
-import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.io.File;
 
 import org.martus.client.core.QuickEraseOptions;
-import org.martus.client.swingui.UiLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.dialogs.UiQuickEraseConfirmDlg;
 import org.martus.util.DirectoryUtils;
@@ -50,8 +48,7 @@ public class ActionMenuQuickErase extends UiMenuAction
 			
 		if (mainWindow.getApp().getFolderOutbox().getBulletinCount() > 0)
 		{				
-			Toolkit.getDefaultToolkit().beep();
-			if (!mainWindow.confirmDlg(mainWindow, "QuickEraseReminder"))
+			if (!mainWindow.confirmDlgBeep(mainWindow, "QuickEraseReminder"))
 				return;
 		}		
 		
@@ -74,29 +71,23 @@ public class ActionMenuQuickErase extends UiMenuAction
 		if (!packetDir.exists())
 			return;			
 								
+		String baseTag = "QuickEraseFailed";						
 		if(mainWindow.getApp().deleteAllBulletinsAndUserFolders(options))
 		{	
 			confirmDeleteSubDirectory(packetDir, options);	
-			String baseTag = (options.isScrubSelected())? "QuickEraseScrubWorked":"QuickEraseWorked";						
-			mainWindow.notifyDlg(mainWindow, baseTag);								
+			baseTag = (options.isScrubSelected())? "QuickEraseScrubWorked":"QuickEraseWorked";						
 		}
-		else
-			mainWindow.notifyDlg(mainWindow, "QuickEraseFailed");
-			
+		
+		if(!options.isDonotPromptSelected())
+			mainWindow.notifyDlg(mainWindow, baseTag);								
+
 		mainWindow.folderTreeContentsHaveChanged();		
 	}
 	
 	private void confirmDeleteSubDirectory(File packetDir, QuickEraseOptions options)
 	{
-		if (!DirectoryUtils.containSubDirs(packetDir))
-			return;
-		
-		UiLocalization localization = mainWindow.getLocalization();			
-		String title = localization.getWindowTitle("confirmDoQuickErase");			
-		String question = localization.getFieldLabel("confirmQuestionDeleteSubDirectory");
-		String[] contents = {question};
-				
-		if (mainWindow.confirmDlg(mainWindow, title, contents))
+		if( options.isDonotPromptSelected() || 
+		    mainWindow.confirmDlgBeep(mainWindow, "DeleteSubDirectory"))
 		{
 			if (options.isScrubSelected())	
 				DirectoryUtils.scrubAndDeleteEntireDirectoryTree(packetDir);
@@ -118,30 +109,18 @@ public class ActionMenuQuickErase extends UiMenuAction
 	{
 		if (options.isDeleteKeyPairSelected())
 		{
-			UiLocalization localization = mainWindow.getLocalization();			
-			String title = localization.getFieldLabel("DeleteKeypair");
-			String cause = localization.getFieldLabel("confirmQuickEraseDeleteKeyPaircause");
-			String question = localization.getFieldLabel("confirmQuestionDeleteKeypair");
-			String[] contents = {cause,"", question};
-			
-			Toolkit.getDefaultToolkit().beep();
-			if (mainWindow.confirmDlg(mainWindow, title, contents))
-				mainWindow.getApp().scrubAndDeleteKeypair(options);	
+			if(options.isDonotPromptSelected() || mainWindow.confirmDlgBeep(mainWindow, "QuickEraseDeleteKeyPair"))
+				mainWindow.getApp().deleteKeypair(options);
 		}	
 	}
 
 	private QuickEraseOptions loadQuickEraseOptions(UiQuickEraseConfirmDlg dlg)
 	{
 		QuickEraseOptions options = new QuickEraseOptions();
-			
-		boolean scrubSelected = dlg.isScrubCheckBoxSelected();
-		boolean deletKeyPairSelected = dlg.isDeleteKeypairSelected();
-		boolean exitWhenCompleteSelected = dlg.isExitWhenCompleteSelected();
-				
-		options.setScrubOption(scrubSelected);
-		options.setDeleteKeyPairOption(deletKeyPairSelected);
-		options.setExitWhenCompleteOption(exitWhenCompleteSelected);
-		
+		options.setScrubOption(dlg.isScrubCheckBoxSelected());
+		options.setDeleteKeyPairOption(dlg.isDeleteKeypairSelected());
+		options.setExitWhenCompleteOption(dlg.isExitWhenCompleteSelected());
+		options.setDonotPromptOption(dlg.isDonotPromptSelected());
 		return options;	
 	}
 }

@@ -81,7 +81,9 @@ public class EnglishStrings
 "wintitle:confirmCancelShareVerify=Cancel Verification",
 "wintitle:confirmEditBulletinWithUnknownTags=Modify Bulletin",
 "wintitle:confirmExportUnknownTags=Export Bulletins",
-	
+"wintitle:confirmQuickEraseDeleteKeyPair=Delete Keypair",
+"wintitle:confirmDeleteSubDirectory=Unexpected Files Found",
+		
 "wintitle:notifyDropErrorNotAllowed=Cannot Move Bulletin(s)",
 "wintitle:notifyDropErrors=Error Moving Bulletin(s)",
 "wintitle:notifyPasteErrorNotAllowed=Cannot Paste Bulletin(s)",
@@ -535,12 +537,14 @@ public class EnglishStrings
 "field:confirmEditBulletinWithUnknownTagseffect=If you modify this bulletin, the unknown information will be lost.",
 "field:confirmExportUnknownTagscause=One or more of the bulletins you have chosen to export contain information that this version of Martus cannot understand. They may have been created by a newer version of Martus, so you should ensure that you are running the latest version.",
 "field:confirmExportUnknownTagseffect=If you continue with the export, any unknown information will not be exported.",
-
-"field:confirmQuickEraseDeleteKeyPaircause=This will scrub and delete keypair files on this computer.",
-"field:confirmQuestionDeleteKeypair=Are you really sure?",
-"field:confirmQuestionDeleteSubDirectory=Do you want to delete ALL files in packets directory?",
-"field:confirmQuickEraseRemindercause=Please Note: There are bulletins in your outbox that have not been sent to a server.",
-
+"field:confirmQuickEraseDeleteKeyPaircause=This will delete your keypair file on this computer.",
+"field:confirmQuickEraseDeleteKeyPaireffect=Clicking on yes will delete your keypair file which means you will not be able to open Martus with the same account unless you have a backup of your keypair on a floppy disk.",
+"field:confirmQuickEraseRemindercause=Please Note: There are bulletins in your outbox that have not been sent to a server. If you continue these bulletins will be lost.",
+"field:confirmQuickEraseRemindereffect=Clicking on yes will bring you to the Quick Erase Options dialog, no will return you to Martus without erasing anything.",
+"field:confirmDeleteSubDirectorycause=There are still backup files and or directories in the Martus/Packets directory.  Do you wish to delete these files and folders as well?",
+"field:confirmDeleteSubDirectoryeffect=Clicking on yes will delete ALL files and folders in this directory.",
+		
+		
 "field:notifyDropErrorNotAllowedcause=One or more bulletins cannot be moved to that folder. This may be because of their Draft/Sealed status, or their author.",
 "field:notifyDropErrorscause=An unexpected error occured while moving the bulletin(s). One or more files may be damaged.",
 "field:notifyPasteErrorNotAllowedcause=One or more bulletins cannot be pasted in that folder. This may be because of their Draft/Sealed status, or their author.",
@@ -666,8 +670,8 @@ public class EnglishStrings
 "field:BackupKeyShareCompleteInformation=Backup complete, please give each disk to people you trust, so that you can in the future if you forget your user name and or password you can recreate your account.  You will need #N# of these disks to recreate your account.",
 "field:BackupRecoverKeyPairInsertNextDiskMessage=Please insert disk #",
 
+"field:DeleteKeypair=Delete key pair",
 "field:ScrubDataBeforeDelete=Scrub data before deleting",
-"field:DeleteKeypair=Delete Keypair",
 "field:ExitWhenComplete=Exit when complete",
 "field:DonotPrompt=Do not prompt",
 

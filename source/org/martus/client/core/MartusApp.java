@@ -501,7 +501,7 @@ public class MartusApp
 			store.deleteFolders();	
 	}
 	
-	public boolean scrubAndDeleteKeypair(QuickEraseOptions opts)
+	public boolean deleteKeypair(QuickEraseOptions opts)
 	{
 		try
 		{

@@ -456,6 +456,12 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 			table.setCurrentBulletinIndex(currentPosition);
 	}
 
+	public boolean confirmDlgBeep(JFrame parent, String baseTag)
+	{			
+		Toolkit.getDefaultToolkit().beep();
+		return confirmDlg(parent, baseTag);
+	}
+	
 	public boolean confirmDlg(JFrame parent, String baseTag)
 	{
 		return UiUtilities.confirmDlg(getLocalization(), parent, baseTag);

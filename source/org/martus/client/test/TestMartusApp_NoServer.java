@@ -498,7 +498,7 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		opts.setDeleteKeyPairOption(true);
 		opts.setScrubOption(true);
 		
-		appWithAccount.scrubAndDeleteKeypair(opts);
+		appWithAccount.deleteKeypair(opts);
 		
 		File keyPairFile = appWithAccount.getCurrentKeyPairFile();	
 		File backupKeyPairFile = MartusApp.getBackupFile(keyPairFile);
