@@ -108,7 +108,7 @@ abstract public class RetrieveTableModel extends AbstractTableModel
 		if(column == COLUMN_AUTHOR)
 			return summary.getAuthor();
 		if(column == COLUMN_LAST_DATE_SAVED)
-			return getLocalization().convertStoredDateTimeToDisplay(summary.getDateTimeSaved());
+			return getLocalization().formatDateTime(summary.getDateTimeSaved());
 		if(column == COLUMN_BULLETIN_SIZE)
 			return  getSizeInKbytes(summary.getSize());
 		if(column == COLUMN_DELETE_FLAG)
