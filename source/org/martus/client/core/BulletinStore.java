@@ -65,7 +65,6 @@ import org.martus.common.packet.Packet.InvalidPacketException;
 import org.martus.common.packet.Packet.SignatureVerificationException;
 import org.martus.common.packet.Packet.WrongAccountException;
 import org.martus.common.packet.Packet.WrongPacketTypeException;
-import org.martus.common.packet.UniversalId.NotUniversalIdException;
 import org.martus.util.FileInputStreamWithSeek;
 import org.martus.util.InputStreamWithSeek;
 import org.martus.util.Base64.InvalidBase64Exception;
@@ -356,7 +355,13 @@ public class BulletinStore
 
 	public synchronized void discardBulletin(BulletinFolder f, Bulletin b, boolean saveFolders) throws IOException
 	{
-		getFolderDiscarded().add(b);
+		try
+		{
+			getFolderDiscarded().add(b);
+		}
+		catch (BulletinAlreadyExistsException saveToIgnoreException)
+		{
+		}
 		removeBulletinFromFolder(b, f, saveFolders);
 		if(isOrphan(b))
 			destroyBulletin(b);
@@ -405,7 +410,13 @@ public class BulletinStore
 		while(folder.getBulletinCount() > 0)
 		{
 			Bulletin b = folder.getBulletinSorted(0);
-			discarded.add(b);
+			try
+			{
+				discarded.add(b);
+			}
+			catch (BulletinAlreadyExistsException safeToIgnore)
+			{
+			}
 			folder.remove(b.getUniversalId());
 		}
 
@@ -569,7 +580,14 @@ public class BulletinStore
 	{
 		if(from.equals(to))
 			return;
-		to.add(b);
+		try
+		{
+			to.add(b);
+		}
+		catch (BulletinAlreadyExistsException e)
+		{
+			System.out.println("Bulletin already exists in destination folder");
+		}
 		boolean saveFolders = true;
 		removeBulletinFromFolder(b, from, saveFolders);
 	}
@@ -733,7 +751,7 @@ public class BulletinStore
 		return createFolder(name);
 	}
 
-	public synchronized void addBulletinToFolder(UniversalId uId, BulletinFolder folder)
+	public synchronized void addBulletinToFolder(UniversalId uId, BulletinFolder folder) throws BulletinAlreadyExistsException
 	{
 		Bulletin b = findBulletinByUniversalId(uId);
 		if(b == null)
@@ -918,7 +936,7 @@ public class BulletinStore
 					UniversalId bId = UniversalId.createFromString(buffer);
 					currentFolder.add(bId);
 				}
-				catch(NotUniversalIdException e)
+				catch(Exception e)
 				{
 					System.out.println("BulletinStore::endElement : " + e);
 				}
@@ -973,7 +991,8 @@ public class BulletinStore
 	}
 
 	public static class StatusNotAllowedException extends Exception {}
-
+	public static class BulletinAlreadyExistsException extends Exception {}
+	
 	public void importZipFileBulletin(File zipFile, BulletinFolder toFolder, boolean forceSameUids) throws
 			StatusNotAllowedException,
 			InvalidPacketException,
@@ -981,7 +1000,7 @@ public class BulletinStore
 			WrongPacketTypeException,
 			CryptoException,
 			IOException,
-			InvalidBase64Exception
+			InvalidBase64Exception, BulletinAlreadyExistsException
 	{
 		ZipFile zip = new ZipFile(zipFile);
 		try

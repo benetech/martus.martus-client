@@ -40,6 +40,7 @@ import java.util.Iterator;
 import java.util.Set;
 import java.util.Vector;
 
+import org.martus.client.core.BulletinStore.BulletinAlreadyExistsException;
 import org.martus.client.core.ClientSideNetworkHandlerUsingXmlRpc.SSLSocketSetupException;
 import org.martus.client.core.Exceptions.ServerCallFailedException;
 import org.martus.client.core.Exceptions.ServerNotAvailableException;
@@ -571,7 +572,14 @@ public class MartusApp
 		while(it.hasNext())
 		{
 			UniversalId uid = (UniversalId)it.next();
-			store.addBulletinToFolder(uid, orphanFolder);
+			try
+			{
+				store.addBulletinToFolder(uid, orphanFolder);
+			}
+			catch (BulletinAlreadyExistsException e)
+			{
+				System.out.println("Orphan Bulletin already exists.");
+			}
 		}
 
 		store.saveFolders();
@@ -710,7 +718,15 @@ public class MartusApp
 			UniversalId uid = (UniversalId)uids.get(i);
 			Bulletin b = store.findBulletinByUniversalId(uid);
 			if(matcher.doesMatch(b))
-				store.addBulletinToFolder(b.getUniversalId(), searchFolder);
+			{	
+				try
+				{
+					store.addBulletinToFolder(b.getUniversalId(), searchFolder);
+				}
+				catch (BulletinAlreadyExistsException safeToIgnoreException)
+				{
+				}
+			}
 		}
 		store.saveFolders();
 	}

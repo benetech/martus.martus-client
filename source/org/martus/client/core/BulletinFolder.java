@@ -28,6 +28,7 @@ package org.martus.client.core;
 
 import java.util.Vector;
 
+import org.martus.client.core.BulletinStore.BulletinAlreadyExistsException;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.clientside.UiBasicLocalization;
 import org.martus.common.database.Database;
@@ -137,18 +138,18 @@ public class BulletinFolder
 		return (getStatusAllowed().indexOf(bulletinStatus) != -1);
 	}
 
-	public synchronized void add(Bulletin b)
+	public synchronized void add(Bulletin b) throws BulletinAlreadyExistsException
 	{
 		add(b.getUniversalId());
 	}
 
-	synchronized void add(UniversalId id)
+	synchronized void add(UniversalId id) throws BulletinAlreadyExistsException
 	{
 		if(rawIdList.contains(id))
 		{
 			//System.out.println("already contains " + id);
 			sortExisting();
-			return;
+			throw new BulletinStore.BulletinAlreadyExistsException();
 		}
 
 		DatabaseKey key = new DatabaseKey(id);

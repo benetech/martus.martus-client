@@ -63,6 +63,7 @@ import org.martus.client.core.BulletinFolder;
 import org.martus.client.core.BulletinStore;
 import org.martus.client.core.MartusApp;
 import org.martus.client.core.TransferableBulletinList;
+import org.martus.client.core.BulletinStore.BulletinAlreadyExistsException;
 import org.martus.client.core.BulletinStore.StatusNotAllowedException;
 import org.martus.client.swingui.UiClipboardUtilities;
 import org.martus.client.swingui.UiMainWindow;
@@ -341,6 +342,10 @@ public class UiBulletinTable extends JTable implements ListSelectionListener, Dr
 			catch (StatusNotAllowedException e)
 			{
 				resultMessageTag = "PasteErrorNotAllowed";
+			}
+			catch (BulletinAlreadyExistsException e)
+			{
+				resultMessageTag = "PasteErrorBulletinAlreadyExists";
 			}
 		}
 

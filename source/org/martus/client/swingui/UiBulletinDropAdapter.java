@@ -41,6 +41,7 @@ import java.util.List;
 import org.martus.client.core.BulletinFolder;
 import org.martus.client.core.BulletinStore;
 import org.martus.client.core.TransferableBulletinList;
+import org.martus.client.core.BulletinStore.BulletinAlreadyExistsException;
 import org.martus.client.core.BulletinStore.StatusNotAllowedException;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.crypto.MartusCrypto.CryptoException;
@@ -128,8 +129,12 @@ public abstract class UiBulletinDropAdapter implements DropTargetListener
 		{
 			worked = false;
 		}
+		catch (BulletinAlreadyExistsException e)
+		{
+			worked = false;
+		}
 		//System.out.println("dropTransferableBulletin: Drop Complete!");
-
+		
 		if(worked)
 		{
 			BulletinStore store = observer.getStore();
@@ -201,6 +206,10 @@ public abstract class UiBulletinDropAdapter implements DropTargetListener
 				attemptDropFile(file, toFolder);
 				++filesDropped;
 			}
+			catch (BulletinAlreadyExistsException e)
+			{
+				resultMessageTag = "DropErrorBulletinExists";
+			}
 			catch (StatusNotAllowedException e)
 			{
 				resultMessageTag = "DropErrorNotAllowed";
@@ -220,13 +229,7 @@ public abstract class UiBulletinDropAdapter implements DropTargetListener
 	}
 
 	public void attemptDropFile(File file, BulletinFolder toFolder) throws
-		InvalidPacketException,
-		SignatureVerificationException,
-		WrongPacketTypeException,
-		StatusNotAllowedException,
-		CryptoException,
-		IOException,
-		InvalidBase64Exception
+		InvalidPacketException, SignatureVerificationException, WrongPacketTypeException, StatusNotAllowedException, CryptoException, IOException, InvalidBase64Exception, BulletinAlreadyExistsException
 	{
 		Cursor originalCursor = observer.setWaitingCursor();
 		try
@@ -242,30 +245,45 @@ public abstract class UiBulletinDropAdapter implements DropTargetListener
 
 
 	public void attemptDropBulletins(Bulletin[] bulletins, BulletinFolder toFolder) throws
-		BulletinStore.StatusNotAllowedException
+		BulletinStore.StatusNotAllowedException, BulletinAlreadyExistsException
 	{
 		System.out.println("attemptDropBulletin");
 
 		BulletinStore store = toFolder.getStore();
-
+		final int statusNotAllowed = 1;
+		final int bulletinExists = 2;
+		int errorThrown = 0;
 		for (int i = 0; i < bulletins.length; i++)
 		{
 			Bulletin bulletin = bulletins[i];
-System.out.println("UiBulletinDropAdapter.attemptDropBulletins: " + bulletin.get(Bulletin.TAGTITLE));
+			System.out.println("UiBulletinDropAdapter.attemptDropBulletins: " + bulletin.get(Bulletin.TAGTITLE));
 			if(!store.canPutBulletinInFolder(toFolder, bulletin.getAccount(), bulletin.getStatus()))
-				throw new BulletinStore.StatusNotAllowedException();
+				errorThrown = statusNotAllowed;
 		}
 
 
 		for (int i = 0; i < bulletins.length; i++)
 		{
 			Bulletin bulletin = bulletins[i];
-			store.addBulletinToFolder(bulletin.getUniversalId(), toFolder);
+			try
+			{
+				store.addBulletinToFolder(bulletin.getUniversalId(), toFolder);
+			}
+			catch (BulletinAlreadyExistsException e)
+			{
+				if(errorThrown == 0)
+					errorThrown = bulletinExists;
+			}
 		}
 		store.saveFolders();
 
 		observer.folderContentsHaveChanged(toFolder);
-	}
+		
+		if(errorThrown == statusNotAllowed)
+			throw new StatusNotAllowedException();
+		if(errorThrown == bulletinExists)
+			throw new BulletinAlreadyExistsException();
+		}
 
 	UiMainWindow observer;
 }

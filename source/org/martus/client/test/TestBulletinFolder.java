@@ -30,6 +30,7 @@ import java.util.Vector;
 
 import org.martus.client.core.BulletinFolder;
 import org.martus.client.core.BulletinStore;
+import org.martus.client.core.BulletinStore.BulletinAlreadyExistsException;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.crypto.MockMartusSecurity;
 import org.martus.common.database.MockClientDatabase;
@@ -184,8 +185,15 @@ public class TestBulletinFolder extends TestCaseEnhanced
 		assertEquals(1, folder.getBulletinCount());
 		assertEquals(true, folder.contains(b));
 
-		// adding has no effect if it's already there
-		folder.add(b);
+		try
+		{
+			// adding has no effect if it's already there
+			folder.add(b);
+			fail("should have thrown exists");
+		}
+		catch (BulletinAlreadyExistsException expectedException)
+		{
+		}
 		assertEquals(1, folder.getBulletinCount());
 		assertEquals(true, folder.contains(b));
 
@@ -197,7 +205,7 @@ public class TestBulletinFolder extends TestCaseEnhanced
 		assertEquals("First bulletin in folder should be valid\n", false, (b2 == null));
 	}
 
-	public void testRemove()
+	public void testRemove() throws Exception
 	{
 		assertEquals("start", 2, testFolder.getBulletinCount());
 		UniversalId badId = UniversalId.createDummyUniversalId();
@@ -210,6 +218,20 @@ public class TestBulletinFolder extends TestCaseEnhanced
 		testFolder.add(b);
 	}
 
+	public void testAddBulletinAgainToSameFolder()
+	{
+		assertTrue("Bulletin b not already in folder?", testFolder.contains(b));
+		try
+		{
+			testFolder.add(b);
+			fail("Should have thrown exists exception");
+		}
+		catch (BulletinAlreadyExistsException expectedException)
+		{
+		}
+	}
+	
+	
 	public void testRemoveAll()
 	{
 		assertTrue("Need some samples", store.getBulletinCount() > 0);

@@ -46,6 +46,7 @@ import javax.swing.JViewport;
 import org.martus.client.core.BulletinStore;
 import org.martus.client.core.EncryptionChangeListener;
 import org.martus.client.core.MartusApp;
+import org.martus.client.core.BulletinStore.BulletinAlreadyExistsException;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.bulletincomponent.UiBulletinComponent;
 import org.martus.client.swingui.bulletincomponent.UiBulletinEditor;
@@ -205,8 +206,24 @@ public class UiBulletinModifyDlg extends JFrame implements ActionListener, Windo
 		app.setHQKeyInBulletin(bulletin);
 		BulletinStore store = app.getStore();
 		store.saveBulletin(bulletin);
-		store.addBulletinToFolder(bulletin.getUniversalId(), store.getFolderDrafts());
-		store.addBulletinToFolder(bulletin.getUniversalId(), store.getFolderDraftOutbox());
+		try
+		{
+			store.addBulletinToFolder(bulletin.getUniversalId(), store.getFolderDrafts());
+		}
+		catch (BulletinAlreadyExistsException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try
+		{
+			store.addBulletinToFolder(bulletin.getUniversalId(), store.getFolderDraftOutbox());
+		}
+		catch (BulletinAlreadyExistsException e1)
+		{
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 	}
 
 	private void saveSealedBulletin(MartusApp app)

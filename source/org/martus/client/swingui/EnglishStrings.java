@@ -92,8 +92,10 @@ public class EnglishStrings
 "wintitle:confirmBackupKeyPairInformation=Backing Up Your Keypair",
 
 "wintitle:notifyDropErrorNotAllowed=Cannot Move Bulletin(s)",
+"wintitle:notifyDropErrorBulletinExists=Cannot Move Bulletin(s)",
 "wintitle:notifyDropErrors=Error Moving Bulletin(s)",
 "wintitle:notifyPasteErrorNotAllowed=Cannot Paste Bulletin(s)",
+"wintitle:notifyPasteErrorBulletinAlreadyExists=Cannot Paste Bulletin(s)",
 "wintitle:notifyPasteError=Error Pasting Bulletin(s)",
 "wintitle:notifyretrieveworked=Retrieve Bulletins",
 "wintitle:notifyretrievefailed=Retrieve Bulletins",
@@ -572,8 +574,10 @@ public class EnglishStrings
 "field:confirmBackupKeyPairInformationeffect=Choosing Yes will begin the backup process.",		
 
 "field:notifyDropErrorNotAllowedcause=One or more bulletins cannot be moved to that folder. This may be because of their Draft/Sealed status, or their author.",
+"field:notifyDropErrorBulletinExistscause=One or more bulletins cannot be moved to that folder, because it already exists in that folder.",
 "field:notifyDropErrorscause=An unexpected error occured while moving the bulletin(s). One or more files may be damaged.",
 "field:notifyPasteErrorNotAllowedcause=One or more bulletins cannot be pasted in that folder. This may be because of their Draft/Sealed status, or their author.",
+"field:notifyPasteErrorBulletinAlreadyExistscause=One or more bulletins cannot be pasted in that folder, because they already existed in this folder.",
 "field:notifyPasteErrorcause=An unexpected error occured while pasting the bulletin(s). One or more files may be damaged.",
 "field:notifyretrieveworkedcause=All of the selected bulletins were successfully retrieved from the server",
 "field:notifyretrievefailedcause=Error: Unable to retrieve bulletins from the server",

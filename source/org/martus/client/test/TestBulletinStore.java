@@ -38,6 +38,7 @@ import java.util.Vector;
 import org.martus.client.core.BulletinFolder;
 import org.martus.client.core.BulletinStore;
 import org.martus.client.core.MartusClientXml;
+import org.martus.client.core.BulletinStore.BulletinAlreadyExistsException;
 import org.martus.common.FieldSpec;
 import org.martus.common.MartusXml;
 import org.martus.common.bulletin.AttachmentProxy;
@@ -534,7 +535,14 @@ public class TestBulletinStore extends TestCaseEnhanced
 		BulletinFolder folder = store.createFolder("test");
 		store.addBulletinToFolder(id, folder);
 		assertEquals("now in folder", true, folder.contains(b));
-		store.addBulletinToFolder(id, folder);
+		try
+		{
+			store.addBulletinToFolder(id, folder);
+			fail("should have thrown exists exception");
+		}
+		catch (BulletinAlreadyExistsException expectedException)
+		{
+		}
 		assertEquals("still in folder", true, folder.contains(b));
 		UniversalId bFakeId = UniversalId.createFromAccountAndPrefix("aa", "abc");
 		store.addBulletinToFolder(bFakeId, folder);
@@ -561,7 +569,8 @@ public class TestBulletinStore extends TestCaseEnhanced
 
 	}
 
-	public void testFoldersToXml()
+	public void testFoldersToXml() throws Exception
+	
 	{
 		TRACE("testFoldersToXml");
 
