@@ -819,20 +819,10 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		catch(InvalidBase64Exception e)
 		{
 		}
-		String accountDirectory = localization.getFieldLabel("AccountInfoDirectory") + app.getCurrentAccountDirectoryName();
-		int dirLength = accountDirectory.length();
-		char[] accountDirectorySlash = new char[dirLength];
-		for(int i = 0; i<dirLength; ++i)
-		{
-			char thisChar = accountDirectory.charAt(i);
-			if(thisChar=='/')
-				accountDirectorySlash[i] = '\\';
-			else
-				accountDirectorySlash[i] = thisChar;
-		}
+		String accountDirectory = localization.getFieldLabel("AccountInfoDirectory") + app.getCurrentAccountDirectory();
 		
 		String ok = localization.getButtonLabel("ok");
-		String[] contents = {userName, " ", keyDescription, keyContents," ", codeDescription, formattedCodeContents, " ", new String(accountDirectorySlash)};
+		String[] contents = {userName, " ", keyDescription, keyContents," ", codeDescription, formattedCodeContents, " ", accountDirectory};
 		String[] buttons = {ok};
 
 		new UiNotifyDlg(this, title, contents, buttons);
