@@ -50,7 +50,7 @@ public class BulletinXmlExporter
 			writeElement(dest, PublicAndPrivateElementName, "", "");
 		else
 			writeElement(dest, PublicOnlyElementName, "", "");
-		dest.write("\n");
+		dest.write(NEW_LINE);
 
 		for (int i = 0; i < bulletins.size(); i++)
 		{
@@ -65,6 +65,9 @@ public class BulletinXmlExporter
 		dest.write(MartusXml.getTagStart(VersionXMLElementName));
 		dest.write(VersionNumber);
 		dest.write(MartusXml.getTagEnd(VersionXMLElementName));
+		dest.write("<!-- Version 2: added Grid columns Labels-->");
+		
+		dest.write(NEW_LINE);
 	}
 
 	static void exportOneBulletin(Bulletin b, Writer dest, boolean includePrivateData) throws IOException
@@ -106,7 +109,7 @@ public class BulletinXmlExporter
 		}
 
 		dest.write(MartusXml.getTagEnd(BulletinElementName));
-		dest.write("\n");
+		dest.write(NEW_LINE);
 	}
 
 	static void writeAttachments(Writer dest, AttachmentProxy[] publicAttachments)
@@ -170,7 +173,7 @@ public class BulletinXmlExporter
 	}	
 
 	public final static String ExportedBulletinsElementName = "ExportedMartusBulletins";
-	public final static String VersionXMLElementName = "XMLVersionNumber";
+	public final static String VersionXMLElementName = "MartusBulletinExportVersion";
 	public final static String PublicOnlyElementName = "PublicDataOnly";
 	public final static String PublicAndPrivateElementName = "PublicAndPrivateData";
 	public final static String BulletinElementName = "MartusBulletin";
@@ -184,11 +187,10 @@ public class BulletinXmlExporter
 	public final static String HistoryElementName = "History";
 	public final static String AncestorElementName = "Ancestor";
 	
+	private final static String NEW_LINE = "\n";
 	private final static String TAG = "Tag";
 	private final static String VALUE = "Value";
 	private final static String LABEL = "Label";
 
-	//Version 1 had no XML tag for XMLVersionNumber
-	//Version 2 added Grid column headers
 	private final static String VersionNumber = "2";
 }
