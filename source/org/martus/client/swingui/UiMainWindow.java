@@ -443,7 +443,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		else
 		{	
 			statusBar.setBulletinId(b.getLocalId());
-			statusBar.setBulletinLastSaved(b.getLastSavedDate());
+			statusBar.setBulletinLastSaved(b.getLastSavedDateTime());
 		}
 	}
 
