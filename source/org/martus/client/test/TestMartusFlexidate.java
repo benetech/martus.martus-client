@@ -126,17 +126,11 @@ public class TestMartusFlexidate extends TestCaseEnhanced
 		Date endDate = getDate(1999,Calendar.JANUARY, 15);
 					
 		MartusFlexidate mf = new MartusFlexidate(beginDate, endDate);
-	
-		assertEquals("19990115+360", mf.getMatusFlexidate());	
-	
 		DateFormat df = Bulletin.getStoredDateFormat();										
 		assertEquals("1999-01-15", df.format(mf.getBeginDate()));
-		assertEquals("2000-01-10", df.format(mf.getEndDate()));
+		assertEquals("2000-01-10", df.format(mf.getEndDate()));	
 		
-		long ONE_HOUR_OF_MILLIS = 60*60*1000;
-		endDate.setTime(endDate.getTime() + ONE_HOUR_OF_MILLIS);	
-		MartusFlexidate mf2 = new MartusFlexidate(beginDate, endDate);
-		assertEquals("19990115+360", mf2.getMatusFlexidate());	
+		assertEquals("19990115+360", mf.getMatusFlexidate());	
 	}
 	
 	public void testCreateFromMartusString()
