@@ -48,6 +48,7 @@ public class UiBackupRecoverSharedKeyPair
 {
 	public UiBackupRecoverSharedKeyPair(UiMainWindow windowToUse)
 	{
+		super();
 		mainWindow = windowToUse;
 		localization = mainWindow.getLocalization();
 	}
