@@ -1,1 +1,56 @@
-﻿Ayuda en línea de Martus
+﻿1. Introducción al programa Martus™
+1a. ¿Qué es Martus™?
+1b. ¿Porque es importante la seguridad cuando uso Martus?
+1c. ¿Como mantiene Martus mi información segura?
+1d. ¿Que tengo que hacer para mantener mi información segura?
+1e. ¿ Cuáles son las limitaciones de la seguridad de Martus?
+1f. ¿Porque tengo que enviar mis boletines a un servidor?
+1g. ¿Porque desarrollamos Martus como un programa de código libre?
+2. Inicio
+2a. Instalación
+2b. Desinstalación
+2c. Actualizar su copia del programa Martus
+2d. Activar su cuenta
+2e. Escoger su contraseña
+2f. Configurar una conexión a un servidor
+2g. Configurar sus preferencias del programa
+3. El área de trabajo de Martus
+4. Crear un boletín
+4a. Rellenar los campos de un boletín
+4b. Personalizar sus boletines
+5. Guardar y modificar sus boletines
+5a. Como guardar un boletín sellado
+5b. Como guardar un borrador
+5c. Como modificar una copia de un boletín sellado
+5d. Como modificar un borrador
+5e. Como desechar un borador
+6. Trabajando con sus boletines
+6a. Carpetas por defecto
+6b. Otras carpetas creadas por Martus
+6c. Como crear nuevas carpetas
+6d. Como desechar y eliminar boletines
+6e. Como organizar sus boletines
+6f. Como mover boletines a su escritorio
+6g. Como bajar sus boletines sellados
+6h. Como bajar sus borradores
+6i. Como bajar boletines creados por oficinas regionales
+6j. Como ver y guardar archivos adjuntos a un boletín
+6k. Como ver boletines dañados
+6l. Como buscar boletines específicos
+6m. Como imprimir boletines
+6n. Como exportar la información de sus boletines
+7. Eliminar sus boletines y la información de su cuenta
+8. Eliminar toda la información en Martus, incluyendo el programa
+9. Para manter su información segura
+9a. La seguridad de Martus y como trabaja
+9b. Como hacer una copia de seguridad de su clave
+9c. Como recuperar su clave de una copia de seguridad
+9d. Precauciones en el uso de su contraseña
+9e. Uso seguro de su ordenador
+9f. Compartiendo su información privada con colegas
+9g. Como permitir que otras cuentas envíen sus boletines a un servidor
+9h. Como cambiar su nombre de usuario o contraseña
+10. Personalizando Martus
+10a. Como usar una plantilla para el campo 'Detalles'
+10b. Personalizando los campos de sus boletines
+11. Preguntas frecuentes
