@@ -49,7 +49,6 @@ import org.martus.common.StandardFieldSpecs;
 import org.martus.common.MartusUtilities.FileVerificationException;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.bulletin.BulletinLoader;
-import org.martus.common.bulletin.BulletinSaver;
 import org.martus.common.bulletin.BulletinZipImporter;
 import org.martus.common.bulletin.Bulletin.DamagedBulletinException;
 import org.martus.common.crypto.MartusCrypto;
@@ -255,7 +254,7 @@ public class ClientBulletinStore extends BulletinStore
 	public void saveBulletin(Bulletin b) throws IOException, CryptoException
 	{
 		cache.remove(b.getUniversalId());
-		BulletinSaver.saveToClientDatabase(b, getWriteableDatabase(), mustEncryptPublicData(), getSignatureGenerator());
+		saveToClientDatabase(b, getWriteableDatabase(), mustEncryptPublicData(), getSignatureGenerator());
 	}
 
 	public synchronized void discardBulletin(BulletinFolder f, Bulletin b) throws IOException

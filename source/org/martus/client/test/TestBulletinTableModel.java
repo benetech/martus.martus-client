@@ -31,7 +31,6 @@ import org.martus.client.core.ClientBulletinStore;
 import org.martus.client.swingui.bulletintable.BulletinTableModel;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.bulletin.BulletinConstants;
-import org.martus.common.bulletin.BulletinSaver;
 import org.martus.common.clientside.test.MockUiLocalization;
 import org.martus.common.crypto.MockMartusSecurity;
 import org.martus.common.database.MockClientDatabase;
@@ -195,7 +194,7 @@ public class TestBulletinTableModel extends TestCaseEnhanced
 
 		MockMartusSecurity otherSecurity = MockMartusSecurity.createOtherClient();
 		Bulletin notMine = new Bulletin(otherSecurity);
-		BulletinSaver.saveToClientDatabase(notMine, app.getWriteableDatabase(), false, otherSecurity);
+		app.getStore().saveBulletinForTesting(notMine);
 		UniversalId uid = notMine.getUniversalId();
 		store.addBulletinToFolder(folderSaved, uid);
 		int row = folderSaved.find(uid);

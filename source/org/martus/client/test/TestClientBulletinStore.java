@@ -50,7 +50,6 @@ import org.martus.common.bulletin.Bulletin;
 import org.martus.common.bulletin.BulletinConstants;
 import org.martus.common.bulletin.BulletinForTesting;
 import org.martus.common.bulletin.BulletinLoader;
-import org.martus.common.bulletin.BulletinSaver;
 import org.martus.common.crypto.MartusCrypto;
 import org.martus.common.crypto.MockMartusSecurity;
 import org.martus.common.crypto.MartusCrypto.CryptoException;
@@ -1184,7 +1183,7 @@ public class TestClientBulletinStore extends TestCaseEnhanced
 		original.addPublicAttachment(a);
 		original.addPrivateAttachment(aPrivate);
 		original.setSealed();
-		BulletinSaver.saveToClientDatabase(original, db, store.mustEncryptPublicData(), store.getSignatureGenerator());
+		store.saveBulletinForTesting(original);
 		File zipFile = createTempFileFromName("$$$MartusTestZipSealed");
 		Bulletin loaded = store.loadFromDatabase(originalKey);
 		BulletinForTesting.saveToFile(db,loaded, zipFile, store.getSignatureVerifier());
@@ -1335,7 +1334,7 @@ public class TestClientBulletinStore extends TestCaseEnhanced
 		original.set(Bulletin.TAGPRIVATEINFO, "private");
 		original.addPublicAttachment(a);
 		original.addPrivateAttachment(aPrivate);
-		BulletinSaver.saveToClientDatabase(original, db, store.mustEncryptPublicData(), store.getSignatureGenerator());
+		store.saveBulletin(original);
 
 		Bulletin loaded = store.loadFromDatabase(originalKey);
 

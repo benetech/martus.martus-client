@@ -35,11 +35,9 @@ import org.martus.client.core.MartusApp;
 import org.martus.client.core.ClientBulletinStore.BulletinAlreadyExistsException;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.bulletin.BulletinConstants;
-import org.martus.common.bulletin.BulletinSaver;
 import org.martus.common.clientside.Localization;
 import org.martus.common.crypto.MartusCrypto;
 import org.martus.common.crypto.MartusCrypto.CryptoException;
-import org.martus.common.database.Database;
 import org.martus.common.test.BulletinForTesting;
 import org.martus.util.UnicodeReader;
 
@@ -100,7 +98,7 @@ public class CreateBadBulletins
 		b.setAllPrivate(false);
 		b.set(BulletinConstants.TAGTITLE, title);
 		b.set("extra", "Data in custom field with unknown stuff");
-		BulletinSaver.saveToClientDatabase(b, (Database)store.getDatabase(), false, security);
+		store.saveBulletin(b);
 		store.createOrFindFolder("Bad Bulletins").add(b);
 		return store;
 	}
