@@ -74,7 +74,7 @@ public class ActionMenuQuickErase extends UiMenuAction
 		String baseTag = "QuickEraseFailed";						
 		if(mainWindow.getApp().deleteAllBulletinsAndUserFolders(options))
 		{
-			mainWindow.eraseAllBulletinsInTableAndPreview();
+			mainWindow.allFolderContentsHaveChanged();
 			if(options.isScrubSelected())
 				baseTag = "QuickEraseScrubWorked";
 			else

@@ -448,14 +448,24 @@ public class BulletinStore
 		return null;
 	}
 
-	public synchronized Vector getAllFolderNames()
+	public synchronized Vector getAllFolders()
 	{
-		Vector names = new Vector();
+		Vector allFolders = new Vector();
 		for(int f = 0; f < getFolderCount(); ++f)
 		{
 			BulletinFolder folder = getFolder(f);
-			String folderName = folder.getName();
-			names.add(folderName);
+			allFolders.add(folder);
+		}
+		return allFolders;
+	}
+	
+	public synchronized Vector getAllFolderNames()
+	{
+		Vector names = new Vector();
+		Vector folders = getAllFolders();
+		for(int f = 0; f < folders.size(); ++f)
+		{
+			names.add(((BulletinFolder)folders.get(f)).getName());
 		}
 		return names;
 	}
