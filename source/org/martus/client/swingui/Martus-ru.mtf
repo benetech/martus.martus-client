@@ -71,6 +71,7 @@
 #      <Field type='GRID'>, </Field>, <Tag>, </Tag>, <Label>, </Label>,
 #      <GridSpecDetails>, </GridSpecDetails>, <Column>, </Column>
 #
+field:translationVersion= Русский 2.01
 
 #________________________=Show all bulletins on this server and on this computer.
 -e9a2-button:AllSummaries=Показать все сводки на данном сервере и на данном компьютере

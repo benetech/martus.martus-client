@@ -79,6 +79,9 @@
 #      translated text), since a continuous block of text is needed.
 #
 !right-to-left
+field:translationVersion=2.01  العربية
+
+
 #________________________=Show all bulletins on this server and on this computer.
 -e9a2-button:AllSummaries=عرض جميع النشرات على هذا الحاسوب و على الخادم
 

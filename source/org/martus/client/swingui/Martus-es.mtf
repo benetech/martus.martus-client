@@ -72,6 +72,8 @@
 #      <GridSpecDetails>, </GridSpecDetails>, <Column>, </Column>
 #
 
+field:translationVersion= Español 2.01
+
 #________________________=Show all bulletins on this server and on this computer.
 -e9a2-button:AllSummaries=Mostrar todos los boletines en este servidor y en este ordenador.
 
