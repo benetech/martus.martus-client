@@ -191,23 +191,22 @@ public class UiAttachmentViewer extends JPanel  implements DragGestureListener, 
 	{
 		public void actionPerformed(ActionEvent ae)
 		{
-			int selection = GetSelection();
-			if(selection == -1)
+			int selectedRow = GetSelection();
+			if(selectedRow == -1)
 				return;
 			if(!mainWindow.getApp().isOurBulletin(bulletinComponent.getCurrentBulletin()))
 			{
 				if(!mainWindow.confirmDlg(mainWindow, "NotYourBulletinViewAttachmentAnyways"))
 					return;
 			}
-
-			String fileName = (String)model.getValueAt(selection,1);
+			String fileName = model.getFilenameAt(selectedRow);
 			Cursor originalCursor = mainWindow.setWaitingCursor();
 			try
 			{
 				File temp = File.createTempFile(extractFileNameOnly(fileName), extractExtentionOnly(fileName));
 				temp.deleteOnExit();
 			
-				AttachmentProxy proxy = model.getAttachmentProxyAt(selection,1);
+				AttachmentProxy proxy = model.getAttachmentProxyAt(selectedRow);
 				Database db = mainWindow.getApp().getStore().getDatabase();
 				BulletinSaver.extractAttachmentToFile(db, proxy, app.getSecurity(), temp);
 
@@ -229,10 +228,10 @@ public class UiAttachmentViewer extends JPanel  implements DragGestureListener, 
 	{
 		public void actionPerformed(ActionEvent ae)
 		{
-			int selection = GetSelection();
-			if(selection == -1)
+			int selectedRow = GetSelection();
+			if(selectedRow == -1)
 				return;
-			String fileName = (String)model.getValueAt(selection,1);
+			String fileName = model.getFilenameAt(selectedRow);
 
 			UiFileChooser chooser = new UiFileChooser();
 			chooser.setSelectedFile(new File(fileName));
@@ -250,7 +249,7 @@ public class UiAttachmentViewer extends JPanel  implements DragGestureListener, 
 						return;
 				}
 				Cursor originalCursor = mainWindow.setWaitingCursor();
-				AttachmentProxy proxy = model.getAttachmentProxyAt(selection,1);
+				AttachmentProxy proxy = model.getAttachmentProxyAt(selectedRow);
 				try
 				{
 					Database db = mainWindow.getApp().getStore().getDatabase();

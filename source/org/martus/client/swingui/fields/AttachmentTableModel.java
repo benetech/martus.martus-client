@@ -82,7 +82,7 @@ class AttachmentTableModel extends AbstractTableModel
 			return mainWindow.getLocalization().getButtonLabel("attachmentSize");
 	}
 
-	public AttachmentProxy getAttachmentProxyAt(int row, int column)
+	public AttachmentProxy getAttachmentProxyAt(int row)
 	{
 		return (AttachmentProxy)attachmentList.get(row);
 	}
@@ -105,6 +105,11 @@ class AttachmentTableModel extends AbstractTableModel
 			list[i] = (AttachmentProxy)attachmentList.get(i);
 	
 		return list;
+	}
+	
+	public String getFilenameAt(int row)
+	{
+		return (String)getValueAt(row, 0);
 	}
 
 	public Object getValueAt(int row, int column)
