@@ -48,9 +48,9 @@ abstract public class RetrieveTableModelNonHQ extends RetrieveTableModel {
 			return getLocalization().getFieldLabel("retrieveflag");
 		case COLUMN_TITLE:
 			return getLocalization().getFieldLabel(Bulletin.TAGTITLE);
-		case COLUMN_DATE:
+		case COLUMN_LAST_DATE_SAVED:
 			return getLocalization().getFieldLabel("BulletinDateSaved");
-		case COLUMN_SIZE:
+		case COLUMN_BULLETIN_SIZE:
 			return getLocalization().getFieldLabel("BulletinSize");
 		default:
 			return "";
@@ -71,9 +71,9 @@ abstract public class RetrieveTableModelNonHQ extends RetrieveTableModel {
 			return new Boolean(summary.isChecked());
 		case COLUMN_TITLE:
 			return summary.getTitle();
-		case COLUMN_DATE:
+		case COLUMN_LAST_DATE_SAVED:
 			return getLocalization().convertStoredDateTimeToDisplay(summary.getDateTimeSaved());
-		case COLUMN_SIZE:
+		case COLUMN_BULLETIN_SIZE:
 			return getSizeInKbytes(summary.getSize());
 		default:
 			return "";
@@ -95,14 +95,14 @@ abstract public class RetrieveTableModelNonHQ extends RetrieveTableModel {
 			return Boolean.class;
 		case COLUMN_TITLE:
 			return String.class;
-		case COLUMN_DATE:
+		case COLUMN_LAST_DATE_SAVED:
 			return String.class;
-		case COLUMN_SIZE:
+		case COLUMN_BULLETIN_SIZE:
 			return Integer.class;
 		default:
 			return null;
 		}
 	}
-	public static final int COLUMN_DATE = 2;
-	public static final int COLUMN_SIZE = 3;
+	public static final int COLUMN_LAST_DATE_SAVED = 2;
+	public static final int COLUMN_BULLETIN_SIZE = 3;
 }

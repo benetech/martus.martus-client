@@ -53,9 +53,9 @@ public class DeleteMyServerDraftsTableModel extends RetrieveTableModelNonHQ
 			return getLocalization().getFieldLabel("DeleteFlag");
 		if(column == COLUMN_TITLE)
 			return getLocalization().getFieldLabel(Bulletin.TAGTITLE);
-		if(column == COLUMN_DATE)
+		if(column == COLUMN_LAST_DATE_SAVED)
 			return getLocalization().getFieldLabel("BulletinDateSaved");
-		if(column == COLUMN_SIZE)
+		if(column == COLUMN_BULLETIN_SIZE)
 			return getLocalization().getFieldLabel("BulletinSize");
 		return "";
 	}
