@@ -49,9 +49,8 @@ public class UiBulletinTablePane extends UiScrollPane
 		table = new UiBulletinTable(parent);
 
 		setVerticalScrollBarPolicy(UiScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-		getViewport().setScrollMode(JViewport.SIMPLE_SCROLL_MODE);
-		getViewport().add(table);
-
+		viewport.setScrollMode(JViewport.SIMPLE_SCROLL_MODE);
+		viewport.add(table);
 		new DropTarget(getViewport(), table.getDropAdapter());
 		addMouseListener(new TablePaneMouseAdapter());
 

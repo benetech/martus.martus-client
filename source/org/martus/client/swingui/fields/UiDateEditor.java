@@ -31,17 +31,16 @@ import java.text.ParseException;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
-
 import javax.swing.Box;
 import javax.swing.JComponent;
 import javax.swing.JPanel;
-
 import org.martus.common.FieldSpec;
 import org.martus.common.StandardFieldSpecs;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.clientside.DateUtilities;
 import org.martus.common.clientside.UiBasicLocalization;
 import org.martus.swing.UiComboBox;
+import org.martus.swing.Utilities;
 
 public class UiDateEditor extends UiField
 {
@@ -104,15 +103,18 @@ public class UiDateEditor extends UiField
 	private static void buildMonth(Box box, UiBasicLocalization localizationToUse,UiComboBox yCombo, UiComboBox mCombo, UiComboBox dCombo)
 	{
 		String mdyOrder = DateUtilities.getMdyOrder(localizationToUse.getCurrentDateFormatCode());
+		JComponent[] dateInOrderLeftToRight = new JComponent[3];
+		
 		for(int i = 0; i < mdyOrder.length(); ++i)
 		{
 			switch(mdyOrder.charAt(i))
 			{
-				case 'd': box.add(dCombo);	break;
-				case 'm': box.add(mCombo);	break;
-				case 'y': box.add(yCombo);	break;
+				case 'd': dateInOrderLeftToRight[i]=dCombo;	break;
+				case 'm': dateInOrderLeftToRight[i]=mCombo;	break;
+				case 'y': dateInOrderLeftToRight[i]=yCombo;	break;
 			}
-		}			
+		}	
+		Utilities.addComponentsRespectingOrientation(box, dateInOrderLeftToRight);
 	}
 
 	public JComponent getComponent()

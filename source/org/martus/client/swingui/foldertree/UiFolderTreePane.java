@@ -56,8 +56,8 @@ public class UiFolderTreePane extends UiScrollPane
 		tree = new UiFolderTree(this, model, store, parent);
 		tree.addMouseListener(new FolderTreeMouseAdapter());
 
-		getViewport().setScrollMode(JViewport.SIMPLE_SCROLL_MODE);
-		getViewport().add(tree);
+		viewport.setScrollMode(JViewport.SIMPLE_SCROLL_MODE);
+		viewport.add(tree);
 	}
 
 	public boolean selectFolder(String internalFolderName)

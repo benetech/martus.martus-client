@@ -132,6 +132,7 @@ import org.martus.common.packet.UniversalId;
 import org.martus.swing.JComponentVista;
 import org.martus.swing.PrintPageFormat;
 import org.martus.swing.UiFileChooser;
+import org.martus.swing.UiLanguageDirection;
 import org.martus.swing.UiNotifyDlg;
 import org.martus.swing.Utilities;
 import org.martus.swing.Utilities.Delay;
@@ -1695,7 +1696,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	private void initializeViews()
 	{
 		getContentPane().removeAll();
-
+		getContentPane().setComponentOrientation(UiLanguageDirection.getComponentOrientation());
 		setTitle(getLocalization().getWindowTitle("main"));
 
 		preview = new UiBulletinPreviewPane(this);
@@ -1706,7 +1707,11 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		previewSplitter = new JSplitPane(JSplitPane.VERTICAL_SPLIT, table, preview);
 		previewSplitter.setDividerLocation(uiState.getCurrentPreviewSplitterPosition());
 
-		folderSplitter = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, folders, previewSplitter);
+		if(UiLanguageDirection.isRightToLeftLanguage())
+			folderSplitter = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, previewSplitter, folders);
+		else
+			folderSplitter = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, folders, previewSplitter);
+		
 		folderSplitter.setDividerLocation(uiState.getCurrentFolderSplitterPosition());
 
 		getContentPane().add(folderSplitter);
