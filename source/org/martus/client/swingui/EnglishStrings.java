@@ -180,6 +180,7 @@ public class EnglishStrings
 "wintitle:notifyAlreadyViewingThisVersion=Bulletin Version Already Being Viewed",
 "wintitle:notifyBulletinVersionNotInSystem=Bulletin Version Not Found",
 "wintitle:notifyHeadquarterLabelDuplicate=Headquarter Label Invalid",
+"wintitle:notifyNoHQsSelected=No HQ's Selected",
 
 "wintitle:inputservername=Server Name",
 "wintitle:inputserverpubliccode=Server Identification",
@@ -465,7 +466,7 @@ public class EnglishStrings
 "field:confirmSetImportPublicKeyeffect=By clicking on Yes you are authorizing this client to view all portions of your bulletins.",
 "field:confirmWarningSwitchToNormalKeyboardcause=Warning! Using the regular keyboard to enter your password greatly reduces the security of the Martus system, and could make it easier for an attacker to view your private data.",
 "field:confirmWarningSwitchToNormalKeyboardeffect=If this is a Headquarters computer, it is especially important to use the on-screen keyboard, because an attacker could gain access to all the private data that you are authorized to view.",
-"field:confirmClearHQInformationcause=You have chosen to remove your Headquarters account.  Any existing saved bulletins will still be visible by the old Headquarters.  If you want to disallow Headquarters viewing access to previously created Draft bulletins they must be re-saved after revoking the Headquarters.  Any sealed bulletins CANNOT be reset to be non-viewable by the Headquarters.",
+"field:confirmClearHQInformationcause=You have chosen to remove all selected Headquarters account.  Any existing saved bulletins will still be visible by the old Headquarters.  If you want to disallow Headquarters viewing access to previously created Draft bulletins they must be re-saved after revoking the Headquarters.  Any sealed bulletins CANNOT be reset to be non-viewable by the Headquarters.",
 "field:confirmClearHQInformationeffect=By clicking on Yes, any draft or sealed bulletins saved in the future will no longer be accessible by your Headquarters.",
 "field:confirmCloneMySealedAsDraftcause=You have chosen to modify one of your sealed bulletins, thus creating a new version of that bulletin.",
 "field:confirmCloneMySealedAsDrafteffect=Clicking on Yes will create a new version of this bulletin that initially contains all the same information.",
@@ -642,6 +643,7 @@ public class EnglishStrings
 "field:notifyAlreadyViewingThisVersioncause=You currently are viewing this version of the bulletin.",
 "field:notifyBulletinVersionNotInSystemcause=The bulletin version you are trying to view is currently not on your system.",
 "field:notifyHeadquarterLabelDuplicatecause=The Headquarters label you entered is already assigned to another Headquarters account.  Please use a different label.",
+"field:notifyNoHQsSelectedcause=Please select a Headquarters first.",
 
 "field:messageServerNewscause=The current server has sent this message:",
 "field:messageErrorDateInFuturecause=This date occurs in the future:",

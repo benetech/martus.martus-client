@@ -61,6 +61,11 @@ public class HeadQuarterEntry
 		return key.getLabel();
 	}
 	
+	public void setLabel(String newLabel)
+	{
+		key.setLabel(newLabel);
+	}
+	
 	public String getPublicCode()
 	{
 		try

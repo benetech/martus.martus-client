@@ -50,8 +50,16 @@ public abstract class HeadQuartersTableModel extends UiTableModel
 	public void addNewHeadQuarterEntry(HeadQuarterEntry entryToAdd)
 	{
 		entries.add(entryToAdd);
+		int rowAdded = entries.size();
+		fireTableRowsInserted(rowAdded, rowAdded);
 	}
 	
+	public void removeRow(int row)
+	{
+		entries.remove(row);
+		fireTableRowsDeleted(row, row);
+	}
+
 	public HQKeys getAllSelectedHeadQuarterKeys()
 	{
 		HQKeys keys = new HQKeys();
@@ -114,10 +122,14 @@ public abstract class HeadQuartersTableModel extends UiTableModel
 	public Object getValueAt(int row, int column)
 	{
 		HeadQuarterEntry entry = (HeadQuarterEntry)entries.get(row);
+		if(column == COLUMN_DEFAULT)
+			return new Boolean(entry.isDefault());
 		if(column == COLUMN_SELECTED)
 			return new Boolean(entry.isSelected());
 		if(column == COLUMN_LABEL)
 			return entry.getLabel();
+		if(column == COLUMN_PUBLIC_CODE)
+			return entry.getPublicCode();
 		return "";
 	}
 
@@ -134,8 +146,12 @@ public abstract class HeadQuartersTableModel extends UiTableModel
 		{
 			entry.setDefault(((Boolean)value).booleanValue());
 		}
+		else if(column == COLUMN_LABEL)
+		{
+			entry.setLabel((String)value);
+		}
 	}
-
+	
 	public Class getColumnClass(int column)
 	{
 		if(column == COLUMN_SELECTED || column == COLUMN_DEFAULT)

@@ -50,8 +50,7 @@ public class IntegerRenderer extends DefaultTableCellRenderer
 			int row, int column)
 	{
 		Component cell = oldIntegerRenderer.getTableCellRendererComponent(tableToUse, value, isSelected, hasFocus, row, column);
-		if(enabledBackgroundColor == null)
-			enabledBackgroundColor = cell.getBackground();
+		Color enabledBackgroundColor = cell.getBackground();
 		if(tableModel.isEnabled(row))
 		{
 			cell.setEnabled(true);
@@ -66,7 +65,6 @@ public class IntegerRenderer extends DefaultTableCellRenderer
 		}
 		return cell;
 	}
-	Color enabledBackgroundColor;
 	Color disabledBackgroundColor;
 	TableCellRenderer oldIntegerRenderer;
 	UiTableModel tableModel;

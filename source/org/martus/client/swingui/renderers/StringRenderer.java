@@ -27,11 +27,8 @@ package org.martus.client.swingui.renderers;
 
 import java.awt.Color;
 import java.awt.Component;
-
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
-import javax.swing.table.TableCellRenderer;
-
 import org.martus.client.swingui.tablemodels.UiTableModel;
 
 public class StringRenderer extends DefaultTableCellRenderer
@@ -61,6 +58,5 @@ public class StringRenderer extends DefaultTableCellRenderer
 	}
 	Color normalBackgroundColor;
 	Color disabledBackgroundColor;
-	TableCellRenderer oldStringRenderer;
 	UiTableModel tableModel;
 }

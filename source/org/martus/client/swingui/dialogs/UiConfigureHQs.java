@@ -26,35 +26,30 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.swingui.dialogs;
 
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.io.File;
-import java.util.Vector;
-
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
-import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.border.EmptyBorder;
-import javax.swing.border.LineBorder;
 import javax.swing.filechooser.FileFilter;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableCellRenderer;
-import javax.swing.table.TableModel;
-
 import org.martus.client.core.MartusApp;
+import org.martus.client.swingui.HeadQuarterEntry;
+import org.martus.client.swingui.HeadQuartersTableModel;
+import org.martus.client.swingui.HeadQuartersTableModelConfiguration;
 import org.martus.client.swingui.UiMainWindow;
+import org.martus.client.swingui.renderers.BooleanRenderer;
+import org.martus.client.swingui.renderers.StringRenderer;
 import org.martus.common.HQKey;
 import org.martus.common.HQKeys;
 import org.martus.common.HQKeys.HQsException;
 import org.martus.common.clientside.UiBasicLocalization;
-import org.martus.common.clientside.UiTextField;
 import org.martus.common.crypto.MartusCrypto;
 import org.martus.swing.UiButton;
 import org.martus.swing.UiFileChooser;
@@ -83,11 +78,9 @@ public class UiConfigureHQs extends JDialog
 		add.addActionListener(new AddHandler());
 		remove = new UiButton(localization.getButtonLabel("ConfigureHQsRemove"));
 		remove.addActionListener(new RemoveHandler());
-		remove.setEnabled(false);
 
 		renameLabel = new UiButton(localization.getButtonLabel("ConfigureHQsReLabel"));
 		renameLabel.addActionListener(new RenameHandler());
-		renameLabel.setEnabled(false);
 		
 		Box hBox1 = Box.createHorizontalBox();
 		hBox1.add(new UiLabel(localization.getFieldLabel("HQsSetAsProxyUploader")));
@@ -98,21 +91,8 @@ public class UiConfigureHQs extends JDialog
 		hBox2.add(new UiLabel(localization.getFieldLabel("ConfigureHQsCurrentHQs")));
 		hBox2.add(Box.createHorizontalGlue());
 		panel.add(hBox2);
-		
-		model = new HQTableModel();
-		Vector columnHeaders = new Vector();
-		String publicCodeColumnHeader = localization.getFieldLabel("ConfigureHQColumnHeaderPublicCode");
-		columnHeaders.add(publicCodeColumnHeader);
-		String userLabelColumnHeader = localization.getFieldLabel("ConfigureHQColumnHeaderLabel");
-		columnHeaders.add(userLabelColumnHeader);
-		model.setColumnIdentifiers(columnHeaders);
-		
-		
-		table = new HQTable(model);
-		table.addKeyListener(new TableListener());
-		table.setColumnSelectionAllowed(false);
-		table.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
-		table.setShowGrid(true);
+		model = new HeadQuartersTableModelConfiguration(localization);
+		table = createHeadquartersTable(model);
 		
 		try
 		{
@@ -124,10 +104,8 @@ public class UiConfigureHQs extends JDialog
 		{
 			e.printStackTrace();
 		}
-		if(model.getRowCount()>0)
-			table.setRowSelectionInterval(0,0);
+		enableDisableButtons();
 		
-		table.resizeTable(DEFAULT_VIEABLE_ROWS);
 		UiScrollPane scroller = new UiScrollPane(table);
 		
 		panel.add(scroller);
@@ -150,29 +128,35 @@ public class UiConfigureHQs extends JDialog
 		setVisible(true);
 	}
 	
-	class HQTableModel extends DefaultTableModel
+	void enableDisableButtons()
 	{
-		public boolean isCellEditable(int row, int column)
-		{
-			return false;
-		}
+		boolean enableButtons = false;
+		if(table.getRowCount()>0)
+			enableButtons = true;
+		remove.setEnabled(enableButtons);
+		renameLabel.setEnabled(enableButtons);
+
 	}
 	
-	class HQTable extends UiTable
+	protected UiTable createHeadquartersTable(HeadQuartersTableModel hqModel) 
 	{
-		public HQTable(TableModel model)
-		{
-			super(model);
-			hqRenderer = new HQCellRenderer();
-		}
+		UiTable hqTable = new UiTable(hqModel);
+		Color disabledBackgroundColor = getBackground();
+		hqTable.setDefaultRenderer(Boolean.class, new BooleanRenderer(hqModel, disabledBackgroundColor, hqTable.getDefaultRenderer(Boolean.class)));
+		hqTable.setDefaultRenderer(String.class, new StringRenderer(hqModel, disabledBackgroundColor));
+
+		hqTable.createDefaultColumnsFromModel();
+		hqTable.addKeyListener(new TableListener());
+		hqTable.setColumnSelectionAllowed(false);
+		hqTable.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+		hqTable.setShowGrid(true);
+		hqTable.setMaxColumnWidthToHeaderWidth(0);
+		hqTable.resizeTable(DEFAULT_VIEABLE_ROWS);
 		
-		public TableCellRenderer getCellRenderer(int row, int column)
-		{
-			return hqRenderer;
-		}
-		TableCellRenderer hqRenderer;
+		return hqTable;
 	}
 
+	
 	class TableListener implements KeyListener
 	{
 		public void keyPressed(KeyEvent e)
@@ -196,34 +180,6 @@ public class UiConfigureHQs extends JDialog
 		}
 	}
 
-	
-	class HQCellRenderer implements TableCellRenderer
-	{
-		public Component getTableCellRendererComponent(JTable tableToUse, Object value, boolean isSelected, boolean hasFocus, int row, int column)
-		{
-			UiTextField cell = new UiTextField((String)value);
-			cell.setBorder(new EmptyBorder(0,0,0,0));
-
-			if(hasFocus)
-				cell.setBorder(new LineBorder(Color.BLUE, 1));
-				
-			if(isSelected)
-			{
-				cell.setBackground(Color.DARK_GRAY);
-				cell.setForeground(Color.WHITE);
-				remove.setEnabled(true);
-				renameLabel.setEnabled(true);
-			}
-			else
-			{
-				cell.setBackground(Color.WHITE);
-				cell.setForeground(Color.BLACK);
-			}
-			return cell;
-		}
-	}
-	
-	
 	class CancelHandler implements ActionListener
 	{
 		public void actionPerformed(ActionEvent ae)
@@ -237,24 +193,30 @@ public class UiConfigureHQs extends JDialog
 	{
 		public void actionPerformed(ActionEvent ae)
 		{
+			int selection = table.getSelectedRow();
+			if(selection == -1)
+			{
+				mainWindow.notifyDlg("NoHQsSelected");
+				return;
+			}
 			int rowCount = model.getRowCount();
 			try
 			{
-				for(int i = 0; i <rowCount ; ++i)
+				for(int i = rowCount-1; i >=0 ; --i)
 				{
 					if(table.isRowSelected(i))
 					{
-						Object hQCodeToBeRemoved = table.getValueAt(i,PUBLIC_CODE_COLUMN);
+						Object hQCodeToBeReNamed = table.getValueAt(i, model.COLUMN_PUBLIC_CODE);
 						for(int j = 0; j<hQKeys.size(); ++j)
 						{
 							HQKey thisKey = hQKeys.get(j);
-							if ( thisKey.getPublicCode().equals(hQCodeToBeRemoved))
+							if ( thisKey.getPublicCode().equals(hQCodeToBeReNamed))
 							{
 								String newLabel = getHQLabel(thisKey.getPublicCode(), thisKey.getLabel());
 								if(newLabel== null)
 									break;
 								thisKey.setLabel(newLabel);
-								model.setValueAt(newLabel, i, LABEL_COLUMN);
+								model.setValueAt(newLabel, i, model.COLUMN_LABEL);
 								break;
 							}
 						}
@@ -292,6 +254,12 @@ public class UiConfigureHQs extends JDialog
 	{
 		public void actionPerformed(ActionEvent ae)
 		{
+			int selection = table.getSelectedRow();
+			if(selection == -1)
+			{
+				mainWindow.notifyDlg("NoHQsSelected");
+				return;
+			}
 			if(!mainWindow.confirmDlg("ClearHQInformation"))
 				return;
 			
@@ -302,7 +270,7 @@ public class UiConfigureHQs extends JDialog
 				{
 					if(table.isRowSelected(i))
 					{
-						Object hQCodeToBeRemoved = table.getValueAt(i,PUBLIC_CODE_COLUMN);
+						Object hQCodeToBeRemoved = table.getValueAt(i,model.COLUMN_PUBLIC_CODE);
 						for(int j = 0; j<hQKeys.size(); ++j)
 						{
 							if (hQKeys.get(j).getPublicCode().equals(hQCodeToBeRemoved))
@@ -314,8 +282,6 @@ public class UiConfigureHQs extends JDialog
 						model.removeRow(i);
 					}
 				}
-				remove.setEnabled(false);
-				renameLabel.setEnabled(false);
 				updateConfigInfo();
 			}
 			catch (InvalidBase64Exception e)
@@ -332,21 +298,15 @@ public class UiConfigureHQs extends JDialog
 			String publicCode = publicKey.getPublicCode();
 			for(int i = 0; i < table.getRowCount(); ++i)
 			{
-				if(((String)model.getValueAt(i, PUBLIC_CODE_COLUMN)).equals(publicCode))
+				if(((String)model.getValueAt(i, model.COLUMN_PUBLIC_CODE)).equals(publicCode))
 				{
 					mainWindow.notifyDlg("HQKeyAlradyExists");
-					table.setRowSelectionInterval(i,i);
 					return;
 				}
 			}
-			Vector row = new Vector();
-			row.add(publicCode);
-			String label = publicKey.getLabel();
-			row.add(label);
-			model.addRow(row);
+			HeadQuarterEntry entry = new HeadQuarterEntry(publicKey);
+			model.addNewHeadQuarterEntry(entry);
 			hQKeys.add(publicKey);
-			int current = table.getRowCount()-1;
-			table.setRowSelectionInterval(current,current);
 		}
 		catch (InvalidBase64Exception e)
 		{
@@ -356,6 +316,7 @@ public class UiConfigureHQs extends JDialog
 	
 	void updateConfigInfo()
 	{
+		enableDisableButtons();
 		mainWindow.setAndSaveHQKeysInConfigInfo(hQKeys);
 	}
 	
@@ -452,12 +413,10 @@ public class UiConfigureHQs extends JDialog
 	
 	UiMainWindow mainWindow;
 	UiTable table;
-	DefaultTableModel model;
+	HeadQuartersTableModelConfiguration model;
 	JButton remove;
 	JButton renameLabel;
 	UiBasicLocalization localization;
 	private static final int DEFAULT_VIEABLE_ROWS = 5;
-	private static final int PUBLIC_CODE_COLUMN = 0;
-	private static final int LABEL_COLUMN = 1;
 	HQKeys hQKeys;
 }

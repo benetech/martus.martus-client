@@ -50,8 +50,7 @@ public 	class BooleanRenderer extends DefaultTableCellRenderer
 			int row, int column)
 	{
 		Component cell = oldBooleanRenderer.getTableCellRendererComponent(tableToUse, value, isSelected, hasFocus, row, column);
-		if(enabledBackgroundColor == null)
-			enabledBackgroundColor = cell.getBackground();
+		Color enabledBackgroundColor = cell.getBackground();
 		if(tableModel.isEnabled(row))
 		{
 			cell.setEnabled(true);
@@ -66,7 +65,6 @@ public 	class BooleanRenderer extends DefaultTableCellRenderer
 		}
 		return cell;
 	}
-	Color enabledBackgroundColor;
 	Color disabledBackgroundColor;
 	UiTableModel tableModel;
 	TableCellRenderer oldBooleanRenderer;
