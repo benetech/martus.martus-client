@@ -29,14 +29,9 @@ package org.martus.client.swingui.dialogs;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Cursor;
-import java.awt.Dimension;
-import java.awt.Point;
-import java.awt.Rectangle;
-
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.border.LineBorder;
-
 import org.martus.swing.Utilities;
 
 public class UiModelessBusyDlg extends JDialog
@@ -52,10 +47,7 @@ public class UiModelessBusyDlg extends JDialog
 		getContentPane().add(new JLabel(message), BorderLayout.CENTER);
 		getRootPane().setBorder(new LineBorder(Color.black, 5));
 		setUndecorated(true);
-		pack();
-		Dimension size = getSize();
-		Rectangle screen = new Rectangle(new Point(0, 0), getToolkit().getScreenSize());
-		setLocation(Utilities.center(size, screen));
+		Utilities.centerDlg(this);
 		setResizable(false);
 		origCursor = getCursor();
 		setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));

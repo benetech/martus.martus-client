@@ -32,7 +32,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.HashMap;
 import java.util.Map;
-
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -41,7 +40,6 @@ import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.common.clientside.Localization;
 import org.martus.common.clientside.UiBasicLocalization;
@@ -129,6 +127,7 @@ public class UiShowScrollableTextDlg extends JDialog implements ActionListener
 			e.printStackTrace();
 		}
 	}
+
 
 	public void actionPerformed(ActionEvent ae)
 	{

@@ -269,7 +269,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 			}
 			else
 			{
-				Dimension screenSize = Utilities.getRectangle().getSize();
+				Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 				setLocation(screenSize.width + 1, screenSize.height + 1);
 				show();
 				toFront();
@@ -1824,8 +1824,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		checkServerStatus();	
 		getContentPane().add(statusBar, BorderLayout.SOUTH ); 
 
-		Toolkit toolkit = Toolkit.getDefaultToolkit();
-		Dimension screenSize = toolkit.getScreenSize();
+		Dimension screenSize = Utilities.getViewableScreenSize(this);
 		Dimension appDimension = uiState.getCurrentAppDimension();
 		Point appPosition = uiState.getCurrentAppPosition();
 		boolean showMaximized = false;

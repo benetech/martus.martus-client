@@ -52,8 +52,7 @@ public class UiClipboardUtilities
 
 	public static Transferable getTransferableFromClipboard()
 	{
-		Toolkit toolkit = Toolkit.getDefaultToolkit();
-		Clipboard clipboard = toolkit.getSystemClipboard();
+		Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
 		return clipboard.getContents(null);
 	}
 

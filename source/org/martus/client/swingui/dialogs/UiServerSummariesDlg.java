@@ -31,7 +31,6 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.GridLayout;
-import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Vector;
@@ -104,7 +103,7 @@ public abstract class UiServerSummariesDlg extends JDialog
 
 	private void setScreenSize()
 	{
-		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+		Dimension dim = Utilities.getViewableScreenSize(this);
 		double width = dim.getWidth()- (dim.getWidth()* 0.25);
 		dim.setSize(width, getSize().getHeight());
 		setSize(dim);

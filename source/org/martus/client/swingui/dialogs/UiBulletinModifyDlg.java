@@ -30,7 +30,6 @@ import java.awt.BorderLayout;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Point;
-import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
@@ -105,8 +104,7 @@ public class UiBulletinModifyDlg extends JFrame implements ActionListener, Windo
 			setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 			addWindowListener(this);
 
-			Toolkit toolkit = Toolkit.getDefaultToolkit();
-			Dimension screenSize = toolkit.getScreenSize();
+			Dimension screenSize = Utilities.getViewableScreenSize(this);
 			Dimension editorDimension = observerToUse.getBulletinEditorDimension();
 			Point editorPosition = observerToUse.getBulletinEditorPosition();
 			boolean showMaximized = false;
