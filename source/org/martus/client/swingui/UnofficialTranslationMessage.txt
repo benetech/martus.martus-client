@@ -2,3 +2,6 @@
 If you only want to use official translations then exit Martus, remove the file #UseUnofficialTranslationFiles# from your Martus directory, and restart Martus.
 
 
+AVISO: Esta traducción no fue creada por el equipo Martus, y tal vez no se le debe confiar.
+Si Ud. solamente desea traducciones oficiales, sálga de Martus, y quite #UseUnofficialTranslationFiles# de su directorio Martus, y reempiézelo.
+
