@@ -26,7 +26,6 @@ Boston, MA 02111-1307, USA.
 
 package org.martus.client.swingui.bulletincomponent;
 
-import java.awt.BorderLayout;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -34,12 +33,12 @@ import java.text.DateFormat;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
+
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 import javax.swing.border.EtchedBorder;
-import org.martus.client.swingui.UiLocalization;
+
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.common.HQKey;
 import org.martus.common.HQKeys;
@@ -53,135 +52,96 @@ public class UiBulletinComponentHeader extends UiBulletinComponentSection
 	UiBulletinComponentHeader(UiMainWindow mainWindowToUse, String tagQualifierToUse)
 	{
 		super(mainWindowToUse);
-		UiMainWindow mainWindow = getMainWindow();
-		updateSectionBorder(false);
+		tagQualifier = tagQualifierToUse;
 		
-		String iconFileName = "BulletinViewHeading.png";
-		UiLocalization localization = mainWindow.getLocalization();
-		setSectionIconAndTitle(iconFileName, localization.getFieldLabel("BulletinViewHeading"));
+		String buttonText = getLocalization().getButtonLabel("BulletinDetails");
+		JButton detailsButton = new JButton(buttonText);
+		detailsButton.addActionListener(new DetailsListener());
+		add(detailsButton, ParagraphLayout.NEW_PARAGRAPH);
+		add(warningIndicator);
 
-		summary = new HqSummary(mainWindow, tagQualifierToUse);
-		add(summary);
-		
-		bulletinLastSaved = new LastSaved(mainWindow);
-		add(new JLabel(""), ParagraphLayout.NEW_PARAGRAPH);
-		add(bulletinLastSaved);
+		add(new JLabel(getLocalization().getFieldLabel("BulletinDateSaved")), ParagraphLayout.NEW_PARAGRAPH);
+		dateTime = new JLabel("");
+		EtchedBorder b = new EtchedBorder();
+		dateTime.setBorder(b);
+		add(dateTime);
+
+		hqLabel = new JLabel(getLocalization().getFieldLabel("HQSummaryLabel"));
+		add(hqLabel, ParagraphLayout.NEW_PARAGRAPH);
+		hqSummary = new JLabel("");
+		hqSummary.setFont(hqSummary.getFont().deriveFont(Font.BOLD));
+		add(hqSummary);
 	}
 
 	public void setHqKeys(HQKeys keys)
 	{
-		summary.setHqKeys(keys);
+		hqList = keys;
+		int numberOfHqs = hqList.size();
+		if(numberOfHqs > 0)
+		{
+			hqSummary.setText(getSummaryString(numberOfHqs));
+			hqLabel.setVisible(true);
+			hqSummary.setVisible(true);
+		}
+		else
+		{
+			hqSummary.setText("");
+			hqLabel.setVisible(false);
+			hqSummary.setVisible(false);
+		}
 	}
 	
 	public void setLastSaved(long time)
 	{
 		if(time == 0)
 		{
-			bulletinLastSaved.setVisible(false);
+			dateTime.setVisible(false);
 		}
 		else
 		{
-			bulletinLastSaved.setTime(time);
-			bulletinLastSaved.setVisible(true);
+			setTime(time);
+			dateTime.setVisible(true);
 		}
 	}
 	
-	static class LastSaved extends JPanel
+	void setTime(long time)
 	{
-		LastSaved(UiMainWindow mainWindowToUse)
-		{
-			mainWindow = mainWindowToUse;
-			add(new JLabel(getLocalization().getFieldLabel("BulletinLastSaved")));
-			dateTime = new JLabel("");
-			EtchedBorder b = new EtchedBorder();
-			dateTime.setBorder(b);
-			add(dateTime);
-		}
-		
-		void setTime(long time)
-		{
-			Calendar cal = new GregorianCalendar();
-			cal.setTimeInMillis(time);		
-			String rawDateTime = DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT).format(cal.getTime());
-			String formatted = getLocalization().convertStoredDateTimeToDisplay(rawDateTime);
-			dateTime.setText("  " + formatted + "  ");
-		}
-		
-		UiLocalization getLocalization()
-		{
-			return mainWindow.getLocalization();
-		}
-		
-		UiMainWindow mainWindow;
-		JLabel dateTime;
+		Calendar cal = new GregorianCalendar();
+		cal.setTimeInMillis(time);		
+		String rawDateTime = DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT).format(cal.getTime());
+		String formatted = getLocalization().convertStoredDateTimeToDisplay(rawDateTime);
+		dateTime.setText("  " + formatted + "  ");
 	}
-
-	static class HqSummary extends JPanel
+	
+	private String getSummaryString(int numberOfHqs)
 	{
-		HqSummary(UiMainWindow mainWindowToUse, String tagQualifierToUse)
+		String summaryText = getLocalization().getFieldLabel(tagQualifier + "BulletinHQInfo");
+		try
 		{
-			mainWindow = mainWindowToUse;
-			tagQualifier = tagQualifierToUse;
-			
-			label = new JLabel();
-			label.setFont(label.getFont().deriveFont(Font.BOLD));
-			
-			String buttonText = getLocalization().getButtonLabel("HQDetails");
-			JButton detailsButton = new JButton(buttonText);
-			detailsButton.addActionListener(new DetailsListener());
-			add(label, BorderLayout.WEST);
-			add(detailsButton, BorderLayout.EAST);
+			HashMap tokenReplacement = new HashMap();
+			tokenReplacement.put("#N#", Integer.toString(numberOfHqs));
+			summaryText = TokenReplacement.replaceTokens(summaryText, tokenReplacement);
 		}
-		
-		void setHqKeys(HQKeys hqKeys)
+		catch (Exception e)
 		{
-			hqList = hqKeys;
-			int numberOfHqs = hqList.size();
-			if(numberOfHqs > 0)
-			{
-				label.setText(getSummaryString(numberOfHqs));
-				setVisible(true);
-			}
-			else
-			{
-				label.setText("");
-				setVisible(false);
-			}
+			e.printStackTrace();
 		}
-		
-		private UiLocalization getLocalization()
+		return summaryText;
+	}
+	
+	class DetailsListener implements ActionListener
+	{
+		public void actionPerformed(ActionEvent e)
 		{
-			return mainWindow.getLocalization();
-		}
-		
-		private String getSummaryString(int numberOfHqs)
-		{
-			String summaryText = getLocalization().getFieldLabel(tagQualifier + "BulletinHQInfo");
-			try
+			String listOfHqPublicKeys = "";
+			HashMap map = new HashMap();
+			if(hqList.size() > 0)
 			{
-				HashMap tokenReplacement = new HashMap();
-				tokenReplacement.put("#N#", Integer.toString(numberOfHqs));
-				summaryText = TokenReplacement.replaceTokens(summaryText, tokenReplacement);
-			}
-			catch (Exception e)
-			{
-				e.printStackTrace();
-			}
-			return summaryText;
-		}
-		
-		class DetailsListener implements ActionListener
-		{
-			public void actionPerformed(ActionEvent e)
-			{
-				String information = mainWindow.getLocalization().getFieldLabel("HQsSetAsProxyUploader") + "\n\n";
-
-				String listOfHqPublicKeys = information;
 				for(int i=0; i < hqList.size(); ++i)
 				{
 					String thisHqCode;
 					HQKey hqKey = getHqPublicCode(i);
-					String thisHqlabel = mainWindow.getApp().getHQLabelIfPresent(hqKey.getPublicKey());
+					String thisHqlabel = getMainWindow().getApp().getHQLabelIfPresent(hqKey.getPublicKey());
 					try
 					{
 						thisHqCode = hqKey.getPublicCode();
@@ -191,36 +151,35 @@ public class UiBulletinComponentHeader extends UiBulletinComponentSection
 						e1.printStackTrace();
 						thisHqCode = hqKey.getPublicKey();
 					}
-					listOfHqPublicKeys += thisHqCode +" : " + thisHqlabel+ "\n";
+					if(thisHqlabel.length() > 0)
+						thisHqCode += " : " + thisHqlabel;
+					listOfHqPublicKeys += thisHqCode + "\n";
 				}
-				HashMap map = new HashMap();
-				map.put("#L#", listOfHqPublicKeys);
-				
-				JFrame parent = mainWindow.getCurrentActiveFrame();
-				mainWindow.notifyDlg(parent, tagQualifier + "ViewHqList", map);
 			}
-
-			private HQKey getHqPublicCode(int i)
-			{
-				try
-				{
-					return hqList.get(i);
-				}
-				catch (Exception e)
-				{
-					e.printStackTrace();
-				}
-				HQKey unknown = new HQKey("???", "???");
-				return unknown;
-			}
+			map.put("#L#", listOfHqPublicKeys);
+			
+			JFrame parent = getMainWindow().getCurrentActiveFrame();
+			getMainWindow().notifyDlg(parent, tagQualifier + "ViewBulletinDetails", map);
 		}
-		
-		UiMainWindow mainWindow;
-		String tagQualifier;
-		JLabel label;
-		HQKeys hqList;
+
+		private HQKey getHqPublicCode(int i)
+		{
+			try
+			{
+				return hqList.get(i);
+			}
+			catch (Exception e)
+			{
+				e.printStackTrace();
+			}
+			HQKey unknown = new HQKey("???", "???");
+			return unknown;
+		}
 	}
 
-	HqSummary summary;
-	LastSaved bulletinLastSaved;
+	String tagQualifier;
+	JLabel dateTime;
+	JLabel hqLabel;
+	JLabel hqSummary;
+	HQKeys hqList;
 }

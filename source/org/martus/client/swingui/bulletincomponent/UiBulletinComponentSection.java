@@ -58,12 +58,11 @@ abstract public class UiBulletinComponentSection extends JPanel
 		sectionHeading = new JLabel("", null, JLabel.LEFT);
 		sectionHeading.setVerticalTextPosition(JLabel.TOP);
 		sectionHeading.setFont(sectionHeading.getFont().deriveFont(Font.BOLD));
-
-		warningIndicator = new UiWarningLabel();
-
-		clearWarningIndicator();
 		add(sectionHeading);
+		
+		warningIndicator = new UiWarningLabel();
 		add(warningIndicator);
+		clearWarningIndicator();
 	}
 	
 	public UiMainWindow getMainWindow()
