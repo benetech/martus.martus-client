@@ -117,7 +117,7 @@ public class UiExportBulletinsDlg extends JDialog implements ActionListener
 		for (int i = 0; i < selectedBulletins.length; i++)
 		{
 			UniversalId uid = selectedBulletins[i];
-			Bulletin b = store.findBulletinByUniversalId(uid);
+			Bulletin b = store.getBulletinRevision(uid);
 			bulletins.add(b);
 		}
 		return bulletins;

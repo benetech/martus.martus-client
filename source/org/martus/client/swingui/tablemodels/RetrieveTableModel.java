@@ -305,7 +305,7 @@ abstract public class RetrieveTableModel extends AbstractTableModel
 			
 			
 			UniversalId uid = UniversalId.createFromAccountAndLocalId(authorAccountId, bulletinLocalId);
-			Bulletin b = app.getStore().findBulletinByUniversalId(uid);
+			Bulletin b = app.getStore().getBulletinRevision(uid);
 			if(b != null)
 				app.getStore().setIsOnServer(b);
 		}

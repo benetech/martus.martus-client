@@ -174,7 +174,7 @@ public class BulletinFolder
 		UniversalId uid = getBulletinUniversalIdSorted(index);
 		if(uid == null)
 			return null;
-		return store.findBulletinByUniversalId(uid);
+		return store.getBulletinRevision(uid);
 	}
 
 	public UniversalId getBulletinUniversalIdSorted(int index)
@@ -190,7 +190,7 @@ public class BulletinFolder
 		UniversalId uid = getBulletinUniversalIdUnsorted(index);
 		if(uid == null)
 			return null;
-		return store.findBulletinByUniversalId(uid);
+		return store.getBulletinRevision(uid);
 	}
 
 	public UniversalId getBulletinUniversalIdUnsorted(int index)

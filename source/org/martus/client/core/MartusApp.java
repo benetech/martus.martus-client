@@ -801,7 +801,7 @@ public class MartusApp
 		for(int i = 0; i < uids.size(); ++i)
 		{
 			UniversalId uid = (UniversalId)uids.get(i);
-			Bulletin b = store.findBulletinByUniversalId(uid);
+			Bulletin b = store.getBulletinRevision(uid);
 			if(matcher.doesMatch(b))
 			{	
 				try
@@ -976,7 +976,7 @@ public class MartusApp
 	{
 		System.out.println("Moving bulletin to damaged");
 		BulletinFolder damaged = createOrFindFolder(store.getNameOfFolderDamaged());
-		Bulletin b = store.findBulletinByUniversalId(uid);
+		Bulletin b = store.getBulletinRevision(uid);
 		store.moveBulletin(b, outbox, damaged);		
 	}
 
@@ -1085,7 +1085,7 @@ public class MartusApp
 			throw new ServerErrorException();
 	
 		UniversalId uId = UniversalId.createFromAccountAndLocalId(accountId, bulletinLocalId);
-		Bulletin bulletin = store.findBulletinByUniversalId(uId);
+		Bulletin bulletin = store.getBulletinRevision(uId);
 		if (bulletin != null)
 			fdp = bulletin.getFieldDataPacket();
 	
@@ -1123,7 +1123,7 @@ public class MartusApp
 		store.importZipFileBulletin(tempFile, retrievedFolder, true);
 		tempFile.delete();
 		
-		Bulletin b = store.findBulletinByUniversalId(uid);
+		Bulletin b = store.getBulletinRevision(uid);
 		store.setIsOnServer(b);
 	}
 

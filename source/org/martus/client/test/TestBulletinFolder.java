@@ -166,7 +166,7 @@ public class TestBulletinFolder extends TestCaseEnhanced
 
 		Vector v = store.getAllBulletinUids();
 		UniversalId uid0 = (UniversalId)v.get(0);
-		b = store.findBulletinByUniversalId(uid0);
+		b = store.getBulletinRevision(uid0);
 		folder.add(b);
 		assertEquals(1, folder.getBulletinCount());
 		assertEquals(true, folder.contains(b));
@@ -184,7 +184,7 @@ public class TestBulletinFolder extends TestCaseEnhanced
 		assertEquals(true, folder.contains(b));
 
 		UniversalId uid1 = (UniversalId)v.get(1);
-		b = store.findBulletinByUniversalId(uid1);
+		b = store.getBulletinRevision(uid1);
 		assertEquals("This bulletin is not in the folder\n", false, folder.contains(b));
 
 		Bulletin b2 = folder.getBulletinSorted(0);

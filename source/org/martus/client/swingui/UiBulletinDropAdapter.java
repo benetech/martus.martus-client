@@ -132,7 +132,7 @@ public abstract class UiBulletinDropAdapter implements DropTargetListener
 			{
 				Bulletin bulletin = wereDropped[i];
 				UniversalId uId = bulletin.getUniversalId();
-				Bulletin b = store.findBulletinByUniversalId(uId);
+				Bulletin b = store.getBulletinRevision(uId);
 				if(b == null)
 					System.out.println("dropTransferableBulletin: null bulletin!!");
 				else
@@ -278,7 +278,7 @@ public abstract class UiBulletinDropAdapter implements DropTargetListener
 		BulletinHeaderPacket bhp = BulletinHeaderPacket.loadFromZipFile(zip, store.getSignatureVerifier());
 		UniversalId uid = bhp.getUniversalId();
 		
-		Bulletin old = store.findBulletinByUniversalId(uid);
+		Bulletin old = store.getBulletinRevision(uid);
 		if(!store.isMyBulletin(bhp) && old != null)
 		{
 			HashMap tokenReplacement = new HashMap();

@@ -70,7 +70,7 @@ public class TestTransferableAttachments extends TestCaseEnhanced
 		b.getFieldDataPacket().getAttachments();
 		store.saveBulletin(b);
 
-		Bulletin bOut = store.findBulletinByUniversalId(b.getUniversalId());
+		Bulletin bOut = store.getBulletinRevision(b.getUniversalId());
 		AttachmentProxy[] attachments = bOut.getPrivateAttachments();
 		assertEquals("Should only have one attachment", 1, attachments.length);
 		AttachmentProxy attachment = attachments[0];

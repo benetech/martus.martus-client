@@ -170,8 +170,7 @@ public class ClientBulletinStore extends BulletinStore
 		removeBulletinFromAllFolders(b);
 		saveFolders();
 
-		UniversalId id = b.getUniversalId();
-		cache.remove(id);
+		cache.remove(b.getUniversalId());
 		removeBulletinFromStore(b);
 	}
 
@@ -185,8 +184,7 @@ public class ClientBulletinStore extends BulletinStore
 			removeRevisionFromAllFolders(uidOfAncestor);
 		}
 		
-		UniversalId uid = b.getUniversalId();
-		removeRevisionFromAllFolders(uid);
+		removeRevisionFromAllFolders(b.getUniversalId());
 	}
 
 	private void removeRevisionFromAllFolders(UniversalId id)
@@ -197,7 +195,7 @@ public class ClientBulletinStore extends BulletinStore
 		}
 	}
 
-	public Bulletin findBulletinByUniversalId(UniversalId uid)
+	public Bulletin getBulletinRevision(UniversalId uid)
 	{
 		DatabaseKey key = new DatabaseKey(uid);
 		if(!doesBulletinRevisionExist(key))
@@ -227,7 +225,7 @@ public class ClientBulletinStore extends BulletinStore
 
 	public String getFieldData(UniversalId uid, String fieldTag)
 	{
-		Bulletin b = findBulletinByUniversalId(uid);
+		Bulletin b = getBulletinRevision(uid);
 		
 		if(fieldTag.equals(Bulletin.TAGSTATUS))
 			return b.getStatus();
@@ -616,8 +614,7 @@ public class ClientBulletinStore extends BulletinStore
 
 	public  void setIsNotOnServer(Bulletin b)
 	{
-		UniversalId uid = b.getUniversalId();
-		setIsNotOnServer(uid);
+		setIsNotOnServer(b.getUniversalId());
 	}
 	
 	// synchronized because updateOnServerLists is called from background thread
@@ -692,8 +689,7 @@ public class ClientBulletinStore extends BulletinStore
 
 	public void removeBulletinFromFolder(BulletinFolder from, Bulletin b)
 	{
-		UniversalId uid = b.getUniversalId();
-		removeBulletinFromFolder(from, uid);
+		removeBulletinFromFolder(from, b.getUniversalId());
 	}
 
 	public synchronized void removeBulletinFromFolder(BulletinFolder from, UniversalId uid)
@@ -864,7 +860,7 @@ public class ClientBulletinStore extends BulletinStore
 
 	public synchronized void addBulletinToFolder(BulletinFolder folder, UniversalId uidToAdd) throws BulletinAlreadyExistsException, IOException
 	{
-		Bulletin b = findBulletinByUniversalId(uidToAdd);
+		Bulletin b = getBulletinRevision(uidToAdd);
 		if(b == null)
 			return;
 		
@@ -897,7 +893,7 @@ public class ClientBulletinStore extends BulletinStore
 	
 	public synchronized void addRepairBulletinToFolders(UniversalId uId) throws BulletinAlreadyExistsException, IOException
 	{
-		Bulletin b = findBulletinByUniversalId(uId);
+		Bulletin b = getBulletinRevision(uId);
 		if(b == null)
 			return;
 			

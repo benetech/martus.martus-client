@@ -404,18 +404,18 @@ public class TestClientBulletinStore extends TestCaseEnhanced
 		UniversalId uId = b.getUniversalId();
 		assertEquals(1, store.getBulletinCount());
 		assertEquals(false, (uId.toString().length() == 0));
-		assertEquals("not saved initially?", initialSummary, store.findBulletinByUniversalId(uId).get(Bulletin.TAGSUMMARY));
+		assertEquals("not saved initially?", initialSummary, store.getBulletinRevision(uId).get(Bulletin.TAGSUMMARY));
 
 		// re-saving the same bulletin replaces the old one
 		UniversalId id = b.getUniversalId();
 		store.saveBulletin(b);
 		assertEquals(1, store.getBulletinCount());
 		assertEquals("Saving should keep same id", id, b.getUniversalId());
-		assertEquals("not still saved?", initialSummary, store.findBulletinByUniversalId(uId).get(Bulletin.TAGSUMMARY));
+		assertEquals("not still saved?", initialSummary, store.getBulletinRevision(uId).get(Bulletin.TAGSUMMARY));
 
 		// unsaved bulletin changes should not be in the store
 		b.set(Bulletin.TAGSUMMARY, "not saved yet");
-		assertEquals("saved without asking?", initialSummary, store.findBulletinByUniversalId(uId).get(Bulletin.TAGSUMMARY));
+		assertEquals("saved without asking?", initialSummary, store.getBulletinRevision(uId).get(Bulletin.TAGSUMMARY));
 
 		// saving a new bulletin with a non-empty id should retain that id
 		int oldCount = store.getBulletinCount();
@@ -425,7 +425,7 @@ public class TestClientBulletinStore extends TestCaseEnhanced
 		assertEquals(oldCount+1, store.getBulletinCount());
 		assertEquals("b uid?", uid, b.getBulletinHeaderPacket().getUniversalId());
 
-		b = store.findBulletinByUniversalId(uid);
+		b = store.getBulletinRevision(uid);
 		assertEquals("store uid?", uid, b.getBulletinHeaderPacket().getUniversalId());
 
 	}
@@ -436,7 +436,7 @@ public class TestClientBulletinStore extends TestCaseEnhanced
 
 		assertEquals(0, store.getBulletinCount());
 		UniversalId uInvalidId = UniversalId.createDummyUniversalId();
-		Bulletin b = store.findBulletinByUniversalId(uInvalidId);
+		Bulletin b = store.getBulletinRevision(uInvalidId);
 		assertEquals(true, (b == null));
 
 		b = store.createEmptyBulletin();
@@ -445,14 +445,14 @@ public class TestClientBulletinStore extends TestCaseEnhanced
 		store.saveBulletin(b);
 		UniversalId id = b.getUniversalId();
 
-		Bulletin b2 = store.findBulletinByUniversalId(id);
+		Bulletin b2 = store.getBulletinRevision(id);
 		assertEquals(false, (b2 == null));
 		assertEquals(b.get(BulletinConstants.TAGSUMMARY), b2.get(BulletinConstants.TAGSUMMARY));
 		
 		b.setSealed();
 		store.saveBulletin(b);
 
-		Bulletin b3 = store.findBulletinByUniversalId(id);
+		Bulletin b3 = store.getBulletinRevision(id);
 		assertEquals(false, (b3 == null));
 		assertEquals(b.get(BulletinConstants.TAGSUMMARY), b3.get(BulletinConstants.TAGSUMMARY));
 	}
@@ -500,7 +500,7 @@ public class TestClientBulletinStore extends TestCaseEnhanced
 
 		store.discardBulletin(discarded, b2);
 		assertEquals("Should no longer be in Discarded", false, discarded.contains(b2));
-		assertNull("Should no longer exist at all", store.findBulletinByUniversalId(b2.getUniversalId()));
+		assertNull("Should no longer exist at all", store.getBulletinRevision(b2.getUniversalId()));
 	}
 
 	public void testRemoveBulletinFromFolder() throws Exception
@@ -976,7 +976,7 @@ public class TestClientBulletinStore extends TestCaseEnhanced
 		ClientBulletinStore newStoreSameDatabase = new MockBulletinStore(db, store.getSignatureGenerator());
 		newStoreSameDatabase.loadFolders();
 		assertEquals("loaded", 1, newStoreSameDatabase.getBulletinCount());
-		Bulletin b2 = newStoreSameDatabase.findBulletinByUniversalId(b.getUniversalId());
+		Bulletin b2 = newStoreSameDatabase.getBulletinRevision(b.getUniversalId());
 		assertEquals("id", b.getLocalId(), b2.getLocalId());
 		assertEquals("author", b.get(Bulletin.TAGAUTHOR), b2.get(Bulletin.TAGAUTHOR));
 		assertEquals("wrong security?", store.getSignatureGenerator(), b2.getSignatureGenerator());
@@ -1061,7 +1061,7 @@ public class TestClientBulletinStore extends TestCaseEnhanced
 		b.set("author", "testsave");
 		store.saveBulletin(b);
 		assertEquals(oldCount+1, store.getBulletinCount());
-		b = store.findBulletinByUniversalId(b.getUniversalId());
+		b = store.getBulletinRevision(b.getUniversalId());
 		assertEquals("testsave", b.get("author"));
 		boolean empty = (b.getLocalId().length() == 0);
 		assertEquals("Saved ID must be non-empty\n", false, empty);
@@ -1246,7 +1246,7 @@ public class TestClientBulletinStore extends TestCaseEnhanced
 		store.importZipFileBulletin(tempFile, folder, false);
 		assertEquals("not imported to store?", 1, store.getBulletinCount());
 		assertEquals("not imported to folder?", 1, folder.getBulletinCount());
-		assertNull("resaved with draft id?", store.findBulletinByUniversalId(b.getUniversalId()));
+		assertNull("resaved with draft id?", store.getBulletinRevision(b.getUniversalId()));
 
 		store.deleteAllData();
 		folder = store.createFolder("test2");
@@ -1257,7 +1257,7 @@ public class TestClientBulletinStore extends TestCaseEnhanced
 		assertEquals("not imported to store?", 1, store.getBulletinCount());
 		assertEquals("not imported to folder count?", 1, folder.getBulletinCount());
 		assertEquals("not imported to folder uid?", 0, folder.find(b.getUniversalId()));
-		assertNotNull("not saved with sealed id?", store.findBulletinByUniversalId(b.getUniversalId()));
+		assertNotNull("not saved with sealed id?", store.getBulletinRevision(b.getUniversalId()));
 
 		BulletinFolder folder2 = store.createFolder("another");
 		store.importZipFileBulletin(tempFile, folder2, false);
@@ -1317,7 +1317,7 @@ public class TestClientBulletinStore extends TestCaseEnhanced
 		BulletinFolder folder = store.createFolder("test");
 		store.importZipFileBulletin(tempFile, folder, true);
 		assertEquals("Didn't fully import?", 1, store.getBulletinCount());
-		assertNotNull("Not same ID?", store.findBulletinByUniversalId(originalUid));
+		assertNotNull("Not same ID?", store.getBulletinRevision(originalUid));
 
 		store.importZipFileBulletin(tempFile, folder, false);
 		assertEquals("Not different IDs?", 2, store.getBulletinCount());
