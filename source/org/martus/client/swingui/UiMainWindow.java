@@ -193,7 +193,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 			
 			loadConfigInfo();
 			
-			if(!createdNewAccount)
+			if(!createdNewAccount && !justRecovered)
 				askAndBackupKeypairIfRequired();
 			
 			UiModelessBusyDlg waitingForBulletinsToLoad = new UiModelessBusyDlg(getLocalization().getFieldLabel("waitingForBulletinsToLoad"));
@@ -290,12 +290,14 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 			UiBackupRecoverSharedKeyPair recover = new UiBackupRecoverSharedKeyPair(this);
 			if(!recover.recoverKeyPairFromMultipleUnencryptedFiles())
 				return false;
+			justRecovered = true;
 		}
 		if(result == UiSigninDlg.RECOVER_ACCOUNT_BY_BACKUP_FILE)
 		{
 			UiRecoverKeyPairFromBackup recover = new UiRecoverKeyPairFromBackup(this);
 			if(!recover.recoverPrivateKey())
 				return false;
+			justRecovered = true;
 		}
 
 		createdNewAccount = false;
@@ -2103,5 +2105,6 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	private static final int BACKGROUND_TIMEOUT_CHECK_EVERY_X_MILLIS = 5*1000;
 	private boolean mainWindowInitalizing;
 	private boolean createdNewAccount;
+	private boolean justRecovered;
 	private BackgroundUploadTimerTask backgroundUploadTimerTask;
 }
