@@ -787,6 +787,7 @@ public class EnglishStrings
 "field:UnknownDateSave=Unknown",
 "field:AttachmentSizeUnknown=Unknown",
 "field:HQSummaryLabel=Headquarters",
+"field:ColumnGridRowNumber=Row #",
 
 "field:WasSentYes=Yes",
 "field:WasSentNo=No",

@@ -54,8 +54,7 @@ public class GridTableModel extends DefaultTableModel
 	public GridTableModel(GridFieldSpec fieldSpec)
 	{
 		Vector columnLabels = new Vector();
-		String emptyColumnLabel = " ";
-		columnLabels.add(emptyColumnLabel);
+		columnLabels.add(fieldSpec.getColumnZeroLabel());
 		columnLabels.addAll(fieldSpec.getAllColumnLabels());
 		setColumnIdentifiers(columnLabels);
 		gridData = new GridData(fieldSpec.getColumnCount());

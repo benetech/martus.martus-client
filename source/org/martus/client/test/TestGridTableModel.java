@@ -61,6 +61,12 @@ public class TestGridTableModel extends TestCaseEnhanced
 		model.addEmptyRow();
 		int rowTwo = 2;
 		assertEquals(Integer.toString(rowTwo), model.getValueAt(1,0));
+
+		GridFieldSpec spec2 = new GridFieldSpec();
+		String ColumnZeroHeader = "column 0";
+		spec2.setColumnZeroLabel(ColumnZeroHeader);
+		GridTableModel model2 = new GridTableModel(spec2);
+		assertEquals(ColumnZeroHeader, model2.getColumnName(0));
 	}
 	
 	

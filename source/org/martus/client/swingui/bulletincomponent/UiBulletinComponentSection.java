@@ -121,7 +121,7 @@ abstract public class UiBulletinComponentSection extends JPanel
 
 
 
-	private UiMainWindow mainWindow;
+	protected UiMainWindow mainWindow;
 	JLabel sectionHeading;
 	JLabel warningIndicator;
 	UiField[] fields;

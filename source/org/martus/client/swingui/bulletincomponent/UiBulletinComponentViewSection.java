@@ -86,6 +86,7 @@ public class UiBulletinComponentViewSection extends UiBulletinComponentDataSecti
 
 	public UiField createGridField(GridFieldSpec fieldSpec)
 	{
+		fieldSpec.setColumnZeroLabel(mainWindow.getLocalization().getFieldLabel("ColumnGridRowNumber"));
 		return new UiGridViewer(fieldSpec);
 	}
 
