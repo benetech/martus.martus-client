@@ -1550,9 +1550,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 			delay.start();
 			Utilities.waitForThreadToTerminate(delay);
 			if( busyDlg != null )
-			{
 				busyDlg.endDialog();
-			}
 
 			seconds = seconds * 2 + 1;
 			if(mode == UiSigninDlg.TIMED_OUT)
@@ -1563,22 +1561,30 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 				//currentActiveFrame.setVisible(false);
 			}
 			UiSigninDlg signinDlg = new UiSigninDlg(this, currentActiveFrame, mode);
-			switch(signinDlg.getUserChoice())
+			int userChoice = signinDlg.getUserChoice();
+			if (userChoice == UiSigninDlg.NEW_ACCOUNT)
+				return NEW_ACCOUNT;
+			if (userChoice != UiSigninDlg.SIGN_IN)
+				return CANCELLED;
+			try
 			{
-				case UiSigninDlg.NEW_ACCOUNT:
-					return NEW_ACCOUNT;
-				case UiSigninDlg.SIGN_IN:
-					if(!app.attemptSignIn(signinDlg.getName(), signinDlg.getPassword()))
-					{
-						notifyDlg(currentActiveFrame, "incorrectsignin");
-						busyDlg = new UiModelessBusyDlg(getLocalization().getFieldLabel("waitAfterFailedSignIn"));
-						continue;
-					}
-					if(mode == UiSigninDlg.TIMED_OUT)
-						currentActiveFrame.setState(NORMAL);
-					return SIGNED_IN;
-				default:
-					return CANCELLED;
+				String userName = signinDlg.getName();
+				char[] password = signinDlg.getPassword();
+				if(mode == UiSigninDlg.INITIAL)
+				{	
+					app.attemptSignIn(userName, password);
+				}
+				else
+				{	
+					app.attemptReSignIn(userName, password);
+					currentActiveFrame.setState(NORMAL);
+				}
+				return SIGNED_IN;
+			}
+			catch (Exception e)
+			{
+				notifyDlg(currentActiveFrame, "incorrectsignin");
+				busyDlg = new UiModelessBusyDlg(getLocalization().getFieldLabel("waitAfterFailedSignIn"));
 			}
 		}
 	}

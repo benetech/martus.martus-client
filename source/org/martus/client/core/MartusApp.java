@@ -1067,9 +1067,9 @@ public class MartusApp
 		return(new File(getCurrentAccountDirectoryName(), completeFileName));
 	}
 
-	public boolean attemptSignIn(String userName, char[] userPassPhrase)
+	public void attemptSignIn(String userName, char[] userPassPhrase) throws Exception
 	{
-		return attemptSignInInternal(getKeyPairFile(getMartusDataRootDirectory()), userName, userPassPhrase);
+		attemptSignInInternal(getKeyPairFile(getMartusDataRootDirectory()), userName, userPassPhrase);
 	}
 	
 	public void attemptReSignIn(String userName, char[] userPassPhrase) throws Exception
@@ -1146,7 +1146,7 @@ public class MartusApp
 
 	}
 
-	public boolean attemptSignInInternal(File keyPairFile, String userName, char[] userPassPhrase)
+	public void attemptSignInInternal(File keyPairFile, String userName, char[] userPassPhrase) throws Exception
 	{
 		try
 		{
@@ -1154,13 +1154,12 @@ public class MartusApp
 			getSecurity().readKeyPair(inputStream, getCombinedPassPhrase(userName, userPassPhrase));
 			inputStream.close();
 			setCurrentAccount(userName);
-			return true;
 		}
 		catch(Exception e)
 		{
 			getSecurity().clearKeyPair();
 			currentUserName = "";
-			return false;
+			throw e;
 		}
 	}
 	

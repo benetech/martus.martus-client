@@ -65,11 +65,7 @@ public class CreateBadBulletins
 	
 		String userName = getUserInput("username:");
 		String userPassPhrase = getUserInput("passphrase:");
-		if(!app.attemptSignIn(userName, userPassPhrase.toCharArray()))
-		{
-			System.out.println("ERROR: Unable to sign in. Possibly incorrect username or passphrase");
-			System.exit(1);
-		}
+		app.attemptSignIn(userName, userPassPhrase.toCharArray());
 		app.doAfterSigninInitalization();
 		app.loadFolders();
 
