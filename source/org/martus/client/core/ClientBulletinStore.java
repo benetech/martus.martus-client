@@ -51,8 +51,10 @@ import org.martus.common.bulletin.Bulletin;
 import org.martus.common.bulletin.BulletinLoader;
 import org.martus.common.bulletin.BulletinSaver;
 import org.martus.common.bulletin.BulletinZipImporter;
+import org.martus.common.bulletin.Bulletin.DamagedBulletinException;
 import org.martus.common.crypto.MartusCrypto;
 import org.martus.common.crypto.MartusCrypto.CryptoException;
+import org.martus.common.crypto.MartusCrypto.NoKeyPairException;
 import org.martus.common.database.ClientFileDatabase;
 import org.martus.common.database.Database;
 import org.martus.common.database.DatabaseKey;
@@ -848,7 +850,7 @@ public class ClientBulletinStore extends BulletinStore
 		return b;
 	}
 
-	private FieldSpec[] getPrivateFieldSpecs()
+	public FieldSpec[] getPrivateFieldSpecs()
 	{
 		return privateFieldSpecs;
 	}
@@ -1233,6 +1235,21 @@ public class ClientBulletinStore extends BulletinStore
 	public static File getCacheFileForAccount(File accountDir)
 	{
 		return new File(accountDir, CACHE_FILE_NAME);
+	}
+
+	public boolean bulletinHasExtraFields(Bulletin b)
+	{
+		return !FieldSpec.isAllFieldsPresent(b.getPublicFieldSpecs(), getPublicFieldSpecs());
+	}
+
+	public Bulletin createClone(Bulletin original, FieldSpec[] publicFieldSpecsToUse, FieldSpec[] privateFieldSpecsToUse) throws CryptoException, InvalidPacketException, SignatureVerificationException, WrongPacketTypeException, IOException, InvalidBase64Exception, DamagedBulletinException, NoKeyPairException
+	{
+		Bulletin clone = createEmptyBulletin(publicFieldSpecsToUse, privateFieldSpecsToUse);
+		clone.createDraftCopyOf(original, getDatabase());
+		saveBulletin(clone);
+		
+		DatabaseKey key = DatabaseKey.createKey(clone.getUniversalId(),clone.getStatus());
+		return loadFromDatabase(key);
 	}
 
 	public static int maxCachedBulletinCount = 100;

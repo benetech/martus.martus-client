@@ -61,14 +61,13 @@ import org.martus.client.core.TransferableBulletinList;
 import org.martus.client.core.ClientBulletinStore.BulletinAlreadyExistsException;
 import org.martus.client.swingui.UiClipboardUtilities;
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.client.swingui.dialogs.UiBulletinModifyDlg.CancelHandler;
+import org.martus.client.swingui.dialogs.UiBulletinModifyDlg;
 import org.martus.client.swingui.dialogs.UiBulletinModifyDlg.DeleteBulletinOnCancel;
 import org.martus.client.swingui.dialogs.UiBulletinModifyDlg.DoNothingOnCancel;
 import org.martus.client.swingui.foldertree.FolderNode;
 import org.martus.common.FieldSpec;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.clientside.UiBasicLocalization;
-import org.martus.common.database.DatabaseKey;
 import org.martus.common.packet.UniversalId;
 import org.martus.swing.UiNotifyDlg;
 import org.martus.swing.UiTable;
@@ -235,55 +234,55 @@ public class UiBulletinTable extends JTable implements ListSelectionListener, Dr
 
 	public void doModifyBulletin()
 	{
-		Bulletin b = getSingleSelectedBulletin();
-		if(b == null)
+		Bulletin original = getSingleSelectedBulletin();
+		if(original == null)
 			return;
 
-		boolean createClone = false;
-		String bulletinAccountId = b.getAccount();
 		String myAccountId = mainWindow.getApp().getAccountId();
-		if(myAccountId.equals(bulletinAccountId))
-		{
-			if(!b.isDraft())
-			{
-				if(!mainWindow.confirmDlg("CloneMySealedAsDraft"))
-					return;
-				createClone = true;
-			}
-		}
-		else
+		boolean isMine = myAccountId.equals(original.getAccount());
+		boolean isSealed = original.isSealed();
+		
+		if(!isMine)
 		{
 			if(!mainWindow.confirmDlg("CloneBulletinAsMine"))
 				return;
-			createClone = true;
 		}
 		
-		if(b.hasUnknownTags() || b.hasUnknownCustomField())
+		if(isMine && isSealed)
+		{
+			if(!mainWindow.confirmDlg("CloneMySealedAsDraft"))
+				return;
+		}
+		
+		if(original.hasUnknownTags() || original.hasUnknownCustomField())
+		{
 			if(!mainWindow.confirmDlg("EditBulletinWithUnknownTags"))
 				return;
-
-		ClientBulletinStore store = mainWindow.getApp().getStore();
-		CancelHandler handler = new DoNothingOnCancel();
-		if(createClone)
+		}
+		
+		Bulletin bulletinToModify = original;
+		UiBulletinModifyDlg.CancelHandler handler = new DoNothingOnCancel();
+		
+		if(isSealed || !isMine)
 		{
-			Bulletin clone = null;
-			FieldSpec[] originalBulletinsPublicFieldSpecs = b.getPublicFieldSpecs();
-			FieldSpec[] currentPublicFieldSpecs = store.getPublicFieldSpecs();
-			if(!FieldSpec.isAllFieldsPresent(originalBulletinsPublicFieldSpecs, currentPublicFieldSpecs))
+			handler = new DeleteBulletinOnCancel();
+
+			ClientBulletinStore store = mainWindow.getApp().getStore();
+			FieldSpec[] publicFieldSpecsToUse = store.getPublicFieldSpecs();
+			FieldSpec[] privateFieldSpecsToUse = store.getPrivateFieldSpecs();
+
+			if(store.bulletinHasExtraFields(original))
 			{
 				if(mainWindow.confirmDlg(mainWindow, "UseBulletinsCustomFields"))
-					clone = store.createEmptyBulletin(originalBulletinsPublicFieldSpecs, b.getPrivateFieldSpecs());
+				{
+					publicFieldSpecsToUse = original.getPublicFieldSpecs();
+					privateFieldSpecsToUse = original.getPrivateFieldSpecs();
+				}
 			}
-			if(clone == null)
-				clone = store.createEmptyBulletin();
 
 			try
 			{
-				clone.createDraftCopyOf(b, store.getDatabase());
-				store.saveBulletin(clone);
-				DatabaseKey key = DatabaseKey.createKey(clone.getUniversalId(),clone.getStatus());
-				b = store.loadFromDatabase(key);
-				handler = new DeleteBulletinOnCancel();
+				bulletinToModify = store.createClone(original, publicFieldSpecsToUse, privateFieldSpecsToUse);
 			}
 			catch (Exception e)
 			{
@@ -292,7 +291,7 @@ public class UiBulletinTable extends JTable implements ListSelectionListener, Dr
 			}
 		}
 
-		mainWindow.modifyBulletin(b, handler);
+		mainWindow.modifyBulletin(bulletinToModify, handler);
 	}
 
 	public void doCutBulletins()
