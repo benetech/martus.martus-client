@@ -104,12 +104,11 @@ public class MartusApp
 			if(cryptoToUse == null)
 				cryptoToUse = new MartusSecurity();
 
-			setSecurity(cryptoToUse);
 			configInfo = new ConfigInfo();
 			currentUserName = "";
 			maxNewFolders = MAXFOLDERS;
 			martusDataRootDirectory = dataDirectoryToUse;
-
+			store = new BulletinStore(cryptoToUse);
 		}
 		catch(MartusCrypto.CryptoInitializationException e)
 		{
@@ -303,8 +302,7 @@ public class MartusApp
 
 	public void doAfterSigninInitalization() throws MartusAppInitializationException, FileVerificationException, MissingAccountMapException, MissingAccountMapSignatureException
 	{
-		store = new BulletinStore(currentAccountDirectory, getSecurity());
-		store.doAfterSigninInitalization();
+		store.doAfterSigninInitialization(getCurrentAccountDirectory());
 	}
 	
 	public File getMartusDataRootDirectory()
@@ -1400,14 +1398,12 @@ public class MartusApp
 
 	public MartusCrypto getSecurity()
 	{
-		return security;
+		return store.getSignatureGenerator();
 	}
 
 	public void setSecurity(MartusCrypto securityToUse)
 	{
-		security = securityToUse;
-		if(store != null)
-			store.setSignatureGenerator(getSecurity());
+		store.setSignatureGenerator(getSecurity());
 	}
 
 	public void setSSLNetworkInterfaceHandlerForTesting(NetworkInterface server)
@@ -1525,7 +1521,6 @@ public class MartusApp
 	public NetworkInterface currentNetworkInterfaceHandler;
 	public ClientSideNetworkGateway currentNetworkInterfaceGateway;
 	boolean logUploads;
-	private MartusCrypto security;
 	public String currentUserName;
 	private int maxNewFolders;
 

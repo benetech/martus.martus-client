@@ -45,9 +45,7 @@ public class TestFolderList extends TestCaseEnhanced
     {
     	super.setUp();
     	localization = new MockUiLocalization();
-		app = MockMartusApp.create();
-		app.store = new BulletinStore(new MockClientDatabase());
-		app.store.setSignatureGenerator(app.getSecurity());
+		app = MockMartusApp.create(new MockClientDatabase());
     }
 
     public void tearDown() throws Exception

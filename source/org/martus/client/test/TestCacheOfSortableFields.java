@@ -34,8 +34,6 @@ import org.martus.client.core.BulletinStore;
 import org.martus.client.core.CacheOfSortableFields;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.crypto.MartusSecurity;
-import org.martus.common.crypto.MockMartusSecurity;
-import org.martus.common.database.MockClientDatabase;
 import org.martus.common.packet.UniversalId;
 import org.martus.util.ByteArrayInputStreamWithSeek;
 import org.martus.util.TestCaseEnhanced;
@@ -51,8 +49,7 @@ public class TestCacheOfSortableFields extends TestCaseEnhanced
 	public void setUp() throws Exception
 	{
 		super.setUp();
-		store = new BulletinStore(new MockClientDatabase());
-		store.setSignatureGenerator(MockMartusSecurity.createClient());
+		store = new MockBulletinStore();
 	}
 
 	public void testGetAndSet()

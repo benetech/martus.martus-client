@@ -87,34 +87,39 @@ import org.xml.sax.SAXParseException;
 */
 public class BulletinStore
 {
-	public BulletinStore(File baseDirectory, MartusCrypto cryptoToUse)
+	public BulletinStore(MartusCrypto cryptoToUse)
 	{
 		setSignatureGenerator(cryptoToUse);
-		File dbDirectory = new File(baseDirectory, "packets");
+	}
+	
+	public File getStoreRootDir()
+	{
+		return dir;
+	}
+
+	public void doAfterSigninInitialization(File dataRootDirectory) throws FileVerificationException, MissingAccountMapException, MissingAccountMapSignatureException
+	{
+		File dbDirectory = new File(dataRootDirectory, "packets");
 		Database db = new ClientFileDatabase(dbDirectory, signer);
-		setUpStore(baseDirectory, db);
+		doAfterSigninInitialization(dataRootDirectory, db);
 	}
 
-	public BulletinStore(Database db)
+	public void doAfterSigninInitialization(File dataRootDirectory, Database db) throws FileVerificationException, MissingAccountMapException, MissingAccountMapSignatureException
 	{
-		try
-		{
-			File tempFile = File.createTempFile("$$$MartusBulletinStore", null);
-			tempFile.deleteOnExit();
-			File baseDirectory = tempFile.getParentFile();
-			tempFile.delete();
-			setUpStore(baseDirectory, db);
-		}
-		catch (IOException e)
-		{
-			e.printStackTrace();
-		}
-	}
+		dir = dataRootDirectory;
+		database = db;
+		initializeFolders();
 
-	public void doAfterSigninInitalization() throws FileVerificationException, MissingAccountMapException, MissingAccountMapSignatureException
-	{
+		cacheOfSortableFieldsFile = getCacheOfSortableFieldsFile();
+
+		bulletinCache = new TreeMap();
+		cacheOfSortableFields = new CacheOfSortableFields();
+
 		database.initialize();
 		loadCacheOfSortableFields();
+
+		publicFieldTags = StandardFieldSpecs.getDefaultPublicFieldSpecs();
+		privateFieldTags = StandardFieldSpecs.getDefaultPrivateFieldSpecs();
 	}
 
 	public void prepareToExit()
@@ -630,6 +635,7 @@ public class BulletinStore
 	public void deleteAllBulletins() throws Exception
 	{
 		database.deleteAllData();
+		bulletinCache.clear();
 		getCacheOfSortableFieldsFile().delete();
 	}
 
@@ -640,7 +646,7 @@ public class BulletinStore
 	
 	public void resetFolders()
 	{
-		setUpStore(dir, database);
+		initializeFolders();
 	}
 	
 	public void scrubAllData() throws Exception
@@ -775,20 +781,10 @@ public class BulletinStore
 	}
 	
 
-	private void setUpStore(File baseDirectory, Database db)
+	private void initializeFolders()
 	{
-		dir = baseDirectory;
-		cacheOfSortableFieldsFile = getCacheOfSortableFieldsFile();
-
-		database = db;
-		bulletinCache = new TreeMap();
-		cacheOfSortableFields = new CacheOfSortableFields();
 		folders = new Vector();
-
 		createSystemFolders();
-	
-		publicFieldTags = StandardFieldSpecs.getDefaultPublicFieldSpecs();
-		privateFieldTags = StandardFieldSpecs.getDefaultPrivateFieldSpecs();
 	}
 	
 	private File getCacheOfSortableFieldsFile()

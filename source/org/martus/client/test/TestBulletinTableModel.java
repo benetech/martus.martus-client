@@ -30,7 +30,7 @@ import org.martus.client.core.BulletinFolder;
 import org.martus.client.core.BulletinStore;
 import org.martus.client.swingui.bulletintable.BulletinTableModel;
 import org.martus.common.bulletin.Bulletin;
-import org.martus.common.clientside.test.*;
+import org.martus.common.clientside.test.MockUiLocalization;
 import org.martus.common.database.MockClientDatabase;
 import org.martus.common.packet.UniversalId;
 import org.martus.util.TestCaseEnhanced;
@@ -46,9 +46,7 @@ public class TestBulletinTableModel extends TestCaseEnhanced
     {
     	super.setUp();
     	localization = new MockUiLocalization();
-		app = MockMartusApp.create();
-		app.store = new BulletinStore(new MockClientDatabase());
-		app.store.setSignatureGenerator(app.getSecurity());
+		app = MockMartusApp.create(new MockClientDatabase());
 		app.loadSampleData();
 		store = app.getStore();
 		folderSent = app.getFolderSent();

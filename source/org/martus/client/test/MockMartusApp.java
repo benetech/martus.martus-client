@@ -30,26 +30,42 @@ import java.io.File;
 import java.io.IOException;
 
 import org.martus.client.core.BulletinFolder;
-import org.martus.client.core.BulletinStore;
 import org.martus.client.core.MartusApp;
+import org.martus.common.MartusUtilities.FileVerificationException;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.clientside.UiBasicLocalization;
 import org.martus.common.crypto.MartusCrypto;
 import org.martus.common.crypto.MockMartusSecurity;
+import org.martus.common.database.Database;
 import org.martus.common.database.MockClientDatabase;
+import org.martus.common.database.FileDatabase.MissingAccountMapException;
+import org.martus.common.database.FileDatabase.MissingAccountMapSignatureException;
 import org.martus.util.DirectoryUtils;
 
 public class MockMartusApp extends MartusApp
 {
-	public static MockMartusApp create(MartusCrypto crypto) throws IOException, MartusAppInitializationException
+	public static MockMartusApp create(MartusCrypto crypto) throws Exception
 	{
 		File fakeDataDirectory = File.createTempFile("$$$MockMartusApp", null);
 		fakeDataDirectory.deleteOnExit();
 		fakeDataDirectory.delete();
 		fakeDataDirectory.mkdir();
 
+		return create(fakeDataDirectory, crypto);
+	}
+
+	public static MockMartusApp create(Database db) throws Exception
+	{
+		MockMartusApp app = create(MockMartusSecurity.createClient());
+		app.store = new MockBulletinStore(db, app.getSecurity());
+		return app;
+	}
+
+	public static MockMartusApp create(File fakeDataDirectory, MartusCrypto crypto) throws MartusAppInitializationException, IOException, FileVerificationException, MissingAccountMapException, MissingAccountMapSignatureException 
+	{
 		MockMartusApp app = new MockMartusApp(crypto, fakeDataDirectory);
 		app.setCurrentAccount("some user", app.getMartusDataRootDirectory());
+		app.store.doAfterSigninInitialization(fakeDataDirectory, new MockClientDatabase());
 		return app;
 	}
 
@@ -109,13 +125,6 @@ public class MockMartusApp extends MartusApp
 		rootDir.delete();
 		if(rootDir.exists())
 			throw new IOException("MartusRootDirectory " + rootDir.getPath());
-	}
-
-	public void setCurrentAccount(String userName, File accountDirectory) throws IOException
-	{
-		super.setCurrentAccount(userName, accountDirectory);
-		store = new BulletinStore(new MockClientDatabase());
-		store.setSignatureGenerator(getSecurity());
 	}
 
 	public void loadSampleData() throws Exception

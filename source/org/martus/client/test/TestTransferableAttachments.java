@@ -40,7 +40,6 @@ import org.martus.client.core.TransferableAttachmentList;
 import org.martus.common.bulletin.AttachmentProxy;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.crypto.MartusSecurity;
-import org.martus.common.database.MockClientDatabase;
 import org.martus.util.TestCaseEnhanced;
 
 public class TestTransferableAttachments extends TestCaseEnhanced
@@ -58,8 +57,7 @@ public class TestTransferableAttachments extends TestCaseEnhanced
 			security = new MartusSecurity();
 			security.createKeyPair(512);
 		}
-		store = new BulletinStore(new MockClientDatabase());
-		store.setSignatureGenerator(security);
+		store = new MockBulletinStore(security);
 		Bulletin b = new Bulletin(security);
 		File temp = createTempFile();
 		FileOutputStream out = new FileOutputStream(temp);

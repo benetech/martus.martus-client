@@ -36,9 +36,7 @@ import org.martus.client.core.BulletinXmlExporter;
 import org.martus.common.bulletin.AttachmentProxy;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.bulletin.BulletinConstants;
-import org.martus.common.crypto.MockMartusSecurity;
 import org.martus.common.crypto.MartusCrypto.EncryptionException;
-import org.martus.common.database.MockClientDatabase;
 import org.martus.util.TestCaseEnhanced;
 
 public class TestBulletinXmlExporter extends TestCaseEnhanced
@@ -53,8 +51,7 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 		super.setUp();
 		if(store==null)
 		{
-			store = new BulletinStore(new MockClientDatabase());
-			store.setSignatureGenerator(MockMartusSecurity.createClient());
+			store = new MockBulletinStore();
 		}
 	}
 

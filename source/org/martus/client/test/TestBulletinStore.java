@@ -49,7 +49,6 @@ import org.martus.common.bulletin.BulletinSaver;
 import org.martus.common.crypto.MockMartusSecurity;
 import org.martus.common.database.Database;
 import org.martus.common.database.DatabaseKey;
-import org.martus.common.database.MockClientDatabase;
 import org.martus.common.database.MockDatabase;
 import org.martus.common.packet.BulletinHeaderPacket;
 import org.martus.common.packet.FieldDataPacket;
@@ -78,7 +77,7 @@ public class TestBulletinStore extends TestCaseEnhanced
     	super.setUp();
     	if(store == null)
     	{
-    		store = createTempStore();
+    		store = new MockBulletinStore();
     		db = (MockDatabase)store.getDatabase();
 			security = (MockMartusSecurity)store.getSignatureGenerator();
     	}
@@ -627,13 +626,13 @@ public class TestBulletinStore extends TestCaseEnhanced
 		assertNull("Folder three must not exist", store.findFolder("three"));
 	}
 
-	public void testLoadXmlLegacyFolders()
+	public void testLoadXmlLegacyFolders() throws Exception
 	{
 		TRACE("testLoadXmlFolders");
 
 		int systemFolderCount = store.getFolderCount();
 
-		BulletinStore tempStore = new BulletinStore(db);
+		BulletinStore tempStore = new MockBulletinStore();
 		String xml = "<FolderList><Folder name='Outbox'></Folder><Folder name='new two'></Folder></FolderList>";
 		tempStore.internalLoadFolders(xml);
 		assertTrue("Legacy folder not detected?", tempStore.needsLegacyFolderConversion());
@@ -676,8 +675,7 @@ public class TestBulletinStore extends TestCaseEnhanced
 		assertEquals("saving", 1, store.getBulletinCount());
 		assertEquals("keys", 3*store.getBulletinCount(), db.getRecordCount());
 
-		BulletinStore newStoreSameDatabase = new BulletinStore(db);
-		newStoreSameDatabase.setSignatureGenerator(store.getSignatureGenerator());
+		BulletinStore newStoreSameDatabase = new MockBulletinStore(db, store.getSignatureGenerator());
 		newStoreSameDatabase.loadFolders();
 		assertEquals("loaded", 1, newStoreSameDatabase.getBulletinCount());
 		Bulletin b2 = newStoreSameDatabase.findBulletinByUniversalId(b.getUniversalId());
@@ -701,8 +699,9 @@ public class TestBulletinStore extends TestCaseEnhanced
 
 		assertEquals("keys", 3*store.getBulletinCount(), db.getRecordCount());
 
-		store = new BulletinStore(db);
-		store.setSignatureGenerator(MockMartusSecurity.createClient());
+		File storeRootDir = store.getStoreRootDir();
+		store = new BulletinStore(security);
+		store.doAfterSigninInitialization(storeRootDir, db);
 		assertEquals("before load", systemFolderCount, store.getFolderCount());
 		store.loadFolders();
 		assertEquals("loaded", 1+systemFolderCount, store.getFolderCount());
@@ -1116,7 +1115,8 @@ public class TestBulletinStore extends TestCaseEnhanced
 		BulletinStore store2 = createTempStore();
 		Bulletin b2 = store2.createEmptyBulletin();
 		b2.setSealed();
-		assertEquals("sealed b2 from another account got put in outbox?", false, store.canPutBulletinInFolder(outbox, b2.getAccount(), b2.getStatus()));
+		boolean canPutInOutbox = store.canPutBulletinInFolder(outbox, b2.getAccount(), b2.getStatus());
+		assertEquals("sealed b2 from another account got put in outbox?", false, canPutInOutbox);
 		assertEquals("sealed b2 from another account can't be put in discarded?", true, store.canPutBulletinInFolder(discardedbox, b2.getAccount(), b2.getStatus()));
 	}
 
@@ -1270,9 +1270,7 @@ public class TestBulletinStore extends TestCaseEnhanced
 	private BulletinStore createTempStore() throws Exception
 	{
 		MockMartusSecurity tempSecurity = MockMartusSecurity.createOtherClient();
-		BulletinStore tempStore = new BulletinStore(new MockClientDatabase());
-		tempStore.setSignatureGenerator(tempSecurity);
-		return tempStore;
+		return new MockBulletinStore(tempSecurity);
 	}
 	
 	public void testScrubAllData() throws Exception

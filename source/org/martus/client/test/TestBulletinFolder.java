@@ -32,8 +32,6 @@ import org.martus.client.core.BulletinFolder;
 import org.martus.client.core.BulletinStore;
 import org.martus.client.core.BulletinStore.BulletinAlreadyExistsException;
 import org.martus.common.bulletin.Bulletin;
-import org.martus.common.crypto.MockMartusSecurity;
-import org.martus.common.database.MockClientDatabase;
 import org.martus.common.packet.UniversalId;
 import org.martus.util.TestCaseEnhanced;
 
@@ -49,8 +47,7 @@ public class TestBulletinFolder extends TestCaseEnhanced
     	super.setUp();
     	if(store == null)
     	{
-			store = new BulletinStore(new MockClientDatabase());
-			store.setSignatureGenerator(MockMartusSecurity.createClient());
+			store = new MockBulletinStore();
 			testFolder = store.createFolder("something");
 
 			b = store.createEmptyBulletin();
@@ -329,15 +326,6 @@ public class TestBulletinFolder extends TestCaseEnhanced
 			Bulletin b = store.createEmptyBulletin();
 			store.saveBulletin(b);
 			folder.add(b);
-		}
-	}
-
-	class MockBulletinStore extends BulletinStore
-	{
-		MockBulletinStore() throws Exception
-		{
-			super(new MockClientDatabase());
-			setSignatureGenerator(MockMartusSecurity.createClient());
 		}
 	}
 
