@@ -85,6 +85,7 @@ import org.martus.common.network.NetworkResponse;
 import org.martus.common.packet.FieldDataPacket;
 import org.martus.common.packet.UniversalId;
 import org.martus.common.packet.Packet.WrongAccountException;
+import org.martus.common.utilities.MartusServerUtilities;
 import org.martus.util.Base64;
 import org.martus.util.ByteArrayInputStreamWithSeek;
 import org.martus.util.DirectoryUtils;
@@ -893,20 +894,7 @@ public class MartusApp
 		ServerNotAvailableException,
 		PublicInformationInvalidException
 	{
-		if(server.ping() == null)
-			throw new ServerNotAvailableException();
-
-		Vector serverInformation = server.getServerInformation();
-		if(serverInformation == null)
-			throw new ServerNotAvailableException();
-
-		if(serverInformation.size() != 3)
-			throw new PublicInformationInvalidException();
-
-		String accountId = (String)serverInformation.get(1);
-		String sig = (String)serverInformation.get(2);
-		MartusUtilities.validatePublicInfo(accountId, sig, getSecurity());
-		return accountId;
+		return MartusServerUtilities.getServerPublicKey(server, getSecurity());
 	}
 
 	public boolean requestServerUploadRights(String magicWord)
