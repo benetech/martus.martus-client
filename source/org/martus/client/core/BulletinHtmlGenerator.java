@@ -55,10 +55,6 @@ public class BulletinHtmlGenerator
 		html.append(Integer.toString(width));
 		html.append("'>");
 
-		html.append(localization.getFieldLabel("BulletinId")+" ");
-		html.append(b.getLocalId());
-		html.append("<tr></tr>");
-
 		String publicSectionTitle =  localization.getFieldLabel("publicsection");
 		html.append("<tr><td colspan='2'><u><b>");
 		html.append(publicSectionTitle);
@@ -84,6 +80,9 @@ public class BulletinHtmlGenerator
 		html.append(getSectionHtmlString(b, privateFieldTags));
 		html.append(getAttachmentsHtmlString(b.getPrivateFieldDataPacket()));
 
+		html.append("<tr></tr>");
+		html.append(localization.getFieldLabel("BulletinId")+" ");
+		html.append(b.getLocalId());
 		html.append("</table>");
 		html.append("</html>");
 		return new String(html);
