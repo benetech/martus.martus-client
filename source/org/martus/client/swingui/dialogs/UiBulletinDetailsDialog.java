@@ -26,15 +26,12 @@ Boston, MA 02111-1307, USA.
 
 package org.martus.client.swingui.dialogs;
 
-import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
@@ -82,36 +79,19 @@ public class UiBulletinDetailsDialog extends JDialog
 		}
 		
 		UiScrollPane historyScroller = createHistoryTable();
-
-		previewVersionButton = new JButton(getLocalization().getButtonLabel("ViewPreviousBulletinVersion"));
-		previewVersionButton.addActionListener(new previewListener());
-		if(versionTable.getRowCount() < 2)
-			previewVersionButton.setEnabled(false);
-
-		
-		Box historyBox = Box.createHorizontalBox();
-		historyBox.add(historyScroller);
-		historyBox.add(Box.createHorizontalStrut(10));
-		historyBox.add(previewVersionButton);
-		
-		
-		panel.addComponents(new JLabel(getLabel("History")), historyBox);
+		panel.addComponents(new JLabel(getLabel("History")), historyScroller);
 		
 		JButton closeButton = new JButton(getLocalization().getButtonLabel("close"));
 		closeButton.addActionListener(new CloseHandler());
 		getRootPane().setDefaultButton(closeButton);
 		closeButton.requestFocus(true);
+		previewVersionButton = new JButton(getLocalization().getButtonLabel("ViewPreviousBulletinVersion"));
+		previewVersionButton.addActionListener(new previewListener());
+		if(versionTable.getRowCount() < 2)
+			previewVersionButton.setEnabled(false);
+		panel.addComponents(closeButton, previewVersionButton);
 
-		Box buttonBox = Box.createHorizontalBox();
-		buttonBox.add(Box.createHorizontalGlue());
-		buttonBox.add(closeButton);
-		buttonBox.add(Box.createHorizontalGlue());
-		
-		
-		JPanel mainPanel = new JPanel();
-		mainPanel.add(panel);
-		mainPanel.add(buttonBox, BorderLayout.SOUTH);
-		getContentPane().add(new UiScrollPane(mainPanel, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER));
+		getContentPane().add(new UiScrollPane(panel, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER));
 		
 		Utilities.centerDlg(this);
 		setResizable(true);
