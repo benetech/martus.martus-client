@@ -70,6 +70,7 @@ public class UiBulletinModifyDlg extends JFrame implements ActionListener, Windo
 		try
 		{
 			bulletin = b;
+			observer.getApp().setHQKeysInBulletin(bulletin);
 
 			view = new UiBulletinEditor(observer);
 			view.copyDataFromBulletin(bulletin);
@@ -217,8 +218,6 @@ public class UiBulletinModifyDlg extends JFrame implements ActionListener, Windo
 				bulletin.setDraft();
 				outboxToUse = draftOutbox;
 			}
-			
-			app.setHQKeysInBulletin(bulletin);
 			saveBulletinAndUpdateFolders(store, outboxToUse);
 			wasBulletinSavedFlag = true;
 			cleanupAndExit();

@@ -125,14 +125,15 @@ public class UiBulletinEditor extends UiBulletinComponent
 	public void copyDataToBulletin(Bulletin bulletin) throws
 		IOException,
 		MartusCrypto.EncryptionException
-	{				
-		bulletin.clear();
+	{	
+		bulletin.clearAllUserData();
 			
 		boolean isAllPrivate = isAllPrivateBoxChecked();
 		bulletin.setAllPrivate(isAllPrivate);
 		
 		publicSection.copyDataToBulletin(bulletin);
 		privateSection.copyDataToBulletin(bulletin);
+		mainWindow.getApp().setHQKeysInBulletin(bulletin);
 
 		UiBulletinComponentEditorSection publicEditorSection = (UiBulletinComponentEditorSection)publicSection;
 		AttachmentProxy[] publicAttachments = publicEditorSection.attachmentEditor.getAttachments();
