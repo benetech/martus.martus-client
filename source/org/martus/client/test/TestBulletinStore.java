@@ -1244,9 +1244,9 @@ public class TestBulletinStore extends TestCaseEnhanced
 		return tempStore;
 	}
 	
-	public void testScrubAllRecordForAccount() throws Exception
+	public void testScrubAllData() throws Exception
 	{		
-		TRACE("testScrubAllRecordForAccount");
+		TRACE("testScrubAllData");
 		
 		Bulletin b = store.createEmptyBulletin();
 		store.saveBulletin(b);
