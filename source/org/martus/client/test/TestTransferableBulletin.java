@@ -54,6 +54,7 @@ public class TestTransferableBulletin extends TestCaseEnhanced
 
 	public void setUp() throws Exception
 	{
+		super.setUp();
 		if(security == null)
 		{
 			security = new MartusSecurity();
@@ -66,9 +67,10 @@ public class TestTransferableBulletin extends TestCaseEnhanced
 		dragId = drag.getBulletins()[0].getLocalId();
 	}
 
-	public void tearDown()
+	public void tearDown() throws Exception
 	{
 		drag.dispose();
+		super.tearDown();
 	}
 
 	public void testBasics()

@@ -43,6 +43,7 @@ public class TestFolderList extends TestCase
 
     public void setUp() throws Exception
     {
+    	super.setUp();
     	localization = new MockUiLocalization();
 		app = MockMartusApp.create();
 		app.store = new BulletinStore(new MockClientDatabase());
@@ -52,6 +53,7 @@ public class TestFolderList extends TestCase
     public void tearDown() throws Exception
     {
     	app.deleteAllFiles();
+    	super.tearDown();
     }
 
 	public void testBasics() throws Exception

@@ -44,6 +44,7 @@ public class TestBulletinTableModel extends TestCase
 
     public void setUp() throws Exception
     {
+    	super.setUp();
     	localization = new MockUiLocalization();
 		app = MockMartusApp.create();
 		app.store = new BulletinStore(new MockClientDatabase());
@@ -57,6 +58,7 @@ public class TestBulletinTableModel extends TestCase
     {
 		store.deleteAllData();
 		app.deleteAllFiles();
+		super.tearDown();
 	}
 	
 	public void test() throws Exception

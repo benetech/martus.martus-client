@@ -52,6 +52,7 @@ public class TestTransferableAttachments extends TestCaseEnhanced
 
 	public void setUp() throws Exception
 	{
+		super.setUp();
 		if(security == null)
 		{
 			security = new MartusSecurity();
@@ -79,9 +80,10 @@ public class TestTransferableAttachments extends TestCaseEnhanced
 		drag = createTransferableAttachment(attachment);
 	}
 
-	public void tearDown()
+	public void tearDown() throws Exception
 	{
 		drag.dispose();
+		super.tearDown();
 	}
 	
 	public void testgetFile() throws Exception

@@ -65,6 +65,7 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 
 	public void setUp() throws Exception
 	{
+		super.setUp();
 		TRACE_BEGIN("setUp");
 
 		mockSecurityForApp = MockMartusSecurity.createClient();
@@ -85,6 +86,7 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 	public void tearDown() throws Exception
 	{
 		appWithAccount.deleteAllFiles();
+		super.tearDown();
 	}
 
 	public void testBasics()

@@ -44,8 +44,9 @@ public class TestMartusLocalization extends TestCase
 		super(name);
 	}
 
-	public void setUp()
+	public void setUp() throws Exception
 	{
+		super.setUp();
 		if(bd == null)
 			bd = new UiLocalization(MartusApp.getTranslationsDirectory());
  	}

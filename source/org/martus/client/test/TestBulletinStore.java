@@ -74,6 +74,7 @@ public class TestBulletinStore extends TestCaseEnhanced
 
     public void setUp() throws Exception
     {
+    	super.setUp();
     	if(store == null)
     	{
     		store = createTempStore();
@@ -92,7 +93,8 @@ public class TestBulletinStore extends TestCaseEnhanced
     {
     	assertEquals("Still some mock streams open?", 0, db.getOpenStreamCount());
 		store.deleteAllData();
-    }
+		super.tearDown();
+	}
 
     public void testBasics()
     {

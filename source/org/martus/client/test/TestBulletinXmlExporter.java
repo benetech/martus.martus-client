@@ -50,6 +50,7 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 
 	public void setUp() throws Exception
 	{
+		super.setUp();
 		if(store==null)
 		{
 			store = new BulletinStore(new MockClientDatabase());

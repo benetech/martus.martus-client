@@ -42,6 +42,7 @@ public class TestRandomAccessFileOverwrite extends TestCase
 
 	public void setUp() throws Exception
 	{
+		super.setUp();
 		tempFile = createTempFile("$$$MartusTestRandomAccessFile");
 		FileOutputStream out = new FileOutputStream(tempFile);
 		out.write(sampleBytes);
@@ -51,6 +52,7 @@ public class TestRandomAccessFileOverwrite extends TestCase
 	public void tearDown() throws Exception
 	{		
 		tempFile.delete();
+		super.tearDown();
 	}
 
     public void testBasics() throws Exception
