@@ -97,8 +97,7 @@ public class UiAboutDlg extends JDialog implements ActionListener
 
 		final String disclaimer = localization.getFieldLabel("aboutDlgDisclaimer");
 		final String credits = localization.getFieldLabel("aboutDlgCredits");
-		final String notice = "\n" + disclaimer + "\n\n" + credits + "\n\n" +
-					RSANOTICE + "\n" + IBMNOTICE + "\n" + APACHENOTICE;
+		final String notice = "\n" + disclaimer + "\n\n" + credits + "\n\n" + APACHENOTICE;
 
 		Box vBoxDetails = Box.createVerticalBox();
 		vBoxDetails.add(new UiWrappedTextArea(notice));
@@ -132,7 +131,5 @@ public class UiAboutDlg extends JDialog implements ActionListener
 				dispose();
 		}
 	}
-	final String RSANOTICE = "This product includes code licensed from RSA Security, Inc.";
-	final String IBMNOTICE = "Some portions licensed from IBM are available at http://oss.software.ibm.com/icu4j/.";
 	final String APACHENOTICE = "This product includes software developed by the Apache Software Foundation (http://www.apache.org/).";
 }
