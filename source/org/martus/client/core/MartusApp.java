@@ -348,7 +348,7 @@ public class MartusApp
 	public File getUiStateFile()
 	{
 		if(isSignedIn())
-			return new File(getMartusDataRootDirectory(), "UsersUiState.dat");
+			return new File(getCurrentAccountDirectory(), "UserUiState.dat");
 		else
 			return new File(getMartusDataRootDirectory(), "UiState.dat");
 	}
