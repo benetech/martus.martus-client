@@ -170,7 +170,9 @@ public class ClientBulletinStore extends BulletinStore
 		UniversalId id = b.getUniversalId();
 		removeFromAllFolders(id);
 		saveFolders();
-		removeBulletinFromStore(id);
+
+		cache.remove(id);
+		removeBulletinFromStore(b);
 	}
 
 	private void removeFromAllFolders(UniversalId id)
@@ -178,22 +180,6 @@ public class ClientBulletinStore extends BulletinStore
 		for(int f = 0; f < getFolderCount(); ++f)
 		{
 			removeBulletinFromFolder(getFolder(f), id);
-		}
-	}
-
-	public synchronized void removeBulletinFromStore(UniversalId uid) throws IOException
-	{
-		Bulletin foundBulletin = findBulletinByUniversalId(uid);
-		cache.remove(uid);
-		MartusCrypto crypto = getSignatureVerifier();
-		try
-		{
-			MartusUtilities.deleteBulletinFromDatabase(foundBulletin.getBulletinHeaderPacket(), getDatabase(), crypto);
-		}
-		catch(Exception e)
-		{
-			//e.printStackTrace();
-			throw new IOException("Unable to delete bulletin");
 		}
 	}
 
