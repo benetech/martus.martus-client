@@ -99,6 +99,7 @@ import org.martus.client.swingui.dialogs.UiSigninDlg;
 import org.martus.client.swingui.dialogs.UiSplashDlg;
 import org.martus.client.swingui.dialogs.UiStringInputDlg;
 import org.martus.client.swingui.dialogs.UiTemplateDlg;
+import org.martus.client.swingui.dialogs.UiWarningMessageDlg;
 import org.martus.client.swingui.foldertree.UiFolderTreePane;
 import org.martus.client.swingui.tablemodels.DeleteMyServerDraftsTableModel;
 import org.martus.client.swingui.tablemodels.RetrieveHQDraftsTableModel;
@@ -215,6 +216,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	static public void displayDefaultUnofficialTranslationMessage(JFrame owner)
 	{
 		URL untranslatedURL = UiMainWindow.class.getResource("UnofficialTranslationMessage.txt");
+		URL untranslatedRtoLURL = UiMainWindow.class.getResource("UnofficialTranslationMessageRtoL.txt");
 		
 		try
 		{
@@ -222,12 +224,16 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 			UnicodeReader reader = new UnicodeReader(in);
 			String message = reader.readAll();
 			reader.close();
+			in = untranslatedRtoLURL.openStream();
+			reader = new UnicodeReader(in);
+			String messageRtoL = reader.readAll();
+			reader.close();
 
 			updateIcon(owner);
-			String[] buttons = { "OK" };
-			String newMessage = getWarningMessageAboutUnofficialTranslations(message);
+			String warningMessageLtoR = getWarningMessageAboutUnofficialTranslations(message);
+			String warningMessageRtoL = getWarningMessageAboutUnofficialTranslations(messageRtoL);
 			Toolkit.getDefaultToolkit().beep();
-			new UiNotifyDlg(owner, "", new String[]{newMessage}, buttons);
+			new UiWarningMessageDlg(owner, "",warningMessageLtoR, warningMessageRtoL);
 		}
 		catch(Exception e)
 		{
