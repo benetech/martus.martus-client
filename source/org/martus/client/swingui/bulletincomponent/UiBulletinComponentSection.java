@@ -28,7 +28,6 @@ package org.martus.client.swingui.bulletincomponent;
 
 import java.awt.Color;
 import java.awt.Font;
-import java.text.DateFormat;
 
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
@@ -40,7 +39,6 @@ import javax.swing.border.LineBorder;
 import org.martus.client.swingui.UiWarningLabel;
 import org.martus.client.swingui.fields.UiDateEditor;
 import org.martus.client.swingui.fields.UiField;
-import org.martus.client.swingui.fields.UiFlexiDateEditor;
 import org.martus.client.swingui.fields.UiField.DataInvalidException;
 import org.martus.common.FieldSpec;
 import org.martus.common.bulletin.AttachmentProxy;
@@ -48,7 +46,6 @@ import org.martus.common.bulletin.Bulletin;
 import org.martus.common.clientside.ChoiceItem;
 import org.martus.common.clientside.UiBasicLocalization;
 import org.martus.common.packet.FieldDataPacket;
-import org.martus.common.utilities.MartusFlexidate;
 import org.martus.swing.ParagraphLayout;
 
 abstract public class UiBulletinComponentSection extends JPanel
@@ -255,15 +252,9 @@ abstract public class UiBulletinComponentSection extends JPanel
 		{			
 			String fieldTag = fieldSpecs[fieldNum].getTag();			
 			String oldFieldText = original.get(fieldTag);
-			
-			String currentFieldText = null;
-		
-			if (fields[fieldNum] instanceof UiFlexiDateEditor)							
-				currentFieldText = getBulletinFlexidateFormat(oldFieldText);					
-			else
-				currentFieldText = oldFieldText;		
-																								
-			if (!currentFieldText.equals(newBulletin.get(fieldTag)))
+			String newFieldText = newBulletin.get(fieldTag);
+
+			if (!oldFieldText.equals(newFieldText))
 			{									
 				return true;
 			}																
@@ -272,14 +263,6 @@ abstract public class UiBulletinComponentSection extends JPanel
 		return false;
 	}
 
-	private String getBulletinFlexidateFormat(String fieldValue)
-	{
-		MartusFlexidate martusFlexidate = MartusFlexidate.createFromMartusDateString(fieldValue);
-		DateFormat df = Bulletin.getStoredDateFormat();	
-		String storedDateFormat = df.format(martusFlexidate.getBeginDate());
-		return storedDateFormat+MartusFlexidate.DATE_RANGE_SEPARATER+martusFlexidate.getMatusFlexidate();		
-	}		
-	
 
 
 	UiBasicLocalization localization;
