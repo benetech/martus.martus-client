@@ -40,6 +40,7 @@ import org.martus.client.core.ChoiceItem;
 import org.martus.client.core.ConfigInfo;
 import org.martus.client.core.MartusApp;
 import org.martus.client.swingui.UiLocalization;
+import org.martus.client.swingui.actions.QuickEraseOptions;
 import org.martus.common.MartusUtilities;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.crypto.MartusCrypto;
@@ -137,8 +138,8 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		BulletinFolder f2 = appWithAccount.getFolderDraftOutbox();
 		f1.add(b1);
 		f2.add(b2);
-		assertEquals(2, appWithAccount.getStore().getBulletinCount());
-		appWithAccount.deleteAllBulletinsAndUserFolders(false, false);
+		assertEquals(2, appWithAccount.getStore().getBulletinCount());		
+		appWithAccount.deleteAllBulletinsAndUserFolders(new QuickEraseOptions());
 		assertEquals(0, appWithAccount.getStore().getBulletinCount());
 		assertNotNull("System Folder deleted?", appWithAccount.getFolderDraftOutbox());
 		assertNull("User Folder Not deleted?", appWithAccount.getStore().findFolder(f1.getName()));

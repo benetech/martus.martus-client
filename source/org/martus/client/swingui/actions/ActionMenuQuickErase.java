@@ -39,7 +39,7 @@ public class ActionMenuQuickErase extends UiMenuAction
 	}
 	
 	public void actionPerformed(ActionEvent arg0) 
-	{
+	{			
 		if(!mainWindow.reSignIn())
 			return;
 		
@@ -48,11 +48,15 @@ public class ActionMenuQuickErase extends UiMenuAction
 		
 		if (!dlg.isOkayPressed())
 			return;
-				
-		boolean scrubSelected 	= dlg.isScrubCheckBoxSelected();
-		boolean keyPairSelected = dlg.isDeleteKeypairSelected();
+
+		boolean scrubSelected = dlg.isScrubCheckBoxSelected();
+		boolean deletKeyPairSelected = dlg.isDeleteKeypairSelected();
+					
+		QuickEraseOptions options = new QuickEraseOptions();			
+		options.setScrubOption(scrubSelected);
+		options.setDeleteKeyPairOption(deletKeyPairSelected);	
 		
-		if(mainWindow.getApp().deleteAllBulletinsAndUserFolders(scrubSelected, keyPairSelected))
+		if(mainWindow.getApp().deleteAllBulletinsAndUserFolders(options))
 		{	
 			String baseTag = (scrubSelected)? "QuickEraseScrubWorked":"QuickEraseWorked";		
 			mainWindow.notifyDlg(mainWindow, baseTag);
@@ -60,6 +64,6 @@ public class ActionMenuQuickErase extends UiMenuAction
 		else
 			mainWindow.notifyDlg(mainWindow, "QuickEraseFailed");
 			
-		mainWindow.folderTreeContentsHaveChanged();
+		mainWindow.folderTreeContentsHaveChanged();		
 	}
 }

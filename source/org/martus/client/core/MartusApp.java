@@ -43,6 +43,7 @@ import java.util.Vector;
 import org.martus.client.core.ClientSideNetworkHandlerUsingXmlRpc.SSLSocketSetupException;
 import org.martus.client.core.Exceptions.ServerCallFailedException;
 import org.martus.client.core.Exceptions.ServerNotAvailableException;
+import org.martus.client.swingui.actions.QuickEraseOptions;
 import org.martus.common.FieldSpec;
 import org.martus.common.MartusConstants;
 import org.martus.common.MartusUtilities;
@@ -478,11 +479,11 @@ public class MartusApp
 		return newFolder;
 	}
 
-	public boolean deleteAllBulletinsAndUserFolders(boolean scrubBeforeDelete, boolean deleteKeyPair)
+	public boolean deleteAllBulletinsAndUserFolders(QuickEraseOptions opts)
 	{
 		try
 		{
-			if (scrubBeforeDelete)
+			if (opts.isScrubSelected())
 				store.scrubAllData();
 				
 			store.deleteAllData();
