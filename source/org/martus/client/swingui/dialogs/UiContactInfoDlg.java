@@ -47,7 +47,7 @@ public class UiContactInfoDlg extends JDialog implements ActionListener
 {
 	public UiContactInfoDlg(UiMainWindow mainWindow, ConfigInfo infoToUse)
 	{
-		super(mainWindow, "", true);
+		super(mainWindow.getCurrentActiveFrame(), "", true);
 		info = infoToUse;
 
 		UiBasicLocalization localization = mainWindow.getLocalization();

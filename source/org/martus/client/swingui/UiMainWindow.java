@@ -131,7 +131,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	public UiMainWindow()
 	{
 		super();
-		currentActiveFrame = this;
+		setCurrentActiveFrame(this);
 		try
 		{
 			localization = new UiLocalization(MartusApp.getTranslationsDirectory(), EnglishStrings.strings);
@@ -158,7 +158,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		UiMainWindow.updateIcon(hiddenFrame);
 		hiddenFrame.setState(Frame.ICONIFIED);
 		hiddenFrame.show();
-		currentActiveFrame = hiddenFrame;
+		setCurrentActiveFrame(hiddenFrame);
 		notifyClientCompliance(hiddenFrame);
 		hiddenFrame.setTitle(UiSigninDlg.getInitialSigninTitle(localization));
 		mainWindowInitalizing = true;
@@ -193,8 +193,6 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 			createdNewAccount = true;
 		}
 
-		currentActiveFrame = this;
-		hiddenFrame.dispose();
 		UiModelessBusyDlg waitingForBulletinsToLoad = new UiModelessBusyDlg(getLocalization().getFieldLabel("waitingForBulletinsToLoad"));
 		initalizeUiState();
 		
@@ -222,6 +220,8 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		}
 
 		doAfterSignInConfigInfoSetup(createdNewAccount);
+		setCurrentActiveFrame(this);
+		hiddenFrame.dispose();
 
 		int quarantineCount = app.quarantineUnreadableBulletins();
 
@@ -1045,7 +1045,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		String[] contents = {serverSelected, uploadGranted};
 		String[] buttons = {ok};
 	
-		new UiNotifyDlg(currentActiveFrame, title, contents, buttons);
+		new UiNotifyDlg(getCurrentActiveFrame(), title, contents, buttons);
 		if(magicAccepted)
 			requestToUpdateContactInfoOnServerAndSaveInfo();
 		inConfigServer = false;
@@ -1379,7 +1379,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 			String ok = getLocalization().getButtonLabel("ok");
 			String[] contents = {msg, export.getCanonicalPath()};
 			String[] buttons = {ok};
-			new UiNotifyDlg(currentActiveFrame, title, contents, buttons);
+			new UiNotifyDlg(getCurrentActiveFrame(), title, contents, buttons);
 		}
 		catch(Exception e)
 		{
@@ -1619,9 +1619,9 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 			while(userChoice == UiSigninDlg.LANGUAGE_CHANGED)
 			{	
 				if(mode==UiSigninDlg.INITIAL || mode == UiSigninDlg.INITIAL_NEW_RECOVER_ACCOUNT)
-					signinDlg = new UiInitialSigninDlg(getLocalization(), getCurrentUiState(), currentActiveFrame, mode, userName, userPassword);
+					signinDlg = new UiInitialSigninDlg(getLocalization(), getCurrentUiState(), getCurrentActiveFrame(), mode, userName, userPassword);
 				else
-					signinDlg = new UiSigninDlg(getLocalization(), getCurrentUiState(), currentActiveFrame, mode, userName, userPassword);
+					signinDlg = new UiSigninDlg(getLocalization(), getCurrentUiState(), getCurrentActiveFrame(), mode, userName, userPassword);
 				userChoice = signinDlg.getUserChoice();
 				userName = signinDlg.getName();
 				userPassword = signinDlg.getPassword();
@@ -1637,13 +1637,13 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 				else
 				{	
 					app.attemptReSignIn(userName, userPassword);
-					currentActiveFrame.setState(NORMAL);
+					getCurrentActiveFrame().setState(NORMAL);
 				}
 				return UiSigninDlg.SIGN_IN;
 			}
 			catch (Exception e)
 			{
-				notifyDlg(currentActiveFrame, "incorrectsignin");
+				notifyDlg(getCurrentActiveFrame(), "incorrectsignin");
 				busyDlg = new UiModelessBusyDlg(getLocalization().getFieldLabel("waitAfterFailedSignIn"));
 			}
 			finally
@@ -1722,7 +1722,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		getCurrentUiState().setModifyingBulletin(true);
 		setEnabled(false);
 		UiBulletinModifyDlg dlg = new UiBulletinModifyDlg(b, cancelHandler, this);
-		currentActiveFrame = dlg;
+		setCurrentActiveFrame(dlg);
 		setVisible(false);
 		return dlg.wasBulletinSaved();
 	}
@@ -1732,7 +1732,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		getCurrentUiState().setModifyingBulletin(false);
 		setEnabled(true);
 		setVisible(true);
-		currentActiveFrame = this;
+		setCurrentActiveFrame(this);
 	}
 
 	public void doExportFolder()
@@ -1831,10 +1831,10 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		{
 			public void run()
 			{
-				currentActiveFrame.setState(ICONIFIED);
+				getCurrentActiveFrame().setState(ICONIFIED);
 				if(signIn(UiSigninDlg.TIMED_OUT) != UiSigninDlg.SIGN_IN)
 					exitWithoutSavingState();
-				currentActiveFrame.setState(NORMAL);
+				getCurrentActiveFrame().setState(NORMAL);
 			}
 		}
 	}
@@ -1882,6 +1882,16 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 			window.setIconImage(imageicon.getImage());
 	}
 
+	void setCurrentActiveFrame(JFrame currentActiveFrame)
+	{
+		this.currentActiveFrame = currentActiveFrame;
+	}
+
+	public JFrame getCurrentActiveFrame()
+	{
+		return currentActiveFrame;
+	}
+
 	
 	private MartusApp app;
 	private CurrentUiState uiState;
@@ -1901,7 +1911,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	UiStatusBar statusBar;
 	UiLocalization localization;
 
-	JFrame currentActiveFrame;
+	private JFrame currentActiveFrame;
 	boolean inConfigServer;
 
 	int timeoutInXSeconds;
