@@ -54,20 +54,34 @@ public class UiGridEditor extends UiGrid
 			{
 				if(e.isShiftDown())
 				{
-					if(table.getSelectedRow()==0 && table.getSelectedColumn() == 0)
+					if(table.getSelectedRow()==0 && table.getSelectedColumn() == 1)
 					{
 						e.consume();
 						table.transferFocusBackward();
 					}
-				}
-				else if(table.getSelectedRow()== table.getRowCount()-1)
-				{
-					if(table.getSelectedColumn() == table.getColumnCount() -1)
+					else if(table.getSelectedColumn() <= 1)
 					{
 						e.consume();
-						table.transferFocus();
+						table.changeSelection(table.getSelectedRow()-1, table.getColumnCount()-1, false, false);
 					}
+					
 				}
+				else 
+				{ 
+					if(table.getSelectedRow()== table.getRowCount()-1)
+					{
+						if(table.getSelectedColumn() >= table.getColumnCount()-1)
+						{
+							e.consume();
+							table.transferFocus();
+						}
+					}
+/*					else if(table.getSelectedColumn() >= table.getColumnCount()-1)
+					{
+						e.consume();
+						table.changeSelection(table.getSelectedRow()+1, 1, false, false);
+					}
+*/				}
 			}
 		}
 

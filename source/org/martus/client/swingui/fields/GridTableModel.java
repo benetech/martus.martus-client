@@ -26,6 +26,7 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.swingui.fields;
 
 import java.io.IOException;
+import java.util.Vector;
 
 import javax.swing.table.DefaultTableModel;
 import javax.xml.parsers.ParserConfigurationException;
@@ -37,10 +38,20 @@ import org.xml.sax.SAXException;
 
 public class GridTableModel extends DefaultTableModel
 {
+	public boolean isCellEditable(int row, int column)
+	{
+		if(column == 0)
+			return false;
+		return super.isCellEditable(row, column);
+	}
 	public GridTableModel(GridFieldSpec fieldSpec)
 	{
-		setColumnIdentifiers(fieldSpec.getAllColumnLabels());
-		gridData = new GridData(fieldSpec.getColumnCount());
+		Vector columnLabels = new Vector();
+		String emptyColumnLabel = " ";
+		columnLabels.add(emptyColumnLabel);
+		columnLabels.addAll(fieldSpec.getAllColumnLabels());
+		setColumnIdentifiers(columnLabels);
+		gridData = new GridData(fieldSpec.getColumnCount() + EXTRA_COLUMN);
 	}
 	
 	public void addEmptyRow()
@@ -59,12 +70,16 @@ public class GridTableModel extends DefaultTableModel
 
 	public Object getValueAt(int row, int column)
 	{
-		return gridData.getValueAt(row, column);
+		if(column == 0)
+			return new Integer(row+1).toString();
+		return gridData.getValueAt(row, column - EXTRA_COLUMN );
 	}
 
 	public void setValueAt(Object aValue, int row, int column)
 	{
-		gridData.setValueAt((String)aValue, row, column);
+		if(column == 0)
+			return;
+		gridData.setValueAt((String)aValue, row, column - EXTRA_COLUMN);
 		fireTableCellUpdated(row,column);
 	}
 	
@@ -78,6 +93,6 @@ public class GridTableModel extends DefaultTableModel
 		gridData.setFromXml(xmlText);
 		fireTableDataChanged();
 	}
-	
+	public int EXTRA_COLUMN = 1;
 	private GridData gridData;
 }

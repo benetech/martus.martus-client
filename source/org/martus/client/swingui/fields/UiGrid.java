@@ -53,6 +53,7 @@ public class UiGrid extends UiField
 		table.setColumnSelectionAllowed(false);
 		table.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
 		table.setShowGrid(true);
+		table.changeSelection(0, 1, false, false);		
 		widget = new JScrollPane(table);
 	}	
 	
@@ -68,6 +69,14 @@ public class UiGrid extends UiField
 			//TODO Optimize: don't create a new renderer each time
 			return new myCellRenderer();
 		}
+
+		public void changeSelection(int rowIndex, int columnIndex,
+				boolean toggle, boolean extend)
+		{
+			if(columnIndex == 0)
+				columnIndex = 1;
+			super.changeSelection(rowIndex, columnIndex, toggle, extend);
+		}
 	}
 	
 	class myCellRenderer implements TableCellRenderer
@@ -76,7 +85,13 @@ public class UiGrid extends UiField
 		{
 			JTextField cell = new JTextField((String)value);
 			cell.setBorder(new EmptyBorder(0,0,0,0));
-
+			if(column == 0)
+			{
+				cell.setBackground(Color.LIGHT_GRAY);
+				cell.setForeground(Color.BLACK);
+				return cell;
+			}
+			
 			if(hasFocus)
 			{
 				cell.setBorder(new LineBorder(Color.BLACK,1));
