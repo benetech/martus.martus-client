@@ -29,12 +29,12 @@ package org.martus.client.core;
 import java.io.IOException;
 import java.io.Writer;
 import java.util.Vector;
-
 import org.martus.common.FieldSpec;
 import org.martus.common.MartusUtilities;
 import org.martus.common.MartusXml;
 import org.martus.common.bulletin.AttachmentProxy;
 import org.martus.common.bulletin.Bulletin;
+import org.martus.common.clientside.DateUtilities;
 import org.martus.common.packet.BulletinHistory;
 
 public class BulletinXmlExporter
@@ -124,9 +124,14 @@ public class BulletinXmlExporter
 			FieldSpec spec = specs[i];
 			if(spec.hasUnknownStuff())
 				continue;						
-						
 			String tag = spec.getTag();
 			String rawFieldData = b.get(tag);				
+			if(spec.getType() == FieldSpec.TYPE_DATERANGE)
+			{
+				String startDate = DateUtilities.getStartDateRange(rawFieldData);
+				String endDate = DateUtilities.getEndDateRange(rawFieldData);
+				rawFieldData = startDate + "," + endDate;
+			}
 			writeElement(dest,tag, spec.getLabel(), rawFieldData);				
 		}
 		
