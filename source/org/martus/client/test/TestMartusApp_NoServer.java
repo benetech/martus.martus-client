@@ -370,20 +370,6 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		TRACE_END();
 	}
 	
-	public void testIsOurBulletin() throws Exception
-	{
-		TRACE_BEGIN("testIsOurBulletin");
-		Bulletin b = appWithAccount.createBulletin();
-		assertTrue("not our bulletin?", appWithAccount.isOurBulletin(b));
-
-		MockMartusApp appWithDifferentAccount;
-		appWithDifferentAccount = MockMartusApp.create(mockSecurityForApp);
-		appWithDifferentAccount.createAccount("bogusName","bogusPassword".toCharArray());
-		assertFalse("This is our bulletin?", appWithDifferentAccount.isOurBulletin(b));
-		appWithDifferentAccount.deleteAllFiles();
-		TRACE_END();
-	}
-
 	public void testContactInfo() throws Exception
 	{
 		TRACE_BEGIN("testContactInfo");

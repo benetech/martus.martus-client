@@ -1250,11 +1250,6 @@ public class MartusApp
 		return getSecurity().getPublicKeyString();
 	}
 	
-	public boolean isOurBulletin(Bulletin b)
-	{
-		return getAccountId().equals(b.getAccount());	
-	}
-
 	public void writeKeyPairFileWithBackup(File keyPairFile, String userName, char[] userPassPhrase) throws
 		IOException,
 		CannotCreateAccountFileException
