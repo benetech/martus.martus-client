@@ -244,6 +244,8 @@ public class EnglishStrings
 "wintitle:DeleteMyDataFromThisComputer=Delete My Data From This Computer",
 "wintitle:RemoveMartsFromThisComputer=Remove Martus From This Computer",
 
+"wintitle:ResendBulletins=Resend Bulletins",
+
 "button:help=Help",
 "button:create=Create",
 "button:search=Search",
