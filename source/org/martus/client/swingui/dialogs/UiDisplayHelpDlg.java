@@ -79,15 +79,15 @@ public class UiDisplayHelpDlg extends JDialog
 
 		helpPanel.setLayout(new BoxLayout(helpPanel, BoxLayout.Y_AXIS));
 
-		message = getFileContents(fileStream);
-		if(message == null)
+		fileContents = getFileContents(fileStream);
+		if(fileContents == null)
 		{
 			dispose();
 			return;
 		}
-		lowercaseMessage = message.toLowerCase();
+		lowercaseMessage = fileContents.toLowerCase();
 
-		msgArea = new UiWrappedTextArea(message);
+		msgArea = new UiWrappedTextArea(fileContents);
 		highliter = new BasicTextUI.BasicHighlighter();
 		msgArea.setHighlighter(highliter);
 		msgArea.addKeyListener(new TabToOkButton());
@@ -205,7 +205,7 @@ public class UiDisplayHelpDlg extends JDialog
 		{
 			Object selectedValue = tocList.getSelectedValue();
 			String searchString = "-\n" + (String)selectedValue;
-			int foundAt = message.indexOf(searchString);
+			int foundAt = fileContents.indexOf(searchString);
 			int startHighlight = foundAt+2;
 			int endHighlight = foundAt + searchString.length();
 			if(foundAt < 0)
@@ -272,7 +272,7 @@ public class UiDisplayHelpDlg extends JDialog
 
 	public void scrollToPosition(int position)
 	{
-		msgArea.setCaretPosition(message.length());
+		msgArea.setCaretPosition(fileContents.length());
 		msgAreaScrollPane.getVerticalScrollBar().setValue(msgAreaScrollPane.getVerticalScrollBar().getMaximum());
 		msgArea.setCaretPosition(position);
 	}
@@ -311,7 +311,7 @@ public class UiDisplayHelpDlg extends JDialog
 			}
 		}
 	}
-	String message;
+	String fileContents;
 	String lowercaseMessage;
 	JButton searchButton;
 	JTextField searchField;

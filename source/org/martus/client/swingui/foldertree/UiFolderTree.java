@@ -173,7 +173,7 @@ class UiFolderTree extends JTree implements TreeSelectionListener
 
 		public Component getTreeCellRendererComponent(JTree tree, Object value,
 					boolean isSelected, boolean isExpanded, boolean isLeaf,
-					int row, boolean hasFocus)
+					int row, boolean hasFocusFlag)
 		{
 			if(isSelected)
 				label.setIcon(openIcon);
@@ -233,12 +233,12 @@ class UiFolderTree extends JTree implements TreeSelectionListener
 			getModel().valueForPathChanged(path, newFolderName);
 		}
 
-		public Component getTreeCellEditorComponent(JTree tree, Object value, boolean isSelected, boolean expanded, boolean leaf, int row)
+		public Component getTreeCellEditorComponent(JTree treeToUse, Object value, boolean isSelected, boolean expanded, boolean leaf, int row)
 		{
 			node = (FolderTreeNode)value;
 			oldLocalizedFolderName = node.getLocalizedName();
 			oldInternalFolderName = node.getInternalName();
-			Component textField = super.getTreeCellEditorComponent(tree, value, isSelected, expanded, leaf, row);
+			Component textField = super.getTreeCellEditorComponent(treeToUse, value, isSelected, expanded, leaf, row);
 			((JTextComponent)editingComponent).selectAll();
 			return textField;
 		}

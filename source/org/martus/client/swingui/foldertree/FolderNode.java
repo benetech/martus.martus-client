@@ -49,10 +49,10 @@ public class FolderNode
 	
 	public String getLocalizedName()
 	{
-		String internalName = getInternalName();
-		if(BulletinFolder.isNameLocalized(internalName))
-			return localization.getLocalizedFolderName(internalName);
-		return internalName;
+		String name = getInternalName();
+		if(BulletinFolder.isNameLocalized(name))
+			return localization.getLocalizedFolderName(name);
+		return name;
 	}
 	
 	public String toString()

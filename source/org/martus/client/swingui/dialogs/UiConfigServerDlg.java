@@ -58,28 +58,28 @@ public class UiConfigServerDlg extends JDialog implements ActionListener
 		setTitle(localization.getWindowTitle("ConfigServer"));
 		getContentPane().setLayout(new ParagraphLayout());
 
-		serverIP = new JTextField(25);
-		serverPublicCode = new JTextField(25);
+		fieldIPAddress = new JTextField(25);
+		fieldPublicCode = new JTextField(25);
 
 		getContentPane().add(new JLabel(localization.getFieldLabel("ServerNameEntry")), ParagraphLayout.NEW_PARAGRAPH);
-		getContentPane().add(serverIP);
+		getContentPane().add(fieldIPAddress);
 		serverIPAddress = info.getServerName();
-		serverIP.setText(serverIPAddress);
-		serverIP.requestFocus();
+		fieldIPAddress.setText(serverIPAddress);
+		fieldIPAddress.requestFocus();
 
 		getContentPane().add(new JLabel(localization.getFieldLabel("ServerPublicCodeEntry")), ParagraphLayout.NEW_PARAGRAPH);
-		getContentPane().add(serverPublicCode);
-		String serverPublicKey = info.getServerPublicKey();
-		String serverCode = "";
+		getContentPane().add(fieldPublicCode);
+		String knownServerPublicKey = info.getServerPublicKey();
+		String knownServerPublicCode = "";
 		try
 		{
-			if(serverPublicKey.length() > 0)
-				serverCode = MartusCrypto.computeFormattedPublicCode(serverPublicKey);
+			if(knownServerPublicKey.length() > 0)
+				knownServerPublicCode = MartusCrypto.computeFormattedPublicCode(knownServerPublicKey);
 		}
 		catch (InvalidBase64Exception e)
 		{
 		}
-		serverPublicCode.setText(serverCode);
+		fieldPublicCode.setText(knownServerPublicCode);
 
 		getContentPane().add(new JLabel(""), ParagraphLayout.NEW_PARAGRAPH);
 
@@ -116,8 +116,8 @@ public class UiConfigServerDlg extends JDialog implements ActionListener
 		result = false;
 		if(ae.getSource() == ok)
 		{
-			String name = serverIP.getText();
-			String publicCode = serverPublicCode.getText();
+			String name = fieldIPAddress.getText();
+			String publicCode = fieldPublicCode.getText();
 			if(!ValidateInformation(name, publicCode))
 				return;
 			result = true;
@@ -168,8 +168,8 @@ public class UiConfigServerDlg extends JDialog implements ActionListener
 	ConfigInfo info;
 
 	JButton ok;
-	JTextField serverIP;
-	JTextField serverPublicCode;
+	JTextField fieldIPAddress;
+	JTextField fieldPublicCode;
 
 	String serverIPAddress;
 	String serverPublicKey;

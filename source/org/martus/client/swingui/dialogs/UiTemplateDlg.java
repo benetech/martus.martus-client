@@ -63,8 +63,8 @@ public class UiTemplateDlg extends JDialog implements ActionListener
 
 		UiBasicLocalization localization = mainWindow.getLocalization();
 		setTitle(localization.getWindowTitle("BulletinDetails"));
-		ok = new JButton(localization.getButtonLabel("ok"));
-		ok.addActionListener(this);
+		okButton = new JButton(localization.getButtonLabel("ok"));
+		okButton.addActionListener(this);
 		JButton cancel = new JButton(localization.getButtonLabel("cancel"));
 		cancel.addActionListener(this);
 		JButton help = new JButton(localization.getButtonLabel("help"));
@@ -88,19 +88,19 @@ public class UiTemplateDlg extends JDialog implements ActionListener
 
 		Box buttons = Box.createHorizontalBox();
 		Dimension preferredSize = details.getPreferredSize();
-		preferredSize.height = ok.getPreferredSize().height;				
+		preferredSize.height = okButton.getPreferredSize().height;				
 		buttons.setPreferredSize(preferredSize);						
 		buttons.add(loadFromFile);
 
 		buttons.add(Box.createHorizontalGlue());		
-		buttons.add(ok);				
+		buttons.add(okButton);				
 		buttons.add(cancel);
 		buttons.add(help);
 		
 		getContentPane().add(new JLabel(""), ParagraphLayout.NEW_PARAGRAPH);
 		getContentPane().add(buttons);
 		
-		getRootPane().setDefaultButton(ok);
+		getRootPane().setDefaultButton(okButton);
 		Utilities.centerDlg(this);
 	}
 
@@ -186,7 +186,7 @@ public class UiTemplateDlg extends JDialog implements ActionListener
 	public void actionPerformed(ActionEvent ae)
 	{
 		result = false;
-		if(ae.getSource() == ok)
+		if(ae.getSource() == okButton)
 		{
 			info.setTemplateDetails(details.getText());
 			result = true;
@@ -195,7 +195,7 @@ public class UiTemplateDlg extends JDialog implements ActionListener
 	}
 
 	ConfigInfo info;
-	JButton ok;
+	JButton okButton;
 	UiTextArea details;
 	boolean result;
 	UiMainWindow mainWindow;

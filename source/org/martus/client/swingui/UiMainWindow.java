@@ -536,10 +536,10 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	
 	public void allFolderContentsHaveChanged()
 	{
-		Vector folders = getStore().getAllFolders();
-		for (int i = 0; i < folders.size(); i++)
+		Vector allFolders = getStore().getAllFolders();
+		for (int i = 0; i < allFolders.size(); i++)
 		{	
-			folderContentsHaveChanged((BulletinFolder)folders.get(i));
+			folderContentsHaveChanged((BulletinFolder)allFolders.get(i));
 		}
 		folderTreeContentsHaveChanged();
 		selectSentFolder();
@@ -806,13 +806,11 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 
 	void saveStateWithoutPrompting() throws IOException
 	{
-		UiLocalization localization = getLocalization();
-	
 		String folderName = folders.getSelectedFolderName();
 		BulletinFolder folder = getStore().findFolder(folderName);
 		uiState.setCurrentFolder(folderName);
-		uiState.setCurrentDateFormat(localization.getCurrentDateFormatCode());
-		uiState.setCurrentLanguage(localization.getCurrentLanguageCode());
+		uiState.setCurrentDateFormat(getLocalization().getCurrentDateFormatCode());
+		uiState.setCurrentLanguage(getLocalization().getCurrentLanguageCode());
 		if(folder != null)
 		{
 			uiState.setCurrentSortTag(folder.sortedBy());
@@ -982,13 +980,12 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 
 	public void showAccountInfo()
 	{
-		UiLocalization localization = getLocalization();
-		String title = localization.getWindowTitle("AccountInfo");
-		String userName = localization.getFieldLabel("AccountInfoUserName")
+		String title = getLocalization().getWindowTitle("AccountInfo");
+		String userName = getLocalization().getFieldLabel("AccountInfoUserName")
 						  + app.getUserName();
-		String keyDescription = localization.getFieldLabel("AccountInfoPublicKey");
+		String keyDescription = getLocalization().getFieldLabel("AccountInfoPublicKey");
 		String keyContents = app.getAccountId();
-		String codeDescription = localization.getFieldLabel("AccountInfoPublicCode");
+		String codeDescription = getLocalization().getFieldLabel("AccountInfoPublicCode");
 		String formattedCodeContents = null;
 		try
 		{
@@ -997,9 +994,9 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		catch(InvalidBase64Exception e)
 		{
 		}
-		String accountDirectory = localization.getFieldLabel("AccountInfoDirectory") + app.getCurrentAccountDirectory();
+		String accountDirectory = getLocalization().getFieldLabel("AccountInfoDirectory") + app.getCurrentAccountDirectory();
 		
-		String ok = localization.getButtonLabel("ok");
+		String ok = getLocalization().getButtonLabel("ok");
 		String[] contents = {userName, " ", keyDescription, keyContents," ", codeDescription, formattedCodeContents, " ", accountDirectory};
 		String[] buttons = {ok};
 

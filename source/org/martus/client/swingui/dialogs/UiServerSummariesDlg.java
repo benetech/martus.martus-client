@@ -191,11 +191,11 @@ public class UiServerSummariesDlg extends JDialog
 	class BooleanRenderer extends DefaultTableCellRenderer
 	{
 		public Component getTableCellRendererComponent(
-				JTable table, Object value,
+				JTable tableToUse, Object value,
 				boolean isSelected, boolean hasFocus,
 				int row, int column)
 		{
-			Component cell = oldBooleanRenderer.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+			Component cell = oldBooleanRenderer.getTableCellRendererComponent(tableToUse, value, isSelected, hasFocus, row, column);
 			if(enabledBackgroundColor == null)
 				enabledBackgroundColor = cell.getBackground();
 			if(model.isDownloadable(row))
@@ -218,11 +218,11 @@ public class UiServerSummariesDlg extends JDialog
 	class IntegerRenderer extends DefaultTableCellRenderer
 	{
 		public Component getTableCellRendererComponent(
-				JTable table, Object value,
+				JTable tableToUse, Object value,
 				boolean isSelected, boolean hasFocus,
 				int row, int column)
 		{
-			Component cell = oldIntegerRenderer.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+			Component cell = oldIntegerRenderer.getTableCellRendererComponent(tableToUse, value, isSelected, hasFocus, row, column);
 			if(enabledBackgroundColor == null)
 				enabledBackgroundColor = cell.getBackground();
 			if(model.isDownloadable(row))
@@ -245,13 +245,13 @@ public class UiServerSummariesDlg extends JDialog
 	class StringRenderer extends DefaultTableCellRenderer
 	{
 		public Component getTableCellRendererComponent(
-				JTable table, Object value,
+				JTable tableToUse, Object value,
 				boolean isSelected, boolean hasFocus,
 				int row, int column)
 		{
 			if(normalBackgroundColor == null)
 			{
-				Component cell = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+				Component cell = super.getTableCellRendererComponent(tableToUse, value, isSelected, hasFocus, row, column);
 				normalBackgroundColor = cell.getBackground();
 			}
 
@@ -259,7 +259,7 @@ public class UiServerSummariesDlg extends JDialog
 				setBackground(disabledBackgroundColor);
 			else
 				setBackground(normalBackgroundColor);
-			return super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+			return super.getTableCellRendererComponent(tableToUse, value, isSelected, hasFocus, row, column);
 		}
 		Color normalBackgroundColor;
 	}

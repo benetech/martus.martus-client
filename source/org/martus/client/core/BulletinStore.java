@@ -234,9 +234,9 @@ public class BulletinStore
 	{
 		class BulletinKeyFilter implements Database.PacketVisitor
 		{
-			BulletinKeyFilter(Database db, Database.PacketVisitor visitorToUse)
+			BulletinKeyFilter(Database db, Database.PacketVisitor visitorToUse2)
 			{
-				visitor = visitorToUse;
+				visitor = visitorToUse2;
 				db.visitAllRecords(this);
 			}
 
@@ -446,9 +446,9 @@ public class BulletinStore
 	
 	private boolean isInVisibleNonDiscardedFolder(Bulletin b)
 	{
-		Vector folders = findBulletinInAllVisibleFolders(b);
-		folders.remove(getFolderDiscarded());
-		return (folders.size() > 0);
+		Vector foldersContainingBulletin = findBulletinInAllVisibleFolders(b);
+		foldersContainingBulletin.remove(getFolderDiscarded());
+		return (foldersContainingBulletin.size() > 0);
 	}
 
 	public synchronized BulletinFolder createFolder(String name)
@@ -561,10 +561,10 @@ public class BulletinStore
 	public synchronized Vector getAllFolderNames()
 	{
 		Vector names = new Vector();
-		Vector folders = getAllFolders();
-		for(int f = 0; f < folders.size(); ++f)
+		Vector allFolders = getAllFolders();
+		for(int f = 0; f < allFolders.size(); ++f)
 		{
-			names.add(((BulletinFolder)folders.get(f)).getName());
+			names.add(((BulletinFolder)allFolders.get(f)).getName());
 		}
 		return names;
 	}
@@ -880,14 +880,12 @@ public class BulletinStore
 
 	public Bulletin createEmptyBulletin()
 	{
-		FieldSpec[] publicFieldSpecs = getPublicFieldSpecs();
-		FieldSpec[] privateFieldSpecs = getPrivateFieldSpecs();
-		return createEmptyBulletin(publicFieldSpecs, privateFieldSpecs);
+		return createEmptyBulletin(getPublicFieldSpecs(), getPrivateFieldSpecs());
 	}
 	
-	public Bulletin createEmptyBulletin(FieldSpec[] publicFieldSpecs, FieldSpec[] privateFieldSpecs)
+	public Bulletin createEmptyBulletin(FieldSpec[] publicSpecs, FieldSpec[] privateSpecs)
 	{
-		Bulletin b = new Bulletin(getSignatureGenerator(), publicFieldSpecs, privateFieldSpecs);
+		Bulletin b = new Bulletin(getSignatureGenerator(), publicSpecs, privateSpecs);
 		return b;
 	}
 

@@ -83,10 +83,10 @@ abstract public class RetrieveTableModel extends AbstractTableModel
 		currentSummaries = allSummaries;
 	}
 
-	public Vector getSummariesForBulletinsNotInStore(Vector allSummaries)
+	public Vector getSummariesForBulletinsNotInStore(Vector summaries)
 	{
 		Vector result = new Vector();
-		Iterator iterator = allSummaries.iterator();
+		Iterator iterator = summaries.iterator();
 		while(iterator.hasNext())
 		{
 			BulletinSummary currentSummary = (BulletinSummary)iterator.next();

@@ -81,7 +81,7 @@ public class UiGrid extends UiField
 	
 	class myCellRenderer implements TableCellRenderer
 	{
-		public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column)
+		public Component getTableCellRendererComponent(JTable tableToUse, Object value, boolean isSelected, boolean hasFocus, int row, int column)
 		{
 			JTextField cell = new JTextField((String)value);
 			cell.setBorder(new EmptyBorder(0,0,0,0));

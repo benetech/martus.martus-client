@@ -63,19 +63,19 @@ public class TestBulletinFolder extends TestCaseEnhanced
 
     public void testBasics() throws Exception
     {
-		BulletinStore store = new MockBulletinStore();
-		assertEquals(false, (store == null));
+		BulletinStore tempStore = new MockBulletinStore();
+		assertEquals(false, (tempStore == null));
 
 		// shouldn't normally create a folder this way!
-		BulletinFolder folder = new BulletinFolder(store, "bad");
+		BulletinFolder folder = new BulletinFolder(tempStore, "bad");
 		assertEquals("Raw folder should start out empty\n", 0, folder.getBulletinCount());
 
 		// this is the way to get a folder
-		folder = store.createFolder("blah");
+		folder = tempStore.createFolder("blah");
 		assertEquals(false, (folder == null));
 		assertEquals("Store folder should start out empty\n", 0, folder.getBulletinCount());
 
-		assertEquals(store, folder.getStore());
+		assertEquals(tempStore, folder.getStore());
 
 	}
 

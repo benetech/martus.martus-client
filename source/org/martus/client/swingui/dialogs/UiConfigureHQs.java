@@ -198,7 +198,7 @@ public class UiConfigureHQs extends JDialog
 	
 	class HQCellRenderer implements TableCellRenderer
 	{
-		public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column)
+		public Component getTableCellRendererComponent(JTable tableToUse, Object value, boolean isSelected, boolean hasFocus, int row, int column)
 		{
 			JTextField cell = new JTextField((String)value);
 			cell.setBorder(new EmptyBorder(0,0,0,0));

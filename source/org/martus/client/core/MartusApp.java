@@ -118,10 +118,10 @@ public class MartusApp
 			throw new MartusAppInitializationException("ErrorCryptoInitialization");
 		}
 
-		initializeCurrentLanguage(localization);
+		initializeCurrentLanguage();
 	}
 
-	private void initializeCurrentLanguage(Localization localization)
+	private void initializeCurrentLanguage()
 	{
 		CurrentUiState previouslySavedState = new CurrentUiState();
 		previouslySavedState.load(getUiStateFile());
