@@ -43,6 +43,7 @@ import org.martus.client.swingui.UiMainWindow;
 import org.martus.common.HQKey;
 import org.martus.common.HQKeys;
 import org.martus.common.bulletin.Bulletin;
+import org.martus.common.crypto.MartusCrypto;
 import org.martus.common.packet.UniversalId;
 import org.martus.swing.ParagraphLayout;
 import org.martus.util.TokenReplacement;
@@ -145,10 +146,24 @@ public class UiBulletinComponentHeader extends UiBulletinComponentSection
 		public void actionPerformed(ActionEvent e)
 		{
 			HashMap map = new HashMap();
+			map.put("#A#", getPublicCode());
 			map.put("#I#", currentUid.getLocalId());
 			map.put("#H#", getHqListText());
 			JFrame parent = getMainWindow().getCurrentActiveFrame();
 			getMainWindow().notifyDlg(parent, tagQualifier + "ViewBulletinDetails", map);
+		}
+		
+		private String getPublicCode()
+		{
+			try
+			{
+				return MartusCrypto.computeFormattedPublicCode(currentUid.getAccountId());
+			}
+			catch (InvalidBase64Exception e)
+			{
+				e.printStackTrace();
+				return "";
+			}		
 		}
 
 		private String getHqListText()

@@ -679,13 +679,13 @@ public class EnglishStrings
 "field:notifyFilesWillNotBeDeletedcause=The original files have not been deleted from your computer, you must delete them manually if you wish.",
 "field:notifyHQKeyAlradyExistscause=You have already added this key to your list of Headquarters.",
 "field:notifyFolderMigrationFailedcause=An error occurred during the conversion of your folders. You can still use Martus, but if the Outbox or Drafts folders still exist, do not use them.",
-"field:notifyViewViewBulletinDetailscause=Bulletin ID: #I#\n\n#H#",
-"field:notifyModifyViewBulletinDetailscause=Bulletin ID: #I#\n\n#H#",
+"field:notifyViewViewBulletinDetailscause=Bulletin ID: #I#\nAuthor:      #A#\n\n#H#",
+"field:notifyModifyViewBulletinDetailscause=Bulletin ID: #I#\nAuthor:      #A#\n\n#H#",
 "field:notifyResendErrorNotAuthorizedToSendcause=One or more bulletins were unable to be resent because you are not authorized to upload them.",
 "field:notifyResendErrorcause=One ore more bulletins were unable to be resent due to an unexpected error.",
 
-"field:ViewViewBulletinDetailsHQList=The following Martus accounts can view the private information in this bulletin, and can send this bulletin to a server:\n\n#L#",
-"field:ModifyViewBulletinDetailsHQList=The following Martus accounts will be able to view the private information in this bulletin, or send this bulletin to a server, after you save it:\n\n#L#\n\nTo add or remove an account, use the Tools/Configure Headquarters menu option.",
+"field:ViewViewBulletinDetailsHQList=The following headquarter account(s) can view the private information in this bulletin, and can send this bulletin to a server:\n\n#L#",
+"field:ModifyViewBulletinDetailsHQList=The following headquarter account(s) will be able to view the private information in this bulletin, or send this bulletin to a server, after you save it:\n\n#L#\n\nTo add or remove an account, use the Tools/Configure Headquarters menu option.",
 
 "field:messageServerNewscause=The current server has sent this message:",
 "field:messageErrorDateInFuturecause=This date occurs in the future:",
