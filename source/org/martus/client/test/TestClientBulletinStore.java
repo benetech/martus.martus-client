@@ -290,7 +290,7 @@ public class TestClientBulletinStore extends TestCaseEnhanced
     	store.addBulletinToFolder(discarded, bulletins[6].getUniversalId());
     	store.addBulletinToFolder(discarded, bulletins[9].getUniversalId());
 
-    	int expected[] = {1, 2, 4, 4, 5, 6, 7, 8, 0, 0};
+    	int expected[] = {1, 2, 4, 4, 5, 7, 7, 8, 0, 0};
     	for(int startIndex=0; startIndex < count; ++startIndex)
     	{
     		UniversalId gotUid = store.chooseBulletinToUpload(outbox, startIndex).getUniversalId();
@@ -325,7 +325,7 @@ public class TestClientBulletinStore extends TestCaseEnhanced
 		assertTrue("2 in x but all discarded?", store.hasAnyNonDiscardedBulletins(outbox));
 
 		store.addBulletinToFolder(discarded, b2.getUniversalId());
-		assertTrue("all in x and discarded means discarded?", store.hasAnyNonDiscardedBulletins(outbox));
+		assertFalse("all in x and discarded means we don't have any that has not been discarded?", store.hasAnyNonDiscardedBulletins(outbox));
 		store.removeBulletinFromFolder(visible, b1);
 		store.removeBulletinFromFolder(visible, b2);
 		assertFalse("doesn't see all are discarded?", store.hasAnyNonDiscardedBulletins(outbox));

@@ -307,7 +307,7 @@ public class ClientBulletinStore extends BulletinStore
 				startIndex = 0;
 			
 			Bulletin b = hiddenFolder.getBulletinUnsorted(startIndex);
-			if(isInVisibleNonDiscardedFolder(b))
+			if(!isDiscarded(b))
 				return b;
 		}
 		return null;
@@ -318,17 +318,15 @@ public class ClientBulletinStore extends BulletinStore
 		for(int i=0; i < hiddenFolder.getBulletinCount(); ++i)
 		{
 			Bulletin b = hiddenFolder.getBulletinSorted(i);
-			if(isInVisibleNonDiscardedFolder(b))
+			if(!isDiscarded(b))
 				return true;
 		}
 		return false;
 	}
 	
-	private boolean isInVisibleNonDiscardedFolder(Bulletin b)
+	private boolean isDiscarded(Bulletin b)
 	{
-		Vector foldersContainingBulletin = findBulletinInAllVisibleFolders(b);
-		foldersContainingBulletin.remove(getFolderDiscarded());
-		return (foldersContainingBulletin.size() > 0);
+		return getFolderDiscarded().contains(b);
 	}
 
 	public synchronized BulletinFolder createFolder(String name)
