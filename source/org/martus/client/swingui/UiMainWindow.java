@@ -54,6 +54,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.TimerTask;
 import java.util.Vector;
+
 import javax.print.attribute.HashPrintRequestAttributeSet;
 import javax.swing.AbstractAction;
 import javax.swing.ImageIcon;
@@ -65,6 +66,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JSplitPane;
 import javax.swing.SwingUtilities;
+
 import org.martus.client.core.BackgroundUploader;
 import org.martus.client.core.BulletinFolder;
 import org.martus.client.core.BulletinHtmlGenerator;
@@ -101,8 +103,6 @@ import org.martus.client.swingui.dialogs.UiSigninDlg;
 import org.martus.client.swingui.dialogs.UiSplashDlg;
 import org.martus.client.swingui.dialogs.UiStringInputDlg;
 import org.martus.client.swingui.dialogs.UiTemplateDlg;
-import org.martus.client.swingui.dialogs.UiBulletinModifyDlg.CancelHandler;
-import org.martus.client.swingui.dialogs.UiBulletinModifyDlg.DoNothingOnCancel;
 import org.martus.client.swingui.foldertree.UiFolderTreePane;
 import org.martus.client.swingui.tablemodels.DeleteMyServerDraftsTableModel;
 import org.martus.client.swingui.tablemodels.RetrieveHQDraftsTableModel;
@@ -1967,14 +1967,14 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	public void createBulletin()
 	{
 		Bulletin b = app.createBulletin();
-		modifyBulletin(b, new DoNothingOnCancel());
+		modifyBulletin(b);
 	}
 
-	public boolean modifyBulletin(Bulletin b, CancelHandler cancelHandler)
+	public boolean modifyBulletin(Bulletin b)
 	{
 		getCurrentUiState().setModifyingBulletin(true);
 		setEnabled(false);
-		UiBulletinModifyDlg dlg = new UiBulletinModifyDlg(b, cancelHandler, this);
+		UiBulletinModifyDlg dlg = new UiBulletinModifyDlg(b, this);
 		setCurrentActiveFrame(dlg);
 		setVisible(false);
 		return dlg.wasBulletinSaved();

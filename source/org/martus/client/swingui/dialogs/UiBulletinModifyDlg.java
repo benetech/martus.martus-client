@@ -36,10 +36,12 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.io.IOException;
+
 import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JViewport;
+
 import org.martus.client.core.BulletinFolder;
 import org.martus.client.core.ClientBulletinStore;
 import org.martus.client.core.EncryptionChangeListener;
@@ -59,10 +61,9 @@ import org.martus.swing.Utilities;
 
 public class UiBulletinModifyDlg extends JFrame implements ActionListener, WindowListener, EncryptionChangeListener
 {
-	public UiBulletinModifyDlg(Bulletin b, CancelHandler cancelHandlerToUse, UiMainWindow observerToUse)
+	public UiBulletinModifyDlg(Bulletin b, UiMainWindow observerToUse)
 	{
 		observer = observerToUse;
-		cancelHandler = cancelHandlerToUse;
 
 		UiBasicLocalization localization = observer.getLocalization();
 		setTitle(localization.getWindowTitle("create"));
@@ -307,39 +308,8 @@ public class UiBulletinModifyDlg extends JFrame implements ActionListener, Windo
 				return;
 		}
 			
-		cancelHandler.onCancel(observer.getStore(), bulletin);
 		cleanupAndExit();
 	}
-
-	public interface CancelHandler
-	{
-		public void onCancel(ClientBulletinStore store,Bulletin b);
-	}
-
-	public static class DoNothingOnCancel implements CancelHandler
-	{
-		public void onCancel(ClientBulletinStore store,Bulletin b)
-		{
-			// do nothing
-		}
-	}
-
-	public static class DeleteBulletinOnCancel implements CancelHandler
-	{
-		public void onCancel(ClientBulletinStore store, Bulletin b)
-		{
-			try
-			{
-				store.destroyBulletin(b);
-			}
-			catch (IOException e)
-			{
-				// TODO Notify user of the error?
-				e.printStackTrace();
-			}
-		}
-	}
-	
 
 	Bulletin bulletin;
 	UiMainWindow observer;
@@ -352,6 +322,5 @@ public class UiBulletinModifyDlg extends JFrame implements ActionListener, Windo
 	JButton cancel;
 
 	boolean wasBulletinSavedFlag;
-	CancelHandler cancelHandler;	
 }
 

@@ -50,11 +50,9 @@ import org.martus.common.MartusUtilities.FileVerificationException;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.bulletin.BulletinLoader;
 import org.martus.common.bulletin.BulletinZipImporter;
-import org.martus.common.bulletin.Bulletin.DamagedBulletinException;
 import org.martus.common.crypto.MartusCrypto;
 import org.martus.common.crypto.MartusCrypto.CryptoException;
 import org.martus.common.crypto.MartusCrypto.MartusSignatureException;
-import org.martus.common.crypto.MartusCrypto.NoKeyPairException;
 import org.martus.common.database.ClientFileDatabase;
 import org.martus.common.database.Database;
 import org.martus.common.database.DatabaseKey;
@@ -1269,14 +1267,11 @@ public class ClientBulletinStore extends BulletinStore
 		return !FieldSpec.isAllFieldsPresent(b.getPublicFieldSpecs(), getPublicFieldSpecs());
 	}
 
-	public Bulletin createClone(Bulletin original, FieldSpec[] publicFieldSpecsToUse, FieldSpec[] privateFieldSpecsToUse) throws CryptoException, InvalidPacketException, SignatureVerificationException, WrongPacketTypeException, IOException, InvalidBase64Exception, DamagedBulletinException, NoKeyPairException
+	public Bulletin createClone(Bulletin original, FieldSpec[] publicFieldSpecsToUse, FieldSpec[] privateFieldSpecsToUse) throws Exception 
 	{
 		Bulletin clone = createEmptyBulletin(publicFieldSpecsToUse, privateFieldSpecsToUse);
 		clone.createDraftCopyOf(original, getDatabase());
-		saveBulletin(clone);
-		
-		DatabaseKey key = DatabaseKey.createKey(clone.getUniversalId(),clone.getStatus());
-		return loadFromDatabase(key);
+		return clone;
 	}
 
 	public Vector getUidsOfAllBulletinRevisions()

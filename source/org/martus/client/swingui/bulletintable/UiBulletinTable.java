@@ -60,9 +60,6 @@ import org.martus.client.core.TransferableBulletinList;
 import org.martus.client.core.ClientBulletinStore.BulletinAlreadyExistsException;
 import org.martus.client.swingui.UiClipboardUtilities;
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.client.swingui.dialogs.UiBulletinModifyDlg;
-import org.martus.client.swingui.dialogs.UiBulletinModifyDlg.DeleteBulletinOnCancel;
-import org.martus.client.swingui.dialogs.UiBulletinModifyDlg.DoNothingOnCancel;
 import org.martus.client.swingui.foldertree.FolderNode;
 import org.martus.common.FieldSpec;
 import org.martus.common.bulletin.Bulletin;
@@ -260,12 +257,9 @@ public class UiBulletinTable extends UiTable implements ListSelectionListener, D
 		}
 		
 		Bulletin bulletinToModify = original;
-		UiBulletinModifyDlg.CancelHandler handler = new DoNothingOnCancel();
 		
 		if(isSealed || !isMine)
 		{
-			handler = new DeleteBulletinOnCancel();
-
 			ClientBulletinStore store = mainWindow.getApp().getStore();
 			FieldSpec[] publicFieldSpecsToUse = store.getPublicFieldSpecs();
 			FieldSpec[] privateFieldSpecsToUse = store.getPrivateFieldSpecs();
@@ -290,7 +284,7 @@ public class UiBulletinTable extends UiTable implements ListSelectionListener, D
 			}
 		}
 
-		mainWindow.modifyBulletin(bulletinToModify, handler);
+		mainWindow.modifyBulletin(bulletinToModify);
 	}
 
 	public void doCutBulletins()

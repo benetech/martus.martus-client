@@ -34,6 +34,7 @@ import org.martus.client.swingui.UiMainWindow;
 import org.martus.common.bulletin.AttachmentProxy;
 import org.martus.common.database.DatabaseKey;
 import org.martus.common.database.ReadableDatabase;
+import org.martus.common.packet.AttachmentPacket;
 import org.martus.common.packet.UniversalId;
 import org.martus.swing.UiTable;
 
@@ -124,6 +125,12 @@ class AttachmentTableModel extends AbstractTableModel
 			return getSizeInKb(size);
 		}
 		
+		AttachmentPacket packet = a.getPendingPacket(); 
+		if(packet != null)
+		{
+			return getSizeInKb(packet.getFileSize());
+		}
+		
 		ReadableDatabase database = mainWindow.getStore().getDatabase();
 		int size = 0;
 		UniversalId id = a.getUniversalId();
@@ -147,12 +154,12 @@ class AttachmentTableModel extends AbstractTableModel
 		
 	}
 
-	private String getSizeInKb(int sizeBytes)
+	private String getSizeInKb(long sizeBytes)
 	{
-		int sizeInKb = sizeBytes / 1024;
+		long sizeInKb = sizeBytes / 1024;
 		if (sizeInKb == 0)
 			sizeInKb = 1;
-		return Integer.toString(sizeInKb);
+		return Integer.toString((int)sizeInKb);
 	}
 
 	public void setValueAt(Object value, int row, int column)
