@@ -492,8 +492,8 @@ public class EnglishStrings
 "field:BulletinWasSent=Sent",
 "field:preferencesAllPrivate=Prevent creating public bulletins",
 
-"field:PrintPrivateData=Include private data in print",
-"field:PrintPrivateDataMessage=You have an option to print all private information in a selected bulletin to printer. Anyone who gets a copy of this print out will be able to read all the private data.\n\nYou may select the checkbox below to include all private data in print.",
+"field:PrintPrivateData=Include private data in print out.",
+"field:PrintPrivateDataMessage=You have the option to include or exclude the selected bulletin’s private information in this print out.\n\nTo only print public information, do not mark the checkbox below.\n\nIf you do mark the checkbox, anyone who sees the print out will be able to read your private data.",
 
 "field:VirtualUserNameDescription=(Enter using regular keyboard)",
 "field:VirtualPasswordDescription=Enter Password using mouse with on-screen keyboard below",
