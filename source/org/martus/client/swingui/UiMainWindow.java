@@ -58,7 +58,6 @@ import javax.swing.AbstractAction;
 import javax.swing.ImageIcon;
 import javax.swing.JComponent;
 import javax.swing.JDialog;
-import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -1396,9 +1395,9 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		
 		UiFileChooser chooser = new UiFileChooser();
 		chooser.setDialogTitle(getLocalization().getWindowTitle("saveBackupKeyPair"));
-		chooser.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
+		chooser.setFileSelectionMode(UiFileChooser.FILES_AND_DIRECTORIES);
 		chooser.setSelectedFile(new File(MartusApp.KEYPAIR_FILENAME));
-		if (chooser.showSaveDialog(this) == JFileChooser.APPROVE_OPTION)
+		if (chooser.showSaveDialog(null) == UiFileChooser.APPROVE_OPTION)
 		{
 			File newBackupFile = chooser.getSelectedFile();
 			if(newBackupFile.exists())
@@ -1463,7 +1462,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		chooser.setDialogTitle(getLocalization().getWindowTitle("ImportHQPublicKey"));
     	chooser.setCurrentDirectory(new File(app.getCurrentAccountDirectoryName()));
 		int returnVal = chooser.showOpenDialog(this);
-		if(returnVal == JFileChooser.APPROVE_OPTION)
+		if(returnVal == UiFileChooser.APPROVE_OPTION)
 		{
 			File importFile = chooser.getSelectedFile();
 			try
