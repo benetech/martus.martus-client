@@ -55,15 +55,36 @@ public class UiCreateNewAccountProcess
 		mainWindow = window;
 		while (true)
 		{
-			UiSigninDlg signinDlg1 =
-				new UiSigninDlg(window, window, UiSigninDlg.CREATE_NEW, originalUserName);
+			UiSigninDlg signinDlg1 = new UiSigninDlg(window, window, UiSigninDlg.CREATE_NEW, originalUserName);
 			if (signinDlg1.getUserChoice() != UiSigninDlg.SIGN_IN)
 				return;
+
 			userName1 = signinDlg1.getName();
 			userPassword1 = signinDlg1.getPassword();
-			String defaultUserName = userName1;
-			if (originalUserName == null || originalUserName.length() == 0)
-				defaultUserName = "";
+			
+			if(!userName1.equals(originalUserName))
+			{	
+				boolean userAlreadyExists = false;
+				try
+				{
+					userAlreadyExists = window.getApp().doesAccountExist(userName1, userPassword1);
+				}
+				catch (Exception e)
+				{
+					userAlreadyExists = false;
+				} 
+
+				if(userAlreadyExists)
+				{	
+					window.notifyDlg(window, "UserAlreadyExists");
+					continue;
+				}
+			}
+				
+			
+			String defaultUserName = "";
+			if (userName1.equals(originalUserName))
+				defaultUserName = originalUserName;
 
 			UiSigninDlg signinDlg2 =
 				new UiSigninDlg(window, window, UiSigninDlg.RETYPE_USERNAME_PASSWORD, defaultUserName);

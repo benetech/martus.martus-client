@@ -157,6 +157,7 @@ public class EnglishStrings
 "wintitle:notifyErrorBackingupKeyPair=Error",
 "wintitle:notifycontactRejected=Error Sending ContactInfo",
 "wintitle:notifyCreateAccountFailed=Error Creating New Account",
+"wintitle:notifyUserAlreadyExists=User Already Exists",
 
 
 "wintitle:inputservername=Server Name",
@@ -620,6 +621,7 @@ public class EnglishStrings
 "field:notifycontactRejectedcause=The current Martus Server has refused to accept your contact info",
 "field:notifyQuickEraseScrubWorkedcause=All bulletins and folders were successfully scrubbed and deleted.",
 "field:notifyCreateAccountFailedcause=An error occured while trying to create your account.",
+"field:notifyUserAlreadyExistscause=The user name you chose already exists on this system, please choose a different user name.",
 	
 "field:messageServerNewscause=The current server has sent this message:",
 "field:messageErrorDateInFuturecause=This date occures in the future:",

@@ -1048,26 +1048,14 @@ public class MartusApp
 			createAccountInternal(getMartusDataRootDirectory(), userName, userPassPhrase);
 	}
 
-	private boolean doesAccountExist(String userName, char[] userPassPhrase) throws Exception
+	public boolean doesAccountExist(String userName, char[] userPassPhrase) throws Exception
 	{
 		Vector allAccountDirs = getAllAccountDirectories();
 		MartusSecurity tempSecurity = new MartusSecurity();
 		for(int i = 0; i<allAccountDirs.size(); ++i )
 		{
-			File thisAccountDirectory = (File)allAccountDirs.get(i);
-			if(isUserOwnerOfThisAccountDirectory(userName, thisAccountDirectory))
+			if(isUserOwnerOfThisAccountDirectory(tempSecurity, userName, userPassPhrase, (File)allAccountDirs.get(i)))
 				return true;
-			
-			File thisAccountsKeyPair = getKeyPairFile(thisAccountDirectory);
-			try
-			{
-				tempSecurity.readKeyPair(thisAccountsKeyPair, getCombinedPassPhrase(userName, userPassPhrase));
-				return true;
-			}
-			catch (Exception cantBeOurAccount)
-			{
-				continue;
-			}
 		}
 		return false;
 	}
@@ -1310,7 +1298,7 @@ public class MartusApp
 		}
 	}
 	
-	public boolean isUserOwnerOfThisAccountDirectory(String userName, File accountDirectory) throws IOException
+	public boolean isUserOwnerOfThisAccountDirectory(MartusSecurity tempSecurity, String userName, char[] userPassPhrase, File accountDirectory) throws IOException
 	{
 		File thisAccountsHashOfUserNameFile = getUserNameHashFile(accountDirectory);
 		if(thisAccountsHashOfUserNameFile.exists())
@@ -1326,8 +1314,19 @@ public class MartusApp
 			{
 				reader.close();
 			}
+			return false;
 		}
-		return false;
+
+		File thisAccountsKeyPair = getKeyPairFile(accountDirectory);
+		try
+		{
+			tempSecurity.readKeyPair(thisAccountsKeyPair, getCombinedPassPhrase(userName, userPassPhrase));
+			return true;
+		}
+		catch (Exception cantBeOurAccount)
+		{
+			return false;
+		}
 	}
 
 	public File getUserNameHashFile(File accountDirectory)

@@ -496,7 +496,7 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		try
 		{
 			app.createAccount(newUserName, newUserPassword);
-			fail("Can't create an account with the same user name.");
+			fail("Should not be able to create an account with the same user name.");
 		}
 		catch(MartusApp.AccountAlreadyExistsException e)
 		{
@@ -702,18 +702,25 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		TRACE_END();
 	}
 	
-	public void testSetUserNameHashFile() throws Exception
+	public void testIsUserOwnerOfThisAccountDirectory() throws Exception
 	{
 		MockMartusApp app = MockMartusApp.create();
 		File tempDirectory = createTempDirectory();
 		File hashFile = app.getUserNameHashFile(tempDirectory); 
 		assertFalse("Should not have this hash file yet", hashFile.exists());
 		String username = "chuck";
-		assertFalse("This user should not own this directory", app.isUserOwnerOfThisAccountDirectory(username,app.getCurrentAccountDirectory()));
+		assertFalse("This user should not own this directory", app.isUserOwnerOfThisAccountDirectory(mockSecurityForApp, username, null, app.getCurrentAccountDirectory()));
 		app.setCurrentAccount(username, tempDirectory);
 		assertTrue("Hash File should now exist", hashFile.exists());
-		
-		assertTrue("This user should be the owner of this directory", app.isUserOwnerOfThisAccountDirectory(username,app.getCurrentAccountDirectory()));
+		assertTrue("This user should be the owner of this directory", app.isUserOwnerOfThisAccountDirectory(mockSecurityForApp, username, null, app.getCurrentAccountDirectory()));
+
+		String myUserName = "goodMan";
+		char[] myPassword = "goodM".toCharArray();
+		app.createAccount(myUserName,myPassword);
+		assertTrue("My new user should be the owner of this directory", app.isUserOwnerOfThisAccountDirectory(mockSecurityForApp, myUserName, myPassword, app.getCurrentAccountDirectory()));
+		File myHashFile = app.getUserNameHashFile(tempDirectory); 
+		myHashFile.delete();
+		assertTrue("My new user should still be the owner of this directory even without a hashFile", app.isUserOwnerOfThisAccountDirectory(mockSecurityForApp, myUserName, myPassword, app.getCurrentAccountDirectory()));
 		
 		app.deleteAllFiles();
 	}
