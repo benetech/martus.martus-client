@@ -281,7 +281,7 @@ public class UiBulletinModifyDlg extends JFrame implements ActionListener, Windo
 
 	private void closeWindowUponConfirmation()
 	{	
-		if(observer.confirmDlg("CancelModifyBulletin"))
+		if(observer.confirmDlg(this, "CancelModifyBulletin"))
 		{
 			cancelHandler.onCancel(observer.getStore(), bulletin);
 			cleanupAndExit();
