@@ -26,6 +26,7 @@ Boston, MA 02111-1307, USA.
 
 package org.martus.client.swingui.fields;
 
+import java.awt.Component;
 import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.Transferable;
 import java.awt.dnd.DropTarget;
@@ -48,6 +49,7 @@ import org.martus.common.clientside.UiBasicLocalization;
 import org.martus.swing.UiFileChooser;
 import org.martus.swing.UiParagraphPanel;
 import org.martus.swing.UiTable;
+import org.martus.swing.Utilities;
 
 
 
@@ -78,13 +80,12 @@ public class UiAttachmentEditor extends UiParagraphPanel
 	
 		add.addFocusListener(new UiFocusListener(this));		
 		add.addActionListener(new AddHandler());
-		hbox.add(add);
 		remove = new JButton(localization.getButtonLabel("removeattachment"));
 		remove.addFocusListener(new UiFocusListener(this));		
 		remove.addActionListener(new RemoveHandler());
 		remove.setEnabled(false);
-		hbox.add(remove);
-		hbox.add(Box.createHorizontalGlue());
+		Component buttons[] = {add, remove, Box.createHorizontalGlue()};
+		Utilities.addComponentsRespectingOrientation(hbox, buttons);
 		vbox.add(hbox);
 		add(vbox);
 
