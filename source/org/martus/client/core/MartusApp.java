@@ -950,7 +950,7 @@ public class MartusApp
 		String resultCode = "?";
 		try
 		{
-			NetworkResponse response = getCurrentNetworkInterfaceGateway().getSealedBulletinIds(getSecurity(), getAccountId(), MartusUtilities.getRetrieveBulletinSummaryTags());
+			NetworkResponse response = getCurrentNetworkInterfaceGateway().getSealedBulletinIds(getSecurity(), getAccountId(), BulletinSummary.getNormalRetrieveTags());
 			resultCode = response.getResultCode();
 			if(resultCode.equals(NetworkInterfaceConstants.OK))
 				return response.getResultVector();
@@ -971,7 +971,7 @@ public class MartusApp
 		String resultCode = "?";
 		try
 		{
-			NetworkResponse response = getCurrentNetworkInterfaceGateway().getDraftBulletinIds(getSecurity(), getAccountId(), MartusUtilities.getRetrieveBulletinSummaryTags());
+			NetworkResponse response = getCurrentNetworkInterfaceGateway().getDraftBulletinIds(getSecurity(), getAccountId(), BulletinSummary.getNormalRetrieveTags());
 			resultCode = response.getResultCode();
 			if(resultCode.equals(NetworkInterfaceConstants.OK))
 				return response.getResultVector();

@@ -35,7 +35,6 @@ import org.martus.client.core.ClientBulletinStore;
 import org.martus.client.core.MartusApp;
 import org.martus.client.swingui.dialogs.UiProgressRetrieveSummariesDlg;
 import org.martus.common.BulletinSummary;
-import org.martus.common.MartusUtilities;
 import org.martus.common.MartusUtilities.ServerErrorException;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.clientside.ClientSideNetworkGateway;
@@ -338,7 +337,7 @@ abstract public class RetrieveTableModel extends AbstractTableModel
 
 		protected Vector getSummaryTags()
 		{
-			Vector summaryTags = MartusUtilities.getRetrieveBulletinSummaryTags();
+			Vector summaryTags = BulletinSummary.getNormalRetrieveTags();
 			return summaryTags;
 		}
 
