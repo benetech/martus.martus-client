@@ -71,8 +71,6 @@ import org.martus.common.MartusUtilities.ServerErrorException;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.clientside.ClientSideNetworkGateway;
 import org.martus.common.clientside.ClientSideNetworkHandlerUsingXmlRpcForNonSSL;
-import org.martus.common.clientside.CurrentUiState;
-import org.martus.common.clientside.DateUtilities;
 import org.martus.common.clientside.Localization;
 import org.martus.common.clientside.PasswordHelper;
 import org.martus.common.clientside.Exceptions.ServerCallFailedException;
@@ -138,31 +136,9 @@ public class MartusApp
 			throw new MartusAppInitializationException("ErrorCryptoInitialization");
 		}
 
-		initializeCurrentLanguage();
 		UpdateDocsIfNecessaryFromMLPFiles();
 	}
 
-	private void initializeCurrentLanguage()
-	{
-		CurrentUiState previouslySavedState = new CurrentUiState();
-		previouslySavedState.load(getUiStateFile());
-
-		if(previouslySavedState.getCurrentLanguage() != "")
-		{	
-			localization.setCurrentLanguageCode(previouslySavedState.getCurrentLanguage());
-			localization.setCurrentDateFormatCode(previouslySavedState.getCurrentDateFormat());
-		}
-		
-		if(localization.getCurrentLanguageCode()== null)
-			setInitialUiDefaultsFromFileIfPresent(localization, new File(getMartusDataRootDirectory(),"DefaultUi.txt"));
-		
-		if(localization.getCurrentLanguageCode()== null)
-		{
-			localization.setCurrentLanguageCode(Localization.ENGLISH);
-			localization.setCurrentDateFormatCode(DateUtilities.getDefaultDateFormatCode());
-		}
-	}
-	
 	static public void setInitialUiDefaultsFromFileIfPresent(Localization localization, File defaultUiFile)
 	{
 		if(!defaultUiFile.exists())
@@ -447,13 +423,6 @@ public class MartusApp
 	public File getUploadInfoFileForAccount(File accountDirectory)
 	{
 		return new File(accountDirectory, "MartusUploadInfo.dat");
-	}
-
-	public File getUiStateFile()
-	{
-		if(isSignedIn())
-			return getUiStateFileForAccount(getCurrentAccountDirectory());
-		return new File(getMartusDataRootDirectory(), "UiState.dat");
 	}
 
 	public File getUiStateFileForAccount(File accountDirectory)

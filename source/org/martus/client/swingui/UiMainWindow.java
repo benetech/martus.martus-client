@@ -54,7 +54,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.TimerTask;
 import java.util.Vector;
-
 import javax.print.attribute.HashPrintRequestAttributeSet;
 import javax.swing.AbstractAction;
 import javax.swing.ImageIcon;
@@ -66,7 +65,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JSplitPane;
 import javax.swing.SwingUtilities;
-
 import org.martus.client.core.BackgroundUploader;
 import org.martus.client.core.BulletinFolder;
 import org.martus.client.core.BulletinHtmlGenerator;
@@ -119,6 +117,7 @@ import org.martus.common.MartusUtilities.ServerErrorException;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.clientside.ClientSideNetworkGateway;
 import org.martus.common.clientside.CurrentUiState;
+import org.martus.common.clientside.DateUtilities;
 import org.martus.common.clientside.Localization;
 import org.martus.common.clientside.UiBasicLocalization;
 import org.martus.common.clientside.UiPasswordField;
@@ -151,6 +150,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		{
 			localization = new UiLocalization(MartusApp.getTranslationsDirectory(), EnglishStrings.strings);
 			app = new MartusApp(localization);
+			initializeCurrentLanguage();
 		}
 		catch(MartusApp.MartusAppInitializationException e)
 		{
@@ -165,7 +165,34 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 
 		initalizeUiState();
 	}
-	
+
+	private void initializeCurrentLanguage()
+	{
+		CurrentUiState previouslySavedState = new CurrentUiState();
+		previouslySavedState.load(getUiStateFile());
+		if(previouslySavedState.getCurrentLanguage() != "")
+		{	
+			localization.setCurrentLanguageCode(previouslySavedState.getCurrentLanguage());
+			localization.setCurrentDateFormatCode(previouslySavedState.getCurrentDateFormat());
+		}
+		
+		if(localization.getCurrentLanguageCode()== null)
+			MartusApp.setInitialUiDefaultsFromFileIfPresent(localization, new File(app.getMartusDataRootDirectory(),"DefaultUi.txt"));
+		
+		if(localization.getCurrentLanguageCode()== null)
+		{
+			localization.setCurrentLanguageCode(Localization.ENGLISH);
+			localization.setCurrentDateFormatCode(DateUtilities.getDefaultDateFormatCode());
+		}
+	}
+
+	public File getUiStateFile()
+	{
+		if(app.isSignedIn())
+			return app.getUiStateFileForAccount(app.getCurrentAccountDirectory());
+		return new File(app.getMartusDataRootDirectory(), "UiState.dat");
+	}
+
 	static class HiddenFrame extends JFrame
 	{
 		HiddenFrame(UiLocalization localization, String programName)
@@ -808,7 +835,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 
 	public void saveCurrentUiState()
 	{
-		uiState.save(app.getUiStateFile());
+		uiState.save(getUiStateFile());
 	}
 
 	public void saveState()
@@ -873,7 +900,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	private void initalizeUiState()
 	{
 		uiState = new CurrentUiState();
-		File uiStateFile = app.getUiStateFile();
+		File uiStateFile = getUiStateFile();
 		if(!uiStateFile.exists())
 		{
 			uiState.setCurrentLanguage(localization.getCurrentLanguageCode());

@@ -89,7 +89,6 @@ public class EnglishStrings
 "wintitle:confirmNewerConfigInfoFileFound=Version Warning",
 "wintitle:confirmdeletefolder=Confirm Delete Folder",
 "wintitle:confirmRetrieveNewerVersions=Confirm Retrieving Newer Versions",
-"wintitle:confirmUnofficialTranslation=Unofficial Martus Translation",
 
 "wintitle:notifyDropErrorBulletinExists=Cannot Move Bulletin(s)",
 "wintitle:notifyDropErrors=Error Moving Bulletin(s)",
@@ -170,10 +169,10 @@ public class EnglishStrings
 "wintitle:notifyFolderMigrationFailed=Folder Migration Error",
 "wintitle:notifyResendErrorNotAuthorizedToSend=Not Authorized To Send",
 "wintitle:notifyResendError=Error Sending Bulletin",
-
 "wintitle:notifyErrorRenameFolder=Unable to Rename Folder",
 "wintitle:notifyErrorRenameFolderExists=Unable to Rename Folder",
 "wintitle:notifyPrintAllPrivateData=Print All Private Data",
+"wintitle:notifyUnofficialTranslation=Unofficial Martus Translation",
 
 "wintitle:inputservername=Server Name",
 "wintitle:inputserverpubliccode=Server Identification",
@@ -613,8 +612,6 @@ public class EnglishStrings
 "field:confirmNewerConfigInfoFileFoundeffect=Answering Yes will continue to use this older version of Martus.  Answering No will exit Martus so you can upgrade to the latest version.",
 "field:confirmRetrieveNewerVersionscause=The following bulletin(s) selected for retrieval are newer versions of bulletins already on this system:\n\n#TITLES#",
 "field:confirmRetrieveNewerVersionseffect=Each older version will be replaced by the newer version from the server.",
-"field:confirmUnofficialTranslationcause=This translation was not created by the Martus team, and therefore may not be trustworthy.  If you continue to see this message please download an official translation from the www.martus.org",
-"field:confirmUnofficialTranslationeffect=Choose Yes to use this unofficial translation.  Choose No to place this translation in the Unofficial Translations directory, and you may either download the official translation from the Martus website, or choose a different language.",
 
 "field:notifyDropErrorBulletinExistscause=One or more bulletins cannot be moved to that folder, because it already exists in that folder.",
 "field:notifyDropErrorscause=An unexpected error occurred while moving the bulletin(s). One or more files may be damaged.",
@@ -698,6 +695,7 @@ public class EnglishStrings
 "field:notifyPrintAllPrivateDatacause=This bulletin will not be printed because all the information is private.  If you wish to print the private data, please mark the \"Include private data in print out\" checkbox.",
 "field:notifyErrorRenameFoldercause=Folder names cannot contain punctuation.  They also cannot begin with a space.",
 "field:notifyErrorRenameFolderExistscause=You already have a folder with that name.",
+"field:notifyUnofficialTranslationcause=Warning this translation was not created by the Martus team, and therefore may not be trustworthy.  If you only want official languages then turn off 'allow unofficial translations' in your user preferences.",
 
 "field:messageServerNewscause=The current server has sent this message:",
 "field:messageErrorDateInFuturecause=This date occurs in the future:",

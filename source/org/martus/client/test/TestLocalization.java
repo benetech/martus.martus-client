@@ -192,32 +192,6 @@ public class TestLocalization extends TestCaseEnhanced
 		
 	}
 	
-	public void testHiddingOfUnofficialTranslations() throws Exception
-	{
-		File translationDirectory = createTempDirectory();
-		UiLocalization tmpLocalization = new UiLocalization(translationDirectory, EnglishStrings.strings);
-		String languageCode = "gg";
-		String data = "test";
-		File mlpkTranslation = new File(translationDirectory, UiBasicLocalization.getMlpkFilename(languageCode));
-		mlpkTranslation.deleteOnExit();
-		writeDataToFile(mlpkTranslation, data);
-		
-		File mtfTranslation = new File(translationDirectory, UiBasicLocalization.getMtfFilename(languageCode));
-		mtfTranslation.deleteOnExit();
-		writeDataToFile(mtfTranslation, data);
-
-		assertTrue("mtf file should exist", mtfTranslation.exists());
-		assertTrue("mlp file should exist", mlpkTranslation.exists());
-		tmpLocalization.hideUnofficialTranslationFiles(languageCode);
-		assertFalse("mtf file now be hidden", mtfTranslation.exists());
-		assertTrue("mlp file should exist", mlpkTranslation.exists());
-
-		tmpLocalization.hideUnofficialTranslationFiles(languageCode);
-		assertFalse("mlp file should exist", mlpkTranslation.exists());
-
-		DirectoryUtils.deleteEntireDirectoryTree(translationDirectory);
-	}
-	
 	private void writeDataToFile(File mlpkTranslation, String data) throws IOException
 	{
 		UnicodeWriter out = new UnicodeWriter(mlpkTranslation);

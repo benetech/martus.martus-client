@@ -104,13 +104,10 @@ preferences.addOnNewLine(directionRtoL);
 			String languageCodeSelected = languageDropdown.getText();
 			if(!localization.isOfficialTranslation(languageCodeSelected))
 			{
-				if(!owner.confirmDlgBeep("UnofficialTranslation"))
-				{
-					localization.hideUnofficialTranslationFiles(languageCodeSelected);
-					languageDropdown.updateChoices(localization.getUiLanguages());
-					languageDropdown.setText(localization.getCurrentLanguageCode());
-					return;
-				}
+				owner.notifyDlgBeep("UnofficialTranslation");
+				languageDropdown.updateChoices(localization.getUiLanguages());
+				languageDropdown.setText(localization.getCurrentLanguageCode());
+				return;
 			}
 			localization.setCurrentDateFormatCode(dateFormatDropdown.getText());
 			localization.setCurrentLanguageCode(languageDropdown.getText());
