@@ -113,6 +113,11 @@ public class UiBulletinTablePane extends JScrollPane
 			repaint();
 		}
 	}
+	
+	public void allBulletinsInCurrentFolderHaveChanged()
+	{
+		repaint();
+	}
 
 	public void bulletinContentsHaveChanged(Bulletin b)
 	{

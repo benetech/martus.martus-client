@@ -644,6 +644,24 @@ public class TestBulletinStore extends TestCaseEnhanced
 		assertFalse("still in on?", store.isProbablyOnServer(b));
 	}
 	
+	public void testClearnOnServerLists() throws Exception
+	{
+		Bulletin on = store.createEmptyBulletin();
+		store.saveBulletin(on);
+		store.setIsOnServer(on);
+		
+		Bulletin off = store.createEmptyBulletin();
+		store.saveBulletin(off);
+		store.setIsNotOnServer(off);
+		
+		store.clearOnServerLists();
+		
+		assertFalse("on still on?", store.isProbablyOnServer(on));
+		assertFalse("on now off?", store.isProbablyNotOnServer(on));
+		assertFalse("off now on?", store.isProbablyOnServer(off));
+		assertFalse("off still off?", store.isProbablyNotOnServer(off));
+	}
+	
 	public void testUpdateOnServerLists() throws Exception
 	{
 		Bulletin sentButNotOnServer = createAndSaveBulletin();
@@ -681,6 +699,9 @@ public class TestBulletinStore extends TestCaseEnhanced
 		store.setIsNotOnServer(draftInOutboxUnsentButOnServer);
 		onServer.add(draftInOutboxUnsentButOnServer.getUniversalId());
 		store.ensureBulletinIsInFolder(draftOutbox, draftInOutboxUnsentButOnServer.getUniversalId());
+
+		store.getFoldersFile().delete();
+		assertFalse("already saved folders?", store.getFoldersFile().exists());
 		
 		store.updateOnServerLists(onServer);
 		
@@ -696,6 +717,8 @@ public class TestBulletinStore extends TestCaseEnhanced
 		assertFalse("(1) unknown; in draft outbox; on server", store.isProbablyOnServer(draftInOutboxUnknownButOnServer));
 		assertFalse("(2) unknown; in draft outbox; on server", store.isProbablyNotOnServer(draftInOutboxUnknownButOnServer));
 		assertTrue("thought unsent; in draft outbox; on server", store.isProbablyNotOnServer(draftInOutboxUnsentButOnServer));
+		
+		assertTrue("didn't save folders?", store.getFoldersFile().exists());
 	}
 	
 	private Bulletin createAndSaveBulletin() throws Exception

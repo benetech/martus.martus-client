@@ -531,6 +531,11 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
 		return originalCursor;
 	}
+	
+	public void allBulletinsInCurrentFolderHaveChanged()
+	{
+		table.allBulletinsInCurrentFolderHaveChanged();
+	}
 
 	public void bulletinSelectionHasChanged()
 	{
@@ -1224,6 +1229,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 				requestToUpdateContactInfoOnServerAndSaveInfo();
 			
 			backgroundUploadTimerTask.forceRecheckOfUidsOnServer();
+			getStore().clearOnServerLists();
 			repaint();
 		}
 		finally

@@ -730,17 +730,20 @@ public class BulletinStore
 		return folder;
 	}
 	
-	public boolean isProbablyOnServer(Bulletin b)
+	// synchronized because updateOnServerLists is called from background thread
+	public synchronized boolean isProbablyOnServer(Bulletin b)
 	{
 		return getFolderOnServer().contains(b);
 	}
 	
-	public boolean isProbablyNotOnServer(Bulletin b)
+	// synchronized because updateOnServerLists is called from background thread
+	public synchronized boolean isProbablyNotOnServer(Bulletin b)
 	{
 		return getFolderNotOnServer().contains(b);
 	}
 	
-	public void setIsOnServer(Bulletin b)
+	// synchronized because updateOnServerLists is called from background thread
+	public synchronized void setIsOnServer(Bulletin b)
 	{
 		removeBulletinFromFolder(getFolderNotOnServer(), b);
 		try
@@ -754,7 +757,8 @@ public class BulletinStore
 		}
 	}
 
-	public void setIsNotOnServer(Bulletin b)
+	// synchronized because updateOnServerLists is called from background thread
+	public synchronized void setIsNotOnServer(Bulletin b)
 	{
 		removeBulletinFromFolder(getFolderOnServer(), b);
 		try
@@ -768,7 +772,15 @@ public class BulletinStore
 		}
 	}
 	
-	public void updateOnServerLists(Vector uidsOnServer)
+	// synchronized because updateOnServerLists is called from background thread
+	public synchronized void clearOnServerLists()
+	{
+		getFolderOnServer().removeAll();
+		getFolderNotOnServer().removeAll();
+	}
+	
+	// synchronized because updateOnServerLists is called from background thread
+	public synchronized void updateOnServerLists(Vector uidsOnServer)
 	{
 		class Adjuster implements Database.PacketVisitor
 		{
@@ -797,6 +809,7 @@ public class BulletinStore
 		
 		Adjuster onServerAdjuster = new Adjuster(uidsOnServer);
 		visitAllBulletins(onServerAdjuster);
+		saveFolders();
 	}
 	
 	public synchronized void moveBulletin(Bulletin b, BulletinFolder from, BulletinFolder to)

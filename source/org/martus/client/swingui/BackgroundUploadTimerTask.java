@@ -30,9 +30,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.Iterator;
 import java.util.TimerTask;
 import java.util.Vector;
-
 import javax.swing.SwingUtilities;
-
 import org.martus.client.core.BackgroundUploader;
 import org.martus.client.core.BulletinStore;
 import org.martus.client.core.ClientSideNetworkGateway;
@@ -129,17 +127,11 @@ class BackgroundUploadTimerTask extends TimerTask
 			return;
 		
 		System.out.println("Entering BackgroundUploadTimerTask.getUpdatedListOfBulletinsOnServer");
-		Vector uidsOnServer = new Vector();
 		String myAccountId = getApp().getAccountId();
+		Vector uidsOnServer = new Vector();
 		try
 		{
-			Vector mySealedUids = tryToGetSealedUidsFromServer(myAccountId);
-			System.out.println("My sealed uids: " + mySealedUids.size());
-			uidsOnServer.addAll(mySealedUids);
-
-			Vector myDraftUids = tryToGetDraftUidsFromServer(myAccountId);
-			System.out.println("My draft uids: " + myDraftUids.size());
-			uidsOnServer.addAll(myDraftUids);
+			uidsOnServer.addAll(getUidsFromServer(myAccountId));
 			
 			ClientSideNetworkGateway gateway = getApp().getCurrentNetworkInterfaceGateway();
 			MartusCrypto security = getApp().getSecurity();
@@ -151,26 +143,41 @@ class BackgroundUploadTimerTask extends TimerTask
 				for(int i = 0; i < fieldOfficeAccounts.size(); ++i)
 				{
 					String fieldOfficeAccountId = (String)fieldOfficeAccounts.get(i);
-					
-					Vector fieldOfficeSealedUids = tryToGetSealedUidsFromServer(fieldOfficeAccountId);
-					System.out.println("FO sealed uids: " + fieldOfficeSealedUids.size());
-					uidsOnServer.addAll(fieldOfficeSealedUids);
-
-					Vector fieldOfficeDraftUids = tryToGetDraftUidsFromServer(fieldOfficeAccountId);
-					System.out.println("FO draft uids: " + fieldOfficeDraftUids.size());
-					uidsOnServer.addAll(fieldOfficeDraftUids);
+					uidsOnServer.addAll(getUidsFromServer(fieldOfficeAccountId));
 				}
 			}
-			
+			getStore().updateOnServerLists(uidsOnServer);
+
+			class CurrentFolderRefresher implements Runnable
+			{
+				public void run()
+				{
+					mainWindow.allBulletinsInCurrentFolderHaveChanged();
+				}
+			}
+			SwingUtilities.invokeLater(new CurrentFolderRefresher());
 		}
 		catch(Exception e)
 		{
 			e.printStackTrace();
 		}
 		gotUpdatedOnServerUids = true;
+		
 		System.out.println("Exiting BackgroundUploadTimerTask.getUpdatedListOfBulletinsOnServer");
 	}
 	
+	private Vector getUidsFromServer(String accountId) throws MartusSignatureException
+	{
+		Vector uidsOnServer = new Vector();
+		Vector mySealedUids = tryToGetSealedUidsFromServer(accountId);
+		uidsOnServer.addAll(mySealedUids);
+
+		Vector myDraftUids = tryToGetDraftUidsFromServer(accountId);
+		uidsOnServer.addAll(myDraftUids);
+		System.out.println("Adding uids from server: " + uidsOnServer.size());
+		return uidsOnServer;
+	}
+
 	private Vector tryToGetDraftUidsFromServer(String accountId) throws MartusSignatureException
 	{
 		ClientSideNetworkGateway gateway = getApp().getCurrentNetworkInterfaceGateway();
@@ -197,6 +204,9 @@ class BackgroundUploadTimerTask extends TimerTask
 		for(int i=0; i < localIds.size(); ++i)
 		{
 			String localId = (String)localIds.get(i);
+			int delimiterAt = localId.indexOf('=');
+			if(delimiterAt >= 0)
+				localId = localId.substring(0, delimiterAt);
 			result.add(UniversalId.createFromAccountAndLocalId(accountId, localId));
 		}
 		
