@@ -106,6 +106,11 @@ public class ConfigInfo implements Serializable
 		return version < VERSION;
 	}
 	
+	public boolean isNewVersion()
+	{
+		return version > VERSION;
+	}
+	
 	public void clear()
 	{
 		version = VERSION;
@@ -147,7 +152,7 @@ public class ConfigInfo implements Serializable
 			loaded.templateDetails = in.readUTF();
 			loaded.legacyHQKey = in.readUTF();
 			loaded.serverPublicKey = in.readUTF();
-			
+						
 			if(loaded.version >= 2)
 				loaded.sendContactInfoToServer = in.readBoolean();
 			else

@@ -171,6 +171,7 @@ public class EnglishStrings
 
 "wintitle:notifyErrorRenameFolder=Unable to Rename Folder",
 "wintitle:notifyPrintAllPrivateData=Print All Private Data",
+"wintitle:notifyOlderConfigInfoFileFound=Upgrade Warning",
 
 "wintitle:inputservername=Server Name",
 "wintitle:inputserverpubliccode=Server Identification",
@@ -605,7 +606,7 @@ public class EnglishStrings
 "field:confirmDeleteMyDataeffect=Answering Yes will delete your data and exit Martus.  Answering No will return you to Martus with nothing deleted.",
 "field:confirmNewerConfigInfoFileFoundcause=It appears that you are trying to run an older version of Martus.  Running this version of Martus may result in reduced functionality.",
 "field:confirmNewerConfigInfoFileFoundeffect=Answering Yes will continue to use this older version of Martus.  Answering No will exit Martus so you can upgrade to the latest version.",
-
+"field:notifyOlderConfigInfoFileFoundcause=Warning: The configuration file for this account was created using a newer version of Martus, so some configuration settings will be ignored. We recommend that you upgrade your software. ",
 
 
 
@@ -719,6 +720,7 @@ public class EnglishStrings
 "field:warningDeleteMultipleUnsentBulletins=WARNING: One or more of these bulletins have not been sent to a server since they were last modified. Deleting them will prevent the latest changes from being backed up.",
 "field:warningDeleteSingleBulletinWithCopies=NOTE: A copy of this bulletin exists in one or more other folders, and those copies will not be removed.",
 "field:warningDeleteMultipleBulletinsWithCopies=NOTE: Copies of one or more of these bulletins exist in one or more other folders. Those copies will not be removed.",
+
 
 "field:username=Username",
 "field:password1=Password",
