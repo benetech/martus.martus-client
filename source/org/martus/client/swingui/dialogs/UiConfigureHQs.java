@@ -32,6 +32,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.io.File;
+import java.util.HashMap;
 import java.util.Vector;
 
 import javax.swing.Box;
@@ -68,6 +69,9 @@ public class UiConfigureHQs extends JDialog
 		super(owner, "", true);
 		mainWindow = owner;
 		localization = mainWindow.getLocalization();
+		hQKeys = new Vector();
+		mapOfKeysToCodes = new HashMap();
+		
 		setTitle(localization.getWindowTitle("ConfigureHQs"));
 		JPanel panel = new JPanel();
 		panel.setBorder(new EmptyBorder(10,10,10,10));
@@ -92,17 +96,8 @@ public class UiConfigureHQs extends JDialog
 		table.setShowGrid(true);
 
 		String hQKey = mainWindow.getApp().getHQKey();
-		if(hQKey!=null || hQKey != "")
-		{
-			try
-			{
-				addHQToTable(MartusCrypto.computePublicCode(hQKey));
-			}
-			catch (InvalidBase64Exception e)
-			{
-				e.printStackTrace();
-			}
-		}
+		if(hQKey.length() != 0)
+			addHQKeyToTable(hQKey);
 		if(model.getRowCount()>0)
 			table.setRowSelectionInterval(0,0);
 		
@@ -220,7 +215,10 @@ public class UiConfigureHQs extends JDialog
 				if(confirmPublicCode(publicCode, "ImportPublicCode", "AccountCodeWrong"))
 				{
 					if(mainWindow.confirmDlg("SetImportPublicKey"))
-						addHQToTable(publicCode);
+					{
+						addHQKeyToTable(publicKey);
+						updateConfigInfo();
+					}
 				}
 			}
 			catch (Exception e)
@@ -230,24 +228,70 @@ public class UiConfigureHQs extends JDialog
 		}
 	}
 
-	void addHQToTable(String publicCode)
+	class RemoveHandler implements ActionListener
 	{
-		Vector hq = new Vector();
-		String formattedCode = MartusCrypto.formatPublicCode(publicCode);
-		for(int i = 0; i < table.getRowCount(); ++i)
+		public void actionPerformed(ActionEvent ae)
 		{
-			if(((String)model.getValueAt(i, PUBLIC_CODE_COLUMN)).equals(formattedCode))
-			{
-				mainWindow.notifyDlg("HQKeyAlradyExists");
-				table.setRowSelectionInterval(i,i);
+			if(!mainWindow.confirmDlg("ClearHQInformation"))
 				return;
+			
+			int rowCount = model.getRowCount();
+			for(int i = rowCount-1; i >=0 ; --i)
+			{
+				if(table.isRowSelected(i))
+				{
+					
+					Object hQKeyToBeRemoved = table.getValueAt(i,PUBLIC_CODE_COLUMN);
+					for(int j = 0; j<hQKeys.size(); ++j)
+					{
+						if (((String)hQKeys.get(j)).equals(mapOfKeysToCodes.get(hQKeyToBeRemoved)))
+						{
+							hQKeys.remove(j);
+							break;
+						}
+					}
+					model.removeRow(i);
+				}
 			}
+			remove.setEnabled(false);
+			updateConfigInfo();
 		}
-		
-		hq.add(formattedCode);
-		model.addRow(hq);
-		int current = table.getRowCount()-1;
-		table.setRowSelectionInterval(current,current);
+//		mainWindow.doClearPublicAccountInfo();
+	}
+
+	void addHQKeyToTable(String publicKey)
+	{
+		try
+		{
+			String rawCode = MartusCrypto.computePublicCode(publicKey);
+			String formattedCode = MartusCrypto.formatPublicCode(rawCode);
+			for(int i = 0; i < table.getRowCount(); ++i)
+			{
+				if(((String)model.getValueAt(i, PUBLIC_CODE_COLUMN)).equals(formattedCode))
+				{
+					mainWindow.notifyDlg("HQKeyAlradyExists");
+					table.setRowSelectionInterval(i,i);
+					return;
+				}
+			}
+			
+			Vector row = new Vector();
+			row.add(formattedCode);
+			model.addRow(row);
+			mapOfKeysToCodes.put(formattedCode, publicKey);
+			hQKeys.add(publicKey);
+			int current = table.getRowCount()-1;
+			table.setRowSelectionInterval(current,current);
+		}
+		catch (InvalidBase64Exception e)
+		{
+			e.printStackTrace();
+		}
+	}
+	
+	void updateConfigInfo()
+	{
+		mainWindow.setAndSaveHQKeysInConfigInfo(hQKeys);
 	}
 	
 	public String getPublicKey() throws Exception
@@ -285,7 +329,7 @@ public class UiConfigureHQs extends JDialog
 	boolean confirmPublicCode(String publicCode, String baseTag, String errorBaseTag)
 	{
 		String userEnteredPublicCode = "";
-		//System.out.println("Public code required:" + publicCode);
+System.out.println("Public code required:" + publicCode);
 		while(true)
 		{
 			userEnteredPublicCode = mainWindow.getStringInput(baseTag, "", userEnteredPublicCode);
@@ -300,22 +344,6 @@ public class UiConfigureHQs extends JDialog
 		}
 	}
 	
-	
-	class RemoveHandler implements ActionListener
-	{
-		public void actionPerformed(ActionEvent ae)
-		{
-			int rowCount = model.getRowCount();
-			for(int i = rowCount-1; i >=0 ; --i)
-			{
-				if(table.isRowSelected(i))
-					model.removeRow(i);
-			}
-			remove.setEnabled(false);
-		}
-//		mainWindow.doClearPublicAccountInfo();
-	}
-	
 	UiMainWindow mainWindow;
 	UiTable table;
 	DefaultTableModel model;
@@ -323,4 +351,6 @@ public class UiConfigureHQs extends JDialog
 	UiBasicLocalization localization;
 	private static final int DEFAULT_VIEABLE_ROWS = 5;
 	private static final int PUBLIC_CODE_COLUMN = 0;
+	Vector hQKeys;
+	HashMap mapOfKeysToCodes;
 }

@@ -1598,25 +1598,24 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 //			return;
 		new UiConfigureHQs(this);
 	}
-
-	public void doClearPublicAccountInfo()
+	
+	public void setAndSaveHQKeysInConfigInfo(Vector hQKeys)
 	{
-		if(!reSignIn())
-			return;
 		try
 		{
-			if(confirmDlg("ClearHQInformation"))
+			if(hQKeys.isEmpty())
 				app.clearHQKey();
+			else
+				app.setHQKey((String)hQKeys.get(0));
+			app.saveConfigInfo();
 		}
 		catch(MartusApp.SaveConfigInfoException e)
 		{
 			notifyDlg("ErrorSavingConfig");
 		}
-		catch(Exception e)
-		{
-			notifyDlg("PublicInfoFileError");
-		}
+		
 	}
+
 
 	private void initializeViews()
 	{
