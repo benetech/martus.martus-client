@@ -105,7 +105,7 @@ public class UiSigninDlg extends UiBasicSigninDlg
 			String buttons[] = {yesButtonText, noButtonText};
 			UiNotifyDlg notify = new UiNotifyDlg(owner, title, content, buttons);
 			String result = notify.getResult();
-			if(result.equals(noButtonText))
+			if(!result.equals(yesButtonText))
 			{
 				localization.hideUnofficialTranslationFiles(languageCodeChangingTo);
 				languageDropdown.updateChoices(localization.getUiLanguages());
