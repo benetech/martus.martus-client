@@ -28,15 +28,27 @@ package org.martus.client.swingui.bulletincomponent;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.common.HQKeys;
 import org.martus.common.bulletin.Bulletin;
+import org.martus.swing.UiWrappedTextArea;
 
 public class UiBulletinComponentHeadQuarters extends UiBulletinComponentSection
 {
-	public UiBulletinComponentHeadQuarters(UiMainWindow mainWindowToUse, Bulletin bulletinToUse)
+	public UiBulletinComponentHeadQuarters(UiMainWindow mainWindowToUse, Bulletin bulletinToUse, String tagQualifierToUse)
 	{
 		super(mainWindowToUse);
 		bulletin = bulletinToUse;
 		hqKeysAuthorizedToReadThisBulletin = bulletin.getAuthorizedToReadKeys();
+		
+		String hqText = getLabel("HQInfoFor" + tagQualifierToUse); 
+		UiWrappedTextArea hqInfo = new UiWrappedTextArea(hqText);
+		hqInfo.setEditable(false);
+		add(hqInfo);
 	}
+
+	protected String getLabel(String tag)
+	{
+		return getLocalization().getFieldLabel("BulletinDetails" + tag);
+	}
+	
 	Bulletin bulletin;
 	HQKeys hqKeysAuthorizedToReadThisBulletin;
 }

@@ -34,18 +34,13 @@ import org.martus.common.bulletin.Bulletin;
 import org.martus.swing.UiLabel;
 import org.martus.swing.UiScrollPane;
 import org.martus.swing.UiTable;
-import org.martus.swing.UiWrappedTextArea;
 import org.martus.util.Base64.InvalidBase64Exception;
 
 public class UiBulletinComponentHeadQuartersViewer extends UiBulletinComponentHeadQuarters
 {
 	public UiBulletinComponentHeadQuartersViewer(UiMainWindow mainWindowToUse, String tagQualifierToUse, Bulletin bulletinToUse)
 	{
-		super(mainWindowToUse, bulletinToUse);
-		String hqText = getLabel("HQInfoFor" + tagQualifierToUse); 
-		UiWrappedTextArea hqInfo = new UiWrappedTextArea(hqText);
-		hqInfo.setEditable(false);
-		add(hqInfo);
+		super(mainWindowToUse, bulletinToUse, tagQualifierToUse);
 
 		UiLabel hqLabel = new UiLabel(getLabel("Headquarters"));
 		if(hqKeysAuthorizedToReadThisBulletin.size() > 0)
@@ -99,8 +94,4 @@ public class UiBulletinComponentHeadQuartersViewer extends UiBulletinComponentHe
 		return hqLabelIfPresent;
 	}
 
-	private String getLabel(String tag)
-	{
-		return getLocalization().getFieldLabel("BulletinDetails" + tag);
-	}
 }
