@@ -76,11 +76,15 @@ public class UiBulletinEditor extends UiBulletinComponent implements HeadQuarter
 		if(privateSection.isAnyFieldModified(previousStateOfBulletinBeingEdited, currentStateOfBulletinBeingEdited))
 			return true;
 
+		if (isHeadquartersAuthorizedModified(previousStateOfBulletinBeingEdited, currentStateOfBulletinBeingEdited))
+			return true;
+
 		if (isPublicAttachmentModified())	
 			return true;						
 		
 		if (isPrivateAttachmentModified())
 			return true;
+		
 			
 		return false;			
 	}	
@@ -124,6 +128,15 @@ public class UiBulletinEditor extends UiBulletinComponent implements HeadQuarter
 		}		
 		return false;	
 	}		
+	
+	public boolean isHeadquartersAuthorizedModified(Bulletin original, Bulletin newBulletin)
+	{
+		HQKeys orignialHQs = original.getAuthorizedToReadKeys();
+		HQKeys newHQs = newBulletin.getAuthorizedToReadKeys();
+		if(!orignialHQs.toStringWithLabel().equals(newHQs.toStringWithLabel()))
+			return true;
+		return false;
+	}
 
 	public void copyDataToBulletin(Bulletin bulletin) throws
 		IOException,
