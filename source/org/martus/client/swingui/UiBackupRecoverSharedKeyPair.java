@@ -123,24 +123,23 @@ public class UiBackupRecoverSharedKeyPair
 
 		int minNumber = MartusConstants.minNumberOfFilesNeededToRecreateSecret;
 		Vector shares = new Vector();
-		String title_and_field_tag="";
 		for(int disk = 1; disk <= minNumber; ++disk )
 		{
 			while(true)
 			{
 				String[] filesMatching = firstShareFile.getParentFile().list(new BackupShareFilenameFilter(defaultShareFileName, MartusApp.SHARE_KEYPAIR_FILENAME_EXTENSION));
 				
-				title_and_field_tag = "ErrorRecoverNoAppropriateFileFound";
+				String noFilesFoundTag = "ErrorRecoverNoAppropriateFileFound";
 				if(filesMatching == null || filesMatching.length == 0)
 				{
-					if(!insertDisk(title_and_field_tag,title_and_field_tag, disk, minNumber, "CancelShareRecover"))
+					if(!insertDisk(noFilesFoundTag,noFilesFoundTag, disk, minNumber, "CancelShareRecover"))
 						return null;
 					continue;
 				}
 				File shareFile = new File(firstShareFile.getParent(), filesMatching[0]);
 				if(shareFile == null || !shareFile.isFile())
 				{
-					if(!insertDisk(title_and_field_tag, title_and_field_tag, disk, minNumber, "CancelShareRecover"))
+					if(!insertDisk(noFilesFoundTag, noFilesFoundTag, disk, minNumber, "CancelShareRecover"))
 						return null;
 					continue;
 				}
@@ -153,16 +152,16 @@ public class UiBackupRecoverSharedKeyPair
 
 					if(disk == minNumber)
 						break;
-					title_and_field_tag = "RecoverShareKeyPair";
-					if(!insertDisk(title_and_field_tag, title_and_field_tag, disk+1, minNumber, "CancelShareRecover"))
+					String recoverShareKeyPairTag = "RecoverShareKeyPair";
+					if(!insertDisk(recoverShareKeyPairTag, recoverShareKeyPairTag, disk+1, minNumber, "CancelShareRecover"))
 						return null;
 					break;
 				} 
 				catch (IOException e) 
 				{
 					e.printStackTrace();
-					title_and_field_tag = "ErrorRecoverShareDisk";
-					if(!insertDisk(title_and_field_tag, title_and_field_tag, disk, minNumber, "CancelShareRecover"))
+					String errorRecoveryTag = "ErrorRecoverShareDisk";
+					if(!insertDisk(errorRecoveryTag, errorRecoveryTag, disk, minNumber, "CancelShareRecover"))
 						return null;
 					continue;
 				}
@@ -296,7 +295,6 @@ public class UiBackupRecoverSharedKeyPair
 	{
 		Vector shareFiles = new Vector();
 		int maxFiles = MartusConstants.numberOfFilesInShare;
-		String title_and_field_tag = "";
 		for(int disk = 1; disk <= maxFiles; ++disk )
 		{
 			while(true)
@@ -306,16 +304,16 @@ public class UiBackupRecoverSharedKeyPair
 				String[] otherBackupFiles = currentShareFile.getParentFile().list(new BackupShareFilenameFilter(defaultFileName, MartusApp.SHARE_KEYPAIR_FILENAME_EXTENSION));
 				if(otherBackupFiles != null && otherBackupFiles.length > 0)
 				{
-					title_and_field_tag = "ErrorPreviousBackupShareExists";
-					if(!insertDisk(title_and_field_tag, title_and_field_tag, disk, maxFiles, "CancelShareBackup"))
+					String previousShareExistsTag = "ErrorPreviousBackupShareExists";
+					if(!insertDisk(previousShareExistsTag, previousShareExistsTag, disk, maxFiles, "CancelShareBackup"))
 						return false;
 					continue;
 				}
 		
 				if(!writeSharePieceToFile(currentShareFile, (String) keyShareBundles.get(disk - 1)))
 				{
-					title_and_field_tag = "ErrorBackingupKeyPair";
-					if(!insertDisk(title_and_field_tag, title_and_field_tag, disk, maxFiles, "CancelShareBackup"))
+					String errorBackingupTag = "ErrorBackingupKeyPair";
+					if(!insertDisk(errorBackingupTag, errorBackingupTag, disk, maxFiles, "CancelShareBackup"))
 						return false;
 					continue;
 				}
@@ -340,19 +338,18 @@ public class UiBackupRecoverSharedKeyPair
 		boolean verifiedAll = false;
 		if(mainWindow.confirmDlg("BackupKeyShareVerifyDisks"))
 		{
-			String title_and_field_tag = "";
 			for(int disk = 1; disk <= maxFiles; ++disk )
 			{
-				title_and_field_tag = "VerifyingKeyPairShare";
-				if(!insertDisk(title_and_field_tag, title_and_field_tag, disk, maxFiles, "CancelShareVerify"))
+				String verifyShareTag = "VerifyingKeyPairShare";
+				if(!insertDisk(verifyShareTag, verifyShareTag, disk, maxFiles, "CancelShareVerify"))
 					break;
 				boolean exitVerification = false;
 				while(true)
 				{
 					if(!verifySharePieceFromFile((File)shareFiles.get(disk-1), (String) keyShareBundles.get(disk - 1)))
 					{
-						title_and_field_tag = "ErrorVerifyingKeyPairShare";
-						if(!insertDisk(title_and_field_tag, title_and_field_tag, disk, maxFiles, "CancelShareVerify"))
+						String errorVerifyShareTag = "ErrorVerifyingKeyPairShare";
+						if(!insertDisk(errorVerifyShareTag, errorVerifyShareTag, disk, maxFiles, "CancelShareVerify"))
 						{
 							exitVerification = true;
 							break;
