@@ -107,7 +107,7 @@ public class MartusApp
 			throw new MartusAppInitializationException("ErrorCryptoInitialization");
 		}
 
-		initializeCurrentLanguage(localizationToUse);
+		initializeCurrentLanguage(localization);
 	}
 
 	private void initializeCurrentLanguage(Localization localization)
