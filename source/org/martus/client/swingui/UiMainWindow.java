@@ -88,7 +88,7 @@ import org.martus.client.swingui.dialogs.UiCreateNewAccountProcess;
 import org.martus.client.swingui.dialogs.UiDisplayFileDlg;
 import org.martus.client.swingui.dialogs.UiExportBulletinsDlg;
 import org.martus.client.swingui.dialogs.UiInitialSigninDlg;
-import org.martus.client.swingui.dialogs.UiLocalizeDlg;
+import org.martus.client.swingui.dialogs.UiPreferencesDlg;
 import org.martus.client.swingui.dialogs.UiModelessBusyDlg;
 import org.martus.client.swingui.dialogs.UiProgressRetrieveBulletinsDlg;
 import org.martus.client.swingui.dialogs.UiProgressRetrieveSummariesDlg;
@@ -1015,7 +1015,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	public void doLocalize()
 	{
 		saveState();
-		new UiLocalizeDlg(this);
+		new UiPreferencesDlg(this);
 		initializeViews();
 		restoreState();
 		show();
@@ -1848,6 +1848,17 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 			defaultFileName = ((Bulletin)bulletins.get(0)).toFileName();
 		new UiExportBulletinsDlg(this, bulletins, defaultFileName);
 	}
+	
+	public boolean getBulletinsAlwaysPrivate()
+	{
+		return bulletinsAlwaysPrivate;
+	}
+
+	public void setBulletinsAlwaysPrivate(boolean newAllPrivateState)
+	{
+		bulletinsAlwaysPrivate = newAllPrivateState;
+		
+	}
 
 	public static boolean isAnyBulletinSelected(UiMainWindow window)
 	{
@@ -1866,6 +1877,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		versionInfo += " " + UiConstants.versionLabel;
 		return versionInfo;
 	}
+	
 	
 	class WindowEventHandler extends WindowAdapter
 	{
@@ -2002,4 +2014,6 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	private static final int BACKGROUND_UPLOAD_CHECK_MILLIS = 5*1000;
 	private static final int BACKGROUND_TIMEOUT_CHECK_EVERY_X_MILLIS = 5*1000;
 	private boolean mainWindowInitalizing;
+	private boolean bulletinsAlwaysPrivate;
+
 }

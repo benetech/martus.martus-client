@@ -90,7 +90,11 @@ public class UiBulletinModifyDlg extends JFrame implements ActionListener, Windo
 			scroller.getViewport().add(view);
 			scroller.getViewport().setScrollMode(JViewport.SIMPLE_SCROLL_MODE);
 
-			indicateEncrypted(bulletin.isAllPrivate());
+			if(observer.getBulletinsAlwaysPrivate())
+				forceEncrypted();
+			else
+				indicateEncrypted(bulletin.isAllPrivate());
+				
 
 			Box box = Box.createHorizontalBox();
 			box.add(send);
@@ -288,6 +292,11 @@ public class UiBulletinModifyDlg extends JFrame implements ActionListener, Windo
 	public boolean confirmSend()
 	{
 		return observer.confirmDlg(this, "send");
+	}
+
+	private void forceEncrypted()
+	{
+		view.encryptAndDisableAllPrivate();
 	}
 
 	private void indicateEncrypted(boolean isEncrypted)

@@ -31,6 +31,7 @@ import java.awt.Dimension;
 import java.awt.Rectangle;
 import java.io.IOException;
 
+import javax.swing.JCheckBox;
 import javax.swing.JPanel;
 import javax.swing.Scrollable;
 import javax.swing.event.ChangeEvent;
@@ -167,6 +168,14 @@ abstract public class UiBulletinComponent extends JPanel implements Scrollable, 
 		
 		if(privateStuff != null)
 			privateStuff.updateEncryptedIndicator(true);
+	}
+	
+	public void encryptAndDisableAllPrivate()
+	{
+		JCheckBox allPrivate = ((JCheckBox)(allPrivateField.getComponent()));
+		allPrivate.setSelected(true);
+		allPrivate.setEnabled(false);
+		updateEncryptedIndicator(true);
 	}
 
 	// Scrollable interface

@@ -30,6 +30,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.event.ChangeEvent;
@@ -44,9 +45,9 @@ import org.martus.swing.Utilities;
 
 
 
-public class UiLocalizeDlg extends JDialog implements ActionListener, ChangeListener
+public class UiPreferencesDlg extends JDialog implements ActionListener, ChangeListener
 {
-	public UiLocalizeDlg(UiMainWindow mainWindow)
+	public UiPreferencesDlg(UiMainWindow mainWindow)
 	{
 		super(mainWindow, "", true);
 		owner = mainWindow;
@@ -59,6 +60,10 @@ public class UiLocalizeDlg extends JDialog implements ActionListener, ChangeList
 
 		languageDropdown = new UiChoiceEditor(localization.getUiLanguages());
 		languageDropdown.setText(localization.getCurrentLanguageCode());
+		
+		allPrivate = new JCheckBox();
+		allPrivate.setText(localization.getFieldLabel("preferencesAllPrivate"));
+		allPrivate.setSelected(owner.getBulletinsAlwaysPrivate());
 
 		ok = new JButton(localization.getButtonLabel("ok"));
 		ok.addActionListener(this);
@@ -72,6 +77,9 @@ public class UiLocalizeDlg extends JDialog implements ActionListener, ChangeList
 
 		getContentPane().add(new JLabel(localization.getFieldLabel("dateformat")), ParagraphLayout.NEW_PARAGRAPH);
 		getContentPane().add(dateFormatDropdown.getComponent());
+
+		getContentPane().add(new JLabel(""), ParagraphLayout.NEW_PARAGRAPH);
+		getContentPane().add(allPrivate);
 
 		getContentPane().add(new JLabel(""), ParagraphLayout.NEW_PARAGRAPH);
 		getContentPane().add(ok);
@@ -90,6 +98,7 @@ public class UiLocalizeDlg extends JDialog implements ActionListener, ChangeList
 		{
 			owner.getLocalization().setCurrentDateFormatCode(dateFormatDropdown.getText());
 			owner.getLocalization().setCurrentLanguageCode(languageDropdown.getText());
+			owner.setBulletinsAlwaysPrivate(allPrivate.isSelected());
 		}
 		dispose();
 	}
@@ -100,6 +109,7 @@ public class UiLocalizeDlg extends JDialog implements ActionListener, ChangeList
 	private UiMainWindow owner;
 	private UiChoiceEditor languageDropdown;
 	private UiChoiceEditor dateFormatDropdown;
+	private JCheckBox allPrivate;
 	private JButton ok;
 	private JButton cancel;
 }
