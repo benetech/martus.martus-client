@@ -118,7 +118,6 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 	{
 		TRACE_BEGIN("testGetHelp");
 		File translationDirectory = appWithAccount.martusDataRootDirectory;
-		UiLocalization tmpLocalization = new UiLocalization(translationDirectory, EnglishStrings.strings);
 		String languageCode = "xx";
 		InputStream helpMain = appWithAccount.getHelpMain(languageCode);
 		assertNull("Language pack doesn't exists help should return null", helpMain);
