@@ -38,6 +38,7 @@ public class EnglishStrings
 "wintitle:MartusSignInValidate=Validate User",
 "wintitle:MartusSignInRetypePassword=Confirm Password",
 "wintitle:ServerCompliance=Server Compliance Statement",
+"wintitle:ErrorBackingupKeyPair=Error",
 
 "wintitle:confirmsend=Confirm Send Bulletin",
 "wintitle:confirmretrieve=Confirm Retrieve Bulletins",
@@ -82,7 +83,8 @@ public class EnglishStrings
 "wintitle:confirmExportUnknownTags=Export Bulletins",
 "wintitle:confirmQuickEraseDeleteKeyPair=Delete Keypair",
 "wintitle:confirmDeleteSubDirectory=Unexpected Files Found",
-		
+"wintitle:confirmKeyPairFileExistsOverWrite=Keypair file Exists",
+
 "wintitle:notifyDropErrorNotAllowed=Cannot Move Bulletin(s)",
 "wintitle:notifyDropErrors=Error Moving Bulletin(s)",
 "wintitle:notifyPasteErrorNotAllowed=Cannot Paste Bulletin(s)",
@@ -154,7 +156,6 @@ public class EnglishStrings
 "wintitle:notifyVerifyKeyPairSharePassed=Verification Succeded",				
 "wintitle:notifyRecoveryOfKeyShareComplete=Recovery Complete",
 "wintitle:notifyOperationCompleted=Finished",
-"wintitle:notifyErrorBackingupKeyPair=Error",
 "wintitle:notifycontactRejected=Error Sending ContactInfo",
 "wintitle:notifyCreateAccountFailed=Error Creating New Account",
 "wintitle:notifyUserAlreadyExists=User Already Exists",
@@ -449,6 +450,7 @@ public class EnglishStrings
 "field:ErrorRecoverShareDisk=An error occured reading this keyshare file.",
 "field:ErrorVerifyingKeyPairShare=An error occured verifying this keyshare file.",
 "field:RecoverAccount=Recover your existing account from floppy or a backup file.",
+"field:ErrorBackingupKeyPair=Unable to back up the key pair file on this disk.",
 
 
 "field:VirtualUserNameDescription=(Enter using regular keyboard)",
@@ -546,7 +548,10 @@ public class EnglishStrings
 "field:confirmQuickEraseOutboxNotEmptyeffect=Clicking on yes will bring you to the Quick Erase Options dialog, no will return you to Martus without erasing anything.",
 "field:confirmDeleteSubDirectorycause=There are still backup files and or directories in the Martus/Packets directory.  Do you wish to delete these files and folders as well?",
 "field:confirmDeleteSubDirectoryeffect=Clicking on yes will delete ALL files and folders in this directory.",
-		
+"field:confirmKeyPairFileExistsOverWritecause=A keypair file already exists for this account.  Do you wish to overwrite it?",
+"field:confirmKeyPairFileExistsOverWriteeffect=Clicking on yes will delete the old keypair file and replace it with your recovered keypair.",
+
+
 		
 "field:notifyDropErrorNotAllowedcause=One or more bulletins cannot be moved to that folder. This may be because of their Draft/Sealed status, or their author.",
 "field:notifyDropErrorscause=An unexpected error occured while moving the bulletin(s). One or more files may be damaged.",
@@ -620,7 +625,6 @@ public class EnglishStrings
 "field:notifyRecoveryOfKeyShareCompletecause=You have successfully restored your keypair from your keyshare files.  It is very important that you now re-scatter your key share.  We also recommend you backup your keypair as an encrypted file, you do not need to recreate the multi-file keyshare.",
 "field:notifyVerifyKeyPairSharePassedcause=Verification of all disks passed.",
 "field:notifyOperationCompletedcause=Operation completed.",
-"field:notifyErrorBackingupKeyPaircause=Unable to back up the key pair file on this disk.",
 "field:notifycontactRejectedcause=The current Martus Server has refused to accept your contact info",
 "field:notifyQuickEraseScrubWorkedcause=All bulletins and folders were successfully scrubbed and deleted.",
 "field:notifyCreateAccountFailedcause=An error occured while trying to create your account.",

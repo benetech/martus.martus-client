@@ -1070,6 +1070,8 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		UiCreateNewAccountProcess newUserInfo = new UiCreateNewAccountProcess(this, originalUserName);
 		if(!newUserInfo.isDataValid())
 			return false;
+		File accountsHashOfUserNameFile = app.getUserNameHashFile(keyPairFile.getParentFile());
+		accountsHashOfUserNameFile.delete();
 		return saveKeyPairFile(keyPairFile, newUserInfo.getUserName(), newUserInfo.getPassword());
 	}
 
@@ -1082,6 +1084,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		}
 		catch(Exception e)
 		{
+			e.printStackTrace();
 			notifyDlg(this, "RewriteKeyPairFailed");
 			return false;
 			//TODO eventually try to restore keypair from backup.

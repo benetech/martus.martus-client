@@ -38,6 +38,7 @@ import javax.swing.JFileChooser;
 import org.martus.client.core.MartusApp;
 import org.martus.common.MartusConstants;
 import org.martus.common.MartusUtilities;
+import org.martus.common.crypto.MartusCrypto;
 import org.martus.common.crypto.MartusCrypto.KeyShareException;
 import org.martus.swing.UiFileChooser;
 import org.martus.util.UnicodeReader;
@@ -212,7 +213,15 @@ public class UiBackupRecoverKeyPair
 		while(true)
 		{
 			MartusApp app = mainWindow.getApp();
-			if(mainWindow.getAndSaveUserNamePassword(app.getKeyPairFile(app.getMartusDataRootDirectory())))
+			String digestOfAccountsPublicCode = MartusCrypto.getHexDigest(app.getAccountId());
+			File keyPairFile = app.getKeyPairFile(app.getAccountDirectory(digestOfAccountsPublicCode));
+			if(keyPairFile.exists())
+			{
+				if(!mainWindow.confirmDlg(mainWindow, "KeyPairFileExistsOverWrite"))
+					return false;
+			}
+			
+			if(mainWindow.getAndSaveUserNamePassword(keyPairFile))
 			{					
 				mainWindow.notifyDlg(mainWindow, "RecoveryOfKeyShareComplete");
 				return true;
