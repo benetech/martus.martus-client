@@ -682,8 +682,8 @@ public class EnglishStrings
 "field:notifyFilesWillNotBeDeletedcause=The original files have not been deleted from your computer, you must delete them manually if you wish.",
 "field:notifyHQKeyAlradyExistscause=You have already added this account to your Headquarters list.",
 "field:notifyFolderMigrationFailedcause=An error occurred during the conversion of your folders. You can still use Martus, but if the Outbox or Drafts folders still exist, do not use them.",
-"field:notifyViewViewBulletinDetailscause=Bulletin ID: #I#\nAuthor:      #A#\n\n#H#",
-"field:notifyModifyViewBulletinDetailscause=Bulletin ID: #I#\nAuthor:      #A#\n\n#H#",
+"field:notifyViewViewBulletinDetailscause=Bulletin ID:        #I#\nAuthor Public Code: #A#\n\n#H#",
+"field:notifyModifyViewBulletinDetailscause=Bulletin ID:        #I#\nAuthor Public Code: #A#\n\n#H#",
 "field:notifyResendErrorNotAuthorizedToSendcause=One or more bulletins were unable to be resent because you are not authorized to upload them.",
 "field:notifyResendErrorcause=One or more bulletins were unable to be resent due to an unexpected error.",
 
