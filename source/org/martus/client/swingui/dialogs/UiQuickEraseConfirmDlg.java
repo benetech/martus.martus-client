@@ -182,7 +182,8 @@ public class UiQuickEraseConfirmDlg extends JDialog
 		options.setScrubOption(scrubBeforeDelete.isSelected());
 		options.setDeleteKeyPairOption(deleteKeyPair.isSelected());
 		options.setExitWhenCompleteOption(exitWhenComplete.isSelected());
-		options.setDonotPromptOption(donotPrompt.isSelected());	
+		options.setDonotPromptOption(donotPrompt.isSelected());
+		options.setUninstallMartusOption(uninstallMartus.isSelected());
 	}
 		
 	JCheckBox scrubBeforeDelete;

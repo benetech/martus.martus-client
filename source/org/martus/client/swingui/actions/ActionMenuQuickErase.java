@@ -27,10 +27,14 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.swingui.actions;
 
 import java.awt.event.ActionEvent;
+import java.io.File;
+import java.io.IOException;
 
 import org.martus.client.core.QuickEraseOptions;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.dialogs.UiQuickEraseConfirmDlg;
+import org.martus.swing.Utilities;
+import org.martus.util.DirectoryUtils;
 
 public class ActionMenuQuickErase extends UiMenuAction 
 {
@@ -88,6 +92,26 @@ public class ActionMenuQuickErase extends UiMenuAction
 	private void exitApp(QuickEraseOptions options)
 	{
 		mainWindow.getApp().cleanupWhenCompleteQuickErase(options);
+		if(options.isUninstallMartusSelected())
+		{
+			if(Utilities.isMSWindows())
+			{
+				File uninstallFile = new File(mainWindow.getApp().getMartusDataRootDirectory(),"uninstall.bat");
+				try
+				{
+					Runtime.getRuntime().exec(uninstallFile.getAbsolutePath());
+				}
+				catch (IOException e)
+				{
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			else
+			{
+				DirectoryUtils.deleteEntireDirectoryTree(mainWindow.getApp().getMartusDataRootDirectory());
+			}
+		}
 		mainWindow.exitWithoutSavingState();		
 	}
 

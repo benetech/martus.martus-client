@@ -32,7 +32,7 @@ public class QuickEraseOptions
 	public boolean isDeleteKeyPairSelected(){return delKeyPairOption;}
 	public boolean isExitWhenCompleteSelected() {return exitWhenCompleteOption;}
 	public boolean isDonotPromptSelected() {return donotPromptOption;}
-
+	public boolean isUninstallMartusSelected() {return uninstallMartusOption;}
 	
 	public void setScrubOption(boolean option) 
 	{
@@ -52,7 +52,12 @@ public class QuickEraseOptions
 	public void setDonotPromptOption(boolean option)
 	{
 		donotPromptOption = option;
-	}	
+	}
+	
+	public void setUninstallMartusOption(boolean option)
+	{
+		uninstallMartusOption = option;
+	}
 	
 	public QuickEraseOptions(){}
 
@@ -60,4 +65,5 @@ public class QuickEraseOptions
 	boolean delKeyPairOption;
 	boolean exitWhenCompleteOption;
 	boolean donotPromptOption;
+	boolean uninstallMartusOption;
 }
