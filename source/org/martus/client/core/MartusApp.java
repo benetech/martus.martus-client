@@ -284,25 +284,10 @@ public class MartusApp
 		}
 	}
 
-	public void doAfterSigninInitalization() throws MartusAppInitializationException
+	public void doAfterSigninInitalization() throws MartusAppInitializationException, FileVerificationException, MissingAccountMapException, MissingAccountMapSignatureException
 	{
 		store = new BulletinStore(currentAccountDirectory, getSecurity());
-		try
-		{
-			store.doAfterSigninInitalization();
-		}
-		catch (MissingAccountMapException e)
-		{
-			throw new MartusAppInitializationException("ErrorMissingAccountMap");
-		}
-		catch (FileVerificationException handlingPostponedException)
-		{
-			throw new MartusAppInitializationException("ErrorAccountMapVerification");
-		}
-		catch (MissingAccountMapSignatureException handlingPostponedException)
-		{
-			throw new MartusAppInitializationException("ErrorMissingAccountMapSignature");
-		}
+		store.doAfterSigninInitalization();
 	}
 	
 	public File getMartusDataRootDirectory()

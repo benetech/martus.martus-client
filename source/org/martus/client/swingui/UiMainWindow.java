@@ -80,7 +80,6 @@ import org.martus.client.core.TransferableBulletinList;
 import org.martus.client.core.MartusApp.MartusAppInitializationException;
 import org.martus.client.swingui.bulletincomponent.UiBulletinPreview;
 import org.martus.client.swingui.bulletintable.UiBulletinTablePane;
-import org.martus.client.swingui.dialogs.*;
 import org.martus.client.swingui.dialogs.UiAboutDlg;
 import org.martus.client.swingui.dialogs.UiBulletinModifyDlg;
 import org.martus.client.swingui.dialogs.UiConfigServerDlg;
@@ -97,6 +96,7 @@ import org.martus.client.swingui.dialogs.UiRemoveServerDlg;
 import org.martus.client.swingui.dialogs.UiSearchDlg;
 import org.martus.client.swingui.dialogs.UiServerSummariesDlg;
 import org.martus.client.swingui.dialogs.UiShowScrollableTextDlg;
+import org.martus.client.swingui.dialogs.UiSigninDlg;
 import org.martus.client.swingui.dialogs.UiSplashDlg;
 import org.martus.client.swingui.dialogs.UiStringInputDlg;
 import org.martus.client.swingui.dialogs.UiTemplateDlg;
@@ -110,11 +110,17 @@ import org.martus.client.swingui.tablemodels.RetrieveMyDraftsTableModel;
 import org.martus.client.swingui.tablemodels.RetrieveMyTableModel;
 import org.martus.client.swingui.tablemodels.RetrieveTableModel;
 import org.martus.common.MartusUtilities;
+import org.martus.common.MartusUtilities.FileVerificationException;
 import org.martus.common.MartusUtilities.ServerErrorException;
 import org.martus.common.bulletin.Bulletin;
-import org.martus.common.clientside.*;
+import org.martus.common.clientside.CurrentUiState;
+import org.martus.common.clientside.UiBasicLocalization;
+import org.martus.common.clientside.UiPasswordField;
+import org.martus.common.clientside.UiUtilities;
 import org.martus.common.crypto.MartusCrypto;
 import org.martus.common.database.Database;
+import org.martus.common.database.FileDatabase.MissingAccountMapException;
+import org.martus.common.database.FileDatabase.MissingAccountMapSignatureException;
 import org.martus.common.network.NetworkInterfaceConstants;
 import org.martus.common.packet.Packet;
 import org.martus.common.packet.UniversalId;
@@ -140,7 +146,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		}
 		catch(MartusApp.MartusAppInitializationException e)
 		{
-			initializationErrorDlg(e.getMessage());
+			initializationErrorExitMartusDlg(e.getMessage());
 		}
 		UiMainWindow.updateIcon(this);
 		
@@ -202,24 +208,22 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		try
 		{
 			app.doAfterSigninInitalization();
-			if(isAccountMapSignatureMissing())
-			{
-				if(confirmDlg("WarnMissingAccountMapSignatureFile"))
-					exitWithoutSavingState();
-				try 
-				{
-					Database database = app.getStore().getDatabase();
-					database.signAccountMap();				
-				} 
-				catch (Exception e) 
-				{
-					e.printStackTrace();
-				} 
-			}
 		}
-		catch (MartusAppInitializationException e)
+		catch (MartusAppInitializationException e1)
 		{
-			initializationErrorDlg(e.getMessage());
+			initializationErrorExitMartusDlg(e1.getMessage());
+		}
+		catch (FileVerificationException e1)
+		{
+			askToRepairMissingOrCorruptAccountMapSignature(); 
+		}
+		catch (MissingAccountMapSignatureException e1)
+		{
+			askToRepairMissingOrCorruptAccountMapSignature(); 
+		}
+		catch (MissingAccountMapException e1)
+		{
+			askToRepairMissingAccountMapFile();
 		}
 
 		doAfterSignInConfigInfoSetup(createdNewAccount);
@@ -262,8 +266,40 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		return true;
     }
     
-    private void PreventTwoInstances()
-    {
+ 	private void askToRepairMissingOrCorruptAccountMapSignature()
+	{
+		if(!confirmDlgBeep("WarnMissingOrCorruptAccountMapSignatureFile"))
+			exitWithoutSavingState();
+		try 
+		{
+			Database database = app.getStore().getDatabase();
+			database.signAccountMap();	
+			app.doAfterSigninInitalization();
+			
+		} 
+		catch (Exception e) 
+		{
+			initializationErrorExitMartusDlg(e.getMessage());
+		}
+	}
+
+	private void askToRepairMissingAccountMapFile()
+	{
+		if(!confirmDlgBeep("WarnMissingAccountMapFile"))
+			exitWithoutSavingState();
+		try 
+		{
+			app.getStore().deleteAllBulletins();
+			app.doAfterSigninInitalization();
+		} 
+		catch (Exception e) 
+		{
+			initializationErrorExitMartusDlg(e.getMessage());
+		}
+	}
+	
+	private void PreventTwoInstances()
+	{
 		try
 		{
 			File lockFile = new File(app.getMartusDataRootDirectory(), "lock");
@@ -274,11 +310,11 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	   	if(lockToPreventTwoInstances == null)
-	   	{
-	   		notifyDlg("AlreadyRunning");
-	   		System.exit(1);
-	   	}
+		if(lockToPreventTwoInstances == null)
+		{
+			notifyDlg("AlreadyRunning");
+			System.exit(1);
+		}
 	}
 
 	private void doAfterSignInConfigInfoSetup(boolean createdNewAccount)
@@ -307,12 +343,6 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 			requestToUpdateContactInfoOnServerAndSaveInfo();
 			info.clearPromptUserRequestSendToServer();
 		}
-	}
-
-	private boolean isAccountMapSignatureMissing() 
-	{
-		Database database = app.getStore().getDatabase();
-		return database.doesAccountMapExist() && !database.doesAccountMapSignatureExist();
 	}
 
 	void notifyClientCompliance(Frame owner)
@@ -558,7 +588,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		UiUtilities.messageDlg(getLocalization(), parent, baseTag, message);
 	}
 
-	private void initializationErrorDlg(String message)
+	private void initializationErrorExitMartusDlg(String message)
 	{
 		String title = "Error Starting Martus";
 		String cause = "Unable to start Martus: " + message;

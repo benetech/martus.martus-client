@@ -596,12 +596,17 @@ public class BulletinStore
 
 	public void deleteAllData() throws Exception
 	{
-		database.deleteAllData();
-		getCacheOfSortableFieldsFile().delete();
+		deleteAllBulletins();
 		deleteFoldersDatFile();
 		resetFolders();
 	}			
 	
+	public void deleteAllBulletins() throws Exception
+	{
+		database.deleteAllData();
+		getCacheOfSortableFieldsFile().delete();
+	}
+
 	public void deleteFoldersDatFile()
 	{
 		getFoldersFile().delete();
