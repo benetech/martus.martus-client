@@ -314,7 +314,7 @@ public class MartusApp
 	
 	public File getPacketsDirectory()
 	{
-		return new File(getCurrentAccountDirectory(), "packets");
+		return new File(getCurrentAccountDirectory(), PACKETS_DIRECTORY_NAME);
 	}
 	
 	public File getAccountsDirectory()
@@ -1086,8 +1086,14 @@ public class MartusApp
 	
 	public boolean doesDefaultAccountExist()
 	{
-		//TODO should also check to see if packets directory exists.
-		return (getKeyPairFile(getMartusDataRootDirectory()).exists());
+		if(getKeyPairFile(getMartusDataRootDirectory()).exists())
+			return true;
+
+		File packetsDir = new File(getMartusDataRootDirectory(), PACKETS_DIRECTORY_NAME);
+		if(!packetsDir.exists())
+			return false;
+
+		return (packetsDir.listFiles().length > 0);
 	}
 
 	public void exportPublicInfo(File exportFile) throws
@@ -1386,6 +1392,7 @@ public class MartusApp
 	public static final String SHARE_KEYPAIR_FILENAME_EXTENSION = ".dat";
 	public static final String KEYPAIR_FILENAME = "MartusKeyPair.dat";
 	public static final String ACCOUNTS_DIRECTORY_NAME = "accounts";
+	public static final String PACKETS_DIRECTORY_NAME = "packets";
 	
 	private final int MAXFOLDERS = 50;
 	public int serverChunkSize = NetworkInterfaceConstants.MAX_CHUNK_SIZE;

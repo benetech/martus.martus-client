@@ -755,9 +755,24 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		out.close();
 
 		assertEquals("Default Account doesn't exist?", true, appWithAccount.doesDefaultAccountExist());
-
+		File rootPacketsDir = new File(keyPairFile.getParentFile(), MartusApp.PACKETS_DIRECTORY_NAME);
+		rootPacketsDir.deleteOnExit();
+		rootPacketsDir.mkdir();
+		assertEquals("Default Account should still exist?", true, appWithAccount.doesDefaultAccountExist());
+		
 		keyPairFile.delete();
-
+		assertEquals("Default Account should not exist because the packets dir is empty.", false, appWithAccount.doesDefaultAccountExist());
+		File anyFile = new File(rootPacketsDir,"anyFile");
+		anyFile.deleteOnExit();
+		FileOutputStream outFile = new FileOutputStream(anyFile);
+		outFile.write(0);
+		outFile.close();
+		assertEquals("Default Account should now exist because the packets dir is not empty.", true, appWithAccount.doesDefaultAccountExist());
+		anyFile.delete();
+		
+		rootPacketsDir.delete();
+		assertEquals("Default account should now not exist", false, appWithAccount.doesDefaultAccountExist());
+		
 		TRACE_END();
 	}
 	
