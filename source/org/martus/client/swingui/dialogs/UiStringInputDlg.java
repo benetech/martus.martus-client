@@ -66,7 +66,7 @@ public class UiStringInputDlg extends JDialog
 		getRootPane().setDefaultButton(ok);
 
 		Utilities.centerDlg(this);
-		setResizable(false);
+		setResizable(true);
 	}
 	
 	public void setFocusToInputField()
