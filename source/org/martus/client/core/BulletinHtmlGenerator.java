@@ -88,9 +88,8 @@ public class BulletinHtmlGenerator
 		html.append(localization.getFieldLabel("BulletinId")+" ");
 		html.append(b.getLocalId());
 		html.append("<tr></tr>");		
-		html.append(localization.getFieldLabel("BulletinLastSaved")+" ");	
-		String date = localization.convertStoredDateToDisplay(b.getLastSavedDateTime());
-		html.append(date);
+		html.append(localization.getFieldLabel("BulletinLastSaved")+" ");			
+		html.append(b.getLastSavedDateTime());
 		html.append("</table>");
 		html.append("</html>");
 		return html.toString();
