@@ -258,8 +258,7 @@ public class TestClientBulletinStore extends TestCaseEnhanced
     
     private Bulletin createSealedBulletin(MartusCrypto otherSecurity)
 	{
-		HQKeys oldHq = new HQKeys();
-		oldHq.add(new HQKey(fakeHqKey));
+		HQKeys oldHq = new HQKeys(new HQKey(fakeHqKey));
     	
     	Bulletin original = new Bulletin(otherSecurity);
     	original.set(Bulletin.TAGTITLE, "oeiwjfio");

@@ -45,14 +45,12 @@ import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.IOException;
 import java.util.Vector;
-
 import javax.swing.JPopupMenu;
 import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.event.TableModelEvent;
 import javax.swing.table.JTableHeader;
-
 import org.martus.client.core.BulletinFolder;
 import org.martus.client.core.ClientBulletinStore;
 import org.martus.client.core.MartusApp;
@@ -64,6 +62,7 @@ import org.martus.client.swingui.UiLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.foldertree.FolderNode;
 import org.martus.common.FieldSpec;
+import org.martus.common.HQKeys;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.clientside.UiBasicLocalization;
 import org.martus.common.packet.UniversalId;
@@ -315,6 +314,8 @@ public class UiBulletinTable extends UiTable implements ListSelectionListener, D
 			try
 			{
 				bulletinToModify = store.createClone(original, publicFieldSpecsToUse, privateFieldSpecsToUse);
+				HQKeys keysAutorizedToRead = bulletinToModify.getAuthorizedToReadKeys();
+				keysAutorizedToRead.add(mainWindow.getApp().getDefaultHQKeysWithFallback());
 			}
 			catch (Exception e)
 			{
