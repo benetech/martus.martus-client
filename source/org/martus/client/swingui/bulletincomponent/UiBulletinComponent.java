@@ -160,7 +160,7 @@ abstract public class UiBulletinComponent extends JPanel implements Scrollable, 
 			publicStuff.updateWarningIndicator(text);
 			privateStuff.updateWarningIndicator(text);
 		}
-		else if(!currentBulletin.wasDecryptedByAuthor())
+		else if(!currentBulletin.getAccount().equals(mainWindow.getApp().getAccountId()))
 		{
 			String text = mainWindow.getLocalization().getFieldLabel("BulletinNotYours");
 			publicStuff.updateWarningIndicator(text);
