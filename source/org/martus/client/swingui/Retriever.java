@@ -115,7 +115,7 @@ public class Retriever
 						progressDlg.updateBulletinCountMeter(i, size);
 					}
 					UniversalId uid = (UniversalId)uidList.get(i);
-					if(app.getStore().findBulletinByUniversalId(uid) != null)
+					if(app.getStore().doesBulletinExist(uid))
 						continue;
 					app.retrieveOneBulletinToFolder(uid, retrievedFolder, progressMeter);
 				}

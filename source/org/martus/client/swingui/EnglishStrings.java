@@ -86,6 +86,7 @@ public class EnglishStrings
 "wintitle:confirmhelpStringNotFound=Text Not Found",
 "wintitle:confirmNeedsFolderMigration=Folder Migration Required",
 "wintitle:confirmUseBulletinsCustomFields=Custom Fields Selection",
+"wintitle:confirmUnAuthoredBulletinDeleteBeforePaste=UnAuthored Bulletin Already Exists",
 
 "wintitle:notifyDropErrorBulletinExists=Cannot Move Bulletin(s)",
 "wintitle:notifyDropErrors=Error Moving Bulletin(s)",
@@ -600,9 +601,10 @@ public class EnglishStrings
 "field:confirmNeedsFolderMigrationeffect=Answering Yes will allow the migration to proceed.",
 "field:confirmUseBulletinsCustomFieldscause=The bulletin you are about to create is based on a previous bulletin whos custom fields are different from your current custom fields.  Do you wish to use the original bulletins custom fields?",
 "field:confirmUseBulletinsCustomFieldseffect=Answering Yes will use the old custom fields and all bulletin data.  Answering No will use your current custom fields and copy all similar fields to the new bulletin but you will loose some of the orignial bulletins data.",
-
 "field:confirmSendWithPublicDatacause=You have chosen to save a completed bulletin.",
 "field:confirmSendWithPublicDataeffect=This will permanently seal the bulletin and you will not be allowed to make any further modifications to it except by creating a new copy of the bulletin.\n\nThe public information in this bulletin will be released for possible publication on the Martus Search Engine, and may be viewed by people outside your organization.\n\nIf there is information you do not want to be publicly available, either move that data to the private section of the bulletin or check the 'Keep ALL Information Private' box before saving the bulletin.",
+"field:confirmUnAuthoredBulletinDeleteBeforePastecause=The bulletin entitled \"#S#\" already exists in this system.  Do you wish to delete the old bulletin and replace it with this bulletin?",
+"field:confirmUnAuthoredBulletinDeleteBeforePasteeffect=Answering Yes will replace the old bulletin with this bulletin.  No will leave the original bulletin and skip this file.",
 
 "field:notifyDropErrorBulletinExistscause=One or more bulletins cannot be moved to that folder, because it already exists in that folder.",
 "field:notifyDropErrorscause=An unexpected error occurred while moving the bulletin(s). One or more files may be damaged.",

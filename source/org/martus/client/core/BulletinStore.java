@@ -331,12 +331,21 @@ public class BulletinStore
 		}
 	}
 
+	public boolean doesBulletinExist(UniversalId uid)
+	{
+		DatabaseKey key = new DatabaseKey(uid);
+		return doesBulletinExist(key);
+	}
+	
+	private boolean doesBulletinExist(DatabaseKey key)
+	{
+		return getDatabase().doesRecordExist(key);
+	}
+
 	public Bulletin findBulletinByUniversalId(UniversalId uid)
 	{
-		Database db = getDatabase();
-
 		DatabaseKey key = new DatabaseKey(uid);
-		if(!db.doesRecordExist(key))
+		if(!doesBulletinExist(key))
 		{
 			//System.out.println("BulletinStore.findBulletinByUniversalId: !doesRecordExist");
 			return null;
@@ -1138,7 +1147,8 @@ public class BulletinStore
 			WrongPacketTypeException,
 			CryptoException,
 			IOException,
-			InvalidBase64Exception, BulletinAlreadyExistsException
+			InvalidBase64Exception, 
+			BulletinAlreadyExistsException
 	{
 		ZipFile zip = new ZipFile(zipFile);
 		try
@@ -1147,8 +1157,7 @@ public class BulletinStore
 			UniversalId uid = bhp.getUniversalId();
 
 			boolean isSealed = bhp.getStatus().equals(Bulletin.STATUSSEALED);
-			boolean isMine = getAccountId().equals(bhp.getAccountId());
-			if(forceSameUids || !isMine || isSealed)
+			if(forceSameUids || !isMyBulletin(bhp) || isSealed)
 			{
 				importZipFileToStoreWithSameUids(zipFile);
 			}
@@ -1163,6 +1172,11 @@ public class BulletinStore
 		}
 
 		saveFolders();
+	}
+
+	public boolean isMyBulletin(BulletinHeaderPacket bhp)
+	{
+		return getAccountId().equals(bhp.getAccountId());
 	}
 
 	public void importZipFileToStoreWithSameUids(File inputFile) throws

@@ -91,7 +91,7 @@ abstract public class RetrieveTableModel extends AbstractTableModel
 		{
 			BulletinSummary currentSummary = (BulletinSummary)iterator.next();
 			UniversalId uid = UniversalId.createFromAccountAndLocalId(currentSummary.getAccountId(), currentSummary.getLocalId());
-			if(store.findBulletinByUniversalId(uid) != null)
+			if(store.doesBulletinExist(uid))
 				continue;
 			currentSummary.setDownloadable(true);
 			result.add(currentSummary);

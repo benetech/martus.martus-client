@@ -36,14 +36,16 @@ import java.awt.dnd.DropTargetEvent;
 import java.awt.dnd.DropTargetListener;
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
-
+import java.util.zip.ZipFile;
 import org.martus.client.core.BulletinFolder;
 import org.martus.client.core.BulletinStore;
 import org.martus.client.core.TransferableBulletinList;
 import org.martus.client.core.BulletinStore.BulletinAlreadyExistsException;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.crypto.MartusCrypto.CryptoException;
+import org.martus.common.packet.BulletinHeaderPacket;
 import org.martus.common.packet.UniversalId;
 import org.martus.common.packet.Packet.InvalidPacketException;
 import org.martus.common.packet.Packet.SignatureVerificationException;
@@ -221,7 +223,8 @@ public abstract class UiBulletinDropAdapter implements DropTargetListener
 	}
 	
 	public void attemptDropFiles(File[] files, BulletinFolder toFolder) throws
-		BulletinAlreadyExistsException, Exception
+		BulletinAlreadyExistsException,
+		Exception
 	{
 		int errorThrown = noError;
 		for(int i = 0; i<files.length; ++i)
@@ -247,18 +250,45 @@ public abstract class UiBulletinDropAdapter implements DropTargetListener
 	}
 	
 	public void attemptDropFile(File file, BulletinFolder toFolder) throws
-		InvalidPacketException, SignatureVerificationException, WrongPacketTypeException, CryptoException, IOException, InvalidBase64Exception, BulletinAlreadyExistsException
+		InvalidPacketException, 
+		SignatureVerificationException, 
+		WrongPacketTypeException, 
+		CryptoException, IOException, 
+		InvalidBase64Exception, 
+		BulletinAlreadyExistsException
 	{
+		BulletinStore store = toFolder.getStore();
+		if(!deleteOldUnAuthoredBulletinIfRequired(file, store))
+			return;
 		Cursor originalCursor = observer.setWaitingCursor();
 		try
 		{
-			toFolder.getStore().importZipFileBulletin(file, toFolder, false);
+			store.importZipFileBulletin(file, toFolder, false);
 			observer.folderContentsHaveChanged(toFolder);
 		}
 		finally
 		{
 			observer.resetCursor(originalCursor);
 		}
+	}
+	
+	private boolean deleteOldUnAuthoredBulletinIfRequired(File file, BulletinStore store) throws SignatureVerificationException, IOException
+	{
+		ZipFile zip = new ZipFile(file);
+		BulletinHeaderPacket bhp = BulletinHeaderPacket.loadFromZipFile(zip, store.getSignatureVerifier());
+		UniversalId uid = bhp.getUniversalId();
+		
+		Bulletin old = store.findBulletinByUniversalId(uid);
+		if(!store.isMyBulletin(bhp) && old != null)
+		{
+			HashMap tokenReplacement = new HashMap();
+			tokenReplacement.put("#S#", old.get(Bulletin.TAGTITLE));
+			if(observer.confirmDlg(observer, "UnAuthoredBulletinDeleteBeforePaste", tokenReplacement))
+				store.destroyBulletin(old);
+			else
+				return false;
+		}
+		return true;
 	}
 
 
@@ -305,9 +335,9 @@ public abstract class UiBulletinDropAdapter implements DropTargetListener
 		}
 
 	final int noError = 0;
-	final int bulletinExists = 2;
-	final int ioError = 3;
-	final int otherError = 4;
+	final int bulletinExists = 1;
+	final int ioError = 2;
+	final int otherError = 3;
 
 	UiMainWindow observer;
 }
