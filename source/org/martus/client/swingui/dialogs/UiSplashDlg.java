@@ -50,7 +50,7 @@ public class UiSplashDlg extends JDialog implements ActionListener
 		Container contents = getContentPane();
 		
 		JLabel body = new JLabel(text);
-		body.setBorder(new EmptyBorder(20, 30, 20, 20));
+		body.setBorder(new EmptyBorder(20, 40, 20, 20));
 		String versionInfo = UiMainWindow.getDisplayVersionInfo(localization);
 		String copyrightInfo = UiConstants.copyright;
 		String websiteInfo = UiConstants.website;
