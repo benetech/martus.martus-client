@@ -1,7 +1,8 @@
 ﻿WARNING:  This translation was not created by the Martus team, and therefore may not be trustworthy.
 If you only want to use official translations then exit Martus, remove the file #UseUnofficialTranslationFiles# from your Martus directory, and restart Martus.
 
-
 AVISO: Esta traducción no fue creada por el equipo Martus, y tal vez no se le debe confiar.
 Si Ud. solamente desea traducciones oficiales, sálga de Martus, y quite #UseUnofficialTranslationFiles# de su directorio Martus, y reempiézelo.
 
+ПРЕДУПРЕЖДЕНИЕ:  Данный перевод создан не разработчиками Martus и может быть недостоверным.
+Если Вы хотите использовать только официальные переводы, выйдите из Martus, удалите из своего каталога Martus файл #UseUnofficialTranslationFiles# и запустите Martus заново.

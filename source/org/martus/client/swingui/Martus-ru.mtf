@@ -1,9 +1,9 @@
 ﻿# Martus Client Translation File
 # Language code:  ru
 # Language name:  Russian
-# Exported date:  Fri Jul 02 18:57:24 PDT 2004
-# Client version: Internal 2.0-prerelease
-# Client build:   20040702.1207
+# Exported date:  Fri Oct 29 17:48:29 PDT 2004
+# Client version: internal pre-release 2.x
+# Client build:   20041029.1501
 #
 # This file MUST be saved in UTF-8 format!
 # Lines beginning with # are comments and are ignored by Martus
@@ -27,51 +27,59 @@
 #    are logged in, go to Options/Preferences.
 #
 #  1.  do NOT translate "\n" (used for new lines)
-#  2.  do NOT translate "#N#" or "#M#" (though move them as appropriate
-#      grammatically for the language to make "N of M" [eg "2 of 5"] make
+#  2.  do NOT create any user-entered new-lines/carriage-returns
+#      (by using the enter key) in any mtf entry
+#      (from the field:xxx to the end of the translated text),
+#      since a continuous block of text is needed.
+#  3.  do NOT translate "#N#" or "#M#" (though move them as appropriate
+#      grammatically for the language to make "#N# of #M#" [eg "2 of 5"] make
 #      sense for creating/restoring multiple key backup files).
-#  3.  in field:VirtualKeyboardKeys, keep the english alphabet, but include any
+#  4.  in field:VirtualKeyboardKeys, keep the english alphabet, but include any
 #      non-english characters at the end of the english alphabet/numbers/special
 #      characters (e.g. attach entire Thai alphabet at the end of the line)
-#  4.  in field:SearchBulletinRules, make sure to translate the english "and"
+#  5.  in field:SearchBulletinRules, make sure to translate the english "and"
 #      and "or" in the text to exactly match the keyword:and= and 
 #      keyword:or= translations.  Also, the translation of the first sentence
 #      should not exactly match the english version because Martus can handle
 #      both english "and"/"or" and the translations of those keywords for
 #      bulletin searching, since for some languages keyboards are not available
-#      to all users in those alphabets. So please translate the following 
-#      for the first sentence: "When searching for bulletins you can add 
-#      key words either in english or the-language-you-are-translating 
-#      (or/or-translated, and/and-translated) between multiple search term words
+#      to all users in those alphabets. So please translate the following for the
+#      first sentence: "When searching for bulletins you can add key words either
+#      in english or the-language-you-are-translating (or/or-translated,
+#      and/and-translated) between multiple search term words
 #      (e.g. prison or jail, prison and assault).
-#  5.  in CreateCustomFieldsHelp2/3 fields, you can translate tags into foreign
+#  6.  in CreateCustomFieldsHelp2/3 fields, you can translate tags into foreign
 #      characters (but without punctuation or spaces)
-#  6.  when there are file or directory names, do not translate them
+#  7.  when there are file or directory names, do not translate them
 #      (e.g.  "acctmap.txt" and "packets"
 #      in field:confirmWarnMissingAccountMapFilecause=Warning: acctmap.txt
 #      file in your account's packets directory...)
-#  7.  do not translate the words "Martus" or "Benetech"
-#  8.  do NOT translate "#S#" (used for search string entry)
-#  9.  do not translate "#L#" as is it used to populate lists of values on
+#  8.  do not translate the words "Martus" or "Benetech"
+#  9.  do NOT translate "#S#" (used for search string entry)
+# 10.  do not translate "#L#" as is it used to populate lists of values on
 #      various dialogs.
-# 10.  do not translate "#Title#" (used for bulletin title entry)
-# 11.  do not translate "#A#" (used for bulletin details: Author Public Code)
-# 12.  do not translate "#I#" (used for bulletin details: Bulletin ID)
-# 13.  do not translate "#H#" (used for bulletin details: Headquarter entries)
-# 14.  do not translate "#NumberOfHQs#" in various dialogs
-# 15.  Leave standard field tags in English in CreateCustomFieldsHelp1 and
+# 11.  do not translate "#Title#" (used for bulletin title entry)
+# 12.  do not translate "#A#" (used for bulletin details: Author Public Code)
+# 13.  do not translate "#I#" (used for bulletin details: Bulletin ID)
+# 14.  do not translate "#H#" (used for bulletin details: Headquarter entries)
+# 15.  do not translate "#NumberOfHQs#" in various dialogs
+# 16.  Leave standard field tags in English in CreateCustomFieldsHelp1 and
 #      CreateCustomFieldsHelp2, but put translation in parentheses after
 #      english : e.g.  'author' (autor), so users know what they refer to
-# 16.  Leave field types in English in CreateCustomFieldsHelp2 (e.g. BOOLEAN,
+# 17.  Leave field types in English in CreateCustomFieldsHelp2 (e.g. BOOLEAN,
 #      DATE), but put translation in parentheses after english, so users know
 #      what they refer to.
-# 17.  Leave field types in English in CreateCustomFieldsHelp3 examples
+# 18.  Leave field types in English in CreateCustomFieldsHelp3 examples
 #      (e.g. BOOLEAN, DATE)
-# 18.  Do not translate words used in XML for custom fields such as:
+# 19.  Do not translate words used in XML for custom fields such as:
 #      <Field type='GRID'>, </Field>, <Tag>, </Tag>, <Label>, </Label>,
 #      <GridSpecDetails>, </GridSpecDetails>, <Column>, </Column>
+# 20.  do not translate "#UseUnofficialTranslationFiles#" in
+#      field:warningUnofficialTranslation since it contains a file name
+# 21.  If you want your language to appear right to left,
+#      Uncomment the next line (by removing the # infront of #!right-to-left)
+#!right-to-left
 #
-field:translationVersion= Русский 2.01
 
 #________________________=Show all bulletins on this server and on this computer.
 -e9a2-button:AllSummaries=Показать все сводки на данном сервере и на данном компьютере
@@ -238,7 +246,6 @@ field:translationVersion= Русский 2.01
 #______________________=Uncheck All
 -bc6d-button:uncheckall=Снять отметки
 
-
 #__________________________=View Attachment
 -b24c-button:viewattachment=Просмотр вложения
 
@@ -263,11 +270,11 @@ field:translationVersion= Русский 2.01
 #_________________________=Author (required)
 -4a0b-field:AuthorRequired=Автор (обязательно)
 
-#___________________________________=Your key is required to read your private bulletin information or to create new bulletins.  To ensure that you’ll always have access to your data, it is extremely important to keep a backup of your key.\n\nMartus offers two methods for backing up your key, either of which may be used, but we strongly recommend using both backup methods.  The first method creates a single, password encrypted key back up file onto removable media (e.g. floppy disk, cd, USB storage) or a network drive; the second method backs up the key in #M# separate pieces (not encrypted with your password) onto multiple floppy disks (or other removable media).\n
--667a-field:BackupKeyPairGeneralInfo=Ваш ключ необходим для чтения конфиденциальной информации из Ваших сводок и для создания новых сводок.  Чтобы Вам был гарантирован доступ к Вашим данным, очень важно сохранить резервную копию Вашего ключа.\n\nMartus предлагает два метода сохранения. Можно использовать любой метод, но мы настоятельно рекомендуем воспользоваться обоими.  Первый метод - создать один файл резервной копии, зашифрованный паролем, на сменном носителе (например, на дискете, на компакт-диске, на USB-носителе) или на сетевом диске. Второй метод (разбивка) - сохранить ключ, разбив его на #M# частей (не зашифрованных Вашим паролем), которые записываются на отдельные дискеты (или другие сменные носители).\n
+#___________________________________=Your key is required to read your private bulletin information or to create new bulletins.  To ensure that you'll always have access to your data, it is extremely important to keep a backup of your key.\n\nMartus offers two methods for backing up your key, either of which may be used, but we strongly recommend using both backup methods.  The first method creates a single, password encrypted key back up file onto removable media (e.g. floppy disk, cd, USB storage) or a network drive; the second method backs up the key in #M# separate pieces (not encrypted with your password) onto multiple floppy disks (or other removable media).\n
+-4f48-field:BackupKeyPairGeneralInfo=Ваш ключ необходим для чтения конфиденциальной информации из Ваших сводок и для создания новых сводок.  Чтобы Вам был гарантирован доступ к Вашим данным, очень важно сохранить резервную копию Вашего ключа.\n\nMartus предлагает два метода сохранения. Можно использовать любой метод, но мы настоятельно рекомендуем воспользоваться обоими.  Первый метод - создать один файл резервной копии, зашифрованный паролем, на сменном носителе (например, на дискете, на компакт-диске, на USB-носителе) или на сетевом диске. Второй метод (разбивка) - сохранить ключ, разбив его на #M# частей (не зашифрованных Вашим паролем), которые записываются на отдельные дискеты (или другие сменные носители).\n
 
-#________________________________________________=This method breaks up your key into #M# pieces, any #N# of which will be required to reconstruct the key without requiring a password.  If you forget your login name or your password, this method is the only way you can restore your key.\n\nOnce the #M# files have been written to removable media disks, you should distribute them to #M# different people whom you will remember, but each of whom don’t know who you have given the other files to.  Do not store any of the disks together.\n\nTo restore your key, first retrieve any #N# of the original #M# disks, and then select 'Restore Account' and 'Restore account from multiple disks' when signing into Martus.\n
--e44a-field:BackupKeyPairToSecretShareInformation=При этом методе сохранении Ваш ключ разбивается на #M# частей. Для восстановления ключа (без запроса пароля) потребуются любые #N# из них. Если Вы забудете имя пользователя или пароль, этот метод - единственный способ восстановления.\n\nЗапишите #M# файлов на сменные диски и раздайте эти диски #M# разным людям. Вы будете знать, у кого хранятся Ваши диски, но этим людям не следует знать, кому еще Вы дали файлы разбивки.  Храните диски разбивки отдельно друг от друга.\n\nДля восстановления ключа возьмите любые #N# из исходных #M# дисков, а при входе в Martus выберите вкладку "Восстановить учетную запись" и опцию "Восстановить учетную запись с нескольких дисков".\n
+#________________________________________________=This method breaks up your key into #M# pieces, any #N# of which will be required to reconstruct the key without requiring a password.  If you forget your login name or your password, this method is the only way you can restore your key.\n\nOnce the #M# files have been written to removable media disks, you should distribute them to #M# different people whom you will remember, but each of whom don't know who you have given the other files to.  Do not store any of the disks together.\n\nTo restore your key, first retrieve any #N# of the original #M# disks, and then select 'Restore Account' and 'Restore account from multiple disks' when signing into Martus.\n
+-c83c-field:BackupKeyPairToSecretShareInformation=При этом методе сохранения Ваш ключ разбивается на #M# частей. Для восстановления ключа (без запроса пароля) потребуются любые #N# из них. Если Вы забудете имя пользователя или пароль, этот метод - единственный способ восстановления.\n\nЗапишите #M# файлов на сменные диски и раздайте эти диски #M# разным людям. Вы будете знать, у кого хранятся Ваши диски, но этим людям не следует знать, кому еще Вы дали файлы разбивки.  Храните диски разбивки отдельно друг от друга.\n\nДля восстановления ключа возьмите любые #N# из исходных #M# дисков, а при входе в Martus выберите вкладку "Восстановить учетную запись" и опцию "Восстановить учетную запись с нескольких дисков".\n
 
 #____________________________________________________=Please insert disk #
 -b877-field:BackupRecoverKeyPairInsertNextDiskMessage=Вставьте диск №
@@ -275,6 +282,53 @@ field:translationVersion= Русский 2.01
 #_______________________________________________=Backup complete, please give each disk to someone you trust, so that if you forget your user name and/or password in the future you can recreate your account.  You will need #N# of these disks to recreate your account.
 -30ee-field:BackupSecretShareCompleteInformation=Сохранение выполнено. Раздайте диски людям, которым Вы доверяете. Тогда Вы сможете восстановить свою учетную запись, если забудете имя или пароль.  Для восстановления Вам понадобятся #N# дисков из этого набора (разбивки).
 
+#__________________________________________=Author Public Code
+-01c7-field:BulletinDetailsAuthorPublicCode=Общий код автора
+
+#____________________________________=Bulletin ID
+-ae8f-field:BulletinDetailsBulletinId=Идентификатор сводки
+
+#_________________________________________=The following Headquarter account(s) will be able to view the private information in this bulletin, or send this bulletin to a server, after you save it.\n\nTo add or remove an account, use the Tools/Configure Headquarters menu option.
+-cc16-field:BulletinDetailsHQInfoForModify=Ниже следует список главных учетных записей, пользователи которых могут просматривать конфиденциальную информацию в данной сводке или отправлять сводку на сервер после того, как Вы ее сохраните. Для добавления учетных записей в список и их удаления из него воспользуйтесь командой "Настройка главной учетной записи" меню Сервис.
+
+#_______________________________________=The following Headquarter account(s) can view the private information in this bulletin, and can send this bulletin to a server.
+-bdf1-field:BulletinDetailsHQInfoForView=Пользователь нижеследующей главной учетной запись может просматривать конфиденциальную информацию в данной сводке или отправлять сводку на сервер.
+
+#_________________________________=Label
+-7434-field:BulletinDetailsHQLabel=Метка
+
+#______________________________________=Public Code
+-a1a2-field:BulletinDetailsHQPublicCode=Общий код
+
+#______________________________________=Headquarters
+-6222-field:BulletinDetailsHeadquarters=Главная учетная запись
+
+#_________________________________=History
+-90cc-field:BulletinDetailsHistory=История
+
+#________________________________________=(in progress)
+-60dc-field:BulletinDetailsInProgressDate=(в работе)
+
+#_________________________________________=(in progress)
+-60dc-field:BulletinDetailsInProgressTitle=(в работе)
+
+#_____________________________________=(unknown)
+-d4bd-field:BulletinDetailsUnknownDate=(неизвестно)
+
+#______________________________________=(unknown)
+-d4bd-field:BulletinDetailsUnknownTitle=(неизвестно)
+
+#_____________________________________=Date Saved
+-a7d9-field:BulletinDetailsVersionDate=Дата сохранения
+
+#___________________________________=ID
+-89f8-field:BulletinDetailsVersionId=Идентификатор
+
+#_______________________________________=Version #
+-8548-field:BulletinDetailsVersionNumber=№ версии
+
+#______________________________________=Title
+-768e-field:BulletinDetailsVersionTitle=Заголовок
 
 #__________________________________=Warning: Some information in this bulletin is not visible
 -eba1-field:BulletinHasUnknownStuff=Предупреждение: Информация в сводке отображена не полностью
@@ -293,6 +347,9 @@ field:translationVersion= Русский 2.01
 
 #_________________________=Bulletin Status:
 -c567-field:BulletinStatus=Состояние сводки:
+
+#________________________________=Version
+-2da6-field:BulletinVersionNumber=Версия
 
 #______________________________=Martus Bulletin
 -1ded-field:BulletinViewHeading=Сводка Martus
@@ -321,23 +378,20 @@ field:translationVersion= Русский 2.01
 #_______________________________________=This information will be available to anyone who can view your public bulletin information.\nThis allows people to contact you for further information.
 -1f49-field:ContactInfoFutureUseOfFields=Эти данные будут доступны каждому, кто имеет доступ к общей информации из Ваших сводок.\nЭто позволит лицам, заинтересованным в подробной информации, связаться с Вами.
 
-
 #____________________________________=This information identifies your organization.\nYou must enter either an Author or Organization, and both are shown in every bulletin you create.
 -ea39-field:ContactInfoRequiredFields=Эти данные определяют Вашу организацию.\nЗаполните либо поле "Автор", либо поле "Организация". Оба поля будут показаны во всех сводках, которые Вы создаете.
-
-
 
 #_________________________________=You can change any of this information later, by choosing Options/Contact Info.
 -e924-field:ContactInfoUpdateLater=Вы всегда сможете изменить эти данные с помощью команды "Контактные данные" меню "Параметры". 
 
-#__________________________________=The layout of the bulletins is dictated by an XML document.  At the start of the document you must have <CustomFields> and at the end of the document you must have its corresponding end tag namely </CustomFields>.  By default the standard bulletin fields occur at the top of the Custom Field declaration, but they can be moved if desired.  However, there are four required fields that cannot be removed:  'author', 'entrydate', 'language' and 'title'.  For example for 'author' you will have\n<Field type='STRING'><Tag>author</Tag><Label></Label></Field>\n\n
--2398-field:CreateCustomFieldsHelp1=Вид сводки определяется в документе формата XML. Этот документ должен начинаться с тега <CustomFields> и заканчиваться соответствующим концевым тегом </CustomFields>. По умолчанию описания стандартных полей сводки появляются вверху экрана редактирования описаний полей, но при желании можно переместить их.  Однако есть четыре обязательных элемента, которые нельзя исключить из списка полей: 'author' (имя автора), 'entrydate' (дата создания сводки), 'language'(язык) и 'title'(заголовок).  Например, поле 'author' должно определяться следующим образом:\n<Field type='STRING'><Tag>author</Tag><Label></Label></Field>\n\n
+#__________________________________=The layout of the bulletins is dictated by an XML document.  By default the standard bulletin fields occur at the top of the Custom Field declaration, but they can be moved if desired.  However, there are four required fields that cannot be removed:  'author', 'entrydate', 'language' and 'title'.\n\n
+-1ef6-field:CreateCustomFieldsHelp1=Вид сводки определяется в документе формата XML. По умолчанию описания стандартных полей сводки появляются вверху экрана редактирования описаний полей, но при желании можно переместить их.  Однако есть четыре обязательных элемента, которые нельзя исключить из списка полей: 'author' (имя автора), 'entrydate' (дата создания сводки), 'language'(язык) и 'title'(заголовок).\n\n
 
-#__________________________________=For custom (non-standard) fields, you first select the type of field you want.  The possible choices are 'BOOLEAN', 'DATE', 'DATERANGE', 'GRID', 'LANGUAGE', 'MULTILINE', and 'STRING'.  This type is defined by <Field type='type of field goes here'>. \n\nFor each custom field you will need a unique identification tag.  This tag can be any word except those already used by the system (eg. 'author', 'summary', 'location', 'title' etc.), and cannot contain spaces or special characters.  Examples of choices are 'custom1', 'custom2', etc, or tags that are more descriptive like 'VictimsName'.  This unique tag looks like <Tag>yourtag</Tag>. \n Then you need a label which is displayed next to your custom field.  An example might be 'Name of 1st Witness'.  This label is surrounded by <Label>your label goes here</Label>\nEach field description ends with </Field>\n\n
--c18a-field:CreateCustomFieldsHelp2=Чтобы создать пользовательское (нестандартное) поле, прежде всего задайте желаемый тип поля. Возможные типы: 'BOOLEAN'(логический), 'DATE'(дата), 'DATERANGE'(диапазон дат), 'GRID'(таблица), 'LANGUAGE'(язык), 'MULTILINE'(многострочный экран редактирования) и 'STRING'(редактируемая строка).  Тип поля определяется в строке <Field type='желаемый тип поля'>\n\nКаждое пользовательское поле должно иметь свой уникальный идентификационный тег. В качестве такого тега может использоваться любое слово, кроме тех, которые уже зарезервированы системой (а именно 'author' - для имени автора, 'summary' - для краткой информации, 'location' - для места события, 'title' - для заголовка и т.п.). Тег не может содержать пробелы и специальные символы. Например, возможны теги 'поле1', 'поле2' и т.д., или же более наглядные, такие как 'ИмяПострадавшего'. Строка задания тега выглядит так: <Tag>ВашТег</Tag>\nЗатем следует определить метку поля, которая будет выводиться рядом с пользовательским полем.  Например, возможна метка "Имя 1-го свидетеля". Метка задается следующим образом: <Label>Ваша метка</Label>\nОписание каждого поля заканчивается последовательностью символов </Field>\n\n
+#__________________________________=For custom (non-standard) fields, you first select the type of field you want.  The possible choices are 'BOOLEAN', 'DATE', 'DATERANGE', 'GRID', 'LANGUAGE', 'MULTILINE', and 'STRING'. \n\nFor each custom field you will need a unique identification tag.  This tag can be any word except those already used by the system (eg. 'author', 'summary', 'location', 'title' etc.), and cannot contain spaces or special characters.  Examples of choices are 'custom1', 'custom2', etc, or tags that are more descriptive like 'VictimsName'.\n Then you need a label which is displayed next to your custom field.  An example might be 'Name of 1st Witness'.\n\nAdditional Comments\n1. XML is case-sensitive\n2. quotes around type name can be single or double (as long as they match)\n3. A Boolean field will be displayed as a checkbox when editing and Yes/No when printed.\n\nSee examples below:\n\n
+-d300-field:CreateCustomFieldsHelp2=Чтобы создать пользовательское (нестандартное) поле, прежде всего задайте желаемый тип поля. Возможные типы: 'BOOLEAN'(логический), 'DATE'(дата), 'DATERANGE'(диапазон дат), 'GRID'(таблица), 'LANGUAGE'(язык), 'MULTILINE'(многострочный экран редактирования) и 'STRING'(редактируемая строка).\n\nКаждое пользовательское поле должно иметь свой уникальный идентификационный тег. В качестве такого тега может использоваться любое слово, кроме тех, которые уже зарезервированы системой - например, 'author' (автор), 'summary'(краткая информация), 'location'(место события), 'title'(заголовок) и т.д. Тег не может содержать пробелы и специальные символы. Например, возможны теги 'поле1', 'поле2' и т.д., или же более наглядные, такие как 'ИмяПострадавшего'.\n Затем следует определить метку поля, которая будет выводиться рядом с пользовательским полем.  Например, возможна метка "Имя 1-го свидетеля".\n\nДополнительные пояснения\n1. XML различает прописные и строчные буквы\n2. Cлово, обозначающее тип поля, может заключаться в одиночные или парные кавычки (кавычки перед словом и после него должны быть одинаковыми)\n3. Поле типа Boolean (логического) будет выводиться в виде флажка в окне редактирования и в виде "Да/Нет" при распечатке.\n\nНиже приводятся примеры полей:\n\n
 
-#__________________________________=Additional Comments\n1. XML is case-sensitive\n2. quotes around type name can be single or double (as long as they match)\n3. A Boolean field will be displayed as a checkbox when editing and Yes/No when printed.\n\nHere are some examples:\n\n<Field type='STRING'>\n<Tag>custom1</Tag>\n<Label>Witness Name</Label>\n</Field>\n\n<Field type='LANGUAGE'>\n<Tag>new2</Tag>\n<Label>Witness Speaks</Label>\n</Field>\n\n<Field type='BOOLEAN'>\n<Tag>new3</Tag>\n<Label>Were guns used?</Label>\n</Field>\n\n<Field type='GRID'>\n<Tag>customgrid</Tag>\n<Label>Victim Information</Label>\n<GridSpecDetails>\n<Column><Label>Name of Victim</Label></Column>\n<Column><Label>Victim Age</Label></Column>\n<Column><Label>Victim Gender</Label></Column>\n<Column><Label>Victim Ethnicity</Label></Column>\n</GridSpecDetails>\n</Field>\n
--eac7-field:CreateCustomFieldsHelp3=Дополнительные пояснения\n1. XML различает прописные и строчные буквы\n2. Cлово, обозначающее тип поля, может заключаться в одиночные или парные кавычки (кавычки перед словом и после него должны быть одинаковыми)\n3. Поле типа Boolean (логического) будет выводиться в виде флажка в окне редактирования и в виде "Да/Нет" при распечатке.\n\nНесколько примеров:\n\n<Field type='STRING'>\n<Tag>поле1</Tag>\n<Label>Имя свидетеля</Label>\n</Field>\n\n<Field type='LANGUAGE'>\n<Tag>поле2</Tag>\n<Label>Родной язык свидетеля</Label>\n</Field>\n\n<Field type='BOOLEAN'>\n<Tag>поле3</Tag>\n<Label>Применялось ли огнестрельное оружие?</Label>\n</Field>\n\n<Field type='GRID'>\n<Tag>НоваяТаблица</Tag>\n<Label>Информация о пострадавших</Label>\n<GridSpecDetails>\n<Column><Label>Имя</Label></Column>\n<Column><Label>Возраст</Label></Column>\n<Column><Label>Пол</Label></Column>\n<Column><Label>Национальность</Label></Column>\n</GridSpecDetails>\n</Field>\n
+#__________________________________=<Field type='STRING'>\n<Tag>custom1</Tag>\n<Label>Witness Name</Label>\n</Field>\n\n<Field type='LANGUAGE'>\n<Tag>new2</Tag>\n<Label>Witness Speaks</Label>\n</Field>\n\n<Field type='BOOLEAN'>\n<Tag>new3</Tag>\n<Label>Were guns used?</Label>\n</Field>\n\n<Field type='GRID'>\n<Tag>customgrid</Tag>\n<Label>Victim Information</Label>\n<GridSpecDetails>\n<Column><Label>Name of Victim</Label></Column>\n<Column><Label>Victim Age</Label></Column>\n<Column><Label>Victim Gender</Label></Column>\n<Column><Label>Victim Ethnicity</Label></Column>\n</GridSpecDetails>\n</Field>\n
+-c0a8-field:CreateCustomFieldsHelp3=<Field type='STRING'>\n<Tag>поле1</Tag>\n<Label>Имя свидетеля</Label>\n</Field>\n\n<Field type='LANGUAGE'>\n<Tag>поле2</Tag>\n<Label>Родной язык свидетеля</Label>\n</Field>\n\n<Field type='BOOLEAN'>\n<Tag>поле3</Tag>\n<Label>Применялось ли огнестрельное оружие?</Label>\n</Field>\n\n<Field type='GRID'>\n<Tag>НоваяТаблица</Tag>\n<Label>Информация о пострадавших</Label>\n<GridSpecDetails>\n<Column><Label>Имя</Label></Column>\n<Column><Label>Возраст</Label></Column>\n<Column><Label>Пол</Label></Column>\n<Column><Label>Национальность</Label></Column>\n</GridSpecDetails>\n</Field>\n
 
 #____________________________________=Please enter your new username and password.
 -aec2-field:CreateNewUserNamePassword=Введите Ваше новое имя пользователя и новый пароль.
@@ -393,7 +447,6 @@ field:translationVersion= Русский 2.01
 #____________________________=There is an error in the custom field definitions. Each problem is identified with the following codes:\n   100 - Required standard field is missing\n   101 - Custom field does not have a correct tag.\n   102 - A previous Tag already exists with this name.\n   103 - Custom field does not have a label.\n   104 - Unrecognized Field Type.\n   105 - A label was found in a standard field.\n   106 - XML Parse Error.\n   107 - Tag contains illegal characters
 -943a-field:ErrorCustomFields=При настройке полей в сводке допущена ошибка. Типы ошибок обозначаются следующими кодами:\n   100 - Отсутствует обязательное стандартное поле.\n   101 - Тег поля отсутствует или задан неверно.\n   102 - Тег с этим именем уже был задан ранее.\n   103 - Метка пользовательского поля отсутствует.\n   104 - Невозможно распознать тип поля.\n   105 - Стандартному полю присвоена метка.\n   106 - Ошибка формата XML.\n   107 - Тег содержит недопустимые символы
 
-
 #_________________________________________=A previous backup file exists.  You must save each file on its own removable media disk.
 -db93-field:ErrorPreviousBackupShareExists= На диске уже есть файл разбивки резервной копии ключа. Сохраняйте файлы разбивки на отдельных дисках.
 
@@ -421,13 +474,11 @@ field:translationVersion= Русский 2.01
 #______________________________________=This file name should be unique and identifiable to you but we recommend not using your user name.  Each file will be generated with this name and its number sequence.
 -02b6-field:GetShareFileNameDescription=Имя файла должно быть уникальным и понятным для Вас. Не рекомендуем называть файл Вашим именем пользователя.  Каждый создаваемый файл будет иметь это имя и порядковый номер.
 
-
 #_________________________=Headquarters
 -6222-field:HQSummaryLabel=Главная учетная запись
 
 #________________________________=These Headquarters accounts are allowed to view the private information in this bulletin, and to send this bulletin to a server on your behalf.
 -2274-field:HQsSetAsProxyUploader=Эти главные учетные записи имеют право на чтение конфиденциальных данных в сводке и на отправку сводок на сервер от Вашего имени.
-
 
 #_____________________________=Enter questions, details, or other information your organization wants to have answered in future bulletins created.
 -704c-field:HelpDefaultDetails= Здесь Вы можете задать вопросы и запросить сведения, нужные Вашей организации для создания следующих сводок.
@@ -459,9 +510,6 @@ field:translationVersion= Русский 2.01
 #_______________________________=#NumberOfHQs# Headquarter account(s) will be able to view this private information
 -da24-field:ModifyBulletinHQInfo= Правом просмотра данной конфиденциальной информации будут обладать #NumberOfHQs# главных учетных) записей 
 
-#__________________________________________=The following Headquarter account(s) will be able to view the private information in this bulletin, or send this bulletin to a server, after you save it:\n\n#L#\n\nTo add or remove an account, use the Tools/Configure Headquarters menu option.
--df1d-field:ModifyViewBulletinDetailsHQList= Просмотреть конфиденциальную информацию в данной сводке или отправить сводку (сохраненную Вами) на сервер могут следующие учетные записи:\n\n#L#\n\nЧтобы дополнить список или удалить запись из списка, используйте команду меню Сервис/Настройка главной учетной записи.
-
 #_____________________________=Please enter a name for the file you wish to export.
 -95ed-field:NameOfExportedFile=Введите имя файла, который Вы хотите экспортировать.
 
@@ -492,8 +540,8 @@ field:translationVersion= Русский 2.01
 #___________________________=Include private data in print out.
 -c6f6-field:PrintPrivateData=Распечатывать также конфиденциальные данные.
 
-#__________________________________=You have the option to include or exclude the selected bulletin’s private information in this print out.\n\nTo only print public information, do not mark the checkbox below.\n\nIf you do mark the checkbox, anyone who sees the print out will be able to read your private data.
--602c-field:PrintPrivateDataMessage= Вы можете выбрать, выводить или не выводить на печать конфиденциальную информацию из данной сводки.\n\nЧтобы распечатать только общедоступную информацию, снимите пометку с флажка, расположенного ниже.\n\nЕсли флажок помечен, с Вашими конфиденциальными данными сможет ознакомиться любой, кто увидит распечатку.
+#__________________________________=You have the option to include or exclude the selected bulletin's private information in this print out.\n\nTo only print public information, do not mark the checkbox below.\n\nIf you do mark the checkbox, anyone who sees the print out will be able to read your private data.
+-e90d-field:PrintPrivateDataMessage=Вы можете выбрать, выводить или не выводить на печать конфиденциальную информацию из данной сводки.\n\nЧтобы распечатать только общедоступную информацию, не помечайте флажок, расположенный ниже.\n\nЕсли этот флажок помечен, с Вашими конфиденциальными данными сможет ознакомиться любой, кто увидит распечатку.
 
 #_________________________________=Public Information Files
 -90f9-field:PublicInformationFiles=Файлы общедоступной информации
@@ -512,7 +560,6 @@ field:translationVersion= Русский 2.01
 
 #_________________________=Restore your existing account from a backup file.
 -c2a2-field:RecoverAccount=Восстановление существующей учетной записи по резервной копии.
-
 
 #_________________________________________________________=IMPORTANT: There are other Martus accounts on this system.
 -e62e-field:RemoveMartusFromSystemMultipleAccountsWarning1=ВАЖНО: В данной системе имеются другие учетные записи Martus.
@@ -643,9 +690,6 @@ field:translationVersion= Русский 2.01
 #_____________________________=#NumberOfHQs# Headquarter account(s) can view this private information
 -5ffa-field:ViewBulletinHQInfo=Право на просмотр данной конфиденциальной информации имеют #NumberOfHQs# главные учетные записи
 
-#________________________________________=The following Headquarter account(s) can view the private information in this bulletin, and can send this bulletin to a server:\n\n#L#
--4500-field:ViewViewBulletinDetailsHQList=Следующие главные учетные записи могут просматривать конфиденциальную информацию в данной сводке, а также отправить данную сводку на сервер:\n\n#L#
-
 #___________________________________=Back Space
 -7ae6-field:VirtualKeyboardBackSpace=Забой (Back Space)
 
@@ -676,6 +720,9 @@ field:translationVersion= Русский 2.01
 #_____________________________=Martus comes with ABSOLUTELY NO WARRANTY, and is made available under license terms in the file named license.txt in the Martus directory. This is free software, and you are welcome to redistribute it under certain conditions discussed in license.txt. 
 -8b41-field:aboutDlgDisclaimer=Программное обеспечение Martus поставляется БЕЗ ГАРАНТИЙ и доступно по лицензионному соглашению, изложенному в файле license.txt в каталоге Martus. Распространяется бесплатно, с правом последующего распространения на условиях, оговоренных в license.txt.
 
+#_________________________________________=Translation version
+-ba67-field:aboutDlgTranslationVersionInfo=Версия перевода
+
 #______________________________=software version
 -f2cc-field:aboutDlgVersionInfo=Версия: 
 
@@ -684,6 +731,9 @@ field:translationVersion= Русский 2.01
 
 #_____________________=Keep ALL Information Private
 -9b5e-field:allprivate=ВСЕ данные конфиденциальные
+
+#____________________________________=Kb
+-1717-field:attachmentSizeForPrinting=Кб
 
 #______________________=Attachments
 -6771-field:attachments=Вложения
@@ -745,10 +795,8 @@ field:translationVersion= Русский 2.01
 #_________________________________________=You have chosen to remove your Headquarters account.  Any existing saved bulletins will still be visible by the old Headquarters.  If you want to disallow Headquarters viewing access to previously created Draft bulletins they must be re-saved after revoking the Headquarters.  Any sealed bulletins CANNOT be reset to be non-viewable by the Headquarters.
 -6076-field:confirmClearHQInformationcause=Вы выбрали отмену прав доступа для главной учетной записи. Все существующие сводки, сохраненные ранее, будут по-прежнему видимы пользователю учетной записи, являвшейся главной по отношению к Вашей. Чистовые сводки НЕВОЗМОЖНО изменить так, чтобы они стали невидимы для пользователя этой учетной записи. Черновые сводки следует сохранить заново после отмены прав доступа для текущей главной учетной записи.
 
-
 #__________________________________________=By clicking on Yes, any draft or sealed bulletins saved in the future will no longer be accessible by your Headquarters.
 -4a87-field:confirmClearHQInformationeffect=Нажмите "Да", чтобы в дальнейшем сводки, которые Вы сохраните или отправите на сервер в чистовом виде, были невидимы для пользователя учетной записи, которая в данный момент обладает правами главной учетной записи по отношению к Вашей.
-
 
 #__________________________________________=You have chosen to modify a bulletin that was created by someone else.
 -b384-field:confirmCloneBulletinAsMinecause=Вы хотите изменить сводку, созданную другим пользователем.
@@ -756,11 +804,11 @@ field:translationVersion= Русский 2.01
 #___________________________________________=Clicking on Yes will create a new bulletin that contains a copy of all the same information. You will be the official author of this new bulletin, and any private data in it will only be visible by you (and your Headquarters, if you have one). The original bulletin will remain unchanged.
 -f291-field:confirmCloneBulletinAsMineeffect=Нажмите "Да", чтобы создать новую сводку, в которой будет скопирована вся информация. Вы будете являться официальным автором новой сводки, и все личные данные в ней будут видимы только для Вас (и для пользователей Вашей главной учетной записи, если таковая имеется). Исходная сводка останется неизменной.
 
-#___________________________________________=You have chosen to modify one of your sealed bulletins, but sealed bulletins cannot be modified.
--55b1-field:confirmCloneMySealedAsDraftcause=Вы выбрали изменение одной из Ваших чистовых сводок, но чистовые сводки не могут быть изменены.
+#___________________________________________=You have chosen to modify one of your sealed bulletins, thus creating a new version of that bulletin.
+-fcb6-field:confirmCloneMySealedAsDraftcause=Вы выбрали изменение одной из Ваших чистовых сводок. Тем самым будет создана новая версия этой сводки.
 
-#____________________________________________=Clicking on Yes will create a new bulletin that contains all the same information, and the original sealed bulletin will remain unchanged.
--bec9-field:confirmCloneMySealedAsDrafteffect=Нажмите "Да", чтобы создать новую сводку, в которой будет скопирована вся информация. Исходная чистовая сводка останется неизменной.
+#____________________________________________=Clicking on Yes will create a new version of this bulletin that initially contains all the same information. In this release of Martus you will only be able to view the most current version.
+-1c29-field:confirmCloneMySealedAsDrafteffect=Нажмите "Да", чтобы создать новую версию сводки, в которой первоначально будет содержаться вся информация, имеющаяся в предыдущей версии. Данный выпуск Martus позволяет просматривать только самую позднюю версию.
 
 #___________________________________=You are about to delete your Martus data from this computer.
 -ee9a-field:confirmDeleteMyDatacause=Вы собираетесь удалить с данного компьютера все Ваши данные, относящиеся к Martus.
@@ -810,11 +858,17 @@ field:translationVersion= Русский 2.01
 #__________________________________________________=Clicking on Yes will delete the old key file and replace it with your restored key.
 -167f-field:confirmKeyPairFileExistsOverWriteeffect=Нажмите "Да", чтобы удалить прежний  ключ и заменить его ключом, который будет восстановлен.
 
+#_______________________________________________________=This account was created with an older version of Martus, which was unaware of multiple sealed bulletin versions. We need to update your system to recognize bulletins with versions.  The migration is automatic, fast, and safe. You cannot run this version of Martus unless you allow this migration.
+-6c3f-field:confirmNeedsBulletinVersioningMigrationcause=Эта учетная запись создавалась с более ранней версии Martus, в которой не предусматривалось наличие множественных версий чистовых сводок. Для распознания сводок с различными версиями требуется обновить Вашу систему. Процесс обновления (миграции) явдяется автоматическим, быстрым и безопасным. Вы не сможете запустить текущую версию Martus, пока не будет выполнена миграция 
+
+#________________________________________________________=Answering Yes will allow the migration to proceed, answering No will exit Martus.
+-2a34-field:confirmNeedsBulletinVersioningMigrationeffect=Выберите ответ "Да", чтобы запустить процесс миграции, или "Нет", чтобы выйти из Martus.
+
 #___________________________________________=This account was created with an older version of Martus, which used a different set of folders. The folders need to be migrated to the new format. The migration is automatic, fast, and safe. You cannot run this version of Martus unless you allow this migration.
 -39ae-field:confirmNeedsFolderMigrationcause=Данная учетная запись созана более ранней версией Martus, использовавшей другой набор папок. Требуется преобразовать папки в новый формат. Процесс преобразования (миграции) папок является автоматическим, быстрым и безопасным. Ваша учетная запись не сможет использовать данную версию Martus, пока не будет выполнена миграция.
 
-#____________________________________________=Answering Yes will allow the migration to proceed.
--1b41-field:confirmNeedsFolderMigrationeffect=Нажмите "Да", чтобы запустить процесс миграции.
+#____________________________________________=Answering Yes will allow the migration to proceed, answering No will exit Martus.
+-2a34-field:confirmNeedsFolderMigrationeffect=Выберите ответ "Да", чтобы запустить процесс миграции, или "Нет", чтобы выйти из Martus.
 
 #_______________________________________________=Warning: It appears that you are trying to run an older version of Martus.  Running this version of Martus may result in reduced functionality, and some configuration settings created in the newer version will be ignored. We recommend that you upgrade your software.
 -f251-field:confirmNewerConfigInfoFileFoundcause=Внимание: По-видимому, Вы пытаетесь запустить более раннюю версию Martus. При использовании этой версии некоторые функциональные возможности будут утрачены, а настройки, созданные в более новой версии, будут частично проигнорированы. Рекомендуем Вам обновить программное обеспечение.
@@ -824,7 +878,6 @@ field:translationVersion= Русский 2.01
 
 #___________________________________________________________=Warning: the bulletin you are currently viewing is not yours.  Attachments can contain viruses, or malicious programs harmful to your computer.
 -8e42-field:confirmNotYourBulletinViewAttachmentAnywayscause=Предупреждение: просматриваемая сводка создана не Вами. Во вложенных файлах могут содержаться вирусы или программы, способные повредить Ваш компьютер.
-
 
 #____________________________________________________________=Clicking on Yes will display the attachment, clicking on No will not try to display the attachment.
 -b6bf-field:confirmNotYourBulletinViewAttachmentAnywayseffect=Нажмите "Да", чтобы показать вложенный файл. Нажмите "Нет", чтобы вложенный файл не был показан.
@@ -846,7 +899,6 @@ field:translationVersion= Русский 2.01
 
 #________________________________________________=Clicking on Yes will bring you to a confirmation dialog, Clicking on No will return you to Martus without erasing anything.
 -ffe3-field:confirmQuickEraseOutboxNotEmptyeffect= Нажмите "Да" для перехода к диалогу подтверждения удаления. Нажмите "Нет" для возврата в Martus без удаления каких-либо данных.
-
 
 #___________________________________________=Welcome to Martus.  What would you like to do?
 -dd0e-field:confirmRecoverUsingKeySharecause=Добро пожаловать в систему Martus.  Что Вы хотите сделать?
@@ -890,12 +942,17 @@ field:translationVersion= Русский 2.01
 #___________________________________________=After you review the contents, you can accept them, modify them, or press cancel to keep the existing default details.
 -bbcf-field:confirmResetDefaultDetailseffect=После просмотра содержимого данного поля Вы можете принять либо изменить содержащуюся в нем информацию, либо же нажать кнопку "Отмена", чтобы сохранить последний вариант содержимого данного поля.
 
+#____________________________________________=The following bulletin(s) selected for retrieval are newer versions of bulletins already on this system:\n\n#TITLES#
+-b7e9-field:confirmRetrieveNewerVersionscause=Следующие сводки, выбранные для загрузки, являются более новыми версиями сводок, уже имеющихся в Вашей системе:\n\n#TITLES#
+
+#_____________________________________________=Each older version will be replaced by the newer version from the server.
+-1d86-field:confirmRetrieveNewerVersionseffect=Каждая более ранняя версия сводки будет заменена новой версией, загружаемой с сервера.
+
 #_________________________________________=You have chosen to save a completed bulletin.
 -a3fe-field:confirmSendWithPublicDatacause=Вы выбрали операцию сохранения заполненной сводки.
 
-#__________________________________________=This will permanently seal the bulletin and you will not be allowed to make any further modifications to it except by creating a new copy of the bulletin.\n\nThe public information in this bulletin will be released for possible publication on the Martus Search Engine, and may be viewed by people outside your organization.\n\nIf there is information you do not want to be publicly available, either move that data to the private section of the bulletin or check the 'Keep ALL Information Private' box before saving the bulletin.
--4964-field:confirmSendWithPublicDataeffect=Эта операция переведет сводку в состояние "Чистовая" и закроет ее для записи, так что вы не сможете вносить в эту сводку изменения иначе как создав ее новую копию. \n\nОбщедоступная информация. содержащаяся в сводке, может быть опубликована поисковой машиной Martus и просмотрена людьми, не имеющими отношения к Вашей организации.\n\nЕсли в сводке имеются данные, не предназначенные для общего доступа, то перед тем, как сохранять сводку, перенесите их в раздел сводки, предназначенный для конфиденциальной информации, либо пометьте флажок "ВСЕ данные конфиденциальные".
-
+#__________________________________________=This will permanently seal the bulletin and you will not be allowed to make any further modifications to it except by creating a new version of the bulletin.\n\nThe public information in this bulletin will be released for possible publication on the Martus Search Engine, and may be viewed by people outside your organization.\n\nIf there is information you do not want to be publicly available, either move that data to the private section of the bulletin or check the 'Keep ALL Information Private' box before saving the bulletin.
+-2df3-field:confirmSendWithPublicDataeffect=Эта операция переведет сводку в состояние "Чистовая" и закроет ее для записи, так что вы не сможете вносить в эту сводку изменения иначе как создав ее новую версию. \n\nОбщедоступная информация. содержащаяся в сводке, может быть опубликована поисковой машиной Martus и просмотрена людьми, не имеющими отношения к Вашей организации.\n\nЕсли в сводке имеются данные, не предназначенные для общего доступа, то перед тем, как сохранять сводку, перенесите их в раздел сводки, предназначенный для конфиденциальной информации, либо пометьте флажок "ВСЕ данные конфиденциальные".
 
 #_____________________________________________=Martus software is unable to determine whether this server complies with the official guidelines for operating a secure and reliable Martus server.
 -ab16-field:confirmServerComplianceFailedcause=Невозможно определить, соответствует ли данный сервер официальным требованиям к работе с надежным и защищенным сервером Martus.
@@ -936,8 +993,8 @@ field:translationVersion= Русский 2.01
 #_______________________________________________=The bulletin you are about to create is based on a previous bulletin whose custom fields are different from your current custom fields.  Do you wish to use the original bulletins custom fields?
 -6d10-field:confirmUseBulletinsCustomFieldscause=Сводка, которую Вы собираетесь создать, основана на созданной ранее сводке, в которой набор пользовательских полей не совпадает с Вашей текущей настройкой полей в сводках. Сохранить набор полей исходной сводки?
 
-#________________________________________________=Answering Yes will use the old custom fields and all bulletin data.  Answering No will use your current custom fields and copy all similar fields to the new bulletin but you will loose some of the original bulletins data.
--3e26-field:confirmUseBulletinsCustomFieldseffect=Нажмите "Да", чтобы набор полей и все данные в новой сводке остались такими же, как в исходной. Нажмите "Нет", чтобы в новой сводке использовалась текущая настройка полей. При этом все аналогичные поля исходной сводки будут скопированы в новую, но часть данных из исходной сводки скопирована не будет.
+#________________________________________________=Answering Yes will use the old custom fields and all bulletin data.  Answering No will use your current custom fields and copy all similar fields to the new bulletin but you will lose some of the original bulletins data.
+-a313-field:confirmUseBulletinsCustomFieldseffect=Нажмите "Да", чтобы набор полей и все данные в новой сводке остались такими же, как в исходной. Нажмите "Нет", чтобы в новой сводке использовалась текущая настройка пользовательских полей. При этом все аналогичные поля исходной сводки будут скопированы в новую, но часть данных из исходной сводки скопирована не будет.
 
 #________________________________________________=Warning: acctmap.txt file in your account's packets directory is missing or is corrupt.  This may indicate someone has tried to tamper with your data or could be caused by a hardware error.
 -61cb-field:confirmWarnMissingAccountMapFilecause= Предупреждение: Файл acctmap.txt отсутствует в каталоге packets Вашей учетной записи или поврежден. Это может означать, что кто-то пытался получить несанкционированный доступ к Вашим данным. Возможно также, что это следствие аппаратной ошибки.
@@ -949,7 +1006,6 @@ field:translationVersion= Русский 2.01
 -e1b1-field:confirmWarnMissingOrCorruptAccountMapSignatureFilecause=Предупреждение: Файл acctmap.txt.sig отсутствует в каталоге packets Вашей учетной записи или поврежден.  Если Вы только что обновили версию Martus, проигнорируйте это предупреждение, нажав "Нет". В ином случае это может означать, что кто-то пытался получить несанкционированный доступ к Вашим данным. Возможно также, что это следствие аппаратной ошибки.
 
 #___________________________________________________________________=Clicking on Yes will try to generate a new acctmap.txt.sig file and continue to load Martus.  Clicking on No will exit Martus.
-
 -3ca4-field:confirmWarnMissingOrCorruptAccountMapSignatureFileeffect=Нажмите "Да", чтобы попытаться генерировать новый файл accountmap.txt.sig и продолжить загрузку Martus. Нажмите "Нет", чтобы выйти из Martus.
 
 #__________________________________________________________=Are you sure the directory you chose to save your backup files to is removable?  You cannot save all #M# files to the same location without inserting a new disk for each backup file.
@@ -967,7 +1023,6 @@ field:translationVersion= Русский 2.01
 #_________________________________________________=A single encrypted backup file of your key has yet to be created.
 -71c0-field:confirmbackupIncompleteEncryptedNeeded=Резервная копия Вашего ключа (единичный зашифрованный файл) еще не создавалась.
 
-
 #_____________________________________________=A multiple disk backup of your key has yet to be created.
 -b185-field:confirmbackupIncompleteShareNeeded= Разбивка Вашего ключа на несколько частей (на отдельных дисках) еще не создавалась.
 
@@ -979,7 +1034,6 @@ field:translationVersion= Русский 2.01
 
 #______________________________________________=Martus has noticed that you have not completed the backup procedure of your key.  It is strongly recommended that you complete the backup procedure at this time.\n\nIf something happens to the original key file, and you don't have a backup you will not be able to open any bulletins you have created with this key.
 -e7f4-field:confirmgeneralBackupKeyPairMsgcause=Martus обращает внимание, что Вы еще не сделали резервную копию своего ключа. Настоятельно рекомендуем сохранить резервную копию сейчас.\n\nЕсли исходный файл ключа будет каким-либо образом поврежден, без его резервной копии Вы не сможете открыть сводки, созданные с использованием этого ключа.
-
 
 #_______________________________________________=Selecting Yes will guide you through the backup procedure, selecting No will skip this important step.
 -8571-field:confirmgeneralBackupKeyPairMsgeffect=Нажмите "Да", чтобы начать процесс сохранения ключа; инструкции будут выводиться на экран. Нажмите "Нет", чтобы пропустить эту важную процедуру.
@@ -1005,8 +1059,8 @@ field:translationVersion= Русский 2.01
 #___________________________=You have chosen to save a completed bulletin.
 -a3fe-field:confirmsendcause=Вы выбрали операцию отправки чистовой сводки на сервер Martus.
 
-#____________________________=This will permanently seal the bulletin and you will not be allowed to make any further modifications to it except by creating a new copy of the bulletin.
--daea-field:confirmsendeffect=Данную сводку будет невозможно редактировать.
+#____________________________=This will permanently seal the bulletin and you will not be allowed to make any further modifications to it except by creating a new version of the bulletin.
+-0de0-field:confirmsendeffect=Данная сводка будет закрыта для записи, и вносить в нее изменения можно будет, только создав ее новую версию.
 
 #_____________________=Connecting...
 -b98e-field:connecting=Соединение...
@@ -1077,8 +1131,8 @@ field:translationVersion= Русский 2.01
 #____________________________________=A copy of Martus is already running on this computer. You must close that copy before starting a new copy.
 -614e-field:notifyAlreadyRunningcause=На компьютере уже запущена программа Martus. Завершите работу запущенного экземпляра программы, прежде чем запускать ее заново.
 
-#________________________________________=The item you choose was not a file, please choose a file to add as an attachment to this bulletin.
--5362-field:notifyAttachmentNotAFilecause=Объект, который Вы хотите вложить, не является файлом. Выберите файл для вложения в данную сводку.
+#________________________________________=The item you chose was not a file, please choose a file to add as an attachment to this bulletin.
+-0de2-field:notifyAttachmentNotAFilecause=Выбранный объект не является файлом. Выберите файл для вложения в данную сводку.
 
 #______________________________________________=Martus could not authenticate the server. The server may have been compromised.  Please verify your server configuration and contact the server operator.
 -f27c-field:notifyAuthenticateServerFailedcause=Martus не может установить соответствие сервера. Возможно, на сервере возникли проблемы. Проверьте свои настройки сервера и свяжитесь с оператором сервера.
@@ -1092,9 +1146,8 @@ field:translationVersion= Русский 2.01
 #_________________________________________=An error occurred while trying to create your account.
 -c8e7-field:notifyCreateAccountFailedcause=В процессе создания учетной записи произошла ошибка.
 
-#_____________________________________________________=An error occurred during upload, and the damaged bulletin has been moved to the Damaged Bulletin folder.
--ae32-field:notifyDamagedBulletinMovedToDiscardedcause=При отправке произошла ошибка. Отправляемая сводка перемещена в папку поврежденных сводок.
-
+#_____________________________________________________=An error occurred during upload, and the damaged bulletin has been moved to the Damaged Bulletins folder.
+-ed3b-field:notifyDamagedBulletinMovedToDiscardedcause=При отправке произошла ошибка. Отправляемая сводка перемещена в папку поврежденных сводок.
 
 #______________________________________________=Error: Unable to delete all of those draft bulletins from the server. Some of them may have been deleted.
 -916e-field:notifyDeleteServerDraftsFailedcause=Ошибка: Невозможно удалить все данные черновые сводки с сервера. Возможно, произошло удаление некоторых сводок.
@@ -1107,6 +1160,9 @@ field:translationVersion= Русский 2.01
 
 #_____________________________________________=One or more bulletins cannot be moved to that folder, because it already exists in that folder.
 -178b-field:notifyDropErrorBulletinExistscause=Переместить сводку (сводки) в данную папку невозможно, так как папка уже содержит эту сводку (сводки).
+
+#____________________________________________=One or more bulletins cannot be moved to that folder, because a newer version of this bulletin already exists.
+-834b-field:notifyDropErrorBulletinOldercause=Сводки невозможно переместить в данную папку, так как имеется более поздняя версия данной сводки.
 
 #________________________________=An unexpected error occurred while moving the bulletin(s). One or more files may be damaged.
 -9ca2-field:notifyDropErrorscause=При перемещении сводки (сводок) произошла неожиданная ошибка. Некоторые файлы могут оказаться повреждены.
@@ -1174,9 +1230,6 @@ field:translationVersion= Русский 2.01
 #_______________________________________=You must have a server name or IP address.
 -984b-field:notifyInvalidServerNamecause=Требуется имя или IP-адрес сервера.
 
-#_______________________________________________=Bulletin ID:        #I#\nAuthor Public Code: #A#\n\n#H#
--485a-field:notifyModifyViewBulletinDetailscause=Идентификатор сводки:        #I#\nОбщий идентификационный код автора: #A#\n\n#H#
-
 #________________________________________=Operation completed.
 -1a65-field:notifyOperationCompletedcause=Операция выполнена.
 
@@ -1188,6 +1241,9 @@ field:translationVersion= Русский 2.01
 
 #_____________________________________________________=One or more bulletins cannot be pasted in that folder, because they already exist in this folder.
 -6181-field:notifyPasteErrorBulletinAlreadyExistscause=Вставить сводку (сводки) в данную папку невозможно, так как папка уже содержит эту сводку (сводки).
+
+#_____________________________________________=One or more bulletins cannot be pasted in that folder, because a newer version of this bulletin already exists.
+-cbb5-field:notifyPasteErrorBulletinOldercause=Сводки невозможно вставить в данную папку, так как имеется более поздняя версия данной сводки 
 
 #________________________________=An unexpected error occurred while pasting the bulletin(s). One or more files may be damaged.
 -eb6e-field:notifyPasteErrorcause=При вставке сводки (сводок) произошла непредвиденная ошибка. Некоторые файлы могут оказаться повреждены.
@@ -1213,8 +1269,8 @@ field:translationVersion= Русский 2.01
 #________________________________________________=You have successfully restored your key from your backup files.  It is very important that you now re-distribute your backup files.  We also recommend you backup your key as a single password-encrypted file, though you do not need to recreate the multiple file backup.
 -f50c-field:notifyRecoveryOfKeyShareCompletecause=Восстановление ключа по файлам разбивки завершено успешно.  Теперь Вам весьма важно снова раздать разным людям файлы разбивки. Рекомендуем также сохранить резервную копию Вашего ключа в виде зашифрованного файла. Создавать заново разбивку ключа не обязательно.
 
-#_______________________________________________=To restore your key, first you must find the backup file you saved previously.  Using the 'Restore Key from Backup File' dialog box find the file on your computer’s hard drive, a network drive, or removable media disk then click the Open button.  Martus will then ask you for your user name and password and restore your key so you can log in normally and access your account.
--83c2-field:notifyRecoveryProcessBackupFilecause=Чтобы восстановить ключ, прежде всего отыщите файл резервной копии, созданный Вами ранее. Используя диалоговое окно "Восстановление ключа по резервной копии", укажите путь к этому файлу (находящемуся на дискете или на жестком диске вашего компьютера) и нажмите кнопку "Открыть".  Martus запросит Ваше имя пользователя и пароль, а затем восстановит Ваш ключ, чтобы Вы могли нормально войти в систему и получить доступ к своей учетной записи.
+#_______________________________________________=To restore your key, first you must find the backup file you saved previously.  Using the 'Restore Key from Backup File' dialog box find the file on your computer's hard drive, a network drive, or removable media disk then click the Open button.  Martus will then ask you for your user name and password and restore your key so you can log in normally and access your account.
+-4a6f-field:notifyRecoveryProcessBackupFilecause=Чтобы восстановить ключ, прежде всего отыщите файл резервной копии, созданный Вами ранее. Используя диалоговое окно "Восстановление ключа по резервной копии", укажите путь к этому файлу (находящемуся на жестком диске вашего компьютера, на сетевом диске или на сменном носителе) и нажмите кнопку "Открыть".  Martus запросит Ваше имя пользователя и пароль, а затем восстановит Ваш ключ, чтобы Вы могли нормально войти в систему и получить доступ к своей учетной записи.
 
 #_____________________________________________=You will now have to provide #N# out of the #M# files you previously saved when you backed up your key.
 -d5c2-field:notifyRecoveryProcessKeySharecause=Теперь Вам понадобятся #N# из #M# файлов, созданных Вами при сохранении резервной копии ключа.
@@ -1278,9 +1334,6 @@ field:translationVersion= Русский 2.01
 
 #______________________________________________=Verification of all disks passed.
 -7d7f-field:notifyVerifyKeyPairSharePassedcause=Проверка всех дисков выполнена.
-
-#_____________________________________________=Bulletin ID:        #I#\nAuthor Public Code: #A#\n\n#H#
--485a-field:notifyViewViewBulletinDetailscause=Идентификатор сводки:        #I#\nОбщий идентификационный код автора: #A#\n\n#H#
 
 #_____________________________________=Welcome!\n\nTo start using Martus, create an account. Choose any username you like and a password that contains at least 8 characters. Keep the following information in mind as you create your username and password:\n\n * We recommend using a password that has 15 characters.\n * Include some characters that aren't letters or numbers in your password.\n   (That is, use punctuation or other special characters.)\n * Use a password that other people won't be able to guess;\n   anyone who knows your username and password can view your private data,\n   and can create bulletins that everyone will believe were created by you.\n * Write down your username and password and store them in a safe place.\n * You'll need to enter your username and password whenever you start Martus.\n * Martus will also sometimes prompt you to re-enter your username\n   and password to prevent someone else from using your account\n   after you've logged in.\n\nIMPORTANT: You are the only one who has your username and password. If you lose either of them, you won't be able to retrieve your data. Your username and password are not stored or backed up anywhere, so they cannot be reset for you.
 -da34-field:notifyWelcomeToMartuscause=Добро пожаловать!\n\nЧтобы начать работать с Martus, создайте учетную запись. Задайте имя пользователя по Вашему желанию, а также пароль, состоящий не менее чем из 8 символов. При выборе имени пользователя и пароля следует помнить:\n\n * Рекомендуем использовать пароль длиной в 15 символов.\n * Включите в пароль несколько символов, отличных от букв и цифр\n   (то есть знаки препинания или иные специальные символы.)\n * Задайте пароль, который не смогут отгадать посторонние;\nлюбой, кому известно Ваше имя пользователя и пароль, сможет получить доступ к Вашим конфиденциальным данным,\n а также создавать сводки, которые будут приписываться Вам.\n * Запишите Ваше имя пользователя и пароль и храните эту запись в безопасном месте.\n * Вы должны будете ввести имя пользователя и пароль при каждом запуске Martus.\n * Иногда Martus будет также запрашивать у Вас ввод имени пользователя и пароля в целях предотвращения использования Вашей учетной записи другими лицами\n   после того, как Вы вошли в систему.\n\nПОМНИТЕ: Только Вы будете знать свое имя пользователя и пароль. Если Вы забудете то или другое, Вы лишитесь доступа к своим данным. Система нигде не сохраняет Ваше имя пользователя и пароль, поэтому восстановить их Вы не сможете.
@@ -1375,6 +1428,9 @@ field:translationVersion= Русский 2.01
 #________________=Title
 -768e-field:title=Заголовок
 
+#_____________________________=English 2.5
+-b0f3-field:translationVersion=Русский 2.5
+
 #___________________=Username
 -84c2-field:username=Имя пользователя
 
@@ -1404,6 +1460,9 @@ field:translationVersion= Русский 2.01
 
 #____________________________________________=WARNING: This bulletin has not been sent to a server since it was last modified. Deleting it will prevent the latest changes from being backed up.
 -523e-field:warningDeleteSingleUnsentBulletin=ВНИМАНИЕ: Данная сводка не была отправлена на сервер после последнего редактирования. Удаление этой сводки приведет к потере последних внесенных изменений.
+
+#_______________________________________=WARNING:  This translation was not created by the Martus team, and therefore may not be trustworthy.\nIf you only want to use official translations then exit Martus, remove the file #UseUnofficialTranslationFiles# from your Martus directory, and restart Martus.\n\n
+-c48e-field:warningUnofficialTranslation=ПРЕДУПРЕЖДЕНИЕ:  Данный перевод создан не разработчиками Martus и может быть недостоверным.\nЕсли Вы хотите использовать только официальные переводы, выйдите из Martus, удалите из своего каталога Martus файл #UseUnofficialTranslationFiles# и запустите Martus заново.\n\n
 
 #__________________=Web Page
 -0163-field:webpage=Веб-страница
@@ -1515,7 +1574,6 @@ field:translationVersion= Русский 2.01
 
 #________________=Kirghiz
 -1848-language:ky=Киргизский
-
 
 #________________=Malayalam
 -c730-language:ml=Малайялам
@@ -1679,7 +1737,6 @@ field:translationVersion= Русский 2.01
 #______________________=Select Martus Server
 -2461-menu:SelectServer=Выбрать сервер Martus
 
-
 #______________________________=View My Account Details
 -264b-menu:ViewMyAccountDetails=Просмотр свойств собственной учетной записи
 
@@ -1797,11 +1854,14 @@ field:translationVersion= Русский 2.01
 #__________________________________________________=Backup Complete
 -8b15-wintitle:BackupSecretShareCompleteInformation=Сохранение выполнено
 
-#_____________________________=Details Field Default Content
--a39b-wintitle:BulletinDetails=Шаблон для поля "Подробности"
+#___________________________________=Bulletin Details
+-6fa9-wintitle:BulletinDetailsDialog=Сведения о сводке
 
 #_____________________________=Bulletin Preview
 -9d3b-wintitle:BulletinPreview=Предварительный просмотр сводки
+
+#______________________________=Details Field Default Content
+-a39b-wintitle:BulletinTemplate=Содержимое шаблона для поля "Подробности"
 
 #__________________________=Server Configuration
 -add5-wintitle:ConfigServer=Настройка сервера
@@ -1877,6 +1937,9 @@ field:translationVersion= Русский 2.01
 
 #__________________________________=Validate User
 -6030-wintitle:MartusSignInValidate=Подтверждение прав пользователя
+
+#_____________________________________=Cannot Paste Bulletin(s)
+-c05f-wintitle:PasteErrorBulletinOlder=Невозможна вставка сводок
 
 #______________________________=Confirm Print Private Data
 -5b7b-wintitle:PrintPrivateData=Подтверждение: Печать конфиденциальных данных
@@ -1986,8 +2049,8 @@ field:translationVersion= Русский 2.01
 #________________________________________=Confirm Create Copy of Someone Else's Bulletin
 -7a92-wintitle:confirmCloneBulletinAsMine=Подтверждение создания копии сводки, созданной другим лицом
 
-#_________________________________________=Confirm Create Copy of Sealed Bulletin
--8038-wintitle:confirmCloneMySealedAsDraft=Подтверждение создания копии чистовой сводки
+#_________________________________________=Confirm Create New Version of Sealed Bulletin
+-1260-wintitle:confirmCloneMySealedAsDraft=Подтверждение создания новой версии чистовой сводки
 
 #_________________________________=Delete My Data
 -07c3-wintitle:confirmDeleteMyData=Удаление собственных данных
@@ -2012,6 +2075,9 @@ field:translationVersion= Русский 2.01
 
 #_______________________________________________=Key file Exists
 -493d-wintitle:confirmKeyPairFileExistsOverWrite=Файл ключа уже существует
+
+#_____________________________________________________=Bulletin Versioning Migration Required
+-4371-wintitle:confirmNeedsBulletinVersioningMigration=Требуется миграция версий сводки
 
 #_________________________________________=Folder Migration Required
 -72d3-wintitle:confirmNeedsFolderMigration=Требуется миграция папок
@@ -2051,6 +2117,9 @@ field:translationVersion= Русский 2.01
 
 #________________________________________=Reset Contents
 -6f62-wintitle:confirmResetDefaultDetails=Возврат к исходному содержанию
+
+#__________________________________________=Confirm Retrieving Newer Versions
+-80c8-wintitle:confirmRetrieveNewerVersions=Подтверждение загрузки новых версий
 
 #_______________________________________=Confirm Save With Public Data
 -1e77-wintitle:confirmSendWithPublicData=Подтверждение сохранения с общедоступными данными
@@ -2169,6 +2238,9 @@ field:translationVersion= Русский 2.01
 #___________________________________________=Cannot Move Bulletin(s)
 -771a-wintitle:notifyDropErrorBulletinExists=Невозможно перемещение сводок
 
+#__________________________________________=Cannot Move Bulletin(s)
+-771a-wintitle:notifyDropErrorBulletinOlder=Невозможно перемещение сводок
+
 #______________________________=Error Moving Bulletin(s)
 -4cd9-wintitle:notifyDropErrors=Ошибка при перемещении сводок
 
@@ -2229,15 +2301,11 @@ field:translationVersion= Русский 2.01
 #_____________________________________=Headquarters Key Already Exists
 -03e9-wintitle:notifyHQKeyAlradyExists=Ключ главной учетной записи уже существует
 
-
 #_____________________________________=Invalid Server Public Code
 -08ad-wintitle:notifyInvalidServerCode=Неверный общий код сервера
 
 #_____________________________________=Invalid Server Name or IP Address
 -3376-wintitle:notifyInvalidServerName=Неверное имя или IP-адрес сервера
-
-#_____________________________________________=Bulletin Details
--6fa9-wintitle:notifyModifyViewBulletinDetails=Сведения о сводке 
 
 #______________________________________=Finished
 -355b-wintitle:notifyOperationCompleted=Завершение
@@ -2340,9 +2408,6 @@ field:translationVersion= Русский 2.01
 
 #____________________________________________=Verification Succeeded
 -9195-wintitle:notifyVerifyKeyPairSharePassed=Проверка выполнена
-
-#___________________________________________=Bulletin Details
--6fa9-wintitle:notifyViewViewBulletinDetails=Сведения о сводке 
 
 #___________________________________=Welcome To Martus
 -423f-wintitle:notifyWelcomeToMartus=Добро пожаловать в систему Martus
