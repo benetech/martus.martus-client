@@ -36,12 +36,10 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.io.IOException;
-
 import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JViewport;
-
 import org.martus.client.core.BulletinFolder;
 import org.martus.client.core.ClientBulletinStore;
 import org.martus.client.core.EncryptionChangeListener;
@@ -60,14 +58,12 @@ import org.martus.common.crypto.MartusCrypto.CryptoException;
 import org.martus.common.crypto.MartusCrypto.EncryptionException;
 import org.martus.swing.UiScrollPane;
 import org.martus.swing.Utilities;
-import org.martus.util.language.LanguageOptions;
 
 public class UiBulletinModifyDlg extends JFrame implements ActionListener, WindowListener, EncryptionChangeListener, LanguageChangeListener
 {
 	public UiBulletinModifyDlg(Bulletin b, UiMainWindow observerToUse)
 	{
 		observer = observerToUse;
-		initialNeedsLanguagePadding = LanguageOptions.needsLanguagePadding();
 
 		UiBasicLocalization localization = observer.getLocalization();
 		setTitle(localization.getWindowTitle("create"));
@@ -289,22 +285,20 @@ public class UiBulletinModifyDlg extends JFrame implements ActionListener, Windo
 
 	public void languageChanged(String newLanguage) 
 	{
-		if(observer.getLocalization().doesLanguageRequirePadding(newLanguage))
+		//TODO add this back when its working correctly
+/*		if(observer.getLocalization().doesLanguageRequirePadding(newLanguage))
 			LanguageOptions.setLanguagePaddingRequired();
 		else
 			LanguageOptions.setLanguagePaddingNotRequired();
 		getContentPane().remove(scroller);
 		addScrollerView();
+*/
 	}
 	
 	public void cleanupAndExit()
 	{
 		observer.doneModifyingBulletin();
 		saveEditorState(getSize(), getLocation());
-		if(initialNeedsLanguagePadding)
-			LanguageOptions.setLanguagePaddingRequired();
-		else
-			LanguageOptions.setLanguagePaddingNotRequired();
 		dispose();
 	}
 
@@ -345,7 +339,5 @@ public class UiBulletinModifyDlg extends JFrame implements ActionListener, Windo
 	JButton cancel;
 
 	boolean wasBulletinSavedFlag;
-	boolean initialNeedsLanguagePadding;
-
 }
 

@@ -30,12 +30,10 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.JViewport;
-
 import org.martus.client.core.LanguageChangeListener;
 import org.martus.client.swingui.UiLocalization;
 import org.martus.client.swingui.UiMainWindow;
@@ -45,7 +43,6 @@ import org.martus.common.StandardFieldSpecs;
 import org.martus.common.packet.FieldDataPacket;
 import org.martus.swing.UiScrollPane;
 import org.martus.swing.Utilities;
-import org.martus.util.language.LanguageOptions;
 
 public class UiBulletinPreviewDlg extends JDialog implements ActionListener, LanguageChangeListener
 {
@@ -53,7 +50,6 @@ public class UiBulletinPreviewDlg extends JDialog implements ActionListener, Lan
 	public UiBulletinPreviewDlg(UiMainWindow owner, FieldDataPacket fdp)
 	{
 		super(owner, owner.getLocalization().getWindowTitle("BulletinPreview"), true);	
-		initialNeedsLanguagePadding = LanguageOptions.needsLanguagePadding();
 		getContentPane().setLayout(new BorderLayout());
 
 		UiBulletinComponentViewSection view = new UiBulletinComponentViewSection(owner);
@@ -93,19 +89,9 @@ public class UiBulletinPreviewDlg extends JDialog implements ActionListener, Lan
 		dispose();
 	}
 
-	public void dispose() 
-	{
-		if(initialNeedsLanguagePadding)
-			LanguageOptions.setLanguagePaddingRequired();
-		else
-			LanguageOptions.setLanguagePaddingNotRequired();
-		super.dispose();
-	}
-	
 	public void languageChanged(String newLanguageCode) 
 	{
 		//read-only nothing to do
 	}
 
-	boolean initialNeedsLanguagePadding;
 }

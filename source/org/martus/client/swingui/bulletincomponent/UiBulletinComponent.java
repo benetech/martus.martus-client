@@ -44,7 +44,6 @@ import org.martus.common.HQKeys;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.crypto.MartusCrypto;
 import org.martus.common.packet.FieldDataPacket;
-import org.martus.util.language.LanguageOptions;
 
 abstract public class UiBulletinComponent extends JPanel implements Scrollable, ChangeListener, LanguageChangeListener 
 {
@@ -131,11 +130,6 @@ abstract public class UiBulletinComponent extends JPanel implements Scrollable, 
 			return;
 		}
 		
-		if(mainWindow.getLocalization().doesLanguageRequirePadding(bulletinToShow.get(Bulletin.TAGLANGUAGE)))
-			LanguageOptions.setLanguagePaddingRequired();
-		else
-			LanguageOptions.setLanguagePaddingNotRequired();
-
 		createSections();
 		
 		headerSection.setBulletin(currentBulletin);
