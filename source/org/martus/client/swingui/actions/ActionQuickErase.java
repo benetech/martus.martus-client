@@ -200,7 +200,7 @@ public abstract class ActionQuickErase extends UiMenuAction
 			getContentPane().add(panel);
 			Utilities.centerDlg(this);
 			setResizable(true);
-			show();
+			setVisible(true);
 		}
 
 		public void actionPerformed(ActionEvent ae)

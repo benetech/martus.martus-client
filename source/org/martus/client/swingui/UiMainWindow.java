@@ -269,13 +269,13 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 			if(Version.isRunningUnderWindows())
 			{
 				setState(Frame.ICONIFIED);
-				show();
+				setVisible(true);
 			}
 			else
 			{
 				Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 				setLocation(screenSize.width + 1, screenSize.height + 1);
-				show();
+				setVisible(true);
 				toFront();
 			}
 		}
@@ -314,7 +314,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 			requestContactInfo();
 			
 			addWindowListener(new WindowEventHandler());
-			show();
+			setVisible(true);
 			toFront();
 		}
 
@@ -843,7 +843,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		UiOptionPane pane = new UiOptionPane(cause, UiOptionPane.INFORMATION_MESSAGE, UiOptionPane.DEFAULT_OPTION,
 								null, buttons);
 		JDialog dialog = pane.createDialog(null, title);
-		dialog.show();
+		dialog.setVisible(true);
 		System.exit(1);
 	}
 
@@ -851,7 +851,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	{
 		UiStringInputDlg inputDlg = new UiStringInputDlg(this, getLocalization(), baseTag, descriptionTag, rawDescriptionText, defaultText);
 		inputDlg.setFocusToInputField();
-		inputDlg.show();
+		inputDlg.setVisible(true);
 		return inputDlg.getResult();
 	}
 
@@ -1110,7 +1110,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 			UiOptionPane pane = new UiOptionPane(cause, UiOptionPane.INFORMATION_MESSAGE, UiOptionPane.DEFAULT_OPTION,
 									null, buttons);
 			JDialog dialog = pane.createDialog(this, title);
-			dialog.show();
+			dialog.setVisible(true);
 		}
 		else
 		{
@@ -1192,7 +1192,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		int width = preview.getView().getWidth();		
 	
 		UiPrintBulletinDlg dlg = new UiPrintBulletinDlg(this, currentBulletin.isAllPrivate());
-		dlg.show();		
+		dlg.setVisible(true);		
 			
 		if (!dlg.isContinueButtonPressed())
 			return;							
@@ -1208,7 +1208,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		frame.getContentPane().add(scroller);
 		frame.pack();
 		//If you want to see what is being printed uncomment out this next line
-		//frame.show();
+		//frame.setVisible(true);
 		PrintPageFormat format = new PrintPageFormat();
 		JComponentVista vista = new JComponentVista(view, format);
 		PrinterJob job = PrinterJob.getPrinterJob();
@@ -1252,7 +1252,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		new UiPreferencesDlg(this);
 		initializeViews();
 		restoreState();
-		show();
+		setVisible(true);
 	}
 
 	public boolean doContactInfo()
@@ -1493,7 +1493,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 			return;
 		}
 
-		templateDlg.show();
+		templateDlg.setVisible(true);
 		if(templateDlg.getResult())
 		{
 			try
@@ -1576,7 +1576,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 			UiProgressRetrieveBulletinsDlg progressDlg = new UiProgressRetrieveBulletinsDlg(this, retrieverProgressTag);
 			Retriever retriever = new Retriever(app, progressDlg);
 			retriever.retrieveBulletins(uidList, retrievedFolder);
-			retriever.progressDlg.show();
+			retriever.progressDlg.setVisible(true);
 			if(progressDlg.shouldExit())
 				notifyDlg("RetrieveCanceled");
 			else

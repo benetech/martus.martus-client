@@ -136,7 +136,7 @@ public class UiOnlineHelpDlg extends JDialog
 
 		Utilities.centerDlg(this);
 		setResizable(true);
-		show();
+		setVisible(true);
 	}
 
 	public String getFileContents(InputStream fileStream)

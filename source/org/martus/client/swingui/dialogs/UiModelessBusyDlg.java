@@ -53,7 +53,7 @@ public class UiModelessBusyDlg extends JDialog
 		setResizable(false);
 		origCursor = getCursor();
 		setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-		show();
+		setVisible(true);
 	}
 
 	public void endDialog()

@@ -110,7 +110,7 @@ public class UiExportBulletinsDlg extends JDialog implements ActionListener
 		
 		Utilities.centerDlg(this);
 		setResizable(true);
-		show();
+		setVisible(true);
 	}
 
 	public static Vector findBulletins(ClientBulletinStore store, UniversalId[] selectedBulletins)

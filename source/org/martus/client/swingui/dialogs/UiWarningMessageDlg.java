@@ -86,7 +86,7 @@ public class UiWarningMessageDlg extends JDialog implements ActionListener
 		setResizable(true);
 		getRootPane().setDefaultButton(okButton);
 		okButton.requestFocus(true);
-		show();
+		setVisible(true);
 	}
 
 	public void actionPerformed(ActionEvent e)

@@ -85,7 +85,7 @@ public class UiPreferencesDlg extends JDialog implements ActionListener
 		
 		Utilities.centerDlg(this);
 		setResizable(true);
-		show();
+		setVisible(true);
 	}
 
 	public void actionPerformed(ActionEvent ae)

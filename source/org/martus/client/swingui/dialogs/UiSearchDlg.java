@@ -83,7 +83,7 @@ public class UiSearchDlg extends JDialog  implements ActionListener
 		getContentPane().add(panel);
 		Utilities.centerDlg(this);
 		setResizable(true);
-		show();
+		setVisible(true);
 
 	}
 

@@ -123,7 +123,7 @@ public class UiBulletinModifyDlg extends JFrame implements ActionListener, Windo
 				setSize(screenSize.width - 50, screenSize.height - 50);
 				Utilities.maximizeWindow(this);
 			}
-			show();
+			setVisible(true);
 		}
 		catch(Exception e)
 		{

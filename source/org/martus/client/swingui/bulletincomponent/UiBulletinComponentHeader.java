@@ -123,7 +123,7 @@ public class UiBulletinComponentHeader extends UiBulletinComponentSection
 	void showBulletinDetails()
 	{
 		UiBulletinDetailsDialog dlg = new UiBulletinDetailsDialog(mainWindow, bulletin, tagQualifier);
-		dlg.show();
+		dlg.setVisible(true);
 	}
 
 	class DetailsListener implements ActionListener

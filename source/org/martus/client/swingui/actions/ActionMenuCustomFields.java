@@ -85,7 +85,7 @@ public class ActionMenuCustomFields extends UiMenuAction
 		{
 			UiCustomFieldsDlg inputDlg = new UiCustomFieldsDlg(mainWindow, existingCustomFieldXml);
 			inputDlg.setFocusToInputField();
-			inputDlg.show();
+			inputDlg.setVisible(true);
 			String newCustomFieldXml = inputDlg.getResult();
 			if(newCustomFieldXml == null)
 				return null;

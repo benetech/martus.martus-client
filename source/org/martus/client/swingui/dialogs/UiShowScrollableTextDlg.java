@@ -123,7 +123,7 @@ public class UiShowScrollableTextDlg extends JDialog implements ActionListener
 			getContentPane().add(panel);
 			getRootPane().setDefaultButton(ok);
 			Utilities.centerDlg(this);
-			show();
+			setVisible(true);
 		} 
 		catch (TokenInvalidException e) 
 		{

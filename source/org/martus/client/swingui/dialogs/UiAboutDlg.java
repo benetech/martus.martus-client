@@ -117,7 +117,7 @@ public class UiAboutDlg extends JDialog implements ActionListener
 		getContentPane().add(vBoxAboutDialog);
 
 		Utilities.centerDlg(this);
-		show();
+		setVisible(true);
 	}
 
 	public void actionPerformed(ActionEvent ae)

@@ -147,7 +147,7 @@ public class UiConfigureHQs extends JDialog
 		getRootPane().setDefaultButton(close);
 		Utilities.centerDlg(this);
 		setResizable(true);
-		show();
+		setVisible(true);
 	}
 	
 	class HQTableModel extends DefaultTableModel

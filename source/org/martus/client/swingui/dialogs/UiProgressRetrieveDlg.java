@@ -83,7 +83,7 @@ public class UiProgressRetrieveDlg extends JDialog
 
 	public void beginRetrieve()
 	{
-		show();
+		setVisible(true);
 	}
 
 	public void finishedRetrieve()

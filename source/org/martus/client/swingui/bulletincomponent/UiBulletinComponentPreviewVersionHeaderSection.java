@@ -40,7 +40,7 @@ public class UiBulletinComponentPreviewVersionHeaderSection extends UiBulletinCo
 	{
 		UiBulletinDetailsDialog dlg = new UiBulletinDetailsDialog(mainWindow, bulletin, tagQualifier);
 		dlg.hidePreviewButton();
-		dlg.show();
+		dlg.setVisible(true);
 	}
 }
 

@@ -77,7 +77,7 @@ public class UiSplashDlg extends JDialog implements ActionListener
 		contents.add(hbox, BorderLayout.SOUTH);
 		
 		Utilities.centerDlg(this);
-		show();
+		setVisible(true);
 	}
 
 	public void actionPerformed(ActionEvent ae)

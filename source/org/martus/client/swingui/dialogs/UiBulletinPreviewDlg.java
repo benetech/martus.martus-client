@@ -95,7 +95,7 @@ public class UiBulletinPreviewDlg extends JDialog implements ActionListener, Lan
 		Utilities.centerDlg(this);
 		setResizable(true);
 		ok.requestFocus(true);
-		show();
+		setVisible(true);
 	}
 	
 	public void actionPerformed(ActionEvent ae)

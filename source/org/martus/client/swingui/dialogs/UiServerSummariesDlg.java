@@ -103,7 +103,7 @@ public abstract class UiServerSummariesDlg extends JDialog
 		getContentPane().add(topPanel);	
 		setScreenSize();				
 		Utilities.centerDlg(this);
-		show();
+		setVisible(true);
 	}
 
 	public void hideBulletinVersionButtons()
