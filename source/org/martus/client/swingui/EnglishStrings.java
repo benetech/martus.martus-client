@@ -39,6 +39,7 @@ public class EnglishStrings
 "wintitle:ServerCompliance=Server Compliance Statement",
 "wintitle:ErrorBackingupKeyPair=Error",
 "wintitle:askToBackupKeyPair=Key Backup Needed",
+"wintitle:ViewBulletinDetails=Bulletin Details",
 
 "wintitle:confirmsend=Confirm Save Bulletin",
 "wintitle:confirmretrieve=Confirm Retrieve Bulletins",
@@ -166,8 +167,6 @@ public class EnglishStrings
 "wintitle:notifyFilesWillNotBeDeleted=Files Not Deleted",
 "wintitle:notifyHQKeyAlradyExists=Headquarters Key Already Exists",
 "wintitle:notifyFolderMigrationFailed=Folder Migration Error",
-"wintitle:notifyViewViewBulletinDetails=Bulletin Details",
-"wintitle:notifyModifyViewBulletinDetails=Bulletin Details",
 "wintitle:notifyResendErrorNotAuthorizedToSend=Not Authorized To Send",
 "wintitle:notifyResendError=Error Sending Bulletin",
 
@@ -692,16 +691,14 @@ public class EnglishStrings
 "field:notifyFilesWillNotBeDeletedcause=The original files have not been deleted from your computer, you must delete them manually if you wish.",
 "field:notifyHQKeyAlradyExistscause=You have already added this account to your Headquarters list.",
 "field:notifyFolderMigrationFailedcause=An error occurred during the conversion of your folders. You can still use Martus, but if the Outbox or Drafts folders still exist, do not use them.",
-"field:notifyViewViewBulletinDetailscause=Bulletin ID:        #I#\nAuthor Public Code: #A#\n\n#H#\n\n#HISTORY#",
-"field:notifyModifyViewBulletinDetailscause=Bulletin ID:        #I#\nAuthor Public Code: #A#\n\n#H#\n\n#HISTORY#",
 "field:notifyResendErrorNotAuthorizedToSendcause=One or more bulletins were unable to be resent because you are not authorized to upload them.",
 "field:notifyResendErrorcause=One or more bulletins were unable to be resent due to an unexpected error.",
 "field:notifyPrintAllPrivateDatacause=This bulletin will not be printed because all the information is private.  If you wish to print the private data, please mark the \"Include private data in print out\" checkbox.",
 "field:notifyErrorRenameFoldercause=Folder names cannot contain punctuation.  They also cannot begin with a space.",
 "field:notifyErrorRenameFolderExistscause=You already have a folder with that name.",
 
-"field:ViewViewBulletinDetailsHQList=The following Headquarter account(s) can view the private information in this bulletin, and can send this bulletin to a server:\n\n#L#",
-"field:ModifyViewBulletinDetailsHQList=The following Headquarter account(s) will be able to view the private information in this bulletin, or send this bulletin to a server, after you save it:\n\n#L#\n\nTo add or remove an account, use the Tools/Configure Headquarters menu option.",
+"field:ViewBulletinDetailsHQInfo=The following Headquarter account(s) can view the private information in this bulletin, and can send this bulletin to a server.",
+"field:ModifyBulletinDetailsHQInfo=The following Headquarter account(s) will be able to view the private information in this bulletin, or send this bulletin to a server, after you save it.\n\nTo add or remove an account, use the Tools/Configure Headquarters menu option.",
 
 "field:ViewViewBulletinDetailsHistory=Earlier versions of this bulletin:\n#IDLIST#",
 "field:ModifyViewBulletinDetailsHistory=Earlier versions of this bulletin:sss\n#IDLIST#",

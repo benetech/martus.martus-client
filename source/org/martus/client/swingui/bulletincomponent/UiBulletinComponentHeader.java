@@ -35,21 +35,14 @@ import java.util.GregorianCalendar;
 import java.util.HashMap;
 
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.border.EtchedBorder;
 
 import org.martus.client.swingui.UiLocalization;
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.common.HQKey;
-import org.martus.common.HQKeys;
+import org.martus.client.swingui.dialogs.BulletinDetailsDialog;
 import org.martus.common.bulletin.Bulletin;
-import org.martus.common.crypto.MartusCrypto;
-import org.martus.common.packet.BulletinHistory;
-import org.martus.common.packet.UniversalId;
 import org.martus.util.TokenReplacement;
-import org.martus.util.Base64.InvalidBase64Exception;
-import org.martus.util.TokenReplacement.TokenInvalidException;
 
 
 public class UiBulletinComponentHeader extends UiBulletinComponentSection
@@ -82,15 +75,10 @@ public class UiBulletinComponentHeader extends UiBulletinComponentSection
 
 	}
 	
-	public void setBulletinId(UniversalId uid)
+	public void setBulletin(Bulletin bulletinToShow)
 	{
-		currentUid = uid;
-	}
-
-	public void setHqKeys(HQKeys keys)
-	{
-		hqList = keys;
-		int numberOfHqs = hqList.size();
+		bulletin = bulletinToShow;
+		int numberOfHqs = bulletin.getAuthorizedToReadKeys().size();
 		if(numberOfHqs > 0)
 		{
 			hqSummary.setText(getSummaryString(numberOfHqs));
@@ -103,16 +91,9 @@ public class UiBulletinComponentHeader extends UiBulletinComponentSection
 			hqLabel.setVisible(false);
 			hqSummary.setVisible(false);
 		}
-	}
-	
-	public void setHistory(BulletinHistory localIds)
-	{
-		history = localIds;
-		versionNumber.setText("  " + Integer.toString(1 + history.size())+ "  ");
-	}
-	
-	public void setLastSaved(long time)
-	{
+		versionNumber.setText("  " + Integer.toString(1 + bulletin.getHistory().size())+ "  ");
+
+		long time = bulletin.getLastSavedTime();
 		if(time == 0)
 		{
 			lastSavedLabel.setVisible(false);
@@ -155,110 +136,17 @@ public class UiBulletinComponentHeader extends UiBulletinComponentSection
 	{
 		public void actionPerformed(ActionEvent e)
 		{
-			HashMap map = new HashMap();
-			map.put("#A#", getPublicCode());
-			map.put("#I#", currentUid.getLocalId());
-			map.put("#H#", getHqListText());
-			map.put("#HISTORY#", getHistoryText());
-			JFrame parent = getMainWindow().getCurrentActiveFrame();
-			getMainWindow().notifyDlg(parent, tagQualifier + "ViewBulletinDetails", map);
+			BulletinDetailsDialog dlg = new BulletinDetailsDialog(mainWindow, bulletin, tagQualifier);
+			dlg.show();
 		}
 		
-		private String getPublicCode()
-		{
-			try
-			{
-				return MartusCrypto.computeFormattedPublicCode(currentUid.getAccountId());
-			}
-			catch (InvalidBase64Exception e)
-			{
-				e.printStackTrace();
-				return "";
-			}		
-		}
-
-		private String getHqListText()
-		{
-			if(hqList.size() == 0)
-				return "";
-			
-			String listOfHqPublicKeys = "";
-			for(int i=0; i < hqList.size(); ++i)
-			{
-				String thisHqCode;
-				HQKey hqKey = getHqPublicCode(i);
-				String thisHqlabel = getMainWindow().getApp().getHQLabelIfPresent(hqKey.getPublicKey());
-				try
-				{
-					thisHqCode = hqKey.getPublicCode();
-				}
-				catch (InvalidBase64Exception e1)
-				{
-					e1.printStackTrace();
-					thisHqCode = hqKey.getPublicKey();
-				}
-				if(thisHqlabel.length() > 0)
-					thisHqCode += " : " + thisHqlabel;
-				listOfHqPublicKeys += "  " + thisHqCode + "\n";
-			}
-			String tag = "ViewBulletinDetailsHQList";
-			String listToken = "#L#";
-			return performReplacement(tag, listToken, listOfHqPublicKeys);
-		}
-		
-		private String performReplacement(String tag, String listToken, String valueToInsert)
-		{
-			HashMap hqMap = new HashMap();
-			hqMap.put(listToken, valueToInsert);
-
-			String text = getLocalization().getFieldLabel(tagQualifier + tag);
-			try
-			{
-				text = TokenReplacement.replaceTokens(text, hqMap);
-			}
-			catch(TokenInvalidException e)
-			{
-				e.printStackTrace();
-			}
-			return text;
-		}
-
-		private HQKey getHqPublicCode(int i)
-		{
-			try
-			{
-				return hqList.get(i);
-			}
-			catch (Exception e)
-			{
-				e.printStackTrace();
-			}
-			HQKey unknown = new HQKey("???", "???");
-			return unknown;
-		}
-
-		private String getHistoryText()
-		{
-			String ancestors = "";
-			for(int i=0; i < history.size(); ++i)
-			{
-				String localId = history.get(i);
-				ancestors += "  " + (i+1) + ".  " + localId + "\n"; 
-			}
-			String tag = "ViewBulletinDetailsHistory";
-			String listToken = "#IDLIST#";
-			return performReplacement(tag, listToken, ancestors);
-		}
-
 	}
 
 	String tagQualifier;
-	JLabel lastSavedLabel;
-	JLabel dateTime;
-	JLabel hqLabel;
-	JLabel hqSummary;
-	JLabel versionNumber;
-	UniversalId currentUid;
-	HQKeys hqList;
-	BulletinHistory history;
+	Bulletin bulletin;
+	private JLabel lastSavedLabel;
+	private JLabel dateTime;
+	private JLabel hqLabel;
+	private JLabel hqSummary;
+	private JLabel versionNumber;
 }

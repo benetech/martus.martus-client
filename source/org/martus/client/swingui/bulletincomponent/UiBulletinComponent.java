@@ -128,10 +128,7 @@ abstract public class UiBulletinComponent extends JPanel implements Scrollable, 
 		
 		createSections();
 		
-		headerSection.setBulletinId(currentBulletin.getUniversalId());
-		headerSection.setHqKeys(getHqKeys());
-		headerSection.setLastSaved(currentBulletin.getLastSavedTime());
-		headerSection.setHistory(bulletinToShow.getHistory());
+		headerSection.setBulletin(currentBulletin);
 
 		String isAllPrivate = FieldSpec.FALSESTRING;
 		if(currentBulletin.isAllPrivate())
