@@ -38,7 +38,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.util.List;
-import java.util.Vector;
 
 import javax.swing.Box;
 import javax.swing.JButton;
@@ -47,7 +46,6 @@ import javax.swing.JFileChooser;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.table.AbstractTableModel;
 
 import org.martus.client.swingui.UiFocusListener;
 import org.martus.client.swingui.UiLocalization;
@@ -66,7 +64,7 @@ public class UiAttachmentEditor extends JPanel
 		ParagraphLayout layout = new ParagraphLayout();
 		setLayout(layout);
 
-		model = new AttachmentTableModel();
+		model = new EditorAttachmentTableModel(mainWindow, table);
 
 		table = new JTable(model);
 		new DropTarget(this, new attachmentDropAdapter());
@@ -195,75 +193,32 @@ public class UiAttachmentEditor extends JPanel
 		return lastAttachmentLoadDirectory;
 	}
 
-	class AttachmentTableModel extends AbstractTableModel
+	class EditorAttachmentTableModel extends AttachmentTableModel
 	{
-		public AttachmentTableModel()
+
+		public EditorAttachmentTableModel(UiMainWindow window, JTable table)
 		{
-			attachmentList = new Vector();
+			super(window, table);
 		}
 
 		void clear()
 		{
-			attachmentList.clear();
+			super.clear();
 			remove.setEnabled(false);
-			fireTableDataChanged();
 		}
 
 		public void add(AttachmentProxy a)
 		{
-			attachmentList.add(a);
+			super.add(a);
 			remove.setEnabled(true);
-			fireTableDataChanged();
 		}
-
+		
 		public void remove(int row)
 		{
-			attachmentList.remove(row);
+			super.remove(row);
 			if(getRowCount() == 0)
 				remove.setEnabled(false);
-			fireTableDataChanged();
 		}
-
-		public AttachmentProxy[] getAttachments()
-		{
-			AttachmentProxy[] list = new AttachmentProxy[attachmentList.size()];
-			for(int i = 0; i < list.length; ++i)
-				list[i] = (AttachmentProxy)attachmentList.get(i);
-
-			return list;
-		}
-
-		public int getRowCount()
-		{
-			return attachmentList.size();
-		}
-
-		public int getColumnCount()
-		{
-			return 1;
-		}
-
-		public String getColumnName(int column)
-		{
-			return mainWindow.getLocalization().getButtonLabel("attachmentlabel");
-		}
-
-		public Object getValueAt(int row, int column)
-		{
-			AttachmentProxy a = (AttachmentProxy)attachmentList.get(row);
-			return a.getLabel();
-		}
-
-		public void setValueAt(Object value, int row, int column)
-		{
-		}
-
-		public boolean isCellEditable(int row, int column)
-		{
-			return false;
-		}
-
-		private Vector attachmentList;
 	}
 
 	class AddHandler implements ActionListener
@@ -305,7 +260,7 @@ public class UiAttachmentEditor extends JPanel
 
 	JTable table;
 	JButton remove;
-	AttachmentTableModel model;
+	EditorAttachmentTableModel model;
 	UiMainWindow mainWindow;
 	
 	private static File lastAttachmentLoadDirectory;

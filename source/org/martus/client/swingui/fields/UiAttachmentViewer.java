@@ -39,7 +39,6 @@ import java.awt.dnd.DragSourceListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
-import java.util.Vector;
 
 import javax.swing.Box;
 import javax.swing.JButton;
@@ -48,7 +47,6 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
-import javax.swing.table.AbstractTableModel;
 
 import org.martus.client.core.MartusApp;
 import org.martus.client.core.TransferableAttachmentList;
@@ -71,7 +69,7 @@ public class UiAttachmentViewer extends JPanel  implements DragGestureListener, 
 		mainWindow = mainWindowToUse;
 		bulletinComponent = bulletinComponentToUse;
 		app = mainWindow.getApp();
-		model = new AttachmentTableModel();
+		model = new AttachmentTableModel(mainWindow, attachmentTable);
 		ParagraphLayout layout = new ParagraphLayout();
 		setLayout(layout);
 
@@ -134,73 +132,6 @@ public class UiAttachmentViewer extends JPanel  implements DragGestureListener, 
 		resizeTable();
 	}
 
-	class AttachmentTableModel extends AbstractTableModel
-	{
-		public AttachmentTableModel()
-		{
-			attachmentList = new Vector();
-		}
-
-		void clear()
-		{
-			attachmentList.clear();
-			fireTableDataChanged();
-		}
-
-		public void add(AttachmentProxy a)
-		{
-			attachmentList.add(a);
-			fireTableDataChanged();
-		}
-
-		public int getRowCount()
-		{
-			return attachmentList.size();
-		}
-
-		public int getColumnCount()
-		{
-			return 1;
-		}
-
-		public String getColumnName(int column)
-		{
-			return mainWindow.getLocalization().getButtonLabel("attachmentlabel");
-		}
-
-		public AttachmentProxy getAttachmentProxyAt(int row, int column)
-		{
-			return (AttachmentProxy)attachmentList.get(row);
-		}
-		
-		public AttachmentProxy[] getSelectedAttachments()
-		{
-			int[] rows = attachmentTable.getSelectedRows();
-			if(rows.length <= 0)
-				return null;
-			AttachmentProxy[] list = new AttachmentProxy[rows.length];
-			for(int i = 0; i < rows.length; ++i)
-				list[i] = (AttachmentProxy)attachmentList.get(rows[i]);
-			return list;
-		}
-
-		public Object getValueAt(int row, int column)
-		{
-			AttachmentProxy a = (AttachmentProxy)attachmentList.get(row);
-			return a.getLabel();
-		}
-
-		public void setValueAt(Object value, int row, int column)
-		{
-		}
-
-		public boolean isCellEditable(int row, int column)
-		{
-			return false;
-		}
-
-		Vector attachmentList;
-	}
 
 	public int GetSelection()
 	{
