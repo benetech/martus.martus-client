@@ -43,7 +43,6 @@ import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
-import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
@@ -52,6 +51,7 @@ import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableModel;
 
 import org.martus.client.swingui.UiMainWindow;
+import org.martus.client.swingui.UiScrollPane;
 import org.martus.client.swingui.tablemodels.RetrieveTableModel;
 import org.martus.common.clientside.UiBasicLocalization;
 import org.martus.common.packet.FieldDataPacket;
@@ -90,7 +90,7 @@ public class UiServerSummariesDlg extends JDialog
 
 		table.createDefaultColumnsFromModel();
 		tableBox.add(table.getTableHeader());
-		tableBox.add(new JScrollPane(table));
+		tableBox.add(new UiScrollPane(table, localization.getComponentOrientation()));
 
 		JPanel topPanel = new JPanel();
 		topPanel.setBorder(new EmptyBorder(5, 5, 5, 5));

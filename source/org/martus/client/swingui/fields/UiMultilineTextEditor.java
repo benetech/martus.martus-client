@@ -28,10 +28,10 @@ package org.martus.client.swingui.fields;
 
 import java.awt.Font;
 import javax.swing.JComponent;
-import javax.swing.JScrollPane;
 import javax.swing.text.JTextComponent;
 import org.martus.client.swingui.UiConstants;
 import org.martus.client.swingui.UiLocalization;
+import org.martus.client.swingui.UiScrollPane;
 import org.martus.swing.UiTextArea;
 
 public class UiMultilineTextEditor extends UiTextField
@@ -44,8 +44,8 @@ public class UiMultilineTextEditor extends UiTextField
 		editor.setWrapStyleWord(true);
 		editor.setFont(new Font("SansSerif", Font.PLAIN, UiConstants.defaultFontSize));
 
-		widget = new JScrollPane(editor, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
-										JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+		widget = new UiScrollPane(editor, UiScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
+				UiScrollPane.HORIZONTAL_SCROLLBAR_NEVER, localization.getComponentOrientation());
 		widget.getVerticalScrollBar().setFocusable(false);
 		supportContextMenu();
 	}
@@ -76,7 +76,7 @@ public class UiMultilineTextEditor extends UiTextField
 		editor.updateUI(); //Resets view position to top of scroll pane
 	}
 
-	JScrollPane widget;
+	UiScrollPane widget;
 	UiTextArea editor;
 }
 

@@ -42,11 +42,11 @@ import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
 import org.martus.client.swingui.UiFocusListener;
 import org.martus.client.swingui.UiMainWindow;
+import org.martus.client.swingui.UiScrollPane;
 import org.martus.common.bulletin.AttachmentProxy;
 import org.martus.common.clientside.UiBasicLocalization;
 import org.martus.swing.ParagraphLayout;
@@ -75,12 +75,12 @@ public class UiAttachmentEditor extends JPanel
 		Box hbox = Box.createHorizontalBox();
 		Box vbox = Box.createVerticalBox();
 
-		JScrollPane scrollPane = new JScrollPane(attachmentTable);
+		UiBasicLocalization localization = mainWindowToUse.getLocalization();
+		UiScrollPane scrollPane = new UiScrollPane(attachmentTable, localization.getComponentOrientation());
 		scrollPane.getHorizontalScrollBar().setFocusable(false);
 		scrollPane.getVerticalScrollBar().setFocusable(false);
 		vbox.add(scrollPane);
 
-		UiBasicLocalization localization = mainWindowToUse.getLocalization();
 		JButton add = new JButton(localization.getButtonLabel("addattachment"));
 	
 		add.addFocusListener(new UiFocusListener(this));		

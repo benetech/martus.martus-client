@@ -44,7 +44,6 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JList;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.border.EmptyBorder;
@@ -56,6 +55,7 @@ import javax.swing.text.DefaultHighlighter;
 import javax.swing.text.DefaultHighlighter.DefaultHighlightPainter;
 
 import org.martus.client.swingui.UiMainWindow;
+import org.martus.client.swingui.UiScrollPane;
 import org.martus.common.clientside.UiBasicLocalization;
 import org.martus.swing.UiWrappedTextArea;
 import org.martus.swing.Utilities;
@@ -93,8 +93,8 @@ public class UiDisplayHelpDlg extends JDialog
 		msgArea.addKeyListener(new TabToOkButton());
 		msgArea.setRows(14);
 		msgArea.setColumns(80);
-		msgAreaScrollPane = new JScrollPane(msgArea, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
-				JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+		msgAreaScrollPane = new UiScrollPane(msgArea, UiScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
+				UiScrollPane.HORIZONTAL_SCROLLBAR_NEVER,localization.getComponentOrientation());
 
 		Vector messageTOC = getFileVectorContents(fileStreamToc);
 		if(messageTOC != null)
@@ -102,8 +102,8 @@ public class UiDisplayHelpDlg extends JDialog
 			tocList = new JList(messageTOC);
 			tocList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 			tocList.addListSelectionListener(new ListHandler());
-			JScrollPane tocMsgAreaScrollPane = new JScrollPane(tocList, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
-					JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+			UiScrollPane tocMsgAreaScrollPane = new UiScrollPane(tocList, UiScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
+					UiScrollPane.HORIZONTAL_SCROLLBAR_NEVER, localization.getComponentOrientation());
 			tocMsgAreaScrollPane.setPreferredSize(new Dimension(580, 100));
 			helpPanel.add(tocMsgAreaScrollPane);
 			tocList.setSelectedIndex(0);
@@ -318,7 +318,7 @@ public class UiDisplayHelpDlg extends JDialog
 	JButton close;
 	JList tocList;
 	UiWrappedTextArea msgArea;
-	JScrollPane msgAreaScrollPane;
+	UiScrollPane msgAreaScrollPane;
 	BasicTextUI.BasicHighlighter highliter;
 	int previouslyFoundIndex;
 	UiMainWindow mainWindow;

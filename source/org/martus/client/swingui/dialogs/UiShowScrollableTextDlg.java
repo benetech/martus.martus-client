@@ -39,10 +39,10 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 
 import org.martus.client.swingui.UiMainWindow;
+import org.martus.client.swingui.UiScrollPane;
 import org.martus.common.clientside.Localization;
 import org.martus.common.clientside.UiBasicLocalization;
 import org.martus.swing.UiWrappedTextArea;
@@ -83,8 +83,8 @@ public class UiShowScrollableTextDlg extends JDialog implements ActionListener
 			details = new UiWrappedTextArea(TokenReplacement.replaceTokens(text, tokenReplacement), 85);
 			Rectangle rect = details.getVisibleRect();
 			details.setEditable(false);
-			JScrollPane detailScrollPane = new JScrollPane(details, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
-					JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+			UiScrollPane detailScrollPane = new UiScrollPane(details, UiScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
+					UiScrollPane.HORIZONTAL_SCROLLBAR_NEVER, localization.getComponentOrientation());
 			detailScrollPane.setPreferredSize(new Dimension(rect.x, 400));		
 
 			JPanel panel = new JPanel();

@@ -23,24 +23,33 @@ Software Foundation, Inc., 59 Temple Place - Suite 330,
 Boston, MA 02111-1307, USA.
 
 */
-package org.martus.client.swingui.fields;
+package org.martus.client.swingui;
 
+import java.awt.Component;
 import java.awt.ComponentOrientation;
-import org.martus.common.GridFieldSpec;
+import javax.swing.JScrollPane;
 
-public class UiGridViewer extends UiGrid
+
+public class UiScrollPane extends JScrollPane
 {
-	public UiGridViewer(GridFieldSpec fieldSpec, ComponentOrientation orientation)
+	public UiScrollPane(ComponentOrientation orientation)
 	{
-		super(fieldSpec, orientation);
-		table.resizeTable();
-		table.setEnabled(false);
-	}
-
-	public void setText(String newText)
-	{
-		super.setText(newText);
-		table.resizeTable();
+		this(null, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED, orientation);
 	}
 	
+	public UiScrollPane(Component view, ComponentOrientation orientation)
+	{
+		this(view, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED, orientation);
+	}
+
+	public UiScrollPane(int vsbPolicy, int hsbPolicy, ComponentOrientation orientation)
+	{
+		this(null, vsbPolicy, hsbPolicy, orientation);
+	}
+
+	public UiScrollPane(Component view, int vsbPolicy, int hsbPolicy, ComponentOrientation orientation)
+	{
+		super(view, vsbPolicy, hsbPolicy);
+		setComponentOrientation(orientation);
+	}
 }

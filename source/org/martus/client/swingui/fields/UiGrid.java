@@ -27,9 +27,9 @@ package org.martus.client.swingui.fields;
 
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.ComponentOrientation;
 
 import javax.swing.JComponent;
-import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
@@ -38,6 +38,7 @@ import javax.swing.border.LineBorder;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableModel;
 
+import org.martus.client.swingui.UiScrollPane;
 import org.martus.common.GridFieldSpec;
 import org.martus.swing.UiTable;
 
@@ -45,7 +46,7 @@ import org.martus.swing.UiTable;
 public class UiGrid extends UiField
 {
 
-	public UiGrid(GridFieldSpec fieldSpec)
+	public UiGrid(GridFieldSpec fieldSpec, ComponentOrientation orientation)
 	{
 		super();
 		model = new GridTableModel(fieldSpec);
@@ -54,7 +55,7 @@ public class UiGrid extends UiField
 		table.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
 		table.setShowGrid(true);
 		table.changeSelection(0, 1, false, false);		
-		widget = new JScrollPane(table);
+		widget = new UiScrollPane(table, orientation);
 	}	
 	
 	class GridTable extends UiTable
@@ -138,7 +139,7 @@ public class UiGrid extends UiField
 		}
 	}
 
-	JScrollPane widget;
+	UiScrollPane widget;
 	UiTable table;
 	GridTableModel model;
 }

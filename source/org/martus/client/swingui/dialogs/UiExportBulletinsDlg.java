@@ -32,18 +32,16 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
 import java.util.Vector;
-
 import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JList;
-import javax.swing.JScrollPane;
-
-import org.martus.client.core.ClientBulletinStore;
 import org.martus.client.core.BulletinXmlExporter;
+import org.martus.client.core.ClientBulletinStore;
 import org.martus.client.swingui.UiMainWindow;
+import org.martus.client.swingui.UiScrollPane;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.bulletin.BulletinConstants;
 import org.martus.common.clientside.UiBasicLocalization;
@@ -83,9 +81,9 @@ public class UiExportBulletinsDlg extends JDialog implements ActionListener
 		
 		String[] titles = extractTitles(mainWindow, bulletins);
 		JList bulletinList = new JList(titles);
-		JScrollPane tocMsgAreaScrollPane = new JScrollPane(bulletinList,
-				JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
-				JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+		UiScrollPane tocMsgAreaScrollPane = new UiScrollPane(bulletinList,
+				UiScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
+				UiScrollPane.HORIZONTAL_SCROLLBAR_NEVER, localization.getComponentOrientation());
 		tocMsgAreaScrollPane.setPreferredSize(new Dimension(580, 100));
 		
 		Box upperStuff = Box.createVerticalBox();

@@ -28,6 +28,7 @@ package org.martus.client.swingui.bulletincomponent;
 
 import java.io.File;
 
+import org.martus.client.swingui.UiLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.fields.UiAttachmentEditor;
 import org.martus.client.swingui.fields.UiBoolEditor;
@@ -89,8 +90,9 @@ public class UiBulletinComponentEditorSection extends UiBulletinComponentDataSec
 
 	public UiField createGridField(GridFieldSpec fieldSpec)
 	{
-		fieldSpec.setColumnZeroLabel(mainWindow.getLocalization().getFieldLabel("ColumnGridRowNumber"));
-		return new UiGridEditor(fieldSpec);
+		UiLocalization localization = mainWindow.getLocalization();
+		fieldSpec.setColumnZeroLabel(localization.getFieldLabel("ColumnGridRowNumber"));
+		return new UiGridEditor(fieldSpec, localization.getComponentOrientation());
 	}
 	
 	public void addAttachment(AttachmentProxy a)

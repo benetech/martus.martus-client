@@ -32,11 +32,11 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
-import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 
 import org.martus.client.core.ConfigInfo;
 import org.martus.client.swingui.UiMainWindow;
+import org.martus.client.swingui.UiScrollPane;
 import org.martus.common.clientside.UiBasicLocalization;
 import org.martus.swing.ParagraphLayout;
 import org.martus.swing.UiTextArea;
@@ -66,8 +66,8 @@ public class UiContactInfoDlg extends JDialog implements ActionListener
 		address = new UiTextArea(5, 50, localization.getComponentOrientation());
 		address.setLineWrap(true);
 		address.setWrapStyleWord(true);
-		JScrollPane addressScrollPane = new JScrollPane(address, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
-				JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+		UiScrollPane addressScrollPane = new UiScrollPane(address, UiScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
+				UiScrollPane.HORIZONTAL_SCROLLBAR_NEVER,localization.getComponentOrientation());
 
 		source.setText(info.getAuthor());
 		organization.setText(info.getOrganization());

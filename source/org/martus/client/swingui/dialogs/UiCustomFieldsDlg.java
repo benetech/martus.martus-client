@@ -36,12 +36,12 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.border.EmptyBorder;
 
 import org.martus.client.swingui.UiLocalization;
 import org.martus.client.swingui.UiMainWindow;
+import org.martus.client.swingui.UiScrollPane;
 import org.martus.common.clientside.Localization;
 import org.martus.swing.UiTextArea;
 import org.martus.swing.UiWrappedTextArea;
@@ -63,8 +63,8 @@ public class UiCustomFieldsDlg extends JDialog
 		text.setText(xmlFieldSpecs);
 		text.setLineWrap(true);
 		text.setWrapStyleWord(true);
-		JScrollPane textPane = new JScrollPane(text, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
-										JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+		UiScrollPane textPane = new UiScrollPane(text, UiScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
+				UiScrollPane.HORIZONTAL_SCROLLBAR_NEVER, localization.getComponentOrientation());
 		textPane.getVerticalScrollBar().setFocusable(false);
 
 		JButton ok = new JButton(localization.getButtonLabel("input" + baseTag + "ok"));

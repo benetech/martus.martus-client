@@ -29,18 +29,19 @@ package org.martus.client.swingui.bulletincomponent;
 import java.io.IOException;
 
 import javax.swing.JComponent;
-import javax.swing.JScrollPane;
 import javax.swing.JViewport;
 
 import org.martus.client.swingui.UiMainWindow;
+import org.martus.client.swingui.UiScrollPane;
 import org.martus.common.bulletin.Bulletin;
 
-public class UiBulletinPreviewPane extends JScrollPane
+public class UiBulletinPreviewPane extends UiScrollPane
 {
     public UiBulletinPreviewPane(UiMainWindow mainWindow)
 	{
-		view = new UiBulletinView(mainWindow);
-
+    	super(mainWindow.getLocalization().getComponentOrientation());
+		
+    	view = new UiBulletinView(mainWindow);
 		getViewport().setScrollMode(JViewport.SIMPLE_SCROLL_MODE);
 		getViewport().add(view);
 	}

@@ -32,7 +32,6 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.AbstractAction;
 import javax.swing.JMenuItem;
-import javax.swing.JScrollPane;
 import javax.swing.JViewport;
 import javax.swing.tree.TreePath;
 import org.martus.client.core.BulletinFolder;
@@ -40,11 +39,13 @@ import org.martus.client.core.ClientBulletinStore;
 import org.martus.client.swingui.UiLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.UiPopupMenu;
+import org.martus.client.swingui.UiScrollPane;
 
-public class UiFolderTreePane extends JScrollPane
+public class UiFolderTreePane extends UiScrollPane
 {
 	public UiFolderTreePane(UiMainWindow mainWindow)
 	{
+		super(mainWindow.getLocalization().getComponentOrientation());
 		parent = mainWindow;
 		localization = mainWindow.getLocalization();
 		store = parent.getStore();

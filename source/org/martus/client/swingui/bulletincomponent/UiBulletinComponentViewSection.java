@@ -26,6 +26,7 @@ Boston, MA 02111-1307, USA.
 
 package org.martus.client.swingui.bulletincomponent;
 
+import org.martus.client.swingui.UiLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.fields.UiAttachmentViewer;
 import org.martus.client.swingui.fields.UiBoolViewer;
@@ -86,8 +87,9 @@ public class UiBulletinComponentViewSection extends UiBulletinComponentDataSecti
 
 	public UiField createGridField(GridFieldSpec fieldSpec)
 	{
-		fieldSpec.setColumnZeroLabel(mainWindow.getLocalization().getFieldLabel("ColumnGridRowNumber"));
-		return new UiGridViewer(fieldSpec);
+		UiLocalization localization = mainWindow.getLocalization();
+		fieldSpec.setColumnZeroLabel(localization.getFieldLabel("ColumnGridRowNumber"));
+		return new UiGridViewer(fieldSpec, localization.getComponentOrientation());
 	}
 
 	public void createAttachmentTable()

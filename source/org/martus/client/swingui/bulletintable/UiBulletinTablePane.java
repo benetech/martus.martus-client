@@ -31,23 +31,24 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 import javax.swing.JPopupMenu;
-import javax.swing.JScrollPane;
 import javax.swing.JViewport;
 
 import org.martus.client.core.BulletinFolder;
 import org.martus.client.swingui.UiMainWindow;
+import org.martus.client.swingui.UiScrollPane;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.packet.UniversalId;
 
-public class UiBulletinTablePane extends JScrollPane
+public class UiBulletinTablePane extends UiScrollPane
 {
     public UiBulletinTablePane(UiMainWindow mainWindow)
 	{
+    	super(mainWindow.getLocalization().getComponentOrientation());
 		parent = mainWindow;
 
 		table = new UiBulletinTable(parent);
 
-		setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+		setVerticalScrollBarPolicy(UiScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 		getViewport().setScrollMode(JViewport.SIMPLE_SCROLL_MODE);
 		getViewport().add(table);
 

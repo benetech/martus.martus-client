@@ -63,7 +63,6 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
 import javax.swing.SwingUtilities;
 import org.martus.client.core.BackgroundUploader;
@@ -1084,7 +1083,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		JComponent view = new JLabel(html);
 		
 		JFrame frame = new JFrame();
-		JScrollPane scroller = new JScrollPane();
+		UiScrollPane scroller = new UiScrollPane(localization.getComponentOrientation());
 		scroller.getViewport().add(view);
 		frame.getContentPane().add(scroller);
 		frame.pack();

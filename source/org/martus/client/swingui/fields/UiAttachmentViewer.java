@@ -38,19 +38,17 @@ import java.awt.dnd.DragSourceListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
-
 import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
-
 import org.martus.client.core.MartusApp;
 import org.martus.client.core.TransferableAttachmentList;
+import org.martus.client.swingui.UiLocalization;
 import org.martus.client.swingui.UiMainWindow;
+import org.martus.client.swingui.UiScrollPane;
 import org.martus.common.bulletin.AttachmentProxy;
 import org.martus.common.bulletin.BulletinSaver;
-import org.martus.common.clientside.UiBasicLocalization;
 import org.martus.common.database.Database;
 import org.martus.swing.ParagraphLayout;
 import org.martus.swing.UiFileChooser;
@@ -74,13 +72,10 @@ public class UiAttachmentViewer extends JPanel  implements DragGestureListener, 
 
 		Box buttonBox = Box.createHorizontalBox();
 		Box vbox = Box.createVerticalBox();
-		attachmentPane = new JScrollPane(attachmentTable);
-		attachmentPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-		attachmentPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_NEVER);
+		UiLocalization localization = mainWindowToUse.getLocalization();
 
+		attachmentPane = new UiScrollPane(attachmentTable, UiScrollPane.VERTICAL_SCROLLBAR_NEVER, UiScrollPane.HORIZONTAL_SCROLLBAR_NEVER, localization.getComponentOrientation());
 		vbox.add(attachmentPane);
-
-		UiBasicLocalization localization = mainWindowToUse.getLocalization();
 
 		saveButton = new JButton(localization.getButtonLabel("saveattachment"));
 		saveButton.addActionListener(new SaveHandler());
@@ -289,7 +284,7 @@ public class UiAttachmentViewer extends JPanel  implements DragGestureListener, 
 	UiTable attachmentTable;
 	public JButton saveButton;
 	public JButton viewButton;
-	JScrollPane attachmentPane;
+	UiScrollPane attachmentPane;
 
 	private static File lastAttachmentSaveDirectory;
 	private DragSource dragSource = DragSource.getDefaultDragSource();

@@ -40,7 +40,6 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
@@ -53,6 +52,7 @@ import javax.swing.table.TableModel;
 
 import org.martus.client.core.MartusApp;
 import org.martus.client.swingui.UiMainWindow;
+import org.martus.client.swingui.UiScrollPane;
 import org.martus.common.HQKey;
 import org.martus.common.HQKeys;
 import org.martus.common.HQKeys.HQsException;
@@ -127,7 +127,7 @@ public class UiConfigureHQs extends JDialog
 			table.setRowSelectionInterval(0,0);
 		
 		table.resizeTable(DEFAULT_VIEABLE_ROWS);
-		JScrollPane scroller = new JScrollPane(table);
+		UiScrollPane scroller = new UiScrollPane(table, localization.getComponentOrientation());
 		
 		panel.add(scroller);
 		panel.add(new JLabel(" "));
