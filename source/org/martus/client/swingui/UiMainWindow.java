@@ -63,6 +63,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
+import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
 import javax.swing.SwingUtilities;
 import javax.swing.filechooser.FileFilter;
@@ -894,9 +895,12 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		JComponent view = new JLabel(html);
 		
 		JFrame frame = new JFrame();
-		frame.getContentPane().add(view);
+		JScrollPane scroller = new JScrollPane();
+		scroller.getViewport().add(view);
+		frame.getContentPane().add(scroller);
 		frame.pack();
-		
+		//If you want to see what is being printed uncomment out this next line
+		//frame.show();
 		PrintPageFormat format = new PrintPageFormat();
 		JComponentVista vista = new JComponentVista(view, format);
 		PrinterJob job = PrinterJob.getPrinterJob();
