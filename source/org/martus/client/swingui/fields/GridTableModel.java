@@ -38,6 +38,13 @@ import org.xml.sax.SAXException;
 
 public class GridTableModel extends DefaultTableModel
 {
+	
+	public int getColumnCount() 
+	{
+		int realDataColumnCount = gridData.getColumnCount();
+		return realDataColumnCount + EXTRA_COLUMN;
+	}
+
 	public boolean isCellEditable(int row, int column)
 	{
 		if(column == 0)
@@ -51,7 +58,7 @@ public class GridTableModel extends DefaultTableModel
 		columnLabels.add(emptyColumnLabel);
 		columnLabels.addAll(fieldSpec.getAllColumnLabels());
 		setColumnIdentifiers(columnLabels);
-		gridData = new GridData(fieldSpec.getColumnCount() + EXTRA_COLUMN);
+		gridData = new GridData(fieldSpec.getColumnCount());
 	}
 	
 	public void addEmptyRow()
@@ -93,6 +100,6 @@ public class GridTableModel extends DefaultTableModel
 		gridData.setFromXml(xmlText);
 		fireTableDataChanged();
 	}
-	public int EXTRA_COLUMN = 1;
+	private int EXTRA_COLUMN = 1;
 	private GridData gridData;
 }

@@ -129,6 +129,7 @@ public class BulletinHtmlGenerator
 			{
 				GridFieldSpec grid = (GridFieldSpec)spec;
 				value = "<table border='1'><tr>";
+				value += "<th></th>";
 				for(int i = 0; i < grid.getColumnCount(); ++i)
 				{
 					value += "<th>";
@@ -143,6 +144,9 @@ public class BulletinHtmlGenerator
 					for(int r =  0; r<gridData.getRowCount(); ++r)
 					{
 						value += "<tr>";
+						value +="<td>";
+						value += Integer.toString(r+1);
+						value +="</td>";
 						for(int c = 0; c<gridData.getColumnCount(); ++c)
 						{
 							value +="<td>";
