@@ -629,7 +629,7 @@ public class EnglishStrings
 "field:notifyErrorBackingUpKeySharecause=An unexpected error occured in generating the individual key share files.",
 "field:notifyRecoveryProcessKeySharecause=You will now have to provide #N# out of the #M# files you previously saved when you backed up your keypair.",
 "field:notifyRecoveredKeyShareSucceededNewUserNamePasswordRequiredcause=Recovery of keypair succeeded!  You now have to enter a user name and password.",
-"field:notifyRecoveryOfKeyShareCompletecause=You have successfully restored your keypair from your keyshare files.  It is very important that you now re-scatter your key share.  We also recommend you backup your keypair as an encrypted file, you do not need to recreate the multi-file keyshare.",
+"field:notifyRecoveryOfKeyShareCompletecause=You have successfully restored your keypair from your secret share files.  It is very important that you now re-distribute your secret share.  We also recommend you backup your keypair as an encrypted file, though you do not need to recreate the multi-file secret share.",
 "field:notifyVerifyKeyPairSharePassedcause=Verification of all disks passed.",
 "field:notifyOperationCompletedcause=Operation completed.",
 "field:notifycontactRejectedcause=The current Martus Server has refused to accept your contact info",
