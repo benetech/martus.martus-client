@@ -83,42 +83,51 @@ public class UiBulletinEditor extends UiBulletinComponent
 				return true;
 			}																
 		}		
+				
+		if (isPublicAttachmentModified())	
+			return true;						
+		
+		if (isPrivateAttachmentModified())
+			return true;
 			
-		return contentDataSectionHasChanged();
+		return false;			
 	}	
 	
-	private boolean contentDataSectionHasChanged()
-	{	
+	private boolean isPublicAttachmentModified()
+	{
 		UiBulletinComponentEditorSection section = (UiBulletinComponentEditorSection)publicStuff;
 		AttachmentProxy[] publicAttachments = section.attachmentEditor.getAttachments();
 		AttachmentProxy[] currentAttachments = currentBulletin.getPublicAttachments();
-	
-		if (contentDataSection(currentAttachments, publicAttachments))
+		
+		if (isAnyAttachmentModified(currentAttachments, publicAttachments))
 			return true;
-	
-		section = (UiBulletinComponentEditorSection)privateStuff;
-		AttachmentProxy[] privateAttachments = section.attachmentEditor.getAttachments();
-		currentAttachments = currentBulletin.getPrivateAttachments();	
-			
-		if (contentDataSection(currentAttachments, privateAttachments))
-			return true;
-
-		return false;		
+		return false;
 	}
-	
-	private boolean contentDataSection(AttachmentProxy[] proxy, AttachmentProxy[]rawProxy)
-	{					
-		if (proxy.length != rawProxy.length)						
+
+	private boolean isPrivateAttachmentModified()
+	{
+		UiBulletinComponentEditorSection section = (UiBulletinComponentEditorSection)privateStuff;
+		AttachmentProxy[] currentAttachments = currentBulletin.getPrivateAttachments();
+		AttachmentProxy[] privateAttachments = section.attachmentEditor.getAttachments();	
+			
+		if (isAnyAttachmentModified(currentAttachments, privateAttachments))
 			return true;
 		
-		for(int aIndex = 0; aIndex < proxy.length; ++aIndex)
-		{									
-			String rawLocalId = rawProxy[aIndex].getUniversalId().getLocalId();
-			String localId = proxy[aIndex].getUniversalId().getLocalId();			
-						
-			if (!rawLocalId.equals(localId))
-				return true;														
+		return false;
+	}
 
+	private boolean isAnyAttachmentModified(AttachmentProxy[] oldProxies, AttachmentProxy[] newProxies)
+	{					
+		if (oldProxies.length != newProxies.length)						
+			return true;
+		
+		for(int aIndex = 0; aIndex < oldProxies.length; ++aIndex)
+		{									
+			String newLocalId = newProxies[aIndex].getUniversalId().getLocalId();
+			String oldLocalId = oldProxies[aIndex].getUniversalId().getLocalId();			
+						
+			if (!newLocalId.equals(oldLocalId))
+				return true;														
 		}		
 		return false;	
 	}		
