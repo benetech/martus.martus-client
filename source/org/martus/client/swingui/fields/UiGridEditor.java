@@ -35,11 +35,14 @@ public class UiGridEditor extends UiGrid
 	public UiGridEditor()
 	{
 		super(3);
-		table.resizeTable(5);
+		table.resizeTable(DEFAULT_VIEABLE_ROWS);
+		
 		table.addKeyListener(new GridKeyListener());
 		widget.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		widget.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
 	}
+
+	
 	
 	class GridKeyListener implements KeyListener
 	{
@@ -79,4 +82,5 @@ public class UiGridEditor extends UiGrid
 			}
 		}
 	}
+	private static final int DEFAULT_VIEABLE_ROWS = 5;
 }

@@ -25,8 +25,19 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.fields;
 
+import java.awt.Color;
+import java.awt.Component;
+
 import javax.swing.JComponent;
 import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.JTextField;
+import javax.swing.ListSelectionModel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.border.LineBorder;
+import javax.swing.event.ChangeEvent;
+import javax.swing.table.TableCellRenderer;
+import javax.swing.table.TableModel;
 
 import org.martus.swing.UiTable;
 
@@ -38,12 +49,54 @@ public class UiGrid extends UiField
 	{
 		super();
 		model = new GridTableModel(columns);
-		table = new UiTable(model);
+		table = new GridTable(model);
 		table.setColumnSelectionAllowed(false);
+		table.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
 		table.setShowGrid(true);
-	
 		widget = new JScrollPane(table);
 	}	
+	
+	class GridTable extends UiTable
+	{
+		public GridTable(TableModel model)
+		{
+			super(model);
+		}
+		
+		public TableCellRenderer getCellRenderer(int row, int column)
+		{
+			//TODO Optimize: don't create a new renderer each time
+			return new myCellRenderer();
+		}
+	}
+	
+	class myCellRenderer implements TableCellRenderer
+	{
+		public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column)
+		{
+			JTextField cell = new JTextField((String)value);
+			cell.setBorder(new EmptyBorder(0,0,0,0));
+
+			if(hasFocus)
+			{
+				cell.setBorder(new LineBorder(Color.BLACK,1));
+			}
+			else
+			{
+				if(isSelected)
+				{
+//					cell.setBackground(new Color(0,0,0));
+				}
+				else
+				{
+	//				cell.setBackground(new Color(255,255,255));
+				}
+			}
+				
+			return cell;
+		}
+	}
+
 	
 	public JComponent getComponent()
 	{
@@ -52,6 +105,8 @@ public class UiGrid extends UiField
 	
 	public String getText()
 	{
+		if(table.isEditing())
+			table.editingStopped(new ChangeEvent(this));
 		return model.getXmlRepresentation();
 	}
 
