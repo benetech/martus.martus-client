@@ -141,7 +141,9 @@ public class BulletinXmlExporter
 			{
 				GridFieldSpec grid = (GridFieldSpec)spec;
 				String columnLabels = grid.getDetailsXml();
-				rawFieldData.insert(0, columnLabels);			
+				String gridData = rawFieldData + columnLabels;
+				writeElementDirect(dest, getXmlEncodedTagWithData(TAG, tag), getXmlEncodedTagWithData(LABEL, spec.getLabel()), MartusXml.getTagWithData(VALUE, gridData));
+				continue;
 			}
 			
 			if(spec.getType() == FieldSpec.TYPE_DATERANGE)
@@ -157,20 +159,37 @@ public class BulletinXmlExporter
 		}
 		
 	}
+	
+	private static String getXmlEncodedTagWithData(String tagName, String data)
+	{
+		return MartusXml.getTagWithData(tagName, MartusUtilities.getXmlEncoded(data));
+	}
 
 	static void writeElement(Writer dest, String tag, String rawLabel, String rawFieldData) throws IOException
-	{						
-		dest.write(MartusXml.getTagStartWithNewline("Field"));	
-		dest.write(MartusXml.getTagWithData(TAG, MartusUtilities.getXmlEncoded(tag)));
-			
+	{	
+		String xmlTagAndValue = "";
+		String xmlLabelAndValue = "";
+		String xmlValueAndFieldData = "";
+		
+		xmlTagAndValue = getXmlEncodedTagWithData(TAG, tag);
+
 		if (rawLabel.length() > 0)
-			dest.write(MartusXml.getTagWithData(LABEL, MartusUtilities.getXmlEncoded(rawLabel)));
+			xmlLabelAndValue = getXmlEncodedTagWithData(LABEL, rawLabel);
 		
 		if (rawFieldData.length() > 0)
-			dest.write(MartusXml.getTagWithData(VALUE, MartusUtilities.getXmlEncoded(rawFieldData)));
-				
-		dest.write(MartusXml.getTagEnd(MartusXml.tagField));		
+			xmlValueAndFieldData = getXmlEncodedTagWithData(VALUE, rawFieldData);
+		writeElementDirect(dest, xmlTagAndValue, xmlLabelAndValue, xmlValueAndFieldData);		
 	}	
+	
+	static void writeElementDirect(Writer dest, String xmlEncodedTag, String xmlEncodedLabel, String xmlEncodedFieldData) throws IOException
+	{						
+		dest.write(MartusXml.getTagStartWithNewline("Field"));	
+		dest.write(xmlEncodedTag);
+		dest.write(xmlEncodedLabel);
+		dest.write(xmlEncodedFieldData);
+		dest.write(MartusXml.getTagEnd(MartusXml.tagField));		
+	}
+	
 
 	public final static String ExportedBulletinsElementName = "ExportedMartusBulletins";
 	public final static String VersionXMLElementName = "MartusBulletinExportVersion";

@@ -35,6 +35,8 @@ import org.martus.client.core.BulletinXmlExporter;
 import org.martus.client.core.ClientBulletinStore;
 import org.martus.common.CustomFields;
 import org.martus.common.FieldSpec;
+import org.martus.common.GridData;
+import org.martus.common.GridRow;
 import org.martus.common.StandardFieldSpecs;
 import org.martus.common.bulletin.AttachmentProxy;
 import org.martus.common.bulletin.Bulletin;
@@ -84,6 +86,51 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 		assertNotContains("<History>", result);
 
 		//System.out.println(result);
+	}
+	
+	public void testExportGrids() throws Exception
+	{
+		CustomFields fields = new CustomFields(StandardFieldSpecs.getDefaultPublicFieldSpecs());
+		String gridTag = "MyGridTag";
+		String xmlFieldType = "<CustomFields>" +
+				"<Field type='GRID'>" +
+				"<Tag>"+gridTag+"</Tag>" +
+				"<Label>Victim Information</Label>" +
+				"<GridSpecDetails>" +
+					"<Column><Label>Name of Victim</Label></Column>" +
+					"<Column><Label>Victim Age</Label></Column>" +
+				"</GridSpecDetails>" +
+				"</Field></CustomFields>";
+		FieldSpec newSpec = CustomFields.parseXml(xmlFieldType)[0]; 
+		fields.add(newSpec);				
+		
+		Bulletin b = new Bulletin(store.getSignatureGenerator(), fields.getSpecs(), StandardFieldSpecs.getDefaultPrivateFieldSpecs());
+		b.setAllPrivate(false);
+		GridData gridData = new GridData(2);
+		GridRow row = new GridRow(2);
+		row.setCellText(0, "rowData1");
+		row.setCellText(1, "rowData2");
+		gridData.addRow(row);
+		b.set(gridTag, gridData.getXmlRepresentation());
+		
+		Vector list = new Vector();
+		list.add(b);
+		String result = doExport(list, false);
+		assertContains("<Field>\n" +
+				"<Tag>MyGridTag</Tag>\n" +
+				"<Label>Victim Information</Label>\n" +
+				"<Value><GridData columns='2'>\n" +
+				"<Row>\n" +
+				"<Column>rowData1</Column>\n" +
+				"<Column>rowData2</Column>\n" +
+				"</Row>\n" +
+				"</GridData>\n" +
+				"<GridSpecDetails>\n" +
+				"<Column><Label>Name of Victim</Label></Column>\n" +
+				"<Column><Label>Victim Age</Label></Column>\n" +
+				"</GridSpecDetails>\n" +
+				"</Value>\n" +
+				"</Field>", result);
 	}
 	
 	public void testExportHistory() throws Exception
