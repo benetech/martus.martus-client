@@ -47,6 +47,9 @@ public class TestCustomFieldSpecValidator extends TestCaseEnhanced
 	public void testAllValid() throws Exception
 	{
 		FieldSpec[] specs = StandardFieldSpecs.getDefaultPublicFieldSpecs();
+		String tag = "A.-_AllValid0123456789";
+		String label = "my Label";
+		specs = addFieldSpec(specs, LegacyCustomFields.createFromLegacy(tag+","+label));
 		CustomFieldSpecValidator checker = new CustomFieldSpecValidator(specs);
 		assertTrue("not valid?", checker.isValid());
 	}
@@ -58,6 +61,30 @@ public class TestCustomFieldSpecValidator extends TestCaseEnhanced
 		assertFalse("valid?", checker.isValid());
 		CustomFieldError error = (CustomFieldError)checker.getAllErrors().get(0);
 		assertEquals("Incorrect Error code?", CustomFieldError.CODE_NULL_SPECS, error.getCode());
+	}
+	
+	public void testIllegalTagCharacters() throws Exception
+	{
+		FieldSpec[] specs = StandardFieldSpecs.getDefaultPublicFieldSpecs();
+		String label = "anything";
+		String[] variousIllegalTags = {"a tag", "a&amp;b", "a=b", "a'b", ".a"};
+		for(int i=0; i < variousIllegalTags.length; ++i)
+		{
+			String thisTag = variousIllegalTags[i];
+			FieldSpec thisSpec = FieldSpec.createCustomField(thisTag, label, FieldSpec.TYPE_NORMAL);
+			specs = addFieldSpec(specs, thisSpec);
+		}
+		CustomFieldSpecValidator checker = new CustomFieldSpecValidator(specs);
+		assertFalse("valid?", checker.isValid());
+		Vector errors = checker.getAllErrors();
+		assertEquals("didn't catch all errors?", variousIllegalTags.length, errors.size());
+		for(int i=0; i < errors.size(); ++i)
+		{
+			CustomFieldError error = (CustomFieldError)errors.get(i);
+			assertEquals("wrong code?", CustomFieldError.CODE_ILLEGAL_TAG, error.getCode());
+			assertEquals("wrong tag?", variousIllegalTags[i], error.getTag());
+			assertEquals("wrong label?", label, error.getLabel());
+		}
 	}
 	
 	public void testMissingRequiredFields() throws Exception

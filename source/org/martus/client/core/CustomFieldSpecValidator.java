@@ -44,6 +44,7 @@ public class CustomFieldSpecValidator
 		}
 		
 		checkForRequiredFields(specsToCheck);
+		checkForIllegalTagCharacters(specsToCheck);
 		checkForBlankTags(specsToCheck);
 		checkForDuplicateFields(specsToCheck);
 		checkForMissingCustomLabels(specsToCheck);
@@ -90,6 +91,39 @@ public class CustomFieldSpecValidator
 			if(tag.length() == 0)
 				errors.add(CustomFieldError.errorBlankTag(thisSpec.getLabel(), getType(thisSpec)));				
 		}
+	}
+	
+	private void checkForIllegalTagCharacters(FieldSpec[] specsToCheck)
+	{
+		for (int i = 0; i < specsToCheck.length; i++)
+		{
+			FieldSpec thisSpec = specsToCheck[i];
+			boolean allValid = true;
+			String thisTag = thisSpec.getTag();
+			if(thisTag.length() < 1)
+				continue;
+			char[] tagChars = thisTag.toCharArray();
+			if(!Character.isLetterOrDigit(tagChars[0]))
+				allValid = false;
+			for(int j = 1; j < tagChars.length; ++j)
+			{
+				if(!isValidTagCharacter(tagChars[j]))
+					allValid = false;
+			}
+			if(!allValid)
+				errors.add(CustomFieldError.errorIllegalTag(thisTag, thisSpec.getLabel(), getType(thisSpec)));
+		}
+	}
+	
+	private boolean isValidTagCharacter(char c)
+	{
+		if(c > 128)
+			return true;
+		if(Character.isLetterOrDigit(c))
+			return true;
+		if(c == '-' || c == '_' || c == '.')
+			return true;
+		return false;
 	}
 	
 	private void checkForDuplicateFields(FieldSpec[] specsToCheck)

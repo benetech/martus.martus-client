@@ -43,6 +43,11 @@ public class CustomFieldError
 		return new CustomFieldError(CODE_MISSING_TAG, UNUSED_FIELD, label, type);
 	}
 	
+	static public CustomFieldError errorIllegalTag(String tag, String label, String type)
+	{
+		return new CustomFieldError(CODE_ILLEGAL_TAG, tag, label, type);
+	}
+	
 	
 	static public CustomFieldError errorDuplicateFields(String tag, String label, String type)
 	{
@@ -102,6 +107,7 @@ public class CustomFieldError
 	static public final String CODE_UNKNOWN_TYPE = "104";
 	static public final String CODE_LABEL_STANDARD_FIELD = "105";
 	static public final String CODE_PARSE_XML = "106";
+	static public final String CODE_ILLEGAL_TAG = "107";
 	static public final String CODE_NULL_SPECS = "200";
 	
 	static private final String UNUSED_FIELD = "";
