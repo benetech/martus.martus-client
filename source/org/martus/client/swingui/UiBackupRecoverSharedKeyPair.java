@@ -89,8 +89,8 @@ public class UiBackupRecoverSharedKeyPair
 
 	public void backupKeyPairToMultipleUnencryptedFiles() 
 	{
-		String message = localization.getFieldLabel("BackupKeyPairToMultipleUnencryptedFilesInformation");
-		mainWindow.displayScrollableMessage("BackupKeyPairToMultipleUnencryptedFilesInformation", message, "Continue", getTokenReplacement());
+		String message = localization.getFieldLabel("BackupKeyPairToSecretShareInformation");
+		mainWindow.displayScrollableMessage("BackupKeyPairToSecretShareInformation", message, "Continue", getTokenReplacement());
 
 		String defaultFileName = getDefaultKeyShareFileName();
 		if(defaultFileName == null)
@@ -110,8 +110,8 @@ public class UiBackupRecoverSharedKeyPair
 		if(!writeAndVerifyKeySharesToDisks(defaultFileName, keyShareBundles, driveToUse))
 			return;
 
-		message = localization.getFieldLabel("BackupKeyShareCompleteInformation");
-		mainWindow.displayScrollableMessage("BackupKeyShareCompleteInformation", message, "ok", getTokenReplacement());
+		message = localization.getFieldLabel("BackupSecretShareCompleteInformation");
+		mainWindow.displayScrollableMessage("BackupSecretShareCompleteInformation", message, "ok", getTokenReplacement());
 	}
 
 	private Vector recoverMinimumKeySharesNeededFromFiles(File firstShareFile) 

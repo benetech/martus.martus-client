@@ -1379,7 +1379,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 
 	public void askToBackupKeyPareToSecretShareFiles()
 	{
-		if(confirmDlg(this,"BackupKeyPairMultiple", UiBackupRecoverSharedKeyPair.getTokenReplacement()))
+		if(confirmDlg(this,"BackupKeyPairSecretShare", UiBackupRecoverSharedKeyPair.getTokenReplacement()))
 		{
 			UiBackupRecoverSharedKeyPair backup = new UiBackupRecoverSharedKeyPair(this);
 			backup.backupKeyPairToMultipleUnencryptedFiles();

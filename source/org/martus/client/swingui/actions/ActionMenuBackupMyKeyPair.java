@@ -42,8 +42,8 @@ public class ActionMenuBackupMyKeyPair extends UiMenuAction
 	{
 		if(!mainWindow.reSignIn())
 			return;
-		String message =  mainWindow.getLocalization().getFieldLabel("BackupKeyPairGeneralInformation");
-		mainWindow.displayScrollableMessage("BackupKeyPairGeneralInformation", message, "Continue", UiBackupRecoverSharedKeyPair.getTokenReplacement());
+		String message =  mainWindow.getLocalization().getFieldLabel("BackupKeyPairGeneralInfo");
+		mainWindow.displayScrollableMessage("BackupKeyPairGeneralInfo", message, "Continue", UiBackupRecoverSharedKeyPair.getTokenReplacement());
 		
 		mainWindow.doBackupKeyPairToSingleEncryptedFile();
 		mainWindow.askToBackupKeyPareToSecretShareFiles();
