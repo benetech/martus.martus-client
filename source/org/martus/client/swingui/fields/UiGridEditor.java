@@ -38,8 +38,9 @@ public class UiGridEditor extends UiField
 		super();
 		GridTableModel model = new GridTableModel(5,3);
 		table = new UiTable(model);
+		table.setColumnSelectionAllowed(false);
 		table.resizeTable();
-
+		table.setShowGrid(true);
 		widget = new JScrollPane(table);
 		widget.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		widget.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
@@ -52,7 +53,7 @@ public class UiGridEditor extends UiField
 	
 	public String getText()
 	{
-		return widget.toString();
+		return "";
 	}
 	
 	public void setText(String newText)

@@ -41,7 +41,9 @@ public class UiGridViewer extends UiField
 		table = new UiTable(model);
 		table.resizeTable();
 		table.setEnabled(false);
-		
+		table.setColumnSelectionAllowed(false);
+		table.setShowGrid(true);
+
 		widget = new JScrollPane(table);
 		widget.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 		widget.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_NEVER);
@@ -55,7 +57,7 @@ public class UiGridViewer extends UiField
 	
 	public String getText()
 	{
-		return widget.toString();
+		return "";
 	}
 	
 	public void setText(String newText)
