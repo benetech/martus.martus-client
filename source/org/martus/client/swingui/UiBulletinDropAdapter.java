@@ -136,7 +136,7 @@ public abstract class UiBulletinDropAdapter implements DropTargetListener
 				if(b == null)
 					System.out.println("dropTransferableBulletin: null bulletin!!");
 				else
-					store.removeBulletinFromFolder(b, fromFolder);
+					store.removeBulletinFromFolder(fromFolder, b);
 			}
 			store.saveFolders();
 			observer.folderContentsHaveChanged(fromFolder);
@@ -311,7 +311,7 @@ public abstract class UiBulletinDropAdapter implements DropTargetListener
 			Bulletin bulletin = bulletins[i];
 			try
 			{
-				store.addBulletinToFolder(bulletin.getUniversalId(), toFolder);
+				store.addBulletinToFolder(toFolder, bulletin.getUniversalId());
 			}
 			catch (BulletinAlreadyExistsException e)
 			{

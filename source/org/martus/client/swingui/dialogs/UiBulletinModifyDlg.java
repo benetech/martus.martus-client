@@ -36,18 +36,15 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.io.IOException;
-
 import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 import javax.swing.JViewport;
-
 import org.martus.client.core.BulletinFolder;
 import org.martus.client.core.BulletinStore;
 import org.martus.client.core.EncryptionChangeListener;
 import org.martus.client.core.MartusApp;
-import org.martus.client.core.BulletinStore.BulletinAlreadyExistsException;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.bulletincomponent.UiBulletinComponent;
 import org.martus.client.swingui.bulletincomponent.UiBulletinComponentEditorSection;
@@ -211,7 +208,7 @@ public class UiBulletinModifyDlg extends JFrame implements ActionListener, Windo
 			view.copyDataToBulletin(bulletin);
 			if(userChoseSeal)
 			{
-				store.removeBulletinFromFolder(bulletin, draftOutbox);
+				store.removeBulletinFromFolder(draftOutbox, bulletin);
 				
 				bulletin.setSealed();
 				outboxToUse = store.getFolderSealedOutbox();
@@ -240,31 +237,12 @@ public class UiBulletinModifyDlg extends JFrame implements ActionListener, Windo
 
 	private void saveBulletinAndUpdateFolders(BulletinStore store, BulletinFolder outboxToUse) throws IOException, CryptoException
 	{
-		store.saveBulletin(bulletin);
+		observer.getApp().saveBulletin(bulletin, outboxToUse);
 
-		BulletinFolder discardedFolder = store.getFolderDiscarded();
-		BulletinFolder destinationFolder = store.getFolderSaved();
-
-		ensureBulletinIsInFolder(store, destinationFolder);
-		ensureBulletinIsInFolder(store, outboxToUse);
-		store.removeBulletinFromFolder(bulletin, discardedFolder);
-		store.saveFolders();
-
-		observer.folderContentsHaveChanged(destinationFolder);
-		observer.folderContentsHaveChanged(discardedFolder);
+		observer.folderContentsHaveChanged(store.getFolderSaved());
+		observer.folderContentsHaveChanged(store.getFolderDiscarded());
 		observer.selectBulletinInCurrentFolderIfExists(bulletin.getUniversalId());
 		observer.bulletinContentsHaveChanged(bulletin);
-	}
-
-	private void ensureBulletinIsInFolder(BulletinStore store, BulletinFolder destinationFolder) throws IOException
-	{
-		try
-		{
-			store.addBulletinToFolder(bulletin.getUniversalId(), destinationFolder);
-		}
-		catch (BulletinAlreadyExistsException harmlessException)
-		{
-		}
 	}
 
 	public boolean wasBulletinSaved()
@@ -362,6 +340,7 @@ public class UiBulletinModifyDlg extends JFrame implements ActionListener, Windo
 			}
 		}
 	}
+	
 
 	Bulletin bulletin;
 	UiMainWindow observer;

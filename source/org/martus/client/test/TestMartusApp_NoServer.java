@@ -109,6 +109,28 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		TRACE_END();
 	}
 	
+	public void testSaveBulletin() throws Exception
+	{
+		BulletinStore store = appWithAccount.getStore();
+		BulletinFolder outbox = store.getFolderDraftOutbox();
+		BulletinFolder discarded = store.getFolderDiscarded();
+		
+		store.getFoldersFile().delete();
+		assertFalse("couldn't delete folders?", store.getFoldersFile().exists());
+		
+		Bulletin b = appWithAccount.createBulletin();
+		appWithAccount.saveBulletin(b, outbox);
+		DatabaseKey key = DatabaseKey.createDraftKey(b.getUniversalId());
+		assertTrue("didn't save?", store.getDatabase().doesRecordExist(key));
+		assertTrue("didn't put in outbox?", outbox.contains(b));
+		assertTrue("didn't put in saved?", appWithAccount.getFolderSaved().contains(b));
+		assertTrue("didn't save folders?", store.getFoldersFile().exists());
+		
+		store.moveBulletin(b, outbox, discarded);
+		appWithAccount.saveBulletin(b, outbox);
+		assertFalse("didn't remove from discarded?", discarded.contains(b));
+	}
+	
 	public void testLoadOldCustomFieldConfigInfo() throws Exception
 	{
 		ConfigInfo infoToConvert = new ConfigInfo();

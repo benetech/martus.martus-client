@@ -120,17 +120,17 @@ public class TestBulletinStore extends TestCaseEnhanced
     	{
     		bulletins[i] = store.createEmptyBulletin();
     		store.saveBulletin(bulletins[i]);
-        	store.addBulletinToFolder(bulletins[i].getUniversalId(), outbox);
-        	store.addBulletinToFolder(bulletins[i].getUniversalId(), normal);
+        	store.addBulletinToFolder(outbox, bulletins[i].getUniversalId());
+        	store.addBulletinToFolder(normal, bulletins[i].getUniversalId());
     	}
     	
     	store.removeBulletinFromFolder(bulletins[3].getUniversalId(), normal);
     	store.removeBulletinFromFolder(bulletins[9].getUniversalId(), normal);
     	
     	BulletinFolder discarded = store.getFolderDiscarded();
-    	store.addBulletinToFolder(bulletins[3].getUniversalId(), discarded);
-    	store.addBulletinToFolder(bulletins[6].getUniversalId(), discarded);
-    	store.addBulletinToFolder(bulletins[9].getUniversalId(), discarded);
+    	store.addBulletinToFolder(discarded, bulletins[3].getUniversalId());
+    	store.addBulletinToFolder(discarded, bulletins[6].getUniversalId());
+    	store.addBulletinToFolder(discarded, bulletins[9].getUniversalId());
 
     	int expected[] = {1, 2, 4, 4, 5, 6, 7, 8, 0, 0};
     	for(int startIndex=0; startIndex < count; ++startIndex)
@@ -153,23 +153,23 @@ public class TestBulletinStore extends TestCaseEnhanced
 		store.saveBulletin(b2);
 		
 		BulletinFolder outbox = store.createFolder("*My Outbox");
-		store.addBulletinToFolder(b1.getUniversalId(), outbox);
-		store.addBulletinToFolder(b2.getUniversalId(), outbox);
+		store.addBulletinToFolder(outbox, b1.getUniversalId());
+		store.addBulletinToFolder(outbox, b2.getUniversalId());
 
 		BulletinFolder visible = store.createFolder("Other Folder");
-		store.addBulletinToFolder(b1.getUniversalId(), visible);
-		store.addBulletinToFolder(b2.getUniversalId(), visible);
+		store.addBulletinToFolder(visible, b1.getUniversalId());
+		store.addBulletinToFolder(visible, b2.getUniversalId());
 
 		assertTrue("thinks some are discarded?", store.hasAnyNonDiscardedBulletins(outbox));
 		
 		BulletinFolder discarded = store.getFolderDiscarded();
-		store.addBulletinToFolder(b1.getUniversalId(), discarded);
+		store.addBulletinToFolder(discarded, b1.getUniversalId());
 		assertTrue("2 in x but all discarded?", store.hasAnyNonDiscardedBulletins(outbox));
 
-		store.addBulletinToFolder(b2.getUniversalId(), discarded);
+		store.addBulletinToFolder(discarded, b2.getUniversalId());
 		assertTrue("all in x and discarded means discarded?", store.hasAnyNonDiscardedBulletins(outbox));
-		store.removeBulletinFromFolder(b1, visible);
-		store.removeBulletinFromFolder(b2, visible);
+		store.removeBulletinFromFolder(visible, b1);
+		store.removeBulletinFromFolder(visible, b2);
 		assertFalse("doesn't see all are discarded?", store.hasAnyNonDiscardedBulletins(outbox));
 	}
 	
@@ -190,12 +190,12 @@ public class TestBulletinStore extends TestCaseEnhanced
 		BulletinFolder outbox = store.createSystemFolder(BulletinStore.OBSOLETE_OUTBOX_FOLDER);
     	Bulletin saved = store.createEmptyBulletin();
     	store.saveBulletin(saved);
-    	store.addBulletinToFolder(saved.getUniversalId(), outbox);
+    	store.addBulletinToFolder(outbox, saved.getUniversalId());
 
     	BulletinFolder drafts = store.createSystemFolder(BulletinStore.OBSOLETE_DRAFT_FOLDER);
     	Bulletin draft = store.createEmptyBulletin();
     	store.saveBulletin(draft);
-    	store.addBulletinToFolder(draft.getUniversalId(), drafts);
+    	store.addBulletinToFolder(drafts, draft.getUniversalId());
     	
 		assertFalse("Already saved folders?", store.getFoldersFile().exists());
     	assertTrue("Migration failed?", store.migrateFolders());
@@ -457,7 +457,7 @@ public class TestBulletinStore extends TestCaseEnhanced
 		store.saveBulletin(b1);
 		f.add(b1);
 		assertEquals(true, f.contains(b1));
-		store.removeBulletinFromFolder(b1, f);
+		store.removeBulletinFromFolder(f, b1);
 		assertEquals(false, f.contains(b1));
 	}
 
@@ -605,11 +605,11 @@ public class TestBulletinStore extends TestCaseEnhanced
 		store.saveBulletin(b);
 		UniversalId id = b.getUniversalId();
 		BulletinFolder folder = store.createFolder("test");
-		store.addBulletinToFolder(id, folder);
+		store.addBulletinToFolder(folder, id);
 		assertEquals("now in folder", true, folder.contains(b));
 		try
 		{
-			store.addBulletinToFolder(id, folder);
+			store.addBulletinToFolder(folder, id);
 			fail("should have thrown exists exception");
 		}
 		catch (BulletinAlreadyExistsException expectedException)
@@ -617,7 +617,7 @@ public class TestBulletinStore extends TestCaseEnhanced
 		}
 		assertEquals("still in folder", true, folder.contains(b));
 		UniversalId bFakeId = UniversalId.createFromAccountAndPrefix("aa", "abc");
-		store.addBulletinToFolder(bFakeId, folder);
+		store.addBulletinToFolder(folder, bFakeId);
 		UniversalId badId2 = UniversalId.createDummyUniversalId();
 		assertEquals("bad bulletin", -1, folder.find(badId2));
 
@@ -877,7 +877,7 @@ public class TestBulletinStore extends TestCaseEnhanced
 		store.deleteAllData();
 		Bulletin b = store.createEmptyBulletin();
 		BulletinFolder f = store.getFolderSaved();
-		store.addBulletinToFolder(b.getUniversalId(), f);
+		store.addBulletinToFolder(f, b.getUniversalId());
 
 		store.getDatabase().deleteAllData();
 		store.clearFolder(f.getName());

@@ -314,7 +314,7 @@ public class BulletinStore
 		UniversalId id = b.getUniversalId();
 		for(int f = 0; f < getFolderCount(); ++f)
 		{
-			removeBulletinFromFolder(b, getFolder(f));
+			removeBulletinFromFolder(getFolder(f), b);
 		}
 		saveFolders();
 		removeBulletinFromStore(id);
@@ -417,7 +417,7 @@ public class BulletinStore
 		catch (BulletinAlreadyExistsException saveToIgnoreException)
 		{
 		}
-		removeBulletinFromFolder(b, f);
+		removeBulletinFromFolder(f, b);
 		if(isOrphan(b))
 			destroyBulletin(b);
 	}
@@ -678,13 +678,7 @@ public class BulletinStore
 		for (int i = 0; i < bulletinUids.size(); i++) 
 		{
 			UniversalId uid = (UniversalId)bulletinUids.get(i);
-			try
-			{
-				addBulletinToFolder(uid, folder);
-			}
-			catch (BulletinAlreadyExistsException ignoreHarmless)
-			{
-			}
+			ensureBulletinIsInFolder(folder, uid);
 		}
 	}
 
@@ -737,11 +731,11 @@ public class BulletinStore
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		removeBulletinFromFolder(b, from);
+		removeBulletinFromFolder(from, b);
 		saveFolders();
 	}
 
-	public void removeBulletinFromFolder(Bulletin b, BulletinFolder from)
+	public void removeBulletinFromFolder(BulletinFolder from, Bulletin b)
 	{
 		UniversalId uid = b.getUniversalId();
 		removeBulletinFromFolder(uid, from);
@@ -917,7 +911,18 @@ public class BulletinStore
 		return createFolder(name);
 	}
 
-	public synchronized void addBulletinToFolder(UniversalId uId, BulletinFolder folder) throws BulletinAlreadyExistsException, IOException
+	public void ensureBulletinIsInFolder(BulletinFolder folder, UniversalId uid) throws IOException
+	{
+		try
+		{
+			addBulletinToFolder(folder, uid);
+		}
+		catch (BulletinAlreadyExistsException ignoreHarmless)
+		{
+		}
+	}
+
+	public synchronized void addBulletinToFolder(BulletinFolder folder, UniversalId uId) throws BulletinAlreadyExistsException, IOException
 	{
 		Bulletin b = findBulletinByUniversalId(uId);
 		if(b == null)
@@ -1187,7 +1192,7 @@ public class BulletinStore
 			else
 				uid = importZipFileToStoreWithNewUids(zipFile);
 
-			addBulletinToFolder(uid, toFolder);
+			addBulletinToFolder(toFolder, uid);
 		}
 		finally
 		{

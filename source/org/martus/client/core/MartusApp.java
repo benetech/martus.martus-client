@@ -68,6 +68,7 @@ import org.martus.common.clientside.DateUtilities;
 import org.martus.common.clientside.Localization;
 import org.martus.common.crypto.MartusCrypto;
 import org.martus.common.crypto.MartusSecurity;
+import org.martus.common.crypto.MartusCrypto.CryptoException;
 import org.martus.common.crypto.MartusCrypto.MartusSignatureException;
 import org.martus.common.database.FileDatabase.MissingAccountMapException;
 import org.martus.common.database.FileDatabase.MissingAccountMapSignatureException;
@@ -792,7 +793,7 @@ public class MartusApp
 			{	
 				try
 				{
-					store.addBulletinToFolder(b.getUniversalId(), searchFolder);
+					store.addBulletinToFolder(searchFolder, b.getUniversalId());
 				}
 				catch (BulletinAlreadyExistsException safeToIgnoreException)
 				{
@@ -1569,6 +1570,15 @@ public class MartusApp
 		}
 
 		return file;
+	}
+
+	public void saveBulletin(Bulletin bulletinToSave, BulletinFolder outboxToUse) throws IOException, CryptoException
+	{
+		store.saveBulletin(bulletinToSave);
+		store.ensureBulletinIsInFolder(store.getFolderSaved(), bulletinToSave.getUniversalId());
+		store.ensureBulletinIsInFolder(outboxToUse, bulletinToSave.getUniversalId());
+		store.removeBulletinFromFolder(store.getFolderDiscarded(), bulletinToSave);
+		store.saveFolders();
 	}
 
 	public class SaveConfigInfoException extends Exception {}
