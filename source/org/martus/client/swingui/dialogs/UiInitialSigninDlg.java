@@ -66,7 +66,10 @@ public class UiInitialSigninDlg extends UiSigninDlg
 
 	JComponent createNewAccountPanel()
 	{
-		String text = localization.getFieldLabel("HowToCreateNewAccount");
+		String message = "HowToCreateNewAccount";
+		if(currentMode == INITIAL_NEW_RECOVER_ACCOUNT)
+			message = "HowToCreateInitialAccount";
+		String text = localization.getFieldLabel(message);
 		return new UiWrappedTextArea("\n" + text);
 	}
 	

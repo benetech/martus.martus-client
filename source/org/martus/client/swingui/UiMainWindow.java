@@ -128,7 +128,7 @@ import org.martus.util.Base64.InvalidBase64Exception;
 
 public class UiMainWindow extends JFrame implements ClipboardOwner
 {
-    public UiMainWindow()
+	public UiMainWindow()
 	{
 		super();
 		currentActiveFrame = this;
@@ -306,23 +306,27 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		if(modified)
 		{
 			complianceStatementAlwaysEnglish =
-			"<html><p align='center'><font size='5'>Welcome to [*your product name*].  <br></br>" +
+			BEGIN_HTML_TAGS + 
+			"Welcome to [*your product name*].  <br></br>" +
 			"This software is not a standard Martus(TM) program, <br></br>" +
 			"because it has been modified by someone other than Benetech, <br></br>" +
 			"the copyright owner and original author of the Martus software.  <br></br>" +
-			"For details of what has been changed, see [*here*].</font></p></html>";
+			"For details of what has been changed, see [*here*]." +
+			END_HTML_TAGS;
 		}
 		else
 		{
 			complianceStatementAlwaysEnglish =
-			"<html><p align='center'><font size='5'>" +
+			BEGIN_HTML_TAGS +
 			"Welcome to the Martus™<br></br>" +
 			"Human Rights Bulletin System,<br></br>" +
-			"created by Benetech.</font></p></html>";
+			"created by Benetech." +
+			END_HTML_TAGS;
 		}
-
 		new UiSplashDlg(owner, getLocalization(), complianceStatementAlwaysEnglish);
 	}
+	public final static String BEGIN_HTML_TAGS = "<html><p align='center'><font size='5'>";
+	public final static String END_HTML_TAGS = "</font></p></html>";
 	
     public boolean isMainWindowInitalizing()
     {
@@ -1720,6 +1724,14 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	public static boolean isOnlyOneBulletinSelected(UiMainWindow window)
 	{
 		return (window.table.getSingleSelectedBulletin() != null);
+	}
+	
+	static public String getDisplayVersionInfo(UiBasicLocalization localization)
+	{
+		String versionInfo = UiConstants.programName;
+		versionInfo += " " + localization.getFieldLabel("aboutDlgVersionInfo");
+		versionInfo += " " + UiConstants.versionLabel;
+		return versionInfo;
 	}
 	
 	class WindowEventHandler extends WindowAdapter

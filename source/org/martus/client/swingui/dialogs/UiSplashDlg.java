@@ -37,6 +37,7 @@ import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.border.EmptyBorder;
 
+import org.martus.client.swingui.UiMainWindow;
 import org.martus.common.clientside.UiBasicLocalization;
 import org.martus.swing.Utilities;
 
@@ -46,9 +47,15 @@ public class UiSplashDlg extends JDialog implements ActionListener
 	{
 		super(owner, owner.getTitle(), true);
 		Container contents = getContentPane();
+		String versionInfoText = UiMainWindow.getDisplayVersionInfo(localization);
+		JLabel versionInfo = new JLabel(versionInfoText,JLabel.CENTER);
+		contents.add(versionInfo,BorderLayout.CENTER);
+		
 		JLabel body = new JLabel(text);
 		body.setBorder(new EmptyBorder(20, 20, 20, 20));
-		contents.add(body);
+		contents.add(body, BorderLayout.NORTH);
+		contents.add(new JLabel("   "), BorderLayout.EAST);
+		contents.add(new JLabel("   "), BorderLayout.WEST);
 		Box hbox = Box.createHorizontalBox();
 		hbox.add(Box.createHorizontalGlue());
 		JButton ok = new JButton(localization.getButtonLabel("ok"));
