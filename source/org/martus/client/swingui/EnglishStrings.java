@@ -665,7 +665,8 @@ public class EnglishStrings
 "field:confirmQuickEraseDeleteKeyPaircause=This will scrub and delete keypair files on this computer.",
 "field:confirmQuestionDeleteKeypair=Are you really sure?",
 
-"field:SelectServer=Select Server",
+"field:RemoveServerLabel1=The following server will be removed:",
+"field:RemoveServerLabel2=Are you sure you want to do this?",
 
 
 "field:DateRangeFrom=Between",

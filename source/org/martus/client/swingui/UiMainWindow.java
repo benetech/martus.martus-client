@@ -934,9 +934,11 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 			return;
 		
 		ConfigInfo info = app.getConfigInfo();
-		UiRemoveServerDlg dlg = new UiRemoveServerDlg(this, info);
-		dlg.show();	
-			
+		UiRemoveServerDlg removeDlg = new UiRemoveServerDlg(this, info);
+		if (removeDlg.isYesButtonPressed())
+		{
+			app.setServerInfo("","","");
+		}			
 	}
 
 	public void doConfigureServer()

@@ -25,13 +25,14 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.dialogs;
 
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
+import javax.swing.JTextField;
 
 import org.martus.client.core.ConfigInfo;
 import org.martus.client.swingui.UiLocalization;
@@ -47,48 +48,58 @@ public class UiRemoveServerDlg extends JDialog implements ActionListener
 		super(owner, "", true);
 		UiLocalization localization = owner.getLocalization();			
 		
-		setTitle(localization.getWindowTitle("RemoveServer"));		
-		String selServer = localization.getFieldLabel("SelectServer");		
-		JLabel selServerLabel = new JLabel(selServer);
-		String[] serverIPAddress = {info.getServerName()};
+		setTitle(localization.getWindowTitle("RemoveServer"));
+				
+		String serverName = info.getServerName();		
+		JTextField serverField = new JTextField(serverName);
+		serverField.setEditable(false);		
+		
+		JLabel msgLabel1 = new JLabel(localization.getFieldLabel("RemoveServerLabel1"));		
+		JLabel msgLabel2 = new JLabel(localization.getFieldLabel("RemoveServerLabel2"));
+		
+		String serverIPAddress = info.getServerName();
 								
-		JComboBox serversCombo 	= new JComboBox(serverIPAddress);
-		serversCombo.setEditable(false);						
+		JTextField serversField = new JTextField(serverIPAddress);
+		serversField.setPreferredSize(new Dimension(10,20));
+		serversField.setEditable(false);						
 
-		ok = new JButton(localization.getButtonLabel("ok"));		
-		ok.addActionListener(this);
-		JButton cancel = new JButton(localization.getButtonLabel("cancel"));
+		yes = new JButton(localization.getButtonLabel("yes"));		
+		yes.addActionListener(this);
+		JButton no = new JButton(localization.getButtonLabel("no"));
+		no.addActionListener(this);
 
 		getContentPane().setLayout(new ParagraphLayout());	
 		getContentPane().add(new JLabel(""), ParagraphLayout.NEW_PARAGRAPH);		
-		getContentPane().add(selServerLabel);	
-		getContentPane().add(serversCombo);			
+		getContentPane().add(msgLabel1);	
+		getContentPane().add(serverField);
+		getContentPane().add(msgLabel2, ParagraphLayout.NEW_LINE);			
 	
 		getContentPane().add(new JLabel(""), ParagraphLayout.NEW_PARAGRAPH);		
-		getContentPane().add(ok);
-		getContentPane().add(cancel);
+		getContentPane().add(yes);
+		getContentPane().add(no);
 
-		getRootPane().setDefaultButton(ok);
+		getRootPane().setDefaultButton(yes);
 
 		Utilities.centerDlg(this);
 		setResizable(false);
+		show();
 	}	
 
 	public void actionPerformed(ActionEvent ae)
 	{	
 		action=false;
-		if(ae.getSource() == ok)
+		if(ae.getSource() == yes)
 		{			
 			action = true;
 		}			
 		dispose();
 	}
 		
-	public boolean isOkayPressed()
+	public boolean isYesButtonPressed()
 	{
 		return action;
 	}
 	
 	boolean action;
-	JButton ok;		
+	JButton yes;		
 }
