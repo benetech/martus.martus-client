@@ -367,7 +367,10 @@ public class BulletinStore
 		Bulletin b = findBulletinByUniversalId(uid);
 		
 		if(fieldTag.equals(Bulletin.TAGSTATUS))
-			return b.getStatus();		
+			return b.getStatus();
+			
+		if (fieldTag.equals(Bulletin.TAGLASTSAVED))
+			return Long.toString(b.getLastSavedTime());			
 		
 		return b.get(fieldTag);
 	}
