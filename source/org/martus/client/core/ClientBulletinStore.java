@@ -1277,6 +1277,22 @@ public class ClientBulletinStore extends BulletinStore
 		return loadFromDatabase(key);
 	}
 
+	public Vector getUidsOfAllBulletinRevisions()
+	{
+		class UidCollector implements Database.PacketVisitor
+		{
+			public void visit(DatabaseKey key)
+			{
+				uidList.add(key.getUniversalId());
+			}
+			Vector uidList = new Vector();
+		}
+	
+		UidCollector uidCollector = new UidCollector();
+		visitAllBulletinRevisions(uidCollector);
+		return uidCollector.uidList;
+	}
+
 	public static int maxCachedBulletinCount = 100;
 
 	public static final String SAVED_FOLDER = "%Sent";
