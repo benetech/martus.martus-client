@@ -319,9 +319,15 @@ public class MartusApp
 		inSignature.close();
 
 		FileInputStream inData = new FileInputStream(dataFile);
-		boolean verified = getSecurity().isValidSignatureOfStream(accountId, inData, signature);
-		inData.close();
-		return verified;
+		try
+		{
+			boolean verified = getSecurity().isValidSignatureOfStream(accountId, inData, signature);
+			return verified;
+		}
+		finally
+		{
+			inData.close();
+		}
 	}
 
 	private void convertLegacyHQToMultipleHQs() throws HQsException
