@@ -57,6 +57,7 @@ import org.martus.swing.UiFileChooser;
 import org.martus.swing.UiLabel;
 import org.martus.swing.UiScrollPane;
 import org.martus.swing.UiTable;
+import org.martus.swing.UiWrappedTextArea;
 import org.martus.swing.Utilities;
 import org.martus.util.Base64.InvalidBase64Exception;
 
@@ -70,27 +71,27 @@ public class UiConfigureHQs extends JDialog
 		localization = mainWindow.getLocalization();
 		
 		setTitle(localization.getWindowTitle("ConfigureHQs"));
-		JPanel panel = new JPanel();
-		panel.setBorder(new EmptyBorder(10,10,10,10));
-		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 		
 		JButton add = new UiButton(localization.getButtonLabel("ConfigureHQsAdd"));
 		add.addActionListener(new AddHandler());
 		remove = new UiButton(localization.getButtonLabel("ConfigureHQsRemove"));
 		remove.addActionListener(new RemoveHandler());
-
 		renameLabel = new UiButton(localization.getButtonLabel("ConfigureHQsReLabel"));
 		renameLabel.addActionListener(new RenameHandler());
-		
-		Box hBox1 = Box.createHorizontalBox();
-		hBox1.add(new UiLabel(localization.getFieldLabel("HQsSetAsProxyUploader")));
-		hBox1.add(Box.createHorizontalGlue());
-		panel.add(hBox1);
 
-		Box hBox2 = Box.createHorizontalBox();
-		hBox2.add(new UiLabel(localization.getFieldLabel("ConfigureHQsCurrentHQs")));
-		hBox2.add(Box.createHorizontalGlue());
-		panel.add(hBox2);
+		Box vBox = Box.createVerticalBox();
+		vBox.add(new UiWrappedTextArea(localization.getFieldLabel("HQsSetAsProxyUploader")));
+		vBox.add(new UiLabel(" "));
+		vBox.add(new UiWrappedTextArea(localization.getFieldLabel("HQsSetAsDefault")));
+		vBox.add(new UiLabel(" "));
+		vBox.add(new UiWrappedTextArea(localization.getFieldLabel("ConfigureHQsCurrentHQs")));
+		vBox.add(new UiLabel(" "));
+
+		JPanel panel = new JPanel();
+		panel.setBorder(new EmptyBorder(10,10,10,10));
+		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+		panel.add(vBox);
+		
 		model = new HeadQuartersTableModelConfiguration(localization);
 		table = createHeadquartersTable(model);
 		
@@ -107,7 +108,6 @@ public class UiConfigureHQs extends JDialog
 		enableDisableButtons();
 		
 		UiScrollPane scroller = new UiScrollPane(table);
-		
 		panel.add(scroller);
 		panel.add(new UiLabel(" "));
 		
@@ -118,6 +118,7 @@ public class UiConfigureHQs extends JDialog
 		cancel.addActionListener(new CancelHandler());
 		Utilities.addComponentsRespectingOrientation(hBox, new Component[]{add,remove,renameLabel,Box.createHorizontalGlue(),save,cancel});
 		panel.add(hBox);
+		
 		getContentPane().add(panel);
 		getRootPane().setDefaultButton(cancel);
 		Utilities.centerDlg(this);
