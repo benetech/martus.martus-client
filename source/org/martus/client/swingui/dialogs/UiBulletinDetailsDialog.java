@@ -80,9 +80,9 @@ public class UiBulletinDetailsDialog extends JDialog
 			panel.addComponents(new JLabel(getLabel("Headquarters")), hqScroller);
 		}
 		
-		UiScrollPane versionScroller = createHistoryTable();
+		UiScrollPane historyScroller = createHistoryTable();
 
-		panel.addComponents(new JLabel(getLabel("History")), versionScroller);
+		panel.addComponents(new JLabel(getLabel("History")), historyScroller);
 		
 		JButton closeButton = new JButton(getLocalization().getButtonLabel("close"));
 		closeButton.addActionListener(new CloseHandler());
