@@ -34,7 +34,7 @@ import java.util.LinkedList;
 import java.util.Vector;
 
 import org.martus.common.bulletin.AttachmentProxy;
-import org.martus.common.bulletin.BulletinSaver;
+import org.martus.common.bulletin.BulletinLoader;
 import org.martus.common.crypto.MartusCrypto;
 import org.martus.common.database.ReadableDatabase;
 
@@ -71,7 +71,7 @@ public class TransferableAttachmentList implements Transferable
 				outputFile.deleteOnExit();
 				files.add(outputFile);
 				
-				BulletinSaver.extractAttachmentToFile(db, attachment, security, outputFile);
+				BulletinLoader.extractAttachmentToFile(db, attachment, security, outputFile);
 				//System.out.println("TransferableAttachment extractAttachmentToFile: " + outputFile);
 			}
 			catch(Exception e)

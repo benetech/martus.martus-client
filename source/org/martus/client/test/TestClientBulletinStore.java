@@ -49,6 +49,7 @@ import org.martus.common.bulletin.AttachmentProxy;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.bulletin.BulletinConstants;
 import org.martus.common.bulletin.BulletinForTesting;
+import org.martus.common.bulletin.BulletinLoader;
 import org.martus.common.bulletin.BulletinSaver;
 import org.martus.common.crypto.MartusCrypto;
 import org.martus.common.crypto.MockMartusSecurity;
@@ -1212,7 +1213,7 @@ public class TestClientBulletinStore extends TestCaseEnhanced
 		assertEquals("private?", original.get(Bulletin.TAGPRIVATEINFO), reloaded.get(Bulletin.TAGPRIVATEINFO));
 
 		File tempRawFilePublic = createTempFileFromName("$$$MartusTestImpSealedZipRawPublic");
-		BulletinSaver.extractAttachmentToFile(db, reloaded.getPublicAttachments()[0], security, tempRawFilePublic);
+		BulletinLoader.extractAttachmentToFile(db, reloaded.getPublicAttachments()[0], security, tempRawFilePublic);
 		byte[] rawBytesPublic = new byte[sampleBytes1.length];
 		FileInputStream in = new FileInputStream(tempRawFilePublic);
 		in.read(rawBytesPublic);
@@ -1220,7 +1221,7 @@ public class TestClientBulletinStore extends TestCaseEnhanced
 		assertEquals("wrong bytes", true, Arrays.equals(sampleBytes1, rawBytesPublic));
 
 		File tempRawFilePrivate = createTempFileFromName("$$$MartusTestImpSealedZipRawPrivate");
-		BulletinSaver.extractAttachmentToFile(db, reloaded.getPrivateAttachments()[0], security, tempRawFilePrivate);
+		BulletinLoader.extractAttachmentToFile(db, reloaded.getPrivateAttachments()[0], security, tempRawFilePrivate);
 		byte[] rawBytesPrivate = new byte[sampleBytes2.length];
 		FileInputStream in2 = new FileInputStream(tempRawFilePrivate);
 		in2.read(rawBytesPrivate);
@@ -1369,12 +1370,12 @@ public class TestClientBulletinStore extends TestCaseEnhanced
 		assertEquals("attachment Private", true, db.doesRecordExist(DatabaseKey.createLegacyKey(reloaded.getPrivateAttachments()[0].getUniversalId())));
 
 		ByteArrayOutputStream publicStream = new ByteArrayOutputStream();
-		BulletinSaver.extractAttachmentToStream(db, reloaded.getPublicAttachments()[0], security, publicStream);
+		BulletinLoader.extractAttachmentToStream(db, reloaded.getPublicAttachments()[0], security, publicStream);
 		byte[] rawBytes = publicStream.toByteArray();
 		assertEquals("wrong bytes Public", true, Arrays.equals(sampleBytes1,rawBytes));
 
 		ByteArrayOutputStream privateStream = new ByteArrayOutputStream();
-		BulletinSaver.extractAttachmentToStream(db, reloaded.getPrivateAttachments()[0], security, privateStream);
+		BulletinLoader.extractAttachmentToStream(db, reloaded.getPrivateAttachments()[0], security, privateStream);
 		byte[] rawBytesPrivate = privateStream.toByteArray();
 		assertEquals("wrong bytes Private", true, Arrays.equals(sampleBytes2, rawBytesPrivate));
 

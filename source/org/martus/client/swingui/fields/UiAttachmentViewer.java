@@ -49,7 +49,7 @@ import org.martus.client.swingui.UiLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.UiScrollPane;
 import org.martus.common.bulletin.AttachmentProxy;
-import org.martus.common.bulletin.BulletinSaver;
+import org.martus.common.bulletin.BulletinLoader;
 import org.martus.common.database.ReadableDatabase;
 import org.martus.swing.UiFileChooser;
 import org.martus.swing.UiParagraphPanel;
@@ -192,7 +192,7 @@ public class UiAttachmentViewer extends UiParagraphPanel  implements DragGesture
 				temp.deleteOnExit();
 			
 				ReadableDatabase db = mainWindow.getApp().getStore().getDatabase();
-				BulletinSaver.extractAttachmentToFile(db, proxy, app.getSecurity(), temp);
+				BulletinLoader.extractAttachmentToFile(db, proxy, app.getSecurity(), temp);
 
 				Runtime runtimeViewer = Runtime.getRuntime();
 				String tempFileFullPathName = temp.getPath();
@@ -236,7 +236,7 @@ public class UiAttachmentViewer extends UiParagraphPanel  implements DragGesture
 			try
 			{
 				ReadableDatabase db = mainWindow.getApp().getStore().getDatabase();
-				BulletinSaver.extractAttachmentToFile(db, proxy, app.getSecurity(), outputFile);
+				BulletinLoader.extractAttachmentToFile(db, proxy, app.getSecurity(), outputFile);
 			}
 			catch(Exception e)
 			{
