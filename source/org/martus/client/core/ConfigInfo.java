@@ -69,6 +69,8 @@ public class ConfigInfo implements Serializable
 	public void setCustomFieldSpecs(String newSpecs)	{customFieldSpecs = newSpecs;}
 	public void setCustomFieldXml(String newXml)	{customFieldXml = newXml;}
 	public void setForceBulletinsAllPrivate(boolean newForceBulletinsAllPrivate)	{forceBulletinsAllPrivate = newForceBulletinsAllPrivate; }
+	public void setBackedUpKeypairEncrypted(boolean newBackedUpKeypairEncrypted)	{backedUpKeypairEncrypted = newBackedUpKeypairEncrypted; }
+	public void setBackedUpKeypairShare(boolean newBackedUpKeypairShare)	{backedUpKeypairShare = newBackedUpKeypairShare; }
 
 	public void clearHQKey()						{ hqKey = ""; }
 	public void clearPromptUserRequestSendToServer() { mustAskUserToSendToServer = false; }
@@ -90,6 +92,8 @@ public class ConfigInfo implements Serializable
 	public String getCustomFieldSpecs() {return customFieldSpecs;}
 	public String getCustomFieldXml()	{return customFieldXml;}
 	public boolean shouldForceBulletinsAllPrivate()	{ return forceBulletinsAllPrivate;}
+	public boolean hasUserBackedUpKeypairEncrypted()	{ return backedUpKeypairEncrypted;}
+	public boolean hasUserBackedUpKeypairShare()	{ return backedUpKeypairShare;}
 
 	public boolean isServerConfigured()
 	{
@@ -115,6 +119,8 @@ public class ConfigInfo implements Serializable
 		customFieldSpecs = LegacyCustomFields.buildFieldListString(StandardFieldSpecs.getDefaultPublicFieldSpecs());
 		customFieldXml = "";
 		forceBulletinsAllPrivate = false;
+		backedUpKeypairEncrypted = false;
+		backedUpKeypairShare = false;
 	}
 
 	public static ConfigInfo load(InputStream inputStream)
@@ -152,6 +158,12 @@ public class ConfigInfo implements Serializable
 			if(loaded.version >= 7)
 				loaded.forceBulletinsAllPrivate = in.readBoolean();
 
+			if(loaded.version >= 8)
+			{
+				loaded.backedUpKeypairEncrypted = in.readBoolean();
+				loaded.backedUpKeypairShare = in.readBoolean();
+			}
+
 			in.close();
 		}
 		catch (Exception e)
@@ -182,6 +194,8 @@ public class ConfigInfo implements Serializable
 			out.writeUTF(MartusConstants.deprecatedCustomFieldSpecs);
 			out.writeUTF(customFieldXml);
 			out.writeBoolean(forceBulletinsAllPrivate);
+			out.writeBoolean(backedUpKeypairEncrypted);
+			out.writeBoolean(backedUpKeypairShare);
 			out.close();
 		}
 		catch(Exception e)
@@ -192,7 +206,7 @@ public class ConfigInfo implements Serializable
 	
 	private boolean mustAskUserToSendToServer;
 	
-	public static final short VERSION = 7;
+	public static final short VERSION = 8;
 	//Version 1
 	private short version;
 	private String author;
@@ -215,5 +229,8 @@ public class ConfigInfo implements Serializable
 	//Version 6
 	private String customFieldXml;
 	//Version 7
-	private boolean forceBulletinsAllPrivate; 
+	private boolean forceBulletinsAllPrivate;
+	//Version 8
+	private boolean backedUpKeypairEncrypted;
+	private boolean backedUpKeypairShare;
 }

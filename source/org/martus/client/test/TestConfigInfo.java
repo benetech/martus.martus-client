@@ -54,7 +54,7 @@ public class TestConfigInfo extends TestCaseEnhanced
 		ConfigInfo info = new ConfigInfo();
 		verifyEmptyInfo(info, "constructor");
 		
-		assertEquals(7, ConfigInfo.VERSION);
+		assertEquals(8, ConfigInfo.VERSION);
 
 		info.setAuthor("fred");
 		assertEquals("fred", info.getAuthor());
@@ -206,6 +206,8 @@ public class TestConfigInfo extends TestCaseEnhanced
 		info.setCustomFieldSpecs(MartusConstants.deprecatedCustomFieldSpecs);
 		info.setCustomFieldXml(sampleCustomFieldXml);
 		info.setForceBulletinsAllPrivate(sampleForceAllPrivate);
+		info.setBackedUpKeypairEncrypted(sampleBackedUpKeypairEncrypted);
+		info.setBackedUpKeypairShare(sampleBackedUpKeypairShare);
 	}
 
 	void verifyEmptyInfo(ConfigInfo info, String label)
@@ -226,6 +228,8 @@ public class TestConfigInfo extends TestCaseEnhanced
 		assertEquals(label + ": sampleCustomFieldSpecs", defaultCustomFieldSpecs, info.getCustomFieldSpecs());
 		assertEquals(label + ": sampleCustomFieldXml", "", info.getCustomFieldXml());
 		assertEquals(label + ": sampleForceAllPrivate", false, info.shouldForceBulletinsAllPrivate());
+		assertEquals(label + ": sampleBackedUpKeypairEncrypted", false, info.hasUserBackedUpKeypairEncrypted());
+		assertEquals(label + ": sampleBackedUpKeypairShare", false, info.hasUserBackedUpKeypairShare());
 	}
 
 	void verifySampleInfo(ConfigInfo info, String label, int VERSION)
@@ -271,6 +275,17 @@ public class TestConfigInfo extends TestCaseEnhanced
 			assertEquals(label + ": sampleForceAllPrivate", sampleForceAllPrivate, info.shouldForceBulletinsAllPrivate());
 		else
 			assertEquals(label + ": sampleForceAllPrivate", false, info.shouldForceBulletinsAllPrivate());
+
+		if(VERSION >= 8)
+		{
+			assertEquals(label + ": sampleBackedUpKeypairEncrypted", sampleBackedUpKeypairEncrypted, info.hasUserBackedUpKeypairEncrypted());
+			assertEquals(label + ": sampleBackedUpKeypairShare", sampleBackedUpKeypairShare, info.hasUserBackedUpKeypairShare());
+		}
+		else
+		{
+			assertEquals(label + ": sampleBackedUpKeypairEncrypted", false, info.hasUserBackedUpKeypairEncrypted());
+			assertEquals(label + ": sampleBackedUpKeypairShared", false, info.hasUserBackedUpKeypairShare());
+		}
 	}
 
 	void verifyLoadSpecificVersion(ByteArrayInputStream inputStream, short VERSION)
@@ -319,6 +334,11 @@ public class TestConfigInfo extends TestCaseEnhanced
 		{
 			out.writeBoolean(sampleForceAllPrivate);
 		}
+		if(VERSION >= 8)
+		{
+			out.writeBoolean(sampleBackedUpKeypairEncrypted);
+			out.writeBoolean(sampleBackedUpKeypairShare);
+		}
 		out.close();
 		return outputStream.toByteArray();
 	}
@@ -348,4 +368,7 @@ public class TestConfigInfo extends TestCaseEnhanced
 	final String sampleCustomFieldXml = "<CustomFields></CustomFields>";
 //Version 7
 	final boolean sampleForceAllPrivate = true;
+//Version 8
+	final boolean sampleBackedUpKeypairEncrypted = true;
+	final boolean sampleBackedUpKeypairShare = true;
 }
