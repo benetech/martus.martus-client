@@ -50,6 +50,7 @@ import org.martus.common.bulletin.Bulletin;
 import org.martus.common.bulletin.BulletinConstants;
 import org.martus.common.bulletin.BulletinForTesting;
 import org.martus.common.bulletin.BulletinSaver;
+import org.martus.common.crypto.MartusCrypto;
 import org.martus.common.crypto.MockMartusSecurity;
 import org.martus.common.crypto.MartusCrypto.CryptoException;
 import org.martus.common.database.Database;
@@ -90,6 +91,14 @@ public class TestClientBulletinStore extends TestCaseEnhanced
 			tempFile1 = createTempFileWithData(sampleBytes1);
 			tempFile2 = createTempFileWithData(sampleBytes2);
     	}
+    	
+    	if(customSpecs == null)
+    	{
+    		FieldSpec title = new FieldSpec(FieldSpec.TYPE_NORMAL);
+    		title.setTag(Bulletin.TAGTITLE);
+    		
+    		customSpecs = new FieldSpec[] {title};
+    	}
     }
 
     public void tearDown() throws Exception
@@ -111,7 +120,53 @@ public class TestClientBulletinStore extends TestCaseEnhanced
 		assertEquals("wrong account?", security.getPublicKeyString(), b.getAccount());
 	}
     
-    public void testChooseBulletinToUpload() throws Exception
+    public void testCreateCloneOfMySealed() throws Exception
+	{
+    	Bulletin original = createSealedBulletin(security);
+    	
+    	{
+	    	Bulletin clone = store.createClone(original, customSpecs, customSpecs);
+	    	assertEquals("wrong account?", store.getAccountId(), clone.getAccount());
+	    	assertNotEquals("not new local id?", original.getLocalId(), clone.getLocalId());
+	    	assertEquals("no data?", original.get(Bulletin.TAGTITLE), clone.get(Bulletin.TAGTITLE));
+	    	assertEquals("kept hq?", 0, clone.getAuthorizedToReadKeys().size());
+	    	assertTrue("not draft?", clone.isDraft());
+	    	assertEquals("wrong public field specs?", customSpecs.length, clone.getPublicFieldSpecs().length);
+	    	assertEquals("wrong private field specs?", customSpecs.length, clone.getPrivateFieldSpecs().length);
+    	}
+	}
+    
+    public void testCreateCloneOfNotMyBulletin() throws Exception
+	{
+    	MartusCrypto otherSecurity = MockMartusSecurity.createOtherClient();
+
+    	Bulletin original = createSealedBulletin(otherSecurity);
+
+    	{
+	    	Bulletin clone = store.createClone(original, customSpecs, customSpecs);
+	    	assertEquals("wrong account?", store.getAccountId(), clone.getAccount());
+	    	assertNotEquals("not new local id?", original.getLocalId(), clone.getLocalId());
+	    	assertEquals("no data?", original.get(Bulletin.TAGTITLE), clone.get(Bulletin.TAGTITLE));
+	    	assertEquals("kept hq?", 0, clone.getAuthorizedToReadKeys().size());
+	    	assertTrue("not draft?", clone.isDraft());
+	    	assertEquals("wrong public field specs?", customSpecs.length, clone.getPublicFieldSpecs().length);
+	    	assertEquals("wrong private field specs?", customSpecs.length, clone.getPrivateFieldSpecs().length);
+    	}
+	}
+    
+    private Bulletin createSealedBulletin(MartusCrypto otherSecurity)
+	{
+		HQKeys oldHq = new HQKeys();
+		oldHq.add(new HQKey(fakeHqKey));
+    	
+    	Bulletin original = new Bulletin(otherSecurity);
+    	original.set(Bulletin.TAGTITLE, "oeiwjfio");
+    	original.setAuthorizedToReadKeys(oldHq);
+    	original.setSealed();
+		return original;
+	}
+
+	public void testChooseBulletinToUpload() throws Exception
 	{
     	BulletinFolder outbox = store.createFolder("*My outbox");
     	BulletinFolder normal = store.createFolder("Normal Folder");
@@ -1464,9 +1519,11 @@ public class TestClientBulletinStore extends TestCaseEnhanced
 	static ClientBulletinStore store;
 	static MockMartusSecurity security;
 	static MockDatabase db;
+	static FieldSpec[] customSpecs;
 
 	static File tempFile1;
 	static File tempFile2;
 	static final byte[] sampleBytes1 = {1,1,2,3,0,5,7,11};
 	static final byte[] sampleBytes2 = {3,1,4,0,1,5,9,2,7};
+	static final String fakeHqKey = "wwwllkjsfdkjf";
 }
