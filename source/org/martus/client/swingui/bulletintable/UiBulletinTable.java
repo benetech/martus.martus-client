@@ -354,6 +354,10 @@ public class UiBulletinTable extends JTable implements ListSelectionListener, Dr
 			{
 				resultMessageTag = "PasteErrorBulletinAlreadyExists";
 			}
+			catch (IOException e)
+			{
+				resultMessageTag = "PasteError";
+			}
 		}
 
 		if(!worked)

@@ -188,23 +188,6 @@ public class TestBulletinStore extends TestCaseEnhanced
 		assertTrue("missing 2?", two.contains(b2.getUniversalId()));
 	}
 
-	public void testCaching() throws Exception
-	{
-		TRACE("testCaching");
-		int oldMax = BulletinStore.maxCachedBulletinCount;
-		BulletinStore.maxCachedBulletinCount = 3;
-		int numBulletins = BulletinStore.maxCachedBulletinCount + 1;
-		for(int i = 0; i < numBulletins; ++i)
-		{
-			Bulletin b = store.createEmptyBulletin();
-			store.saveBulletin(b);
-			store.findBulletinByUniversalId(b.getUniversalId());
-		}
-
-		BulletinStore.maxCachedBulletinCount = oldMax;
-		assertEquals("cache too large?", true, store.bulletinCache.size() <= BulletinStore.maxCachedBulletinCount);
-	}
-
 	public void testDestroyBulletin() throws Exception
 	{
 		TRACE("testDestroyBulletin");
@@ -588,6 +571,7 @@ public class TestBulletinStore extends TestCaseEnhanced
 
 		BulletinFolder f1 = store.createFolder("First");
 		Bulletin b = store.createEmptyBulletin();
+		store.saveBulletin(b);
 		f1.add(b);
 
 		expected = MartusClientXml.getFolderListTagStart();

@@ -26,6 +26,7 @@ Boston, MA 02111-1307, USA.
 
 package org.martus.client.core;
 
+import java.io.IOException;
 import java.util.Vector;
 
 import org.martus.client.core.BulletinStore.BulletinAlreadyExistsException;
@@ -138,26 +139,23 @@ public class BulletinFolder
 		return (getStatusAllowed().indexOf(bulletinStatus) != -1);
 	}
 
-	public synchronized void add(Bulletin b) throws BulletinAlreadyExistsException
+	public synchronized void add(Bulletin b) throws BulletinAlreadyExistsException, IOException
 	{
 		add(b.getUniversalId());
 	}
 
-	synchronized void add(UniversalId id) throws BulletinAlreadyExistsException
+	synchronized void add(UniversalId id) throws BulletinAlreadyExistsException, IOException
 	{
+		DatabaseKey key = new DatabaseKey(id);
+		Database db = store.getDatabase();
+		if(!db.doesRecordExist(key))
+			throw new IOException();
+
 		if(rawIdList.contains(id))
 		{
 			//System.out.println("already contains " + id);
 			sortExisting();
 			throw new BulletinStore.BulletinAlreadyExistsException();
-		}
-
-		DatabaseKey key = new DatabaseKey(id);
-		Database db = store.getDatabase();
-		if(!db.doesRecordExist(key))
-		{
-			//System.out.println("not in store: " + id);
-			return;
 		}
 
 		rawIdList.add(id);

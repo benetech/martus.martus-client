@@ -52,7 +52,6 @@ public class TestClient
 		suite.addTest(new TestSuite(TestBulletinStore.class));
 		suite.addTest(new TestSuite(TestBulletinTableModel.class));
 		suite.addTest(new TestSuite(TestBulletinXmlExporter.class));
-		suite.addTest(new TestSuite(TestCacheOfSortableFields.class));
 		suite.addTest(new TestSuite(TestChoiceItem.class));
 		suite.addTest(new TestSuite(TestClientFileDatabase.class));
 		suite.addTest(new TestSuite(TestClientSideNetworkHandler.class));

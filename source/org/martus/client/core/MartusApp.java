@@ -594,6 +594,10 @@ public class MartusApp
 			{
 				System.out.println("Orphan Bulletin already exists.");
 			}
+			catch (IOException shouldNeverHappen)
+			{
+				shouldNeverHappen.printStackTrace();
+			}
 		}
 
 		store.saveFolders();
@@ -739,6 +743,11 @@ public class MartusApp
 				}
 				catch (BulletinAlreadyExistsException safeToIgnoreException)
 				{
+				}
+				catch (IOException e)
+				{
+					// TODO Auto-generated catch block
+					e.printStackTrace();
 				}
 			}
 		}

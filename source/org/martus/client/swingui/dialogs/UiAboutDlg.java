@@ -46,6 +46,8 @@ import org.martus.client.swingui.UiConstants;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.common.VersionBuildDate;
 import org.martus.common.clientside.UiBasicLocalization;
+import org.martus.common.packet.Packet;
+import org.martus.common.packet.XmlPacketLoader;
 import org.martus.swing.UiWrappedTextArea;
 import org.martus.swing.Utilities;
 
@@ -55,6 +57,12 @@ public class UiAboutDlg extends JDialog implements ActionListener
 		throws HeadlessException
 	{
 		super(owner, "" , true);
+		System.out.println("Number of calls to verifyPacketSignature " + Packet.callsToVerifyPacketSignature);
+		System.out.println("Cumulative time in verifyPacketSignature " + Packet.millisInVerifyPacketSignature);
+		System.out.println("Number of calls to XmlPacketLoader " + XmlPacketLoader.callsToXmlPacketLoader);
+		System.out.println("Cumulative time in XmlPacketLoader " + XmlPacketLoader.millisInXmlPacketLoader);
+
+		
 		UiBasicLocalization localization = owner.getLocalization();
 		
 		setTitle(localization.getWindowTitle("about"));

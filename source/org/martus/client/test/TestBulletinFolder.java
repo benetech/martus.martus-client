@@ -26,6 +26,7 @@ Boston, MA 02111-1307, USA.
 
 package org.martus.client.test;
 
+import java.io.IOException;
 import java.util.Vector;
 
 import org.martus.client.core.BulletinFolder;
@@ -165,7 +166,14 @@ public class TestBulletinFolder extends TestCaseEnhanced
 		// can't add unsaved bulletin to a folder
 		Bulletin b = store.createEmptyBulletin();
 		assertTrue(b != null);
-		folder.add(b);
+		try
+		{
+			folder.add(b);
+			fail("Should have thrown for unsaved bulletin");
+		}
+		catch(IOException ignoreExpected)
+		{
+		}
 		assertEquals(0, folder.getBulletinCount());
 
 		final int count = 7;
@@ -215,7 +223,7 @@ public class TestBulletinFolder extends TestCaseEnhanced
 		testFolder.add(b);
 	}
 
-	public void testAddBulletinAgainToSameFolder()
+	public void testAddBulletinAgainToSameFolder() throws Exception
 	{
 		assertTrue("Bulletin b not already in folder?", testFolder.contains(b));
 		try

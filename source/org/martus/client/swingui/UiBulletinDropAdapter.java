@@ -133,6 +133,10 @@ public abstract class UiBulletinDropAdapter implements DropTargetListener
 		{
 			worked = false;
 		}
+		catch (IOException e)
+		{
+			worked = false;
+		}
 		//System.out.println("dropTransferableBulletin: Drop Complete!");
 		
 		if(worked)
@@ -227,10 +231,6 @@ public abstract class UiBulletinDropAdapter implements DropTargetListener
 		if(!worked)
 			observer.notifyDlgBeep(observer, resultMessageTag);
 	}
-	final int noError = 0;
-	final int statusNotAllowed = 1;
-	final int bulletinExists = 2;
-	final int otherError = 3;
 	
 	public void attemptDropFiles(File[] files, BulletinFolder toFolder) throws
 		StatusNotAllowedException, BulletinAlreadyExistsException, Exception
@@ -282,7 +282,7 @@ public abstract class UiBulletinDropAdapter implements DropTargetListener
 
 
 	public void attemptDropBulletins(Bulletin[] bulletins, BulletinFolder toFolder) throws
-		BulletinStore.StatusNotAllowedException, BulletinAlreadyExistsException
+		BulletinStore.StatusNotAllowedException, BulletinAlreadyExistsException, IOException
 	{
 		System.out.println("attemptDropBulletin");
 
@@ -309,16 +309,29 @@ public abstract class UiBulletinDropAdapter implements DropTargetListener
 				if(errorThrown == noError)
 					errorThrown = bulletinExists;
 			}
+			catch (IOException e)
+			{
+				if(errorThrown == noError)
+					errorThrown = ioError;
+			}
 		}
 		store.saveFolders();
 
 		observer.folderContentsHaveChanged(toFolder);
 		
+		if(errorThrown == ioError)
+			throw new IOException();
 		if(errorThrown == statusNotAllowed)
 			throw new StatusNotAllowedException();
 		if(errorThrown == bulletinExists)
 			throw new BulletinAlreadyExistsException();
 		}
+
+	final int noError = 0;
+	final int statusNotAllowed = 1;
+	final int bulletinExists = 2;
+	final int ioError = 3;
+	final int otherError = 4;
 
 	UiMainWindow observer;
 }

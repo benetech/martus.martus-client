@@ -29,15 +29,14 @@ package org.martus.client.core;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.StringReader;
 import java.io.UnsupportedEncodingException;
 import java.util.HashSet;
-import java.util.Map;
 import java.util.Set;
-import java.util.TreeMap;
 import java.util.Vector;
 import java.util.zip.ZipFile;
 
@@ -110,30 +109,59 @@ public class BulletinStore
 		database = db;
 		initializeFolders();
 
-		cacheOfSortableFieldsFile = getCacheOfSortableFieldsFile();
-
-		bulletinCache = new TreeMap();
-		cacheOfSortableFields = new CacheOfSortableFields();
-
 		database.initialize();
-		loadCacheOfSortableFields();
 
 		publicFieldTags = StandardFieldSpecs.getDefaultPublicFieldSpecs();
 		privateFieldTags = StandardFieldSpecs.getDefaultPrivateFieldSpecs();
+		
+		loadCache();
+		
+		File obsoleteCacheFile = new File(dir, OBSOLETE_CACHE_FILE_NAME);
+		obsoleteCacheFile.delete();
 	}
 
 	public void prepareToExit()
 	{
+		saveCache();
+	}
+	
+	private void loadCache()
+	{
+		//System.out.println("BulletinStore.loadCache");
+		File cacheFile = new File(dir, CACHE_FILE_NAME);
+		if(!cacheFile.exists())
+			return;
+		
+		byte[] sessionKeyCache = new byte[(int)cacheFile.length()];
 		try
 		{
-			FileOutputStream out = new FileOutputStream(cacheOfSortableFieldsFile);
-			cacheOfSortableFields.save(out, getSignatureGenerator());
-			out.close();
+			FileInputStream in = new FileInputStream(cacheFile);
+			in.read(sessionKeyCache);
+			in.close();
+			getSignatureGenerator().setSessionKeyCache(sessionKeyCache);
 		}
 		catch (Exception e)
 		{
 			e.printStackTrace();
-			cacheOfSortableFieldsFile.delete();
+			cacheFile.delete();
+		}
+	}
+
+	private void saveCache()
+	{
+		System.out.println("BulletinStore.saveCache");
+		try
+		{
+			byte[] sessionKeyCache = getSignatureGenerator().getSessionKeyCache();
+			File cacheFile = new File(dir, CACHE_FILE_NAME);
+			FileOutputStream out = new FileOutputStream(cacheFile);
+			out.write(sessionKeyCache);
+			out.close();
+		}
+		catch (Exception e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
 
@@ -294,16 +322,10 @@ public class BulletinStore
 			//e.printStackTrace();
 			throw new IOException("Unable to delete bulletin");
 		}
-		bulletinCache.remove(uid);
-		cacheOfSortableFields.removeFieldData(uid);
 	}
 
 	public Bulletin findBulletinByUniversalId(UniversalId uid)
 	{
-
-		if(bulletinCache.containsKey(uid))
-			return (Bulletin)bulletinCache.get(uid);
-
 		Database db = getDatabase();
 
 		DatabaseKey key = new DatabaseKey(uid);
@@ -316,7 +338,6 @@ public class BulletinStore
 		try
 		{
 			Bulletin b = loadFromDatabase(key);
-			addToCaches(b);
 			return b;
 		}
 		catch(NullPointerException e)
@@ -335,10 +356,6 @@ public class BulletinStore
 
 	public String getFieldData(UniversalId uid, String fieldTag)
 	{
-		String data = cacheOfSortableFields.getFieldData(uid, fieldTag);
-		if(data != null && data.trim().length() > 0)
-			return data;
-								
 		Bulletin b = findBulletinByUniversalId(uid);
 		
 		if(fieldTag.equals(Bulletin.TAGSTATUS))
@@ -357,13 +374,7 @@ public class BulletinStore
 
 	public void saveBulletin(Bulletin b) throws IOException, CryptoException
 	{
-		bulletinCache.remove(b.getUniversalId());
 		BulletinSaver.saveToClientDatabase(b, database, mustEncryptPublicData(), getSignatureGenerator());
-
-		//We don't call addToCaches here because we are not sure
-		//that this bulletin object is still usable -- maybe
-		//attachment proxies still point to disk files?
-		cacheOfSortableFields.setFieldData(b);
 	}
 
 	public synchronized void discardBulletin(BulletinFolder f, Bulletin b, boolean saveFolders) throws IOException
@@ -429,6 +440,10 @@ public class BulletinStore
 			}
 			catch (BulletinAlreadyExistsException safeToIgnore)
 			{
+			}
+			catch (IOException safeToIgnore)
+			{
+				safeToIgnore.printStackTrace();
 			}
 			folder.remove(b.getUniversalId());
 		}
@@ -601,6 +616,11 @@ public class BulletinStore
 		{
 			System.out.println("Bulletin already exists in destination folder");
 		}
+		catch (IOException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		boolean saveFolders = true;
 		removeBulletinFromFolder(b, from, saveFolders);
 	}
@@ -635,8 +655,6 @@ public class BulletinStore
 	public void deleteAllBulletins() throws Exception
 	{
 		database.deleteAllData();
-		bulletinCache.clear();
-		getCacheOfSortableFieldsFile().delete();
 	}
 
 	public void deleteFoldersDatFile()
@@ -771,7 +789,7 @@ public class BulletinStore
 		return createFolder(name);
 	}
 
-	public synchronized void addBulletinToFolder(UniversalId uId, BulletinFolder folder) throws BulletinAlreadyExistsException
+	public synchronized void addBulletinToFolder(UniversalId uId, BulletinFolder folder) throws BulletinAlreadyExistsException, IOException
 	{
 		Bulletin b = findBulletinByUniversalId(uId);
 		if(b == null)
@@ -787,43 +805,9 @@ public class BulletinStore
 		createSystemFolders();
 	}
 	
-	private File getCacheOfSortableFieldsFile()
-	{
-		return new File(dir, CACHE_FILE_NAME);
-	}
-
 	public void setPublicFieldTags(FieldSpec[] newTags)
 	{
 		publicFieldTags = newTags;
-	}
-
-	private void loadCacheOfSortableFields()
-	{
-		if(!cacheOfSortableFieldsFile.exists())
-			return;
-
-		FileInputStreamWithSeek in = null;
-		try
-		{
-			in = new FileInputStreamWithSeek(cacheOfSortableFieldsFile);
-			cacheOfSortableFields.load(in, getSignatureGenerator());
-		}
-		catch (IOException e)
-		{
-			e.printStackTrace();
-		}
-		finally
-		{
-			try
-			{
-				if(in != null)
-					in.close();
-			}
-			catch (IOException nothingWeCanDo)
-			{
-			}
-		}
-		cacheOfSortableFieldsFile.delete();
 	}
 
 	public int quarantineUnreadableBulletins()
@@ -1025,6 +1009,11 @@ public class BulletinStore
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
+				catch (IOException e)
+				{
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 			else
 				super.endElement(tag, ended);
@@ -1110,15 +1099,6 @@ public class BulletinStore
 		return true;
 	}
 
-	synchronized void addToCaches(Bulletin b)
-	{
-		if(bulletinCache.size() >= maxCachedBulletinCount)
-			bulletinCache.clear();
-
-		bulletinCache.put(b.getUniversalId(), b);
-		cacheOfSortableFields.setFieldData(b);
-	}
-
 	public UniversalId importZipFileToStoreWithNewUids(File inputFile) throws
 		InvalidPacketException,
 		SignatureVerificationException,
@@ -1158,7 +1138,8 @@ public class BulletinStore
 	public static final String DAMAGED_BULLETIN_FOLDER = "%DamagedBulletins";
 	private static final String DRAFT_OUTBOX = "*DraftOutbox";
 
-	private static final String CACHE_FILE_NAME = "sfcache.dat";
+	private static final String CACHE_FILE_NAME = "skcache.dat";
+	private static final String OBSOLETE_CACHE_FILE_NAME = "sfcache.dat";
 	private MartusCrypto signer;
 	private File dir;
 	Database database;
@@ -1168,9 +1149,6 @@ public class BulletinStore
 	private BulletinFolder folderDrafts;
 	private BulletinFolder folderDiscarded;
 	private BulletinFolder folderDraftOutbox;
-	public Map bulletinCache;
-	CacheOfSortableFields cacheOfSortableFields;
-	File cacheOfSortableFieldsFile;
 	boolean loadedLegacyFolders;
 
 	FieldSpec[] publicFieldTags;
