@@ -597,7 +597,7 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		assertEquals("already exists?", false, configFile.exists());
 		String sampleHQKey = "abc123";
 		String sampleLabel = "Fred";
-		Vector keys = new Vector();
+		HQKeys keys = new HQKeys();
 		HQKey key = new HQKey(sampleHQKey, sampleLabel);
 		keys.add(key);
 		appWithAccount.setAndSaveHQKeys(keys);
@@ -613,16 +613,16 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		String sampleLabel1 = "Fred";
 		String sampleHQKey2 = "234567";
 		String sampleLabel2 = "Bev";
-		Vector keys = new Vector();
+		HQKeys keys = new HQKeys();
 		HQKey key1 = new HQKey(sampleHQKey1, sampleLabel1);
 		HQKey key2 = new HQKey(sampleHQKey2, sampleLabel2);
 		keys.add(key1);
 		keys.add(key2);
 		appWithAccount.setAndSaveHQKeys(keys);
 		assertEquals("Incorrect default public key", sampleHQKey1, appWithAccount.getLegacyHQKey());
-		Vector returnedKeys = appWithAccount.getHQKeys();
-		assertTrue(HQKeys.containsKey(returnedKeys, sampleHQKey1));
-		assertTrue(HQKeys.containsKey(returnedKeys, sampleHQKey2));
+		HQKeys returnedKeys = appWithAccount.getHQKeys();
+		assertTrue(returnedKeys.containsKey(sampleHQKey1));
+		assertTrue(returnedKeys.containsKey(sampleHQKey2));
 	}
 
 	public void testClearHQKey() throws Exception
@@ -630,14 +630,14 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		File configFile = appWithAccount.getConfigInfoFile();
 		configFile.deleteOnExit();
 		assertEquals("already exists?", false, configFile.exists());
-		Vector empty = new Vector();
+		HQKeys empty = new HQKeys();
 		appWithAccount.setAndSaveHQKeys(empty);
 		assertEquals("HQ key exists?", "", appWithAccount.getLegacyHQKey());
 		assertEquals("Didn't save?", true, configFile.exists());
 
 		String sampleHQKey1 = "abc123";
 		String sampleLabel1 = "Fred";
-		Vector keys = new Vector();
+		HQKeys keys = new HQKeys();
 		HQKey key1 = new HQKey(sampleHQKey1, sampleLabel1);
 		keys.add(key1);
 
@@ -1498,22 +1498,35 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 	{
 		String sampleHQKey1 = "abc123";
 		String sampleLabel1 = "Fred";
-		Vector keys = new Vector();
+		HQKeys keys = new HQKeys();
 		HQKey key1 = new HQKey(sampleHQKey1, sampleLabel1);
 		keys.add(key1);
 		appWithAccount.setAndSaveHQKeys(keys);
-		Vector returnedKeys = appWithAccount.getHQKeys();
-		HQKey returnedKey1 = (HQKey)returnedKeys.get(0);
+		HQKeys returnedKeys = appWithAccount.getHQKeys();
+		HQKey returnedKey1 = returnedKeys.get(0);
 		assertEquals("Public Key not set?", sampleHQKey1, returnedKey1.getPublicKey());
 		assertEquals("Label not set?", sampleLabel1, returnedKey1.getLabel());
 
 		Bulletin b1 = appWithAccount.createBulletin();
 		assertEquals("key already set?", 0, b1.getAuthorizedToReadKeys().size());
 		appWithAccount.setHQKeysInBulletin(b1);
-		assertEquals("Key not set?", sampleHQKey1, ((HQKey)b1.getAuthorizedToReadKeys().get(0)).getPublicKey());
-		assertEquals("Label not set?", sampleLabel1, ((HQKey)b1.getAuthorizedToReadKeys().get(0)).getLabel());
+		assertEquals("Key not set?", sampleHQKey1, (b1.getAuthorizedToReadKeys().get(0)).getPublicKey());
+		assertEquals("Label not set?", sampleLabel1, (b1.getAuthorizedToReadKeys().get(0)).getLabel());
 	}
 
+	public void testGetBulletinHQLabel() throws Exception
+	{
+		String sampleHQKey1 = "abc123";
+		String sampleLabel1 = "Fred";
+		HQKeys keys = new HQKeys();
+		HQKey key1 = new HQKey(sampleHQKey1, sampleLabel1);
+		keys.add(key1);
+		appWithAccount.setAndSaveHQKeys(keys);
+		assertEquals("Label not the same?", sampleLabel1, appWithAccount.getHQLabelIfPresent(sampleHQKey1));
+		assertEquals("not Empty for unknown key?", "", appWithAccount.getHQLabelIfPresent("unknown"));
+	}
+	
+	
 	private MockMartusSecurity mockSecurityForApp;
 
 	UiLocalization localization;

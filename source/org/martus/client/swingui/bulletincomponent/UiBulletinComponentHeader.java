@@ -34,17 +34,15 @@ import java.text.DateFormat;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
-import java.util.Vector;
-
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EtchedBorder;
-
 import org.martus.client.swingui.UiLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.common.HQKey;
+import org.martus.common.HQKeys;
 import org.martus.swing.ParagraphLayout;
 import org.martus.util.TokenReplacement;
 import org.martus.util.Base64.InvalidBase64Exception;
@@ -70,9 +68,9 @@ public class UiBulletinComponentHeader extends UiBulletinComponentSection
 		add(bulletinLastSaved);
 	}
 
-	public void setHqKeys(Vector hqKeys)
+	public void setHqKeys(HQKeys keys)
 	{
-		summary.setHqKeys(hqKeys);
+		summary.setHqKeys(keys);
 	}
 	
 	public void setLastSaved(long time)
@@ -135,7 +133,7 @@ public class UiBulletinComponentHeader extends UiBulletinComponentSection
 			add(detailsButton, BorderLayout.EAST);
 		}
 		
-		void setHqKeys(Vector hqKeys)
+		void setHqKeys(HQKeys hqKeys)
 		{
 			hqList = hqKeys;
 			int numberOfHqs = hqList.size();
@@ -183,7 +181,7 @@ public class UiBulletinComponentHeader extends UiBulletinComponentSection
 				{
 					String thisHqCode;
 					HQKey hqKey = getHqPublicCode(i);
-					String thisHqlabel = hqKey.getLabel();
+					String thisHqlabel = mainWindow.getApp().getHQLabelIfPresent(hqKey.getPublicKey());
 					try
 					{
 						thisHqCode = hqKey.getPublicCode();
@@ -220,7 +218,7 @@ public class UiBulletinComponentHeader extends UiBulletinComponentSection
 		UiMainWindow mainWindow;
 		String tagQualifier;
 		JLabel label;
-		Vector hqList;
+		HQKeys hqList;
 	}
 
 	HqSummary summary;

@@ -30,18 +30,16 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Rectangle;
 import java.io.IOException;
-import java.util.Vector;
-
 import javax.swing.JCheckBox;
 import javax.swing.JPanel;
 import javax.swing.Scrollable;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
-
 import org.martus.client.core.EncryptionChangeListener;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.fields.UiField;
 import org.martus.common.FieldSpec;
+import org.martus.common.HQKeys;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.crypto.MartusCrypto;
 import org.martus.common.packet.FieldDataPacket;
@@ -56,7 +54,7 @@ abstract public class UiBulletinComponent extends JPanel implements Scrollable, 
 	abstract public boolean isBulletinModified() throws
 			IOException, MartusCrypto.EncryptionException;
 	abstract UiBulletinComponentHeader createHeaderSection();
-	abstract Vector getHqKeys();
+	abstract HQKeys getHqKeys();
 
 	// ChangeListener interface
 	abstract public void stateChanged(ChangeEvent event);

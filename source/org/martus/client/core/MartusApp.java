@@ -187,26 +187,36 @@ public class MartusApp
 		return configInfo.getLegacyHQKey();
 	}
 	
-	public Vector getHQKeys() throws HQsException
+	public HQKeys getHQKeys() throws HQsException
 	{
-		String xml = configInfo.getAllHQKeysXml();
-		return HQKeys.parseXml(xml);
+		return new HQKeys(configInfo.getAllHQKeysXml());
 	}
 
-	public Vector getHQKeysWithFallback()
+	public HQKeys getHQKeysWithFallback()
 	{
-		Vector hqKeys = new Vector();
 		try
 		{
-			hqKeys = getHQKeys();
+			return getHQKeys();
 		}
 		catch (HQsException e)
 		{
 			e.printStackTrace();
-			HQKey legacyKey = new HQKey(getLegacyHQKey(), null);
-			hqKeys.add(legacyKey);
+			HQKey legacyKey = new HQKey(getLegacyHQKey());
+			return new HQKeys(legacyKey);
 		}
-		return hqKeys;
+	}
+	
+	public String getHQLabelIfPresent(String hqKey)
+	{
+		try
+		{
+			return getHQKeys().getLabelIfPresent(hqKey);
+		}
+		catch (HQsException e)
+		{
+			e.printStackTrace();
+			return "";
+		}
 	}
 
 	public ConfigInfo getConfigInfo()
@@ -214,14 +224,13 @@ public class MartusApp
 		return configInfo;
 	}
 	
-	public void setAndSaveHQKeys(Vector hQKeys) throws SaveConfigInfoException 
+	public void setAndSaveHQKeys(HQKeys hQKeys) throws SaveConfigInfoException 
 	{
-		HQKeys keys = new HQKeys(hQKeys);
-		configInfo.setAllHQKeysXml(keys.toString());
+		configInfo.setAllHQKeysXml(hQKeys.toStringWithLabel());
 		if(hQKeys.isEmpty())
 			configInfo.clearHQKey();
 		else
-			configInfo.setLegacyHQKey(((HQKey)hQKeys.get(0)).getPublicKey());
+			configInfo.setLegacyHQKey(hQKeys.get(0).getPublicKey());
 		saveConfigInfo();
 	}
 
@@ -314,11 +323,10 @@ public class MartusApp
 		String legacyHQKey = configInfo.getLegacyHQKey();
 		if(legacyHQKey.length()>0)
 		{
-			Vector hqKeys = getHQKeys();
-			if(!HQKeys.containsKey(hqKeys, legacyHQKey))
+			HQKeys hqKeys = getHQKeys();
+			if(!hqKeys.containsKey(legacyHQKey))
 			{
-				String emptyLabel = "";
-				HQKey legacy = new HQKey(legacyHQKey, emptyLabel);
+				HQKey legacy = new HQKey(legacyHQKey);
 				hqKeys.add(legacy);
 				try
 				{
@@ -473,7 +481,7 @@ public class MartusApp
 
 	public void setHQKeysInBulletin(Bulletin b)
 	{
-		Vector hqKeys = getHQKeysWithFallback();
+		HQKeys hqKeys = getHQKeysWithFallback();
 		b.setAuthorizedToReadKeys(hqKeys);
 	}
 

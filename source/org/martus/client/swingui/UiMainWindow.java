@@ -113,6 +113,7 @@ import org.martus.client.swingui.tablemodels.RetrieveHQTableModel;
 import org.martus.client.swingui.tablemodels.RetrieveMyDraftsTableModel;
 import org.martus.client.swingui.tablemodels.RetrieveMyTableModel;
 import org.martus.client.swingui.tablemodels.RetrieveTableModel;
+import org.martus.common.HQKeys;
 import org.martus.common.MartusUtilities;
 import org.martus.common.MartusUtilities.FileVerificationException;
 import org.martus.common.MartusUtilities.ServerErrorException;
@@ -1651,7 +1652,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		new UiConfigureHQs(this);
 	}
 	
-	public void setAndSaveHQKeysInConfigInfo(Vector hQKeys)
+	public void setAndSaveHQKeysInConfigInfo(HQKeys hQKeys)
 	{
 		try
 		{

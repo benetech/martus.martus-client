@@ -54,6 +54,7 @@ import javax.swing.table.TableModel;
 import org.martus.client.core.MartusApp;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.common.HQKey;
+import org.martus.common.HQKeys;
 import org.martus.common.HQKeys.HQsException;
 import org.martus.common.clientside.UiBasicLocalization;
 import org.martus.common.crypto.MartusCrypto;
@@ -70,7 +71,7 @@ public class UiConfigureHQs extends JDialog
 		super(owner, "", true);
 		mainWindow = owner;
 		localization = mainWindow.getLocalization();
-		hQKeys = new Vector();
+		hQKeys = new HQKeys();
 		
 		setTitle(localization.getWindowTitle("ConfigureHQs"));
 		JPanel panel = new JPanel();
@@ -114,9 +115,9 @@ public class UiConfigureHQs extends JDialog
 		
 		try
 		{
-			Vector hQKeys = mainWindow.getApp().getHQKeys();
-			for(int i = 0; i<hQKeys.size();++i)
-				addHQKeyToTable((HQKey)hQKeys.get(i));
+			HQKeys local = mainWindow.getApp().getHQKeys();
+			for(int i = 0; i<local.size();++i)
+				addHQKeyToTable(local.get(i));
 		}
 		catch (HQsException e)
 		{
@@ -245,7 +246,7 @@ public class UiConfigureHQs extends JDialog
 						Object hQCodeToBeRemoved = table.getValueAt(i,PUBLIC_CODE_COLUMN);
 						for(int j = 0; j<hQKeys.size(); ++j)
 						{
-							HQKey thisKey = ((HQKey)hQKeys.get(j));
+							HQKey thisKey = hQKeys.get(j);
 							if ( thisKey.getPublicCode().equals(hQCodeToBeRemoved))
 							{
 								String newLabel = getHQLabel(thisKey.getPublicCode(), thisKey.getLabel());
@@ -303,7 +304,7 @@ public class UiConfigureHQs extends JDialog
 						Object hQCodeToBeRemoved = table.getValueAt(i,PUBLIC_CODE_COLUMN);
 						for(int j = 0; j<hQKeys.size(); ++j)
 						{
-							if ( ((HQKey)hQKeys.get(j)).getPublicCode().equals(hQCodeToBeRemoved))
+							if (hQKeys.get(j).getPublicCode().equals(hQCodeToBeRemoved))
 							{
 								hQKeys.remove(j);
 								break;
@@ -434,5 +435,5 @@ public class UiConfigureHQs extends JDialog
 	private static final int DEFAULT_VIEABLE_ROWS = 5;
 	private static final int PUBLIC_CODE_COLUMN = 0;
 	private static final int LABEL_COLUMN = 1;
-	Vector hQKeys;
+	HQKeys hQKeys;
 }

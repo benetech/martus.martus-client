@@ -27,14 +27,12 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.swingui.bulletincomponent;
 
 import java.io.IOException;
-import java.util.Vector;
-
 import javax.swing.event.ChangeEvent;
-
 import org.martus.client.core.EncryptionChangeListener;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.fields.UiField;
 import org.martus.common.FieldSpec;
+import org.martus.common.HQKeys;
 import org.martus.common.bulletin.AttachmentProxy;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.crypto.MartusCrypto;
@@ -177,7 +175,7 @@ public class UiBulletinEditor extends UiBulletinComponent
 		}
 	}
 
-	Vector getHqKeys()
+	HQKeys getHqKeys()
 	{
 		return mainWindow.getApp().getHQKeysWithFallback();
 	}

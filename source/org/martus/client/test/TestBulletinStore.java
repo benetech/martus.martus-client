@@ -42,6 +42,7 @@ import org.martus.client.core.MartusClientXml;
 import org.martus.client.core.BulletinStore.BulletinAlreadyExistsException;
 import org.martus.common.FieldSpec;
 import org.martus.common.HQKey;
+import org.martus.common.HQKeys;
 import org.martus.common.MartusXml;
 import org.martus.common.StandardFieldSpecs;
 import org.martus.common.bulletin.AttachmentProxy;
@@ -1066,8 +1067,8 @@ public class TestBulletinStore extends TestCaseEnhanced
 		BulletinStore hqStore = createTempStore();
 
 		Bulletin original = store.createEmptyBulletin();
-		Vector keys = new Vector();
-		HQKey key1 = new HQKey(hqStore.getAccountId(), "");
+		HQKeys keys = new HQKeys();
+		HQKey key1 = new HQKey(hqStore.getAccountId());
 		keys.add(key1);
 		original.setAuthorizedToReadKeys(keys);
 		original.setSealed();
