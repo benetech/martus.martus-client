@@ -32,6 +32,7 @@ import java.awt.Rectangle;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.RandomAccessFile;
 import java.util.Vector;
 
 import org.martus.client.core.BulletinFolder;
@@ -488,6 +489,48 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		assertEquals("non-blank username?", "", appWithAccount.getUserName());
 		appWithAccount.security.createKeyPair();
 		TRACE_END();
+	}
+	
+	public void testScrubKeyPairFile() throws Exception
+	{
+		TRACE_BEGIN("testScrubKeyPairFile");
+		appWithAccount.scrubKeypair();	
+		
+		File keyPairFile = appWithAccount.getCurrentKeyPairFile();	
+		checkScrubbedData(keyPairFile);
+		checkScrubbedData(MartusApp.getBackupFile(keyPairFile));
+
+		TRACE_END();
+	}
+	
+	public void testScrubAndDeleteKeyPairFile() throws Exception
+	{
+		TRACE_BEGIN("testScrubAndDeleteKeyPairFile");
+		QuickEraseOptions opts = new QuickEraseOptions();
+		opts.setDeleteKeyPairOption(true);
+		opts.setScrubOption(true);
+		
+		appWithAccount.scrubAndDeleteKeypair(opts);
+		
+		File keyPairFile = appWithAccount.getCurrentKeyPairFile();	
+		File backupKeyPairFile = MartusApp.getBackupFile(keyPairFile);
+			
+		assertEquals("keypair file exist?", false, keyPairFile.exists());
+		assertEquals("backup keypair file exist?", false, backupKeyPairFile.exists());
+		
+		TRACE_END();		
+		
+	}
+	
+	protected void checkScrubbedData(File file) throws Exception
+	{
+		RandomAccessFile randomFile = new RandomAccessFile(file, "r");
+		randomFile.seek(0);
+		for (int i = 0; i < randomFile.length(); i++)
+		{
+			assertEquals("wrong byte?", 0x55, randomFile.read());
+		}
+		randomFile.close();
 	}
 
 	public void testAttemptSignInAuthorizationFailure() throws Exception

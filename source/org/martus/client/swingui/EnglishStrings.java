@@ -658,6 +658,8 @@ public class EnglishStrings
 "field:ScrubDataBeforeDelete=Scrub data before deleting",
 "field:DeleteKeypair=Delete Keypair",
 "field:ExitWhenComplete=Exit when complete",
+"field:confirmQuickEraseDeleteKeyPaircause=This will scrub and delete keypair files on this computer.",
+"field:confirmQuestionDeleteKeypair=Are you really sure?",
 
 
 "field:DateRangeFrom=Between",

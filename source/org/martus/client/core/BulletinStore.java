@@ -583,15 +583,19 @@ public class BulletinStore
 	public void deleteAllData() throws Exception
 	{
 		database.deleteAllData();
-		deleteAndResetFolders();
-	}		
+		deleteFolders();
+		resetFolders();
+	}			
 	
-	private void deleteAndResetFolders()
+	public void deleteFolders()
 	{
 		getFoldersFile().delete();
-		if (resetFolder)
-			setUpStore(dir, database);
 	}	
+	
+	public void resetFolders()
+	{
+		setUpStore(dir, database);
+	}
 	
 	public void scrubAllData() throws Exception
 	{
@@ -613,13 +617,8 @@ public class BulletinStore
 
 		PacketScrubber ac = new PacketScrubber();
 		database.visitAllRecords(ac);
-		deleteAndResetFolders();
-	}
-	
-	public void resetFolders(boolean reset)
-	{
-		resetFolder = reset;	
-	}
+		deleteFolders();
+	}	
 
 	public Database getDatabase()
 	{
@@ -1075,6 +1074,5 @@ public class BulletinStore
 	File cacheOfSortableFieldsFile;
 
 	FieldSpec[] publicFieldTags;
-	FieldSpec[] privateFieldTags;
-	boolean resetFolder=true;	
+	FieldSpec[] privateFieldTags;	
 }

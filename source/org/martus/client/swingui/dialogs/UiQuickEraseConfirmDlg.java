@@ -37,6 +37,7 @@ import javax.swing.JLabel;
 import org.martus.client.swingui.UiLocalization;
 import org.martus.swing.ParagraphLayout;
 import org.martus.swing.Utilities;
+
 public class UiQuickEraseConfirmDlg extends JDialog
 {
 	public UiQuickEraseConfirmDlg(JFrame owner, UiLocalization localization, String baseTag)
@@ -97,7 +98,7 @@ public class UiQuickEraseConfirmDlg extends JDialog
 			action=false;
 			dispose();
 		}
-	}
+	}	
 	
 	public boolean isOkayPressed()
 	{
@@ -122,5 +123,6 @@ public class UiQuickEraseConfirmDlg extends JDialog
 	JCheckBox scrubBeforeDelete;
 	JCheckBox deleteKeyPair;
 	JCheckBox exitWhenComplete;
+	
 	boolean action;
 }

@@ -74,6 +74,7 @@ import org.martus.util.Base64;
 import org.martus.util.ByteArrayInputStreamWithSeek;
 import org.martus.util.FileInputStreamWithSeek;
 import org.martus.util.InputStreamWithSeek;
+import org.martus.util.ScrubFile;
 
 
 public class MartusApp
@@ -359,11 +360,20 @@ public class MartusApp
 	public File getKeyPairFile(File dir)
 	{
 		return new File(dir, KEYPAIR_FILENAME);
-	}
+	}	
 
 	public static File getBackupFile(File original)
 	{
 		return new File(original.getPath() + ".bak");
+	}
+	
+	public void scrubKeypair() throws IOException
+	{
+		File file = getCurrentKeyPairFile();	
+		File backupFile = getBackupFile(file);	
+		
+		ScrubFile.scrub(file);
+		ScrubFile.scrub(backupFile);
 	}
 
 	public String getUserName()
@@ -478,17 +488,44 @@ public class MartusApp
 			store.saveFolders();
 		return newFolder;
 	}
+	
+	public void exitWhenCompleteQuickErase(QuickEraseOptions opts)
+	{
+		if (opts.isExitWhenCompleteSelected())
+			store.deleteFolders();	
+	}
+	
+	public boolean scrubAndDeleteKeypair(QuickEraseOptions opts)
+	{
+		try
+		{
+			if (opts.isDeleteKeyPairSelected())
+			{
+				if (opts.isScrubSelected())	
+					scrubKeypair();
+				
+				File keypairFile = getCurrentKeyPairFile();
+				getBackupFile(keypairFile).delete();
+				keypairFile.delete();
+			}
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+			return false;
+		}
+		return true;
+		
+	}
 
 	public boolean deleteAllBulletinsAndUserFolders(QuickEraseOptions opts)
 	{
 		try
-		{						
-			store.resetFolders((opts.isExitWhenCompleteSelected())? false:true);
-				
+		{											
 			if (opts.isScrubSelected())
 				store.scrubAllData();
 				
-			store.deleteAllData();							
+			store.deleteAllData();																	
 		}
 		catch (Exception e)
 		{

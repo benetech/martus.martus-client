@@ -28,6 +28,7 @@ package org.martus.client.swingui.actions;
 
 import java.awt.event.ActionEvent;
 
+import org.martus.client.swingui.UiLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.dialogs.UiQuickEraseConfirmDlg;
 
@@ -45,24 +46,53 @@ public class ActionMenuQuickErase extends UiMenuAction
 		
 		UiQuickEraseConfirmDlg dlg = new UiQuickEraseConfirmDlg(mainWindow, mainWindow.getLocalization(), "DoQuickErase");
 		dlg.show();
-		
+			
 		if (!dlg.isOkayPressed())
 			return;
-				
-		if(mainWindow.getApp().deleteAllBulletinsAndUserFolders(loadQuickEraseOptions(dlg)))
-		{	
-			String baseTag = (dlg.isScrubCheckBoxSelected())? "QuickEraseScrubWorked":"QuickEraseWorked";		
-			mainWindow.notifyDlg(mainWindow, baseTag);
 			
-			if (dlg.isExitWhenCompleteSelected())
-				mainWindow.exitWithoutSavingState();
-		}						
+		QuickEraseOptions options = loadQuickEraseOptions(dlg); 		
+		checkScrubData(mainWindow, options);
+		checkDeleteKeyPair(mainWindow, options);	
+		checkExitWhenComplete(mainWindow, options);
+												
+		mainWindow.folderTreeContentsHaveChanged();		
+	}	
+
+	private void checkScrubData(UiMainWindow parent, QuickEraseOptions options)
+	{
+		if(mainWindow.getApp().deleteAllBulletinsAndUserFolders(options))
+		{	
+			String baseTag = (options.isScrubSelected())? "QuickEraseScrubWorked":"QuickEraseWorked";		
+			mainWindow.notifyDlg(mainWindow, baseTag);								
+		}
 		else
 			mainWindow.notifyDlg(mainWindow, "QuickEraseFailed");
-			
-		mainWindow.folderTreeContentsHaveChanged();		
 	}
-	
+
+	private void checkExitWhenComplete(UiMainWindow parent, QuickEraseOptions options)
+	{
+		if (options.isExitWhenCompleteSelected())
+		{	
+			mainWindow.getApp().exitWhenCompleteQuickErase(options);
+			mainWindow.exitWithoutSavingState();		
+		}		
+	}
+
+	private void checkDeleteKeyPair(UiMainWindow parent, QuickEraseOptions options)
+	{
+		if (options.isDeleteKeyPairSelected())
+		{
+			UiLocalization localization = mainWindow.getLocalization();			
+			String title = localization.getFieldLabel("DeleteKeypair");
+			String cause = localization.getFieldLabel("confirmQuickEraseDeleteKeyPaircause");
+			String question = localization.getFieldLabel("confirmQuestionDeleteKeypair");
+			String[] contents = {cause,"", question};
+			
+			if (mainWindow.confirmDlg(mainWindow, title, contents))
+				mainWindow.getApp().scrubAndDeleteKeypair(options);	
+		}	
+	}
+
 	private QuickEraseOptions loadQuickEraseOptions(UiQuickEraseConfirmDlg dlg)
 	{
 		QuickEraseOptions options = new QuickEraseOptions();
