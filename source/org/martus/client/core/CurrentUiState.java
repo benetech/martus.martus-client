@@ -48,7 +48,6 @@ public class CurrentUiState implements Serializable
 		currentAppPosition = new Point();
 		currentEditorDimension = new Dimension();
 		currentEditorPosition = new Point();
-		currentOperatingState = OPERATING_STATE_OK;
 	}
 
 	public void setCurrentFolder(String folderName)
@@ -171,11 +170,6 @@ public class CurrentUiState implements Serializable
 		return currentEditorPosition;
 	}
 
-	public String getCurrentOperatingState()
-	{
-		return currentOperatingState;
-	}
-
 	public void setCurrentAppDimension(Dimension currentAppDimension)
 	{
 		this.currentAppDimension = currentAppDimension;
@@ -204,11 +198,6 @@ public class CurrentUiState implements Serializable
 	public void setCurrentEditorPosition(Point currentEditorPosition)
 	{
 		this.currentEditorPosition = currentEditorPosition;
-	}
-
-	public void setCurrentOperatingState(String currentOperatingState)
-	{
-		this.currentOperatingState = currentOperatingState;
 	}
 
 	public void save(File file)
@@ -242,7 +231,7 @@ public class CurrentUiState implements Serializable
 			out.writeInt(currentEditorPosition.y);
 			out.writeBoolean(currentEditorMaximized);
 
-			out.writeUTF(currentOperatingState);
+			out.writeUTF(OPERATING_STATE_OK);
 
 			out.flush();
 			out.close();
@@ -289,7 +278,7 @@ public class CurrentUiState implements Serializable
 						currentEditorMaximized = in.readBoolean();
 						if(version > 3)
 						{
-							currentOperatingState = in.readUTF();
+							in.readUTF();//OPERATING_STATE_OK
 						}
 					}
 				}
@@ -309,7 +298,7 @@ public class CurrentUiState implements Serializable
 		return (firstIntegerIn == uiStateFirstIntegerInFile);
 	}
 
-	public static final short VERSION = 4;
+	public static final short VERSION = 5;
 	//Version 1
 	protected static int uiStateFirstIntegerInFile = 2002;
 	protected String currentFolderName;
@@ -334,9 +323,12 @@ public class CurrentUiState implements Serializable
 	protected boolean currentEditorMaximized;
 
 	//Version 4
-	protected String currentOperatingState;
+	//protected String currentOperatingState;
 	public static final String OPERATING_STATE_OK = "OK";
-	public static final String OPERATING_STATE_UNKNOWN = "UNKNOWN";
-	public static final String OPERATING_STATE_BAD = "BAD";
+	//public static final String OPERATING_STATE_UNKNOWN = "UNKNOWN";
+	//public static final String OPERATING_STATE_BAD = "BAD";
+	
+	//Version 5 
+	//Removed currentOperatingState
 
 }

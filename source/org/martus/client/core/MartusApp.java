@@ -347,7 +347,10 @@ public class MartusApp
 
 	public File getUiStateFile()
 	{
-		return new File(getMartusDataRootDirectory(), "UiState.dat");
+		if(isSignedIn())
+			return new File(getMartusDataRootDirectory(), "UsersUiState.dat");
+		else
+			return new File(getMartusDataRootDirectory(), "UiState.dat");
 	}
 
 	public File getBulletinDefaultDetailsFile()

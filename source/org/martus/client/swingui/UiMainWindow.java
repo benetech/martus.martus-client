@@ -227,12 +227,6 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 
 		int quarantineCount = app.quarantineUnreadableBulletins();
 
-		if(uiState.getCurrentOperatingState().equals(CurrentUiState.OPERATING_STATE_OK))
-		{
-			uiState.setCurrentOperatingState(CurrentUiState.OPERATING_STATE_UNKNOWN);
-			uiState.save(app.getUiStateFile());
-		}
-
 		app.loadFolders();
 		int orphanCount = app.repairOrphans();
 
@@ -262,11 +256,6 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		errorChecker = new javax.swing.Timer(10*1000, new UploadErrorChecker());
 		errorChecker.start();
 
-		if(uiState.getCurrentOperatingState().equals(CurrentUiState.OPERATING_STATE_UNKNOWN))
-		{
-			uiState.setCurrentOperatingState(CurrentUiState.OPERATING_STATE_OK);
-			uiState.save(app.getUiStateFile());
-		}
 		waitingForBulletinsToLoad.endDialog();
 		mainWindowInitalizing = false;
 		return true;
@@ -668,8 +657,6 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 			if(folder.getSortDirection() != uiState.getCurrentSortDirection())
 				folder.sortBy(sortTag);
 			folders.selectFolder(folderName);
-			if(!uiState.getCurrentOperatingState().equals(CurrentUiState.OPERATING_STATE_BAD))
-				table.setCurrentBulletinIndex(uiState.getCurrentBulletinPosition());
 		}
 		catch(Exception e)
 		{
@@ -686,11 +673,6 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		uiState.load(stateFile);
 		uiState.setCurrentLanguage(localization.getCurrentLanguageCode());
 		uiState.setCurrentDateFormat(localization.getCurrentDateFormatCode());
-		if(uiState.getCurrentOperatingState().equals(CurrentUiState.OPERATING_STATE_UNKNOWN))
-		{
-			uiState.setCurrentOperatingState(CurrentUiState.OPERATING_STATE_BAD);
-			uiState.save(stateFile);
-		}
 	}
 
 	public void selectBulletinInCurrentFolderIfExists(UniversalId id)

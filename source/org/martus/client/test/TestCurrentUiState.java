@@ -48,12 +48,11 @@ public class TestCurrentUiState extends TestCaseEnhanced
 	public void testDefaultValues() throws Exception
 	{
 		CurrentUiState state = new CurrentUiState();
-		assertEquals("Current Version not 4 - more tests needed?", 4, CurrentUiState.VERSION);
+		assertEquals("Current Version not 4 - more tests needed?", 5, CurrentUiState.VERSION);
 
 		assertEquals("Default Keyboard not Virtual?", true, state.isCurrentDefaultKeyboardVirtual());
 		assertEquals("Default PreviewSplitterPosition not 100?", 100, state.getCurrentPreviewSplitterPosition());
 		assertEquals("Default FolderSplitterPosition not 180?", 180, state.getCurrentFolderSplitterPosition());
-		assertEquals("Default state not OK?", CurrentUiState.OPERATING_STATE_OK, state.getCurrentOperatingState());
 	}
 
 	public void testSaveAndLoadState() throws Exception
@@ -74,7 +73,6 @@ public class TestCurrentUiState extends TestCaseEnhanced
 		Dimension sampleEditorDimension = new Dimension(123, 43);
 		Point sampleEditorPosition = new Point(2, 99);
 		boolean sampleEditorMaximized = true;
-		String sampleOperationState = CurrentUiState.OPERATING_STATE_UNKNOWN;
 
 		CurrentUiState state = new CurrentUiState();
 
@@ -97,7 +95,6 @@ public class TestCurrentUiState extends TestCaseEnhanced
 		state.setCurrentEditorPosition(sampleEditorPosition);
 		state.setCurrentEditorMaximized(sampleEditorMaximized);
 
-		state.setCurrentOperatingState(sampleOperationState);
 
 		File file = createTempFileFromName("$$$TestCurrentFolder");
 		state.save(file);
@@ -121,7 +118,6 @@ public class TestCurrentUiState extends TestCaseEnhanced
 		assertEquals("Wrong Editor Position?", sampleEditorPosition, loaded.getCurrentEditorPosition());
 		assertEquals("Wrong Editor Maximized?", sampleEditorMaximized, loaded.isCurrentEditorMaximized());
 
-		assertEquals("Wrong Operating State?", sampleOperationState, loaded.getCurrentOperatingState());
 
 		file.delete();
 	}
