@@ -65,12 +65,12 @@ public class UiGrid extends UiField
 			for(int i = 1 ; i < model.getColumnCount(); ++i)
 				setColumnWidthToHeaderWidth(this, i);
 			setAutoResizeMode(AUTO_RESIZE_OFF);
+			myCellRenderer = new GridCellRenderer();
 		}
 		
 		public TableCellRenderer getCellRenderer(int row, int column)
 		{
-			//TODO Optimize: don't create a new renderer each time
-			return new myCellRenderer();
+			return myCellRenderer;
 		}
 
 		public void changeSelection(int rowIndex, int columnIndex,
@@ -82,7 +82,7 @@ public class UiGrid extends UiField
 		}
 	}
 	
-	class myCellRenderer implements TableCellRenderer
+	class GridCellRenderer implements TableCellRenderer
 	{
 		public Component getTableCellRendererComponent(JTable tableToUse, Object value, boolean isSelected, boolean hasFocus, int row, int column)
 		{
@@ -99,18 +99,6 @@ public class UiGrid extends UiField
 			{
 				cell.setBorder(new LineBorder(Color.BLACK,1));
 			}
-			else
-			{
-				if(isSelected)
-				{
-//					cell.setBackground(new Color(0,0,0));
-				}
-				else
-				{
-	//				cell.setBackground(new Color(255,255,255));
-				}
-			}
-				
 			return cell;
 		}
 	}
@@ -141,4 +129,5 @@ public class UiGrid extends UiField
 	UiScrollPane widget;
 	UiTable table;
 	GridTableModel model;
+	GridCellRenderer myCellRenderer;
 }
