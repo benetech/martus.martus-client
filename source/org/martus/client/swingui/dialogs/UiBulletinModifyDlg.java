@@ -27,6 +27,7 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.swingui.dialogs;
 
 import java.awt.BorderLayout;
+import java.awt.Component;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Point;
@@ -95,9 +96,8 @@ public class UiBulletinModifyDlg extends JFrame implements ActionListener, Windo
 				
 
 			Box box = Box.createHorizontalBox();
-			JButton buttons[] = {send, draft, cancel};
+			Component buttons[] = {send, draft, cancel, Box.createHorizontalGlue()};
 			Utilities.addComponentsRespectingOrientation(box, buttons);
-
 			getContentPane().add(scroller);
 			getContentPane().add(box, BorderLayout.SOUTH);
 

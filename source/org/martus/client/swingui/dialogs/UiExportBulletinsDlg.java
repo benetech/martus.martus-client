@@ -26,6 +26,7 @@ Boston, MA 02111-1307, USA.
 
 package org.martus.client.swingui.dialogs;
 
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -76,9 +77,8 @@ public class UiExportBulletinsDlg extends JDialog implements ActionListener
 		cancel.addActionListener(this);
 		
 		Box hBoxButtons = Box.createHorizontalBox();
-		hBoxButtons.add(ok);
-		hBoxButtons.add(cancel);
-		hBoxButtons.add(Box.createHorizontalGlue());
+		Component buttons[] = {ok, cancel, Box.createHorizontalGlue()};
+		Utilities.addComponentsRespectingOrientation(hBoxButtons, buttons);
 		
 		String[] titles = extractTitles(mainWindow, bulletins);
 		UiList bulletinList = new UiList(titles);
