@@ -1,4 +1,4 @@
-Introduction to the Martus™ Software
+﻿Introduction to the Martus™ Software
 --------
 What is Martus™?
 Named after the Greek word for witness, the Martus Project provides an efficient and secure way to store and retrieve information about human rights abuses. Using the Martus application, you can create bulletins that record human rights abuses, attach supporting documents, specify whether the information should be public or private, and store the information on a secure server. To learn more about the problems the Martus Project addresses and future plans for the project, visit http://www.martus.org.
@@ -82,6 +82,7 @@ Linux
 • To upload to a Martus server, you need unrestricted Web access to either ports 987 and 988, or ports 80 and 443. This is only an issue if you are operating Martus through a firewall.
 • CD drive (for CD installation only)
 • At least 16-bit color mode with the KDE or the Gnome desktop recommended
+
 
 --------
 Installing
@@ -414,12 +415,13 @@ To save a draft of the bulletin, click Save Draft. The bulletin moves to your Dr
 
 Martus sends a copy of each saved draft bulletin to the server, to act as a back-up copy in case the draft bulletin on your computer becomes damaged or is deleted. When you make changes to the draft bulletin later, and then save it, Martus deletes the earlier draft from the server and replaces it with the current version. Draft bulletins are always treated as private information, whether the information is marked private or not. 
 
-If you have set up your >account on multiple computers, you can’t access your drafts from a different computer unless >they were saved to the server; and if you overwrite a draft on the server from one computer, >the version on the server will not match the version on the other computer because> the server saves the last version of the draft.  To update an older version of a draft with a newer version from the server, you must delete the draft from the computer and retrieve it from the server.  If you want to keep a backup copy of the old version of the draft, you can drag the bulletin to your desktop before deleting it.
+If you have set up your account on multiple computers, you can’t access your drafts from a different computer unless they were saved to the server; and if you overwrite a draft on the server from one computer, the version on the server will not match the version on the other computer because the server saves the last version of the draft.  To update an older version of a draft with a newer version from the server, you must delete the draft from the computer and retrieve it from the server.  If you want to keep a backup copy of the old version of the draft, you can drag the bulletin to your desktop before deleting it.
 
-If you decide not to complete a bulletin, so it has never been sealed, you can delete the draft bulletin from the server. First, delete the draft bulletin from your computer, and then choose Server > Delete My Drafts From Server. Check the draft bulletin you want to delete and click Delete. (You must delete the copy on your computer first, as you cannot delete bulletins from the server that remain on your computer.)
+If you decide not to complete a bulletin, so it has never been sealed, you can delete the draft bulletin from the server. First, delete the draft bulletin from your computer, and then choose Server Delete My Drafts From Server. Check the draft bulletin you want to delete and click Delete. (You must delete the copy on your computer first, as you cannot delete bulletins from the server that remain on your computer.)
 --------
 Modifying a copy of a sealed bulletin
 Once you’ve sealed a bulletin, no one can make changes to it. However, you can modify a copy of the bulletin and then send that modified copy to the server, to provide corrected or additional information. The original sealed bulletin remains unchanged on the server; you cannot delete it.
+
 
 To modify a copy of a sealed bulletin, select the bulletin you want to modify and either click Modify or choose Edit > Modify Bulletin. Click Yes to confirm that you want to create a copy of the sealed bulletin. When you’ve made the changes you want to make, click Send to send it to the server.
 
@@ -428,14 +430,14 @@ Tip: Consider changing the title of the modified version of the bulletin in a wa
 Modifying a draft
 You can make changes to draft bulletins until you send them to the server. To modify a draft bulletin, double-click the bulletin, and then make changes or add information. (You can also select the bulletin’s title and then click Modify or choose Edit > Modify Bulletin.) You can save the modified bulletin as a draft again or send it to the server. If you click Cancel, new information will be lost and the bulletin will revert to the way it appeared when you last saved it. Each time you save a draft bulletin, Martus updates the back-up copy of the draft bulletin on the server. When you send the final bulletin to the server, Martus deletes the back-up copy of the draft bulletin from the server.
 
-If you have set up your >account on multiple computers, you can’t access your drafts from a different computer unless >they were saved to the server; and if you overwrite a draft on the server from one computer, >the version on the server will not match the version on the other computer because> the server saves the last version of the draft.  To update an older version of a draft with a newer version from the server, you must delete the draft from the computer and retrieve it from the server.  If you want to keep a backup copy of the old version of the draft, you can drag the bulletin to your desktop before deleting it.
+If you have set up your account on multiple computers, you can’t access your drafts from a different computer unless they were saved to the server; and if you overwrite a draft on the server from one computer, the version on the server will not match the version on the other computer because the server saves the last version of the draft.  To update an older version of a draft with a newer version from the server, you must delete the draft from the computer and retrieve it from the server.  If you want to keep a backup copy of the old version of the draft, you can drag the bulletin to your desktop before deleting it.
 --------
 Discarding a draft
 To discard the information you’ve entered, click Cancel. Martus alerts you that you’ll be deleting any unsaved information in the bulletin, which has not been sent yet. Click Yes to discard the unsaved information permanently. (If you click Cancel when you’re editing a draft bulletin, the bulletin will revert to the state it was in when you opened it.)
 
 To delete draft bulletins from the server, first delete them on your computer. Then, choose Server > Delete My Drafts From Server. Check the draft bulletins you want to delete from the server and then click Delete. (You cannot delete draft bulletins from the server if they remain on your computer.)
 
-If you have set up your >account on multiple computers, and delete a draft from one computer and from the server, it will still be on the other computer. On that other computer, if you modify the draft, it will re-upload it to the server, but if you never modify the draft, it will never get re-uploaded.
+If you have set up your account on multiple computers, and delete a draft from one computer and from the server, it will still be on the other computer. On that other computer, if you modify the draft, it will re-upload it to the server, but if you never modify the draft, it will never get re-uploaded.
 
 --------
 Managing Bulletins
@@ -469,6 +471,7 @@ Search Results
 When you search the bulletins on your computer, Martus displays the results in the Search Results folder. The contents of this folder are overwritten the next time you search. If you want to save your search results, rename this folder; Martus will create a new Search Results folder the next time you search. To rename the Search Results folder, right-click on the folder and choose Rename Search Results folder. Alternatively, you can select the folder, and then choose Folders > Rename Folder or click on the folder name, and type in the desired new folder name.
 
 Retrieved Bulletins	
+
 This folder contains sealed bulletins you’ve retrieved from the server. These bulletins are included in searches and you can copy or move them into different folders. Bulletins in this folder are sealed, so you cannot modify them. 
 
 Retrieved Draft Bulletins
@@ -549,6 +552,7 @@ Note: By default, the Retrieve Draft Bulletins dialog box displays only bulletin
 5. The bulletins appear in the Retrieved Draft Bulletins folder. 
 --------
 Retrieving bulletins created by field desks
+
 If you are using a Headquarters account, you can retrieve draft or sealed bulletins created by field workers who have given your account permission to access their data. (See “Sharing your private data with your organization” on page 30.) To download those bulletins, choose Server > Retrieve Field Desk Sealed Bulletins or Server > Retrieve Field Desk Draft Bulletins. 
 
 When you view a field desk bulletin, a bright yellow and black “Field Bulletin” label appears at the top of the bulletin.
@@ -769,7 +773,7 @@ I want to use Martus on a co-worker’s computer, but it won’t accept my usern
 You can access Martus only on a computer that contains your key pair file. Your username and password activate your key pair, which may not be present on your co-worker’s computer. Using Martus 1.5 and later, there can be multiple accounts on a single computer, but your key pair must be available on that computer for you to access it. To access your account on your co-worker’s computer, click the Restore Account tab in the Martus Signin dialog box, and then use your backup key pair file to create the account. And, though you can install your key pair on more than one computer at a time, remember that you need to update each key pair if you change your password, and that your data is only as secure as the least secure computer on which you have your account.  
 
 The bulletins in my account on a co-worker’s computer do not match those on my computer. 
-If you have set up your >account on multiple computers, you can’t access your draft or sealed bulletins from a different computer unless >they were saved to the server and retrieved to the current computer.  If you overwrite a draft on the server from one computer, >the version on the server will not match the version on the other computer because> the server saves the last version of the draft.  To retrieve most recent versions of a draft from the backup server, you will be required to delete any older versions from your computer.  If you want to keep a backup copy of the old version of the draft, you can drag the bulletin to your desktop before deleting it. If you delete a draft from one computer and from the server, it will still be on the other computer. On that other computer, if you modify the draft, it will re-upload it to the server, but if you never modify the draft, it will never get re-uploaded.  
+If you have set up your account on multiple computers, you can’t access your draft or sealed bulletins from a different computer unless they were saved to the server and retrieved to the current computer.  If you overwrite a draft on the server from one computer, the version on the server will not match the version on the other computer because the server saves the last version of the draft.  To retrieve most recent versions of a draft from the backup server, you will be required to delete any older versions from your computer.  If you want to keep a backup copy of the old version of the draft, you can drag the bulletin to your desktop before deleting it. If you delete a draft from one computer and from the server, it will still be on the other computer. On that other computer, if you modify the draft, it will re-upload it to the server, but if you never modify the draft, it will never get re-uploaded.  
 
 There are multiple active Martus accounts on my computer. How can I tell which account folder is mine? Log in to Martus using your username and password. Then choose Help > View My Account Details. The folder Martus uses to store the information for your account is listed below your public code. 
 
@@ -820,13 +824,4 @@ I’m seeing unexpected behavior in Martus. How can I find out what’s going on
 In Windows, instead of starting Martus by double-clicking the Martus icon on your desktop, choose Run from the Start menu and type the following text to launch Martus: C:\Martus\bin\java.exe -jar C:\Martus\Martus.jar. Then note the error messages you receive as you work in Martus, and e-mail those to help@martus.org.
 
 In Linux, start Martus from the command-shell line. Then note the error messages you receive as you work in Martus, and e-mail those to help@martus.org.
-
-
-
-
-
-
-
-
-	1
 
