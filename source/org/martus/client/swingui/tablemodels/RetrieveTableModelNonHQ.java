@@ -49,7 +49,7 @@ abstract public class RetrieveTableModelNonHQ extends RetrieveTableModel {
 		case COLUMN_TITLE:
 			return getLocalization().getFieldLabel(Bulletin.TAGTITLE);
 		case COLUMN_LAST_DATE_SAVED:
-			return getLocalization().getFieldLabel("BulletinDateSaved");
+			return getLocalization().getFieldLabel(Bulletin.TAGLASTSAVED);
 		case COLUMN_BULLETIN_SIZE:
 			return getLocalization().getFieldLabel("BulletinSize");
 		default:

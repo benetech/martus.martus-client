@@ -54,7 +54,7 @@ public class DeleteMyServerDraftsTableModel extends RetrieveTableModelNonHQ
 		if(column == COLUMN_TITLE)
 			return getLocalization().getFieldLabel(Bulletin.TAGTITLE);
 		if(column == COLUMN_LAST_DATE_SAVED)
-			return getLocalization().getFieldLabel("BulletinDateSaved");
+			return getLocalization().getFieldLabel(Bulletin.TAGLASTSAVED);
 		if(column == COLUMN_BULLETIN_SIZE)
 			return getLocalization().getFieldLabel("BulletinSize");
 		return "";
