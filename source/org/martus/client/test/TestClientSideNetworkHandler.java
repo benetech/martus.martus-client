@@ -93,7 +93,7 @@ public class TestClientSideNetworkHandler extends TestCaseEnhanced
 			super("", testPorts);
 		}
 		
-		public Object callServerAtPort(String serverName, String method,
+		public Object executeXmlRpc(String serverName, String method,
 			Vector params, int port)
 					throws MalformedURLException, XmlRpcException, IOException 
 		{

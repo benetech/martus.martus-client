@@ -51,6 +51,10 @@ public class ClientSideNetworkHandlerUsingXmlRpc
 	{
 		server = serverName;
 		ports = portsToUse;
+
+		RESULT_NO_SERVER = new Vector();
+		RESULT_NO_SERVER.add(NetworkInterfaceConstants.NO_SERVER);
+		
 		try
 		{
 			tm = new SimpleX509TrustManager();
@@ -68,7 +72,8 @@ public class ClientSideNetworkHandlerUsingXmlRpc
 	{
 		Vector params = new Vector();
 		params.add(reservedForFuture);
-		return (Vector)callServer(server, cmdGetServerInfo, params);
+		Caller caller = new CallerWithTimeout(cmdGetServerInfo, params, 5);
+		return (Vector)callServer(server, caller);
 	}
 
 	public Vector getUploadRights(String myAccountId, Vector parameters, String signature)
@@ -172,51 +177,141 @@ public class ClientSideNetworkHandlerUsingXmlRpc
 
 	public Object callServer(String serverName, String method, Vector params)
 	{
+		Caller caller = new Caller(method, params);
+		return callServer(serverName, caller);
+	}
+	
+	private Object callServer(String serverName, Caller caller)
+	{
 		int numPorts = ports.length;
 		for(int i=0; i < numPorts; ++i)
 		{
-			int port = ports[indexOfPortThatWorkedLast];
-
-			try
-			{
-				Object result = callServerAtPort(serverName, method, params, port);
-				if(tm.getExpectedPublicKey() == null)
-					throw new Exception("Trust Manager never called");
-				return result;
-			}
-			catch (IOException e)
-			{
-				if(e.getMessage().startsWith("Connection"))
-				{
-					indexOfPortThatWorkedLast = (indexOfPortThatWorkedLast+1)%numPorts;
-					continue;
-				}
-				//TODO throw IOExceptions so caller can decide what to do.
-				//This was added for connection refused: connect (no server connected)
-				//System.out.println("ServerInterfaceXmlRpcHandler:callServer Exception=" + e);
-				//e.printStackTrace();
-				return null;
-			}
-			catch (XmlRpcException e)
-			{
-				if(e.getMessage().indexOf("NoSuchMethodException") < 0)
-				{
-					System.out.println("ServerInterfaceXmlRpcHandler:callServer XmlRpcException=" + e);
-					e.printStackTrace();
-				}
-				return null;
-			}
-			catch (Exception e)
-			{
-				System.out.println("ServerInterfaceXmlRpcHandler:callServer Exception=" + e);
-				e.printStackTrace();
-				return null;
-			}
+			int portIndex = (indexOfPortThatWorkedLast+i) % numPorts;
+			Vector result = caller.call(this, serverName, ports[portIndex]);
+			
+			if(result != null && result.equals(RESULT_NO_SERVER))
+				continue;
+				
+			indexOfPortThatWorkedLast = portIndex;
+			return result;
 		}
 		return null;
 	}
 	
-	public Object callServerAtPort(String serverName, String method,
+	static class Caller
+	{
+		public Caller(String methodToCall, Vector paramsToUse)
+		{
+			method = methodToCall;
+			params = paramsToUse;
+		}
+		
+		public Vector call(ClientSideNetworkHandlerUsingXmlRpc handler, String serverName, int port)
+		{
+			return internalCall(handler, serverName, port);
+		}
+
+		Vector internalCall(ClientSideNetworkHandlerUsingXmlRpc handler, String serverName, int port)
+		{
+			return handler.callServerAtPort(serverName, method, params, port);
+		}
+		
+		String method;
+		Vector params;
+	}
+	
+	static class CallerWithTimeout extends Caller
+	{
+		public CallerWithTimeout(String methodToCall, Vector paramsToUse, long secondsToWait)
+		{
+			super(methodToCall, paramsToUse);
+			timeoutMillis = secondsToWait * 1000;
+		}
+		
+		public Vector call(ClientSideNetworkHandlerUsingXmlRpc handler, String serverName, int port)
+		{
+			
+			BackgroundCallerTask task = new BackgroundCallerTask(this, handler, serverName, port);
+			Thread background = new Thread(task);
+			try
+			{
+				background.start();
+				background.join(timeoutMillis);
+			}
+			catch (InterruptedException e)
+			{
+				System.out.println("ERROR: Server timeout");
+			}
+			background.interrupt();
+			return task.response;
+		}
+		
+		long timeoutMillis;
+	}
+	
+	static class BackgroundCallerTask implements Runnable
+	{
+		BackgroundCallerTask(Caller callerTouse, ClientSideNetworkHandlerUsingXmlRpc handlerToUse, String serverNameToUse, int portToUse)
+		{
+			caller = callerTouse;
+			handler = handlerToUse;
+			serverName = serverNameToUse;
+			port = portToUse;
+			response = RESULT_NO_SERVER;
+		}
+			
+		public void run()
+		{
+			response = caller.internalCall(handler, serverName, port);
+		}
+
+		Caller caller;
+		ClientSideNetworkHandlerUsingXmlRpc handler;
+		String serverName;
+		int port;
+		Vector response;
+	}
+	
+	Vector callServerAtPort(
+		String serverName,
+		String method,
+		Vector params,
+		int port)
+	{
+		try
+		{
+			Vector result = (Vector)executeXmlRpc(serverName, method, params, port);
+			if(tm.getExpectedPublicKey() == null)
+				throw new Exception("Trust Manager never called");
+			return result;
+		}
+		catch (IOException e)
+		{
+			if(e.getMessage().startsWith("Connection"))
+				return RESULT_NO_SERVER;
+
+			//TODO throw IOExceptions so caller can decide what to do.
+			//This was added for connection refused: connect (no server connected)
+			//System.out.println("ServerInterfaceXmlRpcHandler:callServer Exception=" + e);
+			//e.printStackTrace();
+		}
+		catch (XmlRpcException e)
+		{
+			if(e.getMessage().indexOf("NoSuchMethodException") < 0)
+			{
+				System.out.println("ServerInterfaceXmlRpcHandler:callServer XmlRpcException=" + e);
+				e.printStackTrace();
+			}
+		}
+		catch (Exception e)
+		{
+			System.out.println("ServerInterfaceXmlRpcHandler:callServer Exception=" + e);
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	public Object executeXmlRpc(String serverName, String method,
 									Vector params, int port)
 		throws MalformedURLException, XmlRpcException, IOException 
 	{
@@ -239,4 +334,6 @@ public class ClientSideNetworkHandlerUsingXmlRpc
 	SimpleX509TrustManager tm;
 	String server;
 	int[] ports;
+	
+	static Vector RESULT_NO_SERVER;
 }
