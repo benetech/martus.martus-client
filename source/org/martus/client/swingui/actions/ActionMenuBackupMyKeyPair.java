@@ -43,8 +43,6 @@ public class ActionMenuBackupMyKeyPair extends UiMenuAction
 		if(!mainWindow.reSignIn())
 			return;
 		String message =  mainWindow.getLocalization().getFieldLabel("BackupKeyPairGeneralInformation");
-//		message += MartusConstants.NEWLINE;
-		message += mainWindow.getLocalization().getFieldLabel("BackupKeyPairToMultipleUnencryptedFilesInformation");
 		mainWindow.displayScrollableMessage("BackupKeyPairGeneralInformation", message, "Continue", UiBackupRecoverSharedKeyPair.getTokenReplacement());
 		
 		mainWindow.doBackupKeyPairToSingleEncryptedFile();

@@ -1396,7 +1396,8 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 			return;
 		}
 		
-		notifyDlg("BackupKeyPairInformation");
+		if(!confirmDlg("BackupKeyPairInformation"))
+			return;
 		
 		String windowTitle = getLocalization().getWindowTitle("saveBackupKeyPair");
 		UiFileChooser.FileDialogResults results = UiFileChooser.displayFileSaveDialog(this, windowTitle, new File("", MartusApp.KEYPAIR_FILENAME));
