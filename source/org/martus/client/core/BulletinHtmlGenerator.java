@@ -177,11 +177,11 @@ public class BulletinHtmlGenerator
 		return getFieldHtmlString("attachments", attachmentList);
 	}
 
-	private String getFieldHtmlString(String tag, String value)
+	private String getFieldHtmlString(String label, String value)
 	{
 		StringBuffer fieldHtml = new StringBuffer(value.length() + 100);
 		fieldHtml.append("<tr><td width='15%' align='right' valign='top'>");		
-		fieldHtml.append(tag);
+		fieldHtml.append(label);
 		fieldHtml.append("</td>");
 		fieldHtml.append("<td valign='top'>");
 		fieldHtml.append(value);
