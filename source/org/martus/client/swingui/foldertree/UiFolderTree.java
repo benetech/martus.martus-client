@@ -37,6 +37,7 @@ import java.awt.event.KeyEvent;
 import javax.swing.Icon;
 import javax.swing.JLabel;
 import javax.swing.JTree;
+import javax.swing.border.EmptyBorder;
 import javax.swing.event.CellEditorListener;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.TreeSelectionEvent;
@@ -183,6 +184,7 @@ class UiFolderTree extends JTree implements TreeSelectionListener
 				label.setIcon(openIcon);
 			else
 				label.setIcon(closedIcon);
+			label.setBorder(new EmptyBorder(0,5,0,5));
 			FolderTreeNode folderNode = (FolderTreeNode)value;
 			BulletinFolder folder = store.findFolder(folderNode.getInternalName());
 			String show = "?";
