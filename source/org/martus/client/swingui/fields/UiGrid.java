@@ -27,15 +27,17 @@ package org.martus.client.swingui.fields;
 
 import java.awt.Color;
 import java.awt.Component;
+import javax.swing.DefaultCellEditor;
 import javax.swing.JComponent;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
+import javax.swing.table.TableCellEditor;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableModel;
 import org.martus.common.GridFieldSpec;
-import org.martus.common.clientside.UiSingleTextField;
+import org.martus.common.clientside.UiTextField;
 import org.martus.swing.UiScrollPane;
 import org.martus.swing.UiTable;
 import org.martus.swing.UiTableWithCellEditingProtection;
@@ -44,6 +46,7 @@ import org.martus.swing.UiTableWithCellEditingProtection;
 public class UiGrid extends UiField
 {
 
+	private static final int ROW_HEIGHT_PADDING = 5;
 	public UiGrid(GridFieldSpec fieldSpec)
 	{
 		super();
@@ -52,7 +55,8 @@ public class UiGrid extends UiField
 		table.setColumnSelectionAllowed(false);
 		table.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
 		table.setShowGrid(true);
-		table.changeSelection(0, 1, false, false);		
+		table.changeSelection(0, 1, false, false);
+		table.setRowHeight(table.getRowHeight() + ROW_HEIGHT_PADDING);
 		widget = new UiScrollPane(table);
 	}	
 	
@@ -66,6 +70,9 @@ public class UiGrid extends UiField
 				setColumnWidthToHeaderWidth(i);
 			setAutoResizeMode(AUTO_RESIZE_OFF);
 			myCellRenderer = new GridCellRenderer();
+			UiTextField uiTextField = new UiTextField();
+			uiTextField.setBorder(new LineBorder(Color.BLUE));
+			myCellEditor = new DefaultCellEditor(uiTextField);
 		}
 		
 		public TableCellRenderer getCellRenderer(int row, int column)
@@ -73,6 +80,17 @@ public class UiGrid extends UiField
 			return myCellRenderer;
 		}
 
+		public TableCellEditor getCellEditor()
+		{
+			return myCellEditor;
+		}
+		
+		public TableCellEditor getCellEditor(int row, int column)
+		{
+			return myCellEditor;
+		}
+
+		
 		public void changeSelection(int rowIndex, int columnIndex,
 				boolean toggle, boolean extend)
 		{
@@ -81,12 +99,13 @@ public class UiGrid extends UiField
 			super.changeSelection(rowIndex, columnIndex, toggle, extend);
 		}
 	}
+
 	
 	class GridCellRenderer implements TableCellRenderer
 	{
 		public Component getTableCellRendererComponent(JTable tableToUse, Object value, boolean isSelected, boolean hasFocus, int row, int column)
 		{
-			UiSingleTextField cell = new UiSingleTextField((String)value);
+			UiTextField cell = new UiTextField((String)value);
 			cell.setBorder(new EmptyBorder(0,0,0,0));
 			if(column == 0)
 			{
@@ -130,4 +149,5 @@ public class UiGrid extends UiField
 	UiTable table;
 	GridTableModel model;
 	GridCellRenderer myCellRenderer;
+	DefaultCellEditor myCellEditor;
 }

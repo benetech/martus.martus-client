@@ -36,7 +36,7 @@ import org.martus.client.swingui.fields.UiDateEditor;
 import org.martus.common.FieldSpec;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.clientside.UiBasicLocalization;
-import org.martus.common.clientside.UiSingleTextField;
+import org.martus.common.clientside.UiTextField;
 import org.martus.swing.UiParagraphPanel;
 import org.martus.swing.UiWrappedTextArea;
 import org.martus.swing.Utilities;
@@ -58,7 +58,7 @@ public class UiSearchDlg extends JDialog  implements ActionListener
 
 		panel.addOnNewLine(new UiWrappedTextArea(localization.getFieldLabel("SearchBulletinRules")));
 
-		searchField = new UiSingleTextField(40);
+		searchField = new UiTextField(40);
 		searchField.setText(searchString);
 		panel.addComponents(new JLabel(localization.getFieldLabel("SearchEntry")), searchField);
 
@@ -123,7 +123,7 @@ public class UiSearchDlg extends JDialog  implements ActionListener
 	static String endDate = "";
 
 	JButton search;
-	UiSingleTextField searchField;
+	UiTextField searchField;
 	UiDateEditor startDateEditor;
 	UiDateEditor endDateEditor;
 

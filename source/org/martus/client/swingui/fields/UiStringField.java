@@ -37,9 +37,9 @@ import javax.swing.text.JTextComponent;
 import org.martus.client.swingui.UiLocalization;
 import org.martus.client.swingui.UiPopupMenu;
 
-public abstract class UiTextField extends UiField
+public abstract class UiStringField extends UiField
 {
-	public UiTextField(UiLocalization localizationToUse)
+	public UiStringField(UiLocalization localizationToUse)
 	{
 		localization = localizationToUse;
 		mouseAdapter = new TextFieldMouseAdapter();

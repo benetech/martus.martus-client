@@ -52,7 +52,7 @@ import javax.swing.text.DefaultHighlighter;
 import javax.swing.text.DefaultHighlighter.DefaultHighlightPainter;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.common.clientside.UiBasicLocalization;
-import org.martus.common.clientside.UiSingleTextField;
+import org.martus.common.clientside.UiTextField;
 import org.martus.swing.UiList;
 import org.martus.swing.UiScrollPane;
 import org.martus.swing.UiWrappedTextArea;
@@ -113,7 +113,7 @@ public class UiOnlineHelpDlg extends JDialog
 		close.addKeyListener(new MakeEnterKeyExit());
 		helpPanel.add(msgAreaScrollPane);
 		
-		searchField = new UiSingleTextField(20);
+		searchField = new UiTextField(20);
 		searchField.setMaximumSize(searchField.getPreferredSize());
 		searchField.addActionListener(new searchFieldListener());
 		searchButton = new JButton(localization.getButtonLabel("inputsearchok"));
@@ -316,7 +316,7 @@ public class UiOnlineHelpDlg extends JDialog
 	String fileContents;
 	String lowercaseMessage;
 	JButton searchButton;
-	UiSingleTextField searchField;
+	UiTextField searchField;
 	JButton close;
 	UiList tocList;
 	UiWrappedTextArea msgArea;

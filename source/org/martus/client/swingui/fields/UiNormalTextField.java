@@ -31,7 +31,7 @@ import javax.swing.text.JTextComponent;
 import org.martus.client.swingui.UiLocalization;
 import org.martus.swing.UiTextArea;
 
-public abstract class UiNormalTextField extends UiTextField
+public abstract class UiNormalTextField extends UiStringField
 {
 	public UiNormalTextField(UiLocalization localizationToUse)
 	{

@@ -32,7 +32,7 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import org.martus.common.clientside.UiBasicLocalization;
-import org.martus.common.clientside.UiSingleTextField;
+import org.martus.common.clientside.UiTextField;
 import org.martus.swing.UiParagraphPanel;
 import org.martus.swing.UiWrappedTextArea;
 import org.martus.swing.Utilities;
@@ -45,7 +45,7 @@ public class UiStringInputDlg extends JDialog
 
 		setTitle(localization.getWindowTitle("input" + baseTag));
 		UiWrappedTextArea label = new UiWrappedTextArea(localization.getFieldLabel("input" + baseTag + "entry"));
-		text = new UiSingleTextField(30);
+		text = new UiTextField(30);
 		text.setText(defaultText);
 
 		JButton ok = new JButton(localization.getButtonLabel("input" + baseTag + "ok"));
@@ -96,7 +96,7 @@ public class UiStringInputDlg extends JDialog
 		return result;
 	}
 
-	UiSingleTextField text;
+	UiTextField text;
 	String result = null;
 }
 

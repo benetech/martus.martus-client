@@ -34,7 +34,7 @@ import javax.swing.JLabel;
 import org.martus.client.core.ConfigInfo;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.common.clientside.UiBasicLocalization;
-import org.martus.common.clientside.UiSingleTextField;
+import org.martus.common.clientside.UiTextField;
 import org.martus.swing.UiParagraphPanel;
 import org.martus.swing.UiScrollPane;
 import org.martus.swing.UiTextArea;
@@ -56,11 +56,11 @@ public class UiContactInfoDlg extends JDialog implements ActionListener
 		JButton cancel = new JButton(localization.getButtonLabel("cancel"));
 		cancel.addActionListener(this);
 
-		source = new UiSingleTextField(50);
-		organization = new UiSingleTextField(50);
-		email = new UiSingleTextField(50);
-		webpage = new UiSingleTextField(50);
-		phone = new UiSingleTextField(50);
+		source = new UiTextField(50);
+		organization = new UiTextField(50);
+		email = new UiTextField(50);
+		webpage = new UiTextField(50);
+		phone = new UiTextField(50);
 		address = new UiTextArea(5, 50);
 		address.setLineWrap(true);
 		address.setWrapStyleWord(true);
@@ -140,11 +140,11 @@ public class UiContactInfoDlg extends JDialog implements ActionListener
 	ConfigInfo info;
 	boolean result;
 
-	UiSingleTextField source;
-	UiSingleTextField organization;
-	UiSingleTextField email;
-	UiSingleTextField webpage;
-	UiSingleTextField phone;
+	UiTextField source;
+	UiTextField organization;
+	UiTextField email;
+	UiTextField webpage;
+	UiTextField phone;
 	UiTextArea address;
 
 	JButton ok;

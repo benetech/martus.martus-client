@@ -34,7 +34,7 @@ import org.martus.client.swingui.UiLocalization;
 import org.martus.swing.UiScrollPane;
 import org.martus.swing.UiTextArea;
 
-public class UiMultilineTextEditor extends UiTextField
+public class UiMultilineTextEditor extends UiStringField
 {
 	public UiMultilineTextEditor(UiLocalization localizationToUse)
 	{

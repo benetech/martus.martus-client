@@ -55,7 +55,7 @@ import org.martus.common.HQKey;
 import org.martus.common.HQKeys;
 import org.martus.common.HQKeys.HQsException;
 import org.martus.common.clientside.UiBasicLocalization;
-import org.martus.common.clientside.UiSingleTextField;
+import org.martus.common.clientside.UiTextField;
 import org.martus.common.crypto.MartusCrypto;
 import org.martus.swing.UiFileChooser;
 import org.martus.swing.UiScrollPane;
@@ -200,7 +200,7 @@ public class UiConfigureHQs extends JDialog
 	{
 		public Component getTableCellRendererComponent(JTable tableToUse, Object value, boolean isSelected, boolean hasFocus, int row, int column)
 		{
-			UiSingleTextField cell = new UiSingleTextField((String)value);
+			UiTextField cell = new UiTextField((String)value);
 			cell.setBorder(new EmptyBorder(0,0,0,0));
 
 			if(hasFocus)

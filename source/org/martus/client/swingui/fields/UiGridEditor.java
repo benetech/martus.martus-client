@@ -40,6 +40,7 @@ public class UiGridEditor extends UiGrid
 		table.addKeyListener(new GridKeyListener());
 	}
 	
+	
 	class GridKeyListener implements KeyListener
 	{
 		public void keyPressed(KeyEvent e)
