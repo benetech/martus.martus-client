@@ -62,7 +62,6 @@ import org.martus.client.swingui.UiLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.foldertree.FolderNode;
 import org.martus.common.FieldSpec;
-import org.martus.common.HQKeys;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.clientside.UiBasicLocalization;
 import org.martus.common.packet.UniversalId;
@@ -314,8 +313,7 @@ public class UiBulletinTable extends UiTable implements ListSelectionListener, D
 			try
 			{
 				bulletinToModify = store.createClone(original, publicFieldSpecsToUse, privateFieldSpecsToUse);
-				HQKeys keysAutorizedToRead = bulletinToModify.getAuthorizedToReadKeys();
-				keysAutorizedToRead.add(mainWindow.getApp().getDefaultHQKeysWithFallback());
+				bulletinToModify.addAuthorizedToReadKeys(mainWindow.getApp().getDefaultHQKeysWithFallback());
 			}
 			catch (Exception e)
 			{

@@ -273,11 +273,8 @@ public class UiConfigureHQs extends JDialog
 			}
 			HeadQuarterEntry entry = new HeadQuarterEntry(publicKey);
 			HQKeys defaultHQKeys = mainWindow.getApp().getDefaultHQKeysWithFallback();
-			if(defaultHQKeys.containsKey(publicKey.getPublicKey()))
-				entry.setSelected(true);
-			else
-				entry.setSelected(false);
-
+			boolean isDefault = defaultHQKeys.containsKey(publicKey.getPublicKey());
+			entry.setSelected(isDefault);
 			model.addNewHeadQuarterEntry(entry);
 		}
 		catch (InvalidBase64Exception e)
