@@ -26,6 +26,8 @@ Boston, MA 02111-1307, USA.
 
 package org.martus.client.swingui.dialogs;
 
+import java.util.Arrays;
+
 import org.martus.client.core.MartusUserNameAndPassword;
 import org.martus.client.core.Exceptions.BlankUserNameException;
 import org.martus.client.core.Exceptions.PasswordMatchedUserNameException;
@@ -71,7 +73,7 @@ public class UiCreateNewAccountProcess
 			char[] userPassword2 = signinDlg2.getPassword();
 
 			// make sure the passwords and usernames match
-			if (!userPassword1.equals(userPassword2))
+			if (!Arrays.equals(userPassword1, userPassword2))
 			{
 				window.notifyDlg(window, "passwordsdontmatch");
 				continue;
