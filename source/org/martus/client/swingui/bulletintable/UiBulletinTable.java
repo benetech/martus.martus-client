@@ -64,7 +64,6 @@ import org.martus.client.core.BulletinStore;
 import org.martus.client.core.MartusApp;
 import org.martus.client.core.TransferableBulletinList;
 import org.martus.client.core.BulletinStore.BulletinAlreadyExistsException;
-import org.martus.client.core.BulletinStore.StatusNotAllowedException;
 import org.martus.client.swingui.UiClipboardUtilities;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.dialogs.UiBulletinModifyDlg.CancelHandler;
@@ -327,10 +326,6 @@ public class UiBulletinTable extends JTable implements ListSelectionListener, Dr
 				//if(confirmDeletionOfFile(file.getPath()))
 					//file.delete();
 			}
-			catch (StatusNotAllowedException e)
-			{
-				resultMessageTag = "PasteErrorNotAllowed";
-			}
 			catch (BulletinAlreadyExistsException e)
 			{
 				resultMessageTag = "PasteErrorBulletinAlreadyExists";
@@ -346,10 +341,6 @@ public class UiBulletinTable extends JTable implements ListSelectionListener, Dr
 			{
 				dropAdapter.attemptDropBulletins(tb.getBulletins(), folder);
 				worked = true;
-			}
-			catch (StatusNotAllowedException e)
-			{
-				resultMessageTag = "PasteErrorNotAllowed";
 			}
 			catch (BulletinAlreadyExistsException e)
 			{

@@ -96,16 +96,6 @@ public class BulletinFolder
 		return canDelete;
 	}
 
-	public String getStatusAllowed()
-	{
-		return statusAllowed;
-	}
-
-	public void setStatusAllowed(String status)
-	{
-		statusAllowed = status;
-	}
-
 	public int getBulletinCount()
 	{
 		return rawIdList.size();
@@ -129,14 +119,6 @@ public class BulletinFolder
 	public boolean isLocalized()
 	{
 		return isNameLocalized(getName());
-	}
-
-	public boolean canAdd(String bulletinStatus)
-	{
-		if(getStatusAllowed() == null)
-			return true;
-
-		return (getStatusAllowed().indexOf(bulletinStatus) != -1);
 	}
 
 	public synchronized void add(Bulletin b) throws BulletinAlreadyExistsException, IOException
@@ -278,6 +260,4 @@ public class BulletinFolder
 	private boolean canDelete = true;
 	private String sortTag = "eventdate";
 	private int sortDir = ASCENDING;
-	private String statusAllowed;
-
 }

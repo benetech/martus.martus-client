@@ -42,7 +42,6 @@ import org.martus.client.core.BulletinFolder;
 import org.martus.client.core.BulletinStore;
 import org.martus.client.core.TransferableBulletinList;
 import org.martus.client.core.BulletinStore.BulletinAlreadyExistsException;
-import org.martus.client.core.BulletinStore.StatusNotAllowedException;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.crypto.MartusCrypto.CryptoException;
 import org.martus.common.packet.UniversalId;
@@ -124,10 +123,6 @@ public abstract class UiBulletinDropAdapter implements DropTargetListener
 		try
 		{
 			attemptDropBulletins(tb.getBulletins(), toFolder);
-		}
-		catch (StatusNotAllowedException e)
-		{
-			worked = false;
 		}
 		catch (BulletinAlreadyExistsException e)
 		{
@@ -214,10 +209,6 @@ public abstract class UiBulletinDropAdapter implements DropTargetListener
 			{
 				resultMessageTag = "DropErrorBulletinExists";
 			}
-			catch (StatusNotAllowedException e)
-			{
-				resultMessageTag = "DropErrorNotAllowed";
-			}
 			catch(Exception e)
 			{
 				e.printStackTrace();
@@ -233,7 +224,7 @@ public abstract class UiBulletinDropAdapter implements DropTargetListener
 	}
 	
 	public void attemptDropFiles(File[] files, BulletinFolder toFolder) throws
-		StatusNotAllowedException, BulletinAlreadyExistsException, Exception
+		BulletinAlreadyExistsException, Exception
 	{
 		int errorThrown = noError;
 		for(int i = 0; i<files.length; ++i)
@@ -247,18 +238,11 @@ public abstract class UiBulletinDropAdapter implements DropTargetListener
 				if(errorThrown == noError)
 					errorThrown = bulletinExists;
 			}
-			catch (StatusNotAllowedException e)
-			{
-				if(errorThrown != otherError)
-					errorThrown = statusNotAllowed;
-			}
 			catch (Exception e)
 			{
 				errorThrown = otherError;
 			}
 		}
-		if(errorThrown == statusNotAllowed)
-			throw new StatusNotAllowedException();
 		if(errorThrown == bulletinExists)
 			throw new BulletinAlreadyExistsException();
 		if(errorThrown == otherError)
@@ -266,7 +250,7 @@ public abstract class UiBulletinDropAdapter implements DropTargetListener
 	}
 	
 	public void attemptDropFile(File file, BulletinFolder toFolder) throws
-		InvalidPacketException, SignatureVerificationException, WrongPacketTypeException, StatusNotAllowedException, CryptoException, IOException, InvalidBase64Exception, BulletinAlreadyExistsException
+		InvalidPacketException, SignatureVerificationException, WrongPacketTypeException, CryptoException, IOException, InvalidBase64Exception, BulletinAlreadyExistsException
 	{
 		Cursor originalCursor = observer.setWaitingCursor();
 		try
@@ -282,7 +266,7 @@ public abstract class UiBulletinDropAdapter implements DropTargetListener
 
 
 	public void attemptDropBulletins(Bulletin[] bulletins, BulletinFolder toFolder) throws
-		BulletinStore.StatusNotAllowedException, BulletinAlreadyExistsException, IOException
+		BulletinAlreadyExistsException, IOException
 	{
 		System.out.println("attemptDropBulletin");
 
@@ -292,8 +276,6 @@ public abstract class UiBulletinDropAdapter implements DropTargetListener
 		{
 			Bulletin bulletin = bulletins[i];
 			System.out.println("UiBulletinDropAdapter.attemptDropBulletins: " + bulletin.get(Bulletin.TAGTITLE));
-			if(!store.canPutBulletinInFolder(toFolder, bulletin.getAccount(), bulletin.getStatus()))
-				errorThrown = statusNotAllowed;
 		}
 
 
@@ -321,14 +303,11 @@ public abstract class UiBulletinDropAdapter implements DropTargetListener
 		
 		if(errorThrown == ioError)
 			throw new IOException();
-		if(errorThrown == statusNotAllowed)
-			throw new StatusNotAllowedException();
 		if(errorThrown == bulletinExists)
 			throw new BulletinAlreadyExistsException();
 		}
 
 	final int noError = 0;
-	final int statusNotAllowed = 1;
 	final int bulletinExists = 2;
 	final int ioError = 3;
 	final int otherError = 4;

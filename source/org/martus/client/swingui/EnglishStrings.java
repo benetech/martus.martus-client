@@ -94,10 +94,8 @@ public class EnglishStrings
 "wintitle:confirmhelpStringNotFound=Text Not Found",
 "wintitle:confirmNeedsFolderMigration=Folder Migration Required",
 
-"wintitle:notifyDropErrorNotAllowed=Cannot Move Bulletin(s)",
 "wintitle:notifyDropErrorBulletinExists=Cannot Move Bulletin(s)",
 "wintitle:notifyDropErrors=Error Moving Bulletin(s)",
-"wintitle:notifyPasteErrorNotAllowed=Cannot Paste Bulletin(s)",
 "wintitle:notifyPasteErrorBulletinAlreadyExists=Cannot Paste Bulletin(s)",
 "wintitle:notifyPasteError=Error Pasting Bulletin(s)",
 "wintitle:notifyretrieveworked=Retrieve Bulletins",
@@ -597,10 +595,8 @@ public class EnglishStrings
 "field:confirmNeedsFolderMigrationcause=This account was created with an older version of Martus, which used a different set of folders. The folders need to be migrated to the new format. The migration is automatic, fast, and safe. You cannot run this version of Martus unless you allow this migration.",
 "field:confirmNeedsFolderMigrationeffect=Answering Yes will allow the migration to proceed.",
 
-"field:notifyDropErrorNotAllowedcause=One or more bulletins cannot be moved to that folder. This may be because of their Draft/Sealed status, or their author.",
 "field:notifyDropErrorBulletinExistscause=One or more bulletins cannot be moved to that folder, because it already exists in that folder.",
 "field:notifyDropErrorscause=An unexpected error occurred while moving the bulletin(s). One or more files may be damaged.",
-"field:notifyPasteErrorNotAllowedcause=One or more bulletins cannot be pasted in that folder. This may be because of their Draft/Sealed status, or their author.",
 "field:notifyPasteErrorBulletinAlreadyExistscause=One or more bulletins cannot be pasted in that folder, because they already existed in this folder.",
 "field:notifyPasteErrorcause=An unexpected error occurred while pasting the bulletin(s). One or more files may be damaged.",
 "field:notifyretrieveworkedcause=All of the selected bulletins were successfully retrieved from the server",

@@ -140,25 +140,6 @@ public class TestBulletinFolder extends TestCaseEnhanced
 		assertEquals(false, (b == null));
 	}
 
-	public void testStatusRules()
-	{
-		BulletinFolder folder = store.createFolder("a");
-
-		assertNull("Should allow anything", folder.getStatusAllowed());
-		assertEquals(true, folder.canAdd(Bulletin.STATUSDRAFT));
-		assertEquals(true, folder.canAdd(Bulletin.STATUSSEALED));
-
-		folder.setStatusAllowed(Bulletin.STATUSDRAFT);
-		assertEquals(Bulletin.STATUSDRAFT, folder.getStatusAllowed());
-		assertEquals(true, folder.canAdd(Bulletin.STATUSDRAFT));
-		assertEquals(false, folder.canAdd(Bulletin.STATUSSEALED));
-
-
-		folder.setStatusAllowed(Bulletin.STATUSSEALED);
-		assertEquals(false, folder.canAdd(Bulletin.STATUSDRAFT));
-		assertEquals(true, folder.canAdd(Bulletin.STATUSSEALED));
-	}
-
 	public void testAdd() throws Exception
 	{
 		BulletinFolder folder = store.createFolder("a2");

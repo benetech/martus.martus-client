@@ -661,10 +661,8 @@ public class BulletinStore
 		folderSaved = createSystemFolder(SAVED_FOLDER);
 		folderDiscarded = createSystemFolder(DISCARDED_FOLDER);
 		folderDraftOutbox = createSystemFolder(DRAFT_OUTBOX);
-		folderDraftOutbox.setStatusAllowed(Bulletin.STATUSDRAFT);
 		
 		folderSealedOutbox = createSystemFolder(SEALED_OUTBOX);
-		folderSealedOutbox.setStatusAllowed(Bulletin.STATUSSEALED);
 	}
 
 	public BulletinFolder createSystemFolder(String name)
@@ -1100,11 +1098,9 @@ public class BulletinStore
 		BulletinFolder folder;
 	}
 
-	public static class StatusNotAllowedException extends Exception {}
 	public static class BulletinAlreadyExistsException extends Exception {}
 	
 	public void importZipFileBulletin(File zipFile, BulletinFolder toFolder, boolean forceSameUids) throws
-			StatusNotAllowedException,
 			InvalidPacketException,
 			SignatureVerificationException,
 			WrongPacketTypeException,
@@ -1116,10 +1112,6 @@ public class BulletinStore
 		try
 		{
 			BulletinHeaderPacket bhp = BulletinHeaderPacket.loadFromZipFile(zip, getSignatureVerifier());
-			if(!canPutBulletinInFolder(toFolder, bhp.getAccountId(), bhp.getStatus()))
-			{
-				throw new StatusNotAllowedException();
-			}
 			UniversalId uid = bhp.getUniversalId();
 
 			boolean isSealed = bhp.getStatus().equals(Bulletin.STATUSSEALED);
@@ -1165,13 +1157,6 @@ public class BulletinStore
 		{
 			zip.close();
 		}
-	}
-
-	public boolean canPutBulletinInFolder(BulletinFolder folder, String bulletinAuthorAccount, String bulletinStatus)
-	{
-		if(!folder.canAdd(bulletinStatus))
-			return false;
-		return true;
 	}
 
 	public UniversalId importZipFileToStoreWithNewUids(File inputFile) throws

@@ -421,23 +421,15 @@ public class TestBulletinStore extends TestCaseEnhanced
 
 		BulletinFolder fSent = store.getFolderSaved();
 		assertNotNull("Should have created Sent folder", fSent);
-		assertEquals("Sent/Draft", true, fSent.canAdd(Bulletin.STATUSDRAFT));
-		assertEquals("Sent/Sealed", true, fSent.canAdd(Bulletin.STATUSSEALED));
 
 		BulletinFolder fDiscarded = store.getFolderDiscarded();
 		assertNotNull("Should have created Discarded folder", fDiscarded);
-		assertEquals("Discarded/Draft", true, fDiscarded.canAdd(Bulletin.STATUSDRAFT));
-		assertEquals("Discarded/Sealed", true, fDiscarded.canAdd(Bulletin.STATUSSEALED));
 
 		BulletinFolder fDraftOutbox = store.getFolderDraftOutbox();
 		assertNotNull("Should have created DraftOutbox folder", fDraftOutbox);
-		assertEquals("Discarded/Draft", true, fDraftOutbox.canAdd(Bulletin.STATUSDRAFT));
-		assertEquals("Discarded/Sealed", false, fDraftOutbox.canAdd(Bulletin.STATUSSEALED));
 
 		BulletinFolder fSealedOutbox = store.getFolderSealedOutbox();
 		assertNotNull("No SealedOutbox?", fSealedOutbox);
-		assertEquals("draft in SealedOutbox?", false, fSealedOutbox.canAdd(Bulletin.STATUSDRAFT));
-		assertEquals("no sealed in SealedOutbox?", true, fSealedOutbox.canAdd(Bulletin.STATUSSEALED));
 	}
 
 	public void testFindFolder()
@@ -958,18 +950,7 @@ public class TestBulletinStore extends TestCaseEnhanced
 		BulletinForTesting.saveToFile(db,b, tempFile, store.getSignatureVerifier());
 
 		BulletinFolder folder = store.createFolder("test");
-		folder.setStatusAllowed(Bulletin.STATUSSEALED);
-		try
-		{
-			store.importZipFileBulletin(tempFile, folder, false);
-			fail("allowed illegal import?");
-		}
-		catch(BulletinStore.StatusNotAllowedException ignoreExpectedException)
-		{
-		}
-		assertEquals("imported even though the folder prevented it?", 0, store.getBulletinCount());
 
-		folder.setStatusAllowed(null);
 		store.importZipFileBulletin(tempFile, folder, false);
 		assertEquals("not imported to store?", 1, store.getBulletinCount());
 		assertEquals("not imported to folder?", 1, folder.getBulletinCount());
@@ -1104,14 +1085,6 @@ public class TestBulletinStore extends TestCaseEnhanced
 		assertEquals("wrong bytes Private", true, Arrays.equals(sampleBytes2, rawBytesPrivate));
 
 		zipFile.delete();
-	}
-
-	public void testCanPutBulletinInFolder() throws Exception
-	{
-		TRACE("testCanPutBulletinInFolder");
-		Bulletin b1 = store.createEmptyBulletin();
-		BulletinFolder outbox = store.getFolderSealedOutbox();
-		assertEquals("draft b1 got put in outbox?", false, store.canPutBulletinInFolder(outbox, b1.getAccount(), b1.getStatus()));
 	}
 
 	public void testGetSetOfAllBulletinUniversalIds() throws Exception
