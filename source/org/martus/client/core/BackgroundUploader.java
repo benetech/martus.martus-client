@@ -30,6 +30,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.util.Random;
 import java.util.Vector;
 
@@ -292,11 +293,16 @@ public class BackgroundUploader
 		String result = "";
 		try
 		{
-			result = putContactInfoOnServer(info.getContactInfo(app.getSecurity()));
+			result = putContactInfoOnServer(info.getEncodedContactInfo(app.getSecurity()));
 		}
 		catch (MartusCrypto.MartusSignatureException e)
 		{
-			System.out.println("MartusApp.sendContactInfoToServer :" + e);
+			System.out.println("MartusApp.sendContactInfoToServer Sig Error:" + e);
+			return uploadResult;
+		}
+		catch (UnsupportedEncodingException e)
+		{
+			System.out.println("MartusApp.sendContactInfoToServer Encoding Error:" + e);
 			return uploadResult;
 		}
 		if(!result.equals(NetworkInterfaceConstants.OK))

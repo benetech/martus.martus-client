@@ -36,6 +36,7 @@ import org.martus.client.core.ConfigInfo;
 import org.martus.common.FieldSpec;
 import org.martus.common.crypto.MartusSecurity;
 import org.martus.common.test.TestCaseEnhanced;
+import org.martus.util.Base64;
 
 public class TestConfigInfo extends TestCaseEnhanced
 {
@@ -145,20 +146,34 @@ public class TestConfigInfo extends TestCaseEnhanced
 		newInfo.setPhone(samplePhone);
 		MartusSecurity signer = new MartusSecurity();
 		signer.createKeyPair(512);
-		Vector contactInfo = newInfo.getContactInfo(signer);
-		assertEquals("Wrong contactinfo size", 9, contactInfo.size());
-		String publicKey = (String)contactInfo.get(0);
+		Vector contactInfo = newInfo.getEncodedContactInfo(signer);
+		assertEquals("Not encoded?",ConfigInfo.BASE_64_ENCODED,contactInfo.get(0));
+		assertEquals("Wrong contactinfo size", 10, contactInfo.size());
+		String publicKey = (String)contactInfo.get(1);
 
 		assertEquals("Not the publicKey?", signer.getPublicKeyString(), publicKey);
-		int contentSize = ((Integer)(contactInfo.get(1))).intValue();
-		assertEquals("Not the correct size?", contentSize + 3, contactInfo.size());
-		assertEquals("Author not correct?", sampleAuthor, contactInfo.get(2));
-		assertEquals("Address not correct?", sampleAddress, contactInfo.get(7));
-		assertEquals("phone not correct?", samplePhone, contactInfo.get(6));
-		assertTrue("Signature failed with signature in vector?", signer.verifySignatureOfVectorOfStrings(contactInfo, publicKey));
+		int contentSize = ((Integer)(contactInfo.get(2))).intValue();
+		assertEquals("Not the encoded correct size?", contentSize + 4, contactInfo.size());
+		assertEquals("encoded Author not correct?", sampleAuthor, new String(Base64.decode((String)contactInfo.get(3))));
+		assertEquals("encoded Address not correct?", sampleAddress,  new String(Base64.decode((String)contactInfo.get(8))));
+		assertEquals("encoded phone not correct?", samplePhone,  new String(Base64.decode((String)contactInfo.get(7))));
+		
+		Vector decodedContactInfo = ConfigInfo.decodeContactInfoVectorIfNecessary(contactInfo);
+		Vector alreadyDecodedContactInfo = ConfigInfo.decodeContactInfoVectorIfNecessary(decodedContactInfo);
+		assertEquals("Backward compatibility test, a decoded vector should be equal", decodedContactInfo, alreadyDecodedContactInfo);
+		
+		assertNotEquals("Still encoded?", ConfigInfo.BASE_64_ENCODED, decodedContactInfo.get(0));
+		assertEquals("contentSize not the same?", contentSize, ((Integer)decodedContactInfo.get(1)).intValue());
+		assertEquals("decoded Author not correct?", sampleAuthor, decodedContactInfo.get(2));
+		assertEquals("decoded Address not correct?", sampleAddress,  decodedContactInfo.get(7));
+		assertEquals("decoded phone not correct?", samplePhone,  decodedContactInfo.get(6));
+		
+		assertTrue("Signature failed with signature in vector?", signer.verifySignatureOfVectorOfStrings(decodedContactInfo, publicKey));
 
-		String signature = (String)contactInfo.remove(contactInfo.size()-1);
-		assertTrue("Signature failed with signature removed from vector?", signer.verifySignatureOfVectorOfStrings(contactInfo, publicKey, signature));
+		String signature = (String)decodedContactInfo.remove(decodedContactInfo.size()-1);
+		assertTrue("Signature failed with signature removed from vector?", signer.verifySignatureOfVectorOfStrings(decodedContactInfo, publicKey, signature));
+
+		
 	}
 	
 	public void testIsServerConfigured()
