@@ -181,7 +181,7 @@ abstract public class RetrieveTableModel extends AbstractTableModel
 	{
 		try
 		{
-			NetworkResponse response = retriever.getFieldOfficeSummaries();
+			NetworkResponse response = retriever.getSummaries();
 			if(!response.getResultCode().equals(NetworkInterfaceConstants.OK))
 				throw new ServerErrorException();
 
@@ -325,14 +325,14 @@ abstract public class RetrieveTableModel extends AbstractTableModel
 			accountId = accountIdToUse;
 		}
 		
-		NetworkResponse getFieldOfficeSummaries() throws MartusSignatureException, ServerErrorException
+		NetworkResponse getSummaries() throws MartusSignatureException, ServerErrorException
 		{
 			if(!app.isSSLServerAvailable())
 				throw new ServerErrorException("No server");
-			return internalGetFieldOfficeSummaries();
+			return internalGetSummaries();
 		}
 		
-		abstract NetworkResponse internalGetFieldOfficeSummaries() throws MartusSignatureException;
+		abstract NetworkResponse internalGetSummaries() throws MartusSignatureException;
 		
 		protected MartusCrypto getSecurity()
 		{
@@ -342,8 +342,7 @@ abstract public class RetrieveTableModel extends AbstractTableModel
 
 		protected Vector getSummaryTags()
 		{
-			Vector summaryTags = BulletinSummary.getNormalRetrieveTags();
-			return summaryTags;
+			return BulletinSummary.getNormalRetrieveTags();
 		}
 
 		protected ClientSideNetworkGateway getGateway()
@@ -362,7 +361,7 @@ abstract public class RetrieveTableModel extends AbstractTableModel
 			super(appToUse, accountIdToUse);
 		}
 
-		NetworkResponse internalGetFieldOfficeSummaries() throws MartusSignatureException
+		NetworkResponse internalGetSummaries() throws MartusSignatureException
 		{
 			return getGateway().getDraftBulletinIds(getSecurity(), accountId, getSummaryTags());
 		}
@@ -376,7 +375,7 @@ abstract public class RetrieveTableModel extends AbstractTableModel
 			super(appToUse, accountIdToUse);
 		}
 
-		NetworkResponse internalGetFieldOfficeSummaries() throws MartusSignatureException
+		NetworkResponse internalGetSummaries() throws MartusSignatureException
 		{
 			return getGateway().getSealedBulletinIds(getSecurity(), accountId, getSummaryTags());
 		}
