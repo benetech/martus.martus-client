@@ -31,7 +31,7 @@ import java.awt.event.ActionEvent;
 import org.martus.client.core.BulletinStore;
 import org.martus.client.core.CustomFieldSpecValidator;
 import org.martus.client.core.MartusApp;
-import org.martus.client.core.MartusApp.SaveContactInfoException;
+import org.martus.client.core.MartusApp.SaveConfigInfoException;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.common.FieldSpec;
 
@@ -56,13 +56,13 @@ public class ActionMenuCustomFields extends UiMenuAction
 			
 		store.setPublicFieldTags(newSpecs);
 		String fieldSpecString = FieldSpec.buildFieldListString(newSpecs);
-		app.getContactInfo().setCustomFieldSpecs(fieldSpecString);
+		app.getConfigInfo().setCustomFieldSpecs(fieldSpecString);
 
 		try
 		{
-			app.saveContactInfo();
+			app.saveConfigInfo();
 		}
-		catch (SaveContactInfoException e)
+		catch (SaveConfigInfoException e)
 		{
 			mainWindow.notifyDlg("ErrorSavingConfig");
 		}

@@ -32,23 +32,23 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.util.Vector;
 
-import org.martus.common.ContactInfo;
+import org.martus.common.ConfigInfo;
 import org.martus.common.FieldSpec;
 import org.martus.common.crypto.MartusSecurity;
 import org.martus.common.network.NetworkInterfaceConstants;
 import org.martus.common.test.TestCaseEnhanced;
 import org.martus.util.Base64;
 
-public class TestContactInfo extends TestCaseEnhanced
+public class TestConfigInfo extends TestCaseEnhanced
 {
-    public TestContactInfo(String name) throws IOException
+    public TestConfigInfo(String name) throws IOException
 	{
         super(name);
     }
 
 	public void testBasics()
 	{
-		ContactInfo info = new ContactInfo();
+		ConfigInfo info = new ConfigInfo();
 		verifyEmptyInfo(info, "constructor");
 
 		info.setAuthor("fred");
@@ -61,19 +61,19 @@ public class TestContactInfo extends TestCaseEnhanced
 		verifyEmptyInfo(info, "clear");
 	}
 
-	public void testHasContactInfo() throws Exception
+	public void testHasEnoughContactInfo() throws Exception
 	{
-		ContactInfo info = new ContactInfo();
+		ConfigInfo info = new ConfigInfo();
 		info.setAuthor("fred");
-		assertEquals("author isn't enough contact info?", true, info.hasContactInfo());
+		assertEquals("author isn't enough contact info?", true, info.hasEnoughContactInfo());
 		info.setAuthor("");
 		info.setOrganization("whatever");
-		assertEquals("organization isn't enough contact info?", true, info.hasContactInfo());
+		assertEquals("organization isn't enough contact info?", true, info.hasEnoughContactInfo());
 	}
 
 	public void testLoadVersions() throws Exception
 	{
-		for(short version = 1; version <= ContactInfo.VERSION; ++version)
+		for(short version = 1; version <= ConfigInfo.VERSION; ++version)
 		{
 			byte[] data = createFileWithSampleData(version);
 			ByteArrayInputStream inputStream = new ByteArrayInputStream(data);
@@ -83,35 +83,35 @@ public class TestContactInfo extends TestCaseEnhanced
 
 	public void testSaveFull() throws Exception
 	{
-		ContactInfo info = new ContactInfo();
+		ConfigInfo info = new ConfigInfo();
 
 		setConfigToSampleData(info);
-		verifySampleInfo(info, "testSaveFull", ContactInfo.VERSION);
+		verifySampleInfo(info, "testSaveFull", ConfigInfo.VERSION);
 
 		ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
 		info.save(outputStream);
 		outputStream.close();
 
 		ByteArrayInputStream inputStream = new ByteArrayInputStream(outputStream.toByteArray());
-		verifyLoadSpecificVersion(inputStream, ContactInfo.VERSION);
+		verifyLoadSpecificVersion(inputStream, ConfigInfo.VERSION);
 	}
 
 	public void testSaveEmpty() throws Exception
 	{
-		ContactInfo emptyInfo = new ContactInfo();
+		ConfigInfo emptyInfo = new ConfigInfo();
 		ByteArrayOutputStream emptyOutputStream = new ByteArrayOutputStream();
 		emptyInfo.save(emptyOutputStream);
 		emptyOutputStream.close();
 
 		emptyInfo.setAuthor("should go away");
 		ByteArrayInputStream emptyInputStream = new ByteArrayInputStream(emptyOutputStream.toByteArray());
-		emptyInfo = ContactInfo.load(emptyInputStream);
+		emptyInfo = ConfigInfo.load(emptyInputStream);
 		assertEquals("should have cleared", "", emptyInfo.getAuthor());
 	}
 
 	public void testSaveNonEmpty() throws Exception
 	{
-		ContactInfo info = new ContactInfo();
+		ConfigInfo info = new ConfigInfo();
 		String server = "server";
 		info.setServerName(server);
 		ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
@@ -119,13 +119,13 @@ public class TestContactInfo extends TestCaseEnhanced
 		info.setServerName("should be reverted");
 
 		ByteArrayInputStream inputStream = new ByteArrayInputStream(outputStream.toByteArray());
-		info = ContactInfo.load(inputStream);
+		info = ConfigInfo.load(inputStream);
 		assertEquals("should have reverted", server, info.getServerName());
 	}
 
 	public void testRemoveHQKey() throws Exception
 	{
-		ContactInfo info = new ContactInfo();
+		ConfigInfo info = new ConfigInfo();
 		String hqKey = "HQKey";
 		info.setHQKey(hqKey);
 		ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
@@ -134,14 +134,14 @@ public class TestContactInfo extends TestCaseEnhanced
 		assertEquals("HQ Key Should be cleared", "", info.getHQKey());
 
 		ByteArrayInputStream inputStream = new ByteArrayInputStream(outputStream.toByteArray());
-		info = ContactInfo.load(inputStream);
+		info = ConfigInfo.load(inputStream);
 		assertEquals("HQ key should have reverted", hqKey, info.getHQKey());
 	}
 
 
 	public void testGetContactInfo() throws Exception
 	{
-		ContactInfo newInfo = new ContactInfo();
+		ConfigInfo newInfo = new ConfigInfo();
 		newInfo.setAuthor(sampleAuthor);
 		newInfo.setAddress(sampleAddress);
 		newInfo.setPhone(samplePhone);
@@ -159,8 +159,8 @@ public class TestContactInfo extends TestCaseEnhanced
 		assertEquals("encoded Address not correct?", sampleAddress,  new String(Base64.decode((String)contactInfo.get(8))));
 		assertEquals("encoded phone not correct?", samplePhone,  new String(Base64.decode((String)contactInfo.get(7))));
 		
-		Vector decodedContactInfo = ContactInfo.decodeContactInfoVectorIfNecessary(contactInfo);
-		Vector alreadyDecodedContactInfo = ContactInfo.decodeContactInfoVectorIfNecessary(decodedContactInfo);
+		Vector decodedContactInfo = ConfigInfo.decodeContactInfoVectorIfNecessary(contactInfo);
+		Vector alreadyDecodedContactInfo = ConfigInfo.decodeContactInfoVectorIfNecessary(decodedContactInfo);
 		assertEquals("Backward compatibility test, a decoded vector should be equal", decodedContactInfo, alreadyDecodedContactInfo);
 		
 		assertNotEquals("Still encoded?", NetworkInterfaceConstants.BASE_64_ENCODED, decodedContactInfo.get(0));
@@ -179,7 +179,7 @@ public class TestContactInfo extends TestCaseEnhanced
 	
 	public void testIsServerConfigured()
 	{
-		ContactInfo newInfo = new ContactInfo();
+		ConfigInfo newInfo = new ConfigInfo();
 		assertFalse("Didn't set up a server should not exist", newInfo.isServerConfigured());
 		newInfo.setServerName("tmp Server");
 		assertFalse("server publick key not set yet", newInfo.isServerConfigured());
@@ -189,7 +189,7 @@ public class TestContactInfo extends TestCaseEnhanced
 	
 	
 	
-	void setConfigToSampleData(ContactInfo info)
+	void setConfigToSampleData(ConfigInfo info)
 	{
 		info.setAuthor(sampleAuthor);
 		info.setOrganization(sampleOrg);
@@ -206,9 +206,9 @@ public class TestContactInfo extends TestCaseEnhanced
 		info.setCustomFieldSpecs(sampleCustomFieldSpecs);
 	}
 
-	void verifyEmptyInfo(ContactInfo info, String label)
+	void verifyEmptyInfo(ConfigInfo info, String label)
 	{
-		assertEquals(label + ": Full has contact info", false, info.hasContactInfo());
+		assertEquals(label + ": Full has contact info", false, info.hasEnoughContactInfo());
 		assertEquals(label + ": sampleSource", "", info.getAuthor());
 		assertEquals(label + ": sampleOrg", "", info.getOrganization());
 		assertEquals(label + ": sampleEmail", "", info.getEmail());
@@ -225,9 +225,9 @@ public class TestContactInfo extends TestCaseEnhanced
 
 	}
 
-	void verifySampleInfo(ContactInfo info, String label, int VERSION)
+	void verifySampleInfo(ConfigInfo info, String label, int VERSION)
 	{
-		assertEquals(label + ": Full has contact info", true, info.hasContactInfo());
+		assertEquals(label + ": Full has contact info", true, info.hasEnoughContactInfo());
 		assertEquals(label + ": sampleSource", sampleAuthor, info.getAuthor());
 		assertEquals(label + ": sampleOrg", sampleOrg, info.getOrganization());
 		assertEquals(label + ": sampleEmail", sampleEmail, info.getEmail());
@@ -257,8 +257,8 @@ public class TestContactInfo extends TestCaseEnhanced
 
 	void verifyLoadSpecificVersion(ByteArrayInputStream inputStream, short VERSION)
 	{
-		ContactInfo info = new ContactInfo();
-		info = ContactInfo.load(inputStream);
+		ConfigInfo info = new ConfigInfo();
+		info = ConfigInfo.load(inputStream);
 		verifySampleInfo(info, "testLoadVersion" + VERSION, VERSION);
 	}
 

@@ -55,7 +55,7 @@ public class TestClient
 		suite.addTest(new TestSuite(TestChoiceItem.class));
 		suite.addTest(new TestSuite(TestClientFileDatabase.class));
 		suite.addTest(new TestSuite(TestClientSideNetworkHandler.class));
-		suite.addTest(new TestSuite(TestContactInfo.class));
+		suite.addTest(new TestSuite(TestConfigInfo.class));
 		suite.addTest(new TestSuite(TestCurrentUiState.class));
 		suite.addTest(new TestSuite(TestCustomFieldSpecValidator.class));
 		suite.addTest(new TestSuite(TestDateUtilities.class));

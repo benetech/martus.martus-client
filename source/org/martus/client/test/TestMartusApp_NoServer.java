@@ -44,7 +44,7 @@ import org.martus.client.core.MartusApp.AccountAlreadyExistsException;
 import org.martus.client.core.MartusApp.CannotCreateAccountFileException;
 import org.martus.client.swingui.EnglishStrings;
 import org.martus.client.swingui.UiLocalization;
-import org.martus.common.ContactInfo;
+import org.martus.common.ConfigInfo;
 import org.martus.common.MartusUtilities;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.clientside.ChoiceItem;
@@ -84,8 +84,8 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 
 		File keyPairFile = appWithAccount.getCurrentKeyPairFile();
 		keyPairFile.delete();
-		appWithAccount.getContactInfoFile().delete();
-		appWithAccount.getContactInfoSignatureFile().delete();
+		appWithAccount.getConfigInfoFile().delete();
+		appWithAccount.getConfigInfoSignatureFile().delete();
 
 		TRACE_END();
 	}
@@ -388,42 +388,42 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 	{
 		TRACE_BEGIN("testContactInfo");
 
-		File file = appWithAccount.getContactInfoFile();
+		File file = appWithAccount.getConfigInfoFile();
 		file.delete();
 		assertEquals("delete didn't work", false, file.exists());
-		appWithAccount.loadContactInfo();
+		appWithAccount.loadConfigInfo();
 
-		ContactInfo originalInfo = appWithAccount.getContactInfo();
+		ConfigInfo originalInfo = appWithAccount.getConfigInfo();
 		assertEquals("should be empty", "", originalInfo.getAuthor());
 
 		originalInfo.setAuthor("blah");
-		assertEquals("should have been set", "blah", appWithAccount.getContactInfo().getAuthor());
-		appWithAccount.saveContactInfo();
-		assertEquals("should still be there", "blah", appWithAccount.getContactInfo().getAuthor());
+		assertEquals("should have been set", "blah", appWithAccount.getConfigInfo().getAuthor());
+		appWithAccount.saveConfigInfo();
+		assertEquals("should still be there", "blah", appWithAccount.getConfigInfo().getAuthor());
 		assertEquals("save didn't work!", true, file.exists());
 
 		originalInfo.setAuthor("something else");
-		appWithAccount.loadContactInfo();
-		assertNotNull("ContactInfo null", appWithAccount.getContactInfo());
-		assertEquals("should have reloaded", "blah", appWithAccount.getContactInfo().getAuthor());
+		appWithAccount.loadConfigInfo();
+		assertNotNull("ContactInfo null", appWithAccount.getConfigInfo());
+		assertEquals("should have reloaded", "blah", appWithAccount.getConfigInfo().getAuthor());
 
-		File sigFile = appWithAccount.getContactInfoSignatureFile();
+		File sigFile = appWithAccount.getConfigInfoSignatureFile();
 		sigFile.delete();
-		appWithAccount.saveContactInfo();
+		appWithAccount.saveConfigInfo();
 		assertTrue("Missing Signature file", sigFile.exists());
-		appWithAccount.loadContactInfo();
-		assertEquals("blah", appWithAccount.getContactInfo().getAuthor());
+		appWithAccount.loadConfigInfo();
+		assertEquals("blah", appWithAccount.getConfigInfo().getAuthor());
 		sigFile.delete();
 		try
 		{
-			appWithAccount.loadContactInfo();
+			appWithAccount.loadConfigInfo();
 			fail("Should not have verified");
 		}
-		catch (MartusApp.LoadContactInfoException e)
+		catch (MartusApp.LoadConfigInfoException e)
 		{
 			//Expected
 		}
-		assertEquals("", appWithAccount.getContactInfo().getAuthor());
+		assertEquals("", appWithAccount.getConfigInfo().getAuthor());
 
 		TRACE_END();
 
@@ -570,7 +570,7 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 
 	public void testSetAndGetHQKey() throws Exception
 	{
-		File configFile = appWithAccount.getContactInfoFile();
+		File configFile = appWithAccount.getConfigInfoFile();
 		configFile.deleteOnExit();
 		assertEquals("already exists?", false, configFile.exists());
 		String sampleHQKey = "abc123";
@@ -581,7 +581,7 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 
 	public void testClearHQKey() throws Exception
 	{
-		File configFile = appWithAccount.getContactInfoFile();
+		File configFile = appWithAccount.getConfigInfoFile();
 		configFile.deleteOnExit();
 		assertEquals("already exists?", false, configFile.exists());
 		appWithAccount.clearHQKey();
@@ -636,13 +636,13 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		File keyPairFile = appWithAccount.getCurrentKeyPairFile();	
 		File backupKeyPairFile = MartusApp.getBackupFile(keyPairFile);
 		File accountTokenFile = appWithAccount.getUserNameHashFile(keyPairFile.getParentFile());
-		File contactInfoFile = appWithAccount.getContactInfoFile();
-		File contactInfoSigFile = appWithAccount.getContactInfoSignatureFile();
+		File configInfoFile = appWithAccount.getConfigInfoFile();
+		File configInfoSigFile = appWithAccount.getConfigInfoSignatureFile();
 		File uploadedFile = appWithAccount.getUploadInfoFile();
 		File uiStateFile = appWithAccount.getUiStateFile();
 		
 		appWithAccount.writeKeyPairFileWithBackup(keyPairFile,"UserA", "Password".toCharArray());
-		appWithAccount.saveContactInfo();
+		appWithAccount.saveConfigInfo();
 		FileOutputStream out = new FileOutputStream(uploadedFile);
 		out.write(1);
 		out.close();
@@ -653,8 +653,8 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		assertTrue("keypair file doesn't exist?", keyPairFile.exists());
 		assertTrue("backup keypair file doesn't exist?", backupKeyPairFile.exists());
 		assertTrue("account Token file doesn't exist?", accountTokenFile.exists());
-		assertTrue("contactInfo file doesn't exist?", contactInfoFile.exists());
-		assertTrue("contactInfo sig file doesn't exist?", contactInfoSigFile.exists());
+		assertTrue("configInfo file doesn't exist?", configInfoFile.exists());
+		assertTrue("configInfo sig file doesn't exist?", configInfoSigFile.exists());
 		assertTrue("upload reminder file doesn't exist?", uploadedFile.exists());
 		assertTrue("uiState file doesn't exist?", uiStateFile.exists());
 		
@@ -665,8 +665,8 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		assertFalse("keypair file still exist?", keyPairFile.exists());
 		assertFalse("backup keypair file still exist?", backupKeyPairFile.exists());
 		assertFalse("account Token file still exists?", accountTokenFile.exists());
-		assertFalse("contactInfo file still exists?", contactInfoFile.exists());
-		assertFalse("contactInfo sig file still exists?", contactInfoSigFile.exists());
+		assertFalse("configInfo file still exists?", configInfoFile.exists());
+		assertFalse("configInfo sig file still exists?", configInfoSigFile.exists());
 		assertFalse("upload reminder file still exists?", uploadedFile.exists());
 		assertFalse("uiState file still exist?", uiStateFile.exists());
 		
@@ -988,7 +988,7 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 	{
 		TRACE_BEGIN("testCreateBulletin");
 		mockSecurityForApp.loadSampleAccount();
-		ContactInfo info = appWithAccount.getContactInfo();
+		ConfigInfo info = appWithAccount.getConfigInfo();
 		String source = "who?";
 		String organization = "those guys";
 		String template = "Was there a bomb?";

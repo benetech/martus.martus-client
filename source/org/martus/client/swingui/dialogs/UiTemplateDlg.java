@@ -40,7 +40,7 @@ import javax.swing.filechooser.FileFilter;
 
 import org.martus.client.core.MartusApp;
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.common.ContactInfo;
+import org.martus.common.ConfigInfo;
 import org.martus.common.clientside.UiBasicLocalization;
 import org.martus.swing.ParagraphLayout;
 import org.martus.swing.UiNotifyDlg;
@@ -52,7 +52,7 @@ import org.martus.util.UnicodeReader;
 
 public class UiTemplateDlg extends JDialog implements ActionListener
 {
-	public UiTemplateDlg(UiMainWindow owner, ContactInfo infoToUse, File defaultDetailsFileToUse)
+	public UiTemplateDlg(UiMainWindow owner, ConfigInfo infoToUse, File defaultDetailsFileToUse)
 	{
 		super(owner, "", true);
 		info = infoToUse;
@@ -183,7 +183,7 @@ public class UiTemplateDlg extends JDialog implements ActionListener
 		dispose();
 	}
 
-	ContactInfo info;
+	ConfigInfo info;
 	JButton ok;
 	UiTextArea details;
 	boolean result;
