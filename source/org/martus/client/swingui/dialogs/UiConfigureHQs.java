@@ -192,32 +192,23 @@ public class UiConfigureHQs extends JDialog
 	{
 		public void actionPerformed(ActionEvent ae)
 		{
-			int selection = table.getSelectedRow();
-			if(selection == -1)
+			if(table.getSelectedRowCount()>0)
 			{
 				mainWindow.notifyDlg("NoHQsSelected");
 				return;
 			}
 			int rowCount = model.getRowCount();
-			try
+			for(int i = rowCount-1; i >=0 ; --i)
 			{
-				for(int i = rowCount-1; i >=0 ; --i)
+				if(table.isRowSelected(i))
 				{
-					if(table.isRowSelected(i))
-					{
-						HQKey thisKey = model.getHQKey(i);
-						String newLabel = getHQLabel(thisKey.getPublicCode(), thisKey.getLabel());
-						if(newLabel== null)
-							break;
-						model.setValueAt(newLabel, i, model.COLUMN_LABEL);
-					}
+					String newLabel = getHQLabel(model.getPublicCode(i), model.getLabel(i));
+					if(newLabel== null)
+						break;
+					model.setLabel(i, newLabel);
 				}
-				updateConfigInfo();
 			}
-			catch (InvalidBase64Exception e)
-			{
-				e.printStackTrace();
-			}
+			updateConfigInfo();
 		}
 	}
 	
@@ -244,8 +235,7 @@ public class UiConfigureHQs extends JDialog
 	{
 		public void actionPerformed(ActionEvent ae)
 		{
-			int selection = table.getSelectedRow();
-			if(selection == -1)
+			if(table.getSelectedRowCount()>0)
 			{
 				mainWindow.notifyDlg("NoHQsSelected");
 				return;
@@ -270,7 +260,7 @@ public class UiConfigureHQs extends JDialog
 			String publicCode = publicKey.getPublicCode();
 			for(int i = 0; i < table.getRowCount(); ++i)
 			{
-				if(((String)model.getValueAt(i, model.COLUMN_PUBLIC_CODE)).equals(publicCode))
+				if(model.getPublicCode(i).equals(publicCode))
 				{
 					mainWindow.notifyDlg("HQKeyAlradyExists");
 					return;

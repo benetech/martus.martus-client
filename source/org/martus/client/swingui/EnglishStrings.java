@@ -727,6 +727,7 @@ public class EnglishStrings
 "field:ConfigureHQColumnHeaderPublicCode=Public Code",
 "field:SplashProductDescription=Human Rights Bulletin System",
 "field:HQsSetAsProxyUploader=These Headquarters accounts are allowed to view the private information in this bulletin, and to send this bulletin to a server on your behalf.",
+"field:HQsSetAsDefault=Default Headquarters accounts will be selected for each new bulletin or version.",
 "field:DateExact=Exact Date",
 "field:DateRange=Date Range",
 "field:UnknownDateSave=Unknown",

@@ -148,7 +148,25 @@ public abstract class HeadQuartersTableModel extends UiTableModel
 			return entry.getPublicCode();
 		return "";
 	}
+	
+	public String getLabel(int row)
+	{
+		HeadQuarterEntry entry = (HeadQuarterEntry)entries.get(row);
+		return entry.getLabel();
+	}
 
+	public String getPublicCode(int row)
+	{
+		HeadQuarterEntry entry = (HeadQuarterEntry)entries.get(row);
+		return entry.getPublicCode();
+	}
+
+	public void setLabel(int row, String newLabel)
+	{
+		HeadQuarterEntry entry = (HeadQuarterEntry)entries.get(row);
+		entry.setLabel(newLabel);
+	}
+	
 	public void setValueAt(Object value, int row, int column)
 	{
 		HeadQuarterEntry entry = (HeadQuarterEntry)entries.get(row);
@@ -161,10 +179,6 @@ public abstract class HeadQuartersTableModel extends UiTableModel
 		else if(column == COLUMN_DEFAULT)
 		{
 			entry.setDefault(((Boolean)value).booleanValue());
-		}
-		else if(column == COLUMN_LABEL)
-		{
-			entry.setLabel((String)value);
 		}
 	}
 	
