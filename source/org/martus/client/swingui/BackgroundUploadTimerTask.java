@@ -88,10 +88,7 @@ class BackgroundUploadTimerTask extends TimerTask
 				else if(uploadResult.uid != null)
 				{
 					//System.out.println("UiMainWindow.Tick.run: " + uploadResult);
-					mainWindow.folderContentsHaveChanged(getStore().getFolderSaved());
-					mainWindow.folderContentsHaveChanged(getStore().getFolderSealedOutbox());
-					mainWindow.folderContentsHaveChanged(getStore().getFolderDraftOutbox());
-					mainWindow.folderContentsHaveChanged(getApp().createOrFindFolder(getStore().getNameOfFolderDamaged()));
+					updateDisplay();
 				}
 			}
 			catch (MartusApp.DamagedBulletinException e)
@@ -113,6 +110,38 @@ class BackgroundUploadTimerTask extends TimerTask
 		progressMeter.hideProgressMeter();
 	}
 		
+	private void updateDisplay()
+	{
+		class Updater implements Runnable
+		{
+			public void run()
+			{
+				mainWindow.folderContentsHaveChanged(getStore().getFolderSaved());
+				mainWindow.folderContentsHaveChanged(getStore().getFolderSealedOutbox());
+				mainWindow.folderContentsHaveChanged(getStore().getFolderDraftOutbox());
+				mainWindow.folderContentsHaveChanged(getApp().createOrFindFolder(getStore().getNameOfFolderDamaged()));
+			}
+		}
+		Updater updater = new Updater();
+		
+		final boolean crashMode = true;
+		if(crashMode)
+		{
+			updater.run();
+		}
+		else
+		{
+			try
+			{
+				SwingUtilities.invokeAndWait(updater);
+			}
+			catch (Exception notMuchWeCanDoAboutIt)
+			{
+				notMuchWeCanDoAboutIt.printStackTrace();
+			}
+		}
+	}
+
 	public void checkComplianceStatement()
 	{
 		if(alreadyCheckedCompliance)
