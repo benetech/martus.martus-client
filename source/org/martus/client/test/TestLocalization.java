@@ -197,7 +197,7 @@ public class TestLocalization extends TestCaseEnhanced
 	}
 */
 
-	public void testGetAllTranslationStrings()
+	public void testGetAllTranslationStrings() throws Exception
 	{
 		final String sillyEnglish = "a:b=c";
 		final String sillyEsperanto = sillyEnglish + "x";
@@ -220,6 +220,11 @@ public class TestLocalization extends TestCaseEnhanced
 		strings = bd.getAllTranslationStrings("eo");
 		assertEquals("Should have added one string", count+1, strings.size());
 		assertEquals("But still no esperanto silly key", false, strings.contains(sillyEsperanto));
+
+		final String withNewlines = "d:e=f\ng\nh";
+		UiBasicLocalization minimalLocalization = new UiBasicLocalization(createTempDirectory(), new String[0]);
+		minimalLocalization.addTranslation("en", withNewlines);
+		assertContains("d:e=f\\ng\\nh", minimalLocalization.getAllTranslationStrings("en"));
 	}
 
 	static UiLocalization bd;
