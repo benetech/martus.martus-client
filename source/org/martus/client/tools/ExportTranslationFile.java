@@ -71,7 +71,7 @@ public class ExportTranslationFile
 			bd.exportTranslations(languageCode, UiConstants.versionLabel, writer);
 	
 			writer.close();
-			System.out.println("Success");
+			System.out.println("Success: " +outputFile.getAbsolutePath());
 		}
 		catch(Exception e)
 		{
