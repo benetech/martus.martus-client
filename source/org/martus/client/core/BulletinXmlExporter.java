@@ -65,6 +65,20 @@ public class BulletinXmlExporter
 		writeElement(dest, AccountIdElementName, "", b.getAccount());
 		if(b.isAllPrivate())
 			writeElement(dest, AllPrivateElementName, "", "");
+		
+		Vector history = b.getHistory();
+		if(history.size() > 0)
+		{
+			dest.write(MartusXml.getTagStart(HistoryElementName));
+			dest.write("\n");
+			for(int i=0; i < history.size(); ++i)
+			{
+				dest.write(MartusXml.getTagStart(AncestorElementName));
+				dest.write((String)history.get(i));
+				dest.write(MartusXml.getTagEnd(AncestorElementName));
+			}
+			dest.write(MartusXml.getTagEnd(HistoryElementName));
+		}
 
 		if(includePrivateData || !b.isAllPrivate())
 		{
@@ -142,6 +156,8 @@ public class BulletinXmlExporter
 	public final static String AccountIdElementName = "AuthorAccountId";
 	public final static String AttachmentsListElementName = "AttachmentList";
 	public final static String AttachmentElementName = "Attachment";	
+	public final static String HistoryElementName = "History";
+	public final static String AncestorElementName = "Ancestor";
 	
 	private final static String TAG = "Tag";
 	private final static String VALUE = "Value";

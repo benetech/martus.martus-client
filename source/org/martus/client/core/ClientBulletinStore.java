@@ -1172,7 +1172,7 @@ public class ClientBulletinStore extends BulletinStore
 		InvalidBase64Exception
 	{
 		final MartusCrypto security = getSignatureGenerator();
-		Bulletin imported = BulletinZipImporter.loadFromFile(security, inputFile);
+		Bulletin imported = BulletinZipImporter.loadFromFileAsNewDraft(security, inputFile);
 		saveBulletin(imported);
 		return imported.getUniversalId();
 	}

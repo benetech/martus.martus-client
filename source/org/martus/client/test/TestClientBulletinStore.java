@@ -133,6 +133,28 @@ public class TestClientBulletinStore extends TestCaseEnhanced
 	    	assertTrue("not draft?", clone.isDraft());
 	    	assertEquals("wrong public field specs?", customSpecs.length, clone.getPublicFieldSpecs().length);
 	    	assertEquals("wrong private field specs?", customSpecs.length, clone.getPrivateFieldSpecs().length);
+	    	Vector history = clone.getHistory();
+			assertEquals("no history?", 1, history.size());
+	    	assertEquals("wrong ancestor?", original.getLocalId(), history.get(0));
+    	}
+	}
+    
+    public void testCreateCloneOfMyDraft() throws Exception
+	{
+    	Bulletin original = createSealedBulletin(security);
+    	original.setDraft();
+    	
+    	{
+	    	Bulletin clone = store.createClone(original, customSpecs, customSpecs);
+	    	assertEquals("wrong account?", store.getAccountId(), clone.getAccount());
+	    	assertNotEquals("not new local id?", original.getLocalId(), clone.getLocalId());
+	    	assertEquals("no data?", original.get(Bulletin.TAGTITLE), clone.get(Bulletin.TAGTITLE));
+	    	assertEquals("kept hq?", 0, clone.getAuthorizedToReadKeys().size());
+	    	assertTrue("not draft?", clone.isDraft());
+	    	assertEquals("wrong public field specs?", customSpecs.length, clone.getPublicFieldSpecs().length);
+	    	assertEquals("wrong private field specs?", customSpecs.length, clone.getPrivateFieldSpecs().length);
+	    	Vector history = clone.getHistory();
+			assertEquals("has history?", 0, history.size());
     	}
 	}
     
@@ -151,6 +173,7 @@ public class TestClientBulletinStore extends TestCaseEnhanced
 	    	assertTrue("not draft?", clone.isDraft());
 	    	assertEquals("wrong public field specs?", customSpecs.length, clone.getPublicFieldSpecs().length);
 	    	assertEquals("wrong private field specs?", customSpecs.length, clone.getPrivateFieldSpecs().length);
+	    	assertEquals("has history?", 0, clone.getHistory().size());
     	}
 	}
     

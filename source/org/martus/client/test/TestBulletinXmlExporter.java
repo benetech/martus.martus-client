@@ -79,8 +79,31 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 		assertContains(sampleAuthor, result);
 		assertNotContains("<PrivateData>", result);
 		assertNotContains("<AttachmentList>", result);
+		assertNotContains("<History>", result);
 
 		//System.out.println(result);
+	}
+	
+	public void testExportHistory() throws Exception
+	{
+		String localId1 = "pretend local id";
+		String localId2 = "another fake local id";
+
+		Vector fakeHistory = new Vector();
+		fakeHistory.add(localId1);
+		fakeHistory.add(localId2);
+		
+		Bulletin b = new Bulletin(store.getSignatureGenerator());
+		b.setHistory(fakeHistory);
+		
+		Vector list = new Vector();
+		list.add(b);
+		String result = doExport(list, false);
+		
+		assertContains("<History>", result);
+		assertContains("<Ancestor>", result);
+		assertContains(localId1, result);
+		assertContains(localId2, result);
 	}
 
 	public void testExportWithPublicAttachments() throws Exception
