@@ -29,7 +29,7 @@ package org.martus.client.core;
 import java.util.Vector;
 
 import org.martus.client.swingui.UiConstants;
-import org.martus.common.MartusUtilities;
+import org.martus.common.VersionBuildDate;
 import org.martus.common.crypto.MartusCrypto;
 import org.martus.common.network.BulletinRetrieverGatewayInterface;
 import org.martus.common.network.NetworkInterface;
@@ -152,7 +152,7 @@ public class ClientSideNetworkGateway implements BulletinRetrieverGatewayInterfa
 	{
 		Vector parameters = new Vector();
 		parameters.add(UiConstants.versionLabel);
-		parameters.add(MartusUtilities.getVersionDate());
+		parameters.add(VersionBuildDate.getVersionBuildDate());
 		String signature = signer.createSignatureOfVectorOfStrings(parameters);
 		return new NetworkResponse(server.getNews(signer.getPublicKeyString(), parameters, signature));
 	}

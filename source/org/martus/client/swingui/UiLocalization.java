@@ -44,7 +44,7 @@ import org.martus.client.core.ChoiceItem;
 import org.martus.client.core.DateUtilities;
 import org.martus.client.core.Localization;
 import org.martus.client.core.MartusApp;
-import org.martus.common.MartusUtilities;
+import org.martus.common.VersionBuildDate;
 import org.martus.util.UnicodeWriter;
 
 
@@ -103,7 +103,7 @@ public class UiLocalization extends Localization
 		writer.writeln("# Language name:  " + getLanguageName(languageCode));
 		writer.writeln("# Exported date:  " + new Date().toString());
 		writer.writeln("# Client version: " + UiConstants.versionLabel);
-		writer.writeln("# Client build:   " + MartusUtilities.getVersionDate());
+		writer.writeln("# Client build:   " + VersionBuildDate.getVersionBuildDate());
 		writer.writeln("#");
 		writer.writeln("# Lines beginning with # are comments and are ignored by Martus");
 		writer.writeln("# Each entry consists of: KEY=VALUE");

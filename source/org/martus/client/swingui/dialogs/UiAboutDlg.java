@@ -45,7 +45,7 @@ import javax.swing.JLabel;
 import org.martus.client.swingui.UiConstants;
 import org.martus.client.swingui.UiLocalization;
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.common.MartusUtilities;
+import org.martus.common.VersionBuildDate;
 import org.martus.swing.UiWrappedTextArea;
 import org.martus.swing.Utilities;
 
@@ -66,7 +66,7 @@ public class UiAboutDlg extends JDialog implements ActionListener
 		versionInfo += " " + UiConstants.versionLabel;
 
 		String buildDate = localization.getFieldLabel("aboutDlgBuildDate");
-		buildDate += " " + MartusUtilities.getVersionDate();
+		buildDate += " " + VersionBuildDate.getVersionBuildDate();
 
 		JButton ok = new JButton(localization.getButtonLabel("ok"));
 		ok.addActionListener(this);
