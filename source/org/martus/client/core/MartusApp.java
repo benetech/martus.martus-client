@@ -1578,6 +1578,7 @@ public class MartusApp
 		store.ensureBulletinIsInFolder(store.getFolderSaved(), bulletinToSave.getUniversalId());
 		store.ensureBulletinIsInFolder(outboxToUse, bulletinToSave.getUniversalId());
 		store.removeBulletinFromFolder(store.getFolderDiscarded(), bulletinToSave);
+		store.moveBulletin(bulletinToSave, store.getFolderOnServer(), store.getFolderNotOnServer());
 		store.saveFolders();
 	}
 
