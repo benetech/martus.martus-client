@@ -168,6 +168,8 @@ public class EnglishStrings
 "wintitle:notifyResendErrorNotAuthorizedToSend=Not Authorized To Send",
 "wintitle:notifyResendError=Error Sending Bulletin",
 
+"wintitle:notifyErrorRenameFolder=Unable to Rename Folder",
+
 "wintitle:inputservername=Server Name",
 "wintitle:inputserverpubliccode=Server Identification",
 "wintitle:inputservermagicword=Request Upload Permission",
@@ -684,6 +686,8 @@ public class EnglishStrings
 "field:notifyModifyViewBulletinDetailscause=Bulletin ID: #I#\nAuthor:      #A#\n\n#H#",
 "field:notifyResendErrorNotAuthorizedToSendcause=One or more bulletins were unable to be resent because you are not authorized to upload them.",
 "field:notifyResendErrorcause=One or more bulletins were unable to be resent due to an unexpected error.",
+
+"field:notifyErrorRenameFoldercause=Folder names cannot contain punctuation.  They also cannot begin with a space.",
 
 "field:ViewViewBulletinDetailsHQList=The following headquarter account(s) can view the private information in this bulletin, and can send this bulletin to a server:\n\n#L#",
 "field:ModifyViewBulletinDetailsHQList=The following headquarter account(s) will be able to view the private information in this bulletin, or send this bulletin to a server, after you save it:\n\n#L#\n\nTo add or remove an account, use the Tools/Configure Headquarters menu option.",

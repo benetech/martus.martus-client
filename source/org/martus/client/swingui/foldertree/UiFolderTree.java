@@ -226,7 +226,8 @@ class UiFolderTree extends JTree implements TreeSelectionListener
 			else if(!store.renameFolder(oldInternalFolderName, newFolderName))
 			{
 				System.out.println("rename failed");
-				newFolderName = oldInternalFolderName;
+				observer.notifyDlg("ErrorRenameFolder");
+				newFolderName = oldInternalFolderName;				
 			}
 
 			TreePath path = getPathOfNode(node);
