@@ -138,7 +138,7 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		f1.add(b1);
 		f2.add(b2);
 		assertEquals(2, appWithAccount.getStore().getBulletinCount());
-		appWithAccount.deleteAllBulletinsAndUserFolders();
+		appWithAccount.deleteAllBulletinsAndUserFolders(false, false);
 		assertEquals(0, appWithAccount.getStore().getBulletinCount());
 		assertNotNull("System Folder deleted?", appWithAccount.getFolderDraftOutbox());
 		assertNull("User Folder Not deleted?", appWithAccount.getStore().findFolder(f1.getName()));

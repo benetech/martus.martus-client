@@ -29,7 +29,7 @@ package org.martus.client.swingui.actions;
 import java.awt.event.ActionEvent;
 
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.client.swingui.UiUtilities;
+import org.martus.client.swingui.dialogs.UiQuickEraseConfirmDlg;
 
 public class ActionMenuQuickErase extends UiMenuAction 
 {
@@ -42,12 +42,24 @@ public class ActionMenuQuickErase extends UiMenuAction
 	{
 		if(!mainWindow.reSignIn())
 			return;
-		if(!UiUtilities.confirmDlg(mainWindow.getLocalization(), mainWindow, "DoQuickErase"))
+		
+		UiQuickEraseConfirmDlg dlg = new UiQuickEraseConfirmDlg(mainWindow, mainWindow.getLocalization(), "DoQuickErase");
+		dlg.show();
+		
+		if (!dlg.isOkayPressed())
 			return;
-		if(mainWindow.getApp().deleteAllBulletinsAndUserFolders())
-			mainWindow.notifyDlg(mainWindow, "QuickEraseWorked");
+				
+		boolean scrubSelected 	= dlg.isScrubCheckBoxSelected();
+		boolean keyPairSelected = dlg.isDeleteKeypairSelected();
+		
+		if(mainWindow.getApp().deleteAllBulletinsAndUserFolders(scrubSelected, keyPairSelected))
+		{	
+			String baseTag = (scrubSelected)? "QuickEraseScrubWorked":"QuickEraseWorked";		
+			mainWindow.notifyDlg(mainWindow, baseTag);
+		}						
 		else
 			mainWindow.notifyDlg(mainWindow, "QuickEraseFailed");
+			
 		mainWindow.folderTreeContentsHaveChanged();
 	}
 }

@@ -209,6 +209,8 @@ public class EnglishStrings
 "wintitle:ErrorVerifyingKeyPairShare=Verification Error",				
 "wintitle:VerifyingKeyPairShare=Verifying Disk",
 
+"wintitle:notifyQuickEraseScrubWorked=Quick Erase",
+
 "button:help=Help",
 "button:create=Create",
 "button:search=Search",
@@ -644,6 +646,11 @@ public class EnglishStrings
 "field:UnknownFieldType=WARNING: This field requires a newer version of Martus to be viewed",
 "field:BackupKeyShareCompleteInformation=Backup complete, please give each disk to people you trust, so that you can in the future if you forget your user name and or password you can recreate your account.  You will need #N# of these disks to recreate your account.",
 "field:BackupRecoverKeyPairInsertNextDiskMessage=Please insert disk #",
+
+"field:notifyQuickEraseScrubWorkedcause=All bulletins and folders were successfully scrubbed and deleted.",
+"field:ScrubDataBeforeDelete=Scrub data before deleting",
+"field:DeleteKeypair=Delete Keypair",
+
 
 "field:DateRangeFrom=Between",
 "field:DateRangeTo=and",

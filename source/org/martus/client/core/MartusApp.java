@@ -478,10 +478,13 @@ public class MartusApp
 		return newFolder;
 	}
 
-	public boolean deleteAllBulletinsAndUserFolders()
+	public boolean deleteAllBulletinsAndUserFolders(boolean scrubBeforeDelete, boolean deleteKeyPair)
 	{
 		try
 		{
+			if (scrubBeforeDelete)
+				store.scrubAllData();
+				
 			store.deleteAllData();
 		}
 		catch (Exception e)
