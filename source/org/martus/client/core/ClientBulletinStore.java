@@ -1072,7 +1072,7 @@ public class ClientBulletinStore extends BulletinStore
 		xml.append(MartusClientXml.getFolderTagStart(folder.getName()));
 		for(int index=0; index < folder.getBulletinCount(); ++index)
 		{
-			UniversalId uid = folder.getBulletinUniversalIdSorted(index);
+			UniversalId uid = folder.getBulletinUniversalIdUnsorted(index);
 			if(uid == null)
 				System.out.println("WARNING: Unexpected null id");
 			xml.append(MartusXml.getIdTag(uid.toString()));
