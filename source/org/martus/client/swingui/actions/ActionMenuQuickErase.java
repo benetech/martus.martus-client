@@ -62,7 +62,7 @@ public class ActionMenuQuickErase extends UiMenuAction
 		erasePacketData(quickEraseOptions);
 		if (quickEraseOptions.isDeleteKeyPairSelected())
 		{
-			deleteKeyPair(quickEraseOptions);
+			deleteKeyPairAndRelatedFiles(quickEraseOptions);
 		}	
 		if (quickEraseOptions.isExitWhenCompleteSelected())
 		{	
@@ -112,9 +112,9 @@ public class ActionMenuQuickErase extends UiMenuAction
 		mainWindow.exitWithoutSavingState();		
 	}
 
-	private void deleteKeyPair(QuickEraseOptions options)
+	private void deleteKeyPairAndRelatedFiles(QuickEraseOptions options)
 	{
 		if(options.isDonotPromptSelected() || mainWindow.confirmDlgBeep(mainWindow, "QuickEraseDeleteKeyPair"))
-			mainWindow.getApp().deleteKeypair(options);
+			mainWindow.getApp().deleteKeypairAndRelatedFiles(options);
 	}
 }

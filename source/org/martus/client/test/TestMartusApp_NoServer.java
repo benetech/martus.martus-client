@@ -81,8 +81,8 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 
 		File keyPairFile = appWithAccount.getCurrentKeyPairFile();
 		keyPairFile.delete();
-		new File(appWithAccount.getConfigInfoFilename()).delete();
-		new File(appWithAccount.getConfigInfoSignatureFilename()).delete();
+		appWithAccount.getConfigInfoFile().delete();
+		appWithAccount.getConfigInfoSignatureFile().delete();
 
 		TRACE_END();
 	}
@@ -135,10 +135,8 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		assertEquals("Russian should be set", Localization.RUSSIAN, testLocalization.getCurrentLanguageCode());
 		assertEquals("Russian code should set MDY Dot correctly", DateUtilities.DMY_DOT.getCode(), testLocalization.getCurrentDateFormatCode());
 		tmpFile.delete();
-		
-		
 	}
-	
+
 	public void testDiscardBulletinsFromFolder() throws Exception
 	{
 		Bulletin b1 = appWithAccount.createBulletin();
@@ -388,7 +386,7 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 	{
 		TRACE_BEGIN("testConfigInfo");
 
-		File file = new File(appWithAccount.getConfigInfoFilename());
+		File file = appWithAccount.getConfigInfoFile();
 		file.delete();
 		assertEquals("delete didn't work", false, file.exists());
 		appWithAccount.loadConfigInfo();
@@ -407,7 +405,7 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		assertNotNull("ConfigInfo null", appWithAccount.getConfigInfo());
 		assertEquals("should have reloaded", "blah", appWithAccount.getConfigInfo().getAuthor());
 
-		File sigFile = new File(appWithAccount.getConfigInfoSignatureFilename());
+		File sigFile = appWithAccount.getConfigInfoSignatureFile();
 		sigFile.delete();
 		appWithAccount.saveConfigInfo();
 		assertTrue("Missing Signature file", sigFile.exists());
@@ -570,7 +568,7 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 
 	public void testSetAndGetHQKey() throws Exception
 	{
-		File configFile = new File(appWithAccount.getConfigInfoFilename());
+		File configFile = appWithAccount.getConfigInfoFile();
 		configFile.deleteOnExit();
 		assertEquals("already exists?", false, configFile.exists());
 		String sampleHQKey = "abc123";
@@ -581,7 +579,7 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 
 	public void testClearHQKey() throws Exception
 	{
-		File configFile = new File(appWithAccount.getConfigInfoFilename());
+		File configFile = appWithAccount.getConfigInfoFile();
 		configFile.deleteOnExit();
 		assertEquals("already exists?", false, configFile.exists());
 		appWithAccount.clearHQKey();
@@ -632,17 +630,45 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		TRACE_BEGIN("testScrubAndDeleteKeyPairFile");
 		QuickEraseOptions opts = new QuickEraseOptions();
 		opts.setScrubOption(true);
-		
-		appWithAccount.deleteKeypair(opts);
-		
+
 		File keyPairFile = appWithAccount.getCurrentKeyPairFile();	
 		File backupKeyPairFile = MartusApp.getBackupFile(keyPairFile);
-			
-		assertEquals("keypair file exist?", false, keyPairFile.exists());
-		assertEquals("backup keypair file exist?", false, backupKeyPairFile.exists());
+		File accountTokenFile = appWithAccount.getUserNameHashFile(keyPairFile.getParentFile());
+		File configInfoFile = appWithAccount.getConfigInfoFile();
+		File configInfoSigFile = appWithAccount.getConfigInfoSignatureFile();
+		File uploadedFile = appWithAccount.getUploadInfoFile();
+		File uiStateFile = appWithAccount.getUiStateFile();
+		
+		appWithAccount.writeKeyPairFileWithBackup(keyPairFile,"UserA", "Password".toCharArray());
+		appWithAccount.saveConfigInfo();
+		FileOutputStream out = new FileOutputStream(uploadedFile);
+		out.write(1);
+		out.close();
+		FileOutputStream out2 = new FileOutputStream(uiStateFile);
+		out2.write(1);
+		out2.close();
+		
+		assertTrue("keypair file doesn't exist?", keyPairFile.exists());
+		assertTrue("backup keypair file doesn't exist?", backupKeyPairFile.exists());
+		assertTrue("account Token file doesn't exist?", accountTokenFile.exists());
+		assertTrue("configInfo file doesn't exist?", configInfoFile.exists());
+		assertTrue("configInfo sig file doesn't exist?", configInfoSigFile.exists());
+		assertTrue("upload reminder file doesn't exist?", uploadedFile.exists());
+		assertTrue("uiState file doesn't exist?", uiStateFile.exists());
+		
+		appWithAccount.deleteKeypairAndRelatedFiles(opts);
+		
+		//TODO Make sure the files really get scrubbed.
+		
+		assertFalse("keypair file still exist?", keyPairFile.exists());
+		assertFalse("backup keypair file still exist?", backupKeyPairFile.exists());
+		assertFalse("account Token file still exists?", accountTokenFile.exists());
+		assertFalse("configInfo file still exists?", configInfoFile.exists());
+		assertFalse("configInfo sig file still exists?", configInfoSigFile.exists());
+		assertFalse("upload reminder file still exists?", uploadedFile.exists());
+		assertFalse("uiState file still exist?", uiStateFile.exists());
 		
 		TRACE_END();		
-		
 	}
 	
 	protected void checkScrubbedData(File file) throws Exception

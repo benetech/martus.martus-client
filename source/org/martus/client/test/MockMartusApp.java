@@ -80,12 +80,12 @@ public class MockMartusApp extends MartusApp
 		if(getBackupFile(defaultKeyPair).exists())
 			throw new IOException("getBackupFile ");
 
-		File configInfo = new File(getConfigInfoFilename());
+		File configInfo = getConfigInfoFile();
 		configInfo.delete();
 		if(configInfo.exists())
 			throw new IOException("configInfo");
 
-		File sigFile = new File(getConfigInfoSignatureFilename());
+		File sigFile = getConfigInfoSignatureFile();
 		sigFile.delete();
 		if(sigFile.exists())
 			throw new IOException("sigFile");

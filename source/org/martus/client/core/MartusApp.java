@@ -202,8 +202,6 @@ public class MartusApp
 
 	public void saveConfigInfo() throws SaveConfigInfoException
 	{
-		String fileName = getConfigInfoFilename();
-
 		try
 		{
 			ByteArrayOutputStream encryptedConfigOutputStream = new ByteArrayOutputStream();
@@ -211,7 +209,7 @@ public class MartusApp
 			byte[] encryptedConfigInfo = encryptedConfigOutputStream.toByteArray();
 
 			ByteArrayInputStream encryptedConfigInputStream = new ByteArrayInputStream(encryptedConfigInfo);
-			FileOutputStream configFileOutputStream = new FileOutputStream(fileName);
+			FileOutputStream configFileOutputStream = new FileOutputStream(getConfigInfoFile());
 			getSecurity().encrypt(encryptedConfigInputStream, configFileOutputStream);
 
 			configFileOutputStream.close();
@@ -219,11 +217,11 @@ public class MartusApp
 			encryptedConfigOutputStream.close();
 
 
-			FileInputStream in = new FileInputStream(fileName);
+			FileInputStream in = new FileInputStream(getConfigInfoFile());
 			byte[] signature = getSecurity().createSignatureOfStream(in);
 			in.close();
 
-			FileOutputStream out = new FileOutputStream(getConfigInfoSignatureFilename());
+			FileOutputStream out = new FileOutputStream(getConfigInfoSignatureFile());
 			out.write(signature);
 			out.close();
 		}
@@ -239,9 +237,8 @@ public class MartusApp
 	{
 		configInfo.clear();
 
-		String fileName = getConfigInfoFilename();
-		File sigFile = new File(getConfigInfoSignatureFilename());
-		File dataFile = new File(fileName);
+		File sigFile = getConfigInfoSignatureFile();
+		File dataFile = getConfigInfoFile();
 
 		if(!dataFile.exists())
 		{
@@ -262,7 +259,7 @@ public class MartusApp
 			if(!verified)
 				throw new LoadConfigInfoException();
 
-			InputStreamWithSeek encryptedConfigFileInputStream = new FileInputStreamWithSeek(new File(fileName));
+			InputStreamWithSeek encryptedConfigFileInputStream = new FileInputStreamWithSeek(dataFile);
 			ByteArrayOutputStream plainTextConfigOutputStream = new ByteArrayOutputStream();
 			getSecurity().decrypt(encryptedConfigFileInputStream, plainTextConfigOutputStream);
 
@@ -330,14 +327,14 @@ public class MartusApp
 		return getCurrentAccountDirectory().getPath() + "/";
 	}
 
-	public String getConfigInfoFilename()
+	public File getConfigInfoFile()
 	{
-		return getCurrentAccountDirectoryName() + "MartusConfig.dat";
+		return new File(getCurrentAccountDirectoryName() + "MartusConfig.dat");
 	}
 
-	public String getConfigInfoSignatureFilename()
+	public File getConfigInfoSignatureFile()
 	{
-		return getCurrentAccountDirectoryName() + "MartusConfig.sig";
+		return new File(getCurrentAccountDirectoryName() + "MartusConfig.sig");
 	}
 
 	public File getUploadInfoFile()
@@ -520,20 +517,19 @@ public class MartusApp
 			store.deleteFoldersDatFile();	
 	}
 	
-	public boolean deleteKeypair(QuickEraseOptions opts)
+	public boolean deleteKeypairAndRelatedFiles(QuickEraseOptions opts)
 	{
+		boolean shouldScrubFileFirst = opts.isScrubSelected();
+		File currentKeyPairFile = getCurrentKeyPairFile();
 		try
 		{
-			File currentKeyPairFile = getCurrentKeyPairFile();
-			File currentKeyPairBackupFile = getBackupFile(currentKeyPairFile);
-			if (opts.isScrubSelected())	
-			{
-				ScrubFile.scrub(currentKeyPairFile);
-				ScrubFile.scrub(currentKeyPairBackupFile);
-			}
-			
-			currentKeyPairBackupFile.delete();
-			currentKeyPairFile.delete();
+			deleteAndPossiblyScrubFile(currentKeyPairFile, shouldScrubFileFirst);
+			deleteAndPossiblyScrubFile(getBackupFile(currentKeyPairFile), shouldScrubFileFirst);
+			deleteAndPossiblyScrubFile(getUserNameHashFile(currentKeyPairFile.getParentFile()), shouldScrubFileFirst);
+			deleteAndPossiblyScrubFile(getConfigInfoFile(), shouldScrubFileFirst);
+			deleteAndPossiblyScrubFile(getConfigInfoSignatureFile(), shouldScrubFileFirst);
+			deleteAndPossiblyScrubFile(getUploadInfoFile(), shouldScrubFileFirst);
+			deleteAndPossiblyScrubFile(getUiStateFile(), shouldScrubFileFirst);
 		}
 		catch (Exception e)
 		{
@@ -541,7 +537,14 @@ public class MartusApp
 			return false;
 		}
 		return true;
-		
+	}
+	
+	private void deleteAndPossiblyScrubFile(File file, boolean scrubDataFirst) throws Exception
+	{
+		if(scrubDataFirst)
+			ScrubFile.scrub(file);
+		if(!file.delete())
+			throw new Exception("File not deleted! " + file.getPath());
 	}
 
 	public boolean deleteAllBulletinsAndUserFolders(QuickEraseOptions opts)
