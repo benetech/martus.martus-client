@@ -34,7 +34,7 @@ import java.io.UnsupportedEncodingException;
 import java.util.Random;
 import java.util.Vector;
 
-import org.martus.client.core.MartusApp.SaveConfigInfoException;
+import org.martus.client.core.MartusApp.SaveContactInfoException;
 import org.martus.common.*;
 import org.martus.common.MartusUtilities;
 import org.martus.common.MartusUtilities.FileTooLargeException;
@@ -72,7 +72,7 @@ public class BackgroundUploader
 			uploadResult = backgroundUploadOneSealedBulletin(folderOutbox);
 		else if(folderDraftOutbox.getBulletinCount() > 0)
 			uploadResult = backgroundUploadOneDraftBulletin(folderDraftOutbox);
-		else if(app.getConfigInfo().shouldContactInfoBeSentToServer())
+		else if(app.getContactInfo().shouldContactInfoBeSentToServer())
 			uploadResult = sendContactInfoToServer();
 	
 		if(uploadResult.isHopelesslyDamaged)
@@ -234,7 +234,7 @@ public class BackgroundUploader
 						File file = new File(app.getUploadLogFilename());
 						UnicodeWriter log = new UnicodeWriter(file, UnicodeWriter.APPEND);
 						log.writeln(uid.getLocalId());
-						log.writeln(app.getConfigInfo().getServerName());
+						log.writeln(app.getContactInfo().getServerName());
 						log.writeln(b.get(BulletinConstants.TAGTITLE));
 						log.close();
 						log = null;
@@ -289,7 +289,7 @@ public class BackgroundUploader
 		if(!app.isSSLServerAvailable())
 			return uploadResult;
 	
-		ConfigInfo info = app.getConfigInfo();
+		ContactInfo info = app.getContactInfo();
 		String result = "";
 		try
 		{
@@ -316,11 +316,11 @@ public class BackgroundUploader
 		try
 		{
 			info.setSendContactInfoToServer(false);
-			app.saveConfigInfo();
+			app.saveContactInfo();
 		}
-		catch (SaveConfigInfoException e)
+		catch (SaveContactInfoException e)
 		{
-			System.out.println("MartusApp:putContactInfoOnServer Failed to save configinfo locally:" + e);
+			System.out.println("MartusApp:putContactInfoOnServer Failed to save contactinfo locally:" + e);
 		}
 		return uploadResult;
 	}

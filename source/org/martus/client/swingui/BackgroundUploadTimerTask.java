@@ -122,7 +122,7 @@ class BackgroundUploadTimerTask extends TimerTask
 			ClientSideNetworkGateway gateway = getApp().getCurrentNetworkInterfaceGateway();
 			String compliance = getApp().getServerCompliance(gateway);
 			alreadyCheckedCompliance = true;
-			if(!compliance.equals(getApp().getConfigInfo().getServerCompliance()))
+			if(!compliance.equals(getApp().getContactInfo().getServerCompliance()))
 			{
 				ThreadedServerComplianceDlg dlg = new ThreadedServerComplianceDlg(compliance);
 				SwingUtilities.invokeAndWait(dlg);
@@ -194,8 +194,8 @@ class BackgroundUploadTimerTask extends TimerTask
 			inComplianceDialog = true;
 			if(mainWindow.confirmServerCompliance("ServerComplianceChangedDescription", newCompliance))
 			{
-				String serverAddress = getApp().getConfigInfo().getServerName();
-				String serverKey = getApp().getConfigInfo().getServerPublicKey();
+				String serverAddress = getApp().getContactInfo().getServerName();
+				String serverKey = getApp().getContactInfo().getServerPublicKey();
 				getApp().setServerInfo(serverAddress, serverKey, newCompliance);
 			}
 			else

@@ -44,7 +44,7 @@ import org.martus.client.core.BulletinStore.BulletinAlreadyExistsException;
 import org.martus.client.core.ClientSideNetworkHandlerUsingXmlRpc.SSLSocketSetupException;
 import org.martus.client.core.Exceptions.ServerCallFailedException;
 import org.martus.client.core.Exceptions.ServerNotAvailableException;
-import org.martus.common.ConfigInfo;
+import org.martus.common.ContactInfo;
 import org.martus.common.FieldSpec;
 import org.martus.common.MartusConstants;
 import org.martus.common.MartusUtilities;
@@ -102,7 +102,7 @@ public class MartusApp
 				cryptoToUse = new MartusSecurity();
 
 			setSecurity(cryptoToUse);
-			configInfo = new ConfigInfo();
+			contactInfo = new ContactInfo();
 			currentUserName = "";
 			maxNewFolders = MAXFOLDERS;
 			martusDataRootDirectory = dataDirectoryToUse;
@@ -167,88 +167,88 @@ public class MartusApp
 
 	public void setServerInfo(String serverName, String serverKey, String serverCompliance)
 	{
-		configInfo.setServerName(serverName);
-		configInfo.setServerPublicKey(serverKey);
-		configInfo.setServerCompliance(serverCompliance);
+		contactInfo.setServerName(serverName);
+		contactInfo.setServerPublicKey(serverKey);
+		contactInfo.setServerCompliance(serverCompliance);
 		try
 		{
-			saveConfigInfo();
+			saveContactInfo();
 		}
-		catch (SaveConfigInfoException e)
+		catch (SaveContactInfoException e)
 		{
-			System.out.println("MartusApp.setServerInfo: Unable to Save ConfigInfo" + e);
+			System.out.println("MartusApp.setServerInfo: Unable to Save ContactInfo" + e);
 		}
 
 		invalidateCurrentHandlerAndGateway();
 	}
 
 	public void setHQKey(String hqKey) throws
-		SaveConfigInfoException
+		SaveContactInfoException
 	{
-		configInfo.setHQKey(hqKey);
-		saveConfigInfo();
+		contactInfo.setHQKey(hqKey);
+		saveContactInfo();
 	}
 
 	public String getHQKey()
 	{
-		return configInfo.getHQKey();
+		return contactInfo.getHQKey();
 	}
 
 	public void clearHQKey() throws
-		SaveConfigInfoException
+		SaveContactInfoException
 	{
-		configInfo.clearHQKey();
-		saveConfigInfo();
+		contactInfo.clearHQKey();
+		saveContactInfo();
 	}
 
-	public ConfigInfo getConfigInfo()
+	public ContactInfo getContactInfo()
 	{
-		return configInfo;
+		return contactInfo;
 	}
 
-	public void saveConfigInfo() throws SaveConfigInfoException
+	public void saveContactInfo() throws SaveContactInfoException
 	{
 		try
 		{
-			ByteArrayOutputStream encryptedConfigOutputStream = new ByteArrayOutputStream();
-			configInfo.save(encryptedConfigOutputStream);
-			byte[] encryptedConfigInfo = encryptedConfigOutputStream.toByteArray();
+			ByteArrayOutputStream encryptedContactOutputStream = new ByteArrayOutputStream();
+			contactInfo.save(encryptedContactOutputStream);
+			byte[] encryptedContactInfo = encryptedContactOutputStream.toByteArray();
 
-			ByteArrayInputStream encryptedConfigInputStream = new ByteArrayInputStream(encryptedConfigInfo);
-			FileOutputStream configFileOutputStream = new FileOutputStream(getConfigInfoFile());
-			getSecurity().encrypt(encryptedConfigInputStream, configFileOutputStream);
+			ByteArrayInputStream encryptedContactInputStream = new ByteArrayInputStream(encryptedContactInfo);
+			FileOutputStream contactFileOutputStream = new FileOutputStream(getContactInfoFile());
+			getSecurity().encrypt(encryptedContactInputStream, contactFileOutputStream);
 
-			configFileOutputStream.close();
-			encryptedConfigInputStream.close();
-			encryptedConfigOutputStream.close();
+			contactFileOutputStream.close();
+			encryptedContactInputStream.close();
+			encryptedContactOutputStream.close();
 
 
-			FileInputStream in = new FileInputStream(getConfigInfoFile());
+			FileInputStream in = new FileInputStream(getContactInfoFile());
 			byte[] signature = getSecurity().createSignatureOfStream(in);
 			in.close();
 
-			FileOutputStream out = new FileOutputStream(getConfigInfoSignatureFile());
+			FileOutputStream out = new FileOutputStream(getContactInfoSignatureFile());
 			out.write(signature);
 			out.close();
 		}
 		catch (Exception e)
 		{
-			System.out.println("saveConfigInfo :" + e);
-			throw new SaveConfigInfoException();
+			System.out.println("saveContactInfo :" + e);
+			throw new SaveContactInfoException();
 		}
 
 	}
 
-	public void loadConfigInfo() throws LoadConfigInfoException
+	public void loadContactInfo() throws LoadContactInfoException
 	{
-		configInfo.clear();
+		contactInfo.clear();
 
-		File sigFile = getConfigInfoSignatureFile();
-		File dataFile = getConfigInfoFile();
+		File sigFile = getContactInfoSignatureFile();
+		File dataFile = getContactInfoFile();
 
 		if(!dataFile.exists())
 		{
-			//System.out.println("MartusApp.loadConfigInfo: config file doesn't exist");
+			//System.out.println("MartusApp.loadContactInfo: config file doesn't exist");
 			return;
 		}
 
@@ -263,26 +263,26 @@ public class MartusApp
 			boolean verified = getSecurity().isValidSignatureOfStream(getSecurity().getPublicKeyString(), inData, signature);
 			inData.close();
 			if(!verified)
-				throw new LoadConfigInfoException();
+				throw new LoadContactInfoException();
 
-			InputStreamWithSeek encryptedConfigFileInputStream = new FileInputStreamWithSeek(dataFile);
-			ByteArrayOutputStream plainTextConfigOutputStream = new ByteArrayOutputStream();
-			getSecurity().decrypt(encryptedConfigFileInputStream, plainTextConfigOutputStream);
+			InputStreamWithSeek encryptedContactFileInputStream = new FileInputStreamWithSeek(dataFile);
+			ByteArrayOutputStream plainTextContactOutputStream = new ByteArrayOutputStream();
+			getSecurity().decrypt(encryptedContactFileInputStream, plainTextContactOutputStream);
 
-			byte[] plainTextConfigInfo = plainTextConfigOutputStream.toByteArray();
-			ByteArrayInputStream plainTextConfigInputStream = new ByteArrayInputStream(plainTextConfigInfo);
-			configInfo = ConfigInfo.load(plainTextConfigInputStream);
+			byte[] plainTextContactInfo = plainTextContactOutputStream.toByteArray();
+			ByteArrayInputStream plainTextContactInputStream = new ByteArrayInputStream(plainTextContactInfo);
+			contactInfo = ContactInfo.load(plainTextContactInputStream);
 
-			plainTextConfigInputStream.close();
-			plainTextConfigOutputStream.close();
-			encryptedConfigFileInputStream.close();
+			plainTextContactInputStream.close();
+			plainTextContactOutputStream.close();
+			encryptedContactFileInputStream.close();
 			
-			store.setPublicFieldTags(FieldSpec.parseFieldSpecsFromString(configInfo.getCustomFieldSpecs()));
+			store.setPublicFieldTags(FieldSpec.parseFieldSpecsFromString(contactInfo.getCustomFieldSpecs()));
 		}
 		catch (Exception e)
 		{
-			//System.out.println("Loadconfiginfo: " + e);
-			throw new LoadConfigInfoException();
+			//System.out.println("Loadcontactinfo: " + e);
+			throw new LoadContactInfoException();
 		}
 	}
 
@@ -318,12 +318,12 @@ public class MartusApp
 		return getCurrentAccountDirectory().getPath() + "/";
 	}
 
-	public File getConfigInfoFile()
+	public File getContactInfoFile()
 	{
 		return new File(getCurrentAccountDirectoryName() + "MartusConfig.dat");
 	}
 
-	public File getConfigInfoSignatureFile()
+	public File getContactInfoSignatureFile()
 	{
 		return new File(getCurrentAccountDirectoryName() + "MartusConfig.sig");
 	}
@@ -407,9 +407,9 @@ public class MartusApp
 	public Bulletin createBulletin()
 	{
 		Bulletin b = store.createEmptyBulletin();
-		b.set(Bulletin.TAGAUTHOR, configInfo.getAuthor());
-		b.set(Bulletin.TAGORGANIZATION, configInfo.getOrganization());
-		b.set(Bulletin.TAGPUBLICINFO, configInfo.getTemplateDetails());
+		b.set(Bulletin.TAGAUTHOR, contactInfo.getAuthor());
+		b.set(Bulletin.TAGORGANIZATION, contactInfo.getOrganization());
+		b.set(Bulletin.TAGPUBLICINFO, contactInfo.getTemplateDetails());
 		b.set(Bulletin.TAGLANGUAGE, getCurrentLanguage());
 		b.setDraft();
 		b.setAllPrivate(true);
@@ -517,8 +517,8 @@ public class MartusApp
 			deleteAndPossiblyScrubFile(currentKeyPairFile, shouldScrubFileFirst);
 			deleteAndPossiblyScrubFile(getBackupFile(currentKeyPairFile), shouldScrubFileFirst);
 			deleteAndPossiblyScrubFile(getUserNameHashFile(currentKeyPairFile.getParentFile()), shouldScrubFileFirst);
-			deleteAndPossiblyScrubFile(getConfigInfoFile(), shouldScrubFileFirst);
-			deleteAndPossiblyScrubFile(getConfigInfoSignatureFile(), shouldScrubFileFirst);
+			deleteAndPossiblyScrubFile(getContactInfoFile(), shouldScrubFileFirst);
+			deleteAndPossiblyScrubFile(getContactInfoSignatureFile(), shouldScrubFileFirst);
 			deleteAndPossiblyScrubFile(getUploadInfoFile(), shouldScrubFileFirst);
 			deleteAndPossiblyScrubFile(getUiStateFile(), shouldScrubFileFirst);
 		}
@@ -1459,7 +1459,7 @@ public class MartusApp
 	private NetworkInterface createXmlRpcNetworkInterfaceHandler()
 	{
 		String ourServer = getServerName();
-		String ourServerPublicKey = getConfigInfo().getServerPublicKey();
+		String ourServerPublicKey = getContactInfo().getServerPublicKey();
 		return buildNetworkInterface(ourServer,ourServerPublicKey);
 	}
 
@@ -1471,7 +1471,7 @@ public class MartusApp
 
 	private String getServerName()
 	{
-		return configInfo.getServerName();
+		return contactInfo.getServerName();
 	}
 
 	private static File determineMartusDataRootDirectory()
@@ -1495,8 +1495,8 @@ public class MartusApp
 		return file;
 	}
 
-	public class SaveConfigInfoException extends Exception {}
-	public class LoadConfigInfoException extends Exception {}
+	public class SaveContactInfoException extends Exception {}
+	public class LoadContactInfoException extends Exception {}
 
 	public static class MartusAppInitializationException extends Exception
 	{
@@ -1510,7 +1510,7 @@ public class MartusApp
 	protected File currentAccountDirectory;
 	private Localization localization;
 	public BulletinStore store;
-	private ConfigInfo configInfo;
+	private ContactInfo contactInfo;
 	public NetworkInterface currentNetworkInterfaceHandler;
 	public ClientSideNetworkGateway currentNetworkInterfaceGateway;
 	boolean logUploads;

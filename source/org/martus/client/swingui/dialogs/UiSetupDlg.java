@@ -35,7 +35,7 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.common.ConfigInfo;
+import org.martus.common.ContactInfo;
 import org.martus.common.clientside.UiBasicLocalization;
 import org.martus.swing.ParagraphLayout;
 import org.martus.swing.UiTextArea;
@@ -43,7 +43,7 @@ import org.martus.swing.Utilities;
 
 class UiSetupDlg extends JDialog implements ActionListener
 {
-	UiSetupDlg(UiMainWindow owner, ConfigInfo infoToUse)
+	UiSetupDlg(UiMainWindow owner, ContactInfo infoToUse)
 	{
 		super(owner, "", true);
 		mainWindow = owner;
@@ -115,7 +115,7 @@ class UiSetupDlg extends JDialog implements ActionListener
 	}
 
 	UiMainWindow mainWindow;
-	ConfigInfo info;
+	ContactInfo info;
 
 	boolean result;
 

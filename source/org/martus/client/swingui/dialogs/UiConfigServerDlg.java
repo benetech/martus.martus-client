@@ -36,7 +36,7 @@ import javax.swing.JTextField;
 
 import org.martus.client.core.MartusApp;
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.common.ConfigInfo;
+import org.martus.common.ContactInfo;
 import org.martus.common.clientside.UiBasicLocalization;
 import org.martus.common.crypto.MartusCrypto;
 import org.martus.swing.ParagraphLayout;
@@ -45,7 +45,7 @@ import org.martus.util.Base64.InvalidBase64Exception;
 
 public class UiConfigServerDlg extends JDialog implements ActionListener
 {
-	public UiConfigServerDlg(UiMainWindow owner, ConfigInfo infoToUse)
+	public UiConfigServerDlg(UiMainWindow owner, ContactInfo infoToUse)
 	{
 		super(owner, "", true);
 		serverPublicKey = "";
@@ -168,7 +168,7 @@ public class UiConfigServerDlg extends JDialog implements ActionListener
 
 	MartusApp app;
 	UiMainWindow mainWindow;
-	ConfigInfo info;
+	ContactInfo info;
 
 	JButton ok;
 	JTextField serverIP;

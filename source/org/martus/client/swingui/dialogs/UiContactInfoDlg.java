@@ -36,7 +36,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.common.ConfigInfo;
+import org.martus.common.ContactInfo;
 import org.martus.common.clientside.UiBasicLocalization;
 import org.martus.swing.ParagraphLayout;
 import org.martus.swing.UiTextArea;
@@ -45,7 +45,7 @@ import org.martus.swing.Utilities;
 
 public class UiContactInfoDlg extends JDialog implements ActionListener
 {
-	public UiContactInfoDlg(UiMainWindow mainWindow, ConfigInfo infoToUse)
+	public UiContactInfoDlg(UiMainWindow mainWindow, ContactInfo infoToUse)
 	{
 		super(mainWindow.getCurrentActiveFrame(), "", true);
 		info = infoToUse;
@@ -146,7 +146,7 @@ public class UiContactInfoDlg extends JDialog implements ActionListener
 		dispose();
 	}
 
-	ConfigInfo info;
+	ContactInfo info;
 	boolean result;
 
 	JTextField source;

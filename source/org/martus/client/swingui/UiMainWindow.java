@@ -108,7 +108,7 @@ import org.martus.client.swingui.tablemodels.RetrieveHQTableModel;
 import org.martus.client.swingui.tablemodels.RetrieveMyDraftsTableModel;
 import org.martus.client.swingui.tablemodels.RetrieveMyTableModel;
 import org.martus.client.swingui.tablemodels.RetrieveTableModel;
-import org.martus.common.ConfigInfo;
+import org.martus.common.ContactInfo;
 import org.martus.common.MartusUtilities;
 import org.martus.common.MartusUtilities.FileVerificationException;
 import org.martus.common.MartusUtilities.ServerErrorException;
@@ -230,7 +230,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		timeoutChecker = new java.util.Timer(true);
 		timeoutChecker.schedule(new TimeoutTimerTask(), 0, BACKGROUND_TIMEOUT_CHECK_EVERY_X_MILLIS);
 
-		doAfterSignInConfigInfoSetup(createdNewAccount);
+		doAfterSignInContactInfoSetup(createdNewAccount);
 		setCurrentActiveFrame(this);
 		hiddenFrame.dispose();
 
@@ -316,18 +316,18 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		}
 	}
 
-	private void doAfterSignInConfigInfoSetup(boolean createdNewAccount)
+	private void doAfterSignInContactInfoSetup(boolean createdNewAccount)
 	{
 		try
 		{
-			app.loadConfigInfo();
+			app.loadContactInfo();
 		}
-		catch (MartusApp.LoadConfigInfoException e)
+		catch (MartusApp.LoadContactInfoException e)
 		{
 			notifyDlg("corruptconfiginfo");
 		}
 		
-		ConfigInfo info = app.getConfigInfo();
+		ContactInfo info = app.getContactInfo();
 		if(createdNewAccount)
 		{
 			File bulletinDefaultDetailsFile = app.getBulletinDefaultDetailsFile();
@@ -1003,7 +1003,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 
 	public boolean doContactInfo()
 	{
-		ConfigInfo info = app.getConfigInfo();
+		ContactInfo info = app.getContactInfo();
 		UiContactInfoDlg setupContactDlg = new UiContactInfoDlg(this, info);
 		boolean pressedOk = setupContactDlg.getResult();
 		if(pressedOk)
@@ -1020,7 +1020,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		if(!reSignIn())
 			return;
 		
-		ConfigInfo info = app.getConfigInfo();
+		ContactInfo info = app.getContactInfo();
 		UiRemoveServerDlg removeDlg = new UiRemoveServerDlg(this, info);
 		if (removeDlg.isYesButtonPressed())
 		{
@@ -1036,7 +1036,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		inConfigServer = true;
 		try
 		{
-			ConfigInfo previousServerInfo = app.getConfigInfo();
+			ContactInfo previousServerInfo = app.getContactInfo();
 			UiConfigServerDlg serverInfoDlg = new UiConfigServerDlg(this, previousServerInfo);
 			if(!serverInfoDlg.getResult())
 				return;		
@@ -1127,26 +1127,26 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 
 	private void requestToUpdateContactInfoOnServerAndSaveInfo()
 	{
-		ConfigInfo configInfo = app.getConfigInfo();
+		ContactInfo contactInfo = app.getContactInfo();
 		try
 		{
-			app.saveConfigInfo();
+			app.saveContactInfo();
 		}
-		catch (MartusApp.SaveConfigInfoException e)
+		catch (MartusApp.SaveContactInfoException e)
 		{
 			notifyDlg("ErrorSavingConfig");
 		}
 		
-		if(!configInfo.isServerConfigured())
+		if(!contactInfo.isServerConfigured())
 			return;
 		
 		boolean sendInfo = confirmDlg("RequestToSendContactInfoToServer");
-		configInfo.setSendContactInfoToServer(sendInfo);
+		contactInfo.setSendContactInfoToServer(sendInfo);
 	}
 	
 	public boolean isServerConfigured()
 	{
-		return app.getConfigInfo().isServerConfigured();
+		return app.getContactInfo().isServerConfigured();
 	}
 
 	public boolean reSignIn()
@@ -1201,7 +1201,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 
 	public void updateBulletinDetails(File defaultFile)
 	{
-		ConfigInfo info = app.getConfigInfo();
+		ContactInfo info = app.getContactInfo();
 		File details = app.getBulletinDefaultDetailsFile();
 		UiTemplateDlg templateDlg = new UiTemplateDlg(this, info, details);
 		try
@@ -1223,11 +1223,11 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		{
 			try
 			{
-				app.saveConfigInfo();
+				app.saveContactInfo();
 			}
-			catch (MartusApp.SaveConfigInfoException e)
+			catch (MartusApp.SaveContactInfoException e)
 			{
-				System.out.println("doContactInfo: Unable to Save ConfigInfo" + e);
+				System.out.println("doContactInfo: Unable to Save ContactInfo" + e);
 			}
 		}
 	}
@@ -1550,7 +1550,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 					app.setHQKey(publicKey);
 			}
 		}
-		catch(MartusApp.SaveConfigInfoException e)
+		catch(MartusApp.SaveContactInfoException e)
 		{
 			notifyDlg("ErrorSavingConfig");
 		}
@@ -1569,7 +1569,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 			if(confirmDlg("ClearHQInformation"))
 				app.clearHQKey();
 		}
-		catch(MartusApp.SaveConfigInfoException e)
+		catch(MartusApp.SaveContactInfoException e)
 		{
 			notifyDlg("ErrorSavingConfig");
 		}
