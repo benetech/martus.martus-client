@@ -82,11 +82,15 @@ public class UiQuickEraseConfirmDlg extends JDialog
 		
 		String scrubStr = localization.getFieldLabel("ScrubDataBeforeDelete");
 		String deleteKeyPairStr = localization.getFieldLabel("DeleteKeypair");
+		String uninstallMartusStr = localization.getFieldLabel("UninstallMartus");
 		String exitWhenCompleteStr = localization.getFieldLabel("ExitWhenComplete");
 		
 		scrubBeforeDelete = new JCheckBox(scrubStr, false);
 		deleteKeyPair = new JCheckBox(deleteKeyPairStr, false);
 		deleteKeyPair.addActionListener(new KeyPairEraseHandler());
+		uninstallMartus = new JCheckBox(uninstallMartusStr, false);
+		uninstallMartus.addActionListener(new UninstallMartusHandler());
+		 
 		exitWhenComplete = new JCheckBox(exitWhenCompleteStr, false);
 		JPanel panel = new JPanel();
 		panel.setLayout(new ParagraphLayout());
@@ -98,6 +102,7 @@ public class UiQuickEraseConfirmDlg extends JDialog
 		panel.add(new JLabel(""), ParagraphLayout.NEW_PARAGRAPH);
 		panel.add(deleteKeyPair);		
 		panel.add(scrubBeforeDelete, ParagraphLayout.NEW_LINE);
+		panel.add(uninstallMartus, ParagraphLayout.NEW_LINE);
 		panel.add(exitWhenComplete, ParagraphLayout.NEW_LINE);
 		
 		return panel;
@@ -132,6 +137,26 @@ public class UiQuickEraseConfirmDlg extends JDialog
 		}
 	}
 	
+	class UninstallMartusHandler implements ActionListener
+	{
+		public void actionPerformed(ActionEvent ae)
+		{
+			if(uninstallMartus.isSelected())
+			{	
+				exitWhenComplete.setSelected(true);
+				exitWhenComplete.setEnabled(false);
+				deleteKeyPair.setSelected(true);
+				deleteKeyPair.setEnabled(false);
+				mainWindow.notifyDlg("ChoosingUninstallMartus");
+			}
+			else
+			{
+				deleteKeyPair.setEnabled(true);
+			}
+		}
+	}
+	
+	
 	class CancelHandler implements ActionListener
 	{
 		public void actionPerformed(ActionEvent ae)
@@ -163,6 +188,7 @@ public class UiQuickEraseConfirmDlg extends JDialog
 	JCheckBox scrubBeforeDelete;
 	JCheckBox deleteKeyPair;
 	JCheckBox exitWhenComplete;
+	JCheckBox uninstallMartus;
 	JCheckBox donotPrompt;
 	QuickEraseOptions options;
 	UiMainWindow mainWindow;

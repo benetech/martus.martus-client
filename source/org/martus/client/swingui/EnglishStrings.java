@@ -175,6 +175,7 @@ public class EnglishStrings
 "wintitle:notifyAlreadyRunning=Martus Already Running",
 "wintitle:notifyAttachmentNotAFile=Attachment Chosen Not a File",
 "wintitle:notifyFilesWillNotBeDeleted=Files Not Deleted",
+"wintitle:notifyChoosingUninstallMartus=Uninstalling Martus Warning",
 
 
 "wintitle:inputservername=Server Name",
@@ -661,6 +662,7 @@ public class EnglishStrings
 "field:notifyAlreadyRunningcause=A copy of Martus is already running on this computer. You must close that copy before starting a new copy.",
 "field:notifyAttachmentNotAFilecause=The item you choose was not a file, please choose a file to add as an attachment to this bulletin.",
 "field:notifyFilesWillNotBeDeletedcause=The original files have not been deleted from your computer, you must delete them manually if you wish.",
+"field:notifyChoosingUninstallMartuscause=By choosing to uninstall Martus we will need to erase your keypair file and Martus will exit after it completes the quick erase operation then bring up the uninstall wizard.  Since this will erase your keypair file Martus will also delete the following information: any server or HQ you have configured, any custom fields or default details, and your personal preferences.  This information will be lost and restoring your keypair from a backup will not recover these settings.",
 
 "field:messageServerNewscause=The current server has sent this message:",
 "field:messageErrorDateInFuturecause=This date occurs in the future:",
@@ -717,6 +719,7 @@ public class EnglishStrings
 "field:ScrubDataBeforeDelete=Scrub data before deleting",
 "field:ExitWhenComplete=Exit when complete",
 "field:DonotPrompt=Do not prompt",
+"field:UninstallMartus=Uninstall Martus",
 
 "field:RemoveServerLabel1=The following server will be removed:",
 "field:RemoveServerLabel2=Are you sure you want to do this?",
