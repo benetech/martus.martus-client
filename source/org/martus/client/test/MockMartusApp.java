@@ -31,8 +31,6 @@ import java.io.IOException;
 
 import org.martus.client.core.BulletinFolder;
 import org.martus.client.core.MartusApp;
-import org.martus.common.HQKey;
-import org.martus.common.HQKeys;
 import org.martus.common.MartusUtilities.FileVerificationException;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.clientside.UiBasicLocalization;
@@ -90,16 +88,6 @@ public class MockMartusApp extends MartusApp
 	public Database getWriteableDatabase()
 	{
 		return (Database)store.getDatabase();
-	}
-	
-	public String getHQLabelIfPresent(HQKey hqKey)
-	{
-		return hqKeys.getLabelIfPresent(hqKey);
-	}
-	
-	public void setHQKeys(HQKeys keys)
-	{
-		hqKeys = keys;
 	}
 	
 	public void deleteAllFiles() throws Exception
@@ -316,5 +304,4 @@ public class MockMartusApp extends MartusApp
 	}
 
 	String testDataDirectory;
-	HQKeys hqKeys;
 }
