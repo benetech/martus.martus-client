@@ -102,6 +102,8 @@ public class BulletinHtmlGenerator
 		{
 			FieldSpec spec = standardFieldTags[fieldNum];
 			String tag = spec.getTag();
+			String label = spec.getLabel();
+		
 			String value = MartusUtilities.getXmlEncoded(b.get(tag));
 			if(spec.getType() == FieldSpec.TYPE_DATE)
 				value = localization.convertStoredDateToDisplay(value);
@@ -112,7 +114,10 @@ public class BulletinHtmlGenerator
 			else if(spec.getType() == FieldSpec.TYPE_DATERANGE)
 				value = UiFlexiDateViewer.getViewableDateRange(value, localization);
 			
-			String fieldHtml = getFieldHtmlString(tag, value);
+			if(label.equals(""))
+				label = localization.getFieldLabel(tag);
+				
+			String fieldHtml = getFieldHtmlString(label, value);
 			sectionHtml += fieldHtml;
 		}
 		return sectionHtml;
@@ -174,8 +179,8 @@ public class BulletinHtmlGenerator
 	private String getFieldHtmlString(String tag, String value)
 	{
 		StringBuffer fieldHtml = new StringBuffer(value.length() + 100);
-		fieldHtml.append("<tr><td width='15%' align='right' valign='top'>");
-		fieldHtml.append(localization.getFieldLabel(tag));
+		fieldHtml.append("<tr><td width='15%' align='right' valign='top'>");		
+		fieldHtml.append(tag);
 		fieldHtml.append("</td>");
 		fieldHtml.append("<td valign='top'>");
 		fieldHtml.append(value);
