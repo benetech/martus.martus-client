@@ -307,10 +307,9 @@ public class BulletinStore
 	public synchronized void destroyBulletin(Bulletin b) throws IOException
 	{
 		UniversalId id = b.getUniversalId();
-		boolean DONT_SAVE_FOLDERS = false;
 		for(int f = 0; f < getFolderCount(); ++f)
 		{
-			removeBulletinFromFolder(b, getFolder(f), DONT_SAVE_FOLDERS);
+			removeBulletinFromFolder(b, getFolder(f));
 		}
 		saveFolders();
 		removeBulletinFromStore(id);
@@ -395,7 +394,7 @@ public class BulletinStore
 		BulletinSaver.saveToClientDatabase(b, database, mustEncryptPublicData(), getSignatureGenerator());
 	}
 
-	public synchronized void discardBulletin(BulletinFolder f, Bulletin b, boolean saveFolders) throws IOException
+	public synchronized void discardBulletin(BulletinFolder f, Bulletin b) throws IOException
 	{
 		try
 		{
@@ -404,7 +403,7 @@ public class BulletinStore
 		catch (BulletinAlreadyExistsException saveToIgnoreException)
 		{
 		}
-		removeBulletinFromFolder(b, f, saveFolders);
+		removeBulletinFromFolder(b, f);
 		if(isOrphan(b))
 			destroyBulletin(b);
 	}
@@ -650,7 +649,7 @@ public class BulletinStore
 			{
 				UniversalId uid = folder.getBulletinUniversalIdUnsorted(i);
 				bulletinUids.add(uid);
-				removeBulletinFromFolder(uid, folder, false);
+				removeBulletinFromFolder(uid, folder);
 			}
 		}
 		return bulletinUids;
@@ -690,21 +689,19 @@ public class BulletinStore
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		boolean saveFolders = true;
-		removeBulletinFromFolder(b, from, saveFolders);
+		removeBulletinFromFolder(b, from);
+		saveFolders();
 	}
 
-	public synchronized void removeBulletinFromFolder(Bulletin b, BulletinFolder from, boolean saveFolders)
+	public void removeBulletinFromFolder(Bulletin b, BulletinFolder from)
 	{
 		UniversalId uid = b.getUniversalId();
-		removeBulletinFromFolder(uid, from, saveFolders);
+		removeBulletinFromFolder(uid, from);
 	}
 
-	public void removeBulletinFromFolder(UniversalId uid, BulletinFolder from, boolean saveFolders)
+	public synchronized void removeBulletinFromFolder(UniversalId uid, BulletinFolder from)
 	{
 		from.remove(uid);
-		if(saveFolders)
-			saveFolders();
 	}
 
 	public Vector findBulletinInAllVisibleFolders(Bulletin b)

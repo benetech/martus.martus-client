@@ -199,8 +199,7 @@ public class UiBulletinModifyDlg extends JFrame implements ActionListener, Windo
 			{
 				if(!confirmSealBulletin())
 					return;
-				final boolean FALSE_MEANS_DONT_SAVE = false;
-				store.removeBulletinFromFolder(bulletin, draftOutbox, FALSE_MEANS_DONT_SAVE);
+				store.removeBulletinFromFolder(bulletin, draftOutbox);
 				
 				bulletin.setSealed();
 				outboxToUse = store.getFolderSealedOutbox();

@@ -147,13 +147,13 @@ public class TestBulletinTableModel extends TestCaseEnhanced
 		BulletinFolder folderDraftOutbox = store.getFolderDraftOutbox();
 		store.addBulletinToFolder(b.getUniversalId(), folderDraftOutbox);
 		assertEquals("unsent draft not recognized?", localization.getFieldLabel("WasSentNo"), list.getValueAt(0, WASSENT));
-		store.removeBulletinFromFolder(b, folderDraftOutbox, false);
+		store.removeBulletinFromFolder(b, folderDraftOutbox);
 		
 		b.setSealed();
 		BulletinFolder folderSealedOutbox = store.getFolderSealedOutbox();
 		store.addBulletinToFolder(b.getUniversalId(), folderSealedOutbox);
 		assertEquals("unsent sealed not recognized?", localization.getFieldLabel("WasSentNo"), list.getValueAt(0, WASSENT));
-		store.removeBulletinFromFolder(b, folderSealedOutbox, false);
+		store.removeBulletinFromFolder(b, folderSealedOutbox);
 	}
 
 	public void testSetFolder()
