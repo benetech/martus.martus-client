@@ -742,6 +742,25 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		TRACE_END();
 	}
 	
+	public void testDoesDefaultAccountExist() throws Exception
+	{
+		TRACE_BEGIN("testDoesDefaultAccountExist");
+
+		File keyPairFile = appWithAccount.getCurrentKeyPairFile();
+		keyPairFile.delete();
+		assertEquals("Default account exists?", false, appWithAccount.doesDefaultAccountExist());
+
+		FileOutputStream out = new FileOutputStream(keyPairFile);
+		out.write(0);
+		out.close();
+
+		assertEquals("Default Account doesn't exist?", true, appWithAccount.doesDefaultAccountExist());
+
+		keyPairFile.delete();
+
+		TRACE_END();
+	}
+	
 	public void testCreateBulletin() throws Exception
 	{
 		TRACE_BEGIN("testCreateBulletin");

@@ -1083,6 +1083,12 @@ public class MartusApp
 		}
 		return false;
 	}
+	
+	public boolean doesDefaultAccountExist()
+	{
+		//TODO should also check to see if packets directory exists.
+		return (getKeyPairFile(getMartusDataRootDirectory()).exists());
+	}
 
 	public void exportPublicInfo(File exportFile) throws
 		IOException,
