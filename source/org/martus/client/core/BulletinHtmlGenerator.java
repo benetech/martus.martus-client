@@ -99,7 +99,7 @@ public class BulletinHtmlGenerator
 			String value = MartusUtilities.getXmlEncoded(b.get(tag));
 			if(spec.getType() == FieldSpec.TYPE_DATE)
 				value = localization.convertStoredDateToDisplay(value);
-			else if(spec.getType() == FieldSpec.TYPE_CHOICE)
+			else if(spec.getType() == FieldSpec.TYPE_LANGUAGE)
 				value = localization.getLanguageName(value);
 			else if(spec.getType() == FieldSpec.TYPE_MULTILINE)
 				value = insertNewlines(value);

@@ -151,7 +151,7 @@ abstract public class UiBulletinComponentSection extends JPanel
 			case FieldSpec.TYPE_DATERANGE:
 				field = createFlexiDateField();
 				break;
-			case FieldSpec.TYPE_CHOICE:
+			case FieldSpec.TYPE_LANGUAGE:
 				ChoiceItem[] languages =
 					getLocalization().getLanguageNameChoices();
 				field = createChoiceField(languages);
