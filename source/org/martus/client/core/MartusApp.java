@@ -983,38 +983,24 @@ public class MartusApp
 		packet.loadFromXml(in, getSecurity());
 	}
 
-	public BulletinSummary retrieveSummaryFromString(String accountId, String parameters)
+	public BulletinSummary retrieveSummaryFromString(String accountId, String summaryAsString)
 		throws ServerErrorException
 	{
-		String args[] = parameters.split(BulletinSummary.fieldDelimeter, -1);
-		if(args.length < 3)
-			throw new ServerErrorException("MartusApp.retrieveSummaryFromString invalid # params: " + parameters);
-		String bulletinLocalId= args[0];
-		String packetlocalId = args[1];
-		int size = Integer.parseInt(args[2]);
-		String date = "";
-		if(args.length > 3)
-			date = args[3];
-	
-		if(!FieldDataPacket.isValidLocalId(packetlocalId))
-			throw new ServerErrorException();
-	
-		FieldDataPacket fdp = getFieldDataPacketFromStoreOrServer(accountId, bulletinLocalId, packetlocalId);
-		BulletinSummary bulletinSummary = new BulletinSummary(accountId, bulletinLocalId, fdp, size, date);
-		return bulletinSummary;
-}
-
-	private FieldDataPacket getFieldDataPacketFromStoreOrServer(String accountId, String bulletinLocalId, String packetlocalId) throws ServerErrorException
-	{
-		UniversalId uId = UniversalId.createFromAccountAndLocalId(accountId, bulletinLocalId);
-		Bulletin bulletin = store.getBulletinRevision(uId);
-
-		if (bulletin != null)
-			return bulletin.getFieldDataPacket();
-	
 		try
 		{
-			return retrieveFieldDataPacketFromServer(uId, packetlocalId);
+			BulletinSummary summary = BulletinSummary.createFromString(accountId, summaryAsString);
+	
+			if(!FieldDataPacket.isValidLocalId(summary.getFieldDataPacketLocalId()))
+				throw new ServerErrorException();
+		
+			FieldDataPacket fdp = getFieldDataPacketFromStoreOrServer(summary);
+			summary.setFieldDataPacket(fdp);
+			
+			return summary;
+		}
+		catch(BulletinSummary.WrongValueCount e)
+		{
+			throw new ServerErrorException("MartusApp.retrieveSummaryFromString expected: " + e.expected + " but got " + e.got + " values");
 		}
 		catch(Exception e)
 		{
@@ -1022,6 +1008,18 @@ public class MartusApp
 			//e.printStackTrace();
 			throw new ServerErrorException();
 		}
+}
+
+	private FieldDataPacket getFieldDataPacketFromStoreOrServer(BulletinSummary summary) throws Exception
+	{
+		UniversalId uid = summary.getUniversalId();
+		Bulletin bulletin = store.getBulletinRevision(uid);
+
+		if (bulletin != null)
+			return bulletin.getFieldDataPacket();
+
+		return retrieveFieldDataPacketFromServer(uid, summary.getFieldDataPacketLocalId());
+		
 	}
 
 	public void retrieveOneBulletinToFolder(UniversalId uid, BulletinFolder retrievedFolder, ProgressMeterInterface progressMeter) throws
