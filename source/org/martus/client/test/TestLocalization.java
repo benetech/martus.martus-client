@@ -290,7 +290,7 @@ public class TestLocalization extends TestCaseEnhanced
 		UiLocalization myLocalization2 = new UiLocalization(translationDirectory2, EnglishStrings.strings);
 		File someTestLanguage2 = new File(translationDirectory2,UiBasicLocalization.getMlpkFilename(someTestLanguageCode));
 		someTestLanguage2.deleteOnExit();
-		copyResourceFileToLocalFile(someTestLanguage2, "Martus-xx-NotSigned.mlp");
+		copyResourceFileToLocalFile(someTestLanguage2, "Martus-xx-notSigned.mlp");
 		foundSomeTestLanguage = doesLanguageExist(myLocalization2, someTestLanguageCode);
 		assertTrue("should still have testLanguage even if its not signed.", foundSomeTestLanguage);
 		myLocalization2.setCurrentLanguageCode(someTestLanguageCode);
