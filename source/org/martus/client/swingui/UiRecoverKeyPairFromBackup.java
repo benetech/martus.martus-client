@@ -49,7 +49,7 @@ public class UiRecoverKeyPairFromBackup
 	public boolean recoverPrivateKey()
 	{
 		mainWindow.notifyDlg("RecoveryProcessBackupFile");
-		File startingDirectory = UiFileChooser.getHomeDirectoryFile(" ");
+		File startingDirectory = UiFileChooser.getHomeDirectoryFile(UiFileChooser.NO_FILE_SELECTED);
 		while(true)
 		{
 			String windowTitle = localization.getWindowTitle("RecoverKeyPair");

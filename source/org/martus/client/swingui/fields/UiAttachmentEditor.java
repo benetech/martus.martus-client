@@ -230,7 +230,7 @@ public class UiAttachmentEditor extends JPanel
 			File last = getLastAttachmentLoadDirectory();
 			if(last == null)
 				last = UiFileChooser.getHomeDirectoryFile();
-			File attachmentFileToAdd = new File(last, " ");
+			File attachmentFileToAdd = new File(last, UiFileChooser.NO_FILE_SELECTED);
 			
 			UiBasicLocalization localization = mainWindow.getLocalization();
 			String buttonLabel = localization.getButtonLabel("addattachment");

@@ -183,7 +183,7 @@ public class UiBackupRecoverSharedKeyPair
 		while(true)
 		{
 			String windowTitle = localization.getWindowTitle("SaveShareKeyPair");
-			UiFileChooser.FileDialogResults results = UiFileChooser.displayFileOpenDialog(mainWindow, windowTitle, " ");
+			UiFileChooser.FileDialogResults results = UiFileChooser.displayFileOpenDialog(mainWindow, windowTitle, UiFileChooser.NO_FILE_SELECTED);
 			
 			if (!results.wasCancelChoosen())
 			{
