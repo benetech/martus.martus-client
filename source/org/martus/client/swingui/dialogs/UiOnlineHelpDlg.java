@@ -263,7 +263,7 @@ public class UiOnlineHelpDlg extends JDialog
 		try
 		{
 			highliter.removeAllHighlights();
-			Color highlightColor = Color.BLUE;
+			Color highlightColor = new Color(150,150,255); //Light blue, works under Windows with English (Light blue on black) and Arabic (Light Blue on White)
 			DefaultHighlightPainter painter = new DefaultHighlighter.DefaultHighlightPainter(highlightColor);
 			highliter.addHighlight(startIndex, endIndex, painter);
 		}
