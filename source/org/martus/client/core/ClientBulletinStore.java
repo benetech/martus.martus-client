@@ -217,7 +217,7 @@ public class ClientBulletinStore extends BulletinStore
 	public Bulletin findBulletinByUniversalId(UniversalId uid)
 	{
 		DatabaseKey key = new DatabaseKey(uid);
-		if(!doesBulletinExist(key))
+		if(!doesBulletinRevisionExist(key))
 		{
 			//System.out.println("BulletinStore.findBulletinByUniversalId: !doesRecordExist");
 			return null;
@@ -881,7 +881,7 @@ public class ClientBulletinStore extends BulletinStore
 
 	public synchronized void addBulletinToFolder(BulletinFolder folder, UniversalId uId) throws BulletinAlreadyExistsException, IOException
 	{
-		if(!doesBulletinExist(uId))
+		if(!doesBulletinRevisionExist(uId))
 			return;
 
 		folder.add(uId);
