@@ -46,7 +46,7 @@ public class ActionMenuQuickErase extends UiMenuAction
 			
 		if (mainWindow.getApp().getFolderOutbox().getBulletinCount() > 0)
 		{				
-			if (!mainWindow.confirmDlgBeep(mainWindow, "QuickEraseOutboxNotEmpty"))
+			if (!mainWindow.confirmDlgBeep("QuickEraseOutboxNotEmpty"))
 				return;
 		}		
 		
@@ -80,7 +80,7 @@ public class ActionMenuQuickErase extends UiMenuAction
 		}
 		
 		if(!options.isDonotPromptSelected())
-			mainWindow.notifyDlg(mainWindow, baseTag);								
+			mainWindow.notifyDlg(baseTag);								
 
 		mainWindow.folderTreeContentsHaveChanged();		
 	}
@@ -93,7 +93,7 @@ public class ActionMenuQuickErase extends UiMenuAction
 
 	private void deleteKeyPairAndRelatedFiles(QuickEraseOptions options)
 	{
-		if(options.isDonotPromptSelected() || mainWindow.confirmDlgBeep(mainWindow, "QuickEraseDeleteKeyPair"))
+		if(options.isDonotPromptSelected() || mainWindow.confirmDlgBeep("QuickEraseDeleteKeyPair"))
 			mainWindow.getApp().deleteKeypairAndRelatedFiles(options);
 	}
 }

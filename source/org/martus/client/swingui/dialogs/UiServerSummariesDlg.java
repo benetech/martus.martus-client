@@ -279,7 +279,7 @@ public class UiServerSummariesDlg extends JDialog
 			Vector uidList = getUniversalIdList();
 			if( uidList.size() == 0)
 			{
-				mainWindow.notifyDlg(mainWindow, noneSelectedTag);
+				mainWindow.notifyDlg(noneSelectedTag);
 				return;
 			}
 
@@ -304,7 +304,7 @@ public class UiServerSummariesDlg extends JDialog
 			int[] row = table.getSelectedRows();
 			if(row.length <= 0)
 			{
-				mainWindow.notifyDlg(mainWindow, "PreviewNoBulletinsSelected");
+				mainWindow.notifyDlg("PreviewNoBulletinsSelected");
 			}
 			else if(row.length==1)
 			{
@@ -313,7 +313,7 @@ public class UiServerSummariesDlg extends JDialog
 			}
 			else
 			{
-				mainWindow.notifyDlg(mainWindow, "PreviewOneBulletinOnly");
+				mainWindow.notifyDlg("PreviewOneBulletinOnly");
 			}
 		}
 	}

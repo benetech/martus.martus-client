@@ -162,7 +162,7 @@ public class UiConfigServerDlg extends JDialog implements ActionListener
 
 	private boolean errorMessage(String messageTag)
 	{
-		mainWindow.notifyDlg(mainWindow, messageTag);
+		mainWindow.notifyDlg(messageTag);
 		return false;
 	}
 

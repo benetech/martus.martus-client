@@ -239,20 +239,20 @@ public class UiBulletinTable extends JTable implements ListSelectionListener, Dr
 		{
 			if(!b.isDraft())
 			{
-				if(!mainWindow.confirmDlg(mainWindow, "CloneMySealedAsDraft"))
+				if(!mainWindow.confirmDlg("CloneMySealedAsDraft"))
 					return;
 				createClone = true;
 			}
 		}
 		else
 		{
-			if(!mainWindow.confirmDlg(mainWindow, "CloneBulletinAsMine"))
+			if(!mainWindow.confirmDlg("CloneBulletinAsMine"))
 				return;
 			createClone = true;
 		}
 		
 		if(b.hasUnknownTags() || b.hasUnknownCustomField())
-			if(!mainWindow.confirmDlg(mainWindow, "EditBulletinWithUnknownTags"))
+			if(!mainWindow.confirmDlg("EditBulletinWithUnknownTags"))
 				return;
 
 		BulletinStore store = mainWindow.getApp().getStore();
@@ -270,7 +270,7 @@ public class UiBulletinTable extends JTable implements ListSelectionListener, Dr
 			}
 			catch (Exception e)
 			{
-				mainWindow.notifyDlg(mainWindow, "UnexpectedError");
+				mainWindow.notifyDlg("UnexpectedError");
 				return;
 			}
 		}
@@ -345,10 +345,7 @@ public class UiBulletinTable extends JTable implements ListSelectionListener, Dr
 		}
 
 		if(!worked)
-		{
-			Toolkit.getDefaultToolkit().beep();
-			mainWindow.notifyDlg(mainWindow, resultMessageTag);
-		}
+			mainWindow.notifyDlgBeep(resultMessageTag);
 		
 		mainWindow.resetCursor(cursor);	
 	}

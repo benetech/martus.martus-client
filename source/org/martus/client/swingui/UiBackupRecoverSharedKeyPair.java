@@ -81,7 +81,7 @@ public class UiBackupRecoverSharedKeyPair
 		catch (KeyShareException e) 
 		{
 			e.printStackTrace();
-			if(mainWindow.confirmDlg(mainWindow, "RecoveredKeyShareFailedTryAgain"))
+			if(mainWindow.confirmDlg("RecoveredKeyShareFailedTryAgain"))
 				return recoverKeyPairFromMultipleUnencryptedFiles();
 			return false;			
 		}
@@ -101,7 +101,7 @@ public class UiBackupRecoverSharedKeyPair
 		Vector keyShareBundles = mainWindow.getApp().getSecurity().getKeyShareBundles();
 		if(keyShareBundles == null)
 		{
-			mainWindow.notifyDlg(mainWindow,"ErrorBackingUpKeyShare");
+			mainWindow.notifyDlg("ErrorBackingUpKeyShare");
 			return;
 		}
 
@@ -197,12 +197,12 @@ public class UiBackupRecoverSharedKeyPair
 					if(getRootKeyShareFileName(firstShareFile) != null)
 						break;
 
-					if(!mainWindow.confirmDlg(mainWindow, "ErrorRecoverIvalidFileName"))
+					if(!mainWindow.confirmDlg("ErrorRecoverIvalidFileName"))
 						return null;
 					continue;
 				}
 			}
-			if(mainWindow.confirmDlg(mainWindow, "CancelShareRecover"))
+			if(mainWindow.confirmDlg("CancelShareRecover"))
 				return null;
 		}
 		return firstShareFile;
@@ -210,7 +210,7 @@ public class UiBackupRecoverSharedKeyPair
 
 	private boolean keyPairRecoveredNewUserAndPasswordRequired() 
 	{
-		mainWindow.notifyDlg(mainWindow, "RecoveredKeyShareSucceededNewUserNamePasswordRequired");
+		mainWindow.notifyDlg("RecoveredKeyShareSucceededNewUserNamePasswordRequired");
 		
 		while(true)
 		{
@@ -224,22 +224,22 @@ public class UiBackupRecoverSharedKeyPair
 			catch (InvalidBase64Exception e)
 			{
 				e.printStackTrace();
-				mainWindow.notifyDlg(mainWindow, "ErrorRecoveringAccountDirectory");
+				mainWindow.notifyDlg("ErrorRecoveringAccountDirectory");
 				return false;
 			}
 			File keyPairFile = app.getKeyPairFile(accountDirectory);
 			if(keyPairFile.exists())
 			{
-				if(!mainWindow.confirmDlg(mainWindow, "KeyPairFileExistsOverWrite"))
+				if(!mainWindow.confirmDlg("KeyPairFileExistsOverWrite"))
 					return false;
 			}
 			
 			if(mainWindow.getAndSaveUserNamePassword(keyPairFile))
 			{					
-				mainWindow.notifyDlg(mainWindow, "RecoveryOfKeyShareComplete");
+				mainWindow.notifyDlg("RecoveryOfKeyShareComplete");
 				return true;
 			}	
-			if(mainWindow.confirmDlg(mainWindow, "CancelShareRecover"))
+			if(mainWindow.confirmDlg("CancelShareRecover"))
 				return false;
 		}	
 	}
@@ -271,7 +271,7 @@ public class UiBackupRecoverSharedKeyPair
 				if(pathToUse != null)
 					return pathToUse;
 			}
-			if(mainWindow.confirmDlg(mainWindow, "CancelShareBackup"))
+			if(mainWindow.confirmDlg("CancelShareBackup"))
 				break;
 		}	
 		return null;
@@ -337,7 +337,7 @@ public class UiBackupRecoverSharedKeyPair
 	private void verifyKeyShareDisks(Vector keyShareBundles, Vector shareFiles,	int maxFiles) 
 	{
 		boolean verifiedAll = false;
-		if(mainWindow.confirmDlg(mainWindow,"BackupKeyShareVerifyDisks"))
+		if(mainWindow.confirmDlg("BackupKeyShareVerifyDisks"))
 		{
 			for(int disk = 1; disk <= maxFiles; ++disk )
 			{
@@ -363,7 +363,7 @@ public class UiBackupRecoverSharedKeyPair
 					break;
 			}	
 			if(verifiedAll)
-				mainWindow.notifyDlg(mainWindow, "VerifyKeyPairSharePassed");	
+				mainWindow.notifyDlg("VerifyKeyPairSharePassed");	
 		}
 	}
 
@@ -399,7 +399,7 @@ public class UiBackupRecoverSharedKeyPair
 
 		if(!mainWindow.confirmDlg(mainWindow, windowTitle, insertNextDiskMessage, buttons))
 		{
-			if(mainWindow.confirmDlg(mainWindow, confirmCancelTag))
+			if(mainWindow.confirmDlg(confirmCancelTag))
 				return false;
 		}
 		return true;

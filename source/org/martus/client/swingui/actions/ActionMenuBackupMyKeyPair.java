@@ -41,6 +41,7 @@ public class ActionMenuBackupMyKeyPair extends UiMenuAction
 	{
 		if(!mainWindow.reSignIn())
 			return;
+		mainWindow.notifyDlg("BackupKeyPairGeneralInformation");
 		mainWindow.doBackupKeyPairToSingleEncryptedFile();
 		mainWindow.askToBackupKeyPareToSecretShareFiles();
 		}

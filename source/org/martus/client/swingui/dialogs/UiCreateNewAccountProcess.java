@@ -131,7 +131,7 @@ public class UiCreateNewAccountProcess
 			// finally warn them if its a weak password
 			if(MartusUserNameAndPassword.isWeakPassword(userPassword1))
 			{
-				if(!window.confirmDlg(window, "RedoWeakPassword"))
+				if(!window.confirmDlg("RedoWeakPassword"))
 					continue;
 			}
 
@@ -155,7 +155,7 @@ public class UiCreateNewAccountProcess
 
 	private void remindUsersToRememberPassword()
 	{
-		mainWindow.notifyDlg(mainWindow, "RememberPassword");
+		mainWindow.notifyDlg("RememberPassword");
 	}
 
 	public boolean isDataValid()

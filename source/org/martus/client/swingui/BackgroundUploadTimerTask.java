@@ -170,7 +170,7 @@ class BackgroundUploadTimerTask extends TimerTask
 
 		public void run()
 		{
-			mainWindow.notifyDlg(mainWindow, notifyTag);
+			mainWindow.notifyDlg(notifyTag);
 		}
 		String notifyTag;
 	}
@@ -194,7 +194,7 @@ class BackgroundUploadTimerTask extends TimerTask
 			else
 			{
 				getApp().setServerInfo("", "", "");
-				mainWindow.notifyDlg(mainWindow, "ExistingServerRemoved");
+				mainWindow.notifyDlg("ExistingServerRemoved");
 			}
 			inComplianceDialog = false;
 		}

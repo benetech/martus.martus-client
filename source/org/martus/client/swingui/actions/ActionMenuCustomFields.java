@@ -44,7 +44,7 @@ public class ActionMenuCustomFields extends UiMenuAction
 	
 	public void actionPerformed(ActionEvent arg0)
 	{
-		if(!mainWindow.confirmDlg(mainWindow, "EnterCustomFields"))
+		if(!mainWindow.confirmDlg("EnterCustomFields"))
 			return;
 		
 		MartusApp app = mainWindow.getApp();
@@ -64,7 +64,7 @@ public class ActionMenuCustomFields extends UiMenuAction
 		}
 		catch (SaveConfigInfoException e)
 		{
-			mainWindow.notifyDlg(mainWindow, "ErrorSavingConfig");
+			mainWindow.notifyDlg("ErrorSavingConfig");
 		}
 	}
 
@@ -79,7 +79,7 @@ public class ActionMenuCustomFields extends UiMenuAction
 				
 			if(newTags.length() == 0)
 			{
-				if(mainWindow.confirmDlg(mainWindow, "UndoCustomFields"))
+				if(mainWindow.confirmDlg("UndoCustomFields"))
 					return FieldSpec.getDefaultPublicFieldSpecs();
 				continue;
 			}
@@ -89,7 +89,7 @@ public class ActionMenuCustomFields extends UiMenuAction
 			if(checker.isValid())
 				return newSpecs;
 				
-			mainWindow.notifyDlg(mainWindow, "ErrorInCustomFields");
+			mainWindow.notifyDlg("ErrorInCustomFields");
 			existingTags = newTags;
 		}
 	}

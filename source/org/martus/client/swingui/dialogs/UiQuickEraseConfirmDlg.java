@@ -121,7 +121,7 @@ public class UiQuickEraseConfirmDlg extends JDialog
 			{	
 				exitWhenComplete.setSelected(true);
 				exitWhenComplete.setEnabled(false);
-				mainWindow.notifyDlg(mainWindow,"ChoosingQuickEraseKeyPair");
+				mainWindow.notifyDlg("ChoosingQuickEraseKeyPair");
 			}
 			else
 			{

@@ -153,7 +153,7 @@ public class UiExportBulletinsDlg extends JDialog implements ActionListener
 
 		File destFile = chooser.getSelectedFile();
 		if(destFile.exists())
-			if(!mainWindow.confirmDlg(mainWindow, "OverWriteExistingFile"))
+			if(!mainWindow.confirmDlg("OverWriteExistingFile"))
 				return null;
 
 		return destFile;
@@ -171,11 +171,11 @@ public class UiExportBulletinsDlg extends JDialog implements ActionListener
 			UnicodeWriter writer = new UnicodeWriter(destFile);
 			BulletinXmlExporter.exportBulletins(writer, bulletins, userWantsToExportPrivate());
 			writer.close();
-			mainWindow.notifyDlg(mainWindow, "ExportComplete");
+			mainWindow.notifyDlg("ExportComplete");
 		}
 		catch (IOException e)
 		{
-			mainWindow.notifyDlg(mainWindow, "ErrorWritingFile");
+			mainWindow.notifyDlg("ErrorWritingFile");
 		}
 	}
 
@@ -192,13 +192,13 @@ public class UiExportBulletinsDlg extends JDialog implements ActionListener
 			}
 			if(hasUnknown)
 			{
-				if(!mainWindow.confirmDlg(null, "ExportUnknownTags"))
+				if(!mainWindow.confirmDlg("ExportUnknownTags"))
 					return;
 			}
 			
 			if(userWantsToExportPrivate())
 			{
-				if(!mainWindow.confirmDlg(null, "ExportPrivateData"))
+				if(!mainWindow.confirmDlg("ExportPrivateData"))
 					return;
 			}
 

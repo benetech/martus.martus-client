@@ -117,7 +117,7 @@ public class UiTemplateDlg extends JDialog implements ActionListener
 	{
 		public void actionPerformed(ActionEvent ae)
 		{
-			if(mainWindow.confirmDlg(mainWindow, "ResetDefaultDetails"))
+			if(mainWindow.confirmDlg("ResetDefaultDetails"))
 			{
 				details.setText("");
 				try
@@ -128,7 +128,7 @@ public class UiTemplateDlg extends JDialog implements ActionListener
 				catch (IOException e)
 				{
 					e.printStackTrace();
-					mainWindow.notifyDlg(mainWindow, "ErrorReadingFile");
+					mainWindow.notifyDlg("ErrorReadingFile");
 				}
 			}
 		}

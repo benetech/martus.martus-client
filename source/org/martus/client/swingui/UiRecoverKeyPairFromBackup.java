@@ -49,7 +49,7 @@ public class UiRecoverKeyPairFromBackup
 
 	public boolean recoverPrivateKey()
 	{
-		mainWindow.notifyDlg(mainWindow, "RecoveryProcessBackupFile");
+		mainWindow.notifyDlg("RecoveryProcessBackupFile");
 		File startingDirectory = new File("");
 		while(true)
 		{
@@ -89,12 +89,12 @@ public class UiRecoverKeyPairFromBackup
 			startingDirectory = chooser.getCurrentDirectory();
 			if(showUnableToRecoverDlg)
 			{
-				if(!mainWindow.confirmDlg(mainWindow, "UnableToRecoverFromBackupFile"))
+				if(!mainWindow.confirmDlg("UnableToRecoverFromBackupFile"))
 					return false;
 			}
 			if(showCancelDlg)
 			{	
-				if(mainWindow.confirmDlg(mainWindow, "CancelBackupRecovery"))
+				if(mainWindow.confirmDlg("CancelBackupRecovery"))
 					return false;
 			}
 		}
@@ -146,13 +146,13 @@ public class UiRecoverKeyPairFromBackup
 		catch (InvalidBase64Exception e)
 		{
 			e.printStackTrace();
-			mainWindow.notifyDlg(mainWindow, "ErrorRecoveringAccountDirectory");
+			mainWindow.notifyDlg("ErrorRecoveringAccountDirectory");
 			return false;
 		}
 		File keyPairFile = app.getKeyPairFile(accountDirectory);
 		if(keyPairFile.exists())
 		{
-			if(!mainWindow.confirmDlg(mainWindow, "KeyPairFileExistsOverWrite"))
+			if(!mainWindow.confirmDlg("KeyPairFileExistsOverWrite"))
 				return false;
 		}
 		
@@ -161,7 +161,7 @@ public class UiRecoverKeyPairFromBackup
 		if(!mainWindow.saveKeyPairFile(keyPairFile,userName, userPassword))
 			return false;
 
-		mainWindow.notifyDlg(mainWindow, "RecoveryOfKeyPairComplete");
+		mainWindow.notifyDlg("RecoveryOfKeyPairComplete");
 		return true;
 		
 	}

@@ -196,7 +196,7 @@ public class UiAttachmentViewer extends JPanel  implements DragGestureListener, 
 				return;
 			if(!mainWindow.getApp().isOurBulletin(bulletinComponent.getCurrentBulletin()))
 			{
-				if(!mainWindow.confirmDlg(mainWindow, "NotYourBulletinViewAttachmentAnyways"))
+				if(!mainWindow.confirmDlg("NotYourBulletinViewAttachmentAnyways"))
 					return;
 			}
 			String fileName = model.getFilenameAt(selectedRow);
@@ -217,7 +217,7 @@ public class UiAttachmentViewer extends JPanel  implements DragGestureListener, 
 			}
 			catch(Exception e)
 			{
-				mainWindow.notifyDlg(mainWindow, "UnableToViewAttachment");
+				mainWindow.notifyDlg("UnableToViewAttachment");
 				System.out.println("Unable to view file :" + e);
 			}
 			mainWindow.resetCursor(originalCursor);
@@ -245,7 +245,7 @@ public class UiAttachmentViewer extends JPanel  implements DragGestureListener, 
 				File outputFile = chooser.getSelectedFile();
 				if(outputFile.exists())
 				{
-					if(!mainWindow.confirmDlg(mainWindow,"OverWriteExistingFile"))
+					if(!mainWindow.confirmDlg("OverWriteExistingFile"))
 						return;
 				}
 				Cursor originalCursor = mainWindow.setWaitingCursor();
@@ -257,7 +257,7 @@ public class UiAttachmentViewer extends JPanel  implements DragGestureListener, 
 				}
 				catch(Exception e)
 				{
-					mainWindow.notifyDlg(mainWindow, "UnableToSaveAttachment");
+					mainWindow.notifyDlg("UnableToSaveAttachment");
 					System.out.println("Unable to save file :" + e);
 				}
 				mainWindow.resetCursor(originalCursor);

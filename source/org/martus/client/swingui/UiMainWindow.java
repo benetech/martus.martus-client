@@ -203,7 +203,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 			app.doAfterSigninInitalization();
 			if(isAccountMapSignatureMissing())
 			{
-				if(confirmDlg(this, "WarnMissingAccountMapSignatureFile"))
+				if(confirmDlg("WarnMissingAccountMapSignatureFile"))
 					exitWithoutSavingState();
 				try 
 				{
@@ -235,10 +235,10 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		restoreState();
 
 		if(quarantineCount > 0)
-			notifyDlg(this, "FoundDamagedBulletins");
+			notifyDlg("FoundDamagedBulletins");
 
 		if(orphanCount > 0)
-			notifyDlg(this, "FoundOrphans");
+			notifyDlg("FoundOrphans");
 
 		show();
 		toFront();
@@ -267,7 +267,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		}
 		catch (MartusApp.LoadConfigInfoException e)
 		{
-			notifyDlg(this, "corruptconfiginfo");
+			notifyDlg("corruptconfiginfo");
 		}
 		
 		ConfigInfo info = app.getConfigInfo();
@@ -460,10 +460,15 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 			table.setCurrentBulletinIndex(currentPosition);
 	}
 
-	public boolean confirmDlgBeep(JFrame parent, String baseTag)
+	public boolean confirmDlgBeep(String baseTag)
 	{			
 		Toolkit.getDefaultToolkit().beep();
-		return confirmDlg(parent, baseTag);
+		return confirmDlg(baseTag);
+	}
+	
+	public boolean confirmDlg(String baseTag)
+	{
+		return confirmDlg(this, baseTag);
 	}
 	
 	public boolean confirmDlg(JFrame parent, String baseTag)
@@ -486,10 +491,22 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		return UiUtilities.confirmDlg(parent, title, contents, buttons);
 	}
 
+	public void notifyDlgBeep(String baseTag)
+	{			
+		Toolkit.getDefaultToolkit().beep();
+		notifyDlg(baseTag);
+	}
+	
 	public void notifyDlgBeep(JFrame parent, String baseTag)
 	{			
 		Toolkit.getDefaultToolkit().beep();
 		notifyDlg(parent, baseTag);
+	}
+	
+	public void notifyDlg(String baseTag)
+	{
+		HashMap emptyTokenReplacement = new HashMap();
+		notifyDlg(this, baseTag, emptyTokenReplacement);
 	}
 	
 	public void notifyDlg(JFrame parent, String baseTag)
@@ -624,7 +641,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		}
 		catch(IOException e)
 		{
-			notifyDlg(null, "ErrorSavingState");
+			notifyDlg("ErrorSavingState");
 		}
 	}
 
@@ -790,7 +807,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		}
 		else
 		{
-			notifyDlg(this, "SearchFailed");
+			notifyDlg("SearchFailed");
 		}
 	}
 
@@ -894,7 +911,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 				format.setFromAttributes(attributes);
 				if(format.mustWarnUser)
 				{
-					if(confirmDlg(this, "PrinterWarning"))
+					if(confirmDlg("PrinterWarning"))
 						continue;
 				}
 				vista.scaleToFitX();
@@ -976,7 +993,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 				//TODO:The following line shouldn't be necessary but without it, the trustmanager 
 				//will reject the old server, we don't know why.
 				app.buildGateway(info.getServerName(), info.getServerPublicKey()); 
-				notifyDlg(this, "UserRejectedServerCompliance");
+				notifyDlg("UserRejectedServerCompliance");
 				inConfigServer = false;
 				return;
 			}
@@ -996,7 +1013,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 						magicAccepted = true;
 						break;
 					}
-					notifyDlg(this, "magicwordrejected");
+					notifyDlg("magicwordrejected");
 				}
 			}
 
@@ -1034,7 +1051,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	boolean confirmServerCompliance(String descriptionTag, String newServerCompliance)
 	{
 		if(newServerCompliance.equals(""))
-			return confirmDlg(this,"ServerComplianceFailed");
+			return confirmDlg("ServerComplianceFailed");
 			
 		UiShowScrollableTextDlg dlg = new UiShowScrollableTextDlg(this, "ServerCompliance", "ServerComplianceAccept", "ServerComplianceReject", descriptionTag, newServerCompliance);
 		return dlg.getResult();
@@ -1049,13 +1066,13 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		}
 		catch (MartusApp.SaveConfigInfoException e)
 		{
-			notifyDlg(this, "ErrorSavingConfig");
+			notifyDlg("ErrorSavingConfig");
 		}
 		
 		if(!configInfo.isServerConfigured())
 			return;
 		
-		boolean sendInfo = confirmDlg(this, "RequestToSendContactInfoToServer");
+		boolean sendInfo = confirmDlg("RequestToSendContactInfoToServer");
 		configInfo.setSendContactInfoToServer(sendInfo);
 	}
 
@@ -1077,7 +1094,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		if(!getAndSaveUserNamePassword(app.getCurrentKeyPairFile()))
 			return;
 
-		notifyDlg(this, "RewriteKeyPairSaved");
+		notifyDlg("RewriteKeyPairSaved");
 		askToBackupKeyPairEncryptedSingleFile();
 	}
 
@@ -1102,7 +1119,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		catch(Exception e)
 		{
 			e.printStackTrace();
-			notifyDlg(this, "RewriteKeyPairFailed");
+			notifyDlg("RewriteKeyPairFailed");
 			return false;
 			//TODO eventually try to restore keypair from backup.
 		}
@@ -1119,7 +1136,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 			if(defaultFile != null)
 			{
 				templateDlg.loadFile(defaultFile);
-				notifyDlg(this, "ConfirmCorrectDefaultDetailsData");
+				notifyDlg("ConfirmCorrectDefaultDetailsData");
 			}
 		}
 		catch (IOException e)
@@ -1216,7 +1233,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 			retriever.retrieveBulletins(uidList, retrievedFolder);
 			retriever.progressDlg.show();
 			if(progressDlg.shouldExit())
-				notifyDlg(this, "RetrieveCanceled");
+				notifyDlg("RetrieveCanceled");
 			else
 			{
 				String result = retriever.getResult();
@@ -1232,7 +1249,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		}
 		catch(ServerErrorException e)
 		{
-			notifyDlg(this, "ServerError");
+			notifyDlg("ServerError");
 			return;
 		}
 	}
@@ -1256,11 +1273,11 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 				String result = app.deleteServerDraftBulletins(uidList);
 				if(!result.equals(NetworkInterfaceConstants.OK))
 				{
-					notifyDlg(this, "DeleteServerDraftsFailed");
+					notifyDlg("DeleteServerDraftsFailed");
 					return;
 				}
 
-				notifyDlg(this, "DeleteServerDraftsWorked");
+				notifyDlg("DeleteServerDraftsWorked");
 			}
 			finally
 			{
@@ -1269,17 +1286,17 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		}
 		catch (MartusCrypto.MartusSignatureException e)
 		{
-			notifyDlg(this, "UnexpectedError");
+			notifyDlg("UnexpectedError");
 			return;
 		}
 		catch (Packet.WrongAccountException e)
 		{
-			notifyDlg(this, "UnexpectedError");
+			notifyDlg("UnexpectedError");
 			return;
 		}
 		catch(ServerErrorException e)
 		{
-			notifyDlg(this, "ServerError");
+			notifyDlg("ServerError");
 			return;
 		}
 	}
@@ -1331,7 +1348,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 				export = app.getPublicInfoFile(fileName);
 				if(export.exists())
 				{
-					if(confirmDlg(this, "OverWriteExistingFile"))
+					if(confirmDlg("OverWriteExistingFile"))
 						export.delete();
 				}
 			}while(export.exists());
@@ -1352,7 +1369,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 
 	public void askToBackupKeyPairEncryptedSingleFile()
 	{
-		if(confirmDlg(this,"BackupKeyPairSingle"))
+		if(confirmDlg("BackupKeyPairSingle"))
 			doBackupKeyPairToSingleEncryptedFile();
 	}
 
@@ -1371,11 +1388,11 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		if(keypairFile.length() > MAX_KEYPAIRFILE_SIZE)
 		{
 			System.out.println("keypair file too large!");
-			notifyDlg(this, "ErrorBackingupKeyPair");
+			notifyDlg("ErrorBackingupKeyPair");
 			return;
 		}
 		
-		notifyDlg(this, "BackupKeyPairInformation");
+		notifyDlg("BackupKeyPairInformation");
 		
 		UiFileChooser chooser = new UiFileChooser();
 		chooser.setDialogTitle(getLocalization().getWindowTitle("saveBackupKeyPair"));
@@ -1385,7 +1402,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		{
 			File newBackupFile = chooser.getSelectedFile();
 			if(newBackupFile.exists())
-				if(!confirmDlg(this, "OverWriteExistingFile"))
+				if(!confirmDlg("OverWriteExistingFile"))
 					return;
 			try
 			{
@@ -1400,18 +1417,18 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 				input.close();
 				output.close();
 				if(FileVerifier.verifyFiles(keypairFile, newBackupFile))
-					notifyDlg(this,"OperationCompleted");
+					notifyDlg("OperationCompleted");
 				else
-					notifyDlg(this,"ErrorBackingupKeyPair");
+					notifyDlg("ErrorBackingupKeyPair");
 			}
 			catch (FileNotFoundException fnfe)
 			{
-				notifyDlg(this, "ErrorBackingupKeyPair");
+				notifyDlg("ErrorBackingupKeyPair");
 			}
 			catch (IOException ioe)
 			{
 				System.out.println(ioe.getMessage());
-				notifyDlg(this, "ErrorBackingupKeyPair");
+				notifyDlg("ErrorBackingupKeyPair");
 			}
 		}
 	}
@@ -1455,17 +1472,17 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 				String publicCode = MartusCrypto.computePublicCode(publicKey);
 				if(confirmPublicCode(publicCode, "ImportPublicCode", "AccountCodeWrong"))
 				{
-					if(confirmDlg(this, "SetImportPublicKey"))
+					if(confirmDlg("SetImportPublicKey"))
 						app.setHQKey(publicKey);
 				}
 			}
 			catch(MartusApp.SaveConfigInfoException e)
 			{
-				notifyDlg(this, "ErrorSavingConfig");
+				notifyDlg("ErrorSavingConfig");
 			}
 			catch(Exception e)
 			{
-				notifyDlg(this, "PublicInfoFileError");
+				notifyDlg("PublicInfoFileError");
 			}
 		}
 	}
@@ -1476,16 +1493,16 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 			return;
 		try
 		{
-			if(confirmDlg(this, "ClearHQInformation"))
+			if(confirmDlg("ClearHQInformation"))
 				app.clearHQKey();
 		}
 		catch(MartusApp.SaveConfigInfoException e)
 		{
-			notifyDlg(this, "ErrorSavingConfig");
+			notifyDlg("ErrorSavingConfig");
 		}
 		catch(Exception e)
 		{
-			notifyDlg(this, "PublicInfoFileError");
+			notifyDlg("PublicInfoFileError");
 		}
 	}
 
@@ -1506,7 +1523,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 
 			//System.out.println("Entered:     " + userEnteredPublicCode);
 			//System.out.println("Normalized:   " + normalizedPublicCode);
-			notifyDlg(this, errorBaseTag);
+			notifyDlg(errorBaseTag);
 		}
 	}
 
@@ -1612,7 +1629,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 
 	private boolean createAccount()
 	{
-		notifyDlg(this, "WelcomeToMartus");
+		notifyDlg("WelcomeToMartus");
 		UiCreateNewAccountProcess newUserInfo = new UiCreateNewAccountProcess(this, "");
 		if(!newUserInfo.isDataValid())
 			return false;
@@ -1627,7 +1644,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		catch(Exception e)
 		{
 			waitingForKeyPair.endDialog();
-			notifyDlg(this, "CreateAccountFailed");
+			notifyDlg("CreateAccountFailed");
 			return false;
 		}
 		waitingForKeyPair.endDialog();
@@ -1641,14 +1658,14 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		boolean dontExitApplication = false;
 		if(app.shouldShowSealedUploadReminderOnExit())
 		{
-			if(confirmDlg(this, "UploadReminder"))
+			if(confirmDlg("UploadReminder"))
 				app.resetLastUploadRemindedTime();
 			else
 				dontExitApplication = true;
 		}
 		else if(app.shouldShowDraftUploadReminder())
 		{
-			if(!confirmDlg(this, "DraftUploadReminder"))
+			if(!confirmDlg("DraftUploadReminder"))
 				dontExitApplication = true;
 		}
 		return dontExitApplication;
@@ -1699,7 +1716,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		int bulletinCount = selectedFolder.getBulletinCount();
 		if(bulletinCount == 0)
 		{
-			notifyDlg(this, "ExportFolderEmpty");
+			notifyDlg("ExportFolderEmpty");
 			return;
 		}
 		Vector bulletins = new Vector();
@@ -1716,7 +1733,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		UniversalId[] uids = table.getSelectedBulletinUids();
 		if(uids.length == 0)
 		{
-			notifyDlg(this, "ExportZeroBulletins");
+			notifyDlg("ExportZeroBulletins");
 			return;
 		}
 
@@ -1802,17 +1819,17 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 
 			if(uploadResult.equals(NetworkInterfaceConstants.REJECTED) && !rejectedErrorShown)
 			{
-				notifyDlg(UiMainWindow.this, "uploadrejected");
+				notifyDlg("uploadrejected");
 				rejectedErrorShown = true;
 			}
 			if(uploadResult.equals(MartusApp.AUTHENTICATE_SERVER_FAILED) && !authenticationErrorShown)
 			{
-				notifyDlg(UiMainWindow.this, "AuthenticateServerFailed");
+				notifyDlg("AuthenticateServerFailed");
 				authenticationErrorShown = true;
 			}
 			if(uploadResult.equals(BackgroundUploader.CONTACT_INFO_NOT_SENT) && !contactInfoErrorShown)
 			{
-				notifyDlg(UiMainWindow.this, "contactRejected");
+				notifyDlg("contactRejected");
 				contactInfoErrorShown = true;
 			}
 		}
