@@ -1603,11 +1603,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	{
 		try
 		{
-			if(hQKeys.isEmpty())
-				app.clearHQKey();
-			else
-				app.setHQKey((String)hQKeys.get(0));
-			app.saveConfigInfo();
+			app.setAndSaveHQKeys(hQKeys);
 		}
 		catch(MartusApp.SaveConfigInfoException e)
 		{

@@ -44,6 +44,7 @@ import org.martus.client.core.BulletinStore.BulletinAlreadyExistsException;
 import org.martus.client.core.ClientSideNetworkHandlerUsingXmlRpc.SSLSocketSetupException;
 import org.martus.client.core.Exceptions.ServerCallFailedException;
 import org.martus.client.core.Exceptions.ServerNotAvailableException;
+import org.martus.client.core.HQKeys.HQsException;
 import org.martus.client.search.BulletinSearcher;
 import org.martus.client.search.SearchParser;
 import org.martus.client.search.SearchTreeNode;
@@ -184,28 +185,31 @@ public class MartusApp
 		invalidateCurrentHandlerAndGateway();
 	}
 
-	public void setHQKey(String hqKey) throws
-		SaveConfigInfoException
-	{
-		configInfo.setHQKey(hqKey);
-		saveConfigInfo();
-	}
-
 	public String getHQKey()
 	{
 		return configInfo.getHQKey();
 	}
-
-	public void clearHQKey() throws
-		SaveConfigInfoException
+	
+	public Vector getHQKeys() throws HQsException
 	{
-		configInfo.clearHQKey();
-		saveConfigInfo();
+		String xml = configInfo.getAllHQKeysXml();
+		return HQKeys.parseXml(xml);
 	}
 
 	public ConfigInfo getConfigInfo()
 	{
 		return configInfo;
+	}
+	
+	public void setAndSaveHQKeys(Vector hQKeys) throws SaveConfigInfoException 
+	{
+		HQKeys keys = new HQKeys(hQKeys);
+		configInfo.setAllHQKeysXml(keys.toString());
+		if(hQKeys.isEmpty())
+			configInfo.clearHQKey();
+		else
+			configInfo.setHQKey((String)hQKeys.get(0));
+		saveConfigInfo();
 	}
 
 	public void saveConfigInfo() throws SaveConfigInfoException

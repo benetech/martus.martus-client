@@ -587,9 +587,27 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		configFile.deleteOnExit();
 		assertEquals("already exists?", false, configFile.exists());
 		String sampleHQKey = "abc123";
-		appWithAccount.setHQKey(sampleHQKey);
+		Vector keys = new Vector();
+		keys.add(sampleHQKey);
+		appWithAccount.setAndSaveHQKeys(keys);
 		assertEquals("Incorrect public key", sampleHQKey, appWithAccount.getHQKey());
 		assertEquals("Didn't save?", true, configFile.exists());
+	}
+	
+	public void testGetAndSetMultipleHQKeys() throws Exception
+	{
+		File configFile = appWithAccount.getConfigInfoFile();
+		configFile.deleteOnExit();
+		String sampleHQKey1 = "abc123";
+		String sampleHQKey2 = "234567";
+		Vector keys = new Vector();
+		keys.add(sampleHQKey1);
+		keys.add(sampleHQKey2);
+		appWithAccount.setAndSaveHQKeys(keys);
+		assertEquals("Incorrect default public key", sampleHQKey1, appWithAccount.getHQKey());
+		Vector returnedKeys = appWithAccount.getHQKeys();
+		assertContains(sampleHQKey1, returnedKeys);
+		assertContains(sampleHQKey2, returnedKeys);
 	}
 
 	public void testClearHQKey() throws Exception
@@ -597,14 +615,17 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		File configFile = appWithAccount.getConfigInfoFile();
 		configFile.deleteOnExit();
 		assertEquals("already exists?", false, configFile.exists());
-		appWithAccount.clearHQKey();
+		Vector empty = new Vector();
+		appWithAccount.setAndSaveHQKeys(empty);
 		assertEquals("HQ key exists?", "", appWithAccount.getHQKey());
 		assertEquals("Didn't save?", true, configFile.exists());
 
 		String sampleHQKey = "abc123";
-		appWithAccount.setHQKey(sampleHQKey);
+		Vector key = new Vector();
+		key.add(sampleHQKey);
+		appWithAccount.setAndSaveHQKeys(key);
 		assertEquals("Incorrect public key", sampleHQKey, appWithAccount.getHQKey());
-		appWithAccount.clearHQKey();
+		appWithAccount.setAndSaveHQKeys(empty);
 		assertEquals("HQ not cleared", "", appWithAccount.getHQKey());
 	}
 
@@ -1480,7 +1501,9 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 	public void testSetBulletinHQKey() throws Exception
 	{
 		String key = "aabcc";
-		appWithAccount.setHQKey(key);
+		Vector keys = new Vector();
+		keys.add(key);
+		appWithAccount.setAndSaveHQKeys(keys);
 
 		Bulletin b1 = appWithAccount.createBulletin();
 		assertEquals("key already set?", "", b1.getHQPublicKey());

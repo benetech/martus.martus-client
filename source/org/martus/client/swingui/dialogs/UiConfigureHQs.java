@@ -53,6 +53,7 @@ import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableModel;
 
 import org.martus.client.core.MartusApp;
+import org.martus.client.core.HQKeys.HQsException;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.common.clientside.UiBasicLocalization;
 import org.martus.common.crypto.MartusCrypto;
@@ -95,9 +96,16 @@ public class UiConfigureHQs extends JDialog
 		table.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
 		table.setShowGrid(true);
 
-		String hQKey = mainWindow.getApp().getHQKey();
-		if(hQKey.length() != 0)
-			addHQKeyToTable(hQKey);
+		try
+		{
+			Vector hQKeys = mainWindow.getApp().getHQKeys();
+			for(int i = 0; i<hQKeys.size();++i)
+				addHQKeyToTable((String)hQKeys.get(i));
+		}
+		catch (HQsException e)
+		{
+			e.printStackTrace();
+		}
 		if(model.getRowCount()>0)
 			table.setRowSelectionInterval(0,0);
 		
