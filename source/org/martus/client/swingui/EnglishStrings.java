@@ -751,9 +751,8 @@ public class EnglishStrings
 
 "field:BulletinDetailsAuthorPublicCode=Author Public Code",
 "field:BulletinDetailsBulletinId=Bulletin ID",
-"field:BulletinDetailsHQLabel=Label",
-"field:BulletinDetailsHQPublicCode=Public Code",
-"field:BulletinDetailsHeadquarters=Headquarters",
+"field:BulletinHeadQuartersHQLabel=Label",
+"field:BulletinHeadQuartersHeadquarters=Headquarters",
 "field:BulletinDetailsVersionNumber=Version #",
 "field:BulletinDetailsVersionDate=Date Saved",
 "field:BulletinDetailsVersionId=ID",
@@ -763,8 +762,8 @@ public class EnglishStrings
 "field:BulletinDetailsUnknownTitle=(unknown)",
 "field:BulletinDetailsInProgressDate=(in progress)",
 "field:BulletinDetailsInProgressTitle=(in progress)",
-"field:BulletinDetailsHQInfoForView=The following Headquarter account(s) can view the private information in this bulletin, and can send this bulletin to a server.",
-"field:BulletinDetailsHQInfoForModify=The following Headquarter account(s) will be able to view the private information in this bulletin, or send this bulletin to a server, after you save it.\n\nTo add or remove an account, use the Tools/Configure Headquarters menu option.",
+"field:BulletinHeadQuartersHQInfoForView=The following Headquarter account(s) can view the private information in this bulletin, and can send this bulletin to a server.",
+"field:BulletinHeadQuartersHQInfoForModify=The following Headquarter account(s) will be able to view the private information in this bulletin, or send this bulletin to a server, after you save it.\n\nTo add or remove an account, use the Tools/Configure Headquarters menu option.",
 
 
 "folder:%OutBox=Unsent Bulletins",

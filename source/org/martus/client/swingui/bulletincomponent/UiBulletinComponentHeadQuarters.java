@@ -46,7 +46,7 @@ public class UiBulletinComponentHeadQuarters extends UiBulletinComponentSection
 
 	protected String getLabel(String tag)
 	{
-		return getLocalization().getFieldLabel("BulletinDetails" + tag);
+		return getLocalization().getFieldLabel("BulletinHeadQuarters" + tag);
 	}
 	
 	Bulletin bulletin;
