@@ -249,7 +249,7 @@ public class EnglishStrings
 "button:inputLoadDefaultDetailsok=Load",
 "button:inputCustomFieldsok=OK",
 "button:inputGetShareFileNameok=OK",
-
+"button:close=Close",
 
 "button:cancel=Cancel",
 "button:browse=Browse...",

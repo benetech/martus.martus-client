@@ -95,15 +95,16 @@ public class UiDisplayFileDlg extends JDialog
 			tocList.setSelectedIndex(0);
 		}
 
-		ok = new JButton(localization.getButtonLabel("ok"));
-		ok.addActionListener(new OkHandler());
-		ok.addKeyListener(new MakeEnterKeyExit());
+		close = new JButton(localization.getButtonLabel("close"));
+		close.addActionListener(new CloseHandler());
+		close.addKeyListener(new MakeEnterKeyExit());
 
 		getContentPane().add(new JLabel(localization.getFieldLabel(tagMessage)), ParagraphLayout.NEW_PARAGRAPH);
 		getContentPane().add(msgAreaScrollPane);
-		getContentPane().add(ok, ParagraphLayout.NEW_PARAGRAPH);
-		getRootPane().setDefaultButton(ok);
-		ok.requestFocus();
+		getContentPane().add(close, ParagraphLayout.NEW_PARAGRAPH);
+		
+		getRootPane().setDefaultButton(close);
+		close.requestFocus();
 
 		Utilities.centerDlg(this);
 		setResizable(true);
@@ -168,11 +169,11 @@ public class UiDisplayFileDlg extends JDialog
 	}
 
 
-	public void findAndScrollToItem()
+	public void findAndScrollToItem(String searchString)
 	{
 		msgArea.setCaretPosition(message.length());
 		msgAreaScrollPane.getVerticalScrollBar().setValue(msgAreaScrollPane.getVerticalScrollBar().getMaximum());
-		int foundAt = message.indexOf("-\n" + (String)tocList.getSelectedValue());
+		int foundAt = message.indexOf(searchString);
 		if(foundAt < 0)
 			foundAt = 0;
 		msgArea.setCaretPosition(foundAt);
@@ -182,11 +183,11 @@ public class UiDisplayFileDlg extends JDialog
 	{
 		public void valueChanged(ListSelectionEvent arg0)
 		{
-			findAndScrollToItem();
+			findAndScrollToItem("-\n" + (String)tocList.getSelectedValue());
 		}
 	}
 
-	class OkHandler implements ActionListener
+	class CloseHandler implements ActionListener
 	{
 		public void actionPerformed(ActionEvent ae)
 		{
@@ -208,12 +209,12 @@ public class UiDisplayFileDlg extends JDialog
 		{
 			if (ke.getKeyCode() == KeyEvent.VK_TAB)
 			{
-				ok.requestFocus();
+				close.requestFocus();
 			}
 		}
 	}
 	String message;
-	JButton ok;
+	JButton close;
 	JList tocList;
 	UiWrappedTextArea msgArea;
 	JScrollPane msgAreaScrollPane;
