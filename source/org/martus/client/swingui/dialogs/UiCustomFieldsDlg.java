@@ -31,7 +31,6 @@ import java.awt.ComponentOrientation;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
-import java.io.IOException;
 import java.util.Vector;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -42,13 +41,10 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.filechooser.FileFilter;
 import org.martus.client.core.CustomFieldError;
-import org.martus.client.core.CustomFieldSpecValidator;
+import org.martus.client.core.CustomFieldTemplate;
 import org.martus.client.core.MartusApp;
 import org.martus.client.swingui.UiLocalization;
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.common.CustomFields;
-import org.martus.common.FieldSpec;
-import org.martus.common.CustomFields.CustomFieldsParseException;
 import org.martus.common.clientside.Localization;
 import org.martus.swing.UiButton;
 import org.martus.swing.UiFileChooser;
@@ -57,8 +53,6 @@ import org.martus.swing.UiScrollPane;
 import org.martus.swing.UiTextArea;
 import org.martus.swing.UiWrappedTextArea;
 import org.martus.swing.Utilities;
-import org.martus.util.UnicodeReader;
-import org.martus.util.UnicodeWriter;
 
 
 public class UiCustomFieldsDlg extends JDialog
@@ -160,20 +154,16 @@ public class UiCustomFieldsDlg extends JDialog
 			if (results.wasCancelChoosen())
 				return;
 			File importFile = results.getFileChoosen();
-			try
+
+			CustomFieldTemplate template = new CustomFieldTemplate();
+			if(template.importTemplate(importFile))
 			{
-				UnicodeReader reader = new UnicodeReader(importFile);
-				String templateXMLToImport = reader.readAll();
-				reader.close();
-				if(validateXml(templateXMLToImport))
-				{
-					text.setText(templateXMLToImport);
-					mainWindow.notifyDlg("ImportingCustomizationTemplateSuccess");
-				}
+				text.setText(template.getImportedText());
+				mainWindow.notifyDlg("ImportingCustomizationTemplateSuccess");
 			}
-			catch(IOException e)
+			else
 			{
-				e.printStackTrace();
+				displayXMLError(template);
 				mainWindow.notifyDlg("ErrorImportingCustomizationTemplate");
 			}
 		}
@@ -183,8 +173,6 @@ public class UiCustomFieldsDlg extends JDialog
 	{
 		public void actionPerformed(ActionEvent ae)
 		{
-			if(!validateXml(text.getText()))
-				return;
 			String windowTitle = mainWindow.getLocalization().getWindowTitle("ExportCustomizationTemplateSaveAs");
 			FileFilter filter = new MCTFileFilter();
 			UiFileChooser.FileDialogResults results = UiFileChooser.displayFileSaveDialog(mainWindow, windowTitle, mainWindow.getApp().getCurrentAccountDirectory(), filter);
@@ -200,15 +188,14 @@ public class UiCustomFieldsDlg extends JDialog
 			if(destFile.exists())
 				if(!mainWindow.confirmDlg("OverWriteExistingFile"))
 					return;
-			try
+			CustomFieldTemplate template = new CustomFieldTemplate();
+			if(template.ExportTemplate(destFile, text.getText()))
 			{
-				UnicodeWriter writer = new UnicodeWriter(destFile);
-				writer.write(text.getText());
-				writer.close();
+				mainWindow.notifyDlg("ExportingCustomizationTemplateSuccess");
 			}
-			catch(IOException e)
+			else
 			{
-				e.printStackTrace();
+				displayXMLError(template);
 				mainWindow.notifyDlg("ErrorExportingCustomizationTemplate");
 			}
 		}
@@ -228,7 +215,6 @@ public class UiCustomFieldsDlg extends JDialog
 			return mainWindow.getLocalization().getFieldLabel("CustomizationTemplateFiles");
 		}
 	}
-	
 
 	class CustomHelpHandler implements ActionListener
 	{
@@ -251,22 +237,19 @@ public class UiCustomFieldsDlg extends JDialog
 	
 	public boolean validateXml(String xmlToValidate)
 	{
-		Vector errors = null;
-		try
-		{
-			FieldSpec[] newSpecs = CustomFields.parseXml(xmlToValidate);
-			CustomFieldSpecValidator checker = new CustomFieldSpecValidator(newSpecs);
-			if(checker.isValid())
-				return true;
-			errors = checker.getAllErrors();
-		}
-		catch (CustomFieldsParseException e)
-		{
-			e.printStackTrace();
-			errors = new Vector();
-			errors.add(CustomFieldError.errorParseXml());
-		}
+		CustomFieldTemplate template = new CustomFieldTemplate();
+		if(template.validateXml(xmlToValidate))
+			return true;
 
+		displayXMLError(template); 
+		return false;
+	}
+
+	void displayXMLError(CustomFieldTemplate template)
+	{
+		Vector errors = template.getErrors();
+		if(errors == null)
+			return;
 		String header1 = mainWindow.getLocalization().getFieldLabel("ErrorCustomFieldHeader1");
 		String header2 = mainWindow.getLocalization().getFieldLabel("ErrorCustomFieldHeader2");
 		String header3 = mainWindow.getLocalization().getFieldLabel("ErrorCustomFieldHeader3");
@@ -286,8 +269,7 @@ public class UiCustomFieldsDlg extends JDialog
 			errorMessage += thisErrorMessage;
 			errorMessage += '\n';
 		}
-		new UiShowScrollableTextDlg(mainWindow,"ErrorCustomFields", "ok", Localization.UNUSED_TAG, "ErrorCustomFields", errorMessage, null); 
-		return false;
+		new UiShowScrollableTextDlg(mainWindow,"ErrorCustomFields", "ok", Localization.UNUSED_TAG, "ErrorCustomFields", errorMessage, null);
 	}
 		
 	private String GetDataAndSpacing(String data, int columnSpacing)

@@ -184,6 +184,7 @@ public class EnglishStrings
 "wintitle:notifyErrorExportingCustomizationTemplate=Error Exporting Tempalate",
 "wintitle:notifyErrorImportingCustomizationTemplate=Error Importing Tempalate",
 "wintitle:notifyImportingCustomizationTemplateSuccess=Importing Tempalate Succeeded",
+"wintitle:notifyExportCustomizationTemplateSuccess=Exporting Tempalate Succeeded",
 
 "wintitle:inputservername=Server Name",
 "wintitle:inputserverpubliccode=Server Identification",
@@ -656,9 +657,10 @@ public class EnglishStrings
 "field:notifyBulletinVersionNotInSystemcause=The bulletin version you are trying to view is currently not on your system.",
 "field:notifyHeadquarterLabelDuplicatecause=The Headquarters label you entered is already assigned to another Headquarters account.  Please use a different label.",
 "field:notifyNoHQsSelectedcause=Please select a Headquarters first.",
-"field:notifyErrorExportingCustomizationTemplatecause=There was an unexpected error saving your template.  Please check to see you have enought disk space.",
+"field:notifyErrorExportingCustomizationTemplatecause=There was an error saving your template.",
 "field:notifyErrorImportingCustomizationTemplatecause=There was an error importing this template.",
 "field:notifyImportingCustomizationTemplateSuccesscause=Successfully imported customization template.",
+"field:notifyExportingCustomizationTemplateSuccesscause=Successfully exported customization template.",
 
 "field:messageServerNewscause=The current server has sent this message:",
 "field:messageErrorDateInFuturecause=This date occurs in the future:",
