@@ -33,6 +33,7 @@ import javax.swing.border.LineBorder;
 
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.fields.UiDateEditor;
+import org.martus.client.swingui.fields.UiDateViewer;
 import org.martus.client.swingui.fields.UiField;
 import org.martus.client.swingui.fields.UiFlexiDateEditor;
 import org.martus.client.swingui.fields.UiField.DataInvalidException;
@@ -110,6 +111,18 @@ abstract public class UiBulletinComponentDataSection extends UiBulletinComponent
 	{
 		UiField field = null;
 
+		if(fieldSpec.getTag().equals(Bulletin.TAGENTRYDATE))
+			field = createReadOnlyDateField();
+		else
+			field = createNormalField(fieldSpec);
+		field.getComponent().setBorder(new LineBorder(Color.black));
+		return field;
+	}
+
+
+	private UiField createNormalField(FieldSpec fieldSpec)
+	{
+		UiField field;
 		switch(fieldSpec.getType())
 		{
 			case FieldSpec.TYPE_MULTILINE:
@@ -140,10 +153,8 @@ abstract public class UiBulletinComponentDataSection extends UiBulletinComponent
 				field = createUnknownField();
 				break;
 		}
-		field.getComponent().setBorder(new LineBorder(Color.black));
 		return field;
 	}
-
 
 	public void updateEncryptedIndicator(boolean isEncrypted)
 	{
@@ -230,5 +241,10 @@ abstract public class UiBulletinComponentDataSection extends UiBulletinComponent
 	abstract public void addAttachment(AttachmentProxy a);
 	abstract public void clearAttachments();
 	abstract public void validateAttachments() throws DataInvalidException;
+
+	public UiField createReadOnlyDateField()
+	{
+		return new UiDateViewer(getLocalization());
+	}
 
 }
