@@ -32,7 +32,6 @@ import java.io.File;
 import org.martus.client.core.QuickEraseOptions;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.dialogs.UiQuickEraseConfirmDlg;
-import org.martus.util.DirectoryUtils;
 
 public class ActionMenuQuickErase extends UiMenuAction 
 {
@@ -80,8 +79,6 @@ public class ActionMenuQuickErase extends UiMenuAction
 		String baseTag = "QuickEraseFailed";						
 		if(mainWindow.getApp().deleteAllBulletinsAndUserFolders(options))
 		{	
-			if(packetDir.list().length > 0)
-				confirmThenDeleteSubDirectories(packetDir, options);	
 			if(options.isScrubSelected())
 				baseTag = "QuickEraseScrubWorked";
 			else
@@ -94,18 +91,6 @@ public class ActionMenuQuickErase extends UiMenuAction
 		mainWindow.folderTreeContentsHaveChanged();		
 	}
 	
-	private void confirmThenDeleteSubDirectories(File packetDir, QuickEraseOptions options)
-	{
-		if( options.isDonotPromptSelected() || 
-		    mainWindow.confirmDlgBeep(mainWindow, "DeleteSubDirectory"))
-		{
-			if (options.isScrubSelected())	
-				DirectoryUtils.scrubAndDeleteEntireDirectoryTree(packetDir);
-			else
-				DirectoryUtils.deleteEntireDirectoryTree(packetDir);
-		}		
-	}
-
 	private void exitApp(QuickEraseOptions options)
 	{
 		mainWindow.getApp().cleanupWhenCompleteQuickErase(options);
