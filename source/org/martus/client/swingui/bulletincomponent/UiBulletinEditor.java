@@ -112,15 +112,12 @@ public class UiBulletinEditor extends UiBulletinComponent
 			return true;
 		
 		for(int aIndex = 0; aIndex < proxy.length; ++aIndex)
-		{	
-			if (!rawProxy[aIndex].getLabel().equals(proxy[aIndex].getLabel()))
-				return true;
+		{									
+			String rawLocalId = rawProxy[aIndex].getUniversalId().getLocalId();
+			String localId = proxy[aIndex].getUniversalId().getLocalId();			
 						
-			String rawAccountId = rawProxy[aIndex].getUniversalId().getAccountId();
-			String accountId = proxy[aIndex].getUniversalId().getAccountId();			
-						
-			if (!rawAccountId.equals(accountId))
-				return true;								
+			if (!rawLocalId.equals(localId))
+				return true;														
 
 		}		
 		return false;	
