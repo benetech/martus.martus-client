@@ -581,7 +581,7 @@ public class EnglishStrings
 "field:confirmUnableToRecoverFromBackupFileeffect=Choosing Yes will begin the restore process again.",
 "field:confirmWarningPathChosenMayNotBeRemoveablecause=Are you sure the directory you chose to save your backup files to is removable?  You cannot save all #M# files to the same location without inserting a new disk for each backup file.",
 "field:confirmWarningPathChosenMayNotBeRemoveableeffect=Choosing Yes will begin the backup process as instructed.",
-"field:confirmBackupKeyPairInformationcause=Save your password encrypted key backup file to a single floppy disk or other removable media.  Then store this disk in a safe place. You will use this disk, with your username and password, to recover your data if your system files are ever damaged.  To restore this password-protected key in the future, select 'Restore Account' and 'Restore account from backup key file' when signing into Martus.",		
+"field:confirmBackupKeyPairInformationcause=Save your password encrypted key backup file to a single floppy disk or other removable media.  Then store this disk in a safe place. You will use this disk, with your username and password, to restore your data if your system files are ever damaged.  To restore this password-protected key in the future, select 'Restore Account' and 'Restore account from backup key file' when signing into Martus.",		
 "field:confirmBackupKeyPairInformationeffect=Choosing Yes will begin the backup process.",		
 "field:confirmhelpStringNotFoundcause=The text \"#S#\" was not found.  Do you wish to search from the beginning?",
 "field:confirmhelpStringNotFoundeffect=Clicking on Yes will search for \"#S#\" from the beginning.",
