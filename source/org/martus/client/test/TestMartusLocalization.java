@@ -108,7 +108,7 @@ public class TestMartusLocalization extends TestCaseEnhanced
 		assertEquals("", bd.getLanguageCodeFromFilename("Martus.mtf"));
 		assertEquals("", bd.getLanguageCodeFromFilename("Martus-es.xyz"));
 		assertEquals("es", bd.getLanguageCodeFromFilename("Martus-es.mtf"));
-		assertEquals("es", bd.getLanguageCodeFromFilename("martus-es.mtf"));
+		assertEquals("Martus mtf files are case Sensitive", "", bd.getLanguageCodeFromFilename("martus-es.mtf"));
 	}
 
 	public void testTranslations()
