@@ -63,6 +63,7 @@ public abstract class UiServerSummariesDlg extends JDialog
 		super(owner, owner.getLocalization().getWindowTitle(windowTitleTag), true);
 		mainWindow = owner;
 		model = tableModel;
+		displayBulletinVersionRadioButtons = true;
 	}
 	
 	abstract public void initialize();
@@ -100,6 +101,10 @@ public abstract class UiServerSummariesDlg extends JDialog
 		show();
 	}
 
+	public void hideBulletinVersionButtons()
+	{
+		displayBulletinVersionRadioButtons = false;
+	}
 
 	private void setScreenSize()
 	{
@@ -122,7 +127,7 @@ public abstract class UiServerSummariesDlg extends JDialog
 		checkAll.addActionListener(new CheckAllHandler());
 		JButton unCheckAll = new JButton(localization.getButtonLabel("uncheckall"));
 		unCheckAll.addActionListener(new UnCheckAllHandler());
-
+		
 		JPanel southPanel = new JPanel();
 		southPanel.setLayout(new ParagraphLayout());		
 		southPanel.add(new JLabel(""), ParagraphLayout.NEW_PARAGRAPH);
@@ -148,10 +153,24 @@ public abstract class UiServerSummariesDlg extends JDialog
 		ButtonGroup summariesGroup = new ButtonGroup();
 		summariesGroup.add(downloadableSummaries);
 		summariesGroup.add(allSummaries);
+
+		retrieveAllVersions = new UiRadioButton(localization.getButtonLabel("RetrieveAllVersions"));
+		UiRadioButton retrieveLatestBulletinRevisionOnly = new UiRadioButton(localization.getButtonLabel("RetrieveLatestBulletinRevisionOnly"));		
+		ButtonGroup bulletinVersionsGroup = new ButtonGroup();
+		bulletinVersionsGroup.add(retrieveAllVersions);
+		bulletinVersionsGroup.add(retrieveLatestBulletinRevisionOnly);
+		retrieveAllVersions.setSelected(true);
+
 		JPanel radioPanel = new JPanel();		
 		radioPanel.setLayout(new GridLayout(0, 1));
 		radioPanel.add(downloadableSummaries);
 		radioPanel.add(allSummaries);
+		if(displayBulletinVersionRadioButtons)
+		{
+			radioPanel.add(retrieveAllVersions);
+			radioPanel.add(retrieveLatestBulletinRevisionOnly);
+		}
+		
 		return radioPanel;
 	}
 
@@ -163,6 +182,11 @@ public abstract class UiServerSummariesDlg extends JDialog
 	public Vector getUniversalIdList()
 	{
 		return model.getUniversalIdList();
+	}
+	
+	public boolean retrieveAllBulletinVersions()
+	{
+		return retrieveAllVersions.isSelected();
 	}
 	
 	abstract String getNoneSelectedTag();
@@ -356,4 +380,6 @@ public abstract class UiServerSummariesDlg extends JDialog
 	TableCellRenderer oldBooleanRenderer;
 	TableCellRenderer oldIntegerRenderer;
 	Color disabledBackgroundColor;
+	UiRadioButton retrieveAllVersions;
+	boolean displayBulletinVersionRadioButtons;
 }

@@ -41,6 +41,7 @@ public class UiServerSummariesDeleteDlg extends UiServerSummariesDlg
 	
 	public void initialize()
 	{
+		hideBulletinVersionButtons();
 		initialize("DeleteServerDraftsMessage", "DeleteServerDrafts");
 	}
 

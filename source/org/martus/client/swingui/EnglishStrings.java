@@ -309,6 +309,8 @@ public class EnglishStrings
 "button:ConfigureHQsReLabel=Change Label",
 "button:BulletinDetails=Bulletin Details...",
 "button:ViewPreviousBulletinVersion=View Selected Version...",
+"button:RetrieveAllVersions=Retrieve all bulletin revisions",
+"button:RetrieveLatestBulletinRevisionOnly=Retrieve latest bulletin revision only",
 
 "menu:file=File",
 "menu:CreateNewBulletin=Create New Bulletin",

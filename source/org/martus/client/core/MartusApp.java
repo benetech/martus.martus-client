@@ -1134,14 +1134,19 @@ public class MartusApp
 	}
 
 	public void retrieveOneBulletinToFolder(UniversalId uid, BulletinFolder retrievedFolder, ProgressMeterInterface progressMeter) throws
-		Exception
+		BulletinOlderException, Exception
 	{
 		File tempFile = getCurrentNetworkInterfaceGateway().retrieveBulletin(uid, getSecurity(), serverChunkSize, progressMeter);
-		store.importZipFileBulletin(tempFile, retrievedFolder, true);
-		tempFile.delete();
-		
-		Bulletin b = store.getBulletinRevision(uid);
-		store.setIsOnServer(b);
+		try
+		{
+			store.importZipFileBulletin(tempFile, retrievedFolder, true);
+			Bulletin b = store.getBulletinRevision(uid);
+			store.setIsOnServer(b);
+		}
+		finally
+		{
+			tempFile.delete();
+		}
 	}
 
 	public String deleteServerDraftBulletins(Vector uidList) throws

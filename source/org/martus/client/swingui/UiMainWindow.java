@@ -1550,7 +1550,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 
 			UiProgressRetrieveBulletinsDlg progressDlg = new UiProgressRetrieveBulletinsDlg(this, retrieverProgressTag);
 			Retriever retriever = new Retriever(app, progressDlg);
-			retriever.retrieveBulletins(uidList, retrievedFolder);
+			retriever.retrieveBulletins(uidList, retrievedFolder, summariesDlg.retrieveAllBulletinVersions());
 			retriever.progressDlg.show();
 			if(progressDlg.shouldExit())
 				notifyDlg("RetrieveCanceled");
