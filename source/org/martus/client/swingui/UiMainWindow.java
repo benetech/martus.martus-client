@@ -95,7 +95,9 @@ import org.martus.client.swingui.dialogs.UiProgressRetrieveBulletinsDlg;
 import org.martus.client.swingui.dialogs.UiProgressRetrieveSummariesDlg;
 import org.martus.client.swingui.dialogs.UiRemoveServerDlg;
 import org.martus.client.swingui.dialogs.UiSearchDlg;
+import org.martus.client.swingui.dialogs.UiServerSummariesDeleteDlg;
 import org.martus.client.swingui.dialogs.UiServerSummariesDlg;
+import org.martus.client.swingui.dialogs.UiServerSummariesRetrieveDlg;
 import org.martus.client.swingui.dialogs.UiShowScrollableTextDlg;
 import org.martus.client.swingui.dialogs.UiSigninDlg;
 import org.martus.client.swingui.dialogs.UiSplashDlg;
@@ -1445,16 +1447,13 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	private void retrieveBulletins(RetrieveTableModel model, String folderName,
 						String dlgTitleTag, String summariesProgressTag, String retrieverProgressTag)
 	{
-		String topMessageTag = "RetrieveSummariesMessage";
-		String okButtonTag = "retrieve";
-		String noneSelectedTag = "retrievenothing";
-
 		try
 		{
-			Vector uidList = displaySummariesDlg(model, dlgTitleTag, topMessageTag, okButtonTag, noneSelectedTag, summariesProgressTag);
+			UiServerSummariesDlg summariesDlg = new UiServerSummariesRetrieveDlg(this, model, dlgTitleTag);
+			Vector uidList = displaySummariesDialog(model, dlgTitleTag, summariesProgressTag, summariesDlg);
 			if(uidList == null)
 				return;
-
+			
 			BulletinFolder retrievedFolder = app.createOrFindFolder(folderName);
 			app.getStore().saveFolders();
 
@@ -1487,13 +1486,11 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	private void deleteServerDrafts(RetrieveTableModel model,
 						String dlgTitleTag, String summariesProgressTag)
 	{
-		String topMessageTag = "DeleteServerDraftsMessage";
-		String okButtonTag = "DeleteServerDrafts";
-		String noneSelectedTag = "DeleteServerDraftsNone";
 
 		try
 		{
-			Vector uidList = displaySummariesDlg(model, dlgTitleTag, topMessageTag, okButtonTag, noneSelectedTag, summariesProgressTag);
+			UiServerSummariesDlg summariesDlg = new UiServerSummariesDeleteDlg(this, model, dlgTitleTag);
+			Vector uidList = displaySummariesDialog(model, dlgTitleTag, summariesProgressTag, summariesDlg);
 			if(uidList == null)
 				return;
 
@@ -1532,18 +1529,29 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	}
 
 
-	private Vector displaySummariesDlg(RetrieveTableModel model, String dlgTitleTag, String topMessageTag, String okButtonTag, String noneSelectedTag, String summariesProgressTag) throws
-		ServerErrorException
+	private Vector displaySummariesDialog(RetrieveTableModel model, String dlgTitleTag, String summariesProgressTag, UiServerSummariesDlg summariesDlg) throws ServerErrorException
+	{
+		if(!retrieveSummaries(model, dlgTitleTag, summariesProgressTag))
+			return null;
+		
+		summariesDlg.initialize();
+		if(!summariesDlg.getResult())
+			return null;
+		
+		return summariesDlg.getUniversalIdList();
+	}
+
+	private boolean retrieveSummaries(RetrieveTableModel model, String dlgTitleTag, String summariesProgressTag) throws ServerErrorException
 	{
 		if(!app.isSSLServerAvailable())
 		{
 			notifyDlg(this, "retrievenoserver", dlgTitleTag);
-			return null;
+			return false;
 		}
 		UiProgressRetrieveSummariesDlg progressDlg = new UiProgressRetrieveSummariesDlg(this, summariesProgressTag);
 		model.initialize(progressDlg);
 		if(progressDlg.shouldExit())
-			return null;
+			return false;
 		try
 		{
 			model.checkIfErrorOccurred();
@@ -1552,17 +1560,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		{
 			notifyDlg(this, "RetrievedOnlySomeSummaries", dlgTitleTag);
 		}
-		UiServerSummariesDlg summariesDlg = new UiServerSummariesDlg(this, model, dlgTitleTag, topMessageTag, okButtonTag, noneSelectedTag);
-		
-		// the following is required (for unknown reasons)
-		// to get the window to redraw after the dialog
-		// is closed. Yuck! kbs.
-//		repaint();
-
-		if(!summariesDlg.getResult())
-			return null;
-
-		return summariesDlg.getUniversalIdList();
+		return true;
 	}
 
 	public void doExportMyPublicKey()

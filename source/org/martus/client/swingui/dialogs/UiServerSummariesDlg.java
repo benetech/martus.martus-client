@@ -59,17 +59,16 @@ import org.martus.swing.UiTable;
 import org.martus.swing.UiWrappedTextArea;
 import org.martus.swing.Utilities;
 
-public class UiServerSummariesDlg extends JDialog
+public abstract class UiServerSummariesDlg extends JDialog
 {
-	public UiServerSummariesDlg(UiMainWindow owner, RetrieveTableModel tableModel,
-			String windowTitleTag, String topMessageTag, String okButtonTag, String noneSelectedTag)
+	public UiServerSummariesDlg(UiMainWindow owner, RetrieveTableModel tableModel, String windowTitleTag)
 	{
 		super(owner, owner.getLocalization().getWindowTitle(windowTitleTag), true);
 		mainWindow = owner;
 		model = tableModel;
-		this.noneSelectedTag = noneSelectedTag;
-		initialize(topMessageTag, okButtonTag);
 	}
+	
+	abstract public void initialize();
 
 	void initialize(String topMessageTag, String okButtonTag)
 	{
@@ -100,7 +99,7 @@ public class UiServerSummariesDlg extends JDialog
 
 		getContentPane().add(topPanel);	
 		setScreenSize();				
-		Utilities.centerDlg(this);	
+		Utilities.centerDlg(this);
 		show();
 	}
 
@@ -168,7 +167,21 @@ public class UiServerSummariesDlg extends JDialog
 	{
 		return model.getUniversalIdList();
 	}
-
+	
+	abstract String getNoneSelectedTag();
+	
+	boolean confirmIntentionsBeforeClosing()
+	{
+		Vector uidList = getUniversalIdList();
+		if( uidList.size() == 0)
+		{
+			mainWindow.notifyDlg(getNoneSelectedTag());
+			return false;
+		}
+		
+		return true;
+	}
+	
 	class RetrieveJTable extends JTable
 	{
 		public RetrieveJTable(TableModel model)
@@ -266,13 +279,9 @@ public class UiServerSummariesDlg extends JDialog
 	{
 		public void actionPerformed(ActionEvent ae)
 		{
-			Vector uidList = getUniversalIdList();
-			if( uidList.size() == 0)
-			{
-				mainWindow.notifyDlg(noneSelectedTag);
+			if(!confirmIntentionsBeforeClosing())
 				return;
-			}
-
+			
 			result = true;
 			dispose();
 		}
@@ -350,5 +359,4 @@ public class UiServerSummariesDlg extends JDialog
 	TableCellRenderer oldBooleanRenderer;
 	TableCellRenderer oldIntegerRenderer;
 	Color disabledBackgroundColor;
-	String noneSelectedTag;
 }

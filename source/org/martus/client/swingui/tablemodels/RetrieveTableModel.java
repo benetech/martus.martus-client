@@ -43,6 +43,7 @@ import org.martus.common.crypto.MartusCrypto;
 import org.martus.common.crypto.MartusCrypto.MartusSignatureException;
 import org.martus.common.network.NetworkInterfaceConstants;
 import org.martus.common.network.NetworkResponse;
+import org.martus.common.packet.BulletinHistory;
 import org.martus.common.packet.UniversalId;
 
 abstract public class RetrieveTableModel extends AbstractTableModel
@@ -66,6 +67,11 @@ abstract public class RetrieveTableModel extends AbstractTableModel
 	}
 	
 	abstract protected void populateAllSummariesList() throws ServerErrorException;
+	
+	public MartusApp getApp()
+	{
+		return app;
+	}
 	
 	public int getColumnCount()
 	{
@@ -402,7 +408,38 @@ abstract public class RetrieveTableModel extends AbstractTableModel
 				app.getStore().setIsOnServer(b);
 		}
 	}
+	
+	public Vector getUidsThatWouldBeUpgrades(Vector uidsSelectedForRetrieve)
+	{
+		Vector uidsBeingUpgraded = new Vector();
+		
+		for(int i=0; i < allSummaries.size(); ++i)
+		{
+			BulletinSummary summary = (BulletinSummary)allSummaries.get(i);
+			UniversalId uidBeingRetrieved = summary.getUniversalId();
+			if(!uidsSelectedForRetrieve.contains(uidBeingRetrieved))
+				continue;
+			
+			if(doesBulletinExist(summary))
+				uidsBeingUpgraded.add(uidBeingRetrieved);
+		}
+		
+		return uidsBeingUpgraded;
+	}
 
+	private boolean doesBulletinExist(BulletinSummary summary)
+	{
+		String accountId = summary.getAccountId();
+		BulletinHistory history = summary.getHistory();
+		for(int j = 0; j < history.size(); ++j)
+		{
+			String localId = history.get(j);
+			UniversalId uidBeingChecked = UniversalId.createFromAccountAndLocalId(accountId, localId);
+			if(store.doesBulletinRevisionExist(uidBeingChecked))
+				return true;
+		}
+		return false;
+	}
 
 	public static Object getSizeInKbytes(int sizeKb)
 	{
@@ -486,7 +523,7 @@ abstract public class RetrieveTableModel extends AbstractTableModel
 	UiProgressRetrieveSummariesDlg retrieverDlg;
 	protected Vector currentSummaries;
 	private Vector downloadableSummaries;
-	Vector allSummaries;
+	protected Vector allSummaries;
 	ServerErrorException errorThrown;
 	
 	public int COLUMN_RETRIEVE_FLAG = -1;
