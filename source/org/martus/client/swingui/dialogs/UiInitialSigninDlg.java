@@ -75,17 +75,17 @@ public class UiInitialSigninDlg extends UiSigninDlg
 	{
 		JPanel radioButtonPanel = new JPanel();
 		radioButtonPanel.setLayout(new BoxLayout(radioButtonPanel, BoxLayout.Y_AXIS));
-		radioShare = new JRadioButton(localization.getButtonLabel("RecoverAccountByShare"), true);
-		radioShare.setActionCommand("share");
-		radioBackupFile = new JRadioButton(localization.getButtonLabel("RecoverAccountByBackup"), false);
+		radioBackupFile = new JRadioButton(localization.getButtonLabel("RecoverAccountByBackup"), true);
 		radioBackupFile.setActionCommand("backupFile");
+		radioShare = new JRadioButton(localization.getButtonLabel("RecoverAccountByShare"), false);
+		radioShare.setActionCommand("share");
 		recoveryTypeGroup = new ButtonGroup();
-		recoveryTypeGroup.add(radioShare);
 		recoveryTypeGroup.add(radioBackupFile);
+		recoveryTypeGroup.add(radioShare);
 
 		radioButtonPanel.add(new JLabel(" "));
-		radioButtonPanel.add(radioShare);
 		radioButtonPanel.add(radioBackupFile);
+		radioButtonPanel.add(radioShare);
 		radioButtonPanel.add(Box.createVerticalStrut(5));
 		
 		JPanel recoverAccountPanel = new JPanel();
