@@ -54,7 +54,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.TimerTask;
 import java.util.Vector;
-
 import javax.print.attribute.HashPrintRequestAttributeSet;
 import javax.swing.AbstractAction;
 import javax.swing.ImageIcon;
@@ -65,7 +64,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSplitPane;
 import javax.swing.SwingUtilities;
-
 import org.martus.client.core.BackgroundUploader;
 import org.martus.client.core.BulletinFolder;
 import org.martus.client.core.BulletinHtmlGenerator;
@@ -84,10 +82,10 @@ import org.martus.client.swingui.dialogs.UiConfigServerDlg;
 import org.martus.client.swingui.dialogs.UiConfigureHQs;
 import org.martus.client.swingui.dialogs.UiContactInfoDlg;
 import org.martus.client.swingui.dialogs.UiCreateNewAccountProcess;
-import org.martus.client.swingui.dialogs.UiOnlineHelpDlg;
 import org.martus.client.swingui.dialogs.UiExportBulletinsDlg;
 import org.martus.client.swingui.dialogs.UiInitialSigninDlg;
 import org.martus.client.swingui.dialogs.UiModelessBusyDlg;
+import org.martus.client.swingui.dialogs.UiOnlineHelpDlg;
 import org.martus.client.swingui.dialogs.UiPreferencesDlg;
 import org.martus.client.swingui.dialogs.UiPrintBulletinDlg;
 import org.martus.client.swingui.dialogs.UiProgressRetrieveBulletinsDlg;
@@ -135,7 +133,7 @@ import org.martus.swing.UiLanguageDirection;
 import org.martus.swing.UiNotifyDlg;
 import org.martus.swing.UiOptionPane;
 import org.martus.swing.UiScrollPane;
-import org.martus.swing.UiTextArea;
+import org.martus.swing.UiWrappedTextArea;
 import org.martus.swing.Utilities;
 import org.martus.swing.Utilities.Delay;
 import org.martus.util.FileVerifier;
@@ -224,12 +222,8 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	static public void displayUnofficialTranslationMessage(String rawMessage)
 	{
 		String[] buttons = { "OK" };
-		UiTextArea msg = new UiTextArea(10,100);
-		msg.setLineWrap(true);
-		msg.setWrapStyleWord(true);
 		String newMessage = getWarningMessageAboutUnofficialTranslations(rawMessage);
-		msg.setText(newMessage);
-		msg.setEditable(false);
+		UiWrappedTextArea msg = new UiWrappedTextArea(newMessage);
 		msg.setCaretPosition(0);
 
 		UiScrollPane messagePane = new UiScrollPane(msg, UiScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,UiScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
