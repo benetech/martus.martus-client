@@ -179,6 +179,7 @@ public class EnglishStrings
 "wintitle:notifyPrintAllPrivateData=Print All Private Data",
 "wintitle:notifyAlreadyViewingThisVersion=Bulletin Version Already Being Viewed",
 "wintitle:notifyBulletinVersionNotInSystem=Bulletin Version Not Found",
+"wintitle:notifyHeadquarterLabelDuplicate=Headquarter Label Invalid",
 
 "wintitle:inputservername=Server Name",
 "wintitle:inputserverpubliccode=Server Identification",
@@ -641,6 +642,7 @@ public class EnglishStrings
 "field:notifyErrorRenameFolderExistscause=You already have a folder with that name.",
 "field:notifyAlreadyViewingThisVersioncause=You currently are viewing this version of the bulletin.",
 "field:notifyBulletinVersionNotInSystemcause=The bulletin version you are trying to view is currently not on your system.",
+"field:notifyHeadquarterLabelDuplicatecause=The Headquarters label you entered is already assigned to another Headquarters account.  Please use a different label.",
 
 "field:messageServerNewscause=The current server has sent this message:",
 "field:messageErrorDateInFuturecause=This date occurs in the future:",

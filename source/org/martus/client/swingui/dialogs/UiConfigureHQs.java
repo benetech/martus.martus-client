@@ -391,6 +391,29 @@ public class UiConfigureHQs extends JDialog
 		String label = mainWindow.getStringInput("GetHQLabel", "", publicCode, previousValue);
 		if(label == null)
 			return null;
+		return getUniqueLabel(publicCode, label);
+	}
+
+	private String getUniqueLabel(String publicCode, String label) 
+	{
+		for(int i = 0; i < hQKeys.size(); ++i)
+		{
+			HQKey hqKey = hQKeys.get(i);
+			try 
+			{
+				if(hqKey.getPublicCode().equals(publicCode))
+					continue;
+			} 
+			catch (InvalidBase64Exception e) 
+			{
+			}
+			String hqConfiguredLabel = hqKey.getLabel();
+			if(hqConfiguredLabel.length() >0 && label.equals(hqConfiguredLabel))
+			{
+				mainWindow.notifyDlg("HeadquarterLabelDuplicate");
+				return null;
+			}
+		}
 		return label;
 	}
 	
