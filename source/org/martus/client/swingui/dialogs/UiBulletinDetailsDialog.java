@@ -77,66 +77,17 @@ public class UiBulletinDetailsDialog extends JDialog
 		HQKeys hqKeys = bulletin.getAuthorizedToReadKeys();
 		if(hqKeys.size() > 0)
 		{
-			DefaultTableModel hqModel = new DefaultTableModel();
-			hqModel.addColumn(getLabel("HQLabel"));
-			hqModel.addColumn(getLabel("HQPublicCode"));
-			hqModel.setRowCount(hqKeys.size());
-			
-			for(int i=0; i < hqKeys.size(); ++i)
-			{
-				HQKey key = hqKeys.get(i);
-				String publicCode = key.getPublicKey();
-				try
-				{
-					publicCode = key.getPublicCode();
-				}
-				catch (InvalidBase64Exception e)
-				{
-					e.printStackTrace();
-				}
-				
-				hqModel.setValueAt(mainWindow.getApp().getHQLabelIfPresent(key), i, 0);
-				hqModel.setValueAt(publicCode, i, 1);
-			}
-			UiTable hqTable = new UiTable(hqModel);
-			hqTable.setColumnSelectionAllowed(false);
-			hqTable.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
-			hqTable.setShowGrid(true);
-			hqTable.resizeTable();
-			hqTable.setEnabled(false);
-			UiScrollPane hqScroller = new UiScrollPane(hqTable, getLocalization().getComponentOrientation());
-	
 			String hqText = getLabel("HQInfoFor" + tagQualifier); 
 			JComponent hqInfo = createField(hqText);
-	
+			UiScrollPane hqScroller = createHeadquartersTable(hqKeys);
+
 			panel.add(new JLabel(""), ParagraphLayout.NEW_PARAGRAPH);
 			panel.add(hqInfo);
 			panel.add(new JLabel(getLabel("Headquarters")), ParagraphLayout.NEW_PARAGRAPH);
 			panel.add(hqScroller);
 		}
 		
-		BulletinHistory history = bulletin.getHistory();
-		DefaultTableModel versionModel = new DefaultTableModel(); 
-		versionModel.addColumn(getLabel("VersionNumber"));
-		versionModel.addColumn(getLabel("VersionDate"));
-		versionModel.addColumn(getLabel("VersionId"));
-		versionModel.addColumn(getLabel("VersionTitle"));
-		versionModel.setRowCount(history.size() + 1);
-
-		for(int i=0; i < history.size(); ++i)
-		{
-			String localId = history.get(i);
-			UniversalId uid = UniversalId.createFromAccountAndLocalId(bulletin.getAccount(), localId);
-			populateVersionRow(versionModel, i, uid);
-		}
-		populateVersionRow(versionModel, history.size(), bulletin.getUniversalId());
-		UiTable versionTable = new UiTable(versionModel);
-		versionTable.setColumnSelectionAllowed(false);
-		versionTable.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
-		versionTable.setShowGrid(true);
-		versionTable.resizeTable();
-		versionTable.setEnabled(false);
-		UiScrollPane versionScroller = new UiScrollPane(versionTable, getLocalization().getComponentOrientation());
+		UiScrollPane versionScroller = createHistoryTable();
 
 		panel.add(new JLabel(getLabel("History")), ParagraphLayout.NEW_PARAGRAPH);
 		panel.add(versionScroller);
@@ -155,10 +106,68 @@ public class UiBulletinDetailsDialog extends JDialog
 		Utilities.centerDlg(this);
 		setResizable(true);
 		
-//		JFrame parent = getMainWindow().getCurrentActiveFrame();
-		//getMainWindow().notifyDlg(parent, tagQualifier + "ViewBulletinDetails", map);
 	}
 	
+	private UiScrollPane createHistoryTable()
+	{
+		BulletinHistory history = bulletin.getHistory();
+		DefaultTableModel versionModel = new DefaultTableModel(); 
+		versionModel.addColumn(getLabel("VersionNumber"));
+		versionModel.addColumn(getLabel("VersionId"));
+		versionModel.addColumn(getLabel("VersionDate"));
+		versionModel.addColumn(getLabel("VersionTitle"));
+		versionModel.setRowCount(history.size() + 1);
+
+		for(int i=0; i < history.size(); ++i)
+		{
+			String localId = history.get(i);
+			UniversalId uid = UniversalId.createFromAccountAndLocalId(bulletin.getAccount(), localId);
+			populateVersionRow(versionModel, i, uid);
+		}
+		populateVersionRow(versionModel, history.size(), bulletin.getUniversalId());
+		UiTable versionTable = new UiTable(versionModel);
+		versionTable.setColumnSelectionAllowed(false);
+		versionTable.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+		versionTable.setShowGrid(true);
+		versionTable.resizeTable();
+		versionTable.setEnabled(false);
+		UiScrollPane versionScroller = new UiScrollPane(versionTable, getLocalization().getComponentOrientation());
+		return versionScroller;
+	}
+
+	private UiScrollPane createHeadquartersTable(HQKeys hqKeys)
+	{
+		DefaultTableModel hqModel = new DefaultTableModel();
+		hqModel.addColumn(getLabel("HQLabel"));
+		hqModel.addColumn(getLabel("HQPublicCode"));
+		hqModel.setRowCount(hqKeys.size());
+		
+		for(int i=0; i < hqKeys.size(); ++i)
+		{
+			HQKey key = hqKeys.get(i);
+			String publicCode = key.getPublicKey();
+			try
+			{
+				publicCode = key.getPublicCode();
+			}
+			catch (InvalidBase64Exception e)
+			{
+				e.printStackTrace();
+			}
+			
+			hqModel.setValueAt(mainWindow.getApp().getHQLabelIfPresent(key), i, 0);
+			hqModel.setValueAt(publicCode, i, 1);
+		}
+		UiTable hqTable = new UiTable(hqModel);
+		hqTable.setColumnSelectionAllowed(false);
+		hqTable.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+		hqTable.setShowGrid(true);
+		hqTable.resizeTable();
+		hqTable.setEnabled(false);
+		UiScrollPane hqScroller = new UiScrollPane(hqTable, getLocalization().getComponentOrientation());
+		return hqScroller;
+	}
+
 	private void populateVersionRow(DefaultTableModel versionModel, int i, UniversalId uid)
 	{
 		String date = getLabel("UnknownDate");
@@ -169,10 +178,11 @@ public class UiBulletinDetailsDialog extends JDialog
 			date = b.getLastSavedDateTime();
 			title = b.get(Bulletin.TAGTITLE);
 		}
-		versionModel.setValueAt(new Integer(1+i), i, 0);
-		versionModel.setValueAt(date, i, 1);
-		versionModel.setValueAt(uid.getLocalId(), i, 2);
-		versionModel.setValueAt(title, i, 3);
+		int column = 0;
+		versionModel.setValueAt(new Integer(1+i), i, column++);
+		versionModel.setValueAt(uid.getLocalId(), i, column++);
+		versionModel.setValueAt(date, i, column++);
+		versionModel.setValueAt(title, i, column++);
 	}
 
 	private JComponent createField(String text)

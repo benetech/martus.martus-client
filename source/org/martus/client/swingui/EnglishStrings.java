@@ -697,9 +697,6 @@ public class EnglishStrings
 "field:notifyErrorRenameFoldercause=Folder names cannot contain punctuation.  They also cannot begin with a space.",
 "field:notifyErrorRenameFolderExistscause=You already have a folder with that name.",
 
-"field:BulletinDetailsHQInfoForView=The following Headquarter account(s) can view the private information in this bulletin, and can send this bulletin to a server.",
-"field:BulletinDetailsHQInfoForModify=The following Headquarter account(s) will be able to view the private information in this bulletin, or send this bulletin to a server, after you save it.\n\nTo add or remove an account, use the Tools/Configure Headquarters menu option.",
-
 "field:messageServerNewscause=The current server has sent this message:",
 "field:messageErrorDateInFuturecause=This date occurs in the future:",
 "field:messageErrorDateRangeInvertedcause=This date range has an end date that is earlier than the start date:",
@@ -808,6 +805,22 @@ public class EnglishStrings
 "field:RemoveMartusWillRemoveAllOtherAccounts=Delete all other Martus accounts, including their key, folders, and bulletins.",
 "field:RemoveMartusWillDeleteMartusDirectory=Delete the Martus directory and all of its contents.",
 "field:QuickEraseWillExitMartus=Exit Martus when complete.",
+
+"field:BulletinDetailsAuthorPublicCode=Author Public Code",
+"field:BulletinDetailsBulletinId=Bulletin ID",
+"field:BulletinDetailsHQLabel=Label",
+"field:BulletinDetailsHQPublicCode=Public Code",
+"field:BulletinDetailsHeadquarters=Headquarters",
+"field:BulletinDetailsVersionNumber=#",
+"field:BulletinDetailsVersionDate=Date",
+"field:BulletinDetailsVersionId=ID",
+"field:BulletinDetailsVersionTitle=Title",
+"field:BulletinDetailsHistory=History",
+"field:BulletinDetailsUnknownDate=(unknown)",
+"field:BulletinDetailsUnknownTitle=(unknown)",
+"field:BulletinDetailsHQInfoForView=The following Headquarter account(s) can view the private information in this bulletin, and can send this bulletin to a server.",
+"field:BulletinDetailsHQInfoForModify=The following Headquarter account(s) will be able to view the private information in this bulletin, or send this bulletin to a server, after you save it.\n\nTo add or remove an account, use the Tools/Configure Headquarters menu option.",
+
 
 "folder:%OutBox=Unsent Bulletins",
 "folder:%Sent=Saved Bulletins",
