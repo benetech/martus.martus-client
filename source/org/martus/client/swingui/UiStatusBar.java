@@ -26,9 +26,12 @@ Boston, MA 02111-1307, USA.
 
 package org.martus.client.swingui;
 
+import java.awt.Component;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JPanel;
+import org.martus.swing.UiLanguageDirection;
+import org.martus.swing.Utilities;
 
 public class UiStatusBar extends JPanel
 {
@@ -37,12 +40,11 @@ public class UiStatusBar extends JPanel
 	{
 		super();
 		setLayout( new BoxLayout( this, BoxLayout.X_AXIS) );
+		setComponentOrientation(UiLanguageDirection.getComponentOrientation());
 
 		Box statusBarBox = Box.createHorizontalBox();
 		backgroundProgressMeter = new UiProgressMeter(null, localization);
-		statusBarBox.add(backgroundProgressMeter);
-		statusBarBox.add(Box.createHorizontalGlue());
-		
+		Utilities.addComponentsRespectingOrientation(statusBarBox, new Component[]{backgroundProgressMeter, Box.createHorizontalGlue()});
 		add(statusBarBox);
 	}
 	
