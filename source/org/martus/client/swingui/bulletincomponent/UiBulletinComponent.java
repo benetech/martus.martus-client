@@ -113,7 +113,6 @@ abstract public class UiBulletinComponent extends JPanel implements Scrollable, 
 		headerSection.matchFirstColumnWidth(publicSection);
 		publicSection.matchFirstColumnWidth(privateSection);
 		privateSection.matchFirstColumnWidth(publicSection);
-		headquartersSection.validate();
 	}
 
 	public Bulletin getCurrentBulletin()
