@@ -65,12 +65,13 @@ public class UiSigninDlg extends JDialog
 
 	public void initalize(UiLocalization localizationToUse, CurrentUiState uiStateToUse, JFrame owner, int mode, String username)
 	{
+		currentMode = mode;
 		localization = localizationToUse;
 		uiState = uiStateToUse;
 		usersChoice = CANCEL;
-		setTitle(getTextForTitle(localization, mode));
+		setTitle(getTextForTitle(localization, currentMode));
 		
-		signinPane = new UiSigninPanel(this, mode, username);
+		signinPane = new UiSigninPanel(this, currentMode, username);
 		
 		ok = new JButton(localization.getButtonLabel("ok"));
 		ok.addActionListener(new OkHandler());
@@ -222,6 +223,7 @@ public class UiSigninDlg extends JDialog
 	boolean languageChanged;
 	private JButton ok;
 	UiChoiceEditor languageDropdown;
+	int currentMode;
 	
 	public final static int INITIAL = 1;
 	public final static int TIMED_OUT = 2;

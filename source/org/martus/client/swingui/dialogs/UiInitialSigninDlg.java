@@ -48,7 +48,6 @@ public class UiInitialSigninDlg extends UiSigninDlg
 	public UiInitialSigninDlg(UiLocalization localizationToUse, CurrentUiState uiStateToUse, JFrame owner, int mode)
 	{
 		super(localizationToUse, uiStateToUse, owner, mode);
-		currentMode = mode;
 	}
 
 	JPanel createMainPanel()
@@ -114,7 +113,6 @@ public class UiInitialSigninDlg extends UiSigninDlg
 		dispose();
 	}
 
-	int currentMode;
 	private ButtonGroup recoveryTypeGroup;
 	private JTabbedPane tabbedPane;
 	private JRadioButton radioShare;
