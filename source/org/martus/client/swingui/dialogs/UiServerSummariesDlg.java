@@ -42,6 +42,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
+import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableModel;
@@ -162,13 +163,23 @@ public abstract class UiServerSummariesDlg extends JDialog
 		retrieveAllVersions.setSelected(true);
 
 		JPanel radioPanel = new JPanel();		
-		radioPanel.setLayout(new GridLayout(0, 1));
-		radioPanel.add(downloadableSummaries);
-		radioPanel.add(allSummaries);
+		GridLayout gridLayout = new GridLayout(0, 1);
+		gridLayout.setVgap(3);
+		radioPanel.setLayout(gridLayout);
+		JPanel summaries = new JPanel();
+		summaries.setLayout(gridLayout);
+		summaries.add(downloadableSummaries);
+		summaries.add(allSummaries);
+		summaries.setBorder(new LineBorder(Color.BLACK));
+		radioPanel.add(summaries);
 		if(displayBulletinVersionRadioButtons)
 		{
-			radioPanel.add(retrieveAllVersions);
-			radioPanel.add(retrieveLatestBulletinRevisionOnly);
+			JPanel versions = new JPanel();
+			versions.setLayout(gridLayout);
+			versions.add(retrieveAllVersions);
+			versions.add(retrieveLatestBulletinRevisionOnly);
+			versions.setBorder(new LineBorder(Color.BLACK));
+			radioPanel.add(versions);
 		}
 		
 		return radioPanel;
@@ -181,12 +192,9 @@ public abstract class UiServerSummariesDlg extends JDialog
 
 	public Vector getUniversalIdList()
 	{
-		return model.getUniversalIdList();
-	}
-	
-	public boolean retrieveAllBulletinVersions()
-	{
-		return retrieveAllVersions.isSelected();
+		if(retrieveAllVersions.isSelected())
+			return model.getSelectedUidsFullHistory();
+		return model.getSelectedUidsLatestVersion();
 	}
 	
 	abstract String getNoneSelectedTag();

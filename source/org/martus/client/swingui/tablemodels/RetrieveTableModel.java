@@ -178,10 +178,19 @@ abstract public class RetrieveTableModel extends AbstractTableModel
 		return((BulletinSummary)currentSummaries.get(row)).isDownloadable();
 	}
 
-	public Vector getUniversalIdList()
+	public Vector getSelectedUidsLatestVersion()
+	{
+		return getListOfRequestedUids(false);
+	}
+
+	public Vector getSelectedUidsFullHistory()
+	{
+		return getListOfRequestedUids(true);
+	}
+
+	private Vector getListOfRequestedUids(boolean includeEalierVerions)
 	{
 		Vector uidList = new Vector();
-
 		for(int i = 0; i < currentSummaries.size(); ++i)
 		{
 			BulletinSummary summary = (BulletinSummary)currentSummaries.get(i);
@@ -189,12 +198,20 @@ abstract public class RetrieveTableModel extends AbstractTableModel
 			{
 				UniversalId uid = UniversalId.createFromAccountAndLocalId(summary.getAccountId(), summary.getLocalId());
 				uidList.add(uid);
+				if(includeEalierVerions)
+				{
+					BulletinHistory history = summary.getHistory();
+					for(int h = 0; h < history.size(); ++h)
+					{
+						uid = UniversalId.createFromAccountAndLocalId(summary.getAccountId(), history.get(h));
+						uidList.add(uid);
+					}
+				}
 			}
 		}
 		return uidList;
-
 	}
-
+	
 	public int getRowCount()
 	{
 		return currentSummaries.size();

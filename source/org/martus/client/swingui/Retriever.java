@@ -27,15 +27,12 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.swingui;
 
 import java.util.Vector;
-
 import org.martus.client.core.BulletinFolder;
 import org.martus.client.core.MartusApp;
 import org.martus.client.core.ClientBulletinStore.BulletinOlderException;
 import org.martus.client.swingui.dialogs.UiProgressRetrieveBulletinsDlg;
-import org.martus.common.bulletin.Bulletin;
 import org.martus.common.database.DatabaseKey;
 import org.martus.common.network.NetworkInterfaceConstants;
-import org.martus.common.packet.BulletinHistory;
 import org.martus.common.packet.UniversalId;
 
 public class Retriever
@@ -49,7 +46,7 @@ public class Retriever
 		result = NetworkInterfaceConstants.INCOMPLETE;
 	}
 
-	public void retrieveBulletins(Vector uidList, BulletinFolder retrievedFolder, boolean retrieveAllBulletinVersions)
+	public void retrieveBulletins(Vector uidList, BulletinFolder retrievedFolder)
 	{
 		if(!app.isSSLServerAvailable())
 		{
@@ -57,7 +54,7 @@ public class Retriever
 			return;
 		}
 
-		RetrieveThread worker = new RetrieveThread(uidList, retrievedFolder, retrieveAllBulletinVersions) ;
+		RetrieveThread worker = new RetrieveThread(uidList, retrievedFolder) ;
 		worker.start();
 
 		if(progressDlg == null)
@@ -89,11 +86,10 @@ public class Retriever
 
 	class RetrieveThread extends Thread
 	{
-		public RetrieveThread(Vector list, BulletinFolder folder, boolean getAllEarlierVersions)
+		public RetrieveThread(Vector list, BulletinFolder folder)
 		{
 			uidList = list;
 			retrievedFolder = folder;
-			this.getAllEarlierVersions = getAllEarlierVersions;
 			if(progressDlg != null)
 			{
 				String progressTag = "ChunkProgressStatusMessage";
@@ -123,9 +119,13 @@ public class Retriever
 					DatabaseKey key = DatabaseKey.createLegacyKey(uid);
 					if(app.getStore().doesBulletinRevisionExist(key))
 						continue;
-					app.retrieveOneBulletinToFolder(uid, retrievedFolder, progressMeter);
-					if(getAllEarlierVersions)
-						retrieveAllEarlierVersions(progressMeter, app.getStore().getBulletinRevision(uid));
+					try
+					{
+						app.retrieveOneBulletinToFolder(uid, retrievedFolder, progressMeter);
+					}
+					catch(BulletinOlderException expected)
+					{
+					}
 				}
 				catch(Exception e)
 				{
@@ -145,28 +145,8 @@ public class Retriever
 			finishedRetrieve();
 		}
 
-		private void retrieveAllEarlierVersions(UiProgressMeter progressMeter, Bulletin bulletin) throws Exception
-		{
-			BulletinHistory history = bulletin.getHistory();
-			for(int j = 0; j < history.size(); ++j)
-			{
-				UniversalId uid = UniversalId.createFromAccountAndLocalId(bulletin.getAccount(), history.get(j));
-				DatabaseKey key = DatabaseKey.createLegacyKey(uid);
-				if(app.getStore().doesBulletinRevisionExist(key))
-					continue;
-				try
-				{
-					app.retrieveOneBulletinToFolder(uid, retrievedFolder, progressMeter);
-				}
-				catch(BulletinOlderException expected)
-				{
-				}
-			}
-		}
-
 		private Vector uidList;
 		private BulletinFolder retrievedFolder;
-		private boolean getAllEarlierVersions;
 	}
 
 	String result;
