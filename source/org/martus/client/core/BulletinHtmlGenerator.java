@@ -32,6 +32,8 @@ import java.io.StringReader;
 
 import org.martus.client.swingui.fields.UiFlexiDateViewer;
 import org.martus.common.FieldSpec;
+import org.martus.common.GridData;
+import org.martus.common.GridFieldSpec;
 import org.martus.common.MartusUtilities;
 import org.martus.common.StandardFieldSpecs;
 import org.martus.common.bulletin.AttachmentProxy;
@@ -114,6 +116,48 @@ public class BulletinHtmlGenerator
 				value = insertNewlines(value);
 			else if(spec.getType() == FieldSpec.TYPE_DATERANGE)
 				value = UiFlexiDateViewer.getViewableDateRange(value, localization);
+			else if(spec.getType() == FieldSpec.TYPE_BOOLEAN)
+			{
+				if(value.equals(FieldSpec.TRUESTRING))
+					value = localization.getButtonLabel("yes");
+				else
+					value = localization.getButtonLabel("no");
+			}
+			else if(spec.getType() == FieldSpec.TYPE_GRID)
+			{
+				GridFieldSpec grid = (GridFieldSpec)spec;
+				value = "<table border='1'><tr>";
+				for(int i = 0; i < grid.getColumnCount(); ++i)
+				{
+					value += "<th>";
+					value += grid.getColumnLabel(i);
+					value += "</th>";
+				}
+				value += "</tr>";
+				try
+				{
+					GridData gridData = new GridData();
+					gridData.setFromXml(b.get(tag));
+					for(int r =  0; r<gridData.getRowCount(); ++r)
+					{
+						value += "<tr>";
+						for(int c = 0; c<gridData.getColumnCount(); ++c)
+						{
+							value +="<td>";
+							value += gridData.getValueAt(r, c);
+							value +="</td>";
+						}
+						value += "</tr>";
+					}
+				}
+				catch (Exception e)
+				{
+					e.printStackTrace();
+				}
+				
+				value += "</table>";
+				
+			}
 			
 			if(StandardFieldSpecs.isStandardFieldTag(tag))
 				label = localization.getFieldLabel(tag);
