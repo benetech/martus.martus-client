@@ -31,7 +31,6 @@ import java.awt.ComponentOrientation;
 
 import javax.swing.JComponent;
 import javax.swing.JTable;
-import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
@@ -40,15 +39,17 @@ import javax.swing.table.TableModel;
 
 import org.martus.client.swingui.UiScrollPane;
 import org.martus.common.GridFieldSpec;
+import org.martus.common.clientside.UiSingleTextField;
 import org.martus.swing.UiTable;
 
 
 public class UiGrid extends UiField
 {
 
-	public UiGrid(GridFieldSpec fieldSpec, ComponentOrientation orientation)
+	public UiGrid(GridFieldSpec fieldSpec, ComponentOrientation orientationToUse)
 	{
 		super();
+		orientation = orientationToUse;
 		model = new GridTableModel(fieldSpec);
 		table = new GridTable(model);
 		table.setColumnSelectionAllowed(false);
@@ -56,6 +57,7 @@ public class UiGrid extends UiField
 		table.setShowGrid(true);
 		table.changeSelection(0, 1, false, false);		
 		widget = new UiScrollPane(table, orientation);
+		
 	}	
 	
 	class GridTable extends UiTable
@@ -87,7 +89,7 @@ public class UiGrid extends UiField
 	{
 		public Component getTableCellRendererComponent(JTable tableToUse, Object value, boolean isSelected, boolean hasFocus, int row, int column)
 		{
-			JTextField cell = new JTextField((String)value);
+			UiSingleTextField cell = new UiSingleTextField((String)value, orientation);
 			cell.setBorder(new EmptyBorder(0,0,0,0));
 			if(column == 0)
 			{
@@ -142,4 +144,5 @@ public class UiGrid extends UiField
 	UiScrollPane widget;
 	UiTable table;
 	GridTableModel model;
+	ComponentOrientation orientation;
 }

@@ -26,19 +26,20 @@ Boston, MA 02111-1307, USA.
 
 package org.martus.client.swingui.dialogs;
 
+import java.awt.ComponentOrientation;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
-import javax.swing.JTextField;
 
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.fields.UiDateEditor;
 import org.martus.common.FieldSpec;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.clientside.UiBasicLocalization;
+import org.martus.common.clientside.UiSingleTextField;
 import org.martus.swing.ParagraphLayout;
 import org.martus.swing.UiWrappedTextArea;
 import org.martus.swing.Utilities;
@@ -59,9 +60,10 @@ public class UiSearchDlg extends JDialog  implements ActionListener
 		getContentPane().setLayout(new ParagraphLayout());
 
 		getContentPane().add(new JLabel(""), ParagraphLayout.NEW_PARAGRAPH);
-		getContentPane().add(new UiWrappedTextArea(localization.getFieldLabel("SearchBulletinRules"), localization.getComponentOrientation()));
+		ComponentOrientation orientation = localization.getComponentOrientation();
+		getContentPane().add(new UiWrappedTextArea(localization.getFieldLabel("SearchBulletinRules"), orientation));
 
-		searchField = new JTextField(40);
+		searchField = new UiSingleTextField(40, orientation);
 		searchField.setText(searchString);
 		getContentPane().add(new JLabel(localization.getFieldLabel("SearchEntry")), ParagraphLayout.NEW_PARAGRAPH);
 		getContentPane().add(searchField);
@@ -129,7 +131,7 @@ public class UiSearchDlg extends JDialog  implements ActionListener
 	static String endDate = "";
 
 	JButton search;
-	JTextField searchField;
+	UiSingleTextField searchField;
 	UiDateEditor startDateEditor;
 	UiDateEditor endDateEditor;
 

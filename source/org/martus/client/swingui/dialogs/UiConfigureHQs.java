@@ -41,7 +41,6 @@ import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTable;
-import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
@@ -57,6 +56,7 @@ import org.martus.common.HQKey;
 import org.martus.common.HQKeys;
 import org.martus.common.HQKeys.HQsException;
 import org.martus.common.clientside.UiBasicLocalization;
+import org.martus.common.clientside.UiSingleTextField;
 import org.martus.common.crypto.MartusCrypto;
 import org.martus.swing.UiFileChooser;
 import org.martus.swing.UiTable;
@@ -200,7 +200,7 @@ public class UiConfigureHQs extends JDialog
 	{
 		public Component getTableCellRendererComponent(JTable tableToUse, Object value, boolean isSelected, boolean hasFocus, int row, int column)
 		{
-			JTextField cell = new JTextField((String)value);
+			UiSingleTextField cell = new UiSingleTextField((String)value, localization.getComponentOrientation());
 			cell.setBorder(new EmptyBorder(0,0,0,0));
 
 			if(hasFocus)

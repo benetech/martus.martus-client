@@ -33,8 +33,8 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JTextField;
 import org.martus.common.clientside.UiBasicLocalization;
+import org.martus.common.clientside.UiSingleTextField;
 import org.martus.swing.ParagraphLayout;
 import org.martus.swing.UiWrappedTextArea;
 import org.martus.swing.Utilities;
@@ -48,7 +48,7 @@ public class UiStringInputDlg extends JDialog
 		setTitle(localization.getWindowTitle("input" + baseTag));
 		ComponentOrientation orientation = localization.getComponentOrientation();
 		UiWrappedTextArea label = new UiWrappedTextArea(localization.getFieldLabel("input" + baseTag + "entry"), orientation);
-		text = new JTextField(30);
+		text = new UiSingleTextField(30, localization.getComponentOrientation());
 		text.setText(defaultText);
 
 		JButton ok = new JButton(localization.getButtonLabel("input" + baseTag + "ok"));
@@ -109,7 +109,7 @@ public class UiStringInputDlg extends JDialog
 		return result;
 	}
 
-	JTextField text;
+	UiSingleTextField text;
 	String result = null;
 }
 

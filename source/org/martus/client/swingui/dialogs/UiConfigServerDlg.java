@@ -26,18 +26,19 @@ Boston, MA 02111-1307, USA.
 
 package org.martus.client.swingui.dialogs;
 
+import java.awt.ComponentOrientation;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
-import javax.swing.JTextField;
 
 import org.martus.client.core.ConfigInfo;
 import org.martus.client.core.MartusApp;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.common.clientside.UiBasicLocalization;
+import org.martus.common.clientside.UiSingleTextField;
 import org.martus.common.crypto.MartusCrypto;
 import org.martus.swing.ParagraphLayout;
 import org.martus.swing.Utilities;
@@ -57,9 +58,9 @@ public class UiConfigServerDlg extends JDialog implements ActionListener
 		
 		setTitle(localization.getWindowTitle("ConfigServer"));
 		getContentPane().setLayout(new ParagraphLayout());
-
-		fieldIPAddress = new JTextField(25);
-		fieldPublicCode = new JTextField(25);
+		ComponentOrientation orientation = localization.getComponentOrientation();
+		fieldIPAddress = new UiSingleTextField(25, orientation);
+		fieldPublicCode = new UiSingleTextField(25, orientation);
 
 		getContentPane().add(new JLabel(localization.getFieldLabel("ServerNameEntry")), ParagraphLayout.NEW_PARAGRAPH);
 		getContentPane().add(fieldIPAddress);
@@ -168,8 +169,8 @@ public class UiConfigServerDlg extends JDialog implements ActionListener
 	ConfigInfo info;
 
 	JButton ok;
-	JTextField fieldIPAddress;
-	JTextField fieldPublicCode;
+	UiSingleTextField fieldIPAddress;
+	UiSingleTextField fieldPublicCode;
 
 	String serverIPAddress;
 	String serverPublicKey;

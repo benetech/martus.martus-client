@@ -32,11 +32,11 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
-import javax.swing.JTextField;
 
 import org.martus.client.core.ConfigInfo;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.common.clientside.UiBasicLocalization;
+import org.martus.common.clientside.UiSingleTextField;
 import org.martus.swing.ParagraphLayout;
 import org.martus.swing.Utilities;
 
@@ -51,7 +51,7 @@ public class UiRemoveServerDlg extends JDialog implements ActionListener
 		setTitle(localization.getWindowTitle("RemoveServer"));
 				
 		String serverName = info.getServerName();		
-		JTextField serverField = new JTextField(serverName);
+		UiSingleTextField serverField = new UiSingleTextField(serverName, localization.getComponentOrientation());
 		serverField.setEditable(false);		
 		
 		JLabel msgLabel1 = new JLabel(localization.getFieldLabel("RemoveServerLabel1"));		
@@ -59,7 +59,7 @@ public class UiRemoveServerDlg extends JDialog implements ActionListener
 		
 		String serverIPAddress = info.getServerName();
 								
-		JTextField serversField = new JTextField(serverIPAddress);
+		UiSingleTextField serversField = new UiSingleTextField(serverIPAddress, localization.getComponentOrientation());
 		serversField.setPreferredSize(new Dimension(10,20));
 		serversField.setEditable(false);						
 

@@ -44,7 +44,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTable;
-import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableCellRenderer;
@@ -343,14 +342,13 @@ public class UiServerSummariesDlg extends JDialog
 		}
 	}
 
+	private Box tableBox;
 	UiMainWindow mainWindow;
-	JTextField text;
 	boolean result;
 	RetrieveJTable table;
 	RetrieveTableModel model;
 	TableCellRenderer oldBooleanRenderer;
 	TableCellRenderer oldIntegerRenderer;
 	Color disabledBackgroundColor;
-	Box tableBox;
 	String noneSelectedTag;
 }

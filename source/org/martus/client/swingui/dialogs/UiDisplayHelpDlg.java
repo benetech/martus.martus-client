@@ -44,7 +44,6 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JList;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.event.ListSelectionEvent;
@@ -57,6 +56,7 @@ import javax.swing.text.DefaultHighlighter.DefaultHighlightPainter;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.UiScrollPane;
 import org.martus.common.clientside.UiBasicLocalization;
+import org.martus.common.clientside.UiSingleTextField;
 import org.martus.swing.UiWrappedTextArea;
 import org.martus.swing.Utilities;
 import org.martus.util.UnicodeReader;
@@ -114,7 +114,7 @@ public class UiDisplayHelpDlg extends JDialog
 		close.addKeyListener(new MakeEnterKeyExit());
 		helpPanel.add(msgAreaScrollPane);
 		
-		searchField = new JTextField(20);
+		searchField = new UiSingleTextField(20, localization.getComponentOrientation());
 		searchField.setMaximumSize(searchField.getPreferredSize());
 		searchField.addActionListener(new searchFieldListener());
 		searchButton = new JButton(localization.getButtonLabel("inputsearchok"));
@@ -314,7 +314,7 @@ public class UiDisplayHelpDlg extends JDialog
 	String fileContents;
 	String lowercaseMessage;
 	JButton searchButton;
-	JTextField searchField;
+	UiSingleTextField searchField;
 	JButton close;
 	JList tocList;
 	UiWrappedTextArea msgArea;

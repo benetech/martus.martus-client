@@ -26,19 +26,18 @@ Boston, MA 02111-1307, USA.
 
 package org.martus.client.swingui.dialogs;
 
+import java.awt.ComponentOrientation;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
-
 import org.martus.client.core.ConfigInfo;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.UiScrollPane;
 import org.martus.common.clientside.UiBasicLocalization;
+import org.martus.common.clientside.UiSingleTextField;
 import org.martus.swing.ParagraphLayout;
 import org.martus.swing.UiTextArea;
 import org.martus.swing.UiWrappedTextArea;
@@ -59,16 +58,17 @@ public class UiContactInfoDlg extends JDialog implements ActionListener
 		JButton cancel = new JButton(localization.getButtonLabel("cancel"));
 		cancel.addActionListener(this);
 
-		source = new JTextField(50);
-		organization = new JTextField(50);
-		email = new JTextField(50);
-		webpage = new JTextField(50);
-		phone = new JTextField(50);
-		address = new UiTextArea(5, 50, localization.getComponentOrientation());
+		ComponentOrientation componentOrientation = localization.getComponentOrientation();
+		source = new UiSingleTextField(50,componentOrientation);
+		organization = new UiSingleTextField(50,componentOrientation);
+		email = new UiSingleTextField(50,componentOrientation);
+		webpage = new UiSingleTextField(50,componentOrientation);
+		phone = new UiSingleTextField(50,componentOrientation);
+		address = new UiTextArea(5, 50, componentOrientation);
 		address.setLineWrap(true);
 		address.setWrapStyleWord(true);
 		UiScrollPane addressScrollPane = new UiScrollPane(address, UiScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
-				UiScrollPane.HORIZONTAL_SCROLLBAR_NEVER,localization.getComponentOrientation());
+				UiScrollPane.HORIZONTAL_SCROLLBAR_NEVER,componentOrientation);
 
 		source.setText(info.getAuthor());
 		organization.setText(info.getOrganization());
@@ -83,7 +83,7 @@ public class UiContactInfoDlg extends JDialog implements ActionListener
 		panel.add(space, ParagraphLayout.NEW_PARAGRAPH);
 		panel.add(new JLabel());
 
-		UiWrappedTextArea infoRequired = new UiWrappedTextArea(localization.getFieldLabel("ContactInfoRequiredFields"), 60, localization.getComponentOrientation());
+		UiWrappedTextArea infoRequired = new UiWrappedTextArea(localization.getFieldLabel("ContactInfoRequiredFields"), 60, componentOrientation);
 		infoRequired.setFont(space.getFont());
 		infoRequired.setRows(2);
 		panel.add(infoRequired);
@@ -107,7 +107,7 @@ public class UiContactInfoDlg extends JDialog implements ActionListener
 		panel.add(new JLabel(localization.getFieldLabel("ContactInfoDescriptionOfFields")));
 
 		panel.add(new JLabel(" "), ParagraphLayout.NEW_PARAGRAPH);
-		UiWrappedTextArea infoFuture = new UiWrappedTextArea(localization.getFieldLabel("ContactInfoFutureUseOfFields"), 60, localization.getComponentOrientation());
+		UiWrappedTextArea infoFuture = new UiWrappedTextArea(localization.getFieldLabel("ContactInfoFutureUseOfFields"), 60, componentOrientation);
 		infoFuture.setFont(space.getFont());
 		infoFuture.setRows(3);
 		panel.add(infoFuture);
@@ -152,11 +152,11 @@ public class UiContactInfoDlg extends JDialog implements ActionListener
 	ConfigInfo info;
 	boolean result;
 
-	JTextField source;
-	JTextField organization;
-	JTextField email;
-	JTextField webpage;
-	JTextField phone;
+	UiSingleTextField source;
+	UiSingleTextField organization;
+	UiSingleTextField email;
+	UiSingleTextField webpage;
+	UiSingleTextField phone;
 	UiTextArea address;
 
 	JButton ok;
