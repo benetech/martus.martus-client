@@ -1824,7 +1824,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		checkServerStatus();	
 		getContentPane().add(statusBar, BorderLayout.SOUTH ); 
 
-		Dimension screenSize = Utilities.getViewableScreenSize(this);
+		Dimension screenSize = Utilities.getViewableScreenSize();
 		Dimension appDimension = uiState.getCurrentAppDimension();
 		Point appPosition = uiState.getCurrentAppPosition();
 		boolean showMaximized = false;

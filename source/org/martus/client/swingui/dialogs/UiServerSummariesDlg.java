@@ -103,7 +103,7 @@ public abstract class UiServerSummariesDlg extends JDialog
 
 	private void setScreenSize()
 	{
-		Dimension dim = Utilities.getViewableScreenSize(this);
+		Dimension dim = Utilities.getViewableScreenSize();
 		double width = dim.getWidth()- (dim.getWidth()* 0.25);
 		dim.setSize(width, getSize().getHeight());
 		setSize(dim);

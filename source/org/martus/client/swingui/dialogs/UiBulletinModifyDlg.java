@@ -104,7 +104,7 @@ public class UiBulletinModifyDlg extends JFrame implements ActionListener, Windo
 			setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 			addWindowListener(this);
 
-			Dimension screenSize = Utilities.getViewableScreenSize(this);
+			Dimension screenSize = Utilities.getViewableScreenSize();
 			Dimension editorDimension = observerToUse.getBulletinEditorDimension();
 			Point editorPosition = observerToUse.getBulletinEditorPosition();
 			boolean showMaximized = false;
