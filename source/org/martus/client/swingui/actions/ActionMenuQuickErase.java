@@ -52,7 +52,7 @@ public class ActionMenuQuickErase extends UiMenuAction
 		dlg.show();
 			
 		if (!dlg.isOkayPressed())
-			return;
+			return;			
 			
 		QuickEraseOptions options = loadQuickEraseOptions(dlg); 		
 		checkScrubData(options);
@@ -64,14 +64,13 @@ public class ActionMenuQuickErase extends UiMenuAction
 	private void checkScrubData(QuickEraseOptions options)
 	{	
 		File packetDir = mainWindow.getApp().getPacketsDirectory();
-		if (packetDir == null)
-			return;
-			
-		confirmDeleteSubDirectory(packetDir, options);
+		if (!packetDir.exists())
+			return;			
 								
 		if(mainWindow.getApp().deleteAllBulletinsAndUserFolders(options))
 		{	
-			String baseTag = (options.isScrubSelected())? "QuickEraseScrubWorked":"QuickEraseWorked";		
+			confirmDeleteSubDirectory(packetDir, options);	
+			String baseTag = (options.isScrubSelected())? "QuickEraseScrubWorked":"QuickEraseWorked";						
 			mainWindow.notifyDlg(mainWindow, baseTag);								
 		}
 		else
@@ -82,7 +81,6 @@ public class ActionMenuQuickErase extends UiMenuAction
 	
 	private void confirmDeleteSubDirectory(File packetDir, QuickEraseOptions options)
 	{
-
 		if (!DirectoryTreeRemover.isContainSubDir(packetDir))
 			return;
 		
