@@ -226,6 +226,10 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 			askToRepairMissingAccountMapFile();
 		}
 
+		inactivityDetector = new UiInactivityDetector();
+		timeoutChecker = new java.util.Timer(true);
+		timeoutChecker.schedule(new TimeoutTimerTask(), 0, BACKGROUND_TIMEOUT_CHECK_EVERY_X_MILLIS);
+
 		doAfterSignInConfigInfoSetup(createdNewAccount);
 		setCurrentActiveFrame(this);
 		hiddenFrame.dispose();
@@ -250,13 +254,8 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		show();
 		toFront();
 
-		inactivityDetector = new UiInactivityDetector();
-
 		uploader = new java.util.Timer(true);
 		uploader.schedule(new BackgroundUploadTimerTask(this), 0, BACKGROUND_UPLOAD_CHECK_MILLIS);
-
-		timeoutChecker = new java.util.Timer(true);
-		timeoutChecker.schedule(new TimeoutTimerTask(), 0, BACKGROUND_TIMEOUT_CHECK_EVERY_X_MILLIS);
 
 		errorChecker = new javax.swing.Timer(10*1000, new UploadErrorChecker());
 		errorChecker.start();
