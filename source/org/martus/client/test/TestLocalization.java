@@ -42,9 +42,9 @@ import org.martus.util.StringInputStream;
 import org.martus.util.TestCaseEnhanced;
 import org.martus.util.UnicodeStringWriter;
 
-public class TestMartusLocalization extends TestCaseEnhanced
+public class TestLocalization extends TestCaseEnhanced
 {
-    public TestMartusLocalization(String name)
+    public TestLocalization(String name)
 	{
 		super(name);
 	}
@@ -89,7 +89,7 @@ public class TestMartusLocalization extends TestCaseEnhanced
 	}
 	
 	
-	public void testLanguagess()
+	public void testLanguages()
 	{
 		ChoiceItem[] languages = bd.getUiLanguages();
 		assertTrue("Should have multiple languages", languages.length > 1);

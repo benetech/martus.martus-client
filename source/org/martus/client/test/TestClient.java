@@ -63,7 +63,7 @@ public class TestClient
 		suite.addTest(new TestSuite(TestFolderList.class));
 		suite.addTest(new TestSuite(TestMartusApp_NoServer.class));
 		suite.addTest(new TestSuite(TestMartusFlexidate.class));
-		suite.addTest(new TestSuite(TestMartusLocalization.class));
+		suite.addTest(new TestSuite(TestLocalization.class));
 		suite.addTest(new TestSuite(TestMartusUserNameAndPassword.class));
 		suite.addTest(new TestSuite(TestSearchParser.class));
 		suite.addTest(new TestSuite(TestSearchTreeNode.class));
