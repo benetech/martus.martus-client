@@ -1136,6 +1136,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		if (removeDlg.isYesButtonPressed())
 		{
 			app.setServerInfo("","","");
+			repaint();
 		}			
 	}
 
@@ -1208,6 +1209,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 			new UiNotifyDlg(getCurrentActiveFrame(), title, contents, buttons);
 			if(magicAccepted)
 				requestToUpdateContactInfoOnServerAndSaveInfo();
+			repaint();
 		}
 		finally
 		{

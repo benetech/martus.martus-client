@@ -809,7 +809,7 @@ public class MartusApp
 
 	public boolean isNonSSLServerAvailable(String serverName)
 	{
-		if(serverName.length() == 0)
+		if(!isServerConfigured())
 			return false;
 
 		NetworkInterfaceForNonSSL server = new ClientSideNetworkHandlerUsingXmlRpcForNonSSL(serverName);
@@ -818,10 +818,15 @@ public class MartusApp
 
 	public boolean isSSLServerAvailable()
 	{
-		if(currentNetworkInterfaceHandler == null && getServerName().length() == 0)
+		if(currentNetworkInterfaceHandler == null && !isServerConfigured())
 			return false;
 
 		return isSSLServerAvailable(getCurrentNetworkInterfaceGateway());
+	}
+	
+	public boolean isServerConfigured()
+	{
+		return (getServerName().length() > 0);
 	}
 
 	public ClientSideNetworkGateway buildGateway(String serverName, String serverPublicKey)

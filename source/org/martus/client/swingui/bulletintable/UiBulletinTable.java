@@ -83,11 +83,11 @@ public class UiBulletinTable extends JTable implements ListSelectionListener, Dr
 		setModel(model);
 
 		// set widths for first three columns (status, wassent, and date)
-		UiTable.setColumnWidthToHeaderWidth(this, 0);
-		UiTable.setColumnWidthToHeaderWidth(this, 1);
-		UiTable.setColumnWidthToHeaderWidth(this, 2);
+		UiTable.setColumnWidthToHeaderWidth(this, COLUMN_STATUS);
+		UiTable.setColumnWidthToHeaderWidth(this, COLUMN_SENT);
+		UiTable.setColumnWidthToHeaderWidth(this, COLUMN_EVENTDATE);
 //		setColumnWidthToHeaderWidth(this, 4);
-
+		
 		addMouseListener(new TableMouseAdapter());
 		keyListener = new TableKeyAdapter();
 		addKeyListener(keyListener);
@@ -195,7 +195,15 @@ public class UiBulletinTable extends JTable implements ListSelectionListener, Dr
 		tableChanged(new TableModelEvent(model));
 		selectBulletins(selected);
 	}
+	
 
+	public Object getValueAt(int row, int column)
+	{
+		if(column == COLUMN_SENT && !mainWindow.getApp().isServerConfigured())
+			return "";
+		return super.getValueAt(row, column);
+	}
+	
 	// ListSelectionListener interface
 	public void valueChanged(ListSelectionEvent e)
 	{
@@ -703,6 +711,10 @@ public class UiBulletinTable extends JTable implements ListSelectionListener, Dr
 		if(rowIndex >= 0 && rowIndex < getRowCount())
 			setRowSelectionInterval(rowIndex, rowIndex);
 	}
+	
+	static final int COLUMN_STATUS = 0;
+	static final int COLUMN_SENT = 1;
+	static final int COLUMN_EVENTDATE = 2;
 
 	UiMainWindow mainWindow;
 	BulletinTableModel model;
