@@ -27,6 +27,7 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.swingui.dialogs;
 
 import java.awt.Dimension;
+import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.HashMap;
@@ -80,9 +81,11 @@ public class UiShowScrollableTextDlg extends JDialog implements ActionListener
 			}
 			
 			details = new UiWrappedTextArea(TokenReplacement.replaceTokens(text, tokenReplacement), 85);
+			Rectangle rect = details.getVisibleRect();
 			details.setEditable(false);
 			JScrollPane detailScrollPane = new JScrollPane(details, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
 					JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+			detailScrollPane.setPreferredSize(new Dimension(rect.x, 400));		
 
 			JPanel panel = new JPanel();
 			panel.setBorder(new EmptyBorder(10,10,10,10));
