@@ -35,6 +35,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.math.BigInteger;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.Set;
@@ -314,6 +315,12 @@ public class MartusApp
 	public File getPacketsDirectory()
 	{
 		return new File(getCurrentAccountDirectory(), "packets");
+	}
+	
+	public File getAccountsDirectory()
+	{
+		return new File(getCurrentAccountDirectory(), ACCOUNTS_DIRECTORY_NAME);
+		
 	}
 
 	public String getCurrentAccountDirectoryName()
@@ -1035,9 +1042,46 @@ public class MartusApp
 		createAccountInternal(getMartusDataRootDirectory(), userName, userPassPhrase);
 	}
 
+	public Vector getAllAccountDirectories()
+	{
+		Vector accountDirectories = new Vector();
+		accountDirectories.add(getMartusDataRootDirectory());
+		File accountsDirectoryRoot = getAccountsDirectory();
+		File[] contents = accountsDirectoryRoot.listFiles();
+		if(contents== null)
+			return accountDirectories;
+		for (int i = 0; i < contents.length; i++)
+		{
+			try
+			{
+				File thisFile = contents[i];
+				if(!thisFile.isDirectory())
+					continue;
+				String name = thisFile.getName();
+				if(name.length() != 40)
+					continue;
+				if(name.startsWith("-"))
+					continue;
+				new BigInteger(name, 16);
+				accountDirectories.add(thisFile);
+			}
+			catch (Exception notAValidAccountDirectory)
+			{
+			}
+		}
+		return accountDirectories;
+	}
+	
 	public boolean doesAnyAccountExist()
 	{
-		return getKeyPairFile(getMartusDataRootDirectory()).exists();
+		Vector accountDirectories = getAllAccountDirectories();
+		for (int i = 0; i < accountDirectories.size(); i++)
+		{
+			File thisDirectory = (File)accountDirectories.get(i);
+			if(getKeyPairFile(thisDirectory).exists())
+				return true;
+		}
+		return false;
 	}
 
 	public void exportPublicInfo(File exportFile) throws
@@ -1335,7 +1379,8 @@ public class MartusApp
 	public static final String AUTHENTICATE_SERVER_FAILED = "Failed to Authenticate Server";
 	public static final String SHARE_KEYPAIR_FILENAME_EXTENSION = ".dat";
 	public static final String KEYPAIR_FILENAME = "MartusKeyPair.dat";
-
+	public static final String ACCOUNTS_DIRECTORY_NAME = "accounts";
+	
 	private final int MAXFOLDERS = 50;
 	public int serverChunkSize = NetworkInterfaceConstants.MAX_CHUNK_SIZE;
 }

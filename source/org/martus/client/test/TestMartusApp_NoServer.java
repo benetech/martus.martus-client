@@ -664,7 +664,84 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		TRACE_END();
 	}
 
+	public void testGetAllAccountDirectories() throws Exception
+	{
+		TRACE_BEGIN("testGetAllAccountDirectories");
+		File rootDir = createTempDirectory();
+		MartusApp app = new MartusApp(mockSecurityForApp, rootDir, localization);
+		assertEquals("1 account should exist", 1, app.getAllAccountDirectories().size());
+		assertEquals("not root dir?", rootDir, app.getAllAccountDirectories().get(0));
+		
+		File accountsDir = app.getAccountsDirectory();
+		accountsDir.deleteOnExit();
+		String hexHash = MartusCrypto.getHexDigest("hello");
+		File newAccountDir = new File(accountsDir, hexHash);
+		newAccountDir.deleteOnExit();
+		newAccountDir.mkdirs();
+		
+		String hexHash3 = MartusCrypto.getHexDigest("hello3");
+		File thirdAccountDir = new File(accountsDir, hexHash3);
+		thirdAccountDir.deleteOnExit();
+		thirdAccountDir.mkdirs();
+		
+		File nonAccountDir = new File(accountsDir, "notAhexHash");
+		nonAccountDir.deleteOnExit();
+		nonAccountDir.mkdirs();
 
+		File wrongAccountLengthDir = new File(accountsDir, "A03FF");
+		wrongAccountLengthDir.deleteOnExit();
+		wrongAccountLengthDir.mkdirs();
+		
+		String negativeHash = '-' + hexHash3.substring(1); 
+		File negativeAccountDir = new File(accountsDir, negativeHash);
+		negativeAccountDir.deleteOnExit();
+		negativeAccountDir.mkdirs();
+		
+		File notADirectory = File.createTempFile("justAFile", ".test", accountsDir);
+		
+		assertEquals("3 account should now exist", 3, app.getAllAccountDirectories().size());
+		assertContains("no root dir?", rootDir, app.getAllAccountDirectories());
+		assertContains("no newAccountDir dir?", newAccountDir, app.getAllAccountDirectories());
+		assertContains("no thirdAccountDir dir?", thirdAccountDir, app.getAllAccountDirectories());
+		
+		negativeAccountDir.delete();
+		wrongAccountLengthDir.delete();
+		notADirectory.delete();
+		nonAccountDir.delete();
+		thirdAccountDir.delete();
+		newAccountDir.delete();
+		accountsDir.delete();
+		TRACE_END();
+	}
+	
+	public void testDoesAccountExistForMultipleAccounts() throws Exception
+	{
+		TRACE_BEGIN("testDoesAccountExistForMultipleAccounts");
+		File rootDir = createTempDirectory();
+		MartusApp app = new MartusApp(mockSecurityForApp, rootDir, localization);
+		
+		File accountsDir = app.getAccountsDirectory();
+		accountsDir.deleteOnExit();
+		String hexHash = MartusCrypto.getHexDigest("hello");
+		File newAccountDir = new File(accountsDir, hexHash);
+		newAccountDir.deleteOnExit();
+		newAccountDir.mkdirs();
+		File keyPairFile = new File(newAccountDir,MartusApp.KEYPAIR_FILENAME);
+		keyPairFile.deleteOnExit();
+		
+		assertEquals("account should not exist yet", false, app.doesAnyAccountExist());
+		
+		FileOutputStream out = new FileOutputStream(keyPairFile);
+		out.write(0);
+		out.close();
+		assertEquals("account in a sub folder doesn't exist with a file?", true, app.doesAnyAccountExist());
+		
+		keyPairFile.delete();
+		newAccountDir.delete();
+		accountsDir.delete();
+		TRACE_END();
+	}
+	
 	public void testCreateBulletin() throws Exception
 	{
 		TRACE_BEGIN("testCreateBulletin");
