@@ -204,7 +204,7 @@ public class UiBulletinComponentHeader extends UiBulletinComponentSection
 			{
 				try
 				{
-					return (HQKey)hqList.get(i);
+					return hqList.get(i);
 				}
 				catch (Exception e)
 				{
