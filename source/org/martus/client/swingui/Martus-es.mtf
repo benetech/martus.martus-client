@@ -888,10 +888,10 @@ Also, the translation of the first sentence should
 -6bf3-field:confirmUnAuthoredBulletinDeleteBeforePasteeffect=Oprima Si para reemplazar el boletín existente con la copia nueva. Oprima No para mantener el boletín existente sin reemplazarlo.
 
 #____________________________________________________=Key Restore failed, we suggest you try again with a different backup file. Choose Yes to try again, No to exit Martus.
--ec27-field:confirmUnableToRecoverFromBackupFilecause=Falló la recuperación de su clave. Le sugerimos volver a intentarlo con una copia de seguridad diferente. Oprima Si para intentar nuevamente, oprima No para salir de Martus.
+-ec27-field:confirmUnableToRecoverFromBackupFilecause=Falló la recuperación de su clave. Le sugerimos volver a intentarlo con una copia de seguridad diferente.
 
 #_____________________________________________________=Choosing Yes will begin the restore process again.
--cb49-field:confirmUnableToRecoverFromBackupFileeffect=Oprima Si para reiniciar el proceso de recuperación.
+-cb49-field:confirmUnableToRecoverFromBackupFileeffect=Oprima Si para intentar nuevamente, oprima No para salir de Martus.
 
 #_______________________________________=You have chosen to revert to the standard set of Martus fields.
 -61a6-field:confirmUndoCustomFieldscause=Ha escogido revertir a los campos de boletines originales de Martus.
