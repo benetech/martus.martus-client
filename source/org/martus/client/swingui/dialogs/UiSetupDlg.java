@@ -57,7 +57,7 @@ class UiSetupDlg extends JDialog implements ActionListener
 		JButton cancel = new JButton(localization.getButtonLabel("cancel"));
 		cancel.addActionListener(this);
 
-		UiTextArea description = new UiTextArea(localization.getFieldLabel("setupdescription"));
+		UiTextArea description = new UiTextArea(localization.getFieldLabel("setupdescription"), localization.getComponentOrientation());
 		description.setEditable(false);
 		description.setLineWrap(true);
 		description.setWrapStyleWord(true);
@@ -66,7 +66,7 @@ class UiSetupDlg extends JDialog implements ActionListener
 		email = new JTextField(50);
 		webpage = new JTextField(50);
 		phone = new JTextField(50);
-		address = new UiTextArea(4, 50);
+		address = new UiTextArea(4, 50, localization.getComponentOrientation());
 		address.setLineWrap(true);
 		address.setWrapStyleWord(true);
 

@@ -36,7 +36,7 @@ public class UiNormalTextViewer extends UiNormalTextField
 	public UiNormalTextViewer(UiLocalization localizationToUse)
 	{
 		super(localizationToUse);
-		widget = new UiTextArea(1, UiConstants.textFieldColumns);
+		widget = new UiTextArea(1, UiConstants.textFieldColumns, localization.getComponentOrientation());
 		widget.setEditable(false);
 		widget.setLineWrap(true);
 		widget.setWrapStyleWord(true);

@@ -68,7 +68,7 @@ public class UiMultilineViewer extends UiTextField
 	{
 		PreviewTextArea(int rows, int cols)
 		{
-			super(rows, cols);
+			super(rows, cols, localization.getComponentOrientation());
 			setLineWrap(true);
 			setWrapStyleWord(true);
 			setAutoscrolls(false);

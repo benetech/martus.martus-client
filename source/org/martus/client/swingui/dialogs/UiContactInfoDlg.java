@@ -63,7 +63,7 @@ public class UiContactInfoDlg extends JDialog implements ActionListener
 		email = new JTextField(50);
 		webpage = new JTextField(50);
 		phone = new JTextField(50);
-		address = new UiTextArea(5, 50);
+		address = new UiTextArea(5, 50, localization.getComponentOrientation());
 		address.setLineWrap(true);
 		address.setWrapStyleWord(true);
 		JScrollPane addressScrollPane = new JScrollPane(address, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,

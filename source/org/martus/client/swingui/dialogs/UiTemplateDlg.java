@@ -72,7 +72,7 @@ public class UiTemplateDlg extends JDialog implements ActionListener
 		JButton loadFromFile = new JButton(localization.getButtonLabel("ResetContents"));
 		loadFromFile.addActionListener(new loadFileHandler());
 
-		details = new UiTextArea(15, 65);
+		details = new UiTextArea(15, 65, localization.getComponentOrientation());
 		details.setLineWrap(true);
 		details.setWrapStyleWord(true);
 		JScrollPane detailScrollPane = new JScrollPane(details, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,

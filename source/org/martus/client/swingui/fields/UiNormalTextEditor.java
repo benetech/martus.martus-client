@@ -37,7 +37,7 @@ public class UiNormalTextEditor extends UiNormalTextField
 	public UiNormalTextEditor(UiLocalization localizationToUse)
 	{
 		super(localizationToUse);
-		widget = new UiTextArea(1, UiConstants.textFieldColumns);
+		widget = new UiTextArea(1, UiConstants.textFieldColumns, localization.getComponentOrientation());
 		widget.setLineWrap(true);
 		widget.setWrapStyleWord(true);
 		widget.setFont(new Font("SansSerif", Font.PLAIN, UiConstants.defaultFontSize));

@@ -39,7 +39,7 @@ public class UiMultilineTextEditor extends UiTextField
 	public UiMultilineTextEditor(UiLocalization localizationToUse)
 	{
 		super(localizationToUse);
-		editor = new UiTextArea(5, UiConstants.textFieldColumns);
+		editor = new UiTextArea(5, UiConstants.textFieldColumns, localization.getComponentOrientation());
 		editor.setLineWrap(true);
 		editor.setWrapStyleWord(true);
 		editor.setFont(new Font("SansSerif", Font.PLAIN, UiConstants.defaultFontSize));
