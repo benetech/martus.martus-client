@@ -1387,6 +1387,47 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		TRACE_END();
 	}
 
+	public void testSearchOlderVersions() throws Exception
+	{
+		TRACE_BEGIN("testSearchOlderVersions");
+		ClientBulletinStore store = appWithAccount.getStore();
+		String startDate = "1900-01-01";
+		String endDate = "2099-12-31";
+		String andKeyword = "and";
+		String orKeyword = "or";
+		Bulletin b1 = appWithAccount.createBulletin();
+		String originalString = "baggins";
+		String commonString = "hobbit";
+		
+		b1.set(Bulletin.TAGPRIVATEINFO, originalString);
+		b1.set(Bulletin.TAGKEYWORDS, commonString);
+		b1.setSealed();
+		BulletinFolder newFolder = new BulletinFolder(store, "myFolder");
+		appWithAccount.saveBulletin(b1, newFolder);
+		assertNull(store.findFolder(store.getSearchFolderName()));
+		appWithAccount.search(originalString, startDate, endDate, andKeyword, orKeyword);
+		assertEquals(1, store.findFolder(store.getSearchFolderName()).getBulletinCount());
+		appWithAccount.search(commonString, startDate, endDate, andKeyword, orKeyword);
+		assertEquals(1, store.findFolder(store.getSearchFolderName()).getBulletinCount());
+		appWithAccount.search("abcdefghijklmnop", startDate, endDate, andKeyword, orKeyword);
+		assertEquals(0, store.findFolder(store.getSearchFolderName()).getBulletinCount());
+		String newString = "bilbo";
+		Bulletin b2 = store.createClone(b1, b1.getPublicFieldSpecs(), b1.getPrivateFieldSpecs());
+		b2.set(Bulletin.TAGPRIVATEINFO, newString);
+		b2.setSealed();
+		appWithAccount.saveBulletin(b2, newFolder);
+
+		appWithAccount.search(newString, startDate, endDate, andKeyword, orKeyword);
+		assertEquals(1, store.findFolder(store.getSearchFolderName()).getBulletinCount());
+		appWithAccount.search(originalString, startDate, endDate, andKeyword, orKeyword);
+		assertEquals(1, store.findFolder(store.getSearchFolderName()).getBulletinCount());
+		appWithAccount.search(commonString, startDate, endDate, andKeyword, orKeyword);
+		assertEquals(1, store.findFolder(store.getSearchFolderName()).getBulletinCount());
+		
+		
+		TRACE_END();
+	}
+	
 	public void testFindBulletinInAllFolders() throws Exception
 	{
 		TRACE_BEGIN("testFindBulletinInAllFolders");

@@ -89,6 +89,7 @@ import org.martus.common.network.NetworkInterfaceConstants;
 import org.martus.common.network.NetworkResponse;
 import org.martus.common.network.NonSSLNetworkAPI;
 import org.martus.common.packet.BulletinHeaderPacket;
+import org.martus.common.packet.BulletinHistory;
 import org.martus.common.packet.FieldDataPacket;
 import org.martus.common.packet.Packet;
 import org.martus.common.packet.UniversalId;
@@ -964,24 +965,35 @@ public class MartusApp
 		Vector uids = store.getAllBulletinLeafUids();
 		for(int i = 0; i < uids.size(); ++i)
 		{
-			UniversalId uid = (UniversalId)uids.get(i);
-			Bulletin b = store.getBulletinRevision(uid);
-			if(matcher.doesMatch(b))
-			{	
-				try
-				{
-					store.addBulletinToFolder(searchFolder, b.getUniversalId());
-				}
-				catch (BulletinAlreadyExistsException safeToIgnoreException)
-				{
-				}
-				catch (BulletinOlderException safeToIgnoreException)
-				{
-				}
-				catch (IOException e)
-				{
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+			UniversalId leafBulletinUid = (UniversalId)uids.get(i);
+			BulletinHistory history = store.getBulletinRevision(leafBulletinUid).getHistory();
+			Vector allRevisions = new Vector();
+			allRevisions.add(leafBulletinUid);
+			for(int h=0; h<history.size(); ++h)
+			{
+				allRevisions.add(UniversalId.createFromAccountAndLocalId(leafBulletinUid.getAccountId(), history.get(i)));
+			}
+			
+			for(int j = 0; j < allRevisions.size(); ++j)
+			{
+				Bulletin b = store.getBulletinRevision((UniversalId)allRevisions.get(j));
+				if(b != null && matcher.doesMatch(b))
+				{	
+					try
+					{
+						store.addBulletinToFolder(searchFolder, leafBulletinUid);
+					}
+					catch (BulletinAlreadyExistsException safeToIgnoreException)
+					{
+					}
+					catch (BulletinOlderException safeToIgnoreException)
+					{
+					}
+					catch (IOException e)
+					{
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 				}
 			}
 		}
