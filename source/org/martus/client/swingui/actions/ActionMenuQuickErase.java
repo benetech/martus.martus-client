@@ -57,16 +57,14 @@ public class ActionMenuQuickErase extends UiMenuAction
 			return;			
 						
 		QuickEraseOptions quickEraseOptions = dlg.getQuickEraseOptions();
-		erasePacketData(quickEraseOptions);
+		
 		if (quickEraseOptions.isDeleteKeyPairSelected())
-		{
 			deleteKeyPairAndRelatedFiles(quickEraseOptions);
-		}	
+		
+		erasePacketData(quickEraseOptions);
+
 		if (quickEraseOptions.isExitWhenCompleteSelected())
-		{	
 			exitApp(quickEraseOptions);
-		}
-												
 	}	
 
 	private void erasePacketData(QuickEraseOptions options)
