@@ -63,7 +63,8 @@ public class TransferableBulletinList implements Transferable
 			for(int i = 0 ; i < bulletins.length ; ++i)
 			{
 				Bulletin bulletin = bulletins[i];
-				String summary = MartusUtilities.toFileName(bulletin.get(Bulletin.TAGTITLE));
+				
+				String summary = MartusUtilities.toFileName(bulletin);
 				File file = File.createTempFile(summary, BULLETIN_FILE_EXTENSION);
 				file.deleteOnExit();
 				files.add(file);

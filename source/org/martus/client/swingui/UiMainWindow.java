@@ -1766,7 +1766,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		Vector bulletins = UiExportBulletinsDlg.findBulletins(getStore(), uids);
 		String defaultFileName = localization.getFieldLabel("ExportedBulletins");
 		if(bulletins.size()==1)
-			defaultFileName = UiExportBulletinsDlg.extractTitles(this, bulletins)[0];
+			defaultFileName = MartusUtilities.toFileName((Bulletin)bulletins.get(0),localization.getFieldLabel("UntitledBulletin"));
 		new UiExportBulletinsDlg(this, bulletins, defaultFileName);
 	}
 

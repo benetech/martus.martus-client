@@ -143,7 +143,7 @@ public class UiExportBulletinsDlg extends JDialog implements ActionListener
 		if(defaultFileName != null && defaultFileName.length() > 0)
 			defaultFileName += ".xml";
 		else
-			defaultFileName = " ";
+			defaultFileName = null;
 	
 		UiFileChooser.FileDialogResults results = UiFileChooser.displayFileSaveDialog(UiExportBulletinsDlg.this, windowTitle, defaultFileName);
 		if (results.wasCancelChoosen())
