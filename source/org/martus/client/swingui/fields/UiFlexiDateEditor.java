@@ -35,7 +35,6 @@ import java.util.Date;
 
 import javax.swing.Box;
 import javax.swing.ButtonGroup;
-import javax.swing.JComboBox;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -47,6 +46,7 @@ import org.martus.common.bulletin.Bulletin;
 import org.martus.common.clientside.UiBasicLocalization;
 import org.martus.common.utilities.MartusFlexidate;
 import org.martus.swing.ParagraphLayout;
+import org.martus.swing.UiJComboBox;
 
 public class UiFlexiDateEditor extends UiField
 {
@@ -112,9 +112,9 @@ public class UiFlexiDateEditor extends UiField
 		if (bgDateBox  == null)
 		{	
 			bgDateBox = Box.createHorizontalBox();								
-			bgDayCombo = new JComboBox();	
-			bgMonthCombo = new JComboBox(localization.getMonthLabels());
-			bgYearCombo = new JComboBox();
+			bgDayCombo = new UiJComboBox();	
+			bgMonthCombo = new UiJComboBox(localization.getMonthLabels());
+			bgYearCombo = new UiJComboBox();
 			if(StandardFieldSpecs.isCustomFieldTag(spec.getTag()))					
 				UiDateEditor.buildCustomDate(bgDateBox, localization, bgYearCombo, bgMonthCombo, bgDayCombo);
 			else
@@ -130,9 +130,9 @@ public class UiFlexiDateEditor extends UiField
 		if (endDateBox == null)
 		{
 			endDateBox = Box.createHorizontalBox();		
-			endDayCombo = new JComboBox();	
-			endMonthCombo = new JComboBox(localization.getMonthLabels());
-			endYearCombo = new JComboBox();
+			endDayCombo = new UiJComboBox();	
+			endMonthCombo = new UiJComboBox(localization.getMonthLabels());
+			endYearCombo = new UiJComboBox();
 			needToSetDefaultValue=true;	
 			
 			if(StandardFieldSpecs.isCustomFieldTag(spec.getTag()))					
@@ -290,12 +290,12 @@ public class UiFlexiDateEditor extends UiField
 		
 	JComponent 					component;
 	
-	JComboBox 					bgMonthCombo;
-	JComboBox 					bgDayCombo;
-	JComboBox 					bgYearCombo;	
-	JComboBox 					endMonthCombo;
-	JComboBox 					endDayCombo;
-	JComboBox 					endYearCombo;
+	UiJComboBox 					bgMonthCombo;
+	UiJComboBox 					bgDayCombo;
+	UiJComboBox 					bgYearCombo;	
+	UiJComboBox 					endMonthCombo;
+	UiJComboBox 					endDayCombo;
+	UiJComboBox 					endYearCombo;
 		
 	private UiBasicLocalization localization;	
 	private JRadioButton 		exactDateRB;

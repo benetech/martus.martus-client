@@ -27,18 +27,17 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.swingui.fields;
 
 import java.awt.event.ActionListener;
-
-import javax.swing.JComboBox;
 import javax.swing.JComponent;
-
 import org.martus.common.clientside.ChoiceItem;
+import org.martus.swing.UiJComboBox;
 
 public class UiChoiceEditor extends UiField
 {
+	
 	public UiChoiceEditor(ChoiceItem[] choicesToUse)
 	{
 		choices = choicesToUse;
-		widget = new JComboBox(choices);
+		widget = new UiJComboBox(choices);
 	}
 
 	public JComponent getComponent()
@@ -76,7 +75,7 @@ public class UiChoiceEditor extends UiField
 		widget.setSelectedItem(item);
 	}
 
-	JComboBox widget;
+	UiJComboBox widget;
 	ChoiceItem[] choices;
 }
 

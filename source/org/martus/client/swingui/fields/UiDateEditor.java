@@ -33,7 +33,6 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 
 import javax.swing.Box;
-import javax.swing.JComboBox;
 import javax.swing.JComponent;
 import javax.swing.JPanel;
 
@@ -42,6 +41,7 @@ import org.martus.common.StandardFieldSpecs;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.clientside.DateUtilities;
 import org.martus.common.clientside.UiBasicLocalization;
+import org.martus.swing.UiJComboBox;
 
 public class UiDateEditor extends UiField
 {
@@ -49,9 +49,9 @@ public class UiDateEditor extends UiField
 	{				
 		component = new JPanel();
 		Box box = Box.createHorizontalBox();
-		dayCombo = new JComboBox();
-		monthCombo = new JComboBox(localizationToUse.getMonthLabels());
-		yearCombo = new JComboBox();
+		dayCombo = new UiJComboBox();
+		monthCombo = new UiJComboBox(localizationToUse.getMonthLabels());
+		yearCombo = new UiJComboBox();
 		
 		buildCustomDate(box, localizationToUse, yearCombo, monthCombo, dayCombo);
 		spec = specToUse;
@@ -60,7 +60,7 @@ public class UiDateEditor extends UiField
 	}
 	
 	public static void buildCustomDate(Box box, UiBasicLocalization localizationToUse,
-			JComboBox yCombo, JComboBox mCombo, JComboBox dCombo)
+			UiJComboBox yCombo, UiJComboBox mCombo, UiJComboBox dCombo)
 	{							
 		buildDay(dCombo);
 		buildCustomYear(yCombo);
@@ -68,14 +68,14 @@ public class UiDateEditor extends UiField
 	}
 	
 	public static void buildDate(Box box, UiBasicLocalization localizationToUse,
-			JComboBox yCombo, JComboBox mCombo, JComboBox dCombo)
+			UiJComboBox yCombo, UiJComboBox mCombo, UiJComboBox dCombo)
 	{							
 		buildDay(dCombo);
 		buildYear(yCombo);
 		buildMonth(box,localizationToUse, yCombo, mCombo,dCombo);
 	}
 		
-	private static void buildCustomYear(JComboBox yCombo)	
+	private static void buildCustomYear(UiJComboBox yCombo)	
 	{
 		Calendar cal = new GregorianCalendar();
 		int thisYear = cal.get(Calendar.YEAR);			
@@ -86,7 +86,7 @@ public class UiDateEditor extends UiField
 		yCombo.setSelectedItem(new Integer(thisYear).toString());	
 	}		
 	
-	private static void buildYear(JComboBox yCombo)	
+	private static void buildYear(UiJComboBox yCombo)	
 	{
 		Calendar cal = new GregorianCalendar();
 		int thisYear = cal.get(Calendar.YEAR);			
@@ -95,13 +95,13 @@ public class UiDateEditor extends UiField
 			yCombo.addItem(new Integer(year).toString());			
 	}		
 	
-	private static void buildDay(JComboBox dCombo)
+	private static void buildDay(UiJComboBox dCombo)
 	{
 		for(int day=1; day <= 31; ++day)
 			dCombo.addItem(new Integer(day).toString());	
 	}
 	
-	private static void buildMonth(Box box, UiBasicLocalization localizationToUse,JComboBox yCombo, JComboBox mCombo, JComboBox dCombo)
+	private static void buildMonth(Box box, UiBasicLocalization localizationToUse,UiJComboBox yCombo, UiJComboBox mCombo, UiJComboBox dCombo)
 	{
 		String mdyOrder = DateUtilities.getMdyOrder(localizationToUse.getCurrentDateFormatCode());
 		for(int i = 0; i < mdyOrder.length(); ++i)
@@ -158,7 +158,7 @@ public class UiDateEditor extends UiField
 		return df.format(date);
 	}
 
-	public static Date getDate(JComboBox yCombo, JComboBox mCombo, JComboBox dCombo) 
+	public static Date getDate(UiJComboBox yCombo, UiJComboBox mCombo, UiJComboBox dCombo) 
 	{
 		Calendar cal = new GregorianCalendar();
 		cal.set(yCombo.getSelectedIndex()+1900,
@@ -173,7 +173,7 @@ public class UiDateEditor extends UiField
 		setDate(newText, yearCombo, monthCombo, dayCombo);			
 	}
 	
-	public static void setDate(String dateText, JComboBox yCombo, JComboBox mCombo, JComboBox dCombo)
+	public static void setDate(String dateText, UiJComboBox yCombo, UiJComboBox mCombo, UiJComboBox dCombo)
 	{
 		DateFormat df = Bulletin.getStoredDateFormat();
 		Date d = null;
@@ -195,9 +195,9 @@ public class UiDateEditor extends UiField
 	}	
 
 	JComponent component;
-	JComboBox monthCombo;
-	JComboBox dayCombo;
-	JComboBox yearCombo;	
+	UiJComboBox monthCombo;
+	UiJComboBox dayCombo;
+	UiJComboBox yearCombo;	
 	static FieldSpec spec;
 	boolean isCustomField;
 }
