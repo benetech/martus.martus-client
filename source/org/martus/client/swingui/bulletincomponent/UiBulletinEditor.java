@@ -63,7 +63,10 @@ public class UiBulletinEditor extends UiBulletinComponent
 		
 		Bulletin tempBulletin = new Bulletin(mainWindow.getApp().getSecurity());					
 		copyDataToBulletin(tempBulletin);
-			
+		
+		if(tempBulletin.isAllPrivate() != currentBulletin.isAllPrivate())
+			return true;
+		
 		if(publicStuff.isAnyFieldModified(currentBulletin, tempBulletin))
 			return true;
 			
