@@ -1108,8 +1108,10 @@ public class MartusApp
 			throw new ServerErrorException("totalSize didn't match data length");
 
 		store.importZipFileBulletin(tempFile, retrievedFolder, true);
-
 		tempFile.delete();
+		
+		Bulletin b = store.findBulletinByUniversalId(uid);
+		store.setIsOnServer(b);
 	}
 
 	public String deleteServerDraftBulletins(Vector uidList) throws
