@@ -41,9 +41,9 @@ public class UiLocalization extends UiBasicLocalization
 	{
 		String filename = null;
 		Vector internalLanguages = new Vector();
-		for(int i = 0; i < AVAILABLE_MTF_LANGUAGE_RESOURCES.length; ++i)
+		for(int i = 0; i < ALL_LANGUAGE_CODES.length; ++i)
 		{
-			String languageCode = AVAILABLE_MTF_LANGUAGE_RESOURCES[i];
+			String languageCode = ALL_LANGUAGE_CODES[i];
 			filename = getMtfFilename(languageCode);
 			if(getClass().getResource(filename) != null)
 			{
