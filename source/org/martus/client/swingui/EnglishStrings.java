@@ -771,6 +771,7 @@ public class EnglishStrings
 "field:DateExact=Exact Date",
 "field:DateRange=Date Range",
 "field:UnknownDateSave=Unknown",
+"field:AttachmentSizeUnknown=Unknown",
 
 "field:WasSentYes=Yes",
 "field:WasSentNo=No",

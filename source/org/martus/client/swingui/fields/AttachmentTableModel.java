@@ -30,6 +30,7 @@ import java.util.Vector;
 import javax.swing.JTable;
 import javax.swing.table.AbstractTableModel;
 
+import org.martus.client.swingui.UiLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.common.bulletin.AttachmentProxy;
 import org.martus.common.database.Database;
@@ -77,9 +78,9 @@ class AttachmentTableModel extends AbstractTableModel
 	public String getColumnName(int column)
 	{
 		if(column == 0)
-			return mainWindow.getLocalization().getButtonLabel("attachmentLabel");
+			return getLocalization().getButtonLabel("attachmentLabel");
 		else
-			return mainWindow.getLocalization().getButtonLabel("attachmentSize");
+			return getLocalization().getButtonLabel("attachmentSize");
 	}
 
 	public AttachmentProxy getAttachmentProxyAt(int row)
@@ -132,6 +133,8 @@ class AttachmentTableModel extends AbstractTableModel
 			DatabaseKey key = DatabaseKey.createDraftKey(id);
 			if(!database.doesRecordExist(key))
 				key = DatabaseKey.createSealedKey(id);
+			if(!database.doesRecordExist(key))
+				return getLocalization().getFieldLabel("AttachmentSizeUnknown");
 			size = database.getRecordSize(key);
 		}
 		catch (Exception e)
@@ -145,7 +148,7 @@ class AttachmentTableModel extends AbstractTableModel
 		
 	}
 
-	private Object getSizeInKb(int sizeBytes)
+	private String getSizeInKb(int sizeBytes)
 	{
 		int sizeInKb = sizeBytes / 1024;
 		if (sizeInKb == 0)
@@ -162,6 +165,11 @@ class AttachmentTableModel extends AbstractTableModel
 		return false;
 	}
 	
+	private UiLocalization getLocalization()
+	{
+		return mainWindow.getLocalization();
+	}
+
 	Vector attachmentList;
 	UiMainWindow mainWindow;
 	JTable attachmentTable;
