@@ -138,7 +138,13 @@ public class UiBulletinDetailsDialog extends JDialog
 			}
 			String localId = (String)versionTable.getValueAt(selectedRow, 1);
 			UniversalId uid = UniversalId.createFromAccountAndLocalId(bulletin.getAccount(), localId);
-			new UiBulletinVersionPreviewDlg(mainWindow, mainWindow.getStore().getBulletinRevision(uid));
+			Bulletin previousBulletinVersion = mainWindow.getStore().getBulletinRevision(uid);
+			if(previousBulletinVersion == null)
+			{
+				mainWindow.notifyDlg(mainWindow, "BulletinVersionNotInSystem");
+				return;
+			}
+			new UiBulletinVersionPreviewDlg(mainWindow, previousBulletinVersion);
 		}
 		
 	}

@@ -176,6 +176,7 @@ public class EnglishStrings
 "wintitle:notifyErrorRenameFolderExists=Unable to Rename Folder",
 "wintitle:notifyPrintAllPrivateData=Print All Private Data",
 "wintitle:notifyAlreadyViewingThisVersion=Bulletin Version Already Being Viewed",
+"wintitle:notifyBulletinVersionNotInSystem=Bulletin Version Not Found",
 
 "wintitle:inputservername=Server Name",
 "wintitle:inputserverpubliccode=Server Identification",
@@ -307,7 +308,7 @@ public class EnglishStrings
 "button:ConfigureHQsRemove=Remove",
 "button:ConfigureHQsReLabel=Change Label",
 "button:BulletinDetails=Bulletin Details...",
-"button:ViewPreviousBulletinVersion=View Previous Version...",
+"button:ViewPreviousBulletinVersion=View Selected Version...",
 
 "menu:file=File",
 "menu:CreateNewBulletin=Create New Bulletin",
@@ -709,6 +710,7 @@ public class EnglishStrings
 "field:notifyErrorRenameFoldercause=Folder names cannot contain punctuation.  They also cannot begin with a space.",
 "field:notifyErrorRenameFolderExistscause=You already have a folder with that name.",
 "field:notifyAlreadyViewingThisVersioncause=You currently are viewing this verison of the bulletin.",
+"field:notifyBulletinVersionNotInSystemcause=The bulletin version you are trying to view is currently not on your system.",
 
 "field:messageServerNewscause=The current server has sent this message:",
 "field:messageErrorDateInFuturecause=This date occurs in the future:",
