@@ -820,6 +820,8 @@ public class EnglishStrings
 "field:BulletinDetailsHistory=History",
 "field:BulletinDetailsUnknownDate=(unknown)",
 "field:BulletinDetailsUnknownTitle=(unknown)",
+"field:BulletinDetailsInProgressDate=(in progress)",
+"field:BulletinDetailsInProgressTitle=(in progress)",
 "field:BulletinDetailsHQInfoForView=The following Headquarter account(s) can view the private information in this bulletin, and can send this bulletin to a server.",
 "field:BulletinDetailsHQInfoForModify=The following Headquarter account(s) will be able to view the private information in this bulletin, or send this bulletin to a server, after you save it.\n\nTo add or remove an account, use the Tools/Configure Headquarters menu option.",
 

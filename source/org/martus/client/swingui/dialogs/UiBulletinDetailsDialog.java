@@ -162,19 +162,35 @@ public class UiBulletinDetailsDialog extends JDialog
 
 	private void populateVersionRow(DefaultTableModel versionModel, int i, UniversalId uid)
 	{
-		String date = getLabel("UnknownDate");
-		String title = getLabel("UnknownTitle");
-		Bulletin b = mainWindow.getStore().getBulletinRevision(uid);
-		if(b != null)
-		{
-			date = b.getLastSavedDateTime();
-			title = b.get(Bulletin.TAGTITLE);
-		}
 		int column = 0;
 		versionModel.setValueAt(new Integer(1+i), i, column++);
 		versionModel.setValueAt(uid.getLocalId(), i, column++);
-		versionModel.setValueAt(date, i, column++);
-		versionModel.setValueAt(title, i, column++);
+		versionModel.setValueAt(getSavedDateToDisplay(uid), i, column++);
+		versionModel.setValueAt(getTitleToDisplay(uid), i, column++);
+	}
+	
+	private String getSavedDateToDisplay(UniversalId uid)
+	{
+		Bulletin b = mainWindow.getStore().getBulletinRevision(uid);
+		if(b != null)
+			return b.getLastSavedDateTime();
+		
+		if(uid.equals(bulletin.getUniversalId()))
+			return getLabel("InProgressDate");
+		
+		return getLabel("UnknownDate");
+	}
+
+	private String getTitleToDisplay(UniversalId uid)
+	{
+		Bulletin b = mainWindow.getStore().getBulletinRevision(uid);
+		if(b != null)
+			return b.get(Bulletin.TAGTITLE);
+		
+		if(uid.equals(bulletin.getUniversalId()))
+			return getLabel("InProgressTitle");
+		
+		return getLabel("UnknownTitle");
 	}
 
 	private JComponent createField(String text)
