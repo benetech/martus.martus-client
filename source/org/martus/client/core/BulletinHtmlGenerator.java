@@ -97,6 +97,9 @@ public class BulletinHtmlGenerator
 		html.append(localization.getFieldLabel("BulletinId")+" ");
 		html.append(b.getLocalId());
 		html.append("<tr></tr>");		
+		html.append(localization.getFieldLabel("BulletinStatus")+" ");	
+		html.append(b.getStatus());
+		html.append("<tr></tr>");	
 		html.append(localization.getFieldLabel("BulletinLastSaved")+" ");			
 		html.append(b.getLastSavedDateTime());
 		html.append("</table>");
