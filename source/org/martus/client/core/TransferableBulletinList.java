@@ -36,7 +36,6 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Vector;
 
-import org.martus.common.MartusUtilities;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.bulletin.BulletinZipUtilities;
 import org.martus.common.crypto.MartusCrypto;
@@ -64,7 +63,7 @@ public class TransferableBulletinList implements Transferable
 			{
 				Bulletin bulletin = bulletins[i];
 				
-				String summary = MartusUtilities.toFileName(bulletin);
+				String summary = bulletin.toFileName();
 				File file = File.createTempFile(summary, BULLETIN_FILE_EXTENSION);
 				file.deleteOnExit();
 				files.add(file);
