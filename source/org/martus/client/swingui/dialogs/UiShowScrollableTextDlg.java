@@ -26,6 +26,7 @@ Boston, MA 02111-1307, USA.
 
 package org.martus.client.swingui.dialogs;
 
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
@@ -110,12 +111,11 @@ public class UiShowScrollableTextDlg extends JDialog implements ActionListener
 			Dimension preferredSize = details.getPreferredSize();
 			preferredSize.height = ok.getPreferredSize().height;
 			buttons.setPreferredSize(preferredSize);
-			buttons.add(ok);
 			if(cancelButtonTag.length() != 0)
-			{
-				buttons.add(Box.createHorizontalGlue());
-				buttons.add(cancel);
-			}
+				Utilities.addComponentsRespectingOrientation(buttons, new Component[]{ok,Box.createHorizontalGlue(),cancel});
+			else
+				buttons.add(ok);
+
 			panel.add(buttons);
 			getContentPane().add(panel);
 			getRootPane().setDefaultButton(ok);
