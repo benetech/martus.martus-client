@@ -150,10 +150,10 @@ public class MartusApp
 			languageCode = in.readLine();
 			in.close();
 			
-			if(localization.isRecognizedLanguage(languageCode))
+			if(Localization.isRecognizedLanguage(languageCode))
 			{
 				localization.setCurrentLanguageCode(languageCode);
-				localization.setCurrentDateFormatCode(localization.getDefaultDateFormatForLanguage(languageCode));
+				localization.setCurrentDateFormatCode(Localization.getDefaultDateFormatForLanguage(languageCode));
 			}
 		}
 		catch (Exception e)

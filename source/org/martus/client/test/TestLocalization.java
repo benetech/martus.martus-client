@@ -58,10 +58,10 @@ public class TestLocalization extends TestCaseEnhanced
 	
 	public void testDefaultDateFormats()
 	{
-		assertEquals("English should always return the default date format", DateUtilities.getDefaultDateFormatCode(), bd.getDefaultDateFormatForLanguage(UiBasicLocalization.ENGLISH));
-		assertEquals("Spanish should always return Slash DMY", DateUtilities.DMY_SLASH.getCode(), bd.getDefaultDateFormatForLanguage(UiBasicLocalization.SPANISH));
-		assertEquals("Russian should always return Dot DMY", DateUtilities.DMY_DOT.getCode(), bd.getDefaultDateFormatForLanguage(UiBasicLocalization.RUSSIAN));
-		assertEquals("An unknown Language should always return the default date format", DateUtilities.getDefaultDateFormatCode(), bd.getDefaultDateFormatForLanguage("ZZ"));
+		assertEquals("English should always return the default date format", DateUtilities.getDefaultDateFormatCode(), Localization.getDefaultDateFormatForLanguage(UiBasicLocalization.ENGLISH));
+		assertEquals("Spanish should always return Slash DMY", DateUtilities.DMY_SLASH.getCode(), Localization.getDefaultDateFormatForLanguage(UiBasicLocalization.SPANISH));
+		assertEquals("Russian should always return Dot DMY", DateUtilities.DMY_DOT.getCode(), Localization.getDefaultDateFormatForLanguage(UiBasicLocalization.RUSSIAN));
+		assertEquals("An unknown Language should always return the default date format", DateUtilities.getDefaultDateFormatCode(), Localization.getDefaultDateFormatForLanguage("ZZ"));
 	}
 	
 	public void testIsLanguageFile()
@@ -74,11 +74,11 @@ public class TestLocalization extends TestCaseEnhanced
 	
 	public void testValidLanguageCodes()
 	{
-		assertFalse("null should not be recognized", bd.isRecognizedLanguage(null));
-		assertTrue("English should be recognized", bd.isRecognizedLanguage(UiBasicLocalization.ENGLISH));
-		assertTrue("Spanish should be recognized", bd.isRecognizedLanguage(UiBasicLocalization.SPANISH));
-		assertTrue("Russian should be recognized", bd.isRecognizedLanguage(UiBasicLocalization.RUSSIAN));
-		assertFalse("Unknown should not be recognized", bd.isRecognizedLanguage("XX"));
+		assertFalse("null should not be recognized", Localization.isRecognizedLanguage(null));
+		assertTrue("English should be recognized", Localization.isRecognizedLanguage(UiBasicLocalization.ENGLISH));
+		assertTrue("Spanish should be recognized", Localization.isRecognizedLanguage(UiBasicLocalization.SPANISH));
+		assertTrue("Russian should be recognized", Localization.isRecognizedLanguage(UiBasicLocalization.RUSSIAN));
+		assertFalse("Unknown should not be recognized", Localization.isRecognizedLanguage("XX"));
 	}
 
 	public void testToFileNameForeignChars()
@@ -114,10 +114,10 @@ public class TestLocalization extends TestCaseEnhanced
 
 	public void testLanguageCodeFromFilename()
 	{
-		assertEquals("", bd.getLanguageCodeFromFilename("Martus.mtf"));
-		assertEquals("", bd.getLanguageCodeFromFilename("Martus-es.xyz"));
-		assertEquals("es", bd.getLanguageCodeFromFilename("Martus-es.mtf"));
-		assertEquals("Martus mtf files are not case Sensitive", "es", bd.getLanguageCodeFromFilename("martus-es.mtf"));
+		assertEquals("", Localization.getLanguageCodeFromFilename("Martus.mtf"));
+		assertEquals("", Localization.getLanguageCodeFromFilename("Martus-es.xyz"));
+		assertEquals("es", Localization.getLanguageCodeFromFilename("Martus-es.mtf"));
+		assertEquals("Martus mtf files are not case Sensitive", "es", Localization.getLanguageCodeFromFilename("martus-es.mtf"));
 	}
 
 	public void testTranslations()
