@@ -61,6 +61,7 @@ public class ExportTranslationFile
 	
 		System.out.println("Exporting translations for: " + languageCode);
 		UiLocalization bd = new UiLocalization(MartusApp.getTranslationsDirectory(), EnglishStrings.strings);
+		bd.includeOfficialLanguagesOnly = false;
 		bd.loadTranslationFile(languageCode);
 		File outputFile = new File(args[1]);
 	
