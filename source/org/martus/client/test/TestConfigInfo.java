@@ -33,6 +33,7 @@ import java.io.IOException;
 import java.util.Vector;
 
 import org.martus.common.ConfigInfo;
+import org.martus.common.ContactInfo;
 import org.martus.common.FieldSpec;
 import org.martus.common.crypto.MartusSecurity;
 import org.martus.common.network.NetworkInterfaceConstants;
@@ -159,8 +160,8 @@ public class TestConfigInfo extends TestCaseEnhanced
 		assertEquals("encoded Address not correct?", sampleAddress,  new String(Base64.decode((String)contactInfo.get(8))));
 		assertEquals("encoded phone not correct?", samplePhone,  new String(Base64.decode((String)contactInfo.get(7))));
 		
-		Vector decodedContactInfo = ConfigInfo.decodeContactInfoVectorIfNecessary(contactInfo);
-		Vector alreadyDecodedContactInfo = ConfigInfo.decodeContactInfoVectorIfNecessary(decodedContactInfo);
+		Vector decodedContactInfo = ContactInfo.decodeContactInfoVectorIfNecessary(contactInfo);
+		Vector alreadyDecodedContactInfo = ContactInfo.decodeContactInfoVectorIfNecessary(decodedContactInfo);
 		assertEquals("Backward compatibility test, a decoded vector should be equal", decodedContactInfo, alreadyDecodedContactInfo);
 		
 		assertNotEquals("Still encoded?", NetworkInterfaceConstants.BASE_64_ENCODED, decodedContactInfo.get(0));
