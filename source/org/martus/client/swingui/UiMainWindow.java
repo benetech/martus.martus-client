@@ -203,20 +203,20 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	{
 		URL untranslatedURL = UiMainWindow.class.getResource("UnofficialTranslationMessage.txt");
 		
-		String message = "Unofficial Martus Translation";
 		try
 		{
 			InputStream in = untranslatedURL.openStream();
 			UnicodeReader reader = new UnicodeReader(in);
-			message = reader.readAll();
+			String message = reader.readAll();
 			reader.close();
+			displayUnofficialTranslationMessage(message);
 		}
 		catch(Exception e)
 		{
 			e.printStackTrace();
+			throw new RuntimeException();
 		}
 		
-		displayUnofficialTranslationMessage(message);
 	}
 	
 	static public void displayUnofficialTranslationMessage(String rawMessage)
