@@ -709,6 +709,7 @@ public class EnglishStrings
 "field:inputImportPublicCodeentry=Enter the Public Identification Code for this account:",
 "field:inputExportMyPublicKeyentry=",
 "field:inputGetShareFileNameentry=Enter the name of the file you wish to export.",
+"field:inputCustomFieldsInfo=Enter the XML representation for the layout of new and modified bulletins.",
 "field:inputGetHQLabelentry=Enter the label you wish to associate with this Headquarters.",
 
 "field:warningDeleteSingleBulletin=You have chosen to permanently delete a bulletin from the Discarded Bulletins folder. Even if this bulletin was recently cut or copied, you will not be able to paste it. If this bulletin has already been sent to a server, it will remain on the server. This action will only delete it from this computer.",
