@@ -1159,7 +1159,7 @@ public class BulletinStore
 	private static final String OBSOLETE_CACHE_FILE_NAME = "sfcache.dat";
 	private MartusCrypto signer;
 	private File dir;
-	private Database database;
+	Database database;
 	private Vector folders;
 	private BulletinFolder folderSaved;
 	private BulletinFolder folderDrafts;
