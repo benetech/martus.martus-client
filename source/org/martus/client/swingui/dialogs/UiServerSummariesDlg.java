@@ -56,6 +56,7 @@ import org.martus.swing.UiScrollPane;
 import org.martus.swing.UiTable;
 import org.martus.swing.UiWrappedTextArea;
 import org.martus.swing.Utilities;
+import org.martus.util.language.LanguageDirection;
 
 public abstract class UiServerSummariesDlg extends JDialog
 {
@@ -128,19 +129,23 @@ public abstract class UiServerSummariesDlg extends JDialog
 		checkAll.addActionListener(new CheckAllHandler());
 		JButton unCheckAll = new JButton(localization.getButtonLabel("uncheckall"));
 		unCheckAll.addActionListener(new UnCheckAllHandler());
-		
-		JPanel southPanel = new JPanel();
-		southPanel.setLayout(new ParagraphLayout());		
-		southPanel.add(new JLabel(""), ParagraphLayout.NEW_PARAGRAPH);
-		southPanel.add(createSummariesPanel(localization));
-		southPanel.add(new JLabel(""), ParagraphLayout.NEW_PARAGRAPH);
-		southPanel.add(checkAll);
-		southPanel.add(unCheckAll);
-		southPanel.add(preview);
-		southPanel.add(new JLabel(""), ParagraphLayout.NEW_PARAGRAPH);
-		southPanel.add(ok);
-		southPanel.add(cancel);
 
+  		JPanel panel = new JPanel();
+		panel.setLayout(new ParagraphLayout());
+		panel.add(new JLabel(""), ParagraphLayout.NEW_PARAGRAPH);
+		panel.add(createSummariesPanel(localization));
+		panel.add(new JLabel(""), ParagraphLayout.NEW_PARAGRAPH);
+		Utilities.addComponentsRespectingOrientation(panel, new Component[]{checkAll, unCheckAll, preview});
+		panel.add(new JLabel(""), ParagraphLayout.NEW_PARAGRAPH);
+		Utilities.addComponentsRespectingOrientation(panel, new Component[]{ok, cancel});
+
+ 		JPanel southPanel = new JPanel();
+		southPanel.setLayout(new BorderLayout());
+		if(LanguageDirection.isRightToLeftLanguage())
+			southPanel.add(panel, BorderLayout.EAST);
+		else
+			southPanel.add(panel, BorderLayout.WEST);
+		
 		getRootPane().setDefaultButton(ok);
 		return southPanel;
 	}
@@ -162,7 +167,7 @@ public abstract class UiServerSummariesDlg extends JDialog
 		bulletinVersionsGroup.add(retrieveLatestBulletinRevisionOnly);
 		retrieveAllVersions.setSelected(true);
 
-		JPanel radioPanel = new JPanel();		
+		JPanel radioPanel = new JPanel();	
 		GridLayout gridLayout = new GridLayout(0, 1);
 		gridLayout.setVgap(3);
 		radioPanel.setLayout(gridLayout);
