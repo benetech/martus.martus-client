@@ -144,7 +144,7 @@ public class UiOnlineHelpDlg extends JDialog
 		StringBuffer message = new StringBuffer();
 		if(fileStream == null)
 		{
-			System.out.println("UiDisplayFileDlg: null stream");
+			System.out.println("UiOnlineHelpDlg: getFileContents null stream");
 			return null;
 		}
 		try
@@ -162,7 +162,7 @@ public class UiOnlineHelpDlg extends JDialog
 		}
 		catch(IOException e)
 		{
-			System.out.println("UiDisplayFileDlg: " + e);
+			System.out.println("UiOnlineHelpDlg: " + e);
 			return null;
 		}
 		return new String(message);
@@ -173,7 +173,7 @@ public class UiOnlineHelpDlg extends JDialog
 		Vector message = new Vector();
 		if(fileStream == null)
 		{
-			System.out.println("UiDisplayFileDlg: null stream");
+			System.out.println("UiOnlineHelpDlg: getFileVectorContents null stream");
 			return null;
 		}
 		try
@@ -191,12 +191,12 @@ public class UiOnlineHelpDlg extends JDialog
 		}
 		catch(IOException e)
 		{
-			System.out.println("UiDisplayFileDlg: " + e);
+			System.out.println("UiOnlineHelpDlg: " + e);
 			return null;
 		}
 		catch(BOMNotFoundException e)
 		{
-			System.out.println("UiDisplayFileDlg: " + e);
+			System.out.println("UiOnlineHelpDlg: " + e);
 			return null;
 		}
 		return message;
