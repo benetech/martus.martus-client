@@ -48,6 +48,7 @@ public class UiMultilineTextEditor extends UiTextField
 
 		widget = new JScrollPane(editor, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
 										JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+		widget.getVerticalScrollBar().setFocusable(false);
 		supportContextMenu();
 	}
 
