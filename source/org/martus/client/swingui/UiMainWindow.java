@@ -303,7 +303,8 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		try
 		{
 			File lockFile = new File(app.getMartusDataRootDirectory(), "lock");
-			lockToPreventTwoInstances = new FileOutputStream(lockFile).getChannel().tryLock();
+			lockStream = new FileOutputStream(lockFile);
+			lockToPreventTwoInstances = lockStream.getChannel().tryLock();
 		}
 		catch (Exception e)
 		{
@@ -314,6 +315,20 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		{
 			notifyDlg("AlreadyRunning");
 			System.exit(1);
+		}
+	}
+	
+	public void unLock()
+	{
+		try
+		{
+			lockToPreventTwoInstances.release();
+			lockStream.close();
+		}
+		catch (IOException e1)
+		{
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
 		}
 	}
 
@@ -1974,7 +1989,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	private JFrame currentActiveFrame;
 	boolean inConfigServer;
 	private FileLock lockToPreventTwoInstances; 
-
+	private FileOutputStream lockStream;
 	int timeoutInXSeconds;
 	private static final int TIMEOUT_SECONDS = (10 * 60);
 	private static final int TESTING_TIMEOUT_60_SECONDS = 60;

@@ -94,12 +94,15 @@ public class ActionMenuQuickErase extends UiMenuAction
 		mainWindow.getApp().cleanupWhenCompleteQuickErase(options);
 		if(options.isUninstallMartusSelected())
 		{
+			File martusDataRootDirectory = mainWindow.getApp().getMartusDataRootDirectory();
+			mainWindow.unLock();
 			if(Utilities.isMSWindows())
 			{
-				File uninstallFile = new File(mainWindow.getApp().getMartusDataRootDirectory(),"uninstall.bat");
+				DirectoryUtils.deleteAllFilesOnlyInDirectory(martusDataRootDirectory);				
+				File uninstallFile = new File(martusDataRootDirectory,"bin/Martus Uninstall Silent.bat");
 				try
 				{
-					Runtime.getRuntime().exec(uninstallFile.getAbsolutePath());
+					Runtime.getRuntime().exec("\""+uninstallFile.getAbsolutePath()+"\"");
 				}
 				catch (IOException e)
 				{
@@ -109,7 +112,7 @@ public class ActionMenuQuickErase extends UiMenuAction
 			}
 			else
 			{
-				DirectoryUtils.deleteEntireDirectoryTree(mainWindow.getApp().getMartusDataRootDirectory());
+				DirectoryUtils.deleteEntireDirectoryTree(martusDataRootDirectory);
 			}
 		}
 		mainWindow.exitWithoutSavingState();		
