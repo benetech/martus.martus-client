@@ -40,7 +40,7 @@ import org.martus.common.database.Database;
 import org.martus.common.database.MockClientDatabase;
 import org.martus.common.database.FileDatabase.MissingAccountMapException;
 import org.martus.common.database.FileDatabase.MissingAccountMapSignatureException;
-import org.martus.common.test.Utf8ConstantsForTests;
+import org.martus.common.test.UnicodeConstants;
 import org.martus.util.DirectoryUtils;
 
 public class MockMartusApp extends MartusApp
@@ -134,19 +134,19 @@ public class MockMartusApp extends MartusApp
 		{
 			Bulletin b = createBulletin();
 			b.set("language",	"es");
-			b.set("author",		"Comisi"+Utf8ConstantsForTests.ACCENT_O_LOWER+"n para el Esclarecimiento Hist"+Utf8ConstantsForTests.ACCENT_O_LOWER+"rico");
+			b.set("author",		"Comisi"+UnicodeConstants.ACCENT_O_LOWER+"n para el Esclarecimiento Hist"+UnicodeConstants.ACCENT_O_LOWER+"rico");
 			b.set("title",		"Santa Rosa Xeputul Bombardeo");
 			b.set("location",	"Santa Rosa Xeputul, Guatemala");
 			b.set("eventdate",	"1999-01-19");
 			b.set("entrydate",	"1999-02-17");
-			b.set("keywords",	"ejecuci"+Utf8ConstantsForTests.ACCENT_O_LOWER+"n arbitraria, bombardeo");
-			b.set("summary",	"El d"+Utf8ConstantsForTests.ACCENT_I_LOWER+"a 19 de diciembre de 1989, un avi"+Utf8ConstantsForTests.ACCENT_O_LOWER+"n Cessna A-37B, " +
-								"de la Fuerza A"+Utf8ConstantsForTests.ACCENT_E_LOWER+"rea Guatemalteca sobrevol"+Utf8ConstantsForTests.ACCENT_O_LOWER+" la comunidad " +
+			b.set("keywords",	"ejecuci"+UnicodeConstants.ACCENT_O_LOWER+"n arbitraria, bombardeo");
+			b.set("summary",	"El d"+UnicodeConstants.ACCENT_I_LOWER+"a 19 de diciembre de 1989, un avi"+UnicodeConstants.ACCENT_O_LOWER+"n Cessna A-37B, " +
+								"de la Fuerza A"+UnicodeConstants.ACCENT_E_LOWER+"rea Guatemalteca sobrevol"+UnicodeConstants.ACCENT_O_LOWER+" la comunidad " +
 								"Santa Rosa Xeputul de la CPR de la Sierra... a las 11 de " +
-								"la mañana la unidad a"+Utf8ConstantsForTests.ACCENT_E_LOWER+"rea lanz"+Utf8ConstantsForTests.ACCENT_O_LOWER+" una bomba de 550 libras " +
+								"la mañana la unidad a"+UnicodeConstants.ACCENT_E_LOWER+"rea lanz"+UnicodeConstants.ACCENT_O_LOWER+" una bomba de 550 libras " +
 								"... murieron cuatro civiles, mujeres.  Otros dos " +
-								"fallecieron ese mismo d"+Utf8ConstantsForTests.ACCENT_I_LOWER+"a en Chax"+Utf8ConstantsForTests.ACCENT_A_LOWER+", aldea cercana a Santa " +
-								"Rosa, a causa de otra bomba arrojada por el avi"+Utf8ConstantsForTests.ACCENT_O_LOWER+"n.");
+								"fallecieron ese mismo d"+UnicodeConstants.ACCENT_I_LOWER+"a en Chax"+UnicodeConstants.ACCENT_A_LOWER+", aldea cercana a Santa " +
+								"Rosa, a causa de otra bomba arrojada por el avi"+UnicodeConstants.ACCENT_O_LOWER+"n.");
 			b.set("publicinfo",	"");
 			b.set("privateinfo",	"");
 			b.setSealed();

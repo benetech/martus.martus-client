@@ -32,7 +32,7 @@ import org.martus.client.search.SearchTreeNode;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.crypto.MartusCrypto;
 import org.martus.common.crypto.MockMartusSecurity;
-import org.martus.common.test.Utf8ConstantsForTests;
+import org.martus.common.test.UnicodeConstants;
 import org.martus.util.*;
 
 
@@ -50,7 +50,7 @@ public class TestBulletinSearcher extends TestCaseEnhanced
 		Bulletin b = new Bulletin(security);
 		b.set("author", "hello");
 		b.set("summary", "summary");
-		b.set("title", "Jos"+Utf8ConstantsForTests.ACCENT_E_LOWER+"e");
+		b.set("title", "Jos"+UnicodeConstants.ACCENT_E_LOWER+"e");
 		b.set(Bulletin.TAGEVENTDATE, "2002-04-04");
 		b.set(Bulletin.TAGENTRYDATE, "2002-10-15");
 
@@ -72,10 +72,10 @@ public class TestBulletinSearcher extends TestCaseEnhanced
 
 		BulletinSearcher allCaps = new BulletinSearcher(new SearchTreeNode("HELLO"), beginDate, endDate);
 		assertEquals("HELLO", true, allCaps.doesMatch(b));
-		BulletinSearcher utf8 = new BulletinSearcher(new SearchTreeNode("jos"+Utf8ConstantsForTests.ACCENT_E_LOWER+"e"), beginDate, endDate);
-		assertEquals("jos"+Utf8ConstantsForTests.ACCENT_E_LOWER+"e", true, utf8.doesMatch(b));
-		BulletinSearcher utf8MixedCase = new BulletinSearcher(new SearchTreeNode("jos"+Utf8ConstantsForTests.ACCENT_E_UPPER+"e"), beginDate, endDate);
-		assertEquals("jos"+Utf8ConstantsForTests.ACCENT_E_UPPER+"e", true, utf8MixedCase.doesMatch(b));
+		BulletinSearcher utf8 = new BulletinSearcher(new SearchTreeNode("jos"+UnicodeConstants.ACCENT_E_LOWER+"e"), beginDate, endDate);
+		assertEquals("jos"+UnicodeConstants.ACCENT_E_LOWER+"e", true, utf8.doesMatch(b));
+		BulletinSearcher utf8MixedCase = new BulletinSearcher(new SearchTreeNode("jos"+UnicodeConstants.ACCENT_E_UPPER+"e"), beginDate, endDate);
+		assertEquals("jos"+UnicodeConstants.ACCENT_E_UPPER+"e", true, utf8MixedCase.doesMatch(b));
 		BulletinSearcher nonUtf8 = new BulletinSearcher(new SearchTreeNode("josee"), beginDate, endDate);
 		assertEquals("josee", false, nonUtf8.doesMatch(b));
 
