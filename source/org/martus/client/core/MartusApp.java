@@ -861,7 +861,7 @@ public class MartusApp
 		ServerNotAvailableException,
 		PublicInformationInvalidException
 	{
-		return NonSSLNetworkAPI.getServerPublicKey(server, getSecurity());
+		return server.getServerPublicKey(getSecurity());
 	}
 
 	public boolean requestServerUploadRights(String magicWord)
@@ -984,7 +984,7 @@ public class MartusApp
 		MartusCrypto security = getSecurity();
 		String myAccountId = getAccountId();
 
-		return ClientSideNetworkGateway.downloadFieldOfficeAccountIds(networkInterfaceGateway, security, myAccountId);
+		return networkInterfaceGateway.downloadFieldOfficeAccountIds(security, myAccountId);
 	}
 
 	public FieldDataPacket retrieveFieldDataPacketFromServer(String authorAccountId, String bulletinLocalId, String dataPacketLocalId) throws Exception
