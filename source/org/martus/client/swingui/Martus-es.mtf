@@ -45,10 +45,10 @@
 -e9a2-button:AllSummaries=Mostrar todos los boletines en este servidor y en este ordenador.
 
 #___________________________=Add...
--2cce-button:ConfigureHQsAdd=<Add...>
+-2cce-button:ConfigureHQsAdd=Agregar...
 
 #______________________________=Remove
--e963-button:ConfigureHQsRemove=<Remove>
+-e963-button:ConfigureHQsRemove=Remover
 
 #____________________=Continue
 -2e02-button:Continue=Continuar
@@ -117,7 +117,7 @@
 -fab2-button:checkall=Seleccionar todos
 
 #_________________=Close
--bbfa-button:close=<Close>
+-bbfa-button:close=Cerrar
 
 #_________________________=Connect
 -b654-button:connectserver=Conectar
@@ -126,10 +126,10 @@
 -6e15-button:create=Crear
 
 #_________________________=Restore Defaults
--8e80-button:customDefault=<Restore Defaults>
+-8e80-button:customDefault=Revertir a valored predeterminados
 
 #______________________=Help
--c47a-button:customHelp=<Help>
+-c47a-button:customHelp=Ayuda
 
 #________________=Help
 -c47a-button:help=Ayuda
@@ -219,10 +219,10 @@
 -4a0b-field:AuthorRequired=Autor (requerido)
 
 #___________________________________=Your private key is a part of your key pair, and is required to read your private bulletin information or to create new bulletins.  To ensure that you’ll always have access to your data, it is extremely important to keep a backup of your key pair.\n\nMartus offers two methods for backing up your key pair, either of which may be used, but we strongly recommend using both backup methods.  The first method creates a single, password encrypted key pair back up file onto removable media (e.g. floppy disk, cd, USB storage) or a network drive; the second, 'secret share', method backs up the key pair in #M# separate pieces (not encrypted with your password) onto multiple floppy disks (or other removable media).\n
--b25f-field:BackupKeyPairGeneralInfo=<Su clave privada es parte de el par de claves (la privada y la pública) y es un elemento requerido para poder leer la información privada de sus boletines y para crear nuevos boletines. Es importante tener copias de reserva para poder estar seguro que siempre va a tener acceso a su información.\n\nMartus le ofrece dos métodos para crear copias de reserva, puede escoger el que más le convenga pero le recomendamos que use los dos métodos para mayor seguridad. El primer método es para crear una copia cifrada y protegida con su contraseña de su archivo de claves a un medio removible (como una unidad USB, un disco CD-ROM o un disquete) y el segundo método es el que denominamos la 'copia de seguridad compartida'. Las copias de seguridad compartidas son creadas de su archivo de claves seccionado en partes y cifradas pero no están protegidas con su contraseña. Estas partes son guardadas individualmente a medios removibles múltiples.>
+-b25f-field:BackupKeyPairGeneralInfo=Su clave privada es parte de el par de claves (la privada y la pública) y es un elemento requerido para poder leer la información privada de sus boletines y para crear nuevos boletines. Es importante tener copias de reserva para poder estar seguro que siempre va a tener acceso a su información.\n\nMartus le ofrece dos métodos para crear copias de reserva, puede escoger el que más le convenga pero le recomendamos que use los dos métodos para mayor seguridad. El primer método crea una copia cifrada y protegida con su contraseña de su archivo de claves a un medio removible (como una unidad USB, un disco CD-ROM o un disquete) y el segundo método es el que denominamos la 'copia de seguridad compartida'. Las copias de seguridad compartidas son creadas de su archivo de claves seccionado en partes y cifradas pero no están protegidas con su contraseña. Estas partes son guardadas individualmente a medios removibles múltiples.
 
 #________________________________________________=This method breaks up your keypair into #M# 'secret share' pieces, any #N# of which will be required to reconstruct the keypair without requiring a password.  If you forget your login name or your password, this method is the only way you can recover your keypair.\n\nOnce the #M# files have been written to removable media disks, you should distribute them to #M# different people whom you will remember, but each of whom don’t know who you have given the other secret share files to.  Do not store any of the disks together.\n\nTo restore this keypair, first retrieve any #N# of the original #M# floppies, and then select 'Restore Account' and 'Recover account from multiple disks' when signing into Martus.\n
--d68b-field:BackupKeyPairToSecretShareInformation=<Este método secciona su archivo de claves en #M# partes, y con juntar #N# de estas partes puede reconstruir su archivo de claves sin necesidad de una contraseña. Si se le olvida su nombre de usuario de Martus o su contraseña, este es el único método bajo el cual podría recuperar su archivo de claves.\n\nUna vez haya guardado las #M# piezas a medios removibles, distribuya estos a #M# diferentes personas a las cuales usted. conozca y pueda recordar pero los cuales no sepan a quienes otras personas les a dado las demás piezas. Nunca guarde esos medios removibles juntos, siempre sepárelos para su seguridad.\n\nPara recuperar su archivo de claves, junte #N# de las #M# copias originales y elija 'Recuperar cuenta' y luego 'Recuperar cuenta de copias de seguridad compartidas' al iniciar Martus.>
+-d68b-field:BackupKeyPairToSecretShareInformation=Este método secciona su archivo de claves en #M# partes, y con juntar #N# de estas partes puede reconstruir su archivo de claves sin necesidad de su contraseña. Si se le olvida su nombre de usuario de Martus o su contraseña, este es el único método bajo el cual podría recuperar su archivo de claves.\n\nUna vez haya guardado las #M# piezas a medios removibles, distribuya estos a #M# diferentes personas a las cuales usted. conozca y pueda recordar pero los cuales no sepan a quienes otras personas les a dado las demás piezas. Nunca guarde esos medios removibles juntos, siempre sepárelos para su seguridad.\n\nPara recuperar su archivo de claves, junte #N# de las #M# copias originales y elija 'Recuperar cuenta' y luego 'Recuperar cuenta de copias de seguridad compartidas' al iniciar Martus.
 
 #____________________________________________________=Please insert disk #
 -b877-field:BackupRecoverKeyPairInsertNextDiskMessage=Por favor inserte el disco #
@@ -234,10 +234,10 @@
 -eba1-field:BulletinHasUnknownStuff=Advertencia: Partes de este boletín no son visibles
 
 #_____________________=Bulletin Id:
--a081-field:BulletinId=<Bulletin Id:>
+-a081-field:BulletinId=Identificación de boletín:
 
 #____________________________=Last Saved 
--36d1-field:BulletinLastSaved=<Last Saved >
+-36d1-field:BulletinLastSaved=Modidicado en 
 
 #___________________________=Field Office Bulletin
 -5425-field:BulletinNotYours=Boletín de oficina regional
@@ -246,16 +246,16 @@
 -fa2e-field:BulletinSize=Tamaño (Kb)
 
 #__________________________=Sent
--35f4-field:BulletinWasSent=<Sent>
+-35f4-field:BulletinWasSent=Enviado
 
 #_____________________________________=Download Progress
 -8b0e-field:ChunkProgressStatusMessage=Bajando...
 
 #____________________________________________=Public Code
--a1a2-field:ConfigureHQColumnHeaderPublicCode=<Public Code>
+-a1a2-field:ConfigureHQColumnHeaderPublicCode=Código público
 
 #_________________________________=Current HQ's
--c6ea-field:ConfigureHQsCurrentHQs=<Current HQ's>
+-c6ea-field:ConfigureHQsCurrentHQs=Oficina central activa
 
 #_________________________________________=All other fields currently are stored on disk but are not used.
 -78f3-field:ContactInfoDescriptionOfFields=Los campos no requeridos son guardados en su unidad de disco duro pero no son usados en los boletines.
@@ -270,13 +270,13 @@
 -e924-field:ContactInfoUpdateLater=Puede cambiar su información en cualquier momento usando el menú Opciones/Información de contacto.
 
 #__________________________________=The layout of the bulletins is dictated by an XML document.  At the start of the document you must have <CustomFields> and at the end of the document you must have its cooresponding end tag namely </CustomFields>.  There are four required elements and these are 'author', 'entrydate', 'language' and 'title'.  For example for 'author' you will have\n<Field><Tag>author</Tag><Label></Label><Type>STRING</Type></Field>\n\nFor a new custom field you will need a unique identification tag.
--ea45-field:CreateCustomFieldsHelp1=<The layout of the bulletins is dictated by an XML document.  At the start of the document you must have <CustomFields> and at the end of the document you must have its cooresponding end tag namely </CustomFields>.  There are four required elements and these are 'author', 'entrydate', 'language' and 'title'.  For example for 'author' you will have\n<Field><Tag>author</Tag><Label></Label><Type>STRING</Type></Field>\n\nFor a new custom field you will need a unique identification tag.>
+-ea45-field:CreateCustomFieldsHelp1=La presentación de un documento está dictado por un documento en XML. AL inicio de su documento necesita la etiqueta <CustomFields> y al final del documento necesita la etiqueta corespondiente, </CustomFields>. Hay cuatro nombres de identificación que son requeridos en la presentación de un boletín, estas son 'author', 'entrydate', 'language' y 'title'. Por ejemplo para 'author' va a escribirlo \n<Field><Tag>author</Tag><Label></Label><Type>STRING</Type></Field>\n\nPara un campo personalizado va a necesitar un nombre único de identificación.
 
 #__________________________________=This tag can be any word except those already used by the system (eg. 'author', 'sumary', 'location', 'title' etc.).  A good choice might be 'custom1', 'custom2', etc.  This unique tag is surounded by <Tag> </Tag>.  Then you need a Label which is was is displayed next to your custom field.  An example might be 'Witness's Name'.  This label is surrounded by <Label>'your label goes here'</Label>\n\nThen you select the type of field you want.  The possible choices are 'BOOLEAN', 'DATE', 'DATERANGE', 'GRID', 'LANGUAGE', 'MULTILINE', and 'STRING'.  This type is surrounded by <Type>'type of field goes here'</Type>\n\nEach field is encased in matching <Field> </Field> tags.
--9580-field:CreateCustomFieldsHelp2=<This tag can be any word except those already used by the system (eg. 'author', 'sumary', 'location', 'title' etc.).  A good choice might be 'custom1', 'custom2', etc.  This unique tag is surounded by <Tag> </Tag>.  Then you need a Label which is was is displayed next to your custom field.  An example might be 'Witness's Name'.  This label is surrounded by <Label>'your label goes here'</Label>\n\nThen you select the type of field you want.  The possible choices are 'BOOLEAN', 'DATE', 'DATERANGE', 'GRID', 'LANGUAGE', 'MULTILINE', and 'STRING'.  This type is surrounded by <Type>'type of field goes here'</Type>\n\nEach field is encased in matching <Field> </Field> tags.>
+-9580-field:CreateCustomFieldsHelp2=El nombre de identificación de un campo puede ser cualquier palabra a excepción de aquellas en uso por Martus ('author', 'sumary', 'location', 'title' etc.). Por ejemplo puede usar los nombres 'personalizado1', 'personalizado2', etc. Este nombre de identificación único esta dentro de las etiquetas <Tag></Tag>. Necesita además un título para su campo personalizado. Por ejemplo podria ser 'Nombre de testigo'. Este título esta dentro de la etiqueta <Label> de esta manera: <Label>Nombre de testigo</Label>\n\nLuego necesita indicar que tipo de campo quiere que sea. Los tipos de campo disponibles son 'BOOLEAN' (Verdadero/Falso), 'DATE' (Fecha), 'DATERANGE' (Rango de fechas), 'GRID' (Mapa), 'LANGUAGE' (Idioma), 'MULTILINE' (Múltiples lineas), and 'STRING' (Palabra). El tipo va dentro de la etiqueta <Type> de esta manera <Type>LANGUAGE</Type>\n\nTodas estas etiquetas que definen un campo personalizado van dentro de otro par de etiquetas <Field></Field>.
 
 #__________________________________=Here are some examples:\n\n<Field type='STRING'>\n<Tag>custom1</Tag>\n<Label>Witness Name</Label>\n</Field>\n\n<Field type='LANGUAGE'>\n<Tag>new2</Tag>\n<Label>Witness Speaks</Label>\n</Field>\n\n<Field type='BOOLEAN'>\n<Tag>new3</Tag>\n<Label>Were guns used?</Label>\n</Field>\n\n<Field type='GRID'>\n<Tag>customgrid</Tag>\n<Label>Important Information</Label>\n<GridSpecDetails>\n<Column><Label>Hair Color</Label></Column>\n<Column><Label>Eye Color</Label></Column>\n<Column><Label>Weight</Label></Column>\n</GridSpecDetails>\n</Field>\n
--cbd4-field:CreateCustomFieldsHelp3=<Here are some examples:\n\n<Field type='STRING'>\n<Tag>custom1</Tag>\n<Label>Witness Name</Label>\n</Field>\n\n<Field type='LANGUAGE'>\n<Tag>new2</Tag>\n<Label>Witness Speaks</Label>\n</Field>\n\n<Field type='BOOLEAN'>\n<Tag>new3</Tag>\n<Label>Were guns used?</Label>\n</Field>\n\n<Field type='GRID'>\n<Tag>customgrid</Tag>\n<Label>Important Information</Label>\n<GridSpecDetails>\n<Column><Label>Hair Color</Label></Column>\n<Column><Label>Eye Color</Label></Column>\n<Column><Label>Weight</Label></Column>\n</GridSpecDetails>\n</Field>\n>
+-cbd4-field:CreateCustomFieldsHelp3=Aqui puede ver unos ejemplos:\n\n<Field type='STRING'>\n<Tag>personalizada1</Tag>\n<Label>Nombre de testigo</Label>\n</Field>\n\n<Field type='LANGUAGE'>\n<Tag>nuevo2</Tag>\n<Label>Testimonio de testigo</Label>\n</Field>\n\n<Field type='BOOLEAN'>\n<Tag>nuevo3</Tag>\n<Label>¿Se usaron armas?</Label>\n</Field>\n\n<Field type='GRID'>\n<Tag>mapapersonalizado</Tag>\n<Label>Información importante</Label>\n<GridSpecDetails>\n<Column><Label>Color de cabello</Label></Column>\n<Column><Label>Color de ojos</Label></Column>\n<Column><Label>Peso</Label></Column>\n</GridSpecDetails>\n</Field>\n
 
 #____________________________________=Please enter your new username and password.
 -aec2-field:CreateNewUserNamePassword=Escriba su nuevo nombre de usuario y contraseña.
@@ -318,19 +318,19 @@
 -2832-field:ErrorBackingupKeyPair=No se pudo guardar el archivo de claves a este disco.
 
 #__________________________________=CODE
--16de-field:ErrorCustomFieldHeader1=<CODE>
+-16de-field:ErrorCustomFieldHeader1=CÓDIGO
 
 #__________________________________=TYPE
--6e98-field:ErrorCustomFieldHeader2=<TYPE>
+-6e98-field:ErrorCustomFieldHeader2=TIPO
 
 #__________________________________=TAG
--41ea-field:ErrorCustomFieldHeader3=<TAG>
+-41ea-field:ErrorCustomFieldHeader3=ETIQUETA
 
 #__________________________________=LABEL
--64b8-field:ErrorCustomFieldHeader4=<LABEL>
+-64b8-field:ErrorCustomFieldHeader4=NOMBRE
 
 #____________________________=There is an error in the custom field definitions. Each problem is identified with the following codes:\n   100 - Required standard field is missing\n   101 - Custom field does not have a correct tag.\n   102 - A previous Tag already exists with this name.\n   103 - Custom field does not have a label.\n   104 - Unrecognized Field Type.\n   105 - A label was found in a standard field.\n   106 - XML Parse Error.
--807b-field:ErrorCustomFields=<There is an error in the custom field definitions. Each problem is identified with the following codes:\n   100 - Required standard field is missing\n   101 - Custom field does not have a correct tag.\n   102 - A previous Tag already exists with this name.\n   103 - Custom field does not have a label.\n   104 - Unrecognized Field Type.\n   105 - A label was found in a standard field.\n   106 - XML Parse Error.>
+-807b-field:ErrorCustomFields=Se encontró un error en la definición de los campos personales. Cada problema a sido identificado con los siguientes códigos:\n   100 - Falta una etiqueta requerida\n   101 - El campo personal le falta una etiqueta.\n   102 - Ya existe una etiqueta con este nombre.\n   103 - Campo personal no tiene nombre.\n   104 - Tipo de campo desconocido.\n   105 - Se encontró un nombre en un campo estandar.\n   106 - XML Error al leer documento.
 
 #_________________________________________=A previous share file exists.  You must save each file on its own removable media disk.
 -0f43-field:ErrorPreviousBackupShareExists=Una pieza de un archivo de claves ya existe en este medio. Cada pieza de su archivo de claves tiene que ser guardado en su propio medio o disquete.
@@ -495,7 +495,7 @@
 -d09b-field:ServerSelectionResults=El siguiente servidor a sido seleccionado:
 
 #___________________________________=Human Rights Bulletin System
--fe5b-field:SplashProductDescription=<Human Rights Bulletin System>
+-fe5b-field:SplashProductDescription=Sistema de boletines para derechos humanos
 
 #______________________=Ready
 -20c7-field:StatusReady=Listo
@@ -504,7 +504,7 @@
 -dc3d-field:TemplateDetails=Detalles
 
 #__________________________=Uninstall Martus
--08ea-field:UninstallMartus=<Uninstall Martus>
+-08ea-field:UninstallMartus=Desinstalar Martus
 
 #___________________________=WARNING: This field requires a newer version of Martus to be viewed
 -390c-field:UnknownFieldType=ADVERTENCIA: Para poder ver la información en este campo necesita una versión de Martus más reciente
@@ -537,10 +537,10 @@
 -6332-field:VirtualUserNameDescription=Escriba su nombre de usuario con el teclado normal
 
 #____________________=No
--816c-field:WasSentNo=<No>
+-816c-field:WasSentNo=No
 
 #_____________________=Yes
--5397-field:WasSentYes=<Yes>
+-5397-field:WasSentYes=Si
 
 #____________________________=Built on
 -5342-field:aboutDlgBuildDate=creado en
@@ -684,10 +684,10 @@
 -4d0e-field:confirmKeyPairFileExistsOverWriteeffect=Al oprimir Si el archivo existente se borrara y será reemplazado por la copia recuperada.
 
 #___________________________________________=This account was created with an older version of Martus, which used a different set of folders. The folders need to be migrated to the new format. The migration is automatic, fast, and safe. You cannot run this version of Martus unless you allow this migration.
--39ae-field:confirmNeedsFolderMigrationcause=<This account was created with an older version of Martus, which used a different set of folders. The folders need to be migrated to the new format. The migration is automatic, fast, and safe. You cannot run this version of Martus unless you allow this migration.>
+-39ae-field:confirmNeedsFolderMigrationcause=Esta cuenta se creo con una versión anterior de Martus que usó diferentes carpetas. Sus boletines tienen que ser convertidos para usar las nuevas carpetas. Este cambio es automático, rápido y seguro. No podrá usar esta versión de Martus a menos que continue con esta conversión.
 
 #____________________________________________=Answering Yes will allow the migration to proceed.
--1b41-field:confirmNeedsFolderMigrationeffect=<Answering Yes will allow the migration to proceed.>
+-1b41-field:confirmNeedsFolderMigrationeffect=Oprima Si para iniciar la conversión
 
 #___________________________________________________________=Warning the bulletin you are currently viewing is not yours.  Attachments can contain viruses, or malicious programs harmful to your computer.
 -ae0f-field:confirmNotYourBulletinViewAttachmentAnywayscause=Advertencia: El  boletín que está examinando no le pertenece.  Verifique que los archivos adjuntos no tienen un virus o programas que puedan dañar su ordenador.
@@ -726,10 +726,10 @@
 -83df-field:confirmQuickEraseOutboxNotEmptyeffect=Oprima Si para continuar a la configuración de Borra-Todo. Oprima No para regresar a Martus sin eliminar nada.
 
 #________________________________________________=This will completely uninstall Martus from your computer.
--bec3-field:confirmQuickEraseUninstallMartuscause=<This will completely uninstall Martus from your computer.>
+-bec3-field:confirmQuickEraseUninstallMartuscause=Continue para desinstalar completamente Martus de su ordenador.
 
 #_________________________________________________=Clicking on yes will uninstall the Martus program.
--e773-field:confirmQuickEraseUninstallMartuseffect=<Clicking on yes will uninstall the Martus program.>
+-e773-field:confirmQuickEraseUninstallMartuseffect=Oprima Si para desinstalar el programa Martus.
 
 #___________________________________________=Welcome to Martus.  What would you like to do?
 -dd0e-field:confirmRecoverUsingKeySharecause=Bienvenido a Martus. ¿Que es lo que desea hacer?
@@ -822,10 +822,10 @@
 -f61f-field:confirmWarningSwitchToNormalKeyboardeffect=Si este ordenador es de su oficina central es importante que utilice el teclado en la pantalla de otra manera un intruso podría acceder a los boletines que usted. está autorizado a ver.
 
 #_________________________________________________=A single encrypted backup file of your keypair has yet to be created.
--b68c-field:confirmbackupIncompleteEncryptedNeeded=<A single encrypted backup file of your keypair has yet to be created.>
+-b68c-field:confirmbackupIncompleteEncryptedNeeded=Todavia no se a creado una copia de seguridad cifrada de su par de claves.
 
 #_____________________________________________=A multiple disk 'secret share' of your keypair has yet to be created.
--195c-field:confirmbackupIncompleteShareNeeded=<A multiple disk 'secret share' of your keypair has yet to be created.>
+-195c-field:confirmbackupIncompleteShareNeeded=Todavia no se a creado copias de seguridad compartidas de su par de claves.
 
 #___________________________________=You have chosen to permanently delete a folder.  
 -76fa-field:confirmdeletefoldercause=Ha elegido eliminar la carpeta permanentemente.
@@ -834,16 +834,16 @@
 -8d2c-field:confirmdeletefoldereffect=Los boletines en esta carpeta se moverán a la carpeta de Boletines desechados.
 
 #______________________________________________=Martus has noticed that you have not completed the backup procedure of your keypair.  It is strongly recommended that you complete the backup procedure at this time.\n\nIf something happens to the original keypair file, and you don't have a backup you will not be able to open any bulletins you have created with this keypair.
--a06d-field:confirmgeneralBackupKeyPairMsgcause=<Martus has noticed that you have not completed the backup procedure of your keypair.  It is strongly recommended that you complete the backup procedure at this time.\n\nIf something happens to the original keypair file, and you don't have a backup you will not be able to open any bulletins you have created with this keypair.>
+-a06d-field:confirmgeneralBackupKeyPairMsgcause=Todavia no a completado el proceso para crear copias de seguridad de su par de claves.  Le recomendamos urgentemente que complete el proceso para crear copias de seguridad en esta oportunidad.\n\nNo podrá abrir ningún boletín que haya creado con su par de claves si algo le sucediera a su archivo de claves original y no tuviera una copia de seguridad.
 
 #_______________________________________________=Selecting Yes will guide you through the backup procedure, selecting No will skip this important step.
--8571-field:confirmgeneralBackupKeyPairMsgeffect=<Selecting Yes will guide you through the backup procedure, selecting No will skip this important step.>
+-8571-field:confirmgeneralBackupKeyPairMsgeffect=Oprima Si para iniciar el proceso para crear copias de seguridad. Oprima No para no continuar con este importante proceso.
 
 #_________________________________________=The text "#S#" was not found.  Do you wish to search from the beginning?
--cf53-field:confirmhelpStringNotFoundcause=<The text "#S#" was not found.  Do you wish to search from the beginning?>
+-cf53-field:confirmhelpStringNotFoundcause=El texto "#S#" no se encontró.  ¿Desea continuar la búsqueda desde el comienzo?
 
 #__________________________________________=Clicking on yes will search for "#S#" from the beginning.
--eb82-field:confirmhelpStringNotFoundeffect=<Clicking on yes will search for "#S#" from the beginning.>
+-eb82-field:confirmhelpStringNotFoundeffect=Oprima Si para continuar la búsqueda de "#S#" desde el comienzo.
 
 #_____________________=Confirming...
 -a4f3-field:confirming=Confirmando...
@@ -888,7 +888,7 @@
 -a13c-field:eventdaterange=Fechas del evento
 
 #________________________________=Enter the XML representation for the layout of new and modified bulletins.
--cf9a-field:inputCustomFieldsInfo=<Enter the XML representation for the layout of new and modified bulletins.>
+-cf9a-field:inputCustomFieldsInfo=Escriba en XML los campos, y su orden, que quiere usar en boletines nuevos y modificados.
 
 #______________________________________=
 -da39-field:inputExportMyPublicKeyentry=
@@ -918,7 +918,7 @@
 -438b-field:messageErrorDateInFuturecause=La fecha indicada es en el futuro:
 
 #_____________________________________________=This date range has an end date that is earlier than the start date:
--e4dc-field:messageErrorDateRangeInvertedcause=<This date range has an end date that is earlier than the start date:>
+-e4dc-field:messageErrorDateRangeInvertedcause=Este rango de fechas termina en una fecha anterior a la fecha inicial:
 
 #_________________________________=The current server has sent this message:
 -fd76-field:messageServerNewscause=El servidor le a enviado el siguiente mensaje:
@@ -939,7 +939,7 @@
 -6c50-field:notifyChoosingQuickEraseKeyPaircause=Si escoge eliminar su archivo de claves, Martus lo borrará rápidamente y luego el programa se cerrará. También se eliminará información sobre servidores que haya configurado, campos personalizados que haya creado, detalles predeterminados que haya configurado y sus preferencias personales. Esta información no puede ser recuperada una vez haya sido eliminada, aún si intenta recuperar su archivo de claves de una copia de seguridad.
 
 #_____________________________________________=By choosing to uninstall Martus we will need to erase your keypair file and Martus will exit after it completes the quick erase operation then bring up the uninstall wizard.  Since this will erase your keypair file Martus will also delete the following information: any server or HQ you have configured, any custom fields or default details, and your personal preferences.  This information will be lost and restoring your keypair from a backup will not recover these settings.
--0bf9-field:notifyChoosingUninstallMartuscause=<By choosing to uninstall Martus we will need to erase your keypair file and Martus will exit after it completes the quick erase operation then bring up the uninstall wizard.  Since this will erase your keypair file Martus will also delete the following information: any server or HQ you have configured, any custom fields or default details, and your personal preferences.  This information will be lost and restoring your keypair from a backup will not recover these settings.>
+-0bf9-field:notifyChoosingUninstallMartuscause=Si decide desinstalar Martus su archivo de claves será eliminado y luego Martus desinstalado.  Como esta operación elimina su archivo de claves tambien se eliminará la siguiente información: servidores u oficinas centrales que tenga configuradas, campos personalizados o detalles predeterminados y sus preferencias personales.  Esta información va a ser eliminada y no podrá ser recuperada, aún si recupera su archivo de claves.
 
 #____________________________________=The selected server is not responding. Before you choose a server, you must be connected to the internet, and that server must be available.
 -38fd-field:notifyConfigNoServercause=El servidor no responde. Antes de poder elegir un servidor es necesario que se conecte al Internet y el servidor tiene que estar disponible.
@@ -1008,7 +1008,7 @@
 -8965-field:notifyFilesWillNotBeDeletedcause=No se han eliminado de su computador los archivos originales. Si lo desea tendrá que eliminarlos manualmente.
 
 #___________________________________________=An error occurred during the conversion of your folders. You can still use Martus, but if the Outbox folder still exists, do not use it.
--3066-field:notifyFolderMigrationFailedcause=<An error occurred during the conversion of your folders. You can still use Martus, but if the Outbox folder still exists, do not use it.>
+-3066-field:notifyFolderMigrationFailedcause=Occurrió un error durante la conversión de las carpetas. Todavia puede usar Martus pero si la carpeta bandeja de salida todavia existe no la use.
 
 #___________________________________________=One or more bulletins were severely damaged, and cannot be displayed. If these bulletins were backed up to a server, you may be able to retrieve undamaged copies from there.
 -399f-field:notifyFoundDamagedBulletinscause=Uno o más boletines están dañados y no pueden ser mostrados. Si es que envió estos boletines a un servidor puede que los pueda recuperar de ahí.
@@ -1017,7 +1017,7 @@
 -0b0c-field:notifyFoundOrphanscause=Uno o más boletines no pertenecen a ninguna carpeta. Estos boletines han sido colocados en la carpeta de Boletines recuperados.
 
 #_______________________________________=You have already added this key to your list of HQ's.
--620a-field:notifyHQKeyAlradyExistscause=<You have already added this key to your list of HQ's.>
+-620a-field:notifyHQKeyAlradyExistscause=Ya agregó esta clave a su lista de oficinas centrales.
 
 #_______________________________________=You must have a server public code.
 -2fde-field:notifyInvalidServerCodecause=Necesita escribir el código público del servidor.
@@ -1113,7 +1113,7 @@
 -db36-field:notifyUnableToViewAttachmentcause=No se pudo extraer el archivo adjunto para poder verlo.
 
 #_____________________________________=An unexpected error has occurred. Please report this problem to help@martus.org.
--3cb4-field:notifyUnexpectedErrorcause=<Ha ocurrido un error inesperado. Por favor reporte este problema a www.martus.org.>
+-3cb4-field:notifyUnexpectedErrorcause=Ha ocurrido un error inesperado. Por favor reporte este problema a help@martus.org.
 
 #_______________________________________=The user name you chose already exists on this system, please choose a different user name.
 -bbb0-field:notifyUserAlreadyExistscause=El nombre de usuario que eligió ya está en uso, por favor escoja un nombre diferente.
@@ -1185,7 +1185,7 @@
 -ab25-field:phone=Número telefónico
 
 #________________________________=Prevent creating public bulletins
--7c9e-field:preferencesAllPrivate=<Prevent creating public bulletins>
+-7c9e-field:preferencesAllPrivate=No permitir boletines públicos
 
 #______________________=Private
 -237d-field:privateinfo=Privado
@@ -1236,22 +1236,22 @@
 -cc6d-field:waitingForKeyPairGeneration=Espere un momento mientras creamos su cuenta...
 
 #_________________________________________=You have chosen to permanently delete bulletins from the Discarded Bulletins folder. Even if these bulletins were recently cut or copied, you will not be able to paste them. If they have already been sent to a server, they will remain on the server. This action will only delete them from this computer.
--3fc8-field:warningDeleteMultipleBulletins=<You have chosen to permanently delete bulletins from the Discarded Bulletins folder. Even if these bulletins were recently cut or copied, you will not be able to paste them. If they have already been sent to a server, they will remain on the server. This action will only delete them from this computer.>
+-3fc8-field:warningDeleteMultipleBulletins=A elegido eliminar permanentemente boletines de la carpeta de boletines desechados. Aún si estos boletines han sido copiados o cortados recientemente no podrá pegarlos. Si es que los a enviado a un servidor, estos permanecerán en el servidor. Esta acción solo los elimina de este ordenador.
 
 #___________________________________________________=NOTE: Copies of one or more of these bulletins exist in one or more other folders. Those copies will not be removed.
--7d03-field:warningDeleteMultipleBulletinsWithCopies=<NOTE: Copies of one or more of these bulletins exist in one or more other folders. Those copies will not be removed.>
+-7d03-field:warningDeleteMultipleBulletinsWithCopies=NOTA: Existen una o más copias de estos boletines en otras carpetas. Esas copias no serán removidas.
 
 #_______________________________________________=WARNING: One or more of these bulletins have not been sent to a server since they were last modified. Deleting them will prevent the latest changes from being backed up.
--97ce-field:warningDeleteMultipleUnsentBulletins=<WARNING: One or more of these bulletins have not been sent to a server since they were last modified. Deleting them will prevent the latest changes from being backed up.>
+-97ce-field:warningDeleteMultipleUnsentBulletins=ADVERTENCIA: Uno o más de estos boletines no han sido enviados a un servidor desde la última vez que fueron modificados. Los últimos cambios a estos boletines no van a ser guardados si es que los elimina.
 
 #______________________________________=You have chosen to permanently delete a bulletin from the Discarded Bulletins folder. Even if this bulletin was recently cut or copied, you will not be able to paste it. If this bulletin has already been sent to a server, it will remain on the server. This action will only delete it from this computer.
--06b6-field:warningDeleteSingleBulletin=<You have chosen to permanently delete a bulletin from the Discarded Bulletins folder. Even if this bulletin was recently cut or copied, you will not be able to paste it. If this bulletin has already been sent to a server, it will remain on the server. This action will only delete it from this computer.>
+-06b6-field:warningDeleteSingleBulletin=A elegido eliminar permanentemente este boletín de la carpeta de boletines desechados. Aún si este boletín ha sido copiado o cortado recientemente no podrá pegarlo. Si es que lo a enviado a un servidor, este permanecerá en el servidor. Esta acción solo lo elimina de este ordenador.
 
 #________________________________________________=NOTE: A copy of this bulletin exists in one or more other folders, and those copies will not be removed.
--c4bc-field:warningDeleteSingleBulletinWithCopies=<NOTE: A copy of this bulletin exists in one or more other folders, and those copies will not be removed.>
+-c4bc-field:warningDeleteSingleBulletinWithCopies=NOTA: Existen una copia de este boletín en otras carpetas. Esas copias no serán removidas.
 
 #____________________________________________=WARNING: This bulletin has not been sent to a server since it was last modified. Deleting it will prevent the latest changes from being backed up.
--523e-field:warningDeleteSingleUnsentBulletin=<WARNING: This bulletin has not been sent to a server since it was last modified. Deleting it will prevent the latest changes from being backed up.>
+-523e-field:warningDeleteSingleUnsentBulletin=ADVERTENCIA: Este boletín no ha sido enviado a un servidor desde la última vez que fue modificado. Los últimos cambios a este boletín no van a ser guardados si es que lo elimina.
 
 #__________________=Web Page
 -0163-field:webpage=Sitio web
@@ -1263,10 +1263,10 @@
 -0de3-folder:%Discarded=Boletines desechados
 
 #__________________=Old Draft Bulletins
--bacc-folder:%Draft=<Borradores>
+-bacc-folder:%Draft=Borradores antiguos
 
 #___________________=Unsent Bulletins
--2c10-folder:%OutBox=<Bandeja de salida>
+-2c10-folder:%OutBox=boletines no enviados
 
 #_______________________________=Recovered Bulletins
 -f926-folder:%RecoveredBulletins=Boletines recuperados
@@ -1287,7 +1287,7 @@
 -5e05-folder:%SearchResults=Resultados de búsqueda
 
 #_________________=Saved Bulletins
--da0b-folder:%Sent=<Boletines enviados>
+-da0b-folder:%Sent=Boletines guardados
 
 #________________=and
 -cffa-keyword:and=y
@@ -1305,7 +1305,7 @@
 -6885-language:az=Azerbaijani
 
 #________________=Bengali, Bangla
--4b7b-language:bn=<Bengalí>
+-4b7b-language:bn=Bengalí, Bangla
 
 #________________=German
 -da91-language:de=Alemán
@@ -1353,7 +1353,7 @@
 -b9fe-language:kk=Kazakh
 
 #________________=Cambodian (Khmer)
--26f0-language:km=<Cambodian (Khmer)>
+-26f0-language:km=Camboyano (Khmer)
 
 #________________=Kannada
 -c3ed-language:kn=Kannada
@@ -1374,7 +1374,7 @@
 -460c-language:my=Burmés
 
 #________________=Nepali
--16e3-language:ne=<Nepali>
+-16e3-language:ne=Nepalés
 
 #________________=Dutch
 -334a-language:nl=Holandés
@@ -1446,7 +1446,7 @@
 -aad8-menu:BackupMyKeyPairFile=Copia de seguridad
 
 #______________________=Configure HQ's
--738f-menu:ConfigureHQs=<Configure HQ's>
+-738f-menu:ConfigureHQs=Configurar oficinas centrales
 
 #_______________________=Copy Bulletin(s)
 -a57a-menu:CopyBulletins=Copiar boletin(es)
@@ -1647,10 +1647,10 @@
 -add5-wintitle:ConfigServer=Configuración del servidor
 
 #__________________________=HQ Editor
--e90d-wintitle:ConfigureHQs=<HQ Editor>
+-e90d-wintitle:ConfigureHQs=Editor de oficina central
 
 #____________________________________=Help on Creating Custom Fields
--ed1d-wintitle:CreateCustomFieldsHelp=<Help on Creating Custom Fields>
+-ed1d-wintitle:CreateCustomFieldsHelp=Ayuda para crear campos personalizados
 
 #________________________________=Delete Bulletin File
 -9de4-wintitle:DeleteBulletinFile=Eliminar archivo de boletín
@@ -1668,13 +1668,13 @@
 -7f2f-wintitle:ErrorBackingupKeyPair=Error
 
 #_______________________________=Customize Fields Error
--41ec-wintitle:ErrorCustomFields=<Customize Fields Error>
+-41ec-wintitle:ErrorCustomFields=Error de campos personalizados
 
 #_______________________________=Date Invalid
 -3af5-wintitle:ErrorDateInFuture=Fecha no es válida
 
 #____________________________________=Date Range Invalid
--1228-wintitle:ErrorDateRangeInverted=<Date Range Invalid>
+-1228-wintitle:ErrorDateRangeInverted=Rango de fechas erroneo
 
 #____________________________________________=Previous File Exists
 -a449-wintitle:ErrorPreviousBackupShareExists=Archivo ya existe
@@ -1782,7 +1782,7 @@
 -ceff-wintitle:about=Acerca de Martus
 
 #________________________________=Keypair Needs Backing Up
--52f0-wintitle:askToBackupKeyPair=<Keypair Needs Backing Up>
+-52f0-wintitle:askToBackupKeyPair=Archivo de claves necesita copia de seguridad
 
 #_____________________________________________=Backing Up Your Keypair
 -d67d-wintitle:confirmBackupKeyPairInformation=Creando copia de reserva de claves
@@ -1842,7 +1842,7 @@
 -856e-wintitle:confirmKeyPairFileExistsOverWrite=Archivo de claves ya existe
 
 #_________________________________________=Folder Migration Required
--72d3-wintitle:confirmNeedsFolderMigration=<Folder Migration Required>
+-72d3-wintitle:confirmNeedsFolderMigration=Conversión de carpetas requerido
 
 #_________________________________________________________=View Attachment
 -b24c-wintitle:confirmNotYourBulletinViewAttachmentAnyways=Ver archivo adjunto
@@ -1863,7 +1863,7 @@
 -670f-wintitle:confirmQuickEraseOutboxNotEmpty=Recordatorio de eliminación rápida
 
 #______________________________________________=Uninstall Martus
--08ea-wintitle:confirmQuickEraseUninstallMartus=<Uninstall Martus>
+-08ea-wintitle:confirmQuickEraseUninstallMartus=Desinstalar Martus
 
 #_________________________________________=Create New Account / Recover Old Account
 -4de2-wintitle:confirmRecoverUsingKeyShare=Crear cuenta nueva / Recuperar cuenta
@@ -1911,7 +1911,7 @@
 -a8f2-wintitle:confirmWarningSwitchToNormalKeyboard=Advertencia de seguridad
 
 #_______________________________________=Text Not Found
--5592-wintitle:confirmhelpStringNotFound=<Text Not Found>
+-5592-wintitle:confirmhelpStringNotFound=No se encontró el texto
 
 #_____________________________=Confirm Retrieve Bulletins
 -ec90-wintitle:confirmretrieve=Confirme cargado de boletines
@@ -1923,7 +1923,7 @@
 -de5e-wintitle:create=Crear un boletín
 
 #________________________________=Search Text Not Found
--daf7-wintitle:helpStringNotFound=<Search Text Not Found>
+-daf7-wintitle:helpStringNotFound=Texto no se encontró
 
 #_______________________________=Customize Fields
 -1cb1-wintitle:inputCustomFields=Personalizar campos
@@ -1965,7 +1965,7 @@
 -b3c0-wintitle:notifyChoosingQuickEraseKeyPair=Advertencia de eliminación de claves
 
 #___________________________________________=Uninstalling Martus Warning
--c724-wintitle:notifyChoosingUninstallMartus=<Uninstalling Martus Warning>
+-c724-wintitle:notifyChoosingUninstallMartus=Advertencia de desinstalación de Martus
 
 #__________________________________=Unable to Connect to Server
 -1b07-wintitle:notifyConfigNoServer=No se pudo conectar al servidor
@@ -2034,7 +2034,7 @@
 -a001-wintitle:notifyFilesWillNotBeDeleted=Archivos no se eliminaron
 
 #_________________________________________=Folder Migration Error
--3bcb-wintitle:notifyFolderMigrationFailed=<Folder Migration Error>
+-3bcb-wintitle:notifyFolderMigrationFailed=Error durante conversión de carpetas
 
 #_________________________________________=Detected Damaged Bulletins
 -4579-wintitle:notifyFoundDamagedBulletins=Se detectó boletines dañados
@@ -2043,7 +2043,7 @@
 -704d-wintitle:notifyFoundOrphans=Boletines recuperados
 
 #_____________________________________=HQ Key Already Exists
--f91b-wintitle:notifyHQKeyAlradyExists=<HQ Key Already Exists>
+-f91b-wintitle:notifyHQKeyAlradyExists=Clave the oficina central ya existe
 
 #_____________________________________=Invalid Server Public Code
 -08ad-wintitle:notifyInvalidServerCode=Código público inválido
@@ -2214,10 +2214,10 @@
 -7b6e-wintitle:setupsignin=Inicio de configuración de Martus
 
 #____________________________________________=Confirm Delete Bulletins
--4016-wintitle:warningDeleteMultipleBulletins=<Confirm Delete Bulletins>
+-4016-wintitle:warningDeleteMultipleBulletins=Confirme eliminación de boletines
 
 #_________________________________________=Confirm Delete Bulletin
--6b4a-wintitle:warningDeleteSingleBulletin=<Confirm Delete Bulletin>
+-6b4a-wintitle:warningDeleteSingleBulletin=Confirme eliminación de boletin
 
 #_________________________________=Confirm Delete Folder
--1a75-wintitle:warningdeletefolder=<Confirm Delete Folder>
+-1a75-wintitle:warningdeletefolder=Confirme eliminación de carpeta
