@@ -3,6 +3,9 @@
 	<name>martus-client</name>
 	<comment></comment>
 	<projects>
+		<project>martus-common</project>
+		<project>martus-swing</project>
+		<project>martus-utils</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>
