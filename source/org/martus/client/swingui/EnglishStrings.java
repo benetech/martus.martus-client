@@ -29,7 +29,7 @@ package org.martus.client.swingui;
 public class EnglishStrings
 {
 	public static String strings[] = {
-"field:translationVersion=English 2.6",
+"field:translationVersion=English Internal 2.7",
 
 "wintitle:main=Martus Human Rights Bulletin System",
 "wintitle:create=Create Bulletin",
