@@ -45,7 +45,8 @@ public class ClientSideNetworkGateway implements BulletinRetrieverGatewayInterfa
 	public NetworkResponse getServerInfo()
 	{
 		Vector parameters = new Vector();
-		return new NetworkResponse(server.getServerInfo(parameters));
+		Vector response = server.getServerInfo(parameters);
+		return new NetworkResponse(response);
 	}
 
 	public NetworkResponse getUploadRights(MartusCrypto signer, String tryMagicWord) throws
