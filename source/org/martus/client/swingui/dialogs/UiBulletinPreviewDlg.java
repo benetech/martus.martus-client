@@ -45,6 +45,7 @@ import org.martus.common.StandardFieldSpecs;
 import org.martus.common.packet.FieldDataPacket;
 import org.martus.swing.UiScrollPane;
 import org.martus.swing.Utilities;
+import org.martus.util.language.LanguageOptions;
 
 public class UiBulletinPreviewDlg extends JDialog implements ActionListener, LanguageChangeListener
 {
@@ -52,12 +53,14 @@ public class UiBulletinPreviewDlg extends JDialog implements ActionListener, Lan
 	public UiBulletinPreviewDlg(UiMainWindow owner, FieldDataPacket fdp)
 	{
 		super(owner, owner.getLocalization().getWindowTitle("BulletinPreview"), true);	
+		initialNeedsLanguagePadding = LanguageOptions.needsLanguagePadding();
 		getContentPane().setLayout(new BorderLayout());
 
 		UiBulletinComponentViewSection view = new UiBulletinComponentViewSection(owner);
 		FieldSpec[] standardFieldTags = StandardFieldSpecs.getDefaultPublicFieldSpecs();
 
 		UiLocalization localization = owner.getLocalization();
+		
 		view.createLabelsAndFields(standardFieldTags, this);
 		view.copyDataFromPacket(fdp);
 		view.attachmentViewer.saveButton.setVisible(false);
@@ -90,9 +93,19 @@ public class UiBulletinPreviewDlg extends JDialog implements ActionListener, Lan
 		dispose();
 	}
 
+	public void dispose() 
+	{
+		if(initialNeedsLanguagePadding)
+			LanguageOptions.setLanguagePaddingRequired();
+		else
+			LanguageOptions.setLanguagePaddingNotRequired();
+		super.dispose();
+	}
+	
 	public void languageChanged(String newLanguageCode) 
 	{
 		//read-only nothing to do
 	}
 
+	boolean initialNeedsLanguagePadding;
 }
