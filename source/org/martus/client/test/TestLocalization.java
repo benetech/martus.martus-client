@@ -38,13 +38,13 @@ import org.martus.common.clientside.ChoiceItem;
 import org.martus.common.clientside.DateUtilities;
 import org.martus.common.clientside.Localization;
 import org.martus.common.clientside.UiBasicLocalization;
+import org.martus.jarverifier.JarVerifier;
 import org.martus.swing.UiLanguageDirection;
 import org.martus.util.DirectoryUtils;
 import org.martus.util.StringInputStream;
 import org.martus.util.TestCaseEnhanced;
 import org.martus.util.UnicodeStringWriter;
 import org.martus.util.UnicodeWriter;
-
 
 public class TestLocalization extends TestCaseEnhanced
 {
@@ -175,7 +175,7 @@ public class TestLocalization extends TestCaseEnhanced
 		boolean foundSomeTestLanguage = doesLanguageExist(myLocalization, someTestLanguageCode);
 		assertFalse("must not have testLanguage yet", foundSomeTestLanguage);
 		
-		File someTestLanguage = new File(translationDirectory,UiBasicLocalization.MARTUS_LANGUAGE_FILE_PREFIX + someTestLanguageCode + UiBasicLocalization.MARTUS_LANGUAGE_FILE_SUFFIX);
+		File someTestLanguage = new File(translationDirectory,UiBasicLocalization.getMtfFilename(someTestLanguageCode));
 		someTestLanguage.deleteOnExit();
 		UnicodeWriter out = new UnicodeWriter(someTestLanguage);
 		String buttonName = "ok";
@@ -189,7 +189,17 @@ public class TestLocalization extends TestCaseEnhanced
 		assertEquals("Incorrect translation", someLanguageTranslationOfOk, myLocalization.getButtonLabel(buttonName));
 	}
 
-		
+	public void testJarVerifier() throws Exception
+	{
+		assertEquals("no file", JarVerifier.ERROR_INVALID_JAR, JarVerifier.verify("nonexistentFile", false));
+		assertEquals("no maifest", JarVerifier.ERROR_JAR_NOT_SIGNED, JarVerifier.verify(getClass().getResource("Martus-xx-noManifest.mlpk").getFile(), false));
+		assertEquals("Missing Entry", JarVerifier.ERROR_MISSING_ENTRIES, JarVerifier.verify(getClass().getResource("Martus-xx-MissingEntry.mlpk").getFile(), false));
+		assertEquals("Modified Entry", JarVerifier.ERROR_JAR_NOT_SIGNED, JarVerifier.verify(getClass().getResource("Martus-xx-ModifiedEntry.mlpk").getFile(), false));
+		assertEquals("Not Signed", JarVerifier.ERROR_JAR_NOT_SIGNED, JarVerifier.verify(getClass().getResource("Martus-xx-notSigned.mlpk").getFile(), false));
+		assertEquals("Not sealed", JarVerifier.ERROR_JAR_NOT_SIGNED, JarVerifier.verify(getClass().getResource("Martus-xx-notSealed.mlpk").getFile(), false));
+		assertEquals("A valid signed jar didn't pass?", JarVerifier.JAR_VERIFIED_TRUE, JarVerifier.verify(getClass().getResource("Martus-xx.mlpk").getFile(), false));
+	}
+	
 	private boolean doesLanguageExist(UiLocalization dbToUse, String languageCode)
 	{
 		ChoiceItem[] languages = dbToUse.getUiLanguages();

@@ -4,6 +4,7 @@
 	<comment></comment>
 	<projects>
 		<project>martus-common</project>
+		<project>martus-jar-verifier</project>
 		<project>martus-swing</project>
 		<project>martus-utils</project>
 	</projects>
