@@ -27,8 +27,6 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.swingui.tablemodels;
 
 import org.martus.client.core.MartusApp;
-import org.martus.common.BulletinSummary;
-import org.martus.common.bulletin.Bulletin;
 import org.martus.common.clientside.UiBasicLocalization;
 
 public abstract class RetrieveTableModelHQ extends RetrieveTableModel {
@@ -36,69 +34,10 @@ public abstract class RetrieveTableModelHQ extends RetrieveTableModel {
 	public RetrieveTableModelHQ(MartusApp appToUse, UiBasicLocalization localizationToUse)
 	{
 		super(appToUse, localizationToUse);
+		COLUMN_RETRIEVE_FLAG = columnCount++;
+		COLUMN_TITLE = columnCount++;
+		COLUMN_AUTHOR = columnCount++;
+		COLUMN_LAST_DATE_SAVED = columnCount++;
+		COLUMN_BULLETIN_SIZE = columnCount++;
 	}
-
-	public String getColumnName(int column)
-	{
-		if(column == COLUMN_RETRIEVE_FLAG)
-			return getLocalization().getFieldLabel("retrieveflag");
-		if(column == COLUMN_TITLE)
-			return getLocalization().getFieldLabel(Bulletin.TAGTITLE);
-		if(column == COLUMN_AUTHOR)
-			return getLocalization().getFieldLabel(Bulletin.TAGAUTHOR);
-		if(column == COLUMN_LAST_DATE_SAVED)
-			return getLocalization().getFieldLabel(Bulletin.TAGLASTSAVED);
-		if(column == COLUMN_BULLETIN_SIZE)
-			return getLocalization().getFieldLabel("BulletinSize");
-		return "";
-	}
-
-	public int getColumnCount()
-	{
-		return 5;
-	}
-
-	public Object getValueAt(int row, int column)
-	{
-		BulletinSummary summary = (BulletinSummary)currentSummaries.get(row);
-		if(column == COLUMN_RETRIEVE_FLAG)
-			return new Boolean(summary.isChecked());
-		if(column == COLUMN_TITLE)
-			return summary.getTitle();
-		if(column == COLUMN_AUTHOR)
-			return summary.getAuthor();
-		if(column == COLUMN_LAST_DATE_SAVED)
-			return getLocalization().convertStoredDateTimeToDisplay(summary.getDateTimeSaved());
-		if(column == COLUMN_BULLETIN_SIZE)
-			return  getSizeInKbytes(summary.getSize());
-		return "";
-	}
-
-
-	public void setValueAt(Object value, int row, int column)
-	{
-		BulletinSummary summary = (BulletinSummary)currentSummaries.get(row);
-		if(column == COLUMN_RETRIEVE_FLAG)
-		{
-			summary.setChecked(((Boolean)value).booleanValue());
-		}
-	}
-
-	public Class getColumnClass(int column)
-	{
-		if(column == COLUMN_RETRIEVE_FLAG)
-			return Boolean.class;
-		if(column == COLUMN_TITLE)
-			return String.class;
-		if(column == COLUMN_AUTHOR)
-			return String.class;
-		if(column == COLUMN_LAST_DATE_SAVED)
-			return String.class;
-		if(column == COLUMN_BULLETIN_SIZE)
-			return Integer.class;
-		return null;
-	}
-	public int COLUMN_AUTHOR = 2;
-	public int COLUMN_LAST_DATE_SAVED = 3;
-	public int COLUMN_BULLETIN_SIZE = 4;
 }

@@ -28,34 +28,22 @@ package org.martus.client.swingui.tablemodels;
 
 import org.martus.client.core.MartusApp;
 import org.martus.common.MartusUtilities.ServerErrorException;
-import org.martus.common.bulletin.Bulletin;
 import org.martus.common.clientside.UiBasicLocalization;
 
-public class DeleteMyServerDraftsTableModel extends RetrieveTableModelNonHQ
+public class DeleteMyServerDraftsTableModel extends RetrieveTableModel
 {
 
 	public DeleteMyServerDraftsTableModel(MartusApp appToUse, UiBasicLocalization localizationToUse)
 	{
 		super(appToUse, localizationToUse);
+		COLUMN_DELETE_FLAG = columnCount++;
+		COLUMN_TITLE = columnCount++;
+		COLUMN_LAST_DATE_SAVED = columnCount++;
+		COLUMN_BULLETIN_SIZE = columnCount++;
 	}
 
 	public void populateAllSummariesList() throws ServerErrorException
 	{
 		getMyDraftSummaries();
 	}
-
-	public String getColumnName(int column)
-	{
-		if(column == COLUMN_DELETE_FLAG)
-			return getLocalization().getFieldLabel("DeleteFlag");
-		if(column == COLUMN_TITLE)
-			return getLocalization().getFieldLabel(Bulletin.TAGTITLE);
-		if(column == COLUMN_LAST_DATE_SAVED)
-			return getLocalization().getFieldLabel(Bulletin.TAGLASTSAVED);
-		if(column == COLUMN_BULLETIN_SIZE)
-			return getLocalization().getFieldLabel("BulletinSize");
-		return "";
-	}
-	
-	public int COLUMN_DELETE_FLAG = 0;
 }

@@ -67,6 +67,72 @@ abstract public class RetrieveTableModel extends AbstractTableModel
 	
 	abstract protected void populateAllSummariesList() throws ServerErrorException;
 	
+	public int getColumnCount()
+	{
+		return columnCount;
+	}
+	
+	public String getColumnName(int column)
+	{
+		if(column == COLUMN_RETRIEVE_FLAG)
+			return getLocalization().getFieldLabel("retrieveflag");
+		if(column == COLUMN_TITLE)
+			return getLocalization().getFieldLabel(Bulletin.TAGTITLE);
+		if(column == COLUMN_AUTHOR)
+			return getLocalization().getFieldLabel(Bulletin.TAGAUTHOR);
+		if(column == COLUMN_LAST_DATE_SAVED)
+			return getLocalization().getFieldLabel(Bulletin.TAGLASTSAVED);
+		if(column == COLUMN_BULLETIN_SIZE)
+			return getLocalization().getFieldLabel("BulletinSize");
+		if(column == COLUMN_DELETE_FLAG)
+			return getLocalization().getFieldLabel("DeleteFlag");
+		return "";
+	}
+
+	public Object getValueAt(int row, int column)
+	{
+		BulletinSummary summary = (BulletinSummary)currentSummaries.get(row);
+		if(column == COLUMN_RETRIEVE_FLAG)
+			return new Boolean(summary.isChecked());
+		if(column == COLUMN_TITLE)
+			return summary.getTitle();
+		if(column == COLUMN_AUTHOR)
+			return summary.getAuthor();
+		if(column == COLUMN_LAST_DATE_SAVED)
+			return getLocalization().convertStoredDateTimeToDisplay(summary.getDateTimeSaved());
+		if(column == COLUMN_BULLETIN_SIZE)
+			return  getSizeInKbytes(summary.getSize());
+		if(column == COLUMN_DELETE_FLAG)
+			return new Boolean(summary.isChecked());
+		return "";
+	}
+
+	public void setValueAt(Object value, int row, int column)
+	{
+		BulletinSummary summary = (BulletinSummary)currentSummaries.get(row);
+		if(column == COLUMN_RETRIEVE_FLAG)
+			summary.setChecked(((Boolean)value).booleanValue());
+		if(column == COLUMN_DELETE_FLAG)
+			summary.setChecked(((Boolean)value).booleanValue());
+	}
+
+	public Class getColumnClass(int column)
+	{
+		if(column == COLUMN_RETRIEVE_FLAG)
+			return Boolean.class;
+		if(column == COLUMN_TITLE)
+			return String.class;
+		if(column == COLUMN_AUTHOR)
+			return String.class;
+		if(column == COLUMN_LAST_DATE_SAVED)
+			return String.class;
+		if(column == COLUMN_BULLETIN_SIZE)
+			return Integer.class;
+		if(column == COLUMN_DELETE_FLAG)
+			return Boolean.class;
+		return null;
+	}
+	
 	UiBasicLocalization getLocalization()
 	{
 		return localization;
@@ -408,6 +474,7 @@ abstract public class RetrieveTableModel extends AbstractTableModel
 
 	MartusApp app;
 	UiBasicLocalization localization;
+	int columnCount;
 	
 	ClientBulletinStore store;
 	UiProgressRetrieveSummariesDlg retrieverDlg;
@@ -416,7 +483,10 @@ abstract public class RetrieveTableModel extends AbstractTableModel
 	Vector allSummaries;
 	ServerErrorException errorThrown;
 	
-	public int COLUMN_RETRIEVE_FLAG = 0;
-	public int COLUMN_TITLE = 1;
-	
+	public int COLUMN_RETRIEVE_FLAG = -1;
+	public int COLUMN_TITLE = -1;
+	public int COLUMN_AUTHOR = -1;
+	public int COLUMN_LAST_DATE_SAVED = -1;
+	public int COLUMN_BULLETIN_SIZE = -1;
+	public int COLUMN_DELETE_FLAG = -1;
 }
