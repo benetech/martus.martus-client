@@ -329,12 +329,12 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		UiBasicLocalization testLocalization = new UiBasicLocalization(null, noEnglishStrings);
 		File tmpFile = createTempFile();
 		MartusApp.setInitialUiDefaultsFromFileIfPresent(testLocalization, tmpFile);
-		assertNotNull("Default behavior now is English is automatically set.", testLocalization.getCurrentLanguageCode());
+		assertNull("File doesn't exist localization should not be set.  Using DefaultUi.txt depends on the language not being set in this case.", testLocalization.getCurrentLanguageCode());
 		FileOutputStream out = new FileOutputStream(tmpFile);
 		out.write("invalidLanguageCode".getBytes());
 		out.close();
 		MartusApp.setInitialUiDefaultsFromFileIfPresent(testLocalization, tmpFile);
-		assertEquals("Invalid language code, localization should be English", Localization.ENGLISH, testLocalization.getCurrentLanguageCode());
+		assertNull("Invalid language code, localization should not be set", testLocalization.getCurrentLanguageCode());
 		tmpFile.delete();
 		out = new FileOutputStream(tmpFile);
 		out.write("en".getBytes());
