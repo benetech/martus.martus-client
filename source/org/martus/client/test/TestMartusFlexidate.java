@@ -1,7 +1,7 @@
 /*
 
 The Martus(tm) free, social justice documentation and
-monitoring software. Copyright (C) 2001-2004, Beneficent
+monitoring software. Copyright (C) 2001-2005, Beneficent
 Technology, Inc. (Benetech).
 
 Martus is free software; you can redistribute it and/or
@@ -127,7 +127,7 @@ public class TestMartusFlexidate extends TestCaseEnhanced
 					
 		MartusFlexidate mf = new MartusFlexidate(beginDate, endDate);
 	
-		assertEquals("19990115+360", mf.getMatusFlexidate());	
+		assertEquals("Initial date incorrect", "19990115+360", mf.getMatusFlexidate());	
 	
 		DateFormat df = Bulletin.getStoredDateFormat();										
 		assertEquals("1999-01-15", df.format(mf.getBeginDate()));
@@ -136,7 +136,7 @@ public class TestMartusFlexidate extends TestCaseEnhanced
 		long ONE_HOUR_OF_MILLIS = 60*60*1000;
 		endDate.setTime(endDate.getTime() + ONE_HOUR_OF_MILLIS);	
 		MartusFlexidate mf2 = new MartusFlexidate(beginDate, endDate);
-		assertEquals("19990115+360", mf2.getMatusFlexidate());	
+		assertEquals("After setting date incorrect", "19990115+360", mf2.getMatusFlexidate());	
 	}
 	
 	public void testCreateFromMartusString()
