@@ -40,7 +40,7 @@ import org.martus.common.bulletin.AttachmentProxy;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.crypto.MartusCrypto;
 
-public class UiBulletinEditor extends UiBulletinComponent
+public class UiBulletinEditor extends UiBulletinComponent implements HeadQuartersSelectionListener
 {
 	public UiBulletinEditor(UiMainWindow mainWindowToUse)
 	{
@@ -192,6 +192,12 @@ public class UiBulletinEditor extends UiBulletinComponent
 			languageListener.languageChanged(newLanguageCode);
 	}
 
+	// HeadQuartersSelectionListener Interface
+	public void selectedHQsChanged(int newNumberOfSelectedHQs) 
+	{
+		headerSection.updateNumberOfHQs(newNumberOfSelectedHQs);
+	}
+	
 	HQKeys getHqKeys()
 	{
 		return mainWindow.getApp().getHQKeysWithFallback();
@@ -202,9 +208,10 @@ public class UiBulletinEditor extends UiBulletinComponent
 		return new UiBulletinComponentHeaderSection(mainWindow, "Modify");
 	}
 	
-	UiBulletinComponentHeadQuarters createHeadQuartersSection()
+	UiBulletinComponentHeadQuartersSection createHeadQuartersSection()
 	{
-		return new UiBulletinComponentHeadQuartersEditor(mainWindow, currentBulletin, "Modify");
+		UiBulletinComponentHeadQuartersEditor uiBulletinComponentHeadQuartersEditor = new UiBulletinComponentHeadQuartersEditor(this, mainWindow, currentBulletin, "Modify");
+		return uiBulletinComponentHeadQuartersEditor;
 	}
 
 	boolean wasEncrypted;

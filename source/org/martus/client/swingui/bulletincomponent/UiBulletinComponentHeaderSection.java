@@ -76,18 +76,7 @@ public class UiBulletinComponentHeaderSection extends UiBulletinComponentSection
 	{
 		bulletin = bulletinToShow;
 		int numberOfHqs = bulletin.getAuthorizedToReadKeys().size();
-		if(numberOfHqs > 0)
-		{
-			hqSummary.setText(getSummaryString(numberOfHqs));
-			hqLabel.setVisible(true);
-			hqSummary.setVisible(true);
-		}
-		else
-		{
-			hqSummary.setText("");
-			hqLabel.setVisible(false);
-			hqSummary.setVisible(false);
-		}
+		updateNumberOfHQs(numberOfHqs);
 		versionNumber.setText("  " + Integer.toString(bulletin.getVersion())+ "  ");
 
 		long time = bulletin.getLastSavedTime();
@@ -103,8 +92,26 @@ public class UiBulletinComponentHeaderSection extends UiBulletinComponentSection
 			dateTime.setVisible(true);
 		}
 	}
+
+	public void updateNumberOfHQs(int numberOfHqs) 
+	{
+		if(numberOfHqs > 0)
+		{
+			hqSummary.setText(getHQSummaryString(numberOfHqs));
+			hqLabel.setVisible(true);
+			hqSummary.setVisible(true);
+		}
+		else
+		{
+			hqSummary.setText("");
+			hqLabel.setVisible(false);
+			hqSummary.setVisible(false);
+		}
+		hqLabel.updateUI();
+		hqSummary.updateUI();
+	}
 	
-	private String getSummaryString(int numberOfHqs)
+	private String getHQSummaryString(int numberOfHqs)
 	{
 		String summaryText = getLocalization().getFieldLabel(tagQualifier + "BulletinHQInfo");
 		try

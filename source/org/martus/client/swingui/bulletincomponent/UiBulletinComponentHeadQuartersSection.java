@@ -38,9 +38,9 @@ import org.martus.swing.UiLabel;
 import org.martus.swing.UiTable;
 import org.martus.swing.UiWrappedTextArea;
 
-abstract public class UiBulletinComponentHeadQuarters extends UiBulletinComponentSection
+abstract public class UiBulletinComponentHeadQuartersSection extends UiBulletinComponentSection
 {
-	public UiBulletinComponentHeadQuarters(UiMainWindow mainWindowToUse, Bulletin bulletinToUse, String tagQualifierToUse)
+	public UiBulletinComponentHeadQuartersSection(UiMainWindow mainWindowToUse, Bulletin bulletinToUse, String tagQualifierToUse)
 	{
 		super(mainWindowToUse);
 		bulletin = bulletinToUse;
@@ -56,7 +56,8 @@ abstract public class UiBulletinComponentHeadQuarters extends UiBulletinComponen
 		return getLocalization().getFieldLabel("BulletinHeadQuarters" + tag);
 	}
 	
-	protected UiTable createHeadquartersTable(HeadQuartersTableModel hqModel) {
+	protected UiTable createHeadquartersTable(HeadQuartersTableModel hqModel) 
+	{
 		UiTable hqTable = new UiTable(hqModel);
 		Color disabledBackgroundColor = getBackground();
 		hqTable.setDefaultRenderer(Boolean.class, new BooleanRenderer(hqModel, disabledBackgroundColor, hqTable.getDefaultRenderer(Boolean.class)));

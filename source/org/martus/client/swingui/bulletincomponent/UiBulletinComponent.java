@@ -57,7 +57,7 @@ abstract public class UiBulletinComponent extends JPanel implements Scrollable, 
 	abstract public boolean isBulletinModified() throws
 			IOException, MartusCrypto.EncryptionException;
 	abstract UiBulletinComponentHeaderSection createHeaderSection();
-	abstract UiBulletinComponentHeadQuarters createHeadQuartersSection();
+	abstract UiBulletinComponentHeadQuartersSection createHeadQuartersSection();
 	abstract HQKeys getHqKeys();
 
 	// ChangeListener interface
@@ -247,7 +247,7 @@ abstract public class UiBulletinComponent extends JPanel implements Scrollable, 
 	UiBulletinComponentHeaderSection headerSection;
 	UiBulletinComponentDataSection publicSection;
 	UiBulletinComponentDataSection privateSection;	
-	UiBulletinComponentHeadQuarters headquartersSection;
+	UiBulletinComponentHeadQuartersSection headquartersSection;
 
 	private static final int SOMETIMES_ENCRYPTED = 1;
 	private static final int ALWAYS_ENCRYPTED = 2;

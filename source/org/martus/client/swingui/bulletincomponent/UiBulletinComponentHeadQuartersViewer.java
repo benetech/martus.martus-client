@@ -33,7 +33,7 @@ import org.martus.swing.UiLabel;
 import org.martus.swing.UiScrollPane;
 import org.martus.swing.UiTable;
 
-public class UiBulletinComponentHeadQuartersViewer extends UiBulletinComponentHeadQuarters
+public class UiBulletinComponentHeadQuartersViewer extends UiBulletinComponentHeadQuartersSection
 {
 	public UiBulletinComponentHeadQuartersViewer(UiMainWindow mainWindowToUse, Bulletin bulletinToUse, String tagQualifierToUse)
 	{

@@ -36,9 +36,9 @@ import org.martus.swing.UiLabel;
 import org.martus.swing.UiScrollPane;
 import org.martus.swing.UiTable;
 
-public class UiBulletinComponentHeadQuartersEditor extends UiBulletinComponentHeadQuarters
+public class UiBulletinComponentHeadQuartersEditor extends UiBulletinComponentHeadQuartersSection
 {
-	public UiBulletinComponentHeadQuartersEditor(UiMainWindow mainWindowToUse, Bulletin bulletinToUse, String tagQualifierToUse)
+	public UiBulletinComponentHeadQuartersEditor(HeadQuartersSelectionListener hqSelectionListener, UiMainWindow mainWindowToUse, Bulletin bulletinToUse, String tagQualifierToUse)
 	{
 		super(mainWindowToUse, bulletinToUse, tagQualifierToUse);
 		UiLabel hqLabel = new UiLabel(getLabel("Headquarters"));
@@ -75,6 +75,8 @@ public class UiBulletinComponentHeadQuartersEditor extends UiBulletinComponentHe
 				tableModel.addNewHeadQuarterEntry(headQuarterEntry);
 			}
 		}
+		
+		tableModel.setHQSelectionListener(hqSelectionListener);
 
 		UiTable hqTable = createHeadquartersTable(tableModel);
 		hqTable.setMaxColumnWidthToHeaderWidth(0);

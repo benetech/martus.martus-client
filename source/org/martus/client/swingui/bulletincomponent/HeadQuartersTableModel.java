@@ -42,6 +42,11 @@ public class HeadQuartersTableModel extends UiTableModel
 		entries = new Vector();
 	}
 	
+	public void setHQSelectionListener(HeadQuartersSelectionListener selectionListenerToUse)
+	{
+		selectionListener = selectionListenerToUse;
+	}
+	
 	public void addNewHeadQuarterEntry(HeadQuarterEntry entryToAdd)
 	{
 		entries.add(entryToAdd);
@@ -58,6 +63,19 @@ public class HeadQuartersTableModel extends UiTableModel
 		}
 		return keys;
 	}
+	
+	public int getNumberOfSelectedHQs()
+	{
+		int numberOfSelectedHQs = 0;
+		for (Iterator iter = entries.iterator(); iter.hasNext();) 
+		{
+			HeadQuarterEntry hqEntry = (HeadQuarterEntry) iter.next();
+			if(hqEntry.isSelected())
+				++numberOfSelectedHQs;
+		}
+		return numberOfSelectedHQs;
+	}
+	
 	
 	public int getRowCount() 
 	{
@@ -92,7 +110,12 @@ public class HeadQuartersTableModel extends UiTableModel
 	{
 		HeadQuarterEntry entry = (HeadQuarterEntry)entries.get(row);
 		if(column == COLUMN_SELECTED)
+		{
 			entry.setSelected(((Boolean)value).booleanValue());
+			if(selectionListener != null)
+				selectionListener.selectedHQsChanged(getNumberOfSelectedHQs());
+			
+		}
 	}
 
 	public Class getColumnClass(int column)
@@ -123,4 +146,5 @@ public class HeadQuartersTableModel extends UiTableModel
 	public int COLUMN_LABEL = -1;
 	int columnCount;
 	UiBasicLocalization localization;
+	HeadQuartersSelectionListener selectionListener;
 }
