@@ -43,7 +43,6 @@ import java.util.Vector;
 import org.martus.client.core.ClientSideNetworkHandlerUsingXmlRpc.SSLSocketSetupException;
 import org.martus.client.core.Exceptions.ServerCallFailedException;
 import org.martus.client.core.Exceptions.ServerNotAvailableException;
-import org.martus.client.core.QuickEraseOptions;
 import org.martus.common.FieldSpec;
 import org.martus.common.MartusConstants;
 import org.martus.common.MartusUtilities;
@@ -75,6 +74,7 @@ import org.martus.util.ByteArrayInputStreamWithSeek;
 import org.martus.util.FileInputStreamWithSeek;
 import org.martus.util.InputStreamWithSeek;
 import org.martus.util.ScrubFile;
+import org.martus.util.UnicodeReader;
 
 
 public class MartusApp
@@ -110,31 +110,48 @@ public class MartusApp
 
 	private void initializeCurrentLanguage(Localization localization)
 	{
-		File languageFlag = new File(getMartusDataRootDirectory(),"lang.es");
-		if(languageFlag.exists())
-		{
-			languageFlag.delete();
-			localization.setCurrentLanguageCode("es");
-			localization.setCurrentDateFormatCode(DateUtilities.DMY_SLASH.getCode());
+		CurrentUiState previouslySavedState = new CurrentUiState();
+		previouslySavedState.load(getUiStateFile());
+
+		if(previouslySavedState.getCurrentLanguage() != "")
+		{	
+			localization.setCurrentLanguageCode(previouslySavedState.getCurrentLanguage());
+			localization.setCurrentDateFormatCode(previouslySavedState.getCurrentDateFormat());
 		}
-		else
-		{
-			CurrentUiState previouslySavedState = new CurrentUiState();
-			previouslySavedState.load(getUiStateFile());
-			String previouslySavedStateLanguage = previouslySavedState.getCurrentLanguage();
-			if(previouslySavedStateLanguage == "")
-				localization.setCurrentLanguageCode(Localization.ENGLISH);
-			else
-				localization.setCurrentLanguageCode(previouslySavedStateLanguage);
 		
-			String previouslySavedStateDateFormat = previouslySavedState.getCurrentDateFormat();
-			if(previouslySavedStateDateFormat == "")
-				localization.setCurrentDateFormatCode(DateUtilities.getDefaultDateFormatCode());
-			else
-				localization.setCurrentDateFormatCode(previouslySavedStateDateFormat);
+		if(localization.getCurrentLanguageCode()== null)
+			setInitialUiDefaultsFromFileIfPresent(localization, new File(getMartusDataRootDirectory(),"DefaultUi.txt"));
+		
+		if(localization.getCurrentLanguageCode()== null)
+		{
+			localization.setCurrentLanguageCode(Localization.ENGLISH);
+			localization.setCurrentDateFormatCode(DateUtilities.getDefaultDateFormatCode());
 		}
 	}
 	
+	static public void setInitialUiDefaultsFromFileIfPresent(Localization localization, File defaultUiFile)
+	{
+		if(!defaultUiFile.exists())
+			return;
+		try
+		{
+			String languageCode = null;
+			UnicodeReader in = new UnicodeReader(defaultUiFile);
+			languageCode = in.readLine();
+			in.close();
+			
+			if(localization.isRecognizedLanguage(languageCode))
+			{
+				localization.setCurrentLanguageCode(languageCode);
+				localization.setCurrentDateFormatCode(localization.getDefaultDateFormatForLanguage(languageCode));
+			}
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+		}
+	}
+
 	public void enableUploadLogging()
 	{
 		logUploads = true;

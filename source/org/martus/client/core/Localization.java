@@ -34,6 +34,7 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -46,9 +47,34 @@ public class Localization
 	{
 		directory = directoryToUse;
 		languageTranslationsMap = new TreeMap();
+		
+		initalizeDefaultDateFormats();
+	}
+
+	private void initalizeDefaultDateFormats()
+	{
+		defaultLanguageDateFormat = new HashMap();
+		defaultLanguageDateFormat.put(ENGLISH, DateUtilities.getDefaultDateFormatCode());
+		defaultLanguageDateFormat.put(SPANISH, DateUtilities.DMY_SLASH.getCode());
+		defaultLanguageDateFormat.put(RUSSIAN, DateUtilities.DMY_DOT.getCode());
 	}
 	
+	public boolean isRecognizedLanguage(String testLanguageCode)
+	{
+		for(int i = 0 ; i < ALL_LANGUAGE_CODES.length; ++i)
+		{
+			if(ALL_LANGUAGE_CODES[i].equals(testLanguageCode))
+				return true;
+		}
+		return false;
+	}
 
+	public String getDefaultDateFormatForLanguage(String languageCode)
+	{
+		if(!defaultLanguageDateFormat.containsKey(languageCode))
+			return DateUtilities.getDefaultDateFormatCode();
+		return (String)defaultLanguageDateFormat.get(languageCode);
+	}
 
 	public File directory;
 	public Map languageTranslationsMap;
@@ -59,11 +85,13 @@ public class Localization
 	public static final String MARTUS_LANGUAGE_FILE_SUFFIX = ".mtf";
 	
 	public static final String ENGLISH = "en";
+	public static final String SPANISH = "es";
+	public static final String RUSSIAN = "ru";
 	public static final String[] ALL_LANGUAGE_CODES = {
-				"?", "en", "ar",
+				"?", ENGLISH, "ar",
 				"az", "bn", "my","zh", "nl", "eo", "fa", "fr", "de","gu","ha","he","hi","hu",
-				"it", "ja","jv","kn","kk","ky","ko","ml","mr","or","pa","ps","pl","pt","ro","ru","sr",
-				"sr", "sd","si","es","ta","tg","te","th","tr","tk","uk","ur","uz","vi"};
+				"it", "ja","jv","kn","kk","ky","ko","ml","mr","or","pa","ps","pl","pt","ro",RUSSIAN,"sr",
+				"sr", "sd","si",SPANISH,"ta","tg","te","th","tr","tk","uk","ur","uz","vi"};
 	public String getCurrentDateFormatCode()
 	{
 		return currentDateFormat;
@@ -234,4 +262,5 @@ public class Localization
 	
 		return result;
 	}
+	HashMap defaultLanguageDateFormat;
 }

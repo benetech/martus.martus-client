@@ -40,6 +40,8 @@ import org.martus.client.core.BulletinFolder;
 import org.martus.client.core.BulletinStore;
 import org.martus.client.core.ChoiceItem;
 import org.martus.client.core.ConfigInfo;
+import org.martus.client.core.DateUtilities;
+import org.martus.client.core.Localization;
 import org.martus.client.core.MartusApp;
 import org.martus.client.core.QuickEraseOptions;
 import org.martus.client.swingui.UiLocalization;
@@ -96,6 +98,43 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		BulletinStore store = appWithAccount.getStore();
 		assertNotNull("BulletinStore", store);
 		TRACE_END();
+	}
+	
+	public void testSetDefaultUiState() throws Exception
+	{
+		UiLocalization testLocalization = new UiLocalization(null);
+		File tmpFile = createTempFile();
+		MartusApp.setInitialUiDefaultsFromFileIfPresent(testLocalization, tmpFile);
+		assertNull("File doesn't exist localization should not be set", testLocalization.getCurrentLanguageCode());
+		FileOutputStream out = new FileOutputStream(tmpFile);
+		out.write("invalidLanguageCode".getBytes());
+		out.close();
+		MartusApp.setInitialUiDefaultsFromFileIfPresent(testLocalization, tmpFile);
+		assertNull("Invalid language code, localization should not be set", testLocalization.getCurrentLanguageCode());
+		tmpFile.delete();
+		out = new FileOutputStream(tmpFile);
+		out.write("en".getBytes());
+		out.close();
+		MartusApp.setInitialUiDefaultsFromFileIfPresent(testLocalization, tmpFile);
+		assertEquals("English should be set", Localization.ENGLISH, testLocalization.getCurrentLanguageCode());
+		assertEquals("English code should set DMY correctly", DateUtilities.MDY_SLASH.getCode(), testLocalization.getCurrentDateFormatCode());
+		tmpFile.delete();
+		out = new FileOutputStream(tmpFile);
+		out.write("es".getBytes());
+		out.close();
+		MartusApp.setInitialUiDefaultsFromFileIfPresent(testLocalization, tmpFile);
+		assertEquals("Spanish should be set", Localization.SPANISH, testLocalization.getCurrentLanguageCode());
+		assertEquals("Spanish code should set MDY correctly", DateUtilities.DMY_SLASH.getCode(), testLocalization.getCurrentDateFormatCode());
+		tmpFile.delete();
+		out = new FileOutputStream(tmpFile);
+		out.write("ru".getBytes());
+		out.close();
+		MartusApp.setInitialUiDefaultsFromFileIfPresent(testLocalization, tmpFile);
+		assertEquals("Russian should be set", Localization.RUSSIAN, testLocalization.getCurrentLanguageCode());
+		assertEquals("Russian code should set MDY Dot correctly", DateUtilities.DMY_DOT.getCode(), testLocalization.getCurrentDateFormatCode());
+		tmpFile.delete();
+		
+		
 	}
 	
 	public void testDiscardBulletinsFromFolder() throws Exception

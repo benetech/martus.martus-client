@@ -61,6 +61,7 @@ public class TestMartusLocalization extends TestCaseEnhanced
 	
 	public void testValidLanguageCodes()
 	{
+		assertFalse("null should not be recognized", bd.isRecognizedLanguage(null));
 		assertTrue("English should be recognized", bd.isRecognizedLanguage(UiLocalization.ENGLISH));
 		assertTrue("Spanish should be recognized", bd.isRecognizedLanguage(UiLocalization.SPANISH));
 		assertTrue("Russian should be recognized", bd.isRecognizedLanguage(UiLocalization.RUSSIAN));
