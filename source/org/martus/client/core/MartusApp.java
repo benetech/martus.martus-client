@@ -522,40 +522,61 @@ public class MartusApp
 		File[] mlpFiles = GetMlpFiles();
 		for(int i = 0; i < mlpFiles.length; ++i)
 		{
-			if(JarVerifier.verify(mlpFiles[i], false) == JarVerifier.JAR_VERIFIED_TRUE)
+			File mlpFile = mlpFiles[i];
+			extractNewerPDFDocumentation(mlpFile);
+		}
+	}
+
+	private void extractNewerPDFDocumentation(File mlpFile)
+	{
+		if(JarVerifier.verify(mlpFile, false) != JarVerifier.JAR_VERIFIED_TRUE)
+			return;
+		JarFile jar = null;
+		try
+		{
+			jar = new JarFile(mlpFile);
+			Enumeration enum = jar.entries();
+			while(enum.hasMoreElements())
 			{
-				try
-				{
-					JarFile jar = new JarFile(mlpFiles[i]);
-					Enumeration enum = jar.entries();
-					while(enum.hasMoreElements())
-					{
-						JarEntry entry = (JarEntry) enum.nextElement();
-						String jarEntryName = entry.getName();
-						if(jarEntryName.endsWith(".pdf"))
-						{
-							File documentsDirectory = getDocumentsDirectory();
-							File newPdf = new File(documentsDirectory, jarEntryName);
-							if(newPdf.exists())
-							{
-								Date zipPdfDate = new Date(entry.getTime());
-								Date currentFileDate = new Date(newPdf.lastModified());
-								if(zipPdfDate.before(currentFileDate))
-									continue;
-								newPdf.delete();
-							}
-							documentsDirectory.mkdirs();
-							copyJarEntryToFile(jar, entry, newPdf);
-						}
-					}
-					jar.close();
-				}
-				catch(IOException e)
-				{
-					e.printStackTrace();
-				}
+				JarEntry entry = (JarEntry) enum.nextElement();
+				String jarEntryName = entry.getName();
+				if(!jarEntryName.endsWith(".pdf"))
+					continue;
+				File documentsDirectory = getDocumentsDirectory();
+				File pdfFileOnDisk = new File(documentsDirectory, jarEntryName);
+				if(isPdfNewerOnDisk(pdfFileOnDisk, entry))
+					continue;
+				pdfFileOnDisk.delete();
+				documentsDirectory.mkdirs();
+				copyJarEntryToFile(jar, entry, pdfFileOnDisk);
 			}
 		}
+		catch(IOException e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			try
+			{
+				if(jar != null)
+					jar.close();
+			}
+			catch(IOException e1)
+			{
+				e1.printStackTrace();
+			}
+		}
+	}
+	
+
+	public boolean isPdfNewerOnDisk(File pdfFile, ZipEntry entry)
+	{
+		if(!pdfFile.exists())
+			return false;
+		Date zipPdfDate = new Date(entry.getTime());
+		Date currentFileDate = new Date(pdfFile.lastModified());
+		return(zipPdfDate.before(currentFileDate));
 	}
 
 	private void copyJarEntryToFile(JarFile jar, JarEntry entry, File outputFile) throws IOException, FileNotFoundException
@@ -564,6 +585,7 @@ public class MartusApp
 		FileOutputStream out = new FileOutputStream(outputFile);
 		StreamCopier copier = new StreamCopier();
 		copier.copyStream(in, out);
+		//TODO put closes in a finally block.
 		in.close();
 		out.close();
 		outputFile.setLastModified(entry.getTime());
