@@ -61,16 +61,20 @@ public class BulletinHtmlGenerator
 		html.append("<table width='");
 		html.append(Integer.toString(width));
 		html.append("'>");
-
+	
 		String publicSectionTitle =  localization.getFieldLabel("publicsection");
+		String allPrivateValueTag = "no";
+		if(b.isAllPrivate())
+		{	
+			allPrivateValueTag = "yes";				
+			publicSectionTitle =  localization.getFieldLabel("privatesection");
+		}
+		
 		html.append("<tr><td colspan='2'><u><b>");
 		html.append(publicSectionTitle);
 		html.append("</b></u></td></tr>");
 		html.append("\n");
 
-		String allPrivateValueTag = "no";
-		if(b.isAllPrivate())
-			allPrivateValueTag = "yes";
 		html.append(getFieldHtmlString("allprivate", localization.getButtonLabel(allPrivateValueTag)));
 
 		FieldSpec[] standardFieldTags = b.getPublicFieldSpecs();
