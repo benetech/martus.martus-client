@@ -513,10 +513,10 @@ public class MartusApp
 		try
 		{
 			jar = new JarFile(mlpFile);
-			Enumeration enum = jar.entries();
-			while(enum.hasMoreElements())
+			Enumeration entries = jar.entries();
+			while(entries.hasMoreElements())
 			{
-				JarEntry entry = (JarEntry) enum.nextElement();
+				JarEntry entry = (JarEntry) entries.nextElement();
 				String jarEntryName = entry.getName();
 				if(!jarEntryName.endsWith(".pdf"))
 					continue;
