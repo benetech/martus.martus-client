@@ -49,10 +49,9 @@ public class UiBulletinPreviewDlg extends JDialog implements ActionListener
 	public UiBulletinPreviewDlg(UiMainWindow owner, FieldDataPacket fdp)
 	{
 		super(owner, owner.getLocalization().getWindowTitle("BulletinPreview"), true);
-		boolean isEncrypted = fdp.isEncrypted();
 		getContentPane().setLayout(new ParagraphLayout());
 
-		UiBulletinComponentViewSection view = new UiBulletinComponentViewSection(null, owner, isEncrypted);
+		UiBulletinComponentViewSection view = new UiBulletinComponentViewSection(null, owner);
 		FieldSpec[] standardFieldTags = FieldSpec.getDefaultPublicFieldSpecs();
 		view.createLabelsAndFields(standardFieldTags);
 		view.createAttachmentTable();
@@ -60,6 +59,9 @@ public class UiBulletinPreviewDlg extends JDialog implements ActionListener
 		view.disableEdits();
 		view.attachmentViewer.saveButton.setVisible(false);
 		view.attachmentViewer.viewButton.setVisible(false);
+
+		boolean isEncrypted = fdp.isEncrypted();
+		view.updateEncryptedIndicator(isEncrypted);		
 		view.updateSectionBorder(isEncrypted);
 
 		JScrollPane scrollPane = new JScrollPane();

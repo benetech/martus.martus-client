@@ -44,9 +44,9 @@ public class UiBulletinEditor extends UiBulletinComponent
 		// ensure that attachmentEditor gets initialized
 	}
 
-	public UiBulletinComponentSection createBulletinComponentSection(boolean encrypted)
+	public UiBulletinComponentSection createBulletinComponentSection()
 	{
-		return new UiBulletinComponentEditorSection(this, mainWindow, encrypted);
+		return new UiBulletinComponentEditorSection(this, mainWindow);
 	}
 
 	public class AttachmentMissing extends UiField.DataInvalidException

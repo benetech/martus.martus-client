@@ -42,9 +42,9 @@ import org.martus.common.clientside.ChoiceItem;
 public class UiBulletinComponentEditorSection extends UiBulletinComponentSection
 {
 
-	public UiBulletinComponentEditorSection(UiBulletinComponent bulletinComponentToUse, UiMainWindow ownerToUse, boolean encrypted)
+	public UiBulletinComponentEditorSection(UiBulletinComponent bulletinComponentToUse, UiMainWindow ownerToUse)
 	{
-		super(ownerToUse.getLocalization(), encrypted);
+		super(ownerToUse.getLocalization());
 		owner = ownerToUse;
 		bulletinComponent = bulletinComponentToUse;
 	}

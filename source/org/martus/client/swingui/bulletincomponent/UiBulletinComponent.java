@@ -54,11 +54,8 @@ abstract public class UiBulletinComponent extends JPanel implements Scrollable, 
 
 	public void createSections()
 	{
-		boolean sometimesEncrypted = UiBulletinComponentSection.NOT_ENCRYPTED;
-		boolean alwaysEncrypted = UiBulletinComponentSection.ENCRYPTED;
-
-		publicStuff = createSection(currentBulletin.getPublicFieldSpecs(), sometimesEncrypted);
-		privateStuff = createSection(currentBulletin.getPrivateFieldSpecs(), alwaysEncrypted);
+		publicStuff = createSection(currentBulletin.getPublicFieldSpecs(), SOMETIMES_ENCRYPTED);
+		privateStuff = createSection(currentBulletin.getPrivateFieldSpecs(), ALWAYS_ENCRYPTED);
 		
 		ensureBothSectionsLineUp();
 		setLayout(new BorderLayout());
@@ -68,10 +65,10 @@ abstract public class UiBulletinComponent extends JPanel implements Scrollable, 
 
 	private UiBulletinComponentSection createSection(
 		FieldSpec[] fieldSpecs,
-		boolean isAlwaysEncrypted)
+		int encryptionStatus)
 	{
-		UiBulletinComponentSection target = createBulletinComponentSection(isAlwaysEncrypted);
-		if(!isAlwaysEncrypted)
+		UiBulletinComponentSection target = createBulletinComponentSection();
+		if(encryptionStatus == SOMETIMES_ENCRYPTED)
 		{
 			FieldSpec allPrivateFieldSpec = new FieldSpec("allprivate", FieldSpec.TYPE_BOOLEAN);
 			allPrivateField = target.createAndAddLabelAndField(allPrivateFieldSpec);
@@ -243,5 +240,8 @@ abstract public class UiBulletinComponent extends JPanel implements Scrollable, 
 	UiBulletinComponentSection publicStuff;
 	UiBulletinComponentSection privateStuff;	
 
-	abstract public UiBulletinComponentSection createBulletinComponentSection(boolean encrypted);
+	private static final int SOMETIMES_ENCRYPTED = 1;
+	private static final int ALWAYS_ENCRYPTED = 2;
+
+	abstract public UiBulletinComponentSection createBulletinComponentSection();
 }

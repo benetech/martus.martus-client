@@ -53,7 +53,7 @@ import org.martus.swing.ParagraphLayout;
 
 abstract public class UiBulletinComponentSection extends JPanel
 {
-	UiBulletinComponentSection(UiBasicLocalization localizationToUse, boolean encrypted)
+	UiBulletinComponentSection(UiBasicLocalization localizationToUse)
 	{
 		localization = localizationToUse;
 
@@ -69,7 +69,6 @@ abstract public class UiBulletinComponentSection extends JPanel
 
 		warningIndicator = new UiWarningLabel();
 
-		updateEncryptedIndicator(encrypted);
 		clearWarningIndicator();
 		add(encryptedIndicator);
 		add(warningIndicator);
@@ -169,7 +168,7 @@ abstract public class UiBulletinComponentSection extends JPanel
 	{
 		String iconFileName = "unlocked.jpg";
 		String title = localization.getFieldLabel("publicsection");
-		if(isEncrypted == ENCRYPTED)
+		if(isEncrypted)
 		{
 			iconFileName = "locked.jpg";
 			title = localization.getFieldLabel("privatesection");
@@ -288,9 +287,6 @@ abstract public class UiBulletinComponentSection extends JPanel
 	JLabel warningIndicator;
 	UiField[] fields;
 	FieldSpec[] fieldSpecs;
-
-	public final static boolean ENCRYPTED = true;
-	public final static boolean NOT_ENCRYPTED = false;
 
 	abstract public UiField createNormalField();
 	abstract public UiField createMultilineField();

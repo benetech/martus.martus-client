@@ -36,9 +36,9 @@ public class UiBulletinView extends UiBulletinComponent
 		// ensure that attachmentViewer gets initialized
 	}
 
-	public UiBulletinComponentSection createBulletinComponentSection(boolean encrypted)
+	public UiBulletinComponentSection createBulletinComponentSection()
 	{
-		return new UiBulletinComponentViewSection(this, mainWindow, encrypted);
+		return new UiBulletinComponentViewSection(this, mainWindow);
 	}
 
 }
