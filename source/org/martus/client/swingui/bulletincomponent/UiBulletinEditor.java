@@ -69,11 +69,11 @@ public class UiBulletinEditor extends UiBulletinComponent
 		{
 			try 
 			{
-				fields[fieldNum].validate();
+				fields[fieldNum].field.validate();
 			} 
 			catch (UiDateEditor.DateFutureException e) 
 			{
-				throw new UiDateEditor.DateFutureException(owner.getLocalization().getFieldLabel(fieldTags[fieldNum]));
+				throw new UiDateEditor.DateFutureException(owner.getLocalization().getFieldLabel(fields[fieldNum].tag));
 			}
 		}
 		
@@ -107,10 +107,10 @@ public class UiBulletinEditor extends UiBulletinComponent
 			
 		for(int fieldNum = 0; fieldNum < fields.length; ++fieldNum)
 		{			
-			String fieldTag = fieldTags[fieldNum];			
+			String fieldTag = fields[fieldNum].tag;			
 			String oldFieldText = currentBulletin.get(fieldTag);
 			
-			if (fields[fieldNum] instanceof UiFlexiDateEditor)							
+			if (fields[fieldNum].field instanceof UiFlexiDateEditor)							
 				currentFieldText = getBulletinFlexidateFormat(oldFieldText);					
 			else
 				currentFieldText = oldFieldText;		
@@ -190,7 +190,7 @@ public class UiBulletinEditor extends UiBulletinComponent
 		bulletin.setAllPrivate(isAllPrivate);
 		for(int fieldNum = 0; fieldNum < fields.length; ++fieldNum)
 		{						
-			bulletin.set(fieldTags[fieldNum], fields[fieldNum].getText());													
+			bulletin.set(fields[fieldNum].tag, fields[fieldNum].field.getText());													
 		}
 
 		UiBulletinComponentEditorSection publicSection = (UiBulletinComponentEditorSection)publicStuff;
