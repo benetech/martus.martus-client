@@ -79,9 +79,25 @@ public class ActionMenuQuickErase extends UiMenuAction
 		mainWindow.folderTreeContentsHaveChanged();		
 	}
 	
+	static private boolean containSubDir(File startingDir)
+	{
+		File[] files = startingDir.listFiles();
+		
+		if (files != null)
+		{			
+			for (int i = 0; i < files.length; i++)
+			{				
+				if (files[i].isDirectory())
+					return true;
+			}
+		}		
+		return false;
+	}
+	
+	
 	private void confirmDeleteSubDirectory(File packetDir, QuickEraseOptions options)
 	{
-		if (!DirectoryTreeRemover.isContainSubDir(packetDir))
+		if (!containSubDir(packetDir))
 			return;
 		
 		UiLocalization localization = mainWindow.getLocalization();			
