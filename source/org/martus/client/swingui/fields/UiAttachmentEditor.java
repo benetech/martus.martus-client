@@ -229,7 +229,7 @@ public class UiAttachmentEditor extends JPanel
 		{
 			File last = getLastAttachmentLoadDirectory();
 			if(last == null)
-				last = UiFileChooser.createFileInUsersHomeDirectory(null);
+				last = UiFileChooser.getHomeDirectoryFile(null);
 			File attachmentFileToAdd = new File(last, " ");
 			
 			UiBasicLocalization localization = mainWindow.getLocalization();
