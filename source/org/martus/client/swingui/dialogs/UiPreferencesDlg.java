@@ -38,7 +38,6 @@ import org.martus.client.swingui.fields.UiChoiceEditor;
 import org.martus.common.clientside.DateUtilities;
 import org.martus.common.clientside.UiBasicLocalization;
 import org.martus.swing.UiCheckBox;
-import org.martus.swing.UiLanguageDirection;
 import org.martus.swing.UiParagraphPanel;
 import org.martus.swing.Utilities;
 
@@ -64,21 +63,12 @@ public class UiPreferencesDlg extends JDialog implements ActionListener
 		allPrivate.setText(localization.getFieldLabel("preferencesAllPrivate"));
 		allPrivate.setSelected(owner.getBulletinsAlwaysPrivate());
 		
-//TODO: Remove before the 2.x release
-directionRtoL = new UiCheckBox();
-directionRtoL.setText("Language Right to Left");
-directionRtoL.setSelected(UiLanguageDirection.isRightToLeftLanguage());
-		
 		UiParagraphPanel preferences = new UiParagraphPanel();
 		preferences.addComponents(new JLabel(localization.getFieldLabel("language")), languageDropdown.getComponent());
 		preferences.addComponents(new JLabel(localization.getFieldLabel("dateformat")), dateFormatDropdown.getComponent());
 		
 		preferences.addBlankLine();
 		preferences.addOnNewLine(allPrivate);
-		
-//		TODO: Remove before the 2.x release
-preferences.addOnNewLine(directionRtoL);
-		
 		preferences.addBlankLine();
 		
 		ok = new JButton(localization.getButtonLabel("ok"));
@@ -107,12 +97,6 @@ preferences.addOnNewLine(directionRtoL);
 			localization.setCurrentDateFormatCode(dateFormatDropdown.getText());
 			localization.setCurrentLanguageCode(languageDropdown.getText());
 			owner.setBulletinsAlwaysPrivate(allPrivate.isSelected());
-
-//TODO:Remove later			
-if(directionRtoL.isSelected())
-	UiLanguageDirection.setDirection((UiLanguageDirection.RIGHT_TO_LEFT));
-else
-	UiLanguageDirection.setDirection((UiLanguageDirection.LEFT_TO_RIGHT));
 		}
 		dispose();
 	}
@@ -121,7 +105,6 @@ else
 	UiChoiceEditor languageDropdown;
 	private UiChoiceEditor dateFormatDropdown;
 	private JCheckBox allPrivate;
-	private JCheckBox directionRtoL;
 	private JButton ok;
 	private JButton cancel;
 }
