@@ -27,6 +27,8 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.swingui.fields;
 
 import java.awt.Font;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 import javax.swing.JComponent;
 import org.martus.client.swingui.UiConstants;
 import org.martus.client.swingui.UiLocalization;
@@ -41,12 +43,26 @@ public class UiNormalTextEditor extends UiNormalTextField
 		widget.setLineWrap(true);
 		widget.setWrapStyleWord(true);
 		widget.setFont(new Font("SansSerif", Font.PLAIN, UiConstants.defaultFontSize));
+		widget.addFocusListener(new myFocusListener());
 		supportContextMenu();
 	}
 	public JComponent[] getFocusableComponents()
 	{
 		return new JComponent[]{widget};
 	}
+	
+	class myFocusListener implements FocusListener
+	{
+		public void focusGained(FocusEvent e)
+		{
+		}
+
+		public void focusLost(FocusEvent e)
+		{
+			widget.updateUI();//Java Bug with rendering Arabic subscript characters being clipped
+		}
+	}
+	
 }
 
 
