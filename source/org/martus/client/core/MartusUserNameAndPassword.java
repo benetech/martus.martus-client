@@ -26,6 +26,8 @@ Boston, MA 02111-1307, USA.
 
 package org.martus.client.core;
 
+import java.util.Arrays;
+
 import org.martus.client.core.Exceptions.BlankUserNameException;
 import org.martus.client.core.Exceptions.PasswordMatchedUserNameException;
 import org.martus.client.core.Exceptions.PasswordTooShortException;
@@ -42,7 +44,7 @@ import org.martus.client.core.Exceptions.PasswordTooShortException;
  */
 public class MartusUserNameAndPassword
 {
-	public static final void validateUserNameAndPassword(String username, String password)
+	public static final void validateUserNameAndPassword(String username, char[] password)
 		throws
 			BlankUserNameException,
 			PasswordMatchedUserNameException,
@@ -50,27 +52,27 @@ public class MartusUserNameAndPassword
 	{
 		if (username.length() == 0)
 			throw new BlankUserNameException();
-		if (password.length() < BASIC_PASSWORD_LENGTH)
+		if (password.length < BASIC_PASSWORD_LENGTH)
 			throw new PasswordTooShortException();
-		if (password.equals(username))
+		if (Arrays.equals(password, username.toCharArray()))
 			throw new PasswordMatchedUserNameException();
 	}
 
-	public static final boolean isWeakPassword(String password)
+	public static final boolean isWeakPassword(char[] password)
 	{
-		if ((password.length() >= STRONG_PASSWORD_LENGTH)
+		if ((password.length >= STRONG_PASSWORD_LENGTH)
 			&& (containsEnoughNonAlphanumbericCharacters(password)))
 			return false;
 		return true;
 	}
 
-	private static final boolean containsEnoughNonAlphanumbericCharacters(String password)
+	private static final boolean containsEnoughNonAlphanumbericCharacters(char[] password)
 	{
 		int nonAlphanumericCounter = 0;
-		int passwordLength = password.length();
+		int passwordLength = password.length;
 		for (int i = 0; i < passwordLength; i++)
 		{
-			if (!(Character.isLetterOrDigit(password.charAt(i))))
+			if (!(Character.isLetterOrDigit(password[i])))
 			{
 				nonAlphanumericCounter++;
 				if (nonAlphanumericCounter

@@ -115,9 +115,9 @@ public class UiSigninPanel extends JPanel implements VirtualKeyboardHandler
 		return nameField.getText();
 	}
 	
-	public String getPassword()
+	public char[] getPassword()
 	{
-		return new String(passwordField.getPassword());
+		return passwordField.getPassword();
 	}
 	
 	public void refreshForNewVirtualMode()

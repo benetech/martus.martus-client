@@ -44,7 +44,7 @@ public class TestMartusUserNameAndPassword extends TestCaseEnhanced
 	{
 		try
 		{
-			MartusUserNameAndPassword.validateUserNameAndPassword("", "validPassword");
+			MartusUserNameAndPassword.validateUserNameAndPassword("", "validPassword".toCharArray());
 			fail("Why wasn't a BlankUserNameException thrown?");
 		}
 		catch(BlankUserNameException ignoreExpectedException)
@@ -52,7 +52,7 @@ public class TestMartusUserNameAndPassword extends TestCaseEnhanced
 
 		try
 		{
-			MartusUserNameAndPassword.validateUserNameAndPassword("validUserName","validUserName");
+			MartusUserNameAndPassword.validateUserNameAndPassword("validUserName","validUserName".toCharArray());
 			fail("Why was another exception (not PasswordMatchedUserNameException) thrown?");
 		}
 		catch(PasswordMatchedUserNameException ignoreExpectedException)
@@ -60,7 +60,7 @@ public class TestMartusUserNameAndPassword extends TestCaseEnhanced
 
 		try
 		{
-			MartusUserNameAndPassword.validateUserNameAndPassword("validUserName","short");
+			MartusUserNameAndPassword.validateUserNameAndPassword("validUserName","short".toCharArray());
 			fail("Why was another exception (not PasswordTooShortException) thrown?");
 		}
 		catch(PasswordTooShortException ignoreExpectedException)
@@ -69,8 +69,8 @@ public class TestMartusUserNameAndPassword extends TestCaseEnhanced
 
 	public void testIsWeakPassword()
 	{
-		assertTrue("Why was 'test' not a weak password?", MartusUserNameAndPassword.isWeakPassword("test"));
-		assertFalse("Why was '123456789012345%$' not a strong password?", MartusUserNameAndPassword.isWeakPassword("123456789012345%$"));
+		assertTrue("Why was 'test' not a weak password?", MartusUserNameAndPassword.isWeakPassword("test".toCharArray()));
+		assertFalse("Why was '123456789012345%$' not a strong password?", MartusUserNameAndPassword.isWeakPassword("123456789012345%$".toCharArray()));
 	}
 
 

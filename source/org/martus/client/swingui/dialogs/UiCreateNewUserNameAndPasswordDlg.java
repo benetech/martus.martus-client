@@ -68,7 +68,7 @@ public class UiCreateNewUserNameAndPasswordDlg
 			if (signinDlg2.getUserChoice() != UiSigninDlg.SIGN_IN)
 				return;
 			String userName2 = signinDlg2.getName();
-			String userPassword2 = signinDlg2.getPassword();
+			char[] userPassword2 = signinDlg2.getPassword();
 
 			// make sure the passwords and usernames match
 			if (!userPassword1.equals(userPassword2))
@@ -131,13 +131,13 @@ public class UiCreateNewUserNameAndPasswordDlg
 		return userName1;
 	}
 
-	public String getPassword()
+	public char[] getPassword()
 	{
 		return userPassword1;
 	}
 
 	private String userName1;
-	private String userPassword1;
+	private char[] userPassword1;
 	private UiMainWindow mainWindow;
 	private boolean result;
 }

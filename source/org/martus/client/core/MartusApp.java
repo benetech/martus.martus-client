@@ -1011,7 +1011,7 @@ public class MartusApp
 	public static class AccountAlreadyExistsException extends Exception {}
 	public static class CannotCreateAccountFileException extends IOException {}
 
-	public void createAccount(String userName, String userPassPhrase) throws
+	public void createAccount(String userName, char[] userPassPhrase) throws
 					AccountAlreadyExistsException,
 					CannotCreateAccountFileException,
 					IOException
@@ -1051,7 +1051,7 @@ public class MartusApp
 		return(new File(getCurrentAccountDirectoryName(), completeFileName));
 	}
 
-	public boolean attemptSignIn(String userName, String userPassPhrase)
+	public boolean attemptSignIn(String userName, char[] userPassPhrase)
 	{
 		return attemptSignInInternal(getKeyPairFile(getMartusDataRootDirectory()), userName, userPassPhrase);
 	}
@@ -1073,7 +1073,7 @@ public class MartusApp
 		return getAccountId().equals(b.getAccount());	
 	}
 
-	public void createAccountInternal(File accountDataDirectory, String userName, String userPassPhrase) throws
+	public void createAccountInternal(File accountDataDirectory, String userName, char[] userPassPhrase) throws
 					AccountAlreadyExistsException,
 					CannotCreateAccountFileException,
 					IOException
@@ -1094,7 +1094,7 @@ public class MartusApp
 		}
 	}
 
-	public void writeKeyPairFileWithBackup(File keyPairFile, String userName, String userPassPhrase) throws
+	public void writeKeyPairFileWithBackup(File keyPairFile, String userName, char[] userPassPhrase) throws
 		IOException,
 		CannotCreateAccountFileException
 	{
@@ -1110,7 +1110,7 @@ public class MartusApp
 		}
 	}
 
-	protected void writeKeyPairFileInternal(File keyPairFile, String userName, String userPassPhrase) throws
+	protected void writeKeyPairFileInternal(File keyPairFile, String userName, char[] userPassPhrase) throws
 		IOException,
 		CannotCreateAccountFileException
 	{
@@ -1127,7 +1127,7 @@ public class MartusApp
 
 	}
 
-	public boolean attemptSignInInternal(File keyPairFile, String userName, String userPassPhrase)
+	public boolean attemptSignInInternal(File keyPairFile, String userName, char[] userPassPhrase)
 	{
 		FileInputStream inputStream = null;
 		MartusCrypto attemptSignInSecurityToUse = null;
@@ -1200,9 +1200,14 @@ public class MartusApp
 		currentAccountDirectory = martusDataRootDirectory; 
 	}
 
-	public String getCombinedPassPhrase(String userName, String userPassPhrase)
+	public char[] getCombinedPassPhrase(String userName, char[] userPassPhrase)
 	{
-		return(userPassPhrase + ":" + userName);
+		char[] combined = new char[userName.length() + userPassPhrase.length + 1];
+		System.arraycopy(userPassPhrase,0,combined,0,userPassPhrase.length);
+		combined[userPassPhrase.length] = ':';
+		System.arraycopy(userName.toCharArray(),0,combined,userPassPhrase.length+1,userName.length());
+		
+		return(combined);
 	}
 
 	public MartusCrypto getSecurity()

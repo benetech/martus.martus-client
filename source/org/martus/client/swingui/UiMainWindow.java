@@ -1083,7 +1083,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		if(!newUserInfo.isDataValid())
 			return false;
 		String userName = newUserInfo.getUserName();
-		String userPassword = newUserInfo.getPassword();
+		char[] userPassword = newUserInfo.getPassword();
 		try
 		{
 			app.writeKeyPairFileWithBackup(keyPairFile, userName, userPassword);
@@ -1586,7 +1586,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		if(!newUserInfo.isDataValid())
 			return false;
 		String userName = newUserInfo.getUserName();
-		String userPassword = newUserInfo.getPassword();
+		char[] userPassword = newUserInfo.getPassword();
 
 		UiModelessBusyDlg waitingForKeyPair = new UiModelessBusyDlg(getLocalization().getFieldLabel("waitingForKeyPairGeneration"));
 		try

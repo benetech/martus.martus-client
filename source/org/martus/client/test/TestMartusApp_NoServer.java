@@ -33,6 +33,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.RandomAccessFile;
+import java.util.Arrays;
 import java.util.Vector;
 
 import org.martus.client.core.BulletinFolder;
@@ -331,7 +332,7 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 
 		MockMartusApp appWithDifferentAccount;
 		appWithDifferentAccount = MockMartusApp.create(mockSecurityForApp);
-		appWithDifferentAccount.createAccount("bogusName","bogusPassword");
+		appWithDifferentAccount.createAccount("bogusName","bogusPassword".toCharArray());
 		assertFalse("This is our bulletin?", appWithDifferentAccount.isOurBulletin(b));
 		appWithDifferentAccount.deleteAllFiles();
 		TRACE_END();
@@ -468,15 +469,15 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 
 	public void testGetCombinedPassPhrase()
 	{
-		String combined1 = appWithAccount.getCombinedPassPhrase(userName, userPassword);
-		String combined2 = appWithAccount.getCombinedPassPhrase(userName2, userPassword);
-		String combined3 = appWithAccount.getCombinedPassPhrase(userName, userPassword2);
-		assertNotEquals("username diff", combined1, combined2);
-		assertNotEquals("password diff", combined1, combined3);
+		char[] combined1 = appWithAccount.getCombinedPassPhrase(userName, userPassword);
+		char[] combined2 = appWithAccount.getCombinedPassPhrase(userName2, userPassword);
+		char[] combined3 = appWithAccount.getCombinedPassPhrase(userName, userPassword2);
+		assertFalse("username diff", Arrays.equals(combined1, combined2));
+		assertFalse("password diff",  Arrays.equals(combined1, combined3));
 
-		String ab_c = appWithAccount.getCombinedPassPhrase("ab", "c");
-		String a_bc = appWithAccount.getCombinedPassPhrase("a", "bc");
-		assertNotEquals("abc diff", ab_c, a_bc);
+		char[] ab_c = appWithAccount.getCombinedPassPhrase("ab", "c".toCharArray());
+		char[] a_bc = appWithAccount.getCombinedPassPhrase("a", "bc".toCharArray());
+		assertFalse("abc diff", Arrays.equals(ab_c, a_bc));
 	}
 
 	public void testAttemptSignInBadKeyPairFile() throws Exception
@@ -1051,6 +1052,6 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 
 	static final String userName = "testuser";
 	static final String userName2 = "testuse!";
-	static final String userPassword = "12345";
-	static final String userPassword2 = "12347";
+	static final char[] userPassword = "12345".toCharArray();
+	static final char[] userPassword2 = "12347".toCharArray();
 }

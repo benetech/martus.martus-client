@@ -156,7 +156,7 @@ public class UiSigninDlg extends JDialog
 		return signinPane.getName();
 	}
 
-	public String getPassword()
+	public char[] getPassword()
 	{
 		return signinPane.getPassword();
 	}
