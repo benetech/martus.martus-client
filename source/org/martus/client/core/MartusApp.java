@@ -942,7 +942,7 @@ public class MartusApp
 		FieldDataPacket fdp = null;
 		String args[] = parameters.split(MartusConstants.regexEqualsDelimeter, -1);
 		if(args.length != 3)
-			throw new ServerErrorException("MartusApp.createSummaryFromString: " + parameters);
+			throw new ServerErrorException("MartusApp.retrieveSummaryFromString invalid # params: " + parameters);
 		String bulletinLocalId= args[0];
 		String packetlocalId = args[1];
 		int size = Integer.parseInt(args[2]);
@@ -962,7 +962,7 @@ public class MartusApp
 		}
 		catch(Exception e)
 		{
-System.out.println("MartusApp.createSummaryFromString Exception: bulletinLocalId=" + bulletinLocalId + " packetlocalId=" + packetlocalId );
+			//System.out.println("MartusApp.retrieveSummaryFromString Exception: bulletinLocalId=" + bulletinLocalId + " packetlocalId=" + packetlocalId );
 			//e.printStackTrace();
 			throw new ServerErrorException();
 		}
@@ -997,7 +997,8 @@ System.out.println("MartusApp.createSummaryFromString Exception: bulletinLocalId
 		if(!resultCode.equals(NetworkInterfaceConstants.OK))
 			throw new ServerErrorException(resultCode);
 
-		String xml = (String)response.getResultVector().get(0);
+		String xmlencoded = (String)response.getResultVector().get(0);
+		String xml = new String(Base64.decode(xmlencoded), "UTF-8");
 		UniversalId uid = UniversalId.createFromAccountAndLocalId(authorAccountId, dataPacketLocalId);
 		FieldDataPacket fdp = new FieldDataPacket(uid , FieldSpec.getDefaultPublicFieldSpecs());
 		byte[] xmlBytes = xml.getBytes("UTF-8");

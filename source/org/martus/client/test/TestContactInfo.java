@@ -35,6 +35,7 @@ import java.util.Vector;
 import org.martus.common.ContactInfo;
 import org.martus.common.FieldSpec;
 import org.martus.common.crypto.MartusSecurity;
+import org.martus.common.network.NetworkInterfaceConstants;
 import org.martus.common.test.TestCaseEnhanced;
 import org.martus.util.Base64;
 
@@ -147,7 +148,7 @@ public class TestContactInfo extends TestCaseEnhanced
 		MartusSecurity signer = new MartusSecurity();
 		signer.createKeyPair(512);
 		Vector contactInfo = newInfo.getEncodedContactInfo(signer);
-		assertEquals("Not encoded?",ContactInfo.BASE_64_ENCODED,contactInfo.get(0));
+		assertEquals("Not encoded?",NetworkInterfaceConstants.BASE_64_ENCODED,contactInfo.get(0));
 		assertEquals("Wrong contactinfo size", 10, contactInfo.size());
 		String publicKey = (String)contactInfo.get(1);
 
@@ -162,7 +163,7 @@ public class TestContactInfo extends TestCaseEnhanced
 		Vector alreadyDecodedContactInfo = ContactInfo.decodeContactInfoVectorIfNecessary(decodedContactInfo);
 		assertEquals("Backward compatibility test, a decoded vector should be equal", decodedContactInfo, alreadyDecodedContactInfo);
 		
-		assertNotEquals("Still encoded?", ContactInfo.BASE_64_ENCODED, decodedContactInfo.get(0));
+		assertNotEquals("Still encoded?", NetworkInterfaceConstants.BASE_64_ENCODED, decodedContactInfo.get(0));
 		assertEquals("contentSize not the same?", contentSize, ((Integer)decodedContactInfo.get(1)).intValue());
 		assertEquals("decoded Author not correct?", sampleAuthor, decodedContactInfo.get(2));
 		assertEquals("decoded Address not correct?", sampleAddress,  decodedContactInfo.get(7));

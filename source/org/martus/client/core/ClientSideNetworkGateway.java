@@ -33,6 +33,7 @@ import org.martus.common.VersionBuildDate;
 import org.martus.common.crypto.MartusCrypto;
 import org.martus.common.network.BulletinRetrieverGatewayInterface;
 import org.martus.common.network.NetworkInterface;
+import org.martus.common.network.NetworkInterfaceConstants;
 import org.martus.common.network.NetworkResponse;
 
 public class ClientSideNetworkGateway implements BulletinRetrieverGatewayInterface
@@ -123,6 +124,7 @@ public class ClientSideNetworkGateway implements BulletinRetrieverGatewayInterfa
 		parameters.add(authorAccountId);
 		parameters.add(bulletinLocalId);
 		parameters.add(packetLocalId);
+		parameters.add(NetworkInterfaceConstants.BASE_64_ENCODED);
 		String signature = signer.createSignatureOfVectorOfStrings(parameters);
 		return new NetworkResponse(server.getPacket(signer.getPublicKeyString(), parameters, signature));
 	}
