@@ -30,6 +30,7 @@ import java.io.IOException;
 import java.io.Writer;
 import java.util.Vector;
 import org.martus.common.FieldSpec;
+import org.martus.common.GridFieldSpec;
 import org.martus.common.MartusUtilities;
 import org.martus.common.MartusXml;
 import org.martus.common.bulletin.AttachmentProxy;
@@ -125,14 +126,24 @@ public class BulletinXmlExporter
 			if(spec.hasUnknownStuff())
 				continue;						
 			String tag = spec.getTag();
-			String rawFieldData = b.get(tag);				
+			StringBuffer rawFieldData = new StringBuffer(b.get(tag));
+			if(spec.getType() == FieldSpec.TYPE_GRID)
+			{
+				GridFieldSpec grid = (GridFieldSpec)spec;
+				String columnLabels = grid.getDetailsXml();
+				rawFieldData.insert(0, columnLabels);			
+			}
+			
 			if(spec.getType() == FieldSpec.TYPE_DATERANGE)
 			{
-				String startDate = DateUtilities.getStartDateRange(rawFieldData);
-				String endDate = DateUtilities.getEndDateRange(rawFieldData);
-				rawFieldData = startDate + "," + endDate;
+				String martusFlexidate = rawFieldData.toString();
+				String startDate = DateUtilities.getStartDateRange(martusFlexidate);
+				String endDate = DateUtilities.getEndDateRange(martusFlexidate);
+				rawFieldData = new StringBuffer(startDate);
+				rawFieldData.append(",");
+				rawFieldData.append(endDate);
 			}
-			writeElement(dest,tag, spec.getLabel(), rawFieldData);				
+			writeElement(dest,tag, spec.getLabel(), rawFieldData.toString());				
 		}
 		
 	}
