@@ -169,6 +169,7 @@ public class EnglishStrings
 "wintitle:notifyChoosingUninstallMartus=Uninstalling Martus Warning",
 "wintitle:notifyHQKeyAlradyExists=HQ Key Already Exists",
 "wintitle:notifyFolderMigrationFailed=Folder Migration Error",
+"wintitle:notifyViewHqList=HQ Details",
 
 "wintitle:inputservername=Server Name",
 "wintitle:inputserverpubliccode=Server Identification",
@@ -675,7 +676,8 @@ public class EnglishStrings
 "field:notifyFilesWillNotBeDeletedcause=The original files have not been deleted from your computer, you must delete them manually if you wish.",
 "field:notifyChoosingUninstallMartuscause=By choosing to uninstall Martus we will need to erase your keypair file and Martus will exit after it completes the quick erase operation then bring up the uninstall wizard.  Since this will erase your keypair file Martus will also delete the following information: any server or HQ you have configured, any custom fields or default details, and your personal preferences.  This information will be lost and restoring your keypair from a backup will not recover these settings.",
 "field:notifyHQKeyAlradyExistscause=You have already added this key to your list of HQ's.",
-"field:notifyFolderMigrationFailedcause=n error occurred during the conversion of your folders. You can still use Martus, but if the Outbox or Drafts folders still exist, do not use them.",
+"field:notifyFolderMigrationFailedcause=An error occurred during the conversion of your folders. You can still use Martus, but if the Outbox or Drafts folders still exist, do not use them.",
+"field:notifyViewHqListcause=Here is a list of public codes of Martus accounts that can view your private information. To add or remove an account, use the Tools/HQ menu option.\n\n#L#",
 
 "field:messageServerNewscause=The current server has sent this message:",
 "field:messageErrorDateInFuturecause=This date occurs in the future:",

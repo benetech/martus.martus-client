@@ -28,15 +28,20 @@ package org.martus.client.swingui.bulletincomponent;
 
 import java.awt.BorderLayout;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.HashMap;
+import java.util.Vector;
 
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import org.martus.client.swingui.UiLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.common.bulletin.Bulletin;
+import org.martus.common.crypto.MartusCrypto;
 import org.martus.swing.ParagraphLayout;
 import org.martus.util.TokenReplacement;
 
@@ -53,33 +58,36 @@ public class UiBulletinComponentHeader extends UiBulletinComponentSection
 		UiLocalization localization = mainWindow.getLocalization();
 		setSectionIconAndTitle(iconFileName, localization.getFieldLabel("BulletinViewHeading"));
 
-		summary = new HqSummary(localization);
+		summary = new HqSummary(mainWindow);
 		add(new JLabel(""), ParagraphLayout.NEW_PARAGRAPH);
 		add(summary);
 	}
 
 	void copyDataFromBulletin(Bulletin currentBulletin)
 	{
-		int numberOfHqs = currentBulletin.getAuthorizedToReadKeys().size();
-		summary.setHqCount(numberOfHqs);
+		summary.setBulletin(currentBulletin);
 	}
 
 	static class HqSummary extends JPanel
 	{
-		HqSummary(UiLocalization localizationToUse)
+		HqSummary(UiMainWindow mainWindowToUse)
 		{
-			localization = localizationToUse;
+			mainWindow = mainWindowToUse;
 			
 			label = new JLabel();
 			label.setFont(label.getFont().deriveFont(Font.BOLD));
 			
+			String buttonText = getLocalization().getButtonLabel("HQDetails");
+			JButton detailsButton = new JButton(buttonText);
+			detailsButton.addActionListener(new DetailsListener());
 			add(label, BorderLayout.WEST);
-			String buttonText = localization.getButtonLabel("HQDetails");
-			add(new JButton(buttonText), BorderLayout.EAST);
+			add(detailsButton, BorderLayout.EAST);
 		}
 		
-		void setHqCount(int numberOfHqs)
+		void setBulletin(Bulletin bulletin)
 		{
+			hqList = bulletin.getAuthorizedToReadKeys();
+			int numberOfHqs = hqList.size();
 			if(numberOfHqs > 0)
 			{
 				label.setText(getSummaryString(numberOfHqs));
@@ -92,9 +100,14 @@ public class UiBulletinComponentHeader extends UiBulletinComponentSection
 			}
 		}
 		
+		private UiLocalization getLocalization()
+		{
+			return mainWindow.getLocalization();
+		}
+		
 		private String getSummaryString(int numberOfHqs)
 		{
-			String summaryText = localization.getFieldLabel("BulletinViewHQInfo");
+			String summaryText = getLocalization().getFieldLabel("BulletinViewHQInfo");
 			try
 			{
 				HashMap tokenReplacement = new HashMap();
@@ -108,8 +121,41 @@ public class UiBulletinComponentHeader extends UiBulletinComponentSection
 			return summaryText;
 		}
 		
-		UiLocalization localization;
+		class DetailsListener implements ActionListener
+		{
+			public void actionPerformed(ActionEvent e)
+			{
+				String listOfHqPublicKeys = "";
+				for(int i=0; i < hqList.size(); ++i)
+				{
+					String thisHqCode = getHqPublicCode(i);
+					listOfHqPublicKeys += thisHqCode + "\n";
+				}
+				HashMap map = new HashMap();
+				map.put("#L#", listOfHqPublicKeys);
+				
+				JFrame parent = mainWindow.getCurrentActiveFrame();
+				mainWindow.notifyDlg(parent, "ViewHqList", map);
+			}
+
+			private String getHqPublicCode(int i)
+			{
+				try
+				{
+					String thisHqKey = (String)hqList.get(i);
+					return MartusCrypto.getFormattedPublicCode(thisHqKey);
+				}
+				catch (Exception e)
+				{
+					e.printStackTrace();
+				}
+				return "???";
+			}
+		}
+		
+		UiMainWindow mainWindow;
 		JLabel label;
+		Vector hqList;
 	}
 
 	HqSummary summary;
