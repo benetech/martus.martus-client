@@ -57,11 +57,10 @@ public class ActionMenuQuickErase extends UiMenuAction
 			
 		if (!dlg.isOkayPressed())
 			return;			
-			
-		QuickEraseOptions options = loadQuickEraseOptions(dlg); 		
-		checkScrubData(options);
-		checkDeleteKeyPair(options);	
-		checkExitWhenComplete(options);
+						
+		checkScrubData(dlg.getQuickEraseOptions());
+		checkDeleteKeyPair(dlg.getQuickEraseOptions());	
+		checkExitWhenComplete(dlg.getQuickEraseOptions());
 												
 	}	
 
@@ -112,15 +111,5 @@ public class ActionMenuQuickErase extends UiMenuAction
 			if(options.isDonotPromptSelected() || mainWindow.confirmDlgBeep(mainWindow, "QuickEraseDeleteKeyPair"))
 				mainWindow.getApp().deleteKeypair(options);
 		}	
-	}
-
-	private QuickEraseOptions loadQuickEraseOptions(UiQuickEraseConfirmDlg dlg)
-	{
-		QuickEraseOptions options = new QuickEraseOptions();
-		options.setScrubOption(dlg.isScrubCheckBoxSelected());
-		options.setDeleteKeyPairOption(dlg.isDeleteKeypairSelected());
-		options.setExitWhenCompleteOption(dlg.isExitWhenCompleteSelected());
-		options.setDonotPromptOption(dlg.isDonotPromptSelected());
-		return options;	
 	}
 }

@@ -34,8 +34,10 @@ import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 
+import org.martus.client.core.QuickEraseOptions;
 import org.martus.client.swingui.UiLocalization;
 import org.martus.swing.ParagraphLayout;
 import org.martus.swing.Utilities;
@@ -63,11 +65,9 @@ public class UiQuickEraseConfirmDlg extends JDialog
 		donotPrompt	= new JCheckBox(donotPromptStr, false);			
 		getContentPane().add(donotPrompt, ParagraphLayout.NEW_LINE);
 		
-		getContentPane().add(new JLabel(""), ParagraphLayout.NEW_PARAGRAPH);
-		JPanel buttonPanel = new JPanel();			
-		buttonPanel.add(ok);
-		buttonPanel.add(cancel);	
-		getContentPane().add(buttonPanel);
+		getContentPane().add(new JLabel(""), ParagraphLayout.NEW_PARAGRAPH);	
+		getContentPane().add(ok);
+		getContentPane().add(cancel);	
 		
 		getRootPane().setDefaultButton(ok);
 
@@ -92,7 +92,7 @@ public class UiQuickEraseConfirmDlg extends JDialog
 		
 		JPanel panel = new JPanel();
 		panel.setLayout(new ParagraphLayout());
-		panel.setBorder(new TitledBorder(""));
+		panel.setBorder(new TitledBorder(LineBorder.createGrayLineBorder(),""));
 		
 		panel.add(new JLabel(""), ParagraphLayout.NEW_PARAGRAPH);		
 		panel.add(effectLabel);	
@@ -110,6 +110,7 @@ public class UiQuickEraseConfirmDlg extends JDialog
 		public void actionPerformed(ActionEvent ae)
 		{
 			action=true;
+			setQuickEraseOptions();
 			dispose();
 		}
 	}
@@ -123,35 +124,30 @@ public class UiQuickEraseConfirmDlg extends JDialog
 		}
 	}	
 	
+	public QuickEraseOptions getQuickEraseOptions()
+	{
+		return options;
+	}
+	
 	public boolean isOkayPressed()
 	{
 		return action;
 	}
 	
-	public boolean isScrubCheckBoxSelected()
+	private void setQuickEraseOptions()
 	{
-		return scrubBeforeDelete.isSelected();
-	}
-	
-	public boolean isDeleteKeypairSelected()
-	{
-		return deleteKeyPair.isSelected(); 
-	}
-	
-	public boolean isExitWhenCompleteSelected()
-	{
-		return exitWhenComplete.isSelected(); 
-	}
-	
-	public boolean isDonotPromptSelected()
-	{
-		return donotPrompt.isSelected(); 
+		options = new QuickEraseOptions();
+		options.setScrubOption(scrubBeforeDelete.isSelected());
+		options.setDeleteKeyPairOption(deleteKeyPair.isSelected());
+		options.setExitWhenCompleteOption(exitWhenComplete.isSelected());
+		options.setDonotPromptOption(donotPrompt.isSelected());	
 	}
 		
 	JCheckBox scrubBeforeDelete;
 	JCheckBox deleteKeyPair;
 	JCheckBox exitWhenComplete;
 	JCheckBox donotPrompt;
+	QuickEraseOptions options;
 		
 	boolean action;
 }
