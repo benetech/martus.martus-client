@@ -160,7 +160,7 @@ abstract public class RetrieveTableModel extends AbstractTableModel
 		Vector summaryStrings = getSummaryStringsFromServer(retriever);
 		Vector summaries = createSummariesFromStrings(fieldOfficeAccountId, summaryStrings);
 		markAsOnServer(summaries);
-		setDownloadableFlag(summaries);
+		updateAllDownloadableFlags(summaries);
 		allSummaries.addAll(summaries);
 	}
 
@@ -181,19 +181,25 @@ abstract public class RetrieveTableModel extends AbstractTableModel
 		}
 	}
 
-	private void setDownloadableFlag(Vector summaries)
+	private void updateAllDownloadableFlags(Vector summaries)
 	{
 		Iterator iterator = summaries.iterator();
 		while(iterator.hasNext())
 		{
 			BulletinSummary currentSummary = (BulletinSummary)iterator.next();
-			String accountId = currentSummary.getAccountId();
-			String localId = currentSummary.getLocalId();
-			UniversalId uid = UniversalId.createFromAccountAndLocalId(accountId, localId);
-			if(store.doesBulletinRevisionExist(uid))
-				continue;
-			currentSummary.setDownloadable(true);
+			currentSummary.setDownloadable(isDownloadable(currentSummary));
 		}
+	}
+
+	public boolean isDownloadable(BulletinSummary currentSummary)
+	{
+		String accountId = currentSummary.getAccountId();
+		String localId = currentSummary.getLocalId();
+		UniversalId uid = UniversalId.createFromAccountAndLocalId(accountId, localId);
+		if(store.doesBulletinRevisionExist(uid))
+			return false;
+		
+		return true;
 	}
 
 	protected void buildDownloadableSummariesList()
