@@ -27,9 +27,17 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.swingui.fields;
 
 import java.awt.Dimension;
+import java.awt.datatransfer.DataFlavor;
+import java.awt.datatransfer.Transferable;
+import java.awt.dnd.DropTarget;
+import java.awt.dnd.DropTargetDragEvent;
+import java.awt.dnd.DropTargetDropEvent;
+import java.awt.dnd.DropTargetEvent;
+import java.awt.dnd.DropTargetListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.util.List;
 import java.util.Vector;
 
 import javax.swing.Box;
@@ -61,6 +69,7 @@ public class UiAttachmentEditor extends JPanel
 		model = new AttachmentTableModel();
 
 		table = new JTable(model);
+		new DropTarget(this, new attachmentDropAdapter());
 		table.setFocusable(false);
 		table.createDefaultColumnsFromModel();
 		table.setColumnSelectionAllowed(false);
@@ -93,6 +102,68 @@ public class UiAttachmentEditor extends JPanel
 		table.setPreferredScrollableViewportSize(d);
 	}
 
+	class attachmentDropAdapter implements DropTargetListener
+	{
+		public void dragEnter(DropTargetDragEvent dtde)
+		{
+		}
+
+		public void dragOver(DropTargetDragEvent dtde)
+		{
+			if(dtde.isDataFlavorSupported(DataFlavor.javaFileListFlavor))
+				dtde.acceptDrag(dtde.getDropAction());
+			else
+				dtde.rejectDrag();
+		}
+
+		public void dropActionChanged(DropTargetDragEvent dtde)
+		{
+		}
+
+		public void drop(DropTargetDropEvent dtde)
+		{
+			if(!dtde.isDataFlavorSupported(DataFlavor.javaFileListFlavor))
+			{
+				dtde.rejectDrop();
+				return;
+			}
+
+			dtde.acceptDrop(dtde.getDropAction());
+			Transferable t = dtde.getTransferable();
+			List list = null;
+			try
+			{
+				list = (List)t.getTransferData(DataFlavor.javaFileListFlavor);
+			}
+			catch(Exception e)
+			{
+				System.out.println("dropFile exception: " + e);
+				dtde.dropComplete(false);
+				return;
+			}
+
+			if(list.size() == 0)
+			{
+				System.out.println("dropFile: list empty");
+				dtde.dropComplete(false);
+				return;
+			}
+
+			for(int i = 0; i<list.size(); ++i)
+			{	
+				File file = (File)list.get(i);
+				setLastAttachmentLoadDirectory(file.getAbsoluteFile());
+				AttachmentProxy a = new AttachmentProxy(file);
+				model.add(a);
+			}
+			dtde.dropComplete(true);
+		}
+
+		public void dragExit(DropTargetEvent dte)
+		{
+		}
+	}
+	
 	public JComponent[] getFocusableComponents()
 	{
 		return new JComponent[]{table};
