@@ -149,11 +149,22 @@ abstract public class UiBulletinComponent extends JPanel implements Scrollable, 
 		privateSection.copyDataFromPacket(privateData);
 		privateSection.clearWarningIndicator();
 
+		boolean notYourBulletin = !currentBulletin.getAccount().equals(mainWindow.getApp().getAccountId());
 		if(!currentBulletin.isValid())
 		{
-			System.out.println("Damaged: " + currentBulletin.getLocalId());
-			String text = mainWindow.getLocalization().getFieldLabel("MayBeDamaged");
-			publicSection.updateWarningIndicator(text);
+			String text;
+			if(notYourBulletin)
+			{
+				text = mainWindow.getLocalization().getFieldLabel("NotAuthorizedToViewPrivate");
+				if(currentBulletin.isAllPrivate())
+					publicSection.updateWarningIndicator(text);
+			}
+			else
+			{
+				System.out.println("Damaged: " + currentBulletin.getLocalId());
+				text = mainWindow.getLocalization().getFieldLabel("MayBeDamaged");
+				publicSection.updateWarningIndicator(text);
+			}
 			privateSection.updateWarningIndicator(text);
 		}
 		else if(currentBulletin.hasUnknownTags())
@@ -163,7 +174,7 @@ abstract public class UiBulletinComponent extends JPanel implements Scrollable, 
 			publicSection.updateWarningIndicator(text);
 			privateSection.updateWarningIndicator(text);
 		}
-		else if(!currentBulletin.getAccount().equals(mainWindow.getApp().getAccountId()))
+		else if(notYourBulletin)
 		{
 			String text = mainWindow.getLocalization().getFieldLabel("BulletinNotYours");
 			publicSection.updateWarningIndicator(text);

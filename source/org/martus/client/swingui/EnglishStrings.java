@@ -432,6 +432,7 @@ public class EnglishStrings
 "field:publicsection=Public Information",
 "field:privatesection=Private Information",
 "field:MayBeDamaged=Warning: Portions may be missing or damaged",
+"field:NotAuthorizedToViewPrivate=The author has not given you permission to view the private portions",
 "field:BulletinNotYours=Field Office Bulletin",
 "field:BulletinHasUnknownStuff=Warning: Some information in this bulletin is not visible",
 "field:retrieveflag=Retrieve?",
