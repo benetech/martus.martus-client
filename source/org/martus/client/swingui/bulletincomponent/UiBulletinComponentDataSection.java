@@ -30,6 +30,7 @@ import java.awt.Color;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.border.LineBorder;
+import org.martus.client.core.LanguageChangeListener;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.fields.UiDateEditor;
 import org.martus.client.swingui.fields.UiDateViewer;
@@ -52,9 +53,10 @@ abstract public class UiBulletinComponentDataSection extends UiBulletinComponent
 		super(mainWindowToUse);
 	}
 
-	public void createLabelsAndFields(FieldSpec[] specs)
+	public void createLabelsAndFields(FieldSpec[] specs, LanguageChangeListener listener)
 	{
 		fieldSpecs = specs;
+		languageChangeListener = listener;
 
 		fields = new UiField[specs.length];
 		for(int fieldNum = 0; fieldNum < specs.length; ++fieldNum)
@@ -135,6 +137,7 @@ abstract public class UiBulletinComponentDataSection extends UiBulletinComponent
 				ChoiceItem[] languages =
 					getLocalization().getLanguageNameChoices();
 				field = createChoiceField(languages);
+				field.setLanguageListener(languageChangeListener);
 				break;					
 			case FieldSpec.TYPE_NORMAL:
 				field = createNormalField();
@@ -218,7 +221,7 @@ abstract public class UiBulletinComponentDataSection extends UiBulletinComponent
 		
 		return false;
 	}
-
+	
 	public static class AttachmentMissingException extends DataInvalidException
 	{
 		public AttachmentMissingException(String localizedTag)
@@ -245,5 +248,7 @@ abstract public class UiBulletinComponentDataSection extends UiBulletinComponent
 	{
 		return new UiDateViewer(getLocalization());
 	}
+
+	LanguageChangeListener languageChangeListener;
 
 }

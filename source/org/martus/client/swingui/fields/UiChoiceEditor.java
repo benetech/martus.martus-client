@@ -26,18 +26,23 @@ Boston, MA 02111-1307, USA.
 
 package org.martus.client.swingui.fields;
 
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
 import javax.swing.JComponent;
+
+import org.martus.client.core.LanguageChangeListener;
 import org.martus.common.clientside.ChoiceItem;
 import org.martus.swing.UiComboBox;
 
-public class UiChoiceEditor extends UiField
+public class UiChoiceEditor extends UiField implements ActionListener
 {
 	
 	public UiChoiceEditor(ChoiceItem[] choicesToUse)
 	{
 		choices = choicesToUse;
 		widget = new UiComboBox(choices);
+		widget.addActionListener(this);
 	}
 
 	public JComponent getComponent()
@@ -59,11 +64,6 @@ public class UiChoiceEditor extends UiField
 		return new JComponent[]{widget};
 	}
 	
-	public void addActionListener(ActionListener l)
-	{
-		widget.addActionListener(l);
-	}
-
 	public String getText()
 	{
 		ChoiceItem item = (ChoiceItem)widget.getSelectedItem();
@@ -84,7 +84,20 @@ public class UiChoiceEditor extends UiField
 		widget.setSelectedItem(item);
 	}
 
+	public void setLanguageListener(LanguageChangeListener listener)
+	{
+		observer = listener;
+	}
+	
+	
+	public void actionPerformed(ActionEvent e) 
+	{
+		if(observer != null)
+			observer.languageChanged(getText());
+	}
+
 	UiComboBox widget;
 	ChoiceItem[] choices;
+	LanguageChangeListener observer;
 }
 

@@ -29,6 +29,7 @@ package org.martus.client.swingui.fields;
 import javax.swing.JComponent;
 import javax.swing.event.ChangeListener;
 
+import org.martus.client.core.LanguageChangeListener;
 import org.martus.client.swingui.UiFocusListener;
 
 abstract public class UiField
@@ -74,6 +75,10 @@ abstract public class UiField
 	}
 	
 	public void setListener(ChangeListener listener)
+	{
+	}
+	
+	public void setLanguageListener(LanguageChangeListener listener)
 	{
 	}
 	

@@ -27,8 +27,11 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.swingui.bulletincomponent;
 
 import java.io.IOException;
+
 import javax.swing.event.ChangeEvent;
+
 import org.martus.client.core.EncryptionChangeListener;
+import org.martus.client.core.LanguageChangeListener;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.fields.UiField;
 import org.martus.common.HQKeys;
@@ -46,6 +49,11 @@ public class UiBulletinView extends UiBulletinComponent
 	public void setEncryptionChangeListener(EncryptionChangeListener listener)
 	{
 		// read-only view cannot change encryption status
+	}
+	
+	public void setLanguageChangeListener(LanguageChangeListener listener)
+	{
+		// read-only view cannot change encryption status		
 	}
 	
 	public UiBulletinComponentDataSection createBulletinComponentDataSection()
@@ -77,6 +85,13 @@ public class UiBulletinView extends UiBulletinComponent
 	{
 		// read-only view cannot change state
 	}
+	
+	// LanguageChangeListener Interface
+	public void languageChanged(String newLanguage)
+	{
+		// read-only view cannot change state
+	}
+	
 
 	HQKeys getHqKeys()
 	{

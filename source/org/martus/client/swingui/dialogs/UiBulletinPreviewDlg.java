@@ -36,6 +36,7 @@ import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.JViewport;
 
+import org.martus.client.core.LanguageChangeListener;
 import org.martus.client.swingui.UiLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.bulletincomponent.UiBulletinComponentViewSection;
@@ -45,7 +46,7 @@ import org.martus.common.packet.FieldDataPacket;
 import org.martus.swing.UiScrollPane;
 import org.martus.swing.Utilities;
 
-public class UiBulletinPreviewDlg extends JDialog implements ActionListener
+public class UiBulletinPreviewDlg extends JDialog implements ActionListener, LanguageChangeListener
 {
 
 	public UiBulletinPreviewDlg(UiMainWindow owner, FieldDataPacket fdp)
@@ -57,7 +58,7 @@ public class UiBulletinPreviewDlg extends JDialog implements ActionListener
 		FieldSpec[] standardFieldTags = StandardFieldSpecs.getDefaultPublicFieldSpecs();
 
 		UiLocalization localization = owner.getLocalization();
-		view.createLabelsAndFields(standardFieldTags);
+		view.createLabelsAndFields(standardFieldTags, this);
 		view.copyDataFromPacket(fdp);
 		view.attachmentViewer.saveButton.setVisible(false);
 		view.attachmentViewer.viewButton.setVisible(false);
@@ -87,6 +88,11 @@ public class UiBulletinPreviewDlg extends JDialog implements ActionListener
 	public void actionPerformed(ActionEvent ae)
 	{
 		dispose();
+	}
+
+	public void languageChanged(String newLanguageCode) 
+	{
+		//read-only nothing to do
 	}
 
 }

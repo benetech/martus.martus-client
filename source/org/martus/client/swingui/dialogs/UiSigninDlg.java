@@ -26,19 +26,15 @@ Boston, MA 02111-1307, USA.
 
 package org.martus.client.swingui.dialogs;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import javax.swing.JComponent;
 import javax.swing.JFrame;
+
+import org.martus.client.core.LanguageChangeListener;
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.client.swingui.fields.UiChoiceEditor;
 import org.martus.common.clientside.CurrentUiState;
 import org.martus.common.clientside.UiBasicLocalization;
 import org.martus.common.clientside.UiBasicSigninDlg;
 
-
-
-public class UiSigninDlg extends UiBasicSigninDlg
+public class UiSigninDlg extends UiBasicSigninDlg implements LanguageChangeListener
 {
 	public UiSigninDlg(UiBasicLocalization localizationToUse, CurrentUiState uiStateToUse , JFrame owner, int mode)
 	{
@@ -50,29 +46,14 @@ public class UiSigninDlg extends UiBasicSigninDlg
 		super(localizationToUse, uiStateToUse, owner, mode, username, password);
 	}
 
-	protected JComponent getLanguageComponent()
+	// LanguageChangeListener Interface
+	public void languageChanged(String languageCode)
 	{
-		String currentLanguageCode = localization.getCurrentLanguageCode();
-			
-		languageDropdown = new UiChoiceEditor(localization.getUiLanguages());
-		languageDropdown.setText(currentLanguageCode);
-		languageDropdown.addActionListener(new LanguageListener());
-		JComponent languageComponent = languageDropdown.getComponent();
-		return languageComponent;
+		displayWarningOfUnofficialTranslationIfNecessary(languageCode);
+		changeLanguagesAndRestartSignin(languageCode);
+		dispose();
 	}
-
-	class LanguageListener implements ActionListener
-	{
-		public void actionPerformed(ActionEvent ae)
-		{
-			String languageCode = languageDropdown.getText();
-			displayWarningOfUnofficialTranslationIfNecessary(languageCode);
-			changeLanguagesAndRestartSignin(languageCode);
-			dispose();
-		}
-
-	}
-
+	
 	void changeLanguagesAndRestartSignin(String languageCode)
 	{
 		localization.setCurrentLanguageCode(languageCode);
@@ -88,7 +69,5 @@ public class UiSigninDlg extends UiBasicSigninDlg
 		UiMainWindow.displayDefaultUnofficialTranslationMessage(owner);
 
 	}
-
-	UiChoiceEditor languageDropdown;
 }
 

@@ -36,13 +36,16 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.io.IOException;
+
 import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JViewport;
+
 import org.martus.client.core.BulletinFolder;
 import org.martus.client.core.ClientBulletinStore;
 import org.martus.client.core.EncryptionChangeListener;
+import org.martus.client.core.LanguageChangeListener;
 import org.martus.client.core.MartusApp;
 import org.martus.client.core.ClientBulletinStore.BulletinOlderException;
 import org.martus.client.swingui.UiMainWindow;
@@ -58,7 +61,7 @@ import org.martus.common.crypto.MartusCrypto.EncryptionException;
 import org.martus.swing.UiScrollPane;
 import org.martus.swing.Utilities;
 
-public class UiBulletinModifyDlg extends JFrame implements ActionListener, WindowListener, EncryptionChangeListener
+public class UiBulletinModifyDlg extends JFrame implements ActionListener, WindowListener, EncryptionChangeListener, LanguageChangeListener
 {
 	public UiBulletinModifyDlg(Bulletin b, UiMainWindow observerToUse)
 	{
@@ -76,6 +79,7 @@ public class UiBulletinModifyDlg extends JFrame implements ActionListener, Windo
 			view.copyDataFromBulletin(bulletin);
 
 			view.setEncryptionChangeListener(this);
+			view.setLanguageChangeListener(this);
 
 			send = new JButton(localization.getButtonLabel("send"));
 			send.addActionListener(this);
@@ -274,6 +278,18 @@ public class UiBulletinModifyDlg extends JFrame implements ActionListener, Windo
 		indicateEncrypted(newState);
 	}
 
+	public void languageChanged(String newLanguage) 
+	{
+		//TODO uncomment this out and implement this functionality correctly
+/*		if(MiniLocalization.doesLanguageRequirePadding(newLanguage))
+			LanguageOptions.setLanguagePaddingRequired();
+		else
+			LanguageOptions.setLanguagePaddingNotRequired();
+		view.invalidate();
+		view.validate();
+		view.repaint();
+*/
+	}
 	public void cleanupAndExit()
 	{
 		observer.doneModifyingBulletin();
@@ -318,5 +334,6 @@ public class UiBulletinModifyDlg extends JFrame implements ActionListener, Windo
 	JButton cancel;
 
 	boolean wasBulletinSavedFlag;
+
 }
 

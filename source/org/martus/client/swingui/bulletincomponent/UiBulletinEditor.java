@@ -27,8 +27,11 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.swingui.bulletincomponent;
 
 import java.io.IOException;
+
 import javax.swing.event.ChangeEvent;
+
 import org.martus.client.core.EncryptionChangeListener;
+import org.martus.client.core.LanguageChangeListener;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.fields.UiField;
 import org.martus.common.FieldSpec;
@@ -157,13 +160,19 @@ public class UiBulletinEditor extends UiBulletinComponent
 	{
 		encryptionListener = listener;
 	}
+	
+	public void setLanguageChangeListener(LanguageChangeListener listener)
+	{
+		languageListener = listener;
+	}
+	
 
 	protected void fireEncryptionChange(boolean newState)
 	{
 		if(encryptionListener != null)
 			encryptionListener.encryptionChanged(newState);
 	}
-
+	
 	// ChangeListener interface
 	public void stateChanged(ChangeEvent event)
 	{
@@ -174,6 +183,13 @@ public class UiBulletinEditor extends UiBulletinComponent
 			wasEncrypted = nowEncrypted;
 			fireEncryptionChange(nowEncrypted);
 		}
+	}
+	
+	// LanguageChangeListener Interface
+	public void languageChanged(String newLanguageCode)
+	{
+		if(languageListener != null)
+			languageListener.languageChanged(newLanguageCode);
 	}
 
 	HQKeys getHqKeys()
@@ -188,4 +204,5 @@ public class UiBulletinEditor extends UiBulletinComponent
 
 	boolean wasEncrypted;
 	EncryptionChangeListener encryptionListener;
+	LanguageChangeListener languageListener;
 }
