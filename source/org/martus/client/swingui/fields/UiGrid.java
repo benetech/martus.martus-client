@@ -25,39 +25,42 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.fields;
 
-import javax.swing.table.DefaultTableModel;
+import javax.swing.JComponent;
+import javax.swing.JScrollPane;
 
-import org.martus.common.GridData;
+import org.martus.swing.UiTable;
 
 
-public class GridTableModel extends DefaultTableModel
+public class UiGrid extends UiField
 {
-	public GridTableModel(int rowCount, int columnCount)
+
+	public UiGrid(int rows, int columns)
 	{
-		super(rowCount, columnCount);
-		gridData = new GridData(columnCount);
+		super();
+		model = new GridTableModel(rows, columns);
+		table = new UiTable(model);
+		table.setColumnSelectionAllowed(false);
+		table.setShowGrid(true);
+	
+		widget = new JScrollPane(table);
+	}	
+	
+	public JComponent getComponent()
+	{
+		return widget;
 	}
 	
-	public void addEmptyRow()
+	public String getText()
 	{
-		gridData.addEmptyRow();
-	}
-	
-	public Object getValueAt(int row, int column)
-	{
-		return gridData.getValueAt(row, column);
+		return model.getXmlRepresentation();
 	}
 
-	public void setValueAt(Object aValue, int row, int column)
+	public void setText(String newText)
 	{
-		super.setValueAt(aValue, row, column);
-		gridData.setValueAt((String)aValue, row, column);
+		// TODO Auto-generated method stub
 	}
-	
-	public String getXmlRepresentation()
-	{
-		return gridData.getXmlRepresentation();
-	}
-	
-	private GridData gridData;
+
+	JScrollPane widget;
+	UiTable table;
+	GridTableModel model;
 }

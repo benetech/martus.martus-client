@@ -25,42 +25,16 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.fields;
 
-import javax.swing.JComponent;
 import javax.swing.JScrollPane;
 
-import org.martus.swing.UiTable;
-
-
-public class UiGridEditor extends UiField
+public class UiGridEditor extends UiGrid
 {
 	public UiGridEditor()
 	{
-		super();
-		GridTableModel model = new GridTableModel(1,3);
+		super(1,3);
 		model.addEmptyRow();
-		table = new UiTable(model);
-		table.setColumnSelectionAllowed(false);
 		table.resizeTable(5);
-		table.setShowGrid(true);
-		widget = new JScrollPane(table);
 		widget.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		widget.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
 	}
-
-	public JComponent getComponent()
-	{
-		return widget;
-	}
-	
-	public String getText()
-	{
-		return "";
-	}
-	
-	public void setText(String newText)
-	{
-	}
-	
-	JScrollPane widget;
-	UiTable table;
 }
