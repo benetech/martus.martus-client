@@ -82,7 +82,7 @@ public class EnglishStrings
 "wintitle:confirmhelpStringNotFound=Text Not Found",
 "wintitle:confirmNeedsFolderMigration=Folder Migration Required",
 "wintitle:confirmUseBulletinsCustomFields=Custom Fields Selection",
-"wintitle:confirmUnAuthoredBulletinDeleteBeforePaste=UnAuthored Bulletin Already Exists",
+"wintitle:confirmUnAuthoredBulletinDeleteBeforePaste=Bulletin Already Exists",
 "wintitle:confirmRemoveMartus=Delete All Data and Remove Martus",
 "wintitle:confirmDeleteMyData=Delete My Data",
 "wintitle:confirmNewerConfigInfoFileFound=Version Warning",
