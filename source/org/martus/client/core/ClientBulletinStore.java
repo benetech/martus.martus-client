@@ -1312,7 +1312,7 @@ public class ClientBulletinStore extends BulletinStore
 
 	protected void saveCache()
 	{
-		System.out.println("BulletinStore.saveCache");
+		//System.out.println("BulletinStore.saveCache");
 		try
 		{
 			byte[] sessionKeyCache = getSignatureGenerator().getSessionKeyCache();
