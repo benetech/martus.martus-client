@@ -188,8 +188,14 @@ public class MartusApp
 		return configInfo.getLegacyHQKey();
 	}
 	
-	public HQKeys getHQKeys() throws HQsException
+	public HQKeys getAllHQKeys() throws HQsException
 	{
+		return new HQKeys(configInfo.getAllHQKeysXml());
+	}
+
+	public HQKeys getDefaultHQKeys() throws HQsException
+	{
+		//FIXME:change this to default keys.
 		return new HQKeys(configInfo.getAllHQKeysXml());
 	}
 
@@ -197,7 +203,7 @@ public class MartusApp
 	{
 		try
 		{
-			return getHQKeys();
+			return getAllHQKeys();
 		}
 		catch (HQsException e)
 		{
@@ -221,7 +227,7 @@ public class MartusApp
 	{
 		try
 		{
-			String hqLabelIfPresent = getHQKeys().getLabelIfPresent(hqKey);
+			String hqLabelIfPresent = getAllHQKeys().getLabelIfPresent(hqKey);
 			if(hqLabelIfPresent.length() == 0)
 			{
 				String publicCode = hqKey.getPublicKey();
@@ -250,13 +256,13 @@ public class MartusApp
 		return configInfo;
 	}
 	
-	public void setAndSaveHQKeys(HQKeys hQKeys) throws SaveConfigInfoException 
+	public void setAndSaveHQKeys(HQKeys allHQKeys, HQKeys defaultHQKeys) throws SaveConfigInfoException 
 	{
-		configInfo.setAllHQKeysXml(hQKeys.toStringWithLabel());
-		if(hQKeys.isEmpty())
+		configInfo.setAllHQKeysXml(allHQKeys.toStringWithLabel());
+		if(allHQKeys.isEmpty())
 			configInfo.clearHQKey();
 		else
-			configInfo.setLegacyHQKey(hQKeys.get(0).getPublicKey());
+			configInfo.setLegacyHQKey(allHQKeys.get(0).getPublicKey());
 		saveConfigInfo();
 	}
 
@@ -361,14 +367,14 @@ public class MartusApp
 		String legacyHQKey = configInfo.getLegacyHQKey();
 		if(legacyHQKey.length()>0)
 		{
-			HQKeys hqKeys = getHQKeys();
+			HQKeys hqKeys = getAllHQKeys();
 			if(!hqKeys.containsKey(legacyHQKey))
 			{
 				HQKey legacy = new HQKey(legacyHQKey);
 				hqKeys.add(legacy);
 				try
 				{
-					setAndSaveHQKeys(hqKeys);
+					setAndSaveHQKeys(hqKeys, hqKeys);
 				}
 				catch(MartusApp.SaveConfigInfoException e)
 				{

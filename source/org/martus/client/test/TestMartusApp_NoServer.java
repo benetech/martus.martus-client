@@ -790,7 +790,7 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		HQKeys keys = new HQKeys();
 		HQKey key = new HQKey(sampleHQKey, sampleLabel);
 		keys.add(key);
-		appWithAccount.setAndSaveHQKeys(keys);
+		appWithAccount.setAndSaveHQKeys(keys, keys);
 		assertEquals("Incorrect public key", sampleHQKey, appWithAccount.getLegacyHQKey());
 		assertEquals("Didn't save?", true, configFile.exists());
 	}
@@ -803,16 +803,21 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		String sampleLabel1 = "Fred";
 		String sampleHQKey2 = "234567";
 		String sampleLabel2 = "Bev";
-		HQKeys keys = new HQKeys();
+		HQKeys allKeys = new HQKeys();
 		HQKey key1 = new HQKey(sampleHQKey1, sampleLabel1);
 		HQKey key2 = new HQKey(sampleHQKey2, sampleLabel2);
-		keys.add(key1);
-		keys.add(key2);
-		appWithAccount.setAndSaveHQKeys(keys);
+		allKeys.add(key1);
+		allKeys.add(key2);
+		HQKeys defaultKeys = new HQKeys(key1);
+		
+		appWithAccount.setAndSaveHQKeys(allKeys, defaultKeys);
 		assertEquals("Incorrect default public key", sampleHQKey1, appWithAccount.getLegacyHQKey());
-		HQKeys returnedKeys = appWithAccount.getHQKeys();
+		HQKeys returnedKeys = appWithAccount.getAllHQKeys();
 		assertTrue(returnedKeys.containsKey(sampleHQKey1));
 		assertTrue(returnedKeys.containsKey(sampleHQKey2));
+		HQKeys returnedDefaultKeys = appWithAccount.getDefaultHQKeys();
+		assertTrue(returnedDefaultKeys.containsKey(sampleHQKey1));
+//FIXME:remove comment once implemented.		assertFalse(returnedDefaultKeys.containsKey(sampleHQKey2));
 	}
 
 	public void testClearHQKey() throws Exception
@@ -821,7 +826,7 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		configFile.deleteOnExit();
 		assertEquals("already exists?", false, configFile.exists());
 		HQKeys empty = new HQKeys();
-		appWithAccount.setAndSaveHQKeys(empty);
+		appWithAccount.setAndSaveHQKeys(empty, empty);
 		assertEquals("HQ key exists?", "", appWithAccount.getLegacyHQKey());
 		assertEquals("Didn't save?", true, configFile.exists());
 
@@ -831,10 +836,15 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		HQKey key1 = new HQKey(sampleHQKey1, sampleLabel1);
 		keys.add(key1);
 
-		appWithAccount.setAndSaveHQKeys(keys);
+		appWithAccount.setAndSaveHQKeys(keys,keys);
 		assertEquals("Incorrect public key", sampleHQKey1, appWithAccount.getLegacyHQKey());
-		appWithAccount.setAndSaveHQKeys(empty);
+		assertEquals("all keys not set?", 1, appWithAccount.getAllHQKeys().size());
+		assertEquals("Default keys not set", 1, appWithAccount.getDefaultHQKeys().size());
+
+		appWithAccount.setAndSaveHQKeys(empty,empty);
 		assertEquals("HQ not cleared", "", appWithAccount.getLegacyHQKey());
+		assertEquals("All HQs not cleared", 0, appWithAccount.getAllHQKeys().size());
+		assertEquals("Default HQs not cleared", 0, appWithAccount.getDefaultHQKeys().size());
 	}
 
 	public void testGetCombinedPassPhrase()
@@ -1786,7 +1796,7 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		assertEquals("forgot to save folders?", 1, orphanFolder2.getBulletinCount());
 	}
 
-	public void testSetBulletinHQKey() throws Exception
+	public void testSetBulletinHQKeyWhenDefaultIsSet() throws Exception
 	{
 		Bulletin b0 = appWithAccount.createBulletin();
 		assertEquals("No keys should be configured", 0, b0.getAuthorizedToReadKeys().size());
@@ -1796,12 +1806,17 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		HQKeys keys = new HQKeys();
 		HQKey key1 = new HQKey(sampleHQKey1, sampleLabel1);
 		keys.add(key1);
-		appWithAccount.setAndSaveHQKeys(keys);
-		HQKeys returnedKeys = appWithAccount.getHQKeys();
+		appWithAccount.setAndSaveHQKeys(keys,keys);
+		HQKeys returnedKeys = appWithAccount.getAllHQKeys();
 		HQKey returnedKey1 = returnedKeys.get(0);
 		assertEquals("Public Key not set?", sampleHQKey1, returnedKey1.getPublicKey());
 		assertEquals("Label not set?", sampleLabel1, returnedKey1.getLabel());
 
+		HQKeys returnedDefaultKeys = appWithAccount.getDefaultHQKeys();
+		HQKey returnedKey2 = returnedDefaultKeys.get(0);
+		assertEquals("Public Key not set?", sampleHQKey1, returnedKey2.getPublicKey());
+		assertEquals("Label not set?", sampleLabel1, returnedKey2.getLabel());
+		
 		Bulletin b1 = appWithAccount.createBulletin();
 		assertEquals("HQ key not set?", 1, b1.getAuthorizedToReadKeys().size());
 		assertEquals("Key not set?", sampleHQKey1, (b1.getAuthorizedToReadKeys().get(0)).getPublicKey());
@@ -1815,7 +1830,7 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		HQKeys keys = new HQKeys();
 		HQKey key1 = new HQKey(sampleHQKey1, sampleLabel1);
 		keys.add(key1);
-		appWithAccount.setAndSaveHQKeys(keys);
+		appWithAccount.setAndSaveHQKeys(keys, keys);
 		assertEquals("Label not the same?", sampleLabel1, appWithAccount.getHQLabelIfPresent(key1));
 		HQKey missingKey = new HQKey("public key", "some label");
 		assertEquals("unknown Key not configured?", missingKey.getPublicCode()+" <field:HQNotConfigured>", appWithAccount.getHQLabelIfPresent(missingKey));

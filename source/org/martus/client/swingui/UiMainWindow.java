@@ -1796,11 +1796,11 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		new UiConfigureHQs(this);
 	}
 	
-	public void setAndSaveHQKeysInConfigInfo(HQKeys hQKeys)
+	public void setAndSaveHQKeysInConfigInfo(HQKeys allHQKeys, HQKeys defaultHQKeys)
 	{
 		try
 		{
-			app.setAndSaveHQKeys(hQKeys);
+			app.setAndSaveHQKeys(allHQKeys, defaultHQKeys);
 		}
 		catch(MartusApp.SaveConfigInfoException e)
 		{

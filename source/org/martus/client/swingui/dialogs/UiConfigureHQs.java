@@ -97,7 +97,7 @@ public class UiConfigureHQs extends JDialog
 		
 		try
 		{
-			HQKeys local = mainWindow.getApp().getHQKeys();
+			HQKeys local = mainWindow.getApp().getAllHQKeys();
 			for(int i = 0; i<local.size();++i)
 				addHQKeyToTable(local.get(i));
 		}
@@ -283,7 +283,7 @@ public class UiConfigureHQs extends JDialog
 	void updateConfigInfo()
 	{
 		enableDisableButtons();
-		mainWindow.setAndSaveHQKeysInConfigInfo(model.getAllKeys());
+		mainWindow.setAndSaveHQKeysInConfigInfo(model.getAllKeys(), model.getAllSelectedHeadQuarterKeys());
 	}
 	
 	public HQKey getPublicKey() throws Exception
