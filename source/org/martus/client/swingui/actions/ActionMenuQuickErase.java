@@ -58,9 +58,10 @@ public class ActionMenuQuickErase extends UiMenuAction
 		if (!dlg.isOkayPressed())
 			return;			
 						
-		checkScrubData(dlg.getQuickEraseOptions());
-		checkDeleteKeyPair(dlg.getQuickEraseOptions());	
-		checkExitWhenComplete(dlg.getQuickEraseOptions());
+		QuickEraseOptions quickEraseOptions = dlg.getQuickEraseOptions();
+		checkScrubData(quickEraseOptions);
+		checkDeleteKeyPair(quickEraseOptions);	
+		checkExitWhenComplete(quickEraseOptions);
 												
 	}	
 

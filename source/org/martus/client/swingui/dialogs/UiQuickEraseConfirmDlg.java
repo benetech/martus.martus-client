@@ -134,7 +134,7 @@ public class UiQuickEraseConfirmDlg extends JDialog
 		return action;
 	}
 	
-	private void setQuickEraseOptions()
+	void setQuickEraseOptions()
 	{
 		options = new QuickEraseOptions();
 		options.setScrubOption(scrubBeforeDelete.isSelected());
