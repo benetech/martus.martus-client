@@ -47,7 +47,7 @@ public class TestCustomFieldSpecValidator extends TestCaseEnhanced
 	public void testAllValid() throws Exception
 	{
 		FieldSpec[] specs = StandardFieldSpecs.getDefaultPublicFieldSpecs();
-		String tag = "A.-_AllValid0123456789";
+		String tag = "_A.-_AllValid0123456789";
 		String label = "my Label";
 		specs = addFieldSpec(specs, LegacyCustomFields.createFromLegacy(tag+","+label));
 		CustomFieldSpecValidator checker = new CustomFieldSpecValidator(specs);

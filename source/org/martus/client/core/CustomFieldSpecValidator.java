@@ -103,7 +103,7 @@ public class CustomFieldSpecValidator
 			if(thisTag.length() < 1)
 				continue;
 			char[] tagChars = thisTag.toCharArray();
-			if(!Character.isLetterOrDigit(tagChars[0]))
+			if(!isValidFirstTagCharacter(tagChars[0]))
 				allValid = false;
 			for(int j = 1; j < tagChars.length; ++j)
 			{
@@ -117,11 +117,20 @@ public class CustomFieldSpecValidator
 	
 	private boolean isValidTagCharacter(char c)
 	{
+		if(isValidFirstTagCharacter(c))
+			return true;
 		if(c > 128)
 			return true;
+		if(c == '-' || c == '.')
+			return true;
+		return false;
+	}
+	
+	private boolean isValidFirstTagCharacter(char c)
+	{
 		if(Character.isLetterOrDigit(c))
 			return true;
-		if(c == '-' || c == '_' || c == '.')
+		if(c == '_')
 			return true;
 		return false;
 	}
