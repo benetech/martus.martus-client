@@ -1401,11 +1401,6 @@ public class MartusApp
 		return store.getSignatureGenerator();
 	}
 
-	public void setSecurity(MartusCrypto securityToUse)
-	{
-		store.setSignatureGenerator(getSecurity());
-	}
-
 	public void setSSLNetworkInterfaceHandlerForTesting(NetworkInterface server)
 	{
 		currentNetworkInterfaceHandler = server;
