@@ -1298,7 +1298,7 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		assertEquals("English", localization.getLanguageName("en"));
 		assertEquals("Arabic", localization.getLanguageName("ar"));
 		assertEquals("Azerbaijani", localization.getLanguageName("az"));
-		assertEquals("Bengali", localization.getLanguageName("bn"));
+		assertEquals("Bengali, Bangla", localization.getLanguageName("bn"));
 		assertEquals("Burmese", localization.getLanguageName("my"));
 		assertEquals("Chinese", localization.getLanguageName("zh"));
 		assertEquals("Dutch", localization.getLanguageName("nl"));
