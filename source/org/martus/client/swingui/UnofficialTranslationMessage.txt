@@ -1,13 +1,11 @@
-﻿WARNING:  This translation was not created by the Martus team, and therefore may not be trustworthy.
-If you only want to use official translations then exit Martus, remove the file #UseUnofficialTranslationFiles# from your Martus directory, and restart Martus.
+﻿WARNING:  This translation was not created by the Martus team, and therefore may not be trustworthy.  If you only want to use official translations then exit Martus, remove the file #UseUnofficialTranslationFiles# from your Martus directory, and restart Martus.
 
-AVISO: Esta traducción no fue creada por el equipo Martus, y tal vez no se le debe confiar.
-Si Ud. solamente desea traducciones oficiales, sálga de Martus, y quite #UseUnofficialTranslationFiles# de su directorio Martus, y reempiézelo.
+AVISO: Esta traducción no fue creada por el equipo Martus, y tal vez no se le debe confiar.  Si Ud. solamente desea traducciones oficiales, sálga de Martus, y quite #UseUnofficialTranslationFiles# de su directorio Martus, y reempiézelo.
 
-ПРЕДУПРЕЖДЕНИЕ:  Данный перевод создан не разработчиками Martus и может быть недостоверным.
-Если Вы хотите использовать только официальные переводы, выйдите из Martus, удалите из своего каталога Martus файл #UseUnofficialTranslationFiles# и запустите Martus заново.
+ПРЕДУПРЕЖДЕНИЕ:  Данный перевод создан не разработчиками Martus и может быть недостоверным.  Если Вы хотите использовать только официальные переводы, выйдите из Martus, удалите из своего каталога Martus файл #UseUnofficialTranslationFiles# и запустите Martus заново.
 
-تحذير: لم يقم فريق Martus بهذه الترجمة و لذا فقد لا يُعتد بها.
-إذا أردت أن تستخدم ترجمات رسمية، قم بالخروج من Martus ثم قم بإزالة الملف #UseUnofficialTranslationFiles# من مجلد Martus ثم أعد تشغيل البرنامج من جديد.
+تحذير: لم يقم فريق Martus بهذه الترجمة و لذا فقد لا يُعتد بها. إذا أردت أن تستخدم ترجمات رسمية، قم بالخروج من Martus ثم قم بإزالة الملف #UseUnofficialTranslationFiles# من مجلد Martus ثم أعد تشغيل البرنامج من جديد.
+
+चेतावनी: यो अनुवाद मार्टस समुहद्धारा सृजना गरेको थिएन, र त्यसकारण विश्वासिलो नहुनसक्छ । यदि तपाईले मात्र आधिकारिक अनुवाद मात्र प्रयोग गर्न चाहनु हुन्छ भने मार्टसबाट बाहिर निस्कनुहोस्, तपाईको मार्टस निदेशकबाट #UseUnofficialTranslationFiles# फाइल हटाउनुहोस् र मार्टसलाई पून: संचालन गर्नुहोस् ।
 
 
