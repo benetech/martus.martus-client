@@ -339,5 +339,5 @@ public class ClientSideNetworkHandlerUsingXmlRpc
 	
 	static Vector RESULT_NO_SERVER;
 
-	private static final int secondsToTimeoutGetServerInfo = 10;
+	private static final int secondsToTimeoutGetServerInfo = 15;
 }
