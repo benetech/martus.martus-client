@@ -905,6 +905,8 @@ public class BulletinStore
 		for(int index=0; index < folder.getBulletinCount(); ++index)
 		{
 			UniversalId uid = folder.getBulletinUniversalIdSorted(index);
+			if(uid == null)
+				System.out.println("WARNING: Unexpected null id");
 			xml += MartusXml.getIdTag(uid.toString());
 		}
 		xml += MartusClientXml.getFolderTagEnd();
