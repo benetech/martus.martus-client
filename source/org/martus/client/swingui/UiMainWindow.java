@@ -1614,7 +1614,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		catch(Exception e)
 		{
 			waitingForKeyPair.endDialog();
-			notifyDlg(this, "createaccountfailed");
+			notifyDlg(this, "CreateAccountFailed");
 			return false;
 		}
 		waitingForKeyPair.endDialog();

@@ -156,6 +156,7 @@ public class EnglishStrings
 "wintitle:notifyOperationCompleted=Finished",
 "wintitle:notifyErrorBackingupKeyPair=Error",
 "wintitle:notifycontactRejected=Error Sending ContactInfo",
+"wintitle:notifyCreateAccountFailed=Error Creating New Account",
 
 
 "wintitle:inputservername=Server Name",
@@ -618,7 +619,8 @@ public class EnglishStrings
 "field:notifyErrorBackingupKeyPaircause=Unable to back up the key pair file on this disk.",
 "field:notifycontactRejectedcause=The current Martus Server has refused to accept your contact info",
 "field:notifyQuickEraseScrubWorkedcause=All bulletins and folders were successfully scrubbed and deleted.",
-		
+"field:notifyCreateAccountFailedcause=An error occured while trying to create your account.",
+	
 "field:messageServerNewscause=The current server has sent this message:",
 "field:messageErrorDateInFuturecause=This date occures in the future:",
 
