@@ -525,7 +525,7 @@ public class MartusApp
 	
 	public boolean deleteKeypairAndRelatedFiles(QuickEraseOptions opts)
 	{
-		boolean shouldScrubFileFirst = opts.isScrubSelected();
+		boolean shouldScrubFileFirst = true; //always scrub
 		File currentKeyPairFile = getCurrentKeyPairFile();
 		try
 		{
