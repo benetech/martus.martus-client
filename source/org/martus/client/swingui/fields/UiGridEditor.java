@@ -35,7 +35,6 @@ public class UiGridEditor extends UiGrid
 	public UiGridEditor()
 	{
 		super(3);
-		model.addEmptyRow();
 		table.resizeTable(5);
 		table.addKeyListener(new GridKeyListener());
 		widget.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
