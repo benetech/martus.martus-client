@@ -378,7 +378,7 @@ Also, the translation of the first sentence should
 -db93-field:ErrorPreviousBackupShareExists=Una pieza de un archivo de seguridad ya existe en este medio. Cada pieza tiene que ser guardada en su propio medio removible.
 
 #_____________________________________________=No appropriate backup file was found on this disk, please try a different disk.
--618a-field:ErrorRecoverNoAppropriateFileFound=No se encontró la pieza del archivo de claves necesaria, por favor intente con otro disquete.
+-618a-field:ErrorRecoverNoAppropriateFileFound=No se encontró la pieza del archivo de clave necesaria, por favor intente con otro disquete.
 
 #________________________________=An error occurred reading this key backup file.
 -b106-field:ErrorRecoverShareDisk=Ocurrió un error al leer la pieza del archivo de claves.
@@ -681,7 +681,7 @@ Also, the translation of the first sentence should
 -a4d8-field:confirmBackupKeyPairSecretSharecause=Le recomendamos que haga #M# copias de seguridad. Con juntar #N# de estas copias podrá reconstruir su clave y su cuenta de Martus sin necesitar su nombre de usuario o contraseña.
 
 #________________________________________________=By choosing Yes, you will be prompted to save pieces of your key onto removable disks.
--efaa-field:confirmBackupKeyPairSecretShareeffect=Al oprimir Si, necesitará guardar las partes de su archivo de claves a medios removibles.
+-efaa-field:confirmBackupKeyPairSecretShareeffect=Al oprimir Si, necesitará guardar las partes de su clave a medios removibles.
 
 #________________________________________________=We strongly recommend that you now verify all disks to make sure the data was written correctly.
 -ee28-field:confirmBackupKeyShareVerifyDiskscause=Le recomendamos que verifique que todos las piezas creados para asegurarse de que fueron escritos correctamente.
@@ -708,7 +708,7 @@ Also, the translation of the first sentence should
 -5319-field:confirmCancelShareBackupeffect=Oprima Si para salir de la creación de copias de seguridad.
 
 #_________________________________________=Do you wish to cancel the key restore process?
--a7e1-field:confirmCancelShareRecovercause=¿Desea cancelar la recuperación del archivo de claves?
+-a7e1-field:confirmCancelShareRecovercause=¿Desea cancelar la recuperación del su clave?
 
 #__________________________________________=By choosing Yes, you will exit Martus.
 -49e1-field:confirmCancelShareRecovereffect=Oprima Si para salir de Martus.>
@@ -762,7 +762,7 @@ Also, the translation of the first sentence should
 -1483-field:confirmEnterCustomFieldseffect=Modificar los campos de los boletines es una operación avanzada y puede tener consecuencias inesperadas. Continúe solo si entiende característica del programa.
 
 #_________________________________________________=The file you chose is not part of a key backup set.  These files are named '<name you picked>-#.dat' where # is the sequence number in the disk set previously created.
--2e41-field:confirmErrorRecoverIvalidFileNamecause=El archivo que eligió no es parte de un archivo de claves de Martus.  Los archivos de claves de Martus se llaman '<nombre que eligió>-#.dat' donde # es el número del archivo en la secuencia de copias removidas.
+-2e41-field:confirmErrorRecoverIvalidFileNamecause=El archivo que eligió no es parte de las copias de resguardo de su clave de Martus.  Los archivos de las copias de resguardo se llaman '<nombre que eligió>-#.dat' donde # es el número del archivo en la secuencia de copias removidas.
 
 #__________________________________________________=Choosing yes will bring up the file selection dialog again so you may pick a different file.
 -c237-field:confirmErrorRecoverIvalidFileNameeffect=Oprima Si para elegir un archivo diferente.
@@ -780,10 +780,10 @@ Also, the translation of the first sentence should
 -232e-field:confirmExportUnknownTagseffect=Si continua con la exportación la información que Martus no entiende no será exportada.
 
 #_________________________________________________=A key file already exists for this account.  Do you wish to overwrite it?
--6829-field:confirmKeyPairFileExistsOverWritecause=Ya existe un archivo de claves para esta cuenta.  ¿Desea sobrescribir el archivo de claves?
+-6829-field:confirmKeyPairFileExistsOverWritecause=Ya existe una clave para esta cuenta.  ¿Desea sobrescribirla?
 
 #__________________________________________________=Clicking on Yes will delete the old key file and replace it with your restored key.
--167f-field:confirmKeyPairFileExistsOverWriteeffect=Al oprimir Si el archivo de claves existente será reemplazado por la copia recuperada.
+-167f-field:confirmKeyPairFileExistsOverWriteeffect=Al oprimir Si la clave existente será reemplazado por la copia recuperada.
 
 #___________________________________________=This account was created with an older version of Martus, which used a different set of folders. The folders need to be migrated to the new format. The migration is automatic, fast, and safe. You cannot run this version of Martus unless you allow this migration.
 -39ae-field:confirmNeedsFolderMigrationcause=Esta cuenta se creo con una versión anterior de Martus que usó diferentes carpetas. Sus boletines tienen que ser convertidos para usar las nuevas carpetas. Este cambio es automático, rápido y seguro. No podrá usar esta versión de Martus a menos que continue con esta conversión.
@@ -828,7 +828,7 @@ Also, the translation of the first sentence should
 -f6a6-field:confirmRecoverUsingKeyShareeffect=¿Crear una cuenta nueva o recuperar una cuenta existente?
 
 #______________________________________________________=Key Restore failed, we suggest you try again with a different set of files. Choose Yes to try again, No to exit Martus.
--cf94-field:confirmRecoveredKeyShareFailedTryAgaincause=La recuperación de su archivo de claves falló. Le sugerimos intente nuevamente con otras copias de seguridad. Oprima Si para intentar la recuperación nuevamente, oprima No para salir de Martus.
+-cf94-field:confirmRecoveredKeyShareFailedTryAgaincause=La recuperación de su clave falló. Le sugerimos intente nuevamente con otras copias de seguridad. Oprima Si para intentar la recuperación nuevamente, oprima No para salir de Martus.
 
 #_______________________________________________________=Choosing Yes will begin the restore process again.
 -cb49-field:confirmRecoveredKeyShareFailedTryAgaineffect=Oprima Si para reiniciar el proceso de recuperación.
@@ -948,7 +948,7 @@ Also, the translation of the first sentence should
 -8d2c-field:confirmdeletefoldereffect=Los boletines en esta carpeta se moverán a la carpeta de Boletines desechados.
 
 #______________________________________________=Martus has noticed that you have not completed the backup procedure of your key.  It is strongly recommended that you complete the backup procedure at this time.\n\nIf something happens to the original key file, and you don't have a backup you will not be able to open any bulletins you have created with this key.
--e7f4-field:confirmgeneralBackupKeyPairMsgcause=Todavia no a completado el proceso para crear copias de seguridad de su par de claves.  Le recomendamos urgentemente que complete el proceso para crear copias de seguridad en este momento.\n\nSi algo le sucediera a su archivo de claves original y no tuviera una copia de seguridad no podrá abrir ningún boletín que haya creado con su par de claves.
+-e7f4-field:confirmgeneralBackupKeyPairMsgcause=Todavia no a completado el proceso para crear copias de seguridad de su clave.  Le recomendamos urgentemente que complete el proceso para crear copias de seguridad en este momento.\n\nSi algo le sucediera a su clave original y no tiene una copia de seguridad no podrá abrir ningún boletín que haya creado con su clave.
 
 #_______________________________________________=Selecting Yes will guide you through the backup procedure, selecting No will skip this important step.
 -8571-field:confirmgeneralBackupKeyPairMsgeffect=Oprima Si para iniciar el proceso para crear copias de seguridad. Oprima No para no continuar con este importante proceso.
@@ -1080,7 +1080,7 @@ Also, the translation of the first sentence should
 -9ca2-field:notifyDropErrorscause=Ocurrió un error inesperado al mover el (los) boletin(es). Puede que alguno de ellos se haya dañado.
 
 #____________________________________________=An unexpected error occurred in generating the key backup files.
--d237-field:notifyErrorBackingUpKeySharecause=Ocurrió un error inesperado al generar las partes de su archivo de claves.
+-d237-field:notifyErrorBackingUpKeySharecause=Ocurrió un error inesperado al generar las partes de clave.
 
 #______________________________________=An error prevented the file from being read.
 -1ad3-field:notifyErrorReadingFilecause=Un error interrumpió la lectura del archivo.
@@ -1173,16 +1173,16 @@ Also, the translation of the first sentence should
 -f5b5-field:notifyPublicInfoFileErrorcause=El archivo no contiene información pública válida.
 
 #___________________________________________________________________________=Key restore succeeded!  You now have to enter a user name and password.
--2527-field:notifyRecoveredKeyShareSucceededNewUserNamePasswordRequiredcause=¡Se recuperó el archivo de claves!  Es necesario que ingrese su nombre y contraseña.
+-2527-field:notifyRecoveredKeyShareSucceededNewUserNamePasswordRequiredcause=¡Se recuperó su clave!  Es necesario que ingrese su nombre y contraseña.
 
 #_______________________________________________=Key restore is complete, you will now be logged into Martus.
--efa0-field:notifyRecoveryOfKeyPairCompletecause=La recuperación de claves a finalizado y ahora va a ingresar a Martus.
+-efa0-field:notifyRecoveryOfKeyPairCompletecause=La recuperación de su clave a finalizado y ahora va a ingresar a Martus.
 
 #________________________________________________=You have successfully restored your key from your backup files.  It is very important that you now re-distribute your backup files.  We also recommend you backup your key as a single password-encrypted file, though you do not need to recreate the multiple file backup.
 -f50c-field:notifyRecoveryOfKeyShareCompletecause=Se ha recuperado la cuenta de Martus de las copias de seguridad. Es muy importante que vuelva a distribuir las diferentes copias de seguridad. No es necesario que vuelva a crear otra copia de seguridad pero le recomendamos que haga una copia de seguridad cifrada con su contraseña.
 
 #_______________________________________________=To restore your key, first you must find the backup file you saved previously.  Using the 'Restore Key from Backup File' dialog box find the file on your computer’s hard drive, a network drive, or removable media disk then click the Open button.  Martus will then ask you for your user name and password and restore your key so you can log in normally and access your account.
--83c2-field:notifyRecoveryProcessBackupFilecause=Para recuperar su archivo de claves necesita ubicar una copia de seguridad que haya guardado anteriormente. Al iniciar Martus elija 'Recuperar cuenta de una copia de seguridad', indique donde se encuentra la copia en su disco duro, en un disco en la red o en una unidad removible y oprima Abrir. Martus le pedirá que ingrese su nombre de usuario y su contraseña para recuperar su archivo de claves y su cuenta de Martus.
+-83c2-field:notifyRecoveryProcessBackupFilecause=Para recuperar su clave necesita ubicar una copia de seguridad que haya guardado anteriormente. Al iniciar Martus elija 'Recuperar cuenta de una copia de seguridad', indique donde se encuentra la copia en su disco duro, en un disco en la red o en una unidad removible y oprima Abrir. Martus le pedirá que ingrese su nombre de usuario y su contraseña para recuperar su clave y su cuenta de Martus.
 
 #_____________________________________________=You will now have to provide #N# out of the #M# files you previously saved when you backed up your key.
 -d5c2-field:notifyRecoveryProcessKeySharecause=Necesita tener #N# de las #M# partes de las copias de seguridad creadas al hacer la copia de seguridad de su clave.
@@ -1203,7 +1203,7 @@ Also, the translation of the first sentence should
 -6f6f-field:notifyRetrievedOnlySomeSummariescause=Ocurrieron errores al bajar los resúmenes de los boletines. Algunos de los boletines en el servidor no podrán ser mostrados.
 
 #__________________________________________=An error occurred.  Unable to change user name or password.  You may need to restore your backup key file.
--e3a0-field:notifyRewriteKeyPairFailedcause=Ha ocurrido un error. No se pudo cambiar el nombre o la contraseña. Puede que sea necesario recuperar el archivo de claves.
+-e3a0-field:notifyRewriteKeyPairFailedcause=Ha ocurrido un error. No se pudo cambiar el nombre o la contraseña. Puede que sea necesario recuperar su clave.
 
 #_________________________________________=Successfully saved your new username and password.
 -0398-field:notifyRewriteKeyPairSavedcause=Su nombre y contraseña han sido guardados.
@@ -1812,7 +1812,7 @@ Also, the translation of the first sentence should
 -c15e-wintitle:ErrorRecoverNoAppropriateFileFound=No hay archivo
 
 #___________________________________=Key backup File Error
--13ae-wintitle:ErrorRecoverShareDisk=Error de copia de seguridad de claves
+-13ae-wintitle:ErrorRecoverShareDisk=Error de copia de seguridad de clave
 
 #________________________________________=Verification Error
 -5e89-wintitle:ErrorVerifyingKeyPairShare=Error al verificar
@@ -1848,7 +1848,7 @@ Also, the translation of the first sentence should
 -5b7b-wintitle:PrintPrivateData=Confirmar impresión de datos privados
 
 #____________________________=Restore Key from Backup File
--08b0-wintitle:RecoverKeyPair=Recuperar archivo de claves de una copia de seguridad
+-08b0-wintitle:RecoverKeyPair=Recuperar su clave de una copia de seguridad
 
 #_________________________________=Restore from Backup Disk
 -f910-wintitle:RecoverShareKeyPair=Recuperar de discos de seguridad
@@ -1920,7 +1920,7 @@ Also, the translation of the first sentence should
 -ceff-wintitle:about=Acerca de Martus
 
 #________________________________=Key Backup Needed
--e570-wintitle:askToBackupKeyPair=Archivo de claves necesita copia de seguridad
+-e570-wintitle:askToBackupKeyPair=Necesita copia de seguridad de su clave
 
 #_____________________________________________=Backing Up Your Key
 -52f3-wintitle:confirmBackupKeyPairInformation=Creando copia de seguridad de su clave
@@ -1977,7 +1977,7 @@ Also, the translation of the first sentence should
 -a86c-wintitle:confirmExportUnknownTags=Exportar boletines
 
 #_______________________________________________=Key file Exists
--493d-wintitle:confirmKeyPairFileExistsOverWrite=Archivo de claves ya existe
+-493d-wintitle:confirmKeyPairFileExistsOverWrite=Clave ya existe
 
 #_________________________________________=Folder Migration Required
 -72d3-wintitle:confirmNeedsFolderMigration=Conversión de carpetas requerido
@@ -2241,7 +2241,7 @@ Also, the translation of the first sentence should
 -6ad3-wintitle:notifyRecoveryOfKeyShareComplete=Recuperación completada
 
 #_____________________________________________=Restore Key
--cb87-wintitle:notifyRecoveryProcessBackupFile=Recuperar claves
+-cb87-wintitle:notifyRecoveryProcessBackupFile=Recuperar clave
 
 #___________________________________________=Restore Account from Key Backup
 -428a-wintitle:notifyRecoveryProcessKeyShare=Recuperar cuenta de archivo de seguridad de clave
