@@ -644,6 +644,16 @@ public class BulletinStore
 		return folderSealedOutbox;
 	}
 	
+	public BulletinFolder getFolderOnServer()
+	{
+		return createOrFindFolder(ON_SERVER_FOLDER);
+	}
+	
+	public BulletinFolder getFolderNotOnServer()
+	{
+		return createOrFindFolder(NOT_ON_SERVER_FOLDER);
+	}
+
 	public boolean needsFolderMigration()
 	{
 		if(findFolder(OBSOLETE_DRAFT_FOLDER) != null)
@@ -692,7 +702,7 @@ public class BulletinStore
 			{
 				UniversalId uid = folder.getBulletinUniversalIdUnsorted(i);
 				bulletinUids.add(uid);
-				removeBulletinFromFolder(uid, folder);
+				removeBulletinFromFolder(folder, uid);
 			}
 		}
 		return bulletinUids;
@@ -739,10 +749,10 @@ public class BulletinStore
 	public void removeBulletinFromFolder(BulletinFolder from, Bulletin b)
 	{
 		UniversalId uid = b.getUniversalId();
-		removeBulletinFromFolder(uid, from);
+		removeBulletinFromFolder(from, uid);
 	}
 
-	public synchronized void removeBulletinFromFolder(UniversalId uid, BulletinFolder from)
+	public synchronized void removeBulletinFromFolder(BulletinFolder from, UniversalId uid)
 	{
 		from.remove(uid);
 	}
@@ -1276,6 +1286,8 @@ public class BulletinStore
 	public static final String DAMAGED_BULLETIN_FOLDER = "%DamagedBulletins";
 	private static final String DRAFT_OUTBOX = "*DraftOutbox";
 	private static final String SEALED_OUTBOX = "*SealedOutbox";
+	private static final String ON_SERVER_FOLDER = "*OnServer";
+	private static final String NOT_ON_SERVER_FOLDER = "*NotOnServer";
 
 	public static final String OBSOLETE_OUTBOX_FOLDER = "%OutBox";
 	public static final String OBSOLETE_DRAFT_FOLDER = "%Draft";

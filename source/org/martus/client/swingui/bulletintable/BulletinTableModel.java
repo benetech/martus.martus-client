@@ -100,13 +100,13 @@ public class BulletinTableModel extends AbstractTableModel
 		
 		if(fieldTag.equals(Bulletin.TAGSTATUS))
 		 	return localization.getStatusLabel(b.getStatus());	
-			
+		
 		if(fieldTag.equals(Bulletin.TAGWASSENT))
 		{
-			String tagWasSent = "WasSentNo";
-			if(wasSent(b))
-				tagWasSent = "WasSentYes";
-			return localization.getFieldLabel(tagWasSent);
+			String tag = getSentTag(b);
+			if(tag == null)
+				return "";
+			return localization.getFieldLabel(tag);
 		}
 											
 		if (fieldTag.equals(Bulletin.TAGLASTSAVED))			 
@@ -125,6 +125,28 @@ public class BulletinTableModel extends AbstractTableModel
 		return value;
 	}
 
+	private String getSentTag(Bulletin b)
+	{
+		BulletinStore store = folder.getStore();
+		boolean knownNotOnServer = store.getFolderNotOnServer().contains(b);
+
+		if(store.getFolderDraftOutbox().contains(b))
+		{
+			if(store.isMyBulletin(b.getBulletinHeaderPacket()))
+				return "WasSentNo";
+			if(!knownNotOnServer)
+				return null;
+		}
+
+		if(knownNotOnServer)
+			return "WasSentNo";
+
+		if(store.getFolderOnServer().contains(b))
+			return "WasSentYes";
+		
+		return null;
+	}
+
 	public String getColumnName(int columnIndex)
 	{
 		return localization.getFieldLabel(getFieldName(columnIndex));
@@ -140,16 +162,6 @@ public class BulletinTableModel extends AbstractTableModel
 		folder.sortBy(getFieldName(columnIndex));
 	}
 	
-	private boolean wasSent(Bulletin b)
-	{
-		BulletinStore store = folder.getStore();
-		if(store.getFolderSealedOutbox().contains(b))
-			return false;
-		if(store.getFolderDraftOutbox().contains(b))
-			return false;
-		return true;
-	}
-
 	UiBasicLocalization localization;
 	BulletinFolder folder;
 }

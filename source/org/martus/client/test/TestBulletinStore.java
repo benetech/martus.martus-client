@@ -124,8 +124,8 @@ public class TestBulletinStore extends TestCaseEnhanced
         	store.addBulletinToFolder(normal, bulletins[i].getUniversalId());
     	}
     	
-    	store.removeBulletinFromFolder(bulletins[3].getUniversalId(), normal);
-    	store.removeBulletinFromFolder(bulletins[9].getUniversalId(), normal);
+    	store.removeBulletinFromFolder(normal, bulletins[3].getUniversalId());
+    	store.removeBulletinFromFolder(normal, bulletins[9].getUniversalId());
     	
     	BulletinFolder discarded = store.getFolderDiscarded();
     	store.addBulletinToFolder(discarded, bulletins[3].getUniversalId());

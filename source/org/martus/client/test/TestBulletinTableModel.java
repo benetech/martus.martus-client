@@ -31,7 +31,9 @@ import org.martus.client.core.BulletinStore;
 import org.martus.client.swingui.bulletintable.BulletinTableModel;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.bulletin.BulletinConstants;
+import org.martus.common.bulletin.BulletinSaver;
 import org.martus.common.clientside.test.MockUiLocalization;
+import org.martus.common.crypto.MockMartusSecurity;
 import org.martus.common.database.MockClientDatabase;
 import org.martus.common.packet.UniversalId;
 import org.martus.util.TestCaseEnhanced;
@@ -50,7 +52,7 @@ public class TestBulletinTableModel extends TestCaseEnhanced
 		app = MockMartusApp.create(new MockClientDatabase());
 		app.loadSampleData();
 		store = app.getStore();
-		folderSent = app.getFolderSaved();
+		folderSaved = app.getFolderSaved();
     }
 
     public void tearDown() throws Exception
@@ -63,7 +65,7 @@ public class TestBulletinTableModel extends TestCaseEnhanced
 	public void testColumnTags()
 	{
 		BulletinTableModel list = new BulletinTableModel(localization);
-		list.setFolder(folderSent);
+		list.setFolder(folderSaved);
 
 		assertEquals("column count", 6, list.getColumnCount());
 		assertEquals("status", list.getFieldName(STATUS));
@@ -77,7 +79,7 @@ public class TestBulletinTableModel extends TestCaseEnhanced
     public void testColumnLabels()
     {
 		BulletinTableModel list = new BulletinTableModel(localization);
-		list.setFolder(folderSent);
+		list.setFolder(folderSaved);
 
 		assertEquals(localization.getFieldLabel(BulletinConstants.TAGSTATUS), list.getColumnName(STATUS));
 		assertEquals(localization.getFieldLabel(BulletinConstants.TAGWASSENT), list.getColumnName(WASSENT));
@@ -90,7 +92,7 @@ public class TestBulletinTableModel extends TestCaseEnhanced
 	public void testRows()
 	{
 		BulletinTableModel list = new BulletinTableModel(localization);
-		list.setFolder(folderSent);
+		list.setFolder(folderSaved);
 
 		assertEquals(store.getBulletinCount(), list.getRowCount());
 		Bulletin b = list.getBulletin(2);
@@ -104,10 +106,10 @@ public class TestBulletinTableModel extends TestCaseEnhanced
 	public void testGetBulletin()
 	{
 		BulletinTableModel list = new BulletinTableModel(localization);
-		list.setFolder(folderSent);
-		for(int i = 0; i < folderSent.getBulletinCount(); ++i)
+		list.setFolder(folderSaved);
+		for(int i = 0; i < folderSaved.getBulletinCount(); ++i)
 		{
-			UniversalId folderBulletinId = folderSent.getBulletinSorted(i).getUniversalId();
+			UniversalId folderBulletinId = folderSaved.getBulletinSorted(i).getUniversalId();
 			UniversalId listBulletinId = list.getBulletin(i).getUniversalId();
 			assertEquals(i + "wrong bulletin?", folderBulletinId, listBulletinId);
 		}
@@ -116,7 +118,7 @@ public class TestBulletinTableModel extends TestCaseEnhanced
 	public void testGetValueAt() throws Exception
 	{
 		BulletinTableModel list = new BulletinTableModel(localization);
-		list.setFolder(folderSent);
+		list.setFolder(folderSaved);
 
 		assertEquals("", list.getValueAt(1000, 0));
 
@@ -141,19 +143,87 @@ public class TestBulletinTableModel extends TestCaseEnhanced
 		b.setSealed();
 		store.saveBulletin(b);
 		assertEquals(localization.getStatusLabel("sealed"), list.getValueAt(0,STATUS));
-
-		assertEquals("not sent?", localization.getFieldLabel("WasSentYes"), list.getValueAt(0, WASSENT));
-		b.setDraft();
-		BulletinFolder folderDraftOutbox = store.getFolderDraftOutbox();
-		store.addBulletinToFolder(folderDraftOutbox, b.getUniversalId());
-		assertEquals("unsent draft not recognized?", localization.getFieldLabel("WasSentNo"), list.getValueAt(0, WASSENT));
-		store.removeBulletinFromFolder(folderDraftOutbox, b);
+	}
+	
+	public void testSentColumnGetValueAtSealed() throws Exception
+	{
+		BulletinTableModel list = new BulletinTableModel(localization);
+		list.setFolder(folderSaved);
+		int row = 0;
+		Bulletin b = list.getBulletin(row);
+		assertTrue("not sealed?", b.isSealed());
+		assertEquals("already sent?", "", list.getValueAt(row, WASSENT));
 		
-		b.setSealed();
-		BulletinFolder folderSealedOutbox = store.getFolderSealedOutbox();
-		store.addBulletinToFolder(folderSealedOutbox, b.getUniversalId());
-		assertEquals("unsent sealed not recognized?", localization.getFieldLabel("WasSentNo"), list.getValueAt(0, WASSENT));
-		store.removeBulletinFromFolder(folderSealedOutbox, b);
+		BulletinFolder onServer = store.getFolderOnServer();
+		BulletinFolder notOnServer = store.getFolderNotOnServer();
+
+		store.addBulletinToFolder(onServer, b.getUniversalId());
+		assertEquals("not sent?", localization.getFieldLabel("WasSentYes"), list.getValueAt(row, WASSENT));
+		
+		store.addBulletinToFolder(notOnServer, b.getUniversalId());
+		assertEquals("sent if in both?", localization.getFieldLabel("WasSentNo"), list.getValueAt(row, WASSENT));
+		
+		store.removeBulletinFromFolder(onServer, b);
+		assertEquals("sent?", localization.getFieldLabel("WasSentNo"), list.getValueAt(row, WASSENT));
+	}
+	
+	public void testSentColumnGetValueMyDraft() throws Exception
+	{
+		BulletinTableModel list = new BulletinTableModel(localization);
+		list.setFolder(folderSaved);
+
+		Bulletin myDraft = store.createEmptyBulletin();
+		store.saveBulletin(myDraft);
+		UniversalId uid = myDraft.getUniversalId();
+		store.addBulletinToFolder(folderSaved, uid);
+		int row = folderSaved.find(uid);
+		assertEquals("should be unknown", "", list.getValueAt(row, WASSENT));
+
+		BulletinFolder draftOutbox = store.getFolderDraftOutbox();
+		BulletinFolder onServer = store.getFolderOnServer();
+		BulletinFolder notOnServer = store.getFolderNotOnServer();
+
+		store.addBulletinToFolder(onServer, uid);
+		assertEquals("on server should be respected", localization.getFieldLabel("WasSentYes"), list.getValueAt(row, WASSENT));
+		
+		store.moveBulletin(myDraft, onServer, notOnServer);
+		assertEquals("not on server should be respected", localization.getFieldLabel("WasSentNo"), list.getValueAt(row, WASSENT));
+
+		store.addBulletinToFolder(draftOutbox, uid);
+		assertEquals("not on server and in outbox should be unsent", localization.getFieldLabel("WasSentNo"), list.getValueAt(row, WASSENT));
+
+		store.moveBulletin(myDraft, notOnServer, onServer);
+		assertEquals("on server but in outbox should be No", localization.getFieldLabel("WasSentNo"), list.getValueAt(row, WASSENT));
+	}
+	
+	public void testSentColumnGetValueAtNotMyDraft() throws Exception
+	{
+		BulletinTableModel list = new BulletinTableModel(localization);
+		list.setFolder(folderSaved);
+
+		MockMartusSecurity otherSecurity = MockMartusSecurity.createOtherClient();
+		Bulletin notMine = new Bulletin(otherSecurity);
+		BulletinSaver.saveToClientDatabase(notMine, store.getDatabase(), false, otherSecurity);
+		UniversalId uid = notMine.getUniversalId();
+		store.addBulletinToFolder(folderSaved, uid);
+		int row = folderSaved.find(uid);
+		assertEquals("should be unknown", "", list.getValueAt(row, WASSENT));
+
+		BulletinFolder draftOutbox = store.getFolderDraftOutbox();
+		BulletinFolder onServer = store.getFolderOnServer();
+		BulletinFolder notOnServer = store.getFolderNotOnServer();
+
+		store.addBulletinToFolder(onServer, uid);
+		assertEquals("on server should be respected", localization.getFieldLabel("WasSentYes"), list.getValueAt(row, WASSENT));
+		
+		store.moveBulletin(notMine, onServer, notOnServer);
+		assertEquals("not on server should be respected", localization.getFieldLabel("WasSentNo"), list.getValueAt(row, WASSENT));
+
+		store.addBulletinToFolder(draftOutbox, uid);
+		assertEquals("not on server and in outbox should be unsent", localization.getFieldLabel("WasSentNo"), list.getValueAt(row, WASSENT));
+
+		store.moveBulletin(notMine, notOnServer, onServer);
+		assertEquals("on server but in outbox should be unknown", "", list.getValueAt(row, WASSENT));
 	}
 
 	public void testSetFolder()
@@ -161,9 +231,9 @@ public class TestBulletinTableModel extends TestCaseEnhanced
 		BulletinTableModel list = new BulletinTableModel(localization);
 		assertEquals(0, list.getRowCount());
 
-		list.setFolder(folderSent);
-		assertEquals(store.getBulletinCount(), folderSent.getBulletinCount());
-		assertEquals(folderSent.getBulletinSorted(0).getLocalId(), list.getBulletin(0).getLocalId());
+		list.setFolder(folderSaved);
+		assertEquals(store.getBulletinCount(), folderSaved.getBulletinCount());
+		assertEquals(folderSaved.getBulletinSorted(0).getLocalId(), list.getBulletin(0).getLocalId());
 
 		BulletinFolder empty = store.createFolder("empty");
 		assertEquals(0, empty.getBulletinCount());
@@ -174,7 +244,7 @@ public class TestBulletinTableModel extends TestCaseEnhanced
 	public void testFindBulletin() throws Exception
 	{
 		BulletinTableModel list = new BulletinTableModel(localization);
-		list.setFolder(folderSent);
+		list.setFolder(folderSaved);
 
 		assertEquals(-1, list.findBulletin(null));
 
@@ -194,22 +264,22 @@ public class TestBulletinTableModel extends TestCaseEnhanced
 	public void testSortByColumn()
 	{
 		BulletinTableModel list = new BulletinTableModel(localization);
-		list.setFolder(folderSent);
+		list.setFolder(folderSaved);
 
 		String tag = BulletinConstants.TAGEVENTDATE;
 		int col = EVENTDATE;
 		assertEquals(tag, list.getFieldName(col));
-		assertEquals(tag, folderSent.sortedBy());
+		assertEquals(tag, folderSaved.sortedBy());
 		String first = (String)list.getValueAt(0, col);
 		list.sortByColumn(col);
-		assertEquals(tag, folderSent.sortedBy());
+		assertEquals(tag, folderSaved.sortedBy());
 		assertEquals(false, first.equals(list.getValueAt(0,col)));
 	}
 	
 	public void testHtmlTags() throws Exception
 	{
 		BulletinTableModel list = new BulletinTableModel(localization);
-		list.setFolder(folderSent);
+		list.setFolder(folderSaved);
 
 		Bulletin b = list.getBulletin(0);
 		b.set(BulletinConstants.TAGTITLE, "<HTML><body><H1><center>Charles</center></H1></BODY></HTML>");
@@ -233,6 +303,6 @@ public class TestBulletinTableModel extends TestCaseEnhanced
 	MockMartusApp app;
 	MockUiLocalization localization;
 	BulletinStore store;
-	BulletinFolder folderSent;
+	BulletinFolder folderSaved;
 
 }
