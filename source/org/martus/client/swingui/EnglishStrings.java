@@ -405,7 +405,7 @@ public class EnglishStrings
 "field:aboutDlgVersionInfo=software version",
 "field:aboutDlgBuildDate=Built on",
 "field:aboutDlgDisclaimer=Martus comes with ABSOLUTELY NO WARRANTY, and is made available under license terms in the file named license.txt in the Martus directory. This is free software, and you are welcome to redistribute it under certain conditions discussed in license.txt. ",
-"field:aboutDlgCredits=Martus Software is developed by Benetech in partnership with the Information Program of the Open Society Institute, Aspiration and the American Association for the Advancement of Science.",
+"field:aboutDlgCredits=Martus Software is developed by Benetech in partnership with the Information Program of the Open Society Institute, Aspiration, and the John D. and Catherine T. MacArthur Foundation.",
 
 "field:allprivate=Keep ALL Information Private",
 "field:language=Language",
