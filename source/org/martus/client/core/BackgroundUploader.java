@@ -75,9 +75,9 @@ public class BackgroundUploader
 		BulletinFolder folderSealedOutbox = app.getFolderSealedOutbox();
 		BulletinFolder folderDraftOutbox = app.getFolderDraftOutbox();
 		if(store.hasAnyNonDiscardedBulletins(folderSealedOutbox))
-			uploadResult = backgroundUploadOneSealedBulletin(folderSealedOutbox);
+			uploadResult = backgroundUploadOneBulletin(folderSealedOutbox);
 		else if(store.hasAnyNonDiscardedBulletins(folderDraftOutbox))
-			uploadResult = backgroundUploadOneDraftBulletin(folderDraftOutbox);
+			uploadResult = backgroundUploadOneBulletin(folderDraftOutbox);
 		else if(app.getConfigInfo().shouldContactInfoBeSentToServer())
 			uploadResult = sendContactInfoToServer();
 	
@@ -162,11 +162,28 @@ public class BackgroundUploader
 			return uploadResult;
 	
 		int index = new Random().nextInt(uploadFromFolder.getBulletinCount());
-		Bulletin b = app.getStore().chooseBulletinToUpload(uploadFromFolder, index);
+		BulletinStore store = app.getStore();
+		Bulletin b = store.chooseBulletinToUpload(uploadFromFolder, index);
 		uploadResult.uid = b.getUniversalId();
 		try
 		{
 			uploadResult.result = uploadBulletin(b);
+			if(uploadResult.result == null)
+				return uploadResult;
+			
+			if(uploadResult.result.equals(NetworkInterfaceConstants.OK) || 
+					uploadResult.result.equals(NetworkInterfaceConstants.DUPLICATE))
+			{
+				BulletinFolder onServer = store.getFolderOnServer();
+				BulletinFolder notOnServer = store.getFolderNotOnServer();
+				
+				store.moveBulletin(b, notOnServer, onServer);
+				uploadFromFolder.remove(uploadResult.uid);
+				store.saveFolders();
+				
+				// TODO: Is the file this creates ever used???
+				app.resetLastUploadedTime();
+			}
 		}
 		catch (Packet.InvalidPacketException e)
 		{
@@ -216,45 +233,14 @@ public class BackgroundUploader
 		return uploadResult;
 	}
 
-	UploadResult backgroundUploadOneSealedBulletin(BulletinFolder uploadFromFolder) throws
+	UploadResult backgroundUploadOneBulletin(BulletinFolder uploadFromFolder) throws
 		MartusApp.DamagedBulletinException
 	{
 		UploadResult uploadResult = uploadOneBulletin(uploadFromFolder);
 		
-		if(uploadResult.result != null)
-		{
-			if(uploadResult.result.equals(NetworkInterfaceConstants.OK) || uploadResult.result.equals(NetworkInterfaceConstants.DUPLICATE))
-			{
-				UniversalId uid = uploadResult.uid;
-				uploadFromFolder.remove(uid);
-				app.store.saveFolders();
-				app.resetLastUploadedTime();
-			}
-			return uploadResult;
-		}
-	
 		if(uploadResult.isHopelesslyDamaged)
 			app.moveBulletinToDamaged(uploadFromFolder, uploadResult.uid);
-		return uploadResult;
-	}
 
-	UploadResult backgroundUploadOneDraftBulletin(BulletinFolder uploadFromFolder) throws
-		MartusApp.DamagedBulletinException
-	{
-		UploadResult uploadResult = uploadOneBulletin(uploadFromFolder);
-		
-		if(uploadResult.result != null)
-		{
-			if(uploadResult.result.equals(NetworkInterfaceConstants.OK))
-			{
-				uploadFromFolder.remove(uploadResult.uid);
-				app.getStore().saveFolders();
-			}
-			return uploadResult;
-		}
-	
-		if(uploadResult.isHopelesslyDamaged)
-			app.moveBulletinToDamaged(uploadFromFolder, uploadResult.uid);
 		return uploadResult;
 	}
 
