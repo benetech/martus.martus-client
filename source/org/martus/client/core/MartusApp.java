@@ -553,7 +553,7 @@ public class MartusApp
 		{											
 			if (opts.isScrubSelected())
 				store.scrubAllData();
-			store.deleteAllData();																	
+			store.deleteAllData();
 		}
 		catch (Exception e)
 		{
