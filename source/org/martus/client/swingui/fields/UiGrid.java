@@ -57,7 +57,14 @@ public class UiGrid extends UiField
 
 	public void setText(String newText)
 	{
-		// TODO Auto-generated method stub
+		try
+		{
+			model.setFromXml(newText);
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+		}
 	}
 
 	JScrollPane widget;

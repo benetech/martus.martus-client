@@ -25,9 +25,13 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.fields;
 
+import java.io.IOException;
+
 import javax.swing.table.DefaultTableModel;
+import javax.xml.parsers.ParserConfigurationException;
 
 import org.martus.common.GridData;
+import org.xml.sax.SAXException;
 
 
 public class GridTableModel extends DefaultTableModel
@@ -66,6 +70,12 @@ public class GridTableModel extends DefaultTableModel
 	public String getXmlRepresentation()
 	{
 		return gridData.getXmlRepresentation();
+	}
+	
+	public void setFromXml(String xmlText) throws IOException, ParserConfigurationException, SAXException
+	{
+		gridData.setFromXml(xmlText);
+		fireTableDataChanged();
 	}
 	
 	private GridData gridData;
