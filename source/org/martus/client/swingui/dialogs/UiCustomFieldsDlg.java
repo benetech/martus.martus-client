@@ -26,6 +26,7 @@ Boston, MA 02111-1307, USA.
 
 package org.martus.client.swingui.dialogs;
 
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -79,12 +80,8 @@ public class UiCustomFieldsDlg extends JDialog
 		Dimension preferredSize = textPane.getPreferredSize();
 		preferredSize.height = ok.getPreferredSize().height;				
 		buttons.setPreferredSize(preferredSize);	
-		buttons.add(defaults);
-
-		buttons.add(Box.createHorizontalGlue());
-		buttons.add(ok);				
-		buttons.add(cancel);
-		buttons.add(help);
+		Component buttonsToAdd[] = {defaults, Box.createHorizontalGlue(), ok, cancel, help};  
+		Utilities.addComponentsRespectingOrientation(buttons, buttonsToAdd);
 
 		JPanel customFieldsPanel = new JPanel();
 		customFieldsPanel.setBorder(new EmptyBorder(10,10,10,10));

@@ -95,9 +95,8 @@ public class UiBulletinModifyDlg extends JFrame implements ActionListener, Windo
 				
 
 			Box box = Box.createHorizontalBox();
-			box.add(send);
-			box.add(draft);
-			box.add(cancel);
+			JButton buttons[] = {send, draft, cancel};
+			Utilities.addComponentsRespectingOrientation(box, buttons);
 
 			getContentPane().add(scroller);
 			getContentPane().add(box, BorderLayout.SOUTH);

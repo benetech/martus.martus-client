@@ -27,6 +27,7 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.swingui.dialogs;
 
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -124,11 +125,8 @@ public class UiDisplayHelpDlg extends JDialog
 		Dimension msgAreaSize = msgAreaScrollPane.getPreferredSize();
 		msgAreaSize.setSize(msgAreaSize.getWidth(), close.getPreferredSize().getHeight());
 		hBox.setPreferredSize(msgAreaSize);
-		
-		hBox.add(searchField);
-		hBox.add(searchButton);
-		hBox.add(Box.createHorizontalGlue());
-		hBox.add(close);
+		Component buttons[] = {searchField, searchButton, Box.createHorizontalGlue(), close};  
+		Utilities.addComponentsRespectingOrientation(hBox, buttons);
 		helpPanel.add(hBox);
 		
 		getContentPane().add(helpPanel);

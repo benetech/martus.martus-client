@@ -26,17 +26,20 @@ Boston, MA 02111-1307, USA.
 
 package org.martus.client.swingui.dialogs;
 
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
+
 import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.filechooser.FileFilter;
+
 import org.martus.client.core.ConfigInfo;
 import org.martus.client.core.MartusApp;
 import org.martus.client.swingui.UiMainWindow;
@@ -85,12 +88,9 @@ public class UiTemplateDlg extends JDialog implements ActionListener
 		Dimension preferredSize = details.getPreferredSize();
 		preferredSize.height = okButton.getPreferredSize().height;				
 		buttons.setPreferredSize(preferredSize);						
-		buttons.add(loadFromFile);
-
-		buttons.add(Box.createHorizontalGlue());		
-		buttons.add(okButton);				
-		buttons.add(cancel);
-		buttons.add(help);
+		Component buttonsToAdd[] = {loadFromFile, Box.createHorizontalGlue(), okButton, cancel, help};
+		Utilities.addComponentsRespectingOrientation(buttons, buttonsToAdd);
+		
 		panel.addOnNewLine(buttons);
 
 		getContentPane().add(panel);
