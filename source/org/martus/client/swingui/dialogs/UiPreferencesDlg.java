@@ -103,12 +103,7 @@ preferences.addOnNewLine(directionRtoL);
 			UiLocalization localization = owner.getLocalization();
 			String languageCodeSelected = languageDropdown.getText();
 			if(!localization.isOfficialTranslation(languageCodeSelected))
-			{
 				UiMainWindow.displayUnofficialTranslationMessage(localization.getFieldLabel("warningUnofficialTranslation"));
-				languageDropdown.updateChoices(localization.getUiLanguages());
-				languageDropdown.setText(localization.getCurrentLanguageCode());
-				return;
-			}
 			localization.setCurrentDateFormatCode(dateFormatDropdown.getText());
 			localization.setCurrentLanguageCode(languageDropdown.getText());
 			owner.setBulletinsAlwaysPrivate(allPrivate.isSelected());

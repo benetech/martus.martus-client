@@ -304,6 +304,7 @@ public class TestLocalization extends TestCaseEnhanced
 		assertEquals("Incorrect translation OK from within unsigned language pack", "OK", myLocalization2.getButtonLabel("ok"));
 		assertEquals("Incorrect translation No from within unsigned language pack", "No", myLocalization2.getButtonLabel("no"));
 		assertFalse("A unsigned MLPK file should not be trusted", myLocalization2.isOfficialTranslation(someTestLanguageCode));
+		assertFalse("Current translation should not be trusted", myLocalization2.isCurrentTranslationOfficial());
 		
 		assertFalse("A non existant translation should not be trusted.",myLocalization2.isOfficialTranslation("dx"));
 	}
@@ -337,6 +338,8 @@ public class TestLocalization extends TestCaseEnhanced
 		assertFalse("should not have testLanguage because its not signed.", foundSomeTestLanguage);
 		assertFalse("A unsigned MLPK file should not be trusted", myLocalization2.isOfficialTranslation(someTestLanguageCode));
 		assertFalse("A non existant translation should not be trusted.",myLocalization2.isOfficialTranslation("dx"));
+		myLocalization2.setCurrentLanguageCode(someTestLanguageCode);
+		assertFalse("Current translation should be trusted", myLocalization2.isCurrentTranslationOfficial());
 	}
 
 	private boolean doesLanguageExist(UiLocalization dbToUse, String languageCode)

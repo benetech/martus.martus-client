@@ -188,7 +188,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 			localization.setCurrentLanguageCode(Localization.ENGLISH);
 			localization.setCurrentDateFormatCode(DateUtilities.getDefaultDateFormatCode());
 		}
-		if(!localization.isOfficialTranslation(localization.getCurrentLanguageCode()))
+		if(!localization.isCurrentTranslationOfficial())
 			displayDefaultUnofficialTranslationMessage();
 	}
 

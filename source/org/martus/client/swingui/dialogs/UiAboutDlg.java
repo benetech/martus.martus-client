@@ -70,6 +70,11 @@ public class UiAboutDlg extends JDialog implements ActionListener
 		String versionInfo = UiConstants.programName;
 		versionInfo += " " + localization.getFieldLabel("aboutDlgVersionInfo");
 		versionInfo += " " + UiConstants.versionLabel;
+		
+		String mtfVersionInfo = localization.getFieldLabel("aboutDlgTranslationVersionInfo");
+		mtfVersionInfo += " " + localization.getFieldLabel("translationVersion");
+		if(!localization.isCurrentTranslationOfficial())
+			mtfVersionInfo +="X";
 
 		String buildDate = localization.getFieldLabel("aboutDlgBuildDate");
 		buildDate += " " + VersionBuildDate.getVersionBuildDate();
@@ -80,6 +85,7 @@ public class UiAboutDlg extends JDialog implements ActionListener
 
 		Box vBoxVersionInfo = Box.createVerticalBox();
 		vBoxVersionInfo.add(new JLabel(versionInfo));
+		vBoxVersionInfo.add(new JLabel(mtfVersionInfo));
 		vBoxVersionInfo.add(new JLabel(UiConstants.copyright));
 		vBoxVersionInfo.add(new JLabel(UiConstants.website));
 		vBoxVersionInfo.add(new JLabel(buildDate));
