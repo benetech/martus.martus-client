@@ -54,7 +54,7 @@ public class UiStatusBar extends JPanel
 		statusBarBox.add(bulletinId);
 		
 		statusBarBox.add(new JLabel(" "+localization.getFieldLabel("BulletinLastSaved")));
-		bulletinLastSaved = new JTextField(10);
+		bulletinLastSaved = new JTextField(12);
 		bulletinLastSaved.setMaximumSize(bulletinId.getPreferredSize());
 		bulletinLastSaved.setEditable(false);
 		bulletinLastSaved.setBorder(new EtchedBorder());
@@ -70,8 +70,8 @@ public class UiStatusBar extends JPanel
 	
 	public void setBulletinLastSaved(String time)
 	{		
-		local.convertStoredDateToDisplay(time);
-		bulletinLastSaved.setText(time);
+		String dateTime = local.convertStoredDateTimeToDisplay(time);
+		bulletinLastSaved.setText(dateTime);
 	}
 
 	public UiProgressMeter getBackgroundProgressMeter()

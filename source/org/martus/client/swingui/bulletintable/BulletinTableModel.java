@@ -103,10 +103,13 @@ public class BulletinTableModel extends AbstractTableModel
 		 	return localization.getStatusLabel(value);
 		}
 	 	if(fieldTag.equals(Bulletin.TAGENTRYDATE) || 
-				fieldTag.equals(Bulletin.TAGEVENTDATE))
+				fieldTag.equals(Bulletin.TAGEVENTDATE))				
 		{
 			return localization.convertStoredDateToDisplay(value);
-		}
+		}		
+		
+		if (fieldTag.equals(Bulletin.TAGLASTSAVED))
+			return localization.convertStoredDateTimeToDisplay(value);
 		
 		if (value.startsWith("<"))
 			return " "+value;				

@@ -79,11 +79,12 @@ public class TestBulletinTableModel extends TestCaseEnhanced
 		BulletinTableModel list = new BulletinTableModel(localization);
 		list.setFolder(folderSent);
 
-		assertEquals("column count", 4, list.getColumnCount());
+		assertEquals("column count", 5, list.getColumnCount());
 		assertEquals(localization.getFieldLabel("status"), list.getColumnName(0));
 		assertEquals(localization.getFieldLabel("eventdate"), list.getColumnName(1));
 		assertEquals(localization.getFieldLabel("title"), list.getColumnName(2));
 		assertEquals(localization.getFieldLabel("author"), list.getColumnName(3));
+		assertEquals(localization.getFieldLabel("BulletinLastSaved"), list.getColumnName(4));
 	}
 
 	public void doTestFieldNames()
@@ -91,11 +92,12 @@ public class TestBulletinTableModel extends TestCaseEnhanced
 		BulletinTableModel list = new BulletinTableModel(localization);
 		list.setFolder(folderSent);
 
-		assertEquals("row count", 4, list.getColumnCount());
+		assertEquals("column count", 5, list.getColumnCount());
 		assertEquals("status", list.getFieldName(0));
 		assertEquals("eventdate", list.getFieldName(1));
 		assertEquals("title", list.getFieldName(2));
 		assertEquals("author", list.getFieldName(3));
+		assertEquals("BulletinLastSaved", list.getFieldName(4));
 	}
 
 	public void doTestRows()
