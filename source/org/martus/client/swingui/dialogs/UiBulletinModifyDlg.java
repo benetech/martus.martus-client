@@ -210,7 +210,7 @@ public class UiBulletinModifyDlg extends JFrame implements ActionListener, Windo
 				outboxToUse = draftOutbox;
 			}
 			setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-			app.setHQKeyInBulletin(bulletin);
+			app.setHQKeysInBulletin(bulletin);
 			saveBulletinAndUpdateFolders(store, outboxToUse);
 			wasBulletinSavedFlag = true;
 			cleanupAndExit();

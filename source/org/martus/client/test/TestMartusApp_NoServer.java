@@ -1490,7 +1490,7 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 
 		Bulletin b1 = appWithAccount.createBulletin();
 		assertEquals("key already set?", "", b1.getHQPublicKey());
-		appWithAccount.setHQKeyInBulletin(b1);
+		appWithAccount.setHQKeysInBulletin(b1);
 		assertEquals("Key not set?", key, b1.getHQPublicKey());
 	}
 

@@ -453,10 +453,20 @@ public class MartusApp
 		return b;
 	}
 
-	public void setHQKeyInBulletin(Bulletin b)
+	public void setHQKeysInBulletin(Bulletin b)
 	{
-		//System.out.println("App.setHQKeyInBulletin Setting HQ:" + getHQKey());
-		b.setHQPublicKey(getHQKey());
+		try
+		{
+			//System.out.println("App.setHQKeyInBulletin Setting HQ:" + getHQKey());
+			b.setHQPublicKeys(getHQKeys());
+		}
+		catch (HQsException e)
+		{
+			e.printStackTrace();
+			Vector legacy = new Vector();
+			legacy.add(getHQKey());
+			b.setHQPublicKeys(legacy);
+		}
 	}
 
 	public BulletinFolder getFolderSaved()
