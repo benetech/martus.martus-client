@@ -29,6 +29,7 @@ package org.martus.client.swingui.bulletintable;
 import javax.swing.table.AbstractTableModel;
 
 import org.martus.client.core.BulletinFolder;
+import org.martus.client.core.BulletinStore;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.bulletin.BulletinConstants;
 import org.martus.common.clientside.UiBasicLocalization;
@@ -96,10 +97,18 @@ public class BulletinTableModel extends AbstractTableModel
 		
 		Bulletin b = getBulletin(rowIndex);
 		String fieldTag = BulletinConstants.sortableFieldTags[columnIndex];
-											
+		
 		if(fieldTag.equals(Bulletin.TAGSTATUS))
 		 	return localization.getStatusLabel(b.getStatus());	
 			
+		if(fieldTag.equals(Bulletin.TAGWASSENT))
+		{
+			String tagWasSent = "WasSentNo";
+			if(wasSent(b))
+				tagWasSent = "WasSentYes";
+			return localization.getFieldLabel(tagWasSent);
+		}
+											
 		if (fieldTag.equals(Bulletin.TAGLASTSAVED))			 
 			return localization.convertStoredDateTimeToDisplay(b.getLastSavedDateTime());
 		
@@ -129,6 +138,16 @@ public class BulletinTableModel extends AbstractTableModel
 	public void sortByColumn(int columnIndex)
 	{
 		folder.sortBy(getFieldName(columnIndex));
+	}
+	
+	private boolean wasSent(Bulletin b)
+	{
+		BulletinStore store = folder.getStore();
+		if(store.getFolderSealedOutbox().contains(b))
+			return false;
+		if(store.getFolderDraftOutbox().contains(b))
+			return false;
+		return true;
 	}
 
 	UiBasicLocalization localization;
