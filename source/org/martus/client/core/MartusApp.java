@@ -36,6 +36,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.UnsupportedEncodingException;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.Set;
@@ -72,7 +73,9 @@ import org.martus.common.clientside.Exceptions.ServerNotAvailableException;
 import org.martus.common.crypto.MartusCrypto;
 import org.martus.common.crypto.MartusSecurity;
 import org.martus.common.crypto.MartusCrypto.CryptoException;
+import org.martus.common.crypto.MartusCrypto.DecryptionException;
 import org.martus.common.crypto.MartusCrypto.MartusSignatureException;
+import org.martus.common.crypto.MartusCrypto.NoKeyPairException;
 import org.martus.common.database.FileDatabase.MissingAccountMapException;
 import org.martus.common.database.FileDatabase.MissingAccountMapSignatureException;
 import org.martus.common.network.NetworkInterface;
@@ -80,8 +83,12 @@ import org.martus.common.network.NetworkInterfaceConstants;
 import org.martus.common.network.NonSSLNetworkAPI;
 import org.martus.common.network.NetworkResponse;
 import org.martus.common.packet.FieldDataPacket;
+import org.martus.common.packet.Packet;
 import org.martus.common.packet.UniversalId;
+import org.martus.common.packet.Packet.InvalidPacketException;
+import org.martus.common.packet.Packet.SignatureVerificationException;
 import org.martus.common.packet.Packet.WrongAccountException;
+import org.martus.common.packet.Packet.WrongPacketTypeException;
 import org.martus.util.Base64;
 import org.martus.util.ByteArrayInputStreamWithSeek;
 import org.martus.util.DirectoryUtils;
@@ -989,25 +996,29 @@ public class MartusApp
 
 	public FieldDataPacket retrieveFieldDataPacketFromServer(String authorAccountId, String bulletinLocalId, String dataPacketLocalId) throws Exception
 	{
-		NetworkResponse response = getCurrentNetworkInterfaceGateway().getPacket(getSecurity(), authorAccountId, bulletinLocalId, dataPacketLocalId);
+		UniversalId packetUid = UniversalId.createFromAccountAndLocalId(authorAccountId, dataPacketLocalId);
+		FieldDataPacket fdp = new FieldDataPacket(packetUid, StandardFieldSpecs.getDefaultPublicFieldSpecs());
+		populatePacketFromServer(fdp, bulletinLocalId);
+		return fdp;
+	}
+
+	private void populatePacketFromServer(Packet packet, String bulletinLocalId) throws MartusSignatureException, ServerErrorException, UnsupportedEncodingException, InvalidBase64Exception, IOException, InvalidPacketException, WrongPacketTypeException, SignatureVerificationException, DecryptionException, NoKeyPairException
+	{
+		NetworkResponse response = getCurrentNetworkInterfaceGateway().getPacket(getSecurity(), packet.getAccountId(), bulletinLocalId, packet.getLocalId());
 		String resultCode = response.getResultCode();
 		if(!resultCode.equals(NetworkInterfaceConstants.OK))
 			throw new ServerErrorException(resultCode);
 
-		String xmlencoded = (String)response.getResultVector().get(0);
-		String xml = new String(Base64.decode(xmlencoded), "UTF-8");
-		UniversalId uid = UniversalId.createFromAccountAndLocalId(authorAccountId, dataPacketLocalId);
-		FieldDataPacket fdp = new FieldDataPacket(uid , StandardFieldSpecs.getDefaultPublicFieldSpecs());
+		String xmlEncoded = (String)response.getResultVector().get(0);
+		String xml = new String(Base64.decode(xmlEncoded), "UTF-8");
 		byte[] xmlBytes = xml.getBytes("UTF-8");
 		ByteArrayInputStreamWithSeek in =  new ByteArrayInputStreamWithSeek(xmlBytes);
-		fdp.loadFromXml(in, getSecurity());
-		return fdp;
+		packet.loadFromXml(in, getSecurity());
 	}
 
 	public BulletinSummary retrieveSummaryFromString(String accountId, String parameters)
 		throws ServerErrorException
 	{
-		FieldDataPacket fdp = null;
 		String args[] = parameters.split(MartusConstants.regexEqualsDelimeter, -1);
 		if(args.length < 3)
 			throw new ServerErrorException("MartusApp.retrieveSummaryFromString invalid # params: " + parameters);
@@ -1021,15 +1032,22 @@ public class MartusApp
 		if(!FieldDataPacket.isValidLocalId(packetlocalId))
 			throw new ServerErrorException();
 	
+		FieldDataPacket fdp = getFieldDataPacketFromStoreOrServer(accountId, bulletinLocalId, packetlocalId);
+		BulletinSummary bulletinSummary = new BulletinSummary(accountId, bulletinLocalId, fdp, size, date);
+		return bulletinSummary;
+}
+
+	private FieldDataPacket getFieldDataPacketFromStoreOrServer(String accountId, String bulletinLocalId, String packetlocalId) throws ServerErrorException
+	{
 		UniversalId uId = UniversalId.createFromAccountAndLocalId(accountId, bulletinLocalId);
 		Bulletin bulletin = store.getBulletinRevision(uId);
+
 		if (bulletin != null)
-			fdp = bulletin.getFieldDataPacket();
+			return bulletin.getFieldDataPacket();
 	
 		try
 		{
-			if(fdp == null)
-				fdp = retrieveFieldDataPacketFromServer(accountId, bulletinLocalId, packetlocalId);
+			return retrieveFieldDataPacketFromServer(accountId, bulletinLocalId, packetlocalId);
 		}
 		catch(Exception e)
 		{
@@ -1037,9 +1055,7 @@ public class MartusApp
 			//e.printStackTrace();
 			throw new ServerErrorException();
 		}
-		BulletinSummary bulletinSummary = new BulletinSummary(accountId, bulletinLocalId, fdp, size, date);
-		return bulletinSummary;
-}
+	}
 
 	public void retrieveOneBulletinToFolder(UniversalId uid, BulletinFolder retrievedFolder, ProgressMeterInterface progressMeter) throws
 		Exception
