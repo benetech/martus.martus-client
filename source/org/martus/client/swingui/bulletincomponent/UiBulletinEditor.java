@@ -136,8 +136,8 @@ public class UiBulletinEditor extends UiBulletinComponent
 		
 		publicSection.copyDataToBulletin(bulletin);
 		privateSection.copyDataToBulletin(bulletin);
-		mainWindow.getApp().setHQKeysInBulletin(bulletin);
-
+		headquartersSection.copyDataToBulletin(bulletin);
+		
 		UiBulletinComponentEditorSection publicEditorSection = (UiBulletinComponentEditorSection)publicSection;
 		AttachmentProxy[] publicAttachments = publicEditorSection.attachmentEditor.getAttachments();
 		for(int aIndex = 0; aIndex < publicAttachments.length; ++aIndex)

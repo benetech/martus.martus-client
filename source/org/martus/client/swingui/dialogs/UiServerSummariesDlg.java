@@ -40,14 +40,14 @@ import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
-import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
-import javax.swing.table.DefaultTableCellRenderer;
-import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableModel;
 
 import org.martus.client.swingui.UiMainWindow;
+import org.martus.client.swingui.renderers.BooleanRenderer;
+import org.martus.client.swingui.renderers.IntegerRenderer;
+import org.martus.client.swingui.renderers.StringRenderer;
 import org.martus.client.swingui.tablemodels.RetrieveTableModel;
 import org.martus.common.clientside.UiBasicLocalization;
 import org.martus.common.packet.FieldDataPacket;
@@ -83,11 +83,9 @@ public abstract class UiServerSummariesDlg extends JDialog
 		UiWrappedTextArea retrieveMessage = new UiWrappedTextArea(topMessageText);
 		tableBox = Box.createVerticalBox();
 		table = new RetrieveJTable(model);
-		oldBooleanRenderer = table.getDefaultRenderer(Boolean.class);
-		oldIntegerRenderer = table.getDefaultRenderer(Integer.class);
-		table.setDefaultRenderer(Boolean.class, new BooleanRenderer());
-		table.setDefaultRenderer(Integer.class, new IntegerRenderer());
-		table.setDefaultRenderer(String.class, new StringRenderer());
+		table.setDefaultRenderer(Boolean.class, new BooleanRenderer(model, disabledBackgroundColor, table.getDefaultRenderer(Boolean.class)));
+		table.setDefaultRenderer(Integer.class, new IntegerRenderer(model, disabledBackgroundColor, table.getDefaultRenderer(Integer.class)));
+		table.setDefaultRenderer(String.class, new StringRenderer(model, disabledBackgroundColor));
 
 		table.createDefaultColumnsFromModel();
 		tableBox.add(table.getTableHeader());
@@ -235,82 +233,6 @@ public abstract class UiServerSummariesDlg extends JDialog
 		}
 	}
 
-	class BooleanRenderer extends DefaultTableCellRenderer
-	{
-		public Component getTableCellRendererComponent(
-				JTable tableToUse, Object value,
-				boolean isSelected, boolean hasFocus,
-				int row, int column)
-		{
-			Component cell = oldBooleanRenderer.getTableCellRendererComponent(tableToUse, value, isSelected, hasFocus, row, column);
-			if(enabledBackgroundColor == null)
-				enabledBackgroundColor = cell.getBackground();
-			if(model.isDownloadable(row))
-			{
-				cell.setEnabled(true);
-				if(!isSelected)
-					cell.setBackground(enabledBackgroundColor);
-			}
-			else
-			{
-				cell.setEnabled(false);
-				if(!isSelected)
-					cell.setBackground(disabledBackgroundColor);
-			}
-			return cell;
-		}
-		Color enabledBackgroundColor;
-	}
-
-	class IntegerRenderer extends DefaultTableCellRenderer
-	{
-		public Component getTableCellRendererComponent(
-				JTable tableToUse, Object value,
-				boolean isSelected, boolean hasFocus,
-				int row, int column)
-		{
-			Component cell = oldIntegerRenderer.getTableCellRendererComponent(tableToUse, value, isSelected, hasFocus, row, column);
-			if(enabledBackgroundColor == null)
-				enabledBackgroundColor = cell.getBackground();
-			if(model.isDownloadable(row))
-			{
-				cell.setEnabled(true);
-				if(!isSelected)
-					cell.setBackground(enabledBackgroundColor);
-			}
-			else
-			{
-				cell.setEnabled(false);
-				if(!isSelected)
-					cell.setBackground(disabledBackgroundColor);
-			}
-			return cell;
-		}
-		Color enabledBackgroundColor;
-	}
-
-	class StringRenderer extends DefaultTableCellRenderer
-	{
-		public Component getTableCellRendererComponent(
-				JTable tableToUse, Object value,
-				boolean isSelected, boolean hasFocus,
-				int row, int column)
-		{
-			if(normalBackgroundColor == null)
-			{
-				Component cell = super.getTableCellRendererComponent(tableToUse, value, isSelected, hasFocus, row, column);
-				normalBackgroundColor = cell.getBackground();
-			}
-
-			if(!model.isDownloadable(row))
-				setBackground(disabledBackgroundColor);
-			else
-				setBackground(normalBackgroundColor);
-			return super.getTableCellRendererComponent(tableToUse, value, isSelected, hasFocus, row, column);
-		}
-		Color normalBackgroundColor;
-	}
-
 
 	class OkHandler implements ActionListener
 	{
@@ -393,8 +315,6 @@ public abstract class UiServerSummariesDlg extends JDialog
 	boolean result;
 	RetrieveJTable table;
 	RetrieveTableModel model;
-	TableCellRenderer oldBooleanRenderer;
-	TableCellRenderer oldIntegerRenderer;
 	Color disabledBackgroundColor;
 	UiRadioButton retrieveAllVersions;
 	boolean displayBulletinVersionRadioButtons;

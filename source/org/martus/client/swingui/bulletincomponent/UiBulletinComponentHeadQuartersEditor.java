@@ -25,8 +25,9 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.bulletincomponent;
 
-import javax.swing.ListSelectionModel;
-import javax.swing.table.DefaultTableModel;
+import java.util.Vector;
+
+import org.martus.client.core.MartusApp;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.common.HQKey;
 import org.martus.common.HQKeys;
@@ -41,50 +42,52 @@ public class UiBulletinComponentHeadQuartersEditor extends UiBulletinComponentHe
 	{
 		super(mainWindowToUse, bulletinToUse, tagQualifierToUse);
 		UiLabel hqLabel = new UiLabel(getLabel("Headquarters"));
+
+		HQKeys authorizedToReadKeys = bulletinToUse.getAuthorizedToReadKeys();
 		HQKeys allHQKeysConfigured = mainWindow.getApp().getHQKeysWithFallback();
-		
 		int numberOfHQKeysConfigured = allHQKeysConfigured.size();
-		int numberOfHQKeysAuthorizedToRead = hqKeysAuthorizedToReadThisBulletin.size();
+		int numberOfHQKeysAuthorizedToRead = authorizedToReadKeys.size();
 		
-		if(numberOfHQKeysConfigured > 0 || numberOfHQKeysAuthorizedToRead > 0 )
+		if(numberOfHQKeysConfigured == 0 && numberOfHQKeysAuthorizedToRead == 0 )
 		{
-			UiScrollPane hqScroller = createHeadquartersTable(allHQKeysConfigured, hqKeysAuthorizedToReadThisBulletin);
-			addComponents(hqLabel, hqScroller);
-		}
-		else
 			addComponents(hqLabel, new UiLabel(getLocalization().getFieldLabel("NoHQsConfigured")));
-	}
-
-	private UiScrollPane createHeadquartersTable(HQKeys allHQKeysConfigured, HQKeys hqKeysAuthorizedToRead)
-	{
-		DefaultTableModel hqModel = new DefaultTableModel();
-		hqModel.addColumn(getLabel("HQLabel"));
-		
-		int numberOfHQKeysAuthorizedToRead = hqKeysAuthorizedToRead.size();
-//		HashMap autorizedKeys = new HashMap();
-		for(int i=0; i < numberOfHQKeysAuthorizedToRead; ++i)
-		{
-			HQKey key = hqKeysAuthorizedToRead.get(i);
-			hqModel.addRow(new Object[]{getHQLabelIfPresent(key)});
-//			autorizedKeys.put(key.getPublicKey(),"present");
+			return;
 		}
-
-/*		int numberOfHQKeysConfigured = allHQKeysConfigured.size();
+		
+		tableModel = new HeadQuartersTableModelEdit(getLocalization());
+		Vector autorizedKeys = new Vector();
+		MartusApp app = mainWindow.getApp();
+		for (int i = 0; i < authorizedToReadKeys.size(); ++i) 
+		{
+			HQKey hqKeyToAddAuthorized = authorizedToReadKeys.get(i);
+			HeadQuarterEntry headQuarterEntry = new HeadQuarterEntry(app, getLocalization(), hqKeyToAddAuthorized);
+			headQuarterEntry.setSelected(true);
+			tableModel.addNewHeadQuarterEntry(headQuarterEntry);
+			autorizedKeys.add(hqKeyToAddAuthorized.getPublicKey());
+		}
+		
 		for(int j = 0; j < numberOfHQKeysConfigured; ++j)
 		{
-			HQKey key = allHQKeysConfigured.get(j);
-			String configuredKeyString = key.getPublicKey();
-			if(!autorizedKeys.containsKey(configuredKeyString))
-				hqModel.addRow(new Object[]{getHQLabelIfPresent(key)});
+			HQKey hqKeyToCheck = allHQKeysConfigured.get(j);
+			if(!autorizedKeys.contains(hqKeyToCheck.getPublicKey()))
+			{
+				HeadQuarterEntry headQuarterEntry = new HeadQuarterEntry(app, getLocalization(), hqKeyToCheck);
+				tableModel.addNewHeadQuarterEntry(headQuarterEntry);
+			}
 		}
-		*/
-		UiTable hqTable = new UiTable(hqModel);
-		hqTable.setColumnSelectionAllowed(false);
-		hqTable.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
-		hqTable.setShowGrid(true);
-		hqTable.resizeTable();
-		hqTable.setEnabled(false);
+
+		UiTable hqTable = createHeadquartersTable(tableModel);
+		hqTable.setMaxColumnWidthToHeaderWidth(0);
 		UiScrollPane hqScroller = new UiScrollPane(hqTable);
-		return hqScroller;
+
+		addComponents(hqLabel, hqScroller);
 	}
+
+	public void copyDataToBulletin(Bulletin bulletinToCopyInto) 
+	{
+		if(tableModel == null)
+			return;
+		bulletinToCopyInto.setAuthorizedToReadKeys(tableModel.getAllSelectedHeadQuarterKeys());
+	}
+	
 }

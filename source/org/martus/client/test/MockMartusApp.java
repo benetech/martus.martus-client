@@ -1,7 +1,7 @@
 /*
 
 The Martus(tm) free, social justice documentation and
-monitoring software. Copyright (C) 2001-2004, Beneficent
+monitoring software. Copyright (C) 2001-2005, Beneficent
 Technology, Inc. (Benetech).
 
 Martus is free software; you can redistribute it and/or
@@ -28,8 +28,11 @@ package org.martus.client.test;
 
 import java.io.File;
 import java.io.IOException;
+
 import org.martus.client.core.BulletinFolder;
 import org.martus.client.core.MartusApp;
+import org.martus.common.HQKey;
+import org.martus.common.HQKeys;
 import org.martus.common.MartusUtilities.FileVerificationException;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.clientside.UiBasicLocalization;
@@ -87,6 +90,16 @@ public class MockMartusApp extends MartusApp
 	public Database getWriteableDatabase()
 	{
 		return (Database)store.getDatabase();
+	}
+	
+	public String getHQLabelIfPresent(HQKey hqKey)
+	{
+		return hqKeys.getLabelIfPresent(hqKey);
+	}
+	
+	public void setHQKeys(HQKeys keys)
+	{
+		hqKeys = keys;
 	}
 	
 	public void deleteAllFiles() throws Exception
@@ -303,4 +316,5 @@ public class MockMartusApp extends MartusApp
 	}
 
 	String testDataDirectory;
+	HQKeys hqKeys;
 }

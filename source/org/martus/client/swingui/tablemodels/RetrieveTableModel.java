@@ -29,8 +29,6 @@ package org.martus.client.swingui.tablemodels;
 import java.util.Iterator;
 import java.util.Vector;
 
-import javax.swing.table.AbstractTableModel;
-
 import org.martus.client.core.ClientBulletinStore;
 import org.martus.client.core.MartusApp;
 import org.martus.client.swingui.dialogs.UiProgressRetrieveSummariesDlg;
@@ -47,7 +45,7 @@ import org.martus.common.network.NetworkResponse;
 import org.martus.common.packet.BulletinHistory;
 import org.martus.common.packet.UniversalId;
 
-abstract public class RetrieveTableModel extends AbstractTableModel
+abstract public class RetrieveTableModel extends UiTableModel  
 {
 	public RetrieveTableModel(MartusApp appToUse, UiBasicLocalization localizationToUse)
 	{
@@ -177,6 +175,11 @@ abstract public class RetrieveTableModel extends AbstractTableModel
 	{
 		return((BulletinSummary)currentSummaries.get(row)).isDownloadable();
 	}
+	
+	public boolean isEnabled(int row)
+	{
+		return isDownloadable(row);
+	}
 
 	public Vector getSelectedUidsLatestVersion()
 	{
@@ -219,7 +222,7 @@ abstract public class RetrieveTableModel extends AbstractTableModel
 
 	public boolean isCellEditable(int row, int column)
 	{
-		if(column == 0)
+		if(column == COLUMN_RETRIEVE_FLAG || column == COLUMN_DELETE_FLAG)
 			return true;
 
 		return false;

@@ -25,21 +25,25 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.bulletincomponent;
 
+import java.awt.Color;
+
+import javax.swing.ListSelectionModel;
+
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.common.HQKey;
-import org.martus.common.HQKeys;
+import org.martus.client.swingui.renderers.BooleanRenderer;
+import org.martus.client.swingui.renderers.IntegerRenderer;
+import org.martus.client.swingui.renderers.StringRenderer;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.swing.UiLabel;
+import org.martus.swing.UiTable;
 import org.martus.swing.UiWrappedTextArea;
-import org.martus.util.Base64.InvalidBase64Exception;
 
-public class UiBulletinComponentHeadQuarters extends UiBulletinComponentSection
+abstract public class UiBulletinComponentHeadQuarters extends UiBulletinComponentSection
 {
 	public UiBulletinComponentHeadQuarters(UiMainWindow mainWindowToUse, Bulletin bulletinToUse, String tagQualifierToUse)
 	{
 		super(mainWindowToUse);
 		bulletin = bulletinToUse;
-		hqKeysAuthorizedToReadThisBulletin = bulletin.getAuthorizedToReadKeys();
 		
 		String hqText = getLabel("HQInfoFor" + tagQualifierToUse); 
 		UiWrappedTextArea hqInfo = new UiWrappedTextArea(hqText, 85);
@@ -52,26 +56,25 @@ public class UiBulletinComponentHeadQuarters extends UiBulletinComponentSection
 		return getLocalization().getFieldLabel("BulletinHeadQuarters" + tag);
 	}
 	
-	protected String getHQLabelIfPresent(HQKey key)
-	{
-		String hqLabelIfPresent = mainWindow.getApp().getHQLabelIfPresent(key);
-		if(hqLabelIfPresent.length() == 0)
-		{
-			String publicCode = key.getPublicKey();
-			try
-			{
-				publicCode = key.getPublicCode();
-			}
-			catch (InvalidBase64Exception e)
-			{
-				e.printStackTrace();
-			}
-			String hqNotConfigured = getLocalization().getFieldLabel("HQNotConfigured");
-			hqLabelIfPresent = publicCode + " " + hqNotConfigured;
-		}
-		return hqLabelIfPresent;
+	protected UiTable createHeadquartersTable(HeadQuartersTableModel hqModel) {
+		UiTable hqTable = new UiTable(hqModel);
+		Color disabledBackgroundColor = getBackground();
+		hqTable.setDefaultRenderer(Boolean.class, new BooleanRenderer(hqModel, disabledBackgroundColor, hqTable.getDefaultRenderer(Boolean.class)));
+		hqTable.setDefaultRenderer(Integer.class, new IntegerRenderer(hqModel, disabledBackgroundColor, hqTable.getDefaultRenderer(Integer.class)));
+		hqTable.setDefaultRenderer(String.class, new StringRenderer(hqModel, disabledBackgroundColor));
+
+		hqTable.createDefaultColumnsFromModel();
+		
+		hqTable.setColumnSelectionAllowed(false);
+		hqTable.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+		hqTable.setShowGrid(true);
+		hqTable.resizeTable();
+		return hqTable;
 	}
 
+	abstract public void copyDataToBulletin(Bulletin bulletinToCopyInto);
+
 	Bulletin bulletin;
-	HQKeys hqKeysAuthorizedToReadThisBulletin;
+	HeadQuartersTableModel tableModel;
+
 }

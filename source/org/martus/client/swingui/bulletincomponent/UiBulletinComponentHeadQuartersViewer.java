@@ -25,10 +25,9 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.bulletincomponent;
 
-import javax.swing.ListSelectionModel;
-import javax.swing.table.DefaultTableModel;
+
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.common.HQKey;
+import org.martus.common.HQKeys;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.swing.UiLabel;
 import org.martus.swing.UiScrollPane;
@@ -39,35 +38,28 @@ public class UiBulletinComponentHeadQuartersViewer extends UiBulletinComponentHe
 	public UiBulletinComponentHeadQuartersViewer(UiMainWindow mainWindowToUse, Bulletin bulletinToUse, String tagQualifierToUse)
 	{
 		super(mainWindowToUse, bulletinToUse, tagQualifierToUse);
-
 		UiLabel hqLabel = new UiLabel(getLabel("Headquarters"));
-		if(hqKeysAuthorizedToReadThisBulletin.size() > 0)
+		HQKeys authorizedToReadKeys = bulletinToUse.getAuthorizedToReadKeys();
+		if(authorizedToReadKeys.size() == 0)
 		{
-			UiScrollPane hqScroller = createHeadquartersTable();
-			addComponents(hqLabel, hqScroller);
-		}
-		else
 			addComponents(hqLabel, new UiLabel(getLocalization().getFieldLabel("NoHQsConfigured")));
-	}
-
-	private UiScrollPane createHeadquartersTable()
-	{
-		DefaultTableModel hqModel = new DefaultTableModel();
-		hqModel.addColumn(getLabel("HQLabel"));
-		int numberOfHQsConfigured = hqKeysAuthorizedToReadThisBulletin.size();
-		for(int i=0; i < numberOfHQsConfigured; ++i)
-		{
-			HQKey key = hqKeysAuthorizedToReadThisBulletin.get(i);
-			hqModel.addRow(new Object[]{getHQLabelIfPresent(key)});
+			return;
 		}
-		UiTable hqTable = new UiTable(hqModel);
-		hqTable.setColumnSelectionAllowed(false);
-		hqTable.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
-		hqTable.setShowGrid(true);
-		hqTable.resizeTable();
+		
+		tableModel = new HeadQuartersTableModelView(getLocalization());
+		for (int i = 0; i < authorizedToReadKeys.size(); ++i) 
+		{
+			tableModel.addNewHeadQuarterEntry(new HeadQuarterEntry(mainWindowToUse.getApp(), getLocalization(), authorizedToReadKeys.get(i)));
+		}
+		UiTable hqTable = createHeadquartersTable(tableModel);
 		hqTable.setEnabled(false);
 		UiScrollPane hqScroller = new UiScrollPane(hqTable);
-		return hqScroller;
+		addComponents(hqLabel, hqScroller);
+	}
+
+	public void copyDataToBulletin(Bulletin bulletinToCopyInto) 
+	{
+		//Nothing to do here, Read Only.
 	}
 
 }
