@@ -33,7 +33,6 @@ import java.io.OutputStream;
 import java.io.Serializable;
 
 import org.martus.common.LegacyCustomFields;
-import org.martus.common.MartusConstants;
 import org.martus.common.StandardFieldSpecs;
 
 public class ConfigInfo implements Serializable
@@ -191,7 +190,7 @@ public class ConfigInfo implements Serializable
 			out.writeUTF(serverPublicKey);
 			out.writeBoolean(sendContactInfoToServer);
 			out.writeUTF(serverCompliance);
-			out.writeUTF(MartusConstants.deprecatedCustomFieldSpecs);
+			out.writeUTF(customFieldSpecs);
 			out.writeUTF(customFieldXml);
 			out.writeBoolean(forceBulletinsAllPrivate);
 			out.writeBoolean(backedUpKeypairEncrypted);

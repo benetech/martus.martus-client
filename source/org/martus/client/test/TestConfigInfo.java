@@ -35,7 +35,6 @@ import java.util.Vector;
 import org.martus.client.core.ConfigInfo;
 import org.martus.common.ContactInfo;
 import org.martus.common.LegacyCustomFields;
-import org.martus.common.MartusConstants;
 import org.martus.common.StandardFieldSpecs;
 import org.martus.common.crypto.MartusSecurity;
 import org.martus.common.network.NetworkInterfaceConstants;
@@ -88,17 +87,20 @@ public class TestConfigInfo extends TestCaseEnhanced
 
 	public void testSaveFull() throws Exception
 	{
-		ConfigInfo info = new ConfigInfo();
+		for(short version = 1; version <= ConfigInfo.VERSION; ++version)
+		{
+			ConfigInfo info = new ConfigInfo();
+	
+			setConfigToSampleData(info, ConfigInfo.VERSION);
+			verifySampleInfo(info, "testSaveFull", ConfigInfo.VERSION);
+	
+			ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+			info.save(outputStream);
+			outputStream.close();
+			ByteArrayInputStream inputStream = new ByteArrayInputStream(outputStream.toByteArray());
 
-		setConfigToSampleData(info);
-		verifySampleInfo(info, "testSaveFull", ConfigInfo.VERSION);
-
-		ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-		info.save(outputStream);
-		outputStream.close();
-
-		ByteArrayInputStream inputStream = new ByteArrayInputStream(outputStream.toByteArray());
-		verifyLoadSpecificVersion(inputStream, ConfigInfo.VERSION);
+			verifyLoadSpecificVersion(inputStream, ConfigInfo.VERSION);
+		}
 	}
 
 	public void testSaveEmpty() throws Exception
@@ -189,7 +191,7 @@ public class TestConfigInfo extends TestCaseEnhanced
 		assertTrue("Server should be setup now", newInfo.isServerConfigured());
 	}
 	
-	void setConfigToSampleData(ConfigInfo info)
+	void setConfigToSampleData(ConfigInfo info, int VERSION)
 	{
 		info.setAuthor(sampleAuthor);
 		info.setOrganization(sampleOrg);
@@ -203,7 +205,7 @@ public class TestConfigInfo extends TestCaseEnhanced
 		info.setHQKey(sampleHQKey);
 		info.setSendContactInfoToServer(sampleSendContactInfoToServer);
 		info.setServerCompliance(sampleServerCompliance);
-		info.setCustomFieldSpecs(MartusConstants.deprecatedCustomFieldSpecs);
+		info.setCustomFieldSpecs(sampleCustomFieldSpecs);
 		info.setCustomFieldXml(sampleCustomFieldXml);
 		info.setForceBulletinsAllPrivate(sampleForceAllPrivate);
 		info.setBackedUpKeypairEncrypted(sampleBackedUpKeypairEncrypted);
@@ -259,10 +261,8 @@ public class TestConfigInfo extends TestCaseEnhanced
 		else
 			assertEquals(label + ": sampleServerComplicance", "", info.getServerCompliance());
 
-		if(VERSION == 5)
+		if(VERSION >= 5)
 			assertEquals(label + ": sampleCustomFieldSpecs", sampleCustomFieldSpecs, info.getCustomFieldSpecs());
-		else if(VERSION >= 6)
-			assertEquals(label + ": sampleCustomFieldSpecs", MartusConstants.deprecatedCustomFieldSpecs, info.getCustomFieldSpecs());
 		else
 			assertEquals(label + ": sampleCustomFieldSpecs", defaultCustomFieldSpecs, info.getCustomFieldSpecs());
 
@@ -321,13 +321,12 @@ public class TestConfigInfo extends TestCaseEnhanced
 		{
 			out.writeUTF(sampleServerCompliance);
 		}
-		if(VERSION == 5)
+		if(VERSION >= 5)
 		{
 			out.writeUTF(sampleCustomFieldSpecs);
 		}
 		if(VERSION >= 6)
 		{
-			out.writeUTF(MartusConstants.deprecatedCustomFieldSpecs);
 			out.writeUTF(sampleCustomFieldXml);
 		}
 		if(VERSION >= 7)
@@ -343,7 +342,7 @@ public class TestConfigInfo extends TestCaseEnhanced
 		return outputStream.toByteArray();
 	}
 	
-	final String defaultCustomFieldSpecs = LegacyCustomFields.buildFieldListString(StandardFieldSpecs.getDefaultPublicFieldSpecs());
+	private final String defaultCustomFieldSpecs = LegacyCustomFields.buildFieldListString(StandardFieldSpecs.getDefaultPublicFieldSpecs());
 
 //Version 1
 	final String sampleAuthor = "author";
