@@ -593,12 +593,14 @@ public class MartusApp
 	{
 		BulletinFolder draftOutBox = getFolderDraftOutbox();
 		BulletinFolder discardedFolder = getFolderDiscarded();
+		boolean DONT_SAVE_FOLDERS = false;
 		for (int i = 0; i < bulletinsToDiscard.length; i++)
 		{
 			Bulletin b = bulletinsToDiscard[i];
-			draftOutBox.getStore().discardBulletin(draftOutBox, b);
-			folderToDiscardFrom.getStore().discardBulletin(folderToDiscardFrom, b);
+			draftOutBox.getStore().discardBulletin(draftOutBox, b, DONT_SAVE_FOLDERS);
+			folderToDiscardFrom.getStore().discardBulletin(folderToDiscardFrom, b, DONT_SAVE_FOLDERS);
 		}
+		getStore().saveFolders();
 		return discardedFolder;
 	}
 
@@ -849,7 +851,6 @@ public class MartusApp
 		BulletinFolder damaged = createOrFindFolder(store.getNameOfFolderDamaged());
 		Bulletin b = store.findBulletinByUniversalId(uid);
 		store.moveBulletin(b, outbox, damaged);
-		store.saveFolders();
 	}
 
 	public static class DamagedBulletinException extends Exception

@@ -328,7 +328,7 @@ public class TestBulletinStore extends TestCaseEnhanced
 
 		assertEquals(true, f.contains(b));
 		assertEquals(false, discarded.contains(b));
-		store.discardBulletin(f, b);
+		store.discardBulletin(f, b, true);
 		assertEquals("Bulletin wasn't discarded!", false, f.contains(b));
 		assertEquals("Bulletin wasn't copied to Discarded", true, discarded.contains(b));
 
@@ -343,15 +343,15 @@ public class TestBulletinStore extends TestCaseEnhanced
 		assertEquals(true, user1.contains(b2));
 		assertEquals(true, user2.contains(b2));
 		assertEquals(false, discarded.contains(b2));
-		store.discardBulletin(user1, b2);
+		store.discardBulletin(user1, b2, true);
 		assertEquals("Bulletin wasn't discarded!", false, user1.contains(b2));
 		assertEquals("Copy of bulletin accidentally discarded\n", true, user2.contains(b2));
 		assertEquals("Should be in Discarded now", true, discarded.contains(b2));
-		store.discardBulletin(user2, b2);
+		store.discardBulletin(user2, b2, true);
 		assertEquals("Bulletin wasn't discarded!", false, user2.contains(b2));
 		assertEquals("Should be in Discarded now", true, discarded.contains(b2));
 
-		store.discardBulletin(discarded, b2);
+		store.discardBulletin(discarded, b2,true);
 		assertEquals("Should no longer be in Discarded", false, discarded.contains(b2));
 		assertNull("Should no longer exist at all", store.findBulletinByUniversalId(b2.getUniversalId()));
 	}
@@ -367,7 +367,7 @@ public class TestBulletinStore extends TestCaseEnhanced
 		store.saveBulletin(b1);
 		f.add(b1);
 		assertEquals(true, f.contains(b1));
-		store.removeBulletinFromFolder(b1, f);
+		store.removeBulletinFromFolder(b1, f, true);
 		assertEquals(false, f.contains(b1));
 	}
 

@@ -213,7 +213,8 @@ public class UiBulletinModifyDlg extends JFrame implements ActionListener, Windo
 		BulletinStore store = app.getStore();
 		store.saveBulletin(bulletin);
 		store.moveBulletin(bulletin, store.getFolderDrafts(), store.getFolderOutbox());
-		store.removeBulletinFromFolder(bulletin, store.getFolderDraftOutbox());
+		boolean saveFolders = true;
+		store.removeBulletinFromFolder(bulletin, store.getFolderDraftOutbox(), saveFolders);
 	}
 
 	public boolean wasBulletinSaved()

@@ -502,12 +502,9 @@ public class UiBulletinTable extends JTable implements ListSelectionListener, Dr
 
 	private void discardAllSelectedBulletins()
 	{		
-				
 		Cursor cursor = mainWindow.setWaitingCursor();
 		Bulletin[] bulletinsToDiscard = getSelectedBulletins();
-
 		BulletinFolder folderToDiscardFrom = getFolder();
-
 		MartusApp app = mainWindow.getApp();
 		try
 		{

@@ -265,12 +265,12 @@ public class BulletinStore
 	public synchronized void destroyBulletin(Bulletin b) throws IOException
 	{
 		UniversalId id = b.getUniversalId();
-
+		boolean DONT_SAVE_FOLDERS = false;
 		for(int f = 0; f < getFolderCount(); ++f)
 		{
-			removeBulletinFromFolder(b, getFolder(f));
+			removeBulletinFromFolder(b, getFolder(f), DONT_SAVE_FOLDERS);
 		}
-
+		saveFolders();
 		removeBulletinFromStore(id);
 	}
 
@@ -354,10 +354,10 @@ public class BulletinStore
 		cacheOfSortableFields.setFieldData(b);
 	}
 
-	public synchronized void discardBulletin(BulletinFolder f, Bulletin b) throws IOException
+	public synchronized void discardBulletin(BulletinFolder f, Bulletin b, boolean saveFolders) throws IOException
 	{
 		getFolderDiscarded().add(b);
-		removeBulletinFromFolder(b, f);
+		removeBulletinFromFolder(b, f, saveFolders);
 		if(isOrphan(b))
 			destroyBulletin(b);
 	}
@@ -560,13 +560,15 @@ public class BulletinStore
 		if(from.equals(to))
 			return;
 		to.add(b);
-		removeBulletinFromFolder(b, from);
+		boolean saveFolders = true;
+		removeBulletinFromFolder(b, from, saveFolders);
 	}
 
-	public synchronized void removeBulletinFromFolder(Bulletin b, BulletinFolder from)
+	public synchronized void removeBulletinFromFolder(Bulletin b, BulletinFolder from, boolean saveFolders)
 	{
 		from.remove(b.getUniversalId());
-		saveFolders();
+		if(saveFolders)
+			saveFolders();
 	}
 
 	public Vector findBulletinInAllVisibleFolders(Bulletin b)

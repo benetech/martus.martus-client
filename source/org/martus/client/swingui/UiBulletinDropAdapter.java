@@ -136,21 +136,19 @@ public abstract class UiBulletinDropAdapter implements DropTargetListener
 		{
 			BulletinStore store = observer.getStore();
 			Bulletin[] wereDropped = tb.getBulletins();
+			boolean DONT_SAVE_FOLDERS = false;
 			for (int i = 0; i < wereDropped.length; i++)
 			{
 				Bulletin bulletin = wereDropped[i];
 				UniversalId uId = bulletin.getUniversalId();
 				Bulletin b = store.findBulletinByUniversalId(uId);
 				if(b == null)
-				{
 					System.out.println("dropTransferableBulletin: null bulletin!!");
-				}
 				else
-				{
-					store.removeBulletinFromFolder(b, fromFolder);
-					observer.folderContentsHaveChanged(fromFolder);
-				}
+					store.removeBulletinFromFolder(b, fromFolder, DONT_SAVE_FOLDERS);
 			}
+			store.saveFolders();
+			observer.folderContentsHaveChanged(fromFolder);
 		}
 
 		tb.dispose();
