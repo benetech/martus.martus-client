@@ -147,6 +147,11 @@ public class UiBulletinModifyDlg extends JFrame implements ActionListener, Windo
 			observer.messageDlg(this,"ErrorDateInFuture", e.getlocalizedTag());
 			return;
 		}
+		catch(UiBulletinEditor.AttachmentMissing e)
+		{
+			observer.messageDlg(this,"ErrorAttachmentMissing", e.getlocalizedTag());
+			return;
+		}
 		catch (DataInvalidException e) 
 		{
 			System.out.println("UiModifyBulletinDlg.actionPerformed: " + e);

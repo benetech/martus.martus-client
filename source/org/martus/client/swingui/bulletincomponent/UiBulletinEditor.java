@@ -26,6 +26,7 @@ Boston, MA 02111-1307, USA.
 
 package org.martus.client.swingui.bulletincomponent;
 
+import java.io.File;
 import java.io.IOException;
 import java.text.DateFormat;
 
@@ -54,8 +55,15 @@ public class UiBulletinEditor extends UiBulletinComponent
 		return new UiBulletinComponentEditorSection(this, owner, encrypted);
 	}
 
+	public class AttachmentMissing extends UiField.DataInvalidException
+	{
+		public AttachmentMissing(String localizedTag)
+		{
+			super(localizedTag);
+		}
+	}
+	
 	public void validateData() throws UiField.DataInvalidException 
-		
 	{
 		for(int fieldNum = 0; fieldNum < fields.length; ++fieldNum)
 		{
@@ -68,8 +76,25 @@ public class UiBulletinEditor extends UiBulletinComponent
 				throw new UiDateEditor.DateFutureException(owner.getLocalization().getFieldLabel(fieldTags[fieldNum]));
 			}
 		}
+		
+		validateAttachments((UiBulletinComponentEditorSection)publicStuff);
+		validateAttachments((UiBulletinComponentEditorSection)privateStuff);
 	}
 	
+	private void validateAttachments(UiBulletinComponentEditorSection section) throws AttachmentMissing
+	{
+		AttachmentProxy[] publicAttachments = section.attachmentEditor.getAttachments();
+		for(int aIndex = 0; aIndex < publicAttachments.length; ++aIndex)
+		{
+			File file = publicAttachments[aIndex].getFile();
+			if (file != null)
+			{
+				if(!file.exists())
+					throw new AttachmentMissing(file.getAbsolutePath());
+			}
+		}
+	}
+
 	public boolean isBulletinModified() throws
 			IOException,
 			MartusCrypto.EncryptionException
