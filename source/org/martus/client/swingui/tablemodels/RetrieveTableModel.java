@@ -33,13 +33,13 @@ import javax.swing.table.AbstractTableModel;
 
 import org.martus.client.core.ClientBulletinStore;
 import org.martus.client.core.BulletinSummary;
-import org.martus.client.core.ClientSideNetworkGateway;
 import org.martus.client.core.MartusApp;
 import org.martus.client.swingui.dialogs.UiProgressRetrieveSummariesDlg;
 import org.martus.common.MartusConstants;
 import org.martus.common.MartusUtilities;
 import org.martus.common.MartusUtilities.ServerErrorException;
 import org.martus.common.bulletin.Bulletin;
+import org.martus.common.clientside.ClientSideNetworkGateway;
 import org.martus.common.clientside.UiBasicLocalization;
 import org.martus.common.crypto.MartusCrypto;
 import org.martus.common.crypto.MartusCrypto.MartusSignatureException;

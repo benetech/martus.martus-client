@@ -29,10 +29,6 @@ package org.martus.client.test;
 import junit.framework.Test;
 import junit.framework.TestSuite;
 
-import org.martus.common.clientside.test.TestChoiceItem;
-import org.martus.common.clientside.test.TestCurrentUiState;
-import org.martus.common.clientside.test.TestDateUtilities;
-
 public class TestClient
 {
 	public static void main(String[] args)
@@ -54,13 +50,9 @@ public class TestClient
 		suite.addTest(new TestSuite(TestBulletinSearcher.class));
 		suite.addTest(new TestSuite(TestBulletinTableModel.class));
 		suite.addTest(new TestSuite(TestBulletinXmlExporter.class));
-		suite.addTest(new TestSuite(TestChoiceItem.class));
 		suite.addTest(new TestSuite(TestClientBulletinStore.class));
-		suite.addTest(new TestSuite(TestClientSideNetworkHandler.class));
 		suite.addTest(new TestSuite(TestConfigInfo.class));
-		suite.addTest(new TestSuite(TestCurrentUiState.class));
 		suite.addTest(new TestSuite(TestCustomFieldSpecValidator.class));
-		suite.addTest(new TestSuite(TestDateUtilities.class));
 		suite.addTest(new TestSuite(TestFolderList.class));
 		suite.addTest(new TestSuite(TestGridTableModel.class));
 		suite.addTest(new TestSuite(TestMartusApp_NoServer.class));

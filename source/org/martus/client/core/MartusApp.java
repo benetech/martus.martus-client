@@ -41,12 +41,12 @@ import java.util.Iterator;
 import java.util.Set;
 import java.util.Vector;
 import org.martus.client.core.ClientBulletinStore.BulletinAlreadyExistsException;
-import org.martus.client.core.ClientSideNetworkHandlerUsingXmlRpc.SSLSocketSetupException;
 import org.martus.client.core.Exceptions.ServerCallFailedException;
 import org.martus.client.core.Exceptions.ServerNotAvailableException;
 import org.martus.client.search.BulletinSearcher;
 import org.martus.client.search.SearchParser;
 import org.martus.client.search.SearchTreeNode;
+import org.martus.client.swingui.UiConstants;
 import org.martus.common.CustomFields;
 import org.martus.common.FieldSpec;
 import org.martus.common.HQKey;
@@ -64,9 +64,13 @@ import org.martus.common.MartusUtilities.PublicInformationInvalidException;
 import org.martus.common.MartusUtilities.ServerErrorException;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.bulletin.BulletinZipUtilities;
+import org.martus.common.clientside.ClientSideNetworkGateway;
+import org.martus.common.clientside.ClientSideNetworkHandlerUsingXmlRpc;
+import org.martus.common.clientside.ClientSideNetworkHandlerUsingXmlRpcForNonSSL;
 import org.martus.common.clientside.CurrentUiState;
 import org.martus.common.clientside.DateUtilities;
 import org.martus.common.clientside.Localization;
+import org.martus.common.clientside.ClientSideNetworkHandlerUsingXmlRpc.SSLSocketSetupException;
 import org.martus.common.crypto.MartusCrypto;
 import org.martus.common.crypto.MartusSecurity;
 import org.martus.common.crypto.MartusCrypto.CryptoException;
@@ -942,7 +946,7 @@ public class MartusApp
 
 		try
 		{
-			NetworkResponse response = getCurrentNetworkInterfaceGateway().getNews(getSecurity());
+			NetworkResponse response = getCurrentNetworkInterfaceGateway().getNews(getSecurity(), UiConstants.versionLabel);
 			if(response.getResultCode().equals(NetworkInterfaceConstants.OK))
 				return response.getResultVector();
 		}

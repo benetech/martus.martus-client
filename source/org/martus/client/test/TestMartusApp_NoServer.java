@@ -56,6 +56,7 @@ import org.martus.common.clientside.ChoiceItem;
 import org.martus.common.clientside.DateUtilities;
 import org.martus.common.clientside.Localization;
 import org.martus.common.clientside.UiBasicLocalization;
+import org.martus.common.clientside.test.ServerSideNetworkHandlerNotAvailable;
 import org.martus.common.crypto.MartusCrypto;
 import org.martus.common.crypto.MockMartusSecurity;
 import org.martus.common.database.Database;
