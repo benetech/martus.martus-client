@@ -42,9 +42,12 @@ import javax.swing.border.EtchedBorder;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.common.HQKey;
 import org.martus.common.HQKeys;
+import org.martus.common.bulletin.Bulletin;
+import org.martus.common.packet.UniversalId;
 import org.martus.swing.ParagraphLayout;
 import org.martus.util.TokenReplacement;
 import org.martus.util.Base64.InvalidBase64Exception;
+import org.martus.util.TokenReplacement.TokenInvalidException;
 
 
 public class UiBulletinComponentHeader extends UiBulletinComponentSection
@@ -60,7 +63,8 @@ public class UiBulletinComponentHeader extends UiBulletinComponentSection
 		add(detailsButton, ParagraphLayout.NEW_PARAGRAPH);
 		add(warningIndicator);
 
-		add(new JLabel(getLocalization().getFieldLabel("BulletinDateSaved")), ParagraphLayout.NEW_PARAGRAPH);
+		lastSavedLabel = new JLabel(getLocalization().getFieldLabel(Bulletin.TAGLASTSAVED));
+		add(lastSavedLabel, ParagraphLayout.NEW_PARAGRAPH);
 		dateTime = new JLabel("");
 		EtchedBorder b = new EtchedBorder();
 		dateTime.setBorder(b);
@@ -71,6 +75,11 @@ public class UiBulletinComponentHeader extends UiBulletinComponentSection
 		hqSummary = new JLabel("");
 		hqSummary.setFont(hqSummary.getFont().deriveFont(Font.BOLD));
 		add(hqSummary);
+	}
+	
+	public void setBulletinId(UniversalId uid)
+	{
+		currentUid = uid;
 	}
 
 	public void setHqKeys(HQKeys keys)
@@ -95,11 +104,13 @@ public class UiBulletinComponentHeader extends UiBulletinComponentSection
 	{
 		if(time == 0)
 		{
+			lastSavedLabel.setVisible(false);
 			dateTime.setVisible(false);
 		}
 		else
 		{
 			setTime(time);
+			lastSavedLabel.setVisible(true);
 			dateTime.setVisible(true);
 		}
 	}
@@ -133,33 +144,50 @@ public class UiBulletinComponentHeader extends UiBulletinComponentSection
 	{
 		public void actionPerformed(ActionEvent e)
 		{
-			String listOfHqPublicKeys = "";
 			HashMap map = new HashMap();
-			if(hqList.size() > 0)
-			{
-				for(int i=0; i < hqList.size(); ++i)
-				{
-					String thisHqCode;
-					HQKey hqKey = getHqPublicCode(i);
-					String thisHqlabel = getMainWindow().getApp().getHQLabelIfPresent(hqKey.getPublicKey());
-					try
-					{
-						thisHqCode = hqKey.getPublicCode();
-					}
-					catch (InvalidBase64Exception e1)
-					{
-						e1.printStackTrace();
-						thisHqCode = hqKey.getPublicKey();
-					}
-					if(thisHqlabel.length() > 0)
-						thisHqCode += " : " + thisHqlabel;
-					listOfHqPublicKeys += thisHqCode + "\n";
-				}
-			}
-			map.put("#L#", listOfHqPublicKeys);
-			
+			map.put("#I#", currentUid.getLocalId());
+			map.put("#H#", getHqListText());
 			JFrame parent = getMainWindow().getCurrentActiveFrame();
 			getMainWindow().notifyDlg(parent, tagQualifier + "ViewBulletinDetails", map);
+		}
+
+		private String getHqListText()
+		{
+			if(hqList.size() == 0)
+				return "";
+			
+			HashMap hqMap = new HashMap();
+			String listOfHqPublicKeys = "";
+			for(int i=0; i < hqList.size(); ++i)
+			{
+				String thisHqCode;
+				HQKey hqKey = getHqPublicCode(i);
+				String thisHqlabel = getMainWindow().getApp().getHQLabelIfPresent(hqKey.getPublicKey());
+				try
+				{
+					thisHqCode = hqKey.getPublicCode();
+				}
+				catch (InvalidBase64Exception e1)
+				{
+					e1.printStackTrace();
+					thisHqCode = hqKey.getPublicKey();
+				}
+				if(thisHqlabel.length() > 0)
+					thisHqCode += " : " + thisHqlabel;
+				listOfHqPublicKeys += "  " + thisHqCode + "\n";
+			}
+			hqMap.put("#L#", listOfHqPublicKeys);
+
+			String text = getLocalization().getFieldLabel(tagQualifier + "ViewBulletinDetailsHQList");
+			try
+			{
+				text = TokenReplacement.replaceTokens(text, hqMap);
+			}
+			catch(TokenInvalidException e)
+			{
+				e.printStackTrace();
+			}
+			return text;
 		}
 
 		private HQKey getHqPublicCode(int i)
@@ -178,8 +206,10 @@ public class UiBulletinComponentHeader extends UiBulletinComponentSection
 	}
 
 	String tagQualifier;
+	JLabel lastSavedLabel;
 	JLabel dateTime;
 	JLabel hqLabel;
 	JLabel hqSummary;
+	UniversalId currentUid;
 	HQKeys hqList;
 }
