@@ -54,7 +54,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.TimerTask;
 import java.util.Vector;
-
 import javax.print.attribute.HashPrintRequestAttributeSet;
 import javax.swing.AbstractAction;
 import javax.swing.ImageIcon;
@@ -64,11 +63,9 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JPopupMenu;
 import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
 import javax.swing.SwingUtilities;
-
 import org.martus.client.core.BackgroundUploader;
 import org.martus.client.core.BulletinFolder;
 import org.martus.client.core.BulletinHtmlGenerator;
@@ -736,9 +733,9 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		return inputDlg.getResult();
 	}
 
-	public JPopupMenu getPopupMenu()
+	public UiPopupMenu getPopupMenu()
 	{
-		JPopupMenu menu = new JPopupMenu();
+		UiPopupMenu menu = new UiPopupMenu(getLocalization());
 		menu.add(menuBar.actionMenuModifyBulletin);
 		menu.addSeparator();
 		menu.add(menuBar.actionMenuCutBulletins);

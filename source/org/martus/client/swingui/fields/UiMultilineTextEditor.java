@@ -27,18 +27,16 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.swingui.fields;
 
 import java.awt.Font;
-
 import javax.swing.JComponent;
 import javax.swing.JScrollPane;
 import javax.swing.text.JTextComponent;
-
 import org.martus.client.swingui.UiConstants;
-import org.martus.common.clientside.UiBasicLocalization;
+import org.martus.client.swingui.UiLocalization;
 import org.martus.swing.UiTextArea;
 
 public class UiMultilineTextEditor extends UiTextField
 {
-	public UiMultilineTextEditor(UiBasicLocalization localizationToUse)
+	public UiMultilineTextEditor(UiLocalization localizationToUse)
 	{
 		super(localizationToUse);
 		editor = new UiTextArea(5, UiConstants.textFieldColumns);

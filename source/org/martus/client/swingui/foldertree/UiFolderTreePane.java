@@ -30,26 +30,26 @@ import java.awt.Cursor;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-
 import javax.swing.AbstractAction;
 import javax.swing.JMenuItem;
-import javax.swing.JPopupMenu;
 import javax.swing.JScrollPane;
 import javax.swing.JViewport;
 import javax.swing.tree.TreePath;
-
 import org.martus.client.core.BulletinFolder;
 import org.martus.client.core.ClientBulletinStore;
+import org.martus.client.swingui.UiLocalization;
 import org.martus.client.swingui.UiMainWindow;
+import org.martus.client.swingui.UiPopupMenu;
 
 public class UiFolderTreePane extends JScrollPane
 {
 	public UiFolderTreePane(UiMainWindow mainWindow)
 	{
 		parent = mainWindow;
+		localization = mainWindow.getLocalization();
 		store = parent.getStore();
 
-		model = new FolderList(parent.getLocalization());
+		model = new FolderList(localization);
 		model.loadFolders(store);
 
 		tree = new UiFolderTree(this, model, store, parent);
@@ -84,7 +84,7 @@ public class UiFolderTreePane extends JScrollPane
 	{
 		tree.stopEditing();
 
-		String originalFolderName = parent.getLocalization().getFieldLabel("defaultFolderName");
+		String originalFolderName = localization.getFieldLabel("defaultFolderName");
 		BulletinFolder newFolder = parent.getApp().createUniqueFolder(originalFolderName);
 		if(newFolder == null)
 			return;
@@ -149,7 +149,7 @@ public class UiFolderTreePane extends JScrollPane
 				node = (FolderTreeNode)path.getLastPathComponent();
 			}
 
-			JPopupMenu menu = new JPopupMenu();
+			UiPopupMenu menu = new UiPopupMenu(localization);
 			menu.add(new JMenuItem(new ActionNewFolder()));
 			menu.add(new JMenuItem(new ActionRename(node)));
 			menu.add(new JMenuItem(new ActionDelete(node)));
@@ -164,7 +164,7 @@ public class UiFolderTreePane extends JScrollPane
 	{
 		public ActionNewFolder()
 		{
-			super(parent.getLocalization().getMenuLabel("CreateNewFolder"), null);
+			super(localization.getMenuLabel("CreateNewFolder"), null);
 		}
 
 		public void actionPerformed(ActionEvent ae)
@@ -211,7 +211,7 @@ public class UiFolderTreePane extends JScrollPane
 	{
 		public ActionDelete(FolderTreeNode node)
 		{
-			String text = parent.getLocalization().getMenuLabel("DeleteFolder") + " ";
+			String text = localization.getMenuLabel("DeleteFolder") + " ";
 			if(node != null)
 				text += node.getLocalizedName();
 
@@ -285,6 +285,7 @@ public class UiFolderTreePane extends JScrollPane
 	}
 
 	UiMainWindow parent;
+	UiLocalization localization;
 	ClientBulletinStore store;
 	FolderList model;
 	UiFolderTree tree;

@@ -32,14 +32,14 @@ import java.awt.event.MouseEvent;
 
 import javax.swing.AbstractAction;
 import javax.swing.Action;
-import javax.swing.JPopupMenu;
 import javax.swing.text.JTextComponent;
 
-import org.martus.common.clientside.UiBasicLocalization;
+import org.martus.client.swingui.UiLocalization;
+import org.martus.client.swingui.UiPopupMenu;
 
 public abstract class UiTextField extends UiField
 {
-	public UiTextField(UiBasicLocalization localizationToUse)
+	public UiTextField(UiLocalization localizationToUse)
 	{
 		localization = localizationToUse;
 		mouseAdapter = new TextFieldMouseAdapter();
@@ -53,7 +53,7 @@ public abstract class UiTextField extends UiField
 		actionDelete = new ActionDelete();
 		actionSelectAll = new ActionSelectAll();
 
-		menu = new JPopupMenu();
+		menu = new UiPopupMenu(localization);
 		menu.add(actionCut);
 		menu.add(actionCopy);
 		menu.add(actionPaste);
@@ -185,13 +185,13 @@ public abstract class UiTextField extends UiField
 		}
 	}
 
-	UiBasicLocalization localization;
+	UiLocalization localization;
 	Action actionCut;
 	Action actionCopy;
 	Action actionPaste;
 	Action actionDelete;
 	Action actionSelectAll;
-	JPopupMenu menu;
+	UiPopupMenu menu;
 	MouseAdapter mouseAdapter;
 }
 

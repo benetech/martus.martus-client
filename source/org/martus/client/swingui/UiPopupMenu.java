@@ -26,16 +26,16 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.swingui;
 
 import javax.swing.AbstractAction;
-import javax.swing.JMenu;
 import javax.swing.JMenuItem;
+import javax.swing.JPopupMenu;
 
-public class UiMenu extends JMenu
+
+public class UiPopupMenu extends JPopupMenu
 {
-	public UiMenu(UiLocalization localizationToUse, String menuLabelTag)
+	public UiPopupMenu(UiLocalization localizationToUse)
 	{
-		super(localizationToUse.getMenuLabel(menuLabelTag));
+		super();
 		localization = localizationToUse;
-		setHorizontalAlignment(localization.getHorizontalAlignment());
 		setComponentOrientation(localization.getComponentOrientation());
 	}
 	
