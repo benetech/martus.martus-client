@@ -31,7 +31,9 @@ public class QuickEraseOptions
 	public boolean isScrubSelected() {return scrubOption;}
 	public boolean isDeleteKeyPairSelected(){return delKeyPairOption;}
 	public boolean isExitWhenCompleteSelected() {return exitWhenCompleteOption;}
+	public boolean isDonotPromptSelected() {return donotPromptOption;}
 
+	
 	public void setScrubOption(boolean option) 
 	{
 		scrubOption=option;
@@ -47,9 +49,15 @@ public class QuickEraseOptions
 		exitWhenCompleteOption = option;
 	}	
 	
+	public void setDonotPromptOption(boolean option)
+	{
+		donotPromptOption = option;
+	}	
+	
 	public QuickEraseOptions(){}
 
 	boolean scrubOption;
 	boolean delKeyPairOption;
 	boolean exitWhenCompleteOption;
+	boolean donotPromptOption;
 }

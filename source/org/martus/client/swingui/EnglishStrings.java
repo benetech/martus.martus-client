@@ -669,6 +669,7 @@ public class EnglishStrings
 "field:ScrubDataBeforeDelete=Scrub data before deleting",
 "field:DeleteKeypair=Delete Keypair",
 "field:ExitWhenComplete=Exit when complete",
+"field:DonotPrompt=Do not prompt",
 
 "field:RemoveServerLabel1=The following server will be removed:",
 "field:RemoveServerLabel2=Are you sure you want to do this?",

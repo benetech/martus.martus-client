@@ -33,6 +33,8 @@ import javax.swing.JCheckBox;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.border.TitledBorder;
 
 import org.martus.client.swingui.UiLocalization;
 import org.martus.swing.ParagraphLayout;
@@ -44,7 +46,37 @@ public class UiQuickEraseConfirmDlg extends JDialog
 	{
 		super(owner, "", true);
 
-		setTitle(localization.getWindowTitle("confirm" + baseTag));		
+		setTitle(localization.getWindowTitle("confirm" + baseTag));			
+
+		JButton ok = new JButton(localization.getButtonLabel("ok"));
+		ok.addActionListener(new OkHandler());
+		JButton cancel = new JButton(localization.getButtonLabel("cancel"));
+		cancel.addActionListener(new CancelHandler());
+
+		getContentPane().setLayout(new ParagraphLayout());	
+		getContentPane().add(new JLabel(""), ParagraphLayout.NEW_PARAGRAPH);
+		
+		JPanel panel = quickEraseOptioinsLayout(localization, baseTag);		
+		getContentPane().add(panel);		
+		
+		String donotPromptStr = localization.getFieldLabel("DonotPrompt");			
+		donotPrompt	= new JCheckBox(donotPromptStr, false);			
+		getContentPane().add(donotPrompt, ParagraphLayout.NEW_LINE);
+		
+		getContentPane().add(new JLabel(""), ParagraphLayout.NEW_PARAGRAPH);
+		JPanel buttonPanel = new JPanel();			
+		buttonPanel.add(ok);
+		buttonPanel.add(cancel);	
+		getContentPane().add(buttonPanel);
+		
+		getRootPane().setDefaultButton(ok);
+
+		Utilities.centerDlg(this);
+		setResizable(false);
+	}	
+	
+	private JPanel quickEraseOptioinsLayout(UiLocalization localization, String baseTag)
+	{
 		String cause = localization.getFieldLabel("confirm" + baseTag + "effect");	
 		String effect = localization.getFieldLabel("confirm" + baseTag + "cause");	
 		JLabel effectLabel = new JLabel(effect);
@@ -56,32 +88,23 @@ public class UiQuickEraseConfirmDlg extends JDialog
 		
 		scrubBeforeDelete 	= new JCheckBox(scrubStr, false);
 		deleteKeyPair 		= new JCheckBox(deleteKeyPairStr, false);
-		exitWhenComplete	= new JCheckBox(exitWhenCompleteStr, false);			
-
-		JButton ok = new JButton(localization.getButtonLabel("ok"));
-		ok.addActionListener(new OkHandler());
-		JButton cancel = new JButton(localization.getButtonLabel("cancel"));
-		cancel.addActionListener(new CancelHandler());
-
-		getContentPane().setLayout(new ParagraphLayout());	
-		getContentPane().add(new JLabel(""), ParagraphLayout.NEW_PARAGRAPH);		
-		getContentPane().add(effectLabel);	
-		getContentPane().add(causeLabel, ParagraphLayout.NEW_LINE);	
-		getContentPane().add(new JLabel(""), ParagraphLayout.NEW_LINE);	
-		getContentPane().add(deleteKeyPair, ParagraphLayout.NEW_LINE);		
-		getContentPane().add(scrubBeforeDelete, ParagraphLayout.NEW_LINE);
-		getContentPane().add(exitWhenComplete, ParagraphLayout.NEW_LINE);
+		exitWhenComplete	= new JCheckBox(exitWhenCompleteStr, false);
 		
-		getContentPane().add(new JLabel(""), ParagraphLayout.NEW_PARAGRAPH);		
-		getContentPane().add(ok);
-		getContentPane().add(cancel);
+		JPanel panel = new JPanel();
+		panel.setLayout(new ParagraphLayout());
+		panel.setBorder(new TitledBorder(""));
+		
+		panel.add(new JLabel(""), ParagraphLayout.NEW_PARAGRAPH);		
+		panel.add(effectLabel);	
+		panel.add(causeLabel, ParagraphLayout.NEW_LINE);	
+		panel.add(new JLabel(""), ParagraphLayout.NEW_PARAGRAPH);
+		panel.add(deleteKeyPair);		
+		panel.add(scrubBeforeDelete, ParagraphLayout.NEW_LINE);
+		panel.add(exitWhenComplete, ParagraphLayout.NEW_LINE);
+		
+		return panel;
+	}
 
-		getRootPane().setDefaultButton(ok);
-
-		Utilities.centerDlg(this);
-		setResizable(false);
-	}	
-	
 	class OkHandler implements ActionListener
 	{
 		public void actionPerformed(ActionEvent ae)
@@ -95,7 +118,7 @@ public class UiQuickEraseConfirmDlg extends JDialog
 	{
 		public void actionPerformed(ActionEvent ae)
 		{
-			action=false;
+			action=false;			
 			dispose();
 		}
 	}	
@@ -119,10 +142,16 @@ public class UiQuickEraseConfirmDlg extends JDialog
 	{
 		return exitWhenComplete.isSelected(); 
 	}
-
+	
+	public boolean isDonotPromptSelected()
+	{
+		return donotPrompt.isSelected(); 
+	}
+		
 	JCheckBox scrubBeforeDelete;
 	JCheckBox deleteKeyPair;
 	JCheckBox exitWhenComplete;
-	
+	JCheckBox donotPrompt;
+		
 	boolean action;
 }
