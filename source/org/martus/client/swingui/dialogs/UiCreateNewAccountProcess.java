@@ -55,7 +55,7 @@ public class UiCreateNewAccountProcess
 		mainWindow = window;
 		while (true)
 		{
-			UiSigninDlg signinDlg1 = new UiSigninDlg(window, window, UiSigninDlg.CREATE_NEW, originalUserName);
+			UiSigninDlg signinDlg1 = startSignIn(UiSigninDlg.CREATE_NEW, originalUserName);
 			if (signinDlg1.getUserChoice() != UiSigninDlg.SIGN_IN)
 				return;
 
@@ -86,8 +86,10 @@ public class UiCreateNewAccountProcess
 			if (userName1.equals(originalUserName))
 				defaultUserName = originalUserName;
 
-			UiSigninDlg signinDlg2 =
-				new UiSigninDlg(window, window, UiSigninDlg.RETYPE_USERNAME_PASSWORD, defaultUserName);
+			UiSigninDlg signinDlg2 = startSignIn( UiSigninDlg.RETYPE_USERNAME_PASSWORD, defaultUserName);
+			if (signinDlg1.getUserChoice() != UiSigninDlg.SIGN_IN)
+				
+			
 			if (signinDlg2.getUserChoice() != UiSigninDlg.SIGN_IN)
 				return;
 			String userName2 = signinDlg2.getName();
@@ -137,6 +139,18 @@ public class UiCreateNewAccountProcess
 			result = true;
 			break;
 		}
+	}
+
+	private UiSigninDlg startSignIn(int mode, String originalUserName)
+	{
+		UiSigninDlg signinDlg1 = null;
+		int userChoice = UiSigninDlg.LANGUAGE_CHANGED;
+		while(userChoice == UiSigninDlg.LANGUAGE_CHANGED)
+		{	
+			signinDlg1 = new UiSigninDlg(mainWindow, mainWindow, mode, originalUserName);
+			userChoice = signinDlg1.getUserChoice();
+		}
+		return signinDlg1;
 	}
 
 	private void remindUsersToRememberPassword()

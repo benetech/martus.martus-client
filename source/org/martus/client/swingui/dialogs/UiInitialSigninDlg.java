@@ -47,9 +47,9 @@ public class UiInitialSigninDlg extends UiSigninDlg
 		JPanel scrolledPanel = new JPanel(); 
 		tabbedPane = new JTabbedPane();
 		tabbedPane.add(signinPane);
-		tabbedPane.setTitleAt(0, localization.getButtonLabel("SignIn"));  
+		tabbedPane.setTitleAt(SIGNIN_TAB, localization.getButtonLabel("SignIn"));  
 		tabbedPane.add(createNewAccountPane());
-		tabbedPane.setTitleAt(1, localization.getButtonLabel("NewAccount"));
+		tabbedPane.setTitleAt(NEW_ACCOUNT_TAB, localization.getButtonLabel("NewAccount"));
 		scrolledPanel.add(tabbedPane);
 		return scrolledPanel;
 	}

@@ -46,6 +46,7 @@ import org.martus.client.swingui.UiConstants;
 import org.martus.client.swingui.UiLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.UiSigninPanel;
+import org.martus.client.swingui.fields.UiChoiceEditor;
 import org.martus.swing.Utilities;
 
 
@@ -66,7 +67,6 @@ public class UiSigninDlg extends JDialog
 	public void initalize(UiMainWindow window, JFrame owner, int mode, String username)
 	{
 		mainWindow = window;
-		
 		UiLocalization localization = mainWindow.getLocalization();
 
 		String title = getTextForTitle(localization, mode);
@@ -79,10 +79,15 @@ public class UiSigninDlg extends JDialog
 		JButton cancel = new JButton(localization.getButtonLabel("cancel"));
 		cancel.addActionListener(new CancelHandler());
 		Box buttonBox = Box.createHorizontalBox();
+		languageDropdown = new UiChoiceEditor(localization.getUiLanguages());
+		languageDropdown.setText(localization.getCurrentLanguageCode());
+		languageDropdown.addActionListener(new LanguageListener());
+		buttonBox.add(languageDropdown.getComponent());
 		buttonBox.add(Box.createHorizontalGlue());
 		buttonBox.add(ok);
 		buttonBox.add(cancel);
 		buttonBox.add(Box.createHorizontalGlue());
+		
 		buttonBox.setBorder(new EmptyBorder(5,5,5,5));
 		JPanel scrolledPanel = createMainPanel(localization);
 
@@ -152,6 +157,8 @@ public class UiSigninDlg extends JDialog
 			return SIGN_IN;
 		if(okPressedForNewAccount)
 			return NEW_ACCOUNT;
+		if(languageChanged)
+			return LANGUAGE_CHANGED;
 		return CANCEL;
 	}
 
@@ -179,10 +186,20 @@ public class UiSigninDlg extends JDialog
 	{
 		public void actionPerformed(ActionEvent ae)
 		{
-			if(tabbedPane != null && tabbedPane.getSelectedIndex() == 1)
+			if(tabbedPane != null && tabbedPane.getSelectedIndex() == NEW_ACCOUNT_TAB)
 				okPressedForNewAccount = true;
 			else
 				okPressedForSignin = true;
+			dispose();
+		}
+	}
+	
+	class LanguageListener implements ActionListener
+	{
+		public void actionPerformed(ActionEvent ae)
+		{
+			mainWindow.getLocalization().setCurrentLanguageCode(languageDropdown.getText());
+			languageChanged = true;
 			dispose();
 		}
 	}
@@ -200,8 +217,10 @@ public class UiSigninDlg extends JDialog
 	protected UiMainWindow mainWindow;
 	boolean okPressedForSignin;
 	boolean okPressedForNewAccount;
+	boolean languageChanged;
 	private JButton ok;
-
+	UiChoiceEditor languageDropdown;
+	
 	public final static int INITIAL = 1;
 	public final static int TIMED_OUT = 2;
 	public final static int SECURITY_VALIDATE = 3;
@@ -211,5 +230,9 @@ public class UiSigninDlg extends JDialog
 	public final static int CANCEL = 10;
 	public final static int SIGN_IN = 11;
 	public final static int NEW_ACCOUNT = 12;
+	public final static int LANGUAGE_CHANGED = 13;
+
+	static final int SIGNIN_TAB = 0;
+	static final int NEW_ACCOUNT_TAB = 1;
 }
 

@@ -1566,13 +1566,16 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 				//currentActiveFrame.setState(NORMAL);
 				//currentActiveFrame.setVisible(false);
 			}
-			UiSigninDlg signinDlg;
-			if(mode==UiSigninDlg.INITIAL)
-				signinDlg = new UiInitialSigninDlg(this, currentActiveFrame);
-			else
-				signinDlg = new UiSigninDlg(this, currentActiveFrame, mode);
-
-			int userChoice = signinDlg.getUserChoice();
+			UiSigninDlg signinDlg = null;
+			int userChoice = UiSigninDlg.LANGUAGE_CHANGED;
+			while(userChoice == UiSigninDlg.LANGUAGE_CHANGED)
+			{	
+				if(mode==UiSigninDlg.INITIAL)
+					signinDlg = new UiInitialSigninDlg(this, currentActiveFrame);
+				else
+					signinDlg = new UiSigninDlg(this, currentActiveFrame, mode);
+				userChoice = signinDlg.getUserChoice();
+			}
 			if (userChoice == UiSigninDlg.NEW_ACCOUNT)
 				return NEW_ACCOUNT;
 			if (userChoice != UiSigninDlg.SIGN_IN)

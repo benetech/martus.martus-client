@@ -26,6 +26,8 @@ Boston, MA 02111-1307, USA.
 
 package org.martus.client.swingui.fields;
 
+import java.awt.event.ActionListener;
+
 import javax.swing.JComboBox;
 import javax.swing.JComponent;
 
@@ -47,6 +49,11 @@ public class UiChoiceEditor extends UiField
 	public JComponent[] getFocusableComponents()
 	{
 		return new JComponent[]{widget};
+	}
+	
+	public void addActionListener(ActionListener l)
+	{
+		widget.addActionListener(l);
 	}
 
 	public String getText()
