@@ -196,7 +196,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 				return false;
 		}
 
-		boolean createdNewAccount = false;
+		createdNewAccount = false;
 		if(wantsNewAccount)
 		{
 			if(!createAccount())
@@ -351,6 +351,10 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 			if(bulletinDefaultDetailsFile.exists())
 				updateBulletinDetails(bulletinDefaultDetailsFile);
 		}
+		else
+		{
+			askAndBackupKeypairIfRequired();
+		}
 		
 		if(!info.hasEnoughContactInfo())
 			doContactInfo();
@@ -358,6 +362,33 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		{
 			requestToUpdateContactInfoOnServerAndSaveInfo();
 			info.clearPromptUserRequestSendToServer();
+		}
+	}
+
+	private void askAndBackupKeypairIfRequired()
+	{
+		ConfigInfo info = app.getConfigInfo();
+		boolean hasBackedUpEncrypted = info.hasUserBackedUpKeypairEncrypted();
+		boolean hasBackedUpShare = info.hasUserBackedUpKeypairShare();
+		if(!hasBackedUpEncrypted || !hasBackedUpShare)
+		{
+			String generalMsg = localization.getFieldLabel("confirmgeneralBackupKeyPairMsgcause");
+			String generalMsgEffect = localization.getFieldLabel("confirmgeneralBackupKeyPairMsgeffect");
+			String backupEncrypted = "";
+			String backupShare = "";
+			if(!hasBackedUpEncrypted)
+				backupEncrypted = localization.getFieldLabel("confirmbackupIncompleteEncryptedNeeded");
+			if(!hasBackedUpShare)
+				backupShare = localization.getFieldLabel("confirmbackupIncompleteShareNeeded");
+
+			String[] contents = {generalMsg, "", backupEncrypted, backupShare, "", generalMsgEffect}; 
+			if(confirmDlg(this, localization.getWindowTitle("askToBackupKeyPair"), contents))
+			{
+				if(!hasBackedUpEncrypted)
+					askToBackupKeyPairEncryptedSingleFile();
+				if(!hasBackedUpShare)
+					askToBackupKeyPareToSecretShareFiles();
+			}
 		}
 	}
 
@@ -1199,7 +1230,16 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 			return;
 		if(!getAndSaveUserNamePassword(app.getCurrentKeyPairFile()))
 			return;
-
+		try
+		{
+			app.getConfigInfo().setBackedUpKeypairEncrypted(false);
+			app.saveConfigInfo();
+		}
+		catch (SaveConfigInfoException e)
+		{
+			notifyDlg("ErrorSavingConfig");
+			e.printStackTrace();
+		}
 		notifyDlg("RewriteKeyPairSaved");
 		askToBackupKeyPairEncryptedSingleFile();
 	}
@@ -1475,7 +1515,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 
 	public void askToBackupKeyPairEncryptedSingleFile()
 	{
-		if(confirmDlg("BackupKeyPairSingle"))
+		if(confirmDlg("BackupKeyPairInformation"))
 			doBackupKeyPairToSingleEncryptedFile();
 	}
 
@@ -1497,9 +1537,6 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 			notifyDlg("ErrorBackingupKeyPair");
 			return;
 		}
-		
-		if(!confirmDlg("BackupKeyPairInformation"))
-			return;
 		
 		String windowTitle = getLocalization().getWindowTitle("saveBackupKeyPair");
 		UiFileChooser.FileDialogResults results = UiFileChooser.displayFileSaveDialog(this, windowTitle, MartusApp.KEYPAIR_FILENAME);
@@ -1523,9 +1560,15 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 			input.close();
 			output.close();
 			if(FileVerifier.verifyFiles(keypairFile, newBackupFile))
+			{
 				notifyDlg("OperationCompleted");
+				app.getConfigInfo().setBackedUpKeypairEncrypted(true);
+				app.saveConfigInfo();
+			}
 			else
+			{
 				notifyDlg("ErrorBackingupKeyPair");
+			}
 		}
 		catch (FileNotFoundException fnfe)
 		{
@@ -1535,6 +1578,11 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		{
 			System.out.println(ioe.getMessage());
 			notifyDlg("ErrorBackingupKeyPair");
+		}
+		catch (SaveConfigInfoException e)
+		{
+			e.printStackTrace();
+			notifyDlg("ErrorSavingConfig");
 		}
 	}
 	
@@ -1760,8 +1808,6 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 			return false;
 		}
 		waitingForKeyPair.endDialog();
-		askToBackupKeyPairEncryptedSingleFile();
-		askToBackupKeyPareToSecretShareFiles();
 		return true;
 	}
 
@@ -1785,6 +1831,8 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 
 	public void exitNormally()
 	{
+		if(createdNewAccount)
+			askAndBackupKeypairIfRequired();
 		if(doUploadReminderOnExit())
 			return;
 		saveState();
@@ -2029,4 +2077,5 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	private static final int BACKGROUND_UPLOAD_CHECK_MILLIS = 5*1000;
 	private static final int BACKGROUND_TIMEOUT_CHECK_EVERY_X_MILLIS = 5*1000;
 	private boolean mainWindowInitalizing;
+	private boolean createdNewAccount;
 }

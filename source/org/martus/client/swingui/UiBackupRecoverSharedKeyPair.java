@@ -34,6 +34,7 @@ import java.util.Map;
 import java.util.Vector;
 
 import org.martus.client.core.MartusApp;
+import org.martus.client.core.MartusApp.SaveConfigInfoException;
 import org.martus.common.MartusConstants;
 import org.martus.common.MartusUtilities;
 import org.martus.common.Version;
@@ -113,6 +114,16 @@ public class UiBackupRecoverSharedKeyPair
 
 		message = localization.getFieldLabel("BackupSecretShareCompleteInformation");
 		mainWindow.displayScrollableMessage("BackupSecretShareCompleteInformation", message, "ok", getTokenReplacement());
+		try
+		{
+			mainWindow.getApp().getConfigInfo().setBackedUpKeypairShare(true);
+			mainWindow.getApp().saveConfigInfo();
+		}
+		catch (SaveConfigInfoException e)
+		{
+			mainWindow.notifyDlg("ErrorSavingConfig");
+			e.printStackTrace();
+		}
 	}
 
 	private Vector recoverMinimumKeySharesNeededFromFiles(File firstShareFile) 
@@ -341,7 +352,7 @@ public class UiBackupRecoverSharedKeyPair
 			for(int disk = 1; disk <= maxFiles; ++disk )
 			{
 				String verifyShareTag = "VerifyingKeyPairShare";
-				if(!insertDisk(verifyShareTag, verifyShareTag, disk, maxFiles, "CancelShareVerify"))
+				if(!insertDisk(verifyShareTag, "", disk, maxFiles, "CancelShareVerify"))
 					break;
 				boolean exitVerification = false;
 				while(true)
