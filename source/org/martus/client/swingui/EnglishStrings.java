@@ -427,6 +427,7 @@ public class EnglishStrings
 
 "field:BulletinSize=Size (Kb)",
 "field:BulletinLastSaved=Last Saved",
+"field:BulletinVersionNumber=Version",
 
 "field:AuthorRequired=Author (required)",
 "field:OrganizationRequired=Organization (required)",
@@ -491,15 +492,15 @@ public class EnglishStrings
 "field:ErrorVerifyingKeyPairShare=An error occurred verifying this key backup file.",
 "field:RecoverAccount=Restore your existing account from a backup file.",
 "field:ErrorBackingupKeyPair=Unable to back up the key file on this disk.",
-"field:BackupKeyPairGeneralInfo=Your key is required to read your private bulletin information or to create new bulletins.  To ensure that you’ll always have access to your data, it is extremely important to keep a backup of your key.\n\nMartus offers two methods for backing up your key, either of which may be used, but we strongly recommend using both backup methods.  The first method creates a single, password encrypted key back up file onto removable media (e.g. floppy disk, cd, USB storage) or a network drive; the second method backs up the key in #M# separate pieces (not encrypted with your password) onto multiple floppy disks (or other removable media).\n",
-"field:BackupKeyPairToSecretShareInformation=This method breaks up your key into #M# pieces, any #N# of which will be required to reconstruct the key without requiring a password.  If you forget your login name or your password, this method is the only way you can restore your key.\n\nOnce the #M# files have been written to removable media disks, you should distribute them to #M# different people whom you will remember, but each of whom don’t know who you have given the other files to.  Do not store any of the disks together.\n\nTo restore your key, first retrieve any #N# of the original #M# disks, and then select 'Restore Account' and 'Restore account from multiple disks' when signing into Martus.\n",
+"field:BackupKeyPairGeneralInfo=Your key is required to read your private bulletin information or to create new bulletins.  To ensure that you'll always have access to your data, it is extremely important to keep a backup of your key.\n\nMartus offers two methods for backing up your key, either of which may be used, but we strongly recommend using both backup methods.  The first method creates a single, password encrypted key back up file onto removable media (e.g. floppy disk, cd, USB storage) or a network drive; the second method backs up the key in #M# separate pieces (not encrypted with your password) onto multiple floppy disks (or other removable media).\n",
+"field:BackupKeyPairToSecretShareInformation=This method breaks up your key into #M# pieces, any #N# of which will be required to reconstruct the key without requiring a password.  If you forget your login name or your password, this method is the only way you can restore your key.\n\nOnce the #M# files have been written to removable media disks, you should distribute them to #M# different people whom you will remember, but each of whom don't know who you have given the other files to.  Do not store any of the disks together.\n\nTo restore your key, first retrieve any #N# of the original #M# disks, and then select 'Restore Account' and 'Restore account from multiple disks' when signing into Martus.\n",
 "field:BulletinId=Bulletin Id:",
 "field:BulletinWasSent=Sent",
 "field:preferencesAllPrivate=Prevent creating public bulletins",
 
 "field:BulletinStatus=Bulletin Status:",
 "field:PrintPrivateData=Include private data in print out.",
-"field:PrintPrivateDataMessage=You have the option to include or exclude the selected bulletin’s private information in this print out.\n\nTo only print public information, do not mark the checkbox below.\n\nIf you do mark the checkbox, anyone who sees the print out will be able to read your private data.",
+"field:PrintPrivateDataMessage=You have the option to include or exclude the selected bulletin's private information in this print out.\n\nTo only print public information, do not mark the checkbox below.\n\nIf you do mark the checkbox, anyone who sees the print out will be able to read your private data.",
 
 "field:VirtualUserNameDescription=(Enter using regular keyboard)",
 "field:VirtualPasswordDescription=Enter Password using mouse with on-screen keyboard below",
@@ -679,7 +680,7 @@ public class EnglishStrings
 "field:notifycontactRejectedcause=The current Martus Server has refused to accept your contact info",
 "field:notifyCreateAccountFailedcause=An error occurred while trying to create your account.",
 "field:notifyUserAlreadyExistscause=The user name you chose already exists on this system, please choose a different user name.",
-"field:notifyRecoveryProcessBackupFilecause=To restore your key, first you must find the backup file you saved previously.  Using the 'Restore Key from Backup File' dialog box find the file on your computer’s hard drive, a network drive, or removable media disk then click the Open button.  Martus will then ask you for your user name and password and restore your key so you can log in normally and access your account.",
+"field:notifyRecoveryProcessBackupFilecause=To restore your key, first you must find the backup file you saved previously.  Using the 'Restore Key from Backup File' dialog box find the file on your computer's hard drive, a network drive, or removable media disk then click the Open button.  Martus will then ask you for your user name and password and restore your key so you can log in normally and access your account.",
 "field:notifyRecoveryOfKeyPairCompletecause=Key restore is complete, you will now be logged into Martus.",
 "field:notifyErrorRecoveringAccountDirectorycause=Error during key restore. This key backup copy may be damaged.",
 "field:notifyServerSSLNotRespondingcause=Unable to make a secure connection with the Martus backup server.\n\nMartus can connect to a server using either of two ports.  When trying to connect to this server, neither port is accessible, probably because both ports are being blocked by a local firewall or by your ISP.\n\nWe recommend that any firewalls be configured to allow outgoing connections on both TCP port 443 and 987.  Please contact your LAN administrator or office technical support staff to verify that your firewall configuration allows this.\n\nIf the problem persists, you may need to select a different server.",
@@ -688,8 +689,8 @@ public class EnglishStrings
 "field:notifyFilesWillNotBeDeletedcause=The original files have not been deleted from your computer, you must delete them manually if you wish.",
 "field:notifyHQKeyAlradyExistscause=You have already added this account to your Headquarters list.",
 "field:notifyFolderMigrationFailedcause=An error occurred during the conversion of your folders. You can still use Martus, but if the Outbox or Drafts folders still exist, do not use them.",
-"field:notifyViewViewBulletinDetailscause=Bulletin ID:        #I#\nAuthor Public Code: #A#\n\n#H#",
-"field:notifyModifyViewBulletinDetailscause=Bulletin ID:        #I#\nAuthor Public Code: #A#\n\n#H#",
+"field:notifyViewViewBulletinDetailscause=Bulletin ID:        #I#\nAuthor Public Code: #A#\n\n#H#\n\n#HISTORY#",
+"field:notifyModifyViewBulletinDetailscause=Bulletin ID:        #I#\nAuthor Public Code: #A#\n\n#H#\n\n#HISTORY#",
 "field:notifyResendErrorNotAuthorizedToSendcause=One or more bulletins were unable to be resent because you are not authorized to upload them.",
 "field:notifyResendErrorcause=One or more bulletins were unable to be resent due to an unexpected error.",
 "field:notifyPrintAllPrivateDatacause=This bulletin will not be printed because all the information is private.  If you wish to print the private data, please mark the \"Include private data in print out\" checkbox.",
@@ -698,6 +699,9 @@ public class EnglishStrings
 
 "field:ViewViewBulletinDetailsHQList=The following Headquarter account(s) can view the private information in this bulletin, and can send this bulletin to a server:\n\n#L#",
 "field:ModifyViewBulletinDetailsHQList=The following Headquarter account(s) will be able to view the private information in this bulletin, or send this bulletin to a server, after you save it:\n\n#L#\n\nTo add or remove an account, use the Tools/Configure Headquarters menu option.",
+
+"field:ViewViewBulletinDetailsHistory=Earlier versions of this bulletin:\n#IDLIST#",
+"field:ModifyViewBulletinDetailsHistory=Earlier versions of this bulletin:sss\n#IDLIST#",
 
 "field:messageServerNewscause=The current server has sent this message:",
 "field:messageErrorDateInFuturecause=This date occurs in the future:",

@@ -33,10 +33,13 @@ import java.text.DateFormat;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
+import java.util.Vector;
+
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.border.EtchedBorder;
+
 import org.martus.client.swingui.UiLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.common.HQKey;
@@ -63,10 +66,15 @@ public class UiBulletinComponentHeader extends UiBulletinComponentSection
 
 		lastSavedLabel = new JLabel(localization.getFieldLabel(Bulletin.TAGLASTSAVED));
 		dateTime = new JLabel("");
-		EtchedBorder b = new EtchedBorder();
-		dateTime.setBorder(b);
+		EtchedBorder border = new EtchedBorder();
+		dateTime.setBorder(border);
 		addComponents(lastSavedLabel, dateTime);
 
+		JLabel versionLabel = new JLabel(localization.getFieldLabel("BulletinVersionNumber"));
+		versionNumber = new JLabel("#");
+		versionNumber.setBorder(border);
+		addComponents(versionLabel, versionNumber);
+		
 		hqLabel = new JLabel(localization.getFieldLabel("HQSummaryLabel"));
 		hqSummary = new JLabel("");
 		hqSummary.setFont(hqSummary.getFont().deriveFont(Font.BOLD));
@@ -95,6 +103,12 @@ public class UiBulletinComponentHeader extends UiBulletinComponentSection
 			hqLabel.setVisible(false);
 			hqSummary.setVisible(false);
 		}
+	}
+	
+	public void setHistory(Vector localIds)
+	{
+		history = localIds;
+		versionNumber.setText("  " + Integer.toString(1 + history.size())+ "  ");
 	}
 	
 	public void setLastSaved(long time)
@@ -145,6 +159,7 @@ public class UiBulletinComponentHeader extends UiBulletinComponentSection
 			map.put("#A#", getPublicCode());
 			map.put("#I#", currentUid.getLocalId());
 			map.put("#H#", getHqListText());
+			map.put("#HISTORY#", getHistoryText());
 			JFrame parent = getMainWindow().getCurrentActiveFrame();
 			getMainWindow().notifyDlg(parent, tagQualifier + "ViewBulletinDetails", map);
 		}
@@ -167,7 +182,6 @@ public class UiBulletinComponentHeader extends UiBulletinComponentSection
 			if(hqList.size() == 0)
 				return "";
 			
-			HashMap hqMap = new HashMap();
 			String listOfHqPublicKeys = "";
 			for(int i=0; i < hqList.size(); ++i)
 			{
@@ -187,9 +201,17 @@ public class UiBulletinComponentHeader extends UiBulletinComponentSection
 					thisHqCode += " : " + thisHqlabel;
 				listOfHqPublicKeys += "  " + thisHqCode + "\n";
 			}
-			hqMap.put("#L#", listOfHqPublicKeys);
+			String tag = "ViewBulletinDetailsHQList";
+			String listToken = "#L#";
+			return performReplacement(tag, listToken, listOfHqPublicKeys);
+		}
+		
+		private String performReplacement(String tag, String listToken, String valueToInsert)
+		{
+			HashMap hqMap = new HashMap();
+			hqMap.put(listToken, valueToInsert);
 
-			String text = getLocalization().getFieldLabel(tagQualifier + "ViewBulletinDetailsHQList");
+			String text = getLocalization().getFieldLabel(tagQualifier + tag);
 			try
 			{
 				text = TokenReplacement.replaceTokens(text, hqMap);
@@ -214,6 +236,20 @@ public class UiBulletinComponentHeader extends UiBulletinComponentSection
 			HQKey unknown = new HQKey("???", "???");
 			return unknown;
 		}
+
+		private String getHistoryText()
+		{
+			String ancestors = "";
+			for(int i=0; i < history.size(); ++i)
+			{
+				String localId = (String)history.get(i);
+				ancestors += "  " + (i+1) + ".  " + localId + "\n"; 
+			}
+			String tag = "ViewBulletinDetailsHistory";
+			String listToken = "#IDLIST#";
+			return performReplacement(tag, listToken, ancestors);
+		}
+
 	}
 
 	String tagQualifier;
@@ -221,6 +257,8 @@ public class UiBulletinComponentHeader extends UiBulletinComponentSection
 	JLabel dateTime;
 	JLabel hqLabel;
 	JLabel hqSummary;
+	JLabel versionNumber;
 	UniversalId currentUid;
 	HQKeys hqList;
+	Vector history;
 }
