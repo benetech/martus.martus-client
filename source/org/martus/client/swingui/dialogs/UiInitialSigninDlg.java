@@ -39,6 +39,7 @@ import javax.swing.JRadioButton;
 import javax.swing.JTabbedPane;
 
 import org.martus.common.clientside.*;
+import org.martus.swing.UiLanguageDirection;
 import org.martus.swing.UiWrappedTextArea;
 
 
@@ -53,6 +54,7 @@ public class UiInitialSigninDlg extends UiSigninDlg
 	{
 		JPanel scrolledPanel = new JPanel(); 
 		tabbedPane = new JTabbedPane();
+		tabbedPane.setComponentOrientation(UiLanguageDirection.getComponentOrientation());
 		tabLabelSignIn = localization.getButtonLabel("SignIn");
 		tabLabelNewAccount = localization.getButtonLabel("NewAccountTab");
 		tabLabelRecoverAccount = localization.getButtonLabel("RecoverAccountTab");
