@@ -177,7 +177,6 @@ public class EnglishStrings
 "wintitle:notifyFilesWillNotBeDeleted=Files Not Deleted",
 "wintitle:notifyChoosingUninstallMartus=Uninstalling Martus Warning",
 
-
 "wintitle:inputservername=Server Name",
 "wintitle:inputserverpubliccode=Server Identification",
 "wintitle:inputservermagicword=Request Upload Permission",
@@ -233,6 +232,7 @@ public class EnglishStrings
 "wintitle:BackupKeyPairToSecretShareInformation=Information on Sharing Your KeyPair",
 "wintitle:ErrorAttachmentMissing=Attachment Missing",
 "wintitle:helpStringNotFound=Search Text Not Found",
+"wintitle:CreateCustomFieldsHelp=Help on Creating Custom Fields",
 
 "button:help=Help",
 "button:create=Create",
@@ -253,6 +253,7 @@ public class EnglishStrings
 "button:inputGetShareFileNameok=OK",
 "button:close=Close",
 "button:customDefault=Restore Defaults",
+"button:customHelp=Help",
 
 "button:cancel=Cancel",
 "button:browse=Browse...",
@@ -676,11 +677,15 @@ public class EnglishStrings
 "field:messageErrorDateInFuturecause=This date occurs in the future:",
 "field:messageErrorAttachmentMissingcause=The attachment could not be located.",
 
+"field:CreateCustomFieldsHelp1=The layout of the bulletins is dictated by an XML document.  At the start of the document you must have <CustomFields> and at the end of the document you must have its cooresponding end tag namely </CustomFields>.  There are four required elements and these are 'author', 'entrydate', 'language' and 'title'.  For example for 'author' you will have\n<Field><Tag>author</Tag><Label></Label><Type>STRING</Type></Field>\n\nFor a new custom field you will need a unique identification tag.",
+"field:CreateCustomFieldsHelp2=This tag can be any word except those already used by the system (eg. 'author', 'sumary', 'location', 'title' etc.).  A good choice might be 'custom1', 'custom2', etc.  This unique tag is surounded by <Tag> </Tag>.  Then you need a Label which is was is displayed next to your custom field.  An example might be 'Witness's Name'.  This label is surrounded by <Label>'your label goes here'</Label>\n\nThen you select the type of field you want.  The possible choices are 'BOOLEAN', 'DATE', 'DATERANGE', 'GRID', 'LANGUAGE', 'MULTILINE', and 'STRING'.  This type is surrounded by <Type>'type of field goes here'</Type>\n\nEach field is encased in matching <Field> </Field> tags.",
+"field:CreateCustomFieldsHelp3=Here are some examples:\n\n<Field><Tag>custom1</Tag><Label>Witness Name</Lable><Type>STRING</Type></Field>\n<Field><Tag>new2</Tag><Label>Witness Speaks</Lable><Type>LANGUAGE</Type></Field>\n<Field><Tag>new3</Tag><Label>Were guns used?</Lable><Type>BOOLEAN</Type></Field>",
+
 "field:inputservermagicwordentry=If you want to request permission to upload to this server, enter the 'magic word' now:",
 "field:inputImportPublicCodeentry=Enter the Public Identification Code for this account:",
 "field:inputExportMyPublicKeyentry=",
 "field:inputGetShareFileNameentry=Enter the name of the file you wish to export.",
-"field:inputCustomFieldsentry=Enter the list of field tags below, in the order you want them to appear.\n\nTo add a new custom field enter a unique tag followed by a comma and then the label of the tag you want to appear in the bulletin.\n\nFor example VictimsName,Name of Victim\nNote fields are separated by ;'s.\nTo revert to the original standard fields, blank out the line and press OK.",
+"field:inputCustomFieldsInfo=Enter the XML representation for the layout of new and modified bulletins.",
 
 "field:username=Username",
 "field:password1=Password",
