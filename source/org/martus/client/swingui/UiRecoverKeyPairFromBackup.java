@@ -79,6 +79,10 @@ public class UiRecoverKeyPairFromBackup
 					showCancelDlg = true;
 					showUnableToRecoverDlg = false;
 				}
+				finally
+				{
+					UiPasswordField.scrubData(userPassword);
+				}
 				
 			}
 			startingDirectory = results.getCurrentDirectory();
@@ -127,7 +131,6 @@ public class UiRecoverKeyPairFromBackup
 		finally
 		{
 			inputStream.close();
-			UiPasswordField.scrubData(userPassword);
 		}
 	}
 	
