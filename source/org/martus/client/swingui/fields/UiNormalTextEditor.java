@@ -26,7 +26,6 @@ Boston, MA 02111-1307, USA.
 
 package org.martus.client.swingui.fields;
 
-import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -55,21 +54,6 @@ public class UiNormalTextEditor extends UiNormalTextField
 		public UiTextAreaWithPadding(int rows, int cols)
 		{
 			super(rows, cols);
-		}
-
-		/* 
-		 * NOTE: This is a horrible hack to work around the fact that a JTextArea
-		 * seems to completely ignore any calls to setBorder or setMargin.
-		 * We need to add some space to the bottom of the field to avoid Arabic
-		 * (and even English) characters from being chopped off. 
-		 * The number of pixels is arbitrary and may need to be adjusted.
-		 */
-		public Dimension getPreferredSize()
-		{
-			final int EXTRA_PIXELS = 3;
-			Dimension d = super.getPreferredSize();
-			d.setSize(d.getWidth(), d.getHeight() + EXTRA_PIXELS);
-			return d;
 		}
 	}
 	

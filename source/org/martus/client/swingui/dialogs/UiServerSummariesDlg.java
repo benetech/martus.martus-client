@@ -56,7 +56,7 @@ import org.martus.swing.UiScrollPane;
 import org.martus.swing.UiTable;
 import org.martus.swing.UiWrappedTextArea;
 import org.martus.swing.Utilities;
-import org.martus.util.language.LanguageDirection;
+import org.martus.util.language.LanguageOptions;
 
 public abstract class UiServerSummariesDlg extends JDialog
 {
@@ -141,7 +141,7 @@ public abstract class UiServerSummariesDlg extends JDialog
 
  		JPanel southPanel = new JPanel();
 		southPanel.setLayout(new BorderLayout());
-		if(LanguageDirection.isRightToLeftLanguage())
+		if(LanguageOptions.isRightToLeftLanguage())
 			southPanel.add(panel, BorderLayout.EAST);
 		else
 			southPanel.add(panel, BorderLayout.WEST);

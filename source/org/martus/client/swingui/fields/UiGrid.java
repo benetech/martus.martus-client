@@ -143,7 +143,7 @@ public class UiGrid extends UiField
 		}
 	}
 
-	private static final int ROW_HEIGHT_PADDING = 5;
+	private static final int ROW_HEIGHT_PADDING = 3;
 
 	UiScrollPane widget;
 	UiTable table;
