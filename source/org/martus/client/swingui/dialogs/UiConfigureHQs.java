@@ -78,6 +78,13 @@ public class UiConfigureHQs extends JDialog
 		panel.setBorder(new EmptyBorder(10,10,10,10));
 		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 		
+		add = new JButton(localization.getButtonLabel("ConfigureHQsAdd"));
+		add.addActionListener(new AddHandler());
+		remove = new JButton(localization.getButtonLabel("ConfigureHQsRemove"));
+		remove.addActionListener(new RemoveHandler());
+		remove.setEnabled(false);
+
+		
 		Box hBox1 = Box.createHorizontalBox();
 		hBox1.add(new JLabel(localization.getFieldLabel("ConfigureHQsCurrentHQs")));
 		hBox1.add(Box.createHorizontalGlue());
@@ -116,11 +123,6 @@ public class UiConfigureHQs extends JDialog
 		panel.add(new JLabel(" "));
 		
 		Box hBox = Box.createHorizontalBox();
-		JButton add = new JButton(localization.getButtonLabel("ConfigureHQsAdd"));
-		add.addActionListener(new AddHandler());
-		remove = new JButton(localization.getButtonLabel("ConfigureHQsRemove"));
-		remove.addActionListener(new RemoveHandler());
-		remove.setEnabled(false);
 
 		hBox.add(add);
 		hBox.add(remove);
@@ -262,6 +264,10 @@ public class UiConfigureHQs extends JDialog
 				}
 			}
 			remove.setEnabled(false);
+
+			if(model.getRowCount()==0)//TODO:remove for multiple HQs
+				add.setEnabled(true);
+
 			updateConfigInfo();
 		}
 //		mainWindow.doClearPublicAccountInfo();
@@ -288,6 +294,7 @@ public class UiConfigureHQs extends JDialog
 			model.addRow(row);
 			mapOfKeysToCodes.put(formattedCode, publicKey);
 			hQKeys.add(publicKey);
+			add.setEnabled(false);//TODO: remove this to allow more than one HQ.
 			int current = table.getRowCount()-1;
 			table.setRowSelectionInterval(current,current);
 		}
@@ -356,6 +363,7 @@ System.out.println("Public code required:" + publicCode);
 	UiTable table;
 	DefaultTableModel model;
 	JButton remove;
+	JButton add;
 	UiBasicLocalization localization;
 	private static final int DEFAULT_VIEABLE_ROWS = 5;
 	private static final int PUBLIC_CODE_COLUMN = 0;
