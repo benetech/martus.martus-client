@@ -30,18 +30,16 @@ import java.awt.ComponentOrientation;
 import java.io.File;
 import java.io.IOException;
 import java.util.Vector;
-
 import javax.swing.SwingConstants;
-
 import org.martus.client.swingui.EnglishStrings;
 import org.martus.client.swingui.UiConstants;
 import org.martus.client.swingui.UiLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.common.MartusUtilities;
+import org.martus.common.MiniLocalization.NoDateSeparatorException;
 import org.martus.common.clientside.ChoiceItem;
 import org.martus.common.clientside.Localization;
 import org.martus.common.clientside.UiBasicLocalization;
-import org.martus.common.clientside.Localization.NoDateSeparatorException;
 import org.martus.common.utilities.DateUtilities;
 import org.martus.jarverifier.JarVerifier;
 import org.martus.swing.UiLanguageDirection;
