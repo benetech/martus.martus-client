@@ -584,7 +584,7 @@ public class EnglishStrings
 "field:confirmCancelBackupRecoverycause=Do you wish to cancel the key  restore process?",
 "field:confirmCancelBackupRecoveryeffect=By choosing Yes, you will exit Martus.",
 "field:confirmUnableToRecoverFromBackupFilecause=Key restore failed, we suggest you try again with a different backup file.",
-"field:confirmUnableToRecoverFromBackupFileeffect=Choose Yes will begin the restore process again, No to exit Martus.",
+"field:confirmUnableToRecoverFromBackupFileeffect=Yes to begin the restore process again, No to exit Martus.",
 "field:confirmWarningPathChosenMayNotBeRemoveablecause=Are you sure the directory you chose to save your backup files to is removable?  You cannot save all #M# files to the same location without inserting a new disk for each backup file.",
 "field:confirmWarningPathChosenMayNotBeRemoveableeffect=Choosing Yes will begin the backup process as instructed.",
 "field:confirmBackupKeyPairInformationcause=Save your password encrypted key backup file to a single floppy disk or other removable media.  Then store this disk in a safe place. You will use this disk, with your username and password, to restore your data if your system files are ever damaged.  To restore this password-protected key in the future, select 'Restore Account' and 'Restore account from backup key file' when signing into Martus.",		
