@@ -86,6 +86,8 @@ abstract public class RetrieveTableModel extends AbstractTableModel
 			return getLocalization().getFieldLabel("BulletinSize");
 		if(column == COLUMN_DELETE_FLAG)
 			return getLocalization().getFieldLabel("DeleteFlag");
+		if(column == COLUMN_VERSION_NUMBER)
+			return getLocalization().getFieldLabel("BulletinVersionNumber");
 		return "";
 	}
 
@@ -104,6 +106,8 @@ abstract public class RetrieveTableModel extends AbstractTableModel
 			return  getSizeInKbytes(summary.getSize());
 		if(column == COLUMN_DELETE_FLAG)
 			return new Boolean(summary.isChecked());
+		if(column == COLUMN_VERSION_NUMBER)
+			return new Integer(summary.getVersionNumber());
 		return "";
 	}
 
@@ -130,6 +134,8 @@ abstract public class RetrieveTableModel extends AbstractTableModel
 			return Integer.class;
 		if(column == COLUMN_DELETE_FLAG)
 			return Boolean.class;
+		if(column == COLUMN_VERSION_NUMBER)
+			return Integer.class;
 		return null;
 	}
 	
@@ -489,4 +495,5 @@ abstract public class RetrieveTableModel extends AbstractTableModel
 	public int COLUMN_LAST_DATE_SAVED = -1;
 	public int COLUMN_BULLETIN_SIZE = -1;
 	public int COLUMN_DELETE_FLAG = -1;
+	public int COLUMN_VERSION_NUMBER = -1;
 }

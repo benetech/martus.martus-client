@@ -39,6 +39,7 @@ abstract public class RetrieveTableModelNonHQ extends RetrieveTableModel {
 		COLUMN_RETRIEVE_FLAG = columnCount++;
 		COLUMN_TITLE = columnCount++;
 		COLUMN_LAST_DATE_SAVED = columnCount++;
+		COLUMN_VERSION_NUMBER = columnCount++;
 		COLUMN_BULLETIN_SIZE = columnCount++;
 	}
 }

@@ -39,6 +39,7 @@ public class DeleteMyServerDraftsTableModel extends RetrieveTableModel
 		COLUMN_DELETE_FLAG = columnCount++;
 		COLUMN_TITLE = columnCount++;
 		COLUMN_LAST_DATE_SAVED = columnCount++;
+		COLUMN_VERSION_NUMBER = columnCount++;
 		COLUMN_BULLETIN_SIZE = columnCount++;
 	}
 
