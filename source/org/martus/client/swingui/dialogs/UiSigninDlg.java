@@ -85,7 +85,8 @@ public class UiSigninDlg extends UiBasicSigninDlg
 	{
 		if(localization.isOfficialTranslation(languageCodeChangingTo))
 			return;
-		UiMainWindow.displayUnofficialTranslationMessage(this.owner, localization.getFieldLabel("warningUnofficialTranslation"));
+		UiMainWindow.displayDefaultUnofficialTranslationMessage(owner);
+
 	}
 
 	UiChoiceEditor languageDropdown;

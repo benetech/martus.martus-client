@@ -93,7 +93,7 @@ public class UiPreferencesDlg extends JDialog implements ActionListener
 			UiLocalization localization = owner.getLocalization();
 			String languageCodeSelected = languageDropdown.getText();
 			if(!localization.isOfficialTranslation(languageCodeSelected))
-				UiMainWindow.displayUnofficialTranslationMessage(owner, localization.getFieldLabel("warningUnofficialTranslation"));
+				UiMainWindow.displayDefaultUnofficialTranslationMessage(owner);
 			localization.setCurrentDateFormatCode(dateFormatDropdown.getText());
 			localization.setCurrentLanguageCode(languageDropdown.getText());
 			owner.setBulletinsAlwaysPrivate(allPrivate.isSelected());

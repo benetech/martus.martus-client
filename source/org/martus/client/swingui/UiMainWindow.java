@@ -212,7 +212,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		return new File(app.getMartusDataRootDirectory(), "UiState.dat");
 	}
 	
-	public void displayDefaultUnofficialTranslationMessage(JFrame owner)
+	static public void displayDefaultUnofficialTranslationMessage(JFrame owner)
 	{
 		URL untranslatedURL = UiMainWindow.class.getResource("UnofficialTranslationMessage.txt");
 		
@@ -222,7 +222,12 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 			UnicodeReader reader = new UnicodeReader(in);
 			String message = reader.readAll();
 			reader.close();
-			displayUnofficialTranslationMessage(owner, message);
+
+			updateIcon(owner);
+			String[] buttons = { "OK" };
+			String newMessage = getWarningMessageAboutUnofficialTranslations(message);
+			Toolkit.getDefaultToolkit().beep();
+			new UiNotifyDlg(owner, "", new String[]{newMessage}, buttons);
 		}
 		catch(Exception e)
 		{
@@ -232,15 +237,6 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		
 	}
 	
-	static public void displayUnofficialTranslationMessage(JFrame owner, String rawMessage)
-	{
-		updateIcon(owner);
-		String[] buttons = { "OK" };
-		String newMessage = getWarningMessageAboutUnofficialTranslations(rawMessage);
-		Toolkit.getDefaultToolkit().beep();
-		new UiNotifyDlg(owner, "", new String[]{newMessage}, buttons);
-	}
-
 	private static String getWarningMessageAboutUnofficialTranslations(String originalMessage)
 	{
 		try
