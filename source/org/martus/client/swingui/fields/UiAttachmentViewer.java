@@ -42,7 +42,6 @@ import java.io.File;
 
 import javax.swing.Box;
 import javax.swing.JButton;
-import javax.swing.JFileChooser;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -233,34 +232,30 @@ public class UiAttachmentViewer extends JPanel  implements DragGestureListener, 
 				return;
 			String fileName = model.getFilenameAt(selectedRow);
 
-			UiFileChooser chooser = new UiFileChooser();
-			chooser.setSelectedFile(new File(fileName));
 			File last = getLastAttachmentSaveDirectory();
-			if(last != null)
-				chooser.setCurrentDirectory(last);
-			if(chooser.showSaveDialog(mainWindow) == JFileChooser.APPROVE_OPTION)
+			UiFileChooser.FileDialogResults results = UiFileChooser.displayFileSaveDialog(mainWindow, null, new File(fileName), last);
+			if(results.wasCancelChoosen())
+				return;
+			setLastAttachmentSaveDirectory(results.getCurrentDirectory());
+			File outputFile = results.getFileChoosen();
+			if(outputFile.exists())
 			{
-				setLastAttachmentSaveDirectory(chooser.getCurrentDirectory());
-				File outputFile = chooser.getSelectedFile();
-				if(outputFile.exists())
-				{
-					if(!mainWindow.confirmDlg("OverWriteExistingFile"))
-						return;
-				}
-				Cursor originalCursor = mainWindow.setWaitingCursor();
-				AttachmentProxy proxy = model.getAttachmentProxyAt(selectedRow);
-				try
-				{
-					Database db = mainWindow.getApp().getStore().getDatabase();
-					BulletinSaver.extractAttachmentToFile(db, proxy, app.getSecurity(), outputFile);
-				}
-				catch(Exception e)
-				{
-					mainWindow.notifyDlg("UnableToSaveAttachment");
-					System.out.println("Unable to save file :" + e);
-				}
-				mainWindow.resetCursor(originalCursor);
+				if(!mainWindow.confirmDlg("OverWriteExistingFile"))
+					return;
 			}
+			Cursor originalCursor = mainWindow.setWaitingCursor();
+			AttachmentProxy proxy = model.getAttachmentProxyAt(selectedRow);
+			try
+			{
+				Database db = mainWindow.getApp().getStore().getDatabase();
+				BulletinSaver.extractAttachmentToFile(db, proxy, app.getSecurity(), outputFile);
+			}
+			catch(Exception e)
+			{
+				mainWindow.notifyDlg("UnableToSaveAttachment");
+				System.out.println("Unable to save file :" + e);
+			}
+			mainWindow.resetCursor(originalCursor);
 		}
 	}
 

@@ -29,8 +29,6 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 
-import javax.swing.JFileChooser;
-
 import org.martus.client.core.MartusApp;
 import org.martus.client.swingui.dialogs.UiSigninDlg;
 import org.martus.common.clientside.UiPasswordField;
@@ -54,17 +52,13 @@ public class UiRecoverKeyPairFromBackup
 		File startingDirectory = new File("");
 		while(true)
 		{
-			UiFileChooser chooser = new UiFileChooser();
 			String windowTitle = localization.getWindowTitle("RecoverKeyPair");
-			chooser.setDialogTitle(windowTitle);
-			chooser.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
-			chooser.setSelectedFile(new File("", " "));
-			chooser.setCurrentDirectory(startingDirectory);
 			boolean showCancelDlg = true;
 			boolean showUnableToRecoverDlg = false;
-			if (chooser.showOpenDialog(mainWindow) == JFileChooser.APPROVE_OPTION)
+			UiFileChooser.FileDialogResults results = UiFileChooser.displayFileOpenDialog(mainWindow, windowTitle, new File("", " "), startingDirectory);
+			if (!results.wasCancelChoosen())
 			{
-				File backupFile = chooser.getSelectedFile();
+				File backupFile = results.getFileChoosen();
 				try
 				{
 					attemptSignIn(backupFile);
@@ -87,7 +81,7 @@ public class UiRecoverKeyPairFromBackup
 				}
 				
 			}
-			startingDirectory = chooser.getCurrentDirectory();
+			startingDirectory = results.getCurrentDirectory();
 			if(showUnableToRecoverDlg)
 			{
 				if(!mainWindow.confirmDlg("UnableToRecoverFromBackupFile"))

@@ -42,7 +42,6 @@ import java.util.List;
 import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.JComponent;
-import javax.swing.JFileChooser;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -228,20 +227,18 @@ public class UiAttachmentEditor extends JPanel
 	{
 		public void actionPerformed(ActionEvent ae)
 		{
-			UiFileChooser chooser = new UiFileChooser();
 			File last = getLastAttachmentLoadDirectory();
-			if(last != null)
-				chooser.setCurrentDirectory(last);
 			UiBasicLocalization localization = mainWindow.getLocalization();
-			chooser.setApproveButtonText(localization.getButtonLabel("addattachment"));
-			int returnVal = chooser.showOpenDialog(UiAttachmentEditor.this);
-			if(returnVal == JFileChooser.APPROVE_OPTION)
-			{
-				File newAttachmentFile = chooser.getSelectedFile();
-				setLastAttachmentLoadDirectory(chooser.getCurrentDirectory());
-				AttachmentProxy a = new AttachmentProxy(newAttachmentFile);
-				model.add(a);
-			}
+			String buttonLabel = localization.getButtonLabel("addattachment");
+
+			UiFileChooser.FileDialogResults results = UiFileChooser.displayFileOpenDialog(UiAttachmentEditor.this, null, new File("", " "), last, buttonLabel, null);
+			if (results.wasCancelChoosen())
+				return;
+			
+			File newAttachmentFile = results.getFileChoosen();
+			setLastAttachmentLoadDirectory(results.getCurrentDirectory());
+			AttachmentProxy a = new AttachmentProxy(newAttachmentFile);
+			model.add(a);
 		}
 	}
 

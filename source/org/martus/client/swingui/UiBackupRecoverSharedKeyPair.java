@@ -33,8 +33,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Vector;
 
-import javax.swing.JFileChooser;
-
 import org.martus.client.core.MartusApp;
 import org.martus.common.MartusConstants;
 import org.martus.common.MartusUtilities;
@@ -184,14 +182,12 @@ public class UiBackupRecoverSharedKeyPair
 		File firstShareFile = null;
 		while(true)
 		{
-			UiFileChooser chooser = new UiFileChooser();
 			String windowTitle = localization.getWindowTitle("SaveShareKeyPair");
-			chooser.setDialogTitle(windowTitle);
-			chooser.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
-			chooser.setSelectedFile(new File("", " "));
-			if (chooser.showOpenDialog(mainWindow) == JFileChooser.APPROVE_OPTION)
+			UiFileChooser.FileDialogResults results = UiFileChooser.displayFileOpenDialog(mainWindow, windowTitle, new File("", " "));
+			
+			if (!results.wasCancelChoosen())
 			{
-				firstShareFile = chooser.getSelectedFile();
+				firstShareFile = results.getFileChoosen();
 				if(firstShareFile != null && firstShareFile.isFile())
 				{
 					if(getRootKeyShareFileName(firstShareFile) != null)
@@ -259,15 +255,13 @@ public class UiBackupRecoverSharedKeyPair
 	{
 		while(true)
 		{
-			UiFileChooser chooser = new UiFileChooser();
 			String windowTitle = localization.getWindowTitle("SaveShareKeyPair");
-			chooser.setDialogTitle(windowTitle);
-			chooser.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
 			String fileName = defaultFileName + "-1" + MartusApp.SHARE_KEYPAIR_FILENAME_EXTENSION;
-			chooser.setSelectedFile(new File("", fileName));
-			if (chooser.showSaveDialog(mainWindow) == JFileChooser.APPROVE_OPTION)
+			UiFileChooser.FileDialogResults results = UiFileChooser.displayFileSaveDialog(mainWindow, windowTitle, new File("", fileName));
+			
+			if (!results.wasCancelChoosen())
 			{	
-				File pathChoosen = chooser.getSelectedFile().getParentFile();
+				File pathChoosen = results.getCurrentDirectory();
 				String pathToUse = verifyBackupShareMediaType(pathChoosen);
 				if(pathToUse != null)
 					return pathToUse;

@@ -37,7 +37,6 @@ import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JDialog;
-import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JScrollPane;
@@ -140,18 +139,15 @@ public class UiExportBulletinsDlg extends JDialog implements ActionListener
 
 	File askForDestinationFile()
 	{
-		UiFileChooser chooser = new UiFileChooser();
-		chooser.setDialogTitle(mainWindow.getLocalization().getWindowTitle("ExportBulletinsSaveAs"));
-		chooser.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
+		String windowTitle = mainWindow.getLocalization().getWindowTitle("ExportBulletinsSaveAs");
 		if(defaultFileName != null && defaultFileName.length() > 0)
-		{
 			defaultFileName += ".xml";
-			chooser.setSelectedFile(new File(defaultFileName));
-		}
-		if (chooser.showSaveDialog(this) != JFileChooser.APPROVE_OPTION)
+	
+		UiFileChooser.FileDialogResults results = UiFileChooser.displayFileSaveDialog(UiExportBulletinsDlg.this, windowTitle, new File("", defaultFileName));
+		if (results.wasCancelChoosen())
 			return null;
 
-		File destFile = chooser.getSelectedFile();
+		File destFile = results.getFileChoosen();
 		if(destFile.exists())
 			if(!mainWindow.confirmDlg("OverWriteExistingFile"))
 				return null;

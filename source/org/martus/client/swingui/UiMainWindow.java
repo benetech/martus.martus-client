@@ -1398,41 +1398,40 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		
 		notifyDlg("BackupKeyPairInformation");
 		
-		UiFileChooser chooser = new UiFileChooser();
-		chooser.setDialogTitle(getLocalization().getWindowTitle("saveBackupKeyPair"));
-		chooser.setSelectedFile(new File(MartusApp.KEYPAIR_FILENAME));
-		if (chooser.showSaveDialog(this) == UiFileChooser.APPROVE_OPTION)
+		String windowTitle = getLocalization().getWindowTitle("saveBackupKeyPair");
+		UiFileChooser.FileDialogResults results = UiFileChooser.displayFileSaveDialog(this, windowTitle, new File("", MartusApp.KEYPAIR_FILENAME));
+		
+		if (results.wasCancelChoosen())
+			return;
+		File newBackupFile = results.getFileChoosen();
+		if(newBackupFile.exists())
+			if(!confirmDlg("OverWriteExistingFile"))
+				return;
+		try
 		{
-			File newBackupFile = chooser.getSelectedFile();
-			if(newBackupFile.exists())
-				if(!confirmDlg("OverWriteExistingFile"))
-					return;
-			try
-			{
-				FileInputStream input = new FileInputStream(keypairFile);
-				FileOutputStream output = new FileOutputStream(newBackupFile);
-		
-				int originalKeyPairFileSize = (int) keypairFile.length();
-				byte[] inputArray = new byte[originalKeyPairFileSize];
-		
-				input.read(inputArray);
-				output.write(inputArray);
-				input.close();
-				output.close();
-				if(FileVerifier.verifyFiles(keypairFile, newBackupFile))
-					notifyDlg("OperationCompleted");
-				else
-					notifyDlg("ErrorBackingupKeyPair");
-			}
-			catch (FileNotFoundException fnfe)
-			{
+			FileInputStream input = new FileInputStream(keypairFile);
+			FileOutputStream output = new FileOutputStream(newBackupFile);
+	
+			int originalKeyPairFileSize = (int) keypairFile.length();
+			byte[] inputArray = new byte[originalKeyPairFileSize];
+	
+			input.read(inputArray);
+			output.write(inputArray);
+			input.close();
+			output.close();
+			if(FileVerifier.verifyFiles(keypairFile, newBackupFile))
+				notifyDlg("OperationCompleted");
+			else
 				notifyDlg("ErrorBackingupKeyPair");
-			}
-			catch (IOException ioe)
-			{
-				System.out.println(ioe.getMessage());
-				notifyDlg("ErrorBackingupKeyPair");
-			}
+		}
+		catch (FileNotFoundException fnfe)
+		{
+			notifyDlg("ErrorBackingupKeyPair");
+		}
+		catch (IOException ioe)
+		{
+			System.out.println(ioe.getMessage());
+			notifyDlg("ErrorBackingupKeyPair");
 		}
 	}
 	
@@ -1460,33 +1459,34 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	{
 		if(!reSignIn())
 			return;
-		UiFileChooser chooser = new UiFileChooser();
-		chooser.setApproveButtonText(getLocalization().getButtonLabel("inputImportPublicCodeok"));
-		chooser.setFileFilter(new PublicInfoFileFilter());
-		chooser.setDialogTitle(getLocalization().getWindowTitle("ImportHQPublicKey"));
-    	chooser.setCurrentDirectory(new File(app.getCurrentAccountDirectoryName()));
-		int returnVal = chooser.showOpenDialog(this);
-		if(returnVal == UiFileChooser.APPROVE_OPTION)
+
+		String windowTitle = localization.getWindowTitle("ImportHQPublicKey");
+		String buttonLabel = localization.getButtonLabel("inputImportPublicCodeok");
+		
+		File currentDirectory = new File(app.getCurrentAccountDirectoryName());
+		FileFilter filter = new PublicInfoFileFilter();
+		UiFileChooser.FileDialogResults results = UiFileChooser.displayFileOpenDialog(this, windowTitle, null, currentDirectory, buttonLabel, filter);
+		if (results.wasCancelChoosen())
+			return;
+		
+		File importFile = results.getFileChoosen();
+		try
 		{
-			File importFile = chooser.getSelectedFile();
-			try
+			String publicKey = app.extractPublicInfo(importFile);
+			String publicCode = MartusCrypto.computePublicCode(publicKey);
+			if(confirmPublicCode(publicCode, "ImportPublicCode", "AccountCodeWrong"))
 			{
-				String publicKey = app.extractPublicInfo(importFile);
-				String publicCode = MartusCrypto.computePublicCode(publicKey);
-				if(confirmPublicCode(publicCode, "ImportPublicCode", "AccountCodeWrong"))
-				{
-					if(confirmDlg("SetImportPublicKey"))
-						app.setHQKey(publicKey);
-				}
+				if(confirmDlg("SetImportPublicKey"))
+					app.setHQKey(publicKey);
 			}
-			catch(MartusApp.SaveConfigInfoException e)
-			{
-				notifyDlg("ErrorSavingConfig");
-			}
-			catch(Exception e)
-			{
-				notifyDlg("PublicInfoFileError");
-			}
+		}
+		catch(MartusApp.SaveConfigInfoException e)
+		{
+			notifyDlg("ErrorSavingConfig");
+		}
+		catch(Exception e)
+		{
+			notifyDlg("PublicInfoFileError");
 		}
 	}
 
