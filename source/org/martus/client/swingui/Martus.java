@@ -30,6 +30,7 @@ import java.awt.Toolkit;
 
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
+import org.martus.swing.UiOptionPane;
 
 class Martus
 {
@@ -42,7 +43,7 @@ class Martus
 			final String errorMessage = "Requires Java version " + minimumJavaVersion + " or later!";
 			System.out.println(errorMessage);
 			Toolkit.getDefaultToolkit().beep();
-			JOptionPane.showMessageDialog(null, errorMessage, "Error", JOptionPane.ERROR_MESSAGE);
+			UiOptionPane.showMessageDialog(null, errorMessage, "Error", JOptionPane.ERROR_MESSAGE);
 			System.exit(2);
 		}
 

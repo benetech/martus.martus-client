@@ -48,7 +48,6 @@ public class UiSigninDlg extends UiBasicSigninDlg
 	public UiSigninDlg(UiBasicLocalization localizationToUse, CurrentUiState uiStateToUse, JFrame owner, int mode, String username, char[] password)
 	{
 		super(localizationToUse, uiStateToUse, owner, mode, username, password);
-		this.owner = owner;
 	}
 
 	protected JComponent getLanguageComponent()
@@ -86,10 +85,9 @@ public class UiSigninDlg extends UiBasicSigninDlg
 	{
 		if(localization.isOfficialTranslation(languageCodeChangingTo))
 			return;
-		UiMainWindow.displayUnofficialTranslationMessage(localization.getFieldLabel("warningUnofficialTranslation"));
+		UiMainWindow.displayUnofficialTranslationMessage(this.owner, localization.getFieldLabel("warningUnofficialTranslation"));
 	}
 
 	UiChoiceEditor languageDropdown;
-	JFrame owner;
 }
 

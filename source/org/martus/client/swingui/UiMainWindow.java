@@ -133,7 +133,6 @@ import org.martus.swing.UiLanguageDirection;
 import org.martus.swing.UiNotifyDlg;
 import org.martus.swing.UiOptionPane;
 import org.martus.swing.UiScrollPane;
-import org.martus.swing.UiWrappedTextArea;
 import org.martus.swing.Utilities;
 import org.martus.swing.Utilities.Delay;
 import org.martus.util.FileVerifier;
@@ -189,7 +188,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 			localization.setCurrentDateFormatCode(DateUtilities.getDefaultDateFormatCode());
 		}
 		if(!localization.isCurrentTranslationOfficial())
-			displayDefaultUnofficialTranslationMessage();
+			displayDefaultUnofficialTranslationMessage(currentActiveFrame);
 	}
 
 	public File getUiStateFile()
@@ -199,7 +198,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		return new File(app.getMartusDataRootDirectory(), "UiState.dat");
 	}
 	
-	static public void displayDefaultUnofficialTranslationMessage()
+	public void displayDefaultUnofficialTranslationMessage(JFrame owner)
 	{
 		URL untranslatedURL = UiMainWindow.class.getResource("UnofficialTranslationMessage.txt");
 		
@@ -209,7 +208,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 			UnicodeReader reader = new UnicodeReader(in);
 			String message = reader.readAll();
 			reader.close();
-			displayUnofficialTranslationMessage(message);
+			displayUnofficialTranslationMessage(owner, message);
 		}
 		catch(Exception e)
 		{
@@ -219,19 +218,13 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		
 	}
 	
-	static public void displayUnofficialTranslationMessage(String rawMessage)
+	static public void displayUnofficialTranslationMessage(JFrame owner, String rawMessage)
 	{
+		updateIcon(owner);
 		String[] buttons = { "OK" };
 		String newMessage = getWarningMessageAboutUnofficialTranslations(rawMessage);
-		UiWrappedTextArea msg = new UiWrappedTextArea(newMessage);
-		msg.setCaretPosition(0);
-
-		UiScrollPane messagePane = new UiScrollPane(msg, UiScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,UiScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-		UiOptionPane pane = new UiOptionPane(messagePane, UiOptionPane.WARNING_MESSAGE, UiOptionPane.DEFAULT_OPTION,
-								null, buttons);
 		Toolkit.getDefaultToolkit().beep();
-		JDialog dialog = pane.createDialog(null, null);
-		dialog.show();
+		new UiNotifyDlg(owner, "", new String[]{newMessage}, buttons);
 	}
 
 	private static String getWarningMessageAboutUnofficialTranslations(String originalMessage)
