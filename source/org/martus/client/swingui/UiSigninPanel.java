@@ -35,7 +35,6 @@ import javax.swing.AbstractAction;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.border.LineBorder;
 
@@ -98,7 +97,7 @@ public class UiSigninPanel extends JPanel implements VirtualKeyboardHandler
 		add(nameField);
 		
 		add(new JLabel(localization.getFieldLabel("password")), ParagraphLayout.NEW_PARAGRAPH);
-		passwordField = new JPasswordField(20);
+		passwordField = new UiPasswordField(20);
 		
 		switchToNormalKeyboard = new JButton(localization.getButtonLabel("VirtualKeyboardSwitchToNormal"));
 		switchToNormalKeyboard.addActionListener(new SwitchKeyboardHandler());
@@ -238,7 +237,7 @@ public class UiSigninPanel extends JPanel implements VirtualKeyboardHandler
 	private JLabel userNameDescription;
 	private JLabel passwordDescription;
 	private JTextField nameField;
-	private JPasswordField passwordField;
+	private UiPasswordField passwordField;
 	private JPanel passwordArea;
 	private JPanel virtualKeyboardPanel;
 	private JButton switchToNormalKeyboard;
