@@ -98,7 +98,7 @@ public class UiBackupRecoverSharedKeyPair
 		if(defaultFileName == null)
 			return;
 		
-		Vector keyShareBundles = mainWindow.getApp().getSecurity().getKeyShareBundles();
+		Vector keyShareBundles = mainWindow.getApp().getSecurity().buildKeyShareBundles();
 		if(keyShareBundles == null)
 		{
 			mainWindow.notifyDlg("ErrorBackingUpKeyShare");
