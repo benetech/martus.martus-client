@@ -38,6 +38,7 @@ import javax.swing.JFileChooser;
 import org.martus.client.core.MartusApp;
 import org.martus.common.MartusConstants;
 import org.martus.common.MartusUtilities;
+import org.martus.common.Version;
 import org.martus.common.crypto.MartusCrypto.KeyShareException;
 import org.martus.swing.UiFileChooser;
 import org.martus.util.UnicodeReader;
@@ -264,10 +265,32 @@ public class UiBackupRecoverSharedKeyPair
 			String fileName = defaultFileName + "-1" + MartusApp.SHARE_KEYPAIR_FILENAME_EXTENSION;
 			chooser.setSelectedFile(new File("", fileName));
 			if (chooser.showSaveDialog(mainWindow) == JFileChooser.APPROVE_OPTION)
-				return chooser.getSelectedFile().getParent();
+			{	
+				File pathChoosen = chooser.getSelectedFile().getParentFile();
+				String pathToUse = verifyBackupShareMediaType(pathChoosen);
+				if(pathToUse != null)
+					return pathToUse;
+			}
 			if(mainWindow.confirmDlg(mainWindow, "CancelShareBackup"))
 				break;
 		}	
+		return null;
+	}
+
+	private String verifyBackupShareMediaType(File pathChoosen)
+	{
+		String pathToUse = pathChoosen.getPath();
+		if(!Version.isRunningUnderWindows())
+			return pathToUse;
+		
+		File[] rootFiles = File.listRoots();
+		for(int i = 0 ; i < rootFiles.length; ++i)
+		{
+			if(rootFiles[i].equals(pathChoosen))
+				return pathToUse;
+		}
+		if(mainWindow.confirmDlg(mainWindow, "WarningPathChoosenMayNotBeRemoveable", UiBackupRecoverSharedKeyPair.getTokenReplacement()))
+			return pathToUse;
 		return null;
 	}
 

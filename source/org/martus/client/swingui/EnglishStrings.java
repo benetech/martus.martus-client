@@ -86,6 +86,7 @@ public class EnglishStrings
 "wintitle:confirmQuickEraseOutboxNotEmpty=Quick Erase Reminder",
 "wintitle:confirmCancelBackupRecovery=Cancel Backup Recovery",
 "wintitle:confirmUnableToRecoverFromBackupFile=Unable to Recover from Backup File",
+"wintitle:confirmWarningPathChoosenMayNotBeRemoveable=Questionable Media Choosen",
 
 
 "wintitle:notifyDropErrorNotAllowed=Cannot Move Bulletin(s)",
@@ -305,7 +306,7 @@ public class EnglishStrings
 "menu:changeUserNamePassword=Change User Name or Password",
 "menu:tools=Tools",
 "menu:QuickErase=Quick Erase",
-"menu:BackupMyKeyPair=Backup My Private Key",
+"menu:BackupMyKeyPairFile=Backup My Keypair",
 "menu:ExportMyPublicKey=Export My Public Key",
 "menu:ImportHQPublicKey=Import Headquarters Key",
 "menu:RemoveExistingHQPublicKey=Remove Existing Headquarters",
@@ -554,7 +555,9 @@ public class EnglishStrings
 "field:confirmCancelBackupRecoveryeffect=By choosing Yes, will exit Martus.",
 "field:confirmUnableToRecoverFromBackupFilecause=Recovery of Keypair failed, we suggest you try again with a different backup file. Choose Yes to try again, No to exit Martus.",
 "field:confirmUnableToRecoverFromBackupFileeffect=Choosing Yes will begin the recovery process again.",
-		
+"field:confirmWarningPathChoosenMayNotBeRemoveablecause=Are you sure the directory you chose to save your backup files to is removable?  You cannot save all #M# files to the same location without inserting a new disk for each backup file.",
+"field:confirmWarningPathChoosenMayNotBeRemoveableeffect=Choosing Yes will begin the backup process as instructed.",
+
 "field:notifyDropErrorNotAllowedcause=One or more bulletins cannot be moved to that folder. This may be because of their Draft/Sealed status, or their author.",
 "field:notifyDropErrorscause=An unexpected error occured while moving the bulletin(s). One or more files may be damaged.",
 "field:notifyPasteErrorNotAllowedcause=One or more bulletins cannot be pasted in that folder. This may be because of their Draft/Sealed status, or their author.",

@@ -34,7 +34,7 @@ public class ActionMenuBackupMyKeyPair extends UiMenuAction
 {
 	public ActionMenuBackupMyKeyPair(UiMainWindow mainWindowToUse)
 	{
-		super(mainWindowToUse, "BackupMyKeyPair");
+		super(mainWindowToUse, "BackupMyKeyPairFile");
 	}
 	
 	public void actionPerformed(ActionEvent ae)
