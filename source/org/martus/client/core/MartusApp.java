@@ -163,11 +163,6 @@ public class MartusApp
 		}
 	}
 
-	public void enableUploadLogging()
-	{
-		logUploads = true;
-	}
-
 	public void setServerInfo(String serverName, String serverKey, String serverCompliance)
 	{
 		configInfo.setServerName(serverName);
@@ -1551,7 +1546,6 @@ public class MartusApp
 	private ConfigInfo configInfo;
 	public NetworkInterface currentNetworkInterfaceHandler;
 	public ClientSideNetworkGateway currentNetworkInterfaceGateway;
-	boolean logUploads;
 	public String currentUserName;
 	private int maxNewFolders;
 

@@ -225,22 +225,6 @@ public class BackgroundUploader
 				uploadFromFolder.remove(uid);
 				app.store.saveFolders();
 				app.resetLastUploadedTime();
-				if(app.logUploads)
-				{
-					try
-					{
-						File file = new File(app.getUploadLogFilename());
-						UnicodeWriter log = new UnicodeWriter(file, UnicodeWriter.APPEND);
-						log.writeln(uid.getLocalId());
-						log.writeln(app.getConfigInfo().getServerName());
-						log.close();
-						log = null;
-					}
-					catch(Exception e)
-					{
-						System.out.println("MartusApp.backgroundUpload: " + e);
-					}
-				}
 			}
 			return uploadResult;
 		}
