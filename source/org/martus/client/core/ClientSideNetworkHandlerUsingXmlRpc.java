@@ -72,7 +72,7 @@ public class ClientSideNetworkHandlerUsingXmlRpc
 	{
 		Vector params = new Vector();
 		params.add(reservedForFuture);
-		Caller caller = new CallerWithTimeout(cmdGetServerInfo, params, 5);
+		Caller caller = new CallerWithTimeout(cmdGetServerInfo, params, secondsToTimeoutGetServerInfo);
 		return (Vector)callServer(server, caller);
 	}
 
@@ -184,16 +184,18 @@ public class ClientSideNetworkHandlerUsingXmlRpc
 	private Object callServer(String serverName, Caller caller)
 	{
 		int numPorts = ports.length;
+		int portIndexToTryNext = indexOfPortThatWorkedLast;
 		for(int i=0; i < numPorts; ++i)
 		{
-			int portIndex = (indexOfPortThatWorkedLast+i) % numPorts;
-			Vector result = caller.call(this, serverName, ports[portIndex]);
+			Vector result = caller.call(this, serverName, ports[portIndexToTryNext]);
 			
-			if(result != null && result.equals(RESULT_NO_SERVER))
-				continue;
-				
-			indexOfPortThatWorkedLast = portIndex;
-			return result;
+			if(result == null || !result.equals(RESULT_NO_SERVER))
+			{
+				indexOfPortThatWorkedLast = portIndexToTryNext;
+				return result;
+			}
+
+			portIndexToTryNext = (portIndexToTryNext+1) % numPorts;
 		}
 		return null;
 	}
@@ -336,4 +338,6 @@ public class ClientSideNetworkHandlerUsingXmlRpc
 	int[] ports;
 	
 	static Vector RESULT_NO_SERVER;
+
+	private static final int secondsToTimeoutGetServerInfo = 10;
 }
