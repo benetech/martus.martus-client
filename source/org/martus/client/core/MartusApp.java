@@ -942,48 +942,6 @@ public class MartusApp
 		}
 	}
 
-	public Vector getMyServerBulletinSummaries() throws ServerErrorException
-	{
-		if(!isSSLServerAvailable())
-			throw new ServerErrorException("No server");
-
-		String resultCode = "?";
-		try
-		{
-			NetworkResponse response = getCurrentNetworkInterfaceGateway().getSealedBulletinIds(getSecurity(), getAccountId(), BulletinSummary.getNormalRetrieveTags());
-			resultCode = response.getResultCode();
-			if(resultCode.equals(NetworkInterfaceConstants.OK))
-				return response.getResultVector();
-		}
-		catch (MartusSignatureException e)
-		{
-			System.out.println("MartusApp.getMyServerBulletinSummaries: " + e);
-			resultCode = NetworkInterfaceConstants.SIG_ERROR;
-		}
-		throw new ServerErrorException(resultCode);
-	}
-
-	public Vector getMyDraftServerBulletinSummaries() throws ServerErrorException
-	{
-		if(!isSSLServerAvailable())
-			throw new ServerErrorException("No server");
-
-		String resultCode = "?";
-		try
-		{
-			NetworkResponse response = getCurrentNetworkInterfaceGateway().getDraftBulletinIds(getSecurity(), getAccountId(), BulletinSummary.getNormalRetrieveTags());
-			resultCode = response.getResultCode();
-			if(resultCode.equals(NetworkInterfaceConstants.OK))
-				return response.getResultVector();
-		}
-		catch (MartusSignatureException e)
-		{
-			System.out.println("MartusApp.getMyDraftServerBulletinSummaries: " + e);
-			resultCode = NetworkInterfaceConstants.SIG_ERROR;
-		}
-		throw new ServerErrorException(resultCode);
-	}
-
 	public Vector downloadFieldOfficeAccountIds() throws ServerErrorException
 	{
 		if(!isSSLServerAvailable())

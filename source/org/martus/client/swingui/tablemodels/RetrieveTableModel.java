@@ -143,43 +143,41 @@ abstract public class RetrieveTableModel extends AbstractTableModel
 		return false;
 	}
 
-	public void getMySummaries() throws ServerErrorException
+	public void getMySealedSummaries() throws ServerErrorException
 	{
-		Vector summaryStrings = app.getMyServerBulletinSummaries();
 		String accountId = app.getAccountId();
-		markAsOnServer(accountId, summaryStrings);
-		createSummariesFromStrings(app.getAccountId(), summaryStrings);
+		SummaryRetriever retriever = new SealedSummaryRetriever(app, accountId);
+		retrieveSummaries(accountId, retriever);
 	}
 
 	public void getMyDraftSummaries() throws ServerErrorException
 	{
-		Vector summaryStrings = app.getMyDraftServerBulletinSummaries();
 		String accountId = app.getAccountId();
-		markAsOnServer(accountId, summaryStrings);
-		createSummariesFromStrings(accountId, summaryStrings);
+		SummaryRetriever retriever = new DraftSummaryRetriever(app, accountId);
+		retrieveSummaries(accountId, retriever);
 	}
 
 	public void getFieldOfficeSealedSummaries(String fieldOfficeAccountId) throws ServerErrorException
 	{
-		FieldOfficeSummaryRetriever retriever = new SealedFieldOfficeSummaryRetriever(app, fieldOfficeAccountId);
-
-		Vector summaryStrings = getFieldOfficeSummaryStringsFromServer(retriever);
-		String accountId = fieldOfficeAccountId;
-		markAsOnServer(accountId, summaryStrings);
-		createSummariesFromStrings(fieldOfficeAccountId, summaryStrings);
+		SummaryRetriever retriever = new SealedSummaryRetriever(app, fieldOfficeAccountId);
+		retrieveSummaries(fieldOfficeAccountId, retriever);
 	}
 
 	public void getFieldOfficeDraftSummaries(String fieldOfficeAccountId) throws ServerErrorException
 	{
-		FieldOfficeSummaryRetriever retriever = new DraftFieldOfficeSummaryRetriever(app, fieldOfficeAccountId);
+		SummaryRetriever retriever = new DraftSummaryRetriever(app, fieldOfficeAccountId);
+		retrieveSummaries(fieldOfficeAccountId, retriever);
+	}
 
-		Vector summaryStrings = getFieldOfficeSummaryStringsFromServer(retriever);
+	private void retrieveSummaries(String fieldOfficeAccountId, SummaryRetriever retriever) throws ServerErrorException
+	{
+		Vector summaryStrings = getSummaryStringsFromServer(retriever);
 		String accountId = fieldOfficeAccountId;
 		markAsOnServer(accountId, summaryStrings);
 		createSummariesFromStrings(fieldOfficeAccountId, summaryStrings);
 	}
 
-	private Vector getFieldOfficeSummaryStringsFromServer(FieldOfficeSummaryRetriever retriever) throws ServerErrorException
+	private Vector getSummaryStringsFromServer(SummaryRetriever retriever) throws ServerErrorException
 	{
 		try
 		{
@@ -318,16 +316,23 @@ abstract public class RetrieveTableModel extends AbstractTableModel
 		Integer sizeInK = new Integer(sizeKb);
 		return sizeInK;
 	}
-
-	static abstract class FieldOfficeSummaryRetriever
+	
+	static abstract class SummaryRetriever
 	{
-		FieldOfficeSummaryRetriever(MartusApp appToUse, String fieldOfficeAccountIdToUse)
+		SummaryRetriever(MartusApp appToUse, String accountIdToUse)
 		{
 			app = appToUse;
-			fieldOfficeAccountId = fieldOfficeAccountIdToUse;
+			accountId = accountIdToUse;
 		}
 		
-		abstract NetworkResponse getFieldOfficeSummaries() throws MartusSignatureException;
+		NetworkResponse getFieldOfficeSummaries() throws MartusSignatureException, ServerErrorException
+		{
+			if(!app.isSSLServerAvailable())
+				throw new ServerErrorException("No server");
+			return internalGetFieldOfficeSummaries();
+		}
+		
+		abstract NetworkResponse internalGetFieldOfficeSummaries() throws MartusSignatureException;
 		
 		protected MartusCrypto getSecurity()
 		{
@@ -347,33 +352,33 @@ abstract public class RetrieveTableModel extends AbstractTableModel
 		}
 
 		MartusApp app;
-		String fieldOfficeAccountId;
+		String accountId;
 	}
 
-	static class DraftFieldOfficeSummaryRetriever extends FieldOfficeSummaryRetriever
+	static class DraftSummaryRetriever extends SummaryRetriever
 	{
-		DraftFieldOfficeSummaryRetriever(MartusApp appToUse, String fieldOfficeAccountIdToUse)
+		DraftSummaryRetriever(MartusApp appToUse, String accountIdToUse)
 		{
-			super(appToUse, fieldOfficeAccountIdToUse);
+			super(appToUse, accountIdToUse);
 		}
 
-		NetworkResponse getFieldOfficeSummaries() throws MartusSignatureException
+		NetworkResponse internalGetFieldOfficeSummaries() throws MartusSignatureException
 		{
-			return getGateway().getDraftBulletinIds(getSecurity(), fieldOfficeAccountId, getSummaryTags());
+			return getGateway().getDraftBulletinIds(getSecurity(), accountId, getSummaryTags());
 		}
 		
 	}
 
-	static class SealedFieldOfficeSummaryRetriever extends FieldOfficeSummaryRetriever
+	static class SealedSummaryRetriever extends SummaryRetriever
 	{
-		SealedFieldOfficeSummaryRetriever(MartusApp appToUse, String fieldOfficeAccountIdToUse)
+		SealedSummaryRetriever(MartusApp appToUse, String accountIdToUse)
 		{
-			super(appToUse, fieldOfficeAccountIdToUse);
+			super(appToUse, accountIdToUse);
 		}
 
-		NetworkResponse getFieldOfficeSummaries() throws MartusSignatureException
+		NetworkResponse internalGetFieldOfficeSummaries() throws MartusSignatureException
 		{
-			return getGateway().getSealedBulletinIds(getSecurity(), fieldOfficeAccountId, getSummaryTags());
+			return getGateway().getSealedBulletinIds(getSecurity(), accountId, getSummaryTags());
 		}
 		
 	}

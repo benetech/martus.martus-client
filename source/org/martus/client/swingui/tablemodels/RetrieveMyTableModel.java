@@ -44,7 +44,7 @@ public class RetrieveMyTableModel extends RetrieveTableModelNonHQ
 	{
 		setProgressDialog(progressDlg);
 
-		getMySummaries();
+		getMySealedSummaries();
 		setCurrentSummaries();
 	}
 }
