@@ -855,14 +855,15 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		File accountsDir = app.getAccountsDirectory();
 		accountsDir.deleteOnExit();
 
-		String digestAccount1 = MartusCrypto.getHexDigest("hello");
-		File accountDirectory = app.getAccountDirectory(digestAccount1);
+		String dummyAccountId1 = "hello";
+		File accountDirectory = app.getAccountDirectory(dummyAccountId1);
 		assertEquals("No account directory yet and root is empty, so why isn't root directory used for this accounts directory", rootDir.getPath(), accountDirectory.getPath() );
 		
-		File account1Directory = new File(accountsDir, digestAccount1);
+		String digest1 = MartusCrypto.getHexDigest(dummyAccountId1);
+		File account1Directory = new File(accountsDir, digest1);
 		account1Directory.deleteOnExit();
 		account1Directory.mkdirs();
-		accountDirectory = app.getAccountDirectory(digestAccount1);
+		accountDirectory = app.getAccountDirectory(dummyAccountId1);
 		assertEquals("account directory exists why isn't it used?", account1Directory.getPath(), accountDirectory.getPath() );
 		
 		File rootKeyPair = new File(rootDir, MartusApp.KEYPAIR_FILENAME);
@@ -870,9 +871,10 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		FileOutputStream out = new FileOutputStream(rootKeyPair);
 		out.write(0);
 		out.close();
-		String digestAccount2 = MartusCrypto.getHexDigest("hellothere");
-		File account2Directory = new File(accountsDir, digestAccount2);
-		accountDirectory = app.getAccountDirectory(digestAccount2);
+		String dummyAccountId2 = "hellothere";
+		String digest2 = MartusCrypto.getHexDigest(dummyAccountId2);
+		File account2Directory = new File(accountsDir, digest2);
+		accountDirectory = app.getAccountDirectory(dummyAccountId2);
 		assertEquals("Root directory already has an account whey didn't we return account2's directory?", account2Directory.getPath(), accountDirectory.getPath() );
 		assertTrue("Directory should exist", accountDirectory.exists());
 		

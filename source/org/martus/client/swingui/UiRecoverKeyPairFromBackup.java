@@ -33,7 +33,6 @@ import javax.swing.JFileChooser;
 
 import org.martus.client.core.MartusApp;
 import org.martus.client.swingui.dialogs.UiSigninDlg;
-import org.martus.common.crypto.MartusCrypto;
 import org.martus.swing.UiFileChooser;
 
 
@@ -137,8 +136,9 @@ public class UiRecoverKeyPairFromBackup
 	
 	private boolean saveKeyPairToAccount()
 	{
-		String digestOfAccountsPublicCode = MartusCrypto.getHexDigest(app.getAccountId());
-		File keyPairFile = app.getKeyPairFile(app.getAccountDirectory(digestOfAccountsPublicCode));
+		String accountId = app.getAccountId();
+		File accountDirectory = app.getAccountDirectory(accountId);
+		File keyPairFile = app.getKeyPairFile(accountDirectory);
 		if(keyPairFile.exists())
 		{
 			if(!mainWindow.confirmDlg(mainWindow, "KeyPairFileExistsOverWrite"))

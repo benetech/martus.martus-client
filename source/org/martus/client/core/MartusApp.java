@@ -1152,8 +1152,10 @@ public class MartusApp
 		return accountDirectories;
 	}
 	
-	public File getAccountDirectory(String digestOfAccountsPublicCode)
+	public File getAccountDirectory(String accountId)
 	{
+		String digestOfAccountsPublicCode =
+			MartusCrypto.getHexDigest(accountId);
 		File accountDir = new File(getAccountsDirectory(), digestOfAccountsPublicCode);
 		if(accountDir.exists() && accountDir.isDirectory())
 			return accountDir;
@@ -1162,7 +1164,7 @@ public class MartusApp
 		accountDir.mkdirs();
 		return accountDir;
 	}
-	
+
 	public boolean doesAnyAccountExist()
 	{
 		Vector accountDirectories = getAllAccountDirectories();
