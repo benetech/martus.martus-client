@@ -26,8 +26,10 @@ Boston, MA 02111-1307, USA.
 
 package org.martus.client.swingui.actions;
 
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 
+import org.martus.client.core.QuickEraseOptions;
 import org.martus.client.swingui.UiLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.dialogs.UiQuickEraseConfirmDlg;
@@ -55,7 +57,6 @@ public class ActionMenuQuickErase extends UiMenuAction
 		checkDeleteKeyPair(mainWindow, options);	
 		checkExitWhenComplete(mainWindow, options);
 												
-		mainWindow.folderTreeContentsHaveChanged();		
 	}	
 
 	private void checkScrubData(UiMainWindow parent, QuickEraseOptions options)
@@ -67,13 +68,15 @@ public class ActionMenuQuickErase extends UiMenuAction
 		}
 		else
 			mainWindow.notifyDlg(mainWindow, "QuickEraseFailed");
+			
+		mainWindow.folderTreeContentsHaveChanged();		
 	}
 
 	private void checkExitWhenComplete(UiMainWindow parent, QuickEraseOptions options)
 	{
 		if (options.isExitWhenCompleteSelected())
 		{	
-			mainWindow.getApp().exitWhenCompleteQuickErase(options);
+			mainWindow.getApp().cleanupWhenCompleteQuickErase(options);
 			mainWindow.exitWithoutSavingState();		
 		}		
 	}
@@ -88,6 +91,7 @@ public class ActionMenuQuickErase extends UiMenuAction
 			String question = localization.getFieldLabel("confirmQuestionDeleteKeypair");
 			String[] contents = {cause,"", question};
 			
+			Toolkit.getDefaultToolkit().beep();
 			if (mainWindow.confirmDlg(mainWindow, title, contents))
 				mainWindow.getApp().scrubAndDeleteKeypair(options);	
 		}	

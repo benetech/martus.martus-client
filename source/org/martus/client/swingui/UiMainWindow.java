@@ -89,6 +89,7 @@ import org.martus.client.swingui.dialogs.UiLocalizeDlg;
 import org.martus.client.swingui.dialogs.UiModelessBusyDlg;
 import org.martus.client.swingui.dialogs.UiProgressRetrieveBulletinsDlg;
 import org.martus.client.swingui.dialogs.UiProgressRetrieveSummariesDlg;
+import org.martus.client.swingui.dialogs.UiRemoveServerDlg;
 import org.martus.client.swingui.dialogs.UiSearchDlg;
 import org.martus.client.swingui.dialogs.UiServerSummariesDlg;
 import org.martus.client.swingui.dialogs.UiShowScrollableTextDlg;
@@ -927,7 +928,17 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		repaint();
 		return pressedOk;
 	}
-
+	
+	public void doRemoveServer()
+	{
+		if(!reSignIn())
+			return;
+		
+		ConfigInfo info = app.getConfigInfo();
+		UiRemoveServerDlg dlg = new UiRemoveServerDlg(this, info);
+		dlg.show();	
+			
+	}
 
 	public void doConfigureServer()
 	{

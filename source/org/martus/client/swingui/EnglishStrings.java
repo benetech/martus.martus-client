@@ -210,6 +210,8 @@ public class EnglishStrings
 "wintitle:VerifyingKeyPairShare=Verifying Disk",
 
 "wintitle:notifyQuickEraseScrubWorked=Quick Erase",
+"wintitle:RemoveServer=Remove Server",
+
 
 "button:help=Help",
 "button:create=Create",
@@ -308,6 +310,8 @@ public class EnglishStrings
 "menu:paste=Paste",
 "menu:delete=Delete",
 "menu:selectall=Select All",
+
+"menu:RemoveServer=Remove Martus Server",
 
 "language:?=-Other-",
 "language:en=English",
@@ -660,6 +664,8 @@ public class EnglishStrings
 "field:ExitWhenComplete=Exit when complete",
 "field:confirmQuickEraseDeleteKeyPaircause=This will scrub and delete keypair files on this computer.",
 "field:confirmQuestionDeleteKeypair=Are you really sure?",
+
+"field:SelectServer=Select Server",
 
 
 "field:DateRangeFrom=Between",

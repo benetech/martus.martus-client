@@ -95,6 +95,7 @@ public class UiMenuBar extends JMenuBar
 		server.add(UiActions.newActionMenuRetrieveHQDraftBulletins(mainWindow));
 		server.addSeparator();
 		server.add(UiActions.newActionMenuSelectServer(mainWindow));
+		server.add(UiActions.newActionMenuRemoveServer(mainWindow));
 
 
 		JMenu options = new JMenu(localization.getMenuLabel("options"));

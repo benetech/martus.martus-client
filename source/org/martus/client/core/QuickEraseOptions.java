@@ -24,7 +24,7 @@ Boston, MA 02111-1307, USA.
 
 */
 
-package org.martus.client.swingui.actions;
+package org.martus.client.core;
 
 public class QuickEraseOptions
 {	

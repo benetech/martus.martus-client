@@ -43,7 +43,7 @@ import java.util.Vector;
 import org.martus.client.core.ClientSideNetworkHandlerUsingXmlRpc.SSLSocketSetupException;
 import org.martus.client.core.Exceptions.ServerCallFailedException;
 import org.martus.client.core.Exceptions.ServerNotAvailableException;
-import org.martus.client.swingui.actions.QuickEraseOptions;
+import org.martus.client.core.QuickEraseOptions;
 import org.martus.common.FieldSpec;
 import org.martus.common.MartusConstants;
 import org.martus.common.MartusUtilities;
@@ -79,6 +79,7 @@ import org.martus.util.ScrubFile;
 
 public class MartusApp
 {
+	
 	public MartusApp(Localization localizationToUse) throws MartusAppInitializationException
 	{
 		this(null, determineMartusDataRootDirectory(), localizationToUse);
@@ -489,7 +490,7 @@ public class MartusApp
 		return newFolder;
 	}
 	
-	public void exitWhenCompleteQuickErase(QuickEraseOptions opts)
+	public void cleanupWhenCompleteQuickErase(QuickEraseOptions opts)
 	{
 		if (opts.isExitWhenCompleteSelected())
 			store.deleteFolders();	

@@ -614,7 +614,7 @@ public class BulletinStore
 				}				
 			}			
 		}
-
+	
 		PacketScrubber ac = new PacketScrubber();
 		database.visitAllRecords(ac);
 		deleteFolders();

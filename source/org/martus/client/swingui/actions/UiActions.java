@@ -177,6 +177,11 @@ public class UiActions
 	{
 		return new ActionMenuSelectServer(mainWindowToUse);
 	}
+	
+	static public UiMartusAction newActionMenuRemoveServer(UiMainWindow mainWindowToUse)
+	{
+		return new ActionMenuRemoveServer(mainWindowToUse);
+	}
 
 	static public UiMartusAction newActionMenuPreferences(UiMainWindow mainWindowToUse)
 	{
@@ -593,6 +598,19 @@ public class UiActions
 		public void actionPerformed(ActionEvent ae)
 		{
 			mainWindow.doConfigureServer();
+		}
+	}
+	
+	private static class ActionMenuRemoveServer extends UiMenuAction
+	{
+		public ActionMenuRemoveServer(UiMainWindow mainWindowToUse)
+		{
+			super(mainWindowToUse, "RemoveServer");
+		}
+
+		public void actionPerformed(ActionEvent ae)
+		{
+			mainWindow.doRemoveServer();
 		}
 	}
 
