@@ -82,6 +82,7 @@ import org.martus.common.network.NetworkInterface;
 import org.martus.common.network.NetworkInterfaceConstants;
 import org.martus.common.network.NonSSLNetworkAPI;
 import org.martus.common.network.NetworkResponse;
+import org.martus.common.packet.BulletinHeaderPacket;
 import org.martus.common.packet.FieldDataPacket;
 import org.martus.common.packet.Packet;
 import org.martus.common.packet.UniversalId;
@@ -993,12 +994,19 @@ public class MartusApp
 
 		return networkInterfaceGateway.downloadFieldOfficeAccountIds(security, myAccountId);
 	}
-
-	public FieldDataPacket retrieveFieldDataPacketFromServer(String authorAccountId, String bulletinLocalId, String dataPacketLocalId) throws Exception
+	
+	public BulletinHeaderPacket retrieveHeaderPacketFromServer(UniversalId bulletinId) throws Exception
 	{
-		UniversalId packetUid = UniversalId.createFromAccountAndLocalId(authorAccountId, dataPacketLocalId);
+		BulletinHeaderPacket bhp = new BulletinHeaderPacket(bulletinId);
+		populatePacketFromServer(bhp, bulletinId.getLocalId());
+		return bhp;
+	}
+
+	public FieldDataPacket retrieveFieldDataPacketFromServer(UniversalId bulletinId, String dataPacketLocalId) throws Exception
+	{
+		UniversalId packetUid = UniversalId.createFromAccountAndLocalId(bulletinId.getAccountId(), dataPacketLocalId);
 		FieldDataPacket fdp = new FieldDataPacket(packetUid, StandardFieldSpecs.getDefaultPublicFieldSpecs());
-		populatePacketFromServer(fdp, bulletinLocalId);
+		populatePacketFromServer(fdp, bulletinId.getLocalId());
 		return fdp;
 	}
 
@@ -1047,7 +1055,7 @@ public class MartusApp
 	
 		try
 		{
-			return retrieveFieldDataPacketFromServer(accountId, bulletinLocalId, packetlocalId);
+			return retrieveFieldDataPacketFromServer(uId, packetlocalId);
 		}
 		catch(Exception e)
 		{
