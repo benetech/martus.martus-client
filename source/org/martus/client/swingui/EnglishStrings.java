@@ -91,8 +91,10 @@ public class EnglishStrings
 "wintitle:confirmRetrieveNewerVersions=Confirm Retrieving Newer Versions",
 
 "wintitle:notifyDropErrorBulletinExists=Cannot Move Bulletin(s)",
+"wintitle:notifyDropErrorBulletinOlder=Cannot Move Bulletin(s)",
 "wintitle:notifyDropErrors=Error Moving Bulletin(s)",
 "wintitle:notifyPasteErrorBulletinAlreadyExists=Cannot Paste Bulletin(s)",
+"wintitle:PasteErrorBulletinOlder=Cannot Paste Bulletin(s)",
 "wintitle:notifyPasteError=Error Pasting Bulletin(s)",
 "wintitle:notifyretrieveworked=Retrieve Bulletins",
 "wintitle:notifyretrievefailed=Retrieve Bulletins",
@@ -616,8 +618,10 @@ public class EnglishStrings
 "field:confirmRetrieveNewerVersionseffect=Each older version will be replaced by the newer version from the server.",
 
 "field:notifyDropErrorBulletinExistscause=One or more bulletins cannot be moved to that folder, because it already exists in that folder.",
+"field:notifyDropErrorBulletinOldercause=One or more bulletins cannot be moved to that folder, because a newer version of this bulletin already exists.",
 "field:notifyDropErrorscause=An unexpected error occurred while moving the bulletin(s). One or more files may be damaged.",
 "field:notifyPasteErrorBulletinAlreadyExistscause=One or more bulletins cannot be pasted in that folder, because they already exist in this folder.",
+"field:notifyPasteErrorBulletinOldercause=One or more bulletins cannot be pasted in that folder, because a newer version of this bulletin already exists.",
 "field:notifyPasteErrorcause=An unexpected error occurred while pasting the bulletin(s). One or more files may be damaged.",
 "field:notifyretrieveworkedcause=All of the selected bulletins were successfully retrieved from the server",
 "field:notifyretrievefailedcause=Error: Unable to retrieve bulletins from the server",

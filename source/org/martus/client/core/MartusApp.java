@@ -48,6 +48,7 @@ import java.util.jar.JarFile;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 import org.martus.client.core.ClientBulletinStore.BulletinAlreadyExistsException;
+import org.martus.client.core.ClientBulletinStore.BulletinOlderException;
 import org.martus.client.search.BulletinSearcher;
 import org.martus.client.search.SearchParser;
 import org.martus.client.search.SearchTreeNode;
@@ -928,6 +929,9 @@ public class MartusApp
 				catch (BulletinAlreadyExistsException safeToIgnoreException)
 				{
 				}
+				catch (BulletinOlderException safeToIgnoreException)
+				{
+				}
 				catch (IOException e)
 				{
 					// TODO Auto-generated catch block
@@ -1598,7 +1602,7 @@ public class MartusApp
 		return file;
 	}
 
-	public void saveBulletin(Bulletin bulletinToSave, BulletinFolder outboxToUse) throws IOException, CryptoException
+	public void saveBulletin(Bulletin bulletinToSave, BulletinFolder outboxToUse) throws CryptoException, IOException, BulletinOlderException
 	{
 		store.saveBulletin(bulletinToSave);
 		store.ensureBulletinIsInFolder(store.getFolderSaved(), bulletinToSave.getUniversalId());

@@ -544,7 +544,14 @@ public class ClientBulletinStore extends BulletinStore
 		for (int i = 0; i < bulletinUids.size(); i++) 
 		{
 			UniversalId uid = (UniversalId)bulletinUids.get(i);
-			ensureBulletinIsInFolder(folder, uid);
+			try
+			{
+				ensureBulletinIsInFolder(folder, uid);
+			}
+			catch(BulletinOlderException harmlessException)
+			{
+				System.out.println("Exception: Bulletin:"+uid+" is older.");
+			}
 		}
 	}
 
@@ -605,7 +612,7 @@ public class ClientBulletinStore extends BulletinStore
 		{
 			ensureBulletinIsInFolder(getFolderOnServer(), uid);
 		}
-		catch(IOException ignoreForNow)
+		catch(Exception ignoreForNow)
 		{
 			// TODO: Figure out if this should be propagated
 			ignoreForNow.printStackTrace();
@@ -625,7 +632,7 @@ public class ClientBulletinStore extends BulletinStore
 		{
 			ensureBulletinIsInFolder(getFolderNotOnServer(), uid);
 		}
-		catch(IOException ignoreForNow)
+		catch(Exception ignoreForNow)
 		{
 			// TODO: Figure out if this should be propagated
 			ignoreForNow.printStackTrace();
@@ -860,7 +867,7 @@ public class ClientBulletinStore extends BulletinStore
 		return createFolder(name);
 	}
 
-	public void ensureBulletinIsInFolder(BulletinFolder folder, UniversalId uid) throws IOException
+	public void ensureBulletinIsInFolder(BulletinFolder folder, UniversalId uid) throws IOException, BulletinOlderException
 	{
 		try
 		{
@@ -877,14 +884,14 @@ public class ClientBulletinStore extends BulletinStore
 		return bulletinUidsInSystem.contains(b.getUniversalId());
 	}
 
-	public synchronized void addBulletinToFolder(BulletinFolder folder, UniversalId uidToAdd) throws BulletinAlreadyExistsException, IOException
+	public synchronized void addBulletinToFolder(BulletinFolder folder, UniversalId uidToAdd) throws BulletinAlreadyExistsException, IOException, BulletinOlderException
 	{
 		Bulletin b = getBulletinRevision(uidToAdd);
 		if(b == null)
 			return;
 		
 		if(folder.isVisible() && !isLeaf(b))
-			return;
+			throw new BulletinOlderException();
 		
 		folder.add(uidToAdd);
 
@@ -1160,14 +1167,17 @@ public class ClientBulletinStore extends BulletinStore
 
 	public static class BulletinAlreadyExistsException extends Exception {}
 	
+	public static class BulletinOlderException extends Exception {}
+
 	public void importZipFileBulletin(File zipFile, BulletinFolder toFolder, boolean forceSameUids) throws
 			InvalidPacketException,
 			SignatureVerificationException,
 			WrongPacketTypeException,
 			CryptoException,
-			IOException,
 			InvalidBase64Exception, 
-			BulletinAlreadyExistsException
+			BulletinAlreadyExistsException, 
+			IOException, 
+			BulletinOlderException
 	{
 		ZipFile zip = new ZipFile(zipFile);
 		try

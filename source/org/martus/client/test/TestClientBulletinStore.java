@@ -39,6 +39,7 @@ import org.martus.client.core.BulletinFolder;
 import org.martus.client.core.ClientBulletinStore;
 import org.martus.client.core.MartusClientXml;
 import org.martus.client.core.ClientBulletinStore.BulletinAlreadyExistsException;
+import org.martus.client.core.ClientBulletinStore.BulletinOlderException;
 import org.martus.common.FieldSpec;
 import org.martus.common.HQKey;
 import org.martus.common.HQKeys;
@@ -884,7 +885,14 @@ public class TestClientBulletinStore extends TestCaseEnhanced
 		BulletinFolder aFolder = clientStore.createFolder("a");
 		clientStore.addBulletinToFolder(aFolder, clone.getUniversalId());
 		assertEquals("Should only have 1 bulletin in folder", 1, aFolder.getBulletinCount());
-		clientStore.addBulletinToFolder(aFolder, original.getUniversalId());
+		try
+		{
+			clientStore.addBulletinToFolder(aFolder, original.getUniversalId());
+			fail("Should have thrown here.");
+		}
+		catch(BulletinOlderException expected)
+		{
+		}
 		assertEquals("Should still only have 1 bulletin in folder since there is a newer version", 1, aFolder.getBulletinCount());
 		clientStore.deleteAllBulletins();
 	}
