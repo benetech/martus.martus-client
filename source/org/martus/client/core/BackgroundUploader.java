@@ -174,10 +174,7 @@ public class BackgroundUploader
 			if(uploadResult.result.equals(NetworkInterfaceConstants.OK) || 
 					uploadResult.result.equals(NetworkInterfaceConstants.DUPLICATE))
 			{
-				BulletinFolder onServer = store.getFolderOnServer();
-				BulletinFolder notOnServer = store.getFolderNotOnServer();
-				
-				store.moveBulletin(b, notOnServer, onServer);
+				store.setIsOnServer(b);
 				uploadFromFolder.remove(uploadResult.uid);
 				store.saveFolders();
 				

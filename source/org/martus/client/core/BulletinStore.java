@@ -724,7 +724,17 @@ public class BulletinStore
 		folder.preventDelete();
 		return folder;
 	}
+	
+	public void setIsOnServer(Bulletin b)
+	{
+		moveBulletin(b, getFolderNotOnServer(), getFolderOnServer());
+	}
 
+	public void setIsNotOnServer(Bulletin b)
+	{
+		moveBulletin(b, getFolderOnServer(), getFolderNotOnServer());
+	}
+	
 	public synchronized void moveBulletin(Bulletin b, BulletinFolder from, BulletinFolder to)
 	{
 		if(from.equals(to))
@@ -735,7 +745,7 @@ public class BulletinStore
 		}
 		catch (BulletinAlreadyExistsException e)
 		{
-			System.out.println("Bulletin already exists in destination folder");
+			//System.out.println("Bulletin already exists in destination folder");
 		}
 		catch (IOException e)
 		{

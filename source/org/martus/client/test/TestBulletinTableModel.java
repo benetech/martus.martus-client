@@ -180,19 +180,17 @@ public class TestBulletinTableModel extends TestCaseEnhanced
 		assertEquals("should be unknown", "", list.getValueAt(row, WASSENT));
 
 		BulletinFolder draftOutbox = store.getFolderDraftOutbox();
-		BulletinFolder onServer = store.getFolderOnServer();
-		BulletinFolder notOnServer = store.getFolderNotOnServer();
 
-		store.addBulletinToFolder(onServer, uid);
+		store.setIsOnServer(myDraft);
 		assertEquals("on server should be respected", localization.getFieldLabel("WasSentYes"), list.getValueAt(row, WASSENT));
 		
-		store.moveBulletin(myDraft, onServer, notOnServer);
+		store.setIsNotOnServer(myDraft);
 		assertEquals("not on server should be respected", localization.getFieldLabel("WasSentNo"), list.getValueAt(row, WASSENT));
 
 		store.addBulletinToFolder(draftOutbox, uid);
 		assertEquals("not on server and in outbox should be unsent", localization.getFieldLabel("WasSentNo"), list.getValueAt(row, WASSENT));
 
-		store.moveBulletin(myDraft, notOnServer, onServer);
+		store.setIsOnServer(myDraft);
 		assertEquals("on server but in outbox should be No", localization.getFieldLabel("WasSentNo"), list.getValueAt(row, WASSENT));
 	}
 	
@@ -211,18 +209,17 @@ public class TestBulletinTableModel extends TestCaseEnhanced
 
 		BulletinFolder draftOutbox = store.getFolderDraftOutbox();
 		BulletinFolder onServer = store.getFolderOnServer();
-		BulletinFolder notOnServer = store.getFolderNotOnServer();
 
 		store.addBulletinToFolder(onServer, uid);
 		assertEquals("on server should be respected", localization.getFieldLabel("WasSentYes"), list.getValueAt(row, WASSENT));
 		
-		store.moveBulletin(notMine, onServer, notOnServer);
+		store.setIsNotOnServer(notMine);
 		assertEquals("not on server should be respected", localization.getFieldLabel("WasSentNo"), list.getValueAt(row, WASSENT));
 
 		store.addBulletinToFolder(draftOutbox, uid);
 		assertEquals("not on server and in outbox should be unsent", localization.getFieldLabel("WasSentNo"), list.getValueAt(row, WASSENT));
 
-		store.moveBulletin(notMine, notOnServer, onServer);
+		store.setIsOnServer(notMine);
 		assertEquals("on server but in outbox should be unknown", "", list.getValueAt(row, WASSENT));
 	}
 

@@ -130,7 +130,7 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		assertFalse("marked as sent?", onServer.contains(b));
 		assertTrue("didn't mark as unsent?", notOnServer.contains(b));
 		
-		store.moveBulletin(b, notOnServer, onServer);
+		store.setIsOnServer(b);
 		store.moveBulletin(b, outbox, discarded);
 		appWithAccount.saveBulletin(b, outbox);
 		assertFalse("didn't remove from discarded?", discarded.contains(b));

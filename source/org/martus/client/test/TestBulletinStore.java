@@ -608,6 +608,46 @@ public class TestBulletinStore extends TestCaseEnhanced
 		assertEquals("still in a", true, folderA.contains(b));
 		assertEquals("still not in b again", false, folderB.contains(b));
 	}
+	
+	public void testSetIsOnServer() throws Exception
+	{
+		BulletinFolder on = store.getFolderOnServer();
+		BulletinFolder notOn = store.getFolderNotOnServer();
+		
+		Bulletin b = store.createEmptyBulletin();
+		store.saveBulletin(b);
+		store.setIsOnServer(b);
+		assertTrue("not in on?", on.contains(b));
+		assertFalse("in not on?", notOn.contains(b));
+		store.setIsOnServer(b);
+		assertTrue("not still in on?", on.contains(b));
+		assertFalse("now in not on?", notOn.contains(b));
+		
+		store.moveBulletin(b, on, notOn);
+		store.setIsOnServer(b);
+		assertTrue("not again in on?", on.contains(b));
+		assertFalse("still in not on?", notOn.contains(b));
+	}
+
+	public void testSetIsNotOnServer() throws Exception
+	{
+		BulletinFolder on = store.getFolderOnServer();
+		BulletinFolder notOn = store.getFolderNotOnServer();
+		
+		Bulletin b = store.createEmptyBulletin();
+		store.saveBulletin(b);
+		store.setIsNotOnServer(b);
+		assertTrue("not in not on?", notOn.contains(b));
+		assertFalse("in on?", on.contains(b));
+		store.setIsNotOnServer(b);
+		assertTrue("not still in not on?", notOn.contains(b));
+		assertFalse("now in on?", on.contains(b));
+		
+		store.moveBulletin(b, notOn, on);
+		store.setIsNotOnServer(b);
+		assertTrue("not again in not on?", notOn.contains(b));
+		assertFalse("still in on?", on.contains(b));
+	}
 
 	public void testAddBulletinToFolder() throws Exception
 	{
