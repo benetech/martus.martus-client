@@ -30,13 +30,14 @@ import javax.swing.JComponent;
 import javax.swing.JLabel;
 
 import org.martus.common.clientside.ChoiceItem;
+import org.martus.swing.UiLabel;
 
 public class UiChoiceViewer extends UiField
 {
 	public UiChoiceViewer(ChoiceItem[] choicesToUse)
 	{
 		choices = choicesToUse;
-		widget = new JLabel();
+		widget = new UiLabel();
 	}
 
 	public JComponent getComponent()

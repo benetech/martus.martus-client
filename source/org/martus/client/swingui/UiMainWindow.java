@@ -54,16 +54,17 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.TimerTask;
 import java.util.Vector;
+
 import javax.print.attribute.HashPrintRequestAttributeSet;
 import javax.swing.AbstractAction;
 import javax.swing.ImageIcon;
 import javax.swing.JComponent;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSplitPane;
 import javax.swing.SwingUtilities;
+
 import org.martus.client.core.BackgroundUploader;
 import org.martus.client.core.BulletinFolder;
 import org.martus.client.core.ClientBulletinStore;
@@ -131,6 +132,7 @@ import org.martus.common.utilities.DateUtilities;
 import org.martus.swing.JComponentVista;
 import org.martus.swing.PrintPageFormat;
 import org.martus.swing.UiFileChooser;
+import org.martus.swing.UiLabel;
 import org.martus.swing.UiLanguageDirection;
 import org.martus.swing.UiNotifyDlg;
 import org.martus.swing.UiOptionPane;
@@ -1190,7 +1192,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		boolean yourBulletin = currentBulletin.getAccount().equals(getApp().getAccountId());	
 		BulletinHtmlGenerator generator = new BulletinHtmlGenerator(width, getLocalization() );
 		String html = generator.getHtmlString(currentBulletin, getStore().getDatabase(), dlg.isIncludePrivateChecked(), yourBulletin);
-		JComponent view = new JLabel(html);
+		JComponent view = new UiLabel(html);
 		
 		JFrame frame = new JFrame();
 		UiScrollPane scroller = new UiScrollPane();

@@ -30,6 +30,7 @@ import javax.swing.JComponent;
 import javax.swing.JLabel;
 
 import org.martus.common.clientside.UiBasicLocalization;
+import org.martus.swing.UiLabel;
 
 
 public class UiFlexiDateViewer extends UiField
@@ -37,7 +38,7 @@ public class UiFlexiDateViewer extends UiField
 	public UiFlexiDateViewer(UiBasicLocalization localizationToUse)
 	{
 		localization = localizationToUse;
-		label = new JLabel();
+		label = new UiLabel();
 	}
 
 	public JComponent getComponent()

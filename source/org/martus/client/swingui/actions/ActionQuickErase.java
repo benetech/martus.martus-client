@@ -30,15 +30,18 @@ import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Vector;
+
 import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
+
 import org.martus.client.core.MartusApp;
 import org.martus.client.swingui.UiLocalization;
 import org.martus.client.swingui.UiMainWindow;
+import org.martus.swing.UiLabel;
 import org.martus.swing.UiWrappedTextArea;
 import org.martus.swing.Utilities;
 
@@ -127,7 +130,7 @@ public abstract class ActionQuickErase extends UiMenuAction
 			String warningMsg = "<html><p align='center'><font size=8><b>" +
 				localization.getFieldLabel("RemoveMartusFromSystemWarning") + 
 				"</b</font></p></html>";
-			JLabel warningLabel = new JLabel(warningMsg);
+			JLabel warningLabel = new UiLabel(warningMsg);
 			warningLabel.setBackground(Color.YELLOW);
 			warningLabel.setForeground(Color.BLACK);
 			warningLabelPanel.add(warningLabel);
@@ -159,11 +162,11 @@ public abstract class ActionQuickErase extends UiMenuAction
 							"<br></br>"+
 							localization.getFieldLabel("RemoveMartusFromSystemMultipleAccountsWarning2") +
 							"</b</font></p></html>";
-					JLabel multipleAccountsText = new JLabel(multipleMsg);
+					JLabel multipleAccountsText = new UiLabel(multipleMsg);
 					multipleAccountsText.setBackground(Color.WHITE);
 					multipleAccountsText.setForeground(Color.BLACK);
 					multipleAccountPanel.add(multipleAccountsText);
-					vBox.add(new JLabel(" "));
+					vBox.add(new UiLabel(" "));
 					vBox.add(multipleAccountPanel);
 				}
 				warningMessage += "\n* ";
@@ -171,7 +174,7 @@ public abstract class ActionQuickErase extends UiMenuAction
 			}
 			warningMessage += "\n* ";
 			warningMessage += localization.getFieldLabel("QuickEraseWillExitMartus");
-			vBox.add(new JLabel(" "));
+			vBox.add(new UiLabel(" "));
 			
 			UiWrappedTextArea text = new UiWrappedTextArea(warningMessage);
 			text.setBackground(Color.WHITE);
@@ -189,7 +192,7 @@ public abstract class ActionQuickErase extends UiMenuAction
 			hBox.add(okButton);
 			hBox.add(Box.createHorizontalGlue());
 			hBox.add(cancelButton);
-			vBox.add(new JLabel(" "));
+			vBox.add(new UiLabel(" "));
 			vBox.add(hBox);
 			panel.add(vBox);
 			

@@ -52,6 +52,7 @@ import javax.swing.tree.TreeSelectionModel;
 import org.martus.client.core.BulletinFolder;
 import org.martus.client.core.ClientBulletinStore;
 import org.martus.client.swingui.UiMainWindow;
+import org.martus.swing.UiLabel;
 import org.martus.swing.UiLanguageDirection;
 
 
@@ -167,7 +168,7 @@ class UiFolderTree extends JTree implements TreeSelectionListener
 	{
 		FolderTreeNodeRenderer()
 		{
-			label = new JLabel();
+			label = new UiLabel();
 			label.setHorizontalAlignment(UiLanguageDirection.getHorizontalAlignment());
 			label.setComponentOrientation(UiLanguageDirection.getComponentOrientation());
 			label.setOpaque(true);

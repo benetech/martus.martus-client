@@ -31,17 +31,20 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.text.DateFormat;
 import java.util.Date;
+
 import javax.swing.Box;
 import javax.swing.ButtonGroup;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+
 import org.martus.common.FieldSpec;
 import org.martus.common.StandardFieldSpecs;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.clientside.UiBasicLocalization;
 import org.martus.common.utilities.MartusFlexidate;
 import org.martus.swing.UiComboBox;
+import org.martus.swing.UiLabel;
 import org.martus.swing.UiParagraphPanel;
 import org.martus.swing.UiRadioButton;
 
@@ -77,9 +80,9 @@ public class UiFlexiDateEditor extends UiField
 	private JPanel buildFlexiDatePanel()
 	{	
 		UiParagraphPanel beginDate = new UiParagraphPanel();
-		beginDate.addComponents(new JLabel(localization.getFieldLabel("DateRangeFrom")), buildBeginDateBox());		
+		beginDate.addComponents(new UiLabel(localization.getFieldLabel("DateRangeFrom")), buildBeginDateBox());		
 		UiParagraphPanel endDate = new UiParagraphPanel();
-		endDate.addComponents(new JLabel(localization.getFieldLabel("DateRangeTo")), buildEndDateBox());
+		endDate.addComponents(new UiLabel(localization.getFieldLabel("DateRangeTo")), buildEndDateBox());
 
 		flexiDatePanel = new UiParagraphPanel();
 		flexiDatePanel.addComponents(beginDate, endDate);
@@ -89,7 +92,7 @@ public class UiFlexiDateEditor extends UiField
 	private JPanel buildExactDatePanel()
 	{		
 		UiParagraphPanel singleDatePanel = new UiParagraphPanel();
-		JLabel exactDateLabel = new JLabel(localization.getFieldLabel("DateRangeFrom"));		
+		JLabel exactDateLabel = new UiLabel(localization.getFieldLabel("DateRangeFrom"));		
 		singleDatePanel.addComponents(exactDateLabel,  buildBeginDateBox());					
 		exactDateLabel.setForeground(component.getBackground());		
 

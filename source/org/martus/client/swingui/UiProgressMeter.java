@@ -38,6 +38,7 @@ import javax.swing.border.BevelBorder;
 import org.martus.client.swingui.dialogs.UiProgressRetrieveDlg;
 import org.martus.common.ProgressMeterInterface;
 import org.martus.common.clientside.UiBasicLocalization;
+import org.martus.swing.UiLabel;
 import org.martus.swing.UiLanguageDirection;
 import org.martus.swing.Utilities;
 
@@ -50,7 +51,7 @@ public class UiProgressMeter extends JPanel implements ProgressMeterInterface
 		
 		setLayout( new BoxLayout( this, BoxLayout.X_AXIS) );
 		parentDlg = dlg;
-		statusMessage = new JLabel("     ", UiLanguageDirection.getHorizontalAlignment());
+		statusMessage = new UiLabel("     ", UiLanguageDirection.getHorizontalAlignment());
 		statusMessage.setMinimumSize(new Dimension(60, 25));
 
 		progressMeter = new JProgressBar(0, 10);

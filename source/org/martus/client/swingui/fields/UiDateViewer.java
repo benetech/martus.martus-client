@@ -30,13 +30,14 @@ import javax.swing.JComponent;
 import javax.swing.JLabel;
 
 import org.martus.common.clientside.UiBasicLocalization;
+import org.martus.swing.UiLabel;
 
 public class UiDateViewer extends UiField
 {
 	public UiDateViewer(UiBasicLocalization localizationToUse)
 	{
 		localization = localizationToUse;
-		label = new JLabel();
+		label = new UiLabel();
 	}
 
 	public JComponent getComponent()

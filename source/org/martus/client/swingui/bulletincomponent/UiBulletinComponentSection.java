@@ -28,16 +28,19 @@ package org.martus.client.swingui.bulletincomponent;
 
 import java.awt.Color;
 import java.awt.Font;
+
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.LineBorder;
+
 import org.martus.client.swingui.UiLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.UiWarningLabel;
 import org.martus.client.swingui.fields.UiField;
 import org.martus.common.FieldSpec;
+import org.martus.swing.UiLabel;
 import org.martus.swing.UiParagraphPanel;
 
 abstract public class UiBulletinComponentSection extends UiParagraphPanel
@@ -48,7 +51,7 @@ abstract public class UiBulletinComponentSection extends UiParagraphPanel
 		setBorder(new EtchedBorder());
 		outdentFirstField();
 
-		sectionHeading = new JLabel("", null, JLabel.LEFT);
+		sectionHeading = new UiLabel("", null, JLabel.LEFT);
 		sectionHeading.setVerticalTextPosition(JLabel.TOP);
 		sectionHeading.setFont(sectionHeading.getFont().deriveFont(Font.BOLD));
 		add(sectionHeading);

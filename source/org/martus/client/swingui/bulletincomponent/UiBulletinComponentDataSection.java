@@ -27,9 +27,11 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.swingui.bulletincomponent;
 
 import java.awt.Color;
+
 import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.border.LineBorder;
+
 import org.martus.client.core.LanguageChangeListener;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.fields.UiDateEditor;
@@ -44,6 +46,7 @@ import org.martus.common.bulletin.AttachmentProxy;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.clientside.ChoiceItem;
 import org.martus.common.packet.FieldDataPacket;
+import org.martus.swing.UiLabel;
 
 
 abstract public class UiBulletinComponentDataSection extends UiBulletinComponentSection
@@ -63,7 +66,7 @@ abstract public class UiBulletinComponentDataSection extends UiBulletinComponent
 		{
 			fields[fieldNum] = createAndAddLabelAndField(specs[fieldNum]);
 		}
-		JLabel attachments = new JLabel(getLocalization().getFieldLabel("attachments"));
+		JLabel attachments = new UiLabel(getLocalization().getFieldLabel("attachments"));
 		addComponents(attachments, createAttachmentTable());
 	}
 
@@ -103,7 +106,8 @@ abstract public class UiBulletinComponentDataSection extends UiBulletinComponent
 		String labelText = spec.getLabel();
 		if(labelText.equals(""))
 			labelText = getLocalization().getFieldLabel(spec.getTag());
-		return new JLabel(labelText);
+		JLabel label = new UiLabel(labelText);
+		return label;
 	}
 
 	private UiField createField(FieldSpec fieldSpec)

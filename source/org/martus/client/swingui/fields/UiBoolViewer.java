@@ -34,13 +34,14 @@ import javax.swing.border.LineBorder;
 
 import org.martus.common.FieldSpec;
 import org.martus.common.clientside.UiBasicLocalization;
+import org.martus.swing.UiLabel;
 
 public class UiBoolViewer extends UiField
 {
 	public UiBoolViewer(UiBasicLocalization localizationToUse)
 	{
 		localization = localizationToUse;
-		widget = new JLabel();
+		widget = new UiLabel();
 		widget.setBorder(new LineBorder(Color.black));
 	}
 

@@ -38,6 +38,7 @@ import org.martus.client.swingui.UiLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.dialogs.UiBulletinDetailsDialog;
 import org.martus.common.bulletin.Bulletin;
+import org.martus.swing.UiLabel;
 import org.martus.util.TokenReplacement;
 
 
@@ -53,19 +54,19 @@ public class UiBulletinComponentHeader extends UiBulletinComponentSection
 		detailsButton.addActionListener(new DetailsListener());
 		addComponents(detailsButton, warningIndicator);
 
-		lastSavedLabel = new JLabel(localization.getFieldLabel(Bulletin.TAGLASTSAVED));
-		dateTime = new JLabel("");
+		lastSavedLabel = new UiLabel(localization.getFieldLabel(Bulletin.TAGLASTSAVED));
+		dateTime = new UiLabel("");
 		EtchedBorder border = new EtchedBorder();
 		dateTime.setBorder(border);
 		addComponents(lastSavedLabel, dateTime);
 
-		JLabel versionLabel = new JLabel(localization.getFieldLabel("BulletinVersionNumber"));
-		versionNumber = new JLabel("#");
+		JLabel versionLabel = new UiLabel(localization.getFieldLabel("BulletinVersionNumber"));
+		versionNumber = new UiLabel("#");
 		versionNumber.setBorder(border);
 		addComponents(versionLabel, versionNumber);
 		
-		hqLabel = new JLabel(localization.getFieldLabel("HQSummaryLabel"));
-		hqSummary = new JLabel("");
+		hqLabel = new UiLabel(localization.getFieldLabel("HQSummaryLabel"));
+		hqSummary = new UiLabel("");
 		addComponents(hqLabel, hqSummary);
 
 	}
