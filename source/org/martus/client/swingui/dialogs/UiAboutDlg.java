@@ -43,6 +43,7 @@ import org.martus.client.swingui.UiConstants;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.common.VersionBuildDate;
 import org.martus.common.clientside.UiBasicLocalization;
+import org.martus.swing.UiButton;
 import org.martus.swing.UiLabel;
 import org.martus.swing.UiWrappedTextArea;
 import org.martus.swing.Utilities;
@@ -77,7 +78,7 @@ public class UiAboutDlg extends JDialog implements ActionListener
 		String buildDate = localization.getFieldLabel("aboutDlgBuildDate");
 		buildDate += " " + VersionBuildDate.getVersionBuildDate();
 
-		JButton ok = new JButton(localization.getButtonLabel("ok"));
+		JButton ok = new UiButton(localization.getButtonLabel("ok"));
 		ok.addActionListener(this);
 		ok.addKeyListener(new MakeEnterKeyExit());
 

@@ -38,6 +38,7 @@ import javax.swing.JDialog;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.UiProgressMeter;
 import org.martus.common.clientside.UiBasicLocalization;
+import org.martus.swing.UiButton;
 import org.martus.swing.UiLabel;
 
 public class UiProgressRetrieveDlg extends JDialog
@@ -48,7 +49,7 @@ public class UiProgressRetrieveDlg extends JDialog
 		UiBasicLocalization localization = window.getLocalization();
 		setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 		addWindowListener(new WindowEventHandler());
-		cancel = new JButton(localization.getButtonLabel("cancel"));
+		cancel = new UiButton(localization.getButtonLabel("cancel"));
 		cancel.addActionListener(new CancelHandler());
 		cancel.setAlignmentX(JButton.CENTER_ALIGNMENT);
 		bulletinCountMeter = new UiProgressMeter(this, localization);

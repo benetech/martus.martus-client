@@ -56,6 +56,7 @@ import org.martus.common.HQKeys.HQsException;
 import org.martus.common.clientside.UiBasicLocalization;
 import org.martus.common.clientside.UiTextField;
 import org.martus.common.crypto.MartusCrypto;
+import org.martus.swing.UiButton;
 import org.martus.swing.UiFileChooser;
 import org.martus.swing.UiLabel;
 import org.martus.swing.UiScrollPane;
@@ -78,13 +79,13 @@ public class UiConfigureHQs extends JDialog
 		panel.setBorder(new EmptyBorder(10,10,10,10));
 		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 		
-		JButton add = new JButton(localization.getButtonLabel("ConfigureHQsAdd"));
+		JButton add = new UiButton(localization.getButtonLabel("ConfigureHQsAdd"));
 		add.addActionListener(new AddHandler());
-		remove = new JButton(localization.getButtonLabel("ConfigureHQsRemove"));
+		remove = new UiButton(localization.getButtonLabel("ConfigureHQsRemove"));
 		remove.addActionListener(new RemoveHandler());
 		remove.setEnabled(false);
 
-		renameLabel = new JButton(localization.getButtonLabel("ConfigureHQsReLabel"));
+		renameLabel = new UiButton(localization.getButtonLabel("ConfigureHQsReLabel"));
 		renameLabel.addActionListener(new RenameHandler());
 		renameLabel.setEnabled(false);
 		
@@ -138,7 +139,7 @@ public class UiConfigureHQs extends JDialog
 		hBox.add(remove);
 		hBox.add(renameLabel);
 		hBox.add(Box.createHorizontalGlue());
-		JButton close = new JButton(localization.getButtonLabel("close"));
+		JButton close = new UiButton(localization.getButtonLabel("close"));
 		close.addActionListener(new CancelHandler());
 		hBox.add(close);
 		panel.add(hBox);

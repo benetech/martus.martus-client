@@ -38,13 +38,16 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.util.List;
+
 import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.JComponent;
+
 import org.martus.client.swingui.UiFocusListener;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.common.bulletin.AttachmentProxy;
 import org.martus.common.clientside.UiBasicLocalization;
+import org.martus.swing.UiButton;
 import org.martus.swing.UiFileChooser;
 import org.martus.swing.UiParagraphPanel;
 import org.martus.swing.UiScrollPane;
@@ -76,11 +79,11 @@ public class UiAttachmentEditor extends UiParagraphPanel
 		scrollPane.getVerticalScrollBar().setFocusable(false);
 		vbox.add(scrollPane);
 
-		JButton add = new JButton(localization.getButtonLabel("addattachment"));
+		JButton add = new UiButton(localization.getButtonLabel("addattachment"));
 	
 		add.addFocusListener(new UiFocusListener(this));		
 		add.addActionListener(new AddHandler());
-		remove = new JButton(localization.getButtonLabel("removeattachment"));
+		remove = new UiButton(localization.getButtonLabel("removeattachment"));
 		remove.addFocusListener(new UiFocusListener(this));		
 		remove.addActionListener(new RemoveHandler());
 		remove.setEnabled(false);

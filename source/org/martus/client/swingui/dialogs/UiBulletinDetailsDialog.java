@@ -44,6 +44,7 @@ import org.martus.common.bulletin.Bulletin;
 import org.martus.common.crypto.MartusCrypto;
 import org.martus.common.packet.BulletinHistory;
 import org.martus.common.packet.UniversalId;
+import org.martus.swing.UiButton;
 import org.martus.swing.UiLabel;
 import org.martus.swing.UiParagraphPanel;
 import org.martus.swing.UiScrollPane;
@@ -83,11 +84,11 @@ public class UiBulletinDetailsDialog extends JDialog
 		UiScrollPane historyScroller = createHistoryTable();
 		panel.addComponents(new UiLabel(getLabel("History")), historyScroller);
 		
-		JButton closeButton = new JButton(getLocalization().getButtonLabel("close"));
+		JButton closeButton = new UiButton(getLocalization().getButtonLabel("close"));
 		closeButton.addActionListener(new CloseHandler());
 		getRootPane().setDefaultButton(closeButton);
 		closeButton.requestFocus(true);
-		previewVersionButton = new JButton(getLocalization().getButtonLabel("ViewPreviousBulletinVersion"));
+		previewVersionButton = new UiButton(getLocalization().getButtonLabel("ViewPreviousBulletinVersion"));
 		previewVersionButton.addActionListener(new previewListener());
 		if(versionTable.getRowCount() < 2)
 			previewVersionButton.setEnabled(false);

@@ -38,6 +38,7 @@ import org.martus.client.swingui.UiLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.dialogs.UiBulletinDetailsDialog;
 import org.martus.common.bulletin.Bulletin;
+import org.martus.swing.UiButton;
 import org.martus.swing.UiLabel;
 import org.martus.util.TokenReplacement;
 
@@ -50,7 +51,7 @@ public class UiBulletinComponentHeader extends UiBulletinComponentSection
 		tagQualifier = tagQualifierToUse;
 		UiLocalization localization = getLocalization();
 		String buttonText = localization.getButtonLabel("BulletinDetails");
-		JButton detailsButton = new JButton(buttonText);
+		JButton detailsButton = new UiButton(buttonText);
 		detailsButton.addActionListener(new DetailsListener());
 		addComponents(detailsButton, warningIndicator);
 

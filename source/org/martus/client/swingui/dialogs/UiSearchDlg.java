@@ -38,6 +38,7 @@ import org.martus.common.FieldSpec;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.clientside.UiBasicLocalization;
 import org.martus.common.clientside.UiTextField;
+import org.martus.swing.UiButton;
 import org.martus.swing.UiLabel;
 import org.martus.swing.UiParagraphPanel;
 import org.martus.swing.UiWrappedTextArea;
@@ -51,10 +52,10 @@ public class UiSearchDlg extends JDialog  implements ActionListener
 		UiBasicLocalization localization = owner.getLocalization();
 
 		setTitle(localization.getWindowTitle("search"));
-		search = new JButton(localization.getButtonLabel("search"));
+		search = new UiButton(localization.getButtonLabel("search"));
 		search.addActionListener(this);
 		getRootPane().setDefaultButton(search);
-		JButton cancel = new JButton(localization.getButtonLabel("cancel"));
+		JButton cancel = new UiButton(localization.getButtonLabel("cancel"));
 		cancel.addActionListener(this);
 		UiParagraphPanel panel = new UiParagraphPanel();
 

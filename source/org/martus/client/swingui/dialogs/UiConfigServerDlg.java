@@ -38,6 +38,7 @@ import org.martus.client.swingui.UiMainWindow;
 import org.martus.common.clientside.UiBasicLocalization;
 import org.martus.common.clientside.UiTextField;
 import org.martus.common.crypto.MartusCrypto;
+import org.martus.swing.UiButton;
 import org.martus.swing.UiLabel;
 import org.martus.swing.UiParagraphPanel;
 import org.martus.swing.Utilities;
@@ -80,9 +81,9 @@ public class UiConfigServerDlg extends JDialog implements ActionListener
 
 		panel.addBlankLine();
 
-		ok = new JButton(localization.getButtonLabel("ok"));
+		ok = new UiButton(localization.getButtonLabel("ok"));
 		ok.addActionListener(this);
-		JButton cancel = new JButton(localization.getButtonLabel("cancel"));
+		JButton cancel = new UiButton(localization.getButtonLabel("cancel"));
 		cancel.addActionListener(this);
 		panel.addComponents(ok, cancel);
 

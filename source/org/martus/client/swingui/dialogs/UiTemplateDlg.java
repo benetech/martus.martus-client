@@ -43,6 +43,7 @@ import org.martus.client.core.ConfigInfo;
 import org.martus.client.core.MartusApp;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.common.clientside.UiBasicLocalization;
+import org.martus.swing.UiButton;
 import org.martus.swing.UiLabel;
 import org.martus.swing.UiNotifyDlg;
 import org.martus.swing.UiParagraphPanel;
@@ -64,13 +65,13 @@ public class UiTemplateDlg extends JDialog implements ActionListener
 
 		UiBasicLocalization localization = mainWindow.getLocalization();
 		setTitle(localization.getWindowTitle("BulletinTemplate"));
-		okButton = new JButton(localization.getButtonLabel("ok"));
+		okButton = new UiButton(localization.getButtonLabel("ok"));
 		okButton.addActionListener(this);
-		JButton cancel = new JButton(localization.getButtonLabel("cancel"));
+		JButton cancel = new UiButton(localization.getButtonLabel("cancel"));
 		cancel.addActionListener(this);
-		JButton help = new JButton(localization.getButtonLabel("help"));
+		JButton help = new UiButton(localization.getButtonLabel("help"));
 		help.addActionListener(new helpHandler());
-		JButton loadFromFile = new JButton(localization.getButtonLabel("ResetContents"));
+		JButton loadFromFile = new UiButton(localization.getButtonLabel("ResetContents"));
 		loadFromFile.addActionListener(new loadFileHandler());
 		details = new UiTextArea(15, 65);
 		details.setLineWrap(true);

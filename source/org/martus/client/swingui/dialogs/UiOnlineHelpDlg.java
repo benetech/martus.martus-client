@@ -37,6 +37,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Vector;
+
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -50,9 +51,11 @@ import javax.swing.plaf.basic.BasicTextUI;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.DefaultHighlighter;
 import javax.swing.text.DefaultHighlighter.DefaultHighlightPainter;
+
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.common.clientside.UiBasicLocalization;
 import org.martus.common.clientside.UiTextField;
+import org.martus.swing.UiButton;
 import org.martus.swing.UiList;
 import org.martus.swing.UiScrollPane;
 import org.martus.swing.UiWrappedTextArea;
@@ -108,7 +111,7 @@ public class UiOnlineHelpDlg extends JDialog
 			tocList.setSelectedIndex(0);
 		}
 
-		close = new JButton(localization.getButtonLabel("close"));
+		close = new UiButton(localization.getButtonLabel("close"));
 		close.addActionListener(new CloseHandler());
 		close.addKeyListener(new MakeEnterKeyExit());
 		helpPanel.add(msgAreaScrollPane);
@@ -116,7 +119,7 @@ public class UiOnlineHelpDlg extends JDialog
 		searchField = new UiTextField(20);
 		searchField.setMaximumSize(searchField.getPreferredSize());
 		searchField.addActionListener(new searchFieldListener());
-		searchButton = new JButton(localization.getButtonLabel("inputsearchok"));
+		searchButton = new UiButton(localization.getButtonLabel("inputsearchok"));
 		searchButton.addActionListener(new SearchActionListener());
 		Box hBox = Box.createHorizontalBox();
 

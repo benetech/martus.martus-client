@@ -38,6 +38,7 @@ import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.fields.UiChoiceEditor;
 import org.martus.common.clientside.UiBasicLocalization;
 import org.martus.common.utilities.DateUtilities;
+import org.martus.swing.UiButton;
 import org.martus.swing.UiCheckBox;
 import org.martus.swing.UiLabel;
 import org.martus.swing.UiParagraphPanel;
@@ -73,9 +74,9 @@ public class UiPreferencesDlg extends JDialog implements ActionListener
 		preferences.addOnNewLine(allPrivate);
 		preferences.addBlankLine();
 		
-		ok = new JButton(localization.getButtonLabel("ok"));
+		ok = new UiButton(localization.getButtonLabel("ok"));
 		ok.addActionListener(this);
-		cancel = new JButton(localization.getButtonLabel("cancel"));
+		cancel = new UiButton(localization.getButtonLabel("cancel"));
 		cancel.addActionListener(this);
 		preferences.addComponents(ok, cancel);
 		

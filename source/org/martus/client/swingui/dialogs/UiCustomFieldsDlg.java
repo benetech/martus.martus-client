@@ -43,6 +43,7 @@ import javax.swing.border.EmptyBorder;
 import org.martus.client.swingui.UiLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.common.clientside.Localization;
+import org.martus.swing.UiButton;
 import org.martus.swing.UiLabel;
 import org.martus.swing.UiScrollPane;
 import org.martus.swing.UiTextArea;
@@ -64,13 +65,13 @@ public class UiCustomFieldsDlg extends JDialog
 		text = createXMLTextArea(xmlFieldSpecs);
 		UiScrollPane textPane = createScrollPane(text);
 
-		JButton ok = new JButton(localization.getButtonLabel("input" + baseTag + "ok"));
+		JButton ok = new UiButton(localization.getButtonLabel("input" + baseTag + "ok"));
 		ok.addActionListener(new OkHandler());
-		JButton cancel = new JButton(localization.getButtonLabel("cancel"));
+		JButton cancel = new UiButton(localization.getButtonLabel("cancel"));
 		cancel.addActionListener(new CancelHandler());
-		JButton defaults = new JButton(localization.getButtonLabel("customDefault"));
+		JButton defaults = new UiButton(localization.getButtonLabel("customDefault"));
 		defaults.addActionListener(new CustomDefaultHandler());
-		JButton help = new JButton(localization.getButtonLabel("customHelp"));
+		JButton help = new UiButton(localization.getButtonLabel("customHelp"));
 		help.addActionListener(new CustomHelpHandler());
 
 		Box buttons = Box.createHorizontalBox();

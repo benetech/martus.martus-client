@@ -40,6 +40,7 @@ import javax.swing.border.EmptyBorder;
 import org.martus.client.swingui.UiConstants;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.common.clientside.UiBasicLocalization;
+import org.martus.swing.UiButton;
 import org.martus.swing.UiLabel;
 import org.martus.swing.Utilities;
 
@@ -64,7 +65,7 @@ public class UiSplashDlg extends JDialog implements ActionListener
 		
 		Box hbox = Box.createHorizontalBox();
 		hbox.add(Box.createHorizontalGlue());
-		JButton ok = new JButton(localization.getButtonLabel("ok"));
+		JButton ok = new UiButton(localization.getButtonLabel("ok"));
 		ok.addActionListener(this);
 		hbox.add(ok);
 		hbox.add(Box.createHorizontalGlue());

@@ -36,10 +36,12 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.io.IOException;
+
 import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JViewport;
+
 import org.martus.client.core.BulletinFolder;
 import org.martus.client.core.ClientBulletinStore;
 import org.martus.client.core.EncryptionChangeListener;
@@ -56,6 +58,7 @@ import org.martus.common.bulletin.Bulletin;
 import org.martus.common.clientside.UiBasicLocalization;
 import org.martus.common.crypto.MartusCrypto.CryptoException;
 import org.martus.common.crypto.MartusCrypto.EncryptionException;
+import org.martus.swing.UiButton;
 import org.martus.swing.UiScrollPane;
 import org.martus.swing.Utilities;
 
@@ -79,11 +82,11 @@ public class UiBulletinModifyDlg extends JFrame implements ActionListener, Windo
 			view.setEncryptionChangeListener(this);
 			view.setLanguageChangeListener(this);
 
-			send = new JButton(localization.getButtonLabel("send"));
+			send = new UiButton(localization.getButtonLabel("send"));
 			send.addActionListener(this);
-			draft = new JButton(localization.getButtonLabel("savedraft"));
+			draft = new UiButton(localization.getButtonLabel("savedraft"));
 			draft.addActionListener(this);
-			cancel = new JButton(localization.getButtonLabel("cancel"));
+			cancel = new UiButton(localization.getButtonLabel("cancel"));
 			cancel.addActionListener(this);
 
 			addScrollerView();

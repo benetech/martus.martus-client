@@ -28,11 +28,14 @@ package org.martus.client.swingui.dialogs;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
+
 import org.martus.common.clientside.UiBasicLocalization;
 import org.martus.common.clientside.UiTextField;
+import org.martus.swing.UiButton;
 import org.martus.swing.UiParagraphPanel;
 import org.martus.swing.UiWrappedTextArea;
 import org.martus.swing.Utilities;
@@ -48,9 +51,9 @@ public class UiStringInputDlg extends JDialog
 		text = new UiTextField(30);
 		text.setText(defaultText);
 
-		JButton ok = new JButton(localization.getButtonLabel("input" + baseTag + "ok"));
+		JButton ok = new UiButton(localization.getButtonLabel("input" + baseTag + "ok"));
 		ok.addActionListener(new OkHandler());
-		JButton cancel = new JButton(localization.getButtonLabel("cancel"));
+		JButton cancel = new UiButton(localization.getButtonLabel("cancel"));
 		cancel.addActionListener(new CancelHandler());
 
 		UiParagraphPanel stringPanel = new UiParagraphPanel();

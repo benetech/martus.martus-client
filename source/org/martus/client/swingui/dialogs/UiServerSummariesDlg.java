@@ -52,6 +52,7 @@ import org.martus.client.swingui.tablemodels.RetrieveTableModel;
 import org.martus.common.clientside.UiBasicLocalization;
 import org.martus.common.packet.FieldDataPacket;
 import org.martus.swing.ParagraphLayout;
+import org.martus.swing.UiButton;
 import org.martus.swing.UiLabel;
 import org.martus.swing.UiRadioButton;
 import org.martus.swing.UiScrollPane;
@@ -120,16 +121,16 @@ public abstract class UiServerSummariesDlg extends JDialog
 
 	private JPanel createActionsPanel(UiBasicLocalization localization, String okButtonTag)
 	{
-		JButton ok = new JButton(localization.getButtonLabel(okButtonTag));
+		JButton ok = new UiButton(localization.getButtonLabel(okButtonTag));
 		ok.addActionListener(new OkHandler());
-		JButton cancel = new JButton(localization.getButtonLabel("cancel"));
+		JButton cancel = new UiButton(localization.getButtonLabel("cancel"));
 		cancel.addActionListener(new CancelHandler());
-		JButton preview = new JButton(localization.getButtonLabel("Preview"));
+		JButton preview = new UiButton(localization.getButtonLabel("Preview"));
 		preview.addActionListener(new PreviewHandler());
 
-		JButton checkAll = new JButton(localization.getButtonLabel("checkall"));
+		JButton checkAll = new UiButton(localization.getButtonLabel("checkall"));
 		checkAll.addActionListener(new CheckAllHandler());
-		JButton unCheckAll = new JButton(localization.getButtonLabel("uncheckall"));
+		JButton unCheckAll = new UiButton(localization.getButtonLabel("uncheckall"));
 		unCheckAll.addActionListener(new UnCheckAllHandler());
 
   		JPanel panel = new JPanel();

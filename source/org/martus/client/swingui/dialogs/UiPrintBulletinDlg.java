@@ -27,13 +27,16 @@ package org.martus.client.swingui.dialogs;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
 import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JDialog;
 import javax.swing.border.EmptyBorder;
+
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.common.clientside.UiBasicLocalization;
+import org.martus.swing.UiButton;
 import org.martus.swing.UiCheckBox;
 import org.martus.swing.UiParagraphPanel;
 import org.martus.swing.UiWrappedTextArea;
@@ -56,9 +59,9 @@ public class UiPrintBulletinDlg extends JDialog implements ActionListener
 		setTitle(localization.getWindowTitle("PrintPrivateData"));
 		
 		includePrivate = new UiCheckBox(localization.getFieldLabel("PrintPrivateData"));
-		ok = new JButton(localization.getButtonLabel("Continue"));
+		ok = new UiButton(localization.getButtonLabel("Continue"));
 		ok.addActionListener(this);		
-		cancel = new JButton(localization.getButtonLabel("cancel"));
+		cancel = new UiButton(localization.getButtonLabel("cancel"));
 		cancel.addActionListener(this);		
 		
 		Box hBoxButtons = Box.createHorizontalBox();		
