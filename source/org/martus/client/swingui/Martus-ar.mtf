@@ -1,9 +1,9 @@
 ﻿# Martus Client Translation File
 # Language code:  ar
 # Language name:  Arabic
-# Exported date:  Wed Nov 03 16:20:28 PST 2004
-# Client version: internal pre-release 2.x
-# Client build:   20041029.1501
+# Exported date:  Thu Feb 03 11:16:50 PST 2005
+# Client version: Internal 2.6.0
+# Client build:   20050125.1517
 #
 # This file MUST be saved in UTF-8 format!
 # Lines beginning with # are comments and are ignored by Martus
@@ -27,6 +27,9 @@
 #    are logged in, go to Options/Preferences.
 #
 #  1.  do NOT translate "\n" (used for new lines)
+#      And do NOT put spaces before the  equal sign after field:xxx.
+#      [should be "field:fieldtag=fieldtext" instead of
+#  	   "field:fieldtag = fieldtext" (space before the equals sign)]
 #  2.  do NOT create any user-entered new-lines/carriage-returns
 #      (by using the enter key) in any mtf entry
 #      (from the field:xxx to the end of the translated text),
@@ -59,27 +62,29 @@
 # 10.  do not translate "#L#" as is it used to populate lists of values on
 #      various dialogs.
 # 11.  do not translate "#Title#" (used for bulletin title entry)
-# 12.  do not translate "#A#" (used for bulletin details: Author Public Code)
-# 13.  do not translate "#I#" (used for bulletin details: Bulletin ID)
-# 14.  do not translate "#H#" (used for bulletin details: Headquarter entries)
-# 15.  do not translate "#NumberOfHQs#" in various dialogs
-# 16.  Leave standard field tags in English in CreateCustomFieldsHelp1 and
+# 12.  do not translate "#TITLES#" (used for a list of the titles of previous
+#      versions of the bulletin.
+# 13.  do not translate "#A#" (used for bulletin details: Author Public Code)
+# 14.  do not translate "#I#" (used for bulletin details: Bulletin ID)
+# 15.  do not translate "#H#" (used for bulletin details: Headquarter entries)
+# 16.  do not translate "#NumberOfHQs#" in various dialogs
+# 17.  Leave standard field tags in English in CreateCustomFieldsHelp1 and
 #      CreateCustomFieldsHelp2, but put translation in parentheses after
 #      english : e.g.  'author' (autor), so users know what they refer to
-# 17.  Leave field types in English in CreateCustomFieldsHelp2 (e.g. BOOLEAN,
+# 18.  Leave field types in English in CreateCustomFieldsHelp2 (e.g. BOOLEAN,
 #      DATE), but put translation in parentheses after english, so users know
 #      what they refer to.
-# 18.  Leave field types in English in CreateCustomFieldsHelp3 examples
+# 19.  Leave field types in English in CreateCustomFieldsHelp3 examples
 #      (e.g. BOOLEAN, DATE)
-# 19.  Do not translate words used in XML for custom fields such as:
+# 20.  Do not translate words used in XML for custom fields such as:
 #      <Field type='GRID'>, </Field>, <Tag>, </Tag>, <Label>, </Label>,
 #      <GridSpecDetails>, </GridSpecDetails>, <Column>, </Column>
-# 20.  do not translate "#UseUnofficialTranslationFiles#" in
+# 21.  do not translate "#UseUnofficialTranslationFiles#" in
 #      field:warningUnofficialTranslation since it contains a file name
-# 21.  If you want your language to appear right to left (e.g. Arabic),
-#      Uncomment the next line (by removing the # in front of #!right-to-left)
-
+# 22.  If you want your language to appear left to right,
+#      Comment the next line (by adding a # in front of !right-to-left)
 !right-to-left
+#
 
 #________________________=Show all bulletins on this server and on this computer.
 -e9a2-button:AllSummaries=عرض جميع النشرات على هذا الحاسوب و على الخادم
@@ -129,6 +134,12 @@
 #_________________________=Reset Contents
 -6f62-button:ResetContents=حذف المحتويات 
 
+#_______________________________=Retrieve all bulletin revisions
+-6965-button:RetrieveAllVersions=استرجع جميع تنقيحات النشرة
+
+#______________________________________________=Retrieve latest bulletin revision only
+-9c45-button:RetrieveLatestBulletinRevisionOnly=استرجع فقط آخر تنقيح للنشرة
+
 #__________________________________=Accept
 -bb54-button:ServerComplianceAccept=قبول 
 
@@ -137,6 +148,9 @@
 
 #__________________=Sign In
 -f849-button:SignIn=دخول 
+
+#_______________________________________=View Selected Version...
+-f943-button:ViewPreviousBulletinVersion=استعراض الإصدار الذي اخترته...
 
 #_________________________________________=Switch to using regular keyboard
 -c1ee-button:VirtualKeyboardSwitchToNormal=استخدام لوحة المفاتيح العادية
@@ -387,8 +401,8 @@
 #__________________________________=The layout of the bulletins is dictated by an XML document.  By default the standard bulletin fields occur at the top of the Custom Field declaration, but they can be moved if desired.  However, there are four required fields that cannot be removed:  'author', 'entrydate', 'language' and 'title'.\n\n
 -1ef6-field:CreateCustomFieldsHelp1= يتم إملاء نموذج تصميم النشرات عن طريق وثيقة .XML  تلقائيا تتواجد الحقول الأساسية للنشرة في أعلى رمز الحقل المعدّل و لكن يمكن تغيير وضعها حسب الرغبة.  ومع ذلك، لا يمكن تغيير الأربع الحقول الأساسية التالية: 'author' (الكاتب)، 'entrydate' (تاريخ الإنشاء)، 'language' (اللغة) و 'title' (العنوان). n\n\
 
-#__________________________________=For custom (non-standard) fields, you first select the type of field you want.  The possible choices are 'BOOLEAN', 'DATE', 'DATERANGE', 'GRID', 'LANGUAGE', 'MULTILINE', and 'STRING'. \n\nFor each custom field you will need a unique identification tag.  This tag can be any word except those already used by the system (eg. 'author', 'summary', 'location', 'title' etc.), and cannot contain spaces or special characters.  Examples of choices are 'custom1', 'custom2', etc, or tags that are more descriptive like 'VictimsName'.\n Then you need a label which is displayed next to your custom field.  An example might be 'Name of 1st Witness'.\n\nAdditional Comments\n1. XML is case-sensitive\n2. quotes around type name can be single or double (as long as they match)\n3. A Boolean field will be displayed as a checkbox when editing and Yes/No when printed.\n\nSee examples below:\n\n
--d300-field:CreateCustomFieldsHelp2= بالنسبة للحقول المعدلة (غير الأساسية) تقوم أولا باختيار الحقل الذي تريده. الاختيارات الممكنة هي'BOOLEAN'  (موجب أو سالب)،'DATE'  (تاريخ)، 'DATERANGE' (المدى التاريخي)،'GRID' (شبكة متسامتة)، 'LANGUAGE' (اللغة)،'MULTILINE'  (عدة سطور)، و'STRING' (تسلسل حرفي).n\n\ستحتاج لكل حقل معدل رمزا فريدا من نوعه لكي يميزه. يمكن لهذا الرمز أن يكون أية كلمة ماعدا الكلمات التي يستخدمها البرنامج مثل 'author' (الكاتب)،'summary' (الملخص)، 'location' (الموقع) 'title' (العنوان) إلخ، و لا يمكن أن تحتو على مسافات فارغة أو أشكال خاصة. من أمثلة الاختيارات كلمات مثل "جديد1" و "جديد2"، إلخ، أو رموز تحمل مزيد من التفاصيل مثل "اسمالضحية."n\ ثم تحتاج اسما يتم عرضه بجانب حقلك الجديد. وقد يكون هذا الاسم "اسم الشاهد الأول" مثلا. n\n\تعليقات إضافية\n1. وثائق XML حساسة لنوع الحروف اللاتينية المستخدمة.\n2 قد تكون علامات التنصيص المستخدمة إما مفردة أو مزدوجة (طالما كانا من نفس النوع).n3\ يتم عرض حقل الإثبات أو النفي في صورة مربع اختيار عند التحرير و ككلمتي نعم/لا عند الطباعة.\n\nانظر الأمثلة بالأسفل:\n\n
+#__________________________________=For custom (non-standard) fields, you first select the type of field you want.  The possible choices are 'BOOLEAN', 'DATE', 'DATERANGE', 'GRID', 'LANGUAGE', 'MULTILINE', and 'STRING'. \n\nFor each custom field you will need a unique identification tag.  This tag can be any word except those already used by the system (eg. 'author', 'summary', 'location', 'title' etc.), and cannot contain spaces or special characters.  Examples of choices are 'custom1', 'custom2', etc, or tags that are more descriptive like 'VictimsName'.\n Then you need a label which is displayed next to your custom field.  An example might be 'Name of 1st Witness'.\n\nAdditional Comments\n1. XML is case-sensitive ('Witness' is not the same as 'witness') \n2. quotes around type name can be single or double as long as they match (e.g. 'STRING" is not valid. It must be 'STRING' or "STRING") \n3. A Boolean field will be displayed as a checkbox when editing and Yes/No when previewed or printed.\n\nSee examples below:\n\n
+-676b-field:CreateCustomFieldsHelp2= بالنسبة للحقول المعدلة (غير الأساسية) تقوم أولا باختيار الحقل الذي تريده. الاختيارات الممكنة هي'BOOLEAN'  (موجب أو سالب)،'DATE'  (تاريخ)، 'DATERANGE' (المدى التاريخي)،'GRID' (شبكة متسامتة)، 'LANGUAGE' (اللغة)،'MULTILINE'  (عدة سطور)، و'STRING' (تسلسل حرفي).n\n\ستحتاج لكل حقل معدل رمزا فريدا من نوعه لكي يميزه. يمكن لهذا الرمز أن يكون أية كلمة ماعدا الكلمات التي يستخدمها البرنامج مثل 'author' (الكاتب)،'summary' (الملخص)، 'location' (الموقع) 'title' (العنوان) إلخ، و لا يمكن أن تحتو على مسافات فارغة أو أشكال خاصة. من أمثلة الاختيارات كلمات مثل "جديد1" و "جديد2"، إلخ، أو رموز تحمل مزيد من التفاصيل مثل "اسمالضحية."n\ ثم تحتاج اسما يتم عرضه بجانب حقلك الجديد. وقد يكون هذا الاسم "اسم الشاهد الأول" مثلا. n\n\تعليقات إضافية\n1. وثائق XML حساسة لنوع الحروف اللاتينية المستخدمة (كلمة 'WITNESS' ليست ككلمة 'witness').\n2 قد تكون علامات التنصيص المستخدمة إما مفردة أو مزدوجة (طالما كانتا من نفس النوع (مثال: كلمة "STRING' هكذا غير صالحة. يجب أن تكون إما 'STRING' أو "STRING")).n3\ يتم عرض حقل الإثبات أو النفي في صورة مربع اختيار عند التحرير و ككلمتي نعم/لا عند الاستعراض أو الطباعة.\n\nانظر الأمثلة بالأسفل:\n\n
 
 #__________________________________=<Field type='STRING'>\n<Tag>custom1</Tag>\n<Label>Witness Name</Label>\n</Field>\n\n<Field type='LANGUAGE'>\n<Tag>new2</Tag>\n<Label>Witness Speaks</Label>\n</Field>\n\n<Field type='BOOLEAN'>\n<Tag>new3</Tag>\n<Label>Were guns used?</Label>\n</Field>\n\n<Field type='GRID'>\n<Tag>customgrid</Tag>\n<Label>Victim Information</Label>\n<GridSpecDetails>\n<Column><Label>Name of Victim</Label></Column>\n<Column><Label>Victim Age</Label></Column>\n<Column><Label>Victim Gender</Label></Column>\n<Column><Label>Victim Ethnicity</Label></Column>\n</GridSpecDetails>\n</Field>\n
 -c0a8-field:CreateCustomFieldsHelp3=<Field type='STRING'>\n<Tag>جديد1</Tag>\n<Label>اسم الشاهد</Label>\n</Field>\n\n<Field type='LANGUAGE'>\n<Tag>جديد2</Tag>\n<Label>الشاهد يتحدث</Label>\n</Field>\n\n<Field type='BOOLEAN'>\n<Tag>جديد3</Tag>\n<Label> هل تم استخدام أسلحة؟</Label>\n</Field>\n\n<Field type='GRID'>\n<Tag>جدولجديد</Tag>\n<Label> معلومات عن الضحية</Label>\n<GridSpecDetails>\n<Column><Label> اسم الضحية</Label></Column>\n<Column><Label> عمر الضحية</Label></Column>\n<Column><Label> نوع الضحية</Label></Column>\n<Column><Label> عرق الضحية</Label></Column>\n</GridSpecDetails>\n</Field>\n 
@@ -807,8 +821,8 @@
 #___________________________________________=You have chosen to modify one of your sealed bulletins, thus creating a new version of that bulletin.
 -fcb6-field:confirmCloneMySealedAsDraftcause=لقد اخترت تعديل واحدة من نشراتك المختومة، سيتم بذلك إنشاء نسخة جديدة من تلك النشرة. 
 
-#____________________________________________=Clicking on Yes will create a new version of this bulletin that initially contains all the same information. In this release of Martus you will only be able to view the most current version.
--1c29-field:confirmCloneMySealedAsDrafteffect=بالنقر على نعم سيتم إنشاء نشرة جديدة تحتوي مبدئيا على جميع المعلومات ذاتها. في هذا الإصدار من Martus سيمكنك فقط الإطلاع على أحدث نسخة. 
+#____________________________________________=Clicking on Yes will create a new version of this bulletin that initially contains all the same information.
+-198c-field:confirmCloneMySealedAsDrafteffect= بالنقر على نعم سيتم إنشاء نشرة جديدة تحتوي مبدئيا على جميع المعلومات ذاتها. 
 
 #___________________________________=You are about to delete your Martus data from this computer.
 -ee9a-field:confirmDeleteMyDatacause=سوف تحذف بيانات برنامج Martus الخاصة بك من على هذا الحاسوب.
@@ -858,8 +872,8 @@
 #__________________________________________________=Clicking on Yes will delete the old key file and replace it with your restored key.
 -167f-field:confirmKeyPairFileExistsOverWriteeffect=بنقرك على نعم سيتم حذف ملف شفرتي الدخول القديم و استبداله بالملف الذي استرجعته. 
 
-#_______________________________________________________=This account was created with an older version of Martus, which was unaware of multiple sealed bulletin versions. We need to update your system to recognize bulletins with versions.  The migration is automatic, fast, and safe. You cannot run this version of Martus unless you allow this migration.
--6c3f-field:confirmNeedsBulletinVersioningMigrationcause= لقد تم إنشاء هذا الحساب في إصدار قديم من Martus حيث لم تكن له قدرة التعرف على نسخ متعددة من نشرة مختومة. نحتاج لتحديث نظامك حتى يتسنى له التعرف على النشرات ذوات النسخ المتعددة. يعتبر التهجير أتوماتيكيا و آمنا و سريعا. لن يمكنك تشغيل هذا الإصدار من Martus حتى تسمح بعملية التهجير.
+#_______________________________________________________=This account was created with an older release of Martus, which was unaware of multiple sealed bulletin versions. We need to update your system to recognize bulletins with versions.  The migration is automatic, fast, and safe. You cannot run this release of Martus unless you allow this migration.
+-d89c-field:confirmNeedsBulletinVersioningMigrationcause=لقد تم إنشاء هذا الحساب في إصدار قديم من Martus حيث لم تكن له قدرة التعرف على نسخ متعددة من نشرة مختومة. نحتاج لتحديث نظامك حتى يتسنى له التعرف على النشرات ذوات النسخ المتعددة. يعتبر التهجير أتوماتيكيا و آمنا و سريعا. لن يمكنك تشغيل هذا الإصدار من Martus حتى تسمح بعملية التهجير. 
 
 #________________________________________________________=Answering Yes will allow the migration to proceed, answering No will exit Martus.
 -2a34-field:confirmNeedsBulletinVersioningMigrationeffect= إذا أجبت ب "نعم" سيتم السماح لعملية التهجير بالاستمرار، أما إذا أجبت ب "لا" سوف ينغلق برنامج Martus.
@@ -898,7 +912,7 @@
 -1c29-field:confirmQuickEraseOutboxNotEmptycause=لطفا ملاحظة: توجد نشرات بمجلد الصادر لم يتم إرسالها للخادم. إذا واصلت هذا الإجراء فسوف تضيع هذه النشرات. 
 
 #________________________________________________=Clicking on Yes will bring you to a confirmation dialog, Clicking on No will return you to Martus without erasing anything.
--ffe3-field:confirmQuickEraseOutboxNotEmptyeffect=
+-ffe3-field:confirmQuickEraseOutboxNotEmptyeffect= بالنقر على "نعم" سيظهر لك مربع تأكيد، أما إذا نقرت على "لا" فسوف تعود إلى برنامج Martus دون حذف شيء.
 
 #___________________________________________=Welcome to Martus.  What would you like to do?
 -dd0e-field:confirmRecoverUsingKeySharecause=مرحبا بك في Martus. ماذا تريد أن تفعل؟
@@ -942,8 +956,8 @@
 #___________________________________________=After you review the contents, you can accept them, modify them, or press cancel to keep the existing default details.
 -bbcf-field:confirmResetDefaultDetailseffect=بعدما تستعرض المحتويات، يمكنك قبولها أو تعديلها أو النقر على إلغاء للاحتفاظ بالتفاصيل التلقائية الموجودة.
 
-#____________________________________________=The following bulletin(s) selected for retrieval are newer versions of bulletins already on this system:\n\n#TITLES#
--b7e9-field:confirmRetrieveNewerVersionscause= النشرة(ات) الآتية و التي اخترتها لاسترجاعها هي نسخ أحدث لنشرات توجد بالفعل على هذا النظام:\n\n #TITLES#
+#____________________________________________=The following bulletin(s) selected for retrieval are newer versions of bulletins already on this computer:\n\n#TITLES#
+-c5e3-field:confirmRetrieveNewerVersionscause=النشرة(ات) الآتية و التي اخترتها لاسترجاعها هي نسخ أحدث لنشرات توجد بالفعل على هذا الحاسوب:\n\n #TITLES#
 
 #_____________________________________________=Each older version will be replaced by the newer version from the server.
 -1d86-field:confirmRetrieveNewerVersionseffect= سيتم استبدال كل نشرة قديمة بأخرى حديثة من الخادم.
@@ -959,6 +973,7 @@
 
 #______________________________________________=Benetech recommends that you do not use this server until a compliance statement is made available for you to read.  Continuing will select this non-compliant server anyway.
 -8731-field:confirmServerComplianceFailedeffect=توصي شركة Benetech بألاّ تستخدم هذا الخادم حتى يُصدر بيان توافق تقرأه. بالاستمرار سيتم اختيار هذا الخادم غير المتوافق على أية حال.
+
 
 #_________________________________________=You have chosen to allow this client the ability to view your public and PRIVATE data.
 -4059-field:confirmSetImportPublicKeycause=لقد اخترت أن تمنح هذا العميل صلاحية استعراض بياناتك العامة و الخاصة. 
@@ -990,11 +1005,11 @@
 #______________________________________=Clicking on Yes will exit Martus, and leave the unsent bulletins.  They will be sent the next time you run Martus and connect to a server.
 -7c7f-field:confirmUploadRemindereffect=بالنقر على نعم سيتم إنهاء عمل Martus، و ستبقى النشرات التي لم تُرسل وسيتم إرسالها في المرة القادمة التي تبدأ فيها عمل Martus. 
 
-#_______________________________________________=The bulletin you are about to create is based on a previous bulletin whose custom fields are different from your current custom fields.  Do you wish to use the original bulletins custom fields?
--6d10-field:confirmUseBulletinsCustomFieldscause=النشرة التي تريد إنشائها تعتمد على نشرة سابقة حقولها المعدلة تختلف عن حقولك المعدلة الحالية. هل تريد استخدام الحقول المعدلة للنشرة الأصلية؟ 
+#_______________________________________________=The bulletin you are about to create is based on a previous bulletin whose custom fields are different from your current custom fields.  Do you wish to use the original bulletin's custom fields?
+-a6ca-field:confirmUseBulletinsCustomFieldscause=النشرة التي تريد إنشائها تعتمد على نشرة سابقة حقولها المعدلة تختلف عن حقولك المعدلة الحالية. هل تريد استخدام الحقول المعدلة للنشرة الأصلية؟ 
 
-#________________________________________________=Answering Yes will use the old custom fields and all bulletin data.  Answering No will use your current custom fields and copy all similar fields to the new bulletin but you will lose some of the original bulletins data.
--a313-field:confirmUseBulletinsCustomFieldseffect=<Answering Yes will use the old custom fields and all bulletin data.  Answering No will use your current custom fields and copy all similar fields to the new bulletin but you will lose some of the original bulletins data.>
+#________________________________________________=Answering Yes will use the old custom fields and all bulletin data.  Answering No will use your current custom fields and copy all similar fields to the new bulletin but you will lose some of the original bulletin's data.
+-afbe-field:confirmUseBulletinsCustomFieldseffect= إذا أجبت ب"نعم" فسوف تستخدم الحقول المعدلة القديمة و جميع بيانات النشرة. إذا أجبت ب"لا" فسوف تستخدم حقولك المعدلة الحالية و سيتم نسخ جميع الحقول المشابهة إلى النشرة الجديدة و لكنك ستفقد بعضا من بيانات النشرة الأصلية.
 
 #________________________________________________=Warning: acctmap.txt file in your account's packets directory is missing or is corrupt.  This may indicate someone has tried to tamper with your data or could be caused by a hardware error.
 -61cb-field:confirmWarnMissingAccountMapFilecause=تحذير: لقد ضاع أو تم إتلاف ملف acctmap.txt الموجود في مجلد packets بحسابك. يُشير ذلك إلى أن شخصا حاول العبث ببياناتك أو أن هناك مشكلة بمكونات حاسوبك الصلبة.
@@ -1052,6 +1067,7 @@
 
 #_______________________________=You have chosen to retrieve all bulletins from the Martus server.  
 -0330-field:confirmretrievecause=لقد اخترت استرجاع جميع النشرات من خادم Martus.
+
 
 #________________________________=This will restore all the discarded bulletins that were sent to the server.  
 -8dbd-field:confirmretrieveeffect=سيتم بذلك استعادة جميع النشرات المُلغاة التي تم إرسالها للخادم. 
@@ -1131,11 +1147,17 @@
 #____________________________________=A copy of Martus is already running on this computer. You must close that copy before starting a new copy.
 -614e-field:notifyAlreadyRunningcause=تعمل نسخة من Martus بالفعل على هذا الحاسوب. يجب أن تقوم بإغلاق تلك النسخة قبلما تقوم بتشغيل نسخة جديدة.
 
+#_______________________________________________=You currently are viewing this version of the bulletin.
+-8a02-field:notifyAlreadyViewingThisVersioncause= أنت الآن تستعرض هذه النسخة من النشرة.
+
 #________________________________________=The item you chose was not a file, please choose a file to add as an attachment to this bulletin.
 -0de2-field:notifyAttachmentNotAFilecause=المفردة التي اخترتها ليست بملف، لطفا اختر ملف لإضافته كمرفق لهذه النشرة. 
 
 #______________________________________________=Martus could not authenticate the server. The server may have been compromised.  Please verify your server configuration and contact the server operator.
 -f27c-field:notifyAuthenticateServerFailedcause=لم يستطع Martus التحقق من هوية الخادم. ربما تم اختراق هذا الخادم. لطفا تحقق من تهيئة الخادم و اتصل بالقائم عليه.
+
+#________________________________________________=The bulletin version you are trying to view is currently not on your system.
+-8579-field:notifyBulletinVersionNotInSystemcause= نسخة النشرة التي تريد استعراضها لا تتواجد حاليا على نظام حاسوبك.
 
 #____________________________________=The selected server is not responding. Before you choose a server, you must be connected to the internet, and that server must be available.
 -38fd-field:notifyConfigNoServercause=الخادم المُختار لا يستجيب. قبلما تختار خادما، يجب عليك الاتصال بالانترنت وبذلك يصبح هذا الخادم متاحا.
@@ -1336,7 +1358,7 @@
 -7d7f-field:notifyVerifyKeyPairSharePassedcause=تم التحقق من صلاحية جميع الأقراص 
 
 #_____________________________________=Welcome!\n\nTo start using Martus, create an account. Choose any username you like and a password that contains at least 8 characters. Keep the following information in mind as you create your username and password:\n\n * We recommend using a password that has 15 characters.\n * Include some characters that aren't letters or numbers in your password.\n   (That is, use punctuation or other special characters.)\n * Use a password that other people won't be able to guess;\n   anyone who knows your username and password can view your private data,\n   and can create bulletins that everyone will believe were created by you.\n * Write down your username and password and store them in a safe place.\n * You'll need to enter your username and password whenever you start Martus.\n * Martus will also sometimes prompt you to re-enter your username\n   and password to prevent someone else from using your account\n   after you've logged in.\n\nIMPORTANT: You are the only one who has your username and password. If you lose either of them, you won't be able to retrieve your data. Your username and password are not stored or backed up anywhere, so they cannot be reset for you.
--da34-field:notifyWelcomeToMartuscause=مرحبا! \n\nلكي تبدأ في استخدام Martus قم بإنشاء حساب. اختر اسم مستخدم و كلمة مرور تحتوي على 8 حروف على الأقل. ضع هذه المعلومات في اعتبارك عند تكوين اسم المستخدم و كلمة المرور: \n\n* نوصي باستخدام كلمة مرور تحتوي على 15 حرفا. \n * قم بإدخال علامات ليست بحروف و لا أرقام في كلمة مرورك. \n (أي استخدم علامات تنصيص أو أية علامات خاصة أخرى.) \n * استخدم كلمة مرور يصعب على الآخرين تخمينها، \n  يمكن لأي شخص يعرف اسم المستخدم الخاص بك و كلمة مرورك أن يطّلع على بياناتك الخاصة، \n  ويمكنه إنشاء نشرات يعتقد أي فرد أن من قام بإنشائها هو أنت. \n * اكتب اسم المستخدم الخاص بك و كلمة مرورك على ورقة و احفظها في مكان آمن. \n* ستحتاج إلى إدخال اسم المستخدم الخاص بك و كلمة مرورك كلما بدأت العمل في Martus. \n * سيطلب منك Martus أحيانا إعادة إدخال اسم المستخدم الخاص بك\n  وكلمة مرورك لمنع أي شخص آخر من استخدام حسابك\n  بعدما تدخل فيه. \n\nهام: يجب أن تكون أنت الشخص الوحيد الذي يعرف اسم المستخدم الخاص بك و كلمة مرورك. فإذا ما فقدت أيهما، لن تستطيع استرجاع بياناتك. لا يقوم Martus بتخزين اسم المستخدم الخاص بك و كلمة مرورك بأي مكان، لذا لن يمكن استعادتهما إليك.
+-da34-field:notifyWelcomeToMartuscause=مرحبا! \n\n لكي تبدأ في استخدام Martus قم بإنشاء حساب. اختر اسم مستخدم و كلمة مرور تحتوي على 8 حروف على الأقل. ضع هذه المعلومات في اعتبارك عند تكوين اسم المستخدم و كلمة المرور: \n\n * نوصي باستخدام كلمة مرور تحتوي على 15 حرفا. \n * قم بإدخال علامات ليست بحروف و لا أرقام في كلمة مرورك. \n (أي استخدم علامات تنصيص أو أية علامات خاصة أخرى.) \n * استخدم كلمة مرور يصعب على الآخرين تخمينها، \n  يمكن لأي شخص يعرف اسم المستخدم الخاص بك و كلمة مرورك أن يطّلع على بياناتك الخاصة، \n  ويمكنه إنشاء نشرات يعتقد أي فرد أن من قام بإنشائها هو أنت. \n * اكتب اسم المستخدم الخاص بك و كلمة مرورك على ورقة و احفظها في مكان آمن. \n * ستحتاج إلى إدخال اسم المستخدم الخاص بك و كلمة مرورك كلما بدأت العمل في Martus. \n * سيطلب منك Martus أحيانا إعادة إدخال اسم المستخدم الخاص بك\n  وكلمة مرورك لمنع أي شخص آخر من استخدام حسابك\n  بعدما تدخل فيه. \n\nهام: يجب أن تكون أنت الشخص الوحيد الذي يعرف اسم المستخدم الخاص بك و كلمة مرورك. فإذا ما فقدت أيهما، لن تستطيع استرجاع بياناتك. لا يقوم Martus بتخزين اسم المستخدم الخاص بك و كلمة مرورك بأي مكان، لذا لن يمكن استعادتهما إليك.
 
 #_____________________________________=The current Martus Server has refused to accept your contact info
 -156f-field:notifycontactRejectedcause=لقد رفض خادم Martus الحالي قبول معلومات الاتصال بك.
@@ -1428,8 +1450,8 @@
 #________________=Title
 -768e-field:title=العنوان 
 
-#_____________________________=Arabic 2.5
--b0f3-field:translationVersion=2.5  العربية
+#_____________________________=Arabic 2.6
+-b0f3-field:translationVersion=2.6  العربية
 
 #___________________=Username
 -84c2-field:username=اسم المستخدم 
@@ -1514,6 +1536,9 @@
 
 #________________=Azerbaijani
 -6885-language:az=الأذربيجانية 
+
+#________________=Bulgarian
+-cebe-language:bg=البلغارية
 
 #________________=Bengali, Bangla
 -4b7b-language:bn= البنغالية، بانغلا 
@@ -1603,6 +1628,7 @@
 -c98b-language:ps=الباشتو 
 
 #________________=Portuguese
+
 -2388-language:pt=البرتغالية 
 
 #________________=Romanian
@@ -2181,6 +2207,7 @@
 #____________________________________=Export My Public Account Id
 -2b8a-wintitle:inputExportMyPublicKey=تصدير هوية حسابي العام 
 
+
 #_____________________________=HQ Label
 -bd52-wintitle:inputGetHQLabel=العنوان التعريفي للمركز الرئيسي
 
@@ -2208,11 +2235,17 @@
 #__________________________________=Martus Already Running
 -cfce-wintitle:notifyAlreadyRunning=Martus يعمل بالفعل
 
+#_____________________________________________=Bulletin Version Already Being Viewed
+-c778-wintitle:notifyAlreadyViewingThisVersion= هذه النسخة من النشرة يتم استعراضها الآن بالفعل
+
 #______________________________________=Attachment Chosen Not a File
 -8023-wintitle:notifyAttachmentNotAFile=المرفق المُختار ليس بملف
 
 #____________________________________________=Security Alert!
 -4938-wintitle:notifyAuthenticateServerFailed=تنبيه أمني! 
+
+#______________________________________________=Bulletin Version Not Found
+-a60d-wintitle:notifyBulletinVersionNotInSystem=لم يتم العثور على هذه النسخة من النشرة
 
 #__________________________________=Unable to Connect to Server
 -1b07-wintitle:notifyConfigNoServer=غير قادر على الاتصال بالخادم 
