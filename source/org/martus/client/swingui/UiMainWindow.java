@@ -934,7 +934,13 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	}
 	
 	public void doResendBulletins()
-	{
+	{		
+		if (!isServerConfigured())
+		{
+			notifyDlg(this, "retrievenoserver", "ResendBulletins");
+			return;
+		}	
+		
 		table.doResendBulletins();
 	}
 
@@ -1709,9 +1715,8 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		folderSplitter.setDividerLocation(uiState.getCurrentFolderSplitterPosition());
 
 		getContentPane().add(folderSplitter);
-		statusBar = new UiStatusBar(getLocalization());	
-		UiProgressMeter r = statusBar.getBackgroundProgressMeter();		
-		r.hideProgressMeter();
+		statusBar = new UiStatusBar(getLocalization());		
+		checkServerStatus();	
 		getContentPane().add(statusBar, BorderLayout.SOUTH ); 
 
 		Toolkit toolkit = Toolkit.getDefaultToolkit();
@@ -1735,9 +1740,24 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		}
 	}
 	
+	public void checkServerStatus()
+	{		
+		if (!app.isServerConfigured())
+		{	
+			setStatusMessageTag("ServerNotConfiguredProgressMessage");
+			return;
+		}
+	
+		ClientSideNetworkGateway gateway = getApp().getCurrentNetworkInterfaceGateway();		
+		if(app.isSSLServerAvailable(gateway))
+			setStatusMessageTag("StatusReady");	
+		else
+			setStatusMessageTag("NoServerAvailableProgressMessage");			
+	}
+	
 	public void setStatusMessageTag(String tag)
 	{
-		UiProgressMeter r = statusBar.getBackgroundProgressMeter();
+		UiProgressMeter r = statusBar.getBackgroundProgressMeter();	
 		r.setStatusMessageTag(tag);
 		r.hideProgressMeter();
 	}

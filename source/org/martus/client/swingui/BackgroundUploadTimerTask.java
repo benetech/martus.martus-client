@@ -66,8 +66,13 @@ class BackgroundUploadTimerTask extends TimerTask
 			return;
 		if(mainWindow.preparingToExitMartus)
 			return;
+			
 		if(!getApp().isServerConfigured())
+		{
+			mainWindow.setStatusMessageTag("ServerNotConfiguredProgressMessage");	
 			return;
+		}												
+			
 		try
 		{
 			checkComplianceStatement();
@@ -80,23 +85,18 @@ class BackgroundUploadTimerTask extends TimerTask
 			e.printStackTrace();
 		}
 	}
-
+	
 	private void doUploading()
 		throws InterruptedException, InvocationTargetException
 	{		
 		String tag = "StatusReady";
 		if(mainWindow.isServerConfigured())
-		{	
+		{					
 			try
-			{
+			{								
 				BackgroundUploader.UploadResult uploadResult = uploader.backgroundUpload(); 
-				mainWindow.uploadResult = uploadResult.result;
-				
-				if (uploadResult.result != null && uploadResult.result.equals(NetworkInterfaceConstants.UNKNOWN))
-				{
-					tag = "";
-				}	
-				else if(uploadResult.result == null)
+				mainWindow.uploadResult = uploadResult.result;				
+				if(uploadResult.result == null)
 				{
 					tag = "UploadFailedProgressMessage"; 
 					if(uploadResult.exceptionThrown == null)
@@ -107,6 +107,8 @@ class BackgroundUploadTimerTask extends TimerTask
 					//System.out.println("UiMainWindow.Tick.run: " + uploadResult);
 					updateDisplay();
 				}
+				else
+					tag = "";							
 			}
 			catch (MartusApp.DamagedBulletinException e)
 			{
@@ -117,10 +119,6 @@ class BackgroundUploadTimerTask extends TimerTask
 				mainWindow.folderContentsHaveChanged(getApp().createOrFindFolder(getStore().getNameOfFolderDamaged()));
 				mainWindow.folderTreeContentsHaveChanged();
 			}
-		}
-		else
-		{
-			tag = "ServerNotConfiguredProgressMessage";
 		}
 
 		if (tag != "")			
@@ -383,6 +381,7 @@ class BackgroundUploadTimerTask extends TimerTask
 
 	UiMainWindow mainWindow;
 	BackgroundUploader uploader;
+
 	boolean alreadyCheckedCompliance;
 	boolean inComplianceDialog;
 	boolean alreadyGotNews;
