@@ -971,7 +971,7 @@ public class MartusApp
 			allRevisions.add(leafBulletinUid);
 			for(int h=0; h<history.size(); ++h)
 			{
-				allRevisions.add(UniversalId.createFromAccountAndLocalId(leafBulletinUid.getAccountId(), history.get(i)));
+				allRevisions.add(UniversalId.createFromAccountAndLocalId(leafBulletinUid.getAccountId(), history.get(h)));
 			}
 			
 			for(int j = 0; j < allRevisions.size(); ++j)

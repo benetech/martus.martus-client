@@ -1414,14 +1414,21 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		String newString = "bilbo";
 		Bulletin b2 = store.createClone(b1, b1.getPublicFieldSpecs(), b1.getPrivateFieldSpecs());
 		b2.set(Bulletin.TAGPRIVATEINFO, newString);
+		String publicData2 = "publicData2";
+		b2.set(Bulletin.TAGPUBLICINFO, publicData2);
 		b2.setSealed();
 		appWithAccount.saveBulletin(b2, newFolder);
+		Bulletin b3 = store.createClone(b2, b2.getPublicFieldSpecs(), b2.getPrivateFieldSpecs());
+		b3.set(Bulletin.TAGPUBLICINFO, "");
+		appWithAccount.saveBulletin(b3, newFolder);
 
 		appWithAccount.search(newString, startDate, endDate, andKeyword, orKeyword);
 		assertEquals(1, store.findFolder(store.getSearchFolderName()).getBulletinCount());
 		appWithAccount.search(originalString, startDate, endDate, andKeyword, orKeyword);
 		assertEquals(1, store.findFolder(store.getSearchFolderName()).getBulletinCount());
 		appWithAccount.search(commonString, startDate, endDate, andKeyword, orKeyword);
+		assertEquals(1, store.findFolder(store.getSearchFolderName()).getBulletinCount());
+		appWithAccount.search(publicData2, startDate, endDate, andKeyword, orKeyword);
 		assertEquals(1, store.findFolder(store.getSearchFolderName()).getBulletinCount());
 		
 		
