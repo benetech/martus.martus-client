@@ -106,6 +106,7 @@ import org.martus.client.swingui.tablemodels.RetrieveHQTableModel;
 import org.martus.client.swingui.tablemodels.RetrieveMyDraftsTableModel;
 import org.martus.client.swingui.tablemodels.RetrieveMyTableModel;
 import org.martus.client.swingui.tablemodels.RetrieveTableModel;
+import org.martus.common.EnglishCommonStrings;
 import org.martus.common.HQKeys;
 import org.martus.common.MartusUtilities;
 import org.martus.common.Version;
@@ -151,7 +152,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		setCurrentActiveFrame(this);
 		try
 		{
-			localization = new UiLocalization(MartusApp.getTranslationsDirectory(), EnglishStrings.strings);
+			localization = new UiLocalization(MartusApp.getTranslationsDirectory(), getAllEnglishStrings());
 			app = new MartusApp(localization);
 			initializeCurrentLanguage();
 		}
@@ -167,6 +168,18 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 			timeoutInXSeconds = TESTING_TIMEOUT_60_SECONDS;
 
 		initalizeUiState();
+	}
+
+	public static String[] getAllEnglishStrings()
+	{
+		String[] clientStrings = EnglishStrings.strings;
+		int lenghtClient = clientStrings.length;
+		String[] commonStrings = EnglishCommonStrings.strings;
+		int lenghtCommon = commonStrings.length;
+		String[] allEnglishStrings = new String[lenghtCommon+lenghtClient];
+		System.arraycopy(clientStrings,0,allEnglishStrings,0,lenghtClient);
+		System.arraycopy(commonStrings,0,allEnglishStrings,lenghtClient,lenghtCommon);
+		return allEnglishStrings;
 	}
 
 	private void initializeCurrentLanguage()

@@ -44,8 +44,8 @@ import org.martus.client.core.MartusApp;
 import org.martus.client.core.MartusApp.AccountAlreadyExistsException;
 import org.martus.client.core.MartusApp.CannotCreateAccountFileException;
 import org.martus.client.core.MartusApp.SaveConfigInfoException;
-import org.martus.client.swingui.EnglishStrings;
 import org.martus.client.swingui.UiLocalization;
+import org.martus.client.swingui.UiMainWindow;
 import org.martus.common.CustomFields;
 import org.martus.common.FieldSpec;
 import org.martus.common.HQKey;
@@ -87,7 +87,7 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 
 		mockSecurityForApp = MockMartusSecurity.createClient();
 
-		localization = new UiLocalization(null, EnglishStrings.strings);
+		localization = new UiLocalization(null, UiMainWindow.getAllEnglishStrings());
 		localization.setCurrentLanguageCode("en");
 		appWithAccount = MockMartusApp.create(mockSecurityForApp);
 		appWithAccount.setSSLNetworkInterfaceHandlerForTesting(new ServerSideNetworkHandlerNotAvailable());

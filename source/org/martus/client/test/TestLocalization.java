@@ -36,6 +36,7 @@ import javax.swing.SwingConstants;
 import org.martus.client.swingui.EnglishStrings;
 import org.martus.client.swingui.UiConstants;
 import org.martus.client.swingui.UiLocalization;
+import org.martus.client.swingui.UiMainWindow;
 import org.martus.common.MartusUtilities;
 import org.martus.common.clientside.ChoiceItem;
 import org.martus.common.clientside.Localization;
@@ -178,10 +179,19 @@ public class TestLocalization extends TestCaseEnhanced
 		assertTrue("must have english", foundEnglish);
 	}
 	
+	public void testGetAllEnglishStrings() throws Exception
+	{
+		UiLocalization localization = new UiLocalization(createTempDirectory(), UiMainWindow.getAllEnglishStrings());
+		assertEquals(localization.getLabel("en", "wintitle", "main"), "Martus Human Rights Bulletin System");
+		assertEquals(localization.getLabel("en", "keyword", "or"), "or");
+		assertEquals(localization.getLabel("en", "language", "?"), "-Other-");
+		assertEquals(localization.getLabel("en", "status", "sealed"), "Sealed");
+	}
+	
 	public void testGetTranslationFileAllowUnofficial() throws Exception
 	{
 		File translationDirectory = createTempDirectory();
-		UiLocalization tmpLocalization = new UiLocalization(translationDirectory, EnglishStrings.strings);
+		UiLocalization tmpLocalization = new UiLocalization(translationDirectory, UiMainWindow.getAllEnglishStrings());
 		tmpLocalization.includeOfficialLanguagesOnly = false;
 		String languageCode = "ff";
 		assertNull("Language doesn't exists should return null", tmpLocalization.getTranslationFile(languageCode));
@@ -277,7 +287,7 @@ public class TestLocalization extends TestCaseEnhanced
 	public void testAddedMTPKLanguagePackWhenWeAllowUnofficialTranslations() throws Exception
 	{
 		File translationDirectory = createTempDirectory();
-		UiLocalization myLocalization = new UiLocalization(translationDirectory, EnglishStrings.strings);
+		UiLocalization myLocalization = new UiLocalization(translationDirectory, UiMainWindow.getAllEnglishStrings());
 		myLocalization.includeOfficialLanguagesOnly = false;
 
 		String someTestLanguageCode = "xx";
@@ -296,7 +306,7 @@ public class TestLocalization extends TestCaseEnhanced
 		assertTrue("A signed MLP file should be trusted", myLocalization.isOfficialTranslation(someTestLanguageCode));
 
 		File translationDirectory2 = createTempDirectory();
-		UiLocalization myLocalization2 = new UiLocalization(translationDirectory2, EnglishStrings.strings);
+		UiLocalization myLocalization2 = new UiLocalization(translationDirectory2, UiMainWindow.getAllEnglishStrings());
 		myLocalization2.includeOfficialLanguagesOnly = false;
 		File someTestLanguage2 = new File(translationDirectory2,UiBasicLocalization.getMlpkFilename(someTestLanguageCode));
 		someTestLanguage2.deleteOnExit();
@@ -315,7 +325,7 @@ public class TestLocalization extends TestCaseEnhanced
 	public void testAddedMTPKLanguagePackWhenWeAllowONLYOfficialTranslations() throws Exception
 	{
 		File translationDirectory = createTempDirectory();
-		UiLocalization myLocalization = new UiLocalization(translationDirectory, EnglishStrings.strings);
+		UiLocalization myLocalization = new UiLocalization(translationDirectory, UiMainWindow.getAllEnglishStrings());
 
 		String someTestLanguageCode = "xx";
 		boolean foundSomeTestLanguage = doesLanguageExist(myLocalization, someTestLanguageCode);
