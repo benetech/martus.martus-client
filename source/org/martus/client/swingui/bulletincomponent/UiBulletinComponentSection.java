@@ -54,8 +54,8 @@ abstract public class UiBulletinComponentSection extends UiParagraphPanel
 		sectionHeading.setFont(sectionHeading.getFont().deriveFont(Font.BOLD));
 		
 		warningIndicator = new UiWarningLabel();
-		addComponents(sectionHeading, warningIndicator);
 		clearWarningIndicator();
+		addComponents(sectionHeading, warningIndicator);
 	}
 	
 	public UiMainWindow getMainWindow()

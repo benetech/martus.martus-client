@@ -53,7 +53,7 @@ public class UiBulletinComponentHeaderSection extends UiBulletinComponentSection
 		String buttonText = localization.getButtonLabel("BulletinDetails");
 		JButton detailsButton = new UiButton(buttonText);
 		detailsButton.addActionListener(new DetailsListener());
-		addComponents(detailsButton, warningIndicator);
+		addComponents(detailsButton, new UiLabel(""));
 
 		lastSavedLabel = new UiLabel(localization.getFieldLabel(Bulletin.TAGLASTSAVED));
 		dateTime = new UiLabel("");
@@ -69,7 +69,6 @@ public class UiBulletinComponentHeaderSection extends UiBulletinComponentSection
 		hqLabel = new UiLabel(localization.getFieldLabel("HQSummaryLabel"));
 		hqSummary = new UiLabel("");
 		addComponents(hqLabel, hqSummary);
-
 	}
 	
 	public void setBulletin(Bulletin bulletinToShow)
