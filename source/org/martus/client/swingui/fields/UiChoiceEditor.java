@@ -29,7 +29,7 @@ package org.martus.client.swingui.fields;
 import java.awt.event.ActionListener;
 import javax.swing.JComponent;
 import org.martus.common.clientside.ChoiceItem;
-import org.martus.swing.UiJComboBox;
+import org.martus.swing.UiComboBox;
 
 public class UiChoiceEditor extends UiField
 {
@@ -37,7 +37,7 @@ public class UiChoiceEditor extends UiField
 	public UiChoiceEditor(ChoiceItem[] choicesToUse)
 	{
 		choices = choicesToUse;
-		widget = new UiJComboBox(choices);
+		widget = new UiComboBox(choices);
 	}
 
 	public JComponent getComponent()
@@ -75,7 +75,7 @@ public class UiChoiceEditor extends UiField
 		widget.setSelectedItem(item);
 	}
 
-	UiJComboBox widget;
+	UiComboBox widget;
 	ChoiceItem[] choices;
 }
 

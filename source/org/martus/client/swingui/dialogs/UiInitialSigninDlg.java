@@ -26,7 +26,6 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.swingui.dialogs;
 
 import java.awt.BorderLayout;
-
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.ButtonGroup;
@@ -35,11 +34,11 @@ import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JRadioButton;
 import javax.swing.JTabbedPane;
-
-import org.martus.common.clientside.*;
+import org.martus.common.clientside.CurrentUiState;
+import org.martus.common.clientside.UiBasicLocalization;
 import org.martus.swing.UiLanguageDirection;
+import org.martus.swing.UiRadioButton;
 import org.martus.swing.UiWrappedTextArea;
 
 
@@ -79,9 +78,9 @@ public class UiInitialSigninDlg extends UiSigninDlg
 	{
 		JPanel radioButtonPanel = new JPanel();
 		radioButtonPanel.setLayout(new BoxLayout(radioButtonPanel, BoxLayout.Y_AXIS));
-		radioBackupFile = new JRadioButton(localization.getButtonLabel("RecoverAccountByBackup"), true);
+		radioBackupFile = new UiRadioButton(localization.getButtonLabel("RecoverAccountByBackup"), true);
 		radioBackupFile.setActionCommand("backupFile");
-		radioShare = new JRadioButton(localization.getButtonLabel("RecoverAccountByShare"), false);
+		radioShare = new UiRadioButton(localization.getButtonLabel("RecoverAccountByShare"), false);
 		radioShare.setActionCommand("share");
 		recoveryTypeGroup = new ButtonGroup();
 		recoveryTypeGroup.add(radioBackupFile);
@@ -119,8 +118,8 @@ public class UiInitialSigninDlg extends UiSigninDlg
 
 	private ButtonGroup recoveryTypeGroup;
 	private JTabbedPane tabbedPane;
-	private JRadioButton radioShare;
-	private JRadioButton radioBackupFile;
+	private UiRadioButton radioShare;
+	private UiRadioButton radioBackupFile;
 	
 	private String tabLabelSignIn;
 	private	String tabLabelNewAccount;

@@ -38,7 +38,6 @@ import javax.swing.ButtonGroup;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JRadioButton;
 
 import org.martus.common.FieldSpec;
 import org.martus.common.StandardFieldSpecs;
@@ -46,7 +45,8 @@ import org.martus.common.bulletin.Bulletin;
 import org.martus.common.clientside.UiBasicLocalization;
 import org.martus.common.utilities.MartusFlexidate;
 import org.martus.swing.ParagraphLayout;
-import org.martus.swing.UiJComboBox;
+import org.martus.swing.UiComboBox;
+import org.martus.swing.UiRadioButton;
 
 public class UiFlexiDateEditor extends UiField
 {
@@ -63,8 +63,8 @@ public class UiFlexiDateEditor extends UiField
 		component.setLayout(new BorderLayout());		
 				
 		Box boxDateSelection = Box.createHorizontalBox();				
-		exactDateRB = new JRadioButton(localization.getFieldLabel("DateExact"), true);			
-		flexiDateRB = new JRadioButton(localization.getFieldLabel("DateRange"));		
+		exactDateRB = new UiRadioButton(localization.getFieldLabel("DateExact"), true);			
+		flexiDateRB = new UiRadioButton(localization.getFieldLabel("DateRange"));		
 
 		ButtonGroup radioGroup = new ButtonGroup();
 		radioGroup.add(exactDateRB);
@@ -112,9 +112,9 @@ public class UiFlexiDateEditor extends UiField
 		if (bgDateBox  == null)
 		{	
 			bgDateBox = Box.createHorizontalBox();								
-			bgDayCombo = new UiJComboBox();	
-			bgMonthCombo = new UiJComboBox(localization.getMonthLabels());
-			bgYearCombo = new UiJComboBox();
+			bgDayCombo = new UiComboBox();	
+			bgMonthCombo = new UiComboBox(localization.getMonthLabels());
+			bgYearCombo = new UiComboBox();
 			if(StandardFieldSpecs.isCustomFieldTag(spec.getTag()))					
 				UiDateEditor.buildCustomDate(bgDateBox, localization, bgYearCombo, bgMonthCombo, bgDayCombo);
 			else
@@ -130,9 +130,9 @@ public class UiFlexiDateEditor extends UiField
 		if (endDateBox == null)
 		{
 			endDateBox = Box.createHorizontalBox();		
-			endDayCombo = new UiJComboBox();	
-			endMonthCombo = new UiJComboBox(localization.getMonthLabels());
-			endYearCombo = new UiJComboBox();
+			endDayCombo = new UiComboBox();	
+			endMonthCombo = new UiComboBox(localization.getMonthLabels());
+			endYearCombo = new UiComboBox();
 			needToSetDefaultValue=true;	
 			
 			if(StandardFieldSpecs.isCustomFieldTag(spec.getTag()))					
@@ -290,16 +290,16 @@ public class UiFlexiDateEditor extends UiField
 		
 	JComponent 					component;
 	
-	UiJComboBox 					bgMonthCombo;
-	UiJComboBox 					bgDayCombo;
-	UiJComboBox 					bgYearCombo;	
-	UiJComboBox 					endMonthCombo;
-	UiJComboBox 					endDayCombo;
-	UiJComboBox 					endYearCombo;
+	UiComboBox 					bgMonthCombo;
+	UiComboBox 					bgDayCombo;
+	UiComboBox 					bgYearCombo;	
+	UiComboBox 					endMonthCombo;
+	UiComboBox 					endDayCombo;
+	UiComboBox 					endYearCombo;
 		
 	private UiBasicLocalization localization;	
-	private JRadioButton 		exactDateRB;
-	private JRadioButton 		flexiDateRB;
+	private UiRadioButton 		exactDateRB;
+	private UiRadioButton 		flexiDateRB;
 	private JPanel 				flexiDatePanel;
 	private JPanel 				extDatePanel;
 	private Box					bgDateBox = null;

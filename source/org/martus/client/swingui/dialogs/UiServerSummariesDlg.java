@@ -42,7 +42,6 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JRadioButton;
 import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableCellRenderer;
@@ -55,6 +54,7 @@ import org.martus.client.swingui.tablemodels.RetrieveTableModel;
 import org.martus.common.clientside.UiBasicLocalization;
 import org.martus.common.packet.FieldDataPacket;
 import org.martus.swing.ParagraphLayout;
+import org.martus.swing.UiRadioButton;
 import org.martus.swing.UiTable;
 import org.martus.swing.UiWrappedTextArea;
 import org.martus.swing.Utilities;
@@ -144,9 +144,9 @@ public abstract class UiServerSummariesDlg extends JDialog
 
 	private JPanel createSummariesPanel(UiBasicLocalization localization)
 	{
-		JRadioButton downloadableSummaries = new JRadioButton(localization.getButtonLabel("DownloadableSummaries"), true);
+		UiRadioButton downloadableSummaries = new UiRadioButton(localization.getButtonLabel("DownloadableSummaries"), true);
 		downloadableSummaries.addActionListener(new ChangeDownloadableSummariesHandler());
-		JRadioButton allSummaries = new JRadioButton(localization.getButtonLabel("AllSummaries"), false);
+		UiRadioButton allSummaries = new UiRadioButton(localization.getButtonLabel("AllSummaries"), false);
 		allSummaries.addActionListener(new ChangeAllSummariesHandler());
 		ButtonGroup summariesGroup = new ButtonGroup();
 		summariesGroup.add(downloadableSummaries);
