@@ -29,7 +29,6 @@ package org.martus.client.swingui.tablemodels;
 import java.util.Vector;
 
 import org.martus.client.core.MartusApp;
-import org.martus.client.swingui.dialogs.UiProgressRetrieveSummariesDlg;
 import org.martus.common.MartusUtilities.ServerErrorException;
 import org.martus.common.clientside.UiBasicLocalization;
 
@@ -42,15 +41,13 @@ public class RetrieveHQTableModel extends RetrieveTableModelHQ
 		super(appToUse, localizationToUse);
 	}
 
-	public void initialize(UiProgressRetrieveSummariesDlg progressDlg) throws ServerErrorException
+	public void populateAllSummariesList() throws ServerErrorException
 	{
-		setProgressDialog(progressDlg);
 		Vector accounts = app.downloadFieldOfficeAccountIds();
 		for(int a = 0; a < accounts.size(); ++a)
 		{
 			String accountId = (String)accounts.get(a);
 			getFieldOfficeSealedSummaries(accountId);
 		}
-		setCurrentSummaries();
 	}
 }

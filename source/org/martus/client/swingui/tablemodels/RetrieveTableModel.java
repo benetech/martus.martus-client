@@ -57,7 +57,15 @@ abstract public class RetrieveTableModel extends AbstractTableModel
 		allSummaries = new Vector();
 	}
 
-	abstract public void initialize(UiProgressRetrieveSummariesDlg progressDlg) throws ServerErrorException;
+	public void initialize(UiProgressRetrieveSummariesDlg progressDlg) throws ServerErrorException
+	{
+		setProgressDialog(progressDlg);
+		populateAllSummariesList();
+		buildDownloadableSummariesList();
+		changeToDownloadableSummaries();
+	}
+	
+	abstract protected void populateAllSummariesList() throws ServerErrorException;
 	
 	UiBasicLocalization getLocalization()
 	{
@@ -69,12 +77,6 @@ abstract public class RetrieveTableModel extends AbstractTableModel
 		retrieverDlg = progressDlg;
 	}
 
-	protected void setCurrentSummaries()
-	{
-		downloadableSummaries = getSummariesForBulletinsNotInStore(allSummaries);
-		changeToDownloadableSummaries();
-	}
-
 	public void changeToDownloadableSummaries()
 	{
 		currentSummaries = downloadableSummaries;
@@ -83,22 +85,6 @@ abstract public class RetrieveTableModel extends AbstractTableModel
 	public void changeToAllSummaries()
 	{
 		currentSummaries = allSummaries;
-	}
-
-	public Vector getSummariesForBulletinsNotInStore(Vector summaries)
-	{
-		Vector result = new Vector();
-		Iterator iterator = summaries.iterator();
-		while(iterator.hasNext())
-		{
-			BulletinSummary currentSummary = (BulletinSummary)iterator.next();
-			UniversalId uid = UniversalId.createFromAccountAndLocalId(currentSummary.getAccountId(), currentSummary.getLocalId());
-			if(store.doesBulletinRevisionExist(uid))
-				continue;
-			currentSummary.setDownloadable(true);
-			result.add(currentSummary);
-		}
-		return result;
 	}
 
 	public void setAllFlags(boolean flagState)
@@ -172,9 +158,10 @@ abstract public class RetrieveTableModel extends AbstractTableModel
 	private void retrieveSummaries(String fieldOfficeAccountId, SummaryRetriever retriever) throws ServerErrorException
 	{
 		Vector summaryStrings = getSummaryStringsFromServer(retriever);
-		String accountId = fieldOfficeAccountId;
-		markAsOnServer(accountId, summaryStrings);
-		createSummariesFromStrings(fieldOfficeAccountId, summaryStrings);
+		Vector summaries = createSummariesFromStrings(fieldOfficeAccountId, summaryStrings);
+		markAsOnServer(summaries);
+		setDownloadableFlag(summaries);
+		allSummaries.addAll(summaries);
 	}
 
 	private Vector getSummaryStringsFromServer(SummaryRetriever retriever) throws ServerErrorException
@@ -194,7 +181,34 @@ abstract public class RetrieveTableModel extends AbstractTableModel
 		}
 	}
 
-	public void createSummariesFromStrings(String accountId, Vector summaryStrings)
+	private void setDownloadableFlag(Vector summaries)
+	{
+		Iterator iterator = summaries.iterator();
+		while(iterator.hasNext())
+		{
+			BulletinSummary currentSummary = (BulletinSummary)iterator.next();
+			String accountId = currentSummary.getAccountId();
+			String localId = currentSummary.getLocalId();
+			UniversalId uid = UniversalId.createFromAccountAndLocalId(accountId, localId);
+			if(store.doesBulletinRevisionExist(uid))
+				continue;
+			currentSummary.setDownloadable(true);
+		}
+	}
+
+	protected void buildDownloadableSummariesList()
+	{
+		downloadableSummaries = new Vector();
+		Iterator iterator = allSummaries.iterator();
+		while(iterator.hasNext())
+		{
+			BulletinSummary currentSummary = (BulletinSummary)iterator.next();
+			if(currentSummary.isDownloadable())
+				downloadableSummaries.add(currentSummary);
+		}
+	}
+
+	public Vector createSummariesFromStrings(String accountId, Vector summaryStrings)
 	{
 		RetrieveThread worker = new RetrieveThread(accountId, summaryStrings);
 		worker.start();
@@ -203,6 +217,8 @@ abstract public class RetrieveTableModel extends AbstractTableModel
 			waitForThreadToTerminate(worker);
 		else
 			retrieverDlg.beginRetrieve();
+		
+		return worker.getSummaries();
 	}
 
 	public void waitForThreadToTerminate(RetrieveThread worker)
@@ -222,12 +238,18 @@ abstract public class RetrieveTableModel extends AbstractTableModel
 		{
 			accountId = account;
 			summaryStrings = summarys;
+			result = new Vector();
 		}
 
 		public void run()
 		{
 			retrieveAllSummaries();
 			finishedRetrieve();
+		}
+		
+		public Vector getSummaries()
+		{
+			return result;
 		}
 
 		public void retrieveAllSummaries()
@@ -241,7 +263,7 @@ abstract public class RetrieveTableModel extends AbstractTableModel
 				try
 				{
 					BulletinSummary bulletinSummary = app.retrieveSummaryFromString(accountId, pair);
-					allSummaries.add(bulletinSummary);
+					result.add(bulletinSummary);
 				}
 				catch (ServerErrorException e)
 				{
@@ -265,6 +287,7 @@ abstract public class RetrieveTableModel extends AbstractTableModel
 
 		private String accountId;
 		private Vector summaryStrings;
+		private Vector result;
 	}
 
 	public void checkIfErrorOccurred() throws ServerErrorException
@@ -288,20 +311,12 @@ abstract public class RetrieveTableModel extends AbstractTableModel
 		return (BulletinSummary)currentSummaries.get(row);
 	}
 	
-	void markAsOnServer(String authorAccountId, Vector summaryStrings)
+	void markAsOnServer(Vector summaries)
 	{
-		for(int i=0; i < summaryStrings.size(); ++i)
+		for(int i=0; i < summaries.size(); ++i)
 		{
-			String parameters = (String)summaryStrings.get(i);
-				
-			// TODO: The following two lines were copied from MartusApp.retrieveSummaryFromString,
-			// so they should be refactored out to a common class
-			String args[] = parameters.split(BulletinSummary.fieldDelimeter, -1);
-			String bulletinLocalId = args[0];
-			
-			
-			UniversalId uid = UniversalId.createFromAccountAndLocalId(authorAccountId, bulletinLocalId);
-			Bulletin b = app.getStore().getBulletinRevision(uid);
+			BulletinSummary summary = (BulletinSummary)summaries.get(i);
+			Bulletin b = app.getStore().getBulletinRevision(summary.getUniversalId());
 			if(b != null)
 				app.getStore().setIsOnServer(b);
 		}
