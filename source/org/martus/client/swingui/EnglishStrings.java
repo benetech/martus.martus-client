@@ -511,7 +511,7 @@ public class EnglishStrings
 
 "field:confirmquestion=Are you sure you want to do this?",
 "field:confirmsendcause=You have chosen to save a completed bulletin.",
-"field:confirmsendeffect=This will permanently seal the bulletin and you will not be allowed to make any further modifications to it except by creating a new copy of the bulletin.",
+"field:confirmsendeffect=This will permanently seal the bulletin and you will not be allowed to make any further modifications to it except by creating a new version of the bulletin.",
 "field:confirmdeletefoldercause=You have chosen to permanently delete a folder.  ",
 "field:confirmdeletefoldereffect=Any bulletins in the folder will be moved to Discarded Bulletins.  ",
 "field:confirmretrievecause=You have chosen to retrieve all bulletins from the Martus server.  ",
@@ -602,7 +602,7 @@ public class EnglishStrings
 "field:confirmUseBulletinsCustomFieldscause=The bulletin you are about to create is based on a previous bulletin whose custom fields are different from your current custom fields.  Do you wish to use the original bulletins custom fields?",
 "field:confirmUseBulletinsCustomFieldseffect=Answering Yes will use the old custom fields and all bulletin data.  Answering No will use your current custom fields and copy all similar fields to the new bulletin but you will lose some of the original bulletins data.",
 "field:confirmSendWithPublicDatacause=You have chosen to save a completed bulletin.",
-"field:confirmSendWithPublicDataeffect=This will permanently seal the bulletin and you will not be allowed to make any further modifications to it except by creating a new copy of the bulletin.\n\nThe public information in this bulletin will be released for possible publication on the Martus Search Engine, and may be viewed by people outside your organization.\n\nIf there is information you do not want to be publicly available, either move that data to the private section of the bulletin or check the 'Keep ALL Information Private' box before saving the bulletin.",
+"field:confirmSendWithPublicDataeffect=This will permanently seal the bulletin and you will not be allowed to make any further modifications to it except by creating a new version of the bulletin.\n\nThe public information in this bulletin will be released for possible publication on the Martus Search Engine, and may be viewed by people outside your organization.\n\nIf there is information you do not want to be publicly available, either move that data to the private section of the bulletin or check the 'Keep ALL Information Private' box before saving the bulletin.",
 "field:confirmUnAuthoredBulletinDeleteBeforePastecause=The bulletin entitled \"#Title#\" already exists in this system.  Do you wish to delete the old bulletin and replace it with this bulletin?",
 "field:confirmUnAuthoredBulletinDeleteBeforePasteeffect=Answering Yes will replace the old bulletin with this bulletin.  Answering on No will leave the original bulletin and skip this file.",
 "field:confirmRemoveMartuscause=You are about to delete all Martus data from this computer.",
