@@ -66,6 +66,7 @@ import org.martus.common.clientside.ClientSideNetworkHandlerUsingXmlRpcForNonSSL
 import org.martus.common.clientside.CurrentUiState;
 import org.martus.common.clientside.DateUtilities;
 import org.martus.common.clientside.Localization;
+import org.martus.common.clientside.PasswordHelper;
 import org.martus.common.clientside.Exceptions.ServerCallFailedException;
 import org.martus.common.clientside.Exceptions.ServerNotAvailableException;
 import org.martus.common.crypto.MartusCrypto;
@@ -1315,7 +1316,7 @@ public class MartusApp
 			FileOutputStream outputStream = new FileOutputStream(keyPairFile);
 			try
 			{
-				getSecurity().writeKeyPair(outputStream, getCombinedPassPhrase(userName, userPassPhrase));
+				getSecurity().writeKeyPair(outputStream, PasswordHelper.getCombinedPassPhrase(userName, userPassPhrase));
 			}
 			finally
 			{
@@ -1333,7 +1334,7 @@ public class MartusApp
 	{
 		try
 		{
-			getSecurity().readKeyPair(keyPairFile, getCombinedPassPhrase(userName, userPassPhrase));
+			getSecurity().readKeyPair(keyPairFile, PasswordHelper.getCombinedPassPhrase(userName, userPassPhrase));
 			setCurrentAccount(userName, keyPairFile.getParentFile());
 		}
 		catch(Exception e)
@@ -1352,7 +1353,7 @@ public class MartusApp
 		FileInputStream inputStream = new FileInputStream(keyPairFile);
 		try
 		{
-			securityOfReSignin.readKeyPair(inputStream, getCombinedPassPhrase(userName, userPassPhrase));
+			securityOfReSignin.readKeyPair(inputStream, PasswordHelper.getCombinedPassPhrase(userName, userPassPhrase));
 		}
 		finally
 		{
@@ -1406,7 +1407,7 @@ public class MartusApp
 		File thisAccountsKeyPair = getKeyPairFile(accountDirectory);
 		try
 		{
-			tempSecurity.readKeyPair(thisAccountsKeyPair, getCombinedPassPhrase(userName, userPassPhrase));
+			tempSecurity.readKeyPair(thisAccountsKeyPair, PasswordHelper.getCombinedPassPhrase(userName, userPassPhrase));
 			return true;
 		}
 		catch (Exception cantBeOurAccount)
@@ -1418,16 +1419,6 @@ public class MartusApp
 	public File getUserNameHashFile(File accountDirectory)
 	{
 		return new File(accountDirectory, "AccountToken.txt");
-	}
-
-	public char[] getCombinedPassPhrase(String userName, char[] userPassPhrase)
-	{
-		char[] combined = new char[userName.length() + userPassPhrase.length + 1];
-		System.arraycopy(userPassPhrase,0,combined,0,userPassPhrase.length);
-		combined[userPassPhrase.length] = ':';
-		System.arraycopy(userName.toCharArray(),0,combined,userPassPhrase.length+1,userName.length());
-		
-		return(combined);
 	}
 
 	public MartusCrypto getSecurity()

@@ -55,6 +55,7 @@ import org.martus.common.bulletin.Bulletin;
 import org.martus.common.clientside.ChoiceItem;
 import org.martus.common.clientside.DateUtilities;
 import org.martus.common.clientside.Localization;
+import org.martus.common.clientside.PasswordHelper;
 import org.martus.common.clientside.UiBasicLocalization;
 import org.martus.common.clientside.test.ServerSideNetworkHandlerNotAvailable;
 import org.martus.common.crypto.MartusCrypto;
@@ -678,14 +679,14 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 
 	public void testGetCombinedPassPhrase()
 	{
-		char[] combined1 = appWithAccount.getCombinedPassPhrase(userName, userPassword);
-		char[] combined2 = appWithAccount.getCombinedPassPhrase(userName2, userPassword);
-		char[] combined3 = appWithAccount.getCombinedPassPhrase(userName, userPassword2);
+		char[] combined1 = PasswordHelper.getCombinedPassPhrase(userName, userPassword);
+		char[] combined2 = PasswordHelper.getCombinedPassPhrase(userName2, userPassword);
+		char[] combined3 = PasswordHelper.getCombinedPassPhrase(userName, userPassword2);
 		assertFalse("username diff", Arrays.equals(combined1, combined2));
 		assertFalse("password diff",  Arrays.equals(combined1, combined3));
 
-		char[] ab_c = appWithAccount.getCombinedPassPhrase("ab", "c".toCharArray());
-		char[] a_bc = appWithAccount.getCombinedPassPhrase("a", "bc".toCharArray());
+		char[] ab_c = PasswordHelper.getCombinedPassPhrase("ab", "c".toCharArray());
+		char[] a_bc = PasswordHelper.getCombinedPassPhrase("a", "bc".toCharArray());
 		assertFalse("abc diff", Arrays.equals(ab_c, a_bc));
 	}
 
