@@ -39,7 +39,7 @@ public class EnglishStrings
 "wintitle:ServerCompliance=Server Compliance Statement",
 "wintitle:ErrorBackingupKeyPair=Error",
 "wintitle:askToBackupKeyPair=Key Backup Needed",
-"wintitle:ViewBulletinDetails=Bulletin Details",
+"wintitle:BulletinDetails=Bulletin Details",
 
 "wintitle:confirmsend=Confirm Save Bulletin",
 "wintitle:confirmretrieve=Confirm Retrieve Bulletins",
@@ -187,7 +187,7 @@ public class EnglishStrings
 "wintitle:ErrorDateRangeInverted=Date Range Invalid",
 "wintitle:setupsignin=Martus Setup Signin",
 "wintitle:setupcontact=Martus Setup Contact Information",
-"wintitle:BulletinDetails=Details Field Default Content",
+"wintitle:BulletinTemplate=Details Field Default Content",
 "wintitle:RetrieveMySealedBulletins=Retrieve My Sealed Bulletins",
 "wintitle:RetrieveMyDraftBulletins=Retrieve My Draft Bulletins",
 "wintitle:RetrieveHQSealedBulletins=Retrieve Field Desk Sealed Bulletins",
@@ -697,11 +697,8 @@ public class EnglishStrings
 "field:notifyErrorRenameFoldercause=Folder names cannot contain punctuation.  They also cannot begin with a space.",
 "field:notifyErrorRenameFolderExistscause=You already have a folder with that name.",
 
-"field:ViewBulletinDetailsHQInfo=The following Headquarter account(s) can view the private information in this bulletin, and can send this bulletin to a server.",
-"field:ModifyBulletinDetailsHQInfo=The following Headquarter account(s) will be able to view the private information in this bulletin, or send this bulletin to a server, after you save it.\n\nTo add or remove an account, use the Tools/Configure Headquarters menu option.",
-
-"field:ViewViewBulletinDetailsHistory=Earlier versions of this bulletin:\n#IDLIST#",
-"field:ModifyViewBulletinDetailsHistory=Earlier versions of this bulletin:sss\n#IDLIST#",
+"field:BulletinDetailsHQInfoForView=The following Headquarter account(s) can view the private information in this bulletin, and can send this bulletin to a server.",
+"field:BulletinDetailsHQInfoForModify=The following Headquarter account(s) will be able to view the private information in this bulletin, or send this bulletin to a server, after you save it.\n\nTo add or remove an account, use the Tools/Configure Headquarters menu option.",
 
 "field:messageServerNewscause=The current server has sent this message:",
 "field:messageErrorDateInFuturecause=This date occurs in the future:",

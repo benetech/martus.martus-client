@@ -216,7 +216,7 @@ public class MartusApp
 		}
 	}
 	
-	public String getHQLabelIfPresent(String hqKey)
+	public String getHQLabelIfPresent(HQKey hqKey)
 	{
 		try
 		{

@@ -27,6 +27,8 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.swingui.dialogs;
 
 import java.awt.BorderLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.Box;
 import javax.swing.JButton;
@@ -53,29 +55,31 @@ import org.martus.swing.Utilities;
 import org.martus.util.Base64.InvalidBase64Exception;
 
 
-public class BulletinDetailsDialog extends JDialog
+public class UiBulletinDetailsDialog extends JDialog
 {
-	public BulletinDetailsDialog(UiMainWindow mainWindowToUse, Bulletin bulletinToShow, String tagQualifierToUse)
+	public UiBulletinDetailsDialog(UiMainWindow mainWindowToUse, Bulletin bulletinToShow, String tagQualifierToUse)
 	{
+		super(mainWindowToUse.getCurrentActiveFrame());
+		
 		mainWindow = mainWindowToUse;
 		bulletin = bulletinToShow;
 		tagQualifier = tagQualifierToUse;
 		
-		setTitle(getLocalization().getWindowTitle("ViewBulletinDetails"));
+		setTitle(getLocalization().getWindowTitle("BulletinDetails"));
 
 		JPanel panel = new JPanel();
 		panel.setLayout(new ParagraphLayout());
-		panel.add(new JLabel("*Author Public Code"), ParagraphLayout.NEW_PARAGRAPH);
+		panel.add(new JLabel(getLabel("AuthorPublicCode")), ParagraphLayout.NEW_PARAGRAPH);
 		panel.add(createField(getPublicCode()));
-		panel.add(new JLabel("*Bulletin ID"), ParagraphLayout.NEW_PARAGRAPH);
+		panel.add(new JLabel(getLabel("BulletinId")), ParagraphLayout.NEW_PARAGRAPH);
 		panel.add(createField(bulletin.getLocalId()));
 
 		HQKeys hqKeys = bulletin.getAuthorizedToReadKeys();
 		if(hqKeys.size() > 0)
 		{
 			DefaultTableModel hqModel = new DefaultTableModel();
-			hqModel.addColumn("*Description");
-			hqModel.addColumn("*Public Code");
+			hqModel.addColumn(getLabel("HQLabel"));
+			hqModel.addColumn(getLabel("HQPublicCode"));
 			hqModel.setRowCount(hqKeys.size());
 			
 			for(int i=0; i < hqKeys.size(); ++i)
@@ -91,7 +95,7 @@ public class BulletinDetailsDialog extends JDialog
 					e.printStackTrace();
 				}
 				
-				hqModel.setValueAt(key.getLabel(), i, 0);
+				hqModel.setValueAt(mainWindow.getApp().getHQLabelIfPresent(key), i, 0);
 				hqModel.setValueAt(publicCode, i, 1);
 			}
 			UiTable hqTable = new UiTable(hqModel);
@@ -102,21 +106,21 @@ public class BulletinDetailsDialog extends JDialog
 			hqTable.setEnabled(false);
 			UiScrollPane hqScroller = new UiScrollPane(hqTable, getLocalization().getComponentOrientation());
 	
-			String hqText = getLocalization().getFieldLabel(tagQualifier + "BulletinDetailsHQInfo"); 
+			String hqText = getLabel("HQInfoFor" + tagQualifier); 
 			JComponent hqInfo = createField(hqText);
 	
 			panel.add(new JLabel(""), ParagraphLayout.NEW_PARAGRAPH);
 			panel.add(hqInfo);
-			panel.add(new JLabel("*Headquarters"), ParagraphLayout.NEW_PARAGRAPH);
+			panel.add(new JLabel(getLabel("Headquarters")), ParagraphLayout.NEW_PARAGRAPH);
 			panel.add(hqScroller);
 		}
 		
 		BulletinHistory history = bulletin.getHistory();
 		DefaultTableModel versionModel = new DefaultTableModel(); 
-		versionModel.addColumn("*Version");
-		versionModel.addColumn("*Date");
-		versionModel.addColumn("*Version ID");
-		versionModel.addColumn("*Title");
+		versionModel.addColumn(getLabel("VersionNumber"));
+		versionModel.addColumn(getLabel("VersionDate"));
+		versionModel.addColumn(getLabel("VersionId"));
+		versionModel.addColumn(getLabel("VersionTitle"));
 		versionModel.setRowCount(history.size() + 1);
 
 		for(int i=0; i < history.size(); ++i)
@@ -134,12 +138,15 @@ public class BulletinDetailsDialog extends JDialog
 		versionTable.setEnabled(false);
 		UiScrollPane versionScroller = new UiScrollPane(versionTable, getLocalization().getComponentOrientation());
 
-		panel.add(new JLabel("*History"), ParagraphLayout.NEW_PARAGRAPH);
+		panel.add(new JLabel(getLabel("History")), ParagraphLayout.NEW_PARAGRAPH);
 		panel.add(versionScroller);
+		
+		JButton closeButton = new JButton(getLocalization().getButtonLabel("close"));
+		closeButton.addActionListener(new CloseHandler());
 		
 		Box buttonBox = Box.createHorizontalBox();
 		buttonBox.add(Box.createHorizontalGlue());
-		buttonBox.add(new JButton("*Close"));
+		buttonBox.add(closeButton);
 		buttonBox.add(Box.createHorizontalGlue());
 
 		getContentPane().add(panel);
@@ -147,14 +154,15 @@ public class BulletinDetailsDialog extends JDialog
 		
 		Utilities.centerDlg(this);
 		setResizable(true);
+		
 //		JFrame parent = getMainWindow().getCurrentActiveFrame();
 		//getMainWindow().notifyDlg(parent, tagQualifier + "ViewBulletinDetails", map);
 	}
 	
 	private void populateVersionRow(DefaultTableModel versionModel, int i, UniversalId uid)
 	{
-		String date = "*unknown";
-		String title = "*unknown";
+		String date = getLabel("UnknownDate");
+		String title = getLabel("UnknownTitle");
 		Bulletin b = mainWindow.getStore().getBulletinRevision(uid);
 		if(b != null)
 		{
@@ -192,6 +200,19 @@ public class BulletinDetailsDialog extends JDialog
 		}		
 	}
 
+	private String getLabel(String tag)
+	{
+		return getLocalization().getFieldLabel("BulletinDetails" + tag);
+	}
+	
+	class CloseHandler implements ActionListener
+	{
+		public void actionPerformed(ActionEvent e)
+		{
+			UiBulletinDetailsDialog.this.dispose();
+		}
+	}
+	
 	UiMainWindow mainWindow;
 	Bulletin bulletin;
 	String tagQualifier;

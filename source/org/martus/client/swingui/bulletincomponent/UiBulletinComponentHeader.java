@@ -40,7 +40,7 @@ import javax.swing.border.EtchedBorder;
 
 import org.martus.client.swingui.UiLocalization;
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.client.swingui.dialogs.BulletinDetailsDialog;
+import org.martus.client.swingui.dialogs.UiBulletinDetailsDialog;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.util.TokenReplacement;
 
@@ -136,7 +136,7 @@ public class UiBulletinComponentHeader extends UiBulletinComponentSection
 	{
 		public void actionPerformed(ActionEvent e)
 		{
-			BulletinDetailsDialog dlg = new BulletinDetailsDialog(mainWindow, bulletin, tagQualifier);
+			UiBulletinDetailsDialog dlg = new UiBulletinDetailsDialog(mainWindow, bulletin, tagQualifier);
 			dlg.show();
 		}
 		

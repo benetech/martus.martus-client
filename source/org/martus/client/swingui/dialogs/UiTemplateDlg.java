@@ -63,7 +63,7 @@ public class UiTemplateDlg extends JDialog implements ActionListener
 		defaultDetailsFile = defaultDetailsFileToUse;
 
 		UiBasicLocalization localization = mainWindow.getLocalization();
-		setTitle(localization.getWindowTitle("BulletinDetails"));
+		setTitle(localization.getWindowTitle("BulletinTemplate"));
 		okButton = new JButton(localization.getButtonLabel("ok"));
 		okButton.addActionListener(this);
 		JButton cancel = new JButton(localization.getButtonLabel("cancel"));

@@ -1618,8 +1618,9 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		HQKey key1 = new HQKey(sampleHQKey1, sampleLabel1);
 		keys.add(key1);
 		appWithAccount.setAndSaveHQKeys(keys);
-		assertEquals("Label not the same?", sampleLabel1, appWithAccount.getHQLabelIfPresent(sampleHQKey1));
-		assertEquals("not Empty for unknown key?", "", appWithAccount.getHQLabelIfPresent("unknown"));
+		assertEquals("Label not the same?", sampleLabel1, appWithAccount.getHQLabelIfPresent(key1));
+		HQKey missingKey = new HQKey("public key", "some label");
+		assertEquals("not Empty for unknown key?", "", appWithAccount.getHQLabelIfPresent(missingKey));
 	}
 	
 	
