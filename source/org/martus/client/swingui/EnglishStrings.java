@@ -225,7 +225,7 @@ public class EnglishStrings
 "wintitle:VerifyingKeyPairShare=Verifying Disk",
 "wintitle:RemoveServer=Remove Server",
 "wintitle:RecoverKeyPair=Restore Key from Backup File",
-"wintitle:BackupKeyPairGeneralInfo==Backup Key Information",
+"wintitle:BackupKeyPairGeneralInfo=Backup Key Information",
 "wintitle:BackupKeyPairToSecretShareInformation=Information on Sharing Your Key",
 "wintitle:ErrorAttachmentMissing=Attachment Missing",
 "wintitle:helpStringNotFound=Search Text Not Found",
