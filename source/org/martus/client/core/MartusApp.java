@@ -657,15 +657,15 @@ public class MartusApp
 		b.set(Bulletin.TAGORGANIZATION, configInfo.getOrganization());
 		b.set(Bulletin.TAGPUBLICINFO, configInfo.getTemplateDetails());
 		b.set(Bulletin.TAGLANGUAGE, getCurrentLanguage());
-		setHQKeysInBulletin(b);
+		setDefaultHQKeysInBulletin(b);
 		b.setDraft();
 		b.setAllPrivate(true);
 		return b;
 	}
 
-	public void setHQKeysInBulletin(Bulletin b)
+	public void setDefaultHQKeysInBulletin(Bulletin b)
 	{
-		HQKeys hqKeys = getAllHQKeysWithFallback();
+		HQKeys hqKeys = getDefaultHQKeysWithFallback();
 		b.setAuthorizedToReadKeys(hqKeys);
 	}
 
