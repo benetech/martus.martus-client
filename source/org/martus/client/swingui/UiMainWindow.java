@@ -77,7 +77,7 @@ import org.martus.client.core.ClientSideNetworkGateway;
 import org.martus.client.core.MartusApp;
 import org.martus.client.core.TransferableBulletinList;
 import org.martus.client.core.MartusApp.MartusAppInitializationException;
-import org.martus.client.swingui.bulletincomponent.UiBulletinPreview;
+import org.martus.client.swingui.bulletincomponent.UiBulletinPreviewPane;
 import org.martus.client.swingui.bulletintable.UiBulletinTablePane;
 import org.martus.client.swingui.dialogs.UiAboutDlg;
 import org.martus.client.swingui.dialogs.UiBulletinModifyDlg;
@@ -1612,7 +1612,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 
 		setTitle(getLocalization().getWindowTitle("main"));
 
-		preview = new UiBulletinPreview(this);
+		preview = new UiBulletinPreviewPane(this);
 		table = new UiBulletinTablePane(this);
 		folders = new UiFolderTreePane(this);
 		getContentPane().add(createTopStuff(), BorderLayout.NORTH);
@@ -1954,7 +1954,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	
 	private MartusApp app;
 	private CurrentUiState uiState;
-	private UiBulletinPreview preview;
+	private UiBulletinPreviewPane preview;
 	private JSplitPane previewSplitter;
 	private JSplitPane folderSplitter;
 	private UiBulletinTablePane table;

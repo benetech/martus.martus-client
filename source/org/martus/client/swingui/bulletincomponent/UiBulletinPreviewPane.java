@@ -35,9 +35,9 @@ import javax.swing.JViewport;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.common.bulletin.Bulletin;
 
-public class UiBulletinPreview extends JScrollPane
+public class UiBulletinPreviewPane extends JScrollPane
 {
-    public UiBulletinPreview(UiMainWindow mainWindow)
+    public UiBulletinPreviewPane(UiMainWindow mainWindow)
 	{
 		view = new UiBulletinView(mainWindow);
 
