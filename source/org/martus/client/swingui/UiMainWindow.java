@@ -120,6 +120,7 @@ import org.martus.swing.UiFileChooser;
 import org.martus.swing.UiNotifyDlg;
 import org.martus.swing.Utilities;
 import org.martus.swing.Utilities.Delay;
+import org.martus.util.FileVerifier;
 import org.martus.util.Base64.InvalidBase64Exception;
 
 public class UiMainWindow extends JFrame implements ClipboardOwner
@@ -1383,7 +1384,10 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 				output.write(inputArray);
 				input.close();
 				output.close();
-				notifyDlg(this,"OperationCompleted");
+				if(FileVerifier.verifyFiles(keypairFile, newBackupFile))
+					notifyDlg(this,"OperationCompleted");
+				else
+					notifyDlg(this,"ErrorBackingupKeyPair");
 			}
 			catch (FileNotFoundException fnfe)
 			{
