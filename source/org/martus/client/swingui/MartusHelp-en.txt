@@ -1,6 +1,6 @@
 ﻿--------
 1. Introduction to the Martus™ Software 
-Martus 2.0 User Guide
+Martus™ Software 2.0 User Guide
 
 --------
 1a. What is Martus™?

@@ -1,4 +1,7 @@
-﻿1. Introducción al programa Martus™ 
+﻿--------
+1. Introducción al programa Martus™ 
+Martus™ Software Manual de usuario versión 2.0.1
+
 --------
 1a. ¿Qué es Martus™?
 El proyecto Martus, cuyo nombre deriva de la palabra griega para “testigo”, ofrece una manera eficiente y segura para almacenar y obtener información sobre abusos a los derechos humanos. Con el programa Martus puede crear boletines para registrar abusos a los derechos humanos, adjuntar documentos de apoyo, especificar si la información ingresada es pública o privada y guardarla en un servidor seguro. Para saber más acerca de los problemas que el proyecto Martus quiere solucionar, así como los planes de su desarrollo, puede visitar el sitio http://www.martus.org.

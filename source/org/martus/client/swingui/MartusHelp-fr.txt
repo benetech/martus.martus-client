@@ -1,4 +1,7 @@
-﻿1. Présentation du Logiciel Martus™ 
+﻿--------
+1. Présentation du Logiciel Martus™ 
+Logiciel Martus™ Guide de l’Utilisateur Version 2.0.1
+
 --------
 1a. A quoi sert Martus™ ?
 Baptisé d’après le mot grec signifiant témoin, le Projet Martus offre un moyen efficace et sûr de stocker et de récupérer des informations relatives aux violations des droits humains. L’application Martus vous permet de créer des communiqués qui consignent les violations des droits humains, de joindre des justificatifs à l’appui, d'indiquer si ces informations seront de nature publique ou privée et de stocker les informations sur un serveur sécurisé. Pour tous renseignements complémentaires sur les problèmes traités par le Projet Martus et sur les plans d’avenir de ce projet, visitez le site http://www.martus.org.
