@@ -242,7 +242,7 @@ public class UiBulletinComponentHeader extends UiBulletinComponentSection
 			String ancestors = "";
 			for(int i=0; i < history.size(); ++i)
 			{
-				String localId = (String)history.get(i);
+				String localId = history.get(i);
 				ancestors += "  " + (i+1) + ".  " + localId + "\n"; 
 			}
 			String tag = "ViewBulletinDetailsHistory";

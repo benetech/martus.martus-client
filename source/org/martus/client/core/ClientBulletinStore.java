@@ -40,7 +40,6 @@ import java.util.Iterator;
 import java.util.Set;
 import java.util.Vector;
 import java.util.zip.ZipFile;
-
 import org.martus.common.BulletinStore;
 import org.martus.common.FieldSpec;
 import org.martus.common.MartusUtilities;
@@ -180,7 +179,7 @@ public class ClientBulletinStore extends BulletinStore
 		BulletinHistory history = b.getHistory();
 		for(int i = 0; i < history.size(); ++i)
 		{
-			String localId = (String)history.get(i);
+			String localId = history.get(i);
 			UniversalId uidOfAncestor = UniversalId.createFromAccountAndLocalId(b.getAccount(), localId);
 			removeRevisionFromAllFolders(uidOfAncestor);
 		}
@@ -871,7 +870,7 @@ public class ClientBulletinStore extends BulletinStore
 		BulletinHistory history = b.getHistory();
 		for(int i = 0; i < history.size(); ++i)
 		{
-			String localId = (String)history.get(i);
+			String localId = history.get(i);
 			UniversalId uidToRemove = UniversalId.createFromAccountAndLocalId(accountId, localId);
 			for(int f = 0; f < getFolderCount(); ++f)
 			{

@@ -75,7 +75,7 @@ public class BulletinXmlExporter
 			for(int i=0; i < history.size(); ++i)
 			{
 				dest.write(MartusXml.getTagStart(AncestorElementName));
-				dest.write((String)history.get(i));
+				dest.write(history.get(i));
 				dest.write(MartusXml.getTagEnd(AncestorElementName));
 			}
 			dest.write(MartusXml.getTagEnd(HistoryElementName));
