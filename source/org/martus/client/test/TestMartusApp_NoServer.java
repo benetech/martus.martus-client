@@ -1304,9 +1304,12 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 	public void testEncryptPublicData() throws Exception
 	{
 		TRACE_BEGIN("testEncryptPublicData");
-		MockMartusApp app = MockMartusApp.create();
+		File temp = createTempDirectory();
+		MartusCrypto security = MockMartusSecurity.createClient();
+		MartusApp app = new MartusApp(security, temp, new Localization(temp));
+		app.doAfterSigninInitalization();
+		app.getStore().deleteAllData();
 		assertEquals("App Not Encypting Public?", true, app.getStore().mustEncryptPublicData());
-		app.deleteAllFiles();
 
 		TRACE_END();
 	}

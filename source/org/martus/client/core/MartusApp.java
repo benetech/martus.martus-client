@@ -1447,7 +1447,7 @@ public class MartusApp
 	{
 		File hashUserName = getUserNameHashFile(currentAccountDirectory);
 		hashUserName.delete();
-		String hashOfUserName = MartusSecurity.getHexDigest(currentUserName);
+		String hashOfUserName = MartusCrypto.getHexDigest(currentUserName);
 		UnicodeWriter writer = new UnicodeWriter(hashUserName);
 		try
 		{

@@ -36,7 +36,8 @@ import org.martus.client.core.ConfigInfo;
 import org.martus.common.ContactInfo;
 import org.martus.common.LegacyCustomFields;
 import org.martus.common.StandardFieldSpecs;
-import org.martus.common.crypto.MartusSecurity;
+import org.martus.common.crypto.MartusCrypto;
+import org.martus.common.crypto.MockMartusSecurity;
 import org.martus.common.network.NetworkInterfaceConstants;
 import org.martus.util.Base64;
 import org.martus.util.TestCaseEnhanced;
@@ -149,8 +150,7 @@ public class TestConfigInfo extends TestCaseEnhanced
 
 	public void testGetContactInfo() throws Exception
 	{
-		MartusSecurity signer = new MartusSecurity();
-		signer.createKeyPair(512);
+		MartusCrypto signer = MockMartusSecurity.createClient();
 		ContactInfo contactInfo = new ContactInfo(sampleAuthor, "org", "email", "web", samplePhone, sampleAddress);
 		Vector contactInfoVector = contactInfo.getSignedEncodedVector(signer);
 		assertEquals("Not encoded?",NetworkInterfaceConstants.BASE_64_ENCODED,contactInfoVector.get(0));
