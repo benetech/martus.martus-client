@@ -148,7 +148,6 @@ public class UiBulletinModifyDlg extends JFrame implements ActionListener, Windo
 			if(!validateData())
 				return;
 
-			view.copyDataToBulletin(bulletin);
 			boolean userChoseSeal = (ae.getSource() == send);
 			saveBulletin(userChoseSeal);
 		}
@@ -209,6 +208,7 @@ public class UiBulletinModifyDlg extends JFrame implements ActionListener, Windo
 				bulletin.setDraft();
 				outboxToUse = draftOutbox;
 			}
+			view.copyDataToBulletin(bulletin);
 			setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
 			app.setHQKeysInBulletin(bulletin);
 			saveBulletinAndUpdateFolders(store, outboxToUse);
