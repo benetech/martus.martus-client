@@ -124,7 +124,7 @@ class BackgroundUploadTimerTask extends TimerTask
 		}
 		Updater updater = new Updater();
 		
-		final boolean crashMode = true;
+		final boolean crashMode = false;
 		if(crashMode)
 		{
 			updater.run();
