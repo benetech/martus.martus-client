@@ -598,7 +598,7 @@ public class EnglishStrings
 "field:notifyUnableToSaveAttachmentcause=Unable to save the selected attachment for some reason.  Try saving it to a different file.",
 "field:notifyUnableToViewAttachmentcause=Unable to view the selected attachment for some reason.",
 "field:notifySearchFailedcause=Sorry, no bulletins were found.",
-"field:notifySearchFoundcause=Number of bulletins found = ",
+"field:notifySearchFoundcause=Search terms may have been found in either current or previous versions of bulletins in the Search Results folder.\n\nNumber of bulletins found = ",
 "field:notifyServerErrorcause=Server Error, the server may be down, please try again later",
 "field:notifyFoundOrphanscause=One or more bulletins were not in any folder. These lost bulletins have been placed into the Recovered Bulletins folder.",
 "field:notifyFoundDamagedBulletinscause=One or more bulletins were severely damaged, and cannot be displayed. If these bulletins were backed up to a server, you may be able to retrieve undamaged copies from there.",
