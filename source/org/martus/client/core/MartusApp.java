@@ -549,7 +549,7 @@ public class MartusApp
 	{
 		if(scrubDataFirst)
 			ScrubFile.scrub(file);
-		if(!file.delete())
+		if(file.exists() && !file.delete())
 			throw new Exception("File not deleted! " + file.getPath());
 	}
 

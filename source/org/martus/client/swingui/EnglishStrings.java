@@ -90,6 +90,7 @@ public class EnglishStrings
 "wintitle:confirmWarningPathChoosenMayNotBeRemoveable=Questionable Media Chosen",
 "wintitle:confirmQuickEraseActionOkPressed=Quick Erase Warning",
 "wintitle:confirmBackupKeyPairInformation=Backing Up Your Keypair",
+"wintitle:confirmQuickEraseUninstallMartus=Uninstall Martus",
 
 "wintitle:notifyDropErrorNotAllowed=Cannot Move Bulletin(s)",
 "wintitle:notifyDropErrorBulletinExists=Cannot Move Bulletin(s)",
@@ -575,6 +576,8 @@ public class EnglishStrings
 "field:confirmQuickEraseActionOkPressedeffect=Choosing Yes will begin the deletion process.",
 "field:confirmBackupKeyPairInformationcause=Save your password encrypted keypair file to a single floppy disk or other removable media.  Then store this disk in a safe place. You will use this disk, with your username and password, to recover your data if your system files are ever damaged.  To restore this password-protected key pair in the future, select 'Restore Account' and 'Recover account from backup keypair file' when signing into Martus.",		
 "field:confirmBackupKeyPairInformationeffect=Choosing Yes will begin the backup process.",		
+"field:confirmQuickEraseUninstallMartuscause=This will completely uninstall Martus from your computer.",
+"field:confirmQuickEraseUninstallMartuseffect=Clicking on yes will uninstall the Martus program.",
 
 "field:notifyDropErrorNotAllowedcause=One or more bulletins cannot be moved to that folder. This may be because of their Draft/Sealed status, or their author.",
 "field:notifyDropErrorBulletinExistscause=One or more bulletins cannot be moved to that folder, because it already exists in that folder.",

@@ -35,6 +35,8 @@ import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.dialogs.UiQuickEraseConfirmDlg;
 import org.martus.swing.Utilities;
 import org.martus.util.DirectoryUtils;
+import org.martus.util.UnicodeReader;
+import org.martus.util.UnicodeWriter;
 
 public class ActionMenuQuickErase extends UiMenuAction 
 {
@@ -94,25 +96,36 @@ public class ActionMenuQuickErase extends UiMenuAction
 		mainWindow.getApp().cleanupWhenCompleteQuickErase(options);
 		if(options.isUninstallMartusSelected())
 		{
-			File martusDataRootDirectory = mainWindow.getApp().getMartusDataRootDirectory();
-			mainWindow.unLock();
-			if(Utilities.isMSWindows())
+			if(options.isDonotPromptSelected() || mainWindow.confirmDlgBeep("QuickEraseUninstallMartus"))
 			{
-				DirectoryUtils.deleteAllFilesOnlyInDirectory(martusDataRootDirectory);				
-				File uninstallFile = new File(martusDataRootDirectory,"bin/Martus Uninstall Silent.bat");
-				try
+				File martusDataRootDirectory = mainWindow.getApp().getMartusDataRootDirectory();
+				mainWindow.unLock();
+				if(Utilities.isMSWindows())
 				{
-					Runtime.getRuntime().exec("\""+uninstallFile.getAbsolutePath()+"\"");
+					DirectoryUtils.deleteAllFilesOnlyInDirectory(martusDataRootDirectory);				
+					File originalUninstallFile = new File(martusDataRootDirectory,"bin/Martus Uninstall Silent.bat");
+					try
+					{
+						File uninstallFile = File.createTempFile("tmp",".bat");
+						UnicodeReader in = new UnicodeReader(originalUninstallFile);
+						UnicodeWriter out = new UnicodeWriter(uninstallFile);
+						out.writeln(in.readLine());
+						in.close();
+						originalUninstallFile.delete();
+						out.flush();
+						out.close();
+						Runtime.getRuntime().exec("\""+uninstallFile.getAbsolutePath()+"\"");
+					}
+					catch (IOException e)
+					{
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 				}
-				catch (IOException e)
+				else
 				{
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+					DirectoryUtils.deleteEntireDirectoryTree(martusDataRootDirectory);
 				}
-			}
-			else
-			{
-				DirectoryUtils.deleteEntireDirectoryTree(martusDataRootDirectory);
 			}
 		}
 		mainWindow.exitWithoutSavingState();		
