@@ -41,6 +41,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 
+import org.martus.common.FieldSpec;
+import org.martus.common.StandardFieldSpecs;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.clientside.UiBasicLocalization;
 import org.martus.common.utilities.MartusFlexidate;
@@ -48,9 +50,10 @@ import org.martus.swing.ParagraphLayout;
 
 public class UiFlexiDateEditor extends UiField
 {
-	public UiFlexiDateEditor(UiBasicLocalization localization)
+	public UiFlexiDateEditor(UiBasicLocalization localizationToUse, FieldSpec specToUse)
 	{
-		localizationToUse = localization;
+		localization = localizationToUse;
+		spec = specToUse;
 		init();
 	}	
 	
@@ -60,8 +63,8 @@ public class UiFlexiDateEditor extends UiField
 		component.setLayout(new BorderLayout());		
 				
 		Box boxDateSelection = Box.createHorizontalBox();				
-		exactDateRB = new JRadioButton(localizationToUse.getFieldLabel("DateExact"), true);			
-		flexiDateRB = new JRadioButton(localizationToUse.getFieldLabel("DateRange"));		
+		exactDateRB = new JRadioButton(localization.getFieldLabel("DateExact"), true);			
+		flexiDateRB = new JRadioButton(localization.getFieldLabel("DateRange"));		
 
 		ButtonGroup radioGroup = new ButtonGroup();
 		radioGroup.add(exactDateRB);
@@ -82,10 +85,10 @@ public class UiFlexiDateEditor extends UiField
 		flexiDatePanel = new JPanel();
 		flexiDatePanel.setLayout(new ParagraphLayout());	
 											
-		flexiDatePanel.add(new JLabel(localizationToUse.getFieldLabel("DateRangeFrom")));		
+		flexiDatePanel.add(new JLabel(localization.getFieldLabel("DateRangeFrom")));		
 		flexiDatePanel.add(buildBeginDateBox());
 				
-		flexiDatePanel.add(new JLabel(localizationToUse.getFieldLabel("DateRangeTo")));			
+		flexiDatePanel.add(new JLabel(localization.getFieldLabel("DateRangeTo")));			
 		flexiDatePanel.add(buildEndDateBox());
 		
 		return flexiDatePanel;
@@ -96,7 +99,7 @@ public class UiFlexiDateEditor extends UiField
 		extDatePanel = new JPanel();		
 		extDatePanel.setLayout(new ParagraphLayout());
 																
-		JLabel dummy = new JLabel(localizationToUse.getFieldLabel("DateRangeFrom"));		
+		JLabel dummy = new JLabel(localization.getFieldLabel("DateRangeFrom"));		
 		extDatePanel.add(dummy);					
 		extDatePanel.add( buildBeginDateBox());			
 		dummy.setForeground(component.getBackground());		
@@ -110,9 +113,9 @@ public class UiFlexiDateEditor extends UiField
 		{	
 			bgDateBox = Box.createHorizontalBox();								
 			bgDayCombo = new JComboBox();	
-			bgMonthCombo = new JComboBox(localizationToUse.getMonthLabels());
+			bgMonthCombo = new JComboBox(localization.getMonthLabels());
 			bgYearCombo = new JComboBox();					
-			UiDateEditor.buildDate(bgDateBox, localizationToUse, bgYearCombo, bgMonthCombo, bgDayCombo);
+			UiDateEditor.buildDate(bgDateBox, localization, bgYearCombo, bgMonthCombo, bgDayCombo);
 		}		
 		
 		return bgDateBox;											
@@ -125,10 +128,10 @@ public class UiFlexiDateEditor extends UiField
 		{
 			endDateBox = Box.createHorizontalBox();		
 			endDayCombo = new JComboBox();	
-			endMonthCombo = new JComboBox(localizationToUse.getMonthLabels());
+			endMonthCombo = new JComboBox(localization.getMonthLabels());
 			endYearCombo = new JComboBox();
 			needToSetDefaultValue=true;						
-			UiDateEditor.buildDate(endDateBox, localizationToUse, endYearCombo, endMonthCombo, endDayCombo);
+			UiDateEditor.buildDate(endDateBox, localization, endYearCombo, endMonthCombo, endDayCombo);
 		}
 		
 		if (needToSetDefaultValue)
@@ -192,13 +195,24 @@ public class UiFlexiDateEditor extends UiField
 
 	public void validate() throws UiField.DataInvalidException 
 	{
+		if(isFlexiDate())
+		{
+			if(getEndDate().before(getBeginDate()))
+			{
+				bgDayCombo.requestFocus();
+				throw new DateRangeInvertedException();
+			}
+		}		
+
+		if(StandardFieldSpecs.isCustomFieldTag(spec.getTag()))
+			return;
+		
 		Date today = new Date();
 		if (getBeginDate().after(today))
 		{
 			bgDayCombo.requestFocus();	
 			throw new UiDateEditor.DateFutureException();
-		}			
-	
+		}
 		if (isFlexiDate())
 		{		
 			if (getEndDate().after(today))
@@ -206,12 +220,7 @@ public class UiFlexiDateEditor extends UiField
 				bgDayCombo.requestFocus();	
 				throw new UiDateEditor.DateFutureException();				
 			}
-			if(getEndDate().before(getBeginDate()))
-			{
-				bgDayCombo.requestFocus();
-				throw new DateRangeInvertedException();
-			}
-		}		
+		}
 	}
 	
 	boolean isFlexiDate()
@@ -280,11 +289,12 @@ public class UiFlexiDateEditor extends UiField
 	JComboBox 					endDayCombo;
 	JComboBox 					endYearCombo;
 		
-	private UiBasicLocalization 		localizationToUse;	
+	private UiBasicLocalization localization;	
 	private JRadioButton 		exactDateRB;
 	private JRadioButton 		flexiDateRB;
 	private JPanel 				flexiDatePanel;
 	private JPanel 				extDatePanel;
 	private Box					bgDateBox = null;
-	private Box					endDateBox = null;	
+	private Box					endDateBox = null;
+	private FieldSpec			spec;
 }

@@ -39,6 +39,7 @@ import org.martus.client.swingui.fields.UiGridEditor;
 import org.martus.client.swingui.fields.UiMultilineTextEditor;
 import org.martus.client.swingui.fields.UiNormalTextEditor;
 import org.martus.client.swingui.fields.UiUnknownViewer;
+import org.martus.common.FieldSpec;
 import org.martus.common.GridFieldSpec;
 import org.martus.common.bulletin.AttachmentProxy;
 import org.martus.common.clientside.ChoiceItem;
@@ -71,14 +72,14 @@ public class UiBulletinComponentEditorSection extends UiBulletinComponentDataSec
 		return new UiChoiceEditor(choices);
 	}
 
-	public UiField createDateField()
+	public UiField createDateField(FieldSpec spec)
 	{		
-		return new UiDateEditor(getLocalization());		
+		return new UiDateEditor(getLocalization(), spec);		
 	}
 	
-	public UiField createFlexiDateField()
+	public UiField createFlexiDateField(FieldSpec spec)
 	{
-		return new UiFlexiDateEditor(getLocalization());	
+		return new UiFlexiDateEditor(getLocalization(), spec);	
 	}
 
 	public UiField createBoolField()

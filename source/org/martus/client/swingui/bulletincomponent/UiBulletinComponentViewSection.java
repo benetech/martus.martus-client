@@ -36,6 +36,7 @@ import org.martus.client.swingui.fields.UiGridViewer;
 import org.martus.client.swingui.fields.UiMultilineViewer;
 import org.martus.client.swingui.fields.UiNormalTextViewer;
 import org.martus.client.swingui.fields.UiUnknownViewer;
+import org.martus.common.FieldSpec;
 import org.martus.common.GridFieldSpec;
 import org.martus.common.bulletin.AttachmentProxy;
 import org.martus.common.clientside.ChoiceItem;
@@ -53,12 +54,12 @@ public class UiBulletinComponentViewSection extends UiBulletinComponentDataSecti
 		return new UiUnknownViewer(getLocalization());
 	}
 	
-	public UiField createFlexiDateField()
+	public UiField createFlexiDateField(FieldSpec spec)
 	{		
 		return new UiFlexiDateViewer(getLocalization()); 
 	}
 	
-	public UiField createDateField()
+	public UiField createDateField(FieldSpec spec)
 	{
 		return createReadOnlyDateField();
 	}

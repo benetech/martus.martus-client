@@ -37,13 +37,15 @@ import javax.swing.JComboBox;
 import javax.swing.JComponent;
 import javax.swing.JPanel;
 
+import org.martus.common.FieldSpec;
+import org.martus.common.StandardFieldSpecs;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.clientside.DateUtilities;
 import org.martus.common.clientside.UiBasicLocalization;
 
 public class UiDateEditor extends UiField
 {
-	public UiDateEditor(UiBasicLocalization localizationToUse)
+	public UiDateEditor(UiBasicLocalization localizationToUse, FieldSpec specToUse)
 	{				
 		component = new JPanel();
 		Box box = Box.createHorizontalBox();
@@ -52,6 +54,7 @@ public class UiDateEditor extends UiField
 		yearCombo = new JComboBox();
 		
 		buildDate(box, localizationToUse, yearCombo, monthCombo, dayCombo);
+		spec = specToUse;
 		
 		component.add(box);
 	}
@@ -103,6 +106,9 @@ public class UiDateEditor extends UiField
 	
 	public void validate() throws UiField.DataInvalidException 
 	{
+		if(StandardFieldSpecs.isCustomFieldTag(spec.getTag()))
+			return;
+	
 		Date value = getDate(yearCombo, monthCombo, dayCombo);
 		Date today = new Date();
 		if (value.after(today))
@@ -159,5 +165,6 @@ public class UiDateEditor extends UiField
 	JComboBox monthCombo;
 	JComboBox dayCombo;
 	JComboBox yearCombo;	
+	FieldSpec spec;
 }
 

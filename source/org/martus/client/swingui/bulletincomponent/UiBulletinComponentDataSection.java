@@ -39,6 +39,7 @@ import org.martus.client.swingui.fields.UiFlexiDateEditor;
 import org.martus.client.swingui.fields.UiField.DataInvalidException;
 import org.martus.common.FieldSpec;
 import org.martus.common.GridFieldSpec;
+import org.martus.common.StandardFieldSpecs;
 import org.martus.common.bulletin.AttachmentProxy;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.clientside.ChoiceItem;
@@ -129,10 +130,10 @@ abstract public class UiBulletinComponentDataSection extends UiBulletinComponent
 				field = createMultilineField();
 				break;
 			case FieldSpec.TYPE_DATE:
-				field = createDateField();
+				field = createDateField(fieldSpec);
 				break;
 			case FieldSpec.TYPE_DATERANGE:
-				field = createFlexiDateField();
+				field = createFlexiDateField(fieldSpec);
 				break;
 			case FieldSpec.TYPE_LANGUAGE:
 				ChoiceItem[] languages =
@@ -186,6 +187,8 @@ abstract public class UiBulletinComponentDataSection extends UiBulletinComponent
 		{
 			String tag = fieldSpecs[fieldNum].getTag();
 			String label = getLocalization().getFieldLabel(tag);
+			if(StandardFieldSpecs.isCustomFieldTag(tag))
+				label = fieldSpecs[fieldNum].getLabel();
 			try 
 			{
 				fields[fieldNum].validate();
@@ -231,8 +234,8 @@ abstract public class UiBulletinComponentDataSection extends UiBulletinComponent
 	abstract public UiField createNormalField();
 	abstract public UiField createMultilineField();
 	abstract public UiField createChoiceField(ChoiceItem[] choices);
-	abstract public UiField createDateField();
-	abstract public UiField createFlexiDateField();
+	abstract public UiField createDateField(FieldSpec spec);
+	abstract public UiField createFlexiDateField(FieldSpec spec);
 	abstract public UiField createUnknownField();
 	abstract public UiField createBoolField();
 	abstract public UiField createGridField(GridFieldSpec fieldSpec);

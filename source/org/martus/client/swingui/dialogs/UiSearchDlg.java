@@ -36,6 +36,7 @@ import javax.swing.JTextField;
 
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.fields.UiDateEditor;
+import org.martus.common.FieldSpec;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.clientside.UiBasicLocalization;
 import org.martus.swing.ParagraphLayout;
@@ -65,14 +66,14 @@ public class UiSearchDlg extends JDialog  implements ActionListener
 		getContentPane().add(new JLabel(localization.getFieldLabel("SearchEntry")), ParagraphLayout.NEW_PARAGRAPH);
 		getContentPane().add(searchField);
 
-		startDateEditor = new UiDateEditor(localization);
+		startDateEditor = new UiDateEditor(localization, new FieldSpec(FieldSpec.TYPE_DATE));
 		if(startDate.length() == 0)
 			startDate = DEFAULT_SEARCH_START_DATE;
 		startDateEditor.setText(startDate);
 		getContentPane().add(new JLabel(localization.getFieldLabel("SearchStartDate")), ParagraphLayout.NEW_PARAGRAPH);
 		getContentPane().add(startDateEditor.getComponent());
 
-		endDateEditor = new UiDateEditor(localization);
+		endDateEditor = new UiDateEditor(localization, new FieldSpec(FieldSpec.TYPE_DATE));
 		if(endDate.length() == 0)
 			endDate = Bulletin.getLastDayOfThisYear();
 		endDateEditor.setText(endDate);
