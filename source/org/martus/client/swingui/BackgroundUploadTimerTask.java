@@ -33,6 +33,7 @@ import java.util.TimerTask;
 import java.util.Vector;
 import javax.swing.SwingUtilities;
 import org.martus.client.core.BackgroundUploader;
+import org.martus.client.core.BulletinFolder;
 import org.martus.client.core.ClientBulletinStore;
 import org.martus.client.core.MartusApp;
 import org.martus.common.ProgressMeterInterface;
@@ -227,10 +228,13 @@ class BackgroundUploadTimerTask extends TimerTask
 		{
 			public void run()
 			{
-				mainWindow.folderContentsHaveChanged(getStore().getFolderSaved());
-				mainWindow.folderContentsHaveChanged(getStore().getFolderSealedOutbox());
-				mainWindow.folderContentsHaveChanged(getStore().getFolderDraftOutbox());
-				mainWindow.folderContentsHaveChanged(getApp().createOrFindFolder(getStore().getNameOfFolderDamaged()));
+				ClientBulletinStore store = getStore();
+				mainWindow.folderContentsHaveChanged(store.getFolderSaved());
+				mainWindow.folderContentsHaveChanged(store.getFolderSealedOutbox());
+				mainWindow.folderContentsHaveChanged(store.getFolderDraftOutbox());
+				BulletinFolder discardedFolder = store.findFolder(store.getNameOfFolderDamaged());
+				if(discardedFolder != null)
+					mainWindow.folderContentsHaveChanged(discardedFolder);
 			}
 		}
 		Updater updater = new Updater();
