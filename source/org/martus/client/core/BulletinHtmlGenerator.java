@@ -128,6 +128,10 @@ public class BulletinHtmlGenerator
 		html.append("<tr></tr>");	
 		html.append(localization.getFieldLabel("BulletinLastSaved")+" ");			
 		html.append(b.getLastSavedDateTime());
+		html.append("<tr></tr>");	
+		html.append(localization.getFieldLabel("BulletinVersionNumber")+" ");			
+		html.append(b.getVersion());
+		
 		html.append("</table>");
 		html.append("</html>");
 	}

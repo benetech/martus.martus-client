@@ -91,7 +91,7 @@ public class UiBulletinComponentHeader extends UiBulletinComponentSection
 			hqLabel.setVisible(false);
 			hqSummary.setVisible(false);
 		}
-		versionNumber.setText("  " + Integer.toString(1 + bulletin.getHistory().size())+ "  ");
+		versionNumber.setText("  " + Integer.toString(bulletin.getVersion())+ "  ");
 
 		long time = bulletin.getLastSavedTime();
 		if(time == 0)
