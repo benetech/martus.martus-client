@@ -211,6 +211,7 @@ public class EnglishStrings
 
 "wintitle:notifyQuickEraseScrubWorked=Quick Erase",
 "wintitle:RemoveServer=Remove Server",
+"wintitle:confirmQuickEraseReminder=Quick Erase Reminder",
 
 
 "button:help=Help",
@@ -538,6 +539,7 @@ public class EnglishStrings
 "field:confirmQuickEraseDeleteKeyPaircause=This will scrub and delete keypair files on this computer.",
 "field:confirmQuestionDeleteKeypair=Are you really sure?",
 "field:confirmQuestionDeleteSubDirectory=Do you want to delete ALL files in packets directory?",
+"field:confirmQuickEraseRemindercause=Please Note: There are bulletins in your outbox that have not been sent to a server.",
 
 "field:notifyDropErrorNotAllowedcause=One or more bulletins cannot be moved to that folder. This may be because of their Draft/Sealed status, or their author.",
 "field:notifyDropErrorscause=An unexpected error occured while moving the bulletin(s). One or more files may be damaged.",

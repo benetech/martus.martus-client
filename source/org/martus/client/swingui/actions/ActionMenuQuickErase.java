@@ -47,6 +47,13 @@ public class ActionMenuQuickErase extends UiMenuAction
 	{			
 		if(!mainWindow.reSignIn())
 			return;
+			
+		if (mainWindow.getApp().getFolderOutbox().getBulletinCount() > 0)
+		{				
+			Toolkit.getDefaultToolkit().beep();
+			if (!mainWindow.confirmDlg(mainWindow, "QuickEraseReminder"))
+				return;
+		}		
 		
 		UiQuickEraseConfirmDlg dlg = new UiQuickEraseConfirmDlg(mainWindow, mainWindow.getLocalization(), "DoQuickErase");
 		dlg.show();
@@ -88,8 +95,7 @@ public class ActionMenuQuickErase extends UiMenuAction
 		String title = localization.getWindowTitle("confirmDoQuickErase");			
 		String question = localization.getFieldLabel("confirmQuestionDeleteSubDirectory");
 		String[] contents = {question};
-		
-		Toolkit.getDefaultToolkit().beep();
+				
 		if (mainWindow.confirmDlg(mainWindow, title, contents))
 		{
 			if (options.isScrubSelected())	
