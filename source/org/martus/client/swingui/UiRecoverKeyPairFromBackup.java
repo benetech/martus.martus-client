@@ -160,5 +160,4 @@ public class UiRecoverKeyPairFromBackup
 	
 	private String userName;
 	private char[] userPassword;
-
 }
