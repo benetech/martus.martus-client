@@ -265,19 +265,19 @@ public class BulletinFolder
 		{
 			public Sorter(String tagToSortBy, int direction)
 			{
-				sortTag = tagToSortBy;
-				sortDir = direction;
+				sorterTag = tagToSortBy;
+				sorterDir = direction;
 			}
 			
 			public int compare(Object o1, Object o2)
 			{
-				String value1 = getStore().getFieldData((UniversalId)o1, sortTag);
-				String value2 = getStore().getFieldData((UniversalId)o2, sortTag);
-				return value1.compareTo(value2) * sortDir;
+				String value1 = getStore().getFieldData((UniversalId)o1, sorterTag);
+				String value2 = getStore().getFieldData((UniversalId)o2, sorterTag);
+				return value1.compareTo(value2) * sorterDir;
 			}
 			
-			String sortTag;
-			int sortDir;
+			String sorterTag;
+			int sorterDir;
 		}
 		
 		Object[] uids = rawIdList.toArray(); 
