@@ -26,12 +26,14 @@ Boston, MA 02111-1307, USA.
 
 package org.martus.client.swingui.dialogs;
 
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
 
+import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
@@ -77,18 +79,27 @@ public class UiTemplateDlg extends JDialog implements ActionListener
 				JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 
 		details.setText(info.getTemplateDetails());
+		
+		getContentPane().setLayout(new ParagraphLayout());
 
 		getContentPane().setLayout(new ParagraphLayout());
 		getContentPane().add(new JLabel(localization.getFieldLabel("TemplateDetails")), ParagraphLayout.NEW_PARAGRAPH);
 		getContentPane().add(detailScrollPane);
 
-		getContentPane().add(new JLabel(""), ParagraphLayout.NEW_PARAGRAPH);
-		getContentPane().add(help);
-		getContentPane().add(loadFromFile);
-		getContentPane().add(new JLabel(""), ParagraphLayout.NEW_PARAGRAPH);
-		getContentPane().add(ok);
-		getContentPane().add(cancel);
+		Box buttons = Box.createHorizontalBox();
+		Dimension preferredSize = details.getPreferredSize();
+		preferredSize.height = ok.getPreferredSize().height;				
+		buttons.setPreferredSize(preferredSize);						
+		buttons.add(loadFromFile);
 
+		buttons.add(Box.createHorizontalGlue());		
+		buttons.add(ok);				
+		buttons.add(cancel);
+		buttons.add(help);
+		
+		getContentPane().add(new JLabel(""), ParagraphLayout.NEW_PARAGRAPH);
+		getContentPane().add(buttons);
+		
 		getRootPane().setDefaultButton(ok);
 		Utilities.centerDlg(this);
 	}
