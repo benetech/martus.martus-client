@@ -250,7 +250,7 @@
 -63bc-field:AccountInfoPublicCode=Código público:
 
 #_______________________________=Public Account Id:
--6723-field:AccountInfoPublicKey=Ident. de cuenta pública:
+-6723-field:AccountInfoPublicKey=Identificación de cuenta pública:
 
 #______________________________=User Name: 
 -b58e-field:AccountInfoUserName=Nombre de usuario:
@@ -262,10 +262,10 @@
 -4a0b-field:AuthorRequired=Autor (requerido)
 
 #___________________________________=Your key is required to read your private bulletin information or to create new bulletins.  To ensure that you’ll always have access to your data, it is extremely important to keep a backup of your key.\n\nMartus offers two methods for backing up your key, either of which may be used, but we strongly recommend using both backup methods.  The first method creates a single, password encrypted key back up file onto removable media (e.g. floppy disk, cd, USB storage) or a network drive; the second method backs up the key in #M# separate pieces (not encrypted with your password) onto multiple floppy disks (or other removable media).\n
--667a-field:BackupKeyPairGeneralInfo=Su clave es un elemento requerido para poder leer la información privada de sus boletines y para crear nuevos boletines. Es importante tener copias de seguridad para poder estar seguro que siempre va a tener acceso a su información.\n\nMartus le ofrece dos métodos para crear copias de seguridad, puede escoger el que más le convenga pero le recomendamos que use ambos métodos. El primer método crea una copia de su clave, cifrada y protegida con su contraseña a un medio removible (como una unidad USB, un disco CD-ROM o un disquete) o a una red. El segundo método crea múltiples copias de seguridad al seccionar su clave en #M# partes cifradas pero sin protegerlas con su contraseña. Estas partes son guardadas individualmente a medios removibles múltiples como disquetes.
+-667a-field:BackupKeyPairGeneralInfo=Su clave es un elemento requerido para poder leer la información privada de sus boletines y para crear nuevos boletines. Es importante tener copias de seguridad para poder estar seguro que siempre va a tener acceso a su información.\n\nMartus le ofrece dos métodos para crear copias de seguridad, puede escoger el que más le convenga pero le recomendamos que use ambos métodos. El primer método crea una copia de su clave, cifrada y protegida con su contraseña a un medio removible (como una unidad USB, un disco CD-ROM o un disquete) o a una red. El segundo método crea múltiples copias de seguridad al seccionar su clave en #M# partes cifradas pero sin protegerlas con su contraseña. Estas partes son guardadas individualmente en medios removibles múltiples como disquetes.
 
 #________________________________________________=This method breaks up your key into #M# pieces, any #N# of which will be required to reconstruct the key without requiring a password.  If you forget your login name or your password, this method is the only way you can restore your key.\n\nOnce the #M# files have been written to removable media disks, you should distribute them to #M# different people whom you will remember, but each of whom don’t know who you have given the other files to.  Do not store any of the disks together.\n\nTo restore your key, first retrieve any #N# of the original #M# disks, and then select 'Restore Account' and 'Restore account from multiple disks' when signing into Martus.\n
--e44a-field:BackupKeyPairToSecretShareInformation=Este método secciona su clave en #M# partes. Con juntar #N# de estas partes puede reconstruir su clave sin necesidad de su contraseña. Si se le olvida su nombre de usuario de Martus o su contraseña, éste es el único método bajo el cual podría recuperar su clave.\n\nUna vez haya guardado las #M# piezas a medios removibles, distribuya estos entre #M# diferentes personas a las cuales usted conozca y pueda recordar, pero los cuales no sepan de las otras personas a las que les ha dado las demás piezas. Nunca guarde los medios removibles juntos, siempre sepárelos para su seguridad.\n\nPara recuperar su clave junte #N# de las #M# copias originales y elija 'Recuperar cuenta' y luego 'Recuperar cuenta de copias de seguridad múltiples' al iniciar Martus.\n
+-e44a-field:BackupKeyPairToSecretShareInformation=Este método secciona su clave en #M# partes. Con juntar #N# de estas partes puede reconstruir su clave sin necesidad de su contraseña. Si se le olvida su nombre de usuario de Martus o su contraseña, éste es el único método bajo el cual podría recuperar su clave.\n\nUna vez haya guardado las #M# piezas en medios removibles, distribuya estos entre #M# diferentes personas a las cuales usted conozca y pueda recordar, pero los cuales no sepan de las otras personas a las que les ha dado las demás piezas. Nunca guarde los medios removibles juntos, siempre sepárelos para su seguridad.\n\nPara recuperar su clave junte #N# de las #M# copias originales y elija 'Recuperar cuenta' y luego 'Recuperar cuenta de copias de seguridad múltiples' al iniciar Martus.\n
 
 #____________________________________________________=Please insert disk #
 -b877-field:BackupRecoverKeyPairInsertNextDiskMessage=Por favor inserte el disco #
@@ -319,19 +319,19 @@
 -1f49-field:ContactInfoFutureUseOfFields=Esta información va a estar disponible a todos los que puedan acceder la información pública de su boletín.\nEsta característica le permite a otras personas contactarlo para recibir mayor información.
 
 #____________________________________=This information identifies your organization.\nYou must enter either an Author or Organization, and both are shown in every bulletin you create.
--ea39-field:ContactInfoRequiredFields=Esta información identifica a su organización.\nEscriba su nombre o el de su organización para que esta sea incluida en los boletines que escriba.
+-ea39-field:ContactInfoRequiredFields=Esta información identifica a su organización.\nEscriba su nombre o el de su organización para que se incluya en los boletines que escriba.
 
 #_________________________________=You can change any of this information later, by choosing Options/Contact Info.
 -e924-field:ContactInfoUpdateLater=Puede cambiar su información en cualquier momento usando el menú Opciones/Información de contacto.
 
 #__________________________________=The layout of the bulletins is dictated by an XML document.  At the start of the document you must have <CustomFields> and at the end of the document you must have its corresponding end tag namely </CustomFields>.  By default the standard bulletin fields occur at the top of the Custom Field declaration, but they can be moved if desired.  However, there are four required fields that cannot be removed:  'author', 'entrydate', 'language' and 'title'.  For example for 'author' you will have\n<Field type='STRING'><Tag>author</Tag><Label></Label></Field>\n\n
--2398-field:CreateCustomFieldsHelp1=La presentación de los boletines está dictada por un documento en XML. Al inicio de su documento necesita la etiqueta <CustomFields> y al final del documento necesita la etiqueta correspondiente, </CustomFields>. Normalmente los campos de un boletín estandar ocurren al inicio del documento de presentación, pero si lo desea puede moverlos a otra posición. Aún así hay cuatro campos que son requeridos en la presentación de un boletín y no pueden ser removidos, estas son 'author' (autor), 'entrydate' (fecha de introducción), 'language' (idioma) y 'title' (título). Por ejemplo para 'author' va a escribirlo \n<Field type='STRING'><Tag>author</Tag><Label></Label></Field>\n\n
+-2398-field:CreateCustomFieldsHelp1=La presentación de los boletines está dictada por un documento en XML. Al inicio de su documento necesita la etiqueta <CustomFields> y al final del documento necesita la etiqueta correspondiente, </CustomFields>. Normalmente los campos de un boletín estándar ocurren al inicio del documento de presentación, pero si lo desea puede moverlos a otra posición. Aún así hay cuatro campos que son requeridos en la presentación de un boletín y no pueden ser removidos, estas son 'author' (autor), 'entrydate' (fecha de creación), 'language' (idioma) y 'title' (título). Por ejemplo para 'author' va a escribirlo \n<Field type='STRING'><Tag>author</Tag><Label></Label></Field>\n\n
 
 #__________________________________=For custom (non-standard) fields, you first select the type of field you want.  The possible choices are 'BOOLEAN', 'DATE', 'DATERANGE', 'GRID', 'LANGUAGE', 'MULTILINE', and 'STRING'.  This type is defined by <Field type='type of field goes here'>. \n\nFor each custom field you will need a unique identification tag.  This tag can be any word except those already used by the system (eg. 'author', 'summary', 'location', 'title' etc.), and cannot contain spaces or special characters.  Examples of choices are 'custom1', 'custom2', etc, or tags that are more descriptive like 'VictimsName'.  This unique tag looks like <Tag>yourtag</Tag>. \n Then you need a label which is displayed next to your custom field.  An example might be 'Name of 1st Witness'.  This label is surrounded by <Label>your label goes here</Label>\nEach field description ends with </Field>\n\n
--c18a-field:CreateCustomFieldsHelp2=Para crear sus campos personalizados (no estándar), necesita primero identificar qué tipo de campo desea. Los tipos de campo disponibles son 'BOOLEAN' (Verdadero/Falso), 'DATE' (Fecha), 'DATERANGE' (Rango de fechas), 'GRID' (Mapa), 'LANGUAGE' (Idioma), 'MULTILINE' (Múltiples lineas), and 'STRING' (Palabra). El tipo de campo va dentro de la etiqueta <Field> de esta manera: <Field type='DATE'>.\n\nPara cada campo personalizado va a necesitar un nombre de identificación único. El nombre de identificación de un campo puede ser cualquier palabra a excepción de aquellas en uso por Martus ('author', 'summary', 'location', 'title' etc.) y no puede contener espacios o caracteres especiales. Por ejemplo puede usar los de identificación 'personalizado1', 'personalizado2', etc o pueden ser más descriptivos como 'NombreDeVictima'. Este nombre de identificación único esta dentro de las etiquetas <Tag> de esta manera <Tag>NombreDeVictima</Tag>. Luego necesita un título para su campo personalizado. Por ejemplo podria ser 'Nombre de primer testigo'. Este título va dentro de la etiqueta <Label> de esta manera: <Label>Nombre de primer testigo</Label>.\nCada definición de un campo termina con la etiqueta </Field>.\n\n
+-c18a-field:CreateCustomFieldsHelp2=Para crear sus campos personalizados (no estándar), necesita primero identificar qué tipo de campo desea. Los tipos de campo disponibles son 'BOOLEAN' (Verdadero/Falso), 'DATE' (Fecha), 'DATERANGE' (Rango de fechas), 'GRID' (Mapa), 'LANGUAGE' (Idioma), 'MULTILINE' (Múltiples lineas), and 'STRING' (Palabra). El tipo de campo va dentro de la etiqueta <Field> de esta manera: <Field type='DATE'>.\n\nPara cada campo personalizado va a necesitar un nombre de identificación único. El nombre de identificación de un campo puede ser cualquier palabra a excepción de aquellas en uso por Martus ('author', 'summary' (resúmen), 'location' (lugar), 'title' etc.) y no puede contener espacios o caracteres especiales. Por ejemplo puede usar los nombres de identificación 'personalizado1', 'personalizado2', etc o pueden ser más descriptivos como 'NombreDeVictima'. Este nombre de identificación único esta dentro de las etiquetas <Tag> de esta manera <Tag>NombreDeVictima</Tag>. Luego necesita un título para su campo personalizado. Por ejemplo podria ser 'Nombre de primer testigo'. Este título va dentro de la etiqueta <Label> de esta manera: <Label>Nombre de primer testigo</Label>.\nCada definición de un campo termina con la etiqueta </Field>.\n\n
 
 #__________________________________=Additional Comments\n1. XML is case-sensitive\n2. quotes around type name can be single or double (as long as they match)\n3. A Boolean field will be displayed as a checkbox when editing and Yes/No when printed.\n\nHere are some examples:\n\n<Field type='STRING'>\n<Tag>custom1</Tag>\n<Label>Witness Name</Label>\n</Field>\n\n<Field type='LANGUAGE'>\n<Tag>new2</Tag>\n<Label>Witness Speaks</Label>\n</Field>\n\n<Field type='BOOLEAN'>\n<Tag>new3</Tag>\n<Label>Were guns used?</Label>\n</Field>\n\n<Field type='GRID'>\n<Tag>customgrid</Tag>\n<Label>Victim Information</Label>\n<GridSpecDetails>\n<Column><Label>Name of Victim</Label></Column>\n<Column><Label>Victim Age</Label></Column>\n<Column><Label>Victim Gender</Label></Column>\n<Column><Label>Victim Ethnicity</Label></Column>\n</GridSpecDetails>\n</Field>\n
--eac7-field:CreateCustomFieldsHelp3=Notas adicionales\n1. XML toma en cuenta las mayúsculas y minúsculas. 'Testigo' no es lo mismo que 'testigo'\n2. Las comillas alreadedor de los tipos de campos pueden ser dobles o singulares, pero tiene que corresponder. ( ej. 'STRING" no es válido. Tiene que ser 'STRING' o "STRING")\n3. Un campo BOOLEAN muestra como una casilla de verificación cuando se edita y Si/No cuando se imprime.\n\nUn ejemplo de campos personalizados:\n\n<Field type='STRING'>\n<Tag>personalizado1</Tag>\n<Label>Nombre de testigo</Label>\n</Field>\n\n<Field type='LANGUAGE'>\n<Tag>nueva2</Tag>\n<Label>Testimonio de testigo</Label>\n</Field>\n\n<Field type='BOOLEAN'>\n<Tag>nueva3</Tag>\n<Label>¿Se usaron armas?</Label>\n</Field>\n\n<Field type='GRID'>\n<Tag>mapapersonalizado</Tag>\n<Label>Información de la víctima</Label>\n<GridSpecDetails>\n<Column><Label>Nombre de la víctima</Label></Column>\n<Column><Label>Edad de la víctima</Label></Column>\n<Column><Label>Sexo de la víctima</Label></Column>\n<Column><Label>Etnia de la víctima</Label></Column>\n</GridSpecDetails>\n</Field>\n
+-eac7-field:CreateCustomFieldsHelp3=Notas adicionales\n1. XML toma en cuenta las mayúsculas y minúsculas. 'Testigo' no es lo mismo que 'testigo'\n2. Las comillas alreadedor de los tipos de campos pueden ser dobles o singulares, pero tiene que corresponder. ( ej. 'STRING" no es válido. Tiene que ser 'STRING' o "STRING")\n3. Un campo BOOLEAN muestra como una casilla de verificación cuando se edita y Si/No en la vista previa o cuando se imprime.\n\nUn ejemplo de campos personalizados:\n\n<Field type='STRING'>\n<Tag>personalizado1</Tag>\n<Label>Nombre de testigo</Label>\n</Field>\n\n<Field type='LANGUAGE'>\n<Tag>nueva2</Tag>\n<Label>Testimonio de testigo</Label>\n</Field>\n\n<Field type='BOOLEAN'>\n<Tag>nueva3</Tag>\n<Label>¿Se usaron armas?</Label>\n</Field>\n\n<Field type='GRID'>\n<Tag>mapapersonalizado</Tag>\n<Label>Información de la víctima</Label>\n<GridSpecDetails>\n<Column><Label>Nombre de la víctima</Label></Column>\n<Column><Label>Edad de la víctima</Label></Column>\n<Column><Label>Sexo de la víctima</Label></Column>\n<Column><Label>Etnia de la víctima</Label></Column>\n</GridSpecDetails>\n</Field>\n
 
 #____________________________________=Please enter your new username and password.
 -aec2-field:CreateNewUserNamePassword=Escriba su nuevo nombre de usuario y contraseña.
@@ -364,7 +364,7 @@
 -5c38-field:DeleteKeypair=Eliminar archivo de clave
 
 #____________________________________=You can only delete draft bulletins from the server that are not currently on your computer.
--8ded-field:DeleteServerDraftsMessage=Sólo puede eliminar borradores en el servidor que no esten presentes en su ordenador.
+-8ded-field:DeleteServerDraftsMessage=Sólo puede eliminar borradores en el servidor que no estén presentes en su ordenador.
 
 #______________________=Do not prompt
 -448d-field:DonotPrompt=No preguntar nuevamente
@@ -379,13 +379,13 @@
 -6e98-field:ErrorCustomFieldHeader2=TIPO
 
 #__________________________________=TAG
--41ea-field:ErrorCustomFieldHeader3=ELEMENTO
+-41ea-field:ErrorCustomFieldHeader3=NOMBRE DE IDENTIFICACIÓN
 
 #__________________________________=LABEL
 -64b8-field:ErrorCustomFieldHeader4=TÍTULO
 
 #____________________________=There is an error in the custom field definitions. Each problem is identified with the following codes:\n   100 - Required standard field is missing\n   101 - Custom field does not have a correct tag.\n   102 - A previous Tag already exists with this name.\n   103 - Custom field does not have a label.\n   104 - Unrecognized Field Type.\n   105 - A label was found in a standard field.\n   106 - XML Parse Error.\n   107 - Tag contains illegal characters
--943a-field:ErrorCustomFields=Se encontró un error en la definición de los campos personalizados. Cada problema es identificado con los siguientes códigos:\n   100 - Falta una etiqueta requerida\n   101 - Un campo personalizado tiene una etiqueta incorrecta.\n   102 - Ya existe una etiqueta Tag con este nombre.\n   103 - Campo personalizado no tiene título.\n   104 - Tipo de campo desconocido.\n   105 - Se encontró un título en un campo estandar.\n   106 - XML Error al leer documento.\n   107 - Etiqueta Tag contiene letras no válidas
+-943a-field:ErrorCustomFields=Se encontró un error en la definición de los campos personalizados. Cada problema es identificado con los siguientes códigos:\n   100 - Falta un campo estándar requerido\n   101 - Un campo personalizado tiene una nombre de identificación incorrecto.\n   102 - Hay un nombre de identificación duplicado.\n   103 - Campo personalizado no tiene título.\n   104 - Tipo de campo desconocido.\n   105 - Se encontró un título en un campo estándar.\n   106 - XML Error al leer documento.\n   107 - Nombre de identificación contiene letras no válidas
 
 #_________________________________________=A previous backup file exists.  You must save each file on its own removable media disk.
 -db93-field:ErrorPreviousBackupShareExists=Una pieza de un archivo de seguridad ya existe en este medio. Cada pieza debe ser guardada en su propio medio removible.
@@ -634,7 +634,7 @@
 -5ffa-field:ViewBulletinHQInfo=#NumberOfHQs# oficina(s) central(es) pueden ver esta información privada
 
 #________________________________________=The following Headquarter account(s) can view the private information in this bulletin, and can send this bulletin to a server:\n\n#L#
--4500-field:ViewViewBulletinDetailsHQList=Las siguiente(s) cuenta(s) de oficina(s) central(es) pueden ver la información privada en este boletín y enviarlo a un servidor:\n\n#L#
+-4500-field:ViewViewBulletinDetailsHQList=La(s) siguiente(s) cuenta(s) de oficina(s) central(es) pueden ver la información privada en este boletín y enviarlo a un servidor:\n\n#L#
 
 #___________________________________=Back Space
 -7ae6-field:VirtualKeyboardBackSpace=Retroceder
@@ -694,7 +694,7 @@
 -a4d8-field:confirmBackupKeyPairSecretSharecause=Le recomendamos que haga #M# copias de seguridad. Con juntar #N# de estas copias podrá reconstruir su clave y su cuenta de Martus sin necesitar su nombre de usuario o contraseña.
 
 #________________________________________________=By choosing Yes, you will be prompted to save pieces of your key onto removable disks.
--efaa-field:confirmBackupKeyPairSecretShareeffect=Al oprimir Sí, se le pedirá guardar las partes de su clave a medios removibles.
+-efaa-field:confirmBackupKeyPairSecretShareeffect=Al oprimir Sí, se le pedirá guardar las partes de su clave en medios removibles.
 
 #________________________________________________=We strongly recommend that you now verify all disks to make sure the data was written correctly.
 -ee28-field:confirmBackupKeyShareVerifyDiskscause=Le recomendamos que verifique que todos los discos creados para asegurarse de que fueron escritos correctamente.
@@ -721,7 +721,7 @@
 -5319-field:confirmCancelShareBackupeffect=Oprima Sí para salir de la creación de copias de seguridad.
 
 #_________________________________________=Do you wish to cancel the key restore process?
--a7e1-field:confirmCancelShareRecovercause=¿Desea cancelar la recuperación del su clave?
+-a7e1-field:confirmCancelShareRecovercause=¿Desea cancelar la recuperación de su clave?
 
 #__________________________________________=By choosing Yes, you will exit Martus.
 -49e1-field:confirmCancelShareRecovereffect=Oprima Sí para salir de Martus.
@@ -736,7 +736,7 @@
 -6076-field:confirmClearHQInformationcause=Escogió eliminar la cuenta de la oficina central.  Los boletines que estén guardados todavía pueden ser vistos por la oficina central eliminada. Si no quiere que la oficina central eliminada pueda ver sus borradores tendrá que guardarlos nuevamente una vez que elimine la cuenta de la oficina central. Los boletines que están sellados NO pueden ser reconfigurados para que no le sean visibles a la oficina central eliminada.
 
 #__________________________________________=By clicking on Yes, any draft or sealed bulletins saved in the future will no longer be accessible by your Headquarters.
--4a87-field:confirmClearHQInformationeffect=Al oprimir Sí los boletines que selle o borradores que guarde en el futuro no podrán ser vistos por la oficina central.
+-4a87-field:confirmClearHQInformationeffect=Al oprimir Sí, los boletines que selle o borradores que guarde en el futuro no podrán ser vistos por la oficina central.
 
 #__________________________________________=You have chosen to modify a bulletin that was created by someone else.
 -b384-field:confirmCloneBulletinAsMinecause=Escogió modificar un boletín que fue creado por otra persona.
@@ -745,7 +745,7 @@
 -f291-field:confirmCloneBulletinAsMineeffect=Al oprimir Sí, se va a crear un nuevo boletín con una copia de la misma información. Usted va a ser el autor oficial de este nuevo boletín y la información privada va a ser visible sólo por usted (y su oficina central si tiene una). El boletín oficial se va a mantener sin cambios.
 
 #___________________________________________=You have chosen to modify one of your sealed bulletins, but sealed bulletins cannot be modified.
--55b1-field:confirmCloneMySealedAsDraftcause=Escogió modificar un boletín que ha sido sellado. Los boletines no pueden ser modificado una vez sellados.
+-55b1-field:confirmCloneMySealedAsDraftcause=Escogió modificar un boletín que ha sido sellado. Los boletines no pueden ser modificados una vez sellados.
 
 #____________________________________________=Clicking on Yes will create a new bulletin that contains all the same information, and the original sealed bulletin will remain unchanged.
 -bec9-field:confirmCloneMySealedAsDrafteffect=Al oprimir Sí, se va a crear un nuevo boletín con una copia de la misma información, el boletín original se va a mantener sin cambios.
@@ -796,7 +796,7 @@
 -6829-field:confirmKeyPairFileExistsOverWritecause=Ya existe una clave para esta cuenta.  ¿Desea sobrescribirla?
 
 #__________________________________________________=Clicking on Yes will delete the old key file and replace it with your restored key.
--167f-field:confirmKeyPairFileExistsOverWriteeffect=Al oprimir Sí la clave existente será reemplazada por la copia recuperada.
+-167f-field:confirmKeyPairFileExistsOverWriteeffect=Al oprimir Sí, la clave existente será reemplazada por la copia recuperada.
 
 #___________________________________________=This account was created with an older version of Martus, which used a different set of folders. The folders need to be migrated to the new format. The migration is automatic, fast, and safe. You cannot run this version of Martus unless you allow this migration.
 -39ae-field:confirmNeedsFolderMigrationcause=Esta cuenta se creo con una versión anterior de Martus que usó diferentes carpetas. Sus boletines tienen que ser convertidos al nuevo formato para usar las nuevas carpetas. Este cambio es automático, rápido y seguro. No podrá usar esta versión de Martus a menos que continue con esta conversión.
@@ -874,7 +874,7 @@
 -37bf-field:confirmResetDefaultDetailscause=Esta acción va a revertir el contenido al texto original. Verifique el contenido para asegurarse de que es el correcto.
 
 #___________________________________________=After you review the contents, you can accept them, modify them, or press cancel to keep the existing default details.
--bbcf-field:confirmResetDefaultDetailseffect=Despues de verificar el contenido puede aceptarlo, modificarlo u oprimir Cancelar para mantener el contenido original.
+-bbcf-field:confirmResetDefaultDetailseffect=Después de verificar el contenido puede aceptarlo, modificarlo u oprimir Cancelar para mantener el contenido original.
 
 #_________________________________________=You have chosen to save a completed bulletin.
 -a3fe-field:confirmSendWithPublicDatacause=Escogió guardar un boletín completado.
@@ -928,16 +928,16 @@
 -61cb-field:confirmWarnMissingAccountMapFilecause=Advertencia: El archivo acctmap.txt en la carpeta de su cuenta esta dañado o no existe.  Esto puede indicar que alguien a intentado modificar su información o que su computador sufrió de fallas de hardware.
 
 #_________________________________________________=Clicking on Yes will delete all of your bulletins and continue to load Martus.  Clicking on No will exit Martus so you can try to recover or repair this file manually.
--20ee-field:confirmWarnMissingAccountMapFileeffect=Oprima Sí, para borrar todos sus boletines y continuar cargando Martus. Oprima No para salir de Martus y que intente recuperar o reparar el archivo manualmente.
+-20ee-field:confirmWarnMissingAccountMapFileeffect=Oprima Sí para borrar todos sus boletines y continuar cargando Martus. Oprima No para salir de Martus y que intente recuperar o reparar el archivo manualmente.
 
 #__________________________________________________________________=Warning: acctmap.txt.sig file is missing or is corrupt in your account's packets directory.  If you have just upgraded to a new version of Martus this warning is harmless and you should click on No.  Otherwise this may indicate someone has tried to tamper with your data or could be caused by a hardware error.
--e1b1-field:confirmWarnMissingOrCorruptAccountMapSignatureFilecause=Advertencia: El archivo acctmap.txt.sig en la carpeta packets de su cuenta está dañado o no se encontró. Puede ignorar esta advertencia y oprimir No si acaba de actualizar su copia de Martus. De no ser así puede que alguien haya intentado modificar su información o puede haber sido causado por una falla de hardware.
+-e1b1-field:confirmWarnMissingOrCorruptAccountMapSignatureFilecause=Advertencia: El archivo acctmap.txt.sig de la carpeta de paquetes de su cuenta está dañado o no se encontró. Puede ignorar esta advertencia y oprimir No si es que acaba de actualizar su copia de Martus. Si no es así entonces puede que esto signifique que alguien a intentado modificar su información o puede que haya sido causado por una falla de hardware.
 
 #___________________________________________________________________=Clicking on Yes will try to generate a new acctmap.txt.sig file and continue to load Martus.  Clicking on No will exit Martus.
 -3ca4-field:confirmWarnMissingOrCorruptAccountMapSignatureFileeffect=Oprima Sí para intentar generar un nuevo archivo accountmap.txt.sig y continuar cargando Martus. Oprima No para salir de Martus.
 
 #__________________________________________________________=Are you sure the directory you chose to save your backup files to is removable?  You cannot save all #M# files to the same location without inserting a new disk for each backup file.
--75ec-field:confirmWarningPathChosenMayNotBeRemoveablecause=¿Está seguro de que el que escogio guardar sus archivos de seguridad es un medio removible? No puede guardar los ## archivos al mismo lugar sin usar una nueva unidad removible para cada uno.
+-75ec-field:confirmWarningPathChosenMayNotBeRemoveablecause=¿Está seguro de que el que escogio guardar sus archivos de seguridad es un medio removible? No puede guardar los #M# archivos al mismo lugar sin usar una nueva unidad removible para cada uno.
 
 #___________________________________________________________=Choosing Yes will begin the backup process as instructed.
 -7744-field:confirmWarningPathChosenMayNotBeRemoveableeffect=Oprima Sí para iniciar el proceso de copia de seguridad como ha sido indicado.
@@ -952,7 +952,7 @@
 -71c0-field:confirmbackupIncompleteEncryptedNeeded=Todavía no ha creado una copia de seguridad cifrada de su clave.
 
 #_____________________________________________=A multiple disk backup of your key has yet to be created.
--b185-field:confirmbackupIncompleteShareNeeded=Todavía no a creado una copia de seguridad múltiple de su clave.
+-b185-field:confirmbackupIncompleteShareNeeded=Todavía no ha creado una copia de seguridad múltiple de su clave.
 
 #___________________________________=You have chosen to permanently delete a folder.  
 -76fa-field:confirmdeletefoldercause=Escogió eliminar la carpeta permanentemente.
@@ -1027,7 +1027,7 @@
 -6507-field:inputGetShareFileNameentry=Escriba el nombre del archivo que desea exportar.
 
 #_____________________________________=Enter the Public Identification Code for this account:
--830a-field:inputImportPublicCodeentry=Escriba el código de identificación público de estra cuenta:
+-830a-field:inputImportPublicCodeentry=Escriba el código de identificación público de esta cuenta:
 
 #____________________________________=If you want to request permission to upload to this server, enter the 'magic word' now:
 -3ea8-field:inputservermagicwordentry=Escriba la palabra mágica para poder enviar boletines a este servidor:
@@ -1138,7 +1138,7 @@
 -8965-field:notifyFilesWillNotBeDeletedcause=No se han eliminado de su computador los archivos originales. Si lo desea tendrá que eliminarlos manualmente.
 
 #___________________________________________=An error occurred during the conversion of your folders. You can still use Martus, but if the Outbox or Drafts folders still exist, do not use them.
--73de-field:notifyFolderMigrationFailedcause=Occurrió un error durante la conversión de las carpetas. Todavía puede usar Martus pero si la carpeta bandeja de salida o la carpeta de borradores todavia existen no las use.
+-73de-field:notifyFolderMigrationFailedcause=Occurrió un error durante la conversión de las carpetas. Todavía puede usar Martus pero si la carpeta bandeja de salida o la carpeta de borradores todavia existen, no las use.
 
 #___________________________________________=One or more bulletins were severely damaged, and cannot be displayed. If these bulletins were backed up to a server, you may be able to retrieve undamaged copies from there.
 -399f-field:notifyFoundDamagedBulletinscause=Uno o más boletines están dañados y no pueden ser mostrados. Si es que envió estos boletines a un servidor puede que los pueda recuperar de ahí.
@@ -1156,7 +1156,7 @@
 -984b-field:notifyInvalidServerNamecause=Necesita escribir el nombre del servidor o dirección IP.
 
 #_______________________________________________=Bulletin ID:        #I#\nAuthor Public Code: #A#\n\n#H#
--485a-field:notifyModifyViewBulletinDetailscause=Ident. de boletín:        #I#\nCódigo público del autor: #A#\n\n#H#
+-485a-field:notifyModifyViewBulletinDetailscause=Identificación de boletín:        #I#\nCódigo público del autor: #A#\n\n#H#
 
 #________________________________________=Operation completed.
 -1a65-field:notifyOperationCompletedcause=Operación completada.
@@ -1174,7 +1174,7 @@
 -eb6e-field:notifyPasteErrorcause=Ocurrió un error inesperado al mover el (los) boletin(es). Puede que alguno de ellos se haya dañado.
 
 #________________________________________________=No bulletin selected.  Please select the bulletin you wish to preview.
--b51e-field:notifyPreviewNoBulletinsSelectedcause=Ningún boletín está seleccionado. Elija el boletín que desea ver en la vista previa.
+-b51e-field:notifyPreviewNoBulletinsSelectedcause=Ningún boletín está seleccionado. Por favor elija el boletín que desea ver en la vista previa.
 
 #____________________________________________=You may only preview one bulletin at a time.  Please only select one bulletin to preview.
 -fbee-field:notifyPreviewOneBulletinOnlycause=Sólo puede ver un boletín a la vez. Elija sólo un boletín que deseé ver en la vista previa.
@@ -1189,10 +1189,10 @@
 -2527-field:notifyRecoveredKeyShareSucceededNewUserNamePasswordRequiredcause=¡Se recuperó su clave!  Es necesario que ingrese su nombre y contraseña.
 
 #_______________________________________________=Key restore is complete, you will now be logged into Martus.
--efa0-field:notifyRecoveryOfKeyPairCompletecause=La recuperación de su clave a finalizado y ahora va a ingresar a Martus.
+-efa0-field:notifyRecoveryOfKeyPairCompletecause=La recuperación de su clave ha finalizado y ahora va a ingresar a Martus.
 
 #________________________________________________=You have successfully restored your key from your backup files.  It is very important that you now re-distribute your backup files.  We also recommend you backup your key as a single password-encrypted file, though you do not need to recreate the multiple file backup.
--f50c-field:notifyRecoveryOfKeyShareCompletecause=Se ha recuperado la cuenta de Martus de las copias de seguridad. Es muy importante que vuelva a distribuir las diferentes copias de seguridad. No es necesario que vuelva a crear otra copia de seguridad pero le recomendamos que haga una copia de seguridad cifrada con su contraseña.
+-f50c-field:notifyRecoveryOfKeyShareCompletecause=Se ha recuperado la cuenta de Martus de las copias de seguridad. Es muy importante que vuelva a distribuir las diferentes copias de seguridad. No es necesario que vuelva a crear otra copia de seguridad múltiple pero le recomendamos que haga una copia de seguridad cifrada con su contraseña.
 
 #_______________________________________________=To restore your key, first you must find the backup file you saved previously.  Using the 'Restore Key from Backup File' dialog box find the file on your computer’s hard drive, a network drive, or removable media disk then click the Open button.  Martus will then ask you for your user name and password and restore your key so you can log in normally and access your account.
 -83c2-field:notifyRecoveryProcessBackupFilecause=Para recuperar su clave necesita ubicar una copia de seguridad que haya guardado anteriormente. Al iniciar Martus elija 'Recuperar cuenta de una copia de seguridad', indique donde se encuentra la copia en su disco duro, en un disco en la red o en una unidad removible y oprima Abrir. Martus le pedirá que ingrese su nombre de usuario y su contraseña para recuperar su clave y su cuenta de Martus.
@@ -1201,7 +1201,7 @@
 -d5c2-field:notifyRecoveryProcessKeySharecause=Necesita tener #N# de las #M# partes de las copias de seguridad creadas al hacer la copia de seguridad de su clave.
 
 #______________________________________=Please remember your username and password. It cannot be recovered.
--e9e0-field:notifyRememberPasswordcause=Por favor tome nota de su nombre de usuario y contraseña, de perderlos, no los podrá recuperar.
+-e9e0-field:notifyRememberPasswordcause=Recuerde su nombre de usuario y contraseña, de perderlos, no los podrá recuperar.
 
 #____________________________________________________=One or more bulletins were unable to be resent because you are not authorized to upload them.
 -d248-field:notifyResendErrorNotAuthorizedToSendcause=Uno o más boletines no pudieron ser reenviados porque no tiene autorización para enviarlos al servidor.
@@ -1264,7 +1264,7 @@
 -485a-field:notifyViewViewBulletinDetailscause=Identificación de boletín:        #I#\nCódigo público del autor: #A#\n\n#H#
 
 #_____________________________________=Welcome!\n\nTo start using Martus, create an account. Choose any username you like and a password that contains at least 8 characters. Keep the following information in mind as you create your username and password:\n\n * We recommend using a password that has 15 characters.\n * Include some characters that aren't letters or numbers in your password.\n   (That is, use punctuation or other special characters.)\n * Use a password that other people won't be able to guess;\n   anyone who knows your username and password can view your private data,\n   and can create bulletins that everyone will believe were created by you.\n * Write down your username and password and store them in a safe place.\n * You'll need to enter your username and password whenever you start Martus.\n * Martus will also sometimes prompt you to re-enter your username\n   and password to prevent someone else from using your account\n   after you've logged in.\n\nIMPORTANT: You are the only one who has your username and password. If you lose either of them, you won't be able to retrieve your data. Your username and password are not stored or backed up anywhere, so they cannot be reset for you.
--da34-field:notifyWelcomeToMartuscause=Bienvenido al sistema de Martus.\n\nPara poder usar Martus es necesario crear una cuenta. Escoja el nombre de usuario que deseé y una contraseña con un mínimo de 8 letras y números. Considere lo siguiente al crear su nombre de usuario y contraseña:\n\n * Le recomendamos escoja una contraseña con un mínimo de 15 letras o números.\n * Incluya puntuación y otros símbolos en su contraseña.\n * Use una contraseña que otras personas no puedan adivinar pues con su nombre de usuario y contraseña cualquier persona puede ver y modificar su información privada y crear boletines bajo su nombre.\n * Escriba su nombre y contraseña y guardela en un lugar seguro.\n * Necesitará ingresar su nombre y contraseña cada vez que inicie Martus.\n * Martus también le pedirá que ingrese su nombre de usuario y contraseña en oportunidades adicionales durante el uso del programa para prevenir que otra persona use su cuenta en su ausencia.\n\nIMPORTANTE: Usted es la única persona que tiene su nombre de usuario y contraseña. Si los pierde no podrá acceder a la información que haya ingresado. Martus no guarda su nombre de usuario o su contraseña por lo que de perderse estos no pueden ser cambiados o recuperados.\n
+-da34-field:notifyWelcomeToMartuscause=Bienvenido al sistema de Martus.\n\nPara poder usar Martus es necesario crear una cuenta. Escoja el nombre de usuario que deseé y una contraseña con un mínimo de 8 letras y números. Considere lo siguiente al crear su nombre de usuario y contraseña:\n\n * Le recomendamos escoja una contraseña con un mínimo de 15 letras o números.\n * Incluya puntuación y otros símbolos en su contraseña.\n * Use una contraseña que otras personas no puedan adivinar pues con su nombre de usuario y contraseña cualquier persona puede ver y modificar su información privada y crear boletines bajo su nombre.\n * Escriba su nombre y contraseña y guardela en un lugar seguro.\n * Necesitará ingresar su nombre y contraseña cada vez que inicie Martus.\n * Martus también le pedirá que ingrese su nombre de usuario y contraseña en oportunidades adicionales durante el uso del programa para prevenir que otra persona use su cuenta en su ausencia.\n\nIMPORTANTE: Usted es la única persona que tiene su nombre de usuario y contraseña. Si los pierde no podrá acceder a la información que haya ingresado. Martus no guarda su nombre de usuario o su contraseña por lo que de perderse estos no los podrá recobrar.\n
 
 #_____________________________________=The current Martus Server has refused to accept your contact info
 -156f-field:notifycontactRejectedcause=El servidor de Martus a rehusado su información de contacto.
