@@ -505,11 +505,14 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		String accountId2 = createAnotherAccount(app, userName2);
 		assertNotEquals("account id's should be different", accountId1, accountId2);
 
-		String accountId3 = createAnotherAccount(app, "another");
+		MockMartusApp app2 = MockMartusApp.create();
+		app2.martusDataRootDirectory = app.getMartusDataRootDirectory();
+		String accountId3 = createAnotherAccount(app2, "another");
 		assertNotEquals("account1 id's should be different", accountId1, accountId3);
 		assertNotEquals("account2 id's should be different", accountId2, accountId3);
 
 		app.deleteAllFiles();
+		app2.deleteAllFiles();
 		TRACE_END();
 	}
 	

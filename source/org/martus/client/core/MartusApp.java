@@ -1078,7 +1078,7 @@ public class MartusApp
 			tempAccountDir.delete();
 			tempAccountDir.mkdirs();
 			createAccountInternal(tempAccountDir, userName, userPassPhrase);
-			String realAccountDirName = MartusCrypto.getHexDigest(getAccountId());
+			String realAccountDirName = MartusCrypto.getHexDigest(getSecurity().getPublicKeyString());
 			File realAccountDir = new File(accountsDirectory, realAccountDirName);
 			tempAccountDir.renameTo(realAccountDir);
 			setCurrentAccount(userName, realAccountDir);
@@ -1418,7 +1418,7 @@ public class MartusApp
 		}
 	}
 
-	File martusDataRootDirectory;
+	public File martusDataRootDirectory;
 	protected File currentAccountDirectory;
 	private Localization localization;
 	public BulletinStore store;
