@@ -1,9 +1,9 @@
 ﻿# Martus Client Translation File
 # Language code:  es
 # Language name:  Spanish
-# Exported date:  Fri Jul 02 14:27:21 PDT 2004
-# Client version: Internal 2.0-prerelease
-# Client build:   20040701.1206
+# Exported date:  Tue Jul 06 16:22:15 PDT 2004
+# Client version: 2.0
+# Client build:   20040706.1208
 #
 # This file MUST be saved in UTF-8 format!
 # Lines beginning with # are comments and are ignored by Martus
@@ -903,8 +903,8 @@
 #____________________________________________________=Key restore failed, we suggest you try again with a different backup file.
 -f6c1-field:confirmUnableToRecoverFromBackupFilecause=Falló la recuperación de su clave. Le sugerimos volver a intentarlo con una copia de seguridad diferente.
 
-#_____________________________________________________=Yes to begin the restore process again, No to exit Martus.
--aff2-field:confirmUnableToRecoverFromBackupFileeffect=Oprima Si para intentar nuevamente, oprima No para salir de Martus.
+#_____________________________________________________=Choose Yes to begin the restore process again, No to exit Martus.
+-0e22-field:confirmUnableToRecoverFromBackupFileeffect=Oprima Si para intentar nuevamente, oprima No para salir de Martus.
 
 #_______________________________________=You have chosen to revert to the standard set of Martus fields.
 -61a6-field:confirmUndoCustomFieldscause=Ha escogido revertir a los campos de boletines originales de Martus.
