@@ -904,6 +904,8 @@ public class ClientBulletinStore extends BulletinStore
 			for(int f = 0; f < getFolderCount(); ++f)
 			{
 				BulletinFolder folderToFix = getFolder(f);
+				if(!folderToFix.isVisible())
+					continue;
 				if( folderToFix.contains(uidToRemove))
 				{
 					try
@@ -913,8 +915,7 @@ public class ClientBulletinStore extends BulletinStore
 					catch (BulletinAlreadyExistsException ignoreHarmless)
 					{
 					}
-					if(folderToFix.isVisible())
-						removeBulletinFromFolder(folderToFix, uidToRemove);
+					removeBulletinFromFolder(folderToFix, uidToRemove);
 				}
 				
 			}

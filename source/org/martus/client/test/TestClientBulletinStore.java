@@ -897,7 +897,7 @@ public class TestClientBulletinStore extends TestCaseEnhanced
 		clientStore.deleteAllBulletins();
 	}
 	
-	public void testAddingBulletinVersionsToInvisibleFolders() throws Exception
+	public void testAddingBulletinVersionThenOriginalToVisibleAndInvisibleFolders() throws Exception
 	{
 		FieldSpec[] publicFields = StandardFieldSpecs.getDefaultPublicFieldSpecs();
 		FieldSpec[] privateFields = StandardFieldSpecs.getDefaultPrivateFieldSpecs();
@@ -905,25 +905,73 @@ public class TestClientBulletinStore extends TestCaseEnhanced
 		Bulletin original = clientStore.createEmptyBulletin();
 		original.setSealed();
 
-		Bulletin clone = clientStore.createClone(original, publicFields, privateFields);
-		clone.setSealed();
-		clientStore.saveBulletinForTesting(clone);
+		Bulletin newerVersion = clientStore.createClone(original, publicFields, privateFields);
+		newerVersion.setSealed();
+		clientStore.saveBulletinForTesting(newerVersion);
 		clientStore.saveBulletinForTesting(original);
 
-		BulletinFolder visibleFolder = clientStore.createFolder("a");
-		assertTrue("Should be an invisibleFolder", visibleFolder.isVisible());
-		clientStore.addBulletinToFolder(visibleFolder, clone.getUniversalId());
-		assertEquals("Should only have 1 bulletin in visible folder", 1, visibleFolder.getBulletinCount());
-		clientStore.addBulletinToFolder(visibleFolder, original.getUniversalId());
-		assertEquals("Should still only have 1 bulletin in visible folder since there is a newer version", 1, visibleFolder.getBulletinCount());
+		BulletinFolder visibleFolderA = clientStore.createFolder("a");
+		assertTrue("Should be a visibleFolder", visibleFolderA.isVisible());
+		clientStore.addBulletinToFolder(visibleFolderA, newerVersion.getUniversalId());
+		assertEquals("Should only have 1 bulletin in visible folder", 1, visibleFolderA.getBulletinCount());
+		try
+		{
+			clientStore.addBulletinToFolder(visibleFolderA, original.getUniversalId());
+			fail("Should have thrown an exception");
+		}
+		catch(BulletinOlderException expected)
+		{
+		}
+		assertEquals("Should still only have 1 bulletin in visible folder since there is a newer version", 1, visibleFolderA.getBulletinCount());
+		assertTrue("Should still have newer version only", visibleFolderA.contains(newerVersion));
 
-		BulletinFolder invisibleFolder = clientStore.createFolder("*a");
-		assertFalse("Should be an invisibleFolder", invisibleFolder.isVisible());
-		clientStore.addBulletinToFolder(invisibleFolder, clone.getUniversalId());
-		assertEquals("Should only have 1 bulletin in invisible folder", 1, invisibleFolder.getBulletinCount());
-		clientStore.addBulletinToFolder(invisibleFolder, original.getUniversalId());
-		assertEquals("Should now have 2 bulletin in invisible folder", 2, invisibleFolder.getBulletinCount());
+		BulletinFolder invisibleFolderC = clientStore.createFolder("*c");
+		assertFalse("Should be an invisibleFolder", invisibleFolderC.isVisible());
+		clientStore.addBulletinToFolder(invisibleFolderC, newerVersion.getUniversalId());
+		assertEquals("Should only have 1 bulletin in invisible folder", 1, invisibleFolderC.getBulletinCount());
+		clientStore.addBulletinToFolder(invisibleFolderC, original.getUniversalId());
+		assertEquals("Should now have 2 bulletin in invisible folder", 2, invisibleFolderC.getBulletinCount());
 
+		clientStore.deleteAllBulletins();
+	}
+
+	public void testAddingBulletinOriginalThenNewVersionToVisibleAndInvisibleFolders() throws Exception
+	{
+		FieldSpec[] publicFields = StandardFieldSpecs.getDefaultPublicFieldSpecs();
+		FieldSpec[] privateFields = StandardFieldSpecs.getDefaultPrivateFieldSpecs();
+		MockBulletinStore clientStore = new MockBulletinStore(security);
+		Bulletin original = clientStore.createEmptyBulletin();
+		original.setSealed();
+
+		Bulletin newVersion = clientStore.createClone(original, publicFields, privateFields);
+		newVersion.setSealed();
+		clientStore.saveBulletinForTesting(original);
+
+		BulletinFolder visibleFolderA = clientStore.createFolder("a");
+		BulletinFolder visibleFolderB = clientStore.createFolder("b");
+		BulletinFolder invisibleFolderC = clientStore.createFolder("*c");
+
+		clientStore.addBulletinToFolder(visibleFolderA, original.getUniversalId());
+		clientStore.addBulletinToFolder(visibleFolderB, original.getUniversalId());
+		clientStore.addBulletinToFolder(invisibleFolderC, original.getUniversalId());
+		
+		assertEquals("Should only have 1 bulletin in visible folder A", 1, visibleFolderA.getBulletinCount());
+		assertEquals("Should only have 1 bulletin in visible folder B", 1, visibleFolderB.getBulletinCount());
+		assertEquals("Should only have 1 bulletin in invisible folder C", 1, invisibleFolderC.getBulletinCount());
+		
+		clientStore.saveBulletinForTesting(newVersion);
+		clientStore.addBulletinToFolder(visibleFolderA, newVersion.getUniversalId());
+		assertTrue("visibleFolder A should contain the new version", visibleFolderA.contains(newVersion));
+		assertTrue("visibleFolder B should contain the new version", visibleFolderB.contains(newVersion));
+		assertFalse("invisibleFolder C Should not contain the new version", invisibleFolderC.contains(newVersion));
+		assertFalse("visibleFolder A should not contain the original version", visibleFolderA.contains(original));
+		assertFalse("visibleFolder B should not contain the original version", visibleFolderB.contains(original));
+		assertTrue("invisibleFolder C Should contain the original version", invisibleFolderC.contains(original));
+
+		clientStore.addBulletinToFolder(invisibleFolderC, newVersion.getUniversalId());
+		assertTrue("invisibleFolder C Should still contain the original version", invisibleFolderC.contains(original));
+		assertTrue("invisibleFolder C Should now also contain the new version", invisibleFolderC.contains(newVersion));
+		
 		clientStore.deleteAllBulletins();
 	}
 
