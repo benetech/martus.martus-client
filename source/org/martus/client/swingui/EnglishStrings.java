@@ -29,6 +29,8 @@ package org.martus.client.swingui;
 public class EnglishStrings
 {
 	public static String strings[] = {
+"field:translationVersion=English 2.6",
+
 "wintitle:main=Martus Human Rights Bulletin System",
 "wintitle:create=Create Bulletin",
 "wintitle:options=Options",
@@ -359,8 +361,6 @@ public class EnglishStrings
 "menu:delete=Delete",
 "menu:selectall=Select All",
 "menu:RemoveServer=Remove Martus Server",
-
-"field:translationVersion=English 2.5",
 
 "field:aboutDlgVersionInfo=software version",
 "field:aboutDlgTranslationVersionInfo=Translation version",
