@@ -141,7 +141,6 @@ public class BulletinFolder
 		if(rawIdList.contains(id))
 		{
 			//System.out.println("already contains " + id);
-			sortExisting();
 			throw new ClientBulletinStore.BulletinAlreadyExistsException();
 		}
 

@@ -621,7 +621,10 @@ public class ClientBulletinStore extends BulletinStore
 		removeBulletinFromFolder(getFolderNotOnServer(), uid);
 		try
 		{
-			ensureBulletinIsInFolder(getFolderOnServer(), uid);
+			getFolderOnServer().add(uid);
+		}
+		catch(BulletinAlreadyExistsException harmless)
+		{
 		}
 		catch(Exception ignoreForNow)
 		{
@@ -641,7 +644,10 @@ public class ClientBulletinStore extends BulletinStore
 		removeBulletinFromFolder(getFolderOnServer(), uid);
 		try
 		{
-			ensureBulletinIsInFolder(getFolderNotOnServer(), uid);
+			getFolderNotOnServer().add(uid);
+		}
+		catch(BulletinAlreadyExistsException harmless)
+		{
 		}
 		catch(Exception ignoreForNow)
 		{
@@ -907,12 +913,12 @@ public class ClientBulletinStore extends BulletinStore
 		folder.add(uidToAdd);
 
 		String accountId = uidToAdd.getAccountId();
+		Vector visibleFolders = getAllVisibleFolders();
 		BulletinHistory history = b.getHistory();
 		for(int i = 0; i < history.size(); ++i)
 		{
 			String localId = history.get(i);
 			UniversalId uidToRemove = UniversalId.createFromAccountAndLocalId(accountId, localId);
-			Vector visibleFolders = getAllVisibleFolders();
 			for(Iterator f = visibleFolders.iterator(); f.hasNext();)
 			{
 				BulletinFolder folderToFix = (BulletinFolder) f.next();

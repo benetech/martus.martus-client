@@ -321,15 +321,9 @@ public abstract class UiBulletinDropAdapter implements DropTargetListener
 		for (int i = 0; i < bulletins.length; i++)
 		{
 			Bulletin bulletin = bulletins[i];
-			System.out.println("UiBulletinDropAdapter.attemptDropBulletins: " + bulletin.get(Bulletin.TAGTITLE));
-		}
-
-
-		for (int i = 0; i < bulletins.length; i++)
-		{
-			Bulletin bulletin = bulletins[i];
 			try
 			{
+				System.out.println("UiBulletinDropAdapter.attemptDropBulletins: " + bulletin.get(Bulletin.TAGTITLE));
 				store.addBulletinToFolder(toFolder, bulletin.getUniversalId());
 			}
 			catch (BulletinAlreadyExistsException e)
