@@ -995,12 +995,3 @@ When you run the Arabic version of Martus in Windows XP, text in drop-down lists
 22. I want to upgrade to a new version of Martus. Do I need to remove the old version first?
 No. You can install Martus over an existing version of the software. The installer will notify you that an older version exists. Click Yes to upgrade Martus without losing any of your data, including bulletins, account information, server configurations, or passwords. For more information, see "2c. Upgrading to a new version of Martus (Windows only)"
 
-
-
-
-
-
-
-
-Martus 2.6 User Guide		42
-
