@@ -70,7 +70,7 @@ public class TestFolderList extends TestCaseEnhanced
 		store.createFolder("test");
 		list.loadFolders(store);
 		assertEquals(baseCount+1, list.getCount());
-		assertEquals("Outbox not first?", getLocalization().getLocalizedFolderName(app.getFolderOutbox().getName()), list.getName(0));
+		assertEquals("Sent/saved not first?", getLocalization().getLocalizedFolderName(app.getFolderSent().getName()), list.getName(0));
 
 		node = list.getNode(baseCount);
 		assertEquals("test", node.toString());
@@ -104,7 +104,7 @@ public class TestFolderList extends TestCaseEnhanced
 		store.createFolder(app.getNameOfFolderRetrievedSealed());
 		list.loadFolders(store);
 		assertEquals(baseCount+1, list.getCount());
-		assertEquals("Outbox not first?", getLocalization().getLocalizedFolderName(app.getFolderOutbox().getName()), list.getName(0));
+		assertEquals("Outbox not first?", getLocalization().getLocalizedFolderName(app.getFolderSent().getName()), list.getName(0));
 
 		FolderTreeNode node = list.getNode(baseCount);
 		assertEquals(app.getNameOfFolderRetrievedSealed(), node.getInternalName());

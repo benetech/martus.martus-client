@@ -66,10 +66,10 @@ public class BackgroundUploader
 		UploadResult uploadResult = new UploadResult();
 		uploadResult.result = NetworkInterfaceConstants.OK;
 	
-		BulletinFolder folderOutbox = app.getFolderOutbox();
+		BulletinFolder folderSealedOutbox = app.getFolderSealedOutbox();
 		BulletinFolder folderDraftOutbox = app.getFolderDraftOutbox();
-		if(folderOutbox.getBulletinCount() > 0)
-			uploadResult = backgroundUploadOneSealedBulletin(folderOutbox);
+		if(folderSealedOutbox.getBulletinCount() > 0)
+			uploadResult = backgroundUploadOneSealedBulletin(folderSealedOutbox);
 		else if(folderDraftOutbox.getBulletinCount() > 0)
 			uploadResult = backgroundUploadOneDraftBulletin(folderDraftOutbox);
 		else if(app.getConfigInfo().shouldContactInfoBeSentToServer())
@@ -222,9 +222,7 @@ public class BackgroundUploader
 			if(uploadResult.result.equals(NetworkInterfaceConstants.OK) || uploadResult.result.equals(NetworkInterfaceConstants.DUPLICATE))
 			{
 				UniversalId uid = uploadResult.uid;
-				Bulletin b = app.store.findBulletinByUniversalId(uid);
 				uploadFromFolder.remove(uid);
-				app.store.moveBulletin(b, uploadFromFolder, app.getFolderSent());
 				app.store.saveFolders();
 				app.resetLastUploadedTime();
 				if(app.logUploads)
@@ -235,7 +233,6 @@ public class BackgroundUploader
 						UnicodeWriter log = new UnicodeWriter(file, UnicodeWriter.APPEND);
 						log.writeln(uid.getLocalId());
 						log.writeln(app.getConfigInfo().getServerName());
-						log.writeln(b.get(BulletinConstants.TAGTITLE));
 						log.close();
 						log = null;
 					}

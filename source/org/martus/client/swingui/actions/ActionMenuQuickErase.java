@@ -50,7 +50,7 @@ public class ActionMenuQuickErase extends UiMenuAction
 		if(!mainWindow.reSignIn())
 			return;
 			
-		if (mainWindow.getApp().getFolderOutbox().getBulletinCount() > 0)
+		if(!mainWindow.getApp().isSealedOutboxFolderEmpty())
 		{				
 			if (!mainWindow.confirmDlgBeep("QuickEraseOutboxNotEmpty"))
 				return;

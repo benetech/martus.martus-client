@@ -89,7 +89,7 @@ class BackgroundUploadTimerTask extends TimerTask
 				{
 					//System.out.println("UiMainWindow.Tick.run: " + uploadResult);
 					mainWindow.folderContentsHaveChanged(getStore().getFolderSaved());
-					mainWindow.folderContentsHaveChanged(getStore().getFolderOutbox());
+					mainWindow.folderContentsHaveChanged(getStore().getFolderSealedOutbox());
 					mainWindow.folderContentsHaveChanged(getStore().getFolderDraftOutbox());
 					mainWindow.folderContentsHaveChanged(getApp().createOrFindFolder(getStore().getNameOfFolderDamaged()));
 				}
@@ -98,7 +98,7 @@ class BackgroundUploadTimerTask extends TimerTask
 			{
 				ThreadedNotify damagedBulletin = new ThreadedNotify("DamagedBulletinMovedToDiscarded");
 				SwingUtilities.invokeAndWait(damagedBulletin);
-				mainWindow.folderContentsHaveChanged(getStore().getFolderOutbox());
+				mainWindow.folderContentsHaveChanged(getStore().getFolderSealedOutbox());
 				mainWindow.folderContentsHaveChanged(getStore().getFolderDraftOutbox());
 				mainWindow.folderContentsHaveChanged(getApp().createOrFindFolder(getStore().getNameOfFolderDamaged()));
 				mainWindow.folderTreeContentsHaveChanged();

@@ -201,10 +201,15 @@ public class UiFlexiDateEditor extends UiField
 	
 		if (isFlexiDate())
 		{		
-			if (getEndDate().after(today) || getEndDate().before(getBeginDate()))
+			if (getEndDate().after(today))
 			{
 				bgDayCombo.requestFocus();	
 				throw new UiDateEditor.DateFutureException();				
+			}
+			if(getEndDate().before(getBeginDate()))
+			{
+				bgDayCombo.requestFocus();
+				throw new DateRangeInvertedException();
 			}
 		}		
 	}
@@ -251,6 +256,19 @@ public class UiFlexiDateEditor extends UiField
 			flexiDateRB.setSelected(true);
 			UiDateEditor.setDate(MartusFlexidate.toStoredDateFormat(mfd.getEndDate()), endYearCombo, endMonthCombo, endDayCombo);
 		}		
+	}
+	
+	public static class DateRangeInvertedException extends UiField.DataInvalidException
+	{
+		public DateRangeInvertedException()
+		{
+			super(null);
+		}
+		
+		public DateRangeInvertedException(String tag)
+		{
+			super(tag);
+		}
 	}
 		
 	JComponent 					component;

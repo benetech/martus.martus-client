@@ -1464,7 +1464,7 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		BulletinStore store = appWithAccount.getStore();
 
 		store.deleteAllData();
-		BulletinFolder outbox = appWithAccount.getFolderOutbox();
+		BulletinFolder outbox = appWithAccount.getFolderSealedOutbox();
 		assertEquals("Outbox not empty on exit", 0, outbox.getBulletinCount());
 		assertEquals("No file and outbox empty on exit", false,
 			appWithAccount.shouldShowSealedUploadReminderOnExit());

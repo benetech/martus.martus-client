@@ -41,6 +41,7 @@ import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.UiWarningLabel;
 import org.martus.client.swingui.fields.UiDateEditor;
 import org.martus.client.swingui.fields.UiField;
+import org.martus.client.swingui.fields.UiFlexiDateEditor;
 import org.martus.client.swingui.fields.UiField.DataInvalidException;
 import org.martus.common.FieldSpec;
 import org.martus.common.GridFieldSpec;
@@ -243,14 +244,19 @@ abstract public class UiBulletinComponentSection extends JPanel
 	{
 		for(int fieldNum = 0; fieldNum < fields.length; ++fieldNum)
 		{
+			String tag = fieldSpecs[fieldNum].getTag();
+			String label = getLocalization().getFieldLabel(tag);
 			try 
 			{
 				fields[fieldNum].validate();
 			} 
 			catch (UiDateEditor.DateFutureException e) 
 			{
-				String tag = fieldSpecs[fieldNum].getTag();
-				throw new UiDateEditor.DateFutureException(getLocalization().getFieldLabel(tag));
+				throw new UiDateEditor.DateFutureException(label);
+			}
+			catch(UiFlexiDateEditor.DateRangeInvertedException e)
+			{
+				throw new UiFlexiDateEditor.DateRangeInvertedException(label); 
 			}
 		}
 		

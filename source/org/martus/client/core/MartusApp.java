@@ -473,9 +473,9 @@ public class MartusApp
 		return store.getFolderDiscarded();
 	}
 
-	public BulletinFolder getFolderOutbox()
+	public BulletinFolder getFolderSealedOutbox()
 	{
-		return store.getFolderOutbox();
+		return store.getFolderSealedOutbox();
 	}
 
 	public BulletinFolder getFolderDraftOutbox()
@@ -645,16 +645,16 @@ public class MartusApp
 		return true;
 	}
 
-	private boolean isSealedFolderOutboxEmpty()
+	public boolean isSealedOutboxFolderEmpty()
 	{
-		if(getFolderOutbox().getBulletinCount() == 0)
+		if(getFolderSealedOutbox().getBulletinCount() == 0)
 			return true;
 		return false;
 	}
 
 	public boolean shouldShowSealedUploadReminderOnExit()
 	{
-		if(isSealedFolderOutboxEmpty())
+		if(isSealedOutboxFolderEmpty())
 			return false;
 		return true;
 	}

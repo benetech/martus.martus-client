@@ -43,6 +43,7 @@ import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 import javax.swing.JViewport;
 
+import org.martus.client.core.BulletinFolder;
 import org.martus.client.core.BulletinStore;
 import org.martus.client.core.EncryptionChangeListener;
 import org.martus.client.core.MartusApp;
@@ -52,11 +53,11 @@ import org.martus.client.swingui.bulletincomponent.UiBulletinComponent;
 import org.martus.client.swingui.bulletincomponent.UiBulletinComponentEditorSection;
 import org.martus.client.swingui.bulletincomponent.UiBulletinEditor;
 import org.martus.client.swingui.fields.UiDateEditor;
-import org.martus.client.swingui.fields.UiField.DataInvalidException;
+import org.martus.client.swingui.fields.UiFlexiDateEditor;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.clientside.UiBasicLocalization;
-import org.martus.common.crypto.MartusCrypto;
 import org.martus.common.crypto.MartusCrypto.CryptoException;
+import org.martus.common.crypto.MartusCrypto.EncryptionException;
 import org.martus.swing.Utilities;
 
 public class UiBulletinModifyDlg extends JFrame implements ActionListener, WindowListener, EncryptionChangeListener
@@ -91,7 +92,7 @@ public class UiBulletinModifyDlg extends JFrame implements ActionListener, Windo
 			scroller.getViewport().setScrollMode(JViewport.SIMPLE_SCROLL_MODE);
 
 			if(observer.getBulletinsAlwaysPrivate())
-				forceEncrypted();
+				view.encryptAndDisableAllPrivate();
 			else
 				indicateEncrypted(bulletin.isAllPrivate());
 				
@@ -137,63 +138,83 @@ public class UiBulletinModifyDlg extends JFrame implements ActionListener, Windo
 	public void actionPerformed(ActionEvent ae)
 	{		
 		try
-		{	
+		{
 			if(ae.getSource() == cancel)
 			{				
-				closeWindowUponConfirmationIfRequired();
+				closeWindowIfUserConfirms();
 				return;
 			}	
-					
+	
+			if(!validateData())
+				return;
+
+			view.copyDataToBulletin(bulletin);
+			boolean userChoseSeal = (ae.getSource() == send);
+			saveBulletin(userChoseSeal);
+		}
+		catch (Exception e) 
+		{
+			e.printStackTrace();
+			observer.notifyDlg(this, "UnexpectedError");
+		}
+	}
+
+	private boolean validateData()
+	{
+		try
+		{	
 			view.validateData();
-			view.copyDataToBulletin(bulletin);			
+			return true;
 		}
 		catch(UiDateEditor.DateFutureException e)
 		{
 			observer.messageDlg(this,"ErrorDateInFuture", e.getlocalizedTag());
-			return;
+		}
+		catch(UiFlexiDateEditor.DateRangeInvertedException e)
+		{
+			observer.messageDlg(this,"ErrorDateRangeInverted", e.getlocalizedTag());
 		}
 		catch(UiBulletinComponentEditorSection.AttachmentMissingException e)
 		{
 			observer.messageDlg(this,"ErrorAttachmentMissing", e.getlocalizedTag());
-			return;
 		}
-		catch (DataInvalidException e) 
+		catch (Exception e) 
 		{
-			System.out.println("UiModifyBulletinDlg.actionPerformed: " + e);
-			return;
+			e.printStackTrace();
+			observer.notifyDlg(this, "UnexpectedError");
 		}
-		catch(IOException e)
-		{
-			System.out.println("UiModifyBulletinDlg.actionPerformed: " + e);
-			return;
-		}
-		catch(MartusCrypto.EncryptionException e)
-		{
-			System.out.println("UiModifyBulletinDlg.actionPerformed: " + e);
-			return;
-		} 
+		return false;
+	}
 
-
+	private void saveBulletin(boolean userChoseSeal)
+	{
 		Cursor originalCursor = getCursor();
-		try {
+		try 
+		{
 			MartusApp app = observer.getApp();
-			if(ae.getSource() == send)
+			BulletinStore store = app.getStore();
+			BulletinFolder outboxToUse = null;
+			BulletinFolder draftOutbox = store.getFolderDraftOutbox();
+			if(userChoseSeal)
 			{
-				if(!confirmSend())
+				if(!confirmSealBulletin())
 					return;
-				setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-				saveSealedBulletin(app);
+				final boolean FALSE_MEANS_DONT_SAVE = false;
+				store.removeBulletinFromFolder(bulletin, draftOutbox, FALSE_MEANS_DONT_SAVE);
+				
+				bulletin.setSealed();
+				outboxToUse = store.getFolderSealedOutbox();
 			}
 			else
 			{
-				setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-				saveDraftBulletin(app);
+				bulletin.setDraft();
+				outboxToUse = draftOutbox;
 			}
-			observer.bulletinContentsHaveChanged(bulletin);
-			app.getStore().saveFolders();
-			observer.selectBulletinInCurrentFolderIfExists(bulletin.getUniversalId());
-			weAreDoneSoClose();
+			setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+			app.setHQKeyInBulletin(bulletin);
+			saveBulletinAndUpdateFolders(store, outboxToUse);
 			wasBulletinSavedFlag = true;
+			cleanupAndExit();
 		} 
 		catch (Exception e) 
 		{
@@ -206,39 +227,30 @@ public class UiBulletinModifyDlg extends JFrame implements ActionListener, Windo
 		}
 	}
 
-	private void saveDraftBulletin(MartusApp app)
-		throws IOException, CryptoException 
+	private void saveBulletinAndUpdateFolders(BulletinStore store, BulletinFolder outboxToUse) throws IOException, CryptoException
 	{
-		bulletin.setDraft();
-		app.setHQKeyInBulletin(bulletin);
-		BulletinStore store = app.getStore();
 		store.saveBulletin(bulletin);
-		try
-		{
-			store.addBulletinToFolder(bulletin.getUniversalId(), store.getFolderSaved());
-		}
-		catch (BulletinAlreadyExistsException harmlessException)
-		{
-		}
-		try
-		{
-			store.addBulletinToFolder(bulletin.getUniversalId(), store.getFolderDraftOutbox());
-		}
-		catch (BulletinAlreadyExistsException harmlessException)
-		{
-		}
+
+		BulletinFolder destinationFolder = store.getFolderSaved();
+		ensureBulletinIsInFolder(store, destinationFolder);
+		ensureBulletinIsInFolder(store, outboxToUse);
+		store.saveFolders();
+
+		observer.folderContentsHaveChanged(destinationFolder);
+		observer.folderContentsHaveChanged(outboxToUse);
+		observer.selectBulletinInCurrentFolderIfExists(bulletin.getUniversalId());
+		observer.bulletinContentsHaveChanged(bulletin);
 	}
 
-	private void saveSealedBulletin(MartusApp app)
-		throws IOException, CryptoException 
+	private void ensureBulletinIsInFolder(BulletinStore store, BulletinFolder destinationFolder) throws IOException
 	{
-		bulletin.setSealed();
-		app.setHQKeyInBulletin(bulletin);
-		BulletinStore store = app.getStore();
-		store.saveBulletin(bulletin);
-		store.moveBulletin(bulletin, store.getFolderDrafts(), store.getFolderOutbox());
-		boolean saveFolders = true;
-		store.removeBulletinFromFolder(bulletin, store.getFolderDraftOutbox(), saveFolders);
+		try
+		{
+			store.addBulletinToFolder(bulletin.getUniversalId(), destinationFolder);
+		}
+		catch (BulletinAlreadyExistsException harmlessException)
+		{
+		}
 	}
 
 	public boolean wasBulletinSaved()
@@ -256,7 +268,15 @@ public class UiBulletinModifyDlg extends JFrame implements ActionListener, Windo
 
 	public void windowClosing(WindowEvent event)
 	{
-		closeWindowUponConfirmationIfRequired();
+		try
+		{
+			closeWindowIfUserConfirms();
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+			observer.notifyDlg(this, "UnexpectedError");
+		}
 	}
 	// end WindowListener interface
 
@@ -264,13 +284,6 @@ public class UiBulletinModifyDlg extends JFrame implements ActionListener, Windo
 	public void encryptionChanged(boolean newState)
 	{
 		indicateEncrypted(newState);
-	}
-
-	public void weAreDoneSoClose()
-	{
-		observer.folderContentsHaveChanged(observer.getStore().getFolderOutbox());
-		observer.folderContentsHaveChanged(observer.getStore().getFolderDrafts());
-		cleanupAndExit();
 	}
 
 	public void cleanupAndExit()
@@ -289,14 +302,9 @@ public class UiBulletinModifyDlg extends JFrame implements ActionListener, Windo
 		observer.saveState();
 	}
 
-	public boolean confirmSend()
+	public boolean confirmSealBulletin()
 	{
 		return observer.confirmDlg(this, "send");
-	}
-
-	private void forceEncrypted()
-	{
-		view.encryptAndDisableAllPrivate();
 	}
 
 	private void indicateEncrypted(boolean isEncrypted)
@@ -304,30 +312,17 @@ public class UiBulletinModifyDlg extends JFrame implements ActionListener, Windo
 		view.updateEncryptedIndicator(isEncrypted);
 	}
 
-	private void closeWindowUponConfirmationIfRequired()
+	private void closeWindowIfUserConfirms() throws EncryptionException, IOException
 	{	
-		try
+		boolean needConfirmation = view.isBulletinModified();
+		if(needConfirmation)
 		{
-			boolean needConfirmation = view.isBulletinModified();
-			if(needConfirmation)
-			{
-				if(!observer.confirmDlg(this, "CancelModifyBulletin"))
-					return;
-			}
-				
-			cancelHandler.onCancel(observer.getStore(), bulletin);
-			cleanupAndExit();
+			if(!observer.confirmDlg(this, "CancelModifyBulletin"))
+				return;
 		}
-		catch(IOException e)
-		{
-			System.out.println("UiModifyBulletinDlg.actionPerformed: " + e);
-			return;
-		}
-		catch(MartusCrypto.EncryptionException e)
-		{
-			System.out.println("UiModifyBulletinDlg.actionPerformed: " + e);
-			return;
-		} 
+			
+		cancelHandler.onCancel(observer.getStore(), bulletin);
+		cleanupAndExit();
 	}
 
 	public interface CancelHandler

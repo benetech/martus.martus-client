@@ -186,6 +186,7 @@ public class EnglishStrings
 "wintitle:inputGetShareFileName=Default File Share Name",
 
 "wintitle:ErrorDateInFuture=Date Invalid",
+"wintitle:ErrorDateRangeInverted=Date Range Invalid",
 "wintitle:setupsignin=Martus Setup Signin",
 "wintitle:setupcontact=Martus Setup Contact Information",
 "wintitle:BulletinDetails=Details Field Default Content",
@@ -678,6 +679,7 @@ public class EnglishStrings
 
 "field:messageServerNewscause=The current server has sent this message:",
 "field:messageErrorDateInFuturecause=This date occurs in the future:",
+"field:messageErrorDateRangeInvertedcause=This date range has an end date that is earlier than the start date:",
 "field:messageErrorAttachmentMissingcause=The attachment could not be located.",
 
 "field:CreateCustomFieldsHelp1=The layout of the bulletins is dictated by an XML document.  At the start of the document you must have <CustomFields> and at the end of the document you must have its cooresponding end tag namely </CustomFields>.  There are four required elements and these are 'author', 'entrydate', 'language' and 'title'.  For example for 'author' you will have\n<Field><Tag>author</Tag><Label></Label><Type>STRING</Type></Field>\n\nFor a new custom field you will need a unique identification tag.",

@@ -576,11 +576,6 @@ public class BulletinStore
 	}
 
 
-	public BulletinFolder getFolderOutbox()
-	{
-		return folderOutbox;
-	}
-
 	public BulletinFolder getFolderDiscarded()
 	{
 		return folderDiscarded;
@@ -608,8 +603,6 @@ public class BulletinStore
 
 	public void createSystemFolders()
 	{
-		folderOutbox = createSystemFolder(OUTBOX_FOLDER);
-		folderOutbox.setStatusAllowed(Bulletin.STATUSSEALED);
 		folderSaved = createSystemFolder(SAVED_FOLDER);
 		folderDrafts = createSystemFolder(DRAFT_FOLDER);
 		folderDrafts.setStatusAllowed(Bulletin.STATUSDRAFT);
@@ -1119,8 +1112,6 @@ public class BulletinStore
 	{
 		if(!folder.canAdd(bulletinStatus))
 			return false;
-		if(folder.equals(getFolderOutbox()) && !bulletinAuthorAccount.equals(getAccountId()))
-			return false;
 		return true;
 	}
 
@@ -1170,7 +1161,6 @@ public class BulletinStore
 	private File dir;
 	private Database database;
 	private Vector folders;
-	private BulletinFolder folderOutbox;
 	private BulletinFolder folderSaved;
 	private BulletinFolder folderDrafts;
 	private BulletinFolder folderDiscarded;

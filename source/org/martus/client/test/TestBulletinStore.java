@@ -383,12 +383,6 @@ public class TestBulletinStore extends TestCaseEnhanced
 	{
 		TRACE("testCreateSystemFolders");
 
-		BulletinFolder fOutbox = store.getFolderOutbox();
-		assertNotNull("Should have created Outbox folder", fOutbox);
-		assertEquals("Outbox/Draft", false, fOutbox.canAdd(Bulletin.STATUSDRAFT));
-		assertEquals("Outbox/Sealed", true, fOutbox.canAdd(Bulletin.STATUSSEALED));
-//		assertEquals("Incorrect Outbox Name", BulletinStore.OUTBOX_FOLDER, fOutbox.getName());
-
 		BulletinFolder fSent = store.getFolderSaved();
 		assertNotNull("Should have created Sent folder", fSent);
 		assertEquals("Sent/Draft", true, fSent.canAdd(Bulletin.STATUSDRAFT));
@@ -621,15 +615,15 @@ public class TestBulletinStore extends TestCaseEnhanced
 		int systemFolderCount = store.getFolderCount();
 
 		BulletinStore tempStore = new MockBulletinStore();
-		String xml = "<FolderList><Folder name='Outbox'></Folder><Folder name='new two'></Folder></FolderList>";
+		String xml = "<FolderList><Folder name='Sent Bulletins'></Folder><Folder name='new two'></Folder></FolderList>";
 		tempStore.internalLoadFolders(xml);
 		assertTrue("Legacy folder not detected?", tempStore.needsLegacyFolderConversion());
 		assertEquals(systemFolderCount + 1, tempStore.getFolderCount());
-		assertNotNull("Folder %OutBox must exist", tempStore.findFolder("%OutBox"));
-		assertNull("Folder Outbox must not exist", tempStore.findFolder("Outbox"));
+		assertNotNull("Folder %Sent must exist", tempStore.findFolder("%Sent"));
+		assertNull("Folder Sent Bulletins must not exist", tempStore.findFolder("Sent Bulletins"));
 		assertNotNull("Folder two new must exist", tempStore.findFolder("new two"));
 		assertNull("Folder three must not exist", tempStore.findFolder("three"));
-		xml = "<FolderList><Folder name='%OutBox'></Folder><Folder name='new two'></Folder></FolderList>";
+		xml = "<FolderList><Folder name='%Sent'></Folder><Folder name='new two'></Folder></FolderList>";
 		tempStore.internalLoadFolders(xml);
 		assertFalse("Not Legacy folder didn't return false on load", tempStore.needsLegacyFolderConversion());
 	}
@@ -988,33 +982,6 @@ public class TestBulletinStore extends TestCaseEnhanced
 		assertEquals("changed uid?", original.getUniversalId(), imported.getUniversalId());
 	}
 
-	public void testImportZipFileBulletinToOutbox() throws Exception
-	{
-		TRACE("testImportZipFileBulletinToOutbox");
-		BulletinStore creator = createTempStore();
-		Bulletin b = creator.createEmptyBulletin();
-		b.setSealed();
-
-		File tempFile = createTempFileFromName("$$$MartusTestStoreImportZip");
-		BulletinForTesting.saveToFile(db,b, tempFile, creator.getSignatureVerifier());
-
-		creator.importZipFileBulletin(tempFile, creator.getFolderOutbox(), false);
-		assertEquals("Didn't fully import?", 1, creator.getBulletinCount());
-
-		MockMartusApp thisApp = MockMartusApp.create();
-		try
-		{
-			thisApp.getStore().importZipFileBulletin(tempFile, thisApp.getFolderOutbox(), false);
-			fail("allowed illegal import?");
-		}
-		catch(BulletinStore.StatusNotAllowedException ignoreExpectedException)
-		{
-		}
-		assertEquals("imported even though the folder prevented it?", 0, thisApp.getStore().getBulletinCount());
-		tempFile.delete();
-		thisApp.deleteAllFiles();
-	}
-
 	public void testImportDraftZipFile() throws Exception
 	{
 		TRACE("testImportDraftZipFile");
@@ -1096,16 +1063,8 @@ public class TestBulletinStore extends TestCaseEnhanced
 	{
 		TRACE("testCanPutBulletinInFolder");
 		Bulletin b1 = store.createEmptyBulletin();
-		BulletinFolder outbox = store.getFolderOutbox();
-		BulletinFolder discardedbox = store.getFolderDiscarded();
+		BulletinFolder outbox = store.getFolderSealedOutbox();
 		assertEquals("draft b1 got put in outbox?", false, store.canPutBulletinInFolder(outbox, b1.getAccount(), b1.getStatus()));
-
-		BulletinStore store2 = createTempStore();
-		Bulletin b2 = store2.createEmptyBulletin();
-		b2.setSealed();
-		boolean canPutInOutbox = store.canPutBulletinInFolder(outbox, b2.getAccount(), b2.getStatus());
-		assertEquals("sealed b2 from another account got put in outbox?", false, canPutInOutbox);
-		assertEquals("sealed b2 from another account can't be put in discarded?", true, store.canPutBulletinInFolder(discardedbox, b2.getAccount(), b2.getStatus()));
 	}
 
 	public void testGetSetOfAllBulletinUniversalIds() throws Exception
