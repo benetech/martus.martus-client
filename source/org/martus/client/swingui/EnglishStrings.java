@@ -447,7 +447,7 @@ public class EnglishStrings
 "field:DefaultDetailFiles=Default Details",
 "field:ServerComplianceDescription=The server you have selected has provided the following statement describing its compliance with the official guidelines for the secure and reliable operation of a Martus server.  You can accept or reject this server based on its compliance statement.",
 "field:ServerComplianceChangedDescription=The current server has updated its statement describing its compliance with the official guidelines for the secure and reliable operation of a Martus server.  The new statement appears below. You can accept or reject this server based on its compliance statement.",
-"field:BackupKeyPairToMultipleUnencryptedFilesInformation=This is where the information goes explaining how the plain text keypair sharing occures and what the user is going to be prompted to go through, by saving #M# files onto #M# floppy disks and then pass them out to friends.  It will also explain that they will need at least #N# of them to get back their keypair without the use of a user name or password",
+"field:BackupKeyPairToMultipleUnencryptedFilesInformation=This is where the information goes explaining how the plain text keypair sharing occurs and what the user is going to be prompted to go through, by saving #M# files onto #M# floppy disks and then pass them out to friends.  It will also explain that they will need at least #N# of them to get back their keypair without the use of a user name or password",
 "field:ErrorPreviousBackupShareExists=A previous share file exists.  You must save each file on its own removable media disk.",		
 "field:ErrorRecoverNoAppropriateFileFound=No appropriate share file was found on this disk, please try a different disk.",
 "field:ErrorRecoverShareDisk=An error occured reading this keyshare file.",
@@ -639,7 +639,7 @@ public class EnglishStrings
 "field:notifyErrorRecoveringAccountDirectory=Error during keypair recovery. This keypair backup copy may be damaged.",
 	
 "field:messageServerNewscause=The current server has sent this message:",
-"field:messageErrorDateInFuturecause=This date occures in the future:",
+"field:messageErrorDateInFuturecause=This date occurs in the future:",
 
 "field:inputservermagicwordentry=If you want to request permission to upload to this server, enter the 'magic word' now:",
 "field:inputImportPublicCodeentry=Enter the Public Identification Code for this account:",
