@@ -48,16 +48,20 @@ public class UiInitialSigninDlg extends UiSigninDlg
 	public UiInitialSigninDlg(UiLocalization localizationToUse, CurrentUiState uiStateToUse, JFrame owner, int mode)
 	{
 		super(localizationToUse, uiStateToUse, owner, mode);
+		currentMode = mode;
 	}
 
 	JPanel createMainPanel()
 	{
 		JPanel scrolledPanel = new JPanel(); 
 		tabbedPane = new JTabbedPane();
+		tabLabelSignIn = localization.getButtonLabel("SignIn");
+		tabLabelNewAccount = localization.getButtonLabel("NewAccountTab");
+		tabLabelRecoverAccount = localization.getButtonLabel("RecoverAccountTab");
 		if(currentMode == INITIAL)
-			tabbedPane.add(signinPane,localization.getButtonLabel("SignIn"));
-		tabbedPane.add(createNewAccountPanel(), localization.getButtonLabel("NewAccountTab"));
-		tabbedPane.add(createRecoverAccountPanel(), localization.getButtonLabel("RecoverAccountTab"));
+			tabbedPane.add(signinPane,tabLabelSignIn);
+		tabbedPane.add(createNewAccountPanel(), tabLabelNewAccount);
+		tabbedPane.add(createRecoverAccountPanel(), tabLabelRecoverAccount);
 		scrolledPanel.add(tabbedPane);
 		return scrolledPanel;
 	}
@@ -93,22 +97,13 @@ public class UiInitialSigninDlg extends UiSigninDlg
 	}
 	public void handleOk()
 	{
-		int signIn = 0;
-		int newAccount = 1;
-		int recoverAccount = 2;
-		if (tabbedPane.getTabCount() == 2)
-		{
-			--signIn;
-			--newAccount;
-			--recoverAccount;
-		}
 		
 		int tabNumber = tabbedPane.getSelectedIndex();
-		if(tabNumber == signIn)
+		if(tabbedPane.getTitleAt(tabNumber).equals(tabLabelSignIn))
 			usersChoice = SIGN_IN;
-		else if(tabNumber == newAccount)
+		else if(tabbedPane.getTitleAt(tabNumber).equals(tabLabelNewAccount))
 			usersChoice = NEW_ACCOUNT;
-		else if(tabNumber == recoverAccount)
+		else if(tabbedPane.getTitleAt(tabNumber).equals(tabLabelRecoverAccount))
 		{
 			ButtonModel model = recoveryTypeGroup.getSelection();
 			if(model.getActionCommand().equals("share"))
@@ -118,8 +113,15 @@ public class UiInitialSigninDlg extends UiSigninDlg
 		}
 		dispose();
 	}
+
+	int currentMode;
 	private ButtonGroup recoveryTypeGroup;
 	private JTabbedPane tabbedPane;
 	private JRadioButton radioShare;
 	private JRadioButton radioBackupFile;
+	
+	private String tabLabelSignIn;
+	private	String tabLabelNewAccount;
+	private	String tabLabelRecoverAccount;
+
 }
