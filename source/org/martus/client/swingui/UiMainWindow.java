@@ -303,7 +303,6 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 					return false;
 		
 				initializeViews();
-				restoreState();
 			}
 			waitingForBulletinsToLoad.endDialog();
 
@@ -1242,7 +1241,6 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		saveState();
 		new UiPreferencesDlg(this);
 		initializeViews();
-		restoreState();
 		show();
 	}
 
@@ -1801,7 +1799,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	}
 
 
-	private void initializeViews()
+	void initializeViews()
 	{
 		getContentPane().removeAll();
 		getContentPane().setComponentOrientation(UiLanguageDirection.getComponentOrientation());
@@ -1845,6 +1843,8 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 			setSize(screenSize.width - 50 , screenSize.height - 50);
 			Utilities.maximizeWindow(this);
 		}
+		
+		restoreState();
 	}
 	
 	public void checkServerStatus()
@@ -2133,6 +2133,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 				if(signIn(UiSigninDlg.TIMED_OUT) != UiSigninDlg.SIGN_IN)
 					exitWithoutSavingState();
 				getCurrentActiveFrame().setState(NORMAL);
+				initializeViews();
 			}
 		}
 	}
