@@ -34,6 +34,6 @@ public class UiConstants
 	// NOTE: See the license terms to understand when the following MUST be changed.
 	// Also, you should search for "Martus" in EnglishStrings.txt and any .mtf files 
 	// and change other occurances as required by the license.
-	public static final String programName = "Martus™";
-	public static final String versionLabel = "Internal 1.5";
+	public static final String programName = "Martus(TM)";
+	public static final String versionLabel = "Internal pre-1.5";
 }
