@@ -56,6 +56,8 @@ class BackgroundUploadTimerTask extends TimerTask
 			return;
 		if(inComplianceDialog)
 			return;
+		if(mainWindow.preparingToExitMartus)
+			return;
 		try
 		{
 			checkComplianceStatement();

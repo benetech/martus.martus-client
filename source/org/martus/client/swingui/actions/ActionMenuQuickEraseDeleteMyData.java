@@ -23,18 +23,24 @@ Software Foundation, Inc., 59 Temple Place - Suite 330,
 Boston, MA 02111-1307, USA.
 
 */
-
 package org.martus.client.swingui.actions;
 
-import javax.swing.AbstractAction;
+import java.awt.event.ActionEvent;
 import org.martus.client.swingui.UiMainWindow;
 
-abstract class UiMartusAction extends AbstractAction
+
+public class ActionMenuQuickEraseDeleteMyData extends ActionQuickErase
 {
-	public UiMartusAction(UiMainWindow mainWindowToUse, String label)
+	public ActionMenuQuickEraseDeleteMyData(UiMainWindow mainWindowToUse)
 	{
-		super(label);
-		mainWindow = mainWindowToUse;
+		super(mainWindowToUse, "QuickEraseDeleteMyDataOnly");
 	}
-	UiMainWindow mainWindow;
+	
+	public void actionPerformed(ActionEvent arg0)
+	{
+		if(!confirmQuickErase(WILL_NOT_UNINSTALL_MARTUS))
+			return;
+		prepareAndDeleteMyData();
+		exitMartus();
+	}
 }

@@ -132,10 +132,15 @@ public class BulletinStore
 		getSignatureGenerator().flushSessionKeyCache();
 	}
 	
+	public static File getCacheFileForAccount(File accountDir)
+	{
+		return new File(accountDir, CACHE_FILE_NAME);
+	}
+	
 	private void loadCache()
 	{
 		//System.out.println("BulletinStore.loadCache");
-		File cacheFile = new File(dir, CACHE_FILE_NAME);
+		File cacheFile = getCacheFileForAccount(dir);
 		if(!cacheFile.exists())
 			return;
 		
@@ -875,7 +880,12 @@ public class BulletinStore
 
 	public File getFoldersFile()
 	{
-		return new File(dir, "MartusFolders.dat");
+		return getFoldersFileForAccount(dir);
+	}
+
+	static public File getFoldersFileForAccount(File AccountDir)
+	{
+		return new File(AccountDir, "MartusFolders.dat");
 	}
 
 	public Bulletin createEmptyBulletin()

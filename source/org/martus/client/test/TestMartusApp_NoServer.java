@@ -40,7 +40,6 @@ import org.martus.client.core.BulletinFolder;
 import org.martus.client.core.BulletinStore;
 import org.martus.client.core.ConfigInfo;
 import org.martus.client.core.MartusApp;
-import org.martus.client.core.QuickEraseOptions;
 import org.martus.client.core.MartusApp.AccountAlreadyExistsException;
 import org.martus.client.core.MartusApp.CannotCreateAccountFileException;
 import org.martus.client.swingui.EnglishStrings;
@@ -221,7 +220,7 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		f1.add(b1);
 		f2.add(b2);
 		assertEquals(2, appWithAccount.getStore().getBulletinCount());		
-		appWithAccount.deleteAllBulletinsAndUserFolders(new QuickEraseOptions());
+		appWithAccount.deleteAllBulletinsAndUserFolders();
 		assertEquals(0, appWithAccount.getStore().getBulletinCount());
 		assertNotNull("System Folder deleted?", appWithAccount.getFolderDraftOutbox());
 		assertNull("User Folder Not deleted?", appWithAccount.getStore().findFolder(f1.getName()));
@@ -679,19 +678,22 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		TRACE_END();
 	}	
 	
-	public void testScrubAndDeleteKeyPairFile() throws Exception
+	public void testScrubAndDeleteKeyPairFileAndRelatedFiles() throws Exception
 	{
-		TRACE_BEGIN("testScrubAndDeleteKeyPairFile");
-		QuickEraseOptions opts = new QuickEraseOptions();
-		opts.setScrubOption(true);
+		TRACE_BEGIN("testScrubAndDeleteKeyPairFileAndRelatedFiles");
 
+		File accountsDirectory = appWithAccount.getCurrentAccountDirectory();
 		File keyPairFile = appWithAccount.getCurrentKeyPairFile();	
 		File backupKeyPairFile = MartusApp.getBackupFile(keyPairFile);
 		File accountTokenFile = appWithAccount.getUserNameHashFile(keyPairFile.getParentFile());
 		File configInfoFile = appWithAccount.getConfigInfoFile();
 		File configInfoSigFile = appWithAccount.getConfigInfoSignatureFile();
 		File uploadedFile = appWithAccount.getUploadInfoFile();
-		File uiStateFile = appWithAccount.getUiStateFile();
+		File uiStateFile = appWithAccount.getUiStateFileForAccount(accountsDirectory);
+		File foldersFile = BulletinStore.getFoldersFileForAccount(accountsDirectory);
+		File cacheFile = BulletinStore.getCacheFileForAccount(accountsDirectory);
+		File key1File = new File(accountsDirectory, "Key1.mpi");
+		File key2File = new File(accountsDirectory, "Key2.mpi");
 		
 		appWithAccount.writeKeyPairFileWithBackup(keyPairFile,"UserA", "Password".toCharArray());
 		appWithAccount.saveConfigInfo();
@@ -701,7 +703,19 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		FileOutputStream out2 = new FileOutputStream(uiStateFile);
 		out2.write(1);
 		out2.close();
-		
+		FileOutputStream out3 = new FileOutputStream(foldersFile);
+		out3.write(1);
+		out3.close();
+		FileOutputStream out4 = new FileOutputStream(cacheFile);
+		out4.write(1);
+		out4.close();
+		FileOutputStream out5 = new FileOutputStream(key1File);
+		out5.write(1);
+		out5.close();
+		FileOutputStream out6 = new FileOutputStream(key2File);
+		out6.write(1);
+		out6.close();
+
 		assertTrue("keypair file doesn't exist?", keyPairFile.exists());
 		assertTrue("backup keypair file doesn't exist?", backupKeyPairFile.exists());
 		assertTrue("account Token file doesn't exist?", accountTokenFile.exists());
@@ -709,8 +723,12 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		assertTrue("configInfo sig file doesn't exist?", configInfoSigFile.exists());
 		assertTrue("upload reminder file doesn't exist?", uploadedFile.exists());
 		assertTrue("uiState file doesn't exist?", uiStateFile.exists());
+		assertTrue("folders file doesn't exist?", foldersFile.exists());
+		assertTrue("cache file doesn't exist?", cacheFile.exists());
+		assertTrue("key1 file doesn't exist?", key1File.exists());
+		assertTrue("key2 file doesn't exist?", key2File.exists());
 		
-		appWithAccount.deleteKeypairAndRelatedFiles(opts);
+		appWithAccount.deleteKeypairAndRelatedFilesForAccount(accountsDirectory);
 		
 		//TODO Make sure the files really get scrubbed.
 		
@@ -720,8 +738,12 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		assertFalse("configInfo file still exists?", configInfoFile.exists());
 		assertFalse("configInfo sig file still exists?", configInfoSigFile.exists());
 		assertFalse("upload reminder file still exists?", uploadedFile.exists());
-		assertFalse("uiState file still exist?", uiStateFile.exists());
-		
+		assertFalse("uiState file still exists?", uiStateFile.exists());
+		assertFalse("folders file still exists?", foldersFile.exists());
+		assertFalse("cache file still exists?", cacheFile.exists());
+		assertFalse("key1 file still exists?", key1File.exists());
+		assertFalse("key2 file still exists?", key2File.exists());
+			
 		TRACE_END();		
 	}
 	

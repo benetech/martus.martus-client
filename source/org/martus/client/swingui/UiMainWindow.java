@@ -389,6 +389,11 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 			e1.printStackTrace();
 		}
 	}
+	
+	public void prepareToExitMartus()
+	{
+		preparingToExitMartus = true;
+	}
 
 	private boolean loadFoldersAndBulletins()
 	{
@@ -2059,6 +2064,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 
 	private JFrame currentActiveFrame;
 	boolean inConfigServer;
+	boolean preparingToExitMartus;
 	private FileLock lockToPreventTwoInstances; 
 	private FileOutputStream lockStream;
 	int timeoutInXSeconds;

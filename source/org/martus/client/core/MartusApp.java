@@ -29,6 +29,7 @@ package org.martus.client.core;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileFilter;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -384,26 +385,46 @@ public class MartusApp
 
 	public File getConfigInfoFile()
 	{
-		return new File(getCurrentAccountDirectoryName() + "MartusConfig.dat");
+		return getConfigInfoFileForAccount(getCurrentAccountDirectory());
+	}
+	
+	public File getConfigInfoFileForAccount(File accountDirectory)
+	{
+		return new File(accountDirectory, "MartusConfig.dat");
 	}
 
 	public File getConfigInfoSignatureFile()
 	{
-		return new File(getCurrentAccountDirectoryName() + "MartusConfig.sig");
+		return getConfigInfoSignatureFileForAccount(getCurrentAccountDirectory());
+	}
+
+	public File getConfigInfoSignatureFileForAccount(File accountDirectory)
+	{
+		return new File(accountDirectory, "MartusConfig.sig");
 	}
 
 	public File getUploadInfoFile()
 	{
-		return new File(getCurrentAccountDirectoryName() + "MartusUploadInfo.dat");
+		return getUploadInfoFileForAccount(getCurrentAccountDirectory());
+	}
+
+	public File getUploadInfoFileForAccount(File accountDirectory)
+	{
+		return new File(accountDirectory, "MartusUploadInfo.dat");
 	}
 
 	public File getUiStateFile()
 	{
 		if(isSignedIn())
-			return new File(getCurrentAccountDirectory(), "UserUiState.dat");
+			return getUiStateFileForAccount(getCurrentAccountDirectory());
 		return new File(getMartusDataRootDirectory(), "UiState.dat");
 	}
 
+	public File getUiStateFileForAccount(File accountDirectory)
+	{
+		return new File(accountDirectory, "UserUiState.dat");
+	}
+	
 	public File getBulletinDefaultDetailsFile()
 	{
 		return new File(getCurrentAccountDirectoryName(), "DefaultDetails" + DEFAULT_DETAILS_EXTENSION);
@@ -565,48 +586,63 @@ public class MartusApp
 		return newFolder;
 	}
 	
-	public void cleanupWhenCompleteQuickErase(QuickEraseOptions opts)
+	public void cleanupWhenCompleteQuickErase()
 	{
-		if (opts.isExitWhenCompleteSelected())
-			store.deleteFoldersDatFile();	
+		store.deleteFoldersDatFile();	
 	}
 	
-	public boolean deleteKeypairAndRelatedFiles(QuickEraseOptions opts)
+	public void deleteKeypairAndRelatedFilesForAccount(File accountDirectory)
 	{
-		boolean shouldScrubFileFirst = true; //always scrub
-		File currentKeyPairFile = getCurrentKeyPairFile();
-		try
+		File keyPairFile = getKeyPairFile(accountDirectory);
+		deleteAndScrubFile(keyPairFile);
+		deleteAndScrubFile(getBackupFile(keyPairFile));
+		deleteAndScrubFile(getUserNameHashFile(keyPairFile.getParentFile()));
+		deleteAndScrubFile(getConfigInfoFileForAccount(accountDirectory));
+		deleteAndScrubFile(getConfigInfoSignatureFileForAccount(accountDirectory));
+		deleteAndScrubFile(getUploadInfoFileForAccount(accountDirectory));
+		deleteAndScrubFile(getUiStateFileForAccount(accountDirectory));
+		deleteAndScrubFile(BulletinStore.getFoldersFileForAccount(accountDirectory));
+		deleteAndScrubFile(BulletinStore.getCacheFileForAccount(accountDirectory));
+		File[] exportedKeys = exportedPublicKeyFiles(accountDirectory);
+		for (int i = 0; i < exportedKeys.length; i++)
 		{
-			deleteAndPossiblyScrubFile(currentKeyPairFile, shouldScrubFileFirst);
-			deleteAndPossiblyScrubFile(getBackupFile(currentKeyPairFile), shouldScrubFileFirst);
-			deleteAndPossiblyScrubFile(getUserNameHashFile(currentKeyPairFile.getParentFile()), shouldScrubFileFirst);
-			deleteAndPossiblyScrubFile(getConfigInfoFile(), shouldScrubFileFirst);
-			deleteAndPossiblyScrubFile(getConfigInfoSignatureFile(), shouldScrubFileFirst);
-			deleteAndPossiblyScrubFile(getUploadInfoFile(), shouldScrubFileFirst);
-			deleteAndPossiblyScrubFile(getUiStateFile(), shouldScrubFileFirst);
+			File file = exportedKeys[i];
+			deleteAndScrubFile(file);
 		}
-		catch (Exception e)
-		{
-			e.printStackTrace();
-			return false;
-		}
-		return true;
-	}
-	
-	private void deleteAndPossiblyScrubFile(File file, boolean scrubDataFirst) throws Exception
-	{
-		if(scrubDataFirst)
-			ScrubFile.scrub(file);
-		if(file.exists() && !file.delete())
-			throw new Exception("File not deleted! " + file.getPath());
 	}
 
-	public boolean deleteAllBulletinsAndUserFolders(QuickEraseOptions opts)
+	private static File[] exportedPublicKeyFiles(File accountDir)
+	{
+		File[] mpiFiles = accountDir.listFiles(new FileFilter()
+		{
+			public boolean accept(File file)
+			{
+				return (file.isFile() && file.getName().endsWith(".mpi"));	
+			}
+		});
+		return mpiFiles;
+	}
+
+	
+	private void deleteAndScrubFile(File file)
+	{
+		try
+		{
+			ScrubFile.scrub(file);
+			if(file.exists() && !file.delete())
+				System.out.println("File not deleted! " + file.getPath());
+		}
+		catch (IOException e)
+		{
+			e.printStackTrace();
+		}
+	}
+
+	public boolean deleteAllBulletinsAndUserFolders()
 	{
 		try
 		{											
-			if (opts.isScrubSelected())
-				store.scrubAllData();
+			store.scrubAllData();
 			store.deleteAllData();
 		}
 		catch (Exception e)
