@@ -238,8 +238,7 @@ public class UiAttachmentViewer extends JPanel  implements DragGestureListener, 
 			File last = getLastAttachmentSaveDirectory();
 			if(last != null)
 				chooser.setCurrentDirectory(last);
-			int returnVal = chooser.showSaveDialog(mainWindow);
-			if(returnVal == JFileChooser.APPROVE_OPTION)
+			if(chooser.showSaveDialog(mainWindow) == JFileChooser.APPROVE_OPTION)
 			{
 				setLastAttachmentSaveDirectory(chooser.getCurrentDirectory());
 				File outputFile = chooser.getSelectedFile();

@@ -1400,9 +1400,8 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		
 		UiFileChooser chooser = new UiFileChooser();
 		chooser.setDialogTitle(getLocalization().getWindowTitle("saveBackupKeyPair"));
-		chooser.setFileSelectionMode(UiFileChooser.FILES_AND_DIRECTORIES);
 		chooser.setSelectedFile(new File(MartusApp.KEYPAIR_FILENAME));
-		if (chooser.showSaveDialog(null) == UiFileChooser.APPROVE_OPTION)
+		if (chooser.showSaveDialog(this) == UiFileChooser.APPROVE_OPTION)
 		{
 			File newBackupFile = chooser.getSelectedFile();
 			if(newBackupFile.exists())
