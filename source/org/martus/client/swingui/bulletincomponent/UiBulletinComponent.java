@@ -39,7 +39,6 @@ import org.martus.client.core.LanguageChangeListener;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.fields.UiField;
 import org.martus.common.FieldSpec;
-import org.martus.common.HQKeys;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.crypto.MartusCrypto;
 import org.martus.common.packet.FieldDataPacket;
@@ -58,7 +57,6 @@ abstract public class UiBulletinComponent extends JPanel implements Scrollable, 
 			IOException, MartusCrypto.EncryptionException;
 	abstract UiBulletinComponentHeaderSection createHeaderSection();
 	abstract UiBulletinComponentHeadQuartersSection createHeadQuartersSection();
-	abstract HQKeys getHqKeys();
 
 	// ChangeListener interface
 	abstract public void stateChanged(ChangeEvent event);

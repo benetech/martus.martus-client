@@ -817,7 +817,7 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		assertTrue(returnedKeys.containsKey(sampleHQKey2));
 		HQKeys returnedDefaultKeys = appWithAccount.getDefaultHQKeys();
 		assertTrue(returnedDefaultKeys.containsKey(sampleHQKey1));
-//FIXME:remove comment once implemented.		assertFalse(returnedDefaultKeys.containsKey(sampleHQKey2));
+		assertFalse(returnedDefaultKeys.containsKey(sampleHQKey2));
 	}
 
 	public void testClearHQKey() throws Exception

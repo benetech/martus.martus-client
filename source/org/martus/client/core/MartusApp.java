@@ -195,11 +195,10 @@ public class MartusApp
 
 	public HQKeys getDefaultHQKeys() throws HQsException
 	{
-		//FIXME:change this to default keys.
-		return new HQKeys(configInfo.getAllHQKeysXml());
+		return new HQKeys(configInfo.getDefaultHQKeysXml());
 	}
 
-	public HQKeys getHQKeysWithFallback()
+	public HQKeys getAllHQKeysWithFallback()
 	{
 		try
 		{
@@ -259,6 +258,7 @@ public class MartusApp
 	public void setAndSaveHQKeys(HQKeys allHQKeys, HQKeys defaultHQKeys) throws SaveConfigInfoException 
 	{
 		configInfo.setAllHQKeysXml(allHQKeys.toStringWithLabel());
+		configInfo.setDefaultHQKeysXml(defaultHQKeys.toStringWithLabel());
 		if(allHQKeys.isEmpty())
 			configInfo.clearHQKey();
 		else
@@ -651,7 +651,7 @@ public class MartusApp
 
 	public void setHQKeysInBulletin(Bulletin b)
 	{
-		HQKeys hqKeys = getHQKeysWithFallback();
+		HQKeys hqKeys = getAllHQKeysWithFallback();
 		b.setAuthorizedToReadKeys(hqKeys);
 	}
 

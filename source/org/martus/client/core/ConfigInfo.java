@@ -72,6 +72,7 @@ public class ConfigInfo implements Serializable
 	public void setBackedUpKeypairShare(boolean newBackedUpKeypairShare)	{backedUpKeypairShare = newBackedUpKeypairShare; }
 	public void setAllHQKeysXml(String allHQKeysXml){this.allHQKeysXml = allHQKeysXml;}
 	public void setBulletinVersioningAware(boolean newBulletinVersioningAware){this.bulletinVersioningAware = newBulletinVersioningAware;}
+	public void setDefaultHQKeysXml(String defaultHQKeysXml){this.defaultHQKeysXml = defaultHQKeysXml;}
 
 	public void clearHQKey()						{ legacyHQKey = ""; }
 	public void clearPromptUserRequestSendToServer() { mustAskUserToSendToServer = false; }
@@ -97,6 +98,7 @@ public class ConfigInfo implements Serializable
 	public boolean hasUserBackedUpKeypairShare()	{ return backedUpKeypairShare;}
 	public String getAllHQKeysXml()		{return allHQKeysXml;}
 	public boolean isBulletinVersioningAware()	{return bulletinVersioningAware;}
+	public String getDefaultHQKeysXml()		{return defaultHQKeysXml;}
 	
 	public boolean isServerConfigured()
 	{
@@ -131,6 +133,7 @@ public class ConfigInfo implements Serializable
 		backedUpKeypairShare = false;
 		allHQKeysXml = "";
 		bulletinVersioningAware = true;
+		defaultHQKeysXml = "";
 	}
 
 	public static ConfigInfo load(InputStream inputStream)
@@ -181,6 +184,9 @@ public class ConfigInfo implements Serializable
 			else
 				loaded.bulletinVersioningAware = false;
 
+			if(loaded.version >= 11)
+				loaded.defaultHQKeysXml = in.readUTF();
+
 			in.close();
 		}
 		catch (Exception e)
@@ -215,6 +221,7 @@ public class ConfigInfo implements Serializable
 			out.writeBoolean(backedUpKeypairShare);
 			out.writeUTF(allHQKeysXml);
 			out.writeBoolean(bulletinVersioningAware);
+			out.writeUTF(defaultHQKeysXml);
 			out.close();
 		}
 		catch(Exception e)
@@ -225,7 +232,7 @@ public class ConfigInfo implements Serializable
 	
 	private boolean mustAskUserToSendToServer;
 
-	public static final short VERSION = 10;
+	public static final short VERSION = 11;
 	//Version 1
 	private short version;
 	private String author;
@@ -256,5 +263,8 @@ public class ConfigInfo implements Serializable
 	private String allHQKeysXml;
 	//Version 10 
 	private boolean bulletinVersioningAware;
+	//Version 11
+	private String defaultHQKeysXml;
+	
 	
 }

@@ -34,7 +34,6 @@ import org.martus.client.core.EncryptionChangeListener;
 import org.martus.client.core.LanguageChangeListener;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.fields.UiField;
-import org.martus.common.HQKeys;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.crypto.MartusCrypto;
 
@@ -92,12 +91,6 @@ public class UiBulletinView extends UiBulletinComponent
 		// read-only view cannot change state
 	}
 	
-
-	HQKeys getHqKeys()
-	{
-		return currentBulletin.getAuthorizedToReadKeys();
-	}
-
 	UiBulletinComponentHeaderSection createHeaderSection()
 	{
 		return new UiBulletinComponentHeaderSection(mainWindow, "View");

@@ -46,7 +46,7 @@ public class UiBulletinComponentHeadQuartersEditor extends UiBulletinComponentHe
 		UiLabel hqLabel = new UiLabel(getLabel("Headquarters"));
 
 		HQKeys authorizedToReadKeys = bulletinToUse.getAuthorizedToReadKeys();
-		HQKeys allHQKeysConfigured = mainWindow.getApp().getHQKeysWithFallback();
+		HQKeys allHQKeysConfigured = mainWindow.getApp().getAllHQKeysWithFallback();
 		int numberOfHQKeysConfigured = allHQKeysConfigured.size();
 		int numberOfHQKeysAuthorizedToRead = authorizedToReadKeys.size();
 		

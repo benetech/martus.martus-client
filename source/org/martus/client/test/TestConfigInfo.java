@@ -54,7 +54,7 @@ public class TestConfigInfo extends TestCaseEnhanced
 		ConfigInfo info = new ConfigInfo();
 		verifyEmptyInfo(info, "constructor");
 		
-		assertEquals(10, ConfigInfo.VERSION);
+		assertEquals(11, ConfigInfo.VERSION);
 
 		info.setAuthor("fred");
 		assertEquals("fred", info.getAuthor());
@@ -213,6 +213,7 @@ public class TestConfigInfo extends TestCaseEnhanced
 		info.setBackedUpKeypairShare(sampleBackedUpKeypairShare);
 		info.setAllHQKeysXml(sampleAllHQKeysXml);
 		info.setBulletinVersioningAware(sampleBulletinVersioningAware);
+		info.setDefaultHQKeysXml(sampleDefaultHQKeysXml);
 	}
 
 	void verifyEmptyInfo(ConfigInfo info, String label)
@@ -237,6 +238,7 @@ public class TestConfigInfo extends TestCaseEnhanced
 		assertEquals(label + ": sampleBackedUpKeypairShare", false, info.hasUserBackedUpKeypairShare());
 		assertEquals(label + ": sampleAllHQKeysXml", "", info.getAllHQKeysXml());
 		assertEquals(label + ": sampleBulletinVersioningAware", true, info.isBulletinVersioningAware());
+		assertEquals(label + ": sampleDefaultHQKeysXml", "", info.getDefaultHQKeysXml());
 		
 	}
 
@@ -309,6 +311,10 @@ public class TestConfigInfo extends TestCaseEnhanced
 		else
 			assertEquals(label + ": sampleBulletinVersioningAware", false, info.isBulletinVersioningAware());
 		
+		if(VERSION >= 11)
+			assertEquals(label + ": sampleDefaultHQKeysXml", sampleDefaultHQKeysXml, info.getDefaultHQKeysXml());	
+		else
+			assertEquals(label + ": sampleDefaultHQKeysXml", "", info.getDefaultHQKeysXml());
 			
 	}
 
@@ -370,6 +376,10 @@ public class TestConfigInfo extends TestCaseEnhanced
 		{
 			out.writeBoolean(sampleBulletinVersioningAware);
 		}
+		if(VERSION >= 11)
+		{
+			out.writeUTF(sampleDefaultHQKeysXml);
+		}
 		out.close();
 		return outputStream.toByteArray();
 	}
@@ -403,7 +413,9 @@ public class TestConfigInfo extends TestCaseEnhanced
 	final boolean sampleBackedUpKeypairEncrypted = true;
 	final boolean sampleBackedUpKeypairShare = true;
 //Version 9
-	final String sampleAllHQKeysXml = "<HQs></HQs>";
+	final String sampleAllHQKeysXml = "<HQs>ALL</HQs>";
 //Version 10
 	final boolean sampleBulletinVersioningAware = true;
+//	Version 11
+	final String sampleDefaultHQKeysXml = "<HQs>defaultHQ</HQs>";
 }

@@ -212,11 +212,6 @@ public class UiBulletinEditor extends UiBulletinComponent implements HeadQuarter
 		headerSection.updateNumberOfHQs(newNumberOfSelectedHQs);
 	}
 	
-	HQKeys getHqKeys()
-	{
-		return mainWindow.getApp().getHQKeysWithFallback();
-	}
-
 	UiBulletinComponentHeaderSection createHeaderSection()
 	{
 		return new UiBulletinComponentHeaderSection(mainWindow, "Modify");
