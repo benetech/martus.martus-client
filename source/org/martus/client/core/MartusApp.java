@@ -458,7 +458,7 @@ public class MartusApp
 		b.setHQPublicKey(getHQKey());
 	}
 
-	public BulletinFolder getFolderSent()
+	public BulletinFolder getFolderSaved()
 	{
 		return store.getFolderSaved();
 	}
@@ -647,18 +647,18 @@ public class MartusApp
 		return false;
 	}
 
-	public BulletinFolder discardBulletinsFromFolder(BulletinFolder folderToDiscardFrom, Bulletin[] bulletinsToDiscard) throws IOException 
+	public void discardBulletinsFromFolder(BulletinFolder folderToDiscardFrom, Bulletin[] bulletinsToDiscard) throws IOException 
 	{
 		BulletinFolder draftOutBox = getFolderDraftOutbox();
-		BulletinFolder discardedFolder = getFolderDiscarded();
+		BulletinFolder sealedOutbox = getFolderSealedOutbox();
 		for (int i = 0; i < bulletinsToDiscard.length; i++)
 		{
 			Bulletin b = bulletinsToDiscard[i];
-			draftOutBox.getStore().discardBulletin(draftOutBox, b);
-			folderToDiscardFrom.getStore().discardBulletin(folderToDiscardFrom, b);
+			getStore().removeBulletinFromFolder(b, draftOutBox);
+			getStore().removeBulletinFromFolder(b, sealedOutbox);
+			getStore().discardBulletin(folderToDiscardFrom, b);
 		}
 		getStore().saveFolders();
-		return discardedFolder;
 	}
 
 	public Date getUploadInfoElement(int index)

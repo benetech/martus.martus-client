@@ -172,6 +172,7 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		Bulletin b1 = appWithAccount.createBulletin();
 		Bulletin b2 = appWithAccount.createBulletin();
 		Bulletin b3 = appWithAccount.createBulletin();
+		b3.setSealed();
 		appWithAccount.getStore().saveBulletin(b1);
 		appWithAccount.getStore().saveBulletin(b2);
 		appWithAccount.getStore().saveBulletin(b3);
@@ -180,10 +181,16 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		f1.add(b1);
 		f1.add(b2);
 		f1.add(b3);
+		BulletinFolder draftOutbox = appWithAccount.getFolderDraftOutbox();
+		draftOutbox.add(b1);
+		BulletinFolder sealedOutbox = appWithAccount.getFolderSealedOutbox();
+		sealedOutbox.add(b3);
 		
 		appWithAccount.discardBulletinsFromFolder(f1, new Bulletin[] {b1, b3});
 		assertEquals(3, appWithAccount.getStore().getBulletinCount());
 		assertEquals(1, f1.getBulletinCount());
+		assertEquals("didn't remove from draft outbox?", 0, draftOutbox.getBulletinCount());
+		assertEquals("didn't remove from sealed outbox?", 0, sealedOutbox.getBulletinCount());
 		
 		Database db = appWithAccount.getStore().getDatabase();
 		DatabaseKey key = new DatabaseKey(b1.getBulletinHeaderPacket().getUniversalId());

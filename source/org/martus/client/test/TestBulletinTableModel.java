@@ -50,7 +50,7 @@ public class TestBulletinTableModel extends TestCaseEnhanced
 		app = MockMartusApp.create(new MockClientDatabase());
 		app.loadSampleData();
 		store = app.getStore();
-		folderSent = app.getFolderSent();
+		folderSent = app.getFolderSaved();
     }
 
     public void tearDown() throws Exception

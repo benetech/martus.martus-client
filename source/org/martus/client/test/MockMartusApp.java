@@ -129,7 +129,7 @@ public class MockMartusApp extends MartusApp
 
 	public void loadSampleData() throws Exception
 	{
-		BulletinFolder f = this.getFolderSent();
+		BulletinFolder f = this.getFolderSaved();
 		{
 			Bulletin b = createBulletin();
 			b.set("language",	"es");
