@@ -71,6 +71,7 @@ import org.martus.common.search.SearchParser;
 import org.martus.common.search.SearchTreeNode;
 import org.martus.util.Base64;
 import org.martus.util.ByteArrayInputStreamWithSeek;
+import org.martus.util.DirectoryUtils;
 import org.martus.util.FileInputStreamWithSeek;
 import org.martus.util.InputStreamWithSeek;
 import org.martus.util.ScrubFile;
@@ -1035,13 +1036,55 @@ public class MartusApp
 	public static class CannotCreateAccountFileException extends IOException {}
 
 	public void createAccount(String userName, char[] userPassPhrase) throws
-					AccountAlreadyExistsException,
-					CannotCreateAccountFileException,
-					IOException
+					Exception
 	{
-		createAccountInternal(getMartusDataRootDirectory(), userName, userPassPhrase);
+		if(doesDefaultAccountExist())
+			createAdditionalAccount(userName, userPassPhrase);
+		else
+			createAccountInternal(getMartusDataRootDirectory(), userName, userPassPhrase);
 	}
 
+	private void createAdditionalAccount(String userName, char[] userPassPhrase) throws IOException, Exception
+	{
+		File accountsDirectory = getAccountsDirectory();
+		accountsDirectory.mkdirs();
+		File tempAccountDir = File.createTempFile("temp", null, accountsDirectory);
+		try
+		{
+			tempAccountDir.delete();
+			tempAccountDir.mkdirs();
+			createAccountInternal(tempAccountDir, userName, userPassPhrase);
+			String realAccountDir = MartusCrypto.getHexDigest(getAccountId());
+			tempAccountDir.renameTo(new File(accountsDirectory, realAccountDir));
+		}
+		catch (Exception e)
+		{
+			DirectoryUtils.deleteEntireDirectoryTree(tempAccountDir);
+			throw(e);
+		}
+	}
+
+	public void createAccountInternal(File accountDataDirectory, String userName, char[] userPassPhrase) throws
+	AccountAlreadyExistsException,
+	CannotCreateAccountFileException,
+	IOException
+	{
+		File keyPairFile = getKeyPairFile(accountDataDirectory);
+		if(keyPairFile.exists())
+			throw(new AccountAlreadyExistsException());
+		getSecurity().clearKeyPair();
+		getSecurity().createKeyPair();
+		try
+		{
+			writeKeyPairFileWithBackup(keyPairFile, userName, userPassPhrase);
+		}
+		catch(IOException e)
+		{
+			getSecurity().clearKeyPair();
+			throw(e);
+		}
+	}
+	
 	public Vector getAllAccountDirectories()
 	{
 		Vector accountDirectories = new Vector();
@@ -1146,27 +1189,6 @@ public class MartusApp
 	public boolean isOurBulletin(Bulletin b)
 	{
 		return getAccountId().equals(b.getAccount());	
-	}
-
-	public void createAccountInternal(File accountDataDirectory, String userName, char[] userPassPhrase) throws
-					AccountAlreadyExistsException,
-					CannotCreateAccountFileException,
-					IOException
-	{
-		File keyPairFile = getKeyPairFile(accountDataDirectory);
-		if(keyPairFile.exists())
-			throw(new AccountAlreadyExistsException());
-		getSecurity().clearKeyPair();
-		getSecurity().createKeyPair();
-		try
-		{
-			writeKeyPairFileWithBackup(keyPairFile, userName, userPassPhrase);
-		}
-		catch(IOException e)
-		{
-			getSecurity().clearKeyPair();
-			throw(e);
-		}
 	}
 
 	public void writeKeyPairFileWithBackup(File keyPairFile, String userName, char[] userPassPhrase) throws

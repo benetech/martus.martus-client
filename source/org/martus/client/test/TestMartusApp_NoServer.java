@@ -44,6 +44,8 @@ import org.martus.client.core.DateUtilities;
 import org.martus.client.core.Localization;
 import org.martus.client.core.MartusApp;
 import org.martus.client.core.QuickEraseOptions;
+import org.martus.client.core.MartusApp.AccountAlreadyExistsException;
+import org.martus.client.core.MartusApp.CannotCreateAccountFileException;
 import org.martus.client.swingui.UiLocalization;
 import org.martus.common.MartusUtilities;
 import org.martus.common.bulletin.Bulletin;
@@ -461,7 +463,7 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 
 		try
 		{
-			app.createAccount(userName, userPassword);
+			app.createAccountInternal(app.getMartusDataRootDirectory(), userName+"a", userPassword);
 			fail("Can't create an account if one already exists!");
 		}
 		catch(MartusApp.AccountAlreadyExistsException e)
@@ -472,6 +474,59 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 
 		app.deleteAllFiles();
 		TRACE_END();
+	}
+
+	public void testMultipleCreateAccounts() throws Exception
+	{
+		TRACE_BEGIN("testMultipleCreateAccounts");
+		MockMartusApp app = MockMartusApp.create();
+		app.createAccount(userName, userPassword);
+		File keyPairFile = app.getCurrentKeyPairFile();
+		assertEquals("not root dir?", app.getMartusDataRootDirectory(), keyPairFile.getParentFile());
+		File backupKeyPairFile = MartusApp.getBackupFile(keyPairFile);
+		assertEquals("no backup key file?", true, backupKeyPairFile.exists());
+
+		String accountId1 = app.getAccountId();
+		assertEquals("store account not set?", accountId1, app.getStore().getAccountId());
+		assertEquals("User name not set?",userName, app.getUserName());
+		verifySignInThatWorks(app);
+
+		try
+		{
+			app.createAccount(userName, userPassword);
+			fail("Can't create an account with the same user name.");
+		}
+		catch(MartusApp.AccountAlreadyExistsException e)
+		{
+			// expected exception
+		}
+		assertEquals("store account not kept if already exists?", accountId1, app.getStore().getAccountId());
+
+		String accountId2 = createAnotherAccount(app, userName2);
+		assertNotEquals("account id's should be different", accountId1, accountId2);
+
+		String accountId3 = createAnotherAccount(app, "another");
+		assertNotEquals("account1 id's should be different", accountId1, accountId3);
+		assertNotEquals("account2 id's should be different", accountId2, accountId3);
+
+		app.deleteAllFiles();
+		TRACE_END();
+	}
+	
+	private String createAnotherAccount(MockMartusApp app, String userName) throws AccountAlreadyExistsException, CannotCreateAccountFileException, IOException, Exception
+	{
+		app.createAccount(userName, userPassword);
+		File keyPairFile2 = app.getCurrentKeyPairFile();
+		assertNotEquals("Should not be in root directory?", app.getMartusDataRootDirectory(), keyPairFile2.getParentFile());
+		assertEquals("Parent of Parent should be root dir.", app.getMartusDataRootDirectory(), keyPairFile2.getParentFile().getParentFile());
+		File backupKeyPairFile2 = MartusApp.getBackupFile(keyPairFile2);
+		assertEquals("no backup key file2?", true, backupKeyPairFile2.exists());
+
+		String accountId2 = app.getAccountId();
+		assertEquals("store account2 not set?", accountId2, app.getStore().getAccountId());
+		assertEquals("User name2 not set?",userName, app.getUserName());
+		verifySignInThatWorks(app);
+		return accountId2;
 	}
 
 	void verifySignInThatWorks(MartusApp appWithRealAccount) throws Exception
