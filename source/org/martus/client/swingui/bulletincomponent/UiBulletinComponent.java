@@ -121,9 +121,9 @@ abstract public class UiBulletinComponent extends JPanel implements Scrollable, 
 		
 		createSections();
 
-		String isAllPrivate = UiField.FALSESTRING;
+		String isAllPrivate = FieldSpec.FALSESTRING;
 		if(currentBulletin.isAllPrivate())
-			isAllPrivate = UiField.TRUESTRING;
+			isAllPrivate = FieldSpec.TRUESTRING;
 		allPrivateField.setText(isAllPrivate);
 
 		FieldDataPacket publicData = currentBulletin.getFieldDataPacket();

@@ -33,6 +33,7 @@ import javax.swing.event.ChangeEvent;
 import org.martus.client.core.EncryptionChangeListener;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.fields.UiField;
+import org.martus.common.FieldSpec;
 import org.martus.common.bulletin.AttachmentProxy;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.crypto.MartusCrypto;
@@ -61,16 +62,16 @@ public class UiBulletinEditor extends UiBulletinComponent
 			MartusCrypto.EncryptionException
 	{		
 		
-		Bulletin tempBulletin = new Bulletin(mainWindow.getApp().getSecurity());					
-		copyDataToBulletin(tempBulletin);
-		
-		if(tempBulletin.isAllPrivate() != currentBulletin.isAllPrivate())
+		Bulletin currentStateOfBulletinBeingEdited = mainWindow.getApp().getStore().createEmptyBulletin();					
+		copyDataToBulletin(currentStateOfBulletinBeingEdited);
+		Bulletin previousStateOfBulletinBeingEdited = currentBulletin;
+		if(currentStateOfBulletinBeingEdited.isAllPrivate() != currentBulletin.isAllPrivate())
 			return true;
 		
-		if(publicStuff.isAnyFieldModified(currentBulletin, tempBulletin))
+		if(publicStuff.isAnyFieldModified(previousStateOfBulletinBeingEdited, currentStateOfBulletinBeingEdited))
 			return true;
 			
-		if(privateStuff.isAnyFieldModified(currentBulletin, tempBulletin))
+		if(privateStuff.isAnyFieldModified(previousStateOfBulletinBeingEdited, currentStateOfBulletinBeingEdited))
 			return true;
 
 		if (isPublicAttachmentModified())	
@@ -129,7 +130,7 @@ public class UiBulletinEditor extends UiBulletinComponent
 		bulletin.clear();
 			
 		boolean isAllPrivate = false;
-		if(allPrivateField.getText().equals(UiField.TRUESTRING))
+		if(allPrivateField.getText().equals(FieldSpec.TRUESTRING))
 			isAllPrivate = true;
 		bulletin.setAllPrivate(isAllPrivate);
 		
@@ -169,7 +170,7 @@ public class UiBulletinEditor extends UiBulletinComponent
 	public void stateChanged(ChangeEvent event)
 	{
 		String flagString = allPrivateField.getText();
-		boolean nowEncrypted = (flagString.equals(UiField.TRUESTRING));
+		boolean nowEncrypted = (flagString.equals(FieldSpec.TRUESTRING));
 		if(wasEncrypted != nowEncrypted)
 		{
 			wasEncrypted = nowEncrypted;

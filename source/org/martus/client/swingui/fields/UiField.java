@@ -78,7 +78,5 @@ abstract public class UiField
 	}
 	
 
-	public static final String TRUESTRING = "1";
-	public static final String FALSESTRING = "0";
 }
 

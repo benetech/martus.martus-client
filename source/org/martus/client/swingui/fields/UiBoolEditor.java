@@ -31,6 +31,8 @@ import javax.swing.JComponent;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
+import org.martus.common.FieldSpec;
+
 public class UiBoolEditor extends UiField implements ChangeListener
 {
 	public UiBoolEditor()
@@ -57,14 +59,14 @@ public class UiBoolEditor extends UiField implements ChangeListener
 	public String getText()
 	{
 		if(widget.isSelected())
-			return TRUESTRING;
+			return FieldSpec.TRUESTRING;
 
-		return FALSESTRING;
+		return FieldSpec.FALSESTRING;
 	}
 
 	public void setText(String newText)
 	{
-		boolean selected = (newText.equals(TRUESTRING));
+		boolean selected = (newText.equals(FieldSpec.TRUESTRING));
 		widget.setSelected(selected);
 	}
 
