@@ -58,7 +58,7 @@ public class UiBulletinDetailsDialog extends JDialog
 {
 	public UiBulletinDetailsDialog(UiMainWindow mainWindowToUse, Bulletin bulletinToShow, String tagQualifierToUse)
 	{
-		super(mainWindowToUse.getCurrentActiveFrame());
+		super(mainWindowToUse.getCurrentActiveFrame(), true);
 		
 		mainWindow = mainWindowToUse;
 		bulletin = bulletinToShow;
@@ -83,15 +83,30 @@ public class UiBulletinDetailsDialog extends JDialog
 		
 		UiScrollPane historyScroller = createHistoryTable();
 
-		panel.addComponents(new JLabel(getLabel("History")), historyScroller);
+		previewVersionButton = new JButton(getLocalization().getButtonLabel("ViewPreviousBulletinVersion"));
+		previewVersionButton.addActionListener(new previewListener());
+		if(versionTable.getRowCount() < 2)
+			previewVersionButton.setEnabled(false);
+
+		
+		Box historyBox = Box.createHorizontalBox();
+		historyBox.add(historyScroller);
+		historyBox.add(Box.createHorizontalStrut(10));
+		historyBox.add(previewVersionButton);
+		
+		
+		panel.addComponents(new JLabel(getLabel("History")), historyBox);
 		
 		JButton closeButton = new JButton(getLocalization().getButtonLabel("close"));
 		closeButton.addActionListener(new CloseHandler());
-		
+		getRootPane().setDefaultButton(closeButton);
+		closeButton.requestFocus(true);
+
 		Box buttonBox = Box.createHorizontalBox();
 		buttonBox.add(Box.createHorizontalGlue());
 		buttonBox.add(closeButton);
 		buttonBox.add(Box.createHorizontalGlue());
+		
 		
 		JPanel mainPanel = new JPanel();
 		mainPanel.add(panel);
@@ -103,10 +118,35 @@ public class UiBulletinDetailsDialog extends JDialog
 		
 	}
 	
+	public void hidePreviewButton()
+	{
+		previewVersionButton.setVisible(false);
+	}
+	
+	class previewListener implements ActionListener
+	{
+
+		public void actionPerformed(ActionEvent e)
+		{
+			int selectedRow = versionTable.getSelectedRow();
+			if(selectedRow < 0)
+				return;
+			if(selectedRow == versionTable.getRowCount()-1)
+			{
+				mainWindow.notifyDlg(mainWindow, "AlreadyViewingThisVersion");
+				return;
+			}
+			String localId = (String)versionTable.getValueAt(selectedRow, 1);
+			UniversalId uid = UniversalId.createFromAccountAndLocalId(bulletin.getAccount(), localId);
+			new UiBulletinVersionPreviewDlg(mainWindow, mainWindow.getStore().getBulletinRevision(uid));
+		}
+		
+	}
+
 	private UiScrollPane createHistoryTable()
 	{
 		BulletinHistory history = bulletin.getHistory();
-		DefaultTableModel versionModel = new DefaultTableModel(); 
+		DefaultTableModel versionModel = new DetailsTableModel(); 
 		versionModel.addColumn(getLabel("VersionNumber"));
 		versionModel.addColumn(getLabel("VersionId"));
 		versionModel.addColumn(getLabel("VersionDate"));
@@ -120,16 +160,27 @@ public class UiBulletinDetailsDialog extends JDialog
 			populateVersionRow(versionModel, i, uid);
 		}
 		populateVersionRow(versionModel, history.size(), bulletin.getUniversalId());
-		UiTable versionTable = new UiTable(versionModel);
+		versionTable = new UiTable(versionModel);
+		versionTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		versionTable.setColumnSelectionAllowed(false);
-		versionTable.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
 		versionTable.setShowGrid(true);
 		versionTable.resizeTable();
-		versionTable.setEnabled(false);
+
 		UiScrollPane versionScroller = new UiScrollPane(versionTable);
 		return versionScroller;
 	}
-
+	
+	class DetailsTableModel extends DefaultTableModel
+	{
+		
+		public boolean isCellEditable(int row, int column)
+		{
+			return false;
+		}
+		
+	}
+	
+	
 	private UiScrollPane createHeadquartersTable(HQKeys hqKeys)
 	{
 		DefaultTableModel hqModel = new DefaultTableModel();
@@ -237,5 +288,7 @@ public class UiBulletinDetailsDialog extends JDialog
 	UiMainWindow mainWindow;
 	Bulletin bulletin;
 	String tagQualifier;
+	private JButton previewVersionButton;
+	UiTable versionTable;
 
 }

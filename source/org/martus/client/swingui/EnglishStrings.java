@@ -175,6 +175,7 @@ public class EnglishStrings
 "wintitle:notifyErrorRenameFolder=Unable to Rename Folder",
 "wintitle:notifyErrorRenameFolderExists=Unable to Rename Folder",
 "wintitle:notifyPrintAllPrivateData=Print All Private Data",
+"wintitle:notifyAlreadyViewingThisVersion=Bulletin Version Already Being Viewed",
 
 "wintitle:inputservername=Server Name",
 "wintitle:inputserverpubliccode=Server Identification",
@@ -306,6 +307,7 @@ public class EnglishStrings
 "button:ConfigureHQsRemove=Remove",
 "button:ConfigureHQsReLabel=Change Label",
 "button:BulletinDetails=Bulletin Details...",
+"button:ViewPreviousBulletinVersion=View Previous Version...",
 
 "menu:file=File",
 "menu:CreateNewBulletin=Create New Bulletin",
@@ -706,6 +708,7 @@ public class EnglishStrings
 "field:notifyPrintAllPrivateDatacause=This bulletin will not be printed because all the information is private.  If you wish to print the private data, please mark the \"Include private data in print out\" checkbox.",
 "field:notifyErrorRenameFoldercause=Folder names cannot contain punctuation.  They also cannot begin with a space.",
 "field:notifyErrorRenameFolderExistscause=You already have a folder with that name.",
+"field:notifyAlreadyViewingThisVersioncause=You currently are viewing this verison of the bulletin.",
 
 "field:messageServerNewscause=The current server has sent this message:",
 "field:messageErrorDateInFuturecause=This date occurs in the future:",

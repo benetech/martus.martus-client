@@ -37,7 +37,7 @@ import org.martus.common.crypto.MartusCrypto;
 
 public class UiBulletinView extends UiBulletinComponent
 {
-	UiBulletinView(UiMainWindow mainWindowToUse)
+	public UiBulletinView(UiMainWindow mainWindowToUse)
 	{
 		super(mainWindowToUse);
 		// ensure that attachmentViewer gets initialized

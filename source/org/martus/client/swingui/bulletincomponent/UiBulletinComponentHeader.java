@@ -103,7 +103,7 @@ public class UiBulletinComponentHeader extends UiBulletinComponentSection
 		}
 	}
 	
-	void setTime(long time)
+	private void setTime(long time)
 	{
 		Calendar cal = new GregorianCalendar();
 		cal.setTimeInMillis(time);		
@@ -128,12 +128,17 @@ public class UiBulletinComponentHeader extends UiBulletinComponentSection
 		return summaryText;
 	}
 	
+	void showBulletinDetails()
+	{
+		UiBulletinDetailsDialog dlg = new UiBulletinDetailsDialog(mainWindow, bulletin, tagQualifier);
+		dlg.show();
+	}
+
 	class DetailsListener implements ActionListener
 	{
 		public void actionPerformed(ActionEvent e)
 		{
-			UiBulletinDetailsDialog dlg = new UiBulletinDetailsDialog(mainWindow, bulletin, tagQualifier);
-			dlg.show();
+			showBulletinDetails();
 		}
 		
 	}
