@@ -1179,7 +1179,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 				return;		
 			String serverIPAddress = serverInfoDlg.getServerIPAddress();
 			String serverPublicKey = serverInfoDlg.getServerPublicKey();
-			ClientSideNetworkGateway gateway = app.buildGateway(serverIPAddress, serverPublicKey);
+			ClientSideNetworkGateway gateway = ClientSideNetworkGateway.buildGateway(serverIPAddress, serverPublicKey);
 			
 			if(!app.isSSLServerAvailable(gateway))
 			{
@@ -1192,7 +1192,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 			{
 				//TODO:The following line shouldn't be necessary but without it, the trustmanager 
 				//will reject the old server, we don't know why.
-				app.buildGateway(previousServerInfo.getServerName(), previousServerInfo.getServerPublicKey()); 
+				ClientSideNetworkGateway.buildGateway(previousServerInfo.getServerName(), previousServerInfo.getServerPublicKey()); 
 				notifyDlg("UserRejectedServerCompliance");
 				if(serverIPAddress.equals(previousServerInfo.getServerName()) &&
 				   serverPublicKey.equals(previousServerInfo.getServerPublicKey()))

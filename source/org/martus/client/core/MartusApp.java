@@ -63,12 +63,10 @@ import org.martus.common.MartusUtilities.ServerErrorException;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.bulletin.BulletinZipUtilities;
 import org.martus.common.clientside.ClientSideNetworkGateway;
-import org.martus.common.clientside.ClientSideNetworkHandlerUsingXmlRpc;
 import org.martus.common.clientside.ClientSideNetworkHandlerUsingXmlRpcForNonSSL;
 import org.martus.common.clientside.CurrentUiState;
 import org.martus.common.clientside.DateUtilities;
 import org.martus.common.clientside.Localization;
-import org.martus.common.clientside.ClientSideNetworkHandlerUsingXmlRpc.SSLSocketSetupException;
 import org.martus.common.clientside.Exceptions.ServerCallFailedException;
 import org.martus.common.clientside.Exceptions.ServerNotAvailableException;
 import org.martus.common.crypto.MartusCrypto;
@@ -80,7 +78,6 @@ import org.martus.common.database.FileDatabase.MissingAccountMapSignatureExcepti
 import org.martus.common.network.NetworkInterface;
 import org.martus.common.network.NetworkInterfaceConstants;
 import org.martus.common.network.NetworkInterfaceForNonSSL;
-import org.martus.common.network.NetworkInterfaceXmlRpcConstants;
 import org.martus.common.network.NetworkResponse;
 import org.martus.common.packet.FieldDataPacket;
 import org.martus.common.packet.UniversalId;
@@ -848,35 +845,6 @@ public class MartusApp
 		return (getServerName().length() > 0);
 	}
 
-	public ClientSideNetworkGateway buildGateway(String serverName, String serverPublicKey)
-	{
-		NetworkInterface server = buildNetworkInterface(serverName, serverPublicKey);
-		if(server == null)
-			return null;
-		
-		return new ClientSideNetworkGateway(server);
-	}
-
-	NetworkInterface buildNetworkInterface(String serverName, String serverPublicKey)
-	{
-		if(serverName.length() == 0)
-			return null;
-	
-		try
-		{
-			int[] ports = NetworkInterfaceXmlRpcConstants.defaultSSLPorts;
-			ClientSideNetworkHandlerUsingXmlRpc handler = new ClientSideNetworkHandlerUsingXmlRpc(serverName, ports);
-			handler.getSimpleX509TrustManager().setExpectedPublicKey(serverPublicKey);
-			return handler;
-		}
-		catch (SSLSocketSetupException e)
-		{
-			//TODO propagate to UI and needs a test.
-			e.printStackTrace();
-			return null;
-		}
-	}
-
 	public boolean isSignedIn()
 	{
 		return getSecurity().hasKeyPair();
@@ -1538,7 +1506,7 @@ public class MartusApp
 	{
 		String ourServer = getServerName();
 		String ourServerPublicKey = getConfigInfo().getServerPublicKey();
-		return buildNetworkInterface(ourServer,ourServerPublicKey);
+		return ClientSideNetworkGateway.buildNetworkInterface(ourServer,ourServerPublicKey);
 	}
 
 	private void invalidateCurrentHandlerAndGateway()
