@@ -566,7 +566,7 @@ public class EnglishStrings
 "field:confirmExportUnknownTagseffect=If you continue with the export, any unknown information will not be exported.",
 "field:confirmQuickEraseDeleteKeyPaircause=This will delete your keypair file in your Martus account directory.",
 "field:confirmQuickEraseDeleteKeyPaireffect=Clicking on yes will delete your keypair file which means you will not be able to open Martus with the same account unless you have a backup of your keypair on a floppy disk.",
-"field:confirmQuickEraseOutboxNotEmptycause=Please Note: There are bulletins that have not been sent to a server. If you continue, these bulletins will be lost.",
+"field:confirmQuickEraseOutboxNotEmptycause=Please Note: There are bulletins that have not been sent to a server. If you continue these bulletins will be lost.",
 "field:confirmQuickEraseOutboxNotEmptyeffect=Clicking on yes will bring you to the Quick Erase Options dialog, no will return you to Martus without erasing anything.",
 "field:confirmKeyPairFileExistsOverWritecause=A keypair file already exists for this account.  Do you wish to overwrite it?",
 "field:confirmKeyPairFileExistsOverWriteeffect=Clicking on yes will delete the old keypair file and replace it with your recovered keypair.",
