@@ -42,7 +42,7 @@ public class UiStatusBar extends JPanel
 		local = localization;
 		setLayout( new BoxLayout( this, BoxLayout.X_AXIS) );
 
-		statusBarBox = Box.createHorizontalBox();
+		Box statusBarBox = Box.createHorizontalBox();
 		backgroundProgressMeter = new UiProgressMeter(null, localization);
 		statusBarBox.add(backgroundProgressMeter);
 		statusBarBox.add(Box.createHorizontalGlue());
@@ -80,7 +80,6 @@ public class UiStatusBar extends JPanel
 	}
 
 	private UiProgressMeter backgroundProgressMeter;
-	private Box statusBarBox;
 	private JTextField bulletinId;
 	
 	private JTextField bulletinLastSaved;
