@@ -27,7 +27,6 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.swingui.dialogs;
 
 import java.awt.Color;
-import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -36,15 +35,19 @@ import java.awt.event.KeyEvent;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.HashMap;
 import java.util.Vector;
 
+import javax.swing.Box;
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JDialog;
-import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
+import javax.swing.border.EmptyBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.plaf.basic.BasicTextUI;
@@ -54,7 +57,6 @@ import javax.swing.text.DefaultHighlighter.DefaultHighlightPainter;
 
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.common.clientside.UiBasicLocalization;
-import org.martus.swing.ParagraphLayout;
 import org.martus.swing.UiWrappedTextArea;
 import org.martus.swing.Utilities;
 import org.martus.util.UnicodeReader;
@@ -66,13 +68,16 @@ public class UiDisplayFileDlg extends JDialog
 	public UiDisplayFileDlg(UiMainWindow owner, String baseTag, InputStream fileStream, String tagMessage, InputStream fileStreamToc, String tagTOCMessage)
 	{
 		super(owner, "", true);
+		mainWindow = owner;
 		previouslyFoundIndex = -1;
 		tocList = null;
 		UiBasicLocalization localization = owner.getLocalization();
 
 		setTitle(localization.getWindowTitle(baseTag));
-		Container contentPane = getContentPane();
-		contentPane.setLayout(new ParagraphLayout());
+		JPanel helpPanel = new JPanel();
+		helpPanel.setBorder(new EmptyBorder(10,10,10,10));
+
+		helpPanel.setLayout(new BoxLayout(helpPanel, BoxLayout.Y_AXIS));
 
 		message = getFileContents(fileStream);
 		if(message == null)
@@ -100,28 +105,33 @@ public class UiDisplayFileDlg extends JDialog
 			JScrollPane tocMsgAreaScrollPane = new JScrollPane(tocList, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
 					JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 			tocMsgAreaScrollPane.setPreferredSize(new Dimension(580, 100));
-			contentPane.add(new JLabel(" "), ParagraphLayout.NEW_PARAGRAPH);
-			contentPane.add(new JLabel(localization.getFieldLabel(tagTOCMessage+"Description")));
-			contentPane.add(new JLabel(localization.getFieldLabel(tagTOCMessage)), ParagraphLayout.NEW_PARAGRAPH);
-			contentPane.add(tocMsgAreaScrollPane);
+			helpPanel.add(tocMsgAreaScrollPane);
 			tocList.setSelectedIndex(0);
 		}
 
 		close = new JButton(localization.getButtonLabel("close"));
 		close.addActionListener(new CloseHandler());
 		close.addKeyListener(new MakeEnterKeyExit());
-
-		contentPane.add(new JLabel(localization.getFieldLabel(tagMessage)), ParagraphLayout.NEW_PARAGRAPH);
-		contentPane.add(msgAreaScrollPane);
-		contentPane.add(close, ParagraphLayout.NEW_PARAGRAPH);
+		helpPanel.add(msgAreaScrollPane);
 		
 		searchField = new JTextField(20);
+		searchField.setMaximumSize(searchField.getPreferredSize());
 		searchField.addActionListener(new searchFieldListener());
 		searchButton = new JButton(localization.getButtonLabel("inputsearchok"));
 		searchButton.addActionListener(new SearchActionListener());
-		contentPane.add(searchField);
-		contentPane.add(searchButton);
+		Box hBox = Box.createHorizontalBox();
+
+		Dimension msgAreaSize = msgAreaScrollPane.getPreferredSize();
+		msgAreaSize.setSize(msgAreaSize.getWidth(), close.getPreferredSize().getHeight());
+		hBox.setPreferredSize(msgAreaSize);
 		
+		hBox.add(searchField);
+		hBox.add(searchButton);
+		hBox.add(Box.createHorizontalGlue());
+		hBox.add(close);
+		helpPanel.add(hBox);
+		
+		getContentPane().add(helpPanel);
 		getRootPane().setDefaultButton(close);
 		close.requestFocus();
 
@@ -193,11 +203,19 @@ public class UiDisplayFileDlg extends JDialog
 	{
 		public void valueChanged(ListSelectionEvent arg0)
 		{
-			String searchString = "-\n" + (String)tocList.getSelectedValue();
+			Object selectedValue = tocList.getSelectedValue();
+			String searchString = "-\n" + (String)selectedValue;
 			int foundAt = message.indexOf(searchString);
+			int startHighlight = foundAt+2;
+			int endHighlight = foundAt + searchString.length();
 			if(foundAt < 0)
+			{
+				startHighlight=0;
 				foundAt = 0;
+			}
 			scrollToPosition(foundAt);
+			
+			highlightText(startHighlight, endHighlight);
 		}
 		
 	}
@@ -206,34 +224,49 @@ public class UiDisplayFileDlg extends JDialog
 	{
 		public void actionPerformed(ActionEvent e)
 		{
-			String lowerCaseSearchText = searchField.getText().toLowerCase();
-			lowerCaseSearchText += " ";
-			
+			searchMessage();
+		}
+
+		private void searchMessage()
+		{
+			String searchString = searchField.getText();
+			String lowerCaseSearchText = searchString.toLowerCase();
 			if(previouslyFoundIndex != msgArea.getCaretPosition())
 				previouslyFoundIndex = msgArea.getCaretPosition();
 			int startIndex = lowercaseMessage.indexOf(lowerCaseSearchText,previouslyFoundIndex+1);
 			if(startIndex < 0)
+			{
+				HashMap tokenReplacement = new HashMap();
+				tokenReplacement.put("#S#", searchString);
+				if(mainWindow.confirmDlg(null, "helpStringNotFound", tokenReplacement))
+				{
+					msgArea.setCaretPosition(0);
+					previouslyFoundIndex = 0;
+					searchMessage();
+				}
 				return;
+			}
 			
 			tocList.clearSelection();
 			previouslyFoundIndex = startIndex;
 			scrollToPosition(startIndex);
-			int endIndex = startIndex+lowerCaseSearchText.length()-1;
+			int endIndex = startIndex+lowerCaseSearchText.length();
 			highlightText(startIndex, endIndex);
 		}
 
-		private void highlightText(int startIndex, int endIndex)
+	}
+
+	void highlightText(int startIndex, int endIndex)
+	{
+		try
 		{
-			try
-			{
-				highliter.removeAllHighlights();
-				Color highlightColor = new Color(22,88,212);
-				DefaultHighlightPainter painter = new DefaultHighlighter.DefaultHighlightPainter(highlightColor);
-				highliter.addHighlight(startIndex, endIndex, painter);
-			}
-			catch (BadLocationException e1)
-			{
-			}
+			highliter.removeAllHighlights();
+			Color highlightColor = new Color(255,255,0);
+			DefaultHighlightPainter painter = new DefaultHighlighter.DefaultHighlightPainter(highlightColor);
+			highliter.addHighlight(startIndex, endIndex, painter);
+		}
+		catch (BadLocationException e1)
+		{
 		}
 	}
 
@@ -288,4 +321,5 @@ public class UiDisplayFileDlg extends JDialog
 	JScrollPane msgAreaScrollPane;
 	BasicTextUI.BasicHighlighter highliter;
 	int previouslyFoundIndex;
+	UiMainWindow mainWindow;
 }

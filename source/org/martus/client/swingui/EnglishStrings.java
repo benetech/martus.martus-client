@@ -231,6 +231,7 @@ public class EnglishStrings
 "wintitle:BackupKeyPairGeneralInfo=Backup KeyPair Information",
 "wintitle:BackupKeyPairToSecretShareInformation=Information on Sharing Your KeyPair",
 "wintitle:ErrorAttachmentMissing=Attachment Missing",
+"wintitle:helpStringNotFound=Search Text Not Found",
 
 "button:help=Help",
 "button:create=Create",
@@ -578,6 +579,8 @@ public class EnglishStrings
 "field:confirmBackupKeyPairInformationeffect=Choosing Yes will begin the backup process.",		
 "field:confirmQuickEraseUninstallMartuscause=This will completely uninstall Martus from your computer.",
 "field:confirmQuickEraseUninstallMartuseffect=Clicking on yes will uninstall the Martus program.",
+"field:confirmhelpStringNotFoundcause=The text \"#S#\" was not found.  Do you wish to search from the beginning?",
+"field:confirmhelpStringNotFoundeffect=Clicking on yes will search for \"#S#\" from the beginning.",
 
 "field:notifyDropErrorNotAllowedcause=One or more bulletins cannot be moved to that folder. This may be because of their Draft/Sealed status, or their author.",
 "field:notifyDropErrorBulletinExistscause=One or more bulletins cannot be moved to that folder, because it already exists in that folder.",
