@@ -52,10 +52,9 @@ abstract public class UiBulletinComponentSection extends UiParagraphPanel
 		sectionHeading = new UiLabel("", null, JLabel.LEFT);
 		sectionHeading.setVerticalTextPosition(JLabel.TOP);
 		sectionHeading.setFont(sectionHeading.getFont().deriveFont(Font.BOLD));
-		addComponents(sectionHeading, new UiLabel(""));
 		
 		warningIndicator = new UiWarningLabel();
-		add(warningIndicator);
+		addComponents(sectionHeading, warningIndicator);
 		clearWarningIndicator();
 	}
 	
