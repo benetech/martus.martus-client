@@ -67,18 +67,19 @@ public class MockMartusApp extends MartusApp
 	public void deleteAllFiles() throws Exception
 	{
 		getStore().deleteAllData();
-
+		
 		getUploadInfoFile().delete();
 		if(getUploadInfoFile().exists())
 			throw new IOException("uploadInfoFile");
 
-		getCurrentKeyPairFile().delete();
-		if(getCurrentKeyPairFile().exists())
+		File defaultKeyPair = getKeyPairFile(getMartusDataRootDirectory());
+		defaultKeyPair.delete();
+		if(defaultKeyPair.exists())
 			throw new IOException("getKeyPairFile");
 
-		getBackupFile(getCurrentKeyPairFile()).delete();
-		if(getBackupFile(getCurrentKeyPairFile()).exists())
-			throw new IOException("getBackupFile");
+		getBackupFile(defaultKeyPair).delete();
+		if(getBackupFile(defaultKeyPair).exists())
+			throw new IOException("getBackupFile ");
 
 		File configInfo = new File(getConfigInfoFilename());
 		configInfo.delete();
@@ -108,7 +109,7 @@ public class MockMartusApp extends MartusApp
 		
 		rootDir.delete();
 		if(rootDir.exists())
-			throw new IOException("MartusRootDirectory");
+			throw new IOException("MartusRootDirectory " + rootDir.getPath());
 	}
 
 	public void setCurrentAccount(String userName, File accountDirectory) throws IOException

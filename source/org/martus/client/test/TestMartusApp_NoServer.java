@@ -50,7 +50,6 @@ import org.martus.client.swingui.UiLocalization;
 import org.martus.common.MartusUtilities;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.crypto.MartusCrypto;
-import org.martus.common.crypto.MartusSecurity;
 import org.martus.common.crypto.MockMartusSecurity;
 import org.martus.common.database.Database;
 import org.martus.common.database.DatabaseKey;
@@ -460,7 +459,7 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 
 		assertEquals("store account not set?", app.getAccountId(), app.getStore().getAccountId());
 		assertEquals("User name not set?",userName, app.getUserName());
-		verifySignInThatWorks(app);
+		verifySignInThatWorks(app, userName, userPassword);
 
 		try
 		{
@@ -481,7 +480,9 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 	{
 		TRACE_BEGIN("testMultipleCreateAccounts");
 		MockMartusApp app = MockMartusApp.create();
-		app.createAccount(userName, userPassword);
+		String newUserName = "testName";
+		char[] newUserPassword = "passWOrd".toCharArray();
+		app.createAccount(newUserName, newUserPassword);
 		File keyPairFile = app.getCurrentKeyPairFile();
 		assertEquals("not root dir?", app.getMartusDataRootDirectory(), keyPairFile.getParentFile());
 		File backupKeyPairFile = MartusApp.getBackupFile(keyPairFile);
@@ -489,12 +490,12 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 
 		String accountId1 = app.getAccountId();
 		assertEquals("store account not set?", accountId1, app.getStore().getAccountId());
-		assertEquals("User name not set?",userName, app.getUserName());
-		verifySignInThatWorks(app);
+		assertEquals("User name not set?",newUserName, app.getUserName());
+		verifySignInThatWorks(app, newUserName, newUserPassword);
 
 		try
 		{
-			app.createAccount(userName, userPassword);
+			app.createAccount(newUserName, newUserPassword);
 			fail("Can't create an account with the same user name.");
 		}
 		catch(MartusApp.AccountAlreadyExistsException e)
@@ -505,23 +506,34 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 
 		String accountId2 = createAnotherAccount(app, userName2);
 		assertNotEquals("account id's should be different", accountId1, accountId2);
-
-		MockMartusApp app2 = MockMartusApp.create();
-		app2.martusDataRootDirectory = app.getMartusDataRootDirectory();
-		String accountId3 = createAnotherAccount(app2, "another");
+		
+		File account2KeypairFile = app.getKeyPairFile(app.getCurrentAccountDirectory());
+		account2KeypairFile.delete();
+		try
+		{
+			createAnotherAccount(app, userName2);
+			fail("Can't create an account2 with the same user name even if keypair file is missing.");
+		}
+		catch(MartusApp.AccountAlreadyExistsException e)
+		{
+			// expected exception
+		}
+		
+		String accountId3 = createAnotherAccount(app, "another");
 		assertNotEquals("account1 id's should be different", accountId1, accountId3);
 		assertNotEquals("account2 id's should be different", accountId2, accountId3);
 
 		app.deleteAllFiles();
-		app2.deleteAllFiles();
 		TRACE_END();
 	}
 	
-	private String createAnotherAccount(MockMartusApp app, String userName) throws AccountAlreadyExistsException, CannotCreateAccountFileException, IOException, Exception
+	private String createAnotherAccount(MockMartusApp app, String thisUserName) throws AccountAlreadyExistsException, CannotCreateAccountFileException, IOException, Exception
 	{
 		assertTrue("Must already have default account", app.doesDefaultAccountExist());
-		app.createAccount(userName, userPassword);
+		app.createAccount(thisUserName, userPassword);
 		File keyPairFile = app.getCurrentKeyPairFile();
+		File currentAccountDirectory = app.getCurrentAccountDirectory();
+		assertEquals("The directory holding the keypair file & current account directory should match",keyPairFile.getParent(), currentAccountDirectory.getAbsolutePath());
 		assertTrue("Keypair file does not exist? " + keyPairFile.getPath(), keyPairFile.exists());
 		assertNotEquals("Should not be in root directory?", app.getMartusDataRootDirectory(), keyPairFile.getParentFile());
 		assertEquals("Parent of Parent should be the accounts dir.", app.getAccountsDirectory(), keyPairFile.getParentFile().getParentFile());
@@ -530,14 +542,18 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 
 		String accountId = app.getAccountId();
 		assertEquals("store account not set?", accountId, app.getStore().getAccountId());
-		assertEquals("User name not set?",userName, app.getUserName());
-		verifySignInThatWorks(app);
+		assertEquals("User name not set?",thisUserName, app.getUserName());
+		File currentAccountDirectory2 = app.getCurrentAccountDirectory();
+		assertEquals("current account directory should still match",currentAccountDirectory2.getAbsolutePath(), currentAccountDirectory.getAbsolutePath());
+		verifySignInThatWorks(app, thisUserName, userPassword);
+		File currentAccountDirectory3 = app.getCurrentAccountDirectory();
+		assertEquals("current account directory should still match",currentAccountDirectory3.getAbsolutePath(), currentAccountDirectory.getAbsolutePath());
 		return accountId;
 	}
 
-	void verifySignInThatWorks(MartusApp appWithRealAccount) throws Exception
+	void verifySignInThatWorks(MartusApp appWithRealAccount, String userName, char[] userPassword) throws Exception
 	{
-		appWithRealAccount.attemptSignIn(userName, userPassword);
+		appWithRealAccount.attemptReSignIn(userName, userPassword);
 		assertEquals("store account not set?", mockSecurityForApp.getPublicKeyString(), appWithAccount.getStore().getAccountId());
 		assertEquals("wrong username?", userName, appWithRealAccount.getUserName());
 	}
@@ -693,15 +709,13 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		File hashFile = app.getUserNameHashFile(tempDirectory); 
 		assertFalse("Should not have this hash file yet", hashFile.exists());
 		String username = "chuck";
+		assertFalse("This user should not own this directory", app.isUserOwnerOfThisAccountDirectory(username,app.getCurrentAccountDirectory()));
 		app.setCurrentAccount(username, tempDirectory);
 		assertTrue("Hash File should now exist", hashFile.exists());
-		UnicodeReader reader = new UnicodeReader(hashFile);
-		String hashOfUserName = reader.readLine();
-		reader.close();
-		assertEquals("Hash of user name should match file", MartusSecurity.getHexDigest(username), hashOfUserName);
+		
+		assertTrue("This user should be the owner of this directory", app.isUserOwnerOfThisAccountDirectory(username,app.getCurrentAccountDirectory()));
 		
 		app.deleteAllFiles();
-		
 	}
 	
 	public void testAttemptSignInKeyPairVersionFailure() throws Exception
