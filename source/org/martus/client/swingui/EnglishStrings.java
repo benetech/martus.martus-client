@@ -91,6 +91,7 @@ public class EnglishStrings
 "wintitle:confirmQuickEraseActionOkPressed=Quick Erase Warning",
 "wintitle:confirmBackupKeyPairInformation=Backing Up Your Keypair",
 "wintitle:confirmQuickEraseUninstallMartus=Uninstall Martus",
+"wintitle:confirmhelpStringNotFound=Text Not Found",
 
 "wintitle:notifyDropErrorNotAllowed=Cannot Move Bulletin(s)",
 "wintitle:notifyDropErrorBulletinExists=Cannot Move Bulletin(s)",
