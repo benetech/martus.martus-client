@@ -61,6 +61,11 @@ public abstract class HeadQuartersTableModel extends UiTableModel
 		fireTableRowsDeleted(row, row);
 	}
 
+	public int getNumberOfSelectedHQs()
+	{
+		return getAllSelectedHeadQuarterKeys().size();
+	}
+
 	public HQKeys getAllSelectedHeadQuarterKeys()
 	{
 		HQKeys keys = new HQKeys();
@@ -68,18 +73,6 @@ public abstract class HeadQuartersTableModel extends UiTableModel
 		{
 			HeadQuarterEntry hqEntry = (HeadQuarterEntry) iter.next();
 			if(hqEntry.isSelected())
-				keys.add(hqEntry.getKey());
-		}
-		return keys;
-	}
-	
-	public HQKeys getAllDefaultHeadQuarterKeys()
-	{
-		HQKeys keys = new HQKeys();
-		for (Iterator iter = entries.iterator(); iter.hasNext();) 
-		{
-			HeadQuarterEntry hqEntry = (HeadQuarterEntry) iter.next();
-			if(hqEntry.isDefault())
 				keys.add(hqEntry.getKey());
 		}
 		return keys;
@@ -98,18 +91,6 @@ public abstract class HeadQuartersTableModel extends UiTableModel
 	public HQKey getHQKey(int row)
 	{
 		return ((HeadQuarterEntry)entries.get(row)).getKey();
-	}
-
-	public int getNumberOfSelectedHQs()
-	{
-		int numberOfSelectedHQs = 0;
-		for (Iterator iter = entries.iterator(); iter.hasNext();) 
-		{
-			HeadQuarterEntry hqEntry = (HeadQuarterEntry) iter.next();
-			if(hqEntry.isSelected())
-				++numberOfSelectedHQs;
-		}
-		return numberOfSelectedHQs;
 	}
 	
 	public int getRowCount() 
@@ -138,9 +119,7 @@ public abstract class HeadQuartersTableModel extends UiTableModel
 	public Object getValueAt(int row, int column)
 	{
 		HeadQuarterEntry entry = (HeadQuarterEntry)entries.get(row);
-		if(column == COLUMN_DEFAULT)
-			return new Boolean(entry.isDefault());
-		if(column == COLUMN_SELECTED)
+		if(column == COLUMN_DEFAULT || column == COLUMN_SELECTED)
 			return new Boolean(entry.isSelected());
 		if(column == COLUMN_LABEL)
 			return entry.getLabel();
@@ -170,15 +149,11 @@ public abstract class HeadQuartersTableModel extends UiTableModel
 	public void setValueAt(Object value, int row, int column)
 	{
 		HeadQuarterEntry entry = (HeadQuarterEntry)entries.get(row);
-		if(column == COLUMN_SELECTED)
+		if(column == COLUMN_SELECTED || column == COLUMN_DEFAULT)
 		{
 			entry.setSelected(((Boolean)value).booleanValue());
 			if(selectionListener != null)
 				selectionListener.selectedHQsChanged(getNumberOfSelectedHQs());
-		}
-		else if(column == COLUMN_DEFAULT)
-		{
-			entry.setDefault(((Boolean)value).booleanValue());
 		}
 	}
 	

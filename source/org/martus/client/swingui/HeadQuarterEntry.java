@@ -41,21 +41,11 @@ public class HeadQuarterEntry
 		return isSelected;
 	}
 
-	public boolean isDefault()
-	{
-		return isDefault;
-	}
-
 	public void setSelected(boolean selected)
 	{
 		isSelected = selected;
 	}
 	
-	public void setDefault(boolean defaultHQ)
-	{
-		isDefault = defaultHQ;
-	}
-
 	public String getLabel()
 	{
 		return key.getLabel();
@@ -86,5 +76,4 @@ public class HeadQuarterEntry
 	
 	HQKey key;
 	boolean isSelected;
-	boolean isDefault;
 }
