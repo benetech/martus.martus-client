@@ -178,6 +178,8 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		}
 		if(result == UiSigninDlg.RECOVER_ACCOUNT_BY_BACKUP_FILE)
 		{
+			UiRecoverKeyPairFromBackup recover = new UiRecoverKeyPairFromBackup(this);
+			if(!recover.recoverPrivateKey())
 				return false;
 		}
 

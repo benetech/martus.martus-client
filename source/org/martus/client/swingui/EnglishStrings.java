@@ -84,6 +84,10 @@ public class EnglishStrings
 "wintitle:confirmQuickEraseDeleteKeyPair=Delete Keypair",
 "wintitle:confirmDeleteSubDirectory=Unexpected Files Found",
 "wintitle:confirmKeyPairFileExistsOverWrite=Keypair file Exists",
+"wintitle:confirmQuickEraseOutboxNotEmpty=Quick Erase Reminder",
+"wintitle:confirmCancelBackupRecovery=Cancel Backup Recovery",
+"wintitle:confirmUnableToRecoverFromBackupFile=Unable to Recover from Backup File",
+
 
 "wintitle:notifyDropErrorNotAllowed=Cannot Move Bulletin(s)",
 "wintitle:notifyDropErrors=Error Moving Bulletin(s)",
@@ -159,7 +163,9 @@ public class EnglishStrings
 "wintitle:notifycontactRejected=Error Sending ContactInfo",
 "wintitle:notifyCreateAccountFailed=Error Creating New Account",
 "wintitle:notifyUserAlreadyExists=User Already Exists",
-
+"wintitle:notifyQuickEraseScrubWorked=Quick Erase",
+"wintitle:notifyRecoveryProcessBackupFile=Recover Keypair",
+"wintitle:notifyRecoveryOfKeyPairComplete=Successful Recovery of Keypair",
 
 "wintitle:inputservername=Server Name",
 "wintitle:inputserverpubliccode=Server Identification",
@@ -170,7 +176,6 @@ public class EnglishStrings
 "wintitle:inputGetShareFileName=Default File Share Name",
 
 "wintitle:ErrorDateInFuture=Date Invalid",
-
 "wintitle:setupsignin=Martus Setup Signin",
 "wintitle:setupcontact=Martus Setup Contact Information",
 "wintitle:BulletinDetails=Details Field Default Content",
@@ -212,11 +217,8 @@ public class EnglishStrings
 "wintitle:ErrorRecoverShareDisk=KeyShare File Error",				
 "wintitle:ErrorVerifyingKeyPairShare=Verification Error",				
 "wintitle:VerifyingKeyPairShare=Verifying Disk",
-
-"wintitle:notifyQuickEraseScrubWorked=Quick Erase",
 "wintitle:RemoveServer=Remove Server",
-"wintitle:confirmQuickEraseOutboxNotEmpty=Quick Erase Reminder",
-
+"wintitle:RecoverKeyPair=Recover Keypair from Backup File",
 
 "button:help=Help",
 "button:create=Create",
@@ -550,8 +552,10 @@ public class EnglishStrings
 "field:confirmDeleteSubDirectoryeffect=Clicking on yes will delete ALL files and folders in this directory.",
 "field:confirmKeyPairFileExistsOverWritecause=A keypair file already exists for this account.  Do you wish to overwrite it?",
 "field:confirmKeyPairFileExistsOverWriteeffect=Clicking on yes will delete the old keypair file and replace it with your recovered keypair.",
-
-
+"field:confirmCancelBackupRecoverycause=Do you wish to cancel the keypair recovery process?",
+"field:confirmCancelBackupRecoveryeffect=By choosing Yes, will exit Martus.",
+"field:confirmUnableToRecoverFromBackupFilecause=Recovery of Keypair failed, we suggest you try again with a different backup file. Choose Yes to try again, No to exit Martus.",
+"field:confirmUnableToRecoverFromBackupFileeffect=Choosing Yes will begin the recovery process again.",
 		
 "field:notifyDropErrorNotAllowedcause=One or more bulletins cannot be moved to that folder. This may be because of their Draft/Sealed status, or their author.",
 "field:notifyDropErrorscause=An unexpected error occured while moving the bulletin(s). One or more files may be damaged.",
@@ -629,6 +633,8 @@ public class EnglishStrings
 "field:notifyQuickEraseScrubWorkedcause=All bulletins and folders were successfully scrubbed and deleted.",
 "field:notifyCreateAccountFailedcause=An error occured while trying to create your account.",
 "field:notifyUserAlreadyExistscause=The user name you chose already exists on this system, please choose a different user name.",
+"field:notifyRecoveryProcessBackupFilecause=To recover your keypair file, first you must find the backup file you saved previously, it should be called MartusKeyPair.dat.bak.  Note Martus automatically saves a backup file in your account directory, so even if you forgot to save your own backup file all is not lost.  Using the file open dialog box find the file on your computer's hard drive or on a floppy disk then click on open.  Martus will then ask you for your user name and password and restore your account so you can log in normally.",
+"field:notifyRecoveryOfKeyPairCompletecause=Recovery of your keypair file is complete, you will now be logged into Martus.",
 	
 "field:messageServerNewscause=The current server has sent this message:",
 "field:messageErrorDateInFuturecause=This date occures in the future:",
