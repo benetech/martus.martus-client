@@ -55,6 +55,7 @@ import org.martus.common.crypto.MartusCrypto;
 import org.martus.common.crypto.MockMartusSecurity;
 import org.martus.common.database.Database;
 import org.martus.common.database.DatabaseKey;
+import org.martus.common.database.FileDatabase;
 import org.martus.common.packet.UniversalId;
 import org.martus.common.test.TestCaseEnhanced;
 import org.martus.swing.Utilities;
@@ -215,9 +216,8 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 				app.doAfterSigninInitalization();
 				fail("Should have thrown because map is missing");
 			}
-			catch(MartusApp.MartusAppInitializationException expectedException)
+			catch(FileDatabase.MissingAccountMapException expectedException)
 			{
-				assertEquals("wrong message?", "ErrorMissingAccountMap", expectedException.getMessage());
 			}
 		}
 		finally
@@ -271,7 +271,7 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 				app.doAfterSigninInitalization();
 				fail("Should have thrown because of missing map signature");
 			}
-			catch(MartusApp.MartusAppInitializationException expectedException)
+			catch(FileDatabase.MissingAccountMapSignatureException expectedException)
 			{
 			}
 		}
@@ -335,7 +335,7 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 				app.doAfterSigninInitalization();
 				fail("Should have thrown because of invalid map signature");
 			}
-			catch(MartusApp.MartusAppInitializationException expectedException)
+			catch(MartusUtilities.FileVerificationException expectedException)
 			{
 			}
 		}
