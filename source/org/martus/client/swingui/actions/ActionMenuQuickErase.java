@@ -34,7 +34,7 @@ import org.martus.client.core.QuickEraseOptions;
 import org.martus.client.swingui.UiLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.dialogs.UiQuickEraseConfirmDlg;
-import org.martus.util.DirectoryTreeRemover;
+import org.martus.util.DirectoryUtils;
 
 public class ActionMenuQuickErase extends UiMenuAction 
 {
@@ -79,25 +79,9 @@ public class ActionMenuQuickErase extends UiMenuAction
 		mainWindow.folderTreeContentsHaveChanged();		
 	}
 	
-	static private boolean containSubDir(File startingDir)
-	{
-		File[] files = startingDir.listFiles();
-		
-		if (files != null)
-		{			
-			for (int i = 0; i < files.length; i++)
-			{				
-				if (files[i].isDirectory())
-					return true;
-			}
-		}		
-		return false;
-	}
-	
-	
 	private void confirmDeleteSubDirectory(File packetDir, QuickEraseOptions options)
 	{
-		if (!containSubDir(packetDir))
+		if (!DirectoryUtils.containSubDirs(packetDir))
 			return;
 		
 		UiLocalization localization = mainWindow.getLocalization();			
@@ -109,9 +93,9 @@ public class ActionMenuQuickErase extends UiMenuAction
 		if (mainWindow.confirmDlg(mainWindow, title, contents))
 		{
 			if (options.isScrubSelected())	
-				DirectoryTreeRemover.scrubAndDeleteEntireDirectoryTree(packetDir);
+				DirectoryUtils.scrubAndDeleteEntireDirectoryTree(packetDir);
 			else
-				DirectoryTreeRemover.deleteEntireDirectoryTree(packetDir);
+				DirectoryUtils.deleteEntireDirectoryTree(packetDir);
 		}		
 	}
 
