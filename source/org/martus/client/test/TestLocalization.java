@@ -166,6 +166,20 @@ public class TestLocalization extends TestCaseEnhanced
 		assertEquals("Components for Arabic should be Right To Left", UiLanguageDirection.getComponentOrientation(), ComponentOrientation.RIGHT_TO_LEFT);
 		assertEquals("Horizontal Alignment for Arabic should be Right", UiLanguageDirection.getHorizontalAlignment(), SwingConstants.RIGHT);
 		assertTrue("Arabic should require Text Padding", LanguageOptions.needsLanguagePadding());
+		
+		String farsiButtonText = "Farsi translation";
+		File farsi = new File(tmpDir, "Martus-fa.mtf");
+		arabic.deleteOnExit();
+		writer = new UnicodeWriter(farsi);
+		writer.writeln(button+farsiButtonText);
+		writer.writeln(Localization.MTF_RIGHT_TO_LEFT_LANGUAGE_FLAG);
+		writer.close();
+		directionalLanguages.setCurrentLanguageCode("fa");
+		assertEquals("test Button for farsi not correct?", farsiButtonText, directionalLanguages.getButtonLabel(test));
+		assertTrue("Farsi should be a Right to Left language.", LanguageOptions.isRightToLeftLanguage());
+		assertEquals("Components for Farsi should be Right To Left", UiLanguageDirection.getComponentOrientation(), ComponentOrientation.RIGHT_TO_LEFT);
+		assertEquals("Horizontal Alignment for Farsi should be Right", UiLanguageDirection.getHorizontalAlignment(), SwingConstants.RIGHT);
+		assertTrue("Farsi should require Text Padding", LanguageOptions.needsLanguagePadding());
 	}
 
 	public void testToFileNameForeignChars()
