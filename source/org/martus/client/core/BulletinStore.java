@@ -242,6 +242,8 @@ public class BulletinStore
 		for(int f = 0; f < getFolderCount(); ++f)
 		{
 			BulletinFolder folder = getFolder(f);
+			if(!folder.isVisible())
+				continue;
 			for(int b = 0; b < folder.getBulletinCount(); ++b)
 			{
 				UniversalId uid = folder.getBulletinUniversalIdUnsorted(b);

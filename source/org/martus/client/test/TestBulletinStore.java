@@ -1165,10 +1165,13 @@ public class TestBulletinStore extends TestCaseEnhanced
 		assertEquals("not one?", 1, one.size());
 		assertTrue("one Missing b2?", one.contains(b2.getUniversalId()));
 
-		store.getFolderDiscarded().add(b2);
-		Set emptyAgain = store.getSetOfOrphanedBulletinUniversalIds();
-		assertTrue("not empty again?", emptyAgain.isEmpty());
+		store.getFolderDraftOutbox().add(b2);
+		one = store.getSetOfOrphanedBulletinUniversalIds();
+		assertEquals("A bulletin only existing in a hidden folder is orphaned", 1,  one.size());
 
+		store.getFolderDrafts().add(b2);
+		Set empty = store.getSetOfOrphanedBulletinUniversalIds();
+		assertTrue("now b2 is in a visable folder so we should not have any orphans", empty.isEmpty());
 	}
 
 	public void testOrphansInHiddenFolders() throws Exception
@@ -1187,6 +1190,18 @@ public class TestBulletinStore extends TestCaseEnhanced
 		assertEquals("hidden-plus is an orphan?", false, store.isOrphan(b2));
 	}
 
+	public void testOrphansInVisibleFolders() throws Exception
+	{
+		TRACE("testOrphansInVisibleFolders");
+		Bulletin b1 = store.createEmptyBulletin();
+		store.saveBulletin(b1);
+
+		assertEquals("Not in any folder, bulletin not orphaned?", true, store.isOrphan(b1));
+		store.getFolderDrafts().add(b1);
+		assertEquals("In a visible folder, bulletin is orphaned?", false, store.isOrphan(b1));
+	}
+	
+	
 	public void testQuarantineUnreadableBulletinsSimple() throws Exception
 	{
 		TRACE("testQuarantineUnreadableBulletinsSimple");
