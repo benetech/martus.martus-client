@@ -36,6 +36,7 @@ import java.util.HashMap;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.bulletin.BulletinConstants;
 import org.martus.common.crypto.MartusCrypto;
+import org.martus.common.crypto.SessionKey;
 import org.martus.common.crypto.MartusCrypto.DecryptionException;
 import org.martus.common.crypto.MartusCrypto.EncryptionException;
 import org.martus.common.packet.UniversalId;
@@ -77,8 +78,8 @@ public class CacheOfSortableFields
 	{
 		try
 		{
-			byte[] sessionKeyBytes = security.createSessionKey();
-			OutputStream cipherOut = security.createEncryptingOutputStream(out, sessionKeyBytes);
+			SessionKey sessionKey = security.createSessionKey();
+			OutputStream cipherOut = security.createEncryptingOutputStream(out, sessionKey);
 			ObjectOutputStream dataOut = new ObjectOutputStream(cipherOut);
 			dataOut.writeObject(bulletinIdsHashMap);
 			dataOut.close();
