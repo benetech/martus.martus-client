@@ -651,6 +651,7 @@ public class EnglishStrings
 "field:AccountInfoUserName=User Name: ",
 "field:AccountInfoPublicKey=Public Key:",
 "field:AccountInfoPublicCode=Public Code:",
+"field:AccountInfoDirectory=Account Directory: ",
 "field:NameOfExportedFile=Please enter a name for the file you wish to export.",
 "field:ServerNameEntry=Server name or IP address:",
 "field:ServerPublicCodeEntry=Server Public Identification Code:",

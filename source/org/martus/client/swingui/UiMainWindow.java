@@ -802,12 +802,13 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 
 	public void showAccountInfo()
 	{
-		String title = getLocalization().getWindowTitle("AccountInfo");
-		String userName = getLocalization().getFieldLabel("AccountInfoUserName")
+		UiLocalization localization = getLocalization();
+		String title = localization.getWindowTitle("AccountInfo");
+		String userName = localization.getFieldLabel("AccountInfoUserName")
 						  + app.getUserName();
-		String keyDescription = getLocalization().getFieldLabel("AccountInfoPublicKey");
+		String keyDescription = localization.getFieldLabel("AccountInfoPublicKey");
 		String keyContents = app.getAccountId();
-		String codeDescription = getLocalization().getFieldLabel("AccountInfoPublicCode");
+		String codeDescription = localization.getFieldLabel("AccountInfoPublicCode");
 		String codeContents = null;
 		String formattedCodeContents = null;
 		try
@@ -818,8 +819,20 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		catch(InvalidBase64Exception e)
 		{
 		}
-		String ok = getLocalization().getButtonLabel("ok");
-		String[] contents = {userName, " ", keyDescription, keyContents," ", codeDescription, formattedCodeContents};
+		String accountDirectory = localization.getFieldLabel("AccountInfoDirectory") + app.getCurrentAccountDirectoryName();
+		int dirLength = accountDirectory.length();
+		char[] accountDirectorySlash = new char[dirLength];
+		for(int i = 0; i<dirLength; ++i)
+		{
+			char thisChar = accountDirectory.charAt(i);
+			if(thisChar=='/')
+				accountDirectorySlash[i] = '\\';
+			else
+				accountDirectorySlash[i] = thisChar;
+		}
+		
+		String ok = localization.getButtonLabel("ok");
+		String[] contents = {userName, " ", keyDescription, keyContents," ", codeDescription, formattedCodeContents, " ", new String(accountDirectorySlash)};
 		String[] buttons = {ok};
 
 		new UiNotifyDlg(this, title, contents, buttons);
