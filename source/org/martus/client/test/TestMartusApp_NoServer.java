@@ -42,6 +42,7 @@ import org.martus.client.core.ConfigInfo;
 import org.martus.client.core.MartusApp;
 import org.martus.client.core.MartusApp.AccountAlreadyExistsException;
 import org.martus.client.core.MartusApp.CannotCreateAccountFileException;
+import org.martus.client.core.MartusApp.SaveConfigInfoException;
 import org.martus.client.swingui.EnglishStrings;
 import org.martus.client.swingui.UiLocalization;
 import org.martus.common.CustomFields;
@@ -62,6 +63,7 @@ import org.martus.common.database.DatabaseKey;
 import org.martus.common.database.FileDatabase;
 import org.martus.common.packet.UniversalId;
 import org.martus.swing.Utilities;
+import org.martus.util.DirectoryUtils;
 import org.martus.util.TestCaseEnhanced;
 import org.martus.util.UnicodeReader;
 import org.martus.util.UnicodeWriter;
@@ -1003,42 +1005,59 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 	{
 		TRACE_BEGIN("testGetAccountDirectory");
 		File rootDir = createTempDirectory();
-		MartusApp app = new MartusApp(mockSecurityForApp, rootDir, localization);
-		File accountsDir = app.getAccountsDirectory();
-		accountsDir.deleteOnExit();
+		try
+		{
+			MartusApp app = new MartusApp(mockSecurityForApp, rootDir, localization);
+			
+			assertEquals("first account not root dir?", rootDir, app.getAccountDirectory("anything"));
+	
+			String username1 = "name";
+			createAccount(app, username1);
+			String realAccountId1 = app.getAccountId();
+			saveConfigInfo(app);
+			
+			String username2 = "other";
+			createAccount(app, username2);
+			String realAccountId2 = app.getAccountId();
+			saveConfigInfo(app);
+	
+			File account2Directory = app.getAccountDirectory(realAccountId2);
+			String digest2 = MartusCrypto.computeFormattedPublicCode(realAccountId2);
+			assertEquals("second account not in digest dir?", digest2, account2Directory.getName());
 
-		String dummyAccountId1 = "hello";
-		File accountDirectory = app.getAccountDirectory(dummyAccountId1);
-		assertEquals("No account directory yet and root is empty, so why isn't root directory used for this accounts directory", rootDir.getPath(), accountDirectory.getPath() );
-		
-		String digest1 = MartusCrypto.getFormattedPublicCode(dummyAccountId1);
-		File account1Directory = new File(accountsDir, digest1);
-		account1Directory.deleteOnExit();
-		account1Directory.mkdirs();
-		accountDirectory = app.getAccountDirectory(dummyAccountId1);
-		assertEquals("account directory exists why isn't it used?", account1Directory.getPath(), accountDirectory.getPath() );
-		
-		File rootKeyPair = new File(rootDir, MartusApp.KEYPAIR_FILENAME);
-		rootKeyPair.deleteOnExit();
-		FileOutputStream out = new FileOutputStream(rootKeyPair);
-		out.write(0);
-		out.close();
-		String dummyAccountId2 = "hellothere";
-		String digest2 = MartusCrypto.getFormattedPublicCode(dummyAccountId2);
-		File account2Directory = new File(accountsDir, digest2);
-		accountDirectory = app.getAccountDirectory(dummyAccountId2);
-		assertEquals("Root directory already has an account whey didn't we return account2's directory?", account2Directory.getPath(), accountDirectory.getPath() );
-		assertTrue("Directory should exist", accountDirectory.exists());
-		
-		rootKeyPair.delete();
-		account1Directory.delete();
-		account2Directory.delete();
-		accountsDir.delete();
-		rootDir.delete();
+			String sillyAccountId = "something new";
+			File sillyAccountDirectory = app.getAccountDirectory(sillyAccountId);
+			String sillyDigest = MartusCrypto.computeFormattedPublicCode(sillyAccountId);
+			assertEquals("silly account not in digest dir?", sillyDigest, sillyAccountDirectory.getName());
+			assertTrue("didn't create silly dir?", sillyAccountDirectory.exists());
+			
+			File rootAccountDirectory = app.getAccountDirectory(realAccountId1);
+			assertEquals("not root?", rootDir.getAbsolutePath(), rootAccountDirectory.getAbsolutePath());
+			
+		}
+		finally
+		{
+			DirectoryUtils.deleteEntireDirectoryTree(rootDir);
+		}
 		TRACE_END();
 	}
 	
 	
+	private void saveConfigInfo(MartusApp app) throws SaveConfigInfoException 
+	{
+		File configFile1 = app.getConfigInfoFile();
+		app.saveConfigInfo();
+		assertTrue("no config?", configFile1.exists());
+		File sigFile1 = app.getConfigInfoSignatureFile();
+		assertTrue("no config sig?", sigFile1.exists());
+	}
+
+	private void createAccount(MartusApp app, String username1) throws CannotCreateAccountFileException, Exception 
+	{
+		char[] password1 = "pass".toCharArray();
+		app.createAccount(username1, password1);
+	}
+
 	public void testDoesAccountExistForMultipleAccounts() throws Exception
 	{
 		TRACE_BEGIN("testDoesAccountExistForMultipleAccounts");

@@ -31,6 +31,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileFilter;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -281,15 +282,8 @@ public class MartusApp
 
 		try
 		{
-			byte[] signature =	new byte[(int)sigFile.length()];
-			FileInputStream inSignature = new FileInputStream(sigFile);
-			inSignature.read(signature);
-			inSignature.close();
-
-			FileInputStream inData = new FileInputStream(dataFile);
-			boolean verified = getSecurity().isValidSignatureOfStream(getSecurity().getPublicKeyString(), inData, signature);
-			inData.close();
-			if(!verified)
+			String accountId = getSecurity().getPublicKeyString();
+			if(!isSignatureFileValid(dataFile, sigFile, accountId))
 				throw new LoadConfigInfoException();
 
 			InputStreamWithSeek encryptedContactFileInputStream = new FileInputStreamWithSeek(dataFile);
@@ -317,6 +311,19 @@ public class MartusApp
 		}
 	}
 	
+	private boolean isSignatureFileValid(File dataFile, File sigFile, String accountId) throws FileNotFoundException, IOException, MartusSignatureException 
+	{
+		byte[] signature =	new byte[(int)sigFile.length()];
+		FileInputStream inSignature = new FileInputStream(sigFile);
+		inSignature.read(signature);
+		inSignature.close();
+
+		FileInputStream inData = new FileInputStream(dataFile);
+		boolean verified = getSecurity().isValidSignatureOfStream(accountId, inData, signature);
+		inData.close();
+		return verified;
+	}
+
 	private void convertLegacyHQToMultipleHQs() throws HQsException
 	{
 		String legacyHQKey = configInfo.getLegacyHQKey();
@@ -1249,19 +1256,39 @@ public class MartusApp
 	public File getAccountDirectory(String accountId) throws InvalidBase64Exception
 	{
 		String name = getAccountDirectoryName(accountId);
-		File accountDir = new File(getAccountsDirectory(), name);
-		if(accountDir.exists() && accountDir.isDirectory())
-			return accountDir;
-		if(!getKeyPairFile(getMartusDataRootDirectory()).exists())
-			return getMartusDataRootDirectory();
-		accountDir.mkdirs();
-		return accountDir;
+		File proposedAccountDir = new File(getAccountsDirectory(), name);
+		if(proposedAccountDir.exists() && proposedAccountDir.isDirectory())
+			return proposedAccountDir;
+		
+		File dataRootDir = getMartusDataRootDirectory();
+		if(!getKeyPairFile(dataRootDir).exists())
+			return dataRootDir;
+		if(doesDirectoryContainAccount(dataRootDir, accountId))
+			return dataRootDir;
+		
+		proposedAccountDir.mkdirs();
+		return proposedAccountDir;
 	}
 
 	private String getAccountDirectoryName(String accountId)
 		throws InvalidBase64Exception
 	{
 		return MartusCrypto.getFormattedPublicCode(accountId);
+	}
+	
+	private boolean doesDirectoryContainAccount(File dir, String accountId)
+	{
+		File configFile = getConfigInfoFileForAccount(dir);
+		File sigFile = getConfigInfoSignatureFileForAccount(dir);
+		
+		try 
+		{
+			return(isSignatureFileValid(configFile, sigFile, accountId));
+		} 
+		catch (Exception e) 
+		{
+			return false;
+		}
 	}
 
 	public boolean doesAnyAccountExist()
