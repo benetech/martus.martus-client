@@ -25,9 +25,6 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.dialogs;
 
-import java.awt.BorderLayout;
-import javax.swing.Box;
-import javax.swing.BoxLayout;
 import javax.swing.ButtonGroup;
 import javax.swing.ButtonModel;
 import javax.swing.JComponent;
@@ -37,6 +34,7 @@ import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 import org.martus.common.clientside.CurrentUiState;
 import org.martus.common.clientside.UiBasicLocalization;
+import org.martus.swing.ParagraphLayout;
 import org.martus.swing.UiRadioButton;
 import org.martus.swing.UiTabbedPane;
 import org.martus.swing.UiWrappedTextArea;
@@ -76,24 +74,23 @@ public class UiInitialSigninDlg extends UiSigninDlg
 	JPanel createRecoverAccountPanel()
 	{
 		JPanel radioButtonPanel = new JPanel();
-		radioButtonPanel.setLayout(new BoxLayout(radioButtonPanel, BoxLayout.Y_AXIS));
+		radioButtonPanel.setLayout(new ParagraphLayout());
 		radioBackupFile = new UiRadioButton(localization.getButtonLabel("RecoverAccountByBackup"), true);
 		radioBackupFile.setActionCommand("backupFile");
 		radioShare = new UiRadioButton(localization.getButtonLabel("RecoverAccountByShare"), false);
 		radioShare.setActionCommand("share");
+
 		recoveryTypeGroup = new ButtonGroup();
 		recoveryTypeGroup.add(radioBackupFile);
 		recoveryTypeGroup.add(radioShare);
 
-		radioButtonPanel.add(new JLabel(" "));
-		radioButtonPanel.add(radioBackupFile);
-		radioButtonPanel.add(radioShare);
-		radioButtonPanel.add(Box.createVerticalStrut(5));
+		radioButtonPanel.add(radioBackupFile, ParagraphLayout.NEW_PARAGRAPH);
+		radioButtonPanel.add(radioShare, ParagraphLayout.NEW_PARAGRAPH);
 		
 		JPanel recoverAccountPanel = new JPanel();
-		recoverAccountPanel.setLayout(new BorderLayout());
-		recoverAccountPanel.add(new JLabel(localization.getFieldLabel("RecoverAccount")),BorderLayout.NORTH);
-		recoverAccountPanel.add(radioButtonPanel, BorderLayout.CENTER);
+		recoverAccountPanel.setLayout(new ParagraphLayout());
+		recoverAccountPanel.add(new JLabel(localization.getFieldLabel("RecoverAccount")),ParagraphLayout.NEW_PARAGRAPH);
+		recoverAccountPanel.add(radioButtonPanel,ParagraphLayout.NEW_PARAGRAPH);
 		return recoverAccountPanel;
 	}
 	public void handleOk()
