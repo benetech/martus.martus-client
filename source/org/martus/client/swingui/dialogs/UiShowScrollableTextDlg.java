@@ -26,20 +26,24 @@ Boston, MA 02111-1307, USA.
 
 package org.martus.client.swingui.dialogs;
 
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.swing.Box;
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.border.EmptyBorder;
 
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.common.clientside.Localization;
 import org.martus.common.clientside.UiBasicLocalization;
-import org.martus.swing.ParagraphLayout;
 import org.martus.swing.UiWrappedTextArea;
 import org.martus.swing.Utilities;
 import org.martus.util.TokenReplacement;
@@ -75,28 +79,38 @@ public class UiShowScrollableTextDlg extends JDialog implements ActionListener
 				cancel.addActionListener(this);
 			}
 			
-			details = new UiWrappedTextArea(TokenReplacement.replaceTokens(text, tokenReplacement), 65);
+			details = new UiWrappedTextArea(TokenReplacement.replaceTokens(text, tokenReplacement), 85);
 			details.setEditable(false);
 			JScrollPane detailScrollPane = new JScrollPane(details, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
 					JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+			JPanel panel = new JPanel();
+			panel.setBorder(new EmptyBorder(10,10,10,10));
+			panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 			
-			getContentPane().setLayout(new ParagraphLayout());
-			getContentPane().add(new JLabel(""), ParagraphLayout.NEW_PARAGRAPH);
 			if(!descriptionTag.equals(Localization.UNUSED_TAG))
 			{
 				String fieldLabel = localization.getFieldLabel(descriptionTag);
 				fieldLabel = TokenReplacement.replaceTokens(fieldLabel, tokenReplacement);
-				getContentPane().add(new UiWrappedTextArea(fieldLabel));
+				panel.add(new JLabel(" "));
+				panel.add(new UiWrappedTextArea(fieldLabel));
 			}
-			getContentPane().add(new JLabel(""), ParagraphLayout.NEW_PARAGRAPH);
-			getContentPane().add(detailScrollPane);
-			getContentPane().add(new JLabel("    "));
+			panel.add(new JLabel(" "));
+			panel.add(detailScrollPane);
+			panel.add(new JLabel(" "));
 			
-			getContentPane().add(new JLabel(""), ParagraphLayout.NEW_PARAGRAPH);
-			getContentPane().add(ok);
+			Box buttons = Box.createHorizontalBox();
+			Dimension preferredSize = details.getPreferredSize();
+			preferredSize.height = ok.getPreferredSize().height;
+			buttons.setPreferredSize(preferredSize);
+			buttons.add(ok);
 			if(cancelButtonTag.length() != 0)
-				getContentPane().add(cancel);
+			{
+				buttons.add(Box.createHorizontalGlue());
+				buttons.add(cancel);
+			}
+			panel.add(buttons);
 			
+			getContentPane().add(panel);
 			getRootPane().setDefaultButton(ok);
 			Utilities.centerDlg(this);
 			show();
