@@ -36,6 +36,8 @@ import javax.swing.JPanel;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.LineBorder;
 
+import org.martus.client.swingui.UiLocalization;
+import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.UiWarningLabel;
 import org.martus.client.swingui.fields.UiDateEditor;
 import org.martus.client.swingui.fields.UiField;
@@ -44,15 +46,14 @@ import org.martus.common.FieldSpec;
 import org.martus.common.bulletin.AttachmentProxy;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.clientside.ChoiceItem;
-import org.martus.common.clientside.UiBasicLocalization;
 import org.martus.common.packet.FieldDataPacket;
 import org.martus.swing.ParagraphLayout;
 
 abstract public class UiBulletinComponentSection extends JPanel
 {
-	UiBulletinComponentSection(UiBasicLocalization localizationToUse)
+	UiBulletinComponentSection(UiMainWindow mainWindowToUse)
 	{
-		localization = localizationToUse;
+		mainWindow = mainWindowToUse;
 
 		ParagraphLayout layout = new ParagraphLayout();
 		layout.outdentFirstField();
@@ -70,6 +71,16 @@ abstract public class UiBulletinComponentSection extends JPanel
 		add(encryptedIndicator);
 		add(warningIndicator);
 	}
+	
+	public UiMainWindow getMainWindow()
+	{
+		return mainWindow;
+	}
+	
+	public UiLocalization getLocalization()
+	{
+		return getMainWindow().getLocalization();
+	}
 
 	public void createLabelsAndFields(FieldSpec[] specs)
 	{
@@ -80,7 +91,7 @@ abstract public class UiBulletinComponentSection extends JPanel
 		{
 			fields[fieldNum] = createAndAddLabelAndField(specs[fieldNum]);
 		}
-		JLabel attachments = new JLabel(localization.getFieldLabel("attachments"));
+		JLabel attachments = new JLabel(getLocalization().getFieldLabel("attachments"));
 		add(attachments, ParagraphLayout.NEW_PARAGRAPH);
 		createAttachmentTable();
 	}
@@ -121,7 +132,7 @@ abstract public class UiBulletinComponentSection extends JPanel
 	{
 		String labelText = spec.getLabel();
 		if(labelText.equals(""))
-			labelText = localization.getFieldLabel(spec.getTag());
+			labelText = getLocalization().getFieldLabel(spec.getTag());
 		return new JLabel(labelText);
 	}
 
@@ -142,7 +153,7 @@ abstract public class UiBulletinComponentSection extends JPanel
 				break;
 			case FieldSpec.TYPE_CHOICE:
 				ChoiceItem[] languages =
-					localization.getLanguageNameChoices();
+					getLocalization().getLanguageNameChoices();
 				field = createChoiceField(languages);
 				break;					
 			case FieldSpec.TYPE_NORMAL:
@@ -164,11 +175,11 @@ abstract public class UiBulletinComponentSection extends JPanel
 	public void updateEncryptedIndicator(boolean isEncrypted)
 	{
 		String iconFileName = "unlocked.jpg";
-		String title = localization.getFieldLabel("publicsection");
+		String title = getLocalization().getFieldLabel("publicsection");
 		if(isEncrypted)
 		{
 			iconFileName = "locked.jpg";
-			title = localization.getFieldLabel("privatesection");
+			title = getLocalization().getFieldLabel("privatesection");
 		}
 
 		Icon icon = new ImageIcon(UiBulletinComponentSection.class.getResource(iconFileName));
@@ -235,7 +246,7 @@ abstract public class UiBulletinComponentSection extends JPanel
 			catch (UiDateEditor.DateFutureException e) 
 			{
 				String tag = fieldSpecs[fieldNum].getTag();
-				throw new UiDateEditor.DateFutureException(localization.getFieldLabel(tag));
+				throw new UiDateEditor.DateFutureException(getLocalization().getFieldLabel(tag));
 			}
 		}
 	}
@@ -259,7 +270,7 @@ abstract public class UiBulletinComponentSection extends JPanel
 
 
 
-	UiBasicLocalization localization;
+	private UiMainWindow mainWindow;
 	JLabel encryptedIndicator;
 	JLabel warningIndicator;
 	UiField[] fields;

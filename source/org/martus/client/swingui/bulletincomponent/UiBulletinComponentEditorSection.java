@@ -44,23 +44,22 @@ public class UiBulletinComponentEditorSection extends UiBulletinComponentSection
 
 	public UiBulletinComponentEditorSection(UiMainWindow ownerToUse)
 	{
-		super(ownerToUse.getLocalization());
-		owner = ownerToUse;
+		super(ownerToUse);
 	}
 
 	public UiField createUnknownField()
 	{
-		return new UiUnknownViewer(localization);
+		return new UiUnknownViewer(getLocalization());
 	}
 	
 	public UiField createNormalField()
 	{
-		return new UiNormalTextEditor(localization);
+		return new UiNormalTextEditor(getLocalization());
 	}
 
 	public UiField createMultilineField()
 	{
-		return new UiMultilineTextEditor(localization);
+		return new UiMultilineTextEditor(getLocalization());
 	}
 
 	public UiField createChoiceField(ChoiceItem[] choices)
@@ -70,12 +69,12 @@ public class UiBulletinComponentEditorSection extends UiBulletinComponentSection
 
 	public UiField createDateField()
 	{		
-		return new UiDateEditor(localization);		
+		return new UiDateEditor(getLocalization());		
 	}
 	
 	public UiField createFlexiDateField()
 	{
-		return new UiFlexiDateEditor(localization);	
+		return new UiFlexiDateEditor(getLocalization());	
 	}
 
 	public UiField createBoolField()
@@ -95,10 +94,9 @@ public class UiBulletinComponentEditorSection extends UiBulletinComponentSection
 
 	public void createAttachmentTable()
 	{
-		attachmentEditor = new UiAttachmentEditor(owner);
+		attachmentEditor = new UiAttachmentEditor(getMainWindow());
 		add(attachmentEditor);
 	}
 
 	UiAttachmentEditor attachmentEditor;
-	UiMainWindow owner;
 }

@@ -44,33 +44,32 @@ public class UiBulletinComponentViewSection extends UiBulletinComponentSection
 
 	public UiBulletinComponentViewSection(UiMainWindow ownerToUse)
 	{
-		super(ownerToUse.getLocalization());
-		owner = ownerToUse;
+		super(ownerToUse);
 	}
 
 	public UiField createUnknownField()
 	{
-		return new UiUnknownViewer(localization);
+		return new UiUnknownViewer(getLocalization());
 	}
 	
 	public UiField createFlexiDateField()
 	{		
-		return new UiFlexiDateViewer(localization); 
+		return new UiFlexiDateViewer(getLocalization()); 
 	}
 	
 	public UiField createDateField()
 	{
-		return new UiDateViewer(localization);
+		return new UiDateViewer(getLocalization());
 	}
 	
 	public UiField createNormalField()
 	{
-		return new UiNormalTextViewer(localization);
+		return new UiNormalTextViewer(getLocalization());
 	}
 
 	public UiField createMultilineField()
 	{
-		return new UiMultilineViewer(localization);
+		return new UiMultilineViewer(getLocalization());
 	}
 
 	public UiField createChoiceField(ChoiceItem[] choices)
@@ -80,12 +79,12 @@ public class UiBulletinComponentViewSection extends UiBulletinComponentSection
 
 	public UiField createBoolField()
 	{
-		return new UiBoolViewer(localization);
+		return new UiBoolViewer(getLocalization());
 	}
 
 	public void createAttachmentTable()
 	{
-		attachmentViewer = new UiAttachmentViewer(owner);
+		attachmentViewer = new UiAttachmentViewer(getMainWindow());
 		add(attachmentViewer);
 	}
 
@@ -100,5 +99,4 @@ public class UiBulletinComponentViewSection extends UiBulletinComponentSection
 	}
 
 	public UiAttachmentViewer attachmentViewer;
-	UiMainWindow owner;
 }
