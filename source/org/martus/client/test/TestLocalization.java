@@ -164,6 +164,14 @@ public class TestLocalization extends TestCaseEnhanced
 		bd.addTranslation("en", "invalid-because-no-equals");
 		bd.addTranslation("en", "b:c=new\\nline");
 		assertEquals("new\nline", bd.getLabel("en", "b", "c"));
+		
+		String badHash = "ffff";
+		bd.addTranslation("xx", "-" + badHash + "-b:c=def");
+		assertEquals("<def>", bd.getLabel("xx", "b", "c"));
+		String goodHash = bd.getHashOfEnglish("b:c");
+		String goodMtfEntry = "-" + goodHash + "-b:c=def";
+		bd.addTranslation("xx", goodMtfEntry);
+		assertEquals("def", bd.getLabel("xx", "b", "c"));
 	}
 
 /*TODO: Evaluate whether any of these tests are still useful
@@ -224,7 +232,7 @@ public class TestLocalization extends TestCaseEnhanced
 		final String withNewlines = "d:e=f\ng\nh";
 		UiBasicLocalization minimalLocalization = new UiBasicLocalization(createTempDirectory(), new String[0]);
 		minimalLocalization.addTranslation("en", withNewlines);
-		assertContains("d:e=f\\ng\\nh", minimalLocalization.getAllTranslationStrings("en"));
+		assertContains("-25fb-d:e=f\\ng\\nh", minimalLocalization.getAllTranslationStrings("en"));
 	}
 
 	static UiLocalization bd;
