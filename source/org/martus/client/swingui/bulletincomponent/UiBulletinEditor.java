@@ -27,14 +27,17 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.swingui.bulletincomponent;
 
 import java.io.IOException;
+import java.text.DateFormat;
 
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.fields.UiBoolEditor;
 import org.martus.client.swingui.fields.UiDateEditor;
 import org.martus.client.swingui.fields.UiField;
+import org.martus.client.swingui.fields.UiFlexiDateEditor;
 import org.martus.common.bulletin.AttachmentProxy;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.crypto.MartusCrypto;
+import org.martus.common.utilities.MartusFlexidate;
 
 public class UiBulletinEditor extends UiBulletinComponent
 {
@@ -74,11 +77,20 @@ public class UiBulletinEditor extends UiBulletinComponent
 		
 		Bulletin tempBulletin = new Bulletin(owner.getApp().getSecurity());					
 		copyDataToBulletin(tempBulletin);
+			
+		String currentFieldText = null;
+			
 		for(int fieldNum = 0; fieldNum < fields.length; ++fieldNum)
 		{			
-			String fieldTag = fieldTags[fieldNum];
-			String oldFieldText =  currentBulletin.get(fieldTag);									
-			if (!oldFieldText.equals(tempBulletin.get(fieldTag)))
+			String fieldTag = fieldTags[fieldNum];			
+			String oldFieldText = currentBulletin.get(fieldTag);
+			
+			if (fields[fieldNum] instanceof UiFlexiDateEditor)							
+				currentFieldText = getBulletinFlexidateFormat(oldFieldText);					
+			else
+				currentFieldText = oldFieldText;		
+																								
+			if (!currentFieldText.equals(tempBulletin.get(fieldTag)))
 			{									
 				return true;
 			}																
@@ -92,6 +104,15 @@ public class UiBulletinEditor extends UiBulletinComponent
 			
 		return false;			
 	}	
+	
+	
+	private String getBulletinFlexidateFormat(String fieldValue)
+	{
+		MartusFlexidate martusFlexidate = MartusFlexidate.createFromMartusDateString(fieldValue);
+		DateFormat df = Bulletin.getStoredDateFormat();	
+		String storedDateFormat = df.format(martusFlexidate.getBeginDate());
+		return storedDateFormat+MartusFlexidate.DATE_RANGE_SEPARATER+martusFlexidate.getMatusFlexidate();		
+	}		
 	
 	private boolean isPublicAttachmentModified()
 	{
