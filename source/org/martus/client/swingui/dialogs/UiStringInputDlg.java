@@ -31,10 +31,9 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import org.martus.common.clientside.UiBasicLocalization;
 import org.martus.common.clientside.UiSingleTextField;
-import org.martus.swing.ParagraphLayout;
+import org.martus.swing.UiParagraphPanel;
 import org.martus.swing.UiWrappedTextArea;
 import org.martus.swing.Utilities;
 
@@ -54,26 +53,16 @@ public class UiStringInputDlg extends JDialog
 		JButton cancel = new JButton(localization.getButtonLabel("cancel"));
 		cancel.addActionListener(new CancelHandler());
 
-		getContentPane().setLayout(new ParagraphLayout());
+		UiParagraphPanel stringPanel = new UiParagraphPanel();
 		if(descriptionTag.length() > 0)
-		{
-			getContentPane().add(new JLabel(""), ParagraphLayout.NEW_PARAGRAPH);
-			getContentPane().add(new UiWrappedTextArea(localization.getFieldLabel(descriptionTag)));
-		}
+			stringPanel.addOnNewLine(new UiWrappedTextArea(localization.getFieldLabel(descriptionTag)));
 		if(rawDescriptionText.length() > 0)
-		{
-			getContentPane().add(new JLabel(""), ParagraphLayout.NEW_PARAGRAPH);
-			getContentPane().add(new UiWrappedTextArea(rawDescriptionText));
-			
-		}
-		getContentPane().add(new JLabel(""), ParagraphLayout.NEW_PARAGRAPH);
-		getContentPane().add(label);
-		getContentPane().add(new JLabel(""), ParagraphLayout.NEW_PARAGRAPH);
-		getContentPane().add(text);
-		getContentPane().add(new JLabel(""), ParagraphLayout.NEW_PARAGRAPH);
-		getContentPane().add(ok);
-		getContentPane().add(cancel);
-
+			stringPanel.addOnNewLine(new UiWrappedTextArea(rawDescriptionText));
+		stringPanel.addOnNewLine(label);
+		stringPanel.addOnNewLine(text);
+		stringPanel.addComponents(ok, cancel);
+		
+		getContentPane().add(stringPanel);
 		getRootPane().setDefaultButton(ok);
 
 		Utilities.centerDlg(this);

@@ -34,7 +34,7 @@ import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 import org.martus.common.clientside.CurrentUiState;
 import org.martus.common.clientside.UiBasicLocalization;
-import org.martus.swing.ParagraphLayout;
+import org.martus.swing.UiParagraphPanel;
 import org.martus.swing.UiRadioButton;
 import org.martus.swing.UiTabbedPane;
 import org.martus.swing.UiWrappedTextArea;
@@ -73,8 +73,7 @@ public class UiInitialSigninDlg extends UiSigninDlg
 	
 	JPanel createRecoverAccountPanel()
 	{
-		JPanel radioButtonPanel = new JPanel();
-		radioButtonPanel.setLayout(new ParagraphLayout());
+		UiParagraphPanel radioButtonPanel = new UiParagraphPanel();
 		radioBackupFile = new UiRadioButton(localization.getButtonLabel("RecoverAccountByBackup"), true);
 		radioBackupFile.setActionCommand("backupFile");
 		radioShare = new UiRadioButton(localization.getButtonLabel("RecoverAccountByShare"), false);
@@ -84,13 +83,12 @@ public class UiInitialSigninDlg extends UiSigninDlg
 		recoveryTypeGroup.add(radioBackupFile);
 		recoveryTypeGroup.add(radioShare);
 
-		radioButtonPanel.add(radioBackupFile, ParagraphLayout.NEW_PARAGRAPH);
-		radioButtonPanel.add(radioShare, ParagraphLayout.NEW_PARAGRAPH);
+		radioButtonPanel.addOnNewLine(radioBackupFile);
+		radioButtonPanel.addOnNewLine(radioShare);
 		
-		JPanel recoverAccountPanel = new JPanel();
-		recoverAccountPanel.setLayout(new ParagraphLayout());
-		recoverAccountPanel.add(new JLabel(localization.getFieldLabel("RecoverAccount")),ParagraphLayout.NEW_PARAGRAPH);
-		recoverAccountPanel.add(radioButtonPanel,ParagraphLayout.NEW_PARAGRAPH);
+		UiParagraphPanel recoverAccountPanel = new UiParagraphPanel();
+		recoverAccountPanel.addOnNewLine(new JLabel(localization.getFieldLabel("RecoverAccount")));
+		recoverAccountPanel.addOnNewLine(radioButtonPanel);
 		return recoverAccountPanel;
 	}
 	public void handleOk()

@@ -40,7 +40,6 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import javax.swing.Box;
 import javax.swing.JButton;
-import javax.swing.JPanel;
 import javax.swing.ListSelectionModel;
 import org.martus.client.core.MartusApp;
 import org.martus.client.core.TransferableAttachmentList;
@@ -50,20 +49,18 @@ import org.martus.client.swingui.UiScrollPane;
 import org.martus.common.bulletin.AttachmentProxy;
 import org.martus.common.bulletin.BulletinSaver;
 import org.martus.common.database.Database;
-import org.martus.swing.ParagraphLayout;
 import org.martus.swing.UiFileChooser;
+import org.martus.swing.UiParagraphPanel;
 import org.martus.swing.UiTable;
 import org.martus.swing.Utilities;
 
-public class UiAttachmentViewer extends JPanel  implements DragGestureListener, DragSourceListener
+public class UiAttachmentViewer extends UiParagraphPanel  implements DragGestureListener, DragSourceListener
 {
 	public UiAttachmentViewer(UiMainWindow mainWindowToUse)
 	{
 		mainWindow = mainWindowToUse;
 		app = mainWindow.getApp();
 		model = new AttachmentTableModel(mainWindow, attachmentTable);
-		ParagraphLayout layout = new ParagraphLayout();
-		setLayout(layout);
 
 		attachmentTable = new UiTable(model);
 		attachmentTable.createDefaultColumnsFromModel();

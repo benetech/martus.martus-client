@@ -27,19 +27,15 @@ package org.martus.client.swingui.dialogs;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JDialog;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.common.clientside.UiBasicLocalization;
-import org.martus.swing.ParagraphLayout;
 import org.martus.swing.UiCheckBox;
+import org.martus.swing.UiParagraphPanel;
 import org.martus.swing.UiWrappedTextArea;
 import org.martus.swing.Utilities;
 
@@ -70,15 +66,11 @@ public class UiPrintBulletinDlg extends JDialog implements ActionListener
 		hBoxButtons.add(ok);
 		hBoxButtons.add(cancel);
 		
-		JPanel panel = new JPanel();
+		UiParagraphPanel panel = new UiParagraphPanel();
 		panel.setBorder(new EmptyBorder(10,10,10,10));
-		panel.setLayout(new ParagraphLayout());
-		panel.add(new JLabel(""), ParagraphLayout.NEW_PARAGRAPH);
-		panel.add(new UiWrappedTextArea(localization.getFieldLabel("PrintPrivateDataMessage")));
-		panel.add(new JLabel(""), ParagraphLayout.NEW_PARAGRAPH);
-		panel.add(includePrivate);
-		panel.add(new JLabel(""), ParagraphLayout.NEW_PARAGRAPH);
-		panel.add(hBoxButtons);
+		panel.addOnNewLine(new UiWrappedTextArea(localization.getFieldLabel("PrintPrivateDataMessage")));
+		panel.addOnNewLine(includePrivate);
+		panel.addOnNewLine(hBoxButtons);
 	
 		getContentPane().add(panel);
 		getRootPane().setDefaultButton(ok);

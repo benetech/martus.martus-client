@@ -37,32 +37,26 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.util.List;
-
 import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.JComponent;
-import javax.swing.JPanel;
 import javax.swing.JTable;
-
 import org.martus.client.swingui.UiFocusListener;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.UiScrollPane;
 import org.martus.common.bulletin.AttachmentProxy;
 import org.martus.common.clientside.UiBasicLocalization;
-import org.martus.swing.ParagraphLayout;
 import org.martus.swing.UiFileChooser;
+import org.martus.swing.UiParagraphPanel;
 import org.martus.swing.UiTable;
 
 
 
-public class UiAttachmentEditor extends JPanel
+public class UiAttachmentEditor extends UiParagraphPanel
 {
 	public UiAttachmentEditor(UiMainWindow mainWindowToUse)
 	{
 		mainWindow = mainWindowToUse;
-		ParagraphLayout layout = new ParagraphLayout();
-		setLayout(layout);
-
 		model = new EditorAttachmentTableModel(mainWindow, attachmentTable);
 
 		attachmentTable = new UiTable(model);

@@ -29,16 +29,13 @@ package org.martus.client.swingui.dialogs;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
-
 import org.martus.client.swingui.UiLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.UiScrollPane;
@@ -48,9 +45,9 @@ import org.martus.common.bulletin.Bulletin;
 import org.martus.common.crypto.MartusCrypto;
 import org.martus.common.packet.BulletinHistory;
 import org.martus.common.packet.UniversalId;
-import org.martus.swing.ParagraphLayout;
+import org.martus.swing.UiParagraphPanel;
 import org.martus.swing.UiTable;
-import org.martus.swing.UiTextArea;
+import org.martus.swing.UiWrappedTextArea;
 import org.martus.swing.Utilities;
 import org.martus.util.Base64.InvalidBase64Exception;
 
@@ -67,12 +64,9 @@ public class UiBulletinDetailsDialog extends JDialog
 		
 		setTitle(getLocalization().getWindowTitle("BulletinDetailsDialog"));
 
-		JPanel panel = new JPanel();
-		panel.setLayout(new ParagraphLayout());
-		panel.add(new JLabel(getLabel("AuthorPublicCode")), ParagraphLayout.NEW_PARAGRAPH);
-		panel.add(createField(getPublicCode()));
-		panel.add(new JLabel(getLabel("BulletinId")), ParagraphLayout.NEW_PARAGRAPH);
-		panel.add(createField(bulletin.getLocalId()));
+		UiParagraphPanel panel = new UiParagraphPanel();
+		panel.addComponents(new JLabel(getLabel("AuthorPublicCode")), createField(getPublicCode()));
+		panel.addComponents(new JLabel(getLabel("BulletinId")),createField(bulletin.getLocalId()));
 
 		HQKeys hqKeys = bulletin.getAuthorizedToReadKeys();
 		if(hqKeys.size() > 0)
@@ -81,16 +75,14 @@ public class UiBulletinDetailsDialog extends JDialog
 			JComponent hqInfo = createField(hqText);
 			UiScrollPane hqScroller = createHeadquartersTable(hqKeys);
 
-			panel.add(new JLabel(""), ParagraphLayout.NEW_PARAGRAPH);
-			panel.add(hqInfo);
-			panel.add(new JLabel(getLabel("Headquarters")), ParagraphLayout.NEW_PARAGRAPH);
-			panel.add(hqScroller);
+			panel.addBlankLine();
+			panel.addOnNewLine(hqInfo);
+			panel.addComponents(new JLabel(getLabel("Headquarters")), hqScroller);
 		}
 		
 		UiScrollPane versionScroller = createHistoryTable();
 
-		panel.add(new JLabel(getLabel("History")), ParagraphLayout.NEW_PARAGRAPH);
-		panel.add(versionScroller);
+		panel.addComponents(new JLabel(getLabel("History")), versionScroller);
 		
 		JButton closeButton = new JButton(getLocalization().getButtonLabel("close"));
 		closeButton.addActionListener(new CloseHandler());
@@ -187,7 +179,7 @@ public class UiBulletinDetailsDialog extends JDialog
 
 	private JComponent createField(String text)
 	{
-		UiTextArea component = new UiTextArea(text);
+		UiWrappedTextArea component = new UiWrappedTextArea(text);
 		component.setEditable(false);
 		return component;
 	}

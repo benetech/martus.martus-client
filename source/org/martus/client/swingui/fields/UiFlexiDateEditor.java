@@ -27,25 +27,22 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.swingui.fields;
 
 import java.awt.BorderLayout;
-import java.awt.Dimension;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.text.DateFormat;
 import java.util.Date;
-
 import javax.swing.Box;
 import javax.swing.ButtonGroup;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-
 import org.martus.common.FieldSpec;
 import org.martus.common.StandardFieldSpecs;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.clientside.UiBasicLocalization;
 import org.martus.common.utilities.MartusFlexidate;
-import org.martus.swing.ParagraphLayout;
 import org.martus.swing.UiComboBox;
+import org.martus.swing.UiParagraphPanel;
 import org.martus.swing.UiRadioButton;
 
 public class UiFlexiDateEditor extends UiField
@@ -61,8 +58,7 @@ public class UiFlexiDateEditor extends UiField
 	{
 		component = new JPanel();
 		component.setLayout(new BorderLayout());		
-				
-		Box boxDateSelection = Box.createHorizontalBox();				
+		UiParagraphPanel dateSelection = new UiParagraphPanel();				
 		exactDateRB = new UiRadioButton(localization.getFieldLabel("DateExact"), true);			
 		flexiDateRB = new UiRadioButton(localization.getFieldLabel("DateRange"));		
 
@@ -70,40 +66,35 @@ public class UiFlexiDateEditor extends UiField
 		radioGroup.add(exactDateRB);
 		radioGroup.add(flexiDateRB);		
 
-		boxDateSelection.add(exactDateRB);
-		boxDateSelection.add(flexiDateRB);			
+		dateSelection.addComponents(exactDateRB, flexiDateRB);
 						
 		flexiDateRB.addItemListener(new RadioItemListener());
 		exactDateRB.addItemListener(new RadioItemListener());
-		
-		component.add(boxDateSelection, BorderLayout.NORTH);
-		component.add(buildExactDatePanel(), BorderLayout.CENTER);	
+		component.add(dateSelection, BorderLayout.NORTH);
+		component.add(buildExactDatePanel(), BorderLayout.CENTER);
 	}
 	
 	private JPanel buildFlexiDatePanel()
 	{	
-		flexiDatePanel = new JPanel();
-		flexiDatePanel.setLayout(new ParagraphLayout());	
-											
-		flexiDatePanel.add(new JLabel(localization.getFieldLabel("DateRangeFrom")));		
-		flexiDatePanel.add(buildBeginDateBox());
-				
-		flexiDatePanel.add(new JLabel(localization.getFieldLabel("DateRangeTo")));			
-		flexiDatePanel.add(buildEndDateBox());
-		
+		UiParagraphPanel beginDate = new UiParagraphPanel();
+		beginDate.addComponents(new JLabel(localization.getFieldLabel("DateRangeFrom")), buildBeginDateBox());		
+		UiParagraphPanel endDate = new UiParagraphPanel();
+		endDate.addComponents(new JLabel(localization.getFieldLabel("DateRangeTo")), buildEndDateBox());
+
+		flexiDatePanel = new UiParagraphPanel();
+		flexiDatePanel.addComponents(beginDate, endDate);
 		return flexiDatePanel;
 	}
 	
 	private JPanel buildExactDatePanel()
 	{		
-		extDatePanel = new JPanel();		
-		extDatePanel.setLayout(new ParagraphLayout());
-																
-		JLabel dummy = new JLabel(localization.getFieldLabel("DateRangeFrom"));		
-		extDatePanel.add(dummy);					
-		extDatePanel.add( buildBeginDateBox());			
-		dummy.setForeground(component.getBackground());		
-				
+		UiParagraphPanel singleDatePanel = new UiParagraphPanel();
+		JLabel exactDateLabel = new JLabel(localization.getFieldLabel("DateRangeFrom"));		
+		singleDatePanel.addComponents(exactDateLabel,  buildBeginDateBox());					
+		exactDateLabel.setForeground(component.getBackground());		
+
+		extDatePanel = new UiParagraphPanel();		
+		extDatePanel.addOnNewLine(singleDatePanel);
 		return extDatePanel;			
 	}
 				
@@ -193,10 +184,8 @@ public class UiFlexiDateEditor extends UiField
 	
 	void removeFlexidatePanel()
 	{
-		Dimension d = component.getSize();									
 		component.remove(flexiDatePanel);						
 		component.add(buildExactDatePanel());
-		component.setPreferredSize(d);									
 		component.revalidate();		
 	}
 
@@ -300,8 +289,8 @@ public class UiFlexiDateEditor extends UiField
 	private UiBasicLocalization localization;	
 	private UiRadioButton 		exactDateRB;
 	private UiRadioButton 		flexiDateRB;
-	private JPanel 				flexiDatePanel;
-	private JPanel 				extDatePanel;
+	private UiParagraphPanel 	flexiDatePanel;
+	private UiParagraphPanel 	extDatePanel;
 	private Box					bgDateBox = null;
 	private Box					endDateBox = null;
 	private FieldSpec			spec;
