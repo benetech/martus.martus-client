@@ -744,6 +744,7 @@ public class ClientBulletinStore extends BulletinStore
 				{
 					db.scrubRecord(key);
 					db.discardRecord(key);
+					clearLeafKeyCache();
 				}
 				catch (Exception e)
 				{				
@@ -961,6 +962,7 @@ public class ClientBulletinStore extends BulletinStore
 					try
 					{
 						db.moveRecordToQuarantine(key);
+						clearLeafKeyCache();
 					}
 					catch (RecordHiddenException shouldNeverHappen)
 					{

@@ -1469,11 +1469,13 @@ public class TestClientBulletinStore extends TestCaseEnhanced
 		assertEquals("found a bad bulletin in an empty database?", 0, store.quarantineUnreadableBulletins());
 		Bulletin b1 = store.createEmptyBulletin();
 		store.saveBulletin(b1);
+		assertEquals("not one leaf?", 1, store.scanForLeafKeys().size());
 		assertEquals("quarantined a good record?", 0, store.quarantineUnreadableBulletins());
 		corruptBulletinHeader(b1);
 		assertEquals("didn't claim to quarantine 1 record?", 1, store.quarantineUnreadableBulletins());
 		DatabaseKey key = DatabaseKey.createLegacyKey(b1.getUniversalId());
 		assertTrue("didn't actually quarantine our record?", store.getDatabase().isInQuarantine(key));
+		assertEquals("didn't update leaf?", 0, store.scanForLeafKeys().size());
 	}
 
 	public void testQuarantineUnreadableBulletinsMany() throws Exception
