@@ -951,13 +951,13 @@ public class BulletinStore
 				return super.startElement(tag);
 		}
 
-		public void endElement(SimpleXmlDefaultLoader ended)
+		public void endElement(String tag, SimpleXmlDefaultLoader ended)
 			throws SAXParseException
 		{
-			if(ended.getTag().equals(MartusClientXml.tagFolder))
+			if(tag.equals(MartusClientXml.tagFolder))
 				;
 			else
-				super.endElement(ended);
+				super.endElement(tag, ended);
 		}
 		
 		BulletinStore store;
@@ -1003,10 +1003,10 @@ public class BulletinStore
 				return super.startElement(tag);
 		}
 
-		public void endElement(SimpleXmlDefaultLoader ended)
+		public void endElement(String tag, SimpleXmlDefaultLoader ended)
 			throws SAXParseException
 		{
-			if(ended.getTag().equals(MartusClientXml.tagId))
+			if(tag.equals(MartusClientXml.tagId))
 			{
 				String uidText = ((SimpleXmlStringLoader)ended).getText();
 				try
@@ -1026,7 +1026,7 @@ public class BulletinStore
 				}
 			}
 			else
-				super.endElement(ended);
+				super.endElement(tag, ended);
 		}
 		
 		BulletinStore store;
