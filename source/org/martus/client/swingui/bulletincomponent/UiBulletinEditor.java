@@ -66,22 +66,85 @@ public class UiBulletinEditor extends UiBulletinComponent
 			}
 		}
 	}
-
-
-	public void copyDataToBulletin(Bulletin bulletin) throws
+	
+	public void contentDataHasChanged() throws
 		IOException,
 		MartusCrypto.EncryptionException
-	{
-		bulletin.clear();
+	{				
+		Bulletin tempBulletin = new Bulletin(owner.getApp().getSecurity());		
+		setBulletinModified(false);	
 
 		boolean isAllPrivate = false;
 		if(allPrivateField.getText().equals(UiField.TRUESTRING))
 			isAllPrivate = true;
-
-		bulletin.setAllPrivate(isAllPrivate);
+			
+		tempBulletin.setAllPrivate(isAllPrivate);
 		for(int fieldNum = 0; fieldNum < fields.length; ++fieldNum)
 		{
-			bulletin.set(fieldTags[fieldNum], fields[fieldNum].getText());
+			String fieldTag = fieldTags[fieldNum];
+			String oldFieldText =  currentBulletin.get(fieldTag);			
+						
+			tempBulletin.set(fieldTag, fields[fieldNum].getText());
+			if (!oldFieldText.equals(tempBulletin.get(fieldTag)))
+			{	
+				setBulletinModified(true);								
+				return;
+			}																
+		}		
+		
+		if (contentDataPublicSectionHasChanged() ||
+		    contentDataPrivateSectionHasChanged())
+		{	
+			setBulletinModified(true);								
+			return;
+		}				
+	}
+	
+	private boolean contentDataPrivateSectionHasChanged()
+	{
+		UiBulletinComponentEditorSection privateSection = (UiBulletinComponentEditorSection)privateStuff;
+		AttachmentProxy[] privateAttachments = privateSection.attachmentEditor.getAttachments();
+		AttachmentProxy[] currentPrivateAttachments = currentBulletin.getPrivateAttachments();
+	
+		for(int aIndex = 0; aIndex < privateAttachments.length; ++aIndex)
+		{
+			if (!privateAttachments[aIndex].getLabel().equals(currentPrivateAttachments[aIndex].getLabel()))
+					return true;
+		}
+		return false;
+	}
+	
+	private boolean contentDataPublicSectionHasChanged()
+	{
+		UiBulletinComponentEditorSection publicSection = (UiBulletinComponentEditorSection)publicStuff;
+		AttachmentProxy[] publicAttachments = publicSection.attachmentEditor.getAttachments();
+		AttachmentProxy[] currentPublicAttachments = currentBulletin.getPublicAttachments();
+		
+		if (publicAttachments.length != currentPublicAttachments.length)						
+			return true;
+		
+		for(int aIndex = 0; aIndex < publicAttachments.length; ++aIndex)
+		{			
+			if (!publicAttachments[aIndex].getLabel().equals(currentPublicAttachments[aIndex].getLabel()))
+					return true;
+		}
+		
+		return false;
+	}
+
+	public void copyDataToBulletin(Bulletin bulletin) throws
+		IOException,
+		MartusCrypto.EncryptionException
+	{				
+		bulletin.clear();
+			
+		boolean isAllPrivate = false;
+		if(allPrivateField.getText().equals(UiField.TRUESTRING))
+			isAllPrivate = true;
+		bulletin.setAllPrivate(isAllPrivate);
+		for(int fieldNum = 0; fieldNum < fields.length; ++fieldNum)
+		{						
+			bulletin.set(fieldTags[fieldNum], fields[fieldNum].getText());													
 		}
 
 		UiBulletinComponentEditorSection publicSection = (UiBulletinComponentEditorSection)publicStuff;
@@ -100,7 +163,7 @@ public class UiBulletinEditor extends UiBulletinComponent
 			bulletin.addPrivateAttachment(a);
 		}
 
-	}
+	}	
 
 	public UiField createBoolField()
 	{

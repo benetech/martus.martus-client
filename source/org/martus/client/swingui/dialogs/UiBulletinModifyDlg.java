@@ -130,16 +130,21 @@ public class UiBulletinModifyDlg extends JFrame implements ActionListener, Windo
 	}
 
 	public void actionPerformed(ActionEvent ae)
-	{
-		if(ae.getSource() == cancel)
-		{
-			closeWindowUponConfirmation();
-			return;
-		}
+	{		
+
 		try
-		{
+		{			
 			view.validateData();
-			view.copyDataToBulletin(bulletin);
+			if(ae.getSource() == cancel)
+			{
+				view.contentDataHasChanged();
+				if (!view.isBulletinModified())			
+					cleanupAndExit();				
+				else					
+				  closeWindowUponConfirmation();
+				return;
+			}	
+			view.copyDataToBulletin(bulletin);			
 		}
 		catch(UiDateEditor.DateFutureException e)
 		{
@@ -277,7 +282,7 @@ public class UiBulletinModifyDlg extends JFrame implements ActionListener, Windo
 	}
 
 	private void closeWindowUponConfirmation()
-	{
+	{	
 		if(observer.confirmDlg(this, "CancelModifyBulletin"))
 		{
 			cancelHandler.onCancel(observer.getStore(), bulletin);
@@ -325,6 +330,6 @@ public class UiBulletinModifyDlg extends JFrame implements ActionListener, Windo
 	JButton cancel;
 
 	boolean wasBulletinSavedFlag;
-	CancelHandler cancelHandler;
+	CancelHandler cancelHandler;	
 }
 
