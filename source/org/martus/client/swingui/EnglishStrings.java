@@ -474,6 +474,7 @@ public class EnglishStrings
 "field:BackupKeyPairToSecretShareInformation=This method breaks up your keypair into #M# 'secret share' pieces, any #N# of which will be required to reconstruct the keypair without requiring a password.  If you forget your login name or your password, this method is the only way you can recover your keypair.\n\nOnce the #M# files have been written to removable media disks, you should distribute them to #M# different people whom you will remember, but each of whom don’t know who you have given the other secret share files to.  Do not store any of the disks together.\n\nTo restore this keypair, first retrieve any #N# of the original #M# floppies, and then select 'Restore Account' and 'Recover account from multiple disks' when signing into Martus.\n",
 "field:BulletinId=Bulletin Id:",
 "field:BulletinLastSaved=Last Saved ",
+"field:BulletinWasSent=Sent",
 "field:preferencesAllPrivate=Prevent creating public bulletins",
 
 "field:VirtualUserNameDescription=(Enter using regular keyboard)",
@@ -751,6 +752,9 @@ public class EnglishStrings
 "field:DateRangeTo=and",
 "field:DateExact=Exact Date",
 "field:DateRange=Date Range",
+
+"field:WasSentYes=Yes",
+"field:WasSentNo=No",
 
 "folder:%OutBox=Outbox",
 "folder:%Sent=Sent Bulletins",

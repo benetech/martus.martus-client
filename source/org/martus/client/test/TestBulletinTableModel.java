@@ -30,6 +30,7 @@ import org.martus.client.core.BulletinFolder;
 import org.martus.client.core.BulletinStore;
 import org.martus.client.swingui.bulletintable.BulletinTableModel;
 import org.martus.common.bulletin.Bulletin;
+import org.martus.common.bulletin.BulletinConstants;
 import org.martus.common.clientside.test.MockUiLocalization;
 import org.martus.common.database.MockClientDatabase;
 import org.martus.common.packet.UniversalId;
@@ -59,60 +60,48 @@ public class TestBulletinTableModel extends TestCaseEnhanced
 		super.tearDown();
 	}
 	
-	public void test() throws Exception
+	public void testColumnTags()
 	{
-		doTestColumns();
-		doTestFieldNames();
-		doTestRows();
-		doTestGetBulletin();
-		doTestGetValueAt();
-		doTestSetFolder();
-		doTestFindBulletin();
-		doTestSortByColumn();
-		doTestHtmlTags();
+		BulletinTableModel list = new BulletinTableModel(localization);
+		list.setFolder(folderSent);
+
+		assertEquals("column count", 6, list.getColumnCount());
+		assertEquals("status", list.getFieldName(STATUS));
+		assertEquals("BulletinWasSent", list.getFieldName(WASSENT));
+		assertEquals("eventdate", list.getFieldName(EVENTDATE));
+		assertEquals("title", list.getFieldName(TITLE));
+		assertEquals("author", list.getFieldName(AUTHOR));
+		assertEquals("BulletinLastSaved", list.getFieldName(SAVEDDATE));
 	}
 
-    public void doTestColumns()
+    public void testColumnLabels()
     {
 		BulletinTableModel list = new BulletinTableModel(localization);
 		list.setFolder(folderSent);
 
-		assertEquals("column count", 5, list.getColumnCount());
-		assertEquals(localization.getFieldLabel("status"), list.getColumnName(0));
-		assertEquals(localization.getFieldLabel("eventdate"), list.getColumnName(1));
-		assertEquals(localization.getFieldLabel("title"), list.getColumnName(2));
-		assertEquals(localization.getFieldLabel("author"), list.getColumnName(3));
-		assertEquals(localization.getFieldLabel("BulletinLastSaved"), list.getColumnName(4));
+		assertEquals(localization.getFieldLabel(BulletinConstants.TAGSTATUS), list.getColumnName(STATUS));
+		assertEquals(localization.getFieldLabel(BulletinConstants.TAGWASSENT), list.getColumnName(WASSENT));
+		assertEquals(localization.getFieldLabel(BulletinConstants.TAGEVENTDATE), list.getColumnName(EVENTDATE));
+		assertEquals(localization.getFieldLabel(BulletinConstants.TAGTITLE), list.getColumnName(TITLE));
+		assertEquals(localization.getFieldLabel(BulletinConstants.TAGAUTHOR), list.getColumnName(AUTHOR));
+		assertEquals(localization.getFieldLabel(BulletinConstants.TAGLASTSAVED), list.getColumnName(SAVEDDATE));
 	}
 
-	public void doTestFieldNames()
-	{
-		BulletinTableModel list = new BulletinTableModel(localization);
-		list.setFolder(folderSent);
-
-		assertEquals("column count", 5, list.getColumnCount());
-		assertEquals("status", list.getFieldName(0));
-		assertEquals("eventdate", list.getFieldName(1));
-		assertEquals("title", list.getFieldName(2));
-		assertEquals("author", list.getFieldName(3));
-		assertEquals("BulletinLastSaved", list.getFieldName(4));
-	}
-
-	public void doTestRows()
+	public void testRows()
 	{
 		BulletinTableModel list = new BulletinTableModel(localization);
 		list.setFolder(folderSent);
 
 		assertEquals(store.getBulletinCount(), list.getRowCount());
 		Bulletin b = list.getBulletin(2);
-		assertEquals(b.get("author"), list.getValueAt(2, 3));
+		assertEquals(b.get(BulletinConstants.TAGAUTHOR), list.getValueAt(2, AUTHOR));
 
 		b = list.getBulletin(4);
-		String displayDate = localization.convertStoredDateToDisplay(b.get("eventdate"));
-		assertEquals(displayDate, list.getValueAt(4, 1));
+		String displayDate = localization.convertStoredDateToDisplay(b.get(BulletinConstants.TAGEVENTDATE));
+		assertEquals(displayDate, list.getValueAt(4, EVENTDATE));
     }
 
-	public void doTestGetBulletin()
+	public void testGetBulletin()
 	{
 		BulletinTableModel list = new BulletinTableModel(localization);
 		list.setFolder(folderSent);
@@ -124,7 +113,7 @@ public class TestBulletinTableModel extends TestCaseEnhanced
 		}
 	}
 
-	public void doTestGetValueAt() throws Exception
+	public void testGetValueAt() throws Exception
 	{
 		BulletinTableModel list = new BulletinTableModel(localization);
 		list.setFolder(folderSent);
@@ -136,26 +125,27 @@ public class TestBulletinTableModel extends TestCaseEnhanced
 		store.saveBulletin(b);
 
 		assertEquals(Bulletin.STATUSSEALED, b.getStatus());
-		assertEquals(localization.getStatusLabel("sealed"), list.getValueAt(0,0));
+		assertEquals(localization.getStatusLabel("sealed"), list.getValueAt(0,STATUS));
 
-		b.set("eventdate", "1999-04-15");
+		b.set(BulletinConstants.TAGEVENTDATE, "1999-04-15");
 		store.saveBulletin(b);
 		String displayDate = localization.convertStoredDateToDisplay("1999-04-15");
-		assertEquals(displayDate, list.getValueAt(0,1));
+		assertEquals(displayDate, list.getValueAt(0,EVENTDATE));
 
-		assertEquals("xyz", b.get("title"));
-		assertEquals("xyz", list.getValueAt(0,2));
+		assertEquals("xyz", b.get(BulletinConstants.TAGTITLE));
+		assertEquals("xyz", list.getValueAt(0,TITLE));
 
 		b.setDraft();
 		store.saveBulletin(b);
-		assertEquals(localization.getStatusLabel("draft"), list.getValueAt(0,0));
+		assertEquals(localization.getStatusLabel("draft"), list.getValueAt(0,STATUS));
 		b.setSealed();
 		store.saveBulletin(b);
-		assertEquals(localization.getStatusLabel("sealed"), list.getValueAt(0,0));
+		assertEquals(localization.getStatusLabel("sealed"), list.getValueAt(0,STATUS));
 
+//		assertEquals(localization.getFieldLabel("WasSentNo"), list.getValueAt(0, WASSENT));
 	}
 
-	public void doTestSetFolder()
+	public void testSetFolder()
 	{
 		BulletinTableModel list = new BulletinTableModel(localization);
 		assertEquals(0, list.getRowCount());
@@ -170,7 +160,7 @@ public class TestBulletinTableModel extends TestCaseEnhanced
 		assertEquals(0, list.getRowCount());
 	}
 
-	public void doTestFindBulletin() throws Exception
+	public void testFindBulletin() throws Exception
 	{
 		BulletinTableModel list = new BulletinTableModel(localization);
 		list.setFolder(folderSent);
@@ -190,13 +180,13 @@ public class TestBulletinTableModel extends TestCaseEnhanced
 		assertEquals(-1, list.findBulletin(b.getUniversalId()));
 	}
 
-	public void doTestSortByColumn()
+	public void testSortByColumn()
 	{
 		BulletinTableModel list = new BulletinTableModel(localization);
 		list.setFolder(folderSent);
 
-		String tag = "eventdate";
-		int col = 1;
+		String tag = BulletinConstants.TAGEVENTDATE;
+		int col = EVENTDATE;
 		assertEquals(tag, list.getFieldName(col));
 		assertEquals(tag, folderSent.sortedBy());
 		String first = (String)list.getValueAt(0, col);
@@ -205,22 +195,29 @@ public class TestBulletinTableModel extends TestCaseEnhanced
 		assertEquals(false, first.equals(list.getValueAt(0,col)));
 	}
 	
-	public void doTestHtmlTags() throws Exception
+	public void testHtmlTags() throws Exception
 	{
 		BulletinTableModel list = new BulletinTableModel(localization);
 		list.setFolder(folderSent);
 
 		Bulletin b = list.getBulletin(0);
-		b.set("title", "<HTML><body><H1><center>Charles</center></H1></BODY></HTML>");
+		b.set(BulletinConstants.TAGTITLE, "<HTML><body><H1><center>Charles</center></H1></BODY></HTML>");
 
 		store.saveBulletin(b);
-		assertEquals(" <HTML><body><H1><center>Charles</center></H1></BODY></HTML>", list.getValueAt(0,2));
+		assertEquals(" <HTML><body><H1><center>Charles</center></H1></BODY></HTML>", list.getValueAt(0,TITLE));
 		
 		b = list.getBulletin(0);
-		assertEquals("<HTML><body><H1><center>Charles</center></H1></BODY></HTML>", b.get("title"));
+		assertEquals("<HTML><body><H1><center>Charles</center></H1></BODY></HTML>", b.get(BulletinConstants.TAGTITLE));
 
 
 	}
+	
+	private static final int STATUS = 0;
+	private static final int WASSENT = 1;
+	private static final int EVENTDATE = 2;
+	private static final int TITLE = 3;
+	private static final int AUTHOR = 4;
+	private static final int SAVEDDATE = 5;
 
 	MockMartusApp app;
 	MockUiLocalization localization;

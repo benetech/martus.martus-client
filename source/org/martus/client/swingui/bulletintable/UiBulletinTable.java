@@ -86,9 +86,10 @@ public class UiBulletinTable extends JTable implements ListSelectionListener, Dr
 		model = new BulletinTableModel(mainWindow.getLocalization());
 		setModel(model);
 
-		// set widths for first two columns (status and date)
+		// set widths for first three columns (status, wassent, and date)
 		setColumnWidthToHeaderWidth(this,0);
 		setColumnWidthToHeaderWidth(this, 1);
+		setColumnWidthToHeaderWidth(this, 2);
 //		setColumnWidthToHeaderWidth(this, 4);
 
 		addMouseListener(new TableMouseAdapter());
