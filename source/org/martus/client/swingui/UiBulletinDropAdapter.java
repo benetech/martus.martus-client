@@ -28,7 +28,6 @@ package org.martus.client.swingui;
 
 import java.awt.Cursor;
 import java.awt.Point;
-import java.awt.Toolkit;
 import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.Transferable;
 import java.awt.dnd.DropTargetDragEvent;
@@ -89,8 +88,7 @@ public abstract class UiBulletinDropAdapter implements DropTargetListener
 		if(dtde.isDataFlavorSupported(TransferableBulletinList.getBulletinListDataFlavor()))
 			dropTransferableBulletins(dtde);
 		else if(dtde.isDataFlavorSupported(DataFlavor.javaFileListFlavor))
-			dropFile(dtde);
-
+			dropFiles(dtde);
 		observer.resetCursor(originalCursor);
 	}
 
@@ -155,13 +153,10 @@ public abstract class UiBulletinDropAdapter implements DropTargetListener
 		dtde.dropComplete(worked);
 		observer.resetCursor(originalCursor);
 		if(!worked)
-		{
-			Toolkit.getDefaultToolkit().beep();
-			observer.notifyDlg(observer, "DropErrorNotAllowed");
-		}
+			observer.notifyDlgBeep(observer, "DropErrorNotAllowed");
 	}
 
-	private void dropFile(DropTargetDropEvent dtde)
+	private void dropFiles(DropTargetDropEvent dtde)
 	{
 		System.out.println("dropFile");
 		BulletinFolder toFolder = getFolder(dtde.getLocation());
@@ -194,34 +189,34 @@ public abstract class UiBulletinDropAdapter implements DropTargetListener
 			return;
 		}
 
-		File file = (File)list.get(0);
-		System.out.println(file.getPath());
-
 		String resultMessageTag = null;
-
-		try
-		{
-			attemptDropFile(file, toFolder);
+		int filesDropped = 0;
+		for(int i = 0; i < list.size(); ++i)
+		{	
+			File file = (File)list.get(i);
+			//System.out.println(file.getPath());
+	
+			try
+			{
+				attemptDropFile(file, toFolder);
+				++filesDropped;
+			}
+			catch (StatusNotAllowedException e)
+			{
+				resultMessageTag = "DropErrorNotAllowed";
+			}
+			catch(Exception e)
+			{
+				e.printStackTrace();
+				System.out.println("dropFile Exception:" + e);
+				resultMessageTag = "DropErrors";
+			}
 		}
-		catch (StatusNotAllowedException e)
-		{
-			resultMessageTag = "DropErrorNotAllowed";
-		}
-		catch(Exception e)
-		{
-			e.printStackTrace();
-			System.out.println("dropFile Exception:" + e);
-			resultMessageTag = "DropErrors";
-		}
-
-		boolean worked = (resultMessageTag == null);
+		boolean worked = (filesDropped == list.size());
 		dtde.dropComplete(worked);
 
 		if(!worked)
-		{
-			Toolkit.getDefaultToolkit().beep();
-			observer.notifyDlg(observer, resultMessageTag);
-		}
+			observer.notifyDlgBeep(observer, resultMessageTag);
 	}
 
 	public void attemptDropFile(File file, BulletinFolder toFolder) throws

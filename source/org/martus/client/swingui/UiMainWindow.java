@@ -482,6 +482,12 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		return UiUtilities.confirmDlg(parent, title, contents, buttons);
 	}
 
+	public void notifyDlgBeep(JFrame parent, String baseTag)
+	{			
+		Toolkit.getDefaultToolkit().beep();
+		notifyDlg(parent, baseTag);
+	}
+	
 	public void notifyDlg(JFrame parent, String baseTag)
 	{
 		HashMap emptyTokenReplacement = new HashMap();
