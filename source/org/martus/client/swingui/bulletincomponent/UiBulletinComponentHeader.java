@@ -30,6 +30,9 @@ import java.awt.BorderLayout;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.DateFormat;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.Vector;
 
@@ -37,6 +40,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.border.EtchedBorder;
 
 import org.martus.client.swingui.UiLocalization;
 import org.martus.client.swingui.UiMainWindow;
@@ -58,13 +62,59 @@ public class UiBulletinComponentHeader extends UiBulletinComponentSection
 		setSectionIconAndTitle(iconFileName, localization.getFieldLabel("BulletinViewHeading"));
 
 		summary = new HqSummary(mainWindow, tagQualifierToUse);
-		add(new JLabel(""), ParagraphLayout.NEW_PARAGRAPH);
 		add(summary);
+		
+		bulletinLastSaved = new LastSaved(mainWindow);
+		add(new JLabel(""), ParagraphLayout.NEW_PARAGRAPH);
+		add(bulletinLastSaved);
 	}
 
 	public void setHqKeys(Vector hqKeys)
 	{
 		summary.setHqKeys(hqKeys);
+	}
+	
+	public void setLastSaved(long time)
+	{
+		if(time == 0)
+		{
+			bulletinLastSaved.setVisible(false);
+		}
+		else
+		{
+			bulletinLastSaved.setTime(time);
+			bulletinLastSaved.setVisible(true);
+		}
+	}
+	
+	static class LastSaved extends JPanel
+	{
+		LastSaved(UiMainWindow mainWindowToUse)
+		{
+			mainWindow = mainWindowToUse;
+			add(new JLabel(getLocalization().getFieldLabel("BulletinLastSaved")));
+			dateTime = new JLabel("");
+			EtchedBorder b = new EtchedBorder();
+			dateTime.setBorder(b);
+			add(dateTime);
+		}
+		
+		void setTime(long time)
+		{
+			Calendar cal = new GregorianCalendar();
+			cal.setTimeInMillis(time);		
+			String rawDateTime = DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT).format(cal.getTime());
+			String formatted = getLocalization().convertStoredDateTimeToDisplay(rawDateTime);
+			dateTime.setText("  " + formatted + "  ");
+		}
+		
+		UiLocalization getLocalization()
+		{
+			return mainWindow.getLocalization();
+		}
+		
+		UiMainWindow mainWindow;
+		JLabel dateTime;
 	}
 
 	static class HqSummary extends JPanel
@@ -160,4 +210,5 @@ public class UiBulletinComponentHeader extends UiBulletinComponentSection
 	}
 
 	HqSummary summary;
+	LastSaved bulletinLastSaved;
 }

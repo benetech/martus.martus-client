@@ -39,7 +39,6 @@ public class UiStatusBar extends JPanel
 	public UiStatusBar(UiLocalization localization)
 	{
 		super();
-		local = localization;
 		setLayout( new BoxLayout( this, BoxLayout.X_AXIS) );
 
 		Box statusBarBox = Box.createHorizontalBox();
@@ -53,13 +52,6 @@ public class UiStatusBar extends JPanel
 		bulletinId.setBorder(new EtchedBorder());
 		statusBarBox.add(bulletinId);
 		
-		statusBarBox.add(new JLabel(" "+localization.getFieldLabel("BulletinLastSaved")));
-		bulletinLastSaved = new JTextField(15);
-		bulletinLastSaved.setMaximumSize(bulletinId.getPreferredSize());
-		bulletinLastSaved.setEditable(false);
-		bulletinLastSaved.setBorder(new EtchedBorder());
-		statusBarBox.add(bulletinLastSaved);
-		
 		add(statusBarBox);
 	}
 	
@@ -68,12 +60,6 @@ public class UiStatusBar extends JPanel
 		bulletinId.setText(id);
 	}
 	
-	public void setBulletinLastSaved(String time)
-	{		
-		String dateTime = local.convertStoredDateTimeToDisplay(time);
-		bulletinLastSaved.setText(dateTime);
-	}
-
 	public UiProgressMeter getBackgroundProgressMeter()
 	{
 		return backgroundProgressMeter;
@@ -81,7 +67,4 @@ public class UiStatusBar extends JPanel
 
 	private UiProgressMeter backgroundProgressMeter;
 	private JTextField bulletinId;
-	
-	private JTextField bulletinLastSaved;
-	private UiLocalization local;
 }
