@@ -243,6 +243,8 @@
 #_______________=Yes
 -5397-button:yes=ใช่
 
+field:translationVersion= ไทย 2.0.1
+
 #_______________________________=Account Directory: 
 -c354-field:AccountInfoDirectory=โฟลเดอร์ของชื่อบัญชี:
 

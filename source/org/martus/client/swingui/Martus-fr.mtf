@@ -72,7 +72,7 @@
 #      <GridSpecDetails>, </GridSpecDetails>, <Column>, </Column>
 #
 
-field:translationVersion= Français 2.01
+field:translationVersion= Français 2.0.1
 
 #________________________=Show all bulletins on this server and on this computer.
 -e9a2-button:AllSummaries=Afficher tous les communiqués sur ce serveur et sur cet ordinateur.
