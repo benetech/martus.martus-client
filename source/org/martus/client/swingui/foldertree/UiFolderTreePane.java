@@ -39,7 +39,7 @@ import org.martus.client.core.ClientBulletinStore;
 import org.martus.client.swingui.UiLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.UiPopupMenu;
-import org.martus.client.swingui.UiScrollPane;
+import org.martus.swing.UiScrollPane;
 
 public class UiFolderTreePane extends UiScrollPane
 {

@@ -32,8 +32,8 @@ import javax.swing.JComponent;
 import javax.swing.JViewport;
 
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.client.swingui.UiScrollPane;
 import org.martus.common.bulletin.Bulletin;
+import org.martus.swing.UiScrollPane;
 
 public class UiBulletinPreviewPane extends UiScrollPane
 {

@@ -51,7 +51,6 @@ import javax.swing.table.TableModel;
 
 import org.martus.client.core.MartusApp;
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.client.swingui.UiScrollPane;
 import org.martus.common.HQKey;
 import org.martus.common.HQKeys;
 import org.martus.common.HQKeys.HQsException;
@@ -59,6 +58,7 @@ import org.martus.common.clientside.UiBasicLocalization;
 import org.martus.common.clientside.UiSingleTextField;
 import org.martus.common.crypto.MartusCrypto;
 import org.martus.swing.UiFileChooser;
+import org.martus.swing.UiScrollPane;
 import org.martus.swing.UiTable;
 import org.martus.swing.Utilities;
 import org.martus.util.Base64.InvalidBase64Exception;

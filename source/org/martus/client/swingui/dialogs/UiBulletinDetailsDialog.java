@@ -34,11 +34,12 @@ import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 import org.martus.client.swingui.UiLocalization;
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.client.swingui.UiScrollPane;
 import org.martus.common.HQKey;
 import org.martus.common.HQKeys;
 import org.martus.common.bulletin.Bulletin;
@@ -46,6 +47,7 @@ import org.martus.common.crypto.MartusCrypto;
 import org.martus.common.packet.BulletinHistory;
 import org.martus.common.packet.UniversalId;
 import org.martus.swing.UiParagraphPanel;
+import org.martus.swing.UiScrollPane;
 import org.martus.swing.UiTable;
 import org.martus.swing.UiWrappedTextArea;
 import org.martus.swing.Utilities;
@@ -63,7 +65,6 @@ public class UiBulletinDetailsDialog extends JDialog
 		tagQualifier = tagQualifierToUse;
 		
 		setTitle(getLocalization().getWindowTitle("BulletinDetailsDialog"));
-
 		UiParagraphPanel panel = new UiParagraphPanel();
 		panel.addComponents(new JLabel(getLabel("AuthorPublicCode")), createField(getPublicCode()));
 		panel.addComponents(new JLabel(getLabel("BulletinId")),createField(bulletin.getLocalId()));
@@ -91,9 +92,11 @@ public class UiBulletinDetailsDialog extends JDialog
 		buttonBox.add(Box.createHorizontalGlue());
 		buttonBox.add(closeButton);
 		buttonBox.add(Box.createHorizontalGlue());
-
-		getContentPane().add(panel);
-		getContentPane().add(buttonBox, BorderLayout.SOUTH);
+		
+		JPanel mainPanel = new JPanel();
+		mainPanel.add(panel);
+		mainPanel.add(buttonBox, BorderLayout.SOUTH);
+		getContentPane().add(new UiScrollPane(mainPanel, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER));
 		
 		Utilities.centerDlg(this);
 		setResizable(true);

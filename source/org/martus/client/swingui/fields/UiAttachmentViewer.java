@@ -47,12 +47,12 @@ import org.martus.client.core.MartusApp;
 import org.martus.client.core.TransferableAttachmentList;
 import org.martus.client.swingui.UiLocalization;
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.client.swingui.UiScrollPane;
 import org.martus.common.bulletin.AttachmentProxy;
 import org.martus.common.bulletin.BulletinLoader;
 import org.martus.common.database.ReadableDatabase;
 import org.martus.swing.UiFileChooser;
 import org.martus.swing.UiParagraphPanel;
+import org.martus.swing.UiScrollPane;
 import org.martus.swing.UiTable;
 import org.martus.swing.Utilities;
 

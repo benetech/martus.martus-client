@@ -43,11 +43,11 @@ import javax.swing.JButton;
 import javax.swing.JComponent;
 import org.martus.client.swingui.UiFocusListener;
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.client.swingui.UiScrollPane;
 import org.martus.common.bulletin.AttachmentProxy;
 import org.martus.common.clientside.UiBasicLocalization;
 import org.martus.swing.UiFileChooser;
 import org.martus.swing.UiParagraphPanel;
+import org.martus.swing.UiScrollPane;
 import org.martus.swing.UiTable;
 import org.martus.swing.Utilities;
 

@@ -46,7 +46,6 @@ import org.martus.client.core.EncryptionChangeListener;
 import org.martus.client.core.MartusApp;
 import org.martus.client.core.ClientBulletinStore.BulletinOlderException;
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.client.swingui.UiScrollPane;
 import org.martus.client.swingui.bulletincomponent.UiBulletinComponent;
 import org.martus.client.swingui.bulletincomponent.UiBulletinComponentEditorSection;
 import org.martus.client.swingui.bulletincomponent.UiBulletinEditor;
@@ -56,6 +55,7 @@ import org.martus.common.bulletin.Bulletin;
 import org.martus.common.clientside.UiBasicLocalization;
 import org.martus.common.crypto.MartusCrypto.CryptoException;
 import org.martus.common.crypto.MartusCrypto.EncryptionException;
+import org.martus.swing.UiScrollPane;
 import org.martus.swing.Utilities;
 
 public class UiBulletinModifyDlg extends JFrame implements ActionListener, WindowListener, EncryptionChangeListener

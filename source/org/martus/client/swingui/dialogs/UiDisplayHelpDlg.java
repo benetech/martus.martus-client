@@ -55,9 +55,9 @@ import javax.swing.text.DefaultHighlighter;
 import javax.swing.text.DefaultHighlighter.DefaultHighlightPainter;
 
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.client.swingui.UiScrollPane;
 import org.martus.common.clientside.UiBasicLocalization;
 import org.martus.common.clientside.UiSingleTextField;
+import org.martus.swing.UiScrollPane;
 import org.martus.swing.UiWrappedTextArea;
 import org.martus.swing.Utilities;
 import org.martus.util.UnicodeReader;

@@ -43,9 +43,9 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.client.swingui.UiScrollPane;
 import org.martus.common.clientside.Localization;
 import org.martus.common.clientside.UiBasicLocalization;
+import org.martus.swing.UiScrollPane;
 import org.martus.swing.UiWrappedTextArea;
 import org.martus.swing.Utilities;
 import org.martus.util.TokenReplacement;

@@ -134,6 +134,7 @@ import org.martus.swing.UiFileChooser;
 import org.martus.swing.UiLanguageDirection;
 import org.martus.swing.UiNotifyDlg;
 import org.martus.swing.UiOptionPane;
+import org.martus.swing.UiScrollPane;
 import org.martus.swing.UiTextArea;
 import org.martus.swing.Utilities;
 import org.martus.swing.Utilities.Delay;

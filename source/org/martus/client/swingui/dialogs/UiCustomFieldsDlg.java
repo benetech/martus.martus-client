@@ -43,8 +43,8 @@ import javax.swing.border.EmptyBorder;
 
 import org.martus.client.swingui.UiLocalization;
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.client.swingui.UiScrollPane;
 import org.martus.common.clientside.Localization;
+import org.martus.swing.UiScrollPane;
 import org.martus.swing.UiTextArea;
 import org.martus.swing.UiWrappedTextArea;
 import org.martus.swing.Utilities;

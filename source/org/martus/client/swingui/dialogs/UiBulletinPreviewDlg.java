@@ -38,11 +38,11 @@ import javax.swing.JViewport;
 
 import org.martus.client.swingui.UiLocalization;
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.client.swingui.UiScrollPane;
 import org.martus.client.swingui.bulletincomponent.UiBulletinComponentViewSection;
 import org.martus.common.FieldSpec;
 import org.martus.common.StandardFieldSpecs;
 import org.martus.common.packet.FieldDataPacket;
+import org.martus.swing.UiScrollPane;
 import org.martus.swing.Utilities;
 
 public class UiBulletinPreviewDlg extends JDialog implements ActionListener
