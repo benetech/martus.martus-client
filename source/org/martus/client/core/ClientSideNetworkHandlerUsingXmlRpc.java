@@ -179,7 +179,10 @@ public class ClientSideNetworkHandlerUsingXmlRpc
 
 			try
 			{
-				return callServerAtPort(serverName, method, params, port);
+				Object result = callServerAtPort(serverName, method, params, port);
+				if(tm.getExpectedPublicKey() == null)
+					throw new Exception("Trust Manager never called");
+				return result;
 			}
 			catch (IOException e)
 			{
