@@ -28,11 +28,9 @@ package org.martus.client.swingui.bulletincomponent;
 
 import java.awt.Color;
 import java.util.Vector;
-
 import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.border.LineBorder;
-
 import org.martus.client.core.LanguageChangeListener;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.fields.UiDateEditor;
@@ -152,6 +150,9 @@ abstract public class UiBulletinComponentDataSection extends UiBulletinComponent
 			case FieldSpec.TYPE_NORMAL:
 				field = createNormalField();
 				break;
+			case FieldSpec.TYPE_MESSAGE:
+				field = createMessageField(fieldSpec);
+				break;
 			case FieldSpec.TYPE_BOOLEAN:
 				field = createBoolField();
 				break;
@@ -242,6 +243,8 @@ abstract public class UiBulletinComponentDataSection extends UiBulletinComponent
 	
 	abstract public UiField createNormalField();
 	abstract public UiField createMultilineField();
+	abstract public UiField createMessageField(FieldSpec spec);
+
 	abstract public UiField createChoiceField(ChoiceItem[] choices);
 	abstract public UiField createChoiceField(Vector choices);
 	abstract public UiField createDateField(FieldSpec spec);

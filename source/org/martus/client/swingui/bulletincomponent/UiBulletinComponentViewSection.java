@@ -36,6 +36,7 @@ import org.martus.client.swingui.fields.UiChoiceViewer;
 import org.martus.client.swingui.fields.UiField;
 import org.martus.client.swingui.fields.UiFlexiDateViewer;
 import org.martus.client.swingui.fields.UiGridViewer;
+import org.martus.client.swingui.fields.UiMessageField;
 import org.martus.client.swingui.fields.UiMultilineViewer;
 import org.martus.client.swingui.fields.UiNormalTextViewer;
 import org.martus.client.swingui.fields.UiUnknownViewer;
@@ -75,6 +76,11 @@ public class UiBulletinComponentViewSection extends UiBulletinComponentDataSecti
 	public UiField createMultilineField()
 	{
 		return new UiMultilineViewer(getLocalization());
+	}
+
+	public UiField createMessageField(FieldSpec spec)
+	{
+		return new UiMessageField(spec);
 	}
 
 	public UiField createChoiceField(ChoiceItem[] choices)
