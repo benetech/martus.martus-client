@@ -68,7 +68,7 @@ public class BulletinTableModel extends AbstractTableModel
 
 	public int getColumnCount()
 	{
-		return BulletinConstants.sortableFieldTags.length;
+		return sortableFieldTags.length;
 	}
 
 	public Bulletin getBulletin(int rowIndex)
@@ -96,7 +96,7 @@ public class BulletinTableModel extends AbstractTableModel
 			return "";
 		
 		Bulletin b = getBulletin(rowIndex);
-		String fieldTag = BulletinConstants.sortableFieldTags[columnIndex];
+		String fieldTag = sortableFieldTags[columnIndex];
 		
 		if(fieldTag.equals(Bulletin.TAGSTATUS))
 		 	return localization.getStatusLabel(b.getStatus());	
@@ -154,7 +154,7 @@ public class BulletinTableModel extends AbstractTableModel
 
 	public String getFieldName(int columnIndex)
 	{
-		return BulletinConstants.sortableFieldTags[columnIndex];
+		return sortableFieldTags[columnIndex];
 	}
 
 	public void sortByColumn(int columnIndex)
@@ -162,6 +162,17 @@ public class BulletinTableModel extends AbstractTableModel
 		folder.sortBy(getFieldName(columnIndex));
 	}
 	
+	private static final String[] sortableFieldTags =
+	{
+		BulletinConstants.TAGSTATUS, 
+		BulletinConstants.TAGWASSENT, 
+		BulletinConstants.TAGEVENTDATE, 
+		BulletinConstants.TAGTITLE, 
+		BulletinConstants.TAGAUTHOR, 
+		BulletinConstants.TAGLASTSAVED
+	};
+
+
 	UiBasicLocalization localization;
 	BulletinFolder folder;
 }
