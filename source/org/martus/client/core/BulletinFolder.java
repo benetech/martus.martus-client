@@ -27,6 +27,8 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.core;
 
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.Comparator;
 import java.util.Vector;
 
 import org.martus.client.core.ClientBulletinStore.BulletinAlreadyExistsException;
@@ -259,12 +261,32 @@ public class BulletinFolder
 
 	private synchronized void sortExisting()
 	{
-		sortedIdList = new Vector();
-		for(int i = 0; i < rawIdList.size(); ++i)
+		class Sorter implements Comparator
 		{
-			UniversalId id = (UniversalId)rawIdList.get(i);
-			insertIntoSortedList(id);
+			public Sorter(String tagToSortBy, int direction)
+			{
+				sortTag = tagToSortBy;
+				sortDir = direction;
+			}
+			
+			public int compare(Object o1, Object o2)
+			{
+				String value1 = getStore().getFieldData((UniversalId)o1, sortTag);
+				String value2 = getStore().getFieldData((UniversalId)o2, sortTag);
+				return value1.compareTo(value2) * sortDir;
+			}
+			
+			String sortTag;
+			int sortDir;
 		}
+		
+		Object[] uids = rawIdList.toArray(); 
+		if(canSort())
+			Arrays.sort(uids, new Sorter(sortTag, sortDir));
+
+		sortedIdList = new Vector();
+		for(int i = 0; i < uids.length; ++i)
+			sortedIdList.add(uids[i]);
 	}
 
 	private void needSortedIdList()
