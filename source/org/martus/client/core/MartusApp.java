@@ -831,7 +831,7 @@ public class MartusApp
 			return false;
 
 		NetworkInterfaceForNonSSL server = new ClientSideNetworkHandlerUsingXmlRpcForNonSSL(serverName);
-		return isNonSSLServerAvailable(server);
+		return ClientSideNetworkHandlerUsingXmlRpcForNonSSL.isNonSSLServerAvailable(server);
 	}
 
 	public boolean isSSLServerAvailable()
@@ -1518,18 +1518,6 @@ public class MartusApp
 	public void setSSLNetworkInterfaceHandlerForTesting(NetworkInterface server)
 	{
 		currentNetworkInterfaceHandler = server;
-	}
-
-	private boolean isNonSSLServerAvailable(NetworkInterfaceForNonSSL server)
-	{
-		String result = server.ping();
-		if(result == null)
-			return false;
-
-		if(result.indexOf("MartusServer") != 0)
-			return false;
-
-		return true;
 	}
 
 	public boolean isSSLServerAvailable(ClientSideNetworkGateway server)
