@@ -264,13 +264,8 @@ public class UiConfigureHQs extends JDialog
 				}
 			}
 			remove.setEnabled(false);
-
-			if(model.getRowCount()==0)//TODO:remove for multiple HQs
-				add.setEnabled(true);
-
 			updateConfigInfo();
 		}
-//		mainWindow.doClearPublicAccountInfo();
 	}
 
 	void addHQKeyToTable(String publicKey)
@@ -294,7 +289,6 @@ public class UiConfigureHQs extends JDialog
 			model.addRow(row);
 			mapOfKeysToCodes.put(formattedCode, publicKey);
 			hQKeys.add(publicKey);
-			add.setEnabled(false);//TODO: remove this to allow more than one HQ.
 			int current = table.getRowCount()-1;
 			table.setRowSelectionInterval(current,current);
 		}

@@ -677,7 +677,6 @@ public class UiBulletinTable extends JTable implements ListSelectionListener, Dr
 		statusColumn.setMaxWidth(size.width);
 	}
 
-
 	UiMainWindow mainWindow;
 	BulletinTableModel model;
 	private DragSource dragSource = DragSource.getDefaultDragSource();
