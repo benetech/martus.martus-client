@@ -662,7 +662,7 @@ public class ClientBulletinStore extends BulletinStore
 	public void updateOnServerLists(Set uidsOnServer)
 	{
 		HashSet uids = new HashSet(1000);
-		uids.addAll(getAllBulletinUids());
+		uids.addAll(getUidsOfAllBulletinRevisions());
 		internalUpdateOnServerLists(uidsOnServer, uids);
 		saveFolders();
 	}

@@ -1528,11 +1528,11 @@ public class TestClientBulletinStore extends TestCaseEnhanced
 		Bulletin b = store.createEmptyBulletin();
 		store.saveBulletin(b);
 		
-		Vector one = store.getAllBulletinUids();
+		Vector one = store.getUidsOfAllBulletinRevisions();
 		assertEquals("not one?", 1, one.size());		
 		
 		store.scrubAllData();
-		Vector empty = store.getAllBulletinUids();
+		Vector empty = store.getUidsOfAllBulletinRevisions();
 		assertEquals("not empty?", 0, empty.size());			
 	}	
 
