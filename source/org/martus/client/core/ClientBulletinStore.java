@@ -870,11 +870,20 @@ public class ClientBulletinStore extends BulletinStore
 		{
 		}
 	}
+	
+	public boolean isLeaf(Bulletin b)
+	{
+		Vector bulletinUidsInSystem  = getAllBulletinUids();
+		return bulletinUidsInSystem.contains(b.getUniversalId());
+	}
 
 	public synchronized void addBulletinToFolder(BulletinFolder folder, UniversalId uidToAdd) throws BulletinAlreadyExistsException, IOException
 	{
 		Bulletin b = getBulletinRevision(uidToAdd);
 		if(b == null)
+			return;
+		
+		if(folder.isVisible() && !isLeaf(b))
 			return;
 		
 		folder.add(uidToAdd);
@@ -888,7 +897,7 @@ public class ClientBulletinStore extends BulletinStore
 			for(int f = 0; f < getFolderCount(); ++f)
 			{
 				BulletinFolder folderToFix = getFolder(f);
-				if(folderToFix.contains(uidToRemove))
+				if( folderToFix.contains(uidToRemove))
 				{
 					try
 					{
@@ -897,7 +906,8 @@ public class ClientBulletinStore extends BulletinStore
 					catch (BulletinAlreadyExistsException ignoreHarmless)
 					{
 					}
-					removeBulletinFromFolder(folderToFix, uidToRemove);
+					if(folderToFix.isVisible())
+						removeBulletinFromFolder(folderToFix, uidToRemove);
 				}
 				
 			}

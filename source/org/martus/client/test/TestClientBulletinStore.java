@@ -34,7 +34,6 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.Vector;
-
 import org.martus.client.core.BulletinCache;
 import org.martus.client.core.BulletinFolder;
 import org.martus.client.core.ClientBulletinStore;
@@ -53,6 +52,7 @@ import org.martus.common.bulletin.BulletinLoader;
 import org.martus.common.crypto.MartusCrypto;
 import org.martus.common.crypto.MockMartusSecurity;
 import org.martus.common.crypto.MartusCrypto.CryptoException;
+import org.martus.common.database.Database;
 import org.martus.common.database.DatabaseKey;
 import org.martus.common.database.MockDatabase;
 import org.martus.common.packet.BulletinHeaderPacket;
@@ -125,11 +125,15 @@ public class TestClientBulletinStore extends TestCaseEnhanced
     	Bulletin original = store.createEmptyBulletin();
     	original.setSealed();
     	store.saveBulletin(original);
+    	store.setIsOnServer(original);
+    	assertTrue("original not on server?", store.isProbablyOnServer(original));
+
     	Bulletin clone = store.createClone(original, customSpecs, customSpecs);
     	store.saveBulletin(clone);
+    	store.setIsOnServer(clone);
     	
-    	store.setIsOnServer(original);
-    	assertTrue("huh?", store.isProbablyOnServer(original));
+    	assertTrue("new version not on server?", store.isProbablyOnServer(clone));
+    	assertTrue("original still not on server?", store.isProbablyOnServer(original));
     	
     	store.removeBulletinFromAllFolders(clone);
     	assertFalse("didn't remove original?", store.isProbablyOnServer(original));
@@ -815,35 +819,104 @@ public class TestClientBulletinStore extends TestCaseEnhanced
 		FieldSpec[] publicFields = StandardFieldSpecs.getDefaultPublicFieldSpecs();
 		FieldSpec[] privateFields = StandardFieldSpecs.getDefaultPrivateFieldSpecs();
 		
+		BulletinFolder aFolder = store.createFolder("blah");
+
 		Bulletin original = store.createEmptyBulletin();
 		original.setSealed();
 		store.saveBulletin(original);
+		store.addBulletinToFolder(aFolder, original.getUniversalId());
+		assertEquals(1, aFolder.getBulletinCount());
 
 		Bulletin firstClone = store.createClone(original, publicFields, privateFields);
 		firstClone.setSealed();
 		store.saveBulletin(firstClone);
 		
-		Bulletin lastClone = store.createClone(firstClone, publicFields, privateFields);
-		lastClone.setSealed();
-		store.saveBulletin(lastClone);
-		
 		Bulletin unrelated = store.createEmptyBulletin();
 		store.saveBulletin(unrelated);
-		
-		BulletinFolder aFolder = store.createFolder("blah");
-		BulletinFolder otherFolder = store.getFolderDiscarded();
-
 		store.addBulletinToFolder(aFolder, unrelated.getUniversalId());
-		store.addBulletinToFolder(aFolder, original.getUniversalId());
+		assertEquals(2, aFolder.getBulletinCount());
+		
+
 		store.addBulletinToFolder(aFolder, firstClone.getUniversalId());
 		assertEquals(2, aFolder.getBulletinCount());
 		assertTrue("lost unrelated (1)?", aFolder.contains(unrelated));
 		assertTrue("didn't update to first clone?", aFolder.contains(firstClone));
 		
+		Bulletin lastClone = store.createClone(firstClone, publicFields, privateFields);
+		lastClone.setSealed();
+		store.saveBulletin(lastClone);
+		BulletinFolder otherFolder = store.getFolderDiscarded();
 		store.addBulletinToFolder(otherFolder, lastClone.getUniversalId());
 		assertEquals(2, aFolder.getBulletinCount());
 		assertTrue("lost unrelated (2)?", aFolder.contains(unrelated));
 		assertTrue("didn't update to later clone?", aFolder.contains(lastClone));
+	}
+	
+	class BulletinUidCollector implements Database.PacketVisitor
+	{
+		public void visit(DatabaseKey key)
+		{
+			uids.add(key.getUniversalId());
+		}
+
+		Vector uids = new Vector();
+	}
+	
+	public void testAddOriginalBulletinToFolderWithNewerVersion() throws Exception
+	{
+		FieldSpec[] publicFields = StandardFieldSpecs.getDefaultPublicFieldSpecs();
+		FieldSpec[] privateFields = StandardFieldSpecs.getDefaultPrivateFieldSpecs();
+		MockBulletinStore clientStore = new MockBulletinStore(security);
+		Bulletin original = clientStore.createEmptyBulletin();
+		original.setSealed();
+
+		Bulletin clone = clientStore.createClone(original, publicFields, privateFields);
+		clone.setSealed();
+		clientStore.saveBulletinForTesting(clone);
+		BulletinUidCollector collector = new BulletinUidCollector();
+		clientStore.visitAllBulletinRevisions(collector);
+		assertEquals("should have 1 bulletin", 1, collector.uids.size());
+		clientStore.saveBulletinForTesting(original);
+		BulletinUidCollector collector2 = new BulletinUidCollector();
+		clientStore.visitAllBulletinRevisions(collector2);
+		assertEquals("should now have 2 bulletin", 2, collector2.uids.size());
+
+		BulletinFolder aFolder = clientStore.createFolder("a");
+		clientStore.addBulletinToFolder(aFolder, clone.getUniversalId());
+		assertEquals("Should only have 1 bulletin in folder", 1, aFolder.getBulletinCount());
+		clientStore.addBulletinToFolder(aFolder, original.getUniversalId());
+		assertEquals("Should still only have 1 bulletin in folder since there is a newer version", 1, aFolder.getBulletinCount());
+		clientStore.deleteAllBulletins();
+	}
+	
+	public void testAddingBulletinVersionsToInvisibleFolders() throws Exception
+	{
+		FieldSpec[] publicFields = StandardFieldSpecs.getDefaultPublicFieldSpecs();
+		FieldSpec[] privateFields = StandardFieldSpecs.getDefaultPrivateFieldSpecs();
+		MockBulletinStore clientStore = new MockBulletinStore(security);
+		Bulletin original = clientStore.createEmptyBulletin();
+		original.setSealed();
+
+		Bulletin clone = clientStore.createClone(original, publicFields, privateFields);
+		clone.setSealed();
+		clientStore.saveBulletinForTesting(clone);
+		clientStore.saveBulletinForTesting(original);
+
+		BulletinFolder visibleFolder = clientStore.createFolder("a");
+		assertTrue("Should be an invisibleFolder", visibleFolder.isVisible());
+		clientStore.addBulletinToFolder(visibleFolder, clone.getUniversalId());
+		assertEquals("Should only have 1 bulletin in visible folder", 1, visibleFolder.getBulletinCount());
+		clientStore.addBulletinToFolder(visibleFolder, original.getUniversalId());
+		assertEquals("Should still only have 1 bulletin in visible folder since there is a newer version", 1, visibleFolder.getBulletinCount());
+
+		BulletinFolder invisibleFolder = clientStore.createFolder("*a");
+		assertFalse("Should be an invisibleFolder", invisibleFolder.isVisible());
+		clientStore.addBulletinToFolder(invisibleFolder, clone.getUniversalId());
+		assertEquals("Should only have 1 bulletin in invisible folder", 1, invisibleFolder.getBulletinCount());
+		clientStore.addBulletinToFolder(invisibleFolder, original.getUniversalId());
+		assertEquals("Should now have 2 bulletin in invisible folder", 2, invisibleFolder.getBulletinCount());
+
+		clientStore.deleteAllBulletins();
 	}
 
 	public void testFolderToXml() throws Exception
