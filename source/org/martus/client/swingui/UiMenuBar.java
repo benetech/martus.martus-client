@@ -47,7 +47,7 @@ public class UiMenuBar extends JMenuBar
 		createMenuActions();
 
 		JMenu file = new JMenu(localization.getMenuLabel("file"));
-		PrintMenuListener printMenuListener = new PrintMenuListener();
+		FileMenuListener printMenuListener = new FileMenuListener();
 		file.addMenuListener(printMenuListener);
 		printMenuListener.initalize();
 
@@ -56,6 +56,7 @@ public class UiMenuBar extends JMenuBar
 		file.addSeparator();
 		file.add(UiActions.newActionMenuExportFolder(mainWindow));
 		file.add(UiActions.newActionMenuExportBulletins(mainWindow));
+		file.add(actionMenuResendBulletins);
 		file.addSeparator();
 		file.add(UiActions.newActionMenuExit(mainWindow));
 
@@ -129,17 +130,19 @@ public class UiMenuBar extends JMenuBar
 		add(help);
 	}
 
-	class PrintMenuListener implements MenuListener
+	class FileMenuListener implements MenuListener
 	{
 		public void initalize()
 		{
 			//Java Bug, menu items need to be disabled before correct behavior occures.
 			actionMenuPrint.setEnabled(false);
+			actionMenuResendBulletins.setEnabled(false);
 		}
 
 		public void menuSelected(MenuEvent e)
 		{
 			actionMenuPrint.setEnabled(actionMenuPrint.isEnabled());
+			actionMenuResendBulletins.setEnabled(actionMenuResendBulletins.isEnabled());
 		}
 
 		public void menuDeselected(MenuEvent e) {}
@@ -202,7 +205,8 @@ public class UiMenuBar extends JMenuBar
 		actionMenuCopyBulletins = UiActions.newActionMenuCopyBulletins(mainWindow);
 		actionMenuPasteBulletins = UiActions.newActionMenuPasteBulletins(mainWindow);
 		actionMenuDiscardBulletins = UiActions.newActionMenuDiscardBulletins(mainWindow);
-
+		actionMenuResendBulletins = UiActions.newActionMenuResendBulletins(mainWindow);
+		
 		actionMenuRenameFolder = UiActions.newActionMenuRenameFolder(mainWindow);
 		actionMenuDeleteFolder = UiActions.newActionMenuDeleteFolder(mainWindow);
 	}
@@ -216,6 +220,7 @@ public class UiMenuBar extends JMenuBar
 	AbstractAction actionMenuCopyBulletins;
 	AbstractAction actionMenuPasteBulletins;
 	AbstractAction actionMenuDiscardBulletins;
+	AbstractAction actionMenuResendBulletins;
 	AbstractAction actionMenuRenameFolder;
 	AbstractAction actionMenuDeleteFolder;
 }

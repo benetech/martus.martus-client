@@ -144,6 +144,11 @@ public class UiBulletinTablePane extends JScrollPane
 		table.doPasteBulletins();
 	}
 
+	public void doResendBulletins()
+	{
+		table.doResendBulletins();
+	}
+
 	public void doDiscardBulletins()
 	{
 		table.doDiscardBulletins();

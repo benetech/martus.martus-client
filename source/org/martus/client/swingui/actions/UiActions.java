@@ -92,6 +92,11 @@ public class UiActions
 	{
 		return new ActionMenuDiscardBulletins(mainWindowToUse);
 	}
+	
+	static public UiMartusAction newActionMenuResendBulletins(UiMainWindow mainWindowToUse)
+	{
+		return new ActionMenuResendBulletins(mainWindowToUse);
+	}
 
 	static public UiMartusAction newActionMenuRenameFolder(UiMainWindow mainWindowToUse)
 	{
@@ -497,7 +502,8 @@ public class UiActions
 			return UiMainWindow.isAnyBulletinSelected(mainWindow);
 		}
 	}
-
+	
+	
 	private static class ActionMenuDiscardBulletins extends UiMenuAction
 	{
 		public ActionMenuDiscardBulletins(UiMainWindow mainWindowToUse)
@@ -542,7 +548,27 @@ public class UiActions
 		{
 			return mainWindow.canPaste();
 		}
+	}
 
+	private static class ActionMenuResendBulletins extends UiMenuAction
+	{
+		public ActionMenuResendBulletins(UiMainWindow mainWindowToUse)
+		{
+			super(mainWindowToUse, "ResendBulletins");
+		}
+
+		public void actionPerformed(ActionEvent ae)
+		{
+			if(isEnabled())
+				mainWindow.doResendBulletins();
+		}
+
+		public boolean isEnabled()
+		{
+			if(mainWindow.isDiscardedFolderSelected())
+				return false;
+			return UiMainWindow.isAnyBulletinSelected(mainWindow);
+		}
 	}
 
 	private static class ActionMenuSearch extends UiMenuAction

@@ -86,9 +86,14 @@ public class UiConfigureHQs extends JDialog
 
 		
 		Box hBox1 = Box.createHorizontalBox();
-		hBox1.add(new JLabel(localization.getFieldLabel("ConfigureHQsCurrentHQs")));
+		hBox1.add(new JLabel(localization.getFieldLabel("HQsSetAsProxyUploader")));
 		hBox1.add(Box.createHorizontalGlue());
 		panel.add(hBox1);
+
+		Box hBox2 = Box.createHorizontalBox();
+		hBox2.add(new JLabel(localization.getFieldLabel("ConfigureHQsCurrentHQs")));
+		hBox2.add(Box.createHorizontalGlue());
+		panel.add(hBox2);
 		
 		model = new DefaultTableModel();
 		Vector columnHeaders = new Vector();

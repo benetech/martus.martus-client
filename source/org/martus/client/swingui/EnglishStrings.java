@@ -171,6 +171,8 @@ public class EnglishStrings
 "wintitle:notifyFolderMigrationFailed=Folder Migration Error",
 "wintitle:notifyViewViewHqList=Headquarters Details",
 "wintitle:notifyModifyViewHqList=Headquarters Details",
+"wintitle:notifyResendErrorNotAuthorizedToSend=Not Authorized To Send",
+"wintitle:notifyResendError=Error Sending Bulletin",
 
 "wintitle:inputservername=Server Name",
 "wintitle:inputserverpubliccode=Server Identification",
@@ -311,6 +313,7 @@ public class EnglishStrings
 "menu:PasteBulletins=Paste Bulletin(s)",
 "menu:DiscardBulletins=Discard Bulletin(s)",
 "menu:DeleteBulletins=Delete Bulletin(s)",
+"menu:ResendBulletins=Resend Bulletin(s)",
 "menu:folders=Folders",
 "menu:CreateNewFolder=Create New Folder",
 "menu:RenameFolder=Rename Folder",
@@ -680,6 +683,8 @@ public class EnglishStrings
 "field:notifyFolderMigrationFailedcause=An error occurred during the conversion of your folders. You can still use Martus, but if the Outbox or Drafts folders still exist, do not use them.",
 "field:notifyViewViewHqListcause=Here is a list of public codes of Martus accounts that can view the private information in this bulletin.\n\n#L#",
 "field:notifyModifyViewHqListcause=Here is a list of public codes of Martus accounts that will be able to view the private information in this bulletin after you save it. To add or remove an account, use the Tools/Configure Headquarters menu option.\n\n#L#",
+"field:notifyResendErrorNotAuthorizedToSendcause=One or more bulletins were unable to be resent because you are not authorized to upload them.",
+"field:notifyResendErrorcause=One ore more bulletins were unable to be resent due to an unexpected error.",
 
 "field:messageServerNewscause=The current server has sent this message:",
 "field:messageErrorDateInFuturecause=This date occurs in the future:",
@@ -760,7 +765,7 @@ public class EnglishStrings
 "field:ConfigureHQsCurrentHQs=Current Headquarters",
 "field:ConfigureHQColumnHeaderPublicCode=Public Code",
 "field:SplashProductDescription=Human Rights Bulletin System",
-
+"field:HQsSetAsProxyUploader=These Headquarters accounts are allowed to send bulletins to a server on your behalf.",
 "field:DateRangeFrom=Between",
 "field:DateRangeTo=and",
 "field:DateExact=Exact Date",

@@ -364,6 +364,46 @@ public class UiBulletinTable extends JTable implements ListSelectionListener, Dr
 		
 		mainWindow.resetCursor(cursor);	
 	}
+	
+	public void doResendBulletins()
+	{
+		BulletinFolder draftOutBox = mainWindow.getApp().getFolderDraftOutbox();
+		BulletinFolder sealedOutBox = mainWindow.getApp().getFolderSealedOutbox();
+
+		Bulletin[] selected = getSelectedBulletins();
+		boolean notAllowedToSend = false;
+		boolean errorIO = false;
+		for (int i = 0; i < selected.length; i++)
+		{
+			try
+			{
+				Bulletin bulletin = selected[i];
+				String accountId = mainWindow.getApp().getAccountId();
+				if(!bulletin.getBulletinHeaderPacket().isAuthorizedToUpload(accountId))
+				{
+					notAllowedToSend = true;
+					continue;
+				}
+
+				if(bulletin.isDraft())
+					draftOutBox.add(bulletin);
+				if(bulletin.isSealed())
+					sealedOutBox.add(bulletin);
+			}
+			catch (BulletinAlreadyExistsException harmless)
+			{
+			}
+			catch (IOException e)
+			{
+				errorIO = true;
+				e.printStackTrace();
+			}
+		}
+		if(notAllowedToSend)
+			mainWindow.notifyDlg("ResendErrorNotAuthorizedToSend");
+		if(errorIO)
+			mainWindow.notifyDlg("ResendError");
+	}
 
 	public boolean confirmDeletionOfFile(String filePath)
 	{

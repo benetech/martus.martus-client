@@ -913,6 +913,11 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	{
 		table.doPasteBulletins();
 	}
+	
+	public void doResendBulletins()
+	{
+		table.doResendBulletins();
+	}
 
 	public void doDiscardBulletins()
 	{

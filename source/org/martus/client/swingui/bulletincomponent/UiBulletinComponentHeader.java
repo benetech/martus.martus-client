@@ -175,7 +175,9 @@ public class UiBulletinComponentHeader extends UiBulletinComponentSection
 		{
 			public void actionPerformed(ActionEvent e)
 			{
-				String listOfHqPublicKeys = "";
+				String information = mainWindow.getLocalization().getFieldLabel("HQsSetAsProxyUploader") + "\n\n";
+
+				String listOfHqPublicKeys = information;
 				for(int i=0; i < hqList.size(); ++i)
 				{
 					String thisHqCode = getHqPublicCode(i);
