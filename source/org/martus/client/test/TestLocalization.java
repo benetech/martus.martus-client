@@ -40,6 +40,7 @@ import org.martus.common.MartusUtilities;
 import org.martus.common.clientside.ChoiceItem;
 import org.martus.common.clientside.Localization;
 import org.martus.common.clientside.UiBasicLocalization;
+import org.martus.common.clientside.Localization.NoDateSeparatorException;
 import org.martus.common.utilities.DateUtilities;
 import org.martus.jarverifier.JarVerifier;
 import org.martus.swing.UiLanguageDirection;
@@ -343,6 +344,7 @@ public class TestLocalization extends TestCaseEnhanced
 		myLocalization2.setCurrentLanguageCode(someTestLanguageCode);
 		assertFalse("Current translation should be trusted", myLocalization2.isCurrentTranslationOfficial());
 	}
+	
 
 	private boolean doesLanguageExist(UiLocalization dbToUse, String languageCode)
 	{
@@ -357,6 +359,21 @@ public class TestLocalization extends TestCaseEnhanced
 		return foundSomeTestLanguage;
 	}
 
+	public void testGetDateSeparator() throws Exception
+	{
+		assertEquals('/', UiBasicLocalization.getDateSeparator("1999/12/03"));
+		assertEquals('-', UiBasicLocalization.getDateSeparator("03-12-1999"));
+		assertEquals(' ', UiBasicLocalization.getDateSeparator("1999 12 03"));
+		try
+		{
+			UiBasicLocalization.getDateSeparator("19991203");
+			fail("Should have thrown, no date separator character");
+		}
+		catch(NoDateSeparatorException expected)
+		{
+		}
+	}
+	
 	public void testLanguageCodeFromFilename()
 	{
 		assertEquals("", Localization.getLanguageCodeFromFilename("Martus.mtf"));

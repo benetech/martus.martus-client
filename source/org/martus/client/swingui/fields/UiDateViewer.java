@@ -52,12 +52,13 @@ public class UiDateViewer extends UiField
 	public void setText(String newText)
 	{
 		storedValue = newText;
-		String value = localization.convertStoredDateToDisplay(newText);
-		label.setText("  " + value + "  ");
+		String value = localization.convertStoredDateToDisplayReverseIfNecessary(newText);
+		label.setText(SPACE + value + SPACE);
 	}
 
 	UiBasicLocalization localization;
 	JLabel label;
 	String storedValue;
+	private static final String SPACE = "  ";
 }
 

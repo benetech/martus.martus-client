@@ -65,6 +65,7 @@ import org.martus.common.database.DatabaseKey;
 import org.martus.common.database.FileDatabase;
 import org.martus.common.packet.UniversalId;
 import org.martus.common.utilities.DateUtilities;
+import org.martus.swing.UiLanguageDirection;
 import org.martus.swing.Utilities;
 import org.martus.util.DirectoryUtils;
 import org.martus.util.TestCaseEnhanced;
@@ -1654,7 +1655,42 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		assertEquals("", localization.convertStoredDateToDisplay("1987-13-13"));
 		TRACE_END();
 	}
+	
+	public void testDateSlashSeparatedConvertReverseIfNecessary()
+	{
+		TRACE_BEGIN("testDateSlashSeparatedConvertReverseIfNecessary");
+		assertEquals("12/13/1987", localization.convertStoredDateToDisplayReverseIfNecessary("1987-12-13"));
+		assertEquals("03/01/2004", localization.getViewableDateRange("2004-03-01,20040301+0"));
+		assertEquals("Between 01/07/2004 and 07/03/2004", localization.getViewableDateRange("2004-01-07,20040107+178"));
+		
+		UiLanguageDirection.setDirection(UiLanguageDirection.RIGHT_TO_LEFT);
+		assertEquals("1987/13/12", localization.convertStoredDateToDisplayReverseIfNecessary("1987-12-13"));
+		assertEquals("2004/01/03", localization.getViewableDateRange("2004-03-01,20040301+0"));
+		//RtoL languages does reverse the date when mixed strings of RtoL and LtoR when the LtoR text has /'s contained within for some strange reason
+		assertEquals("Between 01/07/2004 and 07/03/2004", localization.getViewableDateRange("2004-01-07,20040107+178"));
+		
+		TRACE_END();
+	}
 
+	public void testDateDotSeparatedConvertReverseIfNecessary()
+	{
+		TRACE_BEGIN("testDateDotSeparatedConvertReverseIfNecessary");
+		localization.setCurrentDateFormatCode(DateUtilities.DMY_DOT.getCode());
+		assertEquals("13.12.1987", localization.convertStoredDateToDisplayReverseIfNecessary("1987-12-13"));
+		assertEquals("01.03.2004", localization.getViewableDateRange("2004-03-01,20040301+0"));
+		assertEquals("Between 07.01.2004 and 03.07.2004", localization.getViewableDateRange("2004-01-07,20040107+178"));
+		
+		UiLanguageDirection.setDirection(UiLanguageDirection.RIGHT_TO_LEFT);
+		assertEquals("1987.12.13", localization.convertStoredDateToDisplayReverseIfNecessary("1987-12-13"));
+		assertEquals("2004.03.01", localization.getViewableDateRange("2004-03-01,20040301+0"));
+		
+		//RtoL languages doesn't reverse the date when mixed strings of RtoL and LtoR when the LtoR text has dot's contained within for some strange reason
+		assertEquals("Between 2004.01.07 and 2004.07.03", localization.getViewableDateRange("2004-01-07,20040107+178"));
+		
+		TRACE_END();
+	}
+
+	
 	public void testCurrentDateFormatCode()
 	{
 		TRACE_BEGIN("testCurrentDateFormatCode");
