@@ -26,22 +26,22 @@ Boston, MA 02111-1307, USA.
 
 package org.martus.client.swingui.dialogs;
 
+import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
-import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JViewport;
 
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.bulletincomponent.UiBulletinComponentViewSection;
-import org.martus.common.StandardFieldSpecs;
 import org.martus.common.FieldSpec;
+import org.martus.common.StandardFieldSpecs;
 import org.martus.common.packet.FieldDataPacket;
-import org.martus.swing.ParagraphLayout;
 import org.martus.swing.Utilities;
 
 public class UiBulletinPreviewDlg extends JDialog implements ActionListener
@@ -49,8 +49,8 @@ public class UiBulletinPreviewDlg extends JDialog implements ActionListener
 
 	public UiBulletinPreviewDlg(UiMainWindow owner, FieldDataPacket fdp)
 	{
-		super(owner, owner.getLocalization().getWindowTitle("BulletinPreview"), true);
-		getContentPane().setLayout(new ParagraphLayout());
+		super(owner, owner.getLocalization().getWindowTitle("BulletinPreview"), true);	
+		getContentPane().setLayout(new BorderLayout());
 
 		UiBulletinComponentViewSection view = new UiBulletinComponentViewSection(owner);
 		FieldSpec[] standardFieldTags = StandardFieldSpecs.getDefaultPublicFieldSpecs();
@@ -60,27 +60,24 @@ public class UiBulletinPreviewDlg extends JDialog implements ActionListener
 		view.attachmentViewer.viewButton.setVisible(false);
 
 		view.updateEncryptedIndicator(fdp.isEncrypted());		
-
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.getViewport().setScrollMode(JViewport.SIMPLE_SCROLL_MODE);
-		scrollPane.getViewport().add(view);
-		scrollPane.setPreferredSize(new Dimension(720, 500));
+		scrollPane.getViewport().add(view);		
 
+		JPanel buttonPane = new JPanel();		
 		JButton ok = new JButton(owner.getLocalization().getButtonLabel("ok"));
 		ok.addActionListener(this);
 		Dimension okSize = ok.getPreferredSize();
 		okSize.width += 40;
 		ok.setPreferredSize(okSize);
+		buttonPane.add(ok);
 
-		getContentPane().add(new JLabel(" "), ParagraphLayout.NEW_PARAGRAPH);
-		getContentPane().add(scrollPane, ParagraphLayout.NEW_PARAGRAPH);
-		getContentPane().add(new JLabel(" "), ParagraphLayout.NEW_PARAGRAPH);
-		getContentPane().add(ok, ParagraphLayout.NEW_PARAGRAPH);
-		getContentPane().add(new JLabel(" "), ParagraphLayout.NEW_PARAGRAPH);
-
+		getContentPane().add(scrollPane, BorderLayout.CENTER);
+		getContentPane().add(buttonPane, BorderLayout.SOUTH);
+		
 		getRootPane().setDefaultButton(ok);
 		Utilities.centerDlg(this);
-		setResizable(true);
+		setResizable(true);		
 		show();
 	}
 

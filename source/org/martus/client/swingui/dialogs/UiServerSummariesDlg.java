@@ -100,10 +100,8 @@ public class UiServerSummariesDlg extends JDialog
 		topPanel.add(createActionsPanel(localization, okButtonTag), BorderLayout.SOUTH);
 
 		getContentPane().add(topPanel);	
-		Utilities.centerDlg(this);
-
 		setScreenSize();				
-		setLocation(mainWindow.getLocation());
+		Utilities.centerDlg(this);	
 		show();
 	}
 
