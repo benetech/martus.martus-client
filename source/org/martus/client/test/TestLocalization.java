@@ -91,6 +91,8 @@ public class TestLocalization extends TestCaseEnhanced
 		assertEquals("English should always return the default date format", DateUtilities.getDefaultDateFormatCode(), Localization.getDefaultDateFormatForLanguage(UiBasicLocalization.ENGLISH));
 		assertEquals("Spanish should always return Slash DMY", DateUtilities.DMY_SLASH.getCode(), Localization.getDefaultDateFormatForLanguage(UiBasicLocalization.SPANISH));
 		assertEquals("Russian should always return Dot DMY", DateUtilities.DMY_DOT.getCode(), Localization.getDefaultDateFormatForLanguage(UiBasicLocalization.RUSSIAN));
+		assertEquals("Thai should always return Slash DMY", DateUtilities.DMY_SLASH.getCode(), Localization.getDefaultDateFormatForLanguage(UiBasicLocalization.THAI));
+		assertEquals("Arabic should always return Slash DMY", DateUtilities.DMY_SLASH.getCode(), Localization.getDefaultDateFormatForLanguage(UiBasicLocalization.ARABIC));
 		assertEquals("An unknown Language should always return the default date format", DateUtilities.getDefaultDateFormatCode(), Localization.getDefaultDateFormatForLanguage("ZZ"));
 	}
 	
