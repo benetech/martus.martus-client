@@ -30,7 +30,6 @@ import java.awt.ComponentOrientation;
 import java.io.File;
 import java.util.Vector;
 import javax.swing.SwingConstants;
-
 import org.martus.client.core.MartusApp;
 import org.martus.client.swingui.EnglishStrings;
 import org.martus.client.swingui.UiConstants;
@@ -44,6 +43,7 @@ import org.martus.util.StringInputStream;
 import org.martus.util.TestCaseEnhanced;
 import org.martus.util.UnicodeStringWriter;
 import org.martus.util.UnicodeWriter;
+
 
 public class TestLocalization extends TestCaseEnhanced
 {
