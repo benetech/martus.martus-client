@@ -1127,7 +1127,19 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 
 	private void requestToUpdateContactInfoOnServerAndSaveInfo()
 	{
+		saveContactInfo();
+		
 		ContactInfo contactInfo = app.getContactInfo();
+		if(!contactInfo.isServerConfigured())
+			return;
+		
+		boolean sendInfo = confirmDlg("RequestToSendContactInfoToServer");
+		contactInfo.setSendContactInfoToServer(sendInfo);
+		saveContactInfo();
+	}
+	
+	private void saveContactInfo()
+	{
 		try
 		{
 			app.saveContactInfo();
@@ -1136,14 +1148,8 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		{
 			notifyDlg("ErrorSavingConfig");
 		}
-		
-		if(!contactInfo.isServerConfigured())
-			return;
-		
-		boolean sendInfo = confirmDlg("RequestToSendContactInfoToServer");
-		contactInfo.setSendContactInfoToServer(sendInfo);
 	}
-	
+
 	public boolean isServerConfigured()
 	{
 		return app.getContactInfo().isServerConfigured();
