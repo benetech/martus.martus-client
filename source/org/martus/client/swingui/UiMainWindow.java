@@ -142,6 +142,7 @@ import org.martus.util.TokenReplacement;
 import org.martus.util.UnicodeReader;
 import org.martus.util.Base64.InvalidBase64Exception;
 import org.martus.util.TokenReplacement.TokenInvalidException;
+import org.martus.util.language.LanguageDirection;
 
 public class UiMainWindow extends JFrame implements ClipboardOwner
 {
@@ -1812,7 +1813,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		previewSplitter = new JSplitPane(JSplitPane.VERTICAL_SPLIT, table, preview);
 		previewSplitter.setDividerLocation(uiState.getCurrentPreviewSplitterPosition());
 
-		if(UiLanguageDirection.isRightToLeftLanguage())
+		if(LanguageDirection.isRightToLeftLanguage())
 			folderSplitter = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, previewSplitter, folders);
 		else
 			folderSplitter = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, folders, previewSplitter);

@@ -37,6 +37,7 @@ import java.io.InputStream;
 import java.io.RandomAccessFile;
 import java.util.Arrays;
 import java.util.Vector;
+
 import org.martus.client.core.BulletinFolder;
 import org.martus.client.core.ClientBulletinStore;
 import org.martus.client.core.ConfigInfo;
@@ -65,12 +66,12 @@ import org.martus.common.database.DatabaseKey;
 import org.martus.common.database.FileDatabase;
 import org.martus.common.packet.UniversalId;
 import org.martus.common.utilities.DateUtilities;
-import org.martus.swing.UiLanguageDirection;
 import org.martus.swing.Utilities;
 import org.martus.util.DirectoryUtils;
 import org.martus.util.TestCaseEnhanced;
 import org.martus.util.UnicodeReader;
 import org.martus.util.UnicodeWriter;
+import org.martus.util.language.LanguageDirection;
 
 public class TestMartusApp_NoServer extends TestCaseEnhanced
 {
@@ -1663,7 +1664,7 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		assertEquals("03/01/2004", localization.getViewableDateRange("2004-03-01,20040301+0"));
 		assertEquals("Between 01/07/2004 and 07/03/2004", localization.getViewableDateRange("2004-01-07,20040107+178"));
 		
-		UiLanguageDirection.setDirection(UiLanguageDirection.RIGHT_TO_LEFT);
+		LanguageDirection.setDirectionRightToLeft();
 		assertEquals("1987/13/12", localization.convertStoredDateToDisplayReverseIfNecessary("1987-12-13"));
 		assertEquals("2004/01/03", localization.getViewableDateRange("2004-03-01,20040301+0"));
 		//RtoL languages does reverse the date when mixed strings of RtoL and LtoR when the LtoR text has /'s contained within for some strange reason
@@ -1680,7 +1681,7 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		assertEquals("01.03.2004", localization.getViewableDateRange("2004-03-01,20040301+0"));
 		assertEquals("Between 07.01.2004 and 03.07.2004", localization.getViewableDateRange("2004-01-07,20040107+178"));
 		
-		UiLanguageDirection.setDirection(UiLanguageDirection.RIGHT_TO_LEFT);
+		LanguageDirection.setDirectionRightToLeft();
 		assertEquals("1987.12.13", localization.convertStoredDateToDisplayReverseIfNecessary("1987-12-13"));
 		assertEquals("2004.03.01", localization.getViewableDateRange("2004-03-01,20040301+0"));
 		
