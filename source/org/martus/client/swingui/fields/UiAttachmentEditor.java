@@ -65,7 +65,7 @@ public class UiAttachmentEditor extends UiParagraphPanel
 		attachmentTable.setFocusable(false);
 		attachmentTable.createDefaultColumnsFromModel();
 		attachmentTable.setColumnSelectionAllowed(false);
-		UiTable.setColumnWidthToHeaderWidth(attachmentTable,1);
+		UiTable.setMaxColumnWidthToHeaderWidth(attachmentTable,1);
 
 		Box hbox = Box.createHorizontalBox();
 		Box vbox = Box.createVerticalBox();

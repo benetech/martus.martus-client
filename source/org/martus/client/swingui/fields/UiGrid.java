@@ -61,7 +61,8 @@ public class UiGrid extends UiField
 		public GridTable(TableModel model)
 		{
 			super(model);
-			for(int i=0; i < model.getColumnCount(); ++i)
+			setMaxColumnWidthToHeaderWidth(this, 0);
+			for(int i = 1 ; i < model.getColumnCount(); ++i)
 				setColumnWidthToHeaderWidth(this, i);
 			setAutoResizeMode(AUTO_RESIZE_OFF);
 		}

@@ -79,9 +79,9 @@ public class UiBulletinTable extends UiTable implements ListSelectionListener, D
 		setModel(model);
 
 		// set widths for first three columns (status, wassent, and date)
-		UiTable.setColumnWidthToHeaderWidth(this, COLUMN_STATUS);
-		UiTable.setColumnWidthToHeaderWidth(this, COLUMN_SENT);
-		UiTable.setColumnWidthToHeaderWidth(this, COLUMN_EVENTDATE);
+		UiTable.setMaxColumnWidthToHeaderWidth(this, COLUMN_STATUS);
+		UiTable.setMaxColumnWidthToHeaderWidth(this, COLUMN_SENT);
+		UiTable.setMaxColumnWidthToHeaderWidth(this, COLUMN_EVENTDATE);
 //		setColumnWidthToHeaderWidth(this, 4);
 		
 		addMouseListener(new TableMouseAdapter());
