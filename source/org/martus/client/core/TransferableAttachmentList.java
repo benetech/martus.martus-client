@@ -72,7 +72,7 @@ public class TransferableAttachmentList implements Transferable
 				files.add(outputFile);
 				
 				BulletinSaver.extractAttachmentToFile(db, attachment, security, outputFile);
-				System.out.println("TransferableAttachment extractAttachmentToFile: " + outputFile);
+				//System.out.println("TransferableAttachment extractAttachmentToFile: " + outputFile);
 			}
 			catch(Exception e)
 			{
