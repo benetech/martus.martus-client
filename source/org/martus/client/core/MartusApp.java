@@ -456,15 +456,15 @@ public class MartusApp
 		return  getCurrentAccountDirectoryName() + "MartusUploadLog.txt";
 	}
 
+	public String getEnglishHelpFilename()
+	{
+		return(getHelpFilename(Localization.ENGLISH));
+	}
+
 	public String getHelpFilename(String languageCode)
 	{
 		String helpFile = "MartusHelp-" + languageCode + ".txt";
 		return helpFile;
-	}
-
-	public String getEnglishHelpFilename()
-	{
-		return("MartusHelp-en.txt");
 	}
 
 	public String getHelpTOCFilename(String languageCode)

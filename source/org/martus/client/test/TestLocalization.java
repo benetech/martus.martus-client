@@ -183,19 +183,55 @@ public class TestLocalization extends TestCaseEnhanced
 		assertNull("Language doesn't exists should return null", tmpLocalization.getTranslationFile(languageCode));
 		File mlpkTranslation = new File(translationDirectory, UiBasicLocalization.getMlpkFilename(languageCode));
 		mlpkTranslation.deleteOnExit();
-		UnicodeWriter out = new UnicodeWriter(mlpkTranslation);
-		out.write("test");
-		out.close();
+		String data = "test";
+		writeDataToFile(mlpkTranslation, data);
 		assertEquals("MLPK file exists should return it.", mlpkTranslation, tmpLocalization.getTranslationFile(languageCode));
 		File mtfTranslation = new File(translationDirectory, UiBasicLocalization.getMtfFilename(languageCode));
 		mtfTranslation.deleteOnExit();
-		out = new UnicodeWriter(mtfTranslation);
-		out.write("test");
-		out.close();
+		writeDataToFile(mtfTranslation, data);
 		assertEquals("MTF file exists should superceed MLPK file.", mtfTranslation, tmpLocalization.getTranslationFile(languageCode));
 		
 	}
 	
+	public void testHiddingOfUnofficialTranslations() throws Exception
+	{
+		File translationDirectory = createTempDirectory();
+		UiLocalization tmpLocalization = new UiLocalization(translationDirectory, EnglishStrings.strings);
+		String languageCode = "gg";
+		String data = "test";
+		File mlpkTranslation = new File(translationDirectory, UiBasicLocalization.getMlpkFilename(languageCode));
+		mlpkTranslation.deleteOnExit();
+		writeDataToFile(mlpkTranslation, data);
+		
+		File mtfTranslation = new File(translationDirectory, UiBasicLocalization.getMtfFilename(languageCode));
+		mtfTranslation.deleteOnExit();
+		writeDataToFile(mtfTranslation, data);
+/*		File mtfHelpFile = new File(translationDirectory, UiBasicLocalization.getMlpkFilename(languageCode));
+		mtfHelpFile.deleteOnExit();
+		writeDataToFile(mtfHelpFile, data);
+		File mtfHelpTOCFile = new File(translationDirectory, UiBasicLocalization.getMlpkFilename(languageCode));
+		mtfHelpTOCFile.deleteOnExit();
+		writeDataToFile(mtfHelpTOCFile, data);
+*/
+		assertTrue("mtf file should exist", mtfTranslation.exists());
+		assertTrue("mlp file should exist", mlpkTranslation.exists());
+		tmpLocalization.hideUnofficialTranslationFiles(languageCode);
+		assertFalse("mtf file now be hidden", mtfTranslation.exists());
+		assertTrue("mlp file should exist", mlpkTranslation.exists());
+
+		tmpLocalization.hideUnofficialTranslationFiles(languageCode);
+		assertFalse("mlp file should exist", mlpkTranslation.exists());
+
+		DirectoryUtils.deleteEntireDirectoryTree(translationDirectory);
+	}
+	
+	private void writeDataToFile(File mlpkTranslation, String data) throws IOException
+	{
+		UnicodeWriter out = new UnicodeWriter(mlpkTranslation);
+		out.write(data);
+		out.close();
+	}
+
 	public void testAddedMTFLanguageFile() throws Exception
 	{
 		File translationDirectory = createTempDirectory();
@@ -206,13 +242,11 @@ public class TestLocalization extends TestCaseEnhanced
 		boolean foundSomeTestLanguage = doesLanguageExist(myLocalization, someTestLanguageCode);
 		assertFalse("must not have testLanguage yet", foundSomeTestLanguage);
 		
-		File someTestLanguage = new File(translationDirectory,UiBasicLocalization.getMtfFilename(someTestLanguageCode));
-		someTestLanguage.deleteOnExit();
-		UnicodeWriter out = new UnicodeWriter(someTestLanguage);
+		File someTestLanguageFile = new File(translationDirectory,UiBasicLocalization.getMtfFilename(someTestLanguageCode));
+		someTestLanguageFile.deleteOnExit();
 		String buttonName = "ok";
 		String someLanguageTranslationOfOk = "dkjfl";
-		out.write("button:"+buttonName+"="+someLanguageTranslationOfOk);
-		out.close();
+		writeDataToFile(someTestLanguageFile, "button:"+buttonName+"="+someLanguageTranslationOfOk);
 		
 		foundSomeTestLanguage = doesLanguageExist(myLocalization, someTestLanguageCode);
 		assertTrue("should now have testLanguage", foundSomeTestLanguage);
