@@ -36,6 +36,7 @@ import org.martus.client.swingui.UiLocalization;
 import org.martus.common.MartusUtilities;
 import org.martus.common.clientside.ChoiceItem;
 import org.martus.common.clientside.DateUtilities;
+import org.martus.common.clientside.Localization;
 import org.martus.common.clientside.UiBasicLocalization;
 import org.martus.common.test.TestCaseEnhanced;
 import org.martus.util.StringInputStream;
@@ -61,6 +62,14 @@ public class TestMartusLocalization extends TestCaseEnhanced
 		assertEquals("Spanish should always return Slash DMY", DateUtilities.DMY_SLASH.getCode(), bd.getDefaultDateFormatForLanguage(UiBasicLocalization.SPANISH));
 		assertEquals("Russian should always return Dot DMY", DateUtilities.DMY_DOT.getCode(), bd.getDefaultDateFormatForLanguage(UiBasicLocalization.RUSSIAN));
 		assertEquals("An unknown Language should always return the default date format", DateUtilities.getDefaultDateFormatCode(), bd.getDefaultDateFormatForLanguage("ZZ"));
+	}
+	
+	public void testIsLanguageFile()
+	{
+		assertTrue(Localization.isLanguageFile("Martus-en.mtf"));
+		assertTrue(Localization.isLanguageFile("Martus-ab.mtf"));
+		assertTrue(Localization.isLanguageFile("martus-ab.mtf"));
+		assertTrue(Localization.isLanguageFile("MARTUS-ab.MTF"));
 	}
 	
 	public void testValidLanguageCodes()
@@ -108,7 +117,7 @@ public class TestMartusLocalization extends TestCaseEnhanced
 		assertEquals("", bd.getLanguageCodeFromFilename("Martus.mtf"));
 		assertEquals("", bd.getLanguageCodeFromFilename("Martus-es.xyz"));
 		assertEquals("es", bd.getLanguageCodeFromFilename("Martus-es.mtf"));
-		assertEquals("Martus mtf files are case Sensitive", "", bd.getLanguageCodeFromFilename("martus-es.mtf"));
+		assertEquals("Martus mtf files are not case Sensitive", "es", bd.getLanguageCodeFromFilename("martus-es.mtf"));
 	}
 
 	public void testTranslations()
