@@ -81,7 +81,7 @@ public class ActionMenuQuickErase extends UiMenuAction
 		if(mainWindow.getApp().deleteAllBulletinsAndUserFolders(options))
 		{	
 			if(packetDir.list().length > 0)
-				confirmDeleteSubDirectory(packetDir, options);	
+				confirmThenDeleteSubDirectories(packetDir, options);	
 			if(options.isScrubSelected())
 				baseTag = "QuickEraseScrubWorked";
 			else
@@ -94,7 +94,7 @@ public class ActionMenuQuickErase extends UiMenuAction
 		mainWindow.folderTreeContentsHaveChanged();		
 	}
 	
-	private void confirmDeleteSubDirectory(File packetDir, QuickEraseOptions options)
+	private void confirmThenDeleteSubDirectories(File packetDir, QuickEraseOptions options)
 	{
 		if( options.isDonotPromptSelected() || 
 		    mainWindow.confirmDlgBeep(mainWindow, "DeleteSubDirectory"))
