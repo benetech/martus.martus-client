@@ -66,6 +66,8 @@ class BackgroundUploadTimerTask extends TimerTask
 			return;
 		if(mainWindow.preparingToExitMartus)
 			return;
+		if(!getApp().isServerConfigured())
+			return;
 		try
 		{
 			checkComplianceStatement();
