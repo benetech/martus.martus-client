@@ -27,6 +27,7 @@ package org.martus.client.swingui.bulletincomponent;
 
 import java.awt.Color;
 import javax.swing.ListSelectionModel;
+import org.martus.client.swingui.HeadQuartersTableModel;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.renderers.BooleanRenderer;
 import org.martus.client.swingui.renderers.StringRenderer;

@@ -24,7 +24,7 @@ Boston, MA 02111-1307, USA.
 
 */
 
-package org.martus.client.swingui.bulletincomponent;
+package org.martus.client.swingui;
 
 import java.util.Iterator;
 import java.util.Vector;
@@ -34,7 +34,7 @@ import org.martus.client.swingui.tablemodels.UiTableModel;
 import org.martus.common.HQKeys;
 import org.martus.common.clientside.UiBasicLocalization;
 
-public class HeadQuartersTableModel extends UiTableModel 
+public abstract class HeadQuartersTableModel extends UiTableModel 
 {
 	public HeadQuartersTableModel(UiBasicLocalization localizationToUse)
 	{
@@ -64,6 +64,18 @@ public class HeadQuartersTableModel extends UiTableModel
 		return keys;
 	}
 	
+	public HQKeys getAllDefaultHeadQuarterKeys()
+	{
+		HQKeys keys = new HQKeys();
+		for (Iterator iter = entries.iterator(); iter.hasNext();) 
+		{
+			HeadQuarterEntry hqEntry = (HeadQuarterEntry) iter.next();
+			if(hqEntry.isDefault())
+				keys.add(hqEntry.getKey());
+		}
+		return keys;
+	}
+
 	public int getNumberOfSelectedHQs()
 	{
 		int numberOfSelectedHQs = 0;
@@ -75,7 +87,6 @@ public class HeadQuartersTableModel extends UiTableModel
 		}
 		return numberOfSelectedHQs;
 	}
-	
 	
 	public int getRowCount() 
 	{
@@ -89,6 +100,10 @@ public class HeadQuartersTableModel extends UiTableModel
 	
 	public String getColumnName(int column)
 	{
+		if(column == COLUMN_DEFAULT)
+			return localization.getFieldLabel("ConfigureHeadQuartersDefault");
+		if(column == COLUMN_PUBLIC_CODE)
+			return localization.getFieldLabel("ConfigureHQColumnHeaderPublicCode");
 		if(column == COLUMN_SELECTED)
 			return localization.getFieldLabel("HeadQuartersSelected");
 		if(column == COLUMN_LABEL)
@@ -114,7 +129,10 @@ public class HeadQuartersTableModel extends UiTableModel
 			entry.setSelected(((Boolean)value).booleanValue());
 			if(selectionListener != null)
 				selectionListener.selectedHQsChanged(getNumberOfSelectedHQs());
-			
+		}
+		else if(column == COLUMN_DEFAULT)
+		{
+			entry.setDefault(((Boolean)value).booleanValue());
 		}
 	}
 
@@ -139,13 +157,12 @@ public class HeadQuartersTableModel extends UiTableModel
 		return false;
 	}
 	
-
 	Vector entries;
 	public int COLUMN_DEFAULT = -1;
 	public int COLUMN_SELECTED = -1;
 	public int COLUMN_PUBLIC_CODE = -1;
 	public int COLUMN_LABEL = -1;
-	int columnCount;
+	public int columnCount;
 	UiBasicLocalization localization;
 	HeadQuartersSelectionListener selectionListener;
 }

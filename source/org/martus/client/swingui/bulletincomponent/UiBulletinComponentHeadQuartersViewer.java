@@ -26,6 +26,7 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.swingui.bulletincomponent;
 
 
+import org.martus.client.swingui.HeadQuarterEntry;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.common.HQKeys;
 import org.martus.common.bulletin.Bulletin;

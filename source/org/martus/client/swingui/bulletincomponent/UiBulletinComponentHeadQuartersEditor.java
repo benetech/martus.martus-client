@@ -28,6 +28,8 @@ package org.martus.client.swingui.bulletincomponent;
 import java.util.Vector;
 
 import org.martus.client.core.MartusApp;
+import org.martus.client.swingui.HeadQuarterEntry;
+import org.martus.client.swingui.HeadQuartersSelectionListener;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.common.HQKey;
 import org.martus.common.HQKeys;

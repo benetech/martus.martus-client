@@ -1,6 +1,4 @@
-/*
-
-The Martus(tm) free, social justice documentation and
+/*The Martus(tm) free, social justice documentation and
 monitoring software. Copyright (C) 2005, Beneficent
 Technology, Inc. (Benetech).
 
@@ -24,16 +22,17 @@ Boston, MA 02111-1307, USA.
 
 */
 
-package org.martus.client.swingui.bulletincomponent;
+package org.martus.client.swingui;
 
-import org.martus.client.swingui.HeadQuartersTableModel;
 import org.martus.common.clientside.UiBasicLocalization;
 
-public class HeadQuartersTableModelView extends HeadQuartersTableModel
+public class HeadQuartersTableModelConfiguration extends HeadQuartersTableModel 
 {
-	public HeadQuartersTableModelView(UiBasicLocalization localizationToUse)
+	public HeadQuartersTableModelConfiguration(UiBasicLocalization localizationToUse) 
 	{
 		super(localizationToUse);
+		COLUMN_DEFAULT = columnCount++;
+		COLUMN_PUBLIC_CODE = columnCount++;
 		COLUMN_LABEL = columnCount++;
 	}
 }

@@ -23,7 +23,7 @@
 
 	*/
 
-package org.martus.client.swingui.bulletincomponent;
+package org.martus.client.swingui;
 
 	import java.util.EventListener;
 

@@ -32,6 +32,7 @@ import javax.swing.event.ChangeEvent;
 
 import org.martus.client.core.EncryptionChangeListener;
 import org.martus.client.core.LanguageChangeListener;
+import org.martus.client.swingui.HeadQuartersSelectionListener;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.fields.UiField;
 import org.martus.common.FieldSpec;
