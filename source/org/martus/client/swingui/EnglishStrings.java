@@ -792,8 +792,8 @@ public class EnglishStrings
 "field:WasSentNo=No",
 
 "field:BulletinViewHeading=Martus Bulletin",
-"field:ViewBulletinHQInfo=#N# Headquarter account(s) can view this private information",
-"field:ModifyBulletinHQInfo=#N# Headquarter account(s) will be able to view this private information",
+"field:ViewBulletinHQInfo=#NumberOfHQs# Headquarter account(s) can view this private information",
+"field:ModifyBulletinHQInfo=#NumberOfHQs# Headquarter account(s) will be able to view this private information",
 "field:RemoveMartusFromSystemWarning=WARNING!",
 "field:RemoveMartusFromSystemMultipleAccountsWarning1=IMPORTANT: There are other Martus accounts on this system.",
 "field:RemoveMartusFromSystemMultipleAccountsWarning2=All of their data will be removed as well!",

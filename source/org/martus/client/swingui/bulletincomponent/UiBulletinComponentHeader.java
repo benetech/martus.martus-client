@@ -131,7 +131,7 @@ public class UiBulletinComponentHeader extends UiBulletinComponentSection
 		try
 		{
 			HashMap tokenReplacement = new HashMap();
-			tokenReplacement.put("#N#", Integer.toString(numberOfHqs));
+			tokenReplacement.put("#NumberOfHQs#", Integer.toString(numberOfHqs));
 			summaryText = TokenReplacement.replaceTokens(summaryText, tokenReplacement);
 		}
 		catch (Exception e)
