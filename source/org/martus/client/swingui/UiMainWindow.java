@@ -493,7 +493,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		{
 			complianceStatementAlwaysEnglish =
 			BEGIN_HTML_TAGS +
-			"Martus?<br></br>" +
+			"Martus™<br></br>" +
 			productDescription +
 			END_HTML_TAGS;
 		}
