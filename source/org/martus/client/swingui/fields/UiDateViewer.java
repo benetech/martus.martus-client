@@ -46,17 +46,18 @@ public class UiDateViewer extends UiField
 
 	public String getText()
 	{
-		return "";
+		return storedValue;
 	}
 
 	public void setText(String newText)
 	{
-		value = localization.convertStoredDateToDisplay(newText);
+		storedValue = newText;
+		String value = localization.convertStoredDateToDisplay(newText);
 		label.setText("  " + value + "  ");
 	}
 
 	UiBasicLocalization localization;
 	JLabel label;
-	String value;
+	String storedValue;
 }
 
