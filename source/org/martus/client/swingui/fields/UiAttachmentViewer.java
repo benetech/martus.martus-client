@@ -28,6 +28,14 @@ package org.martus.client.swingui.fields;
 
 import java.awt.Cursor;
 import java.awt.Dimension;
+import java.awt.dnd.DnDConstants;
+import java.awt.dnd.DragGestureEvent;
+import java.awt.dnd.DragGestureListener;
+import java.awt.dnd.DragSource;
+import java.awt.dnd.DragSourceDragEvent;
+import java.awt.dnd.DragSourceDropEvent;
+import java.awt.dnd.DragSourceEvent;
+import java.awt.dnd.DragSourceListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
@@ -43,6 +51,7 @@ import javax.swing.ListSelectionModel;
 import javax.swing.table.AbstractTableModel;
 
 import org.martus.client.core.MartusApp;
+import org.martus.client.core.TransferableAttachmentList;
 import org.martus.client.swingui.UiLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.bulletincomponent.UiBulletinComponent;
@@ -55,7 +64,7 @@ import org.martus.swing.Utilities;
 
 
 
-public class UiAttachmentViewer extends JPanel
+public class UiAttachmentViewer extends JPanel  implements DragGestureListener, DragSourceListener
 {
 	public UiAttachmentViewer(UiMainWindow mainWindowToUse, UiBulletinComponent bulletinComponentToUse)
 	{
@@ -98,6 +107,8 @@ public class UiAttachmentViewer extends JPanel
 
 		resizeTable();
 		attachmentTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		dragSource.createDefaultDragGestureRecognizer(attachmentTable,
+							DnDConstants.ACTION_COPY_OR_MOVE, this);
 	}
 
 	public void resizeTable()
@@ -161,6 +172,17 @@ public class UiAttachmentViewer extends JPanel
 		{
 			return (AttachmentProxy)attachmentList.get(row);
 		}
+		
+		public AttachmentProxy[] getSelectedAttachments()
+		{
+			int[] rows = attachmentTable.getSelectedRows();
+			if(rows.length <= 0)
+				return null;
+			AttachmentProxy[] list = new AttachmentProxy[rows.length];
+			for(int i = 0; i < rows.length; ++i)
+				list[i] = (AttachmentProxy)attachmentList.get(rows[i]);
+			return list;
+		}
 
 		public Object getValueAt(int row, int column)
 		{
@@ -177,7 +199,7 @@ public class UiAttachmentViewer extends JPanel
 			return false;
 		}
 
-		private Vector attachmentList;
+		Vector attachmentList;
 	}
 
 	public int GetSelection()
@@ -311,6 +333,36 @@ public class UiAttachmentViewer extends JPanel
 		}
 	}
 
+	public void dragGestureRecognized(DragGestureEvent dge)
+	{
+		AttachmentProxy[] attachments = model.getSelectedAttachments();
+		if(attachments == null)
+			return;
+		TransferableAttachmentList dragable = new TransferableAttachmentList(mainWindow.getStore().getDatabase(), mainWindow.getApp().getSecurity(), attachments);
+		dge.startDrag(DragSource.DefaultCopyDrop, dragable, this);
+	}
+
+	public void dragEnter(DragSourceDragEvent dsde)
+	{
+	}
+
+	public void dragOver(DragSourceDragEvent dsde)
+	{
+	}
+
+	public void dropActionChanged(DragSourceDragEvent dsde)
+	{
+	}
+
+	public void dragDropEnd(DragSourceDropEvent dsde)
+	{
+	}
+
+	public void dragExit(DragSourceEvent dse)
+	{
+	}
+	
+	
 	UiMainWindow mainWindow;
 	UiBulletinComponent bulletinComponent;
 	MartusApp app;
@@ -321,6 +373,8 @@ public class UiAttachmentViewer extends JPanel
 	JScrollPane attachmentPane;
 
 	private static File lastAttachmentSaveDirectory;
+	private DragSource dragSource = DragSource.getDefaultDragSource();
 
 	static final int VISIBLE_ROW_COUNT = 4;
+
 }

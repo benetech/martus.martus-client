@@ -116,21 +116,18 @@ public class TransferableBulletinList implements Transferable
 		if(flavor.equals(bulletinListDataFlavor))
 			return this;
 
-		if(flavor.equals(DataFlavor.javaFileListFlavor))
+		if(!flavor.equals(DataFlavor.javaFileListFlavor))
+			throw new UnsupportedFlavorException(flavor);
+
+		if(files == null || files.size() == 0)
 		{
-			if(files == null || files.size() == 0)
-			{
-				//System.out.println("TransferableBulletin.getTransferData : creatingZipFile");
-				if (!createTransferableZipFiles())
-					throw new UnsupportedFlavorException(flavor);
-			}
-
-			LinkedList list = new LinkedList();
-			list.addAll(files);
-			return list;
+			//System.out.println("TransferableBulletin.getTransferData : creatingZipFile");
+			if (!createTransferableZipFiles())
+				throw new UnsupportedFlavorException(flavor);
 		}
-
-		throw new UnsupportedFlavorException(flavor);
+		LinkedList list = new LinkedList();
+		list.addAll(files);
+		return list;
 	}
 
 	public DataFlavor[] getTransferDataFlavors()
