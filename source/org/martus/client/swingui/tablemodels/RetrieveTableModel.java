@@ -199,6 +199,9 @@ abstract public class RetrieveTableModel extends AbstractTableModel
 		if(store.doesBulletinRevisionExist(uid))
 			return false;
 		
+		if(store.hasNewerRevision(uid))
+			return false;
+		
 		return true;
 	}
 
