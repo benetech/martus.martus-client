@@ -39,16 +39,8 @@ import javax.swing.border.LineBorder;
 import org.martus.client.swingui.UiLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.UiWarningLabel;
-import org.martus.client.swingui.fields.UiDateEditor;
 import org.martus.client.swingui.fields.UiField;
-import org.martus.client.swingui.fields.UiFlexiDateEditor;
-import org.martus.client.swingui.fields.UiField.DataInvalidException;
 import org.martus.common.FieldSpec;
-import org.martus.common.GridFieldSpec;
-import org.martus.common.bulletin.AttachmentProxy;
-import org.martus.common.bulletin.Bulletin;
-import org.martus.common.clientside.ChoiceItem;
-import org.martus.common.packet.FieldDataPacket;
 import org.martus.swing.ParagraphLayout;
 
 abstract public class UiBulletinComponentSection extends JPanel
@@ -57,20 +49,20 @@ abstract public class UiBulletinComponentSection extends JPanel
 	{
 		mainWindow = mainWindowToUse;
 
+		setBorder(new EtchedBorder());
+
 		ParagraphLayout layout = new ParagraphLayout();
 		layout.outdentFirstField();
 		setLayout(layout);
 
-		setBorder(new EtchedBorder());
-
-		encryptedIndicator = new JLabel("", null, JLabel.LEFT);
-		encryptedIndicator.setVerticalTextPosition(JLabel.TOP);
-		encryptedIndicator.setFont(encryptedIndicator.getFont().deriveFont(Font.BOLD));
+		sectionHeading = new JLabel("", null, JLabel.LEFT);
+		sectionHeading.setVerticalTextPosition(JLabel.TOP);
+		sectionHeading.setFont(sectionHeading.getFont().deriveFont(Font.BOLD));
 
 		warningIndicator = new UiWarningLabel();
 
 		clearWarningIndicator();
-		add(encryptedIndicator);
+		add(sectionHeading);
 		add(warningIndicator);
 	}
 	
@@ -84,122 +76,12 @@ abstract public class UiBulletinComponentSection extends JPanel
 		return getMainWindow().getLocalization();
 	}
 
-	public void createLabelsAndFields(FieldSpec[] specs)
+	void updateSectionBorder(boolean isEncrypted)
 	{
-		fieldSpecs = specs;
-
-		fields = new UiField[specs.length];
-		for(int fieldNum = 0; fieldNum < specs.length; ++fieldNum)
-		{
-			fields[fieldNum] = createAndAddLabelAndField(specs[fieldNum]);
-		}
-		JLabel attachments = new JLabel(getLocalization().getFieldLabel("attachments"));
-		add(attachments, ParagraphLayout.NEW_PARAGRAPH);
-		createAttachmentTable();
-	}
-
-	public UiField createAndAddLabelAndField(FieldSpec spec)
-	{
-		UiField field = createField(spec);
-		field.initalize();
-		add(createLabel(spec), ParagraphLayout.NEW_PARAGRAPH);
-		add(field.getComponent());
-		return field;
-	}
-	
-	public UiField[] getFields()
-	{
-		return fields;
-	}
-
-	public void copyDataFromPacket(FieldDataPacket fdp)
-	{
-		for(int fieldNum = 0; fieldNum < fields.length; ++fieldNum)
-		{
-			String text = "";
-			if(fdp != null)
-				text = fdp.get(fieldSpecs[fieldNum].getTag());
-			fields[fieldNum].setText(text);
-		}
-
-		if(fdp == null)
-			return;
-
-		AttachmentProxy[] attachments = fdp.getAttachments();
-		for(int i = 0 ; i < attachments.length ; ++i)
-			addAttachment(attachments[i]);
-	}
-
- 	public JLabel createLabel(FieldSpec spec)
-	{
-		String labelText = spec.getLabel();
-		if(labelText.equals(""))
-			labelText = getLocalization().getFieldLabel(spec.getTag());
-		return new JLabel(labelText);
-	}
-
-	private UiField createField(FieldSpec fieldSpec)
-	{
-		UiField field = null;
-
-		switch(fieldSpec.getType())
-		{
-			case FieldSpec.TYPE_MULTILINE:
-				field = createMultilineField();
-				break;
-			case FieldSpec.TYPE_DATE:
-				field = createDateField();
-				break;
-			case FieldSpec.TYPE_DATERANGE:
-				field = createFlexiDateField();
-				break;
-			case FieldSpec.TYPE_LANGUAGE:
-				ChoiceItem[] languages =
-					getLocalization().getLanguageNameChoices();
-				field = createChoiceField(languages);
-				break;					
-			case FieldSpec.TYPE_NORMAL:
-				field = createNormalField();
-				break;
-			case FieldSpec.TYPE_BOOLEAN:
-				field = createBoolField();
-				break;
-			case FieldSpec.TYPE_GRID:
-				field = createGridField((GridFieldSpec)fieldSpec);
-				break;
-			case FieldSpec.TYPE_UNKNOWN:
-			default:
-				field = createUnknownField();
-				break;
-		}
-		field.getComponent().setBorder(new LineBorder(Color.black));
-		return field;
-	}
-
-
-	public void updateEncryptedIndicator(boolean isEncrypted)
-	{
-		String iconFileName = "unlocked.jpg";
-		String title = getLocalization().getFieldLabel("publicsection");
+		Color color = Color.lightGray;
 		if(isEncrypted)
-		{
-			iconFileName = "locked.jpg";
-			title = getLocalization().getFieldLabel("privatesection");
-		}
-
-		Icon icon = new ImageIcon(UiBulletinComponentSection.class.getResource(iconFileName));
-		encryptedIndicator.setIcon(icon);
-		encryptedIndicator.setText(title);
-
-		updateSectionBorder(isEncrypted);
-	}
-
-	private void updateSectionBorder(boolean isEncrypted)
-	{
-		if(isEncrypted)
-			setBorder(new LineBorder(Color.red, 5));
-		else
-			setBorder(new LineBorder(Color.lightGray, 5));
+			color = Color.red;
+		setBorder(new LineBorder(color, 5));
 	}
 
 	public void clearWarningIndicator()
@@ -231,83 +113,18 @@ abstract public class UiBulletinComponentSection extends JPanel
 			getParagraphLayout().setFirstColumnWidth(otherWidth);
 	}
 
-	public void copyDataToBulletin(Bulletin bulletin)
-	{	
-		for(int fieldNum = 0; fieldNum < fields.length; ++fieldNum)
-		{						
-			bulletin.set(fieldSpecs[fieldNum].getTag(), fields[fieldNum].getText());													
-		}
-	}
-
-	
-	public void validateData() throws DataInvalidException
+	protected void setSectionIconAndTitle(String iconFileName, String title)
 	{
-		for(int fieldNum = 0; fieldNum < fields.length; ++fieldNum)
-		{
-			String tag = fieldSpecs[fieldNum].getTag();
-			String label = getLocalization().getFieldLabel(tag);
-			try 
-			{
-				fields[fieldNum].validate();
-			} 
-			catch (UiDateEditor.DateFutureException e) 
-			{
-				throw new UiDateEditor.DateFutureException(label);
-			}
-			catch(UiFlexiDateEditor.DateRangeInvertedException e)
-			{
-				throw new UiFlexiDateEditor.DateRangeInvertedException(label); 
-			}
-		}
-		
-		validateAttachments();
+		Icon icon = new ImageIcon(UiBulletinComponentSection.class.getResource(iconFileName));
+		sectionHeading.setIcon(icon);
+		sectionHeading.setText(title);
 	}
 
-	public boolean isAnyFieldModified(Bulletin original, Bulletin newBulletin)
-	{
-		for(int fieldNum = 0; fieldNum < fields.length; ++fieldNum)
-		{			
-			String fieldTag = fieldSpecs[fieldNum].getTag();			
-			String oldFieldText = original.get(fieldTag);
-			String newFieldText = newBulletin.get(fieldTag);
-
-			if (!oldFieldText.equals(newFieldText))
-			{									
-				return true;
-			}																
-		}		
-		
-		return false;
-	}
-
-	public static class AttachmentMissingException extends DataInvalidException
-	{
-		public AttachmentMissingException(String localizedTag)
-		{
-			super(localizedTag);
-		}
-	}
-	
 
 
 	private UiMainWindow mainWindow;
-	JLabel encryptedIndicator;
+	JLabel sectionHeading;
 	JLabel warningIndicator;
 	UiField[] fields;
 	FieldSpec[] fieldSpecs;
-
-	abstract public UiField createNormalField();
-	abstract public UiField createMultilineField();
-	abstract public UiField createChoiceField(ChoiceItem[] choices);
-	abstract public UiField createDateField();
-	abstract public UiField createFlexiDateField();
-	abstract public UiField createUnknownField();
-	abstract public UiField createBoolField();
-	abstract public UiField createGridField(GridFieldSpec fieldSpec);
-
-	abstract public void createAttachmentTable();
-	abstract public void addAttachment(AttachmentProxy a);
-	abstract public void clearAttachments();
-	abstract public void validateAttachments() throws DataInvalidException;
-
 }

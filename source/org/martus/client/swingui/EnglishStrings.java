@@ -765,6 +765,9 @@ public class EnglishStrings
 "field:WasSentYes=Yes",
 "field:WasSentNo=No",
 
+"field:BulletinViewHeading=Martus Bulletin",
+"field:BulletinViewHQInfo=#N# Headquarter account(s) will be able to view the private information in this bulletin",
+
 "folder:%OutBox=Unsent Bulletins",
 "folder:%Sent=Saved Bulletins",
 "folder:%Draft=Old Draft Bulletins",

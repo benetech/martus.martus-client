@@ -43,7 +43,7 @@ import org.martus.common.GridFieldSpec;
 import org.martus.common.bulletin.AttachmentProxy;
 import org.martus.common.clientside.ChoiceItem;
 
-public class UiBulletinComponentEditorSection extends UiBulletinComponentSection
+public class UiBulletinComponentEditorSection extends UiBulletinComponentDataSection
 {
 
 	public UiBulletinComponentEditorSection(UiMainWindow ownerToUse)

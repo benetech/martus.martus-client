@@ -48,7 +48,7 @@ import org.martus.common.packet.FieldDataPacket;
 abstract public class UiBulletinComponent extends JPanel implements Scrollable, ChangeListener
 {
 	abstract public void setEncryptionChangeListener(EncryptionChangeListener listener);
-	abstract public UiBulletinComponentSection createBulletinComponentSection();
+	abstract public UiBulletinComponentDataSection createBulletinComponentDataSection();
 	abstract public void copyDataToBulletin(Bulletin bulletin) throws
 			IOException, MartusCrypto.EncryptionException;
 	abstract public void validateData() throws UiField.DataInvalidException; 
@@ -69,19 +69,26 @@ abstract public class UiBulletinComponent extends JPanel implements Scrollable, 
 
 	public void createSections()
 	{
-		publicStuff = createSection(currentBulletin.getPublicFieldSpecs(), SOMETIMES_ENCRYPTED);
-		privateStuff = createSection(currentBulletin.getPrivateFieldSpecs(), ALWAYS_ENCRYPTED);
+		headerSection = createHeaderSection();
+		publicSection = createDataSection(currentBulletin.getPublicFieldSpecs(), SOMETIMES_ENCRYPTED);
+		privateSection = createDataSection(currentBulletin.getPrivateFieldSpecs(), ALWAYS_ENCRYPTED);
 		ensureBothSectionsLineUp();
 		setLayout(new BorderLayout());
-		add(publicStuff, BorderLayout.CENTER);
-		add(privateStuff, BorderLayout.SOUTH);
+		add(headerSection, BorderLayout.NORTH);
+		add(publicSection, BorderLayout.CENTER);
+		add(privateSection, BorderLayout.SOUTH);
 	}
 
-	private UiBulletinComponentSection createSection(
+	private UiBulletinComponentHeader createHeaderSection()
+	{
+		return new UiBulletinComponentHeader(mainWindow);
+	}
+	
+	private UiBulletinComponentDataSection createDataSection(
 		FieldSpec[] fieldSpecs,
 		int encryptionStatus)
 	{
-		UiBulletinComponentSection target = createBulletinComponentSection();
+		UiBulletinComponentDataSection target = createBulletinComponentDataSection();
 		if(encryptionStatus == SOMETIMES_ENCRYPTED)
 			createAllPrivateField(target);
 
@@ -89,7 +96,8 @@ abstract public class UiBulletinComponent extends JPanel implements Scrollable, 
 
 		return target;
 	}
-	private void createAllPrivateField(UiBulletinComponentSection target)
+	
+	private void createAllPrivateField(UiBulletinComponentDataSection target)
 	{
 		FieldSpec allPrivateFieldSpec = FieldSpec.createStandardField("allprivate", FieldSpec.TYPE_BOOLEAN);
 		allPrivateField = target.createAndAddLabelAndField(allPrivateFieldSpec);
@@ -98,8 +106,8 @@ abstract public class UiBulletinComponent extends JPanel implements Scrollable, 
 
 	private void ensureBothSectionsLineUp()
 	{
-		publicStuff.matchFirstColumnWidth(privateStuff);
-		privateStuff.matchFirstColumnWidth(publicStuff);
+		publicSection.matchFirstColumnWidth(privateSection);
+		privateSection.matchFirstColumnWidth(publicSection);
 	}
 
 	public Bulletin getCurrentBulletin()
@@ -113,13 +121,16 @@ abstract public class UiBulletinComponent extends JPanel implements Scrollable, 
 		currentBulletin = bulletinToShow;
 		if(currentBulletin == null)
 		{
-			publicStuff = null;
-			privateStuff = null;
+			headerSection = null;
+			publicSection = null;
+			privateSection = null;
 			repaint();
 			return;
 		}
 		
 		createSections();
+		
+		headerSection.copyDataFromBulletin(currentBulletin);
 
 		String isAllPrivate = FieldSpec.FALSESTRING;
 		if(currentBulletin.isAllPrivate())
@@ -127,34 +138,34 @@ abstract public class UiBulletinComponent extends JPanel implements Scrollable, 
 		allPrivateField.setText(isAllPrivate);
 
 		FieldDataPacket publicData = currentBulletin.getFieldDataPacket();
-		publicStuff.clearAttachments();
-		publicStuff.copyDataFromPacket(publicData);
-		publicStuff.clearWarningIndicator();
+		publicSection.clearAttachments();
+		publicSection.copyDataFromPacket(publicData);
+		publicSection.clearWarningIndicator();
 
 		FieldDataPacket privateData = currentBulletin.getPrivateFieldDataPacket();
-		privateStuff.clearAttachments();
-		privateStuff.copyDataFromPacket(privateData);
-		privateStuff.clearWarningIndicator();
+		privateSection.clearAttachments();
+		privateSection.copyDataFromPacket(privateData);
+		privateSection.clearWarningIndicator();
 
 		if(!currentBulletin.isValid())
 		{
 			System.out.println("Damaged: " + currentBulletin.getLocalId());
 			String text = mainWindow.getLocalization().getFieldLabel("MayBeDamaged");
-			publicStuff.updateWarningIndicator(text);
-			privateStuff.updateWarningIndicator(text);
+			publicSection.updateWarningIndicator(text);
+			privateSection.updateWarningIndicator(text);
 		}
 		else if(currentBulletin.hasUnknownTags())
 		{
 			System.out.println("Unknown tags: " + currentBulletin.getLocalId());
 			String text = mainWindow.getLocalization().getFieldLabel("BulletinHasUnknownStuff");
-			publicStuff.updateWarningIndicator(text);
-			privateStuff.updateWarningIndicator(text);
+			publicSection.updateWarningIndicator(text);
+			privateSection.updateWarningIndicator(text);
 		}
 		else if(!currentBulletin.getAccount().equals(mainWindow.getApp().getAccountId()))
 		{
 			String text = mainWindow.getLocalization().getFieldLabel("BulletinNotYours");
-			publicStuff.updateWarningIndicator(text);
-			privateStuff.updateWarningIndicator(text);
+			publicSection.updateWarningIndicator(text);
+			privateSection.updateWarningIndicator(text);
 			
 		}
 
@@ -163,11 +174,11 @@ abstract public class UiBulletinComponent extends JPanel implements Scrollable, 
 
 	public void updateEncryptedIndicator(boolean isEncrypted)
 	{
-		if(publicStuff != null)
-			publicStuff.updateEncryptedIndicator(isEncrypted);
+		if(publicSection != null)
+			publicSection.updateEncryptedIndicator(isEncrypted);
 		
-		if(privateStuff != null)
-			privateStuff.updateEncryptedIndicator(true);
+		if(privateSection != null)
+			privateSection.updateEncryptedIndicator(true);
 	}
 	
 	public void encryptAndDisableAllPrivate()
@@ -209,8 +220,9 @@ abstract public class UiBulletinComponent extends JPanel implements Scrollable, 
 
 	UiField allPrivateField;
 	Bulletin currentBulletin;
-	UiBulletinComponentSection publicStuff;
-	UiBulletinComponentSection privateStuff;	
+	UiBulletinComponentHeader headerSection;
+	UiBulletinComponentDataSection publicSection;
+	UiBulletinComponentDataSection privateSection;	
 
 	private static final int SOMETIMES_ENCRYPTED = 1;
 	private static final int ALWAYS_ENCRYPTED = 2;

@@ -46,15 +46,15 @@ public class UiBulletinEditor extends UiBulletinComponent
 		// ensure that attachmentEditor gets initialized
 	}
 
-	public UiBulletinComponentSection createBulletinComponentSection()
+	public UiBulletinComponentDataSection createBulletinComponentDataSection()
 	{
 		return new UiBulletinComponentEditorSection(mainWindow);
 	}
 
 	public void validateData() throws UiField.DataInvalidException 
 	{
-		publicStuff.validateData();
-		privateStuff.validateData();
+		publicSection.validateData();
+		privateSection.validateData();
 	}
 	
 	public boolean isBulletinModified() throws
@@ -68,10 +68,10 @@ public class UiBulletinEditor extends UiBulletinComponent
 		if(currentStateOfBulletinBeingEdited.isAllPrivate() != currentBulletin.isAllPrivate())
 			return true;
 		
-		if(publicStuff.isAnyFieldModified(previousStateOfBulletinBeingEdited, currentStateOfBulletinBeingEdited))
+		if(publicSection.isAnyFieldModified(previousStateOfBulletinBeingEdited, currentStateOfBulletinBeingEdited))
 			return true;
 			
-		if(privateStuff.isAnyFieldModified(previousStateOfBulletinBeingEdited, currentStateOfBulletinBeingEdited))
+		if(privateSection.isAnyFieldModified(previousStateOfBulletinBeingEdited, currentStateOfBulletinBeingEdited))
 			return true;
 
 		if (isPublicAttachmentModified())	
@@ -86,7 +86,7 @@ public class UiBulletinEditor extends UiBulletinComponent
 	
 	private boolean isPublicAttachmentModified()
 	{
-		UiBulletinComponentEditorSection section = (UiBulletinComponentEditorSection)publicStuff;
+		UiBulletinComponentEditorSection section = (UiBulletinComponentEditorSection)publicSection;
 		AttachmentProxy[] publicAttachments = section.attachmentEditor.getAttachments();
 		AttachmentProxy[] currentAttachments = currentBulletin.getPublicAttachments();
 		
@@ -97,7 +97,7 @@ public class UiBulletinEditor extends UiBulletinComponent
 
 	private boolean isPrivateAttachmentModified()
 	{
-		UiBulletinComponentEditorSection section = (UiBulletinComponentEditorSection)privateStuff;
+		UiBulletinComponentEditorSection section = (UiBulletinComponentEditorSection)privateSection;
 		AttachmentProxy[] currentAttachments = currentBulletin.getPrivateAttachments();
 		AttachmentProxy[] privateAttachments = section.attachmentEditor.getAttachments();	
 			
@@ -134,19 +134,19 @@ public class UiBulletinEditor extends UiBulletinComponent
 			isAllPrivate = true;
 		bulletin.setAllPrivate(isAllPrivate);
 		
-		publicStuff.copyDataToBulletin(bulletin);
-		privateStuff.copyDataToBulletin(bulletin);
+		publicSection.copyDataToBulletin(bulletin);
+		privateSection.copyDataToBulletin(bulletin);
 
-		UiBulletinComponentEditorSection publicSection = (UiBulletinComponentEditorSection)publicStuff;
-		AttachmentProxy[] publicAttachments = publicSection.attachmentEditor.getAttachments();
+		UiBulletinComponentEditorSection publicEditorSection = (UiBulletinComponentEditorSection)publicSection;
+		AttachmentProxy[] publicAttachments = publicEditorSection.attachmentEditor.getAttachments();
 		for(int aIndex = 0; aIndex < publicAttachments.length; ++aIndex)
 		{
 			AttachmentProxy a = publicAttachments[aIndex];
 			bulletin.addPublicAttachment(a);
 		}
 
-		UiBulletinComponentEditorSection privateSection = (UiBulletinComponentEditorSection)privateStuff;
-		AttachmentProxy[] privateAttachments = privateSection.attachmentEditor.getAttachments();
+		UiBulletinComponentEditorSection privateEditorSection = (UiBulletinComponentEditorSection)privateSection;
+		AttachmentProxy[] privateAttachments = privateEditorSection.attachmentEditor.getAttachments();
 		for(int aIndex = 0; aIndex < privateAttachments.length; ++aIndex)
 		{
 			AttachmentProxy a = privateAttachments[aIndex];

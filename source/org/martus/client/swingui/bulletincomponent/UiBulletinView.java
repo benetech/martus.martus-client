@@ -49,7 +49,7 @@ public class UiBulletinView extends UiBulletinComponent
 		// read-only view cannot change encryption status
 	}
 	
-	public UiBulletinComponentSection createBulletinComponentSection()
+	public UiBulletinComponentDataSection createBulletinComponentDataSection()
 	{
 		return new UiBulletinComponentViewSection(mainWindow);
 	}
