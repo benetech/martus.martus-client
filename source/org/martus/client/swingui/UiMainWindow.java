@@ -89,8 +89,8 @@ import org.martus.client.swingui.dialogs.UiCreateNewAccountProcess;
 import org.martus.client.swingui.dialogs.UiDisplayFileDlg;
 import org.martus.client.swingui.dialogs.UiExportBulletinsDlg;
 import org.martus.client.swingui.dialogs.UiInitialSigninDlg;
-import org.martus.client.swingui.dialogs.UiPreferencesDlg;
 import org.martus.client.swingui.dialogs.UiModelessBusyDlg;
+import org.martus.client.swingui.dialogs.UiPreferencesDlg;
 import org.martus.client.swingui.dialogs.UiProgressRetrieveBulletinsDlg;
 import org.martus.client.swingui.dialogs.UiProgressRetrieveSummariesDlg;
 import org.martus.client.swingui.dialogs.UiRemoveServerDlg;
@@ -169,7 +169,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		hiddenFrame.show();
 		setCurrentActiveFrame(hiddenFrame);
 
-		PreventTwoInstances();
+		preventTwoInstances();
 		notifyClientCompliance(hiddenFrame);
 		hiddenFrame.setTitle(UiSigninDlg.getInitialSigninTitle(localization));
 		mainWindowInitalizing = true;
@@ -299,7 +299,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		}
 	}
 	
-	private void PreventTwoInstances()
+	private void preventTwoInstances()
 	{
 		try
 		{
@@ -436,9 +436,15 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		toolBar.actionPrint.setEnabled(b != null);
 		preview.setCurrentBulletin(b);
 		if(b == null)
+		{	
 			statusBar.setBulletinId("");
+			statusBar.setBulletinLastSaved("");
+		}
 		else
+		{	
 			statusBar.setBulletinId(b.getLocalId());
+			statusBar.setBulletinLastSaved(b.getLastSavedDate());
+		}
 	}
 
 	public void bulletinContentsHaveChanged(Bulletin b)

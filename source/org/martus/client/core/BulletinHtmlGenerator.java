@@ -83,9 +83,12 @@ public class BulletinHtmlGenerator
 		html.append("<tr></tr>");
 		html.append(localization.getFieldLabel("BulletinId")+" ");
 		html.append(b.getLocalId());
+		html.append("<tr></tr>");		
+		html.append(localization.getFieldLabel("BulletinLastSaved")+" ");		
+		html.append(b.getLastSavedDate());
 		html.append("</table>");
 		html.append("</html>");
-		return new String(html);
+		return html.toString();
 	}
 
 	private String getSectionHtmlString(Bulletin b, FieldSpec[] standardFieldTags)
