@@ -534,17 +534,15 @@ public class TestBulletinStore extends TestCaseEnhanced
 		assertEquals(f2, store.findFolder("a"));
 		
 		BulletinFolder f3 = store.createFolder("abc");
-		assertEquals(true, store.renameFolder("abc", "*-   abcd"));
-		assertEquals(f3, store.findFolder("abcd"));
+		assertEquals(false, store.renameFolder("abc", "*-   abcd"));
+		assertEquals(f3, store.findFolder("abc"));
 		
 		BulletinFolder f4 = store.createFolder("folder1");
-		assertEquals(true, store.renameFolder("folder1", "fo--d"));
-		assertEquals(null, store.findFolder("folder1"));
-		assertEquals(f4, store.findFolder("fo  d"));
+		assertEquals(false, store.renameFolder("folder1", "fo--d"));
+		assertEquals(f4, store.findFolder("folder1"));
 		
 		BulletinFolder f5 = store.createFolder("folder2");
-		assertEquals("is an existing folder name? (fo  d == fo--d@\\)",
-					 false, store.renameFolder("folder2", "fo--d@\\"));
+		assertEquals(false, store.renameFolder("folder2", "fo@\\"));
 		assertEquals(f5, store.findFolder("folder2"));
 		
 	}
