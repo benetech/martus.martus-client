@@ -78,6 +78,15 @@ public class TestLocalization extends TestCaseEnhanced
 		assertTrue("Russian should be recognized", Localization.isRecognizedLanguage(UiBasicLocalization.RUSSIAN));
 		assertFalse("Unknown should not be recognized", Localization.isRecognizedLanguage("XX"));
 	}
+	
+	public void testIsRightToLeftLanguage()
+	{
+		bd.setCurrentLanguageCode("en");
+		assertFalse("English is a Left To Right language.", bd.isRightToLeftLanguage());
+		bd.setCurrentLanguageCode("ar");
+		assertTrue("Arabic should be a Right to Left language.", bd.isRightToLeftLanguage());
+		
+	}
 
 	public void testToFileNameForeignChars()
 	{

@@ -65,6 +65,11 @@ public class UiPreferencesDlg extends JDialog implements ActionListener, ChangeL
 		allPrivate.setText(localization.getFieldLabel("preferencesAllPrivate"));
 		allPrivate.setSelected(owner.getBulletinsAlwaysPrivate());
 
+//TODO: Remove before the 2.x release
+directionRtoL = new JCheckBox();
+directionRtoL.setText("Language Right to Left");
+directionRtoL.setSelected(owner.getLocalization().isRightToLeftLanguage());
+
 		ok = new JButton(localization.getButtonLabel("ok"));
 		ok.addActionListener(this);
 		cancel = new JButton(localization.getButtonLabel("cancel"));
@@ -80,6 +85,10 @@ public class UiPreferencesDlg extends JDialog implements ActionListener, ChangeL
 
 		getContentPane().add(new JLabel(""), ParagraphLayout.NEW_PARAGRAPH);
 		getContentPane().add(allPrivate);
+
+//		TODO: Remove before the 2.x release
+getContentPane().add(new JLabel(""), ParagraphLayout.NEW_PARAGRAPH);
+getContentPane().add(directionRtoL);
 
 		getContentPane().add(new JLabel(""), ParagraphLayout.NEW_PARAGRAPH);
 		getContentPane().add(ok);
@@ -98,6 +107,7 @@ public class UiPreferencesDlg extends JDialog implements ActionListener, ChangeL
 		{
 			owner.getLocalization().setCurrentDateFormatCode(dateFormatDropdown.getText());
 			owner.getLocalization().setCurrentLanguageCode(languageDropdown.getText());
+			owner.getLocalization().languageDirectionRightToLeft = directionRtoL.isSelected();
 			owner.setBulletinsAlwaysPrivate(allPrivate.isSelected());
 		}
 		dispose();
@@ -110,6 +120,7 @@ public class UiPreferencesDlg extends JDialog implements ActionListener, ChangeL
 	private UiChoiceEditor languageDropdown;
 	private UiChoiceEditor dateFormatDropdown;
 	private JCheckBox allPrivate;
+	private JCheckBox directionRtoL;
 	private JButton ok;
 	private JButton cancel;
 }
