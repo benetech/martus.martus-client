@@ -683,7 +683,6 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		File uiStateFile = app.getUiStateFile();
 		if(!uiStateFile.exists())
 		{
-			UiLocalization localization = getLocalization();
 			uiState.setCurrentLanguage(localization.getCurrentLanguageCode());
 			uiState.setCurrentDateFormat(localization.getCurrentDateFormatCode());
 			uiState.save(uiStateFile);
@@ -691,7 +690,6 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		}
 		uiState.load(uiStateFile);
 		localization.setCurrentDateFormatCode(uiState.getCurrentDateFormat());
-		localization.setCurrentLanguageCode(uiState.getCurrentLanguage());
 	}
 
 	public void selectBulletinInCurrentFolderIfExists(UniversalId id)
