@@ -77,19 +77,25 @@ abstract public class UiBulletinComponentSection extends JPanel
 
 	public void createLabelsAndFields(FieldSpec[] specs)
 	{
-		fieldTags = specs;
+		fieldSpecs = specs;
 
 		fields = new UiField[specs.length];
 		for(int fieldNum = 0; fieldNum < specs.length; ++fieldNum)
 		{
-			fields[fieldNum] = createField(specs[fieldNum]);
-			fields[fieldNum].initalize();
-			add(createLabel(specs[fieldNum]), ParagraphLayout.NEW_PARAGRAPH);
-			add(fields[fieldNum].getComponent());
+			fields[fieldNum] = createAndAddLabelAndField(specs[fieldNum]);
 		}
 		JLabel attachments = new JLabel(localization.getFieldLabel("attachments"));
 		add(attachments, ParagraphLayout.NEW_PARAGRAPH);
 		createAttachmentTable();
+	}
+
+	public UiField createAndAddLabelAndField(FieldSpec spec)
+	{
+		UiField field = createField(spec);
+		field.initalize();
+		add(createLabel(spec), ParagraphLayout.NEW_PARAGRAPH);
+		add(field.getComponent());
+		return field;
 	}
 	
 	public UiField[] getFields()
@@ -103,7 +109,7 @@ abstract public class UiBulletinComponentSection extends JPanel
 		{
 			String text = "";
 			if(fdp != null)
-				text = fdp.get(fieldTags[fieldNum].getTag());
+				text = fdp.get(fieldSpecs[fieldNum].getTag());
 			fields[fieldNum].setText(text);
 		}
 
@@ -145,6 +151,9 @@ abstract public class UiBulletinComponentSection extends JPanel
 				break;					
 			case FieldSpec.TYPE_NORMAL:
 				field = createNormalField();
+				break;
+			case FieldSpec.TYPE_BOOLEAN:
+				field = createBoolField();
 				break;
 			case FieldSpec.TYPE_UNKNOWN:
 			default:
@@ -220,7 +229,7 @@ abstract public class UiBulletinComponentSection extends JPanel
 	{	
 		for(int fieldNum = 0; fieldNum < fields.length; ++fieldNum)
 		{						
-			bulletin.set(fieldTags[fieldNum].getTag(), fields[fieldNum].getText());													
+			bulletin.set(fieldSpecs[fieldNum].getTag(), fields[fieldNum].getText());													
 		}
 	}
 
@@ -235,7 +244,7 @@ abstract public class UiBulletinComponentSection extends JPanel
 			} 
 			catch (UiDateEditor.DateFutureException e) 
 			{
-				String tag = fieldTags[fieldNum].getTag();
+				String tag = fieldSpecs[fieldNum].getTag();
 				throw new UiDateEditor.DateFutureException(localization.getFieldLabel(tag));
 			}
 		}
@@ -245,7 +254,7 @@ abstract public class UiBulletinComponentSection extends JPanel
 	{
 		for(int fieldNum = 0; fieldNum < fields.length; ++fieldNum)
 		{			
-			String fieldTag = fieldTags[fieldNum].getTag();			
+			String fieldTag = fieldSpecs[fieldNum].getTag();			
 			String oldFieldText = original.get(fieldTag);
 			
 			String currentFieldText = null;
@@ -278,7 +287,7 @@ abstract public class UiBulletinComponentSection extends JPanel
 	JLabel encryptedIndicator;
 	JLabel warningIndicator;
 	UiField[] fields;
-	FieldSpec[] fieldTags;
+	FieldSpec[] fieldSpecs;
 
 	public final static boolean ENCRYPTED = true;
 	public final static boolean NOT_ENCRYPTED = false;
@@ -289,6 +298,8 @@ abstract public class UiBulletinComponentSection extends JPanel
 	abstract public UiField createDateField();
 	abstract public UiField createFlexiDateField();
 	abstract public UiField createUnknownField();
+	abstract public UiField createBoolField();
+
 	abstract public void createAttachmentTable();
 	abstract public void addAttachment(AttachmentProxy a);
 	abstract public void clearAttachments();

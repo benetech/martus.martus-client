@@ -30,7 +30,6 @@ import java.io.File;
 import java.io.IOException;
 
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.client.swingui.fields.UiBoolEditor;
 import org.martus.client.swingui.fields.UiField;
 import org.martus.common.bulletin.AttachmentProxy;
 import org.martus.common.bulletin.Bulletin;
@@ -176,8 +175,4 @@ public class UiBulletinEditor extends UiBulletinComponent
 
 	}	
 
-	public UiField createBoolField()
-	{
-		return new UiBoolEditor(this);
-	}
 }

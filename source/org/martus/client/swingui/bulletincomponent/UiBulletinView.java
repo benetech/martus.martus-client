@@ -27,8 +27,6 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.swingui.bulletincomponent;
 
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.client.swingui.fields.UiBoolViewer;
-import org.martus.client.swingui.fields.UiField;
 
 public class UiBulletinView extends UiBulletinComponent
 {
@@ -41,11 +39,6 @@ public class UiBulletinView extends UiBulletinComponent
 	public UiBulletinComponentSection createBulletinComponentSection(boolean encrypted)
 	{
 		return new UiBulletinComponentViewSection(this, mainWindow, encrypted);
-	}
-
-	public UiField createBoolField()
-	{
-		return new UiBoolViewer(mainWindow.getLocalization());
 	}
 
 }

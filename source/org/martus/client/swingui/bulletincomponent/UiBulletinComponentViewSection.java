@@ -28,6 +28,7 @@ package org.martus.client.swingui.bulletincomponent;
 
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.fields.UiAttachmentViewer;
+import org.martus.client.swingui.fields.UiBoolViewer;
 import org.martus.client.swingui.fields.UiChoiceViewer;
 import org.martus.client.swingui.fields.UiDateViewer;
 import org.martus.client.swingui.fields.UiField;
@@ -76,6 +77,11 @@ public class UiBulletinComponentViewSection extends UiBulletinComponentSection
 	public UiField createChoiceField(ChoiceItem[] choices)
 	{
 		return new UiChoiceViewer(choices);
+	}
+
+	public UiField createBoolField()
+	{
+		return new UiBoolViewer(localization);
 	}
 
 	public void createAttachmentTable()

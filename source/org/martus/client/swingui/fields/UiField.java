@@ -27,6 +27,7 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.swingui.fields;
 
 import javax.swing.JComponent;
+import javax.swing.event.ChangeListener;
 
 import org.martus.client.swingui.UiFocusListener;
 
@@ -71,6 +72,10 @@ abstract public class UiField
 			UiFocusListener listener = new UiFocusListener(getComponent());
 			focusableComponents[i].addFocusListener(listener);		
 		}
+	}
+	
+	public void setListener(ChangeListener listener)
+	{
 	}
 	
 

@@ -31,7 +31,6 @@ import java.awt.Dimension;
 import java.awt.Rectangle;
 import java.io.IOException;
 
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.Scrollable;
 import javax.swing.event.ChangeEvent;
@@ -44,7 +43,6 @@ import org.martus.common.FieldSpec;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.crypto.MartusCrypto;
 import org.martus.common.packet.FieldDataPacket;
-import org.martus.swing.ParagraphLayout;
 
 abstract public class UiBulletinComponent extends JPanel implements Scrollable, ChangeListener
 {
@@ -75,12 +73,9 @@ abstract public class UiBulletinComponent extends JPanel implements Scrollable, 
 		UiBulletinComponentSection target = createBulletinComponentSection(isAlwaysEncrypted);
 		if(!isAlwaysEncrypted)
 		{
-			allPrivateField = createBoolField();
-			allPrivateField.initalize();
 			FieldSpec allPrivateFieldSpec = new FieldSpec("allprivate", FieldSpec.TYPE_BOOLEAN);
-			JLabel allPrivateLabel = target.createLabel(allPrivateFieldSpec);
-			target.add(allPrivateLabel, ParagraphLayout.NEW_PARAGRAPH);
-			target.add(allPrivateField.getComponent());
+			allPrivateField = target.createAndAddLabelAndField(allPrivateFieldSpec);
+			allPrivateField.setListener(this);
 		}
 		target.createLabelsAndFields(fieldSpecs);
 		if(!isEditable)
@@ -248,6 +243,5 @@ abstract public class UiBulletinComponent extends JPanel implements Scrollable, 
 	UiBulletinComponentSection publicStuff;
 	UiBulletinComponentSection privateStuff;	
 
-	abstract public UiField createBoolField();
 	abstract public UiBulletinComponentSection createBulletinComponentSection(boolean encrypted);
 }

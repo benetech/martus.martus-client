@@ -33,11 +33,15 @@ import javax.swing.event.ChangeListener;
 
 public class UiBoolEditor extends UiField implements ChangeListener
 {
-	public UiBoolEditor(ChangeListener listener)
+	public UiBoolEditor()
 	{
-		observer = listener;
 		widget = new JCheckBox("");
 		widget.addChangeListener(this);
+	}
+	
+	public void setListener(ChangeListener listener)
+	{
+		observer = listener;
 	}
 
 	public JComponent getComponent()

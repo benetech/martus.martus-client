@@ -28,6 +28,7 @@ package org.martus.client.swingui.bulletincomponent;
 
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.fields.UiAttachmentEditor;
+import org.martus.client.swingui.fields.UiBoolEditor;
 import org.martus.client.swingui.fields.UiChoiceEditor;
 import org.martus.client.swingui.fields.UiDateEditor;
 import org.martus.client.swingui.fields.UiField;
@@ -76,6 +77,11 @@ public class UiBulletinComponentEditorSection extends UiBulletinComponentSection
 	public UiField createFlexiDateField()
 	{
 		return new UiFlexiDateEditor(localization);	
+	}
+
+	public UiField createBoolField()
+	{
+		return new UiBoolEditor();
 	}
 
 	public void addAttachment(AttachmentProxy a)
