@@ -28,13 +28,12 @@ package org.martus.client.swingui.bulletincomponent;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.text.DateFormat;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
 import java.util.HashMap;
+
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.border.EtchedBorder;
+
 import org.martus.client.swingui.UiLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.dialogs.UiBulletinDetailsDialog;
@@ -97,19 +96,10 @@ public class UiBulletinComponentHeader extends UiBulletinComponentSection
 		}
 		else
 		{
-			setTime(time);
+			dateTime.setText("  " + getLocalization().formatDateTime(time) + "  ");
 			lastSavedLabel.setVisible(true);
 			dateTime.setVisible(true);
 		}
-	}
-	
-	private void setTime(long time)
-	{
-		Calendar cal = new GregorianCalendar();
-		cal.setTimeInMillis(time);		
-		String rawDateTime = DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT).format(cal.getTime());
-		String formatted = getLocalization().convertStoredDateTimeToDisplay(rawDateTime);
-		dateTime.setText("  " + formatted + "  ");
 	}
 	
 	private String getSummaryString(int numberOfHqs)

@@ -110,7 +110,7 @@ public class BulletinTableModel extends AbstractTableModel
 		}
 											
 		if (fieldTag.equals(Bulletin.TAGLASTSAVED))			 
-			return localization.convertStoredDateTimeToDisplay(b.getLastSavedDateTime());
+			return localization.formatDateTime(b.getLastSavedTime());
 		
 		String value = store.getFieldData(uid, fieldTag);
 		if (fieldTag.equals(Bulletin.TAGENTRYDATE) || 

@@ -213,7 +213,7 @@ public class UiBulletinDetailsDialog extends JDialog
 	{
 		Bulletin b = mainWindow.getStore().getBulletinRevision(uid);
 		if(b != null)
-			return b.getLastSavedDateTime();
+			return getLocalization().formatDateTime(b.getLastSavedTime());
 		
 		if(uid.equals(bulletin.getUniversalId()))
 			return getLabel("InProgressDate");
