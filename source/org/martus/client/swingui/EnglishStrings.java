@@ -181,6 +181,9 @@ public class EnglishStrings
 "wintitle:notifyBulletinVersionNotInSystem=Bulletin Version Not Found",
 "wintitle:notifyHeadquarterLabelDuplicate=Headquarter Label Invalid",
 "wintitle:notifyNoHQsSelected=No HQ's Selected",
+"wintitle:notifyErrorExportingCustomizationTemplate=Error Exporting Tempalate",
+"wintitle:notifyErrorImportingCustomizationTemplate=Error Importing Tempalate",
+"wintitle:notifyImportingCustomizationTemplateSuccess=Importing Tempalate Succeeded",
 
 "wintitle:inputservername=Server Name",
 "wintitle:inputserverpubliccode=Server Identification",
@@ -242,6 +245,10 @@ public class EnglishStrings
 "wintitle:CreateCustomFieldsHelp=Help on Creating Custom Fields",
 "wintitle:ErrorCustomFields=Customize Fields Error",
 "wintitle:ConfigureHQs=Headquarters Editor",
+"wintitle:ExportCustomizationTemplateSaveAs=Export Customization Template",
+"wintitle:ImportCustomizationTemplateOpen=Import Customization Template",
+
+
 
 "wintitle:warningdeletefolder=Confirm Delete Folder",
 "wintitle:warningDeleteSingleBulletin=Confirm Delete Bulletin",
@@ -275,6 +282,8 @@ public class EnglishStrings
 "button:close=Close",
 "button:customDefault=Restore Defaults",
 "button:customHelp=Help",
+"button:customImport=Import Template",
+"button:customExport=Export Template",
 
 "button:cancel=Cancel",
 "button:save=Save",
@@ -440,6 +449,8 @@ public class EnglishStrings
 "field:preferencesAllPrivate=Prevent creating public bulletins",
 "field:HeadQuartersSelected=Selected?",
 "field:ConfigureHeadQuartersDefault=Default?",
+"field:CustomizationTemplateFiles=Customization Template Files",
+"field:CustomizationFileDefaultName=MartusCustomization",
 
 "field:PrintPrivateData=Include private data in print out.",
 "field:PrintPrivateDataMessage=You have the option to include or exclude the selected bulletin's private information in this print out.\n\nTo only print public information, do not mark the checkbox below.\n\nIf you do mark the checkbox, anyone who sees the print out will be able to read your private data.",
@@ -645,6 +656,9 @@ public class EnglishStrings
 "field:notifyBulletinVersionNotInSystemcause=The bulletin version you are trying to view is currently not on your system.",
 "field:notifyHeadquarterLabelDuplicatecause=The Headquarters label you entered is already assigned to another Headquarters account.  Please use a different label.",
 "field:notifyNoHQsSelectedcause=Please select a Headquarters first.",
+"field:notifyErrorExportingCustomizationTemplatecause=There was an unexpected error saving your template.  Please check to see you have enought disk space.",
+"field:notifyErrorImportingCustomizationTemplatecause=There was an error importing this template.",
+"field:notifyImportingCustomizationTemplateSuccesscause=Successfully imported customization template.",
 
 "field:messageServerNewscause=The current server has sent this message:",
 "field:messageErrorDateInFuturecause=This date occurs in the future:",

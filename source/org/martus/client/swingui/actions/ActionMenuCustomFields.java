@@ -27,22 +27,16 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.swingui.actions;
 
 import java.awt.event.ActionEvent;
-import java.util.Vector;
-
 import org.martus.client.core.ClientBulletinStore;
-import org.martus.client.core.CustomFieldError;
-import org.martus.client.core.CustomFieldSpecValidator;
 import org.martus.client.core.MartusApp;
 import org.martus.client.core.MartusApp.SaveConfigInfoException;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.dialogs.UiCustomFieldsDlg;
-import org.martus.client.swingui.dialogs.UiShowScrollableTextDlg;
 import org.martus.common.CustomFields;
 import org.martus.common.FieldSpec;
 import org.martus.common.MartusConstants;
 import org.martus.common.StandardFieldSpecs;
 import org.martus.common.CustomFields.CustomFieldsParseException;
-import org.martus.common.clientside.Localization;
 
 public class ActionMenuCustomFields extends UiMenuAction
 {
@@ -98,61 +92,19 @@ public class ActionMenuCustomFields extends UiMenuAction
 			}
 			else
 			{
-				Vector errors = null;
+				FieldSpec[] newSpecs = null;
 				try
 				{
-					FieldSpec[] newSpecs = CustomFields.parseXml(newCustomFieldXml);
-					CustomFieldSpecValidator checker = new CustomFieldSpecValidator(newSpecs);
-					if(checker.isValid())
-						return newSpecs;
-					errors = checker.getAllErrors();
+					newSpecs = CustomFields.parseXml(newCustomFieldXml);
 				}
-				catch (CustomFieldsParseException e)
+				catch(CustomFieldsParseException e)
 				{
 					e.printStackTrace();
-					errors = new Vector();
-					errors.add(CustomFieldError.errorParseXml());
 				}
-
-				String header1 = mainWindow.getLocalization().getFieldLabel("ErrorCustomFieldHeader1");
-				String header2 = mainWindow.getLocalization().getFieldLabel("ErrorCustomFieldHeader2");
-				String header3 = mainWindow.getLocalization().getFieldLabel("ErrorCustomFieldHeader3");
-				String header4 = mainWindow.getLocalization().getFieldLabel("ErrorCustomFieldHeader4");
-				String errorMessage = GetDataAndSpacing(header1, HEADER_SPACING_1);
-				errorMessage += GetDataAndSpacing(header2, HEADER_SPACING_2);
-				errorMessage += GetDataAndSpacing(header3, HEADER_SPACING_3);
-				errorMessage += header4;
-				errorMessage += '\n';
-				for(int i = 0; i<errors.size(); ++i)
-				{
-					CustomFieldError thisError = (CustomFieldError)errors.get(i);
-					String thisErrorMessage = GetDataAndSpacing(thisError.getCode(), HEADER_SPACING_1);
-					thisErrorMessage += GetDataAndSpacing(thisError.getType(), HEADER_SPACING_2);
-					thisErrorMessage += GetDataAndSpacing(thisError.getTag(), HEADER_SPACING_3);
-					thisErrorMessage += thisError.getLabel();
-					errorMessage += thisErrorMessage;
-					errorMessage += '\n';
-				}
-				new UiShowScrollableTextDlg(mainWindow,"ErrorCustomFields", "ok", Localization.UNUSED_TAG, "ErrorCustomFields", errorMessage, null); 
-				existingCustomFieldXml = newCustomFieldXml;
+				return newSpecs;
 			}
 		}
 	}
-	
-	String GetDataAndSpacing(String data, int columnSpacing)
-	{
-		String columnData = data;
-		for(int i = data.length(); i < columnSpacing; ++i)
-		{
-			columnData += " ";
-		}
-		columnData += " ";
-		return columnData;
-	}
-	
-	private int HEADER_SPACING_1 = 6;
-	private int HEADER_SPACING_2 = 11;
-	private int HEADER_SPACING_3 = 14;
 	
 	
 }
