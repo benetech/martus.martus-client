@@ -21,6 +21,7 @@ Use una contraseña que recuerde, pero que nadie más pueda adivinar. Preste ate
 Para mantener su contraseña segura no la escriba en ningún sitio donde pueda verse y asociarse al software de Martus. No se la envíe a nadie por correo electrónico ni la mencione por teléfono, pues puede estos medios de comunicación no sean seguros.
 
 Para acceder a su cuenta necesita su clave además de su contraseña. Haga una copia de seguridad de su clave y almacénela separadamente de su contraseña. (Para más detalles consulte la sección "9b. Como hacer una copia de seguridad de su clave"). Este paso es muy importante pues si su ordenador falla o se lo robarán, necesitará usar otro ordenador en donde instalar su clave y así acceder a los datos privados que haya guardado, aún si están almacenados en el servidor de Martus.
+--------
 1e. ¿Cuáles son las limitaciones de la seguridad de Martus?
 El programa Martus usa tecnología criptográfica muy fuerte para cifrar sus boletines en su disco duro de manera que otras personas no puedan leerlos. Sin embargo, ya que la seguridad implica a las personas, y las personas son humanas, la seguridad de Martus tiene sus límites. El programa está diseñado para ser muy seguro pero aún así queremos asegurarnos de que entienda esas limitaciones. Estas son algunas de las formas en que su información puede ser comprometida:
 • Alguien puede descubrir su contraseña escrita en un pedazo de papel
@@ -417,6 +418,7 @@ Indicación: Considere cambiar el título de la versión modificada de un bolet�
 Puede hacer cambios en los borradores hasta que los selle. Para modificar un borrador, haga doble clic sobre el boletín, e introduzca los cambios. También puede seleccionar el título del boletín y oprimir “Modificar” o seleccionar “Editar > Modificar boletín”. Puede grabar el boletín modificado otra vez como borrador y guardarlo como un boletín sellado. Si oprime “Cancelar” las modificaciones se perderán y el borrador revertirá al punto en que fue guardado por última vez. Cada vez que grabe un borrador, Martus actualiza la copia de seguridad del borrador en el servidor. Cuando envíe el boletín final al servidor, Martus borrará la copia de seguridad del borrador del servidor. Cada vez que guarda un borrador Martus sobrescribe la copia de seguridad del borrador que esta en el servidor. Al guardar el borrador final al servidor Martus borra la copia de seguridad del borrador.
 
 Los borradores que escriba se mantienen en el ordenador en que los creo a menos que los envíe a un servidor. Si tiene una misma cuenta de Martus en múltiples ordenadores tendrá que bajar el borrador del servidor a los diferentes ordenadores y subirlo nuevamente para compartirlo con las otras. El servidor sólo mantiene la última modificación a un borrador por lo que si tiene copias de un borrador en dos ordenadores y modifica el borrador en una de ellas, el segundo ordenador tendrá una copia antigua del borrador hasta que borre la copia del ordenador y baje el borrador más reciente del servidor. Si es que quiere mantener una copia anterior de un borrador, jálelo de Martus a su escritorio antes de borrarlo.
+--------
 5e. Como desechar un borrador
 Para descartar nuevas modificaciones a un borrador oprima “Cancelar”. Martus le advertirá de que las modificaciones que no han sido guardadas y que todavía no han sido enviadas al servidor se van a perder. Haga clic en “Sí” para descartar las modificaciones que no han sido guardadas. (Si oprime “Cancelar” cuando está editando un borrador, el boletín volverá al estado en que se encontraba cuando lo abrió inicialmente.)
 
@@ -647,6 +649,7 @@ Nota: Antes de eliminar la información de su cuenta de Martus verifique que ust
 Nota: Martus no puede eliminar boletines o detalles de su cuenta que haya copiado o arrastrado fuera de la carpeta de Martus, como al escritorio. Esos archivos permanecerán en su ordenador una vez completada la operación. Además, Martus no puede eliminar boletines o información en otros ordenadores que haya configurado con su cuenta ni boletines que haya enviado a un servidor de Martus. 
 
 
+--------
 9. Para mantener su información segura
 Martus ha sido diseñado con la seguridad como objetivo primordial. Comprender como funcionan sus parámetros de seguridad puede ayudarlo a mantener seguros sus datos mientras se asegura que puede seguir accediendo a ellos. 
 --------
