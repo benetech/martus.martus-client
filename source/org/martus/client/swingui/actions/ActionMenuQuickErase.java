@@ -59,13 +59,19 @@ public class ActionMenuQuickErase extends UiMenuAction
 			return;			
 						
 		QuickEraseOptions quickEraseOptions = dlg.getQuickEraseOptions();
-		checkScrubData(quickEraseOptions);
-		checkDeleteKeyPair(quickEraseOptions);	
-		checkExitWhenComplete(quickEraseOptions);
+		erasePacketData(quickEraseOptions);
+		if (quickEraseOptions.isDeleteKeyPairSelected())
+		{
+			deleteKeyPair(quickEraseOptions);
+		}	
+		if (quickEraseOptions.isExitWhenCompleteSelected())
+		{	
+			exitApp(quickEraseOptions);
+		}
 												
 	}	
 
-	private void checkScrubData(QuickEraseOptions options)
+	private void erasePacketData(QuickEraseOptions options)
 	{	
 		File packetDir = mainWindow.getApp().getPacketsDirectory();
 		if (!packetDir.exists())
@@ -75,7 +81,10 @@ public class ActionMenuQuickErase extends UiMenuAction
 		if(mainWindow.getApp().deleteAllBulletinsAndUserFolders(options))
 		{	
 			confirmDeleteSubDirectory(packetDir, options);	
-			baseTag = (options.isScrubSelected())? "QuickEraseScrubWorked":"QuickEraseWorked";						
+			if(options.isScrubSelected())
+				baseTag = "QuickEraseScrubWorked";
+			else
+				baseTag = "QuickEraseWorked";						
 		}
 		
 		if(!options.isDonotPromptSelected())
@@ -96,21 +105,15 @@ public class ActionMenuQuickErase extends UiMenuAction
 		}		
 	}
 
-	private void checkExitWhenComplete(QuickEraseOptions options)
+	private void exitApp(QuickEraseOptions options)
 	{
-		if (options.isExitWhenCompleteSelected())
-		{	
-			mainWindow.getApp().cleanupWhenCompleteQuickErase(options);
-			mainWindow.exitWithoutSavingState();		
-		}		
+		mainWindow.getApp().cleanupWhenCompleteQuickErase(options);
+		mainWindow.exitWithoutSavingState();		
 	}
 
-	private void checkDeleteKeyPair(QuickEraseOptions options)
+	private void deleteKeyPair(QuickEraseOptions options)
 	{
-		if (options.isDeleteKeyPairSelected())
-		{
-			if(options.isDonotPromptSelected() || mainWindow.confirmDlgBeep(mainWindow, "QuickEraseDeleteKeyPair"))
-				mainWindow.getApp().deleteKeypair(options);
-		}	
+		if(options.isDonotPromptSelected() || mainWindow.confirmDlgBeep(mainWindow, "QuickEraseDeleteKeyPair"))
+			mainWindow.getApp().deleteKeypair(options);
 	}
 }

@@ -373,15 +373,6 @@ public class MartusApp
 		return new File(original.getPath() + ".bak");
 	}
 	
-	private void scrubKeypair() throws IOException
-	{
-		File file = getCurrentKeyPairFile();	
-		File backupFile = getBackupFile(file);	
-		
-		ScrubFile.scrub(file);
-		ScrubFile.scrub(backupFile);
-	}
-
 	public String getUserName()
 	{
 		return currentUserName;
@@ -505,15 +496,16 @@ public class MartusApp
 	{
 		try
 		{
-			if (opts.isDeleteKeyPairSelected())
+			File currentKeyPairFile = getCurrentKeyPairFile();
+			File currentKeyPairBackupFile = getBackupFile(currentKeyPairFile);
+			if (opts.isScrubSelected())	
 			{
-				if (opts.isScrubSelected())	
-					scrubKeypair();
-				
-				File keypairFile = getCurrentKeyPairFile();
-				getBackupFile(keypairFile).delete();
-				keypairFile.delete();
+				ScrubFile.scrub(currentKeyPairFile);
+				ScrubFile.scrub(currentKeyPairBackupFile);
 			}
+			
+			currentKeyPairBackupFile.delete();
+			currentKeyPairFile.delete();
 		}
 		catch (Exception e)
 		{

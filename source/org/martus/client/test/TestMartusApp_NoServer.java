@@ -495,7 +495,6 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 	{
 		TRACE_BEGIN("testScrubAndDeleteKeyPairFile");
 		QuickEraseOptions opts = new QuickEraseOptions();
-		opts.setDeleteKeyPairOption(true);
 		opts.setScrubOption(true);
 		
 		appWithAccount.deleteKeypair(opts);
