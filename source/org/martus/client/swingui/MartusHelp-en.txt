@@ -1,4 +1,4 @@
-﻿1 Introduction to the Martus™ Software
+﻿1. Introduction to the Martus™ Software 
 --------
 1a. What is Martus™?
 Named after the Greek word for witness, the Martus Project provides an efficient and secure way to store and retrieve information about human rights abuses. Using the Martus application, you can create bulletins that record human rights abuses, attach supporting documents, specify whether the information should be public or private, and store the information on a secure server. To learn more about the problems the Martus Project addresses and future plans for the project, visit http://www.martus.org.
@@ -20,7 +20,7 @@ Use a password that you’ll remember, but that no one else can guess. Pay speci
 
 To keep your password secret, don’t write it down anywhere that it could be found and connected with the Martus software. Don’t send it to anyone through e-mail or give it to anyone over the phone, as those means of communications may not be secure.
 
-In addition to your password, you need your key to access your account. Make a backup copy of your key and store it separately from your password. (For more information, see “9b. Backing up your key”) This is important because if you are unable to start your computer or it is stolen, you’ll need to install the key on another computer to access the private data you have recorded, even if it’s stored on the Martus server.
+In addition to your password, you need your key to access your account. Make a backup copy of your key and store it separately from your password. (For more information, see “9b. Backing up your key”.) This is important because if you are unable to start your computer or it is stolen, you’ll need to install the key on another computer to access the private data you have recorded, even if it’s stored on the Martus server.
 --------
 1e. What are the limitations to Martus security?
 The Martus software uses very strong encryption technology to scramble your bulletins so that other people cannot read them on your hard drive.  However, since security involves people, and people are human, Martus security has limitations.  We want to make sure you understand these limitations, even though the software is designed to be very secure.  Here are some of the ways your private information may be compromised:
@@ -51,7 +51,7 @@ To learn more about open source technology, visit the Open Source Initiative at 
 --------
 2. Getting Started
 
-You can install and run Martus on any computer running Windows, Mac OS X, or Linux that meets the following requirements. For more information about the most current system recommendations, see the release notes included with the Martus software download.
+You can install and run Martus on any computer running Windows, Mac OS, or Linux that meets the following requirements. For more information about the most current system recommendations, see the release notes in the README.txt file included with the Martus software download.
 
 Windows
 • Windows 95 SE, Windows 98, Windows NT 4.0, Windows Me, Windows 2000, or Windows XP (in non-English versions, the only version of Windows 2000 in which Sun tested the Java environment is Windows 2000 Professional.)
@@ -59,16 +59,16 @@ Windows
 • Pentium 166 MHz processor (300 MHz or faster recommended)
 • 50 MB hard disk space available
 • 32 MB RAM (64 MB or more recommended)
-• Internet connection, to back up data to the Martus server
+• Internet connection, to back up data to the Martus server.  If you do not have an internet connection, see section “9g. Enabling other accounts to send your bulletins to a server”.
 • To send bulletins to a Martus server, you need unrestricted Web access to either ports 987 and 988, or ports 80 and 443. This is only an issue if you are operating Martus through a firewall.
 • CD drive (for CD installation only)
 • Screen resolution of 800x600 or greater
 
 Mac OS
-• Mac OS X 10.2.3 or higher
+• Mac OS 9.2 or higher
 • Java Runtime Environment (JRE) version 1.4.1_01 or higher (comes with Jaguar; to download the latest version, visit http://www.apple.com/downloads/macosx/apple)
 • 50 MB hard disk space available
-• Internet connection, to back up data to the Martus server
+• Internet connection, to back up data to the Martus server.  If you do not have an internet connection, see section “9g. Enabling other accounts to send your bulletins to a server”.
 • To send bulletins to a Martus server, you need unrestricted Web access to either ports 987 and 988, or ports 80 and 443. This is only an issue if you are operating Martus through a firewall.
 • CD drive (for CD installation only)
 • Screen resolution of 800x600 or greater
@@ -78,7 +78,7 @@ Linux
 • Java 2 Standard Edition (J2SE) Java Runtime Environment (JRE) 1.4.1 or higher
 • 75 MB hard disk space available
 • 32 MB RAM (64 MB or more recommended)
-• Internet connection, to back up data to the Martus server
+• Internet connection, to back up data to the Martus server.  If you do not have an internet connection, see section “9g. Enabling other accounts to send your bulletins to a server”.
 • To send bulletins to a Martus server, you need unrestricted Web access to either ports 987 and 988, or ports 80 and 443. This is only an issue if you are operating Martus through a firewall.
 • CD drive (for CD installation only)
 • At least 16-bit color mode with the KDE or the Gnome desktop recommended
@@ -89,7 +89,6 @@ Martus was written using the Java programming language, and it requires a Java e
 You can download the Martus installer from http://www.martus.org. You can download the installer for the platform you’re using, or an ISO CD image that contains the installers for Windows, Mac OS, and Linux. If you download the ISO CD image, you must copy it to a CD before installing Martus.
 
 Note: As with most applications, you cannot successfully install Martus by copying Martus files you have backed up. Use the Martus installer to install the application.  
-
 
 To install Martus for Windows:
 1. Insert the Martus CD into your CD-ROM drive or download the Martus installer from http://www.martus.org and run it. The Martus installer opens.
@@ -139,10 +138,10 @@ bash LinuxJavaInstall.txt
 3. Create a new directory on the hard disk at ~/Martus/.
 4. Copy all the files from the Martus/ directory on the installation CD into the ~/Martus/ directory.
 5. If desired, create a script to run Martus. To run the Martus program, type 
-java -jar ~/Martus/Martus.jar
+         java -jar ~/Martus/Martus.jar
 --------
 2b. Uninstalling
-To uninstall Martus in Windows without deleting your Martus bulletins or account data, choose Start > Programs > Martus > Martus Uninstall (if you opted to add short-cuts to your Start menu), double-click the uninst.exe file in the Martus directory, or use the Add/Remove Programs control panel in Windows:
+To uninstall Martus in Windows without deleting your Martus bulletins or account data, choose Start > Programs > Martus > Martus Uninstall (if you opted to add short-cuts to your Start menu), double-click the uninst.exe file in the Martus\bin directory, or use the Add/Remove Programs control panel in Windows:
 1. Choose Settings > Control Panel from the Start menu.
 2. Double-click the Add/Remove Programs icon.
 3. Select Martus from the list of applications.
@@ -152,8 +151,7 @@ To uninstall Martus in Mac OS or Linux without deleting your Martus bulletins or
 
 If you want to delete bulletins and your key file, but keep the Martus application, choose Tools > Delete My Data. For more information, see “7. Deleting Your Bulletins and Account Information.”
 
-If you need to remove Martus bulletins and configuration data, as well as the Martus application, choose Tools > Delete All Data and Remove Martus. This feature removes information for all accounts on the computer, not just yours, and should only be used in emergency situations. For more information, see "
-8. Deleting All Martus Data, Including the Application."
+If you need to remove Martus bulletins and configuration data, as well as the Martus application, choose Tools > Delete All Data and Remove Martus. This feature removes information for all accounts on the computer, not just yours, and should only be used in emergency situations. For more information, see “8. Deleting All Martus Data, Including the Application.”
 
 When you remove Martus files using the Delete All Data and Remove Martus command, Martus deletes the files in a way that makes them more difficult to recover than just deleting the files manually. However, to verify that all Martus information has been removed, search for the Martus folder (C:\Martus in Windows) and any folders and files you copied during installation (Mac OS or Linux). If any of these folders or files remain, delete them, and then empty the trash or recycling bin. 
 
@@ -234,7 +232,7 @@ Note: If you prefer to type your password using the computer’s keyboard, click
 
 8. If you want to provide contact information, enter it now. (It may take a few seconds for the Martus Setup Contact Information dialog box to appear.) If you do not enter anything for Author and Organization, Martus will prompt you for the information every time you start the application.
 
-    
+     
 
 The Author and Organization information appear in every bulletin you create. In the future, public bulletin data (that is, data that has not specifically been labeled private) will be available to researchers, the press, and the public through the Martus Search Engine. This contact information provides a way for someone to follow up with you or your organization for more information about your bulletins. (If you do not want to make your bulletin data available publicly, you can choose to make all of your data private.)
 
@@ -258,7 +256,7 @@ To keep your data secure, you need to use a password that cannot be easily disco
 • Create a reminder statement for yourself, and keep it somewhere secure. (Remember that if your reminder statement jogs your memory, it could also provide a clue to someone attempting to discover your password.) 
 • Use a password that can be remembered (use characters that are meaningful to you).
 • Develop a simple method for choosing new passwords.
-• Change your password if you feel that your account has been compromised.  See “9h. Changing your user name or password”  for information.
+• Change your password if you feel that your account has been compromised.  See “9h. Changing your user name or password” for information.
 --------
 2f. Setting up a server connection
 To ensure you’ll have access to your bulletins in case of computer loss or theft, send them to a Martus server. A Martus server is a computer server that accepts encrypted bulletins, securely backs them up, and replicates them to multiple locations, safeguarding the information from loss. Martus servers are operated by non-profit organizations (Benetech does not operate Martus servers directly). If your organization does not have a relationship with an organization that hosts a Martus server, visit http://www.martus.org to see the list of server hosts.
@@ -274,18 +272,19 @@ Before you can send bulletins to or retrieve them from a server, you need to ide
 To configure the server:
 1. Choose Server > Select Martus Server.
 2. Enter your username and password when prompted.
-3. Enter the IP address for the server.
+3. 
+Enter the IP address for the server.
+4. Enter the server’s public identification code, and click OK. 
 
 	
 
-4. Enter the server’s public identification code, and click OK. 
 5. A server compliance message appears. Click Accept if the server compliance statement meets your needs. If the server doesn’t meet your needs, click Reject and then select a different server. 
 
 Note: Server compliance guidelines are available at http://www.martus.org/, in the “Download Martus Server” section. Compliant servers are expected to be secure; servers that deviate from the server compliance guidelines may be less secure. If you have questions about whether a server meets your needs, ask the person who determines policies for using Martus in your organization—or send a message to info@martus.org
 
 6. Type the magic word to gain permission to send bulletins to the server, and then click OK. 
 
-Note: The magic word is case-sensitive, so be sure to type it exactly as it was given to you.
+Note:  The magic word is not case-sensitive, and ignores spaces.  So if you were given “Magic word” to use, you could also type “magic word” or “MagicWord”.
 
 7. Click OK in the dialog box that confirms your connection to the server.
 
@@ -300,7 +299,7 @@ Note: Once you’ve selected a server, Martus will attempt to access the server 
 2g. Setting your preferences
 You can customize Martus for your preferred language and date format. You can also ensure that every bulletin you create remains private.
 
-To change the language used in the Martus user interface, choose Options > Preferences. Then choose a language from the pop-up menu and click OK. In the current version, the user interface is available in English, Spanish, and Russian. If you are using a later version of Martus, more languages may be included. Visit http://www.martus.org to see if there is a newer version of Martus available with additional languages, or for information about translating the user interface into a different language.
+To change the language used in the Martus user interface, choose Options > Preferences. Then choose a language from the pop-up menu and click OK. In the current version, the user interface is available in English, French, Russian, and Spanish. If you are using a later version of Martus, more languages may be included. Visit http://www.martus.org to see if there is a newer version of Martus available with additional languages, or for information about translating the user interface into a different language.
 
 To change the date format used in lists of bulletins and in bulletins you create, choose Options > Preferences. Then choose the format you prefer from the Date Format dropdown menu and click OK. 
 
@@ -326,7 +325,8 @@ To create a new bulletin, click Create or choose File > Create New Bulletin. The
 Click the Bulletin Details button to see the Bulletin ID (a unique ID number used by Martus, and by technical support and server administrators), as well as the author's Public Code and the Public Codes of any Headquarters accounts given access to this bulletin.
 --------
 4a. Completing fields in a bulletin
-You can type data directly into the fields, or you can copy and paste information from existing bulletins or other documents into the fields. To copy and paste, use the standard operating system keyboard shortcuts: Ctrl+C to copy in Windows or Linux, Command+C to copy in Mac OS, Ctrl+V to paste in Windows or Linux, and Command+V to paste in Mac OS.  The Command key in Mac OS is sometimes also referred to as the Apple key.  Or you can right-click the field in Windows or Linux, or Ctrl-click it in Mac OS, and then choose Copy or Paste from the context menu.
+You can type data directly into the fields, or you can copy and paste information from existing bulletins or other documents into the fields. To copy and paste, use the standard operating system keyboard shortcuts: Ctrl+C to copy in Windows or Linux, Command+C to copy in Mac OS; Ctrl+V to paste in Windows or Linux, and Command+V to paste in Mac OS.  The Command key in Mac OS is sometimes also referred to as the Apple key.  Or you can right-click the field in Windows or Linux, or Ctrl-click it in Mac OS, and then choose Copy or Paste from the context menu.
+
 
 
 
@@ -360,7 +360,9 @@ Summary - Type a summary of the event.
 
 Details - Type any additional details related to the event.
 
+
 Attachments - To attach a photo or other file to the bulletin, click Add Attachment, and then select the file you want to attach; or drag the file from a folder on your computer into the Attachments field. Attachments added in the Public Information section of the bulletin will be available to anyone who has access to public data on the server. (Bulletins with large attachments will take longer to save as a draft, send to the server, retrieve from the server, or move to or from the desktop.) To view an attachment, someone reading the bulletin must have software installed that supports the format of the attachment file.
+
 
 
 Tip:  If you want to attach a file that will only be seen by those who have access to private information, click Add Attachment in the Private Information area or drag a file into the Attachments field in the Private Information area. 
@@ -441,6 +443,7 @@ The Saved Bulletins folder contains all bulletins that you have saved, whether t
 
 If you are working offline when you click Save Sealed or Save Draft, Martus cannot send the bulletin to the server until you have an Internet connection. Additionally, a bulletin that includes one or more attachments may not have Yes in the Sent column for several minutes or possibly as long as an hour while Martus sends it to the server, especially if you have a slow Internet connection. If there are unsent bulletins when you exit the application, Martus will remind you that you have bulletins that have not been sent.
 
+
 Discarded Bulletins 	
 When you discard a bulletin from another folder, it moves to the Discarded Bulletins folder. You can still work with the bulletin when it is in the Discarded Bulletins folder; if it has Draft status, you can modify it; if it has Sealed status, you can move it to the Saved Bulletins folder. To completely remove a discarded bulletin from your computer, right-click its title in the Discarded Bulletins folder and choose Delete Bulletin. (In Mac OS, Ctrl-click the title to see the context menu.) This removes all information about the bulletin from your computer, but it remains on the server. If the bulletin has Draft status, you can delete it from the server by choosing Server > Delete My Drafts From Server; if it has Sealed status, you cannot remove it from the server. 
 
@@ -491,7 +494,9 @@ If you want to delete an entire folder and its contents, right-click on the fold
 6e. Organizing bulletins
 You can list bulletins in multiple folders, but only one copy resides on your hard drive. Each listing references the copy on your hard drive. A bulletin cannot be listed twice in a single folder. 
 
-To move a bulletin from one folder to another, drag it. Or select the bulletin and choose Edit > Cut Bulletin, and then select the new folder and choose Edit > Paste Bulletin. You can also right-click the bulletin or folder and choose Cut Bulletin or Paste Bulletin from the context menu. (When you use the Cut Bulletin command, the bulletin appears in the Discarded Bulletin folder.) To select all the bulletins in a folder, right-click and choose Select All Bulletins.
+To move a bulletin from one folder to another, drag it. Or select the bulletin and choose Edit > Cut Bulletin, and then select the new folder and choose Edit > Paste Bulletin. You can also right-click the bulletin or folder and choose Cut Bulletin or Paste Bulletin from the context menu. (When you use the Cut Bulletin command, the bulletin appears in the Discarded Bulletin folder.) 
+
+To select all the bulletins in a folder, right-click and choose Select All Bulletins.
 
 If you want a bulletin to appear in multiple folders, select the bulletin and choose Edit > Copy Bulletin; then select the new folder and choose Edit > Paste Bulletin. (Or right-click the bulletin and choose Copy Bulletin from the context menu; then right-click the folder and choose Paste Bulletin from the context menu.) 
 
@@ -503,6 +508,7 @@ You can drag (or copy/paste) a bulletin to the desktop, or drag a bulletin from 
 You can e-mail .mba files to other people, or copy them to a floppy disk. Draft bulletins remain fully encrypted, including the parts labeled public, so they cannot be viewed by any other user except a designated Headquarters account. When you e-mail or copy sealed bulletins, anyone may read the public parts of the bulletin using Martus software, but the private sections remain encrypted.  Because you cannot view another user’s private or draft data unless your account is one of their Headquarters accounts, their imported bulletins are labeled with a warning message saying “The author has not given you permission to view the private portions of this bulletin.”  Data in .mba files can only be viewed in Martus; you cannot open them in applications such as Microsoft Word. To use the data in applications other than Martus, export bulletins as XML files (see “6n. Exporting bulletin data”).
 
 Note: Because e-mail is not secure, anything you e-mail may be intercepted by someone else. 
+
 --------
 6g. Retrieving sealed bulletins
 Occasionally, you may need to download bulletins that you have sent to the server. You can download any bulletin you have sent that is not currently on your hard drive. (Martus does not permit you to retrieve bulletins that you already have.)
@@ -515,10 +521,11 @@ Note: The dialog box may not appear immediately, depending on the speed of your 
 
 Note: By default, the Retrieve Bulletins dialog box displays only bulletins that are not currently on your computer. Check Show All Bulletins On This Server And On This Computer to see all your sealed bulletins that have been backed up to this server; you cannot retrieve bulletins that are currently on your computer.
 
-
-
 3. Click Preview to see a preview of the selected bulletin before you download it.
 4. Click Retrieve. 
+
+
+
 5. The bulletins appear in the Retrieved Bulletins folder. 
 --------
 6h. Retrieving draft bulletins
@@ -537,7 +544,7 @@ Note: By default, the Retrieve Draft Bulletins dialog box displays only bulletin
 5. The bulletins appear in the Retrieved Draft Bulletins folder. 
 --------
 6i. Retrieving bulletins created by field desks
-If you are using a Headquarters account, you can retrieve draft or sealed bulletins created by field workers who have given your account permission to access their data. (See “9f. Sharing your private data with colleagues”) To download those bulletins, choose Server > Retrieve Field Desk Sealed Bulletins or Server > Retrieve Field Desk Draft Bulletins. 
+If you are using a Headquarters account, you can retrieve draft or sealed bulletins created by field workers who have given your account permission to access their data. (See “9f. Sharing your private data with colleagues”.) To download those bulletins, choose Server > Retrieve Field Desk Sealed Bulletins or Server > Retrieve Field Desk Draft Bulletins. 
 
 When you view a field desk bulletin, a bright yellow and black “Field Bulletin” label appears at the top of the bulletin.
 --------
@@ -550,6 +557,7 @@ Note: To view the attachment, you must have an application installed that suppor
 --------
 6k. Viewing damaged bulletins
 Occasionally, data may be lost or garbled in a bulletin stored on your computer. If Martus detects missing data, it displays a yellow warning at the top of the bulletin that reads: “Warning: Portions may be missing or damaged.” Often, you can still read some information in the bulletin. If the bulletin is also stored on the server, you may be able to retrieve the entire bulletin successfully: drag a backup copy of the bulletin to your desktop, delete the bulletin from Martus, and then try retrieving it from the server. 
+
 
 
 --------
@@ -610,7 +618,7 @@ Note: You can delete bulletins and Martus folders while other applications are o
 
 Note: Before you delete your Martus account information, make sure you have backed up your key file and will be able to restore it. If you delete your key without backing it up, you will lose access to all private data you’ve sent to the server.  When you delete your key, the following will also be deleted:  server settings, Headquarters account, default details values, custom fields, user-created folders in Martus, and interface preferences (e.g. date format, column widths).
 
-5. Click Yes to confirm that you want to delete all your bulletins and your account information, including your key file, from your computer.
+5. Click Yes to confirm that you want to delete all your bulletins and your account information, including your key file, from your computer.  If you do not wish to continue, click Cancel.
 6. Martus automatically closes.
 
 
@@ -670,7 +678,6 @@ To back up your single password-encrypted key file onto removable media or a net
 8. Store your backup disk or other removable media in a secure place where it is unlikely to be damaged by weather, insects, or other factors. Do not write your password on the disk or store it on the disk electronically. No one can use the key you back up to a single file without your username and password.
 9. If you do not want to back up your key file to multiple disks, click No in the dialog box that appears. We recommend backing up your key file to multiple disks. To do so, follow the instructions below.
 
-
 Note: Create a new single password-encrypted key backup whenever you change your username or password.  See “9h. Changing your user name or password” for information.
 
 Next, to back up your key file to five separate floppy disks or other removable media (two of which will be required to restore the key file):
@@ -693,18 +700,19 @@ If you have lost your computer, had a hard drive failure, or lost your key for s
 To restore your key:
 1. Install Martus, if it isn’t currently installed.
 2. Click the Restore Account tab in the Martus Signin dialog box.
-3. Select an option to restore your account: from a backup key file or from multiple diskettes.
+3. Select an option to restore your account: from a single backup key file or from multiple diskettes.
 4. Read the informational dialog box, and click OK.
-5. If you’re using a backup key file, find the file on your hard-disk/network-drive or insert the floppy disk (or other removable media) that contains the file and navigate to it, and click OK.
+5. If you’re using a single backup key file, find the file on your hard-disk/network-drive or insert the floppy disk (or other removable media) that contains the file and navigate to it, and click OK.
 If you’re using two disks from a five-disk set, insert the first disk and navigate to the file it contains; click OK; and then insert the second disk and click OK.  Make sure to redistribute the key backup disks after restoring your key.
-6. If you are restoring from the single encrypted key file, log into Martus using the username and password that were associated with the key at the time you created the backup file.  If you are restoring from the multiple backup disks, you can either use your old username and password or create a new username and password for your account.
+6. If you are restoring from the single encrypted key file, log into Martus using the username and password that were associated with the key at the time you created the backup file.  
+If you are restoring from the multiple backup disks, you can either use your old username and password or create a new username and password for your account.
 7. You will then be asked to create a password encrypted backup file of your key with this username and password.  See "9b. Backing up your key" for more details.
 8. After the restoration is complete, be sure to re-distribute the key backup disks. Any time two of those disks are in the same place, anyone could use them to access your account, even without knowing your username or password.
 --------
 9d. Using your password wisely
 It is critical that your password remain secret. Do not share your password with anyone, and do not use a password that someone could easily guess. 
 
-Each time you change your password, back up your key and delete all previous single file backups (you do not need to, and should not, delete any multiple file backups you created since they are not encrypted with your password). Your new backup key file is encoded using your new password.  See  “9h. Changing your user name or password” for information.  
+Each time you change your password, back up your key and delete all previous single file backups (you do not need to, and should not, delete any multiple file backups you created since they are not encrypted with your password). Your new backup key file is encoded using your new password.  See “9h. Changing your user name or password” for information.  
 
 When Martus is running, it will prompt you to re-enter your username and password after ten minutes of inactivity. This is to minimize the chance that other people will be able to access your private data if you leave Martus open while you are away from your computer. If Martus prompts you for your username and password while you are editing a bulletin, and you click Cancel, changes you've made to the bulletin are lost and it reverts to its last-saved state. If you haven’t ever saved that bulletin, the entire bulletin is lost. We suggest you save any bulletins you’re working on and then exit Martus before you leave your system unattended.
 --------
@@ -728,7 +736,7 @@ Note: Only bulletins saved after you import the public account ID will be availa
 Instructions for Headquarters users
 To share the HQ public account ID and public code with people in the field:
 1. Create a Martus account. (See “2d. Setting up your account.”)
-2. In Martus, choose Tools > Export My Public Account ID, and name the file. Martus saves the file with an .mpi extension in the Martus folder on your hard drive, and confirms that it has been saved. 
+2. In Martus, choose Tools > Export My Public Account ID, and name the file. Martus saves the file with an .mpi extension in your account directory in the Martus folder on your hard drive, and confirms that it has been saved. 
 3. Give the .mpi file to people whose bulletins you want to access.
 4. Choose Help > View My Account Details.
 5. Write down the public code.
@@ -761,7 +769,7 @@ Users of the Headquarters account will continue to have access to any bulletins 
 9g. Enabling other accounts to send your bulletins to a server
 If you do not have the ability to connect to a server, you should have another account send your bulletins to a server for you to safeguard the information in the bulletins.  If you cannot backup your bulletins to a server from your account, you will not be able to recover them if your computer is damaged or stolen.  See “1f. Why send bulletins to the server?” for more information.  
 
-When you set up a Headquarters account they can send bulletins to a server for you. That is, if a field desk account does not have Internet access, its user can create bulletins in Martus and save them to a disk, and then the Headquarters users can copy the files into their Martus Client and choose File > Resend Bulletins to send the bulletins to the server on behalf of the field desk. The field desk will still be listed as the bulletin's author, and the Headquarters user cannot modify the bulletin.
+When you set up a Headquarters account they can send bulletins to a server for you. That is, if a field desk account does not have Internet access, its user can create bulletins in Martus and save them to a disk, and then the Headquarters users can copy the files into their Martus Client and choose File > Resend Bulletins to send the selected bulletins to the server on behalf of the field desk. The field desk will still be listed as the bulletin's author, and the Headquarters user cannot modify the bulletin.
 
 Note: We recommend that Headquarters users create a separate folder for bulletins they send to the server on behalf of their field desks or other Martus users.
 --------
@@ -795,7 +803,7 @@ Most Martus users find that the default bulletin fields meet their needs. Howeve
 
 After you customize bulletin fields, the new field arrangement will appear in every new bulletin you create; customizing fields has no effect on your existing bulletins or on bulletins you download from the server.  
 
-Custom fields may not be displayed in the current version of the Martus Search Engine, even if the bulletin is public.  However they may be displayed in future versions, so if your custom fields contain confidential information, make sure your bulletin is set to have all data private.
+Custom fields may not be displayed in the current version of the Martus Search Engine, even if the bulletin is public.  However they may be displayed in future versions of the Martus Search Engine, so if your custom fields contain confidential information, make sure your bulletin is set to have all data private.
 
 To customize bulletin fields:
 1. Choose Options > Customize Fields.
@@ -809,8 +817,8 @@ The layout of the fields in a bulletin is dictated by an XML document. The docum
 
 Keep the following in mind when you're customizing fields:
 • XML is case-sensitive. 
-• You can use either single or double quotes around the field type name, as long as they match. 
-• A Boolean field will appear as a checkbox in a bulletin on the screen, and will be printed as Yes/No.
+• You can use either single or double quotes around the field type name, as long as they match.  (E.g. 'STRING" is not valid. It needs to be 'STRING' or "STRING")
+• A Boolean field will appear as a checkbox when you are editing a bulletin, and will be displayed as Yes/No in bulletin previews and when printed.
 
 Here are some examples; these fields would look like the ones in the figure that follows:
 
@@ -863,7 +871,7 @@ To restore the default bulletin fields:
 11. Frequently Asked Questions
 These are the most common issues you’re likely to encounter using Martus. 
 
-1. I’ve saved a bulletin, but the word "yes" hasn't appeared in the Sent column.
+1. I’ve saved a bulletin, but the word "Yes" hasn't appeared in the Sent column.
 Ensure you have an active Internet connection, and that you’ve set up a server. Bulletins are not listed as sent until they have been successfully sent to the server. Bulletins may also take up to an hour to send if you are sending a large attachment, or if the connection is slow. While Martus is sending the bulletin, it displays a progress meter in the status bar at the bottom of the screen. Additionally, when you connect to a server, there may be a delay before the Sent column is populated.
 
 2. Martus won’t accept my password.
@@ -883,7 +891,7 @@ Log in to Martus using your username and password. Then choose Help > View My Ac
 Once you’ve sealed a bulletin—whether or not you've sent it to the server, neither you nor anyone else can ever edit the original bulletin again. However, if you have information to add to a sealed bulletin, or need to make an important correction, you can modify a copy of the bulletin. (See "5c. Modifying a copy of a sealed bulletin") and send it. Both the original and the modified copy will then be available on the server.
 
 7. When I try to retrieve bulletins from the server, the ones I want are not listed.
-By default, the Retrieve Bulletins dialog box does not list bulletins that are already present on your computer, because you cannot download those bulletins. To see all your bulletins on the server, whether they’re on your computer or not, check Show All Buttons On This Computer And On The Server. You may also want to search the bulletins on your computer; it’s possible that the bulletin you’re looking for hasn’t been sent to the server.
+By default, the Retrieve Bulletins dialog box does not list bulletins that are already present on your computer, because you cannot download those bulletins. To see all your bulletins on the server, whether they’re on your computer or not, check Show All Bulletins On This Computer And On The Server. You may also want to search the bulletins on your computer; it’s possible that the bulletin you’re looking for hasn’t been sent to the server.
 
 8. How can I open an attachment?
 If you are using Windows, you can view an attachment without saving it to your hard drive: click View Attachment. The application associated with the attachment’s file type opens the attachment. (You can change the file type’s association in Windows Explorer.)
@@ -894,11 +902,11 @@ If you are using Mac OS or Linux, or if you want to save the attachment to your 
 Discard the bulletin from all folders before you delete it from the Discarded Bulletins folder. 
 
 10. Can I back up my Martus data onto a floppy disk or tape drive?
-Yes, if you have a backup device large enough to hold all your data. Copy the entire C:\Martus folder onto your backup media. This folder contains the Martus application, the Java runtime environment, encrypted key files, configuration data, and bulletins for all Martus accounts on the computer. For a minimal backup, copy only the MartusKeyPair.dat file and the Packets and Accounts folders from your account directory. 
+Yes, if you have a backup device large enough to hold all your data. Copy the entire Martus folder onto your backup media. This folder contains the Martus application, the Java runtime environment, encrypted key files, configuration data, and bulletins for all Martus accounts on the computer. For a minimal backup, copy only the MartusKeyPair.dat file and the Packets and Accounts folders from your account directory. 
 
 11. Why are there more languages available when creating bulletins than in the Signin screen or
  Options dialog box?
-The Options dialog box lets you choose a language for the user interface; currently, the Martus interface has been translated into English, Spanish, and Russian. We hope to translate the interface into more languages in the future; if you are interested in translating Martus into another language, please contact us at info@martus.org. 
+The Options dialog box lets you choose a language for the user interface; currently, the Martus interface has been translated into English, French, Russian, and Spanish. We hope to translate the interface into more languages in the future; if you are interested in translating Martus into another language, please contact us at info@martus.org. 
 
 As you noticed, there are several languages available in the Language pop-up menu when you create a bulletin. That option specifies the language you use to enter the data into your bulletin. You do not need to type the bulletin in the same language used in your user interface.
 
@@ -926,7 +934,9 @@ You can customize the fields in bulletins you create, as well. See “10b. Custo
 This may indicate a problem with your video driver.  If you can not get access to an updated driver or you still see this problem, try setting Martus properties to use 256 color (instead of 16 or 32 bit color) in Windows XP, or using 256 color under Control Panel Display Settings for Windows operating systems older than Windows XP.
 
 17. I’m seeing unexpected behavior in Martus. How can I find out what’s going on?
-In Windows, instead of starting Martus by double-clicking the Martus icon on your desktop, choose Run from the Start menu and type the following text to launch Martus: C:\Martus\bin\java.exe -jar C:\Martus\Martus.jar. Then note the error messages you receive as you work in Martus, and e-mail those to help@martus.org.
+In Windows, instead of starting Martus by double-clicking the Martus icon on your desktop, choose Run from the Start menu and type the following text to launch Martus: 
+         C:\Martus\bin\java.exe -jar C:\Martus\Martus.jar. 
+Then note the error messages you receive as you work in Martus, and e-mail those to help@martus.org.
 
 In Mac, open a Terminal application window, and start Martus from the command line. Then note the error messages you receive as you work in Martus, and e-mail those to help@martus.org.
 
@@ -940,4 +950,13 @@ Yes, you can share private data using a Headquarters account. Any account can se
 
 20. Can I get the Martus User Guide in a different language? 
 Yes. In fact, you probably already have multiple versions on your computer. When you install Martus, all the language versions of the user guide that are currently available are installed in your Martus\Docs directory.  They are also available at http://www.martus.org/downloads, and you can visit this site to see whether new language versions are available.
+
+
+
+
+
+
+
+
+Martus 2.0.1 User Guide		40
 
