@@ -37,6 +37,7 @@ import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 
 import org.martus.client.swingui.UiMainWindow;
+import org.martus.common.clientside.Localization;
 import org.martus.common.clientside.UiBasicLocalization;
 import org.martus.swing.ParagraphLayout;
 import org.martus.swing.UiWrappedTextArea;
@@ -67,7 +68,7 @@ public class UiShowScrollableTextDlg extends JDialog implements ActionListener
 			ok = new JButton(TokenReplacement.replaceTokens(buttonLabel, tokenReplacement));
 			ok.addActionListener(this);
 			JButton cancel = null;
-			if(cancelButtonTag.length() != 0)
+			if(!cancelButtonTag.equals(Localization.UNUSED_TAG))
 			{
 				buttonLabel = localization.getButtonLabel(cancelButtonTag);
 				cancel = new JButton(TokenReplacement.replaceTokens(buttonLabel, tokenReplacement));
@@ -81,9 +82,12 @@ public class UiShowScrollableTextDlg extends JDialog implements ActionListener
 			
 			getContentPane().setLayout(new ParagraphLayout());
 			getContentPane().add(new JLabel(""), ParagraphLayout.NEW_PARAGRAPH);
-			String fieldLabel = localization.getFieldLabel(descriptionTag);
-			fieldLabel = TokenReplacement.replaceTokens(fieldLabel, tokenReplacement);
-			getContentPane().add(new UiWrappedTextArea(fieldLabel));
+			if(!descriptionTag.equals(Localization.UNUSED_TAG))
+			{
+				String fieldLabel = localization.getFieldLabel(descriptionTag);
+				fieldLabel = TokenReplacement.replaceTokens(fieldLabel, tokenReplacement);
+				getContentPane().add(new UiWrappedTextArea(fieldLabel));
+			}
 			getContentPane().add(new JLabel(""), ParagraphLayout.NEW_PARAGRAPH);
 			getContentPane().add(detailScrollPane);
 			getContentPane().add(new JLabel("    "));

@@ -114,6 +114,7 @@ import org.martus.common.MartusUtilities.FileVerificationException;
 import org.martus.common.MartusUtilities.ServerErrorException;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.clientside.CurrentUiState;
+import org.martus.common.clientside.Localization;
 import org.martus.common.clientside.UiBasicLocalization;
 import org.martus.common.clientside.UiPasswordField;
 import org.martus.common.clientside.UiUtilities;
@@ -1513,7 +1514,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	
 	public void displayScrollableMessage(String titleTag, String message, String okButtonTag, Map tokenReplacement) 
 	{
-		new UiShowScrollableTextDlg(this, titleTag, okButtonTag, "", "", message, tokenReplacement);
+		new UiShowScrollableTextDlg(this, titleTag, okButtonTag, Localization.UNUSED_TAG, Localization.UNUSED_TAG, message, tokenReplacement);
 	}
 
 	class PublicInfoFileFilter extends FileFilter

@@ -115,20 +115,20 @@ public class TestMartusLocalization extends TestCaseEnhanced
 	{
 		bd.loadTranslationFile("es");
 
-		assertEquals("Print", bd.getLabel("en", "button", "print", null));
-		assertNull("No translation found", bd.getLabel("en", "whatever", "not in the map", null));
-		assertEquals("xyz", bd.getLabel("en", "whatever", "not in the map", "xyz"));
+		assertEquals("Print", bd.getLabel("en", "button", "print"));
+		assertEquals("No translation found", "<whatever:not in the map>", bd.getLabel("en", "whatever", "not in the map"));
 
-		assertEquals("Imprimir", bd.getLabel("es", "button", "print", null));
+		assertEquals("Imprimir", bd.getLabel("es", "button", "print"));
 
-		assertEquals("?", bd.getLabel("en", "category", "sillytag", "?"));
-		assertEquals("<?>", bd.getLabel("es", "category", "sillytag", "?"));
+		assertEquals("<category:sillytag>", bd.getLabel("en", "category", "sillytag"));
+		assertEquals("<<category:sillytag>>", bd.getLabel("es", "category", "sillytag"));
 		bd.addTranslation("en", "category:sillytag=something");
-		assertEquals("<something>", bd.getLabel("es", "category", "sillytag", "?"));
+		assertEquals("<something>", bd.getLabel("es", "category", "sillytag"));
+		assertEquals("something", bd.getLabel("en", "category", "sillytag"));
 		bd.addTranslation("es", "category:sillytag=es/something");
-		assertEquals("es/something", bd.getLabel("es", "category", "sillytag", "?"));
+		assertEquals("es/something", bd.getLabel("es", "category", "sillytag"));
 
-		assertEquals("<Print>", bd.getLabel("xx", "button", "print", null));
+		assertEquals("<Print>", bd.getLabel("xx", "button", "print"));
 	}
 	
 	public void testLoadTranslations() throws Exception
@@ -136,7 +136,7 @@ public class TestMartusLocalization extends TestCaseEnhanced
 		String sampleFileContents = "# This is a comment with =\na:b=c\nd:e=f";
 		StringInputStream in = new StringInputStream(sampleFileContents);
 		bd.loadTranslations("qq", in);
-		assertEquals("c", bd.getLabel("qq", "a", "b", "default"));
+		assertEquals("c", bd.getLabel("qq", "a", "b"));
 		Map qq = bd.getStringMap("qq");
 		assertEquals("not 2?", 2, qq.size());
 	}
@@ -153,14 +153,14 @@ public class TestMartusLocalization extends TestCaseEnhanced
 	public void testAddTranslation()
 	{
 		// must call getLabel first, to initialize the hash (this should go away soon!)
-		assertEquals("<d>", bd.getLabel("xx", "b", "c", "d"));
+		assertEquals("<<b:c>>", bd.getLabel("xx", "b", "c"));
 		bd.addTranslation("en", "b:c=bc");
-		assertEquals("<bc>", bd.getLabel("xx", "b", "c", "d"));
+		assertEquals("<bc>", bd.getLabel("xx", "b", "c"));
 		bd.addTranslation("a", "invalid=because-bad-language");
 		bd.addTranslation("en", null);
 		bd.addTranslation("en", "invalid-because-no-equals");
 		bd.addTranslation("en", "b:c=new\\nline");
-		assertEquals("new\nline", bd.getLabel("en", "b", "c", "default"));
+		assertEquals("new\nline", bd.getLabel("en", "b", "c"));
 	}
 
 /*TODO: Evaluate whether any of these tests are still useful

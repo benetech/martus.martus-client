@@ -37,6 +37,7 @@ import org.martus.client.core.MartusApp;
 import org.martus.common.MartusConstants;
 import org.martus.common.MartusUtilities;
 import org.martus.common.Version;
+import org.martus.common.clientside.Localization;
 import org.martus.common.crypto.MartusCrypto.KeyShareException;
 import org.martus.swing.UiFileChooser;
 import org.martus.util.UnicodeReader;
@@ -122,23 +123,24 @@ public class UiBackupRecoverSharedKeyPair
 
 		int minNumber = MartusConstants.minNumberOfFilesNeededToRecreateSecret;
 		Vector shares = new Vector();
-
+		String title_and_field_tag="";
 		for(int disk = 1; disk <= minNumber; ++disk )
 		{
 			while(true)
 			{
 				String[] filesMatching = firstShareFile.getParentFile().list(new BackupShareFilenameFilter(defaultShareFileName, MartusApp.SHARE_KEYPAIR_FILENAME_EXTENSION));
 				
+				title_and_field_tag = "ErrorRecoverNoAppropriateFileFound";
 				if(filesMatching == null || filesMatching.length == 0)
 				{
-					if(!insertDisk("ErrorRecoverNoAppropriateFileFound", disk, minNumber, "CancelShareRecover"))
+					if(!insertDisk(title_and_field_tag,title_and_field_tag, disk, minNumber, "CancelShareRecover"))
 						return null;
 					continue;
 				}
 				File shareFile = new File(firstShareFile.getParent(), filesMatching[0]);
 				if(shareFile == null || !shareFile.isFile())
 				{
-					if(!insertDisk("ErrorRecoverNoAppropriateFileFound", disk, minNumber, "CancelShareRecover"))
+					if(!insertDisk(title_and_field_tag, title_and_field_tag, disk, minNumber, "CancelShareRecover"))
 						return null;
 					continue;
 				}
@@ -151,15 +153,16 @@ public class UiBackupRecoverSharedKeyPair
 
 					if(disk == minNumber)
 						break;
-
-					if(!insertDisk("RecoverShareKeyPair", disk+1, minNumber, "CancelShareRecover"))
+					title_and_field_tag = "RecoverShareKeyPair";
+					if(!insertDisk(title_and_field_tag, title_and_field_tag, disk+1, minNumber, "CancelShareRecover"))
 						return null;
 					break;
 				} 
 				catch (IOException e) 
 				{
 					e.printStackTrace();
-					if(!insertDisk("ErrorRecoverShareDisk", disk, minNumber, "CancelShareRecover"))
+					title_and_field_tag = "ErrorRecoverShareDisk";
+					if(!insertDisk(title_and_field_tag, title_and_field_tag, disk, minNumber, "CancelShareRecover"))
 						return null;
 					continue;
 				}
@@ -293,6 +296,7 @@ public class UiBackupRecoverSharedKeyPair
 	{
 		Vector shareFiles = new Vector();
 		int maxFiles = MartusConstants.numberOfFilesInShare;
+		String title_and_field_tag = "";
 		for(int disk = 1; disk <= maxFiles; ++disk )
 		{
 			while(true)
@@ -302,14 +306,16 @@ public class UiBackupRecoverSharedKeyPair
 				String[] otherBackupFiles = currentShareFile.getParentFile().list(new BackupShareFilenameFilter(defaultFileName, MartusApp.SHARE_KEYPAIR_FILENAME_EXTENSION));
 				if(otherBackupFiles != null && otherBackupFiles.length > 0)
 				{
-					if(!insertDisk("ErrorPreviousBackupShareExists", disk, maxFiles, "CancelShareBackup"))
+					title_and_field_tag = "ErrorPreviousBackupShareExists";
+					if(!insertDisk(title_and_field_tag, title_and_field_tag, disk, maxFiles, "CancelShareBackup"))
 						return false;
 					continue;
 				}
 		
 				if(!writeSharePieceToFile(currentShareFile, (String) keyShareBundles.get(disk - 1)))
 				{
-					if(!insertDisk("ErrorBackingupKeyPair", disk, maxFiles, "CancelShareBackup"))
+					title_and_field_tag = "ErrorBackingupKeyPair";
+					if(!insertDisk(title_and_field_tag, title_and_field_tag, disk, maxFiles, "CancelShareBackup"))
 						return false;
 					continue;
 				}
@@ -318,7 +324,7 @@ public class UiBackupRecoverSharedKeyPair
 				if(disk == maxFiles)
 					break;
 					
-				if(!insertDisk("SaveShareKeyPair", disk+1, maxFiles, "CancelShareBackup"))
+				if(!insertDisk("SaveShareKeyPair",Localization.UNUSED_TAG, disk+1, maxFiles, "CancelShareBackup"))
 					return false;
 				break;
 			}
@@ -334,16 +340,19 @@ public class UiBackupRecoverSharedKeyPair
 		boolean verifiedAll = false;
 		if(mainWindow.confirmDlg("BackupKeyShareVerifyDisks"))
 		{
+			String title_and_field_tag = "";
 			for(int disk = 1; disk <= maxFiles; ++disk )
 			{
-				if(!insertDisk("VerifyingKeyPairShare", disk, maxFiles, "CancelShareVerify"))
+				title_and_field_tag = "VerifyingKeyPairShare";
+				if(!insertDisk(title_and_field_tag, title_and_field_tag, disk, maxFiles, "CancelShareVerify"))
 					break;
 				boolean exitVerification = false;
 				while(true)
 				{
 					if(!verifySharePieceFromFile((File)shareFiles.get(disk-1), (String) keyShareBundles.get(disk - 1)))
 					{
-						if(!insertDisk("ErrorVerifyingKeyPairShare", disk, maxFiles, "CancelShareVerify"))
+						title_and_field_tag = "ErrorVerifyingKeyPairShare";
+						if(!insertDisk(title_and_field_tag, title_and_field_tag, disk, maxFiles, "CancelShareVerify"))
 						{
 							exitVerification = true;
 							break;
@@ -379,11 +388,12 @@ public class UiBackupRecoverSharedKeyPair
 		return false;
 	}
 
-	private boolean insertDisk(String titleMessageTag, int diskNumber, int totalNumberOfDisks, String confirmCancelTag)
+	private boolean insertDisk(String titleMessageTag, String fieldMessageTag, int diskNumber, int totalNumberOfDisks, String confirmCancelTag)
 	{
 		String windowTitle = localization.getWindowTitle(titleMessageTag);
-
-		String message1 = localization.getFieldLabel(titleMessageTag);
+		String message1 = "";
+		if(!fieldMessageTag.equals(Localization.UNUSED_TAG))
+			message1 = localization.getFieldLabel(fieldMessageTag);
 		String message2 = localization.getFieldLabel("BackupRecoverKeyPairInsertNextDiskMessage") +
 							" " + Integer.toString(diskNumber) + " " +	
 		localization.getWindowTitle("SaveRecoverShareKeyPairOf") + " " +
