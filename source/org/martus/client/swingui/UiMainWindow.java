@@ -84,6 +84,7 @@ import org.martus.client.swingui.bulletintable.UiBulletinTablePane;
 import org.martus.client.swingui.dialogs.UiAboutDlg;
 import org.martus.client.swingui.dialogs.UiBulletinModifyDlg;
 import org.martus.client.swingui.dialogs.UiConfigServerDlg;
+import org.martus.client.swingui.dialogs.UiConfigureHQs;
 import org.martus.client.swingui.dialogs.UiContactInfoDlg;
 import org.martus.client.swingui.dialogs.UiCreateNewAccountProcess;
 import org.martus.client.swingui.dialogs.UiDisplayHelpDlg;
@@ -1604,6 +1605,13 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		{
 			return getLocalization().getFieldLabel("PublicInformationFiles");
 		}
+	}
+	
+	public void doConfigureHQs()
+	{
+		if(!reSignIn())
+			return;
+		new UiConfigureHQs(this);
 	}
 
 	public void doImportHQPublicKey()

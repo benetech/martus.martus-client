@@ -233,6 +233,7 @@ public class EnglishStrings
 "wintitle:helpStringNotFound=Search Text Not Found",
 "wintitle:CreateCustomFieldsHelp=Help on Creating Custom Fields",
 "wintitle:ErrorCustomFields=Customize Fields Error",
+"wintitle:ConfigureHQs=HQ Editor",
 
 "button:help=Help",
 "button:create=Create",
@@ -287,6 +288,8 @@ public class EnglishStrings
 "button:RecoverAccountTab=Restore Account",
 "button:RecoverAccountByShare=Recover account from multiple disks",
 "button:RecoverAccountByBackup=Recover account from backup keypair file",
+"button:ConfigureHQsAdd=Add...",
+"button:ConfigureHQsRemove=Remove",
 
 "menu:file=File",
 "menu:CreateNewBulletin=Create New Bulletin",
@@ -324,6 +327,7 @@ public class EnglishStrings
 "menu:BackupMyKeyPairFile=Backup My Keypair",
 "menu:ExportMyPublicKey=Export My Public Key",
 "menu:ImportHQPublicKey=Import Headquarters Key",
+"menu:ConfigureHQs=Configure HQ's",
 "menu:RemoveExistingHQPublicKey=Remove Existing Headquarters",
 "menu:CustomFields=Customize Fields",
 "menu:help=Help",
@@ -335,7 +339,6 @@ public class EnglishStrings
 "menu:paste=Paste",
 "menu:delete=Delete",
 "menu:selectall=Select All",
-
 "menu:RemoveServer=Remove Martus Server",
 
 "language:?=-Other-",
@@ -740,6 +743,8 @@ public class EnglishStrings
 "field:ErrorCustomFieldHeader2=TYPE",
 "field:ErrorCustomFieldHeader3=TAG",
 "field:ErrorCustomFieldHeader4=LABEL",
+"field:ConfigureHQsCurrentHQs=Current HQ's",
+"field:ConfigureHQColumnHeaderPublicCode=Public Code",
 
 "field:DateRangeFrom=Between",
 "field:DateRangeTo=and",

@@ -133,6 +133,12 @@ public class UiActions
 		return new ActionMenuExportMyPublicKey(mainWindowToUse);
 	}
 
+	
+	static public UiMartusAction newActionMenuConfigureHQs(UiMainWindow mainWindowToUse)
+	{
+		return new ActionMenuConfigureHQs(mainWindowToUse);
+	}
+
 	static public UiMartusAction newActionMenuImportHeadquarterPublicKey(UiMainWindow mainWindowToUse)
 	{
 		return new ActionMenuImportHeadquarterPublicKey(mainWindowToUse);
@@ -719,6 +725,20 @@ public class UiActions
 		}
 	}
 
+	
+	private static class ActionMenuConfigureHQs extends UiMenuAction
+	{
+		public ActionMenuConfigureHQs(UiMainWindow mainWindowToUse)
+		{
+			super(mainWindowToUse, "ConfigureHQs");
+		}
+
+		public void actionPerformed(ActionEvent ae)
+		{
+			mainWindow.doConfigureHQs();
+		}
+	}
+	
 	private static class ActionMenuImportHeadquarterPublicKey extends UiMenuAction
 	{
 		public ActionMenuImportHeadquarterPublicKey(UiMainWindow mainWindowToUse)
