@@ -586,9 +586,9 @@ public class BulletinStore
 		return folderDiscarded;
 	}
 
-	public BulletinFolder getFolderSent()
+	public BulletinFolder getFolderSaved()
 	{
-		return folderSent;
+		return folderSaved;
 	}
 
 	public BulletinFolder getFolderDrafts()
@@ -610,8 +610,7 @@ public class BulletinStore
 	{
 		folderOutbox = createSystemFolder(OUTBOX_FOLDER);
 		folderOutbox.setStatusAllowed(Bulletin.STATUSSEALED);
-		folderSent = createSystemFolder(SENT_FOLDER);
-		folderSent.setStatusAllowed(Bulletin.STATUSSEALED);
+		folderSaved = createSystemFolder(SAVED_FOLDER);
 		folderDrafts = createSystemFolder(DRAFT_FOLDER);
 		folderDrafts.setStatusAllowed(Bulletin.STATUSDRAFT);
 		folderDiscarded = createSystemFolder(DISCARDED_FOLDER);
@@ -987,7 +986,7 @@ public class BulletinStore
 			if(name.equals("Outbox"))
 				name = OUTBOX_FOLDER;
 			else if(name.equals("Sent Bulletins"))
-				name = SENT_FOLDER;
+				name = SAVED_FOLDER;
 			else if(name.equals("Draft Bulletins"))
 				name = DRAFT_FOLDER;
 			else if(name.equals("Discarded Bulletins"))
@@ -1152,7 +1151,7 @@ public class BulletinStore
 	public static int maxCachedBulletinCount = 100;
 
 	public static final String OUTBOX_FOLDER = "%OutBox";
-	public static final String SENT_FOLDER = "%Sent";
+	public static final String SAVED_FOLDER = "%Sent";
 	public static final String DRAFT_FOLDER = "%Draft";
 	public static final String DISCARDED_FOLDER = "%Discarded";
 	public static final String SEARCH_RESULTS_BULLETIN_FOLDER = "%SearchResults";
@@ -1172,7 +1171,7 @@ public class BulletinStore
 	private Database database;
 	private Vector folders;
 	private BulletinFolder folderOutbox;
-	private BulletinFolder folderSent;
+	private BulletinFolder folderSaved;
 	private BulletinFolder folderDrafts;
 	private BulletinFolder folderDiscarded;
 	private BulletinFolder folderDraftOutbox;

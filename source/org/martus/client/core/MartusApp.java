@@ -465,7 +465,7 @@ public class MartusApp
 
 	public BulletinFolder getFolderSent()
 	{
-		return store.getFolderSent();
+		return store.getFolderSaved();
 	}
 
 	public BulletinFolder getFolderDiscarded()

@@ -553,7 +553,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	public void selectSentFolder()
 	{
 		BulletinStore store = getStore();
-		BulletinFolder folder = store.getFolderSent();
+		BulletinFolder folder = store.getFolderSaved();
 		folders.selectFolder(folder.getName());
 	}
 

@@ -1052,7 +1052,7 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 
 		appWithAccount.loadFolders();
 		assertEquals("Should have loaded samples", sampleCount, store.getBulletinCount());
-		BulletinFolder sent = store.getFolderSent();
+		BulletinFolder sent = store.getFolderSaved();
 		assertEquals("Sent should have bulletins", sampleCount, sent.getBulletinCount());
 
 		store.deleteAllData();

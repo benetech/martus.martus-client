@@ -88,7 +88,7 @@ class BackgroundUploadTimerTask extends TimerTask
 				else if(uploadResult.uid != null)
 				{
 					//System.out.println("UiMainWindow.Tick.run: " + uploadResult);
-					mainWindow.folderContentsHaveChanged(getStore().getFolderSent());
+					mainWindow.folderContentsHaveChanged(getStore().getFolderSaved());
 					mainWindow.folderContentsHaveChanged(getStore().getFolderOutbox());
 					mainWindow.folderContentsHaveChanged(getStore().getFolderDraftOutbox());
 					mainWindow.folderContentsHaveChanged(getApp().createOrFindFolder(getStore().getNameOfFolderDamaged()));

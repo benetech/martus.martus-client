@@ -107,7 +107,7 @@ public class TestBulletinStore extends TestCaseEnhanced
 		assertEquals("wrong author?", "", b.get("Author"));
 		assertEquals("wrong account?", security.getPublicKeyString(), b.getAccount());
 	}
-
+    
 	public void testGetStandardFieldNames()
 	{
 		FieldSpec[] publicFields = StandardFieldSpecs.getDefaultPublicFieldSpecs();
@@ -299,7 +299,7 @@ public class TestBulletinStore extends TestCaseEnhanced
 	{
 		TRACE("testDiscardBulletin");
 
-		BulletinFolder f = store.getFolderSent();
+		BulletinFolder f = store.getFolderSaved();
 		assertNotNull("Need Sent folder", f);
 		BulletinFolder discarded = store.getFolderDiscarded();
 		assertNotNull("Need Discarded folder", f);
@@ -345,7 +345,7 @@ public class TestBulletinStore extends TestCaseEnhanced
 	{
 		TRACE("testRemoveBulletinFromFolder");
 
-		BulletinFolder f = store.getFolderSent();
+		BulletinFolder f = store.getFolderSaved();
 		assertNotNull("Need Sent folder", f);
 
 		Bulletin b1 = store.createEmptyBulletin();
@@ -389,9 +389,9 @@ public class TestBulletinStore extends TestCaseEnhanced
 		assertEquals("Outbox/Sealed", true, fOutbox.canAdd(Bulletin.STATUSSEALED));
 //		assertEquals("Incorrect Outbox Name", BulletinStore.OUTBOX_FOLDER, fOutbox.getName());
 
-		BulletinFolder fSent = store.getFolderSent();
+		BulletinFolder fSent = store.getFolderSaved();
 		assertNotNull("Should have created Sent folder", fSent);
-		assertEquals("Sent/Draft", false, fSent.canAdd(Bulletin.STATUSDRAFT));
+		assertEquals("Sent/Draft", true, fSent.canAdd(Bulletin.STATUSDRAFT));
 		assertEquals("Sent/Sealed", true, fSent.canAdd(Bulletin.STATUSSEALED));
 
 		BulletinFolder fDrafts = store.getFolderDrafts();

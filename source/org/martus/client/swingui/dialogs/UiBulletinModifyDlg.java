@@ -215,7 +215,7 @@ public class UiBulletinModifyDlg extends JFrame implements ActionListener, Windo
 		store.saveBulletin(bulletin);
 		try
 		{
-			store.addBulletinToFolder(bulletin.getUniversalId(), store.getFolderDrafts());
+			store.addBulletinToFolder(bulletin.getUniversalId(), store.getFolderSaved());
 		}
 		catch (BulletinAlreadyExistsException harmlessException)
 		{
