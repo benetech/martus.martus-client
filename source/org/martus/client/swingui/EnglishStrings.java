@@ -636,7 +636,7 @@ public class EnglishStrings
 "field:notifyPrintAllPrivateDatacause=This bulletin will not be printed because all the information is private.  If you wish to print the private data, please mark the \"Include private data in print out\" checkbox.",
 "field:notifyErrorRenameFoldercause=Folder names cannot contain punctuation.  They also cannot begin with a space.",
 "field:notifyErrorRenameFolderExistscause=You already have a folder with that name.",
-"field:notifyAlreadyViewingThisVersioncause=You currently are viewing this verison of the bulletin.",
+"field:notifyAlreadyViewingThisVersioncause=You currently are viewing this version of the bulletin.",
 "field:notifyBulletinVersionNotInSystemcause=The bulletin version you are trying to view is currently not on your system.",
 
 "field:messageServerNewscause=The current server has sent this message:",
