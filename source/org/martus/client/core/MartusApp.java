@@ -1167,7 +1167,7 @@ public class MartusApp
 	public File getAccountDirectoryForUser(String userName, char[] userPassPhrase) throws Exception
 	{
 		Vector allAccountDirs = getAllAccountDirectories();
-		MartusSecurity tempSecurity = new MartusSecurity();
+		MartusCrypto tempSecurity = new MartusSecurity();
 		for(int i = 0; i<allAccountDirs.size(); ++i )
 		{
 			File testAccountDirectory = (File)allAccountDirs.get(i);
@@ -1459,7 +1459,7 @@ public class MartusApp
 		}
 	}
 	
-	public boolean isUserOwnerOfThisAccountDirectory(MartusSecurity tempSecurity, String userName, char[] userPassPhrase, File accountDirectory) throws IOException
+	public boolean isUserOwnerOfThisAccountDirectory(MartusCrypto tempSecurity, String userName, char[] userPassPhrase, File accountDirectory) throws IOException
 	{
 		File thisAccountsHashOfUserNameFile = getUserNameHashFile(accountDirectory);
 		if(thisAccountsHashOfUserNameFile.exists())
@@ -1468,7 +1468,7 @@ public class MartusApp
 			try
 			{
 				String hashOfUserName = reader.readLine();
-				String hexDigest = MartusSecurity.getHexDigest(userName);
+				String hexDigest = MartusCrypto.getHexDigest(userName);
 				if(hashOfUserName.equals(hexDigest))
 					return true;
 			}
