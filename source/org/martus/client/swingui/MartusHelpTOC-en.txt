@@ -9,11 +9,12 @@
 2. Getting Started
 2a. Installing
 2b. Uninstalling
-2c. Updating the Martus application
-2d. Setting up your account
-2e. Choosing a password
-2f. Setting up a server connection
-2g. Setting your preferences
+2c. Upgrading to a new version of Martus (Windows only)
+2d. Updating the Martus program file
+2e. Setting up your account
+2f. Choosing a password
+2g. Setting up a server connection
+2h. Setting your preferences
 3. The Martus Workspace
 4. Creating a Bulletin
 4a. Completing fields in a bulletin
@@ -21,9 +22,10 @@
 5. Saving and Modifying Bulletins
 5a. Saving a sealed bulletin
 5b. Saving a draft
-5c. Modifying a copy of a sealed bulletin
+5c. Creating a new version of a sealed bulletin
 5d. Modifying a draft
 5e. Discarding a draft
+5f. Discarding a sealed bulletin
 6. Managing Bulletins
 6a. Default folders
 6b. Other folders created by Martus
@@ -34,11 +36,12 @@
 6g. Retrieving sealed bulletins
 6h. Retrieving draft bulletins
 6i. Retrieving bulletins created by field desks
-6j. Viewing and saving attachments
-6k. Viewing damaged bulletins
-6l. Searching for specific bulletins
-6m. Printing bulletins
-6n. Exporting bulletin data
+6j. Viewing earlier versions of a bulletin
+6k. Viewing and saving attachments
+6l. Viewing damaged bulletins
+6m. Searching for specific bulletins
+6n. Printing bulletins
+6o. Exporting bulletin data
 7. Deleting Your Bulletins and Account Information
 8. Deleting All Martus Data, Including the Application
 9. Keeping Your Data Secure
