@@ -79,5 +79,5 @@ public class UiFlexiDateViewer extends UiField
 
 	UiLocalization localization;
 	JLabel label;
-	private static String	SPACE = " ";	
+	private static String	SPACE = "  ";	
 }
