@@ -1,9 +1,9 @@
 ﻿# Martus Client Translation File
 # Language code:  th
 # Language name:  Thai
-# Exported date:  Fri Jul 09 15:41:43 PDT 2004
-# Client version: 2.0
-# Client build:   20040707.1210
+# Exported date:  Tue Feb 15 15:49:02 PST 2005
+# Client version: Internal 2.6.0
+# Client build:   20050211.1523
 #
 # This file MUST be saved in UTF-8 format!
 # Lines beginning with # are comments and are ignored by Martus
@@ -27,49 +27,63 @@
 #    are logged in, go to Options/Preferences.
 #
 #  1.  do NOT translate "\n" (used for new lines)
-#  2.  do NOT translate "#N#" or "#M#" (though move them as appropriate
-#      grammatically for the language to make "N of M" [eg "2 of 5"] make
+#      And do NOT put spaces before the  equal sign after field:xxx.
+#      [should be "field:fieldtag=fieldtext" instead of
+#  	   "field:fieldtag = fieldtext" (space before the equals sign)]
+#  2.  do NOT create any user-entered new-lines/carriage-returns
+#      (by using the enter key) in any mtf entry
+#      (from the field:xxx to the end of the translated text),
+#      since a continuous block of text is needed.
+#  3.  do NOT translate "#N#" or "#M#" (though move them as appropriate
+#      grammatically for the language to make "#N# of #M#" [eg "2 of 5"] make
 #      sense for creating/restoring multiple key backup files).
-#  3.  in field:VirtualKeyboardKeys, keep the english alphabet, but include any
+#  4.  in field:VirtualKeyboardKeys, keep the english alphabet, but include any
 #      non-english characters at the end of the english alphabet/numbers/special
 #      characters (e.g. attach entire Thai alphabet at the end of the line)
-#  4.  in field:SearchBulletinRules, make sure to translate the english "and"
+#  5.  in field:SearchBulletinRules, make sure to translate the english "and"
 #      and "or" in the text to exactly match the keyword:and= and 
 #      keyword:or= translations.  Also, the translation of the first sentence
 #      should not exactly match the english version because Martus can handle
 #      both english "and"/"or" and the translations of those keywords for
 #      bulletin searching, since for some languages keyboards are not available
-#      to all users in those alphabets. So please translate the following 
-#      for the first sentence: "When searching for bulletins you can add 
-#      key words either in english or the-language-you-are-translating 
-#      (or/or-translated, and/and-translated) between multiple search term words
-#      (e.g. prison or jail, prison and-translated assault)."
-#  5.  in CreateCustomFieldsHelp2/3 fields, you can translate tags into foreign
+#      to all users in those alphabets. So please translate the following for the
+#      first sentence: "When searching for bulletins you can add key words either
+#      in english or the-language-you-are-translating (or/or-translated,
+#      and/and-translated) between multiple search term words
+#      (e.g. prison or jail, prison and assault).
+#  6.  in CreateCustomFieldsHelp2/3 fields, you can translate tags into foreign
 #      characters (but without punctuation or spaces)
-#  6.  when there are file or directory names, do not translate them
+#  7.  when there are file or directory names, do not translate them
 #      (e.g.  "acctmap.txt" and "packets"
 #      in field:confirmWarnMissingAccountMapFilecause=Warning: acctmap.txt
 #      file in your account's packets directory...)
-#  7.  do not translate the words "Martus" or "Benetech"
-#  8.  do NOT translate "#S#" (used for search string entry)
-#  9.  do not translate "#L#" as is it used to populate lists of values on
+#  8.  do not translate the words "Martus" or "Benetech"
+#  9.  do NOT translate "#S#" (used for search string entry)
+# 10.  do not translate "#L#" as is it used to populate lists of values on
 #      various dialogs.
-# 10.  do not translate "#Title#" (used for bulletin title entry)
-# 11.  do not translate "#A#" (used for bulletin details: Author Public Code)
-# 12.  do not translate "#I#" (used for bulletin details: Bulletin ID)
-# 13.  do not translate "#H#" (used for bulletin details: Headquarter entries)
-# 14.  do not translate "#NumberOfHQs#" in various dialogs
-# 15.  Leave standard field tags in English in CreateCustomFieldsHelp1 and
+# 11.  do not translate "#Title#" (used for bulletin title entry)
+# 12.  do not translate "#TITLES#" (used for a list of the titles of previous
+#      versions of the bulletin.
+# 13.  do not translate "#A#" (used for bulletin details: Author Public Code)
+# 14.  do not translate "#I#" (used for bulletin details: Bulletin ID)
+# 15.  do not translate "#H#" (used for bulletin details: Headquarter entries)
+# 16.  do not translate "#NumberOfHQs#" in various dialogs
+# 17.  Leave standard field tags in English in CreateCustomFieldsHelp1 and
 #      CreateCustomFieldsHelp2, but put translation in parentheses after
 #      english : e.g.  'author' (autor), so users know what they refer to
-# 16.  Leave field types in English in CreateCustomFieldsHelp2 (e.g. BOOLEAN,
+# 18.  Leave field types in English in CreateCustomFieldsHelp2 (e.g. BOOLEAN,
 #      DATE), but put translation in parentheses after english, so users know
 #      what they refer to.
-# 17.  Leave field types in English in CreateCustomFieldsHelp3 examples
+# 19.  Leave field types in English in CreateCustomFieldsHelp3 examples
 #      (e.g. BOOLEAN, DATE)
-# 18.  Do not translate words used in XML for custom fields such as:
+# 20.  Do not translate words used in XML for custom fields such as:
 #      <Field type='GRID'>, </Field>, <Tag>, </Tag>, <Label>, </Label>,
 #      <GridSpecDetails>, </GridSpecDetails>, <Column>, </Column>
+# 21.  do not translate "#UseUnofficialTranslationFiles#" in
+#      field:warningUnofficialTranslation since it contains a file name
+# 22.  If you want your language to appear right to left,
+#      Uncomment the next line (by removing the # in front of #!right-to-left)
+#!right-to-left
 #
 
 #________________________=Show all bulletins on this server and on this computer.
@@ -120,6 +134,12 @@
 #_________________________=Reset Contents
 -6f62-button:ResetContents=เริ่มใหม่
 
+#_______________________________=Retrieve all bulletin revisions
+-6965-button:RetrieveAllVersions=<Retrieve all bulletin revisions>
+
+#______________________________________________=Retrieve latest bulletin revision only
+-9c45-button:RetrieveLatestBulletinRevisionOnly=<Retrieve latest bulletin revision only>
+
 #__________________________________=Accept
 -bb54-button:ServerComplianceAccept=ยอมรับ
 
@@ -128,6 +148,9 @@
 
 #__________________=Sign In
 -f849-button:SignIn=เข้าสู่ระบบ
+
+#_______________________________________=View Selected Version...
+-f943-button:ViewPreviousBulletinVersion=<View Selected Version...>
 
 #_________________________________________=Switch to using regular keyboard
 -c1ee-button:VirtualKeyboardSwitchToNormal=เปลี่ยนไปใช้คีย์บอร์ดปกติ
@@ -243,8 +266,6 @@
 #_______________=Yes
 -5397-button:yes=ใช่
 
-field:translationVersion= ไทย 2.0.1
-
 #_______________________________=Account Directory: 
 -c354-field:AccountInfoDirectory=โฟลเดอร์ของชื่อบัญชี:
 
@@ -263,17 +284,65 @@ field:translationVersion= ไทย 2.0.1
 #_________________________=Author (required)
 -4a0b-field:AuthorRequired=ผู้รายงาน (จำเป็น)
 
-#___________________________________=Your key is required to read your private bulletin information or to create new bulletins.  To ensure that you’ll always have access to your data, it is extremely important to keep a backup of your key.\n\nMartus offers two methods for backing up your key, either of which may be used, but we strongly recommend using both backup methods.  The first method creates a single, password encrypted key back up file onto removable media (e.g. floppy disk, cd, USB storage) or a network drive; the second method backs up the key in #M# separate pieces (not encrypted with your password) onto multiple floppy disks (or other removable media).\n
--667a-field:BackupKeyPairGeneralInfo=จำเป็นต้องใช้กุญแจของคุณในการอ่านข้อมูลรายงานส่วนตัวของคุณ หรือใช้ในการสร้างรายงานใหม่ เพื่อให้แน่ใจว่าคุณสามารถเข้าถึงข้อมูลของคุณได้เสมอ เป็นสิ่งที่สำคัญอย่างยิ่งที่คุณควรจะสำรองกุญแจของคุณ\n\nMartus มีวิธีการสำรองกุญแจ 2 วิธี ซึ่งคุณจะใช้วิธีใดก็ได้ แต่เราแนะนำเป็นอย่างยิ่งว่า ควรใช้ทั้งสองวิธีในการสำรองข้อมูล วิธีแรกคือการสร้างแฟ้มกุญแจแล้วเข้ารหัสด้วยรหัสผ่านของคุณ ลงในสื่อที่เคลื่อนย้ายได้ (เช่น แผ่นฟลอปปี้ดิสก์ ซีดี หรือสื่ออื่นๆ) หรือไดร์ฟบนเครือข่าย วิธีที่สองคือ แยกเก็บกุญแจออกเป็น #M# ส่วน (แต่ไม่ได้เข้ารหัสด้วยรหัสผ่านของคุณ) ลงในแผ่นฟลอปปี้ดิสก์หลายแผ่น (หรือสื่ออื่นๆ)
+#___________________________________=Your key is required to read your private bulletin information or to create new bulletins.  To ensure that you'll always have access to your data, it is extremely important to keep a backup of your key.\n\nMartus offers two methods for backing up your key, either of which may be used, but we strongly recommend using both backup methods.  The first method creates a single, password encrypted key back up file onto removable media (e.g. floppy disk, cd, USB storage) or a network drive; the second method backs up the key in #M# separate pieces (not encrypted with your password) onto multiple floppy disks (or other removable media).\n
+-4f48-field:BackupKeyPairGeneralInfo=จำเป็นต้องใช้กุญแจของคุณในการอ่านข้อมูลรายงานส่วนตัวของคุณ หรือใช้ในการสร้างรายงานใหม่ เพื่อให้แน่ใจว่าคุณสามารถเข้าถึงข้อมูลของคุณได้เสมอ เป็นสิ่งที่สำคัญอย่างยิ่งที่คุณควรจะสำรองกุญแจของคุณ\n\nMartus มีวิธีการสำรองกุญแจ 2 วิธี ซึ่งคุณจะใช้วิธีใดก็ได้ แต่เราแนะนำเป็นอย่างยิ่งว่า ควรใช้ทั้งสองวิธีในการสำรองข้อมูล วิธีแรกคือการสร้างแฟ้มกุญแจแล้วเข้ารหัสด้วยรหัสผ่านของคุณ ลงในสื่อที่เคลื่อนย้ายได้ (เช่น แผ่นฟลอปปี้ดิสก์ ซีดี หรือสื่ออื่นๆ) หรือไดร์ฟบนเครือข่าย วิธีที่สองคือ แยกเก็บกุญแจออกเป็น #M# ส่วน (แต่ไม่ได้เข้ารหัสด้วยรหัสผ่านของคุณ) ลงในแผ่นฟลอปปี้ดิสก์หลายแผ่น (หรือสื่ออื่นๆ)\n
 
-#________________________________________________=This method breaks up your key into #M# pieces, any #N# of which will be required to reconstruct the key without requiring a password.  If you forget your login name or your password, this method is the only way you can restore your key.\n\nOnce the #M# files have been written to removable media disks, you should distribute them to #M# different people whom you will remember, but each of whom don’t know who you have given the other files to.  Do not store any of the disks together.\n\nTo restore your key, first retrieve any #N# of the original #M# disks, and then select 'Restore Account' and 'Restore account from multiple disks' when signing into Martus.\n
--e44a-field:BackupKeyPairToSecretShareInformation=วิธีการนี้จะแยกแฟ้มกุญแจของคุณออกเป็น #M# ส่วน ชิ้นส่วนจำนวน #N# เท่าใดก็ได้ จำเป็นต่อการสร้างแฟ้มกุญแจขึ้นใหม่ โดยไม่จำเป็นต้องใช้รหัสผ่าน ถ้าคุณลืมชื่อล๊อกอินหรือรหัสผ่านของคุณ วิธีนี้เป็นวิธีการเดียวที่คุณสามารถกู้แฟ้มกุญแจของคุณคืนได้\n\nเมื่อแฟ้ม #M# แฟ้มถูกเขียนลงบนดิสก์แล้ว คุณควรกระจายพวกมันไปสู่ #M# คนที่คุณรู้จักที่คุณจำได้ แต่อย่าให้บุคคลเหล่านั้นรู้ได้ว่าใครมีส่วนต่างๆ เหล่านี้บ้าง ห้ามเก็บส่วนใดๆ ของดิสก์เหล่านี้ไว้ด้วยกันอย่างเด็ดขาด\n\nวิธีการกู้คืนคู่กุญแจนี้ เริ่มด้วยการเลือกแผ่นดิสก์จำนวน #N# จาก #M# แผ่นของต้นฉบับ แล้วเลือก "กู้คืนชื่อบัญชี" แล้วเลือก "กู้คืนชื่อบัญชีจากแผ่นฟลอปปี้ดิสก์หลายแผ่น" เมื่อเข้าสู่ Martus เรียบร้อยแล้ว
+#________________________________________________=This method breaks up your key into #M# pieces, any #N# of which will be required to reconstruct the key without requiring a password.  If you forget your login name or your password, this method is the only way you can restore your key.\n\nOnce the #M# files have been written to removable media disks, you should distribute them to #M# different people whom you will remember, but each of whom don't know who you have given the other files to.  Do not store any of the disks together.\n\nTo restore your key, first retrieve any #N# of the original #M# disks, and then select 'Restore Account' and 'Restore account from multiple disks' when signing into Martus.\n
+-c83c-field:BackupKeyPairToSecretShareInformation=วิธีการนี้จะแยกแฟ้มกุญแจของคุณออกเป็น #M# ส่วน ชิ้นส่วนจำนวน #N# เท่าใดก็ได้ จำเป็นต่อการสร้างแฟ้มกุญแจขึ้นใหม่ โดยไม่จำเป็นต้องใช้รหัสผ่าน ถ้าคุณลืมชื่อล๊อกอินหรือรหัสผ่านของคุณ วิธีนี้เป็นวิธีการเดียวที่คุณสามารถกู้แฟ้มกุญแจของคุณคืนได้\n\nเมื่อแฟ้ม #M# แฟ้มถูกเขียนลงบนดิสก์แล้ว คุณควรกระจายพวกมันไปสู่ #M# คนที่คุณรู้จักที่คุณจำได้ แต่อย่าให้บุคคลเหล่านั้นรู้ได้ว่าใครมีส่วนต่างๆ เหล่านี้บ้าง ห้ามเก็บส่วนใดๆ ของดิสก์เหล่านี้ไว้ด้วยกันอย่างเด็ดขาด\n\nวิธีการกู้คืนคู่กุญแจนี้ เริ่มด้วยการเลือกแผ่นดิสก์จำนวน #N# จาก #M# แผ่นของต้นฉบับ แล้วเลือก "กู้คืนชื่อบัญชี" แล้วเลือก "กู้คืนชื่อบัญชีจากแผ่นฟลอปปี้ดิสก์หลายแผ่น" เมื่อเข้าสู่ Martus เรียบร้อยแล้ว\n
 
 #____________________________________________________=Please insert disk #
 -b877-field:BackupRecoverKeyPairInsertNextDiskMessage=โปรดใส่แผ่นฟลอปปี้ดิสก์แผ่นที่
 
 #_______________________________________________=Backup complete, please give each disk to someone you trust, so that if you forget your user name and/or password in the future you can recreate your account.  You will need #N# of these disks to recreate your account.
 -30ee-field:BackupSecretShareCompleteInformation=การสำรองข้อมูลเสร็จสมบูรณ์ โปรดแยกแผ่นฟลอปปี้ดิสก์ให้แก่คนที่คุณไว้ใจ ถ้าคุณลืมชื่อผู้ใช้ และ/หรือ รหัสผ่านในอนาคต คุณสามารถสร้างชื่อบัญชีของคุณขึ้นใหม่ได้ คุณจำเป็นต้องใช้ #N# ในจำนวนทั้งหมดเพื่อที่จะสร้างชื่อบัญชีของคุณใหม่
+
+#__________________________________________=Author Public Code
+-01c7-field:BulletinDetailsAuthorPublicCode=รหัสผู้แต่งสาธารณะ
+
+#____________________________________=Bulletin ID
+-ae8f-field:BulletinDetailsBulletinId=รหัสรายงาน
+
+#_________________________________________=The following Headquarter account(s) will be able to view the private information in this bulletin, or send this bulletin to a server, after you save it.\n\nTo add or remove an account, use the Tools/Configure Headquarters menu option.
+-cc16-field:BulletinDetailsHQInfoForModify=รายชื่อบัญชีสำนักงานใหญ่ต่อไปนี้จะสามารถดูข้อมูลส่วนตัวในรายงานนี้ หรือ ส่งรายงานนี้ ไปยังเซิร์ฟเวอร์ หลังจากที่คุณบันทึกมัน\n\nในการเพิ่มหรือลบชื่อบันชื่อ ใช้ที่เมนู เครื่องมือ/ปรับแต่งค่าของสำนักงานใหญ่
+
+#_______________________________________=The following Headquarter account(s) can view the private information in this bulletin, and can send this bulletin to a server.
+-bdf1-field:BulletinDetailsHQInfoForView=รายชื่อบัญชีสำนักงานใหญ่ต่อไปนี้สามารถดูข้อมูลส่วนตัวในรายงานนี้ หรือ ส่งรายงานนี้ไปยังเซิร์ฟเวอร์ได้
+
+#_________________________________=Label
+-7434-field:BulletinDetailsHQLabel=ชื่อ
+
+#______________________________________=Public Code
+-a1a2-field:BulletinDetailsHQPublicCode=รหัสสาธารณะ
+
+#______________________________________=Headquarters
+-6222-field:BulletinDetailsHeadquarters=สำนักงานใหญ่
+
+#_________________________________=History
+-90cc-field:BulletinDetailsHistory=ประวัติ
+
+#________________________________________=(in progress)
+-60dc-field:BulletinDetailsInProgressDate=กำลังดำเนินการ
+
+#_________________________________________=(in progress)
+-60dc-field:BulletinDetailsInProgressTitle=กำลังดำเนินการ
+
+#_____________________________________=(unknown)
+-d4bd-field:BulletinDetailsUnknownDate=ไม่ระบุ
+
+#______________________________________=(unknown)
+-d4bd-field:BulletinDetailsUnknownTitle=ไม่ระบุ
+
+#_____________________________________=Date Saved
+-a7d9-field:BulletinDetailsVersionDate=วันที่บันทึก
+
+#___________________________________=ID
+-89f8-field:BulletinDetailsVersionId=รหัส
+
+#_______________________________________=Version #
+-8548-field:BulletinDetailsVersionNumber=รุ่น #
+
+#______________________________________=Title
+-768e-field:BulletinDetailsVersionTitle=ชื่อเรื่อง
 
 #__________________________________=Warning: Some information in this bulletin is not visible
 -eba1-field:BulletinHasUnknownStuff=คำเตือน: ข้อมูลบางอย่างในรายงานไม่สามารถมองเห็นได้
@@ -292,6 +361,9 @@ field:translationVersion= ไทย 2.0.1
 
 #_________________________=Bulletin Status:
 -c567-field:BulletinStatus=สถานะรายงาน:
+
+#________________________________=Version
+-2da6-field:BulletinVersionNumber=รุ่น
 
 #______________________________=Martus Bulletin
 -1ded-field:BulletinViewHeading=รายงาน Martus
@@ -326,14 +398,14 @@ field:translationVersion= ไทย 2.0.1
 #_________________________________=You can change any of this information later, by choosing Options/Contact Info.
 -e924-field:ContactInfoUpdateLater=คุณสามารถเปลี่ยนข้อมูลต่างๆ ได้ในภายหลัง โดยเลือกเมนู ตัวเลือก/ข้อมูลสำหรับการติดต่อ
 
-#__________________________________=The layout of the bulletins is dictated by an XML document.  At the start of the document you must have <CustomFields> and at the end of the document you must have its corresponding end tag namely </CustomFields>.  By default the standard bulletin fields occur at the top of the Custom Field declaration, but they can be moved if desired.  However, there are four required fields that cannot be removed:  'author', 'entrydate', 'language' and 'title'.  For example for 'author' you will have\n<Field type='STRING'><Tag>author</Tag><Label></Label></Field>\n\n
--2398-field:CreateCustomFieldsHelp1=รูปแบบรายงานถูกกำหนดได้โดยเอกสาร XML ส่วนเริ่มต้นของเอกสารคุณต้องมี <CustomFields> และที่ท้ายเอกสารคุณต้องมีแท็กที่สอดคล้องกับชื่อ </CustomFields> โดยปกติแล้วช่องข้อมูลมาตรฐานจะอยู่บนสุดของการประกาศช่องข้อมูลกำหนดเอง แต่ก็สามารถเอาออกได้ถ้าต้องการ อย่างไรก็ตาม มีอยู่ช่องข้อมูล 4 ช่องที่ไม่สามารถเอาออกได้คือ 'author' (ผู้รายงาน) 'entrydate' (วันที่ป้อนข้อมูล) 'language' (ภาษา) และ 'title' (ชื่อเรื่อง) ยกตัวอย่างของช่องข้อมูล 'author' (ผู้รายงาน) จะมีรูปแบบดังนี้\n<Fieldtype='STRING'><Tag>author</Tag><Label></Label></Field>\n\n
+#__________________________________=The layout of the bulletins is dictated by an XML document.  By default the standard bulletin fields occur at the top of the Custom Field declaration, but they can be moved if desired.  However, there are four required fields that cannot be removed:  'author', 'entrydate', 'language' and 'title'.\n\n
+-1ef6-field:CreateCustomFieldsHelp1=รูปแบบรายงานถูกกำหนดได้โดยเอกสาร XML โดยปกติแล้วช่องข้อมูลมาตรฐานจะอยู่บนสุดของการประกาศช่องข้อมูลกำหนดเอง แต่ก็สามารถเอาออกได้ถ้าต้องการ อย่างไรก็ตาม มีอยู่ช่องข้อมูล 4 ช่องที่ไม่สามารถเอาออกได้คือ 'author' (ผู้รายงาน) 'entrydate' (วันที่ป้อนข้อมูล) 'language' (ภาษา) และ 'title' (ชื่อเรื่อง)\n\n
 
-#__________________________________=For custom (non-standard) fields, you first select the type of field you want.  The possible choices are 'BOOLEAN', 'DATE', 'DATERANGE', 'GRID', 'LANGUAGE', 'MULTILINE', and 'STRING'.  This type is defined by <Field type='type of field goes here'>. \n\nFor each custom field you will need a unique identification tag.  This tag can be any word except those already used by the system (eg. 'author', 'summary', 'location', 'title' etc.), and cannot contain spaces or special characters.  Examples of choices are 'custom1', 'custom2', etc, or tags that are more descriptive like 'VictimsName'.  This unique tag looks like <Tag>yourtag</Tag>. \n Then you need a label which is displayed next to your custom field.  An example might be 'Name of 1st Witness'.  This label is surrounded by <Label>your label goes here</Label>\nEach field description ends with </Field>\n\n
--c18a-field:CreateCustomFieldsHelp2=สำหรับช่องข้อมูลกำหนดเอง (ไม่ใช่ช่องข้อมูลมาตรฐาน) คุณต้องเลือกชนิดของช่องข้อมูลที่คุณต้องการก่อน ทางเลือกที่เป็นไปได้มีดังนี้ 'BOOLEAN' (ใช่/ไม่ใช่), 'DATE' (วันที่), 'DATERANGE' (ช่วงวันที่), 'GRID' (ตาราง), 'LANGUAGE' (ภาษา), 'MULTILINE' (ข้อความหลายบรรทัด), และ 'STRING' (ข้อความบรรทัดเดียว) ชนิดของช่องข้อมูลกำหนดโดย <Field type='ใส่ชนิดของช่องข้อมูลที่นี่'>\n\nสำหรับแต่ละช่องข้อมูลกำหนดเอง คุณจะต้องระบุแท็กแต่ละช่องให้แตกต่างกัน แท็กนี้สามารถเป็นคำอะไรก็ได้ยกเว้นที่ระบบใช้แล้ว (เช่น 'author', 'summary', 'location', 'title' หรืออื่นๆ) และไม่สามารถมีช่องว่างหรืออักขระพิเศษได้ ตัวอย่างที่สามารใช้ได้เช่น 'custom1', 'custom2', อื่นๆ หรือแท็กที่อธิบายความหมายเช่น 'VictimsName' (ผู้รับเคราะห์) แท็กที่ระบุแต่ละช่องจะเป็นดังนี้ <Tag>yourtag</Tag>\nจากนั้นคุณต้องการป้ายชื่อซึ่งจะแสดงถัดจากช่องข้อมูลกำหนดเองของคุณ ตัวอย่างเช่น 'ชื่อของพยานปากที่หนึ่ง' ป้ายชื่อนี้ต้องครอบด้วย <Label>ป้ายชื่อของคุณที่นี่</Label>\nแต่ละคำอธิบายช่องข้อมูลจบด้วย </Field>\n\n
+#__________________________________=For custom (non-standard) fields, you first select the type of field you want.  The possible choices are 'BOOLEAN', 'DATE', 'DATERANGE', 'GRID', 'LANGUAGE', 'MULTILINE', and 'STRING'. \n\nFor each custom field you will need a unique identification tag.  This tag can be any word except those already used by the system (eg. 'author', 'summary', 'location', 'title' etc.), and cannot contain spaces or special characters.  Examples of choices are 'custom1', 'custom2', etc, or tags that are more descriptive like 'VictimsName'.\n Then you need a label which is displayed next to your custom field.  An example might be 'Name of 1st Witness'.\n\nAdditional Comments\n1. XML is case-sensitive ('Witness' is not the same as 'witness') \n2. quotes around type name can be single or double as long as they match (e.g. 'STRING" is not valid. It must be 'STRING' or "STRING") \n3. A Boolean field will be displayed as a checkbox when editing and Yes/No when previewed or printed.\n\nSee examples below:\n\n
+-676b-field:CreateCustomFieldsHelp2=<สำหรับช่องข้อมูลกำหนดเอง (ไม่ใช่ช่องข้อมูลมาตรฐาน) คุณต้องเลือกชนิดของช่องข้อมูลที่คุณต้องการก่อน ทางเลือกที่เป็นไปได้มีดังนี้ 'BOOLEAN' (ใช่/ไม่ใช่), 'DATE' (วันที่), 'DATERANGE' (ช่วงวันที่), 'GRID' (ตาราง), 'LANGUAGE' (ภาษา), 'MULTILINE' (ข้อความหลายบรรทัด), และ 'STRING' (ข้อความบรรทัดเดียว) \n\nสำหรับแต่ละช่องข้อมูลกำหนดเอง คุณจะต้องระบุแท็กแต่ละช่องให้แตกต่างกัน แท็กนี้สามารถเป็นคำอะไรก็ได้ยกเว้นที่ระบบใช้แล้ว (เช่น 'author', 'summary', 'location', 'title' หรืออื่นๆ) และไม่สามารถมีช่องว่างหรืออักขระพิเศษได้ ตัวอย่างที่สามารใช้ได้เช่น 'custom1', 'custom2', อื่นๆ หรือแท็กที่อธิบายความหมายเช่น 'VictimsName' (ผู้รับเคราะห์) \n\nจากนั้นคุณต้องการป้ายชื่อซึ่งจะแสดงถัดจากช่องข้อมูลกำหนดเองของคุณ ตัวอย่างเช่น 'ชื่อของพยานปากที่หนึ่ง' \n\n อธิบายเพิ่มเติม\n1. ใน XML ตัวพิมพ์เล็ก และ ตัวพิมพ์ใหญ่มีความแตกต่างกัน\n2. เครื่องหมายคำพูดที่คร่อมชื่อสามารถเป็นได้ทั้ง เขาเดียว หรือ สองเขา(แต่ทั้งสองอันต้องเหมือนกัน)\n3. ช่องข้อมูลที่เป็น BOOLEAN (ใช่/ไม่ใช่) จะแสดงเป็น ช่องทำเครื่องหมายถูก เมื่อแก้ไข และแสดงเป็น ใช่/ไม่ใช่ เมื่อพิมพ์\n\nดูตัวอย่างด้านล่าง:\n\n>
 
-#__________________________________=Additional Comments\n1. XML is case-sensitive\n2. quotes around type name can be single or double (as long as they match)\n3. A Boolean field will be displayed as a checkbox when editing and Yes/No when printed.\n\nHere are some examples:\n\n<Field type='STRING'>\n<Tag>custom1</Tag>\n<Label>Witness Name</Label>\n</Field>\n\n<Field type='LANGUAGE'>\n<Tag>new2</Tag>\n<Label>Witness Speaks</Label>\n</Field>\n\n<Field type='BOOLEAN'>\n<Tag>new3</Tag>\n<Label>Were guns used?</Label>\n</Field>\n\n<Field type='GRID'>\n<Tag>customgrid</Tag>\n<Label>Victim Information</Label>\n<GridSpecDetails>\n<Column><Label>Name of Victim</Label></Column>\n<Column><Label>Victim Age</Label></Column>\n<Column><Label>Victim Gender</Label></Column>\n<Column><Label>Victim Ethnicity</Label></Column>\n</GridSpecDetails>\n</Field>\n
--eac7-field:CreateCustomFieldsHelp3=อธิบายเพิ่มเติม\n1. ใน XML การใช้อักษรตัวเล็กและตัวใหญ่ถือว่าแตกต่างกัน\n2. เครื่องหมายคำพูดที่คร่อมชื่อของประเภทสามารถเป็นได้ทั้ง แบบเขาเดี่ยว (') หรือ แบบเขาคู่ (") (ตราบใดที่ใช้ทั้งคู่เหมือนกัน)\n3. ช่องข้อมูลชนิด Boolean จะแสดงเป็น checkbox เมื่อแก้ไข และแสดงเป็น ใช่/ไม่ใช่เมื่อพิมพ์\n\nนี่คือตัวอย่างบางส่วน:\n\n<Field type='STRING'>\n<Tag>custom1</Tag>\n<Label>ชื่อพยาน</Label>\n</Field>\n\n<Field type='LANGUAGE'>\n<Tag>new2</Tag>\n<Label>คำให้การของพยาน</Label>\n</Field>\n\n<Field type='BOOLEAN'>\n<Tag>new3</Tag>\n<Label>มีการใช้อาวุธหรือไม่</Label>\n</Field>\n\n<Field type='GRID'>\n<Tag>customgrid</Tag>\n<Label>ข้อมูลเกี่ยวกับผู้เสียหาย</Label>\n<GridSpecDetails>\n<Column><Label>ชื่อผู้เสียหาย</Label></Column>\n<Column><Label>อายุ</Label></Column>\n<Column><Label>เพศ</Label></Column>\n<Column><Label>เชื้อชาติ</Label></Column>\n</GridSpecDetails>\n</Field>\n
+#__________________________________=<Field type='STRING'>\n<Tag>custom1</Tag>\n<Label>Witness Name</Label>\n</Field>\n\n<Field type='LANGUAGE'>\n<Tag>new2</Tag>\n<Label>Witness Speaks</Label>\n</Field>\n\n<Field type='BOOLEAN'>\n<Tag>new3</Tag>\n<Label>Were guns used?</Label>\n</Field>\n\n<Field type='GRID'>\n<Tag>customgrid</Tag>\n<Label>Victim Information</Label>\n<GridSpecDetails>\n<Column><Label>Name of Victim</Label></Column>\n<Column><Label>Victim Age</Label></Column>\n<Column><Label>Victim Gender</Label></Column>\n<Column><Label>Victim Ethnicity</Label></Column>\n</GridSpecDetails>\n</Field>\n
+-c0a8-field:CreateCustomFieldsHelp3=<Field type='STRING'>\n<Tag>custom1</Tag>\n<Label>ชื่อพยาน</Label>\n</Field>\n\n<Field type='LANGUAGE'>\n<Tag>new2</Tag>\n<Label>คำให้การของพยาน</Label>\n</Field>\n\n<Field type='BOOLEAN'>\n<Tag>new3</Tag>\n<Label>มีการใช้อาวุธหรือไม่</Label>\n</Field>\n\n<Field type='GRID'>\n<Tag>customgrid</Tag>\n<Label>ข้อมูลเกี่ยวกับผู้เสียหาย</Label>\n<GridSpecDetails>\n<Column><Label>ชื่อผู้เสียหาย</Label></Column>\n<Column><Label>อายุ</Label></Column>\n<Column><Label>เพศ</Label></Column>\n<Column><Label>เชื้อชาติ</Label></Column>\n</GridSpecDetails>\n</Field>\n
 
 #____________________________________=Please enter your new username and password.
 -aec2-field:CreateNewUserNamePassword=โปรดใส่ชื่อผู้ใช้ และรหัสผ่าน
@@ -452,9 +524,6 @@ field:translationVersion= ไทย 2.0.1
 #_______________________________=#NumberOfHQs# Headquarter account(s) will be able to view this private information
 -da24-field:ModifyBulletinHQInfo=#NumberOfHQs# ชื่อบัญชีสำนักงานใหญ่จะสามารถดูข้อมูลส่วนตัวนี้ได้
 
-#__________________________________________=The following Headquarter account(s) will be able to view the private information in this bulletin, or send this bulletin to a server, after you save it:\n\n#L#\n\nTo add or remove an account, use the Tools/Configure Headquarters menu option.
--df1d-field:ModifyViewBulletinDetailsHQList=ชื่อบัญชีสำนักงานใหญ่ต่อไปนี้จะสามารถดูข้อมูลส่วนตัวในรายงานนี้ หรือส่งรายงานนี้ไปยังเซิร์ฟเวอร์ หลังจากที่คุณบันทีกมัน:\n\n#L#\n\nการเพิ่มหรือเอาชื่อบัญชีออก ใช้ตัวเลือกเมนู เครื่องมือ/ปรับแต่งสำนักงานใหญ่
-
 #_____________________________=Please enter a name for the file you wish to export.
 -95ed-field:NameOfExportedFile=โปรดป้อนชื่อของแฟ้มที่คุณต้องการส่งออก
 
@@ -485,8 +554,8 @@ field:translationVersion= ไทย 2.0.1
 #___________________________=Include private data in print out.
 -c6f6-field:PrintPrivateData=พิมพ์ข้อมูลส่วนตัวออกมาด้วย
 
-#__________________________________=You have the option to include or exclude the selected bulletin’s private information in this print out.\n\nTo only print public information, do not mark the checkbox below.\n\nIf you do mark the checkbox, anyone who sees the print out will be able to read your private data.
--602c-field:PrintPrivateDataMessage=คุณมีทางเลือกที่จะรวมหรือไม่รวมข้อมูลส่วนตัวของรายงานที่ถูกเลือกที่จะพิมพ์ออก\n\nถ้าจะพิมพ์เพียงข้อมูลสาธารณะ ไม่ต้องทำเครื่องหมายในช่องด้านล่าง\n\nถ้าคุณทำเครื่องหมายที่ช่อง ใครก็ตามที่ดูสิ่งที่พิมพ์ออกมาจะสามารถอ่านข้อมูลส่วนตัวของคุณได้
+#__________________________________=You have the option to include or exclude the selected bulletin's private information in this print out.\n\nTo only print public information, do not mark the checkbox below.\n\nIf you do mark the checkbox, anyone who sees the print out will be able to read your private data.
+-e90d-field:PrintPrivateDataMessage=คุณมีทางเลือกที่จะรวมหรือไม่รวมข้อมูลส่วนตัวของรายงานที่ถูกเลือกที่จะพิมพ์ออก\n\nถ้าจะพิมพ์เพียงข้อมูลสาธารณะ ไม่ต้องทำเครื่องหมายในช่องด้านล่าง\n\nถ้าคุณทำเครื่องหมายที่ช่อง ใครก็ตามที่ดูสิ่งที่พิมพ์ออกมาจะสามารถอ่านข้อมูลส่วนตัวของคุณได้
 
 #_________________________________=Public Information Files
 -90f9-field:PublicInformationFiles=แฟ้มข้อมูลสาธารณะ
@@ -635,9 +704,6 @@ field:translationVersion= ไทย 2.0.1
 #_____________________________=#NumberOfHQs# Headquarter account(s) can view this private information
 -5ffa-field:ViewBulletinHQInfo=#NumberOfHQs# ชื่อบัญชีสำนักงานใหญ่สามารถดูข้อมูลส่วนตัวได้
 
-#________________________________________=The following Headquarter account(s) can view the private information in this bulletin, and can send this bulletin to a server:\n\n#L#
--4500-field:ViewViewBulletinDetailsHQList=ชื่อบัญชีสำนักงานใหญ่ต่อไปนี้สามารถดูข้อมูลส่วนตัวในรายงานนี้ได้ และสามารถส่งรายงานนี้ไปยังเซิร์ฟเวอร์:\n\n#L#
-
 #___________________________________=Back Space
 -7ae6-field:VirtualKeyboardBackSpace=ลบหนึ่งตัวอักษร
 
@@ -668,6 +734,9 @@ field:translationVersion= ไทย 2.0.1
 #_____________________________=Martus comes with ABSOLUTELY NO WARRANTY, and is made available under license terms in the file named license.txt in the Martus directory. This is free software, and you are welcome to redistribute it under certain conditions discussed in license.txt. 
 -8b41-field:aboutDlgDisclaimer=Martus "ไม่มีการรับประกันใดๆ ทั้งสิ้น" และอยู่ภายใต้ลิขสิทธิ์ที่ระบุในแฟ้ม license.txt ภายในไดเร็กทอรี่ Martus นี่คือซอฟต์แวร์เสรี และยินดีที่จะให้คุณแจกจ่าย ภายใต้เงื่อนไขที่กล่าวไว้ในแฟ้ม license.txt
 
+#_________________________________________=Translation version
+-ba67-field:aboutDlgTranslationVersionInfo=รุ่นการแปล
+
 #______________________________=software version
 -f2cc-field:aboutDlgVersionInfo=ซอฟต์แวร์รุ่น
 
@@ -676,6 +745,9 @@ field:translationVersion= ไทย 2.0.1
 
 #_____________________=Keep ALL Information Private
 -9b5e-field:allprivate=ให้ข้อมูลทั้งหมดเป็นส่วนตัว
+
+#____________________________________=Kb
+-1717-field:attachmentSizeForPrinting=กิโลไบต์
 
 #______________________=Attachments
 -6771-field:attachments=เอกสารแนบ
@@ -746,11 +818,11 @@ field:translationVersion= ไทย 2.0.1
 #___________________________________________=Clicking on Yes will create a new bulletin that contains a copy of all the same information. You will be the official author of this new bulletin, and any private data in it will only be visible by you (and your Headquarters, if you have one). The original bulletin will remain unchanged.
 -f291-field:confirmCloneBulletinAsMineeffect=คลิก ใช่ จะเป็นการสร้างรายงานขึ้นใหม่ที่มีข้อมูลเหมือนเดิม คุณสามารถเป็นเจ้าของรายงานใหม่นี้ได้ และข้อมูลส่วนตัวทั้งหมด จะถูกอ่านโดยคุณเท่านั้น (และสำนักงานใหญ่ ถ้าคุณมี) ต้นฉบับรายงานยังคงไม่ถูกเปลี่ยนแปลง
 
-#___________________________________________=You have chosen to modify one of your sealed bulletins, but sealed bulletins cannot be modified.
--55b1-field:confirmCloneMySealedAsDraftcause=คุณได้เลือกที่จะแก้ไขรายงานฉบับหนึ่งที่ถูกปิดผนึกแล้ว แต่รายงานที่ปิดผนึกนี้ ไม่สามารถแก้ไขได้
+#___________________________________________=You have chosen to modify one of your sealed bulletins, thus creating a new version of that bulletin.
+-fcb6-field:confirmCloneMySealedAsDraftcause=คุณได้เลือกที่จะแก้ไขรายงานฉบับหนึ่งที่ถูกปิดผนึกแล้ว จึงสร้างรายงานรุ่นใหม่นั้นขึ้นมา
 
-#____________________________________________=Clicking on Yes will create a new bulletin that contains all the same information, and the original sealed bulletin will remain unchanged.
--bec9-field:confirmCloneMySealedAsDrafteffect=ถ้าตอบ ใช่ จะสร้างรายงานใหม่ที่มีข้อมูลเหมือนกันแทน และรายงานปิดผนึกต้นฉบับจะไม่ถูกเปลี่ยนแปลง
+#____________________________________________=Clicking on Yes will create a new version of this bulletin that initially contains all the same information.
+-198c-field:confirmCloneMySealedAsDrafteffect=<คลิก ใช่ จะสร้างรายงานรุ่นใหม่ที่มีข้อมูลเหมือนกัน ใน Martus รุ่นนี้คุณจะสามารถดูได้เฉพาะรุ่นปัจจุบันเท่านั้น>
 
 #___________________________________=You are about to delete your Martus data from this computer.
 -ee9a-field:confirmDeleteMyDatacause=คุณกำลังจะลบข้อมูล Martus ออกจากคอมพิวเตอร์เครื่องนี้
@@ -800,11 +872,17 @@ field:translationVersion= ไทย 2.0.1
 #__________________________________________________=Clicking on Yes will delete the old key file and replace it with your restored key.
 -167f-field:confirmKeyPairFileExistsOverWriteeffect=ถ้าตอบใช่ จะลบแฟ้มกุญแจเก่าและแทนที่ด้วยกุญแจที่กู้คืนมา
 
+#_______________________________________________________=This account was created with an older release of Martus, which was unaware of multiple sealed bulletin versions. We need to update your system to recognize bulletins with versions.  The migration is automatic, fast, and safe. You cannot run this release of Martus unless you allow this migration.
+-d89c-field:confirmNeedsBulletinVersioningMigrationcause=<ชื่อบัญชีนี้ถูกสร้างด้วย Martus รุ่นเก่ากว่า ซึ่งไม่ได้คาดไว้ในเรื่องรุ่นรายงานปิดผนึกจำนวนมาก เราต้องการปรับปรุงระบบของคุณเพื่อที่รู้จักรายงานรุ่นนี้ การปรับปรุงเป็นไปโดยอัตโนมัติ เร็ว และปลอดภัย คุณไม่สามารถใช้ Martus รุ่นนี้ได้ ถ้าคุณไม่ดำเนินการปรับปรุงนี้>
+
+#________________________________________________________=Answering Yes will allow the migration to proceed, answering No will exit Martus.
+-2a34-field:confirmNeedsBulletinVersioningMigrationeffect=ถ้าตอบ ใช่ จะดำเนินการเปลี่ยน ถ้าตอบ ไม่ใช่ จะออกจาก Martus
+
 #___________________________________________=This account was created with an older version of Martus, which used a different set of folders. The folders need to be migrated to the new format. The migration is automatic, fast, and safe. You cannot run this version of Martus unless you allow this migration.
 -39ae-field:confirmNeedsFolderMigrationcause=ชื่อบัญชีนี้ถูกสร้างด้วย Martus รุ่นเก่ากว่า ซึ่งใช้คนละโฟลเดอร์กัน ต้องย้ายโฟลเดอร์ไปสู่รูปแบบใหม่ การย้ายทำโดยอัตโนมัติ, เร็ว, และปลอดภัย คุณไม่สามารถใช้งาน Martus รุ่นนี้ได้ถ้าคุณไม่ทำการย้าย
 
-#____________________________________________=Answering Yes will allow the migration to proceed.
--1b41-field:confirmNeedsFolderMigrationeffect=ถ้าตอบ ใช่ จะอนุญาตให้ดำเนินการย้าย
+#____________________________________________=Answering Yes will allow the migration to proceed, answering No will exit Martus.
+-2a34-field:confirmNeedsFolderMigrationeffect=ถ้าตอบ ใช่ จะอนุญาตให้ดำเนินการย้าย ถ้าตอบ ไม่ จะออกจาก Martus
 
 #_______________________________________________=Warning: It appears that you are trying to run an older version of Martus.  Running this version of Martus may result in reduced functionality, and some configuration settings created in the newer version will be ignored. We recommend that you upgrade your software.
 -f251-field:confirmNewerConfigInfoFileFoundcause=คำเตือน: คุณกำลังพยายามเปิดใช้ Martus รุ่นเก่า การใช้ Martus รุ่นเก่าจะทำให้ลดหน้าที่การทำงาน และค่าบางค่าที่ปรับแต่งใน Martus รุ่นใหม่จะถูกละเลย เราแนะนำให้คุณอัพเกรดซอฟต์แวร์ของคุณ
@@ -878,11 +956,17 @@ field:translationVersion= ไทย 2.0.1
 #___________________________________________=After you review the contents, you can accept them, modify them, or press cancel to keep the existing default details.
 -bbcf-field:confirmResetDefaultDetailseffect=หลังจากตรวจดูแล้ว คุณสามารถยอมรับ แก้ไข หรือยกเลิกเพื่อเก็บข้อมูลเดิมที่มีอยู่ได้
 
+#____________________________________________=The following bulletin(s) selected for retrieval are newer versions of bulletins already on this computer:\n\n#TITLES#
+-c5e3-field:confirmRetrieveNewerVersionscause=<รายงานต่อไปนี้ได้ถูกเลือกสำหรับการดึงเป็นรายงานรุ่นใหม่เรียบร้อยแล้วบนระบบนี้ :\n\n#TITLES#>
+
+#_____________________________________________=Each older version will be replaced by the newer version from the server.
+-1d86-field:confirmRetrieveNewerVersionseffect=รุ่นเก่าทั้งหมดจะถูกแทนด้วนรุ่นใหม่กว่าจากเซิร์ฟเวอร์
+
 #_________________________________________=You have chosen to save a completed bulletin.
 -a3fe-field:confirmSendWithPublicDatacause=คุณเลือกที่จะบันทึกรายงานที่สมบูรณ์แล้ว
 
-#__________________________________________=This will permanently seal the bulletin and you will not be allowed to make any further modifications to it except by creating a new copy of the bulletin.\n\nThe public information in this bulletin will be released for possible publication on the Martus Search Engine, and may be viewed by people outside your organization.\n\nIf there is information you do not want to be publicly available, either move that data to the private section of the bulletin or check the 'Keep ALL Information Private' box before saving the bulletin.
--4964-field:confirmSendWithPublicDataeffect=การกระทำนี้จะปิดผนึกรายงานอย่างถาวร และคุณจะไม่ได้รับอนุญาตให้ทำการเปลี่ยนแปลงได้อีก ยกเว้นการทำสำเนาของรายงานขึ้นมาใหม่\n\nข้อมูลสาธารณะในรายงานนี้จะถูกแสดงสำหรับเผยแพร่บนโปรแกรมค้นหาของ Martus และอาจถูกดูโดยบุคคลภายนอกองค์กรของท่าน\n\nถ้ามีข้อมูลที่คุณไม่ต้องการเผยแพร่สู่สาธารณะ ทำได้โดยย้ายข้อมูลนั้นไปไว้ในส่วนของรายงานส่วนตัว หรือ ทำเครื่องหมายหน้าช่อง 'ให้ข้อมูลทั้งหมดเป็นส่วนตัว' ก่อนที่จะบันทึกรายงาน
+#__________________________________________=This will permanently seal the bulletin and you will not be allowed to make any further modifications to it except by creating a new version of the bulletin.\n\nThe public information in this bulletin will be released for possible publication on the Martus Search Engine, and may be viewed by people outside your organization.\n\nIf there is information you do not want to be publicly available, either move that data to the private section of the bulletin or check the 'Keep ALL Information Private' box before saving the bulletin.
+-2df3-field:confirmSendWithPublicDataeffect=การกระทำนี้จะปิดผนึกรายงานอย่างถาวร และคุณจะไม่ได้รับอนุญาตให้ทำการเปลี่ยนแปลงได้อีก ยกเว้นการสร้างรายงานรุ่นใหม่ขึ้นมา\n\nข้อมูลสาธารณะในรายงานนี้จะถูกแสดงสำหรับเผยแพร่บนโปรแกรมค้นหาของ Martus และอาจถูกดูโดยบุคคลภายนอกองค์กรของท่าน\n\nถ้ามีข้อมูลที่คุณไม่ต้องการเผยแพร่สู่สาธารณะ ทำได้โดยย้ายข้อมูลนั้นไปไว้ในส่วนของรายงานส่วนตัว หรือ ทำเครื่องหมายหน้าช่อง 'ให้ข้อมูลทั้งหมดเป็นส่วนตัว' ก่อนที่จะบันทึกรายงาน
 
 #_____________________________________________=Martus software is unable to determine whether this server complies with the official guidelines for operating a secure and reliable Martus server.
 -ab16-field:confirmServerComplianceFailedcause=ซอฟต์แวร์ Martus ไม่สามารถที่จะพิจารณาได้ว่า เซิร์ฟเวอร์เครื่องใดปฏิบัติตามที่แนะนำไว้อย่างเป็นทางการเกี่ยวกับความปลอดภัย และความน่าเชื่อถือของเซิร์ฟเวอร์ Martus ได้
@@ -920,11 +1004,11 @@ field:translationVersion= ไทย 2.0.1
 #______________________________________=Clicking on Yes will exit Martus, and leave the unsent bulletins.  They will be sent the next time you run Martus and connect to a server.
 -7c7f-field:confirmUploadRemindereffect=ถ้าตอบ ใช่ จะออกจาก Martus รายงานที่ยังไม่ได้ส่งจะถูกส่งในครั้งต่อไปเมื่อคุณใช้งาน Martus และติดต่อไปยังเซิร์ฟเวอร์
 
-#_______________________________________________=The bulletin you are about to create is based on a previous bulletin whose custom fields are different from your current custom fields.  Do you wish to use the original bulletins custom fields?
--6d10-field:confirmUseBulletinsCustomFieldscause=รายงานที่คุณกำลังสร้างอยู่บนพื้นฐานของรายงานก่อนหน้านี้ ซึ่งมีช่องข้อมูลกำหนดเองที่แตกต่างจากช่องข้อมูลกำหนดเองของคุณในตอนนี้ คุณต้องการใช้ช่องข้อมูลกำหนดเองของรายงานต้นฉบับหรือไม่
+#_______________________________________________=The bulletin you are about to create is based on a previous bulletin whose custom fields are different from your current custom fields.  Do you wish to use the original bulletin's custom fields?
+-a6ca-field:confirmUseBulletinsCustomFieldscause=<รายงานที่คุณกำลังสร้างอยู่บนพื้นฐานของรายงานก่อนหน้านี้ ซึ่งมีช่องข้อมูลกำหนดเองที่แตกต่างจากช่องข้อมูลกำหนดเองของคุณในตอนนี้ คุณต้องการใช้ช่องข้อมูลกำหนดเองของรายงานต้นฉบับหรือไม่>
 
-#________________________________________________=Answering Yes will use the old custom fields and all bulletin data.  Answering No will use your current custom fields and copy all similar fields to the new bulletin but you will loose some of the original bulletins data.
--3e26-field:confirmUseBulletinsCustomFieldseffect=ถ้าตอบ ใช่ จะใช้ช่องข้อมูลกำหนดเองอันเก่าและข้อมูลรายงานอันเก่าทั้งหมด ถ้าตอบ ไม่ใช่ จะใช้ช่องข้อมูลกำหนดเองของชุดปัจจุบันและทำสำเนาช่องข้อมูลที่เหมือนกันทั้งหมดใส่ในรายงานใหม่ แต่คุณจะเสียข้อมูลรายงานต้นฉบับบางส่วน
+#________________________________________________=Answering Yes will use the old custom fields and all bulletin data.  Answering No will use your current custom fields and copy all similar fields to the new bulletin but you will lose some of the original bulletin's data.
+-afbe-field:confirmUseBulletinsCustomFieldseffect=<ถ้าตอบ ใช่ จะใช้ช่องข้อมูลกำหนดเองอันเก่าและข้อมูลรายงานอันเก่าทั้งหมด ถ้าตอบ ไม่ใช่ จะใช้ช่องข้อมูลกำหนดเองของชุดปัจจุบันและทำสำเนาช่องข้อมูลที่เหมือนกันทั้งหมดใส่ในรายงานใหม่ แต่คุณจะเสียข้อมูลรายงานต้นฉบับบางส่วน>
 
 #________________________________________________=Warning: acctmap.txt file in your account's packets directory is missing or is corrupt.  This may indicate someone has tried to tamper with your data or could be caused by a hardware error.
 -61cb-field:confirmWarnMissingAccountMapFilecause=คำเตือน: แฟ้ม acctmap.txt ในโฟลเดอร์ packets ได้หายไปหรือได้รับความเสียหาย นี่อาจแสดงได้ว่า มีใครบางคนกำลังพยายามเข้าไปยุ่งกับข้อมูลของคุณ หรืออาจเกิดจากความผิดพลาดเนื่องจากฮาร์ดแวร์
@@ -989,8 +1073,8 @@ field:translationVersion= ไทย 2.0.1
 #___________________________=You have chosen to save a completed bulletin.
 -a3fe-field:confirmsendcause=คุณเลือกทีจะบันทึกรายงานที่สมบูรณ์
 
-#____________________________=This will permanently seal the bulletin and you will not be allowed to make any further modifications to it except by creating a new copy of the bulletin.
--daea-field:confirmsendeffect=การกระทำนี้ จะปิดผนึกรายงานอย่างถาวร และคุณจะไม่ไม่สามารถแก้ได้อีก ยกเว้นจะสร้างสำเนาของรายงานนี้ขึ้นมาใหม่
+#____________________________=This will permanently seal the bulletin and you will not be allowed to make any further modifications to it except by creating a new version of the bulletin.
+-0de0-field:confirmsendeffect=การกระทำนี้ จะปิดผนึกรายงานอย่างถาวร และคุณจะไม่ไม่สามารถแก้ได้อีก ยกเว้นจะสร้างรายงานรุ่นใหม่ขึ้นมา
 
 #_____________________=Connecting...
 -b98e-field:connecting=กำลังเชื่อมต่อ...
@@ -1061,11 +1145,17 @@ field:translationVersion= ไทย 2.0.1
 #____________________________________=A copy of Martus is already running on this computer. You must close that copy before starting a new copy.
 -614e-field:notifyAlreadyRunningcause=โปรแกรม Martus ตัวอื่นกำลังทำงานอยู่บนคอมพิวเตอร์เครื่องนี้ คุณต้องปิด Martus ตัวนั้นก่อน ถึงจะเปิดตัวใหม่นี้ได้
 
-#________________________________________=The item you choose was not a file, please choose a file to add as an attachment to this bulletin.
--5362-field:notifyAttachmentNotAFilecause=สิ่งที่คุณเลือกไม่ใช่แฟ้มข้อมูล กรุณาเลือกแฟ้มข้อมูลเพื่อเป็นเอกสารแนบในรายงานนี้
+#_______________________________________________=You currently are viewing this version of the bulletin.
+-8a02-field:notifyAlreadyViewingThisVersioncause=<You currently are viewing this version of the bulletin.>
+
+#________________________________________=The item you chose was not a file, please choose a file to add as an attachment to this bulletin.
+-0de2-field:notifyAttachmentNotAFilecause=สิ่งที่คุณเลือกไม่ใช่แฟ้มข้อมูล กรุณาเลือกแฟ้มข้อมูลเพื่อเป็นเอกสารแนบในรายงานนี้
 
 #______________________________________________=Martus could not authenticate the server. The server may have been compromised.  Please verify your server configuration and contact the server operator.
 -f27c-field:notifyAuthenticateServerFailedcause=Martus ไม่สามารถยืนยันเซิร์ฟเวอร์ได้ กรุณาตรวจสอบการตั้งค่าเซิร์ฟเวอร์ และติดต่อผู้ดูแลเซิร์ฟเวอร์
+
+#________________________________________________=The bulletin version you are trying to view is currently not on your system.
+-8579-field:notifyBulletinVersionNotInSystemcause=<The bulletin version you are trying to view is currently not on your system.>
 
 #____________________________________=The selected server is not responding. Before you choose a server, you must be connected to the internet, and that server must be available.
 -38fd-field:notifyConfigNoServercause=เซิร์ฟเวอร์ที่คุณเลือกไม่มีการตอบสนองใดๆ ก่อนที่คุณจะเลือกเซิร์ฟเวอร์ คุณต้องมีการเชื่อมต่ออินเตอร์เน็ตไว้แล้ว และเซิร์ฟเวอร์ต้องให้บริการได้
@@ -1076,8 +1166,8 @@ field:translationVersion= ไทย 2.0.1
 #_________________________________________=An error occurred while trying to create your account.
 -c8e7-field:notifyCreateAccountFailedcause=เกิดข้อผิดพลาดขณะกำลังพยายามสร้างชื่อบัญชีของคุณ
 
-#_____________________________________________________=An error occurred during upload, and the damaged bulletin has been moved to the Damaged Bulletin folder.
--ae32-field:notifyDamagedBulletinMovedToDiscardedcause=เกิดข้อผิดพลาดขณะกำลังอัพโหลด และรายงานที่เสียหายได้ถูกย้ายไปสู่โฟลเดอร์รายงานที่เสียหาย
+#_____________________________________________________=An error occurred during upload, and the damaged bulletin has been moved to the Damaged Bulletins folder.
+-ed3b-field:notifyDamagedBulletinMovedToDiscardedcause=เกิดข้อผิดพลาดขณะกำลังอัพโหลด และรายงานที่เสียหายได้ถูกย้ายไปสู่โฟลเดอร์รายงานที่เสียหาย
 
 #______________________________________________=Error: Unable to delete all of those draft bulletins from the server. Some of them may have been deleted.
 -916e-field:notifyDeleteServerDraftsFailedcause=ข้อผิดพลาด: ไม่สามารถลบร่างรายงานทั้งหมดที่อยู่บนเซิร์ฟเวอร์ได้ รายงานบางฉบับถูกลบไปแล้ว
@@ -1090,6 +1180,9 @@ field:translationVersion= ไทย 2.0.1
 
 #_____________________________________________=One or more bulletins cannot be moved to that folder, because it already exists in that folder.
 -178b-field:notifyDropErrorBulletinExistscause=รายงานบางส่วนไม่สามารถย้ายไปยังโฟลเดอร์ เพราะว่ามีรายงานนั้นอยู่ในโฟลเดอร์แล้ว
+
+#____________________________________________=One or more bulletins cannot be moved to that folder, because a newer version of this bulletin already exists.
+-834b-field:notifyDropErrorBulletinOldercause=รายงานบางส่วนไม่สามารถย้ายไปยังโฟลเดอร์ เพราะว่ามีรายงานรุ่นใหม่กว่าอยู่ในโฟลเดอร์แล้ว
 
 #________________________________=An unexpected error occurred while moving the bulletin(s). One or more files may be damaged.
 -9ca2-field:notifyDropErrorscause=มีข้อผิดพลาดที่ไม่คาดคิดเกิดขึ้นขณะย้ายรายงาน (รายงานหลายฉบับ) รายงานอาจได้รับความเสียหาย
@@ -1157,9 +1250,6 @@ field:translationVersion= ไทย 2.0.1
 #_______________________________________=You must have a server name or IP address.
 -984b-field:notifyInvalidServerNamecause=คุณต้องมีชื่อเซิร์ฟเวอร์ หรือไอพีของเซิร์ฟเวอร์
 
-#_______________________________________________=Bulletin ID:        #I#\nAuthor Public Code: #A#\n\n#H#
--485a-field:notifyModifyViewBulletinDetailscause=รหัสรายงาน:        #I#\nรหัสสาธารณะของผู้รายงาน: #A#\n\n#H#
-
 #________________________________________=Operation completed.
 -1a65-field:notifyOperationCompletedcause=ดำเนินการเรียบร้อยแล้ว
 
@@ -1171,6 +1261,9 @@ field:translationVersion= ไทย 2.0.1
 
 #_____________________________________________________=One or more bulletins cannot be pasted in that folder, because they already exist in this folder.
 -6181-field:notifyPasteErrorBulletinAlreadyExistscause=รายงานบางส่วนไม่สามารถวางลงในโฟลเดอร์นั้นได้ เนื่องจากมีรายงานนั้นอยู่ในโฟลเดอร์นี้แล้ว
+
+#_____________________________________________=One or more bulletins cannot be pasted in that folder, because a newer version of this bulletin already exists.
+-cbb5-field:notifyPasteErrorBulletinOldercause=รายงานบางส่วนไม่สามารถวางลงในโฟลเดอร์นั้นได้ เนื่องจากมีรายงานรุ่นใหม่กว่าอยู่ในโฟลเดอร์นี้แล้ว
 
 #________________________________=An unexpected error occurred while pasting the bulletin(s). One or more files may be damaged.
 -eb6e-field:notifyPasteErrorcause=มีข้อผิดพลาดที่ไม่คาดคิดเกิดขึ้นขณะกำลังวางรายงาน รายงานบางส่วนอาจได้รับความเสียหาย
@@ -1196,8 +1289,8 @@ field:translationVersion= ไทย 2.0.1
 #________________________________________________=You have successfully restored your key from your backup files.  It is very important that you now re-distribute your backup files.  We also recommend you backup your key as a single password-encrypted file, though you do not need to recreate the multiple file backup.
 -f50c-field:notifyRecoveryOfKeyShareCompletecause=คุณกู้คืนข้อมูลกุญแจจากแฟ้มข้อมูลกุญแจได้สำเร็จ มันสำคัญมากที่คุณจะกระจายแฟ้มสำรองกุญแจใหม่อีกครั้ง เราแนะนำให้คุณสำรองข้อมูลกุญแจโดยเข้ารหัสไว้ ด้วยวิธีนี้คุณไม่จำเป็นต้องสร้างแฟ้มสำรองกุญแจแบบหลายแฟ้มอีก
 
-#_______________________________________________=To restore your key, first you must find the backup file you saved previously.  Using the 'Restore Key from Backup File' dialog box find the file on your computer’s hard drive, a network drive, or removable media disk then click the Open button.  Martus will then ask you for your user name and password and restore your key so you can log in normally and access your account.
--83c2-field:notifyRecoveryProcessBackupFilecause=การกู้คืนกุญแจนั้น ขั้นแรกคุณต้องหาแฟ้มที่คุณสำรองไว้ก่อนหน้านี้ ใช้กรอบโต้ตอบ "กู้คืนแฟ้มกุญแจจากแฟ้มที่สำรองไว้" เพื่อหาไฟล์ที่สำรองไว้ในคอมพิวเตอร์ของคุณ, ในไดร์ฟเครือข่าย, หรือแผ่นฟลอปปี้ดิสก์ จากนั้นคลิกปุ่ม เปิด Martus จะถามชื่อผู้ใช้และรหัสผ่านของคุณ และเริ่มการกู้คืนกุญแจ คุณก็จะสามารถใช้งานและเข้าถึงข้อมูลของคุณได้ตามปกติ
+#_______________________________________________=To restore your key, first you must find the backup file you saved previously.  Using the 'Restore Key from Backup File' dialog box find the file on your computer's hard drive, a network drive, or removable media disk then click the Open button.  Martus will then ask you for your user name and password and restore your key so you can log in normally and access your account.
+-4a6f-field:notifyRecoveryProcessBackupFilecause=การกู้คืนกุญแจนั้น ขั้นแรกคุณต้องหาแฟ้มที่คุณสำรองไว้ก่อนหน้านี้ ใช้กรอบโต้ตอบ "กู้คืนแฟ้มกุญแจจากแฟ้มที่สำรองไว้" เพื่อหาไฟล์ที่สำรองไว้ในคอมพิวเตอร์ของคุณ, ในไดร์ฟเครือข่าย, หรือแผ่นฟลอปปี้ดิสก์ จากนั้นคลิกปุ่ม เปิด Martus จะถามชื่อผู้ใช้และรหัสผ่านของคุณ และเริ่มการกู้คืนกุญแจ คุณก็จะสามารถใช้งานและเข้าถึงข้อมูลของคุณได้ตามปกติ
 
 #_____________________________________________=You will now have to provide #N# out of the #M# files you previously saved when you backed up your key.
 -d5c2-field:notifyRecoveryProcessKeySharecause=คุณต้องเตรียมแฟ้ม #N# แฟ้มจาก #M# แฟ้มที่ได้บันทึกไว้ก่อนแล้ว เมื่อคุณสำรองข้อมูลแฟ้มกุญแจ
@@ -1261,9 +1354,6 @@ field:translationVersion= ไทย 2.0.1
 
 #______________________________________________=Verification of all disks passed.
 -7d7f-field:notifyVerifyKeyPairSharePassedcause=การตรวจสอบแผ่นฟลอปปี้ดิสก์ทั้งหมดผ่านแล้ว:
-
-#_____________________________________________=Bulletin ID:        #I#\nAuthor Public Code: #A#\n\n#H#
--485a-field:notifyViewViewBulletinDetailscause=รหัสรายงาน:        #I#\nรหัสสาธารณะของผู้รายงาน: #A#\n\n#H#
 
 #_____________________________________=Welcome!\n\nTo start using Martus, create an account. Choose any username you like and a password that contains at least 8 characters. Keep the following information in mind as you create your username and password:\n\n * We recommend using a password that has 15 characters.\n * Include some characters that aren't letters or numbers in your password.\n   (That is, use punctuation or other special characters.)\n * Use a password that other people won't be able to guess;\n   anyone who knows your username and password can view your private data,\n   and can create bulletins that everyone will believe were created by you.\n * Write down your username and password and store them in a safe place.\n * You'll need to enter your username and password whenever you start Martus.\n * Martus will also sometimes prompt you to re-enter your username\n   and password to prevent someone else from using your account\n   after you've logged in.\n\nIMPORTANT: You are the only one who has your username and password. If you lose either of them, you won't be able to retrieve your data. Your username and password are not stored or backed up anywhere, so they cannot be reset for you.
 -da34-field:notifyWelcomeToMartuscause=ยินดีต้อนรับ\n\nในการเริ่มใช้งาน Martus ให้สร้างชื่อบัญชี เลือกชื่อผู้ใช้ที่คุณชอบ และรหัสผ่านที่มีอย่างน้อย 8 ตัวอักษร เก็บข้อมูลเหล่านี้ไว้ให้ดีเมื่อคุณสร้างชื่อผู้ใช้ และรหัสผ่าน\n\n* เราแนะนำว่าคุณควรตั้งรหัสผ่านที่มีความยาวอย่างน้อย 15 อักขระ\n* ใส่อักขระที่ไม่ใช่ตัวอักษรหรือตัวเลขลงในรหัสผ่านของคุณด้วย\n (นั่นคือ การใช้เครื่องหมายวรรคตอนหรืออักขระพิเศษ)\n* ใช้รหัสผ่านที่บุคคลอื่นไม่สามารถคาดเดาได้โดยง่าย\n ใครก็ตามที่รู้ชื่อผู้ใช้และรหัสผ่านของคุณจะสามารถเข้าไปอ่านข้อมูลส่วนตัวของคุณได้\nและสามารถสร้างรายงาน ซึ่งทำให้ทุกคนหลงเชื่อว่าถูกสร้างโดยตัวคุณเอง\n*เขียนชื่อผู้ใช้และรหัสผ่านของคุณ เก็บไว้ในที่ที่ปลอดภัย\n* คุณต้องใส่ชื่อผู้ใช้และรหัสผ่านทุกครั้งเมื่อเริ่มใช้งาน Martus\n* ในบางครั้ง Martus จะให้คุณป้อนชื่อผู้ใช้และรหัสผ่านอีกครั้ง เพื่อป้องกันบุคคลอื่นใช้งานชื่อบัญชีของคุณหลังจากที่คุณได้เข้าสู่ระบบแล้ว\n\nข้อความสำคัญ: คุณเป็นเพียงคนเดียวที่มีชื่อผู้ใช้และรหัสผ่านนี้ ถ้าคุณทำสูญหายคุณจะไม่สามารถนำข้อมูลของคุณกลับมาได้อีกเลย ถ้าคุณไม่ได้เก็บหรือสำรองข้อมูลชื่อผู้ใช้และรหัสผ่านเอาไว้ ก็จะไม่สามารถกู้คืนได้เลย
@@ -1358,6 +1448,9 @@ field:translationVersion= ไทย 2.0.1
 #________________=Title
 -768e-field:title=ชื่อเรื่อง
 
+#_____________________________=Thai 2.5
+-26a2-field:translationVersion=ไทย 2.5
+
 #___________________=Username
 -84c2-field:username=ชื่อผู้ใช้
 
@@ -1387,6 +1480,9 @@ field:translationVersion= ไทย 2.0.1
 
 #____________________________________________=WARNING: This bulletin has not been sent to a server since it was last modified. Deleting it will prevent the latest changes from being backed up.
 -523e-field:warningDeleteSingleUnsentBulletin=คำเตือน: รายงานนี้ยังไม่ได้ถูกส่งไปที่เซิร์ตั้งแต่ได้เปลี่ยนแปลงครั้งล่าสุด การลบรายงานนี้จะป้องกันการเปลี่ยนครั้งล่าสุดจากการสำรองข้อมูล
+
+#_______________________________________=WARNING:  This translation was not created by the Martus team, and therefore may not be trustworthy.\nIf you only want to use official translations then exit Martus, remove the file #UseUnofficialTranslationFiles# from your Martus directory, and restart Martus.\n\n
+-c48e-field:warningUnofficialTranslation=คำเตือน:  การแปลนี้ไม่ได้ถูกสร้างโดยคณะทำงานของ Martus ฉะนั้นอย่าได้เชื่อถือ\nถ้าคุณต้องการใช้การแปลอย่างเป็นทางการ กรุณาออกจาก Martus ลบแฟ้ม #UseUnofficialTranslationFiles# ออกจากโฟลเดอร์ของ Martus และเปิด Martus ใหม่\n\n
 
 #__________________=Web Page
 -0163-field:webpage=หน้าเว็บ
@@ -1438,6 +1534,9 @@ field:translationVersion= ไทย 2.0.1
 
 #________________=Azerbaijani
 -6885-language:az=อาเซอร์ไบจัน
+
+#________________=Bulgarian
+-cebe-language:bg=<Bulgarian>
 
 #________________=Bengali, Bangla
 -4b7b-language:bn=บัลแกเรีย
@@ -1778,11 +1877,14 @@ field:translationVersion= ไทย 2.0.1
 #__________________________________________________=Backup Complete
 -8b15-wintitle:BackupSecretShareCompleteInformation=สำรองข้อมูลเรียบร้อยแล้ว
 
-#_____________________________=Details Field Default Content
--a39b-wintitle:BulletinDetails=ค่าเริ่มต้นช่องข้อมูลรายละเอียด
+#___________________________________=Bulletin Details
+-6fa9-wintitle:BulletinDetailsDialog=รายระเอียดรายงาน
 
 #_____________________________=Bulletin Preview
 -9d3b-wintitle:BulletinPreview=ตัวอย่างรายงานก่อนพิมพ์
+
+#______________________________=Details Field Default Content
+-a39b-wintitle:BulletinTemplate=ค่าเริ่มต้นช่องข้อมูลรายละเอียด
 
 #__________________________=Server Configuration
 -add5-wintitle:ConfigServer=ปรับแต่งค่าเกี่ยวกับเซิร์ฟเวอร์
@@ -1858,6 +1960,9 @@ field:translationVersion= ไทย 2.0.1
 
 #__________________________________=Validate User
 -6030-wintitle:MartusSignInValidate=ตรวจสอบผู้ใช้
+
+#_____________________________________=Cannot Paste Bulletin(s)
+-c05f-wintitle:PasteErrorBulletinOlder=ไม่สามารถวางรายงานได้
 
 #______________________________=Confirm Print Private Data
 -5b7b-wintitle:PrintPrivateData=ยืนยันการพิมพ์ข้อมูลส่วนตัว
@@ -1967,8 +2072,8 @@ field:translationVersion= ไทย 2.0.1
 #________________________________________=Confirm Create Copy of Someone Else's Bulletin
 -7a92-wintitle:confirmCloneBulletinAsMine=ยืนยันการสร้างสำเนารายงานของผู้อื่น
 
-#_________________________________________=Confirm Create Copy of Sealed Bulletin
--8038-wintitle:confirmCloneMySealedAsDraft=ยืนยันการสร้างสำเนารายงานปิดผนึก
+#_________________________________________=Confirm Create New Version of Sealed Bulletin
+-1260-wintitle:confirmCloneMySealedAsDraft=ยืนยันการสร้างสำเนารายงานปิดผนึกรุ่นใหม่
 
 #_________________________________=Delete My Data
 -07c3-wintitle:confirmDeleteMyData=ลบข้อมูลของฉัน
@@ -1993,6 +2098,9 @@ field:translationVersion= ไทย 2.0.1
 
 #_______________________________________________=Key file Exists
 -493d-wintitle:confirmKeyPairFileExistsOverWrite=มีแฟ้มกุญแจอยู่แล้ว
+
+#_____________________________________________________=Bulletin Versioning Migration Required
+-4371-wintitle:confirmNeedsBulletinVersioningMigration=จำเป็นต้องเปลี่ยนรุ่นรายงาน
 
 #_________________________________________=Folder Migration Required
 -72d3-wintitle:confirmNeedsFolderMigration=จำเป็นต้องย้ายโฟลเดอร์
@@ -2033,6 +2141,9 @@ field:translationVersion= ไทย 2.0.1
 #________________________________________=Reset Contents
 -6f62-wintitle:confirmResetDefaultDetails=เริ่มเนื้อหาใหม่
 
+#__________________________________________=Confirm Retrieving Newer Versions
+-80c8-wintitle:confirmRetrieveNewerVersions=ยืนยันการเอารุ่นใหม่กว่า
+
 #_______________________________________=Confirm Save With Public Data
 -1e77-wintitle:confirmSendWithPublicData=ยืนยันการบันทึกด้วยข้อมูลสาธารณะ
 
@@ -2058,10 +2169,10 @@ field:translationVersion= ไทย 2.0.1
 -0b6f-wintitle:confirmUseBulletinsCustomFields=การเลือกช่องข้อมูลกำหนดเอง
 
 #______________________________________________=Accountmap File Missing Or Corrupt
--e8e7-wintitle:confirmWarnMissingAccountMapFile=แฟ้ม Accountmap.txt สูญหายหรือเสียหาย
+-e8e7-wintitle:confirmWarnMissingAccountMapFile=แฟ้ม Acctmap.txt สูญหายหรือเสียหาย
 
 #________________________________________________________________=Accountmap Signature File Missing Or Corrupt
--9993-wintitle:confirmWarnMissingOrCorruptAccountMapSignatureFile=แฟ้ม Accountmap.txt.sig สูญหายหรือเสียหาย
+-9993-wintitle:confirmWarnMissingOrCorruptAccountMapSignatureFile=แฟ้ม Acctmap.txt.sig สูญหายหรือเสียหาย
 
 #________________________________________________________=Questionable Media Chosen
 -8c18-wintitle:confirmWarningPathChosenMayNotBeRemoveable=เลือกสื่อที่เป็นปัญหา
@@ -2120,11 +2231,17 @@ field:translationVersion= ไทย 2.0.1
 #__________________________________=Martus Already Running
 -cfce-wintitle:notifyAlreadyRunning=Martus กำลังเปิดใช้งานอยู่
 
+#_____________________________________________=Bulletin Version Already Being Viewed
+-c778-wintitle:notifyAlreadyViewingThisVersion=<Bulletin Version Already Being Viewed>
+
 #______________________________________=Attachment Chosen Not a File
 -8023-wintitle:notifyAttachmentNotAFile=เอกสานแบบที่เลือกไว้ไม่ใช่แฟ้มข้อมูล
 
 #____________________________________________=Security Alert!
 -4938-wintitle:notifyAuthenticateServerFailed=แจ้งเตือนด้านความปลอดภัย!
+
+#______________________________________________=Bulletin Version Not Found
+-a60d-wintitle:notifyBulletinVersionNotInSystem=<Bulletin Version Not Found>
 
 #__________________________________=Unable to Connect to Server
 -1b07-wintitle:notifyConfigNoServer=ไม่สามารถติดต่อไปยังเซิร์ฟเวอร์ได้
@@ -2149,6 +2266,9 @@ field:translationVersion= ไทย 2.0.1
 
 #___________________________________________=Cannot Move Bulletin(s)
 -771a-wintitle:notifyDropErrorBulletinExists=ไม่สามารถย้ายรายงาน
+
+#__________________________________________=Cannot Move Bulletin(s)
+-771a-wintitle:notifyDropErrorBulletinOlder=ไม่สามารถย้ายรายงาน
 
 #______________________________=Error Moving Bulletin(s)
 -4cd9-wintitle:notifyDropErrors=ข้อผิดพลาดในการย้ายรายงาน
@@ -2215,9 +2335,6 @@ field:translationVersion= ไทย 2.0.1
 
 #_____________________________________=Invalid Server Name or IP Address
 -3376-wintitle:notifyInvalidServerName=ชื่อเซิร์ฟเวอร์หรือไอพีไม่ถูกต้อง
-
-#_____________________________________________=Bulletin Details
--6fa9-wintitle:notifyModifyViewBulletinDetails=รายละเอียดรายงาน
 
 #______________________________________=Finished
 -355b-wintitle:notifyOperationCompleted=เสร็จแล้ว
@@ -2320,9 +2437,6 @@ field:translationVersion= ไทย 2.0.1
 
 #____________________________________________=Verification Succeeded
 -9195-wintitle:notifyVerifyKeyPairSharePassed=การตรวจสอบรียบร้อย
-
-#___________________________________________=Bulletin Details
--6fa9-wintitle:notifyViewViewBulletinDetails=รายละเอียดรายงาน
 
 #___________________________________=Welcome To Martus
 -423f-wintitle:notifyWelcomeToMartus=ยินดีต้อนรับสู่ Martus
