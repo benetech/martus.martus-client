@@ -65,6 +65,8 @@ public class UiCustomFieldsDlg extends JDialog
 		ok.addActionListener(new OkHandler());
 		JButton cancel = new JButton(localization.getButtonLabel("cancel"));
 		cancel.addActionListener(new CancelHandler());
+		JButton defaults = new JButton(localization.getButtonLabel("customDefault"));
+		defaults.addActionListener(new CustomDefaultHandler());
 
 		getContentPane().setLayout(new ParagraphLayout());
 
@@ -75,6 +77,8 @@ public class UiCustomFieldsDlg extends JDialog
 		getContentPane().add(new JLabel(""), ParagraphLayout.NEW_PARAGRAPH);
 		getContentPane().add(ok);
 		getContentPane().add(cancel);
+		getContentPane().add(defaults);
+		
 
 		getRootPane().setDefaultButton(ok);
 
@@ -100,6 +104,16 @@ public class UiCustomFieldsDlg extends JDialog
 	{
 		public void actionPerformed(ActionEvent ae)
 		{
+			dispose();
+		}
+	}
+	
+	
+	class CustomDefaultHandler implements ActionListener
+	{
+		public void actionPerformed(ActionEvent ae)
+		{
+			result = "";
 			dispose();
 		}
 	}

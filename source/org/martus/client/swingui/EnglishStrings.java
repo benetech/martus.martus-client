@@ -252,6 +252,7 @@ public class EnglishStrings
 "button:inputCustomFieldsok=OK",
 "button:inputGetShareFileNameok=OK",
 "button:close=Close",
+"button:customDefault=Restore Defaults",
 
 "button:cancel=Cancel",
 "button:browse=Browse...",
