@@ -37,6 +37,7 @@ import org.martus.common.bulletin.Bulletin;
 import org.martus.common.crypto.MartusCrypto;
 import org.martus.common.crypto.MockMartusSecurity;
 import org.martus.common.database.MockClientDatabase;
+import org.martus.util.DirectoryUtils;
 
 public class MockMartusApp extends MartusApp
 {
@@ -48,7 +49,7 @@ public class MockMartusApp extends MartusApp
 		fakeDataDirectory.mkdir();
 
 		MockMartusApp app = new MockMartusApp(crypto, fakeDataDirectory);
-		app.setCurrentAccount("some user");
+		app.setCurrentAccount("some user", app.getMartusDataRootDirectory());
 
 		return app;
 	}
@@ -94,16 +95,20 @@ public class MockMartusApp extends MartusApp
 		if(logFile.exists())
 			throw new IOException("logFile");
 
-		File dir = new File(getCurrentAccountDirectoryName());
-		dir.delete();
-		if(dir.exists())
-			throw new IOException("dataDirectory");
+		File accountsDir = getAccountsDirectory();
+		DirectoryUtils.deleteEntireDirectoryTree(accountsDir);
+		if(accountsDir.exists())
+			throw new IOException("AccountsDirectory");
 
+		File rootDir = getMartusDataRootDirectory();
+		rootDir.delete();
+		if(rootDir.exists())
+			throw new IOException("MartusRootDirectory");
 	}
 
-	public void setCurrentAccount(String userName)
+	public void setCurrentAccount(String userName, File accountDirectory)
 	{
-		super.setCurrentAccount(userName);
+		super.setCurrentAccount(userName, accountDirectory);
 		store = new BulletinStore(new MockClientDatabase());
 		store.setSignatureGenerator(getSecurity());
 	}

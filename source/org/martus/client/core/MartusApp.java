@@ -320,7 +320,7 @@ public class MartusApp
 	
 	public File getAccountsDirectory()
 	{
-		return new File(getCurrentAccountDirectory(), ACCOUNTS_DIRECTORY_NAME);
+		return new File(getMartusDataRootDirectory(), ACCOUNTS_DIRECTORY_NAME);
 		
 	}
 
@@ -1038,13 +1038,37 @@ public class MartusApp
 	public void createAccount(String userName, char[] userPassPhrase) throws
 					Exception
 	{
+		if(doesAccountExist(userName, userPassPhrase))
+			throw new AccountAlreadyExistsException();
+		
 		if(doesDefaultAccountExist())
 			createAdditionalAccount(userName, userPassPhrase);
 		else
 			createAccountInternal(getMartusDataRootDirectory(), userName, userPassPhrase);
 	}
 
-	private void createAdditionalAccount(String userName, char[] userPassPhrase) throws IOException, Exception
+	private boolean doesAccountExist(String userName, char[] userPassPhrase) throws Exception
+	{
+		Vector allAccountDirs = getAllAccountDirectories();
+		MartusSecurity tempSecurity = new MartusSecurity();
+		for(int i = 0; i<allAccountDirs.size(); ++i )
+		{
+			File thisAccountsKeyPair = getKeyPairFile((File)allAccountDirs.get(i));
+			try
+			{
+				tempSecurity.readKeyPair(thisAccountsKeyPair, getCombinedPassPhrase(userName, userPassPhrase));
+				return true;
+			}
+			catch (Exception cantBeOurAccount)
+			{
+				continue;
+			}
+		}
+		return false;
+	}
+
+	
+	private void createAdditionalAccount(String userName, char[] userPassPhrase) throws Exception
 	{
 		File accountsDirectory = getAccountsDirectory();
 		accountsDirectory.mkdirs();
@@ -1054,8 +1078,10 @@ public class MartusApp
 			tempAccountDir.delete();
 			tempAccountDir.mkdirs();
 			createAccountInternal(tempAccountDir, userName, userPassPhrase);
-			String realAccountDir = MartusCrypto.getHexDigest(getAccountId());
-			tempAccountDir.renameTo(new File(accountsDirectory, realAccountDir));
+			String realAccountDirName = MartusCrypto.getHexDigest(getAccountId());
+			File realAccountDir = new File(accountsDirectory, realAccountDirName);
+			tempAccountDir.renameTo(realAccountDir);
+			setCurrentAccount(userName, realAccountDir);
 		}
 		catch (Exception e)
 		{
@@ -1065,9 +1091,7 @@ public class MartusApp
 	}
 
 	public void createAccountInternal(File accountDataDirectory, String userName, char[] userPassPhrase) throws
-	AccountAlreadyExistsException,
-	CannotCreateAccountFileException,
-	IOException
+		Exception
 	{
 		File keyPairFile = getKeyPairFile(accountDataDirectory);
 		if(keyPairFile.exists())
@@ -1077,8 +1101,9 @@ public class MartusApp
 		try
 		{
 			writeKeyPairFileWithBackup(keyPairFile, userName, userPassPhrase);
+			attemptSignInInternal(keyPairFile, userName, userPassPhrase);
 		}
-		catch(IOException e)
+		catch(Exception e)
 		{
 			getSecurity().clearKeyPair();
 			throw(e);
@@ -1196,7 +1221,6 @@ public class MartusApp
 		CannotCreateAccountFileException
 	{
 		writeKeyPairFileInternal(keyPairFile, userName, userPassPhrase);
-		setCurrentAccount(userName);
 		try
 		{
 			writeKeyPairFileInternal(getBackupFile(keyPairFile), userName, userPassPhrase);
@@ -1228,10 +1252,8 @@ public class MartusApp
 	{
 		try
 		{
-			FileInputStream inputStream = new FileInputStream(keyPairFile);
-			getSecurity().readKeyPair(inputStream, getCombinedPassPhrase(userName, userPassPhrase));
-			inputStream.close();
-			setCurrentAccount(userName);
+			getSecurity().readKeyPair(keyPairFile, getCombinedPassPhrase(userName, userPassPhrase));
+			setCurrentAccount(userName, keyPairFile.getParentFile());
 		}
 		catch(Exception e)
 		{
@@ -1261,10 +1283,10 @@ public class MartusApp
 		}	
 	}
 
-	public void setCurrentAccount(String userName)
+	public void setCurrentAccount(String userName, File accountDirectory)
 	{
 		currentUserName = userName;
-		currentAccountDirectory = martusDataRootDirectory; 
+		currentAccountDirectory = accountDirectory; 
 	}
 
 	public char[] getCombinedPassPhrase(String userName, char[] userPassPhrase)

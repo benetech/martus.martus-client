@@ -211,7 +211,7 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 			{
 				UiLocalization localization = new UiLocalization(fakeDataDirectory);
 				MartusApp app = new MartusApp(mockSecurityForApp, fakeDataDirectory, localization);
-				app.setCurrentAccount("some user");
+				app.setCurrentAccount("some user", app.getMartusDataRootDirectory());
 				app.doAfterSigninInitalization();
 				fail("Should have thrown because map is missing");
 			}
@@ -266,7 +266,7 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 			{
 				UiLocalization localization = new UiLocalization(fakeDataDirectory);
 				MartusApp app = new MartusApp(mockSecurityForApp, fakeDataDirectory, localization);
-				app.setCurrentAccount("some user");
+				app.setCurrentAccount("some user", app.getMartusDataRootDirectory());
 				app.doAfterSigninInitalization();
 				fail("Should have thrown because of missing map signature");
 			}
@@ -329,7 +329,7 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 			{
 				UiLocalization localization = new UiLocalization(fakeDataDirectory);
 				MartusApp app = new MartusApp(mockSecurityForApp, fakeDataDirectory, localization);
-				app.setCurrentAccount("some user");
+				app.setCurrentAccount("some user", app.getMartusDataRootDirectory());
 				app.doAfterSigninInitalization();
 				fail("Should have thrown because of invalid map signature");
 			}
@@ -515,18 +515,20 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 	
 	private String createAnotherAccount(MockMartusApp app, String userName) throws AccountAlreadyExistsException, CannotCreateAccountFileException, IOException, Exception
 	{
+		assertTrue("Must already have default account", app.doesDefaultAccountExist());
 		app.createAccount(userName, userPassword);
-		File keyPairFile2 = app.getCurrentKeyPairFile();
-		assertNotEquals("Should not be in root directory?", app.getMartusDataRootDirectory(), keyPairFile2.getParentFile());
-		assertEquals("Parent of Parent should be root dir.", app.getMartusDataRootDirectory(), keyPairFile2.getParentFile().getParentFile());
-		File backupKeyPairFile2 = MartusApp.getBackupFile(keyPairFile2);
-		assertEquals("no backup key file2?", true, backupKeyPairFile2.exists());
+		File keyPairFile = app.getCurrentKeyPairFile();
+		assertTrue("Keypair file does not exist? " + keyPairFile.getPath(), keyPairFile.exists());
+		assertNotEquals("Should not be in root directory?", app.getMartusDataRootDirectory(), keyPairFile.getParentFile());
+		assertEquals("Parent of Parent should be the accounts dir.", app.getAccountsDirectory(), keyPairFile.getParentFile().getParentFile());
+		File backupKeyPairFile = MartusApp.getBackupFile(keyPairFile);
+		assertEquals("no backup key file?", true, backupKeyPairFile.exists());
 
-		String accountId2 = app.getAccountId();
-		assertEquals("store account2 not set?", accountId2, app.getStore().getAccountId());
-		assertEquals("User name2 not set?",userName, app.getUserName());
+		String accountId = app.getAccountId();
+		assertEquals("store account not set?", accountId, app.getStore().getAccountId());
+		assertEquals("User name not set?",userName, app.getUserName());
 		verifySignInThatWorks(app);
-		return accountId2;
+		return accountId;
 	}
 
 	void verifySignInThatWorks(MartusApp appWithRealAccount) throws Exception
@@ -650,7 +652,7 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		MockMartusApp app = MockMartusApp.create();
 		app.createAccount(userName, userPassword);
 		app.getSecurity().clearKeyPair();
-		app.setCurrentAccount("");
+		app.setCurrentAccount("", app.getMartusDataRootDirectory());
 		try
 		{
 			app.attemptReSignIn(userName, userPassword);
@@ -676,7 +678,7 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		assertNull("keypair not cleared?", app.getAccountId());
 		app.attemptReSignIn(userName, userPassword);
 		assertNotNull("keypair not restored?", app.getAccountId());
-		
+		app.deleteAllFiles();
 		TRACE_END();
 	}
 	

@@ -1089,6 +1089,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		try
 		{
 			app.writeKeyPairFileWithBackup(keyPairFile, userName, userPassword);
+			app.attemptSignIn(userName, userPassword);
 		}
 		catch(Exception e)
 		{
