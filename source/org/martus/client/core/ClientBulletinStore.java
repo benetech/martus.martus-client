@@ -138,28 +138,6 @@ public class ClientBulletinStore extends BulletinStore
 		return(uid.getAccountId().equals(getAccountId()));
 	}
 
-	public Set getSetOfAllBulletinUniversalIds()
-	{
-		class Visitor implements Database.PacketVisitor
-		{
-			Visitor()
-			{
-				setOfUniversalIds = new HashSet();
-			}
-
-			public void visit(DatabaseKey key)
-			{
-				setOfUniversalIds.add(key.getUniversalId());
-			}
-
-			Set setOfUniversalIds;
-		}
-
-		Visitor visitor = new Visitor();
-		visitAllBulletins(visitor);
-		return visitor.setOfUniversalIds;
-	}
-
 	public synchronized Set getSetOfBulletinUniversalIdsInFolders()
 	{
 		Set setOfUniversalIds = new HashSet();
@@ -181,7 +159,7 @@ public class ClientBulletinStore extends BulletinStore
 
 	public Set getSetOfOrphanedBulletinUniversalIds()
 	{
-		Set possibleOrphans = getSetOfAllBulletinUniversalIds();
+		Set possibleOrphans = new HashSet(getAllBulletinUids());
 		Set inFolders = getSetOfBulletinUniversalIdsInFolders();
 		possibleOrphans.removeAll(inFolders);
 		return possibleOrphans;
@@ -949,7 +927,7 @@ public class ClientBulletinStore extends BulletinStore
 		}
 
 		Quarantiner visitor = new Quarantiner();
-		visitAllBulletins(visitor);
+		visitAllBulletinRevisions(visitor);
 		return visitor.quarantinedCount;
 	}
 

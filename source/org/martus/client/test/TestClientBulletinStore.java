@@ -332,43 +332,6 @@ public class TestClientBulletinStore extends TestCaseEnhanced
 		assertTrue("missing 2?", two.contains(b2.getUniversalId()));
 	}
 
-	public void testVisitAllBulletins() throws Exception
-	{
-		TRACE("testVisitAllBulletins");
-
-		class BulletinUidCollector implements Database.PacketVisitor
-		{
-			BulletinUidCollector(ClientBulletinStore store)
-			{
-				store.visitAllBulletins(this);
-			}
-
-			public void visit(DatabaseKey key)
-			{
-				uids.add(key.getUniversalId());
-			}
-
-			Vector uids = new Vector();
-		}
-
-		assertEquals("not empty?", 0, new BulletinUidCollector(store).uids.size());
-
-		Bulletin b = store.createEmptyBulletin();
-		store.saveBulletin(b);
-		Vector one = new BulletinUidCollector(store).uids;
-		assertEquals("not one?", 1, one.size());
-		UniversalId gotUid = (UniversalId)one.get(0);
-		UniversalId bUid = b.getUniversalId();
-		assertEquals("wrong uid 1?", bUid, gotUid);
-
-		Bulletin b2 = store.createEmptyBulletin();
-		store.saveBulletin(b2);
-		Vector two = new BulletinUidCollector(store).uids;
-		assertEquals("not two?", 2, two.size());
-		assertTrue("missing 1?", two.contains(b.getUniversalId()));
-		assertTrue("missing 2?", two.contains(b2.getUniversalId()));
-	}
-
 	public void testDestroyBulletin() throws Exception
 	{
 		TRACE("testDestroyBulletin");
@@ -1366,22 +1329,6 @@ public class TestClientBulletinStore extends TestCaseEnhanced
 		assertEquals("wrong bytes Private", true, Arrays.equals(sampleBytes2, rawBytesPrivate));
 
 		zipFile.delete();
-	}
-
-	public void testGetSetOfAllBulletinUniversalIds() throws Exception
-	{
-		TRACE("testGetSetOfAllBulletinUniversalIds");
-		Set emptySet = store.getSetOfAllBulletinUniversalIds();
-		assertTrue("not empty to start?", emptySet.isEmpty());
-
-		Bulletin b1 = store.createEmptyBulletin();
-		store.saveBulletin(b1);
-		Bulletin b2 = store.createEmptyBulletin();
-		store.saveBulletin(b2);
-		Set two = store.getSetOfAllBulletinUniversalIds();
-		assertEquals("not two?", 2, two.size());
-		assertTrue("Missing b1?", two.contains(b1.getUniversalId()));
-		assertTrue("Missing b2?", two.contains(b2.getUniversalId()));
 	}
 
 	public void testGetSetOfBulletinUniversalIdsInFolders() throws Exception
