@@ -264,9 +264,10 @@ public class EnglishStrings
 "button:ServerComplianceAccept=Accept",
 "button:ServerComplianceReject=Reject",
 "button:SignIn=Sign In",
-"button:NewAccount=New Account",
-"button:CreateNewAccount=New Account",
-"button:RecoverFromShare=Restore Account",
+"button:NewAccountTab=New Account",
+"button:RecoverAccountTab=Restore Account",
+"button:RecoverAccountByShare=Recover account from multiple disks",
+"button:RecoverAccountByBackup=Recover account from backup keypair file",
 
 "menu:file=File",
 "menu:CreateNewBulletin=Create New Bulletin",
@@ -447,6 +448,8 @@ public class EnglishStrings
 "field:ErrorRecoverNoAppropriateFileFound=No appropriate share file was found on this disk, please try a different disk.",
 "field:ErrorRecoverShareDisk=An error occured reading this keyshare file.",
 "field:ErrorVerifyingKeyPairShare=An error occured verifying this keyshare file.",
+"field:RecoverAccount=Recover your existing account from floppy or a backup file.",
+
 
 "field:VirtualUserNameDescription=(Enter using regular keyboard)",
 "field:VirtualPasswordDescription=Enter Password using mouse with on-screen keyboard below",

@@ -25,9 +25,17 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.dialogs;
 
+import java.awt.BorderLayout;
+
+import javax.swing.Box;
+import javax.swing.BoxLayout;
+import javax.swing.ButtonGroup;
+import javax.swing.ButtonModel;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JRadioButton;
 import javax.swing.JTabbedPane;
 
 import org.martus.client.core.CurrentUiState;
@@ -37,26 +45,81 @@ import org.martus.swing.UiWrappedTextArea;
 
 public class UiInitialSigninDlg extends UiSigninDlg
 {
-	public UiInitialSigninDlg(UiLocalization localizationToUse, CurrentUiState uiStateToUse, JFrame owner)
+	public UiInitialSigninDlg(UiLocalization localizationToUse, CurrentUiState uiStateToUse, JFrame owner, int mode)
 	{
-		super(localizationToUse, uiStateToUse, owner, INITIAL);
+		super(localizationToUse, uiStateToUse, owner, mode);
 	}
 
 	JPanel createMainPanel()
 	{
 		JPanel scrolledPanel = new JPanel(); 
 		tabbedPane = new JTabbedPane();
-		tabbedPane.add(signinPane);
-		tabbedPane.setTitleAt(SIGNIN_TAB, localization.getButtonLabel("SignIn"));  
-		tabbedPane.add(createNewAccountPane());
-		tabbedPane.setTitleAt(NEW_ACCOUNT_TAB, localization.getButtonLabel("NewAccount"));
+		if(currentMode == INITIAL)
+			tabbedPane.add(signinPane,localization.getButtonLabel("SignIn"));
+		tabbedPane.add(createNewAccountPanel(), localization.getButtonLabel("NewAccountTab"));
+		tabbedPane.add(createRecoverAccountPanel(), localization.getButtonLabel("RecoverAccountTab"));
 		scrolledPanel.add(tabbedPane);
 		return scrolledPanel;
 	}
 
-	JComponent createNewAccountPane()
+	JComponent createNewAccountPanel()
 	{
 		String text = localization.getFieldLabel("HowToCreateNewAccount");
 		return new UiWrappedTextArea("\n" + text);
 	}
+	
+	JPanel createRecoverAccountPanel()
+	{
+		JPanel radioButtonPanel = new JPanel();
+		radioButtonPanel.setLayout(new BoxLayout(radioButtonPanel, BoxLayout.Y_AXIS));
+		radioShare = new JRadioButton(localization.getButtonLabel("RecoverAccountByShare"), true);
+		radioShare.setActionCommand("share");
+		radioBackupFile = new JRadioButton(localization.getButtonLabel("RecoverAccountByBackup"), false);
+		radioBackupFile.setActionCommand("backupFile");
+		recoveryTypeGroup = new ButtonGroup();
+		recoveryTypeGroup.add(radioShare);
+		recoveryTypeGroup.add(radioBackupFile);
+
+		radioButtonPanel.add(new JLabel(" "));
+		radioButtonPanel.add(radioShare);
+		radioButtonPanel.add(radioBackupFile);
+		radioButtonPanel.add(Box.createVerticalStrut(5));
+		
+		JPanel recoverAccountPanel = new JPanel();
+		recoverAccountPanel.setLayout(new BorderLayout());
+		recoverAccountPanel.add(new JLabel(localization.getFieldLabel("RecoverAccount")),BorderLayout.NORTH);
+		recoverAccountPanel.add(radioButtonPanel, BorderLayout.CENTER);
+		return recoverAccountPanel;
+	}
+	public void handleOk()
+	{
+		int signIn = 0;
+		int newAccount = 1;
+		int recoverAccount = 2;
+		if (tabbedPane.getTabCount() == 2)
+		{
+			--signIn;
+			--newAccount;
+			--recoverAccount;
+		}
+		
+		int tabNumber = tabbedPane.getSelectedIndex();
+		if(tabNumber == signIn)
+			usersChoice = SIGN_IN;
+		else if(tabNumber == newAccount)
+			usersChoice = NEW_ACCOUNT;
+		else if(tabNumber == recoverAccount)
+		{
+			ButtonModel model = recoveryTypeGroup.getSelection();
+			if(model.getActionCommand().equals("share"))
+				usersChoice = RECOVER_ACCOUNT_BY_SHARE;
+			else 
+				usersChoice = RECOVER_ACCOUNT_BY_BACKUP_FILE;
+		}
+		dispose();
+	}
+	private ButtonGroup recoveryTypeGroup;
+	private JTabbedPane tabbedPane;
+	private JRadioButton radioShare;
+	private JRadioButton radioBackupFile;
 }

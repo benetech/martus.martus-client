@@ -39,7 +39,6 @@ import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.JTabbedPane;
 import javax.swing.border.EmptyBorder;
 
 import org.martus.client.core.CurrentUiState;
@@ -66,10 +65,11 @@ public class UiSigninDlg extends JDialog
 
 	public void initalize(UiLocalization localizationToUse, CurrentUiState uiStateToUse, JFrame owner, int mode, String username)
 	{
+		currentMode = mode;
 		localization = localizationToUse;
 		uiState = uiStateToUse;
-		String title = getTextForTitle(localization, mode);
-		setTitle(title);
+		usersChoice = CANCEL;
+		setTitle(getTextForTitle(localization, mode));
 		
 		signinPane = new UiSigninPanel(this, mode, username);
 		
@@ -147,13 +147,7 @@ public class UiSigninDlg extends JDialog
 
 	public int getUserChoice()
 	{
-		if(okPressedForSignin)
-			return SIGN_IN;
-		if(okPressedForNewAccount)
-			return NEW_ACCOUNT;
-		if(languageChanged)
-			return LANGUAGE_CHANGED;
-		return CANCEL;
+		return usersChoice;
 	}
 
 	public String getName()
@@ -176,15 +170,17 @@ public class UiSigninDlg extends JDialog
 		getRootPane().setDefaultButton(ok);
 	}
 	
+	public void handleOk()
+	{
+		usersChoice = SIGN_IN;
+		dispose();
+	}
+	
 	class OkHandler implements ActionListener
 	{
 		public void actionPerformed(ActionEvent ae)
 		{
-			if(tabbedPane != null && tabbedPane.getSelectedIndex() == NEW_ACCOUNT_TAB)
-				okPressedForNewAccount = true;
-			else
-				okPressedForSignin = true;
-			dispose();
+			handleOk();
 		}
 	}
 	
@@ -196,7 +192,7 @@ public class UiSigninDlg extends JDialog
 			localization.setCurrentLanguageCode(languageCode);
 			uiState.setCurrentLanguage(languageCode);
 			uiState.save();
-			languageChanged = true;
+			usersChoice = LANGUAGE_CHANGED;
 			dispose();
 		}
 	}
@@ -205,6 +201,7 @@ public class UiSigninDlg extends JDialog
 	{
 		public void actionPerformed(ActionEvent ae)
 		{
+			usersChoice = CANCEL;
 			dispose();
 		}
 	}
@@ -220,27 +217,26 @@ public class UiSigninDlg extends JDialog
 	}
 	
 	UiSigninPanel signinPane;
-	JTabbedPane tabbedPane;
 	UiLocalization localization;
 	CurrentUiState uiState;
-	boolean okPressedForSignin;
-	boolean okPressedForNewAccount;
+	int usersChoice;
 	boolean languageChanged;
 	private JButton ok;
 	UiChoiceEditor languageDropdown;
+	int currentMode;
 	
 	public final static int INITIAL = 1;
 	public final static int TIMED_OUT = 2;
 	public final static int SECURITY_VALIDATE = 3;
 	public final static int RETYPE_USERNAME_PASSWORD = 4;
 	public final static int CREATE_NEW = 5;
-
+	public final static int INITIAL_NEW_RECOVER_ACCOUNT = 6;
+	
 	public final static int CANCEL = 10;
 	public final static int SIGN_IN = 11;
 	public final static int NEW_ACCOUNT = 12;
-	public final static int LANGUAGE_CHANGED = 13;
-
-	static final int SIGNIN_TAB = 0;
-	static final int NEW_ACCOUNT_TAB = 1;
+	public final static int RECOVER_ACCOUNT_BY_SHARE = 13;
+	public final static int RECOVER_ACCOUNT_BY_BACKUP_FILE = 14;
+	public final static int LANGUAGE_CHANGED = 15;
 }
 

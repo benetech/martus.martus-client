@@ -160,33 +160,25 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		notifyClientCompliance(hiddenFrame);
 		hiddenFrame.setTitle(UiSigninDlg.getInitialSigninTitle(localization));
 		mainWindowInitalizing = true;
-		boolean wantsNewAccount = true;
-		if(app.doesAnyAccountExist())
-		{
-			int result = signIn(UiSigninDlg.INITIAL); 
-			if(result == CANCELLED)
+		boolean wantsNewAccount = false;
+		int signInType = UiSigninDlg.INITIAL;
+		if(!app.doesAnyAccountExist())
+			signInType = UiSigninDlg.INITIAL_NEW_RECOVER_ACCOUNT;
+		
+		int result = signIn(signInType); 
+		if(result == UiSigninDlg.CANCEL)
+			return false;
+		if(result == UiSigninDlg.NEW_ACCOUNT)
+			wantsNewAccount = true;
+		if(result == UiSigninDlg.RECOVER_ACCOUNT_BY_SHARE)
+		{	
+			UiBackupRecoverKeyPair recover = new UiBackupRecoverKeyPair(this);
+			if(!recover.recoverKeyPairFromMultipleUnencryptedFiles())
 				return false;
-			if(result == NEW_ACCOUNT)
-				wantsNewAccount = true;
-			if(result == SIGNED_IN)
-				wantsNewAccount = false;
 		}
-		else
+		if(result == UiSigninDlg.RECOVER_ACCOUNT_BY_BACKUP_FILE)
 		{
-			String title = localization.getWindowTitle("confirmRecoverUsingKeyShare");
-			String cause = localization.getFieldLabel("confirmRecoverUsingKeySharecause");
-			String effect = localization.getFieldLabel("confirmRecoverUsingKeyShareeffect");
-			String[] contents = {cause, "", effect};
-			String createNewAccountButton =  localization.getButtonLabel("CreateNewAccount");
-			String restoreFromShareButton =  localization.getButtonLabel("RecoverFromShare");
-			String[] buttons = {createNewAccountButton, restoreFromShareButton};
-			if(!confirmDlg(this, title, contents, buttons))
-			{
-				UiBackupRecoverKeyPair recover = new UiBackupRecoverKeyPair(this);
-				if(!recover.recoverKeyPairFromMultipleUnencryptedFiles())
-					return false;
-				wantsNewAccount = false;
-			}		
+			//TODO:Finish this section
 		}
 
 		boolean createdNewAccount = false;
@@ -196,6 +188,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 				return false;
 			createdNewAccount = true;
 		}
+
 		currentActiveFrame = this;
 		hiddenFrame.dispose();
 		UiModelessBusyDlg waitingForBulletinsToLoad = new UiModelessBusyDlg(getLocalization().getFieldLabel("waitingForBulletinsToLoad"));
@@ -1054,7 +1047,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		int result = signIn(UiSigninDlg.SECURITY_VALIDATE);
 		if(!app.isSignedIn())
 			exitWithoutSavingState();
-		if(result == SIGNED_IN)
+		if(result == UiSigninDlg.SIGN_IN)
 			return true;
 		return false;
 	}
@@ -1559,16 +1552,14 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 			int userChoice = UiSigninDlg.LANGUAGE_CHANGED;
 			while(userChoice == UiSigninDlg.LANGUAGE_CHANGED)
 			{	
-				if(mode==UiSigninDlg.INITIAL)
-					signinDlg = new UiInitialSigninDlg(getLocalization(), getCurrentUiState(), currentActiveFrame);
+				if(mode==UiSigninDlg.INITIAL || mode == UiSigninDlg.INITIAL_NEW_RECOVER_ACCOUNT)
+					signinDlg = new UiInitialSigninDlg(getLocalization(), getCurrentUiState(), currentActiveFrame, mode);
 				else
 					signinDlg = new UiSigninDlg(getLocalization(), getCurrentUiState(), currentActiveFrame, mode);
 				userChoice = signinDlg.getUserChoice();
 			}
-			if (userChoice == UiSigninDlg.NEW_ACCOUNT)
-				return NEW_ACCOUNT;
 			if (userChoice != UiSigninDlg.SIGN_IN)
-				return CANCELLED;
+				return userChoice;
 			try
 			{
 				String userName = signinDlg.getName();
@@ -1582,7 +1573,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 					app.attemptReSignIn(userName, password);
 					currentActiveFrame.setState(NORMAL);
 				}
-				return SIGNED_IN;
+				return UiSigninDlg.SIGN_IN;
 			}
 			catch (Exception e)
 			{
@@ -1759,7 +1750,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 			public void run()
 			{
 				currentActiveFrame.setState(ICONIFIED);
-				if(signIn(UiSigninDlg.TIMED_OUT) != SIGNED_IN)
+				if(signIn(UiSigninDlg.TIMED_OUT) != UiSigninDlg.SIGN_IN)
 					exitWithoutSavingState();
 				currentActiveFrame.setState(NORMAL);
 			}
@@ -1828,7 +1819,4 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	private static final int BACKGROUND_UPLOAD_CHECK_MILLIS = 5*1000;
 	private static final int BACKGROUND_TIMEOUT_CHECK_EVERY_X_MILLIS = 5*1000;
 	private boolean mainWindowInitalizing;
-	public final static int CANCELLED = 10;
-	public final static int SIGNED_IN = 11;
-	public final static int NEW_ACCOUNT = 12;
 }
