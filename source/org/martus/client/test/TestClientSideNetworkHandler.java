@@ -34,6 +34,7 @@ import java.util.Vector;
 import org.apache.xmlrpc.XmlRpcException;
 import org.martus.client.core.ClientSideNetworkHandlerUsingXmlRpc;
 import org.martus.client.core.ClientSideNetworkHandlerUsingXmlRpcForNonSSL;
+import org.martus.common.crypto.MockMartusSecurity;
 import org.martus.common.test.TestCaseEnhanced;
 
 public class TestClientSideNetworkHandler extends TestCaseEnhanced 
@@ -110,7 +111,10 @@ public class TestClientSideNetworkHandler extends TestCaseEnhanced
 
 	public void testPortSelectionSSL() throws Exception
 	{
+		MockMartusSecurity mockSecurity = MockMartusSecurity.createServer();
+		
 		MockHandlerForSSL handler = new MockHandlerForSSL();
+		handler.getSimpleX509TrustManager().setExpectedPublicKey(mockSecurity.getPublicKeyString());
 		handler.callServer("server", "method", null);
 		assertContains("didn't try good port?", new Integer(MockHandlerForSSL.goodPort), handler.triedPorts);
 		

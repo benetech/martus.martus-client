@@ -166,6 +166,7 @@ public class EnglishStrings
 "wintitle:notifyQuickEraseScrubWorked=Quick Erase",
 "wintitle:notifyRecoveryProcessBackupFile=Recover Keypair",
 "wintitle:notifyRecoveryOfKeyPairComplete=Successful Recovery of Keypair",
+"wintitle:notifyErrorRecoveringAccountDirectory=Error During Recovery",
 
 "wintitle:inputservername=Server Name",
 "wintitle:inputserverpubliccode=Server Identification",
@@ -635,6 +636,7 @@ public class EnglishStrings
 "field:notifyUserAlreadyExistscause=The user name you chose already exists on this system, please choose a different user name.",
 "field:notifyRecoveryProcessBackupFilecause=To recover your keypair file, first you must find the backup file you saved previously, it should be called MartusKeyPair.dat.bak.  Note Martus automatically saves a backup file in your account directory, so even if you forgot to save your own backup file all is not lost.  Using the file open dialog box find the file on your computer's hard drive or on a floppy disk then click on open.  Martus will then ask you for your user name and password and restore your account so you can log in normally.",
 "field:notifyRecoveryOfKeyPairCompletecause=Recovery of your keypair file is complete, you will now be logged into Martus.",
+"field:notifyErrorRecoveringAccountDirectory=Error during keypair recovery. This keypair backup copy may be damaged.",
 	
 "field:messageServerNewscause=The current server has sent this message:",
 "field:messageErrorDateInFuturecause=This date occures in the future:",

@@ -42,6 +42,7 @@ import org.martus.common.crypto.MartusCrypto.KeyShareException;
 import org.martus.swing.UiFileChooser;
 import org.martus.util.UnicodeReader;
 import org.martus.util.UnicodeWriter;
+import org.martus.util.Base64.InvalidBase64Exception;
 
 public class UiBackupRecoverSharedKeyPair 
 {
@@ -214,7 +215,17 @@ public class UiBackupRecoverSharedKeyPair
 		{
 			MartusApp app = mainWindow.getApp();
 			String accountId = app.getAccountId();
-			File accountDirectory = app.getAccountDirectory(accountId);
+			File accountDirectory;
+			try
+			{
+				accountDirectory = app.getAccountDirectory(accountId);
+			}
+			catch (InvalidBase64Exception e)
+			{
+				e.printStackTrace();
+				mainWindow.notifyDlg(mainWindow, "ErrorRecoveringAccountDirectory");
+				return false;
+			}
 			File keyPairFile = app.getKeyPairFile(accountDirectory);
 			if(keyPairFile.exists())
 			{

@@ -34,6 +34,7 @@ import javax.swing.JFileChooser;
 import org.martus.client.core.MartusApp;
 import org.martus.client.swingui.dialogs.UiSigninDlg;
 import org.martus.swing.UiFileChooser;
+import org.martus.util.Base64.InvalidBase64Exception;
 
 
 public class UiRecoverKeyPairFromBackup
@@ -137,7 +138,17 @@ public class UiRecoverKeyPairFromBackup
 	private boolean saveKeyPairToAccount()
 	{
 		String accountId = app.getAccountId();
-		File accountDirectory = app.getAccountDirectory(accountId);
+		File accountDirectory;
+		try
+		{
+			accountDirectory = app.getAccountDirectory(accountId);
+		}
+		catch (InvalidBase64Exception e)
+		{
+			e.printStackTrace();
+			mainWindow.notifyDlg(mainWindow, "ErrorRecoveringAccountDirectory");
+			return false;
+		}
 		File keyPairFile = app.getKeyPairFile(accountDirectory);
 		if(keyPairFile.exists())
 		{

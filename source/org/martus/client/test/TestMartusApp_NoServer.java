@@ -805,28 +805,23 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		
 		File accountsDir = app.getAccountsDirectory();
 		accountsDir.deleteOnExit();
-		String hexHash = MartusCrypto.getHexDigest("hello");
-		File newAccountDir = new File(accountsDir, hexHash);
+		String directoryName1 = "1111.1111.1111.1111.1111";
+		File newAccountDir = new File(accountsDir, directoryName1);
 		newAccountDir.deleteOnExit();
 		newAccountDir.mkdirs();
 		
-		String hexHash3 = MartusCrypto.getHexDigest("hello3");
-		File thirdAccountDir = new File(accountsDir, hexHash3);
+		String directoryName3 = "3333.3333.3333.3333.3333";
+		File thirdAccountDir = new File(accountsDir, directoryName3);
 		thirdAccountDir.deleteOnExit();
 		thirdAccountDir.mkdirs();
 		
-		File nonAccountDir = new File(accountsDir, "notAhexHash");
+		File nonAccountDir = new File(accountsDir, "notAPublicCodeBut24long!");
 		nonAccountDir.deleteOnExit();
 		nonAccountDir.mkdirs();
 
-		File wrongAccountLengthDir = new File(accountsDir, "A03FF");
+		File wrongAccountLengthDir = new File(accountsDir, "4444.4444");
 		wrongAccountLengthDir.deleteOnExit();
 		wrongAccountLengthDir.mkdirs();
-		
-		String negativeHash = '-' + hexHash3.substring(1); 
-		File negativeAccountDir = new File(accountsDir, negativeHash);
-		negativeAccountDir.deleteOnExit();
-		negativeAccountDir.mkdirs();
 		
 		File notADirectory = File.createTempFile("justAFile", ".test", accountsDir);
 		
@@ -835,7 +830,6 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		assertContains("no newAccountDir dir?", newAccountDir, app.getAllAccountDirectories());
 		assertContains("no thirdAccountDir dir?", thirdAccountDir, app.getAllAccountDirectories());
 		
-		negativeAccountDir.delete();
 		wrongAccountLengthDir.delete();
 		notADirectory.delete();
 		nonAccountDir.delete();
@@ -859,7 +853,7 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		File accountDirectory = app.getAccountDirectory(dummyAccountId1);
 		assertEquals("No account directory yet and root is empty, so why isn't root directory used for this accounts directory", rootDir.getPath(), accountDirectory.getPath() );
 		
-		String digest1 = MartusCrypto.getHexDigest(dummyAccountId1);
+		String digest1 = MartusCrypto.getFormattedPublicCode(dummyAccountId1);
 		File account1Directory = new File(accountsDir, digest1);
 		account1Directory.deleteOnExit();
 		account1Directory.mkdirs();
@@ -872,7 +866,7 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		out.write(0);
 		out.close();
 		String dummyAccountId2 = "hellothere";
-		String digest2 = MartusCrypto.getHexDigest(dummyAccountId2);
+		String digest2 = MartusCrypto.getFormattedPublicCode(dummyAccountId2);
 		File account2Directory = new File(accountsDir, digest2);
 		accountDirectory = app.getAccountDirectory(dummyAccountId2);
 		assertEquals("Root directory already has an account whey didn't we return account2's directory?", account2Directory.getPath(), accountDirectory.getPath() );
@@ -895,8 +889,8 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		
 		File accountsDir = app.getAccountsDirectory();
 		accountsDir.deleteOnExit();
-		String hexHash = MartusCrypto.getHexDigest("hello");
-		File newAccountDir = new File(accountsDir, hexHash);
+		String accountDirectoryName = "1234.5678.9012.3456.7890";
+		File newAccountDir = new File(accountsDir, accountDirectoryName);
 		newAccountDir.deleteOnExit();
 		newAccountDir.mkdirs();
 		File keyPairFile = new File(newAccountDir,MartusApp.KEYPAIR_FILENAME);

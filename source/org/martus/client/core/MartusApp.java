@@ -35,7 +35,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.math.BigInteger;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.Set;
@@ -77,6 +76,7 @@ import org.martus.util.InputStreamWithSeek;
 import org.martus.util.ScrubFile;
 import org.martus.util.UnicodeReader;
 import org.martus.util.UnicodeWriter;
+import org.martus.util.Base64.InvalidBase64Exception;
 
 
 public class MartusApp
@@ -1080,7 +1080,7 @@ public class MartusApp
 			tempAccountDir.delete();
 			tempAccountDir.mkdirs();
 			createAccountInternal(tempAccountDir, userName, userPassPhrase);
-			String realAccountDirName = MartusCrypto.getHexDigest(getAccountId());
+			String realAccountDirName = getAccountDirectoryName(getAccountId());
 			File realAccountDir = new File(accountsDirectory, realAccountDirName);
 
 			if(tempAccountDir.renameTo(realAccountDir))
@@ -1134,15 +1134,14 @@ public class MartusApp
 					continue;
 				}
 				String name = thisFile.getName();
-				if(name.length() != 40)
+				if(name.length() != 24)
 				{	
 					continue;
 				}
-				if(name.startsWith("-"))
+				if(MartusCrypto.removeNonDigits(name).length() != 20)
 				{	
 					continue;
 				}
-				new BigInteger(name, 16);
 				accountDirectories.add(thisFile);
 			}
 			catch (Exception notAValidAccountDirectory)
@@ -1152,17 +1151,22 @@ public class MartusApp
 		return accountDirectories;
 	}
 	
-	public File getAccountDirectory(String accountId)
+	public File getAccountDirectory(String accountId) throws InvalidBase64Exception
 	{
-		String digestOfAccountsPublicCode =
-			MartusCrypto.getHexDigest(accountId);
-		File accountDir = new File(getAccountsDirectory(), digestOfAccountsPublicCode);
+		String name = getAccountDirectoryName(accountId);
+		File accountDir = new File(getAccountsDirectory(), name);
 		if(accountDir.exists() && accountDir.isDirectory())
 			return accountDir;
 		if(!getKeyPairFile(getMartusDataRootDirectory()).exists())
 			return getMartusDataRootDirectory();
 		accountDir.mkdirs();
 		return accountDir;
+	}
+
+	private String getAccountDirectoryName(String accountId)
+		throws InvalidBase64Exception
+	{
+		return MartusCrypto.getFormattedPublicCode(accountId);
 	}
 
 	public boolean doesAnyAccountExist()
