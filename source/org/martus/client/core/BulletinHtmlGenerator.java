@@ -62,6 +62,12 @@ public class BulletinHtmlGenerator
 		html.append(Integer.toString(width));
 		html.append("'>");
 		
+		if (!includePrivateData && b.isAllPrivate())
+		{
+			appendTailHtmlNoData(html);
+			return html.toString();			
+		}	
+		
 		if(!yourBulletin)
 		{
 			html.append("<tr></tr>");
@@ -115,6 +121,15 @@ public class BulletinHtmlGenerator
 		html.append(title);
 		html.append("</b></u></td></tr>");
 		html.append("\n");
+	}
+	
+	private void appendTailHtmlNoData(StringBuffer html)
+	{
+		html.append("<tr></tr>");
+		String nothingToPrintMsg = localization.getFieldLabel("NoDataInPrintOutMessage");
+		html.append(nothingToPrintMsg);
+		html.append("</table>");
+		html.append("</html>");
 	}
 	
 	private void appendTailHtml(StringBuffer html, Bulletin b )

@@ -170,6 +170,7 @@ public class EnglishStrings
 "wintitle:notifyResendError=Error Sending Bulletin",
 
 "wintitle:notifyErrorRenameFolder=Unable to Rename Folder",
+"wintitle:notifyPrintAllPrivateData=Print All Private Data",
 
 "wintitle:inputservername=Server Name",
 "wintitle:inputserverpubliccode=Server Identification",
@@ -689,6 +690,9 @@ public class EnglishStrings
 "field:notifyModifyViewBulletinDetailscause=Bulletin ID:        #I#\nAuthor Public Code: #A#\n\n#H#",
 "field:notifyResendErrorNotAuthorizedToSendcause=One or more bulletins were unable to be resent because you are not authorized to upload them.",
 "field:notifyResendErrorcause=One or more bulletins were unable to be resent due to an unexpected error.",
+
+"field:notifyPrintAllPrivateDatacause=This bulletin will not be printed because all the information is private.  If you wish to print the private data, please mark the \"Include private data in print out\" checkbox.",
+"field:NoDataInPrintOutMessage=This bulletin will not be printed because all the information is private.",
 
 "field:notifyErrorRenameFoldercause=Folder names cannot contain punctuation.  They also cannot begin with a space.",
 

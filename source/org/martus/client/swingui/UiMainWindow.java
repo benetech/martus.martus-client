@@ -1058,7 +1058,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		Bulletin currentBulletin = table.getSingleSelectedBulletin();
 		if(currentBulletin == null)
 			return;
-		
+				
 		printBulletin(currentBulletin);
 		requestFocus(true);
 	}
@@ -1066,11 +1066,13 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	void printBulletin(Bulletin currentBulletin)
 	{
 		int width = preview.getView().getWidth();
+		if (currentBulletin.isAllPrivate())	
+			notifyDlg("PrintAllPrivateData");
+	
 		UiPrintBulletinDlg dlg = new UiPrintBulletinDlg(this);
 		dlg.show();
 		if (!dlg.isContinueButtonPressed())
-			return;			
-		
+			return;					
 		
 		boolean yourBulletin = currentBulletin.getAccount().equals(getApp().getAccountId());	
 		BulletinHtmlGenerator generator = new BulletinHtmlGenerator(width, getLocalization() );
@@ -1083,7 +1085,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		frame.getContentPane().add(scroller);
 		frame.pack();
 		//If you want to see what is being printed uncomment out this next line
-		//frame.show();
+		frame.show();
 		PrintPageFormat format = new PrintPageFormat();
 		JComponentVista vista = new JComponentVista(view, format);
 		PrinterJob job = PrinterJob.getPrinterJob();
@@ -1709,7 +1711,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		statusBar = new UiStatusBar(getLocalization());	
 		UiProgressMeter r = statusBar.getBackgroundProgressMeter();		
 		r.hideProgressMeter();
-		getContentPane().add(statusBar, BorderLayout.SOUTH );
+		getContentPane().add(statusBar, BorderLayout.SOUTH ); 
 
 		Toolkit toolkit = Toolkit.getDefaultToolkit();
 		Dimension screenSize = toolkit.getScreenSize();
