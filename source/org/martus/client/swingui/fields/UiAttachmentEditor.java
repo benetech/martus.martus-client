@@ -40,7 +40,6 @@ import java.util.List;
 import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.JComponent;
-import javax.swing.JTable;
 import org.martus.client.swingui.UiFocusListener;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.UiScrollPane;
@@ -188,7 +187,7 @@ public class UiAttachmentEditor extends UiParagraphPanel
 	class EditorAttachmentTableModel extends AttachmentTableModel
 	{
 
-		public EditorAttachmentTableModel(UiMainWindow window, JTable table)
+		public EditorAttachmentTableModel(UiMainWindow window, UiTable table)
 		{
 			super(window, table);
 		}

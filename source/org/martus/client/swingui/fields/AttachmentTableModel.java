@@ -27,7 +27,6 @@ package org.martus.client.swingui.fields;
 
 import java.util.Vector;
 
-import javax.swing.JTable;
 import javax.swing.table.AbstractTableModel;
 
 import org.martus.client.swingui.UiLocalization;
@@ -36,11 +35,12 @@ import org.martus.common.bulletin.AttachmentProxy;
 import org.martus.common.database.DatabaseKey;
 import org.martus.common.database.ReadableDatabase;
 import org.martus.common.packet.UniversalId;
+import org.martus.swing.UiTable;
 
 
 class AttachmentTableModel extends AbstractTableModel
 {
-	public AttachmentTableModel(UiMainWindow window, JTable table)
+	public AttachmentTableModel(UiMainWindow window, UiTable table)
 	{
 		attachmentList = new Vector();
 		mainWindow = window;
@@ -171,5 +171,5 @@ class AttachmentTableModel extends AbstractTableModel
 
 	Vector attachmentList;
 	UiMainWindow mainWindow;
-	JTable attachmentTable;
+	UiTable attachmentTable;
 }

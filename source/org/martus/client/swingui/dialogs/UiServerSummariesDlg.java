@@ -42,7 +42,6 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableCellRenderer;
@@ -182,7 +181,7 @@ public abstract class UiServerSummariesDlg extends JDialog
 		return true;
 	}
 	
-	class RetrieveJTable extends JTable
+	class RetrieveJTable extends UiTable
 	{
 		public RetrieveJTable(TableModel model)
 		{
@@ -201,7 +200,7 @@ public abstract class UiServerSummariesDlg extends JDialog
 	class BooleanRenderer extends DefaultTableCellRenderer
 	{
 		public Component getTableCellRendererComponent(
-				JTable tableToUse, Object value,
+				UiTable tableToUse, Object value,
 				boolean isSelected, boolean hasFocus,
 				int row, int column)
 		{
@@ -228,7 +227,7 @@ public abstract class UiServerSummariesDlg extends JDialog
 	class IntegerRenderer extends DefaultTableCellRenderer
 	{
 		public Component getTableCellRendererComponent(
-				JTable tableToUse, Object value,
+				UiTable tableToUse, Object value,
 				boolean isSelected, boolean hasFocus,
 				int row, int column)
 		{
@@ -255,7 +254,7 @@ public abstract class UiServerSummariesDlg extends JDialog
 	class StringRenderer extends DefaultTableCellRenderer
 	{
 		public Component getTableCellRendererComponent(
-				JTable tableToUse, Object value,
+				UiTable tableToUse, Object value,
 				boolean isSelected, boolean hasFocus,
 				int row, int column)
 		{

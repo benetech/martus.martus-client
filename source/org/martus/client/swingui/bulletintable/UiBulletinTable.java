@@ -47,7 +47,6 @@ import java.io.IOException;
 import java.util.Vector;
 
 import javax.swing.JPopupMenu;
-import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -73,7 +72,7 @@ import org.martus.swing.UiNotifyDlg;
 import org.martus.swing.UiTable;
 
 
-public class UiBulletinTable extends JTable implements ListSelectionListener, DragGestureListener, DragSourceListener
+public class UiBulletinTable extends UiTable implements ListSelectionListener, DragGestureListener, DragSourceListener
 {
     public UiBulletinTable(UiMainWindow mainWindowToUse)
 	{
