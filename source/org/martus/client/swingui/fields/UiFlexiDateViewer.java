@@ -53,6 +53,12 @@ public class UiFlexiDateViewer extends UiField
 
 	public void setText(String newText)
 	{
+		String display = getViewableDateRange(newText, localization);
+		label.setText(SPACE + display + SPACE);
+	}	
+
+	static public String getViewableDateRange(String newText, UiLocalization localization)
+	{
 		MartusFlexidate mfd = MartusFlexidate.createFromMartusDateString(newText);
 		
 		String rawBeginDate = MartusFlexidate.toStoredDateFormat(mfd.getBeginDate());
@@ -69,9 +75,8 @@ public class UiFlexiDateViewer extends UiField
 				SPACE + endDate;		
 		else
 			display = beginDate;
-				
-		label.setText(SPACE + display + SPACE);
-	}	
+		return display;
+	}
 
 	public void disableEdits()
 	{
