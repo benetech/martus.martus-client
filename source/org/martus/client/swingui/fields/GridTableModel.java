@@ -32,17 +32,26 @@ import org.martus.common.GridData;
 
 public class GridTableModel extends DefaultTableModel
 {
-	public GridTableModel(int rowCount, int columnCount)
+	public GridTableModel(int columnCount)
 	{
-		super(rowCount, columnCount);
+		super(0, columnCount);
 		gridData = new GridData(columnCount);
 	}
 	
 	public void addEmptyRow()
 	{
 		gridData.addEmptyRow();
+		int newRowIndex = getRowCount()-1;
+		this.fireTableRowsInserted(newRowIndex, newRowIndex);
 	}
 	
+	public int getRowCount()
+	{
+		if(gridData == null)
+			return 0;
+		return gridData.getRowCount();
+	}
+
 	public Object getValueAt(int row, int column)
 	{
 		return gridData.getValueAt(row, column);
@@ -50,8 +59,8 @@ public class GridTableModel extends DefaultTableModel
 
 	public void setValueAt(Object aValue, int row, int column)
 	{
-		super.setValueAt(aValue, row, column);
 		gridData.setValueAt((String)aValue, row, column);
+		fireTableCellUpdated(row,column);
 	}
 	
 	public String getXmlRepresentation()

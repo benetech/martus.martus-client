@@ -25,16 +25,37 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.fields;
 
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+
 import javax.swing.JScrollPane;
 
 public class UiGridEditor extends UiGrid
 {
 	public UiGridEditor()
 	{
-		super(1,3);
+		super(3);
 		model.addEmptyRow();
 		table.resizeTable(5);
+		table.addKeyListener(new GridKeyListener());
 		widget.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		widget.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+	}
+	
+	class GridKeyListener implements KeyListener
+	{
+		public void keyPressed(KeyEvent e)
+		{
+		}
+
+		public void keyReleased(KeyEvent e)
+		{
+		}
+
+		public void keyTyped(KeyEvent e)
+		{
+			if(e.getKeyChar()==KeyEvent.VK_ENTER)
+				model.addEmptyRow();
+		}
 	}
 }

@@ -34,10 +34,10 @@ import org.martus.swing.UiTable;
 public class UiGrid extends UiField
 {
 
-	public UiGrid(int rows, int columns)
+	public UiGrid(int columns)
 	{
 		super();
-		model = new GridTableModel(rows, columns);
+		model = new GridTableModel(columns);
 		table = new UiTable(model);
 		table.setColumnSelectionAllowed(false);
 		table.setShowGrid(true);

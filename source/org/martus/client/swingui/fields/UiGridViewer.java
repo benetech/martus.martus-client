@@ -31,7 +31,7 @@ public class UiGridViewer extends UiGrid
 {
 	public UiGridViewer()
 	{
-		super(1,3);
+		super(3);
 		model.addEmptyRow();
 		table.resizeTable();
 		table.setEnabled(false);
