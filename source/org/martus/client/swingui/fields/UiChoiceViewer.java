@@ -26,6 +26,7 @@ Boston, MA 02111-1307, USA.
 
 package org.martus.client.swingui.fields;
 
+import java.util.Vector;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
 
@@ -35,6 +36,22 @@ import org.martus.swing.UiLabel;
 public class UiChoiceViewer extends UiField
 {
 	public UiChoiceViewer(ChoiceItem[] choicesToUse)
+	{
+		initalize(choicesToUse);
+	}
+
+	public UiChoiceViewer(Vector choicesToUse)
+	{
+		ChoiceItem[] choicesArray = new ChoiceItem[choicesToUse.size()];
+		for(int i = 0; i < choicesArray.length; i++)
+		{
+			String item = (String)choicesToUse.get(i);
+			choicesArray[i] = new ChoiceItem(item,item);
+		}
+		initalize(choicesArray);
+	}
+
+	private void initalize(ChoiceItem[] choicesToUse)
 	{
 		choices = choicesToUse;
 		widget = new UiLabel();

@@ -27,6 +27,7 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.swingui.bulletincomponent;
 
 import java.io.File;
+import java.util.Vector;
 import javax.swing.JComponent;
 import org.martus.client.swingui.UiLocalization;
 import org.martus.client.swingui.UiMainWindow;
@@ -69,6 +70,11 @@ public class UiBulletinComponentEditorSection extends UiBulletinComponentDataSec
 	}
 
 	public UiField createChoiceField(ChoiceItem[] choices)
+	{
+		return new UiChoiceEditor(choices);
+	}
+
+	public UiField createChoiceField(Vector choices)
 	{
 		return new UiChoiceEditor(choices);
 	}

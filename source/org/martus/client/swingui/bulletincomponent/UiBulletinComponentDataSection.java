@@ -27,6 +27,7 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.swingui.bulletincomponent;
 
 import java.awt.Color;
+import java.util.Vector;
 
 import javax.swing.JComponent;
 import javax.swing.JLabel;
@@ -39,6 +40,7 @@ import org.martus.client.swingui.fields.UiDateViewer;
 import org.martus.client.swingui.fields.UiField;
 import org.martus.client.swingui.fields.UiFlexiDateEditor;
 import org.martus.client.swingui.fields.UiField.DataInvalidException;
+import org.martus.common.DropDownFieldSpec;
 import org.martus.common.FieldSpec;
 import org.martus.common.GridFieldSpec;
 import org.martus.common.StandardFieldSpecs;
@@ -142,7 +144,11 @@ abstract public class UiBulletinComponentDataSection extends UiBulletinComponent
 					getLocalization().getLanguageNameChoices();
 				field = createChoiceField(languages);
 				field.setLanguageListener(languageChangeListener);
-				break;					
+				break;
+			case FieldSpec.TYPE_DROPDOWN:
+				Vector stringChoices = ((DropDownFieldSpec)fieldSpec).getChoices();
+				field = createChoiceField(stringChoices);
+				break;
 			case FieldSpec.TYPE_NORMAL:
 				field = createNormalField();
 				break;
@@ -237,6 +243,7 @@ abstract public class UiBulletinComponentDataSection extends UiBulletinComponent
 	abstract public UiField createNormalField();
 	abstract public UiField createMultilineField();
 	abstract public UiField createChoiceField(ChoiceItem[] choices);
+	abstract public UiField createChoiceField(Vector choices);
 	abstract public UiField createDateField(FieldSpec spec);
 	abstract public UiField createFlexiDateField(FieldSpec spec);
 	abstract public UiField createUnknownField();

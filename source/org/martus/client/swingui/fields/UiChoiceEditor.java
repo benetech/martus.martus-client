@@ -28,6 +28,7 @@ package org.martus.client.swingui.fields;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Vector;
 
 import javax.swing.JComponent;
 
@@ -39,6 +40,24 @@ public class UiChoiceEditor extends UiField implements ActionListener
 {
 	
 	public UiChoiceEditor(ChoiceItem[] choicesToUse)
+	{
+		initalize(choicesToUse);
+	}
+	
+	public UiChoiceEditor(Vector choicesToUse)
+	{
+		ChoiceItem[] choicesArray = new ChoiceItem[choicesToUse.size()+1];
+		String emptyFirstItem = " ";
+		choicesArray[0] = new ChoiceItem(emptyFirstItem,emptyFirstItem);
+		for(int i = 0; i < choicesToUse.size(); i++)
+		{
+			String item = (String)choicesToUse.get(i);
+			choicesArray[i+1] = new ChoiceItem(item,item);
+		}
+		initalize(choicesArray);
+	}
+
+	private void initalize(ChoiceItem[] choicesToUse)
 	{
 		choices = choicesToUse;
 		widget = new UiComboBox(choices);
