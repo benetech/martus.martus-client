@@ -27,6 +27,7 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.test;
 
 import java.io.File;
+import java.io.IOException;
 
 import org.martus.client.core.BulletinStore;
 import org.martus.common.crypto.MartusCrypto;
@@ -57,4 +58,10 @@ public class MockBulletinStore extends BulletinStore
 		doAfterSigninInitialization(dir, db);
 	}
 	
+	public void deleteAllData() throws Exception
+	{
+		super.deleteAllData();
+		if(getFoldersFile().exists())
+			throw new IOException("Didn't delete folders.dat!");
+	}
 }

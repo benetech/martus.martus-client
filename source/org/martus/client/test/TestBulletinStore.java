@@ -626,6 +626,7 @@ public class TestBulletinStore extends TestCaseEnhanced
 		xml = "<FolderList><Folder name='%Sent'></Folder><Folder name='new two'></Folder></FolderList>";
 		tempStore.internalLoadFolders(xml);
 		assertFalse("Not Legacy folder didn't return false on load", tempStore.needsLegacyFolderConversion());
+		tempStore.deleteAllData();
 	}
 
 	/* missing tests:
@@ -664,7 +665,7 @@ public class TestBulletinStore extends TestCaseEnhanced
 		assertEquals("id", b.getLocalId(), b2.getLocalId());
 		assertEquals("author", b.get(Bulletin.TAGAUTHOR), b2.get(Bulletin.TAGAUTHOR));
 		assertEquals("wrong security?", store.getSignatureGenerator(), b2.getSignatureGenerator());
-
+		newStoreSameDatabase.deleteAllData();
 	}
 
 	public void testDatabaseFolders() throws Exception
@@ -691,6 +692,7 @@ public class TestBulletinStore extends TestCaseEnhanced
 		assertNotNull("folder", f2);
 		assertEquals("bulletins in folder", 1, f2.getBulletinCount());
 		assertEquals("contains", true, f2.contains(b));
+		store.deleteAllData();
 	}
 
 	public void testLoadAllDataWithErrors() throws Exception
@@ -961,6 +963,7 @@ public class TestBulletinStore extends TestCaseEnhanced
 
 		Bulletin imported = folder.getBulletinSorted(0);
 		assertEquals("changed uid?", original.getUniversalId(), imported.getUniversalId());
+		importer.deleteAllData();
 	}
 
 	public void testImportZipFileFieldOffice() throws Exception
@@ -980,6 +983,7 @@ public class TestBulletinStore extends TestCaseEnhanced
 
 		Bulletin imported = folder.getBulletinSorted(0);
 		assertEquals("changed uid?", original.getUniversalId(), imported.getUniversalId());
+		hqStore.deleteAllData();
 	}
 
 	public void testImportDraftZipFile() throws Exception
