@@ -826,7 +826,12 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 
 	public void messageDlg(JFrame parent, String baseTag, String message)
 	{
-		UiUtilities.messageDlg(getLocalization(), parent, baseTag, message);
+		messageDlg(parent, baseTag, message, new HashMap());
+	}
+
+	public void messageDlg(JFrame parent, String baseTag, String message, Map tokenReplacement)
+	{
+		UiUtilities.messageDlg(getLocalization(), parent, baseTag, message, tokenReplacement);
 	}
 
 	private void initializationErrorExitMartusDlg(String message)

@@ -218,7 +218,7 @@ public class EnglishStrings
 "wintitle:BulletinPreview=Bulletin Preview",
 "wintitle:DeleteBulletinFile=Delete Bulletin File",
 "wintitle:ImportHQPublicKey=Import Headquarters Public Account Id File",
-"wintitle:ServerNews=Server News",
+"wintitle:ServerNews=Server News: Message #CurrentNewsItem# of #MaxNewsItems#",
 "wintitle:LoadDefaultDetails=Load Default Details Field Content",
 "wintitle:ExportBulletins=Export Bulletins",
 "wintitle:ExportBulletinsSaveAs=Export Bulletins",

@@ -27,8 +27,8 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.swingui;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.TimerTask;
 import java.util.Vector;
 import javax.swing.SwingUtilities;
@@ -300,13 +300,19 @@ class BackgroundUploadTimerTask extends TimerTask
 		if(alreadyGotNews)
 			return;
 		Vector newsItems = getApp().getNewsFromServer();
-		if (newsItems.size() > 0)
+		int newsSize = newsItems.size();
+		if (newsSize > 0)
 			mainWindow.setStatusMessageTag("StatusReady");
 			
-		for (Iterator iter = newsItems.iterator(); iter.hasNext();)
+		
+		for (int i = 0; i < newsSize; ++i)
 		{
-			String newsItem = (String) iter.next();
-			ThreadedMessageDlg newsDlg = new ThreadedMessageDlg("ServerNews", newsItem);
+			HashMap tokenReplacement = new HashMap();
+			tokenReplacement.put("#CurrentNewsItem#", Integer.toString(i+1));
+			tokenReplacement.put("#MaxNewsItems#", Integer.toString(newsSize));
+
+			String newsItem = (String) newsItems.get(i);
+			ThreadedMessageDlg newsDlg = new ThreadedMessageDlg("ServerNews", newsItem, tokenReplacement);
 			try
 			{
 				SwingUtilities.invokeAndWait(newsDlg);
@@ -363,18 +369,20 @@ class BackgroundUploadTimerTask extends TimerTask
 		
 	class ThreadedMessageDlg implements Runnable
 	{
-		public ThreadedMessageDlg(String tag, String message)
+		public ThreadedMessageDlg(String tag, String message, HashMap tokenReplacementToUse )
 		{
 			titleTag = tag;
 			messageContents = message;
+			tokenReplacement = tokenReplacementToUse;
 		}
 
 		public void run()
 		{
-			mainWindow.messageDlg(mainWindow, titleTag, messageContents);
+			mainWindow.messageDlg(mainWindow, titleTag, messageContents, tokenReplacement);
 		}
 		String titleTag;
 		String messageContents;
+		HashMap tokenReplacement;
 	}
 		
 	MartusApp getApp()
