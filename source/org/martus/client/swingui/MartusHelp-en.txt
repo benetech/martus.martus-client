@@ -951,12 +951,3 @@ Yes, you can share private data using a Headquarters account. Any account can se
 20. Can I get the Martus User Guide in a different language? 
 Yes. In fact, you probably already have multiple versions on your computer. When you install Martus, all the language versions of the user guide that are currently available are installed in your Martus\Docs directory.  They are also available at http://www.martus.org/downloads, and you can visit this site to see whether new language versions are available.
 
-
-
-
-
-
-
-
-Martus 2.0.1 User Guide		40
-

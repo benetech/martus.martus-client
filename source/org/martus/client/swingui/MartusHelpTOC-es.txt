@@ -3,7 +3,7 @@
 1b. ¿Porque es importante la seguridad cuando uso Martus?
 1c. ¿Como mantiene Martus mi información segura?
 1d. ¿Que tengo que hacer para mantener mi información segura?
-1e. ¿ Cuáles son las limitaciones de la seguridad de Martus?
+1e. ¿Cuáles son las limitaciones de la seguridad de Martus?
 1f. ¿Porque tengo que enviar mis boletines a un servidor?
 1g. ¿Porque desarrollamos Martus como un programa de código libre?
 2. Inicio
@@ -23,7 +23,7 @@
 5b. Como guardar un borrador
 5c. Como modificar una copia de un boletín sellado
 5d. Como modificar un borrador
-5e. Como desechar un borador
+5e. Como desechar un borrador
 6. Trabajando con sus boletines
 6a. Carpetas por defecto
 6b. Otras carpetas creadas por Martus
@@ -41,7 +41,7 @@
 6n. Como exportar la información de sus boletines
 7. Eliminar sus boletines y la información de su cuenta
 8. Eliminar toda la información en Martus, incluyendo el programa
-9. Para manter su información segura
+9. Para mantener su información segura
 9a. La seguridad de Martus y como trabaja
 9b. Como hacer una copia de seguridad de su clave
 9c. Como recuperar su clave de una copia de seguridad
