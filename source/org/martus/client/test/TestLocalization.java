@@ -29,10 +29,7 @@ package org.martus.client.test;
 import java.awt.ComponentOrientation;
 import java.io.File;
 import java.util.Vector;
-
 import javax.swing.SwingConstants;
-
-import org.martus.client.core.MartusApp;
 import org.martus.client.swingui.EnglishStrings;
 import org.martus.client.swingui.UiConstants;
 import org.martus.client.swingui.UiLocalization;
@@ -42,6 +39,7 @@ import org.martus.common.clientside.DateUtilities;
 import org.martus.common.clientside.Localization;
 import org.martus.common.clientside.UiBasicLocalization;
 import org.martus.swing.UiLanguageDirection;
+import org.martus.util.DirectoryUtils;
 import org.martus.util.StringInputStream;
 import org.martus.util.TestCaseEnhanced;
 import org.martus.util.UnicodeStringWriter;
@@ -58,9 +56,16 @@ public class TestLocalization extends TestCaseEnhanced
 	public void setUp() throws Exception
 	{
 		super.setUp();
-		bd = new UiLocalization(MartusApp.getTranslationsDirectory(), EnglishStrings.strings);
+		translationDirectory = createTempDirectory();
+		bd = new UiLocalization(translationDirectory, EnglishStrings.strings);
  	}
 	
+	protected void tearDown() throws Exception
+	{
+		DirectoryUtils.deleteEntireDirectoryTree(translationDirectory);
+		assertFalse(translationDirectory.exists());
+		super.tearDown();
+	}
 	public void testNonAsciiEnglishTranslations() throws Exception
 	{
 		String[] strings = EnglishStrings.strings;
@@ -153,21 +158,43 @@ public class TestLocalization extends TestCaseEnhanced
 		//TODO add test for russian.
 	}
 	
-	
-	public void testLanguages()
+	public void testDefaultLanguages()
 	{
 		ChoiceItem[] languages = bd.getUiLanguages();
 		assertTrue("Should have multiple languages", languages.length > 1);
+		boolean foundEnglish = doesLanguageExist(Localization.ENGLISH);
+		assertTrue("must have english", foundEnglish);
+	}
+	
+	public void testAddedMTFLanguageFiles() throws Exception
+	{
+		String someTestLanguageCode = "zz";
+		boolean foundSomeTestLanguage = doesLanguageExist(someTestLanguageCode);
+		assertFalse("must not have testLanguage yet", foundSomeTestLanguage);
+		
+		File someTestLanguage = new File(translationDirectory,UiBasicLocalization.MARTUS_LANGUAGE_FILE_PREFIX + someTestLanguageCode + UiBasicLocalization.MARTUS_LANGUAGE_FILE_SUFFIX);
+		someTestLanguage.deleteOnExit();
+		UnicodeWriter out = new UnicodeWriter(someTestLanguage);
+		String fieldName = "test";
+		String germanTest = "german for test";
+		out.write("field:"+fieldName+"="+germanTest);
+		out.close();
+		
+		foundSomeTestLanguage = doesLanguageExist(someTestLanguageCode);
+		assertTrue("should now have testLanguage", foundSomeTestLanguage);
+	}
 
-		boolean foundEnglish = false;
+	private boolean doesLanguageExist(String languageCode)
+	{
+		ChoiceItem[] languages = bd.getUiLanguages();
+		boolean foundSomeTestLanguage = false;
 		for(int i = 0; i < languages.length; ++i)
 		{
 			String code = languages[i].getCode();
-			if(code.equals("en"))
-				foundEnglish = true;
+			if(code.equals(languageCode))
+				foundSomeTestLanguage = true;
 		}
-
-		assertTrue("must have english", foundEnglish);
+		return foundSomeTestLanguage;
 	}
 
 	public void testLanguageCodeFromFilename()
@@ -303,4 +330,5 @@ public class TestLocalization extends TestCaseEnhanced
 	}
 
 	static UiLocalization bd;
+	File translationDirectory;
 }
