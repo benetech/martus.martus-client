@@ -810,7 +810,7 @@ public class MartusApp
 
 	public boolean isNonSSLServerAvailable(String serverName)
 	{
-		if(!isServerConfigured())
+		if(serverName.length() == 0)
 			return false;
 
 		NetworkInterfaceForNonSSL server = new ClientSideNetworkHandlerUsingXmlRpcForNonSSL(serverName);
