@@ -168,7 +168,7 @@ public class TestLocalization extends TestCaseEnhanced
 	
 	public void testAddedMTFLanguageFile() throws Exception
 	{
-		translationDirectory = createTempDirectory();
+		File translationDirectory = createTempDirectory();
 		UiLocalization myLocalization = new UiLocalization(translationDirectory, EnglishStrings.strings);
 
 		String someTestLanguageCode = "zz";
