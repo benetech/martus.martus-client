@@ -222,7 +222,7 @@ public class UiAttachmentEditor extends JPanel
 		{
 			int[] rows = table.getSelectedRows();
 			if(rows.length == 0)
-				return;
+				rows = new int[]{0};
 			if(!mainWindow.confirmDlg(null,"RemoveAttachment"))
 				return;
 			for(int i = rows.length-1; i >= 0; --i)
