@@ -26,12 +26,14 @@ Boston, MA 02111-1307, USA.
 
 package org.martus.client.test;
 
+import java.io.File;
 import java.text.DateFormat;
 import java.util.Date;
 
 import org.martus.client.search.BulletinSearcher;
 import org.martus.client.search.SearchParser;
 import org.martus.client.search.SearchTreeNode;
+import org.martus.common.bulletin.AttachmentProxy;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.crypto.MartusCrypto;
 import org.martus.common.crypto.MockMartusSecurity;
@@ -56,6 +58,17 @@ public class TestBulletinSearcher extends TestCaseEnhanced
 		b.set("title", "Jos"+UnicodeConstants.ACCENT_E_LOWER+"e");
 		b.set(Bulletin.TAGEVENTDATE, "2002-04-04");
 		b.set(Bulletin.TAGENTRYDATE, "2002-10-15");
+		byte[] sampleBytes1 = {1,1,2,3,0,5,7,11};
+		byte[] sampleBytes2 = {3,1,4,0,1,5,9,2,7};
+		File tempFile1 = createTempFileWithData(sampleBytes1);
+		File tempFile2 = createTempFileWithData(sampleBytes2);
+		AttachmentProxy publicProxy = new AttachmentProxy(tempFile1);
+		String publicProxyLabel = "publicProxy.txt";
+		publicProxy.setLabel(publicProxyLabel);
+		AttachmentProxy privateProxy = new AttachmentProxy(tempFile2);
+
+		b.addPublicAttachment(publicProxy);
+		b.addPrivateAttachment(privateProxy);
 
 		String beginDate ="1900-01-01";
 		String endDate = "2099-12-31";
@@ -98,6 +111,12 @@ public class TestBulletinSearcher extends TestCaseEnhanced
 		assertEquals("right true or", true, orLeftFalse.doesMatch(b));
 		BulletinSearcher orBothTrue = new BulletinSearcher(parser.parse("hello or summary"), beginDate, endDate);
 		assertEquals("both true or", true, orBothTrue.doesMatch(b));
+
+		BulletinSearcher publicAttachmentWithAnyDate = new BulletinSearcher(new SearchTreeNode(publicProxyLabel.substring(0, publicProxyLabel.length()-4)), beginDate, endDate);
+		assertEquals("Public Attachment without .txt extension?", true, publicAttachmentWithAnyDate.doesMatch(b));
+
+		BulletinSearcher privateAttachmentWithAnyDate = new BulletinSearcher(new SearchTreeNode(privateProxy.getLabel().toUpperCase()), beginDate, endDate);
+		assertEquals("Private Attachment?", true, privateAttachmentWithAnyDate.doesMatch(b));
 	}
 
 	public void testDateMatches() throws Exception
