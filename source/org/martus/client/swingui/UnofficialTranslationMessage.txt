@@ -6,3 +6,8 @@ Si Ud. solamente desea traducciones oficiales, sálga de Martus, y quite #UseUno
 
 ПРЕДУПРЕЖДЕНИЕ:  Данный перевод создан не разработчиками Martus и может быть недостоверным.
 Если Вы хотите использовать только официальные переводы, выйдите из Martus, удалите из своего каталога Martus файл #UseUnofficialTranslationFiles# и запустите Martus заново.
+
+تحذير: لم يقم فريق Martus بهذه الترجمة و لذا فقد لا يُعتد بها.
+إذا أردت أن تستخدم ترجمات رسمية، قم بالخروج من Martus ثم قم بإزالة الملف #UseUnofficialTranslationFiles# من مجلد Martus ثم أعد تشغيل البرنامج من جديد.
+
+
