@@ -139,12 +139,11 @@ public class UiCustomFieldsDlg extends JDialog
 		public void actionPerformed(ActionEvent ae)
 		{
 			UiLocalization localization = mainWindow.getLocalization();
-			String title = localization.getWindowTitle("CreateCustomFieldsHelp");
 			String message = localization.getFieldLabel("CreateCustomFieldsHelp1");
 			message += localization.getFieldLabel("CreateCustomFieldsHelp2");
 			message += localization.getFieldLabel("CreateCustomFieldsHelp3");
 
-			new UiShowScrollableTextDlg(mainWindow, title, "ok", Localization.UNUSED_TAG, Localization.UNUSED_TAG, message);
+			new UiShowScrollableTextDlg(mainWindow, "CreateCustomFieldsHelp", "ok", Localization.UNUSED_TAG, Localization.UNUSED_TAG, message);
 		}
 	}
 

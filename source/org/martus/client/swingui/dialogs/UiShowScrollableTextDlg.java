@@ -83,6 +83,7 @@ public class UiShowScrollableTextDlg extends JDialog implements ActionListener
 			details.setEditable(false);
 			JScrollPane detailScrollPane = new JScrollPane(details, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
 					JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+			detailScrollPane.setPreferredSize(new Dimension(500,400));
 			JPanel panel = new JPanel();
 			panel.setBorder(new EmptyBorder(10,10,10,10));
 			panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
