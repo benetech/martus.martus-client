@@ -34,11 +34,11 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Vector;
+
 import javax.swing.Box;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JDialog;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
@@ -46,11 +46,13 @@ import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableModel;
+
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.tablemodels.RetrieveTableModel;
 import org.martus.common.clientside.UiBasicLocalization;
 import org.martus.common.packet.FieldDataPacket;
 import org.martus.swing.ParagraphLayout;
+import org.martus.swing.UiLabel;
 import org.martus.swing.UiRadioButton;
 import org.martus.swing.UiScrollPane;
 import org.martus.swing.UiTable;
@@ -132,11 +134,11 @@ public abstract class UiServerSummariesDlg extends JDialog
 
   		JPanel panel = new JPanel();
 		panel.setLayout(new ParagraphLayout());
-		panel.add(new JLabel(""), ParagraphLayout.NEW_PARAGRAPH);
+		panel.add(new UiLabel(""), ParagraphLayout.NEW_PARAGRAPH);
 		panel.add(createSummariesPanel(localization));
-		panel.add(new JLabel(""), ParagraphLayout.NEW_PARAGRAPH);
+		panel.add(new UiLabel(""), ParagraphLayout.NEW_PARAGRAPH);
 		Utilities.addComponentsRespectingOrientation(panel, new Component[]{checkAll, unCheckAll, preview});
-		panel.add(new JLabel(""), ParagraphLayout.NEW_PARAGRAPH);
+		panel.add(new UiLabel(""), ParagraphLayout.NEW_PARAGRAPH);
 		Utilities.addComponentsRespectingOrientation(panel, new Component[]{ok, cancel});
 
  		JPanel southPanel = new JPanel();

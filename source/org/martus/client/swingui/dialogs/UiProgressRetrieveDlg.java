@@ -34,11 +34,11 @@ import java.awt.event.WindowEvent;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
-import javax.swing.JLabel;
 
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.UiProgressMeter;
 import org.martus.common.clientside.UiBasicLocalization;
+import org.martus.swing.UiLabel;
 
 public class UiProgressRetrieveDlg extends JDialog
 {
@@ -54,8 +54,8 @@ public class UiProgressRetrieveDlg extends JDialog
 		bulletinCountMeter = new UiProgressMeter(this, localization);
 		bulletinCountMeter.setStatusMessage(tag);
 		updateBulletinCountMeter(0, 1);
-		getContentPane().add(new JLabel("    "), BorderLayout.EAST);
-		getContentPane().add(new JLabel("    "), BorderLayout.WEST);
+		getContentPane().add(new UiLabel("    "), BorderLayout.EAST);
+		getContentPane().add(new UiLabel("    "), BorderLayout.WEST);
 	}
 
 	class WindowEventHandler extends WindowAdapter

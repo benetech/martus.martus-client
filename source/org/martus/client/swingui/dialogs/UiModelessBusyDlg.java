@@ -29,9 +29,11 @@ package org.martus.client.swingui.dialogs;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Cursor;
+
 import javax.swing.JDialog;
-import javax.swing.JLabel;
 import javax.swing.border.LineBorder;
+
+import org.martus.swing.UiLabel;
 import org.martus.swing.Utilities;
 
 public class UiModelessBusyDlg extends JDialog
@@ -40,11 +42,11 @@ public class UiModelessBusyDlg extends JDialog
 	public UiModelessBusyDlg(String message)
 	{
 		super();
-		getContentPane().add(new JLabel(" "), BorderLayout.NORTH);
-		getContentPane().add(new JLabel(" "), BorderLayout.SOUTH);
-		getContentPane().add(new JLabel("     "), BorderLayout.EAST);
-		getContentPane().add(new JLabel("     "), BorderLayout.WEST);
-		getContentPane().add(new JLabel(message), BorderLayout.CENTER);
+		getContentPane().add(new UiLabel(" "), BorderLayout.NORTH);
+		getContentPane().add(new UiLabel(" "), BorderLayout.SOUTH);
+		getContentPane().add(new UiLabel("     "), BorderLayout.EAST);
+		getContentPane().add(new UiLabel("     "), BorderLayout.WEST);
+		getContentPane().add(new UiLabel(message), BorderLayout.CENTER);
 		getRootPane().setBorder(new LineBorder(Color.black, 5));
 		setUndecorated(true);
 		Utilities.centerDlg(this);

@@ -37,13 +37,13 @@ import java.io.IOException;
 import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.JDialog;
-import javax.swing.JLabel;
 import javax.swing.filechooser.FileFilter;
 
 import org.martus.client.core.ConfigInfo;
 import org.martus.client.core.MartusApp;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.common.clientside.UiBasicLocalization;
+import org.martus.swing.UiLabel;
 import org.martus.swing.UiNotifyDlg;
 import org.martus.swing.UiParagraphPanel;
 import org.martus.swing.UiScrollPane;
@@ -82,7 +82,7 @@ public class UiTemplateDlg extends JDialog implements ActionListener
 		
 		UiParagraphPanel panel = new UiParagraphPanel();
 		
-		panel.addComponents(new JLabel(localization.getFieldLabel("TemplateDetails")), detailScrollPane);
+		panel.addComponents(new UiLabel(localization.getFieldLabel("TemplateDetails")), detailScrollPane);
 
 		Box buttons = Box.createHorizontalBox();
 		Dimension preferredSize = details.getPreferredSize();

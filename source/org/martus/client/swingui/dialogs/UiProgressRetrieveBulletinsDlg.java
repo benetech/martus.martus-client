@@ -27,10 +27,10 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.swingui.dialogs;
 
 import javax.swing.Box;
-import javax.swing.JLabel;
 
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.UiProgressMeter;
+import org.martus.swing.UiLabel;
 import org.martus.swing.Utilities;
 
 public class UiProgressRetrieveBulletinsDlg extends UiProgressRetrieveDlg
@@ -43,12 +43,12 @@ public class UiProgressRetrieveBulletinsDlg extends UiProgressRetrieveDlg
 		chunkCountMeter.setStatusMessage("ChunkProgressStatusMessage");
 		chunkCountMeter.updateProgressMeter(0, 1);
 		Box vBox = Box.createVerticalBox();
-		vBox.add(new JLabel("    "));
+		vBox.add(new UiLabel("    "));
 		vBox.add(bulletinCountMeter);
 		vBox.add(chunkCountMeter);
-		vBox.add(new JLabel("    "));
+		vBox.add(new UiLabel("    "));
 		vBox.add(cancel);
-		vBox.add(new JLabel("    "));
+		vBox.add(new UiLabel("    "));
 		getContentPane().add(vBox);
 		Utilities.centerDlg(this);
 	}

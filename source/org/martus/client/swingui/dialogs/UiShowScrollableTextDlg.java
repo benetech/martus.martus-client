@@ -33,17 +33,19 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.HashMap;
 import java.util.Map;
+
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JDialog;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.common.clientside.Localization;
 import org.martus.common.clientside.UiBasicLocalization;
+import org.martus.swing.UiLabel;
 import org.martus.swing.UiScrollPane;
 import org.martus.swing.UiWrappedTextArea;
 import org.martus.swing.Utilities;
@@ -95,16 +97,16 @@ public class UiShowScrollableTextDlg extends JDialog implements ActionListener
 			{
 				String fieldLabel = localization.getFieldLabel(descriptionTag);
 				fieldLabel = TokenReplacement.replaceTokens(fieldLabel, tokenReplacement);
-				panel.add(new JLabel(" "));
+				panel.add(new UiLabel(" "));
 				panel.add(new UiWrappedTextArea(fieldLabel));
 			}
-			panel.add(new JLabel(" "));
+			panel.add(new UiLabel(" "));
 			panel.add(detailScrollPane);
-			panel.add(new JLabel(" "));
+			panel.add(new UiLabel(" "));
 			if(bottomPanel != null)
 			{
 				panel.add(bottomPanel);
-				panel.add(new JLabel(" "));
+				panel.add(new UiLabel(" "));
 			}
 			
 			Box buttons = Box.createHorizontalBox();

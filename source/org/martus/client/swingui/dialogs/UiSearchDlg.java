@@ -28,15 +28,17 @@ package org.martus.client.swingui.dialogs;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
 import javax.swing.JButton;
 import javax.swing.JDialog;
-import javax.swing.JLabel;
+
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.fields.UiDateEditor;
 import org.martus.common.FieldSpec;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.clientside.UiBasicLocalization;
 import org.martus.common.clientside.UiTextField;
+import org.martus.swing.UiLabel;
 import org.martus.swing.UiParagraphPanel;
 import org.martus.swing.UiWrappedTextArea;
 import org.martus.swing.Utilities;
@@ -60,19 +62,19 @@ public class UiSearchDlg extends JDialog  implements ActionListener
 
 		searchField = new UiTextField(40);
 		searchField.setText(searchString);
-		panel.addComponents(new JLabel(localization.getFieldLabel("SearchEntry")), searchField);
+		panel.addComponents(new UiLabel(localization.getFieldLabel("SearchEntry")), searchField);
 
 		startDateEditor = new UiDateEditor(localization, new FieldSpec(FieldSpec.TYPE_DATE));
 		if(startDate.length() == 0)
 			startDate = DEFAULT_SEARCH_START_DATE;
 		startDateEditor.setText(startDate);
-		panel.addComponents(new JLabel(localization.getFieldLabel("SearchStartDate")), startDateEditor.getComponent());
+		panel.addComponents(new UiLabel(localization.getFieldLabel("SearchStartDate")), startDateEditor.getComponent());
 
 		endDateEditor = new UiDateEditor(localization, new FieldSpec(FieldSpec.TYPE_DATE));
 		if(endDate.length() == 0)
 			endDate = Bulletin.getLastDayOfThisYear();
 		endDateEditor.setText(endDate);
-		panel.addComponents(new JLabel(localization.getFieldLabel("SearchEndDate")), endDateEditor.getComponent());
+		panel.addComponents(new UiLabel(localization.getFieldLabel("SearchEndDate")), endDateEditor.getComponent());
 
 		panel.addBlankLine();
 		panel.addComponents(search, cancel);

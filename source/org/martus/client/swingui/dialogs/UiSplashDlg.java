@@ -30,14 +30,17 @@ import java.awt.Container;
 import java.awt.Frame;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
 import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.border.EmptyBorder;
+
 import org.martus.client.swingui.UiConstants;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.common.clientside.UiBasicLocalization;
+import org.martus.swing.UiLabel;
 import org.martus.swing.Utilities;
 
 public class UiSplashDlg extends JDialog implements ActionListener
@@ -56,7 +59,7 @@ public class UiSplashDlg extends JDialog implements ActionListener
 				"<p align='center'>" + websiteInfo + "</p>" +
 				"</html>";
 		
-		JLabel body = new JLabel(fullVersionInfo);
+		JLabel body = new UiLabel(fullVersionInfo);
 		body.setBorder(new EmptyBorder(10, 10, 10, 10));
 		
 		Box hbox = Box.createHorizontalBox();

@@ -28,16 +28,18 @@ package org.martus.client.swingui.dialogs;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JDialog;
-import javax.swing.JLabel;
+
 import org.martus.client.swingui.UiLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.fields.UiChoiceEditor;
 import org.martus.common.clientside.UiBasicLocalization;
 import org.martus.common.utilities.DateUtilities;
 import org.martus.swing.UiCheckBox;
+import org.martus.swing.UiLabel;
 import org.martus.swing.UiParagraphPanel;
 import org.martus.swing.Utilities;
 
@@ -64,8 +66,8 @@ public class UiPreferencesDlg extends JDialog implements ActionListener
 		allPrivate.setSelected(owner.getBulletinsAlwaysPrivate());
 		
 		UiParagraphPanel preferences = new UiParagraphPanel();
-		preferences.addComponents(new JLabel(localization.getFieldLabel("language")), languageDropdown.getComponent());
-		preferences.addComponents(new JLabel(localization.getFieldLabel("dateformat")), dateFormatDropdown.getComponent());
+		preferences.addComponents(new UiLabel(localization.getFieldLabel("language")), languageDropdown.getComponent());
+		preferences.addComponents(new UiLabel(localization.getFieldLabel("dateformat")), dateFormatDropdown.getComponent());
 		
 		preferences.addBlankLine();
 		preferences.addOnNewLine(allPrivate);

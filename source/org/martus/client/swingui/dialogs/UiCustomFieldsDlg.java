@@ -37,13 +37,13 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import org.martus.client.swingui.UiLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.common.clientside.Localization;
+import org.martus.swing.UiLabel;
 import org.martus.swing.UiScrollPane;
 import org.martus.swing.UiTextArea;
 import org.martus.swing.UiWrappedTextArea;
@@ -84,9 +84,9 @@ public class UiCustomFieldsDlg extends JDialog
 		customFieldsPanel.setBorder(new EmptyBorder(10,10,10,10));
 		customFieldsPanel.setLayout(new BoxLayout(customFieldsPanel, BoxLayout.Y_AXIS));
 		customFieldsPanel.add(label);
-		customFieldsPanel.add(new JLabel(" "));
+		customFieldsPanel.add(new UiLabel(" "));
 		customFieldsPanel.add(textPane);
-		customFieldsPanel.add(new JLabel(" "));
+		customFieldsPanel.add(new UiLabel(" "));
 		customFieldsPanel.add(buttons);
 	
 		getContentPane().add(customFieldsPanel);

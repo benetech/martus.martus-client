@@ -32,15 +32,18 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+
 import javax.swing.Box;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
+
 import org.martus.client.swingui.UiConstants;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.common.VersionBuildDate;
 import org.martus.common.clientside.UiBasicLocalization;
+import org.martus.swing.UiLabel;
 import org.martus.swing.UiWrappedTextArea;
 import org.martus.swing.Utilities;
 
@@ -79,11 +82,11 @@ public class UiAboutDlg extends JDialog implements ActionListener
 		ok.addKeyListener(new MakeEnterKeyExit());
 
 		Box vBoxVersionInfo = Box.createVerticalBox();
-		vBoxVersionInfo.add(new JLabel(versionInfo));
-		vBoxVersionInfo.add(new JLabel(mtfVersionInfo));
-		vBoxVersionInfo.add(new JLabel(UiConstants.copyright));
-		vBoxVersionInfo.add(new JLabel(UiConstants.website));
-		vBoxVersionInfo.add(new JLabel(buildDate));
+		vBoxVersionInfo.add(new UiLabel(versionInfo));
+		vBoxVersionInfo.add(new UiLabel(mtfVersionInfo));
+		vBoxVersionInfo.add(new UiLabel(UiConstants.copyright));
+		vBoxVersionInfo.add(new UiLabel(UiConstants.website));
+		vBoxVersionInfo.add(new UiLabel(buildDate));
 
 		Box hBoxVersionAndIcon = Box.createHorizontalBox();
 		hBoxVersionAndIcon.add(Box.createHorizontalGlue());

@@ -38,7 +38,6 @@ import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JDialog;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
@@ -58,6 +57,7 @@ import org.martus.common.clientside.UiBasicLocalization;
 import org.martus.common.clientside.UiTextField;
 import org.martus.common.crypto.MartusCrypto;
 import org.martus.swing.UiFileChooser;
+import org.martus.swing.UiLabel;
 import org.martus.swing.UiScrollPane;
 import org.martus.swing.UiTable;
 import org.martus.swing.Utilities;
@@ -89,12 +89,12 @@ public class UiConfigureHQs extends JDialog
 		renameLabel.setEnabled(false);
 		
 		Box hBox1 = Box.createHorizontalBox();
-		hBox1.add(new JLabel(localization.getFieldLabel("HQsSetAsProxyUploader")));
+		hBox1.add(new UiLabel(localization.getFieldLabel("HQsSetAsProxyUploader")));
 		hBox1.add(Box.createHorizontalGlue());
 		panel.add(hBox1);
 
 		Box hBox2 = Box.createHorizontalBox();
-		hBox2.add(new JLabel(localization.getFieldLabel("ConfigureHQsCurrentHQs")));
+		hBox2.add(new UiLabel(localization.getFieldLabel("ConfigureHQsCurrentHQs")));
 		hBox2.add(Box.createHorizontalGlue());
 		panel.add(hBox2);
 		
@@ -130,7 +130,7 @@ public class UiConfigureHQs extends JDialog
 		UiScrollPane scroller = new UiScrollPane(table);
 		
 		panel.add(scroller);
-		panel.add(new JLabel(" "));
+		panel.add(new UiLabel(" "));
 		
 		Box hBox = Box.createHorizontalBox();
 

@@ -29,11 +29,12 @@ import javax.swing.ButtonGroup;
 import javax.swing.ButtonModel;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
+
 import org.martus.common.clientside.CurrentUiState;
 import org.martus.common.clientside.UiBasicLocalization;
+import org.martus.swing.UiLabel;
 import org.martus.swing.UiParagraphPanel;
 import org.martus.swing.UiRadioButton;
 import org.martus.swing.UiTabbedPane;
@@ -87,7 +88,7 @@ public class UiInitialSigninDlg extends UiSigninDlg
 		radioButtonPanel.addOnNewLine(radioShare);
 		
 		UiParagraphPanel recoverAccountPanel = new UiParagraphPanel();
-		recoverAccountPanel.addOnNewLine(new JLabel(localization.getFieldLabel("RecoverAccount")));
+		recoverAccountPanel.addOnNewLine(new UiLabel(localization.getFieldLabel("RecoverAccount")));
 		recoverAccountPanel.addOnNewLine(radioButtonPanel);
 		return recoverAccountPanel;
 	}

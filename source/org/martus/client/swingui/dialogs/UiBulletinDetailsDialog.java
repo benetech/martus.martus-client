@@ -28,13 +28,14 @@ package org.martus.client.swingui.dialogs;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JDialog;
-import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
+
 import org.martus.client.swingui.UiLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.common.HQKey;
@@ -43,6 +44,7 @@ import org.martus.common.bulletin.Bulletin;
 import org.martus.common.crypto.MartusCrypto;
 import org.martus.common.packet.BulletinHistory;
 import org.martus.common.packet.UniversalId;
+import org.martus.swing.UiLabel;
 import org.martus.swing.UiParagraphPanel;
 import org.martus.swing.UiScrollPane;
 import org.martus.swing.UiTable;
@@ -63,8 +65,8 @@ public class UiBulletinDetailsDialog extends JDialog
 		
 		setTitle(getLocalization().getWindowTitle("BulletinDetailsDialog"));
 		UiParagraphPanel panel = new UiParagraphPanel();
-		panel.addComponents(new JLabel(getLabel("AuthorPublicCode")), createField(getPublicCode()));
-		panel.addComponents(new JLabel(getLabel("BulletinId")),createField(bulletin.getLocalId()));
+		panel.addComponents(new UiLabel(getLabel("AuthorPublicCode")), createField(getPublicCode()));
+		panel.addComponents(new UiLabel(getLabel("BulletinId")),createField(bulletin.getLocalId()));
 
 		HQKeys hqKeys = bulletin.getAuthorizedToReadKeys();
 		if(hqKeys.size() > 0)
@@ -75,11 +77,11 @@ public class UiBulletinDetailsDialog extends JDialog
 
 			panel.addBlankLine();
 			panel.addOnNewLine(hqInfo);
-			panel.addComponents(new JLabel(getLabel("Headquarters")), hqScroller);
+			panel.addComponents(new UiLabel(getLabel("Headquarters")), hqScroller);
 		}
 		
 		UiScrollPane historyScroller = createHistoryTable();
-		panel.addComponents(new JLabel(getLabel("History")), historyScroller);
+		panel.addComponents(new UiLabel(getLabel("History")), historyScroller);
 		
 		JButton closeButton = new JButton(getLocalization().getButtonLabel("close"));
 		closeButton.addActionListener(new CloseHandler());

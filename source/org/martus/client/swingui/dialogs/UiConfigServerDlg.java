@@ -28,15 +28,17 @@ package org.martus.client.swingui.dialogs;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
 import javax.swing.JButton;
 import javax.swing.JDialog;
-import javax.swing.JLabel;
+
 import org.martus.client.core.ConfigInfo;
 import org.martus.client.core.MartusApp;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.common.clientside.UiBasicLocalization;
 import org.martus.common.clientside.UiTextField;
 import org.martus.common.crypto.MartusCrypto;
+import org.martus.swing.UiLabel;
 import org.martus.swing.UiParagraphPanel;
 import org.martus.swing.Utilities;
 import org.martus.util.Base64.InvalidBase64Exception;
@@ -58,12 +60,12 @@ public class UiConfigServerDlg extends JDialog implements ActionListener
 		fieldPublicCode = new UiTextField(25);
 
 		UiParagraphPanel panel = new UiParagraphPanel();
-		panel.addComponents(new JLabel(localization.getFieldLabel("ServerNameEntry")), fieldIPAddress);
+		panel.addComponents(new UiLabel(localization.getFieldLabel("ServerNameEntry")), fieldIPAddress);
 		serverIPAddress = info.getServerName();
 		fieldIPAddress.setText(serverIPAddress);
 		fieldIPAddress.requestFocus();
 
-		panel.addComponents(new JLabel(localization.getFieldLabel("ServerPublicCodeEntry")), fieldPublicCode);
+		panel.addComponents(new UiLabel(localization.getFieldLabel("ServerPublicCodeEntry")), fieldPublicCode);
 		String knownServerPublicKey = info.getServerPublicKey();
 		String knownServerPublicCode = "";
 		try

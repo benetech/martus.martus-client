@@ -33,11 +33,12 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
 import java.util.Vector;
+
 import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JDialog;
-import javax.swing.JLabel;
+
 import org.martus.client.core.BulletinXmlExporter;
 import org.martus.client.core.ClientBulletinStore;
 import org.martus.client.swingui.UiMainWindow;
@@ -47,6 +48,7 @@ import org.martus.common.clientside.UiBasicLocalization;
 import org.martus.common.packet.UniversalId;
 import org.martus.swing.UiCheckBox;
 import org.martus.swing.UiFileChooser;
+import org.martus.swing.UiLabel;
 import org.martus.swing.UiList;
 import org.martus.swing.UiScrollPane;
 import org.martus.swing.UiWrappedTextArea;
@@ -88,13 +90,13 @@ public class UiExportBulletinsDlg extends JDialog implements ActionListener
 		tocMsgAreaScrollPane.setPreferredSize(new Dimension(580, 100));
 		
 		Box upperStuff = Box.createVerticalBox();
-		upperStuff.add(new JLabel(" "));
+		upperStuff.add(new UiLabel(" "));
 		upperStuff.add(new UiWrappedTextArea(localization.getFieldLabel("ExportBulletinDetails")));
-		upperStuff.add(new JLabel(" "));
+		upperStuff.add(new UiLabel(" "));
 		upperStuff.add(tocMsgAreaScrollPane);
-		upperStuff.add(new JLabel(" "));
+		upperStuff.add(new UiLabel(" "));
 		upperStuff.add(includePrivate);
-		upperStuff.add(new JLabel(" "));
+		upperStuff.add(new UiLabel(" "));
 		
 		Box upperStuffLeftAligned = Box.createHorizontalBox();
 		upperStuffLeftAligned.add(upperStuff);
