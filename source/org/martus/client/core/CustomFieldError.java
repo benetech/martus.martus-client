@@ -74,7 +74,21 @@ public class CustomFieldError
 		return new CustomFieldError(CODE_PARSE_XML, UNUSED_FIELD, UNUSED_FIELD, UNUSED_FIELD);
 	}
 	
+	static public CustomFieldError errorUnauthorizedKey()
+	{
+		return new CustomFieldError(CODE_UNAUTHORIZED_KEY, UNUSED_FIELD, UNUSED_FIELD, UNUSED_FIELD);
+	}
 	
+	static public CustomFieldError errorSignature()
+	{
+		return new CustomFieldError(CODE_SIGNATURE_ERROR, UNUSED_FIELD, UNUSED_FIELD, UNUSED_FIELD);
+	}
+
+	static public CustomFieldError errorIO()
+	{
+		return new CustomFieldError(CODE_IO_ERROR, UNUSED_FIELD, UNUSED_FIELD, UNUSED_FIELD);
+	}
+
 	private CustomFieldError(String code, String tag, String label, String type)
 	{
 		this.code = code;
@@ -109,6 +123,9 @@ public class CustomFieldError
 	static public final String CODE_PARSE_XML = "106";
 	static public final String CODE_ILLEGAL_TAG = "107";
 	static public final String CODE_NULL_SPECS = "200";
+	static public final String CODE_UNAUTHORIZED_KEY = "201";
+	static public final String CODE_SIGNATURE_ERROR = "202";
+	static public final String CODE_IO_ERROR = "203";
 	
 	static private final String UNUSED_FIELD = "";
 

@@ -200,7 +200,24 @@ public class TestCustomFieldSpecValidator extends TestCaseEnhanced
 		assertEquals("Incorrect Error code for parse XML error", CustomFieldError.CODE_PARSE_XML, xmlError.getCode());
 	}
 
-	
+	public void testIOError() throws Exception
+	{
+		CustomFieldError xmlError = CustomFieldError.errorIO();
+		assertEquals("Incorrect Error code for IO error", CustomFieldError.CODE_IO_ERROR, xmlError.getCode());
+	}
+
+	public void testSignatureError() throws Exception
+	{
+		CustomFieldError xmlError = CustomFieldError.errorSignature();
+		assertEquals("Incorrect Error code for signature error", CustomFieldError.CODE_SIGNATURE_ERROR, xmlError.getCode());
+	}
+
+	public void testUnauthorizedKeyError() throws Exception
+	{
+		CustomFieldError xmlError = CustomFieldError.errorUnauthorizedKey();
+		assertEquals("Incorrect Error code for parse XML error", CustomFieldError.CODE_UNAUTHORIZED_KEY, xmlError.getCode());
+	}
+
 	static public FieldSpec[] addFieldSpec(FieldSpec[] existingFieldSpecs, FieldSpec newFieldSpec)
 	{
 		int oldCount = existingFieldSpecs.length;

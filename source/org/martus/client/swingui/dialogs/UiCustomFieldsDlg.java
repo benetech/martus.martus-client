@@ -45,7 +45,9 @@ import org.martus.client.core.CustomFieldTemplate;
 import org.martus.client.core.MartusApp;
 import org.martus.client.swingui.UiLocalization;
 import org.martus.client.swingui.UiMainWindow;
+import org.martus.common.HQKeys;
 import org.martus.common.clientside.Localization;
+import org.martus.common.crypto.MartusCrypto;
 import org.martus.swing.UiButton;
 import org.martus.swing.UiFileChooser;
 import org.martus.swing.UiLabel;
@@ -61,6 +63,7 @@ public class UiCustomFieldsDlg extends JDialog
 	{
 		super(owner, "", true);
 		mainWindow = owner; 
+		security = mainWindow.getApp().getSecurity();		
 		String baseTag = "CustomFields";
 		UiLocalization localization = owner.getLocalization();
 		setTitle(localization.getWindowTitle("input" + baseTag));
@@ -156,7 +159,10 @@ public class UiCustomFieldsDlg extends JDialog
 			File importFile = results.getFileChoosen();
 
 			CustomFieldTemplate template = new CustomFieldTemplate();
-			if(template.importTemplate(importFile))
+			
+			Vector authorizedKeys = getAuthorizedKeys();
+			
+			if(template.importTemplate(security, importFile, authorizedKeys))
 			{
 				text.setText(template.getImportedText());
 				mainWindow.notifyDlg("ImportingCustomizationTemplateSuccess");
@@ -166,6 +172,18 @@ public class UiCustomFieldsDlg extends JDialog
 				displayXMLError(template);
 				mainWindow.notifyDlg("ErrorImportingCustomizationTemplate");
 			}
+		}
+
+		private Vector getAuthorizedKeys()
+		{
+			Vector authorizedKeys = new Vector();
+			authorizedKeys.add(security.getPublicKeyString());
+			HQKeys hqKeys = mainWindow.getApp().getAllHQKeysWithFallback();
+			for(int i = 0; i < hqKeys.size(); ++i)
+			{
+				authorizedKeys.add(hqKeys.get(i).getPublicKey());
+			}
+			return authorizedKeys;
 		}
 	}
 
@@ -189,7 +207,8 @@ public class UiCustomFieldsDlg extends JDialog
 				if(!mainWindow.confirmDlg("OverWriteExistingFile"))
 					return;
 			CustomFieldTemplate template = new CustomFieldTemplate();
-			if(template.ExportTemplate(destFile, text.getText()))
+			MartusCrypto security = mainWindow.getApp().getSecurity();
+			if(template.ExportTemplate(security, destFile, text.getText()))
 			{
 				mainWindow.notifyDlg("ExportingCustomizationTemplateSuccess");
 			}
@@ -309,6 +328,8 @@ public class UiCustomFieldsDlg extends JDialog
 	UiTextArea text;
 	String result = null;
 	UiMainWindow mainWindow;
+	MartusCrypto security;
+
 
 	private int HEADER_SPACING_1 = 6;
 	private int HEADER_SPACING_2 = 11;

@@ -26,30 +26,42 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.core;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Vector;
 import org.martus.common.CustomFields;
 import org.martus.common.FieldSpec;
 import org.martus.common.CustomFields.CustomFieldsParseException;
-import org.martus.util.UnicodeReader;
-import org.martus.util.UnicodeWriter;
+import org.martus.common.crypto.MartusCrypto;
+import org.martus.common.crypto.MartusCrypto.AuthorizationFailedException;
+import org.martus.common.crypto.MartusCrypto.MartusSignatureException;
 
 public class CustomFieldTemplate
 {
 	public CustomFieldTemplate()
 	{
 		super();
-		errors = null;
+		clearData();
+	}
+
+	private void clearData()
+	{
+		errors = new Vector();
 		xmlImportedText = "";
 	}
 	
-	public boolean importTemplate(File fileToImport)
+	public boolean importTemplate(MartusCrypto security, File fileToImport, Vector authroizedKeys)
 	{
 		try
 		{
-			UnicodeReader reader = new UnicodeReader(fileToImport);
-			String templateXMLToImport = reader.readAll();
-			reader.close();
+			clearData();
+			FileInputStream in = new FileInputStream(fileToImport);
+			byte[] dataBundle = new byte[(int)fileToImport.length()];
+			in.read(dataBundle);
+			in.close();
+			byte[] xmlBytes = security.extractFromSignedBundle(dataBundle, authroizedKeys);
+			String templateXMLToImport = new String(xmlBytes, "UTF-8");
 			if(validateXml(templateXMLToImport))
 			{
 				xmlImportedText = templateXMLToImport;
@@ -58,24 +70,35 @@ public class CustomFieldTemplate
 		}
 		catch(IOException e)
 		{
-			e.printStackTrace();
+			errors.add(CustomFieldError.errorIO());
+			
+		}
+		catch(MartusSignatureException e)
+		{
+			errors.add(CustomFieldError.errorSignature());
+		}
+		catch(AuthorizationFailedException e)
+		{
+			errors.add(CustomFieldError.errorUnauthorizedKey());
 		}
 		return false;
 	}
 	
-	public boolean ExportTemplate(File fileToExportXml, String xmlToExport)
+	public boolean ExportTemplate(MartusCrypto security, File fileToExportXml, String xmlToExport)
 	{
+		clearData();
 		if(!validateXml(xmlToExport))
 			return false;
-		
 		try
 		{
-			UnicodeWriter writer = new UnicodeWriter(fileToExportXml);
-			writer.write(xmlToExport);
-			writer.close();
+			FileOutputStream out = new FileOutputStream(fileToExportXml);
+			byte[] signedBundle = security.createSignedBundle(xmlToExport.getBytes("UTF-8"));
+			out.write(signedBundle);
+			out.flush();
+			out.close();
 			return true;
 		}
-		catch(IOException e)
+		catch(Exception e)
 		{
 			e.printStackTrace();
 		}
@@ -84,19 +107,17 @@ public class CustomFieldTemplate
 	
 	public boolean validateXml(String xmlToValidate)
 	{
-		errors = null;
 		try
 		{
 			FieldSpec[] newSpecs = CustomFields.parseXml(xmlToValidate);
 			CustomFieldSpecValidator checker = new CustomFieldSpecValidator(newSpecs);
 			if(checker.isValid())
 				return true;
-			errors = checker.getAllErrors();
+			errors.addAll(checker.getAllErrors());
 		}
 		catch (CustomFieldsParseException e)
 		{
 			e.printStackTrace();
-			errors = new Vector();
 			errors.add(CustomFieldError.errorParseXml());
 		}
 		return false;

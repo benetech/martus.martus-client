@@ -736,7 +736,7 @@ public class EnglishStrings
 "field:RemoveServerLabel1=The following server will be removed:",
 "field:RemoveServerLabel2=Are you sure you want to do this?",
 "field:ExportedBulletins=Exported Bulletins",
-"field:ErrorCustomFields=There is an error in the custom field definitions. Each problem is identified with the following codes:\n   100 - Required standard field is missing\n   101 - Custom field does not have a correct tag.\n   102 - A previous Tag already exists with this name.\n   103 - Custom field does not have a label.\n   104 - Unrecognized Field Type.\n   105 - A label was found in a standard field.\n   106 - XML Parse Error.\n   107 - Tag contains illegal characters",
+"field:ErrorCustomFields=There is an error in the custom field definitions. Each problem is identified with the following codes:\n   100 - Required standard field is missing\n   101 - Custom field does not have a correct tag.\n   102 - A previous Tag already exists with this name.\n   103 - Custom field does not have a label.\n   104 - Unrecognized Field Type.\n   105 - A label was found in a standard field.\n   106 - XML Parse Error.\n   107 - Tag contains illegal characters.\n   200 - All fields empty.\n   201 - Unrecognized headquarters created this template.\n   202 - Security validation error.\n   203 - File Error.",
 "field:ErrorCustomFieldHeader1=CODE",
 "field:ErrorCustomFieldHeader2=TYPE",
 "field:ErrorCustomFieldHeader3=TAG",
