@@ -26,10 +26,12 @@ Boston, MA 02111-1307, USA.
 
 package org.martus.client.test;
 
-import org.martus.common.clientside.test.*;
-
 import junit.framework.Test;
 import junit.framework.TestSuite;
+
+import org.martus.common.clientside.test.TestChoiceItem;
+import org.martus.common.clientside.test.TestCurrentUiState;
+import org.martus.common.clientside.test.TestDateUtilities;
 
 public class TestClient
 {
@@ -62,7 +64,6 @@ public class TestClient
 		suite.addTest(new TestSuite(TestDateUtilities.class));
 		suite.addTest(new TestSuite(TestFolderList.class));
 		suite.addTest(new TestSuite(TestGridTableModel.class));
-		suite.addTest(new TestSuite(testHQKeys.class));
 		suite.addTest(new TestSuite(TestMartusApp_NoServer.class));
 		suite.addTest(new TestSuite(TestMartusFlexidate.class));
 		suite.addTest(new TestSuite(TestLocalization.class));
