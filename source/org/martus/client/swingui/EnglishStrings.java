@@ -576,7 +576,7 @@ public class EnglishStrings
 "field:confirmQuickEraseDeleteKeyPaircause=This will delete your keypair file in your Martus account directory.",
 "field:confirmQuickEraseDeleteKeyPaireffect=Clicking on Yes will delete your keypair file which means you will not be able to open Martus with the same account unless you have a backup of your keypair on a floppy disk.",
 "field:confirmQuickEraseOutboxNotEmptycause=Please Note: There are bulletins that have not been sent to a server. If you continue these bulletins will be lost.",
-"field:confirmQuickEraseOutboxNotEmptyeffect=Clicking on Yes will bring you to the Quick Erase Options dialog, No will return you to Martus without erasing anything.",
+"field:confirmQuickEraseOutboxNotEmptyeffect=Clicking on Yes will bring you to the Quick Erase Options dialog, Clicking on No will return you to Martus without erasing anything.",
 "field:confirmKeyPairFileExistsOverWritecause=A keypair file already exists for this account.  Do you wish to overwrite it?",
 "field:confirmKeyPairFileExistsOverWriteeffect=Clicking on Yes will delete the old keypair file and replace it with your restored keypair.",
 "field:confirmCancelBackupRecoverycause=Do you wish to cancel the keypair restore process?",
