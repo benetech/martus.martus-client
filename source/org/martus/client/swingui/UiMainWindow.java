@@ -246,11 +246,17 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	
 	private static String getWarningMessageAboutUnofficialTranslations(String originalMessage)
 	{
+		String token = "#UseUnofficialTranslationFiles#";
+		String replacementValue = "\"" + MartusApp.USE_UNOFFICIAL_TRANSLATIONS_NAME + "\"";
+		originalMessage = replaceToken(originalMessage, token, replacementValue);
+		return originalMessage;
+	}
+
+	private static String replaceToken(String originalMessage, String token, String replacementValue)
+	{
 		try
 		{
-			HashMap replacement = new HashMap();
-			replacement.put("#UseUnofficialTranslationFiles#", "\"" + MartusApp.USE_UNOFFICIAL_TRANSLATIONS_NAME + "\"");
-			originalMessage = TokenReplacement.replaceTokens(originalMessage, replacement);
+			return TokenReplacement.replaceToken(originalMessage, token, replacementValue);
 		}
 		catch(TokenInvalidException e)
 		{
@@ -1106,7 +1112,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 			String cause = getLocalization().getFieldLabel("notifySearchFoundcause");
 			String ok = getLocalization().getButtonLabel("ok");
 			String[] buttons = { ok };
-			cause = cause + bulletinsFound;
+			cause = replaceToken(cause , "#N#", (new Integer(bulletinsFound)).toString());
 			UiOptionPane pane = new UiOptionPane(cause, UiOptionPane.INFORMATION_MESSAGE, UiOptionPane.DEFAULT_OPTION,
 									null, buttons);
 			JDialog dialog = pane.createDialog(this, title);

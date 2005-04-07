@@ -84,6 +84,24 @@ public class TestTokenReplacement extends TestCaseEnhanced
 		assertEquals("Replace Tokens for an array[2] of strings not replaced?", expectedArray[2], arrayResult[2]);
 	}
 
+	public void testReplaceToken() throws Exception
+	{
+		try 
+		{
+			TokenReplacement.replaceToken("",null,"a");
+			fail("Null token is invalid and should throw.");
+		} 
+		catch (RuntimeException expected) 
+		{
+		}
+		String original = "the count was ";
+		String count = "3";
+		String token = "#N#";
+		String expected = original + count;
+		String originalWithToken = original + token;
+		assertEquals(expected, TokenReplacement.replaceToken(originalWithToken, token, count));
+	}
+	
 	public void testReplaceTokensRegExpression() throws Exception
 	{
 		
