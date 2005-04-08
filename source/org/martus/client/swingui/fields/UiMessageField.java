@@ -27,9 +27,10 @@ package org.martus.client.swingui.fields;
 
 import javax.swing.JComponent;
 import javax.swing.JPanel;
+
 import org.martus.common.FieldSpec;
 import org.martus.common.MessageFieldSpec;
-import org.martus.swing.UiTextArea;
+import org.martus.swing.UiWrappedTextArea;
 
 public class UiMessageField extends UiField
 {
@@ -37,7 +38,7 @@ public class UiMessageField extends UiField
 	{
 		super();
 		String message = ((MessageFieldSpec)(spec)).getMessage();
-		widget = new UiTextArea(message);
+		widget = new UiWrappedTextArea(message, 65);
 		widget.setEditable(false);
 		widget.setBackground(new JPanel().getBackground());
 	}
@@ -56,5 +57,5 @@ public class UiMessageField extends UiField
 	{
 	}
 	
-	UiTextArea widget;
+	UiWrappedTextArea widget;
 }
