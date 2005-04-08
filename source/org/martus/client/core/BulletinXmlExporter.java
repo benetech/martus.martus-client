@@ -47,9 +47,9 @@ public class BulletinXmlExporter
 		writeXMLVersion(dest);
 		
 		if(includePrivateData)
-			writeElement(dest, PublicAndPrivateElementName, "", "");
+			writeElement(dest, "", PublicAndPrivateElementName, "", "");
 		else
-			writeElement(dest, PublicOnlyElementName, "", "");
+			writeElement(dest, "", PublicOnlyElementName, "", "");
 		dest.write(NEW_LINE);
 
 		for (int i = 0; i < bulletins.size(); i++)
@@ -67,6 +67,7 @@ public class BulletinXmlExporter
 		dest.write(MartusXml.getTagEnd(VersionXMLElementName));
 		dest.write("<!-- Version 2: added Grid columns Labels-->");
 		dest.write("<!-- Version 3: added Dropdowns and Messages-->");
+		dest.write("<!-- Version 4: added Field Types-->");
 		
 		dest.write(NEW_LINE);
 	}
@@ -75,10 +76,10 @@ public class BulletinXmlExporter
 	{
 		dest.write(MartusXml.getTagStartWithNewline(BulletinElementName));
 
-		writeElement(dest, LocalIdElementName, "", b.getLocalId());
-		writeElement(dest, AccountIdElementName, "", b.getAccount());
+		writeElement(dest, "", LocalIdElementName, "", b.getLocalId());
+		writeElement(dest, "", AccountIdElementName, "", b.getAccount());
 		if(b.isAllPrivate())
-			writeElement(dest, AllPrivateElementName, "", "");
+			writeElement(dest, "", AllPrivateElementName, "", "");
 		
 		BulletinHistory history = b.getHistory();
 		if(history.size() > 0)
@@ -123,7 +124,7 @@ public class BulletinXmlExporter
 		for (int i = 0; i < publicAttachments.length; i++)
 		{
 			AttachmentProxy proxy = publicAttachments[i];
-			writeElement(dest, AttachmentElementName, "", proxy.getLabel());
+			writeElement(dest, "", AttachmentElementName, "", proxy.getLabel());
 		}
 		dest.write(MartusXml.getTagEnd(AttachmentsListElementName));
 	}
@@ -143,7 +144,7 @@ public class BulletinXmlExporter
 				GridFieldSpec grid = (GridFieldSpec)spec;
 				String columnLabels = grid.getDetailsXml();
 				String gridData = rawFieldData + columnLabels;
-				writeElementDirect(dest, getXmlEncodedTagWithData(TAG, tag), getXmlEncodedTagWithData(LABEL, spec.getLabel()), MartusXml.getTagWithData(VALUE, gridData));
+				writeElementDirect(dest, getXmlEncodedTagWithData(TYPE, FieldSpec.getTypeString(spec.getType())), getXmlEncodedTagWithData(TAG, tag), getXmlEncodedTagWithData(LABEL, spec.getLabel()), MartusXml.getTagWithData(VALUE, gridData));
 				continue;
 			}
 			
@@ -156,7 +157,7 @@ public class BulletinXmlExporter
 				rawFieldData.append(",");
 				rawFieldData.append(endDate);
 			}
-			writeElement(dest,tag, spec.getLabel(), rawFieldData.toString());				
+			writeElement(dest,FieldSpec.getTypeString(spec.getType()), tag, spec.getLabel(), rawFieldData.toString());				
 		}
 		
 	}
@@ -166,12 +167,16 @@ public class BulletinXmlExporter
 		return MartusXml.getTagWithData(tagName, MartusUtilities.getXmlEncoded(data));
 	}
 
-	static void writeElement(Writer dest, String tag, String rawLabel, String rawFieldData) throws IOException
+	static void writeElement(Writer dest, String fieldType, String tag, String rawLabel, String rawFieldData) throws IOException
 	{	
+		String xmlFieldTypeAndValue = "";
 		String xmlTagAndValue = "";
 		String xmlLabelAndValue = "";
 		String xmlValueAndFieldData = "";
 		
+		if(fieldType.length() > 0)
+			xmlFieldTypeAndValue = getXmlEncodedTagWithData(TYPE, fieldType);
+
 		xmlTagAndValue = getXmlEncodedTagWithData(TAG, tag);
 
 		if (rawLabel.length() > 0)
@@ -179,12 +184,13 @@ public class BulletinXmlExporter
 		
 		if (rawFieldData.length() > 0)
 			xmlValueAndFieldData = getXmlEncodedTagWithData(VALUE, rawFieldData);
-		writeElementDirect(dest, xmlTagAndValue, xmlLabelAndValue, xmlValueAndFieldData);		
+		writeElementDirect(dest, xmlFieldTypeAndValue, xmlTagAndValue, xmlLabelAndValue, xmlValueAndFieldData);		
 	}	
 	
-	static void writeElementDirect(Writer dest, String xmlEncodedTag, String xmlEncodedLabel, String xmlEncodedFieldData) throws IOException
+	static void writeElementDirect(Writer dest, String xmlEncodeType, String xmlEncodedTag, String xmlEncodedLabel, String xmlEncodedFieldData) throws IOException
 	{						
-		dest.write(MartusXml.getTagStartWithNewline("Field"));	
+		dest.write(MartusXml.getTagStartWithNewline("Field"));
+		dest.write(xmlEncodeType);
 		dest.write(xmlEncodedTag);
 		dest.write(xmlEncodedLabel);
 		dest.write(xmlEncodedFieldData);
@@ -208,9 +214,10 @@ public class BulletinXmlExporter
 	public final static String AncestorElementName = "Ancestor";
 	
 	private final static String NEW_LINE = "\n";
+	private final static String TYPE = "Type";
 	private final static String TAG = "Tag";
 	private final static String VALUE = "Value";
 	private final static String LABEL = "Label";
 
-	private final static String VersionNumber = "3";
+	private final static String VersionNumber = "4";
 }

@@ -74,9 +74,11 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 		Vector list = new Vector();
 		list.add(b);
 		String result = doExport(list, false);
-		assertContains("<MartusBulletinExportVersion>3</MartusBulletinExportVersion>", result);
+		assertContains("<MartusBulletinExportVersion>4</MartusBulletinExportVersion>", result);
 		assertContains("<!-- Version 2: added Grid columns Labels-->", result);
 		assertContains("<!-- Version 3: added Dropdowns and Messages-->", result);
+		assertContains("<!-- Version 4: added Field Types-->", result);
+
 		assertContains("<ExportedMartusBulletins>", result);
 		assertContains("<MartusBulletin>", result);
 		assertContains(b.getAccount(), result);
@@ -118,6 +120,7 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 		list.add(b);
 		String result = doExport(list, false);
 		assertContains("<Field>\n" +
+				"<Type>GRID</Type>\n" +
 				"<Tag>MyGridTag</Tag>\n" +
 				"<Label>Victim Information</Label>\n" +
 				"<Value><GridData columns='2'>\n" +
@@ -191,6 +194,10 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 		String result = writer.toString();
 
 		assertContains(sampleTitle1, result);
+		assertContains("<Type>DATE</Type>", result);
+		assertContains("<Type>STRING</Type>", result);
+		assertContains("<Type>MULTILINE</Type>", result);
+		assertContains("<Type>LANGUAGE</Type>", result);
 		assertContains(sampleTitle2, result);
 	}
 
