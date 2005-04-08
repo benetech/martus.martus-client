@@ -28,9 +28,10 @@ package org.martus.client.swingui.bulletincomponent;
 
 import java.awt.Color;
 import java.util.Vector;
+
 import javax.swing.JComponent;
-import javax.swing.JLabel;
 import javax.swing.border.LineBorder;
+
 import org.martus.client.core.LanguageChangeListener;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.fields.UiDateEditor;
@@ -66,8 +67,7 @@ abstract public class UiBulletinComponentDataSection extends UiBulletinComponent
 		{
 			fields[fieldNum] = createAndAddLabelAndField(specs[fieldNum]);
 		}
-		JLabel attachments = new UiLabel(getLocalization().getFieldLabel("attachments"));
-		addComponents(attachments, createAttachmentTable());
+		addComponents(createLabel(getLocalization().getFieldLabel("attachments")), createAttachmentTable());
 	}
 
 	public UiField createAndAddLabelAndField(FieldSpec spec)
@@ -101,12 +101,19 @@ abstract public class UiBulletinComponentDataSection extends UiBulletinComponent
 			addAttachment(attachments[i]);
 	}
 
- 	public JLabel createLabel(FieldSpec spec)
+ 	public JComponent createLabel(FieldSpec spec)
 	{
 		String labelText = spec.getLabel();
 		if(labelText.equals(""))
 			labelText = getLocalization().getFieldLabel(spec.getTag());
-		JLabel label = new UiLabel(labelText);
+		return createLabel(labelText);
+	}
+
+	public JComponent createLabel(String labelText) 
+	{
+		//TODO: For wrapped labels, we need to take into consideration font size, text alignment, rtol and printing. 
+		//UiWrappedTextArea label = new UiWrappedTextArea(labelText, 30);
+		UiLabel label = new UiLabel(labelText);
 		return label;
 	}
 
