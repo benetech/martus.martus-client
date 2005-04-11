@@ -25,13 +25,14 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.dialogs;
 
+import java.awt.Component;
+import javax.swing.Box;
 import javax.swing.ButtonGroup;
 import javax.swing.ButtonModel;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
-
 import org.martus.common.clientside.CurrentUiState;
 import org.martus.common.clientside.UiBasicLocalization;
 import org.martus.swing.UiLabel;
@@ -39,6 +40,7 @@ import org.martus.swing.UiParagraphPanel;
 import org.martus.swing.UiRadioButton;
 import org.martus.swing.UiTabbedPane;
 import org.martus.swing.UiWrappedTextArea;
+import org.martus.swing.Utilities;
 
 
 public class UiInitialSigninDlg extends UiSigninDlg
@@ -72,7 +74,7 @@ public class UiInitialSigninDlg extends UiSigninDlg
 		return new UiWrappedTextArea("\n" + text);
 	}
 	
-	JPanel createRecoverAccountPanel()
+	JComponent createRecoverAccountPanel()
 	{
 		UiParagraphPanel radioButtonPanel = new UiParagraphPanel();
 		radioBackupFile = new UiRadioButton(localization.getButtonLabel("RecoverAccountByBackup"), true);
@@ -87,9 +89,14 @@ public class UiInitialSigninDlg extends UiSigninDlg
 		radioButtonPanel.addOnNewLine(radioBackupFile);
 		radioButtonPanel.addOnNewLine(radioShare);
 		
-		UiParagraphPanel recoverAccountPanel = new UiParagraphPanel();
-		recoverAccountPanel.addOnNewLine(new UiLabel(localization.getFieldLabel("RecoverAccount")));
-		recoverAccountPanel.addOnNewLine(radioButtonPanel);
+		Box recoverAccountPanel = Box.createVerticalBox();
+		Box hBox = Box.createHorizontalBox();
+		Utilities.addComponentsRespectingOrientation(hBox, new Component[] {new UiLabel(localization.getFieldLabel("RecoverAccount")), Box.createHorizontalGlue()});
+		recoverAccountPanel.add(new UiLabel(" "));
+		recoverAccountPanel.add(hBox);
+		Box hBox2 = Box.createHorizontalBox();
+		Utilities.addComponentsRespectingOrientation(hBox2, new Component[] {new UiLabel("          "), radioButtonPanel, Box.createHorizontalGlue()});
+		recoverAccountPanel.add(hBox2);
 		return recoverAccountPanel;
 	}
 	public void handleOk()
