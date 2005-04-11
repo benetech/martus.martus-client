@@ -29,60 +29,30 @@ package org.martus.client.swingui.fields;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Vector;
-
 import javax.swing.JComponent;
-
 import org.martus.client.core.LanguageChangeListener;
 import org.martus.common.clientside.ChoiceItem;
 import org.martus.swing.UiComboBox;
 
-public class UiChoiceEditor extends UiField implements ActionListener
+public class UiChoiceEditor extends UiChoice implements ActionListener
 {
-	
 	public UiChoiceEditor(ChoiceItem[] choicesToUse)
 	{
-		initalize(choicesToUse);
-	}
-	
-	public UiChoiceEditor(Vector choicesToUse)
-	{
-		ChoiceItem[] choicesArray = new ChoiceItem[choicesToUse.size()+1];
-		String emptyFirstItem = " ";
-		choicesArray[0] = new ChoiceItem(emptyFirstItem,emptyFirstItem);
-		for(int i = 0; i < choicesToUse.size(); i++)
-		{
-			String item = (String)choicesToUse.get(i);
-			choicesArray[i+1] = new ChoiceItem(item,item);
-		}
-		initalize(choicesArray);
+		super(choicesToUse);
 	}
 
-	private void initalize(ChoiceItem[] choicesToUse)
+	public UiChoiceEditor(Vector choicesToUse)
+	{
+		super(choicesToUse);
+	}
+	
+	protected void initalize(ChoiceItem[] choicesToUse)
 	{
 		choices = choicesToUse;
 		widget = new UiComboBox(choices);
 		widget.addActionListener(this);
 	}
 
-	public JComponent getComponent()
-	{
-		return widget;
-	}
-	
-	public void updateChoices(ChoiceItem[] choicesToUse)
-	{
-		widget.removeAllItems();
-		choices = choicesToUse;
-		for(int i = 0; i < choicesToUse.length; ++i)
-			widget.addItem(choicesToUse[i]);
-		widget.updateUI();
-	}
-
-	public JComponent[] getFocusableComponents()
-	{
-		return new JComponent[]{widget};
-	}
-	
 	public String getText()
 	{
 		ChoiceItem item = (ChoiceItem)widget.getSelectedItem();
@@ -103,20 +73,37 @@ public class UiChoiceEditor extends UiField implements ActionListener
 		widget.setSelectedItem(item);
 	}
 
-	public void setLanguageListener(LanguageChangeListener listener)
+	public void updateChoices(ChoiceItem[] choicesToUse)
 	{
-		observer = listener;
+		widget.removeAllItems();
+		choices = choicesToUse;
+		for(int i = 0; i < choicesToUse.length; ++i)
+			widget.addItem(choicesToUse[i]);
+		widget.updateUI();
 	}
-	
-	
+
 	public void actionPerformed(ActionEvent e) 
 	{
 		if(observer != null)
 			observer.languageChanged(getText());
 	}
 
+	public JComponent getComponent()
+	{
+		return widget;
+	}
+
+	public JComponent[] getFocusableComponents()
+	{
+		return new JComponent[]{widget};
+	}
+
+	public void setLanguageListener(LanguageChangeListener listener)
+	{
+		observer = listener;
+	}
+		
 	UiComboBox widget;
-	ChoiceItem[] choices;
 	LanguageChangeListener observer;
 }
 

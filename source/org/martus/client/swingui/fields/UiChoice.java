@@ -1,7 +1,7 @@
 /*
 
 The Martus(tm) free, social justice documentation and
-monitoring software. Copyright (C) 2001-2005, Beneficent
+monitoring software. Copyright (C) 2005, Beneficent
 Technology, Inc. (Benetech).
 
 Martus is free software; you can redistribute it and/or
@@ -23,57 +23,32 @@ Software Foundation, Inc., 59 Temple Place - Suite 330,
 Boston, MA 02111-1307, USA.
 
 */
-
 package org.martus.client.swingui.fields;
 
 import java.util.Vector;
-import javax.swing.JComponent;
-import javax.swing.JLabel;
 import org.martus.common.clientside.ChoiceItem;
-import org.martus.swing.UiLabel;
 
-public class UiChoiceViewer extends UiChoice
+abstract public class UiChoice extends UiField
 {
-	public UiChoiceViewer(ChoiceItem[] choicesToUse)
+	public UiChoice(ChoiceItem[] choicesToUse)
 	{
-		super(choicesToUse);
+		initalize(choicesToUse);
 	}
-
-	public UiChoiceViewer(Vector choicesToUse)
+	
+	public UiChoice(Vector choicesToUse)
 	{
-		super(choicesToUse);
-	}
-
-	protected void initalize(ChoiceItem[] choicesToUse)
-	{
-		choices = choicesToUse;
-		widget = new UiLabel();
-	}
-
-	public String getText()
-	{
-		return "";
-	}
-
-	public void setText(String newText)
-	{
-		ChoiceItem item = choices[0];
-		for(int i = 0; i < choices.length; ++i)
+		ChoiceItem[] choicesArray = new ChoiceItem[choicesToUse.size()+1];
+		String emptyFirstItem = " ";
+		choicesArray[0] = new ChoiceItem(emptyFirstItem,emptyFirstItem);
+		for(int i = 0; i < choicesToUse.size(); i++)
 		{
-			if(newText.equals(choices[i].getCode()))
-			{
-				item = choices[i];
-				break;
-			}
+			String item = (String)choicesToUse.get(i);
+			choicesArray[i+1] = new ChoiceItem(item,item);
 		}
-		widget.setText(" " + item.toString() + " ");
+		initalize(choicesArray);
 	}
 
-	public JComponent getComponent()
-	{
-		return widget;
-	}
+	abstract protected void initalize(ChoiceItem[] choicesToUse);
 
-	JLabel widget;
+	protected ChoiceItem[] choices;
 }
-
