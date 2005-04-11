@@ -1,6 +1,9 @@
 ﻿# Martus Client Translation File
 # Language code:  fa
 # Language name:  Farsi, Dari
+# [AB-040805]:  FYI, this is going to be changed to “Persian (Farsi, Dari)” with the next release.
+
+
 # Exported date:  Fri Mar 11 10:14:05 PST 2005
 # Client version: 2.6
 # Client build:   20050218.1528
@@ -86,6 +89,14 @@
 !right-to-left
 #
 
+# [AB-040805]:  Some general comments:
+# [AB-040805]:  1. “Martus” was still translated in some places (I marked everywhere I noticed it, but please do an exhaustive check – also for “Benetech”).  If you would like to put the transliteration of the words in Persian so people know how to pronounce it, it is fine, but not necessary.
+# [AB-040805]:  2. Some items were quite long in comparison to the english.  I expected things to occasionally be a bit longer, but not by quite as much as happened in some cases.  While most of the UI should dynamically size to fit, there are some places where there just won’t be enough room on a screen (especially for users running 800x600 resolution.)  While in some places (e.g. initial signin screen,) scrollbars show up, we’d like to try to avoid them having to use this if possible.  If there are ways to abbreviate at least some of the ones I marked (and whatever others you notice getting cut off/requiring scrollbars,) that would be great.  
+# [AB-040805]:  3. There were some places where English numbers were used and others where Persian numbers were used – I want to understand what the consensus is on when to use which (could you please check everywhere for consistency?)
+# [AB-040805]:  4.  Please let me know if any of the directions above (top of file) are unclear so I can improve them for the next new translator!
+
+
+
 #________________________=Show all bulletins on this server and on this computer.
 -e9a2-button:AllSummaries=کليهء بولتن های خبریِ روی اين سِـروِر را به من نشان بدهيد
 
@@ -166,6 +177,8 @@
 
 #__________________________=Size(Kb)
 -4470-button:attachmentSize=اندازه به کيلوبايت(Kb)
+# [AB-040805]:  Did you translate “Kb”?  I think it would be good to have it in Persian, or in both (which may be what you did) – unless you think even non-technical users would recognize the meaning of “Kb” in english.  
+
 
 #__________________=Browse...
 -7d7f-button:browse=نگاه بيندازيد
@@ -250,12 +263,15 @@
 
 #_____________________=Save Draft
 -cc13-button:savedraft=دست نويس را ذخيره کنيد
+# [AB-040805]:  This seems quite long (and will show up in every bulletin – am worried all the buttons may not fit)
+
 
 #__________________=Search
 -bce0-button:search=جستجو
 
 #________________=Save Sealed
 -110f-button:send=با مُهر سربسته ذخيره کنيد
+# [AB-040805]:  This seems quite long (and will show up in every bulletin – am worried all the buttons may not fit)
 
 #______________________=Uncheck All
 -bc6d-button:uncheckall=مارکِ همه را برداريد
@@ -289,6 +305,9 @@
 
 #________________________________________________=This method breaks up your key into #M# pieces, any #N# of which will be required to reconstruct the key without requiring a password.  If you forget your login name or your password, this method is the only way you can restore your key.\n\nOnce the #M# files have been written to removable media disks, you should distribute them to #M# different people whom you will remember, but each of whom don't know who you have given the other files to.  Do not store any of the disks together.\n\nTo restore your key, first retrieve any #N# of the original #M# disks, and then select 'Restore Account' and 'Restore account from multiple disks' when signing into Martus.\n
 -c83c-field:BackupKeyPairToSecretShareInformation=با اين روش، کليد شما به #M#  قطعه تقسيم می شود، که در آينده اگر بخواهيد بدون استفاده از اسمِ رمز آنرا بازسازی کنيد، هر #N# آن لازم خواهد بود. اگر شما اسم استفاده کننده يا اسمِ رمزِ خودتان را فراموش بکنيد، اين روش تنها وسيله ای است که با آن می توانيد کليدتان را احياء کنيد. \n\nپس از آنکه  #M#  فايل روی ديسک های مستقل (جدا شدنی از کامپيوتر) کپی شد، شما بايد آنها را به #M# فرد متفاوت بدهيد و اسم شان را به خاطر بسپاريد، اما هيچ کدام از آن افراد از وجود فرد ديگر خبر نبايد داشته باشد. هرگز ديسک ها را کنارهم نگه نداريد. \n\nبرای احياء کليدتان، نخست هرکدام#N# از   #M# ديسک های اصلی را بيرون بکشيد، سپس روی »احياء حساب« و »احياء حساب از روی ديسک های چندگانه« کليک کنيد (به هنگامی که برای ورود به Martus امضا می کنيد).\n
+# [AB-040805]:  seems like translation doesn’t exactly match that in button:RecoverAccountByShare and button:RecoverAccountTab?  Or am I missing something?
+
+
 
 #____________________________________________________=Please insert disk #
 -b877-field:BackupRecoverKeyPairInsertNextDiskMessage=لطفن ديسک را داخل کامپيوتر بگذاريد #
@@ -334,6 +353,9 @@
 
 #_____________________________________=Date Saved
 -a7d9-field:BulletinDetailsVersionDate=تاريخی که بولتن ذخيره شد
+# [AB-040805]:  a bit long
+
+
 
 #___________________________________=ID
 -89f8-field:BulletinDetailsVersionId=اسم هويت
@@ -352,12 +374,16 @@
 
 #____________________________=Last Saved
 -eb05-field:BulletinLastSaved=آخرين تاريخی که ذخيره شد
+# [AB-040805]:  a bit long (worried about whole table fitting without scrolling)
 
 #___________________________=Field Desk Bulletin
 -f61d-field:BulletinNotYours=بولتن محلی
 
 #_______________________=Size (Kb)
 -fa2e-field:BulletinSize=اندازه به کيلوبايت (Kb)
+# [AB-040805]:  Did you translate “Kb”?  I think it would be good to have it in Persian, or in both (which may be what you did) – unless you think even non-technical users would recognize the meaning of “Kb” in english.  
+
+
 
 #_________________________=Bulletin Status:
 -c567-field:BulletinStatus=وضعيت بولتن:
@@ -398,14 +424,27 @@
 #_________________________________=You can change any of this information later, by choosing Options/Contact Info.
 -e924-field:ContactInfoUpdateLater=شما می توانيد هربخش از اين اطلاعات را بعدن تغيير دهيد، با انتخاب تغييرات دلخواهی/اطلاعات مربوط به تماس گيری با شما.
 
+# [AB-040805]:  There are a bunch of changes needed in the 3 following items (all about custom fields) – I’ve included the directions again here for reference (below), and tried to modify things where I could (but please correct anything I did wrong!)
+#  6.  in CreateCustomFieldsHelp2/3 fields, you can translate tags into foreign
+#      characters (but without punctuation or spaces)
+# 17.  Leave standard field tags in English in CreateCustomFieldsHelp1 and
+#      CreateCustomFieldsHelp2, but put translation in parentheses after
+#      english : e.g.  'author' (مؤلف), so users know what they refer to
+
 #__________________________________=The layout of the bulletins is dictated by an XML document.  By default the standard bulletin fields occur at the top of the Custom Field declaration, but they can be moved if desired.  However, there are four required fields that cannot be removed:  'author', 'entrydate', 'language' and 'title'.\n\n
--1ef6-field:CreateCustomFieldsHelp1=صفحه بندی و ترتيب بولتن ها توسط يک فايلِ اکس ـ اِم ـ اِل (XML) دستور داده می شود. در ابتدای کار، در صفحه بندیِ اوليه، قسمت های استانداردِ بولتن در بالا، برفرازِ قسمت هايی که به خواستِ استفاده کننده تنظيم می شود، قرار دارد. اما جای آنها می تواند بنا به تمايلِ شما عوض شود. با وجود اين، چهار قسمتِ ضروری وجود دارد که نمی توان آنها را جابجا کرد: "مؤلف"، "تاريخِ وارد کردنِ اطلاعات"، "زبان"، و "عنوان اصلی". \n\n
+-1ef6-field:CreateCustomFieldsHelp1=صفحه بندی و ترتيب بولتن ها توسط يک فايلِ اکس ـ اِم ـ اِل (XML) دستور داده می شود. در ابتدای کار، در صفحه بندیِ اوليه، قسمت های استانداردِ بولتن در بالا، برفرازِ قسمت هايی که به خواستِ استفاده کننده تنظيم می شود، قرار دارد. اما جای آنها می تواند بنا به تمايلِ شما عوض شود. با وجود اين، چهار قسمتِ ضروری وجود دارد که نمی توان آنها را جابجا کرد: 'author' "مؤلف"،  'entrydate' "تاريخِ وارد کردنِ اطلاعات"، 'language'  "زبان"، و 'title'  "عنوان اصلی". \n\n
+# [AB-040805]:  It seems a bit confusing to me to have items in single quotes and double quotes next to each other the way you have done in the item below, but this is what I did here to be consistent (please check that I put things in the right place and that is displays correctly in Martus.)  Are parentheses not understood in Persian?  (I’ve seen them elsewhere, so if they are, think this would be clearer?)
 
 #__________________________________=For custom (non-standard) fields, you first select the type of field you want.  The possible choices are 'BOOLEAN', 'DATE', 'DATERANGE', 'GRID', 'LANGUAGE', 'MULTILINE', and 'STRING'. \n\nFor each custom field you will need a unique identification tag.  This tag can be any word except those already used by the system (eg. 'author', 'summary', 'location', 'title' etc.), and cannot contain spaces or special characters.  Examples of choices are 'custom1', 'custom2', etc, or tags that are more descriptive like 'VictimsName'.\n Then you need a label which is displayed next to your custom field.  An example might be 'Name of 1st Witness'.\n\nAdditional Comments\n1. XML is case-sensitive ('Witness' is not the same as 'witness') \n2. quotes around type name can be single or double as long as they match (e.g. 'STRING" is not valid. It must be 'STRING' or "STRING") \n3. A Boolean field will be displayed as a checkbox when editing and Yes/No when previewed or printed.\n\nSee examples below:\n\n
--676b-field:CreateCustomFieldsHelp2=برای ايجاد قسمت های مورد نيازتان (بخش های غير استانداردی که شما برای وارد کردن اطلاعات، خودتان به وجود می آوريد) ابتدا بايد نوعِ آن قسمت را معلوم بکنيد. نوع هايی که می توانيد برگزينيد عبارت اند از: "بولی(مثبت ـ منفی)"'BOOLEAN'، "تاريخ"'DATE'،  "گريد" 'GRID' ، "طيفِ تاريخ شروع و پايان" 'DATERANGE'، "زبان" 'LANGUAGE' ، "چندخطی" 'MULTILINE' ، "حروف ـ نوشته" 'STRING'.     \n\nبرای هر قسمتی که درست می کنيد، شما بايد يک اتيکتِ تشخيص دهندهء يگانه داشته باشيد. اين اتيکت می توان هر کلمه ای باشد به جز آن کلماتی که از پيش به سيستم اختصاص داده شده (مثل "مؤلف"، "خلاصه"، "محل"، "عنوان اصلی"، و غيره). در اتيکت شما نمی توانيد از فاصله ميان حروف يا کاراکترهای خاصِ غيرالفبايی استفاده کنيد. برای نمونه شما می توانيد "يکشمار"، "دوشمار"، "سهشمار" يا اتيکت هايی که معنیِ خاصی بدهند مثل "قربانی" استفاده کنيد. \nبعد، شما بايد يک برچسب يا عنوان انتخاب کنيد که کنار قسمت مورد نظر می آيد. برای مثال: "نامِ نخستين شاهد". ملاحظات ديگر: \n1-برای پارسر ِ اکس ـ ام ـ ال (XML) حروف بزرگ و حروف کوچک از يکديگر تفکيک پذيرند و شما نبايد يکی را به جای ديگری به کار بگيريد. 2\n- گيومهء دورِ يک کلمه بايد شروع و اختتام اش شبيه به هم باشد (يا يک خطی يا دوخطی). 3\n- يک حوزهء "بولی" به هنگام اديت کردن به  شکل يک چهارگوشک (مکعب کوچک برای مارک زدن) ظاهر می شود و به هنگام رؤيت يا چاپ به شکل بله/خير. \n\nبه نمونه های زير توجه کنيد:\n\n
+-676b-field:CreateCustomFieldsHelp2=برای ايجاد قسمت های مورد نيازتان (بخش های غير استانداردی که شما برای وارد کردن اطلاعات، خودتان به وجود می آوريد) ابتدا بايد نوعِ آن قسمت را معلوم بکنيد. نوع هايی که می توانيد برگزينيد عبارت اند از: "بولی(مثبت ـ منفی)"'BOOLEAN'، "تاريخ"'DATE'،  "گريد" 'GRID' ، "طيفِ تاريخ شروع و پايان" 'DATERANGE'، "زبان" 'LANGUAGE' ، "چندخطی" 'MULTILINE' ، "حروف ـ نوشته" 'STRING'.     \n\nبرای هر قسمتی که درست می کنيد، شما بايد يک اتيکتِ تشخيص دهندهء يگانه داشته باشيد. اين اتيکت می توان هر کلمه ای باشد به جز آن کلماتی که از پيش به سيستم اختصاص داده شده (مثل  ‘author’ "مؤلف"،  ‘summary’ "خلاصه"،  ‘location’ "محل"،  ‘title’ "عنوان اصلی"، و غيره). در اتيکت شما نمی توانيد از فاصله ميان حروف يا کاراکترهای خاصِ غيرالفبايی استفاده کنيد. برای نمونه شما می توانيد "يکشمار"، "دوشمار"، "سهشمار" يا اتيکت هايی که معنیِ خاصی بدهند مثل "قربانی" استفاده کنيد. \n\nبعد، شما بايد يک برچسب يا عنوان انتخاب کنيد که کنار قسمت مورد نظر می آيد. برای مثال: "نامِ نخستين شاهد". \n\n  ملاحظات ديگر: \n1 - برای پارسر ِ اکس ـ ام ـ ال (XML) حروف بزرگ و حروف کوچک از يکديگر تفکيک پذيرند و شما نبايد يکی را به جای ديگری به کار بگيريد. \n2 - گيومهء دورِ يک کلمه بايد شروع و اختتام اش شبيه به هم باشد (يا يک خطی يا دوخطی). \n3 -  يک حوزهء "بولی" به هنگام اديت کردن به  شکل يک چهارگوشک (مکعب کوچک برای مارک زدن) ظاهر می شود و به هنگام رؤيت يا چاپ به شکل بله/خير. \n\nبه نمونه های زير توجه کنيد:\n\n
+# [AB-040805]:  The first sentence seems very long in comparison to the english?  Would parentheses instead of “” around the Persian translations of the types (and Persian translations of the english standard fields I added) not be understood?  It looked to me (not actually being able to read Persian, so my pattern-recognition may be off!) like you had more than the “custom1” and “custom2” examples, but it also looked like the same number was used for each one?.  As long as the examples are valid, it probably doesn’t hurt anything (especially since I want to change the english someday,) but could you please doublecheck it?  I also added some spaces/new-lines to make things line up a bit better – let me know if it looks OK to you... 
+
 
 #__________________________________=<Field type='STRING'>\n<Tag>custom1</Tag>\n<Label>Witness Name</Label>\n</Field>\n\n<Field type='LANGUAGE'>\n<Tag>new2</Tag>\n<Label>Witness Speaks</Label>\n</Field>\n\n<Field type='BOOLEAN'>\n<Tag>new3</Tag>\n<Label>Were guns used?</Label>\n</Field>\n\n<Field type='GRID'>\n<Tag>customgrid</Tag>\n<Label>Victim Information</Label>\n<GridSpecDetails>\n<Column><Label>Name of Victim</Label></Column>\n<Column><Label>Victim Age</Label></Column>\n<Column><Label>Victim Gender</Label></Column>\n<Column><Label>Victim Ethnicity</Label></Column>\n</GridSpecDetails>\n</Field>\n
--c0a8-field:CreateCustomFieldsHelp3=<Field type='STRING'>\n<Tag>custom1</Tag>\n<Label>Witness Name(نام شاهد)</Label>\n</Field>\n\n<Field type='LANGUAGE'>\n<Tag>new2</Tag>\n<Label>Witness Speaks(شاهد سخن می گويد)</Label>\n</Field>\n\n<Field type='BOOLEAN'>\n<Tag>new3</Tag>\n<Label>Were guns used?(آيا از اسلحه استفاده شده؟)</Label>\n</Field>\n\n<Field type='GRID'>\n<Tag>customgrid</Tag>\n<Label>Victim Information(اطلاعاتِ قربانی)</Label>\n<GridSpecDetails>\n<Column><Label>Name of Victim(نام قربانی)</Label></Column>\n<Column><Label>Victim Age(سن قربانی)</Label></Column>\n<Column><Label>Victim Gender(جنسيتِ قربانی)</Label></Column>\n<Column><Label>Victim Ethnicity(قوميتِ قربانی)</Label></Column>\n</GridSpecDetails>\n</Field>\n
+
+
+-c0a8-field:CreateCustomFieldsHelp3=<Field type='STRING'>\n<Tag>custom1</Tag>\n<Label> نام شاهد</Label>\n</Field>\n\n<Field type='LANGUAGE'>\n<Tag>new2</Tag>\n<Label> شاهد سخن می گويد</Label>\n</Field>\n\n<Field type='BOOLEAN'>\n<Tag>new3</Tag>\n<Label> آيا از اسلحه استفاده شده؟</Label>\n</Field>\n\n<Field type='GRID'>\n<Tag>customgrid</Tag>\n<Label> اطلاعاتِ قربانی</Label>\n<GridSpecDetails>\n<Column><Label> نام قربانی</Label></Column>\n<Column><Label> سن قربانی</Label></Column>\n<Column><Label> جنسيتِ قربانی</Label></Column>\n<Column><Label> قوميتِ قربانی</Label></Column>\n</GridSpecDetails>\n</Field>\n
+# [AB-040805]:  I removed the english where it isn’t needed.  But the actual tags (e.g. custom1, new2, new3, customgrid) need to be put into Persian 
 
 #____________________________________=Please enter your new username and password.
 -aec2-field:CreateNewUserNamePassword=لطفن اسمِ استفاده کنندهء جديد و اسم رمز(پاسورد) جديد را وارد کنيد.
@@ -459,7 +498,8 @@
 -64b8-field:ErrorCustomFieldHeader4=برچسب يا عنوان
 
 #____________________________=There is an error in the custom field definitions. Each problem is identified with the following codes:\n   100 - Required standard field is missing\n   101 - Custom field does not have a correct tag.\n   102 - A previous Tag already exists with this name.\n   103 - Custom field does not have a label.\n   104 - Unrecognized Field Type.\n   105 - A label was found in a standard field.\n   106 - XML Parse Error.\n   107 - Tag contains illegal characters
--943a-field:ErrorCustomFields=يک خطا در قسمتی که شما به خواست خودتان داريد درست می کنيد رخ داد. هرمشکلی با کُدهای زيرين تشخيص داده می شود: 100\n- قسمتی که استاندارد و لازم است درينجا از قلم افتاده. 101\n- قسمتی که شما اضافه کرده ايد از اتيکتِ (tag) صحيح برخوردار نيست. 102\n- يک اتيکت مشابه از قبل وجود دارد. 103\n- قسمتی که شما اضافه کرده ايد از برچسب يا عنوان برخوردار نيست. 104\n- اين نوع برای برنامه قابل تشخيص نيست. 105\n- يک برچسب در جايی که متعلق قسمت های استانداردِ موجود است پيدا شد 106\n- اعلام خطا از سوی پارسِر XML(برنامه ای که کُد را می خواند). 107\n- اتيکت شما در خودش کاراکترهای غيرمجاز دارد
+-943a-field:ErrorCustomFields=يک خطا در قسمتی که شما به خواست خودتان داريد درست می کنيد رخ داد. هرمشکلی با کُدهای زيرين تشخيص داده می شود: \n 100 - قسمتی که استاندارد و لازم است درينجا از قلم افتاده. \n 101 - قسمتی که شما اضافه کرده ايد از اتيکتِ (tag) صحيح برخوردار نيست. \n 102 - يک اتيکت مشابه از قبل وجود دارد. \n 103 - قسمتی که شما اضافه کرده ايد از برچسب يا عنوان برخوردار نيست. \n 104 - اين نوع برای برنامه قابل تشخيص نيست. \n 105 - يک برچسب در جايی که متعلق قسمت های استانداردِ موجود است پيدا شد \n 106 - اعلام خطا از سوی پارسِر XML(برنامه ای که کُد را می خواند). \n 107 - اتيکت شما در خودش کاراکترهای غيرمجاز دارد
+# [AB-040805]:  I moved some stuff around to make things line up a bit better – let me know if it looks OK to you... 
 
 #_________________________________________=A previous backup file exists.  You must save each file on its own removable media disk.
 -db93-field:ErrorPreviousBackupShareExists=يک نسخهء اضافی از فايل موجود است. شما بايد هر فايل را روی ديسک جداگانه ای ذخيره کنيد.
@@ -469,6 +509,8 @@
 
 #________________________________=An error occurred reading this key backup file.
 -b106-field:ErrorRecoverShareDisk=به هنگام خواندنِ نسخهء اضافیِ اين «فايل کليد»  اشکالی پيش آمد.
+# [AB-040805]:  what are the » «  around?  (Happens in several places, but not always around filenames etc, so wasn’t sure – I don’t have a problem if you do it, but can you check for consistency on that?)
+
 
 #_____________________________________=An error occurred verifying this key backup file.
 -df17-field:ErrorVerifyingKeyPairShare=به هنگامِ تأييدشدنِ نسخهء اضافیِ  اين «فايل کليد»  اشکالی پيش آمد.
@@ -514,8 +556,13 @@
 
 #____________________________________=No accounts exist on this computer.  To create a new account click OK.  Otherwise you can click on the Restore Account tab to restore an account which was previously backed up.
 -7d69-field:HowToCreateInitialAccount=هيچ حسابی بر روی اين کامپيوتر به اين نام نيست! اگر می خواهيد حساب جديد باز کنيد دکمهء «تأييد» را کليک کنيد؛ در غير اينصورت روی دکمهء «احياء حساب» کليک کنيد تا حسابی که پيش از اين يک نسخه از آن ذخيره شده را بيرون بکشيد.
+# [AB-040805]:  seems like translation doesn’t exactly match that in button:RecoverAccountTab?  Or am I missing something?
+
+
+
 
 #________________________________=One or more accounts already exist on this computer. To create an additional account with a new username and passphrase, click OK.
+
 -02f2-field:HowToCreateNewAccount=يک يا چند حساب با اين نام روی اين کامپيوترموجود است. برای خلق يک حساب ديگر با اسم استفاده کنندهء جديد و اسم رمز جديد، دکمهء «تأييد» را کليک کنيد.
 
 #_______________________=Warning: Portions may be missing or damaged
@@ -529,6 +576,8 @@
 
 #___________________________________________=Server Not Available
 -c79c-field:NoServerAvailableProgressMessage=سِرور يا کامپيوتر مرکزی در لحظهء حاضر قابل دسترسی نيست.
+# [AB-040805]:  this seems pretty long
+
 
 #_____________________________=Remember: Entering your password using the regular keyboard may reduce security.
 -55fa-field:NormalKeyboardMsg1=به ياد داشته باشيد: برای وارد کردن اسم رمز اگر از صفحه کليد معمولی استفاده کنيد، کمتر امن و محرمانه خواهد بود.
@@ -568,6 +617,8 @@
 
 #_______________________________________=This will NOT remove any bulletins from the server, any Martus files copied outside of the Martus directory, or any of your bulletins or Martus files on another computer.
 -8ee9-field:QuickEraseWillNotRemoveItems= اين عمل هيچ بولتنی را از روی «سِروِر» يا کامپيوتر مرکزی پاک نخواهد کرد، همچنين اگر فايلی خارج از محلِ مشخصِ فايل های Martus روی اين کامپيوتر باشد پاک نخواهد شد. اگر بولتن يا فايلی بر روی کامپيوتر ديگری ذخيره شده باشند، آنها نيز پاک نخواهند شد.
+# [AB-040805]:  “Martus” was translated (2 out 3 times)
+
 
 #____________________________________=Delete your Martus key, bulletins, folders, and configuration information (such as your Headquarters, server, and custom field settings).
 -cf3b-field:QuickEraseWillRemoveItems=کليدِ Martus و بولتن ها و «فولدر» های آنها و اطلاعات راهنما (نظير دفاتر مرکزی و «سرور» و تغييرات مشخص)، همگی پاک شوند.
@@ -634,6 +685,20 @@
 
 #______________________________=When searching for bulletins you can add key words (or, and) between multiple search term words (e.g. prison or jail, prison and assault).  If you enter multiple search terms without keywords, Martus will search for the exact phrase you entered.  Do not use quotation marks in your search.  The 'starting on' and 'ending on' dates will further refine your search matching either the event date or the date entered.  If you leave the search text blank Martus will perform only a date search.
 -ac8c-field:SearchBulletinRules=به هنگام جستجو برای يک بولتن خاص، شما می توانيد از واژه های کليدیِ «و» و «يا» ميان چند واژهء اصلی استفاده کنيد. (برای نمونه، زندان يا حبس، زندان و ضرب و شتم). اگر همهء واژه ها را بدون «و» و «يا» وارد کنيد، Martus دقيقن به دنبال همان واژه به همان صورت که وارد شده خواهد بود. اگر بخش «از اين تاريخ» و «تا اين تاريخ» را هم پر کنيد، جستجو با دقت بيشتری انجام خواهد گرفت. اگر هيچ واژه ای در قسمت جستجو نکنيد، Martus فقط روی تاريخ جستجو خواهد کرد.
+# [AB-040805]: see direction (modified to specifically match Persian) below and modify as needed (you can test the display by bringing the modified mtf up in Martus – if the “/”s won’t be understood, use whatever is more appropriate:
+#  5.  in field:SearchBulletinRules, make sure to translate the english "and"
+#      and "or" in the text to exactly match the keyword:and= and 
+#      keyword:or= translations.  Also, the translation of the first sentence
+#      should not exactly match the english version because Martus can handle
+#      both english "and"/"or" and the translations of those keywords for
+#      bulletin searching, since for some languages keyboards are not available
+#      to all users in those alphabets. So please translate the following for 
+#      the first sentence: "When searching for bulletins you can add key words 
+#      either in english or Persian (or/ يا, and/ و) 
+#      between multiple search term words search term words 
+#      (e.g. prison or jail, prison و  assault).
+
+
 
 #________________________=Ending on:
 -2412-field:SearchEndDate=در اين تاريخ پايان گيرد:
@@ -646,18 +711,23 @@
 
 #_______________________________=You will be allowed to upload bulletins to this server.
 -0718-field:ServerAcceptsUploads=شما اجازه خواهيد گرفت که بولتن ها را بر روی اين «سِروِر» پياده کنيد.
+# [AB-040805]:  what are the brackets around?
 
 #_____________________________________________=The current server has updated its statement describing its compliance with the official guidelines for the secure and reliable operation of a Martus server.  The new statement appears below. You can accept or reject this server based on its compliance statement.
 -2acb-field:ServerComplianceChangedDescription=اين «سِرور» اظهاريه اش را جديدن تغيير داده  تابا دستورالعمل های رسمی برای عملکرد امن و محرمانهء Martus همخوانی داشته باشد. اظهاريهء جديد در ذيل خواهد آمد. شما می توانيد برحسب اين اظهاريه، اين «سِرور» را رد يا قبول کنيد.
+# [AB-040805]:  what are the brackets around?
 
 #______________________________________=The server you have selected has provided the following statement describing its compliance with the official guidelines for the secure and reliable operation of a Martus server.  You can accept or reject this server based on its compliance statement.
 -276f-field:ServerComplianceDescription=اي «سِروِر»يا کامپيوترِ مرکزی را که شما انتخاب کرده ايد، اظهاريهء زيرين را فراهم کرده که مطابق است با دستورالعمل های رسمی برای عملکردِ امن و محرمانه و مورد اعتمادِ يک «سرور» Martus. شما می توانيد اين «سِروِر» را رد يا قبول کنيد.
+# [AB-040805]:  what are the brackets around?
 
 #________________________________=You will not be allowed to upload bulletins to this server.
 -3a97-field:ServerDeclinesUploads=شما اجازه نخواهيد داشت که بولتن ها را روی اين «سِروِر» پياده کنيد.
+# [AB-040805]:  what are the brackets around?
 
 #_______________________________=Server Magic Word:
 -ad90-field:ServerMagicWordEntry=اسمِ جادوی «سِروِر»
+# [AB-040805]:  what are the brackets around?  (I’ll stop asking this, but if you could answer it for the rest of the doc – since it didn’t always look like the same word each time.
 
 #__________________________=Server name or IP address:
 -aa94-field:ServerNameEntry=اسم «سِروِر» يا آدرسِ آی ـ پیِ (IP)آن:
@@ -693,7 +763,8 @@
 -5ea8-field:UntitledBulletin=بولتنِ بدونِ عنوان
 
 #______________________________________=Upload Failed
--88c1-field:UploadFailedProgressMessage=متأسفانه عمل پياده کرده اطلاعات ناموفق بود!
+-88c1-field:UploadFailedProgressMessage=متأسفانه عمل پياده کرده اطلاعات ناموفق بود
+# [AB-040805]:  seems long, and I removed the “!” since it wasn’t there in the english.
 
 #_________________________________=Sending Draft Bulletin
 -8ea2-field:UploadingDraftBulletin=در حالِ فرستادنِ دست نويسِ بولتن
@@ -709,6 +780,12 @@
 
 #______________________________=ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890-+=!@#$%^&*()_,.[]{}<>\/?|;:~
 -25df-field:VirtualKeyboardKeys=<ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890-+=!@#$%^&*()_,.[]{}<>\/?|;:~>
+# [AB-040805]: Need to add Persian alphabet – see direction below:
+#  4.  in field:VirtualKeyboardKeys, keep the english alphabet, but include any
+#      non-english characters at the end of the english alphabet/numbers/special
+#      characters (e.g. attach entire Persian alphabet at the end of the line)
+
+
 
 #_______________________________=Space
 -6d8c-field:VirtualKeyboardSpace=يک فاصله
@@ -730,6 +807,7 @@
 
 #__________________________=Martus Software is developed by Benetech in partnership with the Information Program of the Open Society Institute, Aspiration, and the John D. and Catherine T. MacArthur Foundation.
 -3033-field:aboutDlgCredits=نرم افزار Martus توسط شرکت Benetech ساخته شده، با همکاریِ برنامهء اطلاع رسانیِ «بنياد جامعهء باز، اسپيريشن» و بنياد جان دی و کاترين تی مکآرتور.
+# [AB-040805]:  you could put the names of these organizations in english in parentheses after the Persian in case they would be more recognized that way?
 
 #_____________________________=Martus comes with ABSOLUTELY NO WARRANTY, and is made available under license terms in the file named license.txt in the Martus directory. This is free software, and you are welcome to redistribute it under certain conditions discussed in license.txt. 
 -8b41-field:aboutDlgDisclaimer=Martus به هيچ وجه با هيچ ضمانت و « «وارانتی» توزيع نمی شود و شرايط پخش و توزيع آن در فايلی به نام license.txt در دايکتوری يا «فولدر» Martus قابل رجوع است.اين يک نرم افزارِ رايگان است و شما اجازه داريد آنرا تحت همان شرايطی که در فايل نامبرده آمده پخش مجدد بکنيد.
@@ -748,6 +826,7 @@
 
 #____________________________________=Kb
 -1717-field:attachmentSizeForPrinting=Kbکيلوبايت
+# [AB-040805]:  Did you translate “Kb”?  I think it would be good to have it in Persian, or in both (which may be what you did) – unless you think even non-technical users would recognize the meaning of “Kb” in english.  
 
 #______________________=Attachments
 -6771-field:attachments=ضميمه ها
@@ -760,6 +839,10 @@
 
 #_______________________________________________=Save your password encrypted key backup file to a single floppy disk or other removable media.  Then store this disk in a safe place. You will use this disk, with your username and password, to restore your data if your system files are ever damaged.  To restore this password-protected key in the future, select 'Restore Account' and 'Restore account from backup key file' when signing into Martus.
 -e692-field:confirmBackupKeyPairInformationcause=نسخه ای اضافی از فايلِ کليدِ خودتان را که اسم رمز آن به حالتِ رمزی درآمده را روی يک ديسک کوچک(فلاپی) يا يک وسيلهء مستقل و جداشدنیِ ديگر ذخيره کنيد. سپس آنرا در جای امنی پنهان کنيد. اگر زمانی فايل های سيستمیِ شما دچار آسيب بشوند، شما با استفاده از اين ديسک و به کار بردنِ اسمِ استفاده کننده و اسم رمزتان می توانيد آن فايل ها را احيا کنيد. برای احياء کردنِ اين کليد که با اسم رمز حفاظت می شود در آينده، اين دکمه ها را انتخاب کنيد: «حساب را احيا کنيد» و «حساب را از روی نسخهء اضافیِ فايلِ کليد احيا کنيد»، به هنگامی که امضای ورود به Martus را وارد کرده ايد.
+# [AB-040805]:  seems like translation doesn’t exactly match that in button:RecoverAccountByBackup and button:RecoverAccountTab?  Or am I missing something?
+
+
+
 
 #________________________________________________=Choosing Yes will begin the backup process.
 -0b47-field:confirmBackupKeyPairInformationeffect=اگر بله را کليک کنيد، کار ذخيرهء نسخهء اضافی آغاز خواهد شد.
@@ -835,9 +918,12 @@
 
 #___________________________________________=Clicking on Yes will exit Martus, and leave the unsent bulletins.  They will be sent the next time you run Martus and connect to a server.
 -7c7f-field:confirmDraftUploadRemindereffect=اگر روی بله کليک کنيد از Martus خارج خواهيد شد و بولتن های شما به سـِروِر فرستاده نخواهند شد. مرتبهء بعد که شما برنامه را بکار بگيريد و با سِروِر ارتباط برقرار کنيد اين بولتن ها فرستاده خواهند شد.
+# [AB-040805]:  “Martus” was translated (1 out of 2 times)
+
 
 #__________________________________________________=The bulletin you have chosen to modify contains information that this version of Martus cannot understand. It may have been created by a newer version of Martus, so you should ensure that you are running the latest version.
 -1233-field:confirmEditBulletinWithUnknownTagscause=بولتنی که شما انتخاب کرده ايد تا در آن تغييراتی بدهيد شامل اطلاعاتی است که اين نسخه از برنامهء Martus قادر به فهم آن نيست. احتمال دارد اين بولتن با نسخهء جديدتری از برنامهء Martus به وجود آمده باشد. بنابرين، بهتر است شما پيشتر اطمينان حاصل کنيد که از آخرين و جديدترين نسخهء Martus استفاده بکنيد.
+# [AB-040805]:  I’m assuming the extra “Martus” was because you made it “the latest version of Martus” – but could you please doublecheck?)
 
 #___________________________________________________=If you modify this bulletin, the unknown information will be lost.
 -d72b-field:confirmEditBulletinWithUnknownTagseffect=اگر شما در اين بولتن تغييراتی بدهيد، اطلاعات ناشناخته در آن از بين خواهند رفت.
@@ -850,6 +936,7 @@
 
 #_________________________________________________=The file you chose is not part of a key backup set.  These files are named '<name you picked>-#.dat' where # is the sequence number in the disk set previously created.
 -2e41-field:confirmErrorRecoverIvalidFileNamecause=فايلی که هم اکنون شما انتخاب کرديد جزء گروه نسخهء اضافیِ فايل های کليدی نيست. آن فايل ها نام شان اينگونه است 'نام فايل-#.dat'که در اين نام # شمارهء مسلسلی است که روی گروه فايل های روی ديسک از قبل شماره گذاری شده.
+# [AB-040805]:  Can you please check (by picking the Restore tab, and then picking some random nonbackup file) that the filename here displays correctly?  I tried it and think it is backwards from how an actual filename would look, but didn’t want to play with it without asking you.
 
 #__________________________________________________=Choosing yes will bring up the file selection dialog again so you may pick a different file.
 -c237-field:confirmErrorRecoverIvalidFileNameeffect=اگر بله را کليک کنيد، بار ديگر پنجرهء انتخاب فايل را خواهيد ديد که از آن می توانيد فايل ديگری را انتخاب کنيد.
@@ -862,6 +949,7 @@
 
 #________________________________________=One or more of the bulletins you have chosen to export contain information that this version of Martus cannot understand. They may have been created by a newer version of Martus, so you should ensure that you are running the latest version.
 -56f8-field:confirmExportUnknownTagscause=يک يا چند عدد از بولتن هايی که شما می خواهيد صادر کنيد شامل اطلاعاتی است که اين نسخه از بولتن Martus قادر به فهميدنِ آنها نيست. احتمال دارد اين بولتن با نسخهء جديدتری از برنامهء Martus به وجود آمده باشد. بنابرين، بهتر است شما پيشتر اطمينان حاصل کنيد که از آخرين و جديدترين نسخهء Martus استفاده بکنيد.
+# [AB-040805]:  I’m assuming the extra “Martus” was because you made it “the latest version of Martus” – but could you please doublecheck?)
 
 #_________________________________________=If you continue with the export, any unknown information will not be exported.
 -232e-field:confirmExportUnknownTagseffect=اگر کماکان به صدور بولتن ادامه بدهيد، اطلاعات ناشناخته در اين بولتن صادر نخواهند شد.
@@ -877,18 +965,23 @@
 
 #________________________________________________________=Answering Yes will allow the migration to proceed, answering No will exit Martus.
 -2a34-field:confirmNeedsBulletinVersioningMigrationeffect=با انتخاب بله، کار جديدکردن سيستم شما آغاز می شود. با انتخاب خير، از برنامه خارج خواهيد شد.
+# [AB-040805]:  “Martus” was translated
 
 #___________________________________________=This account was created with an older version of Martus, which used a different set of folders. The folders need to be migrated to the new format. The migration is automatic, fast, and safe. You cannot run this version of Martus unless you allow this migration.
 -39ae-field:confirmNeedsFolderMigrationcause=اين حساب با نسخهء قديمی تری از برنامهء Martus ايجاد شده، نسخه ای که از فولدرهای متفاوتی استفاده می کرد. اين فولدرها بايد تبديل فورمت تازه تری بشوند. اين عمل بسيار سريع، امن و به طور اتوماتيک انجام خواهد گرفت. شما بايد اجازهء اين کار را بدهيد چون در غير اين صورت با برنامهء قديمی نمی توانيد کار کنيد
+# [AB-040805]:  “Martus” was translated (1 out of 2 times)
 
 #____________________________________________=Answering Yes will allow the migration to proceed, answering No will exit Martus.
 -2a34-field:confirmNeedsFolderMigrationeffect=با انتخاب بله، کار جديدکردن سيستم شما آغاز می شود. با انتخاب خير، از برنامه خارج خواهيد شد.
+# [AB-040805]:  “Martus” was translated
 
 #_______________________________________________=Warning: It appears that you are trying to run an older version of Martus.  Running this version of Martus may result in reduced functionality, and some configuration settings created in the newer version will be ignored. We recommend that you upgrade your software.
 -f251-field:confirmNewerConfigInfoFileFoundcause=اخطار: به نظر می رسد شما می خواهيد از نسخهء قديمیِ برنامهء Martus استفاده کنيد. اگر از اين برنامهء قديمی استفاده کنيد بعضی از کارکردهای برنامه را از دست خواهيد داد، و تعدادی از تنظيماتِ تازه تر برای نسخهء جديدتر ناديده گرفته خواهند شد. ما سفارش می کنيم نرم افزار را جديد کنيد.
+# [AB-040805]:  “Martus” was translated (1 out of 2 times)
 
 #________________________________________________=Answering Yes will continue to use this older version of Martus.  Answering No will exit Martus so you can upgrade to the latest version.
 -3170-field:confirmNewerConfigInfoFileFoundeffect=با انتخاب بله، شما با همين نسخهء قديمیِ برنامه به کارتان ادامه خواهيد داد. با انتخاب خير، شما از برنامه خارج می شويد تا بتوانيد نسخه جديدتری از نرم افزار را پياده کنيد.
+# [AB-040805]:  “Martus” was translated
 
 #___________________________________________________________=Warning: the bulletin you are currently viewing is not yours.  Attachments can contain viruses, or malicious programs harmful to your computer.
 -8e42-field:confirmNotYourBulletinViewAttachmentAnywayscause=اخطار: بولتنی که شما در حال حاضر نظاره می کنيد متعلق به شما نيست. ضمايم فايل احتمال دارد حاوی ويروس يا برنامه های خطرناکی باشند که به کامپيوتر شما آسيب می رسانند.
@@ -922,12 +1015,14 @@
 
 #______________________________________________________=Key Restore failed, we suggest you try again with a different set of files. Choose Yes to try again, No to exit Martus.
 -cf94-field:confirmRecoveredKeyShareFailedTryAgaincause=عمل احيای کليد دچار مشکل شد، ما سفارش می کنيم شما يک بار ديگر با گروه ديگری از فايل ها اين عمل را تکرار کنيد. اگر می خواهيد دوباره امتحان کنيد بله را کليک کنيد، اگر می خواهيد از برنامه خارج شويد خير را کليک کنيد.
+# [AB-040805]:  “Martus” was translated
 
 #_______________________________________________________=Choosing Yes will begin the restore process again.
 -cb49-field:confirmRecoveredKeyShareFailedTryAgaineffect=اگر بله را انتخاب کنيد، عمل احياء از سرگرفته خواهد شد.
 
 #_______________________________________=The password you chose has fewer than 15 characters and less than 2 non-alphanumeric characters. We recommend choosing a stronger password.
 -73a6-field:confirmRedoWeakPasswordcause=اسم رمزی که شما انتخاب کرديد حروف اش کمتر از پانزده تاست و کاراکترهای غير حروفی و غيرعددی آن هم کمتر از دوتاست. ما سفارش می کنيم از اسم رمز پيچيده تری استفاده بکنيد.
+# [AB-040805]:  Persian numbers seem to have been used here, while in the multi-file restore, English numbers were used.  Should they both use the same?
 
 #________________________________________=Clicking on Yes will continue with the password you just entered.
 -86eb-field:confirmRedoWeakPasswordeffect=اگر بله را کليک کنيد با همين اسم رمز ادامه خواهيد داد.
@@ -967,12 +1062,14 @@
 
 #__________________________________________=This will permanently seal the bulletin and you will not be allowed to make any further modifications to it except by creating a new version of the bulletin.\n\nThe public information in this bulletin will be released for possible publication on the Martus Search Engine, and may be viewed by people outside your organization.\n\nIf there is information you do not want to be publicly available, either move that data to the private section of the bulletin or check the 'Keep ALL Information Private' box before saving the bulletin.
 -2df3-field:confirmSendWithPublicDataeffect=با اين انتخاب، اين بولتن برای هميشه مُهر می خورد و سربسته می ماند و شما از اين به بعد ديگر نمی توانيد در آن تغييراتی بدهيد، مگر اينکه نسخهء ديگری از روی آن کُپی کنيد و آن نسخهء جديدتر را تغيير دهيد.\n\n بخش های عمومی و علنیِ اين بولتن در اختيارِ برنامهء جستجوگرِ Martus قرار خواهد گرفت تا همه بتوانند از طريق جستجو به اطلاعاتِ آن دسترسی پيدا کنند، و بنابراين توسط افرادی خارج از سازمان شما قابل رؤيت خواهند بود. \n\nاگر اطلاعاتی در بولتن تان داريد که نمی خواهيد علنی قابل دسترس باشند، بايد اين اطلاعات را به بخش محرمانهء بولتن منتقل کنيد، يا اينکه قسمتی که می گويد: «کليه اطلاعات را محرمانه نگهداريد.» را مارک بزنيد.
+# [AB-040805]:  Sorry I didn’t specifically mention this before, but we’d like to keep the entire phrase “Martus Search Engine” in english (probably with Persian transliteration for Search Engine in parentheses.)  Also, the message at the end doesn’t exactly match field:allprivate. 
 
 #_____________________________________________=Martus software is unable to determine whether this server complies with the official guidelines for operating a secure and reliable Martus server.
 -ab16-field:confirmServerComplianceFailedcause=متأسفانه نرم افزار Martus قادر نيست مشخص کند که آيا اين سـِروِر برطبق موازين رسمیِ سـِروِرهای امنِ Martus تنظيم شده يا خير.
 
 #______________________________________________=Benetech recommends that you do not use this server until a compliance statement is made available for you to read.  Continuing will select this non-compliant server anyway.
 -8731-field:confirmServerComplianceFailedeffect=شرکت Benetech سفارش می کند که شما از اين سـِروِر استفاده نکنيد تا زمانی که اظهاريهء انطباق با موازين امنيتیِ Martus از سوی آن صادر شود. اگر شما از اينجا کمکان ادامه بدهيد، همين سـِروِر نامنطبق با موازين ما را انتخاب خواهيد کرد.
+# [AB-040805]:  Did you add “Martus” before “server”?  Probably OK, just wanted to check.
 
 #_________________________________________=You have chosen to allow this client the ability to view your public and PRIVATE data.
 -4059-field:confirmSetImportPublicKeycause=با اين انتخاب شما اجازه داده ايد که اين فرد قادر باشد اطلاعات علنی و اطلاعاتِ غيرعلنیِ شما را هردو رؤيت کند.
@@ -1003,6 +1100,7 @@
 
 #______________________________________=Clicking on Yes will exit Martus, and leave the unsent bulletins.  They will be sent the next time you run Martus and connect to a server.
 -7c7f-field:confirmUploadRemindereffect=اگر روی بله کليک کنيد، بولتن های فرستاده نشده همينجا باقی می مانند. مرتبهء بعد که شما از برنامهء Martus استفاده کنيد و با سـِروِر ارتباط برقرار کنيد، اين بولتن ها فرستاده خواهند شد.
+# [AB-040805]:  “Martus” was translated (1 out of 2 times)
 
 #_______________________________________________=The bulletin you are about to create is based on a previous bulletin whose custom fields are different from your current custom fields.  Do you wish to use the original bulletin's custom fields?
 -a6ca-field:confirmUseBulletinsCustomFieldscause=بولتنی که هم اکنون می خواهيد درست کنيد برمبنای يک بولتن قبلی است اما قسمت هايی که اطلاعات در روی صفحهء آن وارد می شود با بولتن کنونی تفاوت دارند. آيا مايل هستيد از صفحه بندیِ آن بولتنِ قبلی استفاده کنيد؟
@@ -1030,6 +1128,7 @@
 
 #____________________________________________________=Warning! Using the regular keyboard to enter your password greatly reduces the security of the Martus system, and could make it easier for an attacker to view your private data.
 -f068-field:confirmWarningSwitchToNormalKeyboardcause=اخطار: اگر از صفحه کليدِ معمولی برای واردکردنِ اسم رمزتان استفاده کنيد، ريسکِ امنيتیِ آن بسيار زياد است و فردی که به کامپيوتر شما شبيخون بزند قادر خواهد بود اطلاعاتِ محرمانهء شما را بخواند.
+# [AB-040805]:  “Martus” was translated
 
 #_____________________________________________________=If this is a Headquarters computer, it is especially important to use the on-screen keyboard, because an attacker could gain access to all the private data that you are authorized to view.
 -4379-field:confirmWarningSwitchToNormalKeyboardeffect=اگر اين کامپيوتر متعلق به دفترمرکزی شماست، بسيار مهم است که شما حتمن از صفحه کليدِ روی مانيتور استفاده بکنيد، زيرا اگر کسی به اين کامپيوترشبيخون بزند می تواند همهء اطلاعاتِ محرمانه ای که فقط برای شماست را رؤيت کند.
@@ -1135,6 +1234,7 @@
 
 #_____________________________________________=This date range has an end date that is earlier than the start date:
 -e4dc-field:messageErrorDateRangeInvertedcause=تاريخ پايانی از تاريخ شروع عقب تر است!
+# [AB-040805]:  shouldn’t the “!” be a “:”
 
 #_________________________________=The current server has sent this message:
 -fd76-field:messageServerNewscause=سـِروِر کنونی اين پيغام را برای شما فرستاده:
@@ -1189,6 +1289,7 @@
 
 #____________________________________________=An unexpected error occurred in generating the key backup files.
 -d237-field:notifyErrorBackingUpKeySharecause=به هنگام ايجاد نسخه های اضافیِ فايل های کليد، خطای نامنتظره ای پيش آمد.
+# [AB-040805]:  I saw << >> brackets in a lot of the other fields about key backup files – for consistency, should there be some here?  (Or should they be removed from those other fields?)
 
 #______________________________________=An error prevented the file from being read.
 -1ad3-field:notifyErrorReadingFilecause=يک خطا باعث شد که فايل خوانده نـشود.
@@ -1234,6 +1335,7 @@
 
 #___________________________________________=An error occurred during the conversion of your folders. You can still use Martus, but if the Outbox or Drafts folders still exist, do not use them.
 -73de-field:notifyFolderMigrationFailedcause=متأسفانه به هنگام تبديلِ فولدرهای شما خطايی رخ داد. شما هنور می توانيد از Martus استفاده کنيد اما اگر فولدرهای Outbox و «دست نويس» هنور وجود داشته باشند، از آنها استفاده نکنيد.
+# [AB-040805]:  Sorry, I should have added this to the mtf directions – but please put both “Outbox” and “Drafts” in both Persian and English (this message should almost never come up, and it may change to be more accurate in a future release, but if it does come up, I want to make sure that it is understood in both languages because those folder names may not get translated if the conversion fails.) 
 
 #___________________________________________=One or more bulletins were severely damaged, and cannot be displayed. If these bulletins were backed up to a server, you may be able to retrieve undamaged copies from there.
 -399f-field:notifyFoundDamagedBulletinscause=يک يا چند بولتن به طرز بدی آسيب ديده اند و قابل رؤيت نمی باشند. اگر نسخهء اضافی آنها روی سِِرور ذخيره شده باشند شما ممکن است بتوانيد آنها را از روی سـِروِر دوباره بيرون بکشيد.
@@ -1249,12 +1351,15 @@
 
 #_______________________________________=You must have a server name or IP address.
 -984b-field:notifyInvalidServerNamecause=شما بايد برای سـِروِر يک نام يا آدرس اينترنتی(IP address) داشته باشيد.
+# [AB-040805]:  “address” was translated, and not left/repeated in english in other similar fields.
 
 #________________________________________=Operation completed.
 -1a65-field:notifyOperationCompletedcause=<Operation completed.
+# [AB-040805]:  This was not translated – an easy check to do when you think you are done with a mtf file is to search on “=<” (to find any items you either didn’t translate, or forgot to remove the opening bracket)
 
 #_____________________________________=Not a valid password, passwords must be at least 8 characters long
 -c9fa-field:notifyPasswordInvalidcause=اين اسمِ رمز (پاسوُورد) معتبر نيست. آن بايد دست کم هشت حرف داشته باشد.
+# [AB-040805]:  This is one of the places I saw a number get put in Persian, while in other places they are left in english – maybe confirm with Joanne which should be used throughout?
 
 #_____________________________________________=Your password can not be your username
 -0acb-field:notifyPasswordMatchesUserNamecause=اسم رمزِ شما نبايد همان اسم استفاده کننده باشد.
@@ -1276,7 +1381,7 @@
 
 #_________________________________________=This bulletin will not be printed because all the information is private.  If you wish to print the private data, please mark the "Include private data in print out" checkbox.
 -459d-field:notifyPrintAllPrivateDatacause=اين بولتن چاپ نخواهد شد زيرا همهء اطلاعات آن محرمانه هستند. اگر مايل هستيد اطلاعات محرمانه را به چاپ بسپاريد،لطفن دکمه ای که نوشته «اطلاعات محرمانه را هم اضافه کنيد» را مارک بزنيد.
-
+# [AB-040805]:  The Persian in quotes/brackets doesn’t look like it matches the translation of field:PrintPrivateData. 
 #_________________________________________=The file does not contain valid public information.
 -f5b5-field:notifyPublicInfoFileErrorcause=اين فايل در بخش علنی خودش اطلاعاتِ معتبری ندارد.
 
@@ -1291,6 +1396,7 @@
 
 #_______________________________________________=To restore your key, first you must find the backup file you saved previously.  Using the 'Restore Key from Backup File' dialog box find the file on your computer's hard drive, a network drive, or removable media disk then click the Open button.  Martus will then ask you for your user name and password and restore your key so you can log in normally and access your account.
 -4a6f-field:notifyRecoveryProcessBackupFilecause=برای احياء کليدتان، شما بايد نسخه های اضافیِ فايل را که قبلن ذخيره کرده ايد بيابيد. با استفاده از پنجرهء «احياء کليد با استفاده از نسخهء اضافیِ فايل»،  فايلِ مورد نظر را روی کامپيوترتان پيدا کنيد (يا از روی محلی در شبکه، يا از روی ديسک کوچک و لوح فشرده) آنگاه دکمهء «باز کنيد» را کليک کنيد.
+# [AB-040805]:  “Martus” was translated.  Also, I realized that the English here is not consistent with the wording on button:RecoverAccountByBackup – I will put that on our to-do-list, but if you could just check that they are relatively close enough in meaning/wording in Persian that it would be clear to a user which radio-button to pick on the Restore Account screen, that would be great. 
 
 #_____________________________________________=You will now have to provide #N# out of the #M# files you previously saved when you backed up your key.
 -d5c2-field:notifyRecoveryProcessKeySharecause=شما حالا بايد #N# از #M# فايل را که قبلن به هنگام تهيهء نسخه های اضافی کليدتان ذخيره کرده ايد را فراهم کنيد.
@@ -1324,6 +1430,7 @@
 
 #_____________________________________=The Server Public Code does not match the one you entered.
 -efe3-field:notifyServerCodeWrongcause=«کُد علنیِ سـِروِر» با آنچه شما وارد کرديد انطباق ندارد.
+# [AB-040805]:  Are both the brackets going the same way?
 
 #_________________________________=Server Error, the server may be down, please try again later
 -7d92-field:notifyServerErrorcause=خطا از سوی سـِروِر: احتمال دارد سـِروِر خاموش باشد.
@@ -1333,6 +1440,7 @@
 
 #____________________________________________=Unable to make a secure connection with the Martus backup server.\n\nMartus can connect to a server using either of two ports.  When trying to connect to this server, neither port is accessible, probably because both ports are being blocked by a local firewall or by your ISP.\n\nWe recommend that any firewalls be configured to allow outgoing connections on both TCP port 443 and 987.  Please contact your LAN administrator or office technical support staff to verify that your firewall configuration allows this.\n\nIf the problem persists, you may need to select a different server.
 -8dc9-field:notifyServerSSLNotRespondingcause=متأسفانه قادر نيستيم ارتباط امن با سـِروِر Martus برقرار کنيم. \n\nMartus می تواند با استفاده از يکی از دو «پورت» (نقطهء فرستادن و گرفتن اطلاعات) با سِرور تماس بگيرد . به هنگامی که سعی کرديم با اين سِروِر ارتباط برقرار کنيم هيچکدام از اين دو پورت قابل دسترسی نبودند، شايد به اين دليل که هردو پورت بوسيلهء نرم افزارِ محافظ (فايِروال) يا بوسيلهء شرکت فراهم کنندهء سرويس اينترنت شما جلوشان ديوار کشيده شده است. \n\nما سفارش می کنيم اگر از نرم افزار محافظ (فايروال) استفاده می کنيد، طوری آنرا تنظيم کنيد که اجازه بدهد ارتباط با خارج از طريق دو پورت تی ـ سی ـ پی (TCP) يعنی پورت های 443 و 987 برقرار شود. لطفن با سرپرست شبکه يا تکنيسينِ کمکیِ محل کارتان تماس بگيريد و از او بخواهيد که فايروال را به اين طريق تنظيم کند. \n\nاگر مشکل کماکان به حال خود باقی ماند، شما شايد چاره ای نداشته  باشيد مگر اينکه سـِروِر ديگری را انتخاب بکنيد. 
+# [AB-040805]:  Do you think it makes sense to put “ISP” and “LAN” in parentheses after the Persian?
 
 #____________________________________________=Unable to save the selected attachment for some reason.  Try saving it to a different file.
 -4a93-field:notifyUnableToSaveAttachmentcause=متأسفانه به دليلی ناشناخته نتوانستيم ضميمهء انتخاب شده را ذخيره کنيم. لطفن سعی کنيد آنرا به شکل فايل ديگری ذخيره کنيد.
@@ -1357,6 +1465,7 @@
 
 #_____________________________________=Welcome!\n\nTo start using Martus, create an account. Choose any username you like and a password that contains at least 8 characters. Keep the following information in mind as you create your username and password:\n\n * We recommend using a password that has 15 characters.\n * Include some characters that aren't letters or numbers in your password.\n   (That is, use punctuation or other special characters.)\n * Use a password that other people won't be able to guess;\n   anyone who knows your username and password can view your private data,\n   and can create bulletins that everyone will believe were created by you.\n * Write down your username and password and store them in a safe place.\n * You'll need to enter your username and password whenever you start Martus.\n * Martus will also sometimes prompt you to re-enter your username\n   and password to prevent someone else from using your account\n   after you've logged in.\n\nIMPORTANT: You are the only one who has your username and password. If you lose either of them, you won't be able to retrieve your data. Your username and password are not stored or backed up anywhere, so they cannot be reset for you.
 -da34-field:notifyWelcomeToMartuscause=خوش آمديد! \n\nبرای شروع استفاده از Martus، ابتدا يک حساب باز کنيد. يک اسمِ استفاده کننده و يک اسمِ رمز (پاسوُرد)که دست کم هشت حرف داشته باشد را انتخاب کنيد. لطفن اين نکات را به ذهن بسپاريد: \n\n*ما سفارش می کنيم که از اسم رمزی استفاده کنيد که پانزده حرف داشته باشد. \n*می توانيد به جای حروف يا عدد از کاراکترهای ديگر نيز استفاده کنيد. (يعنی از نقطه و ويرگول و مميز و کاراکترهای ديگر هم استفاده کنيد.) \n*از اسمِ رمزی استفاده کنيد که ديگران به هيچ نحو نتوانند آنرا حدس بزنند. هرکس که اسم استفاده کننده و اسمِ رمز شما را پيدا کند می توان به همهء اطلاعاتِ محرمانهء شما دسترسی پيدا کند، و همان شخص قادر خواهد بولتن های تقلبی را به نام شما به وجود آورد. \n*اگر لازم باشد اسمِ استفاده کننده و اسمِ رمزتان را بنويسيد و درجای بسيار امنی پنهان کنيد. \n*شما هرزمان که بخواهيد از برنامهء Martus استفاده کنيد بايد اسمِ استفاده کننده و اسمِ رمزتان را وارد کنيد. گاهی اوقات برنامهء Martus از شما می خواهد که اسم استفاده کننده و اسم رمزتان را دوباره وارد کنيد که جلوی سوء استفاده شخصِ ديگری، پس از آنکه شما وارد برنامه شديد، گرفته شود. \n*اخطار مهم: شما تنها کسی هستيد که اسم استفاده کننده و اسمِ رمز را می داند. اگر شما يکی از اين دو اسم را گُم بکنيد، ديگر قادر نخواهيد بود اطلاعاتی که قبلن ذخيره کرده ايد را رؤيت کنيد. نسخهء ثالثی از اسمِ استفاده کننده و اسمِ رمز شما وجود ندارد که شما بتوانيد آنها را احياء کنيد.
+# [AB-040805]:  It looks like a bunch of “\n”s are missing here (6?).  You can compare with how things line up in the english version of the screen (by clicking on OK in the New Account tab.) Also, this is one of the places I saw a number get put in Persian, while in other places they are left in english – maybe confirm with Joanne which should be used throughout? (or which to use in which type of situation?)
 
 #_____________________________________=The current Martus Server has refused to accept your contact info
 -156f-field:notifycontactRejectedcause=سـِروِر کنونی Martus از قبول اطلاعات شما سرباز می زند.
@@ -1429,6 +1538,7 @@
 
 #_______________________=Retrieve?
 -460d-field:retrieveflag=آيا اطلاعات بيرون آورده شود؟
+# [AB-040805]:  Can this be shortened?  It is the label for a checkbox column on a relatively full screen and is much longer than the English, so I’m worried about everything not fitting…
 
 #_______________________________________=For security reasons, we must validate your username and password.
 -0381-field:securityServerConfigValidate=بنا به دلايل امنيتی بايد اسمِ رمز و اسمِ استفاده کنندهء شما را بايد بررسی و تصديق  کنيم.
@@ -1441,6 +1551,7 @@
 
 #____________________=For security reasons, you must sign into Martus again.
 -a575-field:timedout1=بنا به دلايل امنيتی شما بايد دوباره برای ورود امضای تان (اسم استفاده کننده و اسم رمز) را وارد کنيد.
+# [AB-040805]:  “Martus” was translated
 
 #____________________=Any unsaved bulletins will be lost unless you sign in and save them.
 -24c5-field:timedout2=اگر بولتنی هنوز ذخيره نشده باشد از بين خواهد رفت، مگر اينکه شما امضا کنيد و آنرا ذخيره  نماييد.
@@ -1448,8 +1559,9 @@
 #________________=Title
 -768e-field:title=عنوان اصلی
 
-#_____________________________=English 2.6
--26a2-field:translationVersion=English 2.6
+#_____________________________=Persian 2.6
+-26a2-field:translationVersion=<English 2.6>
+# [AB-040805]: Sorry, forgot to update this before sending to you -- please update to say “Persian”
 
 #___________________=Username
 -84c2-field:username=اسم استفاده کننده
@@ -1483,6 +1595,7 @@
 
 #_______________________________________=WARNING:  This translation was not created by the Martus team, and therefore may not be trustworthy.\nIf you only want to use official translations then exit Martus, remove the file #UseUnofficialTranslationFiles# from your Martus directory, and restart Martus.\n\n
 -c48e-field:warningUnofficialTranslation=اخطار: اين ترجمه توسط گروه Martus انجام نگرفته است و احتمال دارد که صد در صد قابل اعتماد نباشد.\n اگر شما می خواهيد فقط از ترجمه های رسمیِ Martus استفاده کنيد، بايد از برنامهء Martus خارج شويد، سپس فايل #UseUnofficialTranslationFiles# را از دايرکتوریِ Martus پاک کنيد، بعد دوباره برنامهء Martus را از اول به راه اندازيد.\n\n
+# [AB-040805]:  I actually now see 5 “Martus”s in Persian when there are only 4 in english?
 
 #__________________=Web Page
 -0163-field:webpage=سايت اينترنتی
@@ -1555,6 +1668,7 @@
 
 #________________=Farsi, Dari
 -e768-language:fa=فارسی، دری
+# [AB-040805]:  FYI, this is going to be changed to “Persian (Farsi, Dari)” with the next release.
 
 #________________=French
 -4438-language:fr=فرانسوی
@@ -1564,6 +1678,7 @@
 
 #________________=Hausa
 -c619-language:ha=هوسا(آفريقا: نيجری و چاد)
+# [AB-040805]:  This seems quite long – could you please just let me know what stuff in parentheses is?)
 
 #________________=Hebrew
 -348d-language:he=عبری
@@ -1591,6 +1706,7 @@
 
 #________________=Kannada
 -c3ed-language:kn=کانا(هند)
+# [AB-040805]:  Just out of curiosity, could you please just let me know what stuff in parentheses is?
 
 #________________=Korean
 -dec6-language:ko=کره ای
@@ -1600,6 +1716,7 @@
 
 #________________=Malayalam
 -c730-language:ml=مالايالام(هند)
+# [AB-040805]:  Just out of curiosity, could you please just let me know what stuff in parentheses is?
 
 #________________=Marathi
 -6bb4-language:mr=ماراتی
@@ -1693,6 +1810,7 @@
 
 #______________________=Customize Fields
 -1cb1-menu:CustomFields=قسمت هايی که اطلاعات وارد می شود را طبق خواست خودتان تنظيم کنيد.
+# [AB-040805]:  This is really long – is there any way to shorten it? (including any references to it elsewhere) 
 
 #______________________=Cut Bulletin(s)
 -33c2-menu:CutBulletins=بولتن(ها) را با قيچی ببُريد
@@ -1819,6 +1937,7 @@
 
 #________________=Server
 -cb0c-menu:server=سـِروِر (روی کامپيوتر مرکزی)
+# [AB-040805]:  This seems long – is there any way to shorten it? (including any references to it elsewhere) 
 
 #_______________=Tools
 -4fa8-menu:tools=ابزارها
@@ -1864,6 +1983,7 @@
 
 #__________________=Sealed
 -66c9-status:sealed=سربسته و مُهر خورده
+# [AB-040805]:  This seems long – is there any way to shorten it? (including any references to it elsewhere)  I’m just concerned since it’s in the bulletin preview list/table that it will make columns not all fit without scrolling (Especially if bulletin titles are long). 
 
 #_________________________=Account Information
 -0cbd-wintitle:AccountInfo=اطلاعاتِ مربوط به حساب
@@ -1894,6 +2014,7 @@
 
 #____________________________________=Help on Creating Custom Fields
 -ed1d-wintitle:CreateCustomFieldsHelp=کمک برای ايجاد قسمت هايی که که با خواست خودتان ايجاد می کنيد
+# [AB-040805]:  This seems long – it’s not as necessary to shorten it since it’s a window-title, but I want to make it consistent with however you changed the fields in the UI
 
 #________________________________=Delete Bulletin File
 -9de4-wintitle:DeleteBulletinFile=فايل بولتن را پاک کنيد
@@ -2086,6 +2207,7 @@
 
 #______________________________________=Customize Fields
 -1cb1-wintitle:confirmEnterCustomFields=قسمت های وارد کردن اطلاعات روی اين صفحه برطبق خواست استفاده کننده تغيير داده شود
+# [AB-040805]:  This almost gets cut off in 800x600 resolution (which a lot of our users have) – maybe changing it to match the other “custom” shortenings will make this shorter as well? 
 
 #_______________________________________________=Invalid File
 -cd3f-wintitle:confirmErrorRecoverIvalidFileName=فايل نادرست
@@ -2158,9 +2280,11 @@
 
 #__________________________________________________=Unable to Restore from Backup File
 -79e5-wintitle:confirmUnableToRecoverFromBackupFile=متأسفانه قادر به احياء از روی نسخهء اضافیِ فايل نيستيم
+# [AB-040805]:  bit long?  (check to see if gets cut off in 800x600)
 
 #_____________________________________=Customize Fields
 -1cb1-wintitle:confirmUndoCustomFields=قسمت هايی که استفاده کننده به خواست خود به وجود می آورد
+# [AB-040805]:  change to match the other “custom” shortenings 
 
 #___________________________________=Upload Reminder
 -5b14-wintitle:confirmUploadReminder=يادآورنده برای پياده کردن فايل ها
@@ -2200,6 +2324,7 @@
 
 #_______________________________=Customize Fields
 -1cb1-wintitle:inputCustomFields=قسمت های ايجاد شده توسط استفاده کنندهء اين برنامه
+# [AB-040805]:  change to match the other “custom” shortenings 
 
 #____________________________________=Export My Public Account Id
 -2b8a-wintitle:inputExportMyPublicKey=اسم هويتِ حسابِ علنیِ من صادر شود
@@ -2209,12 +2334,14 @@
 
 #___________________________________=Default Backup File Name
 -ac3c-wintitle:inputGetShareFileName=نامِ نسخهء اضافیِ فايل که در ابتدا روی آن گذاشته شده
+# [AB-040805]:  bit long?  (check to see if gets cut off in 800x600)
 
 #___________________________________=Import Headquarters Public Account Id
 -6d05-wintitle:inputImportPublicCode=اسمِ هويتِ حسابِ علنی را وارد کن
 
 #__________________________________=Request Upload Permission
 -7e44-wintitle:inputservermagicword=تقاضا برای اجازهء پياده کردنِ فايل ها روی سِروِر
+# [AB-040805]:  bit long?  (check to see if gets cut off in 800x600)
 
 #_____________________________=Server Name
 -563c-wintitle:inputservername=نامِ سـِروِر
@@ -2296,9 +2423,11 @@
 
 #____________________________________=Error Saving State
 -884d-wintitle:notifyErrorSavingState=به هنگام حفظ موقعيت کنونی برنامه خطايی رخ داد
+# [AB-040805]:  bit long?  (check to see if gets cut off in 800x600)
 
 #____________________________________=Error Writing File
 -fabf-wintitle:notifyErrorWritingFile=به هنگام کپی کردن و ذخيرهء فايل خطايی رخ داد
+# [AB-040805]:  bit long?  (check to see if gets cut off in 800x600)
 
 #_________________________________________=Server Removed
 -1820-wintitle:notifyExistingServerRemoved=سـِروِر حذف شد
@@ -2368,6 +2497,7 @@
 
 #_____________________________________________=Successful Key Restore
 -b5ca-wintitle:notifyRecoveryOfKeyPairComplete=احيای موفق آميزِ کليد
+
 
 #______________________________________________=Restore Complete
 -6ad3-wintitle:notifyRecoveryOfKeyShareComplete=احياء کردن کامل شد
