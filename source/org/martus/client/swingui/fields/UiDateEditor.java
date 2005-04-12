@@ -163,7 +163,7 @@ public class UiDateEditor extends UiField
 	public static Date getDate(UiComboBox yCombo, UiComboBox mCombo, UiComboBox dCombo) 
 	{
 		Calendar cal = new GregorianCalendar();
-		cal.set(yCombo.getSelectedIndex()+1900,
+		cal.set(Integer.parseInt((String)yCombo.getSelectedItem()),
 				mCombo.getSelectedIndex(),
 				dCombo.getSelectedIndex()+1);
 		
