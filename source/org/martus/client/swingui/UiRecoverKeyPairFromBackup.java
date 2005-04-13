@@ -32,8 +32,8 @@ import java.io.IOException;
 import org.martus.client.core.MartusApp;
 import org.martus.client.swingui.dialogs.UiSigninDlg;
 import org.martus.common.clientside.PasswordHelper;
-import org.martus.common.clientside.UiPasswordField;
 import org.martus.swing.UiFileChooser;
+import org.martus.swing.UiPasswordField;
 import org.martus.util.Base64.InvalidBase64Exception;
 
 

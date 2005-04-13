@@ -54,10 +54,10 @@ import javax.swing.text.DefaultHighlighter.DefaultHighlightPainter;
 
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.common.clientside.UiBasicLocalization;
-import org.martus.common.clientside.UiTextField;
 import org.martus.swing.UiButton;
 import org.martus.swing.UiList;
 import org.martus.swing.UiScrollPane;
+import org.martus.swing.UiTextField;
 import org.martus.swing.UiWrappedTextArea;
 import org.martus.swing.Utilities;
 import org.martus.util.UnicodeReader;

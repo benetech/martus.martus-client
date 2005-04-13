@@ -30,10 +30,10 @@ import java.util.Arrays;
 
 import org.martus.client.core.MartusUserNameAndPassword;
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.common.clientside.UiPasswordField;
 import org.martus.common.clientside.Exceptions.BlankUserNameException;
 import org.martus.common.clientside.Exceptions.PasswordMatchedUserNameException;
 import org.martus.common.clientside.Exceptions.PasswordTooShortException;
+import org.martus.swing.UiPasswordField;
 
 /**
  * UiCreateNewAccountProcess

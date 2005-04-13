@@ -36,11 +36,11 @@ import org.martus.client.core.ConfigInfo;
 import org.martus.client.core.MartusApp;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.common.clientside.UiBasicLocalization;
-import org.martus.common.clientside.UiTextField;
 import org.martus.common.crypto.MartusCrypto;
 import org.martus.swing.UiButton;
 import org.martus.swing.UiLabel;
 import org.martus.swing.UiParagraphPanel;
+import org.martus.swing.UiTextField;
 import org.martus.swing.Utilities;
 import org.martus.util.Base64.InvalidBase64Exception;
 

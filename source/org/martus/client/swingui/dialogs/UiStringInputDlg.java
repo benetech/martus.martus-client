@@ -34,9 +34,9 @@ import javax.swing.JDialog;
 import javax.swing.JFrame;
 
 import org.martus.common.clientside.UiBasicLocalization;
-import org.martus.common.clientside.UiTextField;
 import org.martus.swing.UiButton;
 import org.martus.swing.UiParagraphPanel;
+import org.martus.swing.UiTextField;
 import org.martus.swing.UiWrappedTextArea;
 import org.martus.swing.Utilities;
 

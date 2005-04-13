@@ -37,10 +37,10 @@ import org.martus.client.swingui.fields.UiDateEditor;
 import org.martus.common.FieldSpec;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.clientside.UiBasicLocalization;
-import org.martus.common.clientside.UiTextField;
 import org.martus.swing.UiButton;
 import org.martus.swing.UiLabel;
 import org.martus.swing.UiParagraphPanel;
+import org.martus.swing.UiTextField;
 import org.martus.swing.UiWrappedTextArea;
 import org.martus.swing.Utilities;
 
