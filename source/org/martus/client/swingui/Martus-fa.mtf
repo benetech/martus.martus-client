@@ -1,9 +1,9 @@
 ﻿# Martus Client Translation File
 # Language code:  fa
-# Language name:  Farsi, Dari
-# Exported date:  Fri Mar 11 10:14:05 PST 2005
-# Client version: 2.6
-# Client build:   20050218.1528
+# Language name:  Persian (Farsi, Dari)
+# Exported date:  Thu Apr 14 09:27:51 PDT 2005
+# Client version: Internal 2.7
+# Client build:   20050413.1558
 #
 # This file MUST be saved in UTF-8 format!
 # Lines beginning with # are comments and are ignored by Martus
@@ -81,8 +81,10 @@
 #      <GridSpecDetails>, </GridSpecDetails>, <Column>, </Column>
 # 21.  do not translate "#UseUnofficialTranslationFiles#" in
 #      field:warningUnofficialTranslation since it contains a file name
-# 22.  If you want your language to appear right to left,
-#      Uncomment the next line (by removing the # in front of #!right-to-left)
+# 22.  do not translate "#CurrentNewsItem#" (used for server news)
+# 23.  do not translate "#MaxNewsItems#" (used for server news)
+# 24.  If you want your language to appear left to right,
+#      Comment the next line (by adding a # in front of !right-to-left)
 !right-to-left
 #
 
@@ -188,8 +190,14 @@
 #_________________________=Restore Defaults
 -8e80-button:customDefault=اطلاعات نخستين را احياء کنيد
 
+#________________________=Export Template
+-1030-button:customExport=قالب صادر شود
+
 #______________________=Help
 -c47a-button:customHelp=کمک
+
+#________________________=Import Template
+-6d2d-button:customImport=قالب واردشود
 
 #________________=Help
 -c47a-button:help=کمک
@@ -244,6 +252,9 @@
 
 #____________________=Retrieve
 -eb55-button:retrieve=دوباره بيرون بياوريد
+
+#________________=Save
+-efc0-button:save=ذخيره
 
 #__________________________=Save Attachment
 -f513-button:saveattachment=ذخيرهء ضميمه
@@ -302,21 +313,6 @@
 #____________________________________=Bulletin ID
 -ae8f-field:BulletinDetailsBulletinId=اسم ِ هويتِ بولتن
 
-#_________________________________________=The following Headquarter account(s) will be able to view the private information in this bulletin, or send this bulletin to a server, after you save it.\n\nTo add or remove an account, use the Tools/Configure Headquarters menu option.
--cc16-field:BulletinDetailsHQInfoForModify=حساب(های) دفترِ مرکزی که در زير می آيد قادر خواهند بود اطلاعاتِ محرمانهء اين بولتن را رؤيت کنند، يا اينکه اين بولتن را، بعد از آنکه شما ذخيره اش کرديد، روی يک سـِروِر پياده کنند. \n\nبرای اضافه کردنِ يا حذف کردنِ يک حساب، در فهرست يا مِنوی بالای صفحه روی ابزارها/دفتر مرکزی را مشخص کنيد کليک کنيد.
-
-#_______________________________________=The following Headquarter account(s) can view the private information in this bulletin, and can send this bulletin to a server.
--bdf1-field:BulletinDetailsHQInfoForView=حساب(های) دفترِ مرکزی که در زير می آيد قادر خواهند بود اطلاعاتِ محرمانهء اين بولتن را رؤيت کنند، يا اينکه اين بولتن را روی يک سـِروِر پياده کنند.
-
-#_________________________________=Label
--7434-field:BulletinDetailsHQLabel=برچسب يا عنوان
-
-#______________________________________=Public Code
--a1a2-field:BulletinDetailsHQPublicCode=کُد علنی
-
-#______________________________________=Headquarters
--6222-field:BulletinDetailsHeadquarters=دفتر مرکزی
-
 #_________________________________=History
 -90cc-field:BulletinDetailsHistory=تاريخچه
 
@@ -346,6 +342,18 @@
 
 #__________________________________=Warning: Some information in this bulletin is not visible
 -eba1-field:BulletinHasUnknownStuff=اخطار: بعضی از اطلاعات اين بولتن قابل رؤيت نيستند
+
+#______________________________________________=The selected Headquarters account(s) will be able to view the private information in this bulletin, or send this bulletin to a server, after you save it.\n\nTo add a new headquarters account use the Tools/Configure Headquarters menu option.
+-de85-field:BulletinHeadQuartersHQInfoForModify=حساب های دفتر مرکزی که انتخاب شده بشند قادر خواهند بود اطلاعاتِ محرمانهء اين بولتن را رؤيت کنند، يا اينکه اين بولتن را روی سِروِر بفرستند، پس از آنکه شما آنرا ذخيره کرديد.\n\nبرای اضافه کردن حساب برای يک دفترِ مرکزی ديگر به اين ترتيب از روی منوی بالای صفحه کليک کنيد ابزارها/دفترمرکزی تعريف شود.
+
+#____________________________________________=The following Headquarters account(s) can view the private information in this bulletin, and can send this bulletin to a server.
+-e728-field:BulletinHeadQuartersHQInfoForView=حساب (های) دفترمرزیِ نشان داده شده می تواند اطلاعاتِ محرمانهء اين بولتن را رؤيت کند، و می تواند اين بولتن را به روی سِرور بفرستد.
+
+#______________________________________=Label
+-7434-field:BulletinHeadQuartersHQLabel=برچسب يا عنوان
+
+#___________________________________________=Headquarters
+-6222-field:BulletinHeadQuartersHeadquarters=دفترِ مرکزی
 
 #_____________________=Bulletin Id:
 -a081-field:BulletinId=اسمِ هويتِ بولتن
@@ -377,14 +385,14 @@
 #______________________________=Row #
 -4946-field:ColumnGridRowNumber=رديف #
 
-#_______________________________________=Label
--7434-field:ConfigureHQColumnHeaderLabel=برچسب يا عنوان
-
 #____________________________________________=Public Code
 -a1a2-field:ConfigureHQColumnHeaderPublicCode=کُد علنی
 
 #_________________________________=Current Headquarters
 -6bd3-field:ConfigureHQsCurrentHQs=دفتر مرکزیِ فعلی
+
+#_______________________________________=Default?
+-0e2c-field:ConfigureHeadQuartersDefault=شکلِ قرارداد؟
 
 #_________________________________________=All other fields currently are stored on disk.
 -7e7c-field:ContactInfoDescriptionOfFields=ساير اطلاعات همه بر روی ديسکِ اصلی ذخيره شده
@@ -401,14 +409,20 @@
 #__________________________________=The layout of the bulletins is dictated by an XML document.  By default the standard bulletin fields occur at the top of the Custom Field declaration, but they can be moved if desired.  However, there are four required fields that cannot be removed:  'author', 'entrydate', 'language' and 'title'.\n\n
 -1ef6-field:CreateCustomFieldsHelp1=صفحه بندی و ترتيب بولتن ها توسط يک فايلِ اکس ـ اِم ـ اِل XML دستور داده می شود. در ابتدای کار، در صفحه بندیِ اوليه، قسمت های استانداردِ بولتن در بالا، برفرازِ قسمت هايی که به خواستِ استفاده کننده تنظيم می شود، قرار دارد، اما جای آنها می تواند بنا به تمايلِ شما عوض شود. با وجود اين، چهار قسمتِ ضروری وجود دارد که نمی توان آنها را حذف کرد: 'author' (مؤلف)،  'entrydate' (تاريخِ وارد کردنِ اطلاعات)، 'language' (زبان)، و 'title'  (عنوان اصلی). \n\n
 
-#__________________________________=For custom (non-standard) fields, you first select the type of field you want.  The possible choices are 'BOOLEAN', 'DATE', 'DATERANGE', 'GRID', 'LANGUAGE', 'MULTILINE', and 'STRING'. \n\nFor each custom field you will need a unique identification tag.  This tag can be any word except those already used by the system (eg. 'author', 'summary', 'location', 'title' etc.), and cannot contain spaces or special characters.  Examples of choices are 'custom1', 'custom2', etc, or tags that are more descriptive like 'VictimsName'.\n Then you need a label which is displayed next to your custom field.  An example might be 'Name of 1st Witness'.\n\nAdditional Comments\n1. XML is case-sensitive ('Witness' is not the same as 'witness') \n2. quotes around type name can be single or double as long as they match (e.g. 'STRING" is not valid. It must be 'STRING' or "STRING") \n3. A Boolean field will be displayed as a checkbox when editing and Yes/No when previewed or printed.\n\nSee examples below:\n\n
--676b-field:CreateCustomFieldsHelp2=برای ايجاد قسمت های مورد نيازتان(غير استاندارد)که شما خودتان به وجود می آوريد، ابتدا بايد نوعِ آن قسمت را معلوم بکنيد. نوع هايی که می توانيد برگزينيد عبارت اند از: 'BOOLEAN' (بولی يامثبت ـ منفی)، 'DATE' (تاريخ)،  'GRID' (گريد) ، 'DATERANGE' (تاريخ شروع و پايان)،  'LANGUAGE' (زبان)، 'MULTILINE' (چندخطی) ، (حروف ـ نوشته) 'STRING'.     \n\nبرای هر قسمتی که درست می کنيد، شما بايد يک اتيکتِ تشخيص دهندهء يگانه داشته باشيد. اين اتيکت می توان هر کلمه ای باشد به جز آن کلماتی که از پيش به سيستم اختصاص داده شده؛ مثل  author (مؤلف)،  summary (خلاصه)،  location (محل)،  title (عنوان اصلی)، و غيره. در اتيکت شما نمی توانيد از فاصله ميان حروف يا کاراکترهای خاصِ غيرالفبايی استفاده کنيد. برای نمونه شما می توانيد "يکشمار"، "دوشمار"، "سهشمار" يا اتيکت هايی که معنیِ خاصی بدهند مثل "اسمقربانی" استفاده کنيد، اما ميان حروف فاصله نگذاريد. \n\nبعد، شما بايد يک برچسب يا عنوان انتخاب کنيد که کنار قسمت مورد نظر می آيد. برای مثال: "نامِ نخستين شاهد". \n\n  ملاحظات ديگر: \n1 - برای پارسر ِ اکس ـ ام ـ ال  XML parser حروف بزرگ و حروف کوچک از يکديگر تفکيک پذيرند و شما نبايد يکی را به جای ديگری به کار بگيريد. \n2 - گيومهء دورِ يک کلمه بايد شروع و اختتام اش شبيه به هم باشد، يا هردويکخطی يا هردو دوخطی. \n3 -  يک حوزهء "بولی" به هنگام اديت کردن به  شکل يک چهارگوشک، يعنی مکعب کوچک برای مارک زدن، ظاهر می شود و به هنگام رؤيت يا چاپ به شکل بله/خير. \n\nبه نمونه های زير توجه کنيد:\n\n
+#__________________________________=For custom (non-standard) fields, you first select the type of field you want.  The possible choices are 'BOOLEAN', 'DATE', 'DATERANGE', 'DROPDOWN', 'GRID', 'LANGUAGE', 'MESSAGE', 'MULTILINE', and 'STRING'. \n\nFor each custom field you will need a unique identification tag.  This tag can be any word except those already used by the system (eg. 'author', 'summary', 'location', 'title' etc.), and cannot contain spaces or special characters.  Examples of choices are 'custom1', 'custom2', etc, or tags that are more descriptive like 'VictimsName'.\n\nThen you need a label which is displayed next to your custom field.  An example might be 'Name of 1st Witness'.\n\nAdditional Comments\n1. XML is case-sensitive ('Witness' is not the same as 'witness') \n2. Quotes around type name can be single or double as long as they match (e.g. 'STRING" is not valid. It must be 'STRING' or "STRING")\n3. A Boolean field will be displayed as a checkbox when editing and Yes/No when previewed or printed.\n4.  Use "MESSAGE" fields to give guidance on how to enter data, and to create comments/notes that will be displayed in every bulletin.\n\nSee examples below:\n\n
+-da0a-field:CreateCustomFieldsHelp2=برای ايجاد قسمت های مورد نيازتان(غير استاندارد)که شما خودتان به وجود می آوريد، ابتدا بايد نوعِ آن قسمت را معلوم بکنيد. نوع هايی که می توانيد برگزينيد عبارت اند از: 'BOOLEAN' (بولی يامثبت ـ منفی)، 'DATE' (تاريخ)،  'DATERANGE' (تاريخ شروع و پايان)،  'DROPDOWN'(بازشونده به پايين)، 'GRID' (جدول)، 'LANGUAGE' (زبان)، 'MESSAGE'(پيام)، 'MULTILINE' (چندخطی) ، و'STRING'(حروف ـ نوشته).     \n\nبرای هر قسمتی که درست می کنيد، شما بايد يک اتيکتِ تشخيص دهندهء يگانه داشته باشيد. اين اتيکت می تواند هر کلمه ای باشد به جز آن کلماتی که از پيش به سيستم اختصاص داده شده؛ مثل  author (مؤلف)،  summary (خلاصه)،  location (محل)،  title (عنوان اصلی)، و غيره. در اتيکت شما نمی توانيد از فاصله ميان حروف يا کاراکترهای خاصِ غيرالفبايی استفاده کنيد. برای نمونه شما می توانيد "يکشمار"، "دوشمار"، "سهشمار" يا اتيکت هايی که معنیِ خاصی بدهند مثل "اسمقربانی" استفاده کنيد، اما ميان حروف فاصله نگذاريد. \n\nبعد، شما بايد يک برچسب يا عنوان انتخاب کنيد که کنار قسمت مورد نظر می آيد. برای مثال: "نامِ نخستين شاهد". \n\n  ملاحظات ديگر: \n 1 - برای پارسر ِ اکس ـ ام ـ ال  XML parser حروف بزرگ و حروف کوچک از يکديگر تفکيک پذيرند و شما نبايد يکی را به جای ديگری به کار بگيريد. \n 2 - گيومهء دورِ يک کلمه بايد شروع و اختتام اش شبيه به هم باشد، يا هردويکخطی يا هردو دوخطی، برای مثال 'نوشته"  غلط است و بايد باشد 'نوشته'  يا "نوشته". \n 3 -  يک حوزهء "بولی" به هنگام اديت کردن به  شکل يک چهارگوشک، يعنی مکعب کوچک برای مارک زدن، ظاهر می شود و به هنگام رؤيت يا چاپ به شکل بله/خير. \n 4 - از محوطهء  'MESSAGE' (پيام)  استفاده کنيد و راهنمايي کنيد که اطلاعات چه طور بايد وارد شود، و توضيحات/يادداشت بگذاريد که در تک تک بولتن ها ظاهر خواهند شد. \n\nبه نمونه های زير توجه کنيد:\n\n
 
-#__________________________________=<Field type='STRING'>\n<Tag>custom1</Tag>\n<Label>Witness Name</Label>\n</Field>\n\n<Field type='LANGUAGE'>\n<Tag>new2</Tag>\n<Label>Witness Speaks</Label>\n</Field>\n\n<Field type='BOOLEAN'>\n<Tag>new3</Tag>\n<Label>Were guns used?</Label>\n</Field>\n\n<Field type='GRID'>\n<Tag>customgrid</Tag>\n<Label>Victim Information</Label>\n<GridSpecDetails>\n<Column><Label>Name of Victim</Label></Column>\n<Column><Label>Victim Age</Label></Column>\n<Column><Label>Victim Gender</Label></Column>\n<Column><Label>Victim Ethnicity</Label></Column>\n</GridSpecDetails>\n</Field>\n
--c0a8-field:CreateCustomFieldsHelp3=<Field type='STRING'>\n<Tag>يکشمار</Tag>\n<Label> نام شاهد</Label>\n</Field>\n\n<Field type='LANGUAGE'>\n<Tag>جديدِدو</Tag>\n<Label> شاهد سخن می گويد</Label>\n</Field>\n\n<Field type='BOOLEAN'>\n<Tag>جديدِسه</Tag>\n<Label>آيا از اسلحه استفاده شده؟</Label>\n</Field>\n\n<Field type='GRID'>\n<Tag>جدولِمن</Tag>\n<Label>اطلاعاتِ قربانی</Label>\n<GridSpecDetails>\n<Column><Label>نام قربانی</Label></Column>\n<Column><Label>سن قربانی</Label></Column>\n<Column><Label>جنسيتِ قربانی</Label></Column>\n<Column><Label>قوميتِ قربانی</Label></Column>\n</GridSpecDetails>\n</Field>\n
+#__________________________________=<Field type='STRING'>\n<Tag>custom1</Tag>\n<Label>Witness Name</Label>\n</Field>\n\n<Field type='LANGUAGE'>\n<Tag>new2</Tag>\n<Label>Witness Speaks</Label>\n</Field>\n\n<Field type='BOOLEAN'>\n<Tag>new3</Tag>\n<Label>Were guns used?</Label>\n</Field>\n\n<Field type='MESSAGE'>\n<Tag>customMessage</Tag>\n<Label>Guidance for Perpetrator Eye Color entry:</Label>\n<Message>If you are unsure of the perpetrator's eye color, please leave this field blank.</Message>\n</Field>\n\n<Field type='DROPDOWN'>\n<Tag>customDropDown</Tag>\n<Label>Perpetrator Eye Color</Label>\n<Choices>\n<Choice>Brown</Choice>\n<Choice>Blue</Choice>\n<Choice>Green</Choice>\n<Choice>Other</Choice>\n</Choices>\n</Field>\n\n<Field type='GRID'>\n<Tag>customgrid</Tag>\n<Label>Victim Information</Label>\n<GridSpecDetails>\n<Column><Label>Name of Victim</Label></Column>\n<Column><Label>Victim Age</Label></Column>\n<Column><Label>Victim Gender</Label></Column>\n<Column><Label>Victim Ethnicity</Label></Column>\n</GridSpecDetails>\n</Field>\n
+-491b-field:CreateCustomFieldsHelp3=<Field type='STRING'>\n<Tag>يکشمار</Tag>\n<Label>نام شاهد</Label>\n</Field>\n\n<Field type='LANGUAGE'>\n<Tag>جديدِدو</Tag>\n<Label>شاهد سخن می گويد</Label>\n</Field>\n\n<Field type='BOOLEAN'>\n<Tag>جديدِسه</Tag>\n<Label>آيا از اسلحه استفاده شده؟</Label>\n</Field>\n\n<Field type='MESSAGE'>\n<Tag>پيام</Tag>\n<Label>راهنمايی برای وارد کردنِ رنگِ چشمِ عاملِ خشونت:</Label>\n<Message>اگر مطمئن نيستيد که رنگ چشمِ خاطی چه بوده، اين قسمت را سفيد بگذاريد.</Message>\n</Field>\n\n<Field type='DROPDOWN'>\n<Tag>بازشوندهبهپايين</Tag>\n<Label>رنگ چشمِ خاطی</Label>\n<Choices>\n<Choice>قهوه ای</Choice>\n<Choice>آبی</Choice>\n<Choice>سبز</Choice>\n<Choice>ديگر</Choice>\n</Choices>\n</Field>\n\n<Field type='GRID'>\n<Tag>جدول</Tag>\n<Label>اطلاعاتِ قربانی</Label>\n<GridSpecDetails>\n<Column><Label>نام قربانی</Label></Column>\n<Column><Label>سن قربانی</Label></Column>\n<Column><Label>جنسيتِ قربانی</Label></Column>\n<Column><Label>قوميتِ قربانی</Label></Column>\n</GridSpecDetails>\n</Field>\n
 
 #____________________________________=Please enter your new username and password.
 -aec2-field:CreateNewUserNamePassword=لطفن اسمِ استفاده کنندهء جديد و اسم رمز(پاسورد) جديد را وارد کنيد.
+
+#_______________________________________=MartusCustomization
+-f3b2-field:CustomizationFileDefaultName=Martusبرطِبقِ
+
+#_____________________________________=Customization Template Files
+-9210-field:CustomizationTemplateFiles=فايل های قالب هایِ به دلخواه تنظيم شده
 
 #____________________=Exact Date
 -8a81-field:DateExact=تاريخ دقيق
@@ -458,8 +472,8 @@
 #__________________________________=LABEL
 -64b8-field:ErrorCustomFieldHeader4=برچسب يا عنوان
 
-#____________________________=There is an error in the custom field definitions. Each problem is identified with the following codes:\n   100 - Required standard field is missing\n   101 - Custom field does not have a correct tag.\n   102 - A previous Tag already exists with this name.\n   103 - Custom field does not have a label.\n   104 - Unrecognized Field Type.\n   105 - A label was found in a standard field.\n   106 - XML Parse Error.\n   107 - Tag contains illegal characters
--943a-field:ErrorCustomFields=يک خطا در قسمتی که شما به خواستِ خودتان داريد درست می کنيد رخ داد. هرمشکلی با کُدهای زيرين تشخيص داده می شود: \n 100 - قسمتی که استاندارد و لازم است درينجا از قلم افتاده. \n 101 - قسمتی که شما اضافه کرده ايد از اتيکتِ (tag) صحيح برخوردار نيست. \n 102 - يک اتيکت مشابه با همين نام از قبل وجود دارد. \n 103 - قسمتی که شما اضافه کرده ايد از برچسب يا عنوان برخوردار نيست. \n 104 - اين نوع برای برنامه قابل تشخيص نيست. \n 105 - يک برچسب در جايی که متعلق قسمت های استانداردِ موجود است پيدا شد \n 106 - اعلام خطا از سوی پارسِر XML(برنامه ای که کُد را می خواند). \n 107 - اتيکت شما در خودش کاراکترهای غيرمجاز دارد
+#____________________________=There is an error in the custom field definitions. Each problem is identified with the following codes:\n   100 - Required standard field is missing\n   101 - Custom field does not have a correct tag.\n   102 - A previous Tag already exists with this name.\n   103 - Custom field does not have a label.\n   104 - Unrecognized Field Type.\n   105 - A label was found in a standard field.\n   106 - XML Parse Error.\n   107 - Tag contains illegal characters.\n   200 - All fields empty.\n   201 - Unrecognized headquarters created this template.\n   202 - Security validation error.\n   203 - File Error.
+-f2cf-field:ErrorCustomFields=يک خطا در قسمتی که شما به خواستِ خودتان داريد درست می کنيد رخ داد. هرمشکلی با کُدهای زيرين تشخيص داده می شود: \n 100 - قسمتی که استاندارد و لازم است درينجا از قلم افتاده. \n 101 - قسمتی که شما اضافه کرده ايد از اتيکتِ (tag) صحيح برخوردار نيست. \n 102 - يک اتيکت مشابه با همين نام از قبل وجود دارد. \n 103 - قسمتی که شما اضافه کرده ايد از برچسب يا عنوان برخوردار نيست. \n 104 - اين نوع برای برنامه قابل تشخيص نيست. \n 105 - يک برچسب در جايی که متعلق به قسمت های استانداردِ است پيدا شد \n 106 - اعلام خطا از سوی پارسِر XML(برنامه ای که کُد را می خواند). \n 107 - اتيکت شما در خودش کاراکترهای غيرمجاز دارد. \n 200 - همه  خالی مانده \n 201 - دفترمرکزیِ ناشناخته ای اين قالب را ساخته. \n 202 - خطار در مورد تأييدِ امنيتی
 
 #_________________________________________=A previous backup file exists.  You must save each file on its own removable media disk.
 -db93-field:ErrorPreviousBackupShareExists=يک نسخهء اضافی از فايل موجود است. شما بايد هر فايل را روی ديسک جداگانه ای ذخيره کنيد.
@@ -488,11 +502,20 @@
 #______________________________________=This file name should be unique and identifiable to you but we recommend not using your user name.  Each file will be generated with this name and its number sequence.
 -02b6-field:GetShareFileNameDescription=اين فايل بايد منحصر به فرد باشد و فقط از سوی شما قابل تشخيص باشد، اما پيشنهاد می شود که از اسم  استفاده کنندهء خودتان استفاده نکنيد. هر فايل با همين نام و يک شماره با ترتيب خودش به وجود خواهد آمد.
 
+#__________________________=(not currently configured)
+-462b-field:HQNotConfigured=(هنور تعريف نشده)
+
 #_________________________=Headquarters
 -6222-field:HQSummaryLabel=دفتر مرکزی
 
+#__________________________=Default Headquarters accounts will be selected for each new bulletin or version.
+-ea13-field:HQsSetAsDefault=حساب های اوليه و قراردادیِ دفترمرکزی برای هر بولتن جديد يا نسخهء جديدی از يک بولتن انتخاب خواهد شد.
+
 #________________________________=These Headquarters accounts are allowed to view the private information in this bulletin, and to send this bulletin to a server on your behalf.
 -2274-field:HQsSetAsProxyUploader=اين حساب های مخصوصِ دفاتر مرکزی اجازه دارندکه اطلاعات غيرعلنیِ داخل اين بولتن را رؤيت کنند و از جانبِ شما اين بولتن را به سِروِر مرکزی  ارسال کنند.
+
+#_______________________________=Selected?
+-9c09-field:HeadQuartersSelected=انتخاب شد؟
 
 #_____________________________=Enter questions, details, or other information your organization wants to have answered in future bulletins created.
 -704c-field:HelpDefaultDetails=درينجا هر سوآل و اطلاعات مشخصی که سازمان شما نياز دارد در بولتن های آينده بداند را وارد کنيد.
@@ -516,7 +539,6 @@
 -7d69-field:HowToCreateInitialAccount=هيچ حسابی بر روی اين کامپيوتر به اين نام نيست. اگر می خواهيد حساب جديد باز کنيد دکمهء 'تأييد' را کليک کنيد؛ در غير اينصورت روی دکمهء 'احياء حساب' کليک کنيد تا حسابی که پيش از اين يک نسخه از آن ذخيره شده را بيرون بکشيد.
 
 #________________________________=One or more accounts already exist on this computer. To create an additional account with a new username and passphrase, click OK.
-
 -02f2-field:HowToCreateNewAccount=يک يا چند حساب با اين نام روی اين کامپيوترموجود است. برای خلق يک حساب ديگر با اسم استفاده کنندهء جديد و اسم رمز جديد، دکمهء تأييد را کليک کنيد.
 
 #_______________________=Warning: Portions may be missing or damaged
@@ -527,6 +549,9 @@
 
 #_____________________________=Please enter a name for the file you wish to export.
 -95ed-field:NameOfExportedFile=لطفن برای فايلی که می خواهيد صادر کنيد يک اسم انتخاب کنيد.
+
+#__________________________=No Headquarters accounts selected for this bulletin.
+-2b9f-field:NoHQsConfigured=هيچ حسابِ دفتر مرکزی برای اين بولتن انتخاب نشده
 
 #___________________________________________=Server Not Available
 -c79c-field:NoServerAvailableProgressMessage=سِروِر قابلِ دسترسی نيست
@@ -635,7 +660,6 @@
 
 #______________________________=When searching for bulletins you can add key words (or, and) between multiple search term words (e.g. prison or jail, prison and assault).  If you enter multiple search terms without keywords, Martus will search for the exact phrase you entered.  Do not use quotation marks in your search.  The 'starting on' and 'ending on' dates will further refine your search matching either the event date or the date entered.  If you leave the search text blank Martus will perform only a date search.
 -ac8c-field:SearchBulletinRules=به هنگام جستجو برای يک بولتن خاص، شما می توانيد هم به فارسی و هم به انگليسی از واژه های کليدیِ 'و/يا' (and/or)ميان چند واژهء اصلی استفاده کنيد. (برای نمونه، زندان or حبس، زندان و ضرب و شتم). اگر همهء واژه ها را بدون 'و' و 'يا' وارد کنيد، Martus دقيقن به دنبال همان واژه به همان صورت که وارد شده خواهد بود. اگر بخش 'از اين تاريخ' و 'تا اين تاريخ' را هم پر کنيد، جستجو با دقت بيشتری انجام خواهد گرفت. اگر هيچ واژه ای در قسمت جستجو نکنيد، Martus فقط روی تاريخ جستجو خواهد کرد.
-
 
 #________________________=Ending on:
 -2412-field:SearchEndDate=در اين تاريخ پايان گيرد:
@@ -808,8 +832,8 @@
 #_________________________________________=By choosing Yes, you will exit this verification step.
 -5b61-field:confirmCancelShareVerifyeffect=اگر بله را کليک کنيد از اين مرحلهء تأييد و تصديق خارج خواهيد شد.
 
-#_________________________________________=You have chosen to remove your Headquarters account.  Any existing saved bulletins will still be visible by the old Headquarters.  If you want to disallow Headquarters viewing access to previously created Draft bulletins they must be re-saved after revoking the Headquarters.  Any sealed bulletins CANNOT be reset to be non-viewable by the Headquarters.
--6076-field:confirmClearHQInformationcause=با اين انتخاب شما حساب دفتر مرکزی را خواهيد بست. اگر هنور بولتنی ذخيره شده باقی مانده باشد بوسيلهء دفاتر مرکزیِ قديمی تر قابل رؤيت است. اگر شما بخواهيد جلوی دفترِ مرکزی را بگيريد که  به دستنويس بولتن های گذشته دسترسی نداشته باشند، بايد شما آن بولتن ها را يک بار ديگر ، بعد از سلب اختيار از دفتر مرکزی، ذخيره کنيد. اما بولتن های سربسته و مُهرخورده به هيچ وجه نمی توانند او اول طوری ذخيره شوند که  دفتر مرکزی نتواند آنها را ببيند.
+#_________________________________________=You have chosen to remove all selected Headquarters accounts.  Any existing saved bulletins will still be visible by the old Headquarters.  If you want to disallow Headquarters viewing access to previously created Draft bulletins they must be re-saved after revoking the Headquarters.  Any sealed bulletins CANNOT be reset to be non-viewable by the Headquarters, except by creating a new version of the bulletin.
+-d335-field:confirmClearHQInformationcause=با اين انتخاب شما همهء حساب های انتخاب شدهء دفتر مرکزی را خواهيد بست. اگر هنور بولتنی ذخيره شده باقی مانده باشد بوسيلهء دفاتر مرکزیِ قديمی تر قابل رؤيت است. اگر شما بخواهيد جلوی دفترِ مرکزی را بگيريد که  به دستنويس بولتن های گذشته دسترسی نداشته باشند، بايد شما آن بولتن ها را يک بار ديگر ، بعد از سلب اختيار از دفتر مرکزی، ذخيره کنيد. اما بولتن های سربسته و مُهرخورده به هيچ وجه نمی توانند از اول طوری ذخيره شوند که  دفتر مرکزی نتواند آنها را ببيند، مگر اينکه يک نسخهء تازه تر درست کنيد.
 
 #__________________________________________=By clicking on Yes, any draft or sealed bulletins saved in the future will no longer be accessible by your Headquarters.
 -4a87-field:confirmClearHQInformationeffect=اگر روی بله کليک کنيد، از اين به بعد هر دست نويس بولتن يا بولتن سربسته و مُهر خورده را که ذخيره کنيد در آينده دفترمرکزی قادر نخواهد بود آنها را رؤيت کند.
@@ -847,8 +871,8 @@
 #________________________________________=You have chosen to customize the fields that will be used in any new bulletins created by this account.
 -2f98-field:confirmEnterCustomFieldscause=با اين انتخاب شما قسمت های کسب اطلاعات را برطبق سليقهء خودتان عوض خواهيد کرد و از اين به بعد هر بولتن جديدی که با اين حساب به وجود آيد با همين شکل و شمايل و تنظيم خواهد شد.
 
-#_________________________________________=Customizing fields is an advanced operation, and can be dangerous. You should only proceed if you are certain that you understand the feature.
--1483-field:confirmEnterCustomFieldseffect=اگر بخش هايی که اطلاعات در آنها وارد می شود را به سليقهء خود بخواهيد تغيير دهيد، عملی خطير خواهد بود که فقط شخص با تجربه ای بايد به آن مبادرت کند. تنها به شرطی که شما به طور قطع بدانيد چگونه از اين جنبهء برنامه استفاده کنيد، به آن مبادرت کنيد.
+#_________________________________________=Customizing fields is an advanced operation. You should only proceed if you are certain that you understand the feature.
+-518e-field:confirmEnterCustomFieldseffect=اگر بخش هايی که اطلاعات در آنها وارد می شود را به سليقهء خود بخواهيد تغيير دهيد، عملی خطير خواهد بود که فقط شخص با تجربه ای بايد به آن مبادرت کند. تنها به شرطی که شما به طور قطع بدانيد چگونه از اين جنبهء برنامه استفاده کنيد، به آن مبادرت کنيد.
 
 #_________________________________________________=The file you chose is not part of a key backup set.  These files are named '<name you picked>-#.dat' where # is the sequence number in the disk set previously created.
 -2e41-field:confirmErrorRecoverIvalidFileNamecause=فايلی که هم اکنون شما انتخاب کرديد جزء گروه نسخهء اضافیِ فايل های کليدی نيست. آن فايل ها نام شان اينگونه است 'dat. #- نام فايل' که در اين نام # شمارهء مسلسلی است که روی گروه فايل های روی ديسک از قبل شماره گذاری شده.
@@ -994,8 +1018,8 @@
 #_____________________________________________________=Choose Yes to begin the restore process again, No to exit Martus.
 -0e22-field:confirmUnableToRecoverFromBackupFileeffect=اگر می خوايد عمل احياء کليد را از سربگيريد روی بله کليک کنيد، اگر می خواهيد از Martus خارج شويد روی خير کليک کنيد.
 
-#_______________________________________=You have chosen to revert to the standard set of Martus fields.
--61a6-field:confirmUndoCustomFieldscause=با اين انتخاب شما به همان قسمت ها وصفحهء استاندارد Martus رجعت خواهيد کرد.
+#_______________________________________=You have chosen to restore the standard set of Martus fields.
+-cd11-field:confirmUndoCustomFieldscause=با اين انتخاب شما به همان قسمت ها وصفحهء استاندارد Martus رجعت خواهيد کرد.
 
 #________________________________________=New bulletins created with this account will not have any custom fields.
 -bf33-field:confirmUndoCustomFieldseffect=بولتن های جديدی که از اين به بعد با اين حساب ايجاد شوند ديگر بخش های اختصاصی که توسط  شما اضافه شده بود را نخواهند داشت، بلکه همان قسمت ها و صفحهء استاندارد Martus را خواهند داشت.
@@ -1009,8 +1033,8 @@
 #_______________________________________________=The bulletin you are about to create is based on a previous bulletin whose custom fields are different from your current custom fields.  Do you wish to use the original bulletin's custom fields?
 -a6ca-field:confirmUseBulletinsCustomFieldscause=بولتنی که هم اکنون می خواهيد درست کنيد برمبنای يک بولتن قبلی است اما قسمت هايی که اطلاعات در روی صفحهء آن وارد می شود با بولتن کنونی تفاوت دارند. آيا مايل هستيد از صفحه بندیِ آن بولتنِ قبلی استفاده کنيد؟
 
-#________________________________________________=Answering Yes will use the old custom fields and all bulletin data.  Answering No will use your current custom fields and copy all similar fields to the new bulletin but you will lose some of the original bulletin's data.
--afbe-field:confirmUseBulletinsCustomFieldseffect=اگر بله را کليک کنيد، قسمت های پذيرشِ اطلاعاتِ روی صفحه، به صورتِ بولتن قبلی در خواهد آمد. اگر روی خير کليک کنيد، صفحه بندی کنونیِ بولتن به همين شکل باقی می ماند و قسمت های مشابه از بولتن قبلی به اينجا کپی خواهند شد، اما بعضی قسمت های بولتن قبلی که مشابه اش در اين بولتن نيست ممکن است از دست بروند.
+#________________________________________________=Answering Yes will use the old custom fields and all bulletin data.  Answering No will use your current custom fields and copy all similar fields to the new bulletin but you may lose some of the original bulletin's data.
+-0ed4-field:confirmUseBulletinsCustomFieldseffect=اگر بله را کليک کنيد، قسمت های پذيرشِ اطلاعاتِ روی صفحه، به صورتِ بولتن قبلی در خواهد آمد. اگر روی خير کليک کنيد، صفحه بندی کنونیِ بولتن به همين شکل باقی می ماند و قسمت های مشابه از بولتن قبلی به اينجا کپی خواهند شد، اما بعضی قسمت های بولتن قبلی که مشابه اش در اين بولتن نيست ممکن است از دست بروند.
 
 #________________________________________________=Warning: acctmap.txt file in your account's packets directory is missing or is corrupt.  This may indicate someone has tried to tamper with your data or could be caused by a hardware error.
 -61cb-field:confirmWarnMissingAccountMapFilecause=اخطار: فايل acctmap.txt که محل آن در حساب شما در دايرکتوریِ packets واقع است، يا مفقود شده و يا اطلاعاتِ داخل آن فاسد شده است. دليل اين امر يا اين است که فردی خواسته اطلاعات شما را بردارد، يا اينکه اين مشکل از خطای سخت افزار ناشی شده باشد.
@@ -1192,6 +1216,12 @@
 #____________________________________________=An unexpected error occurred in generating the key backup files.
 -d237-field:notifyErrorBackingUpKeySharecause=به هنگام ايجاد نسخه های اضافیِ فايل های کليد، خطای نامنتظره ای پيش آمد.
 
+#_________________________________________________________=There was an error saving your template.
+-88ed-field:notifyErrorExportingCustomizationTemplatecause=خطا به هنگامِ ذخيره کردنِ قالبِ شما
+
+#_________________________________________________________=There was an error importing this template.
+-4a9a-field:notifyErrorImportingCustomizationTemplatecause=خطا به هنگامِ واردکردنِ اين قالب
+
 #______________________________________=An error prevented the file from being read.
 -1ad3-field:notifyErrorReadingFilecause=يک خطا باعث شد که فايل خوانده نـشود.
 
@@ -1231,6 +1261,9 @@
 #_________________________________________=To export bulletins, select them first, and then perform the export operation.
 -944e-field:notifyExportZeroBulletinscause=برای صدور بولتن ها، نخست آنها را انتخاب کنيد، سپس عمل صادر کردن را روی آنها انجام دهيد.
 
+#___________________________________________________________=Successfully exported customization template.
+-aed9-field:notifyExportingCustomizationTemplateSuccesscause=قالبِ تازه ساختن با موفقيت صادر شد.
+
 #___________________________________________=The original files have not been deleted from your computer, you must delete them manually if you wish.
 -8965-field:notifyFilesWillNotBeDeletedcause=فايل های اصلی از روی کامپيوتر شما هنور پاک نشده اند. شما بايد آنها را با دست پاک کنيد.
 
@@ -1246,11 +1279,20 @@
 #_______________________________________=You have already added this account to your Headquarters list.
 -0785-field:notifyHQKeyAlradyExistscause=شما پيشتر اين حساب را به ليست دفترمرکزی تان اضافه کرده ايد.
 
+#_______________________________________________=The Headquarters label you entered is already assigned to another Headquarters account.  Please use a different label.
+-91ca-field:notifyHeadquarterLabelDuplicatecause=برچسبی که برای اين دفترمرکزی برگزيديد از قبل به حساب دفترمزکزیِ ديگری داده شده. از برچسب ديگری استفاده کنيد.
+
+#___________________________________________________________=Successfully imported customization template.
+-c78c-field:notifyImportingCustomizationTemplateSuccesscause=قالبِ تازه ساختن با موفقيت وارد شد.
+
 #_______________________________________=You must have a server public code.
 -2fde-field:notifyInvalidServerCodecause=شما بايد برای سـِروِر يک کُد علنیِ سِروِر داشته باشيد.
 
 #_______________________________________=You must have a server name or IP address.
 -984b-field:notifyInvalidServerNamecause=شما بايد برای سـِروِر يک نام يا آدرس اينترنتی(IP address) داشته باشيد.
+
+#___________________________________=Please select a Headquarters first.
+-1d19-field:notifyNoHQsSelectedcause=لطفن ابتدا يک دفترمرکزی انتخاب کنيد.
 
 #________________________________________=Operation completed.
 -1a65-field:notifyOperationCompletedcause=خاتمهء کار.
@@ -1321,8 +1363,8 @@
 #__________________________________=Sorry, no bulletins were found.
 -5bd8-field:notifySearchFailedcause=متأسفانه هيچ بولتنی يافته نشد.
 
-#_________________________________=Number of bulletins found = 
--f301-field:notifySearchFoundcause=تعداد بولتن هايی که يافته شد:
+#_________________________________=#N# bulletins matched the search, and have been added to the Search Results folder.\n Note that both current and earlier versions of each bulletin were searched.
+-6569-field:notifySearchFoundcause=تعداد #N# بولتن با اين مشخصاب پيدا شد و به فولدرِ نتايج جستجو اضافه شدند. \nتوجه داشته باشيد هم نسخه های کنونی و هم نسخه های قديمی ترِ هر بولتن جستجو شد.
 
 #_____________________________________=The Server Public Code does not match the one you entered.
 -efe3-field:notifyServerCodeWrongcause=کُد علنیِ سـِروِر با آنچه شما وارد کرديد انطباق ندارد.
@@ -1450,8 +1492,8 @@
 #________________=Title
 -768e-field:title=عنوان اصلی
 
-#_____________________________=Persian 2.6
--26a2-field:translationVersion=فارسی 2.6
+#_____________________________=Persian Internal 2.7
+-2e32-field:translationVersion=فارسی 2.7
 
 #___________________=Username
 -84c2-field:username=اسم استفاده کننده
@@ -1483,8 +1525,8 @@
 #____________________________________________=WARNING: This bulletin has not been sent to a server since it was last modified. Deleting it will prevent the latest changes from being backed up.
 -523e-field:warningDeleteSingleUnsentBulletin=اخطار: اين بولتن، از زمانی که در آن تغييراتی داده شده، به روی سِِروِر فرستاده نشده است. اگر آن را پاک کنيد، در آينده امکان احياء آن از روی نسخه های اضافی وجود نخواهد داشت.
 
-#_______________________________________=WARNING:  This translation was not created by the Martus team, and therefore may not be trustworthy.\nIf you only want to use official translations then exit Martus, remove the file #UseUnofficialTranslationFiles# from your Martus directory, and restart Martus.\n\n
--c48e-field:warningUnofficialTranslation=اخطار: اين ترجمه توسط گروه Martus انجام نگرفته است و احتمال دارد که صد در صد قابل اعتماد نباشد.\n اگر شما می خواهيد فقط از ترجمه های رسمی استفاده کنيد، بايد از برنامهء Martus خارج شويد، سپس فايل #UseUnofficialTranslationFiles# را از دايرکتوریِ Martus پاک کنيد، بعد دوباره برنامهء Martus را از اول به راه اندازيد.\n\n
+#_______________________________________=WARNING:  This translation was not created by the Martus team, and therefore may not be trustworthy.  If you only want to use official translations then exit Martus, remove the file #UseUnofficialTranslationFiles# from your Martus directory, and restart Martus.
+-711f-field:warningUnofficialTranslation=اخطار: اين ترجمه توسط گروه Martus انجام نگرفته است و احتمال دارد که صد در صد قابل اعتماد نباشد.\n اگر شما می خواهيد فقط از ترجمه های رسمی استفاده کنيد، بايد از برنامهء Martus خارج شويد، سپس فايل #UseUnofficialTranslationFiles# را از دايرکتوریِ Martus پاک کنيد، بعد دوباره برنامهء Martus را از اول به راه اندازيد.\n\n
 
 #__________________=Web Page
 -0163-field:webpage=سايت اينترنتی
@@ -1555,8 +1597,8 @@
 #________________=Spanish
 -8df7-language:es=اسپانيايی
 
-#________________=Farsi, Dari
--e768-language:fa=فارسی، دری
+#________________=Persian (Farsi, Dari)
+-10c9-language:fa=فارسی(فارسی، دری)
 
 #________________=French
 -4438-language:fr=فرانسوی
@@ -1942,11 +1984,17 @@
 #___________________________________=Export Bulletins
 -a86c-wintitle:ExportBulletinsSaveAs=صدور بولتن ها
 
+#_______________________________________________=Export Customization Template
+-5318-wintitle:ExportCustomizationTemplateSaveAs=قالبِ ساختن صادر شود
+
 #__________________=Help on Martus
 -b414-wintitle:Help=کمک دربارهء Martus
 
 #________________________________=Help on Bulletin Details Field Default Content
 -96cb-wintitle:HelpDefaultDetails=کمک در بارهء محتوای اوليهء قسمتِ جزيياتِ بولتن
+
+#_____________________________________________=Import Customization Template
+-0188-wintitle:ImportCustomizationTemplateOpen=قالبِ تازه ساختن وارد شود
 
 #_______________________________=Import Headquarters Public Account Id File
 -9300-wintitle:ImportHQPublicKey=فايلِ اسمِ هويتِ حسابِ علنیِ دفترِ مرکزی را وارد کنيد
@@ -2029,8 +2077,8 @@
 #______________________________=Server Compliance Statement
 -20f8-wintitle:ServerCompliance=اظهاريهء انطباق سِروِر با موازين امنيتی
 
-#________________________=Server News
--d231-wintitle:ServerNews=اخبارِ سِروِر
+#________________________=Server News: Message #CurrentNewsItem# of #MaxNewsItems#
+-7177-wintitle:ServerNews=اخبارِ سِروِر: پيام #CurrentNewsItem# از #MaxNewsItems#
 
 #____________________________________=Server Configuration Results
 -788c-wintitle:ServerSelectionResults=نتايجِ وارد کردن خصوصيات سِروِر
@@ -2206,8 +2254,8 @@
 #____________________________________=Export My Public Account Id
 -2b8a-wintitle:inputExportMyPublicKey=اسم هويتِ حسابِ علنیِ من صادر شود
 
-#_____________________________=HQ Label
--bd52-wintitle:inputGetHQLabel=برچسب يا عنوان دفتر مرکزی
+#_____________________________=Headquarters Label
+-bd52-wintitle:inputGetHQLabel=برچسب دفتر مرکزی
 
 #___________________________________=Default Backup File Name
 -ac3c-wintitle:inputGetShareFileName=نامِ اوليهء نسخهء اضافیِ فايل
@@ -2278,11 +2326,17 @@
 #__________________________________________=Error Backing Up Key
 -ee40-wintitle:notifyErrorBackingUpKeyShare=به هنگام کپی کردنِ نسخهءاضافیِ کليد خطايی رخ داد
 
+#_______________________________________________________=Error Exporting Template
+-f4cc-wintitle:notifyErrorExportingCustomizationTemplate=خطا به هنگام صدورِ قالب
+
+#_______________________________________________________=Error Importing Template
+-4f1a-wintitle:notifyErrorImportingCustomizationTemplate=خطا به هنگامِ وارد کردنِ قالب
+
 #____________________________________=Error Reading File
--73ad-wintitle:notifyErrorReadingFile=به هنگام بازکردن و خواندن فايل خطايی رخ داد
+-73ad-wintitle:notifyErrorReadingFile=خطا به هنگام بازکردن و خواندن فايل
 
 #___________________________________________________=Error During Restore
--af9a-wintitle:notifyErrorRecoveringAccountDirectory=به هنگام احياء کردن خطايی رخ داد
+-af9a-wintitle:notifyErrorRecoveringAccountDirectory=خطا به هنگام احياء کردن
 
 #_____________________________________=Unable to Rename Folder
 -1ce2-wintitle:notifyErrorRenameFolder=قادر به تجديد نامگذاریِ فولدر نيستيم
@@ -2291,7 +2345,7 @@
 -1ce2-wintitle:notifyErrorRenameFolderExists=قادر به تجديد نامگذاریِ فولدر نيستيم
 
 #_______________________________________=Error Saving
--9dc8-wintitle:notifyErrorSavingBulletin=به هنگام ذخيره کردن خطايی رخ داد
+-9dc8-wintitle:notifyErrorSavingBulletin=خطا به هنگام ذخيره کردن
 
 #_____________________________________=Error Saving Configuration File
 -1287-wintitle:notifyErrorSavingConfig=به هنگام ذخيره کردنِ فايل مشخصات (کانفيگوراسيون) خطايی رخ داد
@@ -2317,6 +2371,9 @@
 #_______________________________________=No Bulletins Selected
 -c1d6-wintitle:notifyExportZeroBulletins=هنوز بولتنی انتخاب نشده
 
+#_________________________________________________________=Exporting Template Succeeded
+-b648-wintitle:notifyExportingCustomizationTemplateSuccess=صدورِقالب موفقيت آميز بود
+
 #_________________________________________=Files Not Deleted
 -a001-wintitle:notifyFilesWillNotBeDeleted=فايل ها پاک نمی شوند
 
@@ -2332,11 +2389,20 @@
 #_____________________________________=Headquarters Key Already Exists
 -03e9-wintitle:notifyHQKeyAlradyExists=کليدِ دفترِ مرکزی موجود می باشد
 
+#_____________________________________________=Headquarter Label Invalid
+-106b-wintitle:notifyHeadquarterLabelDuplicate=برچسبِ دفترمرکزی اعتبار ندارد
+
+#_________________________________________________________=Importing Template Succeeded
+-ac8c-wintitle:notifyImportingCustomizationTemplateSuccess=وارد کردنِ قالب موفقيت آميز بود
+
 #_____________________________________=Invalid Server Public Code
 -08ad-wintitle:notifyInvalidServerCode=کُد علنیِ سِروِر نادرست است
 
 #_____________________________________=Invalid Server Name or IP Address
 -3376-wintitle:notifyInvalidServerName=کُد علنیِ سِروِر يا آدرس اينترنتی (IP) آن نادرست است
+
+#_________________________________=No Headquarters Selected
+-0c30-wintitle:notifyNoHQsSelected=هنور هيچ دفتر مرکزی انتخاب نشده
 
 #______________________________________=Finished
 -355b-wintitle:notifyOperationCompleted=به پايان رسيد
@@ -2370,7 +2436,6 @@
 
 #_____________________________________________=Successful Key Restore
 -b5ca-wintitle:notifyRecoveryOfKeyPairComplete=احيای موفق آميزِ کليد
-
 
 #______________________________________________=Restore Complete
 -6ad3-wintitle:notifyRecoveryOfKeyShareComplete=احياء کردن کامل شد
