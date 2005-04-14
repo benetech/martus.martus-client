@@ -398,25 +398,14 @@
 #_________________________________=You can change any of this information later, by choosing Options/Contact Info.
 -e924-field:ContactInfoUpdateLater=شما می توانيد هربخش از اين اطلاعات را بعدن تغيير دهيد، با انتخاب تغييرات دلخواهی/اطلاعات مربوط به تماس گيری با شما.
 
-# [AB-040805]:  There are a bunch of changes needed in the 3 following items (all about custom fields) – I’ve included the directions again here for reference (below), and tried to modify things where I could (but please correct anything I did wrong!)
-#  6.  in CreateCustomFieldsHelp2/3 fields, you can translate tags into foreign
-#      characters (but without punctuation or spaces)
-# 17.  Leave standard field tags in English in CreateCustomFieldsHelp1 and
-#      CreateCustomFieldsHelp2, but put translation in parentheses after
-#      english : e.g.  'author' (مؤلف), so users know what they refer to
-
 #__________________________________=The layout of the bulletins is dictated by an XML document.  By default the standard bulletin fields occur at the top of the Custom Field declaration, but they can be moved if desired.  However, there are four required fields that cannot be removed:  'author', 'entrydate', 'language' and 'title'.\n\n
 -1ef6-field:CreateCustomFieldsHelp1=صفحه بندی و ترتيب بولتن ها توسط يک فايلِ اکس ـ اِم ـ اِل XML دستور داده می شود. در ابتدای کار، در صفحه بندیِ اوليه، قسمت های استانداردِ بولتن در بالا، برفرازِ قسمت هايی که به خواستِ استفاده کننده تنظيم می شود، قرار دارد، اما جای آنها می تواند بنا به تمايلِ شما عوض شود. با وجود اين، چهار قسمتِ ضروری وجود دارد که نمی توان آنها را حذف کرد: 'author' (مؤلف)،  'entrydate' (تاريخِ وارد کردنِ اطلاعات)، 'language' (زبان)، و 'title'  (عنوان اصلی). \n\n
-# [AB-040805]:  It seems a bit confusing to me to have items in single quotes and double quotes next to each other the way you have done in the item below, but this is what I did here to be consistent (please check that I put things in the right place and that is displays correctly in Martus.)  Are parentheses not understood in Persian?  (I’ve seen them elsewhere, so if they are, think this would be clearer?)
 
 #__________________________________=For custom (non-standard) fields, you first select the type of field you want.  The possible choices are 'BOOLEAN', 'DATE', 'DATERANGE', 'GRID', 'LANGUAGE', 'MULTILINE', and 'STRING'. \n\nFor each custom field you will need a unique identification tag.  This tag can be any word except those already used by the system (eg. 'author', 'summary', 'location', 'title' etc.), and cannot contain spaces or special characters.  Examples of choices are 'custom1', 'custom2', etc, or tags that are more descriptive like 'VictimsName'.\n Then you need a label which is displayed next to your custom field.  An example might be 'Name of 1st Witness'.\n\nAdditional Comments\n1. XML is case-sensitive ('Witness' is not the same as 'witness') \n2. quotes around type name can be single or double as long as they match (e.g. 'STRING" is not valid. It must be 'STRING' or "STRING") \n3. A Boolean field will be displayed as a checkbox when editing and Yes/No when previewed or printed.\n\nSee examples below:\n\n
 -676b-field:CreateCustomFieldsHelp2=برای ايجاد قسمت های مورد نيازتان(غير استاندارد)که شما خودتان به وجود می آوريد، ابتدا بايد نوعِ آن قسمت را معلوم بکنيد. نوع هايی که می توانيد برگزينيد عبارت اند از: 'BOOLEAN' (بولی يامثبت ـ منفی)، 'DATE' (تاريخ)،  'GRID' (گريد) ، 'DATERANGE' (تاريخ شروع و پايان)،  'LANGUAGE' (زبان)، 'MULTILINE' (چندخطی) ، (حروف ـ نوشته) 'STRING'.     \n\nبرای هر قسمتی که درست می کنيد، شما بايد يک اتيکتِ تشخيص دهندهء يگانه داشته باشيد. اين اتيکت می توان هر کلمه ای باشد به جز آن کلماتی که از پيش به سيستم اختصاص داده شده؛ مثل  author (مؤلف)،  summary (خلاصه)،  location (محل)،  title (عنوان اصلی)، و غيره. در اتيکت شما نمی توانيد از فاصله ميان حروف يا کاراکترهای خاصِ غيرالفبايی استفاده کنيد. برای نمونه شما می توانيد "يکشمار"، "دوشمار"، "سهشمار" يا اتيکت هايی که معنیِ خاصی بدهند مثل "اسمقربانی" استفاده کنيد، اما ميان حروف فاصله نگذاريد. \n\nبعد، شما بايد يک برچسب يا عنوان انتخاب کنيد که کنار قسمت مورد نظر می آيد. برای مثال: "نامِ نخستين شاهد". \n\n  ملاحظات ديگر: \n1 - برای پارسر ِ اکس ـ ام ـ ال  XML parser حروف بزرگ و حروف کوچک از يکديگر تفکيک پذيرند و شما نبايد يکی را به جای ديگری به کار بگيريد. \n2 - گيومهء دورِ يک کلمه بايد شروع و اختتام اش شبيه به هم باشد، يا هردويکخطی يا هردو دوخطی. \n3 -  يک حوزهء "بولی" به هنگام اديت کردن به  شکل يک چهارگوشک، يعنی مکعب کوچک برای مارک زدن، ظاهر می شود و به هنگام رؤيت يا چاپ به شکل بله/خير. \n\nبه نمونه های زير توجه کنيد:\n\n
-# [AB-040805]:  The first sentence seems very long in comparison to the english?  Would parentheses instead of “” around the Persian translations of the types (and Persian translations of the english standard fields I added) not be understood?  It looked to me (not actually being able to read Persian, so my pattern-recognition may be off!) like you had more than the “custom1” and “custom2” examples, but it also looked like the same number was used for each one?.  As long as the examples are valid, it probably doesn’t hurt anything (especially since I want to change the english someday,) but could you please doublecheck it?  I also added some spaces/new-lines to make things line up a bit better – let me know if it looks OK to you... 
 
 #__________________________________=<Field type='STRING'>\n<Tag>custom1</Tag>\n<Label>Witness Name</Label>\n</Field>\n\n<Field type='LANGUAGE'>\n<Tag>new2</Tag>\n<Label>Witness Speaks</Label>\n</Field>\n\n<Field type='BOOLEAN'>\n<Tag>new3</Tag>\n<Label>Were guns used?</Label>\n</Field>\n\n<Field type='GRID'>\n<Tag>customgrid</Tag>\n<Label>Victim Information</Label>\n<GridSpecDetails>\n<Column><Label>Name of Victim</Label></Column>\n<Column><Label>Victim Age</Label></Column>\n<Column><Label>Victim Gender</Label></Column>\n<Column><Label>Victim Ethnicity</Label></Column>\n</GridSpecDetails>\n</Field>\n
--c0a8-field:CreateCustomFieldsHelp3=<Field type='STRING'>\n<Tag>يکشمار </Tag>\n<Label> نام شاهد</Label>\n</Field>\n\n<Field type='LANGUAGE'>\n<Tag>جديدِدو</Tag>\n<Label> شاهد سخن می گويد</Label>\n</Field>\n\n<Field type='BOOLEAN'>\n<Tag>جديدِسه</Tag>\n<Label>آيا از اسلحه استفاده شده؟</Label>\n</Field>\n\n<Field type='GRID'>\n<Tag>گريدِمن </Tag>\n<Label>اطلاعاتِ قربانی</Label>\n<GridSpecDetails>\n<Column><Label>نام قربانی</Label></Column>\n<Column><Label>سن قربانی</Label></Column>\n<Column><Label>جنسيتِ قربانی</Label></Column>\n<Column><Label>قوميتِ قربانی</Label></Column>\n</GridSpecDetails>\n</Field>\n
-# [AB-040805]:  I removed the english where it isn’t needed.  But the actual tags (e.g. custom1, new2, new3, customgrid) need to be put into Persian 
-# [AB-041305]:  I removed the english in the tags (e.g. custom1, new2, new3, customgrid) 
+-c0a8-field:CreateCustomFieldsHelp3=<Field type='STRING'>\n<Tag>يکشمار</Tag>\n<Label> نام شاهد</Label>\n</Field>\n\n<Field type='LANGUAGE'>\n<Tag>جديدِدو</Tag>\n<Label> شاهد سخن می گويد</Label>\n</Field>\n\n<Field type='BOOLEAN'>\n<Tag>جديدِسه</Tag>\n<Label>آيا از اسلحه استفاده شده؟</Label>\n</Field>\n\n<Field type='GRID'>\n<Tag>جدولِمن</Tag>\n<Label>اطلاعاتِ قربانی</Label>\n<GridSpecDetails>\n<Column><Label>نام قربانی</Label></Column>\n<Column><Label>سن قربانی</Label></Column>\n<Column><Label>جنسيتِ قربانی</Label></Column>\n<Column><Label>قوميتِ قربانی</Label></Column>\n</GridSpecDetails>\n</Field>\n
 
 #____________________________________=Please enter your new username and password.
 -aec2-field:CreateNewUserNamePassword=لطفن اسمِ استفاده کنندهء جديد و اسم رمز(پاسورد) جديد را وارد کنيد.
@@ -645,21 +634,7 @@
 -7a0b-field:ScrubDataBeforeDelete=اطلاعات را قبل از حذف ِکامل، پاک کنيد.
 
 #______________________________=When searching for bulletins you can add key words (or, and) between multiple search term words (e.g. prison or jail, prison and assault).  If you enter multiple search terms without keywords, Martus will search for the exact phrase you entered.  Do not use quotation marks in your search.  The 'starting on' and 'ending on' dates will further refine your search matching either the event date or the date entered.  If you leave the search text blank Martus will perform only a date search.
--ac8c-field:SearchBulletinRules=به هنگام جستجو برای يک بولتن خاص، شما می توانيد هم به فارسی و هم به انگليسی از واژه های کليدیِ 'و' و 'يا' (and/or)ميان چند واژهء اصلی استفاده کنيد. (برای نمونه، زندان or حبس، زندان و ضرب و شتم). اگر همهء واژه ها را بدون 'و' و 'يا' وارد کنيد، Martus دقيقن به دنبال همان واژه به همان صورت که وارد شده خواهد بود. اگر بخش 'از اين تاريخ' و 'تا اين تاريخ' را هم پر کنيد، جستجو با دقت بيشتری انجام خواهد گرفت. اگر هيچ واژه ای در قسمت جستجو نکنيد، Martus فقط روی تاريخ جستجو خواهد کرد.
-# [original]:
-# -ac8c-field:SearchBulletinRules=به هنگام جستجو برای يک بولتن خاص، شما می توانيد هم به فارسی و هم به انگليسی از واژه های کليدیِ 'و' و 'يا' (and/or)ميان چند واژهء اصلی استفاده کنيد. (برای نمونه، زندان يا حبس، زندان و ضرب و شتم). اگر همهء واژه ها را بدون 'و' و 'يا' وارد کنيد، Martus دقيقن به دنبال همان واژه به همان صورت که وارد شده خواهد بود. اگر بخش 'از اين تاريخ' و 'تا اين تاريخ' را هم پر کنيد، جستجو با دقت بيشتری انجام خواهد گرفت. اگر هيچ واژه ای در قسمت جستجو نکنيد، Martus فقط روی تاريخ جستجو خواهد کرد.
-# [AB-040805]: see direction (modified to specifically match Persian) below and modify as needed (you can test the display by bringing the modified mtf up in Martus – if the “/”s won’t be understood, use whatever is more appropriate:
-#  5.  in field:SearchBulletinRules, make sure to translate the english "and"
-#      and "or" in the text to exactly match the keyword:and= and 
-#      keyword:or= translations.  Also, the translation of the first sentence
-#      should not exactly match the english version because Martus can handle
-#      both english "and"/"or" and the translations of those keywords for
-#      bulletin searching, since for some languages keyboards are not available
-#      to all users in those alphabets. So please translate the following for 
-#      the first sentence: "When searching for bulletins you can add key words 
-#      either in english or Persian (or/ يا, and/ و) 
-#      between multiple search term words search term words 
-#      (e.g. prison or jail, prison و  assault).
+-ac8c-field:SearchBulletinRules=به هنگام جستجو برای يک بولتن خاص، شما می توانيد هم به فارسی و هم به انگليسی از واژه های کليدیِ 'و/يا' (and/or)ميان چند واژهء اصلی استفاده کنيد. (برای نمونه، زندان or حبس، زندان و ضرب و شتم). اگر همهء واژه ها را بدون 'و' و 'يا' وارد کنيد، Martus دقيقن به دنبال همان واژه به همان صورت که وارد شده خواهد بود. اگر بخش 'از اين تاريخ' و 'تا اين تاريخ' را هم پر کنيد، جستجو با دقت بيشتری انجام خواهد گرفت. اگر هيچ واژه ای در قسمت جستجو نکنيد، Martus فقط روی تاريخ جستجو خواهد کرد.
 
 
 #________________________=Ending on:
@@ -736,11 +711,6 @@
 
 #______________________________=ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890-+=!@#$%^&*()_,.[]{}<>\/?|;:~
 -25df-field:VirtualKeyboardKeys=ابپتثجچحخدذرزژسشصضطظعغفقکگلمنوهیآبپتثجچحخدذرزژسشصضطظعغفقکگلمنوهي1234567890-+=@#$%^&*()_،.[]{}<>؟؛!, \/|;:~ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz
-# [AB-040805]: Need to add Persian alphabet – see direction below:
-#  4.  in field:VirtualKeyboardKeys, keep the english alphabet, but include any
-#      non-english characters at the end of the english alphabet/numbers/special
-#      characters (e.g. attach entire Persian alphabet at the end of the line)
-# [AB-041305]: I removed the duplicate special characters -- if you think they need to be rearranged, please do...
 
 #_______________________________=Space
 -6d8c-field:VirtualKeyboardSpace=يک فاصله
@@ -779,9 +749,7 @@
 -9b5e-field:allprivate=همهء اطلاعات موجود را غيرعلنی نگهداری کن
 
 #____________________________________=Kb
--1717-field:attachmentSizeForPrinting=Kbکيلوبايت
-# [AB-040805]:  Did you translate “Kb”?  I think it would be good to have it in Persian, or in both (which may be what you did) – unless you think even non-technical users would recognize the meaning of “Kb” in english.  
-# [AB-041305]:  This looks a little odd to me -- should the “Kb” be removed, or put in parenthese/quotes?
+-1717-field:attachmentSizeForPrinting=(Kb)کيلوبايت
 
 #______________________=Attachments
 -6771-field:attachments=ضميمه ها
@@ -884,8 +852,6 @@
 
 #_________________________________________________=The file you chose is not part of a key backup set.  These files are named '<name you picked>-#.dat' where # is the sequence number in the disk set previously created.
 -2e41-field:confirmErrorRecoverIvalidFileNamecause=فايلی که هم اکنون شما انتخاب کرديد جزء گروه نسخهء اضافیِ فايل های کليدی نيست. آن فايل ها نام شان اينگونه است 'dat. #- نام فايل' که در اين نام # شمارهء مسلسلی است که روی گروه فايل های روی ديسک از قبل شماره گذاری شده.
-# [AB-040805]:  Can you please check (by picking the Restore tab, and then picking some random nonbackup file) that the filename here displays correctly?  I tried it and think it is backwards from how an actual filename would look, but didn’t want to play with it without asking you.
-# [AB-041305]: moved some more stuff around -- think it's right now, but please check! 
 
 #__________________________________________________=Choosing yes will bring up the file selection dialog again so you may pick a different file.
 -c237-field:confirmErrorRecoverIvalidFileNameeffect=اگر بله را کليک کنيد، بار ديگر پنجرهء انتخاب فايل را خواهيد ديد که از آن می توانيد فايل ديگری را انتخاب کنيد.
@@ -1285,7 +1251,6 @@
 
 #_______________________________________=You must have a server name or IP address.
 -984b-field:notifyInvalidServerNamecause=شما بايد برای سـِروِر يک نام يا آدرس اينترنتی(IP address) داشته باشيد.
-# [AB-040805]:  “address” was translated, and not left/repeated in english in other similar fields.
 
 #________________________________________=Operation completed.
 -1a65-field:notifyOperationCompletedcause=خاتمهء کار.
@@ -1369,9 +1334,7 @@
 -76c7-field:notifyServerInfoInvalidcause=متأسفانه سـِروِر اطلاعات مربوط به اين حساب را به نادرست فرستاده است.
 
 #____________________________________________=Unable to make a secure connection with the Martus backup server.\n\nMartus can connect to a server using either of two ports.  When trying to connect to this server, neither port is accessible, probably because both ports are being blocked by a local firewall or by your ISP.\n\nWe recommend that any firewalls be configured to allow outgoing connections on both TCP port 443 and 987.  Please contact your LAN administrator or office technical support staff to verify that your firewall configuration allows this.\n\nIf the problem persists, you may need to select a different server.
--8dc9-field:notifyServerSSLNotRespondingcause=متأسفانه قادر نيستيم ارتباط امن با سـِروِر Martus برقرار کنيم. \n\nMartus می تواند با استفاده از يکی از دو port (پورت، نقطهء فرستادن و گرفتن اطلاعات) با سِرور تماس بگيرد . به هنگامی که سعی کرديم با اين سِروِر ارتباط برقرار کنيم هيچکدام از اين دو پورت قابل دسترسی نبودند، شايد به اين دليل که هردو پورت بوسيلهء firewall (نرم افزارِ محافظ يا فايِروال) يا بوسيلهء ISP (شرکت فراهم کنندهء سرويس اينترنت شما) جلوشان ديوار کشيده شده است. \n\nما سفارش می کنيم اگر از نرم افزار محافظ (فايروال) استفاده می کنيد، طوری آنرا تنظيم کنيد که اجازه بدهد ارتباط با خارج از طريق دو پورت تی ـ سی ـ پی (TCP) يعنی پورت های 443 و 987 برقرار شود. لطفن با سرپرست LAN (شبکهء داخلی) يا تکنيسينِ کمکیِ محل کارتان تماس بگيريد و از او بخواهيد که فايروال را به اين طريق تنظيم کند. \n\nاگر مشکل کماکان به حال خود باقی ماند، شما شايد چاره ای نداشته  باشيد مگر اينکه سـِروِر ديگری را انتخاب بکنيد. 
-# [AB-040805]:  Do you think it makes sense to put “ISP” and “LAN” in parentheses after the Persian?
-# [AB-041305]:  For consistency, either put all 3 acronyms in English with Persian in parentheses, or vice-versa.
+-8dc9-field:notifyServerSSLNotRespondingcause=متأسفانه قادر نيستيم ارتباط امن با سـِروِر Martus برقرار کنيم. \n\nMartus می تواند با استفاده از يکی از دو port (پورت، نقطهء فرستادن و گرفتن اطلاعات) با سِرور تماس بگيرد . به هنگامی که سعی کرديم با اين سِروِر ارتباط برقرار کنيم هيچکدام از اين دو پورت قابل دسترسی نبودند، شايد به اين دليل که هردو پورت بوسيلهء firewall (نرم افزارِ محافظ يا فايِروال) يا بوسيلهء ISP (شرکت فراهم کنندهء سرويس اينترنت شما) جلوشان ديوار کشيده شده است. \n\nما سفارش می کنيم اگر از نرم افزار محافظ (فايروال) استفاده می کنيد، طوری آنرا تنظيم کنيد که اجازه بدهد ارتباط با خارج از طريق دو پورتِ TCP (تی ـ سی ـ پی) يعنی پورت های 443 و 987 برقرار شود. لطفن با سرپرست LAN (شبکهء داخلی) يا تکنيسينِ کمکیِ محل کارتان تماس بگيريد و از او بخواهيد که فايروال را به اين طريق تنظيم کند. \n\nاگر مشکل کماکان به حال خود باقی ماند، شما شايد چاره ای نداشته  باشيد مگر اينکه سـِروِر ديگری را انتخاب بکنيد. 
 
 #____________________________________________=Unable to save the selected attachment for some reason.  Try saving it to a different file.
 -4a93-field:notifyUnableToSaveAttachmentcause=متأسفانه به دليلی ناشناخته نتوانستيم ضميمهء انتخاب شده را ذخيره کنيم. لطفن سعی کنيد آنرا به شکل فايل ديگری ذخيره کنيد.
@@ -1395,9 +1358,7 @@
 -7d7f-field:notifyVerifyKeyPairSharePassedcause=صلاحيتِ همهء ديسک ها تصديق شد.
 
 #_____________________________________=Welcome!\n\nTo start using Martus, create an account. Choose any username you like and a password that contains at least 8 characters. Keep the following information in mind as you create your username and password:\n\n * We recommend using a password that has 15 characters.\n * Include some characters that aren't letters or numbers in your password.\n   (That is, use punctuation or other special characters.)\n * Use a password that other people won't be able to guess;\n   anyone who knows your username and password can view your private data,\n   and can create bulletins that everyone will believe were created by you.\n * Write down your username and password and store them in a safe place.\n * You'll need to enter your username and password whenever you start Martus.\n * Martus will also sometimes prompt you to re-enter your username\n   and password to prevent someone else from using your account\n   after you've logged in.\n\nIMPORTANT: You are the only one who has your username and password. If you lose either of them, you won't be able to retrieve your data. Your username and password are not stored or backed up anywhere, so they cannot be reset for you.
--da34-field:notifyWelcomeToMartuscause=خوش آمديد! \n\nبرای شروع استفاده از Martus، ابتدا يک حساب باز کنيد. يک اسمِ استفاده کننده و يک اسمِ رمز (پاسوُرد)که دست کم هشت حرف داشته باشد را انتخاب کنيد. لطفن اين نکات را به ذهن بسپاريد: \n\n*ما سفارش می کنيم که از اسم رمزی استفاده کنيد که پانزده حرف داشته باشد. \n*می توانيد به جای حروف يا عدد از کاراکترهای ديگر نيز استفاده کنيد. (يعنی از نقطه و ويرگول و مميز و کاراکترهای ديگر هم استفاده کنيد.) \n*از اسمِ رمزی استفاده کنيد که ديگران به هيچ نحو نتوانند آنرا حدس بزنند. \nهرکس که اسم استفاده کننده و اسمِ رمز شما را پيدا کند می توان به همهء اطلاعاتِ محرمانهء شما دسترسی پيدا کند، \nو همان شخص قادر خواهد بولتن های تقلبی را به نام شما به وجود آورد. \n*اگر لازم باشد اسمِ استفاده کننده و اسمِ رمزتان را بنويسيد و درجای بسيار امنی پنهان کنيد. \n*شما هرزمان که بخواهيد از برنامهء Martus استفاده کنيد بايد اسمِ استفاده کننده و اسمِ رمزتان را وارد کنيد. گاهی اوقات برنامهء Martus از شما می خواهد که اسم استفاده کننده\n و اسم رمزتان را دوباره وارد کنيد که جلوی سوء استفاده شخصِ ديگری،\n پس از آنکه شما وارد برنامه شديد، گرفته شود. \n*اخطار مهم: شما تنها کسی هستيد که اسم استفاده کننده و اسمِ رمز را می داند. اگر شما يکی از اين دو اسم را گُم بکنيد، ديگر قادر نخواهيد بود اطلاعاتی که قبلن ذخيره کرده ايد را رؤيت کنيد. نسخهء ثالثی از اسمِ استفاده کننده و اسمِ رمز شما وجود ندارد که شما بتوانيد آنها را احياء کنيد.
-# [AB-040805]:  It looks like a bunch of “\n”s are missing here (6?).  You can compare with how things line up in the english version of the screen (by clicking on OK in the New Account tab.) Also, this is one of the places I saw a number get put in Persian, while in other places they are left in english – maybe confirm with Joanne which should be used throughout? (or which to use in which type of situation?)
-# [AB-041305]:  There still seem to be 3 “\n”s missing -- I would have expected more (or the same,) not fewer in Persian since it tends to be longer -- any reason for that?  If you can make it line up more nicely (see the English), that would be great.
+-da34-field:notifyWelcomeToMartuscause=خوش آمديد! \n\nبرای شروع استفاده از Martus، ابتدا يک حساب باز کنيد. يک اسمِ استفاده کننده و يک اسمِ رمز (پاسوُرد)که دست کم هشت حرف داشته باشد را انتخاب کنيد. لطفن اين نکات را به ذهن بسپاريد: \n\n * ما سفارش می کنيم که از اسم رمزی استفاده کنيد که پانزده حرف داشته باشد. \n * می توانيد به جای حروف يا عدد از کاراکترهای ديگر نيز استفاده کنيد.\n (يعنی از نقطه و ويرگول و مميز و کاراکترهای ديگر هم استفاده کنيد.) \n * از اسمِ رمزی استفاده کنيد که ديگران به هيچ نحو نتوانند آنرا حدس بزنند. \n هرکس که اسم استفاده کننده و اسمِ رمز شما را پيدا کند می توان به همهء اطلاعاتِ محرمانهء شما دسترسی پيدا کند، \n و همان شخص قادر خواهد بولتن های تقلبی را به نام شما به وجود آورد. \n * اگر لازم باشد اسمِ استفاده کننده و اسمِ رمزتان را بنويسيد و درجای بسيار امنی پنهان کنيد. \n * شما هرزمان که بخواهيد از برنامهء Martus استفاده کنيد بايد اسمِ استفاده کننده و اسمِ رمزتان را وارد کنيد.\n گاهی اوقات برنامهء Martus از شما می خواهد که اسم استفاده کننده\n و اسم رمزتان را دوباره وارد کنيد که جلوی سوء استفاده شخصِ ديگری،\n پس از آنکه شما وارد برنامه شديد، گرفته شود. \n\n * اخطار مهم: شما تنها کسی هستيد که اسم استفاده کننده و اسمِ رمز را می داند. اگر شما يکی از اين دو اسم را گُم بکنيد، ديگر قادر نخواهيد بود اطلاعاتی که قبلن ذخيره کرده ايد را رؤيت کنيد. نسخهء ثالثی از اسمِ استفاده کننده و اسمِ رمز شما وجود ندارد که شما بتوانيد آنها را احياء کنيد.
 
 #_____________________________________=The current Martus Server has refused to accept your contact info
 -156f-field:notifycontactRejectedcause=سـِروِر کنونی Martus از قبول اطلاعات شما سرباز می زند.
