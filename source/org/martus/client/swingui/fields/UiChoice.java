@@ -26,6 +26,7 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.swingui.fields;
 
 import java.util.Vector;
+import org.martus.common.DropDownFieldSpec;
 import org.martus.common.clientside.ChoiceItem;
 
 abstract public class UiChoice extends UiField
@@ -38,8 +39,7 @@ abstract public class UiChoice extends UiField
 	public UiChoice(Vector choicesToUse)
 	{
 		ChoiceItem[] choicesArray = new ChoiceItem[choicesToUse.size()+1];
-		String emptyFirstItem = " ";
-		choicesArray[0] = new ChoiceItem(emptyFirstItem,emptyFirstItem);
+		choicesArray[0] = new ChoiceItem(DropDownFieldSpec.EMPTY_FIRST_CHOICE,DropDownFieldSpec.EMPTY_FIRST_CHOICE);
 		for(int i = 0; i < choicesToUse.size(); i++)
 		{
 			String item = (String)choicesToUse.get(i);
