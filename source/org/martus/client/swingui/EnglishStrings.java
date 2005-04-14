@@ -29,7 +29,7 @@ package org.martus.client.swingui;
 public class EnglishStrings
 {
 	public static String strings[] = {
-"field:translationVersion=English Internal 2.7",
+"field:translationVersion=English 2.7",
 
 "wintitle:main=Martus Human Rights Bulletin System",
 "wintitle:create=Create Bulletin",
@@ -514,7 +514,7 @@ public class EnglishStrings
 "field:confirmCancelShareBackupeffect=By choosing Yes, you will exit this backup.",
 "field:confirmEnterCustomFieldscause=You have chosen to customize the fields that will be used in any new bulletins created by this account.",
 "field:confirmEnterCustomFieldseffect=Customizing fields is an advanced operation. You should only proceed if you are certain that you understand the feature.",
-"field:confirmUndoCustomFieldscause=You have chosen to restore to the standard set of Martus fields.",
+"field:confirmUndoCustomFieldscause=You have chosen to restore the standard set of Martus fields.",
 "field:confirmUndoCustomFieldseffect=New bulletins created with this account will not have any custom fields.",
 "field:confirmRecoverUsingKeySharecause=Welcome to Martus.  What would you like to do?",
 "field:confirmRecoverUsingKeyShareeffect=Create a new account, or restore a previously created account?",
