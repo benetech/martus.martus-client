@@ -1,9 +1,9 @@
 ﻿# Martus Client Translation File
 # Language code:  fa
 # Language name:  Persian (Farsi, Dari)
-# Exported date:  Thu Apr 14 09:27:51 PDT 2005
-# Client version: Internal 2.7
-# Client build:   20050413.1558
+# Exported date:  Thu Apr 14 16:53:36 PDT 2005
+# Client version: 2.7 Release Candidate
+# Client build:   20050414.1563
 #
 # This file MUST be saved in UTF-8 format!
 # Lines beginning with # are comments and are ignored by Martus
@@ -347,7 +347,7 @@
 -de85-field:BulletinHeadQuartersHQInfoForModify=حساب های دفتر مرکزی که انتخاب شده بشند قادر خواهند بود اطلاعاتِ محرمانهء اين بولتن را رؤيت کنند، يا اينکه اين بولتن را روی سِروِر بفرستند، پس از آنکه شما آنرا ذخيره کرديد.\n\nبرای اضافه کردن حساب برای يک دفترِ مرکزی ديگر به اين ترتيب از روی منوی بالای صفحه کليک کنيد ابزارها/دفترمرکزی تعريف شود.
 
 #____________________________________________=The following Headquarters account(s) can view the private information in this bulletin, and can send this bulletin to a server.
--e728-field:BulletinHeadQuartersHQInfoForView=حساب (های) دفترمرزیِ نشان داده شده می تواند اطلاعاتِ محرمانهء اين بولتن را رؤيت کند، و می تواند اين بولتن را به روی سِرور بفرستد.
+-e728-field:BulletinHeadQuartersHQInfoForView=حساب (های) دفترمرکزیِ نشان داده شده می تواند اطلاعاتِ محرمانهء اين بولتن را رؤيت کند، و می تواند اين بولتن را به روی سِرور بفرستد.
 
 #______________________________________=Label
 -7434-field:BulletinHeadQuartersHQLabel=برچسب يا عنوان
@@ -473,7 +473,7 @@
 -64b8-field:ErrorCustomFieldHeader4=برچسب يا عنوان
 
 #____________________________=There is an error in the custom field definitions. Each problem is identified with the following codes:\n   100 - Required standard field is missing\n   101 - Custom field does not have a correct tag.\n   102 - A previous Tag already exists with this name.\n   103 - Custom field does not have a label.\n   104 - Unrecognized Field Type.\n   105 - A label was found in a standard field.\n   106 - XML Parse Error.\n   107 - Tag contains illegal characters.\n   200 - All fields empty.\n   201 - Unrecognized headquarters created this template.\n   202 - Security validation error.\n   203 - File Error.
--f2cf-field:ErrorCustomFields=يک خطا در قسمتی که شما به خواستِ خودتان داريد درست می کنيد رخ داد. هرمشکلی با کُدهای زيرين تشخيص داده می شود: \n 100 - قسمتی که استاندارد و لازم است درينجا از قلم افتاده. \n 101 - قسمتی که شما اضافه کرده ايد از اتيکتِ (tag) صحيح برخوردار نيست. \n 102 - يک اتيکت مشابه با همين نام از قبل وجود دارد. \n 103 - قسمتی که شما اضافه کرده ايد از برچسب يا عنوان برخوردار نيست. \n 104 - اين نوع برای برنامه قابل تشخيص نيست. \n 105 - يک برچسب در جايی که متعلق به قسمت های استانداردِ است پيدا شد \n 106 - اعلام خطا از سوی پارسِر XML(برنامه ای که کُد را می خواند). \n 107 - اتيکت شما در خودش کاراکترهای غيرمجاز دارد. \n 200 - همه  خالی مانده \n 201 - دفترمرکزیِ ناشناخته ای اين قالب را ساخته. \n 202 - خطار در مورد تأييدِ امنيتی
+-f2cf-field:ErrorCustomFields=يک خطا در قسمتی که شما به خواستِ خودتان داريد درست می کنيد رخ داد. هرمشکلی با کُدهای زيرين تشخيص داده می شود: \n 100 - قسمتی که استاندارد و لازم است درينجا از قلم افتاده. \n 101 - قسمتی که شما اضافه کرده ايد از اتيکتِ (tag) صحيح برخوردار نيست. \n 102 - يک اتيکت مشابه با همين نام از قبل وجود دارد. \n 103 - قسمتی که شما اضافه کرده ايد از برچسب يا عنوان برخوردار نيست. \n 104 - اين نوع برای برنامه قابل تشخيص نيست. \n 105 - يک برچسب در جايی که متعلق به قسمت های استانداردِ است پيدا شد \n 106 - اعلام خطا از سوی پارسِر XML(برنامه ای که کُد را می خواند). \n 107 - اتيکت شما در خودش کاراکترهای غيرمجاز دارد. \n 200 - همه  خالی مانده \n 201 - دفترمرکزیِ ناشناخته ای اين قالب را ساخته. \n 202 - اخطار در مورد تأييدِ امنيتی. \n 203 -  خطای پرونده.\n
 
 #_________________________________________=A previous backup file exists.  You must save each file on its own removable media disk.
 -db93-field:ErrorPreviousBackupShareExists=يک نسخهء اضافی از فايل موجود است. شما بايد هر فايل را روی ديسک جداگانه ای ذخيره کنيد.
@@ -872,7 +872,7 @@
 -2f98-field:confirmEnterCustomFieldscause=با اين انتخاب شما قسمت های کسب اطلاعات را برطبق سليقهء خودتان عوض خواهيد کرد و از اين به بعد هر بولتن جديدی که با اين حساب به وجود آيد با همين شکل و شمايل و تنظيم خواهد شد.
 
 #_________________________________________=Customizing fields is an advanced operation. You should only proceed if you are certain that you understand the feature.
--518e-field:confirmEnterCustomFieldseffect=اگر بخش هايی که اطلاعات در آنها وارد می شود را به سليقهء خود بخواهيد تغيير دهيد، عملی خطير خواهد بود که فقط شخص با تجربه ای بايد به آن مبادرت کند. تنها به شرطی که شما به طور قطع بدانيد چگونه از اين جنبهء برنامه استفاده کنيد، به آن مبادرت کنيد.
+-518e-field:confirmEnterCustomFieldseffect=اگر بخش هايی که اطلاعات در آنها وارد می شود را به سليقهء خود بخواهيد تغيير دهيد عملی خطير خواهد بود که فقط شخص با تجربه ای بايد به آن مبادرت کند. تنها به شرطی که شما به طور قطع بدانيد چگونه از اين جنبهء برنامه استفاده کنيد به آن مبادرت کنيد.
 
 #_________________________________________________=The file you chose is not part of a key backup set.  These files are named '<name you picked>-#.dat' where # is the sequence number in the disk set previously created.
 -2e41-field:confirmErrorRecoverIvalidFileNamecause=فايلی که هم اکنون شما انتخاب کرديد جزء گروه نسخهء اضافیِ فايل های کليدی نيست. آن فايل ها نام شان اينگونه است 'dat. #- نام فايل' که در اين نام # شمارهء مسلسلی است که روی گروه فايل های روی ديسک از قبل شماره گذاری شده.
@@ -1019,7 +1019,7 @@
 -0e22-field:confirmUnableToRecoverFromBackupFileeffect=اگر می خوايد عمل احياء کليد را از سربگيريد روی بله کليک کنيد، اگر می خواهيد از Martus خارج شويد روی خير کليک کنيد.
 
 #_______________________________________=You have chosen to restore the standard set of Martus fields.
--cd11-field:confirmUndoCustomFieldscause=با اين انتخاب شما به همان قسمت ها وصفحهء استاندارد Martus رجعت خواهيد کرد.
+-b1b6-field:confirmUndoCustomFieldscause=با اين انتخاب شما به همان قسمت ها وصفحهء استاندارد Martus رجعت خواهيد کرد.
 
 #________________________________________=New bulletins created with this account will not have any custom fields.
 -bf33-field:confirmUndoCustomFieldseffect=بولتن های جديدی که از اين به بعد با اين حساب ايجاد شوند ديگر بخش های اختصاصی که توسط  شما اضافه شده بود را نخواهند داشت، بلکه همان قسمت ها و صفحهء استاندارد Martus را خواهند داشت.
@@ -1492,8 +1492,8 @@
 #________________=Title
 -768e-field:title=عنوان اصلی
 
-#_____________________________=Persian Internal 2.7
--2e32-field:translationVersion=فارسی 2.7
+#_____________________________=Persian 2.7
+-1d90-field:translationVersion=فارسی2.7 
 
 #___________________=Username
 -84c2-field:username=اسم استفاده کننده
@@ -1526,7 +1526,7 @@
 -523e-field:warningDeleteSingleUnsentBulletin=اخطار: اين بولتن، از زمانی که در آن تغييراتی داده شده، به روی سِِروِر فرستاده نشده است. اگر آن را پاک کنيد، در آينده امکان احياء آن از روی نسخه های اضافی وجود نخواهد داشت.
 
 #_______________________________________=WARNING:  This translation was not created by the Martus team, and therefore may not be trustworthy.  If you only want to use official translations then exit Martus, remove the file #UseUnofficialTranslationFiles# from your Martus directory, and restart Martus.
--711f-field:warningUnofficialTranslation=اخطار: اين ترجمه توسط گروه Martus انجام نگرفته است و احتمال دارد که صد در صد قابل اعتماد نباشد.\n اگر شما می خواهيد فقط از ترجمه های رسمی استفاده کنيد، بايد از برنامهء Martus خارج شويد، سپس فايل #UseUnofficialTranslationFiles# را از دايرکتوریِ Martus پاک کنيد، بعد دوباره برنامهء Martus را از اول به راه اندازيد.\n\n
+-711f-field:warningUnofficialTranslation=اخطار: اين ترجمه توسط گروه Martus انجام نگرفته است و احتمال دارد که صد در صد قابل اعتماد نباشد.\n اگر شما می خواهيد فقط از ترجمه های رسمی استفاده کنيد، بايد از برنامهء Martus خارج شويد، سپس فايل #UseUnofficialTranslationFiles# را از دايرکتوریِ Martus پاک کنيد، بعد دوباره برنامهء Martus را از اول به راه اندازيد.
 
 #__________________=Web Page
 -0163-field:webpage=سايت اينترنتی
@@ -1598,7 +1598,7 @@
 -8df7-language:es=اسپانيايی
 
 #________________=Persian (Farsi, Dari)
--10c9-language:fa=فارسی(فارسی، دری)
+-10c9-language:fa=فارسی، دری
 
 #________________=French
 -4438-language:fr=فرانسوی
@@ -2254,7 +2254,7 @@
 #____________________________________=Export My Public Account Id
 -2b8a-wintitle:inputExportMyPublicKey=اسم هويتِ حسابِ علنیِ من صادر شود
 
-#_____________________________=Headquarters Label
+#_____________________________=HQ Label
 -bd52-wintitle:inputGetHQLabel=برچسب دفتر مرکزی
 
 #___________________________________=Default Backup File Name
@@ -2401,7 +2401,7 @@
 #_____________________________________=Invalid Server Name or IP Address
 -3376-wintitle:notifyInvalidServerName=کُد علنیِ سِروِر يا آدرس اينترنتی (IP) آن نادرست است
 
-#_________________________________=No Headquarters Selected
+#_________________________________=No HQ's Selected
 -0c30-wintitle:notifyNoHQsSelected=هنور هيچ دفتر مرکزی انتخاب نشده
 
 #______________________________________=Finished
