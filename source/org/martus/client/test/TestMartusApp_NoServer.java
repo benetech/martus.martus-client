@@ -180,6 +180,12 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		mlpkTranslationxx.deleteOnExit();
 		copyResourceFileToLocalFile(mlpkTranslationyy, "Martus-yy.mlp");
 		mlpkTranslationyy.deleteOnExit();
+
+		File readmeFile_xx = new File(translationDirectory, "README_xx.txt");
+		File readmeFile_yy = new File(translationDirectory, "README_yy.txt");
+		assertFalse("Should not have an xx readme file yet", readmeFile_xx.exists());
+		assertFalse("Should not have a yy readme file yet", readmeFile_yy.exists());
+
 		appWithAccount.UpdateDocsIfNecessaryFromMLPFiles();
 		assertTrue("Should now have a docs directory,with 4 files within.", documentsDirectory.exists());
 		File[] pdfFiles = GetPdfFiles(documentsDirectory);
@@ -187,7 +193,11 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		appWithAccount.UpdateDocsIfNecessaryFromMLPFiles();
 		pdfFiles = GetPdfFiles(documentsDirectory);
 		assertEquals("Should still have just 4 pdf files", 4, pdfFiles.length);
+		assertTrue("Should now have an xx readme file", readmeFile_xx.exists());
+		assertTrue("Should now have a yy readme file", readmeFile_yy.exists());
 
+		readmeFile_xx.delete();
+		readmeFile_yy.delete();
 		mlpkTranslationxx.delete();
 		mlpkTranslationyy.delete();
 		DirectoryUtils.deleteEntireDirectoryTree(documentsDirectory);
@@ -200,25 +210,31 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		TRACE_BEGIN("testUpdateNewerDocsFromMLPFiles");
 		File translationDirectory = appWithAccount.martusDataRootDirectory;
 		File mlpkTranslationyy = new File(translationDirectory, UiBasicLocalization.getMlpkFilename("yy"));
+		File readmeFile_yy = new File(translationDirectory, "README_yy.txt");
 		copyResourceFileToLocalFile(mlpkTranslationyy, "Martus-yy.mlp");
 		mlpkTranslationyy.deleteOnExit();
 		appWithAccount.UpdateDocsIfNecessaryFromMLPFiles();
 		File documentsDirectory = appWithAccount.getDocumentsDirectory();
 		mlpkTranslationyy.delete();
-		File quickStartGuide_yy = new File(documentsDirectory, "quickstartguide_yy.pdf");
 
+		File quickStartGuide_yy = new File(documentsDirectory, "quickstartguide_yy.pdf");
 		String firstLineInGuide_yy = readLineFromFile(quickStartGuide_yy);
 		assertEquals("not the same pdf file?",textInsideYYQuickStartGuideMLPFile, firstLineInGuide_yy);
+		String firstLineInReadMe_yy = readLineFromFile(readmeFile_yy);
+		assertEquals("not the same readme file?",textInsideYYReadmeMLPFile, firstLineInReadMe_yy);
 
 		copyResourceFileToLocalFile(mlpkTranslationyy, "Martus-updated-yy.mlp");
 		mlpkTranslationyy.deleteOnExit();
 		appWithAccount.UpdateDocsIfNecessaryFromMLPFiles();
 		mlpkTranslationyy.delete();
 		String firstLineInUpdatedQuickStartGuide_yy = readLineFromFile(quickStartGuide_yy);
+		String firstLineInUpdatedReadme_yy = readLineFromFile(readmeFile_yy);
 		
 		DirectoryUtils.deleteEntireDirectoryTree(documentsDirectory);
-		assertEquals("not the updated pdf file?",textInsideUpdatedYYQuickStartGuideMLPFile, firstLineInUpdatedQuickStartGuide_yy);
+		readmeFile_yy.delete();
 
+		assertEquals("not the updated pdf file?",textInsideUpdatedYYQuickStartGuideMLPFile, firstLineInUpdatedQuickStartGuide_yy);
+		assertEquals("not the updated readme file?",textInsideUpdatedYYReadmeMLPFile, firstLineInUpdatedReadme_yy);
 		TRACE_END();
 	}	
 	
@@ -227,6 +243,8 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		TRACE_BEGIN("testDowngradingDocsFromMLPFiles");
 		File translationDirectory = appWithAccount.martusDataRootDirectory;
 		File mlpkTranslationyy = new File(translationDirectory, UiBasicLocalization.getMlpkFilename("yy"));
+		File readmeFile_yy = new File(translationDirectory, "README_yy.txt");
+
 		copyResourceFileToLocalFile(mlpkTranslationyy, "Martus-updated-yy.mlp");
 		mlpkTranslationyy.deleteOnExit();
 		appWithAccount.UpdateDocsIfNecessaryFromMLPFiles();
@@ -236,6 +254,8 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 
 		String firstLineInUpdatedQuickStartGuide_yy = readLineFromFile(quickStartGuide_yy);
 		assertEquals("not the same pdf file as the updated file?",textInsideUpdatedYYQuickStartGuideMLPFile, firstLineInUpdatedQuickStartGuide_yy);
+		String firstLineInUpdatedReadme_yy = readLineFromFile(readmeFile_yy);
+		assertEquals("not the updated readme file?",textInsideUpdatedYYReadmeMLPFile, firstLineInUpdatedReadme_yy);
 
 		copyResourceFileToLocalFile(mlpkTranslationyy, "Martus-yy.mlp");
 		mlpkTranslationyy.deleteOnExit();
@@ -243,9 +263,12 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		mlpkTranslationyy.delete();
 
 		String firstLineInGuide_yy = readLineFromFile(quickStartGuide_yy);
-		
+		String firstLineInReadMe_yy = readLineFromFile(readmeFile_yy);
+
+		readmeFile_yy.delete();
 		DirectoryUtils.deleteEntireDirectoryTree(documentsDirectory);
 		assertEquals("Should still be the updated pdf file, it shouldn't downgrade?",textInsideUpdatedYYQuickStartGuideMLPFile, firstLineInGuide_yy);
+		assertEquals("Should still be the updated readme file, it shouldn't downgrade?",textInsideUpdatedYYReadmeMLPFile, firstLineInReadMe_yy);
 		
 		
 		TRACE_END();
@@ -1914,5 +1937,7 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 	static final char[] userPassword2 = "12347".toCharArray();
 	static final String textInsideYYQuickStartGuideMLPFile = "fake pdf file for testing";
 	static final String textInsideUpdatedYYQuickStartGuideMLPFile = "updated fake pdf file for testing.";
+	static final String textInsideYYReadmeMLPFile = "readme yy";
+	static final String textInsideUpdatedYYReadmeMLPFile = "updated yy readme";
 
 }

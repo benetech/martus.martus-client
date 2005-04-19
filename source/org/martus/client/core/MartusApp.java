@@ -548,10 +548,27 @@ public class MartusApp
 		{
 			File mlpFile = mlpFiles[i];
 			extractNewerPDFDocumentation(mlpFile);
+			extractNewerReadMeDocumentation(mlpFile);
 		}
 	}
 
+	private void extractNewerReadMeDocumentation(File mlpFile)
+	{
+		File targetDirectory = getMartusDataRootDirectory();
+		String readMeFiles = "README";
+		String fileExtension = ".txt";
+		extractMatchingFileTypesFromJar(mlpFile, targetDirectory, readMeFiles, fileExtension);
+	}
+
 	private void extractNewerPDFDocumentation(File mlpFile)
+	{
+		File targetDirectory = getDocumentsDirectory();
+		String anyPdfFile = "";
+		String fileExtension = ".pdf";
+		extractMatchingFileTypesFromJar(mlpFile, targetDirectory, anyPdfFile, fileExtension);
+	}
+
+	private void extractMatchingFileTypesFromJar(File mlpFile, File targetDirectory, String filesBeginningWith, String filesEndingWith)
 	{
 		if(JarVerifier.verify(mlpFile, false) != JarVerifier.JAR_VERIFIED_TRUE)
 			return;
@@ -564,15 +581,20 @@ public class MartusApp
 			{
 				JarEntry entry = (JarEntry) entries.nextElement();
 				String jarEntryName = entry.getName();
-				if(!jarEntryName.endsWith(".pdf"))
+				if(filesBeginningWith.length() > 0)
+				{
+					if(!jarEntryName.startsWith(filesBeginningWith))
 					continue;
-				File documentsDirectory = getDocumentsDirectory();
-				File pdfFileOnDisk = new File(documentsDirectory, jarEntryName);
-				if(isPdfNewerOnDisk(pdfFileOnDisk, entry))
+				}
+					
+				if(!jarEntryName.endsWith(filesEndingWith))
 					continue;
-				pdfFileOnDisk.delete();
-				documentsDirectory.mkdirs();
-				copyJarEntryToFile(jar, entry, pdfFileOnDisk);
+				File fileOnDisk = new File(targetDirectory, jarEntryName);
+				if(isFileNewerOnDisk(fileOnDisk, entry))
+					continue;
+				fileOnDisk.delete();
+				targetDirectory.mkdirs();
+				copyJarEntryToFile(jar, entry, fileOnDisk);
 			}
 		}
 		catch(IOException e)
@@ -594,13 +616,13 @@ public class MartusApp
 	}
 	
 
-	public boolean isPdfNewerOnDisk(File pdfFile, ZipEntry entry)
+	public boolean isFileNewerOnDisk(File fileToCheck, ZipEntry entry)
 	{
-		if(!pdfFile.exists())
+		if(!fileToCheck.exists())
 			return false;
-		Date zipPdfDate = new Date(entry.getTime());
-		Date currentFileDate = new Date(pdfFile.lastModified());
-		return(zipPdfDate.before(currentFileDate));
+		Date zipFileDate = new Date(entry.getTime());
+		Date currentFileDate = new Date(fileToCheck.lastModified());
+		return(zipFileDate.before(currentFileDate));
 	}
 
 	private void copyJarEntryToFile(JarFile jar, JarEntry entry, File outputFile) throws IOException, FileNotFoundException
