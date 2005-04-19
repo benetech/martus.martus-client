@@ -122,8 +122,8 @@ public class TestMartusFlexidate extends TestCaseEnhanced
 	
 	public void testDateRangeSwap()
 	{
-		Date beginDate = getDate(2000,Calendar.JANUARY,10);
-		Date endDate = getDate(1999,Calendar.JANUARY, 15);
+		Date beginDate = getDate(2000, Calendar.JANUARY, 10);
+		Date endDate = new Date(beginDate.getTime() - (360L*24*60*60*1000));
 					
 		MartusFlexidate mf = new MartusFlexidate(beginDate, endDate);
 	
@@ -166,8 +166,8 @@ public class TestMartusFlexidate extends TestCaseEnhanced
 	private Date getDate(int year, int month, int day)
 	{			
 		Calendar cal = new GregorianCalendar();
-		cal.set(year,month,day);		
+		cal.set(year,month,day, 12, 0, 0);		
 						
 		return cal.getTime();
-	}	
+	} 
 }
