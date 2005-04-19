@@ -33,7 +33,7 @@ import java.io.OutputStream;
 import java.io.Serializable;
 
 import org.martus.common.LegacyCustomFields;
-import org.martus.common.StandardFieldSpecs;
+import org.martus.common.fieldspec.StandardFieldSpecs;
 
 public class ConfigInfo implements Serializable
 {

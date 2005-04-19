@@ -26,7 +26,7 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.test;
 
 import org.martus.client.swingui.fields.GridTableModel;
-import org.martus.common.GridFieldSpec;
+import org.martus.common.fieldspec.GridFieldSpec;
 import org.martus.util.TestCaseEnhanced;
 
 

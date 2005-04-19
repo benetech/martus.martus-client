@@ -32,8 +32,8 @@ import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.border.LineBorder;
 
-import org.martus.common.FieldSpec;
 import org.martus.common.clientside.UiBasicLocalization;
+import org.martus.common.fieldspec.FieldSpec;
 import org.martus.swing.UiLabel;
 
 public class UiBoolViewer extends UiField

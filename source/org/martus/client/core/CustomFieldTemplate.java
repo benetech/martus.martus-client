@@ -31,11 +31,11 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Vector;
 import org.martus.common.CustomFields;
-import org.martus.common.FieldSpec;
 import org.martus.common.CustomFields.CustomFieldsParseException;
 import org.martus.common.crypto.MartusCrypto;
 import org.martus.common.crypto.MartusCrypto.AuthorizationFailedException;
 import org.martus.common.crypto.MartusCrypto.MartusSignatureException;
+import org.martus.common.fieldspec.FieldSpec;
 
 public class CustomFieldTemplate
 {

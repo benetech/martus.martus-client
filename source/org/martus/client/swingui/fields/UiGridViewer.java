@@ -25,7 +25,7 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.fields;
 
-import org.martus.common.GridFieldSpec;
+import org.martus.common.fieldspec.GridFieldSpec;
 
 
 public class UiGridViewer extends UiGrid

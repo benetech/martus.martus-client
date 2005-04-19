@@ -31,10 +31,10 @@ import java.util.Vector;
 import org.martus.client.core.CustomFieldError;
 import org.martus.client.core.CustomFieldSpecValidator;
 import org.martus.common.CustomFields;
-import org.martus.common.StandardFieldSpecs;
-import org.martus.common.FieldSpec;
 import org.martus.common.LegacyCustomFields;
 import org.martus.common.bulletin.BulletinConstants;
+import org.martus.common.fieldspec.FieldSpec;
+import org.martus.common.fieldspec.StandardFieldSpecs;
 import org.martus.util.TestCaseEnhanced;
 
 public class TestCustomFieldSpecValidator extends TestCaseEnhanced

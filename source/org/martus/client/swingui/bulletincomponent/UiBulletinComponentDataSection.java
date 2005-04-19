@@ -39,13 +39,13 @@ import org.martus.client.swingui.fields.UiDateViewer;
 import org.martus.client.swingui.fields.UiField;
 import org.martus.client.swingui.fields.UiFlexiDateEditor;
 import org.martus.client.swingui.fields.UiField.DataInvalidException;
-import org.martus.common.DropDownFieldSpec;
-import org.martus.common.FieldSpec;
-import org.martus.common.GridFieldSpec;
-import org.martus.common.StandardFieldSpecs;
 import org.martus.common.bulletin.AttachmentProxy;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.clientside.ChoiceItem;
+import org.martus.common.fieldspec.DropDownFieldSpec;
+import org.martus.common.fieldspec.FieldSpec;
+import org.martus.common.fieldspec.GridFieldSpec;
+import org.martus.common.fieldspec.StandardFieldSpecs;
 import org.martus.common.packet.FieldDataPacket;
 import org.martus.swing.UiLabel;
 

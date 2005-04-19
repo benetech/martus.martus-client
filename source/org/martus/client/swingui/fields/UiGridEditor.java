@@ -27,7 +27,7 @@ package org.martus.client.swingui.fields;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import org.martus.common.GridFieldSpec;
+import org.martus.common.fieldspec.GridFieldSpec;
 
 
 

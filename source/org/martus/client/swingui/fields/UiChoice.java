@@ -26,8 +26,8 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.swingui.fields;
 
 import java.util.Vector;
-import org.martus.common.DropDownFieldSpec;
 import org.martus.common.clientside.ChoiceItem;
+import org.martus.common.fieldspec.DropDownFieldSpec;
 
 abstract public class UiChoice extends UiField
 {

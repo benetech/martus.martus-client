@@ -31,7 +31,7 @@ import javax.swing.JComponent;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
-import org.martus.common.FieldSpec;
+import org.martus.common.fieldspec.FieldSpec;
 import org.martus.swing.UiCheckBox;
 
 public class UiBoolEditor extends UiField implements ChangeListener

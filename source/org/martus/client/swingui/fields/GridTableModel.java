@@ -31,7 +31,7 @@ import javax.swing.table.AbstractTableModel;
 import javax.xml.parsers.ParserConfigurationException;
 
 import org.martus.common.GridData;
-import org.martus.common.GridFieldSpec;
+import org.martus.common.fieldspec.GridFieldSpec;
 import org.xml.sax.SAXException;
 
 

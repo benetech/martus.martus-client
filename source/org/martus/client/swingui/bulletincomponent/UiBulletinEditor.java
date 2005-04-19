@@ -35,11 +35,11 @@ import org.martus.client.core.LanguageChangeListener;
 import org.martus.client.swingui.HeadQuartersSelectionListener;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.fields.UiField;
-import org.martus.common.FieldSpec;
 import org.martus.common.HQKeys;
 import org.martus.common.bulletin.AttachmentProxy;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.crypto.MartusCrypto;
+import org.martus.common.fieldspec.FieldSpec;
 
 public class UiBulletinEditor extends UiBulletinComponent implements HeadQuartersSelectionListener
 {

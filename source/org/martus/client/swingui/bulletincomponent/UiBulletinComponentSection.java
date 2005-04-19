@@ -37,7 +37,7 @@ import org.martus.client.swingui.UiLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.UiWarningLabel;
 import org.martus.client.swingui.fields.UiField;
-import org.martus.common.FieldSpec;
+import org.martus.common.fieldspec.FieldSpec;
 import org.martus.swing.UiLabel;
 import org.martus.swing.UiParagraphPanel;
 

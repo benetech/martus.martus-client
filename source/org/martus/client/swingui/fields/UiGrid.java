@@ -36,7 +36,7 @@ import javax.swing.border.LineBorder;
 import javax.swing.table.TableCellEditor;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableModel;
-import org.martus.common.GridFieldSpec;
+import org.martus.common.fieldspec.GridFieldSpec;
 import org.martus.swing.UiScrollPane;
 import org.martus.swing.UiTable;
 import org.martus.swing.UiTableWithCellEditingProtection;

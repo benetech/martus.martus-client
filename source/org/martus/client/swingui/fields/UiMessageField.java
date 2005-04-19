@@ -28,8 +28,8 @@ package org.martus.client.swingui.fields;
 import javax.swing.JComponent;
 import javax.swing.JPanel;
 
-import org.martus.common.FieldSpec;
-import org.martus.common.MessageFieldSpec;
+import org.martus.common.fieldspec.FieldSpec;
+import org.martus.common.fieldspec.MessageFieldSpec;
 import org.martus.swing.UiWrappedTextArea;
 
 public class UiMessageField extends UiField

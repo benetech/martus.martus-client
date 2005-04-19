@@ -28,9 +28,9 @@ package org.martus.client.core;
 
 import java.util.Vector;
 
-import org.martus.common.StandardFieldSpecs;
-import org.martus.common.FieldSpec;
 import org.martus.common.bulletin.BulletinConstants;
+import org.martus.common.fieldspec.FieldSpec;
+import org.martus.common.fieldspec.StandardFieldSpecs;
 
 public class CustomFieldSpecValidator
 {

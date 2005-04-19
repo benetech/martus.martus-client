@@ -38,10 +38,10 @@ import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import org.martus.common.FieldSpec;
-import org.martus.common.StandardFieldSpecs;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.clientside.UiBasicLocalization;
+import org.martus.common.fieldspec.FieldSpec;
+import org.martus.common.fieldspec.StandardFieldSpecs;
 import org.martus.common.utilities.MartusFlexidate;
 import org.martus.swing.UiComboBox;
 import org.martus.swing.UiLabel;

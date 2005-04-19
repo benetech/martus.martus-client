@@ -33,10 +33,10 @@ import org.martus.client.core.MartusApp.SaveConfigInfoException;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.dialogs.UiCustomFieldsDlg;
 import org.martus.common.CustomFields;
-import org.martus.common.FieldSpec;
 import org.martus.common.MartusConstants;
-import org.martus.common.StandardFieldSpecs;
 import org.martus.common.CustomFields.CustomFieldsParseException;
+import org.martus.common.fieldspec.FieldSpec;
+import org.martus.common.fieldspec.StandardFieldSpecs;
 
 public class ActionMenuCustomFields extends UiMenuAction
 {

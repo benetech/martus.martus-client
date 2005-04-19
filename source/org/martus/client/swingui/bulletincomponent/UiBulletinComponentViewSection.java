@@ -40,10 +40,10 @@ import org.martus.client.swingui.fields.UiMessageField;
 import org.martus.client.swingui.fields.UiMultilineViewer;
 import org.martus.client.swingui.fields.UiNormalTextViewer;
 import org.martus.client.swingui.fields.UiUnknownViewer;
-import org.martus.common.FieldSpec;
-import org.martus.common.GridFieldSpec;
 import org.martus.common.bulletin.AttachmentProxy;
 import org.martus.common.clientside.ChoiceItem;
+import org.martus.common.fieldspec.FieldSpec;
+import org.martus.common.fieldspec.GridFieldSpec;
 
 public class UiBulletinComponentViewSection extends UiBulletinComponentDataSection
 {
