@@ -170,7 +170,7 @@ public class TestLocalization extends TestCaseEnhanced
 		
 		String farsiButtonText = "Farsi translation";
 		File farsi = new File(tmpDir, "Martus-fa.mtf");
-		arabic.deleteOnExit();
+		farsi.deleteOnExit();
 		writer = new UnicodeWriter(farsi);
 		writer.writeln(button+farsiButtonText);
 		writer.writeln(Localization.MTF_RIGHT_TO_LEFT_LANGUAGE_FLAG);
