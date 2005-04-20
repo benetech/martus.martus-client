@@ -167,17 +167,14 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		File mlpkTranslationxx = new File(translationDirectory, UiBasicLocalization.getMlpkFilename("xx"));
 		copyResourceFileToLocalFile(mlpkTranslationxx, "Martus-xx-notSigned.mlp");
 		mlpkTranslationxx.deleteOnExit();
-		File mlpkTranslationyy = new File(translationDirectory, UiBasicLocalization.getMlpkFilename("yy"));
-		copyResourceFileToLocalFile(mlpkTranslationyy, "Martus-yy-notSigned.mlp");
-		mlpkTranslationyy.deleteOnExit();
 		appWithAccount.UpdateDocsIfNecessaryFromMLPFiles();
 		File documentsDirectory = appWithAccount.getDocumentsDirectory();
-		assertFalse("Shouldn't have a docs directory yet, those mlp files were not signed.", documentsDirectory.exists());
+		assertFalse("Shouldn't have a docs directory yet, this mlp file was not signed.", documentsDirectory.exists());
 		mlpkTranslationxx.delete();
-		mlpkTranslationyy.delete();
 
 		copyResourceFileToLocalFile(mlpkTranslationxx, "Martus-xx.mlp");
 		mlpkTranslationxx.deleteOnExit();
+		File mlpkTranslationyy = new File(translationDirectory, UiBasicLocalization.getMlpkFilename("yy"));
 		copyResourceFileToLocalFile(mlpkTranslationyy, "Martus-yy.mlp");
 		mlpkTranslationyy.deleteOnExit();
 
