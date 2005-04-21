@@ -451,7 +451,6 @@ public class EnglishStrings
 "field:HeadQuartersSelected=Selected?",
 "field:ConfigureHeadQuartersDefault=Default?",
 "field:CustomizationTemplateFiles=Customization Template Files",
-"field:CustomizationFileDefaultName=MartusCustomization",
 
 "field:PrintPrivateData=Include private data in print out.",
 "field:PrintPrivateDataMessage=You have the option to include or exclude the selected bulletin's private information in this print out.\n\nTo only print public information, do not mark the checkbox below.\n\nIf you do mark the checkbox, anyone who sees the print out will be able to read your private data.",
