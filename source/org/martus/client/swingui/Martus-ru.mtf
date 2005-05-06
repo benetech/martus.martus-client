@@ -1,9 +1,9 @@
 ﻿# Martus Client Translation File
 # Language code:  ru
 # Language name:  Russian
-# Exported date:  Tue Feb 15 15:21:45 PST 2005
-# Client version: Internal 2.6.0
-# Client build:   20050211.1523
+# Exported date:  Fri Apr 15 16:36:11 PDT 2005
+# Client version: 2.7
+# Client build:   20050415.1566
 #
 # This file MUST be saved in UTF-8 format!
 # Lines beginning with # are comments and are ignored by Martus
@@ -81,7 +81,9 @@
 #      <GridSpecDetails>, </GridSpecDetails>, <Column>, </Column>
 # 21.  do not translate "#UseUnofficialTranslationFiles#" in
 #      field:warningUnofficialTranslation since it contains a file name
-# 22.  If you want your language to appear right to left,
+# 22.  do not translate "#CurrentNewsItem#" (used for server news)
+# 23.  do not translate "#MaxNewsItems#" (used for server news)
+# 24.  If you want your language to appear right to left,
 #      Uncomment the next line (by removing the # in front of #!right-to-left)
 #!right-to-left
 #
@@ -188,8 +190,14 @@
 #_________________________=Restore Defaults
 -8e80-button:customDefault=Восстановить значения по умолчанию
 
+#________________________=Export Template
+-1030-button:customExport=Экспорт шаблона
+
 #______________________=Help
 -c47a-button:customHelp=Справка
+
+#________________________=Import Template
+-6d2d-button:customImport=Импорт шаблона
 
 #________________=Help
 -c47a-button:help=Справка
@@ -244,6 +252,9 @@
 
 #____________________=Retrieve
 -eb55-button:retrieve=Загрузить
+
+#________________=Save
+-efc0-button:save=Сохранить
 
 #__________________________=Save Attachment
 -f513-button:saveattachment=Сохранить вложение
@@ -302,21 +313,6 @@
 #____________________________________=Bulletin ID
 -ae8f-field:BulletinDetailsBulletinId=Идентификатор сводки
 
-#_________________________________________=The following Headquarter account(s) will be able to view the private information in this bulletin, or send this bulletin to a server, after you save it.\n\nTo add or remove an account, use the Tools/Configure Headquarters menu option.
--cc16-field:BulletinDetailsHQInfoForModify=Ниже следует список главных учетных записей, пользователи которых могут просматривать конфиденциальную информацию в данной сводке или отправлять сводку на сервер после того, как Вы ее сохраните. Для добавления учетных записей в список и их удаления из него воспользуйтесь командой "Настройка главной учетной записи" меню Сервис.
-
-#_______________________________________=The following Headquarter account(s) can view the private information in this bulletin, and can send this bulletin to a server.
--bdf1-field:BulletinDetailsHQInfoForView=Пользователь нижеследующей главной учетной запись может просматривать конфиденциальную информацию в данной сводке или отправлять сводку на сервер.
-
-#_________________________________=Label
--7434-field:BulletinDetailsHQLabel=Метка
-
-#______________________________________=Public Code
--a1a2-field:BulletinDetailsHQPublicCode=Общий код
-
-#______________________________________=Headquarters
--6222-field:BulletinDetailsHeadquarters=Главная учетная запись
-
 #_________________________________=History
 -90cc-field:BulletinDetailsHistory=История
 
@@ -347,6 +343,18 @@
 #__________________________________=Warning: Some information in this bulletin is not visible
 -eba1-field:BulletinHasUnknownStuff=Предупреждение: Информация в сводке отображена не полностью
 
+#______________________________________________=The selected Headquarters account(s) will be able to view the private information in this bulletin, or send this bulletin to a server, after you save it.\n\nTo add a new headquarters account use the Tools/Configure Headquarters menu option.
+-de85-field:BulletinHeadQuartersHQInfoForModify=Выбранные главные учетные записи получат право просматривать конфиденциальную информацию в данной сводке, а также отправлять сводку на сервер после того, как Вы сохраните ее.\n\nЧтобы добавить новую главную учетную запись, используйте команду "Настройка главных учетных записей" меню Сервис.
+
+#____________________________________________=The following Headquarters account(s) can view the private information in this bulletin, and can send this bulletin to a server.
+-e728-field:BulletinHeadQuartersHQInfoForView=Следующие главные учетные записи имеют право просматривать конфиденциальную информацию в данной сводке, а также отправлять сводку на сервер.
+
+#______________________________________=Label
+-7434-field:BulletinHeadQuartersHQLabel=Метка
+
+#___________________________________________=Headquarters
+-6222-field:BulletinHeadQuartersHeadquarters=Главные учетные записи
+
 #_____________________=Bulletin Id:
 -a081-field:BulletinId=Идентификатор сводки:
 
@@ -375,16 +383,16 @@
 -8b0e-field:ChunkProgressStatusMessage=Загружается
 
 #______________________________=Row #
--4946-field:ColumnGridRowNumber=Строка #
-
-#_______________________________________=Label
--7434-field:ConfigureHQColumnHeaderLabel=Метка
+-4946-field:ColumnGridRowNumber=№ п/п
 
 #____________________________________________=Public Code
 -a1a2-field:ConfigureHQColumnHeaderPublicCode=Общий код
 
 #_________________________________=Current Headquarters
--6bd3-field:ConfigureHQsCurrentHQs=Текущая главная учетная запись
+-6bd3-field:ConfigureHQsCurrentHQs=Настроенные главные учетные записи
+
+#_______________________________________=Default?
+-0e2c-field:ConfigureHeadQuartersDefault=По умолчанию?
 
 #_________________________________________=All other fields currently are stored on disk.
 -7e7c-field:ContactInfoDescriptionOfFields=Все остальные поля в данной версии сохраняются на диске.
@@ -401,14 +409,20 @@
 #__________________________________=The layout of the bulletins is dictated by an XML document.  By default the standard bulletin fields occur at the top of the Custom Field declaration, but they can be moved if desired.  However, there are four required fields that cannot be removed:  'author', 'entrydate', 'language' and 'title'.\n\n
 -1ef6-field:CreateCustomFieldsHelp1=Вид сводки определяется в документе формата XML. По умолчанию описания стандартных полей сводки появляются вверху экрана редактирования описаний полей, но при желании можно переместить их.  Однако есть четыре обязательных элемента, которые нельзя исключить из списка полей: 'author' (имя автора), 'entrydate' (дата создания сводки), 'language'(язык) и 'title'(заголовок).\n\n
 
-#__________________________________=For custom (non-standard) fields, you first select the type of field you want.  The possible choices are 'BOOLEAN', 'DATE', 'DATERANGE', 'GRID', 'LANGUAGE', 'MULTILINE', and 'STRING'. \n\nFor each custom field you will need a unique identification tag.  This tag can be any word except those already used by the system (eg. 'author', 'summary', 'location', 'title' etc.), and cannot contain spaces or special characters.  Examples of choices are 'custom1', 'custom2', etc, or tags that are more descriptive like 'VictimsName'.\n Then you need a label which is displayed next to your custom field.  An example might be 'Name of 1st Witness'.\n\nAdditional Comments\n1. XML is case-sensitive ('Witness' is not the same as 'witness') \n2. quotes around type name can be single or double as long as they match (e.g. 'STRING" is not valid. It must be 'STRING' or "STRING") \n3. A Boolean field will be displayed as a checkbox when editing and Yes/No when previewed or printed.\n\nSee examples below:\n\n
--676b-field:CreateCustomFieldsHelp2=Чтобы создать пользовательское (нестандартное) поле, прежде всего задайте желаемый тип поля. Возможные типы: 'BOOLEAN'(логический), 'DATE'(дата), 'DATERANGE'(диапазон дат), 'GRID'(таблица), 'LANGUAGE'(язык), 'MULTILINE'(многострочный экран редактирования) и 'STRING'(редактируемая строка).\n\nКаждое пользовательское поле должно иметь свой уникальный идентификационный тег. В качестве такого тега может использоваться любое слово, кроме тех, которые уже зарезервированы системой - например, 'author' (автор), 'summary'(краткая информация), 'location'(место события), 'title'(заголовок) и т.д. Тег не может содержать пробелы и специальные символы. Например, возможны теги 'поле1', 'поле2' и т.д., или же более наглядные, такие как 'ИмяПострадавшего'.\n\nЗатем следует определить метку поля, которая будет выводиться рядом с пользовательским полем.  Например, возможна метка "Имя 1-го свидетеля".\n\nДополнительные пояснения\n1. XML различает прописные и строчные буквы (например, 'Имя' и 'имя' - не одно и то же)\n2. Cлово, обозначающее тип поля, может заключаться в одиночные или парные кавычки (кавычки перед словом и после него должны быть одинаковыми, например, можно набрать 'STRING' или "STRING", но не 'STRING")\n3. Поле типа Boolean (логического) будет выводиться в виде флажка в окне редактирования и в виде "Да/Нет" при распечатке.\n\nНиже приводятся примеры полей:\n\n
+#__________________________________=For custom (non-standard) fields, you first select the type of field you want.  The possible choices are 'BOOLEAN', 'DATE', 'DATERANGE', 'DROPDOWN', 'GRID', 'LANGUAGE', 'MESSAGE', 'MULTILINE', and 'STRING'. \n\nFor each custom field you will need a unique identification tag.  This tag can be any word except those already used by the system (eg. 'author', 'summary', 'location', 'title' etc.), and cannot contain spaces or special characters.  Examples of choices are 'custom1', 'custom2', etc, or tags that are more descriptive like 'VictimsName'.\n\nThen you need a label which is displayed next to your custom field.  An example might be 'Name of 1st Witness'.\n\nAdditional Comments\n1. XML is case-sensitive ('Witness' is not the same as 'witness') \n2. Quotes around type name can be single or double as long as they match (e.g. 'STRING" is not valid. It must be 'STRING' or "STRING")\n3. A Boolean field will be displayed as a checkbox when editing and Yes/No when previewed or printed.\n4.  Use "MESSAGE" fields to give guidance on how to enter data, and to create comments/notes that will be displayed in every bulletin.\n\nSee examples below:\n\n
+-da0a-field:CreateCustomFieldsHelp2=Чтобы создать пользовательское (нестандартное) поле, прежде всего задайте желаемый тип поля. Возможные типы: 'BOOLEAN'(логический), 'DATE'(дата), 'DATERANGE'(диапазон дат), 'DROPDOWN' (выпадающий список), 'GRID'(таблица), 'LANGUAGE'(язык), 'MESSAGE' (сообщение), 'MULTILINE'(многострочный экран редактирования) и 'STRING'(редактируемая строка).\n\nКаждое пользовательское поле должно иметь свой уникальный идентификационный тег. В качестве такого тега может использоваться любое слово, кроме тех, которые уже зарезервированы системой - например, 'author' (автор), 'summary'(краткая информация), 'location'(место события), 'title'(заголовок) и т.д. Тег не может содержать пробелы и специальные символы. Например, возможны теги 'поле1', 'поле2' и т.д., или же более наглядные, такие как 'ИмяПострадавшего'.\n\nЗатем следует определить метку поля, которая будет выводиться рядом с пользовательским полем.  Например, возможна метка "Имя 1-го свидетеля".\n\nДополнительные пояснения\n1. XML различает прописные и строчные буквы (например, 'Имя' и 'имя' - не одно и то же)\n2. Cлово, обозначающее тип поля, может заключаться в одиночные или парные кавычки (кавычки перед словом и после него должны быть одинаковыми, например, можно набрать 'STRING' или "STRING", но не 'STRING")\n3. Поле типа "BOOLEAN" (логического) будет выводиться в виде флажка в окне редактирования и в виде "Да/Нет" при распечатке. \n4. Используйте поля типа "MESSAGE" (сообщение), чтобы пояснять, как вводятся данные, или создавать комментарии (примечания), которые будут выводиться в каждой сводке.\n\nНиже приводятся примеры полей:\n\n
 
-#__________________________________=<Field type='STRING'>\n<Tag>custom1</Tag>\n<Label>Witness Name</Label>\n</Field>\n\n<Field type='LANGUAGE'>\n<Tag>new2</Tag>\n<Label>Witness Speaks</Label>\n</Field>\n\n<Field type='BOOLEAN'>\n<Tag>new3</Tag>\n<Label>Were guns used?</Label>\n</Field>\n\n<Field type='GRID'>\n<Tag>customgrid</Tag>\n<Label>Victim Information</Label>\n<GridSpecDetails>\n<Column><Label>Name of Victim</Label></Column>\n<Column><Label>Victim Age</Label></Column>\n<Column><Label>Victim Gender</Label></Column>\n<Column><Label>Victim Ethnicity</Label></Column>\n</GridSpecDetails>\n</Field>\n
--c0a8-field:CreateCustomFieldsHelp3=<Field type='STRING'>\n<Tag>поле1</Tag>\n<Label>Имя свидетеля</Label>\n</Field>\n\n<Field type='LANGUAGE'>\n<Tag>поле2</Tag>\n<Label>Родной язык свидетеля</Label>\n</Field>\n\n<Field type='BOOLEAN'>\n<Tag>поле3</Tag>\n<Label>Применялось ли огнестрельное оружие?</Label>\n</Field>\n\n<Field type='GRID'>\n<Tag>НоваяТаблица</Tag>\n<Label>Информация о пострадавших</Label>\n<GridSpecDetails>\n<Column><Label>Имя</Label></Column>\n<Column><Label>Возраст</Label></Column>\n<Column><Label>Пол</Label></Column>\n<Column><Label>Национальность</Label></Column>\n</GridSpecDetails>\n</Field>\n
+#__________________________________=<Field type='STRING'>\n<Tag>custom1</Tag>\n<Label>Witness Name</Label>\n</Field>\n\n<Field type='LANGUAGE'>\n<Tag>new2</Tag>\n<Label>Witness Speaks</Label>\n</Field>\n\n<Field type='BOOLEAN'>\n<Tag>new3</Tag>\n<Label>Were guns used?</Label>\n</Field>\n\n<Field type='MESSAGE'>\n<Tag>customMessage</Tag>\n<Label>Guidance for Perpetrator Eye Color entry:</Label>\n<Message>If you are unsure of the perpetrator's eye color, please leave this field blank.</Message>\n</Field>\n\n<Field type='DROPDOWN'>\n<Tag>customDropDown</Tag>\n<Label>Perpetrator Eye Color</Label>\n<Choices>\n<Choice>Brown</Choice>\n<Choice>Blue</Choice>\n<Choice>Green</Choice>\n<Choice>Other</Choice>\n</Choices>\n</Field>\n\n<Field type='GRID'>\n<Tag>customgrid</Tag>\n<Label>Victim Information</Label>\n<GridSpecDetails>\n<Column><Label>Name of Victim</Label></Column>\n<Column><Label>Victim Age</Label></Column>\n<Column><Label>Victim Gender</Label></Column>\n<Column><Label>Victim Ethnicity</Label></Column>\n</GridSpecDetails>\n</Field>\n
+-491b-field:CreateCustomFieldsHelp3=<Field type='STRING'>\n<Tag>поле1</Tag>\n<Label>Имя свидетеля</Label>\n</Field>\n\n<Field type='LANGUAGE'>\n<Tag>поле2</Tag>\n<Label>Родной язык свидетеля</Label>\n</Field>\n\n<Field type='BOOLEAN'>\n<Tag>поле3</Tag>\n<Label>Применялось ли огнестрельное оружие?</Label>\n</Field>\n\n<Field type='MESSAGE'>\n<Tag>сообщение1</Tag>\n<Label>Как вводить параметр "цвет глаз злоумышленника":</Label>\n<Message>Если Вы не знаете цвет глаз злоумышленника, оставьте это поле пустым.</Message>\n</Field>\n\n<Field type='DROPDOWN'>\n<Tag>список1</Tag>\n<Label>Цвет глаз злоумышленника</Label>\n<Choices>\n<Choice>Карий</Choice>\n<Choice>Голубой</Choice>\n<Choice>Зеленый</Choice>\n<Choice>Другой</Choice>\n</Choices>\n</Field>\n\n<Field type='GRID'>\n<Tag>НоваяТаблица</Tag>\n<Label>Информация о пострадавших</Label>\n<GridSpecDetails>\n<Column><Label>Фамилия, имя</Label></Column>\n<Column><Label>Возраст</Label></Column>\n<Column><Label>Пол</Label></Column>\n<Column><Label>Национальность</Label></Column>\n</GridSpecDetails>\n</Field>\n
 
 #____________________________________=Please enter your new username and password.
 -aec2-field:CreateNewUserNamePassword=Введите Ваше новое имя пользователя и новый пароль.
+
+#_______________________________________=MartusCustomization
+-f3b2-field:CustomizationFileDefaultName=MartusCustomization
+
+#_____________________________________=Customization Template Files
+-9210-field:CustomizationTemplateFiles=Файлы шаблонов настройки полей
 
 #____________________=Exact Date
 -8a81-field:DateExact=Точная дата
@@ -458,8 +472,8 @@
 #__________________________________=LABEL
 -64b8-field:ErrorCustomFieldHeader4=МЕТКА
 
-#____________________________=There is an error in the custom field definitions. Each problem is identified with the following codes:\n   100 - Required standard field is missing\n   101 - Custom field does not have a correct tag.\n   102 - A previous Tag already exists with this name.\n   103 - Custom field does not have a label.\n   104 - Unrecognized Field Type.\n   105 - A label was found in a standard field.\n   106 - XML Parse Error.\n   107 - Tag contains illegal characters
--943a-field:ErrorCustomFields=При настройке полей в сводке допущена ошибка. Типы ошибок обозначаются следующими кодами:\n   100 - Отсутствует обязательное стандартное поле.\n   101 - Тег поля отсутствует или задан неверно.\n   102 - Тег с этим именем уже был задан ранее.\n   103 - Метка пользовательского поля отсутствует.\n   104 - Невозможно распознать тип поля.\n   105 - Стандартному полю присвоена метка.\n   106 - Ошибка формата XML.\n   107 - Тег содержит недопустимые символы
+#____________________________=There is an error in the custom field definitions. Each problem is identified with the following codes:\n   100 - Required standard field is missing\n   101 - Custom field does not have a correct tag.\n   102 - A previous Tag already exists with this name.\n   103 - Custom field does not have a label.\n   104 - Unrecognized Field Type.\n   105 - A label was found in a standard field.\n   106 - XML Parse Error.\n   107 - Tag contains illegal characters.\n   200 - All fields empty.\n   201 - Unrecognized headquarters created this template.\n   202 - Security validation error.\n   203 - File Error.
+-f2cf-field:ErrorCustomFields=При настройке полей в сводке допущена ошибка. Типы ошибок обозначаются следующими кодами:\n   100 - Отсутствует обязательное стандартное поле.\n   101 - Тег поля отсутствует или задан неверно.\n   102 - Тег с этим именем уже был задан ранее.\n   103 - Метка пользовательского поля отсутствует.\n   104 - Невозможно распознать тип поля.\n   105 - Стандартному полю присвоена метка.\n   106 - Ошибка формата XML.\n   107 - Тег содержит недопустимые символы.\n   200 - Все поля пустые.\n   201 - Невозможно распознать главную учетную запись, создавшую данный шаблон.\n   202 - Ошибка при проверке защиты.\n   203 - Ошибка файла.
 
 #_________________________________________=A previous backup file exists.  You must save each file on its own removable media disk.
 -db93-field:ErrorPreviousBackupShareExists=На диске уже есть файл разбивки резервной копии ключа. Сохраняйте файлы разбивки на отдельных дисках.
@@ -488,11 +502,20 @@
 #______________________________________=This file name should be unique and identifiable to you but we recommend not using your user name.  Each file will be generated with this name and its number sequence.
 -02b6-field:GetShareFileNameDescription=Имя файла должно быть уникальным и понятным для Вас. Не рекомендуем называть файл Вашим именем пользователя.  Каждый создаваемый файл будет иметь это имя и порядковый номер.
 
+#__________________________=(not currently configured)
+-462b-field:HQNotConfigured=(в данный момент не заданы)
+
 #_________________________=Headquarters
 -6222-field:HQSummaryLabel=Главная учетная запись
 
+#__________________________=Default Headquarters accounts will be selected for each new bulletin or version.
+-ea13-field:HQsSetAsDefault=Главные учетные записи, для которых установлена пометка в поле "по умолчанию", получат права доступа ко всем новым сводкам и новым редакциям сводок.
+
 #________________________________=These Headquarters accounts are allowed to view the private information in this bulletin, and to send this bulletin to a server on your behalf.
 -2274-field:HQsSetAsProxyUploader=Эти главные учетные записи имеют право на чтение конфиденциальных данных в сводке и на отправку сводок на сервер от Вашего имени.
+
+#_______________________________=Selected?
+-9c09-field:HeadQuartersSelected=Выбрать?
 
 #_____________________________=Enter questions, details, or other information your organization wants to have answered in future bulletins created.
 -704c-field:HelpDefaultDetails=Здесь Вы можете задать вопросы и запросить сведения, нужные Вашей организации для создания следующих сводок.
@@ -526,6 +549,9 @@
 
 #_____________________________=Please enter a name for the file you wish to export.
 -95ed-field:NameOfExportedFile=Введите имя файла, который Вы хотите экспортировать.
+
+#__________________________=No Headquarters accounts selected for this bulletin.
+-2b9f-field:NoHQsConfigured=Для данной сводки главные учетные записи не заданы.
 
 #___________________________________________=Server Not Available
 -c79c-field:NoServerAvailableProgressMessage=Сервер недоступен
@@ -806,8 +832,8 @@
 #_________________________________________=By choosing Yes, you will exit this verification step.
 -5b61-field:confirmCancelShareVerifyeffect=Нажмите "Да", чтобы завершить процесс проверки на данной стадии.
 
-#_________________________________________=You have chosen to remove your Headquarters account.  Any existing saved bulletins will still be visible by the old Headquarters.  If you want to disallow Headquarters viewing access to previously created Draft bulletins they must be re-saved after revoking the Headquarters.  Any sealed bulletins CANNOT be reset to be non-viewable by the Headquarters.
--6076-field:confirmClearHQInformationcause=Вы выбрали отмену прав доступа для главной учетной записи. Все существующие сводки, сохраненные ранее, будут по-прежнему видимы пользователю учетной записи, являвшейся главной по отношению к Вашей. Чистовые сводки НЕВОЗМОЖНО изменить так, чтобы они стали невидимы для пользователя этой учетной записи. Черновые сводки следует сохранить заново после отмены прав доступа для текущей главной учетной записи.
+#_________________________________________=You have chosen to remove all selected Headquarters accounts.  Any existing saved bulletins will still be visible by the old Headquarters.  If you want to disallow Headquarters viewing access to previously created Draft bulletins they must be re-saved after revoking the Headquarters.  Any sealed bulletins CANNOT be reset to be non-viewable by the Headquarters, except by creating a new version of the bulletin.
+-d335-field:confirmClearHQInformationcause=Вы выбрали отмену прав доступа для главной учетной записи. Все существующие сводки, сохраненные ранее, будут по-прежнему видимы пользователю учетной записи, являвшейся главной по отношению к Вашей. Чтобы лишить пользователя текущей главной учетной записи прав доступа к черновым сводкам, созданным ранее, их нужно сохранить заново после отмены прав этой учетной записи как главной. Чистовые сводки НЕВОЗМОЖНО изменить так, чтобы они стали невидимы для пользователя этой учетной записи; можно только создать новую версию такой сводки.
 
 #__________________________________________=By clicking on Yes, any draft or sealed bulletins saved in the future will no longer be accessible by your Headquarters.
 -4a87-field:confirmClearHQInformationeffect=Нажмите "Да", чтобы в дальнейшем сводки, которые Вы сохраните или отправите на сервер в чистовом виде, были невидимы для пользователя учетной записи, которая в данный момент обладает правами главной учетной записи по отношению к Вашей.
@@ -845,8 +871,8 @@
 #________________________________________=You have chosen to customize the fields that will be used in any new bulletins created by this account.
 -2f98-field:confirmEnterCustomFieldscause=Вы выбрали функцию настройки полей. Новая настройка будет использоваться во всех сводках, создаваемых данной учетной записью в дальнейшем.
 
-#_________________________________________=Customizing fields is an advanced operation, and can be dangerous. You should only proceed if you are certain that you understand the feature.
--1483-field:confirmEnterCustomFieldseffect=Настройка полей требует определенной квалификации пользователя, так как эта операция может нарушить работу программы. Прежде чем изменять настройку полей, убедитесь, что Вы понимаете, как работает данная функция.
+#_________________________________________=Customizing fields is an advanced operation. You should only proceed if you are certain that you understand the feature.
+-518e-field:confirmEnterCustomFieldseffect=Настройка полей требует определенной квалификации пользователя. Прежде чем изменять настройку полей, убедитесь, что Вы понимаете, как работает данная функция.
 
 #_________________________________________________=The file you chose is not part of a key backup set.  These files are named '<name you picked>-#.dat' where # is the sequence number in the disk set previously created.
 -2e41-field:confirmErrorRecoverIvalidFileNamecause=Выбранный Вами файл не является файлом разбивки ключа Martus.  Файлы Martus носят имя '<назначенное Вами имя>-#.dat', где # - порядковый номер в созданном Вами ранее наборе дисков.
@@ -900,7 +926,7 @@
 -8fa3-field:confirmOverWriteExistingFilecause=Файл уже существует. Переписать?
 
 #_____________________________________________=The existing file will be deleted and replaced with the new information.
--0863-field:confirmOverWriteExistingFileeffect=Выбранное вложение будет записано на Ваш жесткий диск вместо ранее сохраненного файла.
+-0863-field:confirmOverWriteExistingFileeffect=Существующий файл будет удален и заменен новым.
 
 #_____________________________________=Since you have changed from the default print tray your print out may be incorrect, if you also changed the size of paper used.  You must first select the paper tray and then select the paper size in that order, for both to get set correctly.  If you only wanted to change the paper tray then disregard this message and select 'No'.
 -401e-field:confirmPrinterWarningcause=Вы выбрали способ подачи бумаги, отличный от принятого по умолчанию. Если при этом изменился и размер бумаги, печать может быть выполнена некорректно. Чтобы правильно задать параметры печати, задайте сначала способ подачи бумаги, а затем размер бумаги. Если Вы хотели только изменить только способ подачи бумаги, нажмите кнопку "Нет", чтобы игнорировать данное сообщение.
@@ -992,8 +1018,8 @@
 #_____________________________________________________=Choose Yes to begin the restore process again, No to exit Martus.
 -0e22-field:confirmUnableToRecoverFromBackupFileeffect=Нажмите "Да", чтобы начать процесс восстановления заново.
 
-#_______________________________________=You have chosen to revert to the standard set of Martus fields.
--61a6-field:confirmUndoCustomFieldscause=Вы выбрали возврат к стандартному набору полей Martus.
+#_______________________________________=You have chosen to restore the standard set of Martus fields.
+-b1b6-field:confirmUndoCustomFieldscause=Вы выбрали возврат к стандартному набору полей Martus.
 
 #________________________________________=New bulletins created with this account will not have any custom fields.
 -bf33-field:confirmUndoCustomFieldseffect=Сводки, создаваемые данной учетной записью в дальнейшем, не будут содержать полей, определенных пользователем.
@@ -1007,8 +1033,8 @@
 #_______________________________________________=The bulletin you are about to create is based on a previous bulletin whose custom fields are different from your current custom fields.  Do you wish to use the original bulletin's custom fields?
 -a6ca-field:confirmUseBulletinsCustomFieldscause=Сводка, которую Вы собираетесь создать, основана на созданной ранее сводке, в которой набор пользовательских полей не совпадает с Вашей текущей настройкой полей в сводках. Использовать набор пользовательских полей исходной сводки?
 
-#________________________________________________=Answering Yes will use the old custom fields and all bulletin data.  Answering No will use your current custom fields and copy all similar fields to the new bulletin but you will lose some of the original bulletin's data.
--afbe-field:confirmUseBulletinsCustomFieldseffect=Нажмите "Да", чтобы набор пользовательских полей и все данные в новой сводке остались такими же, как в исходной. Нажмите "Нет", чтобы в новой сводке использовалась текущая настройка пользовательских полей. При этом все аналогичные поля исходной сводки будут скопированы в новую, но часть данных из исходной сводки будет утрачена.
+#________________________________________________=Answering Yes will use the old custom fields and all bulletin data.  Answering No will use your current custom fields and copy all similar fields to the new bulletin but you may lose some of the original bulletin's data.
+-0ed4-field:confirmUseBulletinsCustomFieldseffect=Нажмите "Да", чтобы набор пользовательских полей и все данные в новой сводке остались такими же, как в исходной. Нажмите "Нет", чтобы в новой сводке использовалась текущая настройка пользовательских полей. При этом все аналогичные поля исходной сводки будут скопированы в новую, но возможна частичная утрата данных, содержавшихся в исходной сводке.
 
 #________________________________________________=Warning: acctmap.txt file in your account's packets directory is missing or is corrupt.  This may indicate someone has tried to tamper with your data or could be caused by a hardware error.
 -61cb-field:confirmWarnMissingAccountMapFilecause=Предупреждение: Файл acctmap.txt отсутствует в каталоге packets Вашей учетной записи или поврежден. Это может означать, что кто-то пытался получить несанкционированный доступ к Вашим данным. Возможно также, что это следствие аппаратной ошибки.
@@ -1190,6 +1216,12 @@
 #____________________________________________=An unexpected error occurred in generating the key backup files.
 -d237-field:notifyErrorBackingUpKeySharecause=В процессе генерации файлов разбивки ключа произошла непредвиденная ошибка.
 
+#_________________________________________________________=There was an error saving your template.
+-88ed-field:notifyErrorExportingCustomizationTemplatecause=При сохранении шаблона произошла ошибка.
+
+#_________________________________________________________=There was an error importing this template.
+-4a9a-field:notifyErrorImportingCustomizationTemplatecause=При импорте данного шаблона произошла ошибка.
+
 #______________________________________=An error prevented the file from being read.
 -1ad3-field:notifyErrorReadingFilecause=Ошибка чтения файла.
 
@@ -1229,6 +1261,9 @@
 #_________________________________________=To export bulletins, select them first, and then perform the export operation.
 -944e-field:notifyExportZeroBulletinscause=Выделите сводки для экспорта и выполните операцию экспорта.
 
+#___________________________________________________________=Successfully exported customization template.
+-aed9-field:notifyExportingCustomizationTemplateSuccesscause=Шаблон настройки полей успешно сохранен.
+
 #___________________________________________=The original files have not been deleted from your computer, you must delete them manually if you wish.
 -8965-field:notifyFilesWillNotBeDeletedcause=Исходные файлы не были удалены с Вашего компьютера; при желании Вы можете удалить их самостоятельно.
 
@@ -1244,11 +1279,20 @@
 #_______________________________________=You have already added this account to your Headquarters list.
 -0785-field:notifyHQKeyAlradyExistscause=Данная учетная запись уже добавлена к Вашему списку главных учетных записей.
 
+#_______________________________________________=The Headquarters label you entered is already assigned to another Headquarters account.  Please use a different label.
+-91ca-field:notifyHeadquarterLabelDuplicatecause=Введенная Вами метка уже присвоена другой главной учетной записи. Введите другую метку.
+
+#___________________________________________________________=Successfully imported customization template.
+-c78c-field:notifyImportingCustomizationTemplateSuccesscause=Импорт шаблона настройки полей успешно завершен.
+
 #_______________________________________=You must have a server public code.
 -2fde-field:notifyInvalidServerCodecause=Требуется общий код сервера.
 
 #_______________________________________=You must have a server name or IP address.
 -984b-field:notifyInvalidServerNamecause=Требуется имя или IP-адрес сервера.
+
+#___________________________________=Please select a Headquarters first.
+-1d19-field:notifyNoHQsSelectedcause=Вначале выберите главную учетную запись.
 
 #________________________________________=Operation completed.
 -1a65-field:notifyOperationCompletedcause=Операция выполнена.
@@ -1319,8 +1363,8 @@
 #__________________________________=Sorry, no bulletins were found.
 -5bd8-field:notifySearchFailedcause=Извините, сводок не найдено.
 
-#_________________________________=Number of bulletins found = 
--f301-field:notifySearchFoundcause=Число найденных сводок = 
+#_________________________________=#N# bulletins matched the search, and have been added to the Search Results folder.\n Note that both current and earlier versions of each bulletin were searched.
+-6569-field:notifySearchFoundcause=Найдено #N# сводок, которые добавлены в папку "Найденные".\n Напоминаем, что поиск велся как по текущей версии, так и по более ранним версиям каждой сводки.
 
 #_____________________________________=The Server Public Code does not match the one you entered.
 -efe3-field:notifyServerCodeWrongcause=Введенный Вами код не соответствует общему коду сервера.
@@ -1448,8 +1492,8 @@
 #________________=Title
 -768e-field:title=Заголовок
 
-#_____________________________=Russian 2.6
--26a2-field:translationVersion=Русский 2.6
+#_____________________________=Russian 2.7
+-1d90-field:translationVersion=Русский 2.7
 
 #___________________=Username
 -84c2-field:username=Имя пользователя
@@ -1481,8 +1525,8 @@
 #____________________________________________=WARNING: This bulletin has not been sent to a server since it was last modified. Deleting it will prevent the latest changes from being backed up.
 -523e-field:warningDeleteSingleUnsentBulletin=ВНИМАНИЕ: Данная сводка не была отправлена на сервер после последнего редактирования. Удаление этой сводки приведет к потере последних внесенных изменений.
 
-#_______________________________________=WARNING:  This translation was not created by the Martus team, and therefore may not be trustworthy.\nIf you only want to use official translations then exit Martus, remove the file #UseUnofficialTranslationFiles# from your Martus directory, and restart Martus.\n\n
--c48e-field:warningUnofficialTranslation=ПРЕДУПРЕЖДЕНИЕ:  Данный перевод создан не разработчиками Martus и может быть недостоверным.\nЕсли Вы хотите использовать только официальные переводы, выйдите из Martus, удалите из своего каталога Martus файл #UseUnofficialTranslationFiles# и запустите Martus заново.\n\n
+#_______________________________________=WARNING:  This translation was not created by the Martus team, and therefore may not be trustworthy.  If you only want to use official translations then exit Martus, remove the file #UseUnofficialTranslationFiles# from your Martus directory, and restart Martus.
+-711f-field:warningUnofficialTranslation=ПРЕДУПРЕЖДЕНИЕ:  Данный перевод создан не разработчиками Martus и может быть недостоверным. Если Вы хотите использовать только официальные переводы, выйдите из Martus, удалите из своего каталога Martus файл #UseUnofficialTranslationFiles# и запустите Martus заново.
 
 #__________________=Web Page
 -0163-field:webpage=Веб-страница
@@ -1553,8 +1597,8 @@
 #________________=Spanish
 -8df7-language:es=Испанский
 
-#________________=Farsi, Dari
--e768-language:fa=Фарси, дари
+#________________=Persian (Farsi, Dari)
+-10c9-language:fa=Персидский (фарси, дари)
 
 #________________=French
 -4438-language:fr=Французский
@@ -1680,7 +1724,7 @@
 -2852-menu:BackupMyKeyPairFile=Сохранить собственный ключ
 
 #______________________=Configure Headquarters
--bf2f-menu:ConfigureHQs=Настройка главной учетной записи
+-bf2f-menu:ConfigureHQs=Настройка главных учетных записей
 
 #_______________________=Copy Bulletin(s)
 -a57a-menu:CopyBulletins=Копировать сводки
@@ -1940,11 +1984,17 @@
 #___________________________________=Export Bulletins
 -a86c-wintitle:ExportBulletinsSaveAs=Экспорт сводок
 
+#_______________________________________________=Export Customization Template
+-5318-wintitle:ExportCustomizationTemplateSaveAs=Экспорт шаблона настройки полей
+
 #__________________=Help on Martus
 -b414-wintitle:Help=Справка программы Martus
 
 #________________________________=Help on Bulletin Details Field Default Content
 -96cb-wintitle:HelpDefaultDetails=Справка: Шаблон для поля "Подробности"
+
+#_____________________________________________=Import Customization Template
+-0188-wintitle:ImportCustomizationTemplateOpen=Импорт шаблона настройки полей
 
 #_______________________________=Import Headquarters Public Account Id File
 -9300-wintitle:ImportHQPublicKey=Импорт файла общего идентификационного ключа главной учетной записи
@@ -2027,8 +2077,8 @@
 #______________________________=Server Compliance Statement
 -20f8-wintitle:ServerCompliance=Объявление о соответствии сервера
 
-#________________________=Server News
--d231-wintitle:ServerNews=Новости сервера
+#________________________=Server News: Message #CurrentNewsItem# of #MaxNewsItems#
+-7177-wintitle:ServerNews=Новости сервера: сообщение #CurrentNewsItem# из #MaxNewsItems#
 
 #____________________________________=Server Configuration Results
 -788c-wintitle:ServerSelectionResults=Результаты настройки сервера
@@ -2112,7 +2162,7 @@
 -b24c-wintitle:confirmNotYourBulletinViewAttachmentAnyways=Просмотр вложения
 
 #__________________________________________=Confirm Replace Existing File
--e2b2-wintitle:confirmOverWriteExistingFile=Подтверждение замены содержимого существующего файла
+-e2b2-wintitle:confirmOverWriteExistingFile=Подтверждение замены файла
 
 #___________________________________=Print Configuration Warning
 -30d9-wintitle:confirmPrinterWarning=Предупреждение: Настройка печати
@@ -2276,6 +2326,12 @@
 #__________________________________________=Error Backing Up Key
 -ee40-wintitle:notifyErrorBackingUpKeyShare=Ошибка при сохранении ключа
 
+#_______________________________________________________=Error Exporting Template
+-f4cc-wintitle:notifyErrorExportingCustomizationTemplate=Ошибка при экспорте шаблона
+
+#_______________________________________________________=Error Importing Template
+-4f1a-wintitle:notifyErrorImportingCustomizationTemplate=Ошибка при импорте шаблона
+
 #____________________________________=Error Reading File
 -73ad-wintitle:notifyErrorReadingFile=Ошибка чтения файла
 
@@ -2315,6 +2371,9 @@
 #_______________________________________=No Bulletins Selected
 -c1d6-wintitle:notifyExportZeroBulletins=Не выбраны сводки
 
+#_________________________________________________________=Exporting Template Succeeded
+-b648-wintitle:notifyExportingCustomizationTemplateSuccess=Шаблон успешно экспортирован
+
 #_________________________________________=Files Not Deleted
 -a001-wintitle:notifyFilesWillNotBeDeleted=Файлы не удалены
 
@@ -2330,11 +2389,20 @@
 #_____________________________________=Headquarters Key Already Exists
 -03e9-wintitle:notifyHQKeyAlradyExists=Ключ главной учетной записи уже существует
 
+#_____________________________________________=Headquarter Label Invalid
+-106b-wintitle:notifyHeadquarterLabelDuplicate=Неверная метка
+
+#_________________________________________________________=Importing Template Succeeded
+-ac8c-wintitle:notifyImportingCustomizationTemplateSuccess=Шаблон успешно импортирован
+
 #_____________________________________=Invalid Server Public Code
 -08ad-wintitle:notifyInvalidServerCode=Неверный общий код сервера
 
 #_____________________________________=Invalid Server Name or IP Address
 -3376-wintitle:notifyInvalidServerName=Неверное имя или IP-адрес сервера
+
+#_________________________________=No Headquarters Selected
+-0c30-wintitle:notifyNoHQsSelected=Главные учетные записи не заданы
 
 #______________________________________=Finished
 -355b-wintitle:notifyOperationCompleted=Завершение
@@ -2503,3 +2571,6 @@
 
 #_________________________________=Confirm Delete Folder
 -1a75-wintitle:warningdeletefolder=Подтверждение удаления папки
+
+
+
