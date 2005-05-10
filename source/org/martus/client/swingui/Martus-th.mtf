@@ -1,9 +1,9 @@
 ﻿# Martus Client Translation File
 # Language code:  th
 # Language name:  Thai
-# Exported date:  Fri Feb 18 10:47:12 PST 2005
-# Client version: 2.6
-# Client build:   20050218.1527
+# Exported date:  Fri Apr 15 16:37:30 PDT 2005
+# Client version: 2.7
+# Client build:   20050415.1566
 #
 # This file MUST be saved in UTF-8 format!
 # Lines beginning with # are comments and are ignored by Martus
@@ -81,7 +81,9 @@
 #      <GridSpecDetails>, </GridSpecDetails>, <Column>, </Column>
 # 21.  do not translate "#UseUnofficialTranslationFiles#" in
 #      field:warningUnofficialTranslation since it contains a file name
-# 22.  If you want your language to appear right to left,
+# 22.  do not translate "#CurrentNewsItem#" (used for server news)
+# 23.  do not translate "#MaxNewsItems#" (used for server news)
+# 24.  If you want your language to appear right to left,
 #      Uncomment the next line (by removing the # in front of #!right-to-left)
 #!right-to-left
 #
@@ -188,8 +190,14 @@
 #_________________________=Restore Defaults
 -8e80-button:customDefault=เรียกค่าเดิมคืน
 
+#________________________=Export Template
+-1030-button:customExport=ส่งออกแม่แบบ
+
 #______________________=Help
 -c47a-button:customHelp=ช่วยเหลือ
+
+#________________________=Import Template
+-6d2d-button:customImport=นำเข้าแม่แบบ
 
 #________________=Help
 -c47a-button:help=ช่วยเหลือ
@@ -244,6 +252,9 @@
 
 #____________________=Retrieve
 -eb55-button:retrieve=เอาข้อมูลคืน
+
+#________________=Save
+-efc0-button:save=บันทึก
 
 #__________________________=Save Attachment
 -f513-button:saveattachment=บันทึกเอกสารแนบ
@@ -302,21 +313,6 @@
 #____________________________________=Bulletin ID
 -ae8f-field:BulletinDetailsBulletinId=รหัสรายงาน
 
-#_________________________________________=The following Headquarter account(s) will be able to view the private information in this bulletin, or send this bulletin to a server, after you save it.\n\nTo add or remove an account, use the Tools/Configure Headquarters menu option.
--cc16-field:BulletinDetailsHQInfoForModify=รายชื่อบัญชีสำนักงานใหญ่ต่อไปนี้จะสามารถดูข้อมูลส่วนตัวในรายงานนี้ หรือ ส่งรายงานนี้ ไปยังเซิร์ฟเวอร์ หลังจากที่คุณบันทึกมัน\n\nในการเพิ่มหรือลบชื่อบันชื่อ ใช้ที่เมนู เครื่องมือ/ปรับแต่งค่าของสำนักงานใหญ่
-
-#_______________________________________=The following Headquarter account(s) can view the private information in this bulletin, and can send this bulletin to a server.
--bdf1-field:BulletinDetailsHQInfoForView=รายชื่อบัญชีสำนักงานใหญ่ต่อไปนี้สามารถดูข้อมูลส่วนตัวในรายงานนี้ หรือ ส่งรายงานนี้ไปยังเซิร์ฟเวอร์ได้
-
-#_________________________________=Label
--7434-field:BulletinDetailsHQLabel=ชื่อ
-
-#______________________________________=Public Code
--a1a2-field:BulletinDetailsHQPublicCode=รหัสสาธารณะ
-
-#______________________________________=Headquarters
--6222-field:BulletinDetailsHeadquarters=สำนักงานใหญ่
-
 #_________________________________=History
 -90cc-field:BulletinDetailsHistory=ประวัติ
 
@@ -346,6 +342,18 @@
 
 #__________________________________=Warning: Some information in this bulletin is not visible
 -eba1-field:BulletinHasUnknownStuff=คำเตือน: ข้อมูลบางอย่างในรายงานไม่สามารถมองเห็นได้
+
+#______________________________________________=The selected Headquarters account(s) will be able to view the private information in this bulletin, or send this bulletin to a server, after you save it.\n\nTo add a new headquarters account use the Tools/Configure Headquarters menu option.
+-de85-field:BulletinHeadQuartersHQInfoForModify=ชื่อบัญชีสำนักงานใหญ่จะสามารถดูข้อมูลส่วนตัวในรายงานนี้ได้ หรือส่งรายงานนี้ไปยังเซิร์ฟเวอร์ หลังจากคุณบันทึกรายงาน \n\nเพิ่มชื่อบัญชีสำนักงานใหญ่ ไปที่เมนู เครื่องมือ/ปรับแต่งค่าสำนักงานใหญ่
+
+#____________________________________________=The following Headquarters account(s) can view the private information in this bulletin, and can send this bulletin to a server.
+-e728-field:BulletinHeadQuartersHQInfoForView=ชื่อบัญชีสำนักงานใหญ่ตามนี้สามารถดูข้อมูลส่วนตัวในรายงานนี้ได้ และสามารถส่งรายงานนี้ไปยังเซิร์ฟเวอร์ได้
+
+#______________________________________=Label
+-7434-field:BulletinHeadQuartersHQLabel=ป้ายชื่อ
+
+#___________________________________________=Headquarters
+-6222-field:BulletinHeadQuartersHeadquarters=สำนักงานใหญ่
 
 #_____________________=Bulletin Id:
 -a081-field:BulletinId=รหัสรายงาน:
@@ -377,14 +385,14 @@
 #______________________________=Row #
 -4946-field:ColumnGridRowNumber=แถว #
 
-#_______________________________________=Label
--7434-field:ConfigureHQColumnHeaderLabel=ชื่อ
-
 #____________________________________________=Public Code
 -a1a2-field:ConfigureHQColumnHeaderPublicCode=รหัสสาธารณะ
 
 #_________________________________=Current Headquarters
 -6bd3-field:ConfigureHQsCurrentHQs=สำนักงานใหญ่ปัจจุบัน
+
+#_______________________________________=Default?
+-0e2c-field:ConfigureHeadQuartersDefault=ค่าเริ่มต้นหรือไม่
 
 #_________________________________________=All other fields currently are stored on disk.
 -7e7c-field:ContactInfoDescriptionOfFields=ข้อมูลอื่นๆ ถูกเก็บบนดิสก์
@@ -401,14 +409,20 @@
 #__________________________________=The layout of the bulletins is dictated by an XML document.  By default the standard bulletin fields occur at the top of the Custom Field declaration, but they can be moved if desired.  However, there are four required fields that cannot be removed:  'author', 'entrydate', 'language' and 'title'.\n\n
 -1ef6-field:CreateCustomFieldsHelp1=รูปแบบรายงานถูกกำหนดได้โดยเอกสาร XML โดยปกติแล้วช่องข้อมูลมาตรฐานจะอยู่บนสุดของการประกาศช่องข้อมูลกำหนดเอง แต่ก็สามารถเอาออกได้ถ้าต้องการ อย่างไรก็ตาม มีอยู่ช่องข้อมูล 4 ช่องที่ไม่สามารถเอาออกได้คือ 'author' (ผู้รายงาน) 'entrydate' (วันที่ป้อนข้อมูล) 'language' (ภาษา) และ 'title' (ชื่อเรื่อง)\n\n
 
-#__________________________________=For custom (non-standard) fields, you first select the type of field you want.  The possible choices are 'BOOLEAN', 'DATE', 'DATERANGE', 'GRID', 'LANGUAGE', 'MULTILINE', and 'STRING'. \n\nFor each custom field you will need a unique identification tag.  This tag can be any word except those already used by the system (eg. 'author', 'summary', 'location', 'title' etc.), and cannot contain spaces or special characters.  Examples of choices are 'custom1', 'custom2', etc, or tags that are more descriptive like 'VictimsName'.\n Then you need a label which is displayed next to your custom field.  An example might be 'Name of 1st Witness'.\n\nAdditional Comments\n1. XML is case-sensitive ('Witness' is not the same as 'witness') \n2. quotes around type name can be single or double as long as they match (e.g. 'STRING" is not valid. It must be 'STRING' or "STRING") \n3. A Boolean field will be displayed as a checkbox when editing and Yes/No when previewed or printed.\n\nSee examples below:\n\n
--676b-field:CreateCustomFieldsHelp2=<สำหรับช่องข้อมูลกำหนดเอง (ไม่ใช่ช่องข้อมูลมาตรฐาน) คุณต้องเลือกชนิดของช่องข้อมูลที่คุณต้องการก่อน ทางเลือกที่เป็นไปได้มีดังนี้ 'BOOLEAN' (ใช่/ไม่ใช่), 'DATE' (วันที่), 'DATERANGE' (ช่วงวันที่), 'GRID' (ตาราง), 'LANGUAGE' (ภาษา), 'MULTILINE' (ข้อความหลายบรรทัด), และ 'STRING' (ข้อความบรรทัดเดียว) \n\nสำหรับแต่ละช่องข้อมูลกำหนดเอง คุณจะต้องระบุแท็กแต่ละช่องให้แตกต่างกัน แท็กนี้สามารถเป็นคำอะไรก็ได้ยกเว้นที่ระบบใช้แล้ว (เช่น 'author', 'summary', 'location', 'title' หรืออื่นๆ) และไม่สามารถมีช่องว่างหรืออักขระพิเศษได้ ตัวอย่างที่สามารใช้ได้เช่น 'custom1', 'custom2', อื่นๆ หรือแท็กที่อธิบายความหมายเช่น 'VictimsName' (ผู้รับเคราะห์) \nจากนั้นคุณต้องการป้ายชื่อซึ่งจะแสดงถัดจากช่องข้อมูลกำหนดเองของคุณ ตัวอย่างเช่น 'ชื่อของพยานปากที่หนึ่ง' \n\n อธิบายเพิ่มเติม\n1. ใน XML ตัวพิมพ์เล็ก และ ตัวพิมพ์ใหญ่มีความแตกต่างกัน\n2. เครื่องหมายคำพูดที่คร่อมชื่อสามารถเป็นได้ทั้ง เขาเดียว หรือ สองเขา(แต่ทั้งสองอันต้องเหมือนกัน)\n3. ช่องข้อมูลที่เป็น BOOLEAN (ใช่/ไม่ใช่) จะแสดงเป็น ช่องทำเครื่องหมายถูก เมื่อแก้ไข และแสดงเป็น ใช่/ไม่ใช่ เมื่อพิมพ์\n\nดูตัวอย่างด้านล่าง:\n\n>
+#__________________________________=For custom (non-standard) fields, you first select the type of field you want.  The possible choices are 'BOOLEAN', 'DATE', 'DATERANGE', 'DROPDOWN', 'GRID', 'LANGUAGE', 'MESSAGE', 'MULTILINE', and 'STRING'. \n\nFor each custom field you will need a unique identification tag.  This tag can be any word except those already used by the system (eg. 'author', 'summary', 'location', 'title' etc.), and cannot contain spaces or special characters.  Examples of choices are 'custom1', 'custom2', etc, or tags that are more descriptive like 'VictimsName'.\n\nThen you need a label which is displayed next to your custom field.  An example might be 'Name of 1st Witness'.\n\nAdditional Comments\n1. XML is case-sensitive ('Witness' is not the same as 'witness') \n2. Quotes around type name can be single or double as long as they match (e.g. 'STRING" is not valid. It must be 'STRING' or "STRING")\n3. A Boolean field will be displayed as a checkbox when editing and Yes/No when previewed or printed.\n4.  Use "MESSAGE" fields to give guidance on how to enter data, and to create comments/notes that will be displayed in every bulletin.\n\nSee examples below:\n\n
+-da0a-field:CreateCustomFieldsHelp2=สำหรับช่องข้อมูลกำหนดเอง (ไม่ใช่ช่องข้อมูลมาตรฐาน) คุณต้องเลือกชนิดของช่องข้อมูลที่คุณต้องการก่อน ทางเลือกที่เป็นไปได้มีดังนี้ 'BOOLEAN' (ใช่/ไม่ใช่), 'DATE' (วันที่), 'DATERANGE' (ช่วงวันที่), 'DROPDOWN'(กรอปตัวเลือก),'GRID' (ตาราง), 'LANGUAGE' (ภาษา),'MESSAGE' (ข้อความ), 'MULTILINE' (ข้อความหลายบรรทัด), และ 'STRING' (ข้อความบรรทัดเดียว) \n\nสำหรับแต่ละช่องข้อมูลกำหนดเอง คุณจะต้องระบุแท็กแต่ละช่องให้แตกต่างกัน แท็กนี้สามารถเป็นคำอะไรก็ได้ยกเว้นที่ระบบใช้แล้ว (เช่น 'author' (ผู้รายงาน), 'summary'(สรุป), 'location'(สถานที่), 'title' (ชื่อเรื่อง) หรืออื่นๆ) และไม่สามารถมีช่องว่างหรืออักขระพิเศษได้ ตัวอย่างที่สามารใช้ได้เช่น 'กำหนด1', 'กำหนด2', อื่นๆ หรือแท็กที่อธิบายความหมายเช่น 'ผู้เสียหาย' \nจากนั้นคุณต้องการป้ายชื่อซึ่งจะแสดงถัดจากช่องข้อมูลกำหนดเองของคุณ ตัวอย่างเช่น 'ชื่อของพยานปากที่หนึ่ง' \n\n อธิบายเพิ่มเติม\n1. ใน XML ตัวพิมพ์เล็ก และ ตัวพิมพ์ใหญ่มีความแตกต่างกัน('Witness' แตกต่างกับ 'witness')\n2. เครื่องหมายคำพูดที่คร่อมชื่อสามารถเป็นได้ทั้ง เขาเดียว หรือ สองเขา('STRING” ใช้ไม่ได้ ต้องเป็น 'STRING' หรือ “STRING”)\n3. ช่องข้อมูลที่เป็น BOOLEAN (ใช่/ไม่ใช่) จะแสดงเป็น ช่องทำเครื่องหมายถูก เมื่อแก้ไข และแสดงเป็น ใช่/ไม่ใช่ เมื่อพิมพ์\n4. ใช้ MESSAGE (ข้อความ) สำหรับแนะนำการใส่ข้อมูลและสร้างบันทึกย่อที่จะแสดงในทุกรายงาน\n\nดูตัวอย่างด้านล่าง:\n\n
 
-#__________________________________=<Field type='STRING'>\n<Tag>custom1</Tag>\n<Label>Witness Name</Label>\n</Field>\n\n<Field type='LANGUAGE'>\n<Tag>new2</Tag>\n<Label>Witness Speaks</Label>\n</Field>\n\n<Field type='BOOLEAN'>\n<Tag>new3</Tag>\n<Label>Were guns used?</Label>\n</Field>\n\n<Field type='GRID'>\n<Tag>customgrid</Tag>\n<Label>Victim Information</Label>\n<GridSpecDetails>\n<Column><Label>Name of Victim</Label></Column>\n<Column><Label>Victim Age</Label></Column>\n<Column><Label>Victim Gender</Label></Column>\n<Column><Label>Victim Ethnicity</Label></Column>\n</GridSpecDetails>\n</Field>\n
--c0a8-field:CreateCustomFieldsHelp3=<Field type='STRING'>\n<Tag>custom1</Tag>\n<Label>ชื่อพยาน</Label>\n</Field>\n\n<Field type='LANGUAGE'>\n<Tag>new2</Tag>\n<Label>คำให้การของพยาน</Label>\n</Field>\n\n<Field type='BOOLEAN'>\n<Tag>new3</Tag>\n<Label>มีการใช้อาวุธหรือไม่</Label>\n</Field>\n\n<Field type='GRID'>\n<Tag>customgrid</Tag>\n<Label>ข้อมูลเกี่ยวกับผู้เสียหาย</Label>\n<GridSpecDetails>\n<Column><Label>ชื่อผู้เสียหาย</Label></Column>\n<Column><Label>อายุ</Label></Column>\n<Column><Label>เพศ</Label></Column>\n<Column><Label>เชื้อชาติ</Label></Column>\n</GridSpecDetails>\n</Field>\n
+#__________________________________=<Field type='STRING'>\n<Tag>custom1</Tag>\n<Label>Witness Name</Label>\n</Field>\n\n<Field type='LANGUAGE'>\n<Tag>new2</Tag>\n<Label>Witness Speaks</Label>\n</Field>\n\n<Field type='BOOLEAN'>\n<Tag>new3</Tag>\n<Label>Were guns used?</Label>\n</Field>\n\n<Field type='MESSAGE'>\n<Tag>customMessage</Tag>\n<Label>Guidance for Perpetrator Eye Color entry:</Label>\n<Message>If you are unsure of the perpetrator's eye color, please leave this field blank.</Message>\n</Field>\n\n<Field type='DROPDOWN'>\n<Tag>customDropDown</Tag>\n<Label>Perpetrator Eye Color</Label>\n<Choices>\n<Choice>Brown</Choice>\n<Choice>Blue</Choice>\n<Choice>Green</Choice>\n<Choice>Other</Choice>\n</Choices>\n</Field>\n\n<Field type='GRID'>\n<Tag>customgrid</Tag>\n<Label>Victim Information</Label>\n<GridSpecDetails>\n<Column><Label>Name of Victim</Label></Column>\n<Column><Label>Victim Age</Label></Column>\n<Column><Label>Victim Gender</Label></Column>\n<Column><Label>Victim Ethnicity</Label></Column>\n</GridSpecDetails>\n</Field>\n
+-491b-field:CreateCustomFieldsHelp3=<Field type='STRING'>\n<Tag>ข้อมูลกำหนดเอง1</Tag>\n<Label>ชื่อพยาน</Label>\n</Field>\n\n<Field type='LANGUAGE'>\n<Tag>ใหม่2</Tag>\n<Label>คำให้การของพยาน</Label>\n</Field>\n\n<Field type='BOOLEAN'>\n<Tag>ใหม่3</Tag>\n<Label>มีการใช้อาวุธหรือไม่</Label>\n</Field>\n\n<Field type='MESSAGE'>\n<Tag>กำหนดข้อความ</Tag>\n<Label>คำแนะนำในการใส่ข้อมูลผู้ต้องหา:</Label>\n<Message>ถ้าคุณไม่แน่ใจสีดวงตาข้อผู้ต้องหากรุณาปล่อยว่างไว้</Message>\n</Field>\n\n<Field type='DROPDOWN'>\n<Tag>กำหนดดรอปดาวน์</Tag>\n<Label>สีดวงตาผู้ต้องหา</Label>\n<Choices>\n<Choice>น้ำตาล</Choice>\n<Choice>ฟ้า</Choice>\n<Choice>เขียว</Choice>\n<Choice>อื่นๆ</Choice>\n</Choices>\n</Field>\n\n<Field type='GRID'>\n<Tag>กำหนดตาราง</Tag>\n<Label>ข้อมูลเกี่ยวกับผู้เสียหาย</Label>\n<GridSpecDetails>\n<Column><Label>ชื่อผู้เสียหาย</Label></Column>\n<Column><Label>อายุ</Label></Column>\n<Column><Label>เพศ</Label></Column>\n<Column><Label>เชื้อชาติ</Label></Column>\n</GridSpecDetails>\n</Field>\n
 
 #____________________________________=Please enter your new username and password.
 -aec2-field:CreateNewUserNamePassword=โปรดใส่ชื่อผู้ใช้ และรหัสผ่าน
+
+#_______________________________________=MartusCustomization
+-f3b2-field:CustomizationFileDefaultName=การตั้งค่าโปรแกรม Martus
+
+#_____________________________________=Customization Template Files
+-9210-field:CustomizationTemplateFiles=การกำหนดไฟล์แม่แบบ
 
 #____________________=Exact Date
 -8a81-field:DateExact=วันที่แน่นอน
@@ -458,8 +472,8 @@
 #__________________________________=LABEL
 -64b8-field:ErrorCustomFieldHeader4=ป้ายชื่อ
 
-#____________________________=There is an error in the custom field definitions. Each problem is identified with the following codes:\n   100 - Required standard field is missing\n   101 - Custom field does not have a correct tag.\n   102 - A previous Tag already exists with this name.\n   103 - Custom field does not have a label.\n   104 - Unrecognized Field Type.\n   105 - A label was found in a standard field.\n   106 - XML Parse Error.\n   107 - Tag contains illegal characters
--943a-field:ErrorCustomFields=เกิดข้อผิดพลาดในการกำหนดช่องข้อมูลกำหนดเอง แต่ละปัญหาจะถูกระบุด้วยรหัสดังนี้:\n   100 - ช่องข้อมูลมาตรฐานที่จำเป็นต้องมี ได้หายไป\n   101 - ช่องข้อมูลกำหนดเองไม่มีแท็กที่ถูกต้อง\n   102 - แท็กก่อนหน้ามีชื่อนี้อยู่แล้ว\n   103 - ช่องข้อมูลกำหนดเองไม่มีป้ายชื่อ\n   104 - ประเภทของช่องข้อมูลไม่ถูกต้อง\n   105 - ไม่พบป้ายชื่อในช่องข้อมูลมาตรฐาน\n   106 - รูปแบบโครงสร้างของ XML ไม่ถูกต้อง\n   107 - ในแท็กมีอักขระที่ไม่อนุญาตให้ใช้
+#____________________________=There is an error in the custom field definitions. Each problem is identified with the following codes:\n   100 - Required standard field is missing\n   101 - Custom field does not have a correct tag.\n   102 - A previous Tag already exists with this name.\n   103 - Custom field does not have a label.\n   104 - Unrecognized Field Type.\n   105 - A label was found in a standard field.\n   106 - XML Parse Error.\n   107 - Tag contains illegal characters.\n   200 - All fields empty.\n   201 - Unrecognized headquarters created this template.\n   202 - Security validation error.\n   203 - File Error.
+-f2cf-field:ErrorCustomFields=เกิดข้อผิดพลาดในการกำหนดช่องข้อมูลกำหนดเอง แต่ละปัญหาจะถูกระบุด้วยรหัสดังนี้:\n   100 - ช่องข้อมูลมาตรฐานที่จำเป็นต้องมี ได้หายไป\n   101 - ช่องข้อมูลกำหนดเองไม่มีแท็กที่ถูกต้อง\n   102 - แท็กก่อนหน้ามีชื่อนี้อยู่แล้ว\n   103 - ช่องข้อมูลกำหนดเองไม่มีป้ายชื่อ\n   104 - ประเภทของช่องข้อมูลไม่ถูกต้อง\n   105 - พบป้ายชื่อในช่องข้อมูลมาตรฐาน\n   106 - รูปแบบโครงสร้างของ XML ไม่ถูกต้อง\n   107 - ในแท็กมีอักขระที่ไม่อนุญาตให้ใช้\n   200 - ไม่พบข้อมูลในช่องข้อมูล\n   201 - บัญชีสำนักงานใหญ่ไม่ถูกต้องในแม่แบบนี้\n   202 - ระบบรักษาความปลอดภัยผิดพลาด\n   203 - ไฟล์ผิดพลาด
 
 #_________________________________________=A previous backup file exists.  You must save each file on its own removable media disk.
 -db93-field:ErrorPreviousBackupShareExists=แฟ้มข้อมูลก่อนหน้ายังมีอยู่ คุณต้องบันทึกแต่ละไฟล์บนแผ่นฟลอปปี้ดิสก์ทีละแผ่น
@@ -488,11 +502,20 @@
 #______________________________________=This file name should be unique and identifiable to you but we recommend not using your user name.  Each file will be generated with this name and its number sequence.
 -02b6-field:GetShareFileNameDescription=ชื่อแฟ้มข้อมูลจะต้องแตกต่างจากผู้อื่น และบ่งบอกถึงตัวคุณ แต่เราแนะนำว่าไม่ควรใช้เฉพาะชื่อผู้ใช้ของคุณ แต่ละแฟ้มจะสร้างด้วยชื่อนี้ และตัวเลขลำดับของแฟ้ม
 
+#__________________________=(not currently configured)
+-462b-field:HQNotConfigured=(ไม่ใช้การตั้งค่าปัจจุบัน)
+
 #_________________________=Headquarters
 -6222-field:HQSummaryLabel=สำนักงานใหญ่
 
+#__________________________=Default Headquarters accounts will be selected for each new bulletin or version.
+-ea13-field:HQsSetAsDefault=ค่าเริ่มต้นชื่อบัญชีสำนักงานใหญ่จะถูกเลือกไว้ในรายงานที่สร้างใหม่ทุกฉบับหรือทุกรุ่น
+
 #________________________________=These Headquarters accounts are allowed to view the private information in this bulletin, and to send this bulletin to a server on your behalf.
 -2274-field:HQsSetAsProxyUploader=ชื่อบัญชีของสำนักงานใหญ่เหล่านี้ได้รับอนุญาตให้ดูข้อมูลส่วนตัวในรายงานนี้ได้ และสามารถส่งรายงานนี้ไปยังเซิร์ฟเวอร์ภายใต้ชื่อของคุณได้
+
+#_______________________________=Selected?
+-9c09-field:HeadQuartersSelected=เลือกหรือไม่
 
 #_____________________________=Enter questions, details, or other information your organization wants to have answered in future bulletins created.
 -704c-field:HelpDefaultDetails=ป้อนคำถาม รายละเอียด หรือข้อมูลอื่นๆ ที่องค์กรของคุณต้องการจะตอบคำถาม ในรายงานที่สร้างขึ้นมาในอนาคต
@@ -526,6 +549,9 @@
 
 #_____________________________=Please enter a name for the file you wish to export.
 -95ed-field:NameOfExportedFile=โปรดป้อนชื่อของแฟ้มที่คุณต้องการส่งออก
+
+#__________________________=No Headquarters accounts selected for this bulletin.
+-2b9f-field:NoHQsConfigured=ไม่เลือกชื่อบัญชีสำนักงานใหญ่สำหรับรายงานนี้
 
 #___________________________________________=Server Not Available
 -c79c-field:NoServerAvailableProgressMessage=ไม่พบเซิร์ฟเวอร์
@@ -806,8 +832,8 @@
 #_________________________________________=By choosing Yes, you will exit this verification step.
 -5b61-field:confirmCancelShareVerifyeffect=ถ้าคุณเลือก "ใช่" จะเป็นการออกจากขั้นตอนการตรวจสอบ
 
-#_________________________________________=You have chosen to remove your Headquarters account.  Any existing saved bulletins will still be visible by the old Headquarters.  If you want to disallow Headquarters viewing access to previously created Draft bulletins they must be re-saved after revoking the Headquarters.  Any sealed bulletins CANNOT be reset to be non-viewable by the Headquarters.
--6076-field:confirmClearHQInformationcause=คุณได้เลือกที่จะลบชื่อบัญชีของสำนักงานใหญ่ออก ชื่อสำนักงานใหญ่ชื่อเก่าจะสามารถอ่านรายงานใดๆ ที่ได้เคยบันทึกไว้ ถ้าคุณไม่ต้องการให้สำนักงานใหญ่เข้าดูข้อมูลเหล่านั้น ข้อมูลเหล่านั้นจะต้องถูกบันทึกใหม่อีกครั้งหลังจากที่เอาชื่อสำนักงานใหญ่นั้นออก รายงานปิดผนึกไม่สามารถบันทึกใหม่อีกครั้งเพื่อป้องกันไม่ให้สำนักใหญ่เก่าดูได้
+#_________________________________________=You have chosen to remove all selected Headquarters accounts.  Any existing saved bulletins will still be visible by the old Headquarters.  If you want to disallow Headquarters viewing access to previously created Draft bulletins they must be re-saved after revoking the Headquarters.  Any sealed bulletins CANNOT be reset to be non-viewable by the Headquarters, except by creating a new version of the bulletin.
+-d335-field:confirmClearHQInformationcause=คุณได้เลือกที่จะลบชื่อบัญชีของสำนักงานใหญ่ออก ชื่อสำนักงานใหญ่ชื่อเก่าจะสามารถอ่านรายงานใดๆ ที่ได้เคยบันทึกไว้ ถ้าคุณไม่ต้องการให้สำนักงานใหญ่เข้าดูข้อมูลเหล่านั้น ข้อมูลเหล่านั้นจะต้องถูกบันทึกใหม่อีกครั้งหลังจากที่เอาชื่อสำนักงานใหญ่นั้นออก รายงานปิดผนึกไม่สามารถบันทึกใหม่อีกครั้งเพื่อป้องกันไม่ให้สำนักใหญ่เก่าดูได้
 
 #__________________________________________=By clicking on Yes, any draft or sealed bulletins saved in the future will no longer be accessible by your Headquarters.
 -4a87-field:confirmClearHQInformationeffect=ถ้าตอบ ใช่ ร่างรายงานหรือรายงานปิดผนึกจะถูกบันทึกโดยจากสำนักงานใหญ่ของคุณไม่สามารถดูได้
@@ -821,8 +847,9 @@
 #___________________________________________=You have chosen to modify one of your sealed bulletins, thus creating a new version of that bulletin.
 -fcb6-field:confirmCloneMySealedAsDraftcause=คุณได้เลือกที่จะแก้ไขรายงานฉบับหนึ่งที่ถูกปิดผนึกแล้ว จึงสร้างรายงานรุ่นใหม่นั้นขึ้นมา
 
+
 #____________________________________________=Clicking on Yes will create a new version of this bulletin that initially contains all the same information.
--198c-field:confirmCloneMySealedAsDrafteffect=<คลิก ใช่ จะสร้างรายงานรุ่นใหม่ที่มีข้อมูลเหมือนกัน ใน Martus รุ่นนี้คุณจะสามารถดูได้เฉพาะรุ่นปัจจุบันเท่านั้น>
+-198c-field:confirmCloneMySealedAsDrafteffect=คลิก ใช่ จะสร้างรายงานรุ่นใหม่ที่มีข้อมูลเหมือนกัน
 
 #___________________________________=You are about to delete your Martus data from this computer.
 -ee9a-field:confirmDeleteMyDatacause=คุณกำลังจะลบข้อมูล Martus ออกจากคอมพิวเตอร์เครื่องนี้
@@ -845,8 +872,8 @@
 #________________________________________=You have chosen to customize the fields that will be used in any new bulletins created by this account.
 -2f98-field:confirmEnterCustomFieldscause=คุณได้แก้ไขช่องข้อมูลกำหนดเอง ซึ่งจะถูกใช้หรือมีผลในรายงานใหม่ที่ถูกสร้างขึ้นโดยชื่อบัญชีนี้
 
-#_________________________________________=Customizing fields is an advanced operation, and can be dangerous. You should only proceed if you are certain that you understand the feature.
--1483-field:confirmEnterCustomFieldseffect=ช่องข้อมูลกำหนดเอง เป็นการกระทำขั้นสูง ซึ่งอาจเป็นอันตรายได้ คุณควรใช้ก็ต่อเมื่อคุณเข้าใจถึงลักษณะพิเศษนี้อย่างแท้จริง
+#_________________________________________=Customizing fields is an advanced operation. You should only proceed if you are certain that you understand the feature.
+-518e-field:confirmEnterCustomFieldseffect=ช่องข้อมูลกำหนดเอง เป็นการใช้งานขั้นสูง คุณควรใช้ก็ต่อเมื่อคุณเข้าใจถึงลักษณะพิเศษนี้อย่างแท้จริง
 
 #_________________________________________________=The file you chose is not part of a key backup set.  These files are named '<name you picked>-#.dat' where # is the sequence number in the disk set previously created.
 -2e41-field:confirmErrorRecoverIvalidFileNamecause=แฟ้มข้อมูลที่คุณเลือก ไม่ใช่ส่วนหนึ่งของกุญแจสำรอง แฟ้มข้อมูลต้องอยู่ในลักษณะ <ชื่อไฟล์ที่ได้เลือก>-#.dat เมื่อ # คือลำดับเลขในชุดแผ่นฟลอปปี้ดิสก์ที่สร้างขึ้นมาก่อนหน้านี้
@@ -873,7 +900,7 @@
 -167f-field:confirmKeyPairFileExistsOverWriteeffect=ถ้าตอบใช่ จะลบแฟ้มกุญแจเก่าและแทนที่ด้วยกุญแจที่กู้คืนมา
 
 #_______________________________________________________=This account was created with an older release of Martus, which was unaware of multiple sealed bulletin versions. We need to update your system to recognize bulletins with versions.  The migration is automatic, fast, and safe. You cannot run this release of Martus unless you allow this migration.
--d89c-field:confirmNeedsBulletinVersioningMigrationcause=<ชื่อบัญชีนี้ถูกสร้างด้วย Martus รุ่นเก่ากว่า ซึ่งไม่ได้คาดไว้ในเรื่องรุ่นรายงานปิดผนึกจำนวนมาก เราต้องการปรับปรุงระบบของคุณเพื่อที่รู้จักรายงานรุ่นนี้ การปรับปรุงเป็นไปโดยอัตโนมัติ เร็ว และปลอดภัย คุณไม่สามารถใช้ Martus รุ่นนี้ได้ ถ้าคุณไม่ดำเนินการปรับปรุงนี้>
+-d89c-field:confirmNeedsBulletinVersioningMigrationcause=ชื่อบัญชีนี้ถูกสร้างด้วย Martus รุ่นเก่ากว่า ซึ่งไม่ได้คาดไว้ในเรื่องรุ่นรายงานปิดผนึกจำนวนมาก เราต้องการปรับปรุงระบบของคุณเพื่อที่รู้จักรายงานรุ่นนี้ การปรับปรุงเป็นไปโดยอัตโนมัติ เร็ว และปลอดภัย คุณไม่สามารถใช้ Martus รุ่นนี้ได้ ถ้าคุณไม่ดำเนินการปรับปรุงนี้
 
 #________________________________________________________=Answering Yes will allow the migration to proceed, answering No will exit Martus.
 -2a34-field:confirmNeedsBulletinVersioningMigrationeffect=ถ้าตอบ ใช่ จะดำเนินการเปลี่ยน ถ้าตอบ ไม่ใช่ จะออกจาก Martus
@@ -957,7 +984,7 @@
 -bbcf-field:confirmResetDefaultDetailseffect=หลังจากตรวจดูแล้ว คุณสามารถยอมรับ แก้ไข หรือยกเลิกเพื่อเก็บข้อมูลเดิมที่มีอยู่ได้
 
 #____________________________________________=The following bulletin(s) selected for retrieval are newer versions of bulletins already on this computer:\n\n#TITLES#
--c5e3-field:confirmRetrieveNewerVersionscause=<รายงานต่อไปนี้ได้ถูกเลือกสำหรับการดึงเป็นรายงานรุ่นใหม่เรียบร้อยแล้วบนระบบนี้ :\n\n#TITLES#>
+-c5e3-field:confirmRetrieveNewerVersionscause=รายงานต่อไปนี้ได้ถูกเลือกสำหรับการดึงเป็นรายงานรุ่นใหม่เรียบร้อยแล้วบนคอมพิวเตอร์นี้ :\n\n#TITLES#
 
 #_____________________________________________=Each older version will be replaced by the newer version from the server.
 -1d86-field:confirmRetrieveNewerVersionseffect=รุ่นเก่าทั้งหมดจะถูกแทนด้วนรุ่นใหม่กว่าจากเซิร์ฟเวอร์
@@ -992,8 +1019,8 @@
 #_____________________________________________________=Choose Yes to begin the restore process again, No to exit Martus.
 -0e22-field:confirmUnableToRecoverFromBackupFileeffect=เลือก ใช่ จะเริ่มกระบวนการกู้คืนอีกครั้ง เลือก ไม่ใช่ จะออกจาก Martus
 
-#_______________________________________=You have chosen to revert to the standard set of Martus fields.
--61a6-field:confirmUndoCustomFieldscause=คุณเลือกที่จะกลับไปใช้ช่องข้อมูลมาตรฐานของ Martus
+#_______________________________________=You have chosen to restore the standard set of Martus fields.
+-b1b6-field:confirmUndoCustomFieldscause=คุณเลือกที่จะกลับไปใช้ช่องข้อมูลมาตรฐานของ Martus
 
 #________________________________________=New bulletins created with this account will not have any custom fields.
 -bf33-field:confirmUndoCustomFieldseffect=รายงานที่ถูกสร้างขึ้นใหม่ด้วยชื่อบัญชีนี้ จะไม่มีช่องข้อมูลกำหนดเองอีกต่อไป
@@ -1005,10 +1032,10 @@
 -7c7f-field:confirmUploadRemindereffect=ถ้าตอบ ใช่ จะออกจาก Martus รายงานที่ยังไม่ได้ส่งจะถูกส่งในครั้งต่อไปเมื่อคุณใช้งาน Martus และติดต่อไปยังเซิร์ฟเวอร์
 
 #_______________________________________________=The bulletin you are about to create is based on a previous bulletin whose custom fields are different from your current custom fields.  Do you wish to use the original bulletin's custom fields?
--a6ca-field:confirmUseBulletinsCustomFieldscause=<รายงานที่คุณกำลังสร้างอยู่บนพื้นฐานของรายงานก่อนหน้านี้ ซึ่งมีช่องข้อมูลกำหนดเองที่แตกต่างจากช่องข้อมูลกำหนดเองของคุณในตอนนี้ คุณต้องการใช้ช่องข้อมูลกำหนดเองของรายงานต้นฉบับหรือไม่>
+-a6ca-field:confirmUseBulletinsCustomFieldscause=รายงานที่คุณกำลังสร้างอยู่บนพื้นฐานของรายงานก่อนหน้านี้ ซึ่งมีช่องข้อมูลกำหนดเองที่แตกต่างจากช่องข้อมูลกำหนดเองของคุณในตอนนี้ คุณต้องการใช้ช่องข้อมูลกำหนดเองของรายงานต้นฉบับหรือไม่
 
-#________________________________________________=Answering Yes will use the old custom fields and all bulletin data.  Answering No will use your current custom fields and copy all similar fields to the new bulletin but you will lose some of the original bulletin's data.
--afbe-field:confirmUseBulletinsCustomFieldseffect=<ถ้าตอบ ใช่ จะใช้ช่องข้อมูลกำหนดเองอันเก่าและข้อมูลรายงานอันเก่าทั้งหมด ถ้าตอบ ไม่ใช่ จะใช้ช่องข้อมูลกำหนดเองของชุดปัจจุบันและทำสำเนาช่องข้อมูลที่เหมือนกันทั้งหมดใส่ในรายงานใหม่ แต่คุณจะเสียข้อมูลรายงานต้นฉบับบางส่วน>
+#________________________________________________=Answering Yes will use the old custom fields and all bulletin data.  Answering No will use your current custom fields and copy all similar fields to the new bulletin but you may lose some of the original bulletin's data.
+-0ed4-field:confirmUseBulletinsCustomFieldseffect=ถ้าตอบ ใช่ จะใช้ช่องข้อมูลกำหนดเองอันเก่าและข้อมูลรายงานอันเก่าทั้งหมด ถ้าตอบ ไม่ใช่ จะใช้ช่องข้อมูลกำหนดเองของชุดปัจจุบันและทำสำเนาช่องข้อมูลที่เหมือนกันทั้งหมดใส่ในรายงานใหม่ แต่คุณอาจเสียข้อมูลรายงานต้นฉบับบางส่วน
 
 #________________________________________________=Warning: acctmap.txt file in your account's packets directory is missing or is corrupt.  This may indicate someone has tried to tamper with your data or could be caused by a hardware error.
 -61cb-field:confirmWarnMissingAccountMapFilecause=คำเตือน: แฟ้ม acctmap.txt ในโฟลเดอร์ packets ได้หายไปหรือได้รับความเสียหาย นี่อาจแสดงได้ว่า มีใครบางคนกำลังพยายามเข้าไปยุ่งกับข้อมูลของคุณ หรืออาจเกิดจากความผิดพลาดเนื่องจากฮาร์ดแวร์
@@ -1146,7 +1173,7 @@
 -614e-field:notifyAlreadyRunningcause=โปรแกรม Martus ตัวอื่นกำลังทำงานอยู่บนคอมพิวเตอร์เครื่องนี้ คุณต้องปิด Martus ตัวนั้นก่อน ถึงจะเปิดตัวใหม่นี้ได้
 
 #_______________________________________________=You currently are viewing this version of the bulletin.
--8a02-field:notifyAlreadyViewingThisVersioncause=<You currently are viewing this version of the bulletin.>
+-8a02-field:notifyAlreadyViewingThisVersioncause=ขณะนี้คุณกำลังดูรายงานรุ่นนี้อยู่
 
 #________________________________________=The item you chose was not a file, please choose a file to add as an attachment to this bulletin.
 -0de2-field:notifyAttachmentNotAFilecause=สิ่งที่คุณเลือกไม่ใช่แฟ้มข้อมูล กรุณาเลือกแฟ้มข้อมูลเพื่อเป็นเอกสารแนบในรายงานนี้
@@ -1155,7 +1182,7 @@
 -f27c-field:notifyAuthenticateServerFailedcause=Martus ไม่สามารถยืนยันเซิร์ฟเวอร์ได้ กรุณาตรวจสอบการตั้งค่าเซิร์ฟเวอร์ และติดต่อผู้ดูแลเซิร์ฟเวอร์
 
 #________________________________________________=The bulletin version you are trying to view is currently not on your system.
--8579-field:notifyBulletinVersionNotInSystemcause=<The bulletin version you are trying to view is currently not on your system.>
+-8579-field:notifyBulletinVersionNotInSystemcause=รายงานรุ่นที่คุณกำลังพยายามดูในขณะนี้ไม่ได้อยู่บนระบบของคุณ
 
 #____________________________________=The selected server is not responding. Before you choose a server, you must be connected to the internet, and that server must be available.
 -38fd-field:notifyConfigNoServercause=เซิร์ฟเวอร์ที่คุณเลือกไม่มีการตอบสนองใดๆ ก่อนที่คุณจะเลือกเซิร์ฟเวอร์ คุณต้องมีการเชื่อมต่ออินเตอร์เน็ตไว้แล้ว และเซิร์ฟเวอร์ต้องให้บริการได้
@@ -1189,6 +1216,12 @@
 
 #____________________________________________=An unexpected error occurred in generating the key backup files.
 -d237-field:notifyErrorBackingUpKeySharecause=มีข้อผิดพลาดที่คาดคิดเกิดขึ้นขณะสร้างแฟ้มกุญแจ
+
+#_________________________________________________________=There was an error saving your template.
+-88ed-field:notifyErrorExportingCustomizationTemplatecause=มีข้อผิดพลาดในการบันทึกแม่แบบของคุณ
+
+#_________________________________________________________=There was an error importing this template.
+-4a9a-field:notifyErrorImportingCustomizationTemplatecause=มีข้อผิดพลาดในการนำเข้าแม่แบบ
 
 #______________________________________=An error prevented the file from being read.
 -1ad3-field:notifyErrorReadingFilecause=มีข้อผิดพลาดที่ป้องกันการอ่านแฟ้มข้อมูล
@@ -1229,6 +1262,9 @@
 #_________________________________________=To export bulletins, select them first, and then perform the export operation.
 -944e-field:notifyExportZeroBulletinscause=การส่งออกรายงาน ทำได้โดยเลือกรายงานที่ต้องการก่อน แล้วทำตามขั้นตอนการส่งออก
 
+#___________________________________________________________=Successfully exported customization template.
+-aed9-field:notifyExportingCustomizationTemplateSuccesscause=การส่งออกแม่แบบกำหนดเองสำเร็จแล้ว
+
 #___________________________________________=The original files have not been deleted from your computer, you must delete them manually if you wish.
 -8965-field:notifyFilesWillNotBeDeletedcause=แฟ้มข้อมูลต้นฉบับไม่ได้ถูกลบออกไปจากเครื่องคอมพิวเตอร์นี้ คุณต้องลบไฟล์เหล่านี้เองถ้าคุณต้องการ
 
@@ -1244,11 +1280,20 @@
 #_______________________________________=You have already added this account to your Headquarters list.
 -0785-field:notifyHQKeyAlradyExistscause=คุณได้ทำการเพิ่มชื่อบัญชีนี้ในรายการสำนักงานใหญ่ของคุณอยู่แล้ว
 
+#_______________________________________________=The Headquarters label you entered is already assigned to another Headquarters account.  Please use a different label.
+-91ca-field:notifyHeadquarterLabelDuplicatecause=ป้ายชื่อสำนักงานใหญ่ที่คุณใส่นั้น ได้ถูกกำหนดให้ชื่อบัญชีสำนักงานใหญ่อื่นแล้ว กรุณาใช้ป้ายชื่ออื่น
+
+#___________________________________________________________=Successfully imported customization template.
+-c78c-field:notifyImportingCustomizationTemplateSuccesscause=การนำเข้าแม่แบบกำหนดเองสำเร็จแล้ว
+
 #_______________________________________=You must have a server public code.
 -2fde-field:notifyInvalidServerCodecause=คุณต้องมีรหัสสาธารณะของเซิร์ฟเวอร์
 
 #_______________________________________=You must have a server name or IP address.
 -984b-field:notifyInvalidServerNamecause=คุณต้องมีชื่อเซิร์ฟเวอร์ หรือไอพีของเซิร์ฟเวอร์
+
+#___________________________________=Please select a Headquarters first.
+-1d19-field:notifyNoHQsSelectedcause=กรุณาเลือกสำนักงานใหญ่ก่อน
 
 #________________________________________=Operation completed.
 -1a65-field:notifyOperationCompletedcause=ดำเนินการเรียบร้อยแล้ว
@@ -1319,8 +1364,8 @@
 #__________________________________=Sorry, no bulletins were found.
 -5bd8-field:notifySearchFailedcause=เสียใจด้วย ไม่พบรายงานใดๆ
 
-#_________________________________=Number of bulletins found = 
--f301-field:notifySearchFoundcause=จำนวนรายงานที่พบ = 
+#_________________________________=#N# bulletins matched the search, and have been added to the Search Results folder.\n Note that both current and earlier versions of each bulletin were searched.
+-6569-field:notifySearchFoundcause=#N#จำนวนรายงานที่พบ  และได้ถูกใส่ในโฟลเดอร์ผลการค้นหา.\n แสดงว่ารายงานทุกฉบับได้ถูกค้นหาทั้งในรุ่นปัจจุบันและก่อนหน้านี้
 
 #_____________________________________=The Server Public Code does not match the one you entered.
 -efe3-field:notifyServerCodeWrongcause=รหัสสาธารณะของเซิร์ฟเวอร์ ไม่ตรงกับรหัสที่คุณได้ป้อนไว้
@@ -1448,8 +1493,8 @@
 #________________=Title
 -768e-field:title=ชื่อเรื่อง
 
-#_____________________________=Thai 2.5 (only partial 2.6 update)
--26a2-field:translationVersion=ไทย 2.5
+#_____________________________=Thai 2.7
+-1d90-field:translationVersion=ไทย 2.7
 
 #___________________=Username
 -84c2-field:username=ชื่อผู้ใช้
@@ -1481,8 +1526,8 @@
 #____________________________________________=WARNING: This bulletin has not been sent to a server since it was last modified. Deleting it will prevent the latest changes from being backed up.
 -523e-field:warningDeleteSingleUnsentBulletin=คำเตือน: รายงานนี้ยังไม่ได้ถูกส่งไปที่เซิร์ตั้งแต่ได้เปลี่ยนแปลงครั้งล่าสุด การลบรายงานนี้จะป้องกันการเปลี่ยนครั้งล่าสุดจากการสำรองข้อมูล
 
-#_______________________________________=WARNING:  This translation was not created by the Martus team, and therefore may not be trustworthy.\nIf you only want to use official translations then exit Martus, remove the file #UseUnofficialTranslationFiles# from your Martus directory, and restart Martus.\n\n
--c48e-field:warningUnofficialTranslation=คำเตือน:  การแปลนี้ไม่ได้ถูกสร้างโดยคณะทำงานของ Martus ฉะนั้นอย่าได้เชื่อถือ\nถ้าคุณต้องการใช้การแปลอย่างเป็นทางการ กรุณาออกจาก Martus ลบแฟ้ม #UseUnofficialTranslationFiles# ออกจากโฟลเดอร์ของ Martus และเปิด Martus ใหม่\n\n
+#_______________________________________=WARNING:  This translation was not created by the Martus team, and therefore may not be trustworthy.  If you only want to use official translations then exit Martus, remove the file #UseUnofficialTranslationFiles# from your Martus directory, and restart Martus.
+-711f-field:warningUnofficialTranslation=คำเตือน:  การแปลนี้ไม่ได้ถูกสร้างโดยคณะทำงานของ Martus ฉะนั้นอย่าได้เชื่อถือ\nถ้าคุณต้องการใช้การแปลอย่างเป็นทางการ กรุณาออกจาก Martus ลบแฟ้ม #UseUnofficialTranslationFiles# ออกจากโฟลเดอร์ของ Martus และเปิด Martus ใหม่\n\n
 
 #__________________=Web Page
 -0163-field:webpage=หน้าเว็บ
@@ -1536,7 +1581,7 @@
 -6885-language:az=อาเซอร์ไบจัน
 
 #________________=Bulgarian
--cebe-language:bg=<Bulgarian>
+-cebe-language:bg=บังกลาเรีย
 
 #________________=Bengali, Bangla
 -4b7b-language:bn=บัลแกเรีย
@@ -1553,8 +1598,8 @@
 #________________=Spanish
 -8df7-language:es=สเปน
 
-#________________=Farsi, Dari
--e768-language:fa=ฟาร์ซี
+#________________=Persian (Farsi, Dari)
+-10c9-language:fa=เปอร์เซีย (ฟาร์ซี, ดารี)
 
 #________________=French
 -4438-language:fr=ผรั่งเศส
@@ -1940,11 +1985,17 @@
 #___________________________________=Export Bulletins
 -a86c-wintitle:ExportBulletinsSaveAs=ส่งออกรายงาน
 
+#_______________________________________________=Export Customization Template
+-5318-wintitle:ExportCustomizationTemplateSaveAs=ส่งออกแม่แบบกำหนดเอง
+
 #__________________=Help on Martus
 -b414-wintitle:Help=วิธีใช้งาน Martus
 
 #________________________________=Help on Bulletin Details Field Default Content
 -96cb-wintitle:HelpDefaultDetails=วิธีใช้งาน ค่าเริ่มต้นช่องข้อมูลรายละเอียด
+
+#_____________________________________________=Import Customization Template
+-0188-wintitle:ImportCustomizationTemplateOpen=นำเข้าแม่แบบกำหนดเอง
 
 #_______________________________=Import Headquarters Public Account Id File
 -9300-wintitle:ImportHQPublicKey=นำเข้าแฟ้มชื่อบัญชีสาธารณะของสำนักงานใหญ่
@@ -2027,8 +2078,8 @@
 #______________________________=Server Compliance Statement
 -20f8-wintitle:ServerCompliance=ถ้อยแถลงการยอมรับการใช้งานเซิร์ฟเวอร์
 
-#________________________=Server News
--d231-wintitle:ServerNews=ข่าวจากเซิร์ฟเวอร์
+#________________________=Server News: Message #CurrentNewsItem# of #MaxNewsItems#
+-7177-wintitle:ServerNews=ข่าวจากเซิร์ฟเวอร์: ข้อความ #CurrentNewsItem#  ของ #MaxNewsItems#
 
 #____________________________________=Server Configuration Results
 -788c-wintitle:ServerSelectionResults=ผลการปรับแต่งข้อมูลเซิร์ฟเวอร์
@@ -2232,7 +2283,7 @@
 -cfce-wintitle:notifyAlreadyRunning=Martus กำลังเปิดใช้งานอยู่
 
 #_____________________________________________=Bulletin Version Already Being Viewed
--c778-wintitle:notifyAlreadyViewingThisVersion=<Bulletin Version Already Being Viewed>
+-c778-wintitle:notifyAlreadyViewingThisVersion=รายงานรุ่นนี้กำลังถูกเปิดดูอยู่
 
 #______________________________________=Attachment Chosen Not a File
 -8023-wintitle:notifyAttachmentNotAFile=เอกสานแบบที่เลือกไว้ไม่ใช่แฟ้มข้อมูล
@@ -2241,7 +2292,7 @@
 -4938-wintitle:notifyAuthenticateServerFailed=แจ้งเตือนด้านความปลอดภัย!
 
 #______________________________________________=Bulletin Version Not Found
--a60d-wintitle:notifyBulletinVersionNotInSystem=<Bulletin Version Not Found>
+-a60d-wintitle:notifyBulletinVersionNotInSystem=ไม่พบรายงานรุ่นนี้
 
 #__________________________________=Unable to Connect to Server
 -1b07-wintitle:notifyConfigNoServer=ไม่สามารถติดต่อไปยังเซิร์ฟเวอร์ได้
@@ -2275,6 +2326,12 @@
 
 #__________________________________________=Error Backing Up Key
 -ee40-wintitle:notifyErrorBackingUpKeyShare=ข้อผิดพลาดในการสำรองกุญแจ
+
+#_______________________________________________________=Error Exporting Template
+-f4cc-wintitle:notifyErrorExportingCustomizationTemplate=ข้อผิดพลาดในการส่งออกแม่แบบ
+
+#_______________________________________________________=Error Importing Template
+-4f1a-wintitle:notifyErrorImportingCustomizationTemplate=ข้อผิดพลาดในการนำเข้าแม่แบบ
 
 #____________________________________=Error Reading File
 -73ad-wintitle:notifyErrorReadingFile=ข้อผิดพลาดในการอ่านแฟ้ม
@@ -2315,6 +2372,9 @@
 #_______________________________________=No Bulletins Selected
 -c1d6-wintitle:notifyExportZeroBulletins=ไม่มีรายงานใดถูกเลือก
 
+#_________________________________________________________=Exporting Template Succeeded
+-b648-wintitle:notifyExportingCustomizationTemplateSuccess=ส่งออกแม่แบบสำเร็จแล้ว
+
 #_________________________________________=Files Not Deleted
 -a001-wintitle:notifyFilesWillNotBeDeleted=แฟ้มไม่ได้ถูกลบ
 
@@ -2330,11 +2390,20 @@
 #_____________________________________=Headquarters Key Already Exists
 -03e9-wintitle:notifyHQKeyAlradyExists=กุญแจของสำนักงานใหญ่มีปรากฏอยู่แล้ว
 
+#_____________________________________________=Headquarter Label Invalid
+-106b-wintitle:notifyHeadquarterLabelDuplicate=ไม่พบป้ายชื่อสำนักงานใหญ่
+
+#_________________________________________________________=Importing Template Succeeded
+-ac8c-wintitle:notifyImportingCustomizationTemplateSuccess=นำเข้าแม่แบบสำเร็จแล้ว
+
 #_____________________________________=Invalid Server Public Code
 -08ad-wintitle:notifyInvalidServerCode=รหัสลับของเซิร์ฟเวอร์ไม่ถูกต้อง
 
 #_____________________________________=Invalid Server Name or IP Address
 -3376-wintitle:notifyInvalidServerName=ชื่อเซิร์ฟเวอร์หรือไอพีไม่ถูกต้อง
+
+#_________________________________=No HQ's Selected
+-0c30-wintitle:notifyNoHQsSelected=ไม่เลือกสนง.ใหญ่
 
 #______________________________________=Finished
 -355b-wintitle:notifyOperationCompleted=เสร็จแล้ว
