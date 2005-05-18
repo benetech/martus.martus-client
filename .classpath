@@ -8,5 +8,6 @@
 	<classpathentry kind="lib" path="/martus-thirdparty/common/XMLRPC/bin/xmlrpc-1.2-b1.jar"/>
 	<classpathentry kind="src" path="/martus-jar-verifier"/>
 	<classpathentry kind="var" path="JUNIT_HOME/junit.jar"/>
+	<classpathentry kind="lib" path="/martus-thirdparty/common/Velocity/bin/velocity-dep-1.4-rc1.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
