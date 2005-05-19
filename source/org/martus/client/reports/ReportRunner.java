@@ -26,11 +26,17 @@ Boston, MA 02111-1307, USA.
 
 package org.martus.client.reports;
 
-import java.io.StringReader;
-import java.io.StringWriter;
+import java.io.Writer;
+import java.util.Vector;
 
+import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.VelocityEngine;
 import org.apache.velocity.context.Context;
+import org.martus.common.BulletinStore;
+import org.martus.common.crypto.MartusCrypto;
+import org.martus.common.crypto.MartusSecurity;
+import org.martus.common.database.DatabaseKey;
+import org.martus.common.database.ReadableDatabase;
 
 
 public class ReportRunner
@@ -39,12 +45,28 @@ public class ReportRunner
 	{
 		engine = new VelocityEngine();
 		engine.init();
+		signatureVerifier = new MartusSecurity();
 	}
 	
-	public void report(StringReader template, StringWriter result, Context context) throws Exception
+	public void runReport(ReportFormat rf, ReadableDatabase db, Vector keysToInclude, Writer destination) throws Exception
+	{
+		Context context = new VelocityContext();
+		
+		for(int i=0; i < keysToInclude.size(); ++i)
+		{
+			DatabaseKey key = (DatabaseKey)keysToInclude.get(i);
+			context.put("bulletin", BulletinStore.loadBulletinHeaderPacket(db, key, signatureVerifier));
+			
+			context.put("i", new Integer(i+1));
+			performMerge(rf.getDetailSection(), destination, context);
+		}
+	}
+	
+	public void performMerge(String template, Writer result, Context context) throws Exception
 	{
 		engine.evaluate(context, result, "Martus", template);
 	}
 	
 	VelocityEngine engine;
+	MartusCrypto signatureVerifier;
 }

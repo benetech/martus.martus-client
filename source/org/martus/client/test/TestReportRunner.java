@@ -26,12 +26,18 @@ Boston, MA 02111-1307, USA.
 
 package org.martus.client.test;
 
-import java.io.StringReader;
 import java.io.StringWriter;
+import java.util.Vector;
 
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.context.Context;
+import org.martus.client.reports.ReportFormat;
 import org.martus.client.reports.ReportRunner;
+import org.martus.common.BulletinStore;
+import org.martus.common.LegacyCustomFields;
+import org.martus.common.bulletin.Bulletin;
+import org.martus.common.database.DatabaseKey;
+import org.martus.common.fieldspec.FieldSpec;
 import org.martus.util.TestCaseEnhanced;
 
 
@@ -51,7 +57,7 @@ public class TestReportRunner extends TestCaseEnhanced
 	public void testNoVariables() throws Exception
 	{
 		String templateWithoutVariables = "no variables";
-		assertEquals(templateWithoutVariables, runReport(templateWithoutVariables));
+		assertEquals(templateWithoutVariables, performMerge(templateWithoutVariables));
 	}
 	
 	public void testOneVariable() throws Exception
@@ -60,7 +66,7 @@ public class TestReportRunner extends TestCaseEnhanced
 		String value = "hello";
 		String templateWithVariable = "$" + name;
 		context.put(name, value);
-		assertEquals(value, runReport(templateWithVariable));
+		assertEquals(value, performMerge(templateWithVariable));
 	}
 	
 	public void testComplex() throws Exception
@@ -74,13 +80,62 @@ public class TestReportRunner extends TestCaseEnhanced
 			"  $x\n" +
 			"#end\n" +
 			"$nosuchvariable";
-		assertEquals("\n  dog\n  cat\n  monkey\n$nosuchvariable", runReport(template));
+		assertEquals("\n  dog\n  cat\n  monkey\n$nosuchvariable", performMerge(template));
 	}
 	
-	String runReport(String template) throws Exception
+	public void testRunReport() throws Exception
+	{
+		MockMartusApp app = MockMartusApp.create();
+		app.loadSampleData();
+		BulletinStore store = app.getStore();
+		ReportFormat rf = new ReportFormat("$i. $bulletin.localId\n");
+		StringWriter result = new StringWriter();
+		Vector keys = store.scanForLeafKeys();
+		rr.runReport(rf, store.getDatabase(), keys, result);
+		StringBuffer expected = new StringBuffer();
+		for(int i=0; i < keys.size(); ++i)
+		{
+			DatabaseKey key = (DatabaseKey)keys.get(i);
+			expected.append(Integer.toString(i+1));
+			expected.append(". ");
+			expected.append(key.getLocalId());
+			expected.append("\n");
+		}
+		assertEquals(new String(expected), result.toString());
+	}
+	
+	public void TestCustomField() throws Exception
+	{
+		FieldSpec[] specs = new FieldSpec[] 
+		{
+			FieldSpec.createStandardField("date", FieldSpec.TYPE_DATE),
+			FieldSpec.createStandardField("text", FieldSpec.TYPE_NORMAL),
+			FieldSpec.createStandardField("multi", FieldSpec.TYPE_MULTILINE),
+			FieldSpec.createStandardField("range", FieldSpec.TYPE_DATERANGE),
+			FieldSpec.createStandardField("bool", FieldSpec.TYPE_BOOLEAN),
+			FieldSpec.createStandardField("language", FieldSpec.TYPE_LANGUAGE),
+			LegacyCustomFields.createFromLegacy("custom,Custom <label>"),
+		};
+		
+		MockMartusApp app = MockMartusApp.create();
+		Bulletin b = new Bulletin(app.getSecurity(), specs, new FieldSpec[0]);
+		String sampleCustomData = "Robert Plant";
+		b.set("custom", sampleCustomData);
+		app.saveBulletin(b, app.getFolderDraftOutbox());
+		
+		Vector keys = new Vector();
+		keys.add(b.getDatabaseKey());
+		ReportFormat rf = new ReportFormat("$bulletin.custom");
+		StringWriter result = new StringWriter();
+		rr.runReport(rf, app.getStore().getDatabase(), keys, result);
+		
+		assertEquals(sampleCustomData, result.toString());
+	}
+	
+	private String performMerge(String template) throws Exception
 	{
 		StringWriter result = new StringWriter();
-		rr.report(new StringReader(template), result, context);
+		rr.performMerge(template, result, context);
 		return result.toString();
 	}
 
