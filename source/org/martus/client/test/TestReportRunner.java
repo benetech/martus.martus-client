@@ -36,6 +36,7 @@ import org.martus.client.reports.ReportRunner;
 import org.martus.common.BulletinStore;
 import org.martus.common.LegacyCustomFields;
 import org.martus.common.bulletin.Bulletin;
+import org.martus.common.crypto.MockMartusSecurity;
 import org.martus.common.database.DatabaseKey;
 import org.martus.common.fieldspec.FieldSpec;
 import org.martus.util.TestCaseEnhanced;
@@ -50,7 +51,7 @@ public class TestReportRunner extends TestCaseEnhanced
 	
 	public void setUp() throws Exception
 	{
-		rr = new ReportRunner();
+		rr = new ReportRunner(MockMartusSecurity.createClient());
 		context = new VelocityContext();
 	}	
 	
@@ -104,7 +105,7 @@ public class TestReportRunner extends TestCaseEnhanced
 		assertEquals(new String(expected), result.toString());
 	}
 	
-	public void TestCustomField() throws Exception
+	public void testCustomField() throws Exception
 	{
 		FieldSpec[] specs = new FieldSpec[] 
 		{

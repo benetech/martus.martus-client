@@ -32,20 +32,20 @@ import java.util.Vector;
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.VelocityEngine;
 import org.apache.velocity.context.Context;
-import org.martus.common.BulletinStore;
+import org.martus.common.bulletin.Bulletin;
+import org.martus.common.bulletin.BulletinLoader;
 import org.martus.common.crypto.MartusCrypto;
-import org.martus.common.crypto.MartusSecurity;
 import org.martus.common.database.DatabaseKey;
 import org.martus.common.database.ReadableDatabase;
 
 
 public class ReportRunner
 {
-	public ReportRunner() throws Exception
+	public ReportRunner(MartusCrypto security) throws Exception
 	{
+		signatureVerifier = security;
 		engine = new VelocityEngine();
 		engine.init();
-		signatureVerifier = new MartusSecurity();
 	}
 	
 	public void runReport(ReportFormat rf, ReadableDatabase db, Vector keysToInclude, Writer destination) throws Exception
@@ -55,7 +55,8 @@ public class ReportRunner
 		for(int i=0; i < keysToInclude.size(); ++i)
 		{
 			DatabaseKey key = (DatabaseKey)keysToInclude.get(i);
-			context.put("bulletin", BulletinStore.loadBulletinHeaderPacket(db, key, signatureVerifier));
+			Bulletin b = BulletinLoader.loadFromDatabase(db, key, signatureVerifier);
+			context.put("bulletin", new ReportableBulletin(b));
 			
 			context.put("i", new Integer(i+1));
 			performMerge(rf.getDetailSection(), destination, context);
