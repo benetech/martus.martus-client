@@ -1,9 +1,9 @@
 ﻿# Martus Client Translation File
 # Language code:  fr
 # Language name:  French
-# Exported date:  Tue Feb 15 15:11:52 PST 2005
-# Client version: Internal 2.6.0
-# Client build:   20050211.1523
+# Exported date:  Fri Apr 15 16:36:31 PDT 2005
+# Client version: 2.7
+# Client build:   20050415.1566
 #
 # This file MUST be saved in UTF-8 format!
 # Lines beginning with # are comments and are ignored by Martus
@@ -81,7 +81,9 @@
 #      <GridSpecDetails>, </GridSpecDetails>, <Column>, </Column>
 # 21.  do not translate "#UseUnofficialTranslationFiles#" in
 #      field:warningUnofficialTranslation since it contains a file name
-# 22.  If you want your language to appear right to left,
+# 22.  do not translate "#CurrentNewsItem#" (used for server news)
+# 23.  do not translate "#MaxNewsItems#" (used for server news)
+# 24.  If you want your language to appear right to left,
 #      Uncomment the next line (by removing the # in front of #!right-to-left)
 #!right-to-left
 #
@@ -188,8 +190,14 @@
 #_________________________=Restore Defaults
 -8e80-button:customDefault=Restaurer les Défauts
 
+#________________________=Export Template
+-1030-button:customExport=Exporter Modèle
+
 #______________________=Help
 -c47a-button:customHelp=Aide
+
+#________________________=Import Template
+-6d2d-button:customImport=Importer Modèle
 
 #________________=Help
 -c47a-button:help=Aide
@@ -244,6 +252,9 @@
 
 #____________________=Retrieve
 -eb55-button:retrieve=Extraire
+
+#________________=Save
+-efc0-button:save=Enregistrer
 
 #__________________________=Save Attachment
 -f513-button:saveattachment=Enregistrer la Pièce Jointe
@@ -302,21 +313,6 @@
 #____________________________________=Bulletin ID
 -ae8f-field:BulletinDetailsBulletinId=ID du Communiqué
 
-#_________________________________________=The following Headquarter account(s) will be able to view the private information in this bulletin, or send this bulletin to a server, after you save it.\n\nTo add or remove an account, use the Tools/Configure Headquarters menu option.
--cc16-field:BulletinDetailsHQInfoForModify=Le(s) compte(s) Siège suivant(s) pourront visualiser les informations privées de ce communiqué, ou envoyer ce communiqué à un serveur, après que vous l'ayez enregistré.\n\nPour ajouter ou supprimer un compte, utilisez l'option du menu Outils/Configurer Siège.
-
-#_______________________________________=The following Headquarter account(s) can view the private information in this bulletin, and can send this bulletin to a server.
--bdf1-field:BulletinDetailsHQInfoForView=Le(s) compte(s) Siège suivant(s) peuvent visualiser les informations privées de ce communiqué, et envoyer ce communiqué à un serveur.
-
-#_________________________________=Label
--7434-field:BulletinDetailsHQLabel=Etiquette
-
-#______________________________________=Public Code
--a1a2-field:BulletinDetailsHQPublicCode=Code Public
-
-#______________________________________=Headquarters
--6222-field:BulletinDetailsHeadquarters=Siège
-
 #_________________________________=History
 -90cc-field:BulletinDetailsHistory=Historique
 
@@ -346,6 +342,18 @@
 
 #__________________________________=Warning: Some information in this bulletin is not visible
 -eba1-field:BulletinHasUnknownStuff=Attention : Certaines informations de ce communiqué ne sont pas visibles
+
+#______________________________________________=The selected Headquarters account(s) will be able to view the private information in this bulletin, or send this bulletin to a server, after you save it.\n\nTo add a new headquarters account use the Tools/Configure Headquarters menu option.
+-de85-field:BulletinHeadQuartersHQInfoForModify=Le(s) compte(s) Siège sélectionné(s) pourront voir les informations privées de ce communiqué, ou bien envoyer ce communiqué vers un serveur, après que vous l'avez enregistré.\n\nPour ajouter un nouveau compte Siège, utilisez l'option menu Outils/Configurer Siège.
+
+#____________________________________________=The following Headquarters account(s) can view the private information in this bulletin, and can send this bulletin to a server.
+-e728-field:BulletinHeadQuartersHQInfoForView=Le(s) compte(s) Siège suivant(s) peuvent voir les informations privées de ce communiqué et envoyer ce communiqué vers un serveur.
+
+#______________________________________=Label
+-7434-field:BulletinHeadQuartersHQLabel=Etiquette
+
+#___________________________________________=Headquarters
+-6222-field:BulletinHeadQuartersHeadquarters=Siège
 
 #_____________________=Bulletin Id:
 -a081-field:BulletinId=Id du Communiqué :
@@ -377,14 +385,14 @@
 #______________________________=Row #
 -4946-field:ColumnGridRowNumber=Rangée n°
 
-#_______________________________________=Label
--7434-field:ConfigureHQColumnHeaderLabel=Etiquette
-
 #____________________________________________=Public Code
 -a1a2-field:ConfigureHQColumnHeaderPublicCode=Code Public
 
 #_________________________________=Current Headquarters
 -6bd3-field:ConfigureHQsCurrentHQs=Siège Actuel
+
+#_______________________________________=Default?
+-0e2c-field:ConfigureHeadQuartersDefault=Défaut ?
 
 #_________________________________________=All other fields currently are stored on disk.
 -7e7c-field:ContactInfoDescriptionOfFields=Tous les autres champs sont actuellement stockés sur disque.
@@ -401,14 +409,20 @@
 #__________________________________=The layout of the bulletins is dictated by an XML document.  By default the standard bulletin fields occur at the top of the Custom Field declaration, but they can be moved if desired.  However, there are four required fields that cannot be removed:  'author', 'entrydate', 'language' and 'title'.\n\n
 -1ef6-field:CreateCustomFieldsHelp1=La disposition des communiqués est dictée par un  document XML. Par défaut, les champs de communiqués standards se présentent en haut de la déclaration de Champs Personnalisés, mais au besoin ils peuvent être déplacés. Il existe cependant quatre champs obligatoires qui ne peuvent être supprimés : 'author' [auteur], 'entrydate' [date de saisie], 'language' [langue] et 'title' [titre].\n\n
 
-#__________________________________=For custom (non-standard) fields, you first select the type of field you want.  The possible choices are 'BOOLEAN', 'DATE', 'DATERANGE', 'GRID', 'LANGUAGE', 'MULTILINE', and 'STRING'. \n\nFor each custom field you will need a unique identification tag.  This tag can be any word except those already used by the system (eg. 'author', 'summary', 'location', 'title' etc.), and cannot contain spaces or special characters.  Examples of choices are 'custom1', 'custom2', etc, or tags that are more descriptive like 'VictimsName'.\n Then you need a label which is displayed next to your custom field.  An example might be 'Name of 1st Witness'.\n\nAdditional Comments\n1. XML is case-sensitive ('Witness' is not the same as 'witness') \n2. quotes around type name can be single or double as long as they match (e.g. 'STRING" is not valid. It must be 'STRING' or "STRING") \n3. A Boolean field will be displayed as a checkbox when editing and Yes/No when previewed or printed.\n\nSee examples below:\n\n
--676b-field:CreateCustomFieldsHelp2=Pour les champs personnalisés (non standard), sélectionnez d'abord le type de champ souhaité. Les choix proposés sont 'BOOLEAN' (BOOLEEN), 'DATE', 'DATERANGE' (FOURCHETTEDATE), 'GRID' (GRILLE), 'LANGUAGE' (LANGUE), 'MULTILINE' (MULTILIGNE) et 'STRING' (CHAINE). \n\nPour chaque champ personnalisé il vous faudra une balise d'identification unique. Cette balise peut être composée de n'importe quel mot, sauf ceux déjà utilisés par le système (par exemple 'author' [auteur], 'summary' [résumé], 'location' [lieu], 'title' [titre] etc.), et ne peut contenir ni espaces ni caractères spéciaux. Quelques exemples de choix : 'personnalisé1', 'personnalisé2', etc., ou bien des balises plus descriptives telles que 'NomVictime'.\n\nIl vous faut ensuite une étiquette qui s'affiche à côté de votre champ personnalisé. Par exemple, 'Nom du 1er témoin'.\n\nCommentaires complémentaires\n1. Le XML est sensible à la casse ("Témoin" est différent de "témoin") \n2. Les guillemets entourant le nom de type peuvent être simples ou doubles, à condition qu'ils soient identiques (p.ex. 'STRING" est invalide. Ce doit être soit 'STRING', soit "STRING")\n3. Un champ Booléen s'affichera sous forme de case à cocher à l'édition, et Oui/Non à la visualisation ou à l'impression.\n\nVoir les exemples ci-dessous :\n\n
+#__________________________________=For custom (non-standard) fields, you first select the type of field you want.  The possible choices are 'BOOLEAN', 'DATE', 'DATERANGE', 'DROPDOWN', 'GRID', 'LANGUAGE', 'MESSAGE', 'MULTILINE', and 'STRING'. \n\nFor each custom field you will need a unique identification tag.  This tag can be any word except those already used by the system (eg. 'author', 'summary', 'location', 'title' etc.), and cannot contain spaces or special characters.  Examples of choices are 'custom1', 'custom2', etc, or tags that are more descriptive like 'VictimsName'.\n\nThen you need a label which is displayed next to your custom field.  An example might be 'Name of 1st Witness'.\n\nAdditional Comments\n1. XML is case-sensitive ('Witness' is not the same as 'witness') \n2. Quotes around type name can be single or double as long as they match (e.g. 'STRING" is not valid. It must be 'STRING' or "STRING")\n3. A Boolean field will be displayed as a checkbox when editing and Yes/No when previewed or printed.\n4.  Use "MESSAGE" fields to give guidance on how to enter data, and to create comments/notes that will be displayed in every bulletin.\n\nSee examples below:\n\n
+-da0a-field:CreateCustomFieldsHelp2=Pour les champs personnalisés (non standard), sélectionnez d'abord le type de champ souhaité. Les choix proposés sont 'BOOLEAN' (BOOLEEN), 'DATE', 'DATERANGE' (FOURCHETTEDATE), 'DROPDOWN' (LISTE DÉROULANT),  'GRID' (GRILLE), 'LANGUAGE' (LANGUE), 'MESSAGE', 'MULTILINE' (MULTILIGNE) et 'STRING' (CHAINE). \n\nPour chaque champ personnalisé il vous faudra une balise d'identification unique. Cette balise peut être composée de n'importe quel mot, sauf ceux déjà utilisés par le système (par exemple 'author' [auteur], 'summary' [résumé], 'location' [lieu], 'title' [titre] etc.), et ne peut contenir ni espaces ni caractères spéciaux. Quelques exemples de choix : 'personnalisé1', 'personnalisé2', etc., ou bien des balises plus descriptives telles que 'NomVictime'.\n\nIl vous faut ensuite une étiquette qui s'affiche à côté de votre champ personnalisé. Par exemple, 'Nom du 1er témoin'.\n\nCommentaires complémentaires\n1. Le XML est sensible à la casse ("Témoin" est différent de "témoin") \n2. Les guillemets entourant le nom de type peuvent être simples ou doubles, à condition qu'ils soient identiques (p.ex. 'STRING" est invalide. Ce doit être soit 'STRING', soit "STRING")\n3. Un champ Booléen s'affichera sous forme de case à cocher à l'édition, et Oui/Non à la visualisation ou à l'impression.\n4.  Employer des champs d'"MESSAGE" pour donner des conseils sur la façon dont saisir des données, et créer les commentaries/notes qui seront montrés dans chaque communiqué.\n\nVoir les exemples ci-dessous :\n\n
 
-#__________________________________=<Field type='STRING'>\n<Tag>custom1</Tag>\n<Label>Witness Name</Label>\n</Field>\n\n<Field type='LANGUAGE'>\n<Tag>new2</Tag>\n<Label>Witness Speaks</Label>\n</Field>\n\n<Field type='BOOLEAN'>\n<Tag>new3</Tag>\n<Label>Were guns used?</Label>\n</Field>\n\n<Field type='GRID'>\n<Tag>customgrid</Tag>\n<Label>Victim Information</Label>\n<GridSpecDetails>\n<Column><Label>Name of Victim</Label></Column>\n<Column><Label>Victim Age</Label></Column>\n<Column><Label>Victim Gender</Label></Column>\n<Column><Label>Victim Ethnicity</Label></Column>\n</GridSpecDetails>\n</Field>\n
--c0a8-field:CreateCustomFieldsHelp3=<Field type='STRING'>\n<Tag>personnalisé1</Tag>\n<Label>Nom du Témoin</Label>\n</Field>\n\n<Field type='LANGUAGE'>\n<Tag>nouveau2</Tag>\n<Label>Témoin S'exprime</Label>\n</Field>\n\n<Field type='BOOLEAN'>\n<Tag>nouveau3</Tag>\n<Label>Usage d'armes à feu ?</Label>\n</Field>\n\n<Field type='GRID'>\n<Tag>grillepersonnalisée</Tag>\n<Label>Informations de Victime</Label>\n<GridSpecDetails>\n<Column><Label>Nom de Victime</Label></Column>\n<Column><Label>Age de Victime</Label></Column>\n<Column><Label>Sexe de Victime</Label></Column>\n<Column><Label>Ethnie de Victime</Label></Column>\n</GridSpecDetails>\n</Field>\n
+#__________________________________=<Field type='STRING'>\n<Tag>custom1</Tag>\n<Label>Witness Name</Label>\n</Field>\n\n<Field type='LANGUAGE'>\n<Tag>new2</Tag>\n<Label>Witness Speaks</Label>\n</Field>\n\n<Field type='BOOLEAN'>\n<Tag>new3</Tag>\n<Label>Were guns used?</Label>\n</Field>\n\n<Field type='MESSAGE'>\n<Tag>customMessage</Tag>\n<Label>Guidance for Perpetrator Eye Color entry:</Label>\n<Message>If you are unsure of the perpetrator's eye color, please leave this field blank.</Message>\n</Field>\n\n<Field type='DROPDOWN'>\n<Tag>customDropDown</Tag>\n<Label>Perpetrator Eye Color</Label>\n<Choices>\n<Choice>Brown</Choice>\n<Choice>Blue</Choice>\n<Choice>Green</Choice>\n<Choice>Other</Choice>\n</Choices>\n</Field>\n\n<Field type='GRID'>\n<Tag>customgrid</Tag>\n<Label>Victim Information</Label>\n<GridSpecDetails>\n<Column><Label>Name of Victim</Label></Column>\n<Column><Label>Victim Age</Label></Column>\n<Column><Label>Victim Gender</Label></Column>\n<Column><Label>Victim Ethnicity</Label></Column>\n</GridSpecDetails>\n</Field>\n
+-491b-field:CreateCustomFieldsHelp3=<Field type='STRING'>\n<Tag>personnalisé1</Tag>\n<Label>Nom du Témoin</Label>\n</Field>\n\n<Field type='LANGUAGE'>\n<Tag>nouveau2</Tag>\n<Label>Témoin S'exprime</Label>\n</Field>\n\n<Field type='BOOLEAN'>\n<Tag>nouveau3</Tag>\n<Label>Usage d'armes à feu ?</Label>\n</Field>\n\n<Field type='MESSAGE'>\n<Tag>messagePersonnalisé</Tag>\n<Label>Comment renseigner la couleur des yeux de l'auteur :</Label>\n<Message>Si vous n'êtes pas certain de la couleur des yeux de l'auteur, ne renseignez pas ce champ.</Message>\n</Field>\n\n<Field type='DROPDOWN'>\n<Tag>DéroulantPersonnalisé</Tag>\n<Label>Couleur des yeux de l'auteur</Label>\n<Choices>\n<Choice>Marron</Choice>\n<Choice>Bleus</Choice>\n<Choice>Verts</Choice>\n<Choice>Autre</Choice>\n</Choices>\n</Field>\n\n<Field type='GRID'>\n<Tag>grillepersonnalisée</Tag>\n<Label>Informations sur la Victime</Label>\n<GridSpecDetails>\n<Column><Label>Nom de la Victime</Label></Column>\n<Column><Label>Age de la Victime</Label></Column>\n<Column><Label>Sexe de la Victime</Label></Column>\n<Column><Label>Ethnie de la Victime</Label></Column>\n</GridSpecDetails>\n</Field>\n
 
 #____________________________________=Please enter your new username and password.
 -aec2-field:CreateNewUserNamePassword=Veuillez saisir vos nouveaux pseudo et mot de passe.
+
+#_______________________________________=MartusCustomization
+-f3b2-field:CustomizationFileDefaultName=PersonnalisationMartus
+
+#_____________________________________=Customization Template Files
+-9210-field:CustomizationTemplateFiles=Fichiers de Modèles Personnalisés
 
 #____________________=Exact Date
 -8a81-field:DateExact=Date Exacte
@@ -458,8 +472,8 @@
 #__________________________________=LABEL
 -64b8-field:ErrorCustomFieldHeader4=ETIQUETTE
 
-#____________________________=There is an error in the custom field definitions. Each problem is identified with the following codes:\n   100 - Required standard field is missing\n   101 - Custom field does not have a correct tag.\n   102 - A previous Tag already exists with this name.\n   103 - Custom field does not have a label.\n   104 - Unrecognized Field Type.\n   105 - A label was found in a standard field.\n   106 - XML Parse Error.\n   107 - Tag contains illegal characters
--943a-field:ErrorCustomFields=Erreur dans les définitions de champ personnalisé. Chaque problème est identifié par les codes suivants :\n   100 - Le champ standard obligatoire est manquant\n   101 - Balise incorrecte dans le champ personnalisé.\n   102 - Une balise porte déjà ce nom.\n   103 - Le champ personnalisé n'a pas d'étiquette.\n   104 - Type de Champ Non Reconnu.\n   105 - Une étiquette a été trouvée dans un champ standard.\n   106 - Erreur d'Analyse XML.\n   107 - La balise contient des caractères interdits.
+#____________________________=There is an error in the custom field definitions. Each problem is identified with the following codes:\n   100 - Required standard field is missing\n   101 - Custom field does not have a correct tag.\n   102 - A previous Tag already exists with this name.\n   103 - Custom field does not have a label.\n   104 - Unrecognized Field Type.\n   105 - A label was found in a standard field.\n   106 - XML Parse Error.\n   107 - Tag contains illegal characters.\n   200 - All fields empty.\n   201 - Unrecognized headquarters created this template.\n   202 - Security validation error.\n   203 - File Error.
+-f2cf-field:ErrorCustomFields=Erreur dans les définitions de champ personnalisé. Chaque problème est identifié par les codes suivants :\n   100 - Le champ standard obligatoire est manquant\n   101 - Balise incorrecte dans le champ personnalisé.\n   102 - Une balise porte déjà ce nom.\n   103 - Le champ personnalisé n'a pas d'étiquette.\n   104 - Type de Champ Non Reconnu.\n   105 - Une étiquette a été trouvée dans un champ standard.\n   106 - Erreur d'Analyse XML.\n   107 - La balise contient des caractères interdits.\n   200 – Tous les champs sont vides.\n   201 – Modèle créé par un Siège non reconnu.\n   202 – Erreur de validation de sécurité.\n   203 – Erreur de fichier.
 
 #_________________________________________=A previous backup file exists.  You must save each file on its own removable media disk.
 -db93-field:ErrorPreviousBackupShareExists=Il existe un ancien fichier de sauvegarde. Vous devez enregistrer chaque fichier sur son propre disque amovible.
@@ -488,11 +502,20 @@
 #______________________________________=This file name should be unique and identifiable to you but we recommend not using your user name.  Each file will be generated with this name and its number sequence.
 -02b6-field:GetShareFileNameDescription=Le nom de ce fichier doit être unique et vous devez pouvoir l'identifier, mais nous vous recommandons de ne pas utiliser votre pseudo. Chaque fichier sera généré avec ce nom et sa séquence numérique.
 
+#__________________________=(not currently configured)
+-462b-field:HQNotConfigured=(non encore configuré)
+
 #_________________________=Headquarters
 -6222-field:HQSummaryLabel=Siège
 
+#__________________________=Default Headquarters accounts will be selected for each new bulletin or version.
+-ea13-field:HQsSetAsDefault=Les comptes Siège par défaut seront sélectionnés pour tous nouveaux communiqués ou versions.
+
 #________________________________=These Headquarters accounts are allowed to view the private information in this bulletin, and to send this bulletin to a server on your behalf.
 -2274-field:HQsSetAsProxyUploader=Les comptes de ce Siège sont autorisés pour la lecture des informations privées de ce communiqué, et pour l'envoi de ce communiqué à un serveur en votre nom.
+
+#_______________________________=Selected?
+-9c09-field:HeadQuartersSelected=Sélectionné ?
 
 #_____________________________=Enter questions, details, or other information your organization wants to have answered in future bulletins created.
 -704c-field:HelpDefaultDetails=Tapez les questions, détails ou autres informations pour lesquels votre organisme souhaite des réponses dans vos futurs communiqués.
@@ -527,6 +550,9 @@
 #_____________________________=Please enter a name for the file you wish to export.
 -95ed-field:NameOfExportedFile=Veuillez donner un nom au fichier à exporter.
 
+#__________________________=No Headquarters accounts selected for this bulletin.
+-2b9f-field:NoHQsConfigured=Aucun compte Siège n'est sélectionné pour ce communiqué.
+
 #___________________________________________=Server Not Available
 -c79c-field:NoServerAvailableProgressMessage=Serveur indisponible
 
@@ -549,6 +575,7 @@
 -2a14-field:OnlineHelpTOCMessageDescription=Cliquez sur Sujet pour afficher les détails.
 
 #_______________________________=Organization (required)
+
 -2f27-field:OrganizationRequired=Organisme (obligatoire)
 
 #___________________________=Include private data in print out.
@@ -806,8 +833,8 @@
 #_________________________________________=By choosing Yes, you will exit this verification step.
 -5b61-field:confirmCancelShareVerifyeffect=Choisir Oui pour quitter cette étape de vérification.
 
-#_________________________________________=You have chosen to remove your Headquarters account.  Any existing saved bulletins will still be visible by the old Headquarters.  If you want to disallow Headquarters viewing access to previously created Draft bulletins they must be re-saved after revoking the Headquarters.  Any sealed bulletins CANNOT be reset to be non-viewable by the Headquarters.
--6076-field:confirmClearHQInformationcause=Vous avez choisi de supprimer le compte de votre Siège. Tout communiqué existant enregistré restera visible de l'ancien Siège. Si vous souhaitez interdire à votre Siège tout accès de lecture aux Brouillons de communiqués précédemment créés, réenregistrez-les après suppression du Siège. AUCUN communiqué verrouillé ne pourra être réinitialisé pour ne plus être visible du Siège.
+#_________________________________________=You have chosen to remove all selected Headquarters accounts.  Any existing saved bulletins will still be visible by the old Headquarters.  If you want to disallow Headquarters viewing access to previously created Draft bulletins they must be re-saved after revoking the Headquarters.  Any sealed bulletins CANNOT be reset to be non-viewable by the Headquarters, except by creating a new version of the bulletin.
+-d335-field:confirmClearHQInformationcause=Vous avez choisi de supprimer tous les comptes du Siège sélectionné. Tout communiqué existant enregistré restera visible de l'ancien Siège. Si vous souhaitez interdire à votre Siège tout accès de lecture aux Brouillons de communiqués précédemment créés, réenregistrez-les après suppression du Siège. AUCUN communiqué verrouillé ne pourra être réinitialisé pour ne plus être visible du Siège, sauf à créer une nouvelle version du communiqué.
 
 #__________________________________________=By clicking on Yes, any draft or sealed bulletins saved in the future will no longer be accessible by your Headquarters.
 -4a87-field:confirmClearHQInformationeffect=Si vous cliquez Oui, aucun futur brouillon de communiqué ou communiqué verrouillé ne sera plus accessible par votre Siège.
@@ -845,8 +872,8 @@
 #________________________________________=You have chosen to customize the fields that will be used in any new bulletins created by this account.
 -2f98-field:confirmEnterCustomFieldscause=Vous avez choisi de personnaliser les champs qui seront utilisés dans tous les nouveaux communiqués créés par ce compte.
 
-#_________________________________________=Customizing fields is an advanced operation, and can be dangerous. You should only proceed if you are certain that you understand the feature.
--1483-field:confirmEnterCustomFieldseffect=La personnalisation des champs est une manipulation avancée et peut s'avérer dangereuse. Ne poursuivez que si vous êtes certain de maîtriser cette fonction.
+#_________________________________________=Customizing fields is an advanced operation. You should only proceed if you are certain that you understand the feature.
+-518e-field:confirmEnterCustomFieldseffect=La personnalisation des champs est une manipulation avancée. Ne poursuivez que si vous êtes certain de maîtriser cette fonction.
 
 #_________________________________________________=The file you chose is not part of a key backup set.  These files are named '<name you picked>-#.dat' where # is the sequence number in the disk set previously created.
 -2e41-field:confirmErrorRecoverIvalidFileNamecause=Le fichier choisi n'appartient à aucun jeu de sauvegarde de clé. Ces fichiers sont nommés '<nom choisi par vous>-#.dat' et # correspond au numéro de séquence dans le jeu de disques précédemment créé.
@@ -992,8 +1019,8 @@
 #_____________________________________________________=Choose Yes to begin the restore process again, No to exit Martus.
 -0e22-field:confirmUnableToRecoverFromBackupFileeffect=Choisissez Oui pour recommencer le processus de restauration, Non pour quitter Martus.
 
-#_______________________________________=You have chosen to revert to the standard set of Martus fields.
--61a6-field:confirmUndoCustomFieldscause=Vous avez choisi de revenir au jeu standard des champs Martus.
+#_______________________________________=You have chosen to restore the standard set of Martus fields.
+-b1b6-field:confirmUndoCustomFieldscause=Vous avez choisi de restaurer le jeu standard des champs Martus.
 
 #________________________________________=New bulletins created with this account will not have any custom fields.
 -bf33-field:confirmUndoCustomFieldseffect=Les nouveaux communiqués créés avec ce compte ne comporteront aucun champ personnalisé.
@@ -1007,8 +1034,8 @@
 #_______________________________________________=The bulletin you are about to create is based on a previous bulletin whose custom fields are different from your current custom fields.  Do you wish to use the original bulletin's custom fields?
 -a6ca-field:confirmUseBulletinsCustomFieldscause=Le communiqué que vous êtes sur le point de créer s'appuie sur un ancien communiqué dont les champs personnalisés diffèrent de vos champs personnalisés actuels. Souhaitez-vous utiliser les champs personnalisés du communiqué d'origine ?
 
-#________________________________________________=Answering Yes will use the old custom fields and all bulletin data.  Answering No will use your current custom fields and copy all similar fields to the new bulletin but you will lose some of the original bulletin's data.
--afbe-field:confirmUseBulletinsCustomFieldseffect=Répondez Oui pour utiliser les anciens champs personnalisés avec toutes les données du communiqué. Répondez Non pour utiliser vos champs personnalisés actuels et copier tous les champs similaires vers le nouveau communiqué, mais vous perdrez certaines données des communiqués d'origine.
+#________________________________________________=Answering Yes will use the old custom fields and all bulletin data.  Answering No will use your current custom fields and copy all similar fields to the new bulletin but you may lose some of the original bulletin's data.
+-0ed4-field:confirmUseBulletinsCustomFieldseffect=Répondez Oui pour utiliser les anciens champs personnalisés avec toutes les données du communiqué. Répondez Non pour utiliser vos champs personnalisés actuels et copier tous les champs similaires vers le nouveau communiqué, mais vous risquez de perdre certaines données des communiqués d'origine.
 
 #________________________________________________=Warning: acctmap.txt file in your account's packets directory is missing or is corrupt.  This may indicate someone has tried to tamper with your data or could be caused by a hardware error.
 -61cb-field:confirmWarnMissingAccountMapFilecause=Attention : le fichier acctmap.txt situé dans le répertoire packets de votre compte, est manquant ou endommagé.  Cela peut signifier soit qu'un tiers a tenté de corrompre vos données, soit qu'une erreur matérielle s'est produite.
@@ -1103,6 +1130,7 @@
 #________________________________=Enter the XML representation for the layout of new and modified bulletins.
 -cf9a-field:inputCustomFieldsInfo=Tapez la représentation XML de la disposition des communiqués nouveaux et modifiés.
 
+
 #______________________________________=
 -da39-field:inputExportMyPublicKeyentry=
 
@@ -1190,6 +1218,12 @@
 #____________________________________________=An unexpected error occurred in generating the key backup files.
 -d237-field:notifyErrorBackingUpKeySharecause=Une erreur imprévue s'est produite pendant la génération des fichiers de sauvegarde de clé.
 
+#_________________________________________________________=There was an error saving your template.
+-88ed-field:notifyErrorExportingCustomizationTemplatecause=Erreur d'enregistrement de votre modèle.
+
+#_________________________________________________________=There was an error importing this template.
+-4a9a-field:notifyErrorImportingCustomizationTemplatecause=Erreur d'importation de ce modèle.
+
 #______________________________________=An error prevented the file from being read.
 -1ad3-field:notifyErrorReadingFilecause=Une erreur a empêché la lecture du fichier.
 
@@ -1229,6 +1263,9 @@
 #_________________________________________=To export bulletins, select them first, and then perform the export operation.
 -944e-field:notifyExportZeroBulletinscause=Pour exporter des communiqués, commencez par les sélectionner, puis exportez-les.
 
+#___________________________________________________________=Successfully exported customization template.
+-aed9-field:notifyExportingCustomizationTemplateSuccesscause=Modèle personnalisé correctement exporté.
+
 #___________________________________________=The original files have not been deleted from your computer, you must delete them manually if you wish.
 -8965-field:notifyFilesWillNotBeDeletedcause=Les fichiers d'origine n'ont pas été supprimés de votre ordinateur, vous devez au besoin les supprimer manuellement.
 
@@ -1244,11 +1281,20 @@
 #_______________________________________=You have already added this account to your Headquarters list.
 -0785-field:notifyHQKeyAlradyExistscause=Vous avez déjà ajouté ce compte à la liste de votre Siège.
 
+#_______________________________________________=The Headquarters label you entered is already assigned to another Headquarters account.  Please use a different label.
+-91ca-field:notifyHeadquarterLabelDuplicatecause=L'étiquette de Siège que vous avez tapée est déjà attribuée à un autre compte Siège. Veuillez modifier l'étiquette.
+
+#___________________________________________________________=Successfully imported customization template.
+-c78c-field:notifyImportingCustomizationTemplateSuccesscause=Modèle personnalisé correctement importé.
+
 #_______________________________________=You must have a server public code.
 -2fde-field:notifyInvalidServerCodecause=Il vous faut un code public de serveur.
 
 #_______________________________________=You must have a server name or IP address.
 -984b-field:notifyInvalidServerNamecause=Il vous faut un nom de serveur ou une adresse IP.
+
+#___________________________________=Please select a Headquarters first.
+-1d19-field:notifyNoHQsSelectedcause=Veuillez d'abord sélectionner un Siège.
 
 #________________________________________=Operation completed.
 -1a65-field:notifyOperationCompletedcause=Opération terminée.
@@ -1319,8 +1365,8 @@
 #__________________________________=Sorry, no bulletins were found.
 -5bd8-field:notifySearchFailedcause=Désolé, aucun communiqué n'a été trouvé.
 
-#_________________________________=Number of bulletins found = 
--f301-field:notifySearchFoundcause=Nombre de communiqués trouvés = 
+#_________________________________=#N# bulletins matched the search, and have been added to the Search Results folder.\n Note that both current and earlier versions of each bulletin were searched.
+-6569-field:notifySearchFoundcause=#N# communiqués répondant à la recherche ont été ajoutés au dossier de Résultats de la Recherche.\n Notez que la recherche a porté à la fois sur les versions actuelles et anciennes de chaque communiqué.
 
 #_____________________________________=The Server Public Code does not match the one you entered.
 -efe3-field:notifyServerCodeWrongcause=Le Code Public du serveur ne correspond pas à celui que vous avez saisi.
@@ -1331,6 +1377,7 @@
 #_______________________________________=The Server has responded with invalid account information.
 -76c7-field:notifyServerInfoInvalidcause=Réponse du serveur : informations de compte invalides.
 
+
 #____________________________________________=Unable to make a secure connection with the Martus backup server.\n\nMartus can connect to a server using either of two ports.  When trying to connect to this server, neither port is accessible, probably because both ports are being blocked by a local firewall or by your ISP.\n\nWe recommend that any firewalls be configured to allow outgoing connections on both TCP port 443 and 987.  Please contact your LAN administrator or office technical support staff to verify that your firewall configuration allows this.\n\nIf the problem persists, you may need to select a different server.
 -8dc9-field:notifyServerSSLNotRespondingcause=Impossible de se connecter en toute sécurité au serveur de sauvegarde Martus.\n\nMartus peut se connecter à un serveur à l'aide de l'un des deux ports. Lors de la connexion à ce serveur aucun des deux ports n'est accessible, probablement parce que les deux ports sont bloqués par un pare-feu local ou par votre ISP.\n\nNous vous conseillons de configurer tous les pare-feux pour autoriser les connexions vers l'extérieur sur les deux ports TCP 443 et 987. Veuillez contacter votre administrateur LAN ou l'assistance technique de votre bureau pour vérifier que la configuration de votre pare-feu le permet.\n\nSi le problème persiste, il vous faudra peut-être sélectionner un autre serveur.
 
@@ -1338,6 +1385,7 @@
 -4a93-field:notifyUnableToSaveAttachmentcause=Impossible d'enregistrer la pièce jointe sélectionnée pour une raison inconnue. Essayez de l'enregistrer sur un autre fichier.
 
 #____________________________________________=Unable to view the selected attachment for some reason.
+
 -db36-field:notifyUnableToViewAttachmentcause=Impossible de lire la pièce jointe sélectionnée pour une raison inconnue.
 
 #_____________________________________=An unexpected error has occurred. Please report this problem to help@martus.org.
@@ -1448,8 +1496,8 @@
 #________________=Title
 -768e-field:title=Titre
 
-#_____________________________=English 2.6
--26a2-field:translationVersion=Français 2.6
+#_____________________________=French 2.7
+-1d90-field:translationVersion=Français 2.7
 
 #___________________=Username
 -84c2-field:username=Pseudo
@@ -1481,8 +1529,9 @@
 #____________________________________________=WARNING: This bulletin has not been sent to a server since it was last modified. Deleting it will prevent the latest changes from being backed up.
 -523e-field:warningDeleteSingleUnsentBulletin=ATTENTION : Ce communiqué n'a pas été envoyé à un serveur depuis sa dernière modification. Sa suppression empêchera la sauvegarde des dernières modifications.
 
-#_______________________________________=WARNING:  This translation was not created by the Martus team, and therefore may not be trustworthy.\nIf you only want to use official translations then exit Martus, remove the file #UseUnofficialTranslationFiles# from your Martus directory, and restart Martus.\n\n
--c48e-field:warningUnofficialTranslation=ATTENTION : Cette traduction n'a pas été effectuée par l'équipe Martus et peut donc ne pas être fiable.\nSi vous souhaitez n'utiliser que des traductions officielles, quittez Martus, supprimez le fichier #UseUnofficialTranslationFiles# de votre répertoire Martus, et redémarrez Martus.\n\n
+
+#_______________________________________=WARNING:  This translation was not created by the Martus team, and therefore may not be trustworthy.  If you only want to use official translations then exit Martus, remove the file #UseUnofficialTranslationFiles# from your Martus directory, and restart Martus.
+-711f-field:warningUnofficialTranslation=ATTENTION : Cette traduction n'a pas été effectuée par l'équipe Martus et peut donc ne pas être fiable. Si vous souhaitez n'utiliser que des traductions officielles, quittez Martus, supprimez le fichier #UseUnofficialTranslationFiles# de votre répertoire Martus, et redémarrez Martus.
 
 #__________________=Web Page
 -0163-field:webpage=Page Web
@@ -1553,8 +1602,8 @@
 #________________=Spanish
 -8df7-language:es=Espagnol
 
-#________________=Farsi, Dari
--e768-language:fa=Farsi, Dari
+#________________=Persian (Farsi, Dari)
+-10c9-language:fa=Perse (Farsi, Dari)
 
 #________________=French
 -4438-language:fr=Français
@@ -1711,6 +1760,7 @@
 
 #__________________________=Discard Bulletin(s)
 -65eb-menu:DiscardBulletins=Mettre Communiqué(s) Au Rebut 
+
 
 #_________________________=Export Bulletins
 -a86c-menu:ExportBulletins=Exporter Communiqués
@@ -1893,6 +1943,7 @@
 -7fb9-wintitle:ConfigureHQs=Editeur de Siège
 
 #____________________________________=Help on Creating Custom Fields
+
 -ed1d-wintitle:CreateCustomFieldsHelp=Aide sur la Création de Champs Personnalisés
 
 #________________________________=Delete Bulletin File
@@ -1940,11 +1991,17 @@
 #___________________________________=Export Bulletins
 -a86c-wintitle:ExportBulletinsSaveAs=Exporter les Communiqués
 
+#_______________________________________________=Export Customization Template
+-5318-wintitle:ExportCustomizationTemplateSaveAs=Exporter le Modèle Personnalisé
+
 #__________________=Help on Martus
 -b414-wintitle:Help=Aide sur Martus
 
 #________________________________=Help on Bulletin Details Field Default Content
 -96cb-wintitle:HelpDefaultDetails=Aide sur le Contenu par Défaut du Champ Détails du Communiqué
+
+#_____________________________________________=Import Customization Template
+-0188-wintitle:ImportCustomizationTemplateOpen=Importer le Modèle Personnalisé
 
 #_______________________________=Import Headquarters Public Account Id File
 -9300-wintitle:ImportHQPublicKey=Importer le Fichier ID de Compte Public du Siège
@@ -2027,8 +2084,8 @@
 #______________________________=Server Compliance Statement
 -20f8-wintitle:ServerCompliance=Déclaration de Conformité du Serveur
 
-#________________________=Server News
--d231-wintitle:ServerNews=Nouvelles du Serveur
+#________________________=Server News: Message #CurrentNewsItem# of #MaxNewsItems#
+-7177-wintitle:ServerNews=Nouvelles du Serveur : Message #CurrentNewsItem# sur #MaxNewsItems#
 
 #____________________________________=Server Configuration Results
 -788c-wintitle:ServerSelectionResults=Résultats de Configuration du Serveur
@@ -2049,6 +2106,7 @@
 -cdb1-wintitle:confirmBackupKeyPairSecretShare=Sauvegarde de vos Fichiers de Clé
 
 #______________________________________________=Verify Disks
+
 -f38d-wintitle:confirmBackupKeyShareVerifyDisks=Vérifier les Disques
 
 #_________________________________________=Cancel Backup Restore
@@ -2127,6 +2185,7 @@
 -b6bc-wintitle:confirmRecoveredKeyShareFailedTryAgain=Echec de Restauration
 
 #_____________________________________=Weak Password Warning
+
 -0295-wintitle:confirmRedoWeakPassword=Avertissement : Mot de Passe faible
 
 #_____________________________________=Confirm Remove Attachments
@@ -2276,6 +2335,12 @@
 #__________________________________________=Error Backing Up Key
 -ee40-wintitle:notifyErrorBackingUpKeyShare=Erreur de Sauvegarde de la Clé
 
+#_______________________________________________________=Error Exporting Template
+-f4cc-wintitle:notifyErrorExportingCustomizationTemplate=Erreur d'Exportation du Modèle
+
+#_______________________________________________________=Error Importing Template
+-4f1a-wintitle:notifyErrorImportingCustomizationTemplate=Erreur d'Importation du Modèle
+
 #____________________________________=Error Reading File
 -73ad-wintitle:notifyErrorReadingFile=Erreur de Lecture du Fichier
 
@@ -2315,6 +2380,9 @@
 #_______________________________________=No Bulletins Selected
 -c1d6-wintitle:notifyExportZeroBulletins=Aucun Communiqué Sélectionné
 
+#_________________________________________________________=Exporting Template Succeeded
+-b648-wintitle:notifyExportingCustomizationTemplateSuccess=Modèle Correctement Exporté
+
 #_________________________________________=Files Not Deleted
 -a001-wintitle:notifyFilesWillNotBeDeleted=Fichiers Non Supprimés
 
@@ -2330,11 +2398,20 @@
 #_____________________________________=Headquarters Key Already Exists
 -03e9-wintitle:notifyHQKeyAlradyExists=La Clé de Siège Existe Déjà
 
+#_____________________________________________=Headquarters Label Invalid
+-106b-wintitle:notifyHeadquarterLabelDuplicate=Etiquette Siège Invalide
+
+#_________________________________________________________=Importing Template Succeeded
+-ac8c-wintitle:notifyImportingCustomizationTemplateSuccess=Modèle Correctement Importé
+
 #_____________________________________=Invalid Server Public Code
 -08ad-wintitle:notifyInvalidServerCode=Code Public du Serveur Invalide
 
 #_____________________________________=Invalid Server Name or IP Address
 -3376-wintitle:notifyInvalidServerName=Nom du Serveur ou Adresse IP Invalide
+
+#_________________________________=No Headquarters Selected
+-0c30-wintitle:notifyNoHQsSelected=Aucun Siège n'est Sélectionné
 
 #______________________________________=Finished
 -355b-wintitle:notifyOperationCompleted=Terminé
@@ -2503,3 +2580,7 @@
 
 #_________________________________=Confirm Delete Folder
 -1a75-wintitle:warningdeletefolder=Confirmer Suppression de Dossier
+
+
+
+
