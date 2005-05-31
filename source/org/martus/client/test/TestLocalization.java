@@ -73,6 +73,18 @@ public class TestLocalization extends TestCaseEnhanced
 		assertFalse("Translation directory still exists?", translationDirectory.exists());
 		super.tearDown();
 	}
+	
+	public void testEnglishStringsDontStartWithAngleBrackets() throws Exception
+	{
+		for(int i=0; i < EnglishStrings.strings.length; ++i)
+		{
+			String entry = EnglishStrings.strings[i];
+			String value = entry.substring(entry.indexOf("=") + 1);
+			assertFalse("ERROR: English string can't start with < but does: " + entry, 
+						value.startsWith("<"));
+		}
+	}
+	
 	public void testNonAsciiEnglishTranslations() throws Exception
 	{
 		String[] strings = EnglishStrings.strings;
