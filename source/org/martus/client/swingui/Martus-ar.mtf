@@ -1,9 +1,9 @@
 ﻿# Martus Client Translation File
 # Language code:  ar
 # Language name:  Arabic
-# Exported date:  Tue Feb 15 15:21:21 PST 2005
-# Client version: Internal 2.6.0
-# Client build:   20050211.1523
+# Exported date:  Fri Apr 15 16:37:20 PDT 2005
+# Client version: 2.7
+# Client build:   20050415.1566
 #
 # This file MUST be saved in UTF-8 format!
 # Lines beginning with # are comments and are ignored by Martus
@@ -81,7 +81,9 @@
 #      <GridSpecDetails>, </GridSpecDetails>, <Column>, </Column>
 # 21.  do not translate "#UseUnofficialTranslationFiles#" in
 #      field:warningUnofficialTranslation since it contains a file name
-# 22.  If you want your language to appear left to right,
+# 22.  do not translate "#CurrentNewsItem#" (used for server news)
+# 23.  do not translate "#MaxNewsItems#" (used for server news)
+# 24.  If you want your language to appear left to right,
 #      Comment the next line (by adding a # in front of !right-to-left)
 !right-to-left
 #
@@ -188,8 +190,14 @@
 #_________________________=Restore Defaults
 -8e80-button:customDefault=استعادة العناصر التلقائية
 
+#________________________=Export Template
+-1030-button:customExport= تصدير قالب
+
 #______________________=Help
 -c47a-button:customHelp=مساعدة 
+
+#________________________=Import Template
+-6d2d-button:customImport=استيراد قالب
 
 #________________=Help
 -c47a-button:help=مساعدة
@@ -214,6 +222,7 @@
 
 #_________________________=Search
 -bce0-button:inputsearchok=بحث 
+
 
 #__________________________________=OK
 -9ce3-button:inputservermagicwordok=استمر
@@ -244,6 +253,9 @@
 
 #____________________=Retrieve
 -eb55-button:retrieve=استرجاع 
+
+#________________=Save
+-efc0-button:save=حفظ
 
 #__________________________=Save Attachment
 -f513-button:saveattachment=حفظ مرفق 
@@ -302,21 +314,6 @@
 #____________________________________=Bulletin ID
 -ae8f-field:BulletinDetailsBulletinId=هوية النشرة
 
-#_________________________________________=The following Headquarter account(s) will be able to view the private information in this bulletin, or send this bulletin to a server, after you save it.\n\nTo add or remove an account, use the Tools/Configure Headquarters menu option.
--cc16-field:BulletinDetailsHQInfoForModify=ستتمكن حسابات المركز الرئيسي التالية من الإطلاع على المعلومات الخاصة التي تحتويها هذه النشرة و إرسال هذه النشرة إلى خادم بعدما تقوم بحفظها. n\n\لإضافة أو إزالة حساب، استخدم خيار قائمة المركز الرئيسي "أدوات/تهيئة."
-
-#_______________________________________=The following Headquarter account(s) can view the private information in this bulletin, and can send this bulletin to a server.
--bdf1-field:BulletinDetailsHQInfoForView= يمكن لحسابات المركز الرئيسي التالية الإطلاع على المعلومات الخاصة التي تحتويها هذه النشرة و يمكنها إرسال هذه النشرة إلى خادم.
-
-#_________________________________=Label
--7434-field:BulletinDetailsHQLabel=عنوان
-
-#______________________________________=Public Code
--a1a2-field:BulletinDetailsHQPublicCode=الكود العام
-
-#______________________________________=Headquarters
--6222-field:BulletinDetailsHeadquarters=المركز الرئيسي
-
 #_________________________________=History
 -90cc-field:BulletinDetailsHistory=الماضي
 
@@ -346,6 +343,19 @@
 
 #__________________________________=Warning: Some information in this bulletin is not visible
 -eba1-field:BulletinHasUnknownStuff=تحذير: لا يمكن قراءة بعض المعلومات في هذه النشرة
+
+#______________________________________________=The selected Headquarters account(s) will be able to view the private information in this bulletin, or send this bulletin to a server, after you save it.\n\nTo add a new headquarters account use the Tools/Configure Headquarters menu option.
+-de85-field:BulletinHeadQuartersHQInfoForModify= يمكن لحساب(ات)المركز الرئيسي المُختارة أن تطلع على المعلومات الخاصة بهذه النشرة، أو أن تُرسل هذه النشرة إلى خادم بعدما تقوم بحفظها.\n\nلإضافة حساب مركز رئيسي جديد استخدم قائمة أدوات/تهيئة المركز الرئيسي.
+
+
+#____________________________________________=The following Headquarters account(s) can view the private information in this bulletin, and can send this bulletin to a server.
+-e728-field:BulletinHeadQuartersHQInfoForView= حساب(ات)المركز الرئيسي الآتي(ة) يمكنها الإطلاع على المعلومات الخاصة بهذه النشرة و يمكنها إرسال هذه النشرة لخادم.
+
+#______________________________________=Label
+-7434-field:BulletinHeadQuartersHQLabel=عنوان
+
+#___________________________________________=Headquarters
+-6222-field:BulletinHeadQuartersHeadquarters=مركز رئيسي
 
 #_____________________=Bulletin Id:
 -a081-field:BulletinId=هوية النشرة: 
@@ -377,14 +387,15 @@
 #______________________________=Row #
 -4946-field:ColumnGridRowNumber=صف #
 
-#_______________________________________=Label
--7434-field:ConfigureHQColumnHeaderLabel=عنوان
-
 #____________________________________________=Public Code
 -a1a2-field:ConfigureHQColumnHeaderPublicCode=الكود العام
 
+
 #_________________________________=Current Headquarters
 -6bd3-field:ConfigureHQsCurrentHQs=المركز الرئيسي الحالي
+
+#_______________________________________=Default?
+-0e2c-field:ConfigureHeadQuartersDefault=تلقائي؟
 
 #_________________________________________=All other fields currently are stored on disk.
 -7e7c-field:ContactInfoDescriptionOfFields= تم تخزين جميع الحقول الأخرى حاليا على وحدة التخزين. 
@@ -401,14 +412,20 @@
 #__________________________________=The layout of the bulletins is dictated by an XML document.  By default the standard bulletin fields occur at the top of the Custom Field declaration, but they can be moved if desired.  However, there are four required fields that cannot be removed:  'author', 'entrydate', 'language' and 'title'.\n\n
 -1ef6-field:CreateCustomFieldsHelp1= يتم إملاء نموذج تصميم النشرات عن طريق وثيقة .XML  تلقائيا تتواجد الحقول الأساسية للنشرة في أعلى رمز الحقل المعدّل و لكن يمكن تغيير وضعها حسب الرغبة.  ومع ذلك، لا يمكن تغيير الأربع الحقول الأساسية التالية: 'author' (الكاتب)، 'entrydate' (تاريخ الإنشاء)، 'language' (اللغة) و 'title' (العنوان). \n\n
 
-#__________________________________=For custom (non-standard) fields, you first select the type of field you want.  The possible choices are 'BOOLEAN', 'DATE', 'DATERANGE', 'GRID', 'LANGUAGE', 'MULTILINE', and 'STRING'. \n\nFor each custom field you will need a unique identification tag.  This tag can be any word except those already used by the system (eg. 'author', 'summary', 'location', 'title' etc.), and cannot contain spaces or special characters.  Examples of choices are 'custom1', 'custom2', etc, or tags that are more descriptive like 'VictimsName'.\n Then you need a label which is displayed next to your custom field.  An example might be 'Name of 1st Witness'.\n\nAdditional Comments\n1. XML is case-sensitive ('Witness' is not the same as 'witness') \n2. quotes around type name can be single or double as long as they match (e.g. 'STRING" is not valid. It must be 'STRING' or "STRING") \n3. A Boolean field will be displayed as a checkbox when editing and Yes/No when previewed or printed.\n\nSee examples below:\n\n
--676b-field:CreateCustomFieldsHelp2= بالنسبة للحقول المعدلة (غير الأساسية) تقوم أولا باختيار الحقل الذي تريده. الاختيارات الممكنة هي'BOOLEAN'  (موجب أو سالب)،'DATE'  (تاريخ)، 'DATERANGE' (المدى التاريخي)،'GRID' (شبكة متسامتة)، 'LANGUAGE' (اللغة)،'MULTILINE'  (عدة سطور)، و'STRING' (تسلسل حرفي).\n\nستحتاج لكل حقل معدل رمزا فريدا من نوعه لكي يميزه. يمكن لهذا الرمز أن يكون أية كلمة ماعدا الكلمات التي يستخدمها البرنامج مثل 'author' (الكاتب)،'summary' (الملخص)، 'location' (الموقع) 'title' (العنوان) إلخ، و لا يمكن أن تحتو على مسافات فارغة أو أشكال خاصة. من أمثلة الاختيارات كلمات مثل "جديد1" و "جديد2"، إلخ، أو رموز تحمل مزيد من التفاصيل مثل "اسمالضحية."\n\n ثم تحتاج اسما يتم عرضه بجانب حقلك الجديد. وقد يكون هذا الاسم "اسم الشاهد الأول" مثلا. \n\n تعليقات إضافية \n 1. وثائق XML حساسة لنوع الحروف اللاتينية المستخدمة (كلمة 'WITNESS' ليست ككلمة 'witness'). \n 2. قد تكون علامات التنصيص المستخدمة إما مفردة أو مزدوجة (طالما كانتا من نفس النوع (مثال: كلمة "STRING' هكذا غير صالحة. يجب أن تكون إما 'STRING' أو "STRING")). \n 3. يتم عرض حقل الإثبات أو النفي في صورة مربع اختيار عند التحرير و ككلمتي نعم/لا عند الاستعراض أو الطباعة.\n\nانظر الأمثلة بالأسفل:\n
+#__________________________________=For custom (non-standard) fields, you first select the type of field you want.  The possible choices are 'BOOLEAN', 'DATE', 'DATERANGE', 'DROPDOWN', 'GRID', 'LANGUAGE', 'MESSAGE', 'MULTILINE', and 'STRING'. \n\nFor each custom field you will need a unique identification tag.  This tag can be any word except those already used by the system (eg. 'author', 'summary', 'location', 'title' etc.), and cannot contain spaces or special characters.  Examples of choices are 'custom1', 'custom2', etc, or tags that are more descriptive like 'VictimsName'.\n\nThen you need a label which is displayed next to your custom field.  An example might be 'Name of 1st Witness'.\n\nAdditional Comments\n1. XML is case-sensitive ('Witness' is not the same as 'witness') \n2. Quotes around type name can be single or double as long as they match (e.g. 'STRING" is not valid. It must be 'STRING' or "STRING")\n3. A Boolean field will be displayed as a checkbox when editing and Yes/No when previewed or printed.\n4.  Use "MESSAGE" fields to give guidance on how to enter data, and to create comments/notes that will be displayed in every bulletin.\n\nSee examples below:\n\n
+-da0a-field:CreateCustomFieldsHelp2=بالنسبة للحقول المعدلة (غير الأساسية) تقوم أولا باختيار الحقل الذي تريده. الاختيارات الممكنة هي'BOOLEAN'  (موجب أو سالب)،'DATE'  (تاريخ)، 'DATERANGE' (المدى التاريخي)، 'DROPDOWN'، (إنسدال) 'GRID' (شبكة متسامتة)، 'LANGUAGE' (اللغة)، 'MESSAGE' ، (رسالة) 'MULTILINE' (عدة سطور) و'STRING' (تسلسل حرفي).\n\nستحتاج لكل حقل معدل رمزا فريدا من نوعه لكي يميزه. يمكن لهذا الرمز أن يكون أية كلمة ماعدا الكلمات التي يستخدمها البرنامج مثل 'author' (الكاتب)،'summary' (الملخص)، 'location' (الموقع) 'title' (العنوان) إلخ، و لا يمكن أن تحتو على مسافات فارغة أو أشكال خاصة. من أمثلة الاختيارات كلمات مثل "جديد1" و "جديد2"، إلخ، أو رموز تحمل مزيد من التفاصيل مثل "اسمالضحية."\n\n ثم تحتاج اسما يتم عرضه بجانب حقلك الجديد. وقد يكون هذا الاسم "اسم الشاهد الأول" مثلا. \n\n تعليقات إضافية \n 1. وثائق XML حساسة لنوع الحروف اللاتينية المستخدمة (كلمة 'WITNESS' ليست ككلمة 'witness'). \n 2. قد تكون علامات التنصيص المستخدمة إما مفردة أو مزدوجة (طالما كانتا من نفس النوع (مثال: كلمة "STRING' هكذا غير صالحة. يجب أن تكون إما 'STRING' أو "STRING")). \n 3. يتم عرض حقل الإثبات أو النفي في صورة مربع اختيار عند التحرير و ككلمتي نعم/لا عند الاستعراض أو الطباعة.\n 4. استخدم حقول "MESSAGE" (رسالة) لإعطاء تعليمات عن كيفية إدخال البيانات و إنشاء التعليقات/الملاحظات التي سيتم عرضها في كل نشرة.  \n\n انظر الأمثلة بالأسفل:\n
 
-#__________________________________=<Field type='STRING'>\n<Tag>custom1</Tag>\n<Label>Witness Name</Label>\n</Field>\n\n<Field type='LANGUAGE'>\n<Tag>new2</Tag>\n<Label>Witness Speaks</Label>\n</Field>\n\n<Field type='BOOLEAN'>\n<Tag>new3</Tag>\n<Label>Were guns used?</Label>\n</Field>\n\n<Field type='GRID'>\n<Tag>customgrid</Tag>\n<Label>Victim Information</Label>\n<GridSpecDetails>\n<Column><Label>Name of Victim</Label></Column>\n<Column><Label>Victim Age</Label></Column>\n<Column><Label>Victim Gender</Label></Column>\n<Column><Label>Victim Ethnicity</Label></Column>\n</GridSpecDetails>\n</Field>\n
--c0a8-field:CreateCustomFieldsHelp3=<Field type='STRING'>\n<Tag>جديد1</Tag>\n<Label>اسم الشاهد</Label>\n</Field>\n\n<Field type='LANGUAGE'>\n<Tag>جديد2</Tag>\n<Label>الشاهد يتحدث</Label>\n</Field>\n\n<Field type='BOOLEAN'>\n<Tag>جديد3</Tag>\n<Label> هل تم استخدام أسلحة؟</Label>\n</Field>\n\n<Field type='GRID'>\n<Tag>جدولجديد</Tag>\n<Label> معلومات عن الضحية</Label>\n<GridSpecDetails>\n<Column><Label> اسم الضحية</Label></Column>\n<Column><Label> عمر الضحية</Label></Column>\n<Column><Label> نوع الضحية</Label></Column>\n<Column><Label> عرق الضحية</Label></Column>\n</GridSpecDetails>\n</Field>\n 
+#__________________________________=<Field type='STRING'>\n<Tag>custom1</Tag>\n<Label>Witness Name</Label>\n</Field>\n\n<Field type='LANGUAGE'>\n<Tag>new2</Tag>\n<Label>Witness Speaks</Label>\n</Field>\n\n<Field type='BOOLEAN'>\n<Tag>new3</Tag>\n<Label>Were guns used?</Label>\n</Field>\n\n<Field type='MESSAGE'>\n<Tag>customMessage</Tag>\n<Label>Guidance for Perpetrator Eye Color entry:</Label>\n<Message>If you are unsure of the perpetrator's eye color, please leave this field blank.</Message>\n</Field>\n\n<Field type='DROPDOWN'>\n<Tag>customDropDown</Tag>\n<Label>Perpetrator Eye Color</Label>\n<Choices>\n<Choice>Brown</Choice>\n<Choice>Blue</Choice>\n<Choice>Green</Choice>\n<Choice>Other</Choice>\n</Choices>\n</Field>\n\n<Field type='GRID'>\n<Tag>customgrid</Tag>\n<Label>Victim Information</Label>\n<GridSpecDetails>\n<Column><Label>Name of Victim</Label></Column>\n<Column><Label>Victim Age</Label></Column>\n<Column><Label>Victim Gender</Label></Column>\n<Column><Label>Victim Ethnicity</Label></Column>\n</GridSpecDetails>\n</Field>\n
+-491b-field:CreateCustomFieldsHelp3=<Field type='STRING'>\n<Tag>جديد1</Tag>\n<Label>اسم الشاهد</Label>\n</Field>\n\n<Field type='LANGUAGE'>\n<Tag>جديد2</Tag>\n<Label>الشاهد يتحدث</Label>\n</Field>\n\n<Field type='BOOLEAN'>\n<Tag>جديد3</Tag>\n<Label> هل تم استخدام أسلحة؟</Label>\n</Field>\n\n<Field type='MESSAGE'>\n<Tag>رسالةمعدلة</Tag>\n<Label>تعليمات لتدوين لون عين المتهم:</Label>\n<Message>إذا كنت غير متأكد من لون عين المتهم، لطفا اترك هذا الحقل فارغا.</Message>\n</Field>\n\n<Field type='DROPDOWN'>\n<Tag>قائمةمنسدلةمعدلة</Tag>\n<Label>لون عين المتهم</Label>\n<Choices>\n<Choice>بنية</Choice>\n<Choice>زرقاء</Choice>\n<Choice>خضراء</Choice>\n<Choice>أخرى</Choice>\n</Choices>\n</Field>\n\n<Field type='GRID'>\n<Tag>جدولجديد</Tag>\n<Label> معلومات عن الضحية</Label>\n<GridSpecDetails>\n<Column><Label> اسم الضحية</Label></Column>\n<Column><Label> عمر الضحية</Label></Column>\n<Column><Label> نوع الضحية</Label></Column>\n<Column><Label> عرق الضحية</Label></Column>\n</GridSpecDetails>\n</Field>\n 
 
 #____________________________________=Please enter your new username and password.
 -aec2-field:CreateNewUserNamePassword=لطفا قم بإدخال اسم المستخدم وكلمة المرور 
+
+#_______________________________________=MartusCustomization
+-f3b2-field:CustomizationFileDefaultName=تحويرMartus
+
+#_____________________________________=Customization Template Files
+-9210-field:CustomizationTemplateFiles=ملفات قوالب التحوير
 
 #____________________=Exact Date
 -8a81-field:DateExact=التاريخ الفعلي
@@ -458,8 +475,8 @@
 #__________________________________=LABEL
 -64b8-field:ErrorCustomFieldHeader4=عنوان
 
-#____________________________=There is an error in the custom field definitions. Each problem is identified with the following codes:\n   100 - Required standard field is missing\n   101 - Custom field does not have a correct tag.\n   102 - A previous Tag already exists with this name.\n   103 - Custom field does not have a label.\n   104 - Unrecognized Field Type.\n   105 - A label was found in a standard field.\n   106 - XML Parse Error.\n   107 - Tag contains illegal characters
--943a-field:ErrorCustomFields=توجد مشكلة في تعريفات الحقول المُعدلة. يتم تعريف كل مشكلة بكل من الرموز الآتية:\n  100 – لم يتم العثور على الحقل الأساسي المطلوب\n  101 – الحقل المعدل ليس له رمز صحيح.\n  102 – يوجد رمز سابق بنفس الاسم.\n  103 – الحقل المعدل لا يحمل عنوانا.\n  104 – نوع حقل لم يتم التعرف عليه.  \n  105 – لقد تم العثور على عنوان في الحقل الأساسي.\n  106 – مشكلة تحويل XML.\n  107 – يحتو الرمز على حروف غير مسموح بها
+#____________________________=There is an error in the custom field definitions. Each problem is identified with the following codes:\n   100 - Required standard field is missing\n   101 - Custom field does not have a correct tag.\n   102 - A previous Tag already exists with this name.\n   103 - Custom field does not have a label.\n   104 - Unrecognized Field Type.\n   105 - A label was found in a standard field.\n   106 - XML Parse Error.\n   107 - Tag contains illegal characters.\n   200 - All fields empty.\n   201 - Unrecognized headquarters created this template.\n   202 - Security validation error.\n   203 - File Error.
+-f2cf-field:ErrorCustomFields=توجد مشكلة في تعريفات الحقول المُعدلة. يتم تعريف كل مشكلة بكل من الرموز الآتية:\n  100 – لم يتم العثور على الحقل الأساسي المطلوب\n  101 – الحقل المعدل ليس له رمز صحيح.\n  102 – يوجد رمز سابق بنفس الاسم.\n  103 – الحقل المعدل لا يحمل عنوانا.\n  104 – نوع حقل لم يتم التعرف عليه.  \n  105 – لقد تم العثور على عنوان في الحقل الأساسي.\n  106 – مشكلة تحويل XML.\n  107 – يحتو الرمز على حروف غير مسموح بها\n  200 – جميع الحقول فارغة. \n  201 – مركز رئيسي غير معروف أنشأ هذا القالب. \n  202 – مشكلة تحقق أمني. \n  203 – مشكلة ملف.
 
 #_________________________________________=A previous backup file exists.  You must save each file on its own removable media disk.
 -db93-field:ErrorPreviousBackupShareExists=يوجد ملف مجزأ سابق. يجب عليك حفظ كل ملف على قرص بمفرده. 
@@ -488,11 +505,20 @@
 #______________________________________=This file name should be unique and identifiable to you but we recommend not using your user name.  Each file will be generated with this name and its number sequence.
 -02b6-field:GetShareFileNameDescription=يجب أن يكون اسم هذا الملف فريدا و يسهل عليك معرفته ولكننا لا نوصي باستخدام اسم المستخدم الخاص بك. سيتم إنشاء كل ملف بهذا الاسم بالإضافة إلى رقم الترتيب.
 
+#__________________________=(not currently configured)
+-462b-field:HQNotConfigured=(غير مُهيأ حاليا)
+
 #_________________________=Headquarters
 -6222-field:HQSummaryLabel=المركز الرئيسي
 
+#__________________________=Default Headquarters accounts will be selected for each new bulletin or version.
+-ea13-field:HQsSetAsDefault=سيتم اختيار حسابات المركز الرئيسي التلقائية لكل نشرة أو نسخة جديدة.
+
 #________________________________=These Headquarters accounts are allowed to view the private information in this bulletin, and to send this bulletin to a server on your behalf.
 -2274-field:HQsSetAsProxyUploader=حسابات المركز الرئيسي هذه يُسمح لها بالإطلاع على المعلومات الخاصة بهذه النشرة و بإرسال هذه النشرة إلى الخادم نيابة عنك.
+
+#_______________________________=Selected?
+-9c09-field:HeadQuartersSelected=أُختيرت؟
 
 #_____________________________=Enter questions, details, or other information your organization wants to have answered in future bulletins created.
 -704c-field:HelpDefaultDetails=قم بإدخال أسئلة وتفاصيل ومعلومات أخرى تريد منظمتك إجابة لها في نشرات تقوم بإنشائها في المستقبل.
@@ -526,6 +552,9 @@
 
 #_____________________________=Please enter a name for the file you wish to export.
 -95ed-field:NameOfExportedFile=لطفا قم بإدخال اسما للملف الذي تود تصديره.
+
+#__________________________=No Headquarters accounts selected for this bulletin.
+-2b9f-field:NoHQsConfigured=لم يتم اختيار حسابات مركز رئيسي لهذه النشرة
 
 #___________________________________________=Server Not Available
 -c79c-field:NoServerAvailableProgressMessage=الخادم غير متاح
@@ -782,6 +811,7 @@
 #____________________________________________=By choosing Yes, you will exit Martus.
 -49e1-field:confirmCancelBackupRecoveryeffect=باختيار نعم، سينغلق برنامج Martus. 
 
+
 #___________________________________________=You have chosen to cancel modifying this bulletin.
 -deab-field:confirmCancelModifyBulletincause=لقد اخترت إلغاء تعديل هذه النشرة.
 
@@ -806,8 +836,8 @@
 #_________________________________________=By choosing Yes, you will exit this verification step.
 -5b61-field:confirmCancelShareVerifyeffect=باختيار نعم، سينته البرنامج من خطوة التحقق هذه. 
 
-#_________________________________________=You have chosen to remove your Headquarters account.  Any existing saved bulletins will still be visible by the old Headquarters.  If you want to disallow Headquarters viewing access to previously created Draft bulletins they must be re-saved after revoking the Headquarters.  Any sealed bulletins CANNOT be reset to be non-viewable by the Headquarters.
--6076-field:confirmClearHQInformationcause=لقد اخترت إزالة حساب المركز الرئيسي. ومع ذلك، سيزال هذا الحساب يطلّع على النشرات التي سبق حفظها. إذا أردت أن تمنع المركز الرئيسي من الإطلاع على المسودات التي تم إنشائها مسبقا فيجب عليك إعادة حفظها بعدما تحجب المركز الرئيسي عن رؤيتها. و لن تستطيع حجب أية نشرات مختومة عن إطلاع المركز الرئيسي. 
+#_________________________________________=You have chosen to remove all selected Headquarters accounts.  Any existing saved bulletins will still be visible by the old Headquarters.  If you want to disallow Headquarters viewing access to previously created Draft bulletins they must be re-saved after revoking the Headquarters.  Any sealed bulletins CANNOT be reset to be non-viewable by the Headquarters, except by creating a new version of the bulletin.
+-d335-field:confirmClearHQInformationcause=لقد اخترت إزالة جميع حسابات المركز الرئيسي المختارة. سيزال الحساب القديم يطلّع على النشرات التي سبق حفظها. إذا أردت أن تمنع المركز الرئيسي من الإطلاع على المسودات التي تم إنشائها مسبقا فيجب عليك إعادة حفظها بعدما تحجب المركز الرئيسي عن رؤيتها. و لن تستطيع حجب أية نشرات مختومة عن إطلاع المركز الرئيسي إلا إذا قمت بإنشاء نسخة جديدة من النشرة. 
 
 #__________________________________________=By clicking on Yes, any draft or sealed bulletins saved in the future will no longer be accessible by your Headquarters.
 -4a87-field:confirmClearHQInformationeffect=بنقرك على نعم لن يستطع المركز الرئيسي الوصول إلى أية نشرات يتم حفظها أو ختمها في المستقبل. 
@@ -845,8 +875,8 @@
 #________________________________________=You have chosen to customize the fields that will be used in any new bulletins created by this account.
 -2f98-field:confirmEnterCustomFieldscause=لقد اخترت تعديل الحقول التي سيتم استخدامها في أية نشرات جديدة يقوم هذا الحساب بإنشائها.
 
-#_________________________________________=Customizing fields is an advanced operation, and can be dangerous. You should only proceed if you are certain that you understand the feature.
--1483-field:confirmEnterCustomFieldseffect=عملية تعديل الحقول هي عملية متقدمة، و قد تسبب مشكلات. ينبغي عليك الاستمرار فقط إذا كنت تفهم هذه الخاصية.
+#_________________________________________=Customizing fields is an advanced operation. You should only proceed if you are certain that you understand the feature.
+-518e-field:confirmEnterCustomFieldseffect=عملية تعديل الحقول هي عملية متقدمة. ينبغي عليك الاستمرار فقط إذا كنت تفهم هذه الخاصية.
 
 #_________________________________________________=The file you chose is not part of a key backup set.  These files are named '<name you picked>-#.dat' where # is the sequence number in the disk set previously created.
 -2e41-field:confirmErrorRecoverIvalidFileNamecause= لا يعتبر الملف الذي اخترته أحد الملفات الاحتياطية لشفرة الدخول. تتم تسمية هذه الملفات بهذه الطريقة' dat.#- (الاسم الذي تختاره)' حيث # هو الرقم التسلسلي في مجموعة الأقراص التي أنشأتها مسبقا. 
@@ -865,6 +895,7 @@
 
 #_________________________________________=If you continue with the export, any unknown information will not be exported.
 -232e-field:confirmExportUnknownTagseffect=إذا واصلت التصدير فلن يتم تصدير أية معلومات غير معروفة.
+
 
 #_________________________________________________=A key file already exists for this account.  Do you wish to overwrite it?
 -6829-field:confirmKeyPairFileExistsOverWritecause=يوجد ملف شفرتي دخول بالفعل لهذا الحساب. هل تريد استبداله؟
@@ -992,8 +1023,8 @@
 #_____________________________________________________=Choose Yes to begin the restore process again, No to exit Martus.
 -0e22-field:confirmUnableToRecoverFromBackupFileeffect=باختيار نعم ستبدأ عملية الاسترجاع مرة أخرى. و باختيار "لا" سوف يتم الخروج من Martus.
 
-#_______________________________________=You have chosen to revert to the standard set of Martus fields.
--61a6-field:confirmUndoCustomFieldscause=لقد اخترت التحول لمجموعة حقول Martus الأساسية.
+#_______________________________________=You have chosen to restore the standard set of Martus fields.
+-b1b6-field:confirmUndoCustomFieldscause=لقد اخترت استرجاع مجموعة حقول Martus الأساسية .
 
 #________________________________________=New bulletins created with this account will not have any custom fields.
 -bf33-field:confirmUndoCustomFieldseffect=لن تحتوي النشرات الجديدة التي ينشئها هذا الحساب على أية حقول مُعدّلة.
@@ -1007,8 +1038,8 @@
 #_______________________________________________=The bulletin you are about to create is based on a previous bulletin whose custom fields are different from your current custom fields.  Do you wish to use the original bulletin's custom fields?
 -a6ca-field:confirmUseBulletinsCustomFieldscause=النشرة التي تريد إنشائها تعتمد على نشرة سابقة حقولها المعدلة تختلف عن حقولك المعدلة الحالية. هل تريد استخدام الحقول المعدلة للنشرة الأصلية؟ 
 
-#________________________________________________=Answering Yes will use the old custom fields and all bulletin data.  Answering No will use your current custom fields and copy all similar fields to the new bulletin but you will lose some of the original bulletin's data.
--afbe-field:confirmUseBulletinsCustomFieldseffect= إذا أجبت ب"نعم" فسوف تستخدم الحقول المعدلة القديمة و جميع بيانات النشرة. إذا أجبت ب"لا" فسوف تستخدم حقولك المعدلة الحالية و سيتم نسخ جميع الحقول المشابهة إلى النشرة الجديدة و لكنك ستفقد بعضا من بيانات النشرة الأصلية.
+#________________________________________________=Answering Yes will use the old custom fields and all bulletin data.  Answering No will use your current custom fields and copy all similar fields to the new bulletin but you may lose some of the original bulletin's data.
+-0ed4-field:confirmUseBulletinsCustomFieldseffect=إذا أجبت ب"نعم" فسوف تستخدم الحقول المعدلة القديمة و جميع بيانات النشرة. إذا أجبت ب"لا" فسوف تستخدم حقولك المعدلة الحالية و سيتم نسخ جميع الحقول المشابهة إلى النشرة الجديدة و لكنك قد تفقد بعضا من بيانات النشرة الأصلية. 
 
 #________________________________________________=Warning: acctmap.txt file in your account's packets directory is missing or is corrupt.  This may indicate someone has tried to tamper with your data or could be caused by a hardware error.
 -61cb-field:confirmWarnMissingAccountMapFilecause=تحذير: لقد ضاع أو تم إتلاف ملف acctmap.txt الموجود في مجلد packets بحسابك. يُشير ذلك إلى أن شخصا حاول العبث ببياناتك أو أن هناك مشكلة بمكونات حاسوبك الصلبة.
@@ -1098,13 +1129,14 @@
 -2026-field:eventdate=تاريخ الحدث 
 
 #_________________________=Dates of Event
+
 -a13c-field:eventdaterange=تواريخ الحدث 
 
 #________________________________=Enter the XML representation for the layout of new and modified bulletins.
 -cf9a-field:inputCustomFieldsInfo=قم بإدخال تمثيل XML لنموذج تصميم النشرات الجديدة و المُعدلة.
 
 #______________________________________=
--da39-field:inputExportMyPublicKeyentry=<>
+-da39-field:inputExportMyPublicKeyentry=
 
 #_______________________________=Enter the label you wish to associate with this Headquarters.
 -ba5f-field:inputGetHQLabelentry=قم بإدخال العنوان الذي تريد إطلاقه على هذا المركز الرئيسي.
@@ -1190,6 +1222,13 @@
 #____________________________________________=An unexpected error occurred in generating the key backup files.
 -d237-field:notifyErrorBackingUpKeySharecause=حدثت مشكلة غير متوقعة أثناء تكوين الملفات الاحتياطية لشفرتي الدخول. 
 
+#_________________________________________________________=There was an error saving your template.
+
+-88ed-field:notifyErrorExportingCustomizationTemplatecause=توجد مشكلة في حفظ قالبك.
+
+#_________________________________________________________=There was an error importing this template.
+-4a9a-field:notifyErrorImportingCustomizationTemplatecause= توجد مشكلة في استيراد هذا القالب.
+
 #______________________________________=An error prevented the file from being read.
 -1ad3-field:notifyErrorReadingFilecause=توجد مشكلة في قراءة الملف 
 
@@ -1229,6 +1268,9 @@
 #_________________________________________=To export bulletins, select them first, and then perform the export operation.
 -944e-field:notifyExportZeroBulletinscause=لتصدير نشرات، قم باختيارها أولا ثم قم بإجراء عملية التصدير.
 
+#___________________________________________________________=Successfully exported customization template.
+-aed9-field:notifyExportingCustomizationTemplateSuccesscause=لقد تم تصدير قالب التحوير بنجاح.
+
 #___________________________________________=The original files have not been deleted from your computer, you must delete them manually if you wish.
 -8965-field:notifyFilesWillNotBeDeletedcause=لم يتم حذف الملفات الأصلية من حاسوبك، يجب عليك حذفهم يدويا إن شئت.
 
@@ -1244,11 +1286,20 @@
 #_______________________________________=You have already added this account to your Headquarters list.
 -0785-field:notifyHQKeyAlradyExistscause= لقد قمت بإضافة هذا الحساب بالفعل إلى قائمة مركزك الرئيسي.
 
+#_______________________________________________=The Headquarters label you entered is already assigned to another Headquarters account.  Please use a different label.
+-91ca-field:notifyHeadquarterLabelDuplicatecause=اسم المركز الرئيسي الذي أدخلته هو مخصص بالفعل لحساب مركز رئيسي آخر. لطفا استخدم اسما آخر.
+
+#___________________________________________________________=Successfully imported customization template.
+-c78c-field:notifyImportingCustomizationTemplateSuccesscause= لقد تم استيراد قالب التحوير بنجاح.
+
 #_______________________________________=You must have a server public code.
 -2fde-field:notifyInvalidServerCodecause=يجب أن يكون لديك كود عام للخادم. 
 
 #_______________________________________=You must have a server name or IP address.
 -984b-field:notifyInvalidServerNamecause=يجب أن يكون لديك اسم للخادم أو عنوان IP له.
+
+#___________________________________=Please select a Headquarters first.
+-1d19-field:notifyNoHQsSelectedcause=لطفا قم باختيار مركز رئيسي أولا.
 
 #________________________________________=Operation completed.
 -1a65-field:notifyOperationCompletedcause=تم إنجاز العملية 
@@ -1319,8 +1370,8 @@
 #__________________________________=Sorry, no bulletins were found.
 -5bd8-field:notifySearchFailedcause=نأسف، لم يتم العثور على نشرات.
 
-#_________________________________=Number of bulletins found = 
--f301-field:notifySearchFoundcause=عدد النشرات التي تم العثور عليها=
+#_________________________________=#N# bulletins matched the search, and have been added to the Search Results folder.\n Note that both current and earlier versions of each bulletin were searched.
+-6569-field:notifySearchFoundcause= عدد #N# نشرات وافق البحث، و تم إضافته إلى مجلد نتائج البحث. \nلاحظ أن كلا من النسخ الحالية و السابقة لكل نشرة قد تم بحثهم.
 
 #_____________________________________=The Server Public Code does not match the one you entered.
 -efe3-field:notifyServerCodeWrongcause= الكود العام للخادم لا يضاهي الكود الذي أدخلته.
@@ -1448,8 +1499,8 @@
 #________________=Title
 -768e-field:title=العنوان 
 
-#_____________________________=Arabic 2.6
--26a2-field:translationVersion=2.6  العربية
+#_____________________________=Arabic 2.7
+-1d90-field:translationVersion=2.7  العربية
 
 #___________________=Username
 -84c2-field:username=اسم المستخدم 
@@ -1475,14 +1526,15 @@
 #______________________________________=You have chosen to permanently delete a bulletin from the Discarded Bulletins folder. Even if this bulletin was recently cut or copied, you will not be able to paste it. If this bulletin has already been sent to a server, it will remain on the server. This action will only delete it from this computer.
 -06b6-field:warningDeleteSingleBulletin= لقد اخترت حذف نشرة بصورة نهائية من مجلد النشرات المُلغاة. إذا كنت قد نسخت أو قصصت تلك النشرة حديثا لن يمكنك لصقها بعد ذلك. إذا كان قد تم إرسالها إلى خادم، فسوف تبقى على الخادم. سوف يحذف هذا الفعل تلك النشرة من حاسوبك فقط.
 
+
 #________________________________________________=NOTE: A copy of this bulletin exists in one or more other folders, and those copies will not be removed.
 -c4bc-field:warningDeleteSingleBulletinWithCopies= ملحوظة: توجد نسخة من هذه النشرة في مجلد آخر أو أكثر. لن تتم إزالة هذه النسخ.
 
 #____________________________________________=WARNING: This bulletin has not been sent to a server since it was last modified. Deleting it will prevent the latest changes from being backed up.
 -523e-field:warningDeleteSingleUnsentBulletin= تحذير: لم يتم إرسال هذه النشرة إلى الخادم منذ أن تم إجراء تعديل عليها آخر مرة. سوف يؤد حذفها إلى الحيلولة دون النسخ الاحتياطي لآخر التعديلات التي أجريت عليها.
 
-#_______________________________________=WARNING:  This translation was not created by the Martus team, and therefore may not be trustworthy.\nIf you only want to use official translations then exit Martus, remove the file #UseUnofficialTranslationFiles# from your Martus directory, and restart Martus.\n\n
--c48e-field:warningUnofficialTranslation= تحذير: لم يقم فريق Martus بهذه الترجمة و لذا فقد لا يُعتد بها.\n إذا أردت أن تستخدم ترجمات رسمية، قم بالخروج من Martus ثم قم بإزالة الملف #UseUnofficialTranslationFiles# من مجلد Martus ثم أعد تشغيل البرنامج من جديد.
+#_______________________________________=WARNING:  This translation was not created by the Martus team, and therefore may not be trustworthy.  If you only want to use official translations then exit Martus, remove the file #UseUnofficialTranslationFiles# from your Martus directory, and restart Martus.
+-711f-field:warningUnofficialTranslation= تحذير: لم يقم فريق Martus بهذه الترجمة و لذا فقد لا يُعتد بها.\n إذا أردت أن تستخدم ترجمات رسمية، قم بالخروج من Martus ثم قم بإزالة الملف #UseUnofficialTranslationFiles# من مجلد Martus ثم أعد تشغيل البرنامج من جديد. 
 
 #__________________=Web Page
 -0163-field:webpage=صفحة ويب
@@ -1553,8 +1605,8 @@
 #________________=Spanish
 -8df7-language:es=الأسبانية 
 
-#________________=Farsi, Dari
--e768-language:fa=الفارسية، الدارية 
+#________________=Persian (Farsi, Dari)
+-10c9-language:fa= الإيرانية (الفارسية، الدارية)
 
 #________________=French
 -4438-language:fr=الفرنسية 
@@ -1940,11 +1992,17 @@
 #___________________________________=Export Bulletins
 -a86c-wintitle:ExportBulletinsSaveAs=تصدير نشرات 
 
+#_______________________________________________=Export Customization Template
+-5318-wintitle:ExportCustomizationTemplateSaveAs=تصدير قالب التحوير 
+
 #__________________=Help on Martus
 -b414-wintitle:Help=تعليمات عن Martus
 
 #________________________________=Help on Bulletin Details Field Default Content
 -96cb-wintitle:HelpDefaultDetails=تعليمات عن المحتوى التلقائي لحقل التفاصيل بالنشرة
+
+#_____________________________________________=Import Customization Template
+-0188-wintitle:ImportCustomizationTemplateOpen=استيراد قالب التحوير 
 
 #_______________________________=Import Headquarters Public Account Id File
 -9300-wintitle:ImportHQPublicKey=استيراد ملف هوية الحساب العام للمركز الرئيسي
@@ -2027,8 +2085,8 @@
 #______________________________=Server Compliance Statement
 -20f8-wintitle:ServerCompliance=بيان توافق الخادم 
 
-#________________________=Server News
--d231-wintitle:ServerNews=أخبار الخادم  
+#________________________=Server News: Message #CurrentNewsItem# of #MaxNewsItems#
+-7177-wintitle:ServerNews=أخبار الخادم: رسالة #CurrentNewsItem# من #MaxNewsItems#
 
 #____________________________________=Server Configuration Results
 -788c-wintitle:ServerSelectionResults=نتائج تهيئة الخادم 
@@ -2258,6 +2316,7 @@
 #____________________________________________=Delete Drafts From Server
 -ec04-wintitle:notifyDeleteServerDraftsFailed=حذف مسودات من الخادم
 
+
 #__________________________________________=Delete Drafts From Server
 -ec04-wintitle:notifyDeleteServerDraftsNone=حذف مسودات من الخادم
 
@@ -2275,6 +2334,12 @@
 
 #__________________________________________=Error Backing Up Key
 -ee40-wintitle:notifyErrorBackingUpKeyShare=حدثت مشكلة أثناء النسخ الاحتياطي لشفرتي الدخول 
+
+#_______________________________________________________=Error Exporting Template
+-f4cc-wintitle:notifyErrorExportingCustomizationTemplate=حدثت مشكلة في تصدير القالب
+
+#_______________________________________________________=Error Importing Template
+-4f1a-wintitle:notifyErrorImportingCustomizationTemplate= حدثت مشكلة في استيراد القالب 
 
 #____________________________________=Error Reading File
 -73ad-wintitle:notifyErrorReadingFile=حدثت مشكلة في قراءة الملف 
@@ -2300,6 +2365,7 @@
 #____________________________________=Error Writing File
 -fabf-wintitle:notifyErrorWritingFile=حدثت مشكلة في كتابة الملف
 
+
 #_________________________________________=Server Removed
 -1820-wintitle:notifyExistingServerRemoved=تمت إزالة الخادم 
 
@@ -2314,6 +2380,9 @@
 
 #_______________________________________=No Bulletins Selected
 -c1d6-wintitle:notifyExportZeroBulletins=لم يتم اختيار أية نشرة 
+
+#_________________________________________________________=Exporting Template Succeeded
+-b648-wintitle:notifyExportingCustomizationTemplateSuccess=تم تصدير القالب بنجاح
 
 #_________________________________________=Files Not Deleted
 -a001-wintitle:notifyFilesWillNotBeDeleted=لن يتم حذف الملفات 
@@ -2330,11 +2399,20 @@
 #_____________________________________=Headquarters Key Already Exists
 -03e9-wintitle:notifyHQKeyAlradyExists= شفرة المركز الرئيسي موجودة بالفعل 
 
+#_____________________________________________=Headquarters Label Invalid
+-106b-wintitle:notifyHeadquarterLabelDuplicate=اسم المركز الرئيسي غير صالح
+
+#_________________________________________________________=Importing Template Succeeded
+-ac8c-wintitle:notifyImportingCustomizationTemplateSuccess= تم استيراد القالب بنجاح
+
 #_____________________________________=Invalid Server Public Code
 -08ad-wintitle:notifyInvalidServerCode=كود عام للخادم غير صحيح
 
 #_____________________________________=Invalid Server Name or IP Address
 -3376-wintitle:notifyInvalidServerName=اسم خادم أو عنوان IP غير صحيح
+
+#_________________________________=No Headquarters Selected
+-0c30-wintitle:notifyNoHQsSelected=لم يتم اختيار مركز رئيسي
 
 #______________________________________=Finished
 -355b-wintitle:notifyOperationCompleted=تم الانتهاء من الإجراء 
