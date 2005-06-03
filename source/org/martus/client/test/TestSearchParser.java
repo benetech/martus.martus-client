@@ -65,6 +65,16 @@ public class TestSearchParser extends TestCaseEnhanced
     		toTokenize += "   " + words[i];
     	verifyTokenized(words, englishParser.tokenize(toTokenize));
     }
+    
+    public void testTokenizedQuotedString()
+    {
+    	String[] tokens = {"this", "\"here or there\"", "that", };
+    	String toTokenize = "";
+    	for(int i=0; i < tokens.length; ++i)
+    		toTokenize += tokens[i] + " ";
+    	verifyTokenized(tokens, englishParser.tokenize(toTokenize));
+    	
+    }
 
 	private void verifyTokenized(String[] words, TokenList result)
 	{

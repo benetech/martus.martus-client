@@ -43,12 +43,21 @@ public class SearchParser
 	public TokenList tokenize(String expression)
 	{
 		char[] toTokenize = expression.toCharArray();
+		
+		boolean inQuotedString = false;
+		
 		TokenList result = new TokenList();
 		StringBuffer thisToken = new StringBuffer();
 		for(int i = 0; i < expression.length(); ++i)
 		{
 			char thisCharacter = toTokenize[i];
-			if(Character.isSpaceChar(thisCharacter))
+			
+			if(thisCharacter == '"')
+			{
+				inQuotedString = !inQuotedString;
+			}
+			
+			if(!inQuotedString && Character.isSpaceChar(thisCharacter))
 			{
 				result.add(new String(thisToken));
 				thisToken.setLength(0);
