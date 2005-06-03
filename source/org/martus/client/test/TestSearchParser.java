@@ -158,6 +158,16 @@ public class TestSearchParser extends TestCaseEnhanced
 		assertEquals("a", ab.getLeft().getValue());
 		assertEquals("b", ab.getRight().getValue());
 	}
+	
+	public void testSpecificField()
+	{
+		SearchTreeNode all = englishParser.parse("testing");
+		assertNull("not searching all fields?", all.getField());
+		
+		SearchTreeNode name = englishParser.parse("name:smith");
+		assertEquals("not searching name?", "name", name.getField());
+		assertEquals("smith", name.getValue());
+	}
 
 /*	
  * This test won't be valid until we support parens

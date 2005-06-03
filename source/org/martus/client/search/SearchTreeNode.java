@@ -35,7 +35,16 @@ public class SearchTreeNode
 	public SearchTreeNode(String value)
 	{
 		nodeOp = VALUE;
-		nodeValue = value.trim();
+		int colonAt = value.indexOf(':');
+		if(colonAt >= 0)
+		{
+			fieldTag = value.substring(0, colonAt);
+			nodeValue = value.substring(colonAt + 1);
+		}
+		else
+		{
+			nodeValue = value;
+		}
 	}
 	
 	public SearchTreeNode(int op, SearchTreeNode left, SearchTreeNode right)
@@ -43,6 +52,11 @@ public class SearchTreeNode
 		nodeOp = op;
 		nodeLeft = left;
 		nodeRight = right;
+	}
+	
+	public String getField()
+	{
+		return fieldTag;
 	}
 
 	public String getValue()
@@ -66,6 +80,7 @@ public class SearchTreeNode
 	}
 
 	private String nodeValue;
+	private String fieldTag;
 	private int nodeOp;
 	private SearchTreeNode nodeLeft;
 	private SearchTreeNode nodeRight;

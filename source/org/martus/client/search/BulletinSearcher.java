@@ -40,13 +40,7 @@ public class BulletinSearcher
 	public boolean doesMatch(Bulletin b)
 	{
 		if(node.getOperation() == SearchTreeNode.VALUE)
-		{
-			if(b.contains(node.getValue()))
-			{
-				return b.withinDates(beginDate, endDate);
-			}
-			return false;
-		}
+			return doesValueMatch(b);
 
 		BulletinSearcher left = new BulletinSearcher(node.getLeft(), beginDate, endDate);
 		BulletinSearcher right = new BulletinSearcher(node.getRight(), beginDate, endDate);
@@ -58,6 +52,19 @@ public class BulletinSearcher
 			return left.doesMatch(b) || right.doesMatch(b);
 
 		return false;
+	}
+
+	private boolean doesValueMatch(Bulletin b)
+	{
+		String fieldToSearch = node.getField();
+		String searchForValue = node.getValue().toLowerCase();
+		boolean valueMatched = false;
+		if(fieldToSearch == null)
+			valueMatched = b.contains(searchForValue);
+		else
+			valueMatched = b.doesFieldContain(fieldToSearch, searchForValue);
+
+		return (valueMatched && b.withinDates(beginDate, endDate));
 	}
 
 	SearchTreeNode node;
