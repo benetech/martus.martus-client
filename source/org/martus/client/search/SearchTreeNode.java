@@ -36,7 +36,7 @@ public class SearchTreeNode
 	{
 		nodeOp = VALUE;
 		int colonAt = value.indexOf(':');
-		if(colonAt >= 0)
+		if(!value.startsWith("\"") && colonAt >= 0)
 		{
 			fieldTag = value.substring(0, colonAt);
 			nodeValue = value.substring(colonAt + 1);

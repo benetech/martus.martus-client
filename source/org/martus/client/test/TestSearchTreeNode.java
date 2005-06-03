@@ -56,6 +56,10 @@ public class TestSearchTreeNode extends TestCaseEnhanced
     	
     	SearchTreeNode withField = new SearchTreeNode("field:\"" + phrase + "\"");
     	assertEquals("with field parsed wrong?", phrase, withField.getValue());
+    	
+    	String thisThat = "this:that";
+    	SearchTreeNode quotedColon = new SearchTreeNode("\"" + thisThat + "\"");
+    	assertEquals("split quoted string?", thisThat, quotedColon.getValue());
     }
 
     public void testOpNode()
