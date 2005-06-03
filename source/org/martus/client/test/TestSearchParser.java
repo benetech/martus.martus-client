@@ -140,6 +140,14 @@ public class TestSearchParser extends TestCaseEnhanced
 		assertEquals("c", abc.getRight().getValue());
 
 	}
+	
+	public void testMultipleWords()
+	{
+		SearchTreeNode ab = englishParser.parse("a b");
+		assertEquals("rootNode", SearchTreeNode.AND, ab.getOperation());
+		assertEquals("a", ab.getLeft().getValue());
+		assertEquals("b", ab.getRight().getValue());
+	}
 
 /*	
  * This test won't be valid until we support parens
