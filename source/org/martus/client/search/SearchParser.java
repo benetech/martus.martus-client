@@ -26,6 +26,7 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.search;
 
 
+
 public class SearchParser
 {
 	public static SearchParser createEnglishParser()
@@ -35,91 +36,84 @@ public class SearchParser
 
 	public SearchParser(String andKeyword, String orKeyword)
 	{
-		andKeywords = new String[] {spacesAround(andKeyword), ENGLISH_AND_STRING};
-		orKeywords = new String[] {spacesAround(orKeyword), ENGLISH_OR_STRING};
+		andKeywords = new String[] {andKeyword, ENGLISH_AND_KEYWORD};
+		orKeywords = new String[] {orKeyword, ENGLISH_OR_KEYWORD};
+	}
+	
+	public TokenList tokenize(String expression)
+	{
+		char[] toTokenize = expression.toCharArray();
+		TokenList result = new TokenList();
+		StringBuffer thisToken = new StringBuffer();
+		for(int i = 0; i < expression.length(); ++i)
+		{
+			char thisCharacter = toTokenize[i];
+			if(Character.isSpaceChar(thisCharacter))
+			{
+				result.add(new String(thisToken));
+				thisToken.setLength(0);
+			}
+			else
+			{
+				thisToken.append(thisCharacter);
+			}
+		}
+		result.add(new String(thisToken));
+
+		return result;
 	}
 
 	public SearchTreeNode parse(String expression)
 	{
-		SearchTreeNode rootNode = new SearchTreeNode(expression);
-		recursiveParse(rootNode);
-		return rootNode;
-	}
-
-	private void recursiveParse(SearchTreeNode node)
-	{
-		KeywordFinder finder = new KeywordFinder(node.getValue());
-
-		int newOp = SearchTreeNode.OR;
-		if(!finder.findFirstKeyword(orKeywords))
+		int nextOp = SearchTreeNode.AND;
+		SearchTreeNode left = null;
+		
+		TokenList tokens = tokenize(expression);
+		for(int i=0; i < tokens.size(); ++i)
 		{
-			newOp = SearchTreeNode.AND;
-			finder.findFirstKeyword(andKeywords);
+			String thisToken = tokens.get(i);
+			if(isKeyword(thisToken, andKeywords))
+			{
+				continue;
+			}
+			else if(isKeyword(thisToken, orKeywords))
+			{
+				nextOp = SearchTreeNode.OR;
+				continue;
+			}
+			
+			SearchTreeNode thisNode = new SearchTreeNode(thisToken);
+			
+			if(left == null)
+			{
+				left = thisNode;
+			}
+			else
+			{
+				SearchTreeNode right = thisNode;
+				left = new SearchTreeNode(nextOp, left, right);
+				nextOp = SearchTreeNode.AND;
+			}
 		}
-
-		if(finder.foundMatch())
-		{
-			node.convertToOp(newOp, finder.getLeftText(), finder.getRightText());
-			recursiveParse(node.getLeft());
-			recursiveParse(node.getRight());
-		}
+		
+		if(left == null)
+			left = new SearchTreeNode("");
+		
+		return left;
 	}
-
-	private static String spacesAround(String andKeyword)
+	
+	public boolean isKeyword(String candidate, String[] keywords)
 	{
-		return " " + andKeyword + " ";
+		String comparableCandidate = candidate.toLowerCase();
+		for(int i=0; i < keywords.length; ++i)
+			if(comparableCandidate.equals(keywords[i]))
+				return true;
+		
+		return false;
 	}
 
 	private static final String ENGLISH_AND_KEYWORD = "and";
 	private static final String ENGLISH_OR_KEYWORD = "or";
-	private static final String ENGLISH_AND_STRING = spacesAround(ENGLISH_AND_KEYWORD);
-	private static final String ENGLISH_OR_STRING = spacesAround(ENGLISH_OR_KEYWORD);
 	private final String[] orKeywords;
 	private final String[] andKeywords;
-}
-
-class KeywordFinder
-{
-	KeywordFinder(String textToSearch)
-	{
-		text = textToSearch.toLowerCase();
-		foundAt = -1;
-	}
-	
-	boolean findFirstKeyword(String[] keywords)
-	{
-		boolean foundOne = false;
-		for(int i=0; i < keywords.length; ++i)
-		{
-			String thisKeyword = keywords[i];
-			int at = text.indexOf(thisKeyword);
-			if(at >= 0 && (foundAt < 0 || at < foundAt) )
-			{
-				foundOne = true;
-				foundAt = at;
-				foundWord = thisKeyword;
-			}
-		}
-		
-		return foundOne;
-	}
-
-	boolean foundMatch()
-	{
-		return (foundAt >= 0);
-	}
-	
-	String getLeftText()
-	{
-		return text.substring(0, foundAt);
-	}
-	
-	String getRightText()
-	{
-		return text.substring(foundAt + foundWord.length(), text.length());
-	}
-	
-	private String text;
-	private int foundAt;
-	private String foundWord;
 }

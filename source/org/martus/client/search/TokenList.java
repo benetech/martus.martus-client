@@ -1,7 +1,7 @@
 /*
 
 The Martus(tm) free, social justice documentation and
-monitoring software. Copyright (C) 2001-2004, Beneficent
+monitoring software. Copyright (C) 2005, Beneficent
 Technology, Inc. (Benetech).
 
 Martus is free software; you can redistribute it and/or
@@ -26,47 +26,33 @@ Boston, MA 02111-1307, USA.
 
 package org.martus.client.search;
 
-public class SearchTreeNode
-{
-	public final static int VALUE = 0;
-	public final static int OR = 1;
-	public final static int AND = 2;
+import java.util.Vector;
 
-	public SearchTreeNode(String value)
+public class TokenList
+{
+	public TokenList()
 	{
-		nodeOp = VALUE;
-		nodeValue = value.trim();
+		tokens = new Vector();
 	}
 	
-	public SearchTreeNode(int op, SearchTreeNode left, SearchTreeNode right)
+	public void add(String tokenString)
 	{
-		nodeOp = op;
-		nodeLeft = left;
-		nodeRight = right;
+		if(tokenString.length() == 0)
+			return;
+		
+		tokens.add(tokenString);
 	}
-
-	public String getValue()
+	
+	public int size()
 	{
-		return nodeValue;
+		return tokens.size();
 	}
-
-	public int getOperation()
+	
+	public String get(int index)
 	{
-		return nodeOp;
+		return (String)tokens.get(index);
 	}
-
-	public SearchTreeNode getLeft()
-	{
-		return nodeLeft;
-	}
-
-	public SearchTreeNode getRight()
-	{
-		return nodeRight;
-	}
-
-	private String nodeValue;
-	private int nodeOp;
-	private SearchTreeNode nodeLeft;
-	private SearchTreeNode nodeRight;
+	
+	Vector tokens;
 }
+

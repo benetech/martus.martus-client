@@ -28,7 +28,8 @@ package org.martus.client.test;
 
 import org.martus.client.search.SearchParser;
 import org.martus.client.search.SearchTreeNode;
-import org.martus.util.*;
+import org.martus.client.search.TokenList;
+import org.martus.util.TestCaseEnhanced;
 
 public class TestSearchParser extends TestCaseEnhanced
 {
@@ -36,27 +37,66 @@ public class TestSearchParser extends TestCaseEnhanced
 	{
         super(name);
     }
+    
+    public void setUp()
+    {
+		englishParser = SearchParser.createEnglishParser();
+    }
+    
+    public void testTokenizeEmpty()
+    {
+    	assertEquals("not empty?", 0, englishParser.tokenize("").size());
+    }
+    
+    public void testTokenizeTrailingSpaces()
+    {
+    	String[]  words = {"red", "green", "blue", };
+    	String toTokenize = "";
+    	for(int i=0; i < words.length; ++i)
+    		toTokenize += words[i] + "   ";
+    	verifyTokenized(words, englishParser.tokenize(toTokenize));
+    }
 
-	public void testSimpleSearch()
+    public void testTokenizeLeadingSpaces()
+    {
+    	String[]  words = {"red", "green", "blue", };
+    	String toTokenize = "";
+    	for(int i=0; i < words.length; ++i)
+    		toTokenize += "   " + words[i];
+    	verifyTokenized(words, englishParser.tokenize(toTokenize));
+    }
+
+	private void verifyTokenized(String[] words, TokenList result)
 	{
-		SearchParser parser = SearchParser.createEnglishParser();
-		SearchTreeNode rootNode = parser.parse("blah");
+		assertEquals(3, result.size());
+    	for(int i=0; i < words.length; ++i)
+    		assertEquals(words[i], result.get(i));
+	}
+    
+
+    public void testParseEmpty()
+    {
+    	SearchTreeNode rootNode = englishParser.parse("");
+    	assertEquals("not empty?", "", rootNode.getValue());
+    }
+    
+    public void testSimpleSearch()
+	{
+		SearchTreeNode rootNode = englishParser.parse("blah");
 		assertNotNull("Null root", rootNode);
 		assertEquals(SearchTreeNode.VALUE, rootNode.getOperation());
 	}
 	
 	public void testLowerCase()
 	{
-		SearchParser parser = SearchParser.createEnglishParser();
-		SearchTreeNode rootNode = parser.parse("this OR that");
+		SearchTreeNode rootNode = englishParser.parse("this OR that");
 		assertNotNull("Null root", rootNode);
 		assertEquals(SearchTreeNode.OR, rootNode.getOperation());
 	}
 
 	public void testSimpleOr()
 	{
-		SearchParser parser = SearchParser.createEnglishParser();
-		SearchTreeNode rootNode = parser.parse("this or that");
+		SearchTreeNode rootNode = englishParser.parse("this or that");
 		assertNotNull("Null root", rootNode);
 		assertEquals(SearchTreeNode.OR, rootNode.getOperation());
 
@@ -71,8 +111,7 @@ public class TestSearchParser extends TestCaseEnhanced
 
 	public void testSimpleAnd()
 	{
-		SearchParser parser = SearchParser.createEnglishParser();
-		SearchTreeNode rootNode = parser.parse(" tweedledee  and  tweedledum ");
+		SearchTreeNode rootNode = englishParser.parse(" tweedledee  and  tweedledum ");
 		assertNotNull("Null root", rootNode);
 		assertEquals(SearchTreeNode.AND, rootNode.getOperation());
 
@@ -87,25 +126,28 @@ public class TestSearchParser extends TestCaseEnhanced
 
 	public void testComplex()
 	{
-		SearchParser parser = SearchParser.createEnglishParser();
-		// a AND (b AND c)
-		SearchTreeNode abc = parser.parse("a and b and c");
+		// (a AND b) AND c
+		SearchTreeNode abc = englishParser.parse("a and b and c");
 		assertNotNull("Null root", abc);
 		assertEquals("rootNode", SearchTreeNode.AND, abc.getOperation());
-		assertEquals("a", abc.getLeft().getValue());
+		
+		SearchTreeNode ab = abc.getLeft();
+		assertNotNull("root Null left", ab);
+		assertEquals("ab", SearchTreeNode.AND, ab.getOperation());
+		assertEquals("a", ab.getLeft().getValue());
+		assertEquals("b", ab.getRight().getValue());
 
-		SearchTreeNode bc = abc.getRight();
-		assertNotNull("root Null left", bc);
-		assertEquals("bc", SearchTreeNode.AND, bc.getOperation());
-		assertEquals("b", bc.getLeft().getValue());
-		assertEquals("c", bc.getRight().getValue());
+		assertEquals("c", abc.getRight().getValue());
+
 	}
 
-	public void testReallyComplex()
+/*	
+ * This test won't be valid until we support parens
+ * 
+ * public void testReallyComplex()
 	{
-		SearchParser parser = SearchParser.createEnglishParser();
-		// (a and b) OR ( ( (c AND (d and e) OR f)
-		SearchTreeNode rootNode = parser.parse("a and b or c and d and e or f");
+		// (a and b) OR (c AND (d and e) OR f)
+		SearchTreeNode rootNode = englishParser.parse("(a b) or (c (d e) or f)");
 		assertNotNull("Null root", rootNode);
 		assertEquals("rootNode", SearchTreeNode.OR, rootNode.getOperation());
 
@@ -131,21 +173,22 @@ public class TestSearchParser extends TestCaseEnhanced
 		assertEquals("d", de.getLeft().getValue());
 		assertEquals("e", de.getRight().getValue());
 	}
-
+*/
 	public void testSpanish()
 	{
-		// a OR (b AND c)
+		// (a OR b) AND c
 		SearchParser parser = new SearchParser("y", "o");
 		SearchTreeNode abc = parser.parse("a o b y c");
 		assertNotNull("Null root", abc);
-		assertEquals("rootNode", SearchTreeNode.OR, abc.getOperation());
-		assertEquals("a", abc.getLeft().getValue());
+		assertEquals("rootNode", SearchTreeNode.AND, abc.getOperation());
 
-		SearchTreeNode bc = abc.getRight();
-		assertNotNull("root Null left", bc);
-		assertEquals("bc", SearchTreeNode.AND, bc.getOperation());
-		assertEquals("b", bc.getLeft().getValue());
-		assertEquals("c", bc.getRight().getValue());
+		SearchTreeNode ab = abc.getLeft();
+		assertNotNull("root Null left", ab);
+		assertEquals("ab", SearchTreeNode.OR, ab.getOperation());
+		assertEquals("a", ab.getLeft().getValue());
+		assertEquals("b", ab.getRight().getValue());
+
+		assertEquals("c", abc.getRight().getValue());
 	}
 	
 	public void testEnglishAndAndOrAlwaysWork()
@@ -161,4 +204,6 @@ public class TestSearchParser extends TestCaseEnhanced
 		assertEquals("'and' not OR?", SearchTreeNode.AND, and.getOperation());
 		
 	}
+	
+	SearchParser englishParser;
 }

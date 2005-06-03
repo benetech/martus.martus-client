@@ -47,30 +47,19 @@ public class TestSearchTreeNode extends TestCaseEnhanced
 		assertEquals("stripped", node.getValue());
     }
 
-    public void testOrNode()
+    public void testOpNode()
     {
-		SearchTreeNode node = new SearchTreeNode("text");
-
-		assertEquals("text", node.getValue());
-		node.convertToOr("left", "right");
-		assertEquals(SearchTreeNode.OR, node.getOperation());
-		assertNull("Or clears value", node.getValue());
-
-		assertNotNull("Left", node.getLeft());
-		assertNotNull("Right", node.getRight());
-
-		assertEquals("Left", "left", node.getLeft().getValue());
-		assertEquals("Right", "right", node.getRight().getValue());
+		verifyOpNodeCreation(SearchTreeNode.OR, "or");
+		verifyOpNodeCreation(SearchTreeNode.AND, "and");
 	}
 
-    public void testAndNode()
-    {
-		SearchTreeNode node = new SearchTreeNode("text");
-
-		assertEquals("text", node.getValue());
-		node.convertToAnd("left", "right");
-		assertEquals(SearchTreeNode.AND, node.getOperation());
-		assertNull("Or clears value", node.getValue());
+	private void verifyOpNodeCreation(int op, String opName)
+	{
+		SearchTreeNode left = new SearchTreeNode("left");
+		SearchTreeNode right = new SearchTreeNode("right");
+		SearchTreeNode node = new SearchTreeNode(op, left, right);
+		assertEquals(op, node.getOperation());
+		assertNull(opName + " didn't clear value?", node.getValue());
 
 		assertNotNull("Left", node.getLeft());
 		assertNotNull("Right", node.getRight());
