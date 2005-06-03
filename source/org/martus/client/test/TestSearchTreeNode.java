@@ -61,6 +61,33 @@ public class TestSearchTreeNode extends TestCaseEnhanced
     	SearchTreeNode quotedColon = new SearchTreeNode("\"" + thisThat + "\"");
     	assertEquals("split quoted string?", thisThat, quotedColon.getValue());
     }
+    
+    public void testComparisons()
+    {
+    	String field = "field";
+    	String basicValue = "stuff";
+
+    	assertEquals("thought it was a comparison op?", "", SearchTreeNode.getComparisonOp("one"));
+    	SearchTreeNode noOp = new SearchTreeNode(field + ":" + basicValue);
+    	assertEquals("wrong default op?", SearchTreeNode.CONTAINS_STRING, noOp.getComparisonOperator());
+    	
+    	SearchTreeNode opWithoutField = new SearchTreeNode(">" + basicValue);
+    	assertEquals("allowed compareop without field?", SearchTreeNode.CONTAINS_STRING, opWithoutField.getComparisonOperator());
+
+    	String[] comparisonOps = {">", ">=", "<", "<=", };
+    	int[] comparisonOpValues = {
+    		SearchTreeNode.GREATER, 
+    		SearchTreeNode.GREATER_EQUAL,
+    		SearchTreeNode.LESS, 
+    		SearchTreeNode.LESS_EQUAL,
+    	};
+    	for(int i=0; i < comparisonOps.length; ++i)
+    	{
+    		SearchTreeNode node = new SearchTreeNode(field + ":" + comparisonOps[i] + basicValue);
+    		assertEquals("wrong compare op value?", comparisonOpValues[i], node.getComparisonOperator());
+    		assertEquals("didn't strip op?", basicValue, node.getValue());
+    	}
+    }
 
     public void testOpNode()
     {

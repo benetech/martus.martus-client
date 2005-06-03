@@ -71,6 +71,28 @@ public class TestBulletinSearcher extends TestCaseEnhanced
 		assertFalse("found in wrong field?", wrongField.doesMatch(b));
 	}
 
+	public void testDoesMatchComparisons() throws Exception
+	{
+		MartusCrypto security = MockMartusSecurity.createClient();
+		Bulletin b = new Bulletin(security);
+
+		String beginDate ="1900-01-01";
+		String endDate = "2099-12-31";
+		String fieldToSearch = Bulletin.TAGLOCATION;
+		String otherField = Bulletin.TAGAUTHOR;
+		String sampleValue = "green";
+		b.set(fieldToSearch, sampleValue);
+		
+		BulletinSearcher geMatch = new BulletinSearcher(new SearchTreeNode(fieldToSearch + ":>=" + sampleValue), beginDate, endDate);
+		assertTrue(">= didn't match?", geMatch.doesMatch(b));
+		BulletinSearcher gtNoMatch= new BulletinSearcher(new SearchTreeNode(fieldToSearch + ":>" + sampleValue), beginDate, endDate);
+		assertFalse("> matched?", gtNoMatch.doesMatch(b));
+		BulletinSearcher leMatch = new BulletinSearcher(new SearchTreeNode(fieldToSearch + ":<=" + sampleValue), beginDate, endDate);
+		assertTrue("<= didn't match?", leMatch.doesMatch(b));
+		BulletinSearcher ltNoMatch = new BulletinSearcher(new SearchTreeNode(fieldToSearch + ":<" + sampleValue), beginDate, endDate);
+		assertFalse("< matched?", ltNoMatch.doesMatch(b));
+	}
+
 	public void testDoesMatch() throws Exception
 	{
 		MartusCrypto security = MockMartusSecurity.createClient();

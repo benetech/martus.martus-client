@@ -56,15 +56,33 @@ public class BulletinSearcher
 
 	private boolean doesValueMatch(Bulletin b)
 	{
+		if(!b.withinDates(beginDate, endDate))
+			return false;
+		
 		String fieldToSearch = node.getField();
-		String searchForValue = node.getValue().toLowerCase();
-		boolean valueMatched = false;
+		String searchForValue = node.getValue();
 		if(fieldToSearch == null)
-			valueMatched = b.contains(searchForValue);
-		else
-			valueMatched = b.doesFieldContain(fieldToSearch, searchForValue);
+			return b.contains(searchForValue);
 
-		return (valueMatched && b.withinDates(beginDate, endDate));
+		int compareOp = node.getComparisonOperator();
+		if(compareOp == SearchTreeNode.CONTAINS_STRING)
+			return b.doesFieldContain(fieldToSearch, searchForValue);
+		
+		String value = b.get(fieldToSearch);
+		switch(compareOp)
+		{
+			case SearchTreeNode.LESS: 
+				return (value.compareTo(searchForValue) < 0);
+			case SearchTreeNode.LESS_EQUAL: 
+				return (value.compareTo(searchForValue) <= 0);
+			case SearchTreeNode.GREATER: 
+				return (value.compareTo(searchForValue) > 0);
+			case SearchTreeNode.GREATER_EQUAL: 
+				return (value.compareTo(searchForValue) >= 0);
+		}
+		
+		System.out.println("BulletinSearcher.doesValueMatch: Unknown op: " + compareOp);
+		return false;
 	}
 
 	SearchTreeNode node;
