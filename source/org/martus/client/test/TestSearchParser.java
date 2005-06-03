@@ -75,6 +75,24 @@ public class TestSearchParser extends TestCaseEnhanced
     	verifyTokenized(tokens, englishParser.tokenize(toTokenize));
     	
     }
+    
+    public void testTokenizedSpecificFieldSimple()
+    {
+    	String fieldValue = "field:value";
+    	TokenList tokens = englishParser.tokenize(fieldValue);
+    	assertEquals(1, tokens.size());
+    	assertEquals(fieldValue, tokens.get(0));
+    	
+    }
+
+    public void testTokenizedSpecificFieldQuoted()
+    {
+    	String fieldQuotedValue = "field:\"quoted value\"";
+    	TokenList tokens = englishParser.tokenize(fieldQuotedValue);
+    	assertEquals(1, tokens.size());
+    	assertEquals(fieldQuotedValue, tokens.get(0));
+    	
+    }
 
 	private void verifyTokenized(String[] words, TokenList result)
 	{
@@ -159,6 +177,13 @@ public class TestSearchParser extends TestCaseEnhanced
 		assertEquals("b", ab.getRight().getValue());
 	}
 	
+	public void testQuoted()
+	{
+		String quotedValue = "testing quoted";
+		SearchTreeNode quoted = englishParser.parse("\"" + quotedValue + "\"");
+		assertEquals(quotedValue, quoted.getValue());
+	}
+	
 	public void testSpecificField()
 	{
 		SearchTreeNode all = englishParser.parse("testing");
@@ -167,6 +192,11 @@ public class TestSearchParser extends TestCaseEnhanced
 		SearchTreeNode name = englishParser.parse("name:smith");
 		assertEquals("not searching name?", "name", name.getField());
 		assertEquals("smith", name.getValue());
+
+		String greenEggs = "green eggs and ham";
+		SearchTreeNode phrase = englishParser.parse("name:\"" + greenEggs + "\"");
+		assertEquals("not searching name?", "name", phrase.getField());
+		assertEquals("green eggs and ham", phrase.getValue());
 	}
 
 /*	

@@ -45,6 +45,9 @@ public class SearchTreeNode
 		{
 			nodeValue = value;
 		}
+		
+		if(nodeValue.startsWith("\""))
+			nodeValue = nodeValue.substring(1, nodeValue.length() - 1);
 	}
 	
 	public SearchTreeNode(int op, SearchTreeNode left, SearchTreeNode right)

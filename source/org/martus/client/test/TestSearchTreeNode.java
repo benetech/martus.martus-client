@@ -43,8 +43,19 @@ public class TestSearchTreeNode extends TestCaseEnhanced
 		assertEquals("text", node.getValue());
 		assertEquals(SearchTreeNode.VALUE, node.getOperation());
 
-		node = new SearchTreeNode(" stripped ");
-		assertEquals("stripped", node.getValue());
+		node = new SearchTreeNode(" nostripping ");
+		assertEquals(" nostripping ", node.getValue());
+    }
+    
+    public void testQuotedValues()
+    {
+    	String phrase = "search for this";
+    	
+    	SearchTreeNode withoutField = new SearchTreeNode("\"" + phrase + "\"");
+    	assertEquals("without field parsed wrong?", phrase, withoutField.getValue());
+    	
+    	SearchTreeNode withField = new SearchTreeNode("field:\"" + phrase + "\"");
+    	assertEquals("with field parsed wrong?", phrase, withField.getValue());
     }
 
     public void testOpNode()
