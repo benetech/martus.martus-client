@@ -79,7 +79,6 @@ public class TestBulletinSearcher extends TestCaseEnhanced
 		String beginDate ="1900-01-01";
 		String endDate = "2099-12-31";
 		String fieldToSearch = Bulletin.TAGLOCATION;
-		String otherField = Bulletin.TAGAUTHOR;
 		String sampleValue = "green";
 		b.set(fieldToSearch, sampleValue);
 		
