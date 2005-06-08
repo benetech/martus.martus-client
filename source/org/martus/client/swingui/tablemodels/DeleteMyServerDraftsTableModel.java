@@ -26,6 +26,9 @@ Boston, MA 02111-1307, USA.
 
 package org.martus.client.swingui.tablemodels;
 
+import java.io.IOException;
+import java.io.NotSerializableException;
+
 import org.martus.client.core.MartusApp;
 import org.martus.common.MartusUtilities.ServerErrorException;
 import org.martus.common.clientside.UiBasicLocalization;
@@ -47,4 +50,12 @@ public class DeleteMyServerDraftsTableModel extends RetrieveTableModel
 	{
 		getMyDraftSummaries();
 	}
+
+	// This class is NOT intended to be serialized!!!
+	private static final long serialVersionUID = 1;
+	private void writeObject(java.io.ObjectOutputStream stream) throws IOException
+	{
+		throw new NotSerializableException();
+	}
+
 }

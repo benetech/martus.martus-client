@@ -47,6 +47,7 @@ import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
+
 import org.martus.client.core.ClientBulletinStore.BulletinAlreadyExistsException;
 import org.martus.client.core.ClientBulletinStore.BulletinOlderException;
 import org.martus.client.search.BulletinSearcher;
@@ -1131,6 +1132,8 @@ public class MartusApp
 		{
 			super(message);
 		}
+
+		private static final long serialVersionUID = 1;
 	}
 
 	public Vector downloadFieldOfficeAccountIds() throws ServerErrorException
@@ -1246,8 +1249,15 @@ public class MartusApp
 		return response.getResultCode();
 	}
 
-	public static class AccountAlreadyExistsException extends Exception {}
-	public static class CannotCreateAccountFileException extends IOException {}
+	public static class AccountAlreadyExistsException extends Exception 
+	{
+		private static final long serialVersionUID = 1;
+	}
+
+	public static class CannotCreateAccountFileException extends IOException 
+	{
+		private static final long serialVersionUID = 1;
+	}
 
 	public void createAccount(String userName, char[] userPassPhrase) throws
 					Exception
@@ -1697,8 +1707,15 @@ public class MartusApp
 		store.saveFolders();
 	}
 
-	public class SaveConfigInfoException extends Exception {}
-	public class LoadConfigInfoException extends Exception {}
+	public class SaveConfigInfoException extends Exception 
+	{
+		private static final long serialVersionUID = 1;
+	}
+
+	public class LoadConfigInfoException extends Exception 
+	{
+		private static final long serialVersionUID = 1;
+	}
 
 	public static class MartusAppInitializationException extends Exception
 	{
@@ -1706,6 +1723,8 @@ public class MartusApp
 		{
 			super(message);
 		}
+
+		private static final long serialVersionUID = 1;
 	}
 
 	public File martusDataRootDirectory;

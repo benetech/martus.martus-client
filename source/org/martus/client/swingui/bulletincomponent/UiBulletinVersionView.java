@@ -25,6 +25,9 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.bulletincomponent;
 
+import java.io.IOException;
+import java.io.NotSerializableException;
+
 import org.martus.client.swingui.UiMainWindow;
 
 
@@ -39,5 +42,13 @@ public class UiBulletinVersionView extends UiBulletinView
 	{
 		return new UiBulletinComponentPreviewVersionHeaderSection(mainWindow, "View");
 	}
+
+	// This class is NOT intended to be serialized!!!
+	private static final long serialVersionUID = 1;
+	private void writeObject(java.io.ObjectOutputStream stream) throws IOException
+	{
+		throw new NotSerializableException();
+	}
+
 	
 }

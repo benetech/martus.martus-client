@@ -137,6 +137,8 @@ public class UiDateEditor extends UiField
 		{
 			super(tag);
 		}
+
+		private static final long serialVersionUID = 1;
 	}
 	
 	public void validate() throws UiField.DataInvalidException 

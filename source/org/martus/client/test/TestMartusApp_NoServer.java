@@ -34,6 +34,7 @@ import java.io.FileFilter;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.NotSerializableException;
 import java.io.RandomAccessFile;
 import java.util.Arrays;
 import java.util.Vector;
@@ -1528,6 +1529,14 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 				return mockLength;
 			}
 
+			// This class is NOT intended to be serialized!!!
+			private static final long serialVersionUID = 1;
+			private void writeObject(java.io.ObjectOutputStream out) throws IOException
+			{
+				throw new NotSerializableException();
+			}
+
+
 			long mockLength;
 		}
 
@@ -1556,6 +1565,7 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		catch(MartusUtilities.FileTooLargeException ignoreExpectedException)
 		{
 		}
+
 	}
 
 	public void testEncryptPublicData() throws Exception

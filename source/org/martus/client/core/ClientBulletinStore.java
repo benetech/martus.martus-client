@@ -1221,9 +1221,15 @@ public class ClientBulletinStore extends BulletinStore
 		BulletinFolder folder;
 	}
 
-	public static class BulletinAlreadyExistsException extends Exception {}
+	public static class BulletinAlreadyExistsException extends Exception 
+	{
+		private static final long serialVersionUID = 1;
+	}
 	
-	public static class BulletinOlderException extends Exception {}
+	public static class BulletinOlderException extends Exception 
+	{
+		private static final long serialVersionUID = 1;
+	}
 
 	public void importZipFileBulletin(File zipFile, BulletinFolder toFolder, boolean forceSameUids) throws
 			InvalidPacketException,

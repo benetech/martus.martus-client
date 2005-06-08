@@ -25,6 +25,9 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui;
 
+import java.io.IOException;
+import java.io.NotSerializableException;
+
 import javax.swing.AbstractAction;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
@@ -50,4 +53,12 @@ public class UiMenu extends JMenu
 		menuItem.setComponentOrientation(UiLanguageDirection.getComponentOrientation());
 		return super.add(menuItem);
 	}
+
+	// This class is NOT intended to be serialized!!!
+	private static final long serialVersionUID = 1;
+	private void writeObject(java.io.ObjectOutputStream stream) throws IOException
+	{
+		throw new NotSerializableException();
+	}
+
 }

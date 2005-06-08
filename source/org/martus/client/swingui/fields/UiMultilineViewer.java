@@ -28,6 +28,9 @@ package org.martus.client.swingui.fields;
 
 import java.awt.Font;
 import java.awt.Rectangle;
+import java.io.IOException;
+import java.io.NotSerializableException;
+
 import javax.swing.JComponent;
 import javax.swing.text.JTextComponent;
 import org.martus.client.swingui.UiConstants;
@@ -83,6 +86,14 @@ public class UiMultilineViewer extends UiStringField
 		{
 			// do nothing!
 		}
+
+		// This class is NOT intended to be serialized!!!
+		private static final long serialVersionUID = 1;
+		private void writeObject(java.io.ObjectOutputStream stream) throws IOException
+		{
+			throw new NotSerializableException();
+		}
+
 	}
 
 	UiTextArea text;

@@ -28,6 +28,8 @@ package org.martus.client.swingui.renderers;
 
 import java.awt.Color;
 import java.awt.Component;
+import java.io.IOException;
+import java.io.NotSerializableException;
 
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
@@ -65,6 +67,14 @@ public class IntegerRenderer extends DefaultTableCellRenderer
 		}
 		return cell;
 	}
+
+	// This class is NOT intended to be serialized!!!
+	private static final long serialVersionUID = 1;
+	private void writeObject(java.io.ObjectOutputStream stream) throws IOException
+	{
+		throw new NotSerializableException();
+	}
+
 	Color disabledBackgroundColor;
 	TableCellRenderer oldIntegerRenderer;
 	UiTableModel tableModel;

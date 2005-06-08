@@ -48,6 +48,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.NotSerializableException;
 import java.net.URL;
 import java.nio.channels.FileLock;
 import java.util.HashMap;
@@ -285,6 +286,14 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 				toFront();
 			}
 		}
+
+		// This class is NOT intended to be serialized!!!
+		private static final long serialVersionUID = 1;
+		private void writeObject(java.io.ObjectOutputStream stream) throws IOException
+		{
+			throw new NotSerializableException();
+		}
+
 	}
 
 	public boolean run()
@@ -2177,6 +2186,14 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 				contactInfoErrorShown = true;
 			}
 		}
+
+		// This class is NOT intended to be serialized!!!
+		private static final long serialVersionUID = 1;
+		private void writeObject(java.io.ObjectOutputStream stream) throws IOException
+		{
+			throw new NotSerializableException();
+		}
+
 		boolean authenticationErrorShown;
 		boolean rejectedErrorShown;
 		boolean contactInfoErrorShown;
@@ -2214,6 +2231,14 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	public JFrame getCurrentActiveFrame()
 	{
 		return currentActiveFrame;
+	}
+
+
+	// This class is NOT intended to be serialized!!!
+	private static final long serialVersionUID = 1;
+	private void writeObject(java.io.ObjectOutputStream stream) throws IOException
+	{
+		throw new NotSerializableException();
 	}
 
 	

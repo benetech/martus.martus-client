@@ -29,6 +29,8 @@ package org.martus.client.swingui.fields;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.IOException;
+import java.io.NotSerializableException;
 
 import javax.swing.AbstractAction;
 import javax.swing.Action;
@@ -131,6 +133,14 @@ public abstract class UiStringField extends UiField
 		{
 			cut();
 		}
+
+		// This class is NOT intended to be serialized!!!
+		private static final long serialVersionUID = 1;
+		private void writeObject(java.io.ObjectOutputStream stream) throws IOException
+		{
+			throw new NotSerializableException();
+		}
+
 	}
 
 	class ActionCopy extends AbstractAction
@@ -144,6 +154,14 @@ public abstract class UiStringField extends UiField
 		{
 			copy();
 		}
+
+		// This class is NOT intended to be serialized!!!
+		private static final long serialVersionUID = 1;
+		private void writeObject(java.io.ObjectOutputStream stream) throws IOException
+		{
+			throw new NotSerializableException();
+		}
+
 	}
 
 	class ActionPaste extends AbstractAction
@@ -157,6 +175,14 @@ public abstract class UiStringField extends UiField
 		{
 			paste();
 		}
+
+		// This class is NOT intended to be serialized!!!
+		private static final long serialVersionUID = 1;
+		private void writeObject(java.io.ObjectOutputStream stream) throws IOException
+		{
+			throw new NotSerializableException();
+		}
+
 	}
 
 	class ActionDelete extends AbstractAction
@@ -170,6 +196,14 @@ public abstract class UiStringField extends UiField
 		{
 			delete();
 		}
+
+		// This class is NOT intended to be serialized!!!
+		private static final long serialVersionUID = 1;
+		private void writeObject(java.io.ObjectOutputStream stream) throws IOException
+		{
+			throw new NotSerializableException();
+		}
+
 	}
 
 	class ActionSelectAll extends AbstractAction
@@ -183,6 +217,14 @@ public abstract class UiStringField extends UiField
 		{
 			selectAll();
 		}
+
+		// This class is NOT intended to be serialized!!!
+		private static final long serialVersionUID = 1;
+		private void writeObject(java.io.ObjectOutputStream stream) throws IOException
+		{
+			throw new NotSerializableException();
+		}
+
 	}
 
 	UiLocalization localization;

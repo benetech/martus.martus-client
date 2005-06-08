@@ -29,6 +29,7 @@ import java.awt.event.ActionEvent;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.NotSerializableException;
 import java.util.Iterator;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.swing.Utilities;
@@ -92,4 +93,12 @@ public class ActionMenuQuickEraseRemoveMartus extends ActionQuickErase
 		}
 	}
 	
+
+	// This class is NOT intended to be serialized!!!
+	private static final long serialVersionUID = 1;
+	private void writeObject(java.io.ObjectOutputStream stream) throws IOException
+	{
+		throw new NotSerializableException();
+	}
+
 }

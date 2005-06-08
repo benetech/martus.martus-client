@@ -30,12 +30,11 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.io.Serializable;
 
 import org.martus.common.LegacyCustomFields;
 import org.martus.common.fieldspec.StandardFieldSpecs;
 
-public class ConfigInfo implements Serializable
+public class ConfigInfo
 {
 	public ConfigInfo()
 	{

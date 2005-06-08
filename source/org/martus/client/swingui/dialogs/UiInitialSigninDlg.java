@@ -26,6 +26,9 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.swingui.dialogs;
 
 import java.awt.Component;
+import java.io.IOException;
+import java.io.NotSerializableException;
+
 import javax.swing.Box;
 import javax.swing.ButtonGroup;
 import javax.swing.ButtonModel;
@@ -117,6 +120,14 @@ public class UiInitialSigninDlg extends UiSigninDlg
 		}
 		dispose();
 	}
+
+	// This class is NOT intended to be serialized!!!
+	private static final long serialVersionUID = 1;
+	private void writeObject(java.io.ObjectOutputStream stream) throws IOException
+	{
+		throw new NotSerializableException();
+	}
+
 
 	private ButtonGroup recoveryTypeGroup;
 	private JTabbedPane tabbedPane;

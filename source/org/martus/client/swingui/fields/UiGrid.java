@@ -27,6 +27,9 @@ package org.martus.client.swingui.fields;
 
 import java.awt.Color;
 import java.awt.Component;
+import java.io.IOException;
+import java.io.NotSerializableException;
+
 import javax.swing.DefaultCellEditor;
 import javax.swing.JComponent;
 import javax.swing.JTable;
@@ -96,6 +99,14 @@ public class UiGrid extends UiField
 				columnIndex = 1;
 			super.changeSelection(rowIndex, columnIndex, toggle, extend);
 		}
+
+		// This class is NOT intended to be serialized!!!
+		private static final long serialVersionUID = 1;
+		private void writeObject(java.io.ObjectOutputStream stream) throws IOException
+		{
+			throw new NotSerializableException();
+		}
+
 	}
 
 	

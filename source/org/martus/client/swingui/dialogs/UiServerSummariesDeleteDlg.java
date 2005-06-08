@@ -26,6 +26,9 @@ Boston, MA 02111-1307, USA.
 
 package org.martus.client.swingui.dialogs;
 
+import java.io.IOException;
+import java.io.NotSerializableException;
+
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.tablemodels.RetrieveTableModel;
 
@@ -49,4 +52,12 @@ public class UiServerSummariesDeleteDlg extends UiServerSummariesDlg
 	{
 		return "DeleteServerDraftsNone";
 	}
+
+	// This class is NOT intended to be serialized!!!
+	private static final long serialVersionUID = 1;
+	private void writeObject(java.io.ObjectOutputStream stream) throws IOException
+	{
+		throw new NotSerializableException();
+	}
+
 }

@@ -26,6 +26,9 @@ Boston, MA 02111-1307, USA.
 
 package org.martus.client.swingui.dialogs;
 
+import java.io.IOException;
+import java.io.NotSerializableException;
+
 import javax.swing.Box;
 
 import org.martus.client.swingui.UiMainWindow;
@@ -56,6 +59,14 @@ public class UiProgressRetrieveBulletinsDlg extends UiProgressRetrieveDlg
 	public UiProgressMeter getChunkCountMeter()
 	{
 		return chunkCountMeter;
+	}
+
+
+	// This class is NOT intended to be serialized!!!
+	private static final long serialVersionUID = 1;
+	private void writeObject(java.io.ObjectOutputStream stream) throws IOException
+	{
+		throw new NotSerializableException();
 	}
 
 	private UiProgressMeter chunkCountMeter;

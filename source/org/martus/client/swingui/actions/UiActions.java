@@ -27,6 +27,8 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.swingui.actions;
 
 import java.awt.event.ActionEvent;
+import java.io.IOException;
+import java.io.NotSerializableException;
 
 import org.martus.client.swingui.UiMainWindow;
 
@@ -226,6 +228,14 @@ public class UiActions
 		{
 			mainWindow.createBulletin();
 		}
+
+		// This class is NOT intended to be serialized!!!
+		private static final long serialVersionUID = 1;
+		private void writeObject(java.io.ObjectOutputStream stream) throws IOException
+		{
+			throw new NotSerializableException();
+		}
+
 	}
 
 	private static class ActionModify extends UiButtonAction
@@ -239,6 +249,14 @@ public class UiActions
 		{
 			mainWindow.doModifyBulletin();
 		}
+
+		// This class is NOT intended to be serialized!!!
+		private static final long serialVersionUID = 1;
+		private void writeObject(java.io.ObjectOutputStream stream) throws IOException
+		{
+			throw new NotSerializableException();
+		}
+
 	}
 
 	private static class ActionSearch extends UiButtonAction
@@ -252,6 +270,14 @@ public class UiActions
 		{
 			mainWindow.doSearch();
 		}
+
+		// This class is NOT intended to be serialized!!!
+		private static final long serialVersionUID = 1;
+		private void writeObject(java.io.ObjectOutputStream stream) throws IOException
+		{
+			throw new NotSerializableException();
+		}
+
 	}
 
 	private static class ActionPrint extends UiButtonAction
@@ -265,6 +291,14 @@ public class UiActions
 		{
 			mainWindow.doPrint();
 		}
+
+		// This class is NOT intended to be serialized!!!
+		private static final long serialVersionUID = 1;
+		private void writeObject(java.io.ObjectOutputStream stream) throws IOException
+		{
+			throw new NotSerializableException();
+		}
+
 	}
 
 	//////////////////////////////////////////////////////////////
@@ -279,6 +313,14 @@ public class UiActions
 		{
 			mainWindow.exitNormally();
 		}
+
+		// This class is NOT intended to be serialized!!!
+		private static final long serialVersionUID = 1;
+		private void writeObject(java.io.ObjectOutputStream stream) throws IOException
+		{
+			throw new NotSerializableException();
+		}
+
 	}
 
 	private static class ActionMenuCreateFolder extends UiMenuAction
@@ -292,6 +334,14 @@ public class UiActions
 		{
 			mainWindow.doCreateFolder();
 		}
+
+		// This class is NOT intended to be serialized!!!
+		private static final long serialVersionUID = 1;
+		private void writeObject(java.io.ObjectOutputStream stream) throws IOException
+		{
+			throw new NotSerializableException();
+		}
+
 	}
 
 	private static class ActionMenuRenameFolder extends UiMenuAction
@@ -310,6 +360,14 @@ public class UiActions
 		{
 			return mainWindow.canModifyCurrentFolder();
 		}
+
+		// This class is NOT intended to be serialized!!!
+		private static final long serialVersionUID = 1;
+		private void writeObject(java.io.ObjectOutputStream stream) throws IOException
+		{
+			throw new NotSerializableException();
+		}
+
 	}
 
 	private static class ActionMenuDeleteFolder extends UiMenuAction
@@ -328,6 +386,14 @@ public class UiActions
 		{
 			return mainWindow.canModifyCurrentFolder();
 		}
+
+		// This class is NOT intended to be serialized!!!
+		private static final long serialVersionUID = 1;
+		private void writeObject(java.io.ObjectOutputStream stream) throws IOException
+		{
+			throw new NotSerializableException();
+		}
+
 	}
 
 	private static class ActionMenuCreateNewBulletin extends UiMenuAction
@@ -341,6 +407,14 @@ public class UiActions
 		{
 			mainWindow.createBulletin();
 		}
+
+		// This class is NOT intended to be serialized!!!
+		private static final long serialVersionUID = 1;
+		private void writeObject(java.io.ObjectOutputStream stream) throws IOException
+		{
+			throw new NotSerializableException();
+		}
+
 	}
 	
 	private static class ActionMenuExportFolder extends UiMenuAction
@@ -354,6 +428,14 @@ public class UiActions
 		{
 			mainWindow.doExportFolder();
 		}
+
+		// This class is NOT intended to be serialized!!!
+		private static final long serialVersionUID = 1;
+		private void writeObject(java.io.ObjectOutputStream stream) throws IOException
+		{
+			throw new NotSerializableException();
+		}
+
 	}
 	
 	private static class ActionMenuExportBulletins extends UiMenuAction
@@ -367,6 +449,14 @@ public class UiActions
 		{
 			mainWindow.doExportBulletins();
 		}
+
+		// This class is NOT intended to be serialized!!!
+		private static final long serialVersionUID = 1;
+		private void writeObject(java.io.ObjectOutputStream stream) throws IOException
+		{
+			throw new NotSerializableException();
+		}
+
 	}
 
 	private static class ActionMenuPrintBulletin extends UiMenuAction
@@ -386,6 +476,14 @@ public class UiActions
 			return UiMainWindow.isOnlyOneBulletinSelected(mainWindow);
 		}
 
+
+		// This class is NOT intended to be serialized!!!
+		private static final long serialVersionUID = 1;
+		private void writeObject(java.io.ObjectOutputStream stream) throws IOException
+		{
+			throw new NotSerializableException();
+		}
+
 	}
 
 	private static class ActionMenuAbout extends UiMenuAction
@@ -399,6 +497,14 @@ public class UiActions
 		{
 			mainWindow.aboutMartus();
 		}
+
+		// This class is NOT intended to be serialized!!!
+		private static final long serialVersionUID = 1;
+		private void writeObject(java.io.ObjectOutputStream stream) throws IOException
+		{
+			throw new NotSerializableException();
+		}
+
 	}
 
 	private static class ActionMenuAccountDetails extends UiMenuAction
@@ -412,6 +518,14 @@ public class UiActions
 		{
 			mainWindow.showAccountInfo();
 		}
+
+		// This class is NOT intended to be serialized!!!
+		private static final long serialVersionUID = 1;
+		private void writeObject(java.io.ObjectOutputStream stream) throws IOException
+		{
+			throw new NotSerializableException();
+		}
+
 	}
 
 	private static class ActionMenuHelp extends UiMenuAction
@@ -425,6 +539,14 @@ public class UiActions
 		{
 			mainWindow.displayHelpMessage();
 		}
+
+		// This class is NOT intended to be serialized!!!
+		private static final long serialVersionUID = 1;
+		private void writeObject(java.io.ObjectOutputStream stream) throws IOException
+		{
+			throw new NotSerializableException();
+		}
+
 	}
 
 	private static class ActionMenuModifyBulletin extends UiMenuAction
@@ -443,6 +565,14 @@ public class UiActions
 		{
 			return UiMainWindow.isOnlyOneBulletinSelected(mainWindow);
 		}
+
+		// This class is NOT intended to be serialized!!!
+		private static final long serialVersionUID = 1;
+		private void writeObject(java.io.ObjectOutputStream stream) throws IOException
+		{
+			throw new NotSerializableException();
+		}
+
 	}
 
 	private static class ActionMenuSelectAllBulletins extends UiMenuAction
@@ -462,6 +592,14 @@ public class UiActions
 		{
 			return !mainWindow.isCurrentFolderEmpty();
 		}
+
+		// This class is NOT intended to be serialized!!!
+		private static final long serialVersionUID = 1;
+		private void writeObject(java.io.ObjectOutputStream stream) throws IOException
+		{
+			throw new NotSerializableException();
+		}
+
 	}
 
 	private static class ActionMenuCutBulletins extends UiMenuAction
@@ -483,6 +621,14 @@ public class UiActions
 				return false;
 			return UiMainWindow.isAnyBulletinSelected(mainWindow);
 		}
+
+		// This class is NOT intended to be serialized!!!
+		private static final long serialVersionUID = 1;
+		private void writeObject(java.io.ObjectOutputStream stream) throws IOException
+		{
+			throw new NotSerializableException();
+		}
+
 	}
 
 	private static class ActionMenuCopyBulletins extends UiMenuAction
@@ -501,6 +647,14 @@ public class UiActions
 		{
 			return UiMainWindow.isAnyBulletinSelected(mainWindow);
 		}
+
+		// This class is NOT intended to be serialized!!!
+		private static final long serialVersionUID = 1;
+		private void writeObject(java.io.ObjectOutputStream stream) throws IOException
+		{
+			throw new NotSerializableException();
+		}
+
 	}
 	
 	
@@ -537,6 +691,14 @@ public class UiActions
 				updateName();
 			return super.getValue(key);
 		}
+
+		// This class is NOT intended to be serialized!!!
+		private static final long serialVersionUID = 1;
+		private void writeObject(java.io.ObjectOutputStream stream) throws IOException
+		{
+			throw new NotSerializableException();
+		}
+
 	}
 
 	private static class ActionMenuPasteBulletins extends UiMenuAction
@@ -555,6 +717,14 @@ public class UiActions
 		{
 			return mainWindow.canPaste();
 		}
+
+		// This class is NOT intended to be serialized!!!
+		private static final long serialVersionUID = 1;
+		private void writeObject(java.io.ObjectOutputStream stream) throws IOException
+		{
+			throw new NotSerializableException();
+		}
+
 	}
 
 	private static class ActionMenuResendBulletins extends UiMenuAction
@@ -576,6 +746,14 @@ public class UiActions
 				return false;
 			return UiMainWindow.isAnyBulletinSelected(mainWindow);
 		}
+
+		// This class is NOT intended to be serialized!!!
+		private static final long serialVersionUID = 1;
+		private void writeObject(java.io.ObjectOutputStream stream) throws IOException
+		{
+			throw new NotSerializableException();
+		}
+
 	}
 
 	private static class ActionMenuSearch extends UiMenuAction
@@ -589,6 +767,14 @@ public class UiActions
 		{
 			mainWindow.doSearch();
 		}
+
+		// This class is NOT intended to be serialized!!!
+		private static final long serialVersionUID = 1;
+		private void writeObject(java.io.ObjectOutputStream stream) throws IOException
+		{
+			throw new NotSerializableException();
+		}
+
 	}
 
 	static class ActionMenuPreferences extends UiMenuAction
@@ -602,6 +788,14 @@ public class UiActions
 		{
 			mainWindow.doLocalize();
 		}
+
+		// This class is NOT intended to be serialized!!!
+		private static final long serialVersionUID = 1;
+		private void writeObject(java.io.ObjectOutputStream stream) throws IOException
+		{
+			throw new NotSerializableException();
+		}
+
 	}
 
 	private static class ActionMenuContactInfo extends UiMenuAction
@@ -615,6 +809,14 @@ public class UiActions
 		{
 			mainWindow.doContactInfo();
 		}
+
+		// This class is NOT intended to be serialized!!!
+		private static final long serialVersionUID = 1;
+		private void writeObject(java.io.ObjectOutputStream stream) throws IOException
+		{
+			throw new NotSerializableException();
+		}
+
 	}
 
 	private static class ActionMenuSelectServer extends UiMenuAction
@@ -628,6 +830,14 @@ public class UiActions
 		{
 			mainWindow.doConfigureServer();
 		}
+
+		// This class is NOT intended to be serialized!!!
+		private static final long serialVersionUID = 1;
+		private void writeObject(java.io.ObjectOutputStream stream) throws IOException
+		{
+			throw new NotSerializableException();
+		}
+
 	}
 	
 	private static class ActionMenuRemoveServer extends UiMenuAction
@@ -641,6 +851,14 @@ public class UiActions
 		{
 			mainWindow.doRemoveServer();
 		}
+
+		// This class is NOT intended to be serialized!!!
+		private static final long serialVersionUID = 1;
+		private void writeObject(java.io.ObjectOutputStream stream) throws IOException
+		{
+			throw new NotSerializableException();
+		}
+
 	}
 
 	private static class ActionMenuChangeUserNamePassword extends UiMenuAction
@@ -654,6 +872,14 @@ public class UiActions
 		{
 			mainWindow.doChangeUserNamePassword();
 		}
+
+		// This class is NOT intended to be serialized!!!
+		private static final long serialVersionUID = 1;
+		private void writeObject(java.io.ObjectOutputStream stream) throws IOException
+		{
+			throw new NotSerializableException();
+		}
+
 	}
 
 	private static class ActionMenuDefaultDetailsFieldContent extends UiMenuAction
@@ -667,6 +893,14 @@ public class UiActions
 		{
 			mainWindow.updateBulletinDetails(null);
 		}
+
+		// This class is NOT intended to be serialized!!!
+		private static final long serialVersionUID = 1;
+		private void writeObject(java.io.ObjectOutputStream stream) throws IOException
+		{
+			throw new NotSerializableException();
+		}
+
 	}
 
 	private static class ActionMenuRetrieveMySealedBulletins extends UiMenuAction
@@ -680,6 +914,14 @@ public class UiActions
 		{
 			mainWindow.doRetrieveMySealedBulletins();
 		}
+
+		// This class is NOT intended to be serialized!!!
+		private static final long serialVersionUID = 1;
+		private void writeObject(java.io.ObjectOutputStream stream) throws IOException
+		{
+			throw new NotSerializableException();
+		}
+
 	}
 
 	private static class ActionMenuRetrieveMyDraftBulletins extends UiMenuAction
@@ -693,6 +935,14 @@ public class UiActions
 		{
 			mainWindow.doRetrieveMyDraftBulletins();
 		}
+
+		// This class is NOT intended to be serialized!!!
+		private static final long serialVersionUID = 1;
+		private void writeObject(java.io.ObjectOutputStream stream) throws IOException
+		{
+			throw new NotSerializableException();
+		}
+
 	}
 	
 	private static class ActionMenuDeleteMyServerDraftBulletins extends UiMenuAction
@@ -706,6 +956,14 @@ public class UiActions
 		{
 			mainWindow.doDeleteServerDraftBulletins();
 		}
+
+		// This class is NOT intended to be serialized!!!
+		private static final long serialVersionUID = 1;
+		private void writeObject(java.io.ObjectOutputStream stream) throws IOException
+		{
+			throw new NotSerializableException();
+		}
+
 	}
 
 	private static class ActionMenuRetrieveHQSealedBulletins extends UiMenuAction
@@ -719,6 +977,14 @@ public class UiActions
 		{
 			mainWindow.doRetrieveHQBulletins();
 		}
+
+		// This class is NOT intended to be serialized!!!
+		private static final long serialVersionUID = 1;
+		private void writeObject(java.io.ObjectOutputStream stream) throws IOException
+		{
+			throw new NotSerializableException();
+		}
+
 	}
 
 	private static class ActionMenuRetrieveHQDraftBulletins extends UiMenuAction
@@ -732,6 +998,14 @@ public class UiActions
 		{
 			mainWindow.doRetrieveHQDraftsBulletins();
 		}
+
+		// This class is NOT intended to be serialized!!!
+		private static final long serialVersionUID = 1;
+		private void writeObject(java.io.ObjectOutputStream stream) throws IOException
+		{
+			throw new NotSerializableException();
+		}
+
 	}
 
 
@@ -746,6 +1020,14 @@ public class UiActions
 		{
 			mainWindow.doExportMyPublicKey();
 		}
+
+		// This class is NOT intended to be serialized!!!
+		private static final long serialVersionUID = 1;
+		private void writeObject(java.io.ObjectOutputStream stream) throws IOException
+		{
+			throw new NotSerializableException();
+		}
+
 	}
 
 	
@@ -760,5 +1042,13 @@ public class UiActions
 		{
 			mainWindow.doConfigureHQs();
 		}
+
+		// This class is NOT intended to be serialized!!!
+		private static final long serialVersionUID = 1;
+		private void writeObject(java.io.ObjectOutputStream stream) throws IOException
+		{
+			throw new NotSerializableException();
+		}
+
 	}
 }

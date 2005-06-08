@@ -28,6 +28,8 @@ package org.martus.client.swingui.bulletincomponent;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.io.NotSerializableException;
 import java.util.HashMap;
 
 import javax.swing.JButton;
@@ -140,6 +142,14 @@ public class UiBulletinComponentHeaderSection extends UiBulletinComponentSection
 		}
 		
 	}
+
+	// This class is NOT intended to be serialized!!!
+	private static final long serialVersionUID = 1;
+	private void writeObject(java.io.ObjectOutputStream stream) throws IOException
+	{
+		throw new NotSerializableException();
+	}
+
 
 	String tagQualifier;
 	Bulletin bulletin;

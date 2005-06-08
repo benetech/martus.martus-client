@@ -32,6 +32,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.io.IOException;
+import java.io.NotSerializableException;
 
 import javax.swing.Box;
 import javax.swing.ImageIcon;
@@ -133,5 +135,13 @@ public class UiAboutDlg extends JDialog implements ActionListener
 				dispose();
 		}
 	}
+
+	// This class is NOT intended to be serialized!!!
+	private static final long serialVersionUID = 1;
+	private void writeObject(java.io.ObjectOutputStream stream) throws IOException
+	{
+		throw new NotSerializableException();
+	}
+
 	final String APACHENOTICE = "This product includes software developed by the Apache Software Foundation (http://www.apache.org/).";
 }

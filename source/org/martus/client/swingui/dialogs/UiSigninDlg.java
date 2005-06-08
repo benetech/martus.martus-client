@@ -26,6 +26,9 @@ Boston, MA 02111-1307, USA.
 
 package org.martus.client.swingui.dialogs;
 
+import java.io.IOException;
+import java.io.NotSerializableException;
+
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -78,6 +81,14 @@ public class UiSigninDlg extends UiBasicSigninDlg implements LanguageChangeListe
 		UiMainWindow.displayDefaultUnofficialTranslationMessage(owner);
 
 	}
+
+	// This class is NOT intended to be serialized!!!
+	private static final long serialVersionUID = 1;
+	private void writeObject(java.io.ObjectOutputStream stream) throws IOException
+	{
+		throw new NotSerializableException();
+	}
+
 
 	UiChoiceEditor languageDropdown;
 }

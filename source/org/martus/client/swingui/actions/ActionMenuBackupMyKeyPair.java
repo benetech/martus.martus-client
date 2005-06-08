@@ -26,6 +26,8 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.swingui.actions;
 
 import java.awt.event.ActionEvent;
+import java.io.IOException;
+import java.io.NotSerializableException;
 
 import org.martus.client.swingui.UiBackupRecoverSharedKeyPair;
 import org.martus.client.swingui.UiMainWindow;
@@ -47,5 +49,13 @@ public class ActionMenuBackupMyKeyPair extends UiMenuAction
 		
 		mainWindow.askToBackupKeyPairEncryptedSingleFile();
 		mainWindow.askToBackupKeyPareToSecretShareFiles();
-		}
+	}
+
+	// This class is NOT intended to be serialized!!!
+	private static final long serialVersionUID = 1;
+	private void writeObject(java.io.ObjectOutputStream stream) throws IOException
+	{
+		throw new NotSerializableException();
+	}
+
 }

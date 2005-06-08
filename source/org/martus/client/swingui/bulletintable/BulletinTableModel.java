@@ -26,6 +26,9 @@ Boston, MA 02111-1307, USA.
 
 package org.martus.client.swingui.bulletintable;
 
+import java.io.IOException;
+import java.io.NotSerializableException;
+
 import javax.swing.table.AbstractTableModel;
 import org.martus.client.core.BulletinFolder;
 import org.martus.client.core.ClientBulletinStore;
@@ -150,6 +153,14 @@ public class BulletinTableModel extends AbstractTableModel
 		BulletinConstants.TAGAUTHOR, 
 		BulletinConstants.TAGLASTSAVED
 	};
+
+
+	// This class is NOT intended to be serialized!!!
+	private static final long serialVersionUID = 1;
+	private void writeObject(java.io.ObjectOutputStream stream) throws IOException
+	{
+		throw new NotSerializableException();
+	}
 
 
 	UiBasicLocalization localization;

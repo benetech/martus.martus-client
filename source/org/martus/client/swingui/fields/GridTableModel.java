@@ -26,6 +26,7 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.swingui.fields;
 
 import java.io.IOException;
+import java.io.NotSerializableException;
 
 import javax.swing.table.AbstractTableModel;
 import javax.xml.parsers.ParserConfigurationException;
@@ -102,6 +103,14 @@ public class GridTableModel extends AbstractTableModel
 		gridData.setFromXml(xmlText);
 		fireTableDataChanged();
 	}
+
+	// This class is NOT intended to be serialized!!!
+	private static final long serialVersionUID = 1;
+	private void writeObject(java.io.ObjectOutputStream stream) throws IOException
+	{
+		throw new NotSerializableException();
+	}
+
 	
 	private int EXTRA_COLUMN = 1;
 	private GridData gridData;

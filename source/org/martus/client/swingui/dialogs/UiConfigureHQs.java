@@ -32,6 +32,9 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.io.File;
+import java.io.IOException;
+import java.io.NotSerializableException;
+
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -381,6 +384,14 @@ public class UiConfigureHQs extends JDialog
 		}
 	}
 	
+
+	// This class is NOT intended to be serialized!!!
+	private static final long serialVersionUID = 1;
+	private void writeObject(java.io.ObjectOutputStream stream) throws IOException
+	{
+		throw new NotSerializableException();
+	}
+
 	UiMainWindow mainWindow;
 	UiTable table;
 	HeadQuartersTableModelConfiguration model;

@@ -29,6 +29,8 @@ package org.martus.client.swingui.fields;
 import java.awt.Font;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.io.IOException;
+import java.io.NotSerializableException;
 
 import javax.swing.JComponent;
 
@@ -55,6 +57,14 @@ public class UiNormalTextEditor extends UiNormalTextField
 		{
 			super(rows, cols);
 		}
+
+		// This class is NOT intended to be serialized!!!
+		private static final long serialVersionUID = 1;
+		private void writeObject(java.io.ObjectOutputStream stream) throws IOException
+		{
+			throw new NotSerializableException();
+		}
+
 	}
 	
 	public JComponent[] getFocusableComponents()
