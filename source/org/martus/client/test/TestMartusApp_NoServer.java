@@ -1379,31 +1379,24 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 	{
 		TRACE_BEGIN("testSearch");
 		ClientBulletinStore store = appWithAccount.getStore();
-		String startDate = "1900-01-01";
-		String endDate = "2099-12-31";
 		assertNull("Search results already exists?", store.findFolder(store.getSearchFolderName()));
 
 		appWithAccount.loadSampleData(); //SLOW!!!
 		Bulletin b = store.getBulletinRevision((UniversalId)store.getAllBulletinLeafUids().get(0));
 		String andKeyword = "and";
 		String orKeyword = "or";
-		appWithAccount.search(b.get("title"), startDate, endDate, andKeyword, orKeyword);
+		appWithAccount.search(b.get("title"), andKeyword, orKeyword);
 		assertNotNull("Search results should have been created", store.getSearchFolderName());
 
-		appWithAccount.search("--not in any bulletin--", startDate, endDate, andKeyword, orKeyword);
+		appWithAccount.search("--not in any bulletin--", andKeyword, orKeyword);
 		assertEquals("search should clear results folder", 0, store.findFolder(store.getSearchFolderName()).getBulletinCount());
 
 		assertTrue("not enough bulletins?", appWithAccount.getStore().getBulletinCount() >= 5);
 		assertTrue("too many bulletins?", appWithAccount.getStore().getBulletinCount() <= 15);
-		appWithAccount.search(b.get("author"), startDate, endDate, andKeyword, orKeyword);
+		appWithAccount.search(b.get("author"), andKeyword, orKeyword);
 		assertEquals(1, store.findFolder(store.getSearchFolderName()).getBulletinCount());
-		appWithAccount.search(b.get(""), startDate, endDate, andKeyword, orKeyword);
+		appWithAccount.search(b.get(""), andKeyword, orKeyword);
 		assertEquals(10, store.findFolder(store.getSearchFolderName()).getBulletinCount());
-
-		startDate = "1999-01-19";
-		endDate = startDate;
-		appWithAccount.search(b.get(""), startDate, endDate, andKeyword, orKeyword);
-		assertEquals(1, store.findFolder(store.getSearchFolderName()).getBulletinCount());
 
 		TRACE_END();
 	}
@@ -1412,8 +1405,6 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 	{
 		TRACE_BEGIN("testSearchOlderVersions");
 		ClientBulletinStore store = appWithAccount.getStore();
-		String startDate = "1900-01-01";
-		String endDate = "2099-12-31";
 		String andKeyword = "and";
 		String orKeyword = "or";
 		Bulletin b1 = appWithAccount.createBulletin();
@@ -1426,11 +1417,11 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		BulletinFolder newFolder = new BulletinFolder(store, "myFolder");
 		appWithAccount.saveBulletin(b1, newFolder);
 		assertNull(store.findFolder(store.getSearchFolderName()));
-		appWithAccount.search(originalString, startDate, endDate, andKeyword, orKeyword);
+		appWithAccount.search(originalString, andKeyword, orKeyword);
 		assertEquals(1, store.findFolder(store.getSearchFolderName()).getBulletinCount());
-		appWithAccount.search(commonString, startDate, endDate, andKeyword, orKeyword);
+		appWithAccount.search(commonString, andKeyword, orKeyword);
 		assertEquals(1, store.findFolder(store.getSearchFolderName()).getBulletinCount());
-		appWithAccount.search("abcdefghijklmnop", startDate, endDate, andKeyword, orKeyword);
+		appWithAccount.search("abcdefghijklmnop", andKeyword, orKeyword);
 		assertEquals(0, store.findFolder(store.getSearchFolderName()).getBulletinCount());
 		String newString = "bilbo";
 		Bulletin b2 = store.createClone(b1, b1.getPublicFieldSpecs(), b1.getPrivateFieldSpecs());
@@ -1443,13 +1434,13 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		b3.set(Bulletin.TAGPUBLICINFO, "");
 		appWithAccount.saveBulletin(b3, newFolder);
 
-		appWithAccount.search(newString, startDate, endDate, andKeyword, orKeyword);
+		appWithAccount.search(newString, andKeyword, orKeyword);
 		assertEquals(1, store.findFolder(store.getSearchFolderName()).getBulletinCount());
-		appWithAccount.search(originalString, startDate, endDate, andKeyword, orKeyword);
+		appWithAccount.search(originalString, andKeyword, orKeyword);
 		assertEquals(1, store.findFolder(store.getSearchFolderName()).getBulletinCount());
-		appWithAccount.search(commonString, startDate, endDate, andKeyword, orKeyword);
+		appWithAccount.search(commonString, andKeyword, orKeyword);
 		assertEquals(1, store.findFolder(store.getSearchFolderName()).getBulletinCount());
-		appWithAccount.search(publicData2, startDate, endDate, andKeyword, orKeyword);
+		appWithAccount.search(publicData2, andKeyword, orKeyword);
 		assertEquals(1, store.findFolder(store.getSearchFolderName()).getBulletinCount());
 		
 		

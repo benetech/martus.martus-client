@@ -30,11 +30,9 @@ import org.martus.common.bulletin.Bulletin;
 
 public class BulletinSearcher
 {
-	public BulletinSearcher(SearchTreeNode nodeToMatch, String beginDateToMatch, String endDateToMatch)
+	public BulletinSearcher(SearchTreeNode nodeToMatch)
 	{
 		node = nodeToMatch;
-		beginDate = beginDateToMatch;
-		endDate = endDateToMatch;
 	}
 
 	public boolean doesMatch(Bulletin b)
@@ -42,8 +40,8 @@ public class BulletinSearcher
 		if(node.getOperation() == SearchTreeNode.VALUE)
 			return doesValueMatch(b);
 
-		BulletinSearcher left = new BulletinSearcher(node.getLeft(), beginDate, endDate);
-		BulletinSearcher right = new BulletinSearcher(node.getRight(), beginDate, endDate);
+		BulletinSearcher left = new BulletinSearcher(node.getLeft());
+		BulletinSearcher right = new BulletinSearcher(node.getRight());
 
 		if(node.getOperation() == SearchTreeNode.AND)
 			return left.doesMatch(b) && right.doesMatch(b);
@@ -56,9 +54,6 @@ public class BulletinSearcher
 
 	private boolean doesValueMatch(Bulletin b)
 	{
-		if(!b.withinDates(beginDate, endDate))
-			return false;
-		
 		String fieldToSearch = node.getField();
 		String searchForValue = node.getValue();
 		if(fieldToSearch == null)
@@ -86,6 +81,4 @@ public class BulletinSearcher
 	}
 
 	SearchTreeNode node;
-	String beginDate;
-	String endDate;
 }

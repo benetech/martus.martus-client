@@ -27,8 +27,6 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.test;
 
 import java.io.File;
-import java.text.DateFormat;
-import java.util.Date;
 
 import org.martus.client.search.BulletinSearcher;
 import org.martus.client.search.SearchParser;
@@ -54,8 +52,6 @@ public class TestBulletinSearcher extends TestCaseEnhanced
 		MartusCrypto security = MockMartusSecurity.createClient();
 		Bulletin b = new Bulletin(security);
 
-		String beginDate ="1900-01-01";
-		String endDate = "2099-12-31";
 		String fieldToSearch = Bulletin.TAGLOCATION;
 		String otherField = Bulletin.TAGAUTHOR;
 		String sampleValue = "green";
@@ -63,11 +59,11 @@ public class TestBulletinSearcher extends TestCaseEnhanced
 		b.set(fieldToSearch, sampleValue);
 		b.set(otherField, otherValue);
 		
-		BulletinSearcher specific = new BulletinSearcher(new SearchTreeNode(fieldToSearch + ":" + sampleValue), beginDate, endDate);
+		BulletinSearcher specific = new BulletinSearcher(new SearchTreeNode(fieldToSearch + ":" + sampleValue));
 		assertTrue("didn't find specific field?", specific.doesMatch(b));
-		BulletinSearcher wrongValue= new BulletinSearcher(new SearchTreeNode(fieldToSearch + ":" + otherValue), beginDate, endDate);
+		BulletinSearcher wrongValue= new BulletinSearcher(new SearchTreeNode(fieldToSearch + ":" + otherValue));
 		assertFalse("found wrong value?", wrongValue.doesMatch(b));
-		BulletinSearcher wrongField = new BulletinSearcher(new SearchTreeNode(otherField + ":" + sampleValue), beginDate, endDate);
+		BulletinSearcher wrongField = new BulletinSearcher(new SearchTreeNode(otherField + ":" + sampleValue));
 		assertFalse("found in wrong field?", wrongField.doesMatch(b));
 	}
 
@@ -76,22 +72,38 @@ public class TestBulletinSearcher extends TestCaseEnhanced
 		MartusCrypto security = MockMartusSecurity.createClient();
 		Bulletin b = new Bulletin(security);
 
-		String beginDate ="1900-01-01";
-		String endDate = "2099-12-31";
 		String fieldToSearch = Bulletin.TAGLOCATION;
+		String belowSample = "blue";
 		String sampleValue = "green";
+		String aboveSample = "red";
 		b.set(fieldToSearch, sampleValue);
-		
-		BulletinSearcher geMatch = new BulletinSearcher(new SearchTreeNode(fieldToSearch + ":>=" + sampleValue), beginDate, endDate);
-		assertTrue(">= didn't match?", geMatch.doesMatch(b));
-		BulletinSearcher gtNoMatch= new BulletinSearcher(new SearchTreeNode(fieldToSearch + ":>" + sampleValue), beginDate, endDate);
-		assertFalse("> matched?", gtNoMatch.doesMatch(b));
-		BulletinSearcher leMatch = new BulletinSearcher(new SearchTreeNode(fieldToSearch + ":<=" + sampleValue), beginDate, endDate);
-		assertTrue("<= didn't match?", leMatch.doesMatch(b));
-		BulletinSearcher ltNoMatch = new BulletinSearcher(new SearchTreeNode(fieldToSearch + ":<" + sampleValue), beginDate, endDate);
-		assertFalse("< matched?", ltNoMatch.doesMatch(b));
+
+		verifyOperatorComparison("testDoesMatchComparisons", b, fieldToSearch, ":>=", belowSample, true);
+		verifyOperatorComparison("testDoesMatchComparisons", b, fieldToSearch, ":>=", sampleValue, true);
+		verifyOperatorComparison("testDoesMatchComparisons", b, fieldToSearch, ":>=", aboveSample, false);
+
+		verifyOperatorComparison("testDoesMatchComparisons", b, fieldToSearch, ":>", belowSample, true);
+		verifyOperatorComparison("testDoesMatchComparisons", b, fieldToSearch, ":>", sampleValue, false);
+		verifyOperatorComparison("testDoesMatchComparisons", b, fieldToSearch, ":>", aboveSample, false);
+
+		verifyOperatorComparison("testDoesMatchComparisons", b, fieldToSearch, ":<=", belowSample, false);
+		verifyOperatorComparison("testDoesMatchComparisons", b, fieldToSearch, ":<=", sampleValue, true);
+		verifyOperatorComparison("testDoesMatchComparisons", b, fieldToSearch, ":<=", aboveSample, true);
+
+		verifyOperatorComparison("testDoesMatchComparisons", b, fieldToSearch, ":<", belowSample, false);
+		verifyOperatorComparison("testDoesMatchComparisons", b, fieldToSearch, ":<", sampleValue, false);
+		verifyOperatorComparison("testDoesMatchComparisons", b, fieldToSearch, ":<", aboveSample, true);
 	}
 
+	private void verifyOperatorComparison(String caller, Bulletin b, String fieldToSearch, String operator, String value, boolean expected)
+	{
+		String actual = b.get(fieldToSearch);
+		String expressionEnd = operator + value;
+		BulletinSearcher searcher = new BulletinSearcher(new SearchTreeNode(fieldToSearch + expressionEnd));
+		assertEquals(caller + ": " + actual + expressionEnd, expected, searcher.doesMatch(b));
+	}
+	
+	
 	public void testDoesMatch() throws Exception
 	{
 		MartusCrypto security = MockMartusSecurity.createClient();
@@ -113,162 +125,84 @@ public class TestBulletinSearcher extends TestCaseEnhanced
 		b.addPublicAttachment(publicProxy);
 		b.addPrivateAttachment(privateProxy);
 
-		String beginDate ="1900-01-01";
-		String endDate = "2099-12-31";
-
-		BulletinSearcher helloWithAnyDate = new BulletinSearcher(new SearchTreeNode("hello"), beginDate, endDate);
+		BulletinSearcher helloWithAnyDate = new BulletinSearcher(new SearchTreeNode("hello"));
 		assertEquals("hello", true, helloWithAnyDate.doesMatch(b));
 
 		// field names should not be searched
-		BulletinSearcher fieldTagWithAnyDate = new BulletinSearcher(new SearchTreeNode("author"), beginDate, endDate);
+		BulletinSearcher fieldTagWithAnyDate = new BulletinSearcher(new SearchTreeNode("author"));
 		assertEquals("author", false, fieldTagWithAnyDate.doesMatch(b));
 		// id should not be searched
-		BulletinSearcher localIdWithAnyDate = new BulletinSearcher(new SearchTreeNode(b.getLocalId()), beginDate, endDate);
+		BulletinSearcher localIdWithAnyDate = new BulletinSearcher(new SearchTreeNode(b.getLocalId()));
 		assertEquals("getLocalId()", false, localIdWithAnyDate.doesMatch(b));
 
-		BulletinSearcher noText = new BulletinSearcher(new SearchTreeNode(""), beginDate, endDate);
+		BulletinSearcher noText = new BulletinSearcher(new SearchTreeNode(""));
 		assertEquals("Blank must match", true, noText.doesMatch(b));
 
-		BulletinSearcher allCaps = new BulletinSearcher(new SearchTreeNode("HELLO"), beginDate, endDate);
+		BulletinSearcher allCaps = new BulletinSearcher(new SearchTreeNode("HELLO"));
 		assertEquals("HELLO", true, allCaps.doesMatch(b));
-		BulletinSearcher utf8 = new BulletinSearcher(new SearchTreeNode("jos"+UnicodeConstants.ACCENT_E_LOWER+"e"), beginDate, endDate);
+		BulletinSearcher utf8 = new BulletinSearcher(new SearchTreeNode("jos"+UnicodeConstants.ACCENT_E_LOWER+"e"));
 		assertEquals("jos"+UnicodeConstants.ACCENT_E_LOWER+"e", true, utf8.doesMatch(b));
-		BulletinSearcher utf8MixedCase = new BulletinSearcher(new SearchTreeNode("jos"+UnicodeConstants.ACCENT_E_UPPER+"e"), beginDate, endDate);
+		BulletinSearcher utf8MixedCase = new BulletinSearcher(new SearchTreeNode("jos"+UnicodeConstants.ACCENT_E_UPPER+"e"));
 		assertEquals("jos"+UnicodeConstants.ACCENT_E_UPPER+"e", true, utf8MixedCase.doesMatch(b));
-		BulletinSearcher nonUtf8 = new BulletinSearcher(new SearchTreeNode("josee"), beginDate, endDate);
+		BulletinSearcher nonUtf8 = new BulletinSearcher(new SearchTreeNode("josee"));
 		assertEquals("josee", false, nonUtf8.doesMatch(b));
 
 		SearchParser parser = SearchParser.createEnglishParser();
-		BulletinSearcher andRightFalse = new BulletinSearcher(parser.parse("hello and goodbye"), beginDate, endDate);
+		BulletinSearcher andRightFalse = new BulletinSearcher(parser.parse("hello and goodbye"));
 		assertEquals("right false and", false, andRightFalse.doesMatch(b));
-		BulletinSearcher andLeftFalse = new BulletinSearcher(parser.parse("goodbye and hello"), beginDate, endDate);
+		BulletinSearcher andLeftFalse = new BulletinSearcher(parser.parse("goodbye and hello"));
 		assertEquals("left false and", false, andLeftFalse.doesMatch(b));
-		BulletinSearcher andBothTrue = new BulletinSearcher(parser.parse("Hello and Summary"), beginDate, endDate);
+		BulletinSearcher andBothTrue = new BulletinSearcher(parser.parse("Hello and Summary"));
 		assertEquals("true and", true, andBothTrue.doesMatch(b));
 
-		BulletinSearcher orBothFalse = new BulletinSearcher(parser.parse("swinging and swaying"), beginDate, endDate);
+		BulletinSearcher orBothFalse = new BulletinSearcher(parser.parse("swinging and swaying"));
 		assertEquals("false or", false, orBothFalse.doesMatch(b));
-		BulletinSearcher orRightFalse = new BulletinSearcher(parser.parse("hello or goodbye"), beginDate, endDate);
+		BulletinSearcher orRightFalse = new BulletinSearcher(parser.parse("hello or goodbye"));
 		assertEquals("left true or", true, orRightFalse.doesMatch(b));
-		BulletinSearcher orLeftFalse = new BulletinSearcher(parser.parse("goodbye or hello"), beginDate, endDate);
+		BulletinSearcher orLeftFalse = new BulletinSearcher(parser.parse("goodbye or hello"));
 		assertEquals("right true or", true, orLeftFalse.doesMatch(b));
-		BulletinSearcher orBothTrue = new BulletinSearcher(parser.parse("hello or summary"), beginDate, endDate);
+		BulletinSearcher orBothTrue = new BulletinSearcher(parser.parse("hello or summary"));
 		assertEquals("both true or", true, orBothTrue.doesMatch(b));
 
-		BulletinSearcher publicAttachmentWithAnyDate = new BulletinSearcher(new SearchTreeNode(publicProxyLabel.substring(0, publicProxyLabel.length()-4)), beginDate, endDate);
+		BulletinSearcher publicAttachmentWithAnyDate = new BulletinSearcher(new SearchTreeNode(publicProxyLabel.substring(0, publicProxyLabel.length()-4)));
 		assertEquals("Public Attachment without .txt extension?", true, publicAttachmentWithAnyDate.doesMatch(b));
 
-		BulletinSearcher privateAttachmentWithAnyDate = new BulletinSearcher(new SearchTreeNode(privateProxy.getLabel().toUpperCase()), beginDate, endDate);
+		BulletinSearcher privateAttachmentWithAnyDate = new BulletinSearcher(new SearchTreeNode(privateProxy.getLabel().toUpperCase()));
 		assertEquals("Private Attachment?", true, privateAttachmentWithAnyDate.doesMatch(b));
 	}
 
-	public void testDateMatches() throws Exception
-	{
-		Bulletin b = new Bulletin(MockMartusSecurity.createClient());
-		b.set("author", "Dave");
-		b.set("summary", "summary");
-		b.set("title", "cool day");
-		b.set(Bulletin.TAGEVENTDATE, "2002-04-04");
-		b.set(Bulletin.TAGENTRYDATE, "2002-10-15");
-
-		String outOfRangeBeginDate ="2003-01-01";
-		String outOfRangeEndDate = "2006-12-31";
-		String bothInRangeBeginDate ="2002-01-01";
-		String bothInRangeEndDate = "2002-12-31";
-		String eventInRangeBeginDate ="2002-01-01";
-		String eventInRangeEndDate = "2002-04-04";
-		String entryInRangeBeginDate ="2002-10-15";
-		String entryInRangeEndDate = "2002-10-16";
-
-		BulletinSearcher emptySearch = new BulletinSearcher(new SearchTreeNode(""), outOfRangeBeginDate, outOfRangeEndDate);
-		assertEquals("out of range", false, emptySearch.doesMatch(b));
-
-		BulletinSearcher noStringAndBothDatesMatch = new BulletinSearcher(new SearchTreeNode(""), bothInRangeBeginDate, bothInRangeEndDate);
-		assertEquals("both event and entry in range", true, noStringAndBothDatesMatch.doesMatch(b));
-
-		BulletinSearcher noStringAndEventMatches = new BulletinSearcher(new SearchTreeNode(""), eventInRangeBeginDate, eventInRangeEndDate);
-		assertEquals("event only in range", true, noStringAndEventMatches.doesMatch(b));
-
-		BulletinSearcher noStringAndEntryMatches = new BulletinSearcher(new SearchTreeNode(""), entryInRangeBeginDate, entryInRangeEndDate);
-		assertEquals("entry only in range", true, noStringAndEntryMatches.doesMatch(b));
-
-		BulletinSearcher wrongStringAndBothDatesMatch = new BulletinSearcher(new SearchTreeNode("hello"), bothInRangeBeginDate, bothInRangeEndDate);
-		assertEquals("both event and entry in range but string doesn't match", false, wrongStringAndBothDatesMatch.doesMatch(b));
-
-		BulletinSearcher stringMatchesAndBothDatesMatch = new BulletinSearcher(new SearchTreeNode("Dave"), bothInRangeBeginDate, bothInRangeEndDate);
-		assertEquals("both event and entry in range and string matchs", true, stringMatchesAndBothDatesMatch.doesMatch(b));
-
-	}
-	
 	public void testDateMatchesLastSaved() throws Exception
 	{
-		Bulletin b = new Bulletin(MockMartusSecurity.createClient());
-		b.set(Bulletin.TAGEVENTDATE, "2002-04-04");
-		b.set(Bulletin.TAGENTRYDATE, "2002-10-15");
+		MartusCrypto security = MockMartusSecurity.createClient();
+		Bulletin b = new Bulletin(security);
 		b.getBulletinHeaderPacket().updateLastSavedTime();
-		long savedAt = b.getLastSavedTime();
-		final long oneDay = 60*60*24*1000;
-		DateFormat df = Bulletin.getStoredDateFormat();
-		String today = df.format(new Date(savedAt));
-		String dayBefore = df.format(new Date(savedAt - oneDay));
-		String  dayAfter = df.format(new Date(savedAt + oneDay));
+		String lastSaved = b.getLastSavedDate();
 		
-		SearchTreeNode noString = new SearchTreeNode("");
-
-		BulletinSearcher searchBefore = new BulletinSearcher(noString, dayBefore, dayBefore);
-		assertFalse("before matches?", searchBefore.doesMatch(b));
-		BulletinSearcher searchAfter = new BulletinSearcher(noString, dayAfter, dayAfter);
-		assertFalse("after matches?", searchAfter.doesMatch(b));
-		BulletinSearcher searchWithBefore = new BulletinSearcher(noString, dayBefore, today);
-		assertTrue("with before doesn't match?", searchWithBefore.doesMatch(b));
-		BulletinSearcher searchWithAfter = new BulletinSearcher(noString, today, dayAfter);
-		assertTrue("with after doesn't match?", searchWithAfter.doesMatch(b));
+		verifyOperatorComparison("testDateMatchesLastSaved", b, "_LastSavedDate", ":", lastSaved, true);
 	}
 		
 	public void testFlexiDateMatches() throws Exception
 	{
-		Bulletin b = new Bulletin(MockMartusSecurity.createClient());
-		b.set("author", "Test");
-		b.set("summary", "summary");
-		b.set("title", "Test date range");
+		MartusCrypto security = MockMartusSecurity.createClient();
+		Bulletin b = new Bulletin(security);
 		b.set(Bulletin.TAGEVENTDATE, "2003-08-20,20030820+3");
-		b.set(Bulletin.TAGENTRYDATE, "2003-08-22");
+		
+		verifyOperatorComparison("testFlexiDateMatches", b, Bulletin.TAGEVENTDATE, ":", "2003-08-21", true);
+		verifyOperatorComparison("testFlexiDateMatches", b, Bulletin.TAGEVENTDATE, ":", "2003-08-26", false);
+		verifyOperatorComparison("testFlexiDateMatches", b, Bulletin.TAGEVENTDATE, ":contains:", "2003-08-21", true);
+		verifyOperatorComparison("testFlexiDateMatches", b, Bulletin.TAGEVENTDATE, ":contains:", "2003-08-26", false);
 
-		String outOfRangeAfterBeginDate ="2004-01-10";
-		String outOfRangeAfterEndDate = "2004-1-15";
-		
-		String exactDateInRange = "2003-08-21";
-		String exactDateOutOfRange = "1995-01-01";
-		String exactDateMatchEntryDate = "2003-08-22";
-		
-		String inDateRangeBeginDate = "2003-08-21";
-		String inDateRangeEndDate = "2003-08-22";
-		
-		String outOfRangeBeforeBeginDate = "2001-01-01";
-		String outOfRangeBeforeEndDate = "2001-12-20";
-				
-		BulletinSearcher search = new BulletinSearcher(new SearchTreeNode(""), exactDateMatchEntryDate, exactDateMatchEntryDate);
-		assertEquals("match the entry date ", true, search.doesMatch(b));
-					
-		search = new BulletinSearcher(new SearchTreeNode(""), inDateRangeBeginDate, inDateRangeEndDate);
-		assertEquals("both search dates within the range ", true, search.doesMatch(b));
-		
-		search = new BulletinSearcher(new SearchTreeNode(""), outOfRangeBeforeBeginDate,inDateRangeEndDate);
-		assertEquals("search end date within the range ", true, search.doesMatch(b));		
+		verifyOperatorComparison("testFlexiDateMatches", b, Bulletin.TAGEVENTDATE, ":contains:", "2003-08-22,20030822+3", false);
+		verifyOperatorComparison("testFlexiDateMatches", b, Bulletin.TAGEVENTDATE, ":contains:", "2003-08-22,20030822+1", true);
+		verifyOperatorComparison("testFlexiDateMatches", b, Bulletin.TAGEVENTDATE, ":contains:", "2003-08-22,20030822+1", false);
 
-		search = new BulletinSearcher(new SearchTreeNode(""), inDateRangeBeginDate, outOfRangeAfterEndDate);
-		assertEquals("search begin date within range", true, search.doesMatch(b));
+		verifyOperatorComparison("testFlexiDateMatches", b, Bulletin.TAGEVENTDATE, ":overlaps:", "2003-08-22,20030822+3", true);
+		verifyOperatorComparison("testFlexiDateMatches", b, Bulletin.TAGEVENTDATE, ":overlaps:", "2003-08-22,20030822+1", true);
+		verifyOperatorComparison("testFlexiDateMatches", b, Bulletin.TAGEVENTDATE, ":overlaps:", "2003-08-26,20030826+1", false);
 
-		search = new BulletinSearcher(new SearchTreeNode(""), outOfRangeAfterBeginDate, outOfRangeAfterEndDate);
-		assertEquals("both search date in the range (after) ", false, search.doesMatch(b));
-		
-		search = new BulletinSearcher(new SearchTreeNode(""), outOfRangeBeforeBeginDate, outOfRangeBeforeEndDate);
-		assertEquals("both search date in the range (before) ", false, search.doesMatch(b));
-	
-		search = new BulletinSearcher(new SearchTreeNode(""), exactDateInRange, exactDateInRange);
-		assertEquals("exact date in the range", true, search.doesMatch(b));
-		
-		search = new BulletinSearcher(new SearchTreeNode(""), exactDateOutOfRange, exactDateOutOfRange);
-		assertEquals("exact date in the range", false, search.doesMatch(b));		
+		verifyOperatorComparison("testFlexiDateMatches", b, Bulletin.TAGEVENTDATE+".first", ":", "2003-08-20", true);
+		verifyOperatorComparison("testFlexiDateMatches", b, Bulletin.TAGEVENTDATE+".first", ":", "2003-08-21", false);
+		verifyOperatorComparison("testFlexiDateMatches", b, Bulletin.TAGEVENTDATE+".last", ":", "2003-08-23", true);
+		verifyOperatorComparison("testFlexiDateMatches", b, Bulletin.TAGEVENTDATE+".last", ":", "2003-08-22", false);
 	}	
 }

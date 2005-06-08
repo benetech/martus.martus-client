@@ -35,10 +35,7 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.client.swingui.fields.UiDateEditor;
-import org.martus.common.bulletin.Bulletin;
 import org.martus.common.clientside.UiBasicLocalization;
-import org.martus.common.fieldspec.FieldSpec;
 import org.martus.swing.UiButton;
 import org.martus.swing.UiLabel;
 import org.martus.swing.UiParagraphPanel;
@@ -67,18 +64,6 @@ public class UiSearchDlg extends JDialog  implements ActionListener
 		searchField.setText(searchString);
 		panel.addComponents(new UiLabel(localization.getFieldLabel("SearchEntry")), searchField);
 
-		startDateEditor = new UiDateEditor(localization, new FieldSpec(FieldSpec.TYPE_DATE));
-		if(startDate.length() == 0)
-			startDate = DEFAULT_SEARCH_START_DATE;
-		startDateEditor.setText(startDate);
-		panel.addComponents(new UiLabel(localization.getFieldLabel("SearchStartDate")), startDateEditor.getComponent());
-
-		endDateEditor = new UiDateEditor(localization, new FieldSpec(FieldSpec.TYPE_DATE));
-		if(endDate.length() == 0)
-			endDate = Bulletin.getLastDayOfThisYear();
-		endDateEditor.setText(endDate);
-		panel.addComponents(new UiLabel(localization.getFieldLabel("SearchEndDate")), endDateEditor.getComponent());
-
 		panel.addBlankLine();
 		panel.addComponents(search, cancel);
 
@@ -94,8 +79,6 @@ public class UiSearchDlg extends JDialog  implements ActionListener
 		if(ae.getSource() == search)
 		{
 			searchString = searchField.getText();
-			startDate = startDateEditor.getText();
-			endDate = endDateEditor.getText();
 			result = true;
 		}
 		dispose();
@@ -112,16 +95,6 @@ public class UiSearchDlg extends JDialog  implements ActionListener
 		return searchString;
 	}
 
-	public String getStartDate()
-	{
-		return startDate;
-	}
-
-	public String getEndDate()
-	{
-		return endDate;
-	}
-
 	// This class is NOT intended to be serialized!!!
 	private static final long serialVersionUID = 1;
 	private void writeObject(java.io.ObjectOutputStream stream) throws IOException
@@ -132,13 +105,7 @@ public class UiSearchDlg extends JDialog  implements ActionListener
 
 	boolean result;
 	static String searchString = "";
-	static String startDate = "";
-	static String endDate = "";
 
 	JButton search;
 	UiTextField searchField;
-	UiDateEditor startDateEditor;
-	UiDateEditor endDateEditor;
-
-	final String DEFAULT_SEARCH_START_DATE = "1900-01-01";
 }

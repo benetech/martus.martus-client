@@ -976,11 +976,11 @@ public class MartusApp
 		setLastUploadRemindedTime(new Date());
 	}
 
-	public void search(String searchFor, String startDate, String endDate, String andKeyword, String orKeyword)
+	public void search(String searchFor, String andKeyword, String orKeyword)
 	{
 		SearchParser parser = new SearchParser(andKeyword, orKeyword);
 		SearchTreeNode searchNode = parser.parse(searchFor);
-		BulletinSearcher matcher = new BulletinSearcher(searchNode, startDate, endDate);
+		BulletinSearcher matcher = new BulletinSearcher(searchNode);
 
 		BulletinFolder searchFolder = createOrFindFolder(store.getSearchFolderName());
 		searchFolder.removeAll();

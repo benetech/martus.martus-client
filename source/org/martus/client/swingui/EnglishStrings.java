@@ -715,8 +715,6 @@ public class EnglishStrings
 "field:ServerAcceptsUploads=You will be allowed to upload bulletins to this server.",
 "field:ServerDeclinesUploads=You will not be allowed to upload bulletins to this server.",
 "field:SearchEntry=Search for:",
-"field:SearchStartDate=Starting on:",
-"field:SearchEndDate=Ending on:",
 "field:ExportPrivateData=Include private data in export",
 "field:ExportBulletinDetails=Information from the selected bulletins (listed below) will be exported to an XML file that you specify.\n\nPlease Note: This is a one way operation, you will not be able to import the XML file saved back into Martus.  This operation exists so you can bring Martus Bulletins into another application that does import XML files.",
 "field:HowToCreateNewAccount=One or more accounts already exist on this computer. To create an additional account with a new username and passphrase, click OK.",

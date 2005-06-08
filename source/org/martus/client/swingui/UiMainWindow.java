@@ -1107,7 +1107,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 
 		String andKeyword = getLocalization().getKeyword("and");
 		String orKeyword = getLocalization().getKeyword("or");
-		app.search(searchDlg.getSearchString(), searchDlg.getStartDate(), searchDlg.getEndDate(), andKeyword, orKeyword);
+		app.search(searchDlg.getSearchString(), andKeyword, orKeyword);
 		ClientBulletinStore store = getStore();
 		BulletinFolder searchFolder = store.findFolder(store.getSearchFolderName());
 		folders.folderTreeContentsHaveChanged();
