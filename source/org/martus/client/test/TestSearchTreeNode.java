@@ -69,17 +69,19 @@ public class TestSearchTreeNode extends TestCaseEnhanced
 
     	assertEquals("thought it was a comparison op?", "", SearchTreeNode.getComparisonOp("one"));
     	SearchTreeNode noOp = new SearchTreeNode(field + ":" + basicValue);
-    	assertEquals("wrong default op?", SearchTreeNode.CONTAINS_STRING, noOp.getComparisonOperator());
+    	assertEquals("wrong default op?", SearchTreeNode.CONTAINS, noOp.getComparisonOperator());
     	
     	SearchTreeNode opWithoutField = new SearchTreeNode(">" + basicValue);
-    	assertEquals("allowed compareop without field?", SearchTreeNode.CONTAINS_STRING, opWithoutField.getComparisonOperator());
+    	assertEquals("allowed compareop without field?", SearchTreeNode.CONTAINS, opWithoutField.getComparisonOperator());
 
-    	String[] comparisonOps = {">", ">=", "<", "<=", };
+    	String[] comparisonOps = {">", ">=", "<", "<=", "contains:", "overlaps:"};
     	int[] comparisonOpValues = {
     		SearchTreeNode.GREATER, 
     		SearchTreeNode.GREATER_EQUAL,
     		SearchTreeNode.LESS, 
     		SearchTreeNode.LESS_EQUAL,
+    		SearchTreeNode.CONTAINS,
+    		SearchTreeNode.OVERLAPS,
     	};
     	for(int i=0; i < comparisonOps.length; ++i)
     	{

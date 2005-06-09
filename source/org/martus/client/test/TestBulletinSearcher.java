@@ -199,8 +199,9 @@ public class TestBulletinSearcher extends TestCaseEnhanced
 
 		verifyOperatorComparison("testFlexiDateMatches", b, Bulletin.TAGEVENTDATE, ":contains:", "2003-08-22,20030822+3", false);
 		verifyOperatorComparison("testFlexiDateMatches", b, Bulletin.TAGEVENTDATE, ":contains:", "2003-08-22,20030822+1", true);
-		verifyOperatorComparison("testFlexiDateMatches", b, Bulletin.TAGEVENTDATE, ":contains:", "2003-08-22,20030822+1", false);
+		verifyOperatorComparison("testFlexiDateMatches", b, Bulletin.TAGEVENTDATE, ":contains:", "2003-08-22,20030826+1", false);
 
+		verifyOperatorComparison("TestFlexidateMatches", b, Bulletin.TAGAUTHOR, ":overlaps:", "anything", false);
 		verifyOperatorComparison("testFlexiDateMatches", b, Bulletin.TAGEVENTDATE, ":overlaps:", "2003-08-22,20030822+3", true);
 		verifyOperatorComparison("testFlexiDateMatches", b, Bulletin.TAGEVENTDATE, ":overlaps:", "2003-08-22,20030822+1", true);
 		verifyOperatorComparison("testFlexiDateMatches", b, Bulletin.TAGEVENTDATE, ":overlaps:", "2003-08-26,20030826+1", false);

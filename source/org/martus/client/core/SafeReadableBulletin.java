@@ -62,5 +62,10 @@ public class SafeReadableBulletin
 		return realBulletin.doesFieldContain(fieldTag, lookForLowerCase);
 	}
 	
+	public int getFieldType(String tag)
+	{
+		return realBulletin.getFieldType(tag);
+	}
+	
 	Bulletin realBulletin;
 }
