@@ -100,10 +100,11 @@ public class TestBulletinSearcher extends TestCaseEnhanced
 	private void verifyOperatorComparison(String caller, Bulletin realBulletin, String fieldToSearch, String operator, String value, boolean expected)
 	{
 		SafeReadableBulletin b = new SafeReadableBulletin(realBulletin);
-		String actual = b.get(fieldToSearch);
+		String actual = b.field(fieldToSearch);
 		String expressionEnd = operator + value;
 		BulletinSearcher searcher = new BulletinSearcher(new SearchTreeNode(fieldToSearch + expressionEnd));
-		assertEquals(caller + ": " + actual + expressionEnd, expected, searcher.doesMatch(b));
+		String message = caller + ": " + actual + expressionEnd;
+		assertEquals(message, expected, searcher.doesMatch(b));
 	}
 	
 	
@@ -137,7 +138,7 @@ public class TestBulletinSearcher extends TestCaseEnhanced
 		BulletinSearcher fieldTagWithAnyDate = new BulletinSearcher(new SearchTreeNode("author"));
 		assertEquals("author", false, fieldTagWithAnyDate.doesMatch(b));
 		// id should not be searched
-		BulletinSearcher localIdWithAnyDate = new BulletinSearcher(new SearchTreeNode(b.get("M_LocalId")));
+		BulletinSearcher localIdWithAnyDate = new BulletinSearcher(new SearchTreeNode(b.getLocalId()));
 		assertEquals("getLocalId()", false, localIdWithAnyDate.doesMatch(b));
 
 		BulletinSearcher noText = new BulletinSearcher(new SearchTreeNode(""));
@@ -176,6 +177,14 @@ public class TestBulletinSearcher extends TestCaseEnhanced
 		assertEquals("Private Attachment?", true, privateAttachmentWithAnyDate.doesMatch(b));
 	}
 
+	public void testLocalId() throws Exception
+	{
+		MartusCrypto security = MockMartusSecurity.createClient();
+		Bulletin b = new Bulletin(security);
+		
+		verifyOperatorComparison("testLocalId", b, "_localId", ":", b.getLocalId(), true);
+	}
+		
 	public void testDateMatchesLastSaved() throws Exception
 	{
 		MartusCrypto security = MockMartusSecurity.createClient();
@@ -183,7 +192,7 @@ public class TestBulletinSearcher extends TestCaseEnhanced
 		b.getBulletinHeaderPacket().updateLastSavedTime();
 		String lastSaved = b.getLastSavedDate();
 		
-		verifyOperatorComparison("testDateMatchesLastSaved", b, "M_LastSavedDate", ":", lastSaved, true);
+		verifyOperatorComparison("testDateMatchesLastSaved", b, "_lastSavedDate", ":", lastSaved, true);
 	}
 		
 	public void testFlexiDateMatches() throws Exception

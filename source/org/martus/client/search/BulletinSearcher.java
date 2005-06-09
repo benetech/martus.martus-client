@@ -62,7 +62,7 @@ public class BulletinSearcher
 			return b.contains(searchForValue);
 
 		int compareOp = node.getComparisonOperator();
-		String thisValue = b.get(fieldToSearch);
+		String thisValue = b.field(fieldToSearch);
 		
 		if(b.getFieldType(fieldToSearch) == FieldSpec.TYPE_DATERANGE)
 			return doDateComparison(thisValue, compareOp, searchForValue);

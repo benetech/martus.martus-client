@@ -47,9 +47,14 @@ public class SafeReadableBulletin
 		realBulletin = bulletinToWrap;
 	}
 	
-	public String get(String tag)
+	public String field(String tag)
 	{
 		return realBulletin.get(tag);
+	}
+	
+	public String getLocalId()
+	{
+		return realBulletin.getLocalId();
 	}
 	
 	public boolean contains(String lookFor)
@@ -57,9 +62,9 @@ public class SafeReadableBulletin
 		return realBulletin.contains(lookFor);
 	}
 	
-	public boolean doesFieldContain(String fieldTag, String lookForLowerCase)
+	public boolean doesFieldContain(String fieldTag, String lookFor)
 	{
-		return realBulletin.doesFieldContain(fieldTag, lookForLowerCase);
+		return realBulletin.doesFieldContain(fieldTag, lookFor);
 	}
 	
 	public int getFieldType(String tag)
