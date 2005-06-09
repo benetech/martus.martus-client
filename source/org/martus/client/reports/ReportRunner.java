@@ -32,6 +32,7 @@ import java.util.Vector;
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.VelocityEngine;
 import org.apache.velocity.context.Context;
+import org.martus.client.core.SafeReadableBulletin;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.bulletin.BulletinLoader;
 import org.martus.common.crypto.MartusCrypto;
@@ -56,7 +57,7 @@ public class ReportRunner
 		{
 			DatabaseKey key = (DatabaseKey)keysToInclude.get(i);
 			Bulletin b = BulletinLoader.loadFromDatabase(db, key, signatureVerifier);
-			context.put("bulletin", new ReportableBulletin(b));
+			context.put("bulletin", new SafeReadableBulletin(b));
 			
 			context.put("i", new Integer(i+1));
 			performMerge(rf.getDetailSection(), destination, context);

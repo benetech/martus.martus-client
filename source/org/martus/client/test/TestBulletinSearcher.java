@@ -28,6 +28,7 @@ package org.martus.client.test;
 
 import java.io.File;
 
+import org.martus.client.core.SafeReadableBulletin;
 import org.martus.client.search.BulletinSearcher;
 import org.martus.client.search.SearchParser;
 import org.martus.client.search.SearchTreeNode;
@@ -50,15 +51,16 @@ public class TestBulletinSearcher extends TestCaseEnhanced
 	public void testDoesMatchSpecificField() throws Exception
 	{
 		MartusCrypto security = MockMartusSecurity.createClient();
-		Bulletin b = new Bulletin(security);
+		Bulletin realBulletin = new Bulletin(security);
 
 		String fieldToSearch = Bulletin.TAGLOCATION;
 		String otherField = Bulletin.TAGAUTHOR;
 		String sampleValue = "green";
 		String otherValue = "ignoreme";
-		b.set(fieldToSearch, sampleValue);
-		b.set(otherField, otherValue);
+		realBulletin.set(fieldToSearch, sampleValue);
+		realBulletin.set(otherField, otherValue);
 		
+		SafeReadableBulletin b = new SafeReadableBulletin(realBulletin);
 		BulletinSearcher specific = new BulletinSearcher(new SearchTreeNode(fieldToSearch + ":" + sampleValue));
 		assertTrue("didn't find specific field?", specific.doesMatch(b));
 		BulletinSearcher wrongValue= new BulletinSearcher(new SearchTreeNode(fieldToSearch + ":" + otherValue));
@@ -95,8 +97,9 @@ public class TestBulletinSearcher extends TestCaseEnhanced
 		verifyOperatorComparison("testDoesMatchComparisons", b, fieldToSearch, ":<", aboveSample, true);
 	}
 
-	private void verifyOperatorComparison(String caller, Bulletin b, String fieldToSearch, String operator, String value, boolean expected)
+	private void verifyOperatorComparison(String caller, Bulletin realBulletin, String fieldToSearch, String operator, String value, boolean expected)
 	{
+		SafeReadableBulletin b = new SafeReadableBulletin(realBulletin);
 		String actual = b.get(fieldToSearch);
 		String expressionEnd = operator + value;
 		BulletinSearcher searcher = new BulletinSearcher(new SearchTreeNode(fieldToSearch + expressionEnd));
@@ -107,12 +110,12 @@ public class TestBulletinSearcher extends TestCaseEnhanced
 	public void testDoesMatch() throws Exception
 	{
 		MartusCrypto security = MockMartusSecurity.createClient();
-		Bulletin b = new Bulletin(security);
-		b.set("author", "hello");
-		b.set("summary", "summary");
-		b.set("title", "Jos"+UnicodeConstants.ACCENT_E_LOWER+"e");
-		b.set(Bulletin.TAGEVENTDATE, "2002-04-04");
-		b.set(Bulletin.TAGENTRYDATE, "2002-10-15");
+		Bulletin realBulletin = new Bulletin(security);
+		realBulletin.set("author", "hello");
+		realBulletin.set("summary", "summary");
+		realBulletin.set("title", "Jos"+UnicodeConstants.ACCENT_E_LOWER+"e");
+		realBulletin.set(Bulletin.TAGEVENTDATE, "2002-04-04");
+		realBulletin.set(Bulletin.TAGENTRYDATE, "2002-10-15");
 		byte[] sampleBytes1 = {1,1,2,3,0,5,7,11};
 		byte[] sampleBytes2 = {3,1,4,0,1,5,9,2,7};
 		File tempFile1 = createTempFileWithData(sampleBytes1);
@@ -122,8 +125,10 @@ public class TestBulletinSearcher extends TestCaseEnhanced
 		publicProxy.setLabel(publicProxyLabel);
 		AttachmentProxy privateProxy = new AttachmentProxy(tempFile2);
 
-		b.addPublicAttachment(publicProxy);
-		b.addPrivateAttachment(privateProxy);
+		realBulletin.addPublicAttachment(publicProxy);
+		realBulletin.addPrivateAttachment(privateProxy);
+
+		SafeReadableBulletin b = new SafeReadableBulletin(realBulletin);
 
 		BulletinSearcher helloWithAnyDate = new BulletinSearcher(new SearchTreeNode("hello"));
 		assertEquals("hello", true, helloWithAnyDate.doesMatch(b));
@@ -132,7 +137,7 @@ public class TestBulletinSearcher extends TestCaseEnhanced
 		BulletinSearcher fieldTagWithAnyDate = new BulletinSearcher(new SearchTreeNode("author"));
 		assertEquals("author", false, fieldTagWithAnyDate.doesMatch(b));
 		// id should not be searched
-		BulletinSearcher localIdWithAnyDate = new BulletinSearcher(new SearchTreeNode(b.getLocalId()));
+		BulletinSearcher localIdWithAnyDate = new BulletinSearcher(new SearchTreeNode(b.get("M_LocalId")));
 		assertEquals("getLocalId()", false, localIdWithAnyDate.doesMatch(b));
 
 		BulletinSearcher noText = new BulletinSearcher(new SearchTreeNode(""));
@@ -178,7 +183,7 @@ public class TestBulletinSearcher extends TestCaseEnhanced
 		b.getBulletinHeaderPacket().updateLastSavedTime();
 		String lastSaved = b.getLastSavedDate();
 		
-		verifyOperatorComparison("testDateMatchesLastSaved", b, "_LastSavedDate", ":", lastSaved, true);
+		verifyOperatorComparison("testDateMatchesLastSaved", b, "M_LastSavedDate", ":", lastSaved, true);
 	}
 		
 	public void testFlexiDateMatches() throws Exception

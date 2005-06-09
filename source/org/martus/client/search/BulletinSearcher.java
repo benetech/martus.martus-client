@@ -26,7 +26,7 @@ Boston, MA 02111-1307, USA.
 
 package org.martus.client.search;
 
-import org.martus.common.bulletin.Bulletin;
+import org.martus.client.core.SafeReadableBulletin;
 
 public class BulletinSearcher
 {
@@ -35,7 +35,7 @@ public class BulletinSearcher
 		node = nodeToMatch;
 	}
 
-	public boolean doesMatch(Bulletin b)
+	public boolean doesMatch(SafeReadableBulletin b)
 	{
 		if(node.getOperation() == SearchTreeNode.VALUE)
 			return doesValueMatch(b);
@@ -52,7 +52,7 @@ public class BulletinSearcher
 		return false;
 	}
 
-	private boolean doesValueMatch(Bulletin b)
+	private boolean doesValueMatch(SafeReadableBulletin b)
 	{
 		String fieldToSearch = node.getField();
 		String searchForValue = node.getValue();

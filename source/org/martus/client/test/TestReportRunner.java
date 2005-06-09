@@ -89,7 +89,7 @@ public class TestReportRunner extends TestCaseEnhanced
 		MockMartusApp app = MockMartusApp.create();
 		app.loadSampleData();
 		BulletinStore store = app.getStore();
-		ReportFormat rf = new ReportFormat("$i. $bulletin.localId\n");
+		ReportFormat rf = new ReportFormat("$i. $bulletin.M_LocalId\n");
 		StringWriter result = new StringWriter();
 		Vector keys = store.scanForLeafKeys();
 		rr.runReport(rf, store.getDatabase(), keys, result);

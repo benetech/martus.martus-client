@@ -24,36 +24,42 @@ Boston, MA 02111-1307, USA.
 
 */
 
-package org.martus.client.reports;
+package org.martus.client.core;
 
 import org.martus.common.bulletin.Bulletin;
 
 
 /*
  * This class wraps a Bulletin object to allow the report runner
- * to safely pull any of its data. Exposing Bulletin itself to a 
- * user-created Velocity report would certainly allow users to obtain
- * non-reportable data (such as attachments), and might even allow 
+ * or a search/filter query to safely pull any of its data. 
+ * Exposing Bulletin itself to a user-created Velocity report 
+ * or search query would certainly allow users to obtain
+ * non-helpful data (such as attachments), and might even allow 
  * them to somehow modify the bulletin.
  * 
  * This provides a safe, read-only, limited set of getters
  * 
  */
-public class ReportableBulletin
+public class SafeReadableBulletin
 {
-	public ReportableBulletin(Bulletin bulletinToWrap)
+	public SafeReadableBulletin(Bulletin bulletinToWrap)
 	{
 		realBulletin = bulletinToWrap;
-	}
-	
-	public String getLocalId()
-	{
-		return realBulletin.getLocalId();
 	}
 	
 	public String get(String tag)
 	{
 		return realBulletin.get(tag);
+	}
+	
+	public boolean contains(String lookFor)
+	{
+		return realBulletin.contains(lookFor);
+	}
+	
+	public boolean doesFieldContain(String fieldTag, String lookForLowerCase)
+	{
+		return realBulletin.doesFieldContain(fieldTag, lookForLowerCase);
 	}
 	
 	Bulletin realBulletin;
