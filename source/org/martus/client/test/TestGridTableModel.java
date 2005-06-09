@@ -26,6 +26,7 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.test;
 
 import org.martus.client.swingui.fields.GridTableModel;
+import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.fieldspec.GridFieldSpec;
 import org.martus.util.TestCaseEnhanced;
 
@@ -41,9 +42,12 @@ public class TestGridTableModel extends TestCaseEnhanced
 	{
 		GridFieldSpec spec = new GridFieldSpec();
 		String label1 = "column 1";
+		FieldSpec column1 = new FieldSpec(label1, FieldSpec.TYPE_NORMAL);
+
 		String label2 = "column 2";
-		spec.addColumn(label1);
-		spec.addColumn(label2);
+		FieldSpec column2 = new FieldSpec(label2, FieldSpec.TYPE_NORMAL);
+		spec.addColumn(column1);
+		spec.addColumn(column2);
 		GridTableModel model = new GridTableModel(spec);
 		int columnsIncludingRowCount = 3;
 		assertEquals(columnsIncludingRowCount, model.getColumnCount());
