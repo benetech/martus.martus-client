@@ -63,11 +63,6 @@ public class SafeReadableBulletin
 		return realBulletin.contains(lookFor);
 	}
 	
-	public boolean doesFieldContain(String fieldTag, String lookFor)
-	{
-		return realBulletin.doesFieldContain(fieldTag, lookFor);
-	}
-	
 	public int getFieldType(String tag)
 	{
 		return realBulletin.getFieldType(tag);
