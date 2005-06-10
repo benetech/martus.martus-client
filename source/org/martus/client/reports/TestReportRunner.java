@@ -24,15 +24,14 @@ Boston, MA 02111-1307, USA.
 
 */
 
-package org.martus.client.test;
+package org.martus.client.reports;
 
 import java.io.StringWriter;
 import java.util.Vector;
 
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.context.Context;
-import org.martus.client.reports.ReportFormat;
-import org.martus.client.reports.ReportRunner;
+import org.martus.client.test.MockMartusApp;
 import org.martus.common.BulletinStore;
 import org.martus.common.LegacyCustomFields;
 import org.martus.common.bulletin.Bulletin;

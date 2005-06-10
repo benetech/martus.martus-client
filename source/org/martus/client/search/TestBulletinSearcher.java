@@ -24,14 +24,11 @@ Boston, MA 02111-1307, USA.
 
 */
 
-package org.martus.client.test;
+package org.martus.client.search;
 
 import java.io.File;
 
 import org.martus.client.core.SafeReadableBulletin;
-import org.martus.client.search.BulletinSearcher;
-import org.martus.client.search.SearchParser;
-import org.martus.client.search.SearchTreeNode;
 import org.martus.common.bulletin.AttachmentProxy;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.crypto.MartusCrypto;

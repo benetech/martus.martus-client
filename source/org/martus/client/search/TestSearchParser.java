@@ -24,11 +24,8 @@ Boston, MA 02111-1307, USA.
 
 */
 
-package org.martus.client.test;
+package org.martus.client.search;
 
-import org.martus.client.search.SearchParser;
-import org.martus.client.search.SearchTreeNode;
-import org.martus.client.search.TokenList;
 import org.martus.util.TestCaseEnhanced;
 
 public class TestSearchParser extends TestCaseEnhanced

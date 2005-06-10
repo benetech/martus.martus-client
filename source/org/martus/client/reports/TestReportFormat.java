@@ -24,9 +24,8 @@ Boston, MA 02111-1307, USA.
 
 */
 
-package org.martus.client.test;
+package org.martus.client.reports;
 
-import org.martus.client.reports.ReportFormat;
 import org.martus.util.TestCaseEnhanced;
 
 

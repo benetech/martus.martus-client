@@ -26,6 +26,12 @@ Boston, MA 02111-1307, USA.
 
 package org.martus.client.test;
 
+import org.martus.client.reports.TestReportFormat;
+import org.martus.client.reports.TestReportRunner;
+import org.martus.client.search.TestBulletinSearcher;
+import org.martus.client.search.TestSearchParser;
+import org.martus.client.search.TestSearchTreeNode;
+
 import junit.framework.Test;
 import junit.framework.TestSuite;
 
