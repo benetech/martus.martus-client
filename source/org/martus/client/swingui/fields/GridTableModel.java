@@ -32,6 +32,7 @@ import javax.swing.table.AbstractTableModel;
 import javax.xml.parsers.ParserConfigurationException;
 
 import org.martus.common.GridData;
+import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.fieldspec.GridFieldSpec;
 import org.xml.sax.SAXException;
 
@@ -78,6 +79,13 @@ public class GridTableModel extends AbstractTableModel
 		return (String)fieldSpec.getAllColumnLabels().get(column - EXTRA_COLUMN);
 	}
 	
+	public int getColumnType(int column) 
+	{
+		if(column == 0)
+			return FieldSpec.TYPE_NORMAL;
+		return fieldSpec.getColumnType(column - EXTRA_COLUMN);
+	}
+
 	public Object getValueAt(int row, int column)
 	{
 		if(column == 0)

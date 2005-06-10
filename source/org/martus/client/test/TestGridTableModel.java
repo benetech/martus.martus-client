@@ -52,8 +52,11 @@ public class TestGridTableModel extends TestCaseEnhanced
 		int columnsIncludingRowCount = 3;
 		assertEquals(columnsIncludingRowCount, model.getColumnCount());
 		assertEquals(" ", model.getColumnName(0));
+		assertEquals(FieldSpec.TYPE_NORMAL, model.getColumnType(0));
 		assertEquals(label1, model.getColumnName(1));
+		assertEquals(FieldSpec.TYPE_NORMAL, model.getColumnType(1));
 		assertEquals(label2, model.getColumnName(2));
+		assertEquals(FieldSpec.TYPE_NORMAL, model.getColumnType(2));
 		assertEquals(0, model.getRowCount());
 		model.addEmptyRow();
 		assertEquals(1, model.getRowCount());
