@@ -29,8 +29,10 @@ import java.awt.Color;
 import java.awt.Component;
 import java.io.IOException;
 import java.io.NotSerializableException;
-
+import java.util.Vector;
 import javax.swing.DefaultCellEditor;
+import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
 import javax.swing.JComponent;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
@@ -38,7 +40,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.table.TableCellEditor;
 import javax.swing.table.TableCellRenderer;
-import javax.swing.table.TableModel;
+import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.fieldspec.GridFieldSpec;
 import org.martus.swing.UiScrollPane;
 import org.martus.swing.UiTable;
@@ -51,6 +53,7 @@ public class UiGrid extends UiField
 	public UiGrid(GridFieldSpec fieldSpec)
 	{
 		super();
+		tableCellEditors = new Vector(fieldSpec.getColumnCount()+1);
 		model = new GridTableModel(fieldSpec);
 		table = new GridTable(model);
 		table.setColumnSelectionAllowed(false);
@@ -63,7 +66,7 @@ public class UiGrid extends UiField
 	
 	class GridTable extends UiTableWithCellEditingProtection
 	{
-		public GridTable(TableModel model)
+		public GridTable(GridTableModel model)
 		{
 			super(model);
 			setMaxColumnWidthToHeaderWidth(0);
@@ -71,9 +74,17 @@ public class UiGrid extends UiField
 				setColumnWidthToHeaderWidth(i);
 			setAutoResizeMode(AUTO_RESIZE_OFF);
 			myCellRenderer = new GridCellRenderer();
-			UiTextField uiTextField = new UiTextField();
-			uiTextField.setBorder(new LineBorder(Color.BLUE));
-			myCellEditor = new DefaultCellEditor(uiTextField);
+			for(int i = 0 ; i < model.getColumnCount(); ++i)
+			{
+				switch(model.getColumnType(i))
+				{
+					case FieldSpec.TYPE_NORMAL:
+						UiTextField uiTextField = new UiTextField();
+						uiTextField.setBorder(new LineBorder(Color.BLUE));
+						tableCellEditors.add(new GridTableCellEditor(uiTextField));
+				}
+				
+			}
 		}
 		
 		public TableCellRenderer getCellRenderer(int row, int column)
@@ -83,12 +94,14 @@ public class UiGrid extends UiField
 
 		public TableCellEditor getCellEditor()
 		{
-			return myCellEditor;
+			return getCellEditor(getEditingRow(), getEditingColumn());
 		}
 		
 		public TableCellEditor getCellEditor(int row, int column)
 		{
-			return myCellEditor;
+			if(column < 0 || column > tableCellEditors.size())
+				return null;
+			return (TableCellEditor)tableCellEditors.get(column);
 		}
 
 		
@@ -108,26 +121,53 @@ public class UiGrid extends UiField
 		}
 
 	}
+	
+	class GridTableCellEditor extends DefaultCellEditor
+	{
+		public GridTableCellEditor(UiTextField textField)
+		{
+			super(textField);
+		}
+		
+		public GridTableCellEditor(UiChoiceEditor choiceEditor)
+		{
+			super((JComboBox)choiceEditor.getComponent());
+		}
+		
+		public GridTableCellEditor(UiBoolEditor booleanEditor)
+		{
+			super((JCheckBox)booleanEditor.getComponent());
+		}
+
+		private static final long serialVersionUID = 1;
+
+	}
 
 	
 	class GridCellRenderer implements TableCellRenderer
 	{
 		public Component getTableCellRendererComponent(JTable tableToUse, Object value, boolean isSelected, boolean hasFocus, int row, int column)
 		{
-			UiTextField cell = new UiTextField((String)value);
-			cell.setBorder(new EmptyBorder(0,0,0,0));
-			if(column == 0)
+			switch(model.getColumnType(column))
 			{
-				cell.setBackground(Color.LIGHT_GRAY);
-				cell.setForeground(Color.BLACK);
-				return cell;
+				
+				case FieldSpec.TYPE_NORMAL:
+				default:
+					UiTextField cell = new UiTextField((String)value);
+					cell.setBorder(new EmptyBorder(0,0,0,0));
+					if(column == 0)
+					{
+						cell.setBackground(Color.LIGHT_GRAY);
+						cell.setForeground(Color.BLACK);
+						return cell;
+					}
+					
+					if(hasFocus)
+					{
+						cell.setBorder(new LineBorder(Color.BLACK,1));
+					}
+					return cell;
 			}
-			
-			if(hasFocus)
-			{
-				cell.setBorder(new LineBorder(Color.BLACK,1));
-			}
-			return cell;
 		}
 	}
 
@@ -160,5 +200,5 @@ public class UiGrid extends UiField
 	UiTable table;
 	GridTableModel model;
 	GridCellRenderer myCellRenderer;
-	DefaultCellEditor myCellEditor;
+	Vector tableCellEditors;
 }
