@@ -29,7 +29,6 @@ import java.awt.Color;
 import java.awt.Component;
 import java.io.IOException;
 import java.io.NotSerializableException;
-import java.util.Vector;
 import javax.swing.DefaultCellEditor;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
@@ -53,7 +52,7 @@ public class UiGrid extends UiField
 	public UiGrid(GridFieldSpec fieldSpec)
 	{
 		super();
-		tableCellEditors = new Vector(fieldSpec.getColumnCount()+1);
+		tableCellEditors = new TableCellEditor[fieldSpec.getColumnCount()+1];
 		model = new GridTableModel(fieldSpec);
 		table = new GridTable(model);
 		table.setColumnSelectionAllowed(false);
@@ -81,7 +80,7 @@ public class UiGrid extends UiField
 					case FieldSpec.TYPE_NORMAL:
 						UiTextField uiTextField = new UiTextField();
 						uiTextField.setBorder(new LineBorder(Color.BLUE));
-						tableCellEditors.add(new GridTableCellEditor(uiTextField));
+						tableCellEditors[i] = new GridTableCellEditor(uiTextField);
 				}
 				
 			}
@@ -99,9 +98,9 @@ public class UiGrid extends UiField
 		
 		public TableCellEditor getCellEditor(int row, int column)
 		{
-			if(column < 0 || column > tableCellEditors.size())
+			if(column < 0 || column > tableCellEditors.length)
 				return null;
-			return (TableCellEditor)tableCellEditors.get(column);
+			return tableCellEditors[column];
 		}
 
 		
@@ -200,5 +199,5 @@ public class UiGrid extends UiField
 	UiTable table;
 	GridTableModel model;
 	GridCellRenderer myCellRenderer;
-	Vector tableCellEditors;
+	TableCellEditor tableCellEditors[];
 }
