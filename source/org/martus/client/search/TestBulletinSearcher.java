@@ -97,7 +97,7 @@ public class TestBulletinSearcher extends TestCaseEnhanced
 	private void verifyOperatorComparison(String caller, Bulletin realBulletin, String fieldToSearch, String operator, String value, boolean expected)
 	{
 		SafeReadableBulletin b = new SafeReadableBulletin(realBulletin);
-		String actual = b.field(fieldToSearch);
+		String actual = b.field(fieldToSearch).getData();
 		String expressionEnd = operator + value;
 		BulletinSearcher searcher = new BulletinSearcher(new SearchTreeNode(fieldToSearch + expressionEnd));
 		String message = caller + ": " + actual + expressionEnd;

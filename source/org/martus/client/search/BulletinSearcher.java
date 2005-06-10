@@ -62,10 +62,10 @@ public class BulletinSearcher
 			return b.contains(searchForValue);
 
 		int compareOp = node.getComparisonOperator();
-		String thisValue = b.field(fieldToSearch);
+		String thisValue = b.field(fieldToSearch).getData();
 		
 		if(b.getFieldType(fieldToSearch) == FieldSpec.TYPE_DATERANGE)
-			return doDateComparison(thisValue, compareOp, searchForValue);
+			return doDateRangeComparison(thisValue, compareOp, searchForValue);
 		
 		switch(compareOp)
 		{
@@ -87,7 +87,7 @@ public class BulletinSearcher
 		return false;
 	}
 	
-	private boolean doDateComparison(String thisValue, int compareOp, String searchForValue)
+	private boolean doDateRangeComparison(String thisValue, int compareOp, String searchForValue)
 	{
 		MartusFlexidate searchFor = MartusFlexidate.createFromMartusDateString(searchForValue);
 		MartusFlexidate thisRange = MartusFlexidate.createFromMartusDateString(thisValue);

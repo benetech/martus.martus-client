@@ -27,6 +27,7 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.core;
 
 import org.martus.common.bulletin.Bulletin;
+import org.martus.common.field.MartusField;
 
 
 /*
@@ -47,9 +48,9 @@ public class SafeReadableBulletin
 		realBulletin = bulletinToWrap;
 	}
 	
-	public String field(String tag)
+	public MartusField field(String tag)
 	{
-		return realBulletin.get(tag);
+		return realBulletin.getField(tag);
 	}
 	
 	public String getLocalId()
