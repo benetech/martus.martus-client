@@ -26,14 +26,15 @@ Boston, MA 02111-1307, USA.
 
 package org.martus.client.test;
 
+import junit.framework.Test;
+import junit.framework.TestSuite;
+
+import org.martus.client.core.TestSafeReadableBulletin;
 import org.martus.client.reports.TestReportFormat;
 import org.martus.client.reports.TestReportRunner;
 import org.martus.client.search.TestBulletinSearcher;
 import org.martus.client.search.TestSearchParser;
 import org.martus.client.search.TestSearchTreeNode;
-
-import junit.framework.Test;
-import junit.framework.TestSuite;
 
 public class TestClient
 {
@@ -68,6 +69,7 @@ public class TestClient
 		suite.addTest(new TestSuite(TestMartusUserNameAndPassword.class));
 		suite.addTest(new TestSuite(TestReportFormat.class));
 		suite.addTest(new TestSuite(TestReportRunner.class));
+		suite.addTest(new TestSuite(TestSafeReadableBulletin.class));
 		suite.addTest(new TestSuite(TestSearchParser.class));
 		suite.addTest(new TestSuite(TestSearchTreeNode.class));
 		suite.addTest(new TestSuite(TestTokenReplacement.class));

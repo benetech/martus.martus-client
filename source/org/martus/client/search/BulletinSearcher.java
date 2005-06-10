@@ -27,6 +27,7 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.search;
 
 import org.martus.client.core.SafeReadableBulletin;
+import org.martus.common.field.MartusField;
 import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.utilities.MartusFlexidate;
 
@@ -56,21 +57,23 @@ public class BulletinSearcher
 
 	private boolean doesValueMatch(SafeReadableBulletin b)
 	{
-		String fieldToSearch = node.getField();
 		String searchForValue = node.getValue();
-		if(fieldToSearch == null)
+
+		String tagOfFieldToSearch = node.getField();
+		if(tagOfFieldToSearch == null)
 			return b.contains(searchForValue);
 
 		int compareOp = node.getComparisonOperator();
-		String thisValue = b.field(fieldToSearch).getData();
+		MartusField field = b.getPossiblyNestedField(tagOfFieldToSearch);
+		String thisValue = field.getData();
 		
-		if(b.getFieldType(fieldToSearch) == FieldSpec.TYPE_DATERANGE)
+		if(b.getFieldType(tagOfFieldToSearch) == FieldSpec.TYPE_DATERANGE)
 			return doDateRangeComparison(thisValue, compareOp, searchForValue);
 		
 		switch(compareOp)
 		{
 			case SearchTreeNode.CONTAINS:
-				return b.doesFieldContain(fieldToSearch, searchForValue);
+				return (thisValue.toLowerCase().indexOf(searchForValue.toLowerCase()) >= 0);
 			case SearchTreeNode.LESS: 
 				return (thisValue.compareTo(searchForValue) < 0);
 			case SearchTreeNode.LESS_EQUAL: 

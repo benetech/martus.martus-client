@@ -73,5 +73,20 @@ public class SafeReadableBulletin
 		return realBulletin.getFieldType(tag);
 	}
 	
+	public MartusField getPossiblyNestedField(String nestedFieldTag)
+	{
+		String[] tags = parseNestedTags(nestedFieldTag);
+		MartusField field = field(tags[0]);
+		for(int i=1; i < tags.length; ++i)
+			field = field.getSubField(tags[i]);
+			
+		return field;
+	}
+	
+	public static String[] parseNestedTags(String tagsToParse)
+	{
+		return tagsToParse.split("\\.");
+	}
+
 	Bulletin realBulletin;
 }
