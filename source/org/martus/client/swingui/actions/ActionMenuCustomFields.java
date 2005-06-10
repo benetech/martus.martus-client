@@ -35,9 +35,9 @@ import org.martus.client.core.MartusApp;
 import org.martus.client.core.MartusApp.SaveConfigInfoException;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.dialogs.UiCustomFieldsDlg;
-import org.martus.common.CustomFields;
+import org.martus.common.FieldCollection;
 import org.martus.common.MartusConstants;
-import org.martus.common.CustomFields.CustomFieldsParseException;
+import org.martus.common.FieldCollection.CustomFieldsParseException;
 import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.fieldspec.StandardFieldSpecs;
 
@@ -62,7 +62,7 @@ public class ActionMenuCustomFields extends UiMenuAction
 			
 		store.setPublicFieldTags(newSpecs);
 		app.getConfigInfo().setCustomFieldSpecs(MartusConstants.deprecatedCustomFieldSpecs);
-		app.getConfigInfo().setCustomFieldXml(new CustomFields(newSpecs).toString());
+		app.getConfigInfo().setCustomFieldXml(new FieldCollection(newSpecs).toString());
 
 		try
 		{
@@ -76,7 +76,7 @@ public class ActionMenuCustomFields extends UiMenuAction
 
 	private FieldSpec[] getCustomizedFieldsFromUser(FieldSpec[] existingSpecs)
 	{
-		CustomFields existingFields = new CustomFields(existingSpecs);
+		FieldCollection existingFields = new FieldCollection(existingSpecs);
 		String existingCustomFieldXml = existingFields.toString();
 		while(true)
 		{
@@ -90,7 +90,7 @@ public class ActionMenuCustomFields extends UiMenuAction
 			if(newCustomFieldXml.length() == 0)
 			{
 				if(mainWindow.confirmDlg("UndoCustomFields"))
-				existingFields = new CustomFields(StandardFieldSpecs.getDefaultPublicFieldSpecs());
+				existingFields = new FieldCollection(StandardFieldSpecs.getDefaultPublicFieldSpecs());
 				existingCustomFieldXml = existingFields.toString();
 			}
 			else
@@ -98,7 +98,7 @@ public class ActionMenuCustomFields extends UiMenuAction
 				FieldSpec[] newSpecs = null;
 				try
 				{
-					newSpecs = CustomFields.parseXml(newCustomFieldXml);
+					newSpecs = FieldCollection.parseXml(newCustomFieldXml);
 				}
 				catch(CustomFieldsParseException e)
 				{

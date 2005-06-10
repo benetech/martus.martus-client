@@ -56,14 +56,14 @@ import org.martus.client.search.SearchTreeNode;
 import org.martus.client.swingui.EnglishStrings;
 import org.martus.client.swingui.UiConstants;
 import org.martus.common.BulletinSummary;
-import org.martus.common.CustomFields;
+import org.martus.common.FieldCollection;
 import org.martus.common.HQKey;
 import org.martus.common.HQKeys;
 import org.martus.common.LegacyCustomFields;
 import org.martus.common.MartusUtilities;
 import org.martus.common.ProgressMeterInterface;
 import org.martus.common.Version;
-import org.martus.common.CustomFields.CustomFieldsParseException;
+import org.martus.common.FieldCollection.CustomFieldsParseException;
 import org.martus.common.HQKeys.HQsException;
 import org.martus.common.MartusUtilities.FileVerificationException;
 import org.martus.common.MartusUtilities.PublicInformationInvalidException;
@@ -404,7 +404,7 @@ public class MartusApp
 	{
 		String xmlSpecs = configInfo.getCustomFieldXml();
 		if(xmlSpecs.length() > 0)
-			return CustomFields.parseXml(xmlSpecs);
+			return FieldCollection.parseXml(xmlSpecs);
 			
 		String legacySpecs = configInfo.getCustomFieldSpecs();
 		FieldSpec[] specs = LegacyCustomFields.parseFieldSpecsFromString(legacySpecs);

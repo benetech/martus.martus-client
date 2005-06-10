@@ -30,8 +30,8 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Vector;
-import org.martus.common.CustomFields;
-import org.martus.common.CustomFields.CustomFieldsParseException;
+import org.martus.common.FieldCollection;
+import org.martus.common.FieldCollection.CustomFieldsParseException;
 import org.martus.common.crypto.MartusCrypto;
 import org.martus.common.crypto.MartusCrypto.AuthorizationFailedException;
 import org.martus.common.crypto.MartusCrypto.MartusSignatureException;
@@ -109,7 +109,7 @@ public class CustomFieldTemplate
 	{
 		try
 		{
-			FieldSpec[] newSpecs = CustomFields.parseXml(xmlToValidate);
+			FieldSpec[] newSpecs = FieldCollection.parseXml(xmlToValidate);
 			CustomFieldSpecValidator checker = new CustomFieldSpecValidator(newSpecs);
 			if(checker.isValid())
 				return true;

@@ -30,7 +30,7 @@ import java.io.FileOutputStream;
 import java.util.Vector;
 import org.martus.client.core.CustomFieldError;
 import org.martus.client.core.CustomFieldTemplate;
-import org.martus.common.CustomFields;
+import org.martus.common.FieldCollection;
 import org.martus.common.crypto.MockMartusSecurity;
 import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.fieldspec.StandardFieldSpecs;
@@ -61,7 +61,7 @@ public class TestCustomFieldTemplate extends TestCaseEnhanced
 	
 	public void testValidateXml() throws Exception
 	{
-		CustomFields fields = new CustomFields(StandardFieldSpecs.getDefaultPublicFieldSpecs());
+		FieldCollection fields = new FieldCollection(StandardFieldSpecs.getDefaultPublicFieldSpecs());
 		CustomFieldTemplate template = new CustomFieldTemplate();
 		assertTrue("not valid?", template.isvalidTemplateXml(fields.toString()));
 		assertEquals(0, template.getErrors().size());
@@ -75,7 +75,7 @@ public class TestCustomFieldTemplate extends TestCaseEnhanced
 	
 	public void testExportXml() throws Exception
 	{
-		CustomFields fields = new CustomFields(StandardFieldSpecs.getDefaultPublicFieldSpecs());
+		FieldCollection fields = new FieldCollection(StandardFieldSpecs.getDefaultPublicFieldSpecs());
 		CustomFieldTemplate template = new CustomFieldTemplate();
 		File exportFile = createTempFileFromName("$$$testExportXml");
 		exportFile.delete();
@@ -94,7 +94,7 @@ public class TestCustomFieldTemplate extends TestCaseEnhanced
 	
 	public void testImportXml() throws Exception
 	{
-		CustomFields fields = new CustomFields(StandardFieldSpecs.getDefaultPublicFieldSpecs());
+		FieldCollection fields = new FieldCollection(StandardFieldSpecs.getDefaultPublicFieldSpecs());
 		CustomFieldTemplate template = new CustomFieldTemplate();
 		File exportFile = createTempFileFromName("$$$testExportXml");
 		exportFile.delete();

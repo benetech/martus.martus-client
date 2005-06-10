@@ -48,7 +48,7 @@ import org.martus.client.core.MartusApp.CannotCreateAccountFileException;
 import org.martus.client.core.MartusApp.SaveConfigInfoException;
 import org.martus.client.swingui.UiLocalization;
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.common.CustomFields;
+import org.martus.common.FieldCollection;
 import org.martus.common.HQKey;
 import org.martus.common.HQKeys;
 import org.martus.common.LegacyCustomFields;
@@ -326,9 +326,9 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		ConfigInfo infoToConvert = new ConfigInfo();
 		String sampleLegacyFields = "tag1;tag2";
 		infoToConvert.setCustomFieldSpecs(sampleLegacyFields);
-		CustomFields fields = new CustomFields(MartusApp.getCustomFieldSpecs(infoToConvert));
+		FieldCollection fields = new FieldCollection(MartusApp.getCustomFieldSpecs(infoToConvert));
 
-		CustomFields expected = new CustomFields(LegacyCustomFields.parseFieldSpecsFromString(sampleLegacyFields));
+		FieldCollection expected = new FieldCollection(LegacyCustomFields.parseFieldSpecsFromString(sampleLegacyFields));
 		assertEquals(expected.toString(), fields.toString());
 	}
 	
@@ -337,11 +337,11 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		ConfigInfo convertedInfo = new ConfigInfo();
 		String newFields = "new,label;another,show";
 		FieldSpec[] newSpecs = LegacyCustomFields.parseFieldSpecsFromString(newFields);
-		CustomFields convertedFields = new CustomFields(newSpecs);
+		FieldCollection convertedFields = new FieldCollection(newSpecs);
 		convertedInfo.setCustomFieldXml(convertedFields.toString());
-		CustomFields fields = new CustomFields(MartusApp.getCustomFieldSpecs(convertedInfo));
+		FieldCollection fields = new FieldCollection(MartusApp.getCustomFieldSpecs(convertedInfo));
 
-		CustomFields expected = new CustomFields(LegacyCustomFields.parseFieldSpecsFromString(newFields));
+		FieldCollection expected = new FieldCollection(LegacyCustomFields.parseFieldSpecsFromString(newFields));
 		assertEquals(expected.toString(), fields.toString());
 	}
 	

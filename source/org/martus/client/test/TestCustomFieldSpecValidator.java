@@ -30,7 +30,7 @@ import java.util.Vector;
 
 import org.martus.client.core.CustomFieldError;
 import org.martus.client.core.CustomFieldSpecValidator;
-import org.martus.common.CustomFields;
+import org.martus.common.FieldCollection;
 import org.martus.common.LegacyCustomFields;
 import org.martus.common.bulletin.BulletinConstants;
 import org.martus.common.fieldspec.FieldSpec;
@@ -159,13 +159,13 @@ public class TestCustomFieldSpecValidator extends TestCaseEnhanced
 	public void testUnknownType() throws Exception
 	{
 		FieldSpec[] specs = StandardFieldSpecs.getDefaultPublicFieldSpecs();
-		CustomFields fields = new CustomFields(specs);
+		FieldCollection fields = new FieldCollection(specs);
 		String tag = "weirdTag";
 		String label = "weird Label";
 		String xmlFieldUnknownType = "<CustomFields><Field><Tag>"+tag+"</Tag>" +
 			"<Label>" + label + "</Label><Type>xxx</Type>" +
 			"</Field></CustomFields>";
-		FieldSpec badSpec = CustomFields.parseXml(xmlFieldUnknownType)[0]; 
+		FieldSpec badSpec = FieldCollection.parseXml(xmlFieldUnknownType)[0]; 
 		fields.add(badSpec);
 		specs = addFieldSpec(specs, badSpec);
 		CustomFieldSpecValidator checker = new CustomFieldSpecValidator(specs);
