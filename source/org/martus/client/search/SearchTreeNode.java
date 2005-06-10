@@ -37,10 +37,7 @@ public class SearchTreeNode
 	public final static int GREATER_EQUAL = 2; 
 	public final static int LESS = 3; 
 	public final static int LESS_EQUAL = 4;
-	public final static int OVERLAPS = 5;
 	
-	private final static String OVERLAPS_STRING = "overlaps:";
-	private final static String CONTAINS_STRING = "contains:";
 	private final static String GREATER_EQUAL_STRING = ">=";
 	private final static String LESS_EQUAL_STRING = "<=";
 	private final static String GREATER_STRING = ">";
@@ -77,8 +74,6 @@ public class SearchTreeNode
 	
 	private static int convertComparisonOpStringToValue(String op)
 	{
-		if(op.equals(OVERLAPS_STRING))
-			return OVERLAPS;
 		if(op.equals(GREATER_STRING))
 			return GREATER;
 		if(op.equals(GREATER_EQUAL_STRING))
@@ -137,8 +132,6 @@ public class SearchTreeNode
 
 	private final static String[] comparisonOpsLongestFirst = 
 	{
-		OVERLAPS_STRING,
-		CONTAINS_STRING,
 		GREATER_EQUAL_STRING, 
 		LESS_EQUAL_STRING, 
 		GREATER_STRING, 

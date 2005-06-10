@@ -28,8 +28,6 @@ package org.martus.client.search;
 
 import org.martus.client.core.SafeReadableBulletin;
 import org.martus.common.field.MartusField;
-import org.martus.common.fieldspec.FieldSpec;
-import org.martus.common.utilities.MartusFlexidate;
 
 public class BulletinSearcher
 {
@@ -65,59 +63,24 @@ public class BulletinSearcher
 
 		int compareOp = node.getComparisonOperator();
 		MartusField field = b.getPossiblyNestedField(tagOfFieldToSearch);
-		String thisValue = field.getData();
-		
-		if(b.getFieldType(tagOfFieldToSearch) == FieldSpec.TYPE_DATERANGE)
-			return doDateRangeComparison(thisValue, compareOp, searchForValue);
 		
 		switch(compareOp)
 		{
 			case SearchTreeNode.CONTAINS:
-				return (thisValue.toLowerCase().indexOf(searchForValue.toLowerCase()) >= 0);
+				return field.contains(searchForValue);
 			case SearchTreeNode.LESS: 
-				return (thisValue.compareTo(searchForValue) < 0);
+				return (field.compareTo(searchForValue) < 0);
 			case SearchTreeNode.LESS_EQUAL: 
-				return (thisValue.compareTo(searchForValue) <= 0);
+				return (field.compareTo(searchForValue) <= 0);
 			case SearchTreeNode.GREATER: 
-				return (thisValue.compareTo(searchForValue) > 0);
+				return (field.compareTo(searchForValue) > 0);
 			case SearchTreeNode.GREATER_EQUAL: 
-				return (thisValue.compareTo(searchForValue) >= 0);
-			case SearchTreeNode.OVERLAPS:
-				return false;
+				return (field.compareTo(searchForValue) >= 0);
 		}
 		
 		System.out.println("BulletinSearcher.doesValueMatch: Unknown op: " + compareOp);
 		return false;
 	}
 	
-	private boolean doDateRangeComparison(String thisValue, int compareOp, String searchForValue)
-	{
-		MartusFlexidate searchFor = MartusFlexidate.createFromMartusDateString(searchForValue);
-		MartusFlexidate thisRange = MartusFlexidate.createFromMartusDateString(thisValue);
-		
-		long thisBegin = thisRange.getBeginDate().getTime();
-		long thisEnd = thisRange.getEndDate().getTime();
-		long searchBegin = searchFor.getBeginDate().getTime();
-		long searchEnd = searchFor.getEndDate().getTime();
-
-		if(compareOp == SearchTreeNode.CONTAINS)
-		{
-			boolean isBeginningInRange = (searchBegin >= thisBegin && searchBegin <= thisEnd);
-			boolean isEndInRange = (searchEnd >= thisBegin && searchEnd <= thisEnd);
-			
-			return (isBeginningInRange && isEndInRange);
-		}
-
-		if(compareOp == SearchTreeNode.OVERLAPS)
-		{
-			boolean isBeginningInRange = (searchBegin <= thisEnd);
-			boolean isEndInRange = (searchEnd >= thisBegin);
-			
-			return (isBeginningInRange && isEndInRange);
-		}
-
-		return false;
-	}
-
 	SearchTreeNode node;
 }

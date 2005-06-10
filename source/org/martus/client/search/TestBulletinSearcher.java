@@ -201,21 +201,15 @@ public class TestBulletinSearcher extends TestCaseEnhanced
 		
 		verifyOperatorComparison("testFlexiDateMatches", b, Bulletin.TAGEVENTDATE, ":", "2003-08-21", true);
 		verifyOperatorComparison("testFlexiDateMatches", b, Bulletin.TAGEVENTDATE, ":", "2003-08-26", false);
-		verifyOperatorComparison("testFlexiDateMatches", b, Bulletin.TAGEVENTDATE, ":contains:", "2003-08-21", true);
-		verifyOperatorComparison("testFlexiDateMatches", b, Bulletin.TAGEVENTDATE, ":contains:", "2003-08-26", false);
-
-		verifyOperatorComparison("testFlexiDateMatches", b, Bulletin.TAGEVENTDATE, ":contains:", "2003-08-22,20030822+3", false);
-		verifyOperatorComparison("testFlexiDateMatches", b, Bulletin.TAGEVENTDATE, ":contains:", "2003-08-22,20030822+1", true);
-		verifyOperatorComparison("testFlexiDateMatches", b, Bulletin.TAGEVENTDATE, ":contains:", "2003-08-22,20030826+1", false);
-
-		verifyOperatorComparison("TestFlexidateMatches", b, Bulletin.TAGAUTHOR, ":overlaps:", "anything", false);
-		verifyOperatorComparison("testFlexiDateMatches", b, Bulletin.TAGEVENTDATE, ":overlaps:", "2003-08-22,20030822+3", true);
-		verifyOperatorComparison("testFlexiDateMatches", b, Bulletin.TAGEVENTDATE, ":overlaps:", "2003-08-22,20030822+1", true);
-		verifyOperatorComparison("testFlexiDateMatches", b, Bulletin.TAGEVENTDATE, ":overlaps:", "2003-08-26,20030826+1", false);
 
 		verifyOperatorComparison("testFlexiDateMatches", b, Bulletin.TAGEVENTDATE+"." + MartusDateRangeField.SUBFIELD_FIRST, ":", "2003-08-20", true);
 		verifyOperatorComparison("testFlexiDateMatches", b, Bulletin.TAGEVENTDATE+"." + MartusDateRangeField.SUBFIELD_FIRST, ":", "2003-08-21", false);
 		verifyOperatorComparison("testFlexiDateMatches", b, Bulletin.TAGEVENTDATE+"." + MartusDateRangeField.SUBFIELD_LAST, ":", "2003-08-23", true);
 		verifyOperatorComparison("testFlexiDateMatches", b, Bulletin.TAGEVENTDATE+"." + MartusDateRangeField.SUBFIELD_LAST, ":", "2003-08-22", false);
+
+		verifyOperatorComparison("testFlexiDateMatches", b, Bulletin.TAGEVENTDATE+"." + MartusDateRangeField.SUBFIELD_FIRST, ":>=", "2003-08-20", true);
+		verifyOperatorComparison("testFlexiDateMatches", b, Bulletin.TAGEVENTDATE+"." + MartusDateRangeField.SUBFIELD_FIRST, ":>", "2003-08-20", false);
+		verifyOperatorComparison("testFlexiDateMatches", b, Bulletin.TAGEVENTDATE+"." + MartusDateRangeField.SUBFIELD_FIRST, ":<=", "2003-08-20", true);
+		verifyOperatorComparison("testFlexiDateMatches", b, Bulletin.TAGEVENTDATE+"." + MartusDateRangeField.SUBFIELD_FIRST, ":<", "2003-08-19", false);
 	}	
 }

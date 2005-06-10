@@ -73,14 +73,12 @@ public class TestSearchTreeNode extends TestCaseEnhanced
     	SearchTreeNode opWithoutField = new SearchTreeNode(">" + basicValue);
     	assertEquals("allowed compareop without field?", SearchTreeNode.CONTAINS, opWithoutField.getComparisonOperator());
 
-    	String[] comparisonOps = {">", ">=", "<", "<=", "contains:", "overlaps:"};
+    	String[] comparisonOps = {">", ">=", "<", "<="};
     	int[] comparisonOpValues = {
     		SearchTreeNode.GREATER, 
     		SearchTreeNode.GREATER_EQUAL,
     		SearchTreeNode.LESS, 
     		SearchTreeNode.LESS_EQUAL,
-    		SearchTreeNode.CONTAINS,
-    		SearchTreeNode.OVERLAPS,
     	};
     	for(int i=0; i < comparisonOps.length; ++i)
     	{
