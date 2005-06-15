@@ -41,9 +41,9 @@ public class UiChoiceEditor extends UiChoice implements ActionListener
 		super(choicesToUse);
 	}
 
-	public UiChoiceEditor(Vector choicesToUse)
+	public UiChoiceEditor(Vector stringChoicesToUse)
 	{
-		super(choicesToUse);
+		super(stringChoicesToUse);
 	}
 	
 	protected void initalize(ChoiceItem[] choicesToUse)

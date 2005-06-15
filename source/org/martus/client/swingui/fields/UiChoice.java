@@ -36,13 +36,13 @@ abstract public class UiChoice extends UiField
 		initalize(choicesToUse);
 	}
 	
-	public UiChoice(Vector choicesToUse)
+	public UiChoice(Vector stringChoicesToUse)
 	{
-		ChoiceItem[] choicesArray = new ChoiceItem[choicesToUse.size()+1];
+		ChoiceItem[] choicesArray = new ChoiceItem[stringChoicesToUse.size()+1];
 		choicesArray[0] = new ChoiceItem(DropDownFieldSpec.EMPTY_FIRST_CHOICE,DropDownFieldSpec.EMPTY_FIRST_CHOICE);
-		for(int i = 0; i < choicesToUse.size(); i++)
+		for(int i = 0; i < stringChoicesToUse.size(); i++)
 		{
-			String item = (String)choicesToUse.get(i);
+			String item = (String)stringChoicesToUse.get(i);
 			choicesArray[i+1] = new ChoiceItem(item,item);
 		}
 		initalize(choicesArray);

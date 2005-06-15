@@ -25,7 +25,9 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.test;
 
+import java.util.Vector;
 import org.martus.client.swingui.fields.GridTableModel;
+import org.martus.common.fieldspec.DropDownFieldSpec;
 import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.fieldspec.GridFieldSpec;
 import org.martus.util.TestCaseEnhanced;
@@ -40,15 +42,23 @@ public class TestGridTableModel extends TestCaseEnhanced
 	
 	public void testBasics() throws Exception
 	{
-		GridFieldSpec spec = new GridFieldSpec();
+		GridFieldSpec gridSpec = new GridFieldSpec();
 		String label1 = "column 1";
 		FieldSpec column1 = new FieldSpec(label1, FieldSpec.TYPE_NORMAL);
 
 		String label2 = "column 2";
-		FieldSpec column2 = new FieldSpec(label2, FieldSpec.TYPE_NORMAL);
-		spec.addColumn(column1);
-		spec.addColumn(column2);
-		GridTableModel model = new GridTableModel(spec);
+		DropDownFieldSpec column2 = new DropDownFieldSpec();
+		Vector choices = new Vector();
+		String choice1 = "choice 1";
+		String choice2 = "choice 2";
+		choices.add(choice1);
+		choices.add(choice2);
+		
+		column2.setChoices(choices);
+		column2.setLabel(label2);
+		gridSpec.addColumn(column1);
+		gridSpec.addColumn(column2);
+		GridTableModel model = new GridTableModel(gridSpec);
 		int columnsIncludingRowCount = 3;
 		assertEquals(columnsIncludingRowCount, model.getColumnCount());
 		assertEquals(" ", model.getColumnName(0));
@@ -56,7 +66,9 @@ public class TestGridTableModel extends TestCaseEnhanced
 		assertEquals(label1, model.getColumnName(1));
 		assertEquals(FieldSpec.TYPE_NORMAL, model.getColumnType(1));
 		assertEquals(label2, model.getColumnName(2));
-		assertEquals(FieldSpec.TYPE_NORMAL, model.getColumnType(2));
+		assertEquals(FieldSpec.TYPE_DROPDOWN, model.getColumnType(2));
+		assertEquals(choice1, ((DropDownFieldSpec)(model.getFieldSpec(2))).get(0));
+		assertEquals(choice2, ((DropDownFieldSpec)(model.getFieldSpec(2))).get(1));
 		assertEquals(0, model.getRowCount());
 		model.addEmptyRow();
 		assertEquals(1, model.getRowCount());
@@ -75,6 +87,5 @@ public class TestGridTableModel extends TestCaseEnhanced
 		GridTableModel model2 = new GridTableModel(spec2);
 		assertEquals(ColumnZeroHeader, model2.getColumnName(0));
 	}
-	
-	
+
 }

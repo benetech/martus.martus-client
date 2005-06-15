@@ -32,6 +32,7 @@ import javax.swing.table.AbstractTableModel;
 import javax.xml.parsers.ParserConfigurationException;
 
 import org.martus.common.GridData;
+import org.martus.common.clientside.ChoiceItem;
 import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.fieldspec.GridFieldSpec;
 import org.xml.sax.SAXException;
@@ -86,6 +87,13 @@ public class GridTableModel extends AbstractTableModel
 		return fieldSpec.getColumnType(column - EXTRA_COLUMN);
 	}
 
+	public FieldSpec getFieldSpec(int column) 
+	{
+		if(column == 0)
+			return new FieldSpec(FieldSpec.TYPE_NORMAL);
+		return fieldSpec.getFieldSpec(column - EXTRA_COLUMN);
+	}
+
 	public Object getValueAt(int row, int column)
 	{
 		if(column == 0)
@@ -97,8 +105,22 @@ public class GridTableModel extends AbstractTableModel
 	{
 		if(column == 0)
 			return;
-		gridData.setValueAt((String)aValue, row, column - EXTRA_COLUMN);
+		gridData.setValueAt(GetStringValue(aValue, column), row, column - EXTRA_COLUMN);
 		fireTableCellUpdated(row,column);
+	}
+	
+	public String GetStringValue(Object aValue, int column)
+	{
+		switch (fieldSpec.getColumnType(column - EXTRA_COLUMN))
+		{
+			case FieldSpec.TYPE_DROPDOWN:
+				ChoiceItem item = (ChoiceItem)aValue;
+				return item.toString();
+			
+			case FieldSpec.TYPE_NORMAL:
+			default:
+				return (String)aValue;
+		}
 	}
 	
 	public String getXmlRepresentation()

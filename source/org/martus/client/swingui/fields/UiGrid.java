@@ -39,6 +39,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.table.TableCellEditor;
 import javax.swing.table.TableCellRenderer;
+import org.martus.common.fieldspec.DropDownFieldSpec;
 import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.fieldspec.GridFieldSpec;
 import org.martus.swing.UiScrollPane;
@@ -81,6 +82,13 @@ public class UiGrid extends UiField
 						UiTextField uiTextField = new UiTextField();
 						uiTextField.setBorder(new LineBorder(Color.BLUE));
 						tableCellEditors[i] = new GridTableCellEditor(uiTextField);
+						break;
+						
+					case FieldSpec.TYPE_DROPDOWN:
+						UiChoiceEditor uiChoiceField = new UiChoiceEditor(((DropDownFieldSpec)model.getFieldSpec(i)).getChoices());
+						//uiChoiceField.setBorder(new LineBorder(Color.BLUE));
+						tableCellEditors[i] = new GridTableCellEditor(uiChoiceField);
+						break;
 				}
 				
 			}
