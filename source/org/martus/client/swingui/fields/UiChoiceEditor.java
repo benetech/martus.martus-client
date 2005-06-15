@@ -28,28 +28,25 @@ package org.martus.client.swingui.fields;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Vector;
+
 import javax.swing.JComponent;
+
 import org.martus.client.core.LanguageChangeListener;
 import org.martus.common.clientside.ChoiceItem;
+import org.martus.common.fieldspec.FieldSpec;
 import org.martus.swing.UiComboBox;
 
 public class UiChoiceEditor extends UiChoice implements ActionListener
 {
-	public UiChoiceEditor(ChoiceItem[] choicesToUse)
+	public UiChoiceEditor(FieldSpec dropDownSpec)
 	{
-		super(choicesToUse);
-	}
-
-	public UiChoiceEditor(Vector stringChoicesToUse)
-	{
-		super(stringChoicesToUse);
+		super(dropDownSpec);
 	}
 	
-	protected void initalize(ChoiceItem[] choicesToUse)
+	protected void initialize()
 	{
-		choices = choicesToUse;
-		widget = new UiComboBox(choices);
+		widget = new UiComboBox();
+		updateChoices();
 		widget.addActionListener(this);
 	}
 
@@ -59,26 +56,18 @@ public class UiChoiceEditor extends UiChoice implements ActionListener
 		return item.getCode();
 	}
 
-	public void setText(String newText)
+	public void setText(String newCode)
 	{
-		ChoiceItem item = choices[0];
-		for(int i = 0; i < choices.length; ++i)
-		{
-			if(newText.equals(choices[i].getCode()))
-			{
-				item = choices[i];
-				break;
-			}
-		}
-		widget.setSelectedItem(item);
+		int rowToSelect = spec.findCode(newCode);
+		widget.setSelectedIndex(rowToSelect);
 	}
 
-	public void updateChoices(ChoiceItem[] choicesToUse)
+	public void updateChoices()
 	{
 		widget.removeAllItems();
-		choices = choicesToUse;
-		for(int i = 0; i < choicesToUse.length; ++i)
-			widget.addItem(choicesToUse[i]);
+		for(int i = 0; i < spec.getCount(); ++i)
+			widget.addItem(spec.getChoice(i));
+
 		widget.updateUI();
 	}
 

@@ -26,7 +26,9 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.test;
 
 import java.util.Vector;
+
 import org.martus.client.swingui.fields.GridTableModel;
+import org.martus.common.fieldspec.CustomDropDownFieldSpec;
 import org.martus.common.fieldspec.DropDownFieldSpec;
 import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.fieldspec.GridFieldSpec;
@@ -47,7 +49,7 @@ public class TestGridTableModel extends TestCaseEnhanced
 		FieldSpec column1 = new FieldSpec(label1, FieldSpec.TYPE_NORMAL);
 
 		String label2 = "column 2";
-		DropDownFieldSpec column2 = new DropDownFieldSpec();
+		CustomDropDownFieldSpec column2 = new CustomDropDownFieldSpec();
 		Vector choices = new Vector();
 		String choice1 = "choice 1";
 		String choice2 = "choice 2";
@@ -67,8 +69,8 @@ public class TestGridTableModel extends TestCaseEnhanced
 		assertEquals(FieldSpec.TYPE_NORMAL, model.getColumnType(1));
 		assertEquals(label2, model.getColumnName(2));
 		assertEquals(FieldSpec.TYPE_DROPDOWN, model.getColumnType(2));
-		assertEquals(choice1, ((DropDownFieldSpec)(model.getFieldSpec(2))).get(0));
-		assertEquals(choice2, ((DropDownFieldSpec)(model.getFieldSpec(2))).get(1));
+		assertEquals(choice1, ((DropDownFieldSpec)(model.getFieldSpec(2))).getValue(0));
+		assertEquals(choice2, ((DropDownFieldSpec)(model.getFieldSpec(2))).getValue(1));
 		assertEquals(0, model.getRowCount());
 		model.addEmptyRow();
 		assertEquals(1, model.getRowCount());

@@ -25,30 +25,18 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.fields;
 
-import java.util.Vector;
-import org.martus.common.clientside.ChoiceItem;
 import org.martus.common.fieldspec.DropDownFieldSpec;
+import org.martus.common.fieldspec.FieldSpec;
 
 abstract public class UiChoice extends UiField
 {
-	public UiChoice(ChoiceItem[] choicesToUse)
+	public UiChoice(FieldSpec dropDownSpec)
 	{
-		initalize(choicesToUse);
+		spec = (DropDownFieldSpec)dropDownSpec;
+		initialize();
 	}
 	
-	public UiChoice(Vector stringChoicesToUse)
-	{
-		ChoiceItem[] choicesArray = new ChoiceItem[stringChoicesToUse.size()+1];
-		choicesArray[0] = new ChoiceItem(DropDownFieldSpec.EMPTY_FIRST_CHOICE,DropDownFieldSpec.EMPTY_FIRST_CHOICE);
-		for(int i = 0; i < stringChoicesToUse.size(); i++)
-		{
-			String item = (String)stringChoicesToUse.get(i);
-			choicesArray[i+1] = new ChoiceItem(item,item);
-		}
-		initalize(choicesArray);
-	}
+	abstract protected void initialize();
 
-	abstract protected void initalize(ChoiceItem[] choicesToUse);
-
-	protected ChoiceItem[] choices;
+	protected DropDownFieldSpec spec;
 }

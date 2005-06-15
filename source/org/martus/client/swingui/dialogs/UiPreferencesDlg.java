@@ -39,6 +39,7 @@ import org.martus.client.swingui.UiLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.fields.UiChoiceEditor;
 import org.martus.common.clientside.UiBasicLocalization;
+import org.martus.common.fieldspec.DropDownFieldSpec;
 import org.martus.common.utilities.DateUtilities;
 import org.martus.swing.UiButton;
 import org.martus.swing.UiCheckBox;
@@ -58,10 +59,10 @@ public class UiPreferencesDlg extends JDialog implements ActionListener
 		
 		setTitle(localization.getMenuLabel("Preferences"));
 		
-		dateFormatDropdown = new UiChoiceEditor(DateUtilities.getDateFormats());
+		dateFormatDropdown = new UiChoiceEditor(new DropDownFieldSpec(DateUtilities.getDateFormats()));
 		dateFormatDropdown.setText(localization.getCurrentDateFormatCode());
 		
-		languageDropdown = new UiChoiceEditor(localization.getUiLanguages());
+		languageDropdown = new UiChoiceEditor(new DropDownFieldSpec(localization.getUiLanguages()));
 		languageDropdown.setText(localization.getCurrentLanguageCode());
 		
 		allPrivate = new UiCheckBox();

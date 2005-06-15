@@ -28,8 +28,9 @@ package org.martus.client.swingui.bulletincomponent;
 
 import java.io.IOException;
 import java.io.NotSerializableException;
-import java.util.Vector;
+
 import javax.swing.JComponent;
+
 import org.martus.client.swingui.UiLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.fields.UiAttachmentViewer;
@@ -43,7 +44,6 @@ import org.martus.client.swingui.fields.UiMultilineViewer;
 import org.martus.client.swingui.fields.UiNormalTextViewer;
 import org.martus.client.swingui.fields.UiUnknownViewer;
 import org.martus.common.bulletin.AttachmentProxy;
-import org.martus.common.clientside.ChoiceItem;
 import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.fieldspec.GridFieldSpec;
 
@@ -85,14 +85,9 @@ public class UiBulletinComponentViewSection extends UiBulletinComponentDataSecti
 		return new UiMessageField(spec);
 	}
 
-	public UiField createChoiceField(ChoiceItem[] choices)
+	public UiField createChoiceField(FieldSpec spec)
 	{
-		return new UiChoiceViewer(choices);
-	}
-
-	public UiField createChoiceField(Vector choices)
-	{
-		return new UiChoiceViewer(choices);
+		return new UiChoiceViewer(spec);
 	}
 
 	public UiField createBoolField()

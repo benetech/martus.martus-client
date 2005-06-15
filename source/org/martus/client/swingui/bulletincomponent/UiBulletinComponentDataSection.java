@@ -27,7 +27,6 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.swingui.bulletincomponent;
 
 import java.awt.Color;
-import java.util.Vector;
 
 import javax.swing.JComponent;
 import javax.swing.border.LineBorder;
@@ -41,7 +40,6 @@ import org.martus.client.swingui.fields.UiFlexiDateEditor;
 import org.martus.client.swingui.fields.UiField.DataInvalidException;
 import org.martus.common.bulletin.AttachmentProxy;
 import org.martus.common.bulletin.Bulletin;
-import org.martus.common.clientside.ChoiceItem;
 import org.martus.common.fieldspec.DropDownFieldSpec;
 import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.fieldspec.GridFieldSpec;
@@ -145,14 +143,12 @@ abstract public class UiBulletinComponentDataSection extends UiBulletinComponent
 				field = createFlexiDateField(fieldSpec);
 				break;
 			case FieldSpec.TYPE_LANGUAGE:
-				ChoiceItem[] languages =
-					getLocalization().getLanguageNameChoices();
-				field = createChoiceField(languages);
+				DropDownFieldSpec spec = new DropDownFieldSpec(getLocalization().getLanguageNameChoices());
+				field = createChoiceField(spec);
 				field.setLanguageListener(languageChangeListener);
 				break;
 			case FieldSpec.TYPE_DROPDOWN:
-				Vector stringChoices = ((DropDownFieldSpec)fieldSpec).getChoices();
-				field = createChoiceField(stringChoices);
+				field = createChoiceField(fieldSpec);
 				break;
 			case FieldSpec.TYPE_NORMAL:
 				field = createNormalField();
@@ -254,8 +250,7 @@ abstract public class UiBulletinComponentDataSection extends UiBulletinComponent
 	abstract public UiField createMultilineField();
 	abstract public UiField createMessageField(FieldSpec spec);
 
-	abstract public UiField createChoiceField(ChoiceItem[] choices);
-	abstract public UiField createChoiceField(Vector choices);
+	abstract public UiField createChoiceField(FieldSpec spec);
 	abstract public UiField createDateField(FieldSpec spec);
 	abstract public UiField createFlexiDateField(FieldSpec spec);
 	abstract public UiField createUnknownField();

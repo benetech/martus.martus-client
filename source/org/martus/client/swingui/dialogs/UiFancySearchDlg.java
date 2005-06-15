@@ -28,7 +28,6 @@ package org.martus.client.swingui.dialogs;
 
 import java.io.IOException;
 import java.io.NotSerializableException;
-import java.util.Vector;
 
 import javax.swing.Box;
 
@@ -63,12 +62,15 @@ public class UiFancySearchDlg extends UiSearchDlg
 
 		GridFieldSpec spec = new GridFieldSpec();
 
-		Vector opChoices = new Vector();
-		opChoices.add(new ChoiceItem(":", "contains"));
-		opChoices.add(new ChoiceItem(":>", ">"));
-		opChoices.add(new ChoiceItem(":>=", ">="));
-		opChoices.add(new ChoiceItem(":<", "<"));
-		opChoices.add(new ChoiceItem(":<=", "<="));
+		ChoiceItem[] opChoices = 
+		{
+			new ChoiceItem(":", "contains"),
+			new ChoiceItem(":>", ">"),
+			new ChoiceItem(":>=", ">="),
+			new ChoiceItem(":<", "<"),
+			new ChoiceItem(":<=", "<="),
+		};
+		                                  
 		DropDownFieldSpec opSpec = new DropDownFieldSpec();
 		opSpec.setChoices(opChoices);
 		System.out.println(opSpec.getDetailsXml());

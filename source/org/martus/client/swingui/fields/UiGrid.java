@@ -29,6 +29,7 @@ import java.awt.Color;
 import java.awt.Component;
 import java.io.IOException;
 import java.io.NotSerializableException;
+
 import javax.swing.DefaultCellEditor;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
@@ -39,7 +40,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.table.TableCellEditor;
 import javax.swing.table.TableCellRenderer;
-import org.martus.common.fieldspec.DropDownFieldSpec;
+
 import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.fieldspec.GridFieldSpec;
 import org.martus.swing.UiScrollPane;
@@ -85,7 +86,7 @@ public class UiGrid extends UiField
 						break;
 						
 					case FieldSpec.TYPE_DROPDOWN:
-						UiChoiceEditor uiChoiceField = new UiChoiceEditor(((DropDownFieldSpec)model.getFieldSpec(i)).getChoices());
+						UiChoiceEditor uiChoiceField = new UiChoiceEditor((model.getFieldSpec(i)));
 						//uiChoiceField.setBorder(new LineBorder(Color.BLUE));
 						tableCellEditors[i] = new GridTableCellEditor(uiChoiceField);
 						break;

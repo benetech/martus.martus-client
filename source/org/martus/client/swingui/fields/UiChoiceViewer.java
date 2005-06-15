@@ -26,27 +26,21 @@ Boston, MA 02111-1307, USA.
 
 package org.martus.client.swingui.fields;
 
-import java.util.Vector;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
-import org.martus.common.clientside.ChoiceItem;
+
+import org.martus.common.fieldspec.FieldSpec;
 import org.martus.swing.UiLabel;
 
 public class UiChoiceViewer extends UiChoice
 {
-	public UiChoiceViewer(ChoiceItem[] choicesToUse)
+	public UiChoiceViewer(FieldSpec dropDownSpec)
 	{
-		super(choicesToUse);
+		super(dropDownSpec);
 	}
-
-	public UiChoiceViewer(Vector choicesToUse)
+	
+	protected void initialize()
 	{
-		super(choicesToUse);
-	}
-
-	protected void initalize(ChoiceItem[] choicesToUse)
-	{
-		choices = choicesToUse;
 		widget = new UiLabel();
 	}
 
@@ -57,16 +51,8 @@ public class UiChoiceViewer extends UiChoice
 
 	public void setText(String newText)
 	{
-		ChoiceItem item = choices[0];
-		for(int i = 0; i < choices.length; ++i)
-		{
-			if(newText.equals(choices[i].getCode()))
-			{
-				item = choices[i];
-				break;
-			}
-		}
-		widget.setText(" " + item.toString() + " ");
+		String value = spec.getValue(newText);
+		widget.setText(" " + value + " ");
 	}
 
 	public JComponent getComponent()
