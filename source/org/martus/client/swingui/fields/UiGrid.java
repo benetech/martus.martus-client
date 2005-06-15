@@ -87,7 +87,6 @@ public class UiGrid extends UiField
 						getColumnModel().getColumn(i).setCellEditor(new GridTableCellEditor(uiChoiceField)); 
 						break;
 				}
-				
 			}
 		}
 		

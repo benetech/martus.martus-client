@@ -91,9 +91,7 @@ public class UiGridEditor extends UiGrid
                         JComboBox jcbRef = (JComboBox)(component);
                         jcbRef.setVisible( true );
                         jcbRef.requestFocus();
-//						table.editCellAt(table.getSelectedRow(), table.getSelectedColumn());
 						jcbRef.showPopup();
-
                    }
                 }
             }

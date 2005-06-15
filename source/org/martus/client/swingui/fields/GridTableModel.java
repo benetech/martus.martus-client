@@ -27,12 +27,9 @@ package org.martus.client.swingui.fields;
 
 import java.io.IOException;
 import java.io.NotSerializableException;
-
 import javax.swing.table.AbstractTableModel;
 import javax.xml.parsers.ParserConfigurationException;
-
 import org.martus.common.GridData;
-import org.martus.common.clientside.ChoiceItem;
 import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.fieldspec.GridFieldSpec;
 import org.xml.sax.SAXException;
@@ -105,22 +102,8 @@ public class GridTableModel extends AbstractTableModel
 	{
 		if(column == 0)
 			return;
-		gridData.setValueAt(GetStringValue(aValue, column), row, column - EXTRA_COLUMN);
+		gridData.setValueAt((String)aValue, row, column - EXTRA_COLUMN);
 		fireTableCellUpdated(row,column);
-	}
-	
-	public String GetStringValue(Object aValue, int column)
-	{
-		switch (fieldSpec.getColumnType(column - EXTRA_COLUMN))
-		{
-			case FieldSpec.TYPE_DROPDOWN:
-				ChoiceItem item = (ChoiceItem)aValue;
-				return item.toString();
-			
-			case FieldSpec.TYPE_NORMAL:
-			default:
-				return (String)aValue;
-		}
 	}
 	
 	public String getXmlRepresentation()

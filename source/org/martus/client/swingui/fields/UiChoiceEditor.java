@@ -26,15 +26,16 @@ Boston, MA 02111-1307, USA.
 
 package org.martus.client.swingui.fields;
 
+import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
+import javax.swing.DefaultListCellRenderer;
 import javax.swing.JComponent;
-
+import javax.swing.JList;
 import org.martus.client.core.LanguageChangeListener;
-import org.martus.common.clientside.ChoiceItem;
 import org.martus.common.fieldspec.FieldSpec;
 import org.martus.swing.UiComboBox;
+import org.martus.swing.UiLanguageDirection;
 
 public class UiChoiceEditor extends UiChoice implements ActionListener
 {
@@ -48,12 +49,27 @@ public class UiChoiceEditor extends UiChoice implements ActionListener
 		widget = new UiComboBox();
 		updateChoices();
 		widget.addActionListener(this);
+		widget.setRenderer(new UiChoiceListCellRenderer());
+	}
+	
+	class UiChoiceListCellRenderer extends DefaultListCellRenderer
+	{
+		
+		private static final long serialVersionUID = 1;
+
+		public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected, boolean cellHasFocus)
+		{
+			Component cellRenderer = super.getListCellRendererComponent(list, spec.getValue((String)value), index, isSelected,
+					cellHasFocus);
+			cellRenderer.setComponentOrientation(UiLanguageDirection.getComponentOrientation());
+			return cellRenderer;
+		}
+		
 	}
 
 	public String getText()
 	{
-		ChoiceItem item = (ChoiceItem)widget.getSelectedItem();
-		return item.getCode();
+		return (String)widget.getSelectedItem();
 	}
 
 	public void setText(String newCode)
@@ -66,7 +82,7 @@ public class UiChoiceEditor extends UiChoice implements ActionListener
 	{
 		widget.removeAllItems();
 		for(int i = 0; i < spec.getCount(); ++i)
-			widget.addItem(spec.getChoice(i));
+			widget.addItem(spec.getChoice(i).getCode());
 
 		widget.updateUI();
 	}
