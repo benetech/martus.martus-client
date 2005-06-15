@@ -92,12 +92,12 @@ import org.martus.client.swingui.dialogs.UiPrintBulletinDlg;
 import org.martus.client.swingui.dialogs.UiProgressRetrieveBulletinsDlg;
 import org.martus.client.swingui.dialogs.UiProgressRetrieveSummariesDlg;
 import org.martus.client.swingui.dialogs.UiRemoveServerDlg;
-import org.martus.client.swingui.dialogs.UiSearchDlg;
 import org.martus.client.swingui.dialogs.UiServerSummariesDeleteDlg;
 import org.martus.client.swingui.dialogs.UiServerSummariesDlg;
 import org.martus.client.swingui.dialogs.UiServerSummariesRetrieveDlg;
 import org.martus.client.swingui.dialogs.UiShowScrollableTextDlg;
 import org.martus.client.swingui.dialogs.UiSigninDlg;
+import org.martus.client.swingui.dialogs.UiSimpleSearchDlg;
 import org.martus.client.swingui.dialogs.UiSplashDlg;
 import org.martus.client.swingui.dialogs.UiStringInputDlg;
 import org.martus.client.swingui.dialogs.UiTemplateDlg;
@@ -1100,7 +1100,9 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	
 	public void doSearch()
 	{
-		UiSearchDlg searchDlg = new UiSearchDlg(this);
+		// TODO: Allow either the old UiSimpleSearchDlg or the new UiFancySearchDlg
+		//UiFancySearchDlg searchDlg = new UiFancySearchDlg(this);
+		UiSimpleSearchDlg searchDlg = new UiSimpleSearchDlg(this);
 		if(!searchDlg.getResults())
 			return;
 		Cursor originalCursor = setWaitingCursor();

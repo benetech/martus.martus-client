@@ -1,7 +1,7 @@
 /*
 
 The Martus(tm) free, social justice documentation and
-monitoring software. Copyright (C) 2001-2005, Beneficent
+monitoring software. Copyright (C) 2005, Beneficent
 Technology, Inc. (Benetech).
 
 Martus is free software; you can redistribute it and/or
@@ -26,62 +26,66 @@ Boston, MA 02111-1307, USA.
 
 package org.martus.client.swingui.dialogs;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.io.NotSerializableException;
-
-import javax.swing.JButton;
-import javax.swing.JDialog;
 
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.common.clientside.UiBasicLocalization;
 import org.martus.swing.UiButton;
-import org.martus.swing.Utilities;
+import org.martus.swing.UiLabel;
+import org.martus.swing.UiParagraphPanel;
+import org.martus.swing.UiTextField;
+import org.martus.swing.UiWrappedTextArea;
 
-public abstract class UiSearchDlg extends JDialog  implements ActionListener
+public class UiSimpleSearchDlg extends UiSearchDlg
 {
-	public UiSearchDlg(UiMainWindow owner)
+	public UiSimpleSearchDlg(UiMainWindow owner)
 	{
-		super(owner, "", true);
-		UiBasicLocalization localization = owner.getLocalization();
+		super(owner);
+	}
 
-		searchButton = createBody(localization);
+	UiButton createBody(UiBasicLocalization localization)
+	{
+		setTitle(localization.getWindowTitle("search"));
 		
-		Utilities.centerDlg(this);
-		setResizable(true);
-		setVisible(true);
+		UiButton search = new UiButton(localization.getButtonLabel("search"));
+		search.addActionListener(this);
+
+		UiButton cancel = new UiButton(localization.getButtonLabel("cancel"));
+		cancel.addActionListener(this);
+		
+		searchField = new UiTextField(40);
+		searchField.setText(previousSearch);
+
+		UiParagraphPanel panel = new UiParagraphPanel();
+		panel.addOnNewLine(new UiWrappedTextArea(localization.getFieldLabel("SearchBulletinRules")));
+		panel.addComponents(new UiLabel(localization.getFieldLabel("SearchEntry")), searchField);
+		panel.addBlankLine();
+		panel.addComponents(search, cancel);
+	
+		getContentPane().add(panel);
+		getRootPane().setDefaultButton(search);
+		
+		return search;
 	}
 	
-	abstract UiButton createBody(UiBasicLocalization localization);
-	abstract public String getSearchString();
-	abstract void memorizeSearch();
-
-	public void actionPerformed(ActionEvent ae)
+	public String getSearchString()
 	{
-		if(ae.getSource() == searchButton)
-		{
-			memorizeSearch();
-			result = true;
-		}
-		dispose();
+		return searchField.getText(); 		
 	}
 
-
-	public boolean getResults()
+	void memorizeSearch()
 	{
-		return result;
+		previousSearch = getSearchString();
 	}
-
+	
 	// This class is NOT intended to be serialized!!!
 	private static final long serialVersionUID = 1;
 	private void writeObject(java.io.ObjectOutputStream stream) throws IOException
 	{
 		throw new NotSerializableException();
 	}
-
-
-	boolean result;
-
-	protected JButton searchButton;
+	
+	protected UiTextField searchField;
+	private static String previousSearch = "";
 }
