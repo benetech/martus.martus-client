@@ -73,7 +73,6 @@ public class UiFancySearchDlg extends UiSearchDlg
 		                                  
 		DropDownFieldSpec opSpec = new DropDownFieldSpec();
 		opSpec.setChoices(opChoices);
-		System.out.println(opSpec.getDetailsXml());
 		try
 		{
 			spec.addColumn(FieldSpec.createCustomField("field", "Field", FieldSpec.TYPE_NORMAL));
