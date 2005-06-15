@@ -27,6 +27,9 @@ package org.martus.client.swingui.fields;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import javax.swing.CellEditor;
+import javax.swing.DefaultCellEditor;
+import javax.swing.JComboBox;
 import org.martus.common.fieldspec.GridFieldSpec;
 
 
@@ -77,6 +80,23 @@ public class UiGridEditor extends UiGrid
 
 		public void keyReleased(KeyEvent e)
 		{
+            if (e.getKeyCode() == java.awt.event.KeyEvent.VK_SPACE) 
+			{
+                CellEditor dceSelect = table.getCellEditor();
+                if (dceSelect != null && dceSelect instanceof DefaultCellEditor ) 
+				{
+                    Object component = ((DefaultCellEditor)dceSelect).getComponent();
+                    if(component instanceof JComboBox) 
+					{
+                        JComboBox jcbRef = (JComboBox)(component);
+                        jcbRef.setVisible( true );
+                        jcbRef.requestFocus();
+//						table.editCellAt(table.getSelectedRow(), table.getSelectedColumn());
+						jcbRef.showPopup();
+
+                   }
+                }
+            }
 		}
 
 		public void keyTyped(KeyEvent e)
