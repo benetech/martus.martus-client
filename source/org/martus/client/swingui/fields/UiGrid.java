@@ -29,7 +29,6 @@ import java.awt.Color;
 import java.awt.Component;
 import java.io.IOException;
 import java.io.NotSerializableException;
-
 import javax.swing.DefaultCellEditor;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
@@ -38,9 +37,7 @@ import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
-import javax.swing.table.TableCellEditor;
 import javax.swing.table.TableCellRenderer;
-
 import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.fieldspec.GridFieldSpec;
 import org.martus.swing.UiScrollPane;
@@ -54,7 +51,6 @@ public class UiGrid extends UiField
 	public UiGrid(GridFieldSpec fieldSpec)
 	{
 		super();
-		tableCellEditors = new TableCellEditor[fieldSpec.getColumnCount()+1];
 		model = new GridTableModel(fieldSpec);
 		table = new GridTable(model);
 		table.setColumnSelectionAllowed(false);
@@ -82,13 +78,13 @@ public class UiGrid extends UiField
 					case FieldSpec.TYPE_NORMAL:
 						UiTextField uiTextField = new UiTextField();
 						uiTextField.setBorder(new LineBorder(Color.BLUE));
-						tableCellEditors[i] = new GridTableCellEditor(uiTextField);
+						getColumnModel().getColumn(i).setCellEditor(new GridTableCellEditor(uiTextField)); 
+						
 						break;
 						
 					case FieldSpec.TYPE_DROPDOWN:
 						UiChoiceEditor uiChoiceField = new UiChoiceEditor((model.getFieldSpec(i)));
-						//uiChoiceField.setBorder(new LineBorder(Color.BLUE));
-						tableCellEditors[i] = new GridTableCellEditor(uiChoiceField);
+						getColumnModel().getColumn(i).setCellEditor(new GridTableCellEditor(uiChoiceField)); 
 						break;
 				}
 				
@@ -98,18 +94,6 @@ public class UiGrid extends UiField
 		public TableCellRenderer getCellRenderer(int row, int column)
 		{
 			return myCellRenderer;
-		}
-
-		public TableCellEditor getCellEditor()
-		{
-			return getCellEditor(getEditingRow(), getEditingColumn());
-		}
-		
-		public TableCellEditor getCellEditor(int row, int column)
-		{
-			if(column < 0 || column > tableCellEditors.length)
-				return null;
-			return tableCellEditors[column];
 		}
 
 		
@@ -208,5 +192,4 @@ public class UiGrid extends UiField
 	UiTable table;
 	GridTableModel model;
 	GridCellRenderer myCellRenderer;
-	TableCellEditor tableCellEditors[];
 }
