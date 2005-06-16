@@ -36,8 +36,10 @@ import javax.swing.ListSelectionModel;
 import javax.swing.border.LineBorder;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumn;
+import org.martus.client.swingui.renderers.GridDropDownCellRenderer;
 import org.martus.client.swingui.renderers.GridNormalCellRenderer;
 import org.martus.client.swingui.tablemodels.GridTableModel;
+import org.martus.common.fieldspec.DropDownFieldSpec;
 import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.fieldspec.GridFieldSpec;
 import org.martus.swing.UiScrollPane;
@@ -83,9 +85,10 @@ public class UiGrid extends UiField
 						break;
 						
 					case FieldSpec.TYPE_DROPDOWN:
-						UiChoiceEditor uiChoiceField = new UiChoiceEditor((model.getFieldSpec(i)));
+						DropDownFieldSpec dropDownFieldSpec = (DropDownFieldSpec)model.getFieldSpec(i);
+						UiChoiceEditor uiChoiceField = new UiChoiceEditor(dropDownFieldSpec);
 						tableColumn.setCellEditor(new GridTableCellEditor(uiChoiceField)); 
-						tableColumn.setCellRenderer(new GridNormalCellRenderer());
+						tableColumn.setCellRenderer(new GridDropDownCellRenderer(dropDownFieldSpec));
 						break;
 				}
 			}
