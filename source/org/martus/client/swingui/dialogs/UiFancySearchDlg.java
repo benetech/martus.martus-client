@@ -72,6 +72,7 @@ public class UiFancySearchDlg extends UiSearchDlg
 		};
 		                                  
 		DropDownFieldSpec opSpec = new DropDownFieldSpec();
+		opSpec.setLabel("Comparison");
 		opSpec.setChoices(opChoices);
 		try
 		{

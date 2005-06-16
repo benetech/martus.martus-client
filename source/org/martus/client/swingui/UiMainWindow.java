@@ -84,6 +84,7 @@ import org.martus.client.swingui.dialogs.UiConfigureHQs;
 import org.martus.client.swingui.dialogs.UiContactInfoDlg;
 import org.martus.client.swingui.dialogs.UiCreateNewAccountProcess;
 import org.martus.client.swingui.dialogs.UiExportBulletinsDlg;
+import org.martus.client.swingui.dialogs.UiFancySearchDlg;
 import org.martus.client.swingui.dialogs.UiInitialSigninDlg;
 import org.martus.client.swingui.dialogs.UiModelessBusyDlg;
 import org.martus.client.swingui.dialogs.UiOnlineHelpDlg;
@@ -97,7 +98,6 @@ import org.martus.client.swingui.dialogs.UiServerSummariesDlg;
 import org.martus.client.swingui.dialogs.UiServerSummariesRetrieveDlg;
 import org.martus.client.swingui.dialogs.UiShowScrollableTextDlg;
 import org.martus.client.swingui.dialogs.UiSigninDlg;
-import org.martus.client.swingui.dialogs.UiSimpleSearchDlg;
 import org.martus.client.swingui.dialogs.UiSplashDlg;
 import org.martus.client.swingui.dialogs.UiStringInputDlg;
 import org.martus.client.swingui.dialogs.UiTemplateDlg;
@@ -1101,8 +1101,8 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	public void doSearch()
 	{
 		// TODO: Allow either the old UiSimpleSearchDlg or the new UiFancySearchDlg
-		//UiFancySearchDlg searchDlg = new UiFancySearchDlg(this);
-		UiSimpleSearchDlg searchDlg = new UiSimpleSearchDlg(this);
+		UiFancySearchDlg searchDlg = new UiFancySearchDlg(this);
+		//UiSimpleSearchDlg searchDlg = new UiSimpleSearchDlg(this);
 		if(!searchDlg.getResults())
 			return;
 		Cursor originalCursor = setWaitingCursor();
