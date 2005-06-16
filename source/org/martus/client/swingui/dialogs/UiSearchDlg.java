@@ -44,7 +44,7 @@ public abstract class UiSearchDlg extends JDialog  implements ActionListener
 	public UiSearchDlg(UiMainWindow owner)
 	{
 		super(owner, "", true);
-		UiBasicLocalization localization = owner.getLocalization();
+		localization = owner.getLocalization();
 
 		searchButton = createBody(localization);
 		
@@ -73,6 +73,11 @@ public abstract class UiSearchDlg extends JDialog  implements ActionListener
 		return result;
 	}
 
+	public UiBasicLocalization getLocalization()
+	{
+		return localization;
+	}
+
 	// This class is NOT intended to be serialized!!!
 	private static final long serialVersionUID = 1;
 	private void writeObject(java.io.ObjectOutputStream stream) throws IOException
@@ -82,6 +87,8 @@ public abstract class UiSearchDlg extends JDialog  implements ActionListener
 
 
 	boolean result;
-
+	UiBasicLocalization localization;
+	
 	protected JButton searchButton;
+
 }

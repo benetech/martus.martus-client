@@ -55,7 +55,7 @@ public class UiSimpleSearchDlg extends UiSearchDlg
 		cancel.addActionListener(this);
 		
 		searchField = new UiTextField(40);
-		searchField.setText(previousSearch);
+		searchField.setText(getPreviousSearch());
 
 		UiParagraphPanel panel = new UiParagraphPanel();
 		panel.addOnNewLine(new UiWrappedTextArea(localization.getFieldLabel("SearchBulletinRules")));
@@ -79,6 +79,11 @@ public class UiSimpleSearchDlg extends UiSearchDlg
 		previousSearch = getSearchString();
 	}
 	
+	String getPreviousSearch()
+	{
+		return previousSearch;
+	}
+
 	// This class is NOT intended to be serialized!!!
 	private static final long serialVersionUID = 1;
 	private void writeObject(java.io.ObjectOutputStream stream) throws IOException

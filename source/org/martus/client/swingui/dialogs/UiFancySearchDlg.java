@@ -28,6 +28,7 @@ package org.martus.client.swingui.dialogs;
 
 import java.io.IOException;
 import java.io.NotSerializableException;
+import java.util.Vector;
 
 import javax.swing.Box;
 
@@ -38,9 +39,9 @@ import org.martus.common.clientside.UiBasicLocalization;
 import org.martus.common.fieldspec.DropDownFieldSpec;
 import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.fieldspec.GridFieldSpec;
+import org.martus.common.fieldspec.StandardFieldSpecs;
 import org.martus.common.fieldspec.GridFieldSpec.UnsupportedFieldTypeException;
 import org.martus.swing.UiButton;
-import org.martus.swing.UiTextField;
 import org.martus.swing.UiWrappedTextArea;
 
 public class UiFancySearchDlg extends UiSearchDlg
@@ -62,22 +63,10 @@ public class UiFancySearchDlg extends UiSearchDlg
 
 		GridFieldSpec spec = new GridFieldSpec();
 
-		ChoiceItem[] opChoices = 
-		{
-			new ChoiceItem(":", "contains"),
-			new ChoiceItem(":>", ">"),
-			new ChoiceItem(":>=", ">="),
-			new ChoiceItem(":<", "<"),
-			new ChoiceItem(":<=", "<="),
-		};
-		                                  
-		DropDownFieldSpec opSpec = new DropDownFieldSpec();
-		opSpec.setLabel("Comparison");
-		opSpec.setChoices(opChoices);
 		try
 		{
-			spec.addColumn(FieldSpec.createCustomField("field", "Field", FieldSpec.TYPE_NORMAL));
-			spec.addColumn(opSpec);
+			spec.addColumn(createFieldColumnSpec());
+			spec.addColumn(createOpColumnSpec());
 			spec.addColumn(FieldSpec.createCustomField("value", "Value", FieldSpec.TYPE_NORMAL));
 		}
 		catch (UnsupportedFieldTypeException e)
@@ -87,8 +76,8 @@ public class UiFancySearchDlg extends UiSearchDlg
 			throw new RuntimeException();
 		}
 
-		UiGridEditor grid = new UiGridEditor(spec);
-		grid.setText("");
+		grid = new UiGridEditor(spec);
+		grid.setText(getPreviousSearch());
 
 		Box panel = Box.createVerticalBox();
 		panel.add(new UiWrappedTextArea(localization.getFieldLabel("SearchBulletinRules")));
@@ -103,15 +92,68 @@ public class UiFancySearchDlg extends UiSearchDlg
 		
 		return search;
 	}
-	
-	void memorizeSearch()
+
+	private DropDownFieldSpec createFieldColumnSpec()
 	{
-		// TODO: implement this
+		Vector allAvailableFields = new Vector();
+		allAvailableFields.add(new ChoiceItem("", getLocalization().getFieldLabel("anyfield")));
+		allAvailableFields.addAll(convertToChoiceItems(StandardFieldSpecs.getDefaultPublicFieldSpecs()));
+		allAvailableFields.addAll(convertToChoiceItems(StandardFieldSpecs.getDefaultPrivateFieldSpecs()));
+
+		ChoiceItem[] fieldChoices = (ChoiceItem[])allAvailableFields.toArray(new ChoiceItem[0]);
+		                                  
+		DropDownFieldSpec fieldColumnSpec = new DropDownFieldSpec();
+		fieldColumnSpec.setLabel("Field--------------------");
+		fieldColumnSpec.setChoices(fieldChoices);
+		return fieldColumnSpec;
+	}
+	
+	private Vector convertToChoiceItems(FieldSpec[] specs)
+	{
+		Vector choices = new Vector();
+		for(int i=0; i < specs.length; ++i)
+		{
+			String tag = specs[i].getTag();
+			String displayString = tag;
+			if(StandardFieldSpecs.isStandardFieldTag(tag))
+				displayString = getLocalization().getFieldLabel(tag);
+			choices.add(new ChoiceItem(tag, displayString));
+		}
+			
+		return choices;
+	}
+	
+	private DropDownFieldSpec createOpColumnSpec()
+	{
+		ChoiceItem[] opChoices = 
+		{
+			new ChoiceItem(":", "contains"),
+			new ChoiceItem(":>", ">"),
+			new ChoiceItem(":>=", ">="),
+			new ChoiceItem(":<", "<"),
+			new ChoiceItem(":<=", "<="),
+		};
+		                                  
+		DropDownFieldSpec opSpec = new DropDownFieldSpec();
+		opSpec.setLabel("Comparison");
+		opSpec.setChoices(opChoices);
+		return opSpec;
 	}
 	
 	public String getSearchString()
 	{
-		return searchField.getText(); 		
+		return grid.getText(); 
+	}
+	
+	void memorizeSearch()
+	{
+		previousSearch = getSearchString();
+		System.out.println(previousSearch);
+	}
+	
+	String getPreviousSearch()
+	{
+		return previousSearch;
 	}
 
 	// This class is NOT intended to be serialized!!!
@@ -121,6 +163,6 @@ public class UiFancySearchDlg extends UiSearchDlg
 		throw new NotSerializableException();
 	}
 	
-	protected UiTextField searchField;
-
+	UiGridEditor grid;
+	private static String previousSearch = "";
 }
