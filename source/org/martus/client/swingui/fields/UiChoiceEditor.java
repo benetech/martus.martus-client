@@ -29,6 +29,8 @@ package org.martus.client.swingui.fields;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.io.NotSerializableException;
 import javax.swing.DefaultListCellRenderer;
 import javax.swing.JComponent;
 import javax.swing.JList;
@@ -55,16 +57,20 @@ public class UiChoiceEditor extends UiChoice implements ActionListener
 	class UiChoiceListCellRenderer extends DefaultListCellRenderer
 	{
 		
-		private static final long serialVersionUID = 1;
-
-		public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected, boolean cellHasFocus)
+		public Component getListCellRendererComponent(JList list, Object code, int index, boolean isSelected, boolean cellHasFocus)
 		{
-			Component cellRenderer = super.getListCellRendererComponent(list, spec.getValue((String)value), index, isSelected,
+			Component cellRenderer = super.getListCellRendererComponent(list, spec.getDisplayString((String)code), index, isSelected,
 					cellHasFocus);
 			cellRenderer.setComponentOrientation(UiLanguageDirection.getComponentOrientation());
 			return cellRenderer;
 		}
 		
+		// This class is NOT intended to be serialized!!!
+		private static final long serialVersionUID = 1;
+		private void writeObject(java.io.ObjectOutputStream stream) throws IOException
+		{
+			throw new NotSerializableException();
+		}
 	}
 
 	public String getText()

@@ -51,7 +51,7 @@ public class UiChoiceViewer extends UiChoice
 
 	public void setText(String newText)
 	{
-		String value = spec.getValue(newText);
+		String value = spec.getDisplayString(newText);
 		widget.setText(" " + value + " ");
 	}
 
