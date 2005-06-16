@@ -23,7 +23,7 @@ Software Foundation, Inc., 59 Temple Place - Suite 330,
 Boston, MA 02111-1307, USA.
 
 */
-package org.martus.client.swingui.fields;
+package org.martus.client.swingui.tablemodels;
 
 import java.io.IOException;
 import java.io.NotSerializableException;
@@ -41,7 +41,7 @@ import org.martus.common.packet.UniversalId;
 import org.martus.swing.UiTable;
 
 
-class AttachmentTableModel extends AbstractTableModel
+public class AttachmentTableModel extends AbstractTableModel
 {
 	public AttachmentTableModel(UiMainWindow window, UiTable table)
 	{
@@ -60,7 +60,7 @@ class AttachmentTableModel extends AbstractTableModel
 		return 2;
 	}
 
-	void clear()
+	public void clear()
 	{
 		attachmentList.clear();
 		fireTableDataChanged();

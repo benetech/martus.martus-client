@@ -49,6 +49,7 @@ import org.martus.client.core.MartusApp;
 import org.martus.client.core.TransferableAttachmentList;
 import org.martus.client.swingui.UiLocalization;
 import org.martus.client.swingui.UiMainWindow;
+import org.martus.client.swingui.tablemodels.AttachmentTableModel;
 import org.martus.common.bulletin.AttachmentProxy;
 import org.martus.common.bulletin.BulletinLoader;
 import org.martus.common.database.ReadableDatabase;

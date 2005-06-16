@@ -27,7 +27,7 @@ package org.martus.client.test;
 
 import java.util.Vector;
 
-import org.martus.client.swingui.fields.GridTableModel;
+import org.martus.client.swingui.tablemodels.GridTableModel;
 import org.martus.common.fieldspec.CustomDropDownFieldSpec;
 import org.martus.common.fieldspec.DropDownFieldSpec;
 import org.martus.common.fieldspec.FieldSpec;

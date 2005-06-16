@@ -40,13 +40,12 @@ import java.io.File;
 import java.io.IOException;
 import java.io.NotSerializableException;
 import java.util.List;
-
 import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.JComponent;
-
 import org.martus.client.swingui.UiFocusListener;
 import org.martus.client.swingui.UiMainWindow;
+import org.martus.client.swingui.tablemodels.EditorAttachmentTableModel;
 import org.martus.common.bulletin.AttachmentProxy;
 import org.martus.common.clientside.UiBasicLocalization;
 import org.martus.swing.UiButton;
@@ -63,7 +62,14 @@ public class UiAttachmentEditor extends UiParagraphPanel
 	public UiAttachmentEditor(UiMainWindow mainWindowToUse)
 	{
 		mainWindow = mainWindowToUse;
-		model = new EditorAttachmentTableModel(mainWindow, attachmentTable);
+
+		UiBasicLocalization localization = mainWindowToUse.getLocalization();
+		remove = new UiButton(localization.getButtonLabel("removeattachment"));
+		remove.addFocusListener(new UiFocusListener(this));		
+		remove.addActionListener(new RemoveHandler());
+		remove.setEnabled(false);
+
+		model = new EditorAttachmentTableModel(mainWindow, attachmentTable, remove);
 
 		attachmentTable = new UiTable(model);
 		new DropTarget(this, new attachmentDropAdapter());
@@ -75,7 +81,6 @@ public class UiAttachmentEditor extends UiParagraphPanel
 		Box hbox = Box.createHorizontalBox();
 		Box vbox = Box.createVerticalBox();
 
-		UiBasicLocalization localization = mainWindowToUse.getLocalization();
 		UiScrollPane scrollPane = new UiScrollPane(attachmentTable);
 		scrollPane.getHorizontalScrollBar().setFocusable(false);
 		scrollPane.getVerticalScrollBar().setFocusable(false);
@@ -85,10 +90,6 @@ public class UiAttachmentEditor extends UiParagraphPanel
 	
 		add.addFocusListener(new UiFocusListener(this));		
 		add.addActionListener(new AddHandler());
-		remove = new UiButton(localization.getButtonLabel("removeattachment"));
-		remove.addFocusListener(new UiFocusListener(this));		
-		remove.addActionListener(new RemoveHandler());
-		remove.setEnabled(false);
 		Component buttons[] = {add, remove, Box.createHorizontalGlue()};
 		Utilities.addComponentsRespectingOrientation(hbox, buttons);
 		vbox.add(hbox);
@@ -190,41 +191,6 @@ public class UiAttachmentEditor extends UiParagraphPanel
 		return lastAttachmentLoadDirectory;
 	}
 
-	class EditorAttachmentTableModel extends AttachmentTableModel
-	{
-
-		public EditorAttachmentTableModel(UiMainWindow window, UiTable table)
-		{
-			super(window, table);
-		}
-
-		void clear()
-		{
-			super.clear();
-			remove.setEnabled(false);
-		}
-
-		public void add(AttachmentProxy a)
-		{
-			super.add(a);
-			remove.setEnabled(true);
-		}
-		
-		public void remove(int row)
-		{
-			super.remove(row);
-			if(getRowCount() == 0)
-				remove.setEnabled(false);
-		}
-
-		// This class is NOT intended to be serialized!!!
-		private static final long serialVersionUID = 1;
-		private void writeObject(java.io.ObjectOutputStream stream) throws IOException
-		{
-			throw new NotSerializableException();
-		}
-
-	}
 
 	class AddHandler implements ActionListener
 	{
