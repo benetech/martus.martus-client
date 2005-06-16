@@ -26,19 +26,17 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.swingui.fields;
 
 import java.awt.Color;
-import java.awt.Component;
 import java.io.IOException;
 import java.io.NotSerializableException;
 import javax.swing.DefaultCellEditor;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JComponent;
-import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
-import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumn;
+import org.martus.client.swingui.renderers.GridNormalCellRenderer;
 import org.martus.client.swingui.tablemodels.GridTableModel;
 import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.fieldspec.GridFieldSpec;
@@ -137,26 +135,6 @@ public class UiGrid extends UiField
 	}
 
 	
-	class GridNormalCellRenderer implements TableCellRenderer
-	{
-		public Component getTableCellRendererComponent(JTable tableToUse, Object value, boolean isSelected, boolean hasFocus, int row, int column)
-		{
-			UiTextField cell = new UiTextField((String)value);
-			cell.setBorder(new EmptyBorder(0,0,0,0));
-			if(column == 0)
-			{
-				cell.setBackground(Color.LIGHT_GRAY);
-				cell.setForeground(Color.BLACK);
-				return cell;
-			}
-			
-			if(hasFocus)
-			{
-				cell.setBorder(new LineBorder(Color.BLACK,1));
-			}
-			return cell;
-		}
-	}
 
 	
 	public JComponent getComponent()
