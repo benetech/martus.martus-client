@@ -38,6 +38,7 @@ import javax.swing.ListSelectionModel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.table.TableCellRenderer;
+import javax.swing.table.TableColumn;
 import org.martus.client.swingui.tablemodels.GridTableModel;
 import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.fieldspec.GridFieldSpec;
@@ -71,21 +72,22 @@ public class UiGrid extends UiField
 			for(int i = 1 ; i < model.getColumnCount(); ++i)
 				setColumnWidthToHeaderWidth(i);
 			setAutoResizeMode(AUTO_RESIZE_OFF);
-			myCellRenderer = new GridCellRenderer();
 			for(int i = 0 ; i < model.getColumnCount(); ++i)
 			{
+				TableColumn tableColumn = getColumnModel().getColumn(i);
 				switch(model.getColumnType(i))
 				{
 					case FieldSpec.TYPE_NORMAL:
 						UiTextField uiTextField = new UiTextField();
 						uiTextField.setBorder(new LineBorder(Color.BLUE));
-						getColumnModel().getColumn(i).setCellEditor(new GridTableCellEditor(uiTextField)); 
-						
+						tableColumn.setCellEditor(new GridTableCellEditor(uiTextField)); 
+						tableColumn.setCellRenderer(new GridNormalCellRenderer());
 						break;
 						
 					case FieldSpec.TYPE_DROPDOWN:
 						UiChoiceEditor uiChoiceField = new UiChoiceEditor((model.getFieldSpec(i)));
-						getColumnModel().getColumn(i).setCellEditor(new GridTableCellEditor(uiChoiceField)); 
+						tableColumn.setCellEditor(new GridTableCellEditor(uiChoiceField)); 
+						tableColumn.setCellRenderer(new GridNormalCellRenderer());
 						break;
 				}
 			}
@@ -93,9 +95,8 @@ public class UiGrid extends UiField
 		
 		public TableCellRenderer getCellRenderer(int row, int column)
 		{
-			return myCellRenderer;
+			return getColumnModel().getColumn(column).getCellRenderer();
 		}
-
 		
 		public void changeSelection(int rowIndex, int columnIndex,
 				boolean toggle, boolean extend)
@@ -136,30 +137,24 @@ public class UiGrid extends UiField
 	}
 
 	
-	class GridCellRenderer implements TableCellRenderer
+	class GridNormalCellRenderer implements TableCellRenderer
 	{
 		public Component getTableCellRendererComponent(JTable tableToUse, Object value, boolean isSelected, boolean hasFocus, int row, int column)
 		{
-			switch(model.getColumnType(column))
+			UiTextField cell = new UiTextField((String)value);
+			cell.setBorder(new EmptyBorder(0,0,0,0));
+			if(column == 0)
 			{
-				
-				case FieldSpec.TYPE_NORMAL:
-				default:
-					UiTextField cell = new UiTextField((String)value);
-					cell.setBorder(new EmptyBorder(0,0,0,0));
-					if(column == 0)
-					{
-						cell.setBackground(Color.LIGHT_GRAY);
-						cell.setForeground(Color.BLACK);
-						return cell;
-					}
-					
-					if(hasFocus)
-					{
-						cell.setBorder(new LineBorder(Color.BLACK,1));
-					}
-					return cell;
+				cell.setBackground(Color.LIGHT_GRAY);
+				cell.setForeground(Color.BLACK);
+				return cell;
 			}
+			
+			if(hasFocus)
+			{
+				cell.setBorder(new LineBorder(Color.BLACK,1));
+			}
+			return cell;
 		}
 	}
 
@@ -191,5 +186,4 @@ public class UiGrid extends UiField
 	UiScrollPane widget;
 	UiTable table;
 	GridTableModel model;
-	GridCellRenderer myCellRenderer;
 }
