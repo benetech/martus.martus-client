@@ -161,6 +161,16 @@ public class UiGrid extends UiField
 			e.printStackTrace();
 		}
 	}
+	
+	public int getRowCount()
+	{
+		return model.getRowCount();
+	}
+	
+	public String getRawDataAt(int row, int col)
+	{
+		return (String)model.getValueAt(row, col);
+	}
 
 	private static final int ROW_HEIGHT_PADDING = 3;
 
