@@ -28,19 +28,13 @@ package org.martus.client.swingui.dialogs;
 
 import java.io.IOException;
 import java.io.NotSerializableException;
-import java.util.Vector;
 
 import javax.swing.Box;
 
+import org.martus.client.search.FancySearchHelper;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.fields.UiGridEditor;
-import org.martus.common.clientside.ChoiceItem;
 import org.martus.common.clientside.UiBasicLocalization;
-import org.martus.common.fieldspec.DropDownFieldSpec;
-import org.martus.common.fieldspec.FieldSpec;
-import org.martus.common.fieldspec.GridFieldSpec;
-import org.martus.common.fieldspec.StandardFieldSpecs;
-import org.martus.common.fieldspec.GridFieldSpec.UnsupportedFieldTypeException;
 import org.martus.swing.UiButton;
 import org.martus.swing.UiWrappedTextArea;
 
@@ -53,6 +47,7 @@ public class UiFancySearchDlg extends UiSearchDlg
 	
 	UiButton createBody(UiBasicLocalization localization)
 	{
+		helper = new FancySearchHelper(localization);
 		setTitle(localization.getWindowTitle("search"));
 		
 		UiButton search = new UiButton(localization.getButtonLabel("search"));
@@ -61,22 +56,7 @@ public class UiFancySearchDlg extends UiSearchDlg
 		UiButton cancel = new UiButton(localization.getButtonLabel("cancel"));
 		cancel.addActionListener(this);
 
-		GridFieldSpec spec = new GridFieldSpec();
-
-		try
-		{
-			spec.addColumn(createFieldColumnSpec());
-			spec.addColumn(createOpColumnSpec());
-			spec.addColumn(FieldSpec.createCustomField("value", getLocalization().getFieldLabel("SearchGridHeaderValue"), FieldSpec.TYPE_NORMAL));
-		}
-		catch (UnsupportedFieldTypeException e)
-		{
-			// TODO: better error handling?
-			e.printStackTrace();
-			throw new RuntimeException();
-		}
-
-		grid = new UiGridEditor(spec);
+		grid = new UiGridEditor(helper.getGridSpec());
 		grid.setText(getPreviousSearch());
 
 		Box panel = Box.createVerticalBox();
@@ -93,79 +73,9 @@ public class UiFancySearchDlg extends UiSearchDlg
 		return search;
 	}
 
-	private DropDownFieldSpec createFieldColumnSpec()
-	{
-		Vector allAvailableFields = new Vector();
-		allAvailableFields.add(new ChoiceItem("", getLocalization().getFieldLabel("SearchAnyField")));
-		allAvailableFields.addAll(convertToChoiceItems(StandardFieldSpecs.getDefaultPublicFieldSpecs()));
-		allAvailableFields.addAll(convertToChoiceItems(StandardFieldSpecs.getDefaultPrivateFieldSpecs()));
-
-		ChoiceItem[] fieldChoices = (ChoiceItem[])allAvailableFields.toArray(new ChoiceItem[0]);
-		                                  
-		DropDownFieldSpec fieldColumnSpec = new DropDownFieldSpec();
-		fieldColumnSpec.setLabel(getLocalization().getFieldLabel("SearchGridHeaderField"));
-		fieldColumnSpec.setChoices(fieldChoices);
-		return fieldColumnSpec;
-	}
-	
-	private Vector convertToChoiceItems(FieldSpec[] specs)
-	{
-		Vector choices = new Vector();
-		for(int i=0; i < specs.length; ++i)
-		{
-			String tag = specs[i].getTag();
-			String displayString = tag;
-			if(StandardFieldSpecs.isStandardFieldTag(tag))
-				displayString = getLocalization().getFieldLabel(tag);
-			choices.add(new ChoiceItem(tag, displayString));
-		}
-			
-		return choices;
-	}
-	
-	private DropDownFieldSpec createOpColumnSpec()
-	{
-		ChoiceItem[] opChoices = 
-		{
-			new ChoiceItem(":", getLocalization().getFieldLabel("SearchOpContains")),
-			new ChoiceItem(":>", ">"),
-			new ChoiceItem(":>=", ">="),
-			new ChoiceItem(":<", "<"),
-			new ChoiceItem(":<=", "<="),
-		};
-		                                  
-		DropDownFieldSpec opSpec = new DropDownFieldSpec();
-		opSpec.setLabel(getLocalization().getFieldLabel("SearchGridHeaderOp"));
-		opSpec.setChoices(opChoices);
-		return opSpec;
-	}
-	
 	public String getSearchString()
 	{
-		StringBuffer searchExpression = new StringBuffer();
-		for(int row = 0; row < grid.getRowCount(); ++row)
-		{
-			String field = grid.getRawDataAt(row, 1);
-			String op = grid.getRawDataAt(row, 2);
-			String value = grid.getRawDataAt(row, 3);
-		
-			if(field.length() > 0)
-			{
-				searchExpression.append(field);
-				searchExpression.append(op);
-			}
-			
-			// TODO: Strip leading spaces from value
-			// TODO: Detect and disallow quotes in value
-			// TODO: Detect and disallow OR in value
-			searchExpression.append("\"");
-			searchExpression.append(value);
-			searchExpression.append("\"");
-			searchExpression.append(" ");
-		}
-
-		System.out.println("Built search expression: " + searchExpression);
-		return new String(searchExpression);
+		return helper.getSearchString(grid.getGridData());
 	}
 	
 	void memorizeSearch()
@@ -186,5 +96,6 @@ public class UiFancySearchDlg extends UiSearchDlg
 	}
 	
 	UiGridEditor grid;
+	FancySearchHelper helper;
 	private static String previousSearch = "";
 }

@@ -28,6 +28,7 @@ package org.martus.client.swingui.fields;
 import java.awt.Color;
 import java.io.IOException;
 import java.io.NotSerializableException;
+
 import javax.swing.DefaultCellEditor;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
@@ -36,9 +37,11 @@ import javax.swing.ListSelectionModel;
 import javax.swing.border.LineBorder;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumn;
+
 import org.martus.client.swingui.renderers.GridDropDownCellRenderer;
 import org.martus.client.swingui.renderers.GridNormalCellRenderer;
 import org.martus.client.swingui.tablemodels.GridTableModel;
+import org.martus.common.GridData;
 import org.martus.common.fieldspec.DropDownFieldSpec;
 import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.fieldspec.GridFieldSpec;
@@ -161,17 +164,12 @@ public class UiGrid extends UiField
 			e.printStackTrace();
 		}
 	}
-	
-	public int getRowCount()
-	{
-		return model.getRowCount();
-	}
-	
-	public String getRawDataAt(int row, int col)
-	{
-		return (String)model.getValueAt(row, col);
-	}
 
+	public GridData getGridData()
+	{
+		return model.getGridData();
+	}
+	
 	private static final int ROW_HEIGHT_PADDING = 3;
 
 	UiScrollPane widget;

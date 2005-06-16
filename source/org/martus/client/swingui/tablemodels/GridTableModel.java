@@ -106,6 +106,11 @@ public class GridTableModel extends AbstractTableModel
 		fireTableCellUpdated(row,column);
 	}
 	
+	public GridData getGridData()
+	{
+		return gridData;
+	}
+	
 	public String getXmlRepresentation()
 	{
 		return gridData.getXmlRepresentation();
