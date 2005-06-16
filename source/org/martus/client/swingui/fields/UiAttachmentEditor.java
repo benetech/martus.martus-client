@@ -40,12 +40,16 @@ import java.io.File;
 import java.io.IOException;
 import java.io.NotSerializableException;
 import java.util.List;
+
 import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.JComponent;
+import javax.swing.event.TableModelEvent;
+import javax.swing.event.TableModelListener;
+
 import org.martus.client.swingui.UiFocusListener;
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.client.swingui.tablemodels.EditorAttachmentTableModel;
+import org.martus.client.swingui.tablemodels.AttachmentTableModel;
 import org.martus.common.bulletin.AttachmentProxy;
 import org.martus.common.clientside.UiBasicLocalization;
 import org.martus.swing.UiButton;
@@ -64,12 +68,14 @@ public class UiAttachmentEditor extends UiParagraphPanel
 		mainWindow = mainWindowToUse;
 
 		UiBasicLocalization localization = mainWindowToUse.getLocalization();
-		remove = new UiButton(localization.getButtonLabel("removeattachment"));
+		
+		TableRemoveButton remove = new TableRemoveButton(localization.getButtonLabel("removeattachment"));
 		remove.addFocusListener(new UiFocusListener(this));		
 		remove.addActionListener(new RemoveHandler());
 		remove.setEnabled(false);
 
-		model = new EditorAttachmentTableModel(mainWindow, attachmentTable, remove);
+		model = new AttachmentTableModel(mainWindow, attachmentTable);
+		model.addTableModelListener(remove);
 
 		attachmentTable = new UiTable(model);
 		new DropTarget(this, new attachmentDropAdapter());
@@ -243,11 +249,32 @@ public class UiAttachmentEditor extends UiParagraphPanel
 
 
 	UiTable attachmentTable;
-	JButton remove;
-	EditorAttachmentTableModel model;
+	AttachmentTableModel model;
 	UiMainWindow mainWindow;
 	
 	private static File lastAttachmentLoadDirectory;
 	
 	static final int VISIBLE_ROW_COUNT = 4;
 }
+
+class TableRemoveButton extends UiButton implements TableModelListener
+{
+	public TableRemoveButton(String label)
+	{
+		super(label);
+	}
+
+	public void tableChanged(TableModelEvent event)
+	{
+		AttachmentTableModel model = (AttachmentTableModel)event.getSource();
+		setEnabled(model.getRowCount() > 0);
+	}
+
+	// This class is NOT intended to be serialized!!!
+	private static final long serialVersionUID = 1;
+	private void writeObject(java.io.ObjectOutputStream stream) throws IOException
+	{
+		throw new NotSerializableException();
+	}
+};
+
