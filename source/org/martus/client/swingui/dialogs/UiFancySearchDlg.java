@@ -67,7 +67,7 @@ public class UiFancySearchDlg extends UiSearchDlg
 		{
 			spec.addColumn(createFieldColumnSpec());
 			spec.addColumn(createOpColumnSpec());
-			spec.addColumn(FieldSpec.createCustomField("value", "Value", FieldSpec.TYPE_NORMAL));
+			spec.addColumn(FieldSpec.createCustomField("value", getLocalization().getFieldLabel("SearchGridHeaderValue"), FieldSpec.TYPE_NORMAL));
 		}
 		catch (UnsupportedFieldTypeException e)
 		{
@@ -96,14 +96,14 @@ public class UiFancySearchDlg extends UiSearchDlg
 	private DropDownFieldSpec createFieldColumnSpec()
 	{
 		Vector allAvailableFields = new Vector();
-		allAvailableFields.add(new ChoiceItem("", getLocalization().getFieldLabel("anyfield")));
+		allAvailableFields.add(new ChoiceItem("", getLocalization().getFieldLabel("SearchAnyField")));
 		allAvailableFields.addAll(convertToChoiceItems(StandardFieldSpecs.getDefaultPublicFieldSpecs()));
 		allAvailableFields.addAll(convertToChoiceItems(StandardFieldSpecs.getDefaultPrivateFieldSpecs()));
 
 		ChoiceItem[] fieldChoices = (ChoiceItem[])allAvailableFields.toArray(new ChoiceItem[0]);
 		                                  
 		DropDownFieldSpec fieldColumnSpec = new DropDownFieldSpec();
-		fieldColumnSpec.setLabel("Field--------------------");
+		fieldColumnSpec.setLabel(getLocalization().getFieldLabel("SearchGridHeaderField"));
 		fieldColumnSpec.setChoices(fieldChoices);
 		return fieldColumnSpec;
 	}
@@ -127,7 +127,7 @@ public class UiFancySearchDlg extends UiSearchDlg
 	{
 		ChoiceItem[] opChoices = 
 		{
-			new ChoiceItem(":", "contains"),
+			new ChoiceItem(":", getLocalization().getFieldLabel("SearchOpContains")),
 			new ChoiceItem(":>", ">"),
 			new ChoiceItem(":>=", ">="),
 			new ChoiceItem(":<", "<"),
@@ -135,20 +135,42 @@ public class UiFancySearchDlg extends UiSearchDlg
 		};
 		                                  
 		DropDownFieldSpec opSpec = new DropDownFieldSpec();
-		opSpec.setLabel("Comparison");
+		opSpec.setLabel(getLocalization().getFieldLabel("SearchGridHeaderOp"));
 		opSpec.setChoices(opChoices);
 		return opSpec;
 	}
 	
 	public String getSearchString()
 	{
-		return grid.getText(); 
+		StringBuffer searchExpression = new StringBuffer();
+		for(int row = 0; row < grid.getRowCount(); ++row)
+		{
+			String field = grid.getRawDataAt(row, 1);
+			String op = grid.getRawDataAt(row, 2);
+			String value = grid.getRawDataAt(row, 3);
+		
+			if(field.length() > 0)
+			{
+				searchExpression.append(field);
+				searchExpression.append(op);
+			}
+			
+			// TODO: Strip leading spaces from value
+			// TODO: Detect and disallow quotes in value
+			// TODO: Detect and disallow OR in value
+			searchExpression.append("\"");
+			searchExpression.append(value);
+			searchExpression.append("\"");
+			searchExpression.append(" ");
+		}
+
+		System.out.println("Built search expression: " + searchExpression);
+		return new String(searchExpression);
 	}
 	
 	void memorizeSearch()
 	{
-		previousSearch = getSearchString();
-		System.out.println(previousSearch);
+		previousSearch = grid.getText();
 	}
 	
 	String getPreviousSearch()
