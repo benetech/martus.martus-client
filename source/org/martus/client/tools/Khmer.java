@@ -27,21 +27,24 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.tools;
 
 import java.awt.BorderLayout;
+import java.awt.Font;
 
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 
 public class Khmer
 {
-
 	public static void main(String[] args)
 	{
-		char[] khmerText = {0x1781, 0x17D2, 0x1789, 0x17BB, 0x17C6, 0x200B, 0x179F, 0x17D2,
-		0x179A, 0x17B6, 0x200B, 0x179C, 0x17B7, 0x1791, 0x17BC,};
-		
+		char[] khmerText = {0x1781, 0x17D2, 0x1789, 0x17BB, 0x17C6, 0x200B, 0x179F, 0x17D2, 0x179A, 0x17B6, 0x200B, 0x179C, 0x17B7, 0x1791, 0x17BC};
+		JLabel khmerLabel = new JLabel(new String(khmerText));
+		Font khmerFont = new Font("Khmer OS", Font.PLAIN, 30);
+		khmerLabel.setFont(khmerFont);
+
 		JDialog sample = new JDialog();
-		sample.getContentPane().add(new JLabel("This is a test: " + new String(khmerText)), BorderLayout.PAGE_START);
-		sample.setSize(600,400);
+		sample.setTitle(new String(khmerText));
+		sample.getContentPane().add(khmerLabel, BorderLayout.PAGE_START);
+		sample.setSize(350,150);
 		sample.setModal(true);
 		sample.setVisible(true);
 	}
