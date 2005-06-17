@@ -43,7 +43,7 @@ public class Khmer
 		sample.getContentPane().add(new JLabel("This is a test: " + new String(khmerText)), BorderLayout.PAGE_START);
 		sample.setSize(600,400);
 		sample.setModal(true);
-		sample.show();
+		sample.setVisible(true);
 	}
 
 }
