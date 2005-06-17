@@ -102,7 +102,15 @@ public class GridTableModel extends AbstractTableModel
 	{
 		if(column == 0)
 			return;
-		gridData.setValueAt((String)aValue, row, column - EXTRA_COLUMN);
+		if(getColumnType(column) == FieldSpec.TYPE_BOOLEAN)
+		{
+			String selected = FieldSpec.FALSESTRING;
+			if(((Boolean)aValue).booleanValue())
+				selected = FieldSpec.TRUESTRING;
+			gridData.setValueAt(selected, row, column - EXTRA_COLUMN);
+		}
+		else
+			gridData.setValueAt((String)aValue, row, column - EXTRA_COLUMN);
 		fireTableCellUpdated(row,column);
 	}
 	
@@ -129,7 +137,6 @@ public class GridTableModel extends AbstractTableModel
 		throw new NotSerializableException();
 	}
 
-	
 	private int EXTRA_COLUMN = 1;
 	private GridData gridData;
 	private GridFieldSpec fieldSpec;

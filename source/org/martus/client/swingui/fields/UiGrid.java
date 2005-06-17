@@ -28,7 +28,6 @@ package org.martus.client.swingui.fields;
 import java.awt.Color;
 import java.io.IOException;
 import java.io.NotSerializableException;
-
 import javax.swing.DefaultCellEditor;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
@@ -37,7 +36,7 @@ import javax.swing.ListSelectionModel;
 import javax.swing.border.LineBorder;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumn;
-
+import org.martus.client.swingui.renderers.GridBooleanCellRenderer;
 import org.martus.client.swingui.renderers.GridDropDownCellRenderer;
 import org.martus.client.swingui.renderers.GridNormalCellRenderer;
 import org.martus.client.swingui.tablemodels.GridTableModel;
@@ -92,6 +91,12 @@ public class UiGrid extends UiField
 						UiChoiceEditor uiChoiceField = new UiChoiceEditor(dropDownFieldSpec);
 						tableColumn.setCellEditor(new GridTableCellEditor(uiChoiceField)); 
 						tableColumn.setCellRenderer(new GridDropDownCellRenderer(dropDownFieldSpec));
+						break;
+
+					case FieldSpec.TYPE_BOOLEAN:
+						UiBoolEditor uiBooleanField = new UiBoolEditor();
+						tableColumn.setCellEditor(new GridTableCellEditor(uiBooleanField)); 
+						tableColumn.setCellRenderer(new GridBooleanCellRenderer());
 						break;
 				}
 			}
