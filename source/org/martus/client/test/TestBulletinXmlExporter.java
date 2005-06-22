@@ -74,10 +74,11 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 		Vector list = new Vector();
 		list.add(b);
 		String result = doExport(list, false);
-		assertContains("<MartusBulletinExportVersion>4</MartusBulletinExportVersion>", result);
+		assertContains("<MartusBulletinExportVersion>5</MartusBulletinExportVersion>", result);
 		assertContains("<!-- Version 2: added Grid columns Labels-->", result);
 		assertContains("<!-- Version 3: added Dropdowns and Messages-->", result);
 		assertContains("<!-- Version 4: added Field Types-->", result);
+		assertContains("<!-- Version 5: added Grid FieldSpec Types-->", result);
 
 		assertContains("<ExportedMartusBulletins>", result);
 		assertContains("<MartusBulletin>", result);

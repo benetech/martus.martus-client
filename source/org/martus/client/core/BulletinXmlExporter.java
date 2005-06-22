@@ -66,8 +66,13 @@ public class BulletinXmlExporter
 		dest.write(VersionNumber);
 		dest.write(MartusXml.getTagEnd(VersionXMLElementName));
 		dest.write("<!-- Version 2: added Grid columns Labels-->");
+		dest.write(NEW_LINE);
 		dest.write("<!-- Version 3: added Dropdowns and Messages-->");
+		dest.write(NEW_LINE);
 		dest.write("<!-- Version 4: added Field Types-->");
+		dest.write(NEW_LINE);
+		dest.write("<!-- Version 5: added Grid FieldSpec Types-->");
+		dest.write(NEW_LINE);
 		
 		dest.write(NEW_LINE);
 	}
@@ -219,5 +224,5 @@ public class BulletinXmlExporter
 	private final static String VALUE = "Value";
 	private final static String LABEL = "Label";
 
-	private final static String VersionNumber = "4";
+	private final static String VersionNumber = "5";
 }
