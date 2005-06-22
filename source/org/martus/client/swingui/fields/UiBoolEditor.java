@@ -35,6 +35,7 @@ import javax.swing.event.ChangeListener;
 
 import org.martus.common.fieldspec.FieldSpec;
 import org.martus.swing.UiCheckBox;
+import org.martus.swing.UiTextField;
 
 public class UiBoolEditor extends UiField implements ChangeListener
 {
@@ -42,8 +43,9 @@ public class UiBoolEditor extends UiField implements ChangeListener
 	{
 		widget = new UiCheckBox("");
 		widget.addChangeListener(this);
-		widget.setBackground(Color.WHITE);
-		widget.setForeground(Color.BLACK);
+		UiTextField tmp = new UiTextField();
+		widget.setBackground(tmp.getBackground());
+		widget.setForeground(tmp.getForeground());
 		widget.setBorderPainted(true);
 		widget.setBorder(new LineBorder(Color.BLACK, 1));
 	}

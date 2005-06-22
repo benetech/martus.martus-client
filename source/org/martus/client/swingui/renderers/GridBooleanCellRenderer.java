@@ -41,8 +41,8 @@ public class GridBooleanCellRenderer implements TableCellRenderer
 		cell.setSelected(((Boolean)booleanValue).booleanValue());
 		cell.setBorder(new EmptyBorder(0,0,0,0));
 		cell.setBorderPainted(true);
-		cell.setBackground(Color.WHITE);
-		cell.setForeground(Color.BLACK);
+		cell.setBackground(tableToUse.getBackground());
+		cell.setForeground(tableToUse.getForeground());
 		if(hasFocus)
 			cell.setBorder(new LineBorder(Color.BLACK,1));
 		return cell;

@@ -95,14 +95,14 @@ public class GridTableModel extends AbstractTableModel
 	{
 		if(column == 0)
 			return new Integer(row+1).toString();
+		String value = gridData.getValueAt(row, column - EXTRA_COLUMN );
 		if(getColumnType(column) == FieldSpec.TYPE_BOOLEAN)
 		{
-			String value = gridData.getValueAt(row, column - EXTRA_COLUMN );
 			if(value.equals(FieldSpec.TRUESTRING))
 				return new Boolean(true);
 			return new Boolean(false);
 		}
-		return gridData.getValueAt(row, column - EXTRA_COLUMN );
+		return value;
 	}
 
 	public void setValueAt(Object aValue, int row, int column)
