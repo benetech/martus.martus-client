@@ -138,7 +138,6 @@ public class FancySearchHelper
 			searchExpression.append(" ");
 		}
 
-		System.out.println("Built search expression: " + searchExpression);
 		return new String(searchExpression);
 	}
 	
