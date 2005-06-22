@@ -82,16 +82,16 @@ public class UiGridEditor extends UiGrid
 		{
             if (e.getKeyCode() == java.awt.event.KeyEvent.VK_SPACE) 
 			{
-                CellEditor dceSelect = table.getCellEditor();
-                if (dceSelect != null && dceSelect instanceof DefaultCellEditor ) 
+                CellEditor editor = table.getCellEditor();
+                if (editor != null && editor instanceof DefaultCellEditor ) 
 				{
-                    Object component = ((DefaultCellEditor)dceSelect).getComponent();
+                    Object component = ((DefaultCellEditor)editor).getComponent();
                     if(component instanceof JComboBox) 
 					{
-                        JComboBox jcbRef = (JComboBox)(component);
-                        jcbRef.setVisible( true );
-                        jcbRef.requestFocus();
-						jcbRef.showPopup();
+                        JComboBox comboBox = (JComboBox)(component);
+						comboBox.setVisible( true );
+						comboBox.requestFocus();
+						comboBox.showPopup();
                    }
                 }
             }

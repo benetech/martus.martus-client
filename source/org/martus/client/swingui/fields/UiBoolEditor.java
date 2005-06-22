@@ -26,8 +26,10 @@ Boston, MA 02111-1307, USA.
 
 package org.martus.client.swingui.fields;
 
+import java.awt.Color;
 import javax.swing.JCheckBox;
 import javax.swing.JComponent;
+import javax.swing.border.LineBorder;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
@@ -40,6 +42,10 @@ public class UiBoolEditor extends UiField implements ChangeListener
 	{
 		widget = new UiCheckBox("");
 		widget.addChangeListener(this);
+		widget.setBackground(Color.WHITE);
+		widget.setForeground(Color.BLACK);
+		widget.setBorderPainted(true);
+		widget.setBorder(new LineBorder(Color.BLACK, 1));
 	}
 	
 	public void setListener(ChangeListener listener)

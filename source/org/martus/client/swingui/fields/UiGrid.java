@@ -34,7 +34,6 @@ import javax.swing.JComboBox;
 import javax.swing.JComponent;
 import javax.swing.ListSelectionModel;
 import javax.swing.border.LineBorder;
-import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumn;
 import org.martus.client.swingui.renderers.GridBooleanCellRenderer;
 import org.martus.client.swingui.renderers.GridDropDownCellRenderer;
@@ -102,11 +101,6 @@ public class UiGrid extends UiField
 			}
 		}
 		
-		public TableCellRenderer getCellRenderer(int row, int column)
-		{
-			return getColumnModel().getColumn(column).getCellRenderer();
-		}
-		
 		public void changeSelection(int rowIndex, int columnIndex,
 				boolean toggle, boolean extend)
 		{
@@ -121,7 +115,6 @@ public class UiGrid extends UiField
 		{
 			throw new NotSerializableException();
 		}
-
 	}
 	
 	class GridTableCellEditor extends DefaultCellEditor
@@ -142,12 +135,8 @@ public class UiGrid extends UiField
 		}
 
 		private static final long serialVersionUID = 1;
-
 	}
 
-	
-
-	
 	public JComponent getComponent()
 	{
 		return widget;

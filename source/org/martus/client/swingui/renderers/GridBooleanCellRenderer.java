@@ -31,27 +31,20 @@ import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.table.TableCellRenderer;
-import org.martus.common.fieldspec.FieldSpec;
 import org.martus.swing.UiCheckBox;
 
 public class GridBooleanCellRenderer implements TableCellRenderer
 {
-	public Component getTableCellRendererComponent(JTable tableToUse, Object stringValue, boolean isSelected, boolean hasFocus, int row, int column)
+	public Component getTableCellRendererComponent(JTable tableToUse, Object booleanValue, boolean isSelected, boolean hasFocus, int row, int column)
 	{
 		UiCheckBox cell = new UiCheckBox();
-		cell.setSelected(FieldSpec.TRUESTRING.equals(stringValue));
+		cell.setSelected(((Boolean)booleanValue).booleanValue());
 		cell.setBorder(new EmptyBorder(0,0,0,0));
-		if(column == 0)
-		{
-			cell.setBackground(Color.WHITE);
-			cell.setForeground(Color.BLACK);
-			return cell;
-		}
-		
+		cell.setBorderPainted(true);
+		cell.setBackground(Color.WHITE);
+		cell.setForeground(Color.BLACK);
 		if(hasFocus)
-		{
 			cell.setBorder(new LineBorder(Color.BLACK,1));
-		}
 		return cell;
 	}
 }
