@@ -28,9 +28,11 @@ package org.martus.client.search;
 
 import java.io.File;
 
+import org.martus.common.EnglishCommonStrings;
 import org.martus.common.GridData;
 import org.martus.common.bulletin.BulletinConstants;
 import org.martus.common.clientside.Localization;
+import org.martus.common.field.MartusDateRangeField;
 import org.martus.common.fieldspec.DropDownFieldSpec;
 import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.fieldspec.GridFieldSpec;
@@ -57,10 +59,17 @@ public class TestFancySearchHelper extends TestCaseEnhanced
 	
 	public void testCreateFieldColumnSpec()
 	{
+		String languageCode = "en";
+		localization.addEnglishTranslations(EnglishCommonStrings.strings);
+		localization.setCurrentLanguageCode(languageCode);
+		
 		DropDownFieldSpec spec = helper.createFieldColumnSpec();
 		assertEquals("no empty first entry?", "", spec.getChoice(0).getCode());
 		assertTrue("no author?", spec.findCode(BulletinConstants.TAGAUTHOR) >= 0);
 		assertTrue("no private?", spec.findCode(BulletinConstants.TAGPRIVATEINFO) >= 0);
+		assertTrue("no eventdate.begin?", spec.findCode(BulletinConstants.TAGEVENTDATE + "." + MartusDateRangeField.SUBFIELD_BEGIN) >= 0);
+		assertTrue("no eventdate.end?", spec.findCode(BulletinConstants.TAGEVENTDATE + "." + MartusDateRangeField.SUBFIELD_END) >= 0);
+		assertFalse("has raw eventdate?", spec.findCode(BulletinConstants.TAGEVENTDATE) >= 0);
 	}
 	
 	public void testCreateOpColumnSpec()

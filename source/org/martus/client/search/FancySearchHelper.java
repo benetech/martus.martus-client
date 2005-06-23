@@ -31,11 +31,14 @@ import java.util.Vector;
 import org.martus.common.GridData;
 import org.martus.common.clientside.ChoiceItem;
 import org.martus.common.clientside.Localization;
+import org.martus.common.field.MartusDateRangeField;
 import org.martus.common.fieldspec.DropDownFieldSpec;
 import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.fieldspec.GridFieldSpec;
 import org.martus.common.fieldspec.StandardFieldSpecs;
 import org.martus.common.fieldspec.GridFieldSpec.UnsupportedFieldTypeException;
+import org.martus.util.TokenReplacement;
+import org.martus.util.TokenReplacement.TokenInvalidException;
 
 public class FancySearchHelper
 {
@@ -90,10 +93,34 @@ public class FancySearchHelper
 			String displayString = tag;
 			if(StandardFieldSpecs.isStandardFieldTag(tag))
 				displayString = getLocalization().getFieldLabel(tag);
-			choices.add(new ChoiceItem(tag, displayString));
+			if(specs[i].getType() == FieldSpec.TYPE_DATERANGE)
+			{
+				addDateRangeChoiceItem(choices, tag, MartusDateRangeField.SUBFIELD_BEGIN, displayString);
+				addDateRangeChoiceItem(choices, tag, MartusDateRangeField.SUBFIELD_END, displayString);
+			}
+			else
+			{
+				choices.add(new ChoiceItem(tag, displayString));
+			}
 		}
 			
 		return choices;
+	}
+	
+	private void addDateRangeChoiceItem(Vector choices, String tag, String subfield, String baseDisplayString) 
+	{
+		String fullTag = tag + "." + subfield;
+		String displayTemplate = localization.getFieldLabel("DateRangeTemplate" + subfield);
+		try
+		{
+			String fullDisplayString = TokenReplacement.replaceToken(displayTemplate, "#FIELDLABEL#", baseDisplayString);
+			choices.add(new ChoiceItem(fullTag, fullDisplayString));
+		}
+		catch (TokenInvalidException e)
+		{
+			// bad translation--not much we can do about it
+			e.printStackTrace();
+		}
 	}
 	
 	public GridFieldSpec getGridSpec()
