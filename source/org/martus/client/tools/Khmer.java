@@ -47,8 +47,9 @@ public class Khmer
 							0x179F, 0x17D2, 0x179A, 0x17B6, 0x200B, 
 							0x179C, 0x17B7, 0x1791, 0x17BC};
 		String khmerWindowsString = "Khmer Windows: " + new String(khmerText);
-		String khmerSwingString = "Khmer Java 1.6.0 Swing: " + new String(khmerText);
-		String khmerDirectString = "Khmer Java 1.6.0 TextLayout: " + new String(khmerText);
+		String javaVersion = System.getProperty("java.version");
+		String khmerSwingString = "Khmer Java " + javaVersion + " Swing: " + new String(khmerText);
+		String khmerDirectString = "Khmer Java " + javaVersion + " TextLayout: " + new String(khmerText);
 
 		JLabel khmerLabel = new JLabel(khmerSwingString);
 		KhmerViaTextLayout khmerLayout = new KhmerViaTextLayout(khmerDirectString);
@@ -64,7 +65,7 @@ public class Khmer
 		JDialog sample = new JDialog();
 		sample.setTitle(khmerWindowsString);
 		sample.getContentPane().add(vbox);
-		sample.setSize(600,300);
+		sample.setSize(800,300);
 		sample.setModal(true);
 		sample.setVisible(true);
 	}
