@@ -47,14 +47,17 @@ public class Khmer
 							0x179F, 0x17D2, 0x179A, 0x17B6, 0x200B, 
 							0x179C, 0x17B7, 0x1791, 0x17BC};
 		String khmerString = "Khmer: " + new String(khmerText);
-		Font khmerFont = new Font("Khmer OS", Font.PLAIN, 30);
 
 		JLabel khmerLabel = new JLabel(khmerString);
+		KhmerViaTextLayout khmerLayout = new KhmerViaTextLayout(khmerString);
+
+		Font khmerFont = new Font("Khmer OS", Font.PLAIN, 30);
 		khmerLabel.setFont(khmerFont);
+		khmerLayout.setFont(khmerFont);
 
 		Box vbox = Box.createVerticalBox();
 		vbox.add(khmerLabel);
-		vbox.add(new KhmerViaTextLayout(khmerString, khmerFont));
+		vbox.add(khmerLayout);
 
 		JDialog sample = new JDialog();
 		sample.setTitle(khmerString);
@@ -67,10 +70,9 @@ public class Khmer
 
 class KhmerViaTextLayout extends JComponent
 {
-	public KhmerViaTextLayout(String textToShow, Font f)
+	public KhmerViaTextLayout(String textToShow)
 	{
 		text = textToShow;
-		setFont(f);
 	}
 	
 	public void paint(Graphics graphics)
