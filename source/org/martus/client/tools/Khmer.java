@@ -46,10 +46,12 @@ public class Khmer
 		char[] khmerText = {0x1781, 0x17D2, 0x1789, 0x17BB, 0x17C6, 0x200B, 
 							0x179F, 0x17D2, 0x179A, 0x17B6, 0x200B, 
 							0x179C, 0x17B7, 0x1791, 0x17BC};
-		String khmerString = "Khmer: " + new String(khmerText);
+		String khmerWindowsString = "Khmer Windows: " + new String(khmerText);
+		String khmerSwingString = "Khmer Java 1.6.0 Swing: " + new String(khmerText);
+		String khmerDirectString = "Khmer Java 1.6.0 TextLayout: " + new String(khmerText);
 
-		JLabel khmerLabel = new JLabel(khmerString);
-		KhmerViaTextLayout khmerLayout = new KhmerViaTextLayout(khmerString);
+		JLabel khmerLabel = new JLabel(khmerSwingString);
+		KhmerViaTextLayout khmerLayout = new KhmerViaTextLayout(khmerDirectString);
 
 		Font khmerFont = new Font("Khmer OS", Font.PLAIN, 30);
 		khmerLabel.setFont(khmerFont);
@@ -60,7 +62,7 @@ public class Khmer
 		vbox.add(khmerLayout);
 
 		JDialog sample = new JDialog();
-		sample.setTitle(khmerString);
+		sample.setTitle(khmerWindowsString);
 		sample.getContentPane().add(vbox);
 		sample.setSize(600,300);
 		sample.setModal(true);
@@ -70,6 +72,8 @@ public class Khmer
 
 class KhmerViaTextLayout extends JComponent
 {
+	private static final long serialVersionUID = 1L;
+
 	public KhmerViaTextLayout(String textToShow)
 	{
 		text = textToShow;
