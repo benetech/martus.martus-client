@@ -25,28 +25,15 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.fields;
 
-import java.awt.Color;
-import java.io.IOException;
-import java.io.NotSerializableException;
-import javax.swing.DefaultCellEditor;
-import javax.swing.JCheckBox;
-import javax.swing.JComboBox;
 import javax.swing.JComponent;
 import javax.swing.ListSelectionModel;
-import javax.swing.border.LineBorder;
-import javax.swing.table.TableColumn;
-import org.martus.client.swingui.renderers.GridBooleanCellRenderer;
-import org.martus.client.swingui.renderers.GridDropDownCellRenderer;
-import org.martus.client.swingui.renderers.GridNormalCellRenderer;
-import org.martus.client.swingui.tablemodels.GridTableModel;
+
+import org.martus.client.swingui.grids.GridTable;
+import org.martus.client.swingui.grids.GridTableModel;
 import org.martus.common.GridData;
-import org.martus.common.fieldspec.DropDownFieldSpec;
-import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.fieldspec.GridFieldSpec;
 import org.martus.swing.UiScrollPane;
 import org.martus.swing.UiTable;
-import org.martus.swing.UiTableWithCellEditingProtection;
-import org.martus.swing.UiTextField;
 
 
 public class UiGrid extends UiField
@@ -64,79 +51,6 @@ public class UiGrid extends UiField
 		widget = new UiScrollPane(table);
 	}	
 	
-	class GridTable extends UiTableWithCellEditingProtection
-	{
-		public GridTable(GridTableModel model)
-		{
-			super(model);
-			setMaxColumnWidthToHeaderWidth(0);
-			for(int i = 1 ; i < model.getColumnCount(); ++i)
-				setColumnWidthToHeaderWidth(i);
-			setAutoResizeMode(AUTO_RESIZE_OFF);
-			for(int i = 0 ; i < model.getColumnCount(); ++i)
-			{
-				TableColumn tableColumn = getColumnModel().getColumn(i);
-				switch(model.getColumnType(i))
-				{
-					case FieldSpec.TYPE_NORMAL:
-						UiTextField uiTextField = new UiTextField();
-						uiTextField.setBorder(new LineBorder(Color.BLUE));
-						tableColumn.setCellEditor(new GridTableCellEditor(uiTextField)); 
-						tableColumn.setCellRenderer(new GridNormalCellRenderer());
-						break;
-						
-					case FieldSpec.TYPE_DROPDOWN:
-						DropDownFieldSpec dropDownFieldSpec = (DropDownFieldSpec)model.getFieldSpec(i);
-						UiChoiceEditor uiChoiceField = new UiChoiceEditor(dropDownFieldSpec);
-						tableColumn.setCellEditor(new GridTableCellEditor(uiChoiceField)); 
-						tableColumn.setCellRenderer(new GridDropDownCellRenderer(dropDownFieldSpec));
-						break;
-
-					case FieldSpec.TYPE_BOOLEAN:
-						UiBoolEditor uiBooleanField = new UiBoolEditor();
-						tableColumn.setCellEditor(new GridTableCellEditor(uiBooleanField)); 
-						tableColumn.setCellRenderer(new GridBooleanCellRenderer());
-						break;
-				}
-			}
-		}
-		
-		public void changeSelection(int rowIndex, int columnIndex,
-				boolean toggle, boolean extend)
-		{
-			if(columnIndex == 0)
-				columnIndex = 1;
-			super.changeSelection(rowIndex, columnIndex, toggle, extend);
-		}
-
-		// This class is NOT intended to be serialized!!!
-		private static final long serialVersionUID = 1;
-		private void writeObject(java.io.ObjectOutputStream stream) throws IOException
-		{
-			throw new NotSerializableException();
-		}
-	}
-	
-	class GridTableCellEditor extends DefaultCellEditor
-	{
-		public GridTableCellEditor(UiTextField textField)
-		{
-			super(textField);
-		}
-		
-		public GridTableCellEditor(UiChoiceEditor choiceEditor)
-		{
-			super((JComboBox)choiceEditor.getComponent());
-		}
-		
-		public GridTableCellEditor(UiBoolEditor booleanEditor)
-		{
-			super((JCheckBox)booleanEditor.getComponent());
-		}
-
-		private static final long serialVersionUID = 1;
-	}
-
 	public JComponent getComponent()
 	{
 		return widget;
@@ -170,3 +84,4 @@ public class UiGrid extends UiField
 	UiTable table;
 	GridTableModel model;
 }
+

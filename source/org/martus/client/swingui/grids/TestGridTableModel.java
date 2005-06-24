@@ -23,11 +23,10 @@ Software Foundation, Inc., 59 Temple Place - Suite 330,
 Boston, MA 02111-1307, USA.
 
 */
-package org.martus.client.test;
+package org.martus.client.swingui.grids;
 
 import java.util.Vector;
 
-import org.martus.client.swingui.tablemodels.GridTableModel;
 import org.martus.common.fieldspec.CustomDropDownFieldSpec;
 import org.martus.common.fieldspec.DropDownFieldSpec;
 import org.martus.common.fieldspec.FieldSpec;

@@ -36,6 +36,7 @@ import org.martus.client.search.TestBulletinSearcher;
 import org.martus.client.search.TestFancySearchHelper;
 import org.martus.client.search.TestSearchParser;
 import org.martus.client.search.TestSearchTreeNode;
+import org.martus.client.swingui.grids.TestGridTableModel;
 
 public class TestClient
 {

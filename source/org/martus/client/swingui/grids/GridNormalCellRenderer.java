@@ -23,7 +23,7 @@ Software Foundation, Inc., 59 Temple Place - Suite 330,
 Boston, MA 02111-1307, USA.
 
 */
-package org.martus.client.swingui.renderers;
+package org.martus.client.swingui.grids;
 
 import java.awt.Color;
 import java.awt.Component;
@@ -31,20 +31,25 @@ import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.table.TableCellRenderer;
-import org.martus.swing.UiCheckBox;
+import org.martus.swing.UiTextField;
 
-public class GridBooleanCellRenderer implements TableCellRenderer
+public class GridNormalCellRenderer implements TableCellRenderer
 {
-	public Component getTableCellRendererComponent(JTable tableToUse, Object booleanValue, boolean isSelected, boolean hasFocus, int row, int column)
+	public Component getTableCellRendererComponent(JTable tableToUse, Object value, boolean isSelected, boolean hasFocus, int row, int column)
 	{
-		UiCheckBox cell = new UiCheckBox();
-		cell.setSelected(((Boolean)booleanValue).booleanValue());
+		UiTextField cell = new UiTextField((String)value);
 		cell.setBorder(new EmptyBorder(0,0,0,0));
-		cell.setBorderPainted(true);
-		cell.setBackground(tableToUse.getBackground());
-		cell.setForeground(tableToUse.getForeground());
+		if(column == 0)
+		{
+			cell.setBackground(Color.LIGHT_GRAY);
+			cell.setForeground(Color.BLACK);
+			return cell;
+		}
+		
 		if(hasFocus)
+		{
 			cell.setBorder(new LineBorder(Color.BLACK,1));
+		}
 		return cell;
 	}
 }

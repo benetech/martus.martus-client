@@ -23,33 +23,34 @@ Software Foundation, Inc., 59 Temple Place - Suite 330,
 Boston, MA 02111-1307, USA.
 
 */
-package org.martus.client.swingui.renderers;
 
-import java.awt.Color;
-import java.awt.Component;
-import javax.swing.JTable;
-import javax.swing.border.EmptyBorder;
-import javax.swing.border.LineBorder;
-import javax.swing.table.TableCellRenderer;
+package org.martus.client.swingui.grids;
+
+import javax.swing.DefaultCellEditor;
+import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
+
+import org.martus.client.swingui.fields.UiBoolEditor;
+import org.martus.client.swingui.fields.UiChoiceEditor;
 import org.martus.swing.UiTextField;
 
-public class GridNormalCellRenderer implements TableCellRenderer
+class GridTableCellEditor extends DefaultCellEditor
 {
-	public Component getTableCellRendererComponent(JTable tableToUse, Object value, boolean isSelected, boolean hasFocus, int row, int column)
+	public GridTableCellEditor(UiTextField textField)
 	{
-		UiTextField cell = new UiTextField((String)value);
-		cell.setBorder(new EmptyBorder(0,0,0,0));
-		if(column == 0)
-		{
-			cell.setBackground(Color.LIGHT_GRAY);
-			cell.setForeground(Color.BLACK);
-			return cell;
-		}
-		
-		if(hasFocus)
-		{
-			cell.setBorder(new LineBorder(Color.BLACK,1));
-		}
-		return cell;
+		super(textField);
 	}
+	
+	public GridTableCellEditor(UiChoiceEditor choiceEditor)
+	{
+		super((JComboBox)choiceEditor.getComponent());
+	}
+	
+	public GridTableCellEditor(UiBoolEditor booleanEditor)
+	{
+		super((JCheckBox)booleanEditor.getComponent());
+	}
+
+	private static final long serialVersionUID = 1;
 }
+

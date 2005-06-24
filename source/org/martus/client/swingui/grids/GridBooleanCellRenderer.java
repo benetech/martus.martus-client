@@ -23,7 +23,7 @@ Software Foundation, Inc., 59 Temple Place - Suite 330,
 Boston, MA 02111-1307, USA.
 
 */
-package org.martus.client.swingui.renderers;
+package org.martus.client.swingui.grids;
 
 import java.awt.Color;
 import java.awt.Component;
@@ -31,27 +31,20 @@ import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.table.TableCellRenderer;
-import org.martus.common.fieldspec.DropDownFieldSpec;
-import org.martus.swing.UiComboBox;
+import org.martus.swing.UiCheckBox;
 
-public class GridDropDownCellRenderer implements TableCellRenderer
+public class GridBooleanCellRenderer implements TableCellRenderer
 {
-	public GridDropDownCellRenderer(DropDownFieldSpec specToUse)
+	public Component getTableCellRendererComponent(JTable tableToUse, Object booleanValue, boolean isSelected, boolean hasFocus, int row, int column)
 	{
-		super();
-		dropDownSpec = specToUse; 
-	}
-	public Component getTableCellRendererComponent(JTable tableToUse, Object codeString, boolean isSelected, boolean hasFocus, int row, int column)
-	{
-		UiComboBox cell = new UiComboBox();
-		cell.addItem(dropDownSpec.getDisplayString((String)codeString));
-		cell.setSelectedIndex(0);
+		UiCheckBox cell = new UiCheckBox();
+		cell.setSelected(((Boolean)booleanValue).booleanValue());
+		cell.setBorder(new EmptyBorder(0,0,0,0));
+		cell.setBorderPainted(true);
+		cell.setBackground(tableToUse.getBackground());
+		cell.setForeground(tableToUse.getForeground());
 		if(hasFocus)
 			cell.setBorder(new LineBorder(Color.BLACK,1));
-		else
-			cell.setBorder(new EmptyBorder(0,0,0,0));
-			
 		return cell;
 	}
-	DropDownFieldSpec dropDownSpec;
 }
