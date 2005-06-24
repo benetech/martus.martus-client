@@ -41,6 +41,7 @@ import org.martus.common.bulletin.Bulletin;
 import org.martus.common.bulletin.BulletinConstants;
 import org.martus.common.crypto.MartusCrypto.EncryptionException;
 import org.martus.common.fieldspec.FieldSpec;
+import org.martus.common.fieldspec.GridFieldSpec;
 import org.martus.common.fieldspec.StandardFieldSpecs;
 import org.martus.common.packet.BulletinHistory;
 import org.martus.common.packet.FieldDataPacket;
@@ -116,7 +117,7 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 		
 		Bulletin b = new Bulletin(store.getSignatureGenerator(), fields.getSpecs(), StandardFieldSpecs.getDefaultPrivateFieldSpecs());
 		b.setAllPrivate(false);
-		GridData gridData = new GridData(2);
+		GridData gridData = new GridData((GridFieldSpec)newSpec);
 		GridRow row = new GridRow(2);
 		row.setCellText(0, "rowData1");
 		row.setCellText(1, "rowData2");

@@ -40,7 +40,7 @@ public class GridTableModel extends AbstractTableModel
 	public GridTableModel(GridFieldSpec fieldSpecToUse)
 	{
 		fieldSpec = fieldSpecToUse;
-		gridData = new GridData(fieldSpec.getColumnCount());
+		gridData = new GridData(fieldSpec);
 	}
 	
 	public int getColumnCount() 
