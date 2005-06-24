@@ -112,13 +112,13 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 				"</Field>\n" +
 				"</GridSpecDetails>" +
 				"</Field></CustomFields>";
-		FieldSpec newSpec = FieldCollection.parseXml(xmlFieldType)[0]; 
+		GridFieldSpec newSpec = (GridFieldSpec)FieldCollection.parseXml(xmlFieldType)[0]; 
 		fields.add(newSpec);				
 		
 		Bulletin b = new Bulletin(store.getSignatureGenerator(), fields.getSpecs(), StandardFieldSpecs.getDefaultPrivateFieldSpecs());
 		b.setAllPrivate(false);
-		GridData gridData = new GridData((GridFieldSpec)newSpec);
-		GridRow row = new GridRow(2);
+		GridData gridData = new GridData(newSpec);
+		GridRow row = new GridRow(newSpec);
 		row.setCellText(0, "rowData1");
 		row.setCellText(1, "rowData2");
 		gridData.addRow(row);
