@@ -32,8 +32,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.io.File;
-import java.io.IOException;
-import java.io.NotSerializableException;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -43,6 +41,7 @@ import javax.swing.JPanel;
 import javax.swing.ListSelectionModel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.filechooser.FileFilter;
+
 import org.martus.client.core.MartusApp;
 import org.martus.client.swingui.HeadQuarterEntry;
 import org.martus.client.swingui.HeadQuartersTableModel;
@@ -384,13 +383,6 @@ public class UiConfigureHQs extends JDialog
 		}
 	}
 	
-
-	// This class is NOT intended to be serialized!!!
-	private static final long serialVersionUID = 1;
-	private void writeObject(java.io.ObjectOutputStream stream) throws IOException
-	{
-		throw new NotSerializableException();
-	}
 
 	UiMainWindow mainWindow;
 	UiTable table;

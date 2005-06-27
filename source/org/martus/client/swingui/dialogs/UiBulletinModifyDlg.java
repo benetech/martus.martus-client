@@ -36,7 +36,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.io.IOException;
-import java.io.NotSerializableException;
 
 import javax.swing.Box;
 import javax.swing.JButton;
@@ -329,13 +328,6 @@ public class UiBulletinModifyDlg extends JFrame implements ActionListener, Windo
 		}
 			
 		cleanupAndExit();
-	}
-
-	// This class is NOT intended to be serialized!!!
-	private static final long serialVersionUID = 1;
-	private void writeObject(java.io.ObjectOutputStream stream) throws IOException
-	{
-		throw new NotSerializableException();
 	}
 
 

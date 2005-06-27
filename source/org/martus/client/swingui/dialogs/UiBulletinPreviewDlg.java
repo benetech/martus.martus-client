@@ -30,8 +30,6 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
-import java.io.NotSerializableException;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -39,6 +37,7 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.JViewport;
+
 import org.martus.client.core.LanguageChangeListener;
 import org.martus.client.swingui.UiLocalization;
 import org.martus.client.swingui.UiMainWindow;
@@ -111,13 +110,6 @@ public class UiBulletinPreviewDlg extends JDialog implements ActionListener, Lan
 		//read-only nothing to do
 	}
 
-
-	// This class is NOT intended to be serialized!!!
-	private static final long serialVersionUID = 1;
-	private void writeObject(java.io.ObjectOutputStream stream) throws IOException
-	{
-		throw new NotSerializableException();
-	}
 
 	private UiLocalization localization;
 

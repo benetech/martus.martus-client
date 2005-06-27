@@ -26,9 +26,6 @@ Boston, MA 02111-1307, USA.
 
 package org.martus.client.swingui.bulletincomponent;
 
-import java.io.IOException;
-import java.io.NotSerializableException;
-
 import javax.swing.JComponent;
 
 import org.martus.client.swingui.UiLocalization;
@@ -123,13 +120,6 @@ public class UiBulletinComponentViewSection extends UiBulletinComponentDataSecti
 		// read-only view can't have invalid attachments
 	}
 	
-
-	// This class is NOT intended to be serialized!!!
-	private static final long serialVersionUID = 1;
-	private void writeObject(java.io.ObjectOutputStream stream) throws IOException
-	{
-		throw new NotSerializableException();
-	}
 
 	public UiAttachmentViewer attachmentViewer;
 }

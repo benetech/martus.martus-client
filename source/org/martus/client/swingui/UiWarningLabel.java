@@ -28,10 +28,9 @@ package org.martus.client.swingui;
 
 import java.awt.Color;
 import java.awt.Font;
-import java.io.IOException;
-import java.io.NotSerializableException;
 
 import javax.swing.border.LineBorder;
+
 import org.martus.swing.UiLabel;
 
 public class UiWarningLabel extends UiLabel
@@ -50,13 +49,6 @@ public class UiWarningLabel extends UiLabel
 	public void setText(String text)
 	{
 		super.setText("   " + text + "   ");
-	}
-
-	// This class is NOT intended to be serialized!!!
-	private static final long serialVersionUID = 1;
-	private void writeObject(java.io.ObjectOutputStream stream) throws IOException
-	{
-		throw new NotSerializableException();
 	}
 
 }

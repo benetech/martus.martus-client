@@ -26,13 +26,11 @@ Boston, MA 02111-1307, USA.
 
 package org.martus.client.swingui;
 
-import java.io.IOException;
-import java.io.NotSerializableException;
-
 import javax.swing.AbstractAction;
 import javax.swing.JMenuBar;
 import javax.swing.event.MenuEvent;
 import javax.swing.event.MenuListener;
+
 import org.martus.client.swingui.actions.ActionMenuBackupMyKeyPair;
 import org.martus.client.swingui.actions.ActionMenuCustomFields;
 import org.martus.client.swingui.actions.ActionMenuQuickEraseDeleteMyData;
@@ -215,13 +213,6 @@ public class UiMenuBar extends JMenuBar
 		actionMenuDeleteFolder = UiActions.newActionMenuDeleteFolder(mainWindow);
 	}
 
-
-	// This class is NOT intended to be serialized!!!
-	private static final long serialVersionUID = 1;
-	private void writeObject(java.io.ObjectOutputStream stream) throws IOException
-	{
-		throw new NotSerializableException();
-	}
 
 	UiMainWindow mainWindow;
 

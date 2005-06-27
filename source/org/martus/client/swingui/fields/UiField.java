@@ -56,12 +56,6 @@ abstract public class UiField
 			return localizedTag;
 		}
 
-		// This class is NOT intended to be serialized!!!
-		private static final long serialVersionUID = 1;
-		private void writeObject(java.io.ObjectOutputStream stream) throws IOException
-		{
-			throw new NotSerializableException();
-		}
 
 		String localizedTag;
 	}

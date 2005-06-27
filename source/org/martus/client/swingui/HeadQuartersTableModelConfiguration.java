@@ -24,9 +24,6 @@ Boston, MA 02111-1307, USA.
 
 package org.martus.client.swingui;
 
-import java.io.IOException;
-import java.io.NotSerializableException;
-
 import org.martus.common.clientside.UiBasicLocalization;
 
 public class HeadQuartersTableModelConfiguration extends HeadQuartersTableModel 
@@ -37,13 +34,6 @@ public class HeadQuartersTableModelConfiguration extends HeadQuartersTableModel
 		COLUMN_DEFAULT = columnCount++;
 		COLUMN_PUBLIC_CODE = columnCount++;
 		COLUMN_LABEL = columnCount++;
-	}
-
-	// This class is NOT intended to be serialized!!!
-	private static final long serialVersionUID = 1;
-	private void writeObject(java.io.ObjectOutputStream stream) throws IOException
-	{
-		throw new NotSerializableException();
 	}
 
 }

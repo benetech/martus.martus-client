@@ -29,8 +29,6 @@ package org.martus.client.swingui.actions;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
-import java.io.NotSerializableException;
 import java.util.Vector;
 
 import javax.swing.Box;
@@ -229,25 +227,11 @@ public abstract class ActionQuickErase extends UiMenuAction
 		}
 
 
-		// This class is NOT intended to be serialized!!!
-		private static final long serialVersionUID = 1;
-		private void writeObject(java.io.ObjectOutputStream stream) throws IOException
-		{
-			throw new NotSerializableException();
-		}
-
 		private JButton okButton;
 		private boolean okPressed;
 		private boolean uninstallChoosen;
 	}
 
-
-	// This class is NOT intended to be serialized!!!
-	private static final long serialVersionUID = 1;
-	private void writeObject(java.io.ObjectOutputStream stream) throws IOException
-	{
-		throw new NotSerializableException();
-	}
 
 	final boolean WILL_UNINSTALL_MARTUS = true;
 	final boolean WILL_NOT_UNINSTALL_MARTUS = false;

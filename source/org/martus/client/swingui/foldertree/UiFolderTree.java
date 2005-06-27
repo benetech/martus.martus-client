@@ -33,8 +33,6 @@ import java.awt.Point;
 import java.awt.dnd.DropTarget;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.io.IOException;
-import java.io.NotSerializableException;
 
 import javax.swing.Icon;
 import javax.swing.JLabel;
@@ -208,13 +206,6 @@ class UiFolderTree extends JTree implements TreeSelectionListener
 			return label;
 		}
 
-		// This class is NOT intended to be serialized!!!
-		private static final long serialVersionUID = 1;
-		private void writeObject(java.io.ObjectOutputStream stream) throws IOException
-		{
-			throw new NotSerializableException();
-		}
-
 
 		JLabel label;
 		Icon closedIcon;
@@ -271,13 +262,6 @@ class UiFolderTree extends JTree implements TreeSelectionListener
 		String oldLocalizedFolderName;
 		String oldInternalFolderName;
 		FolderTreeNode node;
-	}
-
-	// This class is NOT intended to be serialized!!!
-	private static final long serialVersionUID = 1;
-	private void writeObject(java.io.ObjectOutputStream stream) throws IOException
-	{
-		throw new NotSerializableException();
 	}
 
 

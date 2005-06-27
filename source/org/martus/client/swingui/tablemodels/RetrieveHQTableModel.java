@@ -26,8 +26,6 @@ Boston, MA 02111-1307, USA.
 
 package org.martus.client.swingui.tablemodels;
 
-import java.io.IOException;
-import java.io.NotSerializableException;
 import java.util.Vector;
 
 import org.martus.client.core.MartusApp;
@@ -51,13 +49,6 @@ public class RetrieveHQTableModel extends RetrieveTableModelHQ
 			String accountId = (String)accounts.get(a);
 			getFieldOfficeSealedSummaries(accountId);
 		}
-	}
-
-	// This class is NOT intended to be serialized!!!
-	private static final long serialVersionUID = 1;
-	private void writeObject(java.io.ObjectOutputStream stream) throws IOException
-	{
-		throw new NotSerializableException();
 	}
 
 }

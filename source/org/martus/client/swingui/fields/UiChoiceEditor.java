@@ -29,11 +29,11 @@ package org.martus.client.swingui.fields;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
-import java.io.NotSerializableException;
+
 import javax.swing.DefaultListCellRenderer;
 import javax.swing.JComponent;
 import javax.swing.JList;
+
 import org.martus.client.core.LanguageChangeListener;
 import org.martus.common.fieldspec.FieldSpec;
 import org.martus.swing.UiComboBox;
@@ -65,12 +65,6 @@ public class UiChoiceEditor extends UiChoice implements ActionListener
 			return cellRenderer;
 		}
 		
-		// This class is NOT intended to be serialized!!!
-		private static final long serialVersionUID = 1;
-		private void writeObject(java.io.ObjectOutputStream stream) throws IOException
-		{
-			throw new NotSerializableException();
-		}
 	}
 
 	public String getText()

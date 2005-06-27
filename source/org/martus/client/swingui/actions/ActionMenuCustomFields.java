@@ -27,8 +27,6 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.swingui.actions;
 
 import java.awt.event.ActionEvent;
-import java.io.IOException;
-import java.io.NotSerializableException;
 
 import org.martus.client.core.ClientBulletinStore;
 import org.martus.client.core.MartusApp;
@@ -109,13 +107,6 @@ public class ActionMenuCustomFields extends UiMenuAction
 		}
 	}
 	
-
-	// This class is NOT intended to be serialized!!!
-	private static final long serialVersionUID = 1;
-	private void writeObject(java.io.ObjectOutputStream stream) throws IOException
-	{
-		throw new NotSerializableException();
-	}
 
 	
 }

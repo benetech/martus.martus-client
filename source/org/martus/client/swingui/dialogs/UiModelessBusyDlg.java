@@ -29,8 +29,6 @@ package org.martus.client.swingui.dialogs;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Cursor;
-import java.io.IOException;
-import java.io.NotSerializableException;
 
 import javax.swing.JDialog;
 import javax.swing.border.LineBorder;
@@ -64,13 +62,6 @@ public class UiModelessBusyDlg extends JDialog
 		dispose();
 	}
 
-
-	// This class is NOT intended to be serialized!!!
-	private static final long serialVersionUID = 1;
-	private void writeObject(java.io.ObjectOutputStream stream) throws IOException
-	{
-		throw new NotSerializableException();
-	}
 
 	Cursor origCursor;
 }

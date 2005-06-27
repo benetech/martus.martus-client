@@ -30,13 +30,12 @@ import java.awt.Cursor;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.io.IOException;
-import java.io.NotSerializableException;
 
 import javax.swing.AbstractAction;
 import javax.swing.JMenuItem;
 import javax.swing.JViewport;
 import javax.swing.tree.TreePath;
+
 import org.martus.client.core.BulletinFolder;
 import org.martus.client.core.ClientBulletinStore;
 import org.martus.client.swingui.UiLocalization;
@@ -182,13 +181,6 @@ public class UiFolderTreePane extends UiScrollPane
 			return true;
 		}
 
-		// This class is NOT intended to be serialized!!!
-		private static final long serialVersionUID = 1;
-		private void writeObject(java.io.ObjectOutputStream stream) throws IOException
-		{
-			throw new NotSerializableException();
-		}
-
 	}
 
 	public boolean canDeleteFolder(FolderTreeNode nodeToDelete)
@@ -241,13 +233,6 @@ public class UiFolderTreePane extends UiScrollPane
 			return canDeleteFolder(nodeToDelete);
 		}
 
-		// This class is NOT intended to be serialized!!!
-		private static final long serialVersionUID = 1;
-		private void writeObject(java.io.ObjectOutputStream stream) throws IOException
-		{
-			throw new NotSerializableException();
-		}
-
 
 		FolderTreeNode nodeToDelete;
 	}
@@ -286,13 +271,6 @@ public class UiFolderTreePane extends UiScrollPane
 			return false;
 		}
 
-		// This class is NOT intended to be serialized!!!
-		private static final long serialVersionUID = 1;
-		private void writeObject(java.io.ObjectOutputStream stream) throws IOException
-		{
-			throw new NotSerializableException();
-		}
-
 
 		FolderTreeNode nodeToRename;
 	}
@@ -310,13 +288,6 @@ public class UiFolderTreePane extends UiScrollPane
 		if(node == null)
 			return null;
 		return getPathOfNode(node);
-	}
-
-	// This class is NOT intended to be serialized!!!
-	private static final long serialVersionUID = 1;
-	private void writeObject(java.io.ObjectOutputStream stream) throws IOException
-	{
-		throw new NotSerializableException();
 	}
 
 

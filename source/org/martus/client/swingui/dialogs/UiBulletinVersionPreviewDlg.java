@@ -28,7 +28,6 @@ package org.martus.client.swingui.dialogs;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
-import java.io.NotSerializableException;
 
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.bulletincomponent.UiBulletinVersionView;
@@ -62,12 +61,5 @@ public class UiBulletinVersionPreviewDlg extends UiBulletinPreviewDlg implements
 		dispose();
 	}
 
-
-	// This class is NOT intended to be serialized!!!
-	private static final long serialVersionUID = 1;
-	private void writeObject(java.io.ObjectOutputStream stream) throws IOException
-	{
-		throw new NotSerializableException();
-	}
 
 }

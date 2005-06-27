@@ -279,7 +279,6 @@ public class UiFlexiDateEditor extends UiField
 			super(tag);
 		}
 
-		private static final long serialVersionUID = 1;
 	}
 		
 	JComponent 					component;

@@ -27,8 +27,6 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.swingui.grids;
 
 import java.awt.Color;
-import java.io.IOException;
-import java.io.NotSerializableException;
 
 import javax.swing.border.LineBorder;
 import javax.swing.table.TableColumn;
@@ -85,11 +83,5 @@ public class GridTable extends UiTableWithCellEditingProtection
 		super.changeSelection(rowIndex, columnIndex, toggle, extend);
 	}
 
-	// This class is NOT intended to be serialized!!!
-	private static final long serialVersionUID = 1;
-	private void writeObject(java.io.ObjectOutputStream stream) throws IOException
-	{
-		throw new NotSerializableException();
-	}
 }
 

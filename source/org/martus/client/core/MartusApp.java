@@ -1133,7 +1133,6 @@ public class MartusApp
 			super(message);
 		}
 
-		private static final long serialVersionUID = 1;
 	}
 
 	public Vector downloadFieldOfficeAccountIds() throws ServerErrorException
@@ -1251,12 +1250,10 @@ public class MartusApp
 
 	public static class AccountAlreadyExistsException extends Exception 
 	{
-		private static final long serialVersionUID = 1;
 	}
 
 	public static class CannotCreateAccountFileException extends IOException 
 	{
-		private static final long serialVersionUID = 1;
 	}
 
 	public void createAccount(String userName, char[] userPassPhrase) throws
@@ -1709,12 +1706,10 @@ public class MartusApp
 
 	public class SaveConfigInfoException extends Exception 
 	{
-		private static final long serialVersionUID = 1;
 	}
 
 	public class LoadConfigInfoException extends Exception 
 	{
-		private static final long serialVersionUID = 1;
 	}
 
 	public static class MartusAppInitializationException extends Exception
@@ -1723,8 +1718,6 @@ public class MartusApp
 		{
 			super(message);
 		}
-
-		private static final long serialVersionUID = 1;
 	}
 
 	public File martusDataRootDirectory;

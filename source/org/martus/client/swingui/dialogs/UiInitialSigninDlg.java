@@ -26,8 +26,6 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.swingui.dialogs;
 
 import java.awt.Component;
-import java.io.IOException;
-import java.io.NotSerializableException;
 
 import javax.swing.Box;
 import javax.swing.ButtonGroup;
@@ -36,6 +34,7 @@ import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
+
 import org.martus.common.clientside.CurrentUiState;
 import org.martus.common.clientside.UiBasicLocalization;
 import org.martus.swing.UiLabel;
@@ -119,13 +118,6 @@ public class UiInitialSigninDlg extends UiSigninDlg
 				usersChoice = RECOVER_ACCOUNT_BY_BACKUP_FILE;
 		}
 		dispose();
-	}
-
-	// This class is NOT intended to be serialized!!!
-	private static final long serialVersionUID = 1;
-	private void writeObject(java.io.ObjectOutputStream stream) throws IOException
-	{
-		throw new NotSerializableException();
 	}
 
 

@@ -243,7 +243,6 @@ abstract public class UiBulletinComponentDataSection extends UiBulletinComponent
 			super(localizedTag);
 		}
 
-		private static final long serialVersionUID = 1;
 	}
 	
 	abstract public UiField createNormalField();

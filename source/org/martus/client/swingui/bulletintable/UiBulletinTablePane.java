@@ -29,8 +29,6 @@ package org.martus.client.swingui.bulletintable;
 import java.awt.dnd.DropTarget;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.io.IOException;
-import java.io.NotSerializableException;
 
 import javax.swing.JPopupMenu;
 import javax.swing.JViewport;
@@ -191,13 +189,6 @@ public class UiBulletinTablePane extends UiScrollPane
 		}
 	}
 
-
-	// This class is NOT intended to be serialized!!!
-	private static final long serialVersionUID = 1;
-	private void writeObject(java.io.ObjectOutputStream stream) throws IOException
-	{
-		throw new NotSerializableException();
-	}
 
 	UiMainWindow parent;
 

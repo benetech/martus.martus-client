@@ -73,8 +73,6 @@ public class Khmer
 
 class KhmerViaTextLayout extends JComponent
 {
-	private static final long serialVersionUID = 1L;
-
 	public KhmerViaTextLayout(String textToShow)
 	{
 		text = textToShow;

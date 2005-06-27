@@ -51,6 +51,5 @@ class GridTableCellEditor extends DefaultCellEditor
 		super((JCheckBox)booleanEditor.getComponent());
 	}
 
-	private static final long serialVersionUID = 1;
 }
 

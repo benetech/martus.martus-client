@@ -102,12 +102,10 @@ public class UiRecoverKeyPairFromBackup
 	
 	class AttemptedSignInFailedException extends Exception 
 	{
-		private static final long serialVersionUID = 1;
 	}
 	
 	class AbortedSignInException extends Exception 
 	{
-		private static final long serialVersionUID = 1;
 	}
 	
 	private void attemptSignIn(File backupFile) throws AttemptedSignInFailedException, AbortedSignInException, IOException

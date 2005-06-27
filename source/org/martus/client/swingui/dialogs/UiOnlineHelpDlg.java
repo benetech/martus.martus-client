@@ -35,7 +35,6 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.NotSerializableException;
 import java.util.HashMap;
 import java.util.Vector;
 
@@ -316,13 +315,6 @@ public class UiOnlineHelpDlg extends JDialog
 				close.requestFocus();
 			}
 		}
-	}
-
-	// This class is NOT intended to be serialized!!!
-	private static final long serialVersionUID = 1;
-	private void writeObject(java.io.ObjectOutputStream stream) throws IOException
-	{
-		throw new NotSerializableException();
 	}
 
 	

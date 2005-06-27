@@ -37,8 +37,6 @@ import java.awt.dnd.DropTargetListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
-import java.io.IOException;
-import java.io.NotSerializableException;
 import java.util.List;
 
 import javax.swing.Box;
@@ -240,13 +238,6 @@ public class UiAttachmentEditor extends UiParagraphPanel
 		}
 	}
 
-	// This class is NOT intended to be serialized!!!
-	private static final long serialVersionUID = 1;
-	private void writeObject(java.io.ObjectOutputStream stream) throws IOException
-	{
-		throw new NotSerializableException();
-	}
-
 
 	UiTable attachmentTable;
 	AttachmentTableModel model;
@@ -270,11 +261,5 @@ class TableRemoveButton extends UiButton implements TableModelListener
 		setEnabled(model.getRowCount() > 0);
 	}
 
-	// This class is NOT intended to be serialized!!!
-	private static final long serialVersionUID = 1;
-	private void writeObject(java.io.ObjectOutputStream stream) throws IOException
-	{
-		throw new NotSerializableException();
-	}
 };
 

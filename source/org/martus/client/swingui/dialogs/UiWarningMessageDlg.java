@@ -30,8 +30,6 @@ import java.awt.Color;
 import java.awt.ComponentOrientation;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
-import java.io.NotSerializableException;
 
 import javax.swing.Box;
 import javax.swing.JButton;
@@ -96,11 +94,5 @@ public class UiWarningMessageDlg extends JDialog implements ActionListener
 		dispose();
 	}
 
-	// This class is NOT intended to be serialized!!!
-	private static final long serialVersionUID = 1;
-	private void writeObject(java.io.ObjectOutputStream stream) throws IOException
-	{
-		throw new NotSerializableException();
-	}
 
 }

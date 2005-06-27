@@ -28,8 +28,6 @@ package org.martus.client.swingui;
 
 import java.awt.Component;
 import java.awt.Dimension;
-import java.io.IOException;
-import java.io.NotSerializableException;
 
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
@@ -94,13 +92,6 @@ public class UiProgressMeter extends JPanel implements ProgressMeterInterface
 		return false;
 	}
 
-
-	// This class is NOT intended to be serialized!!!
-	private static final long serialVersionUID = 1;
-	private void writeObject(java.io.ObjectOutputStream stream) throws IOException
-	{
-		throw new NotSerializableException();
-	}
 
 	private JLabel statusMessage;
 	private JProgressBar progressMeter;

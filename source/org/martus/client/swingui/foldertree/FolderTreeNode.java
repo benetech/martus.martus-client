@@ -26,9 +26,6 @@ Boston, MA 02111-1307, USA.
 
 package org.martus.client.swingui.foldertree;
 
-import java.io.IOException;
-import java.io.NotSerializableException;
-
 import javax.swing.tree.DefaultMutableTreeNode;
 
 import org.martus.common.clientside.UiBasicLocalization;
@@ -62,13 +59,6 @@ public class FolderTreeNode extends DefaultMutableTreeNode
 	{
 		super.setUserObject(object);
 		internalNode.setInternalName(object.toString());
-	}
-
-	// This class is NOT intended to be serialized!!!
-	private static final long serialVersionUID = 1;
-	private void writeObject(java.io.ObjectOutputStream stream) throws IOException
-	{
-		throw new NotSerializableException();
 	}
 
 

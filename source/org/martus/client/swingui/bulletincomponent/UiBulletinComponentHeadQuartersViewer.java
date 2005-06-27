@@ -26,9 +26,6 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.swingui.bulletincomponent;
 
 
-import java.io.IOException;
-import java.io.NotSerializableException;
-
 import org.martus.client.swingui.HeadQuarterEntry;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.common.HQKeys;
@@ -67,12 +64,5 @@ public class UiBulletinComponentHeadQuartersViewer extends UiBulletinComponentHe
 		//Nothing to do here, Read Only.
 	}
 
-
-	// This class is NOT intended to be serialized!!!
-	private static final long serialVersionUID = 1;
-	private void writeObject(java.io.ObjectOutputStream stream) throws IOException
-	{
-		throw new NotSerializableException();
-	}
 
 }

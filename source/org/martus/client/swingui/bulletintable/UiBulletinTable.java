@@ -44,14 +44,15 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.IOException;
-import java.io.NotSerializableException;
 import java.util.Vector;
+
 import javax.swing.JPopupMenu;
 import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.event.TableModelEvent;
 import javax.swing.table.JTableHeader;
+
 import org.martus.client.core.BulletinFolder;
 import org.martus.client.core.ClientBulletinStore;
 import org.martus.client.core.MartusApp;
@@ -752,13 +753,6 @@ public class UiBulletinTable extends UiTable implements ListSelectionListener, D
 			setRowSelectionInterval(rowIndex, rowIndex);
 	}
 	
-
-	// This class is NOT intended to be serialized!!!
-	private static final long serialVersionUID = 1;
-	private void writeObject(java.io.ObjectOutputStream stream) throws IOException
-	{
-		throw new NotSerializableException();
-	}
 
 	static final int COLUMN_STATUS = 0;
 	static final int COLUMN_SENT = 1;
