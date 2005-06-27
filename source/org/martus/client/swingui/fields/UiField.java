@@ -26,9 +26,6 @@ Boston, MA 02111-1307, USA.
 
 package org.martus.client.swingui.fields;
 
-import java.io.IOException;
-import java.io.NotSerializableException;
-
 import javax.swing.JComponent;
 import javax.swing.event.ChangeListener;
 
