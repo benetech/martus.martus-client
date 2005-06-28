@@ -28,9 +28,10 @@ package org.martus.client.search;
 
 import java.util.Vector;
 
+import org.martus.client.swingui.grids.GridTableModel;
 import org.martus.common.GridData;
+import org.martus.common.MiniLocalization;
 import org.martus.common.clientside.ChoiceItem;
-import org.martus.common.clientside.Localization;
 import org.martus.common.field.MartusDateRangeField;
 import org.martus.common.fieldspec.DropDownFieldSpec;
 import org.martus.common.fieldspec.FieldSpec;
@@ -42,12 +43,12 @@ import org.martus.util.TokenReplacement.TokenInvalidException;
 
 public class FancySearchHelper
 {
-	public FancySearchHelper(Localization localizationToUse)
+	public FancySearchHelper(MiniLocalization localizationToUse)
 	{
 		localization = localizationToUse;
 	}
 	
-	Localization getLocalization()
+	MiniLocalization getLocalization()
 	{
 		return localization;
 	}
@@ -55,7 +56,7 @@ public class FancySearchHelper
 	public DropDownFieldSpec createFieldColumnSpec()
 	{
 		Vector allAvailableFields = new Vector();
-		allAvailableFields.add(new ChoiceItem("", getLocalization().getFieldLabel("SearchAnyField")));
+		allAvailableFields.add(new ChoiceItem("", getLocalization().getFieldLabel("SearchAnyField"), FieldSpec.TYPE_NORMAL));
 		allAvailableFields.addAll(convertToChoiceItems(StandardFieldSpecs.getDefaultPublicFieldSpecs()));
 		allAvailableFields.addAll(convertToChoiceItems(StandardFieldSpecs.getDefaultPrivateFieldSpecs()));
 
@@ -100,7 +101,7 @@ public class FancySearchHelper
 			}
 			else
 			{
-				choices.add(new ChoiceItem(tag, displayString));
+				choices.add(new ChoiceItem(specs[i]));
 			}
 		}
 			
@@ -114,13 +115,18 @@ public class FancySearchHelper
 		try
 		{
 			String fullDisplayString = TokenReplacement.replaceToken(displayTemplate, "#FIELDLABEL#", baseDisplayString);
-			choices.add(new ChoiceItem(fullTag, fullDisplayString));
+			choices.add(new ChoiceItem(fullTag, fullDisplayString, FieldSpec.TYPE_DATE));
 		}
 		catch (TokenInvalidException e)
 		{
 			// bad translation--not much we can do about it
 			e.printStackTrace();
 		}
+	}
+	
+	public GridTableModel getSearchTableModel()
+	{
+		return new FancySearchTableModel(getGridSpec());
 	}
 	
 	public GridFieldSpec getGridSpec()
@@ -131,7 +137,10 @@ public class FancySearchHelper
 		{
 			spec.addColumn(createFieldColumnSpec());
 			spec.addColumn(createOpColumnSpec());
-			spec.addColumn(FieldSpec.createCustomField("value", getLocalization().getFieldLabel("SearchGridHeaderValue"), FieldSpec.TYPE_NORMAL));
+			
+			String columnTag = "value";
+			String columnHeader = getLocalization().getFieldLabel("SearchGridHeaderValue");
+			spec.addColumn(FieldSpec.createCustomField(columnTag, columnHeader, FieldSpec.TYPE_MORPHIC));
 		}
 		catch (UnsupportedFieldTypeException e)
 		{
@@ -168,5 +177,6 @@ public class FancySearchHelper
 		return new String(searchExpression);
 	}
 	
-	Localization localization;
+	MiniLocalization localization;
 }
+

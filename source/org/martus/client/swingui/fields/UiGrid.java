@@ -40,8 +40,12 @@ public class UiGrid extends UiField
 {
 	public UiGrid(GridFieldSpec fieldSpec)
 	{
-		super();
-		model = new GridTableModel(fieldSpec);
+		this(new GridTableModel(fieldSpec));
+	}
+	
+	public UiGrid(GridTableModel modelToUse)
+	{
+		model = modelToUse;
 		table = new GridTable(model);
 		table.setColumnSelectionAllowed(false);
 		table.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);

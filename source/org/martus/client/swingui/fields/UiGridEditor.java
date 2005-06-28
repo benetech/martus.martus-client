@@ -27,9 +27,12 @@ package org.martus.client.swingui.fields;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+
 import javax.swing.CellEditor;
 import javax.swing.DefaultCellEditor;
 import javax.swing.JComboBox;
+
+import org.martus.client.swingui.grids.GridTableModel;
 import org.martus.common.fieldspec.GridFieldSpec;
 
 
@@ -39,6 +42,17 @@ public class UiGridEditor extends UiGrid
 	public UiGridEditor(GridFieldSpec fieldSpec)
 	{
 		super(fieldSpec);
+		initialize();
+	}
+	
+	public UiGridEditor(GridTableModel model)
+	{
+		super(model);
+		initialize();
+	}
+	
+	private void initialize()
+	{
 		table.resizeTable(DEFAULT_VIEABLE_ROWS);
 		table.addKeyListener(new GridKeyListener());
 	}

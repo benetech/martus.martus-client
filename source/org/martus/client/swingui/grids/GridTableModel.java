@@ -84,6 +84,11 @@ public class GridTableModel extends AbstractTableModel
 			return FieldSpec.TYPE_NORMAL;
 		return fieldSpec.getColumnType(column - EXTRA_COLUMN);
 	}
+	
+	public int getCellType(int row, int column)
+	{
+		return getColumnType(column);
+	}
 
 	public FieldSpec getFieldSpec(int column) 
 	{

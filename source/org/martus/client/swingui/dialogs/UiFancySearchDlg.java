@@ -53,7 +53,7 @@ public class UiFancySearchDlg extends UiSearchDlg
 		UiButton cancel = new UiButton(localization.getButtonLabel("cancel"));
 		cancel.addActionListener(this);
 
-		grid = new UiGridEditor(helper.getGridSpec());
+		grid = new UiGridEditor(helper.getSearchTableModel());
 		grid.setText(getPreviousSearch());
 
 		Box panel = Box.createVerticalBox();

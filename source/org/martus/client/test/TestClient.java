@@ -34,6 +34,7 @@ import org.martus.client.reports.TestReportFormat;
 import org.martus.client.reports.TestReportRunner;
 import org.martus.client.search.TestBulletinSearcher;
 import org.martus.client.search.TestFancySearchHelper;
+import org.martus.client.search.TestFancySearchTableModel;
 import org.martus.client.search.TestSearchParser;
 import org.martus.client.search.TestSearchTreeNode;
 import org.martus.client.swingui.grids.TestGridTableModel;
@@ -64,6 +65,7 @@ public class TestClient
 		suite.addTest(new TestSuite(TestCustomFieldSpecValidator.class));
 		suite.addTest(new TestSuite(TestCustomFieldTemplate.class));
 		suite.addTest(new TestSuite(TestFancySearchHelper.class));
+		suite.addTest(new TestSuite(TestFancySearchTableModel.class));
 		suite.addTest(new TestSuite(TestFolderList.class));
 		suite.addTest(new TestSuite(TestGridTableModel.class));
 		suite.addTest(new TestSuite(TestMartusApp_NoServer.class));
