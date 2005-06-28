@@ -96,7 +96,7 @@ public class UiBulletinComponentViewSection extends UiBulletinComponentDataSecti
 	{
 		UiLocalization localization = mainWindow.getLocalization();
 		fieldSpec.setColumnZeroLabel(localization.getFieldLabel("ColumnGridRowNumber"));
-		return new UiGridViewer(fieldSpec);
+		return new UiGridViewer(fieldSpec, localization);
 	}
 
 	public JComponent createAttachmentTable()

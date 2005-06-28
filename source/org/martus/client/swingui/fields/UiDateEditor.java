@@ -31,31 +31,29 @@ import java.text.ParseException;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+
 import javax.swing.Box;
 import javax.swing.JComponent;
-import javax.swing.JPanel;
+
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.clientside.UiBasicLocalization;
-import org.martus.common.fieldspec.FieldSpec;
-import org.martus.common.fieldspec.StandardFieldSpecs;
 import org.martus.common.utilities.DateUtilities;
 import org.martus.swing.UiComboBox;
 import org.martus.swing.Utilities;
 
 public class UiDateEditor extends UiField
 {
-	public UiDateEditor(UiBasicLocalization localizationToUse, FieldSpec specToUse)
+	public UiDateEditor(UiBasicLocalization localizationToUse, Date highestAllowableDate)
 	{				
-		component = new JPanel();
 		Box box = Box.createHorizontalBox();
 		dayCombo = new UiComboBox();
 		monthCombo = new UiComboBox(localizationToUse.getMonthLabels());
 		yearCombo = new UiComboBox();
 		
 		buildCustomDate(box, localizationToUse, yearCombo, monthCombo, dayCombo);
-		spec = specToUse;
+		maxDate = highestAllowableDate;
  				
-		component.add(box);
+		component = box;
 	}
 	
 	public static void buildCustomDate(Box box, UiBasicLocalization localizationToUse,
@@ -142,12 +140,11 @@ public class UiDateEditor extends UiField
 	
 	public void validate() throws UiField.DataInvalidException 
 	{
-		if(StandardFieldSpecs.isCustomFieldTag(spec.getTag()))
+		if(maxDate == null)
 			return;
 	
 		Date value = getDate(yearCombo, monthCombo, dayCombo);
-		Date today = new Date();
-		if (value.after(today))
+		if (value.after(maxDate))
 		{
 			dayCombo.requestFocus();	
 			throw new DateFutureException();
@@ -201,7 +198,7 @@ public class UiDateEditor extends UiField
 	UiComboBox monthCombo;
 	UiComboBox dayCombo;
 	UiComboBox yearCombo;	
-	static FieldSpec spec;
+	Date maxDate;
 	boolean isCustomField;
 }
 

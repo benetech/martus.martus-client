@@ -27,6 +27,7 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.swingui.bulletincomponent;
 
 import java.io.File;
+import java.util.Date;
 
 import javax.swing.JComponent;
 
@@ -46,6 +47,7 @@ import org.martus.client.swingui.fields.UiUnknownViewer;
 import org.martus.common.bulletin.AttachmentProxy;
 import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.fieldspec.GridFieldSpec;
+import org.martus.common.fieldspec.StandardFieldSpecs;
 
 public class UiBulletinComponentEditorSection extends UiBulletinComponentDataSection
 {
@@ -81,8 +83,12 @@ public class UiBulletinComponentEditorSection extends UiBulletinComponentDataSec
 	}
 
 	public UiField createDateField(FieldSpec spec)
-	{		
-		return new UiDateEditor(getLocalization(), spec);		
+	{
+		Date maxDate = null;
+		if(StandardFieldSpecs.isStandardFieldTag(spec.getTag()))
+			maxDate = new Date();
+
+		return new UiDateEditor(getLocalization(), maxDate);		
 	}
 	
 	public UiField createFlexiDateField(FieldSpec spec)
@@ -99,7 +105,7 @@ public class UiBulletinComponentEditorSection extends UiBulletinComponentDataSec
 	{
 		UiLocalization localization = mainWindow.getLocalization();
 		fieldSpec.setColumnZeroLabel(localization.getFieldLabel("ColumnGridRowNumber"));
-		return new UiGridEditor(fieldSpec);
+		return new UiGridEditor(fieldSpec, localization);
 	}
 	
 	public void addAttachment(AttachmentProxy a)

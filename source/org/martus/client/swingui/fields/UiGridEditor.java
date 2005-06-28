@@ -32,6 +32,7 @@ import javax.swing.CellEditor;
 import javax.swing.DefaultCellEditor;
 import javax.swing.JComboBox;
 
+import org.martus.client.swingui.UiLocalization;
 import org.martus.client.swingui.grids.GridTableModel;
 import org.martus.common.fieldspec.GridFieldSpec;
 
@@ -39,15 +40,15 @@ import org.martus.common.fieldspec.GridFieldSpec;
 
 public class UiGridEditor extends UiGrid
 {
-	public UiGridEditor(GridFieldSpec fieldSpec)
+	public UiGridEditor(GridFieldSpec fieldSpec, UiLocalization localization)
 	{
-		super(fieldSpec);
+		super(fieldSpec, localization);
 		initialize();
 	}
 	
-	public UiGridEditor(GridTableModel model)
+	public UiGridEditor(GridTableModel model, UiLocalization localization)
 	{
-		super(model);
+		super(model, localization);
 		initialize();
 	}
 	

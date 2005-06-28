@@ -26,30 +26,34 @@ Boston, MA 02111-1307, USA.
 
 package org.martus.client.swingui.grids;
 
-import java.awt.Color;
 import java.awt.Component;
 
 import javax.swing.AbstractCellEditor;
 import javax.swing.JTable;
-import javax.swing.border.LineBorder;
 import javax.swing.table.TableCellEditor;
+import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumn;
 
+import org.martus.client.swingui.UiLocalization;
 import org.martus.client.swingui.fields.UiBoolEditor;
 import org.martus.client.swingui.fields.UiChoiceEditor;
+import org.martus.client.swingui.fields.UiDateEditor;
 import org.martus.common.fieldspec.DropDownFieldSpec;
 import org.martus.common.fieldspec.FieldSpec;
 import org.martus.swing.UiTableWithCellEditingProtection;
-import org.martus.swing.UiTextField;
 
 public class GridTable extends UiTableWithCellEditingProtection
 {
-	public GridTable(GridTableModel model)
+	public GridTable(GridTableModel model, UiLocalization localizationToUse)
 	{
 		super(model);
+		localization = localizationToUse;
+
+		stringRenderer = new GridNormalCellRenderer(localization);
+		dateRenderer = new GridTableDateRenderer(localization);
 		
-		stringEditor = createStringEditor();
-		booleanEditor = createBooleanEditor();
+		stringEditor = new GridNormalCellEditor(localization);
+		dateEditor = new GridTableDateEditor(localization);
 		
 		setMaxColumnWidthToHeaderWidth(0);
 		for(int i = 1 ; i < model.getColumnCount(); ++i)
@@ -62,48 +66,30 @@ public class GridTable extends UiTableWithCellEditingProtection
 			{
 				case FieldSpec.TYPE_NORMAL:
 					tableColumn.setCellEditor(stringEditor); 
-					tableColumn.setCellRenderer(new GridNormalCellRenderer());
+					tableColumn.setCellRenderer(stringRenderer);
 					break;
 					
 				case FieldSpec.TYPE_DROPDOWN:
 					DropDownFieldSpec dropDownFieldSpec = (DropDownFieldSpec)model.getFieldSpec(i);
-					tableColumn.setCellEditor(createChoiceEditor(dropDownFieldSpec)); 
+					UiChoiceEditor uiChoiceField = new UiChoiceEditor(dropDownFieldSpec);
+					GridTableCellEditor editor = new GridTableCellEditor(uiChoiceField);
+					tableColumn.setCellEditor(editor); 
 					tableColumn.setCellRenderer(new GridDropDownCellRenderer(dropDownFieldSpec));
 					break;
 
 				case FieldSpec.TYPE_BOOLEAN:
+					UiBoolEditor uiBooleanField = new UiBoolEditor();
+					GridTableCellEditor booleanEditor = new GridTableCellEditor(uiBooleanField);
 					tableColumn.setCellEditor(booleanEditor); 
 					tableColumn.setCellRenderer(new GridBooleanCellRenderer());
 					break;
+					
 				case FieldSpec.TYPE_MORPHIC:
 					// morphic column models delegate renderer/editor selection back to us 
 					break;
 			}
 		}
 		
-		stringEditor = new GridTableStringCellEditor();
-	}
-
-	private GridTableCellEditor createBooleanEditor()
-	{
-		UiBoolEditor uiBooleanField = new UiBoolEditor();
-		GridTableCellEditor editor = new GridTableCellEditor(uiBooleanField);
-		return editor;
-	}
-
-	private GridTableCellEditor createChoiceEditor(DropDownFieldSpec dropDownFieldSpec)
-	{
-		UiChoiceEditor uiChoiceField = new UiChoiceEditor(dropDownFieldSpec);
-		GridTableCellEditor editor = new GridTableCellEditor(uiChoiceField);
-		return editor;
-	}
-
-	private GridTableCellEditor createStringEditor()
-	{
-		UiTextField uiTextField = new UiTextField();
-		uiTextField.setBorder(new LineBorder(Color.BLUE));
-		GridTableCellEditor editor = new GridTableCellEditor(uiTextField);
-		return editor;
 	}
 	
 	public void changeSelection(int rowIndex, int columnIndex,
@@ -125,37 +111,75 @@ public class GridTable extends UiTableWithCellEditingProtection
 		{
 			case FieldSpec.TYPE_NORMAL:
 				return stringEditor;
+			case FieldSpec.TYPE_DATE:
+				return dateEditor;
 			default:
 				System.out.println("GridTable.getCellEditor Unexpected type: " + type);
 				return stringEditor;
 		}
 	}
 
-	TableCellEditor stringEditor;
-	TableCellEditor booleanEditor;
+	public TableCellRenderer getCellRenderer(int row, int column)
+	{
+		GridTableModel model = (GridTableModel)getModel();
+		if((model).getColumnType(column) != FieldSpec.TYPE_MORPHIC)
+			return super.getCellRenderer(row, column);
 
+		int type = model.getCellType(row, column);
+		switch(type)
+		{
+			case FieldSpec.TYPE_NORMAL:
+				return stringRenderer;
+			case FieldSpec.TYPE_DATE:
+				return dateRenderer;
+			default:
+				System.out.println("GridTable.getCellEditor Unexpected type: " + type);
+				return stringRenderer;
+		}
+	}
+
+	UiLocalization localization;
+
+	TableCellRenderer stringRenderer;
+	TableCellRenderer dateRenderer;
+	
+	TableCellEditor stringEditor;
+	TableCellEditor dateEditor;
 
 }
 
-class GridTableStringCellEditor extends AbstractCellEditor implements TableCellEditor
+class GridTableDateRenderer implements TableCellRenderer
 {
-	GridTableStringCellEditor()
+	GridTableDateRenderer(UiLocalization localization)
 	{
-		editor = new UiTextField();
+		renderer = new UiDateEditor(localization, null);
+	}
+
+	public Component getTableCellRendererComponent(JTable table, Object value, boolean arg2, boolean arg3, int row, int column)
+	{
+		renderer.setText((String)value);
+		return renderer.getComponent();
+	}
+
+	UiDateEditor renderer;
+}
+
+class GridTableDateEditor extends AbstractCellEditor implements TableCellEditor
+{
+	GridTableDateEditor(UiLocalization localization)
+	{
+		editor = new UiDateEditor(localization, null);
+	}
+
+	public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row, int column)
+	{
+		return editor.getComponent();
 	}
 
 	public Object getCellEditorValue()
 	{
 		return editor.getText();
 	}
-
-	public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row, int column)
-	{
-		editor.setBackground(Color.RED);
-		editor.setForeground(Color.YELLOW);
-		editor.setText((String)value);
-		return editor;
-	}
 	
-	UiTextField editor;
+	UiDateEditor editor;
 }

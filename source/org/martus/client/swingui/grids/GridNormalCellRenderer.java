@@ -27,29 +27,65 @@ package org.martus.client.swingui.grids;
 
 import java.awt.Color;
 import java.awt.Component;
+
+import javax.swing.JComponent;
 import javax.swing.JTable;
+import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.table.TableCellRenderer;
-import org.martus.swing.UiTextField;
 
-public class GridNormalCellRenderer implements TableCellRenderer
+import org.martus.client.swingui.UiLocalization;
+import org.martus.client.swingui.fields.UiNormalTextViewer;
+
+class GridNormalCellRenderer implements TableCellRenderer
 {
-	public Component getTableCellRendererComponent(JTable tableToUse, Object value, boolean isSelected, boolean hasFocus, int row, int column)
+	GridNormalCellRenderer(UiLocalization localization)
 	{
-		UiTextField cell = new UiTextField((String)value);
-		cell.setBorder(new EmptyBorder(0,0,0,0));
+		renderer = new UiNormalTextViewer(localization);
+		borderWithoutFocus = new EmptyBorder(1,1,1,1);
+		borderWithFocus = new LineBorder(Color.BLACK,1);
+
+		// this code should go away when the first grid column becomes a TYPE_MESSAGE 
+		normalForeground = renderer.getComponent().getForeground();
+		normalBackground = renderer.getComponent().getBackground();
+		// end code that should go away
+
+	}
+	
+	public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column)
+	{
+		renderer.setText((String)value);
+		JComponent component = renderer.getComponent();
+
+		
+		// this code should go away when the first grid column becomes a TYPE_MESSAGE 
+		Color fg = normalForeground;
+		Color bg = normalBackground;
 		if(column == 0)
 		{
-			cell.setBackground(Color.LIGHT_GRAY);
-			cell.setForeground(Color.BLACK);
-			return cell;
+			fg = Color.BLACK;
+			bg = Color.LIGHT_GRAY;
 		}
+		component.setBackground(bg);
+		component.setForeground(fg);
+		// end code that should go away
 		
+		
+		Border border = borderWithoutFocus;
 		if(hasFocus)
-		{
-			cell.setBorder(new LineBorder(Color.BLACK,1));
-		}
-		return cell;
+			border = borderWithFocus;
+		component.setBorder(border);
+
+		return component;
 	}
+	
+	UiNormalTextViewer renderer;
+	Border borderWithFocus;
+	Border borderWithoutFocus;
+	// this code should go away when the first grid column becomes a TYPE_MESSAGE 
+	Color normalForeground;
+	Color normalBackground;
+	// end code that should go away
 }
+

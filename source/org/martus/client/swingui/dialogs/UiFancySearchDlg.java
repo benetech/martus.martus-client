@@ -29,9 +29,9 @@ package org.martus.client.swingui.dialogs;
 import javax.swing.Box;
 
 import org.martus.client.search.FancySearchHelper;
+import org.martus.client.swingui.UiLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.fields.UiGridEditor;
-import org.martus.common.clientside.UiBasicLocalization;
 import org.martus.swing.UiButton;
 import org.martus.swing.UiWrappedTextArea;
 
@@ -42,7 +42,7 @@ public class UiFancySearchDlg extends UiSearchDlg
 		super(owner);
 	}
 	
-	UiButton createBody(UiBasicLocalization localization)
+	UiButton createBody(UiLocalization localization)
 	{
 		helper = new FancySearchHelper(localization);
 		setTitle(localization.getWindowTitle("search"));
@@ -53,7 +53,7 @@ public class UiFancySearchDlg extends UiSearchDlg
 		UiButton cancel = new UiButton(localization.getButtonLabel("cancel"));
 		cancel.addActionListener(this);
 
-		grid = new UiGridEditor(helper.getSearchTableModel());
+		grid = new UiGridEditor(helper.getSearchTableModel(), localization);
 		grid.setText(getPreviousSearch());
 
 		Box panel = Box.createVerticalBox();

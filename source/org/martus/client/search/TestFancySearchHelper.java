@@ -88,7 +88,7 @@ public class TestFancySearchHelper extends TestCaseEnhanced
 		assertEquals(3, spec.getColumnCount());
 		assertEquals("no field column?", FieldSpec.TYPE_DROPDOWN, spec.getColumnType(0));
 		assertEquals("no op column?", FieldSpec.TYPE_DROPDOWN, spec.getColumnType(1));
-		assertEquals("no value column?", FieldSpec.TYPE_NORMAL, spec.getColumnType(2));
+		assertEquals("no value column?", FieldSpec.TYPE_MORPHIC, spec.getColumnType(2));
 	}
 	
 	public void testGetSearchString() throws Exception
@@ -96,7 +96,7 @@ public class TestFancySearchHelper extends TestCaseEnhanced
 		GridFieldSpec spec = new GridFieldSpec();
 		spec.addColumn(FieldSpec.createStandardField("field", FieldSpec.TYPE_NORMAL));
 		spec.addColumn(FieldSpec.createStandardField("op", FieldSpec.TYPE_NORMAL));
-		spec.addColumn(FieldSpec.createStandardField("value", FieldSpec.TYPE_NORMAL));
+		spec.addColumn(FieldSpec.createStandardField("value", FieldSpec.TYPE_MORPHIC));
 		GridData data = new GridData(spec);
 		addRow(data, "", ":", "whiz");
 		addRow(data, "a", "b", "c");
