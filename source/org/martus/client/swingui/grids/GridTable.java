@@ -35,7 +35,6 @@ import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumn;
 
 import org.martus.client.swingui.UiLocalization;
-import org.martus.client.swingui.fields.UiChoiceEditor;
 import org.martus.client.swingui.fields.UiDateEditor;
 import org.martus.common.fieldspec.DropDownFieldSpec;
 import org.martus.common.fieldspec.FieldSpec;
@@ -63,7 +62,8 @@ public class GridTable extends UiTableWithCellEditingProtection
 		for(int i = 0 ; i < model.getColumnCount(); ++i)
 		{
 			TableColumn tableColumn = getColumnModel().getColumn(i);
-			switch(model.getColumnType(i))
+			FieldSpec columnSpec = getFieldSpecForColumn(i);
+			switch(columnSpec.getType())
 			{
 				case FieldSpec.TYPE_NORMAL:
 					tableColumn.setCellEditor(stringEditor); 
@@ -71,11 +71,8 @@ public class GridTable extends UiTableWithCellEditingProtection
 					break;
 					
 				case FieldSpec.TYPE_DROPDOWN:
-					DropDownFieldSpec dropDownFieldSpec = (DropDownFieldSpec)model.getFieldSpec(i);
-					UiChoiceEditor uiChoiceField = new UiChoiceEditor(dropDownFieldSpec);
-					GridTableCellEditor editor = new GridTableCellEditor(uiChoiceField);
-					tableColumn.setCellEditor(editor); 
-					tableColumn.setCellRenderer(new GridDropDownCellRenderer(dropDownFieldSpec));
+					tableColumn.setCellEditor(new GridDropDownCellEditor((DropDownFieldSpec)columnSpec)); 
+					tableColumn.setCellRenderer(new GridDropDownCellRenderer((DropDownFieldSpec)columnSpec));
 					break;
 
 				case FieldSpec.TYPE_BOOLEAN:
@@ -89,6 +86,11 @@ public class GridTable extends UiTableWithCellEditingProtection
 			}
 		}
 		
+	}
+	
+	FieldSpec getFieldSpecForColumn(int column)
+	{
+		return ((GridTableModel)getModel()).getFieldSpec(column);		
 	}
 	
 	public void changeSelection(int rowIndex, int columnIndex,

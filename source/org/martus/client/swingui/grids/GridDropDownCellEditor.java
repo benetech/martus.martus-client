@@ -23,44 +23,43 @@ Software Foundation, Inc., 59 Temple Place - Suite 330,
 Boston, MA 02111-1307, USA.
 
 */
+
 package org.martus.client.swingui.grids;
 
 import java.awt.Color;
 import java.awt.Component;
 
+import javax.swing.AbstractCellEditor;
 import javax.swing.JComponent;
 import javax.swing.JTable;
 import javax.swing.border.Border;
-import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
-import javax.swing.table.TableCellRenderer;
+import javax.swing.table.TableCellEditor;
 
 import org.martus.client.swingui.fields.UiChoiceEditor;
 import org.martus.common.fieldspec.DropDownFieldSpec;
 
-public class GridDropDownCellRenderer implements TableCellRenderer
+public class GridDropDownCellEditor extends AbstractCellEditor implements TableCellEditor
 {
-	public GridDropDownCellRenderer(DropDownFieldSpec spec)
+	GridDropDownCellEditor(DropDownFieldSpec spec)
 	{
-		super();
 		widget = new UiChoiceEditor(spec);
-		borderWithoutFocus = new EmptyBorder(1,1,1,1);
-		borderWithFocus = new LineBorder(Color.BLACK,1);
 	}
-	
-	public Component getTableCellRendererComponent(JTable tableToUse, Object codeString, boolean isSelected, boolean hasFocus, int row, int column)
+
+	public Component getTableCellEditorComponent(JTable tableToUse, Object codeString, boolean isSelected, int row, int column)
 	{
 		widget.setText((String)codeString);
-
 		JComponent component = widget.getComponent();
-		Border border = borderWithoutFocus;
-		if(hasFocus)
-			border = borderWithoutFocus;
-		component.setBorder(border);
+		
+		Border borderWithFocus = new LineBorder(Color.BLACK,1);
+		component.setBorder(borderWithFocus);
 		return component;
 	}
-	
+
+	public Object getCellEditorValue()
+	{
+		return widget.getText();
+	}
+
 	UiChoiceEditor widget;
-	Border borderWithFocus;
-	Border borderWithoutFocus;
 }
