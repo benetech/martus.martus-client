@@ -29,25 +29,17 @@ package org.martus.client.swingui.grids;
 import java.awt.Color;
 import java.awt.Component;
 
-import javax.swing.AbstractCellEditor;
 import javax.swing.JComponent;
 import javax.swing.JTable;
-import javax.swing.border.Border;
-import javax.swing.border.EmptyBorder;
-import javax.swing.border.LineBorder;
-import javax.swing.table.TableCellEditor;
-import javax.swing.table.TableCellRenderer;
 
 import org.martus.client.swingui.UiLocalization;
 import org.martus.client.swingui.fields.UiNormalTextEditor;
 
-class GridNormalCellEditor extends AbstractCellEditor implements TableCellEditor, TableCellRenderer
+class GridNormalCellEditor extends GridCellEditorAndRenderer
 {
 	GridNormalCellEditor(UiLocalization localization)
 	{
-		widget = new UiNormalTextEditor(localization);
-		borderWithoutFocus = new EmptyBorder(1,1,1,1);
-		borderWithFocus = new LineBorder(Color.BLACK,1);
+		super(new UiNormalTextEditor(localization));
 
 		// this code should go away when the first grid column becomes a TYPE_MESSAGE 
 		normalForeground = widget.getComponent().getForeground();
@@ -58,32 +50,14 @@ class GridNormalCellEditor extends AbstractCellEditor implements TableCellEditor
 	
 	public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row, int column)
 	{
-		widget.setText((String)value);
-		JComponent component = widget.getComponent();
-
 		setColors(column);
-		component.setBorder(borderWithFocus);
-		
-		return component;
+		return super.getTableCellEditorComponent(table, value, isSelected, row, column);
 	}
 	
-	public Object getCellEditorValue()
-	{
-		return widget.getText();
-	}
-
 	public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column)
 	{
-		widget.setText((String)value);
-		JComponent component = widget.getComponent();
-
 		setColors(column);
-		Border border = borderWithoutFocus;
-		if(hasFocus)
-			border = borderWithFocus;
-		component.setBorder(border);
-
-		return component;
+		return super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
 	}
 
 	private void setColors(int column)
@@ -102,9 +76,6 @@ class GridNormalCellEditor extends AbstractCellEditor implements TableCellEditor
 		// end code that should go away
 	}
 	
-	UiNormalTextEditor widget;
-	Border borderWithFocus;
-	Border borderWithoutFocus;
 	// this code should go away when the first grid column becomes a TYPE_MESSAGE 
 	Color normalForeground;
 	Color normalBackground;

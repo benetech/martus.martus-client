@@ -26,61 +26,35 @@ Boston, MA 02111-1307, USA.
 
 package org.martus.client.swingui.grids;
 
-import java.awt.Color;
 import java.awt.Component;
 
-import javax.swing.AbstractCellEditor;
-import javax.swing.JComponent;
 import javax.swing.JTable;
-import javax.swing.border.Border;
-import javax.swing.border.EmptyBorder;
-import javax.swing.border.LineBorder;
-import javax.swing.table.TableCellEditor;
-import javax.swing.table.TableCellRenderer;
 
 import org.martus.client.swingui.fields.UiChoiceEditor;
 import org.martus.common.fieldspec.DropDownFieldSpec;
 
-public class GridDropDownCellEditor extends AbstractCellEditor implements TableCellEditor, TableCellRenderer
+public class GridDropDownCellEditor extends GridCellEditorAndRenderer
 {
 	GridDropDownCellEditor()
 	{
-		widget = new UiChoiceEditor(null);
-		borderWithoutFocus = new EmptyBorder(1,1,1,1);
-		borderWithFocus = new LineBorder(Color.BLACK,1);
+		super(new UiChoiceEditor(null));
 	}
 
 	public Component getTableCellEditorComponent(JTable tableToUse, Object codeString, boolean isSelected, int row, int column)
 	{
-		GridTable gridTable = (GridTable)tableToUse;
-		widget.setSpec((DropDownFieldSpec)gridTable.getFieldSpecForColumn(column));
-		widget.setText((String)codeString);
-		JComponent component = widget.getComponent();
-		
-		component.setBorder(borderWithFocus);
-		return component;
-	}
-
-	public Object getCellEditorValue()
-	{
-		return widget.getText();
+		setFieldSpec(tableToUse, column);
+		return super.getTableCellEditorComponent(tableToUse, codeString, isSelected, row, column);
 	}
 
 	public Component getTableCellRendererComponent(JTable tableToUse, Object codeString, boolean isSelected, boolean hasFocus, int row, int column)
 	{
-		GridTable gridTable = (GridTable)tableToUse;
-		widget.setSpec((DropDownFieldSpec)gridTable.getFieldSpecForColumn(column));
-		widget.setText((String)codeString);
-
-		JComponent component = widget.getComponent();
-		Border border = borderWithoutFocus;
-		if(hasFocus)
-			border = borderWithoutFocus;
-		component.setBorder(border);
-		return component;
+		setFieldSpec(tableToUse, column);
+		return super.getTableCellRendererComponent(tableToUse, codeString, isSelected, hasFocus, row, column);
 	}
-	
-	UiChoiceEditor widget;
-	Border borderWithFocus;
-	Border borderWithoutFocus;
+
+	private void setFieldSpec(JTable tableToUse, int column)
+	{
+		GridTable gridTable = (GridTable)tableToUse;
+		((UiChoiceEditor)widget).setSpec((DropDownFieldSpec)gridTable.getFieldSpecForColumn(column));
+	}
 }
