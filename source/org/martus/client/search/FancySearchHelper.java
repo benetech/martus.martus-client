@@ -101,7 +101,8 @@ public class FancySearchHelper
 			}
 			else
 			{
-				choices.add(new ChoiceItem(specs[i]));
+				ChoiceItem choiceItem = new ChoiceItem(specs[i].getTag(), displayString, specs[i].getType());
+				choices.add(choiceItem);
 			}
 		}
 			
