@@ -41,6 +41,9 @@ public class FancySearchTableModel extends GridTableModel
 
 	public int getCellType(int row, int column)
 	{
+		if(column != valueColumn)
+			return super.getCellType(row, column);
+		
 		String selectedFieldTag = (String)getValueAt(row, fieldColumn);
 		DropDownFieldSpec spec = (DropDownFieldSpec)getFieldSpec(fieldColumn);
 		ChoiceItem selectedFieldChoiceItem = spec.getChoice(spec.findCode(selectedFieldTag));
