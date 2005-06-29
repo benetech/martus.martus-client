@@ -102,12 +102,6 @@ public class GridTableModel extends AbstractTableModel
 		if(column == 0)
 			return new Integer(row+1).toString();
 		String value = gridData.getValueAt(row, column - EXTRA_COLUMN );
-		if(getColumnType(column) == FieldSpec.TYPE_BOOLEAN)
-		{
-			if(value.equals(FieldSpec.TRUESTRING))
-				return new Boolean(true);
-			return new Boolean(false);
-		}
 		return value;
 	}
 
@@ -115,15 +109,7 @@ public class GridTableModel extends AbstractTableModel
 	{
 		if(column == 0)
 			return;
-		if(getColumnType(column) == FieldSpec.TYPE_BOOLEAN)
-		{
-			String selected = FieldSpec.FALSESTRING;
-			if(((Boolean)aValue).booleanValue())
-				selected = FieldSpec.TRUESTRING;
-			gridData.setValueAt(selected, row, column - EXTRA_COLUMN);
-		}
-		else
-			gridData.setValueAt((String)aValue, row, column - EXTRA_COLUMN);
+		gridData.setValueAt((String)aValue, row, column - EXTRA_COLUMN);
 		fireTableCellUpdated(row,column);
 	}
 	

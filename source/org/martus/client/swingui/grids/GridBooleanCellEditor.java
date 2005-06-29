@@ -37,7 +37,6 @@ import javax.swing.border.LineBorder;
 import javax.swing.table.TableCellEditor;
 
 import org.martus.client.swingui.fields.UiBoolEditor;
-import org.martus.common.fieldspec.FieldSpec;
 
 public class GridBooleanCellEditor extends AbstractCellEditor implements TableCellEditor
 {
@@ -46,10 +45,9 @@ public class GridBooleanCellEditor extends AbstractCellEditor implements TableCe
 		widget = new UiBoolEditor();
 	}
 	
-	public Component getTableCellEditorComponent(JTable tableToUse, Object booleanValue, boolean isSelected, int row, int column)
+	public Component getTableCellEditorComponent(JTable tableToUse, Object stringValue, boolean isSelected, int row, int column)
 	{
-		String stringValue = ( ((Boolean)booleanValue).booleanValue() ? FieldSpec.TRUESTRING : FieldSpec.FALSESTRING);
-		widget.setText(stringValue);
+		widget.setText((String)stringValue);
 		JComponent component = widget.getComponent();
 		
 		Border borderWithFocus = new LineBorder(Color.BLACK,1);
@@ -59,9 +57,7 @@ public class GridBooleanCellEditor extends AbstractCellEditor implements TableCe
 
 	public Object getCellEditorValue()
 	{
-		String stringValue = widget.getText();
-		Boolean booleanValue = (FieldSpec.TRUESTRING.equals(stringValue) ? Boolean.TRUE : Boolean.FALSE);
-		return booleanValue;
+		return widget.getText();
 	}
 
 	UiBoolEditor widget;
