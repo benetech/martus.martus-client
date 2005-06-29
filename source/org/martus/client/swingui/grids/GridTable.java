@@ -87,18 +87,22 @@ public class GridTable extends UiTableWithCellEditingProtection
 	{
 		return (TableCellRenderer)getCellEditorOrRenderer(renderers, row, column);
 	}
-
+	
 	private Object getCellEditorOrRenderer(HashMap map, int row, int column)
 	{
 		GridTableModel model = (GridTableModel)getModel();
 		Integer type = new Integer(model.getCellType(row, column));
+		return getEditorOrRendererForType(map, type);
+	}
+
+	private TableCellEditor getEditorOrRendererForType(HashMap map, Integer type)
+	{
 		TableCellEditor editor = (TableCellEditor)map.get(type);
-		if(editor == null)
-		{
-			System.out.println("GridTable.getCellEditorOrRenderer Unexpected type: " + type);
-			editor = (TableCellEditor)map.get(new Integer(FieldSpec.TYPE_NORMAL));
-		}
-		return editor;
+		if(editor != null)
+			return editor;
+
+		System.out.println("GridTable.getCellEditorOrRenderer Unexpected type: " + type);
+		return (TableCellEditor)map.get(new Integer(FieldSpec.TYPE_NORMAL));
 	}
 
 	UiLocalization localization;

@@ -27,17 +27,20 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.swingui.grids;
 
 import java.awt.Component;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JTable;
 
 import org.martus.client.swingui.fields.UiChoiceEditor;
 import org.martus.common.fieldspec.DropDownFieldSpec;
 
-public class GridDropDownCellEditor extends GridCellEditorAndRenderer
+public class GridDropDownCellEditor extends GridCellEditorAndRenderer implements ActionListener
 {
 	GridDropDownCellEditor()
 	{
 		super(new UiChoiceEditor(null));
+		addActionListener(this);
 	}
 
 	public Component getTableCellEditorComponent(JTable tableToUse, Object codeString, boolean isSelected, int row, int column)
@@ -52,9 +55,20 @@ public class GridDropDownCellEditor extends GridCellEditorAndRenderer
 		return super.getTableCellRendererComponent(tableToUse, codeString, isSelected, hasFocus, row, column);
 	}
 
+	public void addActionListener(ActionListener listener)
+	{
+		((UiChoiceEditor)widget).addActionListener(listener);
+	}
+	
 	private void setFieldSpec(JTable tableToUse, int column)
 	{
 		GridTable gridTable = (GridTable)tableToUse;
 		((UiChoiceEditor)widget).setSpec((DropDownFieldSpec)gridTable.getFieldSpecForColumn(column));
+	}
+
+	public void actionPerformed(ActionEvent arg0)
+	{
+		// force our new value to be saved, even though we haven't exited this cell yet
+		stopCellEditing();
 	}
 }

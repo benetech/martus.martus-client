@@ -50,10 +50,15 @@ public class UiChoiceEditor extends UiChoice implements ActionListener
 	protected void initialize()
 	{
 		widget = new UiComboBox();
-		widget.addActionListener(this);
+		addActionListener(this);
 		widget.setRenderer(new UiChoiceListCellRenderer());
 		if(spec != null)
 			updateChoices();
+	}
+
+	public void addActionListener(ActionListener listener)
+	{
+		widget.addActionListener(listener);
 	}
 	
 	public void setSpec(DropDownFieldSpec specToUse)

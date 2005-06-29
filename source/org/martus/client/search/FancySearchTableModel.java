@@ -26,17 +26,21 @@ Boston, MA 02111-1307, USA.
 
 package org.martus.client.search;
 
+import javax.swing.event.TableModelEvent;
+import javax.swing.event.TableModelListener;
+
 import org.martus.client.swingui.grids.GridTableModel;
 import org.martus.common.clientside.ChoiceItem;
 import org.martus.common.fieldspec.DropDownFieldSpec;
 import org.martus.common.fieldspec.GridFieldSpec;
 
-public class FancySearchTableModel extends GridTableModel
+public class FancySearchTableModel extends GridTableModel implements TableModelListener
 {
 
 	public FancySearchTableModel(GridFieldSpec fieldSpecToUse)
 	{
 		super(fieldSpecToUse);
+		addTableModelListener(this);
 	}
 
 	public int getCellType(int row, int column)
@@ -50,6 +54,12 @@ public class FancySearchTableModel extends GridTableModel
 		return selectedFieldChoiceItem.getType();
 	}
 	
+	public void tableChanged(TableModelEvent event)
+	{
+		if(event.getColumn() == fieldColumn)
+			this.fireTableRowsUpdated(event.getFirstRow(), event.getLastRow());
+	}
+
 	public static int fieldColumn = 1;
 	public static int valueColumn = 3;
 }
