@@ -26,15 +26,12 @@ Boston, MA 02111-1307, USA.
 
 package org.martus.client.swingui.grids;
 
-import java.awt.Component;
+import java.util.HashMap;
 
-import javax.swing.AbstractCellEditor;
-import javax.swing.JTable;
 import javax.swing.table.TableCellEditor;
 import javax.swing.table.TableCellRenderer;
 
 import org.martus.client.swingui.UiLocalization;
-import org.martus.client.swingui.fields.UiDateEditor;
 import org.martus.common.fieldspec.FieldSpec;
 import org.martus.swing.UiTableWithCellEditingProtection;
 
@@ -45,20 +42,27 @@ public class GridTable extends UiTableWithCellEditingProtection
 		super(model);
 		localization = localizationToUse;
 
-		stringRenderer = new GridNormalCellEditor(localization);
-		dateRenderer = new GridDateCellEditor(localization);
-		booleanRenderer = new GridBooleanCellEditor();
-		dropDownRenderer = new GridDropDownCellEditor();
-
-		stringEditor = new GridNormalCellEditor(localization);
-		dateEditor = new GridDateCellEditor(localization);
-		booleanEditor = new GridBooleanCellEditor();
-		dropDownEditor = new GridDropDownCellEditor();
+		// NOTE: We need to keep renderers and editors separate, because otherwise
+		// they get confused about focus when you click on a renderer but the 
+		// editor is supposed to end up getting the click because they occupy 
+		// the same screen location
+		renderers = createEditorsOrRenderers();
+		editors = createEditorsOrRenderers();
 		
 		setMaxColumnWidthToHeaderWidth(0);
 		for(int i = 1 ; i < model.getColumnCount(); ++i)
 			setColumnWidthToHeaderWidth(i);
 		setAutoResizeMode(AUTO_RESIZE_OFF);
+	}
+
+	private HashMap createEditorsOrRenderers()
+	{
+		HashMap map = new HashMap();
+		map.put(new Integer(FieldSpec.TYPE_BOOLEAN), new GridBooleanCellEditor());
+		map.put(new Integer(FieldSpec.TYPE_DATE), new GridDateCellEditor(localization));
+		map.put(new Integer(FieldSpec.TYPE_DROPDOWN), new GridDropDownCellEditor());
+		map.put(new Integer(FieldSpec.TYPE_NORMAL), new GridNormalCellEditor(localization));
+		return map;
 	}
 	
 	FieldSpec getFieldSpecForColumn(int column)
@@ -76,80 +80,29 @@ public class GridTable extends UiTableWithCellEditingProtection
 
 	public TableCellEditor getCellEditor(int row, int column)
 	{
-		GridTableModel model = (GridTableModel)getModel();
-		int type = model.getCellType(row, column);
-		switch(type)
-		{
-			case FieldSpec.TYPE_NORMAL:
-				return stringEditor;
-			case FieldSpec.TYPE_DATE:
-				return dateEditor;
-			case FieldSpec.TYPE_DROPDOWN:
-				return dropDownEditor;
-			case FieldSpec.TYPE_BOOLEAN:
-				return booleanEditor;
-			default:
-				System.out.println("GridTable.getCellEditor Unexpected type: " + type);
-				return stringEditor;
-		}
+		return (TableCellEditor)getCellEditorOrRenderer(editors, row, column);
 	}
-
+	
 	public TableCellRenderer getCellRenderer(int row, int column)
 	{
+		return (TableCellRenderer)getCellEditorOrRenderer(renderers, row, column);
+	}
+
+	private Object getCellEditorOrRenderer(HashMap map, int row, int column)
+	{
 		GridTableModel model = (GridTableModel)getModel();
-		int type = model.getCellType(row, column);
-		switch(type)
+		Integer type = new Integer(model.getCellType(row, column));
+		TableCellEditor editor = (TableCellEditor)map.get(type);
+		if(editor == null)
 		{
-			case FieldSpec.TYPE_NORMAL:
-				return stringRenderer;
-			case FieldSpec.TYPE_DATE:
-				return dateRenderer;
-			case FieldSpec.TYPE_DROPDOWN:
-				return dropDownRenderer;
-			case FieldSpec.TYPE_BOOLEAN:
-				return booleanRenderer;
-			default:
-				System.out.println("GridTable.getCellEditor Unexpected type: " + type);
-				return stringRenderer;
+			System.out.println("GridTable.getCellEditorOrRenderer Unexpected type: " + type);
+			editor = (TableCellEditor)map.get(new Integer(FieldSpec.TYPE_NORMAL));
 		}
+		return editor;
 	}
 
 	UiLocalization localization;
-
-	GridNormalCellEditor stringRenderer;
-	GridDateCellEditor dateRenderer;
-	GridBooleanCellEditor booleanRenderer;
-	GridDropDownCellEditor dropDownRenderer;
-
-	GridNormalCellEditor stringEditor;
-	GridDateCellEditor dateEditor;
-	GridBooleanCellEditor booleanEditor;
-	GridDropDownCellEditor dropDownEditor;
-
+	HashMap renderers;
+	HashMap editors;
 }
 
-class GridDateCellEditor extends AbstractCellEditor implements TableCellEditor, TableCellRenderer
-{
-	GridDateCellEditor(UiLocalization localization)
-	{
-		widget = new UiDateEditor(localization, null);
-	}
-
-	public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row, int column)
-	{
-		return widget.getComponent();
-	}
-
-	public Object getCellEditorValue()
-	{
-		return widget.getText();
-	}
-	
-	public Component getTableCellRendererComponent(JTable table, Object value, boolean arg2, boolean arg3, int row, int column)
-	{
-		widget.setText((String)value);
-		return widget.getComponent();
-	}
-
-	UiDateEditor widget;
-}
