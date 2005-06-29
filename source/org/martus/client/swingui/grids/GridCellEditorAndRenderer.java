@@ -28,6 +28,8 @@ package org.martus.client.swingui.grids;
 
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 
 import javax.swing.AbstractCellEditor;
 import javax.swing.JComponent;
@@ -40,23 +42,28 @@ import javax.swing.table.TableCellRenderer;
 
 import org.martus.client.swingui.fields.UiField;
 
-public class GridCellEditorAndRenderer extends AbstractCellEditor implements TableCellRenderer, TableCellEditor
+public class GridCellEditorAndRenderer extends AbstractCellEditor implements TableCellRenderer, TableCellEditor, FocusListener
 {
 	GridCellEditorAndRenderer(UiField widgetToWrap)
 	{
 		widget = widgetToWrap;
+		getComponent().addFocusListener(this);
 		borderWithoutFocus = new EmptyBorder(1,1,1,1);
 		borderWithFocus = new LineBorder(Color.BLACK,1);
-		
 	}
 
 	public Component getTableCellEditorComponent(JTable tableToUse, Object stringValue, boolean isSelected, int row, int column)
 	{
 		widget.setText((String)stringValue);
-		JComponent component = widget.getComponent();
+		JComponent component = getComponent();
 		
 		component.setBorder(borderWithFocus);
 		return component;
+	}
+
+	public JComponent getComponent()
+	{
+		return widget.getComponent();
 	}
 
 	public Object getCellEditorValue()
@@ -67,7 +74,7 @@ public class GridCellEditorAndRenderer extends AbstractCellEditor implements Tab
 	public Component getTableCellRendererComponent(JTable tableToUse, Object stringValue, boolean isSelected, boolean hasFocus, int row, int column)
 	{
 		widget.setText((String)stringValue);
-		JComponent component = widget.getComponent();
+		JComponent component = getComponent();
 		
 		Border border = borderWithoutFocus;
 		if(hasFocus)
@@ -76,6 +83,21 @@ public class GridCellEditorAndRenderer extends AbstractCellEditor implements Tab
 		return component;
 	}
 	
+	public void focusGained(FocusEvent arg0)
+	{
+	}
+
+	// NOTE: I would have expected Swing to do this automatically, but without 
+	// this, clicking in a grid cell, making changes, and then directly clicking 
+	// in some other field, or on the Save As Draft button causes the edits
+	// to be discarded. See also UiTableWithCellEditingProtection for a 
+	// related case with a different solution
+	public void focusLost(FocusEvent arg0)
+	{
+		//System.out.println("focusLost, so calling stopCellEditing");
+		stopCellEditing();
+	}
+
 	UiField widget;
 	Border borderWithFocus;
 	Border borderWithoutFocus;
