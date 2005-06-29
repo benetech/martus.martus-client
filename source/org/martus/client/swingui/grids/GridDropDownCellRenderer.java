@@ -40,16 +40,17 @@ import org.martus.common.fieldspec.DropDownFieldSpec;
 
 public class GridDropDownCellRenderer implements TableCellRenderer
 {
-	public GridDropDownCellRenderer(DropDownFieldSpec spec)
+	public GridDropDownCellRenderer()
 	{
-		super();
-		widget = new UiChoiceEditor(spec);
+		widget = new UiChoiceEditor(null);
 		borderWithoutFocus = new EmptyBorder(1,1,1,1);
 		borderWithFocus = new LineBorder(Color.BLACK,1);
 	}
 	
 	public Component getTableCellRendererComponent(JTable tableToUse, Object codeString, boolean isSelected, boolean hasFocus, int row, int column)
 	{
+		GridTable gridTable = (GridTable)tableToUse;
+		widget.setSpec((DropDownFieldSpec)gridTable.getFieldSpecForColumn(column));
 		widget.setText((String)codeString);
 
 		JComponent component = widget.getComponent();

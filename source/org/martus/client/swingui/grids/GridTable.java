@@ -36,7 +36,6 @@ import javax.swing.table.TableColumn;
 
 import org.martus.client.swingui.UiLocalization;
 import org.martus.client.swingui.fields.UiDateEditor;
-import org.martus.common.fieldspec.DropDownFieldSpec;
 import org.martus.common.fieldspec.FieldSpec;
 import org.martus.swing.UiTableWithCellEditingProtection;
 
@@ -50,10 +49,12 @@ public class GridTable extends UiTableWithCellEditingProtection
 		stringRenderer = new GridNormalCellRenderer(localization);
 		dateRenderer = new GridTableDateRenderer(localization);
 		booleanRenderer = new GridBooleanCellRenderer();
+		dropDownRenderer = new GridDropDownCellRenderer();
 		
 		stringEditor = new GridNormalCellEditor(localization);
 		dateEditor = new GridTableDateEditor(localization);
 		booleanEditor = new GridBooleanCellEditor();
+		dropDownEditor = new GridDropDownCellEditor();
 		
 		setMaxColumnWidthToHeaderWidth(0);
 		for(int i = 1 ; i < model.getColumnCount(); ++i)
@@ -71,8 +72,8 @@ public class GridTable extends UiTableWithCellEditingProtection
 					break;
 					
 				case FieldSpec.TYPE_DROPDOWN:
-					tableColumn.setCellEditor(new GridDropDownCellEditor((DropDownFieldSpec)columnSpec)); 
-					tableColumn.setCellRenderer(new GridDropDownCellRenderer((DropDownFieldSpec)columnSpec));
+					tableColumn.setCellEditor(dropDownEditor); 
+					tableColumn.setCellRenderer(dropDownRenderer);
 					break;
 
 				case FieldSpec.TYPE_BOOLEAN:
@@ -144,10 +145,12 @@ public class GridTable extends UiTableWithCellEditingProtection
 	TableCellRenderer stringRenderer;
 	TableCellRenderer dateRenderer;
 	TableCellRenderer booleanRenderer;
+	TableCellRenderer dropDownRenderer;
 	
 	TableCellEditor stringEditor;
 	TableCellEditor dateEditor;
 	TableCellEditor booleanEditor;
+	TableCellEditor dropDownEditor;
 
 }
 

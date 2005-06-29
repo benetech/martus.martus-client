@@ -41,13 +41,15 @@ import org.martus.common.fieldspec.DropDownFieldSpec;
 
 public class GridDropDownCellEditor extends AbstractCellEditor implements TableCellEditor
 {
-	GridDropDownCellEditor(DropDownFieldSpec spec)
+	GridDropDownCellEditor()
 	{
-		widget = new UiChoiceEditor(spec);
+		widget = new UiChoiceEditor(null);
 	}
 
 	public Component getTableCellEditorComponent(JTable tableToUse, Object codeString, boolean isSelected, int row, int column)
 	{
+		GridTable gridTable = (GridTable)tableToUse;
+		widget.setSpec((DropDownFieldSpec)gridTable.getFieldSpecForColumn(column));
 		widget.setText((String)codeString);
 		JComponent component = widget.getComponent();
 		
