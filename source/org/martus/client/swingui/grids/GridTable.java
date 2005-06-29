@@ -32,7 +32,6 @@ import javax.swing.AbstractCellEditor;
 import javax.swing.JTable;
 import javax.swing.table.TableCellEditor;
 import javax.swing.table.TableCellRenderer;
-import javax.swing.table.TableColumn;
 
 import org.martus.client.swingui.UiLocalization;
 import org.martus.client.swingui.fields.UiDateEditor;
@@ -60,33 +59,6 @@ public class GridTable extends UiTableWithCellEditingProtection
 		for(int i = 1 ; i < model.getColumnCount(); ++i)
 			setColumnWidthToHeaderWidth(i);
 		setAutoResizeMode(AUTO_RESIZE_OFF);
-		for(int i = 0 ; i < model.getColumnCount(); ++i)
-		{
-			TableColumn tableColumn = getColumnModel().getColumn(i);
-			FieldSpec columnSpec = getFieldSpecForColumn(i);
-			switch(columnSpec.getType())
-			{
-				case FieldSpec.TYPE_NORMAL:
-					tableColumn.setCellEditor(stringEditor); 
-					tableColumn.setCellRenderer(stringRenderer);
-					break;
-					
-				case FieldSpec.TYPE_DROPDOWN:
-					tableColumn.setCellEditor(dropDownEditor); 
-					tableColumn.setCellRenderer(dropDownRenderer);
-					break;
-
-				case FieldSpec.TYPE_BOOLEAN:
-					tableColumn.setCellEditor(booleanEditor); 
-					tableColumn.setCellRenderer(booleanRenderer);
-					break;
-					
-				case FieldSpec.TYPE_MORPHIC:
-					// morphic column models delegate renderer/editor selection back to us 
-					break;
-			}
-		}
-		
 	}
 	
 	FieldSpec getFieldSpecForColumn(int column)
@@ -105,9 +77,6 @@ public class GridTable extends UiTableWithCellEditingProtection
 	public TableCellEditor getCellEditor(int row, int column)
 	{
 		GridTableModel model = (GridTableModel)getModel();
-		if((model).getColumnType(column) != FieldSpec.TYPE_MORPHIC)
-			return super.getCellEditor(row, column);
-
 		int type = model.getCellType(row, column);
 		switch(type)
 		{
@@ -115,6 +84,10 @@ public class GridTable extends UiTableWithCellEditingProtection
 				return stringEditor;
 			case FieldSpec.TYPE_DATE:
 				return dateEditor;
+			case FieldSpec.TYPE_DROPDOWN:
+				return dropDownEditor;
+			case FieldSpec.TYPE_BOOLEAN:
+				return booleanEditor;
 			default:
 				System.out.println("GridTable.getCellEditor Unexpected type: " + type);
 				return stringEditor;
@@ -124,9 +97,6 @@ public class GridTable extends UiTableWithCellEditingProtection
 	public TableCellRenderer getCellRenderer(int row, int column)
 	{
 		GridTableModel model = (GridTableModel)getModel();
-		if((model).getColumnType(column) != FieldSpec.TYPE_MORPHIC)
-			return super.getCellRenderer(row, column);
-
 		int type = model.getCellType(row, column);
 		switch(type)
 		{
@@ -134,6 +104,10 @@ public class GridTable extends UiTableWithCellEditingProtection
 				return stringRenderer;
 			case FieldSpec.TYPE_DATE:
 				return dateRenderer;
+			case FieldSpec.TYPE_DROPDOWN:
+				return dropDownRenderer;
+			case FieldSpec.TYPE_BOOLEAN:
+				return booleanRenderer;
 			default:
 				System.out.println("GridTable.getCellEditor Unexpected type: " + type);
 				return stringRenderer;
