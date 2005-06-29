@@ -33,16 +33,20 @@ import javax.swing.AbstractCellEditor;
 import javax.swing.JComponent;
 import javax.swing.JTable;
 import javax.swing.border.Border;
+import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.table.TableCellEditor;
+import javax.swing.table.TableCellRenderer;
 
 import org.martus.client.swingui.fields.UiBoolEditor;
 
-public class GridBooleanCellEditor extends AbstractCellEditor implements TableCellEditor
+public class GridBooleanCellEditor extends AbstractCellEditor implements TableCellEditor, TableCellRenderer
 {
 	GridBooleanCellEditor()
 	{
 		widget = new UiBoolEditor();
+		borderWithoutFocus = new EmptyBorder(1,1,1,1);
+		borderWithFocus = new LineBorder(Color.BLACK,1);
 	}
 	
 	public Component getTableCellEditorComponent(JTable tableToUse, Object stringValue, boolean isSelected, int row, int column)
@@ -50,7 +54,6 @@ public class GridBooleanCellEditor extends AbstractCellEditor implements TableCe
 		widget.setText((String)stringValue);
 		JComponent component = widget.getComponent();
 		
-		Border borderWithFocus = new LineBorder(Color.BLACK,1);
 		component.setBorder(borderWithFocus);
 		return component;
 	}
@@ -60,5 +63,19 @@ public class GridBooleanCellEditor extends AbstractCellEditor implements TableCe
 		return widget.getText();
 	}
 
+	public Component getTableCellRendererComponent(JTable tableToUse, Object stringValue, boolean isSelected, boolean hasFocus, int row, int column)
+	{
+		widget.setText((String)stringValue);
+		JComponent component = widget.getComponent();
+		
+		Border border = borderWithoutFocus;
+		if(hasFocus)
+			border = borderWithoutFocus;
+		component.setBorder(border);
+		return component;
+	}
+	
 	UiBoolEditor widget;
+	Border borderWithFocus;
+	Border borderWithoutFocus;
 }

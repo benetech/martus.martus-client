@@ -32,33 +32,81 @@ import java.awt.Component;
 import javax.swing.AbstractCellEditor;
 import javax.swing.JComponent;
 import javax.swing.JTable;
+import javax.swing.border.Border;
+import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.table.TableCellEditor;
+import javax.swing.table.TableCellRenderer;
 
 import org.martus.client.swingui.UiLocalization;
 import org.martus.client.swingui.fields.UiNormalTextEditor;
 
-class GridNormalCellEditor extends AbstractCellEditor implements TableCellEditor
+class GridNormalCellEditor extends AbstractCellEditor implements TableCellEditor, TableCellRenderer
 {
 	GridNormalCellEditor(UiLocalization localization)
 	{
-		editor = new UiNormalTextEditor(localization);
-	}
+		widget = new UiNormalTextEditor(localization);
+		borderWithoutFocus = new EmptyBorder(1,1,1,1);
+		borderWithFocus = new LineBorder(Color.BLACK,1);
 
+		// this code should go away when the first grid column becomes a TYPE_MESSAGE 
+		normalForeground = widget.getComponent().getForeground();
+		normalBackground = widget.getComponent().getBackground();
+		// end code that should go away
+
+	}
+	
 	public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row, int column)
 	{
-		editor.setText((String)value);
-		JComponent component = editor.getComponent();
+		widget.setText((String)value);
+		JComponent component = widget.getComponent();
 
-		component.setBorder(new LineBorder(Color.BLUE, 1));
+		setColors(column);
+		component.setBorder(borderWithFocus);
 		
 		return component;
 	}
 	
 	public Object getCellEditorValue()
 	{
-		return editor.getText();
+		return widget.getText();
 	}
 
-	UiNormalTextEditor editor;
+	public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column)
+	{
+		widget.setText((String)value);
+		JComponent component = widget.getComponent();
+
+		setColors(column);
+		Border border = borderWithoutFocus;
+		if(hasFocus)
+			border = borderWithFocus;
+		component.setBorder(border);
+
+		return component;
+	}
+
+	private void setColors(int column)
+	{
+		// this code should go away when the first grid column becomes a TYPE_MESSAGE 
+		JComponent component = widget.getComponent();
+		Color fg = normalForeground;
+		Color bg = normalBackground;
+		if(column == 0)
+		{
+			fg = Color.BLACK;
+			bg = Color.LIGHT_GRAY;
+		}
+		component.setBackground(bg);
+		component.setForeground(fg);
+		// end code that should go away
+	}
+	
+	UiNormalTextEditor widget;
+	Border borderWithFocus;
+	Border borderWithoutFocus;
+	// this code should go away when the first grid column becomes a TYPE_MESSAGE 
+	Color normalForeground;
+	Color normalBackground;
+	// end code that should go away
 }

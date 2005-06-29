@@ -46,13 +46,13 @@ public class GridTable extends UiTableWithCellEditingProtection
 		super(model);
 		localization = localizationToUse;
 
-		stringRenderer = new GridNormalCellRenderer(localization);
-		dateRenderer = new GridTableDateRenderer(localization);
-		booleanRenderer = new GridBooleanCellRenderer();
-		dropDownRenderer = new GridDropDownCellRenderer();
-		
+		stringRenderer = new GridNormalCellEditor(localization);
+		dateRenderer = new GridDateCellEditor(localization);
+		booleanRenderer = new GridBooleanCellEditor();
+		dropDownRenderer = new GridDropDownCellEditor();
+
 		stringEditor = new GridNormalCellEditor(localization);
-		dateEditor = new GridTableDateEditor(localization);
+		dateEditor = new GridDateCellEditor(localization);
 		booleanEditor = new GridBooleanCellEditor();
 		dropDownEditor = new GridDropDownCellEditor();
 		
@@ -142,50 +142,40 @@ public class GridTable extends UiTableWithCellEditingProtection
 
 	UiLocalization localization;
 
-	TableCellRenderer stringRenderer;
-	TableCellRenderer dateRenderer;
-	TableCellRenderer booleanRenderer;
-	TableCellRenderer dropDownRenderer;
-	
-	TableCellEditor stringEditor;
-	TableCellEditor dateEditor;
-	TableCellEditor booleanEditor;
-	TableCellEditor dropDownEditor;
+	GridNormalCellEditor stringRenderer;
+	GridDateCellEditor dateRenderer;
+	GridBooleanCellEditor booleanRenderer;
+	GridDropDownCellEditor dropDownRenderer;
+
+	GridNormalCellEditor stringEditor;
+	GridDateCellEditor dateEditor;
+	GridBooleanCellEditor booleanEditor;
+	GridDropDownCellEditor dropDownEditor;
 
 }
 
-class GridTableDateRenderer implements TableCellRenderer
+class GridDateCellEditor extends AbstractCellEditor implements TableCellEditor, TableCellRenderer
 {
-	GridTableDateRenderer(UiLocalization localization)
+	GridDateCellEditor(UiLocalization localization)
 	{
-		renderer = new UiDateEditor(localization, null);
-	}
-
-	public Component getTableCellRendererComponent(JTable table, Object value, boolean arg2, boolean arg3, int row, int column)
-	{
-		renderer.setText((String)value);
-		return renderer.getComponent();
-	}
-
-	UiDateEditor renderer;
-}
-
-class GridTableDateEditor extends AbstractCellEditor implements TableCellEditor
-{
-	GridTableDateEditor(UiLocalization localization)
-	{
-		editor = new UiDateEditor(localization, null);
+		widget = new UiDateEditor(localization, null);
 	}
 
 	public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row, int column)
 	{
-		return editor.getComponent();
+		return widget.getComponent();
 	}
 
 	public Object getCellEditorValue()
 	{
-		return editor.getText();
+		return widget.getText();
 	}
 	
-	UiDateEditor editor;
+	public Component getTableCellRendererComponent(JTable table, Object value, boolean arg2, boolean arg3, int row, int column)
+	{
+		widget.setText((String)value);
+		return widget.getComponent();
+	}
+
+	UiDateEditor widget;
 }

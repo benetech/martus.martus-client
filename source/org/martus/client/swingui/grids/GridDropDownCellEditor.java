@@ -33,17 +33,21 @@ import javax.swing.AbstractCellEditor;
 import javax.swing.JComponent;
 import javax.swing.JTable;
 import javax.swing.border.Border;
+import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.table.TableCellEditor;
+import javax.swing.table.TableCellRenderer;
 
 import org.martus.client.swingui.fields.UiChoiceEditor;
 import org.martus.common.fieldspec.DropDownFieldSpec;
 
-public class GridDropDownCellEditor extends AbstractCellEditor implements TableCellEditor
+public class GridDropDownCellEditor extends AbstractCellEditor implements TableCellEditor, TableCellRenderer
 {
 	GridDropDownCellEditor()
 	{
 		widget = new UiChoiceEditor(null);
+		borderWithoutFocus = new EmptyBorder(1,1,1,1);
+		borderWithFocus = new LineBorder(Color.BLACK,1);
 	}
 
 	public Component getTableCellEditorComponent(JTable tableToUse, Object codeString, boolean isSelected, int row, int column)
@@ -53,7 +57,6 @@ public class GridDropDownCellEditor extends AbstractCellEditor implements TableC
 		widget.setText((String)codeString);
 		JComponent component = widget.getComponent();
 		
-		Border borderWithFocus = new LineBorder(Color.BLACK,1);
 		component.setBorder(borderWithFocus);
 		return component;
 	}
@@ -63,5 +66,21 @@ public class GridDropDownCellEditor extends AbstractCellEditor implements TableC
 		return widget.getText();
 	}
 
+	public Component getTableCellRendererComponent(JTable tableToUse, Object codeString, boolean isSelected, boolean hasFocus, int row, int column)
+	{
+		GridTable gridTable = (GridTable)tableToUse;
+		widget.setSpec((DropDownFieldSpec)gridTable.getFieldSpecForColumn(column));
+		widget.setText((String)codeString);
+
+		JComponent component = widget.getComponent();
+		Border border = borderWithoutFocus;
+		if(hasFocus)
+			border = borderWithoutFocus;
+		component.setBorder(border);
+		return component;
+	}
+	
 	UiChoiceEditor widget;
+	Border borderWithFocus;
+	Border borderWithoutFocus;
 }
