@@ -102,14 +102,14 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 				"<Tag>"+gridTag+"</Tag>" +
 				"<Label>Victim Information</Label>" +
 				"<GridSpecDetails>" +
-				"<Field type='STRING'>\n" +
+				"<Column type='STRING'>\n" +
 				"<Tag></Tag>\n" +
 				"<Label>Name of Victim</Label>\n" +
-				"</Field>\n" +
-				"<Field type='STRING'>\n" +
+				"</Column>\n" +
+				"<Column type='STRING'>\n" +
 				"<Tag></Tag>\n" +
 				"<Label>Age of Victim</Label>\n" +
-				"</Field>\n" +
+				"</Column>\n" +
 				"</GridSpecDetails>" +
 				"</Field></CustomFields>";
 		GridFieldSpec newSpec = (GridFieldSpec)FieldCollection.parseXml(xmlFieldType)[0]; 
@@ -138,14 +138,14 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 				"</Row>\n" +
 				"</GridData>\n" +
 				"<GridSpecDetails>\n" +
-				"<Field type='STRING'>\n" +
+				"<Column type='STRING'>\n" +
 				"<Tag></Tag>\n" +
 				"<Label>Name of Victim</Label>\n" +
-				"</Field>\n" +
-				"<Field type='STRING'>\n" +
+				"</Column>\n" +
+				"<Column type='STRING'>\n" +
 				"<Tag></Tag>\n" +
 				"<Label>Age of Victim</Label>\n" +
-				"</Field>\n" +
+				"</Column>\n" +
 				"</GridSpecDetails>\n" +
 				"</Value>\n" +
 				"</Field>", result);
