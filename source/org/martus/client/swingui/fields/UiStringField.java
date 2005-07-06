@@ -35,7 +35,7 @@ import javax.swing.Action;
 import javax.swing.text.JTextComponent;
 
 import org.martus.client.swingui.UiLocalization;
-import org.martus.client.swingui.UiPopupMenu;
+import org.martus.swing.UiPopupMenu;
 
 public abstract class UiStringField extends UiField
 {
