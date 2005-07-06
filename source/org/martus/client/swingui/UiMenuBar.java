@@ -37,6 +37,7 @@ import org.martus.client.swingui.actions.ActionMenuQuickEraseDeleteMyData;
 import org.martus.client.swingui.actions.ActionMenuQuickEraseRemoveMartus;
 import org.martus.client.swingui.actions.UiActions;
 import org.martus.swing.UiLanguageDirection;
+import org.martus.swing.UiMenu;
 
 public class UiMenuBar extends JMenuBar
 {
@@ -47,7 +48,7 @@ public class UiMenuBar extends JMenuBar
 		applyComponentOrientation(UiLanguageDirection.getComponentOrientation());
 		createMenuActions();
 
-		UiMenu file = new UiMenu(localization, "file");
+		UiMenu file = new UiMenu(localization.getMenuLabel("file"));
 		FileMenuListener fileMenuListener = new FileMenuListener();
 		file.addMenuListener(fileMenuListener);
 		fileMenuListener.initalize();
@@ -62,7 +63,7 @@ public class UiMenuBar extends JMenuBar
 		file.add(UiActions.newActionMenuExit(mainWindow));
 
 
-		UiMenu edit = new UiMenu(localization ,"edit");
+		UiMenu edit = new UiMenu(localization.getMenuLabel("edit"));
 		EditMenuListener editMenuListener = new EditMenuListener();
 		edit.addMenuListener(editMenuListener);
 		editMenuListener.initalize();
@@ -78,7 +79,7 @@ public class UiMenuBar extends JMenuBar
 		edit.addSeparator();
 		edit.add(actionMenuDiscardBulletins);
 
-		UiMenu folders = new UiMenu(localization, "folders");
+		UiMenu folders = new UiMenu(localization.getMenuLabel("folders"));
 		FoldersMenuListener folderMenuListener = new FoldersMenuListener();
 		folders.addMenuListener(folderMenuListener);
 		folderMenuListener.initalize();
@@ -88,7 +89,7 @@ public class UiMenuBar extends JMenuBar
 		folders.add(actionMenuDeleteFolder);
 
 
-		UiMenu server = new UiMenu(localization, "server");
+		UiMenu server = new UiMenu(localization.getMenuLabel("server"));
 		server.add(UiActions.newActionMenuRetrieveMySealedBulletins(mainWindow));
 		server.add(UiActions.newActionMenuRetrieveMyDraftBulletins(mainWindow));
 		server.add(UiActions.newActionMenuDeleteMyServerDraftBulletins(mainWindow));
@@ -100,7 +101,7 @@ public class UiMenuBar extends JMenuBar
 		server.add(UiActions.newActionMenuRemoveServer(mainWindow));
 
 
-		UiMenu options = new UiMenu(localization, "options");
+		UiMenu options = new UiMenu(localization.getMenuLabel("options"));
 		options.add(UiActions.newActionMenuPreferences(mainWindow));
 		options.add(UiActions.newActionMenuContactInfo(mainWindow));
 		options.add(UiActions.newActionMenuChangeUserNamePassword(mainWindow));
@@ -108,7 +109,7 @@ public class UiMenuBar extends JMenuBar
 		options.add(UiActions.newActionMenuDefaultDetailsFieldContent(mainWindow));
 		options.add(new ActionMenuCustomFields(mainWindow));
 		
-		UiMenu tools = new UiMenu(localization, "tools");
+		UiMenu tools = new UiMenu(localization.getMenuLabel("tools"));
 		tools.add(new ActionMenuQuickEraseDeleteMyData(mainWindow));
 		tools.add(new ActionMenuQuickEraseRemoveMartus(mainWindow));
 		tools.addSeparator();
@@ -117,7 +118,7 @@ public class UiMenuBar extends JMenuBar
 		tools.addSeparator();
 		tools.add(UiActions.newActionMenuConfigureHQs(mainWindow));
 		
-		UiMenu help = new UiMenu(localization, "help");
+		UiMenu help = new UiMenu(localization.getMenuLabel("help"));
 		help.add(UiActions.newActionMenuHelp(mainWindow));
 		help.add(UiActions.newActionMenuAbout(mainWindow));
 		help.addSeparator();
