@@ -29,7 +29,6 @@ package org.martus.client.core;
 import java.io.IOException;
 import java.io.Writer;
 import java.util.Vector;
-import org.martus.common.MartusUtilities;
 import org.martus.common.MartusXml;
 import org.martus.common.bulletin.AttachmentProxy;
 import org.martus.common.bulletin.Bulletin;
@@ -37,6 +36,7 @@ import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.fieldspec.GridFieldSpec;
 import org.martus.common.packet.BulletinHistory;
 import org.martus.common.utilities.DateUtilities;
+import org.martus.util.xml.XmlUtilities;
 
 public class BulletinXmlExporter
 {
@@ -169,7 +169,7 @@ public class BulletinXmlExporter
 	
 	private static String getXmlEncodedTagWithData(String tagName, String data)
 	{
-		return MartusXml.getTagWithData(tagName, MartusUtilities.getXmlEncoded(data));
+		return MartusXml.getTagWithData(tagName, XmlUtilities.getXmlEncoded(data));
 	}
 
 	static void writeElement(Writer dest, String fieldType, String tag, String rawLabel, String rawFieldData) throws IOException

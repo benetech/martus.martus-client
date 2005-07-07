@@ -147,6 +147,7 @@ import org.martus.util.UnicodeReader;
 import org.martus.util.Base64.InvalidBase64Exception;
 import org.martus.util.TokenReplacement.TokenInvalidException;
 import org.martus.util.language.LanguageOptions;
+import org.martus.util.xml.XmlUtilities;
 
 public class UiMainWindow extends JFrame implements ClipboardOwner
 {
@@ -590,7 +591,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 
 	void notifyClientCompliance()
 	{
-		String productDescription = MartusUtilities.getXmlEncoded(getLocalization().getFieldLabel("SplashProductDescription"));
+		String productDescription = XmlUtilities.getXmlEncoded(getLocalization().getFieldLabel("SplashProductDescription"));
 		// NOTE: If this program contains ANY changes that have 
 		// not been officially released by Benetech, you MUST 
 		// change the splash screen text as required by the 
