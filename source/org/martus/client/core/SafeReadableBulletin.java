@@ -71,9 +71,17 @@ public class SafeReadableBulletin
 	public MartusField getPossiblyNestedField(String nestedFieldTag)
 	{
 		String[] tags = parseNestedTags(nestedFieldTag);
-		MartusField field = field(tags[0]);
-		for(int i=1; i < tags.length; ++i)
-			field = field.getSubField(tags[i]);
+		MartusField field = null;
+		
+		for(int i=0; i < tags.length; ++i)
+		{
+			if(field == null)
+				field = field(tags[0]);
+			else
+				field = field.getSubField(tags[i]);
+			if(field == null)
+				return null;
+		}
 			
 		return field;
 	}

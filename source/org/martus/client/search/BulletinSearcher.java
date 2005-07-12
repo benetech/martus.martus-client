@@ -63,6 +63,8 @@ public class BulletinSearcher
 
 		int compareOp = node.getComparisonOperator();
 		MartusField field = b.getPossiblyNestedField(tagOfFieldToSearch);
+		if(field == null)
+			return false;
 		
 		switch(compareOp)
 		{

@@ -34,6 +34,7 @@ import org.martus.common.bulletin.Bulletin;
 import org.martus.common.crypto.MartusCrypto;
 import org.martus.common.crypto.MockMartusSecurity;
 import org.martus.common.field.MartusDateRangeField;
+import org.martus.common.field.MartusField;
 import org.martus.common.test.UnicodeConstants;
 import org.martus.util.TestCaseEnhanced;
 
@@ -65,6 +66,21 @@ public class TestBulletinSearcher extends TestCaseEnhanced
 		assertFalse("found wrong value?", wrongValue.doesMatch(b));
 		BulletinSearcher wrongField = new BulletinSearcher(new SearchTreeNode(otherField + ":" + sampleValue));
 		assertFalse("found in wrong field?", wrongField.doesMatch(b));
+	}
+	
+	public void testDoesMatchNoSuchField() throws Exception
+	{
+		MartusCrypto security = MockMartusSecurity.createClient();
+		Bulletin realBulletin = new Bulletin(security);
+		
+		String noSuchField = "nosuchfield";
+		String sampleValue = "sample data";
+		SafeReadableBulletin b = new SafeReadableBulletin(realBulletin);
+		BulletinSearcher contains = new BulletinSearcher(new SearchTreeNode(noSuchField + ":" + sampleValue));
+		assertFalse(": matched non-existant field?", contains.doesMatch(b));
+		BulletinSearcher lessThan = new BulletinSearcher(new SearchTreeNode(noSuchField + "<" + sampleValue));
+		assertFalse("< matched non-existant field?", lessThan.doesMatch(b));
+		
 	}
 
 	public void testDoesMatchComparisons() throws Exception
@@ -103,6 +119,17 @@ public class TestBulletinSearcher extends TestCaseEnhanced
 		BulletinSearcher searcher = new BulletinSearcher(new SearchTreeNode(fieldToSearch + expressionEnd));
 		String message = caller + ": " + actual + expressionEnd;
 		assertEquals(message, expected, searcher.doesMatch(b));
+	}
+	
+	public void testGetPossiblyNestedField() throws Exception
+	{
+		MartusCrypto security = MockMartusSecurity.createClient();
+		Bulletin realBulletin = new Bulletin(security);
+		SafeReadableBulletin b = new SafeReadableBulletin(realBulletin);
+		MartusField noSuchField = b.getPossiblyNestedField("no.such.field");
+		assertNull("didn't return null for bogus field?", noSuchField);
+		MartusField noSubfield = b.getPossiblyNestedField("entrydate.no.such.subfield");
+		assertNull("didn't return null for bogus subfield?", noSubfield);
 	}
 	
 	
