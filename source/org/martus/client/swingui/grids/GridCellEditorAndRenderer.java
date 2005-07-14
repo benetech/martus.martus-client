@@ -78,7 +78,7 @@ public class GridCellEditorAndRenderer extends AbstractCellEditor implements Tab
 		
 		Border border = borderWithoutFocus;
 		if(hasFocus)
-			border = borderWithoutFocus;
+			border = borderWithFocus;
 		component.setBorder(border);
 		return component;
 	}
