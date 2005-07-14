@@ -33,13 +33,13 @@ import javax.swing.JComponent;
 import javax.swing.JTable;
 
 import org.martus.client.swingui.UiLocalization;
-import org.martus.client.swingui.fields.UiNormalTextEditor;
+import org.martus.client.swingui.fields.UiSingleLineTextEditor;
 
 class GridNormalCellEditor extends GridCellEditorAndRenderer
 {
 	GridNormalCellEditor(UiLocalization localization)
 	{
-		super(new UiNormalTextEditor(localization));
+		super(new UiSingleLineTextEditor(localization));
 
 		// this code should go away when the first grid column becomes a TYPE_MESSAGE 
 		normalForeground = widget.getComponent().getForeground();
