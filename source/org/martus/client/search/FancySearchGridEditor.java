@@ -27,29 +27,27 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.search;
 
 import org.martus.client.swingui.UiLocalization;
-import org.martus.common.fieldspec.FieldSpec;
-import org.martus.common.fieldspec.GridFieldSpec;
-import org.martus.util.TestCaseEnhanced;
+import org.martus.client.swingui.fields.UiGridEditor;
 
-public class TestFancySearchTableModel extends TestCaseEnhanced
+public class FancySearchGridEditor extends UiGridEditor
 {
-	public TestFancySearchTableModel(String name)
+	public static FancySearchGridEditor create(UiLocalization localization)
 	{
-		super(name);
+		FancySearchHelper helper = new FancySearchHelper(localization);
+		return new FancySearchGridEditor(helper);
+		
+	}
+	
+	private FancySearchGridEditor(FancySearchHelper helperToUse)
+	{
+		super(helperToUse.getModel(), helperToUse.getLocalization());
+		helper = helperToUse;
+	}
+	
+	public String getSearchString()
+	{
+		return helper.getSearchString(getGridData());		
 	}
 
-	public void testGetCellType()
-	{
-		
-		FancySearchHelper helper = new FancySearchHelper(new UiLocalization(null, new String[0]));
-		GridFieldSpec gridSpec = helper.getGridSpec();
-		FancySearchTableModel model = new FancySearchTableModel(gridSpec);
-		model.addEmptyRow();
-		model.setValueAt("eventdate.begin", 0, FancySearchTableModel.fieldColumn);
-		assertEquals(FieldSpec.TYPE_DATE, model.getCellType(0, FancySearchTableModel.valueColumn));
-		
-		model.setValueAt("author", 0, FancySearchTableModel.fieldColumn);
-		assertEquals(FieldSpec.TYPE_NORMAL, model.getCellType(0, FancySearchTableModel.valueColumn));
-		
-	}
+	FancySearchHelper helper;
 }

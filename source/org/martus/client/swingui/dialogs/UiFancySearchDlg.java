@@ -28,10 +28,9 @@ package org.martus.client.swingui.dialogs;
 
 import javax.swing.Box;
 
-import org.martus.client.search.FancySearchHelper;
+import org.martus.client.search.FancySearchGridEditor;
 import org.martus.client.swingui.UiLocalization;
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.client.swingui.fields.UiGridEditor;
 import org.martus.swing.UiButton;
 import org.martus.swing.UiWrappedTextArea;
 
@@ -44,7 +43,6 @@ public class UiFancySearchDlg extends UiSearchDlg
 	
 	UiButton createBody(UiLocalization localization)
 	{
-		helper = new FancySearchHelper(localization);
 		setTitle(localization.getWindowTitle("search"));
 		
 		UiButton search = new UiButton(localization.getButtonLabel("search"));
@@ -53,7 +51,7 @@ public class UiFancySearchDlg extends UiSearchDlg
 		UiButton cancel = new UiButton(localization.getButtonLabel("cancel"));
 		cancel.addActionListener(this);
 
-		grid = new UiGridEditor(helper.getSearchTableModel(), localization);
+		grid = FancySearchGridEditor.create(localization);
 		grid.setText(getPreviousSearch());
 
 		Box panel = Box.createVerticalBox();
@@ -72,7 +70,7 @@ public class UiFancySearchDlg extends UiSearchDlg
 
 	public String getSearchString()
 	{
-		return helper.getSearchString(grid.getGridData());
+		return grid.getSearchString();
 	}
 	
 	void memorizeSearch()
@@ -85,7 +83,6 @@ public class UiFancySearchDlg extends UiSearchDlg
 		return previousSearch;
 	}
 
-	UiGridEditor grid;
-	FancySearchHelper helper;
+	FancySearchGridEditor grid;
 	private static String previousSearch = "";
 }

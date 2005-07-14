@@ -28,9 +28,8 @@ package org.martus.client.search;
 
 import java.util.Vector;
 
-import org.martus.client.swingui.grids.GridTableModel;
+import org.martus.client.swingui.UiLocalization;
 import org.martus.common.GridData;
-import org.martus.common.MiniLocalization;
 import org.martus.common.clientside.ChoiceItem;
 import org.martus.common.field.MartusDateRangeField;
 import org.martus.common.fieldspec.DropDownFieldSpec;
@@ -43,14 +42,20 @@ import org.martus.util.TokenReplacement.TokenInvalidException;
 
 public class FancySearchHelper
 {
-	public FancySearchHelper(MiniLocalization localizationToUse)
+	public FancySearchHelper(UiLocalization localizationToUse)
 	{
 		localization = localizationToUse;
+		model = new FancySearchTableModel(getGridSpec());
 	}
 	
-	MiniLocalization getLocalization()
+	UiLocalization getLocalization()
 	{
 		return localization;
+	}
+	
+	FancySearchTableModel getModel()
+	{
+		return model;
 	}
 	
 	public DropDownFieldSpec createFieldColumnSpec()
@@ -125,11 +130,6 @@ public class FancySearchHelper
 		}
 	}
 	
-	public GridTableModel getSearchTableModel()
-	{
-		return new FancySearchTableModel(getGridSpec());
-	}
-	
 	public GridFieldSpec getGridSpec()
 	{
 		GridFieldSpec spec = new GridFieldSpec();
@@ -178,6 +178,7 @@ public class FancySearchHelper
 		return new String(searchExpression);
 	}
 	
-	MiniLocalization localization;
+	UiLocalization localization;
+	FancySearchTableModel model;
 }
 

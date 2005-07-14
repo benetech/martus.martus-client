@@ -28,10 +28,10 @@ package org.martus.client.search;
 
 import java.io.File;
 
+import org.martus.client.swingui.UiLocalization;
 import org.martus.common.EnglishCommonStrings;
 import org.martus.common.GridData;
 import org.martus.common.bulletin.BulletinConstants;
-import org.martus.common.clientside.Localization;
 import org.martus.common.field.MartusDateRangeField;
 import org.martus.common.fieldspec.DropDownFieldSpec;
 import org.martus.common.fieldspec.FieldSpec;
@@ -48,7 +48,7 @@ public class TestFancySearchHelper extends TestCaseEnhanced
 	public void setUp() throws Exception
 	{
 		tempDir = createTempDirectory();
-		localization = new Localization(tempDir);
+		localization = new UiLocalization(tempDir, new String[0]);
 		helper = new FancySearchHelper(localization);
 	}
 	
@@ -116,6 +116,6 @@ public class TestFancySearchHelper extends TestCaseEnhanced
 	}
 	
 	File tempDir;
-	Localization localization;
+	UiLocalization localization;
 	FancySearchHelper helper;
 }
