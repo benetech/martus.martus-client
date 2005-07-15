@@ -178,6 +178,11 @@ public class FancySearchHelper
 		return new String(searchExpression);
 	}
 	
+	public static final int COLUMN_ROW_NUMBER = 0;
+	public static final int COLUMN_FIELD = 1;
+	public static final int COLUMN_COMPARE_HOW = 2;
+	public static final int COLUMN_VALUE = 3;
+	
 	UiLocalization localization;
 	FancySearchTableModel model;
 }
