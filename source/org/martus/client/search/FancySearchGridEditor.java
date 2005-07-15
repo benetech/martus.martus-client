@@ -26,8 +26,12 @@ Boston, MA 02111-1307, USA.
 
 package org.martus.client.search;
 
+import javax.swing.JTable;
+
 import org.martus.client.swingui.UiLocalization;
 import org.martus.client.swingui.fields.UiGridEditor;
+import org.martus.common.fieldspec.DropDownFieldSpec;
+import org.martus.swing.UiTable;
 
 public class FancySearchGridEditor extends UiGridEditor
 {
@@ -42,6 +46,33 @@ public class FancySearchGridEditor extends UiGridEditor
 	{
 		super(helperToUse.getModel(), helperToUse.getLocalization());
 		helper = helperToUse;
+		
+		setColumnToHoldWidestValueOrHeader(FancySearchHelper.COLUMN_FIELD);
+		setColumnToHoldWidestValueOrHeader(FancySearchHelper.COLUMN_COMPARE_HOW);
+		getTable().setAutoResizeMode(JTable.AUTO_RESIZE_LAST_COLUMN);
+	}
+	
+	public void setColumnToHoldWidestValueOrHeader(int column)
+	{
+		getTable().setColumnMaxWidth(column, getWidestFieldWidthWithPadding(column));
+	}
+	
+	public int getWidestFieldWidthWithPadding(int column)
+	{
+		final int SCROLL_BAR_ALLOWANCE = 50;
+		UiTable uiTable = getTable();
+		String columnHeaderText = uiTable.getColumnName(column);
+		DropDownFieldSpec spec = (DropDownFieldSpec)helper.getModel().getFieldSpec(column); 
+		int widestWidth = uiTable.getRenderedWidth(0, columnHeaderText);
+		for(int i = 0; i < spec.getCount(); ++i)
+		{
+			String thisValue = spec.getChoice(i).toString();
+			int thisWidth = uiTable.getRenderedWidth(column, thisValue) + SCROLL_BAR_ALLOWANCE;
+			if(thisWidth > widestWidth)
+				widestWidth = thisWidth;
+		}
+		
+		return widestWidth;
 	}
 	
 	public String getSearchString()
