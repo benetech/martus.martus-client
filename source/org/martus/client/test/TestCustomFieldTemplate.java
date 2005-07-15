@@ -66,11 +66,11 @@ public class TestCustomFieldTemplate extends TestCaseEnhanced
 		assertTrue("not valid?", template.isvalidTemplateXml(fields.toString()));
 		assertEquals(0, template.getErrors().size());
 		
-		FieldSpec invalidField = FieldSpec.createCustomField("myTag", "myLabel", 55);
+		FieldSpec invalidField = FieldSpec.createCustomField("myTag", "", FieldSpec.TYPE_NORMAL);
 		fields.add(invalidField);
 		assertFalse("Should not be a valid template", template.isvalidTemplateXml(fields.toString()));
 		assertEquals(1, template.getErrors().size());
-		assertEquals(CustomFieldError.CODE_UNKNOWN_TYPE,((CustomFieldError)template.getErrors().get(0)).getCode());
+		assertEquals(CustomFieldError.CODE_MISSING_LABEL,((CustomFieldError)template.getErrors().get(0)).getCode());
 	}
 	
 	public void testExportXml() throws Exception
@@ -84,7 +84,7 @@ public class TestCustomFieldTemplate extends TestCaseEnhanced
 		assertTrue(exportFile.exists());
 		exportFile.delete();
 
-		FieldSpec invalidField = FieldSpec.createCustomField("myTag", "myLabel", 55);
+		FieldSpec invalidField = FieldSpec.createCustomField("myTag", "", FieldSpec.TYPE_NORMAL);
 		fields.add(invalidField);
 		assertFalse(exportFile.exists());
 		assertFalse(template.ExportTemplate(security, exportFile, fields.toString()));
