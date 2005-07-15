@@ -707,7 +707,7 @@ public class EnglishStrings
 "field:timedout1=For security reasons, you must sign into Martus again.",
 "field:timedout2=Any unsaved bulletins will be lost unless you sign in and save them.",
 "field:defaultFolderName=New Folder",
-"field:SearchBulletinRules=When searching for bulletins you can add key words (or, and) between multiple search term words (e.g. prison or jail, prison and assault).  If you enter multiple search terms without keywords, Martus will search for the exact phrase you entered.  Do not use quotation marks in your search.  The 'starting on' and 'ending on' dates will further refine your search matching either the event date or the date entered.  If you leave the search text blank Martus will perform only a date search.",
+"field:SearchBulletinRules=For each row, select a field to search (or choose to match any field), select what kind of comparison to perform, and then enter a value to search for. Only bulletins matching all the rows will be returned.",
 "field:AccountInfoUserName=User Name: ",
 "field:AccountInfoPublicKey=Public Account Id:",
 "field:AccountInfoPublicCode=Public Code:",
