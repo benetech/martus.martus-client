@@ -45,7 +45,7 @@ import org.martus.client.core.MartusApp;
 import org.martus.client.core.MartusApp.AccountAlreadyExistsException;
 import org.martus.client.core.MartusApp.CannotCreateAccountFileException;
 import org.martus.client.core.MartusApp.SaveConfigInfoException;
-import org.martus.client.swingui.UiLocalization;
+import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.common.FieldCollection;
 import org.martus.common.HQKey;
@@ -54,9 +54,9 @@ import org.martus.common.LegacyCustomFields;
 import org.martus.common.MartusUtilities;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.clientside.ChoiceItem;
-import org.martus.common.clientside.Localization;
+import org.martus.common.clientside.MtfAwareLocalization;
 import org.martus.common.clientside.PasswordHelper;
-import org.martus.common.clientside.UiBasicLocalization;
+import org.martus.common.clientside.UiLocalization;
 import org.martus.common.clientside.test.ServerSideNetworkHandlerNotAvailable;
 import org.martus.common.crypto.MartusCrypto;
 import org.martus.common.crypto.MockMartusSecurity;
@@ -88,7 +88,7 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 
 		mockSecurityForApp = MockMartusSecurity.createClient();
 
-		localization = new UiLocalization(null, UiMainWindow.getAllEnglishStrings());
+		localization = new MartusLocalization(null, UiMainWindow.getAllEnglishStrings());
 		localization.setCurrentLanguageCode("en");
 		appWithAccount = MockMartusApp.create(mockSecurityForApp);
 		appWithAccount.setSSLNetworkInterfaceHandlerForTesting(new ServerSideNetworkHandlerNotAvailable());
@@ -126,7 +126,7 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		InputStream helpTOC = appWithAccount.getHelpTOC(languageCode);
 		assertNull("Language pack doesn't exists help toc should return null", helpTOC);
 
-		File mlpkTranslation = new File(translationDirectory, UiBasicLocalization.getMlpkFilename(languageCode));
+		File mlpkTranslation = new File(translationDirectory, UiLocalization.getMlpkFilename(languageCode));
 		copyResourceFileToLocalFile(mlpkTranslation, "Martus-xx-notSigned.mlp");
 		mlpkTranslation.deleteOnExit();
 		helpMain = appWithAccount.getHelpMain(languageCode);
@@ -164,7 +164,7 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 	{
 		TRACE_BEGIN("testUpdateDocsFromMLPFiles");
 		File translationDirectory = appWithAccount.martusDataRootDirectory;
-		File mlpkTranslationxx = new File(translationDirectory, UiBasicLocalization.getMlpkFilename("xx"));
+		File mlpkTranslationxx = new File(translationDirectory, UiLocalization.getMlpkFilename("xx"));
 		copyResourceFileToLocalFile(mlpkTranslationxx, "Martus-xx-notSigned.mlp");
 		mlpkTranslationxx.deleteOnExit();
 		appWithAccount.UpdateDocsIfNecessaryFromMLPFiles();
@@ -174,7 +174,7 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 
 		copyResourceFileToLocalFile(mlpkTranslationxx, "Martus-xx.mlp");
 		mlpkTranslationxx.deleteOnExit();
-		File mlpkTranslationyy = new File(translationDirectory, UiBasicLocalization.getMlpkFilename("yy"));
+		File mlpkTranslationyy = new File(translationDirectory, UiLocalization.getMlpkFilename("yy"));
 		copyResourceFileToLocalFile(mlpkTranslationyy, "Martus-yy.mlp");
 		mlpkTranslationyy.deleteOnExit();
 
@@ -206,7 +206,7 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 	{
 		TRACE_BEGIN("testUpdateNewerDocsFromMLPFiles");
 		File translationDirectory = appWithAccount.martusDataRootDirectory;
-		File mlpkTranslationyy = new File(translationDirectory, UiBasicLocalization.getMlpkFilename("yy"));
+		File mlpkTranslationyy = new File(translationDirectory, UiLocalization.getMlpkFilename("yy"));
 		File readmeFile_yy = new File(translationDirectory, "README_yy.txt");
 		copyResourceFileToLocalFile(mlpkTranslationyy, "Martus-yy.mlp");
 		mlpkTranslationyy.deleteOnExit();
@@ -239,7 +239,7 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 	{
 		TRACE_BEGIN("testDowngradingDocsFromMLPFiles");
 		File translationDirectory = appWithAccount.martusDataRootDirectory;
-		File mlpkTranslationyy = new File(translationDirectory, UiBasicLocalization.getMlpkFilename("yy"));
+		File mlpkTranslationyy = new File(translationDirectory, UiLocalization.getMlpkFilename("yy"));
 		File readmeFile_yy = new File(translationDirectory, "README_yy.txt");
 
 		copyResourceFileToLocalFile(mlpkTranslationyy, "Martus-updated-yy.mlp");
@@ -346,7 +346,7 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 	
 	public void testSetDefaultUiState() throws Exception
 	{
-		UiBasicLocalization testLocalization = new UiBasicLocalization(null, noEnglishStrings);
+		UiLocalization testLocalization = new UiLocalization(null, noEnglishStrings);
 		File tmpFile = createTempFile();
 		MartusApp.setInitialUiDefaultsFromFileIfPresent(testLocalization, tmpFile);
 		assertNull("File doesn't exist localization should not be set.  Using DefaultUi.txt depends on the language not being set in this case.", testLocalization.getCurrentLanguageCode());
@@ -360,21 +360,21 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		out.write("en".getBytes());
 		out.close();
 		MartusApp.setInitialUiDefaultsFromFileIfPresent(testLocalization, tmpFile);
-		assertEquals("English should be set", Localization.ENGLISH, testLocalization.getCurrentLanguageCode());
+		assertEquals("English should be set", MtfAwareLocalization.ENGLISH, testLocalization.getCurrentLanguageCode());
 		assertEquals("English code should set DMY correctly", DateUtilities.MDY_SLASH.getCode(), testLocalization.getCurrentDateFormatCode());
 		tmpFile.delete();
 		out = new FileOutputStream(tmpFile);
 		out.write("es".getBytes());
 		out.close();
 		MartusApp.setInitialUiDefaultsFromFileIfPresent(testLocalization, tmpFile);
-		assertEquals("Spanish should be set", Localization.SPANISH, testLocalization.getCurrentLanguageCode());
+		assertEquals("Spanish should be set", MtfAwareLocalization.SPANISH, testLocalization.getCurrentLanguageCode());
 		assertEquals("Spanish code should set MDY correctly", DateUtilities.DMY_SLASH.getCode(), testLocalization.getCurrentDateFormatCode());
 		tmpFile.delete();
 		out = new FileOutputStream(tmpFile);
 		out.write("ru".getBytes());
 		out.close();
 		MartusApp.setInitialUiDefaultsFromFileIfPresent(testLocalization, tmpFile);
-		assertEquals("Russian should be set", Localization.RUSSIAN, testLocalization.getCurrentLanguageCode());
+		assertEquals("Russian should be set", MtfAwareLocalization.RUSSIAN, testLocalization.getCurrentLanguageCode());
 		assertEquals("Russian code should set MDY Dot correctly", DateUtilities.DMY_DOT.getCode(), testLocalization.getCurrentDateFormatCode());
 		tmpFile.delete();
 	}
@@ -456,7 +456,7 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 
 			try
 			{
-				UiBasicLocalization localization = new UiBasicLocalization(fakeDataDirectory, noEnglishStrings);
+				UiLocalization localization = new UiLocalization(fakeDataDirectory, noEnglishStrings);
 				MartusApp app = new MartusApp(mockSecurityForApp, fakeDataDirectory, localization);
 				app.setCurrentAccount("some user", app.getMartusDataRootDirectory());
 				app.doAfterSigninInitalization();
@@ -511,7 +511,7 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 
 			try
 			{
-				UiBasicLocalization localization = new UiBasicLocalization(fakeDataDirectory, noEnglishStrings);
+				UiLocalization localization = new UiLocalization(fakeDataDirectory, noEnglishStrings);
 				MartusApp app = new MartusApp(mockSecurityForApp, fakeDataDirectory, localization);
 				app.setCurrentAccount("some user", app.getMartusDataRootDirectory());
 				app.doAfterSigninInitalization();
@@ -575,7 +575,7 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 
 			try
 			{
-				UiBasicLocalization localization = new UiBasicLocalization(fakeDataDirectory, noEnglishStrings);
+				UiLocalization localization = new UiLocalization(fakeDataDirectory, noEnglishStrings);
 				MartusApp app = new MartusApp(mockSecurityForApp, fakeDataDirectory, localization);
 				app.setCurrentAccount("some user", app.getMartusDataRootDirectory());
 				app.doAfterSigninInitalization();
@@ -1556,7 +1556,7 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		TRACE_BEGIN("testEncryptPublicData");
 		File temp = createTempDirectory();
 		MartusCrypto security = MockMartusSecurity.createClient();
-		MartusApp app = new MartusApp(security, temp, new Localization(temp));
+		MartusApp app = new MartusApp(security, temp, new MtfAwareLocalization(temp));
 		app.doAfterSigninInitalization();
 		app.getStore().deleteAllData();
 		assertEquals("App Not Encypting Public?", true, app.getStore().mustEncryptPublicData());
@@ -1916,7 +1916,7 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 	
 	private MockMartusSecurity mockSecurityForApp;
 
-	UiLocalization localization;
+	MartusLocalization localization;
 	private MockMartusApp appWithAccount;
 	
 	static final String[] noEnglishStrings = {};

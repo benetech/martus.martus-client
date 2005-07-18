@@ -33,12 +33,12 @@ import java.awt.event.KeyListener;
 import javax.swing.JComponent;
 
 import org.martus.client.swingui.UiConstants;
-import org.martus.client.swingui.UiLocalization;
+import org.martus.client.swingui.MartusLocalization;
 import org.martus.swing.UiTextField;
 
 public class UiSingleLineTextEditor extends UiSingleLineTextField
 {
-	public UiSingleLineTextEditor(UiLocalization localizationToUse)
+	public UiSingleLineTextEditor(MartusLocalization localizationToUse)
 	{
 		super(localizationToUse);
 		widget = new UiTextField();

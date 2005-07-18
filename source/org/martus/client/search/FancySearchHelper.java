@@ -28,7 +28,7 @@ package org.martus.client.search;
 
 import java.util.Vector;
 
-import org.martus.client.swingui.UiLocalization;
+import org.martus.client.swingui.MartusLocalization;
 import org.martus.common.GridData;
 import org.martus.common.clientside.ChoiceItem;
 import org.martus.common.field.MartusDateRangeField;
@@ -42,13 +42,13 @@ import org.martus.util.TokenReplacement.TokenInvalidException;
 
 public class FancySearchHelper
 {
-	public FancySearchHelper(UiLocalization localizationToUse)
+	public FancySearchHelper(MartusLocalization localizationToUse)
 	{
 		localization = localizationToUse;
 		model = new FancySearchTableModel(getGridSpec());
 	}
 	
-	UiLocalization getLocalization()
+	MartusLocalization getLocalization()
 	{
 		return localization;
 	}
@@ -183,7 +183,7 @@ public class FancySearchHelper
 	public static final int COLUMN_COMPARE_HOW = 2;
 	public static final int COLUMN_VALUE = 3;
 	
-	UiLocalization localization;
+	MartusLocalization localization;
 	FancySearchTableModel model;
 }
 

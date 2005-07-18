@@ -33,12 +33,12 @@ import java.awt.event.KeyListener;
 import javax.swing.JComponent;
 
 import org.martus.client.swingui.UiConstants;
-import org.martus.client.swingui.UiLocalization;
+import org.martus.client.swingui.MartusLocalization;
 import org.martus.swing.UiTextArea;
 
 public class UiNormalTextEditor extends UiNormalTextField
 {
-	public UiNormalTextEditor(UiLocalization localizationToUse)
+	public UiNormalTextEditor(MartusLocalization localizationToUse)
 	{
 		super(localizationToUse);
 		widget = new UiTextAreaWithPadding(1, UiConstants.textFieldColumns);

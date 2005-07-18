@@ -39,7 +39,7 @@ import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
 
 import org.martus.client.core.MartusApp;
-import org.martus.client.swingui.UiLocalization;
+import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.swing.UiButton;
 import org.martus.swing.UiLabel;
@@ -118,7 +118,7 @@ public abstract class ActionQuickErase extends UiMenuAction
 			super(mainWindow, "", true);
 			uninstallChoosen = uninstallMartus;
 			martusAccounts = app.getAllAccountDirectories();
-			UiLocalization localization = mainWindow.getLocalization();
+			MartusLocalization localization = mainWindow.getLocalization();
 			if(uninstallMartus)
 				setTitle(localization.getWindowTitle("RemoveMartsFromThisComputer"));
 			else

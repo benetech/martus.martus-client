@@ -38,7 +38,7 @@ import org.martus.client.core.MartusApp.SaveConfigInfoException;
 import org.martus.common.MartusConstants;
 import org.martus.common.MartusUtilities;
 import org.martus.common.Version;
-import org.martus.common.clientside.Localization;
+import org.martus.common.clientside.MtfAwareLocalization;
 import org.martus.common.crypto.MartusCrypto.KeyShareException;
 import org.martus.swing.UiFileChooser;
 import org.martus.util.UnicodeReader;
@@ -333,7 +333,7 @@ public class UiBackupRecoverSharedKeyPair
 				if(disk == maxFiles)
 					break;
 					
-				if(!insertDisk("SaveShareKeyPair",Localization.UNUSED_TAG, disk+1, maxFiles, "CancelShareBackup"))
+				if(!insertDisk("SaveShareKeyPair",MtfAwareLocalization.UNUSED_TAG, disk+1, maxFiles, "CancelShareBackup"))
 					return false;
 				break;
 			}
@@ -400,7 +400,7 @@ public class UiBackupRecoverSharedKeyPair
 	{
 		String windowTitle = localization.getWindowTitle(titleMessageTag);
 		String message1 = "";
-		if(!fieldMessageTag.equals(Localization.UNUSED_TAG))
+		if(!fieldMessageTag.equals(MtfAwareLocalization.UNUSED_TAG))
 			message1 = localization.getFieldLabel(fieldMessageTag);
 		String message2 = localization.getFieldLabel("BackupRecoverKeyPairInsertNextDiskMessage") +
 							" " + Integer.toString(diskNumber) + " " +	
@@ -454,5 +454,5 @@ public class UiBackupRecoverSharedKeyPair
 	}
 
 	UiMainWindow mainWindow;
-	UiLocalization localization;
+	MartusLocalization localization;
 }

@@ -172,7 +172,7 @@ public class UiRecoverKeyPairFromBackup
 	}
 	private MartusApp app;
 	private UiMainWindow mainWindow;
-	private UiLocalization localization;
+	private MartusLocalization localization;
 	
 	private String userName;
 	private char[] userPassword;

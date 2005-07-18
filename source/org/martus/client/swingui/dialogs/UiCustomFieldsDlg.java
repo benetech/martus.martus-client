@@ -45,10 +45,10 @@ import javax.swing.filechooser.FileFilter;
 import org.martus.client.core.CustomFieldError;
 import org.martus.client.core.CustomFieldTemplate;
 import org.martus.client.core.MartusApp;
-import org.martus.client.swingui.UiLocalization;
+import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.common.HQKeys;
-import org.martus.common.clientside.Localization;
+import org.martus.common.clientside.MtfAwareLocalization;
 import org.martus.common.crypto.MartusCrypto;
 import org.martus.swing.UiButton;
 import org.martus.swing.UiFileChooser;
@@ -67,7 +67,7 @@ public class UiCustomFieldsDlg extends JDialog
 		mainWindow = owner; 
 		security = mainWindow.getApp().getSecurity();		
 		String baseTag = "CustomFields";
-		UiLocalization localization = owner.getLocalization();
+		MartusLocalization localization = owner.getLocalization();
 		setTitle(localization.getWindowTitle("input" + baseTag));
 
 		UiWrappedTextArea label = new UiWrappedTextArea(localization.getFieldLabel("input" + baseTag + "Info"));
@@ -241,7 +241,7 @@ public class UiCustomFieldsDlg extends JDialog
 	{
 		public void actionPerformed(ActionEvent ae)
 		{
-			UiLocalization localization = mainWindow.getLocalization();
+			MartusLocalization localization = mainWindow.getLocalization();
 			String message = localization.getFieldLabel("CreateCustomFieldsHelp1");
 			message += localization.getFieldLabel("CreateCustomFieldsHelp2");
 			String examples = localization.getFieldLabel("CreateCustomFieldsHelp3");
@@ -252,7 +252,7 @@ public class UiCustomFieldsDlg extends JDialog
 			xmlExamples.setEditable(false);
 			UiScrollPane pane = createScrollPane(xmlExamples);
 
-			new UiShowScrollableTextDlg(mainWindow, "CreateCustomFieldsHelp", "ok", Localization.UNUSED_TAG, Localization.UNUSED_TAG, message, pane);
+			new UiShowScrollableTextDlg(mainWindow, "CreateCustomFieldsHelp", "ok", MtfAwareLocalization.UNUSED_TAG, MtfAwareLocalization.UNUSED_TAG, message, pane);
 		}
 	}
 	
@@ -290,7 +290,7 @@ public class UiCustomFieldsDlg extends JDialog
 			errorMessage += thisErrorMessage;
 			errorMessage += '\n';
 		}
-		new UiShowScrollableTextDlg(mainWindow,"ErrorCustomFields", "ok", Localization.UNUSED_TAG, "ErrorCustomFields", errorMessage, null);
+		new UiShowScrollableTextDlg(mainWindow,"ErrorCustomFields", "ok", MtfAwareLocalization.UNUSED_TAG, "ErrorCustomFields", errorMessage, null);
 	}
 		
 	private String GetDataAndSpacing(String data, int columnSpacing)

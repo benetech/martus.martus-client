@@ -31,13 +31,13 @@ import java.util.HashMap;
 import javax.swing.table.TableCellEditor;
 import javax.swing.table.TableCellRenderer;
 
-import org.martus.client.swingui.UiLocalization;
+import org.martus.client.swingui.MartusLocalization;
 import org.martus.common.fieldspec.FieldSpec;
 import org.martus.swing.UiTableWithCellEditingProtection;
 
 public class GridTable extends UiTableWithCellEditingProtection
 {
-	public GridTable(GridTableModel model, UiLocalization localizationToUse)
+	public GridTable(GridTableModel model, MartusLocalization localizationToUse)
 	{
 		super(model);
 		localization = localizationToUse;
@@ -105,7 +105,7 @@ public class GridTable extends UiTableWithCellEditingProtection
 		return (TableCellEditor)map.get(new Integer(FieldSpec.TYPE_NORMAL));
 	}
 
-	UiLocalization localization;
+	MartusLocalization localization;
 	HashMap renderers;
 	HashMap editors;
 }

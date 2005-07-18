@@ -118,8 +118,8 @@ import org.martus.common.bulletin.Bulletin;
 import org.martus.common.bulletin.BulletinHtmlGenerator;
 import org.martus.common.clientside.ClientSideNetworkGateway;
 import org.martus.common.clientside.CurrentUiState;
-import org.martus.common.clientside.Localization;
-import org.martus.common.clientside.UiBasicLocalization;
+import org.martus.common.clientside.MtfAwareLocalization;
+import org.martus.common.clientside.UiLocalization;
 import org.martus.common.clientside.UiUtilities;
 import org.martus.common.crypto.MartusCrypto;
 import org.martus.common.database.FileDatabase.MissingAccountMapException;
@@ -158,7 +158,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		setCurrentActiveFrame(this);
 		try
 		{
-			localization = new UiLocalization(MartusApp.getTranslationsDirectory(), getAllEnglishStrings());
+			localization = new MartusLocalization(MartusApp.getTranslationsDirectory(), getAllEnglishStrings());
 			app = new MartusApp(localization);
 			initializeCurrentLanguage();
 		}
@@ -204,7 +204,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		
 		if(localization.getCurrentLanguageCode()== null)
 		{
-			localization.setCurrentLanguageCode(Localization.ENGLISH);
+			localization.setCurrentLanguageCode(MtfAwareLocalization.ENGLISH);
 			localization.setCurrentDateFormatCode(DateUtilities.getDefaultDateFormatCode());
 		}
 	}
@@ -269,7 +269,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 
 	static class HiddenFrame extends JFrame
 	{
-		HiddenFrame(UiLocalization localization, String programName)
+		HiddenFrame(MartusLocalization localization, String programName)
 		{
 			super(programName);
 			UiMainWindow.updateIcon(this);
@@ -635,7 +635,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		return app;
 	}
 	
-	public UiLocalization getLocalization()
+	public MartusLocalization getLocalization()
 	{
 		return localization;
 	}
@@ -1170,8 +1170,8 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 			helpStreamTOC = app.getHelpTOC(currentLanguage);
 		else
 		{
-			helpStream = app.getHelpMain(Localization.ENGLISH);
-			helpStreamTOC = app.getHelpTOC(Localization.ENGLISH);
+			helpStream = app.getHelpMain(MtfAwareLocalization.ENGLISH);
+			helpStreamTOC = app.getHelpTOC(MtfAwareLocalization.ENGLISH);
 		}
 
 		new UiOnlineHelpDlg(this, "Help", helpStream, "OnlineHelpMessage", helpStreamTOC, "OnlineHelpTOCMessage");
@@ -1797,7 +1797,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	
 	public void displayScrollableMessage(String titleTag, String message, String okButtonTag, Map tokenReplacement) 
 	{
-		new UiShowScrollableTextDlg(this, titleTag, okButtonTag, Localization.UNUSED_TAG, Localization.UNUSED_TAG, message, tokenReplacement, null);
+		new UiShowScrollableTextDlg(this, titleTag, okButtonTag, MtfAwareLocalization.UNUSED_TAG, MtfAwareLocalization.UNUSED_TAG, message, tokenReplacement, null);
 	}
 	
 	public void doConfigureHQs()
@@ -2098,7 +2098,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		return (window.table.getSingleSelectedBulletin() != null);
 	}
 	
-	static public String getDisplayVersionInfo(UiBasicLocalization localization)
+	static public String getDisplayVersionInfo(UiLocalization localization)
 	{
 		String versionInfo = UiConstants.programName;
 		versionInfo += " " + localization.getFieldLabel("aboutDlgVersionInfo");
@@ -2240,7 +2240,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	private UiMenuBar menuBar;
 	private UiToolBar toolBar;
 	UiStatusBar statusBar;
-	UiLocalization localization;
+	MartusLocalization localization;
 
 	private JFrame currentActiveFrame;
 	boolean inConfigServer;

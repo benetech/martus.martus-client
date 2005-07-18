@@ -39,7 +39,7 @@ import javax.swing.JPanel;
 import javax.swing.JViewport;
 
 import org.martus.client.core.LanguageChangeListener;
-import org.martus.client.swingui.UiLocalization;
+import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.bulletincomponent.UiBulletinComponentViewSection;
 import org.martus.common.fieldspec.FieldSpec;
@@ -52,7 +52,7 @@ import org.martus.swing.Utilities;
 public class UiBulletinPreviewDlg extends JDialog implements ActionListener, LanguageChangeListener
 {
 
-	public UiBulletinPreviewDlg(UiMainWindow owner, UiLocalization localizationToUse, String windowTitleTag)
+	public UiBulletinPreviewDlg(UiMainWindow owner, MartusLocalization localizationToUse, String windowTitleTag)
 	{
 		super(owner, localizationToUse.getWindowTitle(windowTitleTag), true);	
 		getContentPane().setLayout(new BorderLayout());
@@ -111,6 +111,6 @@ public class UiBulletinPreviewDlg extends JDialog implements ActionListener, Lan
 	}
 
 
-	private UiLocalization localization;
+	private MartusLocalization localization;
 
 }

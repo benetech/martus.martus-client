@@ -33,7 +33,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.LineBorder;
-import org.martus.client.swingui.UiLocalization;
+import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.UiWarningLabel;
 import org.martus.client.swingui.fields.UiField;
@@ -63,7 +63,7 @@ abstract public class UiBulletinComponentSection extends UiParagraphPanel
 		return mainWindow;
 	}
 	
-	public UiLocalization getLocalization()
+	public MartusLocalization getLocalization()
 	{
 		return getMainWindow().getLocalization();
 	}

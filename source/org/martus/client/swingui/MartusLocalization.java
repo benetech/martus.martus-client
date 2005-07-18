@@ -28,11 +28,11 @@ package org.martus.client.swingui;
 import java.io.File;
 import java.util.Vector;
 
-import org.martus.common.clientside.UiBasicLocalization;
+import org.martus.common.clientside.UiLocalization;
 
-public class UiLocalization extends UiBasicLocalization 
+public class MartusLocalization extends UiLocalization 
 {
-	public UiLocalization(File directoryToUse, String[] englishTranslations)
+	public MartusLocalization(File directoryToUse, String[] englishTranslations)
 	{
 		super(directoryToUse, englishTranslations);		
 	}

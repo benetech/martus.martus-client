@@ -36,7 +36,7 @@ import org.martus.common.BulletinSummary;
 import org.martus.common.MartusUtilities.ServerErrorException;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.clientside.ClientSideNetworkGateway;
-import org.martus.common.clientside.UiBasicLocalization;
+import org.martus.common.clientside.UiLocalization;
 import org.martus.common.crypto.MartusCrypto;
 import org.martus.common.crypto.MartusCrypto.MartusSignatureException;
 import org.martus.common.database.DatabaseKey;
@@ -47,7 +47,7 @@ import org.martus.common.packet.UniversalId;
 
 abstract public class RetrieveTableModel extends UiTableModel  
 {
-	public RetrieveTableModel(MartusApp appToUse, UiBasicLocalization localizationToUse)
+	public RetrieveTableModel(MartusApp appToUse, UiLocalization localizationToUse)
 	{
 		app = appToUse;
 		localization = localizationToUse;
@@ -144,7 +144,7 @@ abstract public class RetrieveTableModel extends UiTableModel
 		return null;
 	}
 	
-	UiBasicLocalization getLocalization()
+	UiLocalization getLocalization()
 	{
 		return localization;
 	}
@@ -539,7 +539,7 @@ abstract public class RetrieveTableModel extends UiTableModel
 	}
 
 	MartusApp app;
-	UiBasicLocalization localization;
+	UiLocalization localization;
 	int columnCount;
 	
 	ClientBulletinStore store;

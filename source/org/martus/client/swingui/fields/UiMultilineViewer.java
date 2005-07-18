@@ -33,12 +33,12 @@ import javax.swing.JComponent;
 import javax.swing.text.JTextComponent;
 
 import org.martus.client.swingui.UiConstants;
-import org.martus.client.swingui.UiLocalization;
+import org.martus.client.swingui.MartusLocalization;
 import org.martus.swing.UiTextArea;
 
 public class UiMultilineViewer extends UiStringField
 {
-	public UiMultilineViewer(UiLocalization localizationToUse)
+	public UiMultilineViewer(MartusLocalization localizationToUse)
 	{
 		super(localizationToUse);
 		text = new PreviewTextArea(1, UiConstants.textFieldColumns);

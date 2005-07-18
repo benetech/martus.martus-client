@@ -45,7 +45,7 @@ import javax.swing.ListSelectionModel;
 
 import org.martus.client.core.MartusApp;
 import org.martus.client.core.TransferableAttachmentList;
-import org.martus.client.swingui.UiLocalization;
+import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.tablemodels.AttachmentTableModel;
 import org.martus.common.bulletin.AttachmentProxy;
@@ -73,7 +73,7 @@ public class UiAttachmentViewer extends UiParagraphPanel  implements DragGesture
 
 		Box buttonBox = Box.createHorizontalBox();
 		Box vbox = Box.createVerticalBox();
-		UiLocalization localization = mainWindowToUse.getLocalization();
+		MartusLocalization localization = mainWindowToUse.getLocalization();
 
 		attachmentPane = new UiScrollPane(attachmentTable, UiScrollPane.VERTICAL_SCROLLBAR_NEVER, UiScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 		vbox.add(attachmentPane);

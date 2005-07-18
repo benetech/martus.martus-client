@@ -36,14 +36,14 @@ import javax.swing.Box;
 import javax.swing.JComponent;
 
 import org.martus.common.bulletin.Bulletin;
-import org.martus.common.clientside.UiBasicLocalization;
+import org.martus.common.clientside.UiLocalization;
 import org.martus.common.utilities.DateUtilities;
 import org.martus.swing.UiComboBox;
 import org.martus.swing.Utilities;
 
 public class UiDateEditor extends UiField
 {
-	public UiDateEditor(UiBasicLocalization localizationToUse, Date highestAllowableDate)
+	public UiDateEditor(UiLocalization localizationToUse, Date highestAllowableDate)
 	{				
 		Box box = Box.createHorizontalBox();
 		dayCombo = new UiComboBox();
@@ -56,7 +56,7 @@ public class UiDateEditor extends UiField
 		component = box;
 	}
 	
-	public static void buildCustomDate(Box box, UiBasicLocalization localizationToUse,
+	public static void buildCustomDate(Box box, UiLocalization localizationToUse,
 			UiComboBox yCombo, UiComboBox mCombo, UiComboBox dCombo)
 	{							
 		buildDay(dCombo);
@@ -64,7 +64,7 @@ public class UiDateEditor extends UiField
 		buildMonth(box,localizationToUse, yCombo, mCombo,dCombo);
 	}
 	
-	public static void buildDate(Box box, UiBasicLocalization localizationToUse,
+	public static void buildDate(Box box, UiLocalization localizationToUse,
 			UiComboBox yCombo, UiComboBox mCombo, UiComboBox dCombo)
 	{							
 		buildDay(dCombo);
@@ -98,7 +98,7 @@ public class UiDateEditor extends UiField
 			dCombo.addItem(new Integer(day).toString());	
 	}
 	
-	private static void buildMonth(Box box, UiBasicLocalization localizationToUse,UiComboBox yCombo, UiComboBox mCombo, UiComboBox dCombo)
+	private static void buildMonth(Box box, UiLocalization localizationToUse,UiComboBox yCombo, UiComboBox mCombo, UiComboBox dCombo)
 	{
 		String mdyOrder = DateUtilities.getMdyOrder(localizationToUse.getCurrentDateFormatCode());
 		JComponent[] dateInOrderLeftToRight = new JComponent[3];

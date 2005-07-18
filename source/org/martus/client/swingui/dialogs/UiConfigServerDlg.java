@@ -35,7 +35,7 @@ import javax.swing.JDialog;
 import org.martus.client.core.ConfigInfo;
 import org.martus.client.core.MartusApp;
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.common.clientside.UiBasicLocalization;
+import org.martus.common.clientside.UiLocalization;
 import org.martus.common.crypto.MartusCrypto;
 import org.martus.swing.UiButton;
 import org.martus.swing.UiLabel;
@@ -54,7 +54,7 @@ public class UiConfigServerDlg extends JDialog implements ActionListener
 		info = infoToUse;
 		mainWindow = owner;
 		app = owner.getApp();
-		UiBasicLocalization localization = mainWindow.getLocalization();
+		UiLocalization localization = mainWindow.getLocalization();
 		
 		setTitle(localization.getWindowTitle("ConfigServer"));
 		fieldIPAddress = new UiTextField(25);

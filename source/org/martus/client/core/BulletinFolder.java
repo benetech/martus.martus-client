@@ -33,7 +33,7 @@ import java.util.Vector;
 
 import org.martus.client.core.ClientBulletinStore.BulletinAlreadyExistsException;
 import org.martus.common.bulletin.Bulletin;
-import org.martus.common.clientside.UiBasicLocalization;
+import org.martus.common.clientside.UiLocalization;
 import org.martus.common.database.DatabaseKey;
 import org.martus.common.database.ReadableDatabase;
 import org.martus.common.packet.UniversalId;
@@ -70,7 +70,7 @@ public class BulletinFolder
 		return name;
 	}
 	
-	public String getLocalizedName(UiBasicLocalization localization)
+	public String getLocalizedName(UiLocalization localization)
 	{
 		if(isNameLocalized(name))
 			return localization.getLocalizedFolderName(name);

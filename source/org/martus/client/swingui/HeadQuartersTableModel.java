@@ -33,11 +33,11 @@ import java.util.Vector;
 import org.martus.client.swingui.tablemodels.UiTableModel;
 import org.martus.common.HQKey;
 import org.martus.common.HQKeys;
-import org.martus.common.clientside.UiBasicLocalization;
+import org.martus.common.clientside.UiLocalization;
 
 public abstract class HeadQuartersTableModel extends UiTableModel 
 {
-	public HeadQuartersTableModel(UiBasicLocalization localizationToUse)
+	public HeadQuartersTableModel(UiLocalization localizationToUse)
 	{
 		localization = localizationToUse;
 		entries = new Vector();
@@ -184,6 +184,6 @@ public abstract class HeadQuartersTableModel extends UiTableModel
 	public int COLUMN_PUBLIC_CODE = -1;
 	public int COLUMN_LABEL = -1;
 	public int columnCount;
-	UiBasicLocalization localization;
+	UiLocalization localization;
 	HeadQuartersSelectionListener selectionListener;
 }

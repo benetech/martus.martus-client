@@ -49,7 +49,7 @@ import org.martus.client.swingui.UiFocusListener;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.tablemodels.AttachmentTableModel;
 import org.martus.common.bulletin.AttachmentProxy;
-import org.martus.common.clientside.UiBasicLocalization;
+import org.martus.common.clientside.UiLocalization;
 import org.martus.swing.UiButton;
 import org.martus.swing.UiFileChooser;
 import org.martus.swing.UiParagraphPanel;
@@ -65,7 +65,7 @@ public class UiAttachmentEditor extends UiParagraphPanel
 	{
 		mainWindow = mainWindowToUse;
 
-		UiBasicLocalization localization = mainWindowToUse.getLocalization();
+		UiLocalization localization = mainWindowToUse.getLocalization();
 		
 		TableRemoveButton remove = new TableRemoveButton(localization.getButtonLabel("removeattachment"));
 		remove.addFocusListener(new UiFocusListener(this));		
@@ -204,7 +204,7 @@ public class UiAttachmentEditor extends UiParagraphPanel
 			if(last == null)
 				last = UiFileChooser.getHomeDirectoryFile();
 			
-			UiBasicLocalization localization = mainWindow.getLocalization();
+			UiLocalization localization = mainWindow.getLocalization();
 			String buttonLabel = localization.getButtonLabel("addattachment");
 			UiFileChooser.FileDialogResults results = null;
 			while(true)

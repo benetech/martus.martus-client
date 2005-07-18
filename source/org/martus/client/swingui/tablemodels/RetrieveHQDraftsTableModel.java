@@ -30,13 +30,13 @@ import java.util.Vector;
 
 import org.martus.client.core.MartusApp;
 import org.martus.common.MartusUtilities.ServerErrorException;
-import org.martus.common.clientside.UiBasicLocalization;
+import org.martus.common.clientside.UiLocalization;
 
 
 
 public class RetrieveHQDraftsTableModel extends RetrieveTableModelHQ
 {
-	public RetrieveHQDraftsTableModel(MartusApp appToUse, UiBasicLocalization localizationToUse)
+	public RetrieveHQDraftsTableModel(MartusApp appToUse, UiLocalization localizationToUse)
 	{
 		super(appToUse, localizationToUse);
 	}

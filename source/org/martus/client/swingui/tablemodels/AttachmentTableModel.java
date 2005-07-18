@@ -29,7 +29,7 @@ import java.util.Vector;
 
 import javax.swing.table.AbstractTableModel;
 
-import org.martus.client.swingui.UiLocalization;
+import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.common.bulletin.AttachmentProxy;
 import org.martus.common.database.DatabaseKey;
@@ -171,7 +171,7 @@ public class AttachmentTableModel extends AbstractTableModel
 		return false;
 	}
 	
-	private UiLocalization getLocalization()
+	private MartusLocalization getLocalization()
 	{
 		return mainWindow.getLocalization();
 	}

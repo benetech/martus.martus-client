@@ -39,7 +39,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import org.martus.common.bulletin.Bulletin;
-import org.martus.common.clientside.UiBasicLocalization;
+import org.martus.common.clientside.UiLocalization;
 import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.fieldspec.StandardFieldSpecs;
 import org.martus.common.utilities.MartusFlexidate;
@@ -50,7 +50,7 @@ import org.martus.swing.UiRadioButton;
 
 public class UiFlexiDateEditor extends UiField
 {
-	public UiFlexiDateEditor(UiBasicLocalization localizationToUse, FieldSpec specToUse)
+	public UiFlexiDateEditor(UiLocalization localizationToUse, FieldSpec specToUse)
 	{
 		localization = localizationToUse;
 		spec = specToUse;
@@ -290,7 +290,7 @@ public class UiFlexiDateEditor extends UiField
 	UiComboBox 					endDayCombo;
 	UiComboBox 					endYearCombo;
 		
-	private UiBasicLocalization localization;	
+	private UiLocalization localization;	
 	private UiRadioButton 		exactDateRB;
 	private UiRadioButton 		flexiDateRB;
 	private UiParagraphPanel 	flexiDatePanel;

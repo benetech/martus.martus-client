@@ -26,7 +26,7 @@ Boston, MA 02111-1307, USA.
 
 package org.martus.client.swingui.dialogs;
 
-import org.martus.client.swingui.UiLocalization;
+import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.swing.UiButton;
 import org.martus.swing.UiLabel;
@@ -41,7 +41,7 @@ public class UiSimpleSearchDlg extends UiSearchDlg
 		super(owner);
 	}
 
-	UiButton createBody(UiLocalization localization)
+	UiButton createBody(MartusLocalization localization)
 	{
 		setTitle(localization.getWindowTitle("search"));
 		

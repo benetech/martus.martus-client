@@ -29,7 +29,7 @@ package org.martus.client.test;
 import org.martus.client.core.ClientBulletinStore;
 import org.martus.client.swingui.foldertree.FolderList;
 import org.martus.client.swingui.foldertree.FolderTreeNode;
-import org.martus.common.clientside.UiBasicLocalization;
+import org.martus.common.clientside.UiLocalization;
 import org.martus.common.clientside.test.*;
 import org.martus.common.database.MockClientDatabase;
 import org.martus.util.TestCaseEnhanced;
@@ -135,7 +135,7 @@ public class TestFolderList extends TestCaseEnhanced
 		return store.getVisibleFolderNames().size();
 	}
 	
-	private UiBasicLocalization getLocalization()
+	private UiLocalization getLocalization()
 	{
 		return localization;
 

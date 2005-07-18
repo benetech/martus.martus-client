@@ -26,7 +26,7 @@ Boston, MA 02111-1307, USA.
 
 package org.martus.client.search;
 
-import org.martus.client.swingui.UiLocalization;
+import org.martus.client.swingui.MartusLocalization;
 import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.fieldspec.GridFieldSpec;
 import org.martus.util.TestCaseEnhanced;
@@ -41,7 +41,7 @@ public class TestFancySearchTableModel extends TestCaseEnhanced
 	public void testGetCellType()
 	{
 		
-		FancySearchHelper helper = new FancySearchHelper(new UiLocalization(null, new String[0]));
+		FancySearchHelper helper = new FancySearchHelper(new MartusLocalization(null, new String[0]));
 		GridFieldSpec gridSpec = helper.getGridSpec();
 		FancySearchTableModel model = new FancySearchTableModel(gridSpec);
 		model.addEmptyRow();

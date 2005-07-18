@@ -36,7 +36,7 @@ import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 
-import org.martus.client.swingui.UiLocalization;
+import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.crypto.MartusCrypto;
@@ -197,7 +197,7 @@ public class UiBulletinDetailsDialog extends JDialog
 		return component;
 	}
 	
-	private UiLocalization getLocalization()
+	private MartusLocalization getLocalization()
 	{
 		return mainWindow.getLocalization();
 	}

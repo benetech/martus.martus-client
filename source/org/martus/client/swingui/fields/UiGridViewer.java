@@ -25,13 +25,13 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.fields;
 
-import org.martus.client.swingui.UiLocalization;
+import org.martus.client.swingui.MartusLocalization;
 import org.martus.common.fieldspec.GridFieldSpec;
 
 
 public class UiGridViewer extends UiGrid
 {
-	public UiGridViewer(GridFieldSpec fieldSpec, UiLocalization localization)
+	public UiGridViewer(GridFieldSpec fieldSpec, MartusLocalization localization)
 	{
 		super(fieldSpec, localization);
 		table.resizeTable();

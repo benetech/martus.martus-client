@@ -42,7 +42,7 @@ import javax.swing.filechooser.FileFilter;
 import org.martus.client.core.ConfigInfo;
 import org.martus.client.core.MartusApp;
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.common.clientside.UiBasicLocalization;
+import org.martus.common.clientside.UiLocalization;
 import org.martus.swing.UiButton;
 import org.martus.swing.UiLabel;
 import org.martus.swing.UiNotifyDlg;
@@ -63,7 +63,7 @@ public class UiTemplateDlg extends JDialog implements ActionListener
 		mainWindow = owner;
 		defaultDetailsFile = defaultDetailsFileToUse;
 
-		UiBasicLocalization localization = mainWindow.getLocalization();
+		UiLocalization localization = mainWindow.getLocalization();
 		setTitle(localization.getWindowTitle("BulletinTemplate"));
 		okButton = new UiButton(localization.getButtonLabel("ok"));
 		okButton.addActionListener(this);
@@ -105,7 +105,7 @@ public class UiTemplateDlg extends JDialog implements ActionListener
 	{
 		public void actionPerformed(ActionEvent ae)
 		{
-			UiBasicLocalization localization = mainWindow.getLocalization();
+			UiLocalization localization = mainWindow.getLocalization();
 			String title = localization.getWindowTitle("HelpDefaultDetails");
 			String helpMsg = localization.getFieldLabel("HelpDefaultDetails");
 			String helpMsgExample = localization.getFieldLabel("HelpExampleDefaultDetails");

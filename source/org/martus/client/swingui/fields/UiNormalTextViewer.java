@@ -28,12 +28,12 @@ package org.martus.client.swingui.fields;
 
 import java.awt.Font;
 import org.martus.client.swingui.UiConstants;
-import org.martus.client.swingui.UiLocalization;
+import org.martus.client.swingui.MartusLocalization;
 import org.martus.swing.UiTextArea;
 
 public class UiNormalTextViewer extends UiNormalTextField
 {
-	public UiNormalTextViewer(UiLocalization localizationToUse)
+	public UiNormalTextViewer(MartusLocalization localizationToUse)
 	{
 		super(localizationToUse);
 		widget = new UiTextArea(1, UiConstants.textFieldColumns);

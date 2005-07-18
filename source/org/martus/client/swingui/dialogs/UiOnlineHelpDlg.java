@@ -53,7 +53,7 @@ import javax.swing.text.DefaultHighlighter;
 import javax.swing.text.DefaultHighlighter.DefaultHighlightPainter;
 
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.common.clientside.UiBasicLocalization;
+import org.martus.common.clientside.UiLocalization;
 import org.martus.swing.UiButton;
 import org.martus.swing.UiList;
 import org.martus.swing.UiScrollPane;
@@ -73,7 +73,7 @@ public class UiOnlineHelpDlg extends JDialog
 		mainWindow = owner;
 		previouslyFoundIndex = -1;
 		tocList = null;
-		UiBasicLocalization localization = owner.getLocalization();
+		UiLocalization localization = owner.getLocalization();
 
 		setTitle(localization.getWindowTitle(baseTag));
 		JPanel helpPanel = new JPanel();

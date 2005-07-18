@@ -71,7 +71,7 @@ import org.martus.common.MartusUtilities.ServerErrorException;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.clientside.ClientSideNetworkGateway;
 import org.martus.common.clientside.ClientSideNetworkHandlerUsingXmlRpcForNonSSL;
-import org.martus.common.clientside.Localization;
+import org.martus.common.clientside.MtfAwareLocalization;
 import org.martus.common.clientside.PasswordHelper;
 import org.martus.common.clientside.Exceptions.ServerCallFailedException;
 import org.martus.common.clientside.Exceptions.ServerNotAvailableException;
@@ -115,12 +115,12 @@ import org.martus.util.inputstreamwithseek.ZipEntryInputStreamWithSeekThatCloses
 public class MartusApp
 {
 	
-	public MartusApp(Localization localizationToUse) throws MartusAppInitializationException
+	public MartusApp(MtfAwareLocalization localizationToUse) throws MartusAppInitializationException
 	{
 		this(null, determineMartusDataRootDirectory(), localizationToUse);
 	}
 
-	public MartusApp(MartusCrypto cryptoToUse, File dataDirectoryToUse, Localization localizationToUse) throws MartusAppInitializationException
+	public MartusApp(MartusCrypto cryptoToUse, File dataDirectoryToUse, MtfAwareLocalization localizationToUse) throws MartusAppInitializationException
 	{
 		localization = localizationToUse;
 		try
@@ -145,7 +145,7 @@ public class MartusApp
 		UpdateDocsIfNecessaryFromMLPFiles();
 	}
 
-	static public void setInitialUiDefaultsFromFileIfPresent(Localization localization, File defaultUiFile)
+	static public void setInitialUiDefaultsFromFileIfPresent(MtfAwareLocalization localization, File defaultUiFile)
 	{
 		if(!defaultUiFile.exists())
 			return;
@@ -156,10 +156,10 @@ public class MartusApp
 			languageCode = in.readLine();
 			in.close();
 			
-			if(Localization.isRecognizedLanguage(languageCode))
+			if(MtfAwareLocalization.isRecognizedLanguage(languageCode))
 			{
 				localization.setCurrentLanguageCode(languageCode);
-				localization.setCurrentDateFormatCode(Localization.getDefaultDateFormatForLanguage(languageCode));
+				localization.setCurrentDateFormatCode(MtfAwareLocalization.getDefaultDateFormatForLanguage(languageCode));
 			}
 		}
 		catch (Exception e)
@@ -816,7 +816,7 @@ public class MartusApp
 		{
 			public boolean accept(File file)
 			{
-				return (file.isFile() && file.getName().endsWith(Localization.MARTUS_LANGUAGE_PACK_SUFFIX));	
+				return (file.isFile() && file.getName().endsWith(MtfAwareLocalization.MARTUS_LANGUAGE_PACK_SUFFIX));	
 			}
 		});
 		return mpiFiles;
@@ -1722,7 +1722,7 @@ public class MartusApp
 
 	public File martusDataRootDirectory;
 	protected File currentAccountDirectory;
-	private Localization localization;
+	private MtfAwareLocalization localization;
 	public ClientBulletinStore store;
 	private ConfigInfo configInfo;
 	public NetworkInterface currentNetworkInterfaceHandler;

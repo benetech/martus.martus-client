@@ -31,7 +31,7 @@ import java.util.Date;
 
 import javax.swing.JComponent;
 
-import org.martus.client.swingui.UiLocalization;
+import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.fields.UiAttachmentEditor;
 import org.martus.client.swingui.fields.UiBoolEditor;
@@ -103,7 +103,7 @@ public class UiBulletinComponentEditorSection extends UiBulletinComponentDataSec
 
 	public UiField createGridField(GridFieldSpec fieldSpec)
 	{
-		UiLocalization localization = mainWindow.getLocalization();
+		MartusLocalization localization = mainWindow.getLocalization();
 		fieldSpec.setColumnZeroLabel(localization.getFieldLabel("ColumnGridRowNumber"));
 		return new UiGridEditor(fieldSpec, localization);
 	}

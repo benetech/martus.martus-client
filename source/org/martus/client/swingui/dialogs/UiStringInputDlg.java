@@ -33,7 +33,7 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 
-import org.martus.common.clientside.UiBasicLocalization;
+import org.martus.common.clientside.UiLocalization;
 import org.martus.swing.UiButton;
 import org.martus.swing.UiParagraphPanel;
 import org.martus.swing.UiTextField;
@@ -42,7 +42,7 @@ import org.martus.swing.Utilities;
 
 public class UiStringInputDlg extends JDialog
 {
-	public UiStringInputDlg(JFrame owner, UiBasicLocalization localization, String baseTag, String descriptionTag, String rawDescriptionText, String defaultText)
+	public UiStringInputDlg(JFrame owner, UiLocalization localization, String baseTag, String descriptionTag, String rawDescriptionText, String defaultText)
 	{
 		super(owner, "", true);
 

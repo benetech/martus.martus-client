@@ -60,11 +60,11 @@ import org.martus.client.core.TransferableBulletinList;
 import org.martus.client.core.ClientBulletinStore.BulletinAlreadyExistsException;
 import org.martus.client.core.ClientBulletinStore.BulletinOlderException;
 import org.martus.client.swingui.UiClipboardUtilities;
-import org.martus.client.swingui.UiLocalization;
+import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.foldertree.FolderNode;
 import org.martus.common.bulletin.Bulletin;
-import org.martus.common.clientside.UiBasicLocalization;
+import org.martus.common.clientside.UiLocalization;
 import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.packet.UniversalId;
 import org.martus.swing.UiNotifyDlg;
@@ -102,7 +102,7 @@ public class UiBulletinTable extends UiTable implements ListSelectionListener, D
     {
     	int width = getColumnHeaderWidth(COLUMN_STATUS);
 
-    	UiLocalization localization = mainWindow.getLocalization();
+    	MartusLocalization localization = mainWindow.getLocalization();
 		int draftWidth = getRenderedWidth(COLUMN_STATUS, localization.getStatusLabel(Bulletin.STATUSDRAFT));
     	if(draftWidth > width)
     		width = draftWidth;
@@ -117,7 +117,7 @@ public class UiBulletinTable extends UiTable implements ListSelectionListener, D
     {
     	int width = getColumnHeaderWidth(COLUMN_SENT);
 
-    	UiLocalization localization = mainWindow.getLocalization();
+    	MartusLocalization localization = mainWindow.getLocalization();
 		int sentYes = getRenderedWidth(COLUMN_SENT, localization.getFieldLabel(ClientBulletinStore.WAS_SENT_YES));
     	if(sentYes > width)
     		width = sentYes;
@@ -456,7 +456,7 @@ public class UiBulletinTable extends UiTable implements ListSelectionListener, D
 
 	public boolean confirmDeletionOfFile(String filePath)
 	{
-		UiBasicLocalization localization = mainWindow.getLocalization();
+		UiLocalization localization = mainWindow.getLocalization();
 		String title = localization.getWindowTitle("DeleteBulletinFile");
 		String msg1 = localization.getFieldLabel("DeleteBulletinFileMsg1");
 		String msg2 = localization.getFieldLabel("DeleteBulletinFileMsg2");
@@ -706,7 +706,7 @@ public class UiBulletinTable extends UiTable implements ListSelectionListener, D
 
 	private boolean confirmDeleteBulletins(String tagMain, String tagUnsent, String tagInOtherFolders, Vector foldersToList)
 	{
-		UiBasicLocalization localization = mainWindow.getLocalization();
+		UiLocalization localization = mainWindow.getLocalization();
 		String title = localization.getWindowTitle(tagMain);
 
 		Vector strings = new Vector();
@@ -731,7 +731,7 @@ public class UiBulletinTable extends UiTable implements ListSelectionListener, D
 
 	private String buildFolderNameList(Vector visibleFoldersContainingThisBulletin)
 	{
-		UiBasicLocalization localization = mainWindow.getLocalization();
+		UiLocalization localization = mainWindow.getLocalization();
 		String names = "";
 		for(int i = 0 ; i < visibleFoldersContainingThisBulletin.size() ; ++i)
 		{

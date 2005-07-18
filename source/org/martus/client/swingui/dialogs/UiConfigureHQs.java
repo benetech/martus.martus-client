@@ -52,7 +52,7 @@ import org.martus.client.swingui.renderers.StringRenderer;
 import org.martus.common.HQKey;
 import org.martus.common.HQKeys;
 import org.martus.common.HQKeys.HQsException;
-import org.martus.common.clientside.UiBasicLocalization;
+import org.martus.common.clientside.UiLocalization;
 import org.martus.common.crypto.MartusCrypto;
 import org.martus.swing.UiButton;
 import org.martus.swing.UiFileChooser;
@@ -389,6 +389,6 @@ public class UiConfigureHQs extends JDialog
 	HeadQuartersTableModelConfiguration model;
 	JButton remove;
 	JButton renameLabel;
-	UiBasicLocalization localization;
+	UiLocalization localization;
 	private static final int DEFAULT_VIEABLE_ROWS = 5;
 }

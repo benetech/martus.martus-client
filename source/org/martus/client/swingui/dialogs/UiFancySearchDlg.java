@@ -29,7 +29,7 @@ package org.martus.client.swingui.dialogs;
 import javax.swing.Box;
 
 import org.martus.client.search.FancySearchGridEditor;
-import org.martus.client.swingui.UiLocalization;
+import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.swing.UiButton;
 import org.martus.swing.UiWrappedTextArea;
@@ -41,7 +41,7 @@ public class UiFancySearchDlg extends UiSearchDlg
 		super(owner);
 	}
 	
-	UiButton createBody(UiLocalization localization)
+	UiButton createBody(MartusLocalization localization)
 	{
 		setTitle(localization.getWindowTitle("search"));
 		

@@ -55,7 +55,7 @@ import org.martus.client.swingui.bulletincomponent.UiBulletinEditor;
 import org.martus.client.swingui.fields.UiDateEditor;
 import org.martus.client.swingui.fields.UiFlexiDateEditor;
 import org.martus.common.bulletin.Bulletin;
-import org.martus.common.clientside.UiBasicLocalization;
+import org.martus.common.clientside.UiLocalization;
 import org.martus.common.crypto.MartusCrypto.CryptoException;
 import org.martus.common.crypto.MartusCrypto.EncryptionException;
 import org.martus.swing.UiButton;
@@ -68,7 +68,7 @@ public class UiBulletinModifyDlg extends JFrame implements ActionListener, Windo
 	{
 		observer = observerToUse;
 
-		UiBasicLocalization localization = observer.getLocalization();
+		UiLocalization localization = observer.getLocalization();
 		setTitle(localization.getWindowTitle("create"));
 		UiMainWindow.updateIcon(this);
 		try

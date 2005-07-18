@@ -32,12 +32,12 @@ import org.martus.client.core.BulletinFolder;
 import org.martus.client.core.ClientBulletinStore;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.bulletin.BulletinConstants;
-import org.martus.common.clientside.UiBasicLocalization;
+import org.martus.common.clientside.UiLocalization;
 import org.martus.common.packet.UniversalId;
 
 public class BulletinTableModel extends AbstractTableModel
 {
-    public BulletinTableModel(UiBasicLocalization localizationToUse)
+    public BulletinTableModel(UiLocalization localizationToUse)
     {
 		localization = localizationToUse;
     }
@@ -153,6 +153,6 @@ public class BulletinTableModel extends AbstractTableModel
 	};
 
 
-	UiBasicLocalization localization;
+	UiLocalization localization;
 	BulletinFolder folder;
 }

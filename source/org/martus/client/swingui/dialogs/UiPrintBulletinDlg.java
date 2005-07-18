@@ -35,7 +35,7 @@ import javax.swing.JDialog;
 import javax.swing.border.EmptyBorder;
 
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.common.clientside.UiBasicLocalization;
+import org.martus.common.clientside.UiLocalization;
 import org.martus.swing.UiButton;
 import org.martus.swing.UiCheckBox;
 import org.martus.swing.UiParagraphPanel;
@@ -55,7 +55,7 @@ public class UiPrintBulletinDlg extends JDialog implements ActionListener
 	
 	private void init()
 	{
-		UiBasicLocalization localization = mainWindow.getLocalization();
+		UiLocalization localization = mainWindow.getLocalization();
 		setTitle(localization.getWindowTitle("PrintPrivateData"));
 		
 		includePrivate = new UiCheckBox(localization.getFieldLabel("PrintPrivateData"));

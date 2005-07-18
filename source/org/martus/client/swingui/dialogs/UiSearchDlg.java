@@ -32,9 +32,9 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 
-import org.martus.client.swingui.UiLocalization;
+import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.common.clientside.UiBasicLocalization;
+import org.martus.common.clientside.UiLocalization;
 import org.martus.swing.UiButton;
 import org.martus.swing.Utilities;
 
@@ -52,7 +52,7 @@ public abstract class UiSearchDlg extends JDialog  implements ActionListener
 		setVisible(true);
 	}
 	
-	abstract UiButton createBody(UiLocalization localization);
+	abstract UiButton createBody(MartusLocalization localization);
 	abstract public String getSearchString();
 	abstract void memorizeSearch();
 
@@ -72,14 +72,14 @@ public abstract class UiSearchDlg extends JDialog  implements ActionListener
 		return result;
 	}
 
-	public UiBasicLocalization getLocalization()
+	public UiLocalization getLocalization()
 	{
 		return localization;
 	}
 
 
 	boolean result;
-	UiLocalization localization;
+	MartusLocalization localization;
 	
 	protected JButton searchButton;
 

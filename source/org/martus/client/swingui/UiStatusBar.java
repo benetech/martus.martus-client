@@ -38,7 +38,7 @@ import org.martus.swing.Utilities;
 public class UiStatusBar extends JPanel
 {
 
-	public UiStatusBar(UiLocalization localization)
+	public UiStatusBar(MartusLocalization localization)
 	{
 		super();
 		setLayout( new BoxLayout( this, BoxLayout.X_AXIS) );

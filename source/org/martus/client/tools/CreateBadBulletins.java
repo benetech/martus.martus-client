@@ -35,7 +35,7 @@ import org.martus.client.core.MartusApp;
 import org.martus.client.core.ClientBulletinStore.BulletinAlreadyExistsException;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.bulletin.BulletinConstants;
-import org.martus.common.clientside.Localization;
+import org.martus.common.clientside.MtfAwareLocalization;
 import org.martus.common.crypto.MartusCrypto;
 import org.martus.common.crypto.MartusCrypto.CryptoException;
 import org.martus.common.test.BulletinForTesting;
@@ -61,7 +61,7 @@ public class CreateBadBulletins
 		System.out.println();
 		
 		File codeDirectory = MartusApp.getTranslationsDirectory();
-		MartusApp app = new MartusApp(new Localization(codeDirectory));
+		MartusApp app = new MartusApp(new MtfAwareLocalization(codeDirectory));
 	
 		String userName = getUserInput("username:");
 		String userPassPhrase = getUserInput("passphrase:");

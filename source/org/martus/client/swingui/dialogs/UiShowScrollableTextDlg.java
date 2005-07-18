@@ -43,8 +43,8 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.common.clientside.Localization;
-import org.martus.common.clientside.UiBasicLocalization;
+import org.martus.common.clientside.MtfAwareLocalization;
+import org.martus.common.clientside.UiLocalization;
 import org.martus.swing.UiButton;
 import org.martus.swing.UiLabel;
 import org.martus.swing.UiScrollPane;
@@ -69,14 +69,14 @@ public class UiShowScrollableTextDlg extends JDialog implements ActionListener
 
 		try 
 		{
-			UiBasicLocalization localization = mainWindow.getLocalization();
+			UiLocalization localization = mainWindow.getLocalization();
 			String windowTitle = localization.getWindowTitle(titleTag);
 			setTitle(TokenReplacement.replaceTokens(windowTitle, tokenReplacement));
 			String buttonLabel = localization.getButtonLabel(okButtonTag);
 			ok = new UiButton(TokenReplacement.replaceTokens(buttonLabel, tokenReplacement));
 			ok.addActionListener(this);
 			JButton cancel = null;
-			if(!cancelButtonTag.equals(Localization.UNUSED_TAG))
+			if(!cancelButtonTag.equals(MtfAwareLocalization.UNUSED_TAG))
 			{
 				buttonLabel = localization.getButtonLabel(cancelButtonTag);
 				cancel = new UiButton(TokenReplacement.replaceTokens(buttonLabel, tokenReplacement));
@@ -94,7 +94,7 @@ public class UiShowScrollableTextDlg extends JDialog implements ActionListener
 			panel.setBorder(new EmptyBorder(10,10,10,10));
 			panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 			
-			if(!descriptionTag.equals(Localization.UNUSED_TAG))
+			if(!descriptionTag.equals(MtfAwareLocalization.UNUSED_TAG))
 			{
 				String fieldLabel = localization.getFieldLabel(descriptionTag);
 				fieldLabel = TokenReplacement.replaceTokens(fieldLabel, tokenReplacement);

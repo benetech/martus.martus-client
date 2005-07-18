@@ -34,7 +34,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.border.EtchedBorder;
 
-import org.martus.client.swingui.UiLocalization;
+import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.dialogs.UiBulletinDetailsDialog;
 import org.martus.common.bulletin.Bulletin;
@@ -49,7 +49,7 @@ public class UiBulletinComponentHeaderSection extends UiBulletinComponentSection
 	{
 		super(mainWindowToUse);
 		tagQualifier = tagQualifierToUse;
-		UiLocalization localization = getLocalization();
+		MartusLocalization localization = getLocalization();
 		String buttonText = localization.getButtonLabel("BulletinDetails");
 		JButton detailsButton = new UiButton(buttonText);
 		detailsButton.addActionListener(new DetailsListener());

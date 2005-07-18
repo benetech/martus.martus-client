@@ -28,7 +28,7 @@ package org.martus.client.swingui.fields;
 import javax.swing.JComponent;
 import javax.swing.ListSelectionModel;
 
-import org.martus.client.swingui.UiLocalization;
+import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.grids.GridTable;
 import org.martus.client.swingui.grids.GridTableModel;
 import org.martus.common.GridData;
@@ -39,12 +39,12 @@ import org.martus.swing.UiTable;
 
 public class UiGrid extends UiField
 {
-	public UiGrid(GridFieldSpec fieldSpec, UiLocalization localization)
+	public UiGrid(GridFieldSpec fieldSpec, MartusLocalization localization)
 	{
 		this(new GridTableModel(fieldSpec), localization);
 	}
 	
-	public UiGrid(GridTableModel modelToUse, UiLocalization localization)
+	public UiGrid(GridTableModel modelToUse, MartusLocalization localization)
 	{
 		model = modelToUse;
 		table = new GridTable(model, localization);

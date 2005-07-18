@@ -28,13 +28,13 @@ package org.martus.client.swingui.tablemodels;
 
 import org.martus.client.core.MartusApp;
 import org.martus.common.MartusUtilities.ServerErrorException;
-import org.martus.common.clientside.UiBasicLocalization;
+import org.martus.common.clientside.UiLocalization;
 
 
 
 public class RetrieveMyTableModel extends RetrieveTableModelNonHQ
 {
-	public RetrieveMyTableModel(MartusApp appToUse, UiBasicLocalization localizationToUse)
+	public RetrieveMyTableModel(MartusApp appToUse, UiLocalization localizationToUse)
 	{
 		super(appToUse, localizationToUse);
 	}

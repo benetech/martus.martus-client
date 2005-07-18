@@ -42,7 +42,7 @@ import javax.swing.JLabel;
 import org.martus.client.swingui.UiConstants;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.common.VersionBuildDate;
-import org.martus.common.clientside.UiBasicLocalization;
+import org.martus.common.clientside.UiLocalization;
 import org.martus.swing.UiButton;
 import org.martus.swing.UiLabel;
 import org.martus.swing.UiWrappedTextArea;
@@ -60,7 +60,7 @@ public class UiAboutDlg extends JDialog implements ActionListener
 //		System.out.println("Cumulative time in XmlPacketLoader " + XmlPacketLoader.millisInXmlPacketLoader);
 
 		
-		UiBasicLocalization localization = owner.getLocalization();
+		UiLocalization localization = owner.getLocalization();
 		
 		setTitle(localization.getWindowTitle("about"));
 

@@ -36,7 +36,7 @@ import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 
 import org.martus.common.clientside.CurrentUiState;
-import org.martus.common.clientside.UiBasicLocalization;
+import org.martus.common.clientside.UiLocalization;
 import org.martus.swing.UiLabel;
 import org.martus.swing.UiParagraphPanel;
 import org.martus.swing.UiRadioButton;
@@ -47,7 +47,7 @@ import org.martus.swing.Utilities;
 
 public class UiInitialSigninDlg extends UiSigninDlg
 {
-	public UiInitialSigninDlg(UiBasicLocalization localizationToUse, CurrentUiState uiStateToUse, JFrame owner, int mode, String userName, char[] password)
+	public UiInitialSigninDlg(UiLocalization localizationToUse, CurrentUiState uiStateToUse, JFrame owner, int mode, String userName, char[] password)
 	{
 		super(localizationToUse, uiStateToUse, owner, mode, userName, password);
 	}

@@ -38,7 +38,7 @@ import javax.swing.tree.TreePath;
 
 import org.martus.client.core.BulletinFolder;
 import org.martus.client.core.ClientBulletinStore;
-import org.martus.client.swingui.UiLocalization;
+import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.swing.UiPopupMenu;
 import org.martus.swing.UiScrollPane;
@@ -292,7 +292,7 @@ public class UiFolderTreePane extends UiScrollPane
 
 
 	UiMainWindow parent;
-	UiLocalization localization;
+	MartusLocalization localization;
 	ClientBulletinStore store;
 	FolderList model;
 	UiFolderTree tree;

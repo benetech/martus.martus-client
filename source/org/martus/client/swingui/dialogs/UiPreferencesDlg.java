@@ -33,10 +33,10 @@ import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JDialog;
 
-import org.martus.client.swingui.UiLocalization;
+import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.fields.UiChoiceEditor;
-import org.martus.common.clientside.UiBasicLocalization;
+import org.martus.common.clientside.UiLocalization;
 import org.martus.common.fieldspec.DropDownFieldSpec;
 import org.martus.common.utilities.DateUtilities;
 import org.martus.swing.UiButton;
@@ -53,7 +53,7 @@ public class UiPreferencesDlg extends JDialog implements ActionListener
 	{
 		super(mainWindow, "", true);
 		owner = mainWindow;
-		UiBasicLocalization localization = owner.getLocalization();
+		UiLocalization localization = owner.getLocalization();
 		
 		setTitle(localization.getMenuLabel("Preferences"));
 		
@@ -94,7 +94,7 @@ public class UiPreferencesDlg extends JDialog implements ActionListener
 		
 		if(ae.getSource() == ok)
 		{
-			UiLocalization localization = owner.getLocalization();
+			MartusLocalization localization = owner.getLocalization();
 			String languageCodeSelected = languageDropdown.getText();
 			if(!localization.isOfficialTranslation(languageCodeSelected))
 				UiMainWindow.displayDefaultUnofficialTranslationMessage(owner.getCurrentActiveFrame());
