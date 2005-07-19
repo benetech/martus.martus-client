@@ -28,7 +28,7 @@ package org.martus.client.swingui;
 import java.io.File;
 import java.util.Vector;
 
-import org.martus.common.clientside.UiLocalization;
+import org.martus.clientside.UiLocalization;
 
 public class MartusLocalization extends UiLocalization 
 {

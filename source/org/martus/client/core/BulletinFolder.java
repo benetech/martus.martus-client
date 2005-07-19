@@ -32,8 +32,8 @@ import java.util.Comparator;
 import java.util.Vector;
 
 import org.martus.client.core.ClientBulletinStore.BulletinAlreadyExistsException;
+import org.martus.clientside.UiLocalization;
 import org.martus.common.bulletin.Bulletin;
-import org.martus.common.clientside.UiLocalization;
 import org.martus.common.database.DatabaseKey;
 import org.martus.common.database.ReadableDatabase;
 import org.martus.common.packet.UniversalId;

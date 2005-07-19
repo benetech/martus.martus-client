@@ -35,8 +35,8 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 
-import org.martus.common.clientside.CurrentUiState;
-import org.martus.common.clientside.UiLocalization;
+import org.martus.clientside.CurrentUiState;
+import org.martus.clientside.UiLocalization;
 import org.martus.swing.UiLabel;
 import org.martus.swing.UiParagraphPanel;
 import org.martus.swing.UiRadioButton;

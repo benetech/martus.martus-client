@@ -31,7 +31,7 @@ import java.util.Vector;
 import javax.swing.tree.DefaultTreeModel;
 
 import org.martus.client.core.ClientBulletinStore;
-import org.martus.common.clientside.UiLocalization;
+import org.martus.clientside.UiLocalization;
 
 public class FolderList extends DefaultTreeModel
 {

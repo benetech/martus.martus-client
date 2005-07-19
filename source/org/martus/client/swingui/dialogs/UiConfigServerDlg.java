@@ -35,7 +35,7 @@ import javax.swing.JDialog;
 import org.martus.client.core.ConfigInfo;
 import org.martus.client.core.MartusApp;
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.common.clientside.UiLocalization;
+import org.martus.clientside.UiLocalization;
 import org.martus.common.crypto.MartusCrypto;
 import org.martus.swing.UiButton;
 import org.martus.swing.UiLabel;

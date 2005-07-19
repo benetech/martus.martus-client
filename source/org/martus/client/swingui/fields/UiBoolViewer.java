@@ -32,7 +32,7 @@ import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.border.LineBorder;
 
-import org.martus.common.clientside.UiLocalization;
+import org.martus.clientside.UiLocalization;
 import org.martus.common.fieldspec.FieldSpec;
 import org.martus.swing.UiLabel;
 

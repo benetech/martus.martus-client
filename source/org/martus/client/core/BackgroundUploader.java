@@ -35,13 +35,13 @@ import java.util.Random;
 import java.util.Vector;
 
 import org.martus.client.core.MartusApp.SaveConfigInfoException;
+import org.martus.clientside.ClientSideNetworkGateway;
 import org.martus.common.ContactInfo;
 import org.martus.common.MartusUtilities;
 import org.martus.common.ProgressMeterInterface;
 import org.martus.common.MartusUtilities.FileTooLargeException;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.bulletin.BulletinZipUtilities;
-import org.martus.common.clientside.ClientSideNetworkGateway;
 import org.martus.common.crypto.MartusCrypto;
 import org.martus.common.crypto.MartusCrypto.CryptoException;
 import org.martus.common.crypto.MartusCrypto.DecryptionException;

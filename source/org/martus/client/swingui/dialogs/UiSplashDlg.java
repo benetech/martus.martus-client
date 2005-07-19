@@ -39,7 +39,7 @@ import javax.swing.border.EmptyBorder;
 
 import org.martus.client.swingui.UiConstants;
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.common.clientside.UiLocalization;
+import org.martus.clientside.UiLocalization;
 import org.martus.swing.UiButton;
 import org.martus.swing.UiLabel;
 import org.martus.swing.Utilities;

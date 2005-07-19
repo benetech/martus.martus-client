@@ -34,7 +34,7 @@ import javax.swing.JDialog;
 
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.common.clientside.UiLocalization;
+import org.martus.clientside.UiLocalization;
 import org.martus.swing.UiButton;
 import org.martus.swing.Utilities;
 

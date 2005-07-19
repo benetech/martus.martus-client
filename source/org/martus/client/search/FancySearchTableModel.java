@@ -30,7 +30,7 @@ import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 
 import org.martus.client.swingui.grids.GridTableModel;
-import org.martus.common.clientside.ChoiceItem;
+import org.martus.common.fieldspec.ChoiceItem;
 import org.martus.common.fieldspec.DropDownFieldSpec;
 import org.martus.common.fieldspec.GridFieldSpec;
 

@@ -29,8 +29,8 @@ package org.martus.client.test;
 import org.martus.client.core.ClientBulletinStore;
 import org.martus.client.swingui.foldertree.FolderList;
 import org.martus.client.swingui.foldertree.FolderTreeNode;
-import org.martus.common.clientside.UiLocalization;
-import org.martus.common.clientside.test.*;
+import org.martus.clientside.UiLocalization;
+import org.martus.clientside.test.*;
 import org.martus.common.database.MockClientDatabase;
 import org.martus.util.TestCaseEnhanced;
 

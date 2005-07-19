@@ -36,7 +36,7 @@ import javax.swing.JDialog;
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.fields.UiChoiceEditor;
-import org.martus.common.clientside.UiLocalization;
+import org.martus.clientside.UiLocalization;
 import org.martus.common.fieldspec.DropDownFieldSpec;
 import org.martus.common.utilities.DateUtilities;
 import org.martus.swing.UiButton;

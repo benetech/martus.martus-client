@@ -33,9 +33,9 @@ import javax.swing.JLabel;
 import org.martus.client.core.LanguageChangeListener;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.fields.UiChoiceEditor;
-import org.martus.common.clientside.CurrentUiState;
-import org.martus.common.clientside.UiLocalization;
-import org.martus.common.clientside.UiBasicSigninDlg;
+import org.martus.clientside.CurrentUiState;
+import org.martus.clientside.UiBasicSigninDlg;
+import org.martus.clientside.UiLocalization;
 import org.martus.common.fieldspec.DropDownFieldSpec;
 
 public class UiSigninDlg extends UiBasicSigninDlg implements LanguageChangeListener

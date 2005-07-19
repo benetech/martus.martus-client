@@ -29,8 +29,8 @@ package org.martus.client.swingui.tablemodels;
 import java.util.Vector;
 
 import org.martus.client.core.MartusApp;
+import org.martus.clientside.UiLocalization;
 import org.martus.common.MartusUtilities.ServerErrorException;
-import org.martus.common.clientside.UiLocalization;
 
 
 

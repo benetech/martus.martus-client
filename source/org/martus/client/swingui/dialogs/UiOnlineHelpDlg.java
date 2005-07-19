@@ -53,7 +53,7 @@ import javax.swing.text.DefaultHighlighter;
 import javax.swing.text.DefaultHighlighter.DefaultHighlightPainter;
 
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.common.clientside.UiLocalization;
+import org.martus.clientside.UiLocalization;
 import org.martus.swing.UiButton;
 import org.martus.swing.UiList;
 import org.martus.swing.UiScrollPane;

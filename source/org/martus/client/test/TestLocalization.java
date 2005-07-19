@@ -34,14 +34,14 @@ import java.util.Vector;
 import javax.swing.SwingConstants;
 
 import org.martus.client.swingui.EnglishStrings;
-import org.martus.client.swingui.UiConstants;
 import org.martus.client.swingui.MartusLocalization;
+import org.martus.client.swingui.UiConstants;
 import org.martus.client.swingui.UiMainWindow;
+import org.martus.clientside.MtfAwareLocalization;
+import org.martus.clientside.UiLocalization;
 import org.martus.common.MartusUtilities;
 import org.martus.common.MiniLocalization.NoDateSeparatorException;
-import org.martus.common.clientside.ChoiceItem;
-import org.martus.common.clientside.MtfAwareLocalization;
-import org.martus.common.clientside.UiLocalization;
+import org.martus.common.fieldspec.ChoiceItem;
 import org.martus.common.utilities.DateUtilities;
 import org.martus.jarverifier.JarVerifier;
 import org.martus.swing.UiLanguageDirection;

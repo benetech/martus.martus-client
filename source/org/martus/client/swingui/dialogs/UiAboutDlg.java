@@ -41,8 +41,8 @@ import javax.swing.JLabel;
 
 import org.martus.client.swingui.UiConstants;
 import org.martus.client.swingui.UiMainWindow;
+import org.martus.clientside.UiLocalization;
 import org.martus.common.VersionBuildDate;
-import org.martus.common.clientside.UiLocalization;
 import org.martus.swing.UiButton;
 import org.martus.swing.UiLabel;
 import org.martus.swing.UiWrappedTextArea;

@@ -35,10 +35,10 @@ import java.util.Vector;
 
 import org.martus.client.core.MartusApp;
 import org.martus.client.core.MartusApp.SaveConfigInfoException;
+import org.martus.clientside.MtfAwareLocalization;
 import org.martus.common.MartusConstants;
 import org.martus.common.MartusUtilities;
 import org.martus.common.Version;
-import org.martus.common.clientside.MtfAwareLocalization;
 import org.martus.common.crypto.MartusCrypto.KeyShareException;
 import org.martus.swing.UiFileChooser;
 import org.martus.util.UnicodeReader;

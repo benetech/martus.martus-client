@@ -36,8 +36,8 @@ import javax.swing.JProgressBar;
 import javax.swing.border.BevelBorder;
 
 import org.martus.client.swingui.dialogs.UiProgressRetrieveDlg;
+import org.martus.clientside.UiLocalization;
 import org.martus.common.ProgressMeterInterface;
-import org.martus.common.clientside.UiLocalization;
 import org.martus.swing.UiLabel;
 import org.martus.swing.UiLanguageDirection;
 import org.martus.swing.Utilities;

@@ -31,9 +31,9 @@ import java.util.Vector;
 
 
 import org.martus.client.swingui.tablemodels.UiTableModel;
+import org.martus.clientside.UiLocalization;
 import org.martus.common.HQKey;
 import org.martus.common.HQKeys;
-import org.martus.common.clientside.UiLocalization;
 
 public abstract class HeadQuartersTableModel extends UiTableModel 
 {

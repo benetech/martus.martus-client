@@ -35,8 +35,8 @@ import java.util.GregorianCalendar;
 import javax.swing.Box;
 import javax.swing.JComponent;
 
+import org.martus.clientside.UiLocalization;
 import org.martus.common.bulletin.Bulletin;
-import org.martus.common.clientside.UiLocalization;
 import org.martus.common.utilities.DateUtilities;
 import org.martus.swing.UiComboBox;
 import org.martus.swing.Utilities;

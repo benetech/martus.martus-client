@@ -54,8 +54,8 @@ import org.martus.client.swingui.bulletincomponent.UiBulletinComponentEditorSect
 import org.martus.client.swingui.bulletincomponent.UiBulletinEditor;
 import org.martus.client.swingui.fields.UiDateEditor;
 import org.martus.client.swingui.fields.UiFlexiDateEditor;
+import org.martus.clientside.UiLocalization;
 import org.martus.common.bulletin.Bulletin;
-import org.martus.common.clientside.UiLocalization;
 import org.martus.common.crypto.MartusCrypto.CryptoException;
 import org.martus.common.crypto.MartusCrypto.EncryptionException;
 import org.martus.swing.UiButton;

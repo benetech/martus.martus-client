@@ -29,7 +29,7 @@ package org.martus.client.swingui.fields;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
 
-import org.martus.common.clientside.UiLocalization;
+import org.martus.clientside.UiLocalization;
 import org.martus.swing.UiLabel;
 
 public class UiDateViewer extends UiField

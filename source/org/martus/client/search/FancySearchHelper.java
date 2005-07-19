@@ -30,8 +30,8 @@ import java.util.Vector;
 
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.common.GridData;
-import org.martus.common.clientside.ChoiceItem;
 import org.martus.common.field.MartusDateRangeField;
+import org.martus.common.fieldspec.ChoiceItem;
 import org.martus.common.fieldspec.DropDownFieldSpec;
 import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.fieldspec.GridFieldSpec;

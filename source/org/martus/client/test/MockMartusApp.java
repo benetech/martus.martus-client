@@ -31,9 +31,9 @@ import java.io.IOException;
 
 import org.martus.client.core.BulletinFolder;
 import org.martus.client.core.MartusApp;
+import org.martus.clientside.UiLocalization;
 import org.martus.common.MartusUtilities.FileVerificationException;
 import org.martus.common.bulletin.Bulletin;
-import org.martus.common.clientside.UiLocalization;
 import org.martus.common.crypto.MartusCrypto;
 import org.martus.common.crypto.MockMartusSecurity;
 import org.martus.common.database.Database;

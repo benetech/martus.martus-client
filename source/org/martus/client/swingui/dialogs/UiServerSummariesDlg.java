@@ -49,7 +49,7 @@ import org.martus.client.swingui.renderers.BooleanRenderer;
 import org.martus.client.swingui.renderers.IntegerRenderer;
 import org.martus.client.swingui.renderers.StringRenderer;
 import org.martus.client.swingui.tablemodels.RetrieveTableModel;
-import org.martus.common.clientside.UiLocalization;
+import org.martus.clientside.UiLocalization;
 import org.martus.common.packet.FieldDataPacket;
 import org.martus.swing.ParagraphLayout;
 import org.martus.swing.UiButton;

@@ -28,7 +28,7 @@ package org.martus.client.swingui.foldertree;
 
 import javax.swing.tree.DefaultMutableTreeNode;
 
-import org.martus.common.clientside.UiLocalization;
+import org.martus.clientside.UiLocalization;
 
 public class FolderTreeNode extends DefaultMutableTreeNode
 {

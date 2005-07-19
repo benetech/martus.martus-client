@@ -30,7 +30,7 @@ import javax.swing.JComponent;
 import javax.swing.JLabel;
 
 import org.martus.client.swingui.UiWarningLabel;
-import org.martus.common.clientside.UiLocalization;
+import org.martus.clientside.UiLocalization;
 
 public class UiUnknownViewer extends UiField
 {
