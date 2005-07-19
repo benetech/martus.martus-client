@@ -38,9 +38,8 @@ import org.xml.sax.SAXException;
 
 public class GridTableModel extends AbstractTableModel
 {
-	public GridTableModel(GridFieldSpec fieldSpecToUse)
+	public GridTableModel(GridFieldSpec fieldSpec)
 	{
-		fieldSpec = fieldSpecToUse;
 		gridData = new GridData(fieldSpec);
 	}
 	
@@ -74,15 +73,15 @@ public class GridTableModel extends AbstractTableModel
 	public String getColumnName(int column) 
 	{
 		if(column == 0)
-			return fieldSpec.getColumnZeroLabel();
-		return (String)fieldSpec.getAllColumnLabels().get(column - EXTRA_COLUMN);
+			return getGridFieldSpec().getColumnZeroLabel();
+		return (String)getGridFieldSpec().getAllColumnLabels().get(column - EXTRA_COLUMN);
 	}
 	
 	public int getColumnType(int column) 
 	{
 		if(column == 0)
 			return FieldSpec.TYPE_NORMAL;
-		return fieldSpec.getColumnType(column - EXTRA_COLUMN);
+		return getGridFieldSpec().getColumnType(column - EXTRA_COLUMN);
 	}
 	
 	public int getCellType(int row, int column)
@@ -94,7 +93,7 @@ public class GridTableModel extends AbstractTableModel
 	{
 		if(column == 0)
 			return new FieldSpec(FieldSpec.TYPE_NORMAL);
-		return fieldSpec.getFieldSpec(column - EXTRA_COLUMN);
+		return getGridFieldSpec().getFieldSpec(column - EXTRA_COLUMN);
 	}
 
 	public Object getValueAt(int row, int column)
@@ -129,7 +128,11 @@ public class GridTableModel extends AbstractTableModel
 		fireTableDataChanged();
 	}
 
+	private GridFieldSpec getGridFieldSpec()
+	{
+		return gridData.getSpec();
+	}
+
 	private int EXTRA_COLUMN = 1;
 	private GridData gridData;
-	private GridFieldSpec fieldSpec;
 }
