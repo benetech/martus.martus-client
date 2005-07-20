@@ -41,13 +41,13 @@ import java.util.Set;
 import java.util.Vector;
 import java.util.zip.ZipFile;
 
-import org.martus.common.BulletinStore;
 import org.martus.common.MartusUtilities;
 import org.martus.common.MartusXml;
 import org.martus.common.MartusUtilities.FileVerificationException;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.bulletin.BulletinLoader;
 import org.martus.common.bulletin.BulletinZipImporter;
+import org.martus.common.bulletinstore.BulletinStore;
 import org.martus.common.crypto.MartusCrypto;
 import org.martus.common.crypto.MartusCrypto.CryptoException;
 import org.martus.common.crypto.MartusCrypto.MartusSignatureException;
