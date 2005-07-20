@@ -26,8 +26,10 @@ Boston, MA 02111-1307, USA.
 
 package org.martus.client.search;
 
+import java.util.Arrays;
 import java.util.Vector;
 
+import org.martus.client.bulletinstore.ClientBulletinStore;
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.common.GridData;
 import org.martus.common.field.MartusDateRangeField;
@@ -42,10 +44,10 @@ import org.martus.util.TokenReplacement.TokenInvalidException;
 
 public class FancySearchHelper
 {
-	public FancySearchHelper(MartusLocalization localizationToUse)
+	public FancySearchHelper(ClientBulletinStore storeToUse, MartusLocalization localizationToUse)
 	{
 		localization = localizationToUse;
-		model = new FancySearchTableModel(getGridSpec());
+		model = new FancySearchTableModel(getGridSpec(storeToUse));
 	}
 	
 	MartusLocalization getLocalization()
@@ -58,14 +60,14 @@ public class FancySearchHelper
 		return model;
 	}
 	
-	public DropDownFieldSpec createFieldColumnSpec()
+	public DropDownFieldSpec createFieldColumnSpec(ClientBulletinStore storeToUse)
 	{
 		Vector allAvailableFields = new Vector();
 		allAvailableFields.add(new ChoiceItem("", getLocalization().getFieldLabel("SearchAnyField"), FieldSpec.TYPE_NORMAL));
-		allAvailableFields.addAll(convertToChoiceItems(StandardFieldSpecs.getDefaultPublicFieldSpecs()));
-		allAvailableFields.addAll(convertToChoiceItems(StandardFieldSpecs.getDefaultPrivateFieldSpecs()));
+		allAvailableFields.addAll(convertToChoiceItems(storeToUse.getAllKnownFieldSpecs()));
 
 		ChoiceItem[] fieldChoices = (ChoiceItem[])allAvailableFields.toArray(new ChoiceItem[0]);
+		Arrays.sort(fieldChoices);
 		                                  
 		DropDownFieldSpec fieldColumnSpec = new DropDownFieldSpec();
 		fieldColumnSpec.setLabel(getLocalization().getFieldLabel("SearchGridHeaderField"));
@@ -90,23 +92,24 @@ public class FancySearchHelper
 		return opSpec;
 	}
 	
-	private Vector convertToChoiceItems(FieldSpec[] specs)
+	private Vector convertToChoiceItems(Vector specs)
 	{
 		Vector choices = new Vector();
-		for(int i=0; i < specs.length; ++i)
+		for(int i=0; i < specs.size(); ++i)
 		{
-			String tag = specs[i].getTag();
+			FieldSpec spec = (FieldSpec)specs.get(i);
+			String tag = spec.getTag();
 			String displayString = tag;
 			if(StandardFieldSpecs.isStandardFieldTag(tag))
 				displayString = getLocalization().getFieldLabel(tag);
-			if(specs[i].getType() == FieldSpec.TYPE_DATERANGE)
+			if(spec.getType() == FieldSpec.TYPE_DATERANGE)
 			{
 				addDateRangeChoiceItem(choices, tag, MartusDateRangeField.SUBFIELD_BEGIN, displayString);
 				addDateRangeChoiceItem(choices, tag, MartusDateRangeField.SUBFIELD_END, displayString);
 			}
 			else
 			{
-				ChoiceItem choiceItem = new ChoiceItem(specs[i].getTag(), displayString, specs[i].getType());
+				ChoiceItem choiceItem = new ChoiceItem(spec.getTag(), displayString, spec.getType());
 				choices.add(choiceItem);
 			}
 		}
@@ -130,13 +133,13 @@ public class FancySearchHelper
 		}
 	}
 	
-	public GridFieldSpec getGridSpec()
+	public GridFieldSpec getGridSpec(ClientBulletinStore storeToUse)
 	{
 		GridFieldSpec spec = new GridFieldSpec();
 
 		try
 		{
-			spec.addColumn(createFieldColumnSpec());
+			spec.addColumn(createFieldColumnSpec(storeToUse));
 			spec.addColumn(createOpColumnSpec());
 			
 			String columnTag = "value";

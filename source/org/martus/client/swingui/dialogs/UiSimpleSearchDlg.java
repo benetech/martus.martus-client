@@ -41,8 +41,9 @@ public class UiSimpleSearchDlg extends UiSearchDlg
 		super(owner);
 	}
 
-	UiButton createBody(MartusLocalization localization)
+	UiButton createBody(UiMainWindow mainWindow)
 	{
+		MartusLocalization localization = mainWindow.getLocalization();
 		setTitle(localization.getWindowTitle("search"));
 		
 		UiButton search = new UiButton(localization.getButtonLabel("search"));

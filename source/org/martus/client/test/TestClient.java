@@ -32,6 +32,7 @@ import junit.framework.TestSuite;
 import org.martus.client.bulletinstore.TestBulletinCache;
 import org.martus.client.bulletinstore.TestBulletinFolder;
 import org.martus.client.bulletinstore.TestClientBulletinStore;
+import org.martus.client.bulletinstore.TestKnownFieldSpecCache;
 import org.martus.client.core.TestSafeReadableBulletin;
 import org.martus.client.reports.TestReportFormat;
 import org.martus.client.reports.TestReportRunner;
@@ -71,6 +72,7 @@ public class TestClient
 		suite.addTest(new TestSuite(TestFancySearchTableModel.class));
 		suite.addTest(new TestSuite(TestFolderList.class));
 		suite.addTest(new TestSuite(TestGridTableModel.class));
+		suite.addTest(new TestSuite(TestKnownFieldSpecCache.class));
 		suite.addTest(new TestSuite(TestMartusApp_NoServer.class));
 		suite.addTest(new TestSuite(TestMartusFlexidate.class));
 		suite.addTest(new TestSuite(TestLocalization.class));

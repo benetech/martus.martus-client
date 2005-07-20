@@ -28,6 +28,7 @@ package org.martus.client.search;
 
 import javax.swing.JTable;
 
+import org.martus.client.bulletinstore.ClientBulletinStore;
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.fields.UiGridEditor;
 import org.martus.common.fieldspec.DropDownFieldSpec;
@@ -35,9 +36,9 @@ import org.martus.swing.UiTable;
 
 public class FancySearchGridEditor extends UiGridEditor
 {
-	public static FancySearchGridEditor create(MartusLocalization localization)
+	public static FancySearchGridEditor create(ClientBulletinStore storeToSearch, MartusLocalization localization)
 	{
-		FancySearchHelper helper = new FancySearchHelper(localization);
+		FancySearchHelper helper = new FancySearchHelper(storeToSearch, localization);
 		return new FancySearchGridEditor(helper);
 		
 	}

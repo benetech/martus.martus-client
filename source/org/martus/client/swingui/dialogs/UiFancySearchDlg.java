@@ -41,8 +41,9 @@ public class UiFancySearchDlg extends UiSearchDlg
 		super(owner);
 	}
 	
-	UiButton createBody(MartusLocalization localization)
+	UiButton createBody(UiMainWindow mainWindow)
 	{
+		MartusLocalization localization = mainWindow.getLocalization();
 		setTitle(localization.getWindowTitle("search"));
 		
 		UiButton search = new UiButton(localization.getButtonLabel("search"));
@@ -51,7 +52,7 @@ public class UiFancySearchDlg extends UiSearchDlg
 		UiButton cancel = new UiButton(localization.getButtonLabel("cancel"));
 		cancel.addActionListener(this);
 
-		grid = FancySearchGridEditor.create(localization);
+		grid = FancySearchGridEditor.create(mainWindow.getStore(), localization);
 		grid.setText(getPreviousSearch());
 
 		Box panel = Box.createVerticalBox();

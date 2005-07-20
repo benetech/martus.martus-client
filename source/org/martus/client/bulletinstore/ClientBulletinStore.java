@@ -116,6 +116,10 @@ public class ClientBulletinStore extends BulletinStore
 		
 		File obsoleteCacheFile = new File(getStoreRootDir(), OBSOLETE_CACHE_FILE_NAME);
 		obsoleteCacheFile.delete();
+
+		knownFieldSpecCache = new KnownFieldSpecCache(getDatabase(), getSignatureGenerator());
+		knownFieldSpecCache.restoreCacheFromSavedState();
+		addCache(knownFieldSpecCache);
 	}
 
 	public void prepareToExitNormally()
@@ -1293,6 +1297,16 @@ public class ClientBulletinStore extends BulletinStore
 		return loadedLegacyFolders;
 	}
 	
+	public void populateFieldSpecCacheFromDatabase()
+	{
+		knownFieldSpecCache.clearAndInitialize();
+	}
+	
+	public Vector getAllKnownFieldSpecs()
+	{
+		return knownFieldSpecCache.getAllKnownFieldSpecs();
+	}
+	
 	protected void loadCache()
 	{
 		//System.out.println("BulletinStore.loadCache");
@@ -1404,5 +1418,6 @@ public class ClientBulletinStore extends BulletinStore
 
 	private FieldSpec[] publicFieldSpecs;
 	private FieldSpec[] privateFieldSpecs;
-	BulletinCache bulletinDataCache;	
+	BulletinCache bulletinDataCache;
+	KnownFieldSpecCache knownFieldSpecCache;
 }

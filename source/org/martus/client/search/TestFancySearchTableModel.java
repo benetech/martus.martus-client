@@ -26,7 +26,9 @@ Boston, MA 02111-1307, USA.
 
 package org.martus.client.search;
 
+import org.martus.client.bulletinstore.ClientBulletinStore;
 import org.martus.client.swingui.MartusLocalization;
+import org.martus.client.test.MockMartusApp;
 import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.fieldspec.GridFieldSpec;
 import org.martus.util.TestCaseEnhanced;
@@ -38,11 +40,14 @@ public class TestFancySearchTableModel extends TestCaseEnhanced
 		super(name);
 	}
 
-	public void testGetCellType()
+	public void testGetCellType() throws Exception
 	{
-		
-		FancySearchHelper helper = new FancySearchHelper(new MartusLocalization(null, new String[0]));
-		GridFieldSpec gridSpec = helper.getGridSpec();
+		MockMartusApp app = MockMartusApp.create();
+		ClientBulletinStore store = app.getStore();
+		store.populateFieldSpecCacheFromDatabase();
+		app.loadSampleData();
+		FancySearchHelper helper = new FancySearchHelper(store, new MartusLocalization(null, new String[0]));
+		GridFieldSpec gridSpec = helper.getGridSpec(store);
 		FancySearchTableModel model = new FancySearchTableModel(gridSpec);
 		model.addEmptyRow();
 		model.setValueAt("eventdate.begin", 0, FancySearchTableModel.fieldColumn);

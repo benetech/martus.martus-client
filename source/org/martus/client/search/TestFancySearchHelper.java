@@ -28,7 +28,9 @@ package org.martus.client.search;
 
 import java.io.File;
 
+import org.martus.client.bulletinstore.ClientBulletinStore;
 import org.martus.client.swingui.MartusLocalization;
+import org.martus.client.test.MockMartusApp;
 import org.martus.common.EnglishCommonStrings;
 import org.martus.common.GridData;
 import org.martus.common.bulletin.BulletinConstants;
@@ -47,9 +49,13 @@ public class TestFancySearchHelper extends TestCaseEnhanced
 	
 	public void setUp() throws Exception
 	{
+		MockMartusApp app = MockMartusApp.create();
+		store = app.getStore();
+		store.populateFieldSpecCacheFromDatabase();
+		app.loadSampleData();
 		tempDir = createTempDirectory();
 		localization = new MartusLocalization(tempDir, new String[0]);
-		helper = new FancySearchHelper(localization);
+		helper = new FancySearchHelper(store, localization);
 	}
 	
 	public void tearDown()
@@ -63,7 +69,7 @@ public class TestFancySearchHelper extends TestCaseEnhanced
 		localization.addEnglishTranslations(EnglishCommonStrings.strings);
 		localization.setCurrentLanguageCode(languageCode);
 		
-		DropDownFieldSpec spec = helper.createFieldColumnSpec();
+		DropDownFieldSpec spec = helper.createFieldColumnSpec(store);
 		assertEquals("no empty first entry?", "", spec.getChoice(0).getCode());
 		assertTrue("no author?", spec.findCode(BulletinConstants.TAGAUTHOR) >= 0);
 		assertTrue("no private?", spec.findCode(BulletinConstants.TAGPRIVATEINFO) >= 0);
@@ -84,7 +90,7 @@ public class TestFancySearchHelper extends TestCaseEnhanced
 	
 	public void testCreateGridSpec()
 	{
-		GridFieldSpec spec = helper.getGridSpec();
+		GridFieldSpec spec = helper.getGridSpec(store);
 		assertEquals(3, spec.getColumnCount());
 		assertEquals("no field column?", FieldSpec.TYPE_DROPDOWN, spec.getColumnType(0));
 		assertEquals("no op column?", FieldSpec.TYPE_DROPDOWN, spec.getColumnType(1));
@@ -114,7 +120,8 @@ public class TestFancySearchHelper extends TestCaseEnhanced
 		data.setValueAt(op, row, 1);
 		data.setValueAt(value, row, 2);
 	}
-	
+
+	ClientBulletinStore store;
 	File tempDir;
 	MartusLocalization localization;
 	FancySearchHelper helper;
