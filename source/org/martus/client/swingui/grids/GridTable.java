@@ -27,11 +27,10 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.swingui.grids;
 
 import java.util.HashMap;
-
 import javax.swing.table.TableCellEditor;
 import javax.swing.table.TableCellRenderer;
-
 import org.martus.client.swingui.MartusLocalization;
+import org.martus.common.fieldspec.DropDownFieldSpec;
 import org.martus.common.fieldspec.FieldSpec;
 import org.martus.swing.UiTableWithCellEditingProtection;
 
@@ -51,8 +50,36 @@ public class GridTable extends UiTableWithCellEditingProtection
 		
 		setMaxColumnWidthToHeaderWidth(0);
 		for(int i = 1 ; i < model.getColumnCount(); ++i)
-			setColumnWidthToHeaderWidth(i);
+		{
+			if(model.getColumnType(i)== FieldSpec.TYPE_DROPDOWN)
+				setColumnMaxWidth(i, getDropDownColumnWidth(i, (DropDownFieldSpec)model.getFieldSpec(i)));
+			else if(model.getColumnType(i)== FieldSpec.TYPE_DATE)
+				setColumnMaxWidth(i, getDateColumnWidth());
+			else
+				setColumnWidthToHeaderWidth(i);
+		}
 		setAutoResizeMode(AUTO_RESIZE_OFF);
+	}
+
+	private int getDateColumnWidth()
+	{
+		GridDateCellEditor gridDateCellEditor = ((GridDateCellEditor)getEditorOrRendererForType(editors, new Integer(FieldSpec.TYPE_DATE)));
+		return gridDateCellEditor.getComponent().getPreferredSize().width;
+	}
+	
+	private int getDropDownColumnWidth(int column, DropDownFieldSpec spec)
+	{
+		final int SCROLL_BAR_ALLOWANCE = 50;
+		String columnHeaderText = getColumnName(column);
+		int widestWidth = getRenderedWidth(0, columnHeaderText);
+		for(int i = 0; i < spec.getCount(); ++i)
+		{
+			String thisValue = spec.getChoice(i).toString();
+			int thisWidth = getRenderedWidth(column, thisValue) + SCROLL_BAR_ALLOWANCE;
+			if(thisWidth > widestWidth)
+				widestWidth = thisWidth;
+		}
+		return widestWidth;
 	}
 
 	private HashMap createEditorsOrRenderers()
