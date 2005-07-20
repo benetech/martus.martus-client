@@ -29,7 +29,7 @@ package org.martus.client.swingui.tablemodels;
 import java.util.Iterator;
 import java.util.Vector;
 
-import org.martus.client.core.ClientBulletinStore;
+import org.martus.client.bulletinstore.ClientBulletinStore;
 import org.martus.client.core.MartusApp;
 import org.martus.client.swingui.dialogs.UiProgressRetrieveSummariesDlg;
 import org.martus.clientside.ClientSideNetworkGateway;

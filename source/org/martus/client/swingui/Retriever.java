@@ -27,9 +27,10 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.swingui;
 
 import java.util.Vector;
-import org.martus.client.core.BulletinFolder;
+
+import org.martus.client.bulletinstore.BulletinFolder;
+import org.martus.client.bulletinstore.ClientBulletinStore.BulletinOlderException;
 import org.martus.client.core.MartusApp;
-import org.martus.client.core.ClientBulletinStore.BulletinOlderException;
 import org.martus.client.swingui.dialogs.UiProgressRetrieveBulletinsDlg;
 import org.martus.common.database.DatabaseKey;
 import org.martus.common.network.NetworkInterfaceConstants;

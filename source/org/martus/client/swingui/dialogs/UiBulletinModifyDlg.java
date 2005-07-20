@@ -42,12 +42,12 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JViewport;
 
-import org.martus.client.core.BulletinFolder;
-import org.martus.client.core.ClientBulletinStore;
+import org.martus.client.bulletinstore.BulletinFolder;
+import org.martus.client.bulletinstore.ClientBulletinStore;
+import org.martus.client.bulletinstore.ClientBulletinStore.BulletinOlderException;
 import org.martus.client.core.EncryptionChangeListener;
 import org.martus.client.core.LanguageChangeListener;
 import org.martus.client.core.MartusApp;
-import org.martus.client.core.ClientBulletinStore.BulletinOlderException;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.bulletincomponent.UiBulletinComponent;
 import org.martus.client.swingui.bulletincomponent.UiBulletinComponentEditorSection;

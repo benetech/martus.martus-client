@@ -34,8 +34,8 @@ import java.io.FileOutputStream;
 import java.util.Arrays;
 import java.util.List;
 
-import org.martus.client.core.BulletinFolder;
-import org.martus.client.core.ClientBulletinStore;
+import org.martus.client.bulletinstore.BulletinFolder;
+import org.martus.client.bulletinstore.ClientBulletinStore;
 import org.martus.client.core.TransferableAttachmentList;
 import org.martus.common.bulletin.AttachmentProxy;
 import org.martus.common.bulletin.Bulletin;

@@ -33,7 +33,7 @@ import java.awt.event.MouseEvent;
 import javax.swing.JPopupMenu;
 import javax.swing.JViewport;
 
-import org.martus.client.core.BulletinFolder;
+import org.martus.client.bulletinstore.BulletinFolder;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.packet.UniversalId;

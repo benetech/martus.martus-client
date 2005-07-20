@@ -28,7 +28,8 @@ package org.martus.client.test;
 
 import java.io.File;
 import java.io.IOException;
-import org.martus.client.core.ClientBulletinStore;
+
+import org.martus.client.bulletinstore.ClientBulletinStore;
 import org.martus.common.crypto.MartusCrypto;
 import org.martus.common.crypto.MockMartusSecurity;
 import org.martus.common.database.Database;
@@ -43,12 +44,12 @@ public class MockBulletinStore extends ClientBulletinStore
 		this(MockMartusSecurity.createClient());
 	}
 
-	MockBulletinStore(MartusCrypto crypto) throws Exception
+	public MockBulletinStore(MartusCrypto crypto) throws Exception
 	{
 		this(new MockClientDatabase(), crypto);
 	}
 	
-	MockBulletinStore(Database db, MartusCrypto crypto) throws Exception
+	public MockBulletinStore(Database db, MartusCrypto crypto) throws Exception
 	{
 		super(crypto);
 		File dir = File.createTempFile("$$$MockBulletinStore_" + TestCaseEnhanced.getCallingTestClass(), null);

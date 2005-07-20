@@ -28,8 +28,8 @@ package org.martus.client.swingui.bulletintable;
 
 import javax.swing.table.AbstractTableModel;
 
-import org.martus.client.core.BulletinFolder;
-import org.martus.client.core.ClientBulletinStore;
+import org.martus.client.bulletinstore.BulletinFolder;
+import org.martus.client.bulletinstore.ClientBulletinStore;
 import org.martus.clientside.UiLocalization;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.bulletin.BulletinConstants;

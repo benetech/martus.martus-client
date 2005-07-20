@@ -39,11 +39,12 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.zip.ZipFile;
-import org.martus.client.core.BulletinFolder;
-import org.martus.client.core.ClientBulletinStore;
+
+import org.martus.client.bulletinstore.BulletinFolder;
+import org.martus.client.bulletinstore.ClientBulletinStore;
+import org.martus.client.bulletinstore.ClientBulletinStore.BulletinAlreadyExistsException;
+import org.martus.client.bulletinstore.ClientBulletinStore.BulletinOlderException;
 import org.martus.client.core.TransferableBulletinList;
-import org.martus.client.core.ClientBulletinStore.BulletinAlreadyExistsException;
-import org.martus.client.core.ClientBulletinStore.BulletinOlderException;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.crypto.MartusCrypto.CryptoException;
 import org.martus.common.packet.BulletinHeaderPacket;

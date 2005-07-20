@@ -1,7 +1,7 @@
 /*
 
 The Martus(tm) free, social justice documentation and
-monitoring software. Copyright (C) 2001-2004, Beneficent
+monitoring software. Copyright (C) 2005, Beneficent
 Technology, Inc. (Benetech).
 
 Martus is free software; you can redistribute it and/or
@@ -24,47 +24,36 @@ Boston, MA 02111-1307, USA.
 
 */
 
-package org.martus.client.swingui.foldertree;
+package org.martus.client.bulletinstore;
 
-import org.martus.client.bulletinstore.BulletinFolder;
-import org.martus.clientside.UiLocalization;
+import java.util.Vector;
 
-public class FolderNode
+import org.martus.common.bulletinstore.BulletinStoreCache;
+import org.martus.common.packet.UniversalId;
+
+public class KnownFieldSpecCache extends BulletinStoreCache
 {
-	FolderNode(UiLocalization localizationToUse)
+	public void storeWasCleared()
 	{
-		this("??", localizationToUse);
+		// TODO Auto-generated method stub
+
 	}
 
-	public FolderNode(String internalNameToUse, UiLocalization localizationToUse)
+	public void revisionWasSaved(UniversalId uid)
 	{
-		setInternalName(internalNameToUse);
-		localization = localizationToUse;
+		// TODO Auto-generated method stub
+
+	}
+
+	public void revisionWasRemoved(UniversalId uid)
+	{
+		// TODO Auto-generated method stub
+
 	}
 	
-	String getInternalName()
+	public Vector getAllKnownFieldSpecs()
 	{
-		return internalName;
+		return null;
 	}
-	
-	public String getLocalizedName()
-	{
-		String name = getInternalName();
-		if(BulletinFolder.isNameLocalized(name))
-			return localization.getLocalizedFolderName(name);
-		return name;
-	}
-	
-	public String toString()
-	{
-		return getLocalizedName();
-	}
-	
-	void setInternalName(String newInternalName)
-	{
-		internalName = newInternalName;
-	}
-	
-	String internalName;
-	UiLocalization localization;
+
 }

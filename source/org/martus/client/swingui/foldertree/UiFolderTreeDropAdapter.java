@@ -28,7 +28,7 @@ package org.martus.client.swingui.foldertree;
 
 import java.awt.Point;
 
-import org.martus.client.core.BulletinFolder;
+import org.martus.client.bulletinstore.BulletinFolder;
 import org.martus.client.swingui.UiBulletinDropAdapter;
 import org.martus.client.swingui.UiMainWindow;
 

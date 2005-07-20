@@ -24,7 +24,7 @@ Boston, MA 02111-1307, USA.
 
 */
 
-package org.martus.client.core;
+package org.martus.client.bulletinstore;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -41,6 +41,7 @@ import java.util.Set;
 import java.util.Vector;
 import java.util.zip.ZipFile;
 
+import org.martus.client.core.MartusClientXml;
 import org.martus.common.MartusUtilities;
 import org.martus.common.MartusXml;
 import org.martus.common.MartusUtilities.FileVerificationException;

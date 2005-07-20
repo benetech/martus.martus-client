@@ -36,8 +36,8 @@ import javax.swing.JMenuItem;
 import javax.swing.JViewport;
 import javax.swing.tree.TreePath;
 
-import org.martus.client.core.BulletinFolder;
-import org.martus.client.core.ClientBulletinStore;
+import org.martus.client.bulletinstore.BulletinFolder;
+import org.martus.client.bulletinstore.ClientBulletinStore;
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.swing.UiPopupMenu;

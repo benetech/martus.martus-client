@@ -30,9 +30,9 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
 
-import org.martus.client.core.ClientBulletinStore;
+import org.martus.client.bulletinstore.ClientBulletinStore;
+import org.martus.client.bulletinstore.ClientBulletinStore.BulletinAlreadyExistsException;
 import org.martus.client.core.MartusApp;
-import org.martus.client.core.ClientBulletinStore.BulletinAlreadyExistsException;
 import org.martus.clientside.MtfAwareLocalization;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.bulletin.BulletinConstants;

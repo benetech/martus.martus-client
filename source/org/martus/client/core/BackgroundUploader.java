@@ -34,6 +34,8 @@ import java.io.UnsupportedEncodingException;
 import java.util.Random;
 import java.util.Vector;
 
+import org.martus.client.bulletinstore.BulletinFolder;
+import org.martus.client.bulletinstore.ClientBulletinStore;
 import org.martus.client.core.MartusApp.SaveConfigInfoException;
 import org.martus.clientside.ClientSideNetworkGateway;
 import org.martus.common.ContactInfo;

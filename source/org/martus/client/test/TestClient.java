@@ -29,6 +29,9 @@ package org.martus.client.test;
 import junit.framework.Test;
 import junit.framework.TestSuite;
 
+import org.martus.client.bulletinstore.TestBulletinCache;
+import org.martus.client.bulletinstore.TestBulletinFolder;
+import org.martus.client.bulletinstore.TestClientBulletinStore;
 import org.martus.client.core.TestSafeReadableBulletin;
 import org.martus.client.reports.TestReportFormat;
 import org.martus.client.reports.TestReportRunner;

@@ -31,8 +31,8 @@ import java.io.IOException;
 import java.io.StringWriter;
 import java.util.Vector;
 
+import org.martus.client.bulletinstore.ClientBulletinStore;
 import org.martus.client.core.BulletinXmlExporter;
-import org.martus.client.core.ClientBulletinStore;
 import org.martus.common.FieldCollection;
 import org.martus.common.GridData;
 import org.martus.common.GridRow;

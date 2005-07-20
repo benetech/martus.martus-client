@@ -24,7 +24,7 @@ Boston, MA 02111-1307, USA.
 
 */
 
-package org.martus.client.test;
+package org.martus.client.bulletinstore;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -34,12 +34,11 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.Vector;
-import org.martus.client.core.BulletinCache;
-import org.martus.client.core.BulletinFolder;
-import org.martus.client.core.ClientBulletinStore;
+
+import org.martus.client.bulletinstore.ClientBulletinStore.BulletinAlreadyExistsException;
+import org.martus.client.bulletinstore.ClientBulletinStore.BulletinOlderException;
 import org.martus.client.core.MartusClientXml;
-import org.martus.client.core.ClientBulletinStore.BulletinAlreadyExistsException;
-import org.martus.client.core.ClientBulletinStore.BulletinOlderException;
+import org.martus.client.test.MockBulletinStore;
 import org.martus.common.HQKey;
 import org.martus.common.HQKeys;
 import org.martus.common.MartusXml;

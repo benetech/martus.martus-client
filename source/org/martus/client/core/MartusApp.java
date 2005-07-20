@@ -48,8 +48,10 @@ import java.util.jar.JarFile;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
-import org.martus.client.core.ClientBulletinStore.BulletinAlreadyExistsException;
-import org.martus.client.core.ClientBulletinStore.BulletinOlderException;
+import org.martus.client.bulletinstore.BulletinFolder;
+import org.martus.client.bulletinstore.ClientBulletinStore;
+import org.martus.client.bulletinstore.ClientBulletinStore.BulletinAlreadyExistsException;
+import org.martus.client.bulletinstore.ClientBulletinStore.BulletinOlderException;
 import org.martus.client.search.BulletinSearcher;
 import org.martus.client.search.SearchParser;
 import org.martus.client.search.SearchTreeNode;

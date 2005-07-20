@@ -28,7 +28,7 @@ package org.martus.client.swingui.actions;
 
 import java.awt.event.ActionEvent;
 
-import org.martus.client.core.ClientBulletinStore;
+import org.martus.client.bulletinstore.ClientBulletinStore;
 import org.martus.client.core.MartusApp;
 import org.martus.client.core.MartusApp.SaveConfigInfoException;
 import org.martus.client.swingui.UiMainWindow;
