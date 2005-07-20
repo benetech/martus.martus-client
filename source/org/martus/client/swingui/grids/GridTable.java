@@ -33,6 +33,7 @@ import org.martus.client.swingui.MartusLocalization;
 import org.martus.common.fieldspec.DropDownFieldSpec;
 import org.martus.common.fieldspec.FieldSpec;
 import org.martus.swing.UiTableWithCellEditingProtection;
+import org.martus.util.language.LanguageOptions;
 
 public class GridTable extends UiTableWithCellEditingProtection
 {
@@ -63,13 +64,19 @@ public class GridTable extends UiTableWithCellEditingProtection
 
 	private int getDateColumnWidth()
 	{
+		final int DATE_LANGUAGE_PADDING = 100;
 		GridDateCellEditor gridDateCellEditor = ((GridDateCellEditor)getEditorOrRendererForType(editors, new Integer(FieldSpec.TYPE_DATE)));
-		return gridDateCellEditor.getComponent().getPreferredSize().width;
+		
+		int width = gridDateCellEditor.getComponent().getPreferredSize().width;
+		if(LanguageOptions.needsLanguagePadding())
+			width += DATE_LANGUAGE_PADDING;
+		return width;
 	}
 	
 	private int getDropDownColumnWidth(int column, DropDownFieldSpec spec)
 	{
 		final int SCROLL_BAR_ALLOWANCE = 50;
+		final int DROPDOWN_LANGUAGE_PADDING = 15;
 		String columnHeaderText = getColumnName(column);
 		int widestWidth = getRenderedWidth(0, columnHeaderText);
 		for(int i = 0; i < spec.getCount(); ++i)
@@ -79,6 +86,9 @@ public class GridTable extends UiTableWithCellEditingProtection
 			if(thisWidth > widestWidth)
 				widestWidth = thisWidth;
 		}
+		if(LanguageOptions.needsLanguagePadding())
+			widestWidth += DROPDOWN_LANGUAGE_PADDING;
+		
 		return widestWidth;
 	}
 
