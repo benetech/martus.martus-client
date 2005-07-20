@@ -92,7 +92,7 @@ public class ClientBulletinStore extends BulletinStore
 	public ClientBulletinStore(MartusCrypto cryptoToUse)
 	{
 		setSignatureGenerator(cryptoToUse);
-		cache = new BulletinCache();
+		bulletinDataCache = new BulletinCache();
 	}
 	
 	public void doAfterSigninInitialization(File dataRootDirectory) throws FileVerificationException, MissingAccountMapException, MissingAccountMapSignatureException
@@ -168,7 +168,7 @@ public class ClientBulletinStore extends BulletinStore
 		removeBulletinFromAllFolders(b);
 		saveFolders();
 
-		cache.remove(b.getUniversalId());
+		bulletinDataCache.remove(b.getUniversalId());
 		removeBulletinFromStore(b);
 	}
 
@@ -268,18 +268,18 @@ public class ClientBulletinStore extends BulletinStore
 		Bulletin.DamagedBulletinException,
 		MartusCrypto.NoKeyPairException
 	{
-		Bulletin fromCache = cache.find(key.getUniversalId());
+		Bulletin fromCache = bulletinDataCache.find(key.getUniversalId());
 		if(fromCache != null)
 			return fromCache;
 		
 		Bulletin b = BulletinLoader.loadFromDatabase(getDatabase(), key, getSignatureVerifier());
-		cache.add(b);
+		bulletinDataCache.add(b);
 		return b;
 	}
 
 	public void saveBulletin(Bulletin b) throws IOException, CryptoException
 	{
-		cache.remove(b.getUniversalId());
+		bulletinDataCache.remove(b.getUniversalId());
 		saveBulletin(b, mustEncryptPublicData());
 	}
 
@@ -1334,7 +1334,7 @@ public class ClientBulletinStore extends BulletinStore
 
 	public BulletinCache getCache()
 	{
-		return cache;
+		return bulletinDataCache;
 	}
 
 	public static File getCacheFileForAccount(File accountDir)
@@ -1403,5 +1403,5 @@ public class ClientBulletinStore extends BulletinStore
 
 	private FieldSpec[] publicFieldSpecs;
 	private FieldSpec[] privateFieldSpecs;
-	BulletinCache cache;	
+	BulletinCache bulletinDataCache;	
 }
