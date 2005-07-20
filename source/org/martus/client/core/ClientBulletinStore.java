@@ -786,7 +786,7 @@ public class ClientBulletinStore extends BulletinStore
 				{
 					db.scrubRecord(key);
 					db.discardRecord(key);
-					clearCache();
+					revisionWasRemoved(key.getUniversalId());
 				}
 				catch (Exception e)
 				{				
@@ -1031,7 +1031,7 @@ public class ClientBulletinStore extends BulletinStore
 					try
 					{
 						db.moveRecordToQuarantine(key);
-						clearCache();
+						revisionWasRemoved(key.getUniversalId());
 					}
 					catch (RecordHiddenException shouldNeverHappen)
 					{
