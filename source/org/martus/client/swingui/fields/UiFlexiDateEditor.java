@@ -31,13 +31,11 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.text.DateFormat;
 import java.util.Date;
-
 import javax.swing.Box;
 import javax.swing.ButtonGroup;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-
 import org.martus.clientside.UiLocalization;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.fieldspec.FieldSpec;
@@ -74,31 +72,32 @@ public class UiFlexiDateEditor extends UiField
 		flexiDateRB.addItemListener(new RadioItemListener());
 		exactDateRB.addItemListener(new RadioItemListener());
 		component.add(dateSelection, BorderLayout.NORTH);
-		component.add(buildExactDatePanel(), BorderLayout.CENTER);
+		component.add(buildExactDateBox(), BorderLayout.CENTER);
 	}
 	
-	private JPanel buildFlexiDatePanel()
+	private JComponent buildFlexiDateBox()
 	{	
-		UiParagraphPanel beginDate = new UiParagraphPanel();
-		beginDate.addComponents(new UiLabel(localization.getFieldLabel("DateRangeFrom")), buildBeginDateBox());		
-		UiParagraphPanel endDate = new UiParagraphPanel();
-		endDate.addComponents(new UiLabel(localization.getFieldLabel("DateRangeTo")), buildEndDateBox());
-
-		flexiDatePanel = new UiParagraphPanel();
-		flexiDatePanel.addComponents(beginDate, endDate);
-		return flexiDatePanel;
+		flexiDateBox = Box.createHorizontalBox();
+		flexiDateBox.add(new UiLabel(localization.getFieldLabel("DateRangeFrom")));
+		flexiDateBox.add(new UiLabel(" "));
+		flexiDateBox.add(buildBeginDateBox());
+		flexiDateBox.add(new UiLabel(" "));
+		flexiDateBox.add(new UiLabel(localization.getFieldLabel("DateRangeTo")));
+		flexiDateBox.add(new UiLabel(" "));
+		flexiDateBox.add(buildEndDateBox());
+		return flexiDateBox;
 	}
 	
-	private JPanel buildExactDatePanel()
+	private JComponent buildExactDateBox()
 	{		
-		UiParagraphPanel singleDatePanel = new UiParagraphPanel();
+		exactDateBox = Box.createHorizontalBox();
 		JLabel exactDateLabel = new UiLabel(localization.getFieldLabel("DateRangeFrom"));		
-		singleDatePanel.addComponents(exactDateLabel,  buildBeginDateBox());					
+		exactDateBox.add(exactDateLabel);
+		exactDateBox.add(new UiLabel(" "));
+		exactDateBox.add(buildBeginDateBox());
 		exactDateLabel.setForeground(component.getBackground());		
 
-		extDatePanel = new UiParagraphPanel();		
-		extDatePanel.addOnNewLine(singleDatePanel);
-		return extDatePanel;			
+		return exactDateBox;			
 	}
 				
 	private Box buildBeginDateBox()
@@ -109,7 +108,7 @@ public class UiFlexiDateEditor extends UiField
 			bgDayCombo = new UiComboBox();	
 			bgMonthCombo = new UiComboBox(localization.getMonthLabels());
 			bgYearCombo = new UiComboBox();
-			if(StandardFieldSpecs.isCustomFieldTag(spec.getTag()))					
+			if(isCustomDate())					
 				UiDateEditor.buildCustomDate(bgDateBox, localization, bgYearCombo, bgMonthCombo, bgDayCombo);
 			else
 				UiDateEditor.buildDate(bgDateBox, localization, bgYearCombo, bgMonthCombo, bgDayCombo);	
@@ -129,7 +128,7 @@ public class UiFlexiDateEditor extends UiField
 			endYearCombo = new UiComboBox();
 			needToSetDefaultValue=true;	
 			
-			if(StandardFieldSpecs.isCustomFieldTag(spec.getTag()))					
+			if(isCustomDate())					
 				UiDateEditor.buildCustomDate(endDateBox, localization, endYearCombo, endMonthCombo, endDayCombo);
 			else					
 				UiDateEditor.buildDate(endDateBox, localization, endYearCombo, endMonthCombo, endDayCombo);
@@ -144,6 +143,11 @@ public class UiFlexiDateEditor extends UiField
 			
 		return endDateBox;		
 	}
+
+	protected boolean isCustomDate()
+	{
+		return StandardFieldSpecs.isCustomFieldTag(spec.getTag());
+	}
 		
 	public JComponent getComponent()
 	{
@@ -155,7 +159,7 @@ public class UiFlexiDateEditor extends UiField
 		return (flexiDateRB.isSelected())? loadFlexidatePanelComponents():loadExactDatePanelComponents();				
 	}
 	
-	private JComponent[] loadFlexidatePanelComponents()
+	protected JComponent[] loadFlexidatePanelComponents()
 	{
 		return new JComponent[]{exactDateRB, flexiDateRB, bgDayCombo, bgMonthCombo, bgYearCombo,
 		endDayCombo, endMonthCombo, endYearCombo};
@@ -180,15 +184,15 @@ public class UiFlexiDateEditor extends UiField
 	
 	void removeExactDatePanel()
 	{
-		component.remove(extDatePanel);						
-		component.add(buildFlexiDatePanel());																	
+		component.remove(exactDateBox);						
+		component.add(buildFlexiDateBox());																	
 		component.revalidate();		
 	}
 	
 	void removeFlexidatePanel()
 	{
-		component.remove(flexiDatePanel);						
-		component.add(buildExactDatePanel());
+		component.remove(flexiDateBox);						
+		component.add(buildExactDateBox());
 		component.revalidate();		
 	}
 
@@ -204,7 +208,7 @@ public class UiFlexiDateEditor extends UiField
 			}
 		}
 		
-		if(StandardFieldSpecs.isCustomFieldTag(spec.getTag()))
+		if(isCustomDate())
 			return;		
 		
 		Date today = new Date();
@@ -223,12 +227,12 @@ public class UiFlexiDateEditor extends UiField
 		}
 	}
 	
-	boolean isFlexiDate()
+	protected boolean isFlexiDate()
 	{
 		return flexiDateRB.isSelected();
 	}
 	
-	boolean isExactDate()
+	protected boolean isExactDate()
 	{
 		return exactDateRB.isSelected();
 	}
@@ -241,7 +245,7 @@ public class UiFlexiDateEditor extends UiField
 			dateText = df.format(getBeginDate());
 		else
 			dateText = df.format(getBeginDate())+ MartusFlexidate.DATE_RANGE_SEPARATER+
-						MartusFlexidate.toFlexidateFormat(getBeginDate(), (isFlexiDate())? getEndDate():getBeginDate());						
+						MartusFlexidate.toFlexidateFormat(getBeginDate(), getEndDate());						
 		return dateText;
 	}	
 	
@@ -293,8 +297,8 @@ public class UiFlexiDateEditor extends UiField
 	private UiLocalization localization;	
 	private UiRadioButton 		exactDateRB;
 	private UiRadioButton 		flexiDateRB;
-	private UiParagraphPanel 	flexiDatePanel;
-	private UiParagraphPanel 	extDatePanel;
+	protected Box			 	flexiDateBox;
+	private Box				 	exactDateBox;
 	private Box					bgDateBox = null;
 	private Box					endDateBox = null;
 	private FieldSpec			spec;

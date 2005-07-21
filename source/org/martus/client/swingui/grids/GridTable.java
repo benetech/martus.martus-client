@@ -56,6 +56,8 @@ public class GridTable extends UiTableWithCellEditingProtection
 				setColumnMaxWidth(i, getDropDownColumnWidth(i, (DropDownFieldSpec)model.getFieldSpec(i)));
 			else if(model.getColumnType(i)== FieldSpec.TYPE_DATE)
 				setColumnMaxWidth(i, getDateColumnWidth());
+			else if(model.getColumnType(i)== FieldSpec.TYPE_DATERANGE)
+				setColumnMaxWidth(i, getDateRangeColumnWidth());
 			else
 				setColumnWidthToHeaderWidth(i);
 		}
@@ -73,6 +75,17 @@ public class GridTable extends UiTableWithCellEditingProtection
 		return width;
 	}
 	
+	private int getDateRangeColumnWidth()
+	{
+		final int DATE_LANGUAGE_PADDING = 200;
+		GridDateRangeCellEditor gridDateRangeCellEditor = ((GridDateRangeCellEditor)getEditorOrRendererForType(editors, new Integer(FieldSpec.TYPE_DATERANGE)));
+		
+		int width = gridDateRangeCellEditor.getComponent().getPreferredSize().width;
+		if(LanguageOptions.needsLanguagePadding())
+			width += DATE_LANGUAGE_PADDING;
+		return width;
+	}
+
 	private int getDropDownColumnWidth(int column, DropDownFieldSpec spec)
 	{
 		final int SCROLL_BAR_ALLOWANCE = 50;
@@ -97,6 +110,7 @@ public class GridTable extends UiTableWithCellEditingProtection
 		HashMap map = new HashMap();
 		map.put(new Integer(FieldSpec.TYPE_BOOLEAN), new GridBooleanCellEditor());
 		map.put(new Integer(FieldSpec.TYPE_DATE), new GridDateCellEditor(localization));
+		map.put(new Integer(FieldSpec.TYPE_DATERANGE), new GridDateRangeCellEditor(localization));
 		map.put(new Integer(FieldSpec.TYPE_DROPDOWN), new GridDropDownCellEditor());
 		map.put(new Integer(FieldSpec.TYPE_NORMAL), new GridNormalCellEditor(localization));
 		return map;

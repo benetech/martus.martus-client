@@ -126,7 +126,7 @@ public class UiBulletinModifyDlg extends JFrame implements ActionListener, Windo
 		}
 		catch(Exception e)
 		{
-			System.out.println(e);
+			e.printStackTrace();
 		}
 	}
 
