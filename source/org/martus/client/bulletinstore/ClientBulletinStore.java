@@ -162,6 +162,7 @@ public class ClientBulletinStore extends BulletinStore
 			InputStream in = new FileInputStream(file);
 			knownFieldSpecCache.loadFromStream(in);
 			in.close();
+			file.delete();
 			return true;
 		}
 		catch(Exception e)
