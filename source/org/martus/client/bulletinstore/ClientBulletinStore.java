@@ -1299,7 +1299,7 @@ public class ClientBulletinStore extends BulletinStore
 	
 	public void populateFieldSpecCacheFromDatabase()
 	{
-		knownFieldSpecCache.clearAndInitialize();
+		knownFieldSpecCache.initializeFromDatabase();
 	}
 	
 	public Vector getAllKnownFieldSpecs()

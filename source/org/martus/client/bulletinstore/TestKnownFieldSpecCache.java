@@ -26,7 +26,10 @@ Boston, MA 02111-1307, USA.
 
 package org.martus.client.bulletinstore;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Vector;
@@ -37,6 +40,7 @@ import org.martus.common.bulletin.Bulletin;
 import org.martus.common.bulletin.BulletinZipUtilities;
 import org.martus.common.crypto.MartusCrypto;
 import org.martus.common.crypto.MockMartusSecurity;
+import org.martus.common.database.MockClientDatabase;
 import org.martus.common.fieldspec.FieldSpec;
 import org.martus.util.TestCaseEnhanced;
 
@@ -54,7 +58,7 @@ public class TestKnownFieldSpecCache extends TestCaseEnhanced
 		app.loadSampleData();
 		cache = new KnownFieldSpecCache(app.getStore().getDatabase(), security);
 		app.getStore().addCache(cache);
-		cache.clearAndInitialize();
+		cache.initializeFromDatabase();
 		
 	}
 	
@@ -119,6 +123,31 @@ public class TestKnownFieldSpecCache extends TestCaseEnhanced
 		app.getStore().importBulletinZipFile(new ZipFile(zipFile));
 		Vector specsAfterImport = cache.getAllKnownFieldSpecs();
 		assertEquals("didn't include imported specs?", expectedCountAfterSaveOrImport, specsAfterImport.size());
+	}
+	
+	public void testSaveAndLoad() throws Exception
+	{
+		ByteArrayOutputStream saved = new ByteArrayOutputStream();
+		cache.saveToStream(saved);
+		ByteArrayInputStream loadable = new ByteArrayInputStream(saved.toByteArray());
+		KnownFieldSpecCache reloaded = new KnownFieldSpecCache(new MockClientDatabase(), security);
+		reloaded.loadFromStream(loadable);
+		assertEquals("Didn't reload properly?", reloaded.getAllKnownFieldSpecs(), cache.getAllKnownFieldSpecs());
+	}
+	
+	public void testLoadFromBadData() throws Exception
+	{
+		byte[] badData = {1, 22, 15, 121, 1, 0};
+		ByteArrayInputStream badIn = new ByteArrayInputStream(badData);
+		KnownFieldSpecCache scratch = new KnownFieldSpecCache(new MockClientDatabase(), security);
+		try
+		{
+			scratch.loadFromStream(badIn);
+			fail("Should have thrown");
+		}
+		catch(IOException ignoreExpected)
+		{
+		}
 	}
 
 	private Bulletin createSampleBulletin(MartusCrypto authorSecurity)
