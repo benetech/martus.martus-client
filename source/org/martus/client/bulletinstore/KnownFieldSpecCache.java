@@ -67,13 +67,13 @@ public class KnownFieldSpecCache extends BulletinStoreCache implements ReadableD
 	
 	public void clearAndInitialize()
 	{
-		uidsToSpecArrays = new HashMap();
+		accountsToMapsOfLocalIdsToSpecArrays = new HashMap();
 		db.visitAllRecords(this);
 	}
 	
 	public void storeWasCleared()
 	{
-		uidsToSpecArrays.clear();
+		accountsToMapsOfLocalIdsToSpecArrays.clear();
 	}
 
 	public void revisionWasSaved(UniversalId uid)
@@ -102,13 +102,30 @@ public class KnownFieldSpecCache extends BulletinStoreCache implements ReadableD
 
 	public void revisionWasRemoved(UniversalId uid)
 	{
-		uidsToSpecArrays.remove(uid);
+		String accountId = uid.getAccountId();
+		Map mapForAccount = getMapForAccount(accountId);
+		mapForAccount.remove(uid.getLocalId());
+		if(mapForAccount.size() == 0)
+			accountsToMapsOfLocalIdsToSpecArrays.remove(accountId);
 	}
 	
 	public Vector getAllKnownFieldSpecs()
 	{
 		Vector knownSpecs = new Vector();
-		Collection arraysOfSpecs = uidsToSpecArrays.values();
+		Collection mapsOfLocalIdsToArraysOfSpecs = accountsToMapsOfLocalIdsToSpecArrays.values();
+		Iterator iter = mapsOfLocalIdsToArraysOfSpecs.iterator();
+		while(iter.hasNext())
+		{
+			Map localIdsToArraysOfSpecs = (Map)iter.next();
+			Collection arraysOfSpecs = localIdsToArraysOfSpecs.values();
+			addSpecs(knownSpecs, arraysOfSpecs);
+		}
+			
+		return knownSpecs;
+	}
+
+	private void addSpecs(Vector knownSpecs, Collection arraysOfSpecs)
+	{
 		Iterator iter = arraysOfSpecs.iterator();
 		while(iter.hasNext())
 		{
@@ -120,7 +137,6 @@ public class KnownFieldSpecCache extends BulletinStoreCache implements ReadableD
 					knownSpecs.add(spec);
 			}
 		}
-		return knownSpecs;
 	}
 
 	public void visit(DatabaseKey key)
@@ -200,7 +216,23 @@ public class KnownFieldSpecCache extends BulletinStoreCache implements ReadableD
 
 	private void setSpecs(UniversalId bulletinUid, Vector specs)
 	{
-		uidsToSpecArrays.put(bulletinUid, specs);
+		String accountId = bulletinUid.getAccountId();
+		String localId = bulletinUid.getLocalId();
+
+		Map localIdsToSpecArrays = getMapForAccount(accountId);
+
+		localIdsToSpecArrays.put(localId, specs);
+	}
+
+	private Map getMapForAccount(String accountId)
+	{
+		Map localIdsToSpecArrays = (Map)accountsToMapsOfLocalIdsToSpecArrays.get(accountId);
+		if(localIdsToSpecArrays == null)
+		{
+			localIdsToSpecArrays = new HashMap();
+			accountsToMapsOfLocalIdsToSpecArrays.put(accountId, localIdsToSpecArrays);
+		}
+		return localIdsToSpecArrays;
 	}
 	
 	private Vector arrayToVector(FieldSpec[] array)
@@ -213,5 +245,5 @@ public class KnownFieldSpecCache extends BulletinStoreCache implements ReadableD
 
 	ReadableDatabase db;
 	MartusCrypto security;
-	Map uidsToSpecArrays;
+	Map accountsToMapsOfLocalIdsToSpecArrays;
 }
