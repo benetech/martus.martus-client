@@ -185,6 +185,7 @@ public class EnglishStrings
 "wintitle:notifyErrorImportingCustomizationTemplate=Error Importing Template",
 "wintitle:notifyImportingCustomizationTemplateSuccess=Importing Template Succeeded",
 "wintitle:notifyExportingCustomizationTemplateSuccess=Exporting Template Succeeded",
+"wintitle:notifyCreatingFieldSpecCache=Missing List of Fields",
 
 "wintitle:inputservername=Server Name",
 "wintitle:inputserverpubliccode=Server Identification",
@@ -665,6 +666,7 @@ public class EnglishStrings
 "field:notifyErrorImportingCustomizationTemplatecause=There was an error importing this template.",
 "field:notifyImportingCustomizationTemplateSuccesscause=Successfully imported customization template.",
 "field:notifyExportingCustomizationTemplateSuccesscause=Successfully exported customization template.",
+"field:notifyCreatingFieldSpecCachecause=Martus needs to keep a list of all the fields in all the bulletins in your system.\n\nThis file does not exist, so it will be created now. This may take a few seconds per bulletin on a slower computer.",
 
 "field:messageServerNewscause=The current server has sent this message:",
 "field:messageErrorDateInFuturecause=This date occurs in the future:",

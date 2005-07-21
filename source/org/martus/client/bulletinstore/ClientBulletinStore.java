@@ -33,6 +33,8 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.io.StringReader;
 import java.io.UnsupportedEncodingException;
 import java.util.HashSet;
@@ -117,20 +119,61 @@ public class ClientBulletinStore extends BulletinStore
 		File obsoleteCacheFile = new File(getStoreRootDir(), OBSOLETE_CACHE_FILE_NAME);
 		obsoleteCacheFile.delete();
 
-		knownFieldSpecCache = new KnownFieldSpecCache(getDatabase(), getSignatureGenerator());
-		knownFieldSpecCache.restoreCacheFromSavedState();
-		addCache(knownFieldSpecCache);
 	}
 
 	public void prepareToExitNormally()
 	{
-		saveCache();
+		saveBulletinDataCache();
+		saveFieldSpecCache();
 		getSignatureGenerator().flushSessionKeyCache();
+	}
+
+	private void saveFieldSpecCache()
+	{
+		try
+		{
+			OutputStream out = new FileOutputStream(getFieldSpecCacheFile());
+			knownFieldSpecCache.saveToStream(out);
+			out.close();
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+			// nothing we can do about it
+		}
 	}
 	
 	public void prepareToExitWithoutSavingState()
 	{
 		getSignatureGenerator().flushSessionKeyCache();
+	}
+	
+	public boolean loadFieldSpecCache()
+	{
+		knownFieldSpecCache = new KnownFieldSpecCache(getDatabase(), getSignatureGenerator());
+		addCache(knownFieldSpecCache);
+		
+		File file = getFieldSpecCacheFile();
+		if(!file.exists())
+			return false;
+		
+		try
+		{
+			InputStream in = new FileInputStream(file);
+			knownFieldSpecCache.loadFromStream(in);
+			in.close();
+			return true;
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+			return false;
+		}
+	}
+
+	public void createFieldSpecCacheFromDatabase()
+	{
+		knownFieldSpecCache.initializeFromDatabase();
 	}
 	
 	public boolean mustEncryptPublicData()
@@ -1329,7 +1372,7 @@ public class ClientBulletinStore extends BulletinStore
 		}
 	}
 
-	protected void saveCache()
+	protected void saveBulletinDataCache()
 	{
 		//System.out.println("BulletinStore.saveCache");
 		try
@@ -1357,6 +1400,11 @@ public class ClientBulletinStore extends BulletinStore
 		return new File(accountDir, CACHE_FILE_NAME);
 	}
 
+	private File getFieldSpecCacheFile()
+	{
+		return new File(getStoreRootDir(), FIELD_SPEC_CACHE_FILE_NAME);
+	}
+	
 	public boolean bulletinHasExtraFields(Bulletin b)
 	{
 		return !FieldSpec.isAllFieldsPresent(b.getPublicFieldSpecs(), getPublicFieldSpecs());
@@ -1408,6 +1456,7 @@ public class ClientBulletinStore extends BulletinStore
 
 	private static final String CACHE_FILE_NAME = "skcache.dat";
 	private static final String OBSOLETE_CACHE_FILE_NAME = "sfcache.dat";
+	private static final String FIELD_SPEC_CACHE_FILE_NAME = "fscache.dat";
 
 	private Vector folders;
 	private BulletinFolder folderSaved;

@@ -305,6 +305,8 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	
 			if(!sessionSignIn())
 				return false;
+
+			loadFieldSpecCache();
 			
 			loadConfigInfo();
 			if(!createdNewAccount && !justRecovered)
@@ -335,6 +337,15 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		mainWindowInitalizing = false;
 		return true;
     }
+	
+	private void loadFieldSpecCache()
+	{
+		if(!getStore().loadFieldSpecCache())
+		{
+			notifyDlg(this, "CreatingFieldSpecCache");
+			getStore().createFieldSpecCacheFromDatabase();
+		}
+	}
 	
 	private void createBackgroundUploadTasks()
 	{
