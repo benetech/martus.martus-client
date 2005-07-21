@@ -26,6 +26,8 @@ Boston, MA 02111-1307, USA.
 
 package org.martus.client.bulletinstore;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -138,9 +140,27 @@ public class KnownFieldSpecCache extends BulletinStoreCache implements ReadableD
 		return knownSpecs;
 	}
 	
-	public void saveToStream(OutputStream out) throws IOException
+	public void saveToStream(OutputStream out) throws Exception
 	{
+		byte[] plainBytes = getCacheAsBytes();
+		byte[] bundle = security.createSignedBundle(plainBytes);
 		DataOutputStream dataOut = new DataOutputStream(out);
+		try
+		{
+			dataOut.writeInt(bundle.length);
+			dataOut.write(bundle);
+		}
+		finally
+		{
+			dataOut.close();
+		}
+		
+	}
+
+	private byte[] getCacheAsBytes() throws IOException
+	{
+		ByteArrayOutputStream plain = new ByteArrayOutputStream();
+		DataOutputStream dataOut = new DataOutputStream(plain);
 		try
 		{
 			dataOut.writeByte(FILE_VERSION);
@@ -150,6 +170,7 @@ public class KnownFieldSpecCache extends BulletinStoreCache implements ReadableD
 		{
 			dataOut.close();
 		}
+		return plain.toByteArray();
 	}
 
 	private void writeAllAccountsData(DataOutputStream dataOut) throws IOException
@@ -192,6 +213,24 @@ public class KnownFieldSpecCache extends BulletinStoreCache implements ReadableD
 	
 	public void loadFromStream(InputStream in) throws Exception
 	{
+		DataInputStream dataIn = new DataInputStream(in);
+		try
+		{
+			int length = dataIn.readInt();
+			byte[] encrypted = new byte[length];
+			dataIn.read(encrypted);
+			byte[] plain = security.extractFromSignedBundle(encrypted);
+			loadFromBytes(plain);
+		}
+		finally
+		{
+			dataIn.close();
+		}
+	}
+	
+	private void loadFromBytes(byte[] cacheAsBytes) throws Exception
+	{
+		ByteArrayInputStream in = new ByteArrayInputStream(cacheAsBytes);
 		createMap();
 		DataInputStream dataIn = new DataInputStream(in);
 		try

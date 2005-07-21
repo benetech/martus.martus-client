@@ -30,8 +30,6 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.List;
 import java.util.Vector;
 import java.util.zip.ZipFile;
 
@@ -55,7 +53,6 @@ public class TestKnownFieldSpecCache extends TestCaseEnhanced
 	{
 		security = MockMartusSecurity.createClient();
 		app = MockMartusApp.create(security);
-		app.loadSampleData();
 		cache = new KnownFieldSpecCache(app.getStore().getDatabase(), security);
 		app.getStore().addCache(cache);
 		cache.initializeFromDatabase();
@@ -70,14 +67,12 @@ public class TestKnownFieldSpecCache extends TestCaseEnhanced
 
 	public void testClearAndInitialize() throws Exception
 	{
+		Bulletin one = createSampleBulletin(security);
+		app.saveBulletin(one, app.getFolderDraftOutbox());
 		Vector specs = cache.getAllKnownFieldSpecs();
-		List expectedTags = Arrays.asList(sampleDataSpecTags);
-		assertEquals("wrong number of specs?", sampleDataSpecTags.length, specs.size());
-		for(int i=0; i < specs.size(); ++i)
-		{
-			FieldSpec spec = (FieldSpec)specs.get(i);
-			assertContains("spec not found?", spec.getTag(), expectedTags);
-		}
+		assertEquals("wrong number of specs?", 2, specs.size());
+		assertContains("public spec not found?", publicSpecs[0], specs);
+		assertContains("private spec not found?", privateSpecs[0], specs);
 	}
 
 	public void testSaveBulletin() throws Exception
@@ -85,7 +80,7 @@ public class TestKnownFieldSpecCache extends TestCaseEnhanced
 		Bulletin withCustom = createSampleBulletin(security);
 		app.saveBulletin(withCustom, app.getFolderDraftOutbox());
 		Vector specsAfterSave = cache.getAllKnownFieldSpecs();
-		int newExpectedCount = sampleDataSpecTags.length + publicSpecs.length + privateSpecs.length;
+		int newExpectedCount = publicSpecs.length + privateSpecs.length;
 		assertEquals("didn't add new specs?", newExpectedCount, specsAfterSave.size());
 		assertContains("didn't add public?", publicSpecs[0], specsAfterSave);
 		assertContains("didn't add private?", privateSpecs[0], specsAfterSave);
@@ -104,12 +99,12 @@ public class TestKnownFieldSpecCache extends TestCaseEnhanced
 		
 		app.getStore().importBulletinZipFile(new ZipFile(zipFile));
 		Vector specsWithNotOurs = cache.getAllKnownFieldSpecs();
-		assertEquals("didn't ignore other author's bulletin?", sampleDataSpecTags.length, specsWithNotOurs.size());
+		assertEquals("didn't ignore other author's bulletin?",0, specsWithNotOurs.size());
 	}
 
 	public void testDeleteAndImportBulletin() throws Exception
 	{
-		int expectedCountAfterSaveOrImport = sampleDataSpecTags.length + publicSpecs.length + privateSpecs.length;
+		int expectedCountAfterSaveOrImport = publicSpecs.length + privateSpecs.length;
 		Bulletin toImport = createSampleBulletin(security);
 		app.saveBulletin(toImport, app.getFolderDraftOutbox());
 		assertEquals("save didn't add specs?", expectedCountAfterSaveOrImport, cache.getAllKnownFieldSpecs().size());
@@ -118,7 +113,7 @@ public class TestKnownFieldSpecCache extends TestCaseEnhanced
 		BulletinZipUtilities.exportBulletinPacketsFromDatabaseToZipFile(app.getStore().getDatabase(), toImport.getDatabaseKey(), zipFile, security);
 		app.getStore().destroyBulletin(toImport);
 		Vector specsAfterDelete = cache.getAllKnownFieldSpecs();
-		assertEquals("didn't remove specs from deleted bulletin?", sampleDataSpecTags.length, specsAfterDelete.size());
+		assertEquals("didn't remove specs from deleted bulletin?", 0, specsAfterDelete.size());
 		
 		app.getStore().importBulletinZipFile(new ZipFile(zipFile));
 		Vector specsAfterImport = cache.getAllKnownFieldSpecs();
@@ -127,12 +122,15 @@ public class TestKnownFieldSpecCache extends TestCaseEnhanced
 	
 	public void testSaveAndLoad() throws Exception
 	{
+		app.loadSampleData();
 		ByteArrayOutputStream saved = new ByteArrayOutputStream();
 		cache.saveToStream(saved);
 		ByteArrayInputStream loadable = new ByteArrayInputStream(saved.toByteArray());
 		KnownFieldSpecCache reloaded = new KnownFieldSpecCache(new MockClientDatabase(), security);
 		reloaded.loadFromStream(loadable);
-		assertEquals("Didn't reload properly?", reloaded.getAllKnownFieldSpecs(), cache.getAllKnownFieldSpecs());
+		Vector specs = reloaded.getAllKnownFieldSpecs();
+		assertEquals("Didn't reload properly?", specs, cache.getAllKnownFieldSpecs());
+		assertEquals("Didn't load correct count?", sampleDataSpecTags.length, specs.size());
 	}
 	
 	public void testLoadFromBadData() throws Exception
