@@ -63,7 +63,8 @@ public class FancySearchHelper
 	public DropDownFieldSpec createFieldColumnSpec(ClientBulletinStore storeToUse)
 	{
 		Vector allAvailableFields = new Vector();
-		allAvailableFields.add(new ChoiceItem("", getLocalization().getFieldLabel("SearchAnyField"), FieldSpec.TYPE_NORMAL));
+		FieldSpec anyField = FieldSpec.createCustomField("", getLocalization().getFieldLabel("SearchAnyField"), FieldSpec.TYPE_NORMAL);
+		allAvailableFields.add(new ChoiceItem(anyField));
 		allAvailableFields.addAll(convertToChoiceItems(storeToUse.getAllKnownFieldSpecs()));
 
 		ChoiceItem[] fieldChoices = (ChoiceItem[])allAvailableFields.toArray(new ChoiceItem[0]);
@@ -109,7 +110,8 @@ public class FancySearchHelper
 			}
 			else
 			{
-				ChoiceItem choiceItem = new ChoiceItem(spec.getTag(), displayString, spec.getType());
+				FieldSpec thisSpec = FieldSpec.createCustomField(tag, displayString, spec.getType());
+				ChoiceItem choiceItem = new ChoiceItem(thisSpec);
 				choices.add(choiceItem);
 			}
 		}
@@ -124,7 +126,8 @@ public class FancySearchHelper
 		try
 		{
 			String fullDisplayString = TokenReplacement.replaceToken(displayTemplate, "#FIELDLABEL#", baseDisplayString);
-			choices.add(new ChoiceItem(fullTag, fullDisplayString, FieldSpec.TYPE_DATE));
+			FieldSpec dateSpec = FieldSpec.createCustomField(fullTag, fullDisplayString, FieldSpec.TYPE_DATE);
+			choices.add(new ChoiceItem(dateSpec));
 		}
 		catch (TokenInvalidException e)
 		{
