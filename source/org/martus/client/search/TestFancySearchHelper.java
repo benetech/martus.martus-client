@@ -51,7 +51,7 @@ public class TestFancySearchHelper extends TestCaseEnhanced
 	{
 		MockMartusApp app = MockMartusApp.create();
 		store = app.getStore();
-		store.populateFieldSpecCacheFromDatabase();
+		store.createFieldSpecCacheFromDatabase();
 		app.loadSampleData();
 		tempDir = createTempDirectory();
 		localization = new MartusLocalization(tempDir, new String[0]);

@@ -150,8 +150,7 @@ public class ClientBulletinStore extends BulletinStore
 	
 	public boolean loadFieldSpecCache()
 	{
-		knownFieldSpecCache = new KnownFieldSpecCache(getDatabase(), getSignatureGenerator());
-		addCache(knownFieldSpecCache);
+		createKnownFieldSpecCache();
 		
 		File file = getFieldSpecCacheFile();
 		if(!file.exists())
@@ -174,7 +173,14 @@ public class ClientBulletinStore extends BulletinStore
 
 	public void createFieldSpecCacheFromDatabase()
 	{
+		createKnownFieldSpecCache();
 		knownFieldSpecCache.initializeFromDatabase();
+	}
+	
+	private void createKnownFieldSpecCache()
+	{
+		knownFieldSpecCache = new KnownFieldSpecCache(getDatabase(), getSignatureGenerator());
+		addCache(knownFieldSpecCache);
 	}
 	
 	public boolean mustEncryptPublicData()
@@ -1339,11 +1345,6 @@ public class ClientBulletinStore extends BulletinStore
 	public boolean needsLegacyFolderConversion()
 	{
 		return loadedLegacyFolders;
-	}
-	
-	public void populateFieldSpecCacheFromDatabase()
-	{
-		knownFieldSpecCache.initializeFromDatabase();
 	}
 	
 	public Vector getAllKnownFieldSpecs()

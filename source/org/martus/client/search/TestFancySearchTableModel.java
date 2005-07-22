@@ -44,7 +44,7 @@ public class TestFancySearchTableModel extends TestCaseEnhanced
 	{
 		MockMartusApp app = MockMartusApp.create();
 		ClientBulletinStore store = app.getStore();
-		store.populateFieldSpecCacheFromDatabase();
+		store.createFieldSpecCacheFromDatabase();
 		app.loadSampleData();
 		FancySearchHelper helper = new FancySearchHelper(store, new MartusLocalization(null, new String[0]));
 		GridFieldSpec gridSpec = helper.getGridSpec(store);
