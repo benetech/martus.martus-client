@@ -34,7 +34,6 @@ import java.util.Date;
 import javax.swing.Box;
 import javax.swing.ButtonGroup;
 import javax.swing.JComponent;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import org.martus.clientside.UiLocalization;
 import org.martus.common.bulletin.Bulletin;
@@ -78,25 +77,19 @@ public class UiFlexiDateEditor extends UiField
 	private JComponent buildFlexiDateBox()
 	{	
 		flexiDateBox = Box.createHorizontalBox();
-		flexiDateBox.add(new UiLabel(localization.getFieldLabel("DateRangeFrom")));
 		flexiDateBox.add(new UiLabel(" "));
 		flexiDateBox.add(buildBeginDateBox());
-		flexiDateBox.add(new UiLabel(" "));
-		flexiDateBox.add(new UiLabel(localization.getFieldLabel("DateRangeTo")));
-		flexiDateBox.add(new UiLabel(" "));
+		flexiDateBox.add(new UiLabel("  -  "));
 		flexiDateBox.add(buildEndDateBox());
+		flexiDateBox.add(new UiLabel(" "));
 		return flexiDateBox;
 	}
 	
 	private JComponent buildExactDateBox()
 	{		
 		exactDateBox = Box.createHorizontalBox();
-		JLabel exactDateLabel = new UiLabel(localization.getFieldLabel("DateRangeFrom"));		
-		exactDateBox.add(exactDateLabel);
 		exactDateBox.add(new UiLabel(" "));
 		exactDateBox.add(buildBeginDateBox());
-		exactDateLabel.setForeground(component.getBackground());		
-
 		return exactDateBox;			
 	}
 				
