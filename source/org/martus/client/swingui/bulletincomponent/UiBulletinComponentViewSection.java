@@ -30,6 +30,7 @@ import javax.swing.JComponent;
 
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
+import org.martus.client.swingui.dialogs.UiDialogLauncher;
 import org.martus.client.swingui.fields.UiAttachmentViewer;
 import org.martus.client.swingui.fields.UiBoolViewer;
 import org.martus.client.swingui.fields.UiChoiceViewer;
@@ -96,7 +97,8 @@ public class UiBulletinComponentViewSection extends UiBulletinComponentDataSecti
 	{
 		MartusLocalization localization = mainWindow.getLocalization();
 		fieldSpec.setColumnZeroLabel(localization.getFieldLabel("ColumnGridRowNumber"));
-		return new UiGridViewer(fieldSpec, localization);
+		UiDialogLauncher dlgLauncher = new UiDialogLauncher(mainWindow.getCurrentActiveFrame(), localization);
+		return new UiGridViewer(fieldSpec, localization, dlgLauncher);
 	}
 
 	public JComponent createAttachmentTable()

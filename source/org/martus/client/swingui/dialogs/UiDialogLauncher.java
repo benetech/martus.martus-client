@@ -23,35 +23,27 @@ Software Foundation, Inc., 59 Temple Place - Suite 330,
 Boston, MA 02111-1307, USA.
 
 */
+package org.martus.client.swingui.dialogs;
 
-package org.martus.client.search;
-
-import javax.swing.JTable;
-import org.martus.client.bulletinstore.ClientBulletinStore;
+import java.util.HashMap;
+import javax.swing.JFrame;
 import org.martus.client.swingui.MartusLocalization;
-import org.martus.client.swingui.dialogs.UiDialogLauncher;
-import org.martus.client.swingui.fields.UiGridEditor;
+import org.martus.clientside.UiUtilities;
 
-public class FancySearchGridEditor extends UiGridEditor
+public class UiDialogLauncher
 {
-	public static FancySearchGridEditor create(ClientBulletinStore storeToSearch, MartusLocalization localization, UiDialogLauncher dlgLauncher)
+	public UiDialogLauncher(JFrame frameToUse, MartusLocalization localizationToUse)
 	{
-		FancySearchHelper helper = new FancySearchHelper(storeToSearch, localization, dlgLauncher);
-		return new FancySearchGridEditor(helper);
-		
+		super();
+		frame = frameToUse;
+		localization = localizationToUse;
 	}
-	
-	private FancySearchGridEditor(FancySearchHelper helperToUse)
+	public void ShowDialog(String baseTag)
 	{
-		super(helperToUse.getModel(), helperToUse.getLocalization(), helperToUse.getDialogLauncher());
-		helper = helperToUse;
-		getTable().setAutoResizeMode(JTable.AUTO_RESIZE_LAST_COLUMN);
+		if(frame == null)
+			return;
+		UiUtilities.notifyDlg(localization, frame, baseTag, "notify" + baseTag, new HashMap());
 	}
-	
-	public String getSearchString()
-	{
-		return helper.getSearchString(getGridData());		
-	}
-
-	FancySearchHelper helper;
+	MartusLocalization localization;
+	JFrame frame;
 }

@@ -30,6 +30,7 @@ import java.io.File;
 
 import org.martus.client.bulletinstore.ClientBulletinStore;
 import org.martus.client.swingui.MartusLocalization;
+import org.martus.client.swingui.dialogs.UiDialogLauncher;
 import org.martus.client.test.MockMartusApp;
 import org.martus.common.EnglishCommonStrings;
 import org.martus.common.GridData;
@@ -55,7 +56,10 @@ public class TestFancySearchHelper extends TestCaseEnhanced
 		app.loadSampleData();
 		tempDir = createTempDirectory();
 		localization = new MartusLocalization(tempDir, new String[0]);
-		helper = new FancySearchHelper(store, localization);
+		MartusLocalization localization = new MartusLocalization(null, new String[0]);
+		UiDialogLauncher nullLauncher = new UiDialogLauncher(null,localization);
+		helper = new FancySearchHelper(store, localization, nullLauncher);
+		
 	}
 	
 	public void tearDown()

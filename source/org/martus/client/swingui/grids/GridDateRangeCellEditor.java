@@ -26,12 +26,27 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.swingui.grids;
 
 import org.martus.client.swingui.MartusLocalization;
+import org.martus.client.swingui.dialogs.UiDialogLauncher;
 import org.martus.client.swingui.fields.UiGridDateRangeEditorViewer;
+import org.martus.client.swingui.fields.UiField.DataInvalidException;
 
 public class GridDateRangeCellEditor extends GridCellEditorAndRenderer
 {
-	GridDateRangeCellEditor(MartusLocalization localization)
+	GridDateRangeCellEditor(MartusLocalization localization, UiDialogLauncher dlgLauncher)
 	{
-		super(new UiGridDateRangeEditorViewer(localization));
+		super(new UiGridDateRangeEditorViewer(localization, dlgLauncher));
+	}
+
+	public boolean stopCellEditing()
+	{
+		try
+		{
+			super.widget.validate();
+			return super.stopCellEditing();
+		}
+		catch(DataInvalidException e)
+		{
+			return false;
+		}
 	}
 }

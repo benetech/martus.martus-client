@@ -33,6 +33,7 @@ import javax.swing.JComponent;
 
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
+import org.martus.client.swingui.dialogs.UiDialogLauncher;
 import org.martus.client.swingui.fields.UiAttachmentEditor;
 import org.martus.client.swingui.fields.UiBoolEditor;
 import org.martus.client.swingui.fields.UiChoiceEditor;
@@ -105,7 +106,8 @@ public class UiBulletinComponentEditorSection extends UiBulletinComponentDataSec
 	{
 		MartusLocalization localization = mainWindow.getLocalization();
 		fieldSpec.setColumnZeroLabel(localization.getFieldLabel("ColumnGridRowNumber"));
-		return new UiGridEditor(fieldSpec, localization);
+		UiDialogLauncher dlgLauncher = new UiDialogLauncher(mainWindow.getCurrentActiveFrame(), localization);
+		return new UiGridEditor(fieldSpec, localization, dlgLauncher);
 	}
 	
 	public void addAttachment(AttachmentProxy a)

@@ -28,6 +28,7 @@ package org.martus.client.search;
 
 import org.martus.client.bulletinstore.ClientBulletinStore;
 import org.martus.client.swingui.MartusLocalization;
+import org.martus.client.swingui.dialogs.UiDialogLauncher;
 import org.martus.client.test.MockMartusApp;
 import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.fieldspec.GridFieldSpec;
@@ -46,7 +47,9 @@ public class TestFancySearchTableModel extends TestCaseEnhanced
 		ClientBulletinStore store = app.getStore();
 		store.createFieldSpecCacheFromDatabase();
 		app.loadSampleData();
-		FancySearchHelper helper = new FancySearchHelper(store, new MartusLocalization(null, new String[0]));
+		MartusLocalization localization = new MartusLocalization(null, new String[0]);
+		UiDialogLauncher nullLauncher = new UiDialogLauncher(null,localization);
+		FancySearchHelper helper = new FancySearchHelper(store, localization, nullLauncher);
 		GridFieldSpec gridSpec = helper.getGridSpec(store);
 		FancySearchTableModel model = new FancySearchTableModel(gridSpec);
 		model.addEmptyRow();

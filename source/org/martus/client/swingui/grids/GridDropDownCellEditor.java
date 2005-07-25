@@ -69,6 +69,7 @@ public class GridDropDownCellEditor extends GridCellEditorAndRenderer implements
 	public void actionPerformed(ActionEvent arg0)
 	{
 		// force our new value to be saved, even though we haven't exited this cell yet
+//		System.out.println("GridDropDownCellEditor actionPerformed, so calling stopCellEditing");
 		stopCellEditing();
 	}
 }

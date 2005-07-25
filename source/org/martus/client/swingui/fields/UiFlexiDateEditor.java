@@ -291,7 +291,7 @@ public class UiFlexiDateEditor extends UiField
 	UiComboBox 					endDayCombo;
 	UiComboBox 					endYearCombo;
 		
-	private UiLocalization localization;	
+	protected UiLocalization localization;	
 	private UiRadioButton 		exactDateRB;
 	private UiRadioButton 		flexiDateRB;
 	protected Box			 	flexiDateBox;

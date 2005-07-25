@@ -94,7 +94,7 @@ public class GridCellEditorAndRenderer extends AbstractCellEditor implements Tab
 	// related case with a different solution
 	public void focusLost(FocusEvent arg0)
 	{
-		//System.out.println("focusLost, so calling stopCellEditing");
+//		System.out.println("GridCellEditorAndRenderer focusLost, so calling stopCellEditing");
 		stopCellEditing();
 	}
 

@@ -28,9 +28,9 @@ package org.martus.client.search;
 
 import java.util.Arrays;
 import java.util.Vector;
-
 import org.martus.client.bulletinstore.ClientBulletinStore;
 import org.martus.client.swingui.MartusLocalization;
+import org.martus.client.swingui.dialogs.UiDialogLauncher;
 import org.martus.common.GridData;
 import org.martus.common.field.MartusDateRangeField;
 import org.martus.common.fieldspec.ChoiceItem;
@@ -44,15 +44,21 @@ import org.martus.util.TokenReplacement.TokenInvalidException;
 
 public class FancySearchHelper
 {
-	public FancySearchHelper(ClientBulletinStore storeToUse, MartusLocalization localizationToUse)
+	public FancySearchHelper(ClientBulletinStore storeToUse, MartusLocalization localizationToUse, UiDialogLauncher dlgLauncherToUse)
 	{
 		localization = localizationToUse;
+		dlgLauncher = dlgLauncherToUse;
 		model = new FancySearchTableModel(getGridSpec(storeToUse));
 	}
 	
 	MartusLocalization getLocalization()
 	{
 		return localization;
+	}
+	
+	UiDialogLauncher getDialogLauncher()
+	{
+		return dlgLauncher;
 	}
 	
 	FancySearchTableModel getModel()
@@ -191,5 +197,6 @@ public class FancySearchHelper
 	
 	MartusLocalization localization;
 	FancySearchTableModel model;
+	UiDialogLauncher dlgLauncher;
 }
 

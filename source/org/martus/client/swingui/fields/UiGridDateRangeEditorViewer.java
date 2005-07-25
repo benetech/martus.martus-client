@@ -26,13 +26,15 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.swingui.fields;
 
 import javax.swing.JComponent;
-import org.martus.clientside.UiLocalization;
+import org.martus.client.swingui.MartusLocalization;
+import org.martus.client.swingui.dialogs.UiDialogLauncher;
 
 public class UiGridDateRangeEditorViewer extends UiFlexiDateEditor
 {
-	public UiGridDateRangeEditorViewer(UiLocalization localizationToUse)
+	public UiGridDateRangeEditorViewer(MartusLocalization localizationToUse, UiDialogLauncher dlgLauncherToUse)
 	{
 		super(localizationToUse, null);
+		dlgLauncher = dlgLauncherToUse;
 		removeExactDatePanel();
 	}
 	
@@ -57,9 +59,22 @@ public class UiGridDateRangeEditorViewer extends UiFlexiDateEditor
 		endDayCombo, endMonthCombo, endYearCombo};
 	}
 	
+	public void validate() throws DataInvalidException 
+	{
+		try
+		{
+			super.validate();
+		}
+		catch(DataInvalidException e)
+		{
+			dlgLauncher.ShowDialog("DateRageInvalid");
+			throw e;
+		}
+	}
+
 	public JComponent getComponent()
 	{
 		return flexiDateBox;
 	}
-	
+	UiDialogLauncher dlgLauncher;
 }
