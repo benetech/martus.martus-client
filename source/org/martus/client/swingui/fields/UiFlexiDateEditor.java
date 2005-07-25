@@ -27,6 +27,7 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.swingui.fields;
 
 import java.awt.BorderLayout;
+import java.awt.Component;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.text.DateFormat;
@@ -44,6 +45,7 @@ import org.martus.swing.UiComboBox;
 import org.martus.swing.UiLabel;
 import org.martus.swing.UiParagraphPanel;
 import org.martus.swing.UiRadioButton;
+import org.martus.swing.Utilities;
 
 public class UiFlexiDateEditor extends UiField
 {
@@ -77,19 +79,21 @@ public class UiFlexiDateEditor extends UiField
 	private JComponent buildFlexiDateBox()
 	{	
 		flexiDateBox = Box.createHorizontalBox();
-		flexiDateBox.add(new UiLabel(" "));
-		flexiDateBox.add(buildBeginDateBox());
-		flexiDateBox.add(new UiLabel("  -  "));
-		flexiDateBox.add(buildEndDateBox());
-		flexiDateBox.add(new UiLabel(" "));
+		Component[] items = new Component[] {createSpaceSeperator(), buildBeginDateBox(), new UiLabel("  -  "), buildEndDateBox(), createSpaceSeperator()};
+		Utilities.addComponentsRespectingOrientation(flexiDateBox, items);
 		return flexiDateBox;
+	}
+
+	private UiLabel createSpaceSeperator()
+	{
+		return new UiLabel(" ");
 	}
 	
 	private JComponent buildExactDateBox()
 	{		
 		exactDateBox = Box.createHorizontalBox();
-		exactDateBox.add(new UiLabel(" "));
-		exactDateBox.add(buildBeginDateBox());
+		Component[] items = new Component[] {createSpaceSeperator(), buildBeginDateBox()};
+		Utilities.addComponentsRespectingOrientation(exactDateBox, items);
 		return exactDateBox;			
 	}
 				
