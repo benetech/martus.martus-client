@@ -92,6 +92,7 @@ public class EnglishStrings
 "wintitle:confirmNewerConfigInfoFileFound=Version Warning",
 "wintitle:confirmdeletefolder=Confirm Delete Folder",
 "wintitle:confirmRetrieveNewerVersions=Confirm Retrieving Newer Versions",
+"wintitle:confirmDateRageInvalid=Date Range Invalid",
 
 "wintitle:notifyDropErrorBulletinExists=Cannot Move Bulletin(s)",
 "wintitle:notifyDropErrorBulletinOlder=Cannot Move Bulletin(s)",
@@ -573,6 +574,9 @@ public class EnglishStrings
 "field:confirmNewerConfigInfoFileFoundeffect=Answering Yes will continue to use this older version of Martus.  Answering No will exit Martus so you can upgrade to the latest version.",
 "field:confirmRetrieveNewerVersionscause=The following bulletin(s) selected for retrieval are newer versions of bulletins already on this computer:\n\n#TITLES#",
 "field:confirmRetrieveNewerVersionseffect=Each older version will be replaced by the newer version from the server.",
+
+"field:confirmDateRageInvalidcause=The date range you entered is invalid.  The end date occures before the begin data.",
+"field:confirmDateRageInvalideffect=Ansering Yes will take you back to the date range to fix the problem.  Ansering No will revert the date back to its original value.",
 
 "field:notifyDropErrorBulletinExistscause=One or more bulletins cannot be moved to that folder, because it already exists in that folder.",
 "field:notifyDropErrorBulletinOldercause=One or more bulletins cannot be moved to that folder, because a newer version of this bulletin already exists.",

@@ -25,8 +25,8 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.dialogs;
 
-import java.util.HashMap;
 import javax.swing.JFrame;
+
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.clientside.UiUtilities;
 
@@ -38,12 +38,19 @@ public class UiDialogLauncher
 		frame = frameToUse;
 		localization = localizationToUse;
 	}
-	public void ShowDialog(String baseTag)
+	
+	public boolean ShowConfirmDialog(String baseTag)
 	{
 		if(frame == null)
-			return;
-		UiUtilities.notifyDlg(localization, frame, baseTag, "notify" + baseTag, new HashMap());
+			return true;
+		return UiUtilities.confirmDlg(localization, frame, baseTag);
 	}
+
+	public MartusLocalization GetLocalization()
+	{
+		return localization;
+	}
+	
 	MartusLocalization localization;
 	JFrame frame;
 }

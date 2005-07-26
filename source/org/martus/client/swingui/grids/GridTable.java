@@ -27,9 +27,10 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.swingui.grids;
 
 import java.util.HashMap;
+
 import javax.swing.table.TableCellEditor;
 import javax.swing.table.TableCellRenderer;
-import org.martus.client.swingui.MartusLocalization;
+
 import org.martus.client.swingui.dialogs.UiDialogLauncher;
 import org.martus.common.fieldspec.DropDownFieldSpec;
 import org.martus.common.fieldspec.FieldSpec;
@@ -38,10 +39,9 @@ import org.martus.util.language.LanguageOptions;
 
 public class GridTable extends UiTableWithCellEditingProtection
 {
-	public GridTable(GridTableModel model, MartusLocalization localizationToUse, UiDialogLauncher dlgLauncherToUse)
+	public GridTable(GridTableModel model, UiDialogLauncher dlgLauncherToUse)
 	{
 		super(model);
-		localization = localizationToUse;
 		dlgLauncher = dlgLauncherToUse;
 		// NOTE: We need to keep renderers and editors separate, because otherwise
 		// they get confused about focus when you click on a renderer but the 
@@ -110,10 +110,10 @@ public class GridTable extends UiTableWithCellEditingProtection
 	{
 		HashMap map = new HashMap();
 		map.put(new Integer(FieldSpec.TYPE_BOOLEAN), new GridBooleanCellEditor());
-		map.put(new Integer(FieldSpec.TYPE_DATE), new GridDateCellEditor(localization));
-		map.put(new Integer(FieldSpec.TYPE_DATERANGE), new GridDateRangeCellEditor(localization, dlgLauncher));
+		map.put(new Integer(FieldSpec.TYPE_DATE), new GridDateCellEditor(dlgLauncher.GetLocalization()));
+		map.put(new Integer(FieldSpec.TYPE_DATERANGE), new GridDateRangeCellEditor(dlgLauncher));
 		map.put(new Integer(FieldSpec.TYPE_DROPDOWN), new GridDropDownCellEditor());
-		map.put(new Integer(FieldSpec.TYPE_NORMAL), new GridNormalCellEditor(localization));
+		map.put(new Integer(FieldSpec.TYPE_NORMAL), new GridNormalCellEditor(dlgLauncher.GetLocalization()));
 		return map;
 	}
 	
@@ -157,7 +157,6 @@ public class GridTable extends UiTableWithCellEditingProtection
 		return (TableCellEditor)map.get(new Integer(FieldSpec.TYPE_NORMAL));
 	}
 
-	MartusLocalization localization;
 	UiDialogLauncher dlgLauncher;
 	HashMap renderers;
 	HashMap editors;

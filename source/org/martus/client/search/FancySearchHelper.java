@@ -28,6 +28,7 @@ package org.martus.client.search;
 
 import java.util.Arrays;
 import java.util.Vector;
+
 import org.martus.client.bulletinstore.ClientBulletinStore;
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.dialogs.UiDialogLauncher;
@@ -44,16 +45,15 @@ import org.martus.util.TokenReplacement.TokenInvalidException;
 
 public class FancySearchHelper
 {
-	public FancySearchHelper(ClientBulletinStore storeToUse, MartusLocalization localizationToUse, UiDialogLauncher dlgLauncherToUse)
+	public FancySearchHelper(ClientBulletinStore storeToUse, UiDialogLauncher dlgLauncherToUse)
 	{
-		localization = localizationToUse;
 		dlgLauncher = dlgLauncherToUse;
 		model = new FancySearchTableModel(getGridSpec(storeToUse));
 	}
 	
 	MartusLocalization getLocalization()
 	{
-		return localization;
+		return dlgLauncher.GetLocalization();
 	}
 	
 	UiDialogLauncher getDialogLauncher()
@@ -128,7 +128,7 @@ public class FancySearchHelper
 	private void addDateRangeChoiceItem(Vector choices, String tag, String subfield, String baseDisplayString) 
 	{
 		String fullTag = tag + "." + subfield;
-		String displayTemplate = localization.getFieldLabel("DateRangeTemplate" + subfield);
+		String displayTemplate = dlgLauncher.GetLocalization().getFieldLabel("DateRangeTemplate" + subfield);
 		try
 		{
 			String fullDisplayString = TokenReplacement.replaceToken(displayTemplate, "#FIELDLABEL#", baseDisplayString);
@@ -195,7 +195,6 @@ public class FancySearchHelper
 	public static final int COLUMN_COMPARE_HOW = 2;
 	public static final int COLUMN_VALUE = 3;
 	
-	MartusLocalization localization;
 	FancySearchTableModel model;
 	UiDialogLauncher dlgLauncher;
 }

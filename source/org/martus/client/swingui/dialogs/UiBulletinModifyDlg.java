@@ -67,7 +67,7 @@ public class UiBulletinModifyDlg extends JFrame implements ActionListener, Windo
 	public UiBulletinModifyDlg(Bulletin b, UiMainWindow observerToUse)
 	{
 		observer = observerToUse;
-
+		observerToUse.setCurrentActiveFrame(this); //Added here since it wasn't getting called.  Removed SetVisible within the constructor didn't help.
 		UiLocalization localization = observer.getLocalization();
 		setTitle(localization.getWindowTitle("create"));
 		UiMainWindow.updateIcon(this);

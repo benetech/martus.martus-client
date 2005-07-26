@@ -27,7 +27,7 @@ package org.martus.client.swingui.fields;
 
 import javax.swing.JComponent;
 import javax.swing.ListSelectionModel;
-import org.martus.client.swingui.MartusLocalization;
+
 import org.martus.client.swingui.dialogs.UiDialogLauncher;
 import org.martus.client.swingui.grids.GridTable;
 import org.martus.client.swingui.grids.GridTableModel;
@@ -39,15 +39,15 @@ import org.martus.swing.UiTable;
 
 public class UiGrid extends UiField
 {
-	public UiGrid(GridFieldSpec fieldSpec, MartusLocalization localizationToUse, UiDialogLauncher dlgLauncher)
+	public UiGrid(GridFieldSpec fieldSpec, UiDialogLauncher dlgLauncher)
 	{
-		this(new GridTableModel(fieldSpec), localizationToUse, dlgLauncher);
+		this(new GridTableModel(fieldSpec), dlgLauncher);
 	}
 	
-	public UiGrid(GridTableModel modelToUse, MartusLocalization localizationToUse, UiDialogLauncher dlgLauncher)
+	public UiGrid(GridTableModel modelToUse, UiDialogLauncher dlgLauncher)
 	{
 		model = modelToUse;
-		table = new GridTable(model, localizationToUse, dlgLauncher);
+		table = new GridTable(model, dlgLauncher);
 		table.setColumnSelectionAllowed(false);
 		table.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
 		table.setShowGrid(true);

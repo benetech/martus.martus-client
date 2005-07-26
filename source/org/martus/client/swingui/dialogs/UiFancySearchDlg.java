@@ -52,7 +52,7 @@ public class UiFancySearchDlg extends UiSearchDlg
 		UiButton cancel = new UiButton(localization.getButtonLabel("cancel"));
 		cancel.addActionListener(this);
 		UiDialogLauncher dlgLauncher = new UiDialogLauncher(mainWindow.getCurrentActiveFrame(), localization);
-		grid = FancySearchGridEditor.create(mainWindow.getStore(), localization, dlgLauncher);
+		grid = FancySearchGridEditor.create(mainWindow.getStore(), dlgLauncher);
 		grid.setText(getPreviousSearch());
 
 		Box panel = Box.createVerticalBox();

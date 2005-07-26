@@ -27,23 +27,23 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.search;
 
 import javax.swing.JTable;
+
 import org.martus.client.bulletinstore.ClientBulletinStore;
-import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.dialogs.UiDialogLauncher;
 import org.martus.client.swingui.fields.UiGridEditor;
 
 public class FancySearchGridEditor extends UiGridEditor
 {
-	public static FancySearchGridEditor create(ClientBulletinStore storeToSearch, MartusLocalization localization, UiDialogLauncher dlgLauncher)
+	public static FancySearchGridEditor create(ClientBulletinStore storeToSearch, UiDialogLauncher dlgLauncher)
 	{
-		FancySearchHelper helper = new FancySearchHelper(storeToSearch, localization, dlgLauncher);
+		FancySearchHelper helper = new FancySearchHelper(storeToSearch, dlgLauncher);
 		return new FancySearchGridEditor(helper);
 		
 	}
 	
 	private FancySearchGridEditor(FancySearchHelper helperToUse)
 	{
-		super(helperToUse.getModel(), helperToUse.getLocalization(), helperToUse.getDialogLauncher());
+		super(helperToUse.getModel(), helperToUse.getDialogLauncher());
 		helper = helperToUse;
 		getTable().setAutoResizeMode(JTable.AUTO_RESIZE_LAST_COLUMN);
 	}

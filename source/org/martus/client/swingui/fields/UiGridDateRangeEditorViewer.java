@@ -67,7 +67,8 @@ public class UiGridDateRangeEditorViewer extends UiFlexiDateEditor
 		}
 		catch(DataInvalidException e)
 		{
-			dlgLauncher.ShowDialog("DateRageInvalid");
+			if(!dlgLauncher.ShowConfirmDialog("DateRageInvalid"))
+				e.SetRevertToOriginalDate();
 			throw e;
 		}
 	}

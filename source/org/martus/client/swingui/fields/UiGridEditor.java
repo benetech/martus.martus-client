@@ -27,10 +27,11 @@ package org.martus.client.swingui.fields;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+
 import javax.swing.CellEditor;
 import javax.swing.DefaultCellEditor;
 import javax.swing.JComboBox;
-import org.martus.client.swingui.MartusLocalization;
+
 import org.martus.client.swingui.dialogs.UiDialogLauncher;
 import org.martus.client.swingui.grids.GridTableModel;
 import org.martus.common.fieldspec.GridFieldSpec;
@@ -39,15 +40,15 @@ import org.martus.common.fieldspec.GridFieldSpec;
 
 public class UiGridEditor extends UiGrid
 {
-	public UiGridEditor(GridFieldSpec fieldSpec, MartusLocalization localization, UiDialogLauncher dlgLauncher)
+	public UiGridEditor(GridFieldSpec fieldSpec, UiDialogLauncher dlgLauncher)
 	{
-		super(fieldSpec, localization, dlgLauncher);
+		super(fieldSpec, dlgLauncher);
 		initialize();
 	}
 	
-	public UiGridEditor(GridTableModel model, MartusLocalization localization, UiDialogLauncher dlgLauncher)
+	public UiGridEditor(GridTableModel model, UiDialogLauncher dlgLauncher)
 	{
-		super(model, localization, dlgLauncher);
+		super(model, dlgLauncher);
 		initialize();
 	}
 	

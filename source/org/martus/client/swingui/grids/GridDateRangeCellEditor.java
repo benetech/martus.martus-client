@@ -25,16 +25,19 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.grids;
 
-import org.martus.client.swingui.MartusLocalization;
+import java.awt.Component;
+
+import javax.swing.JTable;
+
 import org.martus.client.swingui.dialogs.UiDialogLauncher;
 import org.martus.client.swingui.fields.UiGridDateRangeEditorViewer;
 import org.martus.client.swingui.fields.UiField.DataInvalidException;
 
 public class GridDateRangeCellEditor extends GridCellEditorAndRenderer
 {
-	GridDateRangeCellEditor(MartusLocalization localization, UiDialogLauncher dlgLauncher)
+	GridDateRangeCellEditor(UiDialogLauncher dlgLauncher)
 	{
-		super(new UiGridDateRangeEditorViewer(localization, dlgLauncher));
+		super(new UiGridDateRangeEditorViewer(dlgLauncher.GetLocalization(), dlgLauncher));
 	}
 
 	public boolean stopCellEditing()
@@ -46,7 +49,20 @@ public class GridDateRangeCellEditor extends GridCellEditorAndRenderer
 		}
 		catch(DataInvalidException e)
 		{
+			if(e.shouldRevertToOriginalDate())
+			{
+				super.widget.setText(originalDate);
+				return super.stopCellEditing();
+			}
 			return false;
 		}
 	}
+
+	public Component getTableCellEditorComponent(JTable tableToUse, Object stringValue, boolean isSelected, int row, int column) {
+		originalDate = super.widget.getText();
+		return super.getTableCellEditorComponent(tableToUse, stringValue, isSelected,
+				row, column);
+	}
+
+	String originalDate;
 }

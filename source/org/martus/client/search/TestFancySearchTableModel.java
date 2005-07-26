@@ -47,9 +47,8 @@ public class TestFancySearchTableModel extends TestCaseEnhanced
 		ClientBulletinStore store = app.getStore();
 		store.createFieldSpecCacheFromDatabase();
 		app.loadSampleData();
-		MartusLocalization localization = new MartusLocalization(null, new String[0]);
-		UiDialogLauncher nullLauncher = new UiDialogLauncher(null,localization);
-		FancySearchHelper helper = new FancySearchHelper(store, localization, nullLauncher);
+		UiDialogLauncher nullLauncher = new UiDialogLauncher(null,new MartusLocalization(null, new String[0]));
+		FancySearchHelper helper = new FancySearchHelper(store, nullLauncher);
 		GridFieldSpec gridSpec = helper.getGridSpec(store);
 		FancySearchTableModel model = new FancySearchTableModel(gridSpec);
 		model.addEmptyRow();

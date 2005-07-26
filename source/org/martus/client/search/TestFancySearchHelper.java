@@ -56,9 +56,8 @@ public class TestFancySearchHelper extends TestCaseEnhanced
 		app.loadSampleData();
 		tempDir = createTempDirectory();
 		localization = new MartusLocalization(tempDir, new String[0]);
-		MartusLocalization localization = new MartusLocalization(null, new String[0]);
-		UiDialogLauncher nullLauncher = new UiDialogLauncher(null,localization);
-		helper = new FancySearchHelper(store, localization, nullLauncher);
+		UiDialogLauncher nullLauncher = new UiDialogLauncher(null,new MartusLocalization(null, new String[0]));
+		helper = new FancySearchHelper(store, nullLauncher);
 		
 	}
 	
