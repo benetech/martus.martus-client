@@ -1211,60 +1211,50 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 
 	void printBulletin(Bulletin currentBulletin)
 	{
-		int width = preview.getView().getWidth();		
-	
 		UiPrintBulletinDlg dlg = new UiPrintBulletinDlg(this, currentBulletin.isAllPrivate());
 		dlg.setVisible(true);		
 			
 		if (!dlg.isContinueButtonPressed())
 			return;							
 		
-		boolean yourBulletin = currentBulletin.getAccount().equals(getApp().getAccountId());	
-		BulletinHtmlGenerator generator = new BulletinHtmlGenerator(width, getLocalization() );
-		String html = generator.getHtmlString(currentBulletin, getStore().getDatabase(), dlg.isIncludePrivateChecked(), yourBulletin);
-		JComponent view = new UiLabel(html);
-		
-		JFrame frame = new JFrame();
-		UiScrollPane scroller = new UiScrollPane();
-		scroller.getViewport().add(view);
-		frame.getContentPane().add(scroller);
-		frame.pack();
-		//If you want to see what is being printed uncomment out this next line
-		//frame.setVisible(true);
 		PrintPageFormat format = new PrintPageFormat();
-		JComponentVista vista = new JComponentVista(view, format);
 		PrinterJob job = PrinterJob.getPrinterJob();
-		job.setPageable(vista);
 		HashPrintRequestAttributeSet attributes = new HashPrintRequestAttributeSet();
-		boolean printCancelled = false;
 		while(true)
 		{
-			if (job.printDialog(attributes))
-			{
-				format.setFromAttributes(attributes);
-				if(format.mustWarnUser)
-				{
-					if(confirmDlg("PrinterWarning"))
-						continue;
-				}
-				vista.scaleToFitX();
-				job.setPageable(vista);
+			if (!job.printDialog(attributes))
+				return;
+			format.setFromAttributes(attributes);
+			if(!format.mustWarnUser)
 				break;
-			}
-			printCancelled = true;
-			break;
+			if(!confirmDlg("PrinterWarning"))
+				break;
 		}
-		if(!printCancelled)
+		
+		try
 		{
-			try
-			{
-				job.print(attributes);
-			}
-			catch (PrinterException e)
-			{
-				System.out.println(e);
-				e.printStackTrace();
-			}
+			boolean yourBulletin = currentBulletin.getAccount().equals(getApp().getAccountId());	
+			int width = preview.getView().getWidth();		
+			BulletinHtmlGenerator generator = new BulletinHtmlGenerator(width, getLocalization() );
+			String html = generator.getHtmlString(currentBulletin, getStore().getDatabase(), dlg.isIncludePrivateChecked(), yourBulletin);
+			JComponent view = new UiLabel(html);
+			
+			JFrame frame = new JFrame();
+			UiScrollPane scroller = new UiScrollPane();
+			scroller.getViewport().add(view);
+			frame.getContentPane().add(scroller);
+			frame.pack();
+			//If you want to see what is being printed uncomment out this next line
+			//frame.setVisible(true);
+			JComponentVista vista = new JComponentVista(view, format);
+			vista.scaleToFitX();
+			job.setPageable(vista);
+			job.print(attributes);
+		}
+		catch (PrinterException e)
+		{
+			System.out.println(e);
+			e.printStackTrace();
 		}
 	}
 
