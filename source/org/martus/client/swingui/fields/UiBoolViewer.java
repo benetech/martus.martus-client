@@ -36,7 +36,7 @@ import org.martus.clientside.UiLocalization;
 import org.martus.common.fieldspec.FieldSpec;
 import org.martus.swing.UiLabel;
 
-public class UiBoolViewer extends UiField
+public class UiBoolViewer extends UiViewerField
 {
 	public UiBoolViewer(UiLocalization localizationToUse)
 	{

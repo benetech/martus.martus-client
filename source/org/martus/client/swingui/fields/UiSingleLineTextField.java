@@ -32,7 +32,7 @@ import javax.swing.text.JTextComponent;
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.swing.UiTextField;
 
-public class UiSingleLineTextField extends UiStringField
+abstract public class UiSingleLineTextField extends UiStringField
 {
 	public UiSingleLineTextField(MartusLocalization localizationToUse)
 	{

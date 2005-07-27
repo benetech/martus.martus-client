@@ -60,6 +60,11 @@ public class UiChoiceViewer extends UiChoice
 		return widget;
 	}
 
+	public JComponent[] getFocusableComponents()
+	{
+		return new JComponent[0];
+	}
+
 	JLabel widget;
 }
 

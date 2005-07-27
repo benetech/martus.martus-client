@@ -28,6 +28,8 @@ package org.martus.client.swingui.fields;
 
 import java.awt.Font;
 
+import javax.swing.JComponent;
+
 import org.martus.client.swingui.UiConstants;
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.swing.UiTextField;
@@ -44,6 +46,11 @@ public class UiSingleLineTextViewer extends UiSingleLineTextField
 		// We would like to support the context menu here, but it seems that 
 		// the grid is preventing right-clicks from being passed to us.
 		supportContextMenu();
+	}
+
+	public JComponent[] getFocusableComponents()
+	{
+		return new JComponent[0];
 	}
 
 }

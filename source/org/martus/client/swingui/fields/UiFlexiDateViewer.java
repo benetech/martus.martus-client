@@ -33,7 +33,7 @@ import org.martus.clientside.UiLocalization;
 import org.martus.swing.UiLabel;
 
 
-public class UiFlexiDateViewer extends UiField
+public class UiFlexiDateViewer extends UiViewerField
 {
 	public UiFlexiDateViewer(UiLocalization localizationToUse)
 	{

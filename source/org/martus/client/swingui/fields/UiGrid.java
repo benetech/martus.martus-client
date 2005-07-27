@@ -37,7 +37,7 @@ import org.martus.swing.UiScrollPane;
 import org.martus.swing.UiTable;
 
 
-public class UiGrid extends UiField
+abstract public class UiGrid extends UiField
 {
 	public UiGrid(GridFieldSpec fieldSpec, UiDialogLauncher dlgLauncher)
 	{
@@ -91,7 +91,7 @@ public class UiGrid extends UiField
 	private static final int ROW_HEIGHT_PADDING = 3;
 
 	UiScrollPane widget;
-	UiTable table;
+	GridTable table;
 	GridTableModel model;
 }
 

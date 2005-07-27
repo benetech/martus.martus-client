@@ -46,34 +46,39 @@ public class GridCellEditorAndRenderer extends AbstractCellEditor implements Tab
 {
 	GridCellEditorAndRenderer(UiField widgetToWrap)
 	{
-		widget = widgetToWrap;
-		getComponent().addFocusListener(this);
+		uiField = widgetToWrap;
+		uiField.addFocusListener(this);
 		borderWithoutFocus = new EmptyBorder(1,1,1,1);
 		borderWithFocus = new LineBorder(Color.BLACK,1);
 	}
 
 	public Component getTableCellEditorComponent(JTable tableToUse, Object stringValue, boolean isSelected, int row, int column)
 	{
-		widget.setText((String)stringValue);
+		getUiField().setText((String)stringValue);
 		JComponent component = getComponent();
 		
 		component.setBorder(borderWithFocus);
 		return component;
 	}
+	
+	public UiField getUiField()
+	{
+		return uiField;
+	}
 
 	public JComponent getComponent()
 	{
-		return widget.getComponent();
+		return getUiField().getComponent();
 	}
 
 	public Object getCellEditorValue()
 	{
-		return widget.getText();
+		return getUiField().getText();
 	}
 
 	public Component getTableCellRendererComponent(JTable tableToUse, Object stringValue, boolean isSelected, boolean hasFocus, int row, int column)
 	{
-		widget.setText((String)stringValue);
+		getUiField().setText((String)stringValue);
 		JComponent component = getComponent();
 		
 		Border border = borderWithoutFocus;
@@ -94,11 +99,11 @@ public class GridCellEditorAndRenderer extends AbstractCellEditor implements Tab
 	// related case with a different solution
 	public void focusLost(FocusEvent arg0)
 	{
-//		System.out.println("GridCellEditorAndRenderer focusLost, so calling stopCellEditing");
+		//System.out.println("GridCellEditorAndRenderer focusLost, so calling stopCellEditing");
 		stopCellEditing();
 	}
 
-	UiField widget;
+	UiField uiField;
 	Border borderWithFocus;
 	Border borderWithoutFocus;
 }

@@ -42,8 +42,8 @@ class GridNormalCellEditor extends GridCellEditorAndRenderer
 		super(new UiSingleLineTextEditor(localization));
 
 		// this code should go away when the first grid column becomes a TYPE_MESSAGE 
-		normalForeground = widget.getComponent().getForeground();
-		normalBackground = widget.getComponent().getBackground();
+		normalForeground = uiField.getComponent().getForeground();
+		normalBackground = uiField.getComponent().getBackground();
 		// end code that should go away
 
 	}
@@ -63,7 +63,7 @@ class GridNormalCellEditor extends GridCellEditorAndRenderer
 	private void setColors(int column)
 	{
 		// this code should go away when the first grid column becomes a TYPE_MESSAGE 
-		JComponent component = widget.getComponent();
+		JComponent component = uiField.getComponent();
 		Color fg = normalForeground;
 		Color bg = normalBackground;
 		if(column == 0)

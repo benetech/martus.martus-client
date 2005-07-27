@@ -32,10 +32,12 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.text.DateFormat;
 import java.util.Date;
+
 import javax.swing.Box;
 import javax.swing.ButtonGroup;
 import javax.swing.JComponent;
 import javax.swing.JPanel;
+
 import org.martus.clientside.UiLocalization;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.fieldspec.FieldSpec;
@@ -73,13 +75,17 @@ public class UiFlexiDateEditor extends UiField
 		flexiDateRB.addItemListener(new RadioItemListener());
 		exactDateRB.addItemListener(new RadioItemListener());
 		component.add(dateSelection, BorderLayout.NORTH);
+		
+		buildBeginDateBox();
+		buildEndDateBox();
+
 		component.add(buildExactDateBox(), BorderLayout.CENTER);
 	}
 	
 	private JComponent buildFlexiDateBox()
 	{	
 		flexiDateBox = Box.createHorizontalBox();
-		Component[] items = new Component[] {createSpaceSeperator(), buildBeginDateBox(), new UiLabel("  -  "), buildEndDateBox(), createSpaceSeperator()};
+		Component[] items = new Component[] {createSpaceSeperator(), getBeginDateBox(), new UiLabel("  -  "), getEndDateBox(), createSpaceSeperator()};
 		Utilities.addComponentsRespectingOrientation(flexiDateBox, items);
 		return flexiDateBox;
 	}
@@ -92,52 +98,48 @@ public class UiFlexiDateEditor extends UiField
 	private JComponent buildExactDateBox()
 	{		
 		exactDateBox = Box.createHorizontalBox();
-		Component[] items = new Component[] {createSpaceSeperator(), buildBeginDateBox()};
+		Component[] items = new Component[] {createSpaceSeperator(), getBeginDateBox()};
 		Utilities.addComponentsRespectingOrientation(exactDateBox, items);
 		return exactDateBox;			
 	}
 				
-	private Box buildBeginDateBox()
+	private void buildBeginDateBox()
 	{				
-		if (bgDateBox  == null)
-		{	
-			bgDateBox = Box.createHorizontalBox();								
-			bgDayCombo = new UiComboBox();	
-			bgMonthCombo = new UiComboBox(localization.getMonthLabels());
-			bgYearCombo = new UiComboBox();
-			if(isCustomDate())					
-				UiDateEditor.buildCustomDate(bgDateBox, localization, bgYearCombo, bgMonthCombo, bgDayCombo);
-			else
-				UiDateEditor.buildDate(bgDateBox, localization, bgYearCombo, bgMonthCombo, bgDayCombo);	
-		}		
-		
+		bgDateBox = Box.createHorizontalBox();								
+		bgDayCombo = new UiComboBox();
+		bgMonthCombo = new UiComboBox(localization.getMonthLabels());
+		bgYearCombo = new UiComboBox();
+
+		if(isCustomDate())					
+			UiDateEditor.buildCustomDate(bgDateBox, localization, bgYearCombo, bgMonthCombo, bgDayCombo);
+		else
+			UiDateEditor.buildDate(bgDateBox, localization, bgYearCombo, bgMonthCombo, bgDayCombo);	
+	}
+	
+	private Box getBeginDateBox()
+	{	
 		return bgDateBox;											
 	}
 
-	private Box buildEndDateBox()
+	private void buildEndDateBox()
 	{		
-		boolean needToSetDefaultValue=false;		
-		if (endDateBox == null)
-		{
-			endDateBox = Box.createHorizontalBox();		
-			endDayCombo = new UiComboBox();	
-			endMonthCombo = new UiComboBox(localization.getMonthLabels());
-			endYearCombo = new UiComboBox();
-			needToSetDefaultValue=true;	
-			
-			if(isCustomDate())					
-				UiDateEditor.buildCustomDate(endDateBox, localization, endYearCombo, endMonthCombo, endDayCombo);
-			else					
-				UiDateEditor.buildDate(endDateBox, localization, endYearCombo, endMonthCombo, endDayCombo);
-		}
+		endDateBox = Box.createHorizontalBox();		
+		endDayCombo = new UiComboBox();	
+		endMonthCombo = new UiComboBox(localization.getMonthLabels());
+		endYearCombo = new UiComboBox();
 		
-		if (needToSetDefaultValue)
-		{				
-			endYearCombo.setSelectedItem(bgYearCombo.getSelectedItem());
-			endMonthCombo.setSelectedItem(bgMonthCombo.getSelectedItem());
-			endDayCombo.setSelectedItem(bgDayCombo.getSelectedItem());			
-		}
-			
+		if(isCustomDate())					
+			UiDateEditor.buildCustomDate(endDateBox, localization, endYearCombo, endMonthCombo, endDayCombo);
+		else					
+			UiDateEditor.buildDate(endDateBox, localization, endYearCombo, endMonthCombo, endDayCombo);
+		
+		endYearCombo.setSelectedItem(bgYearCombo.getSelectedItem());
+		endMonthCombo.setSelectedItem(bgMonthCombo.getSelectedItem());
+		endDayCombo.setSelectedItem(bgDayCombo.getSelectedItem());			
+	}
+		
+	private Box getEndDateBox()
+	{
 		return endDateBox;		
 	}
 
@@ -281,7 +283,7 @@ public class UiFlexiDateEditor extends UiField
 		}
 
 	}
-		
+	
 	JComponent 					component;
 	
 	UiComboBox 					bgMonthCombo;

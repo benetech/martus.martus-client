@@ -32,7 +32,7 @@ import javax.swing.JLabel;
 import org.martus.client.swingui.UiWarningLabel;
 import org.martus.clientside.UiLocalization;
 
-public class UiUnknownViewer extends UiField
+public class UiUnknownViewer extends UiViewerField
 {
 	public UiUnknownViewer(UiLocalization localizationToUse)
 	{

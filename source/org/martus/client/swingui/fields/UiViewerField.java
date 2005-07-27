@@ -23,39 +23,15 @@ Software Foundation, Inc., 59 Temple Place - Suite 330,
 Boston, MA 02111-1307, USA.
 
 */
+
 package org.martus.client.swingui.fields;
 
 import javax.swing.JComponent;
-import javax.swing.JPanel;
 
-import org.martus.common.fieldspec.FieldSpec;
-import org.martus.common.fieldspec.MessageFieldSpec;
-import org.martus.swing.UiWrappedTextArea;
-
-public class UiMessageField extends UiViewerField
+abstract public class UiViewerField extends UiField
 {
-	public UiMessageField(FieldSpec spec)
+	public JComponent[] getFocusableComponents()
 	{
-		super();
-		String message = ((MessageFieldSpec)(spec)).getMessage();
-		widget = new UiWrappedTextArea(message, 65);
-		widget.setEditable(false);
-		widget.setBackground(new JPanel().getBackground());
+		return new JComponent[0];
 	}
-
-	public JComponent getComponent()
-	{
-		return widget;
-	}
-
-	public String getText()
-	{
-		 return widget.getText();
-	}
-
-	public void setText(String newText)
-	{
-	}
-	
-	UiWrappedTextArea widget;
 }

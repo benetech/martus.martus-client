@@ -26,8 +26,14 @@ Boston, MA 02111-1307, USA.
 
 package org.martus.client.swingui.grids;
 
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Vector;
 
+import javax.swing.JComponent;
 import javax.swing.table.TableCellEditor;
 import javax.swing.table.TableCellRenderer;
 
@@ -104,6 +110,20 @@ public class GridTable extends UiTableWithCellEditingProtection
 			widestWidth += DROPDOWN_LANGUAGE_PADDING;
 		
 		return widestWidth;
+	}
+
+	public JComponent[] getFocusableComponents()
+	{
+		Vector components = new Vector();
+		Collection editorUiFields = editors.values();
+		Iterator iter = editorUiFields.iterator();
+		while(iter.hasNext())
+		{
+			GridCellEditorAndRenderer editor = (GridCellEditorAndRenderer)iter.next();
+			List subComponents = Arrays.asList(editor.getUiField().getFocusableComponents());
+			components.addAll(subComponents);
+		}
+		return (JComponent[])components.toArray(new JComponent[0]);
 	}
 
 	private HashMap createEditorsOrRenderers()

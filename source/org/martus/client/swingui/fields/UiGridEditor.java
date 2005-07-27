@@ -25,12 +25,15 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.fields;
 
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 import javax.swing.CellEditor;
 import javax.swing.DefaultCellEditor;
 import javax.swing.JComboBox;
+import javax.swing.JComponent;
 
 import org.martus.client.swingui.dialogs.UiDialogLauncher;
 import org.martus.client.swingui.grids.GridTableModel;
@@ -38,7 +41,7 @@ import org.martus.common.fieldspec.GridFieldSpec;
 
 
 
-public class UiGridEditor extends UiGrid
+public class UiGridEditor extends UiGrid implements FocusListener
 {
 	public UiGridEditor(GridFieldSpec fieldSpec, UiDialogLauncher dlgLauncher)
 	{
@@ -56,9 +59,29 @@ public class UiGridEditor extends UiGrid
 	{
 		table.resizeTable(DEFAULT_VIEABLE_ROWS);
 		table.addKeyListener(new GridKeyListener());
+		addFocusListener(this);
 	}
 	
 	
+	public JComponent[] getFocusableComponents()
+	{
+		return table.getFocusableComponents();
+	}
+
+	public void focusGained(FocusEvent arg0)
+	{
+	}
+
+	public void focusLost(FocusEvent event)
+	{
+		// if we validate on a temporary focus loss, we end up here twice
+		// because popping up a dialog temporarily loses our focus
+		if(event.isTemporary())
+			return;
+		
+		table.getCellEditor().stopCellEditing();
+	}
+
 	class GridKeyListener implements KeyListener
 	{
 		public void keyPressed(KeyEvent e)

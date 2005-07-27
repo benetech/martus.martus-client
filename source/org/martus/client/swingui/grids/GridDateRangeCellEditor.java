@@ -43,14 +43,14 @@ public class GridDateRangeCellEditor extends GridCellEditorAndRenderer
 	{
 		try
 		{
-			super.widget.validate();
+			super.uiField.validate();
 			return super.stopCellEditing();
 		}
 		catch(DataInvalidException e)
 		{
 			if(!dlgLauncher.ShowConfirmDialog("DateRageInvalid"))
 			{
-				super.widget.setText(originalDate);
+				super.uiField.setText(originalDate);
 				return super.stopCellEditing();
 			}
 			return false;
@@ -58,7 +58,7 @@ public class GridDateRangeCellEditor extends GridCellEditorAndRenderer
 	}
 
 	public Component getTableCellEditorComponent(JTable tableToUse, Object stringValue, boolean isSelected, int row, int column) {
-		originalDate = super.widget.getText();
+		originalDate = super.uiField.getText();
 		return super.getTableCellEditorComponent(tableToUse, stringValue, isSelected,
 				row, column);
 	}

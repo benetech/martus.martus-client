@@ -26,15 +26,44 @@ Boston, MA 02111-1307, USA.
 
 package org.martus.client.swingui.fields;
 
+import java.awt.event.FocusListener;
+
 import javax.swing.JComponent;
 import javax.swing.event.ChangeListener;
 
 import org.martus.client.core.LanguageChangeListener;
-import org.martus.client.swingui.UiFocusListener;
 
 abstract public class UiField
 {
+	public UiField()
+	{
+		focusManager = new FocusManager(this);
+	}
+	
+	public void initalize()
+	{
+		focusManager.addFocusableComponents();
+	}
+	
+	public void validate() throws DataInvalidException 
+	{
+	}
+	
+	public void setListener(ChangeListener listener)
+	{
+	}
+	
+	public void setLanguageListener(LanguageChangeListener listener)
+	{
+	}
+	
+	public void addFocusListener(FocusListener listener)
+	{
+		focusManager.addFocusListener(listener);
+	}
+	
 	abstract public JComponent getComponent();
+	abstract public JComponent[] getFocusableComponents();
 	abstract public String getText();
 	abstract public void setText(String newText);
 
@@ -55,33 +84,6 @@ abstract public class UiField
 		String localizedTag;
 	}
 	
-	public void validate() throws DataInvalidException {}
-	
-	public JComponent[] getFocusableComponents()
-	{
-		return null;
-	}
-	
-	public void initalize()
-	{
-		JComponent[] focusableComponents = getFocusableComponents();
-		if(focusableComponents==null)
-			return;
-		for(int i = 0 ; i < focusableComponents.length; ++i)
-		{
-			UiFocusListener listener = new UiFocusListener(getComponent());
-			focusableComponents[i].addFocusListener(listener);		
-		}
-	}
-	
-	public void setListener(ChangeListener listener)
-	{
-	}
-	
-	public void setLanguageListener(LanguageChangeListener listener)
-	{
-	}
-	
-
+	FocusManager focusManager;
 }
 

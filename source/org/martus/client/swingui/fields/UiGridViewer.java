@@ -25,6 +25,8 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.fields;
 
+import javax.swing.JComponent;
+
 import org.martus.client.swingui.dialogs.UiDialogLauncher;
 import org.martus.common.fieldspec.GridFieldSpec;
 
@@ -44,4 +46,9 @@ public class UiGridViewer extends UiGrid
 		table.resizeTable();
 	}
 	
+	public JComponent[] getFocusableComponents()
+	{
+		return new JComponent[0];
+	}
+
 }

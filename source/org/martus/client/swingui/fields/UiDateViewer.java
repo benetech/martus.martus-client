@@ -32,7 +32,7 @@ import javax.swing.JLabel;
 import org.martus.clientside.UiLocalization;
 import org.martus.swing.UiLabel;
 
-public class UiDateViewer extends UiField
+public class UiDateViewer extends UiViewerField
 {
 	public UiDateViewer(UiLocalization localizationToUse)
 	{

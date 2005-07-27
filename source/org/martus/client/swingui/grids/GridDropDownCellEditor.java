@@ -57,19 +57,19 @@ public class GridDropDownCellEditor extends GridCellEditorAndRenderer implements
 
 	public void addActionListener(ActionListener listener)
 	{
-		((UiChoiceEditor)widget).addActionListener(listener);
+		((UiChoiceEditor)uiField).addActionListener(listener);
 	}
 	
 	private void setFieldSpec(JTable tableToUse, int column)
 	{
 		GridTable gridTable = (GridTable)tableToUse;
-		((UiChoiceEditor)widget).setSpec((DropDownFieldSpec)gridTable.getFieldSpecForColumn(column));
+		((UiChoiceEditor)uiField).setSpec((DropDownFieldSpec)gridTable.getFieldSpecForColumn(column));
 	}
 
 	public void actionPerformed(ActionEvent arg0)
 	{
 		// force our new value to be saved, even though we haven't exited this cell yet
 //		System.out.println("GridDropDownCellEditor actionPerformed, so calling stopCellEditing");
-		stopCellEditing();
+//		stopCellEditing();
 	}
 }

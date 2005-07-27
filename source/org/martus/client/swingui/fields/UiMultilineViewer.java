@@ -66,6 +66,11 @@ public class UiMultilineViewer extends UiStringField
 		text.setText(newText);
 	}
 
+	public JComponent[] getFocusableComponents()
+	{
+		return new JComponent[0];
+	}
+
 	class PreviewTextArea extends UiTextArea
 	{
 		PreviewTextArea(int rows, int cols)
