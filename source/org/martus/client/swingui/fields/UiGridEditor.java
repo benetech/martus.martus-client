@@ -34,6 +34,7 @@ import javax.swing.CellEditor;
 import javax.swing.DefaultCellEditor;
 import javax.swing.JComboBox;
 import javax.swing.JComponent;
+import javax.swing.table.TableCellEditor;
 
 import org.martus.client.swingui.dialogs.UiDialogLauncher;
 import org.martus.client.swingui.grids.GridTableModel;
@@ -79,7 +80,10 @@ public class UiGridEditor extends UiGrid implements FocusListener
 		if(event.isTemporary())
 			return;
 		
-		table.getCellEditor().stopCellEditing();
+		TableCellEditor cellEditor = table.getCellEditor();
+		if(cellEditor == null)
+			return;
+		cellEditor.stopCellEditing();
 	}
 
 	class GridKeyListener implements KeyListener
