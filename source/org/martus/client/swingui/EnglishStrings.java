@@ -576,7 +576,7 @@ public class EnglishStrings
 "field:confirmRetrieveNewerVersionseffect=Each older version will be replaced by the newer version from the server.",
 
 "field:confirmDateRageInvalidcause=The date range you entered is invalid.  The end date occures before the begin data.",
-"field:confirmDateRageInvalideffect=Ansering Yes will take you back to the date range to fix the problem.  Ansering No will revert the date back to its original value.",
+"field:confirmDateRageInvalideffect=Answering Yes will take you back to the date range to fix the problem.  Answering No will revert the date back to its original value.",
 
 "field:notifyDropErrorBulletinExistscause=One or more bulletins cannot be moved to that folder, because it already exists in that folder.",
 "field:notifyDropErrorBulletinOldercause=One or more bulletins cannot be moved to that folder, because a newer version of this bulletin already exists.",
