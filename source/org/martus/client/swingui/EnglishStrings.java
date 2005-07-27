@@ -151,6 +151,8 @@ public class EnglishStrings
 "wintitle:notifyErrorWritingFile=Error Writing File",
 "wintitle:notifyErrorReadingFile=Error Reading File",
 "wintitle:notifyExportZeroBulletins=No Bulletins Selected",
+"wintitle:notifyPrintZeroBulletins=No Bulletins Selected",
+
 "wintitle:notifyUserRejectedServerCompliance=Server Compliance Statement",
 "wintitle:notifyExistingServerRemoved=Server Removed",
 "wintitle:notifyErrorSavingBulletin=Error Saving",
@@ -635,6 +637,8 @@ public class EnglishStrings
 "field:notifyErrorWritingFilecause=An error prevented the file from being written. Check to make sure the disk is not full or write protected.",
 "field:notifyErrorReadingFilecause=An error prevented the file from being read.",
 "field:notifyExportZeroBulletinscause=To export bulletins, select them first, and then perform the export operation.",
+"field:notifyPrintZeroBulletinscause=To print one or more bulletins, select them first, and then perform the print operation.",
+
 "field:notifyUserRejectedServerCompliancecause=You have chosen not to use this server",
 "field:notifyExistingServerRemovedcause=You will have to select a server for any bulletins to be backed up to that server, or to retrieve bulletins from that server.",
 "field:notifyErrorSavingBulletincause=An error prevented the bulletin from being saved. Check to make sure the disk is not full or write protected.",		

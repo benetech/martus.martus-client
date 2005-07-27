@@ -33,19 +33,15 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
 import java.util.Vector;
-
 import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JDialog;
-
-import org.martus.client.bulletinstore.ClientBulletinStore;
 import org.martus.client.core.BulletinXmlExporter;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.clientside.UiLocalization;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.bulletin.BulletinConstants;
-import org.martus.common.packet.UniversalId;
 import org.martus.swing.UiButton;
 import org.martus.swing.UiCheckBox;
 import org.martus.swing.UiFileChooser;
@@ -111,18 +107,6 @@ public class UiExportBulletinsDlg extends JDialog implements ActionListener
 		Utilities.centerDlg(this);
 		setResizable(true);
 		setVisible(true);
-	}
-
-	public static Vector findBulletins(ClientBulletinStore store, UniversalId[] selectedBulletins)
-	{
-		Vector bulletins = new Vector();
-		for (int i = 0; i < selectedBulletins.length; i++)
-		{
-			UniversalId uid = selectedBulletins[i];
-			Bulletin b = store.getBulletinRevision(uid);
-			bulletins.add(b);
-		}
-		return bulletins;
 	}
 
 	public static String[] extractTitles(UiMainWindow window, Vector bulletins)

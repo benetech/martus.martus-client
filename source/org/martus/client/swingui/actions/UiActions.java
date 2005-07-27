@@ -60,7 +60,7 @@ public class UiActions
 
 	static public UiMartusAction newActionMenuPrint(UiMainWindow mainWindowToUse)
 	{
-		return new ActionMenuPrintBulletin(mainWindowToUse);
+		return new ActionMenuPrintBulletins(mainWindowToUse);
 	}
 
 	static public UiMartusAction newActionMenuModifyBulletin(UiMainWindow mainWindowToUse)
@@ -241,6 +241,11 @@ public class UiActions
 			mainWindow.doModifyBulletin();
 		}
 
+		public boolean isEnabled()
+		{
+			return UiMainWindow.isOnlyOneBulletinSelected(mainWindow);
+		}
+
 	}
 
 	private static class ActionSearch extends UiButtonAction
@@ -268,7 +273,11 @@ public class UiActions
 		{
 			mainWindow.doPrint();
 		}
-
+		
+		public boolean isEnabled()
+		{
+			return UiMainWindow.isAnyBulletinSelected(mainWindow);
+		}
 	}
 
 	//////////////////////////////////////////////////////////////
@@ -380,9 +389,9 @@ public class UiActions
 
 	}
 
-	private static class ActionMenuPrintBulletin extends UiMenuAction
+	private static class ActionMenuPrintBulletins extends UiMenuAction
 	{
-		public ActionMenuPrintBulletin(UiMainWindow mainWindowToUse)
+		public ActionMenuPrintBulletins(UiMainWindow mainWindowToUse)
 		{
 			super(mainWindowToUse, "printBulletin");
 		}
@@ -394,7 +403,7 @@ public class UiActions
 
 		public boolean isEnabled()
 		{
-			return UiMainWindow.isOnlyOneBulletinSelected(mainWindow);
+			return UiMainWindow.isAnyBulletinSelected(mainWindow);
 		}
 
 

@@ -51,6 +51,7 @@ import java.io.InputStream;
 import java.net.URL;
 import java.nio.channels.FileLock;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 import java.util.TimerTask;
 import java.util.Vector;
@@ -676,9 +677,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	public void bulletinSelectionHasChanged()
 	{
 		Bulletin b = table.getSingleSelectedBulletin();
-		// TODO: Can this be shifted into UiToolBar? 
-		toolBar.actionEdit.setEnabled(b != null);
-		toolBar.actionPrint.setEnabled(b != null);
+		toolBar.updateEnabledStatuses();
 		preview.setCurrentBulletin(b);
 	}
 
@@ -1201,22 +1200,15 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 
 	public void doPrint()
 	{
-		Bulletin currentBulletin = table.getSingleSelectedBulletin();
-		if(currentBulletin == null)
+		Vector selectedBulletins = getSelectedBulletins("PrintZeroBulletins");
+		if(selectedBulletins == null)
 			return;
-		app.addHQLabelsWherePossible(currentBulletin.getAuthorizedToReadKeys());
-		printBulletin(currentBulletin);
+		printBulletin(selectedBulletins);
 		requestFocus(true);
 	}
 
-	void printBulletin(Bulletin currentBulletin)
+	void printBulletin(Vector currentSelectedBulletins)
 	{
-		UiPrintBulletinDlg dlg = new UiPrintBulletinDlg(this, currentBulletin.isAllPrivate());
-		dlg.setVisible(true);		
-			
-		if (!dlg.isContinueButtonPressed())
-			return;							
-		
 		PrintPageFormat format = new PrintPageFormat();
 		PrinterJob job = PrinterJob.getPrinterJob();
 		HashPrintRequestAttributeSet attributes = new HashPrintRequestAttributeSet();
@@ -1230,9 +1222,27 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 			if(!confirmDlg("PrinterWarning"))
 				break;
 		}
-		
-		try
+
+		boolean isAnyBulletinAllPrivate = false;
+		for(Iterator iter = currentSelectedBulletins.iterator(); iter.hasNext();)
 		{
+			Bulletin bulletin = (Bulletin) iter.next();
+			if(bulletin.isAllPrivate())
+			{
+				isAnyBulletinAllPrivate = true;
+				break;
+			}
+		}
+		
+		UiPrintBulletinDlg dlg = new UiPrintBulletinDlg(this, isAnyBulletinAllPrivate);
+		dlg.setVisible(true);		
+		if (!dlg.isContinueButtonPressed())
+			return;							
+		
+		for(Iterator ittr = currentSelectedBulletins.iterator(); ittr.hasNext();)
+		{
+			Bulletin currentBulletin = (Bulletin) ittr.next();
+			app.addHQLabelsWherePossible(currentBulletin.getAuthorizedToReadKeys());
 			boolean yourBulletin = currentBulletin.getAccount().equals(getApp().getAccountId());	
 			int width = preview.getView().getWidth();		
 			BulletinHtmlGenerator generator = new BulletinHtmlGenerator(width, getLocalization() );
@@ -1249,13 +1259,17 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 			JComponentVista vista = new JComponentVista(view, format);
 			vista.scaleToFitX();
 			job.setPageable(vista);
-			job.print(attributes);
-		}
-		catch (PrinterException e)
-		{
-			System.out.println(e);
-			e.printStackTrace();
-		}
+	
+			try
+			{
+				job.print(attributes);
+			}
+			catch (PrinterException e)
+			{
+				System.out.println(e);
+				e.printStackTrace();
+			}
+		}		
 	}
 
 	public void doLocalize()
@@ -2057,19 +2071,38 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 
 	public void doExportBulletins()
 	{
-		UniversalId[] uids = table.getSelectedBulletinUids();
-		if(uids.length == 0)
-		{
-			notifyDlg("ExportZeroBulletins");
+		Vector bulletins = getSelectedBulletins("ExportZeroBulletins");
+		if(bulletins == null)
 			return;
-		}
-
-		Vector bulletins = UiExportBulletinsDlg.findBulletins(getStore(), uids);
 		String defaultFileName = localization.getFieldLabel("ExportedBulletins");
 		if(bulletins.size()==1)
 			defaultFileName = ((Bulletin)bulletins.get(0)).toFileName();
 		new UiExportBulletinsDlg(this, bulletins, defaultFileName);
 	}
+	
+	public Vector getSelectedBulletins(String tagZeroBulletinsSelected)
+	{
+		UniversalId[] uids = table.getSelectedBulletinUids();
+		if(uids.length == 0)
+		{
+			notifyDlg(tagZeroBulletinsSelected);
+			return null;
+		}
+		return findBulletins(uids);
+	}
+	
+	Vector findBulletins(UniversalId[] selectedBulletins)
+	{
+		Vector bulletins = new Vector();
+		for (int i = 0; i < selectedBulletins.length; i++)
+		{
+			UniversalId uid = selectedBulletins[i];
+			Bulletin b = getStore().getBulletinRevision(uid);
+			bulletins.add(b);
+		}
+		return bulletins;
+	}
+	
 	
 	public boolean getBulletinsAlwaysPrivate()
 	{

@@ -44,6 +44,17 @@ public class UiToolBar extends JToolBar
 		add(actionEdit);
 		add(actionSearch);
 		add(actionPrint);
+		actionCreate.setEnabled(true);
+		actionSearch.setEnabled(true);
+		actionEdit.setEnabled(true); 
+		actionPrint.setEnabled(true);
+		updateEnabledStatuses();
+	}
+	
+	public void updateEnabledStatuses()
+	{
+		actionEdit.setEnabled(actionEdit.isEnabled());
+		actionPrint.setEnabled(actionPrint.isEnabled());
 	}
 
 	private void createToolbarActions(UiMainWindow mainWindow)
