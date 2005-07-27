@@ -27,7 +27,6 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.swingui.grids;
 
 import java.awt.Component;
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JTable;
@@ -35,12 +34,11 @@ import javax.swing.JTable;
 import org.martus.client.swingui.fields.UiChoiceEditor;
 import org.martus.common.fieldspec.DropDownFieldSpec;
 
-public class GridDropDownCellEditor extends GridCellEditorAndRenderer implements ActionListener
+public class GridDropDownCellEditor extends GridCellEditorAndRenderer
 {
 	GridDropDownCellEditor()
 	{
 		super(new UiChoiceEditor(null));
-		addActionListener(this);
 	}
 
 	public Component getTableCellEditorComponent(JTable tableToUse, Object codeString, boolean isSelected, int row, int column)
@@ -66,10 +64,4 @@ public class GridDropDownCellEditor extends GridCellEditorAndRenderer implements
 		((UiChoiceEditor)uiField).setSpec((DropDownFieldSpec)gridTable.getFieldSpecForColumn(column));
 	}
 
-	public void actionPerformed(ActionEvent arg0)
-	{
-		// force our new value to be saved, even though we haven't exited this cell yet
-//		System.out.println("GridDropDownCellEditor actionPerformed, so calling stopCellEditing");
-//		stopCellEditing();
-	}
 }
