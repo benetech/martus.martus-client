@@ -36,7 +36,7 @@ import javax.swing.Box;
 import javax.swing.JComponent;
 
 import org.martus.clientside.UiLocalization;
-import org.martus.common.bulletin.Bulletin;
+import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.utilities.DateUtilities;
 import org.martus.swing.UiComboBox;
 import org.martus.swing.Utilities;
@@ -154,7 +154,7 @@ public class UiDateEditor extends UiField
 	public String getText()
 	{
 		Date date = getDate(yearCombo, monthCombo, dayCombo);
-		DateFormat df = Bulletin.getStoredDateFormat();
+		DateFormat df = FieldSpec.getStoredDateFormat();
 		return df.format(date);
 	}
 
@@ -175,7 +175,7 @@ public class UiDateEditor extends UiField
 	
 	public static void setDate(String dateText, UiComboBox yCombo, UiComboBox mCombo, UiComboBox dCombo)
 	{
-		DateFormat df = Bulletin.getStoredDateFormat();
+		DateFormat df = FieldSpec.getStoredDateFormat();
 		Date d = null;
 		try
 		{

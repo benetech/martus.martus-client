@@ -39,7 +39,6 @@ import javax.swing.JComponent;
 import javax.swing.JPanel;
 
 import org.martus.clientside.UiLocalization;
-import org.martus.common.bulletin.Bulletin;
 import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.fieldspec.StandardFieldSpecs;
 import org.martus.common.utilities.MartusFlexidate;
@@ -238,7 +237,7 @@ public class UiFlexiDateEditor extends UiField
 
 	public String getText()
 	{
-		DateFormat df = Bulletin.getStoredDateFormat();
+		DateFormat df = FieldSpec.getStoredDateFormat();
 		String dateText = null;
 		if(isExactDate())
 			dateText = df.format(getBeginDate());
