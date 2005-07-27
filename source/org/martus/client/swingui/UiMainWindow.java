@@ -2032,8 +2032,9 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		getCurrentUiState().setModifyingBulletin(true);
 		setEnabled(false);
 		UiBulletinModifyDlg dlg = new UiBulletinModifyDlg(b, this);
-		setCurrentActiveFrame(dlg);//CML this doesn't seem to be called until after the dialog exits.  Setting SetVisible out here doesn't seem to help.
+		setCurrentActiveFrame(dlg);
 		setVisible(false);
+		dlg.setVisible(true);
 		return dlg.wasBulletinSaved();
 	}
 
