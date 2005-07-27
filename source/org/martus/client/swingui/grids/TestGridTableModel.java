@@ -28,7 +28,6 @@ package org.martus.client.swingui.grids;
 import java.util.Vector;
 
 import org.martus.common.fieldspec.CustomDropDownFieldSpec;
-import org.martus.common.fieldspec.DropDownFieldSpec;
 import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.fieldspec.GridFieldSpec;
 import org.martus.util.TestCaseEnhanced;
@@ -69,9 +68,10 @@ public class TestGridTableModel extends TestCaseEnhanced
 		assertEquals(label2, model.getColumnName(2));
 		assertEquals(FieldSpec.TYPE_DROPDOWN, model.getColumnType(2));
 
-		DropDownFieldSpec dropDownFieldSpec = ((DropDownFieldSpec)(model.getFieldSpec(2)));
-		assertEquals(choice1, dropDownFieldSpec.getValue(0));
-		assertEquals(choice2, dropDownFieldSpec.getValue(1));
+		CustomDropDownFieldSpec dropDownFieldSpec = ((CustomDropDownFieldSpec)(model.getFieldSpec(2)));
+		assertEquals("", dropDownFieldSpec.getValue(0));
+		assertEquals(choice1, dropDownFieldSpec.getValue(1));
+		assertEquals(choice2, dropDownFieldSpec.getValue(2));
 		
 		assertEquals(0, model.getRowCount());
 		model.addEmptyRow();

@@ -72,7 +72,9 @@ public class UiChoiceEditor extends UiChoice implements ActionListener
 		
 		public Component getListCellRendererComponent(JList list, Object code, int index, boolean isSelected, boolean cellHasFocus)
 		{
-			Component cellRenderer = super.getListCellRendererComponent(list, spec.getDisplayString((String)code), index, isSelected,
+			String spaceSoValueWontBeHiddenIfEmpty = " ";
+			String displayString = spec.getDisplayString((String)code) + spaceSoValueWontBeHiddenIfEmpty;
+			Component cellRenderer = super.getListCellRendererComponent(list, displayString, index, isSelected,
 					cellHasFocus);
 			cellRenderer.setComponentOrientation(UiLanguageDirection.getComponentOrientation());
 			return cellRenderer;
