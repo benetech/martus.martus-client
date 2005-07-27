@@ -52,18 +52,6 @@ abstract public class UiField
 		{
 			return localizedTag;
 		}
-
-		public void SetRevertToOriginalDate()
-		{
-			revertToOriginalData = true;
-		}
-		
-		public boolean shouldRevertToOriginalDate()
-		{
-			return revertToOriginalData;
-		}
-		
-		boolean revertToOriginalData;
 		String localizedTag;
 	}
 	

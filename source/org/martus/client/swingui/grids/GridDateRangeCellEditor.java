@@ -26,18 +26,17 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.swingui.grids;
 
 import java.awt.Component;
-
 import javax.swing.JTable;
-
 import org.martus.client.swingui.dialogs.UiDialogLauncher;
 import org.martus.client.swingui.fields.UiGridDateRangeEditorViewer;
 import org.martus.client.swingui.fields.UiField.DataInvalidException;
 
 public class GridDateRangeCellEditor extends GridCellEditorAndRenderer
 {
-	GridDateRangeCellEditor(UiDialogLauncher dlgLauncher)
+	GridDateRangeCellEditor(UiDialogLauncher dlgLauncherToUse)
 	{
-		super(new UiGridDateRangeEditorViewer(dlgLauncher.GetLocalization(), dlgLauncher));
+		super(new UiGridDateRangeEditorViewer(dlgLauncherToUse.GetLocalization()));
+		dlgLauncher = dlgLauncherToUse;
 	}
 
 	public boolean stopCellEditing()
@@ -49,7 +48,7 @@ public class GridDateRangeCellEditor extends GridCellEditorAndRenderer
 		}
 		catch(DataInvalidException e)
 		{
-			if(e.shouldRevertToOriginalDate())
+			if(!dlgLauncher.ShowConfirmDialog("DateRageInvalid"))
 			{
 				super.widget.setText(originalDate);
 				return super.stopCellEditing();
@@ -65,4 +64,5 @@ public class GridDateRangeCellEditor extends GridCellEditorAndRenderer
 	}
 
 	String originalDate;
+	UiDialogLauncher dlgLauncher;
 }

@@ -27,14 +27,12 @@ package org.martus.client.swingui.fields;
 
 import javax.swing.JComponent;
 import org.martus.client.swingui.MartusLocalization;
-import org.martus.client.swingui.dialogs.UiDialogLauncher;
 
 public class UiGridDateRangeEditorViewer extends UiFlexiDateEditor
 {
-	public UiGridDateRangeEditorViewer(MartusLocalization localizationToUse, UiDialogLauncher dlgLauncherToUse)
+	public UiGridDateRangeEditorViewer(MartusLocalization localizationToUse)
 	{
 		super(localizationToUse, null);
-		dlgLauncher = dlgLauncherToUse;
 		removeExactDatePanel();
 	}
 	
@@ -61,21 +59,11 @@ public class UiGridDateRangeEditorViewer extends UiFlexiDateEditor
 	
 	public void validate() throws DataInvalidException 
 	{
-		try
-		{
-			super.validate();
-		}
-		catch(DataInvalidException e)
-		{
-			if(!dlgLauncher.ShowConfirmDialog("DateRageInvalid"))
-				e.SetRevertToOriginalDate();
-			throw e;
-		}
+		super.validate();
 	}
 
 	public JComponent getComponent()
 	{
 		return flexiDateBox;
 	}
-	UiDialogLauncher dlgLauncher;
 }
