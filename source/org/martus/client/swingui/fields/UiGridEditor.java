@@ -83,6 +83,15 @@ public class UiGridEditor extends UiGrid implements FocusListener
 		
 		stopCellEditing();
 	}
+	
+	void ensureSelectionIsValid()
+	{
+		// this little hack is necessary because even though the grid constructor 
+		// sets the selection to (0,1), when the user first tabs into it, there 
+		// is nothing selected according to swing
+		if(table.getSelectedRow() < 0 || table.getSelectedColumn() < 0)
+			moveSelectionTo(0, 1);
+	}
 
 	void stopCellEditing()
 	{
@@ -171,7 +180,6 @@ public class UiGridEditor extends UiGrid implements FocusListener
 		
 		public void actionPerformed(ActionEvent arg0)
 		{
-			System.out.println(getName());
 			stopCellEditing();
 			model.addEmptyRow();
 			table.changeSelection(getLastRowIndex(),0,false,false);
@@ -187,10 +195,10 @@ public class UiGridEditor extends UiGrid implements FocusListener
 
 		public void actionPerformed(ActionEvent arg0)
 		{
-			System.out.println(getName());
 			if(table.isEditing())
 				return;
 			
+			ensureSelectionIsValid();
 			int row = table.getSelectedRow();
 			int column = table.getSelectedColumn();
 			int type = model.getCellType(row, column);
@@ -214,7 +222,7 @@ public class UiGridEditor extends UiGrid implements FocusListener
 
 		public void actionPerformed(ActionEvent arg0)
 		{
-			System.out.println(getName());
+			ensureSelectionIsValid();
 			if(inLastColumn())
 			{
 				if(inLastRow())
@@ -242,7 +250,7 @@ public class UiGridEditor extends UiGrid implements FocusListener
 
 		public void actionPerformed(ActionEvent arg0)
 		{
-			System.out.println(getName());
+			ensureSelectionIsValid();
 			if(inFirstColumn())
 			{
 				if(inFirstRow())
