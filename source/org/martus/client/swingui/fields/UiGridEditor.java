@@ -29,13 +29,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.awt.event.KeyEvent;
-
 import javax.swing.AbstractAction;
 import javax.swing.JComponent;
 import javax.swing.KeyStroke;
 import javax.swing.table.TableCellEditor;
-
 import org.martus.client.swingui.dialogs.UiDialogLauncher;
+import org.martus.client.swingui.grids.GridDateCellEditor;
+import org.martus.client.swingui.grids.GridDateRangeCellEditor;
 import org.martus.client.swingui.grids.GridDropDownCellEditor;
 import org.martus.client.swingui.grids.GridTableModel;
 import org.martus.common.fieldspec.FieldSpec;
@@ -209,8 +209,21 @@ public class UiGridEditor extends UiGrid implements FocusListener
 				if(editor != null)
 					editor.showPopup();
 			}
+			else if(type == FieldSpec.TYPE_DATE)
+			{
+				table.editCellAt(row, column);
+				GridDateCellEditor editor = (GridDateCellEditor)table.getCellEditor();
+				if(editor != null)
+					editor.showPopup();
+			}
+			else if(type == FieldSpec.TYPE_DATERANGE)
+			{
+				table.editCellAt(row, column);
+				GridDateRangeCellEditor editor = (GridDateRangeCellEditor)table.getCellEditor();
+				if(editor != null)
+					editor.showPopup();
+			}
 		}
-
 	}
 
 	class TabAction extends ActionWithName

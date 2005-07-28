@@ -26,6 +26,8 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.swingui.grids;
 
 import java.awt.Component;
+import javax.swing.JComboBox;
+import javax.swing.JComponent;
 import javax.swing.JTable;
 import org.martus.client.swingui.dialogs.UiDialogLauncher;
 import org.martus.client.swingui.fields.UiGridDateRangeEditorViewer;
@@ -57,10 +59,19 @@ public class GridDateRangeCellEditor extends GridCellEditorAndRenderer
 		}
 	}
 
-	public Component getTableCellEditorComponent(JTable tableToUse, Object stringValue, boolean isSelected, int row, int column) {
+	public Component getTableCellEditorComponent(JTable tableToUse, Object stringValue, boolean isSelected, int row, int column) 
+	{
 		originalDate = super.uiField.getText();
 		return super.getTableCellEditorComponent(tableToUse, stringValue, isSelected,
 				row, column);
+	}
+	
+	public void showPopup()
+	{
+		JComponent[] focusableComponents = getFocusableComponents();
+		JComboBox date = (JComboBox)(focusableComponents[0]);
+		date.requestFocus();
+		date.showPopup();
 	}
 
 	String originalDate;

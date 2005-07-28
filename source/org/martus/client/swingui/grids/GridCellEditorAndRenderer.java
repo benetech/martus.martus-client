@@ -71,6 +71,11 @@ public class GridCellEditorAndRenderer extends AbstractCellEditor implements Tab
 		return getUiField().getComponent();
 	}
 
+	public JComponent[] getFocusableComponents()
+	{
+		return getUiField().getFocusableComponents();
+	}
+
 	public Object getCellEditorValue()
 	{
 		return getUiField().getText();

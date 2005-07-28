@@ -26,13 +26,24 @@ Boston, MA 02111-1307, USA.
 
 package org.martus.client.swingui.grids;
 
+import javax.swing.JComboBox;
+import javax.swing.JComponent;
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.fields.UiDateEditor;
 
-class GridDateCellEditor extends GridCellEditorAndRenderer
+public class GridDateCellEditor extends GridCellEditorAndRenderer
 {
 	GridDateCellEditor(MartusLocalization localization)
 	{
 		super(new UiDateEditor(localization, null));
 	}
+	
+	public void showPopup()
+	{
+		JComponent[] focusableComponents = getFocusableComponents();
+		JComboBox date = (JComboBox)(focusableComponents[0]);
+		date.requestFocus();
+		date.showPopup();
+	}
+	
 }
