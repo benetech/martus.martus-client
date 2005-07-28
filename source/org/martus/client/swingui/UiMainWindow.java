@@ -2097,15 +2097,15 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 			notifyDlg(tagZeroBulletinsSelected);
 			return null;
 		}
-		return findBulletins(uids);
+		return getBulletins(uids);
 	}
 	
-	Vector findBulletins(UniversalId[] selectedBulletins)
+	Vector getBulletins(UniversalId[] uids)
 	{
 		Vector bulletins = new Vector();
-		for (int i = 0; i < selectedBulletins.length; i++)
+		for (int i = 0; i < uids.length; i++)
 		{
-			UniversalId uid = selectedBulletins[i];
+			UniversalId uid = uids[i];
 			Bulletin b = getStore().getBulletinRevision(uid);
 			bulletins.add(b);
 		}
