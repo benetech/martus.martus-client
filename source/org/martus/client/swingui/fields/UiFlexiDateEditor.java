@@ -261,12 +261,10 @@ public class UiFlexiDateEditor extends UiField
 	{		
 		MartusFlexidate mfd = MartusFlexidate.createFromMartusDateString(newText);
 		UiDateEditor.setDate(MartusFlexidate.toStoredDateFormat(mfd.getBeginDate()), bgYearCombo, bgMonthCombo, bgDayCombo);
+		UiDateEditor.setDate(MartusFlexidate.toStoredDateFormat(mfd.getEndDate()), endYearCombo, endMonthCombo, endDayCombo);
 			
 		if (mfd.hasDateRange())
-		{
 			flexiDateRB.setSelected(true);
-			UiDateEditor.setDate(MartusFlexidate.toStoredDateFormat(mfd.getEndDate()), endYearCombo, endMonthCombo, endDayCombo);
-		}		
 	}
 	
 	public static class DateRangeInvertedException extends UiField.DataInvalidException
