@@ -89,22 +89,24 @@ public class UiGridEditor extends UiGrid implements FocusListener
 	{
 		public void keyPressed(KeyEvent e)
 		{
-			// We have to handle TAB in pressed, because we need to grab it 
-			// before the default grid handler
-			if(e.getKeyCode() ==  KeyEvent.VK_TAB)
+			// Catch TAB before the default grid handler sees it
+			if(e.getKeyCode() == KeyEvent.VK_TAB)
 				handleTabKey(e);
 		}
 
 		public void keyReleased(KeyEvent e)
 		{
+			// Enter doesn't come to the grid until after the cell
+			// has already handled the press itself
+			if(e.getKeyCode() == KeyEvent.VK_ENTER)
+				handleEnterKey(e);
 		}
 
 		public void keyTyped(KeyEvent e)
 		{
+			// when possible, handling keys in keyTyped is best
             if (e.getKeyChar() == KeyEvent.VK_SPACE) 
                 handleSpaceKey();
-			if(e.getKeyChar() == KeyEvent.VK_ENTER)
-				handleEnterKey();
 		}
 
 		private void handleSpaceKey()
@@ -116,10 +118,11 @@ public class UiGridEditor extends UiGrid implements FocusListener
 			((GridDropDownCellEditor)editor).showPopup();
 		}
 
-		private void handleEnterKey()
+		private void handleEnterKey(KeyEvent e)
 		{
 			model.addEmptyRow();
 			table.changeSelection(getLastRowIndex(),0,false,false);
+			e.consume();
 		}
 
 		private void handleTabKey(KeyEvent e)
