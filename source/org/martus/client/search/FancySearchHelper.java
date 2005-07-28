@@ -87,6 +87,7 @@ public class FancySearchHelper
 		ChoiceItem[] opChoices = 
 		{
 			new ChoiceItem(":", getLocalization().getFieldLabel("SearchOpContains")),
+			new ChoiceItem(":=", "="),
 			new ChoiceItem(":>", ">"),
 			new ChoiceItem(":>=", ">="),
 			new ChoiceItem(":<", "<"),

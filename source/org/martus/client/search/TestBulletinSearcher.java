@@ -109,6 +109,10 @@ public class TestBulletinSearcher extends TestCaseEnhanced
 		verifyOperatorComparison("testDoesMatchComparisons", b, fieldToSearch, ":<", belowSample, false);
 		verifyOperatorComparison("testDoesMatchComparisons", b, fieldToSearch, ":<", sampleValue, false);
 		verifyOperatorComparison("testDoesMatchComparisons", b, fieldToSearch, ":<", aboveSample, true);
+
+		verifyOperatorComparison("testDoesMatchComparisons", b, fieldToSearch, ":=", belowSample, false);
+		verifyOperatorComparison("testDoesMatchComparisons", b, fieldToSearch, ":=", sampleValue, true);
+		verifyOperatorComparison("testDoesMatchComparisons", b, fieldToSearch, ":=", aboveSample, false);
 	}
 
 	private void verifyOperatorComparison(String caller, Bulletin realBulletin, String fieldToSearch, String operator, String value, boolean expected)

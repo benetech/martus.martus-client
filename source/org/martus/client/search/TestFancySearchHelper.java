@@ -89,6 +89,7 @@ public class TestFancySearchHelper extends TestCaseEnhanced
 		assertTrue("no <?", spec.findCode(":<") >= 0);
 		assertTrue("no >=?", spec.findCode(":>=") >= 0);
 		assertTrue("no <=?", spec.findCode(":<=") >= 0);
+		assertTrue("no =?", spec.findCode(":=") >= 0);
 	}
 	
 	public void testCreateGridSpec()

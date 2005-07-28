@@ -37,11 +37,13 @@ public class SearchTreeNode
 	public final static int GREATER_EQUAL = 2; 
 	public final static int LESS = 3; 
 	public final static int LESS_EQUAL = 4;
+	public final static int EQUAL = 5;
 	
 	private final static String GREATER_EQUAL_STRING = ">=";
 	private final static String LESS_EQUAL_STRING = "<=";
 	private final static String GREATER_STRING = ">";
 	private final static String LESS_STRING = "<";
+	private final static String EQUAL_STRING = "=";
 
 	public SearchTreeNode(String value)
 	{
@@ -82,6 +84,8 @@ public class SearchTreeNode
 			return LESS;
 		if(op.equals(LESS_EQUAL_STRING))
 			return LESS_EQUAL;
+		if(op.equals(EQUAL_STRING))
+			return EQUAL;
 		
 		return CONTAINS;
 	}
@@ -136,6 +140,7 @@ public class SearchTreeNode
 		LESS_EQUAL_STRING, 
 		GREATER_STRING, 
 		LESS_STRING, 
+		EQUAL_STRING,
 	};
 	
 	private String nodeValue;
