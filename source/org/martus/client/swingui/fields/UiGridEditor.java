@@ -25,18 +25,20 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.fields;
 
+import java.awt.event.ActionEvent;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 
-import javax.swing.CellEditor;
+import javax.swing.AbstractAction;
 import javax.swing.JComponent;
+import javax.swing.KeyStroke;
 import javax.swing.table.TableCellEditor;
 
 import org.martus.client.swingui.dialogs.UiDialogLauncher;
 import org.martus.client.swingui.grids.GridDropDownCellEditor;
 import org.martus.client.swingui.grids.GridTableModel;
+import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.fieldspec.GridFieldSpec;
 
 
@@ -57,8 +59,8 @@ public class UiGridEditor extends UiGrid implements FocusListener
 	
 	private void initialize()
 	{
-		table.resizeTable(DEFAULT_VIEABLE_ROWS);
-		table.addKeyListener(new GridKeyListener());
+		table.resizeTable(DEFAULT_VISIBLE_ROWS);
+		bindKeys();
 		addFocusListener(this);
 	}
 	
@@ -79,108 +81,185 @@ public class UiGridEditor extends UiGrid implements FocusListener
 		if(event.isTemporary())
 			return;
 		
+		stopCellEditing();
+	}
+
+	void stopCellEditing()
+	{
 		TableCellEditor cellEditor = table.getCellEditor();
 		if(cellEditor == null)
 			return;
 		cellEditor.stopCellEditing();
 	}
-
-	class GridKeyListener implements KeyListener
+	
+	boolean inFirstRow()
 	{
-		public void keyPressed(KeyEvent e)
-		{
-			// Catch TAB before the default grid handler sees it
-			if(e.getKeyCode() == KeyEvent.VK_TAB)
-				handleTabKey(e);
-		}
+		return table.getSelectedRow() <= 0;
+	}
 
-		public void keyReleased(KeyEvent e)
-		{
-			// Enter doesn't come to the grid until after the cell
-			// has already handled the press itself
-			if(e.getKeyCode() == KeyEvent.VK_ENTER)
-				handleEnterKey(e);
-		}
+	boolean inLastRow()
+	{
+		return table.getSelectedRow() >= getLastRowIndex();
+	}
 
-		public void keyTyped(KeyEvent e)
-		{
-			// when possible, handling keys in keyTyped is best
-            if (e.getKeyChar() == KeyEvent.VK_SPACE) 
-                handleSpaceKey();
-		}
+	boolean inFirstColumn()
+	{
+		return table.getSelectedColumn() <= 1;
+	}
 
-		private void handleSpaceKey()
-		{
-			CellEditor editor = table.getCellEditor();
-			if (editor == null || !(editor instanceof GridDropDownCellEditor) )
-				return;
-			
-			((GridDropDownCellEditor)editor).showPopup();
-		}
+	boolean inLastColumn()
+	{
+		return table.getSelectedColumn() >= getLastColumnIndex();
+	}
 
-		private void handleEnterKey(KeyEvent e)
+	int getLastColumnIndex()
+	{
+		return table.getColumnCount()-1;
+	}
+
+	int getLastRowIndex()
+	{
+		return table.getRowCount()-1;
+	}
+	
+	void moveSelectionTo(int row, int column)
+	{
+		if(row < 0)
+			row = 0;
+		if(column < 1)
+			column = 1;
+		stopCellEditing();
+		table.changeSelection(row, column, false, false);
+	}
+
+	void bindKeys()
+	{
+		bindKeysForComponent(table);
+		JComponent[] subComponents = table.getFocusableComponents();
+		for(int i=0; i < subComponents.length; ++i)
 		{
+			bindKeysForComponent(subComponents[i]);
+		}
+	}
+	
+	void bindKeysForComponent(JComponent component)
+	{
+		final int NO_MODIFIERS = 0;
+		bindKeyToAction(component, KeyEvent.VK_ENTER, NO_MODIFIERS, new EnterAction());
+		bindKeyToAction(component, KeyEvent.VK_SPACE, NO_MODIFIERS, new SpaceAction());
+		bindKeyToAction(component, KeyEvent.VK_TAB, NO_MODIFIERS, new TabAction());
+		bindKeyToAction(component, KeyEvent.VK_TAB, KeyEvent.SHIFT_DOWN_MASK, new ShiftTabAction());
+	}
+
+	private void bindKeyToAction(JComponent component, int key, int modifiers, ActionWithName action)
+	{
+		component.getInputMap().put(KeyStroke.getKeyStroke(key, modifiers), action.getName());
+		component.getActionMap().put(action.getName(), action);
+	}
+	
+	abstract class ActionWithName extends AbstractAction
+	{
+		abstract String getName();
+	}
+	
+	class EnterAction extends ActionWithName
+	{
+		public String getName()
+		{
+			return "EnterAction";
+		}
+		
+		public void actionPerformed(ActionEvent arg0)
+		{
+			System.out.println(getName());
+			stopCellEditing();
 			model.addEmptyRow();
 			table.changeSelection(getLastRowIndex(),0,false,false);
-			e.consume();
+		}
+	}
+	
+	class SpaceAction extends ActionWithName
+	{
+		String getName()
+		{
+			return "SpaceAction";
 		}
 
-		private void handleTabKey(KeyEvent e)
+		public void actionPerformed(ActionEvent arg0)
 		{
-			if(e.isControlDown())
+			System.out.println(getName());
+			if(table.isEditing())
 				return;
 			
-			if(e.isShiftDown())
+			int row = table.getSelectedRow();
+			int column = table.getSelectedColumn();
+			int type = model.getCellType(row, column);
+			if(type == FieldSpec.TYPE_DROPDOWN)
 			{
-				if(inFirstRowFirstColumn())
-				{
-					e.consume();
-					table.transferFocusBackward();
-				}
-				else if(inFirstColumn())
-				{
-					e.consume();
-					table.changeSelection(table.getSelectedRow()-1, getLastColumnIndex(), false, false);
-				}
-				
+				table.editCellAt(row, column);
+				GridDropDownCellEditor editor = (GridDropDownCellEditor)table.getCellEditor();
+				if(editor != null)
+					editor.showPopup();
 			}
-			else 
-			{ 
-				if(inLastRowLastColumn())
-				{
-					e.consume();
-					table.transferFocus();
-				}
-			}
-		}
-
-		private boolean inFirstColumn()
-		{
-			return table.getSelectedColumn() <= 1;
-		}
-
-		private boolean inFirstRowFirstColumn()
-		{
-			return table.getSelectedRow() <= 0 && 
-					inFirstColumn();
-		}
-
-		private boolean inLastRowLastColumn()
-		{
-			return table.getSelectedRow() >= getLastRowIndex() && 
-					table.getSelectedColumn() >= getLastColumnIndex();
-		}
-
-		private int getLastRowIndex()
-		{
-			return table.getRowCount()-1;
-		}
-
-		private int getLastColumnIndex()
-		{
-			return table.getColumnCount()-1;
 		}
 
 	}
-	private static final int DEFAULT_VIEABLE_ROWS = 5;
+
+	class TabAction extends ActionWithName
+	{
+		String getName()
+		{
+			return "TabAction";
+		}
+
+		public void actionPerformed(ActionEvent arg0)
+		{
+			System.out.println(getName());
+			if(inLastColumn())
+			{
+				if(inLastRow())
+				{
+					table.transferFocus();
+				}
+				else
+				{
+					moveSelectionTo(table.getSelectedRow() + 1, 0);
+				}
+			}
+			else
+			{
+				moveSelectionTo(table.getSelectedRow(), table.getSelectedColumn() + 1);
+			}
+		}
+	}
+
+	class ShiftTabAction extends ActionWithName
+	{
+		String getName()
+		{
+			return "ShiftTabAction";
+		}
+
+		public void actionPerformed(ActionEvent arg0)
+		{
+			System.out.println(getName());
+			if(inFirstColumn())
+			{
+				if(inFirstRow())
+				{
+					table.transferFocusBackward();
+				}
+				else
+				{
+					moveSelectionTo(table.getSelectedRow() - 1, getLastColumnIndex());
+				}
+			}
+			else
+			{
+				moveSelectionTo(table.getSelectedRow(), table.getSelectedColumn() - 1);
+			}
+		}
+	}
+
+	private static final int DEFAULT_VISIBLE_ROWS = 5;
 }
