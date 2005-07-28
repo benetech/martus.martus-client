@@ -93,6 +93,7 @@ public class EnglishStrings
 "wintitle:confirmdeletefolder=Confirm Delete Folder",
 "wintitle:confirmRetrieveNewerVersions=Confirm Retrieving Newer Versions",
 "wintitle:confirmDateRageInvalid=Date Range Invalid",
+"wintitle:confirmPrintAllPrivateData=Print All Private Data",
 
 "wintitle:notifyDropErrorBulletinExists=Cannot Move Bulletin(s)",
 "wintitle:notifyDropErrorBulletinOlder=Cannot Move Bulletin(s)",
@@ -179,7 +180,6 @@ public class EnglishStrings
 "wintitle:notifyResendError=Error Sending Bulletin",
 "wintitle:notifyErrorRenameFolder=Unable to Rename Folder",
 "wintitle:notifyErrorRenameFolderExists=Unable to Rename Folder",
-"wintitle:notifyPrintAllPrivateData=Print All Private Data",
 "wintitle:notifyAlreadyViewingThisVersion=Bulletin Version Already Being Viewed",
 "wintitle:notifyBulletinVersionNotInSystem=Bulletin Version Not Found",
 "wintitle:notifyHeadquarterLabelDuplicate=Headquarter Label Invalid",
@@ -576,6 +576,8 @@ public class EnglishStrings
 "field:confirmNewerConfigInfoFileFoundeffect=Answering Yes will continue to use this older version of Martus.  Answering No will exit Martus so you can upgrade to the latest version.",
 "field:confirmRetrieveNewerVersionscause=The following bulletin(s) selected for retrieval are newer versions of bulletins already on this computer:\n\n#TITLES#",
 "field:confirmRetrieveNewerVersionseffect=Each older version will be replaced by the newer version from the server.",
+"field:confirmPrintAllPrivateDatacause=One or more bulletins will not be printed because all the information is private.  If you wish to print the private data, please mark the \"Include private data in print out\" checkbox.",
+"field:confirmPrintAllPrivateDataeffect=Answering Yes will all you to change the \"Include private data in print out\" checkbox.  Answering No will print only the public sections of the bulletins and skip those bulletins which are all private.",
 
 "field:confirmDateRageInvalidcause=The date range you entered is invalid.  The end date occures before the begin data.",
 "field:confirmDateRageInvalideffect=Answering Yes will take you back to the date range to fix the problem.  Answering No will revert the date back to its original value.",
@@ -663,7 +665,6 @@ public class EnglishStrings
 "field:notifyFolderMigrationFailedcause=An error occurred during the conversion of your folders. You can still use Martus, but if the Outbox or Drafts folders still exist, do not use them.",
 "field:notifyResendErrorNotAuthorizedToSendcause=One or more bulletins were unable to be resent because you are not authorized to upload them.",
 "field:notifyResendErrorcause=One or more bulletins were unable to be resent due to an unexpected error.",
-"field:notifyPrintAllPrivateDatacause=This bulletin will not be printed because all the information is private.  If you wish to print the private data, please mark the \"Include private data in print out\" checkbox.",
 "field:notifyErrorRenameFoldercause=Folder names cannot contain punctuation.  They also cannot begin with a space.",
 "field:notifyErrorRenameFolderExistscause=You already have a folder with that name.",
 "field:notifyAlreadyViewingThisVersioncause=You currently are viewing this version of the bulletin.",

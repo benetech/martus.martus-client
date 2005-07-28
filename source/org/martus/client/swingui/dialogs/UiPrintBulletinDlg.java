@@ -97,17 +97,13 @@ public class UiPrintBulletinDlg extends JDialog implements ActionListener
 		{
 			if (!isIncludePrivateChecked() && allPrivateData)
 			{		
-				mainWindow.notifyDlg("PrintAllPrivateData");
-				return;
+				if(mainWindow.confirmDlg("PrintAllPrivateData"))
+					return;
 			}	
-					
 			pressContinue = true;
 		}
-			
 		dispose();
 	}
-	
-
 	
 	UiMainWindow mainWindow;	
 	JCheckBox includePrivate;
