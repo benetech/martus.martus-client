@@ -31,12 +31,11 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 import javax.swing.CellEditor;
-import javax.swing.DefaultCellEditor;
-import javax.swing.JComboBox;
 import javax.swing.JComponent;
 import javax.swing.table.TableCellEditor;
 
 import org.martus.client.swingui.dialogs.UiDialogLauncher;
+import org.martus.client.swingui.grids.GridDropDownCellEditor;
 import org.martus.client.swingui.grids.GridTableModel;
 import org.martus.common.fieldspec.GridFieldSpec;
 
@@ -90,63 +89,95 @@ public class UiGridEditor extends UiGrid implements FocusListener
 	{
 		public void keyPressed(KeyEvent e)
 		{
-			if(e.getKeyCode() ==  KeyEvent.VK_TAB && !e.isControlDown())
-			{
-				if(e.isShiftDown())
-				{
-					if(table.getSelectedRow()==0 && table.getSelectedColumn() == 1)
-					{
-						e.consume();
-						table.transferFocusBackward();
-					}
-					else if(table.getSelectedColumn() <= 1)
-					{
-						e.consume();
-						table.changeSelection(table.getSelectedRow()-1, table.getColumnCount()-1, false, false);
-					}
-					
-				}
-				else 
-				{ 
-					if(table.getSelectedRow()== table.getRowCount()-1)
-					{
-						if(table.getSelectedColumn() >= table.getColumnCount()-1)
-						{
-							e.consume();
-							table.transferFocus();
-						}
-					}
-				}
-			}
+			// We have to handle TAB in pressed, because we need to grab it 
+			// before the default grid handler
+			if(e.getKeyCode() ==  KeyEvent.VK_TAB)
+				handleTabKey(e);
 		}
 
 		public void keyReleased(KeyEvent e)
 		{
-            if (e.getKeyCode() == java.awt.event.KeyEvent.VK_SPACE) 
-			{
-                CellEditor editor = table.getCellEditor();
-                if (editor != null && editor instanceof DefaultCellEditor ) 
-				{
-                    Object component = ((DefaultCellEditor)editor).getComponent();
-                    if(component instanceof JComboBox) 
-					{
-                        JComboBox comboBox = (JComboBox)(component);
-						comboBox.setVisible( true );
-						comboBox.requestFocus();
-						comboBox.showPopup();
-                   }
-                }
-            }
 		}
 
 		public void keyTyped(KeyEvent e)
 		{
-			if(e.getKeyChar()==KeyEvent.VK_ENTER)
+            if (e.getKeyChar() == KeyEvent.VK_SPACE) 
+                handleSpaceKey();
+			if(e.getKeyChar() == KeyEvent.VK_ENTER)
+				handleEnterKey();
+		}
+
+		private void handleSpaceKey()
+		{
+			CellEditor editor = table.getCellEditor();
+			if (editor == null || !(editor instanceof GridDropDownCellEditor) )
+				return;
+			
+			((GridDropDownCellEditor)editor).showPopup();
+		}
+
+		private void handleEnterKey()
+		{
+			model.addEmptyRow();
+			table.changeSelection(getLastRowIndex(),0,false,false);
+		}
+
+		private void handleTabKey(KeyEvent e)
+		{
+			if(e.isControlDown())
+				return;
+			
+			if(e.isShiftDown())
 			{
-				model.addEmptyRow();
-				table.changeSelection(table.getRowCount()-1,0,false,false);
+				if(inFirstRowFirstColumn())
+				{
+					e.consume();
+					table.transferFocusBackward();
+				}
+				else if(inFirstColumn())
+				{
+					e.consume();
+					table.changeSelection(table.getSelectedRow()-1, getLastColumnIndex(), false, false);
+				}
+				
+			}
+			else 
+			{ 
+				if(inLastRowLastColumn())
+				{
+					e.consume();
+					table.transferFocus();
+				}
 			}
 		}
+
+		private boolean inFirstColumn()
+		{
+			return table.getSelectedColumn() <= 1;
+		}
+
+		private boolean inFirstRowFirstColumn()
+		{
+			return table.getSelectedRow() <= 0 && 
+					inFirstColumn();
+		}
+
+		private boolean inLastRowLastColumn()
+		{
+			return table.getSelectedRow() >= getLastRowIndex() && 
+					table.getSelectedColumn() >= getLastColumnIndex();
+		}
+
+		private int getLastRowIndex()
+		{
+			return table.getRowCount()-1;
+		}
+
+		private int getLastColumnIndex()
+		{
+			return table.getColumnCount()-1;
+		}
+
 	}
 	private static final int DEFAULT_VIEABLE_ROWS = 5;
 }

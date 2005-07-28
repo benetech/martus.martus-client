@@ -33,12 +33,20 @@ import javax.swing.JTable;
 
 import org.martus.client.swingui.fields.UiChoiceEditor;
 import org.martus.common.fieldspec.DropDownFieldSpec;
+import org.martus.swing.UiComboBox;
 
 public class GridDropDownCellEditor extends GridCellEditorAndRenderer
 {
 	GridDropDownCellEditor()
 	{
 		super(new UiChoiceEditor(null));
+	}
+
+	public void showPopup()
+	{
+        UiComboBox comboBox = (UiComboBox)getComponent();
+		comboBox.requestFocus();
+		comboBox.showPopup();
 	}
 
 	public Component getTableCellEditorComponent(JTable tableToUse, Object codeString, boolean isSelected, int row, int column)
