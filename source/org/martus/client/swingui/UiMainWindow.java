@@ -1224,16 +1224,16 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		}
 
 		boolean isAnyBulletinAllPrivate = false;
-		Iterator ittr = currentSelectedBulletins.iterator();
-		do
+		Iterator iter = currentSelectedBulletins.iterator();
+		while(iter.hasNext())
 		{
-			Bulletin bulletin = (Bulletin) ittr.next();
+			Bulletin bulletin = (Bulletin) iter.next();
 			if(bulletin.isAllPrivate())
 			{
 				isAnyBulletinAllPrivate = true;
 				break;
 			}
-		}while(ittr.hasNext());
+		}
 		
 		UiPrintBulletinDlg dlg = new UiPrintBulletinDlg(this, isAnyBulletinAllPrivate);
 		dlg.setVisible(true);		
@@ -1241,11 +1241,9 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 			return;							
 		
 		boolean includePrivateData = dlg.isIncludePrivateChecked();
-		ittr = currentSelectedBulletins.iterator();
-		do
-		{
-			printBulletin((Bulletin) ittr.next(), job, format, attributes, includePrivateData);
-		}while(ittr.hasNext());		
+		iter = currentSelectedBulletins.iterator();
+		while(iter.hasNext())
+			printBulletin((Bulletin) iter.next(), job, format, attributes, includePrivateData);
 	}
 
 	private void printBulletin(Bulletin bulletin, PrinterJob job, PrintPageFormat format, HashPrintRequestAttributeSet attributes, boolean includePrivateData)
