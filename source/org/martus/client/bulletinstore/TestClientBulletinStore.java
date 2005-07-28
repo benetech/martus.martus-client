@@ -1191,6 +1191,7 @@ public class TestClientBulletinStore extends TestCaseEnhanced
 		File storeRootDir = store.getStoreRootDir();
 		ClientBulletinStore store = new ClientBulletinStore(security);
 		store.doAfterSigninInitialization(storeRootDir, db);
+		store.createFieldSpecCacheFromDatabase();
 		assertEquals("before load", systemFolderCount, store.getFolderCount());
 		store.loadFolders();
 		assertEquals("loaded", 1+systemFolderCount, store.getFolderCount());

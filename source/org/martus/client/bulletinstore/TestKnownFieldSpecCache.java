@@ -53,10 +53,8 @@ public class TestKnownFieldSpecCache extends TestCaseEnhanced
 	{
 		security = MockMartusSecurity.createClient();
 		app = MockMartusApp.create(security);
-		cache = new KnownFieldSpecCache(app.getStore().getDatabase(), security);
-		app.getStore().addCache(cache);
-		cache.initializeFromDatabase();
-		
+		ClientBulletinStore store = app.getStore();
+		cache = store.knownFieldSpecCache;
 	}
 	
 	public void tearDown() throws Exception

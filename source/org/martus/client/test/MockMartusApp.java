@@ -74,6 +74,7 @@ public class MockMartusApp extends MartusApp
 		MockMartusApp app = new MockMartusApp(crypto, fakeDataDirectory, emptyLocalization);
 		app.setCurrentAccount("some user", app.getMartusDataRootDirectory());
 		app.store.doAfterSigninInitialization(fakeDataDirectory, new MockClientDatabase());
+		app.store.createFieldSpecCacheFromDatabase();
 		return app;
 	}
 

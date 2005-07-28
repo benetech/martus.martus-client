@@ -1558,6 +1558,7 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		MartusCrypto security = MockMartusSecurity.createClient();
 		MartusApp app = new MartusApp(security, temp, new MtfAwareLocalization(temp));
 		app.doAfterSigninInitalization();
+		app.getStore().createFieldSpecCacheFromDatabase();
 		app.getStore().deleteAllData();
 		assertEquals("App Not Encypting Public?", true, app.getStore().mustEncryptPublicData());
 

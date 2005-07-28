@@ -119,6 +119,7 @@ public class ClientBulletinStore extends BulletinStore
 		File obsoleteCacheFile = new File(getStoreRootDir(), OBSOLETE_CACHE_FILE_NAME);
 		obsoleteCacheFile.delete();
 
+		createKnownFieldSpecCache();
 	}
 
 	public void prepareToExitNormally()
@@ -150,8 +151,6 @@ public class ClientBulletinStore extends BulletinStore
 	
 	public boolean loadFieldSpecCache()
 	{
-		createKnownFieldSpecCache();
-		
 		File file = getFieldSpecCacheFile();
 		if(!file.exists())
 			return false;
@@ -173,7 +172,6 @@ public class ClientBulletinStore extends BulletinStore
 
 	public void createFieldSpecCacheFromDatabase()
 	{
-		createKnownFieldSpecCache();
 		knownFieldSpecCache.initializeFromDatabase();
 	}
 	

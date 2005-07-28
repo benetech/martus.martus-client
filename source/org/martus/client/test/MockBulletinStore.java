@@ -57,6 +57,7 @@ public class MockBulletinStore extends ClientBulletinStore
 		dir.delete();
 		dir.mkdirs();
 		doAfterSigninInitialization(dir, db);
+		createFieldSpecCacheFromDatabase();
 	}
 	
 	public void deleteAllData() throws Exception
