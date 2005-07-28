@@ -31,6 +31,7 @@ import java.awt.Toolkit;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import org.martus.swing.UiOptionPane;
+import org.martus.swing.Utilities;
 
 class Martus
 {
@@ -65,6 +66,9 @@ class Martus
 		}
 		try
 		{
+			if(Utilities.isMSWindows())
+				UIManager.put("Application.useSystemFontSettings", new Boolean(false));
+			
 			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 		}
 		catch(Exception e)
