@@ -255,7 +255,7 @@
 -eb55-button:retrieve=पून:प्राप्ति गर्नुहोस्
 
 #________________=Save
--efc0-button:save=<Save>
+-efc0-button:save=<  वचत  >
 
 #__________________________=Save Attachment
 -f513-button:saveattachment=संलग्न वचत गर्नुहोस् 
@@ -297,7 +297,7 @@
 -4a0b-field:AuthorRequired=लेखक (आवश्यक) 
 
 #___________________________________=Your key is required to read your private bulletin information or to create new bulletins.  To ensure that you'll always have access to your data, it is extremely important to keep a backup of your key.\n\nMartus offers two methods for backing up your key, either of which may be used, but we strongly recommend using both backup methods.  The first method creates a single, password encrypted key back up file onto removable media (e.g. floppy disk, cd, USB storage) or a network drive; the second method backs up the key in #M# separate pieces (not encrypted with your password) onto multiple floppy disks (or other removable media).\n
--4f48-field:BackupKeyPairGeneralInfo=तपाईको कुञ्जी तपाईको निजी बुलेटिन जानकारी पढ्नको लागि अथवा नयाँ बुलेटिनहरु सिर्जना गर्न आवश्यक पर्दछ । तपाईको लगतमा सँधै तपाईको पहुँच रहिरहने छ  भनि सुनिश्चित गर्न तपाईको कुञ्जीको एउटा जगेडा राख्न अति नै महत्वपुर्ण हुन्छ।\n\n मार्टस(Martus)ले कुञ्जीको जगेडा राख्न दुई तरीका प्रस्ताव गरेको छ, ति मध्ये जुन सुकै प्रयोग गर्न सकिन्छ, तर दुवै जगेडा प्रयोग गर्न हामी कडा सिफारिस गर्दछौँ । पहिलो तरीकाले हटाउन मिल्ने साधन (उदाहरण फ्लपि चक्का( floppy disk), सि डि( cd) , यू एस वि भण्डारन (USB storage)) अथवा नेटवर्क ड्राइभमा पासवर्ड गुप्तिकरण गरिएको एकल  कुञ्जी  फाइलको  जगेडा सिर्जना गर्दछ  र दोस्रो तरिकाले  विविध फ्लपि चक्काहरू (अरू हटाउन मिल्ने साधन) मा #M# वटा छुट्टै भागहरुमा (पासवर्ड गुप्तिकरण नगरिएको) मा कुञ्जी जगेडा राख्दछ । \n
+-4f48-field:BackupKeyPairGeneralInfo=तपाईको कुञ्जी तपाईको निजी बुलेटिन जानकारी पढ्नको लागि अथवा नयाँ बुलेटिनहरु सिर्जना गर्न आवश्यक पर्दछ । तपाईको लगतमा सँधै तपाईको पहुँच रहिरहने छ  भनि सुनिश्चित गर्न तपाईको कुञ्जीको एउटा जगेडा राख्न अति नै महत्वपुर्ण हुन्छ।\n\n मार्टस(Martus)ले कुञ्जीको जगेडा राख्न दुई तरीका प्रस्ताव गरेको छ, ति मध्ये जुन सुकै प्रयोग गर्न सकिन्छ, तर दुवै जगेडा प्रयोग गर्न हामी कडा सिफारिस गर्दछौँ । पहिलो तरीकाले हटाउन मिल्ने साधन (उदाहरण फ्लपि चक्का( floppy disk), सि डि( cd) , यू एस वि भण्डारन (USB storage) अथवा नेटवर्क ड्राइभमा पासवर्ड गुप्तिकरण गरिएको एकल  कुञ्जी  फाइलको  जगेडा सिर्जना गर्दछ  र दोस्रो तरिकाले  विविध फ्लपि चक्काहरू (अरू हटाउन मिल्ने साधन) मा #M# वटा छुट्टै भागहरुमा (पासवर्ड गुप्तिकरण नगरिएको) मा कुञ्जी जगेडा राख्दछ । \n
 
 #________________________________________________=This method breaks up your key into #M# pieces, any #N# of which will be required to reconstruct the key without requiring a password.  If you forget your login name or your password, this method is the only way you can restore your key.\n\nOnce the #M# files have been written to removable media disks, you should distribute them to #M# different people whom you will remember, but each of whom don't know who you have given the other files to.  Do not store any of the disks together.\n\nTo restore your key, first retrieve any #N# of the original #M# disks, and then select 'Restore Account' and 'Restore account from multiple disks' when signing into Martus.\n
 -c83c-field:BackupKeyPairToSecretShareInformation=यो तरिकाले तपाईको कुञ्जीलाई  #M# वटा टुक्राहरूमा टुक्रयाउँदछ, यसमध्ये कुनै #N# वटा पासवर्डको आवश्यकता विना नै कुञ्जीको पून:निर्माण गर्न आवश्यक पर्दछ । यदि तपाईले तपाईको लगइन नाम अथवा पासवर्ड विर्सनु भयो भने, यो नै तपाईले तपाईको कुञ्जी पुर्वावस्था गर्न सक्ने एउटै मात्र तरीका हो । \n\n एकचोटी #M# वटा फाइलहरु हटाउन मिल्ने साधन चक्काहरूमा लेखिसकेपछि, त्यसलाई तपाईले सम्झन सक्ने वेग्ला वेग्लै #M# जना मानिसहरुलाई बाँड्नु पर्दछ, तर ति प्रत्येकलाई अन्य फाइल कसलाई दिईएको छ भनि थाहा हुनुहुदैन । कुनै पनि चक्काहरुलाई एकैसाथ भण्डार नगर्नुहोस् । \n\n यो कुञ्जीलाई  पुर्वावस्था गर्नको लागि,पहिला मौलिक #M# वटा फ्लपिहरू मध्येबाट कुनै #N# वटा पून:प्राप्ति गर्नुहोस् र त्यसपछि मार्टस(Martus)मा साईन ईन गर्दा 'खाता पुर्वावस्थामा ल्याउनुहोस्' र 'विविध चक्काहरूबाट खाता पुर्वावस्थामा ल्याउनुहोस् ' चयन गर्नुहोस् ।
@@ -345,16 +345,16 @@
 -eba1-field:BulletinHasUnknownStuff=चेतावनी:यस बुलेटिनका केहि जानकारीहरू देख्निदैन
 
 #______________________________________________=The selected Headquarters account(s) will be able to view the private information in this bulletin, or send this bulletin to a server, after you save it.\n\nTo add a new headquarters account use the Tools/Configure Headquarters menu option.
--de85-field:BulletinHeadQuartersHQInfoForModify=<The selected Headquarters account(s) will be able to view the private information in this bulletin, or send this bulletin to a server, after you save it.\n\nTo add a new headquarters account use the Tools/Configure Headquarters menu option.>
+-de85-field:BulletinHeadQuartersHQInfoForModify=<  निम्न प्रमुख कार्यालयका खाता(हरु)ले यस बुलेटिनमा  निजि जानकारीहरु अवलोकन गर्न सक्षम हुनेछन, अथवा यस बुलेटिनलाई तपाईले वचत गरिसके पछि सर्वरमा पठाउनुहोस ।\n\n खाता थप्नु अथवा हटाउनलाई, उपकरणहरु/प्रमुख कार्यालय कन्फिगर गर्नुहोस मेनु विकल्प प्रयोग गर्नुहोस ।  >
 
 #____________________________________________=The following Headquarters account(s) can view the private information in this bulletin, and can send this bulletin to a server.
--e728-field:BulletinHeadQuartersHQInfoForView=<The following Headquarters account(s) can view the private information in this bulletin, and can send this bulletin to a server.>
+-e728-field:BulletinHeadQuartersHQInfoForView=<  निम्न  प्रमुख कार्यालयका खाता(हरु)ले यस बुलेटिनमा  निजि जानकारीहरु अवलोकन गर्न, र  यस बुलेटिनलाई सर्वरमा पठाउन सक्छन ।  >
 
 #______________________________________=Label
--7434-field:BulletinHeadQuartersHQLabel=<Label>
+-7434-field:BulletinHeadQuartersHQLabel=<  लेबुल  >
 
 #___________________________________________=Headquarters
--6222-field:BulletinHeadQuartersHeadquarters=<Headquarters>
+-6222-field:BulletinHeadQuartersHeadquarters=<  प्रमुख कार्यालय  >
 
 #_____________________=Bulletin Id:
 -a081-field:BulletinId=बुलेटिन आई डी:
@@ -390,7 +390,7 @@
 -a1a2-field:ConfigureHQColumnHeaderPublicCode=सार्वजनिक संकेत
 
 #_________________________________=Current Headquarters
--6bd3-field:ConfigureHQsCurrentHQs=<Current Headquarters>
+-6bd3-field:ConfigureHQsCurrentHQs=<  प्रमुख कार्यालय  >
 
 #_______________________________________=Default?
 -0e2c-field:ConfigureHeadQuartersDefault=<Default?>
@@ -411,10 +411,10 @@
 -1ef6-field:CreateCustomFieldsHelp1=बुलेटिनहरुको सजावट एउटा XML कागजातद्धारा निर्देशित हुन्छ । पूर्वनिर्धारितरुपले स्तरिय बुलेटिन फाँटहरु अनुकूलन फाँट घोषणा माथि देखा पर्दछ , तर आवश्यक परेमा तिनीहरुलाई सार्न सकिन्छ । यद्धपि, त्यहाँ चारवटा आवश्यक फाँटहरु छन जसलाई हटाउन सकिदैन: 'author'(लेखक), 'entrydate'(प्रविष्ट मिति), 'language'(भाषा) र 'title'(शिर्षक).\n\n
 
 #__________________________________=For custom (non-standard) fields, you first select the type of field you want.  The possible choices are 'BOOLEAN', 'DATE', 'DATERANGE', 'DROPDOWN', 'GRID', 'LANGUAGE', 'MESSAGE', 'MULTILINE', and 'STRING'. \n\nFor each custom field you will need a unique identification tag.  This tag can be any word except those already used by the system (eg. 'author', 'summary', 'location', 'title' etc.), and cannot contain spaces or special characters.  Examples of choices are 'custom1', 'custom2', etc, or tags that are more descriptive like 'VictimsName'.\n\nThen you need a label which is displayed next to your custom field.  An example might be 'Name of 1st Witness'.\n\nAdditional Comments\n1. XML is case-sensitive ('Witness' is not the same as 'witness') \n2. Quotes around type name can be single or double as long as they match (e.g. 'STRING" is not valid. It must be 'STRING' or "STRING")\n3. A Boolean field will be displayed as a checkbox when editing and Yes/No when previewed or printed.\n4.  Use "MESSAGE" fields to give guidance on how to enter data, and to create comments/notes that will be displayed in every bulletin.\n\nSee examples below:\n\n
--da0a-field:CreateCustomFieldsHelp2=<अनुकूलन (स्तरिय नभएको) फाँटहरुको लागि, पहिले तपाईले चाहनु भएको फाँटको प्रकार छनौट गर्नुहोस् । सम्भाव्य छनौटहरु 'BOOLEAN'(बुलियन), 'DATE'(मिति), 'DATERANGE'(मिति दायरा) , 'GRID'(ग्रिड), 'LANGUAGE'(भाषा), 'MULTILINE'(बहु हरफ), र 'STRING'(स्ट्रिङ) हरु हुन ।\n\n  हरेक अनुकूलन फाँटको लागि तपाईलाई एउटा अद्वितिय परिचयात्मक ट्याग( tag)को आवश्यकता पर्नेछ । यो  ट्याग( tag)प्रणालिले पहिले नै प्रयोग गरिसकेको बाहेक जुनसुकै शब्द हुनसक्छ (उदाहरण.'author'(लेखक), 'summary'(साराँश), 'location'(स्थान), 'title'(शिर्षक) आदि ), र खालि ठाँउ तथा विशेष क्यारेकटरहरु समाबेश गर्न सक्दैन । छनौटका उदाहरणहरु 'अनुकूलन१', 'अनुकूलन२', आदि, अथवा ट्यागहरु( Tag) जुन धेरै विवरणात्मक हुन्छन  जस्तै 'पिडितहरुकोनाम' ।\n\n त्यसपछि तपाईलाई एउटा लेबुलको आवश्यकता पर्दछ जुन तपाईको अनुकूलन फाँटको पछि देखिन्छ । एउटा  उदाहरण 'पहिलो साक्षीको नाम' पनि हुनसक्छ  ।\n\n अतिरिक्त टिप्पणीहरु \n१ XML  केस सँवेदनशील हुन्छ ।\n२ टाईप गरिएको नामको वरिपरी उध्दरण चिन्ह हुनसक्छ (जति सक्दो लामो तिनिहरु सुहाउँदो) ।\n३ 'BOOLEAN'(बुलियन) फाँट सम्पादन गर्दा जाँचबाकसको रुपमा र छपाई हुँदा हुन्छ\हुदैन प्रदर्शित हुन्छ ।\n\n तलको उदाहरणहरु हेर्नुहोस्  : \n\n         >
+-da0a-field:CreateCustomFieldsHelp2=<  अनुकूलन (स्तरिय नभएको) फाँटहरुको लागि, पहिले तपाईले चाहनु भएको फाँटको प्रकार छनौट गर्नुहोस् । सम्भाव्य छनौटहरु 'BOOLEAN'(बुलियन), 'DATE'(मिति), 'DATERANGE'(मिति दायरा) , 'DROPDOWN', 'GRID'(ग्रिड), 'LANGUAGE'(भाषा), 'MESSAGE', 'MULTILINE'(बहु हरफ), र 'STRING'(स्ट्रिङ) हरु हुन ।\n\n  हरेक अनुकूलन फाँटको लागि तपाईलाई एउटा अद्वितिय परिचयात्मक ट्याग( tag)को आवश्यकता पर्नेछ । यो  ट्याग( tag)प्रणालिले पहिले नै प्रयोग गरिसकेको बाहेक जुनसुकै शब्द हुनसक्छ (उदाहरण.'author'(लेखक), 'summary'(साराँश), 'location'(स्थान), 'title'(शिर्षक) आदि ), र खालि ठाँउ तथा विशेष क्यारेकटरहरु समाबेश गर्न सक्दैन । छनौटका उदाहरणहरु 'अनुकूलन१', 'अनुकूलन२', आदि, अथवा ट्यागहरु( Tag) जुन धेरै विवरणात्मक हुन्छन  जस्तै 'पिडितहरुकोनाम' ।\n\n त्यसपछि तपाईलाई एउटा लेबुलको आवश्यकता पर्दछ जुन तपाईको अनुकूलन फाँटको पछि देखिन्छ । एउटा  उदाहरण 'पहिलो साक्षीको नाम' पनि हुनसक्छ  ।\n\n अतिरिक्त टिप्पणीहरु \n१ XML  केस सँवेदनशील हुन्छ ।\n२ टाईप गरिएको नामको वरिपरी उध्दरण चिन्ह हुनसक्छ (जति सक्दो लामो तिनिहरु सुहाउँदो) ।\n३ 'BOOLEAN'(बुलियन) फाँट सम्पादन गर्दा जाँचबाकसको रुपमा र छपाई हुँदा हुन्छ\हुदैन प्रदर्शित हुन्छ ।\n\n तलको उदाहरणहरु हेर्नुहोस्  : \n\n         >
 
 #__________________________________=<Field type='STRING'>\n<Tag>custom1</Tag>\n<Label>Witness Name</Label>\n</Field>\n\n<Field type='LANGUAGE'>\n<Tag>new2</Tag>\n<Label>Witness Speaks</Label>\n</Field>\n\n<Field type='BOOLEAN'>\n<Tag>new3</Tag>\n<Label>Were guns used?</Label>\n</Field>\n\n<Field type='MESSAGE'>\n<Tag>customMessage</Tag>\n<Label>Guidance for Perpetrator Eye Color entry:</Label>\n<Message>If you are unsure of the perpetrator's eye color, please leave this field blank.</Message>\n</Field>\n\n<Field type='DROPDOWN'>\n<Tag>customDropDown</Tag>\n<Label>Perpetrator Eye Color</Label>\n<Choices>\n<Choice>Brown</Choice>\n<Choice>Blue</Choice>\n<Choice>Green</Choice>\n<Choice>Other</Choice>\n</Choices>\n</Field>\n\n<Field type='GRID'>\n<Tag>customgrid</Tag>\n<Label>Victim Information</Label>\n<GridSpecDetails>\n<Column><Label>Name of Victim</Label></Column>\n<Column><Label>Victim Age</Label></Column>\n<Column><Label>Victim Gender</Label></Column>\n<Column><Label>Victim Ethnicity</Label></Column>\n</GridSpecDetails>\n</Field>\n
--491b-field:CreateCustomFieldsHelp3=<<Field type='STRING'>\n<Tag>अनुकूलन१</Tag>\n<Label>साक्षीको नाम</Label>\n</Field>\n\n<Field type='LANGUAGE'>\n<Tag>नयाँ२</Tag>\n<Label>साक्षिको भनाई</Label>\n</Field>\n\n<Field type='BOOLEAN'>\n<Tag>नयाँ३</Tag>\n<Label>के बन्दुकहरु प्रयोग भएका थिए?</Label>\n</Field>\n\n<Field type='GRID'>\n<Tag>अनुकूलनग्रिड</Tag>\n<Label>पिडितको जानकारी</Label>\n<GridSpecDetails>\n<Column><Label>पिडितको नाम</Label></Column>\n<Column><Label>पिडितको उमेर </Label></Column>\n<Column><Label>पिडितको लिङ्ग</Label></Column>\n<Column><Label> पिडितको सम्प्रदाय</Label></Column>\n</GridSpecDetails>\n</Field>\n>
+-491b-field:CreateCustomFieldsHelp3=<Field type='STRING'>\n<Tag>अनुकूलन१</Tag>\n<Label>साक्षीको नाम</Label>\n</Field>\n\n<Field type='LANGUAGE'>\n<Tag>नयाँ२</Tag>\n<Label>साक्षिको भनाई</Label>\n</Field>\n\n<Field type='BOOLEAN'>\n<Tag>नयाँ३</Tag>\n<Label>के बन्दुकहरु प्रयोग भएका थिए?</Label>\n</Field>\n\n<Field type='MESSAGE'>\n<Tag>customMessage</Tag>\n<Label>Guidance for Perpetrator Eye Color entry:</Label>\n<Message>If you are unsure of the perpetrator's eye color, please leave this field blank.</Message>\n</Field>\n\n<Field type='DROPDOWN'>\n<Tag>customDropDown</Tag>\n<Label>Perpetrator Eye Color</Label>\n<Choices>\n<Choice>Brown</Choice>\n<Choice>Blue</Choice>\n<Choice>Green</Choice>\n<Choice>Other</Choice>\n</Choices>\n</Field>\n\n<Field type='GRID'>\n<Tag>अनुकूलनग्रिड</Tag>\n<Label>पिडितको जानकारी</Label>\n<GridSpecDetails>\n<Column><Label>पिडितको नाम</Label></Column>\n<Column><Label>पिडितको उमेर </Label></Column>\n<Column><Label>पिडितको लिङ्ग</Label></Column>\n<Column><Label> पिडितको सम्प्रदाय</Label></Column>\n</GridSpecDetails>\n</Field>\n
 
 #____________________________________=Please enter your new username and password.
 -aec2-field:CreateNewUserNamePassword=कृपया तपाँईको नयाँ प्रयोगकर्ता नाम र पासवर्ड प्रविष्ट गराउनुहोस् ।
@@ -474,7 +474,7 @@
 -64b8-field:ErrorCustomFieldHeader4=लेबुल
 
 #____________________________=There is an error in the custom field definitions. Each problem is identified with the following codes:\n   100 - Required standard field is missing\n   101 - Custom field does not have a correct tag.\n   102 - A previous Tag already exists with this name.\n   103 - Custom field does not have a label.\n   104 - Unrecognized Field Type.\n   105 - A label was found in a standard field.\n   106 - XML Parse Error.\n   107 - Tag contains illegal characters.\n   200 - All fields empty.\n   201 - Unrecognized headquarters created this template.\n   202 - Security validation error.\n   203 - File Error.
--f2cf-field:ErrorCustomFields=<अनुकूलन फाँटको परिभाषाहरुमा एउटा त्रुटि छ । हरेक समस्या निम्न संकेतसँग पहिचान गर्न सकिन्छ: \n  १०० - आवश्यक स्तरिय फाँट हराएको छ । \n   १०१ - अनुकूलन फाँटमा एउटा सही ट्याग छैन । \n १०२ - एउटा अघिल्लो ट्याग यो नामसँग पहिले नै अवस्थित छ । \n  १०३ - अनुकूलन फाँट सँग एउटा लेबुल छैन । \n  १०४ - पहिचान गर्न नसक्ने फाँट प्रकार । \n  १०५ - एउटा लेबुल स्तरिय फाँटमा भेट्टायो । \n  १०६ - XML को पद व्याखा त्रुटि । \n  १०७ - ट्यागमा अवैधानिक क्यारेक्टरहरु समावेश छन् ।>
+-f2cf-field:ErrorCustomFields=<  अनुकूलन फाँटको परिभाषाहरुमा एउटा त्रुटि छ । हरेक समस्या निम्न संकेतसँग पहिचान गर्न सकिन्छ: \n  १०० - आवश्यक स्तरिय फाँट हराएको छ । \n  १०१ - अनुकूलन फाँटमा एउटा सही ट्याग छैन । \n  १०२ - एउटा अघिल्लो ट्याग यो नामसँग पहिले नै अवस्थित छ । \n  १०३ - अनुकूलन फाँट सँग एउटा लेबुल छैन । \n  १०४ - पहिचान गर्न नसक्ने फाँट प्रकार । \n  १०५ - एउटा लेबुल स्तरिय फाँटमा भेट्टायो । \n  १०६ - XML को पद व्याखा त्रुटि । \n  १०७ - ट्यागमा अवैधानिक क्यारेक्टरहरु समावेश छन् ।\n  200 - All fields empty.\n  201 - Unrecognized headquarters created this template.\n  202 - Security validation error.\n  203 - File Error.  >
 
 #_________________________________________=A previous backup file exists.  You must save each file on its own removable media disk.
 -db93-field:ErrorPreviousBackupShareExists=पहिलाको जगेडा फाइल अवस्थित छ । तपाईले प्रत्येक फाईललाई यसको आफ्नै हटाउन मिल्ने साधन चक्कामा नै वचत गर्नुपर्दछ।
@@ -834,7 +834,7 @@
 -5b61-field:confirmCancelShareVerifyeffect=हो को छनौटबाट तपाई यो रुजू क्रमबाट बाहिर निस्कनु हुनेछ ।
 
 #_________________________________________=You have chosen to remove all selected Headquarters accounts.  Any existing saved bulletins will still be visible by the old Headquarters.  If you want to disallow Headquarters viewing access to previously created Draft bulletins they must be re-saved after revoking the Headquarters.  Any sealed bulletins CANNOT be reset to be non-viewable by the Headquarters, except by creating a new version of the bulletin.
--d335-field:confirmClearHQInformationcause=<तपाईले तपाईको प्रमुख कार्यालयको खाता हटाउनको लागि छान्नु भएको छ।कुनै पनि पहिले बचत गरिएको बुलेटिनहरु अझै पनि पुरानो प्रमुख कार्यालय द्धारा हेर्न सकिने छ ।यदि तपाई प्रमुख कार्यालयलाई पहिले सिर्जना गरिएका मस्यौदा बुलेटिनहरु अवलोकन गर्न अनुमति दिन चाहनु हुन्न भने तिनिहरुलाई प्रमुख कार्यालयलाई बिनास  गरे पछि पून: वचत गर्नैपर्ने हुन्छ ।कुनैपनि सुरक्षित गरिएका बुलेटिनहरु प्रमुख कार्यालयद्धारा अवलोकन गर्न नमिल्ने गरी रिसेट गर्न सकिदैन।>
+-d335-field:confirmClearHQInformationcause=< तपाईले तपाईको प्रमुख कार्यालयको खाता हटाउनको लागि छान्नु भएको छ।कुनै पनि पहिले बचत गरिएको बुलेटिनहरु अझै पनि पुरानो प्रमुख कार्यालय द्धारा हेर्न सकिने छ ।यदि तपाई प्रमुख कार्यालयलाई पहिले सिर्जना गरिएका मस्यौदा बुलेटिनहरु अवलोकन गर्न अनुमति दिन चाहनु हुन्न भने तिनिहरुलाई प्रमुख कार्यालयलाई बिनास  गरे पछि पून: वचत गर्नैपर्ने हुन्छ ।कुनैपनि सुरक्षित गरिएका बुलेटिनहरु प्रमुख कार्यालयद्धारा अवलोकन गर्न नमिल्ने गरी रिसेट गर्न सकिदैन। >
 
 #__________________________________________=By clicking on Yes, any draft or sealed bulletins saved in the future will no longer be accessible by your Headquarters.
 -4a87-field:confirmClearHQInformationeffect=हो मा क्लिक गर्नाले, कुनैपनि मस्यौदा अथवा सुरक्षित बुलेटिनहरु भविष्यमा वचत हुँदा तपाईको प्रमुख कार्यालयको पहुँचमा रहिरहने छैन ।
@@ -849,7 +849,7 @@
 -fcb6-field:confirmCloneMySealedAsDraftcause=तपाईले तपाईको सुरक्षित बुलेटिनहरु मध्ये एउटा त्यसको नयाँ सँस्करण  सिर्जना गर्नुको सट्टा  परिमार्जनको लागि  छान्नु भएकोछ । 
 
 #____________________________________________=Clicking on Yes will create a new version of this bulletin that initially contains all the same information.
--198c-field:confirmCloneMySealedAsDrafteffect=<हो को क्लिक गर्नाले नयाँ सँस्करणको बुलेटिन सिर्जना हुनेछ जसमा सुरुमा सबै समान जानकारी समावेश हुन्छ । यो जारी भएको  मार्टस(Martus) मा तपाई धेरै नयाँ सँस्करण  मात्र अवलोकन  गर्न  सक्नुहुनेछ ।>
+-198c-field:confirmCloneMySealedAsDrafteffect=< हो को क्लिक गर्नाले नयाँ सँस्करणको बुलेटिन सिर्जना हुनेछ जसमा सुरुमा सबै समान जानकारी समावेश हुन्छ । यो जारी भएको  मार्टस(Martus) मा तपाई धेरै नयाँ सँस्करण  मात्र अवलोकन  गर्न  सक्नुहुनेछ । >
 
 #___________________________________=You are about to delete your Martus data from this computer.
 -ee9a-field:confirmDeleteMyDatacause=तपाईले यो कम्प्यूटरबाट तपाईको मार्टस(Martus)लगत मेट्न लाग्नु भएको छ ।
@@ -873,7 +873,7 @@
 -2f98-field:confirmEnterCustomFieldscause=तपाईले अनुकूलित गर्न छान्नु भएको फाँटहरु जुन यो खाताबाट सिर्जना गरिएको जुनसुकै नयाँ बुलेटिनहरुमा प्रयोग हुनेछन् ।
 
 #_________________________________________=Customizing fields is an advanced operation. You should only proceed if you are certain that you understand the feature.
--518e-field:confirmEnterCustomFieldseffect=<फाँटहरुको अनुकूलितकरण एउटा उन्नत कार्य हो, र खतराजनक पनि हुन सक्छ । तपाईले सुबिधाहरु वुझेकोमा निश्चित हुनुहुन्छ भने मात्र प्रक्रिया अघि बढाउनु पर्छ ।>
+-518e-field:confirmEnterCustomFieldseffect=<  फाँटहरुको अनुकूलितकरण एउटा उन्नत कार्य हो । तपाईले सुबिधाहरु वुझेकोमा निश्चित हुनुहुन्छ भने मात्र प्रक्रिया अघि बढाउनु पर्छ ।  >
 
 #_________________________________________________=The file you chose is not part of a key backup set.  These files are named '<name you picked>-#.dat' where # is the sequence number in the disk set previously created.
 -2e41-field:confirmErrorRecoverIvalidFileNamecause=तपाईले छान्नु भएको फाइल जगेडा कुञ्जीको समुहको भाग होइन् । यि फाइलहरु '<तपाईले राख्नु भएको नाम>-#.dat' नामकरण भएको हुन्छ, जहाँ # पहिलेनै सिर्जना गरिएको चक्का समुहको क्रम संख्या हुन्छ। 
@@ -900,7 +900,7 @@
 -167f-field:confirmKeyPairFileExistsOverWriteeffect=हो मा क्लिक गर्नाले पुरानो कुञ्जी फाइल मेटिनेछ र पुर्वावस्थित कुञ्जीबाट यो प्रतिस्थापन हुन्छ ।
 
 #_______________________________________________________=This account was created with an older release of Martus, which was unaware of multiple sealed bulletin versions. We need to update your system to recognize bulletins with versions.  The migration is automatic, fast, and safe. You cannot run this release of Martus unless you allow this migration.
--d89c-field:confirmNeedsBulletinVersioningMigrationcause=<यो खाता पुरानो सँस्करणको मार्टस( Martus)बाट सिर्जित थियो ,जुन बहुमुखि सुरक्षण बुलेटिन सँस्करणहरु बुझ्ने थिएन । हामी तपाईको प्रणालिलाई बुलेटिनलाई सँस्करणसँग पहिचान गराउनलाई अद्यावधिक गर्न चाहन्छौ । परिवर्तन स्वचालित, छिटो, र सुरक्षित हुन्छ । तपाईले यो सँस्करणको  मार्टस( Martus) यो परिवर्तनलाई नस्विकारे सम्म चलाउन सक्नुहुन्न । >
+-d89c-field:confirmNeedsBulletinVersioningMigrationcause=< यो खाता पुरानो सँस्करणको मार्टस( Martus)बाट सिर्जित थियो ,जुन बहुमुखि सुरक्षण बुलेटिन सँस्करणहरु बुझ्ने थिएन । हामी तपाईको प्रणालिलाई बुलेटिनलाई सँस्करणसँग पहिचान गराउनलाई अद्यावधिक गर्न चाहन्छौ । परिवर्तन स्वचालित, छिटो, र सुरक्षित हुन्छ । तपाईले यो सँस्करणको  मार्टस( Martus) यो परिवर्तनलाई नस्विकारे सम्म चलाउन सक्नुहुन्न । >
 
 #________________________________________________________=Answering Yes will allow the migration to proceed, answering No will exit Martus.
 -2a34-field:confirmNeedsBulletinVersioningMigrationeffect=हो उत्तर दिनाले परिवर्तन प्रकृयालाई स्विकार गर्नेछ ,होइन ले मार्टस( Martus) बाहिर निस्कनेछ ।
@@ -984,7 +984,7 @@
 -bbcf-field:confirmResetDefaultDetailseffect=तपाईले सामाग्रीको  समिक्षा गरे पछि, तपाईले तिनिहरुलाई स्विकार गर्न, परिमार्जन गर्न अथवा रद्द थिचेर अवस्थित पूर्वनिर्धारण सामाग्रीहरु लाई राख्न सक्नुहुन्छ ।
 
 #____________________________________________=The following bulletin(s) selected for retrieval are newer versions of bulletins already on this computer:\n\n#TITLES#
--c5e3-field:confirmRetrieveNewerVersionscause=<पून:प्राप्त गर्न छनौट गरिएको निम्न बुलेटिन(हरु) नयाँ सँस्करणका बुलेटिनहरु पहिले नै प्रणालीमा थियो:\n\n#TITLES#>>
+-c5e3-field:confirmRetrieveNewerVersionscause=< पून:प्राप्त गर्न छनौट गरिएको निम्न बुलेटिन(हरु) नयाँ सँस्करणका बुलेटिनहरु पहिले नै प्रणालीमा थियो:\n\n#TITLES# >
 
 #_____________________________________________=Each older version will be replaced by the newer version from the server.
 -1d86-field:confirmRetrieveNewerVersionseffect=प्रत्येक पुरानो सँस्करण सर्वरले नयाँ सँस्करणमा बदलेको हुनेछ । 
@@ -1020,7 +1020,7 @@
 -0e22-field:confirmUnableToRecoverFromBackupFileeffect=हो को छनौटबाट पुर्वावस्था प्रक्रिया फेरी शुरू हुन्छ, होइनले मार्टस(Martus)बाट बाहिर निस्कन्छ ।
 
 #_______________________________________=You have chosen to restore the standard set of Martus fields.
--b1b6-field:confirmUndoCustomFieldscause=<तपाईले मार्टस(Martus)फाँटहरुको स्तरिय समुहमा फर्काउनेमा छनौट गर्नु भएको छ।>
+-b1b6-field:confirmUndoCustomFieldscause=< तपाईले मार्टस(Martus)फाँटहरुको स्तरिय समुहमा फर्काउनेमा छनौट गर्नु भएको छ। >
 
 #________________________________________=New bulletins created with this account will not have any custom fields.
 -bf33-field:confirmUndoCustomFieldseffect=यो खाताबाट सिर्जना गरेको नयाँ बुलेटिनहरुमा कुनै पनि अनुकूलन फाँटहरु हुने छैनन् ।
@@ -1032,10 +1032,10 @@
 -7c7f-field:confirmUploadRemindereffect=हो मा क्लिक गर्नाले मार्टस(Martus)बाट बाहिर निस्कनु हुनेछ, र नपठाइएको बुलेटिनहरु छोडिनेछन । तिनीहरु अर्को पटक तपाईले मार्टस(Martus)शुरू गर्दा र सर्वरमा जडान गर्दा पठाईने छन् ।
 
 #_______________________________________________=The bulletin you are about to create is based on a previous bulletin whose custom fields are different from your current custom fields.  Do you wish to use the original bulletin's custom fields?
--a6ca-field:confirmUseBulletinsCustomFieldscause=<तपाईँले सिर्जना गर्न लाग्नु भएको बुलेटिन  पछिल्लो बुलेटिनमा आधारित छ जसको अनुकूलन फाँटहरु तपाईको हालको अनुकूलन फाँटहरु भन्दा फरक छ । के तपाई मौलिक बुलेटिनहरुको अनुकूलन फाँटहरु प्रयोग गर्न चाहनु हुन्छ? >
+-a6ca-field:confirmUseBulletinsCustomFieldscause=< तपाईँले सिर्जना गर्न लाग्नु भएको बुलेटिन  पछिल्लो बुलेटिनमा आधारित छ जसको अनुकूलन फाँटहरु तपाईको हालको अनुकूलन फाँटहरु भन्दा फरक छ । के तपाई मौलिक बुलेटिनहरुको अनुकूलन फाँटहरु प्रयोग गर्न चाहनु हुन्छ? >
 
 #________________________________________________=Answering Yes will use the old custom fields and all bulletin data.  Answering No will use your current custom fields and copy all similar fields to the new bulletin but you may lose some of the original bulletin's data.
--0ed4-field:confirmUseBulletinsCustomFieldseffect=<हो उत्तर दिनाले पुरानो अनुकूलन फाँटहरु र सबै बुलेटिनको लगत प्रयोग गर्नेछ । होइन उत्तर दिनाले तपाईको हालको अनुकूलन फाँटहरु प्रयोग गर्नेछ र नयाँ बुलेटिनमा सबै समान फाँटहरु प्रतिलिपि गर्ने छ तर तपाईले केही मौलिक बुलेटिनहरुको लगत गुमाउनु हुनेछ ।>
+-0ed4-field:confirmUseBulletinsCustomFieldseffect=< हो उत्तर दिनाले पुरानो अनुकूलन फाँटहरु र सबै बुलेटिनको लगत प्रयोग गर्नेछ । होइन उत्तर दिनाले तपाईको हालको अनुकूलन फाँटहरु प्रयोग गर्नेछ र नयाँ बुलेटिनमा सबै समान फाँटहरु प्रतिलिपि गर्ने छ तर तपाईले केही मौलिक बुलेटिनहरुको लगत गुमाउनु हुनेछ । >
 
 #________________________________________________=Warning: acctmap.txt file in your account's packets directory is missing or is corrupt.  This may indicate someone has tried to tamper with your data or could be caused by a hardware error.
 -61cb-field:confirmWarnMissingAccountMapFilecause=चेतावनी: तपाईको खाताको प्याकेट्स  डाइरेक्टरीभित्रको acctmap.txt फाइल हराएको अथवा क्षति भएको छ । यसले सायद कसैले तपाईको अभिलेख बिगार्ने कोशिश गरेको अथवा हार्डवेयरको त्रुटिको कारण भएको हुन सक्ने संकेत गर्दछ । 
@@ -1365,7 +1365,7 @@
 -5bd8-field:notifySearchFailedcause=माफ गर्नुहोस्, कुनैपनि बुलेटिनहरु भेटिएनन् ।
 
 #_________________________________=#N# bulletins matched the search, and have been added to the Search Results folder.\n Note that both current and earlier versions of each bulletin were searched.
--6569-field:notifySearchFoundcause=<फेला पारिएका बुलेटिनहरुको संख्या ‍=‍>
+-6569-field:notifySearchFoundcause=<  फेला पारिएका बुलेटिनहरुको संख्या ‍= #N#  ‍>
 
 #_____________________________________=The Server Public Code does not match the one you entered.
 -efe3-field:notifyServerCodeWrongcause=सर्वरको सार्वजनिक संकेत तपाईले प्रविष्ट गराउनु भएको भएकोसँग मिल्दैन।
@@ -1493,8 +1493,8 @@
 #________________=Title
 -768e-field:title=शिर्षक
 
-#_____________________________=Nepali 2.7
--1d90-field:translationVersion=< नेपाली२.५>
+#_____________________________=Nepali 2.7.1
+-1d90-field:translationVersion= नेपाली २.७.१ (partial)
 
 #___________________=Username
 -84c2-field:username= प्रयोगकर्ता नाम
@@ -1599,7 +1599,7 @@
 -8df7-language:es=स्पानिस्
 
 #________________=Persian (Farsi, Dari)
--10c9-language:fa=<फारसी, डरी>
+-10c9-language:fa=< फारसी, डरी >
 
 #________________=French
 -4438-language:fr=फ्रेन्च
@@ -2079,7 +2079,7 @@
 -20f8-wintitle:ServerCompliance=सर्वर स्विकृति कथन
 
 #________________________=Server News: Message #CurrentNewsItem# of #MaxNewsItems#
--7177-wintitle:ServerNews=<सर्वर समाचार>
+-7177-wintitle:ServerNews=< सर्वर समाचार >
 
 #____________________________________=Server Configuration Results
 -788c-wintitle:ServerSelectionResults=सर्वर कन्फिगरेसन परिणामहरु
@@ -2112,7 +2112,7 @@
 -bba5-wintitle:confirmCancelShareBackup=जगेडा रद्द 
 
 #_______________________________________=Cancel Restore
--3889-wintitle:confirmCancelShareRecover=<Cancel Restore>
+-3889-wintitle:confirmCancelShareRecover=<  पुर्वावस्था रद्द  >
 
 #______________________________________=Cancel Verification
 -8a03-wintitle:confirmCancelShareVerify=रुजू रद्द गरिएको छ
@@ -2130,7 +2130,7 @@
 -07c3-wintitle:confirmDeleteMyData=मेरो लगत मेट्नुहोस् 
 
 #________________________________________=Unsent Draft Reminder
--7657-wintitle:confirmDraftUploadReminder=<Unsent Draft Reminder>
+-7657-wintitle:confirmDraftUploadReminder=<  नपठाइएको मस्यौदा सम्झाउने  >
 
 #________________________________________________=Modify Bulletin
 -e125-wintitle:confirmEditBulletinWithUnknownTags=बुलेटिन परिमार्जन गर्नुहोस्
@@ -2178,10 +2178,10 @@
 -b6bc-wintitle:confirmRecoveredKeyShareFailedTryAgain=पुर्वावस्थामा ल्याउन  असफल भयो
 
 #_____________________________________=Weak Password Warning
--0295-wintitle:confirmRedoWeakPassword=<Weak Password Warning>
+-0295-wintitle:confirmRedoWeakPassword=<  कमजोर पासवर्ड चेतावनी  >
 
 #_____________________________________=Confirm Remove Attachments
--8739-wintitle:confirmRemoveAttachment=<Confirm Remove Attachments>
+-8739-wintitle:confirmRemoveAttachment=<  संलग्नहरु हटाउन निश्चित गर्नुहोस्  >
 
 #_________________________________=Delete All Data and Remove Martus
 -6fef-wintitle:confirmRemoveMartus=सबै लगत मेट्नुहोस र मार्टस(Martus)हटाउनुहोस् 
@@ -2223,7 +2223,7 @@
 -e8e7-wintitle:confirmWarnMissingAccountMapFile= Accountmap  फाइल हराएको अथवा दुषित छ 
 
 #________________________________________________________________=Accountmap Signature File Missing Or Corrupt
--9993-wintitle:confirmWarnMissingOrCorruptAccountMapSignatureFile=<Accountmap Signature File Missing Or Corrupt>
+-9993-wintitle:confirmWarnMissingOrCorruptAccountMapSignatureFile=<  Accountmap हस्ताक्षर फाइल हराएको अथवा दुषित छ  >
 
 #________________________________________________________=Questionable Media Chosen
 -8c18-wintitle:confirmWarningPathChosenMayNotBeRemoveable=प्रश्नयोग्य साधनको छनौट
@@ -2235,7 +2235,7 @@
 -1a75-wintitle:confirmdeletefolder=फोल्डर हटाउन निश्चित गर्नुहोस् 
 
 #_______________________________________=Text Not Found
--5592-wintitle:confirmhelpStringNotFound=<Text Not Found>
+-5592-wintitle:confirmhelpStringNotFound=<  पाठ भेट्टाउन सकिएन  >
 
 #_____________________________=Confirm Retrieve Bulletins
 -ec90-wintitle:confirmretrieve=बुलेटिनहरु पून: प्राप्ति गर्न निश्चित गर्नुहोस् 
