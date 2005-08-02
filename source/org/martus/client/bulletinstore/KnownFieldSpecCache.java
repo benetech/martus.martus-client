@@ -341,8 +341,8 @@ public class KnownFieldSpecCache extends BulletinStoreCache implements ReadableD
 		}
 		catch(Exception e)
 		{
-			System.out.println("Error reading " + bulletinHeaderKey.getLocalId());
-			e.printStackTrace();
+			System.out.println("WARNING: Unable to read " + bulletinHeaderKey.getLocalId() + ": " + e);
+			//e.printStackTrace();
 			// we need to keep going anyway
 			// TODO: Alert the user that there was some problem
 		}
