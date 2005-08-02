@@ -32,6 +32,7 @@ import javax.swing.event.TableModelListener;
 import org.martus.client.swingui.grids.GridTableModel;
 import org.martus.common.fieldspec.ChoiceItem;
 import org.martus.common.fieldspec.DropDownFieldSpec;
+import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.fieldspec.GridFieldSpec;
 
 public class FancySearchTableModel extends GridTableModel implements TableModelListener
@@ -49,15 +50,16 @@ public class FancySearchTableModel extends GridTableModel implements TableModelL
 			return super.getCellType(row, column);
 		
 		String selectedFieldTag = (String)getValueAt(row, fieldColumn);
-		DropDownFieldSpec spec = (DropDownFieldSpec)getFieldSpec(fieldColumn);
-		ChoiceItem selectedFieldChoiceItem = spec.getChoice(spec.findCode(selectedFieldTag));
-		return selectedFieldChoiceItem.getType();
+		DropDownFieldSpec fieldColumnSpec = (DropDownFieldSpec)getFieldSpec(fieldColumn);
+		ChoiceItem selectedFieldChoiceItem = fieldColumnSpec.getChoice(fieldColumnSpec.findCode(selectedFieldTag));
+		FieldSpec selectedFieldSpec = selectedFieldChoiceItem.getSpec();
+		return selectedFieldSpec.getType();
 	}
 	
 	public void tableChanged(TableModelEvent event)
 	{
 		if(event.getColumn() == fieldColumn)
-			this.fireTableRowsUpdated(event.getFirstRow(), event.getLastRow());
+			fireTableRowsUpdated(event.getFirstRow(), event.getLastRow());
 	}
 
 	public static int fieldColumn = 1;

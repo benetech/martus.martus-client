@@ -66,7 +66,7 @@ public class GridDateRangeCellEditor extends GridCellEditorAndRenderer
 				row, column);
 	}
 	
-	public void showPopup()
+	public void showPopupIfAvailable()
 	{
 		JComponent[] focusableComponents = getFocusableComponents();
 		JComboBox date = (JComboBox)(focusableComponents[0]);

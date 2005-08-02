@@ -63,10 +63,13 @@ public class TestGridTableModel extends TestCaseEnhanced
 		assertEquals(columnsIncludingRowCount, model.getColumnCount());
 		assertEquals(" ", model.getColumnName(0));
 		assertEquals(FieldSpec.TYPE_NORMAL, model.getColumnType(0));
+		assertEquals(FieldSpec.TYPE_NORMAL, model.getCellType(0, 0));
 		assertEquals(label1, model.getColumnName(1));
 		assertEquals(FieldSpec.TYPE_NORMAL, model.getColumnType(1));
+		assertEquals(FieldSpec.TYPE_NORMAL, model.getCellType(0, 1));
 		assertEquals(label2, model.getColumnName(2));
 		assertEquals(FieldSpec.TYPE_DROPDOWN, model.getColumnType(2));
+		assertEquals(FieldSpec.TYPE_DROPDOWN, model.getCellType(0, 2));
 
 		CustomDropDownFieldSpec dropDownFieldSpec = ((CustomDropDownFieldSpec)(model.getFieldSpec(2)));
 		assertEquals("", dropDownFieldSpec.getValue(0));

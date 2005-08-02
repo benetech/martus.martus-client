@@ -41,8 +41,8 @@ public class GridDropDownCellEditor extends GridCellEditorAndRenderer
 	{
 		super(new UiChoiceEditor(null));
 	}
-
-	public void showPopup()
+	
+	public void showPopupIfAvailable()
 	{
         UiComboBox comboBox = (UiComboBox)getComponent();
 		comboBox.requestFocus();
@@ -71,5 +71,4 @@ public class GridDropDownCellEditor extends GridCellEditorAndRenderer
 		GridTable gridTable = (GridTable)tableToUse;
 		((UiChoiceEditor)uiField).setSpec((DropDownFieldSpec)gridTable.getFieldSpecForColumn(column));
 	}
-
 }

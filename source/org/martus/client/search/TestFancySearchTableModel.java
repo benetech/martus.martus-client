@@ -58,5 +58,7 @@ public class TestFancySearchTableModel extends TestCaseEnhanced
 		model.setValueAt("author", 0, FancySearchTableModel.fieldColumn);
 		assertEquals(FieldSpec.TYPE_NORMAL, model.getCellType(0, FancySearchTableModel.valueColumn));
 		
+		assertEquals(FieldSpec.TYPE_MORPHIC, model.getColumnType(FancySearchTableModel.valueColumn));
+		
 	}
 }

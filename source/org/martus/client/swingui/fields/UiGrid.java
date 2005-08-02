@@ -34,7 +34,6 @@ import org.martus.client.swingui.grids.GridTableModel;
 import org.martus.common.GridData;
 import org.martus.common.fieldspec.GridFieldSpec;
 import org.martus.swing.UiScrollPane;
-import org.martus.swing.UiTable;
 
 
 abstract public class UiGrid extends UiField
@@ -83,7 +82,7 @@ abstract public class UiGrid extends UiField
 		return model.getGridData();
 	}
 	
-	public UiTable getTable()
+	public GridTable getTable()
 	{
 		return table;
 	}

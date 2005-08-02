@@ -61,6 +61,11 @@ public class GridCellEditorAndRenderer extends AbstractCellEditor implements Tab
 		return component;
 	}
 	
+	public void showPopupIfAvailable()
+	{
+		// can be overridden if there is a popup that should be shown when space is pressed
+	}
+	
 	public UiField getUiField()
 	{
 		return uiField;

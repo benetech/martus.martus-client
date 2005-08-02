@@ -27,10 +27,14 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.search;
 
 import javax.swing.JTable;
+import javax.swing.event.PopupMenuEvent;
+import javax.swing.event.PopupMenuListener;
 
 import org.martus.client.bulletinstore.ClientBulletinStore;
 import org.martus.client.swingui.dialogs.UiDialogLauncher;
 import org.martus.client.swingui.fields.UiGridEditor;
+import org.martus.client.swingui.grids.GridDropDownCellEditor;
+import org.martus.swing.UiComboBox;
 
 public class FancySearchGridEditor extends UiGridEditor
 {
@@ -46,11 +50,41 @@ public class FancySearchGridEditor extends UiGridEditor
 		super(helperToUse.getModel(), helperToUse.getDialogLauncher());
 		helper = helperToUse;
 		getTable().setAutoResizeMode(JTable.AUTO_RESIZE_LAST_COLUMN);
+		addListenerSoFieldChangeCanTriggerRepaintOfValueColumn();
+	}
+
+	private GridDropDownCellEditor getFieldColumnEditor()
+	{
+		int column = FancySearchTableModel.fieldColumn;
+		return (GridDropDownCellEditor)getTable().getCellEditor(0, column);
 	}
 	
 	public String getSearchString()
 	{
 		return helper.getSearchString(getGridData());		
+	}
+
+	private void addListenerSoFieldChangeCanTriggerRepaintOfValueColumn()
+	{
+		UiComboBox fieldChoiceCombo = (UiComboBox)getFieldColumnEditor().getComponent();
+		fieldChoiceCombo.addPopupMenuListener(new DropDownPopUpListener());
+	}
+
+	class DropDownPopUpListener implements PopupMenuListener
+	{
+		public void popupMenuCanceled(PopupMenuEvent event)
+		{
+		}
+	
+		public void popupMenuWillBecomeInvisible(PopupMenuEvent event)
+		{
+			//System.out.println("will become invisible: " + ((JComboBox)event.getSource()).getSelectedIndex());
+			stopCellEditing();
+		}
+	
+		public void popupMenuWillBecomeVisible(PopupMenuEvent event)
+		{
+		}
 	}
 
 	FancySearchHelper helper;
