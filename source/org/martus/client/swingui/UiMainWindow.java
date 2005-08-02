@@ -2169,6 +2169,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 			{
 				if(hasTimedOut())
 				{
+					getStore().prepareToExitNormally();
 					System.out.println("Inactive");
 					ThreadedSignin signin = new ThreadedSignin();
 					SwingUtilities.invokeAndWait(signin);
@@ -2195,6 +2196,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 				getCurrentActiveFrame().setState(ICONIFIED);
 				if(signIn(UiSigninDlg.TIMED_OUT) != UiSigninDlg.SIGN_IN)
 					exitWithoutSavingState();
+				getStore().loadFieldSpecCache();
 				getCurrentActiveFrame().setState(NORMAL);
 //cml			initializeViews();
 			}
