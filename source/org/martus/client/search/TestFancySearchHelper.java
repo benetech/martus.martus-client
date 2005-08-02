@@ -27,6 +27,7 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.search;
 
 import java.io.File;
+import java.util.Vector;
 
 import org.martus.client.bulletinstore.ClientBulletinStore;
 import org.martus.client.swingui.MartusLocalization;
@@ -36,9 +37,11 @@ import org.martus.common.EnglishCommonStrings;
 import org.martus.common.GridData;
 import org.martus.common.bulletin.BulletinConstants;
 import org.martus.common.field.MartusDateRangeField;
+import org.martus.common.fieldspec.CustomDropDownFieldSpec;
 import org.martus.common.fieldspec.DropDownFieldSpec;
 import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.fieldspec.GridFieldSpec;
+import org.martus.common.fieldspec.StandardFieldSpecs;
 import org.martus.util.TestCaseEnhanced;
 
 public class TestFancySearchHelper extends TestCaseEnhanced
@@ -79,6 +82,43 @@ public class TestFancySearchHelper extends TestCaseEnhanced
 		assertTrue("no eventdate.begin?", spec.findCode(BulletinConstants.TAGEVENTDATE + "." + MartusDateRangeField.SUBFIELD_BEGIN) >= 0);
 		assertTrue("no eventdate.end?", spec.findCode(BulletinConstants.TAGEVENTDATE + "." + MartusDateRangeField.SUBFIELD_END) >= 0);
 		assertFalse("has raw eventdate?", spec.findCode(BulletinConstants.TAGEVENTDATE) >= 0);
+	}
+	
+	public void testGetChoiceItemsForThisField() throws Exception
+	{
+		FieldSpec normal = StandardFieldSpecs.findStandardFieldSpec(BulletinConstants.TAGAUTHOR);
+		Vector normalChoices = helper.getChoiceItemsForThisField(normal);
+		assertEquals("more than one choice for a plain text field?", 1, normalChoices.size());
+		
+		FieldSpec dateRange = StandardFieldSpecs.findStandardFieldSpec(BulletinConstants.TAGEVENTDATE);
+		Vector dateRangeChoices = helper.getChoiceItemsForThisField(dateRange);
+		assertEquals("not two choices for date range?", 2, dateRangeChoices.size());
+		
+		FieldSpec gridSpec = createSampleGridSpec();
+		Vector gridChoices = helper.getChoiceItemsForThisField(gridSpec);
+		assertEquals("not zero choices for a grid?", 0, gridChoices.size());
+	}
+	
+	private GridFieldSpec createSampleGridSpec() throws Exception
+	{
+		GridFieldSpec gridSpec = new GridFieldSpec();
+		String label1 = "column 1";
+		FieldSpec column1 = new FieldSpec(label1, FieldSpec.TYPE_NORMAL);
+
+		String label2 = "column 2";
+		CustomDropDownFieldSpec column2 = new CustomDropDownFieldSpec();
+		Vector choices = new Vector();
+		String choice1 = "choice 1";
+		String choice2 = "choice 2";
+		choices.add(choice1);
+		choices.add(choice2);
+		
+		column2.setChoices(choices);
+		column2.setLabel(label2);
+		gridSpec.addColumn(column1);
+		gridSpec.addColumn(column2);
+		
+		return gridSpec;
 	}
 	
 	public void testCreateOpColumnSpec()

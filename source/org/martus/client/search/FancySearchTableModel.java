@@ -43,23 +43,30 @@ public class FancySearchTableModel extends GridTableModel implements TableModelL
 		super(fieldSpecToUse);
 		addTableModelListener(this);
 	}
-
-	public int getCellType(int row, int column)
+	
+	public FieldSpec getFieldSpecForCell(int row, int column)
 	{
 		if(column != valueColumn)
-			return super.getCellType(row, column);
+			return super.getFieldSpecForCell(row, column);
 		
 		String selectedFieldTag = (String)getValueAt(row, fieldColumn);
-		DropDownFieldSpec fieldColumnSpec = (DropDownFieldSpec)getFieldSpec(fieldColumn);
+		DropDownFieldSpec fieldColumnSpec = (DropDownFieldSpec)getFieldSpecForColumn(fieldColumn);
 		ChoiceItem selectedFieldChoiceItem = fieldColumnSpec.getChoice(fieldColumnSpec.findCode(selectedFieldTag));
 		FieldSpec selectedFieldSpec = selectedFieldChoiceItem.getSpec();
-		return selectedFieldSpec.getType();
+		return selectedFieldSpec;
 	}
-	
+
 	public void tableChanged(TableModelEvent event)
 	{
 		if(event.getColumn() == fieldColumn)
-			fireTableRowsUpdated(event.getFirstRow(), event.getLastRow());
+		{
+			int row = event.getFirstRow();
+			String defaultValue = getFieldSpecForCell(row, valueColumn).getDefaultValue();
+			setValueAt(defaultValue, row, valueColumn);
+//			System.out.println("FancySearchTableModel.tableChanged: Setting value to: " + defaultValue);
+			// don't need to fire if we just called setValueAt
+			//fireTableRowsUpdated(event.getFirstRow(), event.getLastRow());
+		}
 	}
 
 	public static int fieldColumn = 1;

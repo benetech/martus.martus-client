@@ -60,7 +60,7 @@ public class GridTable extends UiTableWithCellEditingProtection
 		for(int i = 1 ; i < model.getColumnCount(); ++i)
 		{
 			if(model.getColumnType(i)== FieldSpec.TYPE_DROPDOWN)
-				setColumnMaxWidth(i, getDropDownColumnWidth(i, (DropDownFieldSpec)model.getFieldSpec(i)));
+				setColumnMaxWidth(i, getDropDownColumnWidth(i, (DropDownFieldSpec)model.getFieldSpecForColumn(i)));
 			else if(model.getColumnType(i)== FieldSpec.TYPE_DATE)
 				setColumnMaxWidth(i, getDateColumnWidth());
 			else if(model.getColumnType(i)== FieldSpec.TYPE_DATERANGE)
@@ -139,7 +139,7 @@ public class GridTable extends UiTableWithCellEditingProtection
 	
 	FieldSpec getFieldSpecForColumn(int column)
 	{
-		return ((GridTableModel)getModel()).getFieldSpec(column);		
+		return ((GridTableModel)getModel()).getFieldSpecForColumn(column);		
 	}
 	
 	public void changeSelection(int rowIndex, int columnIndex,

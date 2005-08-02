@@ -102,45 +102,60 @@ public class FancySearchHelper
 	
 	private Vector convertToChoiceItems(Vector specs)
 	{
-		Vector choices = new Vector();
+		Vector allChoices = new Vector();
 		for(int i=0; i < specs.size(); ++i)
 		{
 			FieldSpec spec = (FieldSpec)specs.get(i);
-			String tag = spec.getTag();
-			String displayString = tag;
-			if(StandardFieldSpecs.isStandardFieldTag(tag))
-				displayString = getLocalization().getFieldLabel(tag);
-			if(spec.getType() == FieldSpec.TYPE_DATERANGE)
-			{
-				addDateRangeChoiceItem(choices, tag, MartusDateRangeField.SUBFIELD_BEGIN, displayString);
-				addDateRangeChoiceItem(choices, tag, MartusDateRangeField.SUBFIELD_END, displayString);
-			}
-			else
-			{
-				FieldSpec thisSpec = FieldSpec.createCustomField(tag, displayString, spec.getType());
-				ChoiceItem choiceItem = new ChoiceItem(thisSpec);
-				choices.add(choiceItem);
-			}
+			allChoices.addAll(getChoiceItemsForThisField(spec));
 		}
 			
-		return choices;
+		return allChoices;
+	}
+
+	public Vector getChoiceItemsForThisField(FieldSpec spec)
+	{
+		Vector choicesForThisField = new Vector();
+		String tag = spec.getTag();
+		String displayString = tag;
+		if(StandardFieldSpecs.isStandardFieldTag(tag))
+			displayString = getLocalization().getFieldLabel(tag);
+		if(spec.getType() == FieldSpec.TYPE_DATERANGE)
+		{
+			choicesForThisField.addAll(getDateRangeChoiceItem(tag, MartusDateRangeField.SUBFIELD_BEGIN, displayString));
+			choicesForThisField.addAll(getDateRangeChoiceItem(tag, MartusDateRangeField.SUBFIELD_END, displayString));
+		}
+		else if(spec.getType() == FieldSpec.TYPE_GRID)
+		{
+			// currently grids are not specifically searchable
+			// TODO: add one choice per column (call this method recursively)
+		}
+		else
+		{
+			FieldSpec thisSpec = FieldSpec.createCustomField(tag, displayString, spec.getType());
+			ChoiceItem choiceItem = new ChoiceItem(thisSpec);
+			choicesForThisField.add(choiceItem);
+		}
+		return choicesForThisField;
 	}
 	
-	private void addDateRangeChoiceItem(Vector choices, String tag, String subfield, String baseDisplayString) 
+	private Vector getDateRangeChoiceItem(String tag, String subfield, String baseDisplayString) 
 	{
+		Vector itemIfAny = new Vector();
 		String fullTag = tag + "." + subfield;
 		String displayTemplate = dlgLauncher.GetLocalization().getFieldLabel("DateRangeTemplate" + subfield);
 		try
 		{
 			String fullDisplayString = TokenReplacement.replaceToken(displayTemplate, "#FIELDLABEL#", baseDisplayString);
 			FieldSpec dateSpec = FieldSpec.createCustomField(fullTag, fullDisplayString, FieldSpec.TYPE_DATE);
-			choices.add(new ChoiceItem(dateSpec));
+			itemIfAny.add(new ChoiceItem(dateSpec));
 		}
 		catch (TokenInvalidException e)
 		{
 			// bad translation--not much we can do about it
 			e.printStackTrace();
 		}
+		
+		return itemIfAny;
 	}
 	
 	public GridFieldSpec getGridSpec(ClientBulletinStore storeToUse)
@@ -187,6 +202,8 @@ public class FancySearchHelper
 			searchExpression.append("\"");
 			searchExpression.append(" ");
 		}
+		
+		//System.out.println("FancySearchHelper: " + searchExpression);
 
 		return new String(searchExpression);
 	}
