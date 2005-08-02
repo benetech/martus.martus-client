@@ -41,8 +41,9 @@ public class FancySearchGridEditor extends UiGridEditor
 	public static FancySearchGridEditor create(ClientBulletinStore storeToSearch, UiDialogLauncher dlgLauncher)
 	{
 		FancySearchHelper helper = new FancySearchHelper(storeToSearch, dlgLauncher);
-		return new FancySearchGridEditor(helper);
-		
+		FancySearchGridEditor gridEditor = new FancySearchGridEditor(helper);
+		gridEditor.initalize();
+		return gridEditor;
 	}
 	
 	private FancySearchGridEditor(FancySearchHelper helperToUse)

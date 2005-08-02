@@ -35,6 +35,8 @@ import org.martus.common.crypto.MartusCrypto;
 import org.martus.common.crypto.MockMartusSecurity;
 import org.martus.common.field.MartusDateRangeField;
 import org.martus.common.field.MartusField;
+import org.martus.common.fieldspec.FieldSpec;
+import org.martus.common.fieldspec.StandardFieldSpecs;
 import org.martus.common.test.UnicodeConstants;
 import org.martus.util.TestCaseEnhanced;
 
@@ -242,5 +244,31 @@ public class TestBulletinSearcher extends TestCaseEnhanced
 		verifyOperatorComparison("testFlexiDateMatches", b, Bulletin.TAGEVENTDATE+"." + MartusDateRangeField.SUBFIELD_BEGIN, ":>", "2003-08-20", false);
 		verifyOperatorComparison("testFlexiDateMatches", b, Bulletin.TAGEVENTDATE+"." + MartusDateRangeField.SUBFIELD_BEGIN, ":<=", "2003-08-20", true);
 		verifyOperatorComparison("testFlexiDateMatches", b, Bulletin.TAGEVENTDATE+"." + MartusDateRangeField.SUBFIELD_BEGIN, ":<", "2003-08-19", false);
-	}	
+	}
+	
+	public void testBooleanMatches() throws Exception
+	{
+		MartusCrypto security = MockMartusSecurity.createClient();
+		
+		FieldSpec[] publicSpecs = new FieldSpec[] 
+		{
+			FieldSpec.createCustomField("true", "should be true", FieldSpec.TYPE_BOOLEAN),
+			FieldSpec.createCustomField("false", "should be false", FieldSpec.TYPE_BOOLEAN),
+			FieldSpec.createCustomField("bogus", "will be blank", FieldSpec.TYPE_BOOLEAN),
+		};
+		
+		Bulletin b = new Bulletin(security, publicSpecs, StandardFieldSpecs.getDefaultPrivateFieldSpecs());
+		b.set("true", FieldSpec.TRUESTRING);
+		b.set("false", FieldSpec.FALSESTRING);
+		b.set("bogus", "");
+		
+		verifyOperatorComparison("testBooleanMatches", b, "true", ":", FieldSpec.TRUESTRING, true);
+		verifyOperatorComparison("testBooleanMatches", b, "true", ":", FieldSpec.FALSESTRING, false);
+		verifyOperatorComparison("testBooleanMatches", b, "false", ":", FieldSpec.FALSESTRING, true);
+		verifyOperatorComparison("testBooleanMatches", b, "false", ":", FieldSpec.TRUESTRING, false);
+		verifyOperatorComparison("testBooleanMatches", b, "bogus", ":", FieldSpec.FALSESTRING, false);
+		verifyOperatorComparison("testBooleanMatches", b, "bogus", ":", FieldSpec.TRUESTRING, false);
+		verifyOperatorComparison("testBooleanMatches", b, "bogus", ":", FieldSpec.FALSESTRING, false);
+		
+	}
 }
