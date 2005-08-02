@@ -29,12 +29,12 @@ package org.martus.client.swingui.fields;
 import javax.swing.JComponent;
 import javax.swing.text.JTextComponent;
 
-import org.martus.client.swingui.MartusLocalization;
+import org.martus.clientside.UiLocalization;
 import org.martus.swing.UiTextField;
 
 abstract public class UiSingleLineTextField extends UiStringField
 {
-	public UiSingleLineTextField(MartusLocalization localizationToUse)
+	public UiSingleLineTextField(UiLocalization localizationToUse)
 	{
 		super(localizationToUse);
 	}

@@ -27,12 +27,12 @@ package org.martus.client.swingui.dialogs;
 
 import javax.swing.JFrame;
 
-import org.martus.client.swingui.MartusLocalization;
+import org.martus.clientside.UiLocalization;
 import org.martus.clientside.UiUtilities;
 
 public class UiDialogLauncher
 {
-	public UiDialogLauncher(JFrame frameToUse, MartusLocalization localizationToUse)
+	public UiDialogLauncher(JFrame frameToUse, UiLocalization localizationToUse)
 	{
 		super();
 		frame = frameToUse;
@@ -46,11 +46,11 @@ public class UiDialogLauncher
 		return UiUtilities.confirmDlg(localization, frame, baseTag);
 	}
 
-	public MartusLocalization GetLocalization()
+	public UiLocalization GetLocalization()
 	{
 		return localization;
 	}
 	
-	MartusLocalization localization;
+	UiLocalization localization;
 	JFrame frame;
 }

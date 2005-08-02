@@ -28,12 +28,13 @@ package org.martus.client.swingui.grids;
 
 import javax.swing.JComboBox;
 import javax.swing.JComponent;
-import org.martus.client.swingui.MartusLocalization;
+
 import org.martus.client.swingui.fields.UiDateEditor;
+import org.martus.clientside.UiLocalization;
 
 public class GridDateCellEditor extends GridCellEditorAndRenderer
 {
-	GridDateCellEditor(MartusLocalization localization)
+	GridDateCellEditor(UiLocalization localization)
 	{
 		super(new UiDateEditor(localization, null));
 	}

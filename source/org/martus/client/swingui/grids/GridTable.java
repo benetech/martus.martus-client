@@ -133,6 +133,7 @@ public class GridTable extends UiTableWithCellEditingProtection
 		map.put(new Integer(FieldSpec.TYPE_DATE), new GridDateCellEditor(dlgLauncher.GetLocalization()));
 		map.put(new Integer(FieldSpec.TYPE_DATERANGE), new GridDateRangeCellEditor(dlgLauncher));
 		map.put(new Integer(FieldSpec.TYPE_DROPDOWN), new GridDropDownCellEditor());
+		map.put(new Integer(FieldSpec.TYPE_LANGUAGE), new GridDropDownCellEditor());
 		map.put(new Integer(FieldSpec.TYPE_NORMAL), new GridNormalCellEditor(dlgLauncher.GetLocalization()));
 		return map;
 	}
@@ -140,6 +141,11 @@ public class GridTable extends UiTableWithCellEditingProtection
 	FieldSpec getFieldSpecForColumn(int column)
 	{
 		return ((GridTableModel)getModel()).getFieldSpecForColumn(column);		
+	}
+	
+	FieldSpec getFieldSpecForCell(int row, int column)
+	{
+		return ((GridTableModel)getModel()).getFieldSpecForCell(row, column);
 	}
 	
 	public void changeSelection(int rowIndex, int columnIndex,

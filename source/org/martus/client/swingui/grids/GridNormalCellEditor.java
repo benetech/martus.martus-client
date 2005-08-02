@@ -32,12 +32,12 @@ import java.awt.Component;
 import javax.swing.JComponent;
 import javax.swing.JTable;
 
-import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.fields.UiSingleLineTextEditor;
+import org.martus.clientside.UiLocalization;
 
 class GridNormalCellEditor extends GridCellEditorAndRenderer
 {
-	GridNormalCellEditor(MartusLocalization localization)
+	GridNormalCellEditor(UiLocalization localization)
 	{
 		super(new UiSingleLineTextEditor(localization));
 

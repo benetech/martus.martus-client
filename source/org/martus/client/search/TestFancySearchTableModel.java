@@ -30,6 +30,7 @@ import org.martus.client.bulletinstore.ClientBulletinStore;
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.dialogs.UiDialogLauncher;
 import org.martus.client.test.MockMartusApp;
+import org.martus.clientside.UiLocalization;
 import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.fieldspec.GridFieldSpec;
 import org.martus.util.TestCaseEnhanced;
@@ -47,18 +48,23 @@ public class TestFancySearchTableModel extends TestCaseEnhanced
 		ClientBulletinStore store = app.getStore();
 		store.createFieldSpecCacheFromDatabase();
 		app.loadSampleData();
-		UiDialogLauncher nullLauncher = new UiDialogLauncher(null,new MartusLocalization(null, new String[0]));
+		UiLocalization localization = new MartusLocalization(null, new String[0]);
+		UiDialogLauncher nullLauncher = new UiDialogLauncher(null, localization);
 		FancySearchHelper helper = new FancySearchHelper(store, nullLauncher);
 		GridFieldSpec gridSpec = helper.getGridSpec(store);
-		FancySearchTableModel model = new FancySearchTableModel(gridSpec);
+		FancySearchTableModel model = new FancySearchTableModel(gridSpec, localization);
 		model.addEmptyRow();
+		assertEquals(FieldSpec.TYPE_MORPHIC, model.getColumnType(FancySearchTableModel.valueColumn));
+		
 		model.setValueAt("eventdate.begin", 0, FancySearchTableModel.fieldColumn);
 		assertEquals(FieldSpec.TYPE_DATE, model.getCellType(0, FancySearchTableModel.valueColumn));
 		
 		model.setValueAt("author", 0, FancySearchTableModel.fieldColumn);
 		assertEquals(FieldSpec.TYPE_NORMAL, model.getCellType(0, FancySearchTableModel.valueColumn));
 		
-		assertEquals(FieldSpec.TYPE_MORPHIC, model.getColumnType(FancySearchTableModel.valueColumn));
+		model.setValueAt("language", 0, FancySearchTableModel.fieldColumn);
+		assertEquals(FieldSpec.TYPE_DROPDOWN, model.getCellType(0, FancySearchTableModel.valueColumn));
 		
 	}
+	
 }

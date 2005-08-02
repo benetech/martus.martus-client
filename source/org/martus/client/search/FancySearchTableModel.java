@@ -30,6 +30,7 @@ import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 
 import org.martus.client.swingui.grids.GridTableModel;
+import org.martus.clientside.UiLocalization;
 import org.martus.common.fieldspec.ChoiceItem;
 import org.martus.common.fieldspec.DropDownFieldSpec;
 import org.martus.common.fieldspec.FieldSpec;
@@ -38,9 +39,10 @@ import org.martus.common.fieldspec.GridFieldSpec;
 public class FancySearchTableModel extends GridTableModel implements TableModelListener
 {
 
-	public FancySearchTableModel(GridFieldSpec fieldSpecToUse)
+	public FancySearchTableModel(GridFieldSpec fieldSpecToUse, UiLocalization localizationToUse)
 	{
 		super(fieldSpecToUse);
+		localization = localizationToUse;
 		addTableModelListener(this);
 	}
 	
@@ -53,6 +55,9 @@ public class FancySearchTableModel extends GridTableModel implements TableModelL
 		DropDownFieldSpec fieldColumnSpec = (DropDownFieldSpec)getFieldSpecForColumn(fieldColumn);
 		ChoiceItem selectedFieldChoiceItem = fieldColumnSpec.getChoice(fieldColumnSpec.findCode(selectedFieldTag));
 		FieldSpec selectedFieldSpec = selectedFieldChoiceItem.getSpec();
+		if(selectedFieldSpec.getType() == FieldSpec.TYPE_LANGUAGE)
+			selectedFieldSpec = new DropDownFieldSpec(localization.getLanguageNameChoices());
+
 		return selectedFieldSpec;
 	}
 
@@ -71,5 +76,7 @@ public class FancySearchTableModel extends GridTableModel implements TableModelL
 
 	public static int fieldColumn = 1;
 	public static int valueColumn = 3;
+	
+	UiLocalization localization;
 }
 

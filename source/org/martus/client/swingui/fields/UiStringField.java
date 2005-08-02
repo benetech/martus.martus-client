@@ -34,12 +34,12 @@ import javax.swing.AbstractAction;
 import javax.swing.Action;
 import javax.swing.text.JTextComponent;
 
-import org.martus.client.swingui.MartusLocalization;
+import org.martus.clientside.UiLocalization;
 import org.martus.swing.UiPopupMenu;
 
 public abstract class UiStringField extends UiField
 {
-	public UiStringField(MartusLocalization localizationToUse)
+	public UiStringField(UiLocalization localizationToUse)
 	{
 		localization = localizationToUse;
 		mouseAdapter = new TextFieldMouseAdapter();
@@ -192,7 +192,7 @@ public abstract class UiStringField extends UiField
 
 	}
 
-	MartusLocalization localization;
+	UiLocalization localization;
 	Action actionCut;
 	Action actionCopy;
 	Action actionPaste;

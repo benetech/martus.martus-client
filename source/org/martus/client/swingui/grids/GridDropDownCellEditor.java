@@ -51,24 +51,31 @@ public class GridDropDownCellEditor extends GridCellEditorAndRenderer
 
 	public Component getTableCellEditorComponent(JTable tableToUse, Object codeString, boolean isSelected, int row, int column)
 	{
-		setFieldSpec(tableToUse, column);
+		setFieldSpec(tableToUse, row, column);
 		return super.getTableCellEditorComponent(tableToUse, codeString, isSelected, row, column);
 	}
 
 	public Component getTableCellRendererComponent(JTable tableToUse, Object codeString, boolean isSelected, boolean hasFocus, int row, int column)
 	{
-		setFieldSpec(tableToUse, column);
+		setFieldSpec(tableToUse, row, column);
 		return super.getTableCellRendererComponent(tableToUse, codeString, isSelected, hasFocus, row, column);
 	}
 
 	public void addActionListener(ActionListener listener)
 	{
-		((UiChoiceEditor)uiField).addActionListener(listener);
+		(getChoiceEditor()).addActionListener(listener);
 	}
 	
-	private void setFieldSpec(JTable tableToUse, int column)
+	private void setFieldSpec(JTable tableToUse, int row, int column)
 	{
 		GridTable gridTable = (GridTable)tableToUse;
-		((UiChoiceEditor)uiField).setSpec((DropDownFieldSpec)gridTable.getFieldSpecForColumn(column));
+		System.out.println(gridTable.getFieldSpecForCell(row, column));
+		DropDownFieldSpec spec = (DropDownFieldSpec)gridTable.getFieldSpecForCell(row, column);
+		getChoiceEditor().setSpec(spec);
+	}
+
+	private UiChoiceEditor getChoiceEditor()
+	{
+		return (UiChoiceEditor)uiField;
 	}
 }

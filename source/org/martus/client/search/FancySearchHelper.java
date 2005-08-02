@@ -30,8 +30,8 @@ import java.util.Arrays;
 import java.util.Vector;
 
 import org.martus.client.bulletinstore.ClientBulletinStore;
-import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.dialogs.UiDialogLauncher;
+import org.martus.clientside.UiLocalization;
 import org.martus.common.GridData;
 import org.martus.common.field.MartusDateRangeField;
 import org.martus.common.fieldspec.ChoiceItem;
@@ -48,10 +48,10 @@ public class FancySearchHelper
 	public FancySearchHelper(ClientBulletinStore storeToUse, UiDialogLauncher dlgLauncherToUse)
 	{
 		dlgLauncher = dlgLauncherToUse;
-		model = new FancySearchTableModel(getGridSpec(storeToUse));
+		model = new FancySearchTableModel(getGridSpec(storeToUse), dlgLauncherToUse.GetLocalization());
 	}
 	
-	MartusLocalization getLocalization()
+	UiLocalization getLocalization()
 	{
 		return dlgLauncher.GetLocalization();
 	}
