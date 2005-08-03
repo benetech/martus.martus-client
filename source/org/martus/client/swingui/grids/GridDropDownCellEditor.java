@@ -69,7 +69,6 @@ public class GridDropDownCellEditor extends GridCellEditorAndRenderer
 	private void setFieldSpec(JTable tableToUse, int row, int column)
 	{
 		GridTable gridTable = (GridTable)tableToUse;
-		System.out.println(gridTable.getFieldSpecForCell(row, column));
 		DropDownFieldSpec spec = (DropDownFieldSpec)gridTable.getFieldSpecForCell(row, column);
 		getChoiceEditor().setSpec(spec);
 	}
