@@ -159,13 +159,17 @@ public class UiFlexiDateEditor extends UiField
 	
 	protected JComponent[] loadFlexidatePanelComponents()
 	{
-		return new JComponent[]{exactDateRB, flexiDateRB, bgDayCombo, bgMonthCombo, bgYearCombo,
-		endDayCombo, endMonthCombo, endYearCombo};
+		JComponent[] beginDate = UiDateEditor.getComponentsInOrder(bgYearCombo, bgMonthCombo, bgDayCombo, localization);
+		JComponent[] endDate = UiDateEditor.getComponentsInOrder(endYearCombo, endMonthCombo, endDayCombo, localization);
+		return new JComponent[]{exactDateRB, flexiDateRB, 
+					beginDate[0], beginDate[1], beginDate[2],
+					endDate[0], endDate[1], endDate[2],};
 	}
 	
 	private JComponent[] loadExactDatePanelComponents()
 	{
-		return new JComponent[]{exactDateRB, flexiDateRB, bgDayCombo, bgMonthCombo, bgYearCombo,};
+		JComponent[] mdy = UiDateEditor.getComponentsInOrder(bgYearCombo, bgMonthCombo, bgDayCombo, localization);
+		return new JComponent[]{exactDateRB, flexiDateRB, mdy[0], mdy[1], mdy[2],};
 	}
 
 	private final class RadioItemListener implements ItemListener

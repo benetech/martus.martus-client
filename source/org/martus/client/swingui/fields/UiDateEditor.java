@@ -44,13 +44,14 @@ import org.martus.swing.Utilities;
 public class UiDateEditor extends UiField
 {
 	public UiDateEditor(UiLocalization localizationToUse, Date highestAllowableDate)
-	{				
+	{
+		localization = localizationToUse;
 		Box box = Box.createHorizontalBox();
 		dayCombo = new UiComboBox();
-		monthCombo = new UiComboBox(localizationToUse.getMonthLabels());
+		monthCombo = new UiComboBox(localization.getMonthLabels());
 		yearCombo = new UiComboBox();
 		
-		buildCustomDate(box, localizationToUse, yearCombo, monthCombo, dayCombo);
+		buildCustomDate(box, localization, yearCombo, monthCombo, dayCombo);
 		maxDate = highestAllowableDate;
  				
 		component = box;
@@ -61,7 +62,7 @@ public class UiDateEditor extends UiField
 	{							
 		buildDay(dCombo);
 		buildCustomYear(yCombo);
-		buildMonth(box,localizationToUse, yCombo, mCombo,dCombo);
+		addComponentsToBox(box,localizationToUse, yCombo, mCombo,dCombo);
 	}
 	
 	public static void buildDate(Box box, UiLocalization localizationToUse,
@@ -69,9 +70,9 @@ public class UiDateEditor extends UiField
 	{							
 		buildDay(dCombo);
 		buildYear(yCombo);
-		buildMonth(box,localizationToUse, yCombo, mCombo,dCombo);
+		addComponentsToBox(box,localizationToUse, yCombo, mCombo,dCombo);
 	}
-		
+	
 	private static void buildCustomYear(UiComboBox yCombo)	
 	{
 		Calendar cal = new GregorianCalendar();
@@ -98,11 +99,17 @@ public class UiDateEditor extends UiField
 			dCombo.addItem(new Integer(day).toString());	
 	}
 	
-	private static void buildMonth(Box box, UiLocalization localizationToUse,UiComboBox yCombo, UiComboBox mCombo, UiComboBox dCombo)
+	private static void addComponentsToBox(Box box, UiLocalization localizationToUse,UiComboBox yCombo, UiComboBox mCombo, UiComboBox dCombo)
 	{
-		String mdyOrder = DateUtilities.getMdyOrder(localizationToUse.getCurrentDateFormatCode());
+		JComponent[] dateInOrderLeftToRight = getComponentsInOrder(yCombo, mCombo, dCombo, localizationToUse);	
+		Utilities.addComponentsRespectingOrientation(box, dateInOrderLeftToRight);
+	}
+
+	static JComponent[] getComponentsInOrder(UiComboBox yCombo, UiComboBox mCombo, UiComboBox dCombo, UiLocalization localizationForOrdering)
+	{
 		JComponent[] dateInOrderLeftToRight = new JComponent[3];
 		
+		String mdyOrder = DateUtilities.getMdyOrder(localizationForOrdering.getCurrentDateFormatCode());
 		for(int i = 0; i < mdyOrder.length(); ++i)
 		{
 			switch(mdyOrder.charAt(i))
@@ -111,8 +118,8 @@ public class UiDateEditor extends UiField
 				case 'm': dateInOrderLeftToRight[i]=mCombo;	break;
 				case 'y': dateInOrderLeftToRight[i]=yCombo;	break;
 			}
-		}	
-		Utilities.addComponentsRespectingOrientation(box, dateInOrderLeftToRight);
+		}
+		return dateInOrderLeftToRight;
 	}
 
 	public JComponent getComponent()
@@ -122,7 +129,7 @@ public class UiDateEditor extends UiField
 
 	public JComponent[] getFocusableComponents()
 	{
-		return new JComponent[]{dayCombo, monthCombo, yearCombo};
+		return getComponentsInOrder(yearCombo, monthCombo, dayCombo, localization);
 	}
 
 	public static class DateFutureException extends UiField.DataInvalidException
@@ -200,5 +207,6 @@ public class UiDateEditor extends UiField
 	UiComboBox yearCombo;	
 	Date maxDate;
 	boolean isCustomField;
+	UiLocalization localization; 
 }
 

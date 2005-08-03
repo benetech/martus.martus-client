@@ -152,7 +152,6 @@ public class UiGridEditor extends UiGrid implements FocusListener
 	
 	void bindKeysForComponent(JComponent component)
 	{
-		final int NO_MODIFIERS = 0;
 		bindKeyToAction(component, KeyEvent.VK_ENTER, NO_MODIFIERS, new EnterAction());
 		bindKeyToAction(component, KeyEvent.VK_SPACE, NO_MODIFIERS, new SpaceAction());
 		bindKeyToAction(component, KeyEvent.VK_TAB, NO_MODIFIERS, new TabAction());
@@ -194,16 +193,24 @@ public class UiGridEditor extends UiGrid implements FocusListener
 
 		public void actionPerformed(ActionEvent arg0)
 		{
-			if(table.isEditing())
-				return;
-			
-			ensureSelectionIsValid();
-			int row = table.getSelectedRow();
-			int column = table.getSelectedColumn();
-			table.editCellAt(row, column);
+			if(!table.isEditing())
+			{
+				//System.out.println("UiGridEditor.actionPerformed: begin editing");
+				ensureSelectionIsValid();
+				int row = table.getSelectedRow();
+				int column = table.getSelectedColumn();
+				table.editCellAt(row, column);
+		
+			}
+
 			GridCellEditorAndRenderer editor = (GridCellEditorAndRenderer)table.getCellEditor();
-			if(editor != null)
-				editor.showPopupIfAvailable();
+			if(editor == null)
+			{
+				//System.out.println("UiGridEditor.actionPerformed: still no editor!");
+				return;
+			}
+			
+			editor.spaceWasPressed();
 		}
 	}
 
@@ -263,5 +270,6 @@ public class UiGridEditor extends UiGrid implements FocusListener
 		}
 	}
 
+	final int NO_MODIFIERS = 0;
 	private static final int DEFAULT_VISIBLE_ROWS = 5;
 }

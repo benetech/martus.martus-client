@@ -54,12 +54,11 @@ public class UiGridDateRangeEditorViewer extends UiFlexiDateEditor
 	
 	public JComponent[] getFocusableComponents()
 	{
-		JComponent[] components =
-		{
-			bgDayCombo, bgMonthCombo, bgYearCombo,
-			endDayCombo, endMonthCombo, endYearCombo
-		};
-		return components;
+		JComponent[] beginDate = UiDateEditor.getComponentsInOrder(bgYearCombo, bgMonthCombo, bgDayCombo, localization);
+		JComponent[] endDate = UiDateEditor.getComponentsInOrder(endYearCombo, endMonthCombo, endDayCombo, localization);
+		return new JComponent[] { 
+				beginDate[0], beginDate[1], beginDate[2],
+				endDate[0], endDate[1], endDate[2],};
 	}
 	
 	public void validate() throws DataInvalidException 

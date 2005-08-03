@@ -42,11 +42,18 @@ public class GridDropDownCellEditor extends GridCellEditorAndRenderer
 		super(new UiChoiceEditor(null));
 	}
 	
-	public void showPopupIfAvailable()
+	public void spaceWasPressed()
 	{
         UiComboBox comboBox = (UiComboBox)getComponent();
-		comboBox.requestFocus();
-		comboBox.showPopup();
+        if(comboBox.isPopupVisible())
+        {
+        	comboBox.hidePopup();
+        }
+        else
+        {
+        	comboBox.requestFocus();
+        	comboBox.showPopup();
+        }
 	}
 
 	public Component getTableCellEditorComponent(JTable tableToUse, Object codeString, boolean isSelected, int row, int column)

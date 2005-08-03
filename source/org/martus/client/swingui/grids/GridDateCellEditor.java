@@ -39,12 +39,25 @@ public class GridDateCellEditor extends GridCellEditorAndRenderer
 		super(new UiDateEditor(localization, null));
 	}
 	
-	public void showPopupIfAvailable()
+	public void spaceWasPressed()
 	{
-		JComponent[] focusableComponents = getFocusableComponents();
-		JComboBox date = (JComboBox)(focusableComponents[0]);
-		date.requestFocus();
-		date.showPopup();
+		int hasFocus = 0;
+		JComponent[] focusableComponents = ((UiDateEditor)getUiField()).getFocusableComponents();
+		for(int i = 0; i < focusableComponents.length; ++i)
+		{
+			if(focusableComponents[i].isFocusOwner())
+				hasFocus = i;
+		}
+		JComboBox date = (JComboBox)(focusableComponents[hasFocus]);
+		if(date.isPopupVisible())
+		{
+			date.hidePopup();
+		}
+		else
+		{
+			date.requestFocus();
+			date.showPopup();
+		}
 	}
 	
 }

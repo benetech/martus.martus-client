@@ -27,6 +27,7 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.swingui.grids;
 
 import org.martus.client.swingui.fields.UiBoolEditor;
+import org.martus.swing.UiCheckBox;
 
 public class GridBooleanCellEditor extends GridCellEditorAndRenderer
 {
@@ -34,4 +35,10 @@ public class GridBooleanCellEditor extends GridCellEditorAndRenderer
 	{
 		super(new UiBoolEditor());
 	}
+
+	public void spaceWasPressed()
+	{
+		((UiCheckBox)getComponent()).doClick();
+	}
+	
 }

@@ -26,10 +26,13 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.swingui.grids;
 
 import java.awt.Component;
+
 import javax.swing.JComboBox;
 import javax.swing.JComponent;
 import javax.swing.JTable;
+
 import org.martus.client.swingui.dialogs.UiDialogLauncher;
+import org.martus.client.swingui.fields.UiFlexiDateEditor;
 import org.martus.client.swingui.fields.UiGridDateRangeEditorViewer;
 import org.martus.client.swingui.fields.UiField.DataInvalidException;
 
@@ -66,12 +69,25 @@ public class GridDateRangeCellEditor extends GridCellEditorAndRenderer
 				row, column);
 	}
 	
-	public void showPopupIfAvailable()
+	public void spaceWasPressed()
 	{
-		JComponent[] focusableComponents = getFocusableComponents();
-		JComboBox date = (JComboBox)(focusableComponents[0]);
-		date.requestFocus();
-		date.showPopup();
+		int hasFocus = 0;
+		JComponent[] focusableComponents = ((UiFlexiDateEditor)getUiField()).getFocusableComponents();
+		for(int i = 0; i < focusableComponents.length; ++i)
+		{
+			if(focusableComponents[i].isFocusOwner())
+				hasFocus = i;
+		}
+		JComboBox date = (JComboBox)(focusableComponents[hasFocus]);
+		if(date.isPopupVisible())
+		{
+			date.hidePopup();
+		}
+		else
+		{
+			date.requestFocus();
+			date.showPopup();
+		}
 	}
 
 	String originalDate;
