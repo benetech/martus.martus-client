@@ -66,17 +66,46 @@ public class FancySearchTableModel extends GridTableModel implements TableModelL
 		if(event.getColumn() == fieldColumn)
 		{
 			int row = event.getFirstRow();
-			String defaultValue = getFieldSpecForCell(row, valueColumn).getDefaultValue();
+			FieldSpec targetSpec = getFieldSpecForCell(row, valueColumn);
+			String defaultValue = targetSpec.getDefaultValue();
 			setValueAt(defaultValue, row, valueColumn);
-//			System.out.println("FancySearchTableModel.tableChanged: Setting value to: " + defaultValue);
-			// don't need to fire if we just called setValueAt
-			//fireTableRowsUpdated(event.getFirstRow(), event.getLastRow());
+			String op = CONTAINS;
+			if(onlySupportsExactMatch(targetSpec))
+				op = EXACT_MATCH;
+			setValueAt(op, row, opColumn);
 		}
+	}
+	
+	private static boolean onlySupportsExactMatch(FieldSpec spec)
+	{
+		int type = spec.getType();
+		if(type == FieldSpec.TYPE_BOOLEAN)
+			return true;
+		if(type == FieldSpec.TYPE_DROPDOWN)
+			return true;
+		if(type == FieldSpec.TYPE_LANGUAGE)
+			return true;
+		
+		return false;
+	}
+
+	public boolean isCellEditable(int row, int column)
+	{
+		if(column != opColumn)
+			return super.isCellEditable(row, column);
+		
+		FieldSpec targetSpec = getFieldSpecForCell(row, valueColumn);
+		return(!onlySupportsExactMatch(targetSpec));
 	}
 
 	public static int fieldColumn = 1;
+	public static int opColumn = 2;
 	public static int valueColumn = 3;
 	
+	private static final String EXACT_MATCH = ":=";
+	private static final String CONTAINS = ":";
+
 	UiLocalization localization;
+
 }
 
