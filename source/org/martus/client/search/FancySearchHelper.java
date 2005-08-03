@@ -129,6 +129,10 @@ public class FancySearchHelper
 			// currently grids are not specifically searchable
 			// TODO: add one choice per column (call this method recursively)
 		}
+		else if(spec.getType() == FieldSpec.TYPE_DROPDOWN)
+		{
+			choicesForThisField.add(new ChoiceItem(spec));
+		}
 		else
 		{
 			FieldSpec thisSpec = FieldSpec.createCustomField(tag, displayString, spec.getType());

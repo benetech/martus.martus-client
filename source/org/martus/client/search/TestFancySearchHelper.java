@@ -37,6 +37,7 @@ import org.martus.common.EnglishCommonStrings;
 import org.martus.common.GridData;
 import org.martus.common.bulletin.BulletinConstants;
 import org.martus.common.field.MartusDateRangeField;
+import org.martus.common.fieldspec.ChoiceItem;
 import org.martus.common.fieldspec.CustomDropDownFieldSpec;
 import org.martus.common.fieldspec.DropDownFieldSpec;
 import org.martus.common.fieldspec.FieldSpec;
@@ -97,6 +98,15 @@ public class TestFancySearchHelper extends TestCaseEnhanced
 		FieldSpec gridSpec = createSampleGridSpec();
 		Vector gridChoices = helper.getChoiceItemsForThisField(gridSpec);
 		assertEquals("not zero choices for a grid?", 0, gridChoices.size());
+		
+		DropDownFieldSpec dropDownSpec = createSampleDropDownSpec("dropdown");
+		Vector dropDownChoices = helper.getChoiceItemsForThisField(dropDownSpec);
+		assertEquals("not one choice for dropdown?", 1, dropDownChoices.size());
+		{
+			ChoiceItem createdChoice = (ChoiceItem)dropDownChoices.get(0);
+			DropDownFieldSpec createdSpec = (DropDownFieldSpec)createdChoice.getSpec();
+			assertEquals("doesn't have blank plus both sample choices?", 3, createdSpec.getCount());
+		}
 	}
 	
 	private GridFieldSpec createSampleGridSpec() throws Exception
@@ -106,6 +116,15 @@ public class TestFancySearchHelper extends TestCaseEnhanced
 		FieldSpec column1 = new FieldSpec(label1, FieldSpec.TYPE_NORMAL);
 
 		String label2 = "column 2";
+		CustomDropDownFieldSpec column2 = createSampleDropDownSpec(label2);
+		gridSpec.addColumn(column1);
+		gridSpec.addColumn(column2);
+		
+		return gridSpec;
+	}
+
+	private CustomDropDownFieldSpec createSampleDropDownSpec(String label2)
+	{
 		CustomDropDownFieldSpec column2 = new CustomDropDownFieldSpec();
 		Vector choices = new Vector();
 		String choice1 = "choice 1";
@@ -115,10 +134,7 @@ public class TestFancySearchHelper extends TestCaseEnhanced
 		
 		column2.setChoices(choices);
 		column2.setLabel(label2);
-		gridSpec.addColumn(column1);
-		gridSpec.addColumn(column2);
-		
-		return gridSpec;
+		return column2;
 	}
 	
 	public void testCreateOpColumnSpec()
