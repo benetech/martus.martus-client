@@ -259,7 +259,7 @@ public class EnglishStrings
 "wintitle:warningDeleteSingleBulletin=Confirm Delete Bulletin",
 "wintitle:warningDeleteMultipleBulletins=Confirm Delete Bulletins",
 
-"wintitle:PrintPrivateData=Confirm Print Private Data",
+"wintitle:PrintOptions=Print Options",
 "wintitle:confirmSendWithPublicData=Confirm Save With Public Data",
 "wintitle:DeleteMyDataFromThisComputer=Delete My Data From This Computer",
 "wintitle:RemoveMartsFromThisComputer=Remove Martus From This Computer",
@@ -461,8 +461,16 @@ public class EnglishStrings
 "field:SearchOpContains=contains",
 "field:SearchAnyField=--Any Field--",
 
-"field:PrintPrivateData=Include private data in print out.",
-"field:PrintPrivateDataMessage=You have the option to include or exclude the selected bulletin's private information in this print out.\n\nTo only print public information, do not mark the checkbox below.\n\nIf you do mark the checkbox, anyone who sees the print out will be able to read your private data.",
+"field:PrintPrivateDataMessage=You have the option to include or exclude the selected bulletin's private information in this print out. If you choose to print private data, anyone who sees the print out will be able to read it.",
+"button:PrintOnlyPublic=Print only public information",
+"button:PrintPublicAndPrivate=Include private information",
+"field:PrintToPrinterOrDisk=You can print the bulletin contents to a printer, or send the formatted output to a disk file:",
+"button:PrintToPrinter=Print to a printer",
+"button:PrintToDisk=Send output to a disk file",
+"wintitle:PrintToWhichFile=Print to which file",
+"field:DefaultPrintToDiskFileName=bulletins.html",
+"wintitle:notifyPrintToDiskComplete=Print To Disk",
+"field:notifyPrintToDiskCompletecause=Finished",
 
 "field:VirtualUserNameDescription=(Enter using regular keyboard)",
 "field:VirtualPasswordDescription=Enter Password using mouse with on-screen keyboard below",

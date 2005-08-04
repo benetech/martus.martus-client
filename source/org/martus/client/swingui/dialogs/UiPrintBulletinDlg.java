@@ -25,23 +25,24 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.dialogs;
 
+import java.awt.Color;
+import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Iterator;
 import java.util.Vector;
 
 import javax.swing.Box;
+import javax.swing.ButtonGroup;
 import javax.swing.JButton;
-import javax.swing.JCheckBox;
 import javax.swing.JDialog;
-import javax.swing.border.EmptyBorder;
+import javax.swing.border.LineBorder;
 
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.clientside.UiLocalization;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.swing.UiButton;
-import org.martus.swing.UiCheckBox;
-import org.martus.swing.UiParagraphPanel;
+import org.martus.swing.UiRadioButton;
 import org.martus.swing.UiWrappedTextArea;
 import org.martus.swing.Utilities;
 
@@ -59,37 +60,67 @@ public class UiPrintBulletinDlg extends JDialog implements ActionListener
 	private void init()
 	{
 		UiLocalization localization = mainWindow.getLocalization();
-		setTitle(localization.getWindowTitle("PrintPrivateData"));
+		setTitle(localization.getWindowTitle("PrintOptions"));
 		
-		includePrivate = new UiCheckBox(localization.getFieldLabel("PrintPrivateData"));
+		//includePrivate = new UiCheckBox(localization.getFieldLabel("PrintPrivateData"));
 		ok = new UiButton(localization.getButtonLabel("Continue"));
 		ok.addActionListener(this);		
 		cancel = new UiButton(localization.getButtonLabel("cancel"));
-		cancel.addActionListener(this);		
+		cancel.addActionListener(this);	
 		
-		Box hBoxButtons = Box.createHorizontalBox();		
-		hBoxButtons.add(Box.createHorizontalGlue());	
-		hBoxButtons.add(ok);
-		hBoxButtons.add(cancel);
+		publicOnly = new UiRadioButton(localization.getButtonLabel("PrintOnlyPublic"));
+		publicAndPrivate = new UiRadioButton(localization.getButtonLabel("PrintPublicAndPrivate"));
+		ButtonGroup privacyGroup = new ButtonGroup();
+		privacyGroup.add(publicOnly);
+		privacyGroup.add(publicAndPrivate);
+		publicOnly.setSelected(true);
 		
-		UiParagraphPanel panel = new UiParagraphPanel();
-		panel.setBorder(new EmptyBorder(10,10,10,10));
-		panel.addOnNewLine(new UiWrappedTextArea(localization.getFieldLabel("PrintPrivateDataMessage")));
-		panel.addOnNewLine(includePrivate);
-		panel.addOnNewLine(hBoxButtons);
+		toPrinter = new UiRadioButton(localization.getButtonLabel("PrintToPrinter"));
+		toDisk = new UiRadioButton(localization.getButtonLabel("PrintToDisk"));
+		ButtonGroup destinationGroup = new ButtonGroup();
+		destinationGroup.add(toPrinter);
+		destinationGroup.add(toDisk);
+		toPrinter.setSelected(true);
+
+		Box privacyPanel = Box.createVerticalBox();
+		privacyPanel.setBorder(new LineBorder(Color.BLACK));
+		privacyPanel.add(new UiWrappedTextArea(localization.getFieldLabel("PrintPrivateDataMessage")));
+		privacyPanel.add(publicOnly);
+		privacyPanel.add(publicAndPrivate);
+		
+		Box destinationPanel = Box.createVerticalBox();
+		destinationPanel.setBorder(new LineBorder(Color.BLACK));
+		destinationPanel.add(new UiWrappedTextArea(localization.getFieldLabel("PrintToPrinterOrDisk")));
+		destinationPanel.add(toPrinter);
+		destinationPanel.add(toDisk);
+		
+
+		Box hBoxButtons = Box.createHorizontalBox();
+		Component[] buttons = new Component[] {ok, cancel, };
+		Utilities.addComponentsRespectingOrientation(hBoxButtons, buttons);
+
+		Box mainBox = Box.createVerticalBox();
+		mainBox.add(privacyPanel);
+		mainBox.add(destinationPanel);
+		mainBox.add(hBoxButtons);
 	
-		getContentPane().add(panel);
+		getContentPane().add(mainBox);
 		getRootPane().setDefaultButton(ok);
 		Utilities.centerDlg(this);
 		setResizable(true);
 	}
 	
-	public boolean isIncludePrivateChecked()
+	public boolean wantsPrivateData()
 	{
-		return includePrivate.isSelected();
+		return publicAndPrivate.isSelected();
 	}
 	
-	public boolean isContinueButtonPressed()
+	public boolean wantsToPrintToDisk()
+	{
+		return toDisk.isSelected();
+	}
+	
+	public boolean wasContinueButtonPressed()
 	{
 		return pressContinue;
 	}
@@ -98,7 +129,7 @@ public class UiPrintBulletinDlg extends JDialog implements ActionListener
 	{
 		if(ae.getSource().equals(ok))
 		{
-			if (!isIncludePrivateChecked() && allPrivateData)
+			if (!wantsPrivateData() && allPrivateData)
 			{		
 				if(mainWindow.confirmDlg("PrintAllPrivateData"))
 					return;
@@ -125,7 +156,10 @@ public class UiPrintBulletinDlg extends JDialog implements ActionListener
 	}
 
 	UiMainWindow mainWindow;	
-	JCheckBox includePrivate;
+	UiRadioButton publicOnly;
+	UiRadioButton publicAndPrivate;
+	UiRadioButton toPrinter;
+	UiRadioButton toDisk;
 	JButton ok;
 	JButton cancel;
 	boolean pressContinue=false;

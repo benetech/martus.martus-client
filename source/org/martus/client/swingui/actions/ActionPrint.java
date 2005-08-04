@@ -29,6 +29,8 @@ package org.martus.client.swingui.actions;
 import java.awt.event.ActionEvent;
 import java.awt.print.PrinterException;
 import java.awt.print.PrinterJob;
+import java.io.File;
+import java.io.IOException;
 import java.util.Vector;
 
 import javax.print.attribute.HashPrintRequestAttributeSet;
@@ -41,8 +43,10 @@ import org.martus.common.bulletin.Bulletin;
 import org.martus.common.bulletin.BulletinHtmlGenerator;
 import org.martus.swing.JComponentVista;
 import org.martus.swing.PrintPageFormat;
+import org.martus.swing.UiFileChooser;
 import org.martus.swing.UiLabel;
 import org.martus.swing.UiScrollPane;
+import org.martus.util.UnicodeWriter;
 
 public class ActionPrint extends UiMartusAction
 {
@@ -81,10 +85,69 @@ public class ActionPrint extends UiMartusAction
 	{
 		UiPrintBulletinDlg dlg = new UiPrintBulletinDlg(mainWindow, currentSelectedBulletins);
 		dlg.setVisible(true);		
-		if (!dlg.isContinueButtonPressed())
+		if (!dlg.wasContinueButtonPressed())
 			return;							
-		boolean includePrivateData = dlg.isIncludePrivateChecked();
+		boolean includePrivateData = dlg.wantsPrivateData();
+		boolean sendToDisk = dlg.wantsToPrintToDisk();
+
+		if(sendToDisk)
+		{
+			printToDisk(currentSelectedBulletins, includePrivateData);
+		}
+		else
+		{
+			printToPrinter(currentSelectedBulletins, includePrivateData);
+		}
+	}
+	
+	private void printToDisk(Vector currentSelectedBulletins, boolean includePrivateData)
+	{
 		
+		String title = getLocalization().getWindowTitle("PrintToWhichFile");
+		File destination = new File(getLocalization().getFieldLabel("DefaultPrintToDiskFileName"));
+		while(true)
+		{
+			UiFileChooser.FileDialogResults result = UiFileChooser.displayFileSaveDialog(mainWindow, title, destination);
+			if(result.wasCancelChoosen())
+				return;
+			
+			destination = result.getFileChoosen();
+			if(destination.exists())
+				if(mainWindow.confirmDlg(mainWindow, "OverWriteExistingFile"))
+					break;
+		}
+		
+		try
+		{
+			UnicodeWriter writer = new UnicodeWriter(destination);
+			try
+			{
+				for(int i=0; i < currentSelectedBulletins.size(); ++i)
+				{
+					Bulletin bulletin = (Bulletin)currentSelectedBulletins.get(i);
+					if(bulletin.isAllPrivate() && !includePrivateData)
+						continue;
+
+					String html = getBulletinHtml(bulletin, includePrivateData, 0);
+					writer.write(html);
+				}
+			}
+			finally
+			{
+				writer.close();
+			}
+			mainWindow.notifyDlg(mainWindow, "PrintToDiskComplete");
+		}
+		catch (IOException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+	
+	private void printToPrinter(Vector currentSelectedBulletins, boolean includePrivateData)
+	{
 		PrintPageFormat format = new PrintPageFormat();
 		PrinterJob job = PrinterJob.getPrinterJob();
 		HashPrintRequestAttributeSet attributes = new HashPrintRequestAttributeSet();
@@ -142,13 +205,19 @@ public class ActionPrint extends UiMartusAction
 
 	private JComponent createBulletinView(Bulletin bulletin, boolean includePrivateData)
 	{
-		getApp().addHQLabelsWherePossible(bulletin.getAuthorizedToReadKeys());
-		boolean yourBulletin = bulletin.getAccount().equals(getApp().getAccountId());	
 		int width = mainWindow.getPreviewWidth();		
-		BulletinHtmlGenerator generator = new BulletinHtmlGenerator(width, getLocalization() );
-		String html = generator.getHtmlString(bulletin, getStore().getDatabase(), includePrivateData, yourBulletin);
+		String html = getBulletinHtml(bulletin, includePrivateData, width);
 		JComponent view = new UiLabel(html);
 		return view;
+	}
+
+	private String getBulletinHtml(Bulletin bulletin, boolean includePrivateData, int width)
+	{
+		getApp().addHQLabelsWherePossible(bulletin.getAuthorizedToReadKeys());
+		boolean yourBulletin = bulletin.getAccount().equals(getApp().getAccountId());	
+		BulletinHtmlGenerator generator = new BulletinHtmlGenerator(width, getLocalization() );
+		String html = generator.getHtmlString(bulletin, getStore().getDatabase(), includePrivateData, yourBulletin);
+		return html;
 	}
 
 	
