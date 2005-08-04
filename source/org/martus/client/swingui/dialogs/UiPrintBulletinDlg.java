@@ -35,7 +35,9 @@ import java.util.Vector;
 import javax.swing.Box;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
+import javax.swing.JComponent;
 import javax.swing.JDialog;
+import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 
 import org.martus.client.swingui.UiMainWindow;
@@ -85,21 +87,21 @@ public class UiPrintBulletinDlg extends JDialog implements ActionListener
 		Box privacyPanel = Box.createVerticalBox();
 		privacyPanel.setBorder(new LineBorder(Color.BLACK));
 		privacyPanel.add(new UiWrappedTextArea(localization.getFieldLabel("PrintPrivateDataMessage")));
-		privacyPanel.add(publicOnly);
-		privacyPanel.add(publicAndPrivate);
+		privacyPanel.add(leftAligned(publicOnly));
+		privacyPanel.add(leftAligned(publicAndPrivate));
 		
 		Box destinationPanel = Box.createVerticalBox();
 		destinationPanel.setBorder(new LineBorder(Color.BLACK));
 		destinationPanel.add(new UiWrappedTextArea(localization.getFieldLabel("PrintToPrinterOrDisk")));
-		destinationPanel.add(toPrinter);
-		destinationPanel.add(toDisk);
+		destinationPanel.add(leftAligned(toPrinter));
+		destinationPanel.add(leftAligned(toDisk));
 		
-
 		Box hBoxButtons = Box.createHorizontalBox();
-		Component[] buttons = new Component[] {ok, cancel, };
+		Component[] buttons = new Component[] {Box.createHorizontalGlue(), ok, cancel, };
 		Utilities.addComponentsRespectingOrientation(hBoxButtons, buttons);
 
 		Box mainBox = Box.createVerticalBox();
+		mainBox.setBorder(new EmptyBorder(10, 10, 10, 10));
 		mainBox.add(privacyPanel);
 		mainBox.add(destinationPanel);
 		mainBox.add(hBoxButtons);
@@ -153,6 +155,14 @@ public class UiPrintBulletinDlg extends JDialog implements ActionListener
 			}
 		}
 		return isAnyAllPrivate;
+	}
+	
+	private Box leftAligned(JComponent component)
+	{
+		Box box = Box.createHorizontalBox();
+		box.add(component);
+		box.add(Box.createHorizontalGlue());
+		return box;
 	}
 
 	UiMainWindow mainWindow;	

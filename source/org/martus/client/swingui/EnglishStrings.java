@@ -461,10 +461,10 @@ public class EnglishStrings
 "field:SearchOpContains=contains",
 "field:SearchAnyField=--Any Field--",
 
-"field:PrintPrivateDataMessage=You have the option to include or exclude the selected bulletin's private information in this print out. If you choose to print private data, anyone who sees the print out will be able to read it.",
+"field:PrintPrivateDataMessage=You have the option to include or exclude the selected bulletin's private information in this print out. If you choose to print private data, it will be visible to anyone who sees the print out.",
 "button:PrintOnlyPublic=Print only public information",
 "button:PrintPublicAndPrivate=Include private information",
-"field:PrintToPrinterOrDisk=You can print the bulletin contents to a printer, or send the formatted output to a disk file:",
+"field:PrintToPrinterOrDisk=You can print the bulletin contents to a printer, or send the formatted output to a disk file.",
 "button:PrintToPrinter=Print to a printer",
 "button:PrintToDisk=Send output to a disk file",
 "wintitle:PrintToWhichFile=Print to which file",
