@@ -44,7 +44,7 @@ public class ActionMenuModifyBulletin extends UiMenuAction
 
 	public boolean isEnabled()
 	{
-		return UiMainWindow.isOnlyOneBulletinSelected(mainWindow);
+		return mainWindow.isOnlyOneBulletinSelected();
 	}
 
 }

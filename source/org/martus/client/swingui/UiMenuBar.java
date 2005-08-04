@@ -54,7 +54,7 @@ import org.martus.client.swingui.actions.ActionMenuHelp;
 import org.martus.client.swingui.actions.ActionMenuModifyBulletin;
 import org.martus.client.swingui.actions.ActionMenuPasteBulletins;
 import org.martus.client.swingui.actions.ActionMenuPreferences;
-import org.martus.client.swingui.actions.ActionMenuPrintBulletins;
+import org.martus.client.swingui.actions.MenuActionPrint;
 import org.martus.client.swingui.actions.ActionMenuQuickEraseDeleteMyData;
 import org.martus.client.swingui.actions.ActionMenuQuickEraseRemoveMartus;
 import org.martus.client.swingui.actions.ActionMenuRemoveServer;
@@ -231,7 +231,7 @@ public class UiMenuBar extends JMenuBar
 
 	private void createMenuActions()
 	{
-		actionMenuPrint = new ActionMenuPrintBulletins(mainWindow);
+		actionMenuPrint = new MenuActionPrint(mainWindow);
 
 		actionMenuModifyBulletin = new ActionMenuModifyBulletin(mainWindow);
 		actionMenuSelectAllBulletins = new ActionMenuSelectAllBulletins(mainWindow);

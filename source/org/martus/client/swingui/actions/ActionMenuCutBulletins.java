@@ -47,7 +47,7 @@ public class ActionMenuCutBulletins extends UiMenuAction
 	{
 		if(mainWindow.isDiscardedFolderSelected())
 			return false;
-		return UiMainWindow.isAnyBulletinSelected(mainWindow);
+		return mainWindow.isAnyBulletinSelected();
 	}
 
 }

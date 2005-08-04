@@ -44,7 +44,7 @@ public class ActionModify extends UiButtonAction
 
 	public boolean isEnabled()
 	{
-		return UiMainWindow.isOnlyOneBulletinSelected(mainWindow);
+		return mainWindow.isOnlyOneBulletinSelected();
 	}
 
 }

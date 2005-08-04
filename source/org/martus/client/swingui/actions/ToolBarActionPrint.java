@@ -26,26 +26,13 @@ Boston, MA 02111-1307, USA.
 
 package org.martus.client.swingui.actions;
 
-import java.awt.event.ActionEvent;
-
 import org.martus.client.swingui.UiMainWindow;
 
-public class ActionMenuPrintBulletins extends UiMenuAction
+public class ToolBarActionPrint extends ActionPrint
 {
-	public ActionMenuPrintBulletins(UiMainWindow mainWindowToUse)
+	public ToolBarActionPrint(UiMainWindow mainWindowToUse)
 	{
-		super(mainWindowToUse, "printBulletin");
+		super(mainWindowToUse, mainWindowToUse.getLocalization().getButtonLabel("print"));
 	}
-
-	public void actionPerformed(ActionEvent ae)
-	{
-		mainWindow.doPrint();
-	}
-
-	public boolean isEnabled()
-	{
-		return UiMainWindow.isAnyBulletinSelected(mainWindow);
-	}
-
 
 }

@@ -27,7 +27,11 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.swingui.actions;
 
 import javax.swing.AbstractAction;
+
+import org.martus.client.core.MartusApp;
 import org.martus.client.swingui.UiMainWindow;
+import org.martus.clientside.UiLocalization;
+import org.martus.common.bulletinstore.BulletinStore;
 
 abstract public class UiMartusAction extends AbstractAction
 {
@@ -35,6 +39,18 @@ abstract public class UiMartusAction extends AbstractAction
 	{
 		super(label);
 		mainWindow = mainWindowToUse;
+	}
+	protected MartusApp getApp()
+	{
+		return mainWindow.getApp();
+	}
+	protected BulletinStore getStore()
+	{
+		return getApp().getStore();
+	}
+	protected UiLocalization getLocalization()
+	{
+		return mainWindow.getLocalization();
 	}
 	UiMainWindow mainWindow;
 }

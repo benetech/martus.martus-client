@@ -46,7 +46,7 @@ public class ActionMenuDiscardBulletins extends UiMenuAction
 	public boolean isEnabled()
 	{
 		updateName();
-		return UiMainWindow.isAnyBulletinSelected(mainWindow);
+		return mainWindow.isAnyBulletinSelected();
 	}
 
 	public void updateName()

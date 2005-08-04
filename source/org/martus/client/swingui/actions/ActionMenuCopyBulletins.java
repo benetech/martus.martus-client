@@ -44,7 +44,7 @@ public class ActionMenuCopyBulletins extends UiMenuAction
 
 	public boolean isEnabled()
 	{
-		return UiMainWindow.isAnyBulletinSelected(mainWindow);
+		return mainWindow.isAnyBulletinSelected();
 	}
 
 }

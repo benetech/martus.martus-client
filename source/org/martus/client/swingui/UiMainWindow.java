@@ -40,8 +40,6 @@ import java.awt.datatransfer.Transferable;
 import java.awt.event.ActionEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.awt.print.PrinterException;
-import java.awt.print.PrinterJob;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -51,12 +49,10 @@ import java.io.InputStream;
 import java.net.URL;
 import java.nio.channels.FileLock;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
 import java.util.TimerTask;
 import java.util.Vector;
 
-import javax.print.attribute.HashPrintRequestAttributeSet;
 import javax.swing.AbstractAction;
 import javax.swing.ImageIcon;
 import javax.swing.JComponent;
@@ -89,7 +85,6 @@ import org.martus.client.swingui.dialogs.UiInitialSigninDlg;
 import org.martus.client.swingui.dialogs.UiModelessBusyDlg;
 import org.martus.client.swingui.dialogs.UiOnlineHelpDlg;
 import org.martus.client.swingui.dialogs.UiPreferencesDlg;
-import org.martus.client.swingui.dialogs.UiPrintBulletinDlg;
 import org.martus.client.swingui.dialogs.UiProgressRetrieveBulletinsDlg;
 import org.martus.client.swingui.dialogs.UiProgressRetrieveSummariesDlg;
 import org.martus.client.swingui.dialogs.UiRemoveServerDlg;
@@ -121,7 +116,6 @@ import org.martus.common.Version;
 import org.martus.common.MartusUtilities.FileVerificationException;
 import org.martus.common.MartusUtilities.ServerErrorException;
 import org.martus.common.bulletin.Bulletin;
-import org.martus.common.bulletin.BulletinHtmlGenerator;
 import org.martus.common.crypto.MartusCrypto;
 import org.martus.common.database.FileDatabase.MissingAccountMapException;
 import org.martus.common.database.FileDatabase.MissingAccountMapSignatureException;
@@ -129,16 +123,12 @@ import org.martus.common.network.NetworkInterfaceConstants;
 import org.martus.common.packet.Packet;
 import org.martus.common.packet.UniversalId;
 import org.martus.common.utilities.DateUtilities;
-import org.martus.swing.JComponentVista;
-import org.martus.swing.PrintPageFormat;
 import org.martus.swing.UiFileChooser;
-import org.martus.swing.UiLabel;
 import org.martus.swing.UiLanguageDirection;
 import org.martus.swing.UiNotifyDlg;
 import org.martus.swing.UiOptionPane;
 import org.martus.swing.UiPasswordField;
 import org.martus.swing.UiPopupMenu;
-import org.martus.swing.UiScrollPane;
 import org.martus.swing.Utilities;
 import org.martus.swing.Utilities.Delay;
 import org.martus.util.FileVerifier;
@@ -1198,85 +1188,9 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		}
 	}
 
-	public void doPrint()
+	public int getPreviewWidth()
 	{
-		Vector selectedBulletins = getSelectedBulletins("PrintZeroBulletins");
-		if(selectedBulletins == null)
-			return;
-		printBulletins(selectedBulletins);
-		requestFocus(true);
-	}
-
-	void printBulletins(Vector currentSelectedBulletins)
-	{
-		PrintPageFormat format = new PrintPageFormat();
-		PrinterJob job = PrinterJob.getPrinterJob();
-		HashPrintRequestAttributeSet attributes = new HashPrintRequestAttributeSet();
-		while(true)
-		{
-			if (!job.printDialog(attributes))
-				return;
-			format.setFromAttributes(attributes);
-			if(!format.mustWarnUser)
-				break;
-			if(!confirmDlg("PrinterWarning"))
-				break;
-		}
-
-		boolean isAnyBulletinAllPrivate = false;
-		Iterator iter = currentSelectedBulletins.iterator();
-		while(iter.hasNext())
-		{
-			Bulletin bulletin = (Bulletin) iter.next();
-			if(bulletin.isAllPrivate())
-			{
-				isAnyBulletinAllPrivate = true;
-				break;
-			}
-		}
-		
-		UiPrintBulletinDlg dlg = new UiPrintBulletinDlg(this, isAnyBulletinAllPrivate);
-		dlg.setVisible(true);		
-		if (!dlg.isContinueButtonPressed())
-			return;							
-		
-		boolean includePrivateData = dlg.isIncludePrivateChecked();
-		iter = currentSelectedBulletins.iterator();
-		while(iter.hasNext())
-			printBulletin((Bulletin) iter.next(), job, format, attributes, includePrivateData);
-	}
-
-	private void printBulletin(Bulletin bulletin, PrinterJob job, PrintPageFormat format, HashPrintRequestAttributeSet attributes, boolean includePrivateData)
-	{
-		if(bulletin.isAllPrivate() && !includePrivateData)
-			return;
-		app.addHQLabelsWherePossible(bulletin.getAuthorizedToReadKeys());
-		boolean yourBulletin = bulletin.getAccount().equals(getApp().getAccountId());	
-		int width = preview.getView().getWidth();		
-		BulletinHtmlGenerator generator = new BulletinHtmlGenerator(width, getLocalization() );
-		String html = generator.getHtmlString(bulletin, getStore().getDatabase(), includePrivateData, yourBulletin);
-		JComponent view = new UiLabel(html);
-		
-		JFrame frame = new JFrame();
-		UiScrollPane scroller = new UiScrollPane();
-		scroller.getViewport().add(view);
-		frame.getContentPane().add(scroller);
-		frame.pack();
-		//If you want to see what is being printed uncomment out this next line
-		//frame.setVisible(true);
-		JComponentVista vista = new JComponentVista(view, format);
-		vista.scaleToFitX();
-		job.setPageable(vista);
-
-		try
-		{
-			job.print(attributes);
-		}
-		catch (PrinterException e)
-		{
-			System.out.println(e);
-			e.printStackTrace();
-		}
+		return preview.getView().getWidth();
 	}
 
 	public void doLocalize()
@@ -2129,15 +2043,15 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		}
 		
 	}
-
-	public static boolean isAnyBulletinSelected(UiMainWindow window)
+	
+	public boolean isAnyBulletinSelected()
 	{
-		return (window.table.getSelectedBulletinUids().length > 0);
+		return (table.getSelectedBulletinUids().length > 0);
 	}
 
-	public static boolean isOnlyOneBulletinSelected(UiMainWindow window)
+	public boolean isOnlyOneBulletinSelected()
 	{
-		return (window.table.getSingleSelectedBulletin() != null);
+		return (table.getSingleSelectedBulletin() != null);
 	}
 	
 	static public String getDisplayVersionInfo(UiLocalization localization)
