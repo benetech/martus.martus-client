@@ -122,15 +122,19 @@ public class ActionPrint extends UiMartusAction
 			UnicodeWriter writer = new UnicodeWriter(destination);
 			try
 			{
+				writer.writeln("<html>");
 				for(int i=0; i < currentSelectedBulletins.size(); ++i)
 				{
 					Bulletin bulletin = (Bulletin)currentSelectedBulletins.get(i);
 					if(bulletin.isAllPrivate() && !includePrivateData)
 						continue;
 
-					String html = getBulletinHtml(bulletin, includePrivateData, 0);
+					int width = 0;
+					String html = getBulletinHtml(bulletin, includePrivateData, width);
 					writer.write(html);
+					writer.writeln("<hr/>");
 				}
+				writer.writeln("</html>");
 			}
 			finally
 			{
@@ -206,7 +210,7 @@ public class ActionPrint extends UiMartusAction
 	private JComponent createBulletinView(Bulletin bulletin, boolean includePrivateData)
 	{
 		int width = mainWindow.getPreviewWidth();		
-		String html = getBulletinHtml(bulletin, includePrivateData, width);
+		String html = "<html>" + getBulletinHtml(bulletin, includePrivateData, width) + "</html>";
 		JComponent view = new UiLabel(html);
 		return view;
 	}
@@ -216,10 +220,10 @@ public class ActionPrint extends UiMartusAction
 		getApp().addHQLabelsWherePossible(bulletin.getAuthorizedToReadKeys());
 		boolean yourBulletin = bulletin.getAccount().equals(getApp().getAccountId());	
 		BulletinHtmlGenerator generator = new BulletinHtmlGenerator(width, getLocalization() );
-		String html = generator.getHtmlString(bulletin, getStore().getDatabase(), includePrivateData, yourBulletin);
+		String html = generator.getHtmlFragment(bulletin, getStore().getDatabase(), includePrivateData, yourBulletin);
 		return html;
 	}
 
 	
-	static final boolean previewForDebugging = false; 
+	static final boolean previewForDebugging = true; 
 }
