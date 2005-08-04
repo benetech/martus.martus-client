@@ -31,11 +31,42 @@ import javax.swing.JMenuBar;
 import javax.swing.event.MenuEvent;
 import javax.swing.event.MenuListener;
 
+import org.martus.client.swingui.actions.ActionMenuAbout;
+import org.martus.client.swingui.actions.ActionMenuAccountDetails;
 import org.martus.client.swingui.actions.ActionMenuBackupMyKeyPair;
+import org.martus.client.swingui.actions.ActionMenuChangeUserNamePassword;
+import org.martus.client.swingui.actions.ActionMenuConfigureHQs;
+import org.martus.client.swingui.actions.ActionMenuContactInfo;
+import org.martus.client.swingui.actions.ActionMenuCopyBulletins;
+import org.martus.client.swingui.actions.ActionMenuCreateFolder;
+import org.martus.client.swingui.actions.ActionMenuCreateNewBulletin;
 import org.martus.client.swingui.actions.ActionMenuCustomFields;
+import org.martus.client.swingui.actions.ActionMenuCutBulletins;
+import org.martus.client.swingui.actions.ActionMenuDefaultDetailsFieldContent;
+import org.martus.client.swingui.actions.ActionMenuDeleteFolder;
+import org.martus.client.swingui.actions.ActionMenuDeleteMyServerDraftBulletins;
+import org.martus.client.swingui.actions.ActionMenuDiscardBulletins;
+import org.martus.client.swingui.actions.ActionMenuExit;
+import org.martus.client.swingui.actions.ActionMenuExportBulletins;
+import org.martus.client.swingui.actions.ActionMenuExportFolder;
+import org.martus.client.swingui.actions.ActionMenuExportMyPublicKey;
+import org.martus.client.swingui.actions.ActionMenuHelp;
+import org.martus.client.swingui.actions.ActionMenuModifyBulletin;
+import org.martus.client.swingui.actions.ActionMenuPasteBulletins;
+import org.martus.client.swingui.actions.ActionMenuPreferences;
+import org.martus.client.swingui.actions.ActionMenuPrintBulletins;
 import org.martus.client.swingui.actions.ActionMenuQuickEraseDeleteMyData;
 import org.martus.client.swingui.actions.ActionMenuQuickEraseRemoveMartus;
-import org.martus.client.swingui.actions.UiActions;
+import org.martus.client.swingui.actions.ActionMenuRemoveServer;
+import org.martus.client.swingui.actions.ActionMenuRenameFolder;
+import org.martus.client.swingui.actions.ActionMenuResendBulletins;
+import org.martus.client.swingui.actions.ActionMenuRetrieveHQDraftBulletins;
+import org.martus.client.swingui.actions.ActionMenuRetrieveHQSealedBulletins;
+import org.martus.client.swingui.actions.ActionMenuRetrieveMyDraftBulletins;
+import org.martus.client.swingui.actions.ActionMenuRetrieveMySealedBulletins;
+import org.martus.client.swingui.actions.ActionMenuSearch;
+import org.martus.client.swingui.actions.ActionMenuSelectAllBulletins;
+import org.martus.client.swingui.actions.ActionMenuSelectServer;
 import org.martus.swing.UiLanguageDirection;
 import org.martus.swing.UiMenu;
 
@@ -53,14 +84,14 @@ public class UiMenuBar extends JMenuBar
 		file.addMenuListener(fileMenuListener);
 		fileMenuListener.initalize();
 
-		file.add(UiActions.newActionMenuCreateNewBulletin(mainWindow));
+		file.add(new ActionMenuCreateNewBulletin(mainWindow));
 		file.add(actionMenuPrint);
 		file.addSeparator();
-		file.add(UiActions.newActionMenuExportFolder(mainWindow));
-		file.add(UiActions.newActionMenuExportBulletins(mainWindow));
+		file.add(new ActionMenuExportFolder(mainWindow));
+		file.add(new ActionMenuExportBulletins(mainWindow));
 		file.add(actionMenuResendBulletins);
 		file.addSeparator();
-		file.add(UiActions.newActionMenuExit(mainWindow));
+		file.add(new ActionMenuExit(mainWindow));
 
 
 		UiMenu edit = new UiMenu(localization.getMenuLabel("edit"));
@@ -68,7 +99,7 @@ public class UiMenuBar extends JMenuBar
 		edit.addMenuListener(editMenuListener);
 		editMenuListener.initalize();
 
-		edit.add(UiActions.newActionMenuSearch(mainWindow));
+		edit.add(new ActionMenuSearch(mainWindow));
 		edit.addSeparator();
 		edit.add(actionMenuModifyBulletin);
 		edit.addSeparator();
@@ -84,29 +115,29 @@ public class UiMenuBar extends JMenuBar
 		folders.addMenuListener(folderMenuListener);
 		folderMenuListener.initalize();
 
-		folders.add(UiActions.newActionMenuCreateFolder(mainWindow));
+		folders.add(new ActionMenuCreateFolder(mainWindow));
 		folders.add(actionMenuRenameFolder);
 		folders.add(actionMenuDeleteFolder);
 
 
 		UiMenu server = new UiMenu(localization.getMenuLabel("server"));
-		server.add(UiActions.newActionMenuRetrieveMySealedBulletins(mainWindow));
-		server.add(UiActions.newActionMenuRetrieveMyDraftBulletins(mainWindow));
-		server.add(UiActions.newActionMenuDeleteMyServerDraftBulletins(mainWindow));
+		server.add(new ActionMenuRetrieveMySealedBulletins(mainWindow));
+		server.add(new ActionMenuRetrieveMyDraftBulletins(mainWindow));
+		server.add(new ActionMenuDeleteMyServerDraftBulletins(mainWindow));
 		server.addSeparator();
-		server.add(UiActions.newActionMenuRetrieveHQSealedBulletins(mainWindow));
-		server.add(UiActions.newActionMenuRetrieveHQDraftBulletins(mainWindow));
+		server.add(new ActionMenuRetrieveHQSealedBulletins(mainWindow));
+		server.add(new ActionMenuRetrieveHQDraftBulletins(mainWindow));
 		server.addSeparator();
-		server.add(UiActions.newActionMenuSelectServer(mainWindow));
-		server.add(UiActions.newActionMenuRemoveServer(mainWindow));
+		server.add(new ActionMenuSelectServer(mainWindow));
+		server.add(new ActionMenuRemoveServer(mainWindow));
 
 
 		UiMenu options = new UiMenu(localization.getMenuLabel("options"));
-		options.add(UiActions.newActionMenuPreferences(mainWindow));
-		options.add(UiActions.newActionMenuContactInfo(mainWindow));
-		options.add(UiActions.newActionMenuChangeUserNamePassword(mainWindow));
+		options.add(new ActionMenuPreferences(mainWindow));
+		options.add(new ActionMenuContactInfo(mainWindow));
+		options.add(new ActionMenuChangeUserNamePassword(mainWindow));
 		options.addSeparator();
-		options.add(UiActions.newActionMenuDefaultDetailsFieldContent(mainWindow));
+		options.add(new ActionMenuDefaultDetailsFieldContent(mainWindow));
 		options.add(new ActionMenuCustomFields(mainWindow));
 		
 		UiMenu tools = new UiMenu(localization.getMenuLabel("tools"));
@@ -114,15 +145,15 @@ public class UiMenuBar extends JMenuBar
 		tools.add(new ActionMenuQuickEraseRemoveMartus(mainWindow));
 		tools.addSeparator();
 		tools.add(new ActionMenuBackupMyKeyPair(mainWindow));
-		tools.add(UiActions.newActionMenuExportMyPublicKey(mainWindow));
+		tools.add(new ActionMenuExportMyPublicKey(mainWindow));
 		tools.addSeparator();
-		tools.add(UiActions.newActionMenuConfigureHQs(mainWindow));
+		tools.add(new ActionMenuConfigureHQs(mainWindow));
 		
 		UiMenu help = new UiMenu(localization.getMenuLabel("help"));
-		help.add(UiActions.newActionMenuHelp(mainWindow));
-		help.add(UiActions.newActionMenuAbout(mainWindow));
+		help.add(new ActionMenuHelp(mainWindow));
+		help.add(new ActionMenuAbout(mainWindow));
 		help.addSeparator();
-		help.add(UiActions.newActionMenuAccountDetails(mainWindow));
+		help.add(new ActionMenuAccountDetails(mainWindow));
 
 		add(file);
 		add(edit);
@@ -200,18 +231,18 @@ public class UiMenuBar extends JMenuBar
 
 	private void createMenuActions()
 	{
-		actionMenuPrint = UiActions.newActionMenuPrint(mainWindow);
+		actionMenuPrint = new ActionMenuPrintBulletins(mainWindow);
 
-		actionMenuModifyBulletin = UiActions.newActionMenuModifyBulletin(mainWindow);
-		actionMenuSelectAllBulletins = UiActions.newActionMenuSelectAllBulletins(mainWindow);
-		actionMenuCutBulletins = UiActions.newActionMenuCutBulletins(mainWindow);
-		actionMenuCopyBulletins = UiActions.newActionMenuCopyBulletins(mainWindow);
-		actionMenuPasteBulletins = UiActions.newActionMenuPasteBulletins(mainWindow);
-		actionMenuDiscardBulletins = UiActions.newActionMenuDiscardBulletins(mainWindow);
-		actionMenuResendBulletins = UiActions.newActionMenuResendBulletins(mainWindow);
+		actionMenuModifyBulletin = new ActionMenuModifyBulletin(mainWindow);
+		actionMenuSelectAllBulletins = new ActionMenuSelectAllBulletins(mainWindow);
+		actionMenuCutBulletins = new ActionMenuCutBulletins(mainWindow);
+		actionMenuCopyBulletins = new ActionMenuCopyBulletins(mainWindow);
+		actionMenuPasteBulletins = new ActionMenuPasteBulletins(mainWindow);
+		actionMenuDiscardBulletins = new ActionMenuDiscardBulletins(mainWindow);
+		actionMenuResendBulletins = new ActionMenuResendBulletins(mainWindow);
 		
-		actionMenuRenameFolder = UiActions.newActionMenuRenameFolder(mainWindow);
-		actionMenuDeleteFolder = UiActions.newActionMenuDeleteFolder(mainWindow);
+		actionMenuRenameFolder = new ActionMenuRenameFolder(mainWindow);
+		actionMenuDeleteFolder = new ActionMenuDeleteFolder(mainWindow);
 	}
 
 

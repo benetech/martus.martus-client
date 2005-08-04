@@ -29,7 +29,10 @@ package org.martus.client.swingui;
 import javax.swing.AbstractAction;
 import javax.swing.JToolBar;
 
-import org.martus.client.swingui.actions.UiActions;
+import org.martus.client.swingui.actions.ActionCreate;
+import org.martus.client.swingui.actions.ActionModify;
+import org.martus.client.swingui.actions.ActionPrint;
+import org.martus.client.swingui.actions.ActionSearch;
 import org.martus.swing.UiLanguageDirection;
 
 public class UiToolBar extends JToolBar
@@ -59,10 +62,10 @@ public class UiToolBar extends JToolBar
 
 	private void createToolbarActions(UiMainWindow mainWindow)
 	{
-		actionCreate = UiActions.newActionCreate(mainWindow);
-		actionEdit = UiActions.newActionModify(mainWindow);
-		actionSearch = UiActions.newActionSearch(mainWindow);
-		actionPrint = UiActions.newActionPrint(mainWindow);
+		actionCreate = new ActionCreate(mainWindow);
+		actionEdit = new ActionModify(mainWindow);
+		actionSearch = new ActionSearch(mainWindow);
+		actionPrint = new ActionPrint(mainWindow);
 	}
 
 

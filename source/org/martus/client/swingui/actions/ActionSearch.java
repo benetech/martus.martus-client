@@ -1,7 +1,7 @@
 /*
 
 The Martus(tm) free, social justice documentation and
-monitoring software. Copyright (C) 2001-2004, Beneficent
+monitoring software. Copyright (C) 2005, Beneficent
 Technology, Inc. (Benetech).
 
 Martus is free software; you can redistribute it and/or
@@ -26,15 +26,20 @@ Boston, MA 02111-1307, USA.
 
 package org.martus.client.swingui.actions;
 
-import javax.swing.AbstractAction;
+import java.awt.event.ActionEvent;
+
 import org.martus.client.swingui.UiMainWindow;
 
-abstract public class UiMartusAction extends AbstractAction
+public class ActionSearch extends UiButtonAction
 {
-	public UiMartusAction(UiMainWindow mainWindowToUse, String label)
+	public ActionSearch(UiMainWindow mainWindowToUse)
 	{
-		super(label);
-		mainWindow = mainWindowToUse;
+		super(mainWindowToUse, "search");
 	}
-	UiMainWindow mainWindow;
+
+	public void actionPerformed(ActionEvent ae)
+	{
+		mainWindow.doSearch();
+	}
+
 }
