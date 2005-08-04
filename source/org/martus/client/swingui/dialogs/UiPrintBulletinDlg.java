@@ -27,6 +27,8 @@ package org.martus.client.swingui.dialogs;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Iterator;
+import java.util.Vector;
 
 import javax.swing.Box;
 import javax.swing.JButton;
@@ -36,6 +38,7 @@ import javax.swing.border.EmptyBorder;
 
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.clientside.UiLocalization;
+import org.martus.common.bulletin.Bulletin;
 import org.martus.swing.UiButton;
 import org.martus.swing.UiCheckBox;
 import org.martus.swing.UiParagraphPanel;
@@ -45,11 +48,11 @@ import org.martus.swing.Utilities;
 
 public class UiPrintBulletinDlg extends JDialog implements ActionListener
 {
-	public UiPrintBulletinDlg(UiMainWindow mainWindowToUse, boolean allPrivate)
+	public UiPrintBulletinDlg(UiMainWindow mainWindowToUse, Vector bulletinsToPrint)
 	{
 		super(mainWindowToUse, "", true);
 		mainWindow = mainWindowToUse;
-		allPrivateData = allPrivate;	
+		allPrivateData = isAnyBulletinAllPrivate(bulletinsToPrint);	
 		init();	
 	}
 	
@@ -105,6 +108,22 @@ public class UiPrintBulletinDlg extends JDialog implements ActionListener
 		dispose();
 	}
 	
+	private boolean isAnyBulletinAllPrivate(Vector currentSelectedBulletins)
+	{
+		boolean isAnyAllPrivate = false;
+		Iterator iter = currentSelectedBulletins.iterator();
+		while(iter.hasNext())
+		{
+			Bulletin bulletin = (Bulletin) iter.next();
+			if(bulletin.isAllPrivate())
+			{
+				isAnyAllPrivate = true;
+				break;
+			}
+		}
+		return isAnyAllPrivate;
+	}
+
 	UiMainWindow mainWindow;	
 	JCheckBox includePrivate;
 	JButton ok;

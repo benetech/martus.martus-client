@@ -29,12 +29,11 @@ package org.martus.client.swingui.actions;
 import java.awt.event.ActionEvent;
 import java.awt.print.PrinterException;
 import java.awt.print.PrinterJob;
-import java.util.Iterator;
 import java.util.Vector;
 
 import javax.print.attribute.HashPrintRequestAttributeSet;
 import javax.swing.JComponent;
-import javax.swing.JFrame;
+import javax.swing.JDialog;
 
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.dialogs.UiPrintBulletinDlg;
@@ -80,6 +79,12 @@ public class ActionPrint extends UiMartusAction
 
 	void printBulletins(Vector currentSelectedBulletins)
 	{
+		UiPrintBulletinDlg dlg = new UiPrintBulletinDlg(mainWindow, currentSelectedBulletins);
+		dlg.setVisible(true);		
+		if (!dlg.isContinueButtonPressed())
+			return;							
+		boolean includePrivateData = dlg.isIncludePrivateChecked();
+		
 		PrintPageFormat format = new PrintPageFormat();
 		PrinterJob job = PrinterJob.getPrinterJob();
 		HashPrintRequestAttributeSet attributes = new HashPrintRequestAttributeSet();
@@ -88,53 +93,27 @@ public class ActionPrint extends UiMartusAction
 			if (!job.printDialog(attributes))
 				return;
 			format.setFromAttributes(attributes);
-			if(!format.mustWarnUser)
+			if(!format.possiblePaperSizeAndTrayMismatch)
 				break;
 			if(!mainWindow.confirmDlg("PrinterWarning"))
 				break;
 		}
 
-		boolean isAnyBulletinAllPrivate = false;
-		Iterator iter = currentSelectedBulletins.iterator();
-		while(iter.hasNext())
+		for(int i=0; i < currentSelectedBulletins.size(); ++i)
 		{
-			Bulletin bulletin = (Bulletin) iter.next();
-			if(bulletin.isAllPrivate())
-			{
-				isAnyBulletinAllPrivate = true;
-				break;
-			}
+			Bulletin bulletin = (Bulletin)currentSelectedBulletins.get(i);
+			if(bulletin.isAllPrivate() && !includePrivateData)
+				continue;
+
+			JComponent view = createBulletinView(bulletin, includePrivateData);
+			if(previewForDebugging)
+				showPreview(view);
+			printJComponent(view, job, format, attributes);
 		}
-		
-		UiPrintBulletinDlg dlg = new UiPrintBulletinDlg(mainWindow, isAnyBulletinAllPrivate);
-		dlg.setVisible(true);		
-		if (!dlg.isContinueButtonPressed())
-			return;							
-		
-		boolean includePrivateData = dlg.isIncludePrivateChecked();
-		iter = currentSelectedBulletins.iterator();
-		while(iter.hasNext())
-			printBulletin((Bulletin) iter.next(), job, format, attributes, includePrivateData);
 	}
 
-	private void printBulletin(Bulletin bulletin, PrinterJob job, PrintPageFormat format, HashPrintRequestAttributeSet attributes, boolean includePrivateData)
+	private void printJComponent(JComponent view, PrinterJob job, PrintPageFormat format, HashPrintRequestAttributeSet attributes)
 	{
-		if(bulletin.isAllPrivate() && !includePrivateData)
-			return;
-		getApp().addHQLabelsWherePossible(bulletin.getAuthorizedToReadKeys());
-		boolean yourBulletin = bulletin.getAccount().equals(getApp().getAccountId());	
-		int width = mainWindow.getPreviewWidth();		
-		BulletinHtmlGenerator generator = new BulletinHtmlGenerator(width, getLocalization() );
-		String html = generator.getHtmlString(bulletin, getStore().getDatabase(), includePrivateData, yourBulletin);
-		JComponent view = new UiLabel(html);
-		
-		JFrame frame = new JFrame();
-		UiScrollPane scroller = new UiScrollPane();
-		scroller.getViewport().add(view);
-		frame.getContentPane().add(scroller);
-		frame.pack();
-		//If you want to see what is being printed uncomment out this next line
-		//frame.setVisible(true);
 		JComponentVista vista = new JComponentVista(view, format);
 		vista.scaleToFitX();
 		job.setPageable(vista);
@@ -150,4 +129,28 @@ public class ActionPrint extends UiMartusAction
 		}
 	}
 
+	private void showPreview(JComponent view)
+	{
+		JDialog previewDlg = new JDialog();
+		UiScrollPane scroller = new UiScrollPane();
+		scroller.getViewport().add(view);
+		previewDlg.getContentPane().add(scroller);
+		previewDlg.pack();
+		previewDlg.setModal(true);
+		previewDlg.setVisible(true);
+	}
+
+	private JComponent createBulletinView(Bulletin bulletin, boolean includePrivateData)
+	{
+		getApp().addHQLabelsWherePossible(bulletin.getAuthorizedToReadKeys());
+		boolean yourBulletin = bulletin.getAccount().equals(getApp().getAccountId());	
+		int width = mainWindow.getPreviewWidth();		
+		BulletinHtmlGenerator generator = new BulletinHtmlGenerator(width, getLocalization() );
+		String html = generator.getHtmlString(bulletin, getStore().getDatabase(), includePrivateData, yourBulletin);
+		JComponent view = new UiLabel(html);
+		return view;
+	}
+
+	
+	static final boolean previewForDebugging = false; 
 }
