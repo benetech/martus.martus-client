@@ -54,7 +54,6 @@ import org.martus.client.swingui.actions.ActionMenuHelp;
 import org.martus.client.swingui.actions.ActionMenuModifyBulletin;
 import org.martus.client.swingui.actions.ActionMenuPasteBulletins;
 import org.martus.client.swingui.actions.ActionMenuPreferences;
-import org.martus.client.swingui.actions.MenuActionPrint;
 import org.martus.client.swingui.actions.ActionMenuQuickEraseDeleteMyData;
 import org.martus.client.swingui.actions.ActionMenuQuickEraseRemoveMartus;
 import org.martus.client.swingui.actions.ActionMenuRemoveServer;
@@ -67,6 +66,7 @@ import org.martus.client.swingui.actions.ActionMenuRetrieveMySealedBulletins;
 import org.martus.client.swingui.actions.ActionMenuSearch;
 import org.martus.client.swingui.actions.ActionMenuSelectAllBulletins;
 import org.martus.client.swingui.actions.ActionMenuSelectServer;
+import org.martus.client.swingui.actions.ActionPrint;
 import org.martus.swing.UiLanguageDirection;
 import org.martus.swing.UiMenu;
 
@@ -231,7 +231,7 @@ public class UiMenuBar extends JMenuBar
 
 	private void createMenuActions()
 	{
-		actionMenuPrint = new MenuActionPrint(mainWindow);
+		actionMenuPrint = ActionPrint.createWithMenuLabel(mainWindow);
 
 		actionMenuModifyBulletin = new ActionMenuModifyBulletin(mainWindow);
 		actionMenuSelectAllBulletins = new ActionMenuSelectAllBulletins(mainWindow);

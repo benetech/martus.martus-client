@@ -47,6 +47,18 @@ import org.martus.swing.UiScrollPane;
 
 public class ActionPrint extends UiMartusAction
 {
+	public static ActionPrint createWithMenuLabel(UiMainWindow mainWindowToUse)
+	{
+		String label = mainWindowToUse.getLocalization().getMenuLabel("printBulletin");
+		return new ActionPrint(mainWindowToUse, label);
+	}
+	
+	public static ActionPrint createWithButtonLabel(UiMainWindow mainWindowToUse)
+	{
+		String label = mainWindowToUse.getLocalization().getButtonLabel("print");
+		return new ActionPrint(mainWindowToUse, label);
+	}
+	
 	public ActionPrint(UiMainWindow mainWindowToUse, String label)
 	{
 		super(mainWindowToUse, label);
