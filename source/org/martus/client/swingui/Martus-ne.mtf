@@ -1479,7 +1479,7 @@
 -0381-field:securityServerConfigValidate=सुरक्षाको कारणहरुले हामीले तपाईको प्रयोगकर्तानाम र पासवर्ड वैधताको परिक्षण गर्नै पर्दछ  ।
 
 #_________________=Status
--bae7-field:status=स्थिति
+-bae7-field:status=स्थिति                
 
 #__________________=Summary
 -12b7-field:summary=सारांश 
