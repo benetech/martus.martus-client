@@ -212,6 +212,7 @@ public class ActionPrint extends UiMartusAction
 		int width = mainWindow.getPreviewWidth();		
 		String html = "<html>" + getBulletinHtml(bulletin, includePrivateData, width) + "</html>";
 		JComponent view = new UiLabel(html);
+		view.setSize(view.getPreferredSize());
 		return view;
 	}
 
