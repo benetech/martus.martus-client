@@ -115,6 +115,10 @@ public class TestBulletinSearcher extends TestCaseEnhanced
 		verifyOperatorComparison("testDoesMatchComparisons", b, fieldToSearch, ":=", belowSample, false);
 		verifyOperatorComparison("testDoesMatchComparisons", b, fieldToSearch, ":=", sampleValue, true);
 		verifyOperatorComparison("testDoesMatchComparisons", b, fieldToSearch, ":=", aboveSample, false);
+
+		verifyOperatorComparison("testDoesMatchComparisons", b, fieldToSearch, ":!=", belowSample, true);
+		verifyOperatorComparison("testDoesMatchComparisons", b, fieldToSearch, ":!=", sampleValue, false);
+		verifyOperatorComparison("testDoesMatchComparisons", b, fieldToSearch, ":!=", aboveSample, true);
 	}
 
 	private void verifyOperatorComparison(String caller, Bulletin realBulletin, String fieldToSearch, String operator, String value, boolean expected)
@@ -268,7 +272,7 @@ public class TestBulletinSearcher extends TestCaseEnhanced
 		verifyOperatorComparison("testBooleanMatches", b, "false", ":", FieldSpec.TRUESTRING, false);
 		verifyOperatorComparison("testBooleanMatches", b, "bogus", ":", FieldSpec.FALSESTRING, false);
 		verifyOperatorComparison("testBooleanMatches", b, "bogus", ":", FieldSpec.TRUESTRING, false);
-		verifyOperatorComparison("testBooleanMatches", b, "bogus", ":", FieldSpec.FALSESTRING, false);
+		verifyOperatorComparison("testBooleanMatches", b, "true", ":!=", FieldSpec.FALSESTRING, true);
 		
 	}
 }

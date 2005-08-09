@@ -88,6 +88,7 @@ public class FancySearchHelper
 		{
 			new ChoiceItem(":", getLocalization().getFieldLabel("SearchOpContains")),
 			new ChoiceItem(":=", "="),
+			new ChoiceItem(":=", "!="),
 			new ChoiceItem(":>", ">"),
 			new ChoiceItem(":>=", ">="),
 			new ChoiceItem(":<", "<"),

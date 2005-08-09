@@ -80,6 +80,8 @@ public class BulletinSearcher
 				return (field.compareTo(searchForValue) >= 0);
 			case SearchTreeNode.EQUAL: 
 				return (field.compareTo(searchForValue) == 0);
+			case SearchTreeNode.NOT_EQUAL: 
+				return (field.compareTo(searchForValue) != 0);
 		}
 		
 		System.out.println("BulletinSearcher.doesValueMatch: Unknown op: " + compareOp);
