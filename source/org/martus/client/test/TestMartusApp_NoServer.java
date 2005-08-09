@@ -1755,8 +1755,7 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		LanguageOptions.setDirectionRightToLeft();
 		assertEquals("1987/13/12", localization.convertStoredDateToDisplayReverseIfNecessary("1987-12-13"));
 		assertEquals("2004/01/03", localization.getViewableDateRange("2004-03-01,20040301+0"));
-		//RtoL languages does reverse the date when mixed strings of RtoL and LtoR when the LtoR text has /'s contained within for some strange reason
-		assertEquals("01/07/2004 - 07/03/2004", localization.getViewableDateRange("2004-01-07,20040107+178"));
+		assertEquals("2004/03/07 - 2004/07/01", localization.getViewableDateRange("2004-01-07,20040107+178"));
 		
 		TRACE_END();
 	}
@@ -1774,7 +1773,7 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		assertEquals("2004.03.01", localization.getViewableDateRange("2004-03-01,20040301+0"));
 		
 		//RtoL languages doesn't reverse the date when mixed strings of RtoL and LtoR when the LtoR text has dot's contained within for some strange reason
-		assertEquals("2004.01.07 - 2004.07.03", localization.getViewableDateRange("2004-01-07,20040107+178"));
+		assertEquals("2004.07.03 - 2004.01.07", localization.getViewableDateRange("2004-01-07,20040107+178"));
 		
 		TRACE_END();
 	}
