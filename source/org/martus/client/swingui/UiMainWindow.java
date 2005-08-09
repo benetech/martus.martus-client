@@ -50,6 +50,7 @@ import java.net.URL;
 import java.nio.channels.FileLock;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Stack;
 import java.util.TimerTask;
 import java.util.Vector;
 
@@ -145,6 +146,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	public UiMainWindow()
 	{
 		super();
+		cursorStack = new Stack();
 		setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 		setCurrentActiveFrame(this);
 		try
@@ -647,16 +649,16 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		return getApp().getStore();
 	}
 
-	public void resetCursor(Cursor originalCursor)
+	public void resetCursor()
 	{
-		setCursor(originalCursor);
+		setCursor((Cursor)cursorStack.pop());
 	}
 
-	public Cursor setWaitingCursor()
+	public void setWaitingCursor()
 	{
-		Cursor originalCursor = getCursor();
+		cursorStack.push(getCursor());
 		setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-		return originalCursor;
+		return;
 	}
 	
 	public void allBulletinsInCurrentFolderHaveChanged()
@@ -690,9 +692,9 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 
 	public void folderSelectionHasChanged(BulletinFolder f)
 	{
-		Cursor originalCursor = setWaitingCursor();
+		setWaitingCursor();
 		table.setFolder(f);
-		resetCursor(originalCursor);
+		resetCursor();
 	}
 
 	public void folderContentsHaveChanged(BulletinFolder f)
@@ -1099,7 +1101,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		//UiSimpleSearchDlg searchDlg = new UiSimpleSearchDlg(this);
 		if(!searchDlg.getResults())
 			return;
-		Cursor originalCursor = setWaitingCursor();
+		setWaitingCursor();
 
 		String andKeyword = getLocalization().getKeyword("and");
 		String orKeyword = getLocalization().getKeyword("or");
@@ -1109,7 +1111,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		folders.folderTreeContentsHaveChanged();
 		folders.folderContentsHaveChanged(searchFolder);
 		int bulletinsFound = searchFolder.getBulletinCount();
-		resetCursor(originalCursor);
+		resetCursor();
 		if(bulletinsFound > 0)
 		{
 			selectSearchFolder();
@@ -1557,7 +1559,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 			if(uidList == null)
 				return;
 
-			Cursor originalCursor = setWaitingCursor();
+			setWaitingCursor();
 			try
 			{
 				String result = app.deleteServerDraftBulletins(uidList);
@@ -1571,7 +1573,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 			}
 			finally
 			{
-				resetCursor(originalCursor);
+				resetCursor();
 			}
 		}
 		catch (MartusCrypto.MartusSignatureException e)
@@ -2216,4 +2218,5 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	private boolean createdNewAccount;
 	private boolean justRecovered;
 	private BackgroundUploadTimerTask backgroundUploadTimerTask;
+	private Stack cursorStack;
 }

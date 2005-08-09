@@ -26,7 +26,6 @@ Boston, MA 02111-1307, USA.
 
 package org.martus.client.swingui;
 
-import java.awt.Cursor;
 import java.awt.Point;
 import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.Transferable;
@@ -39,7 +38,6 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.zip.ZipFile;
-
 import org.martus.client.bulletinstore.BulletinFolder;
 import org.martus.client.bulletinstore.ClientBulletinStore;
 import org.martus.client.bulletinstore.ClientBulletinStore.BulletinAlreadyExistsException;
@@ -88,12 +86,12 @@ public abstract class UiBulletinDropAdapter implements DropTargetListener
 
 	public void drop(DropTargetDropEvent dtde)
 	{
-		Cursor originalCursor = observer.setWaitingCursor();
+		observer.setWaitingCursor();
 		if(dtde.isDataFlavorSupported(TransferableBulletinList.getBulletinListDataFlavor()))
 			dropTransferableBulletins(dtde);
 		else if(dtde.isDataFlavorSupported(DataFlavor.javaFileListFlavor))
 			dropFiles(dtde);
-		observer.resetCursor(originalCursor);
+		observer.resetCursor();
 	}
 
 	// private methods
@@ -119,7 +117,7 @@ public abstract class UiBulletinDropAdapter implements DropTargetListener
 			dtde.rejectDrop();
 			return;
 		}
-		Cursor originalCursor = observer.setWaitingCursor();
+		observer.setWaitingCursor();
 		dtde.acceptDrop(dtde.getDropAction());
 		//System.out.println("dropTransferableBulletin: accepted");
 
@@ -160,7 +158,7 @@ public abstract class UiBulletinDropAdapter implements DropTargetListener
 		boolean worked = (errorTag == null);
 		tb.dispose();
 		dtde.dropComplete(worked);
-		observer.resetCursor(originalCursor);
+		observer.resetCursor();
 		if(!worked)
 			observer.notifyDlgBeep(observer, errorTag);
 	}
@@ -280,7 +278,7 @@ public abstract class UiBulletinDropAdapter implements DropTargetListener
 		ClientBulletinStore store = toFolder.getStore();
 		if(!deleteOldUnAuthoredBulletinIfRequired(file, store))
 			return;
-		Cursor originalCursor = observer.setWaitingCursor();
+		observer.setWaitingCursor();
 		try
 		{
 			store.importZipFileBulletin(file, toFolder, false);
@@ -288,7 +286,7 @@ public abstract class UiBulletinDropAdapter implements DropTargetListener
 		}
 		finally
 		{
-			observer.resetCursor(originalCursor);
+			observer.resetCursor();
 		}
 	}
 	

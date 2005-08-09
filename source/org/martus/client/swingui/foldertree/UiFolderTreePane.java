@@ -26,16 +26,13 @@ Boston, MA 02111-1307, USA.
 
 package org.martus.client.swingui.foldertree;
 
-import java.awt.Cursor;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-
 import javax.swing.AbstractAction;
 import javax.swing.JMenuItem;
 import javax.swing.JViewport;
 import javax.swing.tree.TreePath;
-
 import org.martus.client.bulletinstore.BulletinFolder;
 import org.martus.client.bulletinstore.ClientBulletinStore;
 import org.martus.client.swingui.MartusLocalization;
@@ -200,7 +197,7 @@ public class UiFolderTreePane extends UiScrollPane
 		if(!canDeleteFolder(nodeToDelete))
 			return;
 
-		Cursor originalCursor = parent.setWaitingCursor();
+		parent.setWaitingCursor();
 		final String internalName = nodeToDelete.getInternalName();
 		final boolean isFolderEmpty = store.findFolder(internalName).getBulletinCount() == 0;
 		if(isFolderEmpty || parent.confirmDlg(parent, "deletefolder"))
@@ -208,7 +205,7 @@ public class UiFolderTreePane extends UiScrollPane
 			store.deleteFolder(internalName);
 			parent.folderTreeContentsHaveChanged();
 		}
-		parent.resetCursor(originalCursor);
+		parent.resetCursor();
 	}
 
 	class ActionDelete extends AbstractAction

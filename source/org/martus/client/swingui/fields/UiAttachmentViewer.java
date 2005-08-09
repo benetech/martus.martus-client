@@ -26,7 +26,6 @@ Boston, MA 02111-1307, USA.
 
 package org.martus.client.swingui.fields;
 
-import java.awt.Cursor;
 import java.awt.dnd.DnDConstants;
 import java.awt.dnd.DragGestureEvent;
 import java.awt.dnd.DragGestureListener;
@@ -38,11 +37,9 @@ import java.awt.dnd.DragSourceListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
-
 import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.ListSelectionModel;
-
 import org.martus.client.core.MartusApp;
 import org.martus.client.core.TransferableAttachmentList;
 import org.martus.client.swingui.MartusLocalization;
@@ -187,7 +184,7 @@ public class UiAttachmentViewer extends UiParagraphPanel  implements DragGesture
 					return;
 			}
 			String fileName = model.getFilenameAt(selectedRow);
-			Cursor originalCursor = mainWindow.setWaitingCursor();
+			mainWindow.setWaitingCursor();
 			try
 			{
 				File temp = File.createTempFile(extractFileNameOnly(fileName), extractExtentionOnly(fileName));
@@ -206,7 +203,7 @@ public class UiAttachmentViewer extends UiParagraphPanel  implements DragGesture
 				mainWindow.notifyDlg("UnableToViewAttachment");
 				System.out.println("Unable to view file :" + e);
 			}
-			mainWindow.resetCursor(originalCursor);
+			mainWindow.resetCursor();
 		}
 	}
 	
@@ -233,7 +230,7 @@ public class UiAttachmentViewer extends UiParagraphPanel  implements DragGesture
 				if(!mainWindow.confirmDlg("OverWriteExistingFile"))
 					return;
 			}
-			Cursor originalCursor = mainWindow.setWaitingCursor();
+			mainWindow.setWaitingCursor();
 			AttachmentProxy proxy = model.getAttachmentProxyAt(selectedRow);
 			try
 			{
@@ -245,7 +242,7 @@ public class UiAttachmentViewer extends UiParagraphPanel  implements DragGesture
 				mainWindow.notifyDlg("UnableToSaveAttachment");
 				System.out.println("Unable to save file :" + e);
 			}
-			mainWindow.resetCursor(originalCursor);
+			mainWindow.resetCursor();
 		}
 	}
 

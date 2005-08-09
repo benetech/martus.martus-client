@@ -28,12 +28,10 @@ package org.martus.client.swingui.foldertree;
 
 import java.awt.Color;
 import java.awt.Component;
-import java.awt.Cursor;
 import java.awt.Point;
 import java.awt.dnd.DropTarget;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-
 import javax.swing.Icon;
 import javax.swing.JLabel;
 import javax.swing.JTree;
@@ -48,7 +46,6 @@ import javax.swing.tree.DefaultTreeCellRenderer;
 import javax.swing.tree.TreeModel;
 import javax.swing.tree.TreePath;
 import javax.swing.tree.TreeSelectionModel;
-
 import org.martus.client.bulletinstore.BulletinFolder;
 import org.martus.client.bulletinstore.ClientBulletinStore;
 import org.martus.client.swingui.UiMainWindow;
@@ -136,14 +133,14 @@ class UiFolderTree extends JTree implements TreeSelectionListener
 			}
 			if(e.isControlDown())
 			{
-				Cursor original = observer.setWaitingCursor();
+				observer.setWaitingCursor();
 				if(e.getKeyCode() == KeyEvent.VK_X)
 					observer.doCutBulletins();
 				if(e.getKeyCode() == KeyEvent.VK_C)
 					observer.doCopyBulletins();
 				if(e.getKeyCode() == KeyEvent.VK_V)
 					observer.doPasteBulletins();
-				observer.resetCursor(original);
+				observer.resetCursor();
 			}			
 			
 		}

@@ -26,7 +26,6 @@ Boston, MA 02111-1307, USA.
 
 package org.martus.client.swingui.bulletintable;
 
-import java.awt.Cursor;
 import java.awt.Toolkit;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.Transferable;
@@ -45,22 +44,20 @@ import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.IOException;
 import java.util.Vector;
-
 import javax.swing.JPopupMenu;
 import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.event.TableModelEvent;
 import javax.swing.table.JTableHeader;
-
 import org.martus.client.bulletinstore.BulletinFolder;
 import org.martus.client.bulletinstore.ClientBulletinStore;
 import org.martus.client.bulletinstore.ClientBulletinStore.BulletinAlreadyExistsException;
 import org.martus.client.bulletinstore.ClientBulletinStore.BulletinOlderException;
 import org.martus.client.core.MartusApp;
 import org.martus.client.core.TransferableBulletinList;
-import org.martus.client.swingui.UiClipboardUtilities;
 import org.martus.client.swingui.MartusLocalization;
+import org.martus.client.swingui.UiClipboardUtilities;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.foldertree.FolderNode;
 import org.martus.clientside.UiLocalization;
@@ -335,7 +332,7 @@ public class UiBulletinTable extends UiTable implements ListSelectionListener, D
 
 	public void doCopyBulletins()
 	{				
-		Cursor cursor = mainWindow.setWaitingCursor();
+		mainWindow.setWaitingCursor();
 					
 		Bulletin[] selected = getSelectedBulletins();
 		BulletinFolder folder = getFolder();
@@ -347,12 +344,12 @@ public class UiBulletinTable extends UiTable implements ListSelectionListener, D
 		mainWindow.lostOwnership(clipboard, contents);
 
 		clipboard.setContents(tb, mainWindow);
-		mainWindow.resetCursor(cursor);		
+		mainWindow.resetCursor();		
 	}
 
 	public void doPasteBulletins()
 	{				 
-		Cursor cursor = mainWindow.setWaitingCursor();
+		mainWindow.setWaitingCursor();
 		
 		BulletinFolder folder = getFolder();
 		TransferableBulletinList tb = UiClipboardUtilities.getClipboardTransferableBulletin();
@@ -410,7 +407,7 @@ public class UiBulletinTable extends UiTable implements ListSelectionListener, D
 		if(!worked)
 			mainWindow.notifyDlgBeep(resultMessageTag);
 		
-		mainWindow.resetCursor(cursor);	
+		mainWindow.resetCursor();	
 	}
 	
 	public void doResendBulletins()
@@ -603,7 +600,7 @@ public class UiBulletinTable extends UiTable implements ListSelectionListener, D
 
 	private void discardAllSelectedBulletins()
 	{		
-		Cursor cursor = mainWindow.setWaitingCursor();
+		mainWindow.setWaitingCursor();
 		Bulletin[] bulletinsToDiscard = getSelectedBulletins();
 		BulletinFolder folderToDiscardFrom = getFolder();
 		MartusApp app = mainWindow.getApp();
@@ -622,7 +619,7 @@ public class UiBulletinTable extends UiTable implements ListSelectionListener, D
 		mainWindow.folderContentsHaveChanged(folderToDiscardFrom);
 		mainWindow.folderContentsHaveChanged(discardedFolder);
 		mainWindow.selectNewCurrentBulletin(getSelectedRow());
-		mainWindow.resetCursor(cursor);			
+		mainWindow.resetCursor();			
 	}
 
 	private boolean confirmDiscardSingleBulletin(Bulletin b)
