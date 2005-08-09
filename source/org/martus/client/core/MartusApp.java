@@ -589,22 +589,15 @@ public class MartusApp
 					if(!jarEntryName.startsWith(filesBeginningWith))
 						continue;
 				}
-//FIXME::remove prints
-System.out.println(filesBeginningWith +" Matches "+jarEntryName);
 				if(!jarEntryName.endsWith(filesEndingWith))
 					continue;
-System.out.println(filesEndingWith +" Matches "+jarEntryName);
 				File fileOnDisk = new File(targetDirectory, jarEntryName);
 				if(isFileNewerOnDisk(fileOnDisk, entry))
-				{
-System.out.println("File on disk is newer, aborting");
 					continue;
-				}
 					
 				fileOnDisk.delete();
 				targetDirectory.mkdirs();
 				copyJarEntryToFile(jar, entry, fileOnDisk);
-System.out.println("copied :" + fileOnDisk.getAbsolutePath());
 			}
 		}
 		catch(IOException e)
