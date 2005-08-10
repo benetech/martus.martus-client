@@ -29,25 +29,34 @@ package org.martus.client.swingui.dialogs;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Cursor;
-
+import javax.swing.Icon;
+import javax.swing.JComponent;
 import javax.swing.JDialog;
+import javax.swing.JLabel;
 import javax.swing.border.LineBorder;
-
 import org.martus.swing.UiLabel;
 import org.martus.swing.Utilities;
 
 public class UiModelessBusyDlg extends JDialog
 {
-
+	public UiModelessBusyDlg(Icon icon)
+	{
+		showDlg(new JLabel(icon, JLabel.CENTER));
+	}
+	
 	public UiModelessBusyDlg(String message)
 	{
-		super();
 		getContentPane().add(new UiLabel(" "), BorderLayout.NORTH);
 		getContentPane().add(new UiLabel(" "), BorderLayout.SOUTH);
 		getContentPane().add(new UiLabel("     "), BorderLayout.EAST);
 		getContentPane().add(new UiLabel("     "), BorderLayout.WEST);
-		getContentPane().add(new UiLabel(message), BorderLayout.CENTER);
+		showDlg(new UiLabel(message));
+	}
+
+	public void showDlg(JComponent displayItem)
+	{
 		getRootPane().setBorder(new LineBorder(Color.black, 5));
+		getContentPane().add(displayItem, BorderLayout.CENTER);
 		setUndecorated(true);
 		Utilities.centerDlg(this);
 		setResizable(false);
@@ -61,7 +70,6 @@ public class UiModelessBusyDlg extends JDialog
 		setCursor(origCursor);
 		dispose();
 	}
-
 
 	Cursor origCursor;
 }

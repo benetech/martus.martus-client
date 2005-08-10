@@ -53,7 +53,6 @@ import java.util.Map;
 import java.util.Stack;
 import java.util.TimerTask;
 import java.util.Vector;
-
 import javax.swing.AbstractAction;
 import javax.swing.ImageIcon;
 import javax.swing.JComponent;
@@ -62,7 +61,6 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JSplitPane;
 import javax.swing.SwingUtilities;
-
 import org.martus.client.bulletinstore.BulletinFolder;
 import org.martus.client.bulletinstore.ClientBulletinStore;
 import org.martus.client.core.BackgroundUploader;
@@ -147,6 +145,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	{
 		super();
 		cursorStack = new Stack();
+		UiModelessBusyDlg splashScreen = new UiModelessBusyDlg(new ImageIcon(UiAboutDlg.class.getResource("MartusLogo.gif")));
 		setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 		setCurrentActiveFrame(this);
 		try
@@ -165,7 +164,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		File timeoutDebug = new File("C:/Martus/timeout.1min");
 		if(timeoutDebug !=null & timeoutDebug.exists())
 			timeoutInXSeconds = TESTING_TIMEOUT_60_SECONDS;
-
+		splashScreen.endDialog();
 		initalizeUiState();
 	}
 
