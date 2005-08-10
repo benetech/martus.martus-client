@@ -135,6 +135,8 @@ public class GridTable extends UiTableWithCellEditingProtection
 		map.put(new Integer(FieldSpec.TYPE_DROPDOWN), new GridDropDownCellEditor());
 		map.put(new Integer(FieldSpec.TYPE_LANGUAGE), new GridDropDownCellEditor());
 		map.put(new Integer(FieldSpec.TYPE_NORMAL), new GridNormalCellEditor(dlgLauncher.GetLocalization()));
+		map.put(new Integer(FieldSpec.TYPE_MULTILINE), new GridNormalCellEditor(dlgLauncher.GetLocalization()));
+		map.put(new Integer(FieldSpec.TYPE_ANY_FIELD), new GridNormalCellEditor(dlgLauncher.GetLocalization()));
 		return map;
 	}
 	
