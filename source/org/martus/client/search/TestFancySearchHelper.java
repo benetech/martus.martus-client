@@ -137,24 +137,13 @@ public class TestFancySearchHelper extends TestCaseEnhanced
 		return column2;
 	}
 	
-	public void testCreateOpColumnSpec()
-	{
-		DropDownFieldSpec spec = helper.createOpColumnSpec();
-		assertTrue("no contains?", spec.findCode(":") >= 0);
-		assertTrue("no >?", spec.findCode(":>") >= 0);
-		assertTrue("no <?", spec.findCode(":<") >= 0);
-		assertTrue("no >=?", spec.findCode(":>=") >= 0);
-		assertTrue("no <=?", spec.findCode(":<=") >= 0);
-		assertTrue("no =?", spec.findCode(":=") >= 0);
-	}
-	
 	public void testCreateGridSpec()
 	{
 		GridFieldSpec spec = helper.getGridSpec(store);
 		assertEquals(3, spec.getColumnCount());
 		assertEquals("no field column?", FieldSpec.TYPE_DROPDOWN, spec.getColumnType(0));
 		assertEquals("no op column?", FieldSpec.TYPE_DROPDOWN, spec.getColumnType(1));
-		assertEquals("no value column?", FieldSpec.TYPE_MORPHIC, spec.getColumnType(2));
+		assertEquals("no value column?", FieldSpec.TYPE_SEARCH_VALUE, spec.getColumnType(2));
 	}
 	
 	public void testGetSearchString() throws Exception
@@ -162,7 +151,7 @@ public class TestFancySearchHelper extends TestCaseEnhanced
 		GridFieldSpec spec = new GridFieldSpec();
 		spec.addColumn(FieldSpec.createStandardField("field", FieldSpec.TYPE_NORMAL));
 		spec.addColumn(FieldSpec.createStandardField("op", FieldSpec.TYPE_NORMAL));
-		spec.addColumn(FieldSpec.createStandardField("value", FieldSpec.TYPE_MORPHIC));
+		spec.addColumn(FieldSpec.createStandardField("value", FieldSpec.TYPE_SEARCH_VALUE));
 		GridData data = new GridData(spec);
 		addRow(data, "", ":", "whiz");
 		addRow(data, "a", "b", "c");

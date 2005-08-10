@@ -69,7 +69,7 @@ public class FancySearchHelper
 	public DropDownFieldSpec createFieldColumnSpec(ClientBulletinStore storeToUse)
 	{
 		Vector allAvailableFields = new Vector();
-		FieldSpec anyField = FieldSpec.createCustomField("", getLocalization().getFieldLabel("SearchAnyField"), FieldSpec.TYPE_NORMAL);
+		FieldSpec anyField = FieldSpec.createCustomField("", getLocalization().getFieldLabel("SearchAnyField"), FieldSpec.TYPE_ANY_FIELD);
 		allAvailableFields.add(new ChoiceItem(anyField));
 		allAvailableFields.addAll(convertToChoiceItems(storeToUse.getAllKnownFieldSpecs()));
 
@@ -80,25 +80,6 @@ public class FancySearchHelper
 		fieldColumnSpec.setLabel(getLocalization().getFieldLabel("SearchGridHeaderField"));
 		fieldColumnSpec.setChoices(fieldChoices);
 		return fieldColumnSpec;
-	}
-	
-	public DropDownFieldSpec createOpColumnSpec()
-	{
-		ChoiceItem[] opChoices = 
-		{
-			new ChoiceItem(":", getLocalization().getFieldLabel("SearchOpContains")),
-			new ChoiceItem(":=", "="),
-			new ChoiceItem(":=", "!="),
-			new ChoiceItem(":>", ">"),
-			new ChoiceItem(":>=", ">="),
-			new ChoiceItem(":<", "<"),
-			new ChoiceItem(":<=", "<="),
-		};
-		                                  
-		DropDownFieldSpec opSpec = new DropDownFieldSpec();
-		opSpec.setLabel(getLocalization().getFieldLabel("SearchGridHeaderOp"));
-		opSpec.setChoices(opChoices);
-		return opSpec;
 	}
 	
 	private Vector convertToChoiceItems(Vector specs)
@@ -170,11 +151,12 @@ public class FancySearchHelper
 		try
 		{
 			spec.addColumn(createFieldColumnSpec(storeToUse));
-			spec.addColumn(createOpColumnSpec());
 			
-			String columnTag = "value";
-			String columnHeader = getLocalization().getFieldLabel("SearchGridHeaderValue");
-			spec.addColumn(FieldSpec.createCustomField(columnTag, columnHeader, FieldSpec.TYPE_MORPHIC));
+			spec.addColumn(FancySearchTableModel.getCurrentOpColumnSpec(FieldSpec.TYPE_ANY_FIELD, getLocalization()));
+			
+			String valueColumnTag = "value";
+			String valueColumnHeader = getLocalization().getFieldLabel("SearchGridHeaderValue");
+			spec.addColumn(FieldSpec.createCustomField(valueColumnTag, valueColumnHeader, FieldSpec.TYPE_SEARCH_VALUE));
 		}
 		catch (UnsupportedFieldTypeException e)
 		{

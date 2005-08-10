@@ -26,6 +26,8 @@ Boston, MA 02111-1307, USA.
 
 package org.martus.client.search;
 
+import java.util.Vector;
+
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 
@@ -48,17 +50,97 @@ public class FancySearchTableModel extends GridTableModel implements TableModelL
 	
 	public FieldSpec getFieldSpecForCell(int row, int column)
 	{
-		if(column != valueColumn)
+		if(column == valueColumn)
+			return getCurrentValueColumnSpec(getSelectedFieldSpec(row));
+		else if(column == opColumn)
+			return getCurrentOpColumnSpec(getSelectedFieldSpec(row).getType());
+		else
 			return super.getFieldSpecForCell(row, column);
-		
+	}
+
+	private FieldSpec getSelectedFieldSpec(int row)
+	{
 		String selectedFieldTag = (String)getValueAt(row, fieldColumn);
 		DropDownFieldSpec fieldColumnSpec = (DropDownFieldSpec)getFieldSpecForColumn(fieldColumn);
 		ChoiceItem selectedFieldChoiceItem = fieldColumnSpec.getChoice(fieldColumnSpec.findCode(selectedFieldTag));
 		FieldSpec selectedFieldSpec = selectedFieldChoiceItem.getSpec();
+		return selectedFieldSpec;
+	}
+
+	private FieldSpec getCurrentValueColumnSpec(FieldSpec selectedFieldSpec)
+	{
 		if(selectedFieldSpec.getType() == FieldSpec.TYPE_LANGUAGE)
 			selectedFieldSpec = new DropDownFieldSpec(localization.getLanguageNameChoices());
 
 		return selectedFieldSpec;
+	}
+	
+	private static Vector getCompareChoices()
+	{
+		Vector opChoiceVector = new Vector();
+		opChoiceVector.add(new ChoiceItem(":>", ">"));
+		opChoiceVector.add(new ChoiceItem(":>=", ">="));
+		opChoiceVector.add(new ChoiceItem(":<", "<"));
+		opChoiceVector.add(new ChoiceItem(":<=", "<="));
+		return opChoiceVector;
+	}
+
+	private static Vector getExactChoices()
+	{
+		Vector opChoiceVector = new Vector();
+		opChoiceVector.add(new ChoiceItem(":=", "="));
+		opChoiceVector.add(new ChoiceItem(":!=", "!="));
+		return opChoiceVector;
+	}
+
+	private static Vector getContainsChoices(UiLocalization localization)
+	{
+		Vector opChoiceVector = new Vector();
+		opChoiceVector.add(new ChoiceItem(":", localization.getFieldLabel("SearchOpContains")));
+		return opChoiceVector;
+	}
+	
+	public DropDownFieldSpec getCurrentOpColumnSpec(int selectedFieldType)
+	{
+		UiLocalization uiLocalization = localization;
+
+		return getCurrentOpColumnSpec(selectedFieldType, uiLocalization);
+	}
+
+	public static DropDownFieldSpec getCurrentOpColumnSpec(int selectedFieldType, UiLocalization localization)
+	{
+		Vector opChoiceVector = new Vector();
+		switch(selectedFieldType)
+		{
+			case FieldSpec.TYPE_NORMAL:
+			case FieldSpec.TYPE_MULTILINE:
+				opChoiceVector.addAll(getContainsChoices(localization));
+				opChoiceVector.addAll(getExactChoices());
+				opChoiceVector.addAll(getCompareChoices());
+				break;
+			case FieldSpec.TYPE_DATE:
+				opChoiceVector.addAll(getExactChoices());
+				opChoiceVector.addAll(getCompareChoices());
+				break;
+			case FieldSpec.TYPE_LANGUAGE:
+			case FieldSpec.TYPE_BOOLEAN:
+			case FieldSpec.TYPE_DROPDOWN:
+				opChoiceVector.addAll(getExactChoices());
+				break;
+			case FieldSpec.TYPE_ANY_FIELD:
+				opChoiceVector.addAll(getContainsChoices(localization));
+				break;
+			case FieldSpec.TYPE_DATERANGE:
+			case FieldSpec.TYPE_MESSAGE:
+			case FieldSpec.TYPE_GRID:
+			default:
+				throw new RuntimeException("Don't know ops for type: " + selectedFieldType);
+		}
+		ChoiceItem[] opChoices = (ChoiceItem[])opChoiceVector.toArray(new ChoiceItem[0]); 
+		DropDownFieldSpec opSpec = new DropDownFieldSpec();
+		opSpec.setLabel(localization.getFieldLabel("SearchGridHeaderOp"));
+		opSpec.setChoices(opChoices);
+		return opSpec;
 	}
 
 	public void tableChanged(TableModelEvent event)
@@ -66,45 +148,21 @@ public class FancySearchTableModel extends GridTableModel implements TableModelL
 		if(event.getColumn() == fieldColumn)
 		{
 			int row = event.getFirstRow();
-			FieldSpec targetSpec = getFieldSpecForCell(row, valueColumn);
-			String defaultValue = targetSpec.getDefaultValue();
-			setValueAt(defaultValue, row, valueColumn);
-			String op = CONTAINS;
-			if(onlySupportsExactMatch(targetSpec))
-				op = EXACT_MATCH;
-			setValueAt(op, row, opColumn);
+			
+			FieldSpec targetValueSpec = getFieldSpecForCell(row, valueColumn);
+			String defaultValueValue = targetValueSpec.getDefaultValue();
+			setValueAt(defaultValueValue, row, valueColumn);
+			
+			FieldSpec targetOpSpec = getFieldSpecForCell(row, opColumn);
+			String defaultOpValue = targetOpSpec.getDefaultValue();
+			setValueAt(defaultOpValue, row, opColumn);
 		}
 	}
 	
-	private static boolean onlySupportsExactMatch(FieldSpec spec)
-	{
-		int type = spec.getType();
-		if(type == FieldSpec.TYPE_BOOLEAN)
-			return true;
-		if(type == FieldSpec.TYPE_DROPDOWN)
-			return true;
-		if(type == FieldSpec.TYPE_LANGUAGE)
-			return true;
-		
-		return false;
-	}
-
-	public boolean isCellEditable(int row, int column)
-	{
-		if(column != opColumn)
-			return super.isCellEditable(row, column);
-		
-		FieldSpec targetSpec = getFieldSpecForCell(row, valueColumn);
-		return(!onlySupportsExactMatch(targetSpec));
-	}
-
 	public static int fieldColumn = 1;
 	public static int opColumn = 2;
 	public static int valueColumn = 3;
 	
-	private static final String EXACT_MATCH = ":=";
-	private static final String CONTAINS = ":";
-
 	UiLocalization localization;
 
 }

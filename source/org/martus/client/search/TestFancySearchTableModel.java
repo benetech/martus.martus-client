@@ -31,6 +31,7 @@ import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.dialogs.UiDialogLauncher;
 import org.martus.client.test.MockMartusApp;
 import org.martus.clientside.UiLocalization;
+import org.martus.common.fieldspec.DropDownFieldSpec;
 import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.fieldspec.GridFieldSpec;
 import org.martus.util.TestCaseEnhanced;
@@ -54,7 +55,7 @@ public class TestFancySearchTableModel extends TestCaseEnhanced
 		GridFieldSpec gridSpec = helper.getGridSpec(store);
 		FancySearchTableModel model = new FancySearchTableModel(gridSpec, localization);
 		model.addEmptyRow();
-		assertEquals(FieldSpec.TYPE_MORPHIC, model.getColumnType(FancySearchTableModel.valueColumn));
+		assertEquals(FieldSpec.TYPE_SEARCH_VALUE, model.getColumnType(FancySearchTableModel.valueColumn));
 		
 		model.setValueAt("eventdate.begin", 0, FancySearchTableModel.fieldColumn);
 		assertEquals(FieldSpec.TYPE_DATE, model.getCellType(0, FancySearchTableModel.valueColumn));
@@ -67,4 +68,22 @@ public class TestFancySearchTableModel extends TestCaseEnhanced
 		
 	}
 	
+	public void testGetCurrentOpColumnSpec() throws Exception
+	{
+		UiLocalization localization = new UiLocalization(null, new String[0]);
+		GridFieldSpec gridSpec = new GridFieldSpec();
+		FancySearchTableModel model = new FancySearchTableModel(gridSpec, localization);
+		DropDownFieldSpec normalSpec = model.getCurrentOpColumnSpec(FieldSpec.TYPE_NORMAL);
+		assertEquals("not all ops available for normal?", 7, normalSpec.getCount());
+		DropDownFieldSpec multilineSpec = model.getCurrentOpColumnSpec(FieldSpec.TYPE_MULTILINE);
+		assertEquals("not all ops available for multiline?", 7, multilineSpec.getCount());
+		DropDownFieldSpec booleanSpec = model.getCurrentOpColumnSpec(FieldSpec.TYPE_BOOLEAN);
+		assertEquals("more than = and != available for boolean?", 2, booleanSpec.getCount());
+		DropDownFieldSpec dropdownSpec = model.getCurrentOpColumnSpec(FieldSpec.TYPE_DROPDOWN);
+		assertEquals("more than = and != available for dropdown?", 2, dropdownSpec.getCount());
+		DropDownFieldSpec dateSpec = model.getCurrentOpColumnSpec(FieldSpec.TYPE_DATE);
+		assertEquals("contains available for date?", 6, dateSpec.getCount());
+		DropDownFieldSpec anyFieldSpec = model.getCurrentOpColumnSpec(FieldSpec.TYPE_ANY_FIELD);
+		assertEquals("not just contains available for 'any field'?", 1, anyFieldSpec.getCount());
+	}
 }
