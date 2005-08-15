@@ -44,7 +44,6 @@ import org.martus.common.bulletin.BulletinConstants;
 import org.martus.swing.UiButton;
 import org.martus.swing.UiCheckBox;
 import org.martus.swing.UiFileChooser;
-import org.martus.swing.UiLabel;
 import org.martus.swing.UiList;
 import org.martus.swing.UiScrollPane;
 import org.martus.swing.UiVBox;
@@ -84,18 +83,18 @@ public class UiExportBulletinsDlg extends JDialog implements ActionListener
 		tocMsgAreaScrollPane.setPreferredSize(new Dimension(580, 100));
 		
 		UiVBox upperStuff = new UiVBox();
-		upperStuff.addCentered(new UiLabel(" "));
+		upperStuff.addSpace();
 		upperStuff.addCentered(new UiWrappedTextArea(localization.getFieldLabel("ExportBulletinDetails")));
-		upperStuff.addCentered(new UiLabel(" "));
+		upperStuff.addSpace();
 		upperStuff.addCentered(tocMsgAreaScrollPane);
-		upperStuff.addCentered(new UiLabel(" "));
+		upperStuff.addSpace();
 		upperStuff.add(includePrivate);
-		upperStuff.addCentered(new UiLabel(" "));
+		upperStuff.addSpace();
 		
 		UiVBox vBoxAll = new UiVBox();
 		vBoxAll.add(upperStuff);
-		Component buttons[] = {ok, cancel};
-		vBoxAll.add(buttons);
+		
+		vBoxAll.add(new Component[]{ok, cancel});
 		getContentPane().add(vBoxAll);
 		
 		Utilities.centerDlg(this);

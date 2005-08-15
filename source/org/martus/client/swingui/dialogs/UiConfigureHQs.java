@@ -84,11 +84,11 @@ public class UiConfigureHQs extends JDialog
 
 		UiVBox vBox = new UiVBox();
 		vBox.addCentered(new UiWrappedTextArea(localization.getFieldLabel("HQsSetAsProxyUploader")));
-		vBox.addCentered(new UiLabel(" "));
+		vBox.addSpace();
 		vBox.addCentered(new UiWrappedTextArea(localization.getFieldLabel("HQsSetAsDefault")));
-		vBox.addCentered(new UiLabel(" "));
+		vBox.addSpace();
 		vBox.addCentered(new UiWrappedTextArea(localization.getFieldLabel("ConfigureHQsCurrentHQs")));
-		vBox.addCentered(new UiLabel(" "));
+		vBox.addSpace();
 
 		JPanel panel = new JPanel();
 		panel.setBorder(new EmptyBorder(10,10,10,10));
