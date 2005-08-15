@@ -84,7 +84,7 @@ public class UiAttachmentViewer extends UiParagraphPanel  implements DragGesture
 			viewButton.setVisible(false);
 
 		UiVBox vbox = new UiVBox();
-		vbox.addCentered(attachmentPane);
+		vbox.add(attachmentPane);
 		vbox.add(new Component[] {saveButton, viewButton});
 		add(vbox);
 
