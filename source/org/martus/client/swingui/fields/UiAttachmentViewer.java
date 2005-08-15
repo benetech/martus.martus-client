@@ -26,6 +26,7 @@ Boston, MA 02111-1307, USA.
 
 package org.martus.client.swingui.fields;
 
+import java.awt.Component;
 import java.awt.dnd.DnDConstants;
 import java.awt.dnd.DragGestureEvent;
 import java.awt.dnd.DragGestureListener;
@@ -37,7 +38,6 @@ import java.awt.dnd.DragSourceListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
-import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.ListSelectionModel;
 import org.martus.client.core.MartusApp;
@@ -53,6 +53,7 @@ import org.martus.swing.UiFileChooser;
 import org.martus.swing.UiParagraphPanel;
 import org.martus.swing.UiScrollPane;
 import org.martus.swing.UiTable;
+import org.martus.swing.UiVBox;
 import org.martus.swing.Utilities;
 
 public class UiAttachmentViewer extends UiParagraphPanel  implements DragGestureListener, DragSourceListener
@@ -68,27 +69,23 @@ public class UiAttachmentViewer extends UiParagraphPanel  implements DragGesture
 		attachmentTable.setColumnSelectionAllowed(false);
 		attachmentTable.setMaxColumnWidthToHeaderWidth(1);
 
-		Box buttonBox = Box.createHorizontalBox();
-		Box vbox = Box.createVerticalBox();
 		MartusLocalization localization = mainWindowToUse.getLocalization();
 
 		attachmentPane = new UiScrollPane(attachmentTable, UiScrollPane.VERTICAL_SCROLLBAR_NEVER, UiScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-		vbox.add(attachmentPane);
 
 		saveButton = new UiButton(localization.getButtonLabel("saveattachment"));
 		saveButton.addActionListener(new SaveHandler());
 		saveButton.setEnabled(false);
-		buttonBox.add(saveButton);
 		
 		viewButton = new UiButton(localization.getButtonLabel("viewattachment"));
 		viewButton.addActionListener(new ViewHandler());
 		viewButton.setEnabled(false);
 		if(!Utilities.isMSWindows())
 			viewButton.setVisible(false);
-		buttonBox.add(viewButton);
 
-		buttonBox.add(Box.createHorizontalGlue());
-		vbox.add(buttonBox);
+		UiVBox vbox = new UiVBox();
+		vbox.addCentered(attachmentPane);
+		vbox.add(new Component[] {saveButton, viewButton});
 		add(vbox);
 
 		updateTable();

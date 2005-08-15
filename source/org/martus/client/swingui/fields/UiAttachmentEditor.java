@@ -38,13 +38,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.util.List;
-
-import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
-
 import org.martus.client.swingui.UiFocusListener;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.tablemodels.AttachmentTableModel;
@@ -55,7 +52,7 @@ import org.martus.swing.UiFileChooser;
 import org.martus.swing.UiParagraphPanel;
 import org.martus.swing.UiScrollPane;
 import org.martus.swing.UiTable;
-import org.martus.swing.Utilities;
+import org.martus.swing.UiVBox;
 
 
 
@@ -82,21 +79,17 @@ public class UiAttachmentEditor extends UiParagraphPanel
 		attachmentTable.setColumnSelectionAllowed(false);
 		attachmentTable.setMaxColumnWidthToHeaderWidth(1);
 
-		Box hbox = Box.createHorizontalBox();
-		Box vbox = Box.createVerticalBox();
-
 		UiScrollPane scrollPane = new UiScrollPane(attachmentTable);
 		scrollPane.getHorizontalScrollBar().setFocusable(false);
 		scrollPane.getVerticalScrollBar().setFocusable(false);
-		vbox.add(scrollPane);
 
 		JButton add = new UiButton(localization.getButtonLabel("addattachment"));
-	
 		add.addFocusListener(new UiFocusListener(this));		
 		add.addActionListener(new AddHandler());
-		Component buttons[] = {add, remove, Box.createHorizontalGlue()};
-		Utilities.addComponentsRespectingOrientation(hbox, buttons);
-		vbox.add(hbox);
+
+		UiVBox vbox = new UiVBox();
+		vbox.add(scrollPane);
+		vbox.add(new Component[]{add, remove});
 		add(vbox);
 
 		attachmentTable.resizeTable(VISIBLE_ROW_COUNT);

@@ -27,7 +27,6 @@ package org.martus.client.swingui.dialogs;
 
 import java.awt.Component;
 
-import javax.swing.Box;
 import javax.swing.ButtonGroup;
 import javax.swing.ButtonModel;
 import javax.swing.JComponent;
@@ -41,8 +40,8 @@ import org.martus.swing.UiLabel;
 import org.martus.swing.UiParagraphPanel;
 import org.martus.swing.UiRadioButton;
 import org.martus.swing.UiTabbedPane;
+import org.martus.swing.UiVBox;
 import org.martus.swing.UiWrappedTextArea;
-import org.martus.swing.Utilities;
 
 
 public class UiInitialSigninDlg extends UiSigninDlg
@@ -91,14 +90,10 @@ public class UiInitialSigninDlg extends UiSigninDlg
 		radioButtonPanel.addOnNewLine(radioBackupFile);
 		radioButtonPanel.addOnNewLine(radioShare);
 		
-		Box recoverAccountPanel = Box.createVerticalBox();
-		Box hBox = Box.createHorizontalBox();
-		Utilities.addComponentsRespectingOrientation(hBox, new Component[] {new UiLabel(localization.getFieldLabel("RecoverAccount")), Box.createHorizontalGlue()});
-		recoverAccountPanel.add(new UiLabel(" "));
-		recoverAccountPanel.add(hBox);
-		Box hBox2 = Box.createHorizontalBox();
-		Utilities.addComponentsRespectingOrientation(hBox2, new Component[] {new UiLabel("          "), radioButtonPanel, Box.createHorizontalGlue()});
-		recoverAccountPanel.add(hBox2);
+		UiVBox recoverAccountPanel = new UiVBox();
+		recoverAccountPanel.addSpace();
+		recoverAccountPanel.add(new UiLabel(localization.getFieldLabel("RecoverAccount")));
+		recoverAccountPanel.add(new Component[] {new UiLabel("          "), radioButtonPanel});
 		return recoverAccountPanel;
 	}
 	public void handleOk()

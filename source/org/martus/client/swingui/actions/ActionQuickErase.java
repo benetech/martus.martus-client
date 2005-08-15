@@ -27,6 +27,7 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.swingui.actions;
 
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Vector;
@@ -43,6 +44,7 @@ import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.swing.UiButton;
 import org.martus.swing.UiLabel;
+import org.martus.swing.UiVBox;
 import org.martus.swing.UiWrappedTextArea;
 import org.martus.swing.Utilities;
 
@@ -138,8 +140,8 @@ public abstract class ActionQuickErase extends UiMenuAction
 			
 			JPanel panel = new JPanel();
 			panel.setBorder(new LineBorder(Color.RED, 20));
-			Box vBox = Box.createVerticalBox();
-			vBox.add(warningLabelPanel);
+			UiVBox vBox = new UiVBox();
+			vBox.addCentered(warningLabelPanel);
 
 			String warningMessage = localization.getFieldLabel("QuickEraseWillNotRemoveItems");
 			warningMessage += "\n\n";
@@ -167,21 +169,22 @@ public abstract class ActionQuickErase extends UiMenuAction
 					multipleAccountsText.setBackground(Color.WHITE);
 					multipleAccountsText.setForeground(Color.BLACK);
 					multipleAccountPanel.add(multipleAccountsText);
-					vBox.add(new UiLabel(" "));
-					vBox.add(multipleAccountPanel);
+					vBox.addSpace();
+					vBox.addCentered(multipleAccountPanel);
 				}
 				warningMessage += "\n* ";
 				warningMessage += localization.getFieldLabel("RemoveMartusWillDeleteMartusDirectory");
 			}
 			warningMessage += "\n* ";
 			warningMessage += localization.getFieldLabel("QuickEraseWillExitMartus");
-			vBox.add(new UiLabel(" "));
+			vBox.addSpace();
 			
 			UiWrappedTextArea text = new UiWrappedTextArea(warningMessage);
 			text.setBackground(Color.WHITE);
 			text.setForeground(Color.BLACK);
 			text.setEditable(false);
-			vBox.add(text);
+			vBox.addCentered(text);
+			vBox.addSpace();
 			
 			okButton = new UiButton(localization.getButtonLabel("ok"));
 			okButton.addActionListener(this);
@@ -190,11 +193,8 @@ public abstract class ActionQuickErase extends UiMenuAction
 			cancelButton.addActionListener(this);
 
 			Box hBox = Box.createHorizontalBox();
-			hBox.add(okButton);
-			hBox.add(Box.createHorizontalGlue());
-			hBox.add(cancelButton);
-			vBox.add(new UiLabel(" "));
-			vBox.add(hBox);
+			Utilities.addComponentsRespectingOrientation(hBox, new Component[] {okButton,Box.createHorizontalGlue(),cancelButton});
+			vBox.addCentered(hBox);
 			panel.add(vBox);
 			
 			getContentPane().add(panel);

@@ -33,7 +33,6 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
 import java.util.Vector;
-import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JDialog;
@@ -48,6 +47,7 @@ import org.martus.swing.UiFileChooser;
 import org.martus.swing.UiLabel;
 import org.martus.swing.UiList;
 import org.martus.swing.UiScrollPane;
+import org.martus.swing.UiVBox;
 import org.martus.swing.UiWrappedTextArea;
 import org.martus.swing.Utilities;
 import org.martus.util.UnicodeWriter;
@@ -75,9 +75,6 @@ public class UiExportBulletinsDlg extends JDialog implements ActionListener
 		cancel = new UiButton(localization.getButtonLabel("cancel"));
 		cancel.addActionListener(this);
 		
-		Box hBoxButtons = Box.createHorizontalBox();
-		Component buttons[] = {ok, cancel, Box.createHorizontalGlue()};
-		Utilities.addComponentsRespectingOrientation(hBoxButtons, buttons);
 		
 		String[] titles = extractTitles(mainWindow, bulletins);
 		UiList bulletinList = new UiList(titles);
@@ -86,22 +83,19 @@ public class UiExportBulletinsDlg extends JDialog implements ActionListener
 				UiScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 		tocMsgAreaScrollPane.setPreferredSize(new Dimension(580, 100));
 		
-		Box upperStuff = Box.createVerticalBox();
-		upperStuff.add(new UiLabel(" "));
-		upperStuff.add(new UiWrappedTextArea(localization.getFieldLabel("ExportBulletinDetails")));
-		upperStuff.add(new UiLabel(" "));
-		upperStuff.add(tocMsgAreaScrollPane);
-		upperStuff.add(new UiLabel(" "));
+		UiVBox upperStuff = new UiVBox();
+		upperStuff.addCentered(new UiLabel(" "));
+		upperStuff.addCentered(new UiWrappedTextArea(localization.getFieldLabel("ExportBulletinDetails")));
+		upperStuff.addCentered(new UiLabel(" "));
+		upperStuff.addCentered(tocMsgAreaScrollPane);
+		upperStuff.addCentered(new UiLabel(" "));
 		upperStuff.add(includePrivate);
-		upperStuff.add(new UiLabel(" "));
+		upperStuff.addCentered(new UiLabel(" "));
 		
-		Box upperStuffLeftAligned = Box.createHorizontalBox();
-		upperStuffLeftAligned.add(upperStuff);
-		upperStuffLeftAligned.add(Box.createHorizontalGlue());
-		
-		Box vBoxAll = Box.createVerticalBox();
-		vBoxAll.add(upperStuffLeftAligned);
-		vBoxAll.add(hBoxButtons);
+		UiVBox vBoxAll = new UiVBox();
+		vBoxAll.add(upperStuff);
+		Component buttons[] = {ok, cancel};
+		vBoxAll.add(buttons);
 		getContentPane().add(vBoxAll);
 		
 		Utilities.centerDlg(this);

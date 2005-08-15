@@ -31,20 +31,18 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Iterator;
 import java.util.Vector;
-
 import javax.swing.Box;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
-import javax.swing.JComponent;
 import javax.swing.JDialog;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
-
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.clientside.UiLocalization;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.swing.UiButton;
 import org.martus.swing.UiRadioButton;
+import org.martus.swing.UiVBox;
 import org.martus.swing.UiWrappedTextArea;
 import org.martus.swing.Utilities;
 
@@ -84,27 +82,25 @@ public class UiPrintBulletinDlg extends JDialog implements ActionListener
 		destinationGroup.add(toDisk);
 		toPrinter.setSelected(true);
 
-		Box privacyPanel = Box.createVerticalBox();
+		Box privacyPanel = new UiVBox();
 		privacyPanel.setBorder(new LineBorder(Color.BLACK));
 		privacyPanel.add(new UiWrappedTextArea(localization.getFieldLabel("PrintPrivateDataMessage")));
-		privacyPanel.add(leftAligned(publicOnly));
-		privacyPanel.add(leftAligned(publicAndPrivate));
+		privacyPanel.add(publicOnly);
+		privacyPanel.add(publicAndPrivate);
 		
-		Box destinationPanel = Box.createVerticalBox();
+		Box destinationPanel = new UiVBox();
 		destinationPanel.setBorder(new LineBorder(Color.BLACK));
 		destinationPanel.add(new UiWrappedTextArea(localization.getFieldLabel("PrintToPrinterOrDisk")));
-		destinationPanel.add(leftAligned(toPrinter));
-		destinationPanel.add(leftAligned(toDisk));
+		destinationPanel.add(toPrinter);
+		destinationPanel.add(toDisk);
 		
-		Box hBoxButtons = Box.createHorizontalBox();
-		Component[] buttons = new Component[] {Box.createHorizontalGlue(), ok, cancel, };
-		Utilities.addComponentsRespectingOrientation(hBoxButtons, buttons);
-
-		Box mainBox = Box.createVerticalBox();
+		UiVBox mainBox = new UiVBox();
 		mainBox.setBorder(new EmptyBorder(10, 10, 10, 10));
-		mainBox.add(privacyPanel);
-		mainBox.add(destinationPanel);
-		mainBox.add(hBoxButtons);
+		mainBox.addCentered(privacyPanel);
+		mainBox.addSpace();
+		mainBox.addCentered(destinationPanel);
+		mainBox.addSpace();
+		mainBox.add(new Component[] {ok, cancel});
 	
 		getContentPane().add(mainBox);
 		getRootPane().setDefaultButton(ok);
@@ -157,14 +153,6 @@ public class UiPrintBulletinDlg extends JDialog implements ActionListener
 		return isAnyAllPrivate;
 	}
 	
-	private Box leftAligned(JComponent component)
-	{
-		Box box = Box.createHorizontalBox();
-		box.add(component);
-		box.add(Box.createHorizontalGlue());
-		return box;
-	}
-
 	UiMainWindow mainWindow;	
 	UiRadioButton publicOnly;
 	UiRadioButton publicAndPrivate;

@@ -34,8 +34,6 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Vector;
-
-import javax.swing.Box;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -43,7 +41,6 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.table.TableModel;
-
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.renderers.BooleanRenderer;
 import org.martus.client.swingui.renderers.IntegerRenderer;
@@ -57,6 +54,7 @@ import org.martus.swing.UiLabel;
 import org.martus.swing.UiRadioButton;
 import org.martus.swing.UiScrollPane;
 import org.martus.swing.UiTable;
+import org.martus.swing.UiVBox;
 import org.martus.swing.UiWrappedTextArea;
 import org.martus.swing.Utilities;
 import org.martus.util.language.LanguageOptions;
@@ -81,15 +79,15 @@ public abstract class UiServerSummariesDlg extends JDialog
 
 		String topMessageText = localization.getFieldLabel(topMessageTag);
 		UiWrappedTextArea retrieveMessage = new UiWrappedTextArea(topMessageText);
-		tableBox = Box.createVerticalBox();
+		tableBox = new UiVBox();
 		table = new RetrieveJTable(model);
 		table.setDefaultRenderer(Boolean.class, new BooleanRenderer(model, disabledBackgroundColor, table.getDefaultRenderer(Boolean.class)));
 		table.setDefaultRenderer(Integer.class, new IntegerRenderer(model, disabledBackgroundColor, table.getDefaultRenderer(Integer.class)));
 		table.setDefaultRenderer(String.class, new StringRenderer(model, disabledBackgroundColor));
 
 		table.createDefaultColumnsFromModel();
-		tableBox.add(table.getTableHeader());
-		tableBox.add(new UiScrollPane(table));
+		tableBox.addCentered(table.getTableHeader());
+		tableBox.addCentered(new UiScrollPane(table));
 
 		JPanel topPanel = new JPanel();
 		topPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -311,7 +309,7 @@ public abstract class UiServerSummariesDlg extends JDialog
 		}
 	}
 
-	private Box tableBox;
+	private UiVBox tableBox;
 	UiMainWindow mainWindow;
 	boolean result;
 	RetrieveJTable table;

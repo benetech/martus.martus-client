@@ -32,7 +32,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.util.Vector;
-
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -41,7 +40,6 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.filechooser.FileFilter;
-
 import org.martus.client.core.CustomFieldError;
 import org.martus.client.core.CustomFieldTemplate;
 import org.martus.client.core.MartusApp;
@@ -55,6 +53,7 @@ import org.martus.swing.UiFileChooser;
 import org.martus.swing.UiLabel;
 import org.martus.swing.UiScrollPane;
 import org.martus.swing.UiTextArea;
+import org.martus.swing.UiVBox;
 import org.martus.swing.UiWrappedTextArea;
 import org.martus.swing.Utilities;
 
@@ -89,7 +88,7 @@ public class UiCustomFieldsDlg extends JDialog
 		JButton help = new UiButton(localization.getButtonLabel("customHelp"));
 		help.addActionListener(new CustomHelpHandler());
 
-		Box vBox = Box.createVerticalBox();
+		Box vBox = new UiVBox();
 		vBox.add(defaults);
 		vBox.add(exportTemplate);
 		vBox.add(importTemplate);

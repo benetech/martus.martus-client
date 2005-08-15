@@ -59,6 +59,7 @@ import org.martus.swing.UiFileChooser;
 import org.martus.swing.UiLabel;
 import org.martus.swing.UiScrollPane;
 import org.martus.swing.UiTable;
+import org.martus.swing.UiVBox;
 import org.martus.swing.UiWrappedTextArea;
 import org.martus.swing.Utilities;
 import org.martus.util.Base64.InvalidBase64Exception;
@@ -81,13 +82,13 @@ public class UiConfigureHQs extends JDialog
 		renameLabel = new UiButton(localization.getButtonLabel("ConfigureHQsReLabel"));
 		renameLabel.addActionListener(new RenameHandler());
 
-		Box vBox = Box.createVerticalBox();
-		vBox.add(new UiWrappedTextArea(localization.getFieldLabel("HQsSetAsProxyUploader")));
-		vBox.add(new UiLabel(" "));
-		vBox.add(new UiWrappedTextArea(localization.getFieldLabel("HQsSetAsDefault")));
-		vBox.add(new UiLabel(" "));
-		vBox.add(new UiWrappedTextArea(localization.getFieldLabel("ConfigureHQsCurrentHQs")));
-		vBox.add(new UiLabel(" "));
+		UiVBox vBox = new UiVBox();
+		vBox.addCentered(new UiWrappedTextArea(localization.getFieldLabel("HQsSetAsProxyUploader")));
+		vBox.addCentered(new UiLabel(" "));
+		vBox.addCentered(new UiWrappedTextArea(localization.getFieldLabel("HQsSetAsDefault")));
+		vBox.addCentered(new UiLabel(" "));
+		vBox.addCentered(new UiWrappedTextArea(localization.getFieldLabel("ConfigureHQsCurrentHQs")));
+		vBox.addCentered(new UiLabel(" "));
 
 		JPanel panel = new JPanel();
 		panel.setBorder(new EmptyBorder(10,10,10,10));

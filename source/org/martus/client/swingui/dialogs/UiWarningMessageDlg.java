@@ -30,17 +30,15 @@ import java.awt.Color;
 import java.awt.ComponentOrientation;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
-import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
-
 import org.martus.swing.UiButton;
 import org.martus.swing.UiScrollPane;
+import org.martus.swing.UiVBox;
 import org.martus.swing.UiWrappedTextArea;
 import org.martus.swing.Utilities;
 
@@ -69,10 +67,10 @@ public class UiWarningMessageDlg extends JDialog implements ActionListener
 		rtolPanel.add(areaRtoL);
 		areaRtoL.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
 
-		Box vbox = Box.createVerticalBox();
+		UiVBox vbox = new UiVBox();
 		
-		vbox.add(ltorPanel);
-		vbox.add(rtolPanel);
+		vbox.addCentered(ltorPanel);
+		vbox.addCentered(rtolPanel);
 		JPanel panel = new JPanel();
 		panel.setBorder(new EmptyBorder(5,5,5,5));
 		panel.add(vbox);

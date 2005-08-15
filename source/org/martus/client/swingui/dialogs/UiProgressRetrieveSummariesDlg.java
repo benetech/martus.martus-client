@@ -26,10 +26,8 @@ Boston, MA 02111-1307, USA.
 
 package org.martus.client.swingui.dialogs;
 
-import javax.swing.Box;
-
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.swing.UiLabel;
+import org.martus.swing.UiVBox;
 import org.martus.swing.Utilities;
 
 public class UiProgressRetrieveSummariesDlg extends UiProgressRetrieveDlg
@@ -37,12 +35,12 @@ public class UiProgressRetrieveSummariesDlg extends UiProgressRetrieveDlg
 	public UiProgressRetrieveSummariesDlg(UiMainWindow window, String tag)
 	{
 		super(window, tag);
-		Box vBox = Box.createVerticalBox();
-		vBox.add(new UiLabel("    "));
+		UiVBox vBox = new UiVBox();
+		vBox.addSpace();
 		vBox.add(bulletinCountMeter);
-		vBox.add(new UiLabel("    "));
+		vBox.addSpace();
 		vBox.add(cancel);
-		vBox.add(new UiLabel("    "));
+		vBox.addSpace();
 		getContentPane().add(vBox);
 		Utilities.centerDlg(this);
 	}

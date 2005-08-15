@@ -26,12 +26,12 @@ Boston, MA 02111-1307, USA.
 
 package org.martus.client.swingui.dialogs;
 
-import javax.swing.Box;
-
+import java.awt.Component;
 import org.martus.client.search.FancySearchGridEditor;
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.swing.UiButton;
+import org.martus.swing.UiVBox;
 import org.martus.swing.UiWrappedTextArea;
 
 public class UiFancySearchDlg extends UiSearchDlg
@@ -55,13 +55,10 @@ public class UiFancySearchDlg extends UiSearchDlg
 		grid = FancySearchGridEditor.create(mainWindow.getStore(), dlgLauncher);
 		grid.setText(getPreviousSearch());
 
-		Box panel = Box.createVerticalBox();
+		UiVBox panel = new UiVBox();
 		panel.add(new UiWrappedTextArea(localization.getFieldLabel("SearchBulletinRules")));
 		panel.add(grid.getComponent());
-		Box buttonBox = Box.createHorizontalBox();
-		buttonBox.add(search);
-		buttonBox.add(cancel);
-		panel.add(buttonBox);
+		panel.add(new Component[] {search, cancel});
 	
 		getContentPane().add(panel);
 		getRootPane().setDefaultButton(search);

@@ -45,6 +45,7 @@ import org.martus.clientside.UiLocalization;
 import org.martus.common.VersionBuildDate;
 import org.martus.swing.UiButton;
 import org.martus.swing.UiLabel;
+import org.martus.swing.UiVBox;
 import org.martus.swing.UiWrappedTextArea;
 import org.martus.swing.Utilities;
 
@@ -82,7 +83,7 @@ public class UiAboutDlg extends JDialog implements ActionListener
 		ok.addActionListener(this);
 		ok.addKeyListener(new MakeEnterKeyExit());
 
-		Box vBoxVersionInfo = Box.createVerticalBox();
+		Box vBoxVersionInfo = new UiVBox();
 		vBoxVersionInfo.add(new UiLabel(versionInfo));
 		vBoxVersionInfo.add(new UiLabel(mtfVersionInfo));
 		vBoxVersionInfo.add(new UiLabel(UiConstants.copyright));
@@ -104,16 +105,16 @@ public class UiAboutDlg extends JDialog implements ActionListener
 		final String credits = localization.getFieldLabel("aboutDlgCredits");
 		final String notice = "\n" + disclaimer + "\n\n" + credits + "\n\n" + APACHENOTICE;
 
-		Box vBoxDetails = Box.createVerticalBox();
-		vBoxDetails.add(new UiWrappedTextArea(notice));
-		vBoxDetails.add(hBoxOk);
+		UiVBox vBoxDetails = new UiVBox();
+		vBoxDetails.addCentered(new UiWrappedTextArea(notice));
+		vBoxDetails.addCentered(hBoxOk);
 
 		Box hBoxDetails = Box.createHorizontalBox();
 		hBoxDetails.add(vBoxDetails);
 
-		Box vBoxAboutDialog = Box.createVerticalBox();
-		vBoxAboutDialog.add(hBoxVersionAndIcon);
-		vBoxAboutDialog.add(hBoxDetails);
+		UiVBox vBoxAboutDialog = new UiVBox();
+		vBoxAboutDialog.addCentered(hBoxVersionAndIcon);
+		vBoxAboutDialog.addCentered(hBoxDetails);
 		getContentPane().add(vBoxAboutDialog);
 
 		Utilities.centerDlg(this);
