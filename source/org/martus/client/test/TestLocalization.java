@@ -415,6 +415,14 @@ public class TestLocalization extends TestCaseEnhanced
 		assertFalse("Current translation should be trusted", myLocalization2.isCurrentTranslationOfficial());
 	}
 	
+	public void testDoesTranslationMatchProgramVersion() throws Exception
+	{
+		MartusLocalization myLocalization = new MartusLocalization(translationDirectory, UiMainWindow.getAllEnglishStrings());
+		myLocalization.setCurrentLanguageCode(MartusLocalization.ENGLISH);
+		assertTrue(myLocalization.doesTranslationMatchProgramVersion(UiConstants.versionLabel));
+		assertTrue(myLocalization.doesTranslationMatchProgramVersion(UiConstants.versionLabel + "Testing 1.2"));
+	}
+	
 
 	private boolean doesLanguageExist(MartusLocalization dbToUse, String languageCode)
 	{
