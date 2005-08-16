@@ -419,8 +419,27 @@ public class TestLocalization extends TestCaseEnhanced
 	{
 		MartusLocalization myLocalization = new MartusLocalization(translationDirectory, UiMainWindow.getAllEnglishStrings());
 		myLocalization.setCurrentLanguageCode(MartusLocalization.ENGLISH);
-		assertTrue(myLocalization.doesTranslationMatchProgramVersion(UiConstants.versionLabel));
-		assertTrue(myLocalization.doesTranslationMatchProgramVersion(UiConstants.versionLabel + "Testing 1.2"));
+		String rawTranslationVersion = myLocalization.getTranslationRawVersion(myLocalization.getCurrentLanguageCode());
+		String rawProgramVersion = UiConstants.versionLabel;
+		
+		String translationVersion = myLocalization.extractVersion(rawTranslationVersion);
+		String programVersion = myLocalization.extractVersion(rawProgramVersion);
+		assertEquals(programVersion, translationVersion);
+		
+		rawTranslationVersion = myLocalization.getTranslationRawVersion("XY");
+		translationVersion = myLocalization.extractVersion(rawTranslationVersion);
+		assertEquals(programVersion, translationVersion);
+
+		File translationDirectory = createTempDirectory();
+		translationDirectory.deleteOnExit();
+		MartusLocalization myLocalization2 = new MartusLocalization(translationDirectory, UiMainWindow.getAllEnglishStrings());
+		myLocalization2.setCurrentLanguageCode(MartusLocalization.ENGLISH);
+		assertTrue(myLocalization2.doesTranslationVersionMatchProgramVersion(MartusLocalization.ENGLISH, UiConstants.versionLabel));
+		myLocalization2.setCurrentLanguageCode("XY");
+		assertTrue(myLocalization2.doesTranslationVersionMatchProgramVersion("XY", UiConstants.versionLabel));
+		myLocalization2.addTranslation("XY", "field:translationVersion=Version 0.0");
+		assertFalse(myLocalization2.doesTranslationVersionMatchProgramVersion("XY", UiConstants.versionLabel));
+		DirectoryUtils.deleteEntireDirectoryTree(translationDirectory);
 	}
 	
 
