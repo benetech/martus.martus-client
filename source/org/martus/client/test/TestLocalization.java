@@ -419,15 +419,13 @@ public class TestLocalization extends TestCaseEnhanced
 	{
 		MartusLocalization myLocalization = new MartusLocalization(translationDirectory, UiMainWindow.getAllEnglishStrings());
 		myLocalization.setCurrentLanguageCode(MartusLocalization.ENGLISH);
-		String rawTranslationVersion = myLocalization.getTranslationRawVersion(myLocalization.getCurrentLanguageCode());
+		String translationVersion = myLocalization.getTranslationVersion(myLocalization.getCurrentLanguageCode());
 		String rawProgramVersion = UiConstants.versionLabel;
 		
-		String translationVersion = myLocalization.extractVersion(rawTranslationVersion);
 		String programVersion = myLocalization.extractVersion(rawProgramVersion);
 		assertEquals(programVersion, translationVersion);
 		
-		rawTranslationVersion = myLocalization.getTranslationRawVersion("XY");
-		translationVersion = myLocalization.extractVersion(rawTranslationVersion);
+		translationVersion = myLocalization.getTranslationVersion("XY");
 		assertEquals(programVersion, translationVersion);
 
 		File translationDirectory = createTempDirectory();

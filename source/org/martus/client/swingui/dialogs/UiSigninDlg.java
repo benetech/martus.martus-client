@@ -31,6 +31,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 
 import org.martus.client.core.LanguageChangeListener;
+import org.martus.client.swingui.UiConstants;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.fields.UiChoiceEditor;
 import org.martus.clientside.CurrentUiState;
@@ -60,6 +61,7 @@ public class UiSigninDlg extends UiBasicSigninDlg implements LanguageChangeListe
 	public void languageChanged(String languageCode)
 	{
 		displayWarningOfUnofficialTranslationIfNecessary(languageCode);
+		displayWarningOfIncompatibleMtfVersionIfNecessary(languageCode);
 		changeLanguagesAndRestartSignin(languageCode);
 		dispose();
 	}
@@ -77,9 +79,13 @@ public class UiSigninDlg extends UiBasicSigninDlg implements LanguageChangeListe
 		if(localization.isOfficialTranslation(languageCodeChangingTo))
 			return;
 		UiMainWindow.displayDefaultUnofficialTranslationMessage(owner);
-
 	}
-
+	
+	void displayWarningOfIncompatibleMtfVersionIfNecessary(String languageCodeChangingTo)
+	{
+	if(!localization.doesTranslationVersionMatchProgramVersion(languageCodeChangingTo, UiConstants.versionLabel))
+		UiMainWindow.displayIncompatibleMtfVersionWarningMessage(owner, localization, localization.getTranslationVersion(languageCodeChangingTo), languageCodeChangingTo);
+	}
 
 	UiChoiceEditor languageDropdown;
 }

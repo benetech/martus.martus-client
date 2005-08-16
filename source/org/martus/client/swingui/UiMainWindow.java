@@ -53,6 +53,7 @@ import java.util.Map;
 import java.util.Stack;
 import java.util.TimerTask;
 import java.util.Vector;
+
 import javax.swing.AbstractAction;
 import javax.swing.ImageIcon;
 import javax.swing.JComponent;
@@ -61,6 +62,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JSplitPane;
 import javax.swing.SwingUtilities;
+
 import org.martus.client.bulletinstore.BulletinFolder;
 import org.martus.client.bulletinstore.ClientBulletinStore;
 import org.martus.client.core.BackgroundUploader;
@@ -238,6 +240,23 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		
 	}
 	
+	public static void displayIncompatibleMtfVersionWarningMessage(JFrame owner, MtfAwareLocalization localization, String mtfVersionNumber, String newLanguageCode)
+	{
+		updateIcon(owner);
+		String langCode = localization.getCurrentLanguageCode();
+		String title = localization.getLabel(langCode, "wintitle", "IncompatibleMtfVersion");
+		String warningMessage = localization.getLabel(langCode, "field", "IncompatibleMtfVersion");
+		String mtfVersion = localization.getLabel(langCode, "field", "IncompatibleMtfVersionTranslation");
+		String programVersion = localization.getLabel(langCode, "field", "IncompatibleMtfVersionProgram");
+		String buttonMessage = localization.getLabel(langCode, "button", "ok");
+		Toolkit.getDefaultToolkit().beep();
+		HashMap map = new HashMap();
+		map.put("#MtfVersionNumber#", mtfVersionNumber);
+		map.put("#ProgramVersionNumber#", localization.extractVersion(UiConstants.versionLabel));
+		map.put("#MtfLanguage#", localization.getLanguageName(newLanguageCode));
+		new UiNotifyDlg(owner, title, new String[]{warningMessage, "", mtfVersion, programVersion}, new String[]{buttonMessage}, map);
+	}
+
 	private static String getWarningMessageAboutUnofficialTranslations(String originalMessage)
 	{
 		String token = "#UseUnofficialTranslationFiles#";
@@ -289,6 +308,9 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		{
 			if(!localization.isCurrentTranslationOfficial())
 				displayDefaultUnofficialTranslationMessage(currentActiveFrame);
+			String currentLanguageCode = localization.getCurrentLanguageCode();
+			if(!localization.doesTranslationVersionMatchProgramVersion(currentLanguageCode, UiConstants.versionLabel))
+				UiMainWindow.displayIncompatibleMtfVersionWarningMessage(currentActiveFrame, localization, localization.getTranslationVersion(currentLanguageCode), currentLanguageCode);
 			
 			preventTwoInstances();
 			notifyClientCompliance();
