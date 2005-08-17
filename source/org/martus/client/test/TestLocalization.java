@@ -29,6 +29,7 @@ package org.martus.client.test;
 import java.awt.ComponentOrientation;
 import java.io.File;
 import java.io.IOException;
+import java.util.Date;
 import java.util.Vector;
 
 import javax.swing.SwingConstants;
@@ -152,6 +153,7 @@ public class TestLocalization extends TestCaseEnhanced
 		assertEquals("Components for English should be Left To Right", UiLanguageDirection.getComponentOrientation(), ComponentOrientation.LEFT_TO_RIGHT);
 		assertEquals("Horizontal Alignment for English should be Left", UiLanguageDirection.getHorizontalAlignment(), SwingConstants.LEFT);
 		assertFalse("English should not require Text Padding", LanguageOptions.needsLanguagePadding());
+		assertFalse("We should not be using a Language Pack with English", directionalLanguages.isTranslationInsideMLP());
 
 		File spanish = new File(tmpDir, "Martus-es.mtf");
 		spanish.deleteOnExit();
@@ -364,18 +366,22 @@ public class TestLocalization extends TestCaseEnhanced
 		assertEquals("Incorrect translation OK from within language pack", "OK", myLocalization.getButtonLabel("ok"));
 		assertEquals("Incorrect translation No from within language pack", "No", myLocalization.getButtonLabel("no"));
 		assertTrue("A signed MLP file should be trusted", myLocalization.isOfficialTranslation(someTestLanguageCode));
+		assertTrue("We should be using a Language Pack", myLocalization.isTranslationInsideMLP());
 
 		File translationDirectory2 = createTempDirectory();
 		MartusLocalization myLocalization2 = new MartusLocalization(translationDirectory2, UiMainWindow.getAllEnglishStrings());
 		myLocalization2.includeOfficialLanguagesOnly = false;
-		File someTestLanguage2 = new File(translationDirectory2,UiLocalization.getMlpkFilename(someTestLanguageCode));
-		someTestLanguage2.deleteOnExit();
-		copyResourceFileToLocalFile(someTestLanguage2, "Martus-xx-notSigned.mlp");
+		File mlpTestLanguage = new File(translationDirectory2,UiLocalization.getMlpkFilename(someTestLanguageCode));
+		mlpTestLanguage.deleteOnExit();
+		copyResourceFileToLocalFile(mlpTestLanguage, "Martus-xx-notSigned.mlp");
 		foundSomeTestLanguage = doesLanguageExist(myLocalization2, someTestLanguageCode);
 		assertTrue("should still have testLanguage even if its not signed.", foundSomeTestLanguage);
 		myLocalization2.setCurrentLanguageCode(someTestLanguageCode);
 		assertEquals("Incorrect translation OK from within unsigned language pack", "OK", myLocalization2.getButtonLabel("ok"));
 		assertEquals("Incorrect translation No from within unsigned language pack", "No", myLocalization2.getButtonLabel("no"));
+		assertTrue("We should be still be using a Language Pack", myLocalization2.isTranslationInsideMLP());
+		assertEquals("Date of MLP not the same?", new Date(mlpTestLanguage.lastModified()), myLocalization2.getMlpDate());	
+		
 		assertFalse("A unsigned MLPK file should not be trusted", myLocalization2.isOfficialTranslation(someTestLanguageCode));
 		assertFalse("Current translation should not be trusted", myLocalization2.isCurrentTranslationOfficial());
 		
@@ -413,6 +419,8 @@ public class TestLocalization extends TestCaseEnhanced
 		assertFalse("A non existant translation should not be trusted.",myLocalization2.isOfficialTranslation("dx"));
 		myLocalization2.setCurrentLanguageCode(someTestLanguageCode);
 		assertFalse("Current translation should be trusted", myLocalization2.isCurrentTranslationOfficial());
+		assertFalse("We should not be using a Language Pack", myLocalization2.isTranslationInsideMLP());
+
 	}
 	
 	public void testDoesTranslationMatchProgramVersion() throws Exception

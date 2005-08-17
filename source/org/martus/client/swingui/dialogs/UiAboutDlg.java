@@ -43,6 +43,7 @@ import org.martus.client.swingui.UiConstants;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.clientside.UiLocalization;
 import org.martus.common.VersionBuildDate;
+import org.martus.common.utilities.MartusFlexidate;
 import org.martus.swing.UiButton;
 import org.martus.swing.UiLabel;
 import org.martus.swing.UiVBox;
@@ -67,28 +68,42 @@ public class UiAboutDlg extends JDialog implements ActionListener
 
 		JLabel icon = new JLabel(new ImageIcon(UiAboutDlg.class.getResource("MartusLogo.gif")),JLabel.LEFT);
 
-		String versionInfo = UiConstants.programName;
-		versionInfo += " " + localization.getFieldLabel("aboutDlgVersionInfo");
-		versionInfo += " " + UiConstants.versionLabel;
+		StringBuffer versionInfo = new StringBuffer(UiConstants.programName);
+		versionInfo.append(" ");
+		versionInfo.append(localization.getFieldLabel("aboutDlgVersionInfo"));
+		versionInfo.append(" ");
+		versionInfo.append(UiConstants.versionLabel);
 		
-		String mtfVersionInfo = localization.getFieldLabel("aboutDlgTranslationVersionInfo");
-		mtfVersionInfo += " " + localization.getFieldLabel("translationVersion");
+		StringBuffer mlpDateInfo = new StringBuffer();
+		if(localization.isTranslationInsideMLP())
+		{
+			mlpDateInfo.append(localization.getFieldLabel("aboutDlgMlpDateInfo"));
+			mlpDateInfo.append(" ");
+			mlpDateInfo.append(localization.convertStoredDateToDisplayReverseIfNecessary(MartusFlexidate.toStoredDateFormat(localization.getMlpDate())));
+		}
+		
+		StringBuffer mtfVersionInfo = new StringBuffer(localization.getFieldLabel("aboutDlgTranslationVersionInfo"));
+		mtfVersionInfo.append(" ");
+		mtfVersionInfo.append(localization.getFieldLabel("translationVersion"));
 		if(!localization.isCurrentTranslationOfficial())
-			mtfVersionInfo +="X";
+			mtfVersionInfo.append("X");
 
-		String buildDate = localization.getFieldLabel("aboutDlgBuildDate");
-		buildDate += " " + VersionBuildDate.getVersionBuildDate();
+		StringBuffer buildDate = new StringBuffer(localization.getFieldLabel("aboutDlgBuildDate"));
+		buildDate.append(" ");
+		buildDate.append(VersionBuildDate.getVersionBuildDate());
 
 		JButton ok = new UiButton(localization.getButtonLabel("ok"));
 		ok.addActionListener(this);
 		ok.addKeyListener(new MakeEnterKeyExit());
 
 		Box vBoxVersionInfo = new UiVBox();
-		vBoxVersionInfo.add(new UiLabel(versionInfo));
-		vBoxVersionInfo.add(new UiLabel(mtfVersionInfo));
+		vBoxVersionInfo.add(new UiLabel(versionInfo.toString()));
+		if(mlpDateInfo.length() > 0)
+			vBoxVersionInfo.add(new UiLabel(mlpDateInfo.toString()));
+		vBoxVersionInfo.add(new UiLabel(mtfVersionInfo.toString()));
 		vBoxVersionInfo.add(new UiLabel(UiConstants.copyright));
 		vBoxVersionInfo.add(new UiLabel(UiConstants.website));
-		vBoxVersionInfo.add(new UiLabel(buildDate));
+		vBoxVersionInfo.add(new UiLabel(buildDate.toString()));
 
 		Box hBoxVersionAndIcon = Box.createHorizontalBox();
 		hBoxVersionAndIcon.add(Box.createHorizontalGlue());
