@@ -34,7 +34,6 @@ import javax.swing.JCheckBox;
 import javax.swing.JDialog;
 
 import org.martus.client.swingui.MartusLocalization;
-import org.martus.client.swingui.UiConstants;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.fields.UiChoiceEditor;
 import org.martus.clientside.UiLocalization;
@@ -97,10 +96,8 @@ public class UiPreferencesDlg extends JDialog implements ActionListener
 		{
 			MartusLocalization localization = owner.getLocalization();
 			String languageCodeSelected = languageDropdown.getText();
-			if(!localization.isOfficialTranslation(languageCodeSelected))
-				UiMainWindow.displayDefaultUnofficialTranslationMessage(owner.getCurrentActiveFrame());
-			if(!localization.doesTranslationVersionMatchProgramVersion(languageCodeSelected, UiConstants.versionLabel))
-				UiMainWindow.displayIncompatibleMtfVersionWarningMessage(owner.getCurrentActiveFrame(), localization, localization.getTranslationVersion(languageCodeSelected), languageCodeSelected);
+			UiMainWindow.displayDefaultUnofficialTranslationMessageIfNecessary(owner.getCurrentActiveFrame(), localization, languageCodeSelected);
+			UiMainWindow.displayIncompatibleMtfVersionWarningMessageIfNecessary(owner.getCurrentActiveFrame(), localization, languageCodeSelected);
 			localization.setCurrentDateFormatCode(dateFormatDropdown.getText());
 			localization.setCurrentLanguageCode(languageDropdown.getText());
 			owner.setBulletinsAlwaysPrivate(allPrivate.isSelected());

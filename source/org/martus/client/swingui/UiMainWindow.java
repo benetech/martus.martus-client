@@ -210,8 +210,11 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		return new File(app.getMartusDataRootDirectory(), "UiState.dat");
 	}
 	
-	static public void displayDefaultUnofficialTranslationMessage(JFrame owner)
+	static public void displayDefaultUnofficialTranslationMessageIfNecessary(JFrame owner, MtfAwareLocalization localization, String languageCodeToTest)
 	{
+		if(localization.isOfficialTranslation(languageCodeToTest))
+			return;
+		
 		URL untranslatedURL = UiMainWindow.class.getResource("UnofficialTranslationMessage.txt");
 		URL untranslatedRtoLURL = UiMainWindow.class.getResource("UnofficialTranslationMessageRtoL.txt");
 		
@@ -240,8 +243,10 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		
 	}
 	
-	public static void displayIncompatibleMtfVersionWarningMessage(JFrame owner, MtfAwareLocalization localization, String mtfVersionNumber, String newLanguageCode)
+	public static void displayIncompatibleMtfVersionWarningMessageIfNecessary(JFrame owner, MtfAwareLocalization localization, String languageCodeToTest)
 	{
+		if(localization.doesTranslationVersionMatchProgramVersion(languageCodeToTest, UiConstants.versionLabel))
+			return;
 		updateIcon(owner);
 		String langCode = localization.getCurrentLanguageCode();
 		String title = localization.getLabel(langCode, "wintitle", "IncompatibleMtfVersion");
@@ -251,9 +256,10 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		String buttonMessage = localization.getLabel(langCode, "button", "ok");
 		Toolkit.getDefaultToolkit().beep();
 		HashMap map = new HashMap();
+		String mtfVersionNumber = localization.getTranslationVersion(languageCodeToTest);		
 		map.put("#MtfVersionNumber#", mtfVersionNumber);
 		map.put("#ProgramVersionNumber#", localization.extractVersion(UiConstants.versionLabel));
-		map.put("#MtfLanguage#", localization.getLanguageName(newLanguageCode));
+		map.put("#MtfLanguage#", localization.getLanguageName(languageCodeToTest));
 		new UiNotifyDlg(owner, title, new String[]{warningMessage, "", mtfVersion, programVersion}, new String[]{buttonMessage}, map);
 	}
 
@@ -306,11 +312,9 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		JFrame hiddenFrame = new HiddenFrame(getLocalization(), UiConstants.programName);
 		setCurrentActiveFrame(hiddenFrame);
 		{
-			if(!localization.isCurrentTranslationOfficial())
-				displayDefaultUnofficialTranslationMessage(currentActiveFrame);
 			String currentLanguageCode = localization.getCurrentLanguageCode();
-			if(!localization.doesTranslationVersionMatchProgramVersion(currentLanguageCode, UiConstants.versionLabel))
-				UiMainWindow.displayIncompatibleMtfVersionWarningMessage(currentActiveFrame, localization, localization.getTranslationVersion(currentLanguageCode), currentLanguageCode);
+			displayDefaultUnofficialTranslationMessageIfNecessary(currentActiveFrame, localization, currentLanguageCode);
+			displayIncompatibleMtfVersionWarningMessageIfNecessary(currentActiveFrame, localization, localization.getCurrentLanguageCode());
 			
 			preventTwoInstances();
 			notifyClientCompliance();
