@@ -1632,6 +1632,10 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		assertEquals("Details", localization.getFieldLabel("publicinfo"));
 		assertEquals("Private", localization.getFieldLabel("privateinfo"));
 		assertEquals("Language", localization.getFieldLabel("language"));
+
+		assertEquals("Keep ALL Information Private", localization.getFieldLabel(MartusLocalization.ENGLISH, "allprivate"));
+		assertEquals("<Keep ALL Information Private>", localization.getFieldLabel("UNKNOWN_LANGUAGE_CODE", "allprivate"));
+		
 		TRACE_END();
 	}
 

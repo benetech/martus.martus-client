@@ -441,10 +441,10 @@ public class TestLocalization extends TestCaseEnhanced
 		MartusLocalization myLocalization2 = new MartusLocalization(translationDirectory, UiMainWindow.getAllEnglishStrings());
 		myLocalization2.setCurrentLanguageCode(MartusLocalization.ENGLISH);
 		assertTrue(myLocalization2.doesTranslationVersionMatchProgramVersion(MartusLocalization.ENGLISH, UiConstants.versionLabel));
-		myLocalization2.setCurrentLanguageCode("XY");
 		assertTrue(myLocalization2.doesTranslationVersionMatchProgramVersion("XY", UiConstants.versionLabel));
 		myLocalization2.addTranslation("XY", "field:translationVersion=Version 0.0");
 		assertFalse(myLocalization2.doesTranslationVersionMatchProgramVersion("XY", UiConstants.versionLabel));
+		assertTrue(myLocalization2.doesTranslationVersionMatchProgramVersion(MartusLocalization.ENGLISH, UiConstants.versionLabel));
 		DirectoryUtils.deleteEntireDirectoryTree(translationDirectory);
 	}
 	
