@@ -48,6 +48,7 @@ public class UiBoolEditor extends UiField implements ChangeListener
 		widget.setForeground(tmp.getForeground());
 		widget.setBorderPainted(true);
 		widget.setBorder(new LineBorder(Color.BLACK, 1));
+		widget.setHorizontalAlignment(JCheckBox.CENTER);
 	}
 	
 	public void setListener(ChangeListener listener)
