@@ -689,7 +689,7 @@ public class EnglishStrings
 
 "field:IncompatibleMtfVersion=The version of this translation is not compatible with this version of Martus.  It is recommend that you do not continue to use this translation version and go to (http://www.martus.org/downloads) for the appropriate version.",
 "field:IncompatibleMtfVersionTranslation=#MtfLanguage# Translation Version: #MtfVersionNumber#",
-"field:IncompatibleMtfVersionProgram=Martus Version: #ProgramVersionNumber#",
+"field:IncompatibleMtfVersionProgram=Martus Software Version: #ProgramVersionNumber#",
 
 "field:messageServerNewscause=The current server has sent this message:",
 "field:messageErrorDateInFuturecause=This date occurs in the future:",
