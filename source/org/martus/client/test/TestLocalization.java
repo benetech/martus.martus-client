@@ -448,6 +448,18 @@ public class TestLocalization extends TestCaseEnhanced
 		DirectoryUtils.deleteEntireDirectoryTree(translationDirectory);
 	}
 	
+	public void testExtractVersion()
+	{
+		MartusLocalization myLocalization = new MartusLocalization(translationDirectory, UiMainWindow.getAllEnglishStrings());
+		String englishVersion = "2.8.1";
+		String englishEntireVersion = "Version: " + englishVersion + "Internal";
+		String extractedVersion = myLocalization.extractVersion(englishEntireVersion);
+		assertEquals(englishVersion, extractedVersion);
+		
+		char[] thaiVersion = {0x0E52, '.', 0x0E58, '.', 0x0E51};
+		extractedVersion = myLocalization.extractVersion(new String(thaiVersion));
+		assertEquals(englishVersion, extractedVersion);
+	}
 
 	private boolean doesLanguageExist(MartusLocalization dbToUse, String languageCode)
 	{
