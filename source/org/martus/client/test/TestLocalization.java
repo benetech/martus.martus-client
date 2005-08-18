@@ -456,8 +456,12 @@ public class TestLocalization extends TestCaseEnhanced
 		String extractedVersion = myLocalization.extractVersion(englishEntireVersion);
 		assertEquals(englishVersion, extractedVersion);
 		
-		char[] thaiVersion = {0x0E52, '.', 0x0E58, '.', 0x0E51};
+		char[] thaiVersion = {0x0E40, 0x0E40, 0x0E52, '.', 0x0E58, '.', 0x0E51,  0x0E41, 0x0E41};
 		extractedVersion = myLocalization.extractVersion(new String(thaiVersion));
+		assertEquals(englishVersion, extractedVersion);
+
+		char[] khmerVersion = {0x17CD, 0x17CD, 0x17E2, '.', 0x17E8, '.', 0x17E1, 0X17CE, 0X17CE};
+		extractedVersion = myLocalization.extractVersion(new String(khmerVersion));
 		assertEquals(englishVersion, extractedVersion);
 	}
 
