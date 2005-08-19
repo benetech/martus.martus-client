@@ -118,11 +118,6 @@ public class BulletinFolder
 		return isNameVisible(getName());
 	}
 
-	public boolean isLocalized()
-	{
-		return isNameLocalized(getName());
-	}
-
 	public synchronized void add(Bulletin b) throws BulletinAlreadyExistsException, IOException
 	{
 		add(b.getUniversalId());
