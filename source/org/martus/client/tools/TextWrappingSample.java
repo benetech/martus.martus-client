@@ -26,27 +26,63 @@ Boston, MA 02111-1307, USA.
 
 package org.martus.client.tools;
 
-import javax.swing.JDialog;
-import javax.swing.JLabel;
+import java.awt.BorderLayout;
 
-public class TextWrappingSample
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+
+public class TextWrappingSample extends JFrame
 {
+    /** Creates new form TestWrappingTest */
+  public TextWrappingSample() 
+  {
+      String message =
+          " When in the Course of human events, it becomes necessary " +
+          "for one people to dissolve the political bands which have " +
+          "connected them with another, and to assume among the powers " +
+          "of the earth, the separate and equal station to which the " +
+          "Laws of Nature and of Nature's God entitle them, a decent " +
+          "respect to the opinions of mankind requires that they should " +
+          "declare the causes which impel them to the separation.";
 
-	public static void main(String[] args)
+	  UiWrappedTextPanel textComponent = new UiWrappedTextPanel(message);
+
+	  boolean doWhatWorks = false;
+	  
+	  if(doWhatWorks)
+	  {
+	      getContentPane().add(textComponent, BorderLayout.CENTER);
+	  }
+	  else
+	  {
+		  JPanel between = new JPanel();
+		  between.add(textComponent);
+	      getContentPane().add(between, BorderLayout.CENTER);
+	  }
+	  pack();
+  }
+  
+  public static void main(String args[]) {
+      java.awt.EventQueue.invokeLater(new Runnable() {
+          public void run() {
+              new TextWrappingSample().setVisible(true);
+          }
+      });
+  }
+}
+
+class UiWrappedTextPanel extends JScrollPane
+{
+	UiWrappedTextPanel(String text)
 	{
-		String text = "This is some text that has a very long paragraph. " +
-				"I mean it goes on forever and ever. " +
-				"If it doesn't get wrapped and/or isn't scrollable, " +
-				"it will be very difficult for users to use it. ";
-		
-		JLabel label = new JLabel("<html>" + text + "</html>");
-		
-		JDialog sample = new JDialog();
-		sample.setTitle("Text Wrapping Sample");
-		sample.getContentPane().add(label);
-		sample.pack();
-		sample.setModal(true);
-		sample.setVisible(true);
-	}
+		JTextArea textArea = new JTextArea(text);
+		textArea.setLineWrap(true);
+		textArea.setWrapStyleWord(true);
+		textArea.setEditable(false);
 
+		setViewportView(textArea);
+		
+	}
 }
