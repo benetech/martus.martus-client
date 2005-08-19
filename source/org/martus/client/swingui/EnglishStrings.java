@@ -253,7 +253,7 @@ public class EnglishStrings
 "wintitle:ConfigureHQs=Headquarters Editor",
 "wintitle:ExportCustomizationTemplateSaveAs=Export Customization Template",
 "wintitle:ImportCustomizationTemplateOpen=Import Customization Template",
-
+"wintitle:SetFolderOrder=Folder Order",
 
 
 "wintitle:warningdeletefolder=Confirm Delete Folder",
@@ -329,6 +329,8 @@ public class EnglishStrings
 "button:ViewPreviousBulletinVersion=View Selected Version...",
 "button:RetrieveAllVersions=Retrieve all bulletin versions",
 "button:RetrieveLatestBulletinRevisionOnly=Retrieve latest bulletin version only",
+"button:FolderOrderUp=Up",
+"button:FolderOrderDown=Down",
 
 "menu:file=File",
 "menu:CreateNewBulletin=Create New Bulletin",
@@ -779,6 +781,7 @@ public class EnglishStrings
 "field:AttachmentSizeUnknown=Unknown",
 "field:ConfigureHQsCurrentHQs=Current Headquarters",
 "field:ColumnGridRowNumber=Row #",
+"field:SetFolderOrder=To change a folder's position, select the folder name and use the #MoveFolderUp# / #MoveFolderDown# buttons.",
 
 "field:WasSentYes=Yes",
 "field:WasSentNo=No",
