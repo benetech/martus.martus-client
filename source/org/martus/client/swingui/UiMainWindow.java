@@ -1129,7 +1129,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		}
 		try
 		{
-			folders.reOrderFolders(reOrderedFolders);
+			folders.setFolderOrder(reOrderedFolders);
 		}
 		catch(Exception e)
 		{

@@ -110,9 +110,9 @@ public class UiFolderTreePane extends UiScrollPane
 		return store.getAllFolders();
 	}
 	
-	public void reOrderFolders(Vector reOrderedFolders) throws Exception
+	public void setFolderOrder(Vector foldersInOrder) throws Exception
 	{
-		store.reOrderFolders(reOrderedFolders);
+		store.setFolderOrder(foldersInOrder);
 		model.loadFolders(store);
 		model.reload();
 	}

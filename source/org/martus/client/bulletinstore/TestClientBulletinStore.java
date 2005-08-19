@@ -667,8 +667,8 @@ public class TestClientBulletinStore extends TestCaseEnhanced
 		newOrder.add(myStore.getFolderSealedOutbox());
 		newOrder.add(myStore.getFolderDiscarded());
 
-		myStore.reOrderFolders(newOrder);
-		Vector namesReordered = myStore.getAllFolderNames();
+		myStore.setFolderOrder(newOrder);
+		Vector namesReordered = myStore.getAllFolders();
 		for(int i = 0; i < myStore.getFolderCount(); ++i )
 		{
 			assertEquals(newOrder.get(i), namesReordered.get(i));
@@ -677,7 +677,7 @@ public class TestClientBulletinStore extends TestCaseEnhanced
 		newOrder.remove(3);
 		try
 		{
-			myStore.reOrderFolders(newOrder);
+			myStore.setFolderOrder(newOrder);
 			fail("Should have thrown since folder list was missing an entry");
 		}
 		catch(Exception expected)

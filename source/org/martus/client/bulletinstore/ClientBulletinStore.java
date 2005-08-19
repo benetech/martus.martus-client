@@ -514,12 +514,12 @@ public class ClientBulletinStore extends BulletinStore
 		return names;
 	}
 	
-	public synchronized void reOrderFolders(Vector reOrderedFolders) throws Exception
+	public synchronized void setFolderOrder(Vector foldersInOrder) throws Exception
 	{
-		if(getFolderCount() != reOrderedFolders.size())
+		if(getFolderCount() != foldersInOrder.size())
 			throw new Exception("Incorrect number of folders");
 		folders.clear();
-		folders.addAll(reOrderedFolders);
+		folders.addAll(foldersInOrder);
 		saveFolders();
 	}
 
@@ -675,6 +675,8 @@ public class ClientBulletinStore extends BulletinStore
 	public BulletinFolder createSystemFolder(String name)
 	{
 		BulletinFolder folder = rawCreateFolder(name);
+		if(folder == null)
+			folder = findFolder(name);
 		folder.preventRename();
 		folder.preventDelete();
 		return folder;
@@ -1168,7 +1170,6 @@ public class ClientBulletinStore extends BulletinStore
 	{
 		folders.clear();
 		loadedLegacyFolders = false;
-		createSystemFolders();
 		XmlFolderListLoader loader = new XmlFolderListLoader(this);
 		try
 		{
@@ -1178,6 +1179,10 @@ public class ClientBulletinStore extends BulletinStore
 		{
 			// TODO Improve error handling!!!
 			e.printStackTrace();
+		}
+		finally
+		{
+			createSystemFolders();
 		}
 	}
 	
