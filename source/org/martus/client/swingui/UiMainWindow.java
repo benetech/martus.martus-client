@@ -1121,7 +1121,20 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	
 	public void doOrganizeFolders()
 	{
-		//TODO: Implement this
+		Vector originalOrderFolders = folders.getAllFolders();
+		Vector reOrderedFolders = new Vector();
+		for(int i = originalOrderFolders.size()-1; i >=0; --i)
+		{
+			reOrderedFolders.add(originalOrderFolders.get(i));
+		}
+		try
+		{
+			folders.reOrderFolders(reOrderedFolders);
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
 	}
 	
 	public void doSearch()

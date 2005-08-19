@@ -29,6 +29,7 @@ package org.martus.client.swingui.foldertree;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.Vector;
 import javax.swing.AbstractAction;
 import javax.swing.JMenuItem;
 import javax.swing.JViewport;
@@ -103,7 +104,18 @@ public class UiFolderTreePane extends UiScrollPane
 		ActionRename rename = new ActionRename(node);
 		rename.actionPerformed(null);
 	}
-
+	
+	public Vector getAllFolders()
+	{
+		return store.getAllFolders();
+	}
+	
+	public void reOrderFolders(Vector reOrderedFolders) throws Exception
+	{
+		store.reOrderFolders(reOrderedFolders);
+		model.loadFolders(store);
+		model.reload();
+	}
 
 	public void deleteCurrentFolderIfPossible()
 	{
