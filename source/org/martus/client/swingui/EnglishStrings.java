@@ -327,8 +327,8 @@ public class EnglishStrings
 "button:ConfigureHQsReLabel=Change Label",
 "button:BulletinDetails=Bulletin Details...",
 "button:ViewPreviousBulletinVersion=View Selected Version...",
-"button:RetrieveAllVersions=Retrieve all bulletin revisions",
-"button:RetrieveLatestBulletinRevisionOnly=Retrieve latest bulletin revision only",
+"button:RetrieveAllVersions=Retrieve all bulletin versions",
+"button:RetrieveLatestBulletinRevisionOnly=Retrieve latest bulletin version only",
 
 "menu:file=File",
 "menu:CreateNewBulletin=Create New Bulletin",
@@ -733,6 +733,7 @@ public class EnglishStrings
 "field:timedout2=Any unsaved bulletins will be lost unless you sign in and save them.",
 "field:defaultFolderName=New Folder",
 "field:SearchBulletinRules=For each row, select a field to search (or choose to match any field), select what kind of comparison to perform, and then enter a value to search for. Only bulletins matching all the rows will be returned.",
+"field:SearchBulletinAddingRules=Press  enter to create a new row in the search query.",
 "field:AccountInfoUserName=User Name: ",
 "field:AccountInfoPublicKey=Public Account Id:",
 "field:AccountInfoPublicCode=Public Code:",

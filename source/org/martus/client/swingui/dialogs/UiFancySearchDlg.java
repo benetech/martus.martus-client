@@ -57,7 +57,10 @@ public class UiFancySearchDlg extends UiSearchDlg
 
 		UiVBox panel = new UiVBox();
 		panel.add(new UiWrappedTextArea(localization.getFieldLabel("SearchBulletinRules")));
+		panel.add(new UiWrappedTextArea(localization.getFieldLabel("SearchBulletinAddingRules")));
+		panel.addSpace();
 		panel.add(grid.getComponent());
+		panel.addSpace();
 		panel.add(new Component[] {search, cancel});
 	
 		getContentPane().add(panel);
