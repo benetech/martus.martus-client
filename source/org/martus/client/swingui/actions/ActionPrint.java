@@ -112,9 +112,10 @@ public class ActionPrint extends UiMartusAction
 				return;
 			
 			destination = result.getFileChoosen();
-			if(destination.exists())
-				if(mainWindow.confirmDlg(mainWindow, "OverWriteExistingFile"))
-					break;
+			if(!destination.exists())
+				break;
+			if(mainWindow.confirmDlg(mainWindow, "OverWriteExistingFile"))
+				break;
 		}
 		
 		try
