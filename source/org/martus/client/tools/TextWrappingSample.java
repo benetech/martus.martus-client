@@ -30,8 +30,9 @@ import java.awt.BorderLayout;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
+
+import org.martus.swing.UiWrappedTextPanel;
+
 
 public class TextWrappingSample extends JFrame
 {
@@ -48,6 +49,7 @@ public class TextWrappingSample extends JFrame
           "declare the causes which impel them to the separation.";
 
 	  UiWrappedTextPanel textComponent = new UiWrappedTextPanel(message);
+	  getContentPane().setLayout(new BorderLayout());
 
 	  boolean doWhatWorks = false;
 	  
@@ -58,7 +60,8 @@ public class TextWrappingSample extends JFrame
 	  else
 	  {
 		  JPanel between = new JPanel();
-		  between.add(textComponent);
+		  between.setLayout(new BorderLayout());
+		  between.add(textComponent, BorderLayout.CENTER);
 	      getContentPane().add(between, BorderLayout.CENTER);
 	  }
 	  pack();
@@ -73,16 +76,3 @@ public class TextWrappingSample extends JFrame
   }
 }
 
-class UiWrappedTextPanel extends JScrollPane
-{
-	UiWrappedTextPanel(String text)
-	{
-		JTextArea textArea = new JTextArea(text);
-		textArea.setLineWrap(true);
-		textArea.setWrapStyleWord(true);
-		textArea.setEditable(false);
-
-		setViewportView(textArea);
-		
-	}
-}
