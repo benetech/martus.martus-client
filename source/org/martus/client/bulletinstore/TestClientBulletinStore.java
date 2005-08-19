@@ -641,7 +641,7 @@ public class TestClientBulletinStore extends TestCaseEnhanced
 		assertEquals(false, (folder==null));
 	}
 
-	public void testReOrderFolders()throws Exception
+	public void testSetFolderOrder()throws Exception
 	{
 		MockBulletinStore myStore = new MockBulletinStore();
 
