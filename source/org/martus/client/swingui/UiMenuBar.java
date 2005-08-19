@@ -38,18 +38,19 @@ import org.martus.client.swingui.actions.ActionMenuChangeUserNamePassword;
 import org.martus.client.swingui.actions.ActionMenuConfigureHQs;
 import org.martus.client.swingui.actions.ActionMenuContactInfo;
 import org.martus.client.swingui.actions.ActionMenuCopyBulletins;
-import org.martus.client.swingui.actions.ActionMenuCreateFolder;
+import org.martus.client.swingui.actions.ActionMenuFolderCreate;
 import org.martus.client.swingui.actions.ActionMenuCreateNewBulletin;
 import org.martus.client.swingui.actions.ActionMenuCustomFields;
 import org.martus.client.swingui.actions.ActionMenuCutBulletins;
 import org.martus.client.swingui.actions.ActionMenuDefaultDetailsFieldContent;
-import org.martus.client.swingui.actions.ActionMenuDeleteFolder;
+import org.martus.client.swingui.actions.ActionMenuFolderDelete;
 import org.martus.client.swingui.actions.ActionMenuDeleteMyServerDraftBulletins;
 import org.martus.client.swingui.actions.ActionMenuDiscardBulletins;
 import org.martus.client.swingui.actions.ActionMenuExit;
 import org.martus.client.swingui.actions.ActionMenuExportBulletins;
 import org.martus.client.swingui.actions.ActionMenuExportFolder;
 import org.martus.client.swingui.actions.ActionMenuExportMyPublicKey;
+import org.martus.client.swingui.actions.ActionMenuFoldersOrganize;
 import org.martus.client.swingui.actions.ActionMenuHelp;
 import org.martus.client.swingui.actions.ActionMenuModifyBulletin;
 import org.martus.client.swingui.actions.ActionMenuPasteBulletins;
@@ -57,7 +58,7 @@ import org.martus.client.swingui.actions.ActionMenuPreferences;
 import org.martus.client.swingui.actions.ActionMenuQuickEraseDeleteMyData;
 import org.martus.client.swingui.actions.ActionMenuQuickEraseRemoveMartus;
 import org.martus.client.swingui.actions.ActionMenuRemoveServer;
-import org.martus.client.swingui.actions.ActionMenuRenameFolder;
+import org.martus.client.swingui.actions.ActionMenuFolderRename;
 import org.martus.client.swingui.actions.ActionMenuResendBulletins;
 import org.martus.client.swingui.actions.ActionMenuRetrieveHQDraftBulletins;
 import org.martus.client.swingui.actions.ActionMenuRetrieveHQSealedBulletins;
@@ -115,9 +116,10 @@ public class UiMenuBar extends JMenuBar
 		folders.addMenuListener(folderMenuListener);
 		folderMenuListener.initalize();
 
-		folders.add(new ActionMenuCreateFolder(mainWindow));
-		folders.add(actionMenuRenameFolder);
-		folders.add(actionMenuDeleteFolder);
+		folders.add(new ActionMenuFolderCreate(mainWindow));
+		folders.add(actionMenuFolderRename);
+		folders.add(actionMenuFolderDelete);
+		folders.add(actionMenuFolderOrganize);
 
 
 		UiMenu server = new UiMenu(localization.getMenuLabel("server"));
@@ -214,15 +216,17 @@ public class UiMenuBar extends JMenuBar
 	{
 		public void menuSelected(MenuEvent e)
 		{
-			actionMenuRenameFolder.setEnabled(actionMenuRenameFolder.isEnabled());
-			actionMenuDeleteFolder.setEnabled(actionMenuDeleteFolder.isEnabled());
+			actionMenuFolderRename.setEnabled(actionMenuFolderRename.isEnabled());
+			actionMenuFolderDelete.setEnabled(actionMenuFolderDelete.isEnabled());
+			actionMenuFolderOrganize.setEnabled(actionMenuFolderOrganize.isEnabled());
 		}
 
 		public void initalize()
 		{
 			//Java Bug, menu items need to be disabled before correct behavior occures.
-			actionMenuRenameFolder.setEnabled(false);
-			actionMenuDeleteFolder.setEnabled(false);
+			actionMenuFolderRename.setEnabled(false);
+			actionMenuFolderDelete.setEnabled(false);
+			actionMenuFolderOrganize.setEnabled(false);
 		}
 
 		public void menuDeselected(MenuEvent e) {}
@@ -241,8 +245,9 @@ public class UiMenuBar extends JMenuBar
 		actionMenuDiscardBulletins = new ActionMenuDiscardBulletins(mainWindow);
 		actionMenuResendBulletins = new ActionMenuResendBulletins(mainWindow);
 		
-		actionMenuRenameFolder = new ActionMenuRenameFolder(mainWindow);
-		actionMenuDeleteFolder = new ActionMenuDeleteFolder(mainWindow);
+		actionMenuFolderRename = new ActionMenuFolderRename(mainWindow);
+		actionMenuFolderDelete = new ActionMenuFolderDelete(mainWindow);
+		actionMenuFolderOrganize = new ActionMenuFoldersOrganize(mainWindow);
 	}
 
 
@@ -256,6 +261,7 @@ public class UiMenuBar extends JMenuBar
 	AbstractAction actionMenuPasteBulletins;
 	AbstractAction actionMenuDiscardBulletins;
 	AbstractAction actionMenuResendBulletins;
-	AbstractAction actionMenuRenameFolder;
-	AbstractAction actionMenuDeleteFolder;
+	AbstractAction actionMenuFolderRename;
+	AbstractAction actionMenuFolderDelete;
+	AbstractAction actionMenuFolderOrganize;
 }

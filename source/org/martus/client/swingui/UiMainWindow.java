@@ -1119,6 +1119,11 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		folders.deleteCurrentFolderIfPossible();
 	}
 	
+	public void doOrganizeFolders()
+	{
+		//TODO: Implement this
+	}
+	
 	public void doSearch()
 	{
 		// TODO: Allow either the old UiSimpleSearchDlg or the new UiFancySearchDlg

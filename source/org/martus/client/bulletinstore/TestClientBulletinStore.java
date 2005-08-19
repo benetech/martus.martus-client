@@ -641,6 +641,52 @@ public class TestClientBulletinStore extends TestCaseEnhanced
 		assertEquals(false, (folder==null));
 	}
 
+	public void testReOrderFolders()throws Exception
+	{
+		MockBulletinStore myStore = new MockBulletinStore();
+
+		BulletinFolder folder1 = myStore.createFolder("1");
+		BulletinFolder folder2 = myStore.createFolder("2");
+		BulletinFolder folder3 = myStore.createFolder("3");
+		
+		Vector namesOriginal = myStore.getAllFolderNames();
+		assertEquals(myStore.getFolderSaved().getName(), namesOriginal.get(0));
+		assertEquals(myStore.getFolderDiscarded().getName(), namesOriginal.get(1));
+		assertEquals(myStore.getFolderDraftOutbox().getName(), namesOriginal.get(2));
+		assertEquals(myStore.getFolderSealedOutbox().getName(), namesOriginal.get(3));
+		assertEquals(folder1.getName(), namesOriginal.get(4));
+		assertEquals(folder2.getName(), namesOriginal.get(5));
+		assertEquals(folder3.getName(), namesOriginal.get(6));
+
+		Vector newOrder = new Vector();
+		newOrder.add(folder2);
+		newOrder.add(myStore.getFolderSaved());
+		newOrder.add(folder3);
+		newOrder.add(myStore.getFolderDraftOutbox());
+		newOrder.add(folder1);
+		newOrder.add(myStore.getFolderSealedOutbox());
+		newOrder.add(myStore.getFolderDiscarded());
+
+		myStore.reOrderFolders(newOrder);
+		Vector namesReordered = myStore.getAllFolderNames();
+		for(int i = 0; i < myStore.getFolderCount(); ++i )
+		{
+			assertEquals(newOrder.get(i), namesReordered.get(i));
+		}
+		
+		newOrder.remove(3);
+		try
+		{
+			myStore.reOrderFolders(newOrder);
+			fail("Should have thrown since folder list was missing an entry");
+		}
+		catch(Exception expected)
+		{
+			
+		}
+		
+	}
+	
 	public void testRenameFolder()
 	{
 		TRACE("testRenameFolder");

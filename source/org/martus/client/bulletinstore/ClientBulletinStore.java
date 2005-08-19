@@ -513,6 +513,16 @@ public class ClientBulletinStore extends BulletinStore
 		}
 		return names;
 	}
+	
+	public synchronized void reOrderFolders(Vector reorderedFolder) throws Exception
+	{
+		Vector reOrderedFolders = new Vector();
+		if(getFolderCount() != reorderedFolder.size())
+			throw new Exception("Incorrect number of folders");
+		folders.clear();
+		folders.addAll(reOrderedFolders);
+		saveFolders();
+	}
 
 	public synchronized Vector getVisibleFolderNames()
 	{

@@ -350,6 +350,7 @@ public class EnglishStrings
 "menu:CreateNewFolder=Create New Folder",
 "menu:RenameFolder=Rename Folder",
 "menu:DeleteFolder=Delete Folder",
+"menu:OrganizeFolders=Organize Folders",
 "menu:server=Server",
 "menu:RetrieveMySealedBulletins=Retrieve My Sealed Bulletins",
 "menu:RetrieveMyDraftsBulletins=Retrieve My Draft Bulletins",

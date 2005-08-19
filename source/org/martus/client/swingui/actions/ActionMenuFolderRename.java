@@ -30,9 +30,9 @@ import java.awt.event.ActionEvent;
 
 import org.martus.client.swingui.UiMainWindow;
 
-public class ActionMenuRenameFolder extends UiMenuAction
+public class ActionMenuFolderRename extends UiMenuAction
 {
-	public ActionMenuRenameFolder(UiMainWindow mainWindowToUse)
+	public ActionMenuFolderRename(UiMainWindow mainWindowToUse)
 	{
 		super(mainWindowToUse, "RenameFolder");
 	}
