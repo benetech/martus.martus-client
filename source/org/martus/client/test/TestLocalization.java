@@ -31,6 +31,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Date;
 import java.util.Vector;
+import java.util.zip.ZipFile;
 
 import javax.swing.SwingConstants;
 
@@ -380,7 +381,6 @@ public class TestLocalization extends TestCaseEnhanced
 		assertEquals("Incorrect translation OK from within unsigned language pack", "OK", myLocalization2.getButtonLabel("ok"));
 		assertEquals("Incorrect translation No from within unsigned language pack", "No", myLocalization2.getButtonLabel("no"));
 		assertTrue("We should be still be using a Language Pack", myLocalization2.isTranslationInsideMLP());
-		assertEquals("Date of MLP not the same?", new Date(mlpTestLanguage.lastModified()), myLocalization2.getMlpDate());	
 		
 		assertFalse("A unsigned MLPK file should not be trusted", myLocalization2.isOfficialTranslation(someTestLanguageCode));
 		assertFalse("Current translation should not be trusted", myLocalization2.isCurrentTranslationOfficial());
@@ -400,13 +400,15 @@ public class TestLocalization extends TestCaseEnhanced
 		File someTestLanguage = new File(translationDirectory,UiLocalization.getMlpkFilename(someTestLanguageCode));
 		someTestLanguage.deleteOnExit();
 		copyResourceFileToLocalFile(someTestLanguage, "Martus-xx.mlp");
-		
+		ZipFile mlp = new ZipFile(someTestLanguage);
 		foundSomeTestLanguage = doesLanguageExist(myLocalization, someTestLanguageCode);
 		assertTrue("should have testLanguage since it is official", foundSomeTestLanguage);
 		myLocalization.setCurrentLanguageCode(someTestLanguageCode);
 		assertEquals("Incorrect translation OK from within language pack", "OK", myLocalization.getButtonLabel("ok"));
 		assertEquals("Incorrect translation No from within language pack", "No", myLocalization.getButtonLabel("no"));
 		assertTrue("A signed MLP file should be trusted", myLocalization.isOfficialTranslation(someTestLanguageCode));
+		
+		assertEquals("Date of MLP not the correct?", new Date(mlp.getEntry("META-INF").getTime()) , myLocalization.getMlpDate());	
 
 		File translationDirectory2 = createTempDirectory();
 		MartusLocalization myLocalization2 = new MartusLocalization(translationDirectory2, EnglishStrings.strings);
