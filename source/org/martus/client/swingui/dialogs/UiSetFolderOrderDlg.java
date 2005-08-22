@@ -67,10 +67,7 @@ public class UiSetFolderOrderDlg extends JDialog implements ActionListener
 		{
 			BulletinFolder bulletinFolder = ((BulletinFolder)originalFolderOrder.get(i));
 			if(bulletinFolder.isVisible())
-			{
-				String name = bulletinFolder.getLocalizedName(localization);
-				model.addElement(name);
-			}
+				model.addElement(new LocalizedBulletinFolder(bulletinFolder));
 			else
 				hiddenFolders.add(bulletinFolder);
 		}
@@ -162,16 +159,7 @@ public class UiSetFolderOrderDlg extends JDialog implements ActionListener
 		newFolderOrder.addAll(hiddenFolders);
 		for(int i = 0; i < model.size(); ++i)
 		{
-			String folderName = (String)model.get(i);
-			for(int j = 0; j < originalFolderOrder.size(); ++j)
-			{
-				BulletinFolder originalFolder = (BulletinFolder)originalFolderOrder.get(j);
-				if(originalFolder.getLocalizedName(localization).equals(folderName))
-				{
-					newFolderOrder.add(originalFolder);
-					break;
-				}
-			}
+			newFolderOrder.add(((LocalizedBulletinFolder)model.get(i)).getFolder());
 		}
 	}
 	
@@ -200,6 +188,26 @@ public class UiSetFolderOrderDlg extends JDialog implements ActionListener
 		model.add(newIndex, folderToMove);
 		folderList.setSelectedIndex(newIndex);
 		folderList.ensureIndexIsVisible(newIndex);
+	}
+	
+	class LocalizedBulletinFolder 
+	{
+		public LocalizedBulletinFolder(BulletinFolder bulletinFolderToUse)
+		{
+			folder = bulletinFolderToUse;
+		}
+		
+		public String toString()
+		{
+			return folder.getLocalizedName(localization);
+		}
+		
+		public BulletinFolder getFolder()
+		{
+			return folder;
+		}
+		
+		private BulletinFolder folder;
 	}
 	
 	Vector newFolderOrder;
