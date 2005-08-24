@@ -874,7 +874,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	private void initializationErrorExitMartusDlg(String message)
 	{
 		String title = "Error Starting Martus";
-		String cause = "Unable to start Martus: " + message;
+		String cause = "Unable to start Martus: \n" + message;
 		String ok = "OK";
 		String[] buttons = { ok };
 		UiOptionPane pane = new UiOptionPane(cause, UiOptionPane.INFORMATION_MESSAGE, UiOptionPane.DEFAULT_OPTION,
