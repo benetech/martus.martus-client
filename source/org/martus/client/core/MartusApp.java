@@ -130,6 +130,8 @@ public class MartusApp
 			if(cryptoToUse == null)
 				cryptoToUse = new MartusSecurity();
 
+			cryptoToUse.verifyJars();
+
 			configInfo = new ConfigInfo();
 			currentUserName = "";
 			maxNewFolders = MAXFOLDERS;
@@ -142,6 +144,14 @@ public class MartusApp
 		catch(MartusCrypto.CryptoInitializationException e)
 		{
 			throw new MartusAppInitializationException("ErrorCryptoInitialization");
+		}
+		catch (MartusCrypto.InvalidJarException e)
+		{
+			throw new MartusAppInitializationException("Invalid jar file: " + e.getMessage());
+		}
+		catch (IOException e)
+		{
+			throw new MartusAppInitializationException("Error verifying jars: " + e.getMessage());
 		}
 
 		UpdateDocsIfNecessaryFromMLPFiles();
