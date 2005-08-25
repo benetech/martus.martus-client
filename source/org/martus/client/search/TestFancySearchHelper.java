@@ -35,6 +35,7 @@ import org.martus.client.swingui.dialogs.UiDialogLauncher;
 import org.martus.client.test.MockMartusApp;
 import org.martus.common.EnglishCommonStrings;
 import org.martus.common.GridData;
+import org.martus.common.bulletin.Bulletin;
 import org.martus.common.bulletin.BulletinConstants;
 import org.martus.common.field.MartusDateRangeField;
 import org.martus.common.fieldspec.ChoiceItem;
@@ -78,6 +79,8 @@ public class TestFancySearchHelper extends TestCaseEnhanced
 		
 		DropDownFieldSpec spec = helper.createFieldColumnSpec(store);
 		assertNotEquals("inserted an empty first entry?", "", spec.getChoice(0).getCode());
+		assertTrue("no ALL FIELDS?", spec.findCode("") >= 0);
+		assertTrue("no last-saved date?", spec.findCode(Bulletin.PSEUDOFIELD_LAST_SAVED_DATE) >= 0);
 		assertTrue("no author?", spec.findCode(BulletinConstants.TAGAUTHOR) >= 0);
 		assertTrue("no private?", spec.findCode(BulletinConstants.TAGPRIVATEINFO) >= 0);
 		assertTrue("no eventdate.begin?", spec.findCode(BulletinConstants.TAGEVENTDATE + "." + MartusDateRangeField.SUBFIELD_BEGIN) >= 0);

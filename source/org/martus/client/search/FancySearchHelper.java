@@ -33,6 +33,7 @@ import org.martus.client.bulletinstore.ClientBulletinStore;
 import org.martus.client.swingui.dialogs.UiDialogLauncher;
 import org.martus.clientside.UiLocalization;
 import org.martus.common.GridData;
+import org.martus.common.bulletin.Bulletin;
 import org.martus.common.field.MartusDateRangeField;
 import org.martus.common.fieldspec.ChoiceItem;
 import org.martus.common.fieldspec.DropDownFieldSpec;
@@ -69,8 +70,9 @@ public class FancySearchHelper
 	public DropDownFieldSpec createFieldColumnSpec(ClientBulletinStore storeToUse)
 	{
 		Vector allAvailableFields = new Vector();
-		FieldSpec anyField = FieldSpec.createCustomField("", getLocalization().getFieldLabel("SearchAnyField"), FieldSpec.TYPE_ANY_FIELD);
-		allAvailableFields.add(new ChoiceItem(anyField));
+
+		allAvailableFields.add(createAnyFieldChoice());
+		allAvailableFields.add(createLastSavedDateChoice());
 		allAvailableFields.addAll(convertToChoiceItems(storeToUse.getAllKnownFieldSpecs()));
 
 		ChoiceItem[] fieldChoices = (ChoiceItem[])allAvailableFields.toArray(new ChoiceItem[0]);
@@ -80,6 +82,28 @@ public class FancySearchHelper
 		fieldColumnSpec.setLabel(getLocalization().getFieldLabel("SearchGridHeaderField"));
 		fieldColumnSpec.setChoices(fieldChoices);
 		return fieldColumnSpec;
+	}
+
+	private ChoiceItem createAnyFieldChoice()
+	{
+		String tag = "";
+		String label = getLocalization().getFieldLabel("SearchAnyField");
+		int type = FieldSpec.TYPE_ANY_FIELD;
+		return createChoice(tag, label, type);
+	}
+
+	private ChoiceItem createLastSavedDateChoice()
+	{
+		String tag = Bulletin.PSEUDOFIELD_LAST_SAVED_DATE;
+		String label = getLocalization().getFieldLabel(Bulletin.TAGLASTSAVED);
+		int type = FieldSpec.TYPE_DATE;
+		return createChoice(tag, label, type);
+	}
+
+	private ChoiceItem createChoice(String tag, String label, int type)
+	{
+		FieldSpec spec = FieldSpec.createCustomField(tag, label, type);
+		return new ChoiceItem(spec);
 	}
 	
 	private Vector convertToChoiceItems(Vector specs)
