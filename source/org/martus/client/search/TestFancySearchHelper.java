@@ -107,6 +107,15 @@ public class TestFancySearchHelper extends TestCaseEnhanced
 			DropDownFieldSpec createdSpec = (DropDownFieldSpec)createdChoice.getSpec();
 			assertEquals("doesn't have blank plus both sample choices?", 3, createdSpec.getCount());
 		}
+		
+		FieldSpec withLabel = FieldSpec.createCustomField("tag", "Label", FieldSpec.TYPE_NORMAL);
+		Vector withLabelChoices = helper.getChoiceItemsForThisField(withLabel);
+		assertEquals("not one choice for normal with label?", 1, withLabelChoices.size());
+		{
+			ChoiceItem createdChoice = (ChoiceItem)withLabelChoices.get(0);
+			assertEquals(withLabel.getTag(), createdChoice.getCode());
+			assertEquals(withLabel.getLabel(), createdChoice.toString());
+		}
 	}
 	
 	private GridFieldSpec createSampleGridSpec() throws Exception

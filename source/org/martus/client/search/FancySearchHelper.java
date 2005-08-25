@@ -98,7 +98,7 @@ public class FancySearchHelper
 	{
 		Vector choicesForThisField = new Vector();
 		String tag = spec.getTag();
-		String displayString = tag;
+		String displayString = spec.getLabel();
 		if(StandardFieldSpecs.isStandardFieldTag(tag))
 			displayString = getLocalization().getFieldLabel(tag);
 		if(spec.getType() == FieldSpec.TYPE_DATERANGE)

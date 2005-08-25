@@ -35,6 +35,7 @@ import javax.swing.JComponent;
 import javax.swing.JList;
 
 import org.martus.client.core.LanguageChangeListener;
+import org.martus.common.fieldspec.ChoiceItem;
 import org.martus.common.fieldspec.DropDownFieldSpec;
 import org.martus.common.fieldspec.FieldSpec;
 import org.martus.swing.UiComboBox;
@@ -70,10 +71,10 @@ public class UiChoiceEditor extends UiChoice implements ActionListener
 	class UiChoiceListCellRenderer extends DefaultListCellRenderer
 	{
 		
-		public Component getListCellRendererComponent(JList list, Object code, int index, boolean isSelected, boolean cellHasFocus)
+		public Component getListCellRendererComponent(JList list, Object choiceItem, int index, boolean isSelected, boolean cellHasFocus)
 		{
 			String spaceSoValueWontBeHiddenIfEmpty = " ";
-			String displayString = spec.getDisplayString((String)code) + spaceSoValueWontBeHiddenIfEmpty;
+			String displayString = ((ChoiceItem)choiceItem).toString() + spaceSoValueWontBeHiddenIfEmpty;
 			Component cellRenderer = super.getListCellRendererComponent(list, displayString, index, isSelected,
 					cellHasFocus);
 			cellRenderer.setComponentOrientation(UiLanguageDirection.getComponentOrientation());
@@ -84,7 +85,7 @@ public class UiChoiceEditor extends UiChoice implements ActionListener
 
 	public String getText()
 	{
-		return (String)widget.getSelectedItem();
+		return ((ChoiceItem)widget.getSelectedItem()).getCode();
 	}
 
 	public void setText(String newCode)
@@ -97,7 +98,7 @@ public class UiChoiceEditor extends UiChoice implements ActionListener
 	{
 		widget.removeAllItems();
 		for(int i = 0; i < spec.getCount(); ++i)
-			widget.addItem(spec.getChoice(i).getCode());
+			widget.addItem(spec.getChoice(i));
 
 		widget.updateUI();
 	}
