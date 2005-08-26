@@ -45,15 +45,8 @@ public class GridDropDownCellEditor extends GridCellEditorAndRenderer
 	public void spaceWasPressed()
 	{
         UiComboBox comboBox = (UiComboBox)getComponent();
-        if(comboBox.isPopupVisible())
-        {
-        	comboBox.hidePopup();
-        }
-        else
-        {
+        if(!comboBox.isPopupVisible())
         	comboBox.requestFocus();
-        	comboBox.showPopup();
-        }
 	}
 
 	public Component getTableCellEditorComponent(JTable tableToUse, Object codeString, boolean isSelected, int row, int column)

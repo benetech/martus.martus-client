@@ -48,15 +48,7 @@ public class GridDateCellEditor extends GridCellEditorAndRenderer
 				hasFocus = i;
 		}
 		UiComboBox date = (UiComboBox)(focusableComponents[hasFocus]);
-		if(date.isPopupVisible())
-		{
-			date.hidePopup();
-		}
-		else
-		{
+		if(!date.isPopupVisible())
 			date.requestFocus();
-			date.showPopup();
-		}
 	}
-	
 }
