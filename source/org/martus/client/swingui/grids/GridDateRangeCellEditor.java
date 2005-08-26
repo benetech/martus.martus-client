@@ -27,7 +27,6 @@ package org.martus.client.swingui.grids;
 
 import java.awt.Component;
 
-import javax.swing.JComboBox;
 import javax.swing.JComponent;
 import javax.swing.JTable;
 
@@ -35,6 +34,7 @@ import org.martus.client.swingui.dialogs.UiDialogLauncher;
 import org.martus.client.swingui.fields.UiFlexiDateEditor;
 import org.martus.client.swingui.fields.UiGridDateRangeEditorViewer;
 import org.martus.client.swingui.fields.UiField.DataInvalidException;
+import org.martus.swing.UiComboBox;
 
 public class GridDateRangeCellEditor extends GridCellEditorAndRenderer
 {
@@ -78,7 +78,7 @@ public class GridDateRangeCellEditor extends GridCellEditorAndRenderer
 			if(focusableComponents[i].isFocusOwner())
 				hasFocus = i;
 		}
-		JComboBox date = (JComboBox)(focusableComponents[hasFocus]);
+		UiComboBox date = (UiComboBox)(focusableComponents[hasFocus]);
 		if(date.isPopupVisible())
 		{
 			date.hidePopup();
