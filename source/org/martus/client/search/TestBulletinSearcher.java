@@ -211,6 +211,14 @@ public class TestBulletinSearcher extends TestCaseEnhanced
 		BulletinSearcher privateAttachmentWithAnyDate = new BulletinSearcher(new SearchTreeNode(privateProxy.getLabel().toUpperCase()));
 		assertEquals("Private Attachment?", true, privateAttachmentWithAnyDate.doesMatch(b));
 	}
+	
+	public void testDateRangeDoesntMatchAnyString()
+	{
+		FieldSpec spec = FieldSpec.createStandardField("daterange", FieldSpec.TYPE_DATERANGE);
+		MartusDateRangeField dateRange = new MartusDateRangeField(spec);
+		dateRange.setData("");
+		assertFalse("empty date range contains a string?", dateRange.contains("lsijflidj"));
+	}
 
 	public void testLocalId() throws Exception
 	{
@@ -236,7 +244,7 @@ public class TestBulletinSearcher extends TestCaseEnhanced
 		Bulletin b = new Bulletin(security);
 		b.set(Bulletin.TAGEVENTDATE, "2003-08-20,20030820+3");
 		
-		verifyOperatorComparison("testFlexiDateMatches", b, Bulletin.TAGEVENTDATE, ":", "2003-08-21", true);
+		verifyOperatorComparison("testFlexiDateMatches", b, Bulletin.TAGEVENTDATE, ":", "2003-08-20", false);
 		verifyOperatorComparison("testFlexiDateMatches", b, Bulletin.TAGEVENTDATE, ":", "2003-08-26", false);
 
 		verifyOperatorComparison("testFlexiDateMatches", b, Bulletin.TAGEVENTDATE+"." + MartusDateRangeField.SUBFIELD_BEGIN, ":", "2003-08-20", true);

@@ -55,14 +55,12 @@ public class TestFancySearchHelper extends TestCaseEnhanced
 	
 	public void setUp() throws Exception
 	{
-		MockMartusApp app = MockMartusApp.create();
-		store = app.getStore();
-		store.createFieldSpecCacheFromDatabase();
-		app.loadSampleData();
+		app = MockMartusApp.create();
+		getStore().createFieldSpecCacheFromDatabase();
 		tempDir = createTempDirectory();
 		localization = new MartusLocalization(tempDir, new String[0]);
 		UiDialogLauncher nullLauncher = new UiDialogLauncher(null,new MartusLocalization(null, new String[0]));
-		helper = new FancySearchHelper(store, nullLauncher);
+		helper = new FancySearchHelper(getStore(), nullLauncher);
 		
 	}
 	
@@ -71,13 +69,15 @@ public class TestFancySearchHelper extends TestCaseEnhanced
 		tempDir.delete();
 	}
 	
-	public void testCreateFieldColumnSpec()
+	public void testCreateFieldColumnSpec() throws Exception
 	{
+		app.loadSampleData();
+
 		String languageCode = "en";
 		localization.addEnglishTranslations(EnglishCommonStrings.strings);
 		localization.setCurrentLanguageCode(languageCode);
 		
-		DropDownFieldSpec spec = helper.createFieldColumnSpec(store);
+		DropDownFieldSpec spec = helper.createFieldColumnSpec(getStore());
 		assertNotEquals("inserted an empty first entry?", "", spec.getChoice(0).getCode());
 		assertTrue("no ALL FIELDS?", spec.findCode("") >= 0);
 		assertTrue("no last-saved date?", spec.findCode(Bulletin.PSEUDOFIELD_LAST_SAVED_DATE) >= 0);
@@ -151,11 +151,20 @@ public class TestFancySearchHelper extends TestCaseEnhanced
 	
 	public void testCreateGridSpec()
 	{
-		GridFieldSpec spec = helper.getGridSpec(store);
-		assertEquals(3, spec.getColumnCount());
+		GridFieldSpec spec = helper.getGridSpec(getStore());
+		assertEquals(4, spec.getColumnCount());
 		assertEquals("no field column?", FieldSpec.TYPE_DROPDOWN, spec.getColumnType(0));
 		assertEquals("no op column?", FieldSpec.TYPE_DROPDOWN, spec.getColumnType(1));
 		assertEquals("no value column?", FieldSpec.TYPE_SEARCH_VALUE, spec.getColumnType(2));
+		assertEquals("no andor column?", FieldSpec.TYPE_DROPDOWN, spec.getColumnType(3));
+	}
+	
+	public void testAndOrColumn() throws Exception
+	{
+		DropDownFieldSpec spec = helper.createAndOrColumnSpec();
+		assertEquals(2, spec.getCount());
+		assertEquals("and", spec.getChoice(0).getCode());
+		assertEquals("or", spec.getChoice(1).getCode());
 	}
 	
 	public void testGetSearchString() throws Exception
@@ -164,25 +173,32 @@ public class TestFancySearchHelper extends TestCaseEnhanced
 		spec.addColumn(FieldSpec.createStandardField("field", FieldSpec.TYPE_NORMAL));
 		spec.addColumn(FieldSpec.createStandardField("op", FieldSpec.TYPE_NORMAL));
 		spec.addColumn(FieldSpec.createStandardField("value", FieldSpec.TYPE_SEARCH_VALUE));
+		spec.addColumn(FieldSpec.createStandardField("andor", FieldSpec.TYPE_NORMAL));
 		GridData data = new GridData(spec);
-		addRow(data, "", ":", "whiz");
-		addRow(data, "a", "b", "c");
-		addRow(data, "d", "e", " f");
-		addRow(data, "g", "h", "\"ii\"");
+		addRow(data, "", ":", "whiz", "and");
+		addRow(data, "a", "b", "c", "or");
+		addRow(data, "d", "e", " f", "and");
+		addRow(data, "g", "h", "\"ii\"", "or");
 		
-		assertEquals("\"whiz\" ab\"c\" de\"f\" gh\"ii\" ", helper.getSearchString(data));
+		assertEquals("\"whiz\" and ab\"c\" or de\"f\" and gh\"ii\" ", helper.getSearchString(data));
 	}
 	
-	private void addRow(GridData data, String field, String op, String value)
+	private void addRow(GridData data, String field, String op, String value, String andOr)
 	{
 		int row = data.getRowCount();
 		data.addEmptyRow();
 		data.setValueAt(field, row, 0);
 		data.setValueAt(op, row, 1);
 		data.setValueAt(value, row, 2);
+		data.setValueAt(andOr, row, 3);
 	}
 
-	ClientBulletinStore store;
+	ClientBulletinStore getStore()
+	{
+		return app.getStore();
+	}
+	
+	MockMartusApp app;
 	File tempDir;
 	MartusLocalization localization;
 	FancySearchHelper helper;

@@ -121,8 +121,8 @@ public class SearchParser
 		return false;
 	}
 
-	private static final String ENGLISH_AND_KEYWORD = "and";
-	private static final String ENGLISH_OR_KEYWORD = "or";
+	public static final String ENGLISH_AND_KEYWORD = "and";
+	public static final String ENGLISH_OR_KEYWORD = "or";
 	private final String[] orKeywords;
 	private final String[] andKeywords;
 }

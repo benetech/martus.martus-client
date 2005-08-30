@@ -181,6 +181,7 @@ public class FancySearchHelper
 			String valueColumnTag = "value";
 			String valueColumnHeader = getLocalization().getFieldLabel("SearchGridHeaderValue");
 			spec.addColumn(FieldSpec.createCustomField(valueColumnTag, valueColumnHeader, FieldSpec.TYPE_SEARCH_VALUE));
+			spec.addColumn(createAndOrColumnSpec());
 		}
 		catch (UnsupportedFieldTypeException e)
 		{
@@ -190,17 +191,34 @@ public class FancySearchHelper
 		}
 		return spec;
 	}
+	
+	public DropDownFieldSpec createAndOrColumnSpec()
+	{
+		ChoiceItem[] choices =
+		{
+			createLocalizedChoiceItem(SearchParser.ENGLISH_AND_KEYWORD),
+			createLocalizedChoiceItem(SearchParser.ENGLISH_OR_KEYWORD),
+		};
+		return new DropDownFieldSpec(choices);
+	}
+	
+	private ChoiceItem createLocalizedChoiceItem(String tag)
+	{
+		return new ChoiceItem(tag, getLocalization().getKeyword(tag));
+	}
 
 	public String getSearchString(GridData gridData)
 	{
 		StringBuffer searchExpression = new StringBuffer();
-		for(int row = 0; row < gridData.getRowCount(); ++row)
+		int rowCount = gridData.getRowCount();
+		for(int row = 0; row < rowCount; ++row)
 		{
 			String field = gridData.getValueAt(row, 0);
 			String op = gridData.getValueAt(row, 1);
 			String value = gridData.getValueAt(row, 2);
 			value = value.trim();
 			value = value.replaceAll("\\\"", "");
+			String andOr = gridData.getValueAt(row, 3); 
 		
 			if(field.length() > 0)
 			{
@@ -211,6 +229,11 @@ public class FancySearchHelper
 			searchExpression.append("\"");
 			searchExpression.append(value);
 			searchExpression.append("\"");
+			if(row < rowCount - 1)
+			{
+				searchExpression.append(" ");
+				searchExpression.append(andOr);
+			}
 			searchExpression.append(" ");
 		}
 		
