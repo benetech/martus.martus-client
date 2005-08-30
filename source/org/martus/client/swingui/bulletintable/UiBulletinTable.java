@@ -300,6 +300,7 @@ public class UiBulletinTable extends UiTable implements ListSelectionListener, D
 				bulletinToModify = updateFieldSpecsIfNecessary(original);
 			else if(needsCloneToEdit(isMine, isSealed))
 				bulletinToModify = createCloneAndUpdateFieldSpecsIfNecessary(original);
+			bulletinToModify.addAuthorizedToReadKeys(mainWindow.getApp().getDefaultHQKeysWithFallback());
 			mainWindow.modifyBulletin(bulletinToModify);
 		}
 		catch(Exception e)
@@ -351,7 +352,6 @@ public class UiBulletinTable extends UiTable implements ListSelectionListener, D
 		}
 
 		Bulletin bulletinToModify = store.createNewDraft(original, publicFieldSpecsToUse, privateFieldSpecsToUse);
-		bulletinToModify.addAuthorizedToReadKeys(mainWindow.getApp().getDefaultHQKeysWithFallback());
 		return bulletinToModify;
 	}
 	
