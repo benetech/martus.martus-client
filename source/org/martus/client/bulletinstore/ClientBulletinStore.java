@@ -1433,11 +1433,11 @@ public class ClientBulletinStore extends BulletinStore
 
 	public void changeFieldSpecs(Bulletin original, FieldSpec[] publicFieldSpecsToUse, FieldSpec[] privateFieldSpecsToUse) throws Exception 
 	{
-		Bulletin clone = createClone(original, original.getPublicFieldSpecs(), original.getPrivateFieldSpecs());
+		Bulletin temporaryCopy = createClone(original, original.getPublicFieldSpecs(), original.getPrivateFieldSpecs());
 		original.getFieldDataPacket().setFieldSpecs(publicFieldSpecsToUse);
 		original.getPrivateFieldDataPacket().setFieldSpecs(privateFieldSpecsToUse);
-		original.pullFields(clone, original.getFieldDataPacket().getFieldSpecs());
-		original.pullFields(clone, original.getPrivateFieldDataPacket().getFieldSpecs());
+		original.pullFields(temporaryCopy, publicFieldSpecsToUse);
+		original.pullFields(temporaryCopy, privateFieldSpecsToUse);
 	}
 
 	public Vector getUidsOfAllBulletinRevisions()
