@@ -280,7 +280,7 @@ public class UiBulletinTable extends UiTable implements ListSelectionListener, D
 				return;
 		}
 		
-		if(isMine && isSealed)
+		if(isMySealed(isMine, isSealed))
 		{
 			if(!mainWindow.confirmDlg("CloneMySealedAsDraft"))
 				return;
@@ -294,7 +294,11 @@ public class UiBulletinTable extends UiTable implements ListSelectionListener, D
 		
 		try
 		{
-			Bulletin bulletinToModify = createCloneIfNecessary(original, isMine, isSealed);
+			Bulletin bulletinToModify = original; 
+			if(isMyDraft(isMine, isSealed))
+				bulletinToModify = updateFieldSpecsIfNecessary(original);
+			else if(needsCloneToEdit(isMine, isSealed))
+				bulletinToModify = createCloneAndUpdateFieldSpecsIfNecessary(original);
 			mainWindow.modifyBulletin(bulletinToModify);
 		}
 		catch(Exception e)
@@ -304,26 +308,49 @@ public class UiBulletinTable extends UiTable implements ListSelectionListener, D
 
 	}
 
-	private Bulletin createCloneIfNecessary(Bulletin original, boolean isMine, boolean isSealed) throws Exception
+	private boolean isMySealed(boolean isMine, boolean isSealed)
 	{
-		Bulletin bulletinToModify = original;
-		if(isSealed || !isMine)
-		{
-			ClientBulletinStore store = mainWindow.getApp().getStore();
-			FieldSpec[] publicFieldSpecsToUse = store.getPublicFieldSpecs();
-			FieldSpec[] privateFieldSpecsToUse = store.getPrivateFieldSpecs();
-			if(store.bulletinHasExtraFields(original))
-			{
-				if(mainWindow.confirmDlg(mainWindow, "UseBulletinsCustomFields"))
-				{
-					publicFieldSpecsToUse = original.getPublicFieldSpecs();
-					privateFieldSpecsToUse = original.getPrivateFieldSpecs();
-				}
-			}
+		return isMine && isSealed;
+	}
+	
+	private boolean isMyDraft(boolean isMine, boolean isSealed)
+	{
+		return isMine && !isSealed;
+	}
+	
+	private boolean needsCloneToEdit(boolean isMine, boolean isSealed)
+	{
+		return isSealed || !isMine;
+	}
 
-			bulletinToModify = store.createClone(original, publicFieldSpecsToUse, privateFieldSpecsToUse);
-			bulletinToModify.addAuthorizedToReadKeys(mainWindow.getApp().getDefaultHQKeysWithFallback());
+	private Bulletin updateFieldSpecsIfNecessary(Bulletin original) throws Exception
+	{
+		ClientBulletinStore store = mainWindow.getApp().getStore();
+		if(!store.bulletinHasExtraFields(original))
+			return original;
+		if(mainWindow.confirmDlg(mainWindow, "UseBulletinsDraftCustomFields"))
+			return original;
+		FieldSpec[] publicFieldSpecsToUse = store.getPublicFieldSpecs();
+		FieldSpec[] privateFieldSpecsToUse = store.getPrivateFieldSpecs();
+		return store.createDraftClone(original, publicFieldSpecsToUse, privateFieldSpecsToUse);
+	}
+
+	private Bulletin createCloneAndUpdateFieldSpecsIfNecessary(Bulletin original) throws Exception
+	{
+		ClientBulletinStore store = mainWindow.getApp().getStore();
+		FieldSpec[] publicFieldSpecsToUse = store.getPublicFieldSpecs();
+		FieldSpec[] privateFieldSpecsToUse = store.getPrivateFieldSpecs();
+		if(store.bulletinHasExtraFields(original))
+		{
+			if(mainWindow.confirmDlg(mainWindow, "UseBulletinsCustomFields"))
+			{
+				publicFieldSpecsToUse = original.getPublicFieldSpecs();
+				privateFieldSpecsToUse = original.getPrivateFieldSpecs();
+			}
 		}
+
+		Bulletin bulletinToModify = store.createNewDraft(original, publicFieldSpecsToUse, privateFieldSpecsToUse);
+		bulletinToModify.addAuthorizedToReadKeys(mainWindow.getApp().getDefaultHQKeysWithFallback());
 		return bulletinToModify;
 	}
 

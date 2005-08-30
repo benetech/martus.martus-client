@@ -939,17 +939,6 @@ public class ClientBulletinStore extends BulletinStore
 		return new File(AccountDir, "MartusFolders.dat");
 	}
 
-	public Bulletin createEmptyBulletin()
-	{
-		return createEmptyBulletin(getPublicFieldSpecs(), getPrivateFieldSpecs());
-	}
-	
-	public Bulletin createEmptyBulletin(FieldSpec[] publicSpecs, FieldSpec[] privateSpecs)
-	{
-		Bulletin b = new Bulletin(getSignatureGenerator(), publicSpecs, privateSpecs);
-		return b;
-	}
-
 	public FieldSpec[] getPrivateFieldSpecs()
 	{
 		return privateFieldSpecs;
@@ -1424,20 +1413,44 @@ public class ClientBulletinStore extends BulletinStore
 		return !FieldSpec.isAllFieldsPresent(b.getPublicFieldSpecs(), getPublicFieldSpecs());
 	}
 
-	public Bulletin createClone(Bulletin original, FieldSpec[] publicFieldSpecsToUse, FieldSpec[] privateFieldSpecsToUse) throws Exception 
+	public Bulletin createEmptyBulletin()
 	{
-		Bulletin clone = createEmptyBulletin(publicFieldSpecsToUse, privateFieldSpecsToUse);
-		clone.createDraftCopyOf(original, getDatabase());
-		return clone;
+		return createEmptyBulletin(getPublicFieldSpecs(), getPrivateFieldSpecs());
+	}
+	
+	public Bulletin createEmptyBulletin(FieldSpec[] publicSpecs, FieldSpec[] privateSpecs)
+	{
+		Bulletin b = new Bulletin(getSignatureGenerator(), publicSpecs, privateSpecs);
+		return b;
+	}
+	
+	public Bulletin createEmptyClone(Bulletin original) throws Exception 
+	{
+		FieldSpec[] publicSpecs = original.getPublicFieldSpecs();
+		FieldSpec[] privateSpecs = original.getPrivateFieldSpecs();
+		return createEmptyCloneWithFields(original, publicSpecs, privateSpecs);
 	}
 
-	public void changeFieldSpecs(Bulletin original, FieldSpec[] publicFieldSpecsToUse, FieldSpec[] privateFieldSpecsToUse) throws Exception 
+	public Bulletin createEmptyCloneWithFields(Bulletin original, FieldSpec[] publicSpecs, FieldSpec[] privateSpecs)
 	{
-		Bulletin temporaryCopy = createClone(original, original.getPublicFieldSpecs(), original.getPrivateFieldSpecs());
-		original.getFieldDataPacket().setFieldSpecs(publicFieldSpecsToUse);
-		original.getPrivateFieldDataPacket().setFieldSpecs(privateFieldSpecsToUse);
-		original.pullFields(temporaryCopy, publicFieldSpecsToUse);
-		original.pullFields(temporaryCopy, privateFieldSpecsToUse);
+		UniversalId headerUid = original.getUniversalId();
+		UniversalId publicDataUid = original.getFieldDataPacket().getUniversalId();
+		UniversalId privateDataUid = original.getPrivateFieldDataPacket().getUniversalId();
+		return new Bulletin(getSignatureGenerator(), headerUid, publicDataUid, privateDataUid, publicSpecs, privateSpecs);
+	}
+
+	public Bulletin createNewDraft(Bulletin original, FieldSpec[] publicFieldSpecsToUse, FieldSpec[] privateFieldSpecsToUse) throws Exception 
+	{
+		Bulletin newDraftBulletin = createEmptyBulletin(publicFieldSpecsToUse, privateFieldSpecsToUse);
+		newDraftBulletin.createDraftCopyOf(original, getDatabase());
+		return newDraftBulletin;
+	}
+	
+	public Bulletin createDraftClone(Bulletin original, FieldSpec[] publicFieldSpecsToUse, FieldSpec[] privateFieldSpecsToUse) throws Exception 
+	{
+		Bulletin clone = createEmptyCloneWithFields(original, publicFieldSpecsToUse, privateFieldSpecsToUse);
+		clone.createDraftCopyOf(original, getDatabase());
+		return clone;
 	}
 
 	public Vector getUidsOfAllBulletinRevisions()

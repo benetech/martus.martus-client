@@ -162,7 +162,7 @@ public class TestClientBulletinStore extends TestCaseEnhanced
 		assertTrue("original not in folder B?", folderB.contains(original));
 		assertTrue("original not in folder C?", invisiblefolderC.contains(original));
 	
-		Bulletin newVersion = store.createClone(original, customPublicSpecs, customPrivateSpecs);
+		Bulletin newVersion = store.createNewDraft(original, customPublicSpecs, customPrivateSpecs);
 		clientStore.saveBulletin(newVersion);
 		assertTrue("original should still be in folder A?", folderA.contains(original));
 		assertTrue("original should still be in folder B?", folderB.contains(original));
@@ -198,7 +198,7 @@ public class TestClientBulletinStore extends TestCaseEnhanced
     	store.setIsOnServer(original);
     	assertTrue("original not on server?", store.isProbablyOnServer(original));
 
-    	Bulletin clone = store.createClone(original, customPublicSpecs, customPrivateSpecs);
+    	Bulletin clone = store.createNewDraft(original, customPublicSpecs, customPrivateSpecs);
     	store.saveBulletin(clone);
     	store.setIsOnServer(clone);
     	
@@ -209,12 +209,27 @@ public class TestClientBulletinStore extends TestCaseEnhanced
     	assertFalse("didn't remove original?", store.isProbablyOnServer(original));
 	}
     
-    public void testCreateCloneOfMySealed() throws Exception
+    public void testCreateEmptyClone() throws Exception
+    {
+    	Bulletin original = createSealedBulletin(security);
+    	UniversalId id = original.getUniversalId();
+    	
+    	Bulletin emptyClone = store.createEmptyClone(original);
+    	
+    	assertEquals(id, original.getUniversalId());
+    	assertEquals(id, emptyClone.getUniversalId());
+    	assertEquals("no public data?", PUBLIC_DATA, original.get(Bulletin.TAGTITLE));
+    	assertEquals("no private data?", PRIVATE_DATA, original.get(Bulletin.TAGAUTHOR));
+    	assertEquals("empty clone has public data?", "", emptyClone.get(Bulletin.TAGTITLE));
+    	assertEquals("empty clone has private data?", "", emptyClone.get(Bulletin.TAGAUTHOR));
+   }
+    
+    public void testCreateDraftCopyOfMySealed() throws Exception
 	{
     	Bulletin original = createSealedBulletin(security);
     	
     	{
-	    	Bulletin clone = store.createClone(original, customPublicSpecs, customPrivateSpecs);
+	    	Bulletin clone = store.createNewDraft(original, customPublicSpecs, customPrivateSpecs);
 	    	assertEquals("wrong account?", store.getAccountId(), clone.getAccount());
 	    	assertNotEquals("not new local id?", original.getLocalId(), clone.getLocalId());
 	    	assertEquals("no data?", original.get(Bulletin.TAGTITLE), clone.get(Bulletin.TAGTITLE));
@@ -228,13 +243,13 @@ public class TestClientBulletinStore extends TestCaseEnhanced
     	}
 	}
     
-    public void testCreateCloneOfMyDraft() throws Exception
+    public void testCreateDraftCopyOfMyDraftWithNewFieldSpecs() throws Exception
 	{
     	Bulletin original = createSealedBulletin(security);
     	original.setDraft();
     	
     	{
-	    	Bulletin clone = store.createClone(original, customPublicSpecs, customPrivateSpecs);
+	    	Bulletin clone = store.createNewDraft(original, customPublicSpecs, customPrivateSpecs);
 	    	assertEquals("wrong account?", store.getAccountId(), clone.getAccount());
 	    	assertNotEquals("not new local id?", original.getLocalId(), clone.getLocalId());
 	    	assertEquals("no data?", original.get(Bulletin.TAGTITLE), clone.get(Bulletin.TAGTITLE));
@@ -249,32 +264,34 @@ public class TestClientBulletinStore extends TestCaseEnhanced
     
     public void testUpdateFieldSpecsOfMyDraft() throws Exception
 	{
-    	Bulletin bulletin = createSealedBulletin(security);
-    	String id = bulletin.getLocalId();
-    	bulletin.setDraft();
+    	Bulletin originalBulletin = createSealedBulletin(security);
+    	String id = originalBulletin.getLocalId();
+    	originalBulletin.setDraft();
     	{
-    		store.changeFieldSpecs(bulletin, customPublicSpecs, customPrivateSpecs);
-	    	assertEquals("wrong account?", store.getAccountId(), bulletin.getAccount());
-	    	assertEquals("not same local id?", id, bulletin.getLocalId());
-	    	assertEquals("no public data?", PUBLIC_DATA, bulletin.get(Bulletin.TAGTITLE));
-	    	assertEquals("no private data?", PRIVATE_DATA, bulletin.get(Bulletin.TAGAUTHOR));
-	    	assertEquals("did not keep hq?", 1, bulletin.getAuthorizedToReadKeys().size());
-	    	assertTrue("not draft?", bulletin.isDraft());
-	    	assertEquals("wrong public field specs?", customPublicSpecs.length, bulletin.getPublicFieldSpecs().length);
-	    	assertEquals("wrong private field specs?", customPrivateSpecs.length, bulletin.getPrivateFieldSpecs().length);
-	    	BulletinHistory history = bulletin.getHistory();
+    		Bulletin newFieldSpecsBulletin = store.createDraftClone(originalBulletin, customPublicSpecs, customPrivateSpecs);
+	    	assertEquals("wrong public field specs for untouched original?", StandardFieldSpecs.getDefaultPublicFieldSpecs().length, originalBulletin.getPublicFieldSpecs().length);
+	    	assertEquals("wrong private field specs for untouched original?", StandardFieldSpecs.getDefaultPrivateFieldSpecs().length, originalBulletin.getPrivateFieldSpecs().length);
+	    	assertEquals("wrong account?", store.getAccountId(), newFieldSpecsBulletin.getAccount());
+	    	assertEquals("not same local id?", id, newFieldSpecsBulletin.getLocalId());
+	    	assertEquals("no public data?", PUBLIC_DATA, newFieldSpecsBulletin.get(Bulletin.TAGTITLE));
+	    	assertEquals("no private data?", PRIVATE_DATA, newFieldSpecsBulletin.get(Bulletin.TAGAUTHOR));
+	    	assertEquals("did not keep hq?", 1, newFieldSpecsBulletin.getAuthorizedToReadKeys().size());
+	    	assertTrue("not draft?", newFieldSpecsBulletin.isDraft());
+	    	assertEquals("wrong public field specs?", customPublicSpecs.length, newFieldSpecsBulletin.getPublicFieldSpecs().length);
+	    	assertEquals("wrong private field specs?", customPrivateSpecs.length, newFieldSpecsBulletin.getPrivateFieldSpecs().length);
+	    	BulletinHistory history = newFieldSpecsBulletin.getHistory();
 			assertEquals("has history?", 0, history.size());
     	}
 	}
 
-    public void testCreateCloneOfNotMyBulletin() throws Exception
+    public void testCreateDraftCopyOfNotMyBulletin() throws Exception
 	{
     	MartusCrypto otherSecurity = MockMartusSecurity.createOtherClient();
 
     	Bulletin original = createSealedBulletin(otherSecurity);
 
     	{
-	    	Bulletin clone = store.createClone(original, customPublicSpecs, customPrivateSpecs);
+	    	Bulletin clone = store.createNewDraft(original, customPublicSpecs, customPrivateSpecs);
 	    	assertEquals("wrong account?", store.getAccountId(), clone.getAccount());
 	    	assertNotEquals("not new local id?", original.getLocalId(), clone.getLocalId());
 	    	assertEquals("no data?", original.get(Bulletin.TAGTITLE), clone.get(Bulletin.TAGTITLE));
@@ -968,7 +985,7 @@ public class TestClientBulletinStore extends TestCaseEnhanced
 		store.addBulletinToFolder(aFolder, original.getUniversalId());
 		assertEquals(1, aFolder.getBulletinCount());
 
-		Bulletin firstClone = store.createClone(original, publicFields, privateFields);
+		Bulletin firstClone = store.createNewDraft(original, publicFields, privateFields);
 		firstClone.setSealed();
 		store.saveBulletin(firstClone);
 		
@@ -983,7 +1000,7 @@ public class TestClientBulletinStore extends TestCaseEnhanced
 		assertTrue("lost unrelated (1)?", aFolder.contains(unrelated));
 		assertTrue("didn't update to first clone?", aFolder.contains(firstClone));
 		
-		Bulletin lastClone = store.createClone(firstClone, publicFields, privateFields);
+		Bulletin lastClone = store.createNewDraft(firstClone, publicFields, privateFields);
 		lastClone.setSealed();
 		store.saveBulletin(lastClone);
 		BulletinFolder otherFolder = store.getFolderDiscarded();
@@ -1011,7 +1028,7 @@ public class TestClientBulletinStore extends TestCaseEnhanced
 		Bulletin original = clientStore.createEmptyBulletin();
 		original.setSealed();
 
-		Bulletin clone = clientStore.createClone(original, publicFields, privateFields);
+		Bulletin clone = clientStore.createNewDraft(original, publicFields, privateFields);
 		clone.setSealed();
 		clientStore.saveBulletinForTesting(clone);
 		BulletinUidCollector collector = new BulletinUidCollector();
@@ -1045,7 +1062,7 @@ public class TestClientBulletinStore extends TestCaseEnhanced
 		Bulletin original = clientStore.createEmptyBulletin();
 		original.setSealed();
 
-		Bulletin newerVersion = clientStore.createClone(original, publicFields, privateFields);
+		Bulletin newerVersion = clientStore.createNewDraft(original, publicFields, privateFields);
 		newerVersion.setSealed();
 		clientStore.saveBulletinForTesting(newerVersion);
 		clientStore.saveBulletinForTesting(original);
@@ -1083,7 +1100,7 @@ public class TestClientBulletinStore extends TestCaseEnhanced
 		Bulletin original = clientStore.createEmptyBulletin();
 		original.setSealed();
 
-		Bulletin newVersion = clientStore.createClone(original, publicFields, privateFields);
+		Bulletin newVersion = clientStore.createNewDraft(original, publicFields, privateFields);
 		newVersion.setSealed();
 		clientStore.saveBulletinForTesting(original);
 
