@@ -139,6 +139,10 @@ public class FancySearchHelper
 		{
 			choicesForThisField.add(new ChoiceItem(spec));
 		}
+		else if(spec.getType() == FieldSpec.TYPE_UNKNOWN)
+		{
+			// unknown types (Lewis had one) should not appear in the list at all
+		}
 		else
 		{
 			FieldSpec thisSpec = FieldSpec.createCustomField(tag, displayString, spec.getType());

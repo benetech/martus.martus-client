@@ -119,6 +119,10 @@ public class TestFancySearchHelper extends TestCaseEnhanced
 			assertEquals(withLabel.getTag(), createdChoice.getCode());
 			assertEquals(withLabel.getLabel(), createdChoice.toString());
 		}
+		
+		FieldSpec unknownType = FieldSpec.createStandardField("tag", FieldSpec.TYPE_UNKNOWN);
+		Vector unknownTypeChoices = helper.getChoiceItemsForThisField(unknownType);
+		assertEquals("not zero choices for unknown type?", 0, unknownTypeChoices.size());
 	}
 	
 	private GridFieldSpec createSampleGridSpec() throws Exception
