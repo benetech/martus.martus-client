@@ -292,14 +292,26 @@ public class UiBulletinTable extends UiTable implements ListSelectionListener, D
 				return;
 		}
 		
+		try
+		{
+			Bulletin bulletinToModify = createCloneIfNecessary(original, isMine, isSealed);
+			mainWindow.modifyBulletin(bulletinToModify);
+		}
+		catch(Exception e)
+		{
+			mainWindow.notifyDlg("UnexpectedError");
+		}
+
+	}
+
+	private Bulletin createCloneIfNecessary(Bulletin original, boolean isMine, boolean isSealed) throws Exception
+	{
 		Bulletin bulletinToModify = original;
-		
 		if(isSealed || !isMine)
 		{
 			ClientBulletinStore store = mainWindow.getApp().getStore();
 			FieldSpec[] publicFieldSpecsToUse = store.getPublicFieldSpecs();
 			FieldSpec[] privateFieldSpecsToUse = store.getPrivateFieldSpecs();
-
 			if(store.bulletinHasExtraFields(original))
 			{
 				if(mainWindow.confirmDlg(mainWindow, "UseBulletinsCustomFields"))
@@ -309,19 +321,10 @@ public class UiBulletinTable extends UiTable implements ListSelectionListener, D
 				}
 			}
 
-			try
-			{
-				bulletinToModify = store.createClone(original, publicFieldSpecsToUse, privateFieldSpecsToUse);
-				bulletinToModify.addAuthorizedToReadKeys(mainWindow.getApp().getDefaultHQKeysWithFallback());
-			}
-			catch (Exception e)
-			{
-				mainWindow.notifyDlg("UnexpectedError");
-				return;
-			}
+			bulletinToModify = store.createClone(original, publicFieldSpecsToUse, privateFieldSpecsToUse);
+			bulletinToModify.addAuthorizedToReadKeys(mainWindow.getApp().getDefaultHQKeysWithFallback());
 		}
-
-		mainWindow.modifyBulletin(bulletinToModify);
+		return bulletinToModify;
 	}
 
 	public void doCutBulletins()
