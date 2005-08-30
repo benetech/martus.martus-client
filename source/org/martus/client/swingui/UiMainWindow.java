@@ -816,6 +816,11 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		return UiUtilities.confirmDlg(getLocalization(), parent, title, contents);
 	}
 
+	public boolean confirmDlg(JFrame parent, String title, String[] contents, String[] buttons, Map tokenReplacement)
+	{
+		return UiUtilities.confirmDlg(parent, title, contents, buttons, tokenReplacement);
+	}
+
 	public boolean confirmDlg(JFrame parent, String title, String[] contents, String[] buttons)
 	{
 		return UiUtilities.confirmDlg(parent, title, contents, buttons);

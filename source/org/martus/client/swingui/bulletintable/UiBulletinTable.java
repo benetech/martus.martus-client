@@ -43,6 +43,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.Vector;
 import javax.swing.JPopupMenu;
 import javax.swing.ListSelectionModel;
@@ -328,7 +329,7 @@ public class UiBulletinTable extends UiTable implements ListSelectionListener, D
 		ClientBulletinStore store = mainWindow.getApp().getStore();
 		if(!store.bulletinHasExtraFields(original))
 			return original;
-		if(mainWindow.confirmDlg(mainWindow, "UseBulletinsDraftCustomFields"))
+		if(confirmUpdateFieldsDlg("UseBulletinsDraftCustomFields"))
 			return original;
 		FieldSpec[] publicFieldSpecsToUse = store.getPublicFieldSpecs();
 		FieldSpec[] privateFieldSpecsToUse = store.getPrivateFieldSpecs();
@@ -342,7 +343,7 @@ public class UiBulletinTable extends UiTable implements ListSelectionListener, D
 		FieldSpec[] privateFieldSpecsToUse = store.getPrivateFieldSpecs();
 		if(store.bulletinHasExtraFields(original))
 		{
-			if(mainWindow.confirmDlg(mainWindow, "UseBulletinsCustomFields"))
+			if(confirmUpdateFieldsDlg("UseBulletinsCustomFields"))
 			{
 				publicFieldSpecsToUse = original.getPublicFieldSpecs();
 				privateFieldSpecsToUse = original.getPrivateFieldSpecs();
@@ -352,6 +353,23 @@ public class UiBulletinTable extends UiTable implements ListSelectionListener, D
 		Bulletin bulletinToModify = store.createNewDraft(original, publicFieldSpecsToUse, privateFieldSpecsToUse);
 		bulletinToModify.addAuthorizedToReadKeys(mainWindow.getApp().getDefaultHQKeysWithFallback());
 		return bulletinToModify;
+	}
+	
+	private boolean confirmUpdateFieldsDlg(String baseTag)
+	{
+		MartusLocalization localization = mainWindow.getLocalization();
+		String title = localization.getWindowTitle("confirm" + baseTag);
+		String cause = localization.getFieldLabel("confirm" + baseTag + "cause");
+		String effect = localization.getFieldLabel("confirm" + baseTag + "effect");
+		String[] contents = {cause, "", effect};
+		String useOld = localization.getButtonLabel("UseOldCustomFields");
+		String useNew = localization.getButtonLabel("UseNewCustomFields");
+		String[] buttons = {useOld, useNew};
+		HashMap tokenReplacement = new HashMap();
+		tokenReplacement.put("#UseOldCustomFields#", useOld);
+		tokenReplacement.put("#UseNewCustomFields#", useNew);
+
+		return mainWindow.confirmDlg(mainWindow, title, contents, buttons, tokenReplacement);
 	}
 
 	public void doCutBulletins()
