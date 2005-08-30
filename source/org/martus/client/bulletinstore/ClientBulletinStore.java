@@ -1431,6 +1431,15 @@ public class ClientBulletinStore extends BulletinStore
 		return clone;
 	}
 
+	public void changeFieldSpecs(Bulletin original, FieldSpec[] publicFieldSpecsToUse, FieldSpec[] privateFieldSpecsToUse) throws Exception 
+	{
+		Bulletin clone = createClone(original, original.getPublicFieldSpecs(), original.getPrivateFieldSpecs());
+		original.getFieldDataPacket().setFieldSpecs(publicFieldSpecsToUse);
+		original.getPrivateFieldDataPacket().setFieldSpecs(privateFieldSpecsToUse);
+		original.pullFields(clone, original.getFieldDataPacket().getFieldSpecs());
+		original.pullFields(clone, original.getPrivateFieldDataPacket().getFieldSpecs());
+	}
+
 	public Vector getUidsOfAllBulletinRevisions()
 	{
 		class UidCollector implements Database.PacketVisitor

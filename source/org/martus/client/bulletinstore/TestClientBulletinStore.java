@@ -92,12 +92,23 @@ public class TestClientBulletinStore extends TestCaseEnhanced
 			tempFile2 = createTempFileWithData(sampleBytes2);
     	}
     	
-    	if(customSpecs == null)
+    	if(customPublicSpecs == null)
     	{
     		FieldSpec title = new FieldSpec(FieldSpec.TYPE_NORMAL);
     		title.setTag(Bulletin.TAGTITLE);
     		
-    		customSpecs = new FieldSpec[] {title};
+    		customPublicSpecs = new FieldSpec[] {title};
+    	}
+    	if(customPrivateSpecs == null)
+    	{
+    		FieldSpec keyword = new FieldSpec(FieldSpec.TYPE_NORMAL);
+    		keyword.setTag(Bulletin.TAGKEYWORDS);
+    		FieldSpec author = new FieldSpec(FieldSpec.TYPE_NORMAL);
+    		author.setTag(Bulletin.TAGAUTHOR);
+    		
+    		customPrivateSpecs = new FieldSpec[] {keyword, author};
+    		
+    	
     	}
     }
 
@@ -151,7 +162,7 @@ public class TestClientBulletinStore extends TestCaseEnhanced
 		assertTrue("original not in folder B?", folderB.contains(original));
 		assertTrue("original not in folder C?", invisiblefolderC.contains(original));
 	
-		Bulletin newVersion = store.createClone(original, customSpecs, customSpecs);
+		Bulletin newVersion = store.createClone(original, customPublicSpecs, customPrivateSpecs);
 		clientStore.saveBulletin(newVersion);
 		assertTrue("original should still be in folder A?", folderA.contains(original));
 		assertTrue("original should still be in folder B?", folderB.contains(original));
@@ -187,7 +198,7 @@ public class TestClientBulletinStore extends TestCaseEnhanced
     	store.setIsOnServer(original);
     	assertTrue("original not on server?", store.isProbablyOnServer(original));
 
-    	Bulletin clone = store.createClone(original, customSpecs, customSpecs);
+    	Bulletin clone = store.createClone(original, customPublicSpecs, customPrivateSpecs);
     	store.saveBulletin(clone);
     	store.setIsOnServer(clone);
     	
@@ -203,14 +214,14 @@ public class TestClientBulletinStore extends TestCaseEnhanced
     	Bulletin original = createSealedBulletin(security);
     	
     	{
-	    	Bulletin clone = store.createClone(original, customSpecs, customSpecs);
+	    	Bulletin clone = store.createClone(original, customPublicSpecs, customPrivateSpecs);
 	    	assertEquals("wrong account?", store.getAccountId(), clone.getAccount());
 	    	assertNotEquals("not new local id?", original.getLocalId(), clone.getLocalId());
 	    	assertEquals("no data?", original.get(Bulletin.TAGTITLE), clone.get(Bulletin.TAGTITLE));
 	    	assertEquals("Did not kept hq?", 1, clone.getAuthorizedToReadKeys().size());
 	    	assertTrue("not draft?", clone.isDraft());
-	    	assertEquals("wrong public field specs?", customSpecs.length, clone.getPublicFieldSpecs().length);
-	    	assertEquals("wrong private field specs?", customSpecs.length, clone.getPrivateFieldSpecs().length);
+	    	assertEquals("wrong public field specs?", customPublicSpecs.length, clone.getPublicFieldSpecs().length);
+	    	assertEquals("wrong private field specs?", customPrivateSpecs.length, clone.getPrivateFieldSpecs().length);
 	    	BulletinHistory history = clone.getHistory();
 			assertEquals("no history?", 1, history.size());
 	    	assertEquals("wrong ancestor?", original.getLocalId(), history.get(0));
@@ -223,19 +234,39 @@ public class TestClientBulletinStore extends TestCaseEnhanced
     	original.setDraft();
     	
     	{
-	    	Bulletin clone = store.createClone(original, customSpecs, customSpecs);
+	    	Bulletin clone = store.createClone(original, customPublicSpecs, customPrivateSpecs);
 	    	assertEquals("wrong account?", store.getAccountId(), clone.getAccount());
 	    	assertNotEquals("not new local id?", original.getLocalId(), clone.getLocalId());
 	    	assertEquals("no data?", original.get(Bulletin.TAGTITLE), clone.get(Bulletin.TAGTITLE));
 	    	assertEquals("did not keep hq?", 1, clone.getAuthorizedToReadKeys().size());
 	    	assertTrue("not draft?", clone.isDraft());
-	    	assertEquals("wrong public field specs?", customSpecs.length, clone.getPublicFieldSpecs().length);
-	    	assertEquals("wrong private field specs?", customSpecs.length, clone.getPrivateFieldSpecs().length);
+	    	assertEquals("wrong public field specs?", customPublicSpecs.length, clone.getPublicFieldSpecs().length);
+	    	assertEquals("wrong private field specs?", customPrivateSpecs.length, clone.getPrivateFieldSpecs().length);
 	    	BulletinHistory history = clone.getHistory();
 			assertEquals("has history?", 0, history.size());
     	}
 	}
     
+    public void testUpdateFieldSpecsOfMyDraft() throws Exception
+	{
+    	Bulletin bulletin = createSealedBulletin(security);
+    	String id = bulletin.getLocalId();
+    	bulletin.setDraft();
+    	{
+    		store.changeFieldSpecs(bulletin, customPublicSpecs, customPrivateSpecs);
+	    	assertEquals("wrong account?", store.getAccountId(), bulletin.getAccount());
+	    	assertEquals("not same local id?", id, bulletin.getLocalId());
+	    	assertEquals("no public data?", PUBLIC_DATA, bulletin.get(Bulletin.TAGTITLE));
+	    	assertEquals("no private data?", PRIVATE_DATA, bulletin.get(Bulletin.TAGAUTHOR));
+	    	assertEquals("did not keep hq?", 1, bulletin.getAuthorizedToReadKeys().size());
+	    	assertTrue("not draft?", bulletin.isDraft());
+	    	assertEquals("wrong public field specs?", customPublicSpecs.length, bulletin.getPublicFieldSpecs().length);
+	    	assertEquals("wrong private field specs?", customPrivateSpecs.length, bulletin.getPrivateFieldSpecs().length);
+	    	BulletinHistory history = bulletin.getHistory();
+			assertEquals("has history?", 0, history.size());
+    	}
+	}
+
     public void testCreateCloneOfNotMyBulletin() throws Exception
 	{
     	MartusCrypto otherSecurity = MockMartusSecurity.createOtherClient();
@@ -243,14 +274,14 @@ public class TestClientBulletinStore extends TestCaseEnhanced
     	Bulletin original = createSealedBulletin(otherSecurity);
 
     	{
-	    	Bulletin clone = store.createClone(original, customSpecs, customSpecs);
+	    	Bulletin clone = store.createClone(original, customPublicSpecs, customPrivateSpecs);
 	    	assertEquals("wrong account?", store.getAccountId(), clone.getAccount());
 	    	assertNotEquals("not new local id?", original.getLocalId(), clone.getLocalId());
 	    	assertEquals("no data?", original.get(Bulletin.TAGTITLE), clone.get(Bulletin.TAGTITLE));
 	    	assertEquals("Did not keep hq?", 1, clone.getAuthorizedToReadKeys().size());
 	    	assertTrue("not draft?", clone.isDraft());
-	    	assertEquals("wrong public field specs?", customSpecs.length, clone.getPublicFieldSpecs().length);
-	    	assertEquals("wrong private field specs?", customSpecs.length, clone.getPrivateFieldSpecs().length);
+	    	assertEquals("wrong public field specs?", customPublicSpecs.length, clone.getPublicFieldSpecs().length);
+	    	assertEquals("wrong private field specs?", customPrivateSpecs.length, clone.getPrivateFieldSpecs().length);
 	    	assertEquals("has history?", 0, clone.getHistory().size());
     	}
 	}
@@ -260,7 +291,8 @@ public class TestClientBulletinStore extends TestCaseEnhanced
 		HQKeys oldHq = new HQKeys(new HQKey(fakeHqKey));
     	
     	Bulletin original = new Bulletin(otherSecurity);
-    	original.set(Bulletin.TAGTITLE, "oeiwjfio");
+    	original.set(Bulletin.TAGTITLE, PUBLIC_DATA);
+    	original.set(Bulletin.TAGAUTHOR, PRIVATE_DATA);
     	original.setAuthorizedToReadKeys(oldHq);
     	original.setSealed();
 		return original;
@@ -684,7 +716,7 @@ public class TestClientBulletinStore extends TestCaseEnhanced
 		{
 			
 		}
-		
+		myStore.deleteAllData();
 	}
 	
 	public void testRenameFolder()
@@ -1778,10 +1810,13 @@ public class TestClientBulletinStore extends TestCaseEnhanced
 	static MockBulletinStore store;
 	static MockMartusSecurity security;
 	static MockDatabase db;
-	static FieldSpec[] customSpecs;
+	static FieldSpec[] customPublicSpecs;
+	static FieldSpec[] customPrivateSpecs;
 
 	static File tempFile1;
 	static File tempFile2;
+	private static final String PUBLIC_DATA = "oeiwjfio";
+	private static final String PRIVATE_DATA = "test private";
 	static final byte[] sampleBytes1 = {1,1,2,3,0,5,7,11};
 	static final byte[] sampleBytes2 = {3,1,4,0,1,5,9,2,7};
 	static final String fakeHqKey = "wwwllkjsfdkjf";
