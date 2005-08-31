@@ -53,7 +53,6 @@ import java.util.Map;
 import java.util.Stack;
 import java.util.TimerTask;
 import java.util.Vector;
-
 import javax.swing.AbstractAction;
 import javax.swing.ImageIcon;
 import javax.swing.JComponent;
@@ -62,7 +61,6 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JSplitPane;
 import javax.swing.SwingUtilities;
-
 import org.martus.client.bulletinstore.BulletinFolder;
 import org.martus.client.bulletinstore.ClientBulletinStore;
 import org.martus.client.core.BackgroundUploader;
@@ -134,7 +132,6 @@ import org.martus.swing.UiPopupMenu;
 import org.martus.swing.Utilities;
 import org.martus.swing.Utilities.Delay;
 import org.martus.util.FileVerifier;
-import org.martus.util.OneEntryMap;
 import org.martus.util.TokenReplacement;
 import org.martus.util.UnicodeReader;
 import org.martus.util.Base64.InvalidBase64Exception;
@@ -1183,7 +1180,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 			String cause = getLocalization().getFieldLabel("notifySearchFoundcause");
 			String ok = getLocalization().getButtonLabel("ok");
 			String[] buttons = { ok };
-			cause = replaceToken(cause , "#N#", (new Integer(bulletinsFound)).toString());
+			cause = replaceToken(cause , "#NumberBulletinsFound#", (new Integer(bulletinsFound)).toString());
 			UiOptionPane pane = new UiOptionPane(cause, UiOptionPane.INFORMATION_MESSAGE, UiOptionPane.DEFAULT_OPTION,
 									null, buttons);
 			JDialog dialog = pane.createDialog(this, title);
@@ -1480,7 +1477,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		catch(Exception e)
 		{
 			e.printStackTrace();
-			notifyDlg(currentActiveFrame, "RewriteKeyPairFailed", new OneEntryMap("#S#", keyPairFile.getAbsolutePath()));
+			notifyDlg(currentActiveFrame, "RewriteKeyPairFailed");
 			return false;
 			//TODO eventually try to restore keypair from backup.
 		}

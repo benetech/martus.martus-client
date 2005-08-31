@@ -242,7 +242,7 @@ public class UiOnlineHelpDlg extends JDialog
 			if(startIndex < 0)
 			{
 				HashMap tokenReplacement = new HashMap();
-				tokenReplacement.put("#S#", searchString);
+				tokenReplacement.put("#SearchString#", searchString);
 				if(mainWindow.confirmDlg(mainWindow, "helpStringNotFound", tokenReplacement))
 				{
 					msgArea.setCaretPosition(0);

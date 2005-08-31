@@ -159,7 +159,7 @@ public class FancySearchHelper
 		String displayTemplate = dlgLauncher.GetLocalization().getFieldLabel("DateRangeTemplate" + subfield);
 		try
 		{
-			String fullDisplayString = TokenReplacement.replaceToken(displayTemplate, "#FIELDLABEL#", baseDisplayString);
+			String fullDisplayString = TokenReplacement.replaceToken(displayTemplate, "#FieldLabel#", baseDisplayString);
 			FieldSpec dateSpec = FieldSpec.createCustomField(fullTag, fullDisplayString, FieldSpec.TYPE_DATE);
 			itemIfAny.add(new ChoiceItem(dateSpec));
 		}

@@ -57,8 +57,8 @@ public class UiBackupRecoverSharedKeyPair
 	public static Map getTokenReplacement() 
 	{
 		HashMap map = new HashMap();
-		map.put("#M#", Integer.toString(MartusConstants.numberOfFilesInShare));
-		map.put("#N#", Integer.toString(MartusConstants.minNumberOfFilesNeededToRecreateSecret));
+		map.put("#TotalNumberOfFilesInBackup#", Integer.toString(MartusConstants.numberOfFilesInShare));
+		map.put("#MinimumNumberOfFilesNeededForRecovery#", Integer.toString(MartusConstants.minNumberOfFilesNeededToRecreateSecret));
 		return map;
 	}
 
