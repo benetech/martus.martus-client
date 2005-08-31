@@ -271,7 +271,7 @@ public class EnglishStrings
 "button:help=Help",
 "button:create=Create",
 "button:search=Search",
-"button:print=Print",
+"button:print=Print/Report",
 "button:connectserver=Connect",
 "button:send=Save Sealed",
 "button:savedraft=Save Draft",
@@ -337,7 +337,7 @@ public class EnglishStrings
 
 "menu:file=File",
 "menu:CreateNewBulletin=Create New Bulletin",
-"menu:printBulletin=Print Bulletin(s)",
+"menu:printBulletin=Print Bulletin(s) / Create Report File",
 "menu:ExportBulletins=Export Bulletins",
 "menu:ExportFolder=Export Folder",
 "menu:exit=Exit",
