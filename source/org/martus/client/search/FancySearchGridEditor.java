@@ -26,14 +26,15 @@ Boston, MA 02111-1307, USA.
 
 package org.martus.client.search;
 
+import java.awt.Dimension;
 import javax.swing.JTable;
 import javax.swing.event.PopupMenuEvent;
 import javax.swing.event.PopupMenuListener;
-
 import org.martus.client.bulletinstore.ClientBulletinStore;
 import org.martus.client.swingui.dialogs.UiDialogLauncher;
 import org.martus.client.swingui.fields.UiGridEditor;
 import org.martus.client.swingui.grids.GridDropDownCellEditor;
+import org.martus.client.swingui.grids.GridTable;
 import org.martus.swing.UiComboBox;
 
 public class FancySearchGridEditor extends UiGridEditor
@@ -50,8 +51,18 @@ public class FancySearchGridEditor extends UiGridEditor
 	{
 		super(helperToUse.getModel(), helperToUse.getDialogLauncher());
 		helper = helperToUse;
-		getTable().setAutoResizeMode(JTable.AUTO_RESIZE_LAST_COLUMN);
+		getTable().setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
+		setSearchForColumnWideEnoughForDates();
+		getComponent().setPreferredSize(new Dimension(750, 200));
 		addListenerSoFieldChangeCanTriggerRepaintOfValueColumn();
+	}
+
+	private void setSearchForColumnWideEnoughForDates()
+	{
+		GridTable searchTable = getTable();
+		int searchForColumn = FancySearchHelper.COLUMN_VALUE;
+		int widthToHoldDates = searchTable.getDateColumnWidth();
+		searchTable.setColumnWidth(searchForColumn, widthToHoldDates);
 	}
 
 	private GridDropDownCellEditor getFieldColumnEditor()

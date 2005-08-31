@@ -71,7 +71,7 @@ public class GridTable extends UiTableWithCellEditingProtection
 		setAutoResizeMode(AUTO_RESIZE_OFF);
 	}
 
-	private int getDateColumnWidth()
+	public int getDateColumnWidth()
 	{
 		final int DATE_LANGUAGE_PADDING = 100;
 		GridDateCellEditor gridDateCellEditor = ((GridDateCellEditor)getEditorOrRendererForType(editors, new Integer(FieldSpec.TYPE_DATE)));
