@@ -46,6 +46,7 @@ public abstract class UiSearchDlg extends JDialog  implements ActionListener
 		localization = owner.getLocalization();
 		searchButton = createBody(owner);
 		Utilities.centerDlg(this);
+		pack();  //JAVA Bug had to call pack twice to force UiWrappedTextArea to get the right dimension
 		setResizable(true);
 	}
 	
