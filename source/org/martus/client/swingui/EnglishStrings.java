@@ -820,7 +820,7 @@ public class EnglishStrings
 "field:BulletinDetailsInProgressDate=(in progress)",
 "field:BulletinDetailsInProgressTitle=(in progress)",
 "field:BulletinHeadQuartersHQInfoForView=The following Headquarters account(s) can view the private information in this bulletin, and can send this bulletin to a server.",
-"field:BulletinHeadQuartersHQInfoForModify=The selected Headquarters account(s) will be able to view the private information in this bulletin, or send this bulletin to a server, after you save it.\n\nTo add a new headquarters account use the Tools/Configure Headquarters menu option.",
+"field:BulletinHeadQuartersHQInfoForModify=The selected Headquarters account(s) will be able to view the private information in this bulletin, or send this bulletin to a server, after you save it.\n\nTo add a new Headquarters account use the Tools/Configure Headquarters menu option.",
 
 "folder:%OutBox=Unsent Bulletins",
 "folder:%Sent=Saved Bulletins",
