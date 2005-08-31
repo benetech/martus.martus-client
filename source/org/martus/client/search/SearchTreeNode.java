@@ -52,14 +52,17 @@ public class SearchTreeNode
 		nodeOp = VALUE;
 		compareOp = CONTAINS;
 		
-		int colonAt = value.indexOf(':');
-		if(!value.startsWith("\"") && colonAt >= 0)
+		if(value.startsWith(":"))
 		{
-			fieldTag = value.substring(0, colonAt);
-			value = value.substring(colonAt + 1);
-			String op  = getComparisonOp(value);
-			value = value.substring(op.length());
-			compareOp = convertComparisonOpStringToValue(op);
+			int colonAt = value.indexOf(":", 1);
+			if(colonAt > 0)
+			{
+				fieldTag = value.substring(1, colonAt);
+				value = value.substring(colonAt + 1);
+				String op  = getComparisonOp(value);
+				value = value.substring(op.length());
+				compareOp = convertComparisonOpStringToValue(op);
+			}
 		}
 		
 		nodeValue = withoutQuotes(value);
@@ -110,6 +113,8 @@ public class SearchTreeNode
 	
 	public String getField()
 	{
+		if(fieldTag == null || fieldTag.length() == 0)
+			return null;
 		return fieldTag;
 	}
 

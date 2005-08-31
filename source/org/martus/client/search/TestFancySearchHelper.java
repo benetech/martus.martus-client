@@ -183,8 +183,9 @@ public class TestFancySearchHelper extends TestCaseEnhanced
 		addRow(data, "a", "b", "c", "or");
 		addRow(data, "d", "e", " f", "and");
 		addRow(data, "g", "h", "\"ii\"", "or");
+		addRow(data, "", ":", "j", "and");
 		
-		assertEquals("\"whiz\" and ab\"c\" or de\"f\" and gh\"ii\" ", helper.getSearchString(data));
+		assertEquals("whiz and :ab c or :de f and :gh \"ii\" or j ", helper.getSearchString(data));
 	}
 	
 	private void addRow(GridData data, String field, String op, String value, String andOr)

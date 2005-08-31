@@ -62,11 +62,11 @@ public class TestBulletinSearcher extends TestCaseEnhanced
 		realBulletin.set(otherField, otherValue);
 		
 		SafeReadableBulletin b = new SafeReadableBulletin(realBulletin);
-		BulletinSearcher specific = new BulletinSearcher(new SearchTreeNode(fieldToSearch + ":" + sampleValue));
+		BulletinSearcher specific = new BulletinSearcher(new SearchTreeNode(":" + fieldToSearch + ":" + sampleValue));
 		assertTrue("didn't find specific field?", specific.doesMatch(b));
-		BulletinSearcher wrongValue= new BulletinSearcher(new SearchTreeNode(fieldToSearch + ":" + otherValue));
+		BulletinSearcher wrongValue= new BulletinSearcher(new SearchTreeNode(":" + fieldToSearch + ":" + otherValue));
 		assertFalse("found wrong value?", wrongValue.doesMatch(b));
-		BulletinSearcher wrongField = new BulletinSearcher(new SearchTreeNode(otherField + ":" + sampleValue));
+		BulletinSearcher wrongField = new BulletinSearcher(new SearchTreeNode(":" + otherField + ":" + sampleValue));
 		assertFalse("found in wrong field?", wrongField.doesMatch(b));
 	}
 	
@@ -96,29 +96,29 @@ public class TestBulletinSearcher extends TestCaseEnhanced
 		String aboveSample = "red";
 		b.set(fieldToSearch, sampleValue);
 
-		verifyOperatorComparison("testDoesMatchComparisons", b, fieldToSearch, ":>=", belowSample, true);
-		verifyOperatorComparison("testDoesMatchComparisons", b, fieldToSearch, ":>=", sampleValue, true);
-		verifyOperatorComparison("testDoesMatchComparisons", b, fieldToSearch, ":>=", aboveSample, false);
+		verifyOperatorComparison("testDoesMatchComparisons", b, fieldToSearch, ">=", belowSample, true);
+		verifyOperatorComparison("testDoesMatchComparisons", b, fieldToSearch, ">=", sampleValue, true);
+		verifyOperatorComparison("testDoesMatchComparisons", b, fieldToSearch, ">=", aboveSample, false);
 
-		verifyOperatorComparison("testDoesMatchComparisons", b, fieldToSearch, ":>", belowSample, true);
-		verifyOperatorComparison("testDoesMatchComparisons", b, fieldToSearch, ":>", sampleValue, false);
-		verifyOperatorComparison("testDoesMatchComparisons", b, fieldToSearch, ":>", aboveSample, false);
+		verifyOperatorComparison("testDoesMatchComparisons", b, fieldToSearch, ">", belowSample, true);
+		verifyOperatorComparison("testDoesMatchComparisons", b, fieldToSearch, ">", sampleValue, false);
+		verifyOperatorComparison("testDoesMatchComparisons", b, fieldToSearch, ">", aboveSample, false);
 
-		verifyOperatorComparison("testDoesMatchComparisons", b, fieldToSearch, ":<=", belowSample, false);
-		verifyOperatorComparison("testDoesMatchComparisons", b, fieldToSearch, ":<=", sampleValue, true);
-		verifyOperatorComparison("testDoesMatchComparisons", b, fieldToSearch, ":<=", aboveSample, true);
+		verifyOperatorComparison("testDoesMatchComparisons", b, fieldToSearch, "<=", belowSample, false);
+		verifyOperatorComparison("testDoesMatchComparisons", b, fieldToSearch, "<=", sampleValue, true);
+		verifyOperatorComparison("testDoesMatchComparisons", b, fieldToSearch, "<=", aboveSample, true);
 
-		verifyOperatorComparison("testDoesMatchComparisons", b, fieldToSearch, ":<", belowSample, false);
-		verifyOperatorComparison("testDoesMatchComparisons", b, fieldToSearch, ":<", sampleValue, false);
-		verifyOperatorComparison("testDoesMatchComparisons", b, fieldToSearch, ":<", aboveSample, true);
+		verifyOperatorComparison("testDoesMatchComparisons", b, fieldToSearch, "<", belowSample, false);
+		verifyOperatorComparison("testDoesMatchComparisons", b, fieldToSearch, "<", sampleValue, false);
+		verifyOperatorComparison("testDoesMatchComparisons", b, fieldToSearch, "<", aboveSample, true);
 
-		verifyOperatorComparison("testDoesMatchComparisons", b, fieldToSearch, ":=", belowSample, false);
-		verifyOperatorComparison("testDoesMatchComparisons", b, fieldToSearch, ":=", sampleValue, true);
-		verifyOperatorComparison("testDoesMatchComparisons", b, fieldToSearch, ":=", aboveSample, false);
+		verifyOperatorComparison("testDoesMatchComparisons", b, fieldToSearch, "=", belowSample, false);
+		verifyOperatorComparison("testDoesMatchComparisons", b, fieldToSearch, "=", sampleValue, true);
+		verifyOperatorComparison("testDoesMatchComparisons", b, fieldToSearch, "=", aboveSample, false);
 
-		verifyOperatorComparison("testDoesMatchComparisons", b, fieldToSearch, ":!=", belowSample, true);
-		verifyOperatorComparison("testDoesMatchComparisons", b, fieldToSearch, ":!=", sampleValue, false);
-		verifyOperatorComparison("testDoesMatchComparisons", b, fieldToSearch, ":!=", aboveSample, true);
+		verifyOperatorComparison("testDoesMatchComparisons", b, fieldToSearch, "!=", belowSample, true);
+		verifyOperatorComparison("testDoesMatchComparisons", b, fieldToSearch, "!=", sampleValue, false);
+		verifyOperatorComparison("testDoesMatchComparisons", b, fieldToSearch, "!=", aboveSample, true);
 	}
 
 	private void verifyOperatorComparison(String caller, Bulletin realBulletin, String fieldToSearch, String operator, String value, boolean expected)
@@ -126,7 +126,7 @@ public class TestBulletinSearcher extends TestCaseEnhanced
 		SafeReadableBulletin b = new SafeReadableBulletin(realBulletin);
 		String actual = b.getPossiblyNestedField(fieldToSearch).getData();
 		String expressionEnd = operator + value;
-		BulletinSearcher searcher = new BulletinSearcher(new SearchTreeNode(fieldToSearch + expressionEnd));
+		BulletinSearcher searcher = new BulletinSearcher(new SearchTreeNode(":" + fieldToSearch + ":" + expressionEnd));
 		String message = caller + ": " + actual + expressionEnd;
 		assertEquals(message, expected, searcher.doesMatch(b));
 	}
@@ -225,7 +225,7 @@ public class TestBulletinSearcher extends TestCaseEnhanced
 		MartusCrypto security = MockMartusSecurity.createClient();
 		Bulletin b = new Bulletin(security);
 		
-		verifyOperatorComparison("testLocalId", b, "_localId", ":", b.getLocalId(), true);
+		verifyOperatorComparison("testLocalId", b, "_localId", "", b.getLocalId(), true);
 	}
 		
 	public void testDateMatchesLastSaved() throws Exception
@@ -235,7 +235,7 @@ public class TestBulletinSearcher extends TestCaseEnhanced
 		b.getBulletinHeaderPacket().updateLastSavedTime();
 		String lastSaved = b.getLastSavedDate();
 		
-		verifyOperatorComparison("testDateMatchesLastSaved", b, "_lastSavedDate", ":", lastSaved, true);
+		verifyOperatorComparison("testDateMatchesLastSaved", b, "_lastSavedDate", "", lastSaved, true);
 	}
 		
 	public void testFlexiDateMatches() throws Exception
@@ -244,18 +244,18 @@ public class TestBulletinSearcher extends TestCaseEnhanced
 		Bulletin b = new Bulletin(security);
 		b.set(Bulletin.TAGEVENTDATE, "2003-08-20,20030820+3");
 		
-		verifyOperatorComparison("testFlexiDateMatches", b, Bulletin.TAGEVENTDATE, ":", "2003-08-20", false);
-		verifyOperatorComparison("testFlexiDateMatches", b, Bulletin.TAGEVENTDATE, ":", "2003-08-26", false);
+		verifyOperatorComparison("testFlexiDateMatches", b, Bulletin.TAGEVENTDATE, "", "2003-08-20", false);
+		verifyOperatorComparison("testFlexiDateMatches", b, Bulletin.TAGEVENTDATE, "", "2003-08-26", false);
 
-		verifyOperatorComparison("testFlexiDateMatches", b, Bulletin.TAGEVENTDATE+"." + MartusDateRangeField.SUBFIELD_BEGIN, ":", "2003-08-20", true);
-		verifyOperatorComparison("testFlexiDateMatches", b, Bulletin.TAGEVENTDATE+"." + MartusDateRangeField.SUBFIELD_BEGIN, ":", "2003-08-21", false);
-		verifyOperatorComparison("testFlexiDateMatches", b, Bulletin.TAGEVENTDATE+"." + MartusDateRangeField.SUBFIELD_END, ":", "2003-08-23", true);
-		verifyOperatorComparison("testFlexiDateMatches", b, Bulletin.TAGEVENTDATE+"." + MartusDateRangeField.SUBFIELD_END, ":", "2003-08-22", false);
+		verifyOperatorComparison("testFlexiDateMatches", b, Bulletin.TAGEVENTDATE+"." + MartusDateRangeField.SUBFIELD_BEGIN, "", "2003-08-20", true);
+		verifyOperatorComparison("testFlexiDateMatches", b, Bulletin.TAGEVENTDATE+"." + MartusDateRangeField.SUBFIELD_BEGIN, "", "2003-08-21", false);
+		verifyOperatorComparison("testFlexiDateMatches", b, Bulletin.TAGEVENTDATE+"." + MartusDateRangeField.SUBFIELD_END, "", "2003-08-23", true);
+		verifyOperatorComparison("testFlexiDateMatches", b, Bulletin.TAGEVENTDATE+"." + MartusDateRangeField.SUBFIELD_END, "", "2003-08-22", false);
 
-		verifyOperatorComparison("testFlexiDateMatches", b, Bulletin.TAGEVENTDATE+"." + MartusDateRangeField.SUBFIELD_BEGIN, ":>=", "2003-08-20", true);
-		verifyOperatorComparison("testFlexiDateMatches", b, Bulletin.TAGEVENTDATE+"." + MartusDateRangeField.SUBFIELD_BEGIN, ":>", "2003-08-20", false);
-		verifyOperatorComparison("testFlexiDateMatches", b, Bulletin.TAGEVENTDATE+"." + MartusDateRangeField.SUBFIELD_BEGIN, ":<=", "2003-08-20", true);
-		verifyOperatorComparison("testFlexiDateMatches", b, Bulletin.TAGEVENTDATE+"." + MartusDateRangeField.SUBFIELD_BEGIN, ":<", "2003-08-19", false);
+		verifyOperatorComparison("testFlexiDateMatches", b, Bulletin.TAGEVENTDATE+"." + MartusDateRangeField.SUBFIELD_BEGIN, ">=", "2003-08-20", true);
+		verifyOperatorComparison("testFlexiDateMatches", b, Bulletin.TAGEVENTDATE+"." + MartusDateRangeField.SUBFIELD_BEGIN, ">", "2003-08-20", false);
+		verifyOperatorComparison("testFlexiDateMatches", b, Bulletin.TAGEVENTDATE+"." + MartusDateRangeField.SUBFIELD_BEGIN, "<=", "2003-08-20", true);
+		verifyOperatorComparison("testFlexiDateMatches", b, Bulletin.TAGEVENTDATE+"." + MartusDateRangeField.SUBFIELD_BEGIN, "<", "2003-08-19", false);
 	}
 	
 	public void testBooleanMatches() throws Exception
@@ -274,13 +274,13 @@ public class TestBulletinSearcher extends TestCaseEnhanced
 		b.set("false", FieldSpec.FALSESTRING);
 		b.set("bogus", "");
 		
-		verifyOperatorComparison("testBooleanMatches", b, "true", ":", FieldSpec.TRUESTRING, true);
-		verifyOperatorComparison("testBooleanMatches", b, "true", ":", FieldSpec.FALSESTRING, false);
-		verifyOperatorComparison("testBooleanMatches", b, "false", ":", FieldSpec.FALSESTRING, true);
-		verifyOperatorComparison("testBooleanMatches", b, "false", ":", FieldSpec.TRUESTRING, false);
-		verifyOperatorComparison("testBooleanMatches", b, "bogus", ":", FieldSpec.FALSESTRING, false);
-		verifyOperatorComparison("testBooleanMatches", b, "bogus", ":", FieldSpec.TRUESTRING, false);
-		verifyOperatorComparison("testBooleanMatches", b, "true", ":!=", FieldSpec.FALSESTRING, true);
+		verifyOperatorComparison("testBooleanMatches", b, "true", "", FieldSpec.TRUESTRING, true);
+		verifyOperatorComparison("testBooleanMatches", b, "true", "", FieldSpec.FALSESTRING, false);
+		verifyOperatorComparison("testBooleanMatches", b, "false", "", FieldSpec.FALSESTRING, true);
+		verifyOperatorComparison("testBooleanMatches", b, "false", "", FieldSpec.TRUESTRING, false);
+		verifyOperatorComparison("testBooleanMatches", b, "bogus", "", FieldSpec.FALSESTRING, false);
+		verifyOperatorComparison("testBooleanMatches", b, "bogus", "", FieldSpec.TRUESTRING, false);
+		verifyOperatorComparison("testBooleanMatches", b, "true", "!=", FieldSpec.FALSESTRING, true);
 		
 	}
 }

@@ -221,18 +221,17 @@ public class FancySearchHelper
 			String op = gridData.getValueAt(row, 1);
 			String value = gridData.getValueAt(row, 2);
 			value = value.trim();
-			value = value.replaceAll("\\\"", "");
 			String andOr = gridData.getValueAt(row, 3); 
 		
 			if(field.length() > 0)
 			{
+				searchExpression.append(":");
 				searchExpression.append(field);
 				searchExpression.append(op);
+				searchExpression.append(" ");
 			}
 			
-			searchExpression.append("\"");
 			searchExpression.append(value);
-			searchExpression.append("\"");
 			if(row < rowCount - 1)
 			{
 				searchExpression.append(" ");

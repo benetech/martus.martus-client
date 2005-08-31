@@ -74,6 +74,7 @@ public class SearchParser
 
 	public SearchTreeNode parse(String expression)
 	{
+		String field = "";
 		int nextOp = SearchTreeNode.AND;
 		SearchTreeNode left = null;
 		
@@ -90,8 +91,13 @@ public class SearchParser
 				nextOp = SearchTreeNode.OR;
 				continue;
 			}
+			else if(isField(thisToken))
+			{
+				field = thisToken;
+				continue;
+			}
 			
-			SearchTreeNode thisNode = new SearchTreeNode(thisToken);
+			SearchTreeNode thisNode = new SearchTreeNode(field + thisToken);
 			
 			if(left == null)
 			{
@@ -109,6 +115,11 @@ public class SearchParser
 			left = new SearchTreeNode("");
 		
 		return left;
+	}
+	
+	private boolean isField(String candidate)
+	{
+		return (candidate.startsWith(":"));
 	}
 	
 	public boolean isKeyword(String candidate, String[] keywords)

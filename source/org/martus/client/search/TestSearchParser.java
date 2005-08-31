@@ -75,16 +75,16 @@ public class TestSearchParser extends TestCaseEnhanced
     
     public void testTokenizedSpecificFieldSimple()
     {
-    	String fieldValue = "field:value";
+    	String fieldValue = ":field:value";
     	TokenList tokens = englishParser.tokenize(fieldValue);
     	assertEquals(1, tokens.size());
     	assertEquals(fieldValue, tokens.get(0));
     	
     }
 
-    public void testTokenizedSpecificFieldQuoted()
+    public void testTokenizedQuoted()
     {
-    	String fieldQuotedValue = "field:\"quoted value\"";
+    	String fieldQuotedValue = "\"quoted :value\"";
     	TokenList tokens = englishParser.tokenize(fieldQuotedValue);
     	assertEquals(1, tokens.size());
     	assertEquals(fieldQuotedValue, tokens.get(0));
@@ -203,14 +203,44 @@ public class TestSearchParser extends TestCaseEnhanced
 		SearchTreeNode all = englishParser.parse("testing");
 		assertNull("not searching all fields?", all.getField());
 		
-		SearchTreeNode name = englishParser.parse("name:smith");
+		SearchTreeNode name = englishParser.parse(":name: smith");
 		assertEquals("not searching name?", "name", name.getField());
 		assertEquals("smith", name.getValue());
 
 		String greenEggs = "green eggs and ham";
-		SearchTreeNode phrase = englishParser.parse("name:\"" + greenEggs + "\"");
+		SearchTreeNode phrase = englishParser.parse(":name: \"" + greenEggs + "\"");
 		assertEquals("not searching name?", "name", phrase.getField());
 		assertEquals("green eggs and ham", phrase.getValue());
+	}
+	
+	public void testAmazonStyleSearching()
+	{
+		String field = "field";
+		String plain = "plain";
+		String quoted = "quoted";
+		String searchString = ":" + field + ":> " + plain + " or \"" + quoted + "\"";
+		SearchTreeNode or = englishParser.parse(searchString);
+		assertEquals("didn't see the or?", SearchTreeNode.OR, or.getOperation());
+		
+		SearchTreeNode left = or.getLeft();
+		assertEquals("left part not a value?", SearchTreeNode.VALUE, left.getOperation());
+		assertEquals("left part wrong value?", plain, left.getValue());
+		assertEquals("left part wrong field?", field, left.getField());
+		assertEquals("left part wrong op?", SearchTreeNode.GREATER, left.getComparisonOperator());
+
+		SearchTreeNode right = or.getRight();
+		assertEquals("right part not a value?", SearchTreeNode.VALUE, right.getOperation());
+		assertEquals("right part wrong value?", quoted, right.getValue());
+		assertEquals("right part wrong field?", field, right.getField());
+		assertEquals("right part wrong op?", SearchTreeNode.GREATER, right.getComparisonOperator());
+	}
+	
+	public void testAmazonRevertToAnyField()
+	{
+		String searchString = ":field:> value :: other";
+		SearchTreeNode other = englishParser.parse(searchString).getRight();
+		assertNull("didn't reset to any field?", other.getField());
+		assertEquals("didn't reset compareop?", SearchTreeNode.CONTAINS, other.getComparisonOperator());
 	}
 
 /*	
