@@ -358,10 +358,6 @@ public class UiBulletinTable extends UiTable implements ListSelectionListener, D
 	private boolean confirmUpdateFieldsDlg(String baseTag)
 	{
 		MartusLocalization localization = mainWindow.getLocalization();
-		String title = localization.getWindowTitle("confirm" + baseTag);
-		String cause = localization.getFieldLabel("confirm" + baseTag + "cause");
-		String effect = localization.getFieldLabel("confirm" + baseTag + "effect");
-		String[] contents = {cause, "", effect};
 		String useOld = localization.getButtonLabel("UseOldCustomFields");
 		String useNew = localization.getButtonLabel("UseNewCustomFields");
 		String[] buttons = {useOld, useNew};
@@ -369,7 +365,7 @@ public class UiBulletinTable extends UiTable implements ListSelectionListener, D
 		tokenReplacement.put("#UseOldCustomFields#", useOld);
 		tokenReplacement.put("#UseNewCustomFields#", useNew);
 
-		return mainWindow.confirmDlg(mainWindow, title, contents, buttons, tokenReplacement);
+		return mainWindow.confirmCustomButtonsDlg(mainWindow, baseTag, buttons, tokenReplacement);
 	}
 
 	public void doCutBulletins()

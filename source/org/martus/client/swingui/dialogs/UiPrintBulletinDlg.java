@@ -29,6 +29,7 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Vector;
 import javax.swing.Box;
@@ -37,6 +38,7 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
+import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.clientside.UiLocalization;
 import org.martus.common.bulletin.Bulletin;
@@ -129,7 +131,14 @@ public class UiPrintBulletinDlg extends JDialog implements ActionListener
 		{
 			if (!wantsPrivateData() && allPrivateData)
 			{		
-				if(mainWindow.confirmDlg("PrintAllPrivateData"))
+				MartusLocalization localization = mainWindow.getLocalization();
+				String back = localization.getButtonLabel("Back");
+				String continuePrinting = localization.getButtonLabel("Continue");
+				String[] buttons = {back, continuePrinting};
+				HashMap tokenReplacement = new HashMap();
+				tokenReplacement.put("#PrintBack#", back);
+				tokenReplacement.put("#PrintContinue#", continuePrinting);
+				if(mainWindow.confirmCustomButtonsDlg(mainWindow, "PrintAllPrivateData", buttons, tokenReplacement))
 					return;
 			}	
 			pressContinue = true;

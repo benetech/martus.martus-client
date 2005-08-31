@@ -314,6 +314,7 @@ public class EnglishStrings
 "button:Leave=Leave",
 "button:modify=Modify",
 "button:loadTemplateFromFile=Load From File",
+"button:Back=Back",
 "button:Continue=Continue",
 "button:ResetContents=Reset Contents",
 "button:ServerComplianceAccept=Accept",
@@ -596,7 +597,7 @@ public class EnglishStrings
 "field:confirmRetrieveNewerVersionscause=The following bulletin(s) selected for retrieval are newer versions of bulletins already on this computer:\n\n#TITLES#",
 "field:confirmRetrieveNewerVersionseffect=Each older version will be replaced by the newer version from the server.",
 "field:confirmPrintAllPrivateDatacause=One or more bulletins will not be printed because all the information is private, and you marked the \"Print only public information\" box",
-"field:confirmPrintAllPrivateDataeffect=Answering Yes will allow return to the previous dialog so you can mark the \"Include private information\" box.  Answering No will print only the public sections of the bulletins and skip those bulletins which are all private.",
+"field:confirmPrintAllPrivateDataeffect=Answering '#PrintBack#' will allow return to the previous dialog so you can mark the \"Include private information\" box.  Answering '#PrintContinue#' will print only the public sections of the bulletins and skip those bulletins which are all private.",
 
 "field:confirmDateRageInvalidcause=The date range you entered is invalid.  The end date occures before the begin data.",
 "field:confirmDateRageInvalideffect=Answering Yes will take you back to the date range to fix the problem.  Answering No will revert the date back to its original value.",
