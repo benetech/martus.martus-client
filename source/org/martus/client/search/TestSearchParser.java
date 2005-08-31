@@ -149,16 +149,33 @@ public class TestSearchParser extends TestCaseEnhanced
 		assertEquals("tweedledum", right.getValue());
 	}
 
-	public void testComplex()
+	public void testAndBeforeOr()
 	{
-		// (a AND b) AND c
-		SearchTreeNode abc = englishParser.parse("a and b and c");
+		// (a AND b) OR c
+		SearchTreeNode abc = englishParser.parse("a and b or c");
+		assertNotNull("Null root", abc);
+		assertEquals("rootNode", SearchTreeNode.OR, abc.getOperation());
+		
+		SearchTreeNode ab = abc.getLeft();
+		assertNotNull("root Null left", ab);
+		assertEquals("ab", SearchTreeNode.AND, ab.getOperation());
+		assertEquals("a", ab.getLeft().getValue());
+		assertEquals("b", ab.getRight().getValue());
+
+		assertEquals("c", abc.getRight().getValue());
+
+	}
+	
+	public void testOrBeforeAnd()
+	{
+		// (a OR b) AND c
+		SearchTreeNode abc = englishParser.parse("a or b and c");
 		assertNotNull("Null root", abc);
 		assertEquals("rootNode", SearchTreeNode.AND, abc.getOperation());
 		
 		SearchTreeNode ab = abc.getLeft();
 		assertNotNull("root Null left", ab);
-		assertEquals("ab", SearchTreeNode.AND, ab.getOperation());
+		assertEquals("ab", SearchTreeNode.OR, ab.getOperation());
 		assertEquals("a", ab.getLeft().getValue());
 		assertEquals("b", ab.getRight().getValue());
 
