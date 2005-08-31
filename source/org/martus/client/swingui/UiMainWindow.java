@@ -1160,6 +1160,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		// TODO: Allow either the old UiSimpleSearchDlg or the new UiFancySearchDlg
 		UiFancySearchDlg searchDlg = new UiFancySearchDlg(this);
 		//UiSimpleSearchDlg searchDlg = new UiSimpleSearchDlg(this);
+		searchDlg.setVisible(true);
 		if(!searchDlg.getResults())
 			return;
 		setWaitingCursor();

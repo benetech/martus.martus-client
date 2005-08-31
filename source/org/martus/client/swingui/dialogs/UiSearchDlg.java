@@ -44,12 +44,9 @@ public abstract class UiSearchDlg extends JDialog  implements ActionListener
 	{
 		super(owner, "", true);
 		localization = owner.getLocalization();
-
 		searchButton = createBody(owner);
-		
 		Utilities.centerDlg(this);
 		setResizable(true);
-		setVisible(true);
 	}
 	
 	abstract UiButton createBody(UiMainWindow mainWindow);
