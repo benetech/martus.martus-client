@@ -29,6 +29,8 @@ package org.martus.client.swingui.dialogs;
 import java.awt.BorderLayout;
 import java.awt.Component;
 import javax.swing.Box;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
 import org.martus.client.search.FancySearchGridEditor;
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
@@ -58,20 +60,22 @@ public class UiFancySearchDlg extends UiSearchDlg
 		grid = FancySearchGridEditor.create(mainWindow.getStore(), dlgLauncher);
 		grid.setText(getPreviousSearch());
 
-		UiVBox panel = new UiVBox();
-		panel.add(new UiWrappedTextArea(localization.getFieldLabel("SearchBulletinRules")));
-		panel.add(new UiWrappedTextArea(localization.getFieldLabel("SearchBulletinAddingRules")));
+		UiVBox instructionPanel = new UiVBox();
+		instructionPanel.add(new UiWrappedTextArea(localization.getFieldLabel("SearchBulletinRules")));
+		instructionPanel.add(new UiWrappedTextArea(localization.getFieldLabel("SearchBulletinAddingRules")));
 
-		getContentPane().setLayout(new BorderLayout());
-		
-		getContentPane().add(panel,BorderLayout.NORTH);
-		getContentPane().add(grid.getComponent(),BorderLayout.CENTER);
+		Box buttonBox = Box.createHorizontalBox();
+		buttonBox.setBorder(new EmptyBorder(10,0,0,0));
+		Utilities.addComponentsRespectingOrientation(buttonBox, new Component[] {search, Box.createHorizontalGlue(),cancel });
 
-		
-		Box componentBox = Box.createHorizontalBox();
-		Utilities.addComponentsRespectingOrientation(componentBox, new Component[] {search, cancel});
+		JPanel mainPanel = new JPanel();
+		mainPanel.setBorder(new EmptyBorder(5,5,5,5));
+		mainPanel.setLayout(new BorderLayout());
+		mainPanel.add(instructionPanel,BorderLayout.NORTH);
+		mainPanel.add(grid.getComponent(),BorderLayout.CENTER);
+		mainPanel.add(buttonBox,BorderLayout.SOUTH);
 
-		getContentPane().add(componentBox,BorderLayout.SOUTH);
+		getContentPane().add(mainPanel);
 		getRootPane().setDefaultButton(search);
 		
 		return search;
