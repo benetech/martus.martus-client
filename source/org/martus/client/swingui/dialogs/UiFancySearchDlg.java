@@ -26,13 +26,16 @@ Boston, MA 02111-1307, USA.
 
 package org.martus.client.swingui.dialogs;
 
+import java.awt.BorderLayout;
 import java.awt.Component;
+import javax.swing.Box;
 import org.martus.client.search.FancySearchGridEditor;
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.swing.UiButton;
 import org.martus.swing.UiVBox;
 import org.martus.swing.UiWrappedTextArea;
+import org.martus.swing.Utilities;
 
 public class UiFancySearchDlg extends UiSearchDlg
 {
@@ -58,12 +61,17 @@ public class UiFancySearchDlg extends UiSearchDlg
 		UiVBox panel = new UiVBox();
 		panel.add(new UiWrappedTextArea(localization.getFieldLabel("SearchBulletinRules")));
 		panel.add(new UiWrappedTextArea(localization.getFieldLabel("SearchBulletinAddingRules")));
-		panel.addSpace();
-		panel.add(grid.getComponent());
-		panel.addSpace();
-		panel.add(new Component[] {search, cancel});
-	
-		getContentPane().add(panel);
+
+		getContentPane().setLayout(new BorderLayout());
+		
+		getContentPane().add(panel,BorderLayout.NORTH);
+		getContentPane().add(grid.getComponent(),BorderLayout.CENTER);
+
+		
+		Box componentBox = Box.createHorizontalBox();
+		Utilities.addComponentsRespectingOrientation(componentBox, new Component[] {search, cancel});
+
+		getContentPane().add(componentBox,BorderLayout.SOUTH);
 		getRootPane().setDefaultButton(search);
 		
 		return search;

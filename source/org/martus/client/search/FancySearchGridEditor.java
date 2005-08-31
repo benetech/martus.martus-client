@@ -36,6 +36,7 @@ import org.martus.client.swingui.fields.UiGridEditor;
 import org.martus.client.swingui.grids.GridDropDownCellEditor;
 import org.martus.client.swingui.grids.GridTable;
 import org.martus.swing.UiComboBox;
+import org.martus.swing.Utilities;
 
 public class FancySearchGridEditor extends UiGridEditor
 {
@@ -53,8 +54,15 @@ public class FancySearchGridEditor extends UiGridEditor
 		helper = helperToUse;
 		getTable().setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
 		setSearchForColumnWideEnoughForDates();
-		getComponent().setPreferredSize(new Dimension(750, 200));
+		setGridTableSize();
 		addListenerSoFieldChangeCanTriggerRepaintOfValueColumn();
+	}
+
+	private void setGridTableSize()
+	{
+		Dimension searchGridSize = Utilities.getViewableScreenSize();
+		searchGridSize.setSize(searchGridSize.getWidth() * 0.9, 200);
+		getComponent().setPreferredSize(searchGridSize);
 	}
 
 	private void setSearchForColumnWideEnoughForDates()
