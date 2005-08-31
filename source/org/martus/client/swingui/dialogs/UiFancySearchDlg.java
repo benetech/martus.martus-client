@@ -28,15 +28,17 @@ package org.martus.client.swingui.dialogs;
 
 import java.awt.BorderLayout;
 import java.awt.Component;
+
 import javax.swing.Box;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
 import org.martus.client.search.FancySearchGridEditor;
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.swing.UiButton;
 import org.martus.swing.UiVBox;
-import org.martus.swing.UiWrappedTextArea;
+import org.martus.swing.UiWrappedTextPanel;
 import org.martus.swing.Utilities;
 
 public class UiFancySearchDlg extends UiSearchDlg
@@ -61,8 +63,8 @@ public class UiFancySearchDlg extends UiSearchDlg
 		grid.setText(getPreviousSearch());
 
 		UiVBox instructionPanel = new UiVBox();
-		instructionPanel.add(new UiWrappedTextArea(localization.getFieldLabel("SearchBulletinRules")));
-		instructionPanel.add(new UiWrappedTextArea(localization.getFieldLabel("SearchBulletinAddingRules")));
+		instructionPanel.add(new UiWrappedTextPanel(localization.getFieldLabel("SearchBulletinRules")));
+		instructionPanel.add(new UiWrappedTextPanel(localization.getFieldLabel("SearchBulletinAddingRules")));
 
 		Box buttonBox = Box.createHorizontalBox();
 		buttonBox.setBorder(new EmptyBorder(10,0,0,0));
