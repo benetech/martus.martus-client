@@ -507,10 +507,8 @@ public class TestLocalization extends TestCaseEnhanced
 	{
 		bd.loadTranslationFile("es");
 
-		assertEquals("Print", bd.getLabel("en", "button", "print"));
+		assertEquals("Print/Report", bd.getLabel("en", "button", "print"));
 		assertEquals("No translation found", "<whatever:not in the map>", bd.getLabel("en", "whatever", "not in the map"));
-
-		assertEquals("Imprimir", bd.getLabel("es", "button", "print"));
 
 		assertEquals("<category:sillytag>", bd.getLabel("en", "category", "sillytag"));
 		assertEquals("<category:sillytag>", bd.getLabel("es", "category", "sillytag"));
@@ -520,7 +518,7 @@ public class TestLocalization extends TestCaseEnhanced
 		bd.addTranslation("es", "category:sillytag=es/something");
 		assertEquals("es/something", bd.getLabel("es", "category", "sillytag"));
 
-		assertEquals("<Print>", bd.getLabel("xx", "button", "print"));
+		assertEquals("<Print/Report>", bd.getLabel("xx", "button", "print"));
 	}
 	
 	public void testLoadTranslations() throws Exception
