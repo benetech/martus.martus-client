@@ -38,11 +38,11 @@ public class TestSearchTreeNode extends TestCaseEnhanced
 
     public void testValueNode()
     {
-		SearchTreeNode node = new SearchTreeNode("text");
+		SearchTreeNode node = new SearchTreeNode("", ":", "text");
 		assertEquals("text", node.getValue());
 		assertEquals(SearchTreeNode.VALUE, node.getOperation());
 
-		node = new SearchTreeNode(" nostripping ");
+		node = new SearchTreeNode("", ":", " nostripping ");
 		assertEquals(" nostripping ", node.getValue());
     }
     
@@ -50,14 +50,14 @@ public class TestSearchTreeNode extends TestCaseEnhanced
     {
     	String phrase = "search for this";
     	
-    	SearchTreeNode withoutField = new SearchTreeNode("\"" + phrase + "\"");
+    	SearchTreeNode withoutField = new SearchTreeNode("", ":", "\"" + phrase + "\"");
     	assertEquals("without field parsed wrong?", phrase, withoutField.getValue());
     	
-    	SearchTreeNode withField = new SearchTreeNode(":field:\"" + phrase + "\"");
+    	SearchTreeNode withField = new SearchTreeNode("field", ":", "\"" + phrase + "\"");
     	assertEquals("with field parsed wrong?", phrase, withField.getValue());
     	
     	String thisThat = "this:that";
-    	SearchTreeNode quotedColon = new SearchTreeNode("\"" + thisThat + "\"");
+    	SearchTreeNode quotedColon = new SearchTreeNode("", ":", "\"" + thisThat + "\"");
     	assertEquals("split quoted string?", thisThat, quotedColon.getValue());
     }
     
@@ -67,11 +67,11 @@ public class TestSearchTreeNode extends TestCaseEnhanced
     	String basicValue = "stuff";
 
     	assertEquals("thought it was a comparison op?", "", SearchTreeNode.getComparisonOp("one"));
-    	SearchTreeNode noOp = new SearchTreeNode(":" + field + ":" + basicValue);
+    	SearchTreeNode noOp = new SearchTreeNode(field, ":", basicValue);
     	assertEquals("wrong default op?", SearchTreeNode.CONTAINS, noOp.getComparisonOperator());
     	
-    	SearchTreeNode opWithoutField = new SearchTreeNode(">" + basicValue);
-    	assertEquals("allowed compareop without field?", SearchTreeNode.CONTAINS, opWithoutField.getComparisonOperator());
+    	SearchTreeNode opWithoutColon = new SearchTreeNode("", ">", basicValue);
+    	assertEquals("allowed compareop without colon?", SearchTreeNode.CONTAINS, opWithoutColon.getComparisonOperator());
 
     	String[] comparisonOps = {"=", "!=", ">", ">=", "<", "<="};
     	int[] comparisonOpValues = {
@@ -84,19 +84,12 @@ public class TestSearchTreeNode extends TestCaseEnhanced
     	};
     	for(int i=0; i < comparisonOps.length; ++i)
     	{
-    		SearchTreeNode node = new SearchTreeNode(":" + field + ":" + comparisonOps[i] + basicValue);
+    		SearchTreeNode node = new SearchTreeNode(field, ":" + comparisonOps[i], basicValue);
     		assertEquals("wrong compare op value?", comparisonOpValues[i], node.getComparisonOperator());
     		assertEquals("didn't strip op?", basicValue, node.getValue());
     	}
     }
     
-    public void testUnbalancedColons()
-    {
-    	SearchTreeNode icky = new SearchTreeNode(":abc");
-    	assertEquals("didn't treat as value?", SearchTreeNode.VALUE, icky.getOperation());
-    	assertEquals("altered value?", ":abc", icky.getValue());
-    }
-
     public void testOpNode()
     {
 		verifyOpNodeCreation(SearchTreeNode.OR, "or");
@@ -105,8 +98,8 @@ public class TestSearchTreeNode extends TestCaseEnhanced
 
 	private void verifyOpNodeCreation(int op, String opName)
 	{
-		SearchTreeNode left = new SearchTreeNode("left");
-		SearchTreeNode right = new SearchTreeNode("right");
+		SearchTreeNode left = new SearchTreeNode("", ":", "left");
+		SearchTreeNode right = new SearchTreeNode("", ":", "right");
 		SearchTreeNode node = new SearchTreeNode(op, left, right);
 		assertEquals(op, node.getOperation());
 		assertNull(opName + " didn't clear value?", node.getValue());

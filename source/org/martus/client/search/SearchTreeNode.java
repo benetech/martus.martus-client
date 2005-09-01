@@ -47,24 +47,11 @@ public class SearchTreeNode
 	private final static String EQUAL_STRING = "=";
 	private final static String NOT_EQUAL_STRING = "!=";
 
-	public SearchTreeNode(String value)
+	public SearchTreeNode(String field, String compareOperator, String value)
 	{
 		nodeOp = VALUE;
-		compareOp = CONTAINS;
-		
-		if(value.startsWith(":"))
-		{
-			int colonAt = value.indexOf(":", 1);
-			if(colonAt > 0)
-			{
-				fieldTag = value.substring(1, colonAt);
-				value = value.substring(colonAt + 1);
-				String op  = getComparisonOp(value);
-				value = value.substring(op.length());
-				compareOp = convertComparisonOpStringToValue(op);
-			}
-		}
-		
+		fieldTag = field;
+		compareOp = convertComparisonOpStringToValue(compareOperator.substring(1));
 		nodeValue = withoutQuotes(value);
 	}
 	

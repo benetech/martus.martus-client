@@ -96,7 +96,7 @@ public class SearchParser
 				continue;
 			}
 			
-			SearchTreeNode thisNode = new SearchTreeNode(":" + field + compareOp + thisToken);
+			SearchTreeNode thisNode = new SearchTreeNode(field, compareOp, thisToken);
 			
 			if(left == null)
 			{
@@ -111,7 +111,7 @@ public class SearchParser
 		}
 		
 		if(left == null)
-			left = new SearchTreeNode("");
+			left = new SearchTreeNode("", ":", "");
 		
 		return left;
 	}

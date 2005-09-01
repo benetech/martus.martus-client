@@ -62,11 +62,11 @@ public class TestBulletinSearcher extends TestCaseEnhanced
 		realBulletin.set(otherField, otherValue);
 		
 		SafeReadableBulletin b = new SafeReadableBulletin(realBulletin);
-		BulletinSearcher specific = new BulletinSearcher(new SearchTreeNode(":" + fieldToSearch + ":" + sampleValue));
+		BulletinSearcher specific = new BulletinSearcher(new SearchTreeNode(fieldToSearch, ":", sampleValue));
 		assertTrue("didn't find specific field?", specific.doesMatch(b));
-		BulletinSearcher wrongValue= new BulletinSearcher(new SearchTreeNode(":" + fieldToSearch + ":" + otherValue));
+		BulletinSearcher wrongValue= new BulletinSearcher(new SearchTreeNode(fieldToSearch, ":", otherValue));
 		assertFalse("found wrong value?", wrongValue.doesMatch(b));
-		BulletinSearcher wrongField = new BulletinSearcher(new SearchTreeNode(":" + otherField + ":" + sampleValue));
+		BulletinSearcher wrongField = new BulletinSearcher(new SearchTreeNode(otherField, ":", sampleValue));
 		assertFalse("found in wrong field?", wrongField.doesMatch(b));
 	}
 	
@@ -78,9 +78,9 @@ public class TestBulletinSearcher extends TestCaseEnhanced
 		String noSuchField = "nosuchfield";
 		String sampleValue = "sample data";
 		SafeReadableBulletin b = new SafeReadableBulletin(realBulletin);
-		BulletinSearcher contains = new BulletinSearcher(new SearchTreeNode(noSuchField + ":" + sampleValue));
+		BulletinSearcher contains = new BulletinSearcher(new SearchTreeNode(noSuchField, ":", sampleValue));
 		assertFalse(": matched non-existant field?", contains.doesMatch(b));
-		BulletinSearcher lessThan = new BulletinSearcher(new SearchTreeNode(noSuchField + "<" + sampleValue));
+		BulletinSearcher lessThan = new BulletinSearcher(new SearchTreeNode(noSuchField, "<", sampleValue));
 		assertFalse("< matched non-existant field?", lessThan.doesMatch(b));
 		
 	}
@@ -125,9 +125,8 @@ public class TestBulletinSearcher extends TestCaseEnhanced
 	{
 		SafeReadableBulletin b = new SafeReadableBulletin(realBulletin);
 		String actual = b.getPossiblyNestedField(fieldToSearch).getData();
-		String expressionEnd = operator + value;
-		BulletinSearcher searcher = new BulletinSearcher(new SearchTreeNode(":" + fieldToSearch + ":" + expressionEnd));
-		String message = caller + ": " + actual + expressionEnd;
+		BulletinSearcher searcher = new BulletinSearcher(new SearchTreeNode(fieldToSearch, ":" + operator, value));
+		String message = caller + ": " + actual + operator + value;
 		assertEquals(message, expected, searcher.doesMatch(b));
 	}
 	
@@ -166,26 +165,26 @@ public class TestBulletinSearcher extends TestCaseEnhanced
 
 		SafeReadableBulletin b = new SafeReadableBulletin(realBulletin);
 
-		BulletinSearcher helloWithAnyDate = new BulletinSearcher(new SearchTreeNode("hello"));
+		BulletinSearcher helloWithAnyDate = new BulletinSearcher(new SearchTreeNode("", ":", "hello"));
 		assertEquals("hello", true, helloWithAnyDate.doesMatch(b));
 
 		// field names should not be searched
-		BulletinSearcher fieldTagWithAnyDate = new BulletinSearcher(new SearchTreeNode("author"));
+		BulletinSearcher fieldTagWithAnyDate = new BulletinSearcher(new SearchTreeNode("", ":", "author"));
 		assertEquals("author", false, fieldTagWithAnyDate.doesMatch(b));
 		// id should not be searched
-		BulletinSearcher localIdWithAnyDate = new BulletinSearcher(new SearchTreeNode(b.getLocalId()));
+		BulletinSearcher localIdWithAnyDate = new BulletinSearcher(new SearchTreeNode("", ":", b.getLocalId()));
 		assertEquals("getLocalId()", false, localIdWithAnyDate.doesMatch(b));
 
-		BulletinSearcher noText = new BulletinSearcher(new SearchTreeNode(""));
+		BulletinSearcher noText = new BulletinSearcher(new SearchTreeNode("", ":", ""));
 		assertEquals("Blank must match", true, noText.doesMatch(b));
 
-		BulletinSearcher allCaps = new BulletinSearcher(new SearchTreeNode("HELLO"));
+		BulletinSearcher allCaps = new BulletinSearcher(new SearchTreeNode("", ":", "HELLO"));
 		assertEquals("HELLO", true, allCaps.doesMatch(b));
-		BulletinSearcher utf8 = new BulletinSearcher(new SearchTreeNode("jos"+UnicodeConstants.ACCENT_E_LOWER+"e"));
+		BulletinSearcher utf8 = new BulletinSearcher(new SearchTreeNode("", ":", "jos"+UnicodeConstants.ACCENT_E_LOWER+"e"));
 		assertEquals("jos"+UnicodeConstants.ACCENT_E_LOWER+"e", true, utf8.doesMatch(b));
-		BulletinSearcher utf8MixedCase = new BulletinSearcher(new SearchTreeNode("jos"+UnicodeConstants.ACCENT_E_UPPER+"e"));
+		BulletinSearcher utf8MixedCase = new BulletinSearcher(new SearchTreeNode("", ":", "jos"+UnicodeConstants.ACCENT_E_UPPER+"e"));
 		assertEquals("jos"+UnicodeConstants.ACCENT_E_UPPER+"e", true, utf8MixedCase.doesMatch(b));
-		BulletinSearcher nonUtf8 = new BulletinSearcher(new SearchTreeNode("josee"));
+		BulletinSearcher nonUtf8 = new BulletinSearcher(new SearchTreeNode("", ":", "josee"));
 		assertEquals("josee", false, nonUtf8.doesMatch(b));
 
 		SearchParser parser = SearchParser.createEnglishParser();
@@ -205,10 +204,10 @@ public class TestBulletinSearcher extends TestCaseEnhanced
 		BulletinSearcher orBothTrue = new BulletinSearcher(parser.parse("", ":", "hello or summary"));
 		assertEquals("both true or", true, orBothTrue.doesMatch(b));
 
-		BulletinSearcher publicAttachmentWithAnyDate = new BulletinSearcher(new SearchTreeNode(publicProxyLabel.substring(0, publicProxyLabel.length()-4)));
+		BulletinSearcher publicAttachmentWithAnyDate = new BulletinSearcher(new SearchTreeNode("", ":", publicProxyLabel.substring(0, publicProxyLabel.length()-4)));
 		assertEquals("Public Attachment without .txt extension?", true, publicAttachmentWithAnyDate.doesMatch(b));
 
-		BulletinSearcher privateAttachmentWithAnyDate = new BulletinSearcher(new SearchTreeNode(privateProxy.getLabel().toUpperCase()));
+		BulletinSearcher privateAttachmentWithAnyDate = new BulletinSearcher(new SearchTreeNode("", ":", privateProxy.getLabel().toUpperCase()));
 		assertEquals("Private Attachment?", true, privateAttachmentWithAnyDate.doesMatch(b));
 	}
 	

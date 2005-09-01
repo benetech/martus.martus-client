@@ -234,13 +234,6 @@ public class TestSearchParser extends TestCaseEnhanced
 		assertEquals("right part wrong op?", SearchTreeNode.GREATER, right.getComparisonOperator());
 	}
 	
-	public void testAmazonRevertToAnyField()
-	{
-		SearchTreeNode other = englishParser.parse("field", ":>", "value :: other").getRight();
-		assertNull("didn't reset to any field?", other.getField());
-		assertEquals("didn't reset compareop?", SearchTreeNode.CONTAINS, other.getComparisonOperator());
-	}
-
 /*	
  * This test won't be valid until we support parens
  * 
