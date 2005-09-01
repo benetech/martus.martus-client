@@ -211,38 +211,53 @@ public class FancySearchHelper
 		return new ChoiceItem(tag, getLocalization().getKeyword(tag));
 	}
 
-	public String getSearchString(GridData gridData)
+	public SearchTreeNode getSearchTree(GridData gridData)
 	{
-		StringBuffer searchExpression = new StringBuffer();
-		int rowCount = gridData.getRowCount();
-		for(int row = 0; row < rowCount; ++row)
-		{
-			String field = gridData.getValueAt(row, 0);
-			String op = gridData.getValueAt(row, 1);
-			String value = gridData.getValueAt(row, 2);
-			value = value.trim();
-			String andOr = gridData.getValueAt(row, 3); 
+		final int firstRow = 0;
+		SearchTreeNode thisNode = createAmazonStyleNode(gridData, firstRow);
+		return getSearchTree(thisNode, gridData, firstRow);
+	}
+	
+	// loop through all rows with recursion, building a search tree that 
+	// is grouped to the left, like:     (a and b) or c
+	public SearchTreeNode getSearchTree(SearchTreeNode existingLeftNode, GridData gridData, int opRow)
+	{
+		int rightValueRow = opRow + 1;
 		
-			if(field.length() > 0)
-			{
-				searchExpression.append(":");
-				searchExpression.append(field);
-				searchExpression.append(op);
-				searchExpression.append(" ");
-			}
+		if(rightValueRow >= gridData.getRowCount())
+			return existingLeftNode;
 			
-			searchExpression.append(value);
-			if(row < rowCount - 1)
-			{
-				searchExpression.append(" ");
-				searchExpression.append(andOr);
-			}
-			searchExpression.append(" ");
-		}
+		int op = getAndOr(gridData, opRow);
 		
-		//System.out.println("FancySearchHelper: " + searchExpression);
+		SearchTreeNode newRightNode = createAmazonStyleNode(gridData, rightValueRow);
+		SearchTreeNode newOpNode = new SearchTreeNode(op, existingLeftNode, newRightNode);
+		return getSearchTree(newOpNode, gridData, opRow + 1);
+	}
 
-		return new String(searchExpression);
+	private int getAndOr(GridData gridData, int opRow)
+	{
+		String andOr = gridData.getValueAt(opRow, 3); 
+		if(andOr.equals(SearchParser.ENGLISH_AND_KEYWORD))
+			return SearchTreeNode.AND;
+		if(andOr.equals(SearchParser.ENGLISH_OR_KEYWORD))
+			return SearchTreeNode.OR;
+
+		throw new RuntimeException("Unknown and/or keyword: " + andOr);
+	}
+
+	// Amazon style allows the user to enter something like:    a or b
+	// into the value area, and the same field is applied to each value
+	private SearchTreeNode createAmazonStyleNode(GridData gridData, int row)
+	{
+		String field = gridData.getValueAt(row, 0);
+		String op = gridData.getValueAt(row, 1);
+		String value = gridData.getValueAt(row, 2);
+		value = value.trim();
+		
+		String localAnd = getLocalization().getKeyword(SearchParser.ENGLISH_AND_KEYWORD);
+		String localOr = getLocalization().getKeyword(SearchParser.ENGLISH_OR_KEYWORD);
+		SearchParser parser = new SearchParser(localAnd, localOr);
+		return parser.parse(":" + field + op + " " + value);
 	}
 	
 	public static final int COLUMN_ROW_NUMBER = 0;

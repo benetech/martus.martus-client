@@ -79,9 +79,9 @@ public class FancySearchGridEditor extends UiGridEditor
 		return (GridDropDownCellEditor)getTable().getCellEditor(0, column);
 	}
 	
-	public String getSearchString()
+	public SearchTreeNode getSearchTree()
 	{
-		return helper.getSearchString(getGridData());		
+		return helper.getSearchTree(getGridData());		
 	}
 
 	private void addListenerSoFieldChangeCanTriggerRepaintOfValueColumn()

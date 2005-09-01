@@ -992,6 +992,11 @@ public class MartusApp
 	{
 		SearchParser parser = new SearchParser(andKeyword, orKeyword);
 		SearchTreeNode searchNode = parser.parse(searchFor);
+		search(searchNode);
+	}
+
+	public void search(SearchTreeNode searchNode)
+	{
 		BulletinSearcher matcher = new BulletinSearcher(searchNode);
 
 		BulletinFolder searchFolder = createOrFindFolder(store.getSearchFolderName());

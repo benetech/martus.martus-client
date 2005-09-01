@@ -32,6 +32,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 
+import org.martus.client.search.SearchTreeNode;
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.clientside.UiLocalization;
@@ -51,7 +52,7 @@ public abstract class UiSearchDlg extends JDialog  implements ActionListener
 	}
 	
 	abstract UiButton createBody(UiMainWindow mainWindow);
-	abstract public String getSearchString();
+	abstract public SearchTreeNode getSearchTree();
 	abstract void memorizeSearch();
 
 	public void actionPerformed(ActionEvent ae)

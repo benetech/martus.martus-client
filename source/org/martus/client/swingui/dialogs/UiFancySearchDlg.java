@@ -28,10 +28,13 @@ package org.martus.client.swingui.dialogs;
 
 import java.awt.BorderLayout;
 import java.awt.Component;
+
 import javax.swing.Box;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
 import org.martus.client.search.FancySearchGridEditor;
+import org.martus.client.search.SearchTreeNode;
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.swing.UiButton;
@@ -81,9 +84,9 @@ public class UiFancySearchDlg extends UiSearchDlg
 		return search;
 	}
 
-	public String getSearchString()
+	public SearchTreeNode getSearchTree()
 	{
-		return grid.getSearchString();
+		return grid.getSearchTree();
 	}
 	
 	void memorizeSearch()

@@ -171,7 +171,7 @@ public class TestFancySearchHelper extends TestCaseEnhanced
 		assertEquals("or", spec.getChoice(1).getCode());
 	}
 	
-	public void testGetSearchString() throws Exception
+	public void testGetSearchTreeOneRow() throws Exception
 	{
 		GridFieldSpec spec = new GridFieldSpec();
 		spec.addColumn(FieldSpec.createStandardField("field", FieldSpec.TYPE_NORMAL));
@@ -179,13 +179,87 @@ public class TestFancySearchHelper extends TestCaseEnhanced
 		spec.addColumn(FieldSpec.createStandardField("value", FieldSpec.TYPE_SEARCH_VALUE));
 		spec.addColumn(FieldSpec.createStandardField("andor", FieldSpec.TYPE_NORMAL));
 		GridData data = new GridData(spec);
-		addRow(data, "", ":", "whiz", "and");
-		addRow(data, "a", "b", "c", "or");
-		addRow(data, "d", "e", " f", "and");
-		addRow(data, "g", "h", "\"ii\"", "or");
+		addRow(data, "field", ":", "value", "or");
+		SearchTreeNode root = helper.getSearchTree(data);
+		verifyFieldCompareOpValue("single row", root, "field", SearchTreeNode.CONTAINS, "value");
+	}
+	
+	public void testGetSearchTreeTwoRows() throws Exception
+	{
+		GridFieldSpec spec = new GridFieldSpec();
+		spec.addColumn(FieldSpec.createStandardField("field", FieldSpec.TYPE_NORMAL));
+		spec.addColumn(FieldSpec.createStandardField("op", FieldSpec.TYPE_NORMAL));
+		spec.addColumn(FieldSpec.createStandardField("value", FieldSpec.TYPE_SEARCH_VALUE));
+		spec.addColumn(FieldSpec.createStandardField("andor", FieldSpec.TYPE_NORMAL));
+		GridData data = new GridData(spec);
+		addRow(data, "a", ":", "b", "or");
+		addRow(data, "c", ":", "d", "or");
+		SearchTreeNode root = helper.getSearchTree(data);
+		verifyOp("top level", root, SearchTreeNode.OR);
+		verifyFieldCompareOpValue("two rows left", root.getLeft(), "a", SearchTreeNode.CONTAINS, "b");
+		verifyFieldCompareOpValue("two rows right", root.getRight(), "c", SearchTreeNode.CONTAINS, "d");
+	}
+	
+	public void testGetSearchTreeComplex() throws Exception
+	{
+		GridFieldSpec spec = new GridFieldSpec();
+		spec.addColumn(FieldSpec.createStandardField("field", FieldSpec.TYPE_NORMAL));
+		spec.addColumn(FieldSpec.createStandardField("op", FieldSpec.TYPE_NORMAL));
+		spec.addColumn(FieldSpec.createStandardField("value", FieldSpec.TYPE_SEARCH_VALUE));
+		spec.addColumn(FieldSpec.createStandardField("andor", FieldSpec.TYPE_NORMAL));
+		GridData data = new GridData(spec);
+		addRow(data, "", ":", "whiz", "or");
+		addRow(data, "a", ":", "c1 and c2", "or");
+		addRow(data, "d", ":>", " f", "and");
+		addRow(data, "g", ":!=", "\"i i\"", "or");
 		addRow(data, "", ":", "j", "and");
 		
-		assertEquals("whiz and :ab c or :de f and :gh \"ii\" or j ", helper.getSearchString(data));
+		// (((any:whiz or (a~c1 and a~c2)) or d>f) and g!="ii") or any:j
+		// OR  - any:j
+		//  |
+		// AND - g!="ii"
+		//  |
+		// OR  - d>f
+		//  |
+		// OR  - AND - a~c2
+		//  |     |
+		//  |    a~c1
+		//  |
+		// any:whiz
+		SearchTreeNode beforeJ = helper.getSearchTree(data);
+		verifyOp("before j", beforeJ, SearchTreeNode.OR);
+		verifyFieldCompareOpValue("any:j", beforeJ.getRight(), null, SearchTreeNode.CONTAINS, "j");
+		
+		SearchTreeNode beforeGii = beforeJ.getLeft();
+		verifyOp("before gii", beforeGii, SearchTreeNode.AND);
+		verifyFieldCompareOpValue("g!=\"ii\"", beforeGii.getRight(), "g", SearchTreeNode.NOT_EQUAL, "i i");
+		
+		SearchTreeNode beforeDf = beforeGii.getLeft();
+		verifyOp("before df", beforeDf, SearchTreeNode.OR);
+		verifyFieldCompareOpValue("d>f", beforeDf.getRight(), "d", SearchTreeNode.GREATER, "f");
+		
+		SearchTreeNode beforeAandA = beforeDf.getLeft();
+		verifyOp("before a a", beforeAandA, SearchTreeNode.OR);
+		
+		SearchTreeNode betweenAandA = beforeAandA.getRight();
+		verifyOp("before a a", betweenAandA, SearchTreeNode.AND);
+		verifyFieldCompareOpValue("a:c1", betweenAandA.getLeft(), "a", SearchTreeNode.CONTAINS, "c1");
+		verifyFieldCompareOpValue("a:c2", betweenAandA.getRight(), "a", SearchTreeNode.CONTAINS, "c2");
+		
+		verifyFieldCompareOpValue("whiz", beforeAandA.getLeft(), null, SearchTreeNode.CONTAINS, "whiz");
+	}
+	
+	private void verifyOp(String message, SearchTreeNode node, int expectedOp)
+	{
+		assertEquals(message, expectedOp, node.getOperation());
+	}
+	
+	private void verifyFieldCompareOpValue(String message, SearchTreeNode node, String field, int compareOp, String value)
+	{
+		assertEquals(message + " wrong op?", SearchTreeNode.VALUE, node.getOperation());
+		assertEquals(message + " wrong field?", field, node.getField());
+		assertEquals(message + " wrong compareOp?", compareOp, node.getComparisonOperator());
+		assertEquals(message + " wrong value?", value, node.getValue());
 	}
 	
 	private void addRow(GridData data, String field, String op, String value, String andOr)
