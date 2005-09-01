@@ -28,6 +28,8 @@ package org.martus.client.swingui.dialogs;
 
 import java.awt.BorderLayout;
 import java.awt.Component;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.Box;
 import javax.swing.JPanel;
@@ -40,6 +42,8 @@ import org.martus.client.swingui.UiMainWindow;
 import org.martus.swing.UiButton;
 import org.martus.swing.UiWrappedTextPanel;
 import org.martus.swing.Utilities;
+import org.martus.util.TokenReplacement;
+import org.martus.util.TokenReplacement.TokenInvalidException;
 
 public class UiFancySearchDlg extends UiSearchDlg
 {
@@ -56,6 +60,10 @@ public class UiFancySearchDlg extends UiSearchDlg
 		UiButton search = new UiButton(localization.getButtonLabel("search"));
 		search.addActionListener(this);
 
+		String helpButtonText = localization.getButtonLabel("help"); 
+		UiButton help = new UiButton(helpButtonText);
+		help.addActionListener(new HelpListener(mainWindow));
+		
 		UiButton cancel = new UiButton(localization.getButtonLabel("cancel"));
 		cancel.addActionListener(this);
 		UiDialogLauncher dlgLauncher = new UiDialogLauncher(mainWindow.getCurrentActiveFrame(), localization);
@@ -65,11 +73,24 @@ public class UiFancySearchDlg extends UiSearchDlg
 		JPanel instructionPanel = new JPanel();
 		instructionPanel.setLayout(new BorderLayout());
 		instructionPanel.add(new UiWrappedTextPanel(localization.getFieldLabel("SearchBulletinRules")), BorderLayout.NORTH);
-		instructionPanel.add(new UiWrappedTextPanel(localization.getFieldLabel("SearchBulletinAddingRules")), BorderLayout.SOUTH);
+		UiWrappedTextPanel uiWrappedTextPanel = new UiWrappedTextPanel(localization.getFieldLabel("SearchBulletinAddingRules"));
+		uiWrappedTextPanel.setBorder(new EmptyBorder(10, 0, 10,0));
+		instructionPanel.add(uiWrappedTextPanel, BorderLayout.CENTER);
+		try
+		{
+			String helpInfo = TokenReplacement.replaceToken(localization.getFieldLabel("SearchBulletinHelp"), "#SearchHelpButton#", helpButtonText);
+			UiWrappedTextPanel uiWrappedTextPanel2 = new UiWrappedTextPanel(helpInfo);
+			uiWrappedTextPanel2.setBorder(new EmptyBorder(0,0,10,0));
+			instructionPanel.add(uiWrappedTextPanel2, BorderLayout.SOUTH);
+		}
+		catch(TokenInvalidException e)
+		{
+			e.printStackTrace();
+		}
 
 		Box buttonBox = Box.createHorizontalBox();
 		buttonBox.setBorder(new EmptyBorder(10,0,0,0));
-		Utilities.addComponentsRespectingOrientation(buttonBox, new Component[] {search, Box.createHorizontalGlue(),cancel });
+		Utilities.addComponentsRespectingOrientation(buttonBox, new Component[] {search, Box.createHorizontalGlue(),help, cancel });
 
 		JPanel mainPanel = new JPanel();
 		mainPanel.setBorder(new EmptyBorder(5,5,5,5));
@@ -82,6 +103,20 @@ public class UiFancySearchDlg extends UiSearchDlg
 		getRootPane().setDefaultButton(search);
 		
 		return search;
+	}
+	
+	private class HelpListener implements ActionListener
+	{
+		HelpListener(UiMainWindow mainWindowToUse)
+		{
+			mainWindow = mainWindowToUse;
+		}
+		public void actionPerformed(ActionEvent e)
+		{
+//FIXME: put in real help before the release
+			mainWindow.notifyDlg("  **Help Is Unavailable at this Time**  ");
+		}
+		private UiMainWindow mainWindow;
 	}
 
 	public SearchTreeNode getSearchTree()
