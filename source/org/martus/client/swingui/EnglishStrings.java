@@ -185,7 +185,7 @@ public class EnglishStrings
 "wintitle:notifyAlreadyViewingThisVersion=Bulletin Version Already Being Viewed",
 "wintitle:notifyBulletinVersionNotInSystem=Bulletin Version Not Found",
 "wintitle:notifyHeadquarterLabelDuplicate=Headquarter Label Invalid",
-"wintitle:notifyNoHQsSelected=No HQ's Selected",
+"wintitle:notifyNoHQsSelected=No Headquarters Selected",
 "wintitle:notifyErrorExportingCustomizationTemplate=Error Exporting Template",
 "wintitle:notifyErrorImportingCustomizationTemplate=Error Importing Template",
 "wintitle:notifyImportingCustomizationTemplateSuccess=Importing Template Succeeded",
@@ -199,7 +199,7 @@ public class EnglishStrings
 "wintitle:inputImportPublicCode=Import Headquarters Public Account Id",
 "wintitle:inputCustomFields=Customize Fields",
 "wintitle:inputGetShareFileName=Default Backup File Name",
-"wintitle:inputGetHQLabel=HQ Label",
+"wintitle:inputGetHQLabel=Headquarters Label",
 
 "wintitle:ErrorDateInFuture=Date Invalid",
 "wintitle:ErrorDateRangeInverted=Date Range Invalid",
