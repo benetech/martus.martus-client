@@ -71,6 +71,11 @@ public class SearchParser
 
 		return result;
 	}
+	
+	public SearchTreeNode parseJustAmazonValueForTesting(String amazonValue)
+	{
+		return parse("", "", amazonValue);
+	}
 
 	public SearchTreeNode parse(String field, String compareOp, String expression)
 	{
@@ -106,7 +111,13 @@ public class SearchParser
 		}
 		
 		if(left == null)
-			left = new SearchTreeNode("", ":", "");
+		{
+			// TODO: Should we handle this case differently?
+			String anyField = "";
+			String containsOp = "";
+			String lookFor = "";
+			left = new SearchTreeNode(anyField, containsOp, lookFor);
+		}
 		
 		return left;
 	}

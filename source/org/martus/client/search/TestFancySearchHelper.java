@@ -179,7 +179,7 @@ public class TestFancySearchHelper extends TestCaseEnhanced
 		spec.addColumn(FieldSpec.createStandardField("value", FieldSpec.TYPE_SEARCH_VALUE));
 		spec.addColumn(FieldSpec.createStandardField("andor", FieldSpec.TYPE_NORMAL));
 		GridData data = new GridData(spec);
-		addRow(data, "field", ":", "value", "or");
+		addRow(data, "field", "", "value", "or");
 		SearchTreeNode root = helper.getSearchTree(data);
 		verifyFieldCompareOpValue("single row", root, "field", SearchTreeNode.CONTAINS, "value");
 	}
@@ -192,8 +192,8 @@ public class TestFancySearchHelper extends TestCaseEnhanced
 		spec.addColumn(FieldSpec.createStandardField("value", FieldSpec.TYPE_SEARCH_VALUE));
 		spec.addColumn(FieldSpec.createStandardField("andor", FieldSpec.TYPE_NORMAL));
 		GridData data = new GridData(spec);
-		addRow(data, "a", ":", "b", "or");
-		addRow(data, "c", ":", "d", "or");
+		addRow(data, "a", "", "b", "or");
+		addRow(data, "c", "", "d", "or");
 		SearchTreeNode root = helper.getSearchTree(data);
 		verifyOp("top level", root, SearchTreeNode.OR);
 		verifyFieldCompareOpValue("two rows left", root.getLeft(), "a", SearchTreeNode.CONTAINS, "b");
@@ -208,11 +208,11 @@ public class TestFancySearchHelper extends TestCaseEnhanced
 		spec.addColumn(FieldSpec.createStandardField("value", FieldSpec.TYPE_SEARCH_VALUE));
 		spec.addColumn(FieldSpec.createStandardField("andor", FieldSpec.TYPE_NORMAL));
 		GridData data = new GridData(spec);
-		addRow(data, "", ":", "whiz", "or");
-		addRow(data, "a", ":", "c1 and c2", "or");
-		addRow(data, "d", ":>", " f", "and");
-		addRow(data, "g", ":!=", "\"i i\"", "or");
-		addRow(data, "", ":", "j", "and");
+		addRow(data, "", "", "whiz", "or");
+		addRow(data, "a", "", "c1 and c2", "or");
+		addRow(data, "d", ">", " f", "and");
+		addRow(data, "g", "!=", "\"i i\"", "or");
+		addRow(data, "", "", "j", "and");
 		
 		// (((any:whiz or (a~c1 and a~c2)) or d>f) and g!="ii") or any:j
 		// OR  - any:j

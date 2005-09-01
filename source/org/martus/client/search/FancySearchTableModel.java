@@ -78,25 +78,25 @@ public class FancySearchTableModel extends GridTableModel implements TableModelL
 	private static Vector getCompareChoices()
 	{
 		Vector opChoiceVector = new Vector();
-		opChoiceVector.add(new ChoiceItem(":>", ">"));
-		opChoiceVector.add(new ChoiceItem(":>=", ">="));
-		opChoiceVector.add(new ChoiceItem(":<", "<"));
-		opChoiceVector.add(new ChoiceItem(":<=", "<="));
+		opChoiceVector.add(new ChoiceItem(">", ">"));
+		opChoiceVector.add(new ChoiceItem(">=", ">="));
+		opChoiceVector.add(new ChoiceItem("<", "<"));
+		opChoiceVector.add(new ChoiceItem("<=", "<="));
 		return opChoiceVector;
 	}
 
 	private static Vector getExactChoices()
 	{
 		Vector opChoiceVector = new Vector();
-		opChoiceVector.add(new ChoiceItem(":=", "="));
-		opChoiceVector.add(new ChoiceItem(":!=", "!="));
+		opChoiceVector.add(new ChoiceItem("=", "="));
+		opChoiceVector.add(new ChoiceItem("!=", "!="));
 		return opChoiceVector;
 	}
 
 	private static Vector getContainsChoices(UiLocalization localization)
 	{
 		Vector opChoiceVector = new Vector();
-		opChoiceVector.add(new ChoiceItem(":", localization.getFieldLabel("SearchOpContains")));
+		opChoiceVector.add(new ChoiceItem("", localization.getFieldLabel("SearchOpContains")));
 		return opChoiceVector;
 	}
 	

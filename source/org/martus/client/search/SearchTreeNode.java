@@ -47,11 +47,16 @@ public class SearchTreeNode
 	private final static String EQUAL_STRING = "=";
 	private final static String NOT_EQUAL_STRING = "!=";
 
+	public SearchTreeNode(String justValueForTesting)
+	{
+		this("", "", justValueForTesting);
+	}
+	
 	public SearchTreeNode(String field, String compareOperator, String value)
 	{
 		nodeOp = VALUE;
 		fieldTag = field;
-		compareOp = convertComparisonOpStringToValue(compareOperator.substring(1));
+		compareOp = convertComparisonOpStringToValue(compareOperator);
 		nodeValue = withoutQuotes(value);
 	}
 	
