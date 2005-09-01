@@ -26,7 +26,7 @@ Boston, MA 02111-1307, USA.
 
 package org.martus.client.search;
 
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.Vector;
 
 import org.martus.client.bulletinstore.ClientBulletinStore;
@@ -71,12 +71,12 @@ public class FancySearchHelper
 	{
 		Vector allAvailableFields = new Vector();
 
-		allAvailableFields.add(createAnyFieldChoice());
 		allAvailableFields.add(createLastSavedDateChoice());
 		allAvailableFields.addAll(convertToChoiceItems(storeToUse.getAllKnownFieldSpecs()));
+		Collections.sort(allAvailableFields);
 
+		allAvailableFields.insertElementAt(createAnyFieldChoice(), 0);
 		ChoiceItem[] fieldChoices = (ChoiceItem[])allAvailableFields.toArray(new ChoiceItem[0]);
-		Arrays.sort(fieldChoices);
 		                                  
 		DropDownFieldSpec fieldColumnSpec = new DropDownFieldSpec();
 		fieldColumnSpec.setLabel(getLocalization().getFieldLabel("SearchGridHeaderField"));
