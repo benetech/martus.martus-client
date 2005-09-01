@@ -743,7 +743,7 @@ public class EnglishStrings
 "field:timedout2=Any unsaved bulletins will be lost unless you sign in and save them.",
 "field:defaultFolderName=New Folder",
 "field:SearchBulletinRules=For each row, select a field to search (or choose to match any field), select what kind of comparison to perform, and then enter a value to search for.",
-"field:SearchBulletinAddingRules=Press  enter to create a new row in the search query.",
+"field:SearchBulletinAddingRules=Press Enter to create a new row in the search query.",
 "field:SearchBulletinHelp=Click '#SearchHelpButton#' to get additional information on searching.",
 "field:AccountInfoUserName=User Name: ",
 "field:AccountInfoPublicKey=Public Account Id:",
