@@ -33,7 +33,10 @@ import org.martus.client.core.CustomFieldSpecValidator;
 import org.martus.common.FieldCollection;
 import org.martus.common.LegacyCustomFields;
 import org.martus.common.bulletin.BulletinConstants;
+import org.martus.common.fieldspec.ChoiceItem;
+import org.martus.common.fieldspec.DropDownFieldSpec;
 import org.martus.common.fieldspec.FieldSpec;
+import org.martus.common.fieldspec.GridFieldSpec;
 import org.martus.common.fieldspec.StandardFieldSpecs;
 import org.martus.util.TestCaseEnhanced;
 
@@ -136,6 +139,70 @@ public class TestCustomFieldSpecValidator extends TestCaseEnhanced
 		Vector errors = checker.getAllErrors();
 		assertEquals("Should have 1 error", 1, errors.size());
 		assertEquals("Incorrect Error code Duplicate Tags", CustomFieldError.CODE_DUPLICATE_FIELD, ((CustomFieldError)errors.get(0)).getCode());
+		assertEquals("Incorrect tag Duplicate Tags", tag, ((CustomFieldError)errors.get(0)).getTag());
+		assertEquals("Incorrect label Duplicate Tags", label, ((CustomFieldError)errors.get(0)).getLabel());
+	}
+
+	public void testDuplicateDropDownEntry() throws Exception
+	{
+		FieldSpec[] specs = StandardFieldSpecs.getDefaultPublicFieldSpecs();
+		String tag = "dd";
+		String label ="cc";
+
+		ChoiceItem[] choicesNoDups = {new ChoiceItem("no Dup", "first item"), new ChoiceItem("second", "second item")};
+		DropDownFieldSpec dropDownSpecNoDuplicates = new DropDownFieldSpec(choicesNoDups);
+		dropDownSpecNoDuplicates.setTag(tag);
+		dropDownSpecNoDuplicates.setLabel(label);
+		specs = addFieldSpec(specs, dropDownSpecNoDuplicates);
+		CustomFieldSpecValidator checker = new CustomFieldSpecValidator(specs);
+		assertTrue("invalid?", checker.isValid());
+		
+		specs = StandardFieldSpecs.getDefaultPublicFieldSpecs();
+		ChoiceItem[] choicesWithDuplicate = {new ChoiceItem("duplicate", "duplicate"), new ChoiceItem("duplicate", "duplicate")};
+		DropDownFieldSpec dropDownSpecWithDuplicates = new DropDownFieldSpec(choicesWithDuplicate);
+		dropDownSpecWithDuplicates.setTag(tag);
+		dropDownSpecWithDuplicates.setLabel(label);
+		specs = addFieldSpec(specs, dropDownSpecWithDuplicates);
+		checker = new CustomFieldSpecValidator(specs);
+		assertFalse("valid?", checker.isValid());
+		Vector errors = checker.getAllErrors();
+		assertEquals("Should have 1 error", 1, errors.size());
+		assertEquals("Incorrect Error code Duplicate Dropdown Entry", CustomFieldError.CODE_DUPLICATE_DROPDOWN_ENTRY, ((CustomFieldError)errors.get(0)).getCode());
+		assertEquals("Incorrect tag Duplicate Tags", tag, ((CustomFieldError)errors.get(0)).getTag());
+		assertEquals("Incorrect label Duplicate Tags", label, ((CustomFieldError)errors.get(0)).getLabel());
+	}
+
+	public void testDuplicateDropDownEntryInSideOfAGrid() throws Exception
+	{
+		String tag = "dd";
+		String label ="cc";
+		FieldSpec[] specs = StandardFieldSpecs.getDefaultPublicFieldSpecs();
+
+		ChoiceItem[] choicesNoDups = {new ChoiceItem("no Dup", "first item"), new ChoiceItem("second", "second item")};
+		DropDownFieldSpec dropDownSpecNoDuplicates = new DropDownFieldSpec(choicesNoDups);
+		GridFieldSpec gridWithNoDuplicateDropdownEntries = new GridFieldSpec();
+		gridWithNoDuplicateDropdownEntries.setTag(tag);
+		gridWithNoDuplicateDropdownEntries.setLabel(label);
+		gridWithNoDuplicateDropdownEntries.addColumn(dropDownSpecNoDuplicates);
+		
+		specs = addFieldSpec(specs, gridWithNoDuplicateDropdownEntries);
+		CustomFieldSpecValidator checker = new CustomFieldSpecValidator(specs);
+		assertTrue("invalid?", checker.isValid());
+		
+		specs = StandardFieldSpecs.getDefaultPublicFieldSpecs();
+		ChoiceItem[] choicesWithDuplicate = {new ChoiceItem("duplicate", "duplicate"), new ChoiceItem("duplicate", "duplicate")};
+		DropDownFieldSpec dropDownSpecWithDuplicates = new DropDownFieldSpec(choicesWithDuplicate);
+		GridFieldSpec gridWithDuplicateDropdownEntries = new GridFieldSpec();
+		gridWithDuplicateDropdownEntries.setTag(tag);
+		gridWithDuplicateDropdownEntries.setLabel(label);
+		gridWithDuplicateDropdownEntries.addColumn(dropDownSpecWithDuplicates);
+		specs = addFieldSpec(specs, gridWithDuplicateDropdownEntries);
+		
+		checker = new CustomFieldSpecValidator(specs);
+		assertFalse("valid?", checker.isValid());
+		Vector errors = checker.getAllErrors();
+		assertEquals("Should have 1 error", 1, errors.size());
+		assertEquals("Incorrect Error code Duplicate Dropdown Entry", CustomFieldError.CODE_DUPLICATE_DROPDOWN_ENTRY, ((CustomFieldError)errors.get(0)).getCode());
 		assertEquals("Incorrect tag Duplicate Tags", tag, ((CustomFieldError)errors.get(0)).getTag());
 		assertEquals("Incorrect label Duplicate Tags", label, ((CustomFieldError)errors.get(0)).getLabel());
 	}

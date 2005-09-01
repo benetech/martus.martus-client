@@ -26,10 +26,13 @@ Boston, MA 02111-1307, USA.
 
 package org.martus.client.core;
 
+import java.util.HashMap;
 import java.util.Vector;
 
 import org.martus.common.bulletin.BulletinConstants;
+import org.martus.common.fieldspec.DropDownFieldSpec;
 import org.martus.common.fieldspec.FieldSpec;
+import org.martus.common.fieldspec.GridFieldSpec;
 import org.martus.common.fieldspec.StandardFieldSpecs;
 
 public class CustomFieldSpecValidator
@@ -50,6 +53,8 @@ public class CustomFieldSpecValidator
 		checkForMissingCustomLabels(specsToCheck);
 		checkForUnknownTypes(specsToCheck);
 		checkForLabelsOnStandardFields(specsToCheck);
+		checkForDuplicateDropdownEntries(specsToCheck);
+		checkForDuplicateDropdownEntriesInsideGrids(specsToCheck);
 	}
 		
 	public boolean isValid()
@@ -147,6 +152,52 @@ public class CustomFieldSpecValidator
 			foundTags.add(tag);
 		}
 	}
+	
+	private void checkForDuplicateDropdownEntries(FieldSpec[] specsToCheck)
+	{
+		for (int i = 0; i < specsToCheck.length; i++)
+		{
+			FieldSpec thisSpec = specsToCheck[i];
+			if(thisSpec.getType() == FieldSpec.TYPE_DROPDOWN)
+			{
+				DropDownFieldSpec dropdownSpec = (DropDownFieldSpec)thisSpec;
+				String tag = thisSpec.getTag();
+				String label = thisSpec.getLabel();
+				checkForDuplicateEntriesInDropDownSpec(dropdownSpec, tag, label);
+			}
+		}
+	}
+
+	private void checkForDuplicateEntriesInDropDownSpec(DropDownFieldSpec dropdownSpec, String tag, String label)
+	{
+		HashMap labelEntries = new HashMap();
+		for(int choice = 0; choice < dropdownSpec.getCount(); ++choice)
+		{
+			String choiceEntryLabel = dropdownSpec.getValue(choice);
+			if(labelEntries.containsKey(choiceEntryLabel))
+				errors.add(CustomFieldError.errorDuplicateDropDownEntry(tag, label));				
+			labelEntries.put(choiceEntryLabel, choiceEntryLabel);
+		}
+	}
+	
+	private void checkForDuplicateDropdownEntriesInsideGrids(FieldSpec[] specsToCheck)
+	{
+		for (int i = 0; i < specsToCheck.length; i++)
+		{
+			FieldSpec thisSpec = specsToCheck[i];
+			if(thisSpec.getType() == FieldSpec.TYPE_GRID)
+			{
+				GridFieldSpec gridSpec = (GridFieldSpec)thisSpec;
+				for(int columns = 0; columns < gridSpec.getColumnCount(); ++columns)
+				{
+					FieldSpec columnSpec = gridSpec.getFieldSpec(columns);
+					if(columnSpec.getType() == FieldSpec.TYPE_DROPDOWN)
+						checkForDuplicateEntriesInDropDownSpec((DropDownFieldSpec)columnSpec, gridSpec.getTag(), gridSpec.getLabel());
+				}
+			}
+		}
+	}
+	
 	
 	private void checkForMissingCustomLabels(FieldSpec[] specsToCheck)
 	{
