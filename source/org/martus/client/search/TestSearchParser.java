@@ -101,27 +101,27 @@ public class TestSearchParser extends TestCaseEnhanced
 
     public void testParseEmpty()
     {
-    	SearchTreeNode rootNode = englishParser.parse("");
+    	SearchTreeNode rootNode = englishParser.parse("", ":", "");
     	assertEquals("not empty?", "", rootNode.getValue());
     }
     
     public void testSimpleSearch()
 	{
-		SearchTreeNode rootNode = englishParser.parse("blah");
+		SearchTreeNode rootNode = englishParser.parse("", ":", "blah");
 		assertNotNull("Null root", rootNode);
 		assertEquals(SearchTreeNode.VALUE, rootNode.getOperation());
 	}
 	
 	public void testLowerCase()
 	{
-		SearchTreeNode rootNode = englishParser.parse("this OR that");
+		SearchTreeNode rootNode = englishParser.parse("", ":", "this OR that");
 		assertNotNull("Null root", rootNode);
 		assertEquals(SearchTreeNode.OR, rootNode.getOperation());
 	}
 
 	public void testSimpleOr()
 	{
-		SearchTreeNode rootNode = englishParser.parse("this or that");
+		SearchTreeNode rootNode = englishParser.parse("", ":", "this or that");
 		assertNotNull("Null root", rootNode);
 		assertEquals(SearchTreeNode.OR, rootNode.getOperation());
 
@@ -136,7 +136,7 @@ public class TestSearchParser extends TestCaseEnhanced
 
 	public void testSimpleAnd()
 	{
-		SearchTreeNode rootNode = englishParser.parse(" tweedledee  and  tweedledum ");
+		SearchTreeNode rootNode = englishParser.parse("", ":", " tweedledee  and  tweedledum ");
 		assertNotNull("Null root", rootNode);
 		assertEquals(SearchTreeNode.AND, rootNode.getOperation());
 
@@ -152,7 +152,7 @@ public class TestSearchParser extends TestCaseEnhanced
 	public void testAndBeforeOr()
 	{
 		// (a AND b) OR c
-		SearchTreeNode abc = englishParser.parse("a and b or c");
+		SearchTreeNode abc = englishParser.parse("", ":", "a and b or c");
 		assertNotNull("Null root", abc);
 		assertEquals("rootNode", SearchTreeNode.OR, abc.getOperation());
 		
@@ -169,7 +169,7 @@ public class TestSearchParser extends TestCaseEnhanced
 	public void testOrBeforeAnd()
 	{
 		// (a OR b) AND c
-		SearchTreeNode abc = englishParser.parse("a or b and c");
+		SearchTreeNode abc = englishParser.parse("", ":", "a or b and c");
 		assertNotNull("Null root", abc);
 		assertEquals("rootNode", SearchTreeNode.AND, abc.getOperation());
 		
@@ -185,7 +185,7 @@ public class TestSearchParser extends TestCaseEnhanced
 	
 	public void testMultipleWords()
 	{
-		SearchTreeNode ab = englishParser.parse("a b");
+		SearchTreeNode ab = englishParser.parse("", ":", "a b");
 		assertEquals("rootNode", SearchTreeNode.AND, ab.getOperation());
 		assertEquals("a", ab.getLeft().getValue());
 		assertEquals("b", ab.getRight().getValue());
@@ -194,21 +194,21 @@ public class TestSearchParser extends TestCaseEnhanced
 	public void testQuoted()
 	{
 		String quotedValue = "testing quoted";
-		SearchTreeNode quoted = englishParser.parse("\"" + quotedValue + "\"");
+		SearchTreeNode quoted = englishParser.parse("", ":", "\"" + quotedValue + "\"");
 		assertEquals(quotedValue, quoted.getValue());
 	}
 	
 	public void testSpecificField()
 	{
-		SearchTreeNode all = englishParser.parse("testing");
+		SearchTreeNode all = englishParser.parse("", ":", "testing");
 		assertNull("not searching all fields?", all.getField());
 		
-		SearchTreeNode name = englishParser.parse(":name: smith");
+		SearchTreeNode name = englishParser.parse("name", ":", "smith");
 		assertEquals("not searching name?", "name", name.getField());
 		assertEquals("smith", name.getValue());
 
 		String greenEggs = "green eggs and ham";
-		SearchTreeNode phrase = englishParser.parse(":name: \"" + greenEggs + "\"");
+		SearchTreeNode phrase = englishParser.parse("name", ":", "\"" + greenEggs + "\"");
 		assertEquals("not searching name?", "name", phrase.getField());
 		assertEquals("green eggs and ham", phrase.getValue());
 	}
@@ -218,8 +218,7 @@ public class TestSearchParser extends TestCaseEnhanced
 		String field = "field";
 		String plain = "plain";
 		String quoted = "quoted";
-		String searchString = ":" + field + ":> " + plain + " or \"" + quoted + "\"";
-		SearchTreeNode or = englishParser.parse(searchString);
+		SearchTreeNode or = englishParser.parse(field, ":>", plain + " or \"" + quoted + "\"");
 		assertEquals("didn't see the or?", SearchTreeNode.OR, or.getOperation());
 		
 		SearchTreeNode left = or.getLeft();
@@ -237,8 +236,7 @@ public class TestSearchParser extends TestCaseEnhanced
 	
 	public void testAmazonRevertToAnyField()
 	{
-		String searchString = ":field:> value :: other";
-		SearchTreeNode other = englishParser.parse(searchString).getRight();
+		SearchTreeNode other = englishParser.parse("field", ":>", "value :: other").getRight();
 		assertNull("didn't reset to any field?", other.getField());
 		assertEquals("didn't reset compareop?", SearchTreeNode.CONTAINS, other.getComparisonOperator());
 	}
@@ -280,7 +278,7 @@ public class TestSearchParser extends TestCaseEnhanced
 	{
 		// (a OR b) AND c
 		SearchParser parser = new SearchParser("y", "o");
-		SearchTreeNode abc = parser.parse("a o b y c");
+		SearchTreeNode abc = parser.parse("", ":", "a o b y c");
 		assertNotNull("Null root", abc);
 		assertEquals("rootNode", SearchTreeNode.AND, abc.getOperation());
 
@@ -296,13 +294,13 @@ public class TestSearchParser extends TestCaseEnhanced
 	public void testEnglishAndAndOrAlwaysWork()
 	{
 		SearchParser parser = new SearchParser("y", "o");
-		SearchTreeNode o = parser.parse("a o b");
+		SearchTreeNode o = parser.parse("", ":", "a o b");
 		assertEquals("'o' not OR?", SearchTreeNode.OR, o.getOperation());
-		SearchTreeNode y = parser.parse("a y b");
+		SearchTreeNode y = parser.parse("", ":", "a y b");
 		assertEquals("'y' not AND?", SearchTreeNode.AND, y.getOperation());
-		SearchTreeNode or = parser.parse("a or b");
+		SearchTreeNode or = parser.parse("", ":", "a or b");
 		assertEquals("'or' not OR?", SearchTreeNode.OR, or.getOperation());
-		SearchTreeNode and = parser.parse("a and b");
+		SearchTreeNode and = parser.parse("", ":", "a and b");
 		assertEquals("'and' not OR?", SearchTreeNode.AND, and.getOperation());
 		
 	}

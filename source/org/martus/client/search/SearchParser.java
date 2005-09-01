@@ -72,9 +72,8 @@ public class SearchParser
 		return result;
 	}
 
-	public SearchTreeNode parse(String expression)
+	public SearchTreeNode parse(String field, String compareOp, String expression)
 	{
-		String field = "";
 		int nextOp = SearchTreeNode.AND;
 		SearchTreeNode left = null;
 		
@@ -97,7 +96,7 @@ public class SearchParser
 				continue;
 			}
 			
-			SearchTreeNode thisNode = new SearchTreeNode(field + thisToken);
+			SearchTreeNode thisNode = new SearchTreeNode(":" + field + compareOp + thisToken);
 			
 			if(left == null)
 			{

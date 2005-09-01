@@ -1924,7 +1924,7 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 	private void search(MartusApp app, String searchFor, String andKeyword, String orKeyword)
 	{
 		SearchParser parser = new SearchParser(andKeyword, orKeyword);
-		SearchTreeNode searchNode = parser.parse(searchFor);
+		SearchTreeNode searchNode = parser.parse("", ":", searchFor);
 		app.search(searchNode);
 	}
 

@@ -189,20 +189,20 @@ public class TestBulletinSearcher extends TestCaseEnhanced
 		assertEquals("josee", false, nonUtf8.doesMatch(b));
 
 		SearchParser parser = SearchParser.createEnglishParser();
-		BulletinSearcher andRightFalse = new BulletinSearcher(parser.parse("hello and goodbye"));
+		BulletinSearcher andRightFalse = new BulletinSearcher(parser.parse("", ":", "hello and goodbye"));
 		assertEquals("right false and", false, andRightFalse.doesMatch(b));
-		BulletinSearcher andLeftFalse = new BulletinSearcher(parser.parse("goodbye and hello"));
+		BulletinSearcher andLeftFalse = new BulletinSearcher(parser.parse("", ":", "goodbye and hello"));
 		assertEquals("left false and", false, andLeftFalse.doesMatch(b));
-		BulletinSearcher andBothTrue = new BulletinSearcher(parser.parse("Hello and Summary"));
+		BulletinSearcher andBothTrue = new BulletinSearcher(parser.parse("", ":", "Hello and Summary"));
 		assertEquals("true and", true, andBothTrue.doesMatch(b));
 
-		BulletinSearcher orBothFalse = new BulletinSearcher(parser.parse("swinging and swaying"));
+		BulletinSearcher orBothFalse = new BulletinSearcher(parser.parse("", ":", "swinging and swaying"));
 		assertEquals("false or", false, orBothFalse.doesMatch(b));
-		BulletinSearcher orRightFalse = new BulletinSearcher(parser.parse("hello or goodbye"));
+		BulletinSearcher orRightFalse = new BulletinSearcher(parser.parse("", ":", "hello or goodbye"));
 		assertEquals("left true or", true, orRightFalse.doesMatch(b));
-		BulletinSearcher orLeftFalse = new BulletinSearcher(parser.parse("goodbye or hello"));
+		BulletinSearcher orLeftFalse = new BulletinSearcher(parser.parse("", ":", "goodbye or hello"));
 		assertEquals("right true or", true, orLeftFalse.doesMatch(b));
-		BulletinSearcher orBothTrue = new BulletinSearcher(parser.parse("hello or summary"));
+		BulletinSearcher orBothTrue = new BulletinSearcher(parser.parse("", ":", "hello or summary"));
 		assertEquals("both true or", true, orBothTrue.doesMatch(b));
 
 		BulletinSearcher publicAttachmentWithAnyDate = new BulletinSearcher(new SearchTreeNode(publicProxyLabel.substring(0, publicProxyLabel.length()-4)));

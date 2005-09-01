@@ -257,7 +257,7 @@ public class FancySearchHelper
 		String localAnd = getLocalization().getKeyword(SearchParser.ENGLISH_AND_KEYWORD);
 		String localOr = getLocalization().getKeyword(SearchParser.ENGLISH_OR_KEYWORD);
 		SearchParser parser = new SearchParser(localAnd, localOr);
-		return parser.parse(":" + field + op + " " + value);
+		return parser.parse(field, op, value);
 	}
 	
 	public static final int COLUMN_ROW_NUMBER = 0;
