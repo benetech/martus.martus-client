@@ -90,11 +90,6 @@ public class SearchParser
 				nextOp = SearchTreeNode.OR;
 				continue;
 			}
-			else if(isField(thisToken))
-			{
-				field = thisToken;
-				continue;
-			}
 			
 			SearchTreeNode thisNode = new SearchTreeNode(field, compareOp, thisToken);
 			
@@ -114,11 +109,6 @@ public class SearchParser
 			left = new SearchTreeNode("", ":", "");
 		
 		return left;
-	}
-	
-	private boolean isField(String candidate)
-	{
-		return (candidate.startsWith(":"));
 	}
 	
 	public boolean isKeyword(String candidate, String[] keywords)
