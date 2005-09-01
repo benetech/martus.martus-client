@@ -78,7 +78,7 @@ public class TestFancySearchHelper extends TestCaseEnhanced
 		localization.setCurrentLanguageCode(languageCode);
 		
 		DropDownFieldSpec spec = helper.createFieldColumnSpec(getStore());
-		assertNotEquals("inserted an empty first entry?", "", spec.getChoice(0).getCode());
+//		assertNotEquals("inserted an empty first entry?", "", spec.getChoice(0).getCode());
 		assertTrue("no ALL FIELDS?", spec.findCode("") >= 0);
 		assertTrue("no last-saved date?", spec.findCode(Bulletin.PSEUDOFIELD_LAST_SAVED_DATE) >= 0);
 		assertTrue("no author?", spec.findCode(BulletinConstants.TAGAUTHOR) >= 0);
