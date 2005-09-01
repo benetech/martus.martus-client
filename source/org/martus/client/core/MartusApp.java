@@ -152,6 +152,10 @@ public class MartusApp
 		{
 			throw new MartusAppInitializationException("Error verifying jars: " + e.getMessage());
 		}
+		catch (Exception e)
+		{
+			throw new MartusAppInitializationException("Error verifying jars: " + e.getMessage());
+		}
 
 		UpdateDocsIfNecessaryFromMLPFiles();
 	}
