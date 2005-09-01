@@ -39,6 +39,7 @@ public class TextWrappingSample extends JFrame
     /** Creates new form TestWrappingTest */
   public TextWrappingSample() 
   {
+	  setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
       String message =
           " When in the Course of human events, it becomes necessary " +
           "for one people to dissolve the political bands which have " +
