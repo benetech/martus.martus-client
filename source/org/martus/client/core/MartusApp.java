@@ -53,7 +53,6 @@ import org.martus.client.bulletinstore.ClientBulletinStore;
 import org.martus.client.bulletinstore.ClientBulletinStore.BulletinAlreadyExistsException;
 import org.martus.client.bulletinstore.ClientBulletinStore.BulletinOlderException;
 import org.martus.client.search.BulletinSearcher;
-import org.martus.client.search.SearchParser;
 import org.martus.client.search.SearchTreeNode;
 import org.martus.client.swingui.EnglishStrings;
 import org.martus.client.swingui.UiConstants;
@@ -986,13 +985,6 @@ public class MartusApp
 	public void resetLastUploadRemindedTime()
 	{
 		setLastUploadRemindedTime(new Date());
-	}
-
-	public void search(String searchFor, String andKeyword, String orKeyword)
-	{
-		SearchParser parser = new SearchParser(andKeyword, orKeyword);
-		SearchTreeNode searchNode = parser.parse(searchFor);
-		search(searchNode);
 	}
 
 	public void search(SearchTreeNode searchNode)

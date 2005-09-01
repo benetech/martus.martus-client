@@ -45,6 +45,8 @@ import org.martus.client.core.MartusApp;
 import org.martus.client.core.MartusApp.AccountAlreadyExistsException;
 import org.martus.client.core.MartusApp.CannotCreateAccountFileException;
 import org.martus.client.core.MartusApp.SaveConfigInfoException;
+import org.martus.client.search.SearchParser;
+import org.martus.client.search.SearchTreeNode;
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.clientside.MtfAwareLocalization;
@@ -1384,17 +1386,17 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		Bulletin b = store.getBulletinRevision((UniversalId)store.getAllBulletinLeafUids().get(0));
 		String andKeyword = "and";
 		String orKeyword = "or";
-		appWithAccount.search(b.get("title"), andKeyword, orKeyword);
+		search(appWithAccount, b.get("title"), andKeyword, orKeyword);
 		assertNotNull("Search results should have been created", store.getSearchFolderName());
 
-		appWithAccount.search("--not in any bulletin--", andKeyword, orKeyword);
+		search(appWithAccount, "--not in any bulletin--", andKeyword, orKeyword);
 		assertEquals("search should clear results folder", 0, store.findFolder(store.getSearchFolderName()).getBulletinCount());
 
 		assertTrue("not enough bulletins?", appWithAccount.getStore().getBulletinCount() >= 5);
 		assertTrue("too many bulletins?", appWithAccount.getStore().getBulletinCount() <= 15);
-		appWithAccount.search(b.get("author"), andKeyword, orKeyword);
+		search(appWithAccount, b.get("author"), andKeyword, orKeyword);
 		assertEquals(1, store.findFolder(store.getSearchFolderName()).getBulletinCount());
-		appWithAccount.search(b.get(""), andKeyword, orKeyword);
+		search(appWithAccount, b.get(""), andKeyword, orKeyword);
 		assertEquals(10, store.findFolder(store.getSearchFolderName()).getBulletinCount());
 
 		TRACE_END();
@@ -1416,11 +1418,11 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		BulletinFolder newFolder = new BulletinFolder(store, "myFolder");
 		appWithAccount.saveBulletin(b1, newFolder);
 		assertNull(store.findFolder(store.getSearchFolderName()));
-		appWithAccount.search(originalString, andKeyword, orKeyword);
+		search(appWithAccount, originalString, andKeyword, orKeyword);
 		assertEquals(1, store.findFolder(store.getSearchFolderName()).getBulletinCount());
-		appWithAccount.search(commonString, andKeyword, orKeyword);
+		search(appWithAccount, commonString, andKeyword, orKeyword);
 		assertEquals(1, store.findFolder(store.getSearchFolderName()).getBulletinCount());
-		appWithAccount.search("abcdefghijklmnop", andKeyword, orKeyword);
+		search(appWithAccount, "abcdefghijklmnop", andKeyword, orKeyword);
 		assertEquals(0, store.findFolder(store.getSearchFolderName()).getBulletinCount());
 		String newString = "bilbo";
 		Bulletin b2 = store.createNewDraft(b1, b1.getPublicFieldSpecs(), b1.getPrivateFieldSpecs());
@@ -1433,13 +1435,13 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		b3.set(Bulletin.TAGPUBLICINFO, "");
 		appWithAccount.saveBulletin(b3, newFolder);
 
-		appWithAccount.search(newString, andKeyword, orKeyword);
+		search(appWithAccount, newString, andKeyword, orKeyword);
 		assertEquals(1, store.findFolder(store.getSearchFolderName()).getBulletinCount());
-		appWithAccount.search(originalString, andKeyword, orKeyword);
+		search(appWithAccount, originalString, andKeyword, orKeyword);
 		assertEquals(1, store.findFolder(store.getSearchFolderName()).getBulletinCount());
-		appWithAccount.search(commonString, andKeyword, orKeyword);
+		search(appWithAccount, commonString, andKeyword, orKeyword);
 		assertEquals(1, store.findFolder(store.getSearchFolderName()).getBulletinCount());
-		appWithAccount.search(publicData2, andKeyword, orKeyword);
+		search(appWithAccount, publicData2, andKeyword, orKeyword);
 		assertEquals(1, store.findFolder(store.getSearchFolderName()).getBulletinCount());
 		
 		
@@ -1917,6 +1919,16 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		assertEquals("unknown Key not configured?", missingKey.getPublicCode()+" <field:HQNotConfigured>", appWithAccount.getHQLabelIfPresent(missingKey));
 	}
 	
+	
+	
+	private void search(MartusApp app, String searchFor, String andKeyword, String orKeyword)
+	{
+		SearchParser parser = new SearchParser(andKeyword, orKeyword);
+		SearchTreeNode searchNode = parser.parse(searchFor);
+		app.search(searchNode);
+	}
+
+
 	
 	private MockMartusSecurity mockSecurityForApp;
 
