@@ -1,9 +1,9 @@
 ﻿# Martus Client Translation File
 # Language code:  es
 # Language name:  Spanish
-# Exported date:  Fri Apr 22 12:06:00 PDT 2005
-# Client version: 2.7
-# Client build:   20050415.1566
+# Exported date:  Thu Sep 01 17:21:31 PDT 2005
+# Client version: 2.8 Internal
+# Client build:   20050901.1660
 #
 # This file MUST be saved in UTF-8 format!
 # Lines beginning with # are comments and are ignored by Martus
@@ -20,8 +20,11 @@
 #    added after the last release. Remove the english, insert/update the
 #    VALUE translation to match the new English text which is in the
 #    comment line directly above it, and remove the <>
-# If you name it Martus-es.mtf and put the file in
-#     c:\Martus, then Martus will automatically read it.
+# If you name it Martus-es.mtf, put the file in your
+#     Martus directory, and create a file (which can be empty)
+#     called use_unofficial_translations.txt in your Martus directory,
+#     then Martus will automatically read it.  You will receive a warning
+#     message when you use this file while testing.
 # In Martus, to choose a language, pick one from the drop-down list
 #    in the lower left-hand corner of the signin screen, or after you
 #    are logged in, go to Options/Preferences.
@@ -34,62 +37,50 @@
 #      (by using the enter key) in any mtf entry
 #      (from the field:xxx to the end of the translated text),
 #      since a continuous block of text is needed.
-#  3.  do NOT translate "#N#" or "#M#" (though move them as appropriate
-#      grammatically for the language to make "#N# of #M#" [eg "2 of 5"] make
-#      sense for creating/restoring multiple key backup files).
-#  4.  in field:VirtualKeyboardKeys, keep the english alphabet, but include any
+#  3.  in field:VirtualKeyboardKeys, keep the english alphabet, but include any
 #      non-english characters at the end of the english alphabet/numbers/special
 #      characters (e.g. attach entire Thai alphabet at the end of the line)
-#  5.  in field:SearchBulletinRules, make sure to translate the english "and"
-#      and "or" in the text to exactly match the keyword:and= and 
-#      keyword:or= translations.  Also, the translation of the first sentence
-#      should not exactly match the english version because Martus can handle
-#      both english "and"/"or" and the translations of those keywords for
-#      bulletin searching, since for some languages keyboards are not available
-#      to all users in those alphabets. So please translate the following for the
-#      first sentence: "When searching for bulletins you can add key words either
-#      in english or the-language-you-are-translating (or/or-translated,
-#      and/and-translated) between multiple search term words
-#      (e.g. prison or jail, prison and assault).
-#  6.  in CreateCustomFieldsHelp2/3 fields, you can translate tags into foreign
+#  4.  *** field:SearchBulletinRules will likely change and an additional
+#      “Search Help” field will likely be added before the release,
+#      so any needed instructions will be added here at that point ***
+#  5.  in CreateCustomFieldsHelp2/3 fields, you can translate tags into foreign
 #      characters (but without punctuation or spaces)
-#  7.  when there are file or directory names, do not translate them
+#  6.  when there are file or directory names, do not translate them
 #      (e.g.  "acctmap.txt" and "packets"
 #      in field:confirmWarnMissingAccountMapFilecause=Warning: acctmap.txt
 #      file in your account's packets directory...)
-#  8.  do not translate the words "Martus" or "Benetech"
-#  9.  do NOT translate "#S#" (used for search string entry)
-# 10.  do not translate "#L#" as is it used to populate lists of values on
-#      various dialogs.
-# 11.  do not translate "#Title#" (used for bulletin title entry)
-# 12.  do not translate "#TITLES#" (used for a list of the titles of previous
-#      versions of the bulletin.
-# 13.  do not translate "#A#" (used for bulletin details: Author Public Code)
-# 14.  do not translate "#I#" (used for bulletin details: Bulletin ID)
-# 15.  do not translate "#H#" (used for bulletin details: Headquarter entries)
-# 16.  do not translate "#NumberOfHQs#" in various dialogs
-# 17.  Leave standard field tags in English in CreateCustomFieldsHelp1 and
+#  7.  do not translate the words "Martus" or "Benetech"
+#  8.  Leave standard field tags in English in CreateCustomFieldsHelp1 and
 #      CreateCustomFieldsHelp2, but put translation in parentheses after
 #      english : e.g.  'author' (autor), so users know what they refer to
-# 18.  Leave field types in English in CreateCustomFieldsHelp2 (e.g. BOOLEAN,
+#  9.  Leave field types in English in CreateCustomFieldsHelp2 (e.g. BOOLEAN,
 #      DATE), but put translation in parentheses after english, so users know
 #      what they refer to.
-# 19.  Leave field types in English in CreateCustomFieldsHelp3 examples
+# 10.  Leave field types in English in CreateCustomFieldsHelp3 examples
 #      (e.g. BOOLEAN, DATE)
-# 20.  Do not translate words used in XML for custom fields such as:
+# 11.  Do not translate words used in XML for custom fields such as:
 #      <Field type='GRID'>, </Field>, <Tag>, </Tag>, <Label>, </Label>,
-#      <GridSpecDetails>, </GridSpecDetails>, <Column>, </Column>
-# 21.  do not translate "#UseUnofficialTranslationFiles#" in
-#      field:warningUnofficialTranslation since it contains a file name
-# 22.  do not translate "#CurrentNewsItem#" (used for server news)
-# 23.  do not translate "#MaxNewsItems#" (used for server news)
-# 24.  If you want your language to appear right to left,
+#      <GridSpecDetails>, </GridSpecDetails>, <Column>, </Column>,
+#      <Message>, </Message>, <Choices>, </Choices>, <Choice>, </Choice>,
+#      <Column type='STRING'>, <Column type='BOOLEAN'>, <Column type='DATE'>,
+#      <Column type='DATERANGE'>, <Column type='DROPDOWN'>
+# 12.  Do not translate words that are surrounded by #'s, but you may move
+#      them around as grammatically appropriate.
+#      Example: #TotalNumberOfFilesInBackup#, #Titles#, #FieldLabel#, etc.
+#      as these words will be replaced when the program runs with
+#      a particular value.
+#      For Example. #TotalNumberOfFilesInBackup# = '5'
+#                   #Titles# = 'A list of bulletin titles'
+# 13.  If you want your language to appear right to left,
 #      Uncomment the next line (by removing the # in front of #!right-to-left)
 #!right-to-left
 #
 
 #________________________=Show all bulletins on this server and on this computer.
 -e9a2-button:AllSummaries=Mostrar todos los boletines en este servidor y en este ordenador.
+
+#________________=Back
+-b52b-button:Back=Atrás
 
 #___________________________=Bulletin Details...
 -d012-button:BulletinDetails=Detalles del boletín...
@@ -115,6 +106,12 @@
 #_________________________________=Show bulletins that are only on the server.
 -b795-button:DownloadableSummaries=Mostrar sólo los boletines en el servidor.
 
+#___________________________=Down
+-bf93-button:FolderOrderDown=Subir
+
+#_________________________=Up
+-2038-button:FolderOrderUp=Bajar
+
 #_________________=Leave
 -7e35-button:Leave=Salir
 
@@ -123,6 +120,18 @@
 
 #___________________=Preview
 -f1fb-button:Preview=Vista previa
+
+#___________________________=Print only public information
+-a2a2-button:PrintOnlyPublic=Solo imprimir datos públicos
+
+#_________________________________=Include private information
+-6c53-button:PrintPublicAndPrivate=Incluir datos privados
+
+#_______________________=Send output to a disk file
+-40dd-button:PrintToDisk=Enviar datos a un archivo
+
+#__________________________=Print to a printer
+-7bac-button:PrintToPrinter=Imprimir
 
 #__________________________________=Restore account from backup key file
 -f447-button:RecoverAccountByBackup=Recuperar cuenta de una copia de seguridad
@@ -136,11 +145,11 @@
 #_________________________=Reset Contents
 -6f62-button:ResetContents=Revertir contenido
 
-#_______________________________=Retrieve all bulletin revisions
--6965-button:RetrieveAllVersions=Bajar todas las revisiones del boletín
+#_______________________________=Retrieve all bulletin versions
+-3daf-button:RetrieveAllVersions=Bajar todas las versiones del boletín
 
-#______________________________________________=Retrieve latest bulletin revision only
--9c45-button:RetrieveLatestBulletinRevisionOnly=Bajar la última revisión del boletín
+#______________________________________________=Retrieve latest bulletin version only
+-3449-button:RetrieveLatestBulletinRevisionOnly=Bajar la última version del boletín
 
 #__________________________________=Accept
 -bb54-button:ServerComplianceAccept=Aceptar
@@ -150,6 +159,12 @@
 
 #__________________=Sign In
 -f849-button:SignIn=Iniciar sesión
+
+#______________________________=Use New
+-99f3-button:UseNewCustomFields=Usar campos nuevos
+
+#______________________________=Use Old
+-91ea-button:UseOldCustomFields=Usar campos antiguos
 
 #_______________________________________=View Selected Version...
 -f943-button:ViewPreviousBulletinVersion=Ver la revisión seleccionada...
@@ -244,8 +259,8 @@
 #______________=OK
 -9ce3-button:ok=Aceptar
 
-#_________________=Print
--5b22-button:print=Imprimir
+#_________________=Print/Report
+-5fdf-button:print=Imprimir/Crear reporte
 
 #____________________________=Remove Attachment
 -6f6d-button:removeattachment=Eliminar archivo adjunto
@@ -295,17 +310,17 @@
 #_________________________=Author (required)
 -4a0b-field:AuthorRequired=Autor (requerido)
 
-#___________________________________=Your key is required to read your private bulletin information or to create new bulletins.  To ensure that you'll always have access to your data, it is extremely important to keep a backup of your key.\n\nMartus offers two methods for backing up your key, either of which may be used, but we strongly recommend using both backup methods.  The first method creates a single, password encrypted key back up file onto removable media (e.g. floppy disk, cd, USB storage) or a network drive; the second method backs up the key in #M# separate pieces (not encrypted with your password) onto multiple floppy disks (or other removable media).\n
--4f48-field:BackupKeyPairGeneralInfo=Su clave es un elemento requerido para poder leer la información privada de sus boletines o para crear nuevos boletines. Es importante tener copias de seguridad de su clave para estar seguro que siempre va a tener acceso a su información.\n\nMartus le ofrece dos métodos para crear copias de seguridad de su clave, puede escoger el que más le convenga pero le recomendamos que use ambos métodos. El primer método crea una sola copia de su clave, cifrada y protegida con su contraseña a un medio removible (como una unidad USB, un disco CD-ROM o un disquete) o a un disco de red. El segundo método crea múltiples copias de seguridad seccionando su clave en #M# partes (sin protegerlas con su contraseña) y copiandolas a medios removibles como disquetes.\n
+#___________________________________=Your key is required to read your private bulletin information or to create new bulletins.  To ensure that you'll always have access to your data, it is extremely important to keep a backup of your key.\n\nMartus offers two methods for backing up your key, either of which may be used, but we strongly recommend using both backup methods.  The first method creates a single, password encrypted key back up file onto removable media (e.g. floppy disk, cd, USB storage) or a network drive; the second method backs up the key in #TotalNumberOfFilesInBackup# separate pieces (not encrypted with your password) onto multiple floppy disks (or other removable media).\n
+-ff3d-field:BackupKeyPairGeneralInfo=Su clave es un elemento requerido para poder leer la información privada de sus boletines o para crear nuevos boletines. Es importante tener copias de seguridad de su clave para estar seguro que siempre va a tener acceso a su información.\n\nMartus le ofrece dos métodos para crear copias de seguridad de su clave, puede escoger el que más le convenga pero le recomendamos que use ambos métodos. El primer método crea una sola copia de su clave, cifrada y protegida con su contraseña a un medio removible (como una unidad USB, un disco CD-ROM o un disquete) o a un disco de red. El segundo método crea múltiples copias de seguridad seccionando su clave en #TotalNumberOfFilesInBackup# partes (sin protegerlas con su contraseña) y copiandolas a medios removibles como disquetes.\n
 
-#________________________________________________=This method breaks up your key into #M# pieces, any #N# of which will be required to reconstruct the key without requiring a password.  If you forget your login name or your password, this method is the only way you can restore your key.\n\nOnce the #M# files have been written to removable media disks, you should distribute them to #M# different people whom you will remember, but each of whom don't know who you have given the other files to.  Do not store any of the disks together.\n\nTo restore your key, first retrieve any #N# of the original #M# disks, and then select 'Restore Account' and 'Restore account from multiple disks' when signing into Martus.\n
--c83c-field:BackupKeyPairToSecretShareInformation=Este método secciona su clave en #M# partes. Con juntar #N# de estas partes puede reconstruir su clave sin necesidad de su contraseña. Si se le olvida su nombre de usuario de Martus o su contraseña, éste es el único método bajo el cual podría recuperar su clave.\n\nUna vez haya guardado las #M# piezas a medios removibles, es necesario que distribuya estos entre #M# diferentes personas que pueda recordar, pero las cuales no sepan de las otras personas a las que dió las demás piezas. Nunca guarde estas partes en los medios removibles juntos, siempre sepárelos para su seguridad.\n\nPara recuperar su clave junte #N# de las #M# copias originales y elija 'Recuperar cuenta' y luego 'Recuperar cuenta de copias de seguridad múltiples' al iniciar Martus.\n
+#________________________________________________=This method breaks up your key into #TotalNumberOfFilesInBackup# pieces, any #MinimumNumberOfFilesNeededForRecovery# of which will be required to reconstruct the key without requiring a password.  If you forget your login name or your password, this method is the only way you can restore your key.\n\nOnce the #TotalNumberOfFilesInBackup# files have been written to removable media disks, you should distribute them to #TotalNumberOfFilesInBackup# different people whom you will remember, but each of whom don't know who you have given the other files to.  Do not store any of the disks together.\n\nTo restore your key, first retrieve any #MinimumNumberOfFilesNeededForRecovery# of the original #TotalNumberOfFilesInBackup# disks, and then select 'Restore Account' and 'Restore account from multiple disks' when signing into Martus.\n
+-9551-field:BackupKeyPairToSecretShareInformation=Este método secciona su clave en #TotalNumberOfFilesInBackup# partes. Con juntar #MinimumNumberOfFilesNeededForRecovery# de estas partes puede reconstruir su clave sin necesidad de su contraseña. Si se le olvida su nombre de usuario de Martus o su contraseña, éste es el único método bajo el cual podría recuperar su clave.\n\nUna vez haya guardado las #TotalNumberOfFilesInBackup# piezas a medios removibles, es necesario que distribuya estos entre #TotalNumberOfFilesInBackup# diferentes personas que pueda recordar, pero las cuales no sepan de las otras personas a las que dió las demás piezas. Nunca guarde estas partes en los medios removibles juntos, siempre sepárelos para su seguridad.\n\nPara recuperar su clave junte #MinimumNumberOfFilesNeededForRecovery# de las #TotalNumberOfFilesInBackup# copias originales y elija 'Recuperar cuenta' y luego 'Recuperar cuenta de copias de seguridad múltiples' al iniciar Martus.\n
 
 #____________________________________________________=Please insert disk #
 -b877-field:BackupRecoverKeyPairInsertNextDiskMessage=Por favor inserte el disco #
 
-#_______________________________________________=Backup complete, please give each disk to someone you trust, so that if you forget your user name and/or password in the future you can recreate your account.  You will need #N# of these disks to recreate your account.
--30ee-field:BackupSecretShareCompleteInformation=Copia de seguridad creada. Por favor entregue cada disco a una persona distinta de su confianza, de tal forma que si se olvida su nombre de usuario o contraseña, pueda recuperar su cuenta de Martus. Necesitara juntar #N# de esos discos con copias de seguridad para recuperar su cuenta.
+#_______________________________________________=Backup complete, please give each disk to someone you trust, so that if you forget your user name and/or password in the future you can recreate your account.  You will need #MinimumNumberOfFilesNeededForRecovery# of these disks to recreate your account.
+-fba9-field:BackupSecretShareCompleteInformation=Copia de seguridad creada. Por favor entregue cada disco a una persona distinta de su confianza, de tal forma que si se olvida su nombre de usuario o contraseña, pueda recuperar su cuenta de Martus. Necesitara juntar #MinimumNumberOfFilesNeededForRecovery# de esos discos con copias de seguridad para recuperar su cuenta.
 
 #__________________________________________=Author Public Code
 -01c7-field:BulletinDetailsAuthorPublicCode=Código público del autor
@@ -343,8 +358,8 @@
 #__________________________________=Warning: Some information in this bulletin is not visible
 -eba1-field:BulletinHasUnknownStuff=Advertencia: Alguna información de este boletín no son visibles
 
-#______________________________________________=The selected Headquarters account(s) will be able to view the private information in this bulletin, or send this bulletin to a server, after you save it.\n\nTo add a new headquarters account use the Tools/Configure Headquarters menu option.
--de85-field:BulletinHeadQuartersHQInfoForModify=La(s) cuenta(s) de oficina(s) central(es) seleccionada(s) podrá(n) ver la información privada en este boletín, o enviar este boletín a un servidor, después que usted lo guarde.\n\nPara agregar una cuenta nueva de oficina central utilice la opción del menú Herramientas/Configurar oficinas centrales. 
+#______________________________________________=The selected Headquarters account(s) will be able to view the private information in this bulletin, or send this bulletin to a server, after you save it.\n\nTo add a new Headquarters account use the Tools/Configure Headquarters menu option.
+-6702-field:BulletinHeadQuartersHQInfoForModify=La(s) cuenta(s) de oficina(s) central(es) seleccionada(s) podrá(n) ver la información privada en este boletín, o enviar este boletín a un servidor, después que usted lo guarde.\n\nPara agregar una cuenta nueva de oficina central utilice la opción del menú Herramientas/Configurar oficinas centrales.
 
 #____________________________________________=The following Headquarters account(s) can view the private information in this bulletin, and can send this bulletin to a server.
 -e728-field:BulletinHeadQuartersHQInfoForView=La(s) siguente(s) cuenta(s) de oficina(s) central(es) puede(n) ver la información privada en este boletín, y puede enviar el boletín a un servidor. 
@@ -409,17 +424,14 @@
 #__________________________________=The layout of the bulletins is dictated by an XML document.  By default the standard bulletin fields occur at the top of the Custom Field declaration, but they can be moved if desired.  However, there are four required fields that cannot be removed:  'author', 'entrydate', 'language' and 'title'.\n\n
 -1ef6-field:CreateCustomFieldsHelp1=La presentación de los boletines está dictada por un documento en XML. Normalmente los campos de un boletín estándar ocurren al inicio del documento, pero puede moverlos a otra posición si lo desea. Hay cuatro campos que son requeridos en la presentación de un boletín y no pueden ser removidos, estas son 'author' (autor), 'entrydate' (fecha de creación), 'language' (idioma) y 'title' (título).\n\n
 
-#__________________________________=For custom (non-standard) fields, you first select the type of field you want.  The possible choices are 'BOOLEAN', 'DATE', 'DATERANGE', 'DROPDOWN', 'GRID', 'LANGUAGE', 'MESSAGE', 'MULTILINE', and 'STRING'. \n\nFor each custom field you will need a unique identification tag.  This tag can be any word except those already used by the system (eg. 'author', 'summary', 'location', 'title' etc.), and cannot contain spaces or special characters.  Examples of choices are 'custom1', 'custom2', etc, or tags that are more descriptive like 'VictimsName'.\n\nThen you need a label which is displayed next to your custom field.  An example might be 'Name of 1st Witness'.\n\nAdditional Comments\n1. XML is case-sensitive ('Witness' is not the same as 'witness') \n2. Quotes around type name can be single or double as long as they match (e.g. 'STRING" is not valid. It must be 'STRING' or "STRING")\n3. A Boolean field will be displayed as a checkbox when editing and Yes/No when previewed or printed.\n4.  Use "MESSAGE" fields to give guidance on how to enter data, and to create comments/notes that will be displayed in every bulletin.\n\nSee examples below:\n\n
--da0a-field:CreateCustomFieldsHelp2=Para campos personalizados (no estándar), necesita primero seleccionar qué tipo de campo desea. Los tipos de campo disponibles son 'BOOLEAN' (Verdadero/Falso), 'DATE' (Fecha), 'DATERANGE' (Rango de fechas), 'DROPDOWN' (Lista desplegable), 'GRID' (Mapa), 'LANGUAGE' (Idioma), 'MESSAGE' (Mensaje), 'MULTILINE' (Múltiples lineas), and 'STRING' (Palabra).\n\nPara cada campo personalizado va a necesitar un nombre de identificación único. El nombre de identificación de un campo puede ser cualquier palabra a excepción de aquellas en uso por Martus ('author' (autor), 'summary' (resúmen), 'location' (lugar), 'title' (título) etc.) y no puede contener espacios o caracteres especiales. Por ejemplo puede usar los nombres de identificación 'personalizado1', 'personalizado2', etc o pueden ser más descriptivos como 'NombreDeVictima'.\n\nLuego necesita un título para su campo personalizado. Por ejemplo podria ser 'Nombre de primer testigo'.\n\nNotas adicionales\n1. XML toma en cuenta las mayúsculas y minúsculas. ('Testigo' no es lo mismo que 'testigo')\n2. Las comillas alrededor de los tipos de campos pueden ser dobles o singulares, pero tiene que corresponder. ( ej. 'STRING" no es válido. Tiene que ser 'STRING' o "STRING")\n3. Un campo BOOLEAN se muestra como una casilla de verificación cuando se edita y se muestra Si/No en la vista previa o cuando se imprime.\n4. Utilice los campos de “MESSAGE” para guiar al usuario en como digitar datos, y para crear comentarios o notas que serán exhibidas en cada boletín.\n\nConsulte los siguientes ejemplos:\n\n
+#__________________________________=For custom (non-standard) fields, you first select the type of field you want.  The possible choices are 'BOOLEAN', 'DATE', 'DATERANGE', 'DROPDOWN', 'GRID', 'LANGUAGE', 'MESSAGE', 'MULTILINE', and 'STRING'. \n\nFor each custom field you will need a unique identification tag.  This tag can be any word except those already used by the system (eg. 'author', 'summary', 'location', 'title' etc.), and cannot contain spaces or special characters.  Examples of choices are 'VictimsName', 'EyeColorChoice', etc.\n\nThen you need a label which is displayed next to your custom field.  An example might be 'Name of 1st Witness'.\n\nAdditional Comments\n1. XML is case-sensitive ('Witness' is not the same as 'witness') \n2. Quotes around type name can be single or double as long as they match (e.g. 'STRING" is not valid. It must be 'STRING' or "STRING")\n3. A Boolean field will be displayed as a checkbox when editing and Yes/No when previewed or printed.\n4.  Use "MESSAGE" fields to give guidance on how to enter data, and to create comments/notes that will be displayed in every bulletin.\n\nSee examples below:\n\n
+-4ccc-field:CreateCustomFieldsHelp2=Para campos personalizados (no estándar), necesita primero seleccionar qué tipo de campo desea. Los tipos de campo disponibles son 'BOOLEAN' (Verdadero/Falso), 'DATE' (Fecha), 'DATERANGE' (Rango de fechas), 'DROPDOWN' (Lista desplegable), 'GRID' (Mapa), 'LANGUAGE' (Idioma), 'MESSAGE' (Mensaje), 'MULTILINE' (Múltiples lineas), and 'STRING' (Palabra).\n\nPara cada campo personalizado va a necesitar un nombre de identificación único. El nombre de identificación de un campo puede ser cualquier palabra a excepción de aquellas en uso por Martus ('author' (autor), 'summary' (resúmen), 'location' (lugar), 'title' (título) etc.) y no puede contener espacios o caracteres especiales. Por ejemplo puede usar los nombres de identificación 'NombreDeVictima', 'ColorDeOjos', etc.\n\nLuego necesita un título para el campo personalizado. Por ejemplo podria ser 'Nombre de primer testigo'.\n\nNotas adicionales\n1. XML toma en cuenta las mayúsculas y minúsculas. ('Testigo' no es lo mismo que 'testigo')\n2. Las comillas alrededor de los tipos de campos pueden ser dobles o singulares, pero tiene que corresponder. ( ej. 'STRING" no es válido. Tiene que ser 'STRING' o "STRING")\n3. Un campo BOOLEAN se muestra como una casilla de verificación cuando se edita y como Si/No en la vista previa o cuando se imprime.\n4. Utilice los campos de “MESSAGE” para guiar al usuario en como ingresar datos, y para crear notas que serán exhibidas en cada boletín.\n\nConsulte los siguientes ejemplos:\n\n
 
-#__________________________________=<Field type='STRING'>\n<Tag>custom1</Tag>\n<Label>Witness Name</Label>\n</Field>\n\n<Field type='LANGUAGE'>\n<Tag>new2</Tag>\n<Label>Witness Speaks</Label>\n</Field>\n\n<Field type='BOOLEAN'>\n<Tag>new3</Tag>\n<Label>Were guns used?</Label>\n</Field>\n\n<Field type='MESSAGE'>\n<Tag>customMessage</Tag>\n<Label>Guidance for Perpetrator Eye Color entry:</Label>\n<Message>If you are unsure of the perpetrator's eye color, please leave this field blank.</Message>\n</Field>\n\n<Field type='DROPDOWN'>\n<Tag>customDropDown</Tag>\n<Label>Perpetrator Eye Color</Label>\n<Choices>\n<Choice>Brown</Choice>\n<Choice>Blue</Choice>\n<Choice>Green</Choice>\n<Choice>Other</Choice>\n</Choices>\n</Field>\n\n<Field type='GRID'>\n<Tag>customgrid</Tag>\n<Label>Victim Information</Label>\n<GridSpecDetails>\n<Column><Label>Name of Victim</Label></Column>\n<Column><Label>Victim Age</Label></Column>\n<Column><Label>Victim Gender</Label></Column>\n<Column><Label>Victim Ethnicity</Label></Column>\n</GridSpecDetails>\n</Field>\n
--491b-field:CreateCustomFieldsHelp3=<Field type ='STRING'>\n<Tag>personalizado1</Tag>\n<Label>Nombre de testigo</Label>\n</Field>\n\n<Field type ='LANGUAGE'>\n<Tag>nueva2</Tag>\n<Label>Idioma del testigo</Label>\n</Field>\n\n<Field type ='BOOLEAN'>\n<Tag>nueva3</Tag>\n<Label>¿Se usaron armas?</Label>\n</Field>\n\n<Field type='MESSAGE'>\n<Tag>mensajepersonalizado</Tag>\n<Label>Consejo para digitar el color de ojos del perpetrador:</Label>\n<Message>Si no está seguro del color del los ojos del perpetrador, por favor deje este campo en blanco.</Message>\n</Field>\n\n<Field type='DROPDOWN'>\n<Tag>listadesplegablepersonalizada</Tag>\n<Label>Color de los ojos del perpetrador</Label>\n<Choices>\n<Choice>Café</Choice>\n<Choice>Azul</Choice>\n<Choice>Verde</Choice>\n<Choice>Otro</Choice>\n</Choices>\n</Field>\n\n<Field type='GRID'>\n<Tag>mapapersonalizado</Tag>\n<Label>Información de la víctima</Label>\n<GridSpecDetails>\n<Column><Label>Nombre de la víctima</Label></Column>\n<Column><Label>Edad de la víctima</Label></Column>\n<Column><Label>Sexo de la víctima</Label></Column>\n<Column><Label>Etnia de la víctima</Label></Column>\n</GridSpecDetails>\n</Field>\n
+#__________________________________=\n<Field type='DROPDOWN'>\n<Tag>BulletinSource</Tag>\n<Label>Source of bulletin information</Label>\n<Choices>\n<Choice>Media/Press</Choice>\n<Choice>Legal Report</Choice>\n<Choice>Personal Interview</Choice>\n<Choice>Other</Choice>\n</Choices>\n</Field>\n\n<Field type='STRING'>\n<Tag>SpecifyOther</Tag>\n<Label>If "Other", please specify:</Label>\n</Field>\n\n<Field type='STRING'>\n<Tag>IntervieweeName</Tag>\n<Label>Interviewee Name</Label>\n</Field>\n\n<Field type='LANGUAGE'>\n<Tag>IntervieweeLanguage</Tag>\n<Label>Interviewee Speaks</Label>\n</Field>\n\n<Field type='DATERANGE'>\n<Tag>InterviewDates</Tag>\n<Label>Date(s) of interview(s)</Label>\n</Field>\n\n<Field type='BOOLEAN'>\n<Tag>Anonymous</Tag>\n<Label>Does interviewee wish to remain anonymous?</Label>\n</Field>\n\n<Field type='GRID'>\n<Tag>VictimInformationGrid</Tag>\n<Label>Victim Information</Label>\n<GridSpecDetails>\n<Column type='STRING'><Tag></Tag><Label>First Name</Label></Column>\n<Column type='STRING'><Tag></Tag><Label>Last Name</Label></Column>\n<Column type='BOOLEAN'><Tag></Tag><Label>Is Identified?</Label></Column>\n<Column type='DATE'><Tag></Tag><Label>Date of Birth</Label></Column>\n<Column type='DROPDOWN'><Tag></Tag><Label>Sex</Label>\n<Choices>\n<Choice>Male</Choice>\n<Choice>Female</Choice>\n<Choice>Unknown</Choice>\n</Choices></Column>\n<Column type='STRING'><Tag></Tag><Label>Ethnicity</Label></Column>\n</GridSpecDetails>\n</Field>\n\n<Field type='MESSAGE'>\n<Tag>MessageProfession</Tag>\n<Label>Profession History Table Note</Label>\n<Message>If you have information about a person who has had different professions over time, enter multiple rows with the same First and Last Names and show the date ranges for each profession on a separate row.</Message>\n</Field>\n\n<Field type='GRID'>\n<Tag>ProfessionHistoryGrid</Tag>\n<Label>Profession History</Label>\n<GridSpecDetails>\n<Column type='STRING'><Tag></Tag><Label>First Name</Label></Column>\n<Column type='STRING'><Tag></Tag><Label>Last Name</Label></Column>\n<Column type='STRING'><Tag></Tag><Label>Profession</Label></Column>\n<Column type='DATERANGE'><Tag></Tag><Label>Dates of Profession</Label></Column>\n</GridSpecDetails>\n</Field>\n
+-4d55-field:CreateCustomFieldsHelp3=\n<Field type='DROPDOWN'>\n<Tag>OrigenDeBoletin</Tag>\n<Label>Origen de la información de este boletín</Label>\n<Choices>\n<Choice>Medios de comunicación</Choice>\n<Choice>Reporte legal</Choice>\n<Choice>Entrevista</Choice>\n<Choice>Otro</Choice>\n</Choices>\n</Field>\n\n<Field type='STRING'>\n<Tag>DetallesOtro</Tag>\n<Label>Si eligió "Otro", por favor proveer detalles adicionales:</Label>\n</Field>\n\n<Field type='STRING'>\n<Tag>NombreDeEntrevistado</Tag>\n<Label>Nombre de entrevistado</Label>\n</Field>\n\n<Field type='LANGUAGE'>\n<Tag>IdiomaDeEntrevistado</Tag>\n<Label>Idioma de entrevista</Label>\n</Field>\n\n<Field type='DATERANGE'>\n<Tag>FechasDeEntrevista</Tag>\n<Label>Fecha(s) de la(s) entrevista(s)</Label>\n</Field>\n\n<Field type='BOOLEAN'>\n<Tag>Anónimo</Tag>\n<Label>El entrevistado desea ser anónimo</Label>\n</Field>\n\n<Field type='GRID'>\n<Tag>MpaDeInformaciónDeVictima</Tag>\n<Label>Información de la víctima</Label>\n<GridSpecDetails>\n<Column type='STRING'><Tag></Tag><Label>Nombre</Label></Column>\n<Column type='STRING'><Tag></Tag><Label>Apellido</Label></Column>\n<Column type='BOOLEAN'><Tag></Tag><Label>¿Ha sido identificado?</Label></Column>\n<Column type='DATE'><Tag></Tag><Label>Fecha de Nacimiento</Label></Column>\n<Column type='DROPDOWN'><Tag></Tag><Label>Sexo</Label>\n<Choices>\n<Choice>Masculino</Choice>\n<Choice>Femenino</Choice>\n<Choice>Desconocido</Choice>\n</Choices></Column>\n<Column type='STRING'><Tag></Tag><Label>Etnia</Label></Column>\n</GridSpecDetails>\n</Field>\n\n<Field type='MESSAGE'>\n<Tag>MensajeDeProfeción</Tag>\n<Label>Notas de historia de profesión</Label>\n<Message>Si tiene información sobre una persona que tuvo diferentes profesiones en un periódo de tiempo, ingrese varias filas con el mismo nombre y apellido y con el rango de fechas de cada profesión.</Message>\n</Field>\n\n<Field type='GRID'>\n<Tag>HistoriaDeProfesión</Tag>\n<Label>Historia de Profesión</Label>\n<GridSpecDetails>\n<Column type='STRING'><Tag></Tag><Label>Nombre</Label></Column>\n<Column type='STRING'><Tag></Tag><Label>Apellido</Label></Column>\n<Column type='STRING'><Tag></Tag><Label>Profesión</Label></Column>\n<Column type='DATERANGE'><Tag></Tag><Label>Rango de fechas de profesión</Label></Column>\n</GridSpecDetails>\n</Field>\n
 
 #____________________________________=Please enter your new username and password.
 -aec2-field:CreateNewUserNamePassword=Escriba su nuevo nombre de usuario y contraseña.
-
-#_______________________________________=MartusCustomization
--f3b2-field:CustomizationFileDefaultName=Personalización de Martus
 
 #_____________________________________=Customization Template Files
 -9210-field:CustomizationTemplateFiles=Archivos de pantillas personalizadas
@@ -430,14 +442,17 @@
 #____________________=Date Range
 -6bb4-field:DateRange=Rango de fecha
 
-#________________________=Between
--1b22-field:DateRangeFrom=Entre
+#_________________________________=#FieldLabel# (beginning)
+-007f-field:DateRangeTemplatebegin=#FieldLabel# (comienzo)
 
-#______________________=and
--cffa-field:DateRangeTo=y
+#_______________________________=#FieldLabel# (end)
+-fea7-field:DateRangeTemplateend=#FieldLabel# (final)
 
 #_____________________________=Default Details
 -4a82-field:DefaultDetailFiles=Detalles predeterminados
+
+#_____________________________________=bulletins.html
+-a4f1-field:DefaultPrintToDiskFileName=boletines.html
 
 #_________________________________=This bulletin has been pasted into Martus from the file:
 -ce4c-field:DeleteBulletinFileMsg1=Este boletín fue ingresado a Martus desde el archivo:
@@ -472,8 +487,8 @@
 #__________________________________=LABEL
 -64b8-field:ErrorCustomFieldHeader4=TÍTULO
 
-#____________________________=There is an error in the custom field definitions. Each problem is identified with the following codes:\n   100 - Required standard field is missing\n   101 - Custom field does not have a correct tag.\n   102 - A previous Tag already exists with this name.\n   103 - Custom field does not have a label.\n   104 - Unrecognized Field Type.\n   105 - A label was found in a standard field.\n   106 - XML Parse Error.\n   107 - Tag contains illegal characters.\n   200 - All fields empty.\n   201 - Unrecognized headquarters created this template.\n   202 - Security validation error.\n   203 - File Error.
--f2cf-field:ErrorCustomFields=Se encontró un error en la definición de los campos personalizados. Cada problema es identificado con los siguientes códigos:\n   100 - Falta un campo estándar requerido\n   101 - Un campo personalizado tiene un nombre de identificación incorrecto.\n   102 - Hay un nombre de identificación duplicado.\n   103 - Campo personalizado no tiene título.\n   104 - Tipo de campo desconocido.\n   105 - Se encontró un título en un campo estándar.\n   106 - XML Error al leer documento.\n   107 - Nombre de identificación contiene letras no válidas.\n   200 – Todos los campos vacíos.\n   201 – Una cuenta de oficina central desconocida creó esta pantilla.\n   202 – Error de validación de seguridad.\n   203 – Error de Archivo.
+#____________________________=There is an error in the custom field definitions. Each problem is identified with the following codes:\n   100 - Required standard field is missing\n   101 - Custom field does not have a correct tag.\n   102 - A previous Tag already exists with this name.\n   103 - Custom field does not have a label.\n   104 - Unrecognized Field Type.\n   105 - A label was found in a standard field.\n   106 - XML Parse Error.\n   107 - Tag contains illegal characters.\n   108 - Duplicate entry in Dropdown field.\n   200 - All fields empty.\n   201 - Unrecognized Headquarters created this template.\n   202 - Security validation error.\n   203 - File Error.
+-f8de-field:ErrorCustomFields=Se encontró un error en la definición de los campos personalizados. Cada problema es identificado con los siguientes códigos:\n   100 - Falta un campo estándar requerido\n   101 - Un campo personalizado tiene un nombre de identificación incorrecto.\n   102 - Hay un nombre de identificación duplicado.\n   103 - Campo personalizado no tiene título.\n   104 - Tipo de campo desconocido.\n   105 - Se encontró un título en un campo estándar.\n   106 - XML Error al leer documento.\n   107 - Nombre de identificación contiene caracteres no válidos.\n   108 - Opcion duplicada en lista desplegable\n   200 - Todos los campos vacíos.\n   201 - Una cuenta de oficina central desconocida creó esta pantilla.\n   202 - Error de validación de seguridad.\n   203 - Error de Archivo.
 
 #_________________________________________=A previous backup file exists.  You must save each file on its own removable media disk.
 -db93-field:ErrorPreviousBackupShareExists=Una pieza de un archivo de seguridad ya existe en este medio. Cada pieza debe ser guardada en su propio medio removible.
@@ -541,6 +556,15 @@
 #________________________________=One or more accounts already exist on this computer. To create an additional account with a new username and passphrase, click OK.
 -02f2-field:HowToCreateNewAccount=Ya existe una o más cuentas en este ordenador. Oprima Aceptar para crear una cuenta adicional con un nuevo nombre de usuario y contraseña.
 
+#_________________________________=The version of this translation is not compatible with this version of Martus.  It is recommend that you do not continue to use this translation version and go to (http://www.martus.org/downloads) for the appropriate version.
+-2c0e-field:IncompatibleMtfVersion=Esta versió de la traducción no es compatible con esta versión de Martus.  Le recomendamo que no use esta traducción y que visite el sitio web (http://www.martus.org/downloads) para descargar una versión actualizada.
+
+#________________________________________=Martus Software Version: #ProgramVersionNumber#
+-fcd7-field:IncompatibleMtfVersionProgram=Martus software versión: #ProgramVersionNumber#
+
+#____________________________________________=#MtfLanguage# Translation Version: #MtfVersionNumber#
+-8dde-field:IncompatibleMtfVersionTranslation=Versión de traducción (#MtfLanguage#): #MtfVersionNumber#
+
 #_______________________=Warning: Portions may be missing or damaged
 -00a9-field:MayBeDamaged=Advertencia: Algunas partes pueden estar dañadas o perdidas.
 
@@ -577,11 +601,11 @@
 #_______________________________=Organization (required)
 -2f27-field:OrganizationRequired=Organización (requerido)
 
-#___________________________=Include private data in print out.
--c6f6-field:PrintPrivateData=Incluir datos privados al imprimir.
+#__________________________________=You have the option to include or exclude the selected bulletin's private information in this print out. If you choose to print private data, it will be visible to anyone who sees the print out.
+-2050-field:PrintPrivateDataMessage=Tiene la opción de incluir o excluir la información privada del boletín seleccionado al imprimirlo. Si elije imprimir los datos privados personas con accesso a la copia impresa podrán leer toda su información privada.
 
-#__________________________________=You have the option to include or exclude the selected bulletin's private information in this print out.\n\nTo only print public information, do not mark the checkbox below.\n\nIf you do mark the checkbox, anyone who sees the print out will be able to read your private data.
--e90d-field:PrintPrivateDataMessage=Tiene la opción de incluir o excluir la información privada del boletín seleccionado al imprimirlo.\n\nSi sólo quiere imprimir la información pública, no active la siguiente casilla.\n\nSi activa la casilla personas con accesso a la copia impresa podrán leer toda su información privada.
+#_______________________________=You can print the bulletin contents to a printer, or send the formatted output to a disk file.
+-4058-field:PrintToPrinterOrDisk=Puede imprimir el contenido del boletín a una impresora, o enviar la información a un archivo.
 
 #_________________________________=Public Information Files
 -90f9-field:PublicInformationFiles=Archivos de información pública
@@ -658,17 +682,32 @@
 #________________________________=Scrub data before deleting
 -7a0b-field:ScrubDataBeforeDelete=Limpiar información antes de eliminar
 
-#______________________________=When searching for bulletins you can add key words (or, and) between multiple search term words (e.g. prison or jail, prison and assault).  If you enter multiple search terms without keywords, Martus will search for the exact phrase you entered.  Do not use quotation marks in your search.  The 'starting on' and 'ending on' dates will further refine your search matching either the event date or the date entered.  If you leave the search text blank Martus will perform only a date search.
--ac8c-field:SearchBulletinRules=Al buscar en boletines puede usar la palabra 'o' y la palabra 'y' entre los términos de la búsqueda (por ejemplo, prisión o cárcel, prisión y asalto). Si usa múltiples términos en la búsqueda sin usar 'y' u 'o' Martus buscará boletines que contengan la frase exacta. No use comillas en sus términos de búsqueda. Use las fechas 'Empezando por' y 'Terminando por' para mantener su búsqueda dentro de un rango de fechas. Si deja los términos de búsqueda en blanco, Martus sólo buscará boletines por fechas.
+#_________________________=--Any Field--
+-bcaa-field:SearchAnyField=--Todos los campos--
 
-#________________________=Ending on:
--2412-field:SearchEndDate=Terminando en:
+#____________________________________=Press Enter to create a new row in the search query.
+-8f11-field:SearchBulletinAddingRules=Oprima Enter para crear una nueva fila en los parametros de búsqueda.
+
+#_____________________________=Click '#SearchHelpButton#' to get additional information on searching.
+-eb4b-field:SearchBulletinHelp=Oprima '#SearchHelpButton#' para información adicional sobre la búsqueda.
+
+#______________________________=For each row, select a field to search (or choose to match any field), select what kind of comparison to perform, and then enter a value to search for.
+-6878-field:SearchBulletinRules=Elija el campo a buscar para cada fila (o elija buscar en todos los campos), seleccione el tipo de comparación, y luego ingrese el término de búsqueda.
 
 #______________________=Search for:
 -0c73-field:SearchEntry=Buscar:
 
-#__________________________=Starting on:
--6fa2-field:SearchStartDate=Empezando en:
+#________________________________=Field(s) to search
+-9acd-field:SearchGridHeaderField=Campo(s) donde buscar
+
+#_____________________________=Compare how?
+-693f-field:SearchGridHeaderOp=¿Comparar como?
+
+#________________________________=Search for...
+-f864-field:SearchGridHeaderValue=Buscar...
+
+#___________________________=contains
+-caeb-field:SearchOpContains=contiene
 
 #_______________________________=You will be allowed to upload bulletins to this server.
 -0718-field:ServerAcceptsUploads=Tiene permiso para subir boletines a este servidor.
@@ -696,6 +735,9 @@
 
 #_________________________________=The following server has been selected:
 -d09b-field:ServerSelectionResults=Ha seleccionado el siguiente servidor:
+
+#_________________________=To change a folder's position, select the folder name and use the #MoveFolderUp# / #MoveFolderDown# buttons.
+-4497-field:SetFolderOrder=Para cmabiar la posición de una carpeta elija la carpeta y use los botones #MoveFolderUp# / #MoveFolderDown#.
 
 #___________________________________=Human Rights Bulletin System
 -fe5b-field:SplashProductDescription=Sistema de boletines para derechos humanos
@@ -760,6 +802,9 @@
 #_____________________________=Martus comes with ABSOLUTELY NO WARRANTY, and is made available under license terms in the file named license.txt in the Martus directory. This is free software, and you are welcome to redistribute it under certain conditions discussed in license.txt. 
 -8b41-field:aboutDlgDisclaimer=Martus no tiene NINGUNA GARANTÍA y es distribuido bajo los términos descritos en el archivo license.txt en la carpeta del programa. Este programa es software libre y tiene permiso para redistribuirlo bajo las condiciones mencionadas en el archivo license.txt. 
 
+#______________________________=Language Pack Date
+-d7f5-field:aboutDlgMlpDateInfo=Fecha de paquete de idioma
+
 #_________________________________________=Translation version
 -ba67-field:aboutDlgTranslationVersionInfo=Versión de traducción
 
@@ -790,8 +835,8 @@
 #________________________________________________=Choosing Yes will begin the backup process.
 -0b47-field:confirmBackupKeyPairInformationeffect=Oprima Sí para iniciar la copia de seguridad
 
-#_______________________________________________=We recommend that you now create #M# separate key backup files of which any #N# can be used to reconstruct your key without a user name or password being required.
--a4d8-field:confirmBackupKeyPairSecretSharecause=Le recomendamos que haga #M# copias de seguridad. Con juntar #N# de estas copias podrá reconstruir su clave y su cuenta de Martus sin necesitar su nombre de usuario o contraseña.
+#_______________________________________________=We recommend that you now create #TotalNumberOfFilesInBackup# separate key backup files of which any #MinimumNumberOfFilesNeededForRecovery# can be used to reconstruct your key without a user name or password being required.
+-9f7f-field:confirmBackupKeyPairSecretSharecause=Le recomendamos que haga #TotalNumberOfFilesInBackup# copias de seguridad. Con juntar #MinimumNumberOfFilesNeededForRecovery# de estas copias podrá reconstruir su clave y su cuenta de Martus sin necesitar su nombre de usuario o contraseña.
 
 #________________________________________________=By choosing Yes, you will be prompted to save pieces of your key onto removable disks.
 -efaa-field:confirmBackupKeyPairSecretShareeffect=Al oprimir Sí, se le pedirá guardar las partes de su clave en medios removibles.
@@ -832,8 +877,8 @@
 #_________________________________________=By choosing Yes, you will exit this verification step.
 -5b61-field:confirmCancelShareVerifyeffect=Oprima Sí para salir del proceso de verificación.
 
-#_________________________________________=You have chosen to remove all selected Headquarters accounts.  Any existing saved bulletins will still be visible by the old Headquarters.  If you want to disallow Headquarters viewing access to previously created Draft bulletins they must be re-saved after revoking the Headquarters.  Any sealed bulletins CANNOT be reset to be non-viewable by the Headquarters, except by creating a new version of the bulletin.
--d335-field:confirmClearHQInformationcause=Escogió eliminar todas las cuentas de oficina central seleccionadas.  Los boletines que estén guardados todavía pueden ser vistos por la oficina central eliminada. Si no quiere que la oficina central eliminada pueda ver sus borradores tendrá que guardarlos nuevamente una vez que elimine la cuenta de la oficina central. Los boletines que están sellados NO pueden ser reconfigurados para que no le sean visibles a la oficina central eliminada, al menos que se cree una nueva versión del boletín.
+#_________________________________________=You have chosen to remove all selected Headquarters accounts.  Any existing saved bulletins will still be visible by the old Headquarters.  If you want to disallow Headquarters viewing access to previously created Draft bulletins they must be re-saved after revoking the Headquarters.  New versions of sealed bulletins will not be able to be viewed by Headquarters, but any old versions of sealed bulletins that already are on a Headquarters' computer CANNOT be reset to be non-viewable by the Headquarters.
+-9959-field:confirmClearHQInformationcause=Escogió eliminar todas las cuentas de oficina central seleccionadas.  Los boletines que estén guardados todavía pueden ser vistos por la oficina central eliminada. Si no quiere que la oficina central eliminada pueda ver sus borradores tendrá que guardarlos nuevamente una vez que elimine la cuenta de la oficina central. Versiones nuevas de boletines sellados no podrán ser vistos por la oficina central eliminada, pero versiones anteriores de un boletín que estén en el ordenador de la oficina central no pueden ser reconfigurados para que no sean vistos.
 
 #__________________________________________=By clicking on Yes, any draft or sealed bulletins saved in the future will no longer be accessible by your Headquarters.
 -4a87-field:confirmClearHQInformationeffect=Al oprimir Sí, los boletines que selle o borradores que guarde en el futuro no podrán ser vistos por la oficina central.
@@ -849,6 +894,12 @@
 
 #____________________________________________=Clicking on Yes will create a new version of this bulletin that initially contains all the same information.
 -198c-field:confirmCloneMySealedAsDrafteffect=Al oprimir Sí, se va a crear una nueva revisión de este boletín con la misma información. 
+
+#______________________________________=The date range you entered is invalid.  The end date occures before the begin data.
+-c7f5-field:confirmDateRageInvalidcause=El rango de fechas ingresado no es válido.  La fecha final occurre antes que la fecha inicial.
+
+#_______________________________________=Answering Yes will take you back to the date range to fix the problem.  Answering No will revert the date back to its original value.
+-8eb7-field:confirmDateRageInvalideffect=Oprima Si para corregir el problema.  Oprima No para revertir al valor original de la fecha.
 
 #___________________________________=You are about to delete your Martus data from this computer.
 -ee9a-field:confirmDeleteMyDatacause=Está a punto de eliminar su información de Martus de este ordenador.
@@ -928,6 +979,12 @@
 #_____________________________________________=The existing file will be deleted and replaced with the new information.
 -0863-field:confirmOverWriteExistingFileeffect=El archivo adjunto elegido va a reemplazar el archivo en su disco duro.
 
+#__________________________________________=One or more bulletins will not be printed because all the information is private, and you marked the "Print only public information" box
+-d4d7-field:confirmPrintAllPrivateDatacause=No se pudo imprimir uno o más boletines porque todos los datos son privados y la casilla "Solo imprimir datos públicos"está activada
+
+#___________________________________________=Answering '#PrintBack#' will allow return to the previous dialog so you can mark the "Include private information" box.  Answering '#PrintContinue#' will print only the public sections of the bulletins and skip those bulletins which are all private.
+-eb0d-field:confirmPrintAllPrivateDataeffect=Oprima '#PrintBack#' para regresar a la ventana de diálogo anterior y marcar la casilla "Incluir datos privados".  Oprima '#PrintContinue#' para imprimir solo los datos públicos de los boletines y no incluir los boletines marcados como privados.
+
 #_____________________________________=Since you have changed from the default print tray your print out may be incorrect, if you also changed the size of paper used.  You must first select the paper tray and then select the paper size in that order, for both to get set correctly.  If you only wanted to change the paper tray then disregard this message and select 'No'.
 -401e-field:confirmPrinterWarningcause=Si es que cambió el tamaño de papel de impresión además de la bandeja de papel predeterminada es posible que el cambio no se efectúe. Para que el cambio se efectúe correctamente primero elija la bandeja para papel y luego el tamaño de papel. Si es que solamente cambió la bandeja de papel oprima 'No' para continuar con la impresión.
 
@@ -982,8 +1039,8 @@
 #___________________________________________=After you review the contents, you can accept them, modify them, or press cancel to keep the existing default details.
 -bbcf-field:confirmResetDefaultDetailseffect=Después de verificar el contenido puede aceptarlo, modificarlo u oprimir Cancelar para mantener el contenido original.
 
-#____________________________________________=The following bulletin(s) selected for retrieval are newer versions of bulletins already on this computer:\n\n#TITLES#
--c5e3-field:confirmRetrieveNewerVersionscause=El(Los) siguiente(s) boletín(es) seleccionados para bajar son nuevas revisiones de boletines que ya tiene en su ordenador:\n\n#TITLES#>
+#____________________________________________=The following bulletin(s) selected for retrieval are newer versions of bulletins already on this computer:\n\n#Titles#
+-050c-field:confirmRetrieveNewerVersionscause=El(Los) siguiente(s) boletín(es) seleccionados para bajar son nuevas versiones de boletines que ya tiene en su ordenador:\n\n#TITLES#
 
 #_____________________________________________=Each older version will be replaced by the newer version from the server.
 -1d86-field:confirmRetrieveNewerVersionseffect=Cada revisión anterior va a ser reemplazada por la nueva revisión del servidor.
@@ -1033,8 +1090,14 @@
 #_______________________________________________=The bulletin you are about to create is based on a previous bulletin whose custom fields are different from your current custom fields.  Do you wish to use the original bulletin's custom fields?
 -a6ca-field:confirmUseBulletinsCustomFieldscause=El boletín que está a punto de crear está basado en un boletín previo que tiene campos personalizados diferentes a los que tiene ahora. ¿Desea usar los campos personalizados del boletín original?
 
-#________________________________________________=Answering Yes will use the old custom fields and all bulletin data.  Answering No will use your current custom fields and copy all similar fields to the new bulletin but you may lose some of the original bulletin's data.
--0ed4-field:confirmUseBulletinsCustomFieldseffect=Oprima Sí para usar los campos personalizados anteriores y toda la información del boletín. Oprima No para usar sus campos personalizados actuales y transferir los campos similares al boletín nuevo, pero podrá perder partes de la información original en el boletín.
+#________________________________________________=Answering '#UseOldCustomFields#' will use the old custom fields and all bulletin data.  Answering '#UseNewCustomFields#' will use your current custom fields and copy all similar fields to the new bulletin but you may lose some of the original bulletin's data.
+-4ce8-field:confirmUseBulletinsCustomFieldseffect=Oprima '#UseOldCustomFields#' para usar los campos personalizados anteriores y toda la información del boletín. Oprima '#UseNewCustomFields#' para usar sus campos personalizados actuales y transferir los campos similares al boletín nuevo, pero podrá perder partes de la información del boletín original.
+
+#____________________________________________________=The draft bulletin you are about to modify has custom fields which are different from your current custom fields.  Do you wish to use the original bulletin's custom fields?
+-ac9d-field:confirmUseBulletinsDraftCustomFieldscause=El borrador que está a punto de modificar tiene campos personalizados diferentes a los que tiene configurado actualmente.  ¿Desea usar los campos personalizados originales del boletín?
+
+#_____________________________________________________=Answering '#UseOldCustomFields#' will use the old custom fields and all bulletin data.  Answering '#UseNewCustomFields#' will use your current custom fields and copy all similar fields to this new draft bulletin but you may lose some of the original bulletin's data.
+-e63e-field:confirmUseBulletinsDraftCustomFieldseffect=Oprima '#UseOldCustomFields#' para usar los campos personalizados originales y los datos del borrador.  Oprima '#UseNewCustomFields#' para usar sus campos personalizados actuales y transferir los campos similares al borrador nuevo, pero podrá perder partes de la información del borrador original.
 
 #________________________________________________=Warning: acctmap.txt file in your account's packets directory is missing or is corrupt.  This may indicate someone has tried to tamper with your data or could be caused by a hardware error.
 -61cb-field:confirmWarnMissingAccountMapFilecause=Advertencia: El archivo acctmap.txt en la carpeta de su cuenta esta dañado o no existe.  Esto puede indicar que alguien a intentado modificar su información o que su computador sufrió de fallas de hardware.
@@ -1048,8 +1111,8 @@
 #___________________________________________________________________=Clicking on Yes will try to generate a new acctmap.txt.sig file and continue to load Martus.  Clicking on No will exit Martus.
 -3ca4-field:confirmWarnMissingOrCorruptAccountMapSignatureFileeffect=Oprima Sí para intentar generar un nuevo archivo accountmap.txt.sig y continuar cargando Martus. Oprima No para salir de Martus.
 
-#__________________________________________________________=Are you sure the directory you chose to save your backup files to is removable?  You cannot save all #M# files to the same location without inserting a new disk for each backup file.
--75ec-field:confirmWarningPathChosenMayNotBeRemoveablecause=¿Está seguro que la carpeta donde eligió guardar sus archivos de seguridad es un medio removible? No puede guardar los #M# archivos en el mismo lugar sin usar una nueva unidad de disco removible para cada uno.
+#__________________________________________________________=Are you sure the directory you chose to save your backup files to is removable?  You cannot save all #TotalNumberOfFilesInBackup# files to the same location without inserting a new disk for each backup file.
+-2aad-field:confirmWarningPathChosenMayNotBeRemoveablecause=<¿Está seguro que la carpeta donde eligió guardar sus archivos de seguridad es un medio removible? No puede guardar los #TotalNumberOfFilesInBackup# archivos en el mismo lugar sin usar una nueva unidad de disco removible para cada uno.>
 
 #___________________________________________________________=Choosing Yes will begin the backup process as instructed.
 -7744-field:confirmWarningPathChosenMayNotBeRemoveableeffect=Oprima Sí para iniciar el proceso de copia de seguridad como ha sido indicado.
@@ -1078,11 +1141,11 @@
 #_______________________________________________=Selecting Yes will guide you through the backup procedure, selecting No will skip this important step.
 -8571-field:confirmgeneralBackupKeyPairMsgeffect=Oprima Sí para iniciar el proceso para crear copias de seguridad. Oprima No para no continuar con este importante proceso.
 
-#_________________________________________=The text "#S#" was not found.  Do you wish to search from the beginning?
--cf53-field:confirmhelpStringNotFoundcause=El texto "#S#" no se encontró.  ¿Desea continuar la búsqueda desde el comienzo?
+#_________________________________________=The text "#SearchString#" was not found.  Do you wish to search from the beginning?
+-25f6-field:confirmhelpStringNotFoundcause=El texto "#SearchString#" no se encontró.  ¿Desea continuar la búsqueda desde el comienzo?
 
-#__________________________________________=Clicking on Yes will search for "#S#" from the beginning.
--f445-field:confirmhelpStringNotFoundeffect=Oprima Sí para continuar la búsqueda de "#S#" desde el comienzo.
+#__________________________________________=Clicking on Yes will search for "#SearchString#" from the beginning.
+-0981-field:confirmhelpStringNotFoundeffect=Oprima Sí para continuar la búsqueda de "#SearchString#" desde el comienzo.
 
 #_____________________=Confirming...
 -a4f3-field:confirming=Confirmando...
@@ -1191,6 +1254,9 @@
 
 #_________________________________________=An error occurred while trying to create your account.
 -c8e7-field:notifyCreateAccountFailedcause=Occurrió un error al intentar crear su cuenta.
+
+#____________________________________________=Martus needs to keep a list of all the fields in all the bulletins in your system.\n\nThis file does not exist, so it will be created now. This may take a few seconds per bulletin on a slower computer.
+-38c8-field:notifyCreatingFieldSpecCachecause=Martus necesita mantener una lista de todos los campos en todos los boletines en su ordenador en un archivo.\n\nEste archivo no existe or lo que tendrá que crearse ahora. Puede está operación puede tomar unos segundos por cada boletín en ordenadores lentos.
 
 #_____________________________________________________=An error occurred during upload, and the damaged bulletin has been moved to the Damaged Bulletins folder.
 -ed3b-field:notifyDamagedBulletinMovedToDiscardedcause=Ocurrió un error durante el envío y el boletín dañado se movió a la carpeta de boletines dañados.
@@ -1318,8 +1384,11 @@
 #____________________________________________=You may only preview one bulletin at a time.  Please only select one bulletin to preview.
 -fbee-field:notifyPreviewOneBulletinOnlycause=Sólo puede ver un boletín a la vez. Elija sólo un boletín que deseé ver en la vista previa.
 
-#_________________________________________=This bulletin will not be printed because all the information is private.  If you wish to print the private data, please mark the "Include private data in print out" checkbox.
--459d-field:notifyPrintAllPrivateDatacause=Este boletín no se imprimió porque toda la información es privada. Si desea imprimir la información privada active la casilla 'Incluir datos privados al imprimir'.
+#_________________________________________=Finished
+-355b-field:notifyPrintToDiskCompletecause=Completado
+
+#________________________________________=To print one or more bulletins, select them first, and then perform the print operation.
+-3298-field:notifyPrintZeroBulletinscause=Para imprimir uno o más boletines, seleccionelos y luego inicie la impresion.
 
 #_________________________________________=The file does not contain valid public information.
 -f5b5-field:notifyPublicInfoFileErrorcause=El archivo no contiene información pública válida.
@@ -1336,8 +1405,8 @@
 #_______________________________________________=To restore your key, first you must find the backup file you saved previously.  Using the 'Restore Key from Backup File' dialog box find the file on your computer's hard drive, a network drive, or removable media disk then click the Open button.  Martus will then ask you for your user name and password and restore your key so you can log in normally and access your account.
 -4a6f-field:notifyRecoveryProcessBackupFilecause=Para recuperar su clave necesita ubicar una copia de seguridad que haya guardado anteriormente. Al iniciar Martus elija 'Recuperar cuenta de una copia de seguridad', indique donde se encuentra la copia en su disco duro, en un disco en la red o en una unidad removible y oprima Abrir. Martus le pedirá que ingrese su nombre de usuario y su contraseña para recuperar su clave y así poder acceder a su cuenta de Martus.
 
-#_____________________________________________=You will now have to provide #N# out of the #M# files you previously saved when you backed up your key.
--d5c2-field:notifyRecoveryProcessKeySharecause=Necesita tener #N# de las #M# partes de las copias de seguridad creadas al hacer la copia de seguridad de su clave.
+#_____________________________________________=You will now have to provide #MinimumNumberOfFilesNeededForRecovery# out of the #TotalNumberOfFilesInBackup# files you previously saved when you backed up your key.
+-f571-field:notifyRecoveryProcessKeySharecause=Necesita tener #MinimumNumberOfFilesNeededForRecovery# de las #TotalNumberOfFilesInBackup# partes de las copias de seguridad creadas al hacer la copia de seguridad de su clave.
 
 #______________________________________=Please remember your username and password. It cannot be recovered.
 -e9e0-field:notifyRememberPasswordcause=Recuerde su nombre de usuario y contraseña, de perderlos, no los podrá recuperar.
@@ -1363,8 +1432,8 @@
 #__________________________________=Sorry, no bulletins were found.
 -5bd8-field:notifySearchFailedcause=No se encontró ningún boletín.
 
-#_________________________________=#N# bulletins matched the search, and have been added to the Search Results folder.\n Note that both current and earlier versions of each bulletin were searched.
--6569-field:notifySearchFoundcause=#N# boletines concordaron con la búsqueda y han sido agregados a la carpeta de Resultados de Búsqueda.\n  Note que la versión actual tanto como las versiones previas fueron buscadas. 
+#_________________________________=#NumberBulletinsFound# bulletins matched the search, and have been added to the Search Results folder.\n Note that both current and earlier versions of each bulletin were searched.
+-5639-field:notifySearchFoundcause=#NumberBulletinsFound# boletines concordaron con la búsqueda y han sido agregados a la carpeta de Resultados de Búsqueda.\n  Note que la versión actual tanto como las versiones previas fueron buscadas. 
 
 #_____________________________________=The Server Public Code does not match the one you entered.
 -efe3-field:notifyServerCodeWrongcause=El código público del servidor no concuerda con el que escribió.
@@ -1492,8 +1561,8 @@
 #________________=Title
 -768e-field:title=Título
 
-#_____________________________=Spanish 2.7
--1d90-field:translationVersion=Español 2.7
+#_____________________________=Spanish 2.8
+-b4ae-field:translationVersion=Español 2.8
 
 #___________________=Username
 -84c2-field:username=Nombre de usuario
@@ -1765,6 +1834,9 @@
 #___________________________=Export My Public Account Id
 -2b8a-menu:ExportMyPublicKey=Exportar mi identificación de cuenta pública
 
+#_________________________=Organize Folders
+-1ee2-menu:OrganizeFolders=Organizar carpetas
+
 #________________________=Paste Bulletin(s)
 -178b-menu:PasteBulletins=Pegar boletin(es)
 
@@ -1852,8 +1924,8 @@
 #_______________=Paste
 -db24-menu:paste=Pegar
 
-#_______________________=Print Bulletin
--ed97-menu:printBulletin=Imprimir boletín
+#_______________________=Print Bulletin(s) / Create Report File
+-ecef-menu:printBulletin=Imprimir boletín / Crear reporte
 
 #________________=Search
 -bce0-menu:search=Búsqueda
@@ -1999,6 +2071,9 @@
 #_______________________________=Import Headquarters Public Account Id File
 -9300-wintitle:ImportHQPublicKey=Importar identificación pública de la oficina central
 
+#____________________________________=Incompatible Translation Version
+-e91d-wintitle:IncompatibleMtfVersion=Versión de traducción incompatible
+
 #________________________________=Load Default Details Field Content
 -4e2f-wintitle:LoadDefaultDetails=Cargar detalles predeterminados
 
@@ -2014,8 +2089,11 @@
 #_____________________________________=Cannot Paste Bulletin(s)
 -c05f-wintitle:PasteErrorBulletinOlder=No se pudo pegar boletín(es)
 
-#______________________________=Confirm Print Private Data
--5b7b-wintitle:PrintPrivateData=Confirmar impresión de datos privados
+#__________________________=Print Options
+-183a-wintitle:PrintOptions=Opciones de impresión
+
+#______________________________=Print to which file
+-7cfe-wintitle:PrintToWhichFile=Archivo para reporte
 
 #____________________________=Restore Key from Backup File
 -08b0-wintitle:RecoverKeyPair=Recuperar su clave de una copia de seguridad
@@ -2083,6 +2161,9 @@
 #____________________________________=Server Configuration Results
 -788c-wintitle:ServerSelectionResults=Resultado de configuración del servidor
 
+#____________________________=Folder Order
+-8c2d-wintitle:SetFolderOrder=Orden de carpetas
+
 #___________________________________=Verifying Disk
 -6387-wintitle:VerifyingKeyPairShare=Verificando disco
 
@@ -2125,6 +2206,9 @@
 #_________________________________________=Confirm Create New Version of Sealed Bulletin
 -1260-wintitle:confirmCloneMySealedAsDraft=Confirme creación de nueva revisión del boletín sellado
 
+#____________________________________=Date Range Invalid
+-1228-wintitle:confirmDateRageInvalid=Rango de fechas inválido
+
 #_________________________________=Delete My Data
 -07c3-wintitle:confirmDeleteMyData=Eliminar mis datos
 
@@ -2163,6 +2247,9 @@
 
 #__________________________________________=Confirm Replace Existing File
 -e2b2-wintitle:confirmOverWriteExistingFile=Confirmar sobre-escribir el boletín
+
+#________________________________________=Print All Private Data
+-180b-wintitle:confirmPrintAllPrivateData=Imprimir todos los datos privados
 
 #___________________________________=Print Configuration Warning
 -30d9-wintitle:confirmPrinterWarning=Advertencia de configuración de impresión
@@ -2218,6 +2305,9 @@
 #_____________________________________________=Custom Fields Selection
 -0b6f-wintitle:confirmUseBulletinsCustomFields=Selección de campos personalizados
 
+#__________________________________________________=Custom Fields Selection
+-0b6f-wintitle:confirmUseBulletinsDraftCustomFields=Selección de campos personalizados
+
 #______________________________________________=Accountmap File Missing Or Corrupt
 -e8e7-wintitle:confirmWarnMissingAccountMapFile=Archivo Accountmap falta o está dañado
 
@@ -2254,8 +2344,8 @@
 #____________________________________=Export My Public Account Id
 -2b8a-wintitle:inputExportMyPublicKey=Exportar mi identificación de cuenta pública
 
-#_____________________________=HQ Label
--bd52-wintitle:inputGetHQLabel=Nombre de oficina central
+#_____________________________=Headquarters Label
+-5c50-wintitle:inputGetHQLabel=Nombre de oficina central
 
 #___________________________________=Default Backup File Name
 -ac3c-wintitle:inputGetShareFileName=Nombre predeterminado de archivo de seguridad
@@ -2301,6 +2391,9 @@
 
 #_______________________________________=Error Creating New Account
 -1141-wintitle:notifyCreateAccountFailed=Error al crear una cuenta nueva
+
+#__________________________________________=Missing List of Fields
+-3ac5-wintitle:notifyCreatingFieldSpecCache=Lista de campos no encontrados
 
 #___________________________________________________=Moved Damaged Bulletin
 -61c0-wintitle:notifyDamagedBulletinMovedToDiscarded=Boletín dañado
@@ -2401,8 +2494,8 @@
 #_____________________________________=Invalid Server Name or IP Address
 -3376-wintitle:notifyInvalidServerName=Nombre de servidor o dirección IP inválida
 
-#_________________________________=No HQ's Selected
--0c30-wintitle:notifyNoHQsSelected=No hay ninguna oficina central seleccionada
+#_________________________________=No Headquarters Selected
+-9140-wintitle:notifyNoHQsSelected=No hay ninguna oficina central seleccionada
 
 #______________________________________=Finished
 -355b-wintitle:notifyOperationCompleted=Completada
@@ -2425,8 +2518,11 @@
 #__________________________________________=Preview One Bulletin Only
 -5b0a-wintitle:notifyPreviewOneBulletinOnly=Ver sólo un boletín
 
-#_______________________________________=Print All Private Data
--180b-wintitle:notifyPrintAllPrivateData=Imprimir todos los datos privados
+#_______________________________________=Print To Disk
+-b5b5-wintitle:notifyPrintToDiskComplete=Reporte a archivo
+
+#______________________________________=No Bulletins Selected
+-c1d6-wintitle:notifyPrintZeroBulletins=No hay boletines seleccionados
 
 #_______________________________________=Error Importing Public Information
 -913d-wintitle:notifyPublicInfoFileError=Error al importar información pública
