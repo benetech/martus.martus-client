@@ -208,6 +208,7 @@ public class UiCustomFieldsDlg extends JDialog
 				if(!mainWindow.confirmDlg("OverWriteExistingFile"))
 					return;
 			CustomFieldTemplate template = new CustomFieldTemplate();
+			MartusCrypto security = mainWindow.getApp().getSecurity();
 			if(template.ExportTemplate(security, destFile, text.getText()))
 			{
 				mainWindow.notifyDlg("ExportingCustomizationTemplateSuccess");
@@ -302,10 +303,10 @@ public class UiCustomFieldsDlg extends JDialog
 		return columnData;
 	}
 
-	UiTextArea createXMLTextArea(String textToUse)
+	UiTextArea createXMLTextArea(String text)
 	{
 		UiTextArea msgArea = new UiTextArea(20, 80);
-		msgArea.setText(textToUse);
+		msgArea.setText(text);
 		msgArea.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
 		msgArea.setLineWrap(true);
 		msgArea.setWrapStyleWord(true);
