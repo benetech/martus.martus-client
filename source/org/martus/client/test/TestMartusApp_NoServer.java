@@ -90,8 +90,8 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 
 		mockSecurityForApp = MockMartusSecurity.createClient();
 
-		localization = new MartusLocalization(null, UiMainWindow.getAllEnglishStrings());
-		localization.setCurrentLanguageCode("en");
+		testAppLocalization = new MartusLocalization(null, UiMainWindow.getAllEnglishStrings());
+		testAppLocalization.setCurrentLanguageCode("en");
 		appWithAccount = MockMartusApp.create(mockSecurityForApp);
 		appWithAccount.setSSLNetworkInterfaceHandlerForTesting(new ServerSideNetworkHandlerNotAvailable());
 
@@ -795,11 +795,11 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		return accountId;
 	}
 
-	void verifySignInThatWorks(MartusApp appWithRealAccount, String userName, char[] userPassword) throws Exception
+	void verifySignInThatWorks(MartusApp appWithRealAccount, String userNameToUse, char[] userPasswordToUse) throws Exception
 	{
-		appWithRealAccount.attemptReSignIn(userName, userPassword);
+		appWithRealAccount.attemptReSignIn(userNameToUse, userPasswordToUse);
 		assertEquals("store account not set?", mockSecurityForApp.getPublicKeyString(), appWithAccount.getStore().getAccountId());
-		assertEquals("wrong username?", userName, appWithRealAccount.getUserName());
+		assertEquals("wrong username?", userNameToUse, appWithRealAccount.getUserName());
 	}
 
 	public void testSetAndGetHQKey() throws Exception
@@ -1088,11 +1088,11 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		TRACE_BEGIN("testAttemptSignInToAdditionalAccount");
 		MockMartusApp app = MockMartusApp.create();
 		app.createAccount(userName, userPassword);
-		String userName2 = "user2";
-		char[] userPassword2 = "pass2".toCharArray();
-		app.createAccount(userName2, userPassword2);
+		String userNameTest2 = "user2";
+		char[] userPasswordTest2 = "pass2".toCharArray();
+		app.createAccount(userNameTest2, userPasswordTest2);
 		
-		app.attemptSignIn(userName2, userPassword2);
+		app.attemptSignIn(userNameTest2, userPasswordTest2);
 		app.attemptSignIn(userName, userPassword);
 		app.deleteAllFiles();
 		TRACE_END();
@@ -1170,7 +1170,7 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 	{
 		TRACE_BEGIN("testGetAllAccountDirectories");
 		File rootDir = createTempDirectory();
-		MartusApp app = new MartusApp(mockSecurityForApp, rootDir, localization);
+		MartusApp app = new MartusApp(mockSecurityForApp, rootDir, testAppLocalization);
 		assertEquals("1 account should exist", 1, app.getAllAccountDirectories().size());
 		assertEquals("not root dir?", rootDir, app.getAllAccountDirectories().get(0));
 		
@@ -1218,7 +1218,7 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		File rootDir = createTempDirectory();
 		try
 		{
-			MartusApp app = new MartusApp(mockSecurityForApp, rootDir, localization);
+			MartusApp app = new MartusApp(mockSecurityForApp, rootDir, testAppLocalization);
 			
 			assertEquals("first account not root dir?", rootDir, app.getAccountDirectory("anything"));
 	
@@ -1273,7 +1273,7 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 	{
 		TRACE_BEGIN("testDoesAccountExistForMultipleAccounts");
 		File rootDir = createTempDirectory();
-		MartusApp app = new MartusApp(mockSecurityForApp, rootDir, localization);
+		MartusApp app = new MartusApp(mockSecurityForApp, rootDir, testAppLocalization);
 		
 		File accountsDir = app.getAccountsDirectory();
 		accountsDir.deleteOnExit();
@@ -1622,21 +1622,21 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 	public void testFieldLabels()
 	{
 		TRACE_BEGIN("testFieldLabels");
-		assertEquals("Keep ALL Information Private", localization.getFieldLabel("allprivate"));
-		assertEquals("Author", localization.getFieldLabel("author"));
-		assertEquals("Organization", localization.getFieldLabel("organization"));
-		assertEquals("Title", localization.getFieldLabel("title"));
-		assertEquals("Location", localization.getFieldLabel("location"));
-		assertEquals("Date of Event", localization.getFieldLabel("eventdate"));
-		assertEquals("Date Created", localization.getFieldLabel("entrydate"));
-		assertEquals("Keywords", localization.getFieldLabel("keywords"));
-		assertEquals("Summary", localization.getFieldLabel("summary"));
-		assertEquals("Details", localization.getFieldLabel("publicinfo"));
-		assertEquals("Private", localization.getFieldLabel("privateinfo"));
-		assertEquals("Language", localization.getFieldLabel("language"));
+		assertEquals("Keep ALL Information Private", testAppLocalization.getFieldLabel("allprivate"));
+		assertEquals("Author", testAppLocalization.getFieldLabel("author"));
+		assertEquals("Organization", testAppLocalization.getFieldLabel("organization"));
+		assertEquals("Title", testAppLocalization.getFieldLabel("title"));
+		assertEquals("Location", testAppLocalization.getFieldLabel("location"));
+		assertEquals("Date of Event", testAppLocalization.getFieldLabel("eventdate"));
+		assertEquals("Date Created", testAppLocalization.getFieldLabel("entrydate"));
+		assertEquals("Keywords", testAppLocalization.getFieldLabel("keywords"));
+		assertEquals("Summary", testAppLocalization.getFieldLabel("summary"));
+		assertEquals("Details", testAppLocalization.getFieldLabel("publicinfo"));
+		assertEquals("Private", testAppLocalization.getFieldLabel("privateinfo"));
+		assertEquals("Language", testAppLocalization.getFieldLabel("language"));
 
-		assertEquals("Keep ALL Information Private", localization.getFieldLabel(MartusLocalization.ENGLISH, "allprivate"));
-		assertEquals("<Keep ALL Information Private>", localization.getFieldLabel("UNKNOWN_LANGUAGE_CODE", "allprivate"));
+		assertEquals("Keep ALL Information Private", testAppLocalization.getFieldLabel(MartusLocalization.ENGLISH, "allprivate"));
+		assertEquals("<Keep ALL Information Private>", testAppLocalization.getFieldLabel("UNKNOWN_LANGUAGE_CODE", "allprivate"));
 		
 		TRACE_END();
 	}
@@ -1650,46 +1650,46 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 	public void testLanguageNames()
 	{
 		TRACE_BEGIN("testLanguageNames");
-		assertNotNull(localization.getLanguageName("Not a valid code"));
-		assertEquals("English", localization.getLanguageName("en"));
-		assertEquals("Arabic", localization.getLanguageName("ar"));
-		assertEquals("Azerbaijani", localization.getLanguageName("az"));
-		assertEquals("Bengali, Bangla", localization.getLanguageName("bn"));
-		assertEquals("Burmese", localization.getLanguageName("my"));
-		assertEquals("Chinese", localization.getLanguageName("zh"));
-		assertEquals("Dutch", localization.getLanguageName("nl"));
-		assertEquals("Esperanto", localization.getLanguageName("eo"));
-		assertEquals("French", localization.getLanguageName("fr"));
-		assertEquals("German", localization.getLanguageName("de"));
-		assertEquals("Gujarati", localization.getLanguageName("gu"));
-		assertEquals("Hausa", localization.getLanguageName("ha"));
-		assertEquals("Hebrew", localization.getLanguageName("he"));
-		assertEquals("Hindi", localization.getLanguageName("hi"));
-		assertEquals("Hungarian", localization.getLanguageName("hu"));
-		assertEquals("Italian", localization.getLanguageName("it"));
-		assertEquals("Japanese", localization.getLanguageName("ja"));
-		assertEquals("Javanese", localization.getLanguageName("jv"));
-		assertEquals("Kannada", localization.getLanguageName("kn"));
-		assertEquals("Korean", localization.getLanguageName("ko"));
-		assertEquals("Malayalam", localization.getLanguageName("ml"));
-		assertEquals("Marathi", localization.getLanguageName("mr"));
-		assertEquals("Oriya", localization.getLanguageName("or"));
-		assertEquals("Panjabi", localization.getLanguageName("pa"));
-		assertEquals("Polish", localization.getLanguageName("pl"));
-		assertEquals("Portuguese", localization.getLanguageName("pt"));
-		assertEquals("Romanian", localization.getLanguageName("ro"));
-		assertEquals("Russian", localization.getLanguageName("ru"));
-		assertEquals("Serbian", localization.getLanguageName("sr"));
-		assertEquals("Sindhi", localization.getLanguageName("sd"));
-		assertEquals("Sinhalese", localization.getLanguageName("si"));
-		assertEquals("Spanish", localization.getLanguageName("es"));
-		assertEquals("Tamil", localization.getLanguageName("ta"));
-		assertEquals("Telugu", localization.getLanguageName("te"));
-		assertEquals("Thai", localization.getLanguageName("th"));
-		assertEquals("Turkish", localization.getLanguageName("tr"));
-		assertEquals("Ukranian", localization.getLanguageName("uk"));
-		assertEquals("Urdu", localization.getLanguageName("ur"));
-		assertEquals("Vietnamese", localization.getLanguageName("vi"));
+		assertNotNull(testAppLocalization.getLanguageName("Not a valid code"));
+		assertEquals("English", testAppLocalization.getLanguageName("en"));
+		assertEquals("Arabic", testAppLocalization.getLanguageName("ar"));
+		assertEquals("Azerbaijani", testAppLocalization.getLanguageName("az"));
+		assertEquals("Bengali, Bangla", testAppLocalization.getLanguageName("bn"));
+		assertEquals("Burmese", testAppLocalization.getLanguageName("my"));
+		assertEquals("Chinese", testAppLocalization.getLanguageName("zh"));
+		assertEquals("Dutch", testAppLocalization.getLanguageName("nl"));
+		assertEquals("Esperanto", testAppLocalization.getLanguageName("eo"));
+		assertEquals("French", testAppLocalization.getLanguageName("fr"));
+		assertEquals("German", testAppLocalization.getLanguageName("de"));
+		assertEquals("Gujarati", testAppLocalization.getLanguageName("gu"));
+		assertEquals("Hausa", testAppLocalization.getLanguageName("ha"));
+		assertEquals("Hebrew", testAppLocalization.getLanguageName("he"));
+		assertEquals("Hindi", testAppLocalization.getLanguageName("hi"));
+		assertEquals("Hungarian", testAppLocalization.getLanguageName("hu"));
+		assertEquals("Italian", testAppLocalization.getLanguageName("it"));
+		assertEquals("Japanese", testAppLocalization.getLanguageName("ja"));
+		assertEquals("Javanese", testAppLocalization.getLanguageName("jv"));
+		assertEquals("Kannada", testAppLocalization.getLanguageName("kn"));
+		assertEquals("Korean", testAppLocalization.getLanguageName("ko"));
+		assertEquals("Malayalam", testAppLocalization.getLanguageName("ml"));
+		assertEquals("Marathi", testAppLocalization.getLanguageName("mr"));
+		assertEquals("Oriya", testAppLocalization.getLanguageName("or"));
+		assertEquals("Panjabi", testAppLocalization.getLanguageName("pa"));
+		assertEquals("Polish", testAppLocalization.getLanguageName("pl"));
+		assertEquals("Portuguese", testAppLocalization.getLanguageName("pt"));
+		assertEquals("Romanian", testAppLocalization.getLanguageName("ro"));
+		assertEquals("Russian", testAppLocalization.getLanguageName("ru"));
+		assertEquals("Serbian", testAppLocalization.getLanguageName("sr"));
+		assertEquals("Sindhi", testAppLocalization.getLanguageName("sd"));
+		assertEquals("Sinhalese", testAppLocalization.getLanguageName("si"));
+		assertEquals("Spanish", testAppLocalization.getLanguageName("es"));
+		assertEquals("Tamil", testAppLocalization.getLanguageName("ta"));
+		assertEquals("Telugu", testAppLocalization.getLanguageName("te"));
+		assertEquals("Thai", testAppLocalization.getLanguageName("th"));
+		assertEquals("Turkish", testAppLocalization.getLanguageName("tr"));
+		assertEquals("Ukranian", testAppLocalization.getLanguageName("uk"));
+		assertEquals("Urdu", testAppLocalization.getLanguageName("ur"));
+		assertEquals("Vietnamese", testAppLocalization.getLanguageName("vi"));
 		TRACE_END();
 	}
 
@@ -1697,31 +1697,31 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 	{
 		TRACE_BEGIN("testWindowTitles");
 		String[] testLanguageCodes = {"es", "en", "si"};
-		ChoiceItem[] languageChoicesTest = localization.getLanguageNameChoices(testLanguageCodes);
-		assertEquals(localization.getLanguageName("en"), languageChoicesTest[0].toString());
-		assertEquals(localization.getLanguageName("si"), languageChoicesTest[1].toString());
-		assertEquals(localization.getLanguageName("es"), languageChoicesTest[2].toString());
+		ChoiceItem[] languageChoicesTest = testAppLocalization.getLanguageNameChoices(testLanguageCodes);
+		assertEquals(testAppLocalization.getLanguageName("en"), languageChoicesTest[0].toString());
+		assertEquals(testAppLocalization.getLanguageName("si"), languageChoicesTest[1].toString());
+		assertEquals(testAppLocalization.getLanguageName("es"), languageChoicesTest[2].toString());
 		TRACE_END();
 	}
 
 	public void testWindowTitles()
 	{
 		TRACE_BEGIN("testWindowTitles");
-		assertEquals("Martus Human Rights Bulletin System", localization.getWindowTitle("main"));
+		assertEquals("Martus Human Rights Bulletin System", testAppLocalization.getWindowTitle("main"));
 		TRACE_END();
 	}
 
 	public void testButtonLabels()
 	{
 		TRACE_BEGIN("testButtonLabels");
-		assertEquals("Help", localization.getButtonLabel("help"));
+		assertEquals("Help", testAppLocalization.getButtonLabel("help"));
 		TRACE_END();
 	}
 
 	public void testMenuLabels()
 	{
 		TRACE_BEGIN("testMenuLabels");
-		assertEquals("File", localization.getMenuLabel("file"));
+		assertEquals("File", testAppLocalization.getMenuLabel("file"));
 		TRACE_END();
 	}
 
@@ -1729,15 +1729,15 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 	{
 		TRACE_BEGIN("testCurrentLanguage");
 
-		assertEquals("en", localization.getCurrentLanguageCode());
+		assertEquals("en", testAppLocalization.getCurrentLanguageCode());
 		assertEquals("MartusHelp-en.txt", appWithAccount.getHelpFilename("en"));
-		localization.setCurrentLanguageCode("es");
-		assertEquals("es", localization.getCurrentLanguageCode());
+		testAppLocalization.setCurrentLanguageCode("es");
+		assertEquals("es", testAppLocalization.getCurrentLanguageCode());
 		assertEquals("MartusHelp-es.txt", appWithAccount.getHelpFilename("es"));
 		char iWithAccentInUtf8 = 237;
 		char[] titleInSpanish = {'T', iWithAccentInUtf8, 't', 'u', 'l', 'o'};
-		assertEquals(new String(titleInSpanish), localization.getFieldLabel("title"));
-		localization.setCurrentLanguageCode("en");
+		assertEquals(new String(titleInSpanish), testAppLocalization.getFieldLabel("title"));
+		testAppLocalization.setCurrentLanguageCode("en");
 		TRACE_END();
 	}
 
@@ -1745,23 +1745,23 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 	public void testDateConvert()
 	{
 		TRACE_BEGIN("testDateConvert");
-		assertEquals("12/13/1987", localization.convertStoredDateToDisplay("1987-12-13"));
-		assertEquals("", localization.convertStoredDateToDisplay("abc"));
-		assertEquals("", localization.convertStoredDateToDisplay("1987-13-13"));
+		assertEquals("12/13/1987", testAppLocalization.convertStoredDateToDisplay("1987-12-13"));
+		assertEquals("", testAppLocalization.convertStoredDateToDisplay("abc"));
+		assertEquals("", testAppLocalization.convertStoredDateToDisplay("1987-13-13"));
 		TRACE_END();
 	}
 	
 	public void testDateSlashSeparatedConvertReverseIfNecessary()
 	{
 		TRACE_BEGIN("testDateSlashSeparatedConvertReverseIfNecessary");
-		assertEquals("12/13/1987", localization.convertStoredDateToDisplayReverseIfNecessary("1987-12-13"));
-		assertEquals("03/01/2004", localization.getViewableDateRange("2004-03-01,20040301+0"));
-		assertEquals("01/07/2004 - 07/03/2004", localization.getViewableDateRange("2004-01-07,20040107+178"));
+		assertEquals("12/13/1987", testAppLocalization.convertStoredDateToDisplayReverseIfNecessary("1987-12-13"));
+		assertEquals("03/01/2004", testAppLocalization.getViewableDateRange("2004-03-01,20040301+0"));
+		assertEquals("01/07/2004 - 07/03/2004", testAppLocalization.getViewableDateRange("2004-01-07,20040107+178"));
 		
 		LanguageOptions.setDirectionRightToLeft();
-		assertEquals("1987/13/12", localization.convertStoredDateToDisplayReverseIfNecessary("1987-12-13"));
-		assertEquals("2004/01/03", localization.getViewableDateRange("2004-03-01,20040301+0"));
-		assertEquals("2004/03/07 - 2004/07/01", localization.getViewableDateRange("2004-01-07,20040107+178"));
+		assertEquals("1987/13/12", testAppLocalization.convertStoredDateToDisplayReverseIfNecessary("1987-12-13"));
+		assertEquals("2004/01/03", testAppLocalization.getViewableDateRange("2004-03-01,20040301+0"));
+		assertEquals("2004/03/07 - 2004/07/01", testAppLocalization.getViewableDateRange("2004-01-07,20040107+178"));
 		
 		TRACE_END();
 	}
@@ -1769,17 +1769,17 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 	public void testDateDotSeparatedConvertReverseIfNecessary()
 	{
 		TRACE_BEGIN("testDateDotSeparatedConvertReverseIfNecessary");
-		localization.setCurrentDateFormatCode(DateUtilities.DMY_DOT.getCode());
-		assertEquals("13.12.1987", localization.convertStoredDateToDisplayReverseIfNecessary("1987-12-13"));
-		assertEquals("01.03.2004", localization.getViewableDateRange("2004-03-01,20040301+0"));
-		assertEquals("07.01.2004 - 03.07.2004", localization.getViewableDateRange("2004-01-07,20040107+178"));
+		testAppLocalization.setCurrentDateFormatCode(DateUtilities.DMY_DOT.getCode());
+		assertEquals("13.12.1987", testAppLocalization.convertStoredDateToDisplayReverseIfNecessary("1987-12-13"));
+		assertEquals("01.03.2004", testAppLocalization.getViewableDateRange("2004-03-01,20040301+0"));
+		assertEquals("07.01.2004 - 03.07.2004", testAppLocalization.getViewableDateRange("2004-01-07,20040107+178"));
 		
 		LanguageOptions.setDirectionRightToLeft();
-		assertEquals("1987.12.13", localization.convertStoredDateToDisplayReverseIfNecessary("1987-12-13"));
-		assertEquals("2004.03.01", localization.getViewableDateRange("2004-03-01,20040301+0"));
+		assertEquals("1987.12.13", testAppLocalization.convertStoredDateToDisplayReverseIfNecessary("1987-12-13"));
+		assertEquals("2004.03.01", testAppLocalization.getViewableDateRange("2004-03-01,20040301+0"));
 		
 		//RtoL languages doesn't reverse the date when mixed strings of RtoL and LtoR when the LtoR text has dot's contained within for some strange reason
-		assertEquals("2004.07.03 - 2004.01.07", localization.getViewableDateRange("2004-01-07,20040107+178"));
+		assertEquals("2004.07.03 - 2004.01.07", testAppLocalization.getViewableDateRange("2004-01-07,20040107+178"));
 		
 		TRACE_END();
 	}
@@ -1789,11 +1789,11 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 	{
 		TRACE_BEGIN("testCurrentDateFormatCode");
 		
-		assertEquals("MM/dd/yyyy", localization.getCurrentDateFormatCode());
-		localization.setCurrentDateFormatCode("dd.MM.yyyy");
-		assertEquals("dd.MM.yyyy", localization.getCurrentDateFormatCode());
-		localization.setCurrentDateFormatCode("MM/dd/yyyy");
-		assertEquals("MM/dd/yyyy", localization.getCurrentDateFormatCode());
+		assertEquals("MM/dd/yyyy", testAppLocalization.getCurrentDateFormatCode());
+		testAppLocalization.setCurrentDateFormatCode("dd.MM.yyyy");
+		assertEquals("dd.MM.yyyy", testAppLocalization.getCurrentDateFormatCode());
+		testAppLocalization.setCurrentDateFormatCode("MM/dd/yyyy");
+		assertEquals("MM/dd/yyyy", testAppLocalization.getCurrentDateFormatCode());
 		TRACE_END();
 	}
 
@@ -1801,13 +1801,13 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 	{
 		TRACE_BEGIN("testMonthLabels");
 
-		assertEquals("Mar", localization.getMonthLabel("mar"));
-		String[] months = localization.getMonthLabels();
+		assertEquals("Mar", testAppLocalization.getMonthLabel("mar"));
+		String[] months = testAppLocalization.getMonthLabels();
 		assertEquals("Jan", months[0]);
-		localization.setCurrentLanguageCode("es");
-		months = localization.getMonthLabels();
+		testAppLocalization.setCurrentLanguageCode("es");
+		months = testAppLocalization.getMonthLabels();
 		assertEquals("Ene", months[0]);
-		localization.setCurrentLanguageCode("en");
+		testAppLocalization.setCurrentLanguageCode("en");
 
 		TRACE_END();
 	}
@@ -1815,8 +1815,8 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 	public void testStatusLabels()
 	{
 		TRACE_BEGIN("testStatusLabels");
-		assertEquals("Draft", localization.getStatusLabel(Bulletin.STATUSDRAFT));
-		assertEquals("Sealed", localization.getStatusLabel(Bulletin.STATUSSEALED));
+		assertEquals("Draft", testAppLocalization.getStatusLabel(Bulletin.STATUSDRAFT));
+		assertEquals("Sealed", testAppLocalization.getStatusLabel(Bulletin.STATUSSEALED));
 		TRACE_END();
 	}
 
@@ -1932,7 +1932,7 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 	
 	private MockMartusSecurity mockSecurityForApp;
 
-	MartusLocalization localization;
+	MartusLocalization testAppLocalization;
 	private MockMartusApp appWithAccount;
 	
 	static final String[] noEnglishStrings = {};

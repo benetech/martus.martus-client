@@ -65,14 +65,14 @@ public class TestLocalization extends TestCaseEnhanced
 	public void setUp() throws Exception
 	{
 		super.setUp();
-		translationDirectory = createTempDirectory();
-		bd = new MartusLocalization(translationDirectory, EnglishStrings.strings);
+		testTranslationDirectory = createTempDirectory();
+		bd = new MartusLocalization(testTranslationDirectory, EnglishStrings.strings);
  	}
 	
 	protected void tearDown() throws Exception
 	{
-		DirectoryUtils.deleteEntireDirectoryTree(translationDirectory);
-		assertFalse("Translation directory still exists?", translationDirectory.exists());
+		DirectoryUtils.deleteEntireDirectoryTree(testTranslationDirectory);
+		assertFalse("Translation directory still exists?", testTranslationDirectory.exists());
 		super.tearDown();
 	}
 	
@@ -427,7 +427,7 @@ public class TestLocalization extends TestCaseEnhanced
 	
 	public void testDoesTranslationMatchProgramVersion() throws Exception
 	{
-		MartusLocalization myLocalization = new MartusLocalization(translationDirectory, UiMainWindow.getAllEnglishStrings());
+		MartusLocalization myLocalization = new MartusLocalization(testTranslationDirectory, UiMainWindow.getAllEnglishStrings());
 		myLocalization.setCurrentLanguageCode(MartusLocalization.ENGLISH);
 		String translationVersion = myLocalization.getTranslationVersion(myLocalization.getCurrentLanguageCode());
 		String rawProgramVersion = UiConstants.versionLabel;
@@ -452,7 +452,7 @@ public class TestLocalization extends TestCaseEnhanced
 	
 	public void testExtractVersion()
 	{
-		MartusLocalization myLocalization = new MartusLocalization(translationDirectory, UiMainWindow.getAllEnglishStrings());
+		MartusLocalization myLocalization = new MartusLocalization(testTranslationDirectory, UiMainWindow.getAllEnglishStrings());
 		String englishVersion = "2.8.1";
 		String englishEntireVersion = "Version: " + englishVersion + "Internal";
 		String extractedVersion = myLocalization.extractVersion(englishEntireVersion);
@@ -626,5 +626,5 @@ public class TestLocalization extends TestCaseEnhanced
 	}
 
 	static MartusLocalization bd;
-	File translationDirectory;
+	File testTranslationDirectory;
 }

@@ -110,12 +110,12 @@ public class TestTransferableAttachments extends TestCaseEnhanced
 		return localTA;
 	}
 
-	private Object getData(TransferableAttachmentList drag, DataFlavor flavor)
+	private Object getData(TransferableAttachmentList dragList, DataFlavor flavor)
 	{
 		Object result = null;
 		try
 		{
-			result = drag.getTransferData(flavor);
+			result = dragList.getTransferData(flavor);
 		}
 		catch (UnsupportedFlavorException e)
 		{
@@ -130,9 +130,9 @@ public class TestTransferableAttachments extends TestCaseEnhanced
 		List list = (List)getData(ta, DataFlavor.javaFileListFlavor);
 		assertNotNull(debugText + " null fileListFlavor?", list);
 		assertEquals(debugText, 1, list.size());
-		Object data = list.get(0);
-		assertTrue(debugText + " not a file?", data instanceof File);
-		File file = (File)data;
+		Object dataFile = list.get(0);
+		assertTrue(debugText + " not a file?", dataFile instanceof File);
+		File file = (File)dataFile;
 		assertTrue(debugText + " file should always exist", file.exists());
 		return file;
 	}

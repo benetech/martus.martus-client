@@ -45,18 +45,18 @@ public class TestBulletinFolder extends TestCaseEnhanced
     public void setUp() throws Exception
     {
     	super.setUp();
-    	if(store == null)
+    	if(testStore == null)
     	{
-			store = new MockBulletinStore();
-			testFolder = store.createFolder("something");
+			testStore = new MockBulletinStore();
+			testFolder = testStore.createFolder("something");
 
-			b = store.createEmptyBulletin();
-    		store.saveBulletin(b);
-			testFolder.add(b);
+			testBulletin1 = testStore.createEmptyBulletin();
+    		testStore.saveBulletin(testBulletin1);
+			testFolder.add(testBulletin1);
 
-			b2 = store.createEmptyBulletin();
-    		store.saveBulletin(b2);
-			testFolder.add(b2);
+			testBulletin2 = testStore.createEmptyBulletin();
+    		testStore.saveBulletin(testBulletin2);
+			testFolder.add(testBulletin2);
     	}
     }
 
@@ -117,7 +117,7 @@ public class TestBulletinFolder extends TestCaseEnhanced
 
 	public void testGetBulletin() throws Exception
 	{
-		BulletinFolder folder = store.createFolder("blah");
+		BulletinFolder folder = testStore.createFolder("blah");
 		assertEquals(0, folder.getBulletinCount());
 
 		Bulletin b = folder.getBulletinSorted(-1);
@@ -141,10 +141,10 @@ public class TestBulletinFolder extends TestCaseEnhanced
 
 	public void testAdd() throws Exception
 	{
-		BulletinFolder folder = store.createFolder("a2");
+		BulletinFolder folder = testStore.createFolder("a2");
 
 		// can't add unsaved bulletin to a folder
-		Bulletin b = store.createEmptyBulletin();
+		Bulletin b = testStore.createEmptyBulletin();
 		assertTrue(b != null);
 		try
 		{
@@ -158,14 +158,14 @@ public class TestBulletinFolder extends TestCaseEnhanced
 
 		final int count = 7;
 
-		BulletinFolder scratchFolder = store.createFolder("b");
+		BulletinFolder scratchFolder = testStore.createFolder("b");
 		createEmptyBulletins(scratchFolder, count);
 		assertEquals(count, scratchFolder.getBulletinCount());
 		assertEquals(0, folder.getBulletinCount());
 
-		Vector v = store.getAllBulletinLeafUids();
+		Vector v = testStore.getAllBulletinLeafUids();
 		UniversalId uid0 = (UniversalId)v.get(0);
-		b = store.getBulletinRevision(uid0);
+		b = testStore.getBulletinRevision(uid0);
 		folder.add(b);
 		assertEquals(1, folder.getBulletinCount());
 		assertEquals(true, folder.contains(b));
@@ -183,7 +183,7 @@ public class TestBulletinFolder extends TestCaseEnhanced
 		assertEquals(true, folder.contains(b));
 
 		UniversalId uid1 = (UniversalId)v.get(1);
-		b = store.getBulletinRevision(uid1);
+		b = testStore.getBulletinRevision(uid1);
 		assertEquals("This bulletin is not in the folder\n", false, folder.contains(b));
 
 		Bulletin b2 = folder.getBulletinSorted(0);
@@ -198,17 +198,17 @@ public class TestBulletinFolder extends TestCaseEnhanced
 
 		assertEquals("after non remove", 2, testFolder.getBulletinCount());
 
-		testFolder.remove(b.getUniversalId());
+		testFolder.remove(testBulletin1.getUniversalId());
 		assertEquals(1, testFolder.getBulletinCount());
-		testFolder.add(b);
+		testFolder.add(testBulletin1);
 	}
 
 	public void testAddBulletinAgainToSameFolder() throws Exception
 	{
-		assertTrue("Bulletin b not already in folder?", testFolder.contains(b));
+		assertTrue("Bulletin b not already in folder?", testFolder.contains(testBulletin1));
 		try
 		{
-			testFolder.add(b);
+			testFolder.add(testBulletin1);
 			fail("Should have thrown exists exception");
 		}
 		catch (BulletinAlreadyExistsException expectedException)
@@ -219,7 +219,7 @@ public class TestBulletinFolder extends TestCaseEnhanced
 	
 	public void testRemoveAll()
 	{
-		assertTrue("Need some samples", store.getBulletinCount() > 0);
+		assertTrue("Need some samples", testStore.getBulletinCount() > 0);
 		assertTrue("Shouldn't be empty", testFolder.getBulletinCount() >= 2);
 		testFolder.removeAll();
 		assertEquals(0, testFolder.getBulletinCount());
@@ -227,8 +227,8 @@ public class TestBulletinFolder extends TestCaseEnhanced
 
 	public void testFind() throws Exception
 	{
-		BulletinFolder folder = store.createFolder("blah2");
-		Bulletin b = store.createEmptyBulletin();
+		BulletinFolder folder = testStore.createFolder("blah2");
+		Bulletin b = testStore.createEmptyBulletin();
 		assertEquals(-1, folder.find(b.getUniversalId()));
 
 		createEmptyBulletins(folder, 3);
@@ -239,29 +239,29 @@ public class TestBulletinFolder extends TestCaseEnhanced
 
 	public void testSorting() throws Exception
 	{
-		BulletinFolder folder = store.createFolder("blah3");
+		BulletinFolder folder = testStore.createFolder("blah3");
 
 		assertEquals("eventdate", folder.sortedBy());
 
-		Bulletin b = store.createEmptyBulletin();
+		Bulletin b = testStore.createEmptyBulletin();
 		b.set("eventdate","20010101");
 		b.set("author","billy bob");
-		store.saveBulletin(b);
+		testStore.saveBulletin(b);
 		folder.add(b);
-		b = store.createEmptyBulletin();
+		b = testStore.createEmptyBulletin();
 		b.set("eventdate","20010201");
 		b.set("author","tom tupa");
-		store.saveBulletin(b);
+		testStore.saveBulletin(b);
 		folder.add(b);
-		b = store.createEmptyBulletin();
+		b = testStore.createEmptyBulletin();
 		b.set("eventdate","20010301");
 		b.set("author","adam ant");
-		store.saveBulletin(b);
+		testStore.saveBulletin(b);
 		folder.add(b);
-		b = store.createEmptyBulletin();
+		b = testStore.createEmptyBulletin();
 		b.set("eventdate","20010401");
 		b.set("author","nervous nellie");
-		store.saveBulletin(b);
+		testStore.saveBulletin(b);
 		folder.add(b);
 		assertEquals("initial count", 4, folder.getBulletinCount());
 		b = folder.getBulletinSorted(0);
@@ -297,10 +297,10 @@ public class TestBulletinFolder extends TestCaseEnhanced
 		assertEquals("tom tupa", b.get("author"));
 
 		// add while in descending mode
-		b = store.createEmptyBulletin();
+		b = testStore.createEmptyBulletin();
 		b.set("eventdate","20010401");
 		b.set("author","zippy zorro");
-		store.saveBulletin(b);
+		testStore.saveBulletin(b);
 		folder.add(b);
 		b = folder.getBulletinSorted(0);
 		assertEquals("zippy zorro", b.get("author"));
@@ -317,8 +317,8 @@ public class TestBulletinFolder extends TestCaseEnhanced
 		}
 	}
 
-	static ClientBulletinStore store;
+	static ClientBulletinStore testStore;
 	static BulletinFolder testFolder;
-	static Bulletin b;
-	static Bulletin b2;
+	static Bulletin testBulletin1;
+	static Bulletin testBulletin2;
 }

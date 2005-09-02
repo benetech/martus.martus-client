@@ -158,12 +158,12 @@ public class TestTransferableBulletin extends TestCaseEnhanced
 		return localTB;
 	}
 
-	private Object getData(TransferableBulletinList drag, DataFlavor flavor)
+	private Object getData(TransferableBulletinList dragList, DataFlavor flavor)
 	{
 		Object result = null;
 		try
 		{
-			result = drag.getTransferData(flavor);
+			result = dragList.getTransferData(flavor);
 		}
 		catch (UnsupportedFlavorException e)
 		{

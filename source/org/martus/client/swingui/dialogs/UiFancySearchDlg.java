@@ -37,7 +37,6 @@ import javax.swing.border.EmptyBorder;
 
 import org.martus.client.search.FancySearchGridEditor;
 import org.martus.client.search.SearchTreeNode;
-import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.swing.UiButton;
 import org.martus.swing.UiWrappedTextPanel;
@@ -54,7 +53,6 @@ public class UiFancySearchDlg extends UiSearchDlg
 	
 	UiButton createBody(UiMainWindow mainWindow)
 	{
-		MartusLocalization localization = mainWindow.getLocalization();
 		setTitle(localization.getWindowTitle("search"));
 		
 		UiButton search = new UiButton(localization.getButtonLabel("search"));

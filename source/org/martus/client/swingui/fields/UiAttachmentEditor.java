@@ -250,8 +250,8 @@ class TableRemoveButton extends UiButton implements TableModelListener
 
 	public void tableChanged(TableModelEvent event)
 	{
-		AttachmentTableModel model = (AttachmentTableModel)event.getSource();
-		setEnabled(model.getRowCount() > 0);
+		AttachmentTableModel tableModel = (AttachmentTableModel)event.getSource();
+		setEnabled(tableModel.getRowCount() > 0);
 	}
 
 };
