@@ -27,7 +27,6 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.swingui.actions;
 
 import java.awt.event.ActionEvent;
-import java.awt.print.PrinterException;
 import java.awt.print.PrinterJob;
 import java.io.File;
 import java.io.IOException;
@@ -35,17 +34,15 @@ import java.util.Vector;
 
 import javax.print.attribute.HashPrintRequestAttributeSet;
 import javax.swing.JComponent;
-import javax.swing.JDialog;
 
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.dialogs.UiPrintBulletinDlg;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.bulletin.BulletinHtmlGenerator;
-import org.martus.swing.JComponentVista;
+import org.martus.swing.PrintPage;
 import org.martus.swing.PrintPageFormat;
 import org.martus.swing.UiFileChooser;
 import org.martus.swing.UiLabel;
-import org.martus.swing.UiScrollPane;
 import org.martus.util.UnicodeWriter;
 
 public class ActionPrint extends UiMartusAction
@@ -175,37 +172,9 @@ public class ActionPrint extends UiMartusAction
 
 			JComponent view = createBulletinView(bulletin, includePrivateData);
 			if(previewForDebugging)
-				showPreview(view);
-			printJComponent(view, job, format, attributes);
+				PrintPage.showPreview(view);
+			PrintPage.printJComponent(view, job, format, attributes);
 		}
-	}
-
-	private void printJComponent(JComponent view, PrinterJob job, PrintPageFormat format, HashPrintRequestAttributeSet attributes)
-	{
-		JComponentVista vista = new JComponentVista(view, format);
-		vista.scaleToFitX();
-		job.setPageable(vista);
-
-		try
-		{
-			job.print(attributes);
-		}
-		catch (PrinterException e)
-		{
-			System.out.println(e);
-			e.printStackTrace();
-		}
-	}
-
-	private void showPreview(JComponent view)
-	{
-		JDialog previewDlg = new JDialog();
-		UiScrollPane scroller = new UiScrollPane();
-		scroller.getViewport().add(view);
-		previewDlg.getContentPane().add(scroller);
-		previewDlg.pack();
-		previewDlg.setModal(true);
-		previewDlg.setVisible(true);
 	}
 
 	private JComponent createBulletinView(Bulletin bulletin, boolean includePrivateData)
