@@ -27,13 +27,12 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.swingui.bulletincomponent;
 
 import java.io.IOException;
-
 import javax.swing.JComponent;
 import javax.swing.JViewport;
-
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.swing.UiScrollPane;
+import org.martus.swing.Utilities;
 
 public class UiBulletinPreviewPane extends UiScrollPane
 {
@@ -79,6 +78,7 @@ public class UiBulletinPreviewPane extends UiScrollPane
 		if(b != null && b.isAllPrivate())
 			isEncrypted = true;
 		indicateEncrypted(isEncrypted);
+		Utilities.forceScrollerToTop(view);
 	}
 
 	public void bulletinContentsHaveChanged(Bulletin b)

@@ -36,12 +36,10 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.io.IOException;
-
 import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JViewport;
-
 import org.martus.client.bulletinstore.BulletinFolder;
 import org.martus.client.bulletinstore.ClientBulletinStore;
 import org.martus.client.bulletinstore.ClientBulletinStore.BulletinOlderException;
@@ -93,7 +91,6 @@ public class UiBulletinModifyDlg extends JFrame implements ActionListener, Windo
 				view.encryptAndDisableAllPrivate();
 			else
 				indicateEncrypted(bulletin.isAllPrivate());
-				
 
 			Box box = Box.createHorizontalBox();
 			Component buttons[] = {send, draft, cancel, Box.createHorizontalGlue()};
@@ -121,6 +118,7 @@ public class UiBulletinModifyDlg extends JFrame implements ActionListener, Windo
 				setSize(screenSize.width - 50, screenSize.height - 50);
 				Utilities.maximizeWindow(this);
 			}
+			Utilities.forceScrollerToTop(view);
 		}
 		catch(Exception e)
 		{
