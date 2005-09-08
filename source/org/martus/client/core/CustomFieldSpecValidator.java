@@ -53,8 +53,8 @@ public class CustomFieldSpecValidator
 		checkForMissingCustomLabels(specsToCheck);
 		checkForUnknownTypes(specsToCheck);
 		checkForLabelsOnStandardFields(specsToCheck);
-		checkForDuplicateDropdownEntries(specsToCheck);
-		checkForDuplicateDropdownEntriesInsideGrids(specsToCheck);
+		checkForDuplicateAndNoDropdownEntries(specsToCheck);
+		checkForDuplicateAndNoDropdownEntriesInsideGrids(specsToCheck);
 	}
 		
 	public boolean isValid()
@@ -153,7 +153,7 @@ public class CustomFieldSpecValidator
 		}
 	}
 	
-	private void checkForDuplicateDropdownEntries(FieldSpec[] specsToCheck)
+	private void checkForDuplicateAndNoDropdownEntries(FieldSpec[] specsToCheck)
 	{
 		for (int i = 0; i < specsToCheck.length; i++)
 		{
@@ -164,10 +164,32 @@ public class CustomFieldSpecValidator
 				String tag = thisSpec.getTag();
 				String label = thisSpec.getLabel();
 				checkForDuplicateEntriesInDropDownSpec(dropdownSpec, tag, label);
+				checkForNoDropdownChoices(dropdownSpec, tag, label);
 			}
 		}
 	}
-
+	
+	private void checkForDuplicateAndNoDropdownEntriesInsideGrids(FieldSpec[] specsToCheck)
+	{
+		for (int i = 0; i < specsToCheck.length; i++)
+		{
+			FieldSpec thisSpec = specsToCheck[i];
+			if(thisSpec.getType() == FieldSpec.TYPE_GRID)
+			{
+				GridFieldSpec gridSpec = (GridFieldSpec)thisSpec;
+				for(int columns = 0; columns < gridSpec.getColumnCount(); ++columns)
+				{
+					FieldSpec columnSpec = gridSpec.getFieldSpec(columns);
+					if(columnSpec.getType() == FieldSpec.TYPE_DROPDOWN)
+					{
+						checkForDuplicateEntriesInDropDownSpec((DropDownFieldSpec)columnSpec, gridSpec.getTag(), gridSpec.getLabel());
+						checkForNoDropdownChoices((DropDownFieldSpec)columnSpec, gridSpec.getTag(), gridSpec.getLabel());
+					}
+				}
+			}
+		}
+	}
+	
 	private void checkForDuplicateEntriesInDropDownSpec(DropDownFieldSpec dropdownSpec, String tag, String label)
 	{
 		HashMap labelEntries = new HashMap();
@@ -180,24 +202,11 @@ public class CustomFieldSpecValidator
 		}
 	}
 	
-	private void checkForDuplicateDropdownEntriesInsideGrids(FieldSpec[] specsToCheck)
+	private void checkForNoDropdownChoices(DropDownFieldSpec dropdownSpec, String tag, String label)
 	{
-		for (int i = 0; i < specsToCheck.length; i++)
-		{
-			FieldSpec thisSpec = specsToCheck[i];
-			if(thisSpec.getType() == FieldSpec.TYPE_GRID)
-			{
-				GridFieldSpec gridSpec = (GridFieldSpec)thisSpec;
-				for(int columns = 0; columns < gridSpec.getColumnCount(); ++columns)
-				{
-					FieldSpec columnSpec = gridSpec.getFieldSpec(columns);
-					if(columnSpec.getType() == FieldSpec.TYPE_DROPDOWN)
-						checkForDuplicateEntriesInDropDownSpec((DropDownFieldSpec)columnSpec, gridSpec.getTag(), gridSpec.getLabel());
-				}
-			}
-		}
+		if(dropdownSpec.getCount() == 0)
+			errors.add(CustomFieldError.noDropDownEntries(tag, label));				
 	}
-	
 	
 	private void checkForMissingCustomLabels(FieldSpec[] specsToCheck)
 	{

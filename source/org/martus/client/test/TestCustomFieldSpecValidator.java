@@ -206,6 +206,48 @@ public class TestCustomFieldSpecValidator extends TestCaseEnhanced
 		assertEquals("Incorrect tag Duplicate Tags", tag, ((CustomFieldError)errors.get(0)).getTag());
 		assertEquals("Incorrect label Duplicate Tags", label, ((CustomFieldError)errors.get(0)).getLabel());
 	}
+	
+	public void testNoDropDownEntries() throws Exception
+	{
+		FieldSpec[] specs = StandardFieldSpecs.getDefaultPublicFieldSpecs();
+		String tag = "dd";
+		String label ="cc";
+
+		DropDownFieldSpec dropDownSpecNoEntries = new DropDownFieldSpec();
+		dropDownSpecNoEntries.setTag(tag);
+		dropDownSpecNoEntries.setLabel(label);
+		specs = addFieldSpec(specs, dropDownSpecNoEntries);
+		CustomFieldSpecValidator checker = new CustomFieldSpecValidator(specs);
+		assertFalse("valid?", checker.isValid());
+		Vector errors = checker.getAllErrors();
+		assertEquals("Should have 1 error", 1, errors.size());
+		assertEquals("Incorrect Error code No Dropdown Entries", CustomFieldError.CODE_NO_DROPDOWN_ENTRIES, ((CustomFieldError)errors.get(0)).getCode());
+		assertEquals("Incorrect tag Duplicate Tags", tag, ((CustomFieldError)errors.get(0)).getTag());
+		assertEquals("Incorrect label Duplicate Tags", label, ((CustomFieldError)errors.get(0)).getLabel());
+	}
+
+	public void testNoDropDownEntriesInsideOfAGrid() throws Exception
+	{
+		String tag = "dd";
+		String label ="cc";
+		FieldSpec[] specs = StandardFieldSpecs.getDefaultPublicFieldSpecs();
+
+		DropDownFieldSpec dropDownSpecNoEntries = new DropDownFieldSpec();
+		GridFieldSpec gridWithNoDropdownEntries = new GridFieldSpec();
+		gridWithNoDropdownEntries.setTag(tag);
+		gridWithNoDropdownEntries.setLabel(label);
+		gridWithNoDropdownEntries.addColumn(dropDownSpecNoEntries);
+		
+		specs = addFieldSpec(specs, gridWithNoDropdownEntries);
+		CustomFieldSpecValidator checker = new CustomFieldSpecValidator(specs);
+		assertFalse("valid?", checker.isValid());
+		Vector errors = checker.getAllErrors();
+		assertEquals("Should have 1 error", 1, errors.size());
+		assertEquals("Incorrect Error code No Dropdown Entries", CustomFieldError.CODE_NO_DROPDOWN_ENTRIES, ((CustomFieldError)errors.get(0)).getCode());
+		assertEquals("Incorrect tag Duplicate Tags", tag, ((CustomFieldError)errors.get(0)).getTag());
+		assertEquals("Incorrect label Duplicate Tags", label, ((CustomFieldError)errors.get(0)).getLabel());
+	}
+	
 
 	public void testMissingCustomLabel() throws Exception
 	{

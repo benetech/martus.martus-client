@@ -76,6 +76,10 @@ public class CustomFieldError
 		return new CustomFieldError(CODE_DUPLICATE_DROPDOWN_ENTRY, tag, label, FieldSpec.getTypeString(FieldSpec.TYPE_DROPDOWN));
 	}
 
+	static public CustomFieldError noDropDownEntries(String tag, String label)
+	{
+		return new CustomFieldError(CODE_NO_DROPDOWN_ENTRIES, tag, label, FieldSpec.getTypeString(FieldSpec.TYPE_DROPDOWN));
+	}
 
 	static public CustomFieldError errorParseXml()
 	{
@@ -131,6 +135,7 @@ public class CustomFieldError
 	static public final String CODE_PARSE_XML = "106";
 	static public final String CODE_ILLEGAL_TAG = "107";
 	static public final String CODE_DUPLICATE_DROPDOWN_ENTRY = "108";
+	static public final String CODE_NO_DROPDOWN_ENTRIES = "109";
 	static public final String CODE_NULL_SPECS = "200";
 	static public final String CODE_UNAUTHORIZED_KEY = "201";
 	static public final String CODE_SIGNATURE_ERROR = "202";
