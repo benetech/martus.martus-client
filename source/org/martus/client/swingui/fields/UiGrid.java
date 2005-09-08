@@ -38,15 +38,15 @@ import org.martus.swing.UiScrollPane;
 
 abstract public class UiGrid extends UiField
 {
-	public UiGrid(GridFieldSpec fieldSpec, UiDialogLauncher dlgLauncher)
+	public UiGrid(GridFieldSpec fieldSpec, UiDialogLauncher dlgLauncher, boolean isEditable)
 	{
-		this(new GridTableModel(fieldSpec), dlgLauncher);
+		this(new GridTableModel(fieldSpec), dlgLauncher, isEditable);
 	}
 	
-	public UiGrid(GridTableModel modelToUse, UiDialogLauncher dlgLauncher)
+	public UiGrid(GridTableModel modelToUse, UiDialogLauncher dlgLauncher, boolean isEditable)
 	{
 		model = modelToUse;
-		table = new GridTable(model, dlgLauncher);
+		table = new GridTable(model, dlgLauncher, isEditable);
 		table.setColumnSelectionAllowed(false);
 		table.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
 		table.setShowGrid(true);

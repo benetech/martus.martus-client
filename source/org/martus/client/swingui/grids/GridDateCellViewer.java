@@ -26,39 +26,23 @@ Boston, MA 02111-1307, USA.
 
 package org.martus.client.swingui.grids;
 
-import javax.swing.JComponent;
-import org.martus.client.swingui.fields.UiDateEditor;
+import org.martus.client.swingui.fields.UiDateViewer;
 import org.martus.clientside.UiLocalization;
-import org.martus.swing.UiComboBox;
-import org.martus.util.language.LanguageOptions;
+import org.martus.common.utilities.DateUtilities;
 
-public class GridDateCellEditor extends GridCellEditorAndRenderer
+public class GridDateCellViewer extends GridCellEditorAndRenderer
 {
-	GridDateCellEditor(UiLocalization localization)
+	GridDateCellViewer(UiLocalization localizationToUse)
 	{
-		super(new UiDateEditor(localization, null));
+		super(new UiDateViewer(localizationToUse));
+		localization = localizationToUse;
 	}
 	
 	public int getMinimumCellSize()
 	{
-		final int DATE_LANGUAGE_PADDING = 100;
-		int width = super.getMinimumCellSize();
-		if(LanguageOptions.needsLanguagePadding())
-			width += DATE_LANGUAGE_PADDING;
-		return width;
+		UiDateViewer tmpViewer = new UiDateViewer(localization);
+		tmpViewer.setText(DateUtilities.getToday());
+		return tmpViewer.getComponent().getPreferredSize().width + INSETS;
 	}
-
-	public void spaceWasPressed()
-	{
-		int hasFocus = 0;
-		JComponent[] focusableComponents = ((UiDateEditor)getUiField()).getFocusableComponents();
-		for(int i = 0; i < focusableComponents.length; ++i)
-		{
-			if(focusableComponents[i].isFocusOwner())
-				hasFocus = i;
-		}
-		UiComboBox date = (UiComboBox)(focusableComponents[hasFocus]);
-		if(!date.isPopupVisible())
-			date.requestFocus();
-	}
+	UiLocalization localization;	
 }

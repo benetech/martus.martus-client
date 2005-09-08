@@ -69,7 +69,7 @@ public class FancySearchGridEditor extends UiGridEditor
 	{
 		GridTable searchTable = getTable();
 		int searchForColumn = FancySearchHelper.COLUMN_VALUE;
-		int widthToHoldDates = searchTable.getDateColumnWidth();
+		int widthToHoldDates = searchTable.getDateColumnWidth(searchForColumn);
 		searchTable.setColumnWidth(searchForColumn, widthToHoldDates);
 	}
 

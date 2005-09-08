@@ -30,7 +30,6 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
-
 import javax.swing.AbstractCellEditor;
 import javax.swing.JComponent;
 import javax.swing.JTable;
@@ -39,13 +38,13 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.table.TableCellEditor;
 import javax.swing.table.TableCellRenderer;
-
 import org.martus.client.swingui.fields.UiField;
 
 public class GridCellEditorAndRenderer extends AbstractCellEditor implements TableCellRenderer, TableCellEditor, FocusListener
 {
 	GridCellEditorAndRenderer(UiField widgetToWrap)
 	{
+		
 		uiField = widgetToWrap;
 		uiField.addFocusListener(this);
 		borderWithoutFocus = new EmptyBorder(1,1,1,1);
@@ -59,6 +58,11 @@ public class GridCellEditorAndRenderer extends AbstractCellEditor implements Tab
 		
 		component.setBorder(borderWithFocus);
 		return component;
+	}
+	
+	public int getMinimumCellSize()
+	{
+		return uiField.getComponent().getPreferredSize().width;
 	}
 	
 	public void spaceWasPressed()
@@ -89,11 +93,11 @@ public class GridCellEditorAndRenderer extends AbstractCellEditor implements Tab
 	{
 		getUiField().setText((String)stringValue);
 		JComponent component = getComponent();
-		
 		Border border = borderWithoutFocus;
 		if(hasFocus)
 			border = borderWithFocus;
 		component.setBorder(border);
+		
 		return component;
 	}
 	
@@ -111,6 +115,8 @@ public class GridCellEditorAndRenderer extends AbstractCellEditor implements Tab
 		//System.out.println("GridCellEditorAndRenderer focusLost, so calling stopCellEditing");
 		stopCellEditing();
 	}
+	
+	final int INSETS = 4;
 
 	UiField uiField;
 	Border borderWithFocus;

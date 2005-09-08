@@ -28,9 +28,7 @@ package org.martus.client.swingui.grids;
 
 import java.awt.Component;
 import java.awt.event.ActionListener;
-
 import javax.swing.JTable;
-
 import org.martus.client.swingui.fields.UiChoiceEditor;
 import org.martus.common.fieldspec.DropDownFieldSpec;
 import org.martus.swing.UiComboBox;

@@ -35,6 +35,7 @@ import org.martus.client.swingui.fields.UiFlexiDateEditor;
 import org.martus.client.swingui.fields.UiGridDateRangeEditorViewer;
 import org.martus.client.swingui.fields.UiField.DataInvalidException;
 import org.martus.swing.UiComboBox;
+import org.martus.util.language.LanguageOptions;
 
 public class GridDateRangeCellEditor extends GridCellEditorAndRenderer
 {
@@ -42,6 +43,15 @@ public class GridDateRangeCellEditor extends GridCellEditorAndRenderer
 	{
 		super(new UiGridDateRangeEditorViewer(dlgLauncherToUse.GetLocalization()));
 		dlgLauncher = dlgLauncherToUse;
+	}
+
+	public int getMinimumCellSize()
+	{
+		final int DATE_LANGUAGE_PADDING = 200;
+		int width = super.getMinimumCellSize();
+		if(LanguageOptions.needsLanguagePadding())
+			width += DATE_LANGUAGE_PADDING;
+		return width;
 	}
 
 	public boolean stopCellEditing()

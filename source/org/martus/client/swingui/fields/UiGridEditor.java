@@ -46,13 +46,13 @@ public class UiGridEditor extends UiGrid implements FocusListener
 {
 	public UiGridEditor(GridFieldSpec fieldSpec, UiDialogLauncher dlgLauncher)
 	{
-		super(fieldSpec, dlgLauncher);
+		super(fieldSpec, dlgLauncher, true);
 		initialize();
 	}
 	
 	public UiGridEditor(GridTableModel model, UiDialogLauncher dlgLauncher)
 	{
-		super(model, dlgLauncher);
+		super(model, dlgLauncher, true);
 		initialize();
 	}
 	

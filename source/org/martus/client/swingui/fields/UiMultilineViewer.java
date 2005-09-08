@@ -28,17 +28,15 @@ package org.martus.client.swingui.fields;
 
 import java.awt.Font;
 import java.awt.Rectangle;
-
 import javax.swing.JComponent;
 import javax.swing.text.JTextComponent;
-
 import org.martus.client.swingui.UiConstants;
-import org.martus.client.swingui.MartusLocalization;
+import org.martus.clientside.UiLocalization;
 import org.martus.swing.UiTextArea;
 
 public class UiMultilineViewer extends UiStringField
 {
-	public UiMultilineViewer(MartusLocalization localizationToUse)
+	public UiMultilineViewer(UiLocalization localizationToUse)
 	{
 		super(localizationToUse);
 		text = new PreviewTextArea(1, UiConstants.textFieldColumns);

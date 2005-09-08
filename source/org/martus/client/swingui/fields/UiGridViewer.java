@@ -35,7 +35,7 @@ public class UiGridViewer extends UiGrid
 {
 	public UiGridViewer(GridFieldSpec fieldSpec, UiDialogLauncher dlgLauncher)
 	{
-		super(fieldSpec, dlgLauncher);
+		super(fieldSpec, dlgLauncher, false);
 		table.resizeTable();
 		table.setEnabled(false);
 	}
