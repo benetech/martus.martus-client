@@ -71,6 +71,7 @@ public class UiCustomFieldsDlg extends JDialog
 
 		UiWrappedTextArea label = new UiWrappedTextArea(localization.getFieldLabel("input" + baseTag + "Info"));
 		text = createXMLTextArea(xmlFieldSpecs);
+		text.setCaretPosition(0);
 		UiScrollPane textPane = createScrollPane(text);
 
 		JButton defaults = new UiButton(localization.getButtonLabel("customDefault"));
