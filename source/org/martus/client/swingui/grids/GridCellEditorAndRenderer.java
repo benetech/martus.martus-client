@@ -60,7 +60,7 @@ public class GridCellEditorAndRenderer extends AbstractCellEditor implements Tab
 		return component;
 	}
 	
-	public int getMinimumCellSize()
+	public int getMinimumCellWidth()
 	{
 		return uiField.getComponent().getPreferredSize().width;
 	}

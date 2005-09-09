@@ -36,7 +36,7 @@ public class GridDateRangeCellViewer extends GridCellEditorAndRenderer
 		localization = localizationToUse;
 	}
 	
-	public int getMinimumCellSize()
+	public int getMinimumCellWidth()
 	{
 		UiFlexiDateViewer tmpViewer = new UiFlexiDateViewer(localization);
 		tmpViewer.setText("20001010,20001010+5");

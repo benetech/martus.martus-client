@@ -30,7 +30,6 @@ import javax.swing.JComponent;
 import org.martus.client.swingui.fields.UiDateEditor;
 import org.martus.clientside.UiLocalization;
 import org.martus.swing.UiComboBox;
-import org.martus.util.language.LanguageOptions;
 
 public class GridDateCellEditor extends GridCellEditorAndRenderer
 {
@@ -39,15 +38,6 @@ public class GridDateCellEditor extends GridCellEditorAndRenderer
 		super(new UiDateEditor(localization, null));
 	}
 	
-	public int getMinimumCellSize()
-	{
-		final int DATE_LANGUAGE_PADDING = 100;
-		int width = super.getMinimumCellSize();
-		if(LanguageOptions.needsLanguagePadding())
-			width += DATE_LANGUAGE_PADDING;
-		return width;
-	}
-
 	public void spaceWasPressed()
 	{
 		int hasFocus = 0;

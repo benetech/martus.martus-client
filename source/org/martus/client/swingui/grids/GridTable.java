@@ -75,7 +75,7 @@ public class GridTable extends UiTableWithCellEditingProtection
 	public int getDateColumnWidth(int column)
 	{
 		GridCellEditorAndRenderer gridDateCellEditor = ((GridCellEditorAndRenderer)getEditorOrRendererForType(editors, new Integer(FieldSpec.TYPE_DATE)));
-		int width = gridDateCellEditor.getMinimumCellSize();
+		int width = gridDateCellEditor.getMinimumCellWidth();
 		
 		int columnHeaderWidth = getColumnHeaderWidth(column);
 		if(width < columnHeaderWidth)
@@ -86,7 +86,7 @@ public class GridTable extends UiTableWithCellEditingProtection
 	private int getDateRangeColumnWidth(int column)
 	{
 		GridCellEditorAndRenderer gridDateRangeCellEditor = ((GridCellEditorAndRenderer)getEditorOrRendererForType(editors, new Integer(FieldSpec.TYPE_DATERANGE)));
-		int width = gridDateRangeCellEditor.getMinimumCellSize();
+		int width = gridDateRangeCellEditor.getMinimumCellWidth();
 		int columnHeaderWidth = getColumnHeaderWidth(column);
 		if(width < columnHeaderWidth)
 			width = columnHeaderWidth;
