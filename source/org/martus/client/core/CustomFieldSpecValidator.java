@@ -53,8 +53,8 @@ public class CustomFieldSpecValidator
 		checkForMissingCustomLabels(specsToCheck);
 		checkForUnknownTypes(specsToCheck);
 		checkForLabelsOnStandardFields(specsToCheck);
-		checkForDuplicateAndNoDropdownEntries(specsToCheck);
-		checkForDuplicateAndNoDropdownEntriesInsideGrids(specsToCheck);
+		checkForDropdownsWithDuplicatedOrZeroEntries(specsToCheck);
+		checkForDropdownsWithDuplicatedOrZeroEntriesInsideGrids(specsToCheck);
 	}
 		
 	public boolean isValid()
@@ -153,7 +153,7 @@ public class CustomFieldSpecValidator
 		}
 	}
 	
-	private void checkForDuplicateAndNoDropdownEntries(FieldSpec[] specsToCheck)
+	private void checkForDropdownsWithDuplicatedOrZeroEntries(FieldSpec[] specsToCheck)
 	{
 		for (int i = 0; i < specsToCheck.length; i++)
 		{
@@ -169,7 +169,7 @@ public class CustomFieldSpecValidator
 		}
 	}
 	
-	private void checkForDuplicateAndNoDropdownEntriesInsideGrids(FieldSpec[] specsToCheck)
+	private void checkForDropdownsWithDuplicatedOrZeroEntriesInsideGrids(FieldSpec[] specsToCheck)
 	{
 		for (int i = 0; i < specsToCheck.length; i++)
 		{
