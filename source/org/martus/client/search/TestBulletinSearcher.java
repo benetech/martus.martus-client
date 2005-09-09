@@ -36,6 +36,8 @@ import org.martus.common.crypto.MockMartusSecurity;
 import org.martus.common.field.MartusDateRangeField;
 import org.martus.common.field.MartusField;
 import org.martus.common.fieldspec.FieldSpec;
+import org.martus.common.fieldspec.FieldTypeBoolean;
+import org.martus.common.fieldspec.FieldTypeDateRange;
 import org.martus.common.fieldspec.StandardFieldSpecs;
 import org.martus.common.test.UnicodeConstants;
 import org.martus.util.TestCaseEnhanced;
@@ -213,7 +215,7 @@ public class TestBulletinSearcher extends TestCaseEnhanced
 	
 	public void testDateRangeDoesntMatchAnyString()
 	{
-		FieldSpec spec = FieldSpec.createStandardField("daterange", FieldSpec.TYPE_DATERANGE);
+		FieldSpec spec = FieldSpec.createStandardField("daterange", new FieldTypeDateRange());
 		MartusDateRangeField dateRange = new MartusDateRangeField(spec);
 		dateRange.setData("");
 		assertFalse("empty date range contains a string?", dateRange.contains("lsijflidj"));
@@ -263,9 +265,9 @@ public class TestBulletinSearcher extends TestCaseEnhanced
 		
 		FieldSpec[] publicSpecs = new FieldSpec[] 
 		{
-			FieldSpec.createCustomField("true", "should be true", FieldSpec.TYPE_BOOLEAN),
-			FieldSpec.createCustomField("false", "should be false", FieldSpec.TYPE_BOOLEAN),
-			FieldSpec.createCustomField("bogus", "will be blank", FieldSpec.TYPE_BOOLEAN),
+			FieldSpec.createCustomField("true", "should be true", new FieldTypeBoolean()),
+			FieldSpec.createCustomField("false", "should be false", new FieldTypeBoolean()),
+			FieldSpec.createCustomField("bogus", "will be blank", new FieldTypeBoolean()),
 		};
 		
 		Bulletin b = new Bulletin(security, publicSpecs, StandardFieldSpecs.getDefaultPrivateFieldSpecs());

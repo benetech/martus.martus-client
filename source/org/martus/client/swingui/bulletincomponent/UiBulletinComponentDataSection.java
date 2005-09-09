@@ -42,6 +42,7 @@ import org.martus.common.bulletin.AttachmentProxy;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.fieldspec.DropDownFieldSpec;
 import org.martus.common.fieldspec.FieldSpec;
+import org.martus.common.fieldspec.FieldType;
 import org.martus.common.fieldspec.GridFieldSpec;
 import org.martus.common.fieldspec.StandardFieldSpecs;
 import org.martus.common.packet.FieldDataPacket;
@@ -130,43 +131,35 @@ abstract public class UiBulletinComponentDataSection extends UiBulletinComponent
 
 	private UiField createNormalField(FieldSpec fieldSpec)
 	{
+		FieldType type = fieldSpec.getType();
+		if(type.isMultiline())
+			return createMultilineField();
+		if(type.isDate())
+			return createDateField(fieldSpec);
+		if(type.isDateRange())
+			return createFlexiDateField(fieldSpec);
+		if(type.isLanguage())
+			return createLanguageField();
+		if(type.isDropdown())
+			return createChoiceField(fieldSpec);
+		if(type.isString())
+			return createNormalField();
+		if(type.isMessage())
+			return createMessageField(fieldSpec);
+		if(type.isBoolean())
+			return createBoolField();
+		if(type.isGrid())
+			return createGridField((GridFieldSpec)fieldSpec);
+		
+		return createUnknownField();
+	}
+
+	private UiField createLanguageField()
+	{
 		UiField field;
-		switch(fieldSpec.getType())
-		{
-			case FieldSpec.TYPE_MULTILINE:
-				field = createMultilineField();
-				break;
-			case FieldSpec.TYPE_DATE:
-				field = createDateField(fieldSpec);
-				break;
-			case FieldSpec.TYPE_DATERANGE:
-				field = createFlexiDateField(fieldSpec);
-				break;
-			case FieldSpec.TYPE_LANGUAGE:
-				DropDownFieldSpec spec = new DropDownFieldSpec(getLocalization().getLanguageNameChoices());
-				field = createChoiceField(spec);
-				field.setLanguageListener(languageChangeListener);
-				break;
-			case FieldSpec.TYPE_DROPDOWN:
-				field = createChoiceField(fieldSpec);
-				break;
-			case FieldSpec.TYPE_NORMAL:
-				field = createNormalField();
-				break;
-			case FieldSpec.TYPE_MESSAGE:
-				field = createMessageField(fieldSpec);
-				break;
-			case FieldSpec.TYPE_BOOLEAN:
-				field = createBoolField();
-				break;
-			case FieldSpec.TYPE_GRID:
-				field = createGridField((GridFieldSpec)fieldSpec);
-				break;
-			case FieldSpec.TYPE_UNKNOWN:
-			default:
-				field = createUnknownField();
-				break;
-		}
+		DropDownFieldSpec spec = new DropDownFieldSpec(getLocalization().getLanguageNameChoices());
+		field = createChoiceField(spec);
+		field.setLanguageListener(languageChangeListener);
 		return field;
 	}
 

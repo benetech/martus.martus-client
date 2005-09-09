@@ -26,6 +26,7 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.core;
 
 import org.martus.common.fieldspec.FieldSpec;
+import org.martus.common.fieldspec.FieldTypeDropdown;
 
 
 public class CustomFieldError
@@ -73,12 +74,12 @@ public class CustomFieldError
 	
 	static public CustomFieldError errorDuplicateDropDownEntry(String tag, String label)
 	{
-		return new CustomFieldError(CODE_DUPLICATE_DROPDOWN_ENTRY, tag, label, FieldSpec.getTypeString(FieldSpec.TYPE_DROPDOWN));
+		return new CustomFieldError(CODE_DUPLICATE_DROPDOWN_ENTRY, tag, label, FieldSpec.getTypeString(new FieldTypeDropdown()));
 	}
 
 	static public CustomFieldError noDropDownEntries(String tag, String label)
 	{
-		return new CustomFieldError(CODE_NO_DROPDOWN_ENTRIES, tag, label, FieldSpec.getTypeString(FieldSpec.TYPE_DROPDOWN));
+		return new CustomFieldError(CODE_NO_DROPDOWN_ENTRIES, tag, label, FieldSpec.getTypeString(new FieldTypeDropdown()));
 	}
 
 	static public CustomFieldError errorParseXml()

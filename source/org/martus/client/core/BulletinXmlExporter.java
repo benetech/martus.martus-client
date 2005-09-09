@@ -29,6 +29,7 @@ package org.martus.client.core;
 import java.io.IOException;
 import java.io.Writer;
 import java.util.Vector;
+
 import org.martus.common.MartusXml;
 import org.martus.common.bulletin.AttachmentProxy;
 import org.martus.common.bulletin.Bulletin;
@@ -144,7 +145,7 @@ public class BulletinXmlExporter
 				continue;						
 			String tag = spec.getTag();
 			StringBuffer rawFieldData = new StringBuffer(b.get(tag));
-			if(spec.getType() == FieldSpec.TYPE_GRID)
+			if(spec.getType().isGrid())
 			{
 				GridFieldSpec grid = (GridFieldSpec)spec;
 				String columnLabels = grid.getDetailsXml();
@@ -153,7 +154,7 @@ public class BulletinXmlExporter
 				continue;
 			}
 			
-			if(spec.getType() == FieldSpec.TYPE_DATERANGE)
+			if(spec.getType().isDate())
 			{
 				String martusFlexidate = rawFieldData.toString();
 				String startDate = DateUtilities.getStartDateRange(martusFlexidate);

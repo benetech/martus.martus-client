@@ -43,6 +43,13 @@ import org.martus.common.fieldspec.ChoiceItem;
 import org.martus.common.fieldspec.CustomDropDownFieldSpec;
 import org.martus.common.fieldspec.DropDownFieldSpec;
 import org.martus.common.fieldspec.FieldSpec;
+import org.martus.common.fieldspec.FieldTypeBoolean;
+import org.martus.common.fieldspec.FieldTypeDropdown;
+import org.martus.common.fieldspec.FieldTypeMessage;
+import org.martus.common.fieldspec.FieldTypeMultiline;
+import org.martus.common.fieldspec.FieldTypeNormal;
+import org.martus.common.fieldspec.FieldTypeSearchValue;
+import org.martus.common.fieldspec.FieldTypeUnknown;
 import org.martus.common.fieldspec.GridFieldSpec;
 import org.martus.common.fieldspec.StandardFieldSpecs;
 import org.martus.util.TestCaseEnhanced;
@@ -118,7 +125,7 @@ public class TestFancySearchHelper extends TestCaseEnhanced
 		assertEquals("not one choice for a grid?", 1, gridTypeChoices.size());
 		ChoiceItem gridChoice = (ChoiceItem)gridTypeChoices.get(0);
 		FieldSpec gridChoiceSpec = gridChoice.getSpec();
-		assertEquals("grid doesn't have string search?", FieldSpec.TYPE_NORMAL, gridChoiceSpec.getType());
+		assertEquals("grid doesn't have string search?", new FieldTypeNormal(), gridChoiceSpec.getType());
 		
 		DropDownFieldSpec dropDownSpec = createSampleDropDownSpec("dropdown");
 		Vector dropDownChoices = helper.getChoiceItemsForThisField(dropDownSpec);
@@ -129,7 +136,7 @@ public class TestFancySearchHelper extends TestCaseEnhanced
 			assertEquals("doesn't have blank plus both sample choices?", 3, createdSpec.getCount());
 		}
 		
-		FieldSpec withLabel = FieldSpec.createCustomField("tag", "Label", FieldSpec.TYPE_NORMAL);
+		FieldSpec withLabel = FieldSpec.createCustomField("tag", "Label", new FieldTypeNormal());
 		Vector withLabelChoices = helper.getChoiceItemsForThisField(withLabel);
 		assertEquals("not one choice for normal with label?", 1, withLabelChoices.size());
 		{
@@ -143,23 +150,23 @@ public class TestFancySearchHelper extends TestCaseEnhanced
 		assertEquals("not one choice for message fields?", 1, messageTypeChoices.size());
 		ChoiceItem messageChoice = (ChoiceItem)messageTypeChoices.get(0);
 		FieldSpec messageChoiceSpec = messageChoice.getSpec();
-		assertEquals("message doesn't have string search?", FieldSpec.TYPE_NORMAL, messageChoiceSpec.getType());
+		assertEquals("message doesn't have string search?", new FieldTypeNormal(), messageChoiceSpec.getType());
 		
 		FieldSpec multilineType = createSampleMultilineSpec();
 		Vector multilineTypeChoices = helper.getChoiceItemsForThisField(multilineType);
 		assertEquals("not one choice for multiline fields?", 1, multilineTypeChoices.size());
 		ChoiceItem multilineChoice = (ChoiceItem)multilineTypeChoices.get(0);
 		FieldSpec multilineChoiceSpec = multilineChoice.getSpec();
-		assertEquals("multiline doesn't have string search?", FieldSpec.TYPE_NORMAL, multilineChoiceSpec.getType());
+		assertEquals("multiline doesn't have string search?", new FieldTypeNormal(), multilineChoiceSpec.getType());
 		
 		FieldSpec booleanType = createSampleBooleanSpec();
 		Vector booleanTypeChoices = helper.getChoiceItemsForThisField(booleanType);
 		assertEquals("not one choice for boolean fields?", 1, booleanTypeChoices.size());
 		ChoiceItem booleanChoice = (ChoiceItem)booleanTypeChoices.get(0);
 		FieldSpec booleanChoiceSpec = booleanChoice.getSpec();
-		assertEquals("boolean doesn't have checkbox?", FieldSpec.TYPE_BOOLEAN, booleanChoiceSpec.getType());
+		assertEquals("boolean doesn't have checkbox?", new FieldTypeBoolean(), booleanChoiceSpec.getType());
 
-		FieldSpec unknownType = FieldSpec.createStandardField("tag", FieldSpec.TYPE_UNKNOWN);
+		FieldSpec unknownType = FieldSpec.createStandardField("tag", new FieldTypeUnknown());
 		Vector unknownTypeChoices = helper.getChoiceItemsForThisField(unknownType);
 		assertEquals("not zero choices for unknown type?", 0, unknownTypeChoices.size());
 	}
@@ -168,7 +175,7 @@ public class TestFancySearchHelper extends TestCaseEnhanced
 	{
 		final String tag = "messagetag";
 		final String label = "Message Label: ";
-		FieldSpec message = FieldSpec.createCustomField(tag, label, FieldSpec.TYPE_MESSAGE);
+		FieldSpec message = FieldSpec.createCustomField(tag, label, new FieldTypeMessage());
 		return message;
 	}
 	
@@ -176,7 +183,7 @@ public class TestFancySearchHelper extends TestCaseEnhanced
 	{
 		final String tag = "multilinetag";
 		final String label = "Multiline Label: ";
-		FieldSpec message = FieldSpec.createCustomField(tag, label, FieldSpec.TYPE_MULTILINE);
+		FieldSpec message = FieldSpec.createCustomField(tag, label, new FieldTypeMultiline());
 		return message;
 	}
 	
@@ -184,7 +191,7 @@ public class TestFancySearchHelper extends TestCaseEnhanced
 	{
 		final String tag = "booleantag";
 		final String label = "Boolean Label: ";
-		FieldSpec message = FieldSpec.createCustomField(tag, label, FieldSpec.TYPE_BOOLEAN);
+		FieldSpec message = FieldSpec.createCustomField(tag, label, new FieldTypeBoolean());
 		return message;
 	}
 	
@@ -192,7 +199,7 @@ public class TestFancySearchHelper extends TestCaseEnhanced
 	{
 		GridFieldSpec gridSpec = new GridFieldSpec();
 		String label1 = "column 1";
-		FieldSpec column1 = new FieldSpec(label1, FieldSpec.TYPE_NORMAL);
+		FieldSpec column1 = new FieldSpec(label1, new FieldTypeNormal());
 
 		String label2 = "column 2";
 		CustomDropDownFieldSpec column2 = createSampleDropDownSpec(label2);
@@ -220,10 +227,10 @@ public class TestFancySearchHelper extends TestCaseEnhanced
 	{
 		GridFieldSpec spec = helper.getGridSpec(getStore());
 		assertEquals(4, spec.getColumnCount());
-		assertEquals("no field column?", FieldSpec.TYPE_DROPDOWN, spec.getColumnType(0));
-		assertEquals("no op column?", FieldSpec.TYPE_DROPDOWN, spec.getColumnType(1));
-		assertEquals("no value column?", FieldSpec.TYPE_SEARCH_VALUE, spec.getColumnType(2));
-		assertEquals("no andor column?", FieldSpec.TYPE_DROPDOWN, spec.getColumnType(3));
+		assertEquals("no field column?", new FieldTypeDropdown(), spec.getColumnType(0));
+		assertEquals("no op column?", new FieldTypeDropdown(), spec.getColumnType(1));
+		assertEquals("no value column?", new FieldTypeSearchValue(), spec.getColumnType(2));
+		assertEquals("no andor column?", new FieldTypeDropdown(), spec.getColumnType(3));
 	}
 	
 	public void testAndOrColumn() throws Exception
@@ -237,10 +244,10 @@ public class TestFancySearchHelper extends TestCaseEnhanced
 	public void testGetSearchTreeOneRow() throws Exception
 	{
 		GridFieldSpec spec = new GridFieldSpec();
-		spec.addColumn(FieldSpec.createStandardField("field", FieldSpec.TYPE_NORMAL));
-		spec.addColumn(FieldSpec.createStandardField("op", FieldSpec.TYPE_NORMAL));
-		spec.addColumn(FieldSpec.createStandardField("value", FieldSpec.TYPE_SEARCH_VALUE));
-		spec.addColumn(FieldSpec.createStandardField("andor", FieldSpec.TYPE_NORMAL));
+		spec.addColumn(FieldSpec.createStandardField("field", new FieldTypeNormal()));
+		spec.addColumn(FieldSpec.createStandardField("op", new FieldTypeNormal()));
+		spec.addColumn(FieldSpec.createStandardField("value", new FieldTypeSearchValue()));
+		spec.addColumn(FieldSpec.createStandardField("andor", new FieldTypeNormal()));
 		GridData data = new GridData(spec);
 		addRow(data, "field", "", "value", "or");
 		SearchTreeNode root = helper.getSearchTree(data);
@@ -250,10 +257,10 @@ public class TestFancySearchHelper extends TestCaseEnhanced
 	public void testGetSearchTreeTwoRows() throws Exception
 	{
 		GridFieldSpec spec = new GridFieldSpec();
-		spec.addColumn(FieldSpec.createStandardField("field", FieldSpec.TYPE_NORMAL));
-		spec.addColumn(FieldSpec.createStandardField("op", FieldSpec.TYPE_NORMAL));
-		spec.addColumn(FieldSpec.createStandardField("value", FieldSpec.TYPE_SEARCH_VALUE));
-		spec.addColumn(FieldSpec.createStandardField("andor", FieldSpec.TYPE_NORMAL));
+		spec.addColumn(FieldSpec.createStandardField("field", new FieldTypeNormal()));
+		spec.addColumn(FieldSpec.createStandardField("op", new FieldTypeNormal()));
+		spec.addColumn(FieldSpec.createStandardField("value", new FieldTypeSearchValue()));
+		spec.addColumn(FieldSpec.createStandardField("andor", new FieldTypeNormal()));
 		GridData data = new GridData(spec);
 		addRow(data, "a", "", "b", "or");
 		addRow(data, "c", "", "d", "or");
@@ -266,10 +273,10 @@ public class TestFancySearchHelper extends TestCaseEnhanced
 	public void testGetSearchTreeComplex() throws Exception
 	{
 		GridFieldSpec spec = new GridFieldSpec();
-		spec.addColumn(FieldSpec.createStandardField("field", FieldSpec.TYPE_NORMAL));
-		spec.addColumn(FieldSpec.createStandardField("op", FieldSpec.TYPE_NORMAL));
-		spec.addColumn(FieldSpec.createStandardField("value", FieldSpec.TYPE_SEARCH_VALUE));
-		spec.addColumn(FieldSpec.createStandardField("andor", FieldSpec.TYPE_NORMAL));
+		spec.addColumn(FieldSpec.createStandardField("field", new FieldTypeNormal()));
+		spec.addColumn(FieldSpec.createStandardField("op", new FieldTypeNormal()));
+		spec.addColumn(FieldSpec.createStandardField("value", new FieldTypeSearchValue()));
+		spec.addColumn(FieldSpec.createStandardField("andor", new FieldTypeNormal()));
 		GridData data = new GridData(spec);
 		addRow(data, "", "", "whiz", "or");
 		addRow(data, "a", "", "c1 and c2", "or");

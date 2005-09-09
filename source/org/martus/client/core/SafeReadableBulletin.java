@@ -28,6 +28,7 @@ package org.martus.client.core;
 
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.field.MartusField;
+import org.martus.common.fieldspec.FieldType;
 
 
 /*
@@ -63,7 +64,7 @@ public class SafeReadableBulletin
 		return realBulletin.contains(lookFor);
 	}
 	
-	public int getFieldType(String tag)
+	public FieldType getFieldType(String tag)
 	{
 		return realBulletin.getFieldType(tag);
 	}

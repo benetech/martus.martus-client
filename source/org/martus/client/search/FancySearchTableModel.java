@@ -36,6 +36,7 @@ import org.martus.clientside.UiLocalization;
 import org.martus.common.fieldspec.ChoiceItem;
 import org.martus.common.fieldspec.DropDownFieldSpec;
 import org.martus.common.fieldspec.FieldSpec;
+import org.martus.common.fieldspec.FieldType;
 import org.martus.common.fieldspec.GridFieldSpec;
 
 public class FancySearchTableModel extends GridTableModel implements TableModelListener
@@ -69,7 +70,7 @@ public class FancySearchTableModel extends GridTableModel implements TableModelL
 
 	private FieldSpec getCurrentValueColumnSpec(FieldSpec selectedFieldSpec)
 	{
-		if(selectedFieldSpec.getType() == FieldSpec.TYPE_LANGUAGE)
+		if(selectedFieldSpec.getType().isLanguage())
 			selectedFieldSpec = new DropDownFieldSpec(localization.getLanguageNameChoices());
 
 		return selectedFieldSpec;
@@ -100,41 +101,38 @@ public class FancySearchTableModel extends GridTableModel implements TableModelL
 		return opChoiceVector;
 	}
 	
-	public DropDownFieldSpec getCurrentOpColumnSpec(int selectedFieldType)
+	public DropDownFieldSpec getCurrentOpColumnSpec(FieldType selectedFieldType)
 	{
 		UiLocalization uiLocalization = localization;
 
 		return getCurrentOpColumnSpec(selectedFieldType, uiLocalization);
 	}
 
-	public static DropDownFieldSpec getCurrentOpColumnSpec(int selectedFieldType, UiLocalization localization)
+	public static DropDownFieldSpec getCurrentOpColumnSpec(FieldType selectedFieldType, UiLocalization localization)
 	{
 		Vector opChoiceVector = new Vector();
-		switch(selectedFieldType)
+		if(selectedFieldType.isString() || selectedFieldType.isMultiline())
 		{
-			case FieldSpec.TYPE_NORMAL:
-			case FieldSpec.TYPE_MULTILINE:
-				opChoiceVector.addAll(getContainsChoices(localization));
-				opChoiceVector.addAll(getExactChoices());
-				opChoiceVector.addAll(getCompareChoices());
-				break;
-			case FieldSpec.TYPE_DATE:
-				opChoiceVector.addAll(getExactChoices());
-				opChoiceVector.addAll(getCompareChoices());
-				break;
-			case FieldSpec.TYPE_LANGUAGE:
-			case FieldSpec.TYPE_BOOLEAN:
-			case FieldSpec.TYPE_DROPDOWN:
-				opChoiceVector.addAll(getExactChoices());
-				break;
-			case FieldSpec.TYPE_ANY_FIELD:
-				opChoiceVector.addAll(getContainsChoices(localization));
-				break;
-			case FieldSpec.TYPE_DATERANGE:
-			case FieldSpec.TYPE_MESSAGE:
-			case FieldSpec.TYPE_GRID:
-			default:
-				throw new RuntimeException("Don't know ops for type: " + selectedFieldType);
+			opChoiceVector.addAll(getContainsChoices(localization));
+			opChoiceVector.addAll(getExactChoices());
+			opChoiceVector.addAll(getCompareChoices());
+		}
+		else if(selectedFieldType.isDate())
+		{
+			opChoiceVector.addAll(getExactChoices());
+			opChoiceVector.addAll(getCompareChoices());
+		}
+		else if(selectedFieldType.isLanguage() || selectedFieldType.isBoolean() || selectedFieldType.isDropdown())
+		{
+			opChoiceVector.addAll(getExactChoices());
+		}
+		else if(selectedFieldType.isAnyField())
+		{
+			opChoiceVector.addAll(getContainsChoices(localization));
+		}
+		else
+		{
+			throw new RuntimeException("Don't know ops for type: " + selectedFieldType.getTypeName());
 		}
 		ChoiceItem[] opChoices = (ChoiceItem[])opChoiceVector.toArray(new ChoiceItem[0]); 
 		DropDownFieldSpec opSpec = new DropDownFieldSpec();

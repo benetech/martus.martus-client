@@ -54,6 +54,7 @@ import org.martus.common.database.Database;
 import org.martus.common.database.DatabaseKey;
 import org.martus.common.database.MockDatabase;
 import org.martus.common.fieldspec.FieldSpec;
+import org.martus.common.fieldspec.FieldTypeNormal;
 import org.martus.common.fieldspec.StandardFieldSpecs;
 import org.martus.common.packet.BulletinHeaderPacket;
 import org.martus.common.packet.BulletinHistory;
@@ -94,16 +95,16 @@ public class TestClientBulletinStore extends TestCaseEnhanced
     	
     	if(customPublicSpecs == null)
     	{
-    		FieldSpec title = new FieldSpec(FieldSpec.TYPE_NORMAL);
+    		FieldSpec title = new FieldSpec(new FieldTypeNormal());
     		title.setTag(Bulletin.TAGTITLE);
     		
     		customPublicSpecs = new FieldSpec[] {title};
     	}
     	if(customPrivateSpecs == null)
     	{
-    		FieldSpec keyword = new FieldSpec(FieldSpec.TYPE_NORMAL);
+    		FieldSpec keyword = new FieldSpec(new FieldTypeNormal());
     		keyword.setTag(Bulletin.TAGKEYWORDS);
-    		FieldSpec author = new FieldSpec(FieldSpec.TYPE_NORMAL);
+    		FieldSpec author = new FieldSpec(new FieldTypeNormal());
     		author.setTag(Bulletin.TAGAUTHOR);
     		
     		customPrivateSpecs = new FieldSpec[] {keyword, author};

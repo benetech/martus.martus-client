@@ -33,6 +33,7 @@ import org.martus.client.core.CustomFieldTemplate;
 import org.martus.common.FieldCollection;
 import org.martus.common.crypto.MockMartusSecurity;
 import org.martus.common.fieldspec.FieldSpec;
+import org.martus.common.fieldspec.FieldTypeNormal;
 import org.martus.common.fieldspec.StandardFieldSpecs;
 import org.martus.util.TestCaseEnhanced;
 import org.martus.util.UnicodeWriter;
@@ -66,7 +67,7 @@ public class TestCustomFieldTemplate extends TestCaseEnhanced
 		assertTrue("not valid?", template.isvalidTemplateXml(fields.toString()));
 		assertEquals(0, template.getErrors().size());
 		
-		FieldSpec invalidField = FieldSpec.createCustomField("myTag", "", FieldSpec.TYPE_NORMAL);
+		FieldSpec invalidField = FieldSpec.createCustomField("myTag", "", new FieldTypeNormal());
 		fields.add(invalidField);
 		assertFalse("Should not be a valid template", template.isvalidTemplateXml(fields.toString()));
 		assertEquals(1, template.getErrors().size());
@@ -84,7 +85,7 @@ public class TestCustomFieldTemplate extends TestCaseEnhanced
 		assertTrue(exportFile.exists());
 		exportFile.delete();
 
-		FieldSpec invalidField = FieldSpec.createCustomField("myTag", "", FieldSpec.TYPE_NORMAL);
+		FieldSpec invalidField = FieldSpec.createCustomField("myTag", "", new FieldTypeNormal());
 		fields.add(invalidField);
 		assertFalse(exportFile.exists());
 		assertFalse(template.ExportTemplate(security, exportFile, fields.toString()));

@@ -29,6 +29,8 @@ import java.util.Vector;
 
 import org.martus.common.fieldspec.CustomDropDownFieldSpec;
 import org.martus.common.fieldspec.FieldSpec;
+import org.martus.common.fieldspec.FieldTypeDropdown;
+import org.martus.common.fieldspec.FieldTypeNormal;
 import org.martus.common.fieldspec.GridFieldSpec;
 import org.martus.util.TestCaseEnhanced;
 
@@ -44,7 +46,7 @@ public class TestGridTableModel extends TestCaseEnhanced
 	{
 		GridFieldSpec gridSpec = new GridFieldSpec();
 		String label1 = "column 1";
-		FieldSpec column1 = new FieldSpec(label1, FieldSpec.TYPE_NORMAL);
+		FieldSpec column1 = new FieldSpec(label1, new FieldTypeNormal());
 
 		String label2 = "column 2";
 		CustomDropDownFieldSpec column2 = new CustomDropDownFieldSpec();
@@ -62,14 +64,14 @@ public class TestGridTableModel extends TestCaseEnhanced
 		int columnsIncludingRowCount = 3;
 		assertEquals(columnsIncludingRowCount, model.getColumnCount());
 		assertEquals(" ", model.getColumnName(0));
-		assertEquals(FieldSpec.TYPE_NORMAL, model.getColumnType(0));
-		assertEquals(FieldSpec.TYPE_NORMAL, model.getCellType(0, 0));
+		assertEquals(new FieldTypeNormal(), model.getColumnType(0));
+		assertEquals(new FieldTypeNormal(), model.getCellType(0, 0));
 		assertEquals(label1, model.getColumnName(1));
-		assertEquals(FieldSpec.TYPE_NORMAL, model.getColumnType(1));
-		assertEquals(FieldSpec.TYPE_NORMAL, model.getCellType(0, 1));
+		assertEquals(new FieldTypeNormal(), model.getColumnType(1));
+		assertEquals(new FieldTypeNormal(), model.getCellType(0, 1));
 		assertEquals(label2, model.getColumnName(2));
-		assertEquals(FieldSpec.TYPE_DROPDOWN, model.getColumnType(2));
-		assertEquals(FieldSpec.TYPE_DROPDOWN, model.getCellType(0, 2));
+		assertEquals(new FieldTypeDropdown(), model.getColumnType(2));
+		assertEquals(new FieldTypeDropdown(), model.getCellType(0, 2));
 
 		CustomDropDownFieldSpec dropDownFieldSpec = ((CustomDropDownFieldSpec)(model.getFieldSpecForColumn(2)));
 		assertEquals("", dropDownFieldSpec.getValue(0));

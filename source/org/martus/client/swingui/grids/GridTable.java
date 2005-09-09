@@ -32,13 +32,24 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Vector;
+
 import javax.swing.JComponent;
 import javax.swing.table.TableCellEditor;
 import javax.swing.table.TableCellRenderer;
+
 import org.martus.client.swingui.dialogs.UiDialogLauncher;
 import org.martus.clientside.UiLocalization;
 import org.martus.common.fieldspec.DropDownFieldSpec;
 import org.martus.common.fieldspec.FieldSpec;
+import org.martus.common.fieldspec.FieldType;
+import org.martus.common.fieldspec.FieldTypeAnyField;
+import org.martus.common.fieldspec.FieldTypeBoolean;
+import org.martus.common.fieldspec.FieldTypeDate;
+import org.martus.common.fieldspec.FieldTypeDateRange;
+import org.martus.common.fieldspec.FieldTypeDropdown;
+import org.martus.common.fieldspec.FieldTypeLanguage;
+import org.martus.common.fieldspec.FieldTypeMultiline;
+import org.martus.common.fieldspec.FieldTypeNormal;
 import org.martus.swing.UiTableWithCellEditingProtection;
 import org.martus.util.language.LanguageOptions;
 
@@ -67,11 +78,11 @@ public class GridTable extends UiTableWithCellEditingProtection
 		setMaxColumnWidthToHeaderWidth(0);
 		for(int i = 1 ; i < model.getColumnCount(); ++i)
 		{
-			if(model.getColumnType(i)== FieldSpec.TYPE_DROPDOWN)
+			if(model.getColumnType(i).isDropdown())
 				setColumnMaxWidth(i, getDropDownColumnWidth(i, (DropDownFieldSpec)model.getFieldSpecForColumn(i)));
-			else if(model.getColumnType(i)== FieldSpec.TYPE_DATE)
+			else if(model.getColumnType(i).isDate())
 				setColumnMaxWidth(i, getDateColumnWidth(i));
-			else if(model.getColumnType(i)== FieldSpec.TYPE_DATERANGE)
+			else if(model.getColumnType(i).isDateRange())
 				setColumnMaxWidth(i, getDateRangeColumnWidth(i));
 			else
 				setColumnWidthToHeaderWidth(i);
@@ -81,7 +92,7 @@ public class GridTable extends UiTableWithCellEditingProtection
 
 	public int getDateColumnWidth(int column)
 	{
-		GridCellEditorAndRenderer gridDateCellEditor = ((GridCellEditorAndRenderer)getEditorOrRendererForType(editors, new Integer(FieldSpec.TYPE_DATE)));
+		GridCellEditorAndRenderer gridDateCellEditor = ((GridCellEditorAndRenderer)getEditorOrRendererForType(editors, new FieldTypeDate()));
 		int width = gridDateCellEditor.getMinimumCellWidth();
 		
 		int columnHeaderWidth = getColumnHeaderWidth(column);
@@ -92,7 +103,7 @@ public class GridTable extends UiTableWithCellEditingProtection
 	
 	private int getDateRangeColumnWidth(int column)
 	{
-		GridCellEditorAndRenderer gridDateRangeCellEditor = ((GridCellEditorAndRenderer)getEditorOrRendererForType(editors, new Integer(FieldSpec.TYPE_DATERANGE)));
+		GridCellEditorAndRenderer gridDateRangeCellEditor = ((GridCellEditorAndRenderer)getEditorOrRendererForType(editors, new FieldTypeDateRange()));
 		int width = gridDateRangeCellEditor.getMinimumCellWidth();
 		int columnHeaderWidth = getColumnHeaderWidth(column);
 		if(width < columnHeaderWidth)
@@ -137,14 +148,14 @@ public class GridTable extends UiTableWithCellEditingProtection
 	{
 		HashMap map = new HashMap();
 		UiLocalization localization = dlgLauncher.GetLocalization();
-		map.put(new Integer(FieldSpec.TYPE_BOOLEAN), new GridBooleanCellEditor());
-		map.put(new Integer(FieldSpec.TYPE_DATE), new GridDateCellEditor(localization));
-		map.put(new Integer(FieldSpec.TYPE_DATERANGE), new GridDateRangeCellEditor(dlgLauncher));
-		map.put(new Integer(FieldSpec.TYPE_DROPDOWN), new GridDropDownCellEditor());
-		map.put(new Integer(FieldSpec.TYPE_LANGUAGE), new GridDropDownCellEditor());
-		map.put(new Integer(FieldSpec.TYPE_NORMAL), new GridNormalCellEditor(localization));
-		map.put(new Integer(FieldSpec.TYPE_MULTILINE), new GridNormalCellEditor(localization));
-		map.put(new Integer(FieldSpec.TYPE_ANY_FIELD), new GridNormalCellEditor(localization));
+		map.put(new FieldTypeBoolean(), new GridBooleanCellEditor());
+		map.put(new FieldTypeDate(), new GridDateCellEditor(localization));
+		map.put(new FieldTypeDateRange(), new GridDateRangeCellEditor(dlgLauncher));
+		map.put(new FieldTypeDropdown(), new GridDropDownCellEditor());
+		map.put(new FieldTypeLanguage(), new GridDropDownCellEditor());
+		map.put(new FieldTypeNormal(), new GridNormalCellEditor(localization));
+		map.put(new FieldTypeMultiline(), new GridNormalCellEditor(localization));
+		map.put(new FieldTypeAnyField(), new GridNormalCellEditor(localization));
 		return map;
 	}
 	
@@ -152,14 +163,14 @@ public class GridTable extends UiTableWithCellEditingProtection
 	{
 		HashMap map = new HashMap();
 		UiLocalization localization = dlgLauncher.GetLocalization();
-		map.put(new Integer(FieldSpec.TYPE_BOOLEAN), new GridBooleanCellViewer(localization));
-		map.put(new Integer(FieldSpec.TYPE_DATE), new GridDateCellViewer(localization));
-		map.put(new Integer(FieldSpec.TYPE_DATERANGE), new GridDateRangeCellViewer(localization));
-		map.put(new Integer(FieldSpec.TYPE_DROPDOWN), new GridDropDownCellViewer());
-		map.put(new Integer(FieldSpec.TYPE_LANGUAGE), new GridDropDownCellViewer());
-		map.put(new Integer(FieldSpec.TYPE_NORMAL), new GridNormalCellEditor(localization));
-		map.put(new Integer(FieldSpec.TYPE_MULTILINE), new GridNormalCellEditor(localization));
-		map.put(new Integer(FieldSpec.TYPE_ANY_FIELD), new GridNormalCellEditor(localization));
+		map.put(new FieldTypeBoolean(), new GridBooleanCellViewer(localization));
+		map.put(new FieldTypeDate(), new GridDateCellViewer(localization));
+		map.put(new FieldTypeDateRange(), new GridDateRangeCellViewer(localization));
+		map.put(new FieldTypeDropdown(), new GridDropDownCellViewer());
+		map.put(new FieldTypeLanguage(), new GridDropDownCellViewer());
+		map.put(new FieldTypeNormal(), new GridNormalCellEditor(localization));
+		map.put(new FieldTypeMultiline(), new GridNormalCellEditor(localization));
+		map.put(new FieldTypeAnyField(), new GridNormalCellEditor(localization));
 		return map;
 	}
 
@@ -194,18 +205,17 @@ public class GridTable extends UiTableWithCellEditingProtection
 	private Object getCellEditorOrRenderer(HashMap map, int row, int column)
 	{
 		GridTableModel model = (GridTableModel)getModel();
-		Integer type = new Integer(model.getCellType(row, column));
-		return getEditorOrRendererForType(map, type);
+		return getEditorOrRendererForType(map, model.getCellType(row, column));
 	}
 
-	private TableCellEditor getEditorOrRendererForType(HashMap map, Integer type)
+	private TableCellEditor getEditorOrRendererForType(HashMap map, FieldType type)
 	{
 		TableCellEditor editor = (TableCellEditor)map.get(type);
 		if(editor != null)
 			return editor;
 
 		System.out.println("GridTable.getCellEditorOrRenderer Unexpected type: " + type);
-		return (TableCellEditor)map.get(new Integer(FieldSpec.TYPE_NORMAL));
+		return (TableCellEditor)map.get(new FieldTypeNormal());
 	}
 
 	UiDialogLauncher dlgLauncher;

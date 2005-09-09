@@ -36,6 +36,7 @@ import org.martus.common.bulletin.BulletinConstants;
 import org.martus.common.fieldspec.ChoiceItem;
 import org.martus.common.fieldspec.DropDownFieldSpec;
 import org.martus.common.fieldspec.FieldSpec;
+import org.martus.common.fieldspec.FieldTypeNormal;
 import org.martus.common.fieldspec.GridFieldSpec;
 import org.martus.common.fieldspec.StandardFieldSpecs;
 import org.martus.util.TestCaseEnhanced;
@@ -74,7 +75,7 @@ public class TestCustomFieldSpecValidator extends TestCaseEnhanced
 		for(int i=0; i < variousIllegalTags.length; ++i)
 		{
 			String thisTag = variousIllegalTags[i];
-			FieldSpec thisSpec = FieldSpec.createCustomField(thisTag, label, FieldSpec.TYPE_NORMAL);
+			FieldSpec thisSpec = FieldSpec.createCustomField(thisTag, label, new FieldTypeNormal());
 			specs = addFieldSpec(specs, thisSpec);
 		}
 		CustomFieldSpecValidator checker = new CustomFieldSpecValidator(specs);
@@ -124,7 +125,7 @@ public class TestCustomFieldSpecValidator extends TestCaseEnhanced
 		assertEquals("Should have 1 error", 1, errors.size());
 		assertEquals("Incorrect Error code Missing Tags", CustomFieldError.CODE_MISSING_TAG, ((CustomFieldError)errors.get(0)).getCode());
 		assertEquals("Incorrect label for Missing Tags", label, ((CustomFieldError)errors.get(0)).getLabel());
-		assertEquals("Incorrect type for Missing Tags", FieldSpec.getTypeString(FieldSpec.TYPE_NORMAL), ((CustomFieldError)errors.get(0)).getType());
+		assertEquals("Incorrect type for Missing Tags", FieldSpec.getTypeString(new FieldTypeNormal()), ((CustomFieldError)errors.get(0)).getType());
 	}
 
 	public void testDuplicateTags() throws Exception

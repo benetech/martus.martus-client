@@ -41,6 +41,7 @@ import org.martus.client.swingui.fields.UiField;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.crypto.MartusCrypto;
 import org.martus.common.fieldspec.FieldSpec;
+import org.martus.common.fieldspec.FieldTypeBoolean;
 import org.martus.common.packet.FieldDataPacket;
 import org.martus.swing.ParagraphLayout;
 import org.martus.swing.UiLabel;
@@ -101,7 +102,7 @@ abstract public class UiBulletinComponent extends JPanel implements Scrollable, 
 	
 	private void createAllPrivateField(UiBulletinComponentDataSection target)
 	{
-		FieldSpec allPrivateFieldSpec = FieldSpec.createStandardField("allprivate", FieldSpec.TYPE_BOOLEAN);
+		FieldSpec allPrivateFieldSpec = FieldSpec.createStandardField("allprivate", new FieldTypeBoolean());
 		allPrivateField = target.createAndAddLabelAndField(allPrivateFieldSpec);
 		allPrivateField.setListener(this);
 	}

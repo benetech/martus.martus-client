@@ -38,6 +38,12 @@ import org.martus.common.bulletinstore.BulletinStore;
 import org.martus.common.crypto.MockMartusSecurity;
 import org.martus.common.database.DatabaseKey;
 import org.martus.common.fieldspec.FieldSpec;
+import org.martus.common.fieldspec.FieldTypeBoolean;
+import org.martus.common.fieldspec.FieldTypeDate;
+import org.martus.common.fieldspec.FieldTypeDateRange;
+import org.martus.common.fieldspec.FieldTypeLanguage;
+import org.martus.common.fieldspec.FieldTypeMultiline;
+import org.martus.common.fieldspec.FieldTypeNormal;
 import org.martus.util.TestCaseEnhanced;
 
 
@@ -108,12 +114,12 @@ public class TestReportRunner extends TestCaseEnhanced
 	{
 		FieldSpec[] specs = new FieldSpec[] 
 		{
-			FieldSpec.createStandardField("date", FieldSpec.TYPE_DATE),
-			FieldSpec.createStandardField("text", FieldSpec.TYPE_NORMAL),
-			FieldSpec.createStandardField("multi", FieldSpec.TYPE_MULTILINE),
-			FieldSpec.createStandardField("range", FieldSpec.TYPE_DATERANGE),
-			FieldSpec.createStandardField("bool", FieldSpec.TYPE_BOOLEAN),
-			FieldSpec.createStandardField("language", FieldSpec.TYPE_LANGUAGE),
+			FieldSpec.createStandardField("date", new FieldTypeDate()),
+			FieldSpec.createStandardField("text", new FieldTypeNormal()),
+			FieldSpec.createStandardField("multi", new FieldTypeMultiline()),
+			FieldSpec.createStandardField("range", new FieldTypeDateRange()),
+			FieldSpec.createStandardField("bool", new FieldTypeBoolean()),
+			FieldSpec.createStandardField("language", new FieldTypeLanguage()),
 			LegacyCustomFields.createFromLegacy("custom,Custom <label>"),
 		};
 		

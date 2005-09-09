@@ -40,6 +40,8 @@ import org.martus.common.crypto.MartusCrypto;
 import org.martus.common.crypto.MockMartusSecurity;
 import org.martus.common.database.MockClientDatabase;
 import org.martus.common.fieldspec.FieldSpec;
+import org.martus.common.fieldspec.FieldTypeDateRange;
+import org.martus.common.fieldspec.FieldTypeMultiline;
 import org.martus.util.TestCaseEnhanced;
 
 public class TestKnownFieldSpecCache extends TestCaseEnhanced
@@ -159,8 +161,8 @@ public class TestKnownFieldSpecCache extends TestCaseEnhanced
 			"author", "organization", "location",
 			"summary", "keywords", "publicinfo", "privateinfo",
 		};
-	FieldSpec[] publicSpecs = {FieldSpec.createCustomField("frodo", "Younger Baggins", FieldSpec.TYPE_MULTILINE),}; 
-	FieldSpec[] privateSpecs = {FieldSpec.createCustomField("bilbo", "Older Baggins", FieldSpec.TYPE_DATERANGE),};
+	FieldSpec[] publicSpecs = {FieldSpec.createCustomField("frodo", "Younger Baggins", new FieldTypeMultiline()),}; 
+	FieldSpec[] privateSpecs = {FieldSpec.createCustomField("bilbo", "Older Baggins", new FieldTypeDateRange()),};
 	
 	MockMartusSecurity security;
 	MockMartusApp app;

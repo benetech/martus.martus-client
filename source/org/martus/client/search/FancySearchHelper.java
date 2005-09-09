@@ -38,6 +38,11 @@ import org.martus.common.field.MartusDateRangeField;
 import org.martus.common.fieldspec.ChoiceItem;
 import org.martus.common.fieldspec.DropDownFieldSpec;
 import org.martus.common.fieldspec.FieldSpec;
+import org.martus.common.fieldspec.FieldType;
+import org.martus.common.fieldspec.FieldTypeAnyField;
+import org.martus.common.fieldspec.FieldTypeDate;
+import org.martus.common.fieldspec.FieldTypeNormal;
+import org.martus.common.fieldspec.FieldTypeSearchValue;
 import org.martus.common.fieldspec.GridFieldSpec;
 import org.martus.common.fieldspec.StandardFieldSpecs;
 import org.martus.common.fieldspec.GridFieldSpec.UnsupportedFieldTypeException;
@@ -88,7 +93,7 @@ public class FancySearchHelper
 	{
 		String tag = "";
 		String label = getLocalization().getFieldLabel("SearchAnyField");
-		int type = FieldSpec.TYPE_ANY_FIELD;
+		FieldType type = new FieldTypeAnyField();
 		return createChoice(tag, label, type);
 	}
 
@@ -96,11 +101,11 @@ public class FancySearchHelper
 	{
 		String tag = Bulletin.PSEUDOFIELD_LAST_SAVED_DATE;
 		String label = getLocalization().getFieldLabel(Bulletin.TAGLASTSAVED);
-		int type = FieldSpec.TYPE_DATE;
+		FieldType type = new FieldTypeDate();
 		return createChoice(tag, label, type);
 	}
 
-	private ChoiceItem createChoice(String tag, String label, int type)
+	private ChoiceItem createChoice(String tag, String label, FieldType type)
 	{
 		FieldSpec spec = FieldSpec.createCustomField(tag, label, type);
 		return new ChoiceItem(spec);
@@ -121,18 +126,18 @@ public class FancySearchHelper
 	public Vector getChoiceItemsForThisField(FieldSpec spec)
 	{
 		Vector choicesForThisField = new Vector();
-		final int thisType = spec.getType();
+		final FieldType thisType = spec.getType();
 		final String tag = spec.getTag();
 		String displayString = spec.getLabel();
 		if(StandardFieldSpecs.isStandardFieldTag(tag))
 			displayString = getLocalization().getFieldLabel(tag);
 
 		// unknown types (Lewis had one) should not appear in the list at all
-		if(thisType == FieldSpec.TYPE_UNKNOWN)
+		if(thisType.isUnknown())
 			return choicesForThisField;
 
 		// dateranges create multiple entries
-		if(thisType == FieldSpec.TYPE_DATERANGE)
+		if(thisType.isDateRange())
 		{
 			choicesForThisField.addAll(getDateRangeChoiceItem(tag, MartusDateRangeField.SUBFIELD_BEGIN, displayString));
 			choicesForThisField.addAll(getDateRangeChoiceItem(tag, MartusDateRangeField.SUBFIELD_END, displayString));
@@ -140,7 +145,7 @@ public class FancySearchHelper
 		}
 		
 		// dropdowns MUST be a DropDownFieldSpec, not a plain FieldSpec
-		if(thisType == FieldSpec.TYPE_DROPDOWN)
+		if(thisType.isDropdown())
 		{
 			choicesForThisField.add(new ChoiceItem(spec));
 			return choicesForThisField;
@@ -153,7 +158,7 @@ public class FancySearchHelper
 
 		// many types just create a choice with their own type,
 		// but we need to default to NORMAL for safety
-		int choiceSpecType = FieldSpec.TYPE_NORMAL;
+		FieldType choiceSpecType = new FieldTypeNormal();
 		if(shouldSearchSpecTypeBeTheFieldSpecType(thisType))
 			choiceSpecType = thisType;
 
@@ -163,11 +168,9 @@ public class FancySearchHelper
 		return choicesForThisField;
 	}
 
-	private boolean shouldSearchSpecTypeBeTheFieldSpecType(final int thisType)
+	private boolean shouldSearchSpecTypeBeTheFieldSpecType(final FieldType thisType)
 	{
-		return thisType == FieldSpec.TYPE_DATE || 
-				thisType == FieldSpec.TYPE_LANGUAGE ||
-				thisType == FieldSpec.TYPE_BOOLEAN;
+		return (thisType.isDate() || thisType.isLanguage() || thisType.isBoolean()); 
 	}
 	
 	private Vector getDateRangeChoiceItem(String tag, String subfield, String baseDisplayString) 
@@ -178,7 +181,7 @@ public class FancySearchHelper
 		try
 		{
 			String fullDisplayString = TokenReplacement.replaceToken(displayTemplate, "#FieldLabel#", baseDisplayString);
-			FieldSpec dateSpec = FieldSpec.createCustomField(fullTag, fullDisplayString, FieldSpec.TYPE_DATE);
+			FieldSpec dateSpec = FieldSpec.createCustomField(fullTag, fullDisplayString, new FieldTypeDate());
 			itemIfAny.add(new ChoiceItem(dateSpec));
 		}
 		catch (TokenInvalidException e)
@@ -198,11 +201,11 @@ public class FancySearchHelper
 		{
 			spec.addColumn(createFieldColumnSpec(storeToUse));
 			
-			spec.addColumn(FancySearchTableModel.getCurrentOpColumnSpec(FieldSpec.TYPE_ANY_FIELD, getLocalization()));
+			spec.addColumn(FancySearchTableModel.getCurrentOpColumnSpec(new FieldTypeAnyField(), getLocalization()));
 			
 			String valueColumnTag = "value";
 			String valueColumnHeader = getLocalization().getFieldLabel("SearchGridHeaderValue");
-			spec.addColumn(FieldSpec.createCustomField(valueColumnTag, valueColumnHeader, FieldSpec.TYPE_SEARCH_VALUE));
+			spec.addColumn(FieldSpec.createCustomField(valueColumnTag, valueColumnHeader, new FieldTypeSearchValue()));
 			spec.addColumn(createAndOrColumnSpec());
 		}
 		catch (UnsupportedFieldTypeException e)

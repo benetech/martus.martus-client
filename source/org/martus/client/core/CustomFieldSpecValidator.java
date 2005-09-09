@@ -32,6 +32,7 @@ import java.util.Vector;
 import org.martus.common.bulletin.BulletinConstants;
 import org.martus.common.fieldspec.DropDownFieldSpec;
 import org.martus.common.fieldspec.FieldSpec;
+import org.martus.common.fieldspec.FieldTypeUnknown;
 import org.martus.common.fieldspec.GridFieldSpec;
 import org.martus.common.fieldspec.StandardFieldSpecs;
 
@@ -158,7 +159,7 @@ public class CustomFieldSpecValidator
 		for (int i = 0; i < specsToCheck.length; i++)
 		{
 			FieldSpec thisSpec = specsToCheck[i];
-			if(thisSpec.getType() == FieldSpec.TYPE_DROPDOWN)
+			if(thisSpec.getType().isDropdown())
 			{
 				DropDownFieldSpec dropdownSpec = (DropDownFieldSpec)thisSpec;
 				String tag = thisSpec.getTag();
@@ -174,13 +175,13 @@ public class CustomFieldSpecValidator
 		for (int i = 0; i < specsToCheck.length; i++)
 		{
 			FieldSpec thisSpec = specsToCheck[i];
-			if(thisSpec.getType() == FieldSpec.TYPE_GRID)
+			if(thisSpec.getType().isGrid())
 			{
 				GridFieldSpec gridSpec = (GridFieldSpec)thisSpec;
 				for(int columns = 0; columns < gridSpec.getColumnCount(); ++columns)
 				{
 					FieldSpec columnSpec = gridSpec.getFieldSpec(columns);
-					if(columnSpec.getType() == FieldSpec.TYPE_DROPDOWN)
+					if(columnSpec.getType().isDropdown())
 					{
 						checkForDuplicateEntriesInDropDownSpec((DropDownFieldSpec)columnSpec, gridSpec.getTag(), gridSpec.getLabel());
 						checkForNoDropdownChoices((DropDownFieldSpec)columnSpec, gridSpec.getTag(), gridSpec.getLabel());
@@ -224,7 +225,7 @@ public class CustomFieldSpecValidator
 		for (int i = 0; i < specsToCheck.length; i++)
 		{
 			FieldSpec thisSpec = specsToCheck[i]; 
-			if(thisSpec.getType() == FieldSpec.TYPE_UNKNOWN)
+			if(thisSpec.getType().isUnknown())
 				errors.add(CustomFieldError.errorUnknownType(thisSpec.getTag(), thisSpec.getLabel()));				
 		}
 	}
