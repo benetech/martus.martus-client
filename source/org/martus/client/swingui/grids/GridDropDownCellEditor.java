@@ -30,6 +30,7 @@ import java.awt.Component;
 import java.awt.event.ActionListener;
 import javax.swing.JTable;
 import org.martus.client.swingui.fields.UiChoiceEditor;
+import org.martus.client.swingui.fields.UiField;
 import org.martus.common.fieldspec.DropDownFieldSpec;
 import org.martus.swing.UiComboBox;
 
@@ -40,6 +41,11 @@ public class GridDropDownCellEditor extends GridCellEditorAndRenderer
 		super(new UiChoiceEditor(null));
 	}
 	
+	GridDropDownCellEditor(UiField field)
+	{
+		super(field);
+	}
+
 	public void spaceWasPressed()
 	{
         UiComboBox comboBox = (UiComboBox)getComponent();
@@ -64,7 +70,7 @@ public class GridDropDownCellEditor extends GridCellEditorAndRenderer
 		(getChoiceEditor()).addActionListener(listener);
 	}
 	
-	private void setFieldSpec(JTable tableToUse, int row, int column)
+	void setFieldSpec(JTable tableToUse, int row, int column)
 	{
 		GridTable gridTable = (GridTable)tableToUse;
 		DropDownFieldSpec spec = (DropDownFieldSpec)gridTable.getFieldSpecForCell(row, column);

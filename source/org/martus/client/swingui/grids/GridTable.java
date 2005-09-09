@@ -155,8 +155,8 @@ public class GridTable extends UiTableWithCellEditingProtection
 		map.put(new Integer(FieldSpec.TYPE_BOOLEAN), new GridBooleanCellViewer(localization));
 		map.put(new Integer(FieldSpec.TYPE_DATE), new GridDateCellViewer(localization));
 		map.put(new Integer(FieldSpec.TYPE_DATERANGE), new GridDateRangeCellViewer(localization));
-		map.put(new Integer(FieldSpec.TYPE_DROPDOWN), new GridDropDownCellEditor());
-		map.put(new Integer(FieldSpec.TYPE_LANGUAGE), new GridDropDownCellEditor());
+		map.put(new Integer(FieldSpec.TYPE_DROPDOWN), new GridDropDownCellViewer());
+		map.put(new Integer(FieldSpec.TYPE_LANGUAGE), new GridDropDownCellViewer());
 		map.put(new Integer(FieldSpec.TYPE_NORMAL), new GridNormalCellEditor(localization));
 		map.put(new Integer(FieldSpec.TYPE_MULTILINE), new GridNormalCellEditor(localization));
 		map.put(new Integer(FieldSpec.TYPE_ANY_FIELD), new GridNormalCellEditor(localization));
