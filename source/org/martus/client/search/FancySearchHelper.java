@@ -121,35 +121,53 @@ public class FancySearchHelper
 	public Vector getChoiceItemsForThisField(FieldSpec spec)
 	{
 		Vector choicesForThisField = new Vector();
-		String tag = spec.getTag();
+		final int thisType = spec.getType();
+		final String tag = spec.getTag();
 		String displayString = spec.getLabel();
 		if(StandardFieldSpecs.isStandardFieldTag(tag))
 			displayString = getLocalization().getFieldLabel(tag);
-		if(spec.getType() == FieldSpec.TYPE_DATERANGE)
+
+		// unknown types (Lewis had one) should not appear in the list at all
+		if(thisType == FieldSpec.TYPE_UNKNOWN)
+			return choicesForThisField;
+
+		// dateranges create multiple entries
+		if(thisType == FieldSpec.TYPE_DATERANGE)
 		{
 			choicesForThisField.addAll(getDateRangeChoiceItem(tag, MartusDateRangeField.SUBFIELD_BEGIN, displayString));
 			choicesForThisField.addAll(getDateRangeChoiceItem(tag, MartusDateRangeField.SUBFIELD_END, displayString));
+			return choicesForThisField;
 		}
-		else if(spec.getType() == FieldSpec.TYPE_GRID)
-		{
-			// currently grids are not specifically searchable
-			// TODO: add one choice per column (call this method recursively)
-		}
-		else if(spec.getType() == FieldSpec.TYPE_DROPDOWN)
+		
+		// dropdowns MUST be a DropDownFieldSpec, not a plain FieldSpec
+		if(thisType == FieldSpec.TYPE_DROPDOWN)
 		{
 			choicesForThisField.add(new ChoiceItem(spec));
+			return choicesForThisField;
 		}
-		else if(spec.getType() == FieldSpec.TYPE_UNKNOWN)
-		{
-			// unknown types (Lewis had one) should not appear in the list at all
-		}
-		else
-		{
-			FieldSpec thisSpec = FieldSpec.createCustomField(tag, displayString, spec.getType());
-			ChoiceItem choiceItem = new ChoiceItem(thisSpec);
-			choicesForThisField.add(choiceItem);
-		}
+
+		// TODO: add one choice per column (call this method recursively)
+		//if(spec.getType() == FieldSpec.TYPE_GRID)
+		//{
+		//}
+
+		// many types just create a choice with their own type,
+		// but we need to default to NORMAL for safety
+		int choiceSpecType = FieldSpec.TYPE_NORMAL;
+		if(shouldSearchSpecTypeBeTheFieldSpecType(thisType))
+			choiceSpecType = thisType;
+
+		FieldSpec thisSpec = FieldSpec.createCustomField(tag, displayString, choiceSpecType);
+		ChoiceItem choiceItem = new ChoiceItem(thisSpec);
+		choicesForThisField.add(choiceItem);
 		return choicesForThisField;
+	}
+
+	private boolean shouldSearchSpecTypeBeTheFieldSpecType(final int thisType)
+	{
+		return thisType == FieldSpec.TYPE_DATE || 
+				thisType == FieldSpec.TYPE_LANGUAGE ||
+				thisType == FieldSpec.TYPE_BOOLEAN;
 	}
 	
 	private Vector getDateRangeChoiceItem(String tag, String subfield, String baseDisplayString) 

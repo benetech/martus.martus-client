@@ -32,6 +32,7 @@ import java.util.Vector;
 import org.martus.client.bulletinstore.ClientBulletinStore;
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.dialogs.UiDialogLauncher;
+import org.martus.client.test.MockBulletinStore;
 import org.martus.client.test.MockMartusApp;
 import org.martus.common.EnglishCommonStrings;
 import org.martus.common.GridData;
@@ -87,6 +88,21 @@ public class TestFancySearchHelper extends TestCaseEnhanced
 		assertFalse("has raw eventdate?", spec.findCode(BulletinConstants.TAGEVENTDATE) >= 0);
 	}
 	
+	public void testAllFieldTypesSearchable() throws Exception
+	{
+		FieldSpec message = createSampleMessageSpec();
+
+		final String value = "value";
+		ClientBulletinStore store = new MockBulletinStore();
+		Bulletin b = new Bulletin(store.getSignatureGenerator(), new FieldSpec[] {message}, new FieldSpec[0]);
+		b.set(message.getTag(), value);
+		store.saveBulletinForTesting(b);
+		
+		DropDownFieldSpec spec = helper.createFieldColumnSpec(store);
+		assertTrue("no message-type field?", spec.findCode(message.getTag()) >= 0);
+		assertEquals("wrong label?", message.getLabel(), spec.getDisplayString(message.getTag()));
+	}
+
 	public void testGetChoiceItemsForThisField() throws Exception
 	{
 		FieldSpec normal = StandardFieldSpecs.findStandardFieldSpec(BulletinConstants.TAGAUTHOR);
@@ -98,8 +114,11 @@ public class TestFancySearchHelper extends TestCaseEnhanced
 		assertEquals("not two choices for date range?", 2, dateRangeChoices.size());
 		
 		FieldSpec gridSpec = createSampleGridSpec();
-		Vector gridChoices = helper.getChoiceItemsForThisField(gridSpec);
-		assertEquals("not zero choices for a grid?", 0, gridChoices.size());
+		Vector gridTypeChoices = helper.getChoiceItemsForThisField(gridSpec);
+		assertEquals("not one choice for a grid?", 1, gridTypeChoices.size());
+		ChoiceItem gridChoice = (ChoiceItem)gridTypeChoices.get(0);
+		FieldSpec gridChoiceSpec = gridChoice.getSpec();
+		assertEquals("grid doesn't have string search?", FieldSpec.TYPE_NORMAL, gridChoiceSpec.getType());
 		
 		DropDownFieldSpec dropDownSpec = createSampleDropDownSpec("dropdown");
 		Vector dropDownChoices = helper.getChoiceItemsForThisField(dropDownSpec);
@@ -119,9 +138,54 @@ public class TestFancySearchHelper extends TestCaseEnhanced
 			assertEquals(withLabel.getLabel(), createdChoice.toString());
 		}
 		
+		FieldSpec messageType = createSampleMessageSpec();
+		Vector messageTypeChoices = helper.getChoiceItemsForThisField(messageType);
+		assertEquals("not one choice for message fields?", 1, messageTypeChoices.size());
+		ChoiceItem messageChoice = (ChoiceItem)messageTypeChoices.get(0);
+		FieldSpec messageChoiceSpec = messageChoice.getSpec();
+		assertEquals("message doesn't have string search?", FieldSpec.TYPE_NORMAL, messageChoiceSpec.getType());
+		
+		FieldSpec multilineType = createSampleMultilineSpec();
+		Vector multilineTypeChoices = helper.getChoiceItemsForThisField(multilineType);
+		assertEquals("not one choice for multiline fields?", 1, multilineTypeChoices.size());
+		ChoiceItem multilineChoice = (ChoiceItem)multilineTypeChoices.get(0);
+		FieldSpec multilineChoiceSpec = multilineChoice.getSpec();
+		assertEquals("multiline doesn't have string search?", FieldSpec.TYPE_NORMAL, multilineChoiceSpec.getType());
+		
+		FieldSpec booleanType = createSampleBooleanSpec();
+		Vector booleanTypeChoices = helper.getChoiceItemsForThisField(booleanType);
+		assertEquals("not one choice for boolean fields?", 1, booleanTypeChoices.size());
+		ChoiceItem booleanChoice = (ChoiceItem)booleanTypeChoices.get(0);
+		FieldSpec booleanChoiceSpec = booleanChoice.getSpec();
+		assertEquals("boolean doesn't have checkbox?", FieldSpec.TYPE_BOOLEAN, booleanChoiceSpec.getType());
+
 		FieldSpec unknownType = FieldSpec.createStandardField("tag", FieldSpec.TYPE_UNKNOWN);
 		Vector unknownTypeChoices = helper.getChoiceItemsForThisField(unknownType);
 		assertEquals("not zero choices for unknown type?", 0, unknownTypeChoices.size());
+	}
+	
+	private FieldSpec createSampleMessageSpec()
+	{
+		final String tag = "messagetag";
+		final String label = "Message Label: ";
+		FieldSpec message = FieldSpec.createCustomField(tag, label, FieldSpec.TYPE_MESSAGE);
+		return message;
+	}
+	
+	private FieldSpec createSampleMultilineSpec()
+	{
+		final String tag = "multilinetag";
+		final String label = "Multiline Label: ";
+		FieldSpec message = FieldSpec.createCustomField(tag, label, FieldSpec.TYPE_MULTILINE);
+		return message;
+	}
+	
+	private FieldSpec createSampleBooleanSpec()
+	{
+		final String tag = "booleantag";
+		final String label = "Boolean Label: ";
+		FieldSpec message = FieldSpec.createCustomField(tag, label, FieldSpec.TYPE_BOOLEAN);
+		return message;
 	}
 	
 	private GridFieldSpec createSampleGridSpec() throws Exception
