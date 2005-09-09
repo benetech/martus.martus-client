@@ -48,14 +48,21 @@ public class GridTable extends UiTableWithCellEditingProtection
 	public GridTable(GridTableModel model, UiDialogLauncher dlgLauncherToUse, boolean isTableEditable)
 	{
 		super(model);
-		isEditable = isTableEditable;
 		dlgLauncher = dlgLauncherToUse;
 		// NOTE: We need to keep renderers and editors separate, because otherwise
 		// they get confused about focus when you click on a renderer but the 
 		// editor is supposed to end up getting the click because they occupy 
 		// the same screen location
-		renderers = createEditorsOrRenderers();
-		editors = createEditorsOrRenderers();
+		if(isTableEditable)
+		{
+			renderers = createEditableEditorsOrRenderers();
+			editors = createEditableEditorsOrRenderers();
+		}
+		else
+		{
+			renderers = createReadOnlyEditorsOrRenderers();
+			editors = createReadOnlyEditorsOrRenderers();
+		}
 		
 		setMaxColumnWidthToHeaderWidth(0);
 		for(int i = 1 ; i < model.getColumnCount(); ++i)
@@ -126,18 +133,9 @@ public class GridTable extends UiTableWithCellEditingProtection
 		return (JComponent[])components.toArray(new JComponent[0]);
 	}
 
-	private HashMap createEditorsOrRenderers()
+	private HashMap createEditableEditorsOrRenderers()
 	{
 		HashMap map = new HashMap();
-		if(isEditable)
-			createEditableEditorsOrRenderers(map);
-		else
-			createReadOnlyEditorsOrRenderers(map);
-		return map;
-	}
-
-	private void createEditableEditorsOrRenderers(HashMap map)
-	{
 		UiLocalization localization = dlgLauncher.GetLocalization();
 		map.put(new Integer(FieldSpec.TYPE_BOOLEAN), new GridBooleanCellEditor());
 		map.put(new Integer(FieldSpec.TYPE_DATE), new GridDateCellEditor(localization));
@@ -147,10 +145,12 @@ public class GridTable extends UiTableWithCellEditingProtection
 		map.put(new Integer(FieldSpec.TYPE_NORMAL), new GridNormalCellEditor(localization));
 		map.put(new Integer(FieldSpec.TYPE_MULTILINE), new GridNormalCellEditor(localization));
 		map.put(new Integer(FieldSpec.TYPE_ANY_FIELD), new GridNormalCellEditor(localization));
+		return map;
 	}
 	
-	private void createReadOnlyEditorsOrRenderers(HashMap map)
+	private HashMap createReadOnlyEditorsOrRenderers()
 	{
+		HashMap map = new HashMap();
 		UiLocalization localization = dlgLauncher.GetLocalization();
 		map.put(new Integer(FieldSpec.TYPE_BOOLEAN), new GridBooleanCellViewer(localization));
 		map.put(new Integer(FieldSpec.TYPE_DATE), new GridDateCellViewer(localization));
@@ -160,6 +160,7 @@ public class GridTable extends UiTableWithCellEditingProtection
 		map.put(new Integer(FieldSpec.TYPE_NORMAL), new GridNormalCellEditor(localization));
 		map.put(new Integer(FieldSpec.TYPE_MULTILINE), new GridNormalCellEditor(localization));
 		map.put(new Integer(FieldSpec.TYPE_ANY_FIELD), new GridNormalCellEditor(localization));
+		return map;
 	}
 
 	FieldSpec getFieldSpecForColumn(int column)
@@ -210,6 +211,5 @@ public class GridTable extends UiTableWithCellEditingProtection
 	UiDialogLauncher dlgLauncher;
 	HashMap renderers;
 	HashMap editors;
-	boolean isEditable;
 }
 
