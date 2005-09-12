@@ -239,6 +239,7 @@ public class UiFlexiDateEditor extends UiField
 		return exactDateRB.isSelected();
 	}
 
+	// FIXME: This needs to be in common, with tests!!!
 	public String getText()
 	{
 		DateFormat df = FieldSpec.getStoredDateFormat();
