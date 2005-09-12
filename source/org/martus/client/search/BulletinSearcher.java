@@ -27,6 +27,7 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.search;
 
 import org.martus.client.core.SafeReadableBulletin;
+import org.martus.common.MiniLocalization;
 import org.martus.common.field.MartusField;
 
 public class BulletinSearcher
@@ -36,30 +37,30 @@ public class BulletinSearcher
 		node = nodeToMatch;
 	}
 
-	public boolean doesMatch(SafeReadableBulletin b)
+	public boolean doesMatch(SafeReadableBulletin b, MiniLocalization localization)
 	{
 		if(node.getOperation() == SearchTreeNode.VALUE)
-			return doesValueMatch(b);
+			return doesValueMatch(b, localization);
 
 		BulletinSearcher left = new BulletinSearcher(node.getLeft());
 		BulletinSearcher right = new BulletinSearcher(node.getRight());
 
 		if(node.getOperation() == SearchTreeNode.AND)
-			return left.doesMatch(b) && right.doesMatch(b);
+			return left.doesMatch(b, localization) && right.doesMatch(b, localization);
 
 		if(node.getOperation() == SearchTreeNode.OR)
-			return left.doesMatch(b) || right.doesMatch(b);
+			return left.doesMatch(b, localization) || right.doesMatch(b, localization);
 
 		return false;
 	}
 
-	private boolean doesValueMatch(SafeReadableBulletin b)
+	private boolean doesValueMatch(SafeReadableBulletin b, MiniLocalization localization)
 	{
 		String searchForValue = node.getValue();
 
 		String tagOfFieldToSearch = node.getField();
 		if(tagOfFieldToSearch == null)
-			return b.contains(searchForValue);
+			return b.contains(searchForValue, localization);
 
 		int compareOp = node.getComparisonOperator();
 		MartusField field = b.getPossiblyNestedField(tagOfFieldToSearch);
@@ -69,19 +70,19 @@ public class BulletinSearcher
 		switch(compareOp)
 		{
 			case SearchTreeNode.CONTAINS:
-				return field.contains(searchForValue);
+				return field.contains(searchForValue, localization);
 			case SearchTreeNode.LESS: 
-				return (field.compareTo(searchForValue) < 0);
+				return (field.compareTo(searchForValue, localization) < 0);
 			case SearchTreeNode.LESS_EQUAL: 
-				return (field.compareTo(searchForValue) <= 0);
+				return (field.compareTo(searchForValue, localization) <= 0);
 			case SearchTreeNode.GREATER: 
-				return (field.compareTo(searchForValue) > 0);
+				return (field.compareTo(searchForValue, localization) > 0);
 			case SearchTreeNode.GREATER_EQUAL: 
-				return (field.compareTo(searchForValue) >= 0);
+				return (field.compareTo(searchForValue, localization) >= 0);
 			case SearchTreeNode.EQUAL: 
-				return (field.compareTo(searchForValue) == 0);
+				return (field.compareTo(searchForValue, localization) == 0);
 			case SearchTreeNode.NOT_EQUAL: 
-				return (field.compareTo(searchForValue) != 0);
+				return (field.compareTo(searchForValue, localization) != 0);
 		}
 		
 		System.out.println("BulletinSearcher.doesValueMatch: Unknown op: " + compareOp);

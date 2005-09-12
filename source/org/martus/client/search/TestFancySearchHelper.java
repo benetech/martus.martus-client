@@ -241,10 +241,39 @@ public class TestFancySearchHelper extends TestCaseEnhanced
 		assertEquals("or", spec.getChoice(1).getCode());
 	}
 	
+	public void testGetSearchTreeBooleanValue() throws Exception
+	{
+		FieldSpec booleanSpec = FieldSpec.createCustomField("tag", "Label", new FieldTypeBoolean());
+		ChoiceItem[] fields = new ChoiceItem[] {
+			new ChoiceItem(booleanSpec),
+		};
+		DropDownFieldSpec fieldColumnSpec = new DropDownFieldSpec(fields);
+		
+		GridFieldSpec spec = new GridFieldSpec();
+		spec.addColumn(fieldColumnSpec);
+		spec.addColumn(FieldSpec.createStandardField("op", new FieldTypeNormal()));
+		spec.addColumn(FieldSpec.createStandardField("value", new FieldTypeSearchValue()));
+		spec.addColumn(FieldSpec.createStandardField("andor", new FieldTypeNormal()));
+		GridData data = new GridData(spec);
+		String localizedTrue = localization.getButtonLabel("yes");
+		addRow(data, "tag", "=", "1", "or");
+		
+		SearchTreeNode booleanEquals = helper.getSearchTree(data);
+		assertEquals(SearchTreeNode.VALUE, booleanEquals.getOperation());
+		assertEquals("tag", booleanEquals.getField());
+		assertEquals(localizedTrue, booleanEquals.getValue());
+	}
+	
 	public void testGetSearchTreeOneRow() throws Exception
 	{
+		FieldSpec normalSpec = FieldSpec.createCustomField("field", "Label", new FieldTypeNormal());
+		ChoiceItem[] fields = new ChoiceItem[] {
+			new ChoiceItem(normalSpec),
+		};
+		DropDownFieldSpec fieldColumnSpec = new DropDownFieldSpec(fields);
+
 		GridFieldSpec spec = new GridFieldSpec();
-		spec.addColumn(FieldSpec.createStandardField("field", new FieldTypeNormal()));
+		spec.addColumn(fieldColumnSpec);
 		spec.addColumn(FieldSpec.createStandardField("op", new FieldTypeNormal()));
 		spec.addColumn(FieldSpec.createStandardField("value", new FieldTypeSearchValue()));
 		spec.addColumn(FieldSpec.createStandardField("andor", new FieldTypeNormal()));
@@ -256,8 +285,16 @@ public class TestFancySearchHelper extends TestCaseEnhanced
 	
 	public void testGetSearchTreeTwoRows() throws Exception
 	{
+		FieldSpec a = FieldSpec.createCustomField("a", "A", new FieldTypeNormal());
+		FieldSpec c = FieldSpec.createCustomField("c", "C", new FieldTypeNormal());
+		ChoiceItem[] fields = new ChoiceItem[] {
+			new ChoiceItem(a),
+			new ChoiceItem(c),
+		};
+		DropDownFieldSpec fieldColumnSpec = new DropDownFieldSpec(fields);
+
 		GridFieldSpec spec = new GridFieldSpec();
-		spec.addColumn(FieldSpec.createStandardField("field", new FieldTypeNormal()));
+		spec.addColumn(fieldColumnSpec);
 		spec.addColumn(FieldSpec.createStandardField("op", new FieldTypeNormal()));
 		spec.addColumn(FieldSpec.createStandardField("value", new FieldTypeSearchValue()));
 		spec.addColumn(FieldSpec.createStandardField("andor", new FieldTypeNormal()));
@@ -272,8 +309,20 @@ public class TestFancySearchHelper extends TestCaseEnhanced
 	
 	public void testGetSearchTreeComplex() throws Exception
 	{
+		FieldSpec any = FieldSpec.createCustomField("", "Any", new FieldTypeNormal());
+		FieldSpec a = FieldSpec.createCustomField("a", "A", new FieldTypeNormal());
+		FieldSpec d = FieldSpec.createCustomField("d", "D", new FieldTypeNormal());
+		FieldSpec g = FieldSpec.createCustomField("g", "G", new FieldTypeNormal());
+		ChoiceItem[] fields = new ChoiceItem[] {
+			new ChoiceItem(any),
+			new ChoiceItem(a),
+			new ChoiceItem(d),
+			new ChoiceItem(g),
+		};
+		DropDownFieldSpec fieldColumnSpec = new DropDownFieldSpec(fields);
+
 		GridFieldSpec spec = new GridFieldSpec();
-		spec.addColumn(FieldSpec.createStandardField("field", new FieldTypeNormal()));
+		spec.addColumn(fieldColumnSpec);
 		spec.addColumn(FieldSpec.createStandardField("op", new FieldTypeNormal()));
 		spec.addColumn(FieldSpec.createStandardField("value", new FieldTypeSearchValue()));
 		spec.addColumn(FieldSpec.createStandardField("andor", new FieldTypeNormal()));

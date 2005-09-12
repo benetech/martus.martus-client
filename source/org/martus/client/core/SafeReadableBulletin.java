@@ -26,6 +26,7 @@ Boston, MA 02111-1307, USA.
 
 package org.martus.client.core;
 
+import org.martus.common.MiniLocalization;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.field.MartusField;
 import org.martus.common.fieldspec.FieldType;
@@ -59,9 +60,9 @@ public class SafeReadableBulletin
 		return realBulletin.getLocalId();
 	}
 	
-	public boolean contains(String lookFor)
+	public boolean contains(String lookFor, MiniLocalization localization)
 	{
-		return realBulletin.contains(lookFor);
+		return realBulletin.contains(lookFor, localization);
 	}
 	
 	public FieldType getFieldType(String tag)
