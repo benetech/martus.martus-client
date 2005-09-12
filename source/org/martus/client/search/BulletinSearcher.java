@@ -29,6 +29,7 @@ package org.martus.client.search;
 import org.martus.client.core.SafeReadableBulletin;
 import org.martus.common.MiniLocalization;
 import org.martus.common.field.MartusField;
+import org.martus.common.fieldspec.FieldSpec;
 
 public class BulletinSearcher
 {
@@ -58,12 +59,12 @@ public class BulletinSearcher
 	{
 		String searchForValue = node.getValue();
 
-		String tagOfFieldToSearch = node.getField();
-		if(tagOfFieldToSearch == null)
+		FieldSpec fieldToSearch = node.getField();
+		if(fieldToSearch.getTag().length() == 0)
 			return b.contains(searchForValue, localization);
 
 		int compareOp = node.getComparisonOperator();
-		MartusField field = b.getPossiblyNestedField(tagOfFieldToSearch);
+		MartusField field = b.getPossiblyNestedField(fieldToSearch);
 		if(field == null)
 			return false;
 		

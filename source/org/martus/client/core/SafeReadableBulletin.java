@@ -29,6 +29,7 @@ package org.martus.client.core;
 import org.martus.common.MiniLocalization;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.field.MartusField;
+import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.fieldspec.FieldType;
 
 
@@ -70,9 +71,9 @@ public class SafeReadableBulletin
 		return realBulletin.getFieldType(tag);
 	}
 	
-	public MartusField getPossiblyNestedField(String nestedFieldTag)
+	public MartusField getPossiblyNestedField(FieldSpec nestedFieldTag)
 	{
-		String[] tags = parseNestedTags(nestedFieldTag);
+		String[] tags = parseNestedTags(nestedFieldTag.getTag());
 		MartusField field = null;
 		
 		for(int i=0; i < tags.length; ++i)

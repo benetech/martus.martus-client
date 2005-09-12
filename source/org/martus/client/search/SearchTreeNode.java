@@ -26,6 +26,9 @@ Boston, MA 02111-1307, USA.
 
 package org.martus.client.search;
 
+import org.martus.common.fieldspec.FieldSpec;
+import org.martus.common.fieldspec.FieldTypeNormal;
+
 public class SearchTreeNode
 {
 	public final static int VALUE = 0;
@@ -49,13 +52,13 @@ public class SearchTreeNode
 
 	public SearchTreeNode(String justValueForTesting)
 	{
-		this("", "", justValueForTesting);
+		this(FieldSpec.createStandardField("", new FieldTypeNormal()), "", justValueForTesting);
 	}
 	
-	public SearchTreeNode(String field, String compareOperator, String value)
+	public SearchTreeNode(FieldSpec fieldToSearch, String compareOperator, String value)
 	{
 		nodeOp = VALUE;
-		fieldTag = field;
+		field = fieldToSearch;
 		compareOp = convertComparisonOpStringToValue(compareOperator);
 		nodeValue = withoutQuotes(value);
 	}
@@ -103,11 +106,9 @@ public class SearchTreeNode
 		nodeRight = right;
 	}
 	
-	public String getField()
+	public FieldSpec getField()
 	{
-		if(fieldTag == null || fieldTag.length() == 0)
-			return null;
-		return fieldTag;
+		return field;
 	}
 
 	public String getValue()
@@ -146,7 +147,7 @@ public class SearchTreeNode
 	};
 	
 	private String nodeValue;
-	private String fieldTag;
+	private FieldSpec field;
 	private int nodeOp;
 	private int compareOp;
 	private SearchTreeNode nodeLeft;

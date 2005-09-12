@@ -26,6 +26,8 @@ Boston, MA 02111-1307, USA.
 
 package org.martus.client.search;
 
+import org.martus.common.fieldspec.FieldSpec;
+import org.martus.common.fieldspec.FieldTypeNormal;
 import org.martus.util.TestCaseEnhanced;
 
 public class TestSearchParser extends TestCaseEnhanced
@@ -201,21 +203,22 @@ public class TestSearchParser extends TestCaseEnhanced
 	public void testSpecificField()
 	{
 		SearchTreeNode all = englishParser.parseJustAmazonValueForTesting("testing");
-		assertNull("not searching all fields?", all.getField());
+		assertEquals("not searching all fields?", "", all.getField().getTag());
 		
-		SearchTreeNode name = englishParser.parse("name", "", "smith");
-		assertEquals("not searching name?", "name", name.getField());
+		FieldSpec field = FieldSpec.createStandardField("name", new FieldTypeNormal());
+		SearchTreeNode name = englishParser.parse(field, "", "smith");
+		assertEquals("not searching name?", "name", name.getField().getTag());
 		assertEquals("smith", name.getValue());
 
 		String greenEggs = "green eggs and ham";
-		SearchTreeNode phrase = englishParser.parse("name", "", "\"" + greenEggs + "\"");
-		assertEquals("not searching name?", "name", phrase.getField());
+		SearchTreeNode phrase = englishParser.parse(field, "", "\"" + greenEggs + "\"");
+		assertEquals("not searching name?", "name", phrase.getField().getTag());
 		assertEquals("green eggs and ham", phrase.getValue());
 	}
 	
 	public void testAmazonStyleSearching()
 	{
-		String field = "field";
+		FieldSpec field = FieldSpec.createStandardField("field", new FieldTypeNormal());
 		String plain = "plain";
 		String quoted = "quoted";
 		SearchTreeNode or = englishParser.parse(field, ">", plain + " or \"" + quoted + "\"");

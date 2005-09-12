@@ -26,7 +26,9 @@ Boston, MA 02111-1307, USA.
 
 package org.martus.client.search;
 
-import org.martus.util.*;
+import org.martus.common.fieldspec.FieldSpec;
+import org.martus.common.fieldspec.FieldTypeNormal;
+import org.martus.util.TestCaseEnhanced;
 
 
 public class TestSearchTreeNode extends TestCaseEnhanced
@@ -48,12 +50,13 @@ public class TestSearchTreeNode extends TestCaseEnhanced
     
     public void testQuotedValues()
     {
+		FieldSpec field = FieldSpec.createStandardField("field", new FieldTypeNormal());
     	String phrase = "search for this";
     	
     	SearchTreeNode withoutField = new SearchTreeNode("\"" + phrase + "\"");
     	assertEquals("without field parsed wrong?", phrase, withoutField.getValue());
     	
-    	SearchTreeNode withField = new SearchTreeNode("field", "", "\"" + phrase + "\"");
+    	SearchTreeNode withField = new SearchTreeNode(field, "", "\"" + phrase + "\"");
     	assertEquals("with field parsed wrong?", phrase, withField.getValue());
     	
     	String thisThat = "this:that";
@@ -63,7 +66,7 @@ public class TestSearchTreeNode extends TestCaseEnhanced
     
     public void testComparisons()
     {
-    	String field = "field";
+		FieldSpec field = FieldSpec.createStandardField("name", new FieldTypeNormal());
     	String basicValue = "stuff";
 
     	assertEquals("thought it was a comparison op?", "", SearchTreeNode.getComparisonOp("one"));

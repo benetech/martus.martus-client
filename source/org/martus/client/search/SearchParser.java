@@ -25,6 +25,9 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.search;
 
+import org.martus.common.fieldspec.FieldSpec;
+import org.martus.common.fieldspec.FieldTypeNormal;
+
 
 
 public class SearchParser
@@ -74,10 +77,10 @@ public class SearchParser
 	
 	public SearchTreeNode parseJustAmazonValueForTesting(String amazonValue)
 	{
-		return parse("", "", amazonValue);
+		return parse(FieldSpec.createStandardField("", new FieldTypeNormal()), "", amazonValue);
 	}
 
-	public SearchTreeNode parse(String field, String compareOp, String expression)
+	public SearchTreeNode parse(FieldSpec field, String compareOp, String expression)
 	{
 		int nextOp = SearchTreeNode.AND;
 		SearchTreeNode left = null;
@@ -113,7 +116,7 @@ public class SearchParser
 		if(left == null)
 		{
 			// TODO: Should we handle this case differently?
-			String anyField = "";
+			FieldSpec anyField = FieldSpec.createStandardField("", new FieldTypeNormal());
 			String containsOp = "";
 			String lookFor = "";
 			left = new SearchTreeNode(anyField, containsOp, lookFor);

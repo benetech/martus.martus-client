@@ -270,17 +270,17 @@ public class FancySearchHelper
 	// into the value area, and the same field is applied to each value
 	private SearchTreeNode createAmazonStyleNode(GridData gridData, int row)
 	{
-		String field = gridData.getValueAt(row, 0);
+		String fieldName = gridData.getValueAt(row, 0);
 		String op = gridData.getValueAt(row, 1);
 		final DropDownFieldSpec fieldColumnSpec = (DropDownFieldSpec)gridData.getSpec().getFieldSpec(0);
-		FieldSpec specForThisValue = FancySearchTableModel.getFieldSpecForChosenField(field, fieldColumnSpec);
+		FieldSpec specForThisValue = FancySearchTableModel.getFieldSpecForChosenField(fieldName, fieldColumnSpec);
 		String value = specForThisValue.convertStoredToDisplay(gridData.getValueAt(row, 2), getLocalization());
 		value = value.trim();
 		
 		String localAnd = getLocalization().getKeyword(SearchParser.ENGLISH_AND_KEYWORD);
 		String localOr = getLocalization().getKeyword(SearchParser.ENGLISH_OR_KEYWORD);
 		SearchParser parser = new SearchParser(localAnd, localOr);
-		return parser.parse(field, op, value);
+		return parser.parse(specForThisValue, op, value);
 	}
 	
 	public static final int COLUMN_ROW_NUMBER = 0;

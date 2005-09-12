@@ -38,7 +38,10 @@ import org.martus.common.field.MartusDateRangeField;
 import org.martus.common.field.MartusField;
 import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.fieldspec.FieldTypeBoolean;
+import org.martus.common.fieldspec.FieldTypeDate;
 import org.martus.common.fieldspec.FieldTypeDateRange;
+import org.martus.common.fieldspec.FieldTypeLanguage;
+import org.martus.common.fieldspec.FieldTypeNormal;
 import org.martus.common.fieldspec.StandardFieldSpecs;
 import org.martus.common.test.UnicodeConstants;
 import org.martus.util.TestCaseEnhanced;
@@ -62,12 +65,12 @@ public class TestBulletinSearcher extends TestCaseEnhanced
 		MartusCrypto security = MockMartusSecurity.createClient();
 		Bulletin realBulletin = new Bulletin(security);
 
-		String fieldToSearch = Bulletin.TAGLOCATION;
-		String otherField = Bulletin.TAGAUTHOR;
+		FieldSpec fieldToSearch = FieldSpec.createStandardField(Bulletin.TAGLOCATION, new FieldTypeNormal());
+		FieldSpec otherField = FieldSpec.createStandardField(Bulletin.TAGAUTHOR, new FieldTypeNormal());
 		String sampleValue = "green";
 		String otherValue = "ignoreme";
-		realBulletin.set(fieldToSearch, sampleValue);
-		realBulletin.set(otherField, otherValue);
+		realBulletin.set(fieldToSearch.getTag(), sampleValue);
+		realBulletin.set(otherField.getTag(), otherValue);
 		
 		SafeReadableBulletin b = new SafeReadableBulletin(realBulletin);
 		BulletinSearcher specific = new BulletinSearcher(new SearchTreeNode(fieldToSearch, "", sampleValue));
@@ -83,7 +86,7 @@ public class TestBulletinSearcher extends TestCaseEnhanced
 		MartusCrypto security = MockMartusSecurity.createClient();
 		Bulletin realBulletin = new Bulletin(security);
 		
-		String noSuchField = "nosuchfield";
+		FieldSpec noSuchField = FieldSpec.createStandardField("nosuchfield", new FieldTypeNormal());
 		String sampleValue = "sample data";
 		SafeReadableBulletin b = new SafeReadableBulletin(realBulletin);
 		BulletinSearcher contains = new BulletinSearcher(new SearchTreeNode(noSuchField, "", sampleValue));
@@ -98,11 +101,11 @@ public class TestBulletinSearcher extends TestCaseEnhanced
 		MartusCrypto security = MockMartusSecurity.createClient();
 		Bulletin b = new Bulletin(security);
 
-		String fieldToSearch = Bulletin.TAGLOCATION;
+		FieldSpec fieldToSearch = FieldSpec.createStandardField(Bulletin.TAGLOCATION, new FieldTypeNormal());
 		String belowSample = "blue";
 		String sampleValue = "green";
 		String aboveSample = "red";
-		b.set(fieldToSearch, sampleValue);
+		b.set(fieldToSearch.getTag(), sampleValue);
 
 		verifyOperatorComparison("testDoesMatchComparisons", b, fieldToSearch, ">=", belowSample, true);
 		verifyOperatorComparison("testDoesMatchComparisons", b, fieldToSearch, ">=", sampleValue, true);
@@ -129,7 +132,7 @@ public class TestBulletinSearcher extends TestCaseEnhanced
 		verifyOperatorComparison("testDoesMatchComparisons", b, fieldToSearch, "!=", aboveSample, true);
 	}
 
-	private void verifyOperatorComparison(String caller, Bulletin realBulletin, String fieldToSearch, String operator, String value, boolean expected)
+	private void verifyOperatorComparison(String caller, Bulletin realBulletin, FieldSpec fieldToSearch, String operator, String value, boolean expected)
 	{
 		SafeReadableBulletin b = new SafeReadableBulletin(realBulletin);
 		String actual = b.getPossiblyNestedField(fieldToSearch).getSearchableData(localization);
@@ -143,10 +146,12 @@ public class TestBulletinSearcher extends TestCaseEnhanced
 		MartusCrypto security = MockMartusSecurity.createClient();
 		Bulletin realBulletin = new Bulletin(security);
 		SafeReadableBulletin b = new SafeReadableBulletin(realBulletin);
-		MartusField noSuchField = b.getPossiblyNestedField("no.such.field");
-		assertNull("didn't return null for bogus field?", noSuchField);
-		MartusField noSubfield = b.getPossiblyNestedField("entrydate.no.such.subfield");
-		assertNull("didn't return null for bogus subfield?", noSubfield);
+		FieldSpec noSuchField = FieldSpec.createStandardField("no.such.field", new FieldTypeNormal());
+		MartusField noSuchFieldResult = b.getPossiblyNestedField(noSuchField);
+		assertNull("didn't return null for bogus field?", noSuchFieldResult);
+		FieldSpec noSubField = FieldSpec.createStandardField("entrydate.no.such.subfield", new FieldTypeNormal());
+		MartusField noSubfieldResult = b.getPossiblyNestedField(noSubField);
+		assertNull("didn't return null for bogus subfield?", noSubfieldResult);
 	}
 	
 	
@@ -232,7 +237,8 @@ public class TestBulletinSearcher extends TestCaseEnhanced
 		MartusCrypto security = MockMartusSecurity.createClient();
 		Bulletin b = new Bulletin(security);
 		
-		verifyOperatorComparison("testLocalId", b, "_localId", "", b.getLocalId(), true);
+		FieldSpec spec = FieldSpec.createStandardField("_localId", new FieldTypeNormal());
+		verifyOperatorComparison("testLocalId", b, spec, "", b.getLocalId(), true);
 	}
 		
 	public void testDateMatchesLastSaved() throws Exception
@@ -242,8 +248,9 @@ public class TestBulletinSearcher extends TestCaseEnhanced
 		b.getBulletinHeaderPacket().updateLastSavedTime();
 		String rawLastSaved = b.getLastSavedDate();
 		String formattedLastSaved = localization.convertStoredDateToDisplay(rawLastSaved);
-		
-		verifyOperatorComparison("testDateMatchesLastSaved", b, "_lastSavedDate", "", formattedLastSaved, true);
+
+		FieldSpec spec = FieldSpec.createStandardField("_lastSavedDate", new FieldTypeDate());
+		verifyOperatorComparison("testDateMatchesLastSaved", b, spec, "", formattedLastSaved, true);
 	}
 		
 	public void testFlexiDateMatches() throws Exception
@@ -252,31 +259,37 @@ public class TestBulletinSearcher extends TestCaseEnhanced
 		Bulletin b = new Bulletin(security);
 		b.set(Bulletin.TAGEVENTDATE, "2003-08-20,20030820+3");
 		
-		verifyOperatorComparison("testFlexiDateMatches", b, Bulletin.TAGEVENTDATE, "", "08/20/2003", true);
-		verifyOperatorComparison("testFlexiDateMatches", b, Bulletin.TAGEVENTDATE, "", "08/21/2003", false);
-		verifyOperatorComparison("testFlexiDateMatches", b, Bulletin.TAGEVENTDATE, "", "08/23/2003", true);
-		verifyOperatorComparison("testFlexiDateMatches", b, Bulletin.TAGEVENTDATE, "", "08/26/2003", false);
+		final FieldSpec eventDateField = b.getField(Bulletin.TAGEVENTDATE).getFieldSpec();
+		verifyOperatorComparison("testFlexiDateMatches", b, eventDateField, "", "08/20/2003", true);
+		verifyOperatorComparison("testFlexiDateMatches", b, eventDateField, "", "08/21/2003", false);
+		verifyOperatorComparison("testFlexiDateMatches", b, eventDateField, "", "08/23/2003", true);
+		verifyOperatorComparison("testFlexiDateMatches", b, eventDateField, "", "08/26/2003", false);
 
-		verifyOperatorComparison("testFlexiDateMatches", b, Bulletin.TAGEVENTDATE+"." + MartusDateRangeField.SUBFIELD_BEGIN, "", "08/20/2003", true);
-		verifyOperatorComparison("testFlexiDateMatches", b, Bulletin.TAGEVENTDATE+"." + MartusDateRangeField.SUBFIELD_BEGIN, "", "08/21/2003", false);
-		verifyOperatorComparison("testFlexiDateMatches", b, Bulletin.TAGEVENTDATE+"." + MartusDateRangeField.SUBFIELD_END, "", "08/23/2003", true);
-		verifyOperatorComparison("testFlexiDateMatches", b, Bulletin.TAGEVENTDATE+"." + MartusDateRangeField.SUBFIELD_END, "", "08/22/2003", false);
+		FieldSpec eventDateBeginField = FieldSpec.createStandardField(Bulletin.TAGEVENTDATE + "." + MartusDateRangeField.SUBFIELD_BEGIN, new FieldTypeDate());
+		FieldSpec eventDateEndField = FieldSpec.createStandardField(Bulletin.TAGEVENTDATE + "." + MartusDateRangeField.SUBFIELD_END, new FieldTypeDate());
+		verifyOperatorComparison("testFlexiDateMatches", b, eventDateBeginField, "", "08/20/2003", true);
+		verifyOperatorComparison("testFlexiDateMatches", b, eventDateBeginField, "", "08/21/2003", false);
+		verifyOperatorComparison("testFlexiDateMatches", b, eventDateEndField, "", "08/23/2003", true);
+		verifyOperatorComparison("testFlexiDateMatches", b, eventDateEndField, "", "08/22/2003", false);
 
-		verifyOperatorComparison("testFlexiDateMatches", b, Bulletin.TAGEVENTDATE+"." + MartusDateRangeField.SUBFIELD_BEGIN, ">=", "08/20/2003", true);
-		verifyOperatorComparison("testFlexiDateMatches", b, Bulletin.TAGEVENTDATE+"." + MartusDateRangeField.SUBFIELD_BEGIN, ">", "08/20/2003", false);
-		verifyOperatorComparison("testFlexiDateMatches", b, Bulletin.TAGEVENTDATE+"." + MartusDateRangeField.SUBFIELD_BEGIN, "<=", "08/20/2003", true);
-		verifyOperatorComparison("testFlexiDateMatches", b, Bulletin.TAGEVENTDATE+"." + MartusDateRangeField.SUBFIELD_BEGIN, "<", "08/19/2003", false);
+		verifyOperatorComparison("testFlexiDateMatches", b, eventDateBeginField, ">=", "08/20/2003", true);
+		verifyOperatorComparison("testFlexiDateMatches", b, eventDateBeginField, ">", "08/20/2003", false);
+		verifyOperatorComparison("testFlexiDateMatches", b, eventDateBeginField, "<=", "08/20/2003", true);
+		verifyOperatorComparison("testFlexiDateMatches", b, eventDateBeginField, "<", "08/19/2003", false);
 	}
 	
 	public void testBooleanMatches() throws Exception
 	{
 		MartusCrypto security = MockMartusSecurity.createClient();
 		
+		final FieldSpec trueField = FieldSpec.createCustomField("true", "should be true", new FieldTypeBoolean());
+		final FieldSpec falseField = FieldSpec.createCustomField("false", "should be false", new FieldTypeBoolean());
+		final FieldSpec blankField = FieldSpec.createCustomField("bogus", "will be blank", new FieldTypeBoolean());
 		FieldSpec[] publicSpecs = new FieldSpec[] 
 		{
-			FieldSpec.createCustomField("true", "should be true", new FieldTypeBoolean()),
-			FieldSpec.createCustomField("false", "should be false", new FieldTypeBoolean()),
-			FieldSpec.createCustomField("bogus", "will be blank", new FieldTypeBoolean()),
+			trueField,
+			falseField,
+			blankField,
 		};
 		
 		Bulletin b = new Bulletin(security, publicSpecs, StandardFieldSpecs.getDefaultPrivateFieldSpecs());
@@ -287,13 +300,13 @@ public class TestBulletinSearcher extends TestCaseEnhanced
 		String localizedTrue = localization.getButtonLabel("yes");
 		String localizedFalse = localization.getButtonLabel("no");
 		
-		verifyOperatorComparison("testBooleanMatches", b, "true", "", localizedTrue, true);
-		verifyOperatorComparison("testBooleanMatches", b, "true", "", localizedFalse, false);
-		verifyOperatorComparison("testBooleanMatches", b, "false", "", localizedFalse, true);
-		verifyOperatorComparison("testBooleanMatches", b, "false", "", localizedTrue, false);
-		verifyOperatorComparison("testBooleanMatches", b, "bogus", "", localizedFalse, true);
-		verifyOperatorComparison("testBooleanMatches", b, "bogus", "", localizedTrue, false);
-		verifyOperatorComparison("testBooleanMatches", b, "true", "!=", localizedFalse, true);
+		verifyOperatorComparison("testBooleanMatches", b, trueField, "", localizedTrue, true);
+		verifyOperatorComparison("testBooleanMatches", b, trueField, "", localizedFalse, false);
+		verifyOperatorComparison("testBooleanMatches", b, falseField, "", localizedFalse, true);
+		verifyOperatorComparison("testBooleanMatches", b, falseField, "", localizedTrue, false);
+		verifyOperatorComparison("testBooleanMatches", b, blankField, "", localizedFalse, true);
+		verifyOperatorComparison("testBooleanMatches", b, blankField, "", localizedTrue, false);
+		verifyOperatorComparison("testBooleanMatches", b, trueField, "!=", localizedFalse, true);
 		
 	}
 	
@@ -302,11 +315,12 @@ public class TestBulletinSearcher extends TestCaseEnhanced
 		MartusCrypto security = MockMartusSecurity.createClient();
 		Bulletin b = new Bulletin(security);
 		
+		FieldSpec fieldToSearch = FieldSpec.createStandardField(Bulletin.TAGLANGUAGE, new FieldTypeLanguage());
 		String localizedArabic = localization.getLanguageName(MiniLocalization.ARABIC); 
 		b.set(Bulletin.TAGLANGUAGE, MiniLocalization.ARABIC);
-		BulletinSearcher contains = new BulletinSearcher(new SearchTreeNode(Bulletin.TAGLANGUAGE , "", localizedArabic));
+		BulletinSearcher contains = new BulletinSearcher(new SearchTreeNode(fieldToSearch , "", localizedArabic));
 		assertTrue("not looking at searchable form?", contains.doesMatch(new SafeReadableBulletin(b), localization));
-		BulletinSearcher equals  = new BulletinSearcher(new SearchTreeNode(Bulletin.TAGLANGUAGE , "=", localizedArabic));
+		BulletinSearcher equals  = new BulletinSearcher(new SearchTreeNode(fieldToSearch, "=", localizedArabic));
 		assertTrue("not looking at searchable form?", equals.doesMatch(new SafeReadableBulletin(b), localization));
 		
 		

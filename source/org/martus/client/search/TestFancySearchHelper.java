@@ -260,7 +260,7 @@ public class TestFancySearchHelper extends TestCaseEnhanced
 		
 		SearchTreeNode booleanEquals = helper.getSearchTree(data);
 		assertEquals(SearchTreeNode.VALUE, booleanEquals.getOperation());
-		assertEquals("tag", booleanEquals.getField());
+		assertEquals("tag", booleanEquals.getField().getTag());
 		assertEquals(localizedTrue, booleanEquals.getValue());
 	}
 	
@@ -280,7 +280,7 @@ public class TestFancySearchHelper extends TestCaseEnhanced
 		GridData data = new GridData(spec);
 		addRow(data, "field", "", "value", "or");
 		SearchTreeNode root = helper.getSearchTree(data);
-		verifyFieldCompareOpValue("single row", root, "field", SearchTreeNode.CONTAINS, "value");
+		verifyFieldCompareOpValue("single row", root, normalSpec, SearchTreeNode.CONTAINS, "value");
 	}
 	
 	public void testGetSearchTreeTwoRows() throws Exception
@@ -303,8 +303,8 @@ public class TestFancySearchHelper extends TestCaseEnhanced
 		addRow(data, "c", "", "d", "or");
 		SearchTreeNode root = helper.getSearchTree(data);
 		verifyOp("top level", root, SearchTreeNode.OR);
-		verifyFieldCompareOpValue("two rows left", root.getLeft(), "a", SearchTreeNode.CONTAINS, "b");
-		verifyFieldCompareOpValue("two rows right", root.getRight(), "c", SearchTreeNode.CONTAINS, "d");
+		verifyFieldCompareOpValue("two rows left", root.getLeft(), a, SearchTreeNode.CONTAINS, "b");
+		verifyFieldCompareOpValue("two rows right", root.getRight(), c, SearchTreeNode.CONTAINS, "d");
 	}
 	
 	public void testGetSearchTreeComplex() throws Exception
@@ -347,25 +347,25 @@ public class TestFancySearchHelper extends TestCaseEnhanced
 		// any:whiz
 		SearchTreeNode beforeJ = helper.getSearchTree(data);
 		verifyOp("before j", beforeJ, SearchTreeNode.OR);
-		verifyFieldCompareOpValue("any:j", beforeJ.getRight(), null, SearchTreeNode.CONTAINS, "j");
+		verifyFieldCompareOpValue("any:j", beforeJ.getRight(), any, SearchTreeNode.CONTAINS, "j");
 		
 		SearchTreeNode beforeGii = beforeJ.getLeft();
 		verifyOp("before gii", beforeGii, SearchTreeNode.AND);
-		verifyFieldCompareOpValue("g!=\"ii\"", beforeGii.getRight(), "g", SearchTreeNode.NOT_EQUAL, "i i");
+		verifyFieldCompareOpValue("g!=\"ii\"", beforeGii.getRight(), g, SearchTreeNode.NOT_EQUAL, "i i");
 		
 		SearchTreeNode beforeDf = beforeGii.getLeft();
 		verifyOp("before df", beforeDf, SearchTreeNode.OR);
-		verifyFieldCompareOpValue("d>f", beforeDf.getRight(), "d", SearchTreeNode.GREATER, "f");
+		verifyFieldCompareOpValue("d>f", beforeDf.getRight(), d, SearchTreeNode.GREATER, "f");
 		
 		SearchTreeNode beforeAandA = beforeDf.getLeft();
 		verifyOp("before a a", beforeAandA, SearchTreeNode.OR);
 		
 		SearchTreeNode betweenAandA = beforeAandA.getRight();
 		verifyOp("before a a", betweenAandA, SearchTreeNode.AND);
-		verifyFieldCompareOpValue("a:c1", betweenAandA.getLeft(), "a", SearchTreeNode.CONTAINS, "c1");
-		verifyFieldCompareOpValue("a:c2", betweenAandA.getRight(), "a", SearchTreeNode.CONTAINS, "c2");
+		verifyFieldCompareOpValue("a:c1", betweenAandA.getLeft(), a, SearchTreeNode.CONTAINS, "c1");
+		verifyFieldCompareOpValue("a:c2", betweenAandA.getRight(), a, SearchTreeNode.CONTAINS, "c2");
 		
-		verifyFieldCompareOpValue("whiz", beforeAandA.getLeft(), null, SearchTreeNode.CONTAINS, "whiz");
+		verifyFieldCompareOpValue("whiz", beforeAandA.getLeft(), any, SearchTreeNode.CONTAINS, "whiz");
 	}
 	
 	private void verifyOp(String message, SearchTreeNode node, int expectedOp)
@@ -373,7 +373,7 @@ public class TestFancySearchHelper extends TestCaseEnhanced
 		assertEquals(message, expectedOp, node.getOperation());
 	}
 	
-	private void verifyFieldCompareOpValue(String message, SearchTreeNode node, String field, int compareOp, String value)
+	private void verifyFieldCompareOpValue(String message, SearchTreeNode node, FieldSpec field, int compareOp, String value)
 	{
 		assertEquals(message + " wrong op?", SearchTreeNode.VALUE, node.getOperation());
 		assertEquals(message + " wrong field?", field, node.getField());
