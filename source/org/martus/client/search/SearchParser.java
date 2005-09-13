@@ -115,11 +115,7 @@ public class SearchParser
 		
 		if(left == null)
 		{
-			// TODO: Should we handle this case differently?
-			FieldSpec anyField = FieldSpec.createStandardField("", new FieldTypeNormal());
-			String containsOp = "";
-			String lookFor = "";
-			left = new SearchTreeNode(anyField, containsOp, lookFor);
+			left = new SearchTreeNode(field, compareOp, "");
 		}
 		
 		return left;

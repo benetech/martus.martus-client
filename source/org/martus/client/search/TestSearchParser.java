@@ -107,6 +107,14 @@ public class TestSearchParser extends TestCaseEnhanced
     	assertEquals("not empty?", "", rootNode.getValue());
     }
     
+    public void testFieldButNoString()
+    {
+		FieldSpec field = FieldSpec.createStandardField("field", new FieldTypeNormal());
+    	SearchTreeNode rootNode = englishParser.parse(field, "=", "");
+    	assertEquals("didn't remember field?", field, rootNode.getField());
+    	assertEquals("didn't remember op?", SearchTreeNode.EQUAL, rootNode.getComparisonOperator());
+    }
+    
     public void testSimpleSearch()
 	{
 		SearchTreeNode rootNode = englishParser.parseJustAmazonValueForTesting("blah");
