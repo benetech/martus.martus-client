@@ -255,7 +255,7 @@ public class EnglishStrings
 "wintitle:ExportCustomizationTemplateSaveAs=Export Customization Template",
 "wintitle:ImportCustomizationTemplateOpen=Import Customization Template",
 "wintitle:SetFolderOrder=Folder Order",
-
+"wintitle:FancySearchHelp=Search Help",
 
 "wintitle:warningdeletefolder=Confirm Delete Folder",
 "wintitle:warningDeleteSingleBulletin=Confirm Delete Bulletin",
@@ -335,6 +335,7 @@ public class EnglishStrings
 "button:FolderOrderDown=Down",
 "button:UseOldCustomFields=Use Old",
 "button:UseNewCustomFields=Use New",
+"button:CloseHelp=Close Help",
 
 "menu:file=File",
 "menu:CreateNewBulletin=Create New Bulletin",
@@ -790,6 +791,9 @@ public class EnglishStrings
 "field:ConfigureHQsCurrentHQs=Current Headquarters",
 "field:ColumnGridRowNumber=Row #",
 "field:SetFolderOrder=To change a folder's position, select the folder name and use the #MoveFolderUp# / #MoveFolderDown# buttons.",
+"field:FancySearchHelpMsg1=",
+"field:FancySearchHelpMsg2=",
+"field:FancySearchHelpMsg3=",
 
 "field:WasSentYes=Yes",
 "field:WasSentNo=No",

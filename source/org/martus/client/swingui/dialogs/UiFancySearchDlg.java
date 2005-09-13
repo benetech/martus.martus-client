@@ -30,14 +30,14 @@ import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
+import java.util.HashMap;
 import javax.swing.Box;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-
 import org.martus.client.search.FancySearchGridEditor;
 import org.martus.client.search.SearchTreeNode;
 import org.martus.client.swingui.UiMainWindow;
+import org.martus.common.MiniLocalization;
 import org.martus.swing.UiButton;
 import org.martus.swing.UiWrappedTextPanel;
 import org.martus.swing.Utilities;
@@ -111,8 +111,21 @@ public class UiFancySearchDlg extends UiSearchDlg
 		}
 		public void actionPerformed(ActionEvent e)
 		{
-//FIXME: put in real help before the release
-			mainWindow.notifyDlg("  **Help Is Unavailable at this Time**  ");
+			String closeHelp = localization.getButtonLabel("CloseHelp");
+			String title = localization.getWindowTitle("FancySearchHelp");
+			String[] buttons = {closeHelp};
+			HashMap tokenReplacement = new HashMap();
+			String andString = localization.getKeyword("and");
+			String orString = localization.getKeyword("or");
+			tokenReplacement.put("#And#", andString);
+			tokenReplacement.put("#Or#", orString);
+			String msg1 = localization.getFieldLabel("FancySearchHelpMsg1");
+			String msg2 = localization.getFieldLabel("FancySearchHelpMsg2");
+			if(localization.getCurrentLanguageCode().equals(MiniLocalization.ENGLISH))
+				msg2 = ""; //Since this is english there is no need to tell the user they can use "And" and "Or" in their own language for keywords between search words.
+			String msg3 = localization.getFieldLabel("FancySearchHelpMsg3");
+			String[] contents = {msg1, msg2, msg3};
+			mainWindow.confirmDlg(mainWindow, title, contents, buttons, tokenReplacement);
 		}
 		private UiMainWindow mainWindow;
 	}
