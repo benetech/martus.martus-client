@@ -1,7 +1,6 @@
 ﻿--------
-1. Présentation du Logiciel Martus™ 
-Logiciel Martus™ Guide de l’Utilisateur Version 2.0.1
-
+1. Présentation du Logiciel Martus™
+Logiciel Martus™ Guide de l’Utilisateur Version 2.6
 --------
 1a. A quoi sert Martus™ ?
 Baptisé d’après le mot grec signifiant témoin, le Projet Martus offre un moyen efficace et sûr de stocker et de récupérer des informations relatives aux violations des droits humains. L’application Martus vous permet de créer des communiqués qui consignent les violations des droits humains, de joindre des justificatifs à l’appui, d'indiquer si ces informations seront de nature publique ou privée et de stocker les informations sur un serveur sécurisé. Pour tous renseignements complémentaires sur les problèmes traités par le Projet Martus et sur les plans d’avenir de ce projet, visitez le site http://www.martus.org.
@@ -12,9 +11,9 @@ Ceux qui vous renseignent sur les violations des droits humains sont soucieux de
 Vous pouvez prendre des dispositions afin d’empêcher quiconque d’utiliser votre compte Martus dans le but de lire les données que vous avez collectées, ou bien de soumettre de nouvelles données, même en cas de vol ou de piratage de votre ordinateur.
 --------
 1c. Comment Martus préserve la sécurité des données
-Chaque compte Martus renferme deux clés (très longues chaînes de caractères) : une clé publique, visible par tous, et une clé privée, à laquelle l’on ne peut accéder qu’en utilisant le mot de passe de ce compte. La combinaison de ces clés se nomme la "biclé" et le fichier s’y rapportant est votre fichier MartusKeyPair.dat. Lorsque vous ouvrez une session avec le logiciel Martus, votre mot de passe autorise l’application à ouvrir à la fois la clé publique et la clé privée, de manière à ce que vous puissiez voir les communiqués que vous avez créés et stockés.
+Chaque compte Martus comporte une clé à laquelle l’on ne peut accéder qu’en utilisant le mot de passe de ce compte. Lorsque vous ouvrez une session avec le logiciel Martus, votre mot de passe autorise l’application à ouvrir la clé (associée au fichier MartusKeyPair.dat), de manière à ce que vous puissiez voir les communiqués que vous avez créés et stockés.
 
-Vous êtes le seul à connaître votre mot de passe ; sans lui, nul ne peut accéder à votre biclé, ce qui signifie que personne d’autre ne peut utiliser votre compte.
+Vous êtes seul à connaître votre mot de passe ; sans lui, nul ne peut ouvrir vos communiqués privés, ni les données privées se trouvant dans les communiqués publics que vous avez envoyés au serveur, ni aucun des communiqués présents sur votre disque dur, qu'ils soient sous forme de brouillon ou verrouillés. Si toutefois vous avez établi un compte Siège (S), le titulaire de ce compte S (en principe le bureau principal de votre organisme) pourra toujours visualiser les données privées que vous avez envoyées au serveur.
 
 Du fait qu’il existe des programmes informatiques et des atteintes à l’intégrité du clavier pouvant permettre à des tiers d’enregistrer les caractères que vous tapez, le logiciel Martus propose un clavier écran que vous pouvez utiliser pour saisir votre mot de passe. Cela rend encore plus difficile la découverte de votre mot de passe par un intrus.
 --------
@@ -44,7 +43,7 @@ Ces restrictions peuvent sembler angoissantes ; cependant, les informations prot
 1f. Pourquoi envoyer des communiqués au serveur ?
 Un serveur Martus est un ordinateur qui accepte des communiqués cryptés, qui les sauvegarde en toute sécurité et qui les reproduit en de multiples endroits, afin d’empêcher la perte de ces informations. (Benetech fournit le logiciel du serveur aux organismes abritant les serveurs Martus, mais ne fournit aucune prestation de serveur directe ; envoyez un e-mail à info@martus.org pour la liste d’hôtes de serveurs potentiels.) Tout communiqué que vous n’avez pas envoyé à un serveur n’existe que sur votre ordinateur. Si votre ordinateur est perdu, volé ou endommagé, vous risquez de perdre l’ensemble de ces données. Le serveur fait office d’outil de sauvegarde. Avec votre clé, votre pseudo et votre mot de passe, vous pouvez installer Martus sur un autre ordinateur et accéder à l’ensemble des données publiques et privées contenues dans les communiqués que vous avez envoyés au serveur. Et si votre organisme possède un compte Siège, l'envoi des communiqués au serveur les met à la disposition des autres membres de votre organisme (données publiques et privées). Voir "9c. Restauration de votre clé" et "9f. Partage de vos données privées avec vos collègues".
 
-En outre, à l’avenir, les informations publiques des communiqués seront accessibles aux chercheurs, à la presse et à tous ceux concernés par les problèmes des droits humains. Si vous stockez les communiqués sur votre ordinateur, vous seul avez accès informations ; si vous les envoyez au serveur, les tiers pourront prendre connaissance des informations publiques des rapports figurant dans vos documents.
+En outre, les informations publiques des communiqués seront accessibles aux chercheurs, à la presse et à tous ceux concernés par les problèmes des droits humains. Si vous stockez les communiqués sur votre ordinateur, vous seul avez accès informations ; si vous les envoyez au serveur, les tiers pourront prendre connaissance des informations publiques des rapports figurant dans vos documents.
 --------
 1g. Pourquoi Martus est une application en code source libre
 Les programmeurs indépendants peuvent examiner le code dans une application en code source libre alors qu’ils ne pourraient pas le faire dans des applications traditionnelles. Benetech a développé Martus pour être utilisé par les organismes de défense des droits humains, et ils n’ont pas prévu d’outils cachés de collecte de renseignements concernant les utilisateurs de Martus, ni de tâche occulte. Martus étant une application en code source libre, vous n’aurez pas à nous croire sur parole. Tout organisme peut faire vérifier le code de manière indépendante pour s’assurer qu’il fait ce que nous affirmons qu’il doit faire.
@@ -53,7 +52,8 @@ Pour en savoir plus sur la technologie des codes sources libres, visitez l’Ope
 
 --------
 2. Démarrage
-Vous pouvez installer et exécuter Martus sur tout ordinateur sous Windows, Mac OS ou Linux répondant aux exigences suivantes. Pour de plus amples renseignements sur les recommandations système les plus courantes, voir les notes de mise à jour dans README_fr.txt téléchargées avec le logiciel Martus.
+
+Vous pouvez installer et exécuter Martus sur tout ordinateur sous Windows, Mac OS X ou Linux répondant aux exigences suivantes. Pour de plus amples renseignements sur les recommandations système les plus courantes, voir les notes de mise à jour téléchargées avec le logiciel Martus.
 
 Windows
 • Windows 95 SE, Windows 98, Windows NT 4.0, Windows Me, Windows 2000, ou Windows XP (versions non anglaises, la seule version de Windows 2000 sous laquelle Sun a testé l’environnement Java est Windows 2000 Professional.)
@@ -61,16 +61,16 @@ Windows
 • Processeur Pentium 166 MHz (minimum 300 MHz recommandé)
 • Espace disque dur disponible 50 Mo
 • 32 Mo de RAM (minimum recommandé 64 Mo)
-• Connexion Internet, pour sauvegarder les données sur le serveur Martus.  Si vous n'avez pas un connexion Internet, consultez la section “9g. Autorisation aux autres comptes d'envoyer vos communiqués à un serveur”
-• Pour envoyer vos communiqués à un serveur Martus, il vous faut un accès illimité à Internet soit par les ports 987 et 988, soit par les ports 80 et 443. Ce n’est un problème que si vous utilisez Martus à travers un pare-feu
+• Connexion Internet, pour sauvegarder les données sur le serveur Martus
+• Pour envoyer vos communiqués à un serveur Martus, il vous faut un accès illimité à Internet soit par les ports 987 et 988, soit par les ports 80 et 443. Ce n’est un problème que si vous utilisez Martus à travers un pare feu
 • Lecteur CD (seulement pour installation par CD)
 • Résolution écran de 800x600 ou plus
 
 Mac OS
-• Mac OS 9.2 ou supérieur
+• Mac OS X 10.2.3 ou supérieur
 • Environnement Java Runtime (JRE) version 1.4.1_01 ou supérieure (livré avec Jaguar ; pour télécharger la dernière version, visitez le site http://www.apple.com/downloads/macosx/apple)
 • Espace disque dur disponible 50 Mo
-• Connexion Internet, pour sauvegarder les données sur le serveur Martus.  Si vous n'avez pas un connexion Internet, consultez la section “9g. Autorisation aux autres comptes d'envoyer vos communiqués à un serveur”
+• Connexion Internet, pour sauvegarder les données sur le serveur Martus
 • Pour envoyer vos communiqués à un serveur Martus, il vous faut un accès illimité à Internet soit par les ports 987 et 988, soit par les ports 80 et 443. Ce n’est un problème que si vous utilisez Martus à travers un pare-feu
 • Lecteur CD (seulement pour installation par CD)
 • Résolution écran de 800x600 ou plus
@@ -80,15 +80,16 @@ Linux
 • Java 2 Edition Standard (J2SE) Environnement Java Runtime (JRE) 1.4.1 ou supérieur
 • Espace disque dur disponible 75 Mo
 • 32 Mo de RAM (minimum recommandé 64 Mo)
-• Connexion Internet, pour sauvegarder les données sur le serveur Martus.  Si vous n'avez pas un connexion Internet, consultez la section “9g. Autorisation aux autres comptes d'envoyer vos communiqués à un serveur”
+• Connexion Internet, pour sauvegarder les données sur le serveur Martus
 • Pour envoyer vos communiqués à un serveur Martus, il vous faut un accès illimité à Internet soit par les ports 987 et 988, soit par les ports 80 et 443. Ce n’est un problème que si vous utilisez Martus à travers un pare-feu
 • Lecteur CD (seulement pour installation par CD)
 • Mode couleur 16-bit minimum avec le KDE ou le bureau Gnome recommandé
+
 --------
 2a. Installation
 Martus a été écrit à l’aide du langage de programmation Java, et nécessite un environnement Java pour fonctionner. Le logiciel d’installation Martus pour Windows installe sur votre ordinateur à la fois l’environnement Java 2 runtime et l’application Martus ; il ajoute également un raccourci de l’application Martus sur votre bureau. Sous Mac OS ou Linux, il se peut que l’environnement Java runtime soit déjà installé ; si ce n’est pas le cas, installez-le avant d’installer Martus.
 
-Vous pouvez télécharger le logiciel d’installation Martus à partir du site http://www.martus.org. Vous pouvez télécharger le logiciel d’installation pour la plateforme que vous utilisez, ou bien une image CD ISO contenant les logiciels d’installation pour Windows, Mac OS et Linux. Si vous téléchargez l’image CD ISO, vous devez la copier sur un CD avant d’installer Martus.
+Vous pouvez télécharger le logiciel d’installation Martus à partir du site http://www.martus.org. Vous pouvez télécharger le logiciel d’installation pour la plateforme que vous utilisez, ou bien une image CD ISO contenant les logiciels d’installation pour Windows, Mac OS et Linux. Si vous téléchargez l’image CD ISO, vous devez la copier sur un CD avant d’installer Martus. Quel que soit le type d'installation de Martus, vous souhaiterez peut-être visiter http://www.martus.org pour télécharger les nouveaux packs de langues qui ont été ajoutées depuis la dernière révision de Martus.
 
 N.B. : Comme pour la plupart des applications, vous ne réussirez pas à installer Martus en copiant les fichiers que vous avez sauvegardés. Utilisez le programme d’installation Martus pour installer l’application.
 
@@ -121,21 +122,31 @@ N.B. : N’utilisez que des CD grande taille dans un lecteur CD muni d’une tra
 6. Créez un raccourci du fichier Martus.jar sur votre bureau ou dans un autre dossier si besoin est.
 
 Installation de Martus pour Linux :
+Les instructions d'installation pour Linux figurent dans le fichier LinuxJavaInstall.txt se trouvant dans le répertoire Martus/Docs sur le CD d'installation. Vous trouverez ce même fichier dans le répertoire Martus/Docs de votre disque dur après l'installation de Martus.
+
 1. Vérifiez la présence de Sun Java version 1.4.1_03 ou plus récente :
-         java –version
-Si une version plus ancienne de Java s’affiche, ou si aucune information n’apparaît alors que vous êtes certain d’avoir installé Java, alors exécutez le code qui contient PATH (CHEMIN D’ACCES) que vous trouverez dans le fichier d’accompagnement LinuxJavaInstall.txt.  
+
+java –version
+
+Si une version plus ancienne de Java s’affiche, ou si aucune information n’apparaît alors que vous êtes certain d’avoir installé Java, alors exécutez le code qui contient PATH (CHEMIN D’ACCES) que vous trouverez dans le fichier d’accompagnement LinuxJavaInstall.txt.
+
 Si vous n’avez installé aucune version récente de Java, installez Sun Java à partir du CD Martus, ou bien téléchargez le "fichier auto extractible Linux" à partir du site
-         http://java.sun.com/j2se/downloads.html
+
+http://java.sun.com/j2se/downloads.html
+
 Pour faciliter l’installation de Java à partir d’un CD, nous vous proposons un script qui devrait fonctionner sur la plupart des versions de Linux. Pour installer Java, exécutez les séries de commandes shell que vous trouverez dans le fichier LinuxJavaInstall.txt, que vous pouvez automatiser en saisissant la commande :
-         bash LinuxJavaInstall.txt
-2. Copiez tous les fichiers compris dans le répertoire /LibExt/ vers le répertoire /lib/ext/ de votre disque dur.
+
+bash LinuxJavaInstall.txt
+
+2. Copiez tous les fichiers compris dans le répertoire /LibExt/ vers le répertoire de votre disque dur contenant vos bibliothèques exécutables de l'Installation Java.
 3. Créez un nouveau répertoire sur le disque dur sur le répertoire ~/Martus/.
 4. Copiez tous les fichiers compris dans le répertoire Martus/ du CD d’installation vers le répertoire ~/Martus/.
 5. Si vous le souhaitez, créez un script pour exécuter Martus. Pour exécuter le programme Martus, saisissez
-java -jar ~/Martus/Martus.jar
+       java -jar ~/Martus/Martus.jar
+
 --------
 2b. Désinstallation
-Pour désinstaller Martus sous Windows sans supprimer vos communiqués Martus ni vos données de compte, choisissez Démarrer > Programmes > Martus > Désinstaller Martus (si vous avez choisi d’ajouter des raccourcis à votre Menu Démarrer), double cliquez le fichier uninst.exe se trouvant dans le répertoire Martus\bin, ou bien utilisez le panneau de configuration Windows, Ajout/Suppression de Programmes :
+Pour désinstaller Martus sous Windows sans supprimer vos communiqués Martus ni vos données de compte, choisissez Démarrer > Programmes > Martus > Désinstaller Martus (si vous avez choisi d’ajouter des raccourcis à votre Menu Démarrer), double cliquez le fichier uninst.exe se trouvant dans le répertoire Martus, ou bien utilisez le panneau de configuration Windows, Ajout/Suppression de Programmes :
 1. Choisissez Options > Panneau de Configuration à partir du Menu Démarrer.
 2. Double-cliquez l’icône Ajout/Suppression de Programmes.
 3. Sélectionnez Martus dans la liste d’applications.
@@ -145,18 +156,26 @@ Pour désinstaller Martus sous Mac OS ou Linux sans supprimer vos communiqués M
 
 Si vous souhaitez supprimer les communiqués et votre fichier de clé tout en conservant l’application Martus, choisissez Outils > Supprimer Mes Données. Pour de plus amples renseignements, consultez "7. Suppression de Vos Communiqués et de Vos Informations de Compte."
 
-Si vous souhaitez supprimer les communiqués Martus et les données de configuration ainsi que l'application Martus, choisissez Outils > Supprimer Toutes les Données et Désinstaller Martus. Cette fonctionnalité supprime les informations de tous les comptes de l’ordinateur - pas seulement les vôtres – et ne doit être utilisée qu’en cas d’urgence. Pour de plus amples renseignements, consultez "8. Suppression de Toutes les Données Martus, y Compris l’Application."
+Si vous souhaitez supprimer les communiqués Martus et les données de configuration, choisissez Outils > Supprimer Toutes Données et Désinstaller Martus. Cette fonctionnalité supprime les informations de tous les comptes de l’ordinateur - pas seulement les vôtres – et ne doit être utilisée qu’en cas d’urgence. Pour de plus amples renseignements, consultez "8. Suppression de Toutes les Données Martus, y Compris l’Application."
 
-Lorsque vous supprimez les fichiers Martus à l’aide de la commande Supprimer Toutes les Données et Désinstaller Martus, ce dernier supprime les fichiers de manière à les rendre moins faciles à récupérer que s’ils avaient été supprimés manuellement. Cependant, afin de vérifier que toutes les informations Martus ont bien été supprimées, cherchez le dossier Martus (C:\Martus sous Windows) ainsi que tous dossiers et fichiers que vous avez copiés au cours de l’installation (Mac Os ou Linux). Si l’un de ces dossiers ou fichiers est toujours présent, supprimez-le, puis videz la corbeille de recyclage.
+Lorsque vous supprimez les fichiers Martus à l’aide de la commande Supprimer Toutes Données et Désinstaller Martus, ce dernier supprime les fichiers de manière à les rendre moins faciles à récupérer que s’ils avaient été supprimés manuellement. Cependant, afin de vérifier que toutes les informations Martus ont bien été supprimées, cherchez le dossier Martus (C:\Martus sous Windows) ainsi que tous dossiers et fichiers que vous avez copiés au cours de l’installation (Mac Os ou Linux). Si l’un de ces dossiers ou fichiers est toujours présent, supprimez-le, puis videz la corbeille de recyclage.
 
-N.B. : Les données utilisateur supprimées peuvent encore être récupérées par des informaticiens pouvant accéder au disque dur de l’ordinateur. Cependant, Martus les supprime de manière à les rendre difficiles à récupérer. En outre, du fait que toutes les données des communiqués sont cryptées, elles restent sécurisées pour autant que votre mot de passe est solide et reste secret. Il existe des utilitaires qui se chargeront d’effacer en totalité les données de l’utilisateur de manière à empêcher la récupération de toute information.
+N.B. : Les données utilisateur supprimées peuvent encore être récupérées par des informaticiens pouvant accéder au disque dur de l’ordinateur. Cependant, Martus les supprime de manière à les rendre difficiles à récupérer. En outre, du fait que toutes les données des communiqués sont cryptées, elles restent sécurisées pour autant que votre mot de passe est solide et reste secret. Il existe des petites applications qui se chargeront d’effacer en totalité les données de l’utilisateur de manière à empêcher la récupération de toute information.
 --------
-2c. Mise à jour de l’application Martus
+2c. Passage à une nouvelle version de Martus (Windows uniquement)
+Benetech améliore constamment l'application Martus, et les mises à jour de Martus sont régulièrement mises à votre disposition sur le site web de Martus : http://www.martus.org.
+
+Pour mettre à jour le logiciel Martus pour Windows, suivez les instructions ci-dessous :
+1. Téléchargez la nouvelle version ou procurez-vous un CD d'installation.
+2. Exécutez le programme d'installation : double-cliquez sur le fichier téléchargé ou insérez le CD dans votre lecteur. Le programme d'installation vous informe que vous possédez une ancienne version de Martus.
+3. Cliquez OUI pour effectuer la mise à jour. La nouvelle version de Martus s'installe dans les mêmes répertoires que l'ancienne version. Tous les fichiers de données, y compris les informations de compte, les mots de passe et les communiqués, restent intacts.
+--------
+2d. Mise à jour de l’application Martus
 Benetech améliore constamment l’application Martus. Allez sur http://www.martus.org pour récupérer la dernière version et suivez les instructions sur le site web pour valider le logiciel téléchargé à l’aide du programme md5sum.
 
 A l’avenir, Benetech choisira peut-être de distribuer une version mise à jour du fichier martus.jar. Ne faites confiance à aucun fichier martus.jar qui vous serait livré séparément, tant que vous n’avez pas vérifié son authenticité à l’aide de la procédure ci-après. Ne faites confiance à aucune autre procédure de vérification qui vous aurait été fournie par d’autres moyens. 
 
-N’utilisez que le programme de vérification fourni sur un CD Martus authentique. Les instructions ci-dessous assument que le programme de vérification se situe dans le répertoire "Verify" (vérifier) d’un CD Martus. Si vous avez placé le programme de vérification sur une disquette ou sur le disque dur, il vous faudra modifier ces instructions en conséquence.
+N’utilisez que le programme de vérification fourni sur un CD Martus authentique. Les instructions ci-dessous assument que le programme de vérification se situe dans le répertoire "Verify" d’un CD Martus. Si vous avez placé le programme de vérification sur une disquette ou sur le disque dur, il vous faudra modifier ces instructions en conséquence.
 
 * Sous Windows :
 
@@ -164,15 +183,15 @@ Ouvrez une fenêtre d’invite MS-DOS et saisissez les trois lignes suivantes, e
 
 d:
 cd\verify
-ven d:\cheminfichier\martus.jar
+ven d:\pathtofile\martus.jar
 
 OU BIEN, à partir du menu Démarrer, choisissez Exécuter, puis saisissez :
 
-d:\verify\ven  d:\cheminfichier\martus.jar  
+d:\verify\ven  d:\pathtofile\martus.jar  
 
-(d étant la lettre correspondant à votre CD-ROM et cheminfichier étant le chemin menant au fichier .jar que vous vérifiez).	
+(d étant la lettre correspondant à votre CD-ROM et pathtofile étant le chemin menant au fichier.jar que vous vérifiez).	
 
-Si la ligne "Martus JAR verified" (Martus JAR vérifié) s’affiche à l’écran, le fichier .jar est légitime.
+Si la ligne "Martus JAR vérifié." s’affiche à l’écran, le fichier .jar est légitime.
 
 * Sous Mac OS :
 
@@ -186,44 +205,48 @@ cd  Martus (puis tapez la touche Tab pour remplir automatiquement le nom du doss
 cd  Verify
 java  -cp  .  JarVerifier  /Library/Java/Martus/Martus.jar
 
-Si la ligne "Martus JAR verified" (Martus JAR vérifié) s’affiche à l’écran, le fichier .jar est légitime.
+Si la ligne "Martus JAR vérifié." s’affiche à l’écran, le fichier .jar est légitime.
 
 * Sous Linux :
 
-Placez le nouveau fichier .jar dans le répertoire ~/Martus/ existant, puis exécutez le programme de vérification. Le code suivant peut être collé dans un bash ou sh shell (bien qu’il vous faille peut-être vous trouver à la racine ("root") pour exécuter la commande mount):
+Placez le nouveau fichier .jar dans le répertoire ~/Martus/ existant, puis exécutez le programme de vérification. Le code suivant peut être collé dans un bash ou sh shell (bien qu’il vous faille peut-être vous trouver à la racine pour exécuter la commande mount):
 
   mount=/mnt/cdrom
   [ -d $mount ] || mount=/cdrom		# for Debian and etc
-  [ -d $mount/[vV]erify ] || mount -r $mount	
+  [ -d $mount/[vV]erify ] || mount -r $mount
   cd $mount/[vV]erify && java JarVerifier ~/Martus/Martus.jar
 
-Si la ligne "Martus JAR verified" (Martus JAR vérifié) s’affiche à l’écran, le fichier .jar est légitime.  
-Si vous lisez "bash: java: No such file or directory" (bash: java: Fichier ou Répertoire inexistant) vous devrez alors ajouter le répertoire 'bin' de java à votre CHEMIN D’ACCES (PATH). Voir étape 1 de la procédure d’installation Linux.   Si vous lisez "Error loading class JarVerifier : Bad major version number" (Erreur de chargement class JarVerifier : Mauvais numéro de version principale) vous devrez alors installer une version plus récente de java, et/ou placer la dernière version de java plus en amont de votre chemin (PATH). Voir étape 1 de la procédure d’installation Linux.
+Si la ligne "Martus JAR vérifié." s’affiche à l’écran, le fichier .jar est légitime.
+
+Si vous lisez "bash: java: Fichier ou Répertoire inexistant" vous devrez alors ajouter le répertoire 'bin' de java à votre CHEMIN D’ACCES (PATH). Voir étape 1 de la procédure d’installation Linux.
+
+Si vous lisez "Erreur de chargement class JarVerifier : Mauvais numéro de version principale" vous devrez alors installer une version plus récente de java, et/ou placer la dernière version de java plus en amont de votre chemin (PATH). Voir étape 1 de la procédure d’installation Linux.
+
+
 --------
-2d. Création de votre compte
+2e. Création de votre compte
 Avant de pouvoir utiliser Martus, vous devez créer un compte personnel et configurer vos informations de contact. Le même ordinateur peut comporter des comptes multiples. Le compte du premier utilisateur se trouve dans le répertoire Martus ; les autres comptes se trouvent dans les sous répertoires du répertoire Martus.
 
 Lorsque vous configurez votre compte, vous créez un pseudo et un mot de passe. Choisissez un mot de passe dont vous vous souviendrez. Si vous oubliez votre pseudo ou votre mot de passe, vous ne pourrez plus accéder à aucun de vos communiqués dans Martus. En outre, préservez le secret de votre mot de passe. Ce dernier vous permet non seulement d’accéder à l’ensemble des communiqués que vous avez créés dans Martus, mais aussi d’en créer de nouveaux. N’envoyez jamais votre mot de passe à personne par e-mail et ne le donnez pas par téléphone, car ces supports sont loin d’être parfaitement sûrs.
 
 1. Démarrez Martus. Cliquez OK dans la boîte de dialogue de Bienvenue de Martus. La boîte de dialogue d’ouverture de session Martus s’ouvre.
-• Pour démarrer Martus sous Windows, choisissez Démarrer > Programmes > Martus > Martus, double-cliquez sur le raccourci bureau de Martus ou dans le répertoire Martus, ou bien choisissez Démarrer > Exécuter puis saisissez le texte suivant :  
-     C:\Martus\bin\javaw.exe -jar C:\Martus\Martus.jar.
+• Pour démarrer Martus sous Windows, choisissez Démarrer > Programmes > Martus > Martus, double-cliquez sur le raccourci bureau de Martus ou dans le répertoire Martus, ou bien choisissez Démarrer > Exécuter puis saisissez le texte suivant : 
+    C:\Martus\bin\javaw.exe -jar C:\Martus\Martus.jar.
 • Pour démarrer Martus sous Mac OS, double-cliquez le fichier Martus.jar se trouvant dans le dossier /Bibliothèque/Java/Martus ou, si vous en avez créé un, double-cliquez le raccourci Martus.jar.
 • Pour démarrer Martus sous Linux, exécutez un script que vous avez créé ou bien saisissez 
-     java –jar ~/Martus/Martus.jar. 
+    java –jar ~/Martus/Martus.jar. 
 2. Si d’autres comptes existent déjà sur votre ordinateur, cliquez sur l’onglet Nouveau Compte dans la boîte de dialogue d’ouverture de session, puis cliquez OK. Si aucun compte n’existe, Martus vous demandera soit de créer un nouveau compte, soit de restaurer un compte à partir de fichiers clés sauvegardés.
 3. Choisissez une langue dans le menu déroulant de la boîte de dialogue d’ouverture de session.
 4. Tapez un pseudo ; il peut contenir des lettres, des chiffres, de la ponctuation et des espaces. Nous vous recommandons de créer un pseudo comportant entre 8 et 50 caractères, et vous déconseillons de saisir des caractères non ascii à l’aide de la méthode Alt + pavé numérique. Optez pour un pseudo que vous mémoriserez facilement, et souvenez-vous si vous avez saisi des majuscules, car les noms d’utilisateurs de Martus tiennent compte de la casse.
-5. Cliquez sur les caractères de l’écran clavier pour taper un mot de passe comportant entre 8 et 50 caractères. (Il n’y a pas de curseur dans le champ du Mot de Passe, et vous ne devez y effectuer aucun clic.) Choisissez un mot de passe dont vous vous souviendrez, mais difficile à deviner par les tiers. Si vous oubliez votre pseudo ou votre mot de passe, vous n’aurez aucun moyen d’accéder ni aux communiqués privés que vous avez créés, ni à aucune donnée de votre ordinateur. Choisissez une combinaison de lettres, de chiffres et de ponctuation pour sécuriser au maximum votre mot de passe ; les mots de passe de Martus tiennent compte de la casse. Consultez "2e. Choix d’un Mot de Passe" pour savoir comment créer un mot de passe utile et sûr.
-
-
+5. Cliquez sur les caractères de l’écran clavier pour taper un mot de passe comportant entre 8 et 50 caractères. (Il n’y a pas de curseur dans le champ du Mot de Passe, et vous ne devez y effectuer aucun clic.) Choisissez un mot de passe dont vous vous souviendrez, mais difficile à deviner par les tiers.  Choisissez une combinaison de lettres, de chiffres et de ponctuation pour sécuriser au maximum votre mot de passe ; les mots de passe de Martus tiennent compte de la casse. Consultez "2f. Choix d’un Mot de Passe" pour savoir comment créer un mot de passe utile et sûr. 
+Si vous oubliez votre pseudo ou votre mot de passe, vous n’aurez aucun moyen d’accéder ni aux communiqués privés que vous avez créés, ni à aucune donnée de votre ordinateur, sauf si vous avez procédé à une sauvegarde de clé multi fichiers. Pour de plus amples renseignements, voir "2f. Choix d'un mot de passe" et "9b. Sauvegarde de votre clé".
 
 N.B. : Si vous préférez saisir votre mot de passe par l’intermédiaire du clavier de votre ordinateur, cliquez sur Passer au Clavier Normal. Votre mot de passe risque d’être moins sécurisé si vous le tapez au clavier de l’ordinateur que par l’intermédiaire du clavier écran, car un intrus pourrait installer un dispositif ou un programme pouvant "renifler" votre clavier et enregistrer votre frappe. Si vous utilisez le clavier, nous vous déconseillons la frappe de caractères non ascii par l’intermédiaire de la méthode Alt + Pavé Numérique.
 
 6. Cliquez OK. L’écran d’ouverture de session réapparaît.
 7. Tapez le même pseudo et le même mot de passe afin qu’ils soient vérifiés, puis cliquez OK.
-8. Si vous souhaitez renseigner des informations sur votre contact, tapez-les maintenant. (L’affichage de la boîte de dialogue de Paramétrage d’Informations de Contact Martus peut prendre quelques secondes.) Si vous laissez les champs Auteur et Organisme en blanc, Martus vous invitera à renseigner ces informations à chaque démarrage de l’application.
-
+8. 
+Si vous souhaitez renseigner des informations sur votre contact, tapez-les maintenant. (L’affichage de la boîte de dialogue de Paramétrage d’Informations de Contact Martus peut prendre quelques secondes.) Si vous laissez les champs Auteur et Organisme en blanc, Martus vous invitera à renseigner ces informations à chaque démarrage de l’application.
 
 
 Les renseignements sur l’Auteur et l’Organisme s’affichent dans tous les communiqués que vous créez. A l’avenir, les données des communiqués publics (à savoir les données qui n’ont pas été spécifiquement déclarées privées) seront accessibles aux chercheurs, à la presse et au public grâce au Moteur de Recherche Martus. Ces informations relatives au contact offrent un moyen aux tiers d’obtenir par votre intermédiaire ou par celui de votre organisme un complément d’informations sur vos communiqués. (Si vous ne souhaitez pas rendre publiques les données de votre communiqué, vous pouvez choisir de cataloguer l’ensemble de vos données comme étant privées.)
@@ -236,21 +259,23 @@ Si vous ne renseignez pas les champs Auteur et Organisme, la boîte de dialogue 
 
 N.B. : Lorsque vous fermez Martus après avoir créé un compte, vous serez invité à sauvegarder votre fichier clé. En cas de mauvais fonctionnement ou de vol de votre ordinateur, vous aurez besoin de votre fichier clé pour accéder à vos données de communiqués privés depuis les serveurs Martus sur un autre ordinateur. Martus vous invitera à sauvegarder votre fichier clé à chaque démarrage de l’application tant que vous ne l’aurez pas fait. Pour de plus amples renseignements, consultez "9b. Sauvegarde de votre clé."
 --------
-2e. Choix d'un mot de passe
+2f. Choix d'un mot de passe
 Pour sécuriser vos données, il vous faut utiliser un mot de passe ne pouvant être facilement découvert ou deviné. Suivez conseils ci-après pour inventer un mot de passe que vous pourrez utiliser avec confiance, et dont vous vous souviendrez. Vous êtes le seul à connaître votre mot de passe ; si vous l’oubliez, vous ne pourrez plus accéder à vos données privées Martus.
 
 • Ne réutilisez pas votre pseudo.
 • N’utilisez pas un seul mot trouvé dans le dictionnaire.
 • Nous vous recommandons d’utiliser au moins 15 caractères.
 • Utilisez une combinaison de caractères alphanumériques, ainsi que des caractères spéciaux (tels que !@#$%^&*).
-• Utilisez une combinaison de caractères mélangeant majuscules et minuscules.
+• Si vous utilisez une langue sensible à la casse, choisissez une combinaison de caractères mélangeant majuscules et minuscules.
 • S’il vous faut noter votre mot de passe, conservez-le en lieu sûr et éloigné de votre installation Martus.
 • Créez un pense-bête, et conservez-le en lieu sûr. (N’oubliez pas que si votre pense-bête vous rafraîchit la mémoire, il peut aussi faciliter la découverte de votre mot de passe par un intrus.)
 • Utilisez un mot de passe mémorisable (utilisez des caractères qui ont une signification pour vous).
 • Développez une méthode simple lorsque vous choisissez de nouveaux mots de passe.
 • Changez votre mot de passe si vous pensez qu’il y a péril sur votre compte. Pour de plus amples renseignements, consultez "9h. Modification de votre pseudo ou de votre mot de passe".
+
+
 --------
-2f. Configuration d’une connexion au serveur
+2g. Configuration d’une connexion au serveur
 Pour vérifier que vous pourrez accéder à vos communiqués en cas de perte ou de vol de votre ordinateur, envoyez-les à un serveur Martus. Le serveur Martus accepte les communiqués cryptés, les sauvegarde en toute sécurité et les reproduit en de multiples endroits, empêchant ainsi la perte des informations. Les serveurs Martus sont gérés par des organismes à but non lucratif (Benetech ne gère pas directement les serveurs Martus). Si votre organisme n’est pas en contact avec un organisme possédant un serveur Martus, visitez le site http://www.martus.org pour voir la liste des hôtes des serveurs.
 
 L'envoi de communiqués à un serveur vous permet également de les partager avec les tiers qui y ont accès, comme le Siège de votre propre organisme. A l’avenir, la presse et le public pourront avoir accès à vos communiqués publics.
@@ -265,17 +290,17 @@ Pour configurer le serveur :
 1. Choisissez Serveur > Sélectionner Serveur Martus.
 2. Tapez votre pseudo et votre mot de passe à l’invite.
 3. Tapez l’adresse IP du serveur.
+
+
+
 4. Tapez le code public d’identification du serveur et cliquez OK.
-
-
-
 5. Un message de conformité du serveur s’affiche. Cliquez Accepter si le message de conformité du serveur répond à vos besoins. Dans le cas contraire, cliquez Refuser et sélectionnez un autre serveur.
 
 N.B. : Le guide de conformité du serveur est disponible sur le site http://www.martus.org/, au chapitre "Télécharger le Serveur Martus". Les serveurs conformes sont réputés être sécurisés ; les serveurs ne répondant pas aux normes du guide de conformité risquent de présenter des failles de sécurité. Si vous souhaitez savoir si un serveur répond à vos besoins, demandez au membre de votre organisme qui détermine les conditions d’utilisation de Martus – ou bien envoyez un message à info@martus.org
 
-6. Tapez la formule magique qui vous permettra d'envoyer vos communiqués au serveur, puis cliquez OK.
+6. A l'invite, tapez la formule magique qui vous permettra d'envoyer vos communiqués au serveur, puis cliquez OK. Aucune invite ne vous demandera de taper la formule magique si vous utilisez un compte ayant déjà eu accès à ce serveur.
 
-N.B. : Veuillez noter que la formule magique n'est pas sensible à la casse et ignore les espaces. Aussi, si vous devez utiliser "Formule magique", vous pouvez aussi bien taper "formule magique" ou "FormuleMagique". 
+N.B. : La formule magique n'est pas sensible à la casse et ne tient pas compte des espaces. Donc, si on vous a fourni "Formule magique", vous pouvez aussi bien taper "formule magique" que "FormuleMagique".
 
 7. Cliquez OK dans la boîte de dialogue pour confirmer votre connexion au serveur.
 
@@ -287,14 +312,14 @@ Pour supprimer votre connexion à un serveur Martus sans vous connecter à un au
 
 N.B. : Une fois le serveur sélectionné, Martus tentera d’y accéder à chaque démarrage du logiciel. Le serveur pourra vous communiquer l’état de votre compte ou d’autres informations importantes.
 --------
-2g. Paramétrage de vos préférences
+2h. Paramétrage de vos préférences
 Dans Martus, vous pouvez personnaliser la langue et le format de date. Vous pouvez également vérifier que tout communiqué créé par vous reste privé.
 
-Pour modifier la langue utilisée dans l’interface utilisateur de Martus, choisissez Options > Préférences. Puis, choisissez une langue dans le menu contextuel et cliquez OK. Dans la version actuelle, l’interface utilisateur est fournie en anglais, en espagnol, en russe et en français. Les versions futures de Martus vous proposeront d’autres langues. Visitez le site http://www.martus.org pour vérifier s’il existe de nouvelles versions de Martus disponibles dans de nouvelles langues ou pour vous renseigner sur les possibilités de traduction de l’interface utilisateur dans une autre langue.
+Pour modifier la langue utilisée dans l’interface utilisateur de Martus, choisissez Options > Préférences. Puis, choisissez une langue dans le menu contextuel et cliquez OK. Martus a été traduit en plusieurs langues. Visitez le site http://www.martus.org pour vérifier s’il existe de nouvelles versions de Martus disponibles dans de nouvelles langues ou pour vous renseigner sur les possibilités de traduction de l’interface utilisateur dans une autre langue. En outre, un pack de langues est peut-être disponible sur le site web de Martus ; un pack de langues peut contenir les versions mises à jour de la traduction de l'interface utilisateur du Client Martus, du Guide de l'Utilisateur, du Guide de Démarrage Rapide, du fichier LisezMoi, et de l'aide programme dans une langue donnée.
 
 Pour modifier le format de la date utilisée dans les listes de communiqués ainsi que dans les communiqués que vous créez, choisissez Options > Préférences. Puis choisissez le format souhaité dans Format Date du menu déroulant et cliquez OK.
 
-Si vous souhaitez ne jamais rendre publics vos communiqués, choisissez Options > Préférences. Puis cochez Empêcher la Création de Communiqués Publics, et cliquez sur OK. Tant que vous n’aurez pas décoché cette option, tous les communiqués que vous créerez dans Martus seront privés et dans les nouveaux communiqués, il ne vous sera pas possible de décocher l’option Garder TOUTES Informations Privées.
+Si vous souhaitez ne jamais rendre publics vos communiqués, choisissez Options > Préférences. Puis cochez Empêcher la Création de Communiqués Publics, et cliquez sur OK. Tant que vous n’aurez pas décoché cette option, tous les communiqués que vous créerez dans Martus seront privés et dans les nouveaux communiqués, il ne vous sera pas possible de décocher l’option Garder TOUS Communiqués Privés dans les nouveaux communiqués.
 
 
 
@@ -312,10 +337,10 @@ Un seul ordinateur peut posséder plusieurs comptes Martus. En cas d’inactivit
 4. Création d'un Communiqué
 Pour créer un nouveau communiqué, cliquez Créer ou choisir Fichier > Créer Nouveau Communiqué. La boîte de dialogue Créer Communiqué apparaît. Saisissez les informations dans les champs de communiqué.
 
-Cliquez sur Détails de Communiqué pour voir l’ID du communiqué (un numéro d’identification unique utilisé par Martus et par le support technique et les administrateurs du serveur), ainsi que le Code Public de l’auteur et les Codes Publics de tous les comptes de Sièges ayant accès à ce communiqué.
+Cliquez sur Détails de Communiqué pour voir l’ID du communiqué (un numéro d’identification unique utilisé par Martus et par le support technique et les administrateurs du serveur), l'historique de la version du communiqué, ainsi que le Code Public de l’auteur et les Codes Publics de tous les comptes de Sièges ayant accès à ce communiqué.
 --------
 4a. Comment remplir les champs d'un communiqué
-Vous pouvez directement taper vos données dans les champs, ou vous pouvez copier/coller vos informations dans les champs à partir de communiqués ou autres documents existants.  Pour copier/coller, utilisez les raccourcis clavier standards du système d’exploitation : Ctrl+C pour copier sous Windows ou Linux, Command+C pour copier sous Mac OS ; Ctrl+V pour coller sous Windows ou Linux, et Command+V pour coller sous Mac OS. La touche Command sous Mac OS correspond à la touche Apple. Vous pouvez aussi faire un clic droit dans le champ sous Windows ou Linux, ou bien faire un Ctrl-clic sous Mac OS, puis choisir Copier ou Coller dans le menu contextuel.
+Vous pouvez directement taper vos données dans les champs, ou vous pouvez copier/coller vos informations dans les champs à partir de communiqués ou autres documents existants. Pour copier/coller, utilisez les raccourcis clavier standards du système d’exploitation : Ctrl+C pour copier sous Windows ou Linux, Command+C pour copier sous Mac OS, Ctrl+V pour coller sous Windows ou Linux, et Command+V pour coller sous Mac OS. La touche Command sous Mac OS correspond à la touche Apple. Vous pouvez aussi faire un clic droit dans le champ sous Windows ou Linux, ou bien faire un Ctrl-clic sous Mac OS, puis choisir Copier ou Coller dans le menu contextuel.
 
 
 
@@ -349,6 +374,7 @@ Résumé – Saisissez un résumé de l’évènement.
 
 Détails – Saisissez tous détails complémentaires se rapportant à l’évènement.
 
+
 Pièces Jointes – Pour joindre une photo ou tout autre fichier au communiqué, cliquez sur Ajouter Pièce Jointe, puis sélectionnez le fichier à joindre ; ou bien déplacez le fichier à partir d’un dossier de votre ordinateur jusqu’au champ Pièces jointes. Les Pièces Jointes ajoutées à la section Informations Publiques du communiqué seront accessibles à quiconque ayant accès aux données publiques du serveur. (Les communiqués comportant des Pièces Jointes volumineuses seront plus longs à enregistrer comme brouillon, à envoyer au serveur, à extraire à partir du serveur ou à placer ou retirer du bureau.) Les personnes désireuses de visualiser une pièce jointe devront avoir installé le logiciel susceptible de lire son format.
 
 
@@ -362,20 +388,19 @@ Privé – Tapez toute information complémentaire que vous souhaitez inclure au
 4b. Personnalisation de vos communiqués
 Il existe plusieurs manières de personnaliser vos communiqués Martus.
 
-Si vous utilisez régulièrement des types d’informations similaires dans la section Détails de l’ensemble de vos communiqués, vous pouvez créer un modèle pour gagner du temps à chaque fois que vous accédez aux données ou que vous les formatez. Pour de plus amples informations sur cette fonctionnalité, consultez "10a. Utilisation d’un modèle dans le champ Détails".
+Si vous utilisez régulièrement des types d’informations similaires dans la section Détails de l’ensemble de vos communiqués, vous pouvez créer un modèle pour gagner le temps que vous passez chaque fois que vous accédez aux données ou que vous les formatez. Pour de plus amples informations sur cette fonctionnalité, consultez "10a. Utilisation d’un modèle dans le champ Détails".
 
 La plupart des utilisateurs Martus estiment que les champs de communiqués standard répondent à leurs besoins. Si cependant vous souhaitez créer des champs complémentaires aux champs Martus standard, vous pouvez alors créer des champs personnalisés de types divers. Si vous souhaitez saisir certains types de données dans chacun des communiqués, vous allez pouvoir structurer vos données autrement que de les inclure dans les champs de texte de Résumé Standard ou de Détails. Pour de plus amples informations sur cette fonctionnalité, consultez "10b. Personnalisation des champs de Communiqué".
 
 
 --------
 5. Enregistrement et modification des Communiqués
-
-Lorsque vous créez un communiqué, vous pouvez choisir de le remplir et de l'enregistrer sur le serveur Martus, ou bien vous pouvez l’enregistrer comme brouillon si vous pensez le modifier par la suite. Une fois que vous avez enregistré un document terminé sur le serveur Martus, il est verrouillé, et l’unique façon de le modifier est de créer une deuxième version de ce communiqué. Martus enregistre automatiquement des copies de sauvegarde des brouillons des communiqués sur le serveur Martus, mais vous seul pouvez continuer à modifier un brouillon de communiqué jusqu’à ce que vous l'enregistriez sous forme de document verrouillé.
+Lorsque vous créez un communiqué, vous pouvez le verrouiller ou l’enregistrer comme brouillon. Une fois que vous avez enregistré un document verrouillé sur le serveur Martus, l’unique façon de le modifier est de créer une nouvelle version de ce communiqué. Martus enregistre automatiquement des copies de sauvegarde des brouillons des communiqués sur le serveur Martus, mais vous seul pouvez continuer à modifier un brouillon de communiqué jusqu’à ce que vous l'enregistriez sous forme de document verrouillé.
 --------
 5a. Enregistrement d'un communiqué verrouillé
-Si votre communiqué est terminé et que vous ne souhaitiez plus le rééditer, enregistrez le communiqué verrouillé. Une fois que vous avez cliqué sur Enregistrer Verrouillé, le communiqué est verrouillé et personne – ni vous ni quiconque accédant à votre compte – ne pourra le modifier. Si vous êtes connecté à Internet et si vous avez configuré un serveur, Martus lui envoie automatiquement le communiqué verrouillé.
+Si votre communiqué est terminé et que vous ne souhaitiez plus le rééditer pour l'instant, enregistrez le communiqué verrouillé. Une fois que vous avez cliqué sur Enregistrer Verrouillé, le communiqué est verrouillé et personne – ni vous ni quiconque accédant à votre compte – ne pourra le modifier. La seule manière de modifier les informations contenues dans un communiqué verrouillé est de créer une nouvelle version de ce communiqué. Si vous êtes connecté à Internet et si vous avez configuré un serveur, Martus lui envoie automatiquement le communiqué verrouillé. La boîte de dialogue Confirmer Enregistrer le Communiqué s’affiche et vous avertit que celui-ci sera définitivement verrouillé. Cliquez Oui pour l'enregistrer.
 
-La boîte de dialogue Confirmer Enregistrer le Communiqué s’affiche et vous avertit que celui-ci sera définitivement verrouillé. Cliquez Oui pour l'enregistrer.  Le communiqué s’affiche dans le dossier Communiqué Enregistrés avec le statut Verrouillé. Lorsqu’il a été envoyé au serveur, le mot "Oui" s'affiche dans la colonne Envoyé.
+Le communiqué s’affiche dans le dossier Communiqué Enregistrés avec le statut Verrouillé. Lorsqu’il a été envoyé au serveur, le mot "Oui" s'affiche dans la colonne Envoyé.
 
 N.B. : Lorsque vous vous connectez à un serveur, il se peut que la colonne Envoyé ne se remplisse qu'après un certain laps de temps.
 
@@ -383,36 +408,46 @@ Si vous n’avez pas accès à une connexion Internet ou si votre ordinateur ne 
 
 N.B. : Lorsque vous lisez un communiqué créé par un tiers, la colonne Envoyé restera vide, sauf si vous êtes un compte Siège ayant extrait du serveur un communiqué de bureau de terrain.
 --------
-5b. Enregistrement d'un brouillon
+5b. Enregistrement d'un Brouillon
 Enregistrez un brouillon du communiqué si vous souhaitez continuer à y ajouter des informations, ou si vous devez les vérifier avant de les verrouiller.
 
-Pour enregistrer un brouillon de communiqué, cliquez sur Enregistrer brouillon. Le communiqué se déplace dans votre dossier Communiqués Enregistrés avec un statut de brouillon. Pour modifier ce communiqué par la suite, ouvrez le dossier Communiqués Enregistrés et double-cliquez sur le communiqué à réviser. Il n’est pas possible de restaurer les anciens brouillons de communiqués ; lorsque vous enregistrez un brouillon de communiqué modifié, il remplace l’original.
+Pour enregistrer un brouillon de communiqué, cliquez sur Enregistrer Brouillon. Le communiqué se déplace dans votre dossier Communiqués Enregistrés avec un statut de Brouillon. Pour modifier ce communiqué par la suite, ouvrez le dossier Communiqués Enregistrés et double-cliquez sur le communiqué à réviser. Il n’est pas possible de restaurer les anciens brouillons de communiqués ; lorsque vous enregistrez un brouillon de communiqué modifié, il remplace l’original.
 
-Martus envoie au serveur une copie de chacun des brouillons de communiqués enregistrés, afin d’en conserver une copie de sauvegarde au cas où le brouillon de communiqué serait endommagé ou supprimé. Lorsque par la suite vous modifiez et enregistrez votre brouillon de communiqué, Martus supprime le brouillon précédent du serveur et le remplace par la nouvelle version. Les brouillons de communiqués sont toujours traités comme informations privées, qu’ils soient ou non déclarés privés.
+Martus envoie au serveur une copie de chacun des brouillons de communiqués enregistrés, afin d’en conserver une copie de sauvegarde au cas où le brouillon de communiqué serait endommagé ou supprimé. Lorsque par la suite vous modifiez et enregistrez votre brouillon de communiqué, Martus supprime le brouillon précédent du serveur et le remplace par le nouveau brouillon. Les brouillons de communiqués sont toujours traités comme informations privées, qu’ils soient ou non déclarés privés.
 
-Si vous avez paramétré votre compte sur plusieurs ordinateurs, vous ne pouvez pas accéder à vos brouillons à partir d’un autre ordinateur, sauf s’ils ont été enregistrés sur le serveur ; et si vous écrasez un brouillon sur le serveur à partir d’un ordinateur, la version du serveur ne correspondra plus à celle de l’autre ordinateur, du fait que le serveur enregistre la dernière version d’un brouillon. Pour remplacer une ancienne version de brouillon par une nouvelle à partir du serveur, vous devez supprimer ce brouillon de votre ordinateur et l’extraire sur le serveur. Si vous souhaitez conserver une copie de sauvegarde de l’ancienne version du brouillon, vous pouvez déplacer le communiqué sur votre bureau avant de le supprimer.
+Si vous avez paramétré votre compte sur plusieurs ordinateurs, vous ne pouvez pas accéder à vos brouillons à partir d’un autre ordinateur, sauf s’ils ont été enregistrés sur le serveur ; et si vous écrasez un brouillon sur le serveur à partir d’un ordinateur, le brouillon du serveur ne correspondra plus à celui de l’autre ordinateur, du fait que le serveur enregistre le brouillon le plus récent. Pour remplacer un ancien brouillon par un nouveau à partir du serveur, vous devez supprimer ce brouillon de votre ordinateur et l’extraire sur le serveur. Si vous souhaitez conserver une copie de sauvegarde de l’ancien brouillon, vous pouvez déplacer le communiqué sur votre bureau avant de le supprimer.
 
-Si vous décidez de ne pas remplir un communiqué, et qu’il n’a donc jamais été verrouillé, vous pouvez supprimer son brouillon du serveur. Supprimez d’abord le brouillon du communiqué de votre ordinateur, puis choisissez Serveur > Supprimer Mes brouillons Du Serveur. Cochez le brouillon que vous souhaitez supprimer et cliquez Supprimer. (Vous devez d’abord supprimer la copie de votre ordinateur, car vous ne pourrez supprimer aucun communiqué du serveur s’il est toujours sur votre ordinateur.)
+Si vous décidez de ne pas remplir un communiqué, et qu’il n’a donc jamais été verrouillé, vous pouvez supprimer son brouillon du serveur. Supprimez d’abord le brouillon du communiqué de votre ordinateur, puis choisissez Serveur > Supprimer Mes Brouillons Du Serveur. Cochez le brouillon que vous souhaitez supprimer et cliquez Supprimer. (Vous devez d’abord supprimer la copie de votre ordinateur, car vous ne pourrez supprimer aucun communiqué du serveur s’il est toujours sur votre ordinateur.)
 --------
-5c. Modification d'une copie d'un communiqué verrouillé
-Une fois que vous avez verrouillé un communiqué, personne ne peut plus le modifier. Cependant, vous pouvez toujours en modifier la copie puis enregistrer celle-ci sur le serveur, afin de corriger ou de compléter les informations. Le communiqué original verrouillé n’est pas modifié sur le serveur ; vous ne pouvez pas le supprimer.
+5c. Création d'une nouvelle version d'un communiqué verrouillé
+Une fois que vous avez verrouillé un communiqué, personne ne peut plus le modifier. Cependant, vous pouvez toujours en modifier la copie pour procéder à des corrections ou ajouter des informations, puis enregistrer celle-ci comme version plus récente sur le serveur. Le communiqué original verrouillé n’est pas modifié sur le serveur ; vous ne pouvez pas le supprimer.
 
-Pour modifier la copie d’un communiqué verrouillé, sélectionnez ce communiqué et, soit cliquez sur Modifier, soit choisissez Editer > Modifier Communiqué. Cliquez Oui pour confirmer votre souhait de créer une copie du communiqué verrouillé. Lorsque vous avez procédé aux modifications souhaitées, cliquez sur Enregistrer Verrouillé, ou sur Enregistrer brouillon si vous souhaitez procéder à d'autres modifications avant de le verrouiller. 
+Pour créer une nouvelle version d’un communiqué verrouillé, sélectionnez ce communiqué et, soit cliquez sur Modifier, soit choisissez Editer > Modifier Communiqué. Cliquez Oui pour confirmer votre souhait de créer une nouvelle version du communiqué verrouillé. Lorsque vous avez procédé aux modifications souhaitées, cliquez sur Enregistrer Verrouillé, ou sur Enregistrer Brouillon si vous souhaitez procéder à d'autres modifications avant de le verrouiller. 
 
-Conseil : Pensez à modifier le titre de la version modifiée du communiqué de manière à indiquer clairement qu’il contient des corrections ou des compléments d’informations. Par exemple, si le communiqué original verrouillé s’intitule "Leaders politiques emprisonnés", vous pourriez intituler la version modifiée "Leaders politiques emprisonnés – mise à jour". Mieux encore, servez-vous du numéro d'identification du communiqué dans le titre, car si les titres de communiqués peuvent être identiques, en revanche chaque numéro d'ID est unique. (Pour vérifier le numéro d'ID du communiqué original, sélectionnez ce communiqué, puis cliquez sur le bouton Détails de Communiqué). Cela vous simplifie l’identification des différentes versions tout en expliquant aux tiers qui accèdent à la base de données que l’incident contient des informations complémentaires.
+Bien que le même communiqué puisse être copié dans plusieurs dossiers Martus différents, chaque liste fait référence à un fichier unique. Par conséquent, lorsque vous créez une nouvelle version du communiqué, cette modification se répercute pour le communiqué dans chaque dossier Martus de votre ordinateur. De la même manière, la nouvelle version est téléchargée si vous êtes connecté au serveur ; toutes les anciennes versions sont conservées sur le serveur.
+
+Conseil : Pensez à modifier le titre de la version modifiée du communiqué de manière à indiquer clairement qu’il contient des corrections ou des compléments d’informations. Par exemple, si le communiqué original verrouillé s’intitule "Leaders politiques emprisonnés", vous pourriez intituler la version modifiée "Leaders politiques emprisonnés – mise à jour". 
 --------
 5d. Modification d'un brouillon
 Vous pouvez modifier les brouillons de communiqués tant que vous ne les avez pas verrouillés. Pour modifier un brouillon de communiqué, double-cliquez le communiqué, puis modifiez ou complétez les informations. (Vous pouvez également sélectionner le titre du communiqué puis cliquer sur Modifier, ou alors choisissez Editer > Modifier Communiqué.) Vous pouvez réenregistrer le communiqué modifié comme brouillon ou bien l'enregistrer sous forme de communiqué verrouillé. Si vous cliquez sur Annuler, les nouvelles informations seront perdues et le communiqué retournera à l’état du dernier enregistrement. Chaque fois que vous enregistrez un brouillon de communiqué, Martus actualise la copie de sauvegarde du brouillon du communiqué sur le serveur. Lorsque vous enregistrez le brouillon du communiqué final sur le serveur, Martus supprime du serveur la copie de sauvegarde du brouillon de communiqué.
 
-Si vous avez paramétré votre compte sur plusieurs ordinateurs, vous ne pouvez pas accéder à vos brouillons à partir d’un autre ordinateur, sauf s’ils ont été enregistrés sur le serveur ; et si vous écrasez un brouillon sur le serveur à partir d’un ordinateur, la version du serveur ne correspondra plus à celle de l’autre ordinateur, du fait que le serveur enregistre la dernière version d’un brouillon. Pour remplacer une ancienne version de brouillon par une nouvelle à partir du serveur, vous devez supprimer ce brouillon de votre ordinateur et l’extraire sur le serveur. Si vous souhaitez conserver une copie de sauvegarde de l’ancienne version du brouillon, vous pouvez déplacer le communiqué sur votre bureau avant de le supprimer.
-
+Si vous avez paramétré votre compte sur plusieurs ordinateurs, vous ne pouvez pas accéder à vos brouillons à partir d’un autre ordinateur, sauf s’ils ont été enregistrés sur le serveur ; et si vous écrasez un brouillon sur le serveur à partir d’un ordinateur, la version du serveur ne correspondra plus à celle de l’autre ordinateur, du fait que le serveur enregistre la dernière version d’un brouillon. Pour remplacer une ancienne version de brouillon par une nouvelle à partir du serveur, vous devez supprimer ce brouillon de votre ordinateur et l’extraire sur le serveur. Si vous souhaitez conserver une copie de sauvegarde du brouillon d'origine, vous pouvez déplacer le communiqué sur votre bureau avant de le supprimer.
 --------
 5e. Mise au rebut d'un brouillon
-Pour mettre au rebut les informations que vous avez saisies, cliquez sur Annuler. Martus vous avertit que vous allez supprimer toutes les informations du communiqué que vous n’avez pas enregistrées et qui n’ont pas encore été envoyées. Cliquez Oui pour mettre définitivement au rebut les informations non enregistrées. (Si vous cliquez sur Annuler lorsque vous éditez un brouillon de communiqué, le communiqué retournera à l’état dans lequel il était lorsque vous l’avez ouvert.)
+Pour mettre au rebut les informations que vous avez saisies, cliquez sur Annuler. Martus vous avertit que vous allez supprimer toutes les informations du communiqué que vous n’avez pas enregistrées et qui n’ont pas encore été envoyées. Cliquez Oui pour mettre définitivement au rebut les informations non enregistrées. (Si vous cliquez sur Annuler lorsque vous modifiez un brouillon de communiqué, le communiqué retournera à l’état dans lequel il était lorsque vous l’avez ouvert.)
 
-Pour supprimer du serveur les brouillons de communiqués, supprimez-les d’abord de votre ordinateur. Puis, choisissez Serveur > Supprimer Mes brouillons Du Serveur. Cochez les brouillons que vous souhaitez supprimer du serveur, puis cliquez sur Supprimer. (Vous ne pourrez supprimer aucun communiqué du serveur s’il est toujours sur votre ordinateur.)
+Pour supprimer du serveur les brouillons de communiqués, supprimez-les d’abord de votre ordinateur. Puis, choisissez Serveur > Supprimer Mes Brouillons Du Serveur. Cochez les brouillons que vous souhaitez supprimer du serveur, puis cliquez sur Supprimer. (Vous ne pourrez supprimer aucun communiqué du serveur s’il est toujours sur votre ordinateur.)
 
 Si vous avez paramétré votre compte sur plusieurs ordinateurs et que vous supprimez un brouillon d’un ordinateur et du serveur, il sera toujours présent sur l’autre ordinateur. Si vous modifiez le brouillon sur ce dernier, il le renverra au serveur, mais si vous ne modifiez jamais le brouillon, il ne sera jamais renvoyé.
+
+Pour de plus amples renseignements, voir "6d. Mise au rebut et suppression de communiqués".
+
+--------
+5f. Mise au rebut d'un communiqué verrouillé
+Vous pouvez mettre au rebut un communiqué se trouvant dans un dossier, ce qui le déplace dans le dossier Communiqués Mis Au Rebut. Pour supprimer définitivement un communiqué du disque dur, supprimez-le du dossier Communiqués Mis Au Rebut. Si un communiqué verrouillé a été envoyé au serveur, vous pourrez le récupérer. 
+
+Pour supprimer un communiqué d'un dossier, sélectionnez-le et choisissez Editer > Supprimer Communiqué. Ce dernier s'affiche dans le dossier des Communiqués Supprimés. Pour le supprimer de votre disque dur, sélectionnez-le dans le dossier des Communiqués Supprimés et choisissez Editer > Supprimer Communiqué. Pour de plus amples renseignements, voir "6d. Mise au rebut et suppression de communiqués".
+
 
 --------
 6. Gestion des Communiqués
@@ -420,7 +455,7 @@ Les dossiers vous aident à gérer les communiqués que vous avez créés ou ext
 
 N.B. : Le champ Envoyé est vide si les communiqués ont été créés par un tiers, ou bien si vous n'êtes connecté à aucun serveur.
 
-Pour visualiser l'ID du communiqué, le Code Public de l'auteur et les Codes Publics de tous les comptes Siège pouvant accéder au communiqué, cliquez sur le bouton Détails de Communiqué.
+Pour visualiser l'ID du communiqué, l'historique de la version du communiqué, le Code Public de l'auteur et les Codes Publics de tous les comptes Siège pouvant accéder au communiqué, cliquez sur le bouton Détails de Communiqué.
 
 
 --------
@@ -435,24 +470,30 @@ Le dossier des Communiqués Enregistrés contient tous les communiqués que vous
 Si vous travaillez hors connexion lorsque vous cliquez sur Enregistrer Verrouillé, Martus ne peut envoyer le communiqué au serveur tant que vous n'êtes pas connecté à Internet. En outre, un communiqué contenant une pièce jointe ou plus peut ne pas avoir de Oui dans la colonne Envoyé pendant plusieurs minutes ou même une heure en attendant que Martus ait fini de l'envoyer au serveur, notamment si votre connexion Internet est lente. Si, lorsque vous quittez l'application, certains communiqués n'ont pas été envoyés, Martus vous le signalera.
 
 Communiqués Mis Au Rebut
-Lorsque vous mettez au rebut un communiqué d’un autre dossier, il est transféré dans le dossier Communiqués Mis au Rebut. Vous pouvez toujours travailler sur le communiqué se trouvant dans le dossier Communiqués Mis Au Rebut ; s’il a un statut de brouillon, vous pouvez le modifier ; s’il a un statut Verrouillé, vous pouvez le déplacer dans le dossier Communiqués Enregistrés. Pour supprimer définitivement de votre ordinateur un communiqué mis au rebut, faites un clic droit sur son titre dans le dossier Communiqués Mis Au Rebut et choisissez Supprimer Communiqué. (Sous Mac OS, Ctrl-clic sur le titre pour voir le menu contextuel.) Cette opération supprime de l’ordinateur toutes les informations sur le communiqué, mais elles sont conservées sur le serveur. Si le communiqué a un statut de brouillon, vous pouvez le supprimer du serveur en choisissant Serveur > Supprimer Mes brouillons Du Serveur ; s’il a un statut Verrouillé, vous ne pouvez pas le supprimer du serveur.
+Lorsque vous mettez au rebut un communiqué d’un autre dossier, il est transféré dans le dossier Communiqués Mis au Rebut. Vous pouvez toujours travailler sur le communiqué se trouvant dans le dossier Communiqués Mis Au Rebut ; s’il a un statut de Brouillon, vous pouvez le modifier ; s’il a un statut Verrouillé, vous pouvez le déplacer dans le dossier Communiqués Enregistrés. Pour supprimer définitivement de votre ordinateur un communiqué mis au rebut, sélectionnez son titre dans le dossier des Communiqués Mis Au rebut et choisissez Editer > Supprimer Communiqué. Ou bien, vous pouvez faire un clic droit (Windows) ou Ctrl-Clic (Mac OS) sur son titre dans le dossier Communiqués Mis Au Rebut et choisissez Supprimer Communiqué. Cette opération supprime de l’ordinateur toutes les informations sur le communiqué, mais elles sont conservées sur le serveur. Si le communiqué a un statut de Brouillon, vous pouvez le supprimer du serveur en choisissant Serveur > Supprimer Mes Brouillons Du Serveur ; s’il a un statut Verrouillé, vous ne pouvez pas le supprimer du serveur.
 
 Tant que vous n’avez pas supprimé un communiqué du dossier Communiqués Mis Au Rebut, vous pouvez le déplacer dans n’importe quel autre dossier. Cependant, une fois le dossier supprimé du dossier Communiqués Mis Au Rebut, vous ne pourrez plus le récupérer sauf s’il est stocké sur le serveur.
 --------
 6b. Autres dossiers créés par Martus
-Martus crée les dossiers Résultats de Recherche, Communiqués Extraits, brouillons de Communiqués Extraits, Communiqués de Bureau de Terrain, brouillons de Communiqués de Bureau de Terrain, Communiqués Récupérés, et Communiqués Endommagés si besoin est. Vous pouvez renommer ou supprimer chacun de ces dossiers.
+Martus crée les dossiers Résultats de Recherche, Communiqués Extraits, Brouillons de Communiqués Extraits, Communiqués de Bureau de Terrain, Brouillons de Communiqués de Bureau de Terrain, Communiqués Récupérés, et Communiqués Endommagés si besoin est. Vous pouvez renommer ou supprimer chacun de ces dossiers.
 
 Résultats de Recherche
-Lorsque vous recherchez des communiqués sur votre ordinateur, Martus affiche les résultats dans le dossier Résultats de Recherche. Le contenu de ce dossier est écrasé à la recherche suivante. Si vous souhaitez enregistrer le résultat de vos recherches, renommez ce dossier ; Martus créera un nouveau dossier de Résultats de Recherche lors de la recherche suivante. Pour renommer le dossier Résultats de Recherche, faites un clic droit sur le dossier et choisissez Renommer dossier Résultats de Recherche. Vous pouvez aussi sélectionner le dossier et ensuite choisir Dossiers > Renommer Dossier, ou bien cliquer sur le nom du dossier et taper le nom du nouveau dossier souhaité. Dans un nom de dossier la ponctuation est interdite, mais les espaces sont autorisés.
+Lorsque vous recherchez des communiqués sur votre ordinateur, Martus affiche les résultats dans le dossier Résultats de Recherche. Le contenu de ce dossier est écrasé à la recherche suivante. Si vous souhaitez enregistrer le résultat de vos recherches, renommez ce dossier ; Martus créera un nouveau dossier de Résultats de Recherche lors de la recherche suivante. Pour renommer le dossier Résultats de Recherche, faites un clic droit sur le dossier et choisissez Renommer dossier Résultats de Recherche. Vous pouvez aussi sélectionner le dossier et ensuite choisir Dossiers > Renommer Dossier, ou bien cliquer le nom du dossier et taper le nom du nouveau dossier souhaité. Dans un nom de dossier la ponctuation est interdite, mais les espaces sont autorisés.
 
 Communiqués Extraits
-Ce dossier contient les communiqués verrouillés que vous avez extraits du serveur. Ces communiqués sont inclus dans les recherches et vous pouvez les copier ou les transférer dans différents dossiers. Les communiqués de ce dossier sont verrouillés, vous ne pouvez donc pas les modifier.
+Ce dossier contient les communiqués verrouillés que vous avez extraits du serveur. Ces communiqués sont inclus dans les recherches et vous pouvez les copier ou les transférer dans différents dossiers. Les communiqués de ce dossier sont verrouillés, vous ne pouvez donc pas les modifier, sauf à créer une nouvelle version du communiqué.
 
 Brouillons de Communiqués Extraits
-Ce dossier contient les brouillons de communiqués que vous avez extraits du serveur. Ces communiqués sont inclus dans les recherches et vous pouvez les copier ou les transférer dans différents dossiers. Les communiqués de ce dossier conservent leur statut de brouillon et leurs données sont par conséquent traitées comme privées, vous pouvez donc les modifier.
+Ce dossier contient les brouillons de communiqués que vous avez extraits du serveur. Ces communiqués sont inclus dans les recherches et vous pouvez les copier ou les transférer dans différents dossiers. Les communiqués de ce dossier conservent leur statut de Brouillon et leurs données sont par conséquent traitées comme privées, vous pouvez donc les modifier.
+
+Communiqués de Bureaux de terrain
+Les utilisateurs de comptes Siège peuvent télécharger les communiqués que leurs bureaux de terrain ont envoyé à un serveur. Le dossier des Communiqués de bureaux de terrain contient tout communiqué de bureau de terrain que vous avez extrait du serveur. Ces communiqués sont inclus dans les recherches et vous pouvez les copier ou les déplacer dans des dossiers différents. Les communiqués de ce dossier sont verrouillés, vous ne pouvez donc pas les modifier. Vous pouvez créer une nouvelle copie d'un communiqué de bureau de terrain, mais l'original n'est pas modifié et retient comme auteur le bureau de terrain. 
+
+Brouillons de Communiqués de Bureaux de terrain
+Le dossier Brouillons de Communiqués de Bureaux de terrain contient tout brouillon de communiqué de bureau de terrain que vous avez extrait du serveur. Ces communiqués sont inclus dans les recherches et vous pouvez les copier ou les déplacer dans des dossiers différents. Les communiqués de ce dossier restent en statut Brouillon, leurs données sont donc traitées comme étant privées. Vous pouvez créer une nouvelle copie d'un communiqué de bureau de terrain, mais l'original n'est pas modifié et retient comme auteur le bureau de terrain.
 
 Communiqués Récupérés
-Normalement tous les communiqués sont associés à des dossiers, mais des coupures de courant, des pannes machine ou d’obscurs problèmes de logiciels peuvent rompre le lien entre un communiqué et son dossier. Au démarrage de Martus, il vérifie ces communiqués. Si Martus en trouve, il vous avertit et crée ensuite un dossier de Communiqués Récupérés. Vous pouvez y laisser ces communiqués, les transférer dans un autre dossier, ou bien les mettre au rebut.
+En temps normal, tous les communiqués sont associés à des dossiers, mais des coupures de courant, des pannes de matériel ou d'obscurs problèmes de logiciels peuvent provoquer une dissociation entre un communiqué et son dossier. Au démarrage de Martus, ce dernier vérifie la présence de ce type de communiqués. S'il en trouve, Martus vous prévient, puis il crée pour eux un dossier de Communiqués Récupérés. Vous pouvez y laisser ces communiqués, les déplacer dans un dossier différent, ou les supprimer.
 
 Communiqués Endommagés
 Si les données d’un communiqué sont tronquées ou manquantes, Martus crée un dossier Communiqués Endommagés et y place ce communiqué. Vous pourrez peut-être encore lire certaines informations se trouvant dans un communiqué endommagé.
@@ -467,11 +508,12 @@ Pour créer un dossier vide, choisissez Dossiers > Créer Nouveau Dossier, ou bi
 Pour renommer un dossier créé par l’utilisateur, faites un clic droit sur ce dossier et choisissez Renommer Dossier. Vous pouvez aussi sélectionner le dossier et choisir Dossiers > Renommer Dossier ou bien cliquer sur le nom du dossier et taper le nom souhaité du nouveau dossier. Vous ne pouvez pas renommer les dossiers système tels que Communiqués Enregistrés ou Communiqués Mis au Rebut.
 --------
 6d. Mise au rebut et suppression de communiqués
-Vous pouvez mettre au rebut le communiqué d’un dossier, ce qui le transfèrera dans le dossier des Communiqués Mis Au Rebut. Pour supprimer définitivement du disque dur un communiqué, supprimez-le du dossier Communiqués Mis Au Rebut. Si un communiqué verrouillé a été envoyé au serveur ou si un brouillon de communiqué a été sauvegardé sur le serveur, vous pouvez encore l’extraire. (Martus fait automatiquement une copie de sauvegarde des brouillons de communiqués sur le serveur lorsque vous les enregistrez, à condition que vous ayez une connexion Internet active.)
+Vous pouvez mettre au rebut le communiqué d’un dossier, ce qui le transfèrera dans le dossier des Communiqués Mis Au Rebut. Pour supprimer définitivement du disque dur toutes les versions d'un communiqué verrouillé, supprimez le communiqué du dossier Communiqués Mis Au Rebut. Si un communiqué verrouillé a été envoyé au serveur ou si un brouillon de communiqué a été sauvegardé sur le serveur, vous pouvez encore l’extraire. (Martus fait automatiquement une copie de sauvegarde des brouillons de communiqués sur le serveur lorsque vous les enregistrez, à condition que vous ayez une connexion Internet active.)
 
-Pour supprimer un communiqué d’un dossier, faites un clic droit sur le communiqué et choisissez Mettre Communiqué Au Rebut. Le communiqué apparaît dans le dossier des Communiqués Mis Au rebut. (Vous pouvez aussi déplacer le communiqué vers le dossier Communiqués Mis Au Rebut.)
+Pour supprimer un communiqué d’un dossier, sélectionnez-le et choisissez Editer > Supprimer Communiqué. Le communiqué apparaît dans le dossier des Communiqués Mis Au rebut. (Vous pouvez aussi déplacer le communiqué vers le dossier Communiqués Mis Au Rebut, ou bien faire un clic droit sur le communiqué et choisir Mettre Communiqué Au Rebut).
 
-Pour supprimer un communiqué de votre disque dur, faites lui un clic droit dans le dossier Communiqués Mis Au Rebut, puis choisissez Supprimer Communiqué. Martus vous avertira que vous allez supprimer définitivement de votre ordinateur ce communiqué, et vous informera s’il existe une copie de ce communiqué dans un autre dossier. Cliquez Oui pour supprimer le communiqué.
+
+Pour supprimer un communiqué de votre disque dur, sélectionnez-le dans le dossier Communiqués Mis Au rebut et choisissez Editer > Supprimer Communiqué, ou bien faites lui un clic droit, puis choisissez Supprimer Communiqué. Martus vous avertira que vous allez supprimer définitivement de votre ordinateur ce communiqué, et vous informera s’il existe une copie de ce communiqué dans un autre dossier. Cliquez Oui pour supprimer le communiqué.
 
 N.B. : Si le communiqué existe aussi dans un autre dossier, il restera sur votre disque dur même lorsque vous le supprimerez du dossier Communiqués Mis Au Rebut. Pour supprimer de votre ordinateur toutes les copies d’un communiqué, il vous faut déplacer chacun d’entre eux vers le dossier Communiqués Mis Au rebut et ensuite les supprimer.
 
@@ -484,100 +526,109 @@ Si vous souhaitez supprimer un dossier entier et son contenu, faites un clic dro
 6e. Organisation des communiqués
 Vous pouvez classer vos communiqués dans plusieurs dossiers, mais une seule copie résidera sur votre disque dur. Chaque liste référence la copie sur votre disque dur. Un communiqué ne peut être listé deux fois dans le même dossier.
 
-Pour transférer un communiqué d’un dossier à l’autre, déplacez-le. Ou bien sélectionnez le communiqué et choisissez Editer > Couper Communiqué, puis sélectionnez le nouveau dossier et choisissez Editer > Coller Communiqué. Vous pouvez aussi faire un clic droit sur le communiqué ou sur le dossier et choisir Couper Communiqué ou Coller Communiqué à partir du menu contextuel. (Si vous utilisez la commande Couper Communiqué, celui-ci s’affiche dans le dossier Communiqué Mis Au rebut.) 
+Pour transférer un communiqué d’un dossier à l’autre, déplacez-le. Ou bien sélectionnez le communiqué et choisissez Editer > Couper Communiqué, puis sélectionnez le nouveau dossier et choisissez Editer > Coller Communiqué. Vous pouvez aussi faire un clic droit sur le communiqué ou sur le dossier et choisir Couper Communiqué ou Copier Communiqué à partie du menu contextuel. (Si vous utilisez la commande Couper Communiqué, celui-ci s’affiche dans le dossier Communiqué Mis Au rebut.) 
 
-Pour sélectionner tous les communiqués d'un dossier, faites un clic droit et choisissez Sélectionner Tous les Communiqués.
+Pour sélectionner tous les communiqués d'un dossier, sélectionnez le dossier et choisissez Editer > Sélectionner Tous Communiqués (ou bien faites un clic droit et choisissez Sélectionner Tous les Communiqués).
 
 Si vous souhaitez qu’un communiqué apparaisse dans plusieurs dossiers, sélectionnez le communiqué et choisissez Editer > Copier Communiqué ; puis choisissez le nouveau dossier et faites Editer > Coller Communiqué. (Ou bien faites un clic droit sur le communiqué et choisissez Copier Communiqué à partir du menu contextuel ; puis faites un clic droit sur le dossier et choisissez Coller Communiqué à partir du menu contextuel.)
 
 Vous pouvez réorganiser les communiqués au sein d’un dossier pour les classer par statut, par date de l’évènement, par titre, par date de dernier enregistrement du communiqué ou par auteur. Cliquez simplement sur le titre de la colonne pour trier par ce champ. Cliquez à nouveau sur le titre de la colonne pour inverser le tri (par exemple, inverser l’ordre des dates de la plus récente à la plus ancienne et vice versa). Les communiqués s’afficheront dans cet ordre-là jusqu’à ce que vous cliquiez sur le titre d’une autre colonne ou que vous quittiez Martus.
 --------
-6f. Placement des communiqués sur le bureau
-Vous pouvez déplacer (ou copier/coller) un communiqué vers le bureau, ou le déplacer du bureau vers Martus. Déplacer un communiqué vers le bureau vous permet de conserver une copie de sauvegarde d’un communiqué sur lequel vous travaillez hors Martus (très utile pour enregistrer des versions intermédiaires des brouillons). Martus affecte aux communiqués exportés l’extension .mba (pour Martus Bulletin Archive).
+6f. Placement des communiqués sur le bureau Windows
+Vous pouvez déplacer (ou copier/coller) un communiqué vers le bureau, ou le déplacer du bureau vers Martus. Déplacer un communiqué vers le bureau vous permet de conserver une copie de sauvegarde d’un communiqué sur lequel vous travaillez hors Martus (très utile pour enregistrer des versions intermédiaires ou des brouillons). Martus affecte aux communiqués exportés l’extension .mba (pour Martus Bulletin Archive – Archive de Communiqués Martus).
 
-Vous pouvez envoyer par e-mail les fichiers .mba à des tiers, ou bien les copier sur disquette. Les brouillons de communiqués restent entièrement cryptés, y compris les parties publiques, de manière à ne pas être vues par d’autres utilisateurs sauf par un compte Siège. Lorsque vous envoyez un e-mail ou une copie de communiqués verrouillés, tout le monde peut accéder aux parties publiques du communiqué en utilisant le logiciel Martus, mais les parties privées restent cryptées. Comme vous ne pouvez pas lire les données privées ni les brouillons d'autres utilisateurs sauf si votre compte fait partie de ceux détenus par leur Siège, leurs communiqués importés sont accompagnés de l’avertissement "L'auteur ne vous a pas autorisé à lire les passages privés de ce communiqué". Les données des fichiers .mba ne peuvent être lues qu’avec Martus ; vous ne pouvez pas les ouvrir dans des applications comme Microsoft Word. Pour utiliser ces données dans d’autres applications que Martus, exportez les communiqués comme fichiers XML (voir "6n. Exportation des données des communiqués").
+Vous pouvez envoyer par e-mail les fichiers .mba à des tiers, ou bien les copier sur disquette. Les brouillons de communiqués restent entièrement cryptés, y compris les parties publiques, de manière à ne pas être vues par d’autres utilisateurs sauf par un compte Siège. Lorsque vous envoyez un e-mail ou une copie de communiqués verrouillés, tout le monde peut accéder aux parties publiques du communiqué en utilisant le logiciel Martus, mais les parties privées restent cryptées. Comme vous ne pouvez pas lire les données privées ni les brouillons d'autres utilisateurs sauf si votre compte fait partie de ceux détenus par leur Siège, leurs communiqués importés sont accompagnés de l’avertissement "L'auteur ne vous a pas autorisé à lire les passages privés de ce communiqué". Les données des fichiers .mba ne peuvent être lues qu’avec Martus ; vous ne pouvez pas les ouvrir dans des applications comme Microsoft Word. Pour utiliser ces données dans d’autres applications que Martus, exportez les communiqués comme fichiers XML (voir "6o. Exportation des données des communiqués").
 
 N.B. : Les e-mails n’étant pas sûrs, tout document envoyé par e-mail peut être intercepté par des tiers.
 --------
 6g. Extraction des communiqués verrouillés
-A l’occasion, vous aurez peut-être besoin de télécharger des communiqués que vous avez envoyés au serveur. Vous pouvez télécharger tout communiqué que vous avez envoyé et qui n’est pas actuellement sur votre disque dur. (Martus ne vous autorise pas à extraire les communiqués que vous avez déjà.)
+A l’occasion, vous aurez peut-être besoin de télécharger des communiqués que vous avez envoyés au serveur. Vous pouvez télécharger tout communiqué que vous avez envoyé et qui n’est pas actuellement sur votre disque dur. (Martus ne vous autorise pas à extraire les communiqués que vous avez déjà.) Vous pouvez choisir de n'extraire que la version la plus récente d'un communiqué ou bien toutes les versions. L'utilisateur possédant une unité de disque peu puissante ou une connexion Internet lente, peut choisir de n'extraire que la version la plus récente des communiqués volumineux.
 
 1. Choisissez Serveur > Extraire Mes Communiqués Verrouillés.
 
 N.B. : La boîte de dialogue peut ne pas s’afficher tout de suite selon la vitesse de votre connexion Internet.
 
-2. Dans la boîte de dialogue Extraire Communiqués, cochez les cases voisines des communiqués que vous souhaitez extraire. Pour sélectionner tous les communiqués, cliquez sur Tout Cocher ; pour désélectionner tous les communiqués, cliquez sur Tout Décocher.
+2. 
+Dans la boîte de dialogue Extraire Communiqués, cochez les cases voisines des communiqués que vous souhaitez extraire. Pour sélectionner tous les communiqués, cliquez sur Tout Cocher ; pour désélectionner tous les communiqués, cliquez sur Tout Décocher.
 
 N.B. : Par défaut la boîte de dialogue Extraire Communiqués n’affiche que les communiqués ne se trouvant pas actuellement sur votre ordinateur. Cochez Afficher Tous Communiqués Sur Ce Serveur Et Sur Cet Ordinateur pour voir tous vos communiqués verrouillés ayant été sauvegardés vers ce serveur ; vous ne pouvez pas extraire les communiqués qui sont actuellement sur votre ordinateur.
 
-3. Cliquez Visualiser pour voir la visualisation du communiqué sélectionné avant de le télécharger.
-4. Cliquez Extraire.
-5. Les communiqués s’affichent dans le dossier Communiqués Extraits.
-
+3. Sélectionnez Récupérer Toutes Révisions de Communiqués pour récupérer toutes les versions d'un communiqué ; sélectionnez Récupérer Uniquement Dernière Révision de Communiqué pour ne récupérer que la version actuelle du communiqué.
+4. Cliquez Visualiser pour voir la visualisation du communiqué sélectionné avant de le télécharger.
+5. Cliquez Extraire. Les communiqués s'affichent dans le dossier Communiqués Récupérés.
 
 --------
 6h. Extraction des brouillons de communiqués
 Les brouillons de communiqués sont copiés sur le serveur au cas où les originaux de votre ordinateur sont endommagés ou supprimés par accident, ou bien si vous n’avez plus accès à votre ordinateur. Vous pouvez télécharger vos brouillons de communiqués depuis le serveur si les communiqués ne sont pas actuellement sur votre disque dur. (Comme pour les communiqués verrouillés, Martus ne vous autorise pas à extraire les communiqués que vous avez déjà.)
 
-1. Choisir Serveur > Extraire Mes brouillons de Communiqués.
+1. Choisir Serveur > Extraire Mes Brouillons de Communiqués.
 
 N.B. : La boîte de dialogue peut ne pas s’afficher tout de suite selon la vitesse de votre connexion Internet.
 
-2. Dans la boîte de dialogue Extraire brouillons de Communiqués, cochez les cases voisines des communiqués que vous souhaitez extraire. Pour sélectionner tous les communiqués, cliquez sur Tout Cocher ; pour désélectionner tous les communiqués, cliquez sur Tout Décocher.
+2. Dans la boîte de dialogue Extraire Brouillons de Communiqués, cochez les cases voisines des communiqués que vous souhaitez extraire. Pour sélectionner tous les communiqués, cliquez sur Tout Cocher ; pour désélectionner tous les communiqués, cliquez sur Tout Décocher.
 
-N.B. : Par défaut la boîte de dialogue Extraire brouillons de Communiqués n’affiche que les communiqués ne se trouvant pas actuellement sur votre ordinateur. Cochez Afficher Tous Communiqués Sur Ce Serveur Et Sur Cet Ordinateur pour voir tous vos brouillons de communiqués sauvegardés vers ce serveur ; vous ne pouvez pas extraire les communiqués qui sont actuellement sur votre ordinateur.
+N.B. : Par défaut la boîte de dialogue Extraire Brouillons de Communiqués n’affiche que les communiqués ne se trouvant pas actuellement sur votre ordinateur. Cochez Afficher Tous Communiqués Sur Ce Serveur Et Sur Cet Ordinateur pour voir tous vos brouillons de communiqués sauvegardés vers ce serveur ; vous ne pouvez pas extraire les communiqués qui sont actuellement sur votre ordinateur.
 
 3. Cliquez Visualiser pour voir la visualisation du communiqué sélectionné avant de le télécharger.
-4. Cliquez Extraire.
-5. Les communiqués s’affichent dans le dossier brouillons de Communiqués Extraits.
+4. Les communiqués s’affichent dans le dossier Brouillons de Communiqués Extraits.
 --------
 6i. Extraction des communiqués créés par les bureaux de terrain
-Si vous utilisez un compte Siège, vous pouvez extraire les brouillons ou les communiqués verrouillés créés par des gens de terrain qui ont autorisé votre compte à accéder à leurs données. (Voir "9f. Partage de vos données privées avec vos collègues.") Pour télécharger ces communiqués, choisissez Serveur > Extraire Communiqués Verrouillés de Bureau de Terrain, ou Serveur > Extraire brouillons de Communiqués de Bureau de Terrain.
+Si vous utilisez un compte Siège, vous pouvez extraire les brouillons ou les communiqués verrouillés créés par des gens de bureau de terrain qui ont autorisé votre compte à accéder à leurs données. (Voir "9f. Partage de vos données privées avec vos collègues.") Pour télécharger ces communiqués, choisissez Serveur > Extraire Communiqués Verrouillés de Bureau de Terrain, ou Serveur > Extraire Brouillons de Communiqués de Bureau de Terrain.
 
 Lorsque vous visionnez un communiqué de bureau de terrain, une étiquette “Communiqué Terrain” jaune et noir brillant s’affiche en haut du communiqué.
 --------
-6j. Visualisation et enregistrement des pièces jointes
+6j. Visualisation des versions précédentes d'un communiqué
+Vous pouvez visualiser toutes les versions d'un communiqué verrouillé sur votre ordinateur. Vous ne pouvez cependant procéder à des changements que sur une version nouvelle.
+
+Pour visualiser une ancienne version du communiqué, sélectionnez ce communiqué et cliquez Détails Communiqué. Puis sélectionnez une version dans l'historique et cliquez Visualiser Version Sélectionnée. Vous ne pourrez pas modifier le contenu du communiqué, mais vous pourrez copier le texte vers le presse-papiers et ensuite le coller dans un fichier texte ou dans un nouveau communiqué (comprenant la version la plus récente de ce communiqué). Une fois terminée la visualisation de la version du communiqué, cliquez OK.
+
+
+--------
+6k. Visualisation et enregistrement des pièces jointes
 Sous Windows, vous pouvez visualiser une pièce jointe sans l’enregistrer sur votre disque dur : cliquez sur Voir Pièce Jointe. L’application associée au type de fichier de la pièce jointe ouvre celle-ci. (Vous pouvez modifier l’association du type de fichier sous Windows Explorer.)
 
 Sous Mac OS ou Linux, ou bien si vous souhaitez enregistrer la pièce jointe sur votre disque dur, déplacez la pièce jointe sur le bureau ou dans un dossier de votre ordinateur. Ou alors cliquez sur Enregistrer Pièce Jointe et enregistrez le fichier n’importe où sur votre ordinateur. Puis ouvrez le fichier dans une application pouvant lire le format du fichier. Par exemple, si un fichier .doc est joint, ouvrez-le avec Microsoft Word. Si un fichier .pdf est joint, ouvrez-le avec Adobe Acrobat Reader.
 
 N.B. : Pour visualiser la pièce jointe, il vous faut une application installée qui supporte le format du fichier en pièce jointe. Les pièces jointes ne sont pas cryptées lorsque vous les enregistrez sur votre disque dur.
 --------
-6k. Visualisation des communiqués endommagés
-Il peut arriver que dans un communiqué stocké sur votre ordinateur, vos données soient perdues ou tronquées. Si Martus détecte des données manquantes, il affiche un avertissement jaune en haut du communiqué, qui dit : "Attention : Certaines parties peuvent être endommagées ou manquantes." Vous pouvez également lire ce message en voyant les communiqués importés d’un autre utilisateur car vous ne pouvez pas voir les données privées ni les brouillons d’un autre utilisateur. Vous pouvez souvent encore lire certaines informations du communiqué. Si celui-ci est également stocké sur le serveur, vous avez des chances de pouvoir extraire l’intégralité du communiqué : déplacez une copie de sauvegarde du communiqué vers votre bureau, supprimez le communiqué de Martus, puis essayez de l’extraire à partir du serveur.
+6l. Visualisation des communiqués endommagés
+Il peut arriver que dans un communiqué stocké sur votre ordinateur, vos données soient perdues ou tronquées. Si Martus détecte des données manquantes, il affiche un avertissement jaune en haut du communiqué, qui dit : "Attention : Certaines parties peuvent être manquantes ou endommagées." Vous pouvez également lire ce message en voyant les communiqués importés d’un autre utilisateur car vous ne pouvez pas voir les données privées ni les brouillons d’un autre utilisateur. Vous pouvez souvent encore lire certaines informations du communiqué. Si celui-ci est également stocké sur le serveur, vous avez des chances de pouvoir extraire l’intégralité du communiqué : déplacez une copie de sauvegarde du communiqué vers votre bureau, supprimez le communiqué de Martus, puis essayez de l’extraire à partir du serveur.
 
 
 --------
-6l. Recherche de communiqués spécifiques
-Vous pouvez rechercher sur votre ordinateur des communiqués contenant des mots ou expressions spécifiques, ou qui ont été enregistrés dans une fourchette de dates, ou les deux. Martus recherche chaque dossier, y compris dans le dossier des Communiqués Mis au Rebut.
+6m. Recherche de communiqués spécifiques
+Vous pouvez rechercher sur votre ordinateur des communiqués contenant des mots ou expressions spécifiques, ou qui ont été enregistrés dans une fourchette de dates, ou les deux. La recherche inclut également les noms de fichiers des pièces jointes. Martus recherche la version actuelle de chaque communiqué dans chaque dossier, y compris dans le dossier des Communiqués Mis au Rebut.
 
-
+N.B.: Martus ne recherche sur votre ordinateur que la version la plus récente de chaque communiqué.
+	
 1. Cliquez sur Rechercher.
 2. Dans la boîte de dialogue Rechercher, saisissez le(s) mot(s) que vous recherchez, ou la fourchette de dates renfermant votre recherche. Vous pouvez rechercher des mots dans toutes les langues.
 
-         
-         
+N.B.: Martus recherche la Dernière Date d'Enregistrement ainsi que la date de l'évènement et la date initiale de création du communiqué.
+
+       
+       
 3. Cliquez sur Rechercher.
 4. Une fois la recherche terminée, la boîte de dialogue des Résultats de la Recherche indique le nombre de communiqués trouvés qui remplissaient vos critères. Cliquez OK.
 5. Le dossier des Résultats de la Recherche récapitule les communiqués trouvés dans votre recherche. (Le dossier contient la copie des communiqués ; les originaux sont conservés dans leurs dossiers d’origine.)
 
 Conseils de recherche
 • Pour chercher une expression, saisissez-la sans guillemets. 
-• Martus trouvera le texte que vous avez saisi, que ce soit un mot entier ou une partie d’un mot plus long. Par exemple, si vous recherchez le mot prison, vous verrez les communiqués comprenant les mots prison, emprisonner et emprisonnement. 
+• Martus trouvera le texte que vous avez saisi, que ce soit un mot entier ou une partie d’un mot plus long. Par exemple, si vous recherchez le mot prison, vous verrez les communiqués comprenant les mots prison, emprisonner et emprisonnement. De la même manière, si vous cherchez le mot prison, Martus trouvera les communiqués qui incluent les pièces jointes ayant un nom de type photosprisons.jpg et prisonniers.tif.
 • Pour l'anglais et les autres langues utilisant des caractères latins, la recherche Martus ne tient pas compte de la casse, donc, majuscules ou minuscules n’ont aucune importance. 
 • Utilisez le mot "ou" pour élargir votre recherche, ou le mot "et" pour la restreindre. Par exemple, si vous recherchez prison ou geôle vous verrez une liste de communiqués contenant l’un ou l’autre mot. Si vous recherchez prison et agression vous verrez une liste de communiqués contenant les deux mots. Si toutefois vous recherchez prison agression, Martus ne recherchera que les communiqués contenant l’expression exacte prison agression.
 • Lorsque vous utilisez à la fois "et" et "ou", le mot "et" se rapporte aux parties à proximité immédiate. Par exemple si vous tapez prisons ou geôles et procès ou libération, Martus recherchera toutes les archives contenant le mot prisons, ou contenant à la fois geôle et procès, ou contenant le mot libération.
-• Si vous communiquez par une langue autre que l'anglais, vous pouvez utiliser soit le mot "ou" soit le mot "et", ou alors vous pouvez également utiliser leurs équivalents anglais "or" et "and" dans votre recherche. Par exemple si vous utilisez la version espagnole de Martus, vous pouvez utiliser lors de votre recherche les mots "o", "y", "or", ou "and".
+• Si vous communiquez par une langue autre que l'anglais, vous pouvez utiliser le mot "ou" ou "et" dans cette langue, ou bien vous pouvez également utiliser les mots anglais "or" et "and" dans votre recherche. Par exemple si vous utilisez la version espagnole de Martus, vous pouvez utiliser lors de votre recherche les mots "o", "y", "or", ou "and".
 
-Pour enregistrer vos résultats de recherche, faites un clic droit sur le dossier Résultats de la Recherche et choisissez Renommer ; puis tapez un nouveau nom pour le dossier. Vous pouvez aussi sélectionner le dossier, puis choisir Dossiers > Renommer Dossier ou bien recliquez sur le nom du dossier et tapez le nouveau nom de dossier souhaité. A votre prochaine recherche, Martus créera un nouveau dossier de Résultats de Recherche. Si vous ne renommez pas le dossier des Résultats de Recherche, son contenu sera écrasé lors de votre prochaine recherche.
+Pour enregistrer vos résultats de recherche, faites un clic droit sur le dossier Résultats de la Recherche et choisissez Renommer Dossier Résultats de Recherche ; puis tapez un nouveau nom pour le dossier. Vous pouvez aussi sélectionner le dossier, puis choisir Dossiers > Renommer Dossier ou bien recliquez sur le nom du dossier et tapez un nouveau nom de dossier. A votre prochaine recherche, Martus créera un nouveau dossier de Résultats de Recherche. Si vous ne renommez pas le dossier des Résultats de Recherche, son contenu sera écrasé lors de votre prochaine recherche.
 --------
-6m. Impression des communiqués
+6n. Impression des communiqués
 Pour imprimer un communiqué, sélectionnez-le et cliquez sur Imprimer. Vous pouvez aussi choisir Fichier > Imprimer Communiqué. La boîte de dialogue Confirmer Impression des Données Privées s'affiche. Si vous souhaitez n'imprimer que les données publiques du communiqué, cliquez sur Continuer. Si vous souhaitez aussi imprimer les données privées, cochez l'option Inclure les Données Privées à la Sortie d’Imprimante, puis cliquez sur Continuer. La boîte de dialogue d’Imprimer s’ouvre, avec les options disponibles sur votre imprimante.
 
-Martus imprime la liste des pièces jointes, mais pas leur contenu. Pour imprimer un fichier joint, cliquez sur Enregistrer Pièce Jointe, enregistrez-la dans un dossier de votre disque dur, puis ouvrez-la et imprimez-la dans une application appropriée, telle qu’un éditeur d’images ou un traitement de texte. Sous Windows, cliquez simplement sur Voir Pièce Jointe, puis imprimez cette pièce jointe à partir de l’application qui l’a ouverte ; il n'est pas nécessaire de l’enregistrer d’abord sur votre disque dur.
+Martus imprime la liste des pièces jointes, mais pas leur contenu. Pour imprimer un fichier joint, cliquez sur Enregistrer Pièce Jointe, enregistrez-la dans un dossier de votre disque dur, puis ouvrez-la et imprimez-la dans une application appropriée, telle qu’un éditeur d’images ou un traitement de texte. Sous Windows, cliquez simplement sur Voir Pièce Jointe, puis imprimez cette pièce jointe à partir de l’application qui l’a ouverte ; il est inutile de l’enregistrer d’abord sur votre disque dur. Martus n'imprime que la dernière version de chaque communiqué de votre ordinateur.
 --------
-6n. Exportation des données des communiqués
-Vous pouvez exporter les données d’un communiqué vers un fichier XML, que vous pouvez ouvrir dans toute application supportant le XML (Extensible Markup Language). Les documents XML comprennent des balises qui définissent la structure du document et le rôle de chaque élément de document compris dans cette structure.
+6o. Exportation des données des communiqués
+Vous pouvez exporter les données d’un communiqué vers un fichier XML, que vous pouvez ouvrir dans toute application supportant le XML (Extensible Markup Language). Les documents XML comprennent des balises qui définissent la structure du document et le rôle de chaque élément de document compris dans cette structure. Martus n'exporte que la dernière version de chaque communiqué de votre ordinateur.
 
 N.B. : Bien que les noms de fichier des documents joints s’affichent dans le fichier XML exporté, les données de la pièce jointe ne sont pas incluses dans l’exportation.
 
@@ -600,16 +651,17 @@ Pour supprimer vos informations de compte et tous vos communiqués de votre disq
 
 N.B. : Vous pouvez supprimer les communiqués et les dossiers Martus alors que d’autres applications sont ouvertes, mais dans ce cas Martus risque de ne pas pouvoir supprimer tous les dossiers Martus.
 
-2. Choisissez Outils > Supprimer Mes Données.
+2. Choisissez Outils > Supprimer mes Données.
 3. Saisissez votre pseudo et votre mot de passe.
-4. Si certains fichiers n’ont pas encore été envoyés vers un serveur, Martus vous invitera à confirmer la suppression. Cliquez Oui pour passer à la boîte de dialogue de confirmation ; cliquez Non pour conserver les fichiers du communiqué et arrêter le processus de suppression.
+4. Si certains fichiers n’ont pas encore été téléchargés sur un serveur, Martus vous invitera à confirmer la suppression. Cliquez Oui pour passer à la boîte de dialogue de confirmation ; cliquez Non pour conserver les fichiers du communiqué et arrêter le processus de suppression.
 
 N.B. : Avant de supprimer les informations de votre compte Martus, vérifiez avoir sauvegardé votre fichier clé et pouvoir le récupérer. Si vous supprimez votre clé  sans l'avoir sauvegardée, vous n'aurez plus accès à aucune des données privées que vous avez envoyées au serveur. Lorsque vous supprimez votre clé, seront également supprimés : les paramètres du serveur, le compte Siège, les valeurs des détails par défaut, les champs personnalisés, les dossiers Martus créés par l'utilisateur et les préférences de l'interface (p. ex. le format de date ou la largeur des colonnes).
 
-5. Cliquez sur Oui pour confirmer que vous souhaitez supprimer de votre ordinateur tous vos communiqués et les informations de votre compte, y compris votre fichier clé.  Si vous ne souhaitez pas poursuivre, cliquez sur Annuler.
+5. Cliquez sur Oui pour confirmer que vous souhaitez supprimer de votre ordinateur tous vos communiqués et les informations de votre compte, y compris votre fichier clé.
 6. Martus se ferme automatiquement.
 
-N.B. : Martus ne peut supprimer aucun communiqué ou fichier de compte que vous auriez copié ou déplacé dans des dossiers hors du dossier Martus, tels que le bureau. Ces fichiers resteront dans votre ordinateur après la suppression. De plus, Martus ne peut supprimer aucun communiqué ou information se trouvant dans tout autre ordinateur dans lequel vous auriez configuré votre compte, et il ne supprimera pas non plus les communiqués se trouvant sur le Serveur Martus.
+
+N.B. : Martus ne peut supprimer aucun communiqué ou fichier de compte que vous auriez copié ou déplacé dans des dossiers hors du dossier Martus, tels que le bureau. Ces fichiers resteront dans votre ordinateur tant que vous ne les aurez pas supprimés manuellement. De plus, Martus ne peut supprimer aucun communiqué ou information se trouvant dans tout autre ordinateur dans lequel vous auriez configuré votre compte, et il ne supprimera pas non plus les communiqués se trouvant sur le Serveur Martus.
 
 
 --------
@@ -618,24 +670,24 @@ En cas d'urgence, il se peut que vous souhaitiez effacer de votre ordinateur tou
 
 Avertissement : N'utilisez cette procédure qu'en cas de nécessité absolue de supprimer de l'ordinateur l'ensemble des données Martus. En suivant cette procédure, vous supprimerez définitivement de l'ordinateur toutes les informations de compte et tous les communiqués – pour tous les utilisateurs de Martus.
 
-Avant d'utiliser cette option, vérifiez que tous les utilisateurs de compte ont sauvegardé leurs fichiers clés, et que tous les communiqués des utilisateurs ont été sauvegardés sur le serveur ou sur tout autre emplacement sûr. Si un fichier clé est supprimé sans avoir été sauvegardé, personne ne pourra plus accéder aux données privées se trouvant sur les communiqués créés par ce compte.
+Avant d'utiliser cette option, vérifiez que tous les utilisateurs de compte ont sauvegardé leurs fichiers clés, et que tous les communiqués des utilisateurs ont été sauvegardés sur le serveur ou sur tout autre emplacement sûr. Sans le fichier clé, les données privées créées par ce compte risquent de ne pas être accessibles ; ces données ne seraient disponibles qu'aux comptes Siège ayant été créés avant l'enregistrement des communiqués et leur envoi à un serveur.
 
 Pour supprimer de votre disque dur l'application Martus et les informations de comptes de tous les utilisateurs, ainsi que les communiqués et les dossiers :
 1. Fermez toutes les autres applications de votre ordinateur. 
 
 N.B. : Vous pouvez supprimer les données Martus alors que d'autres applications sont ouvertes, mais dans ce cas Martus risque de ne pas pouvoir supprimer tous les dossiers pendant le processus de suppression.
 
-2. Choisissez Outils > Supprimer Toutes les Données et Désinstaller Martus.
+2. Choisissez Outils > Supprimer Toutes Données et Désinstaller Martus.
 3. Tapez votre pseudo et votre mot de passe.
 4. Si certains fichiers n'ont pas encore été envoyés au serveur, Martus vous invitera à confirmer la suppression. Cliquez Oui pour poursuivre ; cliquez Non pour conserver les fichiers de communiqués et stopper le processus de suppression.
 
-N.B. : Avant de supprimer les informations de votre compte Martus, vérifiez que vous ainsi que tous les autres utilisateurs avez sauvegardé tous les fichiers clés et que vous pourrez les récupérer. Si vous supprimez les clés sans les avoir sauvegardées, vous et les autres utilisateurs ne pourrez plus accéder à aucune des données privées que chacun d'entre vous avez envoyées au serveur. Lorsque vous supprimez les clés, seront également supprimés : le paramétrage du serveur, le compte Siège, les valeurs des détails par défaut, les champs personnalisés, les dossiers Martus créés par les utilisateurs et les préférences de l'interface (p.ex. format de date ou largeur des colonnes). 
+N.B. : Avant de supprimer les informations de votre compte Martus, vérifiez que vous (ainsi que tous les autres utilisateurs) avez sauvegardé tous les fichiers clés et que vous pourrez les récupérer. Si vous supprimez les clés sans les avoir sauvegardées, vous et les autres utilisateurs ne pourrez plus accéder à aucune des données privées que chacun d'entre vous avez envoyées au serveur. Lorsque vous supprimez les clés, seront également supprimés : le paramétrage du serveur, le compte Siège, les valeurs des détails par défaut, les champs personnalisés, les dossiers Martus créés par les utilisateurs et les préférences de l'interface (p.ex. format de date ou largeur des colonnes). 
 
 5. Si vous êtes absolument certain de vouloir supprimer du disque dur l'application Martus, toutes les informations de compte et tous les communiqués, cliquez sur OK. Si vous ne souhaitez pas poursuivre, cliquez sur Annuler.
 
 6. Si vous cliquez sur OK pour poursuivre la suppression, Martus se ferme automatiquement.
 
-N.B. : Martus ne peut supprimer aucun communiqué ou fichier de compte que vous auriez copié ou déplacé dans des dossiers hors du dossier Martus, tels que le bureau. Ces fichiers resteront dans votre ordinateur après la suppression. De plus, Martus ne peut supprimer aucun communiqué ou information se trouvant dans tout autre ordinateur dans lequel vous auriez configuré votre compte, et il ne supprimera pas non plus les communiqués se trouvant sur le Serveur Martus.
+N.B. : Martus ne peut supprimer aucun communiqué ou fichier de compte que vous auriez copié ou déplacé dans des dossiers hors du dossier Martus, tels que le bureau. Ces fichiers resteront dans votre ordinateur tant que vous ne les aurez pas supprimés manuellement. De plus, Martus ne peut supprimer aucun communiqué ou information se trouvant dans tout autre ordinateur dans lequel vous auriez configuré votre compte, et il ne supprimera pas non plus les communiqués se trouvant sur le Serveur Martus.
 
 --------
 9. Sécurité de Vos Données
@@ -651,7 +703,7 @@ Il est capital de vérifier que vous aurez toujours accès à vos données pour 
 
 Votre première occasion sera d’enregistrer votre clé cryptée - à l’aide de votre pseudo et de votre mot de passe – sur une disquette unique, sur un autre support amovible ou sur un lecteur réseau, que vous devrez garder à portée de main en cas de panne ou d’indisponibilité de votre ordinateur. Lorsque vous sauvegardez votre fichier clé unique sur un support amovible ou sur un lecteur réseau, ce fichier contient tout ce dont vous avez besoin pour restaurer votre compte, pour autant que vous connaissiez votre pseudo et votre mot de passe. Assurez-vous de stocker le fichier de sauvegarde en lieu sûr, et de le nommer de manière à ce que vous puissiez identifier son contenu, sans pour autant qu’un tiers puisse l’identifier. Par la suite, pour restaurer cette clé protégée par mot de passe, sélectionnez "Restaurer Compte" et "Restaurer Compte Sur Fichier de sauvegarde de clé" lorsque vous ouvrirez une session Martus.
 
-La deuxième possibilité de sauvegarde nécessite 5 disques amovibles, (p.ex. disquettes, CD, mémoire USB), que vous répartirez entre amis et collègues de confiance. Cette méthode fractionne la clé en 5 segments, dont il vous en sera demandé 2 pour reconstruire la clé sans exiger un mot de passe. Si vous avez oublié votre pseudo ou votre mot de passe, cette méthode est l’unique manière de restaurer votre clé. Une fois que les 5 fichiers ont été écrits sur disquettes ou supports amovibles, répartissez-les sur 5 personnes différentes dont il faudra vous souvenir, aucune d’entre elles ne sachant à qui d’autre vous avez remis les autres fichiers. Ne stockez jamais ces disquettes ensemble. N’importe qui pourrait utiliser deux de ces disquettes pour accéder à votre compte, même sans connaître votre pseudo et votre mot de passe. Pour restaurer cette clé, récupérez d’abord n’importe quels 2 des 5 disques originaux puis sélectionnez "Restaurer Compte" et "Restaurer Compte Sur Plusieurs Disques" en ouvrant une session Martus.
+La deuxième possibilité de sauvegarde nécessite cinq disques amovibles, (p.ex. disquettes, CD, mémoire USB), que vous répartirez entre amis et collègues de confiance. Cette méthode fractionne la clé en cinq segments, dont il vous en sera demandé deux pour reconstruire la clé sans exiger un mot de passe. Si vous avez oublié votre pseudo ou votre mot de passe, cette méthode est l’unique manière de restaurer votre clé. Une fois que les cinq fichiers ont été écrits sur disquettes ou supports amovibles, répartissez-les sur cinq  personnes différentes dont il faudra vous souvenir, aucune d’entre elles ne sachant à qui d’autre vous avez remis les autres fichiers. Ne stockez jamais ces disquettes ensemble. N’importe qui pourrait utiliser deux de ces disquettes pour accéder à votre compte, même sans connaître votre pseudo et votre mot de passe. Pour restaurer cette clé, récupérez d’abord n’importe quels deux des cinq disques originaux puis sélectionnez "Restaurer Compte" et "Restaurer Compte Sur Plusieurs Disques" en ouvrant une session Martus.
 
 Pour sauvegarder votre fichier clé crypté par mot de passe unique sur support amovible ou lecteur de réseau:
 1. Insérez un disque vierge (ou autre support amovible) dans votre lecteur.
@@ -671,7 +723,7 @@ Ensuite, pour sauvegarder votre fichier clé sur cinq disquettes ou autres suppo
 2. Lisez l’écran d’informations et cliquez sur Continuer.
 3. Nommez le fichier et cliquez OK.
 
-Conseil : Donnez au fichier un nom unique dont vous vous souviendrez par la suite, et qui peut être distingué des fichiers de sauvegarde des autres comptes. Chacun des cinq fichiers portera le même nom suivi d’un numéro de séquence. Par exemple, si vous nommez le fichier fcsauvegarde, les fichiers seront enregistrés comme fcsauvegarde-1.dat, fcsauvegarde-2.dat, et ainsi de suite.
+Conseil : Donnez au fichier un nom unique dont vous vous souviendrez par la suite, et qui peut être distingué des fichiers de sauvegarde des autres comptes. Chacun des cinq fichiers portera le même nom suivi d’un numéro de séquence. Par exemple, si vous nommez le fichier kpsauvegarde, les fichiers seront enregistrés comme kpsauvegarde-1.dat, kpsauvegarde-2.dat, et ainsi de suite.
 
 4. Allez sur votre lecteur de disquette (ou autre support amovible) dans la boîte de dialogue Enregistrement de Disque Sauvegardé et cliquez Enregistrer. Vous devez utiliser un lecteur de support amovible (par exemple disquette, CD, mémoire USB) au lieu de votre disque dur, car le programme n’enregistrera pas deux fichiers de sauvegarde au même endroit.
 5. Insérez les disquettes à l’invite, cliquez OK à chaque fois pour passer à la disquette suivante.
@@ -686,11 +738,11 @@ En cas de perte de votre ordinateur, de panne de disque dur ou de perte de votre
 Pour restaurer votre clé :
 1. Installez Martus, si ce n’est pas encore fait.
 2. Cliquez sur l’onglet Restaurer le Compte dans la boîte de dialogue d’ouverture de session Martus.
-3. Sélectionnez une option pour restaurer votre compte : depuis un unique fichier de sauvegarde de clé ou depuis plusieurs disquettes.
+3. Sélectionnez une option pour restaurer votre compte : depuis un fichier de sauvegarde de clé ou depuis plusieurs disquettes.
 4. Lisez les informations de la boîte de dialogue et cliquez OK.
-5. Si vous utilisez un unique fichier de sauvegarde de clé, trouvez-le sur votre disque dur/lecteur réseau ou insérez la disquette (ou autre support amovible) contenant le fichier, allez dessus et cliquez OK.
+5. Si vous utilisez un fichier de sauvegarde de clé, trouvez-le sur votre disque dur/lecteur réseau ou insérez la disquette (ou autre support amovible) contenant le fichier, allez dessus et cliquez OK.
 Si vous utilisez deux des cinq disques du jeu, insérez le premier et allez sur le fichier qu’il contient ; cliquez OK ; puis insérez le deuxième disque et cliquez OK. Après avoir restauré votre clé, assurez-vous de redistribuer les disques de sauvegarde de clé.
-6. Si la restauration se fait depuis l’unique fichier clé crypté, ouvrez la session Martus à l’aide du pseudo et du mot de passe associés à la clé lors de la création du fichier de sauvegarde. Si la restauration se fait depuis les disques de sauvegarde multiple, vous pouvez soit utiliser vos anciens pseudo et mot de passe, soit créer de nouveaux pseudo et mot de passe pour votre compte.
+6. Si la restauration se fait depuis l’unique fichier clé crypté, ouvrez la session Martus à l’aide du pseudo et du mot de passe associés à la clé lors de la création du fichier de sauvegarde. Si la restauration se fait depuis les disques de sauvegarde, vous pouvez soit utiliser vos anciens pseudo et mot de passe, soit créer de nouveaux pseudo et mot de passe pour votre compte.
 7. Il vous sera alors demandé de créer un fichier de sauvegarde de votre clé cryptée par mot de passe à l’aide de ce pseudo et de ce mot de passe. Pour de plus amples renseignements, consultez "9b. Sauvegarde de votre clé".
 8. Une fois la restauration terminée, assurez-vous de redistribuer les disques de sauvegarde. Si deux d’entre eux se retrouvent ensemble, n’importe qui peut les utiliser pour accéder à votre compte, même sans connaître votre pseudo ou votre mot de passe.
 --------
@@ -719,9 +771,10 @@ Pour accéder à vos communiqués, le Siège de votre organisme doit d’abord e
 N.B. : Seuls les communiqués enregistrés après importation de l'identification de compte public seront accessibles sur votre compte Siège.
 
 Instructions aux utilisateurs du Siège
-Pour partager l'identification de compte public et le code public d’un compte Siège avec les gens de terrain:
+Pour partager l'identification de compte public et le code public d’un compte Siège avec les gens de 
+terrain :
 1. Créez un compte Martus. (Voir "2d. Création de votre Compte".)
-2. Sous Martus, choisissez Outils > Exporter l’ID de Mon Compte Public, et nommez le fichier. Martus enregistre le fichier avec une extension .mpi dans le dossier du compte Martus de votre disque dur, et confirme qu’il a bien été enregistré.
+2. Sous Martus, choisissez Outils > Exporter l’ID de Mon Compte Public, et nommez le fichier. Martus enregistre le fichier avec une extension .mpi (Martus Public Information – Informations Publiques Martus) dans le dossier Martus de votre disque dur, et confirme qu’il a bien été enregistré.
 3. Transmettez le fichier .mpi aux personnes dont vous souhaitez lire les communiqués.
 4. Choisissez Aide > Voir Détails de Mon Compte.
 5. Saisissez le code public.
@@ -733,6 +786,9 @@ Instructions pour les utilisateurs de terrain souhaitant donner l’accès aux u
 Importez l'identification de compte public et le code public du Siège :
 1. Sous Martus, choisissez Outils > Configurer Siège.
 2. Tapez votre pseudo et votre mot de passe dans la boîte de dialogue d'ouverture de session Martus.
+
+
+
 3. Cliquez sur Ajouter.
 4. Sélectionnez le fichier .mpi qui vous a été remis par votre Siège.
 5. Tapez le code public qui vous a été remis par votre Siège. Avant de poursuivre, confirmez avec votre Siège qu’il s’agit bien du code public correct.
@@ -740,6 +796,7 @@ Importez l'identification de compte public et le code public du Siège :
 7. Saisissez un titre pour le compte Siège. Choisissez un titre qui vous parle, car vous pouvez parfois oublier le code public du compte. Le titre attribué au Siège peut être par exemple un nom de personne ou d'organisme, ou bien un nom de ville ou de région. Vous pouvez modifier ce titre par la suite si vous le souhaitez. Vous êtes le seul à visualiser le titre que vous avez choisi ; les tiers qui accèdent à votre communiqué ne le verront pas pour raison de sécurité. 
 8. Cliquez sur Importer. 
 9. Martus vous prévient que vous accordez au propriétaire du compte Siège le droit de lire vos données privées. Cliquez sur Oui pour confirmer que vous ne souhaitez poursuivre que dans la mesure où vous confiez vos informations aux utilisateurs du compte Siège.
+
 
 Instructions aux utilisateurs de terrain qui souhaitent refuser l’accès futur aux utilisateurs du Siège
 Supprimez le compte Siège existant :
@@ -754,7 +811,7 @@ Les utilisateurs du compte Siège auront toujours accès à tous les communiqué
 9g. Autorisation aux autres comptes d'envoyer vos communiqués à un serveur
 Si vous n'avez aucune possibilité de vous connecter à un serveur, il faut qu'un autre compte envoie vos communiqués à un serveur afin que vous sauvegardiez les renseignements des communiqués. S'il vous est impossible de sauvegarder vos communiqués sur un serveur à partir de votre compte, vous ne serez pas en mesure de les récupérer si votre ordinateur est endommagé ou volé. Pour de plus amples informations, consultez "1f. Pourquoi envoyer des communiqués au serveur".
 
-Lorsque vous configurez un compte Siège, ce dernier peut envoyer des communiqués à un serveur à votre place. C'est-à-dire que si un compte de bureau de terrain n'a pas accès à Internet, son utilisateur peut créer des communiqués  dans Martus et les enregistrer sur un disque, puis les utilisateurs du Siège peuvent copier les fichiers dans leur dossier Client Martus et choisir Fichier > Renvoyer Communiqués, pour envoyer les Communiqués choisis au serveur en lieu et place du bureau de terrain. Ce dernier figurera toujours comme étant l'auteur du communiqué, sans que l'utilisateur du Siège ne puisse le modifier.
+Lorsque vous configurez un compte Siège, ce dernier peut envoyer des communiqués à un serveur à votre place. C'est-à-dire que si un compte de bureau de terrain n'a pas accès à Internet, son utilisateur peut créer des communiqués  dans Martus et les enregistrer sur un disque, puis les utilisateurs du Siège peuvent copier les fichiers dans leur dossier Client Martus et choisir Fichier > Renvoyer Communiqués, pour les envoyer au serveur en lieu et place du bureau de terrain. Ce dernier figurera toujours comme étant l'auteur du communiqué, sans que l'utilisateur du Siège ne puisse le modifier.
 
 N.B. : Nous recommandons aux utilisateurs du Siège de créer un dossier séparé concernant les communiqués qu'ils envoient au serveur en lieu et place de leurs bureaux de terrain ou d'autres utilisateurs Martus.
 --------
@@ -769,11 +826,9 @@ Nous vous conseillons de modifier votre mot de passe pour raisons de sécurité 
 
 Pour tous renseignements complémentaires, consultez "9d. Utilisation intelligente de votre mot de passe".
 
-
-
-
 --------
 10. Personnalisation de Martus
+Vous pouvez personnaliser certains aspects du modèle de communiqué pour gagner du temps, pour être cohérent, et pour vérifier que les questions spécifiques sont adressées dans chaque communiqué. Vous pouvez personnaliser le champ Détails, et vous pouvez créer des champs de communiqué supplémentaires. Les champs personnalisés s'affichent dans tout nouveau communiqué créé ; ils n'ont aucun effet sur les communiqués existants.
 --------
 10a. Utilisation d'un modèle dans le champ Détails
 Si vous saisissez fréquemment le même type d'informations dans le champ détails (comme le nombre de victimes ou la réaction du gouvernement), configurez un modèle de manière à ce qu'il s'affiche dans tous les communiqués que vous créez :
@@ -791,25 +846,28 @@ La plupart des utilisateurs Martus sont satisfaits des champs de communiqué par
 
 Après avoir personnalisé les champs de communiqué, la nouvelle disposition des champs s’affichera dans tout nouveau communiqué créé ; la personnalisation des champs n’a aucune influence ni sur vos communiqués existants ni sur les communiqués téléchargés à partir du serveur.
 
-Les champs personnalisés peuvent ne pas s'afficher dans la version actuelle du Moteur de Recherche Martus, même si le communiqué est public. Ils pourront cependant s'afficher dans les versions futures du Moteur de Recherche Martus, par conséquent si vos champs personnalisés contiennent des informations confidentielles, vérifiez que votre communiqué est configuré pour que toutes les données soient privées.
+Les champs personnalisés peuvent s'afficher dans le Moteur de Recherche Martus ; par conséquent, si vos champs personnalisés contiennent des informations confidentielles, vérifiez que votre communiqué est configuré pour que toutes les données soient privées.
 
 Pour personnaliser les champs de communiqués :
 1. Choisissez Options > Personnaliser Champs.
 2. Lisez le contenu de la boîte de dialogue renseignements. Si vous souhaitez poursuivre, cliquez Oui.
 3. Réorganisez, ajoutez ou supprimez les balises de champ de la boîte de dialogue Personnaliser Champs.
-La disposition des champs dans un communiqué est dictée par un document XML. Il doit commencer par <CustomFields> (ChampsPersonnalisés) et finir par </CustomFields> (/ChampsPersonnalisés). En ouvrant la boîte de dialogue Personnalisation des Champs, ces balises s'y trouvent déjà. Par défaut, les champs de communiqué standard se présentent en haut de la déclaration de Personnalisation de Champ, mais vous pouvez les déplacer si besoin est. Vous ne pouvez pas cependant supprimer les champs 'author' (auteur), 'entrydate' (dateentrée) 'language' (langue) et 'title' (titre).
+La disposition des champs dans un communiqué est dictée par un document XML. Il doit commencer par <CustomFields> et finir par </CustomFields>. En ouvrant la boîte de dialogue Personnalisation des Champs, ces balises s'y trouvent déjà. Par défaut, les champs de communiqué standard se présentent en haut de la déclaration de Personnalisation de Champ, mais vous pouvez les déplacer si besoin est. Vous ne pouvez pas cependant supprimer les champs "auteur", dateentrée", "langue" et "titre".
 - Pour modifier l’ordre des champs, coupez/collez dans l’ordre de votre choix.
 - Pour ajouter un champ, cliquez sur le point d’insertion où vous souhaitez le voir s’afficher. Tapez le type de champs que vous souhaitez utiliser : BOOLEAN (booléen), DATE, DATERANGE (fourchette de dates), GRID (grille), LANGUAGE (langue), MULTILINE (lignes multiples), et STRING (chaîne). Chaque champ doit comporter une balise unique, qui peut être tout mot unique sauf ceux déjà utilisés par le système, dans toute langue, et ne peut contenir aucun espace, caractère spécial, ni ponctuation. Vous pouvez par exemple utiliser "Personnalisation1" ou "NomVictime". Chaque champ doit avoir une étiquette, qui correspond à ce qui s'affichera à côté du champ dans le communiqué ; elle peut contenir tout caractère dans toute langue, sauf les virgules ou les points-virgules. Par exemple, vous pourriez choisir "Nom du 1er Témoin". Voir les exemples ci-dessous.
-- Pour effacer un champ, supprimez la balise de ce champ. Vous ne pouvez pas supprimer certains champs obligatoires, comme ceux de 'author' (auteur), 'entrydate' (date d’entrée) 'language' (langue) et 'title' (titre).
+- Pour effacer un champ, supprimez la balise de ce champ. Vous ne pouvez pas supprimer certains champs obligatoires, comme ceux de l’auteur, du titre, de la langue et de la date d’entrée.
 4. Cliquez OK.
 
 Lorsque vous personnalisez des champs, n'oubliez pas les poins suivants :
-• Le XML est sensible à la casse. 
-• Vous pouvez utiliser des guillemets simples ou doubles de part et d'autre du nom de type de champ, pourvu qu'ils se complètent.  (Par exemple 'STRING" est inadmissible. Il doit être 'STRING' ou "STRING")
+• Le XML est sensible à la casse. (Par exemple, "Témoin" est différent de "témoin".)
+• Vous pouvez utiliser des guillemets simples ou doubles de part et d'autre du nom de type de champ, pourvu qu'ils se complètent.
 • Un champ Booléen s'affichera sous forme de case à cocher dans un communiqué à l'écran, et sera imprimé sous forme Oui/Non.
+• Lorsque vous tapez des données dans une grille, faites Entrée pour créer une nouvelle ligne, faites Tab pour passer à la cellule suivante, et faites un triple clic pour copier et coller.
+• Les données entrées dans les colonnes de grille sont enregistrées comme chaînes de texte.
+• Peut-être aurez-vous besoin d'aider d'autres utilisateurs en leur fournissant un modèle de personnalisation. Pour limiter leur besoin de nouvelle assistance, utilisez des étiquettes qui identifient clairement le contenu (telles que "Nom de la Victime").
+
 
 Voici quelques exemples ; ces champs ressembleraient à ceux ci-dessous :
-
 
 <Field type='GRID'>
 <Tag>grillepersonnalisée</Tag>
@@ -824,12 +882,12 @@ Voici quelques exemples ; ces champs ressembleraient à ceux ci-dessous :
 
 <Field type='LANGUAGE'>
 <Tag>nouveau2</Tag>
-<Label>Témoin Parle :</Label>
+<Label>Le témoin parle :</Label>
 </Field>
 
 <Field type='STRING'>
 <Tag>personnalisé1</Tag>
-<Label>Nom Témoin</Label>
+<Label>Nom du Témoin</Label>
 </Field>
 
 <Field type='BOOLEAN'>
@@ -839,11 +897,13 @@ Voici quelques exemples ; ces champs ressembleraient à ceux ci-dessous :
 
 
 
+
 N.B. : Si vous recevez un message d'erreur après avoir cliqué OK, il vous faudra corriger le problème avant de pouvoir poursuivre. Le message d'erreur devrait identifier le problème, mais si vous n'êtes pas certain de la source d'erreur, vérifiez les points suivants : 
--	Vérifiez que les champs author (auteur), language (langue), entrydate (dateentrée), et title (titre) sont bien présents.
--	Supprimez toute étiquette créée pour des balises des champs standard.
--	Supprimez toute balise répétée.
+-	Vérifiez que les champs d'auteur, de langue, de date d'entrée et de titre sont bien présents.
+-	Supprimez toute étiquette créée pour des balises de champ standard.
+-	Supprimez toute étiquette répétée.
 -	Vérifiez que chaque champ personnalisé créé possède l'étiquette correspondante.
+
 
 Pour restaurer les champs de communiqué par défaut :
 1. Choisissez Options > Personnaliser Champs.
@@ -856,7 +916,7 @@ Pour restaurer les champs de communiqué par défaut :
 11. Questions Fréquentes
 Voici les problèmes les plus courants que vous êtes susceptibles de rencontrer en utilisant Martus.
 
-1. J’ai enregistré un communiqué, mais le mot "Oui" n'apparaît pas dans la colonne Envoyé.
+1. J’ai enregistré un communiqué, mais le mot "oui" n'apparaît pas dans la colonne Envoyé.
 Vérifiez que votre connexion Internet est active et qu’un serveur est configuré. Les Communiqués n'apparaissent pas comme Envoyés tant qu’ils n’ont pas été vraiment envoyés au serveur. Leur envoi peut également prendre une heure si vous envoyez une pièce jointe volumineuse ou si la connexion est lente. Pendant que Martus envoie le communiqué, il affiche un indicateur d’avancement dans la barre d’état en bas de l’écran. En outre lorsque vous vous connectez à un serveur, un décalage peut survenir avant que la colonne Envoyé se remplisse.
 
 2. Martus refuse mon mot de passe.
@@ -866,16 +926,16 @@ Assurez-vous d’avoir saisi les pseudo et mot de passe corrects, notamment si v
 Vous ne pouvez accéder à Martus que sur un ordinateur possédant votre fichier clé. Votre pseudo et votre mot de passe activent votre clé, qui n’est peut être pas présente sur l’ordinateur de votre collègue. Les versions Martus 1.5 et suivantes proposent plusieurs comptes sur le même ordinateur, mais votre clé doit être présente sur cet ordinateur pour que vous puissiez y accéder. Pour accéder à votre compte sur l’ordinateur de votre collègue, cliquez sur l’onglet Restaurer Compte dans la boîte de dialogue d’ouverture de session Martus, puis utilisez votre fichier de sauvegarde de clé pour créer le compte. Et, bien que vous puissiez installer votre clé sur plus d’un ordinateur à la fois, n’oubliez pas de mettre à jour chaque clé si vous modifiez votre mot de passe, le degré de sécurité de vos données étant égal au degré de sécurité de l’ordinateur le moins fiable sur lequel se trouve votre compte.
 
 4. Les communiqués de mon compte sur l’ordinateur d’un collègue ne correspondent pas à ceux de mon ordinateur.
-Si vous avez configuré votre compte sur plusieurs ordinateurs, vous ne pouvez accéder à vos brouillons ou à vos communiqués verrouillés depuis un autre ordinateur que s’ils ont été enregistrés vers le serveur et extraits sur l’ordinateur actuel. Si vous écrasez un brouillon sur le serveur à partir d’un ordinateur, la version du serveur ne correspondra pas à celle de l’autre ordinateur du fait que le serveur enregistre la dernière version du brouillon. Pour extraire les dernières versions d’un brouillon depuis le serveur de sauvegarde, il vous sera demandé de supprimer toutes les versions antérieures de votre ordinateur. Si vous souhaitez conserver une copie de sauvegarde de l’ancienne version du brouillon, vous pouvez déplacer le communiqué vers votre bureau avant de le supprimer. Si vous supprimez un brouillon d’un ordinateur et du serveur, il sera encore présent sur l’autre ordinateur. Sur ce dernier, si vous modifiez le brouillon, il sera renvoyé vers le serveur, mais si vous ne modifiez jamais le brouillon, il ne sera jamais renvoyé.
+Si vous avez configuré votre compte sur plusieurs ordinateurs, vous ne pouvez accéder à vos brouillons ou à vos communiqués verrouillés depuis un autre ordinateur que s’ils ont été enregistrés vers le serveur et extraits sur l’ordinateur actuel. Si vous écrasez un brouillon sur le serveur à partir d’un ordinateur, la version du serveur ne correspondra pas à celle de l’autre ordinateur du fait que le serveur enregistre la dernière version du brouillon. Pour extraire le brouillon le plus récent depuis le serveur de sauvegarde, vous devrez supprimer tous les brouillons antérieurs de votre ordinateur. Si vous souhaitez conserver une copie de sauvegarde de l’ancien brouillon, vous pouvez déplacer le communiqué vers votre bureau avant de le supprimer. Si vous supprimez un brouillon d’un ordinateur et du serveur, il sera encore présent sur l’autre ordinateur. Sur ce dernier, si vous modifiez le brouillon, il sera renvoyé vers le serveur, mais si vous ne modifiez jamais le brouillon, il ne sera jamais renvoyé.
 
 5. Il existe des comptes Martus multiples sur mon ordinateur. Comment savoir quel dossier de compte est le mien ?
 Ouvrez une session Martus à l’aide de votre pseudo et de votre mot de passe. Puis choisissez Aide > Voir Détails de Mon Compte. Le dossier utilisé par Martus pour stocker les informations de votre compte est visible au-dessous de votre code public. Le compte du premier utilisateur se trouve dans le dossier Martus ; les comptes suivants se trouvent dans des sous-dossiers à l'intérieur du dossier Martus.
 
 6. J’ai enregistré un communiqué verrouillé au serveur, mais je dois le modifier.
-Une fois que vous avez verrouillé un communiqué – qu'il soit ou non envoyé au serveur, ni vous ni quiconque ne pouvez plus rééditer le communiqué original. En principe, il vaut mieux enregistrer les communiqués comme brouillons tant que vous n’êtes pas certain qu’ils sont complets. Si toutefois vous devez rajouter des informations à un communiqué verrouillé, ou si vous devez procéder à une correction importante, vous pouvez modifier et télécharger une copie du communiqué. (voir "5c. Modification d'une copie d'un communiqué verrouillé".) et envoyez-le. La copie originale ainsi que la copie modifiée seront alors accessibles sur le serveur.
+Une fois que vous avez verrouillé un communiqué – qu'il soit ou non envoyé au serveur, ni vous ni quiconque ne pouvez plus rééditer le communiqué original. En principe, il vaut mieux enregistrer les communiqués comme brouillons tant que vous n’êtes pas certain qu’ils sont complets. Si toutefois vous devez rajouter des informations à un communiqué verrouillé, ou si vous devez procéder à une correction importante, vous pouvez créer une nouvelle version du communiqué (voir "5c. Création d'une nouvelle version d'un communiqué verrouillé") et envoyez-la à un serveur. La version originale ainsi que la nouvelle version seront alors accessibles sur votre ordinateur et sur le serveur.
 
 7. Lorsque j’essaie d’extraire des communiqués à partir du serveur, ceux que je cherche n’y sont pas listés.
-Par défaut, la boîte de dialogue des Communiqués Extraits ne liste pas les communiqués déjà présents sur votre ordinateur, parce que vous ne pouvez pas télécharger ces communiqués. Pour lire tous vos communiqués sur le serveur, qu’ils soient ou non présents sur votre ordinateur, cochez Afficher Tous Communiqués Sur Cet Ordinateur Et Sur le Serveur. Si vous souhaitez rechercher certains communiqués sur votre ordinateur, ceux-ci n’ont peut-être pas été envoyés au serveur.
+Par défaut, la boîte de dialogue des Communiqués Extraits ne liste pas les communiqués déjà présents sur votre ordinateur, parce que vous ne pouvez pas télécharger ces communiqués. Pour lire tous vos communiqués sur le serveur, qu’ils soient ou non présents sur votre ordinateur, cochez Afficher Tous Boutons Sur Cet Ordinateur Et Sur le Serveur. Si vous souhaitez rechercher certains communiqués sur votre ordinateur, ceux-ci n’ont peut-être pas été envoyés au serveur.
 
 8. Comment ouvrir une pièce jointe ?
 Sous Windows, vous pouvez voir une pièce jointe sans l’enregistrer sur votre disque dur : cliquez sur Voir Pièce Jointe. L’application associée au type de fichier de la pièce jointe ouvre celle-ci. (Vous pouvez modifier l’association du type de fichier sous l’Explorateur Windows.)
@@ -886,21 +946,21 @@ Sous Mac OS ou Linux, ou si vous souhaitez enregistrer la pièce jointe sur votr
 Supprimez le communiqué de tous les dossiers avant de le supprimer du dossier Communiqués Mis Au Rebut.
 
 10. Puis-je sauvegarder mes données Martus sur une disquette ou sur un lecteur de bande ?
-Oui, si vous possédez un dispositif de sauvegarde suffisamment volumineux pour enregistrer toutes vos données. Copiez l’intégralité du dossier Martus sur votre support de sauvegarde. Ce dossier contient l’application Martus, l’environnement Java, les fichiers clé cryptés, les données de configuration et les communiqués de l’ensemble des comptes Martus présents sur l’ordinateur. Pour une sauvegarde minimale, ne copiez que le fichier MartusKeyPair.dat et les dossiers "Packets" (Paquets) et "Accounts" (Comptes) de votre répertoire de comptes.
+Oui, si vous possédez un dispositif de sauvegarde suffisamment volumineux pour enregistrer toutes vos données. Copiez l’intégralité du dossier C:\Martus sur votre support de sauvegarde. Ce dossier contient l’application Martus, l’environnement Exécutable JIT, les fichiers clé cryptés, les données de configuration et les communiqués de l’ensemble des comptes Martus présents sur l’ordinateur. Pour une sauvegarde minimale, ne copiez que le fichier MartusKeyPair.dat et les Paquets et les dossiers Comptes de votre répertoire de comptes.
 
 11. Pourquoi existe-t-il plus de langues disponibles à la création des communiqués que sur l’écran d’ouverture de session ou dans la boîte de dialogue des Options ?
-La boîte de dialogue des Options vous permet de choisir la langue de l’interface utilisateur ; l’interface actuelle Martus a été traduite en anglais, en espagnol, en russe et en français. Nous espérons la traduire dans de nouvelles langues à l’avenir ; si vous souhaitez traduire Martus dans une autre langue, veuillez nous contacter à info@martus.org.
+La boîte de dialogue des Options vous permet de choisir la langue de l’interface utilisateur ; Martus a été traduit en plusieurs langues. Visitez http://www.martus.org pour vérifier quelles langues sont actuellement disponibles, y compris les packs de langues ayant été ajoutés depuis la dernière révision de Martus. Si vous souhaitez traduire Martus dans une autre langue, veuillez nous contacter à info@martus.org.
 
-Comme vous l’avez remarqué, plusieurs langues sont disponibles dans le menu contextuel Langues lorsque vous créez un communiqué. Cette option détermine la langue que vous utilisez lorsque vous tapez les données de votre communiqué. Vous n’êtes pas tenu de taper le communiqué dans la même langue que celle utilisée sur l’interface utilisateur.
+Comme vous l’avez remarqué, plusieurs langues sont disponibles dans la liste déroulante Langues lorsque vous créez un communiqué. Cette option détermine la langue que vous utilisez lorsque vous tapez les données de votre communiqué. Vous n’êtes pas tenu de taper le communiqué dans la même langue que celle utilisée sur l’interface utilisateur.
 
 12. Pourquoi Martus semble-t-il si lent lorsque j’effectue certaines tâches ?
 Dans la version actuelle de l’application, nous avons mis l’accent sur l’ajout de nouvelles fonctionnalités et sur la sécurité. Par la suite, nous améliorerons les performances de manière à accélérer les tâches sous Martus.
 
 13. Je n’ai pas de raccourci Martus sur mon bureau ni dans mon menu démarrer. Comment puis-je lancer Martus ?
+
 Martus installe toujours un raccourci dans votre répertoire Martus, que vous pouvez utiliser pour lancer Martus. Ou bien utilisez l'une des méthodes suivantes, en fonction de votre système d'exploitation :
 
-Sous Windows, choisissez Exécuter à partir du menu Démarrer, puis tapez 
-
+Sous Windows, ouvrez une invite de commande DOS, passez au répertoire Martus, et tapez 
 C:\Martus\bin\javaw.exe -jar C:\Martus\Martus.jar pour exécuter Martus.
 
 Sous Mac OS, double-cliquez le fichier Martus.jar dans le dossier /Library/Java/Martus (/Bibliothèque/Java/Martus).
@@ -931,5 +991,13 @@ Non, il n'existe actuellement aucune limite quant à la somme des données, au n
 Oui, vous pouvez partager vos données privées à l'aide d'un compte Siège. Tout compte peut être utilisé comme compte Siège, et deux comptes peuvent être mutuellement utilisés comme comptes Siège s'ils souhaitent accéder à leurs données mutuelles. Pour configurer un compte Siège, suivez les instructions figurant à "9f. Partage de vos données privées avec vos collègues".
 
 20. Puis-je me procurer le Guide de l'Utilisateur Martus dans une autre langue ? 
-Oui. En fait vous en possédez probablement déjà des versions multiples sur votre ordinateur. A l'installation de Martus, toutes les langues actuellement disponibles du guide de l'utilisateur sont installées dans votre répertoire Martus\Docs. Vous les trouverez aussi sur le site http://www.martus.org/downloads, que vous pouvez visiter pour vérifier si la version d'une nouvelle langue est disponible.
+Oui. En fait vous en possédez probablement déjà des versions multiples sur votre ordinateur. A l'installation de Martus, toutes les langues actuellement disponibles du guide de l'utilisateur sont installées dans votre répertoire Martus\Docs. Vous les trouverez aussi sur le site http://www.martus.org/downloads, que vous pouvez visiter pour vérifier si la version d'une nouvelle langue est disponible. En outre, certains packs de langues peuvent être disponibles sur le site web de Martus. Un pack de langues peut contenir des versions mises à jour de la traduction de l'interface utilisateur du Client Martus, le Guide de l'Utilisateur, le Guide de Démarrage Rapide, le fichier LisezMoi, et une aide programme dans une langue particulière.
+
+21. Je ne vois pas tout le texte dans les listes déroulantes de la version arabe de Martus. Comment puis-je y remédier ?
+Lorsque vous exécutez la version arabe de Martus sous Windows XP, le texte figurant dans les listes déroulantes peut ne pas s'aligner correctement. Pour voir le texte correctement, configurez Windows pour qu'il affiche les éléments de l'interface utilisateur en style "Windows Classique". Dans le menu Démarrer, choisissez Réglages > Panneau de Configuration. Puis, double cliquez Affichage. Dans la boîte de dialogue des propriétés d'Affichage, cliquez sur l'onglet Apparence et choisissez Style Windows Classique dans le menu Fenêtres et Boutons.
+
+22. Je souhaite passer à une nouvelle version de Martus. Dois-je d'abord supprimer l'ancienne version ?
+Non. Vous pouvez installer Martus sur une version existante du logiciel. Le programme d'installation vous informera qu'il existe une ancienne version. Cliquez Oui pour mettre à jour Martus sans perdre vos données, y compris les communiqués, les informations de compte, les configurations de serveur et les mots de passe. Pour de plus amples informations, voir "2c. Passage à une nouvelle version de Martus (Windows uniquement").
+
+Guide de l'Utilisateur Martus 2.6		1
 
