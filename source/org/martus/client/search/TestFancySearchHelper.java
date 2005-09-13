@@ -255,13 +255,12 @@ public class TestFancySearchHelper extends TestCaseEnhanced
 		spec.addColumn(FieldSpec.createStandardField("value", new FieldTypeSearchValue()));
 		spec.addColumn(FieldSpec.createStandardField("andor", new FieldTypeNormal()));
 		GridData data = new GridData(spec);
-		String localizedTrue = localization.getButtonLabel("yes");
 		addRow(data, "tag", "=", "1", "or");
 		
 		SearchTreeNode booleanEquals = helper.getSearchTree(data);
 		assertEquals(SearchTreeNode.VALUE, booleanEquals.getOperation());
 		assertEquals("tag", booleanEquals.getField().getTag());
-		assertEquals(localizedTrue, booleanEquals.getValue());
+		assertEquals("1", booleanEquals.getValue());
 	}
 	
 	public void testGetSearchTreeOneRow() throws Exception
@@ -278,9 +277,9 @@ public class TestFancySearchHelper extends TestCaseEnhanced
 		spec.addColumn(FieldSpec.createStandardField("value", new FieldTypeSearchValue()));
 		spec.addColumn(FieldSpec.createStandardField("andor", new FieldTypeNormal()));
 		GridData data = new GridData(spec);
-		addRow(data, "field", "", "value", "or");
+		addRow(data, "field", "=", "value", "or");
 		SearchTreeNode root = helper.getSearchTree(data);
-		verifyFieldCompareOpValue("single row", root, normalSpec, SearchTreeNode.CONTAINS, "value");
+		verifyFieldCompareOpValue("single row", root, normalSpec, SearchTreeNode.EQUAL, "value");
 	}
 	
 	public void testGetSearchTreeTwoRows() throws Exception
@@ -299,12 +298,12 @@ public class TestFancySearchHelper extends TestCaseEnhanced
 		spec.addColumn(FieldSpec.createStandardField("value", new FieldTypeSearchValue()));
 		spec.addColumn(FieldSpec.createStandardField("andor", new FieldTypeNormal()));
 		GridData data = new GridData(spec);
-		addRow(data, "a", "", "b", "or");
-		addRow(data, "c", "", "d", "or");
+		addRow(data, "a", "=", "b", "or");
+		addRow(data, "c", "=", "d", "or");
 		SearchTreeNode root = helper.getSearchTree(data);
 		verifyOp("top level", root, SearchTreeNode.OR);
-		verifyFieldCompareOpValue("two rows left", root.getLeft(), a, SearchTreeNode.CONTAINS, "b");
-		verifyFieldCompareOpValue("two rows right", root.getRight(), c, SearchTreeNode.CONTAINS, "d");
+		verifyFieldCompareOpValue("two rows left", root.getLeft(), a, SearchTreeNode.EQUAL, "b");
+		verifyFieldCompareOpValue("two rows right", root.getRight(), c, SearchTreeNode.EQUAL, "d");
 	}
 	
 	public void testGetSearchTreeComplex() throws Exception

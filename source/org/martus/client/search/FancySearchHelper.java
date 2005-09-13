@@ -272,10 +272,11 @@ public class FancySearchHelper
 	{
 		String fieldName = gridData.getValueAt(row, 0);
 		String op = gridData.getValueAt(row, 1);
-		final DropDownFieldSpec fieldColumnSpec = (DropDownFieldSpec)gridData.getSpec().getFieldSpec(0);
-		FieldSpec specForThisValue = FancySearchTableModel.getFieldSpecForChosenField(fieldName, fieldColumnSpec);
-		String value = specForThisValue.convertStoredToDisplay(gridData.getValueAt(row, 2), getLocalization());
+		String value = gridData.getValueAt(row, 2);
 		value = value.trim();
+
+		DropDownFieldSpec fieldColumnSpec = (DropDownFieldSpec)gridData.getSpec().getFieldSpec(0);
+		FieldSpec specForThisValue = FancySearchTableModel.getFieldSpecForChosenField(fieldName, fieldColumnSpec);
 		
 		String localAnd = getLocalization().getKeyword(SearchParser.ENGLISH_AND_KEYWORD);
 		String localOr = getLocalization().getKeyword(SearchParser.ENGLISH_OR_KEYWORD);

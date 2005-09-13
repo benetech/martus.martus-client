@@ -246,10 +246,12 @@ public class TestBulletinSearcher extends TestCaseEnhanced
 		MartusCrypto security = MockMartusSecurity.createClient();
 		Bulletin b = new Bulletin(security);
 		b.getBulletinHeaderPacket().updateLastSavedTime();
-		String rawLastSaved = b.getLastSavedDate();
-		String formattedLastSaved = localization.convertStoredDateToDisplay(rawLastSaved);
-
 		FieldSpec spec = FieldSpec.createStandardField("_lastSavedDate", new FieldTypeDate());
+		
+		String rawLastSaved = b.getLastSavedDate();
+		verifyOperatorComparison("testDateMatchesLastSaved", b, spec, "=", rawLastSaved, true);
+
+		String formattedLastSaved = localization.convertStoredDateToDisplay(rawLastSaved);
 		verifyOperatorComparison("testDateMatchesLastSaved", b, spec, "", formattedLastSaved, true);
 	}
 		
@@ -272,10 +274,13 @@ public class TestBulletinSearcher extends TestCaseEnhanced
 		verifyOperatorComparison("testFlexiDateMatches", b, eventDateEndField, "", "08/23/2003", true);
 		verifyOperatorComparison("testFlexiDateMatches", b, eventDateEndField, "", "08/22/2003", false);
 
-		verifyOperatorComparison("testFlexiDateMatches", b, eventDateBeginField, ">=", "08/20/2003", true);
-		verifyOperatorComparison("testFlexiDateMatches", b, eventDateBeginField, ">", "08/20/2003", false);
-		verifyOperatorComparison("testFlexiDateMatches", b, eventDateBeginField, "<=", "08/20/2003", true);
-		verifyOperatorComparison("testFlexiDateMatches", b, eventDateBeginField, "<", "08/19/2003", false);
+		verifyOperatorComparison("testFlexiDateMatches", b, eventDateBeginField, ">=", "2003-08-20", true);
+		verifyOperatorComparison("testFlexiDateMatches", b, eventDateBeginField, ">", "2003-08-20", false);
+		verifyOperatorComparison("testFlexiDateMatches", b, eventDateBeginField, "<=", "2003-08-20", true);
+		verifyOperatorComparison("testFlexiDateMatches", b, eventDateBeginField, "<", "2003-08-19", false);
+
+		verifyOperatorComparison("testFlexiDateMatches", b, eventDateBeginField, "<", "2006-02-20", true);
+		verifyOperatorComparison("testFlexiDateMatches", b, eventDateBeginField, ">", "2002-09-20", true);
 	}
 	
 	public void testBooleanMatches() throws Exception
@@ -316,14 +321,15 @@ public class TestBulletinSearcher extends TestCaseEnhanced
 		Bulletin b = new Bulletin(security);
 		
 		FieldSpec fieldToSearch = FieldSpec.createStandardField(Bulletin.TAGLANGUAGE, new FieldTypeLanguage());
-		String localizedArabic = localization.getLanguageName(MiniLocalization.ARABIC); 
-		b.set(Bulletin.TAGLANGUAGE, MiniLocalization.ARABIC);
-		BulletinSearcher contains = new BulletinSearcher(new SearchTreeNode(fieldToSearch , "", localizedArabic));
+		final String languageCode = MiniLocalization.ARABIC;
+		String languageName = localization.getLanguageName(languageCode); 
+		b.set(Bulletin.TAGLANGUAGE, languageCode);
+		
+		BulletinSearcher contains = new BulletinSearcher(new SearchTreeNode(fieldToSearch , "", languageName));
 		assertTrue("not looking at searchable form?", contains.doesMatch(new SafeReadableBulletin(b), localization));
-		BulletinSearcher equals  = new BulletinSearcher(new SearchTreeNode(fieldToSearch, "=", localizedArabic));
+		
+		BulletinSearcher equals  = new BulletinSearcher(new SearchTreeNode(fieldToSearch, "=", languageCode));
 		assertTrue("not looking at searchable form?", equals.doesMatch(new SafeReadableBulletin(b), localization));
-		
-		
 	}
 	
 	MiniLocalization localization;
