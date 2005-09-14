@@ -135,6 +135,10 @@ public class FancySearchTableModel extends GridTableModel implements TableModelL
 		{
 			opChoiceVector.addAll(getContainsChoices(localization));
 		}
+		else if(selectedFieldType.isGrid())
+		{
+			opChoiceVector.addAll(getContainsChoices(localization));
+		}
 		else
 		{
 			throw new RuntimeException("Don't know ops for type: " + selectedFieldType.getTypeName());

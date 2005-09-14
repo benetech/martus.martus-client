@@ -152,9 +152,11 @@ public class FancySearchHelper
 		}
 
 		// TODO: add one choice per column (call this method recursively)
-		//if(spec.getType() == FieldSpec.TYPE_GRID)
-		//{
-		//}
+		if(thisType.isGrid())
+		{
+			choicesForThisField.add(new ChoiceItem(spec));
+			return choicesForThisField;
+		}
 
 		// many types just create a choice with their own type,
 		// but we need to default to NORMAL for safety

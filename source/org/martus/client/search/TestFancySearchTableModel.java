@@ -36,6 +36,7 @@ import org.martus.common.fieldspec.FieldTypeAnyField;
 import org.martus.common.fieldspec.FieldTypeBoolean;
 import org.martus.common.fieldspec.FieldTypeDate;
 import org.martus.common.fieldspec.FieldTypeDropdown;
+import org.martus.common.fieldspec.FieldTypeGrid;
 import org.martus.common.fieldspec.FieldTypeMultiline;
 import org.martus.common.fieldspec.FieldTypeNormal;
 import org.martus.common.fieldspec.FieldTypeSearchValue;
@@ -91,5 +92,7 @@ public class TestFancySearchTableModel extends TestCaseEnhanced
 		assertEquals("contains available for date?", 6, dateSpec.getCount());
 		DropDownFieldSpec anyFieldSpec = model.getCurrentOpColumnSpec(new FieldTypeAnyField());
 		assertEquals("not just contains available for 'any field'?", 1, anyFieldSpec.getCount());
+		DropDownFieldSpec gridFieldSpec = model.getCurrentOpColumnSpec(new FieldTypeGrid());
+		assertEquals("not just contains available for grid?", 1, gridFieldSpec.getCount());
 	}
 }

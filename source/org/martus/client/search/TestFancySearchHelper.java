@@ -45,6 +45,7 @@ import org.martus.common.fieldspec.DropDownFieldSpec;
 import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.fieldspec.FieldTypeBoolean;
 import org.martus.common.fieldspec.FieldTypeDropdown;
+import org.martus.common.fieldspec.FieldTypeGrid;
 import org.martus.common.fieldspec.FieldTypeMessage;
 import org.martus.common.fieldspec.FieldTypeMultiline;
 import org.martus.common.fieldspec.FieldTypeNormal;
@@ -125,7 +126,7 @@ public class TestFancySearchHelper extends TestCaseEnhanced
 		assertEquals("not one choice for a grid?", 1, gridTypeChoices.size());
 		ChoiceItem gridChoice = (ChoiceItem)gridTypeChoices.get(0);
 		FieldSpec gridChoiceSpec = gridChoice.getSpec();
-		assertEquals("grid doesn't have string search?", new FieldTypeNormal(), gridChoiceSpec.getType());
+		assertEquals("grid doesn't have grid search?", new FieldTypeGrid(), gridChoiceSpec.getType());
 		
 		DropDownFieldSpec dropDownSpec = createSampleDropDownSpec("dropdown");
 		Vector dropDownChoices = helper.getChoiceItemsForThisField(dropDownSpec);

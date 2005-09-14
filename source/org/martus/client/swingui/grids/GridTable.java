@@ -47,6 +47,7 @@ import org.martus.common.fieldspec.FieldTypeBoolean;
 import org.martus.common.fieldspec.FieldTypeDate;
 import org.martus.common.fieldspec.FieldTypeDateRange;
 import org.martus.common.fieldspec.FieldTypeDropdown;
+import org.martus.common.fieldspec.FieldTypeGrid;
 import org.martus.common.fieldspec.FieldTypeLanguage;
 import org.martus.common.fieldspec.FieldTypeMultiline;
 import org.martus.common.fieldspec.FieldTypeNormal;
@@ -156,6 +157,7 @@ public class GridTable extends UiTableWithCellEditingProtection
 		map.put(new FieldTypeNormal(), new GridNormalCellEditor(localization));
 		map.put(new FieldTypeMultiline(), new GridNormalCellEditor(localization));
 		map.put(new FieldTypeAnyField(), new GridNormalCellEditor(localization));
+		map.put(new FieldTypeGrid(), new GridNormalCellEditor(localization));
 		return map;
 	}
 	
@@ -171,6 +173,7 @@ public class GridTable extends UiTableWithCellEditingProtection
 		map.put(new FieldTypeNormal(), new GridNormalCellEditor(localization));
 		map.put(new FieldTypeMultiline(), new GridNormalCellEditor(localization));
 		map.put(new FieldTypeAnyField(), new GridNormalCellEditor(localization));
+		map.put(new FieldTypeGrid(), new GridNormalCellEditor(localization));
 		return map;
 	}
 
