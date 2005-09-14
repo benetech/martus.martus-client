@@ -114,19 +114,27 @@ public class UiFancySearchDlg extends UiSearchDlg
 			String closeHelp = localization.getButtonLabel("CloseHelp");
 			String title = localization.getWindowTitle("FancySearchHelp");
 			String[] buttons = {closeHelp};
+			String msg1 = localization.getFieldLabel("FancySearchHelpMsg1");
+			String msg2 = localization.getFieldLabel("FancySearchHelpMsg2");
+			String msg3 = localization.getFieldLabel("FancySearchHelpMsg3");
+			if(alreadyInEnglishSoDontExplainUsingEnglishAndOr())
+				msg3 = "";
+			String[] contents = {msg1 + "\n" + msg2 + "\n" + msg3};
+
 			HashMap tokenReplacement = new HashMap();
 			String andString = localization.getKeyword("and");
 			String orString = localization.getKeyword("or");
 			tokenReplacement.put("#And#", andString);
 			tokenReplacement.put("#Or#", orString);
-			String msg1 = localization.getFieldLabel("FancySearchHelpMsg1");
-			String msg2 = localization.getFieldLabel("FancySearchHelpMsg2");
-			if(localization.getCurrentLanguageCode().equals(MiniLocalization.ENGLISH))
-				msg2 = ""; //Since this is english there is no need to tell the user they can use "And" and "Or" in their own language for keywords between search words.
-			String msg3 = localization.getFieldLabel("FancySearchHelpMsg3");
-			String[] contents = {msg1, msg2, msg3};
+
 			mainWindow.confirmDlg(mainWindow, title, contents, buttons, tokenReplacement);
 		}
+		
+		private boolean alreadyInEnglishSoDontExplainUsingEnglishAndOr()
+		{
+			return localization.getCurrentLanguageCode().equals(MiniLocalization.ENGLISH);
+		}
+		
 		private UiMainWindow mainWindow;
 	}
 

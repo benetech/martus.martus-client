@@ -791,9 +791,39 @@ public class EnglishStrings
 "field:ConfigureHQsCurrentHQs=Current Headquarters",
 "field:ColumnGridRowNumber=Row #",
 "field:SetFolderOrder=To change a folder's position, select the folder name and use the #MoveFolderUp# / #MoveFolderDown# buttons.",
-"field:FancySearchHelpMsg1=",
-"field:FancySearchHelpMsg2=",
-"field:FancySearchHelpMsg3=",
+"field:FancySearchHelpMsg1=---Overview---\n\n" +
+	"Martus searches all versions of every bulletin (both public and private, sealed and draft) in every folder, including the Discarded Bulletins folder.  " +
+		"When the search is completed, the Search Results folder lists copies of the bulletins found in your search.\n\n" +
+	"You can search for words in any language.  " +
+		"Martus searches are not case-sensitive in English and other purely Latin character languages, " +
+		"so it doesn't matter whether a word is capitalized or not.\n\n" +
+	"Searches include attachment filenames, but not content of attachments.\n\n" +
+	"You can search both standard and custom fields.\n",
+"field:FancySearchHelpMsg2=---Search tips---\n\n" +
+	"Martus will find any text you enter whether it's a complete word or part of a larger word. " +
+		"For example, if you search for the word prison, you'll see bulletins that include the words prison, imprison, and imprisonment. " +
+		"Likewise, if you search for the word prison, " +
+		"Martus will find bulletins that include attachments with names such as photos-prison.jpg and prisoners-report.doc.\n\n" + 
+	"To search for an exact phrase, type it with quotation marks around the phrase  (e.g.  \"Witness Testimony\"). " +
+		"If you do not put quotation marks around the phrase, Martus will search for the words individually.\n\n" + 
+	"Use the word \"#Or#\" to broaden your search, or the word \"#And#\" to narrow it.  " +
+		"You can use the #And# / #Or# dropdowns to specify different fields you want search across " +
+		"(e.g. you want to search for bulletins that have \"Last Saved Date\" in the last week and have a certain author).  " +
+		"If you want to search on multiple text values within a single bulletin field, " +
+		"you can use #Or# or #And# in-between words in the \"Search For...\" entry box.  " +
+		"For example, if you search \"Any Field\" for prison #Or# jail you'll see a list of bulletins that contain either word anywhere in the bulletin. " + 
+		"If you search for prison #And# assault you'll see a list of bulletins that contain both words. " +
+		"The keyword \"#And\" is implied, so if you search for prison assault, " +
+		"Martus will find bulletins the same bulletins as if you searched for prison #And# assault.\n\n" + 
+	"When you use both \"#And#\" and \"#Or#\", your search terms are grouped from the beginning of your list " +
+		"(either across bulletin fields or within a particular field). " +
+		"For example, if you enter prison #Or# jail #And# trial in the \"Search For...\" entry box, " +
+		"Martus will search for any bulletins that contain either of the words prison or jail, and also contain the word trial. " +   
+		"But if you enter prison #And# jail #Or# trial, " +
+		"Martus will search for any bulletins that contain both the words prison and jail, or contain the word trial.\n",
+"field:FancySearchHelpMsg3=" + 
+	"You can use the word #Or# or #And#, or you can use the English words \"or\" and \"and\" to search.\n\n" +  
+	"You need to put spaces before and after any #Or# / #And# keywords you use in your search.\n", 
 
 "field:WasSentYes=Yes",
 "field:WasSentNo=No",
