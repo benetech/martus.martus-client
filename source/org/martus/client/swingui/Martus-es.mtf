@@ -74,7 +74,6 @@
 # 13.  If you want your language to appear right to left,
 #      Uncomment the next line (by removing the # in front of #!right-to-left)
 #!right-to-left
-#
 
 #________________________=Show all bulletins on this server and on this computer.
 -e9a2-button:AllSummaries=Mostrar todos los boletines en este servidor y en este ordenador.
@@ -107,10 +106,10 @@
 -b795-button:DownloadableSummaries=Mostrar sólo los boletines en el servidor.
 
 #___________________________=Down
--bf93-button:FolderOrderDown=Subir
+-bf93-button:FolderOrderDown=Bajar
 
 #_________________________=Up
--2038-button:FolderOrderUp=Bajar
+-2038-button:FolderOrderUp=Subir
 
 #_________________=Leave
 -7e35-button:Leave=Salir
@@ -146,10 +145,10 @@
 -6f62-button:ResetContents=Revertir contenido
 
 #_______________________________=Retrieve all bulletin versions
--3daf-button:RetrieveAllVersions=Bajar todas las versiones del boletín
+-3daf-button:RetrieveAllVersions=Bajar todas las revisiones del boletín
 
 #______________________________________________=Retrieve latest bulletin version only
--3449-button:RetrieveLatestBulletinRevisionOnly=Bajar la última version del boletín
+-3449-button:RetrieveLatestBulletinRevisionOnly=Bajar la última revisión del boletín
 
 #__________________________________=Accept
 -bb54-button:ServerComplianceAccept=Aceptar
@@ -260,7 +259,7 @@
 -9ce3-button:ok=Aceptar
 
 #_________________=Print/Report
--5fdf-button:print=Imprimir/Crear reporte
+-5fdf-button:print=Imprimir/Reporte
 
 #____________________________=Remove Attachment
 -6f6d-button:removeattachment=Eliminar archivo adjunto
@@ -428,7 +427,7 @@
 -4ccc-field:CreateCustomFieldsHelp2=Para campos personalizados (no estándar), necesita primero seleccionar qué tipo de campo desea. Los tipos de campo disponibles son 'BOOLEAN' (Verdadero/Falso), 'DATE' (Fecha), 'DATERANGE' (Rango de fechas), 'DROPDOWN' (Lista desplegable), 'GRID' (Mapa), 'LANGUAGE' (Idioma), 'MESSAGE' (Mensaje), 'MULTILINE' (Múltiples lineas), and 'STRING' (Palabra).\n\nPara cada campo personalizado va a necesitar un nombre de identificación único. El nombre de identificación de un campo puede ser cualquier palabra a excepción de aquellas en uso por Martus ('author' (autor), 'summary' (resúmen), 'location' (lugar), 'title' (título) etc.) y no puede contener espacios o caracteres especiales. Por ejemplo puede usar los nombres de identificación 'NombreDeVictima', 'ColorDeOjos', etc.\n\nLuego necesita un título para el campo personalizado. Por ejemplo podria ser 'Nombre de primer testigo'.\n\nNotas adicionales\n1. XML toma en cuenta las mayúsculas y minúsculas. ('Testigo' no es lo mismo que 'testigo')\n2. Las comillas alrededor de los tipos de campos pueden ser dobles o singulares, pero tiene que corresponder. ( ej. 'STRING" no es válido. Tiene que ser 'STRING' o "STRING")\n3. Un campo BOOLEAN se muestra como una casilla de verificación cuando se edita y como Si/No en la vista previa o cuando se imprime.\n4. Utilice los campos de “MESSAGE” para guiar al usuario en como ingresar datos, y para crear notas que serán exhibidas en cada boletín.\n\nConsulte los siguientes ejemplos:\n\n
 
 #__________________________________=\n<Field type='DROPDOWN'>\n<Tag>BulletinSource</Tag>\n<Label>Source of bulletin information</Label>\n<Choices>\n<Choice>Media/Press</Choice>\n<Choice>Legal Report</Choice>\n<Choice>Personal Interview</Choice>\n<Choice>Other</Choice>\n</Choices>\n</Field>\n\n<Field type='STRING'>\n<Tag>SpecifyOther</Tag>\n<Label>If "Other", please specify:</Label>\n</Field>\n\n<Field type='STRING'>\n<Tag>IntervieweeName</Tag>\n<Label>Interviewee Name</Label>\n</Field>\n\n<Field type='LANGUAGE'>\n<Tag>IntervieweeLanguage</Tag>\n<Label>Interviewee Speaks</Label>\n</Field>\n\n<Field type='DATERANGE'>\n<Tag>InterviewDates</Tag>\n<Label>Date(s) of interview(s)</Label>\n</Field>\n\n<Field type='BOOLEAN'>\n<Tag>Anonymous</Tag>\n<Label>Does interviewee wish to remain anonymous?</Label>\n</Field>\n\n<Field type='GRID'>\n<Tag>VictimInformationGrid</Tag>\n<Label>Victim Information</Label>\n<GridSpecDetails>\n<Column type='STRING'><Tag></Tag><Label>First Name</Label></Column>\n<Column type='STRING'><Tag></Tag><Label>Last Name</Label></Column>\n<Column type='BOOLEAN'><Tag></Tag><Label>Is Identified?</Label></Column>\n<Column type='DATE'><Tag></Tag><Label>Date of Birth</Label></Column>\n<Column type='DROPDOWN'><Tag></Tag><Label>Sex</Label>\n<Choices>\n<Choice>Male</Choice>\n<Choice>Female</Choice>\n<Choice>Unknown</Choice>\n</Choices></Column>\n<Column type='STRING'><Tag></Tag><Label>Ethnicity</Label></Column>\n</GridSpecDetails>\n</Field>\n\n<Field type='MESSAGE'>\n<Tag>MessageProfession</Tag>\n<Label>Profession History Table Note</Label>\n<Message>If you have information about a person who has had different professions over time, enter multiple rows with the same First and Last Names and show the date ranges for each profession on a separate row.</Message>\n</Field>\n\n<Field type='GRID'>\n<Tag>ProfessionHistoryGrid</Tag>\n<Label>Profession History</Label>\n<GridSpecDetails>\n<Column type='STRING'><Tag></Tag><Label>First Name</Label></Column>\n<Column type='STRING'><Tag></Tag><Label>Last Name</Label></Column>\n<Column type='STRING'><Tag></Tag><Label>Profession</Label></Column>\n<Column type='DATERANGE'><Tag></Tag><Label>Dates of Profession</Label></Column>\n</GridSpecDetails>\n</Field>\n
--4d55-field:CreateCustomFieldsHelp3=\n<Field type='DROPDOWN'>\n<Tag>OrigenDeBoletin</Tag>\n<Label>Origen de la información de este boletín</Label>\n<Choices>\n<Choice>Medios de comunicación</Choice>\n<Choice>Reporte legal</Choice>\n<Choice>Entrevista</Choice>\n<Choice>Otro</Choice>\n</Choices>\n</Field>\n\n<Field type='STRING'>\n<Tag>DetallesOtro</Tag>\n<Label>Si eligió "Otro", por favor proveer detalles adicionales:</Label>\n</Field>\n\n<Field type='STRING'>\n<Tag>NombreDeEntrevistado</Tag>\n<Label>Nombre de entrevistado</Label>\n</Field>\n\n<Field type='LANGUAGE'>\n<Tag>IdiomaDeEntrevistado</Tag>\n<Label>Idioma de entrevista</Label>\n</Field>\n\n<Field type='DATERANGE'>\n<Tag>FechasDeEntrevista</Tag>\n<Label>Fecha(s) de la(s) entrevista(s)</Label>\n</Field>\n\n<Field type='BOOLEAN'>\n<Tag>Anónimo</Tag>\n<Label>El entrevistado desea ser anónimo</Label>\n</Field>\n\n<Field type='GRID'>\n<Tag>MpaDeInformaciónDeVictima</Tag>\n<Label>Información de la víctima</Label>\n<GridSpecDetails>\n<Column type='STRING'><Tag></Tag><Label>Nombre</Label></Column>\n<Column type='STRING'><Tag></Tag><Label>Apellido</Label></Column>\n<Column type='BOOLEAN'><Tag></Tag><Label>¿Ha sido identificado?</Label></Column>\n<Column type='DATE'><Tag></Tag><Label>Fecha de Nacimiento</Label></Column>\n<Column type='DROPDOWN'><Tag></Tag><Label>Sexo</Label>\n<Choices>\n<Choice>Masculino</Choice>\n<Choice>Femenino</Choice>\n<Choice>Desconocido</Choice>\n</Choices></Column>\n<Column type='STRING'><Tag></Tag><Label>Etnia</Label></Column>\n</GridSpecDetails>\n</Field>\n\n<Field type='MESSAGE'>\n<Tag>MensajeDeProfeción</Tag>\n<Label>Notas de historia de profesión</Label>\n<Message>Si tiene información sobre una persona que tuvo diferentes profesiones en un periódo de tiempo, ingrese varias filas con el mismo nombre y apellido y con el rango de fechas de cada profesión.</Message>\n</Field>\n\n<Field type='GRID'>\n<Tag>HistoriaDeProfesión</Tag>\n<Label>Historia de Profesión</Label>\n<GridSpecDetails>\n<Column type='STRING'><Tag></Tag><Label>Nombre</Label></Column>\n<Column type='STRING'><Tag></Tag><Label>Apellido</Label></Column>\n<Column type='STRING'><Tag></Tag><Label>Profesión</Label></Column>\n<Column type='DATERANGE'><Tag></Tag><Label>Rango de fechas de profesión</Label></Column>\n</GridSpecDetails>\n</Field>\n
+-4d55-field:CreateCustomFieldsHelp3=\n<Field type='DROPDOWN'>\n<Tag>OrigenDeBoletin</Tag>\n<Label>Origen de la información de este boletín</Label>\n<Choices>\n<Choice>Medios de comunicación</Choice>\n<Choice>Reporte legal</Choice>\n<Choice>Entrevista</Choice>\n<Choice>Otro</Choice>\n</Choices>\n</Field>\n\n<Field type='STRING'>\n<Tag>DetallesOtro</Tag>\n<Label>Si eligió "Otro", por favor proveer detalles adicionales:</Label>\n</Field>\n\n<Field type='STRING'>\n<Tag>NombreDeEntrevistado</Tag>\n<Label>Nombre de entrevistado</Label>\n</Field>\n\n<Field type='LANGUAGE'>\n<Tag>IdiomaDeEntrevistado</Tag>\n<Label>Idioma de entrevista</Label>\n</Field>\n\n<Field type='DATERANGE'>\n<Tag>FechasDeEntrevista</Tag>\n<Label>Fecha(s) de la(s) entrevista(s)</Label>\n</Field>\n\n<Field type='BOOLEAN'>\n<Tag>Anónimo</Tag>\n<Label>El entrevistado desea ser anónimo</Label>\n</Field>\n\n<Field type='GRID'>\n<Tag>MapaDeInformaciónDeVictima</Tag>\n<Label>Información de la víctima</Label>\n<GridSpecDetails>\n<Column type='STRING'><Tag></Tag><Label>Nombre</Label></Column>\n<Column type='STRING'><Tag></Tag><Label>Apellido</Label></Column>\n<Column type='BOOLEAN'><Tag></Tag><Label>¿Ha sido identificado?</Label></Column>\n<Column type='DATE'><Tag></Tag><Label>Fecha de Nacimiento</Label></Column>\n<Column type='DROPDOWN'><Tag></Tag><Label>Sexo</Label>\n<Choices>\n<Choice>Masculino</Choice>\n<Choice>Femenino</Choice>\n<Choice>Desconocido</Choice>\n</Choices></Column>\n<Column type='STRING'><Tag></Tag><Label>Etnia</Label></Column>\n</GridSpecDetails>\n</Field>\n\n<Field type='MESSAGE'>\n<Tag>MensajeDeProfeción</Tag>\n<Label>Notas de historia de profesión</Label>\n<Message>Si tiene información sobre una persona que tuvo diferentes profesiones en un periódo de tiempo, ingrese varias filas con el mismo nombre y apellido y con el rango de fechas de cada profesión.</Message>\n</Field>\n\n<Field type='GRID'>\n<Tag>HistoriaDeProfesión</Tag>\n<Label>Historia de Profesión</Label>\n<GridSpecDetails>\n<Column type='STRING'><Tag></Tag><Label>Nombre</Label></Column>\n<Column type='STRING'><Tag></Tag><Label>Apellido</Label></Column>\n<Column type='STRING'><Tag></Tag><Label>Profesión</Label></Column>\n<Column type='DATERANGE'><Tag></Tag><Label>Rango de fechas de profesión</Label></Column>\n</GridSpecDetails>\n</Field>\n
 
 #____________________________________=Please enter your new username and password.
 -aec2-field:CreateNewUserNamePassword=Escriba su nuevo nombre de usuario y contraseña.
@@ -524,7 +523,7 @@
 -6222-field:HQSummaryLabel=Oficina central
 
 #__________________________=Default Headquarters accounts will be selected for each new bulletin or version.
--ea13-field:HQsSetAsDefault=Cuentas por defecto de oficinas centrales serán seleccionadas para cada boletín nuevo o versión nueva. 
+-ea13-field:HQsSetAsDefault=Cuentas por defecto de oficinas centrales serán seleccionadas para cada boletín nuevo o revisión nueva. 
 
 #________________________________=These Headquarters accounts are allowed to view the private information in this bulletin, and to send this bulletin to a server on your behalf.
 -2274-field:HQsSetAsProxyUploader=Estas cuentas de las oficinas centrales pueden ver la información privada de sus boletines y enviarlos a un servidor a su nombre.
@@ -557,10 +556,10 @@
 -02f2-field:HowToCreateNewAccount=Ya existe una o más cuentas en este ordenador. Oprima Aceptar para crear una cuenta adicional con un nuevo nombre de usuario y contraseña.
 
 #_________________________________=The version of this translation is not compatible with this version of Martus.  It is recommend that you do not continue to use this translation version and go to (http://www.martus.org/downloads) for the appropriate version.
--2c0e-field:IncompatibleMtfVersion=Esta versió de la traducción no es compatible con esta versión de Martus.  Le recomendamo que no use esta traducción y que visite el sitio web (http://www.martus.org/downloads) para descargar una versión actualizada.
+-2c0e-field:IncompatibleMtfVersion=La versión de la traducción no es compatible con esta versión del programa de Martus.  Le recomendamo que no use esta traducción y que visite el sitio web (http://www.martus.org/downloads) para descargar una versión actualizada.
 
 #________________________________________=Martus Software Version: #ProgramVersionNumber#
--fcd7-field:IncompatibleMtfVersionProgram=Martus software versión: #ProgramVersionNumber#
+-fcd7-field:IncompatibleMtfVersionProgram=Versión del programa Martus: #ProgramVersionNumber#
 
 #____________________________________________=#MtfLanguage# Translation Version: #MtfVersionNumber#
 -8dde-field:IncompatibleMtfVersionTranslation=Versión de traducción (#MtfLanguage#): #MtfVersionNumber#
@@ -704,7 +703,7 @@
 -693f-field:SearchGridHeaderOp=¿Comparar como?
 
 #________________________________=Search for...
--f864-field:SearchGridHeaderValue=Buscar...
+-f864-field:SearchGridHeaderValue=Términos de búsqueda...
 
 #___________________________=contains
 -caeb-field:SearchOpContains=contiene
@@ -878,7 +877,7 @@
 -5b61-field:confirmCancelShareVerifyeffect=Oprima Sí para salir del proceso de verificación.
 
 #_________________________________________=You have chosen to remove all selected Headquarters accounts.  Any existing saved bulletins will still be visible by the old Headquarters.  If you want to disallow Headquarters viewing access to previously created Draft bulletins they must be re-saved after revoking the Headquarters.  New versions of sealed bulletins will not be able to be viewed by Headquarters, but any old versions of sealed bulletins that already are on a Headquarters' computer CANNOT be reset to be non-viewable by the Headquarters.
--9959-field:confirmClearHQInformationcause=Escogió eliminar todas las cuentas de oficina central seleccionadas.  Los boletines que estén guardados todavía pueden ser vistos por la oficina central eliminada. Si no quiere que la oficina central eliminada pueda ver sus borradores tendrá que guardarlos nuevamente una vez que elimine la cuenta de la oficina central. Versiones nuevas de boletines sellados no podrán ser vistos por la oficina central eliminada, pero versiones anteriores de un boletín que estén en el ordenador de la oficina central no pueden ser reconfigurados para que no sean vistos.
+-9959-field:confirmClearHQInformationcause=Escogió eliminar todas las cuentas de oficina central seleccionadas.  Los boletines que estén guardados todavía pueden ser vistos por la oficina central eliminada. Si no quiere que la oficina central eliminada pueda ver sus borradores tendrá que guardarlos nuevamente una vez que elimine la cuenta de la oficina central. Nuevas revisiones de boletines sellados no podrán ser vistos por la oficina central eliminada, pero revisiones anteriores de un boletín que estén en el ordenador de la oficina central no pueden ser reconfigurados para que no sean vistos.
 
 #__________________________________________=By clicking on Yes, any draft or sealed bulletins saved in the future will no longer be accessible by your Headquarters.
 -4a87-field:confirmClearHQInformationeffect=Al oprimir Sí, los boletines que selle o borradores que guarde en el futuro no podrán ser vistos por la oficina central.
@@ -895,7 +894,7 @@
 #____________________________________________=Clicking on Yes will create a new version of this bulletin that initially contains all the same information.
 -198c-field:confirmCloneMySealedAsDrafteffect=Al oprimir Sí, se va a crear una nueva revisión de este boletín con la misma información. 
 
-#______________________________________=The date range you entered is invalid.  The end date occures before the begin data.
+#______________________________________=The date range you entered is invalid.  The end date occurs before the begin data.
 -c7f5-field:confirmDateRageInvalidcause=El rango de fechas ingresado no es válido.  La fecha final occurre antes que la fecha inicial.
 
 #_______________________________________=Answering Yes will take you back to the date range to fix the problem.  Answering No will revert the date back to its original value.
@@ -950,7 +949,7 @@
 -167f-field:confirmKeyPairFileExistsOverWriteeffect=Al oprimir Sí, la clave existente será reemplazada por la copia recuperada.
 
 #_______________________________________________________=This account was created with an older release of Martus, which was unaware of multiple sealed bulletin versions. We need to update your system to recognize bulletins with versions.  The migration is automatic, fast, and safe. You cannot run this release of Martus unless you allow this migration.
--d89c-field:confirmNeedsBulletinVersioningMigrationcause=Esta cuenta fue creada con una versión anterior de Martus que no tiene conocimiento de revisiones múltiples de un boletín sellado. Es necesario actualizar su cuenta para reconocer boletines que tienen varias revisiones. La actualización es automática, rápida y segura. No puede continuar usando esta versión de Martus a menos que permita la actualización.
+-d89c-field:confirmNeedsBulletinVersioningMigrationcause=Esta cuenta fue creada con una versión anterior de Martus que no tiene conocimiento de múltiples revisiones de un boletín sellado. Es necesario actualizar su cuenta para reconocer boletines que tienen varias revisiones. La actualización es automática, rápida y segura. No puede continuar usando esta versión de Martus a menos que permita la actualización.
 
 #________________________________________________________=Answering Yes will allow the migration to proceed, answering No will exit Martus.
 -2a34-field:confirmNeedsBulletinVersioningMigrationeffect=Oprima Sí para continuar con la conversión, oprima No para salir de Martus.
@@ -979,10 +978,10 @@
 #_____________________________________________=The existing file will be deleted and replaced with the new information.
 -0863-field:confirmOverWriteExistingFileeffect=El archivo adjunto elegido va a reemplazar el archivo en su disco duro.
 
-#__________________________________________=One or more bulletins will not be printed because all the information is private, and you marked the "Print only public information" box
--d4d7-field:confirmPrintAllPrivateDatacause=No se pudo imprimir uno o más boletines porque todos los datos son privados y la casilla "Solo imprimir datos públicos"está activada
+#__________________________________________=One or more bulletins will not be printed because all the information is private, and you marked the "Print only public information" box.
+-d4d7-field:confirmPrintAllPrivateDatacause=No se pudo imprimir uno o más boletines porque todos los datos son privados y la casilla "Solo imprimir datos públicos" está activada.
 
-#___________________________________________=Answering '#PrintBack#' will allow return to the previous dialog so you can mark the "Include private information" box.  Answering '#PrintContinue#' will print only the public sections of the bulletins and skip those bulletins which are all private.
+#___________________________________________=Answering '#PrintBack#' will allow you to return to the previous dialog so you can mark the "Include private information" box.  Answering '#PrintContinue#' will print only the public sections of the bulletins and skip those bulletins which are all private.
 -eb0d-field:confirmPrintAllPrivateDataeffect=Oprima '#PrintBack#' para regresar a la ventana de diálogo anterior y marcar la casilla "Incluir datos privados".  Oprima '#PrintContinue#' para imprimir solo los datos públicos de los boletines y no incluir los boletines marcados como privados.
 
 #_____________________________________=Since you have changed from the default print tray your print out may be incorrect, if you also changed the size of paper used.  You must first select the paper tray and then select the paper size in that order, for both to get set correctly.  If you only wanted to change the paper tray then disregard this message and select 'No'.
@@ -1040,7 +1039,7 @@
 -bbcf-field:confirmResetDefaultDetailseffect=Después de verificar el contenido puede aceptarlo, modificarlo u oprimir Cancelar para mantener el contenido original.
 
 #____________________________________________=The following bulletin(s) selected for retrieval are newer versions of bulletins already on this computer:\n\n#Titles#
--050c-field:confirmRetrieveNewerVersionscause=El(Los) siguiente(s) boletín(es) seleccionados para bajar son nuevas versiones de boletines que ya tiene en su ordenador:\n\n#TITLES#
+-050c-field:confirmRetrieveNewerVersionscause=El(Los) siguiente(s) boletín(es) seleccionados para bajar son nuevas revisiones de boletines que ya tiene en su ordenador:\n\n#TITLES#
 
 #_____________________________________________=Each older version will be replaced by the newer version from the server.
 -1d86-field:confirmRetrieveNewerVersionseffect=Cada revisión anterior va a ser reemplazada por la nueva revisión del servidor.
@@ -1112,7 +1111,7 @@
 -3ca4-field:confirmWarnMissingOrCorruptAccountMapSignatureFileeffect=Oprima Sí para intentar generar un nuevo archivo accountmap.txt.sig y continuar cargando Martus. Oprima No para salir de Martus.
 
 #__________________________________________________________=Are you sure the directory you chose to save your backup files to is removable?  You cannot save all #TotalNumberOfFilesInBackup# files to the same location without inserting a new disk for each backup file.
--2aad-field:confirmWarningPathChosenMayNotBeRemoveablecause=<¿Está seguro que la carpeta donde eligió guardar sus archivos de seguridad es un medio removible? No puede guardar los #TotalNumberOfFilesInBackup# archivos en el mismo lugar sin usar una nueva unidad de disco removible para cada uno.>
+-2aad-field:confirmWarningPathChosenMayNotBeRemoveablecause=¿Está seguro que la carpeta donde eligió guardar sus archivos de seguridad es un medio removible? No puede guardar los #TotalNumberOfFilesInBackup# archivos en el mismo lugar, necesita usar un nuevo disco removible para cada uno.
 
 #___________________________________________________________=Choosing Yes will begin the backup process as instructed.
 -7744-field:confirmWarningPathChosenMayNotBeRemoveableeffect=Oprima Sí para iniciar el proceso de copia de seguridad como ha sido indicado.
@@ -1256,7 +1255,7 @@
 -c8e7-field:notifyCreateAccountFailedcause=Occurrió un error al intentar crear su cuenta.
 
 #____________________________________________=Martus needs to keep a list of all the fields in all the bulletins in your system.\n\nThis file does not exist, so it will be created now. This may take a few seconds per bulletin on a slower computer.
--38c8-field:notifyCreatingFieldSpecCachecause=Martus necesita mantener una lista de todos los campos en todos los boletines en su ordenador en un archivo.\n\nEste archivo no existe or lo que tendrá que crearse ahora. Puede está operación puede tomar unos segundos por cada boletín en ordenadores lentos.
+-38c8-field:notifyCreatingFieldSpecCachecause=Martus necesita mantener una lista de todos los campos de todos los boletines en su ordenador en un archivo.\n\nEste archivo no existe por lo que tendrá que crearse ahora. En ordenadores lentos puede que esta operación tome unos segundos por cada boletín.
 
 #_____________________________________________________=An error occurred during upload, and the damaged bulletin has been moved to the Damaged Bulletins folder.
 -ed3b-field:notifyDamagedBulletinMovedToDiscardedcause=Ocurrió un error durante el envío y el boletín dañado se movió a la carpeta de boletines dañados.
@@ -1433,7 +1432,7 @@
 -5bd8-field:notifySearchFailedcause=No se encontró ningún boletín.
 
 #_________________________________=#NumberBulletinsFound# bulletins matched the search, and have been added to the Search Results folder.\n Note that both current and earlier versions of each bulletin were searched.
--5639-field:notifySearchFoundcause=#NumberBulletinsFound# boletines concordaron con la búsqueda y han sido agregados a la carpeta de Resultados de Búsqueda.\n  Note que la versión actual tanto como las versiones previas fueron buscadas. 
+-5639-field:notifySearchFoundcause=#NumberBulletinsFound# boletines concordaron con la búsqueda y han sido agregados a la carpeta de Resultados de Búsqueda.\n  Note que todas las revisiones (actual y previas) fueron buscadas. 
 
 #_____________________________________=The Server Public Code does not match the one you entered.
 -efe3-field:notifyServerCodeWrongcause=El código público del servidor no concuerda con el que escribió.
@@ -1925,7 +1924,7 @@
 -db24-menu:paste=Pegar
 
 #_______________________=Print Bulletin(s) / Create Report File
--ecef-menu:printBulletin=Imprimir boletín / Crear reporte
+-ecef-menu:printBulletin=Imprimir boletín / Crear archivo de reporte
 
 #________________=Search
 -bce0-menu:search=Búsqueda
