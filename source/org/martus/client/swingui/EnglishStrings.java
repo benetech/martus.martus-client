@@ -696,7 +696,7 @@ public class EnglishStrings
 "field:notifyErrorImportingCustomizationTemplatecause=There was an error importing this template.",
 "field:notifyImportingCustomizationTemplateSuccesscause=Successfully imported customization template.",
 "field:notifyExportingCustomizationTemplateSuccesscause=Successfully exported customization template.",
-"field:notifyCreatingFieldSpecCachecause=Martus needs to keep a list of all the fields in all the bulletins in your system.\n\nThis file does not exist, so it will be created now. This may take a few seconds per bulletin on a slower computer.",
+"field:notifyCreatingFieldSpecCachecause=Martus needs to keep a list of all the fields in all the bulletins in your system.\n\nThis list does not exist, so it will be created now. This may take a few seconds per bulletin on a slower computer.",
 
 "field:IncompatibleMtfVersion=The version of this translation is not compatible with this version of Martus.  It is recommend that you do not continue to use this translation version and go to (http://www.martus.org/downloads) for the appropriate version.",
 "field:IncompatibleMtfVersionTranslation=#MtfLanguage# Translation Version: #MtfVersionNumber#",
@@ -813,7 +813,7 @@ public class EnglishStrings
 		"you can use #Or# or #And# in-between words in the \"Search For...\" entry box.  " +
 		"For example, if you search \"Any Field\" for prison #Or# jail you'll see a list of bulletins that contain either word anywhere in the bulletin. " + 
 		"If you search for prison #And# assault you'll see a list of bulletins that contain both words. " +
-		"The keyword \"#And\" is implied, so if you search for prison assault, " +
+		"The keyword \"#And#\" is implied, so if you search for prison assault, " +
 		"Martus will find bulletins the same bulletins as if you searched for prison #And# assault.\n\n" + 
 	"When you use both \"#And#\" and \"#Or#\", your search terms are grouped from the beginning of your list " +
 		"(either across bulletin fields or within a particular field). " +
