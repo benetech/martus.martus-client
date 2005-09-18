@@ -811,15 +811,24 @@ public class EnglishStrings
 		"(e.g. you want to search for bulletins that have \"Last Saved Date\" in the last week and have a certain author).  " +
 		"If you want to search on multiple text values within a single bulletin field, " +
 		"you can use #Or# or #And# in-between words in the \"Search For...\" entry box.  " +
-		"For example, if you search \"Any Field\" for prison #Or# jail you'll see a list of bulletins that contain either word anywhere in the bulletin. " + 
-		"If you search for prison #And# assault you'll see a list of bulletins that contain both words. " +
-		"The keyword \"#And#\" is implied, so if you search for prison assault, " +
-		"Martus will find bulletins the same bulletins as if you searched for prison #And# assault.\n\n" + 
+		"For example, if you search \"Any Field\" for:\n" +
+		"   prison #Or# jail\n" +
+		"you'll see a list of bulletins that contain either word anywhere in the bulletin. " + 
+		"If you search for:\n" +
+		"   prison #And# assault \n" +
+		"you'll see a list of bulletins that contain both words. " +
+		"The keyword \"#And#\" is implied, so if you search for:\n" +
+		"   prison assault \n" +
+		"Martus will find bulletins the same bulletins as if you searched for:\n" +
+		"   prison #And# assault\n\n" + 
 	"When you use both \"#And#\" and \"#Or#\", your search terms are grouped from the beginning of your list " +
 		"(either across bulletin fields or within a particular field). " +
-		"For example, if you enter prison #Or# jail #And# trial in the \"Search For...\" entry box, " +
+		"For example, if you enter:\n" +
+		"   prison #Or# jail #And# trial \n" +
+		"in the \"Search For...\" entry box, " +
 		"Martus will search for any bulletins that contain either of the words prison or jail, and also contain the word trial. " +   
-		"But if you enter prison #And# jail #Or# trial, " +
+		"But if you enter:\n" +
+		"   prison #And# jail #Or# trial \n" +
 		"Martus will search for any bulletins that contain both the words prison and jail, or contain the word trial.\n",
 "field:FancySearchHelpMsg3=" + 
 	"You can use the word #Or# or #And#, or you can use the English words \"or\" and \"and\" to search.\n\n" +  
