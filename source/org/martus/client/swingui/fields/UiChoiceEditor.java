@@ -85,12 +85,19 @@ public class UiChoiceEditor extends UiChoice implements ActionListener
 
 	public String getText()
 	{
-		return ((ChoiceItem)widget.getSelectedItem()).getCode();
+		if(widget == null)
+			System.out.println("UiChoiceEditor.getText null widget!");
+		ChoiceItem choice = (ChoiceItem)widget.getSelectedItem();
+		if(choice == null)
+			System.out.println("UiChoiceEditor.getText null choice!");
+		return choice.getCode();
 	}
 
 	public void setText(String newCode)
 	{
 		int rowToSelect = spec.findCode(newCode);
+		if(rowToSelect < 0)
+			System.out.println("UiChoiceEditor.setText: Couldn't find " + newCode + " in " + spec.toString());
 		widget.setSelectedIndex(rowToSelect);
 	}
 
