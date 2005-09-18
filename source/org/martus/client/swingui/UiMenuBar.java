@@ -170,7 +170,7 @@ public class UiMenuBar extends JMenuBar
 	{
 		public void initalize()
 		{
-			//Java Bug, menu items need to be disabled before correct behavior occures.
+			//Java Bug, menu items need to be disabled before correct behavior occurs.
 			actionMenuPrint.setEnabled(false);
 			actionMenuResendBulletins.setEnabled(false);
 		}
@@ -199,7 +199,7 @@ public class UiMenuBar extends JMenuBar
 
 		public void initalize()
 		{
-			//Java Bug, menu items need to be disabled before correct behavior occures.
+			//Java Bug, menu items need to be disabled before correct behavior occurs.
 			actionMenuModifyBulletin.setEnabled(false);
 			actionMenuSelectAllBulletins.setEnabled(false);
 			actionMenuCutBulletins.setEnabled(false);
@@ -223,7 +223,7 @@ public class UiMenuBar extends JMenuBar
 
 		public void initalize()
 		{
-			//Java Bug, menu items need to be disabled before correct behavior occures.
+			//Java Bug, menu items need to be disabled before correct behavior occurs.
 			actionMenuFolderRename.setEnabled(false);
 			actionMenuFolderDelete.setEnabled(false);
 			actionMenuFolderOrganize.setEnabled(false);
