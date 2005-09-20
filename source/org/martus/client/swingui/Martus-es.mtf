@@ -1,9 +1,9 @@
 ﻿# Martus Client Translation File
 # Language code:  es
 # Language name:  Spanish
-# Exported date:  Thu Sep 01 17:21:31 PDT 2005
+# Exported date:  Mon Sep 19 16:40:06 PDT 2005
 # Client version: 2.8 Internal
-# Client build:   20050901.1660
+# Client build:   20050919.1662
 #
 # This file MUST be saved in UTF-8 format!
 # Lines beginning with # are comments and are ignored by Martus
@@ -40,40 +40,38 @@
 #  3.  in field:VirtualKeyboardKeys, keep the english alphabet, but include any
 #      non-english characters at the end of the english alphabet/numbers/special
 #      characters (e.g. attach entire Thai alphabet at the end of the line)
-#  4.  *** field:SearchBulletinRules will likely change and an additional
-#      “Search Help” field will likely be added before the release,
-#      so any needed instructions will be added here at that point ***
-#  5.  in CreateCustomFieldsHelp2/3 fields, you can translate tags into foreign
+#  4.  in CreateCustomFieldsHelp2/3 fields, you can translate tags into foreign
 #      characters (but without punctuation or spaces)
-#  6.  when there are file or directory names, do not translate them
+#  5.  when there are file or directory names, do not translate them
 #      (e.g.  "acctmap.txt" and "packets"
 #      in field:confirmWarnMissingAccountMapFilecause=Warning: acctmap.txt
 #      file in your account's packets directory...)
-#  7.  do not translate the words "Martus" or "Benetech"
-#  8.  Leave standard field tags in English in CreateCustomFieldsHelp1 and
+#  6.  do not translate the words "Martus" or "Benetech"
+#  7.  Leave standard field tags in English in CreateCustomFieldsHelp1 and
 #      CreateCustomFieldsHelp2, but put translation in parentheses after
 #      english : e.g.  'author' (autor), so users know what they refer to
-#  9.  Leave field types in English in CreateCustomFieldsHelp2 (e.g. BOOLEAN,
+#  8.  Leave field types in English in CreateCustomFieldsHelp2 (e.g. BOOLEAN,
 #      DATE), but put translation in parentheses after english, so users know
 #      what they refer to.
-# 10.  Leave field types in English in CreateCustomFieldsHelp3 examples
+#  9.  Leave field types in English in CreateCustomFieldsHelp3 examples
 #      (e.g. BOOLEAN, DATE)
-# 11.  Do not translate words used in XML for custom fields such as:
+# 10.  Do not translate words used in XML for custom fields such as:
 #      <Field type='GRID'>, </Field>, <Tag>, </Tag>, <Label>, </Label>,
 #      <GridSpecDetails>, </GridSpecDetails>, <Column>, </Column>,
 #      <Message>, </Message>, <Choices>, </Choices>, <Choice>, </Choice>,
 #      <Column type='STRING'>, <Column type='BOOLEAN'>, <Column type='DATE'>,
 #      <Column type='DATERANGE'>, <Column type='DROPDOWN'>
-# 12.  Do not translate words that are surrounded by #'s, but you may move
+# 11.  Do not translate words that are surrounded by #'s, but you may move
 #      them around as grammatically appropriate.
 #      Example: #TotalNumberOfFilesInBackup#, #Titles#, #FieldLabel#, etc.
 #      as these words will be replaced when the program runs with
 #      a particular value.
 #      For Example. #TotalNumberOfFilesInBackup# = '5'
 #                   #Titles# = 'A list of bulletin titles'
-# 13.  If you want your language to appear right to left,
+# 12.  If you want your language to appear right to left,
 #      Uncomment the next line (by removing the # in front of #!right-to-left)
 #!right-to-left
+#
 
 #________________________=Show all bulletins on this server and on this computer.
 -e9a2-button:AllSummaries=Mostrar todos los boletines en este servidor y en este ordenador.
@@ -83,6 +81,9 @@
 
 #___________________________=Bulletin Details...
 -d012-button:BulletinDetails=Detalles del boletín...
+
+#_____________________=Close Help
+-8624-button:CloseHelp=Cerrar ayuda
 
 #___________________________=Add...
 -2cce-button:ConfigureHQsAdd=Agregar...
@@ -486,8 +487,8 @@
 #__________________________________=LABEL
 -64b8-field:ErrorCustomFieldHeader4=TÍTULO
 
-#____________________________=There is an error in the custom field definitions. Each problem is identified with the following codes:\n   100 - Required standard field is missing\n   101 - Custom field does not have a correct tag.\n   102 - A previous Tag already exists with this name.\n   103 - Custom field does not have a label.\n   104 - Unrecognized Field Type.\n   105 - A label was found in a standard field.\n   106 - XML Parse Error.\n   107 - Tag contains illegal characters.\n   108 - Duplicate entry in Dropdown field.\n   200 - All fields empty.\n   201 - Unrecognized Headquarters created this template.\n   202 - Security validation error.\n   203 - File Error.
--f8de-field:ErrorCustomFields=Se encontró un error en la definición de los campos personalizados. Cada problema es identificado con los siguientes códigos:\n   100 - Falta un campo estándar requerido\n   101 - Un campo personalizado tiene un nombre de identificación incorrecto.\n   102 - Hay un nombre de identificación duplicado.\n   103 - Campo personalizado no tiene título.\n   104 - Tipo de campo desconocido.\n   105 - Se encontró un título en un campo estándar.\n   106 - XML Error al leer documento.\n   107 - Nombre de identificación contiene caracteres no válidos.\n   108 - Opcion duplicada en lista desplegable\n   200 - Todos los campos vacíos.\n   201 - Una cuenta de oficina central desconocida creó esta pantilla.\n   202 - Error de validación de seguridad.\n   203 - Error de Archivo.
+#____________________________=There is an error in the custom field definitions. Each problem is identified with the following codes:\n   100 - Required standard field is missing\n   101 - Custom field does not have a correct tag.\n   102 - A previous Tag already exists with this name.\n   103 - Custom field does not have a label.\n   104 - Unrecognized Field Type.\n   105 - A label was found in a standard field.\n   106 - XML Parse Error.\n   107 - Tag contains illegal characters.\n   108 - Duplicate entry in Dropdown field.\n   109 - No Choices in Dropdown field.\n   200 - All fields empty.\n   201 - Unrecognized Headquarters created this template.\n   202 - Security validation error.\n   203 - File Error.
+-c1b6-field:ErrorCustomFields=Se encontró un error en la definición de los campos personalizados. Cada problema es identificado con los siguientes códigos:\n   100 - Falta un campo estándar requerido\n   101 - Un campo personalizado tiene un nombre de identificación incorrecto.\n   102 - Hay un nombre de identificación duplicado.\n   103 - Campo personalizado no tiene título.\n   104 - Tipo de campo desconocido.\n   105 - Se encontró un título en un campo estándar.\n   106 - XML Error al leer documento.\n   107 - Nombre de identificación contiene caracteres no válidos.\n   108 - Opcion duplicada en lista desplegable\n   109 - No hay opciones en la lista desplegable.\n   200 - Todos los campos vacíos.\n   201 - Una cuenta de oficina central desconocida creó esta pantilla.\n   202 - Error de validación de seguridad.\n   203 - Error de archivo.
 
 #_________________________________________=A previous backup file exists.  You must save each file on its own removable media disk.
 -db93-field:ErrorPreviousBackupShareExists=Una pieza de un archivo de seguridad ya existe en este medio. Cada pieza debe ser guardada en su propio medio removible.
@@ -512,6 +513,15 @@
 
 #____________________________=Exported Bulletins
 -0b4e-field:ExportedBulletins=Boletines exportados
+
+#______________________________=---Overview---\n\nMartus searches all versions of every bulletin (both public and private, sealed and draft) in every folder, including the Discarded Bulletins folder.  When the search is completed, the Search Results folder lists copies of the bulletins found in your search.\n\nYou can search for words in any language.  Martus searches are not case-sensitive in English and other purely Latin character languages, so it doesn't matter whether a word is capitalized or not.\n\nSearches include attachment filenames, but not content of attachments.\n\nYou can search both standard and custom fields.\n
+-d47a-field:FancySearchHelpMsg1=---Descripción---\n\nMartus busca los términos en todas las revisiones de un boletín (públicos y privados, sellados y borradores) en todas las carpetas, incluyendo la carpeta de boletines desechados.  Al concluir la búsqueda todos los boletines encontrados los verá listados en la carpeta Resultados de búsqueda.\n\nPuede buscar términos en cualquier idioma.  Las busquedas de Martus no toman en cuenta las mayúsculas y minúscula en inglés e idiomas que usen el alfabeto latino.\n\nLas busquedas tambien incluyen los nombres de los archivos adjuntos pero no el contenido de los archivos.\n\nPuede buscar en los campos predeterminados y personalizados.\n
+
+#______________________________=---Search tips---\n\nMartus will find any text you enter whether it's a complete word or part of a larger word. For example, if you search for the word prison, you'll see bulletins that include the words prison, imprison, and imprisonment. Likewise, if you search for the word prison, Martus will find bulletins that include attachments with names such as photos-prison.jpg and prisoners-report.doc.\n\nTo search for an exact phrase, type it with quotation marks around the phrase  (e.g.  "Witness Testimony"). If you do not put quotation marks around the phrase, Martus will search for the words individually.\n\nUse the word "#Or#" to broaden your search, or the word "#And#" to narrow it.  You can use the #And# / #Or# dropdowns to specify different fields you want search across (e.g. you want to search for bulletins that have "Last Saved Date" in the last week and have a certain author).  If you want to search on multiple text values within a single bulletin field, you can use #Or# or #And# in-between words in the "Search For..." entry box.  For example, if you search "Any Field" for:\n   prison #Or# jail\nyou'll see a list of bulletins that contain either word anywhere in the bulletin. If you search for:\n   prison #And# assault \nyou'll see a list of bulletins that contain both words. The keyword "#And#" is implied, so if you search for:\n   prison assault \nMartus will find bulletins the same bulletins as if you searched for:\n   prison #And# assault\n\nWhen you use both "#And#" and "#Or#", your search terms are grouped from the beginning of your list (either across bulletin fields or within a particular field). For example, if you enter:\n   prison #Or# jail #And# trial \nin the "Search For..." entry box, Martus will search for any bulletins that contain either of the words prison or jail, and also contain the word trial. But if you enter:\n   prison #And# jail #Or# trial \nMartus will search for any bulletins that contain both the words prison and jail, or contain the word trial.\n
+-ec7d-field:FancySearchHelpMsg2=---Notas de búsqueda---\n\nMartus encontrará cualquier término de búsqueda ya sea una palabra completa o parcial. Por ejemplo, si busca la palabra unión, encontrará las palabras unión, reunión, y desunión. Martus también encontrará boletines que tenga archivos adjuntos con nombres como fotos-unión.jpg y reunión-reporte.doc.\n\nPara buscar una frase exacta escríbala rodeada de comillas  (ej.  "Testimonio del testigo"). Si no usa comillas alrededor de la frase Martus solo buscará por las palabras individualmente.\n\nUse la palabra "#Or#" para ejecutar una búsqueda más amplia o la palabra "#And#" para refinarla.  Use la lista desplegables de  #And# / #Or# para indicar los campos que quiere buscar  (ej. quiere buscar boletines con una fecha de la semana pasada en el campo "Ultima modificación" y que haya sido creado por un autor particular).  Si quiere buscar múltiples términos en un campo puede usar #Or# o #And# entre los términos de búsqueda.  Por ejemplo,  si busca en "Todos los campos" por los términos:\n   prisión #Or# cárcel\nverá una lista de boletines que tienen cualquiera de las palabras en cualquier parte del boletín. Si busca los términos:\n   prisión #And# asalto \nverá una lista de boletines que tienen ambas palabras. La palabra "#And#" es implícita por lo que si solo busca por :\n   prisión asalto \nMartus encontrará los mismo boletines que si buscará por:\n   prisión #And# asalto\n\nCuando use "#And#" y "#Or#", los términos de búsqueda son agrupados desde el comienzo (usando los campos de los boletines o dentro de un mismo campo). Por ejemplo, si busca los términos:\n   prisión #Or# cárcel #And# juicio , Martus buscará por los boletines que tengan las palabras prisión o cárcel, y tengan la palabra jucio. Si busca los términos:\n   prisión #And# cárcel #Or# jucio \nMartus buscará todos los boletines que tengan las palabras prisión y cárcel, o tengan la palabra juicio.\n
+
+#______________________________=You can use the word #Or# or #And#, or you can use the English words "or" and "and" to search.\n\nYou need to put spaces before and after any #Or# / #And# keywords you use in your search.\n
+-f689-field:FancySearchHelpMsg3=Puede usar las palabras #Or# o #And#, o tambien puede usar las palabras en inglés "or" y "and" en su búsqueda.\n\nNecesita ponder espacios alrededor de las palabras #Or# / #And# que use en sus búsquedas.\n
 
 #______________________________________=This file name should be unique and identifiable to you but we recommend not using your user name.  Each file will be generated with this name and its number sequence.
 -02b6-field:GetShareFileNameDescription=El nombre del archivo tiene que ser único e identificable. Le recomendamos no usar su nombre de usuario.  Cada archivo generado usará el nombre que escoja y un número en secuencia.
@@ -895,7 +905,7 @@
 -198c-field:confirmCloneMySealedAsDrafteffect=Al oprimir Sí, se va a crear una nueva revisión de este boletín con la misma información. 
 
 #______________________________________=The date range you entered is invalid.  The end date occurs before the begin data.
--c7f5-field:confirmDateRageInvalidcause=El rango de fechas ingresado no es válido.  La fecha final occurre antes que la fecha inicial.
+-6a92-field:confirmDateRageInvalidcause=El rango de fechas ingresado no es válido.  La fecha final occurre antes que la fecha inicial.
 
 #_______________________________________=Answering Yes will take you back to the date range to fix the problem.  Answering No will revert the date back to its original value.
 -8eb7-field:confirmDateRageInvalideffect=Oprima Si para corregir el problema.  Oprima No para revertir al valor original de la fecha.
@@ -979,10 +989,10 @@
 -0863-field:confirmOverWriteExistingFileeffect=El archivo adjunto elegido va a reemplazar el archivo en su disco duro.
 
 #__________________________________________=One or more bulletins will not be printed because all the information is private, and you marked the "Print only public information" box.
--d4d7-field:confirmPrintAllPrivateDatacause=No se pudo imprimir uno o más boletines porque todos los datos son privados y la casilla "Solo imprimir datos públicos" está activada.
+-50c0-field:confirmPrintAllPrivateDatacause=No se pudo imprimir uno o más boletines porque todos los datos son privados y la casilla "Solo imprimir datos públicos" está activada.
 
 #___________________________________________=Answering '#PrintBack#' will allow you to return to the previous dialog so you can mark the "Include private information" box.  Answering '#PrintContinue#' will print only the public sections of the bulletins and skip those bulletins which are all private.
--eb0d-field:confirmPrintAllPrivateDataeffect=Oprima '#PrintBack#' para regresar a la ventana de diálogo anterior y marcar la casilla "Incluir datos privados".  Oprima '#PrintContinue#' para imprimir solo los datos públicos de los boletines y no incluir los boletines marcados como privados.
+-a0a4-field:confirmPrintAllPrivateDataeffect=Oprima '#PrintBack#' para regresar a la ventana de diálogo anterior y marcar la casilla "Incluir datos privados".  Oprima '#PrintContinue#' para imprimir solo los datos públicos de los boletines y no incluir los boletines marcados como privados.
 
 #_____________________________________=Since you have changed from the default print tray your print out may be incorrect, if you also changed the size of paper used.  You must first select the paper tray and then select the paper size in that order, for both to get set correctly.  If you only wanted to change the paper tray then disregard this message and select 'No'.
 -401e-field:confirmPrinterWarningcause=Si es que cambió el tamaño de papel de impresión además de la bandeja de papel predeterminada es posible que el cambio no se efectúe. Para que el cambio se efectúe correctamente primero elija la bandeja para papel y luego el tamaño de papel. Si es que solamente cambió la bandeja de papel oprima 'No' para continuar con la impresión.
@@ -1254,8 +1264,8 @@
 #_________________________________________=An error occurred while trying to create your account.
 -c8e7-field:notifyCreateAccountFailedcause=Occurrió un error al intentar crear su cuenta.
 
-#____________________________________________=Martus needs to keep a list of all the fields in all the bulletins in your system.\n\nThis file does not exist, so it will be created now. This may take a few seconds per bulletin on a slower computer.
--38c8-field:notifyCreatingFieldSpecCachecause=Martus necesita mantener una lista de todos los campos de todos los boletines en su ordenador en un archivo.\n\nEste archivo no existe por lo que tendrá que crearse ahora. En ordenadores lentos puede que esta operación tome unos segundos por cada boletín.
+#____________________________________________=Martus needs to keep a list of all the fields in all the bulletins in your system.\n\nThis list does not exist, so it will be created now. This may take a few seconds per bulletin on a slower computer.
+-8773-field:notifyCreatingFieldSpecCachecause=Martus necesita mantener una lista de todos los campos de todos los boletines en su ordenador.\n\nEsta lista no existe por lo que tendrá que crearse ahora. En ordenadores lentos puede que esta operación tome unos segundos por cada boletín.
 
 #_____________________________________________________=An error occurred during upload, and the damaged bulletin has been moved to the Damaged Bulletins folder.
 -ed3b-field:notifyDamagedBulletinMovedToDiscardedcause=Ocurrió un error durante el envío y el boletín dañado se movió a la carpeta de boletines dañados.
@@ -1432,7 +1442,7 @@
 -5bd8-field:notifySearchFailedcause=No se encontró ningún boletín.
 
 #_________________________________=#NumberBulletinsFound# bulletins matched the search, and have been added to the Search Results folder.\n Note that both current and earlier versions of each bulletin were searched.
--5639-field:notifySearchFoundcause=#NumberBulletinsFound# boletines concordaron con la búsqueda y han sido agregados a la carpeta de Resultados de Búsqueda.\n  Note que todas las revisiones (actual y previas) fueron buscadas. 
+-5639-field:notifySearchFoundcause=#NumberBulletinsFound# boletines concordaron con la búsqueda y han sido agregados a la carpeta de Resultados de búsqueda.\n  Note que todas las revisiones (actual y previas) fueron buscadas. 
 
 #_____________________________________=The Server Public Code does not match the one you entered.
 -efe3-field:notifyServerCodeWrongcause=El código público del servidor no concuerda con el que escribió.
@@ -2057,6 +2067,9 @@
 
 #_______________________________________________=Export Customization Template
 -5318-wintitle:ExportCustomizationTemplateSaveAs=Exportar plantilla personalizada
+
+#_____________________________=Search Help
+-53b6-wintitle:FancySearchHelp=Ayuda de búsqueda
 
 #__________________=Help on Martus
 -b414-wintitle:Help=Ayuda sobre Martus
