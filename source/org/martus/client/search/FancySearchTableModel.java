@@ -68,7 +68,12 @@ public class FancySearchTableModel extends GridTableModel implements TableModelL
 
 	public static FieldSpec getFieldSpecForChosenField(String selectedFieldTag, DropDownFieldSpec fieldColumnSpec)
 	{
-		ChoiceItem selectedFieldChoiceItem = fieldColumnSpec.getChoice(fieldColumnSpec.findCode(selectedFieldTag));
+		int foundAt = fieldColumnSpec.findCode(selectedFieldTag);
+		if(foundAt < 0)
+		{
+			throw new RuntimeException("Couldn't find " + selectedFieldTag + " in " + fieldColumnSpec.toString());
+		}
+		ChoiceItem selectedFieldChoiceItem = fieldColumnSpec.getChoice(foundAt);
 		FieldSpec selectedFieldSpec = selectedFieldChoiceItem.getSpec();
 		return selectedFieldSpec;
 	}

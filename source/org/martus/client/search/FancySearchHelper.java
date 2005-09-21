@@ -94,7 +94,8 @@ public class FancySearchHelper
 		String tag = "";
 		String label = getLocalization().getFieldLabel("SearchAnyField");
 		FieldType type = new FieldTypeAnyField();
-		return createChoice(tag, label, type);
+		FieldSpec spec = FieldSpec.createCustomField(tag, label, type);
+		return new SearchableFieldChoiceItem("", spec);
 	}
 
 	private ChoiceItem createLastSavedDateChoice()
@@ -102,15 +103,10 @@ public class FancySearchHelper
 		String tag = Bulletin.PSEUDOFIELD_LAST_SAVED_DATE;
 		String label = getLocalization().getFieldLabel(Bulletin.TAGLASTSAVED);
 		FieldType type = new FieldTypeDate();
-		return createChoice(tag, label, type);
+		FieldSpec spec = FieldSpec.createCustomField(tag, label, type);
+		return new SearchableFieldChoiceItem(spec);
 	}
 
-	private ChoiceItem createChoice(String tag, String label, FieldType type)
-	{
-		FieldSpec spec = FieldSpec.createCustomField(tag, label, type);
-		return new ChoiceItem(spec);
-	}
-	
 	private Vector convertToChoiceItems(Vector specs)
 	{
 		Vector allChoices = new Vector();
@@ -147,14 +143,14 @@ public class FancySearchHelper
 		// dropdowns MUST be a DropDownFieldSpec, not a plain FieldSpec
 		if(thisType.isDropdown())
 		{
-			choicesForThisField.add(new ChoiceItem(spec));
+			choicesForThisField.add(new SearchableFieldChoiceItem(spec));
 			return choicesForThisField;
 		}
 
 		// TODO: add one choice per column (call this method recursively)
 		if(thisType.isGrid())
 		{
-			choicesForThisField.add(new ChoiceItem(spec));
+			choicesForThisField.add(new SearchableFieldChoiceItem(spec));
 			return choicesForThisField;
 		}
 
@@ -165,7 +161,7 @@ public class FancySearchHelper
 			choiceSpecType = thisType;
 
 		FieldSpec thisSpec = FieldSpec.createCustomField(tag, displayString, choiceSpecType);
-		ChoiceItem choiceItem = new ChoiceItem(thisSpec);
+		ChoiceItem choiceItem = new SearchableFieldChoiceItem(thisSpec);
 		choicesForThisField.add(choiceItem);
 		return choicesForThisField;
 	}
@@ -184,7 +180,7 @@ public class FancySearchHelper
 		{
 			String fullDisplayString = TokenReplacement.replaceToken(displayTemplate, "#FieldLabel#", baseDisplayString);
 			FieldSpec dateSpec = FieldSpec.createCustomField(fullTag, fullDisplayString, new FieldTypeDate());
-			itemIfAny.add(new ChoiceItem(dateSpec));
+			itemIfAny.add(new SearchableFieldChoiceItem(dateSpec));
 		}
 		catch (TokenInvalidException e)
 		{
@@ -286,6 +282,25 @@ public class FancySearchHelper
 		return parser.parse(specForThisValue, op, value);
 	}
 	
+	public static int findSearchTag(DropDownFieldSpec specOfFieldColumn, String tagToFind)
+	{
+		for(int i=0; i < specOfFieldColumn.getCount(); ++i)
+		{
+			try
+			{
+				SearchableFieldChoiceItem item = (SearchableFieldChoiceItem)specOfFieldColumn.getChoice(i);
+				if(item.getSearchTag().equals(tagToFind))
+					return i;
+			}
+			catch (RuntimeException e)
+			{
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return -1;
+	}
+
 	public static final int COLUMN_ROW_NUMBER = 0;
 	public static final int COLUMN_FIELD = 1;
 	public static final int COLUMN_COMPARE_HOW = 2;

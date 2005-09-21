@@ -63,14 +63,22 @@ public class TestFancySearchTableModel extends TestCaseEnhanced
 		FancySearchTableModel model = new FancySearchTableModel(gridSpec, localization);
 		model.addEmptyRow();
 		assertEquals(new FieldTypeSearchValue(), model.getColumnType(FancySearchTableModel.valueColumn));
+
+		DropDownFieldSpec fieldsSpec = (DropDownFieldSpec)model.getFieldSpecForColumn(FancySearchHelper.COLUMN_FIELD);
 		
-		model.setValueAt("eventdate.begin", 0, FancySearchTableModel.fieldColumn);
+		int beginDateAt = FancySearchHelper.findSearchTag(fieldsSpec, "eventdate.begin");
+		SearchableFieldChoiceItem beginDateItem = (SearchableFieldChoiceItem)fieldsSpec.getChoice(beginDateAt);
+		model.setValueAt(beginDateItem.getCode(), 0, FancySearchTableModel.fieldColumn);
 		assertEquals(new FieldTypeDate(), model.getCellType(0, FancySearchTableModel.valueColumn));
 		
-		model.setValueAt("author", 0, FancySearchTableModel.fieldColumn);
+		int authorAt = FancySearchHelper.findSearchTag(fieldsSpec, "author");
+		SearchableFieldChoiceItem authorItem = (SearchableFieldChoiceItem)fieldsSpec.getChoice(authorAt);
+		model.setValueAt(authorItem.getCode(), 0, FancySearchTableModel.fieldColumn);
 		assertEquals(new FieldTypeNormal(), model.getCellType(0, FancySearchTableModel.valueColumn));
 		
-		model.setValueAt("language", 0, FancySearchTableModel.fieldColumn);
+		int languageAt = FancySearchHelper.findSearchTag(fieldsSpec, "language");
+		SearchableFieldChoiceItem languageItem = (SearchableFieldChoiceItem)fieldsSpec.getChoice(languageAt);
+		model.setValueAt(languageItem.getCode(), 0, FancySearchTableModel.fieldColumn);
 		assertEquals(new FieldTypeDropdown(), model.getCellType(0, FancySearchTableModel.valueColumn));
 		
 	}

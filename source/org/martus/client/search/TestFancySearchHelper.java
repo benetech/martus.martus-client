@@ -87,13 +87,15 @@ public class TestFancySearchHelper extends TestCaseEnhanced
 		localization.setCurrentLanguageCode(languageCode);
 		
 		DropDownFieldSpec spec = helper.createFieldColumnSpec(getStore());
-		assertEquals("ALL FIELDS not first?", 0, spec.findCode(""));
-		assertTrue("no last-saved date?", spec.findCode(Bulletin.PSEUDOFIELD_LAST_SAVED_DATE) >= 0);
-		assertTrue("no author?", spec.findCode(BulletinConstants.TAGAUTHOR) >= 0);
-		assertTrue("no private?", spec.findCode(BulletinConstants.TAGPRIVATEINFO) >= 0);
-		assertTrue("no eventdate.begin?", spec.findCode(BulletinConstants.TAGEVENTDATE + "." + MartusDateRangeField.SUBFIELD_BEGIN) >= 0);
-		assertTrue("no eventdate.end?", spec.findCode(BulletinConstants.TAGEVENTDATE + "." + MartusDateRangeField.SUBFIELD_END) >= 0);
-		assertFalse("has raw eventdate?", spec.findCode(BulletinConstants.TAGEVENTDATE) >= 0);
+		SearchableFieldChoiceItem allFieldsItem = (SearchableFieldChoiceItem)spec.getChoice(0);
+		assertEquals("ALL FIELDS not first?", "", allFieldsItem.getSearchTag());
+		
+		assertTrue("no last-saved date?", FancySearchHelper.findSearchTag(spec, Bulletin.PSEUDOFIELD_LAST_SAVED_DATE) >= 0);
+		assertTrue("no author?", FancySearchHelper.findSearchTag(spec, BulletinConstants.TAGAUTHOR) >= 0);
+		assertTrue("no private?", FancySearchHelper.findSearchTag(spec, BulletinConstants.TAGPRIVATEINFO) >= 0);
+		assertTrue("no eventdate.begin?", FancySearchHelper.findSearchTag(spec, BulletinConstants.TAGEVENTDATE + "." + MartusDateRangeField.SUBFIELD_BEGIN) >= 0);
+		assertTrue("no eventdate.end?", FancySearchHelper.findSearchTag(spec, BulletinConstants.TAGEVENTDATE + "." + MartusDateRangeField.SUBFIELD_END) >= 0);
+		assertFalse("has raw eventdate?", FancySearchHelper.findSearchTag(spec, BulletinConstants.TAGEVENTDATE) >= 0);
 	}
 	
 	public void testAllFieldTypesSearchable() throws Exception
@@ -107,8 +109,10 @@ public class TestFancySearchHelper extends TestCaseEnhanced
 		store.saveBulletinForTesting(b);
 		
 		DropDownFieldSpec spec = helper.createFieldColumnSpec(store);
-		assertTrue("no message-type field?", spec.findCode(message.getTag()) >= 0);
-		assertEquals("wrong label?", message.getLabel(), spec.getDisplayString(message.getTag()));
+		int foundAt = FancySearchHelper.findSearchTag(spec, message.getTag());
+		assertTrue("no message-type field?", foundAt >= 0);
+		SearchableFieldChoiceItem item = (SearchableFieldChoiceItem)spec.getChoice(foundAt);
+		assertEquals("wrong label?", message.getLabel(), item.toString());
 	}
 
 	public void testGetChoiceItemsForThisField() throws Exception
@@ -142,7 +146,7 @@ public class TestFancySearchHelper extends TestCaseEnhanced
 		assertEquals("not one choice for normal with label?", 1, withLabelChoices.size());
 		{
 			ChoiceItem createdChoice = (ChoiceItem)withLabelChoices.get(0);
-			assertEquals(withLabel.getTag(), createdChoice.getCode());
+			assertEquals(withLabel.toString(), createdChoice.getCode());
 			assertEquals(withLabel.getLabel(), createdChoice.toString());
 		}
 		
@@ -246,7 +250,7 @@ public class TestFancySearchHelper extends TestCaseEnhanced
 	{
 		FieldSpec booleanSpec = FieldSpec.createCustomField("tag", "Label", new FieldTypeBoolean());
 		ChoiceItem[] fields = new ChoiceItem[] {
-			new ChoiceItem(booleanSpec),
+			new SearchableFieldChoiceItem(booleanSpec),
 		};
 		DropDownFieldSpec fieldColumnSpec = new DropDownFieldSpec(fields);
 		
@@ -256,7 +260,7 @@ public class TestFancySearchHelper extends TestCaseEnhanced
 		spec.addColumn(FieldSpec.createStandardField("value", new FieldTypeSearchValue()));
 		spec.addColumn(FieldSpec.createStandardField("andor", new FieldTypeNormal()));
 		GridData data = new GridData(spec);
-		addRow(data, "tag", "=", "1", "or");
+		addRow(data, fields[0].getCode(), "=", "1", "or");
 		
 		SearchTreeNode booleanEquals = helper.getSearchTree(data);
 		assertEquals(SearchTreeNode.VALUE, booleanEquals.getOperation());
@@ -268,7 +272,7 @@ public class TestFancySearchHelper extends TestCaseEnhanced
 	{
 		FieldSpec normalSpec = FieldSpec.createCustomField("field", "Label", new FieldTypeNormal());
 		ChoiceItem[] fields = new ChoiceItem[] {
-			new ChoiceItem(normalSpec),
+			new SearchableFieldChoiceItem(normalSpec),
 		};
 		DropDownFieldSpec fieldColumnSpec = new DropDownFieldSpec(fields);
 
@@ -278,7 +282,7 @@ public class TestFancySearchHelper extends TestCaseEnhanced
 		spec.addColumn(FieldSpec.createStandardField("value", new FieldTypeSearchValue()));
 		spec.addColumn(FieldSpec.createStandardField("andor", new FieldTypeNormal()));
 		GridData data = new GridData(spec);
-		addRow(data, "field", "=", "value", "or");
+		addRow(data, fields[0].getCode(), "=", "value", "or");
 		SearchTreeNode root = helper.getSearchTree(data);
 		verifyFieldCompareOpValue("single row", root, normalSpec, SearchTreeNode.EQUAL, "value");
 	}
@@ -288,8 +292,8 @@ public class TestFancySearchHelper extends TestCaseEnhanced
 		FieldSpec a = FieldSpec.createCustomField("a", "A", new FieldTypeNormal());
 		FieldSpec c = FieldSpec.createCustomField("c", "C", new FieldTypeNormal());
 		ChoiceItem[] fields = new ChoiceItem[] {
-			new ChoiceItem(a),
-			new ChoiceItem(c),
+			new SearchableFieldChoiceItem(a),
+			new SearchableFieldChoiceItem(c),
 		};
 		DropDownFieldSpec fieldColumnSpec = new DropDownFieldSpec(fields);
 
@@ -299,8 +303,8 @@ public class TestFancySearchHelper extends TestCaseEnhanced
 		spec.addColumn(FieldSpec.createStandardField("value", new FieldTypeSearchValue()));
 		spec.addColumn(FieldSpec.createStandardField("andor", new FieldTypeNormal()));
 		GridData data = new GridData(spec);
-		addRow(data, "a", "=", "b", "or");
-		addRow(data, "c", "=", "d", "or");
+		addRow(data, fields[0].getCode(), "=", "b", "or");
+		addRow(data, fields[1].getCode(), "=", "d", "or");
 		SearchTreeNode root = helper.getSearchTree(data);
 		verifyOp("top level", root, SearchTreeNode.OR);
 		verifyFieldCompareOpValue("two rows left", root.getLeft(), a, SearchTreeNode.EQUAL, "b");
@@ -314,10 +318,10 @@ public class TestFancySearchHelper extends TestCaseEnhanced
 		FieldSpec d = FieldSpec.createCustomField("d", "D", new FieldTypeNormal());
 		FieldSpec g = FieldSpec.createCustomField("g", "G", new FieldTypeNormal());
 		ChoiceItem[] fields = new ChoiceItem[] {
-			new ChoiceItem(any),
-			new ChoiceItem(a),
-			new ChoiceItem(d),
-			new ChoiceItem(g),
+			new SearchableFieldChoiceItem("", any),
+			new SearchableFieldChoiceItem(a),
+			new SearchableFieldChoiceItem(d),
+			new SearchableFieldChoiceItem(g),
 		};
 		DropDownFieldSpec fieldColumnSpec = new DropDownFieldSpec(fields);
 
@@ -328,9 +332,9 @@ public class TestFancySearchHelper extends TestCaseEnhanced
 		spec.addColumn(FieldSpec.createStandardField("andor", new FieldTypeNormal()));
 		GridData data = new GridData(spec);
 		addRow(data, "", "", "whiz", "or");
-		addRow(data, "a", "", "c1 and c2", "or");
-		addRow(data, "d", ">", " f", "and");
-		addRow(data, "g", "!=", "\"i i\"", "or");
+		addRow(data, fields[1].getCode(), "", "c1 and c2", "or");
+		addRow(data, fields[2].getCode(), ">", " f", "and");
+		addRow(data, fields[3].getCode(), "!=", "\"i i\"", "or");
 		addRow(data, "", "", "j", "and");
 		
 		// (((any:whiz or (a~c1 and a~c2)) or d>f) and g!="ii") or any:j
