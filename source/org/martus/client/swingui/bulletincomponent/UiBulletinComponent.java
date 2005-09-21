@@ -30,7 +30,6 @@ import java.awt.Dimension;
 import java.awt.Rectangle;
 import java.io.IOException;
 import javax.swing.JCheckBox;
-import javax.swing.JPanel;
 import javax.swing.Scrollable;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
@@ -43,10 +42,9 @@ import org.martus.common.crypto.MartusCrypto;
 import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.fieldspec.FieldTypeBoolean;
 import org.martus.common.packet.FieldDataPacket;
-import org.martus.swing.ParagraphLayout;
-import org.martus.swing.UiLabel;
+import org.martus.swing.UiParagraphPanel;
 
-abstract public class UiBulletinComponent extends JPanel implements Scrollable, ChangeListener, LanguageChangeListener 
+abstract public class UiBulletinComponent extends UiParagraphPanel implements Scrollable, ChangeListener, LanguageChangeListener 
 {
 	abstract public void setEncryptionChangeListener(EncryptionChangeListener listener);
 	abstract public void setLanguageChangeListener(LanguageChangeListener listener);
@@ -81,12 +79,11 @@ abstract public class UiBulletinComponent extends JPanel implements Scrollable, 
 		headquartersSection = createHeadQuartersSection();
 		
 		ensureSectionsLineUp();
-		setLayout(new ParagraphLayout());
-		add(new UiLabel(""),ParagraphLayout.NEW_LINE);
-		add(headerSection,ParagraphLayout.NEW_LINE);
-		add(publicSection,ParagraphLayout.NEW_LINE);
-		add(privateSection,ParagraphLayout.NEW_LINE);
-		add(headquartersSection,ParagraphLayout.NEW_LINE);
+		
+		addOnNewLine(headerSection);
+		addOnNewLine(publicSection);
+		addOnNewLine(privateSection);
+		addOnNewLine(headquartersSection);
 	}
 	
 	private UiBulletinComponentDataSection createDataSection(
