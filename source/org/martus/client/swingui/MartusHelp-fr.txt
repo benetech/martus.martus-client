@@ -999,5 +999,3 @@ Lorsque vous exécutez la version arabe de Martus sous Windows XP, le texte figu
 22. Je souhaite passer à une nouvelle version de Martus. Dois-je d'abord supprimer l'ancienne version ?
 Non. Vous pouvez installer Martus sur une version existante du logiciel. Le programme d'installation vous informera qu'il existe une ancienne version. Cliquez Oui pour mettre à jour Martus sans perdre vos données, y compris les communiqués, les informations de compte, les configurations de serveur et les mots de passe. Pour de plus amples informations, voir "2c. Passage à une nouvelle version de Martus (Windows uniquement").
 
-Guide de l'Utilisateur Martus 2.6		1
-
