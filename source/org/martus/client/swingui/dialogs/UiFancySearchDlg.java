@@ -28,10 +28,12 @@ package org.martus.client.swingui.dialogs;
 
 import java.awt.BorderLayout;
 import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.HashMap;
 import javax.swing.Box;
+import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import org.martus.client.search.FancySearchGridEditor;
@@ -111,28 +113,71 @@ public class UiFancySearchDlg extends UiSearchDlg
 		}
 		public void actionPerformed(ActionEvent e)
 		{
-			String closeHelp = localization.getButtonLabel("CloseHelp");
+			String closeHelpButton = localization.getButtonLabel("CloseHelp");
 			String title = localization.getWindowTitle("FancySearchHelp");
-			String[] buttons = {closeHelp};
-			String msg1 = localization.getFieldLabel("FancySearchHelpMsg1");
-			String msg2 = localization.getFieldLabel("FancySearchHelpMsg2");
-			String msg3 = localization.getFieldLabel("FancySearchHelpMsg3");
-			if(alreadyInEnglishSoDontExplainUsingEnglishAndOr())
-				msg3 = "";
-			String[] contents = {msg1 + "\n" + msg2 + "\n" + msg3};
 
-			HashMap tokenReplacement = new HashMap();
-			String andString = localization.getKeyword("and");
-			String orString = localization.getKeyword("or");
-			tokenReplacement.put("#And#", andString);
-			tokenReplacement.put("#Or#", orString);
-
-			mainWindow.confirmDlg(mainWindow, title, contents, buttons, tokenReplacement);
+			StringBuffer rawHelpMessage = new StringBuffer(localization.getFieldLabel("FancySearchHelpMsg1"));
+			rawHelpMessage.append(localization.getFieldLabel("FancySearchHelpMsg2"));
+			if(notInEnglishSoExplainUsingEnglishAndOr())
+				rawHelpMessage.append(localization.getFieldLabel("FancySearchHelpMsg3"));
+			
+			try
+			{
+				HashMap tokenReplacement = new HashMap();
+				tokenReplacement.put("#And#", localization.getKeyword("and"));
+				tokenReplacement.put("#Or#", localization.getKeyword("or"));
+				String helpMessage = TokenReplacement.replaceTokens(rawHelpMessage.toString(), tokenReplacement);
+				showHelp(title, helpMessage, closeHelpButton);
+			}
+			catch(TokenInvalidException e1)
+			{
+				e1.printStackTrace();
+			}
 		}
 		
-		private boolean alreadyInEnglishSoDontExplainUsingEnglishAndOr()
+		private void showHelp(String title, String message, String closeButton)
 		{
-			return localization.getCurrentLanguageCode().equals(MiniLocalization.ENGLISH);
+			JDialog dlg = new JDialog(mainWindow, title, true);
+			JPanel panel = new JPanel();
+			panel.setBorder(new EmptyBorder(5,5,5,5));
+			panel.setLayout(new BorderLayout());
+			UiWrappedTextPanel messagePanel = new UiWrappedTextPanel(message);
+			messagePanel.setBorder(new EmptyBorder(5,5,5,5));
+			messagePanel.setPreferredSize(new Dimension(500,500));
+			panel.add(messagePanel, BorderLayout.CENTER);
+
+			UiButton button = new UiButton(closeButton);
+			button.addActionListener(new CloseHelpDialog(dlg));
+			Box hbox = Box.createHorizontalBox();
+			hbox.add(Box.createHorizontalGlue());
+			hbox.add(button);
+			hbox.add(Box.createHorizontalGlue());
+			JPanel buttonPanel = new JPanel();
+			buttonPanel.setBorder(new EmptyBorder(5,5,0,5));
+			buttonPanel.add(hbox);
+			panel.add(buttonPanel, BorderLayout.SOUTH);
+			
+			dlg.getContentPane().add(panel);
+			Utilities.centerDlg(dlg);
+			dlg.setVisible(true);
+		}
+		
+		class CloseHelpDialog implements ActionListener
+		{
+			public CloseHelpDialog(JDialog dlgToUse)
+			{
+				dlg = dlgToUse;
+			}
+			public void actionPerformed(ActionEvent e)
+			{
+				dlg.dispose();
+			}
+			private JDialog dlg;
+		}
+		
+		private boolean notInEnglishSoExplainUsingEnglishAndOr()
+		{
+			return !localization.getCurrentLanguageCode().equals(MiniLocalization.ENGLISH);
 		}
 		
 		private UiMainWindow mainWindow;
