@@ -30,7 +30,6 @@ import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
-import java.text.DateFormat;
 import java.util.Date;
 
 import javax.swing.Box;
@@ -239,19 +238,15 @@ public class UiFlexiDateEditor extends UiField
 		return exactDateRB.isSelected();
 	}
 
-	// FIXME: This needs to be in common, with tests!!!
 	public String getText()
 	{
-		DateFormat df = FieldSpec.getStoredDateFormat();
-		String dateText = null;
+		final Date beginDate = getBeginDate();
 		if(isExactDate())
-			dateText = df.format(getBeginDate());
-		else
-			dateText = df.format(getBeginDate())+ MartusFlexidate.DATE_RANGE_SEPARATER+
-						MartusFlexidate.toFlexidateFormat(getBeginDate(), getEndDate());						
-		return dateText;
-	}	
-	
+			return MartusFlexidate.toStoredDateFormat(beginDate);
+		
+		return MartusFlexidate.toStoredDateFormat(beginDate, getEndDate());
+	}
+
 	private Date getBeginDate() 
 	{		
 		return UiDateEditor.getDate(bgYearCombo, bgMonthCombo, bgDayCombo);

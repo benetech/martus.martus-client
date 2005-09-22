@@ -45,7 +45,7 @@ public class TestMartusFlexidate extends TestCaseEnhanced
 	public void testFlexiDate()
 	{
 		MartusFlexidate mf = new MartusFlexidate("20030105+2");		
-		assertEquals("20030105+2", mf.getMatusFlexidate());
+		assertEquals("20030105+2", mf.getMartusFlexidateString());
 		
 		DateFormat df = FieldSpec.getStoredDateFormat();						
 		assertEquals("2003-01-05", df.format(mf.getBeginDate()));
@@ -55,7 +55,7 @@ public class TestMartusFlexidate extends TestCaseEnhanced
 	public void testFlexiDateOverMonths()
 	{
 		MartusFlexidate mf = new MartusFlexidate("20030105+120");		
-		assertEquals("20030105+120", mf.getMatusFlexidate());
+		assertEquals("20030105+120", mf.getMartusFlexidateString());
 
 		DateFormat df = FieldSpec.getStoredDateFormat();						
 		assertEquals("2003-01-05", df.format(mf.getBeginDate()));
@@ -66,7 +66,7 @@ public class TestMartusFlexidate extends TestCaseEnhanced
 	public void testFlexiDateOverYear()
 	{
 		MartusFlexidate mf = new MartusFlexidate("20020105+366");		
-		assertEquals("20020105+366", mf.getMatusFlexidate());
+		assertEquals("20020105+366", mf.getMartusFlexidateString());
 
 		DateFormat df = FieldSpec.getStoredDateFormat();						
 		assertEquals("2002-01-05", df.format(mf.getBeginDate()));
@@ -78,7 +78,7 @@ public class TestMartusFlexidate extends TestCaseEnhanced
 	{
 		MartusFlexidate mf = new MartusFlexidate("20030105");
 		
-		assertEquals("20030105+0", mf.getMatusFlexidate());
+		assertEquals("20030105+0", mf.getMartusFlexidateString());
 		DateFormat df = FieldSpec.getStoredDateFormat();				
 		
 		assertEquals("2003-01-05", df.format(mf.getBeginDate()));
@@ -92,7 +92,7 @@ public class TestMartusFlexidate extends TestCaseEnhanced
 						
 		MartusFlexidate mf = new MartusFlexidate(beginDate, endDate);
 		
-		assertEquals("20000110+5", mf.getMatusFlexidate());	
+		assertEquals("20000110+5", mf.getMartusFlexidateString());	
 		
 		DateFormat df = FieldSpec.getStoredDateFormat();										
 		assertEquals("2000-01-10", df.format(mf.getBeginDate()));
@@ -106,14 +106,14 @@ public class TestMartusFlexidate extends TestCaseEnhanced
 		
 		MartusFlexidate mf = new MartusFlexidate(beginDate, endDate);
 
-		assertEquals("20000110+0", mf.getMatusFlexidate());	
+		assertEquals("20000110+0", mf.getMartusFlexidateString());	
 
 		DateFormat df = FieldSpec.getStoredDateFormat();										
 		assertEquals("2000-01-10", df.format(mf.getBeginDate()));
 		assertEquals("2000-01-10", df.format(mf.getEndDate()));
 		
 		mf = new MartusFlexidate("20030105+0");		
-		assertEquals("20030105+0", mf.getMatusFlexidate());
+		assertEquals("20030105+0", mf.getMartusFlexidateString());
 
 		df = FieldSpec.getStoredDateFormat();						
 		assertEquals("2003-01-05", df.format(mf.getBeginDate()));
@@ -127,7 +127,7 @@ public class TestMartusFlexidate extends TestCaseEnhanced
 					
 		MartusFlexidate mf = new MartusFlexidate(beginDate, endDate);
 	
-		assertEquals("Initial date incorrect", "19990115+360", mf.getMatusFlexidate());	
+		assertEquals("Initial date incorrect", "19990115+360", mf.getMartusFlexidateString());	
 	
 		DateFormat df = FieldSpec.getStoredDateFormat();										
 		assertEquals("1999-01-15", df.format(mf.getBeginDate()));
@@ -136,7 +136,7 @@ public class TestMartusFlexidate extends TestCaseEnhanced
 		long ONE_HOUR_OF_MILLIS = 60*60*1000;
 		endDate.setTime(endDate.getTime() + ONE_HOUR_OF_MILLIS);	
 		MartusFlexidate mf2 = new MartusFlexidate(beginDate, endDate);
-		assertEquals("After setting date incorrect", "19990115+360", mf2.getMatusFlexidate());	
+		assertEquals("After setting date incorrect", "19990115+360", mf2.getMartusFlexidateString());	
 	}
 	
 	public void testCreateFromMartusString()

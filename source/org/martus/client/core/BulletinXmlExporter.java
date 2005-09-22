@@ -154,7 +154,7 @@ public class BulletinXmlExporter
 				continue;
 			}
 			
-			if(spec.getType().isDate())
+			if(spec.getType().isDateRange())
 			{
 				String martusFlexidate = rawFieldData.toString();
 				String startDate = DateUtilities.getStartDateRange(martusFlexidate);

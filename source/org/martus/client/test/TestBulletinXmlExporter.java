@@ -29,6 +29,8 @@ package org.martus.client.test;
 import java.io.File;
 import java.io.IOException;
 import java.io.StringWriter;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.Vector;
 
 import org.martus.client.bulletinstore.ClientBulletinStore;
@@ -45,6 +47,7 @@ import org.martus.common.fieldspec.GridFieldSpec;
 import org.martus.common.fieldspec.StandardFieldSpecs;
 import org.martus.common.packet.BulletinHistory;
 import org.martus.common.packet.FieldDataPacket;
+import org.martus.common.utilities.MartusFlexidate;
 import org.martus.util.TestCaseEnhanced;
 
 public class TestBulletinXmlExporter extends TestCaseEnhanced
@@ -372,6 +375,23 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 		assertContains("<Label>N</Label>", result);		
 	}
 
+	public void testExportDateRange() throws Exception
+	{
+		final int MAY = 4;
+		Date beginDate = new GregorianCalendar(2005, MAY, 1).getTime();
+		Date endDate = new GregorianCalendar(2005, MAY, 30).getTime();
+		String rawDateRangeString = MartusFlexidate.toStoredDateFormat(beginDate, endDate);
+
+		Bulletin b = new Bulletin(store.getSignatureGenerator());
+		b.set(Bulletin.TAGEVENTDATE, rawDateRangeString);
+		StringWriter dest = new StringWriter();
+		Vector list = new Vector();
+		list.add(b);
+		BulletinXmlExporter.exportBulletins(dest, list, true);
+		assertNotContains("exported raw flexidate?", rawDateRangeString, dest.toString());
+		assertContains("didn't write good date range?", "2005-05-01,2005-05-30", dest.toString());
+	}
+	
 	String doExport(Vector list, boolean includePrivateData) throws IOException
 	{
 		StringWriter writer = new StringWriter();
