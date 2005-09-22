@@ -31,6 +31,7 @@ import java.io.IOException;
 
 import org.martus.client.bulletinstore.BulletinFolder;
 import org.martus.client.core.MartusApp;
+import org.martus.clientside.MtfAwareLocalization;
 import org.martus.clientside.UiLocalization;
 import org.martus.common.MartusUtilities.FileVerificationException;
 import org.martus.common.bulletin.Bulletin;
@@ -96,6 +97,11 @@ public class MockMartusApp extends MartusApp
 		fakeDataDirectory.delete();
 		fakeDataDirectory.mkdir();
 		return fakeDataDirectory;
+	}
+	
+	public MtfAwareLocalization getLocalization()
+	{
+		return localization;
 	}
 
 	public Database getWriteableDatabase()

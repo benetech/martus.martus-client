@@ -58,6 +58,7 @@ import org.martus.common.HQKey;
 import org.martus.common.HQKeys;
 import org.martus.common.LegacyCustomFields;
 import org.martus.common.MartusUtilities;
+import org.martus.common.MiniLocalization;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.crypto.MartusCrypto;
 import org.martus.common.crypto.MockMartusSecurity;
@@ -116,6 +117,20 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		ClientBulletinStore store = appWithAccount.getStore();
 		assertNotNull("BulletinStore", store);
 		TRACE_END();
+	}
+	
+	public void testGetDefaultLanguageForNewBulletin()
+	{
+		MiniLocalization localization = appWithAccount.getLocalization();
+		String originalLanguage = localization.getCurrentLanguageCode();
+		assertNull("language not null by default?", originalLanguage);
+		
+		final String NON_STANDARD_LANGUAGE_CODE = "soylent green";
+		localization.setCurrentLanguageCode(NON_STANDARD_LANGUAGE_CODE);
+		assertEquals("Didn't reject weird language?", MiniLocalization.LANGUAGE_OTHER, appWithAccount.getDefaultLanguageForNewBulletin());
+
+		localization.setCurrentLanguageCode(MiniLocalization.SPANISH);
+		assertEquals("Didn't use SPANISH?", MiniLocalization.SPANISH, appWithAccount.getDefaultLanguageForNewBulletin());
 	}
 	
 	public void testGetHelp() throws Exception

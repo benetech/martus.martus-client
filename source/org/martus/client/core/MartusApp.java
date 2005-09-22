@@ -66,6 +66,7 @@ import org.martus.common.HQKey;
 import org.martus.common.HQKeys;
 import org.martus.common.LegacyCustomFields;
 import org.martus.common.MartusUtilities;
+import org.martus.common.MiniLocalization;
 import org.martus.common.ProgressMeterInterface;
 import org.martus.common.Version;
 import org.martus.common.Exceptions.ServerCallFailedException;
@@ -84,6 +85,7 @@ import org.martus.common.crypto.MartusCrypto.MartusSignatureException;
 import org.martus.common.crypto.MartusCrypto.NoKeyPairException;
 import org.martus.common.database.FileDatabase.MissingAccountMapException;
 import org.martus.common.database.FileDatabase.MissingAccountMapSignatureException;
+import org.martus.common.fieldspec.ChoiceItem;
 import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.fieldspec.StandardFieldSpecs;
 import org.martus.common.network.NetworkInterface;
@@ -695,11 +697,25 @@ public class MartusApp
 		b.set(Bulletin.TAGAUTHOR, configInfo.getAuthor());
 		b.set(Bulletin.TAGORGANIZATION, configInfo.getOrganization());
 		b.set(Bulletin.TAGPUBLICINFO, configInfo.getTemplateDetails());
-		b.set(Bulletin.TAGLANGUAGE, getCurrentLanguage());
+		b.set(Bulletin.TAGLANGUAGE, getDefaultLanguageForNewBulletin());
 		setDefaultHQKeysInBulletin(b);
 		b.setDraft();
 		b.setAllPrivate(true);
 		return b;
+	}
+
+	public String getDefaultLanguageForNewBulletin()
+	{
+		final String preferredLanguage = getCurrentLanguage();
+		ChoiceItem[] availableLanguages = localization.getLanguageNameChoices();
+		for(int i=0; i < availableLanguages.length; ++i)
+		{
+			ChoiceItem item = availableLanguages[i];
+			if(item.getCode().equals(preferredLanguage))
+				return preferredLanguage;
+		}
+		
+		return MiniLocalization.LANGUAGE_OTHER;
 	}
 
 	public void setDefaultHQKeysInBulletin(Bulletin b)
@@ -1735,7 +1751,7 @@ public class MartusApp
 
 	public File martusDataRootDirectory;
 	protected File currentAccountDirectory;
-	private MtfAwareLocalization localization;
+	protected MtfAwareLocalization localization;
 	public ClientBulletinStore store;
 	private ConfigInfo configInfo;
 	public NetworkInterface currentNetworkInterfaceHandler;
