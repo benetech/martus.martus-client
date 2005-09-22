@@ -831,7 +831,7 @@ public class EnglishStrings
 		"   prison #And# jail #Or# trial \n" +
 		"Martus will search for any bulletins that contain both the words prison and jail, or contain the word trial.\n",
 "field:FancySearchHelpMsg3=" + 
-	"You can use the word #Or# or #And#, or you can use the English words \"or\" and \"and\" to search.\n\n" +  
+	"You can use the word #Or# or #And#, or you can use the English words \"#OrEnglish#\" and \"#AndEnglish#\" to search.\n\n" +  
 	"You need to put spaces before and after any #Or# / #And# keywords you use in your search.\n", 
 
 "field:WasSentYes=Yes",

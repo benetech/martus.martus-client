@@ -126,6 +126,8 @@ public class UiFancySearchDlg extends UiSearchDlg
 				HashMap tokenReplacement = new HashMap();
 				tokenReplacement.put("#And#", localization.getKeyword("and"));
 				tokenReplacement.put("#Or#", localization.getKeyword("or"));
+				tokenReplacement.put("#AndEnglish#", "and");
+				tokenReplacement.put("#OrEnglish#", "or");
 				String helpMessage = TokenReplacement.replaceTokens(rawHelpMessage.toString(), tokenReplacement);
 				showHelp(title, helpMessage, closeHelpButton);
 			}
