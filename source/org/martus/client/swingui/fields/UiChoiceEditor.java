@@ -27,6 +27,7 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.swingui.fields;
 
 import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -40,6 +41,7 @@ import org.martus.common.fieldspec.DropDownFieldSpec;
 import org.martus.common.fieldspec.FieldSpec;
 import org.martus.swing.UiComboBox;
 import org.martus.swing.UiLanguageDirection;
+import org.martus.util.language.LanguageOptions;
 
 public class UiChoiceEditor extends UiChoice implements ActionListener
 {
@@ -80,7 +82,13 @@ public class UiChoiceEditor extends UiChoice implements ActionListener
 			cellRenderer.setComponentOrientation(UiLanguageDirection.getComponentOrientation());
 			return cellRenderer;
 		}
-		
+
+		public Dimension getPreferredSize()
+		{
+			Dimension d = super.getPreferredSize();
+			d.height += LanguageOptions.getExtraHeightIfNecessary();
+			return d;
+		}
 	}
 
 	public String getText()
@@ -106,8 +114,6 @@ public class UiChoiceEditor extends UiChoice implements ActionListener
 		widget.removeAllItems();
 		for(int i = 0; i < spec.getCount(); ++i)
 			widget.addItem(spec.getChoice(i));
-
-		widget.updateUI();
 	}
 
 	public void actionPerformed(ActionEvent e) 
