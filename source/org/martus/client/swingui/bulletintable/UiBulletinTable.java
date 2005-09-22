@@ -328,7 +328,7 @@ public class UiBulletinTable extends UiTable implements ListSelectionListener, D
 	private Bulletin updateFieldSpecsIfNecessary(Bulletin original) throws Exception
 	{
 		ClientBulletinStore store = mainWindow.getApp().getStore();
-		if(!store.bulletinHasExtraFields(original))
+		if(store.bulletinHasCurrentFieldSpecs(original))
 			return original;
 		if(confirmUpdateFieldsDlg("UseBulletinsDraftCustomFields"))
 			return original;
@@ -342,7 +342,7 @@ public class UiBulletinTable extends UiTable implements ListSelectionListener, D
 		ClientBulletinStore store = mainWindow.getApp().getStore();
 		FieldSpec[] publicFieldSpecsToUse = store.getPublicFieldSpecs();
 		FieldSpec[] privateFieldSpecsToUse = store.getPrivateFieldSpecs();
-		if(store.bulletinHasExtraFields(original))
+		if(!store.bulletinHasCurrentFieldSpecs(original))
 		{
 			if(confirmUpdateFieldsDlg("UseBulletinsCustomFields"))
 			{

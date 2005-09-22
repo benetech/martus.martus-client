@@ -37,6 +37,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.StringReader;
 import java.io.UnsupportedEncodingException;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
@@ -1408,9 +1409,9 @@ public class ClientBulletinStore extends BulletinStore
 		return new File(getStoreRootDir(), FIELD_SPEC_CACHE_FILE_NAME);
 	}
 	
-	public boolean bulletinHasExtraFields(Bulletin b)
+	public boolean bulletinHasCurrentFieldSpecs(Bulletin b)
 	{
-		return !FieldSpec.isAllFieldsPresent(b.getPublicFieldSpecs(), getPublicFieldSpecs());
+		return Arrays.equals(b.getPublicFieldSpecs(), getPublicFieldSpecs());
 	}
 
 	public Bulletin createEmptyBulletin()
