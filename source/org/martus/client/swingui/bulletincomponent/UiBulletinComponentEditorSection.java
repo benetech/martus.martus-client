@@ -27,7 +27,8 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.swingui.bulletincomponent;
 
 import java.io.File;
-import java.util.Date;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 import javax.swing.JComponent;
 
@@ -85,9 +86,9 @@ public class UiBulletinComponentEditorSection extends UiBulletinComponentDataSec
 
 	public UiField createDateField(FieldSpec spec)
 	{
-		Date maxDate = null;
+		Calendar maxDate = null;
 		if(StandardFieldSpecs.isStandardFieldTag(spec.getTag()))
-			maxDate = new Date();
+			maxDate = new GregorianCalendar();
 
 		return new UiDateEditor(getLocalization(), maxDate);		
 	}

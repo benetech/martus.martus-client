@@ -32,6 +32,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 import javax.swing.Box;
 import javax.swing.ImageIcon;
@@ -79,7 +81,10 @@ public class UiAboutDlg extends JDialog implements ActionListener
 		{
 			mlpDateInfo.append(localization.getFieldLabel("aboutDlgMlpDateInfo"));
 			mlpDateInfo.append(" ");
-			mlpDateInfo.append(localization.convertStoredDateToDisplayReverseIfNecessary(MartusFlexidate.toStoredDateFormat(localization.getMlpDate())));
+			Calendar mlpDate = new GregorianCalendar();
+			mlpDate.setTime(localization.getMlpDate());
+			String storedDateString = MartusFlexidate.toStoredDateFormat(mlpDate);
+			mlpDateInfo.append(localization.convertStoredDateToDisplayReverseIfNecessary(storedDateString));
 		}
 		
 		StringBuffer mtfVersionInfo = new StringBuffer(localization.getFieldLabel("aboutDlgTranslationVersionInfo"));

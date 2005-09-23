@@ -30,6 +30,7 @@ import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.util.Calendar;
 import java.util.Date;
 
 import javax.swing.Box;
@@ -240,19 +241,19 @@ public class UiFlexiDateEditor extends UiField
 
 	public String getText()
 	{
-		final Date beginDate = getBeginDate();
+		final Calendar beginDate = getBeginDate();
 		if(isExactDate())
 			return MartusFlexidate.toStoredDateFormat(beginDate);
 		
 		return MartusFlexidate.toStoredDateFormat(beginDate, getEndDate());
 	}
 
-	private Date getBeginDate() 
+	private Calendar getBeginDate() 
 	{		
 		return UiDateEditor.getDate(bgYearCombo, bgMonthCombo, bgDayCombo);
 	}
 	
-	private Date getEndDate() 
+	private Calendar getEndDate() 
 	{				
 		return UiDateEditor.getDate(endYearCombo, endMonthCombo, endDayCombo);
 	}	

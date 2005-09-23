@@ -29,7 +29,7 @@ package org.martus.client.test;
 import java.io.File;
 import java.io.IOException;
 import java.io.StringWriter;
-import java.util.Date;
+import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.Vector;
 
@@ -412,8 +412,8 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 	private String createSampleDateRangeString()
 	{
 		final int MAY = 4;
-		Date beginDate = new GregorianCalendar(2005, MAY, 1).getTime();
-		Date endDate = new GregorianCalendar(2005, MAY, 30).getTime();
+		Calendar beginDate = new GregorianCalendar(2005, MAY, 1);
+		Calendar endDate = new GregorianCalendar(2005, MAY, 30);
 		String rawDateRangeString = MartusFlexidate.toStoredDateFormat(beginDate, endDate);
 		return rawDateRangeString;
 	}
