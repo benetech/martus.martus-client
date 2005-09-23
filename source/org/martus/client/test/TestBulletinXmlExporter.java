@@ -43,6 +43,7 @@ import org.martus.common.bulletin.Bulletin;
 import org.martus.common.bulletin.BulletinConstants;
 import org.martus.common.crypto.MartusCrypto.EncryptionException;
 import org.martus.common.fieldspec.FieldSpec;
+import org.martus.common.fieldspec.FieldTypeDateRange;
 import org.martus.common.fieldspec.GridFieldSpec;
 import org.martus.common.fieldspec.StandardFieldSpecs;
 import org.martus.common.packet.BulletinHistory;
@@ -83,6 +84,7 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 		assertContains("<!-- Version 3: added Dropdowns and Messages-->", result);
 		assertContains("<!-- Version 4: added Field Types-->", result);
 		assertContains("<!-- Version 5: added Grid FieldSpec Types-->", result);
+		assertContains("<!-- Version 6: Daterange grid cells now exported as yyyy-mm-dd,yyyy-mm-dd-->", result);
 
 		assertContains("<ExportedMartusBulletins>", result);
 		assertContains("<MartusBulletin>", result);
@@ -285,7 +287,7 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 		assertContains("<PrivateData>", publicAndPrivate);
 	}
 
-	public void testExportCustomFiledValue() throws Exception
+	public void testExportCustomFieldValue() throws Exception
 	{
 		FieldCollection fields = new FieldCollection(StandardFieldSpecs.getDefaultPublicFieldSpecs());
 		String customTag1 = "custom1";
@@ -375,21 +377,67 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 		assertContains("<Label>N</Label>", result);		
 	}
 
+	public void testXmlEscaping() throws Exception
+	{
+		String needsEscaping = "a < b && b > c";
+
+		Bulletin b = new Bulletin(store.getSignatureGenerator());
+		b.set(Bulletin.TAGAUTHOR, needsEscaping);
+		final String result = getExportedXml(b);
+		assertNotContains("exported unescaped?", needsEscaping, result);
+		assertContains("didn't write escaped?", "a &lt; b &amp;&amp; b &gt; c", result);
+	}
+
 	public void testExportDateRange() throws Exception
+	{
+		String rawDateRangeString = createSampleDateRangeString();
+
+		Bulletin b = new Bulletin(store.getSignatureGenerator());
+		b.set(Bulletin.TAGEVENTDATE, rawDateRangeString);
+		final String result = getExportedXml(b);
+		assertNotContains("exported raw flexidate?", rawDateRangeString, result);
+		assertContains("didn't write good date range?", "2005-05-01,2005-05-30", result);
+	}
+
+	private String getExportedXml(Bulletin b) throws IOException
+	{
+		StringWriter dest = new StringWriter();
+		Vector list = new Vector();
+		list.add(b);
+		BulletinXmlExporter.exportBulletins(dest, list, true);
+		final String result = dest.toString();
+		return result;
+	}
+
+	private String createSampleDateRangeString()
 	{
 		final int MAY = 4;
 		Date beginDate = new GregorianCalendar(2005, MAY, 1).getTime();
 		Date endDate = new GregorianCalendar(2005, MAY, 30).getTime();
 		String rawDateRangeString = MartusFlexidate.toStoredDateFormat(beginDate, endDate);
-
-		Bulletin b = new Bulletin(store.getSignatureGenerator());
-		b.set(Bulletin.TAGEVENTDATE, rawDateRangeString);
-		StringWriter dest = new StringWriter();
-		Vector list = new Vector();
-		list.add(b);
-		BulletinXmlExporter.exportBulletins(dest, list, true);
-		assertNotContains("exported raw flexidate?", rawDateRangeString, dest.toString());
-		assertContains("didn't write good date range?", "2005-05-01,2005-05-30", dest.toString());
+		return rawDateRangeString;
+	}
+	
+	public void testExportGridDateRange() throws Exception
+	{
+		GridFieldSpec gridSpec = new GridFieldSpec();
+		gridSpec.setTag("grid");
+		FieldSpec dateRangeSpec = FieldSpec.createCustomField("range", "Date Range", new FieldTypeDateRange());
+		gridSpec.addColumn(dateRangeSpec);
+		
+		GridData data = new GridData(gridSpec);
+		data.addEmptyRow();
+		String rawDateRangeString = createSampleDateRangeString();
+		data.setValueAt(rawDateRangeString, 0, 0);
+		
+		FieldSpec[] publicSpecs = new FieldSpec[] {gridSpec};
+		FieldSpec[] privateSpecs = StandardFieldSpecs.getDefaultPrivateFieldSpecs();
+		Bulletin b = new Bulletin(store.getSignatureGenerator(), publicSpecs, privateSpecs);
+		b.set(gridSpec.getTag(), data.getXmlRepresentation());
+		
+		final String result = getExportedXml(b);
+		assertNotContains("exported raw flexidate?", rawDateRangeString, result);
+		assertContains("didn't write good date range?", "2005-05-01,2005-05-30", result);
 	}
 	
 	String doExport(Vector list, boolean includePrivateData) throws IOException

@@ -33,10 +33,10 @@ import java.util.Vector;
 import org.martus.common.MartusXml;
 import org.martus.common.bulletin.AttachmentProxy;
 import org.martus.common.bulletin.Bulletin;
+import org.martus.common.field.MartusField;
 import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.fieldspec.GridFieldSpec;
 import org.martus.common.packet.BulletinHistory;
-import org.martus.common.utilities.DateUtilities;
 import org.martus.util.xml.XmlUtilities;
 
 public class BulletinXmlExporter
@@ -73,6 +73,8 @@ public class BulletinXmlExporter
 		dest.write("<!-- Version 4: added Field Types-->");
 		dest.write(NEW_LINE);
 		dest.write("<!-- Version 5: added Grid FieldSpec Types-->");
+		dest.write(NEW_LINE);
+		dest.write("<!-- Version 6: Daterange grid cells now exported as yyyy-mm-dd,yyyy-mm-dd-->");
 		dest.write(NEW_LINE);
 		
 		dest.write(NEW_LINE);
@@ -139,31 +141,27 @@ public class BulletinXmlExporter
 		throws IOException
 	{		
 		for (int i = 0; i < specs.length; i++)
-		{			
+		{
 			FieldSpec spec = specs[i];
 			if(spec.hasUnknownStuff())
-				continue;						
-			String tag = spec.getTag();
-			StringBuffer rawFieldData = new StringBuffer(b.get(tag));
+				continue;		
+			final String tag = spec.getTag();
+			MartusField field = b.getField(tag);
+			String value = field.getExportableData();
 			if(spec.getType().isGrid())
 			{
 				GridFieldSpec grid = (GridFieldSpec)spec;
 				String columnLabels = grid.getDetailsXml();
-				String gridData = rawFieldData + columnLabels;
-				writeElementDirect(dest, getXmlEncodedTagWithData(TYPE, FieldSpec.getTypeString(spec.getType())), getXmlEncodedTagWithData(TAG, tag), getXmlEncodedTagWithData(LABEL, spec.getLabel()), MartusXml.getTagWithData(VALUE, gridData));
-				continue;
+				final String typeTagAndData = getXmlEncodedTagWithData(TYPE, FieldSpec.getTypeString(spec.getType()));
+				final String tagTagAndData = getXmlEncodedTagWithData(TAG, tag);
+				final String labelTagAndData = getXmlEncodedTagWithData(LABEL, spec.getLabel());
+				final String valueTagAndData = MartusXml.getTagWithData(VALUE, value + columnLabels);
+				writeElementDirect(dest, typeTagAndData, tagTagAndData, labelTagAndData, valueTagAndData);
 			}
-			
-			if(spec.getType().isDateRange())
+			else
 			{
-				String martusFlexidate = rawFieldData.toString();
-				String startDate = DateUtilities.getStartDateRange(martusFlexidate);
-				String endDate = DateUtilities.getEndDateRange(martusFlexidate);
-				rawFieldData = new StringBuffer(startDate);
-				rawFieldData.append(",");
-				rawFieldData.append(endDate);
+				writeElement(dest,FieldSpec.getTypeString(spec.getType()), tag, spec.getLabel(), value);
 			}
-			writeElement(dest,FieldSpec.getTypeString(spec.getType()), tag, spec.getLabel(), rawFieldData.toString());				
 		}
 		
 	}
