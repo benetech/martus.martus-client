@@ -23,51 +23,46 @@ Software Foundation, Inc., 59 Temple Place - Suite 330,
 Boston, MA 02111-1307, USA.
 
 */
-
 package org.martus.client.swingui.renderers;
 
 import java.awt.Color;
 import java.awt.Component;
-
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableCellRenderer;
-
 import org.martus.client.swingui.tablemodels.UiTableModel;
 
-public 	class BooleanRenderer extends DefaultTableCellRenderer
+public class UiRenderer extends DefaultTableCellRenderer
 {
-	public BooleanRenderer(UiTableModel modelToUse, Color disabledBackgroundColorToUse, TableCellRenderer oldBooleanRendererToUse)
+	public UiRenderer(UiTableModel modelToUse, Color disabledBackgroundColorToUse,TableCellRenderer oldRendererToUse)
 	{
-		oldBooleanRenderer = oldBooleanRendererToUse;
-		disabledBackgroundColor = disabledBackgroundColorToUse;
 		tableModel = modelToUse;
+		oldRenderer = oldRendererToUse;
+		disabledBackgroundColor = disabledBackgroundColorToUse;
 	}
-	
+
 	public Component getTableCellRendererComponent(
 			JTable tableToUse, Object value,
 			boolean isSelected, boolean hasFocus,
 			int row, int column)
 	{
-		Component cell = oldBooleanRenderer.getTableCellRendererComponent(tableToUse, value, isSelected, hasFocus, row, column);
-		Color enabledBackgroundColor = cell.getBackground();
-		if(tableModel.isEnabled(row))
+		Component cell = oldRenderer.getTableCellRendererComponent(tableToUse, value, isSelected, hasFocus, row, column);
+		if(normalBackgroundColor == null)
+			normalBackgroundColor = cell.getBackground();
+		boolean isEnabled = tableModel.isEnabled(row);
+		cell.setEnabled(isEnabled);
+		if(!isSelected)
 		{
-			cell.setEnabled(true);
-			if(!isSelected)
-				cell.setBackground(enabledBackgroundColor);
-		}
-		else
-		{
-			cell.setEnabled(false);
-			if(!isSelected)
+			if(isEnabled)
+				cell.setBackground(normalBackgroundColor);
+			else
 				cell.setBackground(disabledBackgroundColor);
-		}
+		}			
 		return cell;
 	}
 
+	Color normalBackgroundColor;
 	Color disabledBackgroundColor;
 	UiTableModel tableModel;
-	TableCellRenderer oldBooleanRenderer;
+	TableCellRenderer oldRenderer;
 }
-

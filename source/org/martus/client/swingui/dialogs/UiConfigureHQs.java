@@ -32,7 +32,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.io.File;
-
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -41,14 +40,12 @@ import javax.swing.JPanel;
 import javax.swing.ListSelectionModel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.filechooser.FileFilter;
-
 import org.martus.client.core.MartusApp;
 import org.martus.client.swingui.HeadQuarterEntry;
 import org.martus.client.swingui.HeadQuartersTableModel;
 import org.martus.client.swingui.HeadQuartersTableModelConfiguration;
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.client.swingui.renderers.BooleanRenderer;
-import org.martus.client.swingui.renderers.StringRenderer;
+import org.martus.client.swingui.renderers.UiRenderer;
 import org.martus.clientside.UiLocalization;
 import org.martus.common.HQKey;
 import org.martus.common.HQKeys;
@@ -143,8 +140,8 @@ public class UiConfigureHQs extends JDialog
 	{
 		UiTable hqTable = new UiTable(hqModel);
 		Color disabledBackgroundColor = getBackground();
-		hqTable.setDefaultRenderer(Boolean.class, new BooleanRenderer(hqModel, disabledBackgroundColor, hqTable.getDefaultRenderer(Boolean.class)));
-		hqTable.setDefaultRenderer(String.class, new StringRenderer(hqModel, disabledBackgroundColor));
+		hqTable.setDefaultRenderer(Boolean.class, new UiRenderer(hqModel, disabledBackgroundColor, hqTable.getDefaultRenderer(Boolean.class)));
+		hqTable.setDefaultRenderer(String.class, new UiRenderer(hqModel, disabledBackgroundColor, hqTable.getDefaultRenderer(String.class)));
 
 		hqTable.createDefaultColumnsFromModel();
 		hqTable.addKeyListener(new TableListener());
