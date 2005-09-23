@@ -300,6 +300,7 @@ public class UiBulletinTable extends UiTable implements ListSelectionListener, D
 				bulletinToModify = updateFieldSpecsIfNecessary(original);
 			else if(needsCloneToEdit(isMine, isSealed))
 				bulletinToModify = createCloneAndUpdateFieldSpecsIfNecessary(original);
+			bulletinToModify.allowOnlyTheseAuthorizedKeysToRead(mainWindow.getApp().getAllHQKeys());
 			bulletinToModify.addAuthorizedToReadKeys(mainWindow.getApp().getDefaultHQKeysWithFallback());
 			mainWindow.modifyBulletin(bulletinToModify);
 		}
