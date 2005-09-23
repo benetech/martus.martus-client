@@ -33,9 +33,9 @@ import java.util.Vector;
 import org.martus.clientside.UiLocalization;
 import org.martus.common.HQKey;
 import org.martus.common.HQKeys;
-import org.martus.util.MartusTableModel;
+import org.martus.swing.UiTableModel;
 
-public abstract class HeadQuartersTableModel extends MartusTableModel 
+public abstract class HeadQuartersTableModel extends UiTableModel 
 {
 	public HeadQuartersTableModel(UiLocalization localizationToUse)
 	{
