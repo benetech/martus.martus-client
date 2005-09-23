@@ -25,11 +25,9 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.bulletincomponent;
 
-import java.awt.Color;
 import javax.swing.ListSelectionModel;
 import org.martus.client.swingui.HeadQuartersTableModel;
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.client.swingui.renderers.UiRenderer;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.swing.UiLabel;
 import org.martus.swing.UiTable;
@@ -56,10 +54,7 @@ abstract public class UiBulletinComponentHeadQuartersSection extends UiBulletinC
 	protected UiTable createHeadquartersTable(HeadQuartersTableModel hqModel) 
 	{
 		UiTable hqTable = new UiTable(hqModel);
-		Color disabledBackgroundColor = getBackground();
-		hqTable.setDefaultRenderer(Boolean.class, new UiRenderer(hqModel, disabledBackgroundColor, hqTable.getDefaultRenderer(Boolean.class)));
-		hqTable.setDefaultRenderer(String.class, new UiRenderer(hqModel, disabledBackgroundColor, hqTable.getDefaultRenderer(String.class)));
-
+		hqTable.setRenderers(hqModel);
 		hqTable.createDefaultColumnsFromModel();
 		
 		hqTable.setColumnSelectionAllowed(false);

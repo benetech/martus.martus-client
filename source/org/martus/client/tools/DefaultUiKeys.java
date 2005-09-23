@@ -23,12 +23,47 @@ Software Foundation, Inc., 59 Temple Place - Suite 330,
 Boston, MA 02111-1307, USA.
 
 */
+package org.martus.client.tools;
 
-package org.martus.client.swingui.tablemodels;
 
-import javax.swing.table.AbstractTableModel;
+import java.util.ArrayList;
+import java.util.Enumeration;
+import java.util.Hashtable;
+import java.util.List;
+import javax.swing.UIManager;
 
-abstract public class UiTableModel extends AbstractTableModel 
-{
-	public abstract boolean isEnabled(int row);
+/**
+ *
+ * @author rafe
+ */
+public class DefaultUiKeys {
+    
+    /** Creates a new instance of NewMain */
+    public DefaultUiKeys() {
+    }
+    
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) 
+    {
+        Hashtable h = UIManager.getDefaults();
+        
+        List l = new ArrayList();
+        
+        Enumeration e = h.keys();
+        while( e.hasMoreElements() ) {
+            l.add( e.nextElement().toString() );
+        }
+
+        java.util.Collections.sort( l );
+        
+        for (int i = 0 ; i <l.size();++i) 
+        {
+        	String k = (String)l.get(i);
+            System.out.println( k + ":" + h.get(k) ) ;
+        }
+    }
+    
 }
+

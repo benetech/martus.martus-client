@@ -25,7 +25,6 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.dialogs;
 
-import java.awt.Color;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -45,7 +44,6 @@ import org.martus.client.swingui.HeadQuarterEntry;
 import org.martus.client.swingui.HeadQuartersTableModel;
 import org.martus.client.swingui.HeadQuartersTableModelConfiguration;
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.client.swingui.renderers.UiRenderer;
 import org.martus.clientside.UiLocalization;
 import org.martus.common.HQKey;
 import org.martus.common.HQKeys;
@@ -139,10 +137,7 @@ public class UiConfigureHQs extends JDialog
 	protected UiTable createHeadquartersTable(HeadQuartersTableModel hqModel) 
 	{
 		UiTable hqTable = new UiTable(hqModel);
-		Color disabledBackgroundColor = getBackground();
-		hqTable.setDefaultRenderer(Boolean.class, new UiRenderer(hqModel, disabledBackgroundColor, hqTable.getDefaultRenderer(Boolean.class)));
-		hqTable.setDefaultRenderer(String.class, new UiRenderer(hqModel, disabledBackgroundColor, hqTable.getDefaultRenderer(String.class)));
-
+		hqTable.setRenderers(hqModel);
 		hqTable.createDefaultColumnsFromModel();
 		hqTable.addKeyListener(new TableListener());
 		hqTable.setColumnSelectionAllowed(false);

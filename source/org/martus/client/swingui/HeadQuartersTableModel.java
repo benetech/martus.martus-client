@@ -30,12 +30,12 @@ import java.util.Iterator;
 import java.util.Vector;
 
 
-import org.martus.client.swingui.tablemodels.UiTableModel;
 import org.martus.clientside.UiLocalization;
 import org.martus.common.HQKey;
 import org.martus.common.HQKeys;
+import org.martus.util.MartusTableModel;
 
-public abstract class HeadQuartersTableModel extends UiTableModel 
+public abstract class HeadQuartersTableModel extends MartusTableModel 
 {
 	public HeadQuartersTableModel(UiLocalization localizationToUse)
 	{

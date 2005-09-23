@@ -44,8 +44,9 @@ import org.martus.common.network.NetworkInterfaceConstants;
 import org.martus.common.network.NetworkResponse;
 import org.martus.common.packet.BulletinHistory;
 import org.martus.common.packet.UniversalId;
+import org.martus.util.MartusTableModel;
 
-abstract public class RetrieveTableModel extends UiTableModel  
+abstract public class RetrieveTableModel extends MartusTableModel  
 {
 	public RetrieveTableModel(MartusApp appToUse, UiLocalization localizationToUse)
 	{

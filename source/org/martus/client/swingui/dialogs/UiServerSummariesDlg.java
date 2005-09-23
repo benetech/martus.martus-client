@@ -42,7 +42,6 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.table.TableModel;
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.client.swingui.renderers.UiRenderer;
 import org.martus.client.swingui.tablemodels.RetrieveTableModel;
 import org.martus.clientside.UiLocalization;
 import org.martus.common.packet.FieldDataPacket;
@@ -79,9 +78,7 @@ public abstract class UiServerSummariesDlg extends JDialog
 		UiWrappedTextArea retrieveMessage = new UiWrappedTextArea(topMessageText);
 		tableBox = new UiVBox();
 		table = new RetrieveJTable(model);
-		table.setDefaultRenderer(Boolean.class, new UiRenderer(model, disabledBackgroundColor, table.getDefaultRenderer(Boolean.class)));
-		table.setDefaultRenderer(Integer.class, new UiRenderer(model, disabledBackgroundColor, table.getDefaultRenderer(Integer.class)));
-		table.setDefaultRenderer(String.class, new UiRenderer(model, disabledBackgroundColor, table.getDefaultRenderer(String.class)));
+		table.setRenderers(model);
 
 		table.createDefaultColumnsFromModel();
 		tableBox.addCentered(table.getTableHeader());
