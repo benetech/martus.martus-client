@@ -27,10 +27,10 @@ package org.martus.client.test;
 
 import java.util.Calendar;
 import java.util.Date;
-import java.util.GregorianCalendar;
 
 import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.utilities.MartusFlexidate;
+import org.martus.util.MartusCalendar;
 import org.martus.util.TestCaseEnhanced;
 
 public class TestMartusFlexidate extends TestCaseEnhanced
@@ -82,8 +82,8 @@ public class TestMartusFlexidate extends TestCaseEnhanced
 	
 	public void testDateRange()
 	{
-		Calendar beginDate = getDate(2000,Calendar.JANUARY,10);
-		Calendar endDate = getDate(2000,Calendar.JANUARY, 15);
+		MartusCalendar beginDate = getDate(2000,Calendar.JANUARY,10);
+		MartusCalendar endDate = getDate(2000,Calendar.JANUARY, 15);
 						
 		MartusFlexidate mf = new MartusFlexidate(beginDate, endDate);
 		
@@ -95,8 +95,8 @@ public class TestMartusFlexidate extends TestCaseEnhanced
 	
 	public void testSameDateRange()
 	{
-		Calendar beginDate = getDate(2000,Calendar.JANUARY,10);
-		Calendar endDate = getDate(2000,Calendar.JANUARY, 10);
+		MartusCalendar beginDate = getDate(2000,Calendar.JANUARY,10);
+		MartusCalendar endDate = getDate(2000,Calendar.JANUARY, 10);
 		
 		MartusFlexidate mf = new MartusFlexidate(beginDate, endDate);
 
@@ -114,8 +114,8 @@ public class TestMartusFlexidate extends TestCaseEnhanced
 	
 	public void testDateRangeSwap()
 	{
-		Calendar beginDate = getDate(2000, Calendar.JANUARY, 10);
-		Calendar endDate = new GregorianCalendar();
+		MartusCalendar beginDate = getDate(2000, Calendar.JANUARY, 10);
+		MartusCalendar endDate = new MartusCalendar();
 		endDate.setTime(new Date(beginDate.getTime().getTime() - (360L*24*60*60*1000)));
 					
 		MartusFlexidate mf = new MartusFlexidate(beginDate, endDate);
@@ -124,11 +124,6 @@ public class TestMartusFlexidate extends TestCaseEnhanced
 	
 		assertEquals("1999-01-15", FieldSpec.calendarToYYYYMMDD(mf.getBeginDate()));
 		assertEquals("2000-01-10", FieldSpec.calendarToYYYYMMDD(mf.getEndDate()));
-		
-		long ONE_HOUR_OF_MILLIS = 60*60*1000;
-		endDate.setTime(new Date(endDate.getTime().getTime() + ONE_HOUR_OF_MILLIS));	
-		MartusFlexidate mf2 = new MartusFlexidate(beginDate, endDate);
-		assertEquals("After setting date incorrect", "19990115+360", mf2.getMartusFlexidateString());	
 	}
 	
 	public void testCreateFromMartusString()
@@ -151,11 +146,9 @@ public class TestMartusFlexidate extends TestCaseEnhanced
 		assertEquals("1900-01-01", FieldSpec.calendarToYYYYMMDD(mfd.getBeginDate()));					
 	}
 
-	private Calendar getDate(int year, int month, int day)
+	private MartusCalendar getDate(int year, int month, int day)
 	{			
-		Calendar cal = new GregorianCalendar();
-		cal.set(year,month,day, 12, 0, 0);		
-						
+		MartusCalendar cal = new MartusCalendar(year, month, day);
 		return cal;
 	} 
 }

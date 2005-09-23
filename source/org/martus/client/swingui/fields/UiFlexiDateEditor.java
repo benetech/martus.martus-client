@@ -30,8 +30,6 @@ import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
-import java.util.Calendar;
-import java.util.Date;
 
 import javax.swing.Box;
 import javax.swing.ButtonGroup;
@@ -47,6 +45,7 @@ import org.martus.swing.UiLabel;
 import org.martus.swing.UiParagraphPanel;
 import org.martus.swing.UiRadioButton;
 import org.martus.swing.Utilities;
+import org.martus.util.MartusCalendar;
 
 public class UiFlexiDateEditor extends UiField
 {
@@ -213,7 +212,7 @@ public class UiFlexiDateEditor extends UiField
 		if(isCustomDate())
 			return;		
 		
-		Date today = new Date();
+		MartusCalendar today = new MartusCalendar();
 		if (getBeginDate().after(today))
 		{
 			bgDayCombo.requestFocus();	
@@ -241,19 +240,19 @@ public class UiFlexiDateEditor extends UiField
 
 	public String getText()
 	{
-		final Calendar beginDate = getBeginDate();
+		final MartusCalendar beginDate = getBeginDate();
 		if(isExactDate())
 			return MartusFlexidate.toStoredDateFormat(beginDate);
 		
 		return MartusFlexidate.toStoredDateFormat(beginDate, getEndDate());
 	}
 
-	private Calendar getBeginDate() 
+	private MartusCalendar getBeginDate() 
 	{		
 		return UiDateEditor.getDate(bgYearCombo, bgMonthCombo, bgDayCombo);
 	}
 	
-	private Calendar getEndDate() 
+	private MartusCalendar getEndDate() 
 	{				
 		return UiDateEditor.getDate(endYearCombo, endMonthCombo, endDayCombo);
 	}	

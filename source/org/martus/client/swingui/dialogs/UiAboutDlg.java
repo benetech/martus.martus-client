@@ -32,8 +32,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
 
 import javax.swing.Box;
 import javax.swing.ImageIcon;
@@ -51,6 +49,7 @@ import org.martus.swing.UiLabel;
 import org.martus.swing.UiVBox;
 import org.martus.swing.UiWrappedTextArea;
 import org.martus.swing.Utilities;
+import org.martus.util.MartusCalendar;
 
 public class UiAboutDlg extends JDialog implements ActionListener
 {
@@ -81,7 +80,7 @@ public class UiAboutDlg extends JDialog implements ActionListener
 		{
 			mlpDateInfo.append(localization.getFieldLabel("aboutDlgMlpDateInfo"));
 			mlpDateInfo.append(" ");
-			Calendar mlpDate = new GregorianCalendar();
+			MartusCalendar mlpDate = new MartusCalendar();
 			mlpDate.setTime(localization.getMlpDate());
 			String storedDateString = MartusFlexidate.toStoredDateFormat(mlpDate);
 			mlpDateInfo.append(localization.convertStoredDateToDisplayReverseIfNecessary(storedDateString));

@@ -29,8 +29,6 @@ package org.martus.client.test;
 import java.io.File;
 import java.io.IOException;
 import java.io.StringWriter;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
 import java.util.Vector;
 
 import org.martus.client.bulletinstore.ClientBulletinStore;
@@ -49,6 +47,7 @@ import org.martus.common.fieldspec.StandardFieldSpecs;
 import org.martus.common.packet.BulletinHistory;
 import org.martus.common.packet.FieldDataPacket;
 import org.martus.common.utilities.MartusFlexidate;
+import org.martus.util.MartusCalendar;
 import org.martus.util.TestCaseEnhanced;
 
 public class TestBulletinXmlExporter extends TestCaseEnhanced
@@ -412,8 +411,8 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 	private String createSampleDateRangeString()
 	{
 		final int MAY = 4;
-		Calendar beginDate = new GregorianCalendar(2005, MAY, 1);
-		Calendar endDate = new GregorianCalendar(2005, MAY, 30);
+		MartusCalendar beginDate = new MartusCalendar(2005, MAY, 1);
+		MartusCalendar endDate = new MartusCalendar(2005, MAY, 30);
 		String rawDateRangeString = MartusFlexidate.toStoredDateFormat(beginDate, endDate);
 		return rawDateRangeString;
 	}

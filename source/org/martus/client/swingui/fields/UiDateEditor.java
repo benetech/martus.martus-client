@@ -38,10 +38,11 @@ import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.utilities.DateUtilities;
 import org.martus.swing.UiComboBox;
 import org.martus.swing.Utilities;
+import org.martus.util.MartusCalendar;
 
 public class UiDateEditor extends UiField
 {
-	public UiDateEditor(UiLocalization localizationToUse, Calendar highestAllowableDate)
+	public UiDateEditor(UiLocalization localizationToUse, MartusCalendar highestAllowableDate)
 	{
 		localization = localizationToUse;
 		Box box = Box.createHorizontalBox();
@@ -84,7 +85,7 @@ public class UiDateEditor extends UiField
 	
 	private static void buildYear(UiComboBox yCombo)	
 	{
-		Calendar cal = new GregorianCalendar();
+		MartusCalendar cal = new MartusCalendar();
 		int thisYear = cal.get(Calendar.YEAR);			
 		
 		for(int year = 1900; year <= thisYear; ++year)
@@ -148,7 +149,7 @@ public class UiDateEditor extends UiField
 		if(maxDate == null)
 			return;
 	
-		Calendar value = getDate(yearCombo, monthCombo, dayCombo);
+		MartusCalendar value = getDate(yearCombo, monthCombo, dayCombo);
 		if (value.after(maxDate))
 		{
 			dayCombo.requestFocus();	
@@ -158,13 +159,13 @@ public class UiDateEditor extends UiField
 
 	public String getText()
 	{
-		Calendar date = getDate(yearCombo, monthCombo, dayCombo);
+		MartusCalendar date = getDate(yearCombo, monthCombo, dayCombo);
 		return FieldSpec.calendarToYYYYMMDD(date);
 	}
 
-	public static Calendar getDate(UiComboBox yCombo, UiComboBox mCombo, UiComboBox dCombo) 
+	public static MartusCalendar getDate(UiComboBox yCombo, UiComboBox mCombo, UiComboBox dCombo) 
 	{
-		Calendar cal = new GregorianCalendar();
+		MartusCalendar cal = new MartusCalendar();
 		cal.set(Integer.parseInt((String)yCombo.getSelectedItem()),
 				mCombo.getSelectedIndex(),
 				dCombo.getSelectedIndex()+1);
@@ -181,7 +182,7 @@ public class UiDateEditor extends UiField
 	{
 		try
 		{
-			Calendar cal = FieldSpec.yyyymmddWithDashesToCalendar(dateText);
+			MartusCalendar cal = FieldSpec.yyyymmddWithDashesToCalendar(dateText);
 		
 			yCombo.setSelectedItem( (new Integer(cal.get(Calendar.YEAR))).toString());
 			mCombo.setSelectedIndex(cal.get(Calendar.MONTH));
@@ -197,7 +198,7 @@ public class UiDateEditor extends UiField
 	UiComboBox monthCombo;
 	UiComboBox dayCombo;
 	UiComboBox yearCombo;	
-	Calendar maxDate;
+	MartusCalendar maxDate;
 	boolean isCustomField;
 	UiLocalization localization; 
 }
