@@ -76,7 +76,13 @@ public class UiChoiceEditor extends UiChoice implements ActionListener
 		public Component getListCellRendererComponent(JList list, Object choiceItem, int index, boolean isSelected, boolean cellHasFocus)
 		{
 			String spaceSoValueWontBeHiddenIfEmpty = " ";
-			String displayString = ((ChoiceItem)choiceItem).toString() + spaceSoValueWontBeHiddenIfEmpty;
+			String choiceText = "";
+			if(choiceItem == null)
+				System.out.println("UiChoiceEditor.getRenderer null choiceItem");
+			else
+				choiceText = choiceItem.toString();
+
+			String displayString = choiceText + spaceSoValueWontBeHiddenIfEmpty;
 			Component cellRenderer = super.getListCellRendererComponent(list, displayString, index, isSelected,
 					cellHasFocus);
 			cellRenderer.setComponentOrientation(UiLanguageDirection.getComponentOrientation());
@@ -97,7 +103,10 @@ public class UiChoiceEditor extends UiChoice implements ActionListener
 			System.out.println("UiChoiceEditor.getText null widget!");
 		ChoiceItem choice = (ChoiceItem)widget.getSelectedItem();
 		if(choice == null)
+		{
 			System.out.println("UiChoiceEditor.getText null choice!");
+			return "";
+		}
 		return choice.getCode();
 	}
 
