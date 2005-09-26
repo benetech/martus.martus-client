@@ -62,14 +62,12 @@ import org.martus.swing.Utilities;
 
 public class UiBulletinModifyDlg extends JFrame implements ActionListener, WindowListener, EncryptionChangeListener, LanguageChangeListener
 {
-	public UiBulletinModifyDlg(Bulletin b, UiMainWindow observerToUse)
+	public UiBulletinModifyDlg(Bulletin b, UiMainWindow observerToUse) throws IOException
 	{
 		observer = observerToUse;
 		UiLocalization localization = observer.getLocalization();
 		setTitle(localization.getWindowTitle("create"));
 		UiMainWindow.updateIcon(this);
-		try
-		{
 			bulletin = b;
 
 			view = new UiBulletinEditor(observer);
@@ -119,11 +117,6 @@ public class UiBulletinModifyDlg extends JFrame implements ActionListener, Windo
 				Utilities.maximizeWindow(this);
 			}
 			Utilities.forceScrollerToTop(view);
-		}
-		catch(Exception e)
-		{
-			e.printStackTrace();
-		}
 	}
 
 	private void addScrollerView() 

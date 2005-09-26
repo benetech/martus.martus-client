@@ -2010,19 +2010,36 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 
 	public void createBulletin()
 	{
-		Bulletin b = app.createBulletin();
-		modifyBulletin(b);
+		try
+		{
+			Bulletin b = app.createBulletin();
+			modifyBulletin(b);
+		}
+		catch(Exception e)
+		{
+			notifyDlg("UnexpectedError");
+		}
 	}
 
-	public boolean modifyBulletin(Bulletin b)
+	public void modifyBulletin(Bulletin b) throws Exception
 	{
 		getCurrentUiState().setModifyingBulletin(true);
 		setEnabled(false);
-		UiBulletinModifyDlg dlg = new UiBulletinModifyDlg(b, this);
-		setCurrentActiveFrame(dlg);
-		setVisible(false);
-		dlg.setVisible(true);
-		return dlg.wasBulletinSaved();
+		UiBulletinModifyDlg dlg = null;
+		try
+		{
+			dlg = new UiBulletinModifyDlg(b, this);
+			setCurrentActiveFrame(dlg);
+			setVisible(false);
+			dlg.setVisible(true);
+		}
+		catch(Exception e)
+		{
+			if(dlg != null)
+				dlg.dispose();
+			doneModifyingBulletin();
+			throw(e);
+		}
 	}
 
 	public void doneModifyingBulletin()
