@@ -28,6 +28,7 @@ package org.martus.client.swingui.dialogs;
 
 import java.awt.BorderLayout;
 import java.awt.Component;
+import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
@@ -191,7 +192,8 @@ public class UiBulletinModifyDlg extends JFrame implements ActionListener, Windo
 
 	private void saveBulletin(boolean userChoseSeal)
 	{
-		observer.setWaitingCursor();
+		Cursor originalCursor = getCursor();
+		setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
 		try 
 		{
 			MartusApp app = observer.getApp();
@@ -225,7 +227,7 @@ public class UiBulletinModifyDlg extends JFrame implements ActionListener, Windo
 		} 
 		finally 
 		{
-			observer.resetCursor();
+			setCursor(originalCursor);
 		}
 	}
 
