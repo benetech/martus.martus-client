@@ -1656,13 +1656,15 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 
 	private Vector displaySummariesDialog(RetrieveTableModel model, String dlgTitleTag, String summariesProgressTag, UiServerSummariesDlg summariesDlg) throws ServerErrorException
 	{
-		if(!retrieveSummaries(model, dlgTitleTag, summariesProgressTag))
+		setWaitingCursor();	
+		boolean retrievedSummaries = retrieveSummaries(model, dlgTitleTag, summariesProgressTag);
+		resetCursor();
+
+		if(!retrievedSummaries)
 			return null;
-	
 		summariesDlg.initialize();
 		if(!summariesDlg.getResult())
 			return null;
-		
 		return summariesDlg.getUniversalIdList();
 	}
 
