@@ -71,11 +71,11 @@ public class FocusManager extends FocusAdapter
 		{
 			if(nowHasFocus == null)
 			{
-				System.out.println("FocusManager Really lost focus from " + field);
+				//System.out.println("FocusManager Really lost focus from " + field);
 				for(int i=0; i < listeners.size(); ++i)
 				{
 					FocusListener listener = ((FocusListener)listeners.get(i));
-					System.out.println("Notifying " + listener);
+					//System.out.println("Notifying " + listener);
 					listener.focusLost(event);
 				}
 				break;
