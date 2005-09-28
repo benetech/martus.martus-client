@@ -40,7 +40,7 @@
 6k. Viewing and saving attachments
 6l. Viewing damaged bulletins
 6m. Searching for specific bulletins
-6n. Printing bulletins
+6n. Printing bulletins and creating bulletin reports
 6o. Exporting bulletin data
 7. Deleting Your Bulletins and Account Information
 8. Deleting All Martus Data, Including the Application
@@ -56,4 +56,5 @@
 10. Customizing Martus
 10a. Using a template in the Details field
 10b. Customizing bulletin fields
+10c. Using Customization Templates
 11. Frequently Asked Questions
