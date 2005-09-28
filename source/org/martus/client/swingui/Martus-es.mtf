@@ -1,9 +1,9 @@
 ﻿# Martus Client Translation File
 # Language code:  es
 # Language name:  Spanish
-# Exported date:  Mon Sep 19 16:40:06 PDT 2005
+# Exported date:  Tue Sep 27 20:23:11 PDT 2005
 # Client version: 2.8 Internal
-# Client build:   20050919.1662
+# Client build:   20050927.1666
 #
 # This file MUST be saved in UTF-8 format!
 # Lines beginning with # are comments and are ignored by Martus
@@ -127,8 +127,8 @@
 #_________________________________=Include private information
 -6c53-button:PrintPublicAndPrivate=Incluir datos privados
 
-#_______________________=Send output to a disk file
--40dd-button:PrintToDisk=Enviar datos a un archivo
+#_______________________=Send report output to a file
+-89b9-button:PrintToDisk=Enviar reporte a un archivo
 
 #__________________________=Print to a printer
 -7bac-button:PrintToPrinter=Enviar a impresora
@@ -514,14 +514,14 @@
 #____________________________=Exported Bulletins
 -0b4e-field:ExportedBulletins=Boletines exportados
 
-#______________________________=---Overview---\n\nMartus searches all versions of every bulletin (both public and private, sealed and draft) in every folder, including the Discarded Bulletins folder.  When the search is completed, the Search Results folder lists copies of the bulletins found in your search.\n\nYou can search for words in any language.  Martus searches are not case-sensitive in English and other purely Latin character languages, so it doesn't matter whether a word is capitalized or not.\n\nSearches include attachment filenames, but not content of attachments.\n\nYou can search both standard and custom fields.\n
--d47a-field:FancySearchHelpMsg1=---Descripción---\n\nMartus busca los términos en todas las revisiones de un boletín (públicos y privados, sellados y borradores) en todas las carpetas, incluyendo la carpeta de boletines desechados.  Al concluir la búsqueda copias todos los boletines encontrados los verá en la carpeta Resultados de búsqueda.\n\nPuede buscar términos en cualquier idioma.  Las busquedas de Martus no toman en cuenta las mayúsculas y minúscula en inglés e idiomas que usen el alfabeto latino.\n\nLas busquedas tambien incluyen los nombres de los archivos adjuntos pero no el contenido de los archivos.\n\nPuede buscar en los campos predeterminados y personalizados.\n
+#______________________________=---Overview---\n\nMartus searches all versions of every bulletin (both public and private, sealed and draft) in every folder, including the Discarded Bulletins folder.  When the search is completed, the Search Results folder lists copies of the bulletins found in your search.\n\nYou can search for words in any language.  Martus searches are not case-sensitive in English and other purely Latin character languages, so it doesn't matter whether a word is capitalized or not.\n\nSearches include attachment filenames, but not content of attachments.\n\nYou can search both standard and custom fields.\n\n
+-d47a-field:FancySearchHelpMsg1=---Descripción---\n\nMartus busca los términos en todas las revisiones de un boletín (públicos y privados, sellados y borradores) en todas las carpetas, incluyendo la carpeta de boletines desechados.  Al concluir la búsqueda copias todos los boletines encontrados los verá en la carpeta Resultados de búsqueda.\n\nPuede buscar términos en cualquier idioma.  Las busquedas de Martus no toman en cuenta las mayúsculas y minúscula en inglés e idiomas que usen el alfabeto latino.\n\nLas busquedas tambien incluyen los nombres de los archivos adjuntos pero no el contenido de los archivos.\n\nPuede buscar en los campos predeterminados y personalizados.\n\n
 
 #______________________________=---Search tips---\n\nMartus will find any text you enter whether it's a complete word or part of a larger word. For example, if you search for the word prison, you'll see bulletins that include the words prison, imprison, and imprisonment. Likewise, if you search for the word prison, Martus will find bulletins that include attachments with names such as photos-prison.jpg and prisoners-report.doc.\n\nTo search for an exact phrase, type it with quotation marks around the phrase  (e.g.  "Witness Testimony"). If you do not put quotation marks around the phrase, Martus will search for the words individually.\n\nUse the word "#Or#" to broaden your search, or the word "#And#" to narrow it.  You can use the #And# / #Or# dropdowns to specify different fields you want search across (e.g. you want to search for bulletins that have "Last Saved Date" in the last week and have a certain author).  If you want to search on multiple text values within a single bulletin field, you can use #Or# or #And# in-between words in the "Search For..." entry box.  For example, if you search "Any Field" for:\n   prison #Or# jail\nyou'll see a list of bulletins that contain either word anywhere in the bulletin. If you search for:\n   prison #And# assault \nyou'll see a list of bulletins that contain both words. The keyword "#And#" is implied, so if you search for:\n   prison assault \nMartus will find bulletins the same bulletins as if you searched for:\n   prison #And# assault\n\nWhen you use both "#And#" and "#Or#", your search terms are grouped from the beginning of your list (either across bulletin fields or within a particular field). For example, if you enter:\n   prison #Or# jail #And# trial \nin the "Search For..." entry box, Martus will search for any bulletins that contain either of the words prison or jail, and also contain the word trial. But if you enter:\n   prison #And# jail #Or# trial \nMartus will search for any bulletins that contain both the words prison and jail, or contain the word trial.\n
 -ec7d-field:FancySearchHelpMsg2=---Notas de búsqueda---\n\nMartus encontrará cualquier término de búsqueda ya sea una palabra completa o parcial. Por ejemplo, si busca la palabra unión, encontrará las palabras unión, reunión, y desunión. Martus también encontrará boletines que tenga archivos adjuntos con nombres como fotos-unión.jpg y reunión-reporte.doc.\n\nPara buscar una frase exacta escríbala rodeada de comillas  (ej.  "Testimonio del testigo"). Si no usa comillas alrededor de la frase Martus solo buscará por las palabras individualmente.\n\nUse la palabra "#Or#" para ejecutar una búsqueda más amplia o la palabra "#And#" para refinarla.  Use la lista desplegables de  #And# / #Or# para iniciar una búsqueda combinando differents campos (ej. quiere buscar boletines con una fecha de la semana pasada en el campo "Ultima modificación" y que haya sido creado por un autor particular).  Si quiere buscar múltiples términos en un campo puede usar #Or# o #And# entre los términos de búsqueda.  Por ejemplo,  si busca en "Todos los campos" por los términos:\n   prisión #Or# cárcel\nverá una lista de boletines que tienen cualquiera de las palabras en cualquier parte del boletín. Si busca los términos:\n   prisión #And# asalto \nverá una lista de boletines que tienen ambas palabras. La palabra "#And#" es implícita por lo que si solo busca por :\n   prisión asalto \nMartus encontrará los mismo boletines que si buscará por:\n   prisión #And# asalto\n\nCuando use "#And#" y "#Or#", los términos de búsqueda son agrupados desde el comienzo (usando los campos de los boletines o dentro de un mismo campo). Por ejemplo, si busca los términos:\n   prisión #Or# cárcel #And# juicio , Martus buscará por los boletines que tengan las palabras prisión o cárcel, y tengan la palabra juicio. Si busca los términos:\n   prisión #And# cárcel #Or# juicio \nMartus buscará todos los boletines que tengan las palabras prisión y cárcel, o tengan la palabra juicio.\n
 
-#______________________________=You can use the word #Or# or #And#, or you can use the English words "or" and "and" to search.\n\nYou need to put spaces before and after any #Or# / #And# keywords you use in your search.\n
--f689-field:FancySearchHelpMsg3=Puede usar las palabras #Or# o #And#, o tambien puede usar las palabras en inglés "or" y "and" en su búsqueda.\n\nNecesita poner espacios alrededor de las palabras #Or# / #And# que use en sus búsquedas.\n
+#______________________________=You can use the word #Or# or #And#, or you can use the English words "#OrEnglish#" and "#AndEnglish#" to search.\n\nYou need to put spaces before and after any #Or# / #And# keywords you use in your search.\n
+-1573-field:FancySearchHelpMsg3=Puede usar las palabras #Or# o #And#, o tambien puede usar las palabras en inglés "#OrEnglish#" y "#AndEnglish#" en su búsqueda.\n\nNecesita poner espacios alrededor de las palabras #Or# / #And# que use en sus búsquedas.\n
 
 #______________________________________=This file name should be unique and identifiable to you but we recommend not using your user name.  Each file will be generated with this name and its number sequence.
 -02b6-field:GetShareFileNameDescription=El nombre del archivo tiene que ser único e identificable. Le recomendamos no usar su nombre de usuario.  Cada archivo generado usará el nombre que escoja y un número en secuencia.
@@ -610,11 +610,11 @@
 #_______________________________=Organization (required)
 -2f27-field:OrganizationRequired=Organización (requerido)
 
-#__________________________________=You have the option to include or exclude the selected bulletin's private information in this print out. If you choose to print private data, it will be visible to anyone who sees the print out.
--2050-field:PrintPrivateDataMessage=Tiene la opción de incluir o excluir la información privada del boletín seleccionado al imprimirlo. Si elije imprimir los datos privados personas con accesso a la copia impresa podrán leer toda su información privada.
+#__________________________________=You have the option to include or exclude the selected bulletin's private information in this print out or report file. If you choose to print private data, it will be visible to anyone who sees the print out or report file.
+-2bd3-field:PrintPrivateDataMessage=<Tiene la opción de incluir o excluir la información privada del boletín seleccionado al imprimirlo. Si elije imprimir los datos privados personas con accesso a la copia impresa podrán leer toda su información privada.
 
-#_______________________________=You can print the bulletin contents to a printer, or send the formatted output to a disk file.
--4058-field:PrintToPrinterOrDisk=Puede imprimir el contenido del boletín a una impresora, o enviar la información a un archivo.
+#_______________________________=You can print the bulletin contents to a printer, or send the formatted report output to a file.
+-41ba-field:PrintToPrinterOrDisk=Puede imprimir el contenido del boletín a una impresora, o enviar un reporte a un archivo.
 
 #_________________________________=Public Information Files
 -90f9-field:PublicInformationFiles=Archivos de información pública
@@ -905,7 +905,7 @@
 -198c-field:confirmCloneMySealedAsDrafteffect=Al oprimir Sí, se va a crear una nueva revisión de este boletín con la misma información. 
 
 #______________________________________=The date range you entered is invalid.  The end date occurs before the begin date.
--6a92-field:confirmDateRageInvalidcause=El rango de fechas ingresado no es válido.  La fecha final occurre antes que la fecha inicial.
+-a745-field:confirmDateRageInvalidcause=El rango de fechas ingresado no es válido.  La fecha final occurre antes que la fecha inicial.
 
 #_______________________________________=Answering Yes will take you back to the date range to fix the problem.  Answering No will revert the date back to its original value.
 -8eb7-field:confirmDateRageInvalideffect=Oprima Si para corregir el problema.  Oprima No para revertir al valor original de la fecha.
@@ -1570,7 +1570,7 @@
 #________________=Title
 -768e-field:title=Título
 
-#_____________________________=Spanish 2.8
+#_____________________________=Spanish 2.8 
 -b4ae-field:translationVersion=Español 2.8
 
 #___________________=Username
