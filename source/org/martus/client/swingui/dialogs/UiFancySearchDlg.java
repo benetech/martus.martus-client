@@ -32,13 +32,16 @@ import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.HashMap;
+
 import javax.swing.Box;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
 import org.martus.client.search.FancySearchGridEditor;
 import org.martus.client.search.SearchTreeNode;
 import org.martus.client.swingui.UiMainWindow;
+import org.martus.client.swingui.grids.GridTableModel;
 import org.martus.common.MiniLocalization;
 import org.martus.swing.UiButton;
 import org.martus.swing.UiWrappedTextPanel;
@@ -69,6 +72,7 @@ public class UiFancySearchDlg extends UiSearchDlg
 		UiDialogLauncher dlgLauncher = new UiDialogLauncher(mainWindow.getCurrentActiveFrame(), localization);
 		grid = FancySearchGridEditor.create(mainWindow.getStore(), dlgLauncher);
 		grid.setText(getPreviousSearch());
+		clearGridIfAnyProblems();
 
 		JPanel instructionPanel = new JPanel();
 		instructionPanel.setLayout(new BorderLayout());
@@ -103,6 +107,29 @@ public class UiFancySearchDlg extends UiSearchDlg
 		getRootPane().setDefaultButton(search);
 		
 		return search;
+	}
+	
+	private void clearGridIfAnyProblems()
+	{
+		try
+		{
+			GridTableModel model = grid.getGridTableModel(); 
+			for(int row = 0; row < model.getRowCount(); ++row)
+			{
+				for(int col = 0; col < model.getColumnCount(); ++col)
+				{
+					model.getFieldSpecForCell(row, col);
+				}
+			}
+		}
+		catch (RuntimeException e)
+		{
+			// unable to restore previous search for some reason.
+			// most likely, the choices have changed, 
+			// perhaps because we are now in a different UI language
+			grid.setText("");
+		}
+		
 	}
 	
 	private class HelpListener implements ActionListener

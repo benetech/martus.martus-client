@@ -76,6 +76,11 @@ abstract public class UiGrid extends UiField
 			e.printStackTrace();
 		}
 	}
+	
+	public GridTableModel getGridTableModel()
+	{
+		return model;
+	}
 
 	public GridData getGridData()
 	{
