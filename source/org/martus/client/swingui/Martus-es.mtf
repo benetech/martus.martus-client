@@ -710,7 +710,7 @@
 -9acd-field:SearchGridHeaderField=Campo(s) donde buscar
 
 #_____________________________=Compare how?
--693f-field:SearchGridHeaderOp=¿Comparar como?
+-693f-field:SearchGridHeaderOp=Comparar como
 
 #________________________________=Search for...
 -f864-field:SearchGridHeaderValue=Términos de búsqueda...
