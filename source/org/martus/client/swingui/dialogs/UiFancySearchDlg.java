@@ -32,12 +32,10 @@ import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.HashMap;
-
 import javax.swing.Box;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-
 import org.martus.client.search.FancySearchGridEditor;
 import org.martus.client.search.SearchTreeNode;
 import org.martus.client.swingui.UiMainWindow;
@@ -97,9 +95,11 @@ public class UiFancySearchDlg extends UiSearchDlg
 		Utilities.addComponentsRespectingOrientation(buttonBox, new Component[] {search, Box.createHorizontalGlue(),help, cancel });
 
 		JPanel mainPanel = new JPanel();
-		mainPanel.setBorder(new EmptyBorder(5,5,5,5));
+		int borderWidth = 5;
+		mainPanel.setBorder(new EmptyBorder(borderWidth,borderWidth,borderWidth,borderWidth));
 		mainPanel.setLayout(new BorderLayout());
 		mainPanel.add(instructionPanel,BorderLayout.NORTH);
+		setGridSize(grid, borderWidth);
 		mainPanel.add(grid.getComponent(),BorderLayout.CENTER);
 		mainPanel.add(buttonBox,BorderLayout.SOUTH);
 
@@ -107,6 +107,12 @@ public class UiFancySearchDlg extends UiSearchDlg
 		getRootPane().setDefaultButton(search);
 		
 		return search;
+	}
+	
+	private static void setGridSize(FancySearchGridEditor gridEditor, int borderWidth)
+	{
+		int gridWidth = Utilities.getViewableScreenSize().width - 4*borderWidth;
+		gridEditor.getComponent().setPreferredSize(new Dimension(gridWidth, 300));
 	}
 	
 	private void clearGridIfAnyProblems()
