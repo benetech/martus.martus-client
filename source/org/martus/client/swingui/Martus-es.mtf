@@ -611,7 +611,7 @@
 -2f27-field:OrganizationRequired=Organización (requerido)
 
 #__________________________________=You have the option to include or exclude the selected bulletin's private information in this print out or report file. If you choose to print private data, it will be visible to anyone who sees the print out or report file.
--2bd3-field:PrintPrivateDataMessage=<Tiene la opción de incluir o excluir la información privada del boletín seleccionado al imprimirlo. Si elije imprimir los datos privados personas con accesso a la copia impresa podrán leer toda su información privada.
+-2bd3-field:PrintPrivateDataMessage=Tiene la opción de incluir o excluir la información privada del boletín seleccionado al imprimirlo. Si elije imprimir los datos privados personas con accesso a la copia impresa o el archivo de reporte podrán leer toda su información privada.
 
 #_______________________________=You can print the bulletin contents to a printer, or send the formatted report output to a file.
 -41ba-field:PrintToPrinterOrDisk=Puede imprimir el contenido del boletín a una impresora, o enviar un reporte a un archivo.
