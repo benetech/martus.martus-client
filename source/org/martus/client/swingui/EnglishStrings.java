@@ -798,7 +798,7 @@ public class EnglishStrings
 		"Martus searches are not case-sensitive in English and other purely Latin character languages, " +
 		"so it doesn't matter whether a word is capitalized or not.\n\n" +
 	"Searches include attachment filenames, but not content of attachments.\n\n" +
-	"You can search both standard and custom fields.\n",
+	"You can search both standard and custom fields.\n\n",
 "field:FancySearchHelpMsg2=---Search tips---\n\n" +
 	"Martus will find any text you enter whether it's a complete word or part of a larger word. " +
 		"For example, if you search for the word prison, you'll see bulletins that include the words prison, imprison, and imprisonment. " +
