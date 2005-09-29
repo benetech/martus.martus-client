@@ -1,8 +1,8 @@
 ﻿# Martus Client Translation File
 # Language code:  es
 # Language name:  Spanish
-# Exported date:  Tue Sep 27 20:23:11 PDT 2005
-# Client version: 2.8 Internal
+# Exported date:  Thu Sep 29 10:48:11 PDT 2005
+# Client version: 2.8
 # Client build:   20050927.1666
 #
 # This file MUST be saved in UTF-8 format!
@@ -1571,7 +1571,7 @@
 -768e-field:title=Título
 
 #_____________________________=Spanish 2.8 
--b4ae-field:translationVersion=Español 2.8
+-4e03-field:translationVersion=Español 2.8
 
 #___________________=Username
 -84c2-field:username=Nombre de usuario
