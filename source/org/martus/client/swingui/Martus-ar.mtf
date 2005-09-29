@@ -1,8 +1,8 @@
 ﻿# Martus Client Translation File
 # Language code:  ar
 # Language name:  Arabic
-# Exported date:  Thu Sep 29 10:49:38 PDT 2005
-# Client version: 2.8
+# Exported date:  Thu Sep 29 15:13:31 PDT 2005
+# Client version: 2.8 
 # Client build:   20050928.1668
 #
 # This file MUST be saved in UTF-8 format!
@@ -74,7 +74,7 @@
 #
 
 #________________________=Show all bulletins on this server and on this computer.
--e9a2-button:AllSummaries=عرض جميع النشرات على هذا الحاسوب و على الخادم
+-e9a2-button:AllSummaries=عرض جميع النشرات على هذا الجهاز وعلى الخادم
 
 #________________=Back
 -b52b-button:Back=السابق
@@ -128,7 +128,7 @@
 -6c53-button:PrintPublicAndPrivate=تضمين المعلومات الخاصة
 
 #_______________________=Send report output to a file
--89b9-button:PrintToDisk=<إرسال المعلومات إلى ملف على القرص>
+-89b9-button:PrintToDisk=إرسال التقرير إلى ملف على القرص
 
 #__________________________=Print to a printer
 -7bac-button:PrintToPrinter=إرسال إلى الطابعة
@@ -311,13 +311,13 @@
 -4a0b-field:AuthorRequired=الكاتب (ضروري)
 
 #___________________________________=Your key is required to read your private bulletin information or to create new bulletins.  To ensure that you'll always have access to your data, it is extremely important to keep a backup of your key.\n\nMartus offers two methods for backing up your key, either of which may be used, but we strongly recommend using both backup methods.  The first method creates a single, password encrypted key back up file onto removable media (e.g. floppy disk, cd, USB storage) or a network drive; the second method backs up the key in #TotalNumberOfFilesInBackup# separate pieces (not encrypted with your password) onto multiple floppy disks (or other removable media).\n
--ff3d-field:BackupKeyPairGeneralInfo=شفرتك ضرورية لقراءة معلومات نشرتك الخاصة أو لإنشاء نشرة جديدة. لضمان الوصول لبياناتك بشكل مستمر، من المهم جدا أن تحتفظ بنسخة احتياطية من شفرتك. \n\nMartusيوفر طريقتين للاحتفاظ بنسخة احتياطية من ملف شفرة دخولك، ويمكن استخدام أي منها ولكننا نوصي بشدة باستخدام كليهما.  تعتمد الطريقة الأولى على إنشاء نسخة احتياطية واحدة من ملف شفرة دخولك يتم تشفيرها بكلمة مرور ويتم تخزينها على وسائط تخزينية متنقلة (مثل الأقراص المرنة والأقراص المضغوطة أو أجهزة UBS للتخزين) أو على قرص الشبكة. أما الطريقة الثانية فهي طريقة التجزيء السري وتعتمد على حفظ نسخة احتياطية من ملف شفرة دخولك  في #TotalNumberOfFilesInBackup#  في أجزاء مختلفة (غير مشفرة بكلمة مرورك) على أقراص مرنة متعددة (أو وسائل تخزين أخرى محمولة).  
+-ff3d-field:BackupKeyPairGeneralInfo=شفرتك ضرورية لقراءة معلومات نشرتك الخاصة أو لإنشاء نشرة جديدة. لضمان الوصول لبياناتك بشكل مستمر، من المهم جدا أن تحتفظ بنسخة احتياطية من شفرتك. \n\nMartusيوفر طريقتين للاحتفاظ بنسخة احتياطية من ملف شفرة دخولك، ويمكن استخدام أي منها ولكننا نوصي بشدة باستخدام كليهما.  تعتمد الطريقة الأولى على إنشاء نسخة احتياطية واحدة من ملف شفرة دخولك يتم تشفيرها بكلمة مرور ويتم تخزينها على وسائط تخزين متنقلة (مثل الأقراص المرنة والأقراص المضغوطة أو أجهزة UBS للتخزين) أو على قرص الشبكة. أما الطريقة الثانية فهي طريقة التجزيء السري وتعتمد على حفظ نسخة احتياطية من ملف شفرة دخولك  في #TotalNumberOfFilesInBackup#  في أجزاء مختلفة (غير مشفرة بكلمة مرورك) على أقراص مرنة متعددة (أو وسائل تخزين أخرى محمولة).  
 
 #________________________________________________=This method breaks up your key into #TotalNumberOfFilesInBackup# pieces, any #MinimumNumberOfFilesNeededForRecovery# of which will be required to reconstruct the key without requiring a password.  If you forget your login name or your password, this method is the only way you can restore your key.\n\nOnce the #TotalNumberOfFilesInBackup# files have been written to removable media disks, you should distribute them to #TotalNumberOfFilesInBackup# different people whom you will remember, but each of whom don't know who you have given the other files to.  Do not store any of the disks together.\n\nTo restore your key, first retrieve any #MinimumNumberOfFilesNeededForRecovery# of the original #TotalNumberOfFilesInBackup# disks, and then select 'Restore Account' and 'Restore account from multiple disks' when signing into Martus.\n
--9551-field:BackupKeyPairToSecretShareInformation=تُقسّم هذه الطريقة ملف شفرة دخولك إلى #TotalNumberOfFilesInBackup# من القطع، أي #MinimumNumberOfFilesNeededForRecovery# والذي سيكون ضروريا لإعادة تركيب الشفرة بدون اللجوء إلى كلمة المرور. إذا نسيت اسم التسجيل الخاص بك أو كلمة المرور الخاصة بك، يكون هذا الإجراء الطريقة الوحيدة لاسترجاع شفرتك. \n\nبعد أن يتم كتابة #TotalNumberOfFilesInBackup# إلى أقراص التخزين المحمولة قم بتوزيعها على  #TotalNumberOfFilesInBackup# أشخاص مختلفين تتذكرهم لكن لا يعرف كل واحد هوية الأشخاص الآخرين الحاملين للأقراص. لا تقم بتخزين الأقراص مع بعضها في نفس المكان. \n\n لاسترجاع شفرتك قم أولا باسترداد أي  #MinimumNumberOfFilesNeededForRecovery# من القرص الأصلي لـ #TotalNumberOfFilesInBackup# ثم قم بتحديد ’استرجاع حساب’ و ’استرجاع حساب من أقراص متعددة’ عندما تسجل دخولك إلى Martus.\n
+-9551-field:BackupKeyPairToSecretShareInformation=تُقسّم هذه الطريقة ملف شفرة دخولك إلى #TotalNumberOfFilesInBackup# من الأجزاء، أي #MinimumNumberOfFilesNeededForRecovery# والذي سيكون ضروريا لإعادة تركيب الشفرة بدون اللجوء إلى كلمة المرور. إذا نسيت اسم التسجيل الخاص بك أو كلمة المرور الخاصة بك، يكون هذا الإجراء الطريقة الوحيدة لاسترجاع شفرتك. \n\nبعد أن يتم كتابة #TotalNumberOfFilesInBackup# إلى أقراص التخزين المحمولة قم بتوزيعها على  #TotalNumberOfFilesInBackup# أشخاص مختلفين تتذكرهم لكن لا يعرف كل واحد هوية الأشخاص الآخرين الحاملين للأقراص. لا تقم بتخزين الأقراص مع بعضها في نفس المكان. \n\n لاسترجاع شفرتك قم أولا باسترداد أي  #MinimumNumberOfFilesNeededForRecovery# من القرص الأصلي لـ #TotalNumberOfFilesInBackup# ثم قم بتحديد ’استرجاع حساب’ و ’استرجاع حساب من أقراص متعددة’ عندما تسجل دخولك إلى Martus.\n
 
 #____________________________________________________=Please insert disk #
--b877-field:BackupRecoverKeyPairInsertNextDiskMessage=لطفا قم بإدخال قرص
+-b877-field:BackupRecoverKeyPairInsertNextDiskMessage=الرجاء إدخال قرص
 
 #_______________________________________________=Backup complete, please give each disk to someone you trust, so that if you forget your user name and/or password in the future you can recreate your account.  You will need #MinimumNumberOfFilesNeededForRecovery# of these disks to recreate your account.
 -fba9-field:BackupSecretShareCompleteInformation=تم النسخ الاحتياطي، الرجاء إعطاء كل قرص إلى شخص تأتمنه حتى إذا نسيت اسم المستخدم و/أو كلمة المرور الخاصيّن بك في المستقبل ستستطيع إعادة إنشاء حسابك. ستحتاج إلى#MinimumNumberOfFilesNeededForRecovery#  من هذه الأقراص لإعادة إنشاء حسابك. 
@@ -467,7 +467,7 @@
 -5c38-field:DeleteKeypair=حذف ملف شفرتي الدخول 
 
 #____________________________________=You can only delete draft bulletins from the server that are not currently on your computer.
--8ded-field:DeleteServerDraftsMessage=يمكنك فقط حذف المسودات الموجودة على الخادم ولا توجد حاليا على حاسوبك.
+-8ded-field:DeleteServerDraftsMessage=يمكنك فقط حذف المسودات الموجودة على الخادم ولا توجد حاليا على جهازك.
 
 #______________________=Do not prompt
 -448d-field:DonotPrompt=لا تنبيه
@@ -494,7 +494,7 @@
 -db93-field:ErrorPreviousBackupShareExists=يوجد ملف مجزأ سابق. يجب عليك حفظ كل ملف على قرص بمفرده. 
 
 #_____________________________________________=No appropriate backup file was found on this disk, please try a different disk.
--618a-field:ErrorRecoverNoAppropriateFileFound=لم يتم العثور على ملف مجزأ صالح على هذا القرص، لطفا جرّب قرصا آخر. 
+-618a-field:ErrorRecoverNoAppropriateFileFound=لم يتم العثور على ملف مجزأ صالح على هذا القرص، الرجاء استعمال قرص آخر. 
 
 #________________________________=An error occurred reading this key backup file.
 -b106-field:ErrorRecoverShareDisk=توجد مشكلة في قراءة هذا الملف المجزأ. 
@@ -515,10 +515,10 @@
 -0b4e-field:ExportedBulletins=النشرات المُصّدرة
 
 #______________________________=---Overview---\n\nMartus searches all versions of every bulletin (both public and private, sealed and draft) in every folder, including the Discarded Bulletins folder.  When the search is completed, the Search Results folder lists copies of the bulletins found in your search.\n\nYou can search for words in any language.  Martus searches are not case-sensitive in English and other purely Latin character languages, so it doesn't matter whether a word is capitalized or not.\n\nSearches include attachment filenames, but not content of attachments.\n\nYou can search both standard and custom fields.\n\n
--42b4-field:FancySearchHelpMsg1=--- نظرة عامة يقوم ---  \n\nMartus ببحث في جميع الإصدارات لكل نشرة (عامة وخاصة ومختومة ومسودة) في كل ملف بما في ذلك ملف النشرات المتجاهلة. عند الانتهاء من البحث يعرض ملف نتائج البحث قائمة لنسخ النشرات التي تم العثور عليها خلال البحث. \n\nبإمكانك القيام ببحث عن كلمات في أي لغة. لا يقوم Martus ببحث متحسس لحالة الأحرف في اللغة الإنجليزية وفي اللغات الأخرى التي تستعمل أحرفا لاتينية ولذلك فليس من المهم إدخال كلمة بأحرف كبيرة أم لا. \n\nيتضمن البحث أسماء الملفات المرفقة لكن لا يقوم ببحث عن مضمون الملف. \n\nبإمكانك إجراء بحث عادي أو بحث الحقول المخصصة.\n\n
+-42b4-field:FancySearchHelpMsg1=--- نظرة عامة يقوم --- \n\nMartus ببحث في جميع الإصدارات لكل نشرة (عامة وخاصة ومختومة ومسودة) في كل ملف بما في ذلك ملف النشرات المتجاهلة. عند الانتهاء من البحث يعرض ملف نتائج البحث قائمة لنسخ النشرات التي تم العثور عليها خلال البحث. \n\nبإمكانك القيام ببحث عن كلمات في أي لغة. لا يقوم Martus ببحث متحسس لحالة الأحرف في اللغة الإنجليزية وفي اللغات الأخرى التي تستعمل أحرفا لاتينية ولذلك فليس من المهم إدخال كلمة بأحرف كبيرة أم لا. \n\nيتضمن البحث أسماء الملفات المرفقة لكن لا يقوم ببحث عن مضمون الملف. \n\nبإمكانك إجراء بحث عادي أو بحث الحقول المخصصة.\n\n
 
-#______________________________=---Search tips---\n\nMartus will find any text you enter whether it's a complete word or part of a larger word. For example, if you search for the word prison, you'll see bulletins that include the words prison, imprison, and imprisonment. Likewise, if you search for the word prison, Martus will find bulletins that include attachments with names such as photos-prison.jpg and prisoners-report.doc.\n\nTo search for an exact phrase, type it with quotation marks around the phrase  (e.g.  "Witness Testimony"). If you do not put quotation marks around the phrase, Martus will search for the words individually.\n\nUse the word "#Or#" to broaden your search, or the word "#And#" to narrow it.  You can use the #And# / #Or# dropdowns to specify different fields you want search across (e.g. you want to search for bulletins that have "Last Saved Date" in the last week and have a certain author).  If you want to search on multiple text values within a single bulletin field, you can use #Or# or #And# in-between words in the "Search For..." entry box.  For example, if you search "Any Field" for:\n   prison #Or# jail\nyou'll see a list of bulletins that contain either word anywhere in the bulletin. If you search for:\n   prison #And# assault \nyou'll see a list of bulletins that contain both words. The keyword "#And#" is implied, so if you search for:\n   prison assault \nMartus will find bulletins the same bulletins as if you searched for:\n   prison #And# assault\n\nWhen you use both "#And#" and "#Or#", your search terms are grouped from the beginning of your list (either across bulletin fields or within a particular field). For example, if you enter:\n   prison #Or# jail #And# trial \nin the "Search For..." entry box, Martus will search for any bulletins that contain either of the words prison or jail, and also contain the word trial. But if you enter:\n   prison #And# jail #Or# trial \nMartus will search for any bulletins that contain both the words prison and jail, or contain the word trial.\n
--ec7d-field:FancySearchHelpMsg2=--تلميحات البحث---\n\nيقوم Martus بالعثور على أي نص تدخله سواء كان كلمة كاملة أو جزءا من كلمة أطول. فعلى سبيل المثال إذا قمت ببحث عن كلمة سجن، ستشاهد نشرات تحتوي على كلمات سجن و سجناء. ونفس الشيء بالنسبة لبحث يحتوي على كلمة سجن، سيقوم Martus بالبحث في نشرات تتضمن ملفات مرفقة تحتوي على كلمات مثل صور سجن.JPG وتقرير سجن.doc .\n\nللبحث عن جملة محددة، أدخل الجملة بين علامتي الاقتباس (مثال: "تصريح شاهد"). إذا لم تضع الجملة بين علامتي الاقتباس سيقوم Martus بالبحث عن الكلمات على انفصال. \n\nاستخدم الكلمة "  #Or# "  لتوسيع البحث أو الكلمة " #And# "  لتحديد البحث. بإمكانك استخدام القوائم المنسدلة  #And#  #Or#  لتحديد حقول مختلفة تريد بحثها (مثال: إذا أردت البحث في نشرات تحتوي على "آخر تاريخ حفظ"  في حقل الأسبوع الماضي من قبل مؤلف معين). إذا أردت القيام ببحث عن قيم نص متعددة في حقل نشرة واحدة بإمكانك استخدام  #Or#  أو  #And#   بين الكلمات في مربع الإدخال "بحث عن...." على سبيل المثال إذا أردت البحث في "أي حقل" عن:\n سجن  #Or#  حبس\n ستشاهد قائمة في النشرات التي تحتوي على كلا الكلمتين في أي حقل في النشرة.  الكلمة الرئيسية " #And# " هي ضمنية ولذلك إذا قمت ببحث عن: \n اعتداء سجن يقوم \nMartus بالعثور على نفس النشرات التي قد يعثر عليها إذا قمت بالبحث عن: \n سجن  #And#  اعتداء\n\n إذا استخدمت كلا من "#And#" و "#Or#" تكون شروط البحث مجموعة منذ بداية القائمة (سواء عبر حقول النشرة أو داخل حقل معين). على سبيل المثال إذا قمت بإدخال: \n سجن  #Or#   حبس  #And#   محاكمة \n في مربع الإدخال "بحث عن..." سيقوم Martus بالبحث عن النشرات التي تحتوي على أي من الكلمتين سجن و حبس والتي تحتوي أيضا على كلمة محاكمة. لكن إذا قمت بإدخال: \n  سجن  #And#  حبس  #Or#  محاكمة يقوم  \nMartus  بالبحث عن النشرات التي تحتوي على الكلمتين سجن و حبس أو تحتوي على كلمة محاكمة. \n
+#______________________________=---Search tips---\n\nMartus will find any text you enter whether it's a complete word or part of a larger word. For example, if you search for the word prison, you'll see bulletins that include the words prison, imprison, and imprisonment. Likewise, if you search for the word prison, Martus will find bulletins that include attachments with names such as photos-prison.jpg and prisoners-report.doc.\n\nTo search for an exact phrase, type it with quotation marks around the phrase  (e.g.  "Witness Testimony"). If you do not put quotation marks around the phrase, Martus will search for the words individually.\n\nUse the word "#Or#" to broaden your search, or the word "#And#" to narrow it.  You can use the #And# / #Or# dropdowns to specify different fields you want search across (e.g. you want to search for bulletins that have "Last Saved Date" in the last week and have a certain author).  If you want to search on multiple text values within a single bulletin field, you can use #Or# or #And# in-between words in the "Search For..." entry box.  For example, if you search "Any Field" for:\n   prison #Or# jail\nyou'll see a list of bulletins that contain either word anywhere in the bulletin. If you search for:\n   prison #And# assault \nyou'll see a list of bulletins that contain both words. The keyword "#And#" is implied, so if you search for:\n   prison assault \nMartus will find bulletins the same bulletins as if you searched for:\n   prison #And# assault\n\nWhen you use both "#And#" and "#Or#", your search terms are grouped from the beginning of your list (either across bulletin fields or within a particular field). For example, if you enter:\n   prison #Or# jail #And# trial \nin the "Search For..." entry box, Martus will search for any bulletins that contain either of the words prison or jail, and also contain the word trial. But if you enter:\n   prison #And# jail #Or# trial \nMartus will search for any bulletins that contain both the words prison and jail, or contain the word trial.\n 
+-ec7d-field:FancySearchHelpMsg2=--- تلميحات البحث ---\n\nيقوم Martus بالعثور على أي نص تدخله سواء كان كلمة كاملة أو جزءا من كلمة أطول. فعلى سبيل المثال إذا قمت ببحث عن كلمة سجن، ستشاهد نشرات تحتوي على كلمات سجن و سجناء. ونفس الشيء بالنسبة لبحث يحتوي على كلمة سجن، سيقوم Martus بالبحث في نشرات تتضمن ملفات مرفقة تحتوي على كلمات مثل صور سجن.JPG وتقرير سجن.doc .\n\nللبحث عن جملة محددة، أدخل الجملة بين علامتي الاقتباس (مثال: "تصريح شاهد"). إذا لم تضع الجملة بين علامتي الاقتباس سيقوم Martus بالبحث عن الكلمات على انفصال. \n\nاستخدم الكلمة "  #Or# "  لتوسيع البحث أو الكلمة " #And# "  لتحديد البحث. بإمكانك استخدام القوائم المنسدلة  #And#  #Or#  لتحديد حقول مختلفة تريد بحثها (مثال: إذا أردت البحث في نشرات تحتوي على "آخر تاريخ حفظ"  في حقل الأسبوع الماضي من قبل مؤلف معين). إذا أردت القيام ببحث عن قيم نص متعددة في حقل نشرة واحدة بإمكانك استخدام  #Or#  أو  #And#   بين الكلمات في مربع الإدخال "بحث عن...." على سبيل المثال إذا أردت البحث في "أي حقل" عن:\n سجن  #Or#  حبس\n ستشاهد قائمة في النشرات التي تحتوي على كلا الكلمتين في أي حقل في النشرة.  الكلمة الرئيسية " #And# " هي ضمنية ولذلك إذا قمت ببحث عن: \n اعتداء سجن يقوم \nMartus بالعثور على نفس النشرات التي قد يعثر عليها إذا قمت بالبحث عن: \n سجن  #And#  اعتداء\n\n إذا استخدمت كلا من "#And#" و "#Or#" تكون شروط البحث مجموعة منذ بداية القائمة (سواء عبر حقول النشرة أو داخل حقل معين). على سبيل المثال إذا قمت بإدخال: \n سجن  #Or#   حبس  #And#   محاكمة \n في مربع الإدخال "بحث عن..." سيقوم Martus بالبحث عن النشرات التي تحتوي على أي من الكلمتين سجن و حبس والتي تحتوي أيضا على كلمة محاكمة. لكن إذا قمت بإدخال: \n  سجن  #And#  حبس  #Or#  محاكمة يقوم  \nMartus  بالبحث عن النشرات التي تحتوي على الكلمتين سجن و حبس أو تحتوي على كلمة محاكمة. \n
 
 #______________________________=You can use the word #Or# or #And#, or you can use the English words "#OrEnglish#" and "#AndEnglish#" to search.\n\nYou need to put spaces before and after any #Or# / #And# keywords you use in your search.\n
 -1573-field:FancySearchHelpMsg3=بإمكانك استخدام الكلمات  #Or#   أو #And#  أو بإمكانك استخدام الكلمات الإنجليزية “#OrEnglish#” و “#AndEnglish#” للقيام بالبحث. \n\nيجب أن تترك فضاءات قبل وبعد كلمات  #Or#  و  #And#  التي تستخدمها في البحث.\n
@@ -560,10 +560,10 @@
 -65cc-field:HelpOnCreatingNewPassword=عندما تختار كلمة مرور، من المهم ألاّ تستخدم كلمة مرور يسهل على الغير تخمينها، مثل الأسماء وتواريخ الأحداث الهامة أو كلمات بسيطة. قم بإضافة أرقام لحروف عشوائية واجعل كلمة المرور طويلة. تذكر كلمة مرورك ولا تبوح بها لأحد. لن يصل أحد لكلمة مرورك إذا نسيتها، لذا إذا كتبتها على ورقة، ضعها في مكان آمن.
 
 #____________________________________=No accounts exist on this computer.  To create a new account click OK.  Otherwise you can click on the Restore Account tab to restore an account which was previously backed up.
--7d69-field:HowToCreateInitialAccount=لا توجد حسابات على هذا الحاسوب. لإنشاء حساب جديد انقر "موافق." و إلاّ فانقُر على زر "استعادة حساب" لاستعادة حساب قمت بحفظه احتياطيا مسبقا. 
+-7d69-field:HowToCreateInitialAccount=لا توجد حسابات على هذا الجهاز. لإنشاء حساب جديد انقر "موافق." و إلاّ فانقُر على زر "استعادة حساب" لاستعادة حساب قمت بحفظه احتياطيا مسبقا. 
 
 #________________________________=One or more accounts already exist on this computer. To create an additional account with a new username and passphrase, click OK.
--02f2-field:HowToCreateNewAccount=يوجد حسابا أو أكثر على هذا الحاسوب بالفعل. لإنشاء حساب إضافي باسم مستخدم و كلمة مرور جديدين، انقر "موافق."
+-02f2-field:HowToCreateNewAccount=يوجد حسابا أو أكثر على هذا الجهاز بالفعل. لإنشاء حساب إضافي باسم مستخدم و كلمة مرور جديدين، انقر "موافق."
 
 #_________________________________=The version of this translation is not compatible with this version of Martus.  It is recommend that you do not continue to use this translation version and go to (http://www.martus.org/downloads) for the appropriate version.
 -2c0e-field:IncompatibleMtfVersion=ترجمة هذا الإصدار غير مواءمة لهذا الإصدار من Martus . من الأفضل أن تتوقف عن استعمال هذا الإصدار وأن تنزل الإصدار المناسب من موقعنا  (http://www.martus.org/downloads)
@@ -581,7 +581,7 @@
 -da24-field:ModifyBulletinHQInfo=يمكن لعدد #NumberOfHQs# من حسابات المركز الرئيسي أن يطلع على هذه المعلومات الخاصة
 
 #_____________________________=Please enter a name for the file you wish to export.
--95ed-field:NameOfExportedFile=لطفا قم بإدخال اسما للملف الذي تود تصديره.
+-95ed-field:NameOfExportedFile=الرجاء إدخال اسما للملف الذي تود تصديره.
 
 #__________________________=No Headquarters accounts selected for this bulletin.
 -2b9f-field:NoHQsConfigured=لم يتم اختيار حسابات مركز رئيسي لهذه النشرة
@@ -611,22 +611,22 @@
 -2f27-field:OrganizationRequired=المنظمة (ضروري)
 
 #__________________________________=You have the option to include or exclude the selected bulletin's private information in this print out or report file. If you choose to print private data, it will be visible to anyone who sees the print out or report file.
--2bd3-field:PrintPrivateDataMessage=<بإمكانك تضمين أو استثناء المعلومات الخاصة للنشرة المحددة في هذه الطباعة. إذا قررت طباعة البيانات الخاصة سيتمكن كل شخص يقرأ الوثيقة من الاطلاع على البيانات الخاصة. >
+-2bd3-field:PrintPrivateDataMessage=بإمكانك تضمين أو استثناء المعلومات الخاصة للنشرة المحددة في طباعة هذا التقرير. إذا قررت طباعة البيانات الخاصة سيتمكن كل شخص يقرأ الوثيقة أو تقرير الطباعة من الاطلاع على البيانات الخاصة. 
 
 #_______________________________=You can print the bulletin contents to a printer, or send the formatted report output to a file.
--41ba-field:PrintToPrinterOrDisk=<بإمكانك إرسال محتويات النشرة إلى الطابعة أو إرسال البيانات المنسقة إلى ملف على القرص.>
+-41ba-field:PrintToPrinterOrDisk=بإمكانك إرسال محتويات النشرة إلى الطابعة أو إرسال التقرير المنسق إلى ملف على القرص.
 
 #_________________________________=Public Information Files
 -90f9-field:PublicInformationFiles=ملفات المعلومات العامة
 
 #___________________________________=Clicking on Ok will do the following on this computer:
--70e6-field:QuickEraseFollowingItems=إذا نقرت على "موافق" فسيحدث الآتي على هذا الحاسوب:
+-70e6-field:QuickEraseFollowingItems=إذا نقرت على "موافق" فسيحدث الآتي على هذا الجهاز:
 
 #___________________________________=Exit Martus when complete.
 -23dc-field:QuickEraseWillExitMartus=قم بإنهاء   Martusبعد إتمام العمل.
 
 #_______________________________________=This will NOT remove any bulletins from the server, any Martus files copied outside of the Martus directory, or any of your bulletins or Martus files on another computer.
--8ee9-field:QuickEraseWillNotRemoveItems=لن يتم بذلك إزالة أية نشرات من الخادم أو أية ملفات تابعة لبرنامج Martus تم نسخها خارج مساره أو أية نشرات أو ملفات تخص برنامج Martus على حاسوب آخر.
+-8ee9-field:QuickEraseWillNotRemoveItems=لن يتم بذلك إزالة أية نشرات من الخادم أو أية ملفات تابعة لبرنامج Martus تم نسخها خارج مساره أو أية نشرات أو ملفات تخص برنامج Martus على جهاز آخر.
 
 #____________________________________=Delete your Martus key, bulletins, folders, and configuration information (such as your Headquarters, server, and custom field settings).
 -cf3b-field:QuickEraseWillRemoveItems=حذف شفرة و نشرات و مجلدات و معلومات التهيئة (مثل الخادم و مركزك الرئيسي و أوضاع الحقول المعدلة) لبرنامج Martus الخاص بك.
@@ -683,10 +683,10 @@
 -828a-field:RetrieveMySealedBulletinSummaries=استرجاع ملخصات نشراتي المختومة
 
 #___________________________________=All bulletins retrieved will still remain on the server.\nYou can only retrieve bulletins that are not currently on your computer.
--fdb6-field:RetrieveSummariesMessage=جميع النشرات التي تم استرجاعها لا تزال باقية على الخادم. \nيمكنك فقط استرجاع النشرات غير المتواجدة على حاسوبك.
+-fdb6-field:RetrieveSummariesMessage=جميع النشرات التي تم استرجاعها لا تزال باقية على الخادم. \nيمكنك فقط استرجاع النشرات غير المتواجدة على جهازك.
 
 #____________________________________=Please retype your username and password for verification.
--67cd-field:RetypeUserNameAndPassword=لطفا أعد كتابة اسم المستخدم و كلمة المرور للتأكيد
+-67cd-field:RetypeUserNameAndPassword=الرجاء إعادة كتابة اسم المستخدم و كلمة المرور للتأكيد
 
 #________________________________=Scrub data before deleting
 -7a0b-field:ScrubDataBeforeDelete=كشط البيانات قبل الحذف
@@ -905,19 +905,19 @@
 -198c-field:confirmCloneMySealedAsDrafteffect= بالنقر على نعم سيتم إنشاء نشرة جديدة تحتوي مبدئيا على جميع المعلومات ذاتها. 
 
 #______________________________________=The date range you entered is invalid.  The end date occurs before the begin date.
--a745-field:confirmDateRageInvalidcause=<مدى التاريخ الذي أدخلته غير صحيح. يحل تاريخ الإنهاء قبل تاريخ البدء.>
+-a745-field:confirmDateRageInvalidcause=مدى التاريخ الذي أدخلته غير صحيح. يحل تاريخ الإنهاء قبل تاريخ البدء.
 
 #_______________________________________=Answering Yes will take you back to the date range to fix the problem.  Answering No will revert the date back to its original value.
 -8eb7-field:confirmDateRageInvalideffect=إذا أجبت نعم ستُعاد إلى مدى التاريخ لتصحيح الخطأ. إذا أجبت لا سيعود التاريخ إلى قيمته الأولى.
 
 #___________________________________=You are about to delete your Martus data from this computer.
--ee9a-field:confirmDeleteMyDatacause=سوف تحذف بيانات برنامج Martus الخاصة بك من على هذا الحاسوب.
+-ee9a-field:confirmDeleteMyDatacause=سوف تحذف بيانات برنامج Martus الخاصة بك من على هذا الجهاز.
 
 #____________________________________=Answering Yes will delete your data and exit Martus.  Answering No will return you to Martus with nothing deleted.
 -7f90-field:confirmDeleteMyDataeffect=إذا أجبت ب"نعم" فسوف يتم حذف بياناتك و يُغلق برنامج Martus. أما إذا أجبت ب"لا" فسوف تعود لبرنامج Martus دون حذف شيء. 
 
 #__________________________________________=Please Note: There are draft bulletins that have been modified and not yet sent to a server.  Do you still want to exit?
--49ee-field:confirmDraftUploadRemindercause=لطفا ملاحظة: توجد مسودات تم تعديلها و لم يتم إرسالها لخادم. هل مازلت تريد الإنهاء؟
+-49ee-field:confirmDraftUploadRemindercause=ملاحظة: توجد مسودات تم تعديلها و لم يتم إرسالها لخادم. هل مازلت تريد الإنهاء؟
 
 #___________________________________________=Clicking on Yes will exit Martus, and leave the unsent bulletins.  They will be sent the next time you run Martus and connect to a server.
 -7c7f-field:confirmDraftUploadRemindereffect=بالنقر على نعم سينغلق Martus و سوف تُترك النشرات التي لم ترسل. ولكن سيتم إرسال هذه النشرات إلى الخادم عندما تقوم بتشغيل Martus مرة أخرى. 
@@ -977,7 +977,7 @@
 -3170-field:confirmNewerConfigInfoFileFoundeffect=إذا أجبت ب "نعم" فسوف تستمر في استخدام الإصدار القديم من Martus. أما إذا أجبت ب "لا" فسوف تخرج من البرنامج حتى يتسن لك تحديثه للإصدار الأحدث.
 
 #___________________________________________________________=Warning: the bulletin you are currently viewing is not yours.  Attachments can contain viruses, or malicious programs harmful to your computer.
--8e42-field:confirmNotYourBulletinViewAttachmentAnywayscause=تحذير: النشرة التي تستعرضها الآن لا تخصك. قد تحتوي المرفقات على فيروسات أو برامج خبيثة تضر بحاسوبك. 
+-8e42-field:confirmNotYourBulletinViewAttachmentAnywayscause=تحذير: النشرة التي تستعرضها الآن لا تخصك. قد تحتوي المرفقات على فيروسات أو برامج خبيثة تضر بجهازك. 
 
 #____________________________________________________________=Clicking on Yes will display the attachment, clicking on No will not try to display the attachment.
 -b6bf-field:confirmNotYourBulletinViewAttachmentAnywayseffect=بالنقر على نعم سيتم استعراض المرفق، بالنقر على لا لن يتم استعراضه.
@@ -1001,7 +1001,7 @@
 -824f-field:confirmPrinterWarningeffect=بالنقر على نعم سيتم عرض مربع الطابعة مرة أخرى حتى تستطيع إعادة اختيار إطار و حجم الورق التلقائي. بالنقر على لا سيتم طبع الوثيقة.
 
 #_______________________________________________=Please Note: There are bulletins that have not been sent to a server. If you continue these bulletins will be lost.
--1c29-field:confirmQuickEraseOutboxNotEmptycause=لطفا ملاحظة: توجد نشرات بمجلد الصادر لم يتم إرسالها للخادم. إذا واصلت هذا الإجراء فسوف تضيع هذه النشرات. 
+-1c29-field:confirmQuickEraseOutboxNotEmptycause=ملاحظة: توجد نشرات بمجلد الصادر لم يتم إرسالها للخادم. إذا واصلت هذا الإجراء فسوف تضيع هذه النشرات. 
 
 #________________________________________________=Clicking on Yes will bring you to a confirmation dialog, Clicking on No will return you to Martus without erasing anything.
 -ffe3-field:confirmQuickEraseOutboxNotEmptyeffect= بالنقر على "نعم" سيظهر لك مربع تأكيد، أما إذا نقرت على "لا" فسوف تعود إلى برنامج Martus دون حذف شيء.
@@ -1031,7 +1031,7 @@
 -3252-field:confirmRemoveAttachmenteffect=ستتم إزالة المرفقات المُختارة إلى الأبد من هذه النشرة.
 
 #___________________________________=You are about to delete all Martus data from this computer.
--af45-field:confirmRemoveMartuscause=سوف تقوم بحذف جميع بيانات Martus من هذا الحاسوب.
+-af45-field:confirmRemoveMartuscause=سوف تقوم بحذف جميع بيانات Martus من هذا الجهاز.
 
 #____________________________________=Answering Yes will delete all data, uninstall Martus and exit the program.  Answering No will return you to Martus with nothing deleted.
 -b6a1-field:confirmRemoveMartuseffect=إذا أجبت ب"نعم" سوف تحذف جميع البيانات و ستتم إزالة Martus و الخروج من البرنامج. أما إذا أجبت ب"لا" فسوف تعود لبرنامج Martus دون حذف شيء.
@@ -1091,7 +1091,7 @@
 -bf33-field:confirmUndoCustomFieldseffect=لن تحتوي النشرات الجديدة التي ينشئها هذا الحساب على أية حقول مُعدّلة.
 
 #_____________________________________=Please Note: There are bulletins that have not been sent to a server.  Do you still want to exit?
--d0f3-field:confirmUploadRemindercause=لطفا ملاحظة: توجد نشرات بمجلد الصادر لم يتم إرسالها لخادم بعد. هل مازلت تريد الإنهاء. 
+-d0f3-field:confirmUploadRemindercause=ملاحظة: توجد نشرات بمجلد الصادر لم يتم إرسالها لخادم بعد. هل مازلت تريد الإنهاء. 
 
 #______________________________________=Clicking on Yes will exit Martus, and leave the unsent bulletins.  They will be sent the next time you run Martus and connect to a server.
 -7c7f-field:confirmUploadRemindereffect=بالنقر على نعم سيتم إنهاء عمل Martus، و ستبقى النشرات التي لم تُرسل وسيتم إرسالها في المرة القادمة التي تبدأ فيها عمل Martus. 
@@ -1109,13 +1109,13 @@
 -e63e-field:confirmUseBulletinsDraftCustomFieldseffect=إذا أجبت '#UseOldCustomFields#'  سيتم استخدام الحقول المخصصة القديمة و جميع بيانات النشرة. إذا أجبت '#UseNewCustomFields#' سيتم استخدام الحقول المخصصة الجديدة ونسخ جميع الحقول المشابهة إلى مسودة النشرة ولكنك قد تفقد بعضا من بيانات النشرة الأصلية. 
 
 #________________________________________________=Warning: acctmap.txt file in your account's packets directory is missing or is corrupt.  This may indicate someone has tried to tamper with your data or could be caused by a hardware error.
--61cb-field:confirmWarnMissingAccountMapFilecause=تحذير: لقد ضاع أو تم إتلاف ملف acctmap.txt الموجود في مجلد packets بحسابك. يُشير ذلك إلى أن شخصا حاول العبث ببياناتك أو أن هناك مشكلة بمكونات حاسوبك الصلبة.
+-61cb-field:confirmWarnMissingAccountMapFilecause=تحذير: لقد ضاع أو تم إتلاف ملف acctmap.txt الموجود في مجلد packets بحسابك. يُشير ذلك إلى أن شخصا حاول العبث ببياناتك أو أن هناك مشكلة بمكونات جهازك الصلبة.
 
 #_________________________________________________=Clicking on Yes will delete all of your bulletins and continue to load Martus.  Clicking on No will exit Martus so you can try to recover or repair this file manually.
 -20ee-field:confirmWarnMissingAccountMapFileeffect=بالنقر على نعم سيتم حذف جميع نشراتك و سيستمر تحميل  Martus. بالنقر على لا سيتم غلق Martus حتى يتسنى لك استرجاع أو إصلاح هذا الملف يدويا. 
 
 #__________________________________________________________________=Warning: acctmap.txt.sig file is missing or is corrupt in your account's packets directory.  If you have just upgraded to a new version of Martus this warning is harmless and you should click on No.  Otherwise this may indicate someone has tried to tamper with your data or could be caused by a hardware error.
--e1b1-field:confirmWarnMissingOrCorruptAccountMapSignatureFilecause=تحذير: لقد ضاع أو تم إتلاف ملف acctmap.txt.sig الموجود في مجلد packets بحسابك. إذا كنت قد قمت بتحديث إصدار Martus بإصدار جديد فلا تعبأ بهذا التحذير و ينبغي عليك النقر على لا. و إلاّ فقد يُشير ذلك إلى أن شخصا حاول العبث ببياناتك أو أن هناك مشكلة بمكونات حاسوبك الصلبة. 
+-e1b1-field:confirmWarnMissingOrCorruptAccountMapSignatureFilecause=تحذير: لقد ضاع أو تم إتلاف ملف acctmap.txt.sig الموجود في مجلد packets بحسابك. إذا كنت قد قمت بتحديث إصدار Martus بإصدار جديد فلا تعبأ بهذا التحذير و ينبغي عليك النقر على لا. و إلاّ فقد يُشير ذلك إلى أن شخصا حاول العبث ببياناتك أو أن هناك مشكلة بمكونات جهازك الصلبة. 
 
 #___________________________________________________________________=Clicking on Yes will try to generate a new acctmap.txt.sig file and continue to load Martus.  Clicking on No will exit Martus.
 -3ca4-field:confirmWarnMissingOrCorruptAccountMapSignatureFileeffect=بالنقر على نعم ستتم محاولة تكوين ملف acctmap.txt.sig و الاستمرار في تفعيل Martus. بالنقر على لا سينتهي عمل البرنامج. 
@@ -1130,7 +1130,7 @@
 -f068-field:confirmWarningSwitchToNormalKeyboardcause=تحذير! إن استخدام لوحة المفاتيح العادية لإدخال كلمة المرور يُحد من أمن نظام Martus بشدة، و يجعل من السهل لأي متطفل استعراض بياناتك الخاصة.
 
 #_____________________________________________________=If this is a Headquarters computer, it is especially important to use the on-screen keyboard, because an attacker could gain access to all the private data that you are authorized to view.
--4379-field:confirmWarningSwitchToNormalKeyboardeffect=إذا كان هذا حاسوب مركز رئيسي، من الأهمية بمكان أن تستخدم لوحة مفاتيح النافذة لأن متطفلا قد يصل إلى جميع البيانات الخاصة المصرح لك فقط بالإطلاع عليها. 
+-4379-field:confirmWarningSwitchToNormalKeyboardeffect=إذا كان هذا جهاز مركز رئيسي، من الأهمية بمكان أن تستخدم لوحة مفاتيح النافذة لأن متطفلا قد يصل إلى جميع البيانات الخاصة المصرح لك فقط بالإطلاع عليها. 
 
 #_________________________________________________=A single encrypted backup file of your key has yet to be created.
 -71c0-field:confirmbackupIncompleteEncryptedNeeded=ما زال يجب عليك إنشاء ملف احتياطي لشفرتي دخولك مُشفر بكلمة مرور. 
@@ -1241,25 +1241,25 @@
 -040a-field:notifyAccountCodeWrongcause=لا يتفق الكود العام مع الذي أدخلته.
 
 #____________________________________=A copy of Martus is already running on this computer. You must close that copy before starting a new copy.
--614e-field:notifyAlreadyRunningcause=تعمل نسخة من Martus بالفعل على هذا الحاسوب. يجب أن تقوم بإغلاق تلك النسخة قبلما تقوم بتشغيل نسخة جديدة.
+-614e-field:notifyAlreadyRunningcause=تعمل نسخة من Martus بالفعل على هذا الجهاز. يجب أن تقوم بإغلاق تلك النسخة قبلما تقوم بتشغيل نسخة جديدة.
 
 #_______________________________________________=You currently are viewing this version of the bulletin.
 -8a02-field:notifyAlreadyViewingThisVersioncause= أنت الآن تستعرض هذه النسخة من النشرة.
 
 #________________________________________=The item you chose was not a file, please choose a file to add as an attachment to this bulletin.
--0de2-field:notifyAttachmentNotAFilecause=المفردة التي اخترتها ليست بملف، لطفا اختر ملف لإضافته كمرفق لهذه النشرة. 
+-0de2-field:notifyAttachmentNotAFilecause=المفردة التي اخترتها ليست بملف، الرجاء اختيار ملف لإضافته كمرفق لهذه النشرة. 
 
 #______________________________________________=Martus could not authenticate the server. The server may have been compromised.  Please verify your server configuration and contact the server operator.
--f27c-field:notifyAuthenticateServerFailedcause=لم يستطع Martus التحقق من هوية الخادم. ربما تم اختراق هذا الخادم. لطفا تحقق من تهيئة الخادم و اتصل بالقائم عليه.
+-f27c-field:notifyAuthenticateServerFailedcause=لم يستطع Martus التحقق من هوية الخادم. ربما تم اختراق هذا الخادم. الرجاء التحقق من تهيئة الخادم و اتصل بالقائم عليه.
 
 #________________________________________________=The bulletin version you are trying to view is currently not on your system.
--8579-field:notifyBulletinVersionNotInSystemcause= نسخة النشرة التي تريد استعراضها لا تتواجد حاليا على نظام حاسوبك.
+-8579-field:notifyBulletinVersionNotInSystemcause= نسخة النشرة التي تريد استعراضها لا تتواجد حاليا على نظام جهازك.
 
 #____________________________________=The selected server is not responding. Before you choose a server, you must be connected to the internet, and that server must be available.
 -38fd-field:notifyConfigNoServercause=الخادم المُختار لا يستجيب. قبلما تختار خادما، يجب عليك الاتصال بالانترنت وبذلك يصبح هذا الخادم متاحا.
 
 #______________________________________________________=Please confirm that the default details retrieved are correct.
--af6b-field:notifyConfirmCorrectDefaultDetailsDatacause=لطفا قم بتأكيد أن التفاصيل التلقائية التي تم استرجاعها صحيحة.
+-af6b-field:notifyConfirmCorrectDefaultDetailsDatacause=الرجاء التأكد من أن التفاصيل التلقائية التي تم استرجاعها صحيحة.
 
 #_________________________________________=An error occurred while trying to create your account.
 -c8e7-field:notifyCreateAccountFailedcause=حدثت مشكلة أثناء محاولة إنشاء حسابك. 
@@ -1340,7 +1340,7 @@
 -aed9-field:notifyExportingCustomizationTemplateSuccesscause=لقد تم تصدير قالب التحوير بنجاح.
 
 #___________________________________________=The original files have not been deleted from your computer, you must delete them manually if you wish.
--8965-field:notifyFilesWillNotBeDeletedcause=لم يتم حذف الملفات الأصلية من حاسوبك، يجب عليك حذفهم يدويا إن شئت.
+-8965-field:notifyFilesWillNotBeDeletedcause=لم يتم حذف الملفات الأصلية من جهازك، يجب عليك حذفهم يدويا إن شئت.
 
 #___________________________________________=An error occurred during the conversion of your folders. You can still use Martus, but if the Outbox or Drafts folders still exist, do not use them.
 -73de-field:notifyFolderMigrationFailedcause= حدثت مشكلة أثناء تحويل مجلداتك. مازال يمكنك استخدام Martus و لكن لا تستخدم مجلد الصادر أو مجلد المسودات إذا كانوا موجودين.
@@ -1355,7 +1355,7 @@
 -0785-field:notifyHQKeyAlradyExistscause= لقد قمت بإضافة هذا الحساب بالفعل إلى قائمة مركزك الرئيسي.
 
 #_______________________________________________=The Headquarters label you entered is already assigned to another Headquarters account.  Please use a different label.
--91ca-field:notifyHeadquarterLabelDuplicatecause=اسم المركز الرئيسي الذي أدخلته هو مخصص بالفعل لحساب مركز رئيسي آخر. لطفا استخدم اسما آخر.
+-91ca-field:notifyHeadquarterLabelDuplicatecause=اسم المركز الرئيسي الذي أدخلته هو مخصص بالفعل لحساب مركز رئيسي آخر. الرجاء استخدام اسم آخر.
 
 #___________________________________________________________=Successfully imported customization template.
 -c78c-field:notifyImportingCustomizationTemplateSuccesscause= لقد تم استيراد قالب التحوير بنجاح.
@@ -1367,7 +1367,7 @@
 -984b-field:notifyInvalidServerNamecause=يجب أن يكون لديك اسم للخادم أو عنوان IP له.
 
 #___________________________________=Please select a Headquarters first.
--1d19-field:notifyNoHQsSelectedcause=لطفا قم باختيار مركز رئيسي أولا.
+-1d19-field:notifyNoHQsSelectedcause=الرجاء اختيار مركز رئيسي أولا.
 
 #________________________________________=Operation completed.
 -1a65-field:notifyOperationCompletedcause=تم إنجاز العملية 
@@ -1388,10 +1388,10 @@
 -eb6e-field:notifyPasteErrorcause=حدثت مشكلة أثناء لصق النشرة(ات). قد يكون ملفا أو أكثر تالفا.
 
 #________________________________________________=No bulletin selected.  Please select the bulletin you wish to preview.
--b51e-field:notifyPreviewNoBulletinsSelectedcause=لم يتم استعراض أية نشرة. لطفا اختر النشرة التي تريد استعراضها.
+-b51e-field:notifyPreviewNoBulletinsSelectedcause=لم يتم استعراض أية نشرة. الرجاء اختيار  النشرة التي تريد استعراضها.
 
 #____________________________________________=You may only preview one bulletin at a time.  Please only select one bulletin to preview.
--fbee-field:notifyPreviewOneBulletinOnlycause=يمكنك استعراض نشرة واحدة فقط في المرة. لطفا اختر نشرة واحدة فقط لاستعراضها.
+-fbee-field:notifyPreviewOneBulletinOnlycause=يمكنك استعراض نشرة واحدة فقط في المرة. الرجاء اختيار نشرة واحدة فقط لاستعراضها.
 
 #_________________________________________=Finished
 -355b-field:notifyPrintToDiskCompletecause=إنهاء
@@ -1412,13 +1412,13 @@
 -f50c-field:notifyRecoveryOfKeyShareCompletecause=لقد قمت باسترجاع شفرتي دخولك من ملفات التجزئة السرية بنجاح. من المهم جدا أن تقوم الآن بإعادة توزيع ملفات التجزئة السرية الخاصة بك. نوصي كذلك بنسخ شفرتي دخولك احتياطيا كملف مُشفَر، على الرغم من أنك لن تحتاج إعادة إنشاء ملفات التجزئة السرية ثانية. 
 
 #_______________________________________________=To restore your key, first you must find the backup file you saved previously.  Using the 'Restore Key from Backup File' dialog box find the file on your computer's hard drive, a network drive, or removable media disk then click the Open button.  Martus will then ask you for your user name and password and restore your key so you can log in normally and access your account.
--4a6f-field:notifyRecoveryProcessBackupFilecause=لاستعادة ملف شفرة دخولك، يجب أولا أن تجد الملف الاحتياطي الذي سبق لك حفظه. باستخدام مربع حوار "استعادة حساب بملف شفرة دخول احتياطي"، قم بإيجاد الملف على القرص الصلب لحاسوبك أو على قرص بالشبكة أو على قرص مرن ثم انقر زر الفتح. سيطلب منك Martus بعد ذلك اسم المستخدم و كلمة المرور لاستعادة شفرة دخولك حتى يتسنى لك الدخول لحسابك بشكل عادي. 
+-4a6f-field:notifyRecoveryProcessBackupFilecause=لاستعادة ملف شفرة دخولك، يجب أولا أن تجد الملف الاحتياطي الذي سبق لك حفظه. باستخدام مربع حوار "استعادة حساب بملف شفرة دخول احتياطي"، قم بإيجاد الملف على القرص الصلب لجهازك أو على قرص بالشبكة أو على قرص مرن ثم انقر زر الفتح. سيطلب منك Martus بعد ذلك اسم المستخدم و كلمة المرور لاستعادة شفرة دخولك حتى يتسنى لك الدخول لحسابك بشكل عادي. 
 
 #_____________________________________________=You will now have to provide #MinimumNumberOfFilesNeededForRecovery# out of the #TotalNumberOfFilesInBackup# files you previously saved when you backed up your key.
 -f571-field:notifyRecoveryProcessKeySharecause=يجب عليك الآن إدخال #MinimumNumberOfFilesNeededForRecovery#  من #TotalNumberOfFilesInBackup#  ملفات التي سبق لك حفظها عندما قمت بحفظ نسخة احتياطية لشفرتك.
 
 #______________________________________=Please remember your username and password. It cannot be recovered.
--e9e0-field:notifyRememberPasswordcause=لطفا تذكر دائما اسم المستخدم و كلمة المرور. فلن يمكن استعادتهما.
+-e9e0-field:notifyRememberPasswordcause=تذكر دائما اسم المستخدم و كلمة المرور. فلن يمكن استعادتهما.
 
 #____________________________________________________=One or more bulletins were unable to be resent because you are not authorized to upload them.
 -d248-field:notifyResendErrorNotAuthorizedToSendcause= م يتسن إعادة إرسال واحدة أو أكثر من النشرات لأنه غير مصرح لك بإرسالها للخادم.
@@ -1448,13 +1448,13 @@
 -efe3-field:notifyServerCodeWrongcause= الكود العام للخادم لا يضاهي الكود الذي أدخلته.
 
 #_________________________________=Server Error, the server may be down, please try again later
--7d92-field:notifyServerErrorcause=مشكلة خادم، قد يكون الخادم مُعطل، لطفا حاول ثانية لاحقا
+-7d92-field:notifyServerErrorcause=مشكلة خادم، قد يكون الخادم مُعطل، الرجاء المحاولة ثانية لاحقا
 
 #_______________________________________=The Server has responded with invalid account information.
 -76c7-field:notifyServerInfoInvalidcause=لقد استجاب الخادم بمعلومات حساب غير صالحة.
 
 #____________________________________________=Unable to make a secure connection with the Martus backup server.\n\nMartus can connect to a server using either of two ports.  When trying to connect to this server, neither port is accessible, probably because both ports are being blocked by a local firewall or by your ISP.\n\nWe recommend that any firewalls be configured to allow outgoing connections on both TCP port 443 and 987.  Please contact your LAN administrator or office technical support staff to verify that your firewall configuration allows this.\n\nIf the problem persists, you may need to select a different server.
--8dc9-field:notifyServerSSLNotRespondingcause=غير قادر على إقامة اتصال آمن بخادم Martus الاحتياطي. \n\nيمكن للبرنامج الاتصال بخادم عبر منفذيّن. عند محاولة الاتصال بهذا الخادم، لا أجد أي من المنفذيّن مفتوحا، ربما لأن حائط ناري على حاسوبك أو ISP الخاص بك كانا قد سدا هاذين المنفذيّن. \n\nنوصي بتهيئة أية حوائط نارية حتى تسمح بالاتصال الصادر على منفذي TCP رقم 443 و 987. لطفا اتصل بمدير الشبكة الداخلية LAN أو أفراد الدعم التقني بالمكتب للتحقق من أن تهيئة حائطك الناري يسمح بذلك. \n\nإذا استمرت المشكلة، ربما قد تحتاج لاختيار خادم مختلف.
+-8dc9-field:notifyServerSSLNotRespondingcause=غير قادر على إقامة اتصال آمن بخادم Martus الاحتياطي. \n\nيمكن للبرنامج الاتصال بخادم عبر منفذيّن. عند محاولة الاتصال بهذا الخادم، لا أجد أي من المنفذيّن مفتوحا، ربما لأن حائط ناري على جهازك أو ISP الخاص بك كانا قد سدا هاذين المنفذيّن. \n\nنوصي بتهيئة أية حوائط نارية حتى تسمح بالاتصال الصادر على منفذي TCP رقم 443 و 987. الرجاء الاتصال بمدير الشبكة الداخلية LAN أو أفراد الدعم التقني بالمكتب للتحقق من أن تهيئة حائطك الناري يسمح بذلك. \n\nإذا استمرت المشكلة، ربما قد تحتاج لاختيار خادم مختلف.
 
 #____________________________________________=Unable to save the selected attachment for some reason.  Try saving it to a different file.
 -4a93-field:notifyUnableToSaveAttachmentcause=غير قادر على حفظ المرفق المُختار لسبب ما. حاول حفظه بملف آخر. 
@@ -1463,10 +1463,10 @@
 -db36-field:notifyUnableToViewAttachmentcause=غير قادر على استعراض المرفق المُختار لسبب ما.
 
 #_____________________________________=An unexpected error has occurred. Please report this problem to help@martus.org.
--3cb4-field:notifyUnexpectedErrorcause=حدثت مشكلة غير متوقعة. لطفا أبلغ عن هذه المشكلة للعنوان التالي: help@martus.org
+-3cb4-field:notifyUnexpectedErrorcause=حدثت مشكلة غير متوقعة. الرجاء الإبلاغ عن هذه المشكلة للعنوان التالي: help@martus.org
 
 #_______________________________________=The user name you chose already exists on this system, please choose a different user name.
--bbb0-field:notifyUserAlreadyExistscause=اسم المستخدم الذي اخترته يتواجد بالفعل على هذا النظام، لطفا اختر اسم مستخدم مختلف.
+-bbb0-field:notifyUserAlreadyExistscause=اسم المستخدم الذي اخترته يتواجد بالفعل على هذا النظام، الرجاء اختيار اسم مستخدم مختلف.
 
 #___________________________________=User Name must not be blank
 -d8fe-field:notifyUserNameBlankcause=لا يمكن أن يكون اسم المستخدم فارغا 
@@ -1570,23 +1570,23 @@
 #________________=Title
 -768e-field:title=العنوان 
 
-#_____________________________=Arabic 2.8
+#_____________________________=Arabic 2.8  
 -4e03-field:translationVersion= العربية 2.8
 
 #___________________=Username
 -84c2-field:username=اسم المستخدم 
 
 #________________________________=Please wait to sign in again ...
--d901-field:waitAfterFailedSignIn=لطفا انتظر لتدخل مرة أخرى... 
+-d901-field:waitAfterFailedSignIn=الرجاء الانتظار لتدخل مرة أخرى... 
 
 #____________________________________=Loading Martus.  Please wait...
 -4d07-field:waitingForBulletinsToLoad=جاري تحميل Martus. رجاء الانتظار...
 
 #______________________________________=Please wait a minute while your account is being created...
--cc6d-field:waitingForKeyPairGeneration=لطفا انتظر دقيقة حتى يتم إنشاء حسابك... 
+-cc6d-field:waitingForKeyPairGeneration=الرجاء الانتظار دقيقة حتى يتم إنشاء حسابك... 
 
 #_________________________________________=You have chosen to permanently delete bulletins from the Discarded Bulletins folder. Even if these bulletins were recently cut or copied, you will not be able to paste them. If they have already been sent to a server, they will remain on the server. This action will only delete them from this computer.
--3fc8-field:warningDeleteMultipleBulletins= لقد اخترت حذف نشرات بصورة نهائية من مجلد النشرات المُلغاة. إذا كنت قد نسخت أو قصصت تلك النشرات حديثا لن يمكنك لصقها بعد ذلك. إذا كان قد تم إرسالها إلى خادم، فسوف تبقى على الخادم. سوف يحذف هذا الفعل تلك النشرات من حاسوبك فقط.
+-3fc8-field:warningDeleteMultipleBulletins= لقد اخترت حذف نشرات بصورة نهائية من مجلد النشرات المُلغاة. إذا كنت قد نسخت أو قصصت تلك النشرات حديثا لن يمكنك لصقها بعد ذلك. إذا كان قد تم إرسالها إلى خادم، فسوف تبقى على الخادم. سوف يحذف هذا الفعل تلك النشرات من جهازك فقط.
 
 #___________________________________________________=NOTE: Copies of one or more of these bulletins exist in one or more other folders. Those copies will not be removed.
 -7d03-field:warningDeleteMultipleBulletinsWithCopies= ملحوظة: توجد نسخ من واحدة أو أكثر من تلك النشرات في مجلد آخر أو أكثر. لن تتم إزالة هذه النسخ.
@@ -1595,7 +1595,7 @@
 -97ce-field:warningDeleteMultipleUnsentBulletins= تحذير: لم يتم إرسال واحدة أو أكثر من هذه النشرات إلى الخادم منذ أن تم إجراء تعديل عليها آخر مرة. سوف يؤد حذفها إلى الحيلولة دون النسخ الاحتياطي لآخر التعديلات التي أجريت عليها.
 
 #______________________________________=You have chosen to permanently delete a bulletin from the Discarded Bulletins folder. Even if this bulletin was recently cut or copied, you will not be able to paste it. If this bulletin has already been sent to a server, it will remain on the server. This action will only delete it from this computer.
--06b6-field:warningDeleteSingleBulletin= لقد اخترت حذف نشرة بصورة نهائية من مجلد النشرات المُلغاة. إذا كنت قد نسخت أو قصصت تلك النشرة حديثا لن يمكنك لصقها بعد ذلك. إذا كان قد تم إرسالها إلى خادم، فسوف تبقى على الخادم. سوف يحذف هذا الفعل تلك النشرة من حاسوبك فقط.
+-06b6-field:warningDeleteSingleBulletin= لقد اخترت حذف نشرة بصورة نهائية من مجلد النشرات المُلغاة. إذا كنت قد نسخت أو قصصت تلك النشرة حديثا لن يمكنك لصقها بعد ذلك. إذا كان قد تم إرسالها إلى خادم، فسوف تبقى على الخادم. سوف يحذف هذا الفعل تلك النشرة من جهازك فقط.
 
 #________________________________________________=NOTE: A copy of this bulletin exists in one or more other folders, and those copies will not be removed.
 -c4bc-field:warningDeleteSingleBulletinWithCopies= ملحوظة: توجد نسخة من هذه النشرة في مجلد آخر أو أكثر. لن تتم إزالة هذه النسخ.
@@ -2024,7 +2024,7 @@
 -9de4-wintitle:DeleteBulletinFile=حذف ملف النشرة 
 
 #__________________________________________=Delete My Data From This Computer
--216c-wintitle:DeleteMyDataFromThisComputer= حذف بياناتي من هذا الحاسوب
+-216c-wintitle:DeleteMyDataFromThisComputer= حذف بياناتي من هذا الجهاز 
 
 #______________________________________=Delete My Drafts From Server
 -b43a-wintitle:DeleteMyDraftsFromServer=احذف مسوداتي من الخادم 
@@ -2114,7 +2114,7 @@
 -f910-wintitle:RecoverShareKeyPair=استعادة من قرص احتياطي 
 
 #_________________________________________=Remove Martus From This Computer
--31b5-wintitle:RemoveMartsFromThisComputer= إزالة Martus من هذا الحاسوب
+-31b5-wintitle:RemoveMartsFromThisComputer= إزالة Martus من هذا الجهاز
 
 #__________________________=Remove Server
 -49c2-wintitle:RemoveServer=إزالة خادم 
