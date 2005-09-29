@@ -85,7 +85,6 @@ public class UiContactInfoDlg extends JDialog implements ActionListener
 		infoRequired.setFont(space.getFont());
 		infoRequired.setRows(2);
 		panel.addOnNewLine(infoRequired);
-		panel.addBlankLine();
 
 		String authorPrompt = localization.getFieldLabel("AuthorRequired");
 		panel.addComponents(new UiLabel(authorPrompt), source);
@@ -96,22 +95,22 @@ public class UiContactInfoDlg extends JDialog implements ActionListener
 		panel.addComponents(new UiLabel(localization.getFieldLabel("webpage")), webpage);
 		panel.addComponents(new UiLabel(localization.getFieldLabel("phone")), phone);
 		panel.addComponents(new UiLabel(localization.getFieldLabel("address")), addressScrollPane);
-		panel.addBlankLine();
-		panel.addOnNewLine(new UiLabel(localization.getFieldLabel("ContactInfoDescriptionOfFields")));
-		panel.addBlankLine();
-
-		UiWrappedTextArea infoFuture = new UiWrappedTextArea(localization.getFieldLabel("ContactInfoFutureUseOfFields"), 60);
+		
+		StringBuffer helpmsg = new StringBuffer();
+		helpmsg.append(localization.getFieldLabel("ContactInfoDescriptionOfFields"));
+		helpmsg.append('\n');
+		helpmsg.append(localization.getFieldLabel("ContactInfoFutureUseOfFields"));
+		helpmsg.append('\n');
+		helpmsg.append(localization.getFieldLabel("ContactInfoUpdateLater"));
+		UiWrappedTextArea infoFuture = new UiWrappedTextArea(helpmsg.toString(), 30);
 		infoFuture.setFont(space.getFont());
-		infoFuture.setRows(3);
+		infoFuture.setRows(infoFuture.getLineCount());
+
 		panel.addOnNewLine(infoFuture);
 
-		panel.addBlankLine();
-		panel.addOnNewLine(new UiLabel(localization.getFieldLabel("ContactInfoUpdateLater")));
-		panel.addBlankLine();
-
 		panel.addComponents(ok, cancel);
-		
-		getContentPane().add(panel);
+		UiScrollPane scroller = new UiScrollPane(panel);
+		getContentPane().add(scroller);
 		getRootPane().setDefaultButton(ok);
 
 		Utilities.centerDlg(this);
