@@ -30,12 +30,10 @@ import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
-
 import javax.swing.Box;
 import javax.swing.ButtonGroup;
 import javax.swing.JComponent;
 import javax.swing.JPanel;
-
 import org.martus.clientside.UiLocalization;
 import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.fieldspec.StandardFieldSpecs;
@@ -59,19 +57,22 @@ public class UiFlexiDateEditor extends UiField
 	private void init()
 	{
 		component = new JPanel();
-		component.setLayout(new BorderLayout());		
-		UiParagraphPanel dateSelection = new UiParagraphPanel();				
+		component.setLayout(new BorderLayout());
+
 		exactDateRB = new UiRadioButton(localization.getFieldLabel("DateExact"), true);			
+		exactDateRB.addItemListener(new RadioItemListener());
+		
 		flexiDateRB = new UiRadioButton(localization.getFieldLabel("DateRange"));		
+		flexiDateRB.addItemListener(new RadioItemListener());
 
 		ButtonGroup radioGroup = new ButtonGroup();
 		radioGroup.add(exactDateRB);
 		radioGroup.add(flexiDateRB);		
 
-		dateSelection.addComponents(exactDateRB, flexiDateRB);
-						
-		flexiDateRB.addItemListener(new RadioItemListener());
-		exactDateRB.addItemListener(new RadioItemListener());
+		UiParagraphPanel dateButtons = new UiParagraphPanel();				
+		dateButtons.addComponents(exactDateRB, flexiDateRB);
+		Box dateSelection = Box.createHorizontalBox();
+		Utilities.addComponentsRespectingOrientation(dateSelection, new Component[] {dateButtons, Box.createHorizontalGlue()});
 		component.add(dateSelection, BorderLayout.NORTH);
 		
 		buildBeginDateBox();
@@ -185,15 +186,15 @@ public class UiFlexiDateEditor extends UiField
 	
 	void removeExactDatePanel()
 	{
-		component.remove(exactDateBox);						
-		component.add(buildFlexiDateBox());																	
+		component.remove(exactDateBox);	
+		component.add(buildFlexiDateBox(), BorderLayout.CENTER);																	
 		component.revalidate();		
 	}
 	
 	void removeFlexidatePanel()
 	{
 		component.remove(flexiDateBox);						
-		component.add(buildExactDateBox());
+		component.add(buildExactDateBox(), BorderLayout.CENTER);
 		component.revalidate();		
 	}
 
