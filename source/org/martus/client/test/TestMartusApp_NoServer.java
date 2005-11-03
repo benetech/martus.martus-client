@@ -1762,7 +1762,11 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		TRACE_BEGIN("testDateConvert");
 		assertEquals("12/13/1987", testAppLocalization.convertStoredDateToDisplay("1987-12-13"));
 		assertEquals("", testAppLocalization.convertStoredDateToDisplay("abc"));
+		assertEquals("", testAppLocalization.convertStoredDateToDisplay("-123-01-03"));
+		assertEquals("", testAppLocalization.convertStoredDateToDisplay("1987-00-13"));
 		assertEquals("", testAppLocalization.convertStoredDateToDisplay("1987-13-13"));
+		assertEquals("", testAppLocalization.convertStoredDateToDisplay("1987-10-00"));
+		assertEquals("", testAppLocalization.convertStoredDateToDisplay("1987-02-32"));
 		TRACE_END();
 	}
 	

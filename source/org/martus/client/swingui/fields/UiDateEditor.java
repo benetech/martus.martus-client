@@ -26,7 +26,6 @@ Boston, MA 02111-1307, USA.
 
 package org.martus.client.swingui.fields;
 
-import java.text.ParseException;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
@@ -188,7 +187,7 @@ public class UiDateEditor extends UiField
 			mCombo.setSelectedIndex(cal.get(Calendar.MONTH));
 			dCombo.setSelectedItem( (new Integer(cal.get(Calendar.DATE))).toString());
 		}
-		catch(ParseException e)
+		catch(Exception e)
 		{
 			System.out.println(e);
 		}
