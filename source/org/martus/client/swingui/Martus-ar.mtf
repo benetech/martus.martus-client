@@ -2,7 +2,7 @@
 # Language code:  ar
 # Language name:  Arabic
 # Exported date:  Thu Sep 29 15:13:31 PDT 2005
-# Client version: 2.8 
+# Client version: 2.8.1 
 # Client build:   20050928.1668
 #
 # This file MUST be saved in UTF-8 format!
@@ -1570,8 +1570,8 @@
 #________________=Title
 -768e-field:title=العنوان 
 
-#_____________________________=Arabic 2.8  
--4e03-field:translationVersion= العربية 2.8
+#_____________________________=Arabic 2.8.1  
+-a3db-field:translationVersion= العربية 2.8.1
 
 #___________________=Username
 -84c2-field:username=اسم المستخدم 
