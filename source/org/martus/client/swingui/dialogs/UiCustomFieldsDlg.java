@@ -40,7 +40,6 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.filechooser.FileFilter;
-import org.martus.client.core.CustomFieldError;
 import org.martus.client.core.CustomFieldTemplate;
 import org.martus.client.core.MartusApp;
 import org.martus.client.swingui.MartusLocalization;
@@ -48,6 +47,7 @@ import org.martus.client.swingui.UiMainWindow;
 import org.martus.clientside.MtfAwareLocalization;
 import org.martus.common.HQKeys;
 import org.martus.common.crypto.MartusCrypto;
+import org.martus.common.fieldspec.CustomFieldError;
 import org.martus.swing.UiButton;
 import org.martus.swing.UiFileChooser;
 import org.martus.swing.UiLabel;
@@ -275,22 +275,22 @@ public class UiCustomFieldsDlg extends JDialog
 		String header2 = mainWindow.getLocalization().getFieldLabel("ErrorCustomFieldHeader2");
 		String header3 = mainWindow.getLocalization().getFieldLabel("ErrorCustomFieldHeader3");
 		String header4 = mainWindow.getLocalization().getFieldLabel("ErrorCustomFieldHeader4");
-		String errorMessage = GetDataAndSpacing(header1, HEADER_SPACING_1);
-		errorMessage += GetDataAndSpacing(header2, HEADER_SPACING_2);
-		errorMessage += GetDataAndSpacing(header3, HEADER_SPACING_3);
-		errorMessage += header4;
-		errorMessage += '\n';
+		StringBuffer errorMessage = new StringBuffer(GetDataAndSpacing(header1, HEADER_SPACING_1));
+		errorMessage.append(GetDataAndSpacing(header2, HEADER_SPACING_2));
+		errorMessage.append(GetDataAndSpacing(header3, HEADER_SPACING_3));
+		errorMessage.append(header4);
+		errorMessage.append('\n');
 		for(int i = 0; i<errors.size(); ++i)
 		{
 			CustomFieldError thisError = (CustomFieldError)errors.get(i);
-			String thisErrorMessage = GetDataAndSpacing(thisError.getCode(), HEADER_SPACING_1);
-			thisErrorMessage += GetDataAndSpacing(thisError.getType(), HEADER_SPACING_2);
-			thisErrorMessage += GetDataAndSpacing(thisError.getTag(), HEADER_SPACING_3);
-			thisErrorMessage += thisError.getLabel();
-			errorMessage += thisErrorMessage;
-			errorMessage += '\n';
+			StringBuffer thisErrorMessage = new StringBuffer(GetDataAndSpacing(thisError.getCode(), HEADER_SPACING_1));
+			thisErrorMessage.append(GetDataAndSpacing(thisError.getType(), HEADER_SPACING_2));
+			thisErrorMessage.append(GetDataAndSpacing(thisError.getTag(), HEADER_SPACING_3));
+			thisErrorMessage.append(thisError.getLabel());
+			errorMessage.append(thisErrorMessage);
+			errorMessage.append('\n');
 		}
-		new UiShowScrollableTextDlg(mainWindow,"ErrorCustomFields", "ok", MtfAwareLocalization.UNUSED_TAG, "ErrorCustomFields", errorMessage, null);
+		new UiShowScrollableTextDlg(mainWindow,"ErrorCustomFields", "ok", MtfAwareLocalization.UNUSED_TAG, "ErrorCustomFields", errorMessage.toString(), null);
 	}
 		
 	private String GetDataAndSpacing(String data, int columnSpacing)

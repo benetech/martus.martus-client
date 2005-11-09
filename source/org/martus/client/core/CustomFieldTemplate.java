@@ -35,6 +35,8 @@ import org.martus.common.FieldCollection.CustomFieldsParseException;
 import org.martus.common.crypto.MartusCrypto;
 import org.martus.common.crypto.MartusCrypto.AuthorizationFailedException;
 import org.martus.common.crypto.MartusCrypto.MartusSignatureException;
+import org.martus.common.fieldspec.CustomFieldError;
+import org.martus.common.fieldspec.CustomFieldSpecValidator;
 import org.martus.common.fieldspec.FieldSpec;
 
 public class CustomFieldTemplate

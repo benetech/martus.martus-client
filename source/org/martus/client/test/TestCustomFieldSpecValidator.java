@@ -28,12 +28,12 @@ package org.martus.client.test;
 
 import java.util.Vector;
 
-import org.martus.client.core.CustomFieldError;
-import org.martus.client.core.CustomFieldSpecValidator;
 import org.martus.common.FieldCollection;
 import org.martus.common.LegacyCustomFields;
 import org.martus.common.bulletin.BulletinConstants;
 import org.martus.common.fieldspec.ChoiceItem;
+import org.martus.common.fieldspec.CustomFieldError;
+import org.martus.common.fieldspec.CustomFieldSpecValidator;
 import org.martus.common.fieldspec.DropDownFieldSpec;
 import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.fieldspec.FieldTypeNormal;
