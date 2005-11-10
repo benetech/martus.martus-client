@@ -260,7 +260,7 @@ public class UiFlexiDateEditor extends UiField
 		
 	public void setText(String newText)
 	{		
-		MartusFlexidate mfd = MartusFlexidate.createFromMartusDateString(newText);
+		MartusFlexidate mfd = MartusFlexidate.createFromBulletinFlexidateFormat(newText);
 		UiDateEditor.setDate(MartusFlexidate.toStoredDateFormat(mfd.getBeginDate()), bgYearCombo, bgMonthCombo, bgDayCombo);
 		UiDateEditor.setDate(MartusFlexidate.toStoredDateFormat(mfd.getEndDate()), endYearCombo, endMonthCombo, endDayCombo);
 			

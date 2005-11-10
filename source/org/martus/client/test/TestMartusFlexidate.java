@@ -128,21 +128,21 @@ public class TestMartusFlexidate extends TestCaseEnhanced
 	
 	public void testCreateFromMartusString()
 	{
-		MartusFlexidate mfd = MartusFlexidate.createFromMartusDateString("2000-01-10");
+		MartusFlexidate mfd = MartusFlexidate.createFromBulletinFlexidateFormat("2000-01-10");
 		assertEquals("2000-01-10", FieldSpec.calendarToYYYYMMDD(mfd.getBeginDate()));	
 		
-		mfd = MartusFlexidate.createFromMartusDateString("2000-01-10,20000101+0");
+		mfd = MartusFlexidate.createFromBulletinFlexidateFormat("2000-01-10,20000101+0");
 		assertEquals("single begin", "2000-01-01", FieldSpec.calendarToYYYYMMDD(mfd.getBeginDate()));
 		assertEquals("single end", "2000-01-01", FieldSpec.calendarToYYYYMMDD(mfd.getEndDate()));
 		
-		mfd = MartusFlexidate.createFromMartusDateString("2000-01-10,20001203+5");
+		mfd = MartusFlexidate.createFromBulletinFlexidateFormat("2000-01-10,20001203+5");
 		assertEquals("range begin","2000-12-03", FieldSpec.calendarToYYYYMMDD(mfd.getBeginDate()));
 		assertEquals("range end","2000-12-08", FieldSpec.calendarToYYYYMMDD(mfd.getEndDate()));						
 	}
 	
 	public void testCreateInvalidDateFromMartusString()
 	{
-		MartusFlexidate mfd = MartusFlexidate.createFromMartusDateString("185[01-10");
+		MartusFlexidate mfd = MartusFlexidate.createFromBulletinFlexidateFormat("185[01-10");
 		assertEquals("1900-01-01", FieldSpec.calendarToYYYYMMDD(mfd.getBeginDate()));					
 	}
 	
