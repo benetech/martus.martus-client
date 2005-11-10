@@ -43,7 +43,7 @@ public class TestMartusFlexidate extends TestCaseEnhanced
 	
 	public void testFlexiDate()
 	{
-		MartusFlexidate mf = new MartusFlexidate("20030105+2");		
+		MartusFlexidate mf = MartusFlexidate.createFromInternalMartusFlexidateString("20030105+2");		
 		assertEquals("20030105+2", mf.getMartusFlexidateString());
 		
 		assertEquals("2003-01-05", FieldSpec.calendarToYYYYMMDD(mf.getBeginDate()));
@@ -52,7 +52,7 @@ public class TestMartusFlexidate extends TestCaseEnhanced
 		
 	public void testFlexiDateOverMonths()
 	{
-		MartusFlexidate mf = new MartusFlexidate("20030105+120");		
+		MartusFlexidate mf = MartusFlexidate.createFromInternalMartusFlexidateString("20030105+120");		
 		assertEquals("20030105+120", mf.getMartusFlexidateString());
 
 		assertEquals("2003-01-05", FieldSpec.calendarToYYYYMMDD(mf.getBeginDate()));
@@ -62,7 +62,7 @@ public class TestMartusFlexidate extends TestCaseEnhanced
 	
 	public void testFlexiDateOverYear()
 	{
-		MartusFlexidate mf = new MartusFlexidate("20020105+366");		
+		MartusFlexidate mf = MartusFlexidate.createFromInternalMartusFlexidateString("20020105+366");		
 		assertEquals("20020105+366", mf.getMartusFlexidateString());
 
 		assertEquals("2002-01-05", FieldSpec.calendarToYYYYMMDD(mf.getBeginDate()));
@@ -72,7 +72,7 @@ public class TestMartusFlexidate extends TestCaseEnhanced
 	
 	public void testExactDate()
 	{
-		MartusFlexidate mf = new MartusFlexidate("20030105");
+		MartusFlexidate mf = MartusFlexidate.createFromInternalMartusFlexidateString("20030105");
 		
 		assertEquals("20030105+0", mf.getMartusFlexidateString());
 		
@@ -105,7 +105,7 @@ public class TestMartusFlexidate extends TestCaseEnhanced
 		assertEquals("2000-01-10", FieldSpec.calendarToYYYYMMDD(mf.getBeginDate()));
 		assertEquals("2000-01-10", FieldSpec.calendarToYYYYMMDD(mf.getEndDate()));
 		
-		mf = new MartusFlexidate("20030105+0");		
+		mf = MartusFlexidate.createFromInternalMartusFlexidateString("20030105+0");		
 		assertEquals("20030105+0", mf.getMartusFlexidateString());
 
 		assertEquals("2003-01-05", FieldSpec.calendarToYYYYMMDD(mf.getBeginDate()));
