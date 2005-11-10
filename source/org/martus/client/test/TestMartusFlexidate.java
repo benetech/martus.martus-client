@@ -145,6 +145,19 @@ public class TestMartusFlexidate extends TestCaseEnhanced
 		MartusFlexidate mfd = MartusFlexidate.createFromMartusDateString("185[01-10");
 		assertEquals("1900-01-01", FieldSpec.calendarToYYYYMMDD(mfd.getBeginDate()));					
 	}
+	
+	public void testCreateMartusDateStringFromDateRange()
+	{
+		assertNull(MartusFlexidate.createMartusDateStringFromDateRange("invalidDate"));
+		String standardDateRange = "1988-02-01,1988-02-05";
+		assertEquals("1988-02-01,19880201+4", MartusFlexidate.createMartusDateStringFromDateRange(standardDateRange));
+
+		String reversedDateRange = "1988-02-05,1988-02-01";
+		assertEquals("1988-02-01,19880201+4", MartusFlexidate.createMartusDateStringFromDateRange(reversedDateRange));
+
+		String noDateRange = "1988-02-05,1988-02-05";
+		assertEquals("1988-02-05,19880205+0", MartusFlexidate.createMartusDateStringFromDateRange(noDateRange));
+	}
 
 	private MartusCalendar getDate(int year, int month, int day)
 	{			
