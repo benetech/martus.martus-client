@@ -245,7 +245,7 @@ public class UiFlexiDateEditor extends UiField
 		if(isExactDate())
 			return MartusFlexidate.toStoredDateFormat(beginDate);
 		
-		return MartusFlexidate.toStoredDateFormat(beginDate, getEndDate());
+		return MartusFlexidate.toBulletinFlexidateFormat(beginDate, getEndDate());
 	}
 
 	private MartusCalendar getBeginDate() 
