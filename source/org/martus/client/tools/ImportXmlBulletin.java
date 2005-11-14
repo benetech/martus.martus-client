@@ -33,6 +33,8 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.Vector;
+import org.martus.client.bulletinstore.BulletinFolder;
+import org.martus.client.bulletinstore.ClientBulletinStore;
 import org.martus.clientside.PasswordHelper;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.bulletin.XmlBulletinsImporter;
@@ -81,17 +83,52 @@ public class ImportXmlBulletin
 		
 		if(!importDirectory.exists() || !importDirectory.isDirectory())
 		{
-			System.err.println("Cannot find directory: " + importDirectory);
+			System.err.println("Cannot find import directory: " + importDirectory);
 			System.exit(3);
 		}
+		
 		
 		if(!keyPairFile.exists() || !keyPairFile.isFile())
 		{
-			System.err.println("Cannot find file: " + keyPairFile);
-			System.exit(3);
+			System.err.println("Cannot find keypair file: " + keyPairFile);
+			System.exit(4);
 		}
 		
-		MartusCrypto security = null;
+		ImportXmlBulletin importer = new ImportXmlBulletin(importDirectory, keyPairFile, prompt);
+		System.out.println("Finished!  " + importer.getNumberOfBulletinsImported() + " bulletins imported into Martus.");
+		System.exit(0);
+	}
+
+	public ImportXmlBulletin()
+	{
+	}
+
+	private ImportXmlBulletin(File importDirectory, File keyPairFile, boolean prompt)
+	{
+		File[] bulletinXmlFilesToImport = getXmlFiles(importDirectory);
+		if(bulletinXmlFilesToImport.length == 0)
+		{
+			System.err.println("Error No XML bulletins found.");
+			System.exit(5);
+		}
+
+		MartusCrypto security = createSecurityObject(keyPairFile, prompt);
+		ClientBulletinStore clientStore = createBulletinStore(security);
+		BulletinFolder importFolder = createImportFolder(security, clientStore, prompt);
+
+		for(int i= 0; i < bulletinXmlFilesToImport.length; ++i)
+		{
+			bulletinsImported += importOneFile(security, clientStore,importFolder,bulletinXmlFilesToImport[i]);
+		}
+	}
+
+	public int getNumberOfBulletinsImported()
+	{
+		return bulletinsImported;
+	}
+
+	private MartusCrypto createSecurityObject(File keyPairFile, boolean prompt)
+	{
 		String userName = "";
 		try
 		{
@@ -107,7 +144,7 @@ public class ImportXmlBulletin
 		catch(Exception e)
 		{
 			System.err.println("ImportXmlBulletin.main UserName: " + e);
-			System.exit(4);
+			System.exit(6);
 		}
 		
 		String userPassPhrase = "";
@@ -126,9 +163,10 @@ public class ImportXmlBulletin
 		catch(Exception e)
 		{
 			System.err.println("ImportXmlBulletin.main Password: " + e);
-			System.exit(4);
+			System.exit(7);
 		}
-
+		
+		MartusCrypto security = null;
 		//TODO security issue here passphrase is a string.
 		char[] passphrase = PasswordHelper.getCombinedPassPhrase(userName, userPassPhrase.toCharArray());
 		try
@@ -138,26 +176,69 @@ public class ImportXmlBulletin
 		catch(Exception e)
 		{
 			System.err.println("Error username or password incorrect: " + e);
-			System.exit(5);
+			System.exit(8);
 		}
+		
 		Arrays.fill(passphrase,'X');
-		File[] bulletinXmlFilesToImport = getXmlFiles(importDirectory);
-		if(bulletinXmlFilesToImport.length == 0)
+		
+		if(security == null)
 		{
-			System.err.println("Error No XML bulletins found.");
-			System.exit(6);
-			
+			System.err.println("Error unable to create Security");
+			System.exit(9);
 		}
-		int bulletinsImported = 0;
-		for(int i= 0; i < bulletinXmlFilesToImport.length; ++i)
-		{
-			bulletinsImported += importOneFile(security, bulletinXmlFilesToImport[i]);
-		}
-		System.out.println("Finished!  " + bulletinsImported + " bulletins imported into Martus.");
-		System.exit(0);
+		return security;
+	}
+
+	private MartusCrypto loadCurrentMartusSecurity(File keyPairFile, char[] passphrase) throws CryptoInitializationException, FileNotFoundException, IOException, InvalidKeyPairFileVersionException, AuthorizationFailedException
+	{
+		MartusCrypto security = new MartusSecurity();
+		FileInputStream in = new FileInputStream(keyPairFile);
+		security.readKeyPair(in, passphrase);
+		in.close();
+		return security;
 	}
 	
-	private static int importOneFile(MartusCrypto security, File bulletinXmlFileToImport)
+	private ClientBulletinStore createBulletinStore(MartusCrypto security)
+	{
+		ClientBulletinStore clientStore = new ClientBulletinStore(security);
+		if(clientStore == null)
+		{
+			System.err.println("Unable to create Bulletin Store:");
+			System.exit(11);
+		}
+		return clientStore;
+	}
+
+	private BulletinFolder createImportFolder(MartusCrypto security, ClientBulletinStore store, boolean prompt)
+	{
+		String folderName = "";
+		try
+		{
+			if(prompt)
+			{
+				System.out.print("Enter import folder name:");
+				System.out.flush();
+			}
+
+			BufferedReader reader = new BufferedReader(new UnicodeReader(System.in));
+			folderName = reader.readLine();
+		}
+		catch(Exception e)
+		{
+			System.err.println("ImportXmlBulletin.main Folder name: " + e);
+			System.exit(10);
+		}
+		
+		BulletinFolder importFolder = store.createOrFindFolder(folderName);
+		if(importFolder == null)
+		{
+			System.err.println("Unable to create Import Folder:" + folderName);
+			System.exit(12);
+		}
+		return importFolder;
+	}
+
+	public int importOneFile(MartusCrypto security, ClientBulletinStore clientStore, BulletinFolder importFolder, File bulletinXmlFileToImport)
 	{
 		try
 		{
@@ -168,7 +249,10 @@ public class ImportXmlBulletin
 			{
 				Bulletin b =  bulletins[j];
 				System.out.println("Importing:" +b.get(Bulletin.TAGTITLE));
+				clientStore.saveBulletin(b);
+				clientStore.addBulletinToFolder(importFolder, b.getUniversalId());
 			}
+			clientStore.saveFolders();
 			return bulletins.length;
 		}
 		catch(FieldSpecVerificationException e)
@@ -187,16 +271,7 @@ public class ImportXmlBulletin
 		return 0;
 	}
 	
-	private static MartusCrypto loadCurrentMartusSecurity(File keyPairFile, char[] passphrase) throws CryptoInitializationException, FileNotFoundException, IOException, InvalidKeyPairFileVersionException, AuthorizationFailedException
-	{
-		MartusCrypto security = new MartusSecurity();
-		FileInputStream in = new FileInputStream(keyPairFile);
-		security.readKeyPair(in, passphrase);
-		in.close();
-		return security;
-	}
-	
-	private static File[] getXmlFiles(File startingDir)
+	private File[] getXmlFiles(File startingDir)
 	{
 		File[] filesToImport = startingDir.listFiles(new FileFilter()
 		{
@@ -209,7 +284,7 @@ public class ImportXmlBulletin
 	}
 	
 	
-	public static String getValidationErrorMessage(Vector errors)
+	public String getValidationErrorMessage(Vector errors)
 	{
 		StringBuffer validationErrorMessages = new StringBuffer();
 		for(int i = 0; i<errors.size(); ++i)
@@ -235,4 +310,5 @@ public class ImportXmlBulletin
 		return validationErrorMessages.toString();  
 	}
 	
+	private int bulletinsImported;
 }
