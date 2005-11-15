@@ -32,6 +32,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.Vector;
 import org.martus.client.bulletinstore.BulletinFolder;
 import org.martus.client.bulletinstore.ClientBulletinStore;
 import org.martus.client.tools.XmlBulletinsImporter.FieldSpecVerificationException;
@@ -41,6 +42,8 @@ import org.martus.common.crypto.MartusSecurity;
 import org.martus.common.crypto.MartusCrypto.AuthorizationFailedException;
 import org.martus.common.crypto.MartusCrypto.CryptoInitializationException;
 import org.martus.common.crypto.MartusCrypto.InvalidKeyPairFileVersionException;
+import org.martus.common.fieldspec.CustomFieldError;
+import org.martus.common.fieldspec.CustomFieldSpecValidator;
 import org.martus.util.UnicodeReader;
 
 public class ImportXmlBulletin
@@ -106,7 +109,7 @@ public class ImportXmlBulletin
 		}
 		catch(FieldSpecVerificationException e)
 		{
-			System.err.println(importer.getValidationErrorMessage(e.getErrors()));
+			System.err.println(getValidationErrorMessage(e.getErrors()));
 			System.exit(6);
 		}
 		catch(Exception e)
@@ -181,7 +184,10 @@ public class ImportXmlBulletin
 			System.err.println("Error username or password incorrect: " + e);
 			System.exit(10);
 		}
-		Arrays.fill(passphrase,'X');
+		finally
+		{
+			Arrays.fill(passphrase,'X');
+		}
 		
 		if(security == null)
 		{
@@ -239,4 +245,31 @@ public class ImportXmlBulletin
 		}
 		return importFolder;
 	}
+
+	static private String getValidationErrorMessage(Vector errors)
+	{
+		StringBuffer validationErrorMessages = new StringBuffer();
+		for(int i = 0; i<errors.size(); ++i)
+		{
+			validationErrorMessages.append("\n\nBulletin " +(i+1)+"\n");
+			CustomFieldSpecValidator currentValidator = (CustomFieldSpecValidator)errors.get(i);
+			Vector validationErrors = currentValidator.getAllErrors();
+			for(int j = 0; j<validationErrors.size(); ++j)
+			{
+				CustomFieldError thisError = (CustomFieldError)validationErrors.get(j);
+				StringBuffer thisErrorMessage = new StringBuffer(thisError.getCode());
+				thisErrorMessage.append(" : ");
+				thisErrorMessage.append(thisError.getType());
+				thisErrorMessage.append(" : ");
+				thisErrorMessage.append(thisError.getTag());
+				thisErrorMessage.append(" : ");
+				thisErrorMessage.append(thisError.getLabel());
+				validationErrorMessages.append(thisErrorMessage);
+				validationErrorMessages.append('\n');
+			}
+		}		
+		validationErrorMessages.append("\n\nTo see a list of the errors, please run Martus go to Options, Custom Fields and change <CustomFields> to <xCustomFields> and press OK.");
+		return validationErrorMessages.toString();  
+	}
+
 }

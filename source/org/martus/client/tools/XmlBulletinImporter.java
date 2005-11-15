@@ -27,13 +27,10 @@ package org.martus.client.tools;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.util.Vector;
 import org.martus.client.bulletinstore.BulletinFolder;
 import org.martus.client.bulletinstore.ClientBulletinStore;
 import org.martus.client.tools.XmlBulletinsImporter.FieldSpecVerificationException;
 import org.martus.common.bulletin.Bulletin;
-import org.martus.common.fieldspec.CustomFieldError;
-import org.martus.common.fieldspec.CustomFieldSpecValidator;
 
 public class XmlBulletinImporter
 {
@@ -67,32 +64,6 @@ public class XmlBulletinImporter
 		}
 		clientStore.saveFolders();
 		return bulletins.length;
-	}
-	
-	public String getValidationErrorMessage(Vector errors)
-	{
-		StringBuffer validationErrorMessages = new StringBuffer();
-		for(int i = 0; i<errors.size(); ++i)
-		{
-			validationErrorMessages.append("\n\nBulletin " +(i+1)+"\n");
-			CustomFieldSpecValidator currentValidator = (CustomFieldSpecValidator)errors.get(i);
-			Vector validationErrors = currentValidator.getAllErrors();
-			for(int j = 0; j<validationErrors.size(); ++j)
-			{
-				CustomFieldError thisError = (CustomFieldError)validationErrors.get(j);
-				StringBuffer thisErrorMessage = new StringBuffer(thisError.getCode());
-				thisErrorMessage.append(" : ");
-				thisErrorMessage.append(thisError.getType());
-				thisErrorMessage.append(" : ");
-				thisErrorMessage.append(thisError.getTag());
-				thisErrorMessage.append(" : ");
-				thisErrorMessage.append(thisError.getLabel());
-				validationErrorMessages.append(thisErrorMessage);
-				validationErrorMessages.append('\n');
-			}
-		}		
-		validationErrorMessages.append("\n\nTo see a list of the errors, please run Martus go to Options, Custom Fields and change <CustomFields> to <xCustomFields> and press OK.");
-		return validationErrorMessages.toString();  
 	}
 	
 	public int getNumberOfBulletinsImported()
