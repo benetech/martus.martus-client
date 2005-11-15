@@ -27,6 +27,7 @@ package org.martus.client.tools;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.PrintStream;
 import org.martus.client.bulletinstore.BulletinFolder;
 import org.martus.client.bulletinstore.ClientBulletinStore;
 import org.martus.client.tools.XmlBulletinsImporter.FieldSpecVerificationException;
@@ -34,9 +35,10 @@ import org.martus.common.bulletin.Bulletin;
 
 public class ImporterOfXmlFilesOfBulletins
 {
-	public ImporterOfXmlFilesOfBulletins(File[] bulletinXmlFilesToImportToUse, ClientBulletinStore clientStoreToUse, BulletinFolder importFolderToUse)
+	public ImporterOfXmlFilesOfBulletins(File[] bulletinXmlFilesToImportToUse, ClientBulletinStore clientStoreToUse, BulletinFolder importFolderToUse, PrintStream progressMonitorToUse)
 	{
 		super();
+		progressMonitor = progressMonitorToUse;
 		bulletinXmlFilesToImport = bulletinXmlFilesToImportToUse;
 		clientStore = clientStoreToUse;
 		importFolder = importFolderToUse;
@@ -58,7 +60,7 @@ public class ImporterOfXmlFilesOfBulletins
 		for(int j = 0; j < bulletins.length; ++j)
 		{
 			Bulletin b =  bulletins[j];
-			System.out.println("Importing:" +b.get(Bulletin.TAGTITLE));
+			progressMonitor.println("Importing:" +b.get(Bulletin.TAGTITLE));
 			clientStore.saveBulletin(b);
 			clientStore.addBulletinToFolder(importFolder, b.getUniversalId());
 		}
@@ -75,4 +77,5 @@ public class ImporterOfXmlFilesOfBulletins
 	private File[] bulletinXmlFilesToImport;
 	private ClientBulletinStore clientStore;
 	private BulletinFolder importFolder;
+	private PrintStream progressMonitor;
 }

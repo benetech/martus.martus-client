@@ -99,13 +99,14 @@ public class ImportXmlBulletins
 		}
 		
 		MartusCrypto security = createSecurityObject(keyPairFile, prompt);
-		ClientBulletinStore clientStore = createBulletinStore(security);
+		ClientBulletinStore clientStore = createBulletinStore(security, keyPairFile.getParentFile());
 		BulletinFolder importFolder = createImportFolder(security, clientStore, prompt);
 
-		ImporterOfXmlFilesOfBulletins importer = new ImporterOfXmlFilesOfBulletins(bulletinXmlFilesToImport, clientStore, importFolder);
+		ImporterOfXmlFilesOfBulletins importer = new ImporterOfXmlFilesOfBulletins(bulletinXmlFilesToImport, clientStore, importFolder, System.out);
 		try
 		{
 			importer.importFiles();
+			clientStore.prepareToExitNormally();
 		}
 		catch(FieldSpecVerificationException e)
 		{
@@ -206,12 +207,19 @@ public class ImportXmlBulletins
 		return security;
 	}
 	
-	static private ClientBulletinStore createBulletinStore(MartusCrypto security)
+	static private ClientBulletinStore createBulletinStore(MartusCrypto security, File accountDirectory)
 	{
 		ClientBulletinStore clientStore = new ClientBulletinStore(security);
-		if(clientStore == null)
+		try
+		{
+			clientStore.doAfterSigninInitialization(accountDirectory);
+			if(!clientStore.loadFieldSpecCache())
+				clientStore.createFieldSpecCacheFromDatabase();
+		}
+		catch(Exception e)
 		{
 			System.err.println("Unable to create Bulletin Store:");
+			e.printStackTrace();
 			System.exit(12);
 		}
 		return clientStore;

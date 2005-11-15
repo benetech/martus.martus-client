@@ -71,6 +71,7 @@ public class TestClient
 		suite.addTest(new TestSuite(TestFancySearchTableModel.class));
 		suite.addTest(new TestSuite(TestFolderList.class));
 		suite.addTest(new TestSuite(TestGridTableModel.class));
+		suite.addTest(new TestSuite(TestImporterOfXmlFilesOfBulletins.class));
 		suite.addTest(new TestSuite(TestKnownFieldSpecCache.class));
 		suite.addTest(new TestSuite(TestMartusApp_NoServer.class));
 		suite.addTest(new TestSuite(TestMartusFlexidate.class));

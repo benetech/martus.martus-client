@@ -68,7 +68,7 @@ public class TestXmlBulletinsImporter extends TestCaseEnhanced
 	
 	public void testImportXML() throws Exception
 	{
-		InputStream xmlIn = getXMLStreamFromResource("SampleXmlBulletin.xml");
+		InputStream xmlIn = getStreamFromResource("SampleXmlBulletin.xml");
 		XmlBulletinsImporter importer = new XmlBulletinsImporter(security, xmlIn);
 		FieldSpec[] mainFieldSpecs = importer.getMainFieldSpecs();
 		assertNotNull(mainFieldSpecs);
@@ -122,7 +122,7 @@ public class TestXmlBulletinsImporter extends TestCaseEnhanced
 	
 	public void testImportXMLWithMultipleBulletins() throws Exception
 	{
-		InputStream xmlIn = getXMLStreamFromResource("SampleXmlTwoBulletins.xml");
+		InputStream xmlIn = getStreamFromResource("SampleXmlTwoBulletins.xml");
 		XmlBulletinsImporter importer = new XmlBulletinsImporter(security, xmlIn);
 		Bulletin[] bulletinReturned = importer.getBulletins();
 		assertEquals(2, bulletinReturned.length);
@@ -134,7 +134,7 @@ public class TestXmlBulletinsImporter extends TestCaseEnhanced
 
 	public void testImportInvalidMainFieldSpecs() throws Exception
 	{
-		InputStream xmlIn = getXMLStreamFromResource("SampleInvalidFieldSpecsXmlBulletin.xml");
+		InputStream xmlIn = getStreamFromResource("SampleInvalidFieldSpecsXmlBulletin.xml");
 		try
 		{
 			 new XmlBulletinsImporter(security, xmlIn);
@@ -184,7 +184,7 @@ public class TestXmlBulletinsImporter extends TestCaseEnhanced
 	public void testImportInvalidFieldsSpecDontMatchData() throws Exception
 	{
 		
-		InputStream xmlIn = getXMLStreamFromResource("SampleInvalidBulletinFieldsSpecDontMatchData.xml");
+		InputStream xmlIn = getStreamFromResource("SampleInvalidBulletinFieldsSpecDontMatchData.xml");
 		try
 		{
 			new XmlBulletinsImporter(security, xmlIn);
@@ -206,7 +206,7 @@ public class TestXmlBulletinsImporter extends TestCaseEnhanced
 	public void testImportInvalidMultipleBulletins() throws Exception
 	{
 		
-		InputStream xmlIn = getXMLStreamFromResource("SampleInvalidFieldSpecsXmlThreeBulletins.xml");
+		InputStream xmlIn = getStreamFromResource("SampleInvalidFieldSpecsXmlThreeBulletins.xml");
 		try
 		{
 			new XmlBulletinsImporter(security, xmlIn);
@@ -231,17 +231,10 @@ public class TestXmlBulletinsImporter extends TestCaseEnhanced
 		}
 	}
 	
-	InputStream getXMLStreamFromResource(String resourceFile) throws Exception
-	{
-		InputStream in = getClass().getResource(resourceFile).openStream();
-		assertNotNull(in);
-		return in;
-	}
-
 	final String expectedErrorMessage = "100 :  : author : \n" +
 			"100 :  : title : \n" +
 			"102 : BOOLEAN : DuplicateTag : Does interviewee wish to remain anonymous?\n" +
 			"108 : DROPDOWN : BulletinSourceDuplicateEntries : Source of bulletin information\n";
 
-	MartusCrypto security;
+	static MartusCrypto security;
 }
