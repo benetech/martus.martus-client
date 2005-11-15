@@ -72,7 +72,7 @@ public class XmlBulletinImporter
 	}
 
 	private int bulletinsImported;
-	File[] bulletinXmlFilesToImport;
-	ClientBulletinStore clientStore;
-	BulletinFolder importFolder;
+	private File[] bulletinXmlFilesToImport;
+	private ClientBulletinStore clientStore;
+	private BulletinFolder importFolder;
 }
