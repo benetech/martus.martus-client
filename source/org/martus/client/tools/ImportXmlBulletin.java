@@ -86,47 +86,122 @@ public class ImportXmlBulletin
 			System.exit(3);
 		}
 		
-		
 		if(!keyPairFile.exists() || !keyPairFile.isFile())
 		{
 			System.err.println("Cannot find keypair file: " + keyPairFile);
 			System.exit(4);
 		}
 		
-		ImportXmlBulletin importer = new ImportXmlBulletin(importDirectory, keyPairFile, prompt);
-		System.out.println("Finished!  " + importer.getNumberOfBulletinsImported() + " bulletins imported into Martus.");
-		System.exit(0);
-	}
-
-	public ImportXmlBulletin()
-	{
-	}
-
-	private ImportXmlBulletin(File importDirectory, File keyPairFile, boolean prompt)
-	{
 		File[] bulletinXmlFilesToImport = getXmlFiles(importDirectory);
 		if(bulletinXmlFilesToImport.length == 0)
 		{
 			System.err.println("Error No XML bulletins found.");
 			System.exit(5);
 		}
-
+		
 		MartusCrypto security = createSecurityObject(keyPairFile, prompt);
 		ClientBulletinStore clientStore = createBulletinStore(security);
 		BulletinFolder importFolder = createImportFolder(security, clientStore, prompt);
 
+		ImportXmlBulletin importer = new ImportXmlBulletin(bulletinXmlFilesToImport, security, clientStore, importFolder);
+		importer.importFiles();
+		System.out.println("Finished!  " + importer.getNumberOfBulletinsImported() + " bulletins imported into Martus.");
+		System.exit(0);
+	}
+
+	public ImportXmlBulletin(File[] bulletinXmlFilesToImportToUse, MartusCrypto securityToUse, ClientBulletinStore clientStoreToUse, BulletinFolder importFolderToUse)
+	{
+		bulletinXmlFilesToImport = bulletinXmlFilesToImportToUse;
+		security = securityToUse;
+		clientStore = clientStoreToUse;
+		importFolder = importFolderToUse;
+	}
+	
+	public void importFiles()
+	{
 		for(int i= 0; i < bulletinXmlFilesToImport.length; ++i)
 		{
-			bulletinsImported += importOneFile(security, clientStore,importFolder,bulletinXmlFilesToImport[i]);
+			bulletinsImported += importOneFile(bulletinXmlFilesToImport[i]);
 		}
 	}
 
+	private int importOneFile(File bulletinXmlFileToImport)
+	{
+		try
+		{
+			FileInputStream xmlIn = new FileInputStream(bulletinXmlFileToImport);
+			XmlBulletinsImporter importer = new XmlBulletinsImporter(security, xmlIn);
+			Bulletin[] bulletins = importer.getBulletins();
+			for(int j = 0; j < bulletins.length; ++j)
+			{
+				Bulletin b =  bulletins[j];
+				System.out.println("Importing:" +b.get(Bulletin.TAGTITLE));
+				clientStore.saveBulletin(b);
+				clientStore.addBulletinToFolder(importFolder, b.getUniversalId());
+			}
+			clientStore.saveFolders();
+			return bulletins.length;
+		}
+		catch(FieldSpecVerificationException e)
+		{
+			System.err.println("FieldSpecVerificationException Error in File:" + bulletinXmlFileToImport.getName());
+			System.err.println(getValidationErrorMessage(e.getErrors()));
+			System.exit(7);
+			
+		}
+		catch(Exception e)
+		{
+			System.err.println("ImportXmlBulletin Error in File:" + bulletinXmlFileToImport.getName());
+			System.err.println("ImportXmlBulletin.main importing Error: " + e);
+			System.exit(8);
+		}
+		return 0;
+	}
+	
+	public String getValidationErrorMessage(Vector errors)
+	{
+		StringBuffer validationErrorMessages = new StringBuffer();
+		for(int i = 0; i<errors.size(); ++i)
+		{
+			validationErrorMessages.append("\n\nBulletin " +(i+1)+"\n");
+			CustomFieldSpecValidator currentValidator = (CustomFieldSpecValidator)errors.get(i);
+			Vector validationErrors = currentValidator.getAllErrors();
+			for(int j = 0; j<validationErrors.size(); ++j)
+			{
+				CustomFieldError thisError = (CustomFieldError)validationErrors.get(j);
+				StringBuffer thisErrorMessage = new StringBuffer(thisError.getCode());
+				thisErrorMessage.append(" : ");
+				thisErrorMessage.append(thisError.getType());
+				thisErrorMessage.append(" : ");
+				thisErrorMessage.append(thisError.getTag());
+				thisErrorMessage.append(" : ");
+				thisErrorMessage.append(thisError.getLabel());
+				validationErrorMessages.append(thisErrorMessage);
+				validationErrorMessages.append('\n');
+			}
+		}		
+		validationErrorMessages.append("\n\nTo see a list of the errors, please run Martus go to Options, Custom Fields and change <CustomFields> to <xCustomFields> and press OK.");
+		return validationErrorMessages.toString();  
+	}
+	
 	public int getNumberOfBulletinsImported()
 	{
 		return bulletinsImported;
 	}
 
-	private MartusCrypto createSecurityObject(File keyPairFile, boolean prompt)
+	static private File[] getXmlFiles(File startingDir)
+	{
+		File[] filesToImport = startingDir.listFiles(new FileFilter()
+		{
+			public boolean accept(File fileName)
+			{
+				return fileName.getName().toUpperCase().endsWith(".XML");	
+			}
+		});
+		return filesToImport;
+	}
+	
+	static private MartusCrypto createSecurityObject(File keyPairFile, boolean prompt)
 	{
 		String userName = "";
 		try
@@ -188,7 +263,7 @@ public class ImportXmlBulletin
 		return security;
 	}
 
-	private MartusCrypto loadCurrentMartusSecurity(File keyPairFile, char[] passphrase) throws CryptoInitializationException, FileNotFoundException, IOException, InvalidKeyPairFileVersionException, AuthorizationFailedException
+	static private MartusCrypto loadCurrentMartusSecurity(File keyPairFile, char[] passphrase) throws CryptoInitializationException, FileNotFoundException, IOException, InvalidKeyPairFileVersionException, AuthorizationFailedException
 	{
 		MartusCrypto security = new MartusSecurity();
 		FileInputStream in = new FileInputStream(keyPairFile);
@@ -197,7 +272,7 @@ public class ImportXmlBulletin
 		return security;
 	}
 	
-	private ClientBulletinStore createBulletinStore(MartusCrypto security)
+	static private ClientBulletinStore createBulletinStore(MartusCrypto security)
 	{
 		ClientBulletinStore clientStore = new ClientBulletinStore(security);
 		if(clientStore == null)
@@ -208,7 +283,7 @@ public class ImportXmlBulletin
 		return clientStore;
 	}
 
-	private BulletinFolder createImportFolder(MartusCrypto security, ClientBulletinStore store, boolean prompt)
+	static private BulletinFolder createImportFolder(MartusCrypto security, ClientBulletinStore store, boolean prompt)
 	{
 		String folderName = "";
 		try
@@ -237,77 +312,9 @@ public class ImportXmlBulletin
 		return importFolder;
 	}
 
-	public int importOneFile(MartusCrypto security, ClientBulletinStore clientStore, BulletinFolder importFolder, File bulletinXmlFileToImport)
-	{
-		try
-		{
-			FileInputStream xmlIn = new FileInputStream(bulletinXmlFileToImport);
-			XmlBulletinsImporter importer = new XmlBulletinsImporter(security, xmlIn);
-			Bulletin[] bulletins = importer.getBulletins();
-			for(int j = 0; j < bulletins.length; ++j)
-			{
-				Bulletin b =  bulletins[j];
-				System.out.println("Importing:" +b.get(Bulletin.TAGTITLE));
-				clientStore.saveBulletin(b);
-				clientStore.addBulletinToFolder(importFolder, b.getUniversalId());
-			}
-			clientStore.saveFolders();
-			return bulletins.length;
-		}
-		catch(FieldSpecVerificationException e)
-		{
-			System.err.println("FieldSpecVerificationException Error in File:" + bulletinXmlFileToImport.getName());
-			System.err.println(getValidationErrorMessage(e.getErrors()));
-			System.exit(7);
-			
-		}
-		catch(Exception e)
-		{
-			System.err.println("ImportXmlBulletin Error in File:" + bulletinXmlFileToImport.getName());
-			System.err.println("ImportXmlBulletin.main importing Error: " + e);
-			System.exit(8);
-		}
-		return 0;
-	}
-	
-	private File[] getXmlFiles(File startingDir)
-	{
-		File[] filesToImport = startingDir.listFiles(new FileFilter()
-		{
-			public boolean accept(File fileName)
-			{
-				return fileName.getName().toUpperCase().endsWith(".XML");	
-			}
-		});
-		return filesToImport;
-	}
-	
-	
-	public String getValidationErrorMessage(Vector errors)
-	{
-		StringBuffer validationErrorMessages = new StringBuffer();
-		for(int i = 0; i<errors.size(); ++i)
-		{
-			validationErrorMessages.append("\n\nBulletin " +(i+1)+"\n");
-			CustomFieldSpecValidator currentValidator = (CustomFieldSpecValidator)errors.get(i);
-			Vector validationErrors = currentValidator.getAllErrors();
-			for(int j = 0; j<validationErrors.size(); ++j)
-			{
-				CustomFieldError thisError = (CustomFieldError)validationErrors.get(j);
-				StringBuffer thisErrorMessage = new StringBuffer(thisError.getCode());
-				thisErrorMessage.append(" : ");
-				thisErrorMessage.append(thisError.getType());
-				thisErrorMessage.append(" : ");
-				thisErrorMessage.append(thisError.getTag());
-				thisErrorMessage.append(" : ");
-				thisErrorMessage.append(thisError.getLabel());
-				validationErrorMessages.append(thisErrorMessage);
-				validationErrorMessages.append('\n');
-			}
-		}		
-		validationErrorMessages.append("\n\nTo see a list of the errors, please run Martus go to Options, Custom Fields and change <CustomFields> to <xCustomFields> and press OK.");
-		return validationErrorMessages.toString();  
-	}
-	
 	private int bulletinsImported;
+	File[] bulletinXmlFilesToImport;
+	MartusCrypto security;
+	ClientBulletinStore clientStore;
+	BulletinFolder importFolder;
 }
