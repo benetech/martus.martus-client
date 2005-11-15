@@ -51,15 +51,15 @@ public class ImportXmlBulletins
 	public static void main(String[] args)
 	{
 		File importDirectory = null;
-		File keyPairFile = null;
+		File accountDirectory = null;
 		boolean prompt = true;
 		System.out.println("Martus Bulletin XML Importer");
-				
+		
 		for (int i = 0; i < args.length; i++)
 		{
 			if(args[i].startsWith("--accountdir"))
 			{
-				keyPairFile = new File(args[i].substring(args[i].indexOf("=")+1),"MartusKeyPair.dat");
+				accountDirectory = new File(args[i].substring(args[i].indexOf("=")+1)); 
 			}
 			
 			if(args[i].startsWith("--import-directory="))
@@ -73,7 +73,7 @@ public class ImportXmlBulletins
 			}
 		}
 
-		if(importDirectory == null || keyPairFile == null )
+		if(importDirectory == null || accountDirectory == null )
 		{
 			System.err.println("\nUsage: ImportXmlBulletin --import-directory=<pathToXmlFiles> --accountdir=<pathToYourMartusAccount> [--no-prompt]");
 			System.exit(2);
@@ -85,21 +85,15 @@ public class ImportXmlBulletins
 			System.exit(3);
 		}
 		
-		if(!keyPairFile.exists() || !keyPairFile.isFile())
-		{
-			System.err.println("Cannot find keypair file: " + keyPairFile);
-			System.exit(4);
-		}
-		
 		File[] bulletinXmlFilesToImport = getXmlFiles(importDirectory);
 		if(bulletinXmlFilesToImport.length == 0)
 		{
 			System.err.println("Error No XML bulletins found.");
-			System.exit(5);
+			System.exit(4);
 		}
 		
-		MartusCrypto security = createSecurityObject(keyPairFile, prompt);
-		ClientBulletinStore clientStore = createBulletinStore(security, keyPairFile.getParentFile());
+		MartusCrypto security = createSecurityObject(accountDirectory, prompt);
+		ClientBulletinStore clientStore = createBulletinStore(security, accountDirectory);
 		BulletinFolder importFolder = createImportFolder(security, clientStore, prompt);
 
 		ImporterOfXmlFilesOfBulletins importer = new ImporterOfXmlFilesOfBulletins(bulletinXmlFilesToImport, clientStore, importFolder, System.out);
@@ -134,8 +128,15 @@ public class ImportXmlBulletins
 		return filesToImport;
 	}
 	
-	static private MartusCrypto createSecurityObject(File keyPairFile, boolean prompt)
+	static private MartusCrypto createSecurityObject(File accountDirectory, boolean prompt)
 	{
+		File keyPairFile = new File(accountDirectory, "MartusKeyPair.dat");
+		if(!keyPairFile.exists() || !keyPairFile.isFile())
+		{
+			System.err.println("Cannot find keypair file: " + keyPairFile);
+			System.exit(8);
+		}
+
 		String userName = "";
 		try
 		{
@@ -151,7 +152,7 @@ public class ImportXmlBulletins
 		catch(Exception e)
 		{
 			System.err.println("ImportXmlBulletin.main UserName: " + e);
-			System.exit(7);
+			System.exit(8);
 		}
 		
 		String userPassPhrase = "";
