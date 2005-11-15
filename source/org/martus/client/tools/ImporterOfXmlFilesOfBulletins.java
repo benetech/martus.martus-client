@@ -32,9 +32,9 @@ import org.martus.client.bulletinstore.ClientBulletinStore;
 import org.martus.client.tools.XmlBulletinsImporter.FieldSpecVerificationException;
 import org.martus.common.bulletin.Bulletin;
 
-public class XmlBulletinImporter
+public class ImporterOfXmlFilesOfBulletins
 {
-	public XmlBulletinImporter(File[] bulletinXmlFilesToImportToUse, ClientBulletinStore clientStoreToUse, BulletinFolder importFolderToUse)
+	public ImporterOfXmlFilesOfBulletins(File[] bulletinXmlFilesToImportToUse, ClientBulletinStore clientStoreToUse, BulletinFolder importFolderToUse)
 	{
 		super();
 		bulletinXmlFilesToImport = bulletinXmlFilesToImportToUse;

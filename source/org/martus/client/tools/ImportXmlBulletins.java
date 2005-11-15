@@ -46,7 +46,7 @@ import org.martus.common.fieldspec.CustomFieldError;
 import org.martus.common.fieldspec.CustomFieldSpecValidator;
 import org.martus.util.UnicodeReader;
 
-public class ImportXmlBulletin
+public class ImportXmlBulletins
 {
 	public static void main(String[] args)
 	{
@@ -102,7 +102,7 @@ public class ImportXmlBulletin
 		ClientBulletinStore clientStore = createBulletinStore(security);
 		BulletinFolder importFolder = createImportFolder(security, clientStore, prompt);
 
-		XmlBulletinImporter importer = new XmlBulletinImporter(bulletinXmlFilesToImport, clientStore, importFolder);
+		ImporterOfXmlFilesOfBulletins importer = new ImporterOfXmlFilesOfBulletins(bulletinXmlFilesToImport, clientStore, importFolder);
 		try
 		{
 			importer.importFiles();
