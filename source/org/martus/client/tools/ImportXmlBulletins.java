@@ -57,12 +57,12 @@ public class ImportXmlBulletins
 		
 		for (int i = 0; i < args.length; i++)
 		{
-			if(args[i].startsWith("--accountdir"))
+			if(args[i].startsWith("--account-directory"))
 			{
 				accountDirectory = new File(args[i].substring(args[i].indexOf("=")+1)); 
 			}
 			
-			if(args[i].startsWith("--import-directory="))
+			if(args[i].startsWith("--import-directory"))
 			{
 				importDirectory = new File(args[i].substring(args[i].indexOf("=")+1));
 			}
@@ -75,7 +75,7 @@ public class ImportXmlBulletins
 
 		if(importDirectory == null || accountDirectory == null )
 		{
-			System.err.println("\nUsage: ImportXmlBulletin --import-directory=<pathToXmlFiles> --accountdir=<pathToYourMartusAccount> [--no-prompt]");
+			System.err.println("\nUsage: ImportXmlBulletin --import-directory=<pathToXmlFiles> --account-directory=<pathToYourMartusAccount> [--no-prompt]");
 			System.exit(2);
 		}
 		
@@ -214,6 +214,7 @@ public class ImportXmlBulletins
 		try
 		{
 			clientStore.doAfterSigninInitialization(accountDirectory);
+			clientStore.loadFolders();
 			if(!clientStore.loadFieldSpecCache())
 				clientStore.createFieldSpecCacheFromDatabase();
 		}
