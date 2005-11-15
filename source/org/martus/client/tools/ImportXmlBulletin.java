@@ -103,7 +103,7 @@ public class ImportXmlBulletin
 		ClientBulletinStore clientStore = createBulletinStore(security);
 		BulletinFolder importFolder = createImportFolder(security, clientStore, prompt);
 
-		ImportXmlBulletin importer = new ImportXmlBulletin(bulletinXmlFilesToImport, security, clientStore, importFolder);
+		ImportXmlBulletin importer = new ImportXmlBulletin(bulletinXmlFilesToImport, clientStore, importFolder);
 		try
 		{
 			importer.importFiles();
@@ -122,10 +122,9 @@ public class ImportXmlBulletin
 		System.exit(0);
 	}
 
-	public ImportXmlBulletin(File[] bulletinXmlFilesToImportToUse, MartusCrypto securityToUse, ClientBulletinStore clientStoreToUse, BulletinFolder importFolderToUse)
+	public ImportXmlBulletin(File[] bulletinXmlFilesToImportToUse, ClientBulletinStore clientStoreToUse, BulletinFolder importFolderToUse)
 	{
 		bulletinXmlFilesToImport = bulletinXmlFilesToImportToUse;
-		security = securityToUse;
 		clientStore = clientStoreToUse;
 		importFolder = importFolderToUse;
 	}
@@ -141,7 +140,7 @@ public class ImportXmlBulletin
 	private int importOneFile(File bulletinXmlFileToImport) throws FieldSpecVerificationException, Exception
 	{
 		FileInputStream xmlIn = new FileInputStream(bulletinXmlFileToImport);
-		XmlBulletinsImporter importer = new XmlBulletinsImporter(security, xmlIn);
+		XmlBulletinsImporter importer = new XmlBulletinsImporter(clientStore.getSignatureVerifier(), xmlIn);
 		Bulletin[] bulletins = importer.getBulletins();
 		for(int j = 0; j < bulletins.length; ++j)
 		{
@@ -310,7 +309,6 @@ public class ImportXmlBulletin
 
 	private int bulletinsImported;
 	File[] bulletinXmlFilesToImport;
-	MartusCrypto security;
 	ClientBulletinStore clientStore;
 	BulletinFolder importFolder;
 }
