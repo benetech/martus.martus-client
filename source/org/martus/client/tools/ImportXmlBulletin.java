@@ -104,7 +104,20 @@ public class ImportXmlBulletin
 		BulletinFolder importFolder = createImportFolder(security, clientStore, prompt);
 
 		ImportXmlBulletin importer = new ImportXmlBulletin(bulletinXmlFilesToImport, security, clientStore, importFolder);
-		importer.importFiles();
+		try
+		{
+			importer.importFiles();
+		}
+		catch(FieldSpecVerificationException e)
+		{
+			System.err.println(importer.getValidationErrorMessage(e.getErrors()));
+			System.exit(6);
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+			System.exit(7);
+		}
 		System.out.println("Finished!  " + importer.getNumberOfBulletinsImported() + " bulletins imported into Martus.");
 		System.exit(0);
 	}
@@ -117,7 +130,7 @@ public class ImportXmlBulletin
 		importFolder = importFolderToUse;
 	}
 	
-	public void importFiles()
+	public void importFiles()  throws FieldSpecVerificationException, Exception
 	{
 		for(int i= 0; i < bulletinXmlFilesToImport.length; ++i)
 		{
@@ -125,37 +138,20 @@ public class ImportXmlBulletin
 		}
 	}
 
-	private int importOneFile(File bulletinXmlFileToImport)
+	private int importOneFile(File bulletinXmlFileToImport) throws FieldSpecVerificationException, Exception
 	{
-		try
+		FileInputStream xmlIn = new FileInputStream(bulletinXmlFileToImport);
+		XmlBulletinsImporter importer = new XmlBulletinsImporter(security, xmlIn);
+		Bulletin[] bulletins = importer.getBulletins();
+		for(int j = 0; j < bulletins.length; ++j)
 		{
-			FileInputStream xmlIn = new FileInputStream(bulletinXmlFileToImport);
-			XmlBulletinsImporter importer = new XmlBulletinsImporter(security, xmlIn);
-			Bulletin[] bulletins = importer.getBulletins();
-			for(int j = 0; j < bulletins.length; ++j)
-			{
-				Bulletin b =  bulletins[j];
-				System.out.println("Importing:" +b.get(Bulletin.TAGTITLE));
-				clientStore.saveBulletin(b);
-				clientStore.addBulletinToFolder(importFolder, b.getUniversalId());
-			}
-			clientStore.saveFolders();
-			return bulletins.length;
+			Bulletin b =  bulletins[j];
+			System.out.println("Importing:" +b.get(Bulletin.TAGTITLE));
+			clientStore.saveBulletin(b);
+			clientStore.addBulletinToFolder(importFolder, b.getUniversalId());
 		}
-		catch(FieldSpecVerificationException e)
-		{
-			System.err.println("FieldSpecVerificationException Error in File:" + bulletinXmlFileToImport.getName());
-			System.err.println(getValidationErrorMessage(e.getErrors()));
-			System.exit(7);
-			
-		}
-		catch(Exception e)
-		{
-			System.err.println("ImportXmlBulletin Error in File:" + bulletinXmlFileToImport.getName());
-			System.err.println("ImportXmlBulletin.main importing Error: " + e);
-			System.exit(8);
-		}
-		return 0;
+		clientStore.saveFolders();
+		return bulletins.length;
 	}
 	
 	public String getValidationErrorMessage(Vector errors)
@@ -218,7 +214,7 @@ public class ImportXmlBulletin
 		catch(Exception e)
 		{
 			System.err.println("ImportXmlBulletin.main UserName: " + e);
-			System.exit(6);
+			System.exit(7);
 		}
 		
 		String userPassPhrase = "";
@@ -237,7 +233,7 @@ public class ImportXmlBulletin
 		catch(Exception e)
 		{
 			System.err.println("ImportXmlBulletin.main Password: " + e);
-			System.exit(7);
+			System.exit(9);
 		}
 		
 		MartusCrypto security = null;
@@ -250,7 +246,7 @@ public class ImportXmlBulletin
 		catch(Exception e)
 		{
 			System.err.println("Error username or password incorrect: " + e);
-			System.exit(8);
+			System.exit(10);
 		}
 		
 		Arrays.fill(passphrase,'X');
@@ -258,7 +254,7 @@ public class ImportXmlBulletin
 		if(security == null)
 		{
 			System.err.println("Error unable to create Security");
-			System.exit(9);
+			System.exit(11);
 		}
 		return security;
 	}
@@ -278,7 +274,7 @@ public class ImportXmlBulletin
 		if(clientStore == null)
 		{
 			System.err.println("Unable to create Bulletin Store:");
-			System.exit(11);
+			System.exit(12);
 		}
 		return clientStore;
 	}
@@ -300,14 +296,14 @@ public class ImportXmlBulletin
 		catch(Exception e)
 		{
 			System.err.println("ImportXmlBulletin.main Folder name: " + e);
-			System.exit(10);
+			System.exit(13);
 		}
 		
 		BulletinFolder importFolder = store.createOrFindFolder(folderName);
 		if(importFolder == null)
 		{
 			System.err.println("Unable to create Import Folder:" + folderName);
-			System.exit(12);
+			System.exit(14);
 		}
 		return importFolder;
 	}
