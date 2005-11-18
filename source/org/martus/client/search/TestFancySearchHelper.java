@@ -174,6 +174,11 @@ public class TestFancySearchHelper extends TestCaseEnhanced
 		FieldSpec unknownType = FieldSpec.createStandardField("tag", new FieldTypeUnknown());
 		Vector unknownTypeChoices = helper.getChoiceItemsForThisField(unknownType);
 		assertEquals("not zero choices for unknown type?", 0, unknownTypeChoices.size());
+		
+		FieldSpec blankLabel = FieldSpec.createCustomField("tag", "  ", new FieldTypeNormal());
+		Vector blankLabelChoices = helper.getChoiceItemsForThisField(blankLabel);
+		ChoiceItem blankLabelChoice = (ChoiceItem)blankLabelChoices.get(0);
+		assertEquals("didn't use tag for blank label", blankLabel.getTag(), blankLabelChoice.toString());
 	}
 	
 	private FieldSpec createSampleMessageSpec()

@@ -127,6 +127,8 @@ public class FancySearchHelper
 		String displayString = spec.getLabel();
 		if(StandardFieldSpecs.isStandardFieldTag(tag))
 			displayString = getLocalization().getFieldLabel(tag);
+		else if(displayString.trim().equals(""))
+			displayString = tag;
 
 		// unknown types (Lewis had one) should not appear in the list at all
 		if(thisType.isUnknown())
