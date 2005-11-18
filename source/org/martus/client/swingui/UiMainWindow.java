@@ -1288,6 +1288,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		if (removeDlg.isYesButtonPressed())
 		{
 			app.setServerInfo("","","");
+			clearStatusMessage();
 			repaint();
 		}			
 	}
@@ -1300,6 +1301,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		inConfigServer = true;
 		try
 		{
+			clearStatusMessage();
 			ConfigInfo previousServerInfo = app.getConfigInfo();
 			UiConfigServerDlg serverInfoDlg = new UiConfigServerDlg(this, previousServerInfo);
 			if(!serverInfoDlg.getResult())
@@ -1881,6 +1883,11 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 			setStatusMessageTag("StatusReady");	
 		else
 			setStatusMessageTag("NoServerAvailableProgressMessage");			
+	}
+	
+	public void clearStatusMessage()
+	{
+		setStatusMessageTag("");
 	}
 	
 	public void setStatusMessageTag(String tag)
