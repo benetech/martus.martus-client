@@ -36,6 +36,7 @@ import org.martus.client.test.MockBulletinStore;
 import org.martus.client.test.MockMartusApp;
 import org.martus.common.EnglishCommonStrings;
 import org.martus.common.GridData;
+import org.martus.common.MiniLocalization;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.bulletin.BulletinConstants;
 import org.martus.common.field.MartusDateRangeField;
@@ -68,7 +69,8 @@ public class TestFancySearchHelper extends TestCaseEnhanced
 		getStore().createFieldSpecCacheFromDatabase();
 		tempDir = createTempDirectory();
 		localization = new MartusLocalization(tempDir, new String[0]);
-		UiDialogLauncher nullLauncher = new UiDialogLauncher(null,new MartusLocalization(null, new String[0]));
+		localization.setCurrentLanguageCode(MiniLocalization.ENGLISH);
+		UiDialogLauncher nullLauncher = new UiDialogLauncher(null,localization);
 		helper = new FancySearchHelper(getStore(), nullLauncher);
 		
 	}

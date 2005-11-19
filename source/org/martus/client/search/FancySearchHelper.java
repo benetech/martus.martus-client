@@ -78,7 +78,7 @@ public class FancySearchHelper
 
 		allAvailableFields.add(createLastSavedDateChoice());
 		allAvailableFields.addAll(convertToChoiceItems(storeToUse.getAllKnownFieldSpecs()));
-		Collections.sort(allAvailableFields);
+		Collections.sort(allAvailableFields, new SaneCollator(getLocalization().getCurrentLanguageCode()));
 
 		allAvailableFields.insertElementAt(createAnyFieldChoice(), 0);
 		ChoiceItem[] fieldChoices = (ChoiceItem[])allAvailableFields.toArray(new ChoiceItem[0]);

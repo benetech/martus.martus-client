@@ -31,6 +31,7 @@ import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.dialogs.UiDialogLauncher;
 import org.martus.client.test.MockMartusApp;
 import org.martus.clientside.UiLocalization;
+import org.martus.common.MiniLocalization;
 import org.martus.common.fieldspec.DropDownFieldSpec;
 import org.martus.common.fieldspec.FieldTypeAnyField;
 import org.martus.common.fieldspec.FieldTypeBoolean;
@@ -57,6 +58,7 @@ public class TestFancySearchTableModel extends TestCaseEnhanced
 		store.createFieldSpecCacheFromDatabase();
 		app.loadSampleData();
 		UiLocalization localization = new MartusLocalization(null, new String[0]);
+		localization.setCurrentLanguageCode(MiniLocalization.ENGLISH);
 		UiDialogLauncher nullLauncher = new UiDialogLauncher(null, localization);
 		FancySearchHelper helper = new FancySearchHelper(store, nullLauncher);
 		GridFieldSpec gridSpec = helper.getGridSpec(store);
