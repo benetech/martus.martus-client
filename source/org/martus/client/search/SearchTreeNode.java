@@ -26,6 +26,7 @@ Boston, MA 02111-1307, USA.
 
 package org.martus.client.search;
 
+import org.martus.common.field.MartusField;
 import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.fieldspec.FieldTypeNormal;
 
@@ -34,14 +35,6 @@ public class SearchTreeNode
 	public final static int VALUE = 0;
 	public final static int OR = 1;
 	public final static int AND = 2;
-	
-	public final static int CONTAINS = 0;
-	public final static int GREATER = 1;
-	public final static int GREATER_EQUAL = 2; 
-	public final static int LESS = 3; 
-	public final static int LESS_EQUAL = 4;
-	public final static int EQUAL = 5;
-	public final static int NOT_EQUAL = 6;
 	
 	private final static String GREATER_EQUAL_STRING = ">=";
 	private final static String LESS_EQUAL_STRING = "<=";
@@ -77,19 +70,19 @@ public class SearchTreeNode
 	private static int convertComparisonOpStringToValue(String op)
 	{
 		if(op.equals(GREATER_STRING))
-			return GREATER;
+			return MartusField.GREATER;
 		if(op.equals(GREATER_EQUAL_STRING))
-			return GREATER_EQUAL;
+			return MartusField.GREATER_EQUAL;
 		if(op.equals(LESS_STRING))
-			return LESS;
+			return MartusField.LESS;
 		if(op.equals(LESS_EQUAL_STRING))
-			return LESS_EQUAL;
+			return MartusField.LESS_EQUAL;
 		if(op.equals(EQUAL_STRING))
-			return EQUAL;
+			return MartusField.EQUAL;
 		if(op.equals(NOT_EQUAL_STRING))
-			return NOT_EQUAL;
+			return MartusField.NOT_EQUAL;
 		
-		return CONTAINS;
+		return MartusField.CONTAINS;
 	}
 
 	private String withoutQuotes(String rawValue)

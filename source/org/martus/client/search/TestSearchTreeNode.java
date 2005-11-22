@@ -26,6 +26,7 @@ Boston, MA 02111-1307, USA.
 
 package org.martus.client.search;
 
+import org.martus.common.field.MartusField;
 import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.fieldspec.FieldTypeNormal;
 import org.martus.util.TestCaseEnhanced;
@@ -71,16 +72,16 @@ public class TestSearchTreeNode extends TestCaseEnhanced
 
     	assertEquals("thought it was a comparison op?", "", SearchTreeNode.getComparisonOp("one"));
     	SearchTreeNode noOp = new SearchTreeNode(field, "", basicValue);
-    	assertEquals("wrong default op?", SearchTreeNode.CONTAINS, noOp.getComparisonOperator());
+    	assertEquals("wrong default op?", MartusField.CONTAINS, noOp.getComparisonOperator());
     	
     	String[] comparisonOps = {"=", "!=", ">", ">=", "<", "<="};
     	int[] comparisonOpValues = {
-    		SearchTreeNode.EQUAL,
-    		SearchTreeNode.NOT_EQUAL,
-    		SearchTreeNode.GREATER, 
-    		SearchTreeNode.GREATER_EQUAL,
-    		SearchTreeNode.LESS, 
-    		SearchTreeNode.LESS_EQUAL,
+    		MartusField.EQUAL,
+    		MartusField.NOT_EQUAL,
+    		MartusField.GREATER, 
+    		MartusField.GREATER_EQUAL,
+    		MartusField.LESS, 
+    		MartusField.LESS_EQUAL,
     	};
     	for(int i=0; i < comparisonOps.length; ++i)
     	{

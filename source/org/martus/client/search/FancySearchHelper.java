@@ -121,14 +121,22 @@ public class FancySearchHelper
 
 	public Vector getChoiceItemsForThisField(FieldSpec spec)
 	{
+		return getChoiceItemsForThisField(spec, "", "");
+	}
+	
+	public Vector getChoiceItemsForThisField(FieldSpec spec, String tagPrefix, String displayPrefix)
+	{
+
 		Vector choicesForThisField = new Vector();
 		final FieldType thisType = spec.getType();
-		final String tag = spec.getTag();
+		final String tag = tagPrefix + spec.getTag();
 		String displayString = spec.getLabel();
 		if(StandardFieldSpecs.isStandardFieldTag(tag))
 			displayString = getLocalization().getFieldLabel(tag);
 		else if(displayString.trim().equals(""))
 			displayString = tag;
+
+		displayString = displayPrefix + displayString;
 
 		// unknown types (Lewis had one) should not appear in the list at all
 		if(thisType.isUnknown())
@@ -145,14 +153,20 @@ public class FancySearchHelper
 		// dropdowns MUST be a DropDownFieldSpec, not a plain FieldSpec
 		if(thisType.isDropdown())
 		{
-			choicesForThisField.add(new SearchableFieldChoiceItem(spec));
+			DropDownFieldSpec originalSpec = (DropDownFieldSpec)spec;
+			DropDownFieldSpec specWithBetterLabel = new DropDownFieldSpec(originalSpec.getAllChoices());
+			specWithBetterLabel.setTag(tag);
+			specWithBetterLabel.setLabel(displayString);
+			choicesForThisField.add(new SearchableFieldChoiceItem(specWithBetterLabel));
 			return choicesForThisField;
 		}
 
-		// TODO: add one choice per column (call this method recursively)
+		// add one choice per column
 		if(thisType.isGrid())
 		{
-			choicesForThisField.add(new SearchableFieldChoiceItem(spec));
+			GridFieldSpec gridSpec = (GridFieldSpec)spec;
+			for(int i=0; i < gridSpec.getColumnCount(); ++i)
+				choicesForThisField.addAll(getChoiceItemsForThisField(gridSpec.getFieldSpec(i), tag + ".", displayString + ": "));
 			return choicesForThisField;
 		}
 

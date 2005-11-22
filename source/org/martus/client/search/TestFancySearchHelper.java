@@ -40,13 +40,13 @@ import org.martus.common.MiniLocalization;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.bulletin.BulletinConstants;
 import org.martus.common.field.MartusDateRangeField;
+import org.martus.common.field.MartusField;
 import org.martus.common.fieldspec.ChoiceItem;
 import org.martus.common.fieldspec.CustomDropDownFieldSpec;
 import org.martus.common.fieldspec.DropDownFieldSpec;
 import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.fieldspec.FieldTypeBoolean;
 import org.martus.common.fieldspec.FieldTypeDropdown;
-import org.martus.common.fieldspec.FieldTypeGrid;
 import org.martus.common.fieldspec.FieldTypeMessage;
 import org.martus.common.fieldspec.FieldTypeMultiline;
 import org.martus.common.fieldspec.FieldTypeNormal;
@@ -54,6 +54,7 @@ import org.martus.common.fieldspec.FieldTypeSearchValue;
 import org.martus.common.fieldspec.FieldTypeUnknown;
 import org.martus.common.fieldspec.GridFieldSpec;
 import org.martus.common.fieldspec.StandardFieldSpecs;
+import org.martus.common.fieldspec.GridFieldSpec.UnsupportedFieldTypeException;
 import org.martus.util.TestCaseEnhanced;
 
 public class TestFancySearchHelper extends TestCaseEnhanced
@@ -127,13 +128,6 @@ public class TestFancySearchHelper extends TestCaseEnhanced
 		Vector dateRangeChoices = helper.getChoiceItemsForThisField(dateRange);
 		assertEquals("not two choices for date range?", 2, dateRangeChoices.size());
 		
-		FieldSpec gridSpec = createSampleGridSpec();
-		Vector gridTypeChoices = helper.getChoiceItemsForThisField(gridSpec);
-		assertEquals("not one choice for a grid?", 1, gridTypeChoices.size());
-		ChoiceItem gridChoice = (ChoiceItem)gridTypeChoices.get(0);
-		FieldSpec gridChoiceSpec = gridChoice.getSpec();
-		assertEquals("grid doesn't have grid search?", new FieldTypeGrid(), gridChoiceSpec.getType());
-		
 		DropDownFieldSpec dropDownSpec = createSampleDropDownSpec("dropdown");
 		Vector dropDownChoices = helper.getChoiceItemsForThisField(dropDownSpec);
 		assertEquals("not one choice for dropdown?", 1, dropDownChoices.size());
@@ -183,6 +177,30 @@ public class TestFancySearchHelper extends TestCaseEnhanced
 		assertEquals("didn't use tag for blank label", blankLabel.getTag(), blankLabelChoice.toString());
 	}
 	
+	public void testGetChoiceItemsForThisFieldGrid() throws Exception
+	{
+		GridFieldSpec gridSpec = createSampleGridSpec();
+		Vector gridTypeChoices = helper.getChoiceItemsForThisField(gridSpec);
+		assertEquals("not one choice for each grid column?", gridSpec.getColumnCount(), gridTypeChoices.size());
+		ChoiceItem gridChoiceNormalColumn = (ChoiceItem)gridTypeChoices.get(0);
+		FieldSpec gridChoiceNormalColumnSpec = gridChoiceNormalColumn.getSpec();
+		assertEquals("bad normal grid column?", new FieldTypeNormal(), gridChoiceNormalColumnSpec.getType());
+		assertEquals("Grid Label: column 1", gridChoiceNormalColumnSpec.getLabel());
+		assertEquals("gridtag.normaltag", gridChoiceNormalColumnSpec.getTag());
+		
+		ChoiceItem gridChoiceDropDownColumn = (ChoiceItem)gridTypeChoices.get(1);
+		DropDownFieldSpec gridChoiceDropDownColumnSpec = (DropDownFieldSpec)gridChoiceDropDownColumn.getSpec();
+		assertEquals("bad dropdown grid column?", new FieldTypeDropdown(), gridChoiceDropDownColumnSpec.getType());
+		assertEquals("Grid Label: column 2", gridChoiceDropDownColumnSpec.getLabel());
+		assertEquals("gridtag.dropdowntag", gridChoiceDropDownColumnSpec.getTag());
+		ChoiceItem empty = gridChoiceDropDownColumnSpec.getChoice(0);
+		ChoiceItem first = gridChoiceDropDownColumnSpec.getChoice(1);
+		ChoiceItem second = gridChoiceDropDownColumnSpec.getChoice(2);
+		assertEquals("wrong empty choice?", "", empty.toString());
+		assertEquals("wrong first choice?", "choice 1", first.toString());
+		assertEquals("wrong second choice?", "choice 2", second.toString());
+	}
+	
 	private FieldSpec createSampleMessageSpec()
 	{
 		final String tag = "messagetag";
@@ -209,9 +227,19 @@ public class TestFancySearchHelper extends TestCaseEnhanced
 	
 	private GridFieldSpec createSampleGridSpec() throws Exception
 	{
+		final String tag = "gridtag";
+
+		return createSampleGridSpecWithTag(tag);
+	}
+
+	private GridFieldSpec createSampleGridSpecWithTag(final String tag) throws UnsupportedFieldTypeException
+	{
 		GridFieldSpec gridSpec = new GridFieldSpec();
+		gridSpec.setLabel("Grid Label");
+		gridSpec.setTag(tag);
 		String label1 = "column 1";
 		FieldSpec column1 = new FieldSpec(label1, new FieldTypeNormal());
+		column1.setTag("normaltag");
 
 		String label2 = "column 2";
 		CustomDropDownFieldSpec column2 = createSampleDropDownSpec(label2);
@@ -224,6 +252,7 @@ public class TestFancySearchHelper extends TestCaseEnhanced
 	private CustomDropDownFieldSpec createSampleDropDownSpec(String label2)
 	{
 		CustomDropDownFieldSpec column2 = new CustomDropDownFieldSpec();
+		column2.setTag("dropdowntag");
 		Vector choices = new Vector();
 		String choice1 = "choice 1";
 		String choice2 = "choice 2";
@@ -291,7 +320,7 @@ public class TestFancySearchHelper extends TestCaseEnhanced
 		GridData data = new GridData(spec);
 		addRow(data, fields[0].getCode(), "=", "value", "or");
 		SearchTreeNode root = helper.getSearchTree(data);
-		verifyFieldCompareOpValue("single row", root, normalSpec, SearchTreeNode.EQUAL, "value");
+		verifyFieldCompareOpValue("single row", root, normalSpec, MartusField.EQUAL, "value");
 	}
 	
 	public void testGetSearchTreeTwoRows() throws Exception
@@ -314,8 +343,8 @@ public class TestFancySearchHelper extends TestCaseEnhanced
 		addRow(data, fields[1].getCode(), "=", "d", "or");
 		SearchTreeNode root = helper.getSearchTree(data);
 		verifyOp("top level", root, SearchTreeNode.OR);
-		verifyFieldCompareOpValue("two rows left", root.getLeft(), a, SearchTreeNode.EQUAL, "b");
-		verifyFieldCompareOpValue("two rows right", root.getRight(), c, SearchTreeNode.EQUAL, "d");
+		verifyFieldCompareOpValue("two rows left", root.getLeft(), a, MartusField.EQUAL, "b");
+		verifyFieldCompareOpValue("two rows right", root.getRight(), c, MartusField.EQUAL, "d");
 	}
 	
 	public void testGetSearchTreeComplex() throws Exception
@@ -358,25 +387,25 @@ public class TestFancySearchHelper extends TestCaseEnhanced
 		// any:whiz
 		SearchTreeNode beforeJ = helper.getSearchTree(data);
 		verifyOp("before j", beforeJ, SearchTreeNode.OR);
-		verifyFieldCompareOpValue("any:j", beforeJ.getRight(), any, SearchTreeNode.CONTAINS, "j");
+		verifyFieldCompareOpValue("any:j", beforeJ.getRight(), any, MartusField.CONTAINS, "j");
 		
 		SearchTreeNode beforeGii = beforeJ.getLeft();
 		verifyOp("before gii", beforeGii, SearchTreeNode.AND);
-		verifyFieldCompareOpValue("g!=\"ii\"", beforeGii.getRight(), g, SearchTreeNode.NOT_EQUAL, "i i");
+		verifyFieldCompareOpValue("g!=\"ii\"", beforeGii.getRight(), g, MartusField.NOT_EQUAL, "i i");
 		
 		SearchTreeNode beforeDf = beforeGii.getLeft();
 		verifyOp("before df", beforeDf, SearchTreeNode.OR);
-		verifyFieldCompareOpValue("d>f", beforeDf.getRight(), d, SearchTreeNode.GREATER, "f");
+		verifyFieldCompareOpValue("d>f", beforeDf.getRight(), d, MartusField.GREATER, "f");
 		
 		SearchTreeNode beforeAandA = beforeDf.getLeft();
 		verifyOp("before a a", beforeAandA, SearchTreeNode.OR);
 		
 		SearchTreeNode betweenAandA = beforeAandA.getRight();
 		verifyOp("before a a", betweenAandA, SearchTreeNode.AND);
-		verifyFieldCompareOpValue("a:c1", betweenAandA.getLeft(), a, SearchTreeNode.CONTAINS, "c1");
-		verifyFieldCompareOpValue("a:c2", betweenAandA.getRight(), a, SearchTreeNode.CONTAINS, "c2");
+		verifyFieldCompareOpValue("a:c1", betweenAandA.getLeft(), a, MartusField.CONTAINS, "c1");
+		verifyFieldCompareOpValue("a:c2", betweenAandA.getRight(), a, MartusField.CONTAINS, "c2");
 		
-		verifyFieldCompareOpValue("whiz", beforeAandA.getLeft(), any, SearchTreeNode.CONTAINS, "whiz");
+		verifyFieldCompareOpValue("whiz", beforeAandA.getLeft(), any, MartusField.CONTAINS, "whiz");
 	}
 	
 	private void verifyOp(String message, SearchTreeNode node, int expectedOp)

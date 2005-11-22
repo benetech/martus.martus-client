@@ -68,26 +68,7 @@ public class BulletinSearcher
 		if(field == null)
 			return false;
 		
-		switch(compareOp)
-		{
-			case SearchTreeNode.CONTAINS:
-				return field.contains(searchForValue, localization);
-			case SearchTreeNode.LESS: 
-				return (field.compareTo(searchForValue, localization) < 0);
-			case SearchTreeNode.LESS_EQUAL: 
-				return (field.compareTo(searchForValue, localization) <= 0);
-			case SearchTreeNode.GREATER: 
-				return (field.compareTo(searchForValue, localization) > 0);
-			case SearchTreeNode.GREATER_EQUAL: 
-				return (field.compareTo(searchForValue, localization) >= 0);
-			case SearchTreeNode.EQUAL: 
-				return (field.compareTo(searchForValue, localization) == 0);
-			case SearchTreeNode.NOT_EQUAL: 
-				return (field.compareTo(searchForValue, localization) != 0);
-		}
-		
-		System.out.println("BulletinSearcher.doesValueMatch: Unknown op: " + compareOp);
-		return false;
+		return field.doesMatch(compareOp, searchForValue, localization);
 	}
 	
 	SearchTreeNode node;

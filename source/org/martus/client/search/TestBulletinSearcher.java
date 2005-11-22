@@ -29,6 +29,7 @@ package org.martus.client.search;
 import java.io.File;
 
 import org.martus.client.core.SafeReadableBulletin;
+import org.martus.common.GridData;
 import org.martus.common.MiniLocalization;
 import org.martus.common.bulletin.AttachmentProxy;
 import org.martus.common.bulletin.Bulletin;
@@ -36,12 +37,14 @@ import org.martus.common.crypto.MartusCrypto;
 import org.martus.common.crypto.MockMartusSecurity;
 import org.martus.common.field.MartusDateRangeField;
 import org.martus.common.field.MartusField;
+import org.martus.common.field.MartusSearchableGridColumnField;
 import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.fieldspec.FieldTypeBoolean;
 import org.martus.common.fieldspec.FieldTypeDate;
 import org.martus.common.fieldspec.FieldTypeDateRange;
 import org.martus.common.fieldspec.FieldTypeLanguage;
 import org.martus.common.fieldspec.FieldTypeNormal;
+import org.martus.common.fieldspec.GridFieldSpec;
 import org.martus.common.fieldspec.StandardFieldSpecs;
 import org.martus.common.test.UnicodeConstants;
 import org.martus.util.TestCaseEnhanced;
@@ -152,6 +155,36 @@ public class TestBulletinSearcher extends TestCaseEnhanced
 		FieldSpec noSubField = FieldSpec.createStandardField("entrydate.no.such.subfield", new FieldTypeNormal());
 		MartusField noSubfieldResult = b.getPossiblyNestedField(noSubField);
 		assertNull("didn't return null for bogus subfield?", noSubfieldResult);
+	}
+	
+	public void testGetPossiblyNestedFieldInGrid() throws Exception
+	{
+		GridFieldSpec gridSpec = new GridFieldSpec();
+		gridSpec.setTag("grid");
+		gridSpec.addColumn(FieldSpec.createCustomField("columntag", "Column Label", new FieldTypeNormal()));
+		FieldSpec[] specs = {gridSpec};
+		
+		MartusCrypto security = MockMartusSecurity.createClient();
+		Bulletin realBulletin = new Bulletin(security, specs, StandardFieldSpecs.getDefaultPrivateFieldSpecs());
+		GridData data = new GridData(gridSpec);
+		data.addEmptyRow();
+		data.setValueAt("first row", 0, 0);
+		data.addEmptyRow();
+		data.setValueAt("second row", 1, 0);
+		realBulletin.set(gridSpec.getTag(), data.getXmlRepresentation());
+		
+		SafeReadableBulletin b = new SafeReadableBulletin(realBulletin);
+		FieldSpec firstColumn = FieldSpec.createStandardField("grid.columntag", new FieldTypeNormal());
+		MartusSearchableGridColumnField gridColumn = (MartusSearchableGridColumnField)b.getPossiblyNestedField(firstColumn);
+		assertTrue("didn't find contains in second row?", gridColumn.doesMatch(MartusField.CONTAINS, "second", localization));
+		assertFalse("matched contains when it shouldn't?", gridColumn.doesMatch(MartusField.CONTAINS, "sfesfff", localization));
+		assertTrue("didn't find greater in second row?", gridColumn.doesMatch(MartusField.GREATER, "m", localization));
+		assertFalse("matched greater when it shouldn't?", gridColumn.doesMatch(MartusField.GREATER, "yyy", localization));
+		
+		Bulletin emptyBulletin = new Bulletin(security, specs, StandardFieldSpecs.getDefaultPrivateFieldSpecs());
+		SafeReadableBulletin eb = new SafeReadableBulletin(emptyBulletin);
+		assertNull("returned searchable for empty grid?", eb.getPossiblyNestedField(firstColumn));
+		
 	}
 	
 	

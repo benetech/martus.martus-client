@@ -26,6 +26,7 @@ Boston, MA 02111-1307, USA.
 
 package org.martus.client.search;
 
+import org.martus.common.field.MartusField;
 import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.fieldspec.FieldTypeNormal;
 import org.martus.util.TestCaseEnhanced;
@@ -112,7 +113,7 @@ public class TestSearchParser extends TestCaseEnhanced
 		FieldSpec field = FieldSpec.createStandardField("field", new FieldTypeNormal());
     	SearchTreeNode rootNode = englishParser.parse(field, "=", "");
     	assertEquals("didn't remember field?", field, rootNode.getField());
-    	assertEquals("didn't remember op?", SearchTreeNode.EQUAL, rootNode.getComparisonOperator());
+    	assertEquals("didn't remember op?", MartusField.EQUAL, rootNode.getComparisonOperator());
     }
     
     public void testSimpleSearch()
@@ -236,13 +237,13 @@ public class TestSearchParser extends TestCaseEnhanced
 		assertEquals("left part not a value?", SearchTreeNode.VALUE, left.getOperation());
 		assertEquals("left part wrong value?", plain, left.getValue());
 		assertEquals("left part wrong field?", field, left.getField());
-		assertEquals("left part wrong op?", SearchTreeNode.GREATER, left.getComparisonOperator());
+		assertEquals("left part wrong op?", MartusField.GREATER, left.getComparisonOperator());
 
 		SearchTreeNode right = or.getRight();
 		assertEquals("right part not a value?", SearchTreeNode.VALUE, right.getOperation());
 		assertEquals("right part wrong value?", quoted, right.getValue());
 		assertEquals("right part wrong field?", field, right.getField());
-		assertEquals("right part wrong op?", SearchTreeNode.GREATER, right.getComparisonOperator());
+		assertEquals("right part wrong op?", MartusField.GREATER, right.getComparisonOperator());
 	}
 	
 /*	
