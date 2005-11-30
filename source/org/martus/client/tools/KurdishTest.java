@@ -75,9 +75,9 @@ public class KurdishTest
 
 		System.out.println("Defaulting to: " + label.getFont().getFontName());
 		
-		Font khmerFont = new Font("Lucida Bright Regular", Font.PLAIN, 30);
-		label.setFont(khmerFont);
-		viaTextLayout.setFont(khmerFont);
+//		Font khmerFont = new Font("Lucida Bright Regular", Font.PLAIN, 30);
+//		label.setFont(khmerFont);
+//		viaTextLayout.setFont(khmerFont);
 
 		JSplitPane splitter = new JSplitPane(JSplitPane.VERTICAL_SPLIT);
 		splitter.add(label, JSplitPane.TOP);
