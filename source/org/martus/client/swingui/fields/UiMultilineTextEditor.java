@@ -31,6 +31,8 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import javax.swing.JComponent;
 import javax.swing.text.JTextComponent;
+
+import org.martus.client.swingui.FontHandler;
 import org.martus.client.swingui.UiConstants;
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.swing.UiScrollPane;
@@ -44,7 +46,7 @@ public class UiMultilineTextEditor extends UiStringField
 		editor = new UiTextArea(5, UiConstants.textFieldColumns);
 		editor.setLineWrap(true);
 		editor.setWrapStyleWord(true);
-		editor.setFont(new Font("SansSerif", Font.PLAIN, UiConstants.defaultFontSize));
+		editor.setFont(new Font(FontHandler.defaultFontName, Font.PLAIN, FontHandler.defaultFontSize));
 		editor.addKeyListener(new myKeyListener());
 
 		widget = new UiScrollPane(editor, UiScrollPane.VERTICAL_SCROLLBAR_ALWAYS,

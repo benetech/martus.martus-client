@@ -30,6 +30,8 @@ import java.awt.Font;
 import java.awt.Rectangle;
 import javax.swing.JComponent;
 import javax.swing.text.JTextComponent;
+
+import org.martus.client.swingui.FontHandler;
 import org.martus.client.swingui.UiConstants;
 import org.martus.clientside.UiLocalization;
 import org.martus.swing.UiTextArea;
@@ -78,7 +80,7 @@ public class UiMultilineViewer extends UiStringField
 			setWrapStyleWord(true);
 			setAutoscrolls(false);
 			setEditable(false);
-			setFont(new Font("SansSerif", Font.PLAIN, UiConstants.defaultFontSize));
+			setFont(new Font(FontHandler.defaultFontName, Font.PLAIN, FontHandler.defaultFontSize));
 		}
 
 		// overridden ONLY because setting the text to a new

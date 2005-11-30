@@ -32,6 +32,7 @@ import java.awt.event.KeyListener;
 
 import javax.swing.JComponent;
 
+import org.martus.client.swingui.FontHandler;
 import org.martus.client.swingui.UiConstants;
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.swing.UiTextArea;
@@ -44,7 +45,7 @@ public class UiNormalTextEditor extends UiNormalTextField
 		widget = new UiTextAreaWithPadding(1, UiConstants.textFieldColumns);
 		widget.setLineWrap(true);
 		widget.setWrapStyleWord(true);
-		widget.setFont(new Font("SansSerif", Font.PLAIN, UiConstants.defaultFontSize));
+		widget.setFont(new Font(FontHandler.defaultFontName, Font.PLAIN, FontHandler.defaultFontSize));
 		widget.addKeyListener(new myKeyListener());
 		supportContextMenu();
 	}

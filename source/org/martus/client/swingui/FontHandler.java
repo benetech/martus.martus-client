@@ -1,7 +1,7 @@
 /*
 
 The Martus(tm) free, social justice documentation and
-monitoring software. Copyright (C) 2001-2005, Beneficent
+monitoring software. Copyright (C) 2005, Beneficent
 Technology, Inc. (Benetech).
 
 Martus is free software; you can redistribute it and/or
@@ -26,15 +26,34 @@ Boston, MA 02111-1307, USA.
 
 package org.martus.client.swingui;
 
-public class UiConstants
+public class FontHandler
 {
-	// NOTE: See the license terms to understand when the following MUST be changed.
-	// Also, you should search for "Martus" in EnglishStrings.txt and any .mtf files 
-	// and change other occurances as required by the license.
-	public static final String programName = "Martus(TM)";
-	public static String versionLabel = "2.8.1";
-	public static final String copyright = "Copyright 2001-2005 Beneficent Technology, Inc.";
-	public static final String website = "(Benetech, at www.benetech.org)";
 
-	public static final int textFieldColumns = 40;
+	// NOTE: The following is just a quick hack for Kurdish testing,
+	// but is harmless and powerful so it's worth keeping 
+	// until we decide what to do in the long run. 2005-11-30 kbs
+	public static final int defaultFontSize = getAsInteger(System.getProperty("inputfontsize"), 13);
+	public static final String defaultFontName = getAsString(System.getProperty("inputfontname"), "SansSerif");
+
+	public static String getAsString(String candidate, String defaultValue)
+	{
+		if(candidate != null && candidate.length() > 0)
+			return candidate;
+		
+		return defaultValue;
+	}
+
+	public static int getAsInteger(String candidate, int defaultValue)
+	{
+		try
+		{
+			return Integer.parseInt(candidate);
+		}
+		catch (NumberFormatException e)
+		{
+			return defaultValue;
+		}
+	}
+	// NOTE: End of Kurdish testing hack
+
 }
