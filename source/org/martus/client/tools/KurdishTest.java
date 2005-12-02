@@ -62,6 +62,7 @@ public class KurdishTest
 		{
 			out.write(b);
 		}
+		in.close();
 		String kurdishText = new String(out.toString("UTF-8")).substring(0, 36);
 
 		String windowsString = "Kurdish Test";
