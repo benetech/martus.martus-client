@@ -698,7 +698,7 @@ public class EnglishStrings
 "field:notifyExportingCustomizationTemplateSuccesscause=Successfully exported customization template.",
 "field:notifyCreatingFieldSpecCachecause=Martus needs to keep a list of all the fields in all the bulletins in your system.\n\nThis list does not exist, so it will be created now. This may take a few seconds per bulletin on a slower computer.",
 
-"field:IncompatibleMtfVersion=The version of this translation is not compatible with this version of Martus.  It is recommend that you do not continue to use this translation version and go to (http://www.martus.org/downloads) for the appropriate version.",
+"field:IncompatibleMtfVersion=The version of this translation is not compatible with this version of Martus.  It is recommended that you do not continue to use this translation version and go to (http://www.martus.org/downloads) for the appropriate version.",
 "field:IncompatibleMtfVersionTranslation=#MtfLanguage# Translation Version: #MtfVersionNumber#",
 "field:IncompatibleMtfVersionProgram=Martus Software Version: #ProgramVersionNumber#",
 
