@@ -58,6 +58,7 @@ public class TestClient
 	{
 		TestSuite suite= new TestSuite("All Client Martus Tests");
 		
+		suite.addTest(new TestSuite(TestBackgroundRetriever.class));
 		suite.addTest(new TestSuite(TestBulletinCache.class));
 		suite.addTest(new TestSuite(TestBulletinFolder.class));
 		suite.addTest(new TestSuite(TestBulletinSearcher.class));
@@ -77,6 +78,7 @@ public class TestClient
 		suite.addTest(new TestSuite(TestMartusFlexidate.class));
 		suite.addTest(new TestSuite(TestLocalization.class));
 		suite.addTest(new TestSuite(TestMartusUserNameAndPassword.class));
+		suite.addTest(new TestSuite(TestRetrieveCommand.class));
 		suite.addTest(new TestSuite(TestReportFormat.class));
 		//suite.addTest(new TestSuite(TestReportRunner.class));
 		suite.addTest(new TestSuite(TestSafeReadableBulletin.class));

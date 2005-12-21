@@ -31,10 +31,12 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.TimerTask;
 import java.util.Vector;
+
 import javax.swing.SwingUtilities;
 
 import org.martus.client.bulletinstore.BulletinFolder;
 import org.martus.client.bulletinstore.ClientBulletinStore;
+import org.martus.client.core.BackgroundRetriever;
 import org.martus.client.core.BackgroundUploader;
 import org.martus.client.core.MartusApp;
 import org.martus.clientside.ClientSideNetworkGateway;
@@ -54,6 +56,7 @@ class BackgroundUploadTimerTask extends TimerTask
 		mainWindow = mainWindowToUse;
 		ProgressMeterInterface progressMeter = mainWindow.statusBar.getBackgroundProgressMeter();
 		uploader = new BackgroundUploader(mainWindow.getApp(), progressMeter);
+		retriever = new BackgroundRetriever(mainWindow.getApp(), progressMeter);
 	}
 	
 	public void forceRecheckOfUidsOnServer()
@@ -398,6 +401,7 @@ class BackgroundUploadTimerTask extends TimerTask
 
 	UiMainWindow mainWindow;
 	BackgroundUploader uploader;
+	BackgroundRetriever retriever;
 
 	boolean alreadyCheckedCompliance;
 	boolean inComplianceDialog;

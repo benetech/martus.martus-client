@@ -140,6 +140,7 @@ public class MartusApp
 			store = new ClientBulletinStore(cryptoToUse);
 			if(shouldUseUnofficialTranslations())
 				localization.includeOfficialLanguagesOnly = false;
+			currentRetrieveCommand = new RetrieveCommand();
 			
 		}
 		catch(MartusCrypto.CryptoInitializationException e)
@@ -689,6 +690,16 @@ public class MartusApp
 	public ClientBulletinStore getStore()
 	{
 		return store;
+	}
+	
+	public RetrieveCommand getCurrentRetrieveCommand()
+	{
+		return currentRetrieveCommand;
+	}
+	
+	public void setCurrentRetrieveCommand(RetrieveCommand rc)
+	{
+		currentRetrieveCommand = rc;
 	}
 
 	public Bulletin createBulletin()
@@ -1758,6 +1769,7 @@ public class MartusApp
 	public ClientSideNetworkGateway currentNetworkInterfaceGateway;
 	public String currentUserName;
 	private int maxNewFolders;
+	private RetrieveCommand currentRetrieveCommand;
 
 	public static final String PUBLIC_INFO_EXTENSION = ".mpi";
 	public static final String CUSTOMIZATION_TEMPLATE_EXTENSION = ".mct";
