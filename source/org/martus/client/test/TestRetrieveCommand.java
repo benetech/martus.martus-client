@@ -65,6 +65,7 @@ public class TestRetrieveCommand extends TestCaseEnhanced
 		assertEquals("wrong folder name?", sampleFolderName, rc.getFolderName());
 		assertEquals("didn't start with something to retrieve?", sampleUidList.size(), rc.getRemainingToRetrieveCount());
 		assertEquals("didn't start with nothing retrieved?", 0, rc.getRetrievedCount());
+		assertEquals("total count wrong?", sampleUidList.size(), rc.getTotalCount());
 		
 		assertEquals("wrong next to retrieve?", sampleUidList.get(0), rc.getNextToRetrieve());
 		rc.markAsRetrieved((UniversalId)sampleUidList.get(0));

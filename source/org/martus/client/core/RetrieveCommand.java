@@ -34,7 +34,7 @@ public class RetrieveCommand
 {
 	public RetrieveCommand()
 	{
-		this("", new Vector());
+		this(NO_FOLDER, new Vector());
 	}
 	
 	public RetrieveCommand(String destinationFolderName, Vector uidsToRetrieve)
@@ -60,6 +60,11 @@ public class RetrieveCommand
 		return uidsRetrieved.size();
 	}
 	
+	public int getTotalCount()
+	{
+		return getRemainingToRetrieveCount() + getRetrievedCount();
+	}
+	
 	public UniversalId getNextToRetrieve()
 	{
 		return (UniversalId)uidsRemainingToRetrieve.get(0);
@@ -72,6 +77,8 @@ public class RetrieveCommand
 		uidsRetrieved.add(uid);
 	}
 	
+	private static final String NO_FOLDER = null;
+
 	String folderName;
 	Vector uidsRemainingToRetrieve;
 	Vector uidsRetrieved;
