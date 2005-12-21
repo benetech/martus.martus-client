@@ -124,8 +124,8 @@ class BackgroundUploadTimerTask extends TimerTask
 			}
 		}
 
-		if (tag != "")			
-		 mainWindow.setStatusMessageTag(tag);
+		if(tag.length() > 0)			
+			mainWindow.setStatusMessageTag(tag);
 	}
 	
 	private void getUpdatedListOfBulletinsOnServer()
