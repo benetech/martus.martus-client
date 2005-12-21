@@ -54,7 +54,7 @@ import javax.swing.table.JTableHeader;
 import org.martus.client.bulletinstore.BulletinFolder;
 import org.martus.client.bulletinstore.ClientBulletinStore;
 import org.martus.client.bulletinstore.ClientBulletinStore.BulletinAlreadyExistsException;
-import org.martus.client.bulletinstore.ClientBulletinStore.BulletinOlderException;
+import org.martus.client.bulletinstore.ClientBulletinStore.AddOlderVersionToFolderFailedException;
 import org.martus.client.core.MartusApp;
 import org.martus.client.core.TransferableBulletinList;
 import org.martus.client.swingui.MartusLocalization;
@@ -419,7 +419,7 @@ public class UiBulletinTable extends UiTable implements ListSelectionListener, D
 			{
 				resultMessageTag = "PasteErrorBulletinAlreadyExists";
 			}
-			catch (BulletinOlderException e)
+			catch (AddOlderVersionToFolderFailedException e)
 			{
 				resultMessageTag = "PasteErrorBulletinOlder";
 			}
@@ -439,7 +439,7 @@ public class UiBulletinTable extends UiTable implements ListSelectionListener, D
 			{
 				resultMessageTag = "PasteErrorBulletinAlreadyExists";
 			}
-			catch (BulletinOlderException e)
+			catch (AddOlderVersionToFolderFailedException e)
 			{
 				resultMessageTag = "PasteErrorBulletinOlder";
 			}

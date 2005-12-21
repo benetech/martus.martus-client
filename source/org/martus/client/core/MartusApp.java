@@ -51,7 +51,7 @@ import java.util.zip.ZipFile;
 import org.martus.client.bulletinstore.BulletinFolder;
 import org.martus.client.bulletinstore.ClientBulletinStore;
 import org.martus.client.bulletinstore.ClientBulletinStore.BulletinAlreadyExistsException;
-import org.martus.client.bulletinstore.ClientBulletinStore.BulletinOlderException;
+import org.martus.client.bulletinstore.ClientBulletinStore.AddOlderVersionToFolderFailedException;
 import org.martus.client.search.BulletinSearcher;
 import org.martus.client.search.SearchTreeNode;
 import org.martus.client.swingui.EnglishStrings;
@@ -1049,7 +1049,7 @@ public class MartusApp
 					catch (BulletinAlreadyExistsException safeToIgnoreException)
 					{
 					}
-					catch (BulletinOlderException safeToIgnoreException)
+					catch (AddOlderVersionToFolderFailedException safeToIgnoreException)
 					{
 					}
 					catch (IOException e)
@@ -1256,7 +1256,7 @@ public class MartusApp
 	}
 
 	public void retrieveOneBulletinToFolder(UniversalId uid, BulletinFolder retrievedFolder, ProgressMeterInterface progressMeter) throws
-		BulletinOlderException, Exception
+		AddOlderVersionToFolderFailedException, Exception
 	{
 		File tempFile = getCurrentNetworkInterfaceGateway().retrieveBulletin(uid, getSecurity(), serverChunkSize, progressMeter);
 		try
@@ -1734,7 +1734,7 @@ public class MartusApp
 		return file;
 	}
 
-	public void saveBulletin(Bulletin bulletinToSave, BulletinFolder outboxToUse) throws CryptoException, IOException, BulletinOlderException
+	public void saveBulletin(Bulletin bulletinToSave, BulletinFolder outboxToUse) throws CryptoException, IOException, AddOlderVersionToFolderFailedException
 	{
 		store.saveBulletin(bulletinToSave);
 		store.ensureBulletinIsInFolder(store.getFolderSaved(), bulletinToSave.getUniversalId());

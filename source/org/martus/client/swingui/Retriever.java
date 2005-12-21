@@ -29,7 +29,7 @@ package org.martus.client.swingui;
 import java.util.Vector;
 
 import org.martus.client.bulletinstore.BulletinFolder;
-import org.martus.client.bulletinstore.ClientBulletinStore.BulletinOlderException;
+import org.martus.client.bulletinstore.ClientBulletinStore.AddOlderVersionToFolderFailedException;
 import org.martus.client.core.MartusApp;
 import org.martus.client.swingui.dialogs.UiProgressRetrieveBulletinsDlg;
 import org.martus.common.database.DatabaseKey;
@@ -124,7 +124,7 @@ public class Retriever
 					{
 						app.retrieveOneBulletinToFolder(uid, retrievedFolder, progressMeter);
 					}
-					catch(BulletinOlderException expected)
+					catch(AddOlderVersionToFolderFailedException expected)
 					{
 					}
 				}

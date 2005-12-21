@@ -30,7 +30,7 @@ import java.io.File;
 import java.util.Vector;
 
 import org.martus.client.bulletinstore.BulletinFolder;
-import org.martus.client.bulletinstore.ClientBulletinStore.BulletinOlderException;
+import org.martus.client.bulletinstore.ClientBulletinStore.AddOlderVersionToFolderFailedException;
 import org.martus.client.core.BackgroundRetriever;
 import org.martus.client.core.MartusApp;
 import org.martus.client.core.RetrieveCommand;
@@ -128,7 +128,7 @@ class MockRetrievingApp extends MockMartusApp
 		return retrievedUid;
 	}
 
-	public void retrieveOneBulletinToFolder(UniversalId uid, BulletinFolder retrievedFolder, ProgressMeterInterface progressMeter) throws BulletinOlderException, Exception
+	public void retrieveOneBulletinToFolder(UniversalId uid, BulletinFolder retrievedFolder, ProgressMeterInterface progressMeter) throws AddOlderVersionToFolderFailedException, Exception
 	{
 		retrievedUid = uid;
 	}

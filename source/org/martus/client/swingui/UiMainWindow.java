@@ -366,7 +366,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	private void createBackgroundUploadTasks()
 	{
 		uploader = new java.util.Timer(true);
-		backgroundUploadTimerTask = new BackgroundUploadTimerTask(this);
+		backgroundUploadTimerTask = new BackgroundTimerTask(this);
 		uploader.schedule(backgroundUploadTimerTask, 0, BACKGROUND_UPLOAD_CHECK_MILLIS);
 
 		errorChecker = new javax.swing.Timer(10*1000, new UploadErrorChecker());
@@ -2303,6 +2303,6 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	private boolean mainWindowInitalizing;
 	private boolean createdNewAccount;
 	private boolean justRecovered;
-	private BackgroundUploadTimerTask backgroundUploadTimerTask;
+	private BackgroundTimerTask backgroundUploadTimerTask;
 	private Stack cursorStack;
 }

@@ -36,7 +36,7 @@ import java.util.Set;
 import java.util.Vector;
 
 import org.martus.client.bulletinstore.ClientBulletinStore.BulletinAlreadyExistsException;
-import org.martus.client.bulletinstore.ClientBulletinStore.BulletinOlderException;
+import org.martus.client.bulletinstore.ClientBulletinStore.AddOlderVersionToFolderFailedException;
 import org.martus.client.core.MartusClientXml;
 import org.martus.client.test.MockBulletinStore;
 import org.martus.common.HQKey;
@@ -1048,7 +1048,7 @@ public class TestClientBulletinStore extends TestCaseEnhanced
 			clientStore.addBulletinToFolder(aFolder, original.getUniversalId());
 			fail("Should have thrown here.");
 		}
-		catch(BulletinOlderException expected)
+		catch(AddOlderVersionToFolderFailedException expected)
 		{
 		}
 		assertEquals("Should still only have 1 bulletin in folder since there is a newer version", 1, aFolder.getBulletinCount());
@@ -1077,7 +1077,7 @@ public class TestClientBulletinStore extends TestCaseEnhanced
 			clientStore.addBulletinToFolder(visibleFolderA, original.getUniversalId());
 			fail("Should have thrown an exception");
 		}
-		catch(BulletinOlderException expected)
+		catch(AddOlderVersionToFolderFailedException expected)
 		{
 		}
 		assertEquals("Should still only have 1 bulletin in visible folder since there is a newer version", 1, visibleFolderA.getBulletinCount());

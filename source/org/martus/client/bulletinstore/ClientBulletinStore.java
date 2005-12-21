@@ -642,7 +642,7 @@ public class ClientBulletinStore extends BulletinStore
 			{
 				ensureBulletinIsInFolder(folder, uid);
 			}
-			catch(BulletinOlderException harmlessException)
+			catch(AddOlderVersionToFolderFailedException harmlessException)
 			{
 				System.out.println("Exception: Bulletin:"+uid+" is older.");
 			}
@@ -958,7 +958,7 @@ public class ClientBulletinStore extends BulletinStore
 		return createFolder(name);
 	}
 
-	public void ensureBulletinIsInFolder(BulletinFolder folder, UniversalId uid) throws IOException, BulletinOlderException
+	public void ensureBulletinIsInFolder(BulletinFolder folder, UniversalId uid) throws IOException, AddOlderVersionToFolderFailedException
 	{
 		try
 		{
@@ -969,14 +969,14 @@ public class ClientBulletinStore extends BulletinStore
 		}
 	}
 	
-	public synchronized void addBulletinToFolder(BulletinFolder folder, UniversalId uidToAdd) throws BulletinAlreadyExistsException, IOException, BulletinOlderException
+	public synchronized void addBulletinToFolder(BulletinFolder folder, UniversalId uidToAdd) throws BulletinAlreadyExistsException, IOException, AddOlderVersionToFolderFailedException
 	{
 		Bulletin b = getBulletinRevision(uidToAdd);
 		if(b == null)
 			return;
 		
 		if(folder.isVisible() && !isLeaf(uidToAdd))
-			throw new BulletinOlderException();
+			throw new AddOlderVersionToFolderFailedException();
 		
 		folder.add(uidToAdd);
 
@@ -1282,7 +1282,7 @@ public class ClientBulletinStore extends BulletinStore
 	{
 	}
 	
-	public static class BulletinOlderException extends Exception 
+	public static class AddOlderVersionToFolderFailedException extends Exception 
 	{
 	}
 
@@ -1294,7 +1294,7 @@ public class ClientBulletinStore extends BulletinStore
 			InvalidBase64Exception, 
 			BulletinAlreadyExistsException, 
 			IOException, 
-			BulletinOlderException
+			AddOlderVersionToFolderFailedException
 	{
 		ZipFile zip = new ZipFile(zipFile);
 		try

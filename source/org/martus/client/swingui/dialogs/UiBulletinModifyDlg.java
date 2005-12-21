@@ -42,7 +42,7 @@ import javax.swing.JFrame;
 import javax.swing.JViewport;
 import org.martus.client.bulletinstore.BulletinFolder;
 import org.martus.client.bulletinstore.ClientBulletinStore;
-import org.martus.client.bulletinstore.ClientBulletinStore.BulletinOlderException;
+import org.martus.client.bulletinstore.ClientBulletinStore.AddOlderVersionToFolderFailedException;
 import org.martus.client.core.EncryptionChangeListener;
 import org.martus.client.core.LanguageChangeListener;
 import org.martus.client.core.MartusApp;
@@ -231,7 +231,7 @@ public class UiBulletinModifyDlg extends JFrame implements ActionListener, Windo
 		}
 	}
 
-	private void saveBulletinAndUpdateFolders(ClientBulletinStore store, BulletinFolder outboxToUse) throws CryptoException, IOException, BulletinOlderException
+	private void saveBulletinAndUpdateFolders(ClientBulletinStore store, BulletinFolder outboxToUse) throws CryptoException, IOException, AddOlderVersionToFolderFailedException
 	{
 		observer.getApp().saveBulletin(bulletin, outboxToUse);
 

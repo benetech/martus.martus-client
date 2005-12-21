@@ -41,7 +41,7 @@ import java.util.zip.ZipFile;
 import org.martus.client.bulletinstore.BulletinFolder;
 import org.martus.client.bulletinstore.ClientBulletinStore;
 import org.martus.client.bulletinstore.ClientBulletinStore.BulletinAlreadyExistsException;
-import org.martus.client.bulletinstore.ClientBulletinStore.BulletinOlderException;
+import org.martus.client.bulletinstore.ClientBulletinStore.AddOlderVersionToFolderFailedException;
 import org.martus.client.core.TransferableBulletinList;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.crypto.MartusCrypto.CryptoException;
@@ -145,7 +145,7 @@ public abstract class UiBulletinDropAdapter implements DropTargetListener
 		{
 			errorTag = "DropErrorBulletinExists";
 		}
-		catch (BulletinOlderException e)
+		catch (AddOlderVersionToFolderFailedException e)
 		{
 			errorTag = "DropErrorBulletinOlder";
 		}
@@ -212,7 +212,7 @@ public abstract class UiBulletinDropAdapter implements DropTargetListener
 			{
 				resultMessageTag = "DropErrorBulletinExists";
 			}
-			catch (BulletinOlderException e)
+			catch (AddOlderVersionToFolderFailedException e)
 			{
 				resultMessageTag = "DropErrorBulletinOlder";
 			}
@@ -232,7 +232,7 @@ public abstract class UiBulletinDropAdapter implements DropTargetListener
 	
 	public void attemptDropFiles(File[] files, BulletinFolder toFolder) throws
 		BulletinAlreadyExistsException,
-		BulletinOlderException,
+		AddOlderVersionToFolderFailedException,
 		Exception
 	{
 		int errorThrown = noError;
@@ -247,7 +247,7 @@ public abstract class UiBulletinDropAdapter implements DropTargetListener
 				if(errorThrown == noError)
 					errorThrown = bulletinExists;
 			}
-			catch (BulletinOlderException e)
+			catch (AddOlderVersionToFolderFailedException e)
 			{
 				if(errorThrown == noError)
 					errorThrown = bulletinOlder;
@@ -260,7 +260,7 @@ public abstract class UiBulletinDropAdapter implements DropTargetListener
 		if(errorThrown == bulletinExists)
 			throw new BulletinAlreadyExistsException();
 		if(errorThrown == bulletinOlder)
-			throw new BulletinOlderException();
+			throw new AddOlderVersionToFolderFailedException();
 		if(errorThrown == otherError)
 			throw new Exception();
 	}
@@ -273,7 +273,7 @@ public abstract class UiBulletinDropAdapter implements DropTargetListener
 		InvalidBase64Exception, 
 		BulletinAlreadyExistsException, 
 		IOException, 
-		BulletinOlderException
+		AddOlderVersionToFolderFailedException
 	{
 		ClientBulletinStore store = toFolder.getStore();
 		if(!deleteOldUnAuthoredBulletinIfRequired(file, store))
@@ -311,7 +311,7 @@ public abstract class UiBulletinDropAdapter implements DropTargetListener
 
 
 	public void attemptDropBulletins(Bulletin[] bulletins, BulletinFolder toFolder) throws
-		BulletinAlreadyExistsException, IOException, BulletinOlderException
+		BulletinAlreadyExistsException, IOException, AddOlderVersionToFolderFailedException
 	{
 		System.out.println("attemptDropBulletin");
 
@@ -335,7 +335,7 @@ public abstract class UiBulletinDropAdapter implements DropTargetListener
 				if(errorThrown == noError)
 					errorThrown = ioError;
 			}
-			catch(BulletinOlderException e)
+			catch(AddOlderVersionToFolderFailedException e)
 			{
 				if(errorThrown == noError)
 					errorThrown = bulletinOlder;
@@ -350,7 +350,7 @@ public abstract class UiBulletinDropAdapter implements DropTargetListener
 		if(errorThrown == bulletinExists)
 			throw new BulletinAlreadyExistsException();
 		if(errorThrown == bulletinOlder)
-			throw new BulletinOlderException();
+			throw new AddOlderVersionToFolderFailedException();
 		}
 
 	final int noError = 0;

@@ -49,9 +49,9 @@ import org.martus.common.network.NetworkInterfaceConstants;
 import org.martus.common.network.NetworkResponse;
 import org.martus.common.packet.UniversalId;
 
-class BackgroundUploadTimerTask extends TimerTask
+class BackgroundTimerTask extends TimerTask
 {
-	public BackgroundUploadTimerTask(UiMainWindow mainWindowToUse)
+	public BackgroundTimerTask(UiMainWindow mainWindowToUse)
 	{
 		mainWindow = mainWindowToUse;
 		ProgressMeterInterface progressMeter = mainWindow.statusBar.getBackgroundProgressMeter();
