@@ -26,10 +26,17 @@ Boston, MA 02111-1307, USA.
 
 package org.martus.client.test;
 
+import java.io.File;
 import java.util.Vector;
 
+import org.martus.client.bulletinstore.BulletinFolder;
+import org.martus.client.bulletinstore.ClientBulletinStore.BulletinOlderException;
+import org.martus.client.core.BackgroundRetriever;
 import org.martus.client.core.MartusApp;
 import org.martus.client.core.RetrieveCommand;
+import org.martus.clientside.UiLocalization;
+import org.martus.common.ProgressMeterInterface;
+import org.martus.common.crypto.MartusCrypto;
 import org.martus.common.packet.UniversalId;
 import org.martus.util.TestCaseEnhanced;
 
@@ -51,6 +58,21 @@ public class TestBackgroundRetriever extends TestCaseEnhanced
 		RetrieveCommand got = app.getCurrentRetrieveCommand();
 		assertEquals("didn't get it back?", rc.getRemainingToRetrieveCount(), got.getRemainingToRetrieveCount());
 	}
+	
+	public void testBasics() throws Exception
+	{
+		MockRetrievingApp app = MockRetrievingApp.createMockRetrievingApp();
+		RetrieveCommand rc = createSampleRetrieveCommand();
+		app.setCurrentRetrieveCommand(rc);
+		ProgressRecorder progressRecorder = new ProgressRecorder();
+		BackgroundRetriever retriever = new BackgroundRetriever(app, progressRecorder);
+		
+		UniversalId uid = rc.getNextToRetrieve();
+		retriever.retrieveNext();
+		assertEquals("didn't update progress current?", 1, progressRecorder.current);
+		assertEquals("didn't set progress max?", rc.getTotalCount(), progressRecorder.max);
+		assertEquals("didn't perform retrieve?", uid, app.getRetrievedUid());
+	}
 
 	private RetrieveCommand createSampleRetrieveCommand()
 	{
@@ -63,4 +85,53 @@ public class TestBackgroundRetriever extends TestCaseEnhanced
 		return rc;
 	}
 
+}
+
+class ProgressRecorder implements ProgressMeterInterface
+{
+	public void setStatusMessage(String message)
+	{
+	}
+
+	public void updateProgressMeter(int currentValue, int maxValue)
+	{
+		current = currentValue;
+		max = maxValue;
+	}
+
+	public boolean shouldExit()
+	{
+		return false;
+	}
+	
+	public int current;
+	public int max;
+}
+
+class MockRetrievingApp extends MockMartusApp
+{
+	private MockRetrievingApp(MartusCrypto cryptoToUse, File dataDirectoryToUse, UiLocalization localizationToUse) throws Exception
+	{
+		super(cryptoToUse, dataDirectoryToUse, localizationToUse);
+	}
+	
+	public static MockRetrievingApp createMockRetrievingApp() throws Exception 
+	{
+		File directory = createFakeDataDirectory();
+		MockRetrievingApp app = new MockRetrievingApp(createFakeSecurity(), directory, createFakeLocalization(directory));
+		initializeMockApp(app, directory);
+		return app;
+	}
+	
+	public UniversalId getRetrievedUid()
+	{
+		return retrievedUid;
+	}
+
+	public void retrieveOneBulletinToFolder(UniversalId uid, BulletinFolder retrievedFolder, ProgressMeterInterface progressMeter) throws BulletinOlderException, Exception
+	{
+		retrievedUid = uid;
+	}
+
+	UniversalId retrievedUid;
 }

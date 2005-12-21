@@ -59,38 +59,49 @@ public class MockMartusApp extends MartusApp
 
 	public static MockMartusApp create(Database db) throws Exception
 	{
-		MockMartusApp app = create(createFakeDataDirectory(), MockMartusSecurity.createClient());
+		MockMartusApp app = create(createFakeDataDirectory(), createFakeSecurity());
 		app.store = new MockBulletinStore(db, app.getSecurity());
 		return app;
 
 	}
-	
+
 	private static MockMartusApp create(File fakeDataDirectory, MartusCrypto crypto) throws MartusAppInitializationException, IOException, FileVerificationException, MissingAccountMapException, MissingAccountMapSignatureException 
 	{
-		UiLocalization emptyLocalization = new UiLocalization(fakeDataDirectory, new String[0]);
+		UiLocalization emptyLocalization = createFakeLocalization(fakeDataDirectory);
 		return create(fakeDataDirectory, crypto, emptyLocalization);
 	}
 
-	private static MockMartusApp create(File fakeDataDirectory, MartusCrypto crypto, UiLocalization emptyLocalization) throws MartusAppInitializationException, IOException, FileVerificationException, MissingAccountMapException, MissingAccountMapSignatureException {
+	private static MockMartusApp create(File fakeDataDirectory, MartusCrypto crypto, UiLocalization emptyLocalization) throws MartusAppInitializationException, IOException, FileVerificationException, MissingAccountMapException, MissingAccountMapSignatureException 
+	{
 		MockMartusApp app = new MockMartusApp(crypto, fakeDataDirectory, emptyLocalization);
+		initializeMockApp(app, fakeDataDirectory);
+		return app;
+	}
+
+	public static void initializeMockApp(MockMartusApp app, File fakeDataDirectory) throws IOException, FileVerificationException, MissingAccountMapException, MissingAccountMapSignatureException
+	{
 		app.setCurrentAccount("some user", app.getMartusDataRootDirectory());
 		app.store.doAfterSigninInitialization(fakeDataDirectory, new MockClientDatabase());
 		app.store.createFieldSpecCacheFromDatabase();
-		return app;
 	}
 
 	public static MockMartusApp create() throws Exception
 	{
-		return create(createFakeDataDirectory(), MockMartusSecurity.createClient());
+		return create(createFakeDataDirectory(), createFakeSecurity());
 	}
 
-	private MockMartusApp(MartusCrypto crypto, File dataDirectoryToUse, UiLocalization localizationToUse) throws MartusAppInitializationException
+	protected MockMartusApp(MartusCrypto crypto, File dataDirectoryToUse, UiLocalization localizationToUse) throws MartusAppInitializationException
 	{
 		super(crypto, dataDirectoryToUse, localizationToUse);
 	}
 
 	
-	private static File createFakeDataDirectory() throws IOException
+	public static MockMartusSecurity createFakeSecurity() throws Exception
+	{
+		return MockMartusSecurity.createClient();
+	}
+	
+	public static File createFakeDataDirectory() throws IOException
 	{
 		File fakeDataDirectory = File.createTempFile("$$$MockMartusApp_" + TestCaseEnhanced.getCallingTestClass(), null);
 		fakeDataDirectory.deleteOnExit();
@@ -98,6 +109,13 @@ public class MockMartusApp extends MartusApp
 		fakeDataDirectory.mkdir();
 		return fakeDataDirectory;
 	}
+	
+	public static UiLocalization createFakeLocalization(File fakeDataDirectory)
+	{
+		return new UiLocalization(fakeDataDirectory, new String[0]);
+	}
+
+
 	
 	public MtfAwareLocalization getLocalization()
 	{
