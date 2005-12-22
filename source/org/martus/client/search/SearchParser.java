@@ -26,6 +26,7 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.search;
 
 import org.martus.common.fieldspec.FieldSpec;
+import org.martus.common.fieldspec.FieldTypeDropdown;
 import org.martus.common.fieldspec.FieldTypeNormal;
 
 
@@ -85,7 +86,7 @@ public class SearchParser
 		int nextOp = SearchTreeNode.AND;
 		SearchTreeNode left = null;
 		
-		TokenList tokens = tokenize(expression);
+		TokenList tokens = getTokens(field, expression);
 		for(int i=0; i < tokens.size(); ++i)
 		{
 			String thisToken = tokens.get(i);
@@ -119,6 +120,18 @@ public class SearchParser
 		}
 		
 		return left;
+	}
+	
+	private TokenList getTokens(FieldSpec spec, String expression)
+	{
+		if(spec.getType().equals(new FieldTypeDropdown()))
+		{
+			TokenList tokens = new TokenList();
+			tokens.add(expression);
+			return tokens;
+		}
+		
+		return tokenize(expression);
 	}
 	
 	public boolean isKeyword(String candidate, String[] keywords)

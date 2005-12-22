@@ -27,6 +27,8 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.search;
 
 import org.martus.common.field.MartusField;
+import org.martus.common.fieldspec.ChoiceItem;
+import org.martus.common.fieldspec.DropDownFieldSpec;
 import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.fieldspec.FieldTypeNormal;
 import org.martus.util.TestCaseEnhanced;
@@ -244,6 +246,15 @@ public class TestSearchParser extends TestCaseEnhanced
 		assertEquals("right part wrong value?", quoted, right.getValue());
 		assertEquals("right part wrong field?", field, right.getField());
 		assertEquals("right part wrong op?", MartusField.GREATER, right.getComparisonOperator());
+	}
+	
+	public void testDropdownValuesWithSpaces()
+	{
+		String valueWithSpaces = "Item with spaces";
+		ChoiceItem[] choices = {new ChoiceItem(valueWithSpaces, valueWithSpaces)};
+		FieldSpec field = new DropDownFieldSpec(choices);
+		SearchTreeNode result = englishParser.parse(field, "=", valueWithSpaces);
+		assertEquals("didn't ignore spaces?", valueWithSpaces, result.getValue());
 	}
 	
 /*	
