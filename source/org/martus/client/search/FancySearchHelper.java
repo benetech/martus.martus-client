@@ -35,6 +35,7 @@ import org.martus.clientside.UiLocalization;
 import org.martus.common.GridData;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.field.MartusDateRangeField;
+import org.martus.common.field.MartusGridField;
 import org.martus.common.fieldspec.ChoiceItem;
 import org.martus.common.fieldspec.DropDownFieldSpec;
 import org.martus.common.fieldspec.FieldSpec;
@@ -121,20 +122,19 @@ public class FancySearchHelper
 
 	public Vector getChoiceItemsForThisField(FieldSpec spec)
 	{
-		return getChoiceItemsForThisField(spec, "", "");
+		return getChoiceItemsForThisField(spec, spec.getTag(), "");
 	}
 	
-	public Vector getChoiceItemsForThisField(FieldSpec spec, String tagPrefix, String displayPrefix)
+	public Vector getChoiceItemsForThisField(FieldSpec spec, String fullTagChain, String displayPrefix)
 	{
 
 		Vector choicesForThisField = new Vector();
 		final FieldType thisType = spec.getType();
-		final String tag = tagPrefix + spec.getTag();
 		String displayString = spec.getLabel();
-		if(StandardFieldSpecs.isStandardFieldTag(tag))
-			displayString = getLocalization().getFieldLabel(tag);
+		if(StandardFieldSpecs.isStandardFieldTag(fullTagChain))
+			displayString = getLocalization().getFieldLabel(fullTagChain);
 		else if(displayString.trim().equals(""))
-			displayString = tag;
+			displayString = fullTagChain;
 
 		displayString = displayPrefix + displayString;
 
@@ -145,8 +145,8 @@ public class FancySearchHelper
 		// dateranges create multiple entries
 		if(thisType.isDateRange())
 		{
-			choicesForThisField.addAll(getDateRangeChoiceItem(tag, MartusDateRangeField.SUBFIELD_BEGIN, displayString));
-			choicesForThisField.addAll(getDateRangeChoiceItem(tag, MartusDateRangeField.SUBFIELD_END, displayString));
+			choicesForThisField.addAll(getDateRangeChoiceItem(fullTagChain, MartusDateRangeField.SUBFIELD_BEGIN, displayString));
+			choicesForThisField.addAll(getDateRangeChoiceItem(fullTagChain, MartusDateRangeField.SUBFIELD_END, displayString));
 			return choicesForThisField;
 		}
 		
@@ -155,7 +155,7 @@ public class FancySearchHelper
 		{
 			DropDownFieldSpec originalSpec = (DropDownFieldSpec)spec;
 			DropDownFieldSpec specWithBetterLabel = new DropDownFieldSpec(originalSpec.getAllChoices());
-			specWithBetterLabel.setTag(tag);
+			specWithBetterLabel.setTag(fullTagChain);
 			specWithBetterLabel.setLabel(displayString);
 			choicesForThisField.add(new SearchableFieldChoiceItem(specWithBetterLabel));
 			return choicesForThisField;
@@ -166,7 +166,11 @@ public class FancySearchHelper
 		{
 			GridFieldSpec gridSpec = (GridFieldSpec)spec;
 			for(int i=0; i < gridSpec.getColumnCount(); ++i)
-				choicesForThisField.addAll(getChoiceItemsForThisField(gridSpec.getFieldSpec(i), tag + ".", displayString + ": "));
+			{
+				final FieldSpec columnSpec = gridSpec.getFieldSpec(i);
+				String columnTag = fullTagChain + "." + MartusGridField.sanitizeLabel(columnSpec.getLabel());
+				choicesForThisField.addAll(getChoiceItemsForThisField(columnSpec, columnTag, displayString + ": "));
+			}
 			return choicesForThisField;
 		}
 
@@ -176,7 +180,7 @@ public class FancySearchHelper
 		if(shouldSearchSpecTypeBeTheFieldSpecType(thisType))
 			choiceSpecType = thisType;
 
-		FieldSpec thisSpec = FieldSpec.createCustomField(tag, displayString, choiceSpecType);
+		FieldSpec thisSpec = FieldSpec.createCustomField(fullTagChain, displayString, choiceSpecType);
 		ChoiceItem choiceItem = new SearchableFieldChoiceItem(thisSpec);
 		choicesForThisField.add(choiceItem);
 		return choicesForThisField;

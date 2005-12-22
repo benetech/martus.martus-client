@@ -186,13 +186,13 @@ public class TestFancySearchHelper extends TestCaseEnhanced
 		FieldSpec gridChoiceNormalColumnSpec = gridChoiceNormalColumn.getSpec();
 		assertEquals("bad normal grid column?", new FieldTypeNormal(), gridChoiceNormalColumnSpec.getType());
 		assertEquals("Grid Label: column 1", gridChoiceNormalColumnSpec.getLabel());
-		assertEquals("gridtag.normaltag", gridChoiceNormalColumnSpec.getTag());
+		assertEquals("gridtag.column 1", gridChoiceNormalColumnSpec.getTag());
 		
 		ChoiceItem gridChoiceDropDownColumn = (ChoiceItem)gridTypeChoices.get(1);
 		DropDownFieldSpec gridChoiceDropDownColumnSpec = (DropDownFieldSpec)gridChoiceDropDownColumn.getSpec();
 		assertEquals("bad dropdown grid column?", new FieldTypeDropdown(), gridChoiceDropDownColumnSpec.getType());
-		assertEquals("Grid Label: column 2", gridChoiceDropDownColumnSpec.getLabel());
-		assertEquals("gridtag.dropdowntag", gridChoiceDropDownColumnSpec.getTag());
+		assertEquals("Grid Label: column.2", gridChoiceDropDownColumnSpec.getLabel());
+		assertEquals("gridtag.column 2", gridChoiceDropDownColumnSpec.getTag());
 		ChoiceItem empty = gridChoiceDropDownColumnSpec.getChoice(0);
 		ChoiceItem first = gridChoiceDropDownColumnSpec.getChoice(1);
 		ChoiceItem second = gridChoiceDropDownColumnSpec.getChoice(2);
@@ -239,9 +239,10 @@ public class TestFancySearchHelper extends TestCaseEnhanced
 		gridSpec.setTag(tag);
 		String label1 = "column 1";
 		FieldSpec column1 = new FieldSpec(label1, new FieldTypeNormal());
-		column1.setTag("normaltag");
+		final String GRID_COLUMNS_DONT_HAVE_TAGS = "";
+		column1.setTag(GRID_COLUMNS_DONT_HAVE_TAGS);
 
-		String label2 = "column 2";
+		String label2 = "column.2";
 		CustomDropDownFieldSpec column2 = createSampleDropDownSpec(label2);
 		gridSpec.addColumn(column1);
 		gridSpec.addColumn(column2);

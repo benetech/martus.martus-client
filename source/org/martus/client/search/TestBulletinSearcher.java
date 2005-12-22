@@ -159,9 +159,11 @@ public class TestBulletinSearcher extends TestCaseEnhanced
 	
 	public void testGetPossiblyNestedFieldInGrid() throws Exception
 	{
+		String ickyLabel = "Column.Label";
 		GridFieldSpec gridSpec = new GridFieldSpec();
 		gridSpec.setTag("grid");
-		gridSpec.addColumn(FieldSpec.createCustomField("columntag", "Column Label", new FieldTypeNormal()));
+		gridSpec.addColumn(FieldSpec.createCustomField("", ickyLabel, new FieldTypeNormal()));
+		gridSpec.addColumn(FieldSpec.createCustomField("", "Second column", new FieldTypeNormal()));
 		FieldSpec[] specs = {gridSpec};
 		
 		MartusCrypto security = MockMartusSecurity.createClient();
@@ -173,14 +175,19 @@ public class TestBulletinSearcher extends TestCaseEnhanced
 		data.setValueAt("second row", 1, 0);
 		realBulletin.set(gridSpec.getTag(), data.getXmlRepresentation());
 		
+		String sanitizedLabel = ickyLabel.replaceAll("\\.", " ");
 		SafeReadableBulletin b = new SafeReadableBulletin(realBulletin);
-		FieldSpec firstColumn = FieldSpec.createStandardField("grid.columntag", new FieldTypeNormal());
+		FieldSpec firstColumn = FieldSpec.createStandardField("grid." + sanitizedLabel, new FieldTypeNormal());
 		MartusSearchableGridColumnField gridColumn = (MartusSearchableGridColumnField)b.getPossiblyNestedField(firstColumn);
 		assertTrue("didn't find contains in second row?", gridColumn.doesMatch(MartusField.CONTAINS, "second", localization));
 		assertFalse("matched contains when it shouldn't?", gridColumn.doesMatch(MartusField.CONTAINS, "sfesfff", localization));
 		assertTrue("didn't find greater in second row?", gridColumn.doesMatch(MartusField.GREATER, "m", localization));
 		assertFalse("matched greater when it shouldn't?", gridColumn.doesMatch(MartusField.GREATER, "yyy", localization));
 		
+		FieldSpec secondColumn = FieldSpec.createStandardField("grid.Second column", new FieldTypeNormal());
+		MartusSearchableGridColumnField gridSecondColumn = (MartusSearchableGridColumnField)b.getPossiblyNestedField(secondColumn);
+		assertNotNull("didn't get second column?", gridSecondColumn);
+
 		Bulletin emptyBulletin = new Bulletin(security, specs, StandardFieldSpecs.getDefaultPrivateFieldSpecs());
 		SafeReadableBulletin eb = new SafeReadableBulletin(emptyBulletin);
 		assertNull("returned searchable for empty grid?", eb.getPossiblyNestedField(firstColumn));
