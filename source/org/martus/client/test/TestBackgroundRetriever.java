@@ -53,6 +53,9 @@ public class TestBackgroundRetriever extends TestCaseEnhanced
 		RetrieveCommand shouldBeEmpty = app.getCurrentRetrieveCommand();
 		assertEquals("not empty?", 0, shouldBeEmpty.getRemainingToRetrieveCount());
 		
+		BackgroundRetriever retriever = new BackgroundRetriever(app, null);
+		assertFalse("empty but work to do?", retriever.hasWorkToDo());
+		
 		RetrieveCommand rc = createSampleRetrieveCommand();
 		app.setCurrentRetrieveCommand(rc);
 		RetrieveCommand got = app.getCurrentRetrieveCommand();
@@ -66,6 +69,8 @@ public class TestBackgroundRetriever extends TestCaseEnhanced
 		app.setCurrentRetrieveCommand(rc);
 		ProgressRecorder progressRecorder = new ProgressRecorder();
 		BackgroundRetriever retriever = new BackgroundRetriever(app, progressRecorder);
+		
+		assertTrue("no work to do?", retriever.hasWorkToDo());
 		
 		UniversalId uid = rc.getNextToRetrieve();
 		retriever.retrieveNext();

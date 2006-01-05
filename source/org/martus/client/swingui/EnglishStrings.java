@@ -432,6 +432,7 @@ public class EnglishStrings
 "field:UploadingSealedBulletin=Sending Sealed Bulletin",
 "field:UploadingDraftBulletin=Sending Draft Bulletin",
 "field:StatusReady=Ready",
+"field:StatusRetrieving=Retrieving...",
 "field:RetrieveMySealedBulletinProgress=Retrieving My Sealed Bulletins",
 "field:RetrieveMyDraftBulletinProgress=Retrieving My Draft Bulletins",
 "field:RetrieveHQSealedBulletinProgress=Retrieving Field Desk Sealed Bulletins",

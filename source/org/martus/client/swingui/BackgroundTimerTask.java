@@ -84,7 +84,7 @@ class BackgroundTimerTask extends TimerTask
 			checkComplianceStatement();
 			checkForNewsFromServer();
 			getUpdatedListOfBulletinsOnServer();
-			doUploading();
+			doRetrievingOrUploading();
 		}
 		catch(Exception e)
 		{
@@ -92,10 +92,41 @@ class BackgroundTimerTask extends TimerTask
 		}
 	}
 	
+	private void doRetrievingOrUploading() throws Exception
+	{
+		final UiProgressMeter progressMeter = mainWindow.statusBar.getBackgroundProgressMeter();
+		if(retriever.hasWorkToDo())
+		{
+			progressMeter.setStatusMessage(UiMainWindow.STATUS_RETRIEVING);
+			doRetrieving();
+			return;
+		}
+		
+		mainWindow.setStatusMessageTag(STATUS_READY);
+		doUploading();
+	}
+	
+	private void doRetrieving() throws Exception
+	{
+		try
+		{
+			retriever.retrieveNext();
+		}
+		catch (Exception e)
+		{
+			String tag = "RetrieveError";
+			SwingUtilities.invokeLater(new ThreadedNotifyDlg(tag));
+			e.printStackTrace();
+		}
+		String folderName = retriever.getRetrieveFolderName();
+		mainWindow.folderContentsHaveChanged(mainWindow.getApp().createOrFindFolder(folderName));
+	}
+	
 	private void doUploading()
 		throws InterruptedException, InvocationTargetException
-	{		
-		String tag = "StatusReady";
+	{
+		
+		String tag = STATUS_READY;
 		if(mainWindow.isServerConfigured())
 		{					
 			try
@@ -388,6 +419,21 @@ class BackgroundTimerTask extends TimerTask
 		String messageContents;
 		HashMap tokenReplacement;
 	}
+	
+	class ThreadedNotifyDlg implements Runnable
+	{
+		public ThreadedNotifyDlg(String tagToUse)
+		{
+			tag = tagToUse;
+		}
+		
+		public void run()
+		{
+			mainWindow.notifyDlg(mainWindow, tag);
+		}
+		
+		String tag;
+	}
 		
 	MartusApp getApp()
 	{
@@ -398,6 +444,8 @@ class BackgroundTimerTask extends TimerTask
 	{
 		return getApp().getStore();
 	}
+
+	private static String STATUS_READY = "StatusReady";
 
 	UiMainWindow mainWindow;
 	BackgroundUploader uploader;

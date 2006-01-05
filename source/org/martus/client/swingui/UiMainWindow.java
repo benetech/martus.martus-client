@@ -53,6 +53,7 @@ import java.util.Map;
 import java.util.Stack;
 import java.util.TimerTask;
 import java.util.Vector;
+
 import javax.swing.AbstractAction;
 import javax.swing.ImageIcon;
 import javax.swing.JComponent;
@@ -61,11 +62,13 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JSplitPane;
 import javax.swing.SwingUtilities;
+
 import org.martus.client.bulletinstore.BulletinFolder;
 import org.martus.client.bulletinstore.ClientBulletinStore;
 import org.martus.client.core.BackgroundUploader;
 import org.martus.client.core.ConfigInfo;
 import org.martus.client.core.MartusApp;
+import org.martus.client.core.RetrieveCommand;
 import org.martus.client.core.TransferableBulletinList;
 import org.martus.client.core.MartusApp.LoadConfigInfoException;
 import org.martus.client.core.MartusApp.MartusAppInitializationException;
@@ -84,7 +87,6 @@ import org.martus.client.swingui.dialogs.UiInitialSigninDlg;
 import org.martus.client.swingui.dialogs.UiModelessBusyDlg;
 import org.martus.client.swingui.dialogs.UiOnlineHelpDlg;
 import org.martus.client.swingui.dialogs.UiPreferencesDlg;
-import org.martus.client.swingui.dialogs.UiProgressRetrieveBulletinsDlg;
 import org.martus.client.swingui.dialogs.UiProgressRetrieveSummariesDlg;
 import org.martus.client.swingui.dialogs.UiRemoveServerDlg;
 import org.martus.client.swingui.dialogs.UiServerSummariesDeleteDlg;
@@ -1581,27 +1583,17 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 			if(uidList == null)
 				return;
 			
-			BulletinFolder retrievedFolder = app.createOrFindFolder(folderName);
+			app.createOrFindFolder(folderName);
 			app.getStore().saveFolders();
-
-			UiProgressRetrieveBulletinsDlg progressDlg = new UiProgressRetrieveBulletinsDlg(this, retrieverProgressTag);
-			Retriever retriever = new Retriever(app, progressDlg);
-			retriever.retrieveBulletins(uidList, retrievedFolder);
-			retriever.progressDlg.setVisible(true);
-			if(progressDlg.shouldExit())
-				notifyDlg("RetrieveCanceled");
-			else
-			{
-				String result = retriever.getResult();
-				if(!result.equals(NetworkInterfaceConstants.OK))
-					notifyDlg(this, "retrievefailed", dlgTitleTag);
-				else
-					notifyDlg(this, "retrieveworked", dlgTitleTag);
-			}
-
 			folderTreeContentsHaveChanged();
-			folders.folderContentsHaveChanged(retrievedFolder);
-			folders.selectFolder(folderName);
+
+			RetrieveCommand command = new RetrieveCommand(folderName, uidList);
+			app.setCurrentRetrieveCommand(command);
+			
+			setStatusMessageTag(STATUS_RETRIEVING);
+			
+//			if(progressDlg.shouldExit())
+//				notifyDlg("RetrieveCanceled");
 		}
 		catch(ServerErrorException e)
 		{
@@ -2268,7 +2260,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		return currentActiveFrame;
 	}
 
-
+	public static final String STATUS_RETRIEVING = "StatusRetrieving";
 	
 	private MartusApp app;
 	private CurrentUiState uiState;

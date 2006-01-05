@@ -39,6 +39,16 @@ public class BackgroundRetriever
 		progressMeter = progressMeterToUse;
 	}
 	
+	public boolean hasWorkToDo()
+	{
+		return (app.getCurrentRetrieveCommand().getRemainingToRetrieveCount() > 0);
+	}
+	
+	public String getRetrieveFolderName()
+	{
+		return app.getCurrentRetrieveCommand().getFolderName();
+	}
+	
 	public void retrieveNext() throws Exception
 	{
 		RetrieveCommand rc = app.getCurrentRetrieveCommand();
@@ -47,13 +57,13 @@ public class BackgroundRetriever
 		try
 		{
 			app.retrieveOneBulletinToFolder(uid, folder, null);
-			rc.markAsRetrieved(uid);
 		}
 		catch(AddOlderVersionToFolderFailedException okIfOlderVersionWasNotAddedToRetrievedFolder)
 		{
 		}
 		finally
 		{
+			rc.markAsRetrieved(uid);
 			progressMeter.updateProgressMeter(rc.getRetrievedCount(), rc.getTotalCount());
 		}
 	}
