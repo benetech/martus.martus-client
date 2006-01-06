@@ -1576,6 +1576,12 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	private void retrieveBulletins(RetrieveTableModel model, String folderName,
 						String dlgTitleTag, String summariesProgressTag, String retrieverProgressTag)
 	{
+		if(app.getCurrentRetrieveCommand().getRemainingToRetrieveCount() > 0)
+		{
+			notifyDlg("RetrieveInProgress");
+			return;
+		}
+		
 		try
 		{
 			UiServerSummariesDlg summariesDlg = new UiServerSummariesRetrieveDlg(this, model, dlgTitleTag);
