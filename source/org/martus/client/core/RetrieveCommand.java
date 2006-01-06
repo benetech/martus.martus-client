@@ -26,8 +26,11 @@ Boston, MA 02111-1307, USA.
 
 package org.martus.client.core;
 
+import java.util.Iterator;
 import java.util.Vector;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.martus.common.packet.UniversalId;
 
 public class RetrieveCommand
@@ -45,6 +48,21 @@ public class RetrieveCommand
 		uidsRetrieved = new Vector();
 	}
 	
+	public RetrieveCommand(JSONObject createFrom)
+	{
+		String typeString = createFrom.getString(TAG_JSON_TYPE);
+		if(!TYPE_RETRIEVE_COMMAND.equals(typeString))
+			throw new RuntimeException("JSON type expected " + TYPE_RETRIEVE_COMMAND + " but was " + typeString);
+	
+		int version = createFrom.getInt(TAG_VERSION);
+		if(version != DATA_VERSION)
+			throw new RuntimeException("Data version expected " + DATA_VERSION + " but was " + version);
+		
+		folderName = createFrom.getString(TAG_FOLDER_NAME);
+		uidsRemainingToRetrieve = extractUidsFromJsonObject(createFrom.getJSONObject(TAG_TO_RETRIEVE));
+		uidsRetrieved = extractUidsFromJsonObject(createFrom.getJSONObject(TAG_RETRIEVED));
+	}
+
 	public String getFolderName()
 	{
 		return folderName;
@@ -77,7 +95,66 @@ public class RetrieveCommand
 		uidsRetrieved.add(uid);
 	}
 	
+	public JSONObject toJson()
+	{
+		JSONObject json = new JSONObject();
+		json.put(TAG_JSON_TYPE, TYPE_RETRIEVE_COMMAND);
+		json.put(TAG_VERSION, DATA_VERSION);
+
+		json.put(TAG_FOLDER_NAME, folderName);
+		json.put(TAG_TO_RETRIEVE, createJsonObject(uidsRemainingToRetrieve));
+		json.put(TAG_RETRIEVED, createJsonObject(uidsRetrieved));
+		
+		return json;
+	}
+
+	private JSONObject createJsonObject(final Vector vector)
+	{
+		JSONObject bulletinIds = new JSONObject();
+		for(int i = 0; i < vector.size(); ++i)
+		{
+			UniversalId uid = (UniversalId)vector.get(i);
+			
+			String accountId = uid.getAccountId();
+			JSONArray localIds = bulletinIds.optJSONArray(accountId);
+			if(localIds == null)
+				localIds = new JSONArray();
+			
+			localIds.put(uid.getLocalId());
+			
+			bulletinIds.put(accountId, localIds);
+		}
+		return bulletinIds;
+	}
+	
+	private Vector extractUidsFromJsonObject(JSONObject toRetrieve)
+	{
+		Vector vector = new Vector();
+		Iterator iter = toRetrieve.keys();
+		while(iter.hasNext())
+		{
+			String accountId = (String)iter.next();
+			JSONArray localIds = toRetrieve.getJSONArray(accountId);
+			for(int i = 0; i < localIds.length(); ++i)
+			{
+				String localId = (String)localIds.get(i);
+				UniversalId uid = UniversalId.createFromAccountAndLocalId(accountId, localId);
+				vector.add(uid);
+			}
+		}
+		return vector;
+	}
+	
 	private static final String NO_FOLDER = null;
+	
+	private static final String TAG_JSON_TYPE = "_Type";
+	private static final String TAG_VERSION = "_Version";
+	private static final String TAG_FOLDER_NAME = "FolderName";
+	private static final String TAG_TO_RETRIEVE = "ToRetrieve";
+	private static final String TAG_RETRIEVED = "Retrieved";
+	
+	private static final String TYPE_RETRIEVE_COMMAND = "MartusRetrieveCommand";
+	private static final int DATA_VERSION = 1;
 
 	String folderName;
 	Vector uidsRemainingToRetrieve;

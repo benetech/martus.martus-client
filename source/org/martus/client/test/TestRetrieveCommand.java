@@ -28,8 +28,10 @@ package org.martus.client.test;
 
 import java.util.Vector;
 
+import org.json.JSONObject;
 import org.martus.client.core.RetrieveCommand;
 import org.martus.common.packet.UniversalId;
+import org.martus.common.test.UniversalIdForTesting;
 import org.martus.util.TestCaseEnhanced;
 
 public class TestRetrieveCommand extends TestCaseEnhanced
@@ -85,5 +87,62 @@ public class TestRetrieveCommand extends TestCaseEnhanced
 		assertEquals("didn't reduce retrieve count again?", sampleUidList.size() - 2, rc.getRemainingToRetrieveCount());
 		assertEquals("didn't increase retrieved count again?", 2, rc.getRetrievedCount());
 	}
+	
+	public void testJson() throws Exception
+	{
+		String folderName = "Folder";
+		String accountId1 = "Pretend this is an account";
+		String accountId2 = "Another fake account id";
+		Vector uids = new Vector();
+		uids.add(UniversalIdForTesting.createFromAccountAndPrefix(accountId1, "B-"));
+		uids.add(UniversalIdForTesting.createFromAccountAndPrefix(accountId1, "B-"));
+		uids.add(UniversalIdForTesting.createFromAccountAndPrefix(accountId2, "B-"));
+		
+		RetrieveCommand rc = new RetrieveCommand(folderName, uids);
+		JSONObject json = rc.toJson();
+		assertEquals("Wrong json type?", "MartusRetrieveCommand", json.getString("_Type"));
+		assertEquals("Wrong data version?", 1, json.getInt("_Version"));
+		RetrieveCommand got = new RetrieveCommand(json);
+		assertEquals("bad folder?", rc.getFolderName(), got.getFolderName());
+		assertEquals("bad remaining count?", rc.getRemainingToRetrieveCount(), got.getRemainingToRetrieveCount());
+		assertEquals("bad done count?", rc.getRetrievedCount(), got.getRetrievedCount());
+		assertContains("missing 1", got.getNextToRetrieve(), uids);
+		rc.markAsRetrieved(rc.getNextToRetrieve());
+		assertContains("missing 2", got.getNextToRetrieve(), uids);
+		rc.markAsRetrieved(rc.getNextToRetrieve());
+		assertContains("missing 3", got.getNextToRetrieve(), uids);
+		rc.markAsRetrieved(rc.getNextToRetrieve());
+		
+		RetrieveCommand gotAfterMarking = new RetrieveCommand(rc.toJson());
+		assertEquals("bad folder after marking?", rc.getFolderName(), gotAfterMarking.getFolderName());
+		assertEquals("bad remaining count after marking?", rc.getRemainingToRetrieveCount(), gotAfterMarking.getRemainingToRetrieveCount());
+		assertEquals("bad done count after marking?", rc.getRetrievedCount(), gotAfterMarking.getRetrievedCount());
+		
+	}
+	
+	public void testBadJson() throws Exception
+	{
+		JSONObject bad = new JSONObject();
+		verifyConstructorThrows("No type or version", bad);
+		bad.put("Type", "not what we wanted");
+		verifyConstructorThrows("Bad type", bad);
+		bad.put("Type", "MartusRetrieveCommand");
+		verifyConstructorThrows("No version", bad);
+		bad.put("Version", 0);
+		verifyConstructorThrows("Older version", bad);
+		bad.put("Version", 2);
+		verifyConstructorThrows("Newer version", bad);
+	}
 
+	private void verifyConstructorThrows(String label, JSONObject bad)
+	{
+		try
+		{
+			new RetrieveCommand(bad);
+			fail("Should have thrown: " + label);
+		}
+		catch(Exception ignoreExpected)
+		{
+		}
+	}
 }
