@@ -96,6 +96,7 @@ public class EnglishStrings
 "wintitle:confirmRetrieveNewerVersions=Confirm Retrieving Newer Versions",
 "wintitle:confirmDateRageInvalid=Date Range Invalid",
 "wintitle:confirmPrintAllPrivateData=Print All Private Data",
+"wintitle:confirmCancelRetrieve=Cancel Retrieve",
 
 "wintitle:notifyDropErrorBulletinExists=Cannot Move Bulletin(s)",
 "wintitle:notifyDropErrorBulletinOlder=Cannot Move Bulletin(s)",
@@ -602,6 +603,8 @@ public class EnglishStrings
 "field:confirmRetrieveNewerVersionseffect=Each older version will be replaced by the newer version from the server.",
 "field:confirmPrintAllPrivateDatacause=One or more bulletins will not be printed because all the information is private, and you marked the \"Print only public information\" box.",
 "field:confirmPrintAllPrivateDataeffect=Answering '#PrintBack#' will allow you to return to the previous dialog so you can mark the \"Include private information\" box.  Answering '#PrintContinue#' will print only the public sections of the bulletins and skip those bulletins which are all private.",
+"field:confirmCancelRetrievecause=Bulletins are currently being retrieved from the server.",
+"field:confirmCancelRetrieveeffect=Selecting a new server will cancel the retrieval, so not all of the requested bulletins will be retrieved.",
 
 "field:confirmDateRageInvalidcause=The date range you entered is invalid.  The end date occurs before the begin date.",
 "field:confirmDateRageInvalideffect=Answering Yes will take you back to the date range to fix the problem.  Answering No will revert the date back to its original value.",

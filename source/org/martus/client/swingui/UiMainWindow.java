@@ -1298,6 +1298,14 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	
 	public void doConfigureServer()
 	{
+		if(isRetrieveInProgress())
+		{
+			if(!confirmDlg(this, "CancelRetrieve"))
+				return;
+			
+			getApp().setCurrentRetrieveCommand(new RetrieveCommand());
+		}
+		
 		if(!reSignIn())
 			return;
 		inConfigServer = true;
@@ -1375,6 +1383,11 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		{
 			inConfigServer = false;
 		}
+	}
+
+	private boolean isRetrieveInProgress()
+	{
+		return getApp().getCurrentRetrieveCommand().getRemainingToRetrieveCount() > 0;
 	}
 	
 	private String getServerCompliance(ClientSideNetworkGateway gateway)
@@ -1576,7 +1589,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	private void retrieveBulletins(RetrieveTableModel model, String folderName,
 						String dlgTitleTag, String summariesProgressTag, String retrieverProgressTag)
 	{
-		if(app.getCurrentRetrieveCommand().getRemainingToRetrieveCount() > 0)
+		if(isRetrieveInProgress())
 		{
 			notifyDlg("RetrieveInProgress");
 			return;
