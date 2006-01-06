@@ -1282,6 +1282,14 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	
 	public void doRemoveServer()
 	{
+		if(isRetrieveInProgress())
+		{
+			if(!confirmDlg(this, "CancelRetrieve"))
+				return;
+			
+			cancelRetrieve();
+		}
+		
 		if(!reSignIn())
 			return;
 		
@@ -1303,7 +1311,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 			if(!confirmDlg(this, "CancelRetrieve"))
 				return;
 			
-			getApp().setCurrentRetrieveCommand(new RetrieveCommand());
+			cancelRetrieve();
 		}
 		
 		if(!reSignIn())
@@ -1383,6 +1391,11 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		{
 			inConfigServer = false;
 		}
+	}
+
+	private void cancelRetrieve()
+	{
+		getApp().setCurrentRetrieveCommand(new RetrieveCommand());
 	}
 
 	private boolean isRetrieveInProgress()
