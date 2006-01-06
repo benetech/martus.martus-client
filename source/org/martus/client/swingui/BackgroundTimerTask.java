@@ -108,6 +108,8 @@ class BackgroundTimerTask extends TimerTask
 	
 	private void doRetrieving() throws Exception
 	{
+		String folderName = retriever.getRetrieveFolderName();
+		final BulletinFolder folder = mainWindow.getApp().createOrFindFolder(folderName);
 		try
 		{
 			retriever.retrieveNext();
@@ -118,8 +120,7 @@ class BackgroundTimerTask extends TimerTask
 			SwingUtilities.invokeLater(new ThreadedNotifyDlg(tag));
 			e.printStackTrace();
 		}
-		String folderName = retriever.getRetrieveFolderName();
-		mainWindow.folderContentsHaveChanged(mainWindow.getApp().createOrFindFolder(folderName));
+		mainWindow.folderContentsHaveChanged(folder);
 	}
 	
 	private void doUploading()
