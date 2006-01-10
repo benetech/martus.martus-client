@@ -40,13 +40,16 @@ import java.util.Vector;
 
 import org.martus.client.bulletinstore.BulletinFolder;
 import org.martus.client.bulletinstore.ClientBulletinStore;
+import org.martus.client.bulletinstore.ClientBulletinStore.AddOlderVersionToFolderFailedException;
 import org.martus.client.core.ConfigInfo;
 import org.martus.client.core.MartusApp;
+import org.martus.client.core.RetrieveCommand;
 import org.martus.client.core.MartusApp.AccountAlreadyExistsException;
 import org.martus.client.core.MartusApp.CannotCreateAccountFileException;
 import org.martus.client.core.MartusApp.SaveConfigInfoException;
 import org.martus.client.search.SearchParser;
 import org.martus.client.search.SearchTreeNode;
+import org.martus.client.swingui.EnglishStrings;
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.clientside.MtfAwareLocalization;
@@ -59,6 +62,7 @@ import org.martus.common.HQKeys;
 import org.martus.common.LegacyCustomFields;
 import org.martus.common.MartusUtilities;
 import org.martus.common.MiniLocalization;
+import org.martus.common.ProgressMeterInterface;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.crypto.MartusCrypto;
 import org.martus.common.crypto.MockMartusSecurity;
@@ -118,6 +122,67 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		assertNotNull("BulletinStore", store);
 		TRACE_END();
 	}
+	
+	public void testRetrieveNextBackgroundBulletin() throws Exception
+	{
+		class FakeRetrieveApp extends MockMartusApp
+		{
+			public FakeRetrieveApp(File tempDir) throws Exception
+			{
+				super(MockMartusSecurity.createClient(), tempDir, new UiLocalization(tempDir, EnglishStrings.strings));
+				initializeMockApp(this, tempDir);
+			}
+
+			public void retrieveOneBulletinToFolder(UniversalId uid, BulletinFolder retrievedFolder, ProgressMeterInterface progressMeter) throws AddOlderVersionToFolderFailedException, Exception
+			{
+				// fake it...do nothing
+			}
+		}
+
+		File tempDir = createTempDirectory();
+		try
+		{
+			Vector uids = new Vector();
+			uids.add(UniversalId.createDummyUniversalId());
+			uids.add(UniversalId.createDummyUniversalId());
+			RetrieveCommand rc = new RetrieveCommand("folder", uids);
+			
+			FakeRetrieveApp app = new FakeRetrieveApp(tempDir);
+			File retrieveFile = new File(tempDir, "Retrieve.dat");
+			assertFalse("retrieve file already exists?", retrieveFile.exists());
+	
+			app.startBackgroundRetrieve(rc);
+			assertTrue("retrieve file not created?", retrieveFile.exists());
+			retrieveFile.delete();
+			
+			app.retrieveNextBackgroundBulletin();
+			assertTrue("retrieve file not updated?", retrieveFile.exists());
+			retrieveFile.delete();
+	
+			app.cancelBackgroundRetrieve();
+			assertTrue("retrieve file not updated?", retrieveFile.exists());
+		}
+		finally
+		{
+			DirectoryUtils.deleteEntireDirectoryTree(tempDir);
+		}
+		
+	}
+	
+	public void testCreateRetrieveCommandBundle() throws Exception
+	{
+		Vector uids = new Vector();
+		uids.add(UniversalId.createDummyUniversalId());
+		uids.add(UniversalId.createDummyUniversalId());
+		RetrieveCommand rc = new RetrieveCommand("folder", uids);
+		byte[] bundle = appWithAccount.createRetrieveCommandBundle(rc);
+		
+		RetrieveCommand got = appWithAccount.parseRetrieveCommandBundle(bundle);
+		assertEquals("wrong folder?", rc.getFolderName(), got.getFolderName());
+		assertEquals("wrong count?", rc.getRemainingToRetrieveCount(), got.getRemainingToRetrieveCount());
+		assertEquals("wrong next uid?", rc.getNextToRetrieve(), got.getNextToRetrieve());
+	}
+	
 	
 	public void testGetDefaultLanguageForNewBulletin()
 	{

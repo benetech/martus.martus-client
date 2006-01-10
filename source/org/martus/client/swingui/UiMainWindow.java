@@ -1287,7 +1287,15 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 			if(!confirmDlg(this, "CancelRetrieve"))
 				return;
 			
-			cancelRetrieve();
+			try
+			{
+				cancelRetrieve();
+			}
+			catch (Exception e)
+			{
+				notifyDlg("UnexpectedError");
+				return;
+			}
 		}
 		
 		if(!reSignIn())
@@ -1311,7 +1319,15 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 			if(!confirmDlg(this, "CancelRetrieve"))
 				return;
 			
-			cancelRetrieve();
+			try
+			{
+				cancelRetrieve();
+			}
+			catch (Exception e)
+			{
+				notifyDlg("UnexpectedError");
+				return;
+			}
 		}
 		
 		if(!reSignIn())
@@ -1393,7 +1409,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		}
 	}
 
-	private void cancelRetrieve()
+	private void cancelRetrieve() throws Exception
 	{
 		getApp().cancelBackgroundRetrieve();
 	}
@@ -1631,6 +1647,10 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		{
 			notifyDlg("ServerError");
 			return;
+		}
+		catch(Exception e)
+		{
+			notifyDlg("UnexpectedError");
 		}
 	}
 

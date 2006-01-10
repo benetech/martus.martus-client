@@ -38,6 +38,7 @@ import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.UnsupportedEncodingException;
+import java.text.ParseException;
 import java.util.Date;
 import java.util.Enumeration;
 import java.util.Iterator;
@@ -48,10 +49,11 @@ import java.util.jar.JarFile;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
+import org.json.JSONObject;
 import org.martus.client.bulletinstore.BulletinFolder;
 import org.martus.client.bulletinstore.ClientBulletinStore;
-import org.martus.client.bulletinstore.ClientBulletinStore.BulletinAlreadyExistsException;
 import org.martus.client.bulletinstore.ClientBulletinStore.AddOlderVersionToFolderFailedException;
+import org.martus.client.bulletinstore.ClientBulletinStore.BulletinAlreadyExistsException;
 import org.martus.client.search.BulletinSearcher;
 import org.martus.client.search.SearchTreeNode;
 import org.martus.client.swingui.EnglishStrings;
@@ -79,8 +81,10 @@ import org.martus.common.MartusUtilities.ServerErrorException;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.crypto.MartusCrypto;
 import org.martus.common.crypto.MartusSecurity;
+import org.martus.common.crypto.MartusCrypto.AuthorizationFailedException;
 import org.martus.common.crypto.MartusCrypto.CryptoException;
 import org.martus.common.crypto.MartusCrypto.DecryptionException;
+import org.martus.common.crypto.MartusCrypto.EncryptionException;
 import org.martus.common.crypto.MartusCrypto.MartusSignatureException;
 import org.martus.common.crypto.MartusCrypto.NoKeyPairException;
 import org.martus.common.database.FileDatabase.MissingAccountMapException;
@@ -509,6 +513,11 @@ public class MartusApp
 		return new File(getCurrentAccountDirectoryName(), "DefaultDetails" + DEFAULT_DETAILS_EXTENSION);
 	}
 
+	public File getRetrieveFile()
+	{
+		return new File(getCurrentAccountDirectory(), "Retrieve.dat");
+	}
+
 	public String getUploadLogFilename()
 	{
 		return  getCurrentAccountDirectoryName() + "MartusUploadLog.txt";
@@ -697,14 +706,54 @@ public class MartusApp
 		return currentRetrieveCommand;
 	}
 	
-	public void startBackgroundRetrieve(RetrieveCommand rc)
+	public void startBackgroundRetrieve(RetrieveCommand rc) throws MartusSignatureException, NoKeyPairException, EncryptionException, IOException
 	{
 		currentRetrieveCommand = rc;
+		saveRetrieveCommand();
+	}
+
+	private void saveRetrieveCommand() throws MartusSignatureException, IOException, NoKeyPairException, EncryptionException, FileNotFoundException
+	{
+		byte[] retrieveCommandBytes = createRetrieveCommandBundle(getCurrentRetrieveCommand());
+		FileOutputStream out = new FileOutputStream(getRetrieveFile());
+		try
+		{
+			out.write(retrieveCommandBytes);
+		}
+		finally
+		{
+			out.close();
+		}
 	}
 	
-	public void cancelBackgroundRetrieve()
+	public void cancelBackgroundRetrieve() throws MartusSignatureException, NoKeyPairException, EncryptionException, IOException
 	{
 		startBackgroundRetrieve(new RetrieveCommand());
+	}
+	
+	public byte[] createRetrieveCommandBundle(RetrieveCommand rc) throws MartusSignatureException, IOException, NoKeyPairException, EncryptionException
+	{
+		try
+		{
+			byte[] plainText = rc.toJson().toString().getBytes("UTF-8");
+			ByteArrayOutputStream encryptedBytes = new ByteArrayOutputStream();
+			MartusCrypto security = store.getSignatureGenerator();
+			security.encrypt(new ByteArrayInputStream(plainText), encryptedBytes);
+			return security.createSignedBundle(encryptedBytes.toByteArray());
+		}
+		catch (UnsupportedEncodingException e)
+		{
+			throw new RuntimeException(e);
+		}
+	}
+	
+	public RetrieveCommand parseRetrieveCommandBundle(byte[] bundle) throws MartusSignatureException, AuthorizationFailedException, IOException, NoKeyPairException, DecryptionException, ParseException
+	{
+		MartusCrypto security = store.getSignatureGenerator();
+		byte[] encryptedBytes = security.extractFromSignedBundle(bundle);
+		ByteArrayOutputStream plainTextBytes = new ByteArrayOutputStream();
+		security.decrypt(new ByteArrayInputStreamWithSeek(encryptedBytes), plainTextBytes);
+		return new RetrieveCommand(new JSONObject(new String(plainTextBytes.toByteArray(), "UTF-8")));
 	}
 
 	public Bulletin createBulletin()
@@ -1275,6 +1324,7 @@ public class MartusApp
 		finally
 		{
 			rc.markAsRetrieved(uid);
+			saveRetrieveCommand();
 		}
 		
 	}
