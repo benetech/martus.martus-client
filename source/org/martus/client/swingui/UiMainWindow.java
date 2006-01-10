@@ -1395,7 +1395,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 
 	private void cancelRetrieve()
 	{
-		getApp().setCurrentRetrieveCommand(new RetrieveCommand());
+		getApp().cancelBackgroundRetrieve();
 	}
 
 	private boolean isRetrieveInProgress()
@@ -1620,7 +1620,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 			folderTreeContentsHaveChanged();
 
 			RetrieveCommand command = new RetrieveCommand(folderName, uidList);
-			app.setCurrentRetrieveCommand(command);
+			app.startBackgroundRetrieve(command);
 			
 			setStatusMessageTag(STATUS_RETRIEVING);
 			

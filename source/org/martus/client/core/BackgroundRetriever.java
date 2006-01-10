@@ -26,10 +26,7 @@ Boston, MA 02111-1307, USA.
 
 package org.martus.client.core;
 
-import org.martus.client.bulletinstore.BulletinFolder;
-import org.martus.client.bulletinstore.ClientBulletinStore.AddOlderVersionToFolderFailedException;
 import org.martus.common.ProgressMeterInterface;
-import org.martus.common.packet.UniversalId;
 
 public class BackgroundRetriever
 {
@@ -51,19 +48,13 @@ public class BackgroundRetriever
 	
 	public void retrieveNext() throws Exception
 	{
-		RetrieveCommand rc = app.getCurrentRetrieveCommand();
-		UniversalId uid = rc.getNextToRetrieve();
-		BulletinFolder folder = app.createOrFindFolder(rc.getFolderName());
 		try
 		{
-			app.retrieveOneBulletinToFolder(uid, folder, null);
-		}
-		catch(AddOlderVersionToFolderFailedException okIfOlderVersionWasNotAddedToRetrievedFolder)
-		{
+			app.retrieveNextBackgroundBulletin();
 		}
 		finally
 		{
-			rc.markAsRetrieved(uid);
+			RetrieveCommand rc = app.getCurrentRetrieveCommand();
 			progressMeter.updateProgressMeter(rc.getRetrievedCount(), rc.getTotalCount());
 		}
 	}

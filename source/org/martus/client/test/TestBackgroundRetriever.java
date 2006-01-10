@@ -57,7 +57,7 @@ public class TestBackgroundRetriever extends TestCaseEnhanced
 		assertFalse("empty but work to do?", retriever.hasWorkToDo());
 		
 		RetrieveCommand rc = createSampleRetrieveCommand();
-		app.setCurrentRetrieveCommand(rc);
+		app.startBackgroundRetrieve(rc);
 		RetrieveCommand got = app.getCurrentRetrieveCommand();
 		assertEquals("didn't get it back?", rc.getRemainingToRetrieveCount(), got.getRemainingToRetrieveCount());
 	}
@@ -66,7 +66,7 @@ public class TestBackgroundRetriever extends TestCaseEnhanced
 	{
 		MockRetrievingApp app = MockRetrievingApp.createMockRetrievingApp();
 		RetrieveCommand rc = createSampleRetrieveCommand();
-		app.setCurrentRetrieveCommand(rc);
+		app.startBackgroundRetrieve(rc);
 		ProgressRecorder progressRecorder = new ProgressRecorder();
 		BackgroundRetriever retriever = new BackgroundRetriever(app, progressRecorder);
 		

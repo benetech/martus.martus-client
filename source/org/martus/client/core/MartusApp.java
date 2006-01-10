@@ -697,9 +697,14 @@ public class MartusApp
 		return currentRetrieveCommand;
 	}
 	
-	public void setCurrentRetrieveCommand(RetrieveCommand rc)
+	public void startBackgroundRetrieve(RetrieveCommand rc)
 	{
 		currentRetrieveCommand = rc;
+	}
+	
+	public void cancelBackgroundRetrieve()
+	{
+		startBackgroundRetrieve(new RetrieveCommand());
 	}
 
 	public Bulletin createBulletin()
@@ -1252,6 +1257,25 @@ public class MartusApp
 			return bulletin.getFieldDataPacket();
 
 		return retrieveFieldDataPacketFromServer(uid, summary.getFieldDataPacketLocalId());
+		
+	}
+	
+	public void retrieveNextBackgroundBulletin() throws Exception
+	{
+		RetrieveCommand rc = getCurrentRetrieveCommand();
+		UniversalId uid = rc.getNextToRetrieve();
+		BulletinFolder folder = createOrFindFolder(rc.getFolderName());
+		try
+		{
+			retrieveOneBulletinToFolder(uid, folder, null);
+		}
+		catch(AddOlderVersionToFolderFailedException okIfOlderVersionWasNotAddedToRetrievedFolder)
+		{
+		}
+		finally
+		{
+			rc.markAsRetrieved(uid);
+		}
 		
 	}
 
