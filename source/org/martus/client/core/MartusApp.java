@@ -38,7 +38,6 @@ import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.UnsupportedEncodingException;
-import java.text.ParseException;
 import java.util.Date;
 import java.util.Enumeration;
 import java.util.Iterator;
@@ -81,7 +80,6 @@ import org.martus.common.MartusUtilities.ServerErrorException;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.crypto.MartusCrypto;
 import org.martus.common.crypto.MartusSecurity;
-import org.martus.common.crypto.MartusCrypto.AuthorizationFailedException;
 import org.martus.common.crypto.MartusCrypto.CryptoException;
 import org.martus.common.crypto.MartusCrypto.DecryptionException;
 import org.martus.common.crypto.MartusCrypto.EncryptionException;
@@ -747,7 +745,7 @@ public class MartusApp
 		}
 	}
 	
-	public RetrieveCommand parseRetrieveCommandBundle(byte[] bundle) throws MartusSignatureException, AuthorizationFailedException, IOException, NoKeyPairException, DecryptionException, ParseException
+	public RetrieveCommand parseRetrieveCommandBundle(byte[] bundle) throws Exception
 	{
 		MartusCrypto security = store.getSignatureGenerator();
 		byte[] encryptedBytes = security.extractFromSignedBundle(bundle);

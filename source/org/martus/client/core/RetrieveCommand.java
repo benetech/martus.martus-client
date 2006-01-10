@@ -35,6 +35,29 @@ import org.martus.common.packet.UniversalId;
 
 public class RetrieveCommand
 {
+	static class DataVersionException extends Exception
+	{
+		DataVersionException(int actual)
+		{
+			super("Data version expected " + RetrieveCommand.DATA_VERSION + " but was " + actual);
+		}
+	}
+	public static class OlderDataVersionException extends DataVersionException 
+	{
+		OlderDataVersionException(int foundVersion)
+		{
+			super(foundVersion);
+		}
+	}
+	
+	public static class NewerDataVersionException extends DataVersionException
+	{
+		NewerDataVersionException(int foundVersion)
+		{
+			super(foundVersion);
+		}
+	}
+	
 	public RetrieveCommand()
 	{
 		this(NO_FOLDER, new Vector());
@@ -48,15 +71,17 @@ public class RetrieveCommand
 		uidsRetrieved = new Vector();
 	}
 	
-	public RetrieveCommand(JSONObject createFrom)
+	public RetrieveCommand(JSONObject createFrom) throws DataVersionException
 	{
 		String typeString = createFrom.getString(TAG_JSON_TYPE);
 		if(!TYPE_RETRIEVE_COMMAND.equals(typeString))
 			throw new RuntimeException("JSON type expected " + TYPE_RETRIEVE_COMMAND + " but was " + typeString);
 	
-		int version = createFrom.getInt(TAG_VERSION);
-		if(version != DATA_VERSION)
-			throw new RuntimeException("Data version expected " + DATA_VERSION + " but was " + version);
+		int version = createFrom.getInt(TAG_DATA_VERSION);
+		if(version < DATA_VERSION)
+			throw new OlderDataVersionException(version);
+		else if(version > DATA_VERSION)
+			throw new NewerDataVersionException(version);
 		
 		folderName = createFrom.getString(TAG_FOLDER_NAME);
 		uidsRemainingToRetrieve = extractUidsFromJsonObject(createFrom.getJSONObject(TAG_TO_RETRIEVE));
@@ -99,7 +124,7 @@ public class RetrieveCommand
 	{
 		JSONObject json = new JSONObject();
 		json.put(TAG_JSON_TYPE, TYPE_RETRIEVE_COMMAND);
-		json.put(TAG_VERSION, DATA_VERSION);
+		json.put(TAG_DATA_VERSION, DATA_VERSION);
 
 		json.put(TAG_FOLDER_NAME, folderName);
 		json.put(TAG_TO_RETRIEVE, createJsonObject(uidsRemainingToRetrieve));
@@ -147,14 +172,15 @@ public class RetrieveCommand
 	
 	private static final String NO_FOLDER = null;
 	
-	private static final String TAG_JSON_TYPE = "_Type";
-	private static final String TAG_VERSION = "_Version";
+	public static final String TAG_JSON_TYPE = "_Type";
+	public static final String TAG_DATA_VERSION = "_DataVersion";
+	
 	private static final String TAG_FOLDER_NAME = "FolderName";
 	private static final String TAG_TO_RETRIEVE = "ToRetrieve";
 	private static final String TAG_RETRIEVED = "Retrieved";
 	
-	private static final String TYPE_RETRIEVE_COMMAND = "MartusRetrieveCommand";
-	private static final int DATA_VERSION = 1;
+	static final String TYPE_RETRIEVE_COMMAND = "MartusRetrieveCommand";
+	public static final int DATA_VERSION = 1;
 
 	String folderName;
 	Vector uidsRemainingToRetrieve;

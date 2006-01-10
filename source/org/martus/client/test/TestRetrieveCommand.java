@@ -26,6 +26,7 @@ Boston, MA 02111-1307, USA.
 
 package org.martus.client.test;
 
+import java.util.NoSuchElementException;
 import java.util.Vector;
 
 import org.json.JSONObject;
@@ -101,7 +102,7 @@ public class TestRetrieveCommand extends TestCaseEnhanced
 		RetrieveCommand rc = new RetrieveCommand(folderName, uids);
 		JSONObject json = rc.toJson();
 		assertEquals("Wrong json type?", "MartusRetrieveCommand", json.getString("_Type"));
-		assertEquals("Wrong data version?", 1, json.getInt("_Version"));
+		assertEquals("Wrong data version?", 1, json.getInt("_DataVersion"));
 		RetrieveCommand got = new RetrieveCommand(json);
 		assertEquals("bad folder?", rc.getFolderName(), got.getFolderName());
 		assertEquals("bad remaining count?", rc.getRemainingToRetrieveCount(), got.getRemainingToRetrieveCount());
@@ -123,18 +124,18 @@ public class TestRetrieveCommand extends TestCaseEnhanced
 	public void testBadJson() throws Exception
 	{
 		JSONObject bad = new JSONObject();
-		verifyConstructorThrows("No type or version", bad);
-		bad.put("Type", "not what we wanted");
-		verifyConstructorThrows("Bad type", bad);
-		bad.put("Type", "MartusRetrieveCommand");
-		verifyConstructorThrows("No version", bad);
-		bad.put("Version", 0);
-		verifyConstructorThrows("Older version", bad);
-		bad.put("Version", 2);
-		verifyConstructorThrows("Newer version", bad);
+		verifyConstructorThrows("No type or version", bad, NoSuchElementException.class);
+		bad.put(RetrieveCommand.TAG_JSON_TYPE, "not what we wanted");
+		verifyConstructorThrows("Bad type", bad, RuntimeException.class);
+		bad.put(RetrieveCommand.TAG_JSON_TYPE, "MartusRetrieveCommand");
+		verifyConstructorThrows("No version", bad, NoSuchElementException.class);
+		bad.put(RetrieveCommand.TAG_DATA_VERSION, 0);
+		verifyConstructorThrows("Older version", bad, RetrieveCommand.OlderDataVersionException.class);
+		bad.put(RetrieveCommand.TAG_DATA_VERSION, 2);
+		verifyConstructorThrows("Newer version", bad, RetrieveCommand.NewerDataVersionException.class);
 	}
 
-	private void verifyConstructorThrows(String label, JSONObject bad)
+	private void verifyConstructorThrows(String label, JSONObject bad, Class expectedClass)
 	{
 		try
 		{
@@ -143,6 +144,7 @@ public class TestRetrieveCommand extends TestCaseEnhanced
 		}
 		catch(Exception ignoreExpected)
 		{
+			assertEquals("wrong exception class?", expectedClass, ignoreExpected.getClass());
 		}
 	}
 }
