@@ -31,6 +31,7 @@ import java.awt.Point;
 import java.awt.Rectangle;
 import java.io.File;
 import java.io.FileFilter;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -167,6 +168,79 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 			DirectoryUtils.deleteEntireDirectoryTree(tempDir);
 		}
 		
+	}
+	
+	public void testLoadRetrieveCommand() throws Exception
+	{
+		try
+		{
+			appWithAccount.loadRetrieveCommand();
+		}
+		catch(Exception e)
+		{
+			fail("Should not have thrown if retrieve file doesn't exist");
+		}
+		
+		RetrieveCommand rc = new RetrieveCommand("Blah", new Vector());
+		appWithAccount.startBackgroundRetrieve(rc);
+		appWithAccount.currentRetrieveCommand = new RetrieveCommand();
+		appWithAccount.loadRetrieveCommand();
+		assertEquals("didn't load?", rc.getFolderName(), appWithAccount.getCurrentRetrieveCommand().getFolderName());
+		
+		FileInputStream in = new FileInputStream(appWithAccount.getRetrieveFile());
+		byte[] contents = new byte[(int)appWithAccount.getRetrieveFile().length()];
+		in.read(contents);
+		in.close();
+		
+		contents[50] = (byte)(contents[50] ^ 0xFF);
+		
+		FileOutputStream out = new FileOutputStream(appWithAccount.getRetrieveFile());
+		out.write(contents);
+		out.close();
+		
+		try
+		{
+			appWithAccount.loadRetrieveCommand();
+			fail("Should have thrown for corrupted file");
+		}
+		catch(Exception ignoreExpected)
+		{
+		}
+		
+		class RetrieveCommandWithFakeVersion extends RetrieveCommand
+		{
+
+			public int getDataVersion()
+			{
+				return fakeVersion;
+			}
+			
+			public int fakeVersion;
+		}
+		
+		RetrieveCommandWithFakeVersion tooOld = new RetrieveCommandWithFakeVersion();
+		tooOld.fakeVersion = RetrieveCommand.DATA_VERSION - 1;
+		appWithAccount.startBackgroundRetrieve(tooOld);
+		try
+		{
+			appWithAccount.loadRetrieveCommand();
+			fail("Should have thrown for older data version");
+		}
+		catch(RetrieveCommand.OlderDataVersionException ignoreExpected)
+		{
+		}
+		
+		RetrieveCommandWithFakeVersion tooNew = new RetrieveCommandWithFakeVersion();
+		tooNew.fakeVersion = RetrieveCommand.DATA_VERSION + 1;
+		appWithAccount.startBackgroundRetrieve(tooNew);
+		try
+		{
+			appWithAccount.loadRetrieveCommand();
+			fail("Should have thrown for older data version");
+		}
+		catch(RetrieveCommand.NewerDataVersionException ignoreExpected)
+		{
+		}
 	}
 	
 	public void testCreateRetrieveCommandBundle() throws Exception

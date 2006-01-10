@@ -340,6 +340,8 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 			}
 			waitingForBulletinsToLoad.endDialog();
 
+			reloadPendingRetrieveQueue();
+			
 			requestContactInfo();
 			
 			addWindowListener(new WindowEventHandler());
@@ -413,6 +415,22 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		{
 			requestToUpdateContactInfoOnServerAndSaveInfo();
 			info.clearPromptUserRequestSendToServer();
+		}
+	}
+	
+	private void reloadPendingRetrieveQueue()
+	{
+		try
+		{
+			app.loadRetrieveCommand();
+		}
+		catch(RetrieveCommand.DataVersionException e)
+		{
+			notifyDlg("RetrieveFileDataVersionError");
+		}
+		catch (Exception e)
+		{
+			notifyDlg("RetrieveFileError");
 		}
 	}
 

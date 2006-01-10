@@ -35,7 +35,7 @@ import org.martus.common.packet.UniversalId;
 
 public class RetrieveCommand
 {
-	static class DataVersionException extends Exception
+	public static class DataVersionException extends Exception
 	{
 		DataVersionException(int actual)
 		{
@@ -78,9 +78,9 @@ public class RetrieveCommand
 			throw new RuntimeException("JSON type expected " + TYPE_RETRIEVE_COMMAND + " but was " + typeString);
 	
 		int version = createFrom.getInt(TAG_DATA_VERSION);
-		if(version < DATA_VERSION)
+		if(version < getDataVersion())
 			throw new OlderDataVersionException(version);
-		else if(version > DATA_VERSION)
+		else if(version > getDataVersion())
 			throw new NewerDataVersionException(version);
 		
 		folderName = createFrom.getString(TAG_FOLDER_NAME);
@@ -120,11 +120,16 @@ public class RetrieveCommand
 		uidsRetrieved.add(uid);
 	}
 	
+	public int getDataVersion()
+	{
+		return DATA_VERSION;
+	}
+	
 	public JSONObject toJson()
 	{
 		JSONObject json = new JSONObject();
 		json.put(TAG_JSON_TYPE, TYPE_RETRIEVE_COMMAND);
-		json.put(TAG_DATA_VERSION, DATA_VERSION);
+		json.put(TAG_DATA_VERSION, getDataVersion());
 
 		json.put(TAG_FOLDER_NAME, folderName);
 		json.put(TAG_TO_RETRIEVE, createJsonObject(uidsRemainingToRetrieve));

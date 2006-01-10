@@ -170,6 +170,11 @@ public class MockMartusApp extends MartusApp
 		if(hashFile.exists())
 			throw new IOException("UserHashFile");
 		
+		File retrieveFile = getRetrieveFile();
+		retrieveFile.delete();
+		if(retrieveFile.exists())
+			throw new IOException("RetrieveFile");
+		
 		rootDir.delete();
 		if(rootDir.exists())
 			throw new IOException("MartusRootDirectory " + rootDir.getPath());

@@ -709,6 +709,26 @@ public class MartusApp
 		currentRetrieveCommand = rc;
 		saveRetrieveCommand();
 	}
+	
+	public void loadRetrieveCommand() throws Exception
+	{
+		final File retrieveFile = getRetrieveFile();
+		if(!retrieveFile.exists())
+			return;
+
+		int size = (int)retrieveFile.length();
+		byte[] bundle = new byte[size];
+		FileInputStream in = new FileInputStream(retrieveFile);
+		try
+		{
+			in.read(bundle);
+		}
+		finally
+		{
+			in.close();
+		}
+		startBackgroundRetrieve(parseRetrieveCommandBundle(bundle));
+	}
 
 	private void saveRetrieveCommand() throws MartusSignatureException, IOException, NoKeyPairException, EncryptionException, FileNotFoundException
 	{
@@ -1841,7 +1861,7 @@ public class MartusApp
 	public ClientSideNetworkGateway currentNetworkInterfaceGateway;
 	public String currentUserName;
 	private int maxNewFolders;
-	private RetrieveCommand currentRetrieveCommand;
+	public RetrieveCommand currentRetrieveCommand;
 
 	public static final String PUBLIC_INFO_EXTENSION = ".mpi";
 	public static final String CUSTOMIZATION_TEMPLATE_EXTENSION = ".mct";
