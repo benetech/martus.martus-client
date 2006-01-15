@@ -102,7 +102,7 @@ class BackgroundTimerTask extends TimerTask
 			return;
 		}
 		
-		mainWindow.setStatusMessageTag(STATUS_READY);
+		mainWindow.setStatusMessageReady();
 		doUploading();
 	}
 	
@@ -127,7 +127,7 @@ class BackgroundTimerTask extends TimerTask
 		throws InterruptedException, InvocationTargetException
 	{
 		
-		String tag = STATUS_READY;
+		String tag = UiMainWindow.STATUS_READY;
 		if(mainWindow.isServerConfigured())
 		{					
 			try
@@ -445,8 +445,6 @@ class BackgroundTimerTask extends TimerTask
 	{
 		return getApp().getStore();
 	}
-
-	private static String STATUS_READY = "StatusReady";
 
 	UiMainWindow mainWindow;
 	BackgroundUploader uploader;

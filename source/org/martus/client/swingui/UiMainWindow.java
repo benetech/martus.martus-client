@@ -1420,6 +1420,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 			backgroundUploadTimerTask.forceRecheckOfUidsOnServer();
 			getStore().clearOnServerLists();
 			repaint();
+			setStatusMessageReady();
 		}
 		finally
 		{
@@ -1958,6 +1959,11 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		r.setStatusMessage(tag);
 		r.hideProgressMeter();
 	}
+	
+	public void setStatusMessageReady()
+	{
+		setStatusMessageTag(UiMainWindow.STATUS_READY);
+	}
 
 	int signIn(int mode)
 	{
@@ -2331,6 +2337,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	}
 
 	public static final String STATUS_RETRIEVING = "StatusRetrieving";
+	public static String STATUS_READY = "StatusReady";
 	
 	private MartusApp app;
 	private CurrentUiState uiState;
