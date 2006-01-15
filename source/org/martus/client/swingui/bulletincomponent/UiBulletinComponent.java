@@ -29,10 +29,12 @@ package org.martus.client.swingui.bulletincomponent;
 import java.awt.Dimension;
 import java.awt.Rectangle;
 import java.io.IOException;
+
 import javax.swing.JCheckBox;
 import javax.swing.Scrollable;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
+
 import org.martus.client.core.EncryptionChangeListener;
 import org.martus.client.core.LanguageChangeListener;
 import org.martus.client.swingui.UiMainWindow;
@@ -149,7 +151,15 @@ abstract public class UiBulletinComponent extends UiParagraphPanel implements Sc
 		privateSection.clearWarningIndicator();
 
 		boolean notYourBulletin = !currentBulletin.getAccount().equals(mainWindow.getApp().getAccountId());
-		if(!currentBulletin.isValid())
+		
+		boolean areAttachmentsValid = false; 
+		
+		mainWindow.setWaitingCursor();
+		areAttachmentsValid = mainWindow.getStore().areAttachmentsValid(currentBulletin);
+		mainWindow.resetCursor();
+		
+		boolean isBulletinValid = currentBulletin.isNonAttachmentDataValid() && areAttachmentsValid;
+		if(!isBulletinValid)
 		{
 			String text;
 			if(notYourBulletin)
