@@ -485,7 +485,7 @@ public class EnglishStrings
 "button:PrintToDisk=Send report output to a file",
 "wintitle:PrintToWhichFile=Print to which file",
 "field:DefaultPrintToDiskFileName=bulletins.html",
-"wintitle:notifyPrintToDiskComplete=Print To Disk",
+"wintitle:notifyPrintToDiskComplete=Print To Report File",
 "field:notifyPrintToDiskCompletecause=Finished",
 
 "field:VirtualUserNameDescription=(Enter using regular keyboard)",
