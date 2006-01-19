@@ -4,7 +4,7 @@ AVISO: Esta traducción no fue creada por el equipo Martus, y tal vez no se le d
 
 ПРЕДУПРЕЖДЕНИЕ:  Данный перевод создан не разработчиками Martus и может быть недостоверным.  Если Вы хотите использовать только официальные переводы, выйдите из Martus, удалите из своего каталога Martus файл #UseUnofficialTranslationFiles# и запустите Martus заново.
 
-AVERTISSEMENT : Cette traduction n'a pas été créée par l'équipe de Martus, et peut donc ne pas être digne de confiance.  Si vous voulez seulement employer des traductions officielles alors sortent Martus, enlèvent le fichier #UseUnofficialTranslationFiles# de votre répertoire de Martus, et remettent en marche Martus.
+ATTENTION : Cette traduction n'a pas été effectuée par l'équipe Martus et peut donc ne pas être fiable. Si vous souhaitez n'utiliser que des traductions officielles, quittez Martus, supprimez le fichier #UseUnofficialTranslationFiles# de votre répertoire Martus, et redémarrez Martus.
 
 चेतावनी: यो अनुवाद मार्टस समुहद्धारा सृजना गरेको थिएन, र त्यसकारण विश्वासिलो नहुनसक्छ । यदि तपाईले मात्र आधिकारिक अनुवाद मात्र प्रयोग गर्न चाहनु हुन्छ भने मार्टसबाट बाहिर निस्कनुहोस्, तपाईको मार्टस निदेशकबाट #UseUnofficialTranslationFiles# फाइल हटाउनुहोस् र मार्टसलाई पून: संचालन गर्नुहोस् ।
 
