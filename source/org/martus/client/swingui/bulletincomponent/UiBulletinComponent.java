@@ -150,7 +150,9 @@ abstract public class UiBulletinComponent extends UiParagraphPanel implements Sc
 		privateSection.copyDataFromPacket(privateData);
 		privateSection.clearWarningIndicator();
 
-		boolean notYourBulletin = !currentBulletin.getAccount().equals(mainWindow.getApp().getAccountId());
+		String accountId = mainWindow.getApp().getAccountId();
+		
+		boolean notYourBulletin = !currentBulletin.getAccount().equals(accountId);
 		
 		boolean areAttachmentsValid = false; 
 		
@@ -158,8 +160,10 @@ abstract public class UiBulletinComponent extends UiParagraphPanel implements Sc
 		areAttachmentsValid = mainWindow.getStore().areAttachmentsValid(currentBulletin);
 		mainWindow.resetCursor();
 		
-		boolean isBulletinValid = currentBulletin.isNonAttachmentDataValid() && areAttachmentsValid;
-		if(!isBulletinValid)
+		boolean isBulletinDamaged = !currentBulletin.isNonAttachmentDataValid() && areAttachmentsValid;
+		boolean notAuthorizedToRead = !currentBulletin.getAuthorizedToReadKeys().containsKey(accountId);
+		
+		if(isBulletinDamaged || (notYourBulletin && notAuthorizedToRead))
 		{
 			String text;
 			if(notYourBulletin)
