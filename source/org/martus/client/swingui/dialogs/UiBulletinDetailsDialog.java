@@ -28,14 +28,12 @@ package org.martus.client.swingui.dialogs;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JDialog;
 import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
-
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.common.bulletin.Bulletin;
@@ -79,9 +77,7 @@ public class UiBulletinDetailsDialog extends JDialog
 		if(versionTable.getRowCount() < 2)
 			previewVersionButton.setEnabled(false);
 		panel.addComponents(closeButton, previewVersionButton);
-
 		getContentPane().add(new UiScrollPane(panel, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER));
-		
 		Utilities.centerDlg(this);
 		setResizable(true);
 		
@@ -136,6 +132,11 @@ public class UiBulletinDetailsDialog extends JDialog
 		}
 		populateVersionRow(versionModel, history.size(), bulletin.getUniversalId());
 		versionTable = new UiTable(versionModel);
+		versionTable.setMaxColumnWidthToHeaderWidth(0);
+		versionTable.setColumnWidthToHeaderWidth(1);
+		versionTable.setColumnWidth(2, DATE_COLUMN_WIDTH);
+		versionTable.setColumnWidth(3, TITLE_COLUMN_WIDTH);
+		versionTable.setAutoResizeMode(UiTable.AUTO_RESIZE_OFF);
 		versionTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		versionTable.setColumnSelectionAllowed(false);
 		versionTable.setShowGrid(true);
@@ -228,6 +229,8 @@ public class UiBulletinDetailsDialog extends JDialog
 		}
 	}
 
+	private static final int TITLE_COLUMN_WIDTH = 300;
+	private static final int DATE_COLUMN_WIDTH = 125;
 	
 	UiMainWindow mainWindow;
 	Bulletin bulletin;
