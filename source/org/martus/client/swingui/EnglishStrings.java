@@ -486,7 +486,7 @@ public class EnglishStrings
 "wintitle:PrintToWhichFile=Print to which file",
 "field:DefaultPrintToDiskFileName=bulletins.html",
 "wintitle:notifyPrintToDiskComplete=Print To Report File",
-"field:notifyPrintToDiskCompletecause=Finished",
+"field:notifyPrintToDiskCompletecause=Successfully saved Report",
 
 "field:VirtualUserNameDescription=(Enter using regular keyboard)",
 "field:VirtualPasswordDescription=Enter Password using mouse with on-screen keyboard below",
