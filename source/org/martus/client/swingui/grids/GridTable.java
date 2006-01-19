@@ -116,8 +116,9 @@ public class GridTable extends UiTableWithCellEditingProtection
 	{
 		final int SCROLL_BAR_ALLOWANCE = 50;
 		final int DROPDOWN_LANGUAGE_PADDING = 15;
+		final int HEADER_INSETS = 5;
 		String columnHeaderText = getColumnName(column);
-		int widestWidth = getRenderedWidth(0, columnHeaderText);
+		int widestWidth = getRenderedWidth(0, columnHeaderText) + HEADER_INSETS;
 		for(int i = 0; i < spec.getCount(); ++i)
 		{
 			String thisValue = spec.getChoice(i).toString();
