@@ -153,17 +153,12 @@ abstract public class UiBulletinComponent extends UiParagraphPanel implements Sc
 		String accountId = mainWindow.getApp().getAccountId();
 		
 		boolean notYourBulletin = !currentBulletin.getAccount().equals(accountId);
-		
-		boolean areAttachmentsValid = false; 
-		
+		boolean notAuthorizedToRead = !currentBulletin.getAuthorizedToReadKeys().containsKey(accountId);
 		mainWindow.setWaitingCursor();
-		areAttachmentsValid = mainWindow.getStore().areAttachmentsValid(currentBulletin);
+		boolean isBulletinValid = mainWindow.getStore().isBulletinValid(currentBulletin);
 		mainWindow.resetCursor();
 		
-		boolean isBulletinDamaged = !currentBulletin.isNonAttachmentDataValid() && areAttachmentsValid;
-		boolean notAuthorizedToRead = !currentBulletin.getAuthorizedToReadKeys().containsKey(accountId);
-		
-		if(isBulletinDamaged || (notYourBulletin && notAuthorizedToRead))
+		if(!isBulletinValid || (notYourBulletin && notAuthorizedToRead))
 		{
 			String text;
 			if(notYourBulletin)
