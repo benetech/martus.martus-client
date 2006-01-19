@@ -28,11 +28,9 @@ package org.martus.client.swingui.dialogs;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
-
 import org.martus.client.core.ConfigInfo;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.clientside.UiLocalization;
@@ -113,8 +111,7 @@ public class UiContactInfoDlg extends JDialog implements ActionListener
 		getContentPane().add(scroller);
 		getRootPane().setDefaultButton(ok);
 
-		Utilities.centerDlg(this);
-		setResizable(true);
+		setSize(Utilities.getViewableScreenSize());
 		setVisible(true);
 		toFront();
 	}
