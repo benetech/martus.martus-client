@@ -447,6 +447,49 @@ public class TestLocalization extends TestCaseEnhanced
 		myLocalization2.addTranslation("XY", "field:translationVersion=Version 0.0");
 		assertFalse(myLocalization2.doesTranslationVersionMatchProgramVersion("XY", UiConstants.versionLabel));
 		assertTrue(myLocalization2.doesTranslationVersionMatchProgramVersion(MartusLocalization.ENGLISH, UiConstants.versionLabel));
+
+		String currentVersion = "Version 8";
+		myLocalization2.addTranslation("XY", "field:translationVersion=Version 9");
+		assertFalse("Major Only:  Major version changes are not allowed", myLocalization2.doesTranslationVersionMatchProgramVersion("XY", currentVersion));
+		myLocalization2.addTranslation("XY", "field:translationVersion=Version 8.1");
+		assertFalse("Major Only: Minor version changes are not allowed", myLocalization2.doesTranslationVersionMatchProgramVersion("XY", currentVersion));
+		myLocalization2.addTranslation("XY", "field:translationVersion=Version 8.0.1");
+		assertTrue("Major Only: Incremental version changes are allowed", myLocalization2.doesTranslationVersionMatchProgramVersion("XY", currentVersion));
+		myLocalization2.addTranslation("XY", "field:translationVersion=Version 8");
+		assertTrue("Major Only: Same Major allowed", myLocalization2.doesTranslationVersionMatchProgramVersion("XY", currentVersion));
+
+		currentVersion = "Version 8.1";
+		myLocalization2.addTranslation("XY", "field:translationVersion=Version 8");
+		assertFalse("Translation has Major Only: but Minor of 0 is implied", myLocalization2.doesTranslationVersionMatchProgramVersion("XY", currentVersion));
+		myLocalization2.addTranslation("XY", "field:translationVersion=Version 9");
+		assertFalse("Translation has Major Only:  Major version changes are not allowed", myLocalization2.doesTranslationVersionMatchProgramVersion("XY", currentVersion));
+
+		currentVersion = "Version 8.0.1";
+		myLocalization2.addTranslation("XY", "field:translationVersion=Version 8");
+		assertTrue(myLocalization2.doesTranslationVersionMatchProgramVersion("XY", currentVersion));
+		myLocalization2.addTranslation("XY", "field:translationVersion=Version 8.1");
+		assertFalse(myLocalization2.doesTranslationVersionMatchProgramVersion("XY", currentVersion));
+		myLocalization2.addTranslation("XY", "field:translationVersion=Version 8.0.2");
+		assertTrue(myLocalization2.doesTranslationVersionMatchProgramVersion("XY", currentVersion));
+		
+		
+		currentVersion = "Version 2.8";
+		myLocalization2.addTranslation("XY", "field:translationVersion=Version 3.8");
+		assertFalse("Major version changes are not allowed", myLocalization2.doesTranslationVersionMatchProgramVersion("XY", currentVersion));
+		myLocalization2.addTranslation("XY", "field:translationVersion=Version 2.9");
+		assertFalse("Minor version changes are not allowed", myLocalization2.doesTranslationVersionMatchProgramVersion("XY", currentVersion));
+		myLocalization2.addTranslation("XY", "field:translationVersion=Version 2.8.1");
+		assertTrue("Incremental version changes are allowed", myLocalization2.doesTranslationVersionMatchProgramVersion("XY", currentVersion));
+
+		currentVersion = "Version 10.2";
+		myLocalization2.addTranslation("XY", "field:translationVersion=Version 11.2");
+		assertFalse("2 digit Major version changes are not allowed", myLocalization2.doesTranslationVersionMatchProgramVersion("XY", currentVersion));
+		myLocalization2.addTranslation("XY", "field:translationVersion=Version 10.3");
+		assertFalse("2 digit Minor version changes are not allowed", myLocalization2.doesTranslationVersionMatchProgramVersion("XY", currentVersion));
+		myLocalization2.addTranslation("XY", "field:translationVersion=Version 10.2.1");
+		assertTrue("2 digit Incremental version changes are allowed", myLocalization2.doesTranslationVersionMatchProgramVersion("XY", currentVersion));
+
+
 		DirectoryUtils.deleteEntireDirectoryTree(translationDirectory);
 	}
 	
