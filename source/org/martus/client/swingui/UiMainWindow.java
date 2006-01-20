@@ -2340,13 +2340,11 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	
 	private int getTextFieldColumns(int windowWidth) 
 	{
-		if(windowWidth <= 800)
-			return 40;
-		if(windowWidth <= 1000)
-			return 50;
-		if(windowWidth < 1200)
-			return 65;
-		return 90;
+		if(windowWidth < MINIMUM_SCREEN_WIDTH)
+			return MINIMUM_TEXT_FIELD_WIDTH;
+		windowWidth -= MINIMUM_SCREEN_WIDTH;
+		int widthToUse = MINIMUM_TEXT_FIELD_WIDTH + (windowWidth / 10);
+		return widthToUse;
 	}
 	
 	public int getPreviewTextFieldColumns()
@@ -2389,7 +2387,8 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	int timeoutInXSeconds;
 	private static final int TIMEOUT_SECONDS = (10 * 60);
 	private static final int TESTING_TIMEOUT_60_SECONDS = 60;
-
+	private static final int MINIMUM_SCREEN_WIDTH = 700;
+	private static final int MINIMUM_TEXT_FIELD_WIDTH = 30;
 	private static final int MAX_KEYPAIRFILE_SIZE = 32000;
 	private static final int BACKGROUND_UPLOAD_CHECK_MILLIS = 5*1000;
 	private static final int BACKGROUND_TIMEOUT_CHECK_EVERY_X_MILLIS = 5*1000;
