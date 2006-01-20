@@ -35,13 +35,13 @@ import org.martus.swing.UiWrappedTextArea;
 
 abstract public class UiBulletinComponentHeadQuartersSection extends UiBulletinComponentSection
 {
-	public UiBulletinComponentHeadQuartersSection(UiMainWindow mainWindowToUse, Bulletin bulletinToUse, String tagQualifierToUse)
+	public UiBulletinComponentHeadQuartersSection(UiMainWindow mainWindowToUse, Bulletin bulletinToUse, String tagQualifierToUse, int widthToUse)
 	{
 		super(mainWindowToUse);
 		bulletin = bulletinToUse;
 		
 		String hqText = getLabel("HQInfoFor" + tagQualifierToUse); 
-		UiWrappedTextArea hqInfo = new UiWrappedTextArea(hqText, 85);
+		UiWrappedTextArea hqInfo = new UiWrappedTextArea(hqText, widthToUse);
 		hqInfo.setEditable(false);
 		addComponents(new UiLabel(""),hqInfo);
 	}

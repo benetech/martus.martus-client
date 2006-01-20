@@ -38,7 +38,7 @@ public class UiBulletinComponentHeadQuartersViewer extends UiBulletinComponentHe
 {
 	public UiBulletinComponentHeadQuartersViewer(UiMainWindow mainWindowToUse, Bulletin bulletinToUse, String tagQualifierToUse)
 	{
-		super(mainWindowToUse, bulletinToUse, tagQualifierToUse);
+		super(mainWindowToUse, bulletinToUse, tagQualifierToUse, mainWindowToUse.getPreviewTextFieldColumns());
 		UiLabel hqLabel = new UiLabel(getLabel("Headquarters"));
 		HQKeys authorizedToReadKeys = bulletinToUse.getAuthorizedToReadKeys();
 		if(authorizedToReadKeys.size() == 0)

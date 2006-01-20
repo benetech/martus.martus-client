@@ -42,7 +42,7 @@ public class UiBulletinComponentHeadQuartersEditor extends UiBulletinComponentHe
 {
 	public UiBulletinComponentHeadQuartersEditor(HeadQuartersSelectionListener hqSelectionListener, UiMainWindow mainWindowToUse, Bulletin bulletinToUse, String tagQualifierToUse)
 	{
-		super(mainWindowToUse, bulletinToUse, tagQualifierToUse);
+		super(mainWindowToUse, bulletinToUse, tagQualifierToUse, mainWindowToUse.getEditingTextFieldColumns());
 		UiLabel hqLabel = new UiLabel(getLabel("Headquarters"));
 
 		HQKeys authorizedToReadKeys = bulletinToUse.getAuthorizedToReadKeys();
