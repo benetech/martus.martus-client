@@ -65,6 +65,8 @@ public class UiAttachmentViewer extends UiParagraphPanel  implements DragGesture
 		model = new AttachmentTableModel(mainWindow, attachmentTable);
 
 		attachmentTable = new UiTable(model);
+		attachmentTable.setMaxGridWidth(40);
+		attachmentTable.useMaxWidth();
 		attachmentTable.createDefaultColumnsFromModel();
 		attachmentTable.setColumnSelectionAllowed(false);
 		attachmentTable.setMaxColumnWidthToHeaderWidth(1);

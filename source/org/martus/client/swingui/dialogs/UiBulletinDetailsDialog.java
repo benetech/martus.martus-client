@@ -136,7 +136,7 @@ public class UiBulletinDetailsDialog extends JDialog
 		versionTable.setColumnWidthToHeaderWidth(1);
 		versionTable.setColumnWidth(2, DATE_COLUMN_WIDTH);
 		versionTable.setColumnWidth(3, TITLE_COLUMN_WIDTH);
-		versionTable.setAutoResizeMode(UiTable.AUTO_RESIZE_OFF);
+		versionTable.setAutoResizeMode(UiTable.AUTO_RESIZE_LAST_COLUMN);
 		versionTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		versionTable.setColumnSelectionAllowed(false);
 		versionTable.setShowGrid(true);

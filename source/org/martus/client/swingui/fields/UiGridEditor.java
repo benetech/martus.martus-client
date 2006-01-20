@@ -44,21 +44,23 @@ import org.martus.common.fieldspec.GridFieldSpec;
 
 public class UiGridEditor extends UiGrid implements FocusListener
 {
-	public UiGridEditor(GridFieldSpec fieldSpec, UiDialogLauncher dlgLauncher)
+	public UiGridEditor(GridFieldSpec fieldSpec, UiDialogLauncher dlgLauncher, int maxGridCharacters)
 	{
 		super(fieldSpec, dlgLauncher, true);
-		initialize();
+		initialize(maxGridCharacters);
 	}
 	
 	public UiGridEditor(GridTableModel model, UiDialogLauncher dlgLauncher)
 	{
 		super(model, dlgLauncher, true);
-		initialize();
+		initialize(80);
 	}
 	
-	private void initialize()
+	private void initialize(int maxGridCharacters)
 	{
+		table.setMaxGridWidth(maxGridCharacters);
 		table.resizeTable(DEFAULT_VISIBLE_ROWS);
+
 		bindKeys();
 		addFocusListener(this);
 	}

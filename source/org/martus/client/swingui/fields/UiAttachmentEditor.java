@@ -73,11 +73,14 @@ public class UiAttachmentEditor extends UiParagraphPanel
 		model.addTableModelListener(remove);
 
 		attachmentTable = new UiTable(model);
-		new DropTarget(this, new attachmentDropAdapter());
+		attachmentTable.setMaxGridWidth(40);
+		attachmentTable.useMaxWidth();
 		attachmentTable.setFocusable(false);
 		attachmentTable.createDefaultColumnsFromModel();
 		attachmentTable.setColumnSelectionAllowed(false);
 		attachmentTable.setMaxColumnWidthToHeaderWidth(1);
+
+		new DropTarget(this, new attachmentDropAdapter());
 
 		UiScrollPane scrollPane = new UiScrollPane(attachmentTable);
 		scrollPane.getHorizontalScrollBar().setFocusable(false);

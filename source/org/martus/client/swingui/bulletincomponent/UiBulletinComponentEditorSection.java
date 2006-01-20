@@ -107,7 +107,7 @@ public class UiBulletinComponentEditorSection extends UiBulletinComponentDataSec
 		MartusLocalization localization = mainWindow.getLocalization();
 		fieldSpec.setColumnZeroLabel(localization.getFieldLabel("ColumnGridRowNumber"));
 		UiDialogLauncher dlgLauncher = new UiDialogLauncher(mainWindow.getCurrentActiveFrame(), localization);
-		return new UiGridEditor(fieldSpec, dlgLauncher);
+		return new UiGridEditor(fieldSpec, dlgLauncher, mainWindow.getEditingTextFieldColumns());
 	}
 	
 	public void addAttachment(AttachmentProxy a)

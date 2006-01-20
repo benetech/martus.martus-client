@@ -33,9 +33,10 @@ import org.martus.common.fieldspec.GridFieldSpec;
 
 public class UiGridViewer extends UiGrid
 {
-	public UiGridViewer(GridFieldSpec fieldSpec, UiDialogLauncher dlgLauncher)
+	public UiGridViewer(GridFieldSpec fieldSpec, UiDialogLauncher dlgLauncher, int maxGridCharacters)
 	{
 		super(fieldSpec, dlgLauncher, false);
+		table.setMaxGridWidth(maxGridCharacters);
 		table.resizeTable();
 		table.setEnabled(false);
 	}
