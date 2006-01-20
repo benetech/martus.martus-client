@@ -36,5 +36,4 @@ public class UiConstants
 	public static final String copyright = "Copyright 2001-2005 Beneficent Technology, Inc.";
 	public static final String website = "(Benetech, at www.benetech.org)";
 
-	public static final int textFieldColumns = 40;
 }

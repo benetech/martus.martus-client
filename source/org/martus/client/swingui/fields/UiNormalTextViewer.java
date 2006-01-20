@@ -26,24 +26,20 @@ Boston, MA 02111-1307, USA.
 
 package org.martus.client.swingui.fields;
 
-import java.awt.Font;
 import javax.swing.JComponent;
 
-import org.martus.client.swingui.FontHandler;
-import org.martus.client.swingui.UiConstants;
 import org.martus.clientside.UiLocalization;
 import org.martus.swing.UiTextArea;
 
 public class UiNormalTextViewer extends UiNormalTextField
 {
-	public UiNormalTextViewer(UiLocalization localizationToUse)
+	public UiNormalTextViewer(UiLocalization localizationToUse, int numberColumns)
 	{
 		super(localizationToUse);
-		widget = new UiTextArea(1, UiConstants.textFieldColumns);
+		widget = new UiTextArea(1, numberColumns);
 		widget.setEditable(false);
 		widget.setLineWrap(true);
 		widget.setWrapStyleWord(true);
-		widget.setFont(new Font(FontHandler.defaultFontName, Font.PLAIN, FontHandler.defaultFontSize));
 		supportContextMenu();
 	}
 

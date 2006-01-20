@@ -65,17 +65,17 @@ public class UiBulletinComponentEditorSection extends UiBulletinComponentDataSec
 	
 	public UiField createNormalField()
 	{
-		return new UiNormalTextEditor(getLocalization());
+		return new UiNormalTextEditor(getLocalization(), mainWindow.getEditingTextFieldColumns());
 	}
 
 	public UiField createMultilineField()
 	{
-		return new UiMultilineTextEditor(getLocalization());
+		return new UiMultilineTextEditor(getLocalization(), mainWindow.getEditingTextFieldColumns());
 	}
 
 	public UiField createMessageField(FieldSpec spec)
 	{
-		return new UiMessageField(spec);
+		return new UiMessageField(spec, mainWindow.getEditingTextFieldColumns());
 	}
 
 	public UiField createChoiceField(FieldSpec spec)

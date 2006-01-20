@@ -2337,6 +2337,28 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	{
 		return currentActiveFrame;
 	}
+	
+	private int getTextFieldColumns(int windowWidth) 
+	{
+		if(windowWidth <= 800)
+			return 40;
+		if(windowWidth <= 1000)
+			return 50;
+		if(windowWidth < 1200)
+			return 65;
+		return 90;
+	}
+	
+	public int getPreviewTextFieldColumns()
+	{
+		int previewWindowWidth = Utilities.getViewableScreenSize().width - folderSplitter.getDividerLocation();
+		return getTextFieldColumns(previewWindowWidth);
+	}
+
+	public int getEditingTextFieldColumns()
+	{
+		return getTextFieldColumns(Utilities.getViewableScreenSize().width);
+	}
 
 	public static final String STATUS_RETRIEVING = "StatusRetrieving";
 	public static String STATUS_READY = "StatusReady";

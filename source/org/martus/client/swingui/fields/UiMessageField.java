@@ -34,11 +34,11 @@ import org.martus.swing.UiWrappedTextArea;
 
 public class UiMessageField extends UiViewerField
 {
-	public UiMessageField(FieldSpec spec)
+	public UiMessageField(FieldSpec spec, int numberColumns)
 	{
 		super();
 		String message = ((MessageFieldSpec)(spec)).getMessage();
-		widget = new UiWrappedTextArea(message, 65);
+		widget = new UiWrappedTextArea(message, numberColumns);
 		widget.setEditable(false);
 		widget.setBackground(new JPanel().getBackground());
 	}

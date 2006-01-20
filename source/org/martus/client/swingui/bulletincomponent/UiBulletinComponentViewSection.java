@@ -70,17 +70,17 @@ public class UiBulletinComponentViewSection extends UiBulletinComponentDataSecti
 	
 	public UiField createNormalField()
 	{
-		return new UiNormalTextViewer(getLocalization());
+		return new UiNormalTextViewer(getLocalization(), mainWindow.getPreviewTextFieldColumns());
 	}
 
 	public UiField createMultilineField()
 	{
-		return new UiMultilineViewer(getLocalization());
+		return new UiMultilineViewer(getLocalization(), mainWindow.getPreviewTextFieldColumns());
 	}
 
 	public UiField createMessageField(FieldSpec spec)
 	{
-		return new UiMessageField(spec);
+		return new UiMessageField(spec, mainWindow.getPreviewTextFieldColumns());
 	}
 
 	public UiField createChoiceField(FieldSpec spec)

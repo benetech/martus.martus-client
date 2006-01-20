@@ -26,11 +26,8 @@ Boston, MA 02111-1307, USA.
 
 package org.martus.client.swingui.fields;
 
-import java.awt.Font;
-
 import javax.swing.JComponent;
 
-import org.martus.client.swingui.FontHandler;
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.swing.UiTextField;
 
@@ -41,7 +38,6 @@ public class UiSingleLineTextViewer extends UiSingleLineTextField
 		super(localizationToUse);
 		widget = new UiTextField();
 		widget.setEditable(false);
-		widget.setFont(new Font(FontHandler.defaultFontName, Font.PLAIN, FontHandler.defaultFontSize));
 		
 		// We would like to support the context menu here, but it seems that 
 		// the grid is preventing right-clicks from being passed to us.
