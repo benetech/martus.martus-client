@@ -90,7 +90,6 @@ public class UiMenuBar extends JMenuBar
 		file.addSeparator();
 		file.add(new ActionMenuExportFolder(mainWindow));
 		file.add(new ActionMenuExportBulletins(mainWindow));
-		file.add(actionMenuResendBulletins);
 		file.addSeparator();
 		file.add(new ActionMenuExit(mainWindow));
 
@@ -123,6 +122,9 @@ public class UiMenuBar extends JMenuBar
 
 
 		UiMenu server = new UiMenu(localization.getMenuLabel("server"));
+		ServerMenuListener serverMenuListener = new ServerMenuListener();
+		server.addMenuListener(serverMenuListener);
+		serverMenuListener.initalize();
 		server.add(new ActionMenuRetrieveMySealedBulletins(mainWindow));
 		server.add(new ActionMenuRetrieveMyDraftBulletins(mainWindow));
 		server.add(new ActionMenuDeleteMyServerDraftBulletins(mainWindow));
@@ -132,6 +134,9 @@ public class UiMenuBar extends JMenuBar
 		server.addSeparator();
 		server.add(new ActionMenuSelectServer(mainWindow));
 		server.add(new ActionMenuRemoveServer(mainWindow));
+		server.addSeparator();
+		server.add(actionMenuResendBulletins);
+
 
 
 		UiMenu options = new UiMenu(localization.getMenuLabel("options"));
@@ -178,6 +183,24 @@ public class UiMenuBar extends JMenuBar
 		public void menuSelected(MenuEvent e)
 		{
 			actionMenuPrint.setEnabled(actionMenuPrint.isEnabled());
+			actionMenuResendBulletins.setEnabled(actionMenuResendBulletins.isEnabled());
+		}
+
+		public void menuDeselected(MenuEvent e) {}
+		public void menuCanceled(MenuEvent e) {}
+	}
+	
+	
+	class ServerMenuListener implements MenuListener
+	{
+		public void initalize()
+		{
+			//Java Bug, menu items need to be disabled before correct behavior occurs.
+			actionMenuResendBulletins.setEnabled(false);
+		}
+
+		public void menuSelected(MenuEvent e)
+		{
 			actionMenuResendBulletins.setEnabled(actionMenuResendBulletins.isEnabled());
 		}
 

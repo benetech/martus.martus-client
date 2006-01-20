@@ -935,6 +935,8 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		menu.add(menuBar.actionMenuSelectAllBulletins);
 		menu.addSeparator();
 		menu.add(menuBar.actionMenuDiscardBulletins);
+		menu.addSeparator();
+		menu.add(menuBar.actionMenuResendBulletins);
 		return menu;
 	}
 	
