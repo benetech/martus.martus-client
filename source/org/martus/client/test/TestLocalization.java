@@ -492,8 +492,8 @@ public class TestLocalization extends TestCaseEnhanced
 		currentVersion = "Version 0.2";
 		myLocalization2.addTranslation("XY", "field:translationVersion=Version");
 		assertFalse("No Version Info", myLocalization2.doesTranslationVersionMatchProgramVersion("XY", currentVersion));
+		assertFalse("No Version Info At all", myLocalization2.doesTranslationVersionMatchProgramVersion("YY", currentVersion));
 		
-
 		DirectoryUtils.deleteEntireDirectoryTree(translationDirectory);
 	}
 	
