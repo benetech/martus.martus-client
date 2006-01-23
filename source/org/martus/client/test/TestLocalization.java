@@ -489,6 +489,10 @@ public class TestLocalization extends TestCaseEnhanced
 		myLocalization2.addTranslation("XY", "field:translationVersion=Version 10.2.1");
 		assertTrue("2 digit Incremental version changes are allowed", myLocalization2.doesTranslationVersionMatchProgramVersion("XY", currentVersion));
 
+		currentVersion = "Version 0.2";
+		myLocalization2.addTranslation("XY", "field:translationVersion=Version");
+		assertFalse("No Version Info", myLocalization2.doesTranslationVersionMatchProgramVersion("XY", currentVersion));
+		
 
 		DirectoryUtils.deleteEntireDirectoryTree(translationDirectory);
 	}
