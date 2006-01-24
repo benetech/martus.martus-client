@@ -2350,7 +2350,10 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	
 	public int getPreviewTextFieldColumns()
 	{
-		int previewWindowWidth = Utilities.getViewableScreenSize().width - folderSplitter.getDividerLocation();
+		int dividerLocation = folderSplitter.getDividerLocation();
+		int previewWindowWidth = Utilities.getViewableScreenSize().width - dividerLocation;
+		if(LanguageOptions.isRightToLeftLanguage())
+			previewWindowWidth = dividerLocation;
 		return getTextFieldColumns(previewWindowWidth);
 	}
 
