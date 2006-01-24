@@ -75,7 +75,7 @@ public class GridTable extends UiTableWithCellEditingProtection
 			renderers = createReadOnlyEditorsOrRenderers();
 			editors = createReadOnlyEditorsOrRenderers();
 		}
-		
+		useMaxWidth();
 		setMaxColumnWidthToHeaderWidth(0);
 		for(int i = 1 ; i < model.getColumnCount(); ++i)
 		{
