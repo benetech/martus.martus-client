@@ -121,6 +121,8 @@ public class ActionPrint extends UiMartusAction
 			try
 			{
 				writer.writeln("<html>");
+				String characterEncoding = "<meta http-equiv=\"Content-Type\" content=\"text/html;charset=UTF-8\">";
+				writer.writeln(characterEncoding);
 				for(int i=0; i < currentSelectedBulletins.size(); ++i)
 				{
 					Bulletin bulletin = (Bulletin)currentSelectedBulletins.get(i);
