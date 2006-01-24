@@ -2343,8 +2343,8 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 			return MINIMUM_TEXT_FIELD_WIDTH;
 		windowWidth -= MINIMUM_SCREEN_WIDTH;
 		
-		int charWidth = FontHandler.defaultFontSize;
-		int widthToUse = MINIMUM_TEXT_FIELD_WIDTH + (windowWidth / charWidth);
+		int veryApproximateCharWidthInPixels = FontHandler.defaultFontSize;
+		int widthToUse = MINIMUM_TEXT_FIELD_WIDTH + (windowWidth / veryApproximateCharWidthInPixels);
 		return widthToUse;
 	}
 	
