@@ -56,7 +56,8 @@ abstract public class UiBulletinComponentHeadQuartersSection extends UiBulletinC
 		UiTable hqTable = new UiTable(hqModel);
 		hqTable.setRenderers(hqModel);
 		hqTable.createDefaultColumnsFromModel();
-		
+		hqTable.setMaxGridWidth(40);
+		hqTable.useMaxWidth();
 		hqTable.setColumnSelectionAllowed(false);
 		hqTable.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
 		hqTable.setShowGrid(true);
