@@ -1301,21 +1301,9 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	
 	public void doRemoveServer()
 	{
+		offerToCancelRetrieveInProgress();
 		if(isRetrieveInProgress())
-		{
-			if(!confirmDlg(this, "CancelRetrieve"))
-				return;
-			
-			try
-			{
-				cancelRetrieve();
-			}
-			catch (Exception e)
-			{
-				notifyDlg("UnexpectedError");
-				return;
-			}
-		}
+			return;
 		
 		if(!reSignIn())
 			return;
@@ -1333,21 +1321,10 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	
 	public void doConfigureServer()
 	{
+		offerToCancelRetrieveInProgress();
 		if(isRetrieveInProgress())
-		{
-			if(!confirmDlg(this, "CancelRetrieve"))
-				return;
-			
-			try
-			{
-				cancelRetrieve();
-			}
-			catch (Exception e)
-			{
-				notifyDlg("UnexpectedError");
-				return;
-			}
-		}
+			return;
+		
 		
 		if(!reSignIn())
 			return;
@@ -1429,6 +1406,24 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		}
 	}
 
+	private void offerToCancelRetrieveInProgress()
+	{
+		if(!isRetrieveInProgress())
+			return;
+		
+		if(!confirmDlg(this, "CancelRetrieve"))
+			return;
+		
+		try
+		{
+			cancelRetrieve();
+		}
+		catch (Exception e)
+		{
+			notifyDlg("UnexpectedError");
+		}
+	}
+	
 	private void cancelRetrieve() throws Exception
 	{
 		getApp().cancelBackgroundRetrieve();
@@ -1584,6 +1579,10 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 
 	public void doRetrieveMySealedBulletins()
 	{
+		offerToCancelRetrieveInProgress();
+		if(isRetrieveInProgress())
+			return;
+		
 		String dlgTitleTag = "RetrieveMySealedBulletins";
 		String summariesProgressTag = "RetrieveMySealedBulletinSummaries";
 		String retrieverProgressTag = "RetrieveMySealedBulletinProgress";
@@ -1595,6 +1594,10 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 
 	public void doRetrieveMyDraftBulletins()
 	{
+		offerToCancelRetrieveInProgress();
+		if(isRetrieveInProgress())
+			return;
+		
 		String dlgTitleTag = "RetrieveMyDraftBulletins";
 		String summariesProgressTag = "RetrieveMyDraftBulletinSummaries";
 		String retrieverProgressTag = "RetrieveMyDraftBulletinProgress";
@@ -1606,6 +1609,10 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 
 	public void doRetrieveHQBulletins()
 	{
+		offerToCancelRetrieveInProgress();
+		if(isRetrieveInProgress())
+			return;
+		
 		String dlgTitleTag = "RetrieveHQSealedBulletins";
 		String summariesProgressTag = "RetrieveHQSealedBulletinSummaries";
 		String retrieverProgressTag = "RetrieveHQSealedBulletinProgress";
@@ -1617,6 +1624,10 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 
 	public void doRetrieveHQDraftsBulletins()
 	{
+		offerToCancelRetrieveInProgress();
+		if(isRetrieveInProgress())
+			return;
+		
 		String dlgTitleTag = "RetrieveHQDraftBulletins";
 		String summariesProgressTag = "RetrieveHQDraftBulletinSummaries";
 		String retrieverProgressTag = "RetrieveHQDraftBulletinProgress";
