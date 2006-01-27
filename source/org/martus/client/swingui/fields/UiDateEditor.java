@@ -85,7 +85,7 @@ public class UiDateEditor extends UiField
 	private static void buildYear(UiComboBox yCombo)	
 	{
 		MartusCalendar cal = new MartusCalendar();
-		int thisYear = cal.get(Calendar.YEAR);			
+		int thisYear = cal.getGregorianYear();			
 		
 		for(int year = 1900; year <= thisYear; ++year)
 			yCombo.addItem(new Integer(year).toString());			
@@ -183,9 +183,9 @@ public class UiDateEditor extends UiField
 		{
 			MartusCalendar cal = FieldSpec.yyyymmddWithDashesToCalendar(dateText);
 		
-			yCombo.setSelectedItem( (new Integer(cal.get(Calendar.YEAR))).toString());
-			mCombo.setSelectedIndex(cal.get(Calendar.MONTH));
-			dCombo.setSelectedItem( (new Integer(cal.get(Calendar.DATE))).toString());
+			yCombo.setSelectedItem( (new Integer(cal.getGregorianYear())).toString());
+			mCombo.setSelectedIndex(cal.getGregorianMonth());
+			dCombo.setSelectedItem( (new Integer(cal.getGregorianDay())).toString());
 		}
 		catch(Exception e)
 		{
