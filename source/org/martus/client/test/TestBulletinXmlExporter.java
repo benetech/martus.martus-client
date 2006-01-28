@@ -411,8 +411,8 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 	private String createSampleDateRangeString()
 	{
 		final int MAY = 4;
-		MartusCalendar beginDate = new MartusCalendar(2005, MAY, 1);
-		MartusCalendar endDate = new MartusCalendar(2005, MAY, 30);
+		MartusCalendar beginDate = MartusCalendar.createMartusCalendarFromGregorian(2005, MAY, 1);
+		MartusCalendar endDate = MartusCalendar.createMartusCalendarFromGregorian(2005, MAY, 30);
 		String rawDateRangeString = MartusFlexidate.toBulletinFlexidateFormat(beginDate, endDate);
 		return rawDateRangeString;
 	}

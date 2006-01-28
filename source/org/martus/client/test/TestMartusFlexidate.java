@@ -161,7 +161,7 @@ public class TestMartusFlexidate extends TestCaseEnhanced
 
 	private MartusCalendar getDate(int year, int month, int day)
 	{			
-		MartusCalendar cal = new MartusCalendar(year, month, day);
+		MartusCalendar cal = MartusCalendar.createMartusCalendarFromGregorian(year, month, day);
 		return cal;
 	} 
 }
