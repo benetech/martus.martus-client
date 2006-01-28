@@ -165,7 +165,7 @@ public class UiDateEditor extends UiField
 	public static MartusCalendar getDate(UiComboBox yCombo, UiComboBox mCombo, UiComboBox dCombo) 
 	{
 		MartusCalendar cal = new MartusCalendar();
-		cal.set(Integer.parseInt((String)yCombo.getSelectedItem()),
+		cal.setGregorian(Integer.parseInt((String)yCombo.getSelectedItem()),
 				mCombo.getSelectedIndex(),
 				dCombo.getSelectedIndex()+1);
 		
