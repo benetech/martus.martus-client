@@ -158,7 +158,7 @@ public class UiDateEditor extends UiField
 	public String getText()
 	{
 		MartusCalendar date = getDate(yearCombo, monthCombo, dayCombo);
-		return date.calendarToYYYYMMDD();
+		return date.toIsoDateString();
 	}
 
 	public static MartusCalendar getDate(UiComboBox yCombo, UiComboBox mCombo, UiComboBox dCombo) 
@@ -180,7 +180,7 @@ public class UiDateEditor extends UiField
 	{
 		try
 		{
-			MartusCalendar cal = MartusCalendar.yyyymmddWithDashesToCalendar(dateText);
+			MartusCalendar cal = MartusCalendar.createFromIsoDateString(dateText);
 		
 			yCombo.setSelectedItem( (new Integer(cal.getGregorianYear())).toString());
 			mCombo.setSelectedIndex((cal.getGregorianMonth() - 1));
