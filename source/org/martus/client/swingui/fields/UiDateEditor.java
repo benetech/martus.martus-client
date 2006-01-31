@@ -183,7 +183,7 @@ public class UiDateEditor extends UiField
 			MartusCalendar cal = MartusCalendar.yyyymmddWithDashesToCalendar(dateText);
 		
 			yCombo.setSelectedItem( (new Integer(cal.getGregorianYear())).toString());
-			mCombo.setSelectedIndex(cal.getGregorianMonth());
+			mCombo.setSelectedIndex((cal.getGregorianMonth() - 1));
 			dCombo.setSelectedItem( (new Integer(cal.getGregorianDay())).toString());
 		}
 		catch(Exception e)

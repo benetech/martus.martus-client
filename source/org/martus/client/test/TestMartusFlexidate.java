@@ -25,7 +25,6 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.test;
 
-import java.util.Calendar;
 import java.util.Date;
 
 import org.martus.common.utilities.MartusFlexidate;
@@ -81,8 +80,8 @@ public class TestMartusFlexidate extends TestCaseEnhanced
 	
 	public void testDateRange()
 	{
-		MartusCalendar beginDate = getDate(2000,Calendar.JANUARY,10);
-		MartusCalendar endDate = getDate(2000,Calendar.JANUARY, 15);
+		MartusCalendar beginDate = getDate(2000,1,10);
+		MartusCalendar endDate = getDate(2000,1, 15);
 						
 		MartusFlexidate mf = new MartusFlexidate(beginDate, endDate);
 		
@@ -94,8 +93,8 @@ public class TestMartusFlexidate extends TestCaseEnhanced
 	
 	public void testSameDateRange()
 	{
-		MartusCalendar beginDate = getDate(2000,Calendar.JANUARY,10);
-		MartusCalendar endDate = getDate(2000,Calendar.JANUARY, 10);
+		MartusCalendar beginDate = getDate(2000,1,10);
+		MartusCalendar endDate = getDate(2000,1, 10);
 		
 		MartusFlexidate mf = new MartusFlexidate(beginDate, endDate);
 
@@ -113,7 +112,7 @@ public class TestMartusFlexidate extends TestCaseEnhanced
 	
 	public void testDateRangeSwap()
 	{
-		MartusCalendar beginDate = getDate(2000, Calendar.JANUARY, 10);
+		MartusCalendar beginDate = getDate(2000, 1, 10);
 		MartusCalendar endDate = new MartusCalendar();
 		endDate.setTime(new Date(beginDate.getTime().getTime() - (360L*24*60*60*1000)));
 					
