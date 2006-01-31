@@ -48,7 +48,7 @@ import org.martus.common.bulletin.AttachmentProxy;
 import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.fieldspec.GridFieldSpec;
 import org.martus.common.fieldspec.StandardFieldSpecs;
-import org.martus.util.MartusCalendar;
+import org.martus.util.MultiCalendar;
 
 public class UiBulletinComponentEditorSection extends UiBulletinComponentDataSection
 {
@@ -85,9 +85,9 @@ public class UiBulletinComponentEditorSection extends UiBulletinComponentDataSec
 
 	public UiField createDateField(FieldSpec spec)
 	{
-		MartusCalendar maxDate = null;
+		MultiCalendar maxDate = null;
 		if(StandardFieldSpecs.isStandardFieldTag(spec.getTag()))
-			maxDate = new MartusCalendar();
+			maxDate = new MultiCalendar();
 
 		return new UiDateEditor(getLocalization(), maxDate);		
 	}

@@ -36,11 +36,11 @@ import org.martus.clientside.UiLocalization;
 import org.martus.common.utilities.DateUtilities;
 import org.martus.swing.UiComboBox;
 import org.martus.swing.Utilities;
-import org.martus.util.MartusCalendar;
+import org.martus.util.MultiCalendar;
 
 public class UiDateEditor extends UiField
 {
-	public UiDateEditor(UiLocalization localizationToUse, MartusCalendar highestAllowableDate)
+	public UiDateEditor(UiLocalization localizationToUse, MultiCalendar highestAllowableDate)
 	{
 		localization = localizationToUse;
 		Box box = Box.createHorizontalBox();
@@ -83,7 +83,7 @@ public class UiDateEditor extends UiField
 	
 	private static void buildYear(UiComboBox yCombo)	
 	{
-		MartusCalendar cal = new MartusCalendar();
+		MultiCalendar cal = new MultiCalendar();
 		int thisYear = cal.getGregorianYear();			
 		
 		for(int year = 1900; year <= thisYear; ++year)
@@ -147,7 +147,7 @@ public class UiDateEditor extends UiField
 		if(maxDate == null)
 			return;
 	
-		MartusCalendar value = getDate(yearCombo, monthCombo, dayCombo);
+		MultiCalendar value = getDate(yearCombo, monthCombo, dayCombo);
 		if (value.after(maxDate))
 		{
 			dayCombo.requestFocus();	
@@ -157,13 +157,13 @@ public class UiDateEditor extends UiField
 
 	public String getText()
 	{
-		MartusCalendar date = getDate(yearCombo, monthCombo, dayCombo);
+		MultiCalendar date = getDate(yearCombo, monthCombo, dayCombo);
 		return date.toIsoDateString();
 	}
 
-	public static MartusCalendar getDate(UiComboBox yCombo, UiComboBox mCombo, UiComboBox dCombo) 
+	public static MultiCalendar getDate(UiComboBox yCombo, UiComboBox mCombo, UiComboBox dCombo) 
 	{
-		MartusCalendar cal = new MartusCalendar();
+		MultiCalendar cal = new MultiCalendar();
 		cal.setGregorian(Integer.parseInt((String)yCombo.getSelectedItem()),
 				mCombo.getSelectedIndex(),
 				dCombo.getSelectedIndex()+1);
@@ -180,7 +180,7 @@ public class UiDateEditor extends UiField
 	{
 		try
 		{
-			MartusCalendar cal = MartusCalendar.createFromIsoDateString(dateText);
+			MultiCalendar cal = MultiCalendar.createFromIsoDateString(dateText);
 		
 			yCombo.setSelectedItem( (new Integer(cal.getGregorianYear())).toString());
 			mCombo.setSelectedIndex((cal.getGregorianMonth() - 1));
@@ -196,7 +196,7 @@ public class UiDateEditor extends UiField
 	UiComboBox monthCombo;
 	UiComboBox dayCombo;
 	UiComboBox yearCombo;	
-	MartusCalendar maxDate;
+	MultiCalendar maxDate;
 	boolean isCustomField;
 	UiLocalization localization; 
 }

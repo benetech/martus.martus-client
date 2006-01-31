@@ -28,7 +28,7 @@ package org.martus.client.test;
 import java.util.Date;
 
 import org.martus.common.utilities.MartusFlexidate;
-import org.martus.util.MartusCalendar;
+import org.martus.util.MultiCalendar;
 import org.martus.util.TestCaseEnhanced;
 
 public class TestMartusFlexidate extends TestCaseEnhanced
@@ -80,8 +80,8 @@ public class TestMartusFlexidate extends TestCaseEnhanced
 	
 	public void testDateRange()
 	{
-		MartusCalendar beginDate = getDate(2000,1,10);
-		MartusCalendar endDate = getDate(2000,1, 15);
+		MultiCalendar beginDate = getDate(2000,1,10);
+		MultiCalendar endDate = getDate(2000,1, 15);
 						
 		MartusFlexidate mf = new MartusFlexidate(beginDate, endDate);
 		
@@ -93,8 +93,8 @@ public class TestMartusFlexidate extends TestCaseEnhanced
 	
 	public void testSameDateRange()
 	{
-		MartusCalendar beginDate = getDate(2000,1,10);
-		MartusCalendar endDate = getDate(2000,1, 10);
+		MultiCalendar beginDate = getDate(2000,1,10);
+		MultiCalendar endDate = getDate(2000,1, 10);
 		
 		MartusFlexidate mf = new MartusFlexidate(beginDate, endDate);
 
@@ -112,8 +112,8 @@ public class TestMartusFlexidate extends TestCaseEnhanced
 	
 	public void testDateRangeSwap()
 	{
-		MartusCalendar beginDate = getDate(2000, 1, 10);
-		MartusCalendar endDate = new MartusCalendar();
+		MultiCalendar beginDate = getDate(2000, 1, 10);
+		MultiCalendar endDate = new MultiCalendar();
 		endDate.setTime(new Date(beginDate.getTime().getTime() - (360L*24*60*60*1000)));
 					
 		MartusFlexidate mf = new MartusFlexidate(beginDate, endDate);
@@ -157,9 +157,9 @@ public class TestMartusFlexidate extends TestCaseEnhanced
 		assertEquals("1988-02-05,19880205+0", MartusFlexidate.createMartusDateStringFromDateRange(noDateRange));
 	}
 
-	private MartusCalendar getDate(int year, int month, int day)
+	private MultiCalendar getDate(int year, int month, int day)
 	{			
-		MartusCalendar cal = MartusCalendar.createFromGregorianYearMonthDay(year, month, day);
+		MultiCalendar cal = MultiCalendar.createFromGregorianYearMonthDay(year, month, day);
 		return cal;
 	} 
 }

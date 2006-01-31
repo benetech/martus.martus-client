@@ -47,7 +47,7 @@ import org.martus.common.fieldspec.StandardFieldSpecs;
 import org.martus.common.packet.BulletinHistory;
 import org.martus.common.packet.FieldDataPacket;
 import org.martus.common.utilities.MartusFlexidate;
-import org.martus.util.MartusCalendar;
+import org.martus.util.MultiCalendar;
 import org.martus.util.TestCaseEnhanced;
 
 public class TestBulletinXmlExporter extends TestCaseEnhanced
@@ -411,8 +411,8 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 	private String createSampleDateRangeString()
 	{
 		final int MAY = 5;
-		MartusCalendar beginDate = MartusCalendar.createFromGregorianYearMonthDay(2005, MAY, 1);
-		MartusCalendar endDate = MartusCalendar.createFromGregorianYearMonthDay(2005, MAY, 30);
+		MultiCalendar beginDate = MultiCalendar.createFromGregorianYearMonthDay(2005, MAY, 1);
+		MultiCalendar endDate = MultiCalendar.createFromGregorianYearMonthDay(2005, MAY, 30);
 		String rawDateRangeString = MartusFlexidate.toBulletinFlexidateFormat(beginDate, endDate);
 		return rawDateRangeString;
 	}

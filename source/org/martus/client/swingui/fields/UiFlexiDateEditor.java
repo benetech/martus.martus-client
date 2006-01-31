@@ -43,7 +43,7 @@ import org.martus.swing.UiLabel;
 import org.martus.swing.UiParagraphPanel;
 import org.martus.swing.UiRadioButton;
 import org.martus.swing.Utilities;
-import org.martus.util.MartusCalendar;
+import org.martus.util.MultiCalendar;
 
 public class UiFlexiDateEditor extends UiField
 {
@@ -213,7 +213,7 @@ public class UiFlexiDateEditor extends UiField
 		if(isCustomDate())
 			return;		
 		
-		MartusCalendar today = new MartusCalendar();
+		MultiCalendar today = new MultiCalendar();
 		if (getBeginDate().after(today))
 		{
 			bgDayCombo.requestFocus();	
@@ -241,19 +241,19 @@ public class UiFlexiDateEditor extends UiField
 
 	public String getText()
 	{
-		final MartusCalendar beginDate = getBeginDate();
+		final MultiCalendar beginDate = getBeginDate();
 		if(isExactDate())
 			return MartusFlexidate.toStoredDateFormat(beginDate);
 		
 		return MartusFlexidate.toBulletinFlexidateFormat(beginDate, getEndDate());
 	}
 
-	private MartusCalendar getBeginDate() 
+	private MultiCalendar getBeginDate() 
 	{		
 		return UiDateEditor.getDate(bgYearCombo, bgMonthCombo, bgDayCombo);
 	}
 	
-	private MartusCalendar getEndDate() 
+	private MultiCalendar getEndDate() 
 	{				
 		return UiDateEditor.getDate(endYearCombo, endMonthCombo, endDayCombo);
 	}	

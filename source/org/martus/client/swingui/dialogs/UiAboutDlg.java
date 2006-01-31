@@ -49,7 +49,7 @@ import org.martus.swing.UiLabel;
 import org.martus.swing.UiVBox;
 import org.martus.swing.UiWrappedTextArea;
 import org.martus.swing.Utilities;
-import org.martus.util.MartusCalendar;
+import org.martus.util.MultiCalendar;
 
 public class UiAboutDlg extends JDialog implements ActionListener
 {
@@ -80,7 +80,7 @@ public class UiAboutDlg extends JDialog implements ActionListener
 		{
 			mlpDateInfo.append(localization.getFieldLabel("aboutDlgMlpDateInfo"));
 			mlpDateInfo.append(" ");
-			MartusCalendar mlpDate = new MartusCalendar();
+			MultiCalendar mlpDate = new MultiCalendar();
 			mlpDate.setTime(localization.getMlpDate());
 			String storedDateString = MartusFlexidate.toStoredDateFormat(mlpDate);
 			mlpDateInfo.append(localization.convertStoredDateToDisplayReverseIfNecessary(storedDateString));
