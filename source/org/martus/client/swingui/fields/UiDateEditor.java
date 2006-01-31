@@ -33,7 +33,6 @@ import javax.swing.Box;
 import javax.swing.JComponent;
 
 import org.martus.clientside.UiLocalization;
-import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.utilities.DateUtilities;
 import org.martus.swing.UiComboBox;
 import org.martus.swing.Utilities;
@@ -159,7 +158,7 @@ public class UiDateEditor extends UiField
 	public String getText()
 	{
 		MartusCalendar date = getDate(yearCombo, monthCombo, dayCombo);
-		return FieldSpec.calendarToYYYYMMDD(date);
+		return date.calendarToYYYYMMDD();
 	}
 
 	public static MartusCalendar getDate(UiComboBox yCombo, UiComboBox mCombo, UiComboBox dCombo) 
@@ -181,7 +180,7 @@ public class UiDateEditor extends UiField
 	{
 		try
 		{
-			MartusCalendar cal = FieldSpec.yyyymmddWithDashesToCalendar(dateText);
+			MartusCalendar cal = MartusCalendar.yyyymmddWithDashesToCalendar(dateText);
 		
 			yCombo.setSelectedItem( (new Integer(cal.getGregorianYear())).toString());
 			mCombo.setSelectedIndex(cal.getGregorianMonth());
