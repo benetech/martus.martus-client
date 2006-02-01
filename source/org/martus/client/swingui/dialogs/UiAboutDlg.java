@@ -88,7 +88,7 @@ public class UiAboutDlg extends JDialog implements ActionListener
 		
 		StringBuffer mtfVersionInfo = new StringBuffer(localization.getFieldLabel("aboutDlgTranslationVersionInfo"));
 		mtfVersionInfo.append(" ");
-		mtfVersionInfo.append(localization.getFieldLabel("translationVersion"));
+		mtfVersionInfo.append(localization.getTranslationFullVersionInfo());
 		if(!localization.isCurrentTranslationOfficial())
 			mtfVersionInfo.append("X");
 

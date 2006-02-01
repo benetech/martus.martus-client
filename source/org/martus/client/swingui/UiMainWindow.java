@@ -255,9 +255,9 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		String buttonMessage = localization.getLabel(langCode, "button", "ok");
 		Toolkit.getDefaultToolkit().beep();
 		HashMap map = new HashMap();
-		String mtfVersionNumber = localization.getTranslationVersion(languageCodeToTest);		
+		String mtfVersionNumber = localization.getTranslationVersionNumber(languageCodeToTest);		
 		map.put("#MtfVersionNumber#", mtfVersionNumber);
-		map.put("#ProgramVersionNumber#", localization.extractVersion(UiConstants.versionLabel));
+		map.put("#ProgramVersionNumber#", localization.extractVersionNumber(UiConstants.versionLabel));
 		map.put("#MtfLanguage#", localization.getLanguageName(languageCodeToTest));
 		new UiNotifyDlg(owner, title, new String[]{warningMessage, "", mtfVersion, programVersion}, new String[]{buttonMessage}, map);
 	}
