@@ -234,7 +234,7 @@ public class ImportXmlBulletins
 		{
 			if(prompt)
 			{
-				System.out.print("Enter import folder name:");
+				System.out.print("Enter Martus folder name where you want these bulletins to be stored:");
 				System.out.flush();
 			}
 
