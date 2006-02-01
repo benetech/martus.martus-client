@@ -107,6 +107,7 @@ import org.martus.client.swingui.tablemodels.RetrieveTableModel;
 import org.martus.clientside.ClientSideNetworkGateway;
 import org.martus.clientside.CurrentUiState;
 import org.martus.clientside.MtfAwareLocalization;
+import org.martus.clientside.UiConstants;
 import org.martus.clientside.UiLocalization;
 import org.martus.clientside.UiUtilities;
 import org.martus.common.EnglishCommonStrings;

@@ -27,9 +27,9 @@ package org.martus.client.tools;
 
 import java.io.File;
 import org.martus.client.core.MartusApp;
-import org.martus.client.swingui.UiConstants;
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
+import org.martus.clientside.UiConstants;
 import org.martus.util.UnicodeWriter;
 
 

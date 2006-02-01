@@ -37,9 +37,9 @@ import javax.swing.SwingConstants;
 
 import org.martus.client.swingui.EnglishStrings;
 import org.martus.client.swingui.MartusLocalization;
-import org.martus.client.swingui.UiConstants;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.clientside.MtfAwareLocalization;
+import org.martus.clientside.UiConstants;
 import org.martus.clientside.UiLocalization;
 import org.martus.common.MartusUtilities;
 import org.martus.common.MiniLocalization.NoDateSeparatorException;
@@ -512,6 +512,16 @@ public class TestLocalization extends TestCaseEnhanced
 		char[] khmerVersion = {0x17CD, 0x17CD, 0x17E2, '.', 0x17E8, '.', 0x17E1, 0X17CE, 0X17CE};
 		extractedVersion = myLocalization.extractVersionNumber(new String(khmerVersion));
 		assertEquals(englishVersion, extractedVersion);
+
+	}
+	
+	public void testHasVersionNumber()
+	{
+		MartusLocalization myLocalization = new MartusLocalization(testTranslationDirectory, UiMainWindow.getAllEnglishStrings());
+		assertTrue(myLocalization.hasVersionNumber("English 2.8"));
+		assertTrue(myLocalization.hasVersionNumber("English 2.8 Internal"));
+		assertTrue(myLocalization.hasVersionNumber("English 4 Internal"));
+		assertFalse(myLocalization.hasVersionNumber("No Version Numbers"));
 	}
 
 	private boolean doesLanguageExist(MartusLocalization dbToUse, String languageCode)
@@ -589,6 +599,9 @@ public class TestLocalization extends TestCaseEnhanced
 		String result = writer.toString();
 		assertEquals("no leading ByteOrderMark?", 0xFEFF, result.charAt(0));
 		assertEquals("no leading comment?", 1, result.indexOf("#"));
+		String versionNumber = UiConstants.versionLabel;
+		String expectedTranslationVersion = "field:translationVersion=English "+ versionNumber;
+		assertContains("Translation Version # not exported?", expectedTranslationVersion, result);
 	}
 
 	public void testAddTranslation()
