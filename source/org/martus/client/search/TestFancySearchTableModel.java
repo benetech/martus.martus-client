@@ -87,7 +87,7 @@ public class TestFancySearchTableModel extends TestCaseEnhanced
 	
 	public void testGetCurrentOpColumnSpec() throws Exception
 	{
-		UiLocalization localization = new UiLocalization(null, new String[0]);
+		MartusLocalization localization = new MartusLocalization(null, new String[0]);
 		GridFieldSpec gridSpec = new GridFieldSpec();
 		FancySearchTableModel model = new FancySearchTableModel(gridSpec, localization);
 		DropDownFieldSpec normalSpec = model.getCurrentOpColumnSpec(new FieldTypeNormal());

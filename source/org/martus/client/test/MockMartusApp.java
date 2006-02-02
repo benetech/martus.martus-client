@@ -31,6 +31,7 @@ import java.io.IOException;
 
 import org.martus.client.bulletinstore.BulletinFolder;
 import org.martus.client.core.MartusApp;
+import org.martus.client.swingui.MartusLocalization;
 import org.martus.clientside.MtfAwareLocalization;
 import org.martus.clientside.UiLocalization;
 import org.martus.common.MartusUtilities.FileVerificationException;
@@ -110,9 +111,9 @@ public class MockMartusApp extends MartusApp
 		return fakeDataDirectory;
 	}
 	
-	public static UiLocalization createFakeLocalization(File fakeDataDirectory)
+	public static MartusLocalization createFakeLocalization(File fakeDataDirectory)
 	{
-		return new UiLocalization(fakeDataDirectory, new String[0]);
+		return new MartusLocalization(fakeDataDirectory, new String[0]);
 	}
 
 

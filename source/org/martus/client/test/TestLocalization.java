@@ -680,7 +680,7 @@ public class TestLocalization extends TestCaseEnhanced
 		assertEquals("But still no esperanto silly key", false, strings.contains(sillyEsperanto));
 
 		final String withNewlines = "d:e=f\ng\nh";
-		UiLocalization minimalLocalization = new UiLocalization(createTempDirectory(), new String[0]);
+		UiLocalization minimalLocalization = new MartusLocalization(createTempDirectory(), new String[0]);
 		minimalLocalization.addTranslation("en", withNewlines);
 		assertContains("-25fb-d:e=f\\ng\\nh", minimalLocalization.getAllTranslationStrings("en"));
 	}

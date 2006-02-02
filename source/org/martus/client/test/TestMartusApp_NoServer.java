@@ -130,7 +130,7 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		{
 			public FakeRetrieveApp(File tempDir) throws Exception
 			{
-				super(MockMartusSecurity.createClient(), tempDir, new UiLocalization(tempDir, EnglishStrings.strings));
+				super(MockMartusSecurity.createClient(), tempDir, new MartusLocalization(tempDir, EnglishStrings.strings));
 				initializeMockApp(this, tempDir);
 			}
 
@@ -502,7 +502,7 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 	
 	public void testSetDefaultUiState() throws Exception
 	{
-		UiLocalization testLocalization = new UiLocalization(null, noEnglishStrings);
+		MartusLocalization testLocalization = new MartusLocalization(null, noEnglishStrings);
 		File tmpFile = createTempFile();
 		MartusApp.setInitialUiDefaultsFromFileIfPresent(testLocalization, tmpFile);
 		assertNull("File doesn't exist localization should not be set.  Using DefaultUi.txt depends on the language not being set in this case.", testLocalization.getCurrentLanguageCode());
@@ -612,7 +612,7 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 
 			try
 			{
-				UiLocalization localization = new UiLocalization(fakeDataDirectory, noEnglishStrings);
+				MartusLocalization localization = new MartusLocalization(fakeDataDirectory, noEnglishStrings);
 				MartusApp app = new MartusApp(mockSecurityForApp, fakeDataDirectory, localization);
 				app.setCurrentAccount("some user", app.getMartusDataRootDirectory());
 				app.doAfterSigninInitalization();
@@ -667,7 +667,7 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 
 			try
 			{
-				UiLocalization localization = new UiLocalization(fakeDataDirectory, noEnglishStrings);
+				MartusLocalization localization = new MartusLocalization(fakeDataDirectory, noEnglishStrings);
 				MartusApp app = new MartusApp(mockSecurityForApp, fakeDataDirectory, localization);
 				app.setCurrentAccount("some user", app.getMartusDataRootDirectory());
 				app.doAfterSigninInitalization();
@@ -731,7 +731,7 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 
 			try
 			{
-				UiLocalization localization = new UiLocalization(fakeDataDirectory, noEnglishStrings);
+				MartusLocalization localization = new MartusLocalization(fakeDataDirectory, noEnglishStrings);
 				MartusApp app = new MartusApp(mockSecurityForApp, fakeDataDirectory, localization);
 				app.setCurrentAccount("some user", app.getMartusDataRootDirectory());
 				app.doAfterSigninInitalization();
@@ -1712,7 +1712,8 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		TRACE_BEGIN("testEncryptPublicData");
 		File temp = createTempDirectory();
 		MartusCrypto security = MockMartusSecurity.createClient();
-		MartusApp app = new MartusApp(security, temp, new MtfAwareLocalization(temp));
+		String[] emptyTranslations = {};
+		MartusApp app = new MartusApp(security, temp, new MartusLocalization(temp,emptyTranslations));
 		app.doAfterSigninInitalization();
 		app.getStore().createFieldSpecCacheFromDatabase();
 		app.getStore().deleteAllData();

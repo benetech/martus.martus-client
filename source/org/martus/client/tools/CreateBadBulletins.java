@@ -29,11 +29,10 @@ package org.martus.client.tools;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
-
 import org.martus.client.bulletinstore.ClientBulletinStore;
 import org.martus.client.bulletinstore.ClientBulletinStore.BulletinAlreadyExistsException;
 import org.martus.client.core.MartusApp;
-import org.martus.clientside.MtfAwareLocalization;
+import org.martus.client.swingui.MartusLocalization;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.bulletin.BulletinConstants;
 import org.martus.common.crypto.MartusCrypto;
@@ -61,7 +60,7 @@ public class CreateBadBulletins
 		System.out.println();
 		
 		File codeDirectory = MartusApp.getTranslationsDirectory();
-		MartusApp app = new MartusApp(new MtfAwareLocalization(codeDirectory));
+		MartusApp app = new MartusApp(new MartusLocalization(codeDirectory, new String[] {}));
 	
 		String userName = getUserInput("username:");
 		String userPassPhrase = getUserInput("passphrase:");

@@ -28,6 +28,7 @@ package org.martus.client.swingui;
 import java.io.File;
 import java.util.Vector;
 
+import org.martus.clientside.UiConstants;
 import org.martus.clientside.UiLocalization;
 
 public class MartusLocalization extends UiLocalization 
@@ -51,5 +52,10 @@ public class MartusLocalization extends UiLocalization
 			}
 		}
 		return internalLanguages;
+	}
+	
+	public String getProgramVersionLabel()
+	{
+		return UiConstants.versionLabel;
 	}
 }
