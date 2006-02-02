@@ -83,7 +83,7 @@ public class UiAboutDlg extends JDialog implements ActionListener
 			MultiCalendar mlpDate = new MultiCalendar();
 			mlpDate.setTime(localization.getMlpDate());
 			String storedDateString = MartusFlexidate.toStoredDateFormat(mlpDate);
-			mlpDateInfo.append(localization.convertStoredDateToDisplayReverseIfNecessary(storedDateString));
+			mlpDateInfo.append(localization.convertStoredDateToDisplay(storedDateString));
 		}
 		
 		StringBuffer mtfVersionInfo = new StringBuffer(localization.getFieldLabel("aboutDlgTranslationVersionInfo"));

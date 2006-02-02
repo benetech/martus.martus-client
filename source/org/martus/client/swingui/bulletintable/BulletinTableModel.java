@@ -117,7 +117,7 @@ public class BulletinTableModel extends AbstractTableModel
 		if (fieldTag.equals(Bulletin.TAGENTRYDATE) || 
 			fieldTag.equals(Bulletin.TAGEVENTDATE))				
 		{
-			return localization.convertStoredDateToDisplayReverseIfNecessary(value);
+			return localization.convertStoredDateToDisplay(value);
 		}	
 		
 		if (value.startsWith("<"))

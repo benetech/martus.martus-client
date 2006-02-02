@@ -129,7 +129,7 @@ public class UiBulletinTable extends UiTable implements ListSelectionListener, D
     public void setEventDateWidth()
     {
        	int width = getColumnHeaderWidth(COLUMN_EVENTDATE);
-    	int dateWidth = getRenderedWidth(COLUMN_EVENTDATE, mainWindow.getLocalization().convertStoredDateToDisplayReverseIfNecessary("2004-12-23"));
+    	int dateWidth = getRenderedWidth(COLUMN_EVENTDATE, mainWindow.getLocalization().convertStoredDateToDisplay("2004-12-23"));
     	if(dateWidth > width)
     		width = dateWidth;
     	setColumnMaxWidth(COLUMN_EVENTDATE, width);

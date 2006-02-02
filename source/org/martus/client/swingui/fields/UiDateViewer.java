@@ -53,7 +53,7 @@ public class UiDateViewer extends UiViewerField
 	public void setText(String newText)
 	{
 		storedValue = newText;
-		String value = localization.convertStoredDateToDisplayReverseIfNecessary(newText);
+		String value = localization.convertStoredDateToDisplay(newText);
 		label.setText(SPACE + value + SPACE);
 	}
 

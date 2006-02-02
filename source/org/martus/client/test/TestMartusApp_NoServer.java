@@ -1913,12 +1913,12 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 	public void testDateSlashSeparatedConvertReverseIfNecessary()
 	{
 		TRACE_BEGIN("testDateSlashSeparatedConvertReverseIfNecessary");
-		assertEquals("12/13/1987", testAppLocalization.convertStoredDateToDisplayReverseIfNecessary("1987-12-13"));
+		assertEquals("12/13/1987", testAppLocalization.convertStoredDateToDisplay("1987-12-13"));
 		assertEquals("03/01/2004", testAppLocalization.getViewableDateRange("2004-03-01,20040301+0"));
 		assertEquals("01/07/2004 - 07/03/2004", testAppLocalization.getViewableDateRange("2004-01-07,20040107+178"));
 		
 		LanguageOptions.setDirectionRightToLeft();
-		assertEquals("1987/13/12", testAppLocalization.convertStoredDateToDisplayReverseIfNecessary("1987-12-13"));
+		assertEquals("1987/13/12", testAppLocalization.convertStoredDateToDisplay("1987-12-13"));
 		assertEquals("2004/01/03", testAppLocalization.getViewableDateRange("2004-03-01,20040301+0"));
 		assertEquals("2004/03/07 - 2004/07/01", testAppLocalization.getViewableDateRange("2004-01-07,20040107+178"));
 		
@@ -1929,12 +1929,12 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 	{
 		TRACE_BEGIN("testDateDotSeparatedConvertReverseIfNecessary");
 		testAppLocalization.setCurrentDateFormatCode(DateUtilities.DMY_DOT.getCode());
-		assertEquals("13.12.1987", testAppLocalization.convertStoredDateToDisplayReverseIfNecessary("1987-12-13"));
+		assertEquals("13.12.1987", testAppLocalization.convertStoredDateToDisplay("1987-12-13"));
 		assertEquals("01.03.2004", testAppLocalization.getViewableDateRange("2004-03-01,20040301+0"));
 		assertEquals("07.01.2004 - 03.07.2004", testAppLocalization.getViewableDateRange("2004-01-07,20040107+178"));
 		
 		LanguageOptions.setDirectionRightToLeft();
-		assertEquals("1987.12.13", testAppLocalization.convertStoredDateToDisplayReverseIfNecessary("1987-12-13"));
+		assertEquals("1987.12.13", testAppLocalization.convertStoredDateToDisplay("1987-12-13"));
 		assertEquals("2004.03.01", testAppLocalization.getViewableDateRange("2004-03-01,20040301+0"));
 		
 		//RtoL languages doesn't reverse the date when mixed strings of RtoL and LtoR when the LtoR text has dot's contained within for some strange reason
