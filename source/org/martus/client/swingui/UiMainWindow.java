@@ -53,6 +53,7 @@ import java.util.Map;
 import java.util.Stack;
 import java.util.TimerTask;
 import java.util.Vector;
+
 import javax.swing.AbstractAction;
 import javax.swing.ImageIcon;
 import javax.swing.JComponent;
@@ -61,6 +62,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JSplitPane;
 import javax.swing.SwingUtilities;
+
 import org.martus.client.bulletinstore.BulletinFolder;
 import org.martus.client.bulletinstore.ClientBulletinStore;
 import org.martus.client.core.BackgroundUploader;
@@ -122,7 +124,6 @@ import org.martus.common.database.FileDatabase.MissingAccountMapSignatureExcepti
 import org.martus.common.network.NetworkInterfaceConstants;
 import org.martus.common.packet.Packet;
 import org.martus.common.packet.UniversalId;
-import org.martus.common.utilities.DateUtilities;
 import org.martus.swing.FontHandler;
 import org.martus.swing.UiFileChooser;
 import org.martus.swing.UiLanguageDirection;
@@ -198,7 +199,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		if(localization.getCurrentLanguageCode()== null)
 		{
 			localization.setCurrentLanguageCode(MtfAwareLocalization.ENGLISH);
-			localization.setCurrentDateFormatCode(DateUtilities.getDefaultDateFormatCode());
+			localization.setDateFormatFromLanguage();
 		}
 	}
 

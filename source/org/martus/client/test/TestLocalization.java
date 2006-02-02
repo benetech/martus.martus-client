@@ -105,13 +105,13 @@ public class TestLocalization extends TestCaseEnhanced
 	
 	public void testDefaultDateFormats()
 	{
-		assertEquals("English should always return the default date format", DateUtilities.getDefaultDateFormatCode(), MtfAwareLocalization.getDefaultDateFormatForLanguage(UiLocalization.ENGLISH));
+		assertEquals("English should always return the default date format", DateUtilities.MDY_SLASH.getCode(), MtfAwareLocalization.getDefaultDateFormatForLanguage(UiLocalization.ENGLISH));
 		assertEquals("Spanish should always return Slash DMY", DateUtilities.DMY_SLASH.getCode(), MtfAwareLocalization.getDefaultDateFormatForLanguage(UiLocalization.SPANISH));
 		assertEquals("Russian should always return Dot DMY", DateUtilities.DMY_DOT.getCode(), MtfAwareLocalization.getDefaultDateFormatForLanguage(UiLocalization.RUSSIAN));
 		assertEquals("Thai should always return Slash DMY", DateUtilities.DMY_SLASH.getCode(), MtfAwareLocalization.getDefaultDateFormatForLanguage(UiLocalization.THAI));
 		assertEquals("Arabic should always return Slash DMY", DateUtilities.DMY_SLASH.getCode(), MtfAwareLocalization.getDefaultDateFormatForLanguage(UiLocalization.ARABIC));
 		assertEquals("Farsi should always return Slash DMY", DateUtilities.DMY_SLASH.getCode(), MtfAwareLocalization.getDefaultDateFormatForLanguage(UiLocalization.FARSI));
-		assertEquals("An unknown Language should always return the default date format", DateUtilities.getDefaultDateFormatCode(), MtfAwareLocalization.getDefaultDateFormatForLanguage("ZZ"));
+		assertEquals("An unknown Language should always return the default date format", DateUtilities.MDY_SLASH.getCode(), MtfAwareLocalization.getDefaultDateFormatForLanguage("ZZ"));
 	}
 	
 	public void testIsLanguageFile()
