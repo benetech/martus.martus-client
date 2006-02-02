@@ -33,7 +33,6 @@ import javax.swing.Box;
 import javax.swing.JComponent;
 
 import org.martus.clientside.UiLocalization;
-import org.martus.common.utilities.DateUtilities;
 import org.martus.swing.UiComboBox;
 import org.martus.swing.Utilities;
 import org.martus.util.MultiCalendar;
@@ -106,7 +105,7 @@ public class UiDateEditor extends UiField
 	{
 		JComponent[] dateInOrderLeftToRight = new JComponent[3];
 		
-		String mdyOrder = DateUtilities.getMdyOrder(localizationForOrdering.getCurrentDateFormatCode());
+		String mdyOrder = localizationForOrdering.getMdyOrder();
 		for(int i = 0; i < mdyOrder.length(); ++i)
 		{
 			switch(mdyOrder.charAt(i))
