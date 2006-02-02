@@ -37,9 +37,9 @@ import javax.swing.SwingConstants;
 
 import org.martus.client.swingui.EnglishStrings;
 import org.martus.client.swingui.MartusLocalization;
+import org.martus.client.swingui.UiConstants;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.clientside.MtfAwareLocalization;
-import org.martus.clientside.UiConstants;
 import org.martus.clientside.UiLocalization;
 import org.martus.common.MartusUtilities;
 import org.martus.common.MiniLocalization.NoDateSeparatorException;

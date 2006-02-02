@@ -37,8 +37,8 @@ import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.border.EmptyBorder;
 
+import org.martus.client.swingui.UiConstants;
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.clientside.UiConstants;
 import org.martus.clientside.UiLocalization;
 import org.martus.swing.UiButton;
 import org.martus.swing.UiLabel;

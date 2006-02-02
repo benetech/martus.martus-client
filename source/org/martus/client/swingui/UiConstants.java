@@ -1,7 +1,7 @@
 /*
 
 The Martus(tm) free, social justice documentation and
-monitoring software. Copyright (C) 2001-2004, Beneficent
+monitoring software. Copyright (C) 2001-2005, Beneficent
 Technology, Inc. (Benetech).
 
 Martus is free software; you can redistribute it and/or
@@ -23,38 +23,17 @@ Software Foundation, Inc., 59 Temple Place - Suite 330,
 Boston, MA 02111-1307, USA.
 
 */
+
 package org.martus.client.swingui;
 
-import java.io.File;
-import java.util.Vector;
-
-import org.martus.clientside.UiLocalization;
-
-public class MartusLocalization extends UiLocalization 
+public class UiConstants
 {
-	public MartusLocalization(File directoryToUse, String[] englishTranslations)
-	{
-		super(directoryToUse, englishTranslations);		
-	}
+	// NOTE: See the license terms to understand when the following MUST be changed.
+	// Also, you should search for "Martus" in EnglishStrings.txt and any .mtf files 
+	// and change other occurances as required by the license.
+	public static final String programName = "Martus(TM)";
+	public static String versionLabel = "pre-2.9 internal";
+	public static final String copyright = "Copyright 2001-2006 Beneficent Technology, Inc.";
+	public static final String website = "(Benetech, at www.benetech.org)";
 
-	protected Vector getAllCompiledLanguageResources()
-	{
-		String filename = null;
-		Vector internalLanguages = new Vector();
-		for(int i = 0; i < ALL_LANGUAGE_CODES.length; ++i)
-		{
-			String languageCode = ALL_LANGUAGE_CODES[i];
-			filename = getMtfFilename(languageCode);
-			if(getClass().getResource(filename) != null)
-			{
-				internalLanguages.addElement(getLanguageChoiceItem(filename));
-			}
-		}
-		return internalLanguages;
-	}
-	
-	public String getProgramVersionLabel()
-	{
-		return UiConstants.versionLabel;
-	}
 }

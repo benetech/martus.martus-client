@@ -56,11 +56,11 @@ import org.martus.client.bulletinstore.ClientBulletinStore.BulletinAlreadyExists
 import org.martus.client.search.BulletinSearcher;
 import org.martus.client.search.SearchTreeNode;
 import org.martus.client.swingui.EnglishStrings;
+import org.martus.client.swingui.UiConstants;
 import org.martus.clientside.ClientSideNetworkGateway;
 import org.martus.clientside.ClientSideNetworkHandlerUsingXmlRpcForNonSSL;
 import org.martus.clientside.MtfAwareLocalization;
 import org.martus.clientside.PasswordHelper;
-import org.martus.clientside.UiConstants;
 import org.martus.common.BulletinSummary;
 import org.martus.common.FieldCollection;
 import org.martus.common.HQKey;
