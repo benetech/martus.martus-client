@@ -42,9 +42,8 @@ import org.martus.client.swingui.UiMainWindow;
 import org.martus.clientside.MtfAwareLocalization;
 import org.martus.clientside.UiLocalization;
 import org.martus.common.MartusUtilities;
-import org.martus.common.MiniLocalization.NoDateSeparatorException;
+import org.martus.common.MiniLocalization;
 import org.martus.common.fieldspec.ChoiceItem;
-import org.martus.common.utilities.DateUtilities;
 import org.martus.jarverifier.JarVerifier;
 import org.martus.swing.UiLanguageDirection;
 import org.martus.util.DirectoryUtils;
@@ -105,13 +104,22 @@ public class TestLocalization extends TestCaseEnhanced
 	
 	public void testDefaultDateFormats()
 	{
-		assertEquals("English should always return the default date format", DateUtilities.MDY_SLASH.getCode(), MtfAwareLocalization.getDefaultDateFormatForLanguage(UiLocalization.ENGLISH));
-		assertEquals("Spanish should always return Slash DMY", DateUtilities.DMY_SLASH.getCode(), MtfAwareLocalization.getDefaultDateFormatForLanguage(UiLocalization.SPANISH));
-		assertEquals("Russian should always return Dot DMY", DateUtilities.DMY_DOT.getCode(), MtfAwareLocalization.getDefaultDateFormatForLanguage(UiLocalization.RUSSIAN));
-		assertEquals("Thai should always return Slash DMY", DateUtilities.DMY_SLASH.getCode(), MtfAwareLocalization.getDefaultDateFormatForLanguage(UiLocalization.THAI));
-		assertEquals("Arabic should always return Slash DMY", DateUtilities.DMY_SLASH.getCode(), MtfAwareLocalization.getDefaultDateFormatForLanguage(UiLocalization.ARABIC));
-		assertEquals("Farsi should always return Slash DMY", DateUtilities.DMY_SLASH.getCode(), MtfAwareLocalization.getDefaultDateFormatForLanguage(UiLocalization.FARSI));
-		assertEquals("An unknown Language should always return the default date format", DateUtilities.MDY_SLASH.getCode(), MtfAwareLocalization.getDefaultDateFormatForLanguage("ZZ"));
+		verifyDefaultDateFormat(MiniLocalization.ENGLISH, "mdy", '/');
+		verifyDefaultDateFormat(MiniLocalization.SPANISH, "dmy", '/');
+		verifyDefaultDateFormat(MiniLocalization.RUSSIAN, "dmy", '.');
+		verifyDefaultDateFormat(MiniLocalization.THAI, "dmy", '/');
+		verifyDefaultDateFormat(MiniLocalization.ARABIC, "dmy", '/');
+		verifyDefaultDateFormat(MiniLocalization.FARSI, "dmy", '/');
+		verifyDefaultDateFormat("UNKNOWN", "mdy", '/');
+	}
+	
+	private void verifyDefaultDateFormat(String languageCode, String mdyOrder, char delimiter)
+	{
+		MiniLocalization localization = new MiniLocalization();
+		localization.setCurrentLanguageCode(languageCode);
+		localization.setDateFormatFromLanguage();
+		assertEquals("wrong mdy order for " + languageCode + "? ", mdyOrder, localization.getMdyOrder());
+		assertEquals("wrong delimiter for " + languageCode + "? ", delimiter, localization.getDateDelimiter());
 	}
 	
 	public void testIsLanguageFile()
@@ -537,21 +545,6 @@ public class TestLocalization extends TestCaseEnhanced
 		return foundSomeTestLanguage;
 	}
 
-	public void testGetDateSeparator() throws Exception
-	{
-		assertEquals('/', UiLocalization.getDateSeparator("1999/12/03"));
-		assertEquals('-', UiLocalization.getDateSeparator("03-12-1999"));
-		assertEquals(' ', UiLocalization.getDateSeparator("1999 12 03"));
-		try
-		{
-			UiLocalization.getDateSeparator("19991203");
-			fail("Should have thrown, no date separator character");
-		}
-		catch(NoDateSeparatorException expected)
-		{
-		}
-	}
-	
 	public void testLanguageCodeFromFilename()
 	{
 		assertEquals("", MtfAwareLocalization.getLanguageCodeFromFilename("Martus.mtf"));

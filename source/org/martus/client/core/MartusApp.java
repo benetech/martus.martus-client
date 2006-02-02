@@ -180,7 +180,7 @@ public class MartusApp
 			if(MtfAwareLocalization.isRecognizedLanguage(languageCode))
 			{
 				localization.setCurrentLanguageCode(languageCode);
-				localization.setCurrentDateFormatCode(MtfAwareLocalization.getDefaultDateFormatForLanguage(languageCode));
+				localization.setDateFormatFromLanguage();
 			}
 		}
 		catch (Exception e)
