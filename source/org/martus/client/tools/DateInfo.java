@@ -36,7 +36,7 @@ public class DateInfo
 	public static void main(String[] args) throws Exception
 	{
 		System.out.println("DateInfo - Displays system date information as seen by Java");
-		System.out.println("Today: " + DateUtilities.getToday());
+		System.out.println("Today: " + DateUtilities.getTodayInStoredFormat());
 		System.out.println("Default locale: " + Locale.getDefault());
 		System.out.println("GregorianCalendar: " + new GregorianCalendar());
 	}

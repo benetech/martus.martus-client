@@ -41,7 +41,7 @@ public class GridDateCellViewer extends GridCellEditorAndRenderer
 	public int getMinimumCellWidth()
 	{
 		UiDateViewer tmpViewer = new UiDateViewer(localization);
-		tmpViewer.setText(DateUtilities.getToday());
+		tmpViewer.setText(DateUtilities.getTodayInStoredFormat());
 		return tmpViewer.getComponent().getPreferredSize().width + INSETS;
 	}
 	UiLocalization localization;	
