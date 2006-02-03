@@ -73,7 +73,6 @@ import org.martus.common.database.FileDatabase;
 import org.martus.common.fieldspec.ChoiceItem;
 import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.packet.UniversalId;
-import org.martus.common.utilities.DateUtilities;
 import org.martus.swing.Utilities;
 import org.martus.util.DirectoryUtils;
 import org.martus.util.TestCaseEnhanced;
@@ -517,21 +516,21 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		out.close();
 		MartusApp.setInitialUiDefaultsFromFileIfPresent(testLocalization, tmpFile);
 		assertEquals("English should be set", MtfAwareLocalization.ENGLISH, testLocalization.getCurrentLanguageCode());
-		assertEquals("English code should set DMY correctly", DateUtilities.MDY_SLASH.getCode(), testLocalization.getCurrentDateFormatCode());
+		assertEquals("English code should set DMY correctly", MDY_SLASH, testLocalization.getCurrentDateFormatCode());
 		tmpFile.delete();
 		out = new FileOutputStream(tmpFile);
 		out.write("es".getBytes());
 		out.close();
 		MartusApp.setInitialUiDefaultsFromFileIfPresent(testLocalization, tmpFile);
 		assertEquals("Spanish should be set", MtfAwareLocalization.SPANISH, testLocalization.getCurrentLanguageCode());
-		assertEquals("Spanish code should set MDY correctly", DateUtilities.DMY_SLASH.getCode(), testLocalization.getCurrentDateFormatCode());
+		assertEquals("Spanish code should set MDY correctly", DMY_SLASH, testLocalization.getCurrentDateFormatCode());
 		tmpFile.delete();
 		out = new FileOutputStream(tmpFile);
 		out.write("ru".getBytes());
 		out.close();
 		MartusApp.setInitialUiDefaultsFromFileIfPresent(testLocalization, tmpFile);
 		assertEquals("Russian should be set", MtfAwareLocalization.RUSSIAN, testLocalization.getCurrentLanguageCode());
-		assertEquals("Russian code should set MDY Dot correctly", DateUtilities.DMY_DOT.getCode(), testLocalization.getCurrentDateFormatCode());
+		assertEquals("Russian code should set MDY Dot correctly", DMY_DOT, testLocalization.getCurrentDateFormatCode());
 		tmpFile.delete();
 	}
 
@@ -1928,7 +1927,7 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 	public void testDateDotSeparatedConvertReverseIfNecessary()
 	{
 		TRACE_BEGIN("testDateDotSeparatedConvertReverseIfNecessary");
-		testAppLocalization.setCurrentDateFormatCode(DateUtilities.DMY_DOT.getCode());
+		testAppLocalization.setCurrentDateFormatCode(DMY_DOT);
 		assertEquals("13.12.1987", testAppLocalization.convertStoredDateToDisplay("1987-12-13"));
 		assertEquals("01.03.2004", testAppLocalization.getViewableDateRange("2004-03-01,20040301+0"));
 		assertEquals("07.01.2004 - 03.07.2004", testAppLocalization.getViewableDateRange("2004-01-07,20040107+178"));
@@ -2105,4 +2104,7 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 	static final String textInsideYYReadmeMLPFile = "readme yy";
 	static final String textInsideUpdatedYYReadmeMLPFile = "updated yy readme";
 
+	static final String MDY_SLASH = "MM/dd/yyyy";
+	static final String DMY_SLASH = "dd/MM/yyyy";
+	static final String DMY_DOT = "dd.MM.yyyy";
 }

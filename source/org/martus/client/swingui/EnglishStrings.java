@@ -878,6 +878,15 @@ public class EnglishStrings
 "field:BulletinHeadQuartersHQInfoForView=The following Headquarters account(s) can view the private information in this bulletin, and can send this bulletin to a server.",
 "field:BulletinHeadQuartersHQInfoForModify=The selected Headquarters account(s) will be able to view the private information in this bulletin, or send this bulletin to a server, after you save it.\n\nTo add a new Headquarters account use the Tools/Configure Headquarters menu option.",
 
+"field:mdyOrder=Date format sequence",
+"field:DateDelimiter=Date delimiter",
+"field:DatePartYear=Year",
+"field:DatePartMonth=Month",
+"field:DatePartDay=Day",
+"field:DateDelimiterSlash=Slash (00/00/00)",
+"field:DateDelimiterDash=Dash (00-00-00)",
+"field:DateDelimiterDot=Dot (00.00.00)",
+
 "folder:%OutBox=Unsent Bulletins",
 "folder:%Sent=Saved Bulletins",
 "folder:%Draft=Old Draft Bulletins",

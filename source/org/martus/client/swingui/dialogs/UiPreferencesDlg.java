@@ -37,8 +37,8 @@ import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.fields.UiChoiceEditor;
 import org.martus.clientside.UiLocalization;
+import org.martus.common.fieldspec.ChoiceItem;
 import org.martus.common.fieldspec.DropDownFieldSpec;
-import org.martus.common.utilities.DateUtilities;
 import org.martus.swing.UiButton;
 import org.martus.swing.UiCheckBox;
 import org.martus.swing.UiLabel;
@@ -56,9 +56,24 @@ public class UiPreferencesDlg extends JDialog implements ActionListener
 		UiLocalization localization = owner.getLocalization();
 		
 		setTitle(localization.getMenuLabel("Preferences"));
+
+		ChoiceItem[] mdyChoices = new ChoiceItem[] {
+			new ChoiceItem("ymd", buildMdyLabel("ymd")),
+			new ChoiceItem("mdy", buildMdyLabel("mdy")),
+			new ChoiceItem("dmy", buildMdyLabel("dmy")),
+		};
+		DropDownFieldSpec mdyChoiceSpec = new DropDownFieldSpec(mdyChoices);
+		mdyDropdown = new UiChoiceEditor(mdyChoiceSpec);
+		mdyDropdown.setText(localization.getMdyOrder());
 		
-		dateFormatDropdown = new UiChoiceEditor(new DropDownFieldSpec(DateUtilities.getDateFormats()));
-		dateFormatDropdown.setText(localization.getCurrentDateFormatCode());
+		ChoiceItem[] delimiterChoices = new ChoiceItem[] {
+			new ChoiceItem("/", localization.getFieldLabel("DateDelimiterSlash")),
+			new ChoiceItem("-", localization.getFieldLabel("DateDelimiterDash")),
+			new ChoiceItem(".", localization.getFieldLabel("DateDelimiterDot")),
+		};
+		DropDownFieldSpec delimiterChoiceSpec = new DropDownFieldSpec(delimiterChoices);
+		delimiterDropdown = new UiChoiceEditor(delimiterChoiceSpec);
+		delimiterDropdown.setText("" + localization.getDateDelimiter());
 		
 		languageDropdown = new UiChoiceEditor(new DropDownFieldSpec(localization.getUiLanguages()));
 		languageDropdown.setText(localization.getCurrentLanguageCode());
@@ -69,7 +84,8 @@ public class UiPreferencesDlg extends JDialog implements ActionListener
 		
 		UiParagraphPanel preferences = new UiParagraphPanel();
 		preferences.addComponents(new UiLabel(localization.getFieldLabel("language")), languageDropdown.getComponent());
-		preferences.addComponents(new UiLabel(localization.getFieldLabel("dateformat")), dateFormatDropdown.getComponent());
+		preferences.addComponents(new UiLabel(localization.getFieldLabel("mdyOrder")), mdyDropdown.getComponent());
+		preferences.addComponents(new UiLabel(localization.getFieldLabel("DateDelimiter")), delimiterDropdown.getComponent());
 		
 		preferences.addBlankLine();
 		preferences.addOnNewLine(allPrivate);
@@ -88,6 +104,26 @@ public class UiPreferencesDlg extends JDialog implements ActionListener
 		setResizable(true);
 		setVisible(true);
 	}
+	
+	private String buildMdyLabel(String mdyOrder)
+	{
+		UiLocalization localization = owner.getLocalization();
+		String result = "";
+		for(int i = 0; i < mdyOrder.length(); ++i)
+		{
+			String tag = "Unknown";
+			char thisPart = mdyOrder.charAt(i);
+			switch(thisPart)
+			{
+				case 'y': tag = "Year"; break;
+				case 'm': tag = "Month"; break;
+				case 'd': tag = "Day"; break;
+			}
+			result += localization.getFieldLabel("DatePart" + tag) + " ";
+		}
+		
+		return result;
+	}
 
 	public void actionPerformed(ActionEvent ae)
 	{
@@ -98,7 +134,8 @@ public class UiPreferencesDlg extends JDialog implements ActionListener
 			String languageCodeSelected = languageDropdown.getText();
 			UiMainWindow.displayDefaultUnofficialTranslationMessageIfNecessary(owner.getCurrentActiveFrame(), localization, languageCodeSelected);
 			UiMainWindow.displayIncompatibleMtfVersionWarningMessageIfNecessary(owner.getCurrentActiveFrame(), localization, languageCodeSelected);
-			localization.setCurrentDateFormatCode(dateFormatDropdown.getText());
+			localization.setMdyOrder(mdyDropdown.getText());
+			localization.setDateDelimiter(delimiterDropdown.getText().charAt(0));
 			localization.setCurrentLanguageCode(languageDropdown.getText());
 			owner.setBulletinsAlwaysPrivate(allPrivate.isSelected());
 		}
@@ -108,7 +145,8 @@ public class UiPreferencesDlg extends JDialog implements ActionListener
 
 	UiMainWindow owner;
 	UiChoiceEditor languageDropdown;
-	private UiChoiceEditor dateFormatDropdown;
+	private UiChoiceEditor mdyDropdown;
+	private UiChoiceEditor delimiterDropdown;
 	private JCheckBox allPrivate;
 	private JButton ok;
 	private JButton cancel;
