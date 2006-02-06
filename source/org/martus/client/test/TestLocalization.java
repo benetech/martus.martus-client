@@ -224,10 +224,10 @@ public class TestLocalization extends TestCaseEnhanced
 	public void testGetAllEnglishStrings() throws Exception
 	{
 		MartusLocalization localization = new MartusLocalization(createTempDirectory(), UiMainWindow.getAllEnglishStrings());
-		assertEquals(localization.getLabel("en", "wintitle", "main"), "Martus Human Rights Bulletin System");
-		assertEquals(localization.getLabel("en", "keyword", "or"), "or");
-		assertEquals(localization.getLabel("en", "language", "?"), "-Other-");
-		assertEquals(localization.getLabel("en", "status", "sealed"), "Sealed");
+		assertEquals("Testing Only: Martus Human Rights Bulletin System", localization.getLabel("en", "wintitle", "main"));
+		assertEquals("or", localization.getLabel("en", "keyword", "or"));
+		assertEquals("-Other-", localization.getLabel("en", "language", "?"));
+		assertEquals("Sealed", localization.getLabel("en", "status", "sealed"));
 	}
 	
 	public void testGetTranslationFileAllowUnofficial() throws Exception
