@@ -59,6 +59,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JComponent;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JSplitPane;
 import javax.swing.SwingUtilities;
@@ -375,6 +376,9 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 
 		errorChecker = new javax.swing.Timer(10*1000, new UploadErrorChecker());
 		errorChecker.start();
+		
+		demoOnlyChecker = new javax.swing.Timer(5*60*1000, new DemoOnlyChecker());
+		demoOnlyChecker.start();
 	}
 
 	private void loadConfigInfo()
@@ -2286,6 +2290,15 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		}
 	}
 
+	class DemoOnlyChecker extends AbstractAction
+	{
+		public void actionPerformed(ActionEvent evt)
+		{
+			JOptionPane.showMessageDialog(null,"This is a test version of Martus.  You may obtain a release version of Martus at www.martus.org", "MARTUS TEST VERSION ONLY", JOptionPane.WARNING_MESSAGE);
+		}
+	}
+		
+	
 	class UploadErrorChecker extends AbstractAction
 	{
 		public void actionPerformed(ActionEvent evt)
@@ -2387,6 +2400,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	private java.util.Timer uploader;
 	private java.util.Timer timeoutChecker;
 	private javax.swing.Timer errorChecker;
+	private javax.swing.Timer demoOnlyChecker;
 	String uploadResult;
 	UiInactivityDetector inactivityDetector;
 
