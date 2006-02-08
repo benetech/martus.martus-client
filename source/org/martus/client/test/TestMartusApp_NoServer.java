@@ -1861,7 +1861,7 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 	public void testWindowTitles()
 	{
 		TRACE_BEGIN("testWindowTitles");
-		assertEquals("Testing Only: Martus Human Rights Bulletin System", testAppLocalization.getWindowTitle("main"));
+		assertEquals("Martus Human Rights Bulletin System", testAppLocalization.getWindowTitle("main"));
 		TRACE_END();
 	}
 
