@@ -27,6 +27,7 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.swingui;
 
 import java.awt.BorderLayout;
+import java.awt.Component;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Frame;
@@ -1912,9 +1913,9 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		previewSplitter.setDividerLocation(uiState.getCurrentPreviewSplitterPosition());
 
 		if(LanguageOptions.isRightToLeftLanguage())
-			folderSplitter = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, previewSplitter, folders);
+			folderSplitter = new FolderSplitPane(JSplitPane.HORIZONTAL_SPLIT, previewSplitter, folders);
 		else
-			folderSplitter = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, folders, previewSplitter);
+			folderSplitter = new FolderSplitPane(JSplitPane.HORIZONTAL_SPLIT, folders, previewSplitter);
 
 		Dimension screenSize = Utilities.getViewableScreenSize();
 		Dimension appDimension = uiState.getCurrentAppDimension();
@@ -1936,12 +1937,31 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		}
 
 		uiState.setCurrentAppDimension(getSize());
-		folderSplitter.setDividerLocation(uiState.getCurrentFolderSplitterPosition());
+		folderSplitter.setInitialDividerLocation(uiState.getCurrentFolderSplitterPosition());
 
 		getContentPane().add(folderSplitter);
 		statusBar = new UiStatusBar(getLocalization());		
 		checkServerStatus();	
 		getContentPane().add(statusBar, BorderLayout.SOUTH ); 
+	}
+
+	class FolderSplitPane extends JSplitPane
+	{
+		public FolderSplitPane(int newOrientation, Component newLeftComponent, Component newRightComponent) 
+		{
+			super(newOrientation, newLeftComponent, newRightComponent);
+		}
+
+		public void setInitialDividerLocation(int location)
+		{
+			super.setDividerLocation(location);
+		}
+
+		public void setDividerLocation(int location) 
+		{
+			super.setDividerLocation(location);
+			preview.updateView();
+		}
 	}
 	
 	public void checkServerStatus()
@@ -2379,7 +2399,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	private CurrentUiState uiState;
 	private UiBulletinPreviewPane preview;
 	private JSplitPane previewSplitter;
-	private JSplitPane folderSplitter;
+	private FolderSplitPane folderSplitter;
 	private UiBulletinTablePane table;
 	private UiFolderTreePane folders;
 	private java.util.Timer uploader;

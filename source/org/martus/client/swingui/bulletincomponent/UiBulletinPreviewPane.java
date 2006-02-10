@@ -63,19 +63,22 @@ public class UiBulletinPreviewPane extends UiScrollPane
 			//System.out.println("UiBulletinPreview.refresh: skipping");
 			return;
 		}
-
 		currentBulletin = b;
+		updateView();
+	}
+
+	public void updateView() 
+	{
 		try
 		{
-			view.copyDataFromBulletin(b);
+			view.copyDataFromBulletin(currentBulletin);
 		}
 		catch(IOException e)
 		{
 			System.out.println("UiBulletinPreview.refresh: " + e);
 		}
-
 		boolean isEncrypted = false;
-		if(b != null && b.isAllPrivate())
+		if(currentBulletin != null && currentBulletin.isAllPrivate())
 			isEncrypted = true;
 		indicateEncrypted(isEncrypted);
 		Utilities.forceScrollerToTop(view);
