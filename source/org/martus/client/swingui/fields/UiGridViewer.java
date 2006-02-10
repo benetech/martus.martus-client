@@ -43,6 +43,8 @@ public class UiGridViewer extends UiGrid
 
 	public void setText(String newText)
 	{
+		if(newText.length() == 0)
+			return;
 		super.setText(newText);
 		table.resizeTable();
 	}
