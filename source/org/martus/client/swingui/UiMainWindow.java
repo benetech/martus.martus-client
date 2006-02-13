@@ -2397,7 +2397,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	
 	private MartusApp app;
 	private CurrentUiState uiState;
-	private UiBulletinPreviewPane preview;
+	UiBulletinPreviewPane preview;
 	private JSplitPane previewSplitter;
 	private FolderSplitPane folderSplitter;
 	private UiBulletinTablePane table;
