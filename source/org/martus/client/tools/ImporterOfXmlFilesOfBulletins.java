@@ -57,14 +57,20 @@ public class ImporterOfXmlFilesOfBulletins
 		FileInputStream xmlIn = new FileInputStream(bulletinXmlFileToImport);
 		XmlBulletinsImporter importer = new XmlBulletinsImporter(clientStore.getSignatureVerifier(), xmlIn);
 		Bulletin[] bulletins = importer.getBulletins();
-		for(int j = 0; j < bulletins.length; ++j)
+		try
 		{
-			Bulletin b =  bulletins[j];
-			progressMonitor.println("Importing:" +b.get(Bulletin.TAGTITLE));
-			clientStore.saveBulletin(b);
-			clientStore.addBulletinToFolder(importFolder, b.getUniversalId());
+			for(int j = 0; j < bulletins.length; ++j)
+			{
+				Bulletin b =  bulletins[j];
+				progressMonitor.println("Importing:" +b.get(Bulletin.TAGTITLE));
+				clientStore.saveBulletin(b);
+				clientStore.addBulletinToFolder(importFolder, b.getUniversalId());
+			}
 		}
-		clientStore.saveFolders();
+		finally
+		{
+			clientStore.saveFolders();
+		}
 		return bulletins.length;
 	}
 	
