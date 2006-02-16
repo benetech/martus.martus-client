@@ -220,8 +220,6 @@ public class ClientBulletinStore extends BulletinStore
 	public synchronized void destroyBulletin(Bulletin b) throws IOException
 	{
 		removeBulletinFromAllFolders(b);
-		saveFolders();
-
 		bulletinDataCache.remove(b.getUniversalId());
 		removeBulletinFromStore(b);
 	}
@@ -341,7 +339,8 @@ public class ClientBulletinStore extends BulletinStore
 	{
 		try
 		{
-			getFolderDiscarded().add(b);
+			if(f != folderDiscarded)
+				folderDiscarded.add(b);
 		}
 		catch (BulletinAlreadyExistsException saveToIgnoreException)
 		{

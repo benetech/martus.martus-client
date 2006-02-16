@@ -302,9 +302,14 @@ public abstract class UiBulletinDropAdapter implements DropTargetListener
 			HashMap tokenReplacement = new HashMap();
 			tokenReplacement.put("#Title#", old.get(Bulletin.TAGTITLE));
 			if(observer.confirmDlg(observer, "UnAuthoredBulletinDeleteBeforePaste", tokenReplacement))
+			{
 				store.destroyBulletin(old);
+				store.saveFolders();
+			}
 			else
+			{
 				return false;
+			}
 		}
 		return true;
 	}

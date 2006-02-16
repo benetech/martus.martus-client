@@ -563,14 +563,23 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		DatabaseKey key = DatabaseKey.createLegacyKey(b1.getBulletinHeaderPacket().getUniversalId());
 		db.discardRecord(key);
 
-		BulletinFolder trash = appWithAccount.getFolderDiscarded();
+		BulletinFolder savedFolder = appWithAccount.getFolderSaved();
 		try
 		{
-			appWithAccount.discardBulletinsFromFolder(trash, new Bulletin[] {b1, b3});
+			appWithAccount.discardBulletinsFromFolder(savedFolder, new Bulletin[] {b1, b3});
 			fail("discard damaged record should have thrown");
 		}
 		catch(IOException ignoreExpectedException)
 		{
+		}
+		BulletinFolder trash = appWithAccount.getFolderDiscarded();
+		try
+		{
+			appWithAccount.discardBulletinsFromFolder(trash, new Bulletin[] {b1, b3});
+		}
+		catch(IOException e)
+		{
+			fail("Should not have thrown, discarding from trash is fine.");
 		}
 	}
 	

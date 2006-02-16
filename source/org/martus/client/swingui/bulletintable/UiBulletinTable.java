@@ -662,7 +662,6 @@ public class UiBulletinTable extends UiTable implements ListSelectionListener, D
 		}
 
 		BulletinFolder discardedFolder = app.getFolderDiscarded(); 
-		folderToDiscardFrom.getStore().saveFolders();
 		mainWindow.folderContentsHaveChanged(folderToDiscardFrom);
 		mainWindow.folderContentsHaveChanged(discardedFolder);
 		mainWindow.selectNewCurrentBulletin(getSelectedRow());
