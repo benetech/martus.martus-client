@@ -276,8 +276,24 @@ public abstract class UiBulletinDropAdapter implements DropTargetListener
 		AddOlderVersionToFolderFailedException
 	{
 		ClientBulletinStore store = toFolder.getStore();
-		if(!deleteOldUnAuthoredBulletinIfRequired(file, store))
-			return;
+		
+		ZipFile zip = new ZipFile(file);
+		BulletinHeaderPacket bhp = BulletinHeaderPacket.loadFromZipFile(zip, store.getSignatureVerifier());
+		Bulletin old = store.getBulletinRevision(bhp.getUniversalId());
+		boolean isMyBulletin = store.isMyBulletin(bhp);
+		boolean doesBulletinRevisionExist = old != null;
+		
+		if(!isMyBulletin && doesBulletinRevisionExist)
+		{
+			HashMap tokenReplacement = new HashMap();
+			tokenReplacement.put("#Title#", old.get(Bulletin.TAGTITLE));
+			if(observer.confirmDlg(observer, "UnAuthoredBulletinDeleteBeforePaste", tokenReplacement))
+			{
+				store.destroyBulletin(old);
+				store.saveFolders();
+			}
+		}
+
 		observer.setWaitingCursor();
 		try
 		{
@@ -289,31 +305,6 @@ public abstract class UiBulletinDropAdapter implements DropTargetListener
 			observer.resetCursor();
 		}
 	}
-	
-	private boolean deleteOldUnAuthoredBulletinIfRequired(File file, ClientBulletinStore store) throws SignatureVerificationException, IOException
-	{
-		ZipFile zip = new ZipFile(file);
-		BulletinHeaderPacket bhp = BulletinHeaderPacket.loadFromZipFile(zip, store.getSignatureVerifier());
-		UniversalId uid = bhp.getUniversalId();
-		
-		Bulletin old = store.getBulletinRevision(uid);
-		if(!store.isMyBulletin(bhp) && old != null)
-		{
-			HashMap tokenReplacement = new HashMap();
-			tokenReplacement.put("#Title#", old.get(Bulletin.TAGTITLE));
-			if(observer.confirmDlg(observer, "UnAuthoredBulletinDeleteBeforePaste", tokenReplacement))
-			{
-				store.destroyBulletin(old);
-				store.saveFolders();
-			}
-			else
-			{
-				return false;
-			}
-		}
-		return true;
-	}
-
 
 	public void attemptDropBulletins(Bulletin[] bulletins, BulletinFolder toFolder) throws
 		BulletinAlreadyExistsException, IOException, AddOlderVersionToFolderFailedException
