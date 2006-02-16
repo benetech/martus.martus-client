@@ -57,6 +57,7 @@ public class ImporterOfXmlFilesOfBulletins
 		FileInputStream xmlIn = new FileInputStream(bulletinXmlFileToImport);
 		XmlBulletinsImporter importer = new XmlBulletinsImporter(clientStore.getSignatureVerifier(), xmlIn);
 		Bulletin[] bulletins = importer.getBulletins();
+		importFolder.prepareForBulkOperation();
 		try
 		{
 			for(int j = 0; j < bulletins.length; ++j)

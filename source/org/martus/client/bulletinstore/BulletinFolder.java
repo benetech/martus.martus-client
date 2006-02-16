@@ -231,6 +231,11 @@ public class BulletinFolder
 		return folderName.startsWith("%");
 	}
 
+	public void prepareForBulkOperation()
+	{
+		sortedIdList = null;
+	}
+
 	private void insertIntoSortedList(UniversalId uid)
 	{
 		if(sortedIdList == null)

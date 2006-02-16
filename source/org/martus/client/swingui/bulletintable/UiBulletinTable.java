@@ -463,6 +463,8 @@ public class UiBulletinTable extends UiTable implements ListSelectionListener, D
 		Bulletin[] selected = getSelectedBulletins();
 		boolean notAllowedToSend = false;
 		boolean errorIO = false;
+		draftOutBox.prepareForBulkOperation();
+		sealedOutBox.prepareForBulkOperation();
 		for (int i = 0; i < selected.length; i++)
 		{
 			try

@@ -423,7 +423,7 @@ public class ClientBulletinStore extends BulletinStore
 			return false;
 
 		BulletinFolder discarded = getFolderDiscarded();
-
+		discarded.prepareForBulkOperation();
 		while(folder.getBulletinCount() > 0)
 		{
 			Bulletin b = folder.getBulletinSorted(0);
@@ -635,6 +635,7 @@ public class ClientBulletinStore extends BulletinStore
 
 	public void addBulletinIdsToFolder(BulletinFolder folder, Vector bulletinUids) throws IOException
 	{
+		folder.prepareForBulkOperation();
 		for (int i = 0; i < bulletinUids.size(); i++) 
 		{
 			UniversalId uid = (UniversalId)bulletinUids.get(i);
@@ -1037,6 +1038,7 @@ public class ClientBulletinStore extends BulletinStore
 			
 		String name = getOrphanFolderName();
 		BulletinFolder orphanFolder = createOrFindFolder(name);
+		orphanFolder.prepareForBulkOperation();
 		orphanFolder.add(b);
 		
 		BulletinFolder outboxFolder =  (b.isDraft())? getFolderDraftOutbox():getFolderSealedOutbox();

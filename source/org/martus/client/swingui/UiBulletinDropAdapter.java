@@ -313,16 +313,17 @@ public abstract class UiBulletinDropAdapter implements DropTargetListener
 	public void attemptDropBulletins(Bulletin[] bulletins, BulletinFolder toFolder) throws
 		BulletinAlreadyExistsException, IOException, AddOlderVersionToFolderFailedException
 	{
-		System.out.println("attemptDropBulletin");
+//		System.out.println("attemptDropBulletin");
 
 		ClientBulletinStore store = toFolder.getStore();
 		int errorThrown = noError;
+		toFolder.prepareForBulkOperation();
 		for (int i = 0; i < bulletins.length; i++)
 		{
 			Bulletin bulletin = bulletins[i];
 			try
 			{
-				System.out.println("UiBulletinDropAdapter.attemptDropBulletins: " + bulletin.get(Bulletin.TAGTITLE));
+//				System.out.println("UiBulletinDropAdapter.attemptDropBulletins: " + bulletin.get(Bulletin.TAGTITLE));
 				store.addBulletinToFolder(toFolder, bulletin.getUniversalId());
 			}
 			catch (BulletinAlreadyExistsException e)

@@ -1008,12 +1008,13 @@ public class MartusApp
 	
 	public void discardBulletinsFromFolder(BulletinFolder folderToDiscardFrom, Bulletin[] bulletinsToDiscard) throws IOException 
 	{
+		store.getFolderDiscarded().prepareForBulkOperation();
 		for (int i = 0; i < bulletinsToDiscard.length; i++)
 		{
 			Bulletin b = bulletinsToDiscard[i];
-			getStore().discardBulletin(folderToDiscardFrom, b);
+			store.discardBulletin(folderToDiscardFrom, b);
 		}
-		getStore().saveFolders();
+		store.saveFolders();
 	}
 
 	public Date getUploadInfoElement(int index)
@@ -1097,6 +1098,7 @@ public class MartusApp
 
 		BulletinFolder searchFolder = createOrFindFolder(store.getSearchFolderName());
 		searchFolder.removeAll();
+		searchFolder.prepareForBulkOperation();
 
 		Vector uids = store.getAllBulletinLeafUids();
 		for(int i = 0; i < uids.size(); ++i)
