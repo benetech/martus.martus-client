@@ -1645,7 +1645,7 @@ public class MartusApp
 				outputStream.close();
 			}
 		}
-		catch(IOException e)
+		catch(Exception e)
 		{
 			throw(new CannotCreateAccountFileException());
 		}
