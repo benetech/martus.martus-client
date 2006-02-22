@@ -54,8 +54,8 @@ public class UiGridDateRangeEditorViewer extends UiFlexiDateEditor
 	
 	public JComponent[] getFocusableComponents()
 	{
-		JComponent[] beginDate = UiDateEditor.getComponentsInOrder(bgYearCombo, bgMonthCombo, bgDayCombo, localization);
-		JComponent[] endDate = UiDateEditor.getComponentsInOrder(endYearCombo, endMonthCombo, endDayCombo, localization);
+		JComponent[] beginDate = bgDateBox.getFocusableComponents();
+		JComponent[] endDate = endDateBox.getFocusableComponents();
 		return new JComponent[] { 
 				beginDate[0], beginDate[1], beginDate[2],
 				endDate[0], endDate[1], endDate[2],};

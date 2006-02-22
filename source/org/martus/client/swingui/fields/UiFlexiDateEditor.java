@@ -30,15 +30,16 @@ import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+
 import javax.swing.Box;
 import javax.swing.ButtonGroup;
 import javax.swing.JComponent;
 import javax.swing.JPanel;
+
 import org.martus.clientside.UiLocalization;
 import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.fieldspec.StandardFieldSpecs;
 import org.martus.common.utilities.MartusFlexidate;
-import org.martus.swing.UiComboBox;
 import org.martus.swing.UiLabel;
 import org.martus.swing.UiParagraphPanel;
 import org.martus.swing.UiRadioButton;
@@ -104,40 +105,20 @@ public class UiFlexiDateEditor extends UiField
 				
 	private void buildBeginDateBox()
 	{				
-		bgDateBox = Box.createHorizontalBox();								
-		bgDayCombo = new UiComboBox();
-		bgMonthCombo = new UiComboBox(localization.getMonthLabels());
-		bgYearCombo = new UiComboBox();
-
-		if(isCustomDate())					
-			UiDateEditor.buildCustomDate(bgDateBox, localization, bgYearCombo, bgMonthCombo, bgDayCombo);
-		else
-			UiDateEditor.buildDate(bgDateBox, localization, bgYearCombo, bgMonthCombo, bgDayCombo);	
+		bgDateBox = new UiDateEditorComponent(localization, isCustomDate());								
 	}
 	
-	private Box getBeginDateBox()
+	private JComponent getBeginDateBox()
 	{	
 		return bgDateBox;											
 	}
 
 	private void buildEndDateBox()
 	{		
-		endDateBox = Box.createHorizontalBox();		
-		endDayCombo = new UiComboBox();	
-		endMonthCombo = new UiComboBox(localization.getMonthLabels());
-		endYearCombo = new UiComboBox();
-		
-		if(isCustomDate())					
-			UiDateEditor.buildCustomDate(endDateBox, localization, endYearCombo, endMonthCombo, endDayCombo);
-		else					
-			UiDateEditor.buildDate(endDateBox, localization, endYearCombo, endMonthCombo, endDayCombo);
-		
-		endYearCombo.setSelectedItem(bgYearCombo.getSelectedItem());
-		endMonthCombo.setSelectedItem(bgMonthCombo.getSelectedItem());
-		endDayCombo.setSelectedItem(bgDayCombo.getSelectedItem());			
+		endDateBox = new UiDateEditorComponent(localization, isCustomDate());								
 	}
 		
-	private Box getEndDateBox()
+	private JComponent getEndDateBox()
 	{
 		return endDateBox;		
 	}
@@ -159,8 +140,8 @@ public class UiFlexiDateEditor extends UiField
 	
 	protected JComponent[] loadFlexidatePanelComponents()
 	{
-		JComponent[] beginDate = UiDateEditor.getComponentsInOrder(bgYearCombo, bgMonthCombo, bgDayCombo, localization);
-		JComponent[] endDate = UiDateEditor.getComponentsInOrder(endYearCombo, endMonthCombo, endDayCombo, localization);
+		JComponent[] beginDate = bgDateBox.getFocusableComponents();
+		JComponent[] endDate = endDateBox.getFocusableComponents();
 		return new JComponent[]{exactDateRB, flexiDateRB, 
 					beginDate[0], beginDate[1], beginDate[2],
 					endDate[0], endDate[1], endDate[2],};
@@ -168,7 +149,7 @@ public class UiFlexiDateEditor extends UiField
 	
 	private JComponent[] loadExactDatePanelComponents()
 	{
-		JComponent[] mdy = UiDateEditor.getComponentsInOrder(bgYearCombo, bgMonthCombo, bgDayCombo, localization);
+		JComponent[] mdy = bgDateBox.getFocusableComponents();
 		return new JComponent[]{exactDateRB, flexiDateRB, mdy[0], mdy[1], mdy[2],};
 	}
 
@@ -205,7 +186,7 @@ public class UiFlexiDateEditor extends UiField
 		{
 			if(getEndDate().before(getBeginDate()))
 			{
-				bgDayCombo.requestFocus();
+				bgDateBox.requestFocus();
 				throw new DateRangeInvertedException();
 			}
 		}
@@ -216,14 +197,14 @@ public class UiFlexiDateEditor extends UiField
 		MultiCalendar today = new MultiCalendar();
 		if (getBeginDate().after(today))
 		{
-			bgDayCombo.requestFocus();	
+			bgDateBox.requestFocus();	
 			throw new UiDateEditor.DateFutureException();
 		}
 		if (isFlexiDate())
 		{		
 			if (getEndDate().after(today))
 			{
-				bgDayCombo.requestFocus();	
+				bgDateBox.requestFocus();	
 				throw new UiDateEditor.DateFutureException();				
 			}
 		}
@@ -250,19 +231,19 @@ public class UiFlexiDateEditor extends UiField
 
 	private MultiCalendar getBeginDate() 
 	{		
-		return UiDateEditor.getDate(bgYearCombo, bgMonthCombo, bgDayCombo);
+		return bgDateBox.getDate();
 	}
 	
 	private MultiCalendar getEndDate() 
 	{				
-		return UiDateEditor.getDate(endYearCombo, endMonthCombo, endDayCombo);
+		return endDateBox.getDate();
 	}	
 		
 	public void setText(String newText)
 	{		
 		MartusFlexidate mfd = MartusFlexidate.createFromBulletinFlexidateFormat(newText);
-		UiDateEditor.setDate(MartusFlexidate.toStoredDateFormat(mfd.getBeginDate()), bgYearCombo, bgMonthCombo, bgDayCombo);
-		UiDateEditor.setDate(MartusFlexidate.toStoredDateFormat(mfd.getEndDate()), endYearCombo, endMonthCombo, endDayCombo);
+		bgDateBox.setDate(mfd.getBeginDate());
+		endDateBox.setDate(mfd.getEndDate());
 			
 		if (mfd.hasDateRange())
 			flexiDateRB.setSelected(true);
@@ -283,20 +264,14 @@ public class UiFlexiDateEditor extends UiField
 	}
 	
 	JComponent 					component;
-	
-	UiComboBox 					bgMonthCombo;
-	UiComboBox 					bgDayCombo;
-	UiComboBox 					bgYearCombo;	
-	UiComboBox 					endMonthCombo;
-	UiComboBox 					endDayCombo;
-	UiComboBox 					endYearCombo;
-		
+			
 	protected UiLocalization localization;	
 	private UiRadioButton 		exactDateRB;
 	private UiRadioButton 		flexiDateRB;
 	protected Box			 	flexiDateBox;
 	private Box				 	exactDateBox;
-	private Box					bgDateBox = null;
-	private Box					endDateBox = null;
+	UiDateEditorComponent bgDateBox;
+	UiDateEditorComponent endDateBox;
 	private FieldSpec			spec;
+	
 }
