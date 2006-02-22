@@ -254,6 +254,13 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		assertEquals("wrong folder?", rc.getFolderName(), got.getFolderName());
 		assertEquals("wrong count?", rc.getRemainingToRetrieveCount(), got.getRemainingToRetrieveCount());
 		assertEquals("wrong next uid?", rc.getNextToRetrieve(), got.getNextToRetrieve());
+		
+		RetrieveCommand rcEmpty = new RetrieveCommand();
+		byte[] bundleEmpty = appWithAccount.createRetrieveCommandBundle(rcEmpty);
+		
+		RetrieveCommand gotEmpty = appWithAccount.parseRetrieveCommandBundle(bundleEmpty);
+		assertEquals("wrong folder Empty?", "", gotEmpty.getFolderName());
+		assertEquals("wrong count Empty?", 0, gotEmpty.getRemainingToRetrieveCount());
 	}
 	
 	

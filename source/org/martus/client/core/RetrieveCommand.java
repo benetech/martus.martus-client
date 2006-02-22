@@ -175,7 +175,7 @@ public class RetrieveCommand
 		return vector;
 	}
 	
-	private static final String NO_FOLDER = null;
+	private static final String NO_FOLDER = "";
 	
 	public static final String TAG_JSON_TYPE = "_Type";
 	public static final String TAG_DATA_VERSION = "_DataVersion";
