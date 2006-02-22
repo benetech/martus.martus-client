@@ -79,6 +79,12 @@ class BackgroundTimerTask extends TimerTask
 			return;
 		}												
 			
+		if(!getApp().isSSLServerAvailable())
+		{
+			mainWindow.setStatusMessageTag("NoServerAvailableProgressMessage");
+			return;
+		}
+		
 		try
 		{
 			checkComplianceStatement();
@@ -166,9 +172,6 @@ class BackgroundTimerTask extends TimerTask
 	private void getUpdatedListOfBulletinsOnServer()
 	{
 		if(gotUpdatedOnServerUids)
-			return;
-		
-		if(!getApp().isSSLServerAvailable())
 			return;
 		
 		System.out.println("Entering BackgroundUploadTimerTask.getUpdatedListOfBulletinsOnServer");
