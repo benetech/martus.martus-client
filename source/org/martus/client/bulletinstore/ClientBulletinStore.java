@@ -339,7 +339,7 @@ public class ClientBulletinStore extends BulletinStore
 	{
 		try
 		{
-			if(f != folderDiscarded)
+			if(!f.equals(folderDiscarded))
 				folderDiscarded.add(b);
 		}
 		catch (BulletinAlreadyExistsException saveToIgnoreException)
