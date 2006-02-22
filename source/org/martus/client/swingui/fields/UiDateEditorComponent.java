@@ -25,9 +25,6 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.fields;
 
-import java.util.Calendar;
-import java.util.GregorianCalendar;
-
 import javax.swing.Box;
 import javax.swing.JComponent;
 import javax.swing.JPanel;
@@ -56,14 +53,17 @@ public class UiDateEditorComponent extends JPanel
 
 	private UiComboBox createYearCombo()	
 	{
-		UiComboBox yCombo = new UiComboBox();
-		Calendar cal = new GregorianCalendar();
-		int thisYear = cal.get(Calendar.YEAR);	
+		MultiCalendar calToday = new MultiCalendar();
+		int thisYear = localization.getLocalizedYear(calToday);	
 		int maxYear = thisYear;
 		if(allowFuture)
 			maxYear += 10;
 		
-		for(int year = 1900; year <= maxYear; ++year)
+		MultiCalendar cal1900 = MultiCalendar.createFromGregorianYearMonthDay(1900, 1, 1);
+		int minYear = localization.getLocalizedYear(cal1900);
+
+		UiComboBox yCombo = new UiComboBox();
+		for(int year = minYear; year <= maxYear; ++year)
 			yCombo.addItem(new Integer(year).toString());
 		
 		yCombo.setSelectedItem(new Integer(thisYear).toString());
@@ -118,11 +118,11 @@ public class UiDateEditorComponent extends JPanel
 
 	public MultiCalendar getDate()
 	{
-		MultiCalendar cal = new MultiCalendar();
-		cal.setGregorian(Integer.parseInt((String)yearCombo.getSelectedItem()),
-				monthCombo.getSelectedIndex()+1,
-				dayCombo.getSelectedIndex()+1);
-		return cal;
+		int year = Integer.parseInt((String)yearCombo.getSelectedItem());
+		int month = monthCombo.getSelectedIndex()+1;
+		int day = dayCombo.getSelectedIndex()+1;
+
+		return localization.createCalendarFromLocalizedYearMonthDay(year, month, day);
 	}
 
 	public void setStoredDateText(String newText)
@@ -140,9 +140,9 @@ public class UiDateEditorComponent extends JPanel
 
 	public void setDate(MultiCalendar cal)
 	{
-		yearCombo.setSelectedItem( Integer.toString(cal.getGregorianYear()));
-		monthCombo.setSelectedIndex((cal.getGregorianMonth() - 1));
-		dayCombo.setSelectedIndex((cal.getGregorianDay() - 1));
+		yearCombo.setSelectedItem( Integer.toString(localization.getLocalizedYear(cal)));
+		monthCombo.setSelectedIndex((localization.getLocalizedMonth(cal) - 1));
+		dayCombo.setSelectedIndex((localization.getLocalizedDay(cal) - 1));
 	}
 	
 	public void requestFocus()
