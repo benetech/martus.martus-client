@@ -140,9 +140,9 @@ public class UiDateEditorComponent extends JPanel
 
 	public void setDate(MultiCalendar cal)
 	{
-		yearCombo.setSelectedItem( (new Integer(cal.getGregorianYear())).toString());
+		yearCombo.setSelectedItem( Integer.toString(cal.getGregorianYear()));
 		monthCombo.setSelectedIndex((cal.getGregorianMonth() - 1));
-		dayCombo.setSelectedItem( (new Integer(cal.getGregorianDay())).toString());
+		dayCombo.setSelectedIndex((cal.getGregorianDay() - 1));
 	}
 	
 	public void requestFocus()
