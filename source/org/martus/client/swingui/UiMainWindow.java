@@ -1974,15 +1974,15 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	{		
 		if (!app.isServerConfigured())
 		{	
-			setStatusMessageTag("ServerNotConfiguredProgressMessage");
+			setStatusMessageTag(STATUS_SERVER_NOT_CONFIGURED);
 			return;
 		}
 	
 		ClientSideNetworkGateway gateway = getApp().getCurrentNetworkInterfaceGateway();		
 		if(app.isSSLServerAvailable(gateway))
-			setStatusMessageTag("StatusReady");	
+			setStatusMessageTag(STATUS_READY);	
 		else
-			setStatusMessageTag("NoServerAvailableProgressMessage");			
+			setStatusMessageTag(STATUS_NO_SERVER_AVAILABLE);			
 	}
 	
 	public void clearStatusMessage()
@@ -2399,7 +2399,10 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	}
 
 	public static final String STATUS_RETRIEVING = "StatusRetrieving";
-	public static String STATUS_READY = "StatusReady";
+	public static final String STATUS_READY = "StatusReady";
+	public static final String STATUS_CONNECTING = "StatusConnecting";
+	public static final String STATUS_NO_SERVER_AVAILABLE = "NoServerAvailableProgressMessage";
+	public static final String STATUS_SERVER_NOT_CONFIGURED = "ServerNotConfiguredProgressMessage";
 	
 	private MartusApp app;
 	private CurrentUiState uiState;

@@ -75,13 +75,13 @@ class BackgroundTimerTask extends TimerTask
 			
 		if(!getApp().isServerConfigured())
 		{
-			mainWindow.setStatusMessageTag("ServerNotConfiguredProgressMessage");	
+			mainWindow.setStatusMessageTag(UiMainWindow.STATUS_SERVER_NOT_CONFIGURED);	
 			return;
 		}												
 			
 		if(!getApp().isSSLServerAvailable())
 		{
-			mainWindow.setStatusMessageTag("NoServerAvailableProgressMessage");
+			mainWindow.setStatusMessageTag(UiMainWindow.STATUS_NO_SERVER_AVAILABLE);
 			return;
 		}
 		
@@ -144,7 +144,7 @@ class BackgroundTimerTask extends TimerTask
 				{
 					tag = "UploadFailedProgressMessage"; 
 					if(uploadResult.exceptionThrown == null)
-						tag = "NoServerAvailableProgressMessage";
+						tag = UiMainWindow.STATUS_NO_SERVER_AVAILABLE;
 				}
 				else if(uploadResult.uid != null)
 				{
@@ -173,7 +173,7 @@ class BackgroundTimerTask extends TimerTask
 	{
 		if(gotUpdatedOnServerUids)
 			return;
-		
+		mainWindow.setStatusMessageTag(UiMainWindow.STATUS_CONNECTING);
 		System.out.println("Entering BackgroundUploadTimerTask.getUpdatedListOfBulletinsOnServer");
 		String myAccountId = getApp().getAccountId();
 		HashSet uidsOnServer = new HashSet(1000);
@@ -212,6 +212,7 @@ class BackgroundTimerTask extends TimerTask
 		gotUpdatedOnServerUids = true;
 		
 		System.out.println("Exiting BackgroundUploadTimerTask.getUpdatedListOfBulletinsOnServer");
+		mainWindow.setStatusMessageTag(UiMainWindow.STATUS_READY);
 	}
 	
 	private Vector getUidsFromServer(String accountId) throws MartusSignatureException
@@ -306,7 +307,7 @@ class BackgroundTimerTask extends TimerTask
 			String compliance = getApp().getServerCompliance(gateway);
 			alreadyCheckedCompliance = true;
 			if (compliance != null)
-				mainWindow.setStatusMessageTag("StatusReady");
+				mainWindow.setStatusMessageTag(UiMainWindow.STATUS_READY);
 			
 			if(!compliance.equals(getApp().getConfigInfo().getServerCompliance()))
 			{
@@ -321,7 +322,7 @@ class BackgroundTimerTask extends TimerTask
 		}
 		catch (ServerNotAvailableException weWillTryAgainLater)
 		{
-			mainWindow.setStatusMessageTag("NoServerAvailableProgressMessage");
+			mainWindow.setStatusMessageTag(UiMainWindow.STATUS_NO_SERVER_AVAILABLE);
 			return;
 		} 
 		catch (InterruptedException e)
@@ -341,7 +342,7 @@ class BackgroundTimerTask extends TimerTask
 		Vector newsItems = getApp().getNewsFromServer();
 		int newsSize = newsItems.size();
 		if (newsSize > 0)
-			mainWindow.setStatusMessageTag("StatusReady");
+			mainWindow.setStatusMessageTag(UiMainWindow.STATUS_READY);
 			
 		
 		for (int i = 0; i < newsSize; ++i)
@@ -358,7 +359,7 @@ class BackgroundTimerTask extends TimerTask
 			}
 			catch (Exception e)
 			{
-				mainWindow.setStatusMessageTag("NoServerAvailableProgressMessage");
+				mainWindow.setStatusMessageTag(UiMainWindow.STATUS_NO_SERVER_AVAILABLE);
 				e.printStackTrace();
 			}
 		}
