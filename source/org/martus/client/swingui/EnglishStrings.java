@@ -880,12 +880,15 @@ public class EnglishStrings
 
 "field:mdyOrder=Date format sequence",
 "field:DateDelimiter=Date delimiter",
+"field:CalendarSystem=Calendar type",
 "field:DatePartYear=Year",
 "field:DatePartMonth=Month",
 "field:DatePartDay=Day",
 "field:DateDelimiterSlash=Slash (00/00/00)",
 "field:DateDelimiterDash=Dash (00-00-00)",
 "field:DateDelimiterDot=Dot (00.00.00)",
+"field:CalendarSystemGregorian=Default (2005-05-31)",
+"field:CalendarSystemThai=Thai (2248-05-31)",
 
 "folder:%OutBox=Unsent Bulletins",
 "folder:%Sent=Saved Bulletins",

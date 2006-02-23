@@ -37,6 +37,7 @@ import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.fields.UiChoiceEditor;
 import org.martus.clientside.UiLocalization;
+import org.martus.common.MiniLocalization;
 import org.martus.common.fieldspec.ChoiceItem;
 import org.martus.common.fieldspec.DropDownFieldSpec;
 import org.martus.swing.UiButton;
@@ -57,6 +58,9 @@ public class UiPreferencesDlg extends JDialog implements ActionListener
 		
 		setTitle(localization.getMenuLabel("Preferences"));
 
+		languageDropdown = new UiChoiceEditor(new DropDownFieldSpec(localization.getUiLanguages()));
+		languageDropdown.setText(localization.getCurrentLanguageCode());
+		
 		ChoiceItem[] mdyChoices = new ChoiceItem[] {
 			new ChoiceItem("ymd", buildMdyLabel("ymd")),
 			new ChoiceItem("mdy", buildMdyLabel("mdy")),
@@ -75,8 +79,13 @@ public class UiPreferencesDlg extends JDialog implements ActionListener
 		delimiterDropdown = new UiChoiceEditor(delimiterChoiceSpec);
 		delimiterDropdown.setText("" + localization.getDateDelimiter());
 		
-		languageDropdown = new UiChoiceEditor(new DropDownFieldSpec(localization.getUiLanguages()));
-		languageDropdown.setText(localization.getCurrentLanguageCode());
+		ChoiceItem[] calendarChoices = new ChoiceItem[] {
+			new ChoiceItem(MiniLocalization.GREGORIAN_SYSTEM, localization.getFieldLabel("CalendarSystemGregorian")),
+			new ChoiceItem(MiniLocalization.THAI_SYSTEM, localization.getFieldLabel("CalendarSystemThai")),
+		};
+		DropDownFieldSpec calendarChoiceSpec = new DropDownFieldSpec(calendarChoices);
+		calendarDropdown = new UiChoiceEditor(calendarChoiceSpec);
+		calendarDropdown.setText(localization.getCurrentCalendarSystem());
 		
 		allPrivate = new UiCheckBox();
 		allPrivate.setText(localization.getFieldLabel("preferencesAllPrivate"));
@@ -86,6 +95,7 @@ public class UiPreferencesDlg extends JDialog implements ActionListener
 		preferences.addComponents(new UiLabel(localization.getFieldLabel("language")), languageDropdown.getComponent());
 		preferences.addComponents(new UiLabel(localization.getFieldLabel("mdyOrder")), mdyDropdown.getComponent());
 		preferences.addComponents(new UiLabel(localization.getFieldLabel("DateDelimiter")), delimiterDropdown.getComponent());
+		preferences.addComponents(new UiLabel(localization.getFieldLabel("CalendarSystem")), calendarDropdown.getComponent());
 		
 		preferences.addBlankLine();
 		preferences.addOnNewLine(allPrivate);
@@ -136,6 +146,7 @@ public class UiPreferencesDlg extends JDialog implements ActionListener
 			UiMainWindow.displayIncompatibleMtfVersionWarningMessageIfNecessary(owner.getCurrentActiveFrame(), localization, languageCodeSelected);
 			localization.setMdyOrder(mdyDropdown.getText());
 			localization.setDateDelimiter(delimiterDropdown.getText().charAt(0));
+			localization.setCurrentCalendarSystem(calendarDropdown.getText());
 			localization.setCurrentLanguageCode(languageDropdown.getText());
 			owner.setBulletinsAlwaysPrivate(allPrivate.isSelected());
 		}
@@ -147,6 +158,7 @@ public class UiPreferencesDlg extends JDialog implements ActionListener
 	UiChoiceEditor languageDropdown;
 	private UiChoiceEditor mdyDropdown;
 	private UiChoiceEditor delimiterDropdown;
+	private UiChoiceEditor calendarDropdown;
 	private JCheckBox allPrivate;
 	private JButton ok;
 	private JButton cancel;
