@@ -1018,8 +1018,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		String folderName = folders.getSelectedFolderName();
 		BulletinFolder folder = getStore().findFolder(folderName);
 		uiState.setCurrentFolder(folderName);
-		uiState.setCurrentDateFormat(getLocalization().getCurrentDateFormatCode());
-		uiState.setCurrentLanguage(getLocalization().getCurrentLanguageCode());
+		copyLocalizationSettingsToUiState();
 		if(folder != null)
 		{
 			uiState.setCurrentSortTag(folder.sortedBy());
@@ -1066,13 +1065,20 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		File uiStateFile = getUiStateFile();
 		if(!uiStateFile.exists())
 		{
-			uiState.setCurrentLanguage(localization.getCurrentLanguageCode());
-			uiState.setCurrentDateFormat(localization.getCurrentDateFormatCode());
+			copyLocalizationSettingsToUiState();
 			uiState.save(uiStateFile);
 			return;
 		}
 		uiState.load(uiStateFile);
 		localization.setCurrentDateFormatCode(uiState.getCurrentDateFormat());
+		localization.setCurrentCalendarSystem(uiState.getCurrentCalendarSystem());
+	}
+
+	private void copyLocalizationSettingsToUiState()
+	{
+		uiState.setCurrentLanguage(getLocalization().getCurrentLanguageCode());
+		uiState.setCurrentDateFormat(getLocalization().getCurrentDateFormatCode());
+		uiState.setCurrentCalendarSystem(getLocalization().getCurrentCalendarSystem());
 	}
 
 	public void selectBulletinInCurrentFolderIfExists(UniversalId id)
