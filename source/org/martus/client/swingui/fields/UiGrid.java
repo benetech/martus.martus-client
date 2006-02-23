@@ -92,7 +92,7 @@ abstract public class UiGrid extends UiField
 		return table;
 	}
 	
-	private static final int ROW_HEIGHT_PADDING = 3;
+	private static final int ROW_HEIGHT_PADDING = 10;
 
 	UiScrollPane widget;
 	GridTable table;

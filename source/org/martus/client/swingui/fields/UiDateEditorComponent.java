@@ -26,18 +26,19 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.swingui.fields;
 
 import javax.swing.Box;
+import javax.swing.BoxLayout;
 import javax.swing.JComponent;
-import javax.swing.JPanel;
 
 import org.martus.clientside.UiLocalization;
 import org.martus.swing.UiComboBox;
 import org.martus.swing.Utilities;
 import org.martus.util.MultiCalendar;
 
-public class UiDateEditorComponent extends JPanel
+public class UiDateEditorComponent extends Box
 {
 	public UiDateEditorComponent(UiLocalization localizationToUse, boolean allowFutureDates)
 	{
+		super(BoxLayout.X_AXIS);
 		localization = localizationToUse;
 		allowFuture = allowFutureDates;
 		
@@ -45,10 +46,7 @@ public class UiDateEditorComponent extends JPanel
 		monthCombo = createMonthCombo();
 		dayCombo = createDayCombo();
 	
-		Box box = Box.createHorizontalBox();
-		addComponentsToBox(box);
-
-		add(box);
+		addComponentsToBox();
 	}
 
 	private UiComboBox createYearCombo()	
@@ -83,10 +81,10 @@ public class UiDateEditorComponent extends JPanel
 		return dCombo;
 	}
 	
-	private void addComponentsToBox(Box box)
+	private void addComponentsToBox()
 	{
 		JComponent[] dateInOrderLeftToRight = getComponentsInOrder();	
-		Utilities.addComponentsRespectingOrientation(box, dateInOrderLeftToRight);
+		Utilities.addComponentsRespectingOrientation(this, dateInOrderLeftToRight);
 	}
 
 	JComponent[] getComponentsInOrder()
