@@ -94,20 +94,12 @@ public class KnownFieldSpecCache extends BulletinStoreCache implements ReadableD
 
 	public void revisionWasSaved(UniversalId uid)
 	{
-		DatabaseKey[] possibleKeys = 
-		{
-			DatabaseKey.createDraftKey(uid),
-			DatabaseKey.createSealedKey(uid),
-			DatabaseKey.createLegacyKey(uid),
-		};
-
-		for(int i=0; i < possibleKeys.length; ++i)
-		{
-			if(db.doesRecordExist(possibleKeys[i]))
-				addFieldSpecsFromBulletin(possibleKeys[i]);
-		}
+		DatabaseKey key = findKey(db, uid);
+		if(key == null)
+			return;
+		addFieldSpecsFromBulletin(key);
 	}
-
+	
 	public void revisionWasSaved(Bulletin b)
 	{
 		Vector publicAndPrivateSpecs = new Vector();
