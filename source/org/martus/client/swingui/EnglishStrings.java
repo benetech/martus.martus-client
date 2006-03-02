@@ -890,6 +890,7 @@ public class EnglishStrings
 "field:DateDelimiterDot=Dot (00.00.00)",
 "field:CalendarSystemGregorian=Default (2005-05-31)",
 "field:CalendarSystemThai=Thai (2248-05-31)",
+"field:CalendarSystemPersian=Persian (1384-03-10)",
 
 "folder:%OutBox=Unsent Bulletins",
 "folder:%Sent=Saved Bulletins",

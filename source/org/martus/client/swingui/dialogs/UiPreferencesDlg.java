@@ -37,7 +37,6 @@ import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.fields.UiChoiceEditor;
 import org.martus.clientside.UiLocalization;
-import org.martus.common.MiniLocalization;
 import org.martus.common.fieldspec.ChoiceItem;
 import org.martus.common.fieldspec.DropDownFieldSpec;
 import org.martus.swing.UiButton;
@@ -79,10 +78,7 @@ public class UiPreferencesDlg extends JDialog implements ActionListener
 		delimiterDropdown = new UiChoiceEditor(delimiterChoiceSpec);
 		delimiterDropdown.setText("" + localization.getDateDelimiter());
 		
-		ChoiceItem[] calendarChoices = new ChoiceItem[] {
-			new ChoiceItem(MiniLocalization.GREGORIAN_SYSTEM, localization.getFieldLabel("CalendarSystemGregorian")),
-			new ChoiceItem(MiniLocalization.THAI_SYSTEM, localization.getFieldLabel("CalendarSystemThai")),
-		};
+		ChoiceItem[] calendarChoices = localization.getAvailableCalendarSystems();
 		DropDownFieldSpec calendarChoiceSpec = new DropDownFieldSpec(calendarChoices);
 		calendarDropdown = new UiChoiceEditor(calendarChoiceSpec);
 		calendarDropdown.setText(localization.getCurrentCalendarSystem());
