@@ -772,7 +772,8 @@ public class MartusApp
 		byte[] encryptedBytes = security.extractFromSignedBundle(bundle);
 		ByteArrayOutputStream plainTextBytes = new ByteArrayOutputStream();
 		security.decrypt(new ByteArrayInputStreamWithSeek(encryptedBytes), plainTextBytes);
-		return new RetrieveCommand(new JSONObject(new String(plainTextBytes.toByteArray(), "UTF-8")));
+		String jsonString = new String(plainTextBytes.toByteArray(), "UTF-8");
+		return new RetrieveCommand(new JSONObject(jsonString));
 	}
 
 	public Bulletin createBulletin()
