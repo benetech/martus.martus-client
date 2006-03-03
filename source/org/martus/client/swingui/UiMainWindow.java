@@ -54,6 +54,7 @@ import java.util.Map;
 import java.util.Stack;
 import java.util.TimerTask;
 import java.util.Vector;
+
 import javax.swing.AbstractAction;
 import javax.swing.ImageIcon;
 import javax.swing.JComponent;
@@ -62,6 +63,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JSplitPane;
 import javax.swing.SwingUtilities;
+
 import org.martus.client.bulletinstore.BulletinFolder;
 import org.martus.client.bulletinstore.ClientBulletinStore;
 import org.martus.client.core.BackgroundUploader;
@@ -422,6 +424,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		try
 		{
 			app.loadRetrieveCommand();
+			return;
 		}
 		catch(RetrieveCommand.DataVersionException e)
 		{
@@ -431,7 +434,16 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		{
 			notifyDlg("RetrieveFileError");
 		}
-	}
+
+		try
+		{
+			app.cancelBackgroundRetrieve();
+		} 
+		catch (Exception notMuchWeCanDoAboutIt)
+		{
+			notMuchWeCanDoAboutIt.printStackTrace();
+		}
+}
 
 	private boolean sessionSignIn()
 	{
