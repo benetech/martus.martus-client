@@ -26,6 +26,7 @@ Boston, MA 02111-1307, USA.
 
 package org.martus.client.swingui.bulletincomponent;
 
+import java.awt.Rectangle;
 import java.io.IOException;
 import javax.swing.JComponent;
 import javax.swing.JViewport;
@@ -43,6 +44,7 @@ public class UiBulletinPreviewPane extends UiScrollPane
     	view = new UiBulletinView(mainWindow);
 		getViewport().setScrollMode(JViewport.SIMPLE_SCROLL_MODE);
 		getViewport().add(view);
+		previousRect = new Rectangle(0,0,0,0);
 	}
 
 	public Bulletin getCurrentBulletin()
@@ -63,6 +65,11 @@ public class UiBulletinPreviewPane extends UiScrollPane
 			//System.out.println("UiBulletinPreview.refresh: skipping");
 			return;
 		}
+		if(b == null && currentBulletin != null)
+		{
+			previousRect = getViewport().getViewRect();
+			previousBulletin = currentBulletin;
+		}
 		currentBulletin = b;
 		updateView();
 	}
@@ -81,7 +88,14 @@ public class UiBulletinPreviewPane extends UiScrollPane
 		if(currentBulletin != null && currentBulletin.isAllPrivate())
 			isEncrypted = true;
 		indicateEncrypted(isEncrypted);
-		Utilities.forceScrollerToTop(view);
+		if(currentBulletin == null)
+			return;
+		
+		if(previousBulletin != null &&  
+		previousBulletin.getUniversalId().equals(currentBulletin.getUniversalId()))
+			Utilities.forceScrollerToRect(view, previousRect);
+		else
+			Utilities.forceScrollerToTop(view);
 	}
 
 	public void bulletinContentsHaveChanged(Bulletin b)
@@ -98,7 +112,8 @@ public class UiBulletinPreviewPane extends UiScrollPane
 		view.updateEncryptedIndicator(isEncrypted);
 	}
 
-
 	Bulletin currentBulletin;
 	UiBulletinView view = null;
+	Rectangle previousRect;
+	Bulletin previousBulletin;
 }
