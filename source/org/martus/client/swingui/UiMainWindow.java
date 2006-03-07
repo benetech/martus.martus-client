@@ -135,6 +135,7 @@ import org.martus.swing.UiPopupMenu;
 import org.martus.swing.Utilities;
 import org.martus.swing.Utilities.Delay;
 import org.martus.util.FileVerifier;
+import org.martus.util.MultiCalendar;
 import org.martus.util.TokenReplacement;
 import org.martus.util.UnicodeReader;
 import org.martus.util.Base64.InvalidBase64Exception;
@@ -1084,6 +1085,8 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		uiState.load(uiStateFile);
 		localization.setCurrentDateFormatCode(uiState.getCurrentDateFormat());
 		localization.setCurrentCalendarSystem(uiState.getCurrentCalendarSystem());
+		MultiCalendar.adjustThaiLegacyDates = uiState.getAdjustThaiLegacyDates();
+		MultiCalendar.adjustPersianLegacyDates = uiState.getAdjustPersianLegacyDates();
 	}
 
 	private void copyLocalizationSettingsToUiState()
@@ -1091,6 +1094,8 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		uiState.setCurrentLanguage(getLocalization().getCurrentLanguageCode());
 		uiState.setCurrentDateFormat(getLocalization().getCurrentDateFormatCode());
 		uiState.setCurrentCalendarSystem(getLocalization().getCurrentCalendarSystem());
+		uiState.setCurrentAdjustThaiLegacyDates(MultiCalendar.adjustThaiLegacyDates);
+		uiState.setCurrentAdjustPersianLegacyDates(MultiCalendar.adjustPersianLegacyDates);
 	}
 
 	public void selectBulletinInCurrentFolderIfExists(UniversalId id)

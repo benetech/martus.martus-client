@@ -83,6 +83,14 @@ public class UiPreferencesDlg extends JDialog implements ActionListener
 		calendarDropdown = new UiChoiceEditor(calendarChoiceSpec);
 		calendarDropdown.setText(localization.getCurrentCalendarSystem());
 		
+		adjustThai = new UiCheckBox();
+		adjustThai.setText(localization.getFieldLabel("preferencesAdjustThai"));
+		adjustThai.setSelected(localization.getAdjustThaiLegacyDates());
+		
+		adjustPersian = new UiCheckBox();
+		adjustPersian.setText(localization.getFieldLabel("preferencesAdjustPersian"));
+		adjustPersian.setSelected(localization.getAdjustPersianLegacyDates());
+		
 		allPrivate = new UiCheckBox();
 		allPrivate.setText(localization.getFieldLabel("preferencesAllPrivate"));
 		allPrivate.setSelected(owner.getBulletinsAlwaysPrivate());
@@ -92,6 +100,8 @@ public class UiPreferencesDlg extends JDialog implements ActionListener
 		preferences.addComponents(new UiLabel(localization.getFieldLabel("mdyOrder")), mdyDropdown.getComponent());
 		preferences.addComponents(new UiLabel(localization.getFieldLabel("DateDelimiter")), delimiterDropdown.getComponent());
 		preferences.addComponents(new UiLabel(localization.getFieldLabel("CalendarSystem")), calendarDropdown.getComponent());
+		preferences.addOnNewLine(adjustThai);
+		preferences.addOnNewLine(adjustPersian);
 		
 		preferences.addBlankLine();
 		preferences.addOnNewLine(allPrivate);
@@ -144,6 +154,8 @@ public class UiPreferencesDlg extends JDialog implements ActionListener
 			localization.setDateDelimiter(delimiterDropdown.getText().charAt(0));
 			localization.setCurrentCalendarSystem(calendarDropdown.getText());
 			localization.setCurrentLanguageCode(languageDropdown.getText());
+			localization.setAdjustThaiLegacyDates(adjustThai.isSelected());
+			localization.setAdjustPersianLegacyDates(adjustPersian.isSelected());
 			owner.setBulletinsAlwaysPrivate(allPrivate.isSelected());
 		}
 		dispose();
@@ -155,6 +167,8 @@ public class UiPreferencesDlg extends JDialog implements ActionListener
 	private UiChoiceEditor mdyDropdown;
 	private UiChoiceEditor delimiterDropdown;
 	private UiChoiceEditor calendarDropdown;
+	private UiCheckBox adjustThai;
+	private UiCheckBox adjustPersian;
 	private JCheckBox allPrivate;
 	private JButton ok;
 	private JButton cancel;
