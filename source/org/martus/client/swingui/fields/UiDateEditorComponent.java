@@ -135,7 +135,7 @@ public class UiDateEditorComponent extends Box
 	{
 		try
 		{
-			MultiCalendar cal = MultiCalendar.createFromIsoDateString(newText);
+			MultiCalendar cal = localization.createCalendarFromIsoDateString(newText);
 			setDate(cal);
 		}
 		catch(Exception e)
