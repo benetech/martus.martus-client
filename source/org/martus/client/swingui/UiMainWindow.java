@@ -1983,8 +1983,13 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		public void setDividerLocation(int location) 
 		{
 			super.setDividerLocation(location);
-			preview.updateView();
+			if(previousLocation != location)
+			{
+				previousLocation = location;
+				preview.updateView();
+			}
 		}
+		int previousLocation = -1;
 	}
 	
 	public void checkServerStatus()
