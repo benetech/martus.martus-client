@@ -61,6 +61,14 @@ public class UiDateEditorComponent extends Box
 		int minYear = localization.getLocalizedYear(cal1900);
 
 		UiComboBox yCombo = new UiComboBox();
+
+		if(THAI_AND_PERSIAN_TESTING)
+		{
+			System.out.println("WARNING: THAI_AND_PERSIAN Testing mode!!!");
+			yCombo.addItem(Integer.toString(1385));
+			yCombo.addItem(Integer.toString(2549));
+		}
+		
 		for(int year = minYear; year <= maxYear; ++year)
 			yCombo.addItem(new Integer(year).toString());
 		
@@ -147,6 +155,10 @@ public class UiDateEditorComponent extends Box
 	{
 		getComponentsInOrder()[0].requestFocus();
 	}
+	
+	// Enable the following to add a Persian year and a 
+	// Thai year to the Date Editor year dropdowns
+	static final boolean THAI_AND_PERSIAN_TESTING = false;
 	
 	UiLocalization localization;
 	boolean allowFuture;
