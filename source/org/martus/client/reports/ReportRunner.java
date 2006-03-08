@@ -33,6 +33,7 @@ import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.VelocityEngine;
 import org.apache.velocity.context.Context;
 import org.martus.client.core.SafeReadableBulletin;
+import org.martus.common.MiniLocalization;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.bulletin.BulletinLoader;
 import org.martus.common.crypto.MartusCrypto;
@@ -42,9 +43,11 @@ import org.martus.common.database.ReadableDatabase;
 
 public class ReportRunner
 {
-	public ReportRunner(MartusCrypto security) throws Exception
+	public ReportRunner(MartusCrypto security, MiniLocalization localizationToUse) throws Exception
 	{
 		signatureVerifier = security;
+		localization = localizationToUse;
+		
 		engine = new VelocityEngine();
 		engine.init();
 	}
@@ -57,7 +60,7 @@ public class ReportRunner
 		{
 			DatabaseKey key = (DatabaseKey)keysToInclude.get(i);
 			Bulletin b = BulletinLoader.loadFromDatabase(db, key, signatureVerifier);
-			context.put("bulletin", new SafeReadableBulletin(b));
+			context.put("bulletin", new SafeReadableBulletin(b, localization));
 			
 			context.put("i", new Integer(i+1));
 			performMerge(rf.getDetailSection(), destination, context);
@@ -70,5 +73,6 @@ public class ReportRunner
 	}
 	
 	VelocityEngine engine;
+	MiniLocalization localization;
 	MartusCrypto signatureVerifier;
 }

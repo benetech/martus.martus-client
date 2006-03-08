@@ -75,7 +75,7 @@ public class TestBulletinSearcher extends TestCaseEnhanced
 		realBulletin.set(fieldToSearch.getTag(), sampleValue);
 		realBulletin.set(otherField.getTag(), otherValue);
 		
-		SafeReadableBulletin b = new SafeReadableBulletin(realBulletin);
+		SafeReadableBulletin b = new SafeReadableBulletin(realBulletin, localization);
 		BulletinSearcher specific = new BulletinSearcher(new SearchTreeNode(fieldToSearch, "", sampleValue));
 		assertTrue("didn't find specific field?", specific.doesMatch(b, localization));
 		BulletinSearcher wrongValue= new BulletinSearcher(new SearchTreeNode(fieldToSearch, "", otherValue));
@@ -91,7 +91,7 @@ public class TestBulletinSearcher extends TestCaseEnhanced
 		
 		FieldSpec noSuchField = FieldSpec.createStandardField("nosuchfield", new FieldTypeNormal());
 		String sampleValue = "sample data";
-		SafeReadableBulletin b = new SafeReadableBulletin(realBulletin);
+		SafeReadableBulletin b = new SafeReadableBulletin(realBulletin, localization);
 		BulletinSearcher contains = new BulletinSearcher(new SearchTreeNode(noSuchField, "", sampleValue));
 		assertFalse(": matched non-existant field?", contains.doesMatch(b, localization));
 		BulletinSearcher lessThan = new BulletinSearcher(new SearchTreeNode(noSuchField, "<", sampleValue));
@@ -137,7 +137,7 @@ public class TestBulletinSearcher extends TestCaseEnhanced
 
 	private void verifyOperatorComparison(String caller, Bulletin realBulletin, FieldSpec fieldToSearch, String operator, String value, boolean expected)
 	{
-		SafeReadableBulletin b = new SafeReadableBulletin(realBulletin);
+		SafeReadableBulletin b = new SafeReadableBulletin(realBulletin, localization);
 		String actual = b.getPossiblyNestedField(fieldToSearch).getSearchableData(localization);
 		BulletinSearcher searcher = new BulletinSearcher(new SearchTreeNode(fieldToSearch, operator, value));
 		String message = caller + ": " + actual + " " + operator + value + " ";
@@ -148,7 +148,7 @@ public class TestBulletinSearcher extends TestCaseEnhanced
 	{
 		MartusCrypto security = MockMartusSecurity.createClient();
 		Bulletin realBulletin = new Bulletin(security);
-		SafeReadableBulletin b = new SafeReadableBulletin(realBulletin);
+		SafeReadableBulletin b = new SafeReadableBulletin(realBulletin, localization);
 		FieldSpec noSuchField = FieldSpec.createStandardField("no.such.field", new FieldTypeNormal());
 		MartusField noSuchFieldResult = b.getPossiblyNestedField(noSuchField);
 		assertNull("didn't return null for bogus field?", noSuchFieldResult);
@@ -176,7 +176,7 @@ public class TestBulletinSearcher extends TestCaseEnhanced
 		realBulletin.set(gridSpec.getTag(), data.getXmlRepresentation());
 		
 		String sanitizedLabel = ickyLabel.replaceAll("\\.", " ");
-		SafeReadableBulletin b = new SafeReadableBulletin(realBulletin);
+		SafeReadableBulletin b = new SafeReadableBulletin(realBulletin, localization);
 		FieldSpec firstColumn = FieldSpec.createStandardField("grid." + sanitizedLabel, new FieldTypeNormal());
 		MartusSearchableGridColumnField gridColumn = (MartusSearchableGridColumnField)b.getPossiblyNestedField(firstColumn);
 		assertTrue("didn't find contains in second row?", gridColumn.doesMatch(MartusField.CONTAINS, "second", localization));
@@ -189,7 +189,7 @@ public class TestBulletinSearcher extends TestCaseEnhanced
 		assertNotNull("didn't get second column?", gridSecondColumn);
 
 		Bulletin emptyBulletin = new Bulletin(security, specs, StandardFieldSpecs.getDefaultPrivateFieldSpecs());
-		SafeReadableBulletin eb = new SafeReadableBulletin(emptyBulletin);
+		SafeReadableBulletin eb = new SafeReadableBulletin(emptyBulletin, localization);
 		assertNull("returned searchable for empty grid?", eb.getPossiblyNestedField(firstColumn));
 		
 	}
@@ -216,7 +216,7 @@ public class TestBulletinSearcher extends TestCaseEnhanced
 		realBulletin.addPublicAttachment(publicProxy);
 		realBulletin.addPrivateAttachment(privateProxy);
 
-		SafeReadableBulletin b = new SafeReadableBulletin(realBulletin);
+		SafeReadableBulletin b = new SafeReadableBulletin(realBulletin, localization);
 
 		BulletinSearcher helloWithAnyDate = new BulletinSearcher(new SearchTreeNode("hello"));
 		assertEquals("hello", true, helloWithAnyDate.doesMatch(b, localization));
@@ -366,10 +366,10 @@ public class TestBulletinSearcher extends TestCaseEnhanced
 		b.set(Bulletin.TAGLANGUAGE, languageCode);
 		
 		BulletinSearcher contains = new BulletinSearcher(new SearchTreeNode(fieldToSearch , "", languageName));
-		assertTrue("not looking at searchable form?", contains.doesMatch(new SafeReadableBulletin(b), localization));
+		assertTrue("not looking at searchable form?", contains.doesMatch(new SafeReadableBulletin(b, localization), localization));
 		
 		BulletinSearcher equals  = new BulletinSearcher(new SearchTreeNode(fieldToSearch, "=", languageCode));
-		assertTrue("not looking at searchable form?", equals.doesMatch(new SafeReadableBulletin(b), localization));
+		assertTrue("not looking at searchable form?", equals.doesMatch(new SafeReadableBulletin(b, localization), localization));
 	}
 	
 	MiniLocalization localization;

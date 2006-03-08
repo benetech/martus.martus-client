@@ -241,7 +241,7 @@ public class UiFlexiDateEditor extends UiField
 		
 	public void setText(String newText)
 	{		
-		MartusFlexidate mfd = MartusFlexidate.createFromBulletinFlexidateFormat(newText);
+		MartusFlexidate mfd = localization.createFlexidateFromStoredData(newText);
 		bgDateBox.setDate(mfd.getBeginDate());
 		endDateBox.setDate(mfd.getEndDate());
 			

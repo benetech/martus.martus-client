@@ -124,26 +124,6 @@ public class TestMartusFlexidate extends TestCaseEnhanced
 		assertEquals("2000-01-10", mf.getEndDate().toIsoDateString());
 	}
 	
-	public void testCreateFromMartusString()
-	{
-		MartusFlexidate mfd = MartusFlexidate.createFromBulletinFlexidateFormat("2000-01-10");
-		assertEquals("2000-01-10", mfd.getBeginDate().toIsoDateString());	
-		
-		mfd = MartusFlexidate.createFromBulletinFlexidateFormat("2000-01-10,20000101+0");
-		assertEquals("single begin", "2000-01-01", mfd.getBeginDate().toIsoDateString());
-		assertEquals("single end", "2000-01-01", mfd.getEndDate().toIsoDateString());
-		
-		mfd = MartusFlexidate.createFromBulletinFlexidateFormat("2000-01-10,20001203+5");
-		assertEquals("range begin","2000-12-03", mfd.getBeginDate().toIsoDateString());
-		assertEquals("range end","2000-12-08", mfd.getEndDate().toIsoDateString());						
-	}
-	
-	public void testCreateInvalidDateFromMartusString()
-	{
-		MartusFlexidate mfd = MartusFlexidate.createFromBulletinFlexidateFormat("185[01-10");
-		assertEquals("1900-01-01", mfd.getBeginDate().toIsoDateString());					
-	}
-	
 	public void testCreateMartusDateStringFromDateRange()
 	{
 		assertNull(MartusFlexidate.createMartusDateStringFromDateRange("invalidDate"));

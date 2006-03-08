@@ -31,6 +31,7 @@ import java.io.Writer;
 import java.util.Vector;
 
 import org.martus.common.MartusXml;
+import org.martus.common.MiniLocalization;
 import org.martus.common.bulletin.AttachmentProxy;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.field.MartusField;
@@ -41,7 +42,12 @@ import org.martus.util.xml.XmlUtilities;
 
 public class BulletinXmlExporter
 {
-	public static void exportBulletins(Writer dest, Vector bulletins, boolean includePrivateData)
+	public BulletinXmlExporter(MiniLocalization localizationToUse)
+	{
+		localization = localizationToUse;
+	}
+	
+	public void exportBulletins(Writer dest, Vector bulletins, boolean includePrivateData)
 		throws IOException
 	{
 		dest.write(MartusXml.getTagStartWithNewline(ExportedBulletinsElementName));
@@ -80,7 +86,7 @@ public class BulletinXmlExporter
 		dest.write(NEW_LINE);
 	}
 
-	static void exportOneBulletin(Bulletin b, Writer dest, boolean includePrivateData) throws IOException
+	void exportOneBulletin(Bulletin b, Writer dest, boolean includePrivateData) throws IOException
 	{
 		dest.write(MartusXml.getTagStartWithNewline(BulletinElementName));
 
@@ -137,9 +143,9 @@ public class BulletinXmlExporter
 		dest.write(MartusXml.getTagEnd(AttachmentsListElementName));
 	}
 
-	static void writeFields(Writer dest, Bulletin b, FieldSpec[] specs)
+	void writeFields(Writer dest, Bulletin b, FieldSpec[] specs)
 		throws IOException
-	{		
+	{
 		for (int i = 0; i < specs.length; i++)
 		{
 			FieldSpec spec = specs[i];
@@ -147,7 +153,7 @@ public class BulletinXmlExporter
 				continue;		
 			final String tag = spec.getTag();
 			MartusField field = b.getField(tag);
-			String value = field.getExportableData();
+			String value = field.getExportableData(localization);
 			if(spec.getType().isGrid())
 			{
 				GridFieldSpec grid = (GridFieldSpec)spec;
@@ -224,4 +230,7 @@ public class BulletinXmlExporter
 	private final static String LABEL = "Label";
 
 	private final static String VersionNumber = "5";
+	
+	
+	MiniLocalization localization;
 }

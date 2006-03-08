@@ -33,6 +33,7 @@ import org.apache.velocity.VelocityContext;
 import org.apache.velocity.context.Context;
 import org.martus.client.test.MockMartusApp;
 import org.martus.common.LegacyCustomFields;
+import org.martus.common.MiniLocalization;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.bulletinstore.BulletinStore;
 import org.martus.common.crypto.MockMartusSecurity;
@@ -56,7 +57,7 @@ public class TestReportRunner extends TestCaseEnhanced
 	
 	public void setUp() throws Exception
 	{
-		rr = new ReportRunner(MockMartusSecurity.createClient());
+		rr = new ReportRunner(MockMartusSecurity.createClient(), new MiniLocalization());
 		context = new VelocityContext();
 	}	
 	

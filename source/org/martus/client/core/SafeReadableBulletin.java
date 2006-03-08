@@ -46,9 +46,10 @@ import org.martus.common.fieldspec.FieldType;
  */
 public class SafeReadableBulletin
 {
-	public SafeReadableBulletin(Bulletin bulletinToWrap)
+	public SafeReadableBulletin(Bulletin bulletinToWrap, MiniLocalization localizationToUse)
 	{
 		realBulletin = bulletinToWrap;
+		localization = localizationToUse;
 	}
 	
 	public MartusField field(String tag)
@@ -61,7 +62,7 @@ public class SafeReadableBulletin
 		return realBulletin.getLocalId();
 	}
 	
-	public boolean contains(String lookFor, MiniLocalization localization)
+	public boolean contains(String lookFor)
 	{
 		return realBulletin.contains(lookFor, localization);
 	}
@@ -81,7 +82,7 @@ public class SafeReadableBulletin
 			if(field == null)
 				field = field(tags[0]);
 			else
-				field = field.getSubField(tags[i]);
+				field = field.getSubField(tags[i], localization);
 			if(field == null)
 				return null;
 		}
@@ -95,4 +96,5 @@ public class SafeReadableBulletin
 	}
 
 	Bulletin realBulletin;
+	MiniLocalization localization;
 }

@@ -143,10 +143,11 @@ public class UiExportBulletinsDlg extends JDialog implements ActionListener
 
 	void doExport(File destFile)
 	{
+		BulletinXmlExporter exporter = new BulletinXmlExporter(mainWindow.getLocalization());
 		try
 		{
 			UnicodeWriter writer = new UnicodeWriter(destFile);
-			BulletinXmlExporter.exportBulletins(writer, bulletins, userWantsToExportPrivate());
+			exporter.exportBulletins(writer, bulletins, userWantsToExportPrivate());
 			writer.close();
 			mainWindow.notifyDlg("ExportComplete");
 		}

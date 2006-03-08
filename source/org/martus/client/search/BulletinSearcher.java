@@ -61,7 +61,7 @@ public class BulletinSearcher
 
 		FieldSpec fieldToSearch = node.getField();
 		if(fieldToSearch.getTag().length() == 0)
-			return b.contains(searchForValue, localization);
+			return b.contains(searchForValue);
 
 		int compareOp = node.getComparisonOperator();
 		MartusField field = b.getPossiblyNestedField(fieldToSearch);

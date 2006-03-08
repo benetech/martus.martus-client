@@ -1119,7 +1119,7 @@ public class MartusApp
 			for(int j = 0; j < allRevisions.size(); ++j)
 			{
 				Bulletin b = store.getBulletinRevision((UniversalId)allRevisions.get(j));
-				if(b != null && matcher.doesMatch(new SafeReadableBulletin(b), localization))
+				if(b != null && matcher.doesMatch(new SafeReadableBulletin(b, localization), localization))
 				{	
 					try
 					{

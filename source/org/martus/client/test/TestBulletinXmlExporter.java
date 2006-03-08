@@ -36,6 +36,7 @@ import org.martus.client.core.BulletinXmlExporter;
 import org.martus.common.FieldCollection;
 import org.martus.common.GridData;
 import org.martus.common.GridRow;
+import org.martus.common.MiniLocalization;
 import org.martus.common.bulletin.AttachmentProxy;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.bulletin.BulletinConstants;
@@ -208,7 +209,8 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 		Vector list = new Vector();
 		list.add(b1);
 		list.add(b2);
-		BulletinXmlExporter.exportBulletins(writer, list, false);
+		BulletinXmlExporter exporter = new BulletinXmlExporter(new MiniLocalization());
+		exporter.exportBulletins(writer, list, false);
 		String result = writer.toString();
 
 		assertContains(sampleTitle1, result);
@@ -403,7 +405,8 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 		StringWriter dest = new StringWriter();
 		Vector list = new Vector();
 		list.add(b);
-		BulletinXmlExporter.exportBulletins(dest, list, true);
+		BulletinXmlExporter exporter = new BulletinXmlExporter(new MiniLocalization());
+		exporter.exportBulletins(dest, list, true);
 		final String result = dest.toString();
 		return result;
 	}
@@ -442,7 +445,8 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 	String doExport(Vector list, boolean includePrivateData) throws IOException
 	{
 		StringWriter writer = new StringWriter();
-		BulletinXmlExporter.exportBulletins(writer, list, includePrivateData);
+		BulletinXmlExporter exporter = new BulletinXmlExporter(new MiniLocalization());
+		exporter.exportBulletins(writer, list, includePrivateData);
 		String result = writer.toString();
 		return result;
 	}
