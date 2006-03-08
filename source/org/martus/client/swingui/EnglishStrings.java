@@ -339,7 +339,7 @@ public class EnglishStrings
 "button:UseOldCustomFields=Use Old",
 "button:UseNewCustomFields=Use New",
 "button:CloseHelp=Close Help",
-"button:SearchFinalBulletinsOnly=Search final bulletins only",
+"button:SearchFinalBulletinsOnly=Search most recent versions only",
 
 "menu:file=File",
 "menu:CreateNewBulletin=Create New Bulletin",
