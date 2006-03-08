@@ -41,7 +41,7 @@ public class TestMartusFlexidate extends TestCaseEnhanced
 	
 	public void testFlexiDate()
 	{
-		MartusFlexidate mf = MartusFlexidate.createFromInternalMartusFlexidateString("20030105+2");		
+		MartusFlexidate mf = new MartusFlexidate("2003-01-05", 2);	
 		assertEquals("20030105+2", mf.getMartusFlexidateString());
 		
 		assertEquals("2003-01-05", mf.getBeginDate().toIsoDateString());
@@ -50,7 +50,7 @@ public class TestMartusFlexidate extends TestCaseEnhanced
 		
 	public void testFlexiDateOverMonths()
 	{
-		MartusFlexidate mf = MartusFlexidate.createFromInternalMartusFlexidateString("20030105+120");		
+		MartusFlexidate mf = new MartusFlexidate("2003-01-05", 120);		
 		assertEquals("20030105+120", mf.getMartusFlexidateString());
 
 		assertEquals("2003-01-05", mf.getBeginDate().toIsoDateString());
@@ -60,7 +60,7 @@ public class TestMartusFlexidate extends TestCaseEnhanced
 	
 	public void testFlexiDateOverYear()
 	{
-		MartusFlexidate mf = MartusFlexidate.createFromInternalMartusFlexidateString("20020105+366");		
+		MartusFlexidate mf = new MartusFlexidate("2002-01-05", 366);		
 		assertEquals("20020105+366", mf.getMartusFlexidateString());
 
 		assertEquals("2002-01-05", mf.getBeginDate().toIsoDateString());
@@ -70,7 +70,7 @@ public class TestMartusFlexidate extends TestCaseEnhanced
 	
 	public void testExactDate()
 	{
-		MartusFlexidate mf = MartusFlexidate.createFromInternalMartusFlexidateString("20030105");
+		MartusFlexidate mf = new MartusFlexidate("2003-01-05", 0);
 		
 		assertEquals("20030105+0", mf.getMartusFlexidateString());
 		
@@ -103,7 +103,7 @@ public class TestMartusFlexidate extends TestCaseEnhanced
 		assertEquals("2000-01-10", mf.getBeginDate().toIsoDateString());
 		assertEquals("2000-01-10", mf.getEndDate().toIsoDateString());
 		
-		mf = MartusFlexidate.createFromInternalMartusFlexidateString("20030105+0");		
+		mf = new MartusFlexidate("2003-01-05", 0);		
 		assertEquals("20030105+0", mf.getMartusFlexidateString());
 
 		assertEquals("2003-01-05", mf.getBeginDate().toIsoDateString());
@@ -126,15 +126,15 @@ public class TestMartusFlexidate extends TestCaseEnhanced
 	
 	public void testCreateMartusDateStringFromDateRange()
 	{
-		assertNull(MartusFlexidate.createMartusDateStringFromDateRange("invalidDate"));
+		assertNull(MartusFlexidate.createMartusDateStringFromBeginAndEndDateString("invalidDate"));
 		String standardDateRange = "1988-02-01,1988-02-05";
-		assertEquals("1988-02-01,19880201+4", MartusFlexidate.createMartusDateStringFromDateRange(standardDateRange));
+		assertEquals("1988-02-01,19880201+4", MartusFlexidate.createMartusDateStringFromBeginAndEndDateString(standardDateRange));
 
 		String reversedDateRange = "1988-02-05,1988-02-01";
-		assertEquals("1988-02-01,19880201+4", MartusFlexidate.createMartusDateStringFromDateRange(reversedDateRange));
+		assertEquals("1988-02-01,19880201+4", MartusFlexidate.createMartusDateStringFromBeginAndEndDateString(reversedDateRange));
 
 		String noDateRange = "1988-02-05,1988-02-05";
-		assertEquals("1988-02-05,19880205+0", MartusFlexidate.createMartusDateStringFromDateRange(noDateRange));
+		assertEquals("1988-02-05,19880205+0", MartusFlexidate.createMartusDateStringFromBeginAndEndDateString(noDateRange));
 	}
 
 	private MultiCalendar getDate(int year, int month, int day)

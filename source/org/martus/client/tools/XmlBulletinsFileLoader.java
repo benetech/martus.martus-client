@@ -172,7 +172,7 @@ public class XmlBulletinsFileLoader extends SimpleXmlDefaultLoader
 		if(xmlValue.startsWith(DateRange))
 		{
 			String rawDateRange = xmlValue.substring(DateRange.length());
-			return MartusFlexidate.createMartusDateStringFromDateRange(rawDateRange);
+			return MartusFlexidate.createMartusDateStringFromBeginAndEndDateString(rawDateRange);
 		}
 		return xmlValue;
 	}
