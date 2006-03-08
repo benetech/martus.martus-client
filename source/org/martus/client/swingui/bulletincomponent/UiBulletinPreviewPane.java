@@ -91,11 +91,16 @@ public class UiBulletinPreviewPane extends UiScrollPane
 		if(currentBulletin == null)
 			return;
 		
-		if(previousBulletin != null &&  
-		previousBulletin.getUniversalId().equals(currentBulletin.getUniversalId()))
+		if(didReturnToPreviousBulletin())
 			Utilities.forceScrollerToRect(view, previousRect);
 		else
 			Utilities.forceScrollerToTop(view);
+	}
+
+	private boolean didReturnToPreviousBulletin()
+	{
+		return previousBulletin != null &&  
+		previousBulletin.getUniversalId().equals(currentBulletin.getUniversalId());
 	}
 
 	public void bulletinContentsHaveChanged(Bulletin b)
