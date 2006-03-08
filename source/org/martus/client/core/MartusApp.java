@@ -1093,7 +1093,7 @@ public class MartusApp
 		setLastUploadRemindedTime(new Date());
 	}
 
-	public void search(SearchTreeNode searchNode)
+	public void search(SearchTreeNode searchNode, boolean searchFinalVersionsOnly)
 	{
 		BulletinSearcher matcher = new BulletinSearcher(searchNode);
 
@@ -1105,13 +1105,16 @@ public class MartusApp
 		for(int i = 0; i < uids.size(); ++i)
 		{
 			UniversalId leafBulletinUid = (UniversalId)uids.get(i);
-			BulletinHistory history = store.getBulletinRevision(leafBulletinUid).getHistory();
 			Vector allRevisions = new Vector();
 			allRevisions.add(leafBulletinUid);
-			for(int h=0; h<history.size(); ++h)
+			if(!searchFinalVersionsOnly)
 			{
-				allRevisions.add(UniversalId.createFromAccountAndLocalId(leafBulletinUid.getAccountId(), history.get(h)));
-			}
+				BulletinHistory history = store.getBulletinRevision(leafBulletinUid).getHistory();
+				for(int h=0; h<history.size(); ++h)
+				{
+					allRevisions.add(UniversalId.createFromAccountAndLocalId(leafBulletinUid.getAccountId(), history.get(h)));
+				}
+			}		
 			
 			for(int j = 0; j < allRevisions.size(); ++j)
 			{

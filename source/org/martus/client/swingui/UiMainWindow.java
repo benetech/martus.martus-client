@@ -1209,7 +1209,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 			return;
 		setWaitingCursor();
 
-		app.search(searchDlg.getSearchTree());
+		app.search(searchDlg.getSearchTree(), searchDlg.searchFinalBulletinsOnly());
 		ClientBulletinStore store = getStore();
 		BulletinFolder searchFolder = store.findFolder(store.getSearchFolderName());
 		folders.folderTreeContentsHaveChanged();

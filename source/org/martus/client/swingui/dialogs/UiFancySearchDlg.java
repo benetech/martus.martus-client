@@ -42,6 +42,7 @@ import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.grids.GridTableModel;
 import org.martus.common.MiniLocalization;
 import org.martus.swing.UiButton;
+import org.martus.swing.UiCheckBox;
 import org.martus.swing.UiWrappedTextPanel;
 import org.martus.swing.Utilities;
 import org.martus.util.TokenReplacement;
@@ -93,6 +94,15 @@ public class UiFancySearchDlg extends UiSearchDlg
 		Box buttonBox = Box.createHorizontalBox();
 		buttonBox.setBorder(new EmptyBorder(10,0,0,0));
 		Utilities.addComponentsRespectingOrientation(buttonBox, new Component[] {search, Box.createHorizontalGlue(),help, cancel });
+		
+		searchFinalBulletins = new UiCheckBox(localization.getButtonLabel("SearchFinalBulletinsOnly"));
+		searchFinalBulletins.setSelected(false);
+		
+		JPanel bottomPanel = new JPanel();
+		bottomPanel.setLayout(new BorderLayout());
+		bottomPanel.add(searchFinalBulletins, BorderLayout.NORTH);
+		bottomPanel.add(buttonBox, BorderLayout.CENTER);
+		
 
 		JPanel mainPanel = new JPanel();
 		int borderWidth = 5;
@@ -101,7 +111,7 @@ public class UiFancySearchDlg extends UiSearchDlg
 		mainPanel.add(instructionPanel,BorderLayout.NORTH);
 		setGridSize(grid, borderWidth);
 		mainPanel.add(grid.getComponent(),BorderLayout.CENTER);
-		mainPanel.add(buttonBox,BorderLayout.SOUTH);
+		mainPanel.add(bottomPanel,BorderLayout.SOUTH);
 
 		getContentPane().add(mainPanel);
 		getRootPane().setDefaultButton(search);
@@ -232,7 +242,14 @@ public class UiFancySearchDlg extends UiSearchDlg
 	{
 		return previousSearch;
 	}
+	
+	public boolean searchFinalBulletinsOnly()
+	{
+		return searchFinalBulletins.isSelected();
+	}
+	
 
 	FancySearchGridEditor grid;
+	UiCheckBox searchFinalBulletins;
 	private static String previousSearch = "";
 }

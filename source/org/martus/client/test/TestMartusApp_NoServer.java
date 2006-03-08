@@ -1555,25 +1555,25 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		Bulletin b = store.getBulletinRevision((UniversalId)store.getAllBulletinLeafUids().get(0));
 		String andKeyword = "and";
 		String orKeyword = "or";
-		search(appWithAccount, b.get("title"), andKeyword, orKeyword);
+		search(appWithAccount, b.get("title"), andKeyword, orKeyword, SEARCH_ALL_BULLETIN_REVISIONS);
 		assertNotNull("Search results should have been created", store.getSearchFolderName());
 
-		search(appWithAccount, "--not in any bulletin--", andKeyword, orKeyword);
+		search(appWithAccount, "--not in any bulletin--", andKeyword, orKeyword, SEARCH_ALL_BULLETIN_REVISIONS);
 		assertEquals("search should clear results folder", 0, store.findFolder(store.getSearchFolderName()).getBulletinCount());
 
 		assertTrue("not enough bulletins?", appWithAccount.getStore().getBulletinCount() >= 5);
 		assertTrue("too many bulletins?", appWithAccount.getStore().getBulletinCount() <= 15);
-		search(appWithAccount, b.get("author"), andKeyword, orKeyword);
+		search(appWithAccount, b.get("author"), andKeyword, orKeyword, SEARCH_ALL_BULLETIN_REVISIONS);
 		assertEquals(1, store.findFolder(store.getSearchFolderName()).getBulletinCount());
-		search(appWithAccount, b.get(""), andKeyword, orKeyword);
+		search(appWithAccount, b.get(""), andKeyword, orKeyword, SEARCH_ALL_BULLETIN_REVISIONS);
 		assertEquals(10, store.findFolder(store.getSearchFolderName()).getBulletinCount());
 
 		TRACE_END();
 	}
 
-	public void testSearchOlderVersions() throws Exception
+	public void testSearchOlderVersionsAndFinalVersions() throws Exception
 	{
-		TRACE_BEGIN("testSearchOlderVersions");
+		TRACE_BEGIN("testSearchOlderVersionsAndFinalVersions");
 		ClientBulletinStore store = appWithAccount.getStore();
 		String andKeyword = "and";
 		String orKeyword = "or";
@@ -1587,12 +1587,21 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		BulletinFolder newFolder = new BulletinFolder(store, "myFolder");
 		appWithAccount.saveBulletin(b1, newFolder);
 		assertNull(store.findFolder(store.getSearchFolderName()));
-		search(appWithAccount, originalString, andKeyword, orKeyword);
+		
+		search(appWithAccount, originalString, andKeyword, orKeyword, SEARCH_ALL_BULLETIN_REVISIONS);
 		assertEquals(1, store.findFolder(store.getSearchFolderName()).getBulletinCount());
-		search(appWithAccount, commonString, andKeyword, orKeyword);
+		search(appWithAccount, commonString, andKeyword, orKeyword, SEARCH_ALL_BULLETIN_REVISIONS);
 		assertEquals(1, store.findFolder(store.getSearchFolderName()).getBulletinCount());
-		search(appWithAccount, "abcdefghijklmnop", andKeyword, orKeyword);
+		search(appWithAccount, "abcdefghijklmnop", andKeyword, orKeyword, SEARCH_ALL_BULLETIN_REVISIONS);
 		assertEquals(0, store.findFolder(store.getSearchFolderName()).getBulletinCount());
+
+		search(appWithAccount, originalString, andKeyword, orKeyword, SEARCH_FINAL_BULLETIN_REVISION_ONLY);
+		assertEquals(1, store.findFolder(store.getSearchFolderName()).getBulletinCount());
+		search(appWithAccount, commonString, andKeyword, orKeyword, SEARCH_FINAL_BULLETIN_REVISION_ONLY);
+		assertEquals(1, store.findFolder(store.getSearchFolderName()).getBulletinCount());
+		search(appWithAccount, "abcdefghijklmnop", andKeyword, orKeyword, SEARCH_FINAL_BULLETIN_REVISION_ONLY);
+		assertEquals(0, store.findFolder(store.getSearchFolderName()).getBulletinCount());
+		
 		String newString = "bilbo";
 		Bulletin b2 = store.createNewDraft(b1, b1.getPublicFieldSpecs(), b1.getPrivateFieldSpecs());
 		b2.set(Bulletin.TAGPRIVATEINFO, newString);
@@ -1604,18 +1613,27 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		b3.set(Bulletin.TAGPUBLICINFO, "");
 		appWithAccount.saveBulletin(b3, newFolder);
 
-		search(appWithAccount, newString, andKeyword, orKeyword);
+		search(appWithAccount, newString, andKeyword, orKeyword, SEARCH_ALL_BULLETIN_REVISIONS);
 		assertEquals(1, store.findFolder(store.getSearchFolderName()).getBulletinCount());
-		search(appWithAccount, originalString, andKeyword, orKeyword);
+		search(appWithAccount, originalString, andKeyword, orKeyword, SEARCH_ALL_BULLETIN_REVISIONS);
 		assertEquals(1, store.findFolder(store.getSearchFolderName()).getBulletinCount());
-		search(appWithAccount, commonString, andKeyword, orKeyword);
+		search(appWithAccount, commonString, andKeyword, orKeyword, SEARCH_ALL_BULLETIN_REVISIONS);
 		assertEquals(1, store.findFolder(store.getSearchFolderName()).getBulletinCount());
-		search(appWithAccount, publicData2, andKeyword, orKeyword);
+		search(appWithAccount, publicData2, andKeyword, orKeyword, SEARCH_ALL_BULLETIN_REVISIONS);
 		assertEquals(1, store.findFolder(store.getSearchFolderName()).getBulletinCount());
 		
+		search(appWithAccount, newString, andKeyword, orKeyword, SEARCH_FINAL_BULLETIN_REVISION_ONLY);
+		assertEquals(1, store.findFolder(store.getSearchFolderName()).getBulletinCount());
+		search(appWithAccount, originalString, andKeyword, orKeyword, SEARCH_FINAL_BULLETIN_REVISION_ONLY);
+		assertEquals(0, store.findFolder(store.getSearchFolderName()).getBulletinCount());
+		search(appWithAccount, commonString, andKeyword, orKeyword, SEARCH_FINAL_BULLETIN_REVISION_ONLY);
+		assertEquals(1, store.findFolder(store.getSearchFolderName()).getBulletinCount());
+		search(appWithAccount, publicData2, andKeyword, orKeyword, SEARCH_FINAL_BULLETIN_REVISION_ONLY);
+		assertEquals(0, store.findFolder(store.getSearchFolderName()).getBulletinCount());
 		
 		TRACE_END();
 	}
+	
 	
 	public void testFindBulletinInAllFolders() throws Exception
 	{
@@ -2095,11 +2113,11 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 	
 	
 	
-	private void search(MartusApp app, String searchFor, String andKeyword, String orKeyword)
+	private void search(MartusApp app, String searchFor, String andKeyword, String orKeyword, boolean searchFinalBulletinVersionsOnly)
 	{
 		SearchParser parser = new SearchParser(andKeyword, orKeyword);
 		SearchTreeNode searchNode = parser.parseJustAmazonValueForTesting(searchFor);
-		app.search(searchNode);
+		app.search(searchNode, searchFinalBulletinVersionsOnly);
 	}
 
 
@@ -2109,6 +2127,9 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 	MartusLocalization testAppLocalization;
 	private MockMartusApp appWithAccount;
 	
+	static final boolean SEARCH_ALL_BULLETIN_REVISIONS = false; 
+	static final boolean SEARCH_FINAL_BULLETIN_REVISION_ONLY = true; 
+
 	static final String[] noEnglishStrings = {};
 
 	static final String userName = "testuser";
