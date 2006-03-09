@@ -1993,7 +1993,7 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 	{
 		TRACE_BEGIN("testMonthLabels");
 
-		assertEquals("Mar", testAppLocalization.getMonthLabel("Gregorian3"));
+		assertEquals("Mar", testAppLocalization.getMonthLabel("mar"));
 		assertEquals("Mar", testAppLocalization.getMonthLabel("Thai3"));
 		assertEquals("Khordad", testAppLocalization.getMonthLabel("Persian3"));
 		String[] months = testAppLocalization.getMonthLabels();
