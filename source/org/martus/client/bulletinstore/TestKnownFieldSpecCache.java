@@ -39,6 +39,8 @@ import org.martus.common.bulletin.BulletinZipUtilities;
 import org.martus.common.crypto.MartusCrypto;
 import org.martus.common.crypto.MockMartusSecurity;
 import org.martus.common.database.MockClientDatabase;
+import org.martus.common.fieldspec.ChoiceItem;
+import org.martus.common.fieldspec.DropDownFieldSpec;
 import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.fieldspec.FieldTypeDateRange;
 import org.martus.common.fieldspec.FieldTypeMultiline;
@@ -146,6 +148,22 @@ public class TestKnownFieldSpecCache extends TestCaseEnhanced
 		catch(IOException ignoreExpected)
 		{
 		}
+	}
+	
+	public void testSimilarDropdowns() throws Exception
+	{
+		ChoiceItem[] choices1 = {new ChoiceItem("a", "a a"), new ChoiceItem("b", "b b"),};
+		ChoiceItem[] choices2 = {new ChoiceItem("a", "a-a"), new ChoiceItem("b", "b-b"),};
+		DropDownFieldSpec spec1 = new DropDownFieldSpec(choices1);
+		DropDownFieldSpec spec2 = new DropDownFieldSpec(choices2);
+		
+		Bulletin b1 = new Bulletin(security, new FieldSpec[] {spec1}, new FieldSpec[0]);
+		Bulletin b2 = new Bulletin(security, new FieldSpec[] {spec2}, new FieldSpec[0]);
+		
+		assertEquals(0, cache.getAllKnownFieldSpecs().size());
+		cache.revisionWasSaved(b1);
+		cache.revisionWasSaved(b2);
+		assertEquals(2, cache.getAllKnownFieldSpecs().size());
 	}
 
 	private Bulletin createSampleBulletin(MartusCrypto authorSecurity)
