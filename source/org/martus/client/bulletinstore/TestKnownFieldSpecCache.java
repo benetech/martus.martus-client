@@ -30,7 +30,7 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
-import java.util.Vector;
+import java.util.Set;
 import java.util.zip.ZipFile;
 
 import org.martus.client.test.MockMartusApp;
@@ -69,7 +69,7 @@ public class TestKnownFieldSpecCache extends TestCaseEnhanced
 	{
 		Bulletin one = createSampleBulletin(security);
 		app.saveBulletin(one, app.getFolderDraftOutbox());
-		Vector specs = cache.getAllKnownFieldSpecs();
+		Set specs = cache.getAllKnownFieldSpecs();
 		assertEquals("wrong number of specs?", 2, specs.size());
 		assertContains("public spec not found?", publicSpecs[0], specs);
 		assertContains("private spec not found?", privateSpecs[0], specs);
@@ -79,7 +79,7 @@ public class TestKnownFieldSpecCache extends TestCaseEnhanced
 	{
 		Bulletin withCustom = createSampleBulletin(security);
 		app.saveBulletin(withCustom, app.getFolderDraftOutbox());
-		Vector specsAfterSave = cache.getAllKnownFieldSpecs();
+		Set specsAfterSave = cache.getAllKnownFieldSpecs();
 		int newExpectedCount = publicSpecs.length + privateSpecs.length;
 		assertEquals("didn't add new specs?", newExpectedCount, specsAfterSave.size());
 		assertContains("didn't add public?", publicSpecs[0], specsAfterSave);
@@ -98,7 +98,7 @@ public class TestKnownFieldSpecCache extends TestCaseEnhanced
 		BulletinZipUtilities.exportBulletinPacketsFromDatabaseToZipFile(otherApp.getStore().getDatabase(), notOurs.getDatabaseKey(), zipFile, otherSecurity);
 		
 		app.getStore().importBulletinZipFile(new ZipFile(zipFile));
-		Vector specsWithNotOurs = cache.getAllKnownFieldSpecs();
+		Set specsWithNotOurs = cache.getAllKnownFieldSpecs();
 		assertEquals("didn't ignore other author's bulletin?",0, specsWithNotOurs.size());
 	}
 
@@ -112,11 +112,11 @@ public class TestKnownFieldSpecCache extends TestCaseEnhanced
 		File zipFile = createTempFile();
 		BulletinZipUtilities.exportBulletinPacketsFromDatabaseToZipFile(app.getStore().getDatabase(), toImport.getDatabaseKey(), zipFile, security);
 		app.getStore().destroyBulletin(toImport);
-		Vector specsAfterDelete = cache.getAllKnownFieldSpecs();
+		Set specsAfterDelete = cache.getAllKnownFieldSpecs();
 		assertEquals("didn't remove specs from deleted bulletin?", 0, specsAfterDelete.size());
 		
 		app.getStore().importBulletinZipFile(new ZipFile(zipFile));
-		Vector specsAfterImport = cache.getAllKnownFieldSpecs();
+		Set specsAfterImport = cache.getAllKnownFieldSpecs();
 		assertEquals("didn't include imported specs?", expectedCountAfterSaveOrImport, specsAfterImport.size());
 	}
 	
@@ -128,7 +128,7 @@ public class TestKnownFieldSpecCache extends TestCaseEnhanced
 		ByteArrayInputStream loadable = new ByteArrayInputStream(saved.toByteArray());
 		KnownFieldSpecCache reloaded = new KnownFieldSpecCache(new MockClientDatabase(), security);
 		reloaded.loadFromStream(loadable);
-		Vector specs = reloaded.getAllKnownFieldSpecs();
+		Set specs = reloaded.getAllKnownFieldSpecs();
 		assertEquals("Didn't reload properly?", specs, cache.getAllKnownFieldSpecs());
 		assertEquals("Didn't load correct count?", sampleDataSpecTags.length, specs.size());
 	}

@@ -1350,7 +1350,7 @@ public class ClientBulletinStore extends BulletinStore
 		return loadedLegacyFolders;
 	}
 	
-	public Vector getAllKnownFieldSpecs()
+	public Set getAllKnownFieldSpecs()
 	{
 		return knownFieldSpecCache.getAllKnownFieldSpecs();
 	}

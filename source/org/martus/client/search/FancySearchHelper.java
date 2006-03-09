@@ -27,6 +27,9 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.search;
 
 import java.util.Collections;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Set;
 import java.util.Vector;
 
 import org.martus.client.bulletinstore.ClientBulletinStore;
@@ -75,15 +78,16 @@ public class FancySearchHelper
 	
 	public DropDownFieldSpec createFieldColumnSpec(ClientBulletinStore storeToUse)
 	{
-		Vector allAvailableFields = new Vector();
-
+		Set allAvailableFields = new HashSet();
 		allAvailableFields.add(createLastSavedDateChoice());
 		allAvailableFields.addAll(convertToChoiceItems(storeToUse.getAllKnownFieldSpecs()));
-		Collections.sort(allAvailableFields, new SaneCollator(getLocalization().getCurrentLanguageCode()));
 
-		allAvailableFields.insertElementAt(createAnyFieldChoice(), 0);
-		ChoiceItem[] fieldChoices = (ChoiceItem[])allAvailableFields.toArray(new ChoiceItem[0]);
-		                                  
+		Vector sortedFields = new Vector(allAvailableFields);
+		Collections.sort(sortedFields, new SaneCollator(getLocalization().getCurrentLanguageCode()));
+
+		sortedFields.insertElementAt(createAnyFieldChoice(), 0);
+		ChoiceItem[] fieldChoices = (ChoiceItem[])sortedFields.toArray(new ChoiceItem[0]);
+		
 		DropDownFieldSpec fieldColumnSpec = new DropDownFieldSpec();
 		fieldColumnSpec.setLabel(getLocalization().getFieldLabel("SearchGridHeaderField"));
 		fieldColumnSpec.setChoices(fieldChoices);
@@ -108,27 +112,28 @@ public class FancySearchHelper
 		return new SearchableFieldChoiceItem(spec);
 	}
 
-	private Vector convertToChoiceItems(Vector specs)
+	private Set convertToChoiceItems(Set specs)
 	{
-		Vector allChoices = new Vector();
-		for(int i=0; i < specs.size(); ++i)
+		Set allChoices = new HashSet();
+		Iterator iter = specs.iterator();
+		while(iter.hasNext())
 		{
-			FieldSpec spec = (FieldSpec)specs.get(i);
+			FieldSpec spec = (FieldSpec)iter.next();
 			allChoices.addAll(getChoiceItemsForThisField(spec));
 		}
 			
 		return allChoices;
 	}
 
-	public Vector getChoiceItemsForThisField(FieldSpec spec)
+	public Set getChoiceItemsForThisField(FieldSpec spec)
 	{
 		return getChoiceItemsForThisField(spec, spec.getTag(), "");
 	}
 	
-	public Vector getChoiceItemsForThisField(FieldSpec spec, String fullTagChain, String displayPrefix)
+	public Set getChoiceItemsForThisField(FieldSpec spec, String fullTagChain, String displayPrefix)
 	{
 
-		Vector choicesForThisField = new Vector();
+		Set choicesForThisField = new HashSet();
 		final FieldType thisType = spec.getType();
 		String displayString = spec.getLabel();
 		if(StandardFieldSpecs.isStandardFieldTag(fullTagChain))
@@ -191,9 +196,9 @@ public class FancySearchHelper
 		return (thisType.isDate() || thisType.isLanguage() || thisType.isBoolean()); 
 	}
 	
-	private Vector getDateRangeChoiceItem(String tag, String subfield, String baseDisplayString) 
+	private Set getDateRangeChoiceItem(String tag, String subfield, String baseDisplayString) 
 	{
-		Vector itemIfAny = new Vector();
+		Set itemIfAny = new HashSet();
 		String fullTag = tag + "." + subfield;
 		String displayTemplate = dlgLauncher.GetLocalization().getFieldLabel("DateRangeTemplate" + subfield);
 		try

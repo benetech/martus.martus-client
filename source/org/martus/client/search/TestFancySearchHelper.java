@@ -27,6 +27,8 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.search;
 
 import java.io.File;
+import java.util.Iterator;
+import java.util.Set;
 import java.util.Vector;
 
 import org.martus.client.bulletinstore.ClientBulletinStore;
@@ -121,84 +123,95 @@ public class TestFancySearchHelper extends TestCaseEnhanced
 	public void testGetChoiceItemsForThisField() throws Exception
 	{
 		FieldSpec normal = StandardFieldSpecs.findStandardFieldSpec(BulletinConstants.TAGAUTHOR);
-		Vector normalChoices = helper.getChoiceItemsForThisField(normal);
+		Set normalChoices = helper.getChoiceItemsForThisField(normal);
 		assertEquals("more than one choice for a plain text field?", 1, normalChoices.size());
 		
 		FieldSpec dateRange = StandardFieldSpecs.findStandardFieldSpec(BulletinConstants.TAGEVENTDATE);
-		Vector dateRangeChoices = helper.getChoiceItemsForThisField(dateRange);
+		Set dateRangeChoices = helper.getChoiceItemsForThisField(dateRange);
 		assertEquals("not two choices for date range?", 2, dateRangeChoices.size());
 		
 		DropDownFieldSpec dropDownSpec = createSampleDropDownSpec("dropdown");
-		Vector dropDownChoices = helper.getChoiceItemsForThisField(dropDownSpec);
+		Set dropDownChoices = helper.getChoiceItemsForThisField(dropDownSpec);
 		assertEquals("not one choice for dropdown?", 1, dropDownChoices.size());
 		{
-			ChoiceItem createdChoice = (ChoiceItem)dropDownChoices.get(0);
+			ChoiceItem createdChoice = (ChoiceItem)dropDownChoices.iterator().next();
 			DropDownFieldSpec createdSpec = (DropDownFieldSpec)createdChoice.getSpec();
 			assertEquals("doesn't have blank plus both sample choices?", 3, createdSpec.getCount());
 		}
 		
 		FieldSpec withLabel = FieldSpec.createCustomField("tag", "Label", new FieldTypeNormal());
-		Vector withLabelChoices = helper.getChoiceItemsForThisField(withLabel);
+		Set withLabelChoices = helper.getChoiceItemsForThisField(withLabel);
 		assertEquals("not one choice for normal with label?", 1, withLabelChoices.size());
 		{
-			ChoiceItem createdChoice = (ChoiceItem)withLabelChoices.get(0);
+			ChoiceItem createdChoice = (ChoiceItem)withLabelChoices.iterator().next();
 			assertEquals(withLabel.toString(), createdChoice.getCode());
 			assertEquals(withLabel.getLabel(), createdChoice.toString());
 		}
 		
 		FieldSpec messageType = createSampleMessageSpec();
-		Vector messageTypeChoices = helper.getChoiceItemsForThisField(messageType);
+		Set messageTypeChoices = helper.getChoiceItemsForThisField(messageType);
 		assertEquals("not one choice for message fields?", 1, messageTypeChoices.size());
-		ChoiceItem messageChoice = (ChoiceItem)messageTypeChoices.get(0);
+		ChoiceItem messageChoice = (ChoiceItem)messageTypeChoices.iterator().next();
 		FieldSpec messageChoiceSpec = messageChoice.getSpec();
 		assertEquals("message doesn't have string search?", new FieldTypeNormal(), messageChoiceSpec.getType());
 		
 		FieldSpec multilineType = createSampleMultilineSpec();
-		Vector multilineTypeChoices = helper.getChoiceItemsForThisField(multilineType);
+		Set multilineTypeChoices = helper.getChoiceItemsForThisField(multilineType);
 		assertEquals("not one choice for multiline fields?", 1, multilineTypeChoices.size());
-		ChoiceItem multilineChoice = (ChoiceItem)multilineTypeChoices.get(0);
+		ChoiceItem multilineChoice = (ChoiceItem)multilineTypeChoices.iterator().next();
 		FieldSpec multilineChoiceSpec = multilineChoice.getSpec();
 		assertEquals("multiline doesn't have string search?", new FieldTypeNormal(), multilineChoiceSpec.getType());
 		
 		FieldSpec booleanType = createSampleBooleanSpec();
-		Vector booleanTypeChoices = helper.getChoiceItemsForThisField(booleanType);
+		Set booleanTypeChoices = helper.getChoiceItemsForThisField(booleanType);
 		assertEquals("not one choice for boolean fields?", 1, booleanTypeChoices.size());
-		ChoiceItem booleanChoice = (ChoiceItem)booleanTypeChoices.get(0);
+		ChoiceItem booleanChoice = (ChoiceItem)booleanTypeChoices.iterator().next();
 		FieldSpec booleanChoiceSpec = booleanChoice.getSpec();
 		assertEquals("boolean doesn't have checkbox?", new FieldTypeBoolean(), booleanChoiceSpec.getType());
 
 		FieldSpec unknownType = FieldSpec.createStandardField("tag", new FieldTypeUnknown());
-		Vector unknownTypeChoices = helper.getChoiceItemsForThisField(unknownType);
+		Set unknownTypeChoices = helper.getChoiceItemsForThisField(unknownType);
 		assertEquals("not zero choices for unknown type?", 0, unknownTypeChoices.size());
 		
 		FieldSpec blankLabel = FieldSpec.createCustomField("tag", "  ", new FieldTypeNormal());
-		Vector blankLabelChoices = helper.getChoiceItemsForThisField(blankLabel);
-		ChoiceItem blankLabelChoice = (ChoiceItem)blankLabelChoices.get(0);
+		Set blankLabelChoices = helper.getChoiceItemsForThisField(blankLabel);
+		ChoiceItem blankLabelChoice = (ChoiceItem)blankLabelChoices.iterator().next();
 		assertEquals("didn't use tag for blank label", blankLabel.getTag(), blankLabelChoice.toString());
 	}
 	
 	public void testGetChoiceItemsForThisFieldGrid() throws Exception
 	{
 		GridFieldSpec gridSpec = createSampleGridSpec();
-		Vector gridTypeChoices = helper.getChoiceItemsForThisField(gridSpec);
+		Set gridTypeChoices = helper.getChoiceItemsForThisField(gridSpec);
 		assertEquals("not one choice for each grid column?", gridSpec.getColumnCount(), gridTypeChoices.size());
-		ChoiceItem gridChoiceNormalColumn = (ChoiceItem)gridTypeChoices.get(0);
-		FieldSpec gridChoiceNormalColumnSpec = gridChoiceNormalColumn.getSpec();
-		assertEquals("bad normal grid column?", new FieldTypeNormal(), gridChoiceNormalColumnSpec.getType());
-		assertEquals("Grid Label: column 1", gridChoiceNormalColumnSpec.getLabel());
-		assertEquals("gridtag.column 1", gridChoiceNormalColumnSpec.getTag());
 		
-		ChoiceItem gridChoiceDropDownColumn = (ChoiceItem)gridTypeChoices.get(1);
-		DropDownFieldSpec gridChoiceDropDownColumnSpec = (DropDownFieldSpec)gridChoiceDropDownColumn.getSpec();
-		assertEquals("bad dropdown grid column?", new FieldTypeDropdown(), gridChoiceDropDownColumnSpec.getType());
-		assertEquals("Grid Label: column.2", gridChoiceDropDownColumnSpec.getLabel());
-		assertEquals("gridtag.column 2", gridChoiceDropDownColumnSpec.getTag());
-		ChoiceItem empty = gridChoiceDropDownColumnSpec.getChoice(0);
-		ChoiceItem first = gridChoiceDropDownColumnSpec.getChoice(1);
-		ChoiceItem second = gridChoiceDropDownColumnSpec.getChoice(2);
-		assertEquals("wrong empty choice?", "", empty.toString());
-		assertEquals("wrong first choice?", "choice 1", first.toString());
-		assertEquals("wrong second choice?", "choice 2", second.toString());
+		Iterator iter = gridTypeChoices.iterator();
+		while(iter.hasNext())
+		{
+			ChoiceItem choice = (ChoiceItem)iter.next();
+			if(choice.getType().isString())
+			{
+				ChoiceItem gridChoiceNormalColumn = choice;
+				FieldSpec gridChoiceNormalColumnSpec = gridChoiceNormalColumn.getSpec();
+				assertEquals("bad normal grid column?", new FieldTypeNormal(), gridChoiceNormalColumnSpec.getType());
+				assertEquals("Grid Label: column 1", gridChoiceNormalColumnSpec.getLabel());
+				assertEquals("gridtag.column 1", gridChoiceNormalColumnSpec.getTag());
+			}
+			else
+			{
+				ChoiceItem gridChoiceDropDownColumn = choice;
+				DropDownFieldSpec gridChoiceDropDownColumnSpec = (DropDownFieldSpec)gridChoiceDropDownColumn.getSpec();
+				assertEquals("bad dropdown grid column?", new FieldTypeDropdown(), gridChoiceDropDownColumnSpec.getType());
+				assertEquals("Grid Label: column.2", gridChoiceDropDownColumnSpec.getLabel());
+				assertEquals("gridtag.column 2", gridChoiceDropDownColumnSpec.getTag());
+				ChoiceItem empty = gridChoiceDropDownColumnSpec.getChoice(0);
+				ChoiceItem first = gridChoiceDropDownColumnSpec.getChoice(1);
+				ChoiceItem second = gridChoiceDropDownColumnSpec.getChoice(2);
+				assertEquals("wrong empty choice?", "", empty.toString());
+				assertEquals("wrong first choice?", "choice 1", first.toString());
+				assertEquals("wrong second choice?", "choice 2", second.toString());
+			}
+		}
 	}
 	
 	private FieldSpec createSampleMessageSpec()
