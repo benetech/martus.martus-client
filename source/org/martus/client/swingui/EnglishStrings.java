@@ -907,6 +907,20 @@ public class EnglishStrings
 "folder:%RecoveredBulletins=Recovered Bulletins",
 "folder:%DamagedBulletins=Damaged Bulletins",
 
+"month:jan=Deprecated",
+"month:feb=Deprecated",
+"month:mar=Deprecated",
+"month:apr=Deprecated",
+"month:may=Deprecated",
+"month:jun=Deprecated",
+"month:jul=Deprecated",
+"month:aug=Deprecated",
+"month:sep=Deprecated",
+"month:oct=Deprecated",
+"month:nov=Deprecated",
+"month:dec=Deprecated",
+
+
 "month:Gregorian1=Jan",
 "month:Gregorian2=Feb",
 "month:Gregorian3=Mar",

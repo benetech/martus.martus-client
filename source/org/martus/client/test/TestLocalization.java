@@ -75,6 +75,17 @@ public class TestLocalization extends TestCaseEnhanced
 		super.tearDown();
 	}
 	
+	public void testHasTranslation()
+	{
+		bd.setCurrentLanguageCode(MiniLocalization.ENGLISH);
+		bd.addEnglishTranslations(new String[0]);
+		String tag = "TagWhichDoesNotExist";
+		String value = "value";
+		assertFalse("Already has bad translation?", bd.hasTranslation(tag));
+		bd.addTranslation(bd.getCurrentLanguageCode(), tag + "=" + value);
+		assertTrue("Doesn't have translation?", bd.hasTranslation(tag));
+	}
+	
 	public void testEnglishStringsDontStartWithAngleBrackets() throws Exception
 	{
 		for(int i=0; i < EnglishStrings.strings.length; ++i)
