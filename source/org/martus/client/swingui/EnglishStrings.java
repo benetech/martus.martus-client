@@ -154,6 +154,7 @@ public class EnglishStrings
 "wintitle:notifyErrorReadingFile=Error Reading File",
 "wintitle:notifyExportZeroBulletins=No Bulletins Selected",
 "wintitle:notifyPrintZeroBulletins=No Bulletins Selected",
+"wintitle:notifyNoGridRowSelected=No Row Selected",
 
 "wintitle:notifyUserRejectedServerCompliance=Server Compliance Statement",
 "wintitle:notifyExistingServerRemoved=Server Removed",
@@ -340,6 +341,7 @@ public class EnglishStrings
 "button:UseNewCustomFields=Use New",
 "button:CloseHelp=Close Help",
 "button:SearchFinalBulletinsOnly=Only search most recent version of bulletins",
+"button:DeleteSelectedGridRow=Delete Selected Row",
 
 "menu:file=File",
 "menu:CreateNewBulletin=Create New Bulletin",
@@ -712,6 +714,7 @@ public class EnglishStrings
 "field:notifyRetrieveInProgresscause=A retrieve is already in progress. You cannot start another retrieve until that one has finished.",
 "field:notifyRetrieveFileDataVersionErrorcause=A retrieve was in progress when you upgraded to a newer version of Martus. That retrieve will be canceled, so you should re-select any bulletins that had not yet been retrieved.",
 "field:notifyRetrieveFileErrorcause=An error has prevented Martus from continuing the retrieve that was in progress. You should re-select any bulletins that had not yet been retrieved.",
+"field:notifyNoGridRowSelectedcause=No row selected.",
 
 "field:IncompatibleMtfVersion=The version of this translation is not compatible with this version of Martus.  It is recommended that you do not continue to use this translation version and go to (http://www.martus.org/downloads) for the appropriate version.",
 "field:IncompatibleMtfVersionTranslation=#MtfLanguage# Translation Version: #MtfVersionNumber#",
