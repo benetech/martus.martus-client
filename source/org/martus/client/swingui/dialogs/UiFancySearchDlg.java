@@ -71,7 +71,6 @@ public class UiFancySearchDlg extends UiSearchDlg
 		UiDialogLauncher dlgLauncher = new UiDialogLauncher(mainWindow.getCurrentActiveFrame(), localization);
 		grid = FancySearchGridEditor.create(mainWindow.getStore(), dlgLauncher);
 		grid.setText(getPreviousSearch());
-		grid.hideInsertRowButton();
 		clearGridIfAnyProblems();
 
 		JPanel instructionPanel = new JPanel();
