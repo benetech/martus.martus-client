@@ -72,7 +72,9 @@ abstract public class UiGrid extends UiField
 		buttonBox.setBorder(new EmptyBorder(10,0,0,0));
 		UiButton deleteRow = new UiButton(dlgLauncher.GetLocalization().getButtonLabel("DeleteSelectedGridRow"));
 		deleteRow.addActionListener(new DeleteRowListener(dlgLauncher));
-		Utilities.addComponentsRespectingOrientation(buttonBox, new Component[] {deleteRow, Box.createHorizontalGlue()});
+		insertRow = new UiButton(dlgLauncher.GetLocalization().getButtonLabel("InsertEmptyGridRow"));
+		insertRow.addActionListener(new InsertRowListener(dlgLauncher));
+		Utilities.addComponentsRespectingOrientation(buttonBox, new Component[] {deleteRow, insertRow, Box.createHorizontalGlue()});
 
 		widget.add(buttonBox, BorderLayout.SOUTH);
 		
@@ -105,13 +107,23 @@ abstract public class UiGrid extends UiField
 		return (table.getSelectedRow() != NO_ROW_SELECTED);
 	}
 	
+	public void insertRow() throws ArrayIndexOutOfBoundsException
+	{
+		stopCellEditing();
+		model.insertEmptyRow(table.getSelectedRow());
+	}
+
 	public void deleteSelectedRow() throws ArrayIndexOutOfBoundsException
 	{
-		
+		stopCellEditing();
+		model.deleteSelectedRow(table.getSelectedRow());
+	}
+
+	private void stopCellEditing() 
+	{
 		TableCellEditor cellEditor = table.getCellEditor();
 		if(cellEditor != null)
 			cellEditor.stopCellEditing();
-		model.deleteSelectedRow(table.getSelectedRow());
 	}
 	
 	public GridTableModel getGridTableModel()
@@ -129,6 +141,11 @@ abstract public class UiGrid extends UiField
 		return table;
 	}
 	
+	public void hideInsertRowButton()
+	{
+		insertRow.setVisible(false);
+	}
+	
 	private class DeleteRowListener implements ActionListener
 	{
 		DeleteRowListener(UiDialogLauncher dlgLauncherToUse)
@@ -138,13 +155,14 @@ abstract public class UiGrid extends UiField
 
 		public void actionPerformed(ActionEvent e)
 		{
+			if(!isRowSelected())
+			{
+				dlgLauncher.ShowNotifyDialog("NoGridRowSelected");
+				return;
+			}
+
 			try 
 			{
-				if(!isRowSelected())
-				{
-					dlgLauncher.ShowNotifyDialog("NoGridRowSelected");
-					return;
-				}
 				deleteSelectedRow();
 			} 
 			catch (ArrayIndexOutOfBoundsException e1) 
@@ -155,11 +173,38 @@ abstract public class UiGrid extends UiField
 		UiDialogLauncher dlgLauncher;
 	}
 	
+	private class InsertRowListener implements ActionListener
+	{
+		InsertRowListener(UiDialogLauncher dlgLauncherToUse)
+		{
+			dlgLauncher = dlgLauncherToUse;
+		}
+
+		public void actionPerformed(ActionEvent e)
+		{
+			if(!isRowSelected())
+			{
+				dlgLauncher.ShowNotifyDialog("NoGridRowSelected");
+				return;
+			}
+
+			try 
+			{
+				insertRow();
+			} 
+			catch (ArrayIndexOutOfBoundsException e1) 
+			{
+				e1.printStackTrace();
+			}
+		}		
+		UiDialogLauncher dlgLauncher;
+	}
 	
 	private static final int NO_ROW_SELECTED = -1;
 	private static final int ROW_HEIGHT_PADDING = 10;
 	JPanel widget;
 	GridTable table;
 	GridTableModel model;
+	UiButton insertRow;
 }
 

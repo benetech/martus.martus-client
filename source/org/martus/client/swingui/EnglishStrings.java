@@ -342,6 +342,7 @@ public class EnglishStrings
 "button:CloseHelp=Close Help",
 "button:SearchFinalBulletinsOnly=Only search most recent version of bulletins",
 "button:DeleteSelectedGridRow=Delete Selected Row",
+"button:InsertEmptyGridRow=Insert Row",
 
 "menu:file=File",
 "menu:CreateNewBulletin=Create New Bulletin",

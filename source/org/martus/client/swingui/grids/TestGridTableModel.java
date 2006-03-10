@@ -120,6 +120,29 @@ public class TestGridTableModel extends TestCaseEnhanced
 		assertEquals("Deleting last row should replace it with an empty row", 1, model.getRowCount());
 		assertEquals(3,listener.insertCalls());
 		
+		assertEquals(1,model.getRowCount());
+		model.insertEmptyRow(0);
+		assertEquals(2,model.getRowCount());
+		assertEquals(4,listener.insertCalls());
+		try 
+		{
+			model.insertEmptyRow(-1);
+			fail("should have thrown for invalid row to insert at -1");
+		} 
+		catch (Exception expected) 
+		{
+		}
+
+		try 
+		{
+			model.insertEmptyRow(50);
+			fail("should have thrown for invalid row to insert");
+		} 
+		catch (Exception expected) 
+		{
+		}
+		
+		
 	}
 	
 
