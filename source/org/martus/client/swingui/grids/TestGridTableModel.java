@@ -84,9 +84,9 @@ public class TestGridTableModel extends TestCaseEnhanced
 		assertEquals(choice2, dropDownFieldSpec.getValue(2));
 		
 		assertEquals(0, model.getRowCount());
-		assertFalse(listener.wasInsertCalled());
+		assertEquals(0, listener.insertCalls());
 		model.addEmptyRow();
-		assertTrue(listener.wasInsertCalled());
+		assertEquals(1, listener.insertCalls());
 		assertEquals(1, model.getRowCount());
 		String value1 = "row 1";
 		model.setValueAt(value1, 0,1);
@@ -94,6 +94,7 @@ public class TestGridTableModel extends TestCaseEnhanced
 		int rowOne = 1;
 		assertEquals(Integer.toString(rowOne), model.getValueAt(0,0));
 		model.addEmptyRow();
+		assertEquals(2, listener.insertCalls());
 		int rowTwo = 2;
 		assertEquals(Integer.toString(rowTwo), model.getValueAt(1,0));
 		String value2 = "row 2";
@@ -106,15 +107,18 @@ public class TestGridTableModel extends TestCaseEnhanced
 		GridTableModel model2 = new GridTableModel(spec2);
 		assertEquals(ColumnZeroHeader, model2.getColumnName(0));
 		
-		assertFalse(listener.wasDeletedCalled());
+		assertEquals(0, listener.deletedCalls());
 		assertEquals(2, model.getRowCount());
 		model.deleteSelectedRow(0);
-		assertTrue(listener.wasDeletedCalled());
+		assertEquals(1,listener.deletedCalls());
 		assertEquals(1, model.getRowCount());
 		assertEquals(value2, model.getValueAt(0,1));
 		
+		assertEquals(2,listener.insertCalls());
 		model.deleteSelectedRow(0);
+		assertEquals(2,listener.deletedCalls());
 		assertEquals("Deleting last row should replace it with an empty row", 1, model.getRowCount());
+		assertEquals(3,listener.insertCalls());
 		
 	}
 	
@@ -125,21 +129,21 @@ class TestTableModelListener implements TableModelListener
 	public void tableChanged(TableModelEvent e) 
 	{
 		if(e.getType() == TableModelEvent.DELETE)
-			deletedCalled = true;
+			++deletedCalls;
 		if(e.getType() == TableModelEvent.INSERT)
-			insertCalled = true;
+			++insertCalls;
 	}
 	
-	public boolean wasDeletedCalled()
+	public int deletedCalls()
 	{
-		return deletedCalled;
+		return deletedCalls;
 	}
-	public boolean wasInsertCalled()
+	public int insertCalls()
 	{
-		return insertCalled;
+		return insertCalls;
 	}
-	boolean deletedCalled = false;
-	boolean insertCalled = false;
+	int deletedCalls = 0;
+	int insertCalls = 0;
 }
 
 }
