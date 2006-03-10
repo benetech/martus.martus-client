@@ -65,6 +65,14 @@ public class GridTableModel extends AbstractTableModel
 		fireTableRowsInserted(newRowIndex, newRowIndex);
 	}
 	
+	public void deleteSelectedRow(int selectedRow) throws ArrayIndexOutOfBoundsException
+	{
+		gridData.deleteRow(selectedRow);
+		fireTableRowsDeleted(selectedRow,selectedRow);
+		if(getRowCount() == 0)
+			addEmptyRow();
+	}
+	
 	public int getRowCount()
 	{
 		if(gridData == null)

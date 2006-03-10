@@ -76,6 +76,16 @@ abstract public class UiGrid extends UiField
 			e.printStackTrace();
 		}
 	}
+
+	public boolean isRowSelected()
+	{
+		return (table.getSelectedRow() != NO_ROW_SELECTED);
+	}
+	
+	public void deleteSelectedRow() throws ArrayIndexOutOfBoundsException
+	{
+		model.deleteSelectedRow(table.getSelectedRow());
+	}
 	
 	public GridTableModel getGridTableModel()
 	{
@@ -92,8 +102,8 @@ abstract public class UiGrid extends UiField
 		return table;
 	}
 	
+	private static final int NO_ROW_SELECTED = -1;
 	private static final int ROW_HEIGHT_PADDING = 10;
-
 	UiScrollPane widget;
 	GridTable table;
 	GridTableModel model;

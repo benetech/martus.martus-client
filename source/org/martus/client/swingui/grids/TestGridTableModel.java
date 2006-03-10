@@ -27,6 +27,9 @@ package org.martus.client.swingui.grids;
 
 import java.util.Vector;
 
+import javax.swing.event.TableModelEvent;
+import javax.swing.event.TableModelListener;
+
 import org.martus.common.fieldspec.CustomDropDownFieldSpec;
 import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.fieldspec.FieldTypeDropdown;
@@ -61,6 +64,8 @@ public class TestGridTableModel extends TestCaseEnhanced
 		gridSpec.addColumn(column1);
 		gridSpec.addColumn(column2);
 		GridTableModel model = new GridTableModel(gridSpec);
+		TestTableModelListener listener = new TestTableModelListener();
+		model.addTableModelListener(listener);
 		int columnsIncludingRowCount = 3;
 		assertEquals(columnsIncludingRowCount, model.getColumnCount());
 		assertEquals(" ", model.getColumnName(0));
@@ -79,22 +84,62 @@ public class TestGridTableModel extends TestCaseEnhanced
 		assertEquals(choice2, dropDownFieldSpec.getValue(2));
 		
 		assertEquals(0, model.getRowCount());
+		assertFalse(listener.wasInsertCalled());
 		model.addEmptyRow();
+		assertTrue(listener.wasInsertCalled());
 		assertEquals(1, model.getRowCount());
-		String value = "Yeah";
-		model.setValueAt(value, 0,1);
-		assertEquals(value, model.getValueAt(0,1));
+		String value1 = "row 1";
+		model.setValueAt(value1, 0,1);
+		assertEquals(value1, model.getValueAt(0,1));
 		int rowOne = 1;
 		assertEquals(Integer.toString(rowOne), model.getValueAt(0,0));
 		model.addEmptyRow();
 		int rowTwo = 2;
 		assertEquals(Integer.toString(rowTwo), model.getValueAt(1,0));
+		String value2 = "row 2";
+		model.setValueAt(value2, 1,1);
+		assertEquals(value2, model.getValueAt(1,1));
 
 		GridFieldSpec spec2 = new GridFieldSpec();
 		String ColumnZeroHeader = "column 0";
 		spec2.setColumnZeroLabel(ColumnZeroHeader);
 		GridTableModel model2 = new GridTableModel(spec2);
 		assertEquals(ColumnZeroHeader, model2.getColumnName(0));
+		
+		assertFalse(listener.wasDeletedCalled());
+		assertEquals(2, model.getRowCount());
+		model.deleteSelectedRow(0);
+		assertTrue(listener.wasDeletedCalled());
+		assertEquals(1, model.getRowCount());
+		assertEquals(value2, model.getValueAt(0,1));
+		
+		model.deleteSelectedRow(0);
+		assertEquals("Deleting last row should replace it with an empty row", 1, model.getRowCount());
+		
 	}
+	
+
+class TestTableModelListener implements TableModelListener
+{
+
+	public void tableChanged(TableModelEvent e) 
+	{
+		if(e.getType() == TableModelEvent.DELETE)
+			deletedCalled = true;
+		if(e.getType() == TableModelEvent.INSERT)
+			insertCalled = true;
+	}
+	
+	public boolean wasDeletedCalled()
+	{
+		return deletedCalled;
+	}
+	public boolean wasInsertCalled()
+	{
+		return insertCalled;
+	}
+	boolean deletedCalled = false;
+	boolean insertCalled = false;
+}
 
 }
