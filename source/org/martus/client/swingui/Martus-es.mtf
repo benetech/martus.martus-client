@@ -1,9 +1,10 @@
 ﻿# Martus Client Translation File
 # Language code:  es
 # Language name:  Spanish
-# Exported date:  Thu Nov 03 15:23:52 PST 2005
-# Client version: 2.8.1
-# Client build:   20051103.1685
+# Translated by:  
+# Exported date:  Thu Mar 09 20:06:37 PST 2006
+# Client version: pre-2.9 internal
+# Client build:   #{BUILDDATE}
 #
 # This file MUST be saved in UTF-8 format!
 # Lines beginning with # are comments and are ignored by Martus
@@ -150,6 +151,9 @@
 
 #______________________________________________=Retrieve latest bulletin version only
 -3449-button:RetrieveLatestBulletinRevisionOnly=Bajar la última revisión del boletín
+
+#____________________________________=Only search most recent version of bulletins
+-852f-button:SearchFinalBulletinsOnly=Solo buscar la revisión más reciente de los boletines
 
 #__________________________________=Accept
 -bb54-button:ServerComplianceAccept=Aceptar
@@ -394,6 +398,18 @@
 #__________________________=Sent
 -35f4-field:BulletinWasSent=Enviado
 
+#_________________________=Calendar type
+-87e7-field:CalendarSystem=Tipo de calendario
+
+#__________________________________=Default (2005-05-31)
+-784a-field:CalendarSystemGregorian=Predeterminado (2005-05-31)
+
+#________________________________=Persian (1384-03-10)
+-2f3e-field:CalendarSystemPersian=Persa (1384-03-10)
+
+#_____________________________=Thai Solar (2548-05-31)
+-2be4-field:CalendarSystemThai=Thailandés Solar (2548-05-31)
+
 #_____________________________________=Download Progress
 -8b0e-field:ChunkProgressStatusMessage=Descarga en progreso
 
@@ -436,8 +452,29 @@
 #_____________________________________=Customization Template Files
 -9210-field:CustomizationTemplateFiles=Archivos de pantillas personalizadas
 
+#________________________=Date delimiter
+-36d4-field:DateDelimiter=Separador de fechas
+
+#____________________________=Dash (00-00-00)
+-997c-field:DateDelimiterDash=Renglón (00-00-00)
+
+#___________________________=Dot (00.00.00)
+-66ea-field:DateDelimiterDot=Punto (00.00.00)
+
+#_____________________________=Slash (00/00/00)
+-404d-field:DateDelimiterSlash=Raya Vertical (00/00/00)
+
 #____________________=Exact Date
 -8a81-field:DateExact=Fecha exacta
+
+#______________________=Day
+-987b-field:DatePartDay=Día
+
+#________________________=Month
+-082b-field:DatePartMonth=Més
+
+#_______________________=Year
+-879e-field:DatePartYear=Año
 
 #____________________=Date Range
 -6bb4-field:DateRange=Rango de fecha
@@ -488,7 +525,7 @@
 -64b8-field:ErrorCustomFieldHeader4=TÍTULO
 
 #____________________________=There is an error in the custom field definitions. Each problem is identified with the following codes:\n   100 - Required standard field is missing\n   101 - Custom field does not have a correct tag.\n   102 - A previous Tag already exists with this name.\n   103 - Custom field does not have a label.\n   104 - Unrecognized Field Type.\n   105 - A label was found in a standard field.\n   106 - XML Parse Error.\n   107 - Tag contains illegal characters.\n   108 - Duplicate entry in Dropdown field.\n   109 - No Choices in Dropdown field.\n   200 - All fields empty.\n   201 - Unrecognized Headquarters created this template.\n   202 - Security validation error.\n   203 - File Error.
--c1b6-field:ErrorCustomFields=Se encontró un error en la definición de los campos personalizados. Cada problema es identificado con los siguientes códigos:\n   100 - Falta un campo estándar requerido\n   101 - Un campo personalizado tiene un nombre de identificación incorrecto.\n   102 - Hay un nombre de identificación duplicado.\n   103 - Campo personalizado no tiene título.\n   104 - Tipo de campo desconocido.\n   105 - Se encontró un título en un campo estándar.\n   106 - XML Error al leer documento.\n   107 - Nombre de identificación contiene caracteres no válidos.\n   108 - Opción duplicada en lista desplegable\n   109 - No hay opciones en la lista desplegable.\n   200 - Todos los campos vacíos.\n   201 - Una cuenta de oficina central desconocida creó esta pantilla.\n   202 - Error de validación de seguridad.\n   203 - Error de archivo.
+-c1b6-field:ErrorCustomFields=Se encontró un error en la definición de los campos personalizados. Cada problema es identificado con los siguientes códigos:\n   100 - Falta un campo estándar requerido\n   101 - Un campo personalizado tiene un nombre de identificación incorrecto.\n   102 - Hay un nombre de identificación duplicado.\n   103 - Campo personalizado no tiene título.\n   104 - Tipo de campo desconocido.\n   105 - Se encontró un título en un campo estándar.\n   106 - XML Error al leer documento.\n   107 - Nombre de identificación contiene caracteres no válidos.\n   108 - Opción duplicada en lista desplegable\n   109 - No hay opciones en la lista desplegable.\n   200 - Todos los campos vacíos.\n   201 - Una cuenta de oficina central desconocida creó esta pantilla.\n   202 - Error de validación de seguridad.\n   203 - Error de archivo.\n   204 - Falta campos en el XML importado.
 
 #_________________________________________=A previous backup file exists.  You must save each file on its own removable media disk.
 -db93-field:ErrorPreviousBackupShareExists=Una pieza de un archivo de seguridad ya existe en este medio. Cada pieza debe ser guardada en su propio medio removible.
@@ -565,8 +602,8 @@
 #________________________________=One or more accounts already exist on this computer. To create an additional account with a new username and passphrase, click OK.
 -02f2-field:HowToCreateNewAccount=Ya existe una o más cuentas en este ordenador. Oprima Aceptar para crear una cuenta adicional con un nuevo nombre de usuario y contraseña.
 
-#_________________________________=The version of this translation is not compatible with this version of Martus.  It is recommend that you do not continue to use this translation version and go to (http://www.martus.org/downloads) for the appropriate version.
--2c0e-field:IncompatibleMtfVersion=La versión de la traducción no es compatible con esta versión del programa de Martus.  Le recomendamo que no use esta traducción y que visite el sitio web (http://www.martus.org/downloads) para descargar una versión actualizada.
+#_________________________________=The version of this translation is not compatible with this version of Martus.  It is recommended that you do not continue to use this translation version and go to (http://www.martus.org/downloads) for the appropriate version.
+-2c0e-field:IncompatibleMtfVersion=La versión de la traducción no es compatible con esta versión del programa de Martus.  Le recomendamos que no use esta traducción y que visite el sitio web (http://www.martus.org/downloads) para descargar una versión actualizada.
 
 #________________________________________=Martus Software Version: #ProgramVersionNumber#
 -fcd7-field:IncompatibleMtfVersionProgram=Versión del programa Martus: #ProgramVersionNumber#
@@ -751,8 +788,14 @@
 #___________________________________=Human Rights Bulletin System
 -fe5b-field:SplashProductDescription=Sistema de boletines para derechos humanos
 
+#___________________________=Connecting to server
+-2a77-field:StatusConnecting=Conectándose al servidor
+
 #______________________=Ready
 -20c7-field:StatusReady=Listo
+
+#___________________________=Retrieving...
+-5316-field:StatusRetrieving=Bajando...
 
 #__________________________=Details
 -dc3d-field:TemplateDetails=Detalles
@@ -867,6 +910,12 @@
 
 #____________________________________________=Any changes you have made to this bulletin will be discarded.
 -3819-field:confirmCancelModifyBulletineffect=Los cambios que haya hecho a este boletín serán desechados.
+
+#_____________________________________=Bulletins are currently being retrieved from the server.
+-126a-field:confirmCancelRetrievecause=Los boletines se están bajando del servidor.
+
+#______________________________________=This operation will cancel the current retrieval, so some of the requested bulletins may not be retrieved.
+-babb-field:confirmCancelRetrieveeffect=<This operation will cancel the current retrieval, so some of the requested bulletins may not be retrieved.>
 
 #________________________________________=Do you wish to cancel this backup?
 -7b46-field:confirmCancelShareBackupcause=¿Desea cancelar la creación de copias de seguridad?
@@ -1225,6 +1274,9 @@
 #___________________=Location
 -d219-field:location=Lugar
 
+#___________________=Date format sequence
+-eed8-field:mdyOrder=Sequencia de formato de fecha
+
 #_____________________________________________=The attachment could not be located.
 -65b1-field:messageErrorAttachmentMissingcause=No se pudo ubicar el archivo adjunto.
 
@@ -1393,8 +1445,8 @@
 #____________________________________________=You may only preview one bulletin at a time.  Please only select one bulletin to preview.
 -fbee-field:notifyPreviewOneBulletinOnlycause=Sólo puede ver un boletín a la vez. Elija sólo un boletín que deseé ver en la vista previa.
 
-#_________________________________________=Finished
--355b-field:notifyPrintToDiskCompletecause=Completado
+#_________________________________________=Successfully saved Report
+-45d7-field:notifyPrintToDiskCompletecause=El reporte ha sido guardado
 
 #________________________________________=To print one or more bulletins, select them first, and then perform the print operation.
 -3298-field:notifyPrintZeroBulletinscause=Para imprimir uno o más boletines, seleccionelos y luego inicie la impresion.
@@ -1428,6 +1480,18 @@
 
 #______________________________________=Bulletin download cancelled.  Some bulletins may have already been downloaded.
 -87b3-field:notifyRetrieveCanceledcause=Se canceló la operación. Puede que algunos boletines ya hayan sido bajados.
+
+#___________________________________=An error has occurred while retrieving a bulletin.
+-6201-field:notifyRetrieveErrorcause=Ocurrió un error al bajar un boletín.
+
+#__________________________________________________=A retrieve was in progress when you upgraded to a newer version of Martus. That retrieve will be canceled, so you should re-select any bulletins that had not yet been retrieved.
+-28ae-field:notifyRetrieveFileDataVersionErrorcause=Un boletín se estaba bajando cuando actualizó su copia de Martus a una versión más reciente. Se canceló la bajada de boletines, vuelva a selecionar los boletines que desee bajar.
+
+#_______________________________________=An error has prevented Martus from continuing the retrieve that was in progress. You should re-select any bulletins that had not yet been retrieved.
+-8149-field:notifyRetrieveFileErrorcause=Un error previno que Martus continue bajando boletines. Vuelva a seleccionar los boletines que no se hayan bajado.
+
+#________________________________________=A retrieve is already in progress. You cannot start another retrieve until that one has finished.
+-3e55-field:notifyRetrieveInProgresscause=Los boletines se están bajando. No puede volver a iniciar la operación hasta que la que está en progreso finalize.
 
 #________________________________________________=Errors occurred while retrieving bulletin summaries.  Some of the bulletins on the server will not be shown.
 -6f6f-field:notifyRetrievedOnlySomeSummariescause=Ocurrieron errores al bajar los resúmenes de los boletines. Algunos de los boletines en el servidor no podrán ser mostrados.
@@ -1534,6 +1598,12 @@
 #________________=Phone Number
 -ab25-field:phone=Número telefónico
 
+#___________________________________=Automatically adjust legacy Persian dates
+-4d0e-field:preferencesAdjustPersian=Ajustar automáticamente fechas Persas antiguas
+
+#________________________________=Automatically adjust legacy Thai dates
+-4d22-field:preferencesAdjustThai=Ajustar automáticamente  fechas tailandeses antiguas
+
 #________________________________=Prevent creating public bulletins
 -7c9e-field:preferencesAllPrivate=No permitir crear boletines públicos
 
@@ -1571,7 +1641,7 @@
 -768e-field:title=Título
 
 #_____________________________=Spanish 2.8.1 
--a3db-field:translationVersion=Español 2.8.1
+-a3db-field:translationVersion=Español pre-2.9 internal
 
 #___________________=Username
 -84c2-field:username=Nombre de usuario
@@ -1716,6 +1786,9 @@
 
 #________________=Korean
 -dec6-language:ko=Koreano
+
+#________________=Kurdish
+-a06e-language:ku=Kurdo
 
 #________________=Kirghiz
 -1848-language:ky=Kirghiz
@@ -1947,6 +2020,78 @@
 
 #_______________=Tools
 -4fa8-menu:tools=Herramientas
+
+#___________________=Farvardin
+-fef9-month:Persian1=Farvardin
+
+#____________________=Dey
+-494f-month:Persian10=Dey
+
+#____________________=Bahman
+-6c49-month:Persian11=Bahman
+
+#____________________=Esfand
+-7179-month:Persian12=Esfand
+
+#___________________=Ordibehesht
+-4241-month:Persian2=Ordibehesht
+
+#___________________=Khordad
+-02bc-month:Persian3=Khordad
+
+#___________________=Tir
+-5b96-month:Persian4=Tir
+
+#___________________=Mordad
+-e86f-month:Persian5=Mordad
+
+#___________________=Shahrivar
+-4a9e-month:Persian6=Shahrivar
+
+#___________________=Mehr
+-dfc8-month:Persian7=Mehr
+
+#___________________=Aban
+-1d23-month:Persian8=Aban
+
+#___________________=Azar
+-1e15-month:Persian9=Azar
+
+#________________=Jan
+-efed-month:Thai1=Ene
+
+#_________________=Oct
+-5132-month:Thai10=Oct
+
+#_________________=Nov
+-bb9b-month:Thai11=Nov
+
+#_________________=Dec
+-997f-month:Thai12=Dic
+
+#________________=Feb
+-dc84-month:Thai2=Feb
+
+#________________=Mar
+-c4ba-month:Thai3=Mar
+
+#________________=Apr
+-befd-month:Thai4=Abr
+
+#________________=May
+-c94f-month:Thai5=May
+
+#________________=Jun
+-6d90-month:Thai6=Jun
+
+#________________=Jul
+-b737-month:Thai7=Jul
+
+#________________=Aug
+-7562-month:Thai8=Ago
+
+#________________=Sep
+-fdd2-month:Thai9=Sep
 
 #______________=Apr
 -befd-month:apr=Abr
@@ -2199,6 +2344,9 @@
 
 #_________________________________________=Cancel Modify Bulletin
 -276b-wintitle:confirmCancelModifyBulletin=Cancelar modificación
+
+#___________________________________=Cancel Retrieve
+-d984-wintitle:confirmCancelRetrieve=Cancelar bajada
 
 #______________________________________=Cancel Backup
 -bba5-wintitle:confirmCancelShareBackup=Cancelar copia de seguridad
@@ -2565,6 +2713,18 @@
 
 #____________________________________=Bulletin Download Canceled
 -f8d3-wintitle:notifyRetrieveCanceled=Operación cancelada
+
+#_________________________________=Retrieve Error
+-8ed0-wintitle:notifyRetrieveError=Error al bajar
+
+#________________________________________________=Warning
+-e9c4-wintitle:notifyRetrieveFileDataVersionError=<Warning>
+
+#_____________________________________=Error
+-7f2f-wintitle:notifyRetrieveFileError=<Error>
+
+#______________________________________=Retrieve In Progress
+-6983-wintitle:notifyRetrieveInProgress=<Retrieve In Progress>
 
 #______________________________________________=Error During Retrieve
 -f2d7-wintitle:notifyRetrievedOnlySomeSummaries=Error al bajar boletines
