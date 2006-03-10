@@ -25,15 +25,26 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.fields;
 
+import java.awt.BorderLayout;
+import java.awt.Component;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.Box;
 import javax.swing.JComponent;
+import javax.swing.JPanel;
 import javax.swing.ListSelectionModel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.table.TableCellEditor;
 
 import org.martus.client.swingui.dialogs.UiDialogLauncher;
 import org.martus.client.swingui.grids.GridTable;
 import org.martus.client.swingui.grids.GridTableModel;
 import org.martus.common.GridData;
 import org.martus.common.fieldspec.GridFieldSpec;
+import org.martus.swing.UiButton;
 import org.martus.swing.UiScrollPane;
+import org.martus.swing.Utilities;
 
 
 abstract public class UiGrid extends UiField
@@ -52,7 +63,19 @@ abstract public class UiGrid extends UiField
 		table.setShowGrid(true);
 		table.changeSelection(0, 1, false, false);
 		table.setRowHeight(table.getRowHeight() + ROW_HEIGHT_PADDING);
-		widget = new UiScrollPane(table);
+		UiScrollPane tableScroller = new UiScrollPane(table);
+		widget = new JPanel();
+		widget.setLayout(new BorderLayout());
+		widget.add(tableScroller, BorderLayout.CENTER);
+
+		Box buttonBox = Box.createHorizontalBox();
+		buttonBox.setBorder(new EmptyBorder(10,0,0,0));
+		UiButton deleteRow = new UiButton(dlgLauncher.GetLocalization().getButtonLabel("DeleteSelectedGridRow"));
+		deleteRow.addActionListener(new DeleteRowListener(dlgLauncher));
+		Utilities.addComponentsRespectingOrientation(buttonBox, new Component[] {deleteRow, Box.createHorizontalGlue()});
+
+		widget.add(buttonBox, BorderLayout.SOUTH);
+		
 	}	
 	
 	public JComponent getComponent()
@@ -84,6 +107,10 @@ abstract public class UiGrid extends UiField
 	
 	public void deleteSelectedRow() throws ArrayIndexOutOfBoundsException
 	{
+		
+		TableCellEditor cellEditor = table.getCellEditor();
+		if(cellEditor != null)
+			cellEditor.stopCellEditing();
 		model.deleteSelectedRow(table.getSelectedRow());
 	}
 	
@@ -102,9 +129,36 @@ abstract public class UiGrid extends UiField
 		return table;
 	}
 	
+	private class DeleteRowListener implements ActionListener
+	{
+		DeleteRowListener(UiDialogLauncher dlgLauncherToUse)
+		{
+			dlgLauncher = dlgLauncherToUse;
+		}
+
+		public void actionPerformed(ActionEvent e)
+		{
+			try 
+			{
+				if(!isRowSelected())
+				{
+					dlgLauncher.ShowNotifyDialog("NoGridRowSelected");
+					return;
+				}
+				deleteSelectedRow();
+			} 
+			catch (ArrayIndexOutOfBoundsException e1) 
+			{
+				e1.printStackTrace();
+			}
+		}		
+		UiDialogLauncher dlgLauncher;
+	}
+	
+	
 	private static final int NO_ROW_SELECTED = -1;
 	private static final int ROW_HEIGHT_PADDING = 10;
-	UiScrollPane widget;
+	JPanel widget;
 	GridTable table;
 	GridTableModel model;
 }

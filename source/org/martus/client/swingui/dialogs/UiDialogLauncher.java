@@ -46,6 +46,11 @@ public class UiDialogLauncher
 		return UiUtilities.confirmDlg(localization, frame, baseTag);
 	}
 
+	public void ShowNotifyDialog(String baseTag)
+	{
+		UiUtilities.notifyDlg(localization, frame, baseTag);
+	}
+
 	public UiLocalization GetLocalization()
 	{
 		return localization;

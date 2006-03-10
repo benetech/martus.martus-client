@@ -68,8 +68,6 @@ public class UiFancySearchDlg extends UiSearchDlg
 		
 		UiButton cancel = new UiButton(localization.getButtonLabel("cancel"));
 		cancel.addActionListener(this);
-		UiButton deleteRow = new UiButton(localization.getButtonLabel("DeleteSelectedGridRow"));
-		deleteRow.addActionListener(new DeleteRowListener(mainWindow));
 		UiDialogLauncher dlgLauncher = new UiDialogLauncher(mainWindow.getCurrentActiveFrame(), localization);
 		grid = FancySearchGridEditor.create(mainWindow.getStore(), dlgLauncher);
 		grid.setText(getPreviousSearch());
@@ -95,7 +93,7 @@ public class UiFancySearchDlg extends UiSearchDlg
 
 		Box buttonBox = Box.createHorizontalBox();
 		buttonBox.setBorder(new EmptyBorder(10,0,0,0));
-		Utilities.addComponentsRespectingOrientation(buttonBox, new Component[] {search, Box.createHorizontalGlue(),deleteRow, help, cancel });
+		Utilities.addComponentsRespectingOrientation(buttonBox, new Component[] {search, Box.createHorizontalGlue(), help, cancel });
 		
 		searchFinalBulletins = new UiCheckBox(localization.getButtonLabel("SearchFinalBulletinsOnly"));
 		searchFinalBulletins.setSelected(false);
@@ -148,32 +146,6 @@ public class UiFancySearchDlg extends UiSearchDlg
 			grid.setText("");
 		}
 		
-	}
-	
-	private class DeleteRowListener implements ActionListener
-	{
-		DeleteRowListener(UiMainWindow mainWindowToUse)
-		{
-			mainWindow = mainWindowToUse;
-		}
-
-		public void actionPerformed(ActionEvent e)
-		{
-			try 
-			{
-				if(!grid.isRowSelected())
-				{
-					mainWindow.notifyDlg("NoGridRowSelected");
-					return;
-				}
-				grid.deleteSelectedRow();
-			} 
-			catch (ArrayIndexOutOfBoundsException e1) 
-			{
-				e1.printStackTrace();
-			}
-		}		
-		UiMainWindow mainWindow;
 	}
 	
 	private class HelpListener implements ActionListener
