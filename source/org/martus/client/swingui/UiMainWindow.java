@@ -1203,12 +1203,15 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		// TODO: Allow either the old UiSimpleSearchDlg or the new UiFancySearchDlg
 		UiFancySearchDlg searchDlg = new UiFancySearchDlg(this);
 		//UiSimpleSearchDlg searchDlg = new UiSimpleSearchDlg(this);
+		searchDlg.setSearchFinalBulletinsOnly(uiState.searchFinalBulletinsOnly());
 		searchDlg.setVisible(true);
 		if(!searchDlg.getResults())
 			return;
 		setWaitingCursor();
 
-		app.search(searchDlg.getSearchTree(), searchDlg.searchFinalBulletinsOnly());
+		boolean searchFinalBulletinsOnly = searchDlg.searchFinalBulletinsOnly();
+		uiState.setSearchFinalBulletinsOnly(searchFinalBulletinsOnly);
+		app.search(searchDlg.getSearchTree(), searchFinalBulletinsOnly);
 		ClientBulletinStore store = getStore();
 		BulletinFolder searchFolder = store.findFolder(store.getSearchFolderName());
 		folders.folderTreeContentsHaveChanged();

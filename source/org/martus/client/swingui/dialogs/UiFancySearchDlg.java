@@ -248,6 +248,11 @@ public class UiFancySearchDlg extends UiSearchDlg
 		return searchFinalBulletins.isSelected();
 	}
 	
+	public void setSearchFinalBulletinsOnly(boolean searchFinalOnly)
+	{
+		searchFinalBulletins.setSelected(searchFinalOnly);
+	}
+	
 
 	FancySearchGridEditor grid;
 	UiCheckBox searchFinalBulletins;
