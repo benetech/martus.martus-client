@@ -70,9 +70,9 @@ abstract public class UiGrid extends UiField
 
 		Box buttonBox = Box.createHorizontalBox();
 		buttonBox.setBorder(new EmptyBorder(10,0,0,0));
-		UiButton deleteRow = new UiButton(dlgLauncher.GetLocalization().getButtonLabel("DeleteSelectedGridRow"));
+		deleteRow = new UiButton(dlgLauncher.GetLocalization().getButtonLabel("DeleteSelectedGridRow"));
 		deleteRow.addActionListener(new DeleteRowListener(dlgLauncher));
-		UiButton insertRow = new UiButton(dlgLauncher.GetLocalization().getButtonLabel("InsertEmptyGridRow"));
+		insertRow = new UiButton(dlgLauncher.GetLocalization().getButtonLabel("InsertEmptyGridRow"));
 		insertRow.addActionListener(new InsertRowListener(dlgLauncher));
 		Utilities.addComponentsRespectingOrientation(buttonBox, new Component[] {deleteRow, insertRow, Box.createHorizontalGlue()});
 
@@ -141,6 +141,16 @@ abstract public class UiGrid extends UiField
 		return table;
 	}
 	
+	public void hideDeleteRowButton()
+	{
+		deleteRow.setVisible(false);
+	}
+	
+	public void hideInsertRowButton()
+	{
+		insertRow.setVisible(false);
+	}
+
 	private class DeleteRowListener implements ActionListener
 	{
 		DeleteRowListener(UiDialogLauncher dlgLauncherToUse)
@@ -200,5 +210,7 @@ abstract public class UiGrid extends UiField
 	JPanel widget;
 	GridTable table;
 	GridTableModel model;
+	UiButton deleteRow;
+	UiButton insertRow;
 }
 

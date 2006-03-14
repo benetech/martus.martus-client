@@ -39,6 +39,8 @@ public class UiGridViewer extends UiGrid
 		table.setMaxGridWidth(maxGridCharacters);
 		table.resizeTable();
 		table.setEnabled(false);
+		hideDeleteRowButton();
+		hideInsertRowButton();
 	}
 
 	public void setText(String newText)
