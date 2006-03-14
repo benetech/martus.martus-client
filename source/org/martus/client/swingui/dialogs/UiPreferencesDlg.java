@@ -28,6 +28,7 @@ package org.martus.client.swingui.dialogs;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Vector;
 
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -124,7 +125,7 @@ public class UiPreferencesDlg extends JDialog implements ActionListener
 	private String buildMdyLabel(String mdyOrder)
 	{
 		UiLocalization localization = owner.getLocalization();
-		String result = "";
+		Vector dateParts = new Vector(); 
 		for(int i = 0; i < mdyOrder.length(); ++i)
 		{
 			String tag = "Unknown";
@@ -135,11 +136,14 @@ public class UiPreferencesDlg extends JDialog implements ActionListener
 				case 'm': tag = "Month"; break;
 				case 'd': tag = "Day"; break;
 			}
-			result += localization.getFieldLabel("DatePart" + tag) + " ";
+			dateParts.add(" ");
+			dateParts.add(localization.getFieldLabel("DatePart" + tag));
 		}
-		
-		return result;
+		dateParts.add(" ");
+
+		return Utilities.createStringRespectingOrientation(dateParts);
 	}
+
 
 	public void actionPerformed(ActionEvent ae)
 	{
