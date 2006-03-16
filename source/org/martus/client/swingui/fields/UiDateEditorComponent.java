@@ -95,6 +95,8 @@ public class UiDateEditorComponent extends Box
 		Utilities.addComponentsRespectingOrientation(this, dateInOrderLeftToRight);
 	}
 	
+	//	 On some platforms (Windows?), the dropdowns are not quite wide enough
+	//	 and shows "..." unless we widen the whole component to give it enough space
 	public Dimension getPreferredSize()
 	{
 		Dimension preferredSize = super.getPreferredSize();
