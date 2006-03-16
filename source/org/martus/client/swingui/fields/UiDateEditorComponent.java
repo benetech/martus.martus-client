@@ -25,10 +25,10 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.fields;
 
+import java.awt.Dimension;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JComponent;
-
 import org.martus.clientside.UiLocalization;
 import org.martus.swing.UiComboBox;
 import org.martus.swing.Utilities;
@@ -93,6 +93,13 @@ public class UiDateEditorComponent extends Box
 	{
 		JComponent[] dateInOrderLeftToRight = getComponentsInOrder();	
 		Utilities.addComponentsRespectingOrientation(this, dateInOrderLeftToRight);
+	}
+	
+	public Dimension getPreferredSize()
+	{
+		Dimension preferredSize = super.getPreferredSize();
+		preferredSize.width += EXTRA_WIDTH_SO_FIELDS_DISPLAY_WHEN_COLAPSED;
+		return preferredSize;
 	}
 
 	JComponent[] getComponentsInOrder()
@@ -160,6 +167,8 @@ public class UiDateEditorComponent extends Box
 	// Thai year to the Date Editor year dropdowns
 	static final boolean THAI_AND_PERSIAN_TESTING = false;
 	
+	
+	static final int EXTRA_WIDTH_SO_FIELDS_DISPLAY_WHEN_COLAPSED = 20;
 	UiLocalization localization;
 	boolean allowFuture;
 	UiComboBox yearCombo;	
