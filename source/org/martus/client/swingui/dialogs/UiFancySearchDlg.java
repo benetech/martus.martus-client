@@ -114,10 +114,16 @@ public class UiFancySearchDlg extends UiSearchDlg
 		mainPanel.add(bottomPanel,BorderLayout.SOUTH);
 
 		getContentPane().add(mainPanel);
-		getRootPane().setDefaultButton(search);
-		
+		setInsertButtonAsDefault();
 		return search;
 	}
+
+	private void setInsertButtonAsDefault()
+	{
+		getRootPane().setDefaultButton(grid.getInsertButton());
+		grid.getTable().setRowSelectionInterval(0,0);
+	}
+	
 	
 	private static void setGridSize(FancySearchGridEditor gridEditor, int borderWidth)
 	{

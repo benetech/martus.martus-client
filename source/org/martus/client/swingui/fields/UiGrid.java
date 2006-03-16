@@ -80,6 +80,11 @@ abstract public class UiGrid extends UiField
 		
 	}	
 	
+	public UiButton getInsertButton()
+	{
+		return insertRow;
+	}
+	
 	public JComponent getComponent()
 	{
 		return widget;
