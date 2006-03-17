@@ -79,12 +79,7 @@ class BackgroundTimerTask extends TimerTask
 			return;
 		}												
 			
-		if(!getApp().isSSLServerAvailable())
-		{
-			mainWindow.setStatusMessageTag(UiMainWindow.STATUS_NO_SERVER_AVAILABLE);
-			return;
-		}
-		
+	
 		try
 		{
 			checkComplianceStatement();
@@ -97,12 +92,22 @@ class BackgroundTimerTask extends TimerTask
 			e.printStackTrace();
 		}
 	}
+
+	private boolean isServerAvailable()
+	{
+		if(getApp().isSSLServerAvailable())
+			return true;
+		mainWindow.setStatusMessageTag(UiMainWindow.STATUS_NO_SERVER_AVAILABLE);
+		return false;
+	}
 	
 	private void doRetrievingOrUploading() throws Exception
 	{
 		final UiProgressMeter progressMeter = mainWindow.statusBar.getBackgroundProgressMeter();
 		if(retriever.hasWorkToDo())
 		{
+			if(!isServerAvailable())
+				return;
 			progressMeter.setStatusMessage(UiMainWindow.STATUS_RETRIEVING);
 			doRetrieving();
 			return;
@@ -172,6 +177,8 @@ class BackgroundTimerTask extends TimerTask
 	private void getUpdatedListOfBulletinsOnServer()
 	{
 		if(gotUpdatedOnServerUids)
+			return;
+		if(!isServerAvailable())
 			return;
 		mainWindow.setStatusMessageTag(UiMainWindow.STATUS_CONNECTING);
 		System.out.println("Entering BackgroundUploadTimerTask.getUpdatedListOfBulletinsOnServer");
@@ -301,6 +308,8 @@ class BackgroundTimerTask extends TimerTask
 	{
 		if(alreadyCheckedCompliance)
 			return;
+		if(!isServerAvailable())
+			return;
 		try
 		{
 			ClientSideNetworkGateway gateway = getApp().getCurrentNetworkInterfaceGateway();
@@ -338,6 +347,8 @@ class BackgroundTimerTask extends TimerTask
 	public void checkForNewsFromServer()
 	{
 		if(alreadyGotNews)
+			return;
+		if(!isServerAvailable())
 			return;
 		Vector newsItems = getApp().getNewsFromServer();
 		int newsSize = newsItems.size();
