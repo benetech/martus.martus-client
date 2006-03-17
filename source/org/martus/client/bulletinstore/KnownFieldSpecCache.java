@@ -49,6 +49,7 @@ import org.martus.common.crypto.MartusCrypto.NoKeyPairException;
 import org.martus.common.database.DatabaseKey;
 import org.martus.common.database.ReadableDatabase;
 import org.martus.common.fieldspec.FieldSpec;
+import org.martus.common.fieldspec.StandardFieldSpecs;
 import org.martus.common.packet.BulletinHeaderPacket;
 import org.martus.common.packet.FieldDataPacket;
 import org.martus.common.packet.Packet;
@@ -327,7 +328,9 @@ public class KnownFieldSpecCache extends BulletinStoreCache implements ReadableD
 			try
 			{
 				String packetLocalId = bhp.getFieldDataPacketId();
-				publicAndPrivateSpecs.addAll(loadFieldSpecsForPacket(accountId, packetLocalId, status));
+				FieldSpec[] defaultSpecs = StandardFieldSpecs.getDefaultPublicFieldSpecs();
+				Set packetSpecs = loadFieldSpecsForPacket(accountId, packetLocalId, status, defaultSpecs);
+				publicAndPrivateSpecs.addAll(packetSpecs);
 			}
 			catch(DecryptionException e)
 			{
@@ -337,7 +340,9 @@ public class KnownFieldSpecCache extends BulletinStoreCache implements ReadableD
 			try
 			{
 				String packetLocalId = bhp.getPrivateFieldDataPacketId();
-				publicAndPrivateSpecs.addAll(loadFieldSpecsForPacket(accountId, packetLocalId, status));
+				FieldSpec[] defaultSpecs = StandardFieldSpecs.getDefaultPrivateFieldSpecs();
+				Set packetSpecs = loadFieldSpecsForPacket(accountId, packetLocalId, status, defaultSpecs);
+				publicAndPrivateSpecs.addAll(packetSpecs);
 			}
 			catch(DecryptionException e)
 			{
@@ -349,24 +354,24 @@ public class KnownFieldSpecCache extends BulletinStoreCache implements ReadableD
 		catch(Exception e)
 		{
 			System.out.println("WARNING: Unable to read " + bulletinHeaderKey.getLocalId() + ": " + e);
-			//e.printStackTrace();
+			e.printStackTrace();
 			// we need to keep going anyway
 			// TODO: Alert the user that there was some problem
 		}
 	}
 
-	private Set loadFieldSpecsForPacket(String accountId, String packetLocalId, String status) throws IOException, CryptoException, InvalidPacketException, WrongPacketTypeException, SignatureVerificationException, DecryptionException, NoKeyPairException
+	private Set loadFieldSpecsForPacket(String accountId, String packetLocalId, String status, FieldSpec[] defaultSpecs) throws IOException, CryptoException, InvalidPacketException, WrongPacketTypeException, SignatureVerificationException, DecryptionException, NoKeyPairException
 	{
 		UniversalId packetUid = UniversalId.createFromAccountAndLocalId(accountId, packetLocalId);
-		FieldDataPacket fdp = loadFieldDataPacket(packetUid, status);
+		FieldDataPacket fdp = loadFieldDataPacket(packetUid, status, defaultSpecs);
 		Set specs = arrayToSet(fdp.getFieldSpecs());
 		return specs;
 	}
 
-	private FieldDataPacket loadFieldDataPacket(UniversalId publicPacketUid, String status) throws IOException, CryptoException, InvalidPacketException, WrongPacketTypeException, SignatureVerificationException, DecryptionException, NoKeyPairException
+	private FieldDataPacket loadFieldDataPacket(UniversalId publicPacketUid, String status, FieldSpec[] defaultSpecs) throws IOException, CryptoException, InvalidPacketException, WrongPacketTypeException, SignatureVerificationException, DecryptionException, NoKeyPairException
 	{
 		DatabaseKey publicPacketKey = DatabaseKey.createKey(publicPacketUid, status);
-		FieldDataPacket publicData = new FieldDataPacket(publicPacketKey.getUniversalId(), new FieldSpec[0]);
+		FieldDataPacket publicData = new FieldDataPacket(publicPacketKey.getUniversalId(), defaultSpecs);
 		loadPacket(publicData, publicPacketKey);
 		return publicData;
 	}
