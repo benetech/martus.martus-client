@@ -74,6 +74,7 @@ import org.martus.common.Exceptions.ServerCallFailedException;
 import org.martus.common.Exceptions.ServerNotAvailableException;
 import org.martus.common.FieldCollection.CustomFieldsParseException;
 import org.martus.common.HQKeys.HQsException;
+import org.martus.common.MartusUtilities.BulletinNotFoundException;
 import org.martus.common.MartusUtilities.FileVerificationException;
 import org.martus.common.MartusUtilities.NotYourBulletinErrorException;
 import org.martus.common.MartusUtilities.PublicInformationInvalidException;
@@ -1344,6 +1345,9 @@ public class MartusApp
 			retrieveOneBulletinToFolder(uid, folder, null);
 		}
 		catch(NotYourBulletinErrorException okIfPreviousVersionIsNotAuthorizedToRead)
+		{
+		}
+		catch(BulletinNotFoundException okIfPreviousVersionIsNotOnServer)
 		{
 		}
 		catch(AddOlderVersionToFolderFailedException okIfOlderVersionWasNotAddedToRetrievedFolder)
