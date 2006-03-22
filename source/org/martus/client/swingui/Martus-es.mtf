@@ -1649,8 +1649,8 @@
 #________________=Title
 -768e-field:title=Título
 
-#_____________________________=Spanish pre-2.9 internal
--649d-field:translationVersion=Español pre-2.9 internal 
+#_____________________________=Spanish 2.9
+-649d-field:translationVersion=Español 2.9 
 
 #___________________=Username
 -84c2-field:username=Nombre de usuario
