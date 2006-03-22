@@ -1,9 +1,10 @@
 ﻿# Martus Client Translation File
 # Language code:  ar
 # Language name:  Arabic
-# Exported date:  Thu Sep 29 15:13:31 PDT 2005
-# Client version: 2.8.1 
-# Client build:   20050928.1668
+# Translated by:  MID Foundation; Localize; Mounaim Elkhezzani
+# Exported date:  Wed Mar 15 11:20:44 PST 2006
+# Client version: pre-2.9 internal
+# Client build:   20060314.1712
 #
 # This file MUST be saved in UTF-8 format!
 # Lines beginning with # are comments and are ignored by Martus
@@ -100,6 +101,9 @@
 #__________________=Delete
 -f6fd-button:Delete=حذف 
 
+#_________________________________=Delete Selected Row
+-5e2f-button:DeleteSelectedGridRow=حذف الصف المختار
+
 #______________________________=Delete
 -f6fd-button:DeleteServerDrafts=حذف
 
@@ -111,6 +115,9 @@
 
 #_________________________=Up
 -2038-button:FolderOrderUp=أعلى
+
+#______________________________=Insert Row
+-9f53-button:InsertEmptyGridRow=ادرج صف
 
 #_________________=Leave
 -7e35-button:Leave=ترك
@@ -150,6 +157,9 @@
 
 #______________________________________________=Retrieve latest bulletin version only
 -3449-button:RetrieveLatestBulletinRevisionOnly=استرجاع آخر نشرة فقط
+
+#____________________________________=Only search most recent version of bulletins
+-852f-button:SearchFinalBulletinsOnly=البحث عن أحدث إصدار للنشرات فقط
 
 #__________________________________=Accept
 -bb54-button:ServerComplianceAccept=قبول 
@@ -394,6 +404,18 @@
 #__________________________=Sent
 -35f4-field:BulletinWasSent=تم الإرسال
 
+#_________________________=Calendar type
+-87e7-field:CalendarSystem=نوع التقويم
+
+#__________________________________=Default (2005-05-31)
+-784a-field:CalendarSystemGregorian=(2005-05-31)التاريخ الافتراضي
+
+#________________________________=Persian (1384-03-10)
+-2f3e-field:CalendarSystemPersian=(10-03-1384)فارسي 
+
+#_____________________________=Thai Solar (2548-05-31)
+-2be4-field:CalendarSystemThai=(2548-05-31) تايلاندي شمسي 
+
 #_____________________________________=Download Progress
 -8b0e-field:ChunkProgressStatusMessage=جاري التحميل
 
@@ -428,7 +450,7 @@
 -4ccc-field:CreateCustomFieldsHelp2=بالنسبة للحقول المخصصة (غير النمطية) قم أولا باختيار نوع  الحقل الذي تريده. تتمثل الاختيارات المتوفرة في'BOOLEAN'   (ضروري أو) و 'DATE' (التاريخ) و 'DATERANGE' (المدى التاريخي) و 'DROPDOWN' (قائمة منسدلة) و 'GRID' (شبكة) و 'LANGUAGE' (اللغة) و 'MESSAGE' (رسالة) و 'MULTILINE' (أسطر متعددة) و 'STRING (تسلسل حرفي). \n\n ستحتاج إلى رمز هوية فريد لكل حقل مخصص. قد يكون هذا الرمز أي كلمة باستثناء تلك الكلمات المستخدمة من قبل النظام (مثال: 'author' (مؤلف) و 'summary' (تلخيص) و 'location' (الموضع) و 'title' (عنوان) إلخ.) ولا يمكن أن تحتوي على أحرف فراغ أو على أحرف خاصة. من بين الخيارات (’اسمالضحية’) أو (’خيارلونالعينين’) إلخ. \n\nثم ستحتاج إلى اسم يتم عرضه بجانب حقلك الجديد مثل (’اسم الشاهد الأول’). \n\nملاحظات إضافية\n1. تكون الوثائق في صيغة XML حساسة لنوع الحروف اللاتينية المستخدمة (كلمة 'Witness' مختلفة عن كلمة 'witness' ) \n2. تكون علامات الاقتباس مفردة أو مزدوجة طالما كانتا متشابهتان (مثال: كلمة 'STRING" بهذه الصيغة غير صحيحة، يجب أن تكون 'STRING' أو "STRING" )\n3. يتم عرض الإثبات أو النفي في صيغة مربع اختيار عند التحرير وفي صيغة نعم/لا عند الاستعراض أو الطباعة. \n4. استخدم حقول "MESSAGE" (رسالة) لإعطاء التعليمات عن طريقة إدخال البيانات ولإنشاء تعليقات/ملاحظات يتم عرضها في كل نشرة. \n\nراجع المثال أدناه:\n\n   
 
 #__________________________________=\n<Field type='DROPDOWN'>\n<Tag>BulletinSource</Tag>\n<Label>Source of bulletin information</Label>\n<Choices>\n<Choice>Media/Press</Choice>\n<Choice>Legal Report</Choice>\n<Choice>Personal Interview</Choice>\n<Choice>Other</Choice>\n</Choices>\n</Field>\n\n<Field type='STRING'>\n<Tag>SpecifyOther</Tag>\n<Label>If "Other", please specify:</Label>\n</Field>\n\n<Field type='STRING'>\n<Tag>IntervieweeName</Tag>\n<Label>Interviewee Name</Label>\n</Field>\n\n<Field type='LANGUAGE'>\n<Tag>IntervieweeLanguage</Tag>\n<Label>Interviewee Speaks</Label>\n</Field>\n\n<Field type='DATERANGE'>\n<Tag>InterviewDates</Tag>\n<Label>Date(s) of interview(s)</Label>\n</Field>\n\n<Field type='BOOLEAN'>\n<Tag>Anonymous</Tag>\n<Label>Does interviewee wish to remain anonymous?</Label>\n</Field>\n\n<Field type='GRID'>\n<Tag>VictimInformationGrid</Tag>\n<Label>Victim Information</Label>\n<GridSpecDetails>\n<Column type='STRING'><Tag></Tag><Label>First Name</Label></Column>\n<Column type='STRING'><Tag></Tag><Label>Last Name</Label></Column>\n<Column type='BOOLEAN'><Tag></Tag><Label>Is Identified?</Label></Column>\n<Column type='DATE'><Tag></Tag><Label>Date of Birth</Label></Column>\n<Column type='DROPDOWN'><Tag></Tag><Label>Sex</Label>\n<Choices>\n<Choice>Male</Choice>\n<Choice>Female</Choice>\n<Choice>Unknown</Choice>\n</Choices></Column>\n<Column type='STRING'><Tag></Tag><Label>Ethnicity</Label></Column>\n</GridSpecDetails>\n</Field>\n\n<Field type='MESSAGE'>\n<Tag>MessageProfession</Tag>\n<Label>Profession History Table Note</Label>\n<Message>If you have information about a person who has had different professions over time, enter multiple rows with the same First and Last Names and show the date ranges for each profession on a separate row.</Message>\n</Field>\n\n<Field type='GRID'>\n<Tag>ProfessionHistoryGrid</Tag>\n<Label>Profession History</Label>\n<GridSpecDetails>\n<Column type='STRING'><Tag></Tag><Label>First Name</Label></Column>\n<Column type='STRING'><Tag></Tag><Label>Last Name</Label></Column>\n<Column type='STRING'><Tag></Tag><Label>Profession</Label></Column>\n<Column type='DATERANGE'><Tag></Tag><Label>Dates of Profession</Label></Column>\n</GridSpecDetails>\n</Field>\n
--4d55-field:CreateCustomFieldsHelp3=\n<Field type='DROPDOWN'>\n<Tag>مصدرالنشرة</Tag>\n<Label>مصدر معلومات النشرة</Label>\n<Choices>\n<Choice>وسائل الإعلام/صحف</Choice>\n<Choice>تقرير قانوني</Choice>\n<Choice>لقاء شخصي</Choice>\n<Choice>غير ذلك</Choice>\n</Choices>\n</Field>\n\n<Field type='STRING'>\n<Tag>غيرذلك</Tag>\n<Label>إذا كان "غير ذلك" الرجاء أن تذكر بوضوح:</Label>\n</Field>\n\n<Field type='STRING'>\n<Tag>اسمالمتحدث</Tag>\n<Label>اسم المتحدث</Label>\n</Field>\n\n<Field type='LANGUAGE'>\n<Tag>لغةالمتحدث</Tag>\n<Label>لغة المتحدث</Label>\n</Field>\n\n<Field type='DATERANGE'>\n<Tag>تواريخاللقاءات</Tag>\n<Label>تاريخ (تواريخ) اللقاء (اللقاءات)</Label>\n</Field>\n\n<Field type='BOOLEAN'>\n<Tag>مجهول</Tag>\n<Label>هل يريد المتحدث أن يبقى مجهول الهوية؟</Label>\n</Field>\n\n<Field type='GRID'>\n<Tag>جدولبياناتالضحية</Tag>\n<Label>معلومات الضحية</Label>\n<GridSpecDetails>\n<Column type='STRING'><Tag></Tag><Label>الاسم</Label></Column>\n<Column type='STRING'><Tag></Tag><Label>اللقب العائلي</Label></Column>\n<Column type='BOOLEAN'><Tag></Tag><Label>هل معروف؟</Label></Column>\n<Column type='DATE'><Tag></Tag><Label>تاريخ الولادة</Label></Column>\n<Column type='DROPDOWN'><Tag></Tag><Label>الجنس</Label>\n<Choices>\n<Choice>ذكر</Choice>\n<Choice>أنثى</Choice>\n<Choice>غير معروف</Choice>\n</Choices></Column>\n<Column type='STRING'><Tag></Tag><Label>العرق</Label></Column>\n</GridSpecDetails>\n</Field>\n\n<Field type='MESSAGE'>\n<Tag>مهنةالرسالة</Tag>\n<Label>جدول التجربة العملية </Label>\n<Message> إذا كانت لديك معلومات حول شخص شغل وظائف مختلفة، أدخل صفوفا متعددة باستخدام نفس الاسم واللقب العائلي وأدخل المدى التاريخي لكل وظيفة في صف مختلف.</Message>\n</Field>\n\n<Field type='GRID'>\n<Tag>جدولالتجربةالعملية</Tag>\n<Label>التجربة العملية</Label>\n<GridSpecDetails>\n<Column type='STRING'><Tag></Tag><Label>الاسم الأول</Label></Column>\n<Column type='STRING'><Tag></Tag><Label>اللقب العائلي</Label></Column>\n<Column type='STRING'><Tag></Tag><Label>المهنة</Label></Column>\n<Column type='DATERANGE'><Tag></Tag><Label>تواريخ الوظائف</Label></Column>\n</GridSpecDetails>\n</Field>\n
+-4d55-field:CreateCustomFieldsHelp3=\n<Field type='DROPDOWN'>\n<Tag>مصدرالنشرة</Tag>\n<Label>مصدر معلومات النشرة</Label>\n<Choices>\n<Choice>وسائل الإعلام/صحف</Choice>\n<Choice>تقرير قانوني</Choice>\n<Choice>لقاء شخصي</Choice>\n<Choice>غير ذلك</Choice>\n</Choices>\n</Field>\n\n<Field type='STRING'>\n<Tag>غيرذلك</Tag>\n<Label>إذا كان "غير ذلك" الرجاء أن تذكر بوضوح:</Label>\n</Field>\n\n<Field type='STRING'>\n<Tag>اسمالمتحدث</Tag>\n<Label>اسم المتحدث</Label>\n</Field>\n\n<Field type='LANGUAGE'>\n<Tag>لغةالمتحدث</Tag>\n<Label>لغة المتحدث</Label>\n</Field>\n\n<Field type='DATERANGE'>\n<Tag>تواريخاللقاءات</Tag>\n<Label>تاريخ (تواريخ) اللقاء (اللقاءات)</Label>\n</Field>\n\n<Field type='BOOLEAN'>\n<Tag>مجهولا</Tag>\n<Label>هل يريد المتحدث أن يبقى مجهول الهوية؟</Label>\n</Field>\n\n<Field type='GRID'>\n<Tag>جدولبياناتالضحية</Tag>\n<Label>معلومات الضحية</Label>\n<GridSpecDetails>\n<Column type='STRING'><Tag></Tag><Label>الاسم</Label></Column>\n<Column type='STRING'><Tag></Tag><Label>اللقب العائلي</Label></Column>\n<Column type='BOOLEAN'><Tag></Tag><Label>هل معروف؟</Label></Column>\n<Column type='DATE'><Tag></Tag><Label>تاريخ الولادة</Label></Column>\n<Column type='DROPDOWN'><Tag></Tag><Label>الجنس</Label>\n<Choices>\n<Choice>ذكر</Choice>\n<Choice>أنثى</Choice>\n<Choice>غير معروف</Choice>\n</Choices></Column>\n<Column type='STRING'><Tag></Tag><Label>العرق</Label></Column>\n</GridSpecDetails>\n</Field>\n\n<Field type='MESSAGE'>\n<Tag>مهنةالرسالة</Tag>\n<Label>جدول التجربة العملية </Label>\n<Message> إذا كانت لديك معلومات حول شخص شغل وظائف مختلفة، أدخل صفوفا متعددة باستخدام نفس الاسم واللقب العائلي وأدخل المدى التاريخي لكل وظيفة في صف مختلف.</Message>\n</Field>\n\n<Field type='GRID'>\n<Tag>جدولالتجربةالعملية</Tag>\n<Label>التجربة العملية</Label>\n<GridSpecDetails>\n<Column type='STRING'><Tag></Tag><Label>الاسم </Label></Column>\n<Column type='STRING'><Tag></Tag><Label>اللقب العائلي</Label></Column>\n<Column type='STRING'><Tag></Tag><Label>المهنة</Label></Column>\n<Column type='DATERANGE'><Tag></Tag><Label>تواريخ الوظائف</Label></Column>\n</GridSpecDetails>\n</Field>\n
 
 #____________________________________=Please enter your new username and password.
 -aec2-field:CreateNewUserNamePassword=الرجاء القيام بإدخال اسم المستخدم وكلمة المرور 
@@ -436,8 +458,32 @@
 #_____________________________________=Customization Template Files
 -9210-field:CustomizationTemplateFiles=ملفات قوالب التحوير
 
+#________________________=Date delimiter
+-36d4-field:DateDelimiter=محدد التاريخ
+
+#____________________________=Dash (00-00-00)
+-997c-field:DateDelimiterDash=(00-00-00)عارضة 
+# AB2006-03-15:  I assume that the example in parentheses should switch to be on the other side of the translation of "Dash".
+
+#___________________________=Dot (00.00.00)
+-66ea-field:DateDelimiterDot= (00.00.00)نقطة 
+# AB2006-03-15:  Same instructions as above.
+
+#_____________________________=Slash (00/00/00)
+-404d-field:DateDelimiterSlash=(00/00/00)خط مائل
+# AB2006-03-15:  Same instructions as above.
+
 #____________________=Exact Date
 -8a81-field:DateExact=التاريخ الفعلي
+
+#______________________=Day
+-987b-field:DatePartDay=اليوم
+
+#________________________=Month
+-082b-field:DatePartMonth=الشهر
+
+#_______________________=Year
+-879e-field:DatePartYear=السنة
 
 #____________________=Date Range
 -6bb4-field:DateRange=المدى الزمني
@@ -487,8 +533,8 @@
 #__________________________________=LABEL
 -64b8-field:ErrorCustomFieldHeader4=عنوان
 
-#____________________________=There is an error in the custom field definitions. Each problem is identified with the following codes:\n   100 - Required standard field is missing\n   101 - Custom field does not have a correct tag.\n   102 - A previous Tag already exists with this name.\n   103 - Custom field does not have a label.\n   104 - Unrecognized Field Type.\n   105 - A label was found in a standard field.\n   106 - XML Parse Error.\n   107 - Tag contains illegal characters.\n   108 - Duplicate entry in Dropdown field.\n   109 - No Choices in Dropdown field.\n   200 - All fields empty.\n   201 - Unrecognized Headquarters created this template.\n   202 - Security validation error.\n   203 - File Error.
--c1b6-field:ErrorCustomFields=هناك خطأ في تعريفات الحقل المخصص. يتم تعريف كل خطأ من خلال الرموز التالية:\n 100 – حقل نمطي ضروري مفقود\n 101 – الحقل المخصص لا يتضمن الرمز الصحيح.\n 102 – يوجد رمز بنفس الاسم. \n 103 – لا يتضمن الحقل المخصص على تسمية. \n 104 – نوع حقل غير معروف.\n 105 – توجد تسمية في حقل نمطي.\n 106 – خطأ تجزئة XML.\n 107 - يحتوي الرمز على أحرف ممنوعة.\n 108 – إدخال مزدوج في حقل منسدل.\n 109 – لا يوجد خيار في حقل منسدل.\n 200 – جميع الحقول فارغة.\n 201 – مركز رئيسي غير معروف قام بإنشاء هذا القالب.\n 202 – خطأ تصحيح أمني.\n 203 – خطأ ملف. 
+#____________________________=There is an error in the custom field definitions. Each problem is identified with the following codes:\n   100 - Required standard field is missing\n   101 - Custom field does not have a correct tag.\n   102 - A previous Tag already exists with this name.\n   103 - Custom field does not have a label.\n   104 - Unrecognized Field Type.\n   105 - A label was found in a standard field.\n   106 - XML Parse Error.\n   107 - Tag contains illegal characters.\n   108 - Duplicate entry in Dropdown field.\n   109 - No Choices in Dropdown field.\n   200 - All fields empty.\n   201 - Unrecognized Headquarters created this template.\n   202 - Security validation error.\n   203 - File Error.\n   204 - Imported XML Missing Field.
+-0b96-field:ErrorCustomFields=هناك خطأ في تعريفات الحقل المخصص. يتم تعريف كل خطأ من خلال الرموز التالية:\n 100 – حقل نمطي ضروري مفقود\n 101 – الحقل المخصص لا يتضمن الرمز الصحيح.\n 102 – يوجد رمز بنفس الاسم. \n 103 – لا يتضمن الحقل المخصص على تسمية. \n 104 – نوع حقل غير معروف.\n 105 – توجد تسمية في حقل نمطي.\n 106 – خطأ تجزئة XML.\n 107 - يحتوي الرمز على أحرف ممنوعة.\n 108 – إدخال مزدوج في حقل منسدل.\n 109 – لا يوجد خيار في حقل منسدل.\n 200 – جميع الحقول فارغة.\n 201 – مركز رئيسي غير معروف قام بإنشاء هذا القالب.\n 202 – خطأ تصحيح أمني.\n 203 – خطأ ملف.\n 204 – مجال XML  المستورد ناقص.
 
 #_________________________________________=A previous backup file exists.  You must save each file on its own removable media disk.
 -db93-field:ErrorPreviousBackupShareExists=يوجد ملف مجزأ سابق. يجب عليك حفظ كل ملف على قرص بمفرده. 
@@ -517,7 +563,7 @@
 #______________________________=---Overview---\n\nMartus searches all versions of every bulletin (both public and private, sealed and draft) in every folder, including the Discarded Bulletins folder.  When the search is completed, the Search Results folder lists copies of the bulletins found in your search.\n\nYou can search for words in any language.  Martus searches are not case-sensitive in English and other purely Latin character languages, so it doesn't matter whether a word is capitalized or not.\n\nSearches include attachment filenames, but not content of attachments.\n\nYou can search both standard and custom fields.\n\n
 -42b4-field:FancySearchHelpMsg1=--- نظرة عامة يقوم --- \n\nMartus ببحث في جميع الإصدارات لكل نشرة (عامة وخاصة ومختومة ومسودة) في كل ملف بما في ذلك ملف النشرات المتجاهلة. عند الانتهاء من البحث يعرض ملف نتائج البحث قائمة لنسخ النشرات التي تم العثور عليها خلال البحث. \n\nبإمكانك القيام ببحث عن كلمات في أي لغة. لا يقوم Martus ببحث متحسس لحالة الأحرف في اللغة الإنجليزية وفي اللغات الأخرى التي تستعمل أحرفا لاتينية ولذلك فليس من المهم إدخال كلمة بأحرف كبيرة أم لا. \n\nيتضمن البحث أسماء الملفات المرفقة لكن لا يقوم ببحث عن مضمون الملف. \n\nبإمكانك إجراء بحث عادي أو بحث الحقول المخصصة.\n\n
 
-#______________________________=---Search tips---\n\nMartus will find any text you enter whether it's a complete word or part of a larger word. For example, if you search for the word prison, you'll see bulletins that include the words prison, imprison, and imprisonment. Likewise, if you search for the word prison, Martus will find bulletins that include attachments with names such as photos-prison.jpg and prisoners-report.doc.\n\nTo search for an exact phrase, type it with quotation marks around the phrase  (e.g.  "Witness Testimony"). If you do not put quotation marks around the phrase, Martus will search for the words individually.\n\nUse the word "#Or#" to broaden your search, or the word "#And#" to narrow it.  You can use the #And# / #Or# dropdowns to specify different fields you want search across (e.g. you want to search for bulletins that have "Last Saved Date" in the last week and have a certain author).  If you want to search on multiple text values within a single bulletin field, you can use #Or# or #And# in-between words in the "Search For..." entry box.  For example, if you search "Any Field" for:\n   prison #Or# jail\nyou'll see a list of bulletins that contain either word anywhere in the bulletin. If you search for:\n   prison #And# assault \nyou'll see a list of bulletins that contain both words. The keyword "#And#" is implied, so if you search for:\n   prison assault \nMartus will find bulletins the same bulletins as if you searched for:\n   prison #And# assault\n\nWhen you use both "#And#" and "#Or#", your search terms are grouped from the beginning of your list (either across bulletin fields or within a particular field). For example, if you enter:\n   prison #Or# jail #And# trial \nin the "Search For..." entry box, Martus will search for any bulletins that contain either of the words prison or jail, and also contain the word trial. But if you enter:\n   prison #And# jail #Or# trial \nMartus will search for any bulletins that contain both the words prison and jail, or contain the word trial.\n 
+#______________________________=---Search tips---\n\nMartus will find any text you enter whether it's a complete word or part of a larger word. For example, if you search for the word prison, you'll see bulletins that include the words prison, imprison, and imprisonment. Likewise, if you search for the word prison, Martus will find bulletins that include attachments with names such as photos-prison.jpg and prisoners-report.doc.\n\nTo search for an exact phrase, type it with quotation marks around the phrase  (e.g.  "Witness Testimony"). If you do not put quotation marks around the phrase, Martus will search for the words individually.\n\nUse the word "#Or#" to broaden your search, or the word "#And#" to narrow it.  You can use the #And# / #Or# dropdowns to specify different fields you want search across (e.g. you want to search for bulletins that have "Last Saved Date" in the last week and have a certain author).  If you want to search on multiple text values within a single bulletin field, you can use #Or# or #And# in-between words in the "Search For..." entry box.  For example, if you search "Any Field" for:\n   prison #Or# jail\nyou'll see a list of bulletins that contain either word anywhere in the bulletin. If you search for:\n   prison #And# assault \nyou'll see a list of bulletins that contain both words. The keyword "#And#" is implied, so if you search for:\n   prison assault \nMartus will find bulletins the same bulletins as if you searched for:\n   prison #And# assault\n\nWhen you use both "#And#" and "#Or#", your search terms are grouped from the beginning of your list (either across bulletin fields or within a particular field). For example, if you enter:\n   prison #Or# jail #And# trial \nin the "Search For..." entry box, Martus will search for any bulletins that contain either of the words prison or jail, and also contain the word trial. But if you enter:\n   prison #And# jail #Or# trial \nMartus will search for any bulletins that contain both the words prison and jail, or contain the word trial.\n
 -ec7d-field:FancySearchHelpMsg2=--- تلميحات البحث ---\n\nيقوم Martus بالعثور على أي نص تدخله سواء كان كلمة كاملة أو جزءا من كلمة أطول. فعلى سبيل المثال إذا قمت ببحث عن كلمة سجن، ستشاهد نشرات تحتوي على كلمات سجن و سجناء. ونفس الشيء بالنسبة لبحث يحتوي على كلمة سجن، سيقوم Martus بالبحث في نشرات تتضمن ملفات مرفقة تحتوي على كلمات مثل صور سجن.JPG وتقرير سجن.doc .\n\nللبحث عن جملة محددة، أدخل الجملة بين علامتي الاقتباس (مثال: "تصريح شاهد"). إذا لم تضع الجملة بين علامتي الاقتباس سيقوم Martus بالبحث عن الكلمات على انفصال. \n\nاستخدم الكلمة "  #Or# "  لتوسيع البحث أو الكلمة " #And# "  لتحديد البحث. بإمكانك استخدام القوائم المنسدلة  #And#  #Or#  لتحديد حقول مختلفة تريد بحثها (مثال: إذا أردت البحث في نشرات تحتوي على "آخر تاريخ حفظ"  في حقل الأسبوع الماضي من قبل مؤلف معين). إذا أردت القيام ببحث عن قيم نص متعددة في حقل نشرة واحدة بإمكانك استخدام  #Or#  أو  #And#   بين الكلمات في مربع الإدخال "بحث عن...." على سبيل المثال إذا أردت البحث في "أي حقل" عن:\n سجن  #Or#  حبس\n ستشاهد قائمة في النشرات التي تحتوي على كلا الكلمتين في أي حقل في النشرة.  الكلمة الرئيسية " #And# " هي ضمنية ولذلك إذا قمت ببحث عن: \n اعتداء سجن يقوم \nMartus بالعثور على نفس النشرات التي قد يعثر عليها إذا قمت بالبحث عن: \n سجن  #And#  اعتداء\n\n إذا استخدمت كلا من "#And#" و "#Or#" تكون شروط البحث مجموعة منذ بداية القائمة (سواء عبر حقول النشرة أو داخل حقل معين). على سبيل المثال إذا قمت بإدخال: \n سجن  #Or#   حبس  #And#   محاكمة \n في مربع الإدخال "بحث عن..." سيقوم Martus بالبحث عن النشرات التي تحتوي على أي من الكلمتين سجن و حبس والتي تحتوي أيضا على كلمة محاكمة. لكن إذا قمت بإدخال: \n  سجن  #And#  حبس  #Or#  محاكمة يقوم  \nMartus  بالبحث عن النشرات التي تحتوي على الكلمتين سجن و حبس أو تحتوي على كلمة محاكمة. \n
 
 #______________________________=You can use the word #Or# or #And#, or you can use the English words "#OrEnglish#" and "#AndEnglish#" to search.\n\nYou need to put spaces before and after any #Or# / #And# keywords you use in your search.\n
@@ -565,8 +611,8 @@
 #________________________________=One or more accounts already exist on this computer. To create an additional account with a new username and passphrase, click OK.
 -02f2-field:HowToCreateNewAccount=يوجد حسابا أو أكثر على هذا الجهاز بالفعل. لإنشاء حساب إضافي باسم مستخدم و كلمة مرور جديدين، انقر "موافق."
 
-#_________________________________=The version of this translation is not compatible with this version of Martus.  It is recommend that you do not continue to use this translation version and go to (http://www.martus.org/downloads) for the appropriate version.
--2c0e-field:IncompatibleMtfVersion=ترجمة هذا الإصدار غير مواءمة لهذا الإصدار من Martus . من الأفضل أن تتوقف عن استعمال هذا الإصدار وأن تنزل الإصدار المناسب من موقعنا  (http://www.martus.org/downloads)
+#_________________________________=The version of this translation is not compatible with this version of Martus.  It is recommended that you do not continue to use this translation version and go to (http://www.martus.org/downloads) for the appropriate version.
+-a747-field:IncompatibleMtfVersion=ترجمة هذا الإصدار غير مواءمة لهذا الإصدار من Martus . من الأفضل أن تتوقف عن استعمال هذا الإصدار وأن تنزل الإصدار المناسب من موقعنا  (http://www.martus.org/downloads)
 
 #________________________________________=Martus Software Version: #ProgramVersionNumber#
 -fcd7-field:IncompatibleMtfVersionProgram=إصدار برنامج Martus:  #ProgramVersionNumber#
@@ -751,8 +797,14 @@
 #___________________________________=Human Rights Bulletin System
 -fe5b-field:SplashProductDescription=نظام Martus لنشرات حقوق الإنسان 
 
+#___________________________=Connecting to server
+-2a77-field:StatusConnecting=جاري الاتصال بالخادم
+
 #______________________=Ready
 -20c7-field:StatusReady=جاهز
+
+#___________________________=Retrieving...
+-5316-field:StatusRetrieving=جاري الاسترجاع...
 
 #__________________________=Details
 -dc3d-field:TemplateDetails=التفاصيل 
@@ -867,6 +919,12 @@
 
 #____________________________________________=Any changes you have made to this bulletin will be discarded.
 -3819-field:confirmCancelModifyBulletineffect=سيتم التغاضي عن أية تغييرات قمت بإجرائها في هذه النشرة.
+
+#_____________________________________=Bulletins are currently being retrieved from the server.
+-126a-field:confirmCancelRetrievecause=يتم حاليا استرجاع النشرات من الخادم
+
+#______________________________________=This operation will cancel the current retrieval, so some of the requested bulletins may not be retrieved.
+-babb-field:confirmCancelRetrieveeffect=هذه العملية ستلغي الاسترجاع الحالي ولذلك فبعض النشرات لا يمكن استرجاعها.
 
 #________________________________________=Do you wish to cancel this backup?
 -7b46-field:confirmCancelShareBackupcause=هل تود إلغاء هذا النسخ الاحتياطي؟
@@ -1225,6 +1283,9 @@
 #___________________=Location
 -d219-field:location=الموضع 
 
+#___________________=Date format sequence
+-eed8-field:mdyOrder=تسلسل الخادم التاريخ
+
 #_____________________________________________=The attachment could not be located.
 -65b1-field:messageErrorAttachmentMissingcause=لم يتم العثور على المُرفق 
 
@@ -1319,7 +1380,7 @@
 -2bad-field:notifyErrorSavingStatecause=غير قادر على حفظ نموذج تصميم النافذة الحالي.
 
 #______________________________________=An error prevented the file from being written. Check to make sure the disk is not full or write protected.
--2a84-field:notifyErrorWritingFilecause=حدثت مشكلة أثناء كتابة الملف. تأكد أن القرص به مساحة فارغة و أنه مسموح بالكتابة عليه. 
+-2a84-field:notifyErrorWritingFilecause=حدثت مشكلة ما أثناء كتابة الملف. تأكد أن القرص به مساحة فارغة و أنه مسموح بالكتابة عليه. 
 
 #___________________________________________=You will have to select a server for any bulletins to be backed up to that server, or to retrieve bulletins from that server.
 -83c4-field:notifyExistingServerRemovedcause=سيتحتم عليك اختيار خادم للاحتفاظ عليه بأية نشرات و استرجاعها منه عند الضرورة. 
@@ -1366,6 +1427,9 @@
 #_______________________________________=You must have a server name or IP address.
 -984b-field:notifyInvalidServerNamecause=يجب أن يكون لديك اسم للخادم أو عنوان IP له.
 
+#_______________________________________=No row selected.
+-7b20-field:notifyNoGridRowSelectedcause=لم يتم اختيار صف
+
 #___________________________________=Please select a Headquarters first.
 -1d19-field:notifyNoHQsSelectedcause=الرجاء اختيار مركز رئيسي أولا.
 
@@ -1393,8 +1457,8 @@
 #____________________________________________=You may only preview one bulletin at a time.  Please only select one bulletin to preview.
 -fbee-field:notifyPreviewOneBulletinOnlycause=يمكنك استعراض نشرة واحدة فقط في المرة. الرجاء اختيار نشرة واحدة فقط لاستعراضها.
 
-#_________________________________________=Finished
--355b-field:notifyPrintToDiskCompletecause=إنهاء
+#_________________________________________=Successfully saved Report
+-45d7-field:notifyPrintToDiskCompletecause=تم حفظ التقرير بنحاح
 
 #________________________________________=To print one or more bulletins, select them first, and then perform the print operation.
 -3298-field:notifyPrintZeroBulletinscause=لطباعة نشرة واحدة أو أكثر قم بتحديد النشرات ثم قم بعملية الطباعة.
@@ -1428,6 +1492,18 @@
 
 #______________________________________=Bulletin download cancelled.  Some bulletins may have already been downloaded.
 -87b3-field:notifyRetrieveCanceledcause=تم إلغاء تحميل النشرة. ربما قد تم تحميل بعض النشرات بالفعل.
+
+#___________________________________=An error has occurred while retrieving a bulletin.
+-6201-field:notifyRetrieveErrorcause=حدث مشكلة ماأثناء استرجاع النشرة
+
+#__________________________________________________=A retrieve was in progress when you upgraded to a newer version of Martus. That retrieve will be canceled, so you should re-select any bulletins that had not yet been retrieved.
+-28ae-field:notifyRetrieveFileDataVersionErrorcause=كان استرجاع جاري لما قمت بترقية مارتوس لإصدار جديد. سيتم إلغاء هذا الاسترجاع، ولذلك عليك اختيار أي نشرات لم يتم استرجاعها بعد.
+
+#_______________________________________=An error has prevented Martus from continuing the retrieve that was in progress. You should re-select any bulletins that had not yet been retrieved.
+-8149-field:notifyRetrieveFileErrorcause=منع خطأ ما مارتوس من متابعة عملية الاسترجاع التي كانت جارية. عليك إعادة اختيار أية نشرات لم يتم استرجاعها بعد.
+
+#________________________________________=A retrieve is already in progress. You cannot start another retrieve until that one has finished.
+-3e55-field:notifyRetrieveInProgresscause=جاري استرجاع ما. لا يمكنك بدء عملية استرجاع أخرى الا بانتهاء ذلك الاسترجاع
 
 #________________________________________________=Errors occurred while retrieving bulletin summaries.  Some of the bulletins on the server will not be shown.
 -6f6f-field:notifyRetrievedOnlySomeSummariescause=حدثت مشكلات أثناء استرجاع الملخصات. لن يتم عرض بعض النشرات الموجودة على الخادم.
@@ -1534,6 +1610,12 @@
 #________________=Phone Number
 -ab25-field:phone=رقم الهاتف 
 
+#___________________________________=Automatically adjust legacy Persian dates
+-4d0e-field:preferencesAdjustPersian=ضبط آلي لتواريخ الفارسية الموروثة
+
+#________________________________=Automatically adjust legacy Thai dates
+-4d22-field:preferencesAdjustThai=ضبط آلي لتواريخ التايلاندية الموروثة
+
 #________________________________=Prevent creating public bulletins
 -7c9e-field:preferencesAllPrivate=منع إنشاء نشرات عامة
 
@@ -1570,8 +1652,8 @@
 #________________=Title
 -768e-field:title=العنوان 
 
-#_____________________________=Arabic 2.8.1  
--a3db-field:translationVersion= العربية 2.8.1
+#_____________________________=Arabic 2.9 
+-649d-field:translationVersion=2.9 العربية  
 
 #___________________=Username
 -84c2-field:username=اسم المستخدم 
@@ -1716,6 +1798,9 @@
 
 #________________=Korean
 -dec6-language:ko=الكورية 
+
+#________________=Kurdish
+-a06e-language:ku=الكردية
 
 #________________=Kirghiz
 -1848-language:ky=الكرغستانية 
@@ -1947,6 +2032,78 @@
 
 #_______________=Tools
 -4fa8-menu:tools=أدوات 
+
+#___________________=Farvardin
+-fef9-month:Persian1=الفارفادينية
+
+#____________________=Dey
+-494f-month:Persian10=الديوية
+
+#____________________=Bahman
+-6c49-month:Persian11=الباهمانية
+
+#____________________=Esfand
+-7179-month:Persian12=الاصفاندية
+
+#___________________=Ordibehesht
+-4241-month:Persian2=الأورديباهشتية
+
+#___________________=Khordad
+-02bc-month:Persian3=الخردادية
+
+#___________________=Tir
+-5b96-month:Persian4=التيرية
+
+#___________________=Mordad
+-e86f-month:Persian5=المردادية
+
+#___________________=Shahrivar
+-4a9e-month:Persian6=الشاهريفارية
+
+#___________________=Mehr
+-dfc8-month:Persian7=الميهرية
+
+#___________________=Aban
+-1d23-month:Persian8=الأبانية
+
+#___________________=Azar
+-1e15-month:Persian9=الأزيرية
+
+#________________=Jan
+-efed-month:Thai1=يناير
+
+#_________________=Oct
+-5132-month:Thai10=أكتوبر
+
+#_________________=Nov
+-bb9b-month:Thai11=نوفمبر
+
+#_________________=Dec
+-997f-month:Thai12=ديسمبر
+
+#________________=Feb
+-dc84-month:Thai2=فبراير
+
+#________________=Mar
+-c4ba-month:Thai3=مارس
+
+#________________=Apr
+-befd-month:Thai4=أبريل
+
+#________________=May
+-c94f-month:Thai5=ماي
+
+#________________=Jun
+-6d90-month:Thai6=يونيو
+
+#________________=Jul
+-b737-month:Thai7=يوليو
+
+#________________=Aug
+-7562-month:Thai8=أغسطس
+
+#________________=Sep
+-fdd2-month:Thai9=سبتمبر
 
 #______________=Apr
 -befd-month:apr=أبريل
@@ -2199,6 +2356,9 @@
 
 #_________________________________________=Cancel Modify Bulletin
 -276b-wintitle:confirmCancelModifyBulletin=إلغاء تعديل النشرة 
+
+#___________________________________=Cancel Retrieve
+-d984-wintitle:confirmCancelRetrieve=الغاء الاسترجاع
 
 #______________________________________=Cancel Backup
 -bba5-wintitle:confirmCancelShareBackup=إلغاء النسخ الاحتياطي 
@@ -2506,6 +2666,9 @@
 #_____________________________________=Invalid Server Name or IP Address
 -3376-wintitle:notifyInvalidServerName=اسم خادم أو عنوان IP غير صحيح
 
+#_____________________________________=No Row Selected
+-28fe-wintitle:notifyNoGridRowSelected=لم يتم اختيار صف
+
 #_________________________________=No Headquarters Selected
 -9140-wintitle:notifyNoHQsSelected=لم يتم تحديد مراكز رئيسية
 
@@ -2530,8 +2693,8 @@
 #__________________________________________=Preview One Bulletin Only
 -5b0a-wintitle:notifyPreviewOneBulletinOnly=استعرض نشرة واحدة فقط 
 
-#_______________________________________=Print To Disk
--b5b5-wintitle:notifyPrintToDiskComplete=طباعة إلى القرص
+#_______________________________________=Print To Report File
+-c1b2-wintitle:notifyPrintToDiskComplete=طباعة إلى ملف التقرير
 
 #______________________________________=No Bulletins Selected
 -c1d6-wintitle:notifyPrintZeroBulletins=لم يتم اختيار نشرة
@@ -2565,6 +2728,18 @@
 
 #____________________________________=Bulletin Download Canceled
 -f8d3-wintitle:notifyRetrieveCanceled=تم إلغاء تنزيل النشرة 
+
+#_________________________________=Retrieve Error
+-8ed0-wintitle:notifyRetrieveError=خطأ في الاسترجاع
+
+#________________________________________________=Warning
+-e9c4-wintitle:notifyRetrieveFileDataVersionError=تحذير
+
+#_____________________________________=Error
+-7f2f-wintitle:notifyRetrieveFileError=خطأ
+
+#______________________________________=Retrieve In Progress
+-6983-wintitle:notifyRetrieveInProgress=جاري الاسترجاع
 
 #______________________________________________=Error During Retrieve
 -f2d7-wintitle:notifyRetrievedOnlySomeSummaries=حدثت مشكلة أثناء الاسترجاع 
@@ -2618,10 +2793,10 @@
 -423f-wintitle:notifyWelcomeToMartus=مرحبا بك في Martus
 
 #___________________________________=Error Sending ContactInfo
--be22-wintitle:notifycontactRejected=حدثت مشكلة أثناء إرسال معلومات الاتصال
+-be22-wintitle:notifycontactRejected=حدثت مشكلة ما أثناء إرسال معلومات الاتصال
 
 #_____________________________________=Error Loading Configuration File
--fa56-wintitle:notifycorruptconfiginfo=حدثت مشكلة أثناء تحميل ملف التهيئة 
+-fa56-wintitle:notifycorruptconfiginfo=حدثت مشكلة ما أثناء تحميل ملف التهيئة 
 
 #___________________________________=Incorrect Signin
 -81bc-wintitle:notifyincorrectsignin=دخول غير صحيح 
@@ -2651,7 +2826,7 @@
 -21ee-wintitle:notifyserverok=تم اختيار خادم 
 
 #__________________________________=Error Sending Bulletin
--eaab-wintitle:notifyuploadrejected=حدثت مشكلة أثناء إرسال النشرة 
+-eaab-wintitle:notifyuploadrejected=حدثت مشكلة ما أثناء إرسال النشرة 
 
 #_______________________________________=Invalid Setup Information
 -2e9b-wintitle:notifyusernamessdontmatch=معلومات إقامة حساب غير صالحة
