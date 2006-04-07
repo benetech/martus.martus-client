@@ -1,9 +1,10 @@
 ﻿# Martus Client Translation File
 # Language code:  fr
 # Language name:  French
-# Exported date:  Wed Nov 23 11:37:58 PST 2005
-# Client version: 2.8.1
-# Client build:   20051104.1686
+# Translated by:  MID Foundation; Caroline Garcia
+# Exported date:  Wed Mar 15 11:20:41 PST 2006
+# Client version: pre-2.9 internal
+# Client build:   20060314.1712
 #
 # This file MUST be saved in UTF-8 format!
 # Lines beginning with # are comments and are ignored by Martus
@@ -23,7 +24,6 @@
 # If you name it Martus-fr.mtf, put the file in your
 #     Martus directory, and create a file (which can be empty)
 #     called use_unofficial_translations.txt in your Martus directory,
-
 #     then Martus will automatically read it.  You will receive a warning
 #     message when you use this file while testing.
 # In Martus, to choose a language, pick one from the drop-down list
@@ -48,6 +48,8 @@
 #      in field:confirmWarnMissingAccountMapFilecause=Warning: acctmap.txt
 #      file in your account's packets directory...)
 #  6.  do not translate the words "Martus" or "Benetech"
+
+
 #  7.  Leave standard field tags in English in CreateCustomFieldsHelp1 and
 #      CreateCustomFieldsHelp2, but put translation in parentheses after
 #      english : e.g.  'author' (autor), so users know what they refer to
@@ -101,6 +103,9 @@
 #__________________=Delete
 -f6fd-button:Delete=Supprimer
 
+#_________________________________=Delete Selected Row
+-5e2f-button:DeleteSelectedGridRow=Supprimer Rangée Sélectionnée
+
 #______________________________=Delete
 -f6fd-button:DeleteServerDrafts=Supprimer
 
@@ -111,8 +116,11 @@
 -bf93-button:FolderOrderDown=Bas
 
 #_________________________=Up
+
 -2038-button:FolderOrderUp=Haut
 
+#______________________________=Insert Row
+-9f53-button:InsertEmptyGridRow=Insérer Rangée
 
 #_________________=Leave
 -7e35-button:Leave=Quitter
@@ -120,8 +128,9 @@
 #_________________________=New Account
 -1d19-button:NewAccountTab=Nouveau Compte
 
+
 #___________________=Preview
--f1fb-button:Preview=Visualiser
+-f1fb-button:Preview=Prévisualiser
 
 #___________________________=Print only public information
 -a2a2-button:PrintOnlyPublic=Imprimer uniquement les informations publiques
@@ -153,6 +162,11 @@
 #______________________________________________=Retrieve latest bulletin version only
 -3449-button:RetrieveLatestBulletinRevisionOnly=Extraire uniquement la dernière version du communiqué
 
+#____________________________________=Only search most recent version of bulletins
+
+-852f-button:SearchFinalBulletinsOnly=Rechercher uniquement la dernière version des communiqués
+
+
 #__________________________________=Accept
 -bb54-button:ServerComplianceAccept=Accepter
 
@@ -169,7 +183,7 @@
 -91ea-button:UseOldCustomFields=Utiliser Ancien
 
 #_______________________________________=View Selected Version...
--f943-button:ViewPreviousBulletinVersion=Voir la Version Sélectionnée...
+-f943-button:ViewPreviousBulletinVersion=Afficher la Version Sélectionnée...
 
 #_________________________________________=Switch to using regular keyboard
 -c1ee-button:VirtualKeyboardSwitchToNormal=Passer au clavier normal
@@ -179,8 +193,6 @@
 
 #_________________________=Add Attachment
 -f3aa-button:addattachment=Ajouter Pièce Jointe
-
-
 
 #___________________________=Name
 -709a-button:attachmentLabel=Nom
@@ -192,7 +204,6 @@
 -7d7f-button:browse=Naviguer...
 
 #__________________=Cancel
-
 -77df-button:cancel=Annuler
 
 #____________________=Check All
@@ -205,7 +216,6 @@
 -b654-button:connectserver=Connecter
 
 #__________________=Create
-
 -6e15-button:create=Créer
 
 #_________________________=Restore Defaults
@@ -275,7 +285,6 @@
 -eb55-button:retrieve=Extraire
 
 #________________=Save
-
 -efc0-button:save=Enregistrer
 
 #__________________________=Save Attachment
@@ -294,7 +303,7 @@
 -bc6d-button:uncheckall=Tout Décocher 
 
 #__________________________=View Attachment
--b24c-button:viewattachment=Voir Pièce Jointe
+-b24c-button:viewattachment=Afficher Pièce Jointe
 
 #_______________=Yes
 -5397-button:yes=Oui
@@ -338,7 +347,6 @@
 #_________________________________=History
 -90cc-field:BulletinDetailsHistory=Historique
 
-
 #________________________________________=(in progress)
 -60dc-field:BulletinDetailsInProgressDate=(en cours)
 
@@ -367,10 +375,10 @@
 -eba1-field:BulletinHasUnknownStuff=Attention : Certaines informations de ce communiqué ne sont pas visibles
 
 #______________________________________________=The selected Headquarters account(s) will be able to view the private information in this bulletin, or send this bulletin to a server, after you save it.\n\nTo add a new Headquarters account use the Tools/Configure Headquarters menu option.
--6702-field:BulletinHeadQuartersHQInfoForModify=Le(s) compte(s) Siège sélectionné(s) pourra/pourront voir les informations confidentielles de ce communiqué, ou bien envoyer ce communiqué vers un serveur, après que vous l'ayez enregistré.\n\nPour ajouter un nouveau compte Siège, sélectionnez dans le menu l'option Outils/Configurer Siège.
+-6702-field:BulletinHeadQuartersHQInfoForModify=Le(s) compte(s) Siège sélectionné(s) pourra/pourront afficher les informations confidentielles de ce communiqué, ou bien envoyer ce communiqué vers un serveur, après que vous l'ayez enregistré.\n\nPour ajouter un nouveau compte Siège, sélectionnez dans le menu l'option Outils/Configurer Siège.
 
 #____________________________________________=The following Headquarters account(s) can view the private information in this bulletin, and can send this bulletin to a server.
--e728-field:BulletinHeadQuartersHQInfoForView=Le(s) compte(s) Siège suivant(s) peut/peuvent voir les informations confidentielles de ce communiqué et envoyer ce communiqué vers un serveur.
+-e728-field:BulletinHeadQuartersHQInfoForView=Le(s) compte(s) Siège suivant(s) peut/peuvent afficher les informations confidentielles de ce communiqué et envoyer ce communiqué vers un serveur.
 
 #______________________________________=Label
 -7434-field:BulletinHeadQuartersHQLabel=Etiquette
@@ -396,12 +404,23 @@
 #________________________________=Version
 -2da6-field:BulletinVersionNumber=Version
 
-
 #______________________________=Martus Bulletin
 -1ded-field:BulletinViewHeading=Communiqué Martus
 
 #__________________________=Sent
 -35f4-field:BulletinWasSent=Envoyé
+
+#_________________________=Calendar type
+-87e7-field:CalendarSystem=Type de Calendrier
+
+#__________________________________=Default (2005-05-31)
+-784a-field:CalendarSystemGregorian=Par Défaut (2005-05-31)
+
+#________________________________=Persian (1384-03-10)
+-2f3e-field:CalendarSystemPersian=Persan (1384-03-10)
+
+#_____________________________=Thai Solar (2548-05-31)
+-2be4-field:CalendarSystemThai=Solaire Thaï (2548-05-31)
 
 #_____________________________________=Download Progress
 -8b0e-field:ChunkProgressStatusMessage=Téléchargement en Cours
@@ -422,10 +441,9 @@
 -7e7c-field:ContactInfoDescriptionOfFields=Tous les autres champs sont actuellement stockés sur disque.
 
 #_______________________________________=This information will be available to anyone who can view your public bulletin information.\nThis allows people to contact you for further information.
--1f49-field:ContactInfoFutureUseOfFields=Ces informations seront accessibles à quiconque pouvant lire les informations de votre communiqué public.\nCela permet aux tiers de vous contacter pour de plus amples informations.
+-1f49-field:ContactInfoFutureUseOfFields=Ces informations seront accessibles à quiconque pouvant afficher les informations de votre communiqué public.\nCela permet aux tiers de vous contacter pour de plus amples informations.
 
 #____________________________________=This information identifies your organization.\nYou must enter either an Author or Organization, and both are shown in every bulletin you create.
-
 -ea39-field:ContactInfoRequiredFields=Ces informations identifient votre organisme.\nVous devez saisir soit un Auteur, soit un Organisme, tous les deux figurant dans chaque communiqué que vous créez.
 
 #_________________________________=You can change any of this information later, by choosing Options/Contact Info.
@@ -435,7 +453,7 @@
 -1ef6-field:CreateCustomFieldsHelp1=La disposition des communiqués est dictée par un  document XML. Par défaut, les champs des communiqués standards se présentent en haut de la déclaration des Champs Personnalisés, mais au besoin ils peuvent être déplacés. Il existe cependant quatre champs obligatoires qui ne peuvent être supprimés : 'author' [auteur], 'entrydate' [date de saisie], 'language' [langue] et 'title' [titre].\n\n
 
 #__________________________________=For custom (non-standard) fields, you first select the type of field you want.  The possible choices are 'BOOLEAN', 'DATE', 'DATERANGE', 'DROPDOWN', 'GRID', 'LANGUAGE', 'MESSAGE', 'MULTILINE', and 'STRING'. \n\nFor each custom field you will need a unique identification tag.  This tag can be any word except those already used by the system (eg. 'author', 'summary', 'location', 'title' etc.), and cannot contain spaces or special characters.  Examples of choices are 'VictimsName', 'EyeColorChoice', etc.\n\nThen you need a label which is displayed next to your custom field.  An example might be 'Name of 1st Witness'.\n\nAdditional Comments\n1. XML is case-sensitive ('Witness' is not the same as 'witness') \n2. Quotes around type name can be single or double as long as they match (e.g. 'STRING" is not valid. It must be 'STRING' or "STRING")\n3. A Boolean field will be displayed as a checkbox when editing and Yes/No when previewed or printed.\n4.  Use "MESSAGE" fields to give guidance on how to enter data, and to create comments/notes that will be displayed in every bulletin.\n\nSee examples below:\n\n
--4ccc-field:CreateCustomFieldsHelp2=Pour les champs personnalisés (non standards), sélectionnez d'abord le type de champ souhaité. Les choix proposés sont 'BOOLEAN' (BOOLEEN), 'DATE', 'DATERANGE' (FOURCHETTE DE DATES), 'DROPDOWN' (LISTE DÉROULANTE), 'GRID' (GRILLE), 'LANGUAGE' (LANGUE), 'MESSAGE', 'MULTILINE' (MULTILIGNE) et 'STRING' (CHAINE).\n\nPour chaque champ personnalisé, il vous faudra une balise d'identification unique. Cette balise peut être composée de n'importe quel mot, sauf de ceux déjà utilisés par le système (par exemple 'author' [auteur], 'summary' [résumé], 'location' [lieu], 'title' [titre] etc.), et ne peut contenir ni espaces ni caractères spéciaux. Quelques exemples de choix : 'NomVictime', 'ChoixCouleurYeux', etc.\n\nIl vous faut ensuite une étiquette qui s'affiche à côté de votre champ personnalisé. Par exemple, 'Nom du 1er témoin'.\n\nCommentaires supplémentaires\n1. Le XML tient compte de la casse ('Témoin' est différent de 'témoin')\n2. Les guillemets entourant le nom type peuvent être simples ou doubles, à condition qu'ils soient identiques (p.ex. 'STRING" [CHAINE] est invalide. Ce doit être soit 'STRING' [CHAINE], soit "STRING" [CHAINE])\n3. Un champ Booléen s'affichera sous forme de case à cocher à l'édition, et Oui/Non à la visualisation ou à l'impression.\n4. Employez les champs "MESSAGE" pour donner des conseils sur la façon de saisir les données, et créer des commentaires/notes qui seront inclus dans chaque communiqué.\n\nVoir les exemples ci-dessous :\n\n
+-4ccc-field:CreateCustomFieldsHelp2=Pour les champs personnalisés (non standards), sélectionnez d'abord le type de champ souhaité. Les choix proposés sont 'BOOLEAN' (BOOLEEN), 'DATE', 'DATERANGE' (FOURCHETTE DE DATES), 'DROPDOWN' (LISTE DÉROULANTE), 'GRID' (GRILLE), 'LANGUAGE' (LANGUE), 'MESSAGE', 'MULTILINE' (MULTILIGNE) et 'STRING' (CHAINE).\n\nPour chaque champ personnalisé, il vous faudra une balise d'identification unique. Cette balise peut être composée de n'importe quel mot, sauf de ceux déjà utilisés par le système (par exemple 'author' [auteur], 'summary' [résumé], 'location' [lieu], 'title' [titre] etc.), et ne peut contenir ni espaces ni caractères spéciaux. Quelques exemples de choix : 'NomVictime', 'ChoixCouleurYeux', etc.\n\nIl vous faut ensuite une étiquette qui s'affiche à côté de votre champ personnalisé. Par exemple, 'Nom du 1er témoin'.\n\nCommentaires supplémentaires\n1. Le XML tient compte de la casse ('Témoin' est différent de 'témoin')\n2. Les guillemets entourant le nom type peuvent être simples ou doubles, à condition qu'ils soient identiques (p.ex. 'STRING" [CHAINE] est invalide. Ce doit être soit 'STRING' [CHAINE], soit "STRING" [CHAINE])\n3. Un champ Booléen s'affichera sous forme de case à cocher à l'édition, et Oui/Non à la prévisualisation ou à l'impression.\n4. Employez les champs "MESSAGE" pour donner des conseils sur la façon de saisir les données, et créer des commentaires/notes qui seront inclus dans chaque communiqué.\n\nVoir les exemples ci-dessous :\n\n
 
 #__________________________________=\n<Field type='DROPDOWN'>\n<Tag>BulletinSource</Tag>\n<Label>Source of bulletin information</Label>\n<Choices>\n<Choice>Media/Press</Choice>\n<Choice>Legal Report</Choice>\n<Choice>Personal Interview</Choice>\n<Choice>Other</Choice>\n</Choices>\n</Field>\n\n<Field type='STRING'>\n<Tag>SpecifyOther</Tag>\n<Label>If "Other", please specify:</Label>\n</Field>\n\n<Field type='STRING'>\n<Tag>IntervieweeName</Tag>\n<Label>Interviewee Name</Label>\n</Field>\n\n<Field type='LANGUAGE'>\n<Tag>IntervieweeLanguage</Tag>\n<Label>Interviewee Speaks</Label>\n</Field>\n\n<Field type='DATERANGE'>\n<Tag>InterviewDates</Tag>\n<Label>Date(s) of interview(s)</Label>\n</Field>\n\n<Field type='BOOLEAN'>\n<Tag>Anonymous</Tag>\n<Label>Does interviewee wish to remain anonymous?</Label>\n</Field>\n\n<Field type='GRID'>\n<Tag>VictimInformationGrid</Tag>\n<Label>Victim Information</Label>\n<GridSpecDetails>\n<Column type='STRING'><Tag></Tag><Label>First Name</Label></Column>\n<Column type='STRING'><Tag></Tag><Label>Last Name</Label></Column>\n<Column type='BOOLEAN'><Tag></Tag><Label>Is Identified?</Label></Column>\n<Column type='DATE'><Tag></Tag><Label>Date of Birth</Label></Column>\n<Column type='DROPDOWN'><Tag></Tag><Label>Sex</Label>\n<Choices>\n<Choice>Male</Choice>\n<Choice>Female</Choice>\n<Choice>Unknown</Choice>\n</Choices></Column>\n<Column type='STRING'><Tag></Tag><Label>Ethnicity</Label></Column>\n</GridSpecDetails>\n</Field>\n\n<Field type='MESSAGE'>\n<Tag>MessageProfession</Tag>\n<Label>Profession History Table Note</Label>\n<Message>If you have information about a person who has had different professions over time, enter multiple rows with the same First and Last Names and show the date ranges for each profession on a separate row.</Message>\n</Field>\n\n<Field type='GRID'>\n<Tag>ProfessionHistoryGrid</Tag>\n<Label>Profession History</Label>\n<GridSpecDetails>\n<Column type='STRING'><Tag></Tag><Label>First Name</Label></Column>\n<Column type='STRING'><Tag></Tag><Label>Last Name</Label></Column>\n<Column type='STRING'><Tag></Tag><Label>Profession</Label></Column>\n<Column type='DATERANGE'><Tag></Tag><Label>Dates of Profession</Label></Column>\n</GridSpecDetails>\n</Field>\n
 -4d55-field:CreateCustomFieldsHelp3=\n<Field type='DROPDOWN'>\n<Tag>OrigineCommuniqué</Tag>\n<Label>Origine des informations du communiqué</Label>\n<Choices>\n<Choice>Médias/Presse</Choice>\n<Choice>Rapport Légal</Choice>\n<Choice>Entretien Personnel</Choice>\n<Choice>Autre</Choice>\n</Choices>\n</Field>\n\n<Field type='STRING'>\n<Tag>SpécifierAutre</Tag>\n<Label>Si "Autre", veuillez spécifier :</Label>\n</Field>\n\n<Field type='STRING'>\n<Tag>NomInterviewé</Tag>\n<Label>Nom de l'interviewé</Label>\n</Field>\n\n<Field type='LANGUAGE'>\n<Tag>LangueInterviewé</Tag>\n<Label>Langue de l’interviewé</Label>\n</Field>\n\n<Field type='DATERANGE'>\n<Tag>DatesEntretien</Tag>\n<Label>Date(s) d’entretien(s)</Label>\n</Field>\n\n<Field type='BOOLEAN'>\n<Tag>Anonyme</Tag>\n<Label>Est-ce que l'interviewé souhaite rester anonyme ?</Label>\n</Field>\n\n<Field type='GRID'>\n<Tag>GrilleInformationsVictime</Tag>\n<Label>Informations sur la Victime</Label>\n<GridSpecDetails>\n<Column type='STRING'><Tag></Tag><Label>Prénom</Label></Column>\n<Column type='STRING'><Tag></Tag><Label>Nom</Label></Column>\n<Column type='BOOLEAN'><Tag></Tag><Label>Est-elle identifiée ?</Label></Column>\n<Column type='DATE'><Tag></Tag><Label>Date de Naissance</Label></Column>\n<Column type='DROPDOWN'><Tag></Tag><Label>Sexe</Label>\n<Choices>\n<Choice>Masculin</Choice>\n<Choice>Féminin</Choice>\n<Choice>Inconnu</Choice>\n</Choices></Column>\n<Column type='STRING'><Tag></Tag><Label>Appartenance Ethnique</Label></Column>\n</GridSpecDetails>\n</Field>\n\n<Field type='MESSAGE'>\n<Tag>MessageProfession</Tag>\n<Label>Notes sur le Passé Professionnel</Label>\n<Message>Si vous avez des informations concernant une personne qui a exercé différentes professions par le passé, créez plusieurs rangées comportant le même prénom et le même nom, et saisissez les fourchettes de dates pour chaque profession dans des rangées différentes.</Message>\n</Field>\n\n<Field type='GRID'>\n<Tag>GrillePasséProfessionnel</Tag>\n<Label>Passé Professionnel</Label>\n<GridSpecDetails>\n<Column type='STRING'><Tag></Tag><Label>Prénom</Label></Column>\n<Column type='STRING'><Tag></Tag><Label>Nom</Label></Column>\n<Column type='STRING'><Tag></Tag><Label>Profession</Label></Column>\n<Column type='DATERANGE'><Tag></Tag><Label>Dates de Fonction</Label></Column>\n</GridSpecDetails>\n</Field>\n
@@ -446,8 +464,29 @@
 #_____________________________________=Customization Template Files
 -9210-field:CustomizationTemplateFiles=Fichiers de Modèles Personnalisés
 
+#________________________=Date delimiter
+-36d4-field:DateDelimiter=Délimiteur de Date
+
+#____________________________=Dash (00-00-00)
+-997c-field:DateDelimiterDash=Tiret (00-00-00)
+
+#___________________________=Dot (00.00.00)
+-66ea-field:DateDelimiterDot=Point (00.00.00)
+
+#_____________________________=Slash (00/00/00)
+-404d-field:DateDelimiterSlash=Barre oblique (00/00/00)
+
 #____________________=Exact Date
 -8a81-field:DateExact=Date Exacte
+
+#______________________=Day
+-987b-field:DatePartDay=Jour
+
+#________________________=Month
+-082b-field:DatePartMonth=Mois
+
+#_______________________=Year
+-879e-field:DatePartYear=Année
 
 #____________________=Date Range
 -6bb4-field:DateRange=Fourchette de Dates
@@ -468,9 +507,7 @@
 -ce4c-field:DeleteBulletinFileMsg1=Ce communiqué a été collé dans Martus à partir du fichier :
 
 #_________________________________=Do you want to delete the original file, or leave it in place?
-
 -3425-field:DeleteBulletinFileMsg2=Voulez-vous supprimer le fichier d’origine, ou le laisser en place ?
-
 
 #_____________________=Delete?
 -042d-field:DeleteFlag=Supprimer ?
@@ -494,14 +531,13 @@
 -6e98-field:ErrorCustomFieldHeader2=TYPE
 
 #__________________________________=TAG
-
 -41ea-field:ErrorCustomFieldHeader3=BALISE
 
 #__________________________________=LABEL
 -64b8-field:ErrorCustomFieldHeader4=ETIQUETTE
 
-#____________________________=There is an error in the custom field definitions. Each problem is identified with the following codes:\n   100 - Required standard field is missing\n   101 - Custom field does not have a correct tag.\n   102 - A previous Tag already exists with this name.\n   103 - Custom field does not have a label.\n   104 - Unrecognized Field Type.\n   105 - A label was found in a standard field.\n   106 - XML Parse Error.\n   107 - Tag contains illegal characters.\n   108 - Duplicate entry in Dropdown field.\n   109 - No Choices in Dropdown field.\n   200 - All fields empty.\n   201 - Unrecognized Headquarters created this template.\n   202 - Security validation error.\n   203 - File Error.
--c1b6-field:ErrorCustomFields=Erreur dans les définitions de champs personnalisés. Chaque problème est identifié par les codes suivants :\n  100 - Le champ standard obligatoire est manquant\n  101 - Balise incorrecte dans le champ personnalisé.\n  102 - Une balise porte déjà ce nom.\n  103 - Le champ personnalisé n'a pas d'étiquette.\n  104 - Type de champ non reconnu.\n  105 - Une étiquette a été trouvée dans un champ standard.\n  106 - Erreur d'analyse XML.\n  107 - La balise contient des caractères interdits.\n  108 – Double entrée dans le champ déroulant.\n  109 – Aucun choix dans le champ déroulant.\n  200 – Tous les champs sont vides.\n  201 – Modèle créé par un Siège non reconnu.\n  202 – Erreur de validation de sécurité.\n  203 – Erreur de fichier.
+#____________________________=There is an error in the custom field definitions. Each problem is identified with the following codes:\n   100 - Required standard field is missing\n   101 - Custom field does not have a correct tag.\n   102 - A previous Tag already exists with this name.\n   103 - Custom field does not have a label.\n   104 - Unrecognized Field Type.\n   105 - A label was found in a standard field.\n   106 - XML Parse Error.\n   107 - Tag contains illegal characters.\n   108 - Duplicate entry in Dropdown field.\n   109 - No Choices in Dropdown field.\n   200 - All fields empty.\n   201 - Unrecognized Headquarters created this template.\n   202 - Security validation error.\n   203 - File Error.\n   204 - Imported XML Missing Field.
+-0b96-field:ErrorCustomFields=Erreur dans les définitions de champs personnalisés. Chaque problème est identifié par les codes suivants :\n  100 - Le champ standard obligatoire est manquant\n  101 - Balise incorrecte dans le champ personnalisé.\n  102 - Une balise porte déjà ce nom.\n  103 - Le champ personnalisé n'a pas d'étiquette.\n  104 - Type de champ non reconnu.\n  105 - Une étiquette a été trouvée dans un champ standard.\n  106 - Erreur d'analyse XML.\n  107 - La balise contient des caractères interdits.\n  108 – Double entrée dans le champ déroulant.\n  109 – Aucun choix dans le champ déroulant.\n  200 – Tous les champs sont vides.\n  201 – Modèle créé par un Siège non reconnu.\n  202 – Erreur de validation de sécurité.\n  203 – Erreur de fichier.\n  204 – Champ XML importé manquant.
 
 #_________________________________________=A previous backup file exists.  You must save each file on its own removable media disk.
 -db93-field:ErrorPreviousBackupShareExists=Il existe un ancien fichier de sauvegarde. Vous devez enregistrer chaque fichier sur son propre disque amovible.
@@ -531,12 +567,10 @@
 -42b4-field:FancySearchHelpMsg1=--- Généralités ---\n\nMartus recherche les versions existantes de tout communiqué (à la fois publique et privée, verrouillée et brouillon) dans chaque dossier, dont le dossier Communiqués Supprimés. Lorsque la recherche est terminée, le dossier Résultats de la Recherche affiche les copies des communiqués trouvés.\n\nVous pouvez rechercher des mots dans chaque langue. Les recherches Martus ne tiennent pas compte de la casse en Anglais ni dans les autres langues à caractères latins, donc il n’y a aucune différence entre les majuscules et les minuscules.\n\nLes recherches incluent les noms de pièces jointes, mais non leur contenu.\n\nVous pouvez rechercher à la fois dans les champs standards et les champs personnalisés.\n\n
 
 #______________________________=---Search tips---\n\nMartus will find any text you enter whether it's a complete word or part of a larger word. For example, if you search for the word prison, you'll see bulletins that include the words prison, imprison, and imprisonment. Likewise, if you search for the word prison, Martus will find bulletins that include attachments with names such as photos-prison.jpg and prisoners-report.doc.\n\nTo search for an exact phrase, type it with quotation marks around the phrase  (e.g.  "Witness Testimony"). If you do not put quotation marks around the phrase, Martus will search for the words individually.\n\nUse the word "#Or#" to broaden your search, or the word "#And#" to narrow it.  You can use the #And# / #Or# dropdowns to specify different fields you want search across (e.g. you want to search for bulletins that have "Last Saved Date" in the last week and have a certain author).  If you want to search on multiple text values within a single bulletin field, you can use #Or# or #And# in-between words in the "Search For..." entry box.  For example, if you search "Any Field" for:\n   prison #Or# jail\nyou'll see a list of bulletins that contain either word anywhere in the bulletin. If you search for:\n   prison #And# assault \nyou'll see a list of bulletins that contain both words. The keyword "#And#" is implied, so if you search for:\n   prison assault \nMartus will find bulletins the same bulletins as if you searched for:\n   prison #And# assault\n\nWhen you use both "#And#" and "#Or#", your search terms are grouped from the beginning of your list (either across bulletin fields or within a particular field). For example, if you enter:\n   prison #Or# jail #And# trial \nin the "Search For..." entry box, Martus will search for any bulletins that contain either of the words prison or jail, and also contain the word trial. But if you enter:\n   prison #And# jail #Or# trial \nMartus will search for any bulletins that contain both the words prison and jail, or contain the word trial.\n
-
 -ec7d-field:FancySearchHelpMsg2=--- Astuces pour la recherche ---\n\nMartus trouvera tout texte que vous avez saisi, que ce soit un mot entier ou une partie d’un mot. Par exemple, si vous recherchez le mot prison, vous verrez s’afficher la liste des communiqués comportant le mot prison et ses dérivés tels que emprisonner et emprisonnement. De la même façon, si vous recherchez le mot prison, Martus trouvera des communiqués contenant des pièces jointes avec des noms tels que photos-prison.jpg et rapport-prisonniers.doc.\n\nPour rechercher une expression exacte, tapez-la entre guillements (p.ex. "Déposition du Témoin"). Si vous omettez les guillemets, Martus recherchera chaque mot individuellement.\n\nUtilisez le mot "#Or#" pour élargir votre recherche, ou le mot "#And#" pour la restraindre. Vous pouvez utiliser les boutons de déroulement #And# / #Or# pour spécifier les différents champs dans lesquels rechercher (p.ex. Vous voulez rechercher des communiqués dont la "Date du Dernier Enregistrement" est la semaine précédente et qui ont été créés par un certain auteur). Si vous voulez rechercher plusieurs valeurs de texte dans un seul champ de communiqué, vous pouvez utiliser #Or# ou #And# entre les mots dans le champ de saisie "Rechercher...". Par exemple, si vous recherchez dans "Tous les Champs" :\n  prison #Or# cellule\nvous verrez s’afficher la liste des communiqués contenant soit l’un, soit l’autre mot. Si vous recherchez :\n  prison #And# agression \nvous verrez s’afficher la liste des communiqués contenant à la fois les deux mots. Le mot clé "#And#" est implicite, donc si vous recherchez :\n  prison agression \nMartus trouvera les mêmes communiqués que si vous aviez recherché :\n  prison #And# agression\n\nLorsque vous utilisez à la fois "#And#" et "#Or#", vos termes de recherche sont regroupés au début de la liste (soit dans les champs de communiqués, soit dans un champ particulier). Par exemple, si vous entrez :\n  prison #Or# cellule #And# jugement \ndans le champ de saisie "Rechercher...", Martus recherchera tous les communiqués contenant soit le mot prison, soit cellule, et comportant aussi le mot jugement. Mais si vous saisissez :\n  prison #And# cellule #Or# jugement \nMartus recherchera tous les communiqués contenant à la fois les mots prison et cellule, ou comportant le mot jugement.\n
 
 #______________________________=You can use the word #Or# or #And#, or you can use the English words "#OrEnglish#" and "#AndEnglish#" to search.\n\nYou need to put spaces before and after any #Or# / #And# keywords you use in your search.\n
 -1573-field:FancySearchHelpMsg3=Vous pouvez utiliser le mot #Or# ou #And#, ou les mots anglais "#OrEnglish#" et "#AndEnglish#" pour effectuer la recherche.\n\nVous devez mettre des espaces avant et après chaque mot clé #Or# / #And# que vous avez utilisé pour votre recherche.\n
-
 
 #______________________________________=This file name should be unique and identifiable to you but we recommend not using your user name.  Each file will be generated with this name and its number sequence.
 -02b6-field:GetShareFileNameDescription=Le nom de ce fichier doit être unique et vous devez pouvoir l'identifier, mais nous vous recommandons de ne pas utiliser votre pseudo. Chaque fichier sera généré avec ce nom et sa séquence numérique.
@@ -551,8 +585,7 @@
 -ea13-field:HQsSetAsDefault=Les comptes Siège par défaut seront sélectionnés pour tous nouveaux communiqués ou versions.
 
 #________________________________=These Headquarters accounts are allowed to view the private information in this bulletin, and to send this bulletin to a server on your behalf.
--2274-field:HQsSetAsProxyUploader=Les comptes de ce Siège sont autorisés pour la lecture des informations confidentielles de ce communiqué, et pour l'envoi de ce communiqué à un serveur en votre nom.
-
+-2274-field:HQsSetAsProxyUploader=Les comptes de ce Siège sont autorisés à afficher les informations confidentielles de ce communiqué, et à envoyer ce communiqué à un serveur en votre nom.
 
 #_______________________________=Selected?
 -9c09-field:HeadQuartersSelected=Sélectionné ?
@@ -581,10 +614,8 @@
 #________________________________=One or more accounts already exist on this computer. To create an additional account with a new username and passphrase, click OK.
 -02f2-field:HowToCreateNewAccount=Il existe déjà un ou plusieurs comptes sur cet ordinateur. Pour créer un nouveau compte avec un nouveau pseudo et un nouveau mot de passe, cliquez sur OK.
 
-#_________________________________=The version of this translation is not compatible with this version of Martus.  It is recommend that you do not continue to use this translation version and go to (http://www.martus.org/downloads) for the appropriate version.
--2c0e-field:IncompatibleMtfVersion=La version de cette traduction n’est pas compatible avec la version de Martus que vous utilisez. Il est recommandé de ne pas continuer à utiliser cette traduction et de vous rendre sur le site (http://www.martus.org/downloads) pour télécharger une version appropriée.
-
-
+#_________________________________=The version of this translation is not compatible with this version of Martus.  It is recommended that you do not continue to use this translation version and go to (http://www.martus.org/downloads) for the appropriate version.
+-a747-field:IncompatibleMtfVersion=La version de cette traduction n’est pas compatible avec la version de Martus que vous utilisez. Il est recommandé de ne pas continuer à utiliser cette traduction et de vous rendre sur le site (http://www.martus.org/downloads) pour télécharger une version appropriée.
 
 #________________________________________=Martus Software Version: #ProgramVersionNumber#
 -fcd7-field:IncompatibleMtfVersionProgram=Version du Logiciel Martus : #ProgramVersionNumber#
@@ -596,13 +627,14 @@
 -00a9-field:MayBeDamaged=Attention : Certaines parties peuvent être manquantes ou endommagées
 
 #_______________________________=#NumberOfHQs# Headquarter account(s) will be able to view this private information
--da24-field:ModifyBulletinHQInfo=#NumberOfHQs# compte(s) Siège pourra/pourront lire ces informations confidentielles
+-da24-field:ModifyBulletinHQInfo=#NumberOfHQs# compte(s) Siège pourra/pourront afficher ces informations confidentielles
 
 #_____________________________=Please enter a name for the file you wish to export.
 -95ed-field:NameOfExportedFile=Veuillez donner un nom au fichier à exporter.
 
 #__________________________=No Headquarters accounts selected for this bulletin.
 -2b9f-field:NoHQsConfigured=Aucun compte Siège n'est sélectionné pour ce communiqué.
+
 
 #___________________________________________=Server Not Available
 -c79c-field:NoServerAvailableProgressMessage=Serveur Indisponible
@@ -614,10 +646,9 @@
 -8167-field:NormalKeyboardMsg2=Pour une sécurité optimale, passez au clavier écran.
 
 #_____________________________________=The author has not given you permission to view the private portions of this bulletin.
--ba2f-field:NotAuthorizedToViewPrivate=L'auteur ne vous a pas autorisé à lire les parties confidentielles de ce communiqué.
+-ba2f-field:NotAuthorizedToViewPrivate=L'auteur ne vous a pas autorisé à afficher les parties confidentielles de ce communiqué.
 
 #____________________________=Details:
-
 -1daa-field:OnlineHelpMessage=Détails :
 
 #_______________________________=Topics:
@@ -674,7 +705,6 @@
 #_____________________________=The following server will be removed:
 -5316-field:RemoveServerLabel1=Le serveur suivant va être supprimé :
 
-
 #_____________________________=Are you sure you want to do this?
 -bfb8-field:RemoveServerLabel2=En êtes-vous certain ?
 
@@ -707,7 +737,6 @@
 
 #____________________________________=Please retype your username and password for verification.
 -67cd-field:RetypeUserNameAndPassword=Veuillez ressaisir votre pseudo et votre mot de passe pour vérification.
-
 
 #________________________________=Scrub data before deleting
 -7a0b-field:ScrubDataBeforeDelete=Nettoyer les données avant suppression
@@ -745,13 +774,11 @@
 #_____________________________________________=The current server has updated its statement describing its compliance with the official guidelines for the secure and reliable operation of a Martus server.  The new statement appears below. You can accept or reject this server based on its compliance statement.
 -2acb-field:ServerComplianceChangedDescription=Le serveur actuel a mis à jour sa déclaration de conformité avec les normes officielles de sécurité et de fiabilité d'exploitation d'un serveur Martus. La nouvelle déclaration s'affiche ci-dessous. Vous pouvez accepter ou refuser ce serveur en fonction de sa déclaration de conformité.
 
-
 #______________________________________=The server you have selected has provided the following statement describing its compliance with the official guidelines for the secure and reliable operation of a Martus server.  You can accept or reject this server based on its compliance statement.
 -276f-field:ServerComplianceDescription=Le serveur que vous avez sélectionné a fourni la déclaration suivante de conformité avec les normes officielles de sécurité et de fiabilité d'exploitation d'un serveur Martus. Vous pouvez accepter ou refuser ce serveur en fonction de sa déclaration de conformité.
 
 #________________________________=You will not be allowed to upload bulletins to this server.
 -3a97-field:ServerDeclinesUploads=Vous ne serez pas autorisé à télécharger vos communiqués vers ce serveur.
-
 
 #_______________________________=Server Magic Word:
 -ad90-field:ServerMagicWordEntry=Formule Magique du Serveur :
@@ -761,6 +788,7 @@
 
 #_____________________________________________=Server needs to be configured.
 -26de-field:ServerNotConfiguredProgressMessage=Le serveur doit être configuré.
+
 
 #________________________________=Server Public Identification Code:
 -0cf3-field:ServerPublicCodeEntry=Code d'Identification Publique du serveur :
@@ -774,9 +802,14 @@
 #___________________________________=Human Rights Bulletin System
 -fe5b-field:SplashProductDescription=Système de Communiqués pour les Droits de l’Homme
 
+#___________________________=Connecting to server
+-2a77-field:StatusConnecting=Connexion au serveur
+
 #______________________=Ready
 -20c7-field:StatusReady=Prêt
 
+#___________________________=Retrieving...
+-5316-field:StatusRetrieving=Extraction...
 
 #__________________________=Details
 -dc3d-field:TemplateDetails=Détails
@@ -786,7 +819,6 @@
 
 #__________________________=Unknown
 -bc78-field:UnknownDateSave=Inconnu
-
 
 #___________________________=WARNING: This field requires a newer version of Martus to be viewed
 -390c-field:UnknownFieldType=ATTENTION : Pour s'afficher, ce champ nécessite une version plus récente de Martus
@@ -804,14 +836,13 @@
 -6231-field:UploadingSealedBulletin=Envoi du Communiqué Verrouillé
 
 #_____________________________=#NumberOfHQs# Headquarter account(s) can view this private information
--5ffa-field:ViewBulletinHQInfo=#NumberOfHQs# compte(s) Siège peuvent lire ces informations confidentielles
+-5ffa-field:ViewBulletinHQInfo=#NumberOfHQs# compte(s) Siège peuvent afficher ces informations confidentielles
 
 #___________________________________=Back Space
 -7ae6-field:VirtualKeyboardBackSpace=Retour Arrière
 
 #______________________________=ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890-+=!@#$%^&*()_,.[]{}<>\/?|;:~
 -25df-field:VirtualKeyboardKeys=ABCDEFGHIJKLMNOPQRSTUVWXYZaàâbcçdeéèêëfghiîïjklmnoôpqrstuùûvwxyz1234567890-+=!@$%^&*()_,.[]{}<>\/?|;:~
-
 
 #_______________________________=Space
 -6d8c-field:VirtualKeyboardSpace=Espace
@@ -826,7 +857,6 @@
 -816c-field:WasSentNo=Non
 
 #_____________________=Yes
-
 -5397-field:WasSentYes=Oui
 
 #____________________________=Built on
@@ -875,8 +905,6 @@
 -9f7f-field:confirmBackupKeyPairSecretSharecause=Nous vous recommandons de créer maintenant #TotalNumberOfFilesInBackup# fichiers de sauvegarde à partir desquels #MinimumNumberOfFilesNeededForRecovery# pourront être utilisés pour reconstruire votre clé sans pseudo ni mot de passe.
 
 #________________________________________________=By choosing Yes, you will be prompted to save pieces of your key onto removable disks.
-
-
 -efaa-field:confirmBackupKeyPairSecretShareeffect=Si vous choisissez Oui, il vous sera demandé de sauvegarder des parties de votre clé sur des disques amovibles.
 
 #________________________________________________=We strongly recommend that you now verify all disks to make sure the data was written correctly.
@@ -897,8 +925,15 @@
 #____________________________________________=Any changes you have made to this bulletin will be discarded.
 -3819-field:confirmCancelModifyBulletineffect=Toutes les modifications que vous avez apportées à ce communiqué ne seront pas prises en compte.
 
+#_____________________________________=Bulletins are currently being retrieved from the server.
+-126a-field:confirmCancelRetrievecause=Extraction en cours des communiqués depuis le serveur
+
+#______________________________________=This operation will cancel the current retrieval, so some of the requested bulletins may not be retrieved.
+-babb-field:confirmCancelRetrieveeffect=Cette opération annulera l’extraction en cours et certains des communiqués demandés ne seront pas extraits.
+
 #________________________________________=Do you wish to cancel this backup?
 -7b46-field:confirmCancelShareBackupcause=Voulez-vous annuler cette sauvegarde ?
+
 
 #_________________________________________=By choosing Yes, you will exit this backup.
 -5319-field:confirmCancelShareBackupeffect=Si vous choisissez Oui, vous quitterez cette sauvegarde.
@@ -906,10 +941,8 @@
 #_________________________________________=Do you wish to cancel the key restore process?
 -a7e1-field:confirmCancelShareRecovercause=Voulez-vous annuler le processus de restauration de la clé ?
 
-
 #__________________________________________=By choosing Yes, you will exit Martus.
 -49e1-field:confirmCancelShareRecovereffect=Si vous choisissez Oui, vous quitterez Martus.
-
 
 #________________________________________=Do you wish to cancel the verification?
 -40ae-field:confirmCancelShareVerifycause=Voulez-vous annuler la vérification ?
@@ -918,7 +951,7 @@
 -5b61-field:confirmCancelShareVerifyeffect=Si vous choisissez Oui, vous quitterez cette étape de vérification.
 
 #_________________________________________=You have chosen to remove all selected Headquarters accounts.  Any existing saved bulletins will still be visible by the old Headquarters.  If you want to disallow Headquarters viewing access to previously created Draft bulletins they must be re-saved after revoking the Headquarters.  New versions of sealed bulletins will not be able to be viewed by Headquarters, but any old versions of sealed bulletins that already are on a Headquarters' computer CANNOT be reset to be non-viewable by the Headquarters.
--9959-field:confirmClearHQInformationcause=Vous avez choisi de supprimer tous les comptes Siège sélectionnés. Tout communiqué enregistré existant restera visible par l'ancien Siège. Si vous souhaitez interdire à votre Siège tout accès de lecture aux Brouillons de communiqués précédemment créés, réenregistrez-les après suppression du Siège. Aucune version récente de communiqué vérouillé ne pourra être vue par le Siège, mais AUCUNE ancienne version de communiqué verrouillé existant sur un ordinateur du Siège ne pourra être réinitialisée pour ne plus être visible du Siège.
+-9959-field:confirmClearHQInformationcause=Vous avez choisi de supprimer tous les comptes Siège sélectionnés. Tout communiqué enregistré existant restera visible par l'ancien Siège. Si vous souhaitez interdire à votre Siège tout accès à l’affichage de Brouillons de communiqués précédemment créés, réenregistrez-les après suppression du Siège. Aucune version récente de communiqué vérouillé ne pourra être affichée par le Siège, mais AUCUNE ancienne version de communiqué verrouillé existant sur un ordinateur du Siège ne pourra être réinitialisée pour ne plus être affichée par le Siège.
 
 #__________________________________________=By clicking on Yes, any draft or sealed bulletins saved in the future will no longer be accessible by your Headquarters.
 -4a87-field:confirmClearHQInformationeffect=Si vous cliquez sur Oui, aucun futur brouillon de communiqué ou communiqué verrouillé ne sera plus accessible par votre Siège.
@@ -951,8 +984,6 @@
 -49ee-field:confirmDraftUploadRemindercause=N.B. : Certains brouillons de communiqués ont été modifiés sans avoir encore été transmis à un serveur. Voulez-vous quand même quitter ?
 
 #___________________________________________=Clicking on Yes will exit Martus, and leave the unsent bulletins.  They will be sent the next time you run Martus and connect to a server.
-
-
 -7c7f-field:confirmDraftUploadRemindereffect=Si vous cliquez sur Oui, vous quitterez Martus sans envoyer les communiqués. Ils seront envoyés lors de votre prochaine session Martus après avoir établi une connexion au serveur.
 
 #__________________________________________________=The bulletin you have chosen to modify contains information that this version of Martus cannot understand. It may have been created by a newer version of Martus, so you should ensure that you are running the latest version.
@@ -1010,7 +1041,7 @@
 -3170-field:confirmNewerConfigInfoFileFoundeffect=Si vous répondez Oui, vous continuerez à utiliser cette ancienne version de Martus. Si vous répondez Non, vous quitterez Martus et passerez à la dernière version.
 
 #___________________________________________________________=Warning: the bulletin you are currently viewing is not yours.  Attachments can contain viruses, or malicious programs harmful to your computer.
--8e42-field:confirmNotYourBulletinViewAttachmentAnywayscause=Attention : Le communiqué que vous lisez ne vous appartient pas. Les pièces jointes peuvent contenir des virus ou des programmes malveillants susceptibles d'endommager votre ordinateur.
+-8e42-field:confirmNotYourBulletinViewAttachmentAnywayscause=Attention : Le communiqué que vous affichez ne vous appartient pas. Les pièces jointes peuvent contenir des virus ou des programmes malveillants susceptibles d'endommager votre ordinateur.
 
 #____________________________________________________________=Clicking on Yes will display the attachment, clicking on No will not try to display the attachment.
 -b6bf-field:confirmNotYourBulletinViewAttachmentAnywayseffect=Si vous cliquez sur Oui, la pièce jointe s’affichera, si vous cliquez sur Non, la pièce jointe ne sera pas affichée.
@@ -1066,7 +1097,6 @@
 #___________________________________=You are about to delete all Martus data from this computer.
 -af45-field:confirmRemoveMartuscause=Vous êtes sur le point de supprimer de cet ordinateur toutes les données Martus.
 
-
 #____________________________________=Answering Yes will delete all data, uninstall Martus and exit the program.  Answering No will return you to Martus with nothing deleted.
 -b6a1-field:confirmRemoveMartuseffect=Si vous répondez Oui, toutes les données seront supprimées, Martus sera désinstallé et se fermera. Si vous répondez Non, vous retournerez dans Martus sans rien avoir effacé.
 
@@ -1092,8 +1122,7 @@
 -a3fe-field:confirmSendWithPublicDatacause=Vous avez choisi d'enregistrer un communiqué terminé.
 
 #__________________________________________=This will permanently seal the bulletin and you will not be allowed to make any further modifications to it except by creating a new version of the bulletin.\n\nThe public information in this bulletin will be released for possible publication on the Martus Search Engine, and may be viewed by people outside your organization.\n\nIf there is information you do not want to be publicly available, either move that data to the private section of the bulletin or check the 'Keep ALL Information Private' box before saving the bulletin.
--2df3-field:confirmSendWithPublicDataeffect=Cela verrouillera définitivement le communiqué et vous ne serez plus autorisé à y effectuer d'autres modifications, sauf à créer une nouvelle version du communiqué.\n\nLes informations publiques de ce communiqué seront disponibles pour une publication éventuelle sur le Moteur de Recherche Martus, et pourront être lues par des tiers extérieurs à votre organisme.\n\nSi vous ne souhaitez pas divulguer certaines informations au public, soit déplacez ces données dans la partie privée du communiqué, soit cochez la case 'Garder Confidentielles TOUTES les Informations' avant d'enregistrer ce communiqué.
-
+-2df3-field:confirmSendWithPublicDataeffect=Cela verrouillera définitivement le communiqué et vous ne serez plus autorisé à y effectuer d'autres modifications, sauf à créer une nouvelle version du communiqué.\n\nLes informations publiques de ce communiqué seront disponibles pour une publication éventuelle sur le Moteur de Recherche Martus, et pourront être affichées par des tiers extérieurs à votre organisme.\n\nSi vous ne souhaitez pas divulguer certaines informations au public, soit déplacez ces données dans la partie privée du communiqué, soit cochez la case 'Garder Confidentielles TOUTES les Informations' avant d'enregistrer ce communiqué.
 
 #_____________________________________________=Martus software is unable to determine whether this server complies with the official guidelines for operating a secure and reliable Martus server.
 -ab16-field:confirmServerComplianceFailedcause=Le logiciel Martus ne parvient pas à déterminer si ce serveur est conforme aux normes officielles de sécurité et de fiabilité d'exploitation d'un serveur Martus.
@@ -1102,21 +1131,19 @@
 -8731-field:confirmServerComplianceFailedeffect=Benetech vous conseille de ne pas utiliser ce serveur tant qu'une déclaration de conformité n'a pas été diffusée. Si vous poursuivez, ce serveur non-conforme sera tout de même sélectionné.
 
 #_________________________________________=You have chosen to allow this client the ability to view your public and PRIVATE data.
--4059-field:confirmSetImportPublicKeycause=Vous avez choisi d'autoriser ce client à lire vos données publiques et PRIVEES.
+-4059-field:confirmSetImportPublicKeycause=Vous avez choisi d'autoriser ce client à afficher vos données publiques et PRIVEES.
 
 #__________________________________________=By clicking on Yes you are authorizing this client to view all portions of your bulletins.
--9ff2-field:confirmSetImportPublicKeyeffect=Si vous cliquez sur Oui, ce client sera autorisé à lire toutes les parties de vos communiqués.
+-9ff2-field:confirmSetImportPublicKeyeffect=Si vous cliquez sur Oui, ce client sera autorisé à afficher toutes les parties de vos communiqués.
 
 #__________________________________________________________=The bulletin entitled "#Title#" already exists in this system.  Do you wish to delete the old bulletin and replace it with this bulletin?
 -2692-field:confirmUnAuthoredBulletinDeleteBeforePastecause=Le communiqué intitulé "#Title#" existe déjà sur ce système. Souhaitez-vous supprimer l'ancien communiqué et le remplacer par celui-ci ?
-
 
 #___________________________________________________________=Answering Yes will replace the old bulletin with this bulletin.  Answering on No will leave the original bulletin and skip this file.
 -6bf3-field:confirmUnAuthoredBulletinDeleteBeforePasteeffect=Si vous répondez Oui, l'ancien communiqué sera remplacé par celui-ci. Si vous répondez Non, le communiqué d’origine sera conservé.
 
 #____________________________________________________=Key restore failed, we suggest you try again with a different backup file.
 -f6c1-field:confirmUnableToRecoverFromBackupFilecause=Echec de Restauration de la Clé, nous vous conseillons de réessayer avec un fichier de sauvegarde différent.
-
 
 #_____________________________________________________=Choose Yes to begin the restore process again, No to exit Martus.
 -0e22-field:confirmUnableToRecoverFromBackupFileeffect=Si vous choisissez Oui, le processus de restauration recommencera, si vous choisissez Non, vous quitterez Martus.
@@ -1128,6 +1155,7 @@
 -bf33-field:confirmUndoCustomFieldseffect=Les nouveaux communiqués créés avec ce compte ne comporteront aucun champ personnalisé.
 
 #_____________________________________=Please Note: There are bulletins that have not been sent to a server.  Do you still want to exit?
+
 -d0f3-field:confirmUploadRemindercause=N.B. : Certains communiqués n'ont pas été envoyés au serveur. Souhaitez-vous tout de même quitter ?
 
 #______________________________________=Clicking on Yes will exit Martus, and leave the unsent bulletins.  They will be sent the next time you run Martus and connect to a server.
@@ -1149,6 +1177,7 @@
 -61cb-field:confirmWarnMissingAccountMapFilecause=Attention : le fichier acctmap.txt situé dans le répertoire packets de votre compte est manquant ou endommagé. Cela peut signifier soit qu'un tiers a tenté de corrompre vos données, soit qu'une erreur matérielle s'est produite.
 
 #_________________________________________________=Clicking on Yes will delete all of your bulletins and continue to load Martus.  Clicking on No will exit Martus so you can try to recover or repair this file manually.
+
 -20ee-field:confirmWarnMissingAccountMapFileeffect=Si vous cliquez sur Oui, tous vos communiqués seront supprimés et le chargement de Martus se poursuivra. Si vous cliquez sur Non, vous quitterez Martus et pourrez tenter de restaurer ou de réparer manuellement ce fichier.
 
 #__________________________________________________________________=Warning: acctmap.txt.sig file is missing or is corrupt in your account's packets directory.  If you have just upgraded to a new version of Martus this warning is harmless and you should click on No.  Otherwise this may indicate someone has tried to tamper with your data or could be caused by a hardware error.
@@ -1167,10 +1196,11 @@
 -f068-field:confirmWarningSwitchToNormalKeyboardcause=Attention ! L'usage du clavier normal pour saisir votre mot de passe réduit grandement la sécurité du système Martus, et pourrait faciliter à un intrus l'accès à vos données privées.
 
 #_____________________________________________________=If this is a Headquarters computer, it is especially important to use the on-screen keyboard, because an attacker could gain access to all the private data that you are authorized to view.
--4379-field:confirmWarningSwitchToNormalKeyboardeffect=Si cet ordinateur appartient à un Siège, il est très important d'utiliser le clavier écran, car un intrus pourrait accéder à toutes les données privées que vous êtes autorisé à lire.
+-4379-field:confirmWarningSwitchToNormalKeyboardeffect=Si cet ordinateur appartient à un Siège, il est très important d'utiliser le clavier écran, car un intrus pourrait accéder à toutes les données privées que vous êtes autorisé à afficher.
 
 #_________________________________________________=A single encrypted backup file of your key has yet to be created.
 -71c0-field:confirmbackupIncompleteEncryptedNeeded=Vous n'avez pas encore créé de fichier unique de sauvegarde crypté pour votre clé.
+
 
 #_____________________________________________=A multiple disk backup of your key has yet to be created.
 -b185-field:confirmbackupIncompleteShareNeeded=Vous n'avez pas encore créé de disque multiple de sauvegarde pour votre clé.
@@ -1203,6 +1233,7 @@
 -0330-field:confirmretrievecause=Vous avez choisi d'extraire tous les communiqués du serveur Martus.
 
 #________________________________=This will restore all the discarded bulletins that were sent to the server.  
+
 -8dbd-field:confirmretrieveeffect=Cela restaurera tous les Communiqués Supprimés transmis au serveur.
 
 #___________________________=You have chosen to save a completed bulletin.
@@ -1217,7 +1248,6 @@
 #_____________________=Date Format
 -4827-field:dateformat=Format de Date
 
-
 #____________________________=New Folder
 -d8ed-field:defaultFolderName=Nouveau Dossier
 
@@ -1225,6 +1255,7 @@
 -257e-field:disconnecting=Déconnexion...
 
 #________________=Email Address
+
 -09ba-field:email=Adresse E-mail
 
 #____________________=Date Created
@@ -1232,7 +1263,6 @@
 
 #____________________=Date of Event
 -2026-field:eventdate=Date de l'Evénement
-
 
 #_________________________=Dates of Event
 -a13c-field:eventdaterange=Dates de l'Evénement
@@ -1258,11 +1288,15 @@
 #___________________=Keywords
 -f530-field:keywords=Mots Clés
 
+
 #___________________=Language
 -89b8-field:language=Langue
 
 #___________________=Location
 -d219-field:location=Lieu
+
+#___________________=Date format sequence
+-eed8-field:mdyOrder=Ordre du format de date
 
 #_____________________________________________=The attachment could not be located.
 -65b1-field:messageErrorAttachmentMissingcause=Impossible de trouver la pièce jointe.
@@ -1283,17 +1317,16 @@
 -614e-field:notifyAlreadyRunningcause=Une copie de Martus est en cours d'exécution sur cet ordinateur. Fermez cette copie avant d'en démarrer une autre.
 
 #_______________________________________________=You currently are viewing this version of the bulletin.
--8a02-field:notifyAlreadyViewingThisVersioncause=Vous voyez actuellement cette version du communiqué.
+-8a02-field:notifyAlreadyViewingThisVersioncause=Vous affichez actuellement cette version du communiqué.
 
 #________________________________________=The item you chose was not a file, please choose a file to add as an attachment to this bulletin.
 -0de2-field:notifyAttachmentNotAFilecause=L'objet choisi n'est pas un fichier, veuillez choisir un fichier à mettre en pièce jointe à ce communiqué.
 
 #______________________________________________=Martus could not authenticate the server. The server may have been compromised.  Please verify your server configuration and contact the server operator.
-
 -f27c-field:notifyAuthenticateServerFailedcause=Martus n'a pas pu authentifier le serveur. Celui-ci peut avoir été compromis. Veuillez vérifier la configuration de votre serveur et contactez son gestionnaire.
 
 #________________________________________________=The bulletin version you are trying to view is currently not on your system.
--8579-field:notifyBulletinVersionNotInSystemcause=La version du communiqué que vous essayez de voir ne se trouve pas sur votre système.
+-8579-field:notifyBulletinVersionNotInSystemcause=La version du communiqué que vous essayez d’afficher ne se trouve pas sur votre système.
 
 #____________________________________=The selected server is not responding. Before you choose a server, you must be connected to the internet, and that server must be available.
 -38fd-field:notifyConfigNoServercause=Le serveur sélectionné ne répond pas. Avant de choisir un serveur, il vous faut une connexion Internet et ce serveur doit être disponible.
@@ -1352,7 +1385,6 @@
 #_________________________________________=An error prevented the bulletin from being saved. Check to make sure the disk is not full or write protected.
 -f4c4-field:notifyErrorSavingBulletincause=Une erreur a empêché l'enregistrement du communiqué. Assurez-vous que le disque n'est pas plein ou protégé en écriture.
 
-
 #_______________________________________=Unable to save configuration file.
 -896e-field:notifyErrorSavingConfigcause=Impossible d'enregistrer le fichier de configuration.
 
@@ -1363,7 +1395,6 @@
 -2a84-field:notifyErrorWritingFilecause=Une erreur a empêché l'écriture du fichier. Assurez-vous que le disque n'est pas plein ou protégé en écriture.
 
 #___________________________________________=You will have to select a server for any bulletins to be backed up to that server, or to retrieve bulletins from that server.
-
 -83c4-field:notifyExistingServerRemovedcause=Il vous faudra sélectionner un serveur pour y sauvegarder ou y extraire tout communiqué.
 
 #____________________________________=Export completed successfully
@@ -1378,8 +1409,9 @@
 #_________________________________________=To export bulletins, select them first, and then perform the export operation.
 -944e-field:notifyExportZeroBulletinscause=Pour exporter des communiqués, commencez par les sélectionner, puis exportez-les.
 
+
 #___________________________________________________________=Successfully exported customization template.
--aed9-field:notifyExportingCustomizationTemplateSuccesscause=Modèle personnalisé correctement exporté.
+-aed9-field:notifyExportingCustomizationTemplateSuccesscause=Modèle personnalisé exporté avec succcès.
 
 #___________________________________________=The original files have not been deleted from your computer, you must delete them manually if you wish.
 -8965-field:notifyFilesWillNotBeDeletedcause=Les fichiers d'origine n'ont pas été supprimés de votre ordinateur, vous devez au besoin les supprimer manuellement.
@@ -1399,15 +1431,17 @@
 #_______________________________________________=The Headquarters label you entered is already assigned to another Headquarters account.  Please use a different label.
 -91ca-field:notifyHeadquarterLabelDuplicatecause=L'étiquette de Siège que vous avez saisie est déjà attribuée à un autre compte Siège. Veuillez modifier l'étiquette.
 
-
 #___________________________________________________________=Successfully imported customization template.
--c78c-field:notifyImportingCustomizationTemplateSuccesscause=Modèle personnalisé correctement importé.
+-c78c-field:notifyImportingCustomizationTemplateSuccesscause=Modèle personnalisé importé avec succès.
 
 #_______________________________________=You must have a server public code.
 -2fde-field:notifyInvalidServerCodecause=Il vous faut un code public de serveur.
 
 #_______________________________________=You must have a server name or IP address.
 -984b-field:notifyInvalidServerNamecause=Il vous faut un nom de serveur ou une adresse IP.
+
+#_______________________________________=No row selected.
+-7b20-field:notifyNoGridRowSelectedcause=Aucune Rangée Sélectionnée.
 
 #___________________________________=Please select a Headquarters first.
 -1d19-field:notifyNoHQsSelectedcause=Veuillez d'abord sélectionner un Siège.
@@ -1419,7 +1453,6 @@
 -c9fa-field:notifyPasswordInvalidcause=Mot de passe invalide, les mots de passe doivent comporter au moins 8 caractères
 
 #_____________________________________________=Your password can not be your username
-
 -0acb-field:notifyPasswordMatchesUserNamecause=Votre mot de passe doit être différent de votre pseudo
 
 #_____________________________________________________=One or more bulletins cannot be pasted in that folder, because they already exist in this folder.
@@ -1432,13 +1465,14 @@
 -eb6e-field:notifyPasteErrorcause=Une erreur imprévue s'est produite pendant le collage du/des communiqué(s). Un ou plusieurs fichiers risquent d'être endommagés.
 
 #________________________________________________=No bulletin selected.  Please select the bulletin you wish to preview.
--b51e-field:notifyPreviewNoBulletinsSelectedcause=Aucun communiqué n'est sélectionné. Veuillez sélectionner le communiqué que vous souhaitez visualiser.
+-b51e-field:notifyPreviewNoBulletinsSelectedcause=Aucun communiqué n'est sélectionné. Veuillez sélectionner le communiqué que vous souhaitez prévisualiser.
 
 #____________________________________________=You may only preview one bulletin at a time.  Please only select one bulletin to preview.
--fbee-field:notifyPreviewOneBulletinOnlycause=Vous ne pouvez visualiser qu'un communiqué à la fois. Veuillez ne sélectionner qu'un seul communiqué à visualiser.
+-fbee-field:notifyPreviewOneBulletinOnlycause=Vous ne pouvez prévisualiser qu'un communiqué à la fois. Veuillez ne sélectionner qu'un seul communiqué à visualiser.
 
-#_________________________________________=Finished
--355b-field:notifyPrintToDiskCompletecause=Terminé
+#_________________________________________=Successfully saved Report
+-45d7-field:notifyPrintToDiskCompletecause=Rapport enregistré avec succès
+
 
 #________________________________________=To print one or more bulletins, select them first, and then perform the print operation.
 -3298-field:notifyPrintZeroBulletinscause=Pour imprimer un ou plusieurs communiqués, sélectionnez-les d’abord et lancez ensuite l’impression.
@@ -1464,6 +1498,7 @@
 #______________________________________=Please remember your username and password. It cannot be recovered.
 -e9e0-field:notifyRememberPasswordcause=N'oubliez pas votre pseudo et votre mot de passe. Ils ne pourront pas être récupérés.
 
+
 #____________________________________________________=One or more bulletins were unable to be resent because you are not authorized to upload them.
 -d248-field:notifyResendErrorNotAuthorizedToSendcause=Un ou plusieurs communiqués n'ont pu être renvoyés car vous n'êtes pas autorisé à les télécharger.
 
@@ -1473,6 +1508,18 @@
 #______________________________________=Bulletin download cancelled.  Some bulletins may have already been downloaded.
 -87b3-field:notifyRetrieveCanceledcause=Téléchargement de communiqué annulé. Certains communiqués peuvent déjà avoir été téléchargés.
 
+#___________________________________=An error has occurred while retrieving a bulletin.
+-6201-field:notifyRetrieveErrorcause=Une erreur s’est produite lors de l’extraction d’un communiqué.
+
+#__________________________________________________=A retrieve was in progress when you upgraded to a newer version of Martus. That retrieve will be canceled, so you should re-select any bulletins that had not yet been retrieved.
+-28ae-field:notifyRetrieveFileDataVersionErrorcause=Une extraction était en cours lorsque vous êtes passé à une version plus récente de Martus. Cette extraction sera annulée et vous devrez resélectionner les communiqués qui n’ont pas été extraits.
+
+#_______________________________________=An error has prevented Martus from continuing the retrieve that was in progress. You should re-select any bulletins that had not yet been retrieved.
+-8149-field:notifyRetrieveFileErrorcause=Une erreur a empêché Martus de continuer l’extraction en cours. Vous devrez resélectionner les communiqués qui n’ont pas été extraits.
+
+#________________________________________=A retrieve is already in progress. You cannot start another retrieve until that one has finished.
+-3e55-field:notifyRetrieveInProgresscause=Une extraction est déjà en cours. Vous ne pouvez pas en démarrer une autre tant que celle-ci n’est pas terminée.
+
 #________________________________________________=Errors occurred while retrieving bulletin summaries.  Some of the bulletins on the server will not be shown.
 -6f6f-field:notifyRetrievedOnlySomeSummariescause=Une erreur s'est produite lors de l'extraction des résumés de communiqués. Certains des communiqués présents sur le serveur ne s'afficheront pas.
 
@@ -1480,7 +1527,7 @@
 -e3a0-field:notifyRewriteKeyPairFailedcause=Une erreur s'est produite. Impossible de modifier le pseudo ou le mot de passe. Il vous faudra peut-être restaurer votre fichier de sauvegarde de clé.
 
 #_________________________________________=Successfully saved your new username and password.
--0398-field:notifyRewriteKeyPairSavedcause=Enregistrement réussi de vos nouveaux pseudo et mot de passe.
+-0398-field:notifyRewriteKeyPairSavedcause=Vos nouveaux pseudo et mot de passe ont été enregistrés avec succès.
 
 #__________________________________=Sorry, no bulletins were found.
 -5bd8-field:notifySearchFailedcause=Désolé, aucun communiqué n'a été trouvé.
@@ -1504,7 +1551,8 @@
 -4a93-field:notifyUnableToSaveAttachmentcause=Impossible d'enregistrer la pièce jointe sélectionnée pour une raison inconnue. Essayez de l'enregistrer vers un autre fichier.
 
 #____________________________________________=Unable to view the selected attachment for some reason.
--db36-field:notifyUnableToViewAttachmentcause=Impossible de lire la pièce jointe sélectionnée pour une raison inconnue.
+-db36-field:notifyUnableToViewAttachmentcause=Impossible d’afficher la pièce jointe sélectionnée pour une raison inconnue.
+
 
 #_____________________________________=An unexpected error has occurred. Please report this problem to help@martus.org.
 -3cb4-field:notifyUnexpectedErrorcause=Une erreur imprévue s'est produite. Veuillez signaler ce problème à help@martus.org.
@@ -1522,14 +1570,13 @@
 -7d7f-field:notifyVerifyKeyPairSharePassedcause=Vérification réussie de tous les disques.
 
 #_____________________________________=Welcome!\n\nTo start using Martus, create an account. Choose any username you like and a password that contains at least 8 characters. Keep the following information in mind as you create your username and password:\n\n * We recommend using a password that has 15 characters.\n * Include some characters that aren't letters or numbers in your password.\n   (That is, use punctuation or other special characters.)\n * Use a password that other people won't be able to guess;\n   anyone who knows your username and password can view your private data,\n   and can create bulletins that everyone will believe were created by you.\n * Write down your username and password and store them in a safe place.\n * You'll need to enter your username and password whenever you start Martus.\n * Martus will also sometimes prompt you to re-enter your username\n   and password to prevent someone else from using your account\n   after you've logged in.\n\nIMPORTANT: You are the only one who has your username and password. If you lose either of them, you won't be able to retrieve your data. Your username and password are not stored or backed up anywhere, so they cannot be reset for you.
--da34-field:notifyWelcomeToMartuscause=Bienvenue !\n\nLors de la première utilisation de Martus, créez un compte. Choisissez un pseudo quelconque et un mot de passe contenant au moins 8 caractères. Gardez les conseils suivants à l'esprit lorsque vous créez votre pseudo et votre mot de passe :\n\n * Nous vous recommandons d'utiliser un mot de passe de 15 caractères.\n * Ajoutez des caractères qui ne sont ni des lettres ni des chiffres à votre mot de passe (utilisez de la ponctuation ou d'autres caractères spéciaux).\n * Utilisez un mot de passe difficile à deviner ; quiconque connaissant votre pseudo et votre mot de passe peut lire vos données privées, et peut créer des communiqués dont vous serez l'auteur présumé.\n * Notez votre pseudo et votre mot de passe et mettez-les en lieu sûr.\n * Il vous faudra saisir votre pseudo et votre mot de passe à chaque ouverture de session Martus.\n * Parfois, Martus vous invitera aussi à ressaisir votre pseudo et votre mot de passe pour empêcher un intrus d'utiliser votre compte après avoir ouvert une session.\n\nIMPORTANT : Vous êtes le seul à posséder votre pseudo et votre mot de passe. Si vous perdez l'un ou l'autre, vous ne pourrez plus récupérer vos données. Votre pseudo et votre mot de passe ne sont stockés ou sauvegardés nulle part, ils ne peuvent donc pas être réinitialisés.
+-da34-field:notifyWelcomeToMartuscause=Bienvenue !\n\nLors de la première utilisation de Martus, créez un compte. Choisissez un pseudo quelconque et un mot de passe contenant au moins 8 caractères. Gardez les conseils suivants à l'esprit lorsque vous créez votre pseudo et votre mot de passe :\n\n * Nous vous recommandons d'utiliser un mot de passe de 15 caractères.\n * Ajoutez des caractères qui ne sont ni des lettres ni des chiffres à votre mot de passe (utilisez de la ponctuation ou d'autres caractères spéciaux).\n * Utilisez un mot de passe difficile à deviner ; quiconque connaissant votre pseudo et votre mot de passe peut accéder à vos données privées, et peut créer des communiqués dont vous serez l'auteur présumé.\n * Notez votre pseudo et votre mot de passe et mettez-les en lieu sûr.\n * Il vous faudra saisir votre pseudo et votre mot de passe à chaque ouverture de session Martus.\n * Parfois, Martus vous invitera aussi à ressaisir votre pseudo et votre mot de passe pour empêcher un intrus d'utiliser votre compte après avoir ouvert une session.\n\nIMPORTANT : Vous êtes le seul à posséder votre pseudo et votre mot de passe. Si vous perdez l'un ou l'autre, vous ne pourrez plus récupérer vos données. Votre pseudo et votre mot de passe ne sont stockés ou sauvegardés nulle part, ils ne peuvent donc pas être réinitialisés.
 
 #_____________________________________=The current Martus Server has refused to accept your contact info
 -156f-field:notifycontactRejectedcause=Le serveur Martus actuel a refusé votre info contact
 
 #_______________________________________=The configuration file may be corrupted
 -d84d-field:notifycorruptconfiginfocause=Le fichier de configuration peut être corrompu
-
 
 #_____________________________________=Username or Password incorrect
 -7b2d-field:notifyincorrectsignincause=Pseudo ou mot de passe incorrect
@@ -1553,7 +1600,7 @@
 -3dbb-field:notifyretrievenothingcause=Aucun communiqué n’est sélectionné
 
 #____________________________________=All of the selected bulletins were successfully retrieved from the server
--824a-field:notifyretrieveworkedcause=Tous les communiqués sélectionnés ont bien été extraits du serveur
+-824a-field:notifyretrieveworkedcause=Tous les communiqués sélectionnés ont été extraits avec succès du serveur
 
 #______________________________=The Server has been selected.
 -e7a0-field:notifyserverokcause=Le Serveur a été sélectionné.
@@ -1579,6 +1626,12 @@
 #________________=Phone Number
 -ab25-field:phone=N° de Téléphone
 
+#___________________________________=Automatically adjust legacy Persian dates
+-4d0e-field:preferencesAdjustPersian=Ajuster automatiquement les dates patrimoniales perses 
+
+#________________________________=Automatically adjust legacy Thai dates
+-4d22-field:preferencesAdjustThai=Ajuster automatiquement les dates patrimoniales thaï
+
 #________________________________=Prevent creating public bulletins
 -7c9e-field:preferencesAllPrivate=Empêcher la création de communiqués publics
 
@@ -1592,7 +1645,6 @@
 -dc3d-field:publicinfo=Détails
 
 #________________________=Public Information
-
 -251b-field:publicsection=Informations Publiques
 
 #_______________________=Retrieve?
@@ -1610,23 +1662,20 @@
 #____________________=For security reasons, you must sign into Martus again.
 -a575-field:timedout1=Pour des raisons de sécurité, vous devez ouvrir une nouvelle session Martus.
 
-
 #____________________=Any unsaved bulletins will be lost unless you sign in and save them.
 -24c5-field:timedout2=Tout communiqué non enregistré sera perdu, sauf si vous ouvrez une session pour l'enregistrer.
 
 #________________=Title
 -768e-field:title=Titre
 
-#_____________________________=French 2.8.1
--a3db-field:translationVersion=Français 2.8.1
-
+#_____________________________=French 2.9
+-649d-field:translationVersion=Français 2.9
 
 #___________________=Username
 -84c2-field:username=Pseudo
 
 #________________________________=Please wait to sign in again ...
 -d901-field:waitAfterFailedSignIn=Veuillez patienter pendant l'ouverture d'une nouvelle session...
-
 
 #____________________________________=Loading Martus.  Please wait...
 -4d07-field:waitingForBulletinsToLoad=Chargement de Martus. Veuillez patienter...
@@ -1638,7 +1687,6 @@
 -3fc8-field:warningDeleteMultipleBulletins=Vous avez choisi de supprimer définitivement les communiqués se trouvant dans le dossier Communiqués Supprimés. Même si ces communiqués ont été récemment coupés ou copiés, vous ne pourrez plus les coller. S'ils ont déjà été envoyés à un serveur, ils y resteront. Cette action ne les supprimera que de cet ordinateur.
 
 #___________________________________________________=NOTE: Copies of one or more of these bulletins exist in one or more other folders. Those copies will not be removed.
-
 -7d03-field:warningDeleteMultipleBulletinsWithCopies=N.B. : Des copies d'un ou plusieurs de ces communiqués se trouvent dans un ou plusieurs autres dossiers. Ces copies ne seront pas supprimées.
 
 #_______________________________________________=WARNING: One or more of these bulletins have not been sent to a server since they were last modified. Deleting them will prevent the latest changes from being backed up.
@@ -1695,13 +1743,11 @@
 #________________=and
 -cffa-keyword:and=et
 
-
 #_______________=or
 -1758-keyword:or=ou
 
 #_______________=-Other-
 -d367-language:?=- Autre -
-
 
 #________________=Arabic
 -af4f-language:ar=Arabe
@@ -1726,7 +1772,6 @@
 
 #________________=Spanish
 -8df7-language:es=Espagnol
-
 
 #________________=Persian (Farsi, Dari)
 -10c9-language:fa=Perse (Farsi, Dari)
@@ -1770,6 +1815,9 @@
 #________________=Korean
 -dec6-language:ko=Coréen
 
+#________________=Kurdish
+-a06e-language:ku=Kurde
+
 #________________=Kirghiz
 -1848-language:ky=Kirghiz
 
@@ -1778,6 +1826,7 @@
 
 #________________=Marathi
 -6bb4-language:mr=Marathi
+
 
 #________________=Burmese
 -460c-language:my=Birman
@@ -1817,7 +1866,6 @@
 
 #________________=Serbian
 -a75e-language:sr=Serbe
-
 
 #________________=Tamil
 -86c2-language:ta=Tamil
@@ -1873,14 +1921,15 @@
 #______________________=Cut Bulletin(s)
 -33c2-menu:CutBulletins=Couper Communiqué(s)
 
-
 #____________________________________=Default Details Field Content
 -8ae0-menu:DefaultDetailsFieldContent=Contenu du Champ Détails par Défaut
 
 #_________________________=Delete Bulletin(s)
 -9079-menu:DeleteBulletins=Supprimer Communiqué(s)
 
+
 #______________________=Delete Folder
+
 -2880-menu:DeleteFolder=Supprimer Dossier
 
 #______________________________=Delete My Drafts From Server
@@ -1911,7 +1960,6 @@
 -07c3-menu:QuickEraseDeleteMyDataOnly=Supprimer Mes Données
 
 #________________________________=Delete All Data And Remove Martus
-
 -a0f7-menu:QuickEraseRemoveMartus=Supprimer Toutes les Données et Désinstaller Martus
 
 #______________________=Remove Martus Server
@@ -1942,7 +1990,7 @@
 -2461-menu:SelectServer=Sélectionner Serveur Martus
 
 #______________________________=View My Account Details
--264b-menu:ViewMyAccountDetails=Voir Détails de Mon Compte 
+-264b-menu:ViewMyAccountDetails=Afficher Détails de Mon Compte 
 
 #_______________=About Martus
 -ceff-menu:about=A Propos de Martus
@@ -1966,7 +2014,6 @@
 -5301-menu:edit=Editer
 
 #______________=Exit
-
 -f83b-menu:exit=Quitter
 
 #______________=File
@@ -1988,7 +2035,6 @@
 -6bf5-menu:options=Options
 
 #_______________=Paste
-
 -db24-menu:paste=Coller
 
 #_______________________=Print Bulletin(s) / Create Report File
@@ -2001,11 +2047,82 @@
 -86a5-menu:selectall=Tout Sélectionner
 
 #________________=Server
-
 -cb0c-menu:server=Serveur
 
 #_______________=Tools
 -4fa8-menu:tools=Outils
+
+#___________________=Farvardin
+-fef9-month:Persian1=Farvardin
+
+#____________________=Dey
+-494f-month:Persian10=Dey
+
+#____________________=Bahman
+-6c49-month:Persian11=Bahman
+
+#____________________=Esfand
+-7179-month:Persian12=Esfand
+
+#___________________=Ordibehesht
+-4241-month:Persian2=Ordibehesht
+
+#___________________=Khordad
+-02bc-month:Persian3=Khordad
+
+#___________________=Tir
+-5b96-month:Persian4=Tir
+
+#___________________=Mordad
+-e86f-month:Persian5=Mordad
+
+#___________________=Shahrivar
+-4a9e-month:Persian6=Shahrivar
+
+#___________________=Mehr
+-dfc8-month:Persian7=Mehr
+
+#___________________=Aban
+-1d23-month:Persian8=Aban
+
+#___________________=Azar
+-1e15-month:Persian9=Azar
+
+#________________=Jan
+-efed-month:Thai1=Janv
+
+#_________________=Oct
+-5132-month:Thai10=Oct
+
+#_________________=Nov
+-bb9b-month:Thai11=Nov
+
+#_________________=Dec
+-997f-month:Thai12=Déc
+
+#________________=Feb
+-dc84-month:Thai2=Févr
+
+#________________=Mar
+-c4ba-month:Thai3=Mars
+
+#________________=Apr
+-befd-month:Thai4=Avr
+
+#________________=May
+-c94f-month:Thai5=Mai
+
+#________________=Jun
+-6d90-month:Thai6=Juin
+
+#________________=Jul
+-b737-month:Thai7=Juil
+
+#________________=Aug
+-7562-month:Thai8=Aoû 
+
+#________________=Sep
+-fdd2-month:Thai9=Sept
 
 #______________=Apr
 -befd-month:apr=Avr
@@ -2040,7 +2157,6 @@
 #______________=Oct
 -5132-month:oct=Oct
 
-
 #______________=Sep
 -fdd2-month:sep=Sept
 
@@ -2060,15 +2176,13 @@
 -53df-wintitle:BackupKeyPairToSecretShareInformation=Informations de Sauvegarde de Clé
 
 #__________________________________________________=Backup Complete
-
 -8b15-wintitle:BackupSecretShareCompleteInformation=Sauvegarde Terminée
 
 #___________________________________=Bulletin Details
 -6fa9-wintitle:BulletinDetailsDialog=Détails de Communiqué
 
 #_____________________________=Bulletin Preview
--9d3b-wintitle:BulletinPreview=Visualisation du Communiqué
-
+-9d3b-wintitle:BulletinPreview=Prévisualisation du Communiqué
 
 #______________________________=Details Field Default Content
 -a39b-wintitle:BulletinTemplate=Contenu du Champ Détails par Défaut
@@ -2088,20 +2202,16 @@
 #__________________________________________=Delete My Data From This Computer
 -216c-wintitle:DeleteMyDataFromThisComputer=Supprimer Mes Données de cet Ordinateur
 
-
-
 #______________________________________=Delete My Drafts From Server
 -b43a-wintitle:DeleteMyDraftsFromServer=Supprimer Mes Brouillons du Serveur
 
 #_________________________________________________=Retrieving Bulletin Summaries
 -2a45-wintitle:DeleteServerDraftsBulletinSummaries=Récupération des Résumés de Communiqué
 
-
 #____________________________________=Attachment Missing
 -11e1-wintitle:ErrorAttachmentMissing=Pièce Jointe Manquante
 
 #___________________________________=Error
-
 -7f2f-wintitle:ErrorBackingupKeyPair=Erreur
 
 #_______________________________=Customize Fields Error
@@ -2126,7 +2236,6 @@
 -5e89-wintitle:ErrorVerifyingKeyPairShare=Erreur de Vérification
 
 #_____________________________=Export Bulletins
-
 -a86c-wintitle:ExportBulletins=Exporter Communiqués
 
 #___________________________________=Export Bulletins
@@ -2173,7 +2282,6 @@
 
 #______________________________=Print to which file
 -7cfe-wintitle:PrintToWhichFile=Imprimer vers quel fichier
-
 
 #____________________________=Restore Key from Backup File
 -08b0-wintitle:RecoverKeyPair=Restaurer la Clé depuis le Fichier de Sauvegarde
@@ -2223,10 +2331,8 @@
 #_______________________________________________=Retrieving Bulletin Summaries
 -2a45-wintitle:RetrieveMySealedBulletinSummaries=Extraction des Résumés de Communiqué
 
-
 #_______________________________________=Retrieve My Sealed Bulletins
 -68b9-wintitle:RetrieveMySealedBulletins=Extraire Mes Communiqués Verrouillés
-
 
 #_______________________________________=of
 -de04-wintitle:SaveRecoverShareKeyPairOf=de
@@ -2239,7 +2345,6 @@
 
 #________________________=Server News: Message #CurrentNewsItem# of #MaxNewsItems#
 -7177-wintitle:ServerNews=Nouvelles du Serveur : Message #CurrentNewsItem# sur #MaxNewsItems#
-
 
 #____________________________________=Server Configuration Results
 -788c-wintitle:ServerSelectionResults=Résultats de Configuration du Serveur
@@ -2254,7 +2359,6 @@
 -ceff-wintitle:about=A propos de Martus
 
 #________________________________=Key Backup Needed
-
 -e570-wintitle:askToBackupKeyPair=La Clé doit être Sauvegardée
 
 #_____________________________________________=Backing Up Your Key
@@ -2262,7 +2366,6 @@
 
 #_____________________________________________=Backing Up Your Key Files
 -cdb1-wintitle:confirmBackupKeyPairSecretShare=Sauvegarde de vos Fichiers de Clé
-
 
 #______________________________________________=Verify Disks
 -f38d-wintitle:confirmBackupKeyShareVerifyDisks=Vérifier Disques
@@ -2273,12 +2376,14 @@
 #_________________________________________=Cancel Modify Bulletin
 -276b-wintitle:confirmCancelModifyBulletin=Annuler Modifier le Communiqué
 
+#___________________________________=Cancel Retrieve
+-d984-wintitle:confirmCancelRetrieve=Annuler Extraction
+
 #______________________________________=Cancel Backup
 -bba5-wintitle:confirmCancelShareBackup=Annuler Sauvegarde
 
 #_______________________________________=Cancel Restore
--3889-wintitle:confirmCancelShareRecover=Annuler Restaurer
-
+-3889-wintitle:confirmCancelShareRecover=Annuler Restauration
 
 #______________________________________=Cancel Verification
 -8a03-wintitle:confirmCancelShareVerify=Annuler Vérification
@@ -2300,7 +2405,6 @@
 
 #________________________________________=Unsent Draft Reminder
 -7657-wintitle:confirmDraftUploadReminder=Rappel de Brouillon Non Envoyé
-
 
 #________________________________________________=Modify Bulletin
 -e125-wintitle:confirmEditBulletinWithUnknownTags=Modifier le Communiqué
@@ -2330,7 +2434,7 @@
 -86f7-wintitle:confirmNewerConfigInfoFileFound=Avertissement Version
 
 #_________________________________________________________=View Attachment
--b24c-wintitle:confirmNotYourBulletinViewAttachmentAnyways=Voir Pièce Jointe
+-b24c-wintitle:confirmNotYourBulletinViewAttachmentAnyways=Afficher Pièce Jointe
 
 #__________________________________________=Confirm Replace Existing File
 -e2b2-wintitle:confirmOverWriteExistingFile=Confirmer Remplacer le Fichier Existant
@@ -2345,11 +2449,11 @@
 -1a10-wintitle:confirmQuickEraseOutboxNotEmpty=Rappel de Communiqués Non Envoyés
 
 #_________________________________________=Create New Account / Restore Old Account
+
 -ab12-wintitle:confirmRecoverUsingKeyShare=Créer Nouveau Compte / Restaurer Ancien Compte
 
 #____________________________________________________=Restore Failed
 -b6bc-wintitle:confirmRecoveredKeyShareFailedTryAgain=Echec de Restauration
-
 
 #_____________________________________=Weak Password Warning
 -0295-wintitle:confirmRedoWeakPassword=Avertissement : Mot de Passe faible
@@ -2378,7 +2482,6 @@
 #_______________________________________=Confirm Import of Public Account Id
 -0a90-wintitle:confirmSetImportPublicKey=Confirmer Importation d'ID de Compte Public
 
-
 #________________________________________________________=Bulletin Already Exists
 -c839-wintitle:confirmUnAuthoredBulletinDeleteBeforePaste=Ce Communiqué Existe Déjà
 
@@ -2391,12 +2494,12 @@
 #___________________________________=Upload Reminder
 -5b14-wintitle:confirmUploadReminder=Rappel de Téléchargement
 
-
 #_____________________________________________=Custom Fields Selection
 -0b6f-wintitle:confirmUseBulletinsCustomFields=Sélection de Champs Personnalisés
 
 #__________________________________________________=Custom Fields Selection
 -0b6f-wintitle:confirmUseBulletinsDraftCustomFields=Sélection de Champs Personnalisés
+
 
 #______________________________________________=Accountmap File Missing Or Corrupt
 -e8e7-wintitle:confirmWarnMissingAccountMapFile=Fichier Accountmap Manquant ou Endommagé 
@@ -2431,6 +2534,7 @@
 #_______________________________=Customize Fields
 -1cb1-wintitle:inputCustomFields=Personnaliser Champs
 
+
 #____________________________________=Export My Public Account Id
 -2b8a-wintitle:inputExportMyPublicKey=Exporter l'ID de Mon Compte Public
 
@@ -2438,10 +2542,10 @@
 -5c50-wintitle:inputGetHQLabel=Etiquette Siège
 
 #___________________________________=Default Backup File Name
-
 -ac3c-wintitle:inputGetShareFileName=Nom de Fichier de Sauvegarde par Défaut
 
 #___________________________________=Import Headquarters Public Account Id
+
 -6d05-wintitle:inputImportPublicCode=Importer l'ID de Compte Public du Siège
 
 #__________________________________=Request Upload Permission
@@ -2457,11 +2561,9 @@
 -e5ae-wintitle:main=Système Martus de Communiqués pour les Droits de l’Homme 
 
 #____________________________________=Incorrect Public Code
-
 -f994-wintitle:notifyAccountCodeWrong=Code Public Incorrect
 
 #__________________________________=Martus Already Running
-
 -cfce-wintitle:notifyAlreadyRunning=Martus Fonctionne Déjà
 
 #_____________________________________________=Bulletin Version Already Being Viewed
@@ -2521,7 +2623,6 @@
 #____________________________________=Error Reading File
 -73ad-wintitle:notifyErrorReadingFile=Erreur de Lecture du Fichier
 
-
 #___________________________________________________=Error During Restore
 -af9a-wintitle:notifyErrorRecoveringAccountDirectory=Erreur lors de la Restauration
 
@@ -2558,7 +2659,6 @@
 #_______________________________________=No Bulletins Selected
 -c1d6-wintitle:notifyExportZeroBulletins=Aucun Communiqué Sélectionné
 
-
 #_________________________________________________________=Exporting Template Succeeded
 -b648-wintitle:notifyExportingCustomizationTemplateSuccess=Modèle Correctement Exporté
 
@@ -2572,25 +2672,26 @@
 -4579-wintitle:notifyFoundDamagedBulletins=Communiqués Endommagés Détectés
 
 #________________________________=Recovered Lost Bulletins
-
 -704d-wintitle:notifyFoundOrphans=Communiqués Perdus Récupérés
 
 #_____________________________________=Headquarters Key Already Exists
-
 -03e9-wintitle:notifyHQKeyAlradyExists=Cette Clé de Siège Existe Déjà
 
 #_____________________________________________=Headquarter Label Invalid
 -106b-wintitle:notifyHeadquarterLabelDuplicate=Etiquette Siège Invalide
 
-
 #_________________________________________________________=Importing Template Succeeded
 -ac8c-wintitle:notifyImportingCustomizationTemplateSuccess=Modèle Correctement Importé
+
 
 #_____________________________________=Invalid Server Public Code
 -08ad-wintitle:notifyInvalidServerCode=Code Public du Serveur Invalide
 
 #_____________________________________=Invalid Server Name or IP Address
 -3376-wintitle:notifyInvalidServerName=Nom du Serveur ou Adresse IP Invalide
+
+#_____________________________________=No Row Selected
+-28fe-wintitle:notifyNoGridRowSelected=Aucune Rangée Sélectionnée
 
 #_________________________________=No Headquarters Selected
 -9140-wintitle:notifyNoHQsSelected=Aucun Siège Sélectionné
@@ -2614,11 +2715,10 @@
 -27cd-wintitle:notifyPreviewNoBulletinsSelected=Aucun Communiqué Sélectionné
 
 #__________________________________________=Preview One Bulletin Only
--5b0a-wintitle:notifyPreviewOneBulletinOnly=Visualiser Un Seul Communiqué
+-5b0a-wintitle:notifyPreviewOneBulletinOnly=Prévisualiser Un Seul Communiqué
 
-
-#_______________________________________=Print To Disk
--b5b5-wintitle:notifyPrintToDiskComplete=Imprimer dans un Fichier
+#_______________________________________=Print To Report File
+-c1b2-wintitle:notifyPrintToDiskComplete=Imprimer dans un Fichier
 
 #______________________________________=No Bulletins Selected
 -c1d6-wintitle:notifyPrintZeroBulletins=Aucun Communiqué Sélectionné
@@ -2638,7 +2738,6 @@
 #_____________________________________________=Restore Key
 -cb87-wintitle:notifyRecoveryProcessBackupFile=Restaurer la Clé
 
-
 #___________________________________________=Restore Account from Key Backup
 -428a-wintitle:notifyRecoveryProcessKeyShare=Restaurer le Compte depuis la Sauvegarde de Clé
 
@@ -2654,11 +2753,24 @@
 #____________________________________=Bulletin Download Canceled
 -f8d3-wintitle:notifyRetrieveCanceled=Téléchargement du Communiqué Annulé
 
+#_________________________________=Retrieve Error
+-8ed0-wintitle:notifyRetrieveError=Erreur d’extraction
+
+#________________________________________________=Warning
+-e9c4-wintitle:notifyRetrieveFileDataVersionError=Avertissement 
+
+#_____________________________________=Error
+-7f2f-wintitle:notifyRetrieveFileError=Erreur 
+
+#______________________________________=Retrieve In Progress
+-6983-wintitle:notifyRetrieveInProgress=Extraction en cours
+
 #______________________________________________=Error During Retrieve
 -f2d7-wintitle:notifyRetrievedOnlySomeSummaries=Erreur lors de l'Extraction
 
 #________________________________________=Error Changing User Name or Password
 -787e-wintitle:notifyRewriteKeyPairFailed=Erreur lors de la Modification du Pseudo ou du Mot de Passe
+
 
 #_______________________________________=Changed User Name or Password
 -b5b9-wintitle:notifyRewriteKeyPairSaved=Pseudo ou Mot de Passe Modifié
@@ -2666,16 +2778,14 @@
 #________________________________=Search Results
 -5e05-wintitle:notifySearchFailed=Résultats de la Recherche 
 
-
 #_______________________________=Search Results
 -5e05-wintitle:notifySearchFound=Résultats de la Recherche
 
 #___________________________________=Incorrect Server Public Code
-
 -7b1b-wintitle:notifyServerCodeWrong=Code Public du Serveur Incorrect
 
-#_______________________________=Server Error
 
+#_______________________________=Server Error
 -076a-wintitle:notifyServerError=Erreur du Serveur
 
 #_____________________________________=Server Response Invalid
@@ -2687,9 +2797,8 @@
 #__________________________________________=Saving Attachment Failed
 -fdf7-wintitle:notifyUnableToSaveAttachment=Echec lors de l’Enregistrement de la Pièce Jointe
 
-
 #__________________________________________=Viewing Attachment Failed
--bd14-wintitle:notifyUnableToViewAttachment=Echec lors de la Visualisation de la Pièce Jointe
+-bd14-wintitle:notifyUnableToViewAttachment=Echec lors de l’affichage de la Pièce Jointe
 
 #___________________________________=Unexpected Error
 -d17c-wintitle:notifyUnexpectedError=Erreur Inattendue
@@ -2710,7 +2819,7 @@
 -423f-wintitle:notifyWelcomeToMartus=Bienvenue sur Martus
 
 #___________________________________=Error Sending ContactInfo
--be22-wintitle:notifycontactRejected=Erreur lors de l'Envoi d'Infos Contact
+-be22-wintitle:notifycontactRejected=Erreur lors de l'Envoi d'Info Contact
 
 #_____________________________________=Error Loading Configuration File
 -fa56-wintitle:notifycorruptconfiginfo=Erreur lors du Chargement du Fichier de Configuration
@@ -2728,7 +2837,6 @@
 -2e9b-wintitle:notifypasswordsdontmatch=Informations de Paramétrage Invalides
 
 #__________________________________=Retrieve Bulletins
-
 -9245-wintitle:notifyretrievefailed=Extraire Communiqués 
 
 #____________________________________=Retrieve Bulletins
@@ -2753,6 +2861,7 @@
 -6bf5-wintitle:options=Options
 
 #_______________________________=Back up key file
+
 -d004-wintitle:saveBackupKeyPair=Sauvegarder Fichier de Clé
 
 #____________________=Search

@@ -1,9 +1,10 @@
 ﻿# Martus Client Translation File
 # Language code:  ru
 # Language name:  Russian
-# Exported date:  Fri Oct 07 11:20:44 PDT 2005
-# Client version: 2.8.1
-# Client build:   20050930.1674
+# Translated by:  Inna Kremen
+# Exported date:  Wed Mar 15 11:20:35 PST 2006
+# Client version: pre-2.9 internal
+# Client build:   20060314.1712
 #
 # This file MUST be saved in UTF-8 format!
 # Lines beginning with # are comments and are ignored by Martus
@@ -100,6 +101,9 @@
 #__________________=Delete
 -f6fd-button:Delete=Удалить
 
+#_________________________________=Delete Selected Row
+-5e2f-button:DeleteSelectedGridRow=Удалить выбранную строку
+
 #______________________________=Delete
 -f6fd-button:DeleteServerDrafts=Удалить
 
@@ -111,6 +115,9 @@
 
 #_________________________=Up
 -2038-button:FolderOrderUp=Вверх
+
+#______________________________=Insert Row
+-9f53-button:InsertEmptyGridRow=Вставить строку
 
 #_________________=Leave
 -7e35-button:Leave=Оставить
@@ -146,10 +153,13 @@
 -6f62-button:ResetContents=Вернуться к исходному содержанию
 
 #_______________________________=Retrieve all bulletin versions
--3daf-button:RetrieveAllVersions=Загрузить все редакции данной сводки
+-3daf-button:RetrieveAllVersions=Загрузить все версии данной сводки
 
 #______________________________________________=Retrieve latest bulletin version only
--3449-button:RetrieveLatestBulletinRevisionOnly=Загрузить только последнюю редакцию данной сводки
+-3449-button:RetrieveLatestBulletinRevisionOnly=Загрузить только последнюю версию данной сводки
+
+#____________________________________=Only search most recent version of bulletins
+-852f-button:SearchFinalBulletinsOnly=Искать только в последних версиях сводок
 
 #__________________________________=Accept
 -bb54-button:ServerComplianceAccept=Принять
@@ -394,6 +404,18 @@
 #__________________________=Sent
 -35f4-field:BulletinWasSent=Отправлена
 
+#_________________________=Calendar type
+-87e7-field:CalendarSystem=Календарь
+
+#__________________________________=Default (2005-05-31)
+-784a-field:CalendarSystemGregorian=По умолчанию (2005-05-31)
+
+#________________________________=Persian (1384-03-10)
+-2f3e-field:CalendarSystemPersian=Персидский (1384-03-10)
+
+#_____________________________=Thai Solar (2548-05-31)
+-2be4-field:CalendarSystemThai=Тайский солнечный (2548-05-31)
+
 #_____________________________________=Download Progress
 -8b0e-field:ChunkProgressStatusMessage=Загружается
 
@@ -436,8 +458,29 @@
 #_____________________________________=Customization Template Files
 -9210-field:CustomizationTemplateFiles=Файлы шаблонов настройки полей
 
+#________________________=Date delimiter
+-36d4-field:DateDelimiter=Разделитель компонентов даты
+
+#____________________________=Dash (00-00-00)
+-997c-field:DateDelimiterDash=Дефис (00-00-00)
+
+#___________________________=Dot (00.00.00)
+-66ea-field:DateDelimiterDot=Точка (00.00.00)
+
+#_____________________________=Slash (00/00/00)
+-404d-field:DateDelimiterSlash=Косая черта (00/00/00)
+
 #____________________=Exact Date
 -8a81-field:DateExact=Точная дата
+
+#______________________=Day
+-987b-field:DatePartDay=День
+
+#________________________=Month
+-082b-field:DatePartMonth=Месяц
+
+#_______________________=Year
+-879e-field:DatePartYear=Год
 
 #____________________=Date Range
 -6bb4-field:DateRange=Интервал
@@ -487,8 +530,8 @@
 #__________________________________=LABEL
 -64b8-field:ErrorCustomFieldHeader4=МЕТКА
 
-#____________________________=There is an error in the custom field definitions. Each problem is identified with the following codes:\n   100 - Required standard field is missing\n   101 - Custom field does not have a correct tag.\n   102 - A previous Tag already exists with this name.\n   103 - Custom field does not have a label.\n   104 - Unrecognized Field Type.\n   105 - A label was found in a standard field.\n   106 - XML Parse Error.\n   107 - Tag contains illegal characters.\n   108 - Duplicate entry in Dropdown field.\n   109 - No Choices in Dropdown field.\n   200 - All fields empty.\n   201 - Unrecognized Headquarters created this template.\n   202 - Security validation error.\n   203 - File Error.
--c1b6-field:ErrorCustomFields=При настройке полей в сводке допущена ошибка. Типы ошибок обозначаются следующими кодами:\n   100 - Отсутствует обязательное стандартное поле.\n   101 - Тег поля отсутствует или задан неверно.\n   102 - Тег с этим именем уже был задан ранее.\n   103 - Метка пользовательского поля отсутствует.\n   104 - Невозможно распознать тип поля.\n   105 - Стандартному полю присвоена метка.\n   106 - Ошибка формата XML.\n   107 - Тег содержит недопустимые символы.\n   108 - Дублирование элемента в выпадающем списке.\n   109 - В выпадающем списке отсутствуют элементы.\n   200 - Все поля пустые.\n   201 - Невозможно распознать главную учетную запись, создавшую данный шаблон.\n   202 - Ошибка при проверке защиты.\n   203 - Ошибка файла.
+#____________________________=There is an error in the custom field definitions. Each problem is identified with the following codes:\n   100 - Required standard field is missing\n   101 - Custom field does not have a correct tag.\n   102 - A previous Tag already exists with this name.\n   103 - Custom field does not have a label.\n   104 - Unrecognized Field Type.\n   105 - A label was found in a standard field.\n   106 - XML Parse Error.\n   107 - Tag contains illegal characters.\n   108 - Duplicate entry in Dropdown field.\n   109 - No Choices in Dropdown field.\n   200 - All fields empty.\n   201 - Unrecognized Headquarters created this template.\n   202 - Security validation error.\n   203 - File Error.\n   204 - Imported XML Missing Field.
+-0b96-field:ErrorCustomFields=При настройке полей в сводке допущена ошибка. Типы ошибок обозначаются следующими кодами:\n   100 - Отсутствует обязательное стандартное поле.\n   101 - Тег поля отсутствует или задан неверно.\n   102 - Тег с этим именем уже был задан ранее.\n   103 - Метка пользовательского поля отсутствует.\n   104 - Невозможно распознать тип поля.\n   105 - Стандартному полю присвоена метка.\n   106 - Ошибка формата XML.\n   107 - Тег содержит недопустимые символы.\n   108 - Дублирование элемента в выпадающем списке.\n   109 - В выпадающем списке отсутствуют элементы.\n   200 - Все поля пустые.\n   201 - Невозможно распознать главную учетную запись, создавшую данный шаблон.\n   202 - Ошибка при проверке защиты.\n   203 - Ошибка файла.\n   204 - Поле отсутствует в импортируемом XML-файле.
 
 #_________________________________________=A previous backup file exists.  You must save each file on its own removable media disk.
 -db93-field:ErrorPreviousBackupShareExists=На диске уже есть файл разбивки резервной копии ключа. Сохраняйте файлы разбивки на отдельных дисках.
@@ -533,7 +576,7 @@
 -6222-field:HQSummaryLabel=Главная учетная запись
 
 #__________________________=Default Headquarters accounts will be selected for each new bulletin or version.
--ea13-field:HQsSetAsDefault=Главные учетные записи, для которых установлена пометка в поле "по умолчанию", получат права доступа ко всем новым сводкам и новым редакциям сводок.
+-ea13-field:HQsSetAsDefault=Главные учетные записи, для которых установлена пометка в поле "по умолчанию", получат права доступа ко всем новым сводкам и новым версиям сводок.
 
 #________________________________=These Headquarters accounts are allowed to view the private information in this bulletin, and to send this bulletin to a server on your behalf.
 -2274-field:HQsSetAsProxyUploader=Эти главные учетные записи имеют право на чтение конфиденциальных данных в сводке и на отправку сводок на сервер от Вашего имени.
@@ -565,8 +608,8 @@
 #________________________________=One or more accounts already exist on this computer. To create an additional account with a new username and passphrase, click OK.
 -02f2-field:HowToCreateNewAccount=На этом компьютере уже имеются учетные записи. Чтобы создать новую учетную запись с новым именем пользователя и паролем, нажмите OK.
 
-#_________________________________=The version of this translation is not compatible with this version of Martus.  It is recommend that you do not continue to use this translation version and go to (http://www.martus.org/downloads) for the appropriate version.
--2c0e-field:IncompatibleMtfVersion=Данная версия перевода не соответствует используемой версии Martus.  Рекомендуем Вам не пользоваться этим переводом в дальнейшем и найти соответствующую версию перевода по ссылке http://www.martus.org/downloads.
+#_________________________________=The version of this translation is not compatible with this version of Martus.  It is recommended that you do not continue to use this translation version and go to (http://www.martus.org/downloads) for the appropriate version.
+-a747-field:IncompatibleMtfVersion=Данная версия перевода не соответствует используемой версии Martus.  Рекомендуем Вам не пользоваться этим переводом в дальнейшем и найти нужную версию перевода на странице загрузки (http://www.martus.org/downloads).
 
 #________________________________________=Martus Software Version: #ProgramVersionNumber#
 -fcd7-field:IncompatibleMtfVersionProgram=Версия Martus: #ProgramVersionNumber#
@@ -751,8 +794,14 @@
 #___________________________________=Human Rights Bulletin System
 -fe5b-field:SplashProductDescription=Система сводок по правам человека
 
+#___________________________=Connecting to server
+-2a77-field:StatusConnecting=Соединение с сервером
+
 #______________________=Ready
 -20c7-field:StatusReady=Готово
+
+#___________________________=Retrieving...
+-5316-field:StatusRetrieving=Загрузка...
 
 #__________________________=Details
 -dc3d-field:TemplateDetails=Подробности
@@ -868,6 +917,12 @@
 #____________________________________________=Any changes you have made to this bulletin will be discarded.
 -3819-field:confirmCancelModifyBulletineffect=Все изменения, внесенные Вами в сводку, будут отменены.
 
+#_____________________________________=Bulletins are currently being retrieved from the server.
+-126a-field:confirmCancelRetrievecause=Сейчас с сервера загружаются сводки.
+
+#______________________________________=This operation will cancel the current retrieval, so some of the requested bulletins may not be retrieved.
+-babb-field:confirmCancelRetrieveeffect=Данная операция прервет текущий процесс загрузки, так что могут загрузиться не все запрошенные сводки.
+
 #________________________________________=Do you wish to cancel this backup?
 -7b46-field:confirmCancelShareBackupcause=Вы хотите отменить сохранение?
 
@@ -899,7 +954,7 @@
 -f291-field:confirmCloneBulletinAsMineeffect=Нажмите "Да", чтобы создать новую сводку, в которой будет скопирована вся информация. Вы будете являться официальным автором новой сводки, и все личные данные в ней будут видимы только для Вас (и для пользователей Вашей главной учетной записи, если таковая имеется). Исходная сводка останется неизменной.
 
 #___________________________________________=You have chosen to modify one of your sealed bulletins, thus creating a new version of that bulletin.
--fcb6-field:confirmCloneMySealedAsDraftcause=Вы выбрали изменение одной из Ваших чистовых сводок. Тем самым будет создана новая версия (редакция) этой сводки.
+-fcb6-field:confirmCloneMySealedAsDraftcause=Вы выбрали изменение одной из Ваших чистовых сводок. Тем самым будет создана новая версия этой сводки.
 
 #____________________________________________=Clicking on Yes will create a new version of this bulletin that initially contains all the same information.
 -198c-field:confirmCloneMySealedAsDrafteffect=Нажмите "Да", чтобы создать новую версию сводки, в которой первоначально будет содержаться вся информация, имеющаяся в предыдущей версии. 
@@ -959,7 +1014,7 @@
 -167f-field:confirmKeyPairFileExistsOverWriteeffect=Нажмите "Да", чтобы удалить прежний  ключ и заменить его ключом, который будет восстановлен.
 
 #_______________________________________________________=This account was created with an older release of Martus, which was unaware of multiple sealed bulletin versions. We need to update your system to recognize bulletins with versions.  The migration is automatic, fast, and safe. You cannot run this release of Martus unless you allow this migration.
--d89c-field:confirmNeedsBulletinVersioningMigrationcause=Эта учетная запись создавалась в программном обеспечении Martus более раннего выпуска, в котором не предусматривалось наличие множественных версий (редакций) чистовых сводок. Для распознания сводок с различными версиями требуется обновить Вашу систему. Процесс обновления (миграции) является автоматическим, быстрым и безопасным. Вы не сможете запустить программное обеспечение Martus текущего выпуска, пока не будет выполнена миграция.
+-d89c-field:confirmNeedsBulletinVersioningMigrationcause=Эта учетная запись создавалась в программном обеспечении Martus более раннего выпуска, в котором не предусматривалось наличие множественных версий чистовых сводок. Для распознания сводок с различными версиями требуется обновить Вашу систему. Процесс обновления (миграции) является автоматическим, быстрым и безопасным. Вы не сможете запустить программное обеспечение Martus текущего выпуска, пока не будет выполнена миграция.
 
 #________________________________________________________=Answering Yes will allow the migration to proceed, answering No will exit Martus.
 -2a34-field:confirmNeedsBulletinVersioningMigrationeffect=Выберите ответ "Да", чтобы запустить процесс миграции, или "Нет", чтобы выйти из Martus.
@@ -1225,6 +1280,9 @@
 #___________________=Location
 -d219-field:location=Место события
 
+#___________________=Date format sequence
+-eed8-field:mdyOrder=Формат отображения даты
+
 #_____________________________________________=The attachment could not be located.
 -65b1-field:messageErrorAttachmentMissingcause=Вложение не найдено.
 
@@ -1366,6 +1424,9 @@
 #_______________________________________=You must have a server name or IP address.
 -984b-field:notifyInvalidServerNamecause=Требуется имя или IP-адрес сервера.
 
+#_______________________________________=No row selected.
+-7b20-field:notifyNoGridRowSelectedcause=Не выделена строка.
+
 #___________________________________=Please select a Headquarters first.
 -1d19-field:notifyNoHQsSelectedcause=Вначале выберите главную учетную запись.
 
@@ -1393,8 +1454,8 @@
 #____________________________________________=You may only preview one bulletin at a time.  Please only select one bulletin to preview.
 -fbee-field:notifyPreviewOneBulletinOnlycause=Одновременно возможен предварительный просмотр только одной сводки. Выберите одну сводку для предварительного просмотра.
 
-#_________________________________________=Finished
--355b-field:notifyPrintToDiskCompletecause=Завершено
+#_________________________________________=Successfully saved Report
+-45d7-field:notifyPrintToDiskCompletecause=Отчет успешно сохранен
 
 #________________________________________=To print one or more bulletins, select them first, and then perform the print operation.
 -3298-field:notifyPrintZeroBulletinscause=Чтобы распечатать одну или несколько сводок, выделите их и выполните операцию печати.
@@ -1428,6 +1489,18 @@
 
 #______________________________________=Bulletin download cancelled.  Some bulletins may have already been downloaded.
 -87b3-field:notifyRetrieveCanceledcause=Загрузка сводки (сводок) отменена. Некоторые сводки могут быть уже загружены.
+
+#___________________________________=An error has occurred while retrieving a bulletin.
+-6201-field:notifyRetrieveErrorcause=При загрузке сводки произошла ошибка.
+
+#__________________________________________________=A retrieve was in progress when you upgraded to a newer version of Martus. That retrieve will be canceled, so you should re-select any bulletins that had not yet been retrieved.
+-28ae-field:notifyRetrieveFileDataVersionErrorcause=Вы обновили версию Martus во время загрузки сводки. Текущий процесс загрузки будет прерван, так что следует повторно выбрать сводки, которые еще не загрузились.
+
+#_______________________________________=An error has prevented Martus from continuing the retrieve that was in progress. You should re-select any bulletins that had not yet been retrieved.
+-8149-field:notifyRetrieveFileErrorcause=В результате ошибки программа Martus вынуждена прервать текущий процесс загрузки. Следует повторно выбрать сводки, которые еще не загрузились.
+
+#________________________________________=A retrieve is already in progress. You cannot start another retrieve until that one has finished.
+-3e55-field:notifyRetrieveInProgresscause=Загрузка уже выполняется. Невозможно начать новый процесс загрузки, пока не завершился текущий.
 
 #________________________________________________=Errors occurred while retrieving bulletin summaries.  Some of the bulletins on the server will not be shown.
 -6f6f-field:notifyRetrievedOnlySomeSummariescause=При загрузке краткой информации из сводок произошли ошибки.  Некоторые сводки, находящиеся на сервере, не будут показаны.
@@ -1534,6 +1607,12 @@
 #________________=Phone Number
 -ab25-field:phone=Номер телефона
 
+#___________________________________=Automatically adjust legacy Persian dates
+-4d0e-field:preferencesAdjustPersian=Автоматическая корректировка унаследованных персидских дат
+
+#________________________________=Automatically adjust legacy Thai dates
+-4d22-field:preferencesAdjustThai=Автоматическая корректировка унаследованных тайских дат 
+
 #________________________________=Prevent creating public bulletins
 -7c9e-field:preferencesAllPrivate=Запретить создание общедоступных сводок 
 
@@ -1570,8 +1649,8 @@
 #________________=Title
 -768e-field:title=Заголовок
 
-#_____________________________=Russian 2.8.1
--a3db-field:translationVersion=Русский 2.8.1
+#_____________________________=Russian 2.9 
+-649d-field:translationVersion=Русский 2.9 
 
 #___________________=Username
 -84c2-field:username=Имя пользователя
@@ -1628,13 +1707,13 @@
 -647f-folder:%RetrievedFieldOfficeBulletin=Сводки подчиненных учетных записей
 
 #______________________________________________=Field Desk Draft Bulletins
--204a-folder:%RetrievedFieldOfficeBulletinDraft=Черновые сводки подчиненных учетных записей
+-204a-folder:%RetrievedFieldOfficeBulletinDraft=Черновики подчиненных учетных записей
 
 #________________________________=Retrieved Bulletins
 -6539-folder:%RetrievedMyBulletin=Загруженные
 
 #_____________________________________=Retrieved Draft Bulletins
--4ff2-folder:%RetrievedMyBulletinDraft=Загруженные черновые сводки
+-4ff2-folder:%RetrievedMyBulletinDraft=Загруженные черновики
 
 #__________________________=Search Results
 -5e05-folder:%SearchResults=Найденные
@@ -1716,6 +1795,9 @@
 
 #________________=Korean
 -dec6-language:ko=Корейский
+
+#________________=Kurdish
+-a06e-language:ku=Курдский
 
 #________________=Kirghiz
 -1848-language:ky=Киргизский
@@ -1947,6 +2029,78 @@
 
 #_______________=Tools
 -4fa8-menu:tools=Сервис
+
+#___________________=Farvardin
+-fef9-month:Persian1=Фарвардин
+
+#____________________=Dey
+-494f-month:Persian10=Дай
+
+#____________________=Bahman
+-6c49-month:Persian11=Бахман
+
+#____________________=Esfand
+-7179-month:Persian12=Исфанд
+
+#___________________=Ordibehesht
+-4241-month:Persian2=Урдибихишт
+
+#___________________=Khordad
+-02bc-month:Persian3=Хурдад
+
+#___________________=Tir
+-5b96-month:Persian4=Тир
+
+#___________________=Mordad
+-e86f-month:Persian5=Мурдад
+
+#___________________=Shahrivar
+-4a9e-month:Persian6=Шахривар
+
+#___________________=Mehr
+-dfc8-month:Persian7=Мехр
+
+#___________________=Aban
+-1d23-month:Persian8=Абан
+
+#___________________=Azar
+-1e15-month:Persian9=Азар
+
+#________________=Jan
+-efed-month:Thai1=Янв
+
+#_________________=Oct
+-5132-month:Thai10=Окт
+
+#_________________=Nov
+-bb9b-month:Thai11=Нов
+
+#_________________=Dec
+-997f-month:Thai12=Дек
+
+#________________=Feb
+-dc84-month:Thai2=Фев
+
+#________________=Mar
+-c4ba-month:Thai3=Мар
+
+#________________=Apr
+-befd-month:Thai4=Апр
+
+#________________=May
+-c94f-month:Thai5=Май
+
+#________________=Jun
+-6d90-month:Thai6=Июн
+
+#________________=Jul
+-b737-month:Thai7=Июл
+
+#________________=Aug
+-7562-month:Thai8=Авг
+
+#________________=Sep
+-fdd2-month:Thai9=Сен
 
 #______________=Apr
 -befd-month:apr=Апр
@@ -2199,6 +2353,9 @@
 
 #_________________________________________=Cancel Modify Bulletin
 -276b-wintitle:confirmCancelModifyBulletin=Отмена изменений сводки
+
+#___________________________________=Cancel Retrieve
+-d984-wintitle:confirmCancelRetrieve=Отмена загрузки
 
 #______________________________________=Cancel Backup
 -bba5-wintitle:confirmCancelShareBackup=Отмена сохранения
@@ -2506,6 +2663,9 @@
 #_____________________________________=Invalid Server Name or IP Address
 -3376-wintitle:notifyInvalidServerName=Неверное имя или IP-адрес сервера
 
+#_____________________________________=No Row Selected
+-28fe-wintitle:notifyNoGridRowSelected=Не выделена строка
+
 #_________________________________=No Headquarters Selected
 -9140-wintitle:notifyNoHQsSelected=Главные учетные записи не выбраны
 
@@ -2530,8 +2690,8 @@
 #__________________________________________=Preview One Bulletin Only
 -5b0a-wintitle:notifyPreviewOneBulletinOnly=Просмотр только одной сводки
 
-#_______________________________________=Print To Disk
--b5b5-wintitle:notifyPrintToDiskComplete=Печать в файл 
+#_______________________________________=Print To Report File
+-c1b2-wintitle:notifyPrintToDiskComplete=Печать в файл отчета
 
 #______________________________________=No Bulletins Selected
 -c1d6-wintitle:notifyPrintZeroBulletins=Не выбраны сводки
@@ -2565,6 +2725,18 @@
 
 #____________________________________=Bulletin Download Canceled
 -f8d3-wintitle:notifyRetrieveCanceled=Загрузка сводки отменена
+
+#_________________________________=Retrieve Error
+-8ed0-wintitle:notifyRetrieveError=Ошибка загрузки
+
+#________________________________________________=Warning
+-e9c4-wintitle:notifyRetrieveFileDataVersionError=Предупреждение
+
+#_____________________________________=Error
+-7f2f-wintitle:notifyRetrieveFileError=Ошибка
+
+#______________________________________=Retrieve In Progress
+-6983-wintitle:notifyRetrieveInProgress=Выполняется загрузка
 
 #______________________________________________=Error During Retrieve
 -f2d7-wintitle:notifyRetrievedOnlySomeSummaries=Ошибка при загрузке
@@ -2679,3 +2851,4 @@
 
 #_________________________________=Confirm Delete Folder
 -1a75-wintitle:warningdeletefolder=Подтверждение удаления папки
+
