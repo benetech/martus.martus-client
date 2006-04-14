@@ -232,8 +232,7 @@ don't know
 </Field>
 
 <Field tag='VictimInformationGrid'>
-<Value>
-<GridData>
+<Value><GridData>
 <Row>
 <Column>Dan</Column>
 <Column>Brown</Column>
@@ -265,8 +264,7 @@ don't know
 </Field>
 
 <Field tag='ProfessionHistoryGrid'>
-<Value>
-<GridData>
+<Value><GridData>
 <Row>
 <Column>Dan</Column>
 <Column>Brown</Column>
