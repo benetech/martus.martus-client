@@ -47,6 +47,7 @@ import org.martus.common.fieldspec.GridFieldSpec;
 import org.martus.common.fieldspec.StandardFieldSpecs;
 import org.martus.common.packet.FieldDataPacket;
 import org.martus.swing.UiLabel;
+import org.martus.swing.UiWrappedTextArea;
 
 
 abstract public class UiBulletinComponentDataSection extends UiBulletinComponentSection
@@ -112,8 +113,12 @@ abstract public class UiBulletinComponentDataSection extends UiBulletinComponent
 	{
 		//TODO: For wrapped labels, we need to take into consideration font size, text alignment, rtol and printing. 
 		//UiWrappedTextArea label = new UiWrappedTextArea(labelText, 30);
-		UiLabel label = new UiLabel(labelText);
-		return label;
+		//UiLabel label = new UiLabel(labelText);
+		//return label;
+		UiWrappedTextArea label = new UiWrappedTextArea(labelText, 14);
+		if(label.getRows()>1)
+			return label;
+		return new UiLabel(labelText);
 	}
 
 	private UiField createField(FieldSpec fieldSpec)
