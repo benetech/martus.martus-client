@@ -125,7 +125,7 @@ public class UiAboutDlg extends JDialog implements ActionListener
 		final String notice = "\n" + disclaimer + "\n\n" + credits + "\n\n" + APACHENOTICE;
 
 		getContentPane().add(hBoxVersionAndIcon, BorderLayout.NORTH);
-		getContentPane().add((new UiWrappedTextArea(notice)).getWrappedTextPanel(), BorderLayout.CENTER);
+		getContentPane().add(new UiWrappedTextArea(notice), BorderLayout.CENTER);
 		getContentPane().add(hBoxOk, BorderLayout.SOUTH);
 		
 		Utilities.centerDlg(this);

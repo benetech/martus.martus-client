@@ -54,13 +54,15 @@ public class UiWarningMessageDlg extends JDialog implements ActionListener
 		UiWrappedTextArea areaLtoR = new UiWrappedTextArea(warningMessageLtoR);
 		areaLtoR.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
 		areaLtoR.setBorder(new EmptyBorder(5,5,5,5));
-		JPanel ltorPanel = areaLtoR.getWrappedTextPanel();
+		JPanel ltorPanel = new JPanel();
+		ltorPanel.add(areaLtoR);
 		ltorPanel.setBorder(new LineBorder(Color.BLACK));
 		
 		UiWrappedTextArea areaRtoL = new UiWrappedTextArea(warningMessageRtoL);
 		areaRtoL.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
 		areaRtoL.setBorder(new EmptyBorder(5,5,5,5));
-		JPanel rtolPanel = areaRtoL.getWrappedTextPanel();
+		JPanel rtolPanel = new JPanel();
+		rtolPanel.add(areaRtoL);
 		rtolPanel.setBorder(new LineBorder(Color.BLACK));
 
 		JPanel panel = new JPanel();
