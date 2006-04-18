@@ -101,17 +101,13 @@ public class UiContactInfoDlg extends JDialog implements ActionListener
 		helpmsg.append('\n');
 		helpmsg.append(localization.getFieldLabel("ContactInfoUpdateLater"));
 		UiWrappedTextArea infoFuture = new UiWrappedTextArea(helpmsg.toString(), 30);
-		infoFuture.setFont(space.getFont());
-		infoFuture.setRows(infoFuture.getLineCount());
-
 		panel.addOnNewLine(infoFuture);
 
 		panel.addComponents(ok, cancel);
 		UiScrollPane scroller = new UiScrollPane(panel);
 		getContentPane().add(scroller);
 		getRootPane().setDefaultButton(ok);
-
-		setSize(Utilities.getViewableScreenSize());
+		Utilities.centerDlg(this);
 		setVisible(true);
 		toFront();
 	}
