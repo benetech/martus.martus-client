@@ -211,7 +211,7 @@ public class ClientBulletinStore extends BulletinStore
 
 	public Set getSetOfOrphanedBulletinUniversalIds()
 	{
-		Set possibleOrphans = new HashSet(getAllBulletinLeafUids());
+		Set possibleOrphans = getAllBulletinLeafUids();
 		Set inFolders = getSetOfBulletinUniversalIdsInFolders();
 		possibleOrphans.removeAll(inFolders);
 		return possibleOrphans;

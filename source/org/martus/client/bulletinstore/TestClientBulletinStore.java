@@ -440,20 +440,18 @@ public class TestClientBulletinStore extends TestCaseEnhanced
 	public void testGetAllBulletinUids() throws Exception
 	{
 		TRACE("testGetAllBulletinUids");
-		Vector empty = testStore.getAllBulletinLeafUids();
+		Set empty = testStore.getAllBulletinLeafUids();
 		assertEquals("not empty?", 0, empty.size());
 
 		Bulletin b = testStore.createEmptyBulletin();
 		testStore.saveBulletin(b);
-		Vector one = testStore.getAllBulletinLeafUids();
+		Set one = testStore.getAllBulletinLeafUids();
 		assertEquals("not one?", 1, one.size());
-		UniversalId gotUid = (UniversalId)one.get(0);
-		UniversalId bUid = b.getUniversalId();
-		assertEquals("wrong uid 1?", bUid, gotUid);
+		assertTrue("wrong uid 1?", one.contains(b.getUniversalId()));
 
 		Bulletin b2 = testStore.createEmptyBulletin();
 		testStore.saveBulletin(b2);
-		Vector two = testStore.getAllBulletinLeafUids();
+		Set two = testStore.getAllBulletinLeafUids();
 		assertEquals("not two?", 2, two.size());
 		assertTrue("missing 1?", two.contains(b.getUniversalId()));
 		assertTrue("missing 2?", two.contains(b2.getUniversalId()));

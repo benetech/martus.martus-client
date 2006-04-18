@@ -28,6 +28,7 @@ package org.martus.client.test;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.PrintStream;
+import java.util.Set;
 import java.util.Vector;
 import org.martus.client.bulletinstore.BulletinFolder;
 import org.martus.client.bulletinstore.ClientBulletinStore;
@@ -81,7 +82,9 @@ public class TestImporterOfXmlFilesOfBulletins extends TestCaseEnhanced
 		ImporterOfXmlFilesOfBulletins importer = new ImporterOfXmlFilesOfBulletins(xmlFiles, clientStore, importFolder, nullPrinter);
 		importer.importFiles();
 		assertEquals("Didn't get all 3 bulletins?", 3, importer.getNumberOfBulletinsImported());
-		Vector bulletinIds = clientStore.getAllBulletinLeafUids();
+		Set bulletinSetIds = clientStore.getAllBulletinLeafUids();
+		Vector bulletinIds = toVector(bulletinSetIds);
+		
 		Bulletin b1 = clientStore.getBulletinRevision((UniversalId)bulletinIds.get(0));
 		Bulletin b2 = clientStore.getBulletinRevision((UniversalId)bulletinIds.get(1));
 		Bulletin b3 = clientStore.getBulletinRevision((UniversalId)bulletinIds.get(2));

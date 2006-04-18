@@ -1102,10 +1102,10 @@ public class MartusApp
 		searchFolder.removeAll();
 		searchFolder.prepareForBulkOperation();
 
-		Vector uids = store.getAllBulletinLeafUids();
-		for(int i = 0; i < uids.size(); ++i)
+		Set uids = store.getAllBulletinLeafUids();
+		for(Iterator iter = uids.iterator(); iter.hasNext();)
 		{
-			UniversalId leafBulletinUid = (UniversalId)uids.get(i);
+			UniversalId leafBulletinUid = (UniversalId) iter.next();
 			Vector allRevisions = new Vector();
 			allRevisions.add(leafBulletinUid);
 			if(!searchFinalVersionsOnly)

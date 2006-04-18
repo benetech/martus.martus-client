@@ -27,8 +27,8 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.bulletinstore;
 
 import java.io.IOException;
+import java.util.Set;
 import java.util.Vector;
-
 import org.martus.client.bulletinstore.ClientBulletinStore.BulletinAlreadyExistsException;
 import org.martus.client.test.MockBulletinStore;
 import org.martus.common.bulletin.Bulletin;
@@ -163,7 +163,9 @@ public class TestBulletinFolder extends TestCaseEnhanced
 		assertEquals(count, scratchFolder.getBulletinCount());
 		assertEquals(0, folder.getBulletinCount());
 
-		Vector v = testStore.getAllBulletinLeafUids();
+		Set s = testStore.getAllBulletinLeafUids();
+		
+		Vector v = toVector(s);
 		UniversalId uid0 = (UniversalId)v.get(0);
 		b = testStore.getBulletinRevision(uid0);
 		folder.add(b);
