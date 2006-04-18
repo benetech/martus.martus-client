@@ -26,6 +26,7 @@ Boston, MA 02111-1307, USA.
 
 package org.martus.client.swingui.actions;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
@@ -138,8 +139,6 @@ public abstract class ActionQuickErase extends UiMenuAction
 			warningLabel.setForeground(Color.BLACK);
 			warningLabelPanel.add(warningLabel);
 			
-			JPanel panel = new JPanel();
-			panel.setBorder(new LineBorder(Color.RED, 20));
 			UiVBox vBox = new UiVBox();
 			vBox.addCentered(warningLabelPanel);
 
@@ -169,7 +168,6 @@ public abstract class ActionQuickErase extends UiMenuAction
 					multipleAccountsText.setBackground(Color.WHITE);
 					multipleAccountsText.setForeground(Color.BLACK);
 					multipleAccountPanel.add(multipleAccountsText);
-					vBox.addSpace();
 					vBox.addCentered(multipleAccountPanel);
 				}
 				warningMessage += "\n* ";
@@ -177,14 +175,11 @@ public abstract class ActionQuickErase extends UiMenuAction
 			}
 			warningMessage += "\n* ";
 			warningMessage += localization.getFieldLabel("QuickEraseWillExitMartus");
-			vBox.addSpace();
 			
 			UiWrappedTextArea text = new UiWrappedTextArea(warningMessage);
 			text.setBackground(Color.WHITE);
 			text.setForeground(Color.BLACK);
 			text.setEditable(false);
-			vBox.addCentered(text);
-			vBox.addSpace();
 			
 			okButton = new UiButton(localization.getButtonLabel("ok"));
 			okButton.addActionListener(this);
@@ -194,10 +189,16 @@ public abstract class ActionQuickErase extends UiMenuAction
 
 			Box hBox = Box.createHorizontalBox();
 			Utilities.addComponentsRespectingOrientation(hBox, new Component[] {okButton,Box.createHorizontalGlue(),cancelButton});
-			vBox.addCentered(hBox);
-			panel.add(vBox);
+			JPanel panel = new JPanel();
+			panel.setLayout(new BorderLayout());
+			panel.setBorder(new LineBorder(Color.RED, 20));
+			panel.add(vBox, BorderLayout.CENTER);
 			
-			getContentPane().add(panel);
+			getContentPane().setLayout(new BorderLayout());
+			getContentPane().add(panel, BorderLayout.NORTH);
+			getContentPane().add(text.getWrappedTextPanel(), BorderLayout.CENTER);
+			getContentPane().add(hBox, BorderLayout.SOUTH);
+			
 			Utilities.centerDlg(this);
 			setResizable(true);
 			setVisible(true);

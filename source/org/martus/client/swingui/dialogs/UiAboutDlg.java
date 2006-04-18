@@ -27,18 +27,17 @@ Boston, MA 02111-1307, USA.
 
 package org.martus.client.swingui.dialogs;
 
+import java.awt.BorderLayout;
 import java.awt.HeadlessException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-
 import javax.swing.Box;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
-
 import org.martus.client.swingui.UiConstants;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.clientside.UiLocalization;
@@ -57,6 +56,7 @@ public class UiAboutDlg extends JDialog implements ActionListener
 		throws HeadlessException
 	{
 		super(owner, "" , true);
+		getContentPane().setLayout(new BorderLayout());
 //		System.out.println("Number of calls to verifyPacketSignature " + Packet.callsToVerifyPacketSignature);
 //		System.out.println("Cumulative time in verifyPacketSignature " + Packet.millisInVerifyPacketSignature);
 //		System.out.println("Number of calls to XmlPacketLoader " + XmlPacketLoader.callsToXmlPacketLoader);
@@ -124,18 +124,10 @@ public class UiAboutDlg extends JDialog implements ActionListener
 		final String credits = localization.getFieldLabel("aboutDlgCredits");
 		final String notice = "\n" + disclaimer + "\n\n" + credits + "\n\n" + APACHENOTICE;
 
-		UiVBox vBoxDetails = new UiVBox();
-		vBoxDetails.addCentered(new UiWrappedTextArea(notice));
-		vBoxDetails.addCentered(hBoxOk);
-
-		Box hBoxDetails = Box.createHorizontalBox();
-		hBoxDetails.add(vBoxDetails);
-
-		UiVBox vBoxAboutDialog = new UiVBox();
-		vBoxAboutDialog.addCentered(hBoxVersionAndIcon);
-		vBoxAboutDialog.addCentered(hBoxDetails);
-		getContentPane().add(vBoxAboutDialog);
-
+		getContentPane().add(hBoxVersionAndIcon, BorderLayout.NORTH);
+		getContentPane().add((new UiWrappedTextArea(notice)).getWrappedTextPanel(), BorderLayout.CENTER);
+		getContentPane().add(hBoxOk, BorderLayout.SOUTH);
+		
 		Utilities.centerDlg(this);
 		setVisible(true);
 	}

@@ -38,7 +38,6 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import org.martus.swing.UiButton;
 import org.martus.swing.UiScrollPane;
-import org.martus.swing.UiVBox;
 import org.martus.swing.UiWrappedTextArea;
 import org.martus.swing.Utilities;
 
@@ -53,27 +52,22 @@ public class UiWarningMessageDlg extends JDialog implements ActionListener
 		okButton.addActionListener(this);
 		
 		UiWrappedTextArea areaLtoR = new UiWrappedTextArea(warningMessageLtoR);
-		areaLtoR.setRows(areaLtoR.getRows()-5);//TODO:Remove this once we fix the UiWrappedTextArea to get the correct row count.
 		areaLtoR.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
 		areaLtoR.setBorder(new EmptyBorder(5,5,5,5));
-		JPanel ltorPanel = new JPanel();
+		JPanel ltorPanel = areaLtoR.getWrappedTextPanel();
 		ltorPanel.setBorder(new LineBorder(Color.BLACK));
-		ltorPanel.add(areaLtoR);
 		
 		UiWrappedTextArea areaRtoL = new UiWrappedTextArea(warningMessageRtoL);
-		areaRtoL.setBorder(new EmptyBorder(5,5,5,5));
-		JPanel rtolPanel = new JPanel();
-		rtolPanel.setBorder(new LineBorder(Color.BLACK));
-		rtolPanel.add(areaRtoL);
 		areaRtoL.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
+		areaRtoL.setBorder(new EmptyBorder(5,5,5,5));
+		JPanel rtolPanel = areaRtoL.getWrappedTextPanel();
+		rtolPanel.setBorder(new LineBorder(Color.BLACK));
 
-		UiVBox vbox = new UiVBox();
-		
-		vbox.addCentered(ltorPanel);
-		vbox.addCentered(rtolPanel);
 		JPanel panel = new JPanel();
+		panel.setLayout(new BorderLayout());
 		panel.setBorder(new EmptyBorder(5,5,5,5));
-		panel.add(vbox);
+		panel.add(ltorPanel,BorderLayout.NORTH);
+		panel.add(rtolPanel,BorderLayout.SOUTH);
 		getContentPane().add(new UiScrollPane(panel), BorderLayout.CENTER);
 		
 		JPanel pb = new JPanel();

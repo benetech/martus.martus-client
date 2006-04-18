@@ -25,6 +25,7 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.dialogs;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
@@ -36,6 +37,7 @@ import javax.swing.Box;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JDialog;
+import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import org.martus.client.swingui.MartusLocalization;
@@ -43,8 +45,8 @@ import org.martus.client.swingui.UiMainWindow;
 import org.martus.clientside.UiLocalization;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.swing.UiButton;
+import org.martus.swing.UiLabel;
 import org.martus.swing.UiRadioButton;
-import org.martus.swing.UiVBox;
 import org.martus.swing.UiWrappedTextArea;
 import org.martus.swing.Utilities;
 
@@ -84,27 +86,32 @@ public class UiPrintBulletinDlg extends JDialog implements ActionListener
 		destinationGroup.add(toDisk);
 		toPrinter.setSelected(true);
 
-		Box privacyPanel = new UiVBox();
+		JPanel privacyPanel = new JPanel();
 		privacyPanel.setBorder(new LineBorder(Color.BLACK));
-		privacyPanel.add(new UiWrappedTextArea(localization.getFieldLabel("PrintPrivateDataMessage")));
-		privacyPanel.add(publicOnly);
-		privacyPanel.add(publicAndPrivate);
+		privacyPanel.setLayout(new BorderLayout());
+		privacyPanel.add((new UiWrappedTextArea(localization.getFieldLabel("PrintPrivateDataMessage")).getWrappedTextPanel()), BorderLayout.NORTH);
+		privacyPanel.add(publicOnly, BorderLayout.CENTER);
+		privacyPanel.add(publicAndPrivate, BorderLayout.SOUTH);
 		
-		Box destinationPanel = new UiVBox();
+		JPanel destinationPanel = new JPanel();
 		destinationPanel.setBorder(new LineBorder(Color.BLACK));
-		destinationPanel.add(new UiWrappedTextArea(localization.getFieldLabel("PrintToPrinterOrDisk")));
-		destinationPanel.add(toPrinter);
-		destinationPanel.add(toDisk);
+		destinationPanel.setLayout(new BorderLayout());
+		destinationPanel.add((new UiWrappedTextArea(localization.getFieldLabel("PrintToPrinterOrDisk")).getWrappedTextPanel()), BorderLayout.NORTH);
+		destinationPanel.add(toPrinter,BorderLayout.CENTER);
+		destinationPanel.add(toDisk, BorderLayout.SOUTH);
 		
-		UiVBox mainBox = new UiVBox();
-		mainBox.setBorder(new EmptyBorder(10, 10, 10, 10));
-		mainBox.addCentered(privacyPanel);
-		mainBox.addSpace();
-		mainBox.addCentered(destinationPanel);
-		mainBox.addSpace();
-		mainBox.add(new Component[] {ok, cancel});
-	
-		getContentPane().add(mainBox);
+		JPanel mainPanel = new JPanel();
+		mainPanel.setBorder(new EmptyBorder(10, 10, 10, 10));
+		mainPanel.setLayout(new BorderLayout());
+		mainPanel.add(privacyPanel,BorderLayout.NORTH);
+		mainPanel.add(new UiLabel(" "), BorderLayout.CENTER);
+		Box buttons = Box.createHorizontalBox();
+		Utilities.addComponentsRespectingOrientation(buttons, new Component[] {ok, Box.createHorizontalGlue(),cancel});
+		mainPanel.add(destinationPanel, BorderLayout.SOUTH);
+
+		getContentPane().setLayout(new BorderLayout());
+		getContentPane().add(mainPanel, BorderLayout.CENTER);
+		getContentPane().add(buttons, BorderLayout.SOUTH);
 		getRootPane().setDefaultButton(ok);
 		Utilities.centerDlg(this);
 		setResizable(true);
