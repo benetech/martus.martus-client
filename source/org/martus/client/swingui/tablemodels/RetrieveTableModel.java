@@ -26,7 +26,9 @@ Boston, MA 02111-1307, USA.
 
 package org.martus.client.swingui.tablemodels;
 
+import java.util.HashSet;
 import java.util.Iterator;
+import java.util.Set;
 import java.util.Vector;
 
 import org.martus.client.bulletinstore.ClientBulletinStore;
@@ -432,10 +434,9 @@ abstract public class RetrieveTableModel extends UiTableModel
 		}
 	}
 	
-	public Vector getUidsThatWouldBeUpgrades(Vector uidsSelectedForRetrieve)
+	public Set getUidsThatWouldBeUpgrades(Vector uidsSelectedForRetrieve)
 	{
-		Vector uidsBeingUpgraded = new Vector();
-		
+		Set uidsBeingUpgraded = new HashSet();
 		for(int i=0; i < allSummaries.size(); ++i)
 		{
 			BulletinSummary summary = (BulletinSummary)allSummaries.get(i);

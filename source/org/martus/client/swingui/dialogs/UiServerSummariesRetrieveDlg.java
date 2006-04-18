@@ -27,7 +27,9 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.swingui.dialogs;
 
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
+import java.util.Set;
 import java.util.Vector;
 
 import org.martus.client.swingui.UiMainWindow;
@@ -53,13 +55,13 @@ public class UiServerSummariesRetrieveDlg extends UiServerSummariesDlg
 	public boolean confirmIntentionsBeforeClosing()
 	{
 		Vector uidsSelected = getUniversalIdList();
-		Vector uidsBeingUpgraded = model.getUidsThatWouldBeUpgrades(uidsSelected);
+		Set uidsBeingUpgraded = model.getUidsThatWouldBeUpgrades(uidsSelected);
 		if(uidsBeingUpgraded.size() > 0)
 		{
 			String titles = "";
-			for(int i=0; i < uidsBeingUpgraded.size(); ++i)
+			for(Iterator iter = uidsBeingUpgraded.iterator(); iter.hasNext();)
 			{
-				UniversalId uid = (UniversalId)uidsBeingUpgraded.get(i);
+				UniversalId uid = (UniversalId) iter.next();
 				titles += "   " + getTitleFromSummary(uid) + "\n";
 			}
 			Map replacements = new HashMap();
