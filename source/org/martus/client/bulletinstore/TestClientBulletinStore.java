@@ -318,7 +318,6 @@ public class TestClientBulletinStore extends TestCaseEnhanced
 	public void testChooseBulletinToUpload() throws Exception
 	{
     	BulletinFolder outbox = testStore.createFolder("*My outbox");
-    	BulletinFolder normal = testStore.createFolder("Normal Folder");
     	int count = 10;
     	Bulletin[] bulletins = new Bulletin[count];
     	Set bulletinsToBeSent = new HashSet();
@@ -328,31 +327,34 @@ public class TestClientBulletinStore extends TestCaseEnhanced
     		testStore.saveBulletin(bulletins[i]);
         	UniversalId universalId = bulletins[i].getUniversalId();
 			testStore.addBulletinToFolder(outbox, universalId);
-        	testStore.addBulletinToFolder(normal, universalId);
         	bulletinsToBeSent.add(universalId);
     	}
     	
-    	testStore.removeBulletinFromFolder(normal, bulletins[3].getUniversalId());
-    	testStore.removeBulletinFromFolder(normal, bulletins[9].getUniversalId());
+    	UniversalId uidRemoved = bulletins[3].getUniversalId();
+    	UniversalId uidDiscarded = bulletins[6].getUniversalId();
+    	UniversalId uidRemovedAndDiscarded = bulletins[9].getUniversalId();
+    	
+    	testStore.removeBulletinFromFolder(outbox, uidRemoved);
+    	testStore.removeBulletinFromFolder(outbox, uidRemovedAndDiscarded);
     	
     	BulletinFolder discarded = testStore.getFolderDiscarded();
-    	testStore.addBulletinToFolder(discarded, bulletins[3].getUniversalId());
-    	testStore.addBulletinToFolder(discarded, bulletins[6].getUniversalId());
-    	testStore.addBulletinToFolder(discarded, bulletins[9].getUniversalId());
+    	testStore.addBulletinToFolder(discarded, uidDiscarded);
+    	testStore.addBulletinToFolder(discarded, uidRemovedAndDiscarded);
     	
-    	assertEquals("Bulletin Lists different?", bulletinsToBeSent, outbox.getAllUniversalIdsUnsorted());
-    	
+    	bulletinsToBeSent.remove(uidRemoved);
+    	bulletinsToBeSent.remove(uidRemovedAndDiscarded);
+    	bulletinsToBeSent.remove(uidDiscarded);
+
     	Set bulletinsActuallySent = new HashSet();
     	for(int startIndex=0; startIndex < count; ++startIndex)
     	{
     		UniversalId gotUid = testStore.chooseBulletinToUpload(outbox, startIndex).getUniversalId();
-    		assertTrue("Index ="+startIndex, bulletinsToBeSent.contains(gotUid));
     		bulletinsActuallySent.add(gotUid);
-    		assertNotEquals("Send discarded bulletin 3?", bulletins[3].getUniversalId(), gotUid);
-    		assertNotEquals("Send discarded bulletin 6?", bulletins[6].getUniversalId(), gotUid);
-    		assertNotEquals("Send discarded bulletin 9?", bulletins[9].getUniversalId(), gotUid);
+    		assertNotEquals("Sent removed bulletin?", uidRemoved, gotUid);
+    		assertNotEquals("Sent discarded bulletin?", uidDiscarded, gotUid);
+    		assertNotEquals("Sent removed and discarded bulletin?", uidRemovedAndDiscarded, gotUid);
     	}
-    	assertEquals("All non discarded bulletins sent?", count - 3, bulletinsActuallySent.size());
+    	assertEquals("Didn't send expected bulletins?", bulletinsToBeSent, bulletinsActuallySent);
     	
 	}
     
