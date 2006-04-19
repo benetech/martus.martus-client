@@ -78,7 +78,6 @@ import org.martus.util.DirectoryUtils;
 import org.martus.util.TestCaseEnhanced;
 import org.martus.util.UnicodeReader;
 import org.martus.util.UnicodeWriter;
-import org.martus.util.VectorConversion;
 import org.martus.util.language.LanguageOptions;
 
 public class TestMartusApp_NoServer extends TestCaseEnhanced
@@ -1554,7 +1553,7 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 
 		appWithAccount.loadSampleData(); //SLOW!!!
 		
-		Bulletin b = store.getBulletinRevision((UniversalId)VectorConversion.toVector(store.getAllBulletinLeafUids()).get(0));
+		Bulletin b = store.getBulletinRevision((UniversalId)(new Vector(store.getAllBulletinLeafUids()).get(0)));
 		String andKeyword = "and";
 		String orKeyword = "or";
 		search(appWithAccount, b.get("title"), andKeyword, orKeyword, SEARCH_ALL_BULLETIN_REVISIONS);
