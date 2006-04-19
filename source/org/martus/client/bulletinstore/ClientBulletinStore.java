@@ -348,13 +348,13 @@ public class ClientBulletinStore extends BulletinStore
 
 	public Bulletin chooseBulletinToUpload(BulletinFolder hiddenFolder, int startIndex)
 	{
-		int bulletinCount = hiddenFolder.getBulletinCount();
-		for(int i=0; i < bulletinCount; ++i)
+		UniversalId[] uids = hiddenFolder.getAllUniversalIdsUnsortedAsArray();
+		for(int i=0; i < uids.length; ++i)
 		{
 			++startIndex;
-			if(startIndex >= bulletinCount)
+			if(startIndex >= uids.length)
 				startIndex = 0;
-			Bulletin b = hiddenFolder.getBulletinSorted(startIndex);
+			Bulletin b = getBulletinRevision(uids[startIndex]);
 			if(!isDiscarded(b))
 				return b;
 		}

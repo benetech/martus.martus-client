@@ -176,6 +176,11 @@ public class BulletinFolder
 	{
 		return rawIdList;
 	}
+	
+	public UniversalId[] getAllUniversalIdsUnsortedAsArray()
+	{
+		return (UniversalId[])getAllUniversalIdsUnsorted().toArray(new UniversalId[0]);
+	}
 
 	public boolean contains(Bulletin b)
 	{
