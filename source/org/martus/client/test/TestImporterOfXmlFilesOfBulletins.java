@@ -39,6 +39,7 @@ import org.martus.common.crypto.MockMartusSecurity;
 import org.martus.common.packet.UniversalId;
 import org.martus.util.DirectoryUtils;
 import org.martus.util.TestCaseEnhanced;
+import org.martus.util.VectorConversion;
 
 public class TestImporterOfXmlFilesOfBulletins extends TestCaseEnhanced
 {
@@ -83,7 +84,7 @@ public class TestImporterOfXmlFilesOfBulletins extends TestCaseEnhanced
 		importer.importFiles();
 		assertEquals("Didn't get all 3 bulletins?", 3, importer.getNumberOfBulletinsImported());
 		Set bulletinSetIds = clientStore.getAllBulletinLeafUids();
-		Vector bulletinIds = toVector(bulletinSetIds);
+		Vector bulletinIds = VectorConversion.toVector(bulletinSetIds);
 		
 		Bulletin b1 = clientStore.getBulletinRevision((UniversalId)bulletinIds.get(0));
 		Bulletin b2 = clientStore.getBulletinRevision((UniversalId)bulletinIds.get(1));

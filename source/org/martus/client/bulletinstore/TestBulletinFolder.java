@@ -34,6 +34,7 @@ import org.martus.client.test.MockBulletinStore;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.packet.UniversalId;
 import org.martus.util.TestCaseEnhanced;
+import org.martus.util.VectorConversion;
 
 public class TestBulletinFolder extends TestCaseEnhanced
 {
@@ -165,7 +166,7 @@ public class TestBulletinFolder extends TestCaseEnhanced
 
 		Set s = testStore.getAllBulletinLeafUids();
 		
-		Vector v = toVector(s);
+		Vector v = VectorConversion.toVector(s);
 		UniversalId uid0 = (UniversalId)v.get(0);
 		b = testStore.getBulletinRevision(uid0);
 		folder.add(b);

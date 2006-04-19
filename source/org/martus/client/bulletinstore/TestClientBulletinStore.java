@@ -34,9 +34,8 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.Vector;
-
-import org.martus.client.bulletinstore.ClientBulletinStore.BulletinAlreadyExistsException;
 import org.martus.client.bulletinstore.ClientBulletinStore.AddOlderVersionToFolderFailedException;
+import org.martus.client.bulletinstore.ClientBulletinStore.BulletinAlreadyExistsException;
 import org.martus.client.core.MartusClientXml;
 import org.martus.client.test.MockBulletinStore;
 import org.martus.common.HQKey;
@@ -322,12 +321,15 @@ public class TestClientBulletinStore extends TestCaseEnhanced
     	BulletinFolder normal = testStore.createFolder("Normal Folder");
     	int count = 10;
     	Bulletin[] bulletins = new Bulletin[count];
+    	Set bulletinsToBeSent = new HashSet();
     	for(int i=0; i < count; ++i)
     	{
     		bulletins[i] = testStore.createEmptyBulletin();
     		testStore.saveBulletin(bulletins[i]);
-        	testStore.addBulletinToFolder(outbox, bulletins[i].getUniversalId());
-        	testStore.addBulletinToFolder(normal, bulletins[i].getUniversalId());
+        	UniversalId universalId = bulletins[i].getUniversalId();
+			testStore.addBulletinToFolder(outbox, universalId);
+        	testStore.addBulletinToFolder(normal, universalId);
+        	bulletinsToBeSent.add(universalId);
     	}
     	
     	testStore.removeBulletinFromFolder(normal, bulletins[3].getUniversalId());
@@ -337,17 +339,20 @@ public class TestClientBulletinStore extends TestCaseEnhanced
     	testStore.addBulletinToFolder(discarded, bulletins[3].getUniversalId());
     	testStore.addBulletinToFolder(discarded, bulletins[6].getUniversalId());
     	testStore.addBulletinToFolder(discarded, bulletins[9].getUniversalId());
-
-    	int expected[] = {1, 2, 4, 4, 5, 7, 7, 8, 0, 0};
+    	
+    	assertEquals("Bulletin Lists different?", bulletinsToBeSent, outbox.getAllUniversalIdsUnsorted());
+    	
+    	Set bulletinsActuallySent = new HashSet();
     	for(int startIndex=0; startIndex < count; ++startIndex)
     	{
     		UniversalId gotUid = testStore.chooseBulletinToUpload(outbox, startIndex).getUniversalId();
-    		int gotIndex = -1;
-    		for(int i=0; i < bulletins.length; ++i)
-    			if(gotUid.equals(bulletins[i].getUniversalId()))
-    				gotIndex = i;
-    		assertEquals("wrong for " + startIndex, expected[startIndex], gotIndex);
+    		assertTrue("Index ="+startIndex, bulletinsToBeSent.contains(gotUid));
+    		bulletinsActuallySent.add(gotUid);
+    		assertNotEquals("Send discarded bulletin 3?", bulletins[3].getUniversalId(), gotUid);
+    		assertNotEquals("Send discarded bulletin 6?", bulletins[6].getUniversalId(), gotUid);
+    		assertNotEquals("Send discarded bulletin 9?", bulletins[9].getUniversalId(), gotUid);
     	}
+    	assertEquals("All non discarded bulletins sent?", count - 3, bulletinsActuallySent.size());
     	
 	}
     

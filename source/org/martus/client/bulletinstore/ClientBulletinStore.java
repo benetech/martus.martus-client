@@ -200,11 +200,7 @@ public class ClientBulletinStore extends BulletinStore
 		for(Iterator f = visibleFolders.iterator(); f.hasNext();)
 		{
 			BulletinFolder folder = (BulletinFolder) f.next();
-			for(int b = 0; b < folder.getBulletinCount(); ++b)
-			{
-				UniversalId uid = folder.getBulletinUniversalIdUnsorted(b);
-				setOfUniversalIds.add(uid);
-			}
+			setOfUniversalIds.addAll(folder.getAllUniversalIdsUnsorted());
 		}
 		return setOfUniversalIds;
 	}
@@ -358,8 +354,7 @@ public class ClientBulletinStore extends BulletinStore
 			++startIndex;
 			if(startIndex >= bulletinCount)
 				startIndex = 0;
-			
-			Bulletin b = hiddenFolder.getBulletinUnsorted(startIndex);
+			Bulletin b = hiddenFolder.getBulletinSorted(startIndex);
 			if(!isDiscarded(b))
 				return b;
 		}
@@ -654,9 +649,11 @@ public class ClientBulletinStore extends BulletinStore
 		Vector bulletinUids = new Vector();
 		if(folder != null)
 		{
-			for(int i=0; i < folder.getBulletinCount(); ++i)
+			Set unsortedBulletinList = folder.getAllUniversalIdsUnsorted();
+			
+			for(Iterator iter = unsortedBulletinList.iterator(); iter.hasNext();)
 			{
-				UniversalId uid = folder.getBulletinUniversalIdUnsorted(i);
+				UniversalId uid = (UniversalId) iter.next();
 				bulletinUids.add(uid);
 				removeBulletinFromFolder(folder, uid);
 			}
@@ -1146,9 +1143,10 @@ public class ClientBulletinStore extends BulletinStore
 	{
 		StringBuffer xml = new StringBuffer();
 		xml.append(MartusClientXml.getFolderTagStart(folder.getName()));
-		for(int index=0; index < folder.getBulletinCount(); ++index)
+		Set unsortedBulletinList = folder.getAllUniversalIdsUnsorted();
+		for(Iterator iter = unsortedBulletinList.iterator(); iter.hasNext();)
 		{
-			UniversalId uid = folder.getBulletinUniversalIdUnsorted(index);
+			UniversalId uid = (UniversalId) iter.next();
 			if(uid == null)
 				System.out.println("WARNING: Unexpected null id");
 			xml.append(MartusXml.getIdTag(uid.toString()));

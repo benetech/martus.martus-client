@@ -29,8 +29,9 @@ package org.martus.client.bulletinstore;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.Vector;
-
 import org.martus.client.bulletinstore.ClientBulletinStore.BulletinAlreadyExistsException;
 import org.martus.clientside.UiLocalization;
 import org.martus.common.bulletin.Bulletin;
@@ -48,7 +49,7 @@ public class BulletinFolder
 		store = storeToUse;
 		name = nameToUse;
 
-		rawIdList = new Vector();
+		rawIdList = new HashSet();
 		sortedIdList = null;
 	}
 
@@ -155,11 +156,6 @@ public class BulletinFolder
 		sortedIdList = null;
 	}
 	
-	public Vector getAllUniversalIdsUnsorted()
-	{
-		return (Vector)rawIdList.clone();
-	}
-
 	public Bulletin getBulletinSorted(int index)
 	{
 		UniversalId uid = getBulletinUniversalIdSorted(index);
@@ -176,19 +172,9 @@ public class BulletinFolder
 		return  (UniversalId)sortedIdList.get(index);
 	}
 
-	public Bulletin getBulletinUnsorted(int index)
+	public Set getAllUniversalIdsUnsorted()
 	{
-		UniversalId uid = getBulletinUniversalIdUnsorted(index);
-		if(uid == null)
-			return null;
-		return store.getBulletinRevision(uid);
-	}
-
-	public UniversalId getBulletinUniversalIdUnsorted(int index)
-	{
-		if(index < 0 || index >= rawIdList.size())
-			return null;
-		return  (UniversalId)rawIdList.get(index);
+		return rawIdList;
 	}
 
 	public boolean contains(Bulletin b)
@@ -303,7 +289,7 @@ public class BulletinFolder
 	private ClientBulletinStore store;
 	private String name;
 
-	private Vector rawIdList;
+	private Set rawIdList;
 	private Vector sortedIdList;
 	private boolean canRename = true;
 	private boolean canDelete = true;
