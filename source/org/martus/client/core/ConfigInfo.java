@@ -65,13 +65,14 @@ public class ConfigInfo
 	public void setSendContactInfoToServer(boolean newSendContactInfoToServer) {sendContactInfoToServer = newSendContactInfoToServer; }
 	public void setServerCompliance(String newCompliance) {serverCompliance = newCompliance;}
 	public void setCustomFieldSpecs(String newSpecs)	{customFieldLegacySpecs = newSpecs;}
-	public void setCustomFieldXml(String newXml)	{customFieldTopSectionXml = newXml;}
+	public void setCustomFieldTopSectionXml(String newXml)	{customFieldTopSectionXml = newXml;}
 	public void setForceBulletinsAllPrivate(boolean newForceBulletinsAllPrivate)	{forceBulletinsAllPrivate = newForceBulletinsAllPrivate; }
 	public void setBackedUpKeypairEncrypted(boolean newBackedUpKeypairEncrypted)	{backedUpKeypairEncrypted = newBackedUpKeypairEncrypted; }
 	public void setBackedUpKeypairShare(boolean newBackedUpKeypairShare)	{backedUpKeypairShare = newBackedUpKeypairShare; }
 	public void setAllHQKeysXml(String allHQKeysXml){this.allHQKeysXml = allHQKeysXml;}
 	public void setBulletinVersioningAware(boolean newBulletinVersioningAware){this.bulletinVersioningAware = newBulletinVersioningAware;}
 	public void setDefaultHQKeysXml(String defaultHQKeysXml){this.defaultHQKeysXml = defaultHQKeysXml;}
+	public void setCustomFieldBottomSectionXml(String newXml)	{customFieldBottomSectionXml = newXml;}
 
 	public void clearHQKey()						{ legacyHQKey = ""; }
 	public void clearPromptUserRequestSendToServer() { mustAskUserToSendToServer = false; }
@@ -98,6 +99,7 @@ public class ConfigInfo
 	public String getAllHQKeysXml()		{return allHQKeysXml;}
 	public boolean isBulletinVersioningAware()	{return bulletinVersioningAware;}
 	public String getDefaultHQKeysXml()		{return defaultHQKeysXml;}
+	public String getCustomFieldBottomSectionXml() {return customFieldBottomSectionXml;}
 	
 	public boolean isServerConfigured()
 	{
@@ -133,6 +135,7 @@ public class ConfigInfo
 		allHQKeysXml = "";
 		bulletinVersioningAware = true;
 		defaultHQKeysXml = "";
+		customFieldBottomSectionXml = "";
 	}
 
 	public static ConfigInfo load(InputStream inputStream)
@@ -186,6 +189,9 @@ public class ConfigInfo
 			if(loaded.version >= 11)
 				loaded.defaultHQKeysXml = in.readUTF();
 
+			if(loaded.version >= 12)
+				loaded.customFieldBottomSectionXml = in.readUTF();
+
 			in.close();
 		}
 		catch (Exception e)
@@ -221,6 +227,8 @@ public class ConfigInfo
 			out.writeUTF(allHQKeysXml);
 			out.writeBoolean(bulletinVersioningAware);
 			out.writeUTF(defaultHQKeysXml);
+			out.writeUTF(customFieldBottomSectionXml);
+
 			out.close();
 		}
 		catch(Exception e)
@@ -231,7 +239,7 @@ public class ConfigInfo
 	
 	private boolean mustAskUserToSendToServer;
 
-	public static final short VERSION = 11;
+	public static final short VERSION = 12;
 	//Version 1
 	private short version;
 	private String author;
@@ -264,6 +272,7 @@ public class ConfigInfo
 	private boolean bulletinVersioningAware;
 	//Version 11
 	private String defaultHQKeysXml;
-	
+	//Version 12
+	private String customFieldBottomSectionXml;
 	
 }

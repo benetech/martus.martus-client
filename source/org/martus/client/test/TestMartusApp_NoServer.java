@@ -499,7 +499,7 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		String newFields = "new,label;another,show";
 		FieldSpec[] newSpecs = LegacyCustomFields.parseFieldSpecsFromString(newFields);
 		FieldCollection convertedFields = new FieldCollection(newSpecs);
-		convertedInfo.setCustomFieldXml(convertedFields.toString());
+		convertedInfo.setCustomFieldTopSectionXml(convertedFields.toString());
 		FieldCollection fields = new FieldCollection(MartusApp.getCustomFieldSpecs(convertedInfo));
 
 		FieldCollection expected = new FieldCollection(LegacyCustomFields.parseFieldSpecsFromString(newFields));

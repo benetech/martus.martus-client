@@ -60,7 +60,7 @@ public class ActionMenuCustomFields extends UiMenuAction
 			
 		store.setPublicFieldTags(newSpecs);
 		app.getConfigInfo().setCustomFieldSpecs(MartusConstants.deprecatedCustomFieldSpecs);
-		app.getConfigInfo().setCustomFieldXml(new FieldCollection(newSpecs).toString());
+		app.getConfigInfo().setCustomFieldTopSectionXml(new FieldCollection(newSpecs).toString());
 
 		try
 		{
