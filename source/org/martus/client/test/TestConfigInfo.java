@@ -206,7 +206,7 @@ public class TestConfigInfo extends TestCaseEnhanced
 		info.setLegacyHQKey(sampleHQKey);
 		info.setSendContactInfoToServer(sampleSendContactInfoToServer);
 		info.setServerCompliance(sampleServerCompliance);
-		info.setCustomFieldSpecs(sampleCustomFieldSpecs);
+		info.setCustomFieldLegacySpecs(sampleCustomFieldSpecs);
 		info.setCustomFieldTopSectionXml(sampleCustomFieldTopSectionXml);
 		info.setForceBulletinsAllPrivate(sampleForceAllPrivate);
 		info.setBackedUpKeypairEncrypted(sampleBackedUpKeypairEncrypted);

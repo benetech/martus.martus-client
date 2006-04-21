@@ -486,7 +486,7 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 	{
 		ConfigInfo infoToConvert = new ConfigInfo();
 		String sampleLegacyFields = "tag1;tag2";
-		infoToConvert.setCustomFieldSpecs(sampleLegacyFields);
+		infoToConvert.setCustomFieldLegacySpecs(sampleLegacyFields);
 		FieldCollection fields = new FieldCollection(MartusApp.getCustomFieldSpecs(infoToConvert));
 
 		FieldCollection expected = new FieldCollection(LegacyCustomFields.parseFieldSpecsFromString(sampleLegacyFields));

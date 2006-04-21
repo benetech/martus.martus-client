@@ -64,7 +64,7 @@ public class ConfigInfo
 	public void setLegacyHQKey(String newHQKey)			{ legacyHQKey = newHQKey; }
 	public void setSendContactInfoToServer(boolean newSendContactInfoToServer) {sendContactInfoToServer = newSendContactInfoToServer; }
 	public void setServerCompliance(String newCompliance) {serverCompliance = newCompliance;}
-	public void setCustomFieldSpecs(String newSpecs)	{customFieldLegacySpecs = newSpecs;}
+	public void setCustomFieldLegacySpecs(String newSpecs)	{customFieldLegacySpecs = newSpecs;}
 	public void setCustomFieldTopSectionXml(String newXml)	{customFieldTopSectionXml = newXml;}
 	public void setForceBulletinsAllPrivate(boolean newForceBulletinsAllPrivate)	{forceBulletinsAllPrivate = newForceBulletinsAllPrivate; }
 	public void setBackedUpKeypairEncrypted(boolean newBackedUpKeypairEncrypted)	{backedUpKeypairEncrypted = newBackedUpKeypairEncrypted; }
