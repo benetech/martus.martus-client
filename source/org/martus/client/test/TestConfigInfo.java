@@ -231,8 +231,8 @@ public class TestConfigInfo extends TestCaseEnhanced
 		assertEquals(label + ": sampleHQKey", "", info.getLegacyHQKey());
 		assertEquals(label + ": sampleSendContactInfoToServer", false, info.shouldContactInfoBeSentToServer());
 		assertEquals(label + ": sampleServerComplicance", "", info.getServerCompliance());
-		assertEquals(label + ": sampleCustomFieldSpecs", defaultCustomFieldSpecs, info.getCustomFieldSpecs());
-		assertEquals(label + ": sampleCustomFieldXml", "", info.getCustomFieldXml());
+		assertEquals(label + ": sampleCustomFieldSpecs", defaultCustomFieldSpecs, info.getCustomFieldLegacySpecs());
+		assertEquals(label + ": sampleCustomFieldXml", "", info.getCustomFieldTopSectionXml());
 		assertEquals(label + ": sampleForceAllPrivate", false, info.shouldForceBulletinsAllPrivate());
 		assertEquals(label + ": sampleBackedUpKeypairEncrypted", false, info.hasUserBackedUpKeypairEncrypted());
 		assertEquals(label + ": sampleBackedUpKeypairShare", false, info.hasUserBackedUpKeypairShare());
@@ -276,14 +276,14 @@ public class TestConfigInfo extends TestCaseEnhanced
 			assertEquals(label + ": sampleServerComplicance", "", info.getServerCompliance());
 
 		if(VERSION >= 5)
-			assertEquals(label + ": sampleCustomFieldSpecs", sampleCustomFieldSpecs, info.getCustomFieldSpecs());
+			assertEquals(label + ": sampleCustomFieldSpecs", sampleCustomFieldSpecs, info.getCustomFieldLegacySpecs());
 		else
-			assertEquals(label + ": sampleCustomFieldSpecs", defaultCustomFieldSpecs, info.getCustomFieldSpecs());
+			assertEquals(label + ": sampleCustomFieldSpecs", defaultCustomFieldSpecs, info.getCustomFieldLegacySpecs());
 
 		if(VERSION >= 6)
-			assertEquals(label + ": sampleCustomFieldXml", sampleCustomFieldXml, info.getCustomFieldXml());	
+			assertEquals(label + ": sampleCustomFieldXml", sampleCustomFieldXml, info.getCustomFieldTopSectionXml());	
 		else
-			assertEquals(label + ": sampleCustomFieldXml", "", info.getCustomFieldXml());
+			assertEquals(label + ": sampleCustomFieldXml", "", info.getCustomFieldTopSectionXml());
 		
 		if(VERSION >= 7)
 			assertEquals(label + ": sampleForceAllPrivate", sampleForceAllPrivate, info.shouldForceBulletinsAllPrivate());

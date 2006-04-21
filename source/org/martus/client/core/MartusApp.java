@@ -424,11 +424,11 @@ public class MartusApp
 
 	public static FieldSpec[] getCustomFieldSpecs(ConfigInfo configInfo) throws CustomFieldsParseException
 	{
-		String xmlSpecs = configInfo.getCustomFieldXml();
+		String xmlSpecs = configInfo.getCustomFieldTopSectionXml();
 		if(xmlSpecs.length() > 0)
 			return FieldCollection.parseXml(xmlSpecs);
 			
-		String legacySpecs = configInfo.getCustomFieldSpecs();
+		String legacySpecs = configInfo.getCustomFieldLegacySpecs();
 		FieldSpec[] specs = LegacyCustomFields.parseFieldSpecsFromString(legacySpecs);
 		return specs;
 	}

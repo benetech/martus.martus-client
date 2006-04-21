@@ -64,8 +64,8 @@ public class ConfigInfo
 	public void setLegacyHQKey(String newHQKey)			{ legacyHQKey = newHQKey; }
 	public void setSendContactInfoToServer(boolean newSendContactInfoToServer) {sendContactInfoToServer = newSendContactInfoToServer; }
 	public void setServerCompliance(String newCompliance) {serverCompliance = newCompliance;}
-	public void setCustomFieldSpecs(String newSpecs)	{customFieldSpecs = newSpecs;}
-	public void setCustomFieldXml(String newXml)	{customFieldXml = newXml;}
+	public void setCustomFieldSpecs(String newSpecs)	{customFieldLegacySpecs = newSpecs;}
+	public void setCustomFieldXml(String newXml)	{customFieldTopSectionXml = newXml;}
 	public void setForceBulletinsAllPrivate(boolean newForceBulletinsAllPrivate)	{forceBulletinsAllPrivate = newForceBulletinsAllPrivate; }
 	public void setBackedUpKeypairEncrypted(boolean newBackedUpKeypairEncrypted)	{backedUpKeypairEncrypted = newBackedUpKeypairEncrypted; }
 	public void setBackedUpKeypairShare(boolean newBackedUpKeypairShare)	{backedUpKeypairShare = newBackedUpKeypairShare; }
@@ -90,8 +90,8 @@ public class ConfigInfo
 	public boolean shouldContactInfoBeSentToServer() { return sendContactInfoToServer; }
 	public boolean promptUserRequestSendToServer() { return mustAskUserToSendToServer; }
 	public String getServerCompliance() {return serverCompliance;}
-	public String getCustomFieldSpecs() {return customFieldSpecs;}
-	public String getCustomFieldXml()	{return customFieldXml;}
+	public String getCustomFieldLegacySpecs() {return customFieldLegacySpecs;}
+	public String getCustomFieldTopSectionXml()	{return customFieldTopSectionXml;}
 	public boolean shouldForceBulletinsAllPrivate()	{ return forceBulletinsAllPrivate;}
 	public boolean hasUserBackedUpKeypairEncrypted()	{ return backedUpKeypairEncrypted;}
 	public boolean hasUserBackedUpKeypairShare()	{ return backedUpKeypairShare;}
@@ -125,8 +125,8 @@ public class ConfigInfo
 		sendContactInfoToServer = false;
 		mustAskUserToSendToServer = false;
 		serverCompliance = "";
-		customFieldSpecs = LegacyCustomFields.buildFieldListString(StandardFieldSpecs.getDefaultPublicFieldSpecs());
-		customFieldXml = "";
+		customFieldLegacySpecs = LegacyCustomFields.buildFieldListString(StandardFieldSpecs.getDefaultPublicFieldSpecs());
+		customFieldTopSectionXml = "";
 		forceBulletinsAllPrivate = false;
 		backedUpKeypairEncrypted = false;
 		backedUpKeypairShare = false;
@@ -162,10 +162,10 @@ public class ConfigInfo
 				loaded.serverCompliance = in.readUTF();
 				
 			if(loaded.version >= 5)
-				loaded.customFieldSpecs = in.readUTF();
+				loaded.customFieldLegacySpecs = in.readUTF();
 				
 			if(loaded.version >= 6)
-				loaded.customFieldXml = in.readUTF();
+				loaded.customFieldTopSectionXml = in.readUTF();
 
 			if(loaded.version >= 7)
 				loaded.forceBulletinsAllPrivate = in.readBoolean();
@@ -213,8 +213,8 @@ public class ConfigInfo
 			out.writeUTF(serverPublicKey);
 			out.writeBoolean(sendContactInfoToServer);
 			out.writeUTF(serverCompliance);
-			out.writeUTF(customFieldSpecs);
-			out.writeUTF(customFieldXml);
+			out.writeUTF(customFieldLegacySpecs);
+			out.writeUTF(customFieldTopSectionXml);
 			out.writeBoolean(forceBulletinsAllPrivate);
 			out.writeBoolean(backedUpKeypairEncrypted);
 			out.writeBoolean(backedUpKeypairShare);
@@ -250,9 +250,9 @@ public class ConfigInfo
 	//Version 4
 	private String serverCompliance;
 	//Version 5
-	private String customFieldSpecs;
+	private String customFieldLegacySpecs;
 	//Version 6
-	private String customFieldXml;
+	private String customFieldTopSectionXml;
 	//Version 7
 	private boolean forceBulletinsAllPrivate;
 	//Version 8
