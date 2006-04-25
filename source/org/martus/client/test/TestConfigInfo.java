@@ -429,7 +429,7 @@ public class TestConfigInfo extends TestCaseEnhanced
 //Version 11
 	final String sampleDefaultHQKeysXml = "<HQs>defaultHQ</HQs>";
 //Version 12
-	final String sampleCustomFieldBottomSectionXml = "<CustomFieldsBottomSection></CustomFieldsBottomSection>";
+	final String sampleCustomFieldBottomSectionXml = "<CustomFields></CustomFields>";
 	
 	
 }
