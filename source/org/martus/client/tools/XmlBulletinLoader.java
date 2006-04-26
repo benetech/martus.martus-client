@@ -50,9 +50,9 @@ public class XmlBulletinLoader extends SimpleXmlDefaultLoader
 		throws SAXParseException
 	{
 		if(tag.equals(MainFieldSpecsElementName))
-			return new FieldCollection.XmlCustomFieldsLoader(tag, new FieldCollection());
+			return new FieldCollection.XmlCustomFieldsLoader(tag);
 		else if(tag.equals(PrivateFieldSpecsElementName))
-			return new FieldCollection.XmlCustomFieldsLoader(tag, new FieldCollection());
+			return new FieldCollection.XmlCustomFieldsLoader(tag);
 		else if(tag.equals(FieldValuesElementName))
 			return new FieldValuesSectionLoader(tag);
 		return super.startElement(tag);
