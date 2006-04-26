@@ -49,7 +49,7 @@ public class TestGridTableModel extends TestCaseEnhanced
 	{
 		GridFieldSpec gridSpec = new GridFieldSpec();
 		String label1 = "column 1";
-		FieldSpec column1 = new FieldSpec(label1, new FieldTypeNormal());
+		FieldSpec column1 = FieldSpec.createFieldSpec(label1, new FieldTypeNormal());
 
 		String label2 = "column 2";
 		CustomDropDownFieldSpec column2 = new CustomDropDownFieldSpec();

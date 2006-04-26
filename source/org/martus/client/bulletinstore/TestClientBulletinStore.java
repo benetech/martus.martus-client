@@ -94,16 +94,16 @@ public class TestClientBulletinStore extends TestCaseEnhanced
     	
     	if(customPublicSpecs == null)
     	{
-    		FieldSpec title = new FieldSpec(new FieldTypeNormal());
+    		FieldSpec title = FieldSpec.createFieldSpec(new FieldTypeNormal());
     		title.setTag(Bulletin.TAGTITLE);
     		
     		customPublicSpecs = new FieldSpec[] {title};
     	}
     	if(customPrivateSpecs == null)
     	{
-    		FieldSpec keyword = new FieldSpec(new FieldTypeNormal());
+    		FieldSpec keyword = FieldSpec.createFieldSpec(new FieldTypeNormal());
     		keyword.setTag(Bulletin.TAGKEYWORDS);
-    		FieldSpec author = new FieldSpec(new FieldTypeNormal());
+    		FieldSpec author = FieldSpec.createFieldSpec(new FieldTypeNormal());
     		author.setTag(Bulletin.TAGAUTHOR);
     		
     		customPrivateSpecs = new FieldSpec[] {keyword, author};

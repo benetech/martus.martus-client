@@ -113,7 +113,7 @@ public class GridTableModel extends AbstractTableModel
 	public FieldSpec getFieldSpecForColumn(int column) 
 	{
 		if(column == 0)
-			return new FieldSpec(new FieldTypeNormal());
+			return FieldSpec.createFieldSpec(new FieldTypeNormal());
 		return getGridFieldSpec().getFieldSpec(column - EXTRA_COLUMN);
 	}
 

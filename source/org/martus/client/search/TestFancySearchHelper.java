@@ -251,7 +251,7 @@ public class TestFancySearchHelper extends TestCaseEnhanced
 		gridSpec.setLabel("Grid Label");
 		gridSpec.setTag(tag);
 		String label1 = "column 1";
-		FieldSpec column1 = new FieldSpec(label1, new FieldTypeNormal());
+		FieldSpec column1 = FieldSpec.createFieldSpec(label1, new FieldTypeNormal());
 		final String GRID_COLUMNS_DONT_HAVE_TAGS = "";
 		column1.setTag(GRID_COLUMNS_DONT_HAVE_TAGS);
 
