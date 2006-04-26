@@ -42,6 +42,7 @@ public class ImporterOfXmlFilesOfBulletins
 		bulletinXmlFilesToImport = bulletinXmlFilesToImportToUse;
 		clientStore = clientStoreToUse;
 		importFolder = importFolderToUse;
+		baseAttachmentsDirectory = null;
 	}
 	
 	public void importFiles()  throws FieldSpecVerificationException, Exception
@@ -51,11 +52,16 @@ public class ImporterOfXmlFilesOfBulletins
 			bulletinsImported += importOneFile(bulletinXmlFilesToImport[i]);
 		}
 	}
+	
+	public void setAttachmentsDirectory(File baseAttachmentsDirectoryToUse)
+	{
+		baseAttachmentsDirectory = baseAttachmentsDirectoryToUse;
+	}
 
 	private int importOneFile(File bulletinXmlFileToImport) throws FieldSpecVerificationException, Exception
 	{
 		FileInputStream xmlIn = new FileInputStream(bulletinXmlFileToImport);
-		XmlBulletinsImporter importer = new XmlBulletinsImporter(clientStore.getSignatureVerifier(), xmlIn);
+		XmlBulletinsImporter importer = new XmlBulletinsImporter(clientStore.getSignatureVerifier(), xmlIn, baseAttachmentsDirectory);
 		Bulletin[] bulletins = importer.getBulletins();
 		importFolder.prepareForBulkOperation();
 		try
@@ -85,4 +91,5 @@ public class ImporterOfXmlFilesOfBulletins
 	private ClientBulletinStore clientStore;
 	private BulletinFolder importFolder;
 	private PrintStream progressMonitor;
+	public File baseAttachmentsDirectory;
 }

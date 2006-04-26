@@ -26,6 +26,7 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.tools;
 
 import java.util.HashMap;
+import java.util.Vector;
 import org.martus.common.FieldCollection;
 import org.martus.common.GridData;
 import org.martus.common.field.MartusField;
@@ -41,6 +42,8 @@ public class XmlBulletinLoader extends SimpleXmlDefaultLoader
 	public XmlBulletinLoader()
 	{
 		super(MartusBulletinElementName);
+		topSectionAttachments = new Vector();
+		bottomSectionAttachments = new Vector();
 	}
 	
 	public SimpleXmlDefaultLoader startElement(String tag)
@@ -68,7 +71,10 @@ public class XmlBulletinLoader extends SimpleXmlDefaultLoader
 		}
 		else if(tag.equals(FieldValuesElementName))
 		{
-			fieldTagValuesMap = ((FieldValuesSectionLoader)ended).getFieldTagValueMap();
+			FieldValuesSectionLoader fieldValuesSectionLoader = ((FieldValuesSectionLoader)ended);
+			fieldTagValuesMap = fieldValuesSectionLoader.getFieldTagValueMap();
+			topSectionAttachments = fieldValuesSectionLoader.getTopSectionAttachments();
+			bottomSectionAttachments = fieldValuesSectionLoader.getBottomSectionAttachments();
 		}
 		else
 			super.endElement(tag, ended);
@@ -77,6 +83,16 @@ public class XmlBulletinLoader extends SimpleXmlDefaultLoader
 	public HashMap getFieldTagValuesMap()
 	{
 		return fieldTagValuesMap;
+	}
+	
+	public Vector getTopSectionAttachments()
+	{
+		return topSectionAttachments;
+	}
+	
+	public Vector getBottomSectionAttachments()
+	{
+		return bottomSectionAttachments;
 	}
 	
 	public FieldCollection getMainFieldSpecs()
@@ -95,12 +111,19 @@ public class XmlBulletinLoader extends SimpleXmlDefaultLoader
 		{
 			super(tag);
 			fieldTagToValueMap = new HashMap();
+			topSectionAttachmentsList = new Vector();
+			bottomSectionAttachmentsList = new Vector();
 		}
 		
 		public SimpleXmlDefaultLoader startElement(String tag)throws SAXParseException
 		{
 			if(tag.equals(FieldElementName))
 				return new FieldLoader(tag);
+			else if(tag.equals(TopSectionAttachmentListElementName))
+				return new FieldAttachmentSectionLoader(tag);
+			else if(tag.equals(BottomSectionAttachmentListElementName))
+				return new FieldAttachmentSectionLoader(tag);
+			
 			return super.startElement(tag);
 		}
 	
@@ -113,6 +136,15 @@ public class XmlBulletinLoader extends SimpleXmlDefaultLoader
 				String fieldValue = fieldLoader.getValue();
 				fieldTagToValueMap.put(fieldTag, fieldValue);
 			}
+			else if(tag.equals(TopSectionAttachmentListElementName))
+			{
+				topSectionAttachmentsList = ((FieldAttachmentSectionLoader)ended).getAttachments();
+				
+			}
+			else if(tag.equals(BottomSectionAttachmentListElementName))
+			{
+				bottomSectionAttachmentsList = ((FieldAttachmentSectionLoader)ended).getAttachments();
+			}
 			else
 				super.endElement(tag, ended);
 		}
@@ -121,7 +153,86 @@ public class XmlBulletinLoader extends SimpleXmlDefaultLoader
 		{
 			return fieldTagToValueMap;
 		}
+		
+		public Vector getTopSectionAttachments()
+		{
+			return topSectionAttachmentsList;
+		}
+		
+		public Vector getBottomSectionAttachments()
+		{
+			return bottomSectionAttachmentsList;
+		}
+		
 		HashMap fieldTagToValueMap;
+		Vector topSectionAttachmentsList;
+		Vector bottomSectionAttachmentsList;
+	}
+	
+	class FieldAttachmentSectionLoader extends SimpleXmlStringLoader
+	{
+		public FieldAttachmentSectionLoader(String tag)
+		{
+			super(tag);
+			attachments = new Vector();
+		}
+		public SimpleXmlDefaultLoader startElement(String tag) throws SAXParseException
+		{
+			if(tag.equals(AttachmentElementName))
+			{
+				return new AttachmentFileLoader(AttachmentElementName);
+			}
+			return super.startElement(tag);
+		}
+
+		public void endElement(String tag, SimpleXmlDefaultLoader ended) throws SAXParseException
+		{
+			if(tag.equals(AttachmentElementName))
+			{
+				String attachment = ((AttachmentFileLoader)ended).getAttachment();
+				attachments.add(attachment);
+			}
+			super.endElement(tag, ended);
+		}
+		
+		public Vector getAttachments()
+		{
+			return attachments;
+		}
+		
+		Vector attachments;
+	}
+	
+	class AttachmentFileLoader extends SimpleXmlStringLoader
+	{
+
+		public AttachmentFileLoader(String tag)
+		{
+			super(tag);
+		}
+		
+		public SimpleXmlDefaultLoader startElement(String tag) throws SAXParseException
+		{
+			if(tag.equals(AttachmentFilenameElementName))
+			{
+				return new SimpleXmlStringLoader(AttachmentFilenameElementName);
+			}
+			return super.startElement(tag);
+		}
+
+		public void endElement(String tag, SimpleXmlDefaultLoader ended) throws SAXParseException
+		{
+			if(tag.equals(AttachmentFilenameElementName))
+			{
+				attachmentFileName = ((SimpleXmlStringLoader)ended).getText();
+			}
+				super.endElement(tag, ended);
+		}
+		public String getAttachment()
+		{
+			return attachmentFileName;
+		}
+		String attachmentFileName;
 	}
 	
 	class FieldLoader extends SimpleXmlDefaultLoader
@@ -236,6 +347,8 @@ public class XmlBulletinLoader extends SimpleXmlDefaultLoader
 	private FieldCollection mainFieldSpecs;
 	private FieldCollection privateFieldSpecs;
 	private HashMap fieldTagValuesMap;
+	private Vector topSectionAttachments;
+	private Vector bottomSectionAttachments;
 
 	public static final String MartusBulletinElementName = "MartusBulletin";
 	public static final String MainFieldSpecsElementName = "MainFieldSpecs";
@@ -244,5 +357,9 @@ public class XmlBulletinLoader extends SimpleXmlDefaultLoader
 	public static final String FieldElementName = "Field";
 	public static final String ValueElementName = "Value";
 	public static final String TagAttributeName = "tag";
+	public static final String TopSectionAttachmentListElementName = "TopAttachmentList";
+	public static final String BottomSectionAttachmentListElementName = "BottomAttachmentList";
+	public static final String AttachmentElementName = "Attachment";
+	public static final String AttachmentFilenameElementName = "Filename";
 	
 }

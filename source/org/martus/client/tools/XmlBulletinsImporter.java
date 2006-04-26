@@ -25,6 +25,7 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.tools;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
@@ -40,10 +41,15 @@ public class XmlBulletinsImporter
 {
 	public XmlBulletinsImporter(MartusCrypto security, InputStream xmlIn) throws IOException, ParserConfigurationException, SAXException, FieldSpecVerificationException
 	{
+		this(security, xmlIn, null);
+	}
+	
+	public XmlBulletinsImporter(MartusCrypto security, InputStream xmlIn, File baseAttachmentsDirectory) throws IOException, ParserConfigurationException, SAXException, FieldSpecVerificationException
+	{
 		UnicodeReader reader = new UnicodeReader(xmlIn);
 		try
 		{
-			bulletinsLoader = new XmlBulletinsFileLoader(security);
+			bulletinsLoader = new XmlBulletinsFileLoader(security, baseAttachmentsDirectory);
 			bulletinsLoader.parse(reader);
 			if(bulletinsLoader.didFieldSpecVerificationErrorOccur())
 				throw new FieldSpecVerificationException(bulletinsLoader.getErrors());

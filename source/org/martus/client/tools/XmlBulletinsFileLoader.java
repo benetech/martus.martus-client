@@ -25,14 +25,19 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.tools;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Vector;
 import org.martus.common.FieldCollection;
 import org.martus.common.GridData;
+import org.martus.common.bulletin.AttachmentProxy;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.crypto.MartusCrypto;
+import org.martus.common.crypto.MartusCrypto.EncryptionException;
+import org.martus.common.fieldspec.CustomFieldError;
 import org.martus.common.fieldspec.CustomFieldSpecValidator;
 import org.martus.common.fieldspec.FieldType;
 import org.martus.common.fieldspec.GridFieldSpec;
@@ -42,15 +47,16 @@ import org.xml.sax.SAXParseException;
 
 public class XmlBulletinsFileLoader extends SimpleXmlDefaultLoader
 {
-	public XmlBulletinsFileLoader(MartusCrypto cryptoToUse)
+	public XmlBulletinsFileLoader(MartusCrypto cryptoToUse, File baseAttachmentsDirectoryToUse)
 	{
 		super(MartusBulletinSElementName);
 		security = cryptoToUse;
 		bulletins = new Vector();
-		fieldspecVerificationErrorOccurred = false;
 		fieldSpecValidationErrors = new Vector();
+		topSectionAttachments = new Vector();
+		bottomSectionAttachments = new Vector();
+		baseAttachmentsDirectory = baseAttachmentsDirectoryToUse;
 	}
-	
 	
 	public SimpleXmlDefaultLoader startElement(String tag)
 		throws SAXParseException
@@ -71,17 +77,35 @@ public class XmlBulletinsFileLoader extends SimpleXmlDefaultLoader
 			mainFields = currentBulletinLoader.getMainFieldSpecs();
 			privateFields = currentBulletinLoader.getPrivateFieldSpecs();
 			fieldTagValuesMap = currentBulletinLoader.getFieldTagValuesMap();
+			topSectionAttachments = currentBulletinLoader.getTopSectionAttachments();
+			bottomSectionAttachments = currentBulletinLoader.getBottomSectionAttachments();
 			validateMainFields(mainFields);
 			if(didFieldSpecVerificationErrorOccur())
 				return;
 			
-			bulletins.add(createBulletin());			
+			Bulletin createdBulletin;
+			try
+			{
+				createdBulletin = createBulletin();
+			}
+			catch(IOException e)
+			{
+				fieldSpecValidationErrors.add(CustomFieldError.errorIO());
+				return;
+			}
+			catch(EncryptionException e)
+			{
+				fieldSpecValidationErrors.add(CustomFieldError.errorSignature());
+				return;
+			}
+
+			bulletins.add(createdBulletin);			
 		}
 		else
 			super.endElement(tag, ended);
 	}
 
-	private Bulletin createBulletin()
+	private Bulletin createBulletin() throws EncryptionException, IOException
 	{
 		Bulletin bulletin = new Bulletin(security, mainFields.getSpecs(), privateFields.getSpecs());
 		for (Iterator iter = fieldTagValuesMap.entrySet().iterator(); iter.hasNext();)
@@ -91,6 +115,18 @@ public class XmlBulletinsFileLoader extends SimpleXmlDefaultLoader
 			String value = (String)element.getValue();
 			value = convertDateFieldsToInternalFormat(fieldTag, value);
 			bulletin.set(fieldTag, value);
+		}
+		for(Iterator iter = topSectionAttachments.iterator(); iter.hasNext();)
+		{
+			String attachmentFileName = (String) iter.next();
+			AttachmentProxy attachment = new AttachmentProxy(new File(baseAttachmentsDirectory, attachmentFileName));
+			bulletin.addPublicAttachment(attachment);
+		}
+		for(Iterator iter = bottomSectionAttachments.iterator(); iter.hasNext();)
+		{
+			String attachmentFileName = (String) iter.next();
+			AttachmentProxy attachment = new AttachmentProxy(new File(baseAttachmentsDirectory, attachmentFileName));
+			bulletin.addPrivateAttachment(attachment);
 		}
 		return bulletin;
 	}
@@ -102,7 +138,7 @@ public class XmlBulletinsFileLoader extends SimpleXmlDefaultLoader
 	
 	public boolean didFieldSpecVerificationErrorOccur()
 	{
-		return fieldspecVerificationErrorOccurred;
+		return fieldSpecValidationErrors.size()>0;
 	}
 	
 	public Vector getErrors()
@@ -189,7 +225,6 @@ public class XmlBulletinsFileLoader extends SimpleXmlDefaultLoader
 		}		
 		if(!validator.isValid())
 		{
-			fieldspecVerificationErrorOccurred = true;
 			fieldSpecValidationErrors.add(validator);
 		}
 	}
@@ -201,8 +236,11 @@ public class XmlBulletinsFileLoader extends SimpleXmlDefaultLoader
 	public FieldCollection mainFields;
 	public FieldCollection privateFields;
 	public HashMap fieldTagValuesMap;
+	public Vector topSectionAttachments; 
+	public Vector bottomSectionAttachments; 
+	
 	Vector bulletins;
-	boolean fieldspecVerificationErrorOccurred;
 	Vector fieldSpecValidationErrors;
+	File baseAttachmentsDirectory;
 	private MartusCrypto security;
 }
