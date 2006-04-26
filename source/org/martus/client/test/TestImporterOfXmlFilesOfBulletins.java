@@ -32,11 +32,13 @@ import java.util.Vector;
 import org.martus.client.bulletinstore.BulletinFolder;
 import org.martus.client.bulletinstore.ClientBulletinStore;
 import org.martus.client.tools.ImporterOfXmlFilesOfBulletins;
+import org.martus.client.tools.XmlBulletinsImporter.FieldSpecVerificationException;
 import org.martus.common.bulletin.AttachmentProxy;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.bulletin.PendingAttachmentList;
 import org.martus.common.crypto.MartusCrypto;
 import org.martus.common.crypto.MockMartusSecurity;
+import org.martus.common.fieldspec.CustomFieldError;
 import org.martus.common.packet.UniversalId;
 import org.martus.util.DirectoryUtils;
 import org.martus.util.TestCaseEnhanced;
@@ -103,7 +105,6 @@ public class TestImporterOfXmlFilesOfBulletins extends TestCaseEnhanced
 
 	public void testImportXMLWithAttachments() throws Exception
 	{
-		assertTrue(xmlInputDirectory.exists());
 		File xmlBulletinWithAttachments = new File(xmlInputDirectory, "$$$bulletinWithAttachments.xml");
 		copyResourceFileToLocalFile(xmlBulletinWithAttachments, "SampleXmlBulletinWithAttachments.xml");
 		xmlBulletinWithAttachments.deleteOnExit();
@@ -179,6 +180,33 @@ public class TestImporterOfXmlFilesOfBulletins extends TestCaseEnhanced
 		assertEquals("Attachment 1 public data not equal?", attachment1Data, bulletinAttachment1Data);
 		assertEquals("Attachment 2 public data not equal?", attachment2Data, bulletinAttachment2Data);
 		assertEquals("Attachment 3 pravate data not equal?", attachment3Data, bulletinAttachment3Data);
+	}
+	
+	public void testImportXMLWithAttachmentsMissing() throws Exception
+	{
+		File xmlBulletinWithAttachments = new File(xmlInputDirectory, "$$$bulletinWithAttachments.xml");
+		copyResourceFileToLocalFile(xmlBulletinWithAttachments, "SampleXmlBulletinWithAttachments.xml");
+		xmlBulletinWithAttachments.deleteOnExit();
+	
+		clientStore.deleteAllBulletins();
+		File[] xmlFiles = new File[] {xmlBulletinWithAttachments};
+		PrintStream nullPrinter = new PrintStream(new ByteArrayOutputStream());
+		ImporterOfXmlFilesOfBulletins importer = new ImporterOfXmlFilesOfBulletins(xmlFiles, clientStore, importFolder, nullPrinter);
+		importer.setAttachmentsDirectory(xmlInputDirectory);
+		try
+		{
+			importer.importFiles();
+			fail("Should have thrown when attachment didn't exist");
+		}
+		catch(FieldSpecVerificationException expected)
+		{
+			Vector errors = expected.getErrors();
+			CustomFieldError element = (CustomFieldError) errors.get(0);
+ 			File attachment1 = new File(xmlInputDirectory, "$$$Sample Attachment1.txt");			
+ 			assertEquals("Not an IO error for missing attachment file?", CustomFieldError.CODE_IO_ERROR, element.getCode());
+			assertEquals("File which wasn't found was not named?",element.getType(), attachment1.getAbsolutePath());
+		}
+		xmlBulletinWithAttachments.delete();
 	}
 	
 	static ClientBulletinStore clientStore;

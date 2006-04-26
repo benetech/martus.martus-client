@@ -90,7 +90,7 @@ public class XmlBulletinsFileLoader extends SimpleXmlDefaultLoader
 			}
 			catch(IOException e)
 			{
-				fieldSpecValidationErrors.add(CustomFieldError.errorIO());
+				fieldSpecValidationErrors.add(CustomFieldError.errorIO(e.getMessage()));
 				return;
 			}
 			catch(EncryptionException e)
@@ -119,16 +119,26 @@ public class XmlBulletinsFileLoader extends SimpleXmlDefaultLoader
 		for(Iterator iter = topSectionAttachments.iterator(); iter.hasNext();)
 		{
 			String attachmentFileName = (String) iter.next();
-			AttachmentProxy attachment = new AttachmentProxy(new File(baseAttachmentsDirectory, attachmentFileName));
+			File attachmentFile = getAttachmentFile(attachmentFileName);
+			AttachmentProxy attachment = new AttachmentProxy(attachmentFile);
 			bulletin.addPublicAttachment(attachment);
 		}
 		for(Iterator iter = bottomSectionAttachments.iterator(); iter.hasNext();)
 		{
 			String attachmentFileName = (String) iter.next();
-			AttachmentProxy attachment = new AttachmentProxy(new File(baseAttachmentsDirectory, attachmentFileName));
+			File attachmentFile = getAttachmentFile(attachmentFileName);
+			AttachmentProxy attachment = new AttachmentProxy(attachmentFile);
 			bulletin.addPrivateAttachment(attachment);
 		}
 		return bulletin;
+	}
+
+	private File getAttachmentFile(String attachmentFileName) throws IOException
+	{
+		File attachmentFile = new File(baseAttachmentsDirectory, attachmentFileName);
+		if(attachmentFile.isFile() && attachmentFile.canRead())
+			return attachmentFile;
+		throw new IOException(attachmentFile.getAbsolutePath());
 	}
 
 	public Bulletin[] getBulletins()

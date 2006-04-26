@@ -72,7 +72,7 @@ public class CustomFieldTemplate
 		}
 		catch(IOException e)
 		{
-			errors.add(CustomFieldError.errorIO());
+			errors.add(CustomFieldError.errorIO(e.getMessage()));
 			
 		}
 		catch(MartusSignatureException e)

@@ -311,8 +311,10 @@ public class TestCustomFieldSpecValidator extends TestCaseEnhanced
 
 	public void testIOError() throws Exception
 	{
-		CustomFieldError xmlError = CustomFieldError.errorIO();
+		String errorMessage = "io message";
+		CustomFieldError xmlError = CustomFieldError.errorIO(errorMessage);
 		assertEquals("Incorrect Error code for IO error", CustomFieldError.CODE_IO_ERROR, xmlError.getCode());
+		assertEquals("Incorrect error message for IO error", errorMessage, xmlError.getType());
 	}
 
 	public void testSignatureError() throws Exception
