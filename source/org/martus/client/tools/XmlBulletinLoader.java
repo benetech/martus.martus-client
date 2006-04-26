@@ -63,11 +63,11 @@ public class XmlBulletinLoader extends SimpleXmlDefaultLoader
 	{
 		if(tag.equals(MainFieldSpecsElementName))
 		{
-			mainFieldSpecs = ((FieldCollection.XmlCustomFieldsLoader)ended).getFields();
+			mainFieldSpecs = getFieldSpecs(ended);
 		}
 		else if(tag.equals(PrivateFieldSpecsElementName))
 		{
-			privateFieldSpecs = ((FieldCollection.XmlCustomFieldsLoader)ended).getFields();
+			privateFieldSpecs = getFieldSpecs(ended);
 		}
 		else if(tag.equals(FieldValuesElementName))
 		{
@@ -78,6 +78,12 @@ public class XmlBulletinLoader extends SimpleXmlDefaultLoader
 		}
 		else
 			super.endElement(tag, ended);
+	}
+
+	private FieldCollection getFieldSpecs(SimpleXmlDefaultLoader ended)
+	{
+		FieldCollection.XmlCustomFieldsLoader loader = (FieldCollection.XmlCustomFieldsLoader)ended;
+		return new FieldCollection(loader.getFieldSpecs());
 	}
 	
 	public HashMap getFieldTagValuesMap()
