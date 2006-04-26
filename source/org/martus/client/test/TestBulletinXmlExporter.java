@@ -34,6 +34,7 @@ import java.util.Vector;
 import org.martus.client.bulletinstore.ClientBulletinStore;
 import org.martus.client.core.BulletinXmlExporter;
 import org.martus.common.FieldCollection;
+import org.martus.common.FieldCollectionForTesting;
 import org.martus.common.GridData;
 import org.martus.common.GridRow;
 import org.martus.common.MiniLocalization;
@@ -100,7 +101,6 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 	
 	public void testExportGrids() throws Exception
 	{
-		FieldCollection fields = new FieldCollection(StandardFieldSpecs.getDefaultPublicFieldSpecs());
 		String gridTag = "MyGridTag";
 		String xmlFieldType = "<CustomFields>" +
 				"<Field type='GRID'>" +
@@ -118,7 +118,7 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 				"</GridSpecDetails>" +
 				"</Field></CustomFields>";
 		GridFieldSpec newSpec = (GridFieldSpec)FieldCollection.parseXml(xmlFieldType)[0]; 
-		fields.add(newSpec);				
+		FieldCollection fields = FieldCollectionForTesting.extendDefaultPublicFields(newSpec);				
 		
 		Bulletin b = new Bulletin(store.getSignatureGenerator(), fields.getSpecs(), StandardFieldSpecs.getDefaultPrivateFieldSpecs());
 		b.setAllPrivate(false);
@@ -290,7 +290,6 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 
 	public void testExportCustomFieldValue() throws Exception
 	{
-		FieldCollection fields = new FieldCollection(StandardFieldSpecs.getDefaultPublicFieldSpecs());
 		String customTag1 = "custom1";
 		String customTag2 = "custom2";
 		String label1 = "Witness1 name";
@@ -298,12 +297,12 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 		
 		String xmlFieldType = "<CustomFields><Field><Tag>"+customTag1+"</Tag>" +
 			"<Label>" + label1 + "</Label></Field></CustomFields>";
-		FieldSpec newSpec = FieldCollection.parseXml(xmlFieldType)[0]; 
-		fields.add(newSpec);		
+		FieldSpec newSpec1 = FieldCollection.parseXml(xmlFieldType)[0]; 
 		xmlFieldType = "<CustomFields><Field><Tag>"+customTag2+"</Tag>" +
 			"<Label>" + label2 + "</Label></Field></CustomFields>";
-		newSpec = FieldCollection.parseXml(xmlFieldType)[0]; 
-		fields.add(newSpec);				
+		FieldSpec newSpec2 = FieldCollection.parseXml(xmlFieldType)[0]; 
+		FieldSpec[] extraFieldSpecs = {newSpec1, newSpec2};
+		FieldCollection fields = FieldCollectionForTesting.extendDefaultPublicFields(extraFieldSpecs);
 		
 		Bulletin b = new Bulletin(store.getSignatureGenerator(), fields.getSpecs(), StandardFieldSpecs.getDefaultPrivateFieldSpecs());
 		b.setAllPrivate(false);
@@ -347,7 +346,6 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 
 	public void testExportCustomFiledSignalCharacterOfTagAndLabel() throws Exception
 	{
-		FieldCollection fields = new FieldCollection(StandardFieldSpecs.getDefaultPublicFieldSpecs());
 		String customTag1 = "A";
 		String customTag2 = "custom";
 		String label1 = "Witness1 name";
@@ -355,12 +353,13 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 		
 		String xmlFieldType = "<CustomFields><Field><Tag>"+customTag1+"</Tag>" +
 			"<Label>" + label1 + "</Label></Field></CustomFields>";
-		FieldSpec newSpec = FieldCollection.parseXml(xmlFieldType)[0]; 
-		fields.add(newSpec);		
+		FieldSpec newSpec1 = FieldCollection.parseXml(xmlFieldType)[0]; 
 		xmlFieldType = "<CustomFields><Field><Tag>"+customTag2+"</Tag>" +
 			"<Label>" + label2 + "</Label></Field></CustomFields>";
-		newSpec = FieldCollection.parseXml(xmlFieldType)[0]; 
-		fields.add(newSpec);				
+		FieldSpec newSpec2 = FieldCollection.parseXml(xmlFieldType)[0]; 
+
+		FieldSpec[] extraFieldSpecs = {newSpec1, newSpec2};
+		FieldCollection fields = FieldCollectionForTesting.extendDefaultPublicFields(extraFieldSpecs);
 		
 		Bulletin b = new Bulletin(store.getSignatureGenerator(), fields.getSpecs(), StandardFieldSpecs.getDefaultPrivateFieldSpecs());
 		b.setAllPrivate(false);				

@@ -30,6 +30,7 @@ import java.io.FileOutputStream;
 import java.util.Vector;
 import org.martus.client.core.CustomFieldTemplate;
 import org.martus.common.FieldCollection;
+import org.martus.common.FieldCollectionForTesting;
 import org.martus.common.crypto.MockMartusSecurity;
 import org.martus.common.fieldspec.CustomFieldError;
 import org.martus.common.fieldspec.FieldSpec;
@@ -62,13 +63,13 @@ public class TestCustomFieldTemplate extends TestCaseEnhanced
 	
 	public void testValidateXml() throws Exception
 	{
-		FieldCollection fields = new FieldCollection(StandardFieldSpecs.getDefaultPublicFieldSpecs());
+		FieldCollection defaultFields = new FieldCollection(StandardFieldSpecs.getDefaultPublicFieldSpecs());
 		CustomFieldTemplate template = new CustomFieldTemplate();
-		assertTrue("not valid?", template.isvalidTemplateXml(fields.toString()));
+		assertTrue("not valid?", template.isvalidTemplateXml(defaultFields.toString()));
 		assertEquals(0, template.getErrors().size());
 		
 		FieldSpec invalidField = FieldSpec.createCustomField("myTag", "", new FieldTypeNormal());
-		fields.add(invalidField);
+		FieldCollection fields = FieldCollectionForTesting.extendDefaultPublicFields(invalidField);
 		assertFalse("Should not be a valid template", template.isvalidTemplateXml(fields.toString()));
 		assertEquals(1, template.getErrors().size());
 		assertEquals(CustomFieldError.CODE_MISSING_LABEL,((CustomFieldError)template.getErrors().get(0)).getCode());
@@ -76,19 +77,20 @@ public class TestCustomFieldTemplate extends TestCaseEnhanced
 	
 	public void testExportXml() throws Exception
 	{
-		FieldCollection fields = new FieldCollection(StandardFieldSpecs.getDefaultPublicFieldSpecs());
 		CustomFieldTemplate template = new CustomFieldTemplate();
 		File exportFile = createTempFileFromName("$$$testExportXml");
 		exportFile.delete();
 		assertFalse(exportFile.exists());
-		assertTrue(template.ExportTemplate(security, exportFile, fields.toString()));
+
+		FieldCollection defaultFields = new FieldCollection(StandardFieldSpecs.getDefaultPublicFieldSpecs());
+		assertTrue(template.ExportTemplate(security, exportFile, defaultFields.toString()));
 		assertTrue(exportFile.exists());
 		exportFile.delete();
 
 		FieldSpec invalidField = FieldSpec.createCustomField("myTag", "", new FieldTypeNormal());
-		fields.add(invalidField);
+		FieldCollection withInvalid = FieldCollectionForTesting.extendDefaultPublicFields(invalidField);
 		assertFalse(exportFile.exists());
-		assertFalse(template.ExportTemplate(security, exportFile, fields.toString()));
+		assertFalse(template.ExportTemplate(security, exportFile, withInvalid.toString()));
 		assertFalse(exportFile.exists());
 		exportFile.delete();
 	}

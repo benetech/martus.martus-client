@@ -268,15 +268,14 @@ public class TestCustomFieldSpecValidator extends TestCaseEnhanced
 	
 	public void testUnknownType() throws Exception
 	{
-		FieldSpec[] specs = StandardFieldSpecs.getDefaultPublicFieldSpecs();
-		FieldCollection fields = new FieldCollection(specs);
 		String tag = "weirdTag";
 		String label = "weird Label";
 		String xmlFieldUnknownType = "<CustomFields><Field><Tag>"+tag+"</Tag>" +
 			"<Label>" + label + "</Label><Type>xxx</Type>" +
 			"</Field></CustomFields>";
 		FieldSpec badSpec = FieldCollection.parseXml(xmlFieldUnknownType)[0]; 
-		fields.add(badSpec);
+
+		FieldSpec[] specs = StandardFieldSpecs.getDefaultPublicFieldSpecs();
 		specs = addFieldSpec(specs, badSpec);
 		CustomFieldSpecValidator checker = new CustomFieldSpecValidator(specs);
 		assertFalse("didn't detect unknown?", checker.isValid());
