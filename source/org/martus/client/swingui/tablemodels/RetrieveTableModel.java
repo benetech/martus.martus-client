@@ -322,7 +322,8 @@ abstract public class RetrieveTableModel extends UiTableModel
 
 	public Vector createSummariesFromStrings(String accountId, Vector summaryStrings)
 	{
-		RetrieveThread worker = new RetrieveThread(accountId, summaryStrings);
+		Vector bulletinSummaries = buildSummariesFromStrings(accountId, summaryStrings);
+		RetrieveThread worker = new RetrieveThread(bulletinSummaries);
 		worker.start();
 
 		if(retrieverDlg == null)
@@ -346,10 +347,9 @@ abstract public class RetrieveTableModel extends UiTableModel
 
 	class RetrieveThread extends Thread
 	{
-		public RetrieveThread(String account, Vector summaryStrings)
+		public RetrieveThread(Vector bulletinSummariesToUse)
 		{
-			accountId = account;
-			buildSummariesFromStrings(summaryStrings);
+			bulletinSummaries = bulletinSummariesToUse;
 			result = new Vector();
 		}
 
@@ -362,25 +362,6 @@ abstract public class RetrieveTableModel extends UiTableModel
 		public Vector getSummaries()
 		{
 			return result;
-		}
-
-		public void buildSummariesFromStrings(Vector summaryStrings)
-		{
-			bulletinSummaries = new Vector();
-			Iterator iterator = summaryStrings.iterator();
-			while(iterator.hasNext())
-			{
-				String pair = (String)iterator.next();
-				try
-				{
-					BulletinSummary summary = app.createSummaryFromString(accountId, pair);
-					bulletinSummaries.add(summary);
-				}
-				catch (Exception e)
-				{
-					errorThrown = e;
-				}
-			}
 		}
 
 		public void retrieveMissingDetailsFromServer()
@@ -418,7 +399,6 @@ abstract public class RetrieveTableModel extends UiTableModel
 				retrieverDlg.finishedRetrieve();
 		}
 
-		private String accountId;
 		private Vector bulletinSummaries;
 		private Vector result;
 	}
@@ -432,6 +412,26 @@ abstract public class RetrieveTableModel extends UiTableModel
 	public Vector getDownloadableSummaries()
 	{
 		return downloadableSummaries;
+	}
+
+	public Vector buildSummariesFromStrings(String accountId, Vector summaryStrings)
+	{
+		Vector bulletinSummaries = new Vector();
+		Iterator iterator = summaryStrings.iterator();
+		while(iterator.hasNext())
+		{
+			String pair = (String)iterator.next();
+			try
+			{
+				BulletinSummary summary = app.createSummaryFromString(accountId, pair);
+				bulletinSummaries.add(summary);
+			}
+			catch (Exception e)
+			{
+				errorThrown = e;
+			}
+		}
+		return bulletinSummaries;
 	}
 
 	public Vector getAllSummaries()
