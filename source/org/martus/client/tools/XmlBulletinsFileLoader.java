@@ -116,29 +116,19 @@ public class XmlBulletinsFileLoader extends SimpleXmlDefaultLoader
 			value = convertDateFieldsToInternalFormat(fieldTag, value);
 			bulletin.set(fieldTag, value);
 		}
-		addTopSectionAttachmentsToBulletin(bulletin, topSectionAttachments);
-		addBottomSectionAttachmentsToBulletin(bulletin, bottomSectionAttachments);
+		addAttachmentsToBulletin(bulletin, topSectionAttachments, Bulletin.TOP_SECTION);
+		addAttachmentsToBulletin(bulletin, bottomSectionAttachments, Bulletin.BOTTOM_SECTION);
 		return bulletin;
 	}
 	
-	private void addTopSectionAttachmentsToBulletin(Bulletin bulletin, Vector attachmentFileNames) throws IOException, EncryptionException
-	{
-		addAttachmentsToBulletin(bulletin,attachmentFileNames,true);
-	}	
-
-	private void addBottomSectionAttachmentsToBulletin(Bulletin bulletin, Vector attachmentFileNames) throws IOException, EncryptionException
-	{
-		addAttachmentsToBulletin(bulletin,attachmentFileNames,false);
-	}	
-
-	private void addAttachmentsToBulletin(Bulletin bulletin, Vector attachmentFileNames, boolean addToTopSection) throws IOException, EncryptionException
+	private void addAttachmentsToBulletin(Bulletin bulletin, Vector attachmentFileNames, String sectionToAddAttachments) throws IOException, EncryptionException
 	{
 		for(int i = 0; i < attachmentFileNames.size(); ++i)
 		{
 			String attachmentFileName = (String)attachmentFileNames.get(i);
 			File attachmentFile = getAttachmentFile(attachmentFileName);
 			AttachmentProxy attachment = new AttachmentProxy(attachmentFile);
-			if(addToTopSection)
+			if(sectionToAddAttachments.equals(Bulletin.TOP_SECTION))
 				bulletin.addPublicAttachment(attachment);
 			else
 				bulletin.addPrivateAttachment(attachment);
