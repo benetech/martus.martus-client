@@ -66,6 +66,8 @@ abstract public class RetrieveTableModel extends UiTableModel
 		populateAllSummariesList();
 		buildDownloadableSummariesList();
 		changeToDownloadableSummaries();
+
+		populateMissingSummaryDataFromServer(this);
 	}
 	
 	abstract protected void populateAllSummariesList() throws ServerErrorException;
@@ -264,8 +266,6 @@ abstract public class RetrieveTableModel extends UiTableModel
 		markAsOnServer(bulletinSummaries);
 		updateAllDownloadableFlags(bulletinSummaries);
 		allSummaries.addAll(bulletinSummaries);
-
-		populateMissingSummaryDataFromServer(bulletinSummaries);
 	}
 
 	private Vector getSummaryStringsFromServer(SummaryRetriever retriever) throws ServerErrorException
@@ -322,15 +322,15 @@ abstract public class RetrieveTableModel extends UiTableModel
 		}
 	}
 
-	public void populateMissingSummaryDataFromServer(Vector bulletinSummaries)
+	public void populateMissingSummaryDataFromServer(RetrieveTableModel tableModelToUse)
 	{
-		RetrieveThread worker = new RetrieveThread(bulletinSummaries);
+		RetrieveThread worker = new RetrieveThread(tableModelToUse);
 		worker.start();
 
 		if(retrieverDlg == null)
 			waitForThreadToTerminate(worker);
-		else
-			retrieverDlg.beginRetrieve();
+//		else
+//			retrieverDlg.beginRetrieve();
 	}
 
 	public void waitForThreadToTerminate(RetrieveThread worker)
@@ -346,9 +346,9 @@ abstract public class RetrieveTableModel extends UiTableModel
 
 	class RetrieveThread extends Thread
 	{
-		public RetrieveThread(Vector bulletinSummariesToUse)
+		public RetrieveThread(RetrieveTableModel tableModelToUse)
 		{
-			bulletinSummaries = bulletinSummariesToUse;
+			tableModel = tableModelToUse;
 		}
 
 		public void run()
@@ -359,6 +359,7 @@ abstract public class RetrieveTableModel extends UiTableModel
 		
 		public void retrieveMissingDetailsFromServer()
 		{
+			Vector bulletinSummaries = tableModel.getDownloadableSummaries();
 			Iterator iterator = bulletinSummaries.iterator();
 			int count = 0;
 			int maxCount = bulletinSummaries.size();
@@ -368,11 +369,15 @@ abstract public class RetrieveTableModel extends UiTableModel
 				try
 				{
 					if(!summary.hasFieldDataPacket())
+					{
 						app.setFieldDataPacketFromServer(summary);
+						tableModel.summaryHasChanged(summary);
+					}
 				}
 				catch (Exception e)
 				{
 					errorThrown = e;
+					tableModel.summaryNotAvailable(summary);
 				}
 
 				if(retrieverDlg != null)
@@ -390,7 +395,21 @@ abstract public class RetrieveTableModel extends UiTableModel
 				retrieverDlg.finishedRetrieve();
 		}
 
-		private Vector bulletinSummaries;
+		private RetrieveTableModel tableModel;
+	}
+	
+	void summaryHasChanged(BulletinSummary summary)
+	{
+		int at = currentSummaries.indexOf(summary);
+		fireTableRowsUpdated(at, at);
+	}
+	
+	void summaryNotAvailable(BulletinSummary summary)
+	{
+		summary.setDownloadable(false);
+		downloadableSummaries.remove(summary);
+		currentSummaries.remove(summary);
+		fireTableDataChanged();
 	}
 
 	public void checkIfErrorOccurred() throws Exception
