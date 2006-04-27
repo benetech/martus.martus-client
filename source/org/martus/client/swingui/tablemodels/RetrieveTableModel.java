@@ -33,7 +33,7 @@ import java.util.Vector;
 
 import org.martus.client.bulletinstore.ClientBulletinStore;
 import org.martus.client.core.MartusApp;
-import org.martus.client.swingui.dialogs.UiProgressRetrieveSummariesDlg;
+import org.martus.client.swingui.RetrieveSummariesProgressMeter;
 import org.martus.clientside.ClientSideNetworkGateway;
 import org.martus.clientside.UiLocalization;
 import org.martus.common.BulletinSummary;
@@ -59,10 +59,10 @@ abstract public class RetrieveTableModel extends UiTableModel
 		store = app.getStore();
 		allSummaries = new Vector();
 	}
-
-	public void initialize(UiProgressRetrieveSummariesDlg progressDlg) throws ServerErrorException
+	
+	public void initialize(RetrieveSummariesProgressMeter progressHandlerToUse) throws ServerErrorException
 	{
-		setProgressDialog(progressDlg);
+		setProgressDialog(progressHandlerToUse);
 		populateAllSummariesList();
 		buildDownloadableSummariesList();
 		changeToDownloadableSummaries();
@@ -154,9 +154,9 @@ abstract public class RetrieveTableModel extends UiTableModel
 		return localization;
 	}
 
-	protected void setProgressDialog(UiProgressRetrieveSummariesDlg progressDlg)
+	protected void setProgressDialog(RetrieveSummariesProgressMeter progressHandlerToUse)
 	{
-		retrieverDlg = progressDlg;
+		progressHandler = progressHandlerToUse;
 	}
 
 	public void changeToDownloadableSummaries()
@@ -327,10 +327,10 @@ abstract public class RetrieveTableModel extends UiTableModel
 		RetrieveThread worker = new RetrieveThread(tableModelToUse);
 		worker.start();
 
-		if(retrieverDlg == null)
+		if(progressHandler == null)
 			waitForThreadToTerminate(worker);
-//		else
-//			retrieverDlg.beginRetrieve();
+		else
+			progressHandler.started();
 	}
 
 	public void waitForThreadToTerminate(RetrieveThread worker)
@@ -380,19 +380,19 @@ abstract public class RetrieveTableModel extends UiTableModel
 					tableModel.summaryNotAvailable(summary);
 				}
 
-				if(retrieverDlg != null)
+				if(progressHandler != null)
 				{
-					if(retrieverDlg.shouldExit())
+					if(progressHandler.shouldExit())
 						break;
-					retrieverDlg.updateBulletinCountMeter(++count, maxCount);
+					progressHandler.updateProgressMeter(++count, maxCount);
 				}
 			}
 		}
 
 		public void finishedRetrieve()
 		{
-			if(retrieverDlg != null)
-				retrieverDlg.finishedRetrieve();
+			if(progressHandler != null)
+				progressHandler.finished();
 		}
 
 		private RetrieveTableModel tableModel;
@@ -575,7 +575,7 @@ abstract public class RetrieveTableModel extends UiTableModel
 	int columnCount;
 	
 	ClientBulletinStore store;
-	UiProgressRetrieveSummariesDlg retrieverDlg;
+	RetrieveSummariesProgressMeter progressHandler;
 	protected Vector currentSummaries;
 	private Vector downloadableSummaries;
 	protected Vector allSummaries;

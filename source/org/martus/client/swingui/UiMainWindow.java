@@ -88,7 +88,6 @@ import org.martus.client.swingui.dialogs.UiInitialSigninDlg;
 import org.martus.client.swingui.dialogs.UiModelessBusyDlg;
 import org.martus.client.swingui.dialogs.UiOnlineHelpDlg;
 import org.martus.client.swingui.dialogs.UiPreferencesDlg;
-import org.martus.client.swingui.dialogs.UiProgressRetrieveSummariesDlg;
 import org.martus.client.swingui.dialogs.UiRemoveServerDlg;
 import org.martus.client.swingui.dialogs.UiServerSummariesDeleteDlg;
 import org.martus.client.swingui.dialogs.UiServerSummariesDlg;
@@ -1758,28 +1757,29 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 
 	private Vector displaySummariesDialog(RetrieveTableModel model, String dlgTitleTag, String summariesProgressTag, UiServerSummariesDlg summariesDlg) throws ServerErrorException
 	{
+		RetrieveSummariesProgressMeter progressHandler = new RetrieveSummariesProgressMeter();
 		setWaitingCursor();	
-		boolean retrievedSummaries = retrieveSummaries(model, dlgTitleTag, summariesProgressTag);
+		boolean retrievedSummaries = retrieveSummaries(model, dlgTitleTag, progressHandler);
 		resetCursor();
 
 		if(!retrievedSummaries)
 			return null;
 		summariesDlg.initialize();
+		progressHandler.requestCancel();
 		if(!summariesDlg.getResult())
 			return null;
 		return summariesDlg.getUniversalIdList();
 	}
 
-	private boolean retrieveSummaries(RetrieveTableModel model, String dlgTitleTag, String summariesProgressTag) throws ServerErrorException
+	private boolean retrieveSummaries(RetrieveTableModel model, String dlgTitleTag, RetrieveSummariesProgressMeter progressHandler) throws ServerErrorException
 	{
 		if(!app.isSSLServerAvailable())
 		{
 			notifyDlg(this, "retrievenoserver", dlgTitleTag);
 			return false;
 		}
-		UiProgressRetrieveSummariesDlg progressDlg = new UiProgressRetrieveSummariesDlg(this, summariesProgressTag);
-		model.initialize(progressDlg);
-		if(progressDlg.shouldExit())
+		model.initialize(progressHandler);
+		if(progressHandler.shouldExit())
 			return false;
 		try
 		{
