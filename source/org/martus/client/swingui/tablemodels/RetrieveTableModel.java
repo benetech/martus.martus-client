@@ -257,13 +257,15 @@ abstract public class RetrieveTableModel extends UiTableModel
 		retrieveSummaries(fieldOfficeAccountId, retriever);
 	}
 
-	private void retrieveSummaries(String fieldOfficeAccountId, SummaryRetriever retriever) throws ServerErrorException
+	private void retrieveSummaries(String accountId, SummaryRetriever retriever) throws ServerErrorException
 	{
 		Vector summaryStrings = getSummaryStringsFromServer(retriever);
-		Vector summaries = createSummariesFromStrings(fieldOfficeAccountId, summaryStrings);
-		markAsOnServer(summaries);
-		updateAllDownloadableFlags(summaries);
-		allSummaries.addAll(summaries);
+		Vector bulletinSummaries = buildSummariesFromStrings(accountId, summaryStrings);
+		markAsOnServer(bulletinSummaries);
+		updateAllDownloadableFlags(bulletinSummaries);
+		allSummaries.addAll(bulletinSummaries);
+
+		populateMissingSummaryDataFromServer(bulletinSummaries);
 	}
 
 	private Vector getSummaryStringsFromServer(SummaryRetriever retriever) throws ServerErrorException
@@ -320,9 +322,8 @@ abstract public class RetrieveTableModel extends UiTableModel
 		}
 	}
 
-	public Vector createSummariesFromStrings(String accountId, Vector summaryStrings)
+	public void populateMissingSummaryDataFromServer(Vector bulletinSummaries)
 	{
-		Vector bulletinSummaries = buildSummariesFromStrings(accountId, summaryStrings);
 		RetrieveThread worker = new RetrieveThread(bulletinSummaries);
 		worker.start();
 
@@ -330,8 +331,6 @@ abstract public class RetrieveTableModel extends UiTableModel
 			waitForThreadToTerminate(worker);
 		else
 			retrieverDlg.beginRetrieve();
-		
-		return worker.getSummaries();
 	}
 
 	public void waitForThreadToTerminate(RetrieveThread worker)
@@ -350,7 +349,6 @@ abstract public class RetrieveTableModel extends UiTableModel
 		public RetrieveThread(Vector bulletinSummariesToUse)
 		{
 			bulletinSummaries = bulletinSummariesToUse;
-			result = new Vector();
 		}
 
 		public void run()
@@ -359,11 +357,6 @@ abstract public class RetrieveTableModel extends UiTableModel
 			finishedRetrieve();
 		}
 		
-		public Vector getSummaries()
-		{
-			return result;
-		}
-
 		public void retrieveMissingDetailsFromServer()
 		{
 			Iterator iterator = bulletinSummaries.iterator();
@@ -376,8 +369,6 @@ abstract public class RetrieveTableModel extends UiTableModel
 				{
 					if(!summary.hasFieldDataPacket())
 						app.setFieldDataPacketFromServer(summary);
-					
-					result.add(summary);
 				}
 				catch (Exception e)
 				{
@@ -400,7 +391,6 @@ abstract public class RetrieveTableModel extends UiTableModel
 		}
 
 		private Vector bulletinSummaries;
-		private Vector result;
 	}
 
 	public void checkIfErrorOccurred() throws Exception
