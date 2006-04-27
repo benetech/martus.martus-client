@@ -116,21 +116,33 @@ public class XmlBulletinsFileLoader extends SimpleXmlDefaultLoader
 			value = convertDateFieldsToInternalFormat(fieldTag, value);
 			bulletin.set(fieldTag, value);
 		}
-		for(Iterator iter = topSectionAttachments.iterator(); iter.hasNext();)
-		{
-			String attachmentFileName = (String) iter.next();
-			File attachmentFile = getAttachmentFile(attachmentFileName);
-			AttachmentProxy attachment = new AttachmentProxy(attachmentFile);
-			bulletin.addPublicAttachment(attachment);
-		}
-		for(Iterator iter = bottomSectionAttachments.iterator(); iter.hasNext();)
-		{
-			String attachmentFileName = (String) iter.next();
-			File attachmentFile = getAttachmentFile(attachmentFileName);
-			AttachmentProxy attachment = new AttachmentProxy(attachmentFile);
-			bulletin.addPrivateAttachment(attachment);
-		}
+		addTopSectionAttachmentsToBulletin(bulletin, topSectionAttachments);
+		addBottomSectionAttachmentsToBulletin(bulletin, bottomSectionAttachments);
 		return bulletin;
+	}
+	
+	private void addTopSectionAttachmentsToBulletin(Bulletin bulletin, Vector attachmentFileNames) throws IOException, EncryptionException
+	{
+		addAttachmentsToBulletin(bulletin,attachmentFileNames,true);
+	}	
+
+	private void addBottomSectionAttachmentsToBulletin(Bulletin bulletin, Vector attachmentFileNames) throws IOException, EncryptionException
+	{
+		addAttachmentsToBulletin(bulletin,attachmentFileNames,false);
+	}	
+
+	private void addAttachmentsToBulletin(Bulletin bulletin, Vector attachmentFileNames, boolean addToTopSection) throws IOException, EncryptionException
+	{
+		for(int i = 0; i < attachmentFileNames.size(); ++i)
+		{
+			String attachmentFileName = (String)attachmentFileNames.get(i);
+			File attachmentFile = getAttachmentFile(attachmentFileName);
+			AttachmentProxy attachment = new AttachmentProxy(attachmentFile);
+			if(addToTopSection)
+				bulletin.addPublicAttachment(attachment);
+			else
+				bulletin.addPrivateAttachment(attachment);
+		}
 	}
 
 	private File getAttachmentFile(String attachmentFileName) throws IOException
