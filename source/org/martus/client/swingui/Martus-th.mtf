@@ -1,9 +1,10 @@
 ﻿# Martus Client Translation File
 # Language code:  th
 # Language name:  Thai
-# Exported date:  Mon Oct 31 09:25:34 PST 2005
-# Client version: 2.8.1
-# Client build:   20050930.1674
+# Translated by:  ITIE; ThaiNGO
+# Exported date:  Fri Mar 24 17:47:55 PST 2006
+# Client version: 2.9
+# Client build:   20060322.1716
 #
 # This file MUST be saved in UTF-8 format!
 # Lines beginning with # are comments and are ignored by Martus
@@ -100,6 +101,9 @@
 #__________________=Delete
 -f6fd-button:Delete=ลบ
 
+#_________________________________=Delete Selected Row
+-5e2f-button:DeleteSelectedGridRow=ลบแถวที่เลือก
+
 #______________________________=Delete
 -f6fd-button:DeleteServerDrafts=ลบ
 
@@ -111,6 +115,9 @@
 
 #_________________________=Up
 -2038-button:FolderOrderUp=ขึ้น
+
+#______________________________=Insert Row
+-9f53-button:InsertEmptyGridRow=เพิ่มแถว
 
 #_________________=Leave
 -7e35-button:Leave=ออก
@@ -125,7 +132,7 @@
 -a2a2-button:PrintOnlyPublic=พิมพ์ข้อมูลสาธารณะเท่านั้น
 
 #_________________________________=Include private information
--6c53-button:PrintPublicAndPrivate=รวมข้อมูลส่วนบุคคล
+-6c53-button:PrintPublicAndPrivate=รวมข้อมูลความลับ
 
 #_______________________=Send report output to a file
 -89b9-button:PrintToDisk=พิมพ์รายงานเป็นไฟล์
@@ -151,6 +158,9 @@
 #______________________________________________=Retrieve latest bulletin version only
 -3449-button:RetrieveLatestBulletinRevisionOnly=เอาคืนรายงานที่ปรับแก้รุ่นล่าสุดเท่านั้น
 
+#____________________________________=Only search most recent version of bulletins
+-852f-button:SearchFinalBulletinsOnly=ค้นหาเฉพาะรายงานรุ่นล่าสุดเท่านั้น
+
 #__________________________________=Accept
 -bb54-button:ServerComplianceAccept=ยอมรับ
 
@@ -161,7 +171,7 @@
 -f849-button:SignIn=เข้าสู่ระบบ
 
 #______________________________=Use New
--99f3-button:UseNewCustomFields=ใช้ช่ิองข้อมูลใหม่
+-99f3-button:UseNewCustomFields=ใช้ช่องข้อมูลใหม่
 
 #______________________________=Use Old
 -91ea-button:UseOldCustomFields=ใช้ช่องข้อมูลเก่า
@@ -311,7 +321,7 @@
 -4a0b-field:AuthorRequired=ผู้รายงาน (จำเป็น)
 
 #___________________________________=Your key is required to read your private bulletin information or to create new bulletins.  To ensure that you'll always have access to your data, it is extremely important to keep a backup of your key.\n\nMartus offers two methods for backing up your key, either of which may be used, but we strongly recommend using both backup methods.  The first method creates a single, password encrypted key back up file onto removable media (e.g. floppy disk, cd, USB storage) or a network drive; the second method backs up the key in #TotalNumberOfFilesInBackup# separate pieces (not encrypted with your password) onto multiple floppy disks (or other removable media).\n
--ff3d-field:BackupKeyPairGeneralInfo=จำเป็นต้องใช้กุญแจของคุณในการอ่านข้อมูลรายงานส่วนตัวของคุณ หรือใช้ในการสร้างรายงานใหม่ เพื่อให้แน่ใจว่าคุณสามารถเข้าถึงข้อมูลของคุณได้เสมอ เป็นสิ่งที่สำคัญอย่างยิ่งที่คุณควรจะสำรองกุญแจของคุณ\n\nMartus มีวิธีการสำรองกุญแจ 2 วิธี ซึ่งคุณจะใช้วิธีใดก็ได้ แต่เราแนะนำเป็นอย่างยิ่งว่า ควรใช้ทั้งสองวิธีในการสำรองข้อมูล วิธีแรกคือการสร้างแฟ้มกุญแจแล้วเข้ารหัสด้วยรหัสผ่านของคุณ ลงในสื่อที่เคลื่อนย้ายได้ (เช่น แผ่นฟลอปปี้ดิสก์ ซีดี หรือยูเอสบีไดรว์) หรือไดร์ฟบนเครือข่าย วิธีที่สองคือ แยกเก็บกุญแจออกเป็น #TotalNumberOfFilesInBackup# ส่วน (แต่ไม่ได้เข้ารหัสด้วยรหัสผ่านของคุณ) ลงในแผ่นฟลอปปี้ดิสก์หลายแผ่น (หรือสื่ออื่นๆ)\n
+-ff3d-field:BackupKeyPairGeneralInfo=จำเป็นต้องใช้กุญแจของคุณในการอ่านข้อมูลรายงานความลับของคุณ หรือใช้ในการสร้างรายงานใหม่ เพื่อให้แน่ใจว่าคุณสามารถเข้าถึงข้อมูลของคุณได้เสมอ เป็นสิ่งที่สำคัญอย่างยิ่งที่คุณควรจะสำรองกุญแจของคุณ\n\nMartus มีวิธีการสำรองกุญแจ 2 วิธี ซึ่งคุณจะใช้วิธีใดก็ได้ แต่เราแนะนำเป็นอย่างยิ่งว่า ควรใช้ทั้งสองวิธีในการสำรองข้อมูล วิธีแรกคือการสร้างแฟ้มกุญแจแล้วเข้ารหัสด้วยรหัสผ่านของคุณ ลงในสื่อที่เคลื่อนย้ายได้ (เช่น แผ่นฟลอปปี้ดิสก์ ซีดี หรือยูเอสบีไดรว์) หรือไดร์ฟบนเครือข่าย วิธีที่สองคือ แยกเก็บกุญแจออกเป็น #TotalNumberOfFilesInBackup# ส่วน (แต่ไม่ได้เข้ารหัสด้วยรหัสผ่านของคุณ) ลงในแผ่นฟลอปปี้ดิสก์หลายแผ่น (หรือสื่ออื่นๆ)\n
 
 #________________________________________________=This method breaks up your key into #TotalNumberOfFilesInBackup# pieces, any #MinimumNumberOfFilesNeededForRecovery# of which will be required to reconstruct the key without requiring a password.  If you forget your login name or your password, this method is the only way you can restore your key.\n\nOnce the #TotalNumberOfFilesInBackup# files have been written to removable media disks, you should distribute them to #TotalNumberOfFilesInBackup# different people whom you will remember, but each of whom don't know who you have given the other files to.  Do not store any of the disks together.\n\nTo restore your key, first retrieve any #MinimumNumberOfFilesNeededForRecovery# of the original #TotalNumberOfFilesInBackup# disks, and then select 'Restore Account' and 'Restore account from multiple disks' when signing into Martus.\n
 -9551-field:BackupKeyPairToSecretShareInformation=วิธีการนี้จะแยกแฟ้มกุญแจของคุณออกเป็น #TotalNumberOfFilesInBackup#ส่วน ชิ้นส่วน #MinimumNumberOfFilesNeededForRecovery# จำเป็นต่อการสร้างแฟ้มกุญแจขึ้นใหม่ โดยไม่จำเป็นต้องใช้รหัสผ่าน ถ้าคุณลืมชื่อล๊อกอินหรือรหัสผ่านของคุณ วิธีนี้เป็นวิธีการเดียวที่คุณสามารถกู้แฟ้มกุญแจของคุณคืนได้\n\nเมื่อแฟ้ม #TotalNumberOfFilesInBackup# แฟ้มถูกเขียนลงบนดิสก์แล้ว คุณควรกระจายพวกมันไปสู่ #TotalNumberOfFilesInBackup# คนที่คุณรู้จักที่คุณจำได้ แต่อย่าให้บุคคลเหล่านั้นรู้ได้ว่าใครมีส่วนต่างๆ เหล่านี้บ้าง ห้ามเก็บส่วนใดๆ ของดิสก์เหล่านี้ไว้ด้วยกันอย่างเด็ดขาด\n\nวิธีการกู้คืนคู่กุญแจนี้ เริ่มด้วยการเลือกแผ่นดิสก์จำนวน #MinimumNumberOfFilesNeededForRecovery# จาก #TotalNumberOfFilesInBackup# แผ่นของต้นฉบับ แล้วเลือก "กู้คืนชื่อบัญชี" แล้วเลือก "กู้คืนชื่อบัญชีจากแผ่นฟลอปปี้ดิสก์หลายแผ่น" เมื่อเข้าสู่ Martus เรียบร้อยแล้ว\n
@@ -359,10 +369,10 @@
 -eba1-field:BulletinHasUnknownStuff=คำเตือน: ข้อมูลบางอย่างในรายงานไม่สามารถมองเห็นได้
 
 #______________________________________________=The selected Headquarters account(s) will be able to view the private information in this bulletin, or send this bulletin to a server, after you save it.\n\nTo add a new Headquarters account use the Tools/Configure Headquarters menu option.
--6702-field:BulletinHeadQuartersHQInfoForModify=ชื่อบัญชีสำนักงานใหญ่ที่เลือกจะสามารถดูข้อมูลส่วนตัวในรายงานนี้ได้ หรือส่งรายงานนี้ไปยังเซิร์ฟเวอร์ หลังจากคุณบันทึกรายงาน \n\nเพิ่มชื่อบัญชีสำนักงานใหญ่ ไปที่เมนู เครื่องมือ/ปรับแต่งค่าสำนักงานใหญ่
+-6702-field:BulletinHeadQuartersHQInfoForModify=ชื่อบัญชีสำนักงานใหญ่ที่เลือกจะสามารถดูข้อมูลความลับในรายงานนี้ได้ หรือส่งรายงานนี้ไปยังเซิร์ฟเวอร์ หลังจากคุณบันทึกรายงาน \n\nเพิ่มชื่อบัญชีสำนักงานใหญ่ ไปที่เมนู เครื่องมือ/ปรับแต่งค่าสำนักงานใหญ่
 
 #____________________________________________=The following Headquarters account(s) can view the private information in this bulletin, and can send this bulletin to a server.
--e728-field:BulletinHeadQuartersHQInfoForView=ชื่อบัญชีสำนักงานใหญ่ตามนี้สามารถดูข้อมูลส่วนตัวในรายงานนี้ได้ และสามารถส่งรายงานนี้ไปยังเซิร์ฟเวอร์ได้
+-e728-field:BulletinHeadQuartersHQInfoForView=ชื่อบัญชีสำนักงานใหญ่ตามนี้สามารถดูข้อมูลความลับในรายงานนี้ได้ และสามารถส่งรายงานนี้ไปยังเซิร์ฟเวอร์ได้
 
 #______________________________________=Label
 -7434-field:BulletinHeadQuartersHQLabel=ป้ายชื่อ
@@ -393,6 +403,18 @@
 
 #__________________________=Sent
 -35f4-field:BulletinWasSent=ส่งแล้ว
+
+#_________________________=Calendar type
+-87e7-field:CalendarSystem=ชนิดของปฏิทิน
+
+#__________________________________=Default (2005-05-31)
+-784a-field:CalendarSystemGregorian=ค่าเริ่มต้น (2005-05-31)
+
+#________________________________=Persian (1384-03-10)
+-2f3e-field:CalendarSystemPersian=ปฏิทินเปอร์เซีย (1384-03-10)
+
+#_____________________________=Thai Solar (2548-05-31)
+-2be4-field:CalendarSystemThai=ปฏิทินไทย (2548-05-31)
 
 #_____________________________________=Download Progress
 -8b0e-field:ChunkProgressStatusMessage=ความคืบหน้าการดาวน์โหลด
@@ -436,8 +458,29 @@
 #_____________________________________=Customization Template Files
 -9210-field:CustomizationTemplateFiles=การกำหนดไฟล์แม่แบบ
 
+#________________________=Date delimiter
+-36d4-field:DateDelimiter=รูปแบบวันที่
+
+#____________________________=Dash (00-00-00)
+-997c-field:DateDelimiterDash=ขีดกลาง (00-00-00)
+
+#___________________________=Dot (00.00.00)
+-66ea-field:DateDelimiterDot=จุด (00.00.00)
+
+#_____________________________=Slash (00/00/00)
+-404d-field:DateDelimiterSlash=ทับ (00/00/00)
+
 #____________________=Exact Date
 -8a81-field:DateExact=วันที่แน่นอน
+
+#______________________=Day
+-987b-field:DatePartDay=วัน
+
+#________________________=Month
+-082b-field:DatePartMonth=เดือน
+
+#_______________________=Year
+-879e-field:DatePartYear=ปี
 
 #____________________=Date Range
 -6bb4-field:DateRange=ช่วงวันที่
@@ -487,8 +530,8 @@
 #__________________________________=LABEL
 -64b8-field:ErrorCustomFieldHeader4=ป้ายชื่อ
 
-#____________________________=There is an error in the custom field definitions. Each problem is identified with the following codes:\n   100 - Required standard field is missing\n   101 - Custom field does not have a correct tag.\n   102 - A previous Tag already exists with this name.\n   103 - Custom field does not have a label.\n   104 - Unrecognized Field Type.\n   105 - A label was found in a standard field.\n   106 - XML Parse Error.\n   107 - Tag contains illegal characters.\n   108 - Duplicate entry in Dropdown field.\n   109 - No Choices in Dropdown field.\n   200 - All fields empty.\n   201 - Unrecognized Headquarters created this template.\n   202 - Security validation error.\n   203 - File Error.
--c1b6-field:ErrorCustomFields=เกิดข้อผิดพลาดในการกำหนดช่องข้อมูลกำหนดเอง แต่ละปัญหาจะถูกระบุด้วยรหัสดังนี้:\n   100 - ช่องข้อมูลมาตรฐานที่จำเป็นต้องมี ได้หายไป\n   101 - ช่องข้อมูลกำหนดเองไม่มีแท็กที่ถูกต้อง\n   102 - แท็กก่อนหน้ามีชื่อนี้อยู่แล้ว\n   103 - ช่องข้อมูลกำหนดเองไม่มีป้ายชื่อ\n   104 - ประเภทของช่องข้อมูลไม่ถูกต้อง\n   105 - พบป้ายชื่อในช่องข้อมูลมาตรฐาน\n   106 - รูปแบบโครงสร้างของ XML ไม่ถูกต้อง\n   107 - ในแท็กมีอักขระที่ไม่อนุญาตให้ใช้\n   108 - ใส่กรอบข้อมูลซ้ำซ้อน\n   109 - ไม่มีตัวเลือกในช่องดรอปดาวน์\n   200 - ไม่พบข้อมูลในช่องข้อมูล\n   201 - บัญชีสำนักงานใหญ่ไม่ถูกต้องในแม่แบบนี้\n   202 - ระบบรักษาความปลอดภัยผิดพลาด\n   203 - ไฟล์ผิดพลาด
+#____________________________=There is an error in the custom field definitions. Each problem is identified with the following codes:\n   100 - Required standard field is missing\n   101 - Custom field does not have a correct tag.\n   102 - A previous Tag already exists with this name.\n   103 - Custom field does not have a label.\n   104 - Unrecognized Field Type.\n   105 - A label was found in a standard field.\n   106 - XML Parse Error.\n   107 - Tag contains illegal characters.\n   108 - Duplicate entry in Dropdown field.\n   109 - No Choices in Dropdown field.\n   200 - All fields empty.\n   201 - Unrecognized Headquarters created this template.\n   202 - Security validation error.\n   203 - File Error.\n   204 - Imported XML Missing Field.
+-0b96-field:ErrorCustomFields=เกิดข้อผิดพลาดในการกำหนดช่องข้อมูลกำหนดเอง แต่ละปัญหาจะถูกระบุด้วยรหัสดังนี้:\n   100 - ช่องข้อมูลมาตรฐานที่จำเป็นต้องมี ได้หายไป\n   101 - ช่องข้อมูลกำหนดเองไม่มีแท็กที่ถูกต้อง\n   102 - แท็กก่อนหน้ามีชื่อนี้อยู่แล้ว\n   103 - ช่องข้อมูลกำหนดเองไม่มีป้ายชื่อ\n   104 - ประเภทของช่องข้อมูลไม่ถูกต้อง\n   105 - พบป้ายชื่อในช่องข้อมูลมาตรฐาน\n   106 - รูปแบบโครงสร้างของ XML ไม่ถูกต้อง\n   107 - ในแท็กมีอักขระที่ไม่อนุญาตให้ใช้\n   108 - ใส่กรอบข้อมูลซ้ำซ้อน\n   109 - ไม่มีตัวเลือกในช่องดรอปดาวน์\n   200 - ไม่พบข้อมูลในช่องข้อมูล\n   201 - บัญชีสำนักงานใหญ่ไม่ถูกต้องในแม่แบบนี้\n   202 - ระบบรักษาความปลอดภัยผิดพลาด\n   203 - ไฟล์ผิดพลาด\n   204 -  ช่องข้อมูล XML ที่นำเข้าหายไป.
 
 #_________________________________________=A previous backup file exists.  You must save each file on its own removable media disk.
 -db93-field:ErrorPreviousBackupShareExists=แฟ้มข้อมูลก่อนหน้ายังมีอยู่ คุณต้องบันทึกแต่ละไฟล์บนแผ่นฟลอปปี้ดิสก์ทีละแผ่น
@@ -509,13 +552,13 @@
 -7ae7-field:ExportBulletinDetails=ข้อมูลจากรายงานที่เลือก (ตามรายการด้านล่าง) จะถูกส่งออกเป็นแฟ้ม XML ตามที่คุณต้องการ\n\nข้อควรจำ: นี่เป็นการกระทำทิศทางเดียว คุณไม่สามารถนำเข้าแฟ้ม XML แล้วบันทึกกลับคืนแก่ Martus ได้ เมื่อการดำเนินการนี้เสร็จเรียบร้อยแล้วคุณสามารถนำเอารายงาน Martus นี้ไปใช้ในโปรแกรมประยุกต์อื่นได้โดยการนำเข้าแฟ้ม XML นี้
 
 #____________________________=Include private data in export
--4bb6-field:ExportPrivateData=รวมข้อมูลส่วนตัวในการส่งออกด้วย
+-4bb6-field:ExportPrivateData=รวมข้อมูลความลับในการส่งออกด้วย
 
 #____________________________=Exported Bulletins
 -0b4e-field:ExportedBulletins=รายงานที่ถูกส่งออก
 
 #______________________________=---Overview---\n\nMartus searches all versions of every bulletin (both public and private, sealed and draft) in every folder, including the Discarded Bulletins folder.  When the search is completed, the Search Results folder lists copies of the bulletins found in your search.\n\nYou can search for words in any language.  Martus searches are not case-sensitive in English and other purely Latin character languages, so it doesn't matter whether a word is capitalized or not.\n\nSearches include attachment filenames, but not content of attachments.\n\nYou can search both standard and custom fields.\n\n
--42b4-field:FancySearchHelpMsg1=---สรุปภาพรวม---\n\nโปรแกรม Martus สืบค้นทุกรายงานและทุกรุ่น (ทั้งข้อมูลส่วนตัวและสาธารณะ, ทั้งร่างรายงานและรายงานปิดผนึก) ในทุกแฟ้ม, รวมทั้งแฟ้มรายงานที่ทิ้งไปแล้ว เมื่อการค้นหาเสร็จสิ้นลง แฟ้มสรุปการค้นหาจะคัดลอกรายงานที่พบจากการค้นหาของคุณ\n\nคุณสามารถค้นหาคำในทุกภาษา ระบบค้นหาของ Martus จะไม่ยึดตามตัวพิมพ์ใหญ่เล็กในภาษาอังกฤษ หรือตัวอักษรในภาษาละตินอื่นๆ จึงไม่สำคัญว่าตัวอักษรขอคำนั้นจะเป็นตัวพิมพ์ใหญ่หรือไม่\n\nการค้นหารวมถึงชื่อของไฟล์ที่แนบ, แต่ไม่สามารถค้นหาเนื้อหาของไฟล์ที่แนบได้\n\nคุณสามารถค้นหาทั้งช่องข้อมูลมาตรฐานและแบบกำหนดเอง\n\n
+-42b4-field:FancySearchHelpMsg1=---สรุปภาพรวม---\n\nโปรแกรม Martus สืบค้นทุกรายงานและทุกรุ่น (ทั้งข้อมูลความลับและสาธารณะ, ทั้งร่างรายงานและรายงานปิดผนึก) ในทุกแฟ้ม, รวมทั้งแฟ้มรายงานที่ทิ้งไปแล้ว เมื่อการค้นหาเสร็จสิ้นลง แฟ้มสรุปการค้นหาจะคัดลอกรายงานที่พบจากการค้นหาของคุณ\n\nคุณสามารถค้นหาคำในทุกภาษา ระบบค้นหาของ Martus จะไม่ยึดตามตัวพิมพ์ใหญ่เล็กในภาษาอังกฤษ หรือตัวอักษรในภาษาละตินอื่นๆ จึงไม่สำคัญว่าตัวอักษรขอคำนั้นจะเป็นตัวพิมพ์ใหญ่หรือไม่\n\nการค้นหารวมถึงชื่อของไฟล์ที่แนบ, แต่ไม่สามารถค้นหาเนื้อหาของไฟล์ที่แนบได้\n\nคุณสามารถค้นหาทั้งช่องข้อมูลมาตรฐานและแบบกำหนดเอง\n\n
 
 #______________________________=---Search tips---\n\nMartus will find any text you enter whether it's a complete word or part of a larger word. For example, if you search for the word prison, you'll see bulletins that include the words prison, imprison, and imprisonment. Likewise, if you search for the word prison, Martus will find bulletins that include attachments with names such as photos-prison.jpg and prisoners-report.doc.\n\nTo search for an exact phrase, type it with quotation marks around the phrase  (e.g.  "Witness Testimony"). If you do not put quotation marks around the phrase, Martus will search for the words individually.\n\nUse the word "#Or#" to broaden your search, or the word "#And#" to narrow it.  You can use the #And# / #Or# dropdowns to specify different fields you want search across (e.g. you want to search for bulletins that have "Last Saved Date" in the last week and have a certain author).  If you want to search on multiple text values within a single bulletin field, you can use #Or# or #And# in-between words in the "Search For..." entry box.  For example, if you search "Any Field" for:\n   prison #Or# jail\nyou'll see a list of bulletins that contain either word anywhere in the bulletin. If you search for:\n   prison #And# assault \nyou'll see a list of bulletins that contain both words. The keyword "#And#" is implied, so if you search for:\n   prison assault \nMartus will find bulletins the same bulletins as if you searched for:\n   prison #And# assault\n\nWhen you use both "#And#" and "#Or#", your search terms are grouped from the beginning of your list (either across bulletin fields or within a particular field). For example, if you enter:\n   prison #Or# jail #And# trial \nin the "Search For..." entry box, Martus will search for any bulletins that contain either of the words prison or jail, and also contain the word trial. But if you enter:\n   prison #And# jail #Or# trial \nMartus will search for any bulletins that contain both the words prison and jail, or contain the word trial.\n
 -ec7d-field:FancySearchHelpMsg2=---วิธีการค้นหา---\n\nMartus จะค้นหาทุกคำที่คุณใส่ข้อมูลไม่ว่าคำนั้นจะสมบูรณ์หรือว่าเป็นส่วนหนึ่งของคำ ตัวอย่าง, ถ้าคุณค้นหาคำว่านักโทษ คุณจะพบรายงานที่มีทั้งคำว่า นักโทษ, นักโทษชาย และ นักโทษประหาร นอกจากนั้นถ้าคุณค้นหาคำว่านักโทษ Martus จะค้นหารายงานที่รวมถึงไฟล์แนบที่มีชื่ออาทิ รูปภาพ_นักโทษ.jpg หรือรายงาน_นักโทษ.doc\n\nหากต้องการค้นหาประโยคที่ถูกต้อง พิมพ์ประโยคที่ต้องการค้นหาแล้วตามด้วยเครื่องหมายอัญประกาศ (อาทิ  "คำให้การของพยาน"). ถ้าคุณไม่ได้ใส่เครื่องหมายอัญประกาศที่ประโยค Martus จะค้นหาแบบแยกส่วนคำ\n\nใช้คำว่า "#Or#" เพื่อขยายการค้นหาของคุณ, หรือคำว่า "#And#" เพื่อทำให้การค้นหาแคบลง คุณสามารถใช้ตัวเลือก  #And# / #Or#  เพื่อกำหนดการค้นหาข้ามช่องข้อมูลที่ต่างกัน (อาทิ คุณต้องการค้นหารายงานที่มี "การบันทึกล่าสุด" ในสัปดาห์ล่าสุดและมีชื่อผู้เขียนที่แน่นอน) ถ้าคุณต้องการค้นหาคำหลายคำในรายงานที่อยู่ในช่องข้อมูลเดียวกันคุณสามารถใช้ #Or# หรือ #And# ในระหว่างคำ ในช่อง"ค้นหา สำหรับ..." อาทิ ถ้าคุณค้นหา"ทุกช่องข้อมูล" เพื่อคำว่า:\n  ผู้ต้องขัง #Or# ห้องขัง\nคุณจะเห็นรายงานที่รวมทุกคำในทุกๆที่ของรายงาน ถ้าคุณค้นหา:\n   นักโทษ #And# การทำร้าย \nคุณจะพบรายงานที่มีคำทั้งคู่ คำสำคัญ" #And#" ทำให้เห็นได้ว่า ถ้าคุณค้นหา:\n   การทำร้าย นักโทษ \nMartus จะค้นหารายงานเหมือนรายงานที่คุณค้นหาจาก:\n   นักโทษ #And# การทำร้าย\n\nเมื่อคุณใช้ทั้ง "#And#" และ "#Or#", สิ่งที่คุณค้นหาจะถูกจัดกลุ่มไว้ในช่วงแรกของผลการค้นหา (ทั้งข้ามช่องข้อมูลรายงานและในช่องข้อมูลที่เฉพาะเจาะจง). อาทิ ถ้าคุณพิมพ์:\n   เรือนจำ #Or# คุก #And# จองจำ \nในช่อง"ค้นหาสำหรับ..." Martus จะค้นหาทุกๆรายงานที่มีคำทั้งเรือนจำ และ คุก หรือ คำว่าจองจำ แต่ถ้าคุณใส่คำว่า:\n   เรือนจำ #And# คุก #Or# จองจำ \nMartus จะค้นหาทุกรายงานที่มีคำทั้งหมด ทั้งเรือนจำ และคุก หรือ รวมทั้งคำว่าจองจำ\n
@@ -536,7 +579,7 @@
 -ea13-field:HQsSetAsDefault=ค่าเริ่มต้นชื่อบัญชีสำนักงานใหญ่จะถูกเลือกไว้ในรายงานที่สร้างใหม่ทุกฉบับหรือทุกรุ่น
 
 #________________________________=These Headquarters accounts are allowed to view the private information in this bulletin, and to send this bulletin to a server on your behalf.
--2274-field:HQsSetAsProxyUploader=ชื่อบัญชีของสำนักงานใหญ่เหล่านี้ได้รับอนุญาตให้ดูข้อมูลส่วนตัวในรายงานนี้ได้ และสามารถส่งรายงานนี้ไปยังเซิร์ฟเวอร์ภายใต้ชื่อของคุณได้
+-2274-field:HQsSetAsProxyUploader=ชื่อบัญชีของสำนักงานใหญ่เหล่านี้ได้รับอนุญาตให้ดูข้อมูลความลับในรายงานนี้ได้ และสามารถส่งรายงานนี้ไปยังเซิร์ฟเวอร์ภายใต้ชื่อของคุณได้
 
 #_______________________________=Selected?
 -9c09-field:HeadQuartersSelected=เลือกหรือไม่
@@ -565,8 +608,8 @@
 #________________________________=One or more accounts already exist on this computer. To create an additional account with a new username and passphrase, click OK.
 -02f2-field:HowToCreateNewAccount=ชื่อบัญชีบางชื่อ มีอยู่แล้วบนเครื่องคอมพิวเตอร์นี้ ถ้าต้องการสร้างชื่อบัญชีใหม่เพิ่มเติม ให้คลิก ตกลง
 
-#_________________________________=The version of this translation is not compatible with this version of Martus.  It is recommend that you do not continue to use this translation version and go to (http://www.martus.org/downloads) for the appropriate version.
--2c0e-field:IncompatibleMtfVersion=การแปลภาษาเข้ากันไม่ได้กับโปรแกรม Martus ในรุ่นนี้ โปรแกรม Martus ไม่แนะนำให้ใช้การแปลภาษาชุดนี้ กรุณาไปที่ (http://www.martus.org/downloads) เพื่อดาวน์โหลดชุดแปลภาษาที่เหมาะสม
+#_________________________________=The version of this translation is not compatible with this version of Martus.  It is recommended that you do not continue to use this translation version and go to (http://www.martus.org/downloads) for the appropriate version.
+-a747-field:IncompatibleMtfVersion=การแปลภาษาเข้ากันไม่ได้กับโปรแกรม Martus ในรุ่นนี้ โปรแกรม Martus ไม่แนะนำให้ใช้การแปลภาษาชุดนี้ กรุณาไปที่ (http://www.martus.org/downloads) เพื่อดาวน์โหลดชุดแปลภาษาที่เหมาะสม
 
 #________________________________________=Martus Software Version: #ProgramVersionNumber#
 -fcd7-field:IncompatibleMtfVersionProgram=โปรแกรม Martus รุ่น: #ProgramVersionNumber#
@@ -578,7 +621,7 @@
 -00a9-field:MayBeDamaged=คำเตือน: ข้อมูลบางอย่างอาจสูญหายหรือถูกทำลายได้
 
 #_______________________________=#NumberOfHQs# Headquarter account(s) will be able to view this private information
--da24-field:ModifyBulletinHQInfo=#NumberOfHQs# ชื่อบัญชีสำนักงานใหญ่จะสามารถดูข้อมูลส่วนตัวนี้ได้
+-da24-field:ModifyBulletinHQInfo=#NumberOfHQs# ชื่อบัญชีสำนักงานใหญ่จะสามารถดูข้อมูลความลับนี้ได้
 
 #_____________________________=Please enter a name for the file you wish to export.
 -95ed-field:NameOfExportedFile=โปรดป้อนชื่อของแฟ้มที่คุณต้องการส่งออก
@@ -596,7 +639,7 @@
 -8167-field:NormalKeyboardMsg2=เพื่อให้มีความปลอดภัยสูงสุด ควรเปลี่ยนมาใช้คียบอร์ดบนหน้าจอแทน
 
 #_____________________________________=The author has not given you permission to view the private portions of this bulletin.
--ba2f-field:NotAuthorizedToViewPrivate=ผู้รายงานยังไม่ได้ให้สิทธิ์คุณในการดูส่วนที่เป็นข้อมูลส่วนตัวในรายงานนี้
+-ba2f-field:NotAuthorizedToViewPrivate=ผู้รายงานยังไม่ได้ให้สิทธิ์คุณในการดูส่วนที่เป็นข้อมูลความลับในรายงานนี้
 
 #____________________________=Details:
 -1daa-field:OnlineHelpMessage=รายละเอียด:
@@ -611,7 +654,7 @@
 -2f27-field:OrganizationRequired=องค์กร/หน่วยงาน (จำเป็น)
 
 #__________________________________=You have the option to include or exclude the selected bulletin's private information in this print out or report file. If you choose to print private data, it will be visible to anyone who sees the print out or report file.
--2bd3-field:PrintPrivateDataMessage=คุณมีทางเลือกที่จะรวมหรือไม่รวมข้อมูลส่วนตัวของรายงานที่ถูกเลือกที่จะพิมพ์ออกหรือพิมพ์เป็นไฟล์รายงาน ถ้าคุณเลือกพิมพ์ข้อมูลส่วนตัว ใครก็ตามที่ดูสิ่งที่พิมพ์หรือไฟล์รายงานที่ออกมา จะสามารถอ่านข้อมูลส่วนตัวของคุณได้
+-2bd3-field:PrintPrivateDataMessage=คุณมีทางเลือกที่จะรวมหรือไม่รวมข้อมูลความลับของรายงานที่ถูกเลือกที่จะพิมพ์ออกหรือพิมพ์เป็นไฟล์รายงาน ถ้าคุณเลือกพิมพ์ข้อมูลความลับใครก็ตามที่ดูสิ่งที่พิมพ์หรือไฟล์รายงานที่ออกมา จะสามารถอ่านข้อมูลความลับของคุณได้
 
 #_______________________________=You can print the bulletin contents to a printer, or send the formatted report output to a file.
 -41ba-field:PrintToPrinterOrDisk=คุณสามารถพิมพ์เนื้อหารายงานไปยังเครื่องพิมพ์ หรือส่งพิมพ์รายงานออกเป็นไฟล์
@@ -751,8 +794,14 @@
 #___________________________________=Human Rights Bulletin System
 -fe5b-field:SplashProductDescription=ระบบรายงานสิทธิมนุษยชน
 
+#___________________________=Connecting to server
+-2a77-field:StatusConnecting=กำลังติดต่อเซิร์ฟเวอร์
+
 #______________________=Ready
 -20c7-field:StatusReady=พร้อม
+
+#___________________________=Retrieving...
+-5316-field:StatusRetrieving=กำลังเอาข้อมูลคืน...
 
 #__________________________=Details
 -dc3d-field:TemplateDetails=รายละเอียด
@@ -779,7 +828,7 @@
 -6231-field:UploadingSealedBulletin=กำลังส่งรายงานปิดผนึก
 
 #_____________________________=#NumberOfHQs# Headquarter account(s) can view this private information
--5ffa-field:ViewBulletinHQInfo=#NumberOfHQs# ชื่อบัญชีสำนักงานใหญ่สามารถดูข้อมูลส่วนตัวได้
+-5ffa-field:ViewBulletinHQInfo=#NumberOfHQs# ชื่อบัญชีสำนักงานใหญ่สามารถดูข้อมูลความลับได้
 
 #___________________________________=Back Space
 -7ae6-field:VirtualKeyboardBackSpace=ลบหนึ่งตัวอักษร
@@ -824,7 +873,7 @@
 -e6af-field:address=ที่อยู่
 
 #_____________________=Keep ALL Information Private
--9b5e-field:allprivate=ให้ข้อมูลทั้งหมดเป็นส่วนตัว
+-9b5e-field:allprivate=ให้ข้อมูลทั้งหมดเป็นความลับ
 
 #____________________________________=Kb
 -1717-field:attachmentSizeForPrinting=กิโลไบต์
@@ -868,6 +917,12 @@
 #____________________________________________=Any changes you have made to this bulletin will be discarded.
 -3819-field:confirmCancelModifyBulletineffect=การเปลี่ยนแปลงที่คุณทำกับรายงานนี้จะถูกยกเลิก
 
+#_____________________________________=Bulletins are currently being retrieved from the server.
+-126a-field:confirmCancelRetrievecause=รายงานขณะนี้กำลังถูกเอาคืนมาจาดเซิร์ฟเวอร์
+
+#______________________________________=This operation will cancel the current retrieval, so some of the requested bulletins may not be retrieved.
+-babb-field:confirmCancelRetrieveeffect=การกระทำนี้จะยกเลิกการเรียกคืนข้อมูลในขณะนี้ ซึ่งบางรายงานที่ถูกขอคืนอาจจะไม่ได้รับคืน
+
 #________________________________________=Do you wish to cancel this backup?
 -7b46-field:confirmCancelShareBackupcause=คุณต้องการยกเลิกกระบวนการกู้คืนคู่กุญแจใช่หรือไม่?
 
@@ -896,7 +951,7 @@
 -b384-field:confirmCloneBulletinAsMinecause=คุณได้เลือกที่จะแก้ไขรายงานที่ถูกสร้างโดยบุคคลอื่น
 
 #___________________________________________=Clicking on Yes will create a new bulletin that contains a copy of all the same information. You will be the official author of this new bulletin, and any private data in it will only be visible by you (and your Headquarters, if you have one). The original bulletin will remain unchanged.
--f291-field:confirmCloneBulletinAsMineeffect=คลิก ใช่ จะเป็นการสร้างรายงานขึ้นใหม่ที่มีข้อมูลเหมือนเดิม คุณสามารถเป็นเจ้าของรายงานใหม่นี้ได้ และข้อมูลส่วนตัวทั้งหมด จะถูกอ่านโดยคุณเท่านั้น (และสำนักงานใหญ่ ถ้าคุณมี) ต้นฉบับรายงานยังคงไม่ถูกเปลี่ยนแปลง
+-f291-field:confirmCloneBulletinAsMineeffect=คลิก ใช่ จะเป็นการสร้างรายงานขึ้นใหม่ที่มีข้อมูลเหมือนเดิม คุณสามารถเป็นเจ้าของรายงานใหม่นี้ได้ และข้อมูลความลับทั้งหมด จะถูกอ่านโดยคุณเท่านั้น (และสำนักงานใหญ่ ถ้าคุณมี) ต้นฉบับรายงานยังคงไม่ถูกเปลี่ยนแปลง
 
 #___________________________________________=You have chosen to modify one of your sealed bulletins, thus creating a new version of that bulletin.
 -fcb6-field:confirmCloneMySealedAsDraftcause=คุณได้เลือกที่จะแก้ไขรายงานฉบับหนึ่งที่ถูกปิดผนึกแล้ว จึงสร้างรายงานรุ่นใหม่นั้นขึ้นมา
@@ -941,10 +996,10 @@
 -c237-field:confirmErrorRecoverIvalidFileNameeffect=ถ้าตอบ ใช่ จะให้คุณเลือกแฟ้มใหม่อีกครั้ง
 
 #________________________________________=This will save the private information in the selected bulletins in plain text.
--817c-field:confirmExportPrivateDatacause=การกระทำนี้ จะบันทึกข้อมูลส่วนตัวจากรายงานที่เลือก ลงในแฟ้มข้อความปกติ
+-817c-field:confirmExportPrivateDatacause=การกระทำนี้ จะบันทึกข้อมูลความลับจากรายงานที่เลือก ลงในแฟ้มข้อความปกติ
 
 #_________________________________________=Anyone who gets a copy of this file will be able to read all the private data.
--9965-field:confirmExportPrivateDataeffect=ใครก็ตามที่ได้สำเนาของแฟ้มนี้ไป จะสามารถอ่านข้อมูลส่วนตัวได้ทั้งหมด
+-9965-field:confirmExportPrivateDataeffect=ใครก็ตามที่ได้สำเนาของแฟ้มนี้ไป จะสามารถอ่านข้อมูลความลับได้ทั้งหมด
 
 #________________________________________=One or more of the bulletins you have chosen to export contain information that this version of Martus cannot understand. They may have been created by a newer version of Martus, so you should ensure that you are running the latest version.
 -56f8-field:confirmExportUnknownTagscause=รายงานบางรายงานที่คุณได้เลือกเพื่อส่งออก มีข้อมูลบางอย่างที่ Martus รุ่นนี้ ไม่สามารถเข้าใจได้ ซึ่งอาจถูกสร้างด้วย Martus รุ่นที่ใหม่กว่า ดังนั้นคุณต้องแน่ใจว่า Martus ที่ใช้งานอยู่เป็นรุ่นล่าสุด
@@ -1058,7 +1113,7 @@
 -a3fe-field:confirmSendWithPublicDatacause=คุณเลือกที่จะบันทึกรายงานที่สมบูรณ์แล้ว
 
 #__________________________________________=This will permanently seal the bulletin and you will not be allowed to make any further modifications to it except by creating a new version of the bulletin.\n\nThe public information in this bulletin will be released for possible publication on the Martus Search Engine, and may be viewed by people outside your organization.\n\nIf there is information you do not want to be publicly available, either move that data to the private section of the bulletin or check the 'Keep ALL Information Private' box before saving the bulletin.
--2df3-field:confirmSendWithPublicDataeffect=การกระทำนี้จะปิดผนึกรายงานอย่างถาวร และคุณจะไม่ได้รับอนุญาตให้ทำการเปลี่ยนแปลงได้อีก ยกเว้นการสร้างรายงานรุ่นใหม่ขึ้นมา\n\nข้อมูลสาธารณะในรายงานนี้จะถูกแสดงสำหรับเผยแพร่บนโปรแกรมค้นหาของ Martus และอาจถูกดูโดยบุคคลภายนอกองค์กรของท่าน\n\nถ้ามีข้อมูลที่คุณไม่ต้องการเผยแพร่สู่สาธารณะ ทำได้โดยย้ายข้อมูลนั้นไปไว้ในส่วนของรายงานส่วนตัว หรือ ทำเครื่องหมายหน้าช่อง 'ให้ข้อมูลทั้งหมดเป็นส่วนตัว' ก่อนที่จะบันทึกรายงาน
+-2df3-field:confirmSendWithPublicDataeffect=การกระทำนี้จะปิดผนึกรายงานอย่างถาวร และคุณจะไม่ได้รับอนุญาตให้ทำการเปลี่ยนแปลงได้อีก ยกเว้นการสร้างรายงานรุ่นใหม่ขึ้นมา\n\nข้อมูลสาธารณะในรายงานนี้จะถูกแสดงสำหรับเผยแพร่บนโปรแกรมค้นหาของ Martus และอาจถูกดูโดยบุคคลภายนอกองค์กรของท่าน\n\nถ้ามีข้อมูลที่คุณไม่ต้องการเผยแพร่สู่สาธารณะ ทำได้โดยย้ายข้อมูลนั้นไปไว้ในส่วนของรายงานความลับ หรือ ทำเครื่องหมายหน้าช่อง 'ให้ข้อมูลทั้งหมดเป็นความลับ' ก่อนที่จะบันทึกรายงาน
 
 #_____________________________________________=Martus software is unable to determine whether this server complies with the official guidelines for operating a secure and reliable Martus server.
 -ab16-field:confirmServerComplianceFailedcause=ซอฟต์แวร์ Martus ไม่สามารถที่จะพิจารณาได้ว่า เซิร์ฟเวอร์เครื่องใดปฏิบัติตามที่แนะนำไว้อย่างเป็นทางการเกี่ยวกับความปลอดภัย และความน่าเชื่อถือของเซิร์ฟเวอร์ Martus ได้
@@ -1067,7 +1122,7 @@
 -8731-field:confirmServerComplianceFailedeffect=Benetech แนะนำว่า คุณไม่ควรใช้เซิร์ฟเวอร์นี้ จนกว่าเซิร์ฟเวอร์นี้จะปฏิบัติตาม เลือก ต่อไป จะเป็นการใช้งานเซิร์ฟเวอร์นี้
 
 #_________________________________________=You have chosen to allow this client the ability to view your public and PRIVATE data.
--4059-field:confirmSetImportPublicKeycause=คุณได้เลือกที่จะยอมให้เครื่องนี้ สามารถดูข้อมูลสาธารณะและส่วนตัวได้
+-4059-field:confirmSetImportPublicKeycause=คุณได้เลือกที่จะยอมให้เครื่องนี้ สามารถดูข้อมูลสาธารณะและความลับได้
 
 #__________________________________________=By clicking on Yes you are authorizing this client to view all portions of your bulletins.
 -9ff2-field:confirmSetImportPublicKeyeffect=ถ้าตอบ ใช่ คุณยินยอมให้เครื่องนี้ ดูข้อมูลรายงานต่างๆ ของคุณได้
@@ -1127,10 +1182,10 @@
 -7744-field:confirmWarningPathChosenMayNotBeRemoveableeffect=เลือก ใช่ จะเริ่มกระบวนการสำรองข้อมูลตามตำแนะนำ
 
 #____________________________________________________=Warning! Using the regular keyboard to enter your password greatly reduces the security of the Martus system, and could make it easier for an attacker to view your private data.
--f068-field:confirmWarningSwitchToNormalKeyboardcause=คำเตือน: การใช้งานคีย์บอร์ดปกติในการป้อนรหัสผ่าน จะเป็นการลดทอนการรักษาความปลอดภัยของ Martus และจะทำให้ผู้บุกรุกดูข้อมูลส่วนตัวของคุณได้ง่ายขึ้นได้
+-f068-field:confirmWarningSwitchToNormalKeyboardcause=คำเตือน: การใช้งานคีย์บอร์ดปกติในการป้อนรหัสผ่าน จะเป็นการลดทอนการรักษาความปลอดภัยของ Martus และจะทำให้ผู้บุกรุกดูข้อมูลความลับของคุณได้ง่ายขึ้นได้
 
 #_____________________________________________________=If this is a Headquarters computer, it is especially important to use the on-screen keyboard, because an attacker could gain access to all the private data that you are authorized to view.
--4379-field:confirmWarningSwitchToNormalKeyboardeffect=ถ้าคอมพิวเตอร์เครื่องนี้เป็นเครื่องที่สำนักงานใหญ่ จำเป็นอย่างยิ่งที่จะใช้คีย์บอร์ดบนหน้าจอ เพราะว่าผู้บุกรุกจะสามารถดูข้อมูลส่วนตัวได้ทั้งหมดเท่าที่คุณจะสามารถดูได้
+-4379-field:confirmWarningSwitchToNormalKeyboardeffect=ถ้าคอมพิวเตอร์เครื่องนี้เป็นเครื่องที่สำนักงานใหญ่ จำเป็นอย่างยิ่งที่จะใช้คีย์บอร์ดบนหน้าจอ เพราะว่าผู้บุกรุกจะสามารถดูข้อมูลความลับได้ทั้งหมดเท่าที่คุณจะสามารถดูได้
 
 #_________________________________________________=A single encrypted backup file of your key has yet to be created.
 -71c0-field:confirmbackupIncompleteEncryptedNeeded=ไฟล์สำรองข้อมูลที่ถูกเข้ารหัสของกุญแจคุณยังคงถูกสร้างอยู่
@@ -1224,6 +1279,9 @@
 
 #___________________=Location
 -d219-field:location=สถานที่
+
+#___________________=Date format sequence
+-eed8-field:mdyOrder=การลำดับรูปแบบวันที่
 
 #_____________________________________________=The attachment could not be located.
 -65b1-field:messageErrorAttachmentMissingcause=ไม่สามารถหาเอกสารแนบได้
@@ -1366,6 +1424,9 @@
 #_______________________________________=You must have a server name or IP address.
 -984b-field:notifyInvalidServerNamecause=คุณต้องมีชื่อเซิร์ฟเวอร์ หรือไอพีของเซิร์ฟเวอร์
 
+#_______________________________________=No row selected.
+-7b20-field:notifyNoGridRowSelectedcause=ไม่ได้เลือกแถว
+
 #___________________________________=Please select a Headquarters first.
 -1d19-field:notifyNoHQsSelectedcause=กรุณาเลือกสำนักงานใหญ่ก่อน
 
@@ -1393,8 +1454,8 @@
 #____________________________________________=You may only preview one bulletin at a time.  Please only select one bulletin to preview.
 -fbee-field:notifyPreviewOneBulletinOnlycause=คุณสามารถดูรายงานได้เพียงครั้งละหนึ่งรายงาน โปรดเลือกเพียงรายงานเดียว
 
-#_________________________________________=Finished
--355b-field:notifyPrintToDiskCompletecause=เสร็จแล้ว
+#_________________________________________=Successfully saved Report
+-45d7-field:notifyPrintToDiskCompletecause=บันทึกรายงานเสร็จแล้ว
 
 #________________________________________=To print one or more bulletins, select them first, and then perform the print operation.
 -3298-field:notifyPrintZeroBulletinscause=ต้องการพิมพ์รายงาน กรุณาเลือกรายงานจากนั้นจึงดำเนินขั้นตอนการพิมพ์
@@ -1428,6 +1489,19 @@
 
 #______________________________________=Bulletin download cancelled.  Some bulletins may have already been downloaded.
 -87b3-field:notifyRetrieveCanceledcause=การดาวน์โหลดรายงานถูกยกเลิก บางรายงานอาจจะถูกดาวน์โหลดเรียบแล้ว
+
+#___________________________________=An error has occurred while retrieving a bulletin.
+-6201-field:notifyRetrieveErrorcause=มีข้อผิดพลาดเกินดึ้นขณะเอาข้อมูลคืน
+
+#__________________________________________________=A retrieve was in progress when you upgraded to a newer version of Martus. That retrieve will be canceled, so you should re-select any bulletins that had not yet been retrieved.
+-28ae-field:notifyRetrieveFileDataVersionErrorcause=การปรับปรุงรุ่นที่ใหม่กว่าของโปรแกรม Martus ในระหว่างเอาข้อมูลคืน การเรียกเอาคืนข้อมูลจะถูกยกเลิก ซึ่งคุณจะต้องเลือกรายงานที่คุณยังไม่ได้คืนอีกครั้ง
+
+#_______________________________________=An error has prevented Martus from continuing the retrieve that was in progress. You should re-select any bulletins that had not yet been retrieved.
+-8149-field:notifyRetrieveFileErrorcause= การผิดพลาดทำให้ข้อมูลที่อยู่ระหว่างเอาคืนหยุดกลางครัน คุณจะต้องเลือกรายงานที่คุณยังไม่ได้คืนอีกครั้ง
+# AB2006-04-18:  I don't see "Martus" in the Thai translation anywhere (we usually keep it in English)?
+
+#________________________________________=A retrieve is already in progress. You cannot start another retrieve until that one has finished.
+-3e55-field:notifyRetrieveInProgresscause=อยู่ในระหว่างการเอาคืนข้อมูล คุณไม่สามารถเริ่มการเอาคืนข้อมูลอีกจนกว่าข้อมูลที่กำลังเอาคืนเสร็จสิ้น
 
 #________________________________________________=Errors occurred while retrieving bulletin summaries.  Some of the bulletins on the server will not be shown.
 -6f6f-field:notifyRetrievedOnlySomeSummariescause=เกิดข้อผิดพลาดขึ้นขณะทำการเอาสรุปรายงานคืน เซิร์ฟเวอร์อาจไม่สามารถแสดงรายงานบางรายงานได้
@@ -1478,7 +1552,7 @@
 -7d7f-field:notifyVerifyKeyPairSharePassedcause=การตรวจสอบแผ่นฟลอปปี้ดิสก์ทั้งหมดผ่านแล้ว:
 
 #_____________________________________=Welcome!\n\nTo start using Martus, create an account. Choose any username you like and a password that contains at least 8 characters. Keep the following information in mind as you create your username and password:\n\n * We recommend using a password that has 15 characters.\n * Include some characters that aren't letters or numbers in your password.\n   (That is, use punctuation or other special characters.)\n * Use a password that other people won't be able to guess;\n   anyone who knows your username and password can view your private data,\n   and can create bulletins that everyone will believe were created by you.\n * Write down your username and password and store them in a safe place.\n * You'll need to enter your username and password whenever you start Martus.\n * Martus will also sometimes prompt you to re-enter your username\n   and password to prevent someone else from using your account\n   after you've logged in.\n\nIMPORTANT: You are the only one who has your username and password. If you lose either of them, you won't be able to retrieve your data. Your username and password are not stored or backed up anywhere, so they cannot be reset for you.
--da34-field:notifyWelcomeToMartuscause=ยินดีต้อนรับ\n\nในการเริ่มใช้งาน Martus ให้สร้างชื่อบัญชี เลือกชื่อผู้ใช้ที่คุณชอบ และรหัสผ่านที่มีอย่างน้อย 8 ตัวอักษร เก็บข้อมูลเหล่านี้ไว้ให้ดีเมื่อคุณสร้างชื่อผู้ใช้ และรหัสผ่าน\n\n* เราแนะนำว่าคุณควรตั้งรหัสผ่านที่มีความยาวอย่างน้อย 15 อักขระ\n* ใส่อักขระที่ไม่ใช่ตัวอักษรหรือตัวเลขลงในรหัสผ่านของคุณด้วย\n (นั่นคือ การใช้เครื่องหมายวรรคตอนหรืออักขระพิเศษ)\n* ใช้รหัสผ่านที่บุคคลอื่นไม่สามารถคาดเดาได้โดยง่าย\n ใครก็ตามที่รู้ชื่อผู้ใช้และรหัสผ่านของคุณจะสามารถเข้าไปอ่านข้อมูลส่วนตัวของคุณได้\nและสามารถสร้างรายงาน ซึ่งทำให้ทุกคนหลงเชื่อว่าถูกสร้างโดยตัวคุณเอง\n*เขียนชื่อผู้ใช้และรหัสผ่านของคุณ เก็บไว้ในที่ที่ปลอดภัย\n* คุณต้องใส่ชื่อผู้ใช้และรหัสผ่านทุกครั้งเมื่อเริ่มใช้งาน Martus\n* ในบางครั้ง Martus จะให้คุณป้อนชื่อผู้ใช้และรหัสผ่านอีกครั้ง เพื่อป้องกันบุคคลอื่นใช้งานชื่อบัญชีของคุณหลังจากที่คุณได้เข้าสู่ระบบแล้ว\n\nข้อความสำคัญ: คุณเป็นเพียงคนเดียวที่มีชื่อผู้ใช้และรหัสผ่านนี้ ถ้าคุณทำสูญหายคุณจะไม่สามารถนำข้อมูลของคุณกลับมาได้อีกเลย ถ้าคุณไม่ได้เก็บหรือสำรองข้อมูลชื่อผู้ใช้และรหัสผ่านเอาไว้ ก็จะไม่สามารถกู้คืนได้เลย
+-da34-field:notifyWelcomeToMartuscause=ยินดีต้อนรับ\n\nในการเริ่มใช้งาน Martus ให้สร้างชื่อบัญชี เลือกชื่อผู้ใช้ที่คุณชอบ และรหัสผ่านที่มีอย่างน้อย 8 ตัวอักษร เก็บข้อมูลเหล่านี้ไว้ให้ดีเมื่อคุณสร้างชื่อผู้ใช้ และรหัสผ่าน\n\n* เราแนะนำว่าคุณควรตั้งรหัสผ่านที่มีความยาวอย่างน้อย 15 อักขระ\n* ใส่อักขระที่ไม่ใช่ตัวอักษรหรือตัวเลขลงในรหัสผ่านของคุณด้วย\n (นั่นคือ การใช้เครื่องหมายวรรคตอนหรืออักขระพิเศษ)\n* ใช้รหัสผ่านที่บุคคลอื่นไม่สามารถคาดเดาได้โดยง่าย\n ใครก็ตามที่รู้ชื่อผู้ใช้และรหัสผ่านของคุณจะสามารถเข้าไปอ่านข้อมูลความลับของคุณได้\nและสามารถสร้างรายงาน ซึ่งทำให้ทุกคนหลงเชื่อว่าถูกสร้างโดยตัวคุณเอง\n*เขียนชื่อผู้ใช้และรหัสผ่านของคุณ เก็บไว้ในที่ที่ปลอดภัย\n* คุณต้องใส่ชื่อผู้ใช้และรหัสผ่านทุกครั้งเมื่อเริ่มใช้งาน Martus\n* ในบางครั้ง Martus จะให้คุณป้อนชื่อผู้ใช้และรหัสผ่านอีกครั้ง เพื่อป้องกันบุคคลอื่นใช้งานชื่อบัญชีของคุณหลังจากที่คุณได้เข้าสู่ระบบแล้ว\n\nข้อความสำคัญ: คุณเป็นเพียงคนเดียวที่มีชื่อผู้ใช้และรหัสผ่านนี้ ถ้าคุณทำสูญหายคุณจะไม่สามารถนำข้อมูลของคุณกลับมาได้อีกเลย ถ้าคุณไม่ได้เก็บหรือสำรองข้อมูลชื่อผู้ใช้และรหัสผ่านเอาไว้ ก็จะไม่สามารถกู้คืนได้เลย
 
 #_____________________________________=The current Martus Server has refused to accept your contact info
 -156f-field:notifycontactRejectedcause=เซิร์ฟเวอร์ Martus ปัจจุบัน ไม่ยอมรับข้อมูลการติดต่อของคุณ
@@ -1534,14 +1608,20 @@
 #________________=Phone Number
 -ab25-field:phone=โทรศัพท์
 
+#___________________________________=Automatically adjust legacy Persian dates
+-4d0e-field:preferencesAdjustPersian=ปรับค่าวันที่แบบเปอร์เซียอัตโนมัติ
+
+#________________________________=Automatically adjust legacy Thai dates
+-4d22-field:preferencesAdjustThai=ปรับค่าวันที่แบบไทยอัตโนมัติ
+
 #________________________________=Prevent creating public bulletins
 -7c9e-field:preferencesAllPrivate=ป้องกันการสร้างรายงานสาธารณะ
 
 #______________________=Private
--237d-field:privateinfo=ส่วนตัว
+-237d-field:privateinfo=ความลับ
 
 #_________________________=Private Information
--4ca1-field:privatesection=ข้อมูลส่วนตัว
+-4ca1-field:privatesection=ข้อมูลความลับ
 
 #_____________________=Details
 -dc3d-field:publicinfo=รายละเอียด
@@ -1570,8 +1650,8 @@
 #________________=Title
 -768e-field:title=ชื่อเรื่อง
 
-#_____________________________=Thai 2.8.1
--a3db-field:translationVersion=ไทย 2.8.1
+#_____________________________=Thai 2.9
+-649d-field:translationVersion=ไทย  2.9
 
 #___________________=Username
 -84c2-field:username=ชื่อผู้ใช้
@@ -1716,6 +1796,9 @@
 
 #________________=Korean
 -dec6-language:ko=เกาหลี
+
+#________________=Kurdish
+-a06e-language:ku=เคอร์ดิช
 
 #________________=Kirghiz
 -1848-language:ky=เคอร์ฮิส
@@ -1947,6 +2030,78 @@
 
 #_______________=Tools
 -4fa8-menu:tools=เครื่องมือ
+
+#___________________=Farvardin
+-fef9-month:Persian1=Farvardin
+
+#____________________=Dey
+-494f-month:Persian10=Dey
+
+#____________________=Bahman
+-6c49-month:Persian11=Bahman
+
+#____________________=Esfand
+-7179-month:Persian12=Esfand
+
+#___________________=Ordibehesht
+-4241-month:Persian2=Ordibehesht
+
+#___________________=Khordad
+-02bc-month:Persian3=Khordad
+
+#___________________=Tir
+-5b96-month:Persian4=Tir
+
+#___________________=Mordad
+-e86f-month:Persian5=Mordad
+
+#___________________=Shahrivar
+-4a9e-month:Persian6=Shahrivar
+
+#___________________=Mehr
+-dfc8-month:Persian7=Mehr
+
+#___________________=Aban
+-1d23-month:Persian8=Aban
+
+#___________________=Azar
+-1e15-month:Persian9=Azar
+
+#________________=Jan
+-efed-month:Thai1=ม.ค.
+
+#_________________=Oct
+-5132-month:Thai10=ต.ค.
+
+#_________________=Nov
+-bb9b-month:Thai11=พ.ย.
+
+#_________________=Dec
+-997f-month:Thai12=ธ.ค.
+
+#________________=Feb
+-dc84-month:Thai2=ก.พ.
+
+#________________=Mar
+-c4ba-month:Thai3=มี.ค.
+
+#________________=Apr
+-befd-month:Thai4=เม.ย.
+
+#________________=May
+-c94f-month:Thai5=พ.ค.
+
+#________________=Jun
+-6d90-month:Thai6=มิ.ย.
+
+#________________=Jul
+-b737-month:Thai7=ก.ค.
+
+#________________=Aug
+-7562-month:Thai8=ส.ค.
+
+#________________=Sep
+-fdd2-month:Thai9=ก.ย.
 
 #______________=Apr
 -befd-month:apr=เม.ย.
@@ -2200,6 +2355,9 @@
 #_________________________________________=Cancel Modify Bulletin
 -276b-wintitle:confirmCancelModifyBulletin=ยกเลิกการแก้ไขรายงาน
 
+#___________________________________=Cancel Retrieve
+-d984-wintitle:confirmCancelRetrieve=ยกเลิกการเอาคืน
+
 #______________________________________=Cancel Backup
 -bba5-wintitle:confirmCancelShareBackup=ยกเลิกการสำรองข้อมูล
 
@@ -2237,7 +2395,7 @@
 -cd3f-wintitle:confirmErrorRecoverIvalidFileName=แฟ้มเอกสารไม่ถูกต้อง
 
 #______________________________________=Confirm Export Private Data
--fa1c-wintitle:confirmExportPrivateData=ยืนยันการส่งออกข้อมูลส่วนตัว
+-fa1c-wintitle:confirmExportPrivateData=ยืนยันการส่งออกข้อมูลความลับ
 
 #______________________________________=Export Bulletins
 -a86c-wintitle:confirmExportUnknownTags=ส่งออกรายงาน
@@ -2506,6 +2664,9 @@
 #_____________________________________=Invalid Server Name or IP Address
 -3376-wintitle:notifyInvalidServerName=ชื่อเซิร์ฟเวอร์หรือไอพีไม่ถูกต้อง
 
+#_____________________________________=No Row Selected
+-28fe-wintitle:notifyNoGridRowSelected=ไม่ได้เลือกแถว
+
 #_________________________________=No Headquarters Selected
 -9140-wintitle:notifyNoHQsSelected=ไม่มีสำนักงานใหญ่ถูกเลือก
 
@@ -2530,8 +2691,8 @@
 #__________________________________________=Preview One Bulletin Only
 -5b0a-wintitle:notifyPreviewOneBulletinOnly=ดูรายงานได้ครั้งละหนึ่งรายงานเท่านั้น
 
-#_______________________________________=Print To Disk
--b5b5-wintitle:notifyPrintToDiskComplete=พิมพ์ไปยังดิสค์
+#_______________________________________=Print To Report File
+-c1b2-wintitle:notifyPrintToDiskComplete=พิมพ์รายงานเป็นไฟล์
 
 #______________________________________=No Bulletins Selected
 -c1d6-wintitle:notifyPrintZeroBulletins=ไม่มีรายงานถูกเลือก
@@ -2565,6 +2726,18 @@
 
 #____________________________________=Bulletin Download Canceled
 -f8d3-wintitle:notifyRetrieveCanceled=การดาวน์โหลดรายงานถูกยกเลิก
+
+#_________________________________=Retrieve Error
+-8ed0-wintitle:notifyRetrieveError=เอาข้อมูลคืนผิดพลาด
+
+#________________________________________________=Warning
+-e9c4-wintitle:notifyRetrieveFileDataVersionError=คำเตือน
+
+#_____________________________________=Error
+-7f2f-wintitle:notifyRetrieveFileError=ผิดพลาด
+
+#______________________________________=Retrieve In Progress
+-6983-wintitle:notifyRetrieveInProgress=อยู่ระหว่างเอาข้อมูลคืน
 
 #______________________________________________=Error During Retrieve
 -f2d7-wintitle:notifyRetrievedOnlySomeSummaries=ข้อผิดพลาดขณะเอาคืน
