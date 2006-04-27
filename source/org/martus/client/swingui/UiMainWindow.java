@@ -1785,7 +1785,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		{
 			model.checkIfErrorOccurred();
 		}
-		catch (ServerErrorException e)
+		catch (Exception e)
 		{
 			notifyDlg(this, "RetrievedOnlySomeSummaries", dlgTitleTag);
 		}

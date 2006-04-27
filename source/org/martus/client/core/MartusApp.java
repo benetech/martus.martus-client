@@ -70,6 +70,7 @@ import org.martus.common.MartusUtilities;
 import org.martus.common.MiniLocalization;
 import org.martus.common.ProgressMeterInterface;
 import org.martus.common.Version;
+import org.martus.common.BulletinSummary.WrongValueCount;
 import org.martus.common.Exceptions.ServerCallFailedException;
 import org.martus.common.Exceptions.ServerNotAvailableException;
 import org.martus.common.FieldCollection.CustomFieldsParseException;
@@ -1296,45 +1297,23 @@ public class MartusApp
 		packet.loadFromXml(in, getSecurity());
 	}
 
-	public BulletinSummary retrieveSummaryFromString(String accountId, String summaryAsString)
-		throws ServerErrorException
+	public BulletinSummary createSummaryFromString(String accountId, String summaryAsString) throws WrongValueCount
 	{
-		try
-		{
-			BulletinSummary summary = BulletinSummary.createFromString(accountId, summaryAsString);
-	
-			if(!FieldDataPacket.isValidLocalId(summary.getFieldDataPacketLocalId()))
-				throw new ServerErrorException();
-		
-			FieldDataPacket fdp = getFieldDataPacketFromStoreOrServer(summary);
-			summary.setFieldDataPacket(fdp);
-			
-			return summary;
-		}
-		catch(BulletinSummary.WrongValueCount e)
-		{
-			throw new ServerErrorException("MartusApp.retrieveSummaryFromString expected: " + e.expected + " but got " + e.got + " values");
-		}
-		catch(Exception e)
-		{
-			//System.out.println("MartusApp.retrieveSummaryFromString Exception: bulletinLocalId=" + bulletinLocalId + " packetlocalId=" + packetlocalId );
-			//e.printStackTrace();
-			throw new ServerErrorException();
-		}
-}
-
-	private FieldDataPacket getFieldDataPacketFromStoreOrServer(BulletinSummary summary) throws Exception
-	{
-		UniversalId uid = summary.getUniversalId();
-		Bulletin bulletin = store.getBulletinRevision(uid);
-
+		BulletinSummary summary = BulletinSummary.createFromString(accountId, summaryAsString);
+		Bulletin bulletin = store.getBulletinRevision(summary.getUniversalId());
 		if (bulletin != null)
-			return bulletin.getFieldDataPacket();
-
-		return retrieveFieldDataPacketFromServer(uid, summary.getFieldDataPacketLocalId());
-		
+			summary.setFieldDataPacket(bulletin.getFieldDataPacket());
+		return summary;
 	}
+
+	public void setFieldDataPacketFromServer(BulletinSummary summary) throws Exception
+	{
+		if(!FieldDataPacket.isValidLocalId(summary.getFieldDataPacketLocalId()))
+			throw new ServerErrorException();
 	
+		summary.setFieldDataPacket(retrieveFieldDataPacketFromServer(summary.getUniversalId(), summary.getFieldDataPacketLocalId()));
+	}
+
 	public void retrieveNextBackgroundBulletin() throws Exception
 	{
 		RetrieveCommand rc = getCurrentRetrieveCommand();

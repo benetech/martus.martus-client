@@ -374,10 +374,13 @@ abstract public class RetrieveTableModel extends UiTableModel
 				String pair = (String)iterator.next();
 				try
 				{
-					BulletinSummary bulletinSummary = app.retrieveSummaryFromString(accountId, pair);
-					result.add(bulletinSummary);
+					BulletinSummary summary = app.createSummaryFromString(accountId, pair);
+					if(!summary.hasFieldDataPacket())
+						app.setFieldDataPacketFromServer(summary);
+					
+					result.add(summary);
 				}
-				catch (ServerErrorException e)
+				catch (Exception e)
 				{
 					errorThrown = e;
 				}
@@ -402,7 +405,7 @@ abstract public class RetrieveTableModel extends UiTableModel
 		private Vector result;
 	}
 
-	public void checkIfErrorOccurred() throws ServerErrorException
+	public void checkIfErrorOccurred() throws Exception
 	{
 		if(errorThrown != null)
 			throw (errorThrown);
@@ -549,7 +552,7 @@ abstract public class RetrieveTableModel extends UiTableModel
 	protected Vector currentSummaries;
 	private Vector downloadableSummaries;
 	protected Vector allSummaries;
-	ServerErrorException errorThrown;
+	Exception errorThrown;
 	
 	public int COLUMN_RETRIEVE_FLAG = -1;
 	public int COLUMN_TITLE = -1;
