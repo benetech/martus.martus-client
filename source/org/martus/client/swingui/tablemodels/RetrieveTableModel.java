@@ -346,16 +346,16 @@ abstract public class RetrieveTableModel extends UiTableModel
 
 	class RetrieveThread extends Thread
 	{
-		public RetrieveThread(String account, Vector summarys)
+		public RetrieveThread(String account, Vector summaryStrings)
 		{
 			accountId = account;
-			summaryStrings = summarys;
+			buildSummariesFromStrings(summaryStrings);
 			result = new Vector();
 		}
 
 		public void run()
 		{
-			retrieveAllSummaries();
+			retrieveMissingDetailsFromServer();
 			finishedRetrieve();
 		}
 		
@@ -364,17 +364,35 @@ abstract public class RetrieveTableModel extends UiTableModel
 			return result;
 		}
 
-		public void retrieveAllSummaries()
+		public void buildSummariesFromStrings(Vector summaryStrings)
 		{
+			bulletinSummaries = new Vector();
 			Iterator iterator = summaryStrings.iterator();
-			int count = 0;
-			int maxCount = summaryStrings.size();
 			while(iterator.hasNext())
 			{
 				String pair = (String)iterator.next();
 				try
 				{
 					BulletinSummary summary = app.createSummaryFromString(accountId, pair);
+					bulletinSummaries.add(summary);
+				}
+				catch (Exception e)
+				{
+					errorThrown = e;
+				}
+			}
+		}
+
+		public void retrieveMissingDetailsFromServer()
+		{
+			Iterator iterator = bulletinSummaries.iterator();
+			int count = 0;
+			int maxCount = bulletinSummaries.size();
+			while(iterator.hasNext())
+			{
+				BulletinSummary summary = (BulletinSummary)iterator.next();
+				try
+				{
 					if(!summary.hasFieldDataPacket())
 						app.setFieldDataPacketFromServer(summary);
 					
@@ -401,7 +419,7 @@ abstract public class RetrieveTableModel extends UiTableModel
 		}
 
 		private String accountId;
-		private Vector summaryStrings;
+		private Vector bulletinSummaries;
 		private Vector result;
 	}
 
