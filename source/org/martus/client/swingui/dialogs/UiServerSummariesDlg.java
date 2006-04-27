@@ -261,7 +261,10 @@ public abstract class UiServerSummariesDlg extends JDialog
 			else if(row.length==1)
 			{
 				FieldDataPacket fdp = model.getBulletinSummary(row[0]).getFieldDataPacket();
-				new UiBulletinPreviewDlg(mainWindow, fdp);
+				if(fdp == null)
+					mainWindow.notifyDlg("RetrievePreviewNotAvailableYet");
+				else
+					new UiBulletinPreviewDlg(mainWindow, fdp);
 			}
 			else
 			{
