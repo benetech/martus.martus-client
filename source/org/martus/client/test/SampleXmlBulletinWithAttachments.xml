@@ -106,13 +106,18 @@ don't know
 </Attachment>
 </TopAttachmentList>
 
+<BottomAttachmentList>
+<Attachment>
+<Filename>$$$Sample Attachment3.txt</Filename>
+</Attachment>
+</BottomAttachmentList>
 <Field tag ='privateinfo'>
 <Value>Information we want kept private
 </Value>
 </Field>
 <BottomAttachmentList>
 <Attachment>
-<Filename>$$$Sample Attachment3.txt</Filename>
+<Filename>$$$Sample Attachment2.txt</Filename>
 </Attachment>
 </BottomAttachmentList>
 

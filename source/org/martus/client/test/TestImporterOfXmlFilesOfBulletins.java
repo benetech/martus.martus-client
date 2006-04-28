@@ -154,11 +154,12 @@ public class TestImporterOfXmlFilesOfBulletins extends TestCaseEnhanced
 		assertEquals("Found pending Private attachments?",0,pendingPrivateAttachments.size());
 		
 		assertEquals("Didn't find 2 public attachments?", 2, publicAttachments.length);
-		assertEquals("Didn't find 1 private attachments?", 1, privateAttachments.length);
+		assertEquals("Didn't find 2 private attachments?", 2, privateAttachments.length);
 		
 		assertEquals("Wrong File name Public 1?", "$$$Sample Attachment1.txt", publicAttachments[0].getLabel());
 		assertEquals("Wrong File name Public 2?", "$$$Sample Attachment2.txt", publicAttachments[1].getLabel());
 		assertEquals("Wrong File name Private 1?", "$$$Sample Attachment3.txt", privateAttachments[0].getLabel());
+		assertEquals("Wrong File name Private 2?", "$$$Sample Attachment2.txt", privateAttachments[1].getLabel());
 
 		File BulletinAttachment1 = b1.getAsFileProxy(publicAttachments[0], clientStore.getDatabase(), b1.getStatus()).getFile();
 		

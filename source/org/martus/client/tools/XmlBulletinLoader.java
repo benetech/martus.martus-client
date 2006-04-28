@@ -144,12 +144,12 @@ public class XmlBulletinLoader extends SimpleXmlDefaultLoader
 			}
 			else if(tag.equals(TopSectionAttachmentListElementName))
 			{
-				topSectionAttachmentsList = ((FieldAttachmentSectionLoader)ended).getAttachments();
+				topSectionAttachmentsList.addAll(((FieldAttachmentSectionLoader)ended).getAttachments());
 				
 			}
 			else if(tag.equals(BottomSectionAttachmentListElementName))
 			{
-				bottomSectionAttachmentsList = ((FieldAttachmentSectionLoader)ended).getAttachments();
+				bottomSectionAttachmentsList.addAll(((FieldAttachmentSectionLoader)ended).getAttachments());
 			}
 			else
 				super.endElement(tag, ended);
