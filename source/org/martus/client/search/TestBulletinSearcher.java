@@ -167,7 +167,7 @@ public class TestBulletinSearcher extends TestCaseEnhanced
 		FieldSpec[] specs = {gridSpec};
 		
 		MartusCrypto security = MockMartusSecurity.createClient();
-		Bulletin realBulletin = new Bulletin(security, specs, StandardFieldSpecs.getDefaultPrivateFieldSpecs());
+		Bulletin realBulletin = new Bulletin(security, specs, StandardFieldSpecs.getDefaultBottomSectionFieldSpecs());
 		GridData data = new GridData(gridSpec);
 		data.addEmptyRow();
 		data.setValueAt("first row", 0, 0);
@@ -188,7 +188,7 @@ public class TestBulletinSearcher extends TestCaseEnhanced
 		MartusSearchableGridColumnField gridSecondColumn = (MartusSearchableGridColumnField)b.getPossiblyNestedField(secondColumn);
 		assertNotNull("didn't get second column?", gridSecondColumn);
 
-		Bulletin emptyBulletin = new Bulletin(security, specs, StandardFieldSpecs.getDefaultPrivateFieldSpecs());
+		Bulletin emptyBulletin = new Bulletin(security, specs, StandardFieldSpecs.getDefaultBottomSectionFieldSpecs());
 		SafeReadableBulletin eb = new SafeReadableBulletin(emptyBulletin, localization);
 		assertNull("returned searchable for empty grid?", eb.getPossiblyNestedField(firstColumn));
 		
@@ -337,7 +337,7 @@ public class TestBulletinSearcher extends TestCaseEnhanced
 			blankField,
 		};
 		
-		Bulletin b = new Bulletin(security, publicSpecs, StandardFieldSpecs.getDefaultPrivateFieldSpecs());
+		Bulletin b = new Bulletin(security, publicSpecs, StandardFieldSpecs.getDefaultBottomSectionFieldSpecs());
 		b.set("true", FieldSpec.TRUESTRING);
 		b.set("false", FieldSpec.FALSESTRING);
 		b.set("bogus", "");

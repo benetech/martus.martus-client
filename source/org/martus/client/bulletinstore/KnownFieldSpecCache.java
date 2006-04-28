@@ -328,7 +328,7 @@ public class KnownFieldSpecCache extends BulletinStoreCache implements ReadableD
 			try
 			{
 				String packetLocalId = bhp.getFieldDataPacketId();
-				FieldSpec[] defaultSpecs = StandardFieldSpecs.getDefaultPublicFieldSpecs();
+				FieldSpec[] defaultSpecs = StandardFieldSpecs.getDefaultTopSectionFieldSpecs();
 				Set packetSpecs = loadFieldSpecsForPacket(accountId, packetLocalId, status, defaultSpecs);
 				publicAndPrivateSpecs.addAll(packetSpecs);
 			}
@@ -340,7 +340,7 @@ public class KnownFieldSpecCache extends BulletinStoreCache implements ReadableD
 			try
 			{
 				String packetLocalId = bhp.getPrivateFieldDataPacketId();
-				FieldSpec[] defaultSpecs = StandardFieldSpecs.getDefaultPrivateFieldSpecs();
+				FieldSpec[] defaultSpecs = StandardFieldSpecs.getDefaultBottomSectionFieldSpecs();
 				Set packetSpecs = loadFieldSpecsForPacket(accountId, packetLocalId, status, defaultSpecs);
 				publicAndPrivateSpecs.addAll(packetSpecs);
 			}

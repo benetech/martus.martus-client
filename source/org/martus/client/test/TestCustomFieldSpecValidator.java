@@ -50,7 +50,7 @@ public class TestCustomFieldSpecValidator extends TestCaseEnhanced
 	
 	public void testAllValid() throws Exception
 	{
-		FieldSpec[] specs = StandardFieldSpecs.getDefaultPublicFieldSpecs();
+		FieldSpec[] specs = StandardFieldSpecs.getDefaultTopSectionFieldSpecs();
 		String tag = "_A.-_AllValid0123456789";
 		String label = "my Label";
 		specs = addFieldSpec(specs, LegacyCustomFields.createFromLegacy(tag+","+label));
@@ -69,7 +69,7 @@ public class TestCustomFieldSpecValidator extends TestCaseEnhanced
 	
 	public void testIllegalTagCharacters() throws Exception
 	{
-		FieldSpec[] specs = StandardFieldSpecs.getDefaultPublicFieldSpecs();
+		FieldSpec[] specs = StandardFieldSpecs.getDefaultTopSectionFieldSpecs();
 		String label = "anything";
 		String[] variousIllegalTags = {"a tag", "a&amp;b", "a=b", "a'b", ".a"};
 		for(int i=0; i < variousIllegalTags.length; ++i)
@@ -116,7 +116,7 @@ public class TestCustomFieldSpecValidator extends TestCaseEnhanced
 
 	public void testMissingTag() throws Exception
 	{
-		FieldSpec[] specs = StandardFieldSpecs.getDefaultPublicFieldSpecs();
+		FieldSpec[] specs = StandardFieldSpecs.getDefaultTopSectionFieldSpecs();
 		String label = "my Label";
 		specs = addFieldSpec(specs, LegacyCustomFields.createFromLegacy(","+label));
 		CustomFieldSpecValidator checker = new CustomFieldSpecValidator(specs);
@@ -130,7 +130,7 @@ public class TestCustomFieldSpecValidator extends TestCaseEnhanced
 
 	public void testDuplicateTags() throws Exception
 	{
-		FieldSpec[] specs = StandardFieldSpecs.getDefaultPublicFieldSpecs();
+		FieldSpec[] specs = StandardFieldSpecs.getDefaultTopSectionFieldSpecs();
 		String tag = "a";
 		String label ="b";
 		specs = addFieldSpec(specs, LegacyCustomFields.createFromLegacy(tag+","+label));
@@ -146,7 +146,7 @@ public class TestCustomFieldSpecValidator extends TestCaseEnhanced
 
 	public void testDuplicateDropDownEntry() throws Exception
 	{
-		FieldSpec[] specs = StandardFieldSpecs.getDefaultPublicFieldSpecs();
+		FieldSpec[] specs = StandardFieldSpecs.getDefaultTopSectionFieldSpecs();
 		String tag = "dd";
 		String label ="cc";
 
@@ -158,7 +158,7 @@ public class TestCustomFieldSpecValidator extends TestCaseEnhanced
 		CustomFieldSpecValidator checker = new CustomFieldSpecValidator(specs);
 		assertTrue("invalid?", checker.isValid());
 		
-		specs = StandardFieldSpecs.getDefaultPublicFieldSpecs();
+		specs = StandardFieldSpecs.getDefaultTopSectionFieldSpecs();
 		ChoiceItem[] choicesWithDuplicate = {new ChoiceItem("duplicate", "duplicate"), new ChoiceItem("duplicate", "duplicate")};
 		DropDownFieldSpec dropDownSpecWithDuplicates = new DropDownFieldSpec(choicesWithDuplicate);
 		dropDownSpecWithDuplicates.setTag(tag);
@@ -177,7 +177,7 @@ public class TestCustomFieldSpecValidator extends TestCaseEnhanced
 	{
 		String tag = "dd";
 		String label ="cc";
-		FieldSpec[] specs = StandardFieldSpecs.getDefaultPublicFieldSpecs();
+		FieldSpec[] specs = StandardFieldSpecs.getDefaultTopSectionFieldSpecs();
 
 		ChoiceItem[] choicesNoDups = {new ChoiceItem("no Dup", "first item"), new ChoiceItem("second", "second item")};
 		DropDownFieldSpec dropDownSpecNoDuplicates = new DropDownFieldSpec(choicesNoDups);
@@ -190,7 +190,7 @@ public class TestCustomFieldSpecValidator extends TestCaseEnhanced
 		CustomFieldSpecValidator checker = new CustomFieldSpecValidator(specs);
 		assertTrue("invalid?", checker.isValid());
 		
-		specs = StandardFieldSpecs.getDefaultPublicFieldSpecs();
+		specs = StandardFieldSpecs.getDefaultTopSectionFieldSpecs();
 		ChoiceItem[] choicesWithDuplicate = {new ChoiceItem("duplicate", "duplicate"), new ChoiceItem("duplicate", "duplicate")};
 		DropDownFieldSpec dropDownSpecWithDuplicates = new DropDownFieldSpec(choicesWithDuplicate);
 		GridFieldSpec gridWithDuplicateDropdownEntries = new GridFieldSpec();
@@ -210,7 +210,7 @@ public class TestCustomFieldSpecValidator extends TestCaseEnhanced
 	
 	public void testNoDropDownEntries() throws Exception
 	{
-		FieldSpec[] specs = StandardFieldSpecs.getDefaultPublicFieldSpecs();
+		FieldSpec[] specs = StandardFieldSpecs.getDefaultTopSectionFieldSpecs();
 		String tag = "dd";
 		String label ="cc";
 
@@ -231,7 +231,7 @@ public class TestCustomFieldSpecValidator extends TestCaseEnhanced
 	{
 		String tag = "dd";
 		String label ="cc";
-		FieldSpec[] specs = StandardFieldSpecs.getDefaultPublicFieldSpecs();
+		FieldSpec[] specs = StandardFieldSpecs.getDefaultTopSectionFieldSpecs();
 
 		DropDownFieldSpec dropDownSpecNoEntries = new DropDownFieldSpec();
 		GridFieldSpec gridWithNoDropdownEntries = new GridFieldSpec();
@@ -252,7 +252,7 @@ public class TestCustomFieldSpecValidator extends TestCaseEnhanced
 
 	public void testMissingCustomLabel() throws Exception
 	{
-		FieldSpec[] specs = StandardFieldSpecs.getDefaultPublicFieldSpecs();
+		FieldSpec[] specs = StandardFieldSpecs.getDefaultTopSectionFieldSpecs();
 		specs = addFieldSpec(specs, LegacyCustomFields.createFromLegacy("a,label"));
 		CustomFieldSpecValidator checker = new CustomFieldSpecValidator(specs);
 		assertTrue("not valid?", checker.isValid());
@@ -275,7 +275,7 @@ public class TestCustomFieldSpecValidator extends TestCaseEnhanced
 			"</Field></CustomFields>";
 		FieldSpec badSpec = FieldCollection.parseXml(xmlFieldUnknownType)[0]; 
 
-		FieldSpec[] specs = StandardFieldSpecs.getDefaultPublicFieldSpecs();
+		FieldSpec[] specs = StandardFieldSpecs.getDefaultTopSectionFieldSpecs();
 		specs = addFieldSpec(specs, badSpec);
 		CustomFieldSpecValidator checker = new CustomFieldSpecValidator(specs);
 		assertFalse("didn't detect unknown?", checker.isValid());
@@ -289,7 +289,7 @@ public class TestCustomFieldSpecValidator extends TestCaseEnhanced
 
 	public void testStandardFieldWithLabel() throws Exception
 	{
-		FieldSpec[] specs = StandardFieldSpecs.getDefaultPublicFieldSpecs();
+		FieldSpec[] specs = StandardFieldSpecs.getDefaultTopSectionFieldSpecs();
 		String tag = specs[3].getTag();
 		String illegal_label = "Some Label";
 		specs[3] = LegacyCustomFields.createFromLegacy(tag + ","+ illegal_label);

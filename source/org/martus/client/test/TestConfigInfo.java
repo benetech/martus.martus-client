@@ -394,7 +394,7 @@ public class TestConfigInfo extends TestCaseEnhanced
 		return outputStream.toByteArray();
 	}
 	
-	private final String defaultCustomFieldSpecs = LegacyCustomFields.buildFieldListString(StandardFieldSpecs.getDefaultPublicFieldSpecs());
+	private final String defaultCustomFieldSpecs = LegacyCustomFields.buildFieldListString(StandardFieldSpecs.getDefaultTopSectionFieldSpecs());
 
 //Version 1
 	final String sampleAuthor = "author";

@@ -53,12 +53,12 @@ public class ActionMenuCustomFields extends UiMenuAction
 		
 		MartusApp app = mainWindow.getApp();
 		ClientBulletinStore store = app.getStore();
-		FieldSpec[] existingSpecs = store.getPublicFieldSpecs();
+		FieldSpec[] existingSpecs = store.getTopSectionFieldSpecs();
 		FieldSpec[] newSpecs = getCustomizedFieldsFromUser(existingSpecs);
 		if(newSpecs == null)
 			return;
 			
-		store.setPublicFieldTags(newSpecs);
+		store.setTopSectionFieldSpecs(newSpecs);
 		app.getConfigInfo().setCustomFieldLegacySpecs(MartusConstants.deprecatedCustomFieldSpecs);
 		app.getConfigInfo().setCustomFieldTopSectionXml(new FieldCollection(newSpecs).toString());
 
@@ -88,7 +88,7 @@ public class ActionMenuCustomFields extends UiMenuAction
 			if(newCustomFieldXml.length() == 0)
 			{
 				if(mainWindow.confirmDlg("UndoCustomFields"))
-				existingFields = new FieldCollection(StandardFieldSpecs.getDefaultPublicFieldSpecs());
+				existingFields = new FieldCollection(StandardFieldSpecs.getDefaultTopSectionFieldSpecs());
 				existingCustomFieldXml = existingFields.toString();
 			}
 			else

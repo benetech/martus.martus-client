@@ -120,7 +120,7 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 		GridFieldSpec newSpec = (GridFieldSpec)FieldCollection.parseXml(xmlFieldType)[0]; 
 		FieldCollection fields = FieldCollectionForTesting.extendDefaultPublicFields(newSpec);				
 		
-		Bulletin b = new Bulletin(store.getSignatureGenerator(), fields.getSpecs(), StandardFieldSpecs.getDefaultPrivateFieldSpecs());
+		Bulletin b = new Bulletin(store.getSignatureGenerator(), fields.getSpecs(), StandardFieldSpecs.getDefaultBottomSectionFieldSpecs());
 		b.setAllPrivate(false);
 		GridData gridData = new GridData(newSpec);
 		GridRow row = new GridRow(newSpec);
@@ -304,7 +304,7 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 		FieldSpec[] extraFieldSpecs = {newSpec1, newSpec2};
 		FieldCollection fields = FieldCollectionForTesting.extendDefaultPublicFields(extraFieldSpecs);
 		
-		Bulletin b = new Bulletin(store.getSignatureGenerator(), fields.getSpecs(), StandardFieldSpecs.getDefaultPrivateFieldSpecs());
+		Bulletin b = new Bulletin(store.getSignatureGenerator(), fields.getSpecs(), StandardFieldSpecs.getDefaultBottomSectionFieldSpecs());
 		b.setAllPrivate(false);
 		
 		FieldDataPacket fdp = b.getFieldDataPacket();
@@ -361,7 +361,7 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 		FieldSpec[] extraFieldSpecs = {newSpec1, newSpec2};
 		FieldCollection fields = FieldCollectionForTesting.extendDefaultPublicFields(extraFieldSpecs);
 		
-		Bulletin b = new Bulletin(store.getSignatureGenerator(), fields.getSpecs(), StandardFieldSpecs.getDefaultPrivateFieldSpecs());
+		Bulletin b = new Bulletin(store.getSignatureGenerator(), fields.getSpecs(), StandardFieldSpecs.getDefaultBottomSectionFieldSpecs());
 		b.setAllPrivate(false);				
 										
 		b.set(customTag1, "abc");
@@ -432,7 +432,7 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 		data.setValueAt(rawDateRangeString, 0, 0);
 		
 		FieldSpec[] publicSpecs = new FieldSpec[] {gridSpec};
-		FieldSpec[] privateSpecs = StandardFieldSpecs.getDefaultPrivateFieldSpecs();
+		FieldSpec[] privateSpecs = StandardFieldSpecs.getDefaultBottomSectionFieldSpecs();
 		Bulletin b = new Bulletin(store.getSignatureGenerator(), publicSpecs, privateSpecs);
 		b.set(gridSpec.getTag(), data.getXmlRepresentation());
 		

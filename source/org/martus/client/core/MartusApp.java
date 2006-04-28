@@ -370,7 +370,7 @@ public class MartusApp
 			encryptedContactFileInputStream.close();
 			
 			FieldSpec[] specs = getCustomFieldSpecs(configInfo);
-			store.setPublicFieldTags(specs);
+			store.setTopSectionFieldSpecs(specs);
 			
 			convertLegacyHQToMultipleHQs();
 			
@@ -1278,7 +1278,7 @@ public class MartusApp
 	public FieldDataPacket retrieveFieldDataPacketFromServer(UniversalId bulletinId, String dataPacketLocalId) throws Exception
 	{
 		UniversalId packetUid = UniversalId.createFromAccountAndLocalId(bulletinId.getAccountId(), dataPacketLocalId);
-		FieldDataPacket fdp = new FieldDataPacket(packetUid, StandardFieldSpecs.getDefaultPublicFieldSpecs());
+		FieldDataPacket fdp = new FieldDataPacket(packetUid, StandardFieldSpecs.getDefaultTopSectionFieldSpecs());
 		populatePacketFromServer(fdp, bulletinId.getLocalId());
 		return fdp;
 	}

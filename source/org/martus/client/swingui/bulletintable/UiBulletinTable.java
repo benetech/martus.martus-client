@@ -333,16 +333,16 @@ public class UiBulletinTable extends UiTable implements ListSelectionListener, D
 			return original;
 		if(confirmUpdateFieldsDlg("UseBulletinsDraftCustomFields"))
 			return original;
-		FieldSpec[] publicFieldSpecsToUse = store.getPublicFieldSpecs();
-		FieldSpec[] privateFieldSpecsToUse = store.getPrivateFieldSpecs();
+		FieldSpec[] publicFieldSpecsToUse = store.getTopSectionFieldSpecs();
+		FieldSpec[] privateFieldSpecsToUse = store.getBottomSectionFieldSpecs();
 		return store.createDraftClone(original, publicFieldSpecsToUse, privateFieldSpecsToUse);
 	}
 
 	private Bulletin createCloneAndUpdateFieldSpecsIfNecessary(Bulletin original) throws Exception
 	{
 		ClientBulletinStore store = mainWindow.getApp().getStore();
-		FieldSpec[] publicFieldSpecsToUse = store.getPublicFieldSpecs();
-		FieldSpec[] privateFieldSpecsToUse = store.getPrivateFieldSpecs();
+		FieldSpec[] publicFieldSpecsToUse = store.getTopSectionFieldSpecs();
+		FieldSpec[] privateFieldSpecsToUse = store.getBottomSectionFieldSpecs();
 		if(!store.bulletinHasCurrentFieldSpecs(original))
 		{
 			if(confirmUpdateFieldsDlg("UseBulletinsCustomFields"))

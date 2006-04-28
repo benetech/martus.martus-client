@@ -63,7 +63,7 @@ public class TestCustomFieldTemplate extends TestCaseEnhanced
 	
 	public void testValidateXml() throws Exception
 	{
-		FieldCollection defaultFields = new FieldCollection(StandardFieldSpecs.getDefaultPublicFieldSpecs());
+		FieldCollection defaultFields = new FieldCollection(StandardFieldSpecs.getDefaultTopSectionFieldSpecs());
 		CustomFieldTemplate template = new CustomFieldTemplate();
 		assertTrue("not valid?", template.isvalidTemplateXml(defaultFields.toString()));
 		assertEquals(0, template.getErrors().size());
@@ -82,7 +82,7 @@ public class TestCustomFieldTemplate extends TestCaseEnhanced
 		exportFile.delete();
 		assertFalse(exportFile.exists());
 
-		FieldCollection defaultFields = new FieldCollection(StandardFieldSpecs.getDefaultPublicFieldSpecs());
+		FieldCollection defaultFields = new FieldCollection(StandardFieldSpecs.getDefaultTopSectionFieldSpecs());
 		assertTrue(template.ExportTemplate(security, exportFile, defaultFields.toString()));
 		assertTrue(exportFile.exists());
 		exportFile.delete();
@@ -97,7 +97,7 @@ public class TestCustomFieldTemplate extends TestCaseEnhanced
 	
 	public void testImportXml() throws Exception
 	{
-		FieldCollection fields = new FieldCollection(StandardFieldSpecs.getDefaultPublicFieldSpecs());
+		FieldCollection fields = new FieldCollection(StandardFieldSpecs.getDefaultTopSectionFieldSpecs());
 		CustomFieldTemplate template = new CustomFieldTemplate();
 		File exportFile = createTempFileFromName("$$$testExportXml");
 		exportFile.delete();

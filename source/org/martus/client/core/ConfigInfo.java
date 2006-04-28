@@ -127,7 +127,7 @@ public class ConfigInfo
 		sendContactInfoToServer = false;
 		mustAskUserToSendToServer = false;
 		serverCompliance = "";
-		customFieldLegacySpecs = LegacyCustomFields.buildFieldListString(StandardFieldSpecs.getDefaultPublicFieldSpecs());
+		customFieldLegacySpecs = LegacyCustomFields.buildFieldListString(StandardFieldSpecs.getDefaultTopSectionFieldSpecs());
 		customFieldTopSectionXml = "";
 		forceBulletinsAllPrivate = false;
 		backedUpKeypairEncrypted = false;
