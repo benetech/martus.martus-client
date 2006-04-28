@@ -53,14 +53,17 @@ public class ActionMenuCustomFields extends UiMenuAction
 		
 		MartusApp app = mainWindow.getApp();
 		ClientBulletinStore store = app.getStore();
-		FieldSpec[] existingSpecs = store.getTopSectionFieldSpecs();
-		FieldSpec[] newSpecs = getCustomizedFieldsFromUser(existingSpecs);
+		BulletinFieldSpecs existingSpecs = new BulletinFieldSpecs();
+		existingSpecs.setTopSectionSpecs(store.getTopSectionFieldSpecs());
+		existingSpecs.setBottomSectionSpecs(store.getBottomSectionFieldSpecs());
+		
+		BulletinFieldSpecs newSpecs = getCustomizedFieldsFromUser(existingSpecs);
 		if(newSpecs == null)
 			return;
 			
-		store.setTopSectionFieldSpecs(newSpecs);
+		store.setTopSectionFieldSpecs(newSpecs.getTopSectionSpecs());
 		app.getConfigInfo().setCustomFieldLegacySpecs(MartusConstants.deprecatedCustomFieldSpecs);
-		app.getConfigInfo().setCustomFieldTopSectionXml(new FieldCollection(newSpecs).toString());
+		app.getConfigInfo().setCustomFieldTopSectionXml(new FieldCollection(newSpecs.getTopSectionSpecs()).toString());
 
 		try
 		{
@@ -72,13 +75,13 @@ public class ActionMenuCustomFields extends UiMenuAction
 		}
 	}
 
-	private FieldSpec[] getCustomizedFieldsFromUser(FieldSpec[] existingSpecs)
+	private BulletinFieldSpecs getCustomizedFieldsFromUser(BulletinFieldSpecs existingSpecs)
 	{
-		FieldCollection existingFields = new FieldCollection(existingSpecs);
-		String existingCustomFieldXml = existingFields.toString();
+		FieldCollection existingTopSectionFieldSpecs = new FieldCollection(existingSpecs.getTopSectionSpecs());
+		String existingCustomTopSectionFieldXml = existingTopSectionFieldSpecs.toString();
 		while(true)
 		{
-			UiCustomFieldsDlg inputDlg = new UiCustomFieldsDlg(mainWindow, existingCustomFieldXml);
+			UiCustomFieldsDlg inputDlg = new UiCustomFieldsDlg(mainWindow, existingCustomTopSectionFieldXml);
 			inputDlg.setFocusToInputField();
 			inputDlg.setVisible(true);
 			String newCustomFieldXml = inputDlg.getResult();
@@ -88,25 +91,58 @@ public class ActionMenuCustomFields extends UiMenuAction
 			if(newCustomFieldXml.length() == 0)
 			{
 				if(mainWindow.confirmDlg("UndoCustomFields"))
-				existingFields = new FieldCollection(StandardFieldSpecs.getDefaultTopSectionFieldSpecs());
-				existingCustomFieldXml = existingFields.toString();
+				existingTopSectionFieldSpecs = new FieldCollection(StandardFieldSpecs.getDefaultTopSectionFieldSpecs());
+				existingCustomTopSectionFieldXml = existingTopSectionFieldSpecs.toString();
 			}
 			else
 			{
-				FieldSpec[] newSpecs = null;
+				FieldSpec[] newTopSectionSpecs = null;
 				try
 				{
-					newSpecs = FieldCollection.parseXml(newCustomFieldXml);
+					newTopSectionSpecs = FieldCollection.parseXml(newCustomFieldXml);
 				}
 				catch(CustomFieldsParseException e)
 				{
 					e.printStackTrace();
 				}
-				return newSpecs;
+				BulletinFieldSpecs newFieldSpecs = new BulletinFieldSpecs();
+				newFieldSpecs.setTopSectionSpecs(newTopSectionSpecs);
+				//TODO implement realBottomSectionFieldSpecs
+				newFieldSpecs.setBottomSectionSpecs(existingSpecs.getBottomSectionSpecs());
+				return newFieldSpecs;
 			}
 		}
 	}
 	
+	class BulletinFieldSpecs
+	{
+		public BulletinFieldSpecs()
+		{
+		}
+		
+		public FieldSpec[] getTopSectionSpecs()
+		{
+			return topSectionSpecs;
+		}
+
+		public FieldSpec[] getBottomSectionSpecs()
+		{
+			return bottomSectionSpecs;
+		}
+		
+		public void setTopSectionSpecs(FieldSpec[] topSectionSpecsToUse)
+		{
+			topSectionSpecs = topSectionSpecsToUse;
+		}
+
+		public void setBottomSectionSpecs(FieldSpec[] bottomSectionSpecsToUse)
+		{
+			bottomSectionSpecs = bottomSectionSpecsToUse;
+		}
+
+		private FieldSpec[] topSectionSpecs;
+		private FieldSpec[] bottomSectionSpecs ;
+	}
 
 	
 }
