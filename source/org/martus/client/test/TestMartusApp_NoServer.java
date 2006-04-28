@@ -1604,13 +1604,13 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		assertEquals(0, store.findFolder(store.getSearchFolderName()).getBulletinCount());
 		
 		String newString = "bilbo";
-		Bulletin b2 = store.createNewDraft(b1, b1.getPublicFieldSpecs(), b1.getPrivateFieldSpecs());
+		Bulletin b2 = store.createNewDraft(b1, b1.getTopSectionFieldSpecs(), b1.getBottomSectionFieldSpecs());
 		b2.set(Bulletin.TAGPRIVATEINFO, newString);
 		String publicData2 = "publicData2";
 		b2.set(Bulletin.TAGPUBLICINFO, publicData2);
 		b2.setSealed();
 		appWithAccount.saveBulletin(b2, newFolder);
-		Bulletin b3 = store.createNewDraft(b2, b2.getPublicFieldSpecs(), b2.getPrivateFieldSpecs());
+		Bulletin b3 = store.createNewDraft(b2, b2.getTopSectionFieldSpecs(), b2.getBottomSectionFieldSpecs());
 		b3.set(Bulletin.TAGPUBLICINFO, "");
 		appWithAccount.saveBulletin(b3, newFolder);
 

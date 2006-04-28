@@ -235,8 +235,8 @@ public class TestClientBulletinStore extends TestCaseEnhanced
 	    	assertEquals("no data?", original.get(Bulletin.TAGTITLE), clone.get(Bulletin.TAGTITLE));
 	    	assertEquals("Did not kept hq?", 1, clone.getAuthorizedToReadKeys().size());
 	    	assertTrue("not draft?", clone.isDraft());
-	    	assertEquals("wrong public field specs?", customPublicSpecs.length, clone.getPublicFieldSpecs().length);
-	    	assertEquals("wrong private field specs?", customPrivateSpecs.length, clone.getPrivateFieldSpecs().length);
+	    	assertEquals("wrong public field specs?", customPublicSpecs.length, clone.getTopSectionFieldSpecs().length);
+	    	assertEquals("wrong private field specs?", customPrivateSpecs.length, clone.getBottomSectionFieldSpecs().length);
 	    	BulletinHistory history = clone.getHistory();
 			assertEquals("no history?", 1, history.size());
 	    	assertEquals("wrong ancestor?", original.getLocalId(), history.get(0));
@@ -255,8 +255,8 @@ public class TestClientBulletinStore extends TestCaseEnhanced
 	    	assertEquals("no data?", original.get(Bulletin.TAGTITLE), clone.get(Bulletin.TAGTITLE));
 	    	assertEquals("did not keep hq?", 1, clone.getAuthorizedToReadKeys().size());
 	    	assertTrue("not draft?", clone.isDraft());
-	    	assertEquals("wrong public field specs?", customPublicSpecs.length, clone.getPublicFieldSpecs().length);
-	    	assertEquals("wrong private field specs?", customPrivateSpecs.length, clone.getPrivateFieldSpecs().length);
+	    	assertEquals("wrong public field specs?", customPublicSpecs.length, clone.getTopSectionFieldSpecs().length);
+	    	assertEquals("wrong private field specs?", customPrivateSpecs.length, clone.getBottomSectionFieldSpecs().length);
 	    	BulletinHistory history = clone.getHistory();
 			assertEquals("has history?", 0, history.size());
     	}
@@ -269,16 +269,16 @@ public class TestClientBulletinStore extends TestCaseEnhanced
     	originalBulletin.setDraft();
     	{
     		Bulletin newFieldSpecsBulletin = testStore.createDraftClone(originalBulletin, customPublicSpecs, customPrivateSpecs);
-	    	assertEquals("wrong public field specs for untouched original?", StandardFieldSpecs.getDefaultTopSectionFieldSpecs().length, originalBulletin.getPublicFieldSpecs().length);
-	    	assertEquals("wrong private field specs for untouched original?", StandardFieldSpecs.getDefaultBottomSectionFieldSpecs().length, originalBulletin.getPrivateFieldSpecs().length);
+	    	assertEquals("wrong public field specs for untouched original?", StandardFieldSpecs.getDefaultTopSectionFieldSpecs().length, originalBulletin.getTopSectionFieldSpecs().length);
+	    	assertEquals("wrong private field specs for untouched original?", StandardFieldSpecs.getDefaultBottomSectionFieldSpecs().length, originalBulletin.getBottomSectionFieldSpecs().length);
 	    	assertEquals("wrong account?", testStore.getAccountId(), newFieldSpecsBulletin.getAccount());
 	    	assertEquals("not same local id?", id, newFieldSpecsBulletin.getLocalId());
 	    	assertEquals("no public data?", PUBLIC_DATA, newFieldSpecsBulletin.get(Bulletin.TAGTITLE));
 	    	assertEquals("no private data?", PRIVATE_DATA, newFieldSpecsBulletin.get(Bulletin.TAGAUTHOR));
 	    	assertEquals("did not keep hq?", 1, newFieldSpecsBulletin.getAuthorizedToReadKeys().size());
 	    	assertTrue("not draft?", newFieldSpecsBulletin.isDraft());
-	    	assertEquals("wrong public field specs?", customPublicSpecs.length, newFieldSpecsBulletin.getPublicFieldSpecs().length);
-	    	assertEquals("wrong private field specs?", customPrivateSpecs.length, newFieldSpecsBulletin.getPrivateFieldSpecs().length);
+	    	assertEquals("wrong public field specs?", customPublicSpecs.length, newFieldSpecsBulletin.getTopSectionFieldSpecs().length);
+	    	assertEquals("wrong private field specs?", customPrivateSpecs.length, newFieldSpecsBulletin.getBottomSectionFieldSpecs().length);
 	    	BulletinHistory history = newFieldSpecsBulletin.getHistory();
 			assertEquals("has history?", 0, history.size());
     	}
@@ -297,8 +297,8 @@ public class TestClientBulletinStore extends TestCaseEnhanced
 	    	assertEquals("no data?", original.get(Bulletin.TAGTITLE), clone.get(Bulletin.TAGTITLE));
 	    	assertEquals("Did not keep hq?", 1, clone.getAuthorizedToReadKeys().size());
 	    	assertTrue("not draft?", clone.isDraft());
-	    	assertEquals("wrong public field specs?", customPublicSpecs.length, clone.getPublicFieldSpecs().length);
-	    	assertEquals("wrong private field specs?", customPrivateSpecs.length, clone.getPrivateFieldSpecs().length);
+	    	assertEquals("wrong public field specs?", customPublicSpecs.length, clone.getTopSectionFieldSpecs().length);
+	    	assertEquals("wrong private field specs?", customPrivateSpecs.length, clone.getBottomSectionFieldSpecs().length);
 	    	assertEquals("has history?", 0, clone.getHistory().size());
     	}
 	}

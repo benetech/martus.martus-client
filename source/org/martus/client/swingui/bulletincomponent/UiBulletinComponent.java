@@ -76,8 +76,8 @@ abstract public class UiBulletinComponent extends UiParagraphPanel implements Sc
 	public void createSections()
 	{
 		headerSection = createHeaderSection();
-		publicSection = createDataSection(currentBulletin.getPublicFieldSpecs(), SOMETIMES_ENCRYPTED);
-		privateSection = createDataSection(currentBulletin.getPrivateFieldSpecs(), ALWAYS_ENCRYPTED);
+		publicSection = createDataSection(currentBulletin.getTopSectionFieldSpecs(), SOMETIMES_ENCRYPTED);
+		privateSection = createDataSection(currentBulletin.getBottomSectionFieldSpecs(), ALWAYS_ENCRYPTED);
 		headquartersSection = createHeadQuartersSection();
 		
 		ensureSectionsLineUp();

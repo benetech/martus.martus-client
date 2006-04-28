@@ -1410,7 +1410,7 @@ public class ClientBulletinStore extends BulletinStore
 	
 	public boolean bulletinHasCurrentFieldSpecs(Bulletin b)
 	{
-		return Arrays.equals(b.getPublicFieldSpecs(), getTopSectionFieldSpecs());
+		return Arrays.equals(b.getTopSectionFieldSpecs(), getTopSectionFieldSpecs());
 	}
 
 	public Bulletin createEmptyBulletin()
@@ -1426,9 +1426,9 @@ public class ClientBulletinStore extends BulletinStore
 	
 	public Bulletin createEmptyClone(Bulletin original) throws Exception 
 	{
-		FieldSpec[] publicSpecs = original.getPublicFieldSpecs();
-		FieldSpec[] privateSpecs = original.getPrivateFieldSpecs();
-		return createEmptyCloneWithFields(original, publicSpecs, privateSpecs);
+		FieldSpec[] topSectionSpecs = original.getTopSectionFieldSpecs();
+		FieldSpec[] bottomSectionSpecs = original.getBottomSectionFieldSpecs();
+		return createEmptyCloneWithFields(original, topSectionSpecs, bottomSectionSpecs);
 	}
 
 	public Bulletin createEmptyCloneWithFields(Bulletin original, FieldSpec[] publicSpecs, FieldSpec[] privateSpecs)

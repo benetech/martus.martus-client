@@ -347,8 +347,8 @@ public class UiBulletinTable extends UiTable implements ListSelectionListener, D
 		{
 			if(confirmUpdateFieldsDlg("UseBulletinsCustomFields"))
 			{
-				publicFieldSpecsToUse = original.getPublicFieldSpecs();
-				privateFieldSpecsToUse = original.getPrivateFieldSpecs();
+				publicFieldSpecsToUse = original.getTopSectionFieldSpecs();
+				privateFieldSpecsToUse = original.getBottomSectionFieldSpecs();
 			}
 		}
 

@@ -111,7 +111,7 @@ public class BulletinXmlExporter
 		if(includePrivateData || !b.isAllPrivate())
 		{
 			dest.write(MartusXml.getTagStart(PublicDataElementName));
-			writeFields(dest, b, b.getPublicFieldSpecs());
+			writeFields(dest, b, b.getTopSectionFieldSpecs());
 			writeAttachments(dest, b.getPublicAttachments());
 			dest.write(MartusXml.getTagEnd(PublicDataElementName));
 		}
@@ -119,7 +119,7 @@ public class BulletinXmlExporter
 		if(includePrivateData)
 		{
 			dest.write(MartusXml.getTagStart(PrivateDataElementName));
-			writeFields(dest, b, b.getPrivateFieldSpecs());
+			writeFields(dest, b, b.getBottomSectionFieldSpecs());
 			writeAttachments(dest, b.getPrivateAttachments());
 			dest.write(MartusXml.getTagEnd(PrivateDataElementName));
 		}

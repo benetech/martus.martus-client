@@ -105,8 +105,8 @@ public class KnownFieldSpecCache extends BulletinStoreCache implements ReadableD
 	public void revisionWasSaved(Bulletin b)
 	{
 		Set publicAndPrivateSpecs = new HashSet();
-		publicAndPrivateSpecs.addAll(arrayToSet(b.getPublicFieldSpecs()));
-		publicAndPrivateSpecs.addAll(arrayToSet(b.getPrivateFieldSpecs()));
+		publicAndPrivateSpecs.addAll(arrayToSet(b.getTopSectionFieldSpecs()));
+		publicAndPrivateSpecs.addAll(arrayToSet(b.getBottomSectionFieldSpecs()));
 		setSpecs(b.getUniversalId(), publicAndPrivateSpecs);
 	}
 
