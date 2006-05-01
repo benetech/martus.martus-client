@@ -37,6 +37,8 @@ import org.martus.common.fieldspec.CustomFieldSpecValidator;
 import org.martus.common.fieldspec.DropDownFieldSpec;
 import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.fieldspec.FieldType;
+import org.martus.common.fieldspec.FieldTypeDate;
+import org.martus.common.fieldspec.FieldTypeLanguage;
 import org.martus.common.fieldspec.FieldTypeNormal;
 import org.martus.common.fieldspec.GridFieldSpec;
 import org.martus.common.fieldspec.StandardFieldSpecs;
@@ -155,39 +157,47 @@ public class TestCustomFieldSpecValidator extends TestCaseEnhanced
 		String tagStatus = BulletinConstants.TAGSTATUS;
 		String labelStatus ="status";
 		specsTopSection = addFieldSpec(specsTopSection, LegacyCustomFields.createFromLegacy(tagStatus+","+labelStatus));
-		specsBottomSection = addFieldSpec(specsBottomSection, LegacyCustomFields.createFromLegacy(tagStatus+","+labelStatus));
 		
 		String tagSent = BulletinConstants.TAGWASSENT;
 		String labelSent ="sent";
 		specsTopSection = addFieldSpec(specsTopSection, LegacyCustomFields.createFromLegacy(tagSent+","+labelSent));
-		specsBottomSection = addFieldSpec(specsBottomSection, LegacyCustomFields.createFromLegacy(tagSent+","+labelSent));
 		
 		String tagSaved = BulletinConstants.TAGLASTSAVED;
 		String labelSaved ="saved";
 		specsTopSection = addFieldSpec(specsTopSection, LegacyCustomFields.createFromLegacy(tagSaved+","+labelSaved));
-		specsBottomSection = addFieldSpec(specsBottomSection, LegacyCustomFields.createFromLegacy(tagSaved+","+labelSaved));
-		
+
 		CustomFieldSpecValidator checker = new CustomFieldSpecValidator(specsTopSection, specsBottomSection);
 		assertFalse("valid?", checker.isValid());
 		Vector errors = checker.getAllErrors();
-		assertEquals("Should have found 6 errors", 6 , errors.size());
+		assertEquals("Should have found 3 errors", 3 , errors.size());
 		verifyExpectedError("Reserved Fields", CustomFieldError.CODE_RESERVED_TAG, tagStatus, labelStatus, null, (CustomFieldError)errors.get(0));
 		verifyExpectedError("Reserved Fields", CustomFieldError.CODE_RESERVED_TAG, tagSent, labelSent, null, (CustomFieldError)errors.get(1));
 		verifyExpectedError("Reserved Fields", CustomFieldError.CODE_RESERVED_TAG, tagSaved, labelSaved, null, (CustomFieldError)errors.get(2));
 		
-		verifyExpectedError("Reserved Fields Bottom Section", CustomFieldError.CODE_RESERVED_TAG, tagStatus, labelStatus, null, (CustomFieldError)errors.get(3));
-		verifyExpectedError("Reserved Fields Bottom Section", CustomFieldError.CODE_RESERVED_TAG, tagSent, labelSent, null, (CustomFieldError)errors.get(4));
-		verifyExpectedError("Reserved Fields Bottom Section", CustomFieldError.CODE_RESERVED_TAG, tagSaved, labelSaved, null, (CustomFieldError)errors.get(5));
+		
+		specsTopSection = StandardFieldSpecs.getDefaultTopSectionFieldSpecs();
+		specsBottomSection = addFieldSpec(specsBottomSection, LegacyCustomFields.createFromLegacy(tagStatus+","+labelStatus));
+		specsBottomSection = addFieldSpec(specsBottomSection, LegacyCustomFields.createFromLegacy(tagSent+","+labelSent));
+		specsBottomSection = addFieldSpec(specsBottomSection, LegacyCustomFields.createFromLegacy(tagSaved+","+labelSaved));
+
+		checker = new CustomFieldSpecValidator(specsTopSection, specsBottomSection);
+		assertFalse("valid?", checker.isValid());
+		errors = checker.getAllErrors();
+		assertEquals("Should have found 3 errors", 3 , errors.size());
+		verifyExpectedError("Reserved Fields Bottom Section", CustomFieldError.CODE_RESERVED_TAG, tagStatus, labelStatus, null, (CustomFieldError)errors.get(0));
+		verifyExpectedError("Reserved Fields Bottom Section", CustomFieldError.CODE_RESERVED_TAG, tagSent, labelSent, null, (CustomFieldError)errors.get(1));
+		verifyExpectedError("Reserved Fields Bottom Section", CustomFieldError.CODE_RESERVED_TAG, tagSaved, labelSaved, null, (CustomFieldError)errors.get(2));
 	}
 
 	public void testMartusFieldsInBottomSection() throws Exception
 	{
-		FieldSpec[] specsTopSection = StandardFieldSpecs.getDefaultTopSectionFieldSpecs();
-		CustomFieldSpecValidator checker = new CustomFieldSpecValidator(specsTopSection, specsTopSection);
+		FieldSpec[] specsTopSection = getRequiredOnlyTopSectionFieldSpecs();
+		FieldSpec[] specsBottomSection = getAllNonRequiredMartusFieldSpecs();
+		CustomFieldSpecValidator checker = new CustomFieldSpecValidator(specsTopSection, specsBottomSection);
 		assertFalse("Valid?", checker.isValid());
 		Vector errors = checker.getAllErrors();
-		int numberOfMartusFields = 10;
-		assertEquals("Should require 10 fields", numberOfMartusFields, errors.size());
+		int numberOfMartusFields = 6;
+		assertEquals("Should require 6 fields", numberOfMartusFields, errors.size());
 		for (int i = 0; i<numberOfMartusFields; ++i)
 		{
 			assertEquals("Incorrect Error code required "+i, CustomFieldError.CODE_MARTUS_FIELD_IN_BOTTOM_SECTION, ((CustomFieldError)errors.get(i)).getCode());
@@ -197,13 +207,9 @@ public class TestCustomFieldSpecValidator extends TestCaseEnhanced
 		{
 			errorFields.add(((CustomFieldError)errors.get(i)).getTag());
 		}
-		assertContains(BulletinConstants.TAGLANGUAGE, errorFields);
-		assertContains(BulletinConstants.TAGAUTHOR, errorFields);
 		assertContains(BulletinConstants.TAGORGANIZATION, errorFields);
-		assertContains(BulletinConstants.TAGTITLE, errorFields);
 		assertContains(BulletinConstants.TAGLOCATION, errorFields);
 		assertContains(BulletinConstants.TAGEVENTDATE, errorFields);
-		assertContains(BulletinConstants.TAGENTRYDATE, errorFields);
 		assertContains(BulletinConstants.TAGKEYWORDS, errorFields);
 		assertContains(BulletinConstants.TAGSUMMARY, errorFields);
 		assertContains(BulletinConstants.TAGPUBLICINFO, errorFields);
@@ -244,6 +250,16 @@ public class TestCustomFieldSpecValidator extends TestCaseEnhanced
 		verifyExpectedError("Duplicate Tags Bottom Section", CustomFieldError.CODE_DUPLICATE_FIELD, tag2, label2, null, (CustomFieldError)errors.get(1));
 
 		//TODO duplicate tag from top found in bottom
+		specsTopSection = StandardFieldSpecs.getDefaultTopSectionFieldSpecs();
+		specsBottomSection = StandardFieldSpecs.getDefaultBottomSectionFieldSpecs();
+		specsTopSection = addFieldSpec(specsTopSection, LegacyCustomFields.createFromLegacy(tag+","+label));
+		specsBottomSection = addFieldSpec(specsBottomSection, LegacyCustomFields.createFromLegacy(tag+","+label));
+		checker = new CustomFieldSpecValidator(specsTopSection, specsBottomSection);
+		assertFalse("valid?", checker.isValid());
+		errors = checker.getAllErrors();
+		assertEquals("Should have 1 error", 1, errors.size());
+		verifyExpectedError("Duplicate Tags not found in Bottom?", CustomFieldError.CODE_DUPLICATE_FIELD, tag, label, null, (CustomFieldError)errors.get(0));
+		
 	}
 
 	public void testDuplicateDropDownEntry() throws Exception
@@ -521,4 +537,34 @@ public class TestCustomFieldSpecValidator extends TestCaseEnhanced
 			assertEquals("Incorrect type: " + reportingErrorMsg , FieldSpec.getTypeString(expectedType), errorToVerify.getType());
 	}
 
+	public static FieldSpec[] getRequiredOnlyTopSectionFieldSpecs()
+	{
+		FieldSpec[] requiredOnlyTopSectionFieldSpecs = new FieldSpec[] 
+			{
+				FieldSpec.createStandardField(BulletinConstants.TAGLANGUAGE, new FieldTypeLanguage()),
+				FieldSpec.createStandardField(BulletinConstants.TAGAUTHOR, new FieldTypeNormal()),
+				FieldSpec.createStandardField(BulletinConstants.TAGTITLE, new FieldTypeNormal()),
+				FieldSpec.createStandardField(BulletinConstants.TAGENTRYDATE, new FieldTypeDate()),
+			};
+		
+		return requiredOnlyTopSectionFieldSpecs;
+		
+	}
+	
+	public static FieldSpec[] getAllNonRequiredMartusFieldSpecs()
+	{
+		FieldSpec[] allNonRequiredMartusFieldSpecs = new FieldSpec[] 
+			{
+				FieldSpec.createStandardField(BulletinConstants.TAGORGANIZATION, new FieldTypeLanguage()),
+				FieldSpec.createStandardField(BulletinConstants.TAGLOCATION, new FieldTypeNormal()),
+				FieldSpec.createStandardField(BulletinConstants.TAGKEYWORDS, new FieldTypeNormal()),
+				FieldSpec.createStandardField(BulletinConstants.TAGEVENTDATE, new FieldTypeDate()),
+				FieldSpec.createStandardField(BulletinConstants.TAGSUMMARY, new FieldTypeDate()),
+				FieldSpec.createStandardField(BulletinConstants.TAGPUBLICINFO, new FieldTypeDate()),
+			};
+		
+		return allNonRequiredMartusFieldSpecs;
+		
+	}
+	
 }
