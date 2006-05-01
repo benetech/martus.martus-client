@@ -118,7 +118,7 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 				"</GridSpecDetails>" +
 				"</Field></CustomFields>";
 		GridFieldSpec newSpec = (GridFieldSpec)FieldCollection.parseXml(xmlFieldType)[0]; 
-		FieldCollection fields = FieldCollectionForTesting.extendDefaultTopSectionFields(newSpec);				
+		FieldCollection fields = FieldCollectionForTesting.extendFields(StandardFieldSpecs.getDefaultTopSectionFieldSpecs(), newSpec);				
 		
 		Bulletin b = new Bulletin(store.getSignatureGenerator(), fields.getSpecs(), StandardFieldSpecs.getDefaultBottomSectionFieldSpecs());
 		b.setAllPrivate(false);
@@ -302,7 +302,7 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 			"<Label>" + label2 + "</Label></Field></CustomFields>";
 		FieldSpec newSpec2 = FieldCollection.parseXml(xmlFieldType)[0]; 
 		FieldSpec[] extraFieldSpecs = {newSpec1, newSpec2};
-		FieldCollection fields = FieldCollectionForTesting.extendDefaultTopSectionFields(extraFieldSpecs);
+		FieldCollection fields = FieldCollectionForTesting.extendFields(StandardFieldSpecs.getDefaultTopSectionFieldSpecs(), extraFieldSpecs);
 		
 		Bulletin b = new Bulletin(store.getSignatureGenerator(), fields.getSpecs(), StandardFieldSpecs.getDefaultBottomSectionFieldSpecs());
 		b.setAllPrivate(false);
@@ -359,7 +359,7 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 		FieldSpec newSpec2 = FieldCollection.parseXml(xmlFieldType)[0]; 
 
 		FieldSpec[] extraFieldSpecs = {newSpec1, newSpec2};
-		FieldCollection fields = FieldCollectionForTesting.extendDefaultTopSectionFields(extraFieldSpecs);
+		FieldCollection fields = FieldCollectionForTesting.extendFields(StandardFieldSpecs.getDefaultTopSectionFieldSpecs(), extraFieldSpecs);
 		
 		Bulletin b = new Bulletin(store.getSignatureGenerator(), fields.getSpecs(), StandardFieldSpecs.getDefaultBottomSectionFieldSpecs());
 		b.setAllPrivate(false);				

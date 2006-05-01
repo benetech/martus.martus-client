@@ -79,7 +79,7 @@ public class XmlBulletinsFileLoader extends SimpleXmlDefaultLoader
 			fieldTagValuesMap = currentBulletinLoader.getFieldTagValuesMap();
 			topSectionAttachments = currentBulletinLoader.getTopSectionAttachments();
 			bottomSectionAttachments = currentBulletinLoader.getBottomSectionAttachments();
-			validateMainFields(mainFields);
+			validateMainFields(mainFields, privateFields);
 			if(didFieldSpecVerificationErrorOccur())
 				return;
 			
@@ -225,9 +225,9 @@ public class XmlBulletinsFileLoader extends SimpleXmlDefaultLoader
 		return xmlValue;
 	}
 
-	private void validateMainFields(FieldCollection fields)
+	private void validateMainFields(FieldCollection fieldsTopSection, FieldCollection fieldsBottomSection)
 	{
-		CustomFieldSpecValidator validator = new CustomFieldSpecValidator(fields);
+		CustomFieldSpecValidator validator = new CustomFieldSpecValidator(fieldsTopSection, fieldsBottomSection);
 		for (Iterator iter = fieldTagValuesMap.entrySet().iterator(); iter.hasNext();)
 		{
 			Map.Entry element = (Map.Entry) iter.next();

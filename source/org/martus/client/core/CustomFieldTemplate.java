@@ -38,6 +38,7 @@ import org.martus.common.crypto.MartusCrypto.MartusSignatureException;
 import org.martus.common.fieldspec.CustomFieldError;
 import org.martus.common.fieldspec.CustomFieldSpecValidator;
 import org.martus.common.fieldspec.FieldSpec;
+import org.martus.common.fieldspec.StandardFieldSpecs;
 
 public class CustomFieldTemplate
 {
@@ -64,7 +65,9 @@ public class CustomFieldTemplate
 			in.close();
 			byte[] xmlBytes = security.extractFromSignedBundle(dataBundle, authroizedKeys);
 			String templateXMLToImport = new String(xmlBytes, "UTF-8");
-			if(isvalidTemplateXml(templateXMLToImport))
+			//TODO: Use real private section
+			FieldCollection defaultBottomFields = new FieldCollection(StandardFieldSpecs.getDefaultBottomSectionFieldSpecs());
+			if(isvalidTemplateXml(templateXMLToImport, defaultBottomFields.toString()))
 			{
 				xmlImportedText = templateXMLToImport;
 				return true;
@@ -89,7 +92,9 @@ public class CustomFieldTemplate
 	public boolean ExportTemplate(MartusCrypto security, File fileToExportXml, String xmlToExport)
 	{
 		clearData();
-		if(!isvalidTemplateXml(xmlToExport))
+		//TODO: Export real private section
+		FieldCollection defaultBottomFields = new FieldCollection(StandardFieldSpecs.getDefaultBottomSectionFieldSpecs());
+		if(!isvalidTemplateXml(xmlToExport, defaultBottomFields.toString()))
 			return false;
 		try
 		{
@@ -107,12 +112,13 @@ public class CustomFieldTemplate
 		return false;
 	}
 	
-	public boolean isvalidTemplateXml(String xmlToValidate)
+	public boolean isvalidTemplateXml(String xmlToValidateTopSection, String xmlToValidateBottomSection)
 	{
 		try
 		{
-			FieldSpec[] newSpecs = FieldCollection.parseXml(xmlToValidate);
-			CustomFieldSpecValidator checker = new CustomFieldSpecValidator(newSpecs);
+			FieldSpec[] newSpecsTopSection = FieldCollection.parseXml(xmlToValidateTopSection);
+			FieldSpec[] newSpecsBottomSection = FieldCollection.parseXml(xmlToValidateBottomSection);
+			CustomFieldSpecValidator checker = new CustomFieldSpecValidator(newSpecsTopSection, newSpecsBottomSection);
 			if(checker.isValid())
 				return true;
 			errors.addAll(checker.getAllErrors());
