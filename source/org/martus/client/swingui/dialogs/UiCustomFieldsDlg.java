@@ -133,11 +133,9 @@ public class UiCustomFieldsDlg extends JDialog
 	{
 		public void actionPerformed(ActionEvent ae)
 		{
-			if(!validateXml(topSectionXmlTextArea.getText()))
+			if(!validateXml(topSectionXmlTextArea.getText(), bottomSectionXmlTextArea.getText()))
 				return;
 			topSecionXmlResult = topSectionXmlTextArea.getText();
-			if(!validateXml(bottomSectionXmlTextArea.getText()))
-				return;
 			bottomSecionXmlResult = bottomSectionXmlTextArea.getText();
 			dispose();
 		}
@@ -271,10 +269,10 @@ public class UiCustomFieldsDlg extends JDialog
 		}
 	}
 	
-	public boolean validateXml(String xmlToValidate)
+	public boolean validateXml(String xmlToValidateTopSection, String xmlToValidateBottomSection)
 	{
 		CustomFieldTemplate template = new CustomFieldTemplate();
-		if(template.isvalidTemplateXml(xmlToValidate, null))
+		if(template.isvalidTemplateXml(xmlToValidateTopSection, xmlToValidateBottomSection))
 			return true;
 
 		displayXMLError(template); 
