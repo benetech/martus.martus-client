@@ -1053,6 +1053,11 @@ public class ClientBulletinStore extends BulletinStore
 	{
 		topSectionFieldSpecs = newFieldSpecs;
 	}
+	
+	public void setBottomSectionFieldSpecs(FieldSpec[] newFieldSpecs)
+	{
+		bottomSectionFieldSpecs = newFieldSpecs;
+	}
 
 	public int quarantineUnreadableBulletins()
 	{

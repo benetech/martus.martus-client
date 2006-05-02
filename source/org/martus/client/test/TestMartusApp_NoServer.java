@@ -72,6 +72,7 @@ import org.martus.common.database.DatabaseKey;
 import org.martus.common.database.FileDatabase;
 import org.martus.common.fieldspec.ChoiceItem;
 import org.martus.common.fieldspec.FieldSpec;
+import org.martus.common.fieldspec.StandardFieldSpecs;
 import org.martus.common.packet.UniversalId;
 import org.martus.swing.Utilities;
 import org.martus.util.DirectoryUtils;
@@ -487,12 +488,29 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		ConfigInfo infoToConvert = new ConfigInfo();
 		String sampleLegacyFields = "tag1;tag2";
 		infoToConvert.setCustomFieldLegacySpecs(sampleLegacyFields);
-		FieldCollection fields = new FieldCollection(MartusApp.getCustomFieldSpecs(infoToConvert));
+		FieldCollection fields = new FieldCollection(MartusApp.getCustomFieldSpecsTopSection(infoToConvert));
 
 		FieldCollection expected = new FieldCollection(LegacyCustomFields.parseFieldSpecsFromString(sampleLegacyFields));
 		assertEquals(expected.toString(), fields.toString());
+
+		fields = new FieldCollection(MartusApp.getCustomFieldSpecsBottomSection(infoToConvert));
+		expected = new FieldCollection(StandardFieldSpecs.getDefaultBottomSectionFieldSpecs());
+		assertEquals(expected.toString(), fields.toString());
 	}
 	
+	public void testLoadCustomFieldInfoWithBottomFieldSpec() throws Exception
+	{
+		ConfigInfo convertedInfo = new ConfigInfo();
+		String newFields = "new,label;another,show";
+		FieldSpec[] newSpecs = LegacyCustomFields.parseFieldSpecsFromString(newFields);
+		FieldCollection convertedFields = new FieldCollection(newSpecs);
+		convertedInfo.setCustomFieldBottomSectionXml(convertedFields.toString());
+		FieldCollection fields = new FieldCollection(MartusApp.getCustomFieldSpecsBottomSection(convertedInfo));
+
+		FieldCollection expected = new FieldCollection(LegacyCustomFields.parseFieldSpecsFromString(newFields));
+		assertEquals(expected.toString(), fields.toString());
+	}
+
 	public void testLoadConvertedCustomFieldInfo() throws Exception
 	{
 		ConfigInfo convertedInfo = new ConfigInfo();
@@ -500,7 +518,7 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		FieldSpec[] newSpecs = LegacyCustomFields.parseFieldSpecsFromString(newFields);
 		FieldCollection convertedFields = new FieldCollection(newSpecs);
 		convertedInfo.setCustomFieldTopSectionXml(convertedFields.toString());
-		FieldCollection fields = new FieldCollection(MartusApp.getCustomFieldSpecs(convertedInfo));
+		FieldCollection fields = new FieldCollection(MartusApp.getCustomFieldSpecsTopSection(convertedInfo));
 
 		FieldCollection expected = new FieldCollection(LegacyCustomFields.parseFieldSpecsFromString(newFields));
 		assertEquals(expected.toString(), fields.toString());

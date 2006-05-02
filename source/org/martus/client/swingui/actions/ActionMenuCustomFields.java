@@ -62,9 +62,13 @@ public class ActionMenuCustomFields extends UiMenuAction
 		if(newSpecs == null)
 			return;
 			
-		store.setTopSectionFieldSpecs(newSpecs.getTopSectionSpecs());
+		FieldSpec[] topSectionSpecs = newSpecs.getTopSectionSpecs();
+		FieldSpec[] bottomSectionSpecs = newSpecs.getBottomSectionSpecs();
+		store.setTopSectionFieldSpecs(topSectionSpecs);
+		store.setBottomSectionFieldSpecs(bottomSectionSpecs);
 		app.getConfigInfo().setCustomFieldLegacySpecs(MartusConstants.deprecatedCustomFieldSpecs);
-		app.getConfigInfo().setCustomFieldTopSectionXml(new FieldCollection(newSpecs.getTopSectionSpecs()).toString());
+		app.getConfigInfo().setCustomFieldTopSectionXml(new FieldCollection(topSectionSpecs).toString());
+		app.getConfigInfo().setCustomFieldBottomSectionXml(new FieldCollection(bottomSectionSpecs).toString());
 
 		try
 		{
