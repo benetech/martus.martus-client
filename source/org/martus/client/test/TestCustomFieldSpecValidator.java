@@ -39,6 +39,7 @@ import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.fieldspec.FieldType;
 import org.martus.common.fieldspec.FieldTypeDate;
 import org.martus.common.fieldspec.FieldTypeLanguage;
+import org.martus.common.fieldspec.FieldTypeMultiline;
 import org.martus.common.fieldspec.FieldTypeNormal;
 import org.martus.common.fieldspec.GridFieldSpec;
 import org.martus.common.fieldspec.StandardFieldSpecs;
@@ -213,6 +214,21 @@ public class TestCustomFieldSpecValidator extends TestCaseEnhanced
 		assertContains(BulletinConstants.TAGKEYWORDS, errorFields);
 		assertContains(BulletinConstants.TAGSUMMARY, errorFields);
 		assertContains(BulletinConstants.TAGPUBLICINFO, errorFields);
+	}
+
+	public void testPrivateFieldInTopSection() throws Exception
+	{
+		FieldSpec[] specsTopSection = getRequiredOnlyTopSectionFieldSpecs();
+		FieldSpec[] specsBottomSection = {};
+		
+		specsTopSection = addFieldSpec(specsTopSection, FieldSpec.createStandardField(BulletinConstants.TAGPRIVATEINFO, new FieldTypeMultiline()));
+
+		CustomFieldSpecValidator checker = new CustomFieldSpecValidator(specsTopSection, specsBottomSection);
+		assertFalse("Valid?", checker.isValid());
+		Vector errors = checker.getAllErrors();
+		assertEquals(1, errors.size());
+		assertEquals("Incorrect Error code required ", CustomFieldError.CODE_PRIVATE_FIELD_IN_TOP_SECTION, ((CustomFieldError)errors.get(0)).getCode());
+		assertEquals(BulletinConstants.TAGPRIVATEINFO, ((CustomFieldError)errors.get(0)).getTag());
 	}
 
 	public void testMissingTag() throws Exception
