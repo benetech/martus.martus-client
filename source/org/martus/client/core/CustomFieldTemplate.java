@@ -89,17 +89,17 @@ public class CustomFieldTemplate
 		return false;
 	}
 	
-	public boolean ExportTemplate(MartusCrypto security, File fileToExportXml, String xmlToExport)
+	public boolean ExportTemplate(MartusCrypto security, File fileToExportXml, String xmlToExportTopSection)
 	{
 		clearData();
 		//TODO: Export real private section
 		FieldCollection defaultBottomFields = new FieldCollection(StandardFieldSpecs.getDefaultBottomSectionFieldSpecs());
-		if(!isvalidTemplateXml(xmlToExport, defaultBottomFields.toString()))
+		if(!isvalidTemplateXml(xmlToExportTopSection, defaultBottomFields.toString()))
 			return false;
 		try
 		{
 			FileOutputStream out = new FileOutputStream(fileToExportXml);
-			byte[] signedBundle = security.createSignedBundle(xmlToExport.getBytes("UTF-8"));
+			byte[] signedBundle = security.createSignedBundle(xmlToExportTopSection.getBytes("UTF-8"));
 			out.write(signedBundle);
 			out.flush();
 			out.close();
