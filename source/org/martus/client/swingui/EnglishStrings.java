@@ -41,6 +41,7 @@ public class EnglishStrings
 "wintitle:askToBackupKeyPair=Key Backup Needed",
 "wintitle:BulletinDetailsDialog=Bulletin Details",
 "wintitle:IncompatibleMtfVersion=Incompatible Translation Version",
+"wintitle:DuplicateLabelsInCustomTemplate=Warning Duplicate Labels Found",
 
 "wintitle:confirmsend=Confirm Save Bulletin",
 "wintitle:confirmretrieve=Confirm Retrieve Bulletins",
@@ -483,7 +484,9 @@ public class EnglishStrings
 "field:SearchGridHeaderValue=Search for...",
 "field:SearchOpContains=contains",
 "field:SearchAnyField=--Any Field--",
-
+"field:DuplicateLabelsInCustomTemplate=Warning, the following labels appear more than once in your template.",
+"field:DuplicateLabels=Labels:",
+"field:DuplicateLabelsInCustomTemplateContinue=Do you want to save this template with the duplicate labels?",
 "field:PrintPrivateDataMessage=You have the option to include or exclude the selected bulletin's private information in this print out or report file. If you choose to print private data, it will be visible to anyone who sees the print out or report file.",
 "button:PrintOnlyPublic=Print only public information",
 "button:PrintPublicAndPrivate=Include private information",

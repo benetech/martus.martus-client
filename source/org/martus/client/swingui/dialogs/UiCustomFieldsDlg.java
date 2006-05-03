@@ -47,6 +47,7 @@ import org.martus.client.swingui.UiMainWindow;
 import org.martus.clientside.MtfAwareLocalization;
 import org.martus.common.FieldCollection;
 import org.martus.common.HQKeys;
+import org.martus.common.FieldCollection.CustomFieldsParseException;
 import org.martus.common.crypto.MartusCrypto;
 import org.martus.common.fieldspec.BulletinFieldSpecs;
 import org.martus.common.fieldspec.CustomFieldError;
@@ -134,6 +135,8 @@ public class UiCustomFieldsDlg extends JDialog
 		public void actionPerformed(ActionEvent ae)
 		{
 			if(!validateXml(topSectionXmlTextArea.getText(), bottomSectionXmlTextArea.getText()))
+			 	return;
+			if(!checkForDuplicateLabels())
 				return;
 			topSectionXmlResult = topSectionXmlTextArea.getText();
 			bottomSectionXmlResult = bottomSectionXmlTextArea.getText();
@@ -207,6 +210,14 @@ public class UiCustomFieldsDlg extends JDialog
 	{
 		public void actionPerformed(ActionEvent ae)
 		{
+			if(!validateXml(topSectionXmlTextArea.getText(), bottomSectionXmlTextArea.getText()))
+			{
+				mainWindow.notifyDlg("ErrorExportingCustomizationTemplate");
+				return;
+			}
+			if(!checkForDuplicateLabels())
+				return;
+			
 			String windowTitle = mainWindow.getLocalization().getWindowTitle("ExportCustomizationTemplateSaveAs");
 			FileFilter filter = new MCTFileFilter();
 			UiFileChooser.FileDialogResults results = UiFileChooser.displayFileSaveDialog(mainWindow, windowTitle, mainWindow.getApp().getCurrentAccountDirectory(), filter);
@@ -279,6 +290,40 @@ public class UiCustomFieldsDlg extends JDialog
 		displayXMLError(template); 
 		return false;
 	}
+	
+	public Vector getDuplicateLabels()
+	{
+		Vector duplicateLabelsFound = new Vector();
+		try 
+		{
+			FieldSpec[] topSection = FieldCollection.parseXml(topSectionXmlTextArea.getText());
+			FieldSpec[] bottomSection = FieldCollection.parseXml(bottomSectionXmlTextArea.getText());
+			int topLength = topSection.length;
+			int bottomLength = bottomSection.length;
+			FieldSpec[] allSpecs = new FieldSpec[topLength + bottomLength];
+			System.arraycopy(topSection, 0, allSpecs, 0, topLength);
+			System.arraycopy(bottomSection, 0, allSpecs, topLength, bottomLength);
+			Vector foundLabels = new Vector();
+			for (int i = 0; i < allSpecs.length; i++)
+			{
+				FieldSpec thisSpec = allSpecs[i];
+				String label = thisSpec.getLabel();
+				if(label.length() > 0)
+				{
+					if(foundLabels.contains(label))
+						duplicateLabelsFound.add(label);				
+					foundLabels.add(label);
+				}
+			}
+		} 
+		catch (CustomFieldsParseException e) 
+		{
+		}
+
+		return duplicateLabelsFound;
+	}
+	
+	
 
 	void displayXMLError(CustomFieldTemplate template)
 	{
@@ -352,6 +397,33 @@ public class UiCustomFieldsDlg extends JDialog
 	public String getBottomSectionXml()
 	{
 		return bottomSectionXmlResult;
+	}
+
+	private boolean checkForDuplicateLabels() 
+	{
+		Vector duplicateLabelsFound = getDuplicateLabels();
+		if(duplicateLabelsFound.size() > 0)
+		{
+			MartusLocalization localization = mainWindow.getLocalization();
+			String duplicateTitle = localization.getWindowTitle("DuplicateLabelsInCustomTemplate");
+			String duplicateWarnging = localization.getFieldLabel("DuplicateLabelsInCustomTemplate");
+			String duplicateContinue = localization.getFieldLabel("DuplicateLabelsInCustomTemplateContinue");
+			StringBuffer duplicates = new StringBuffer(localization.getFieldLabel("DuplicateLabels"));
+			for(int i = 0; i < duplicateLabelsFound.size(); ++i)
+			{
+				if(i>0)
+					duplicates.append(", ");
+				duplicates.append("\"");
+				duplicates.append((String)duplicateLabelsFound.get(i));
+				duplicates.append("\"");
+				
+			}
+			String[] duplicateWarningMessage = {duplicateWarnging, duplicates.toString(), duplicateContinue};
+			if(mainWindow.confirmDlg(mainWindow, duplicateTitle, duplicateWarningMessage))
+				return true;
+		return false;
+		}
+		return true;
 	}
 
 	UiTextArea topSectionXmlTextArea;
