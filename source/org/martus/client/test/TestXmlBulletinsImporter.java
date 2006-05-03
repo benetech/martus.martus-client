@@ -233,8 +233,8 @@ public class TestXmlBulletinsImporter extends TestCaseEnhanced
 	
 	final String expectedErrorMessage = "100 :  : author : \n" +
 			"100 :  : title : \n" +
-			"102 : BOOLEAN : DuplicateTag : Does interviewee wish to remain anonymous?\n" +
-			"108 : DROPDOWN : BulletinSourceDuplicateEntries : Source of bulletin information\n";
+			"108 : DROPDOWN : BulletinSourceDuplicateEntries : Source of bulletin information\n" +
+			"102 : BOOLEAN : DuplicateTag : Does interviewee wish to remain anonymous?\n";
 
 	static MartusCrypto security;
 }
