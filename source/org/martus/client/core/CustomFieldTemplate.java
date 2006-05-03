@@ -25,11 +25,15 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.core;
 
+import java.io.ByteArrayInputStream;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Vector;
+
 import org.martus.common.FieldCollection;
 import org.martus.common.FieldCollection.CustomFieldsParseException;
 import org.martus.common.crypto.MartusCrypto;
@@ -60,16 +64,37 @@ public class CustomFieldTemplate
 		try
 		{
 			clearData();
+			String templateXMLToImportTopSection = "";
+			String templateXMLToImportBottomSection = "";
 			FileInputStream in = new FileInputStream(fileToImport);
 			byte[] dataBundle = new byte[(int)fileToImport.length()];
 			in.read(dataBundle);
 			in.close();
-			byte[] xmlBytesTopSection = security.extractFromSignedBundle(dataBundle, authroizedKeys);
-			String templateXMLToImportTopSection = new String(xmlBytesTopSection, "UTF-8");
-			
-			//TODO: Use real private section
-			FieldCollection defaultBottomFields = new FieldCollection(StandardFieldSpecs.getDefaultBottomSectionFieldSpecs());
-			String templateXMLToImportBottomSection = defaultBottomFields.toString();
+			byte[] dataBundleTopSection;
+			if(isLegacyTemplateFile(fileToImport))
+			{
+				dataBundleTopSection = dataBundle;
+				FieldCollection defaultBottomFields = new FieldCollection(StandardFieldSpecs.getDefaultBottomSectionFieldSpecs());
+				templateXMLToImportBottomSection = defaultBottomFields.toString();
+			}
+			else
+			{
+				ByteArrayInputStream bIn = new ByteArrayInputStream(dataBundle);
+				DataInputStream bundleIn = new DataInputStream(bIn);
+				bundleIn.skip(versionHeader.length()); //ignore header
+				bundleIn.readInt(); //Ignore version #
+				int topSectionBundleLength = bundleIn.readInt();
+				int bottomSectionBundleLength = bundleIn.readInt();
+				dataBundleTopSection = new byte[topSectionBundleLength];
+				byte[] dataBundleBottomSection = new byte[bottomSectionBundleLength];
+				bundleIn.read(dataBundleTopSection,0, topSectionBundleLength);
+				bundleIn.read(dataBundleBottomSection,0, bottomSectionBundleLength);
+				byte[] xmlBytesBottomSection = security.extractFromSignedBundle(dataBundleBottomSection, authroizedKeys);
+				templateXMLToImportBottomSection = new String(xmlBytesBottomSection, "UTF-8");
+			}
+
+			byte[] xmlBytesTopSection = security.extractFromSignedBundle(dataBundleTopSection, authroizedKeys);
+			templateXMLToImportTopSection = new String(xmlBytesTopSection, "UTF-8");
 			
 			if(isvalidTemplateXml(templateXMLToImportTopSection, templateXMLToImportBottomSection))
 			{
@@ -94,6 +119,16 @@ public class CustomFieldTemplate
 		return false;
 	}
 	
+	public boolean isLegacyTemplateFile(File fileToImport) throws IOException
+	{
+		FileInputStream in = new FileInputStream(fileToImport);
+		byte[] versionHeaderInBytes = new byte[versionHeader.length()];
+		in.read(versionHeaderInBytes);
+		in.close();
+		String versionHeaderInString = new String(versionHeaderInBytes);
+		return !versionHeaderInString.equals(versionHeader);
+	}
+	
 	public boolean ExportTemplate(MartusCrypto security, File fileToExportXml, String xmlToExportTopSection, String xmlToExportBottomSection)
 	{
 		clearData();
@@ -102,8 +137,17 @@ public class CustomFieldTemplate
 		try
 		{
 			FileOutputStream out = new FileOutputStream(fileToExportXml);
-			byte[] signedBundle = security.createSignedBundle(xmlToExportTopSection.getBytes("UTF-8"));
-			out.write(signedBundle);
+			DataOutputStream dataOut = new DataOutputStream(out);
+			dataOut.write(versionHeader.getBytes());
+			dataOut.writeInt(exportVersionNumber);
+			byte[] signedBundleTopSection = security.createSignedBundle(xmlToExportTopSection.getBytes("UTF-8"));
+			byte[] signedBundleBottomSection = security.createSignedBundle(xmlToExportBottomSection.getBytes("UTF-8"));
+			dataOut.writeInt(signedBundleTopSection.length);
+			dataOut.writeInt(signedBundleBottomSection.length);
+			dataOut.write(signedBundleTopSection);
+			dataOut.write(signedBundleBottomSection);
+			dataOut.flush();
+			dataOut.close();
 			out.flush();
 			out.close();
 			return true;
@@ -152,5 +196,7 @@ public class CustomFieldTemplate
 	private Vector errors;
 	private String xmlImportedTopSectionText;
 	private String xmlImportedBottomSectionText;
+	final private String versionHeader = "Export Version Number:";
+	final private int exportVersionNumber = 2; 
 	
 }

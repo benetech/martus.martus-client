@@ -180,7 +180,7 @@ public class TestCustomFieldTemplate extends TestCaseEnhanced
 		authorizedKeys.add(security.getPublicKeyString());
 		assertTrue(template.importTemplate(security, exportFile, authorizedKeys));
 		assertEquals(fieldsTopSection.toString(), template.getImportedTopSectionText());
-//		assertEquals(fieldsBottomSection.toString(), template.getImportedBottomSectionText());
+		assertEquals(fieldsBottomSection.toString(), template.getImportedBottomSectionText());
 		assertEquals(0, template.getErrors().size());
 		
 		Vector unKnownKey = new Vector();
@@ -195,6 +195,7 @@ public class TestCustomFieldTemplate extends TestCaseEnhanced
 		
 		assertTrue(template.importTemplate(security, exportFile, authorizedKeys));
 		assertEquals(fieldsTopSection.toString(), template.getImportedTopSectionText());
+		assertEquals(fieldsBottomSection.toString(), template.getImportedBottomSectionText());
 		assertEquals(0, template.getErrors().size());
 
 		exportFile.delete();
@@ -207,12 +208,14 @@ public class TestCustomFieldTemplate extends TestCaseEnhanced
 		
 		assertFalse(template.importTemplate(security, exportFile, authorizedKeys));
 		assertEquals("", template.getImportedTopSectionText());
+		assertEquals("", template.getImportedBottomSectionText());
 		assertEquals(1, template.getErrors().size());
 		assertEquals(CustomFieldError.CODE_SIGNATURE_ERROR, ((CustomFieldError)template.getErrors().get(0)).getCode());
 		
 		exportFile.delete();
 		assertFalse(template.importTemplate(security, exportFile, authorizedKeys));
 		assertEquals("", template.getImportedTopSectionText());
+		assertEquals("", template.getImportedBottomSectionText());
 		assertEquals(1, template.getErrors().size());
 		assertEquals(CustomFieldError.CODE_IO_ERROR, ((CustomFieldError)template.getErrors().get(0)).getCode());
 	}
