@@ -135,8 +135,8 @@ public class UiCustomFieldsDlg extends JDialog
 		{
 			if(!validateXml(topSectionXmlTextArea.getText(), bottomSectionXmlTextArea.getText()))
 				return;
-			topSecionXmlResult = topSectionXmlTextArea.getText();
-			bottomSecionXmlResult = bottomSectionXmlTextArea.getText();
+			topSectionXmlResult = topSectionXmlTextArea.getText();
+			bottomSectionXmlResult = bottomSectionXmlTextArea.getText();
 			dispose();
 		}
 	}
@@ -154,8 +154,8 @@ public class UiCustomFieldsDlg extends JDialog
 	{
 		public void actionPerformed(ActionEvent ae)
 		{
-			topSecionXmlResult = "";
-			bottomSecionXmlResult = "";
+			topSectionXmlResult = "";
+			bottomSectionXmlResult = "";
 			dispose();
 		}
 	}
@@ -346,18 +346,18 @@ public class UiCustomFieldsDlg extends JDialog
 
 	public String getTopSectionXml()
 	{
-		return topSecionXmlResult;
+		return topSectionXmlResult;
 	}
 
 	public String getBottomSectionXml()
 	{
-		return bottomSecionXmlResult;
+		return bottomSectionXmlResult;
 	}
 
 	UiTextArea topSectionXmlTextArea;
 	UiTextArea bottomSectionXmlTextArea;
-	String topSecionXmlResult = null;
-	String bottomSecionXmlResult = null;
+	String topSectionXmlResult = null;
+	String bottomSectionXmlResult = null;
 	UiMainWindow mainWindow;
 	MartusCrypto security;
 
