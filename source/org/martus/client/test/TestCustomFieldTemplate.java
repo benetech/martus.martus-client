@@ -31,6 +31,7 @@ import java.util.Vector;
 import org.martus.client.core.CustomFieldTemplate;
 import org.martus.common.FieldCollection;
 import org.martus.common.FieldCollectionForTesting;
+import org.martus.common.LegacyCustomFields;
 import org.martus.common.crypto.MockMartusSecurity;
 import org.martus.common.fieldspec.CustomFieldError;
 import org.martus.common.fieldspec.FieldSpec;
@@ -90,31 +91,41 @@ public class TestCustomFieldTemplate extends TestCaseEnhanced
 		exportFile.delete();
 		assertFalse(exportFile.exists());
 
-		FieldCollection defaultFields = new FieldCollection(StandardFieldSpecs.getDefaultTopSectionFieldSpecs());
-		assertTrue(template.ExportTemplate(security, exportFile, defaultFields.toString()));
+		FieldCollection defaultFieldsTopSection = new FieldCollection(StandardFieldSpecs.getDefaultTopSectionFieldSpecs());
+		FieldCollection defaultFieldsBottomSection = new FieldCollection(StandardFieldSpecs.getDefaultBottomSectionFieldSpecs());
+		assertTrue(template.ExportTemplate(security, exportFile, defaultFieldsTopSection.toString(), defaultFieldsBottomSection.toString()));
 		assertTrue(exportFile.exists());
 		exportFile.delete();
 
 		FieldSpec invalidField = FieldSpec.createCustomField("myTag", "", new FieldTypeNormal());
 		FieldCollection withInvalid = FieldCollectionForTesting.extendFields(StandardFieldSpecs.getDefaultTopSectionFieldSpecs(), invalidField);
+		FieldCollection bottomSectionFields = new FieldCollection(StandardFieldSpecs.getDefaultBottomSectionFieldSpecs());
 		assertFalse(exportFile.exists());
-		assertFalse(template.ExportTemplate(security, exportFile, withInvalid.toString()));
+		assertFalse(template.ExportTemplate(security, exportFile, withInvalid.toString(), bottomSectionFields.toString()));
 		assertFalse(exportFile.exists());
 		exportFile.delete();
 	}
 	
-	public void testImportXml() throws Exception
+	public void testImportXmlLegacy() throws Exception
 	{
-		FieldCollection fields = new FieldCollection(StandardFieldSpecs.getDefaultTopSectionFieldSpecs());
-		CustomFieldTemplate template = new CustomFieldTemplate();
-		File exportFile = createTempFileFromName("$$$testExportXml");
+		FieldCollection fieldsTopSection = new FieldCollection(StandardFieldSpecs.getDefaultTopSectionFieldSpecs());
+		File exportFile = createTempFileFromName("$$$testImportXmlLegacy");
 		exportFile.delete();
-		template.ExportTemplate(security, exportFile, fields.toString());
-		assertEquals("", template.getImportedText());
+		
+		FileOutputStream out = new FileOutputStream(exportFile);
+		byte[] signedBundle = security.createSignedBundle(fieldsTopSection.toString().getBytes("UTF-8"));
+		out.write(signedBundle);
+		out.flush();
+		out.close();
+
+		CustomFieldTemplate template = new CustomFieldTemplate();
+		assertEquals("", template.getImportedTopSectionText());
 		Vector authorizedKeys = new Vector();
 		authorizedKeys.add(security.getPublicKeyString());
 		assertTrue(template.importTemplate(security, exportFile, authorizedKeys));
-		assertEquals(fields.toString(), template.getImportedText());
+		FieldCollection defaultBottomSectionFields = new FieldCollection(StandardFieldSpecs.getDefaultBottomSectionFieldSpecs());
+		assertEquals(fieldsTopSection.toString(), template.getImportedTopSectionText());
+		assertEquals(defaultBottomSectionFields.toString(), template.getImportedBottomSectionText());
 		assertEquals(0, template.getErrors().size());
 		
 		Vector unKnownKey = new Vector();
@@ -128,29 +139,84 @@ public class TestCustomFieldTemplate extends TestCaseEnhanced
 		writer.close();
 		
 		assertTrue(template.importTemplate(security, exportFile, authorizedKeys));
-		assertEquals(fields.toString(), template.getImportedText());
+		assertEquals(fieldsTopSection.toString(), template.getImportedTopSectionText());
 		assertEquals(0, template.getErrors().size());
 
 		exportFile.delete();
-		FileOutputStream out = new FileOutputStream(exportFile);
-		byte[] tamperedBundle = security.createSignedBundle(fields.toString().getBytes("UTF-8"));
+		out = new FileOutputStream(exportFile);
+		byte[] tamperedBundle = security.createSignedBundle(fieldsTopSection.toString().getBytes("UTF-8"));
 		tamperedBundle[tamperedBundle.length-2] = 'j';
 		out.write(tamperedBundle);
 		out.flush();
 		out.close();
 		
 		assertFalse(template.importTemplate(security, exportFile, authorizedKeys));
-		assertEquals("", template.getImportedText());
+		assertEquals("", template.getImportedTopSectionText());
 		assertEquals(1, template.getErrors().size());
 		assertEquals(CustomFieldError.CODE_SIGNATURE_ERROR, ((CustomFieldError)template.getErrors().get(0)).getCode());
 		
 		exportFile.delete();
 		assertFalse(template.importTemplate(security, exportFile, authorizedKeys));
-		assertEquals("", template.getImportedText());
+		assertEquals("", template.getImportedTopSectionText());
 		assertEquals(1, template.getErrors().size());
 		assertEquals(CustomFieldError.CODE_IO_ERROR, ((CustomFieldError)template.getErrors().get(0)).getCode());
 	}
 
+	public void testImportXml() throws Exception
+	{
+		FieldCollection fieldsTopSection = new FieldCollection(StandardFieldSpecs.getDefaultTopSectionFieldSpecs());
+		FieldSpec[] fieldSpecsBottomSection = StandardFieldSpecs.getDefaultBottomSectionFieldSpecs();
+		String privateTag = "a2";
+		String privateLabel ="b2";
+		fieldSpecsBottomSection = TestCustomFieldSpecValidator.addFieldSpec(fieldSpecsBottomSection, LegacyCustomFields.createFromLegacy(privateTag+","+privateLabel));
+		FieldCollection fieldsBottomSection = new FieldCollection(fieldSpecsBottomSection);
+		
+		CustomFieldTemplate template = new CustomFieldTemplate();
+		File exportFile = createTempFileFromName("$$$testImportXml");
+		exportFile.delete();
+		template.ExportTemplate(security, exportFile, fieldsTopSection.toString(), fieldsBottomSection.toString());
+		assertEquals("", template.getImportedTopSectionText());
+		Vector authorizedKeys = new Vector();
+		authorizedKeys.add(security.getPublicKeyString());
+		assertTrue(template.importTemplate(security, exportFile, authorizedKeys));
+		assertEquals(fieldsTopSection.toString(), template.getImportedTopSectionText());
+//		assertEquals(fieldsBottomSection.toString(), template.getImportedBottomSectionText());
+		assertEquals(0, template.getErrors().size());
+		
+		Vector unKnownKey = new Vector();
+		unKnownKey.add("unknown");
+		assertFalse(template.importTemplate(security, exportFile, unKnownKey));
+		assertEquals(1, template.getErrors().size());
+		assertEquals(CustomFieldError.CODE_UNAUTHORIZED_KEY, ((CustomFieldError)template.getErrors().get(0)).getCode());
+		
+		UnicodeWriter writer = new UnicodeWriter(exportFile,UnicodeWriter.APPEND);
+		writer.write("unauthorizedTextAppended Should not be read.");
+		writer.close();
+		
+		assertTrue(template.importTemplate(security, exportFile, authorizedKeys));
+		assertEquals(fieldsTopSection.toString(), template.getImportedTopSectionText());
+		assertEquals(0, template.getErrors().size());
+
+		exportFile.delete();
+		FileOutputStream out = new FileOutputStream(exportFile);
+		byte[] tamperedBundle = security.createSignedBundle(fieldsTopSection.toString().getBytes("UTF-8"));
+		tamperedBundle[tamperedBundle.length-2] = 'j';
+		out.write(tamperedBundle);
+		out.flush();
+		out.close();
+		
+		assertFalse(template.importTemplate(security, exportFile, authorizedKeys));
+		assertEquals("", template.getImportedTopSectionText());
+		assertEquals(1, template.getErrors().size());
+		assertEquals(CustomFieldError.CODE_SIGNATURE_ERROR, ((CustomFieldError)template.getErrors().get(0)).getCode());
+		
+		exportFile.delete();
+		assertFalse(template.importTemplate(security, exportFile, authorizedKeys));
+		assertEquals("", template.getImportedTopSectionText());
+		assertEquals(1, template.getErrors().size());
+		assertEquals(CustomFieldError.CODE_IO_ERROR, ((CustomFieldError)template.getErrors().get(0)).getCode());
+	}
+	
 	static MockMartusSecurity security;
 	
 }

@@ -179,7 +179,8 @@ public class UiCustomFieldsDlg extends JDialog
 			
 			if(template.importTemplate(security, importFile, authorizedKeys))
 			{
-				topSectionXmlTextArea.setText(template.getImportedText());
+				topSectionXmlTextArea.setText(template.getImportedTopSectionText());
+				bottomSectionXmlTextArea.setText(template.getImportedBottomSectionText());
 				mainWindow.notifyDlg("ImportingCustomizationTemplateSuccess");
 			}
 			else
@@ -223,7 +224,7 @@ public class UiCustomFieldsDlg extends JDialog
 					return;
 			CustomFieldTemplate template = new CustomFieldTemplate();
 			MartusCrypto securityTemp = mainWindow.getApp().getSecurity();
-			if(template.ExportTemplate(securityTemp, destFile, topSectionXmlTextArea.getText()))
+			if(template.ExportTemplate(securityTemp, destFile, topSectionXmlTextArea.getText(), bottomSectionXmlTextArea.getText()))
 			{
 				mainWindow.notifyDlg("ExportingCustomizationTemplateSuccess");
 			}

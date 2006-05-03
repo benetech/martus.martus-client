@@ -51,7 +51,8 @@ public class CustomFieldTemplate
 	private void clearData()
 	{
 		errors = new Vector();
-		xmlImportedText = "";
+		xmlImportedTopSectionText = "";
+		xmlImportedBottomSectionText = "";
 	}
 	
 	public boolean importTemplate(MartusCrypto security, File fileToImport, Vector authroizedKeys)
@@ -63,13 +64,17 @@ public class CustomFieldTemplate
 			byte[] dataBundle = new byte[(int)fileToImport.length()];
 			in.read(dataBundle);
 			in.close();
-			byte[] xmlBytes = security.extractFromSignedBundle(dataBundle, authroizedKeys);
-			String templateXMLToImport = new String(xmlBytes, "UTF-8");
+			byte[] xmlBytesTopSection = security.extractFromSignedBundle(dataBundle, authroizedKeys);
+			String templateXMLToImportTopSection = new String(xmlBytesTopSection, "UTF-8");
+			
 			//TODO: Use real private section
 			FieldCollection defaultBottomFields = new FieldCollection(StandardFieldSpecs.getDefaultBottomSectionFieldSpecs());
-			if(isvalidTemplateXml(templateXMLToImport, defaultBottomFields.toString()))
+			String templateXMLToImportBottomSection = defaultBottomFields.toString();
+			
+			if(isvalidTemplateXml(templateXMLToImportTopSection, templateXMLToImportBottomSection))
 			{
-				xmlImportedText = templateXMLToImport;
+				xmlImportedTopSectionText = templateXMLToImportTopSection;
+				xmlImportedBottomSectionText = templateXMLToImportBottomSection;
 				return true;
 			}
 		}
@@ -89,12 +94,10 @@ public class CustomFieldTemplate
 		return false;
 	}
 	
-	public boolean ExportTemplate(MartusCrypto security, File fileToExportXml, String xmlToExportTopSection)
+	public boolean ExportTemplate(MartusCrypto security, File fileToExportXml, String xmlToExportTopSection, String xmlToExportBottomSection)
 	{
 		clearData();
-		//TODO: Export real private section
-		FieldCollection defaultBottomFields = new FieldCollection(StandardFieldSpecs.getDefaultBottomSectionFieldSpecs());
-		if(!isvalidTemplateXml(xmlToExportTopSection, defaultBottomFields.toString()))
+		if(!isvalidTemplateXml(xmlToExportTopSection, xmlToExportBottomSection))
 			return false;
 		try
 		{
@@ -136,12 +139,18 @@ public class CustomFieldTemplate
 		return errors;
 	}
 	
-	public String getImportedText()
+	public String getImportedTopSectionText()
 	{
-		return xmlImportedText;
+		return xmlImportedTopSectionText;
 	}
 	
+	public String getImportedBottomSectionText()
+	{
+		return xmlImportedBottomSectionText;
+	}
+
 	private Vector errors;
-	private String xmlImportedText;
+	private String xmlImportedTopSectionText;
+	private String xmlImportedBottomSectionText;
 	
 }
