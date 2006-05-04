@@ -54,6 +54,7 @@ import org.martus.common.crypto.MartusCrypto;
 import org.martus.common.fieldspec.BulletinFieldSpecs;
 import org.martus.common.fieldspec.CustomFieldError;
 import org.martus.common.fieldspec.FieldSpec;
+import org.martus.common.fieldspec.GridFieldSpec;
 import org.martus.swing.UiButton;
 import org.martus.swing.UiFileChooser;
 import org.martus.swing.UiLabel;
@@ -372,7 +373,7 @@ public class UiCustomFieldsDlg extends JDialog
 
 	boolean checkForDuplicateLabels() 
 	{
-		HashSet duplicateLabelsFound = getDuplicateLabels();
+		Vector duplicateLabelsFound = getDuplicateLabels();
 		if(duplicateLabelsFound.size() == 0)
 			return true;
 
@@ -394,9 +395,9 @@ public class UiCustomFieldsDlg extends JDialog
 		return false;
 	}
 
-	public HashSet getDuplicateLabels()
+	public Vector getDuplicateLabels()
 	{
-		HashSet duplicateLabelsFound = new HashSet();
+		Vector duplicateLabelsFound = new Vector();
 		try 
 		{
 			FieldSpec[] topSection = FieldCollection.parseXml(topSectionXmlTextArea.getText());
@@ -406,16 +407,32 @@ public class UiCustomFieldsDlg extends JDialog
 			FieldSpec[] allSpecs = new FieldSpec[topLength + bottomLength];
 			System.arraycopy(topSection, 0, allSpecs, 0, topLength);
 			System.arraycopy(bottomSection, 0, allSpecs, topLength, bottomLength);
-			Vector foundLabels = new Vector();
+			HashSet foundLabels = new HashSet();
 			for (int i = 0; i < allSpecs.length; i++)
 			{
 				FieldSpec thisSpec = allSpecs[i];
 				String label = thisSpec.getLabel();
-				if(label.length() > 0)
-				{
-					if(foundLabels.contains(label))
+				if(label.length() == 0)
+					continue;
+			
+				if(foundLabels.contains(label))
+					if(!duplicateLabelsFound.contains(label))
 						duplicateLabelsFound.add(label);				
-					foundLabels.add(label);
+				foundLabels.add(label);
+				
+				if(!thisSpec.getType().isGrid())
+					continue;
+
+				GridFieldSpec grid = (GridFieldSpec)thisSpec;
+				Vector gridLabels = grid.getAllColumnLabels();
+				HashSet uniqueGridColumnLabels = new HashSet();
+				for(Iterator iter = gridLabels.iterator(); iter.hasNext();)
+				{
+					String gridColumnLabel = (String) iter.next();
+					if(uniqueGridColumnLabels.contains(gridColumnLabel))
+						if(!duplicateLabelsFound.contains(gridColumnLabel))
+							duplicateLabelsFound.add(gridColumnLabel);				
+					uniqueGridColumnLabels.add(gridColumnLabel);
 				}
 			}
 		} 
