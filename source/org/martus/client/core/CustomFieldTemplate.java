@@ -59,7 +59,13 @@ public class CustomFieldTemplate
 		xmlImportedBottomSectionText = "";
 	}
 	
-	public boolean importTemplate(MartusCrypto security, File fileToImport, Vector authroizedKeys)
+	public class FutureVersionException extends Exception
+	{
+		
+	}
+
+	
+	public boolean importTemplate(MartusCrypto security, File fileToImport, Vector authroizedKeys) throws FutureVersionException
 	{
 		try
 		{
@@ -82,7 +88,9 @@ public class CustomFieldTemplate
 				ByteArrayInputStream bIn = new ByteArrayInputStream(dataBundle);
 				DataInputStream bundleIn = new DataInputStream(bIn);
 				bundleIn.skip(versionHeader.length()); //ignore header
-				bundleIn.readInt(); //Ignore version #
+				int templateVersion = bundleIn.readInt();
+				if(templateVersion > exportVersionNumber)
+					throw new FutureVersionException();
 				int topSectionBundleLength = bundleIn.readInt();
 				int bottomSectionBundleLength = bundleIn.readInt();
 				dataBundleTopSection = new byte[topSectionBundleLength];
@@ -196,7 +204,7 @@ public class CustomFieldTemplate
 	private Vector errors;
 	private String xmlImportedTopSectionText;
 	private String xmlImportedBottomSectionText;
-	final private String versionHeader = "Export Version Number:";
-	final private int exportVersionNumber = 2; 
+	public static final String versionHeader = "Export Version Number:";
+	public static final int exportVersionNumber = 2; 
 	
 }

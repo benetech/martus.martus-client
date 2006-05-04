@@ -25,6 +25,7 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.test;
 
+import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.util.Vector;
@@ -160,6 +161,34 @@ public class TestCustomFieldTemplate extends TestCaseEnhanced
 		assertEquals("", template.getImportedTopSectionText());
 		assertEquals(1, template.getErrors().size());
 		assertEquals(CustomFieldError.CODE_IO_ERROR, ((CustomFieldError)template.getErrors().get(0)).getCode());
+	}
+
+	public void testImportXmlFuture() throws Exception
+	{
+		File exportFile = createTempFileFromName("$$$testImportXmlFuture");
+		exportFile.delete();
+		
+		FileOutputStream out = new FileOutputStream(exportFile);
+		DataOutputStream dataOut = new DataOutputStream(out);
+		dataOut.write(CustomFieldTemplate.versionHeader.getBytes());
+		dataOut.writeInt(CustomFieldTemplate.exportVersionNumber + 1);
+		dataOut.writeInt(16);
+		dataOut.writeInt(0);
+		dataOut.write("Some future data".getBytes());
+		dataOut.flush();
+		dataOut.close();
+
+		CustomFieldTemplate template = new CustomFieldTemplate();
+		Vector authorizedKeys = new Vector();
+		authorizedKeys.add(security.getPublicKeyString());
+		try
+		{
+			template.importTemplate(security, exportFile, authorizedKeys);
+			fail("Should have thrown future version Exception");
+		}
+		catch(CustomFieldTemplate.FutureVersionException expected)
+		{
+		}
 	}
 
 	public void testImportXml() throws Exception

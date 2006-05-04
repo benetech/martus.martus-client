@@ -44,6 +44,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.filechooser.FileFilter;
 import org.martus.client.core.CustomFieldTemplate;
 import org.martus.client.core.MartusApp;
+import org.martus.client.core.CustomFieldTemplate.FutureVersionException;
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.clientside.MtfAwareLocalization;
@@ -183,17 +184,22 @@ public class UiCustomFieldsDlg extends JDialog
 			
 			Vector authorizedKeys = getAuthorizedKeys();
 			
-			if(template.importTemplate(security, importFile, authorizedKeys))
+			try
 			{
-				topSectionXmlTextArea.setText(template.getImportedTopSectionText());
-				bottomSectionXmlTextArea.setText(template.getImportedBottomSectionText());
-				mainWindow.notifyDlg("ImportingCustomizationTemplateSuccess");
-			}
-			else
-			{
+				if(template.importTemplate(security, importFile, authorizedKeys))
+				{
+					topSectionXmlTextArea.setText(template.getImportedTopSectionText());
+					bottomSectionXmlTextArea.setText(template.getImportedBottomSectionText());
+					mainWindow.notifyDlg("ImportingCustomizationTemplateSuccess");
+					return;
+				}
 				displayXMLError(template);
-				mainWindow.notifyDlg("ErrorImportingCustomizationTemplate");
 			}
+			catch(FutureVersionException e)
+			{
+				mainWindow.notifyDlg("ErrorImportingCustomizationTemplateFuture");
+			}
+			mainWindow.notifyDlg("ErrorImportingCustomizationTemplate");
 		}
 
 		private Vector getAuthorizedKeys()
@@ -326,6 +332,8 @@ public class UiCustomFieldsDlg extends JDialog
 		
 	private String GetDataAndSpacing(String data, int columnSpacing)
 	{
+		if(data == null)
+			return " ";
 		String columnData = data;
 		for(int i = data.length(); i < columnSpacing; ++i)
 		{
