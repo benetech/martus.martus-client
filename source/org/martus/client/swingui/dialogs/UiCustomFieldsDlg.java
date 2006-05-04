@@ -399,7 +399,7 @@ public class UiCustomFieldsDlg extends JDialog
 		return bottomSectionXmlResult;
 	}
 
-	private boolean checkForDuplicateLabels() 
+	boolean checkForDuplicateLabels() 
 	{
 		Vector duplicateLabelsFound = getDuplicateLabels();
 		if(duplicateLabelsFound.size() > 0)

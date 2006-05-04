@@ -484,7 +484,7 @@ public class EnglishStrings
 "field:SearchGridHeaderValue=Search for...",
 "field:SearchOpContains=contains",
 "field:SearchAnyField=--Any Field--",
-"field:DuplicateLabelsInCustomTemplate=Warning, the following labels appear more than once in your template.",
+"field:DuplicateLabelsInCustomTemplate=The following labels appear more than once in your template.",
 "field:DuplicateLabels=Labels:",
 "field:DuplicateLabelsInCustomTemplateContinue=Do you want to save this template with the duplicate labels?",
 "field:PrintPrivateDataMessage=You have the option to include or exclude the selected bulletin's private information in this print out or report file. If you choose to print private data, it will be visible to anyone who sees the print out or report file.",
