@@ -31,6 +31,8 @@ import java.awt.ComponentOrientation;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Vector;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -291,37 +293,6 @@ public class UiCustomFieldsDlg extends JDialog
 		return false;
 	}
 	
-	public Vector getDuplicateLabels()
-	{
-		Vector duplicateLabelsFound = new Vector();
-		try 
-		{
-			FieldSpec[] topSection = FieldCollection.parseXml(topSectionXmlTextArea.getText());
-			FieldSpec[] bottomSection = FieldCollection.parseXml(bottomSectionXmlTextArea.getText());
-			int topLength = topSection.length;
-			int bottomLength = bottomSection.length;
-			FieldSpec[] allSpecs = new FieldSpec[topLength + bottomLength];
-			System.arraycopy(topSection, 0, allSpecs, 0, topLength);
-			System.arraycopy(bottomSection, 0, allSpecs, topLength, bottomLength);
-			Vector foundLabels = new Vector();
-			for (int i = 0; i < allSpecs.length; i++)
-			{
-				FieldSpec thisSpec = allSpecs[i];
-				String label = thisSpec.getLabel();
-				if(label.length() > 0)
-				{
-					if(foundLabels.contains(label))
-						duplicateLabelsFound.add(label);				
-					foundLabels.add(label);
-				}
-			}
-		} 
-		catch (CustomFieldsParseException e) 
-		{
-		}
-
-		return duplicateLabelsFound;
-	}
 	
 	
 
@@ -401,31 +372,59 @@ public class UiCustomFieldsDlg extends JDialog
 
 	boolean checkForDuplicateLabels() 
 	{
-		Vector duplicateLabelsFound = getDuplicateLabels();
-		if(duplicateLabelsFound.size() > 0)
+		HashSet duplicateLabelsFound = getDuplicateLabels();
+		if(duplicateLabelsFound.size() == 0)
+			return true;
+
+		MartusLocalization localization = mainWindow.getLocalization();
+		String duplicateTitle = localization.getWindowTitle("DuplicateLabelsInCustomTemplate");
+		String duplicateWarnging = localization.getFieldLabel("DuplicateLabelsInCustomTemplate");
+		String duplicateContinue = localization.getFieldLabel("DuplicateLabelsInCustomTemplateContinue");
+		StringBuffer duplicates = new StringBuffer(localization.getFieldLabel("DuplicateLabels"));
+		duplicates.append(": ");
+		for(Iterator iter = duplicateLabelsFound.iterator(); iter.hasNext();)
 		{
-			MartusLocalization localization = mainWindow.getLocalization();
-			String duplicateTitle = localization.getWindowTitle("DuplicateLabelsInCustomTemplate");
-			String duplicateWarnging = localization.getFieldLabel("DuplicateLabelsInCustomTemplate");
-			String duplicateContinue = localization.getFieldLabel("DuplicateLabelsInCustomTemplateContinue");
-			StringBuffer duplicates = new StringBuffer(localization.getFieldLabel("DuplicateLabels"));
-			for(int i = 0; i < duplicateLabelsFound.size(); ++i)
-			{
-				if(i>0)
-					duplicates.append(", ");
-				duplicates.append("\"");
-				duplicates.append((String)duplicateLabelsFound.get(i));
-				duplicates.append("\"");
-				
-			}
-			String[] duplicateWarningMessage = {duplicateWarnging, duplicates.toString(), duplicateContinue};
-			if(mainWindow.confirmDlg(mainWindow, duplicateTitle, duplicateWarningMessage))
-				return true;
-		return false;
+			duplicates.append("\"");
+			duplicates.append((String) iter.next());
+			duplicates.append("\" ");
 		}
-		return true;
+		String[] duplicateWarningMessage = {duplicateWarnging, duplicates.toString(), duplicateContinue};
+		if(mainWindow.confirmDlg(mainWindow, duplicateTitle, duplicateWarningMessage))
+			return true;
+		return false;
 	}
 
+	public HashSet getDuplicateLabels()
+	{
+		HashSet duplicateLabelsFound = new HashSet();
+		try 
+		{
+			FieldSpec[] topSection = FieldCollection.parseXml(topSectionXmlTextArea.getText());
+			FieldSpec[] bottomSection = FieldCollection.parseXml(bottomSectionXmlTextArea.getText());
+			int topLength = topSection.length;
+			int bottomLength = bottomSection.length;
+			FieldSpec[] allSpecs = new FieldSpec[topLength + bottomLength];
+			System.arraycopy(topSection, 0, allSpecs, 0, topLength);
+			System.arraycopy(bottomSection, 0, allSpecs, topLength, bottomLength);
+			Vector foundLabels = new Vector();
+			for (int i = 0; i < allSpecs.length; i++)
+			{
+				FieldSpec thisSpec = allSpecs[i];
+				String label = thisSpec.getLabel();
+				if(label.length() > 0)
+				{
+					if(foundLabels.contains(label))
+						duplicateLabelsFound.add(label);				
+					foundLabels.add(label);
+				}
+			}
+		} 
+		catch (CustomFieldsParseException e) 
+		{
+		}
+		return duplicateLabelsFound;
+	}
+	
 	UiTextArea topSectionXmlTextArea;
 	UiTextArea bottomSectionXmlTextArea;
 	String topSectionXmlResult = null;
