@@ -78,9 +78,10 @@ public class TestFancySearchHelper extends TestCaseEnhanced
 		
 	}
 	
-	public void tearDown()
+	public void tearDown()throws Exception
 	{
 		tempDir.delete();
+		app.deleteAllFiles();
 	}
 	
 	public void testCreateFieldColumnSpec() throws Exception

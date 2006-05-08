@@ -70,9 +70,9 @@ public class TestLocalization extends TestCaseEnhanced
 	
 	protected void tearDown() throws Exception
 	{
+		super.tearDown();
 		DirectoryUtils.deleteEntireDirectoryTree(testTranslationDirectory);
 		assertFalse("Translation directory still exists?", testTranslationDirectory.exists());
-		super.tearDown();
 	}
 	
 	public void testEnglishStringsDontStartWithAngleBrackets() throws Exception
@@ -355,7 +355,7 @@ public class TestLocalization extends TestCaseEnhanced
 		return tmpResourceFile;
 	}
 	
-	public void testAddedMTPKLanguagePackWhenWeAllowUnofficialTranslations() throws Exception
+	public void testAddedMLPLanguagePackWhenWeAllowUnofficialTranslations() throws Exception
 	{
 		File translationDirectory = createTempDirectory();
 		MartusLocalization myLocalization = new MartusLocalization(translationDirectory, UiMainWindow.getAllEnglishStrings());
@@ -396,7 +396,7 @@ public class TestLocalization extends TestCaseEnhanced
 		assertFalse("A non existant translation should not be trusted.",myLocalization2.isOfficialTranslation("dx"));
 	}
 
-	public void testAddedMTPKLanguagePackWhenWeAllowONLYOfficialTranslations() throws Exception
+	public void testAddedMLPLanguagePackWhenWeAllowONLYOfficialTranslations() throws Exception
 	{
 		File translationDirectory = createTempDirectory();
 		MartusLocalization myLocalization = new MartusLocalization(translationDirectory, UiMainWindow.getAllEnglishStrings());
@@ -409,6 +409,7 @@ public class TestLocalization extends TestCaseEnhanced
 		someTestLanguage.deleteOnExit();
 		copyResourceFileToLocalFile(someTestLanguage, "Martus-xx.mlp");
 		ZipFile mlp = new ZipFile(someTestLanguage);
+		
 		foundSomeTestLanguage = doesLanguageExist(myLocalization, someTestLanguageCode);
 		assertTrue("should have testLanguage since it is official", foundSomeTestLanguage);
 		myLocalization.setCurrentLanguageCode(someTestLanguageCode);
@@ -416,7 +417,12 @@ public class TestLocalization extends TestCaseEnhanced
 		assertEquals("Incorrect translation No from within language pack", "No", myLocalization.getButtonLabel("no"));
 		assertTrue("A signed MLP file should be trusted", myLocalization.isOfficialTranslation(someTestLanguageCode));
 		
-		assertEquals("Date of MLP not the correct?", new Date(mlp.getEntry("META-INF").getTime()) , myLocalization.getMlpDate());	
+		assertEquals("Date of MLP not the correct?", new Date(mlp.getEntry("META-INF").getTime()) , myLocalization.getMlpDate());
+		mlp.close();
+		someTestLanguage.delete();
+		assertFalse(someTestLanguage.exists());
+		translationDirectory.delete();
+		assertFalse(translationDirectory.exists());
 
 		File translationDirectory2 = createTempDirectory();
 		MartusLocalization myLocalization2 = new MartusLocalization(translationDirectory2, EnglishStrings.strings);
@@ -425,12 +431,15 @@ public class TestLocalization extends TestCaseEnhanced
 		copyResourceFileToLocalFile(someTestLanguage2, "Martus-xx-notSigned.mlp");
 		foundSomeTestLanguage = doesLanguageExist(myLocalization2, someTestLanguageCode);
 		assertFalse("should not have testLanguage because its not signed.", foundSomeTestLanguage);
-		assertFalse("A unsigned MLPK file should not be trusted", myLocalization2.isOfficialTranslation(someTestLanguageCode));
+		assertFalse("A unsigned MLP file should not be trusted", myLocalization2.isOfficialTranslation(someTestLanguageCode));
 		assertFalse("A non existant translation should not be trusted.",myLocalization2.isOfficialTranslation("dx"));
 		myLocalization2.setCurrentLanguageCode(someTestLanguageCode);
 		assertFalse("Current translation should be trusted", myLocalization2.isCurrentTranslationOfficial());
 		assertFalse("We should not be using a Language Pack", myLocalization2.isTranslationInsideMLP());
-
+		someTestLanguage2.delete();
+		assertFalse(someTestLanguage2.exists());
+		translationDirectory2.delete();
+		assertFalse(translationDirectory2.exists());
 	}
 	
 	public void testDoesTranslationMatchProgramVersion() throws Exception

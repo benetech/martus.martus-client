@@ -102,6 +102,7 @@ public class TestKnownFieldSpecCache extends TestCaseEnhanced
 		app.getStore().importBulletinZipFile(new ZipFile(zipFile));
 		Set specsWithNotOurs = cache.getAllKnownFieldSpecs();
 		assertEquals("didn't ignore other author's bulletin?",0, specsWithNotOurs.size());
+		otherApp.deleteAllFiles();
 	}
 
 	public void testDeleteAndImportBulletin() throws Exception

@@ -32,7 +32,6 @@ import java.util.Vector;
 import org.martus.client.bulletinstore.BulletinFolder;
 import org.martus.client.bulletinstore.ClientBulletinStore.AddOlderVersionToFolderFailedException;
 import org.martus.client.core.BackgroundRetriever;
-import org.martus.client.core.MartusApp;
 import org.martus.client.core.RetrieveCommand;
 import org.martus.clientside.UiLocalization;
 import org.martus.common.ProgressMeterInterface;
@@ -49,7 +48,7 @@ public class TestBackgroundRetriever extends TestCaseEnhanced
 
 	public void testAppCurrentRetrieveCommand() throws Exception
 	{
-		MartusApp app = MockMartusApp.create();
+		MockMartusApp app = MockMartusApp.create();
 		RetrieveCommand shouldBeEmpty = app.getCurrentRetrieveCommand();
 		assertEquals("not empty?", 0, shouldBeEmpty.getRemainingToRetrieveCount());
 		
@@ -60,6 +59,7 @@ public class TestBackgroundRetriever extends TestCaseEnhanced
 		app.startBackgroundRetrieve(rc);
 		RetrieveCommand got = app.getCurrentRetrieveCommand();
 		assertEquals("didn't get it back?", rc.getRemainingToRetrieveCount(), got.getRemainingToRetrieveCount());
+		app.deleteAllFiles();
 	}
 	
 	public void testBasics() throws Exception
@@ -77,6 +77,7 @@ public class TestBackgroundRetriever extends TestCaseEnhanced
 		assertEquals("didn't update progress current?", 1, progressRecorder.current);
 		assertEquals("didn't set progress max?", rc.getTotalCount(), progressRecorder.max);
 		assertEquals("didn't perform retrieve?", uid, app.getRetrievedUid());
+		app.deleteAllFiles();
 	}
 
 	private RetrieveCommand createSampleRetrieveCommand()

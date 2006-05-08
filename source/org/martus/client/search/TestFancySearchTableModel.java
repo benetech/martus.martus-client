@@ -82,6 +82,7 @@ public class TestFancySearchTableModel extends TestCaseEnhanced
 		SearchableFieldChoiceItem languageItem = (SearchableFieldChoiceItem)fieldsSpec.getChoice(languageAt);
 		model.setValueAt(languageItem.getCode(), 0, FancySearchTableModel.fieldColumn);
 		assertEquals(new FieldTypeDropdown(), model.getCellType(0, FancySearchTableModel.valueColumn));
+		app.deleteAllFiles();
 		
 	}
 	
