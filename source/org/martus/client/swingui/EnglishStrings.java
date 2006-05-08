@@ -714,7 +714,7 @@ public class EnglishStrings
 "field:notifyNoHQsSelectedcause=Please select a Headquarters first.",
 "field:notifyErrorExportingCustomizationTemplatecause=There was an error saving your template.",
 "field:notifyErrorImportingCustomizationTemplatecause=There was an error importing this template.",
-"field:notifyErrorImportingCustomizationTemplateFuturecause=The customization template you are trying to import was created by a future version of Martus.  You need to upgrade to the latest version of Martus before you can import this template.",
+"field:notifyErrorImportingCustomizationTemplateFuturecause=The customization template you are trying to import was created by a newer version of Martus.  You need to upgrade to the latest version of Martus before you can import this template.",
 "field:notifyImportingCustomizationTemplateSuccesscause=Successfully imported customization template.",
 "field:notifyExportingCustomizationTemplateSuccesscause=Successfully exported customization template.",
 "field:notifyCreatingFieldSpecCachecause=Martus needs to keep a list of all the fields in all the bulletins in your system.\n\nThis list does not exist, so it will be created now. This may take a few seconds per bulletin on a slower computer.",
