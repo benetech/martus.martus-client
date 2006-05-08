@@ -72,15 +72,15 @@ public class BulletinXmlExporter
 		dest.write(MartusXml.getTagStart(VersionXMLElementName));
 		dest.write(VersionNumber);
 		dest.write(MartusXml.getTagEnd(VersionXMLElementName));
-		dest.write("<!-- Version 2: added Grid columns Labels-->");
+		dest.write("<!-- XML format Version 2: added Grid columns Labels-->");
 		dest.write(NEW_LINE);
-		dest.write("<!-- Version 3: added Dropdowns and Messages-->");
+		dest.write("<!-- XML format Version 3: added Dropdowns and Messages-->");
 		dest.write(NEW_LINE);
-		dest.write("<!-- Version 4: added Field Types-->");
+		dest.write("<!-- XML format Version 4: added Field Types-->");
 		dest.write(NEW_LINE);
-		dest.write("<!-- Version 5: added Grid FieldSpec Types-->");
+		dest.write("<!-- XML format Version 5: added Grid FieldSpec Types-->");
 		dest.write(NEW_LINE);
-		dest.write("<!-- Version 6: Daterange grid cells now exported as yyyy-mm-dd,yyyy-mm-dd-->");
+		dest.write("<!-- XML format Version 6: Daterange grid cells now exported as yyyy-mm-dd,yyyy-mm-dd-->");
 		dest.write(NEW_LINE);
 		
 		dest.write(NEW_LINE);
@@ -209,7 +209,7 @@ public class BulletinXmlExporter
 	
 
 	public final static String ExportedBulletinsElementName = "ExportedMartusBulletins";
-	public final static String VersionXMLElementName = "MartusBulletinExportVersion";
+	public final static String VersionXMLElementName = "MartusBulletinExportFormatVersion";
 	public final static String PublicOnlyElementName = "PublicDataOnly";
 	public final static String PublicAndPrivateElementName = "PublicAndPrivateData";
 	public final static String BulletinElementName = "MartusBulletin";
