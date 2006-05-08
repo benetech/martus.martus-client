@@ -229,7 +229,7 @@ public class BulletinXmlExporter
 	private final static String VALUE = "Value";
 	private final static String LABEL = "Label";
 
-	private final static String VersionNumber = "5";
+	private final static String VersionNumber = "6";
 	
 	
 	MiniLocalization localization;
