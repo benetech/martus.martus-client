@@ -335,6 +335,7 @@ public class TestCustomFieldSpecValidator extends TestCaseEnhanced
 
 		ChoiceItem[] choicesNoDups = {new ChoiceItem("no Dup", "first item"), new ChoiceItem("second", "second item")};
 		DropDownFieldSpec dropDownSpecNoDuplicates = new DropDownFieldSpec(choicesNoDups);
+		dropDownSpecNoDuplicates.setLabel("dropdown column label");
 		GridFieldSpec gridWithNoDuplicateDropdownEntries = new GridFieldSpec();
 		gridWithNoDuplicateDropdownEntries.setTag(tag);
 		gridWithNoDuplicateDropdownEntries.setLabel(label);
@@ -343,6 +344,7 @@ public class TestCustomFieldSpecValidator extends TestCaseEnhanced
 
 		ChoiceItem[] choicesNoDups2 = {new ChoiceItem("no Dup2", "first item2"), new ChoiceItem("second2", "second item2")};
 		DropDownFieldSpec dropDownSpecNoDuplicates2 = new DropDownFieldSpec(choicesNoDups2);
+		dropDownSpecNoDuplicates2.setLabel("label");
 		GridFieldSpec gridWithNoDuplicateDropdownEntries2 = new GridFieldSpec();
 		gridWithNoDuplicateDropdownEntries2.setTag(tag2);
 		gridWithNoDuplicateDropdownEntries2.setLabel(label2);
@@ -355,6 +357,7 @@ public class TestCustomFieldSpecValidator extends TestCaseEnhanced
 		specsTopSection = StandardFieldSpecs.getDefaultTopSectionFieldSpecs();
 		ChoiceItem[] choicesWithDuplicate = {new ChoiceItem("duplicate", "duplicate"), new ChoiceItem("duplicate", "duplicate")};
 		DropDownFieldSpec dropDownSpecWithDuplicates = new DropDownFieldSpec(choicesWithDuplicate);
+		dropDownSpecWithDuplicates.setLabel("dropdown column label with dups");
 		GridFieldSpec gridWithDuplicateDropdownEntries = new GridFieldSpec();
 		gridWithDuplicateDropdownEntries.setTag(tag);
 		gridWithDuplicateDropdownEntries.setLabel(label);
@@ -364,6 +367,7 @@ public class TestCustomFieldSpecValidator extends TestCaseEnhanced
 		specsBottomSection = StandardFieldSpecs.getDefaultBottomSectionFieldSpecs();
 		ChoiceItem[] choicesWithDuplicate2 = {new ChoiceItem("duplicate2", "duplicate2"), new ChoiceItem("duplicate2", "duplicate2")};
 		DropDownFieldSpec dropDownSpecWithDuplicates2 = new DropDownFieldSpec(choicesWithDuplicate2);
+		dropDownSpecWithDuplicates2.setLabel("Dropdown label");
 		GridFieldSpec gridWithDuplicateDropdownEntries2 = new GridFieldSpec();
 		gridWithDuplicateDropdownEntries2.setTag(tag2);
 		gridWithDuplicateDropdownEntries2.setLabel(label2);
@@ -415,6 +419,7 @@ public class TestCustomFieldSpecValidator extends TestCaseEnhanced
 		FieldSpec[] specsBottomSection = StandardFieldSpecs.getDefaultBottomSectionFieldSpecs();
 
 		DropDownFieldSpec dropDownSpecNoEntries = new DropDownFieldSpec();
+		dropDownSpecNoEntries.setLabel("dropdown label");
 		GridFieldSpec gridWithNoDropdownEntries = new GridFieldSpec();
 		gridWithNoDropdownEntries.setTag(tag);
 		gridWithNoDropdownEntries.setLabel(label);
@@ -422,6 +427,7 @@ public class TestCustomFieldSpecValidator extends TestCaseEnhanced
 		specsTopSection = addFieldSpec(specsTopSection, gridWithNoDropdownEntries);
 
 		DropDownFieldSpec dropDownSpecNoEntries2 = new DropDownFieldSpec();
+		dropDownSpecNoEntries2.setLabel("dropdown label 2");
 		GridFieldSpec gridWithNoDropdownEntries2 = new GridFieldSpec();
 		gridWithNoDropdownEntries2.setTag(tag2);
 		gridWithNoDropdownEntries2.setLabel(label2);
@@ -436,6 +442,29 @@ public class TestCustomFieldSpecValidator extends TestCaseEnhanced
 		verifyExpectedError("No Dropdown Entries In Grids Bottom Section", CustomFieldError.CODE_NO_DROPDOWN_ENTRIES, tag2, label2, null, (CustomFieldError)errors.get(1));
 	}
 	
+	public void testBlankLabelsInsideOfAGrid() throws Exception
+	{
+		String columnTag = "dd";
+		String columnEmptyLabel ="";
+		FieldSpec[] specsTopSection = StandardFieldSpecs.getDefaultTopSectionFieldSpecs();
+		FieldSpec[] specsBottomSection = StandardFieldSpecs.getDefaultBottomSectionFieldSpecs();
+
+		
+		String gridTag = "Grid";
+		String gridLabel = "Grid Label";
+		GridFieldSpec gridWithEmptyColumnLabel = new GridFieldSpec();
+		gridWithEmptyColumnLabel.setTag(gridTag);
+		gridWithEmptyColumnLabel.setLabel(gridLabel);
+		
+		gridWithEmptyColumnLabel.addColumn(LegacyCustomFields.createFromLegacy(columnTag+","+columnEmptyLabel));
+		specsTopSection = addFieldSpec(specsTopSection, gridWithEmptyColumnLabel);
+
+		CustomFieldSpecValidator checker = new CustomFieldSpecValidator(specsTopSection, specsBottomSection);
+		assertFalse("valid?", checker.isValid());
+		Vector errors = checker.getAllErrors();
+		assertEquals("Should have 1 error", 1, errors.size());
+		verifyExpectedError("Empty Column Label in Grids", CustomFieldError.CODE_MISSING_LABEL, gridTag, columnEmptyLabel, null, (CustomFieldError)errors.get(0));
+	}
 
 	public void testMissingCustomLabel() throws Exception
 	{
@@ -447,14 +476,18 @@ public class TestCustomFieldSpecValidator extends TestCaseEnhanced
 		assertTrue("not valid?", checker.isValid());
 		String tag = "b";
 		specsTopSection = addFieldSpec(specsTopSection, LegacyCustomFields.createFromLegacy(tag));
+		String tag1 = "ab";
+		String spaceLabel = " ";
+		specsTopSection = addFieldSpec(specsTopSection, LegacyCustomFields.createFromLegacy(tag1+","+spaceLabel));
 		String tag2 = "b2";
 		specsBottomSection = addFieldSpec(specsBottomSection, LegacyCustomFields.createFromLegacy(tag2));
 		CustomFieldSpecValidator checker2 = new CustomFieldSpecValidator(specsTopSection, specsBottomSection);
 		assertFalse("valid?", checker2.isValid());
 		Vector errors = checker2.getAllErrors();
-		assertEquals("Should have 2 error", 2, errors.size());
-		verifyExpectedError("Duplicate Tags", CustomFieldError.CODE_MISSING_LABEL, tag, null, null, (CustomFieldError)errors.get(0));
-		verifyExpectedError("Duplicate Tags Bottom Section", CustomFieldError.CODE_MISSING_LABEL, tag2, null, null, (CustomFieldError)errors.get(1));
+		assertEquals("Should have 3 error", 3, errors.size());
+		verifyExpectedError("Missing Label", CustomFieldError.CODE_MISSING_LABEL, tag, null, null, (CustomFieldError)errors.get(0));
+		verifyExpectedError("Label with spaces Only", CustomFieldError.CODE_MISSING_LABEL, tag1, null, null, (CustomFieldError)errors.get(1));
+		verifyExpectedError("Missing Label Bottom Section", CustomFieldError.CODE_MISSING_LABEL, tag2, null, null, (CustomFieldError)errors.get(2));
 	}
 	
 	public void testUnknownType() throws Exception

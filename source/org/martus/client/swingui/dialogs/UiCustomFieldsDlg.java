@@ -423,12 +423,12 @@ public class UiCustomFieldsDlg extends JDialog
 		for (int i = 0; i < allSpecs.length; i++)
 		{
 			FieldSpec thisSpec = allSpecs[i];
-			String label = thisSpec.getLabel();
+			String label = thisSpec.getLabel().trim();
 			if(label.length() == 0)
 				continue;
 		
 			if(foundLabels.contains(label))
-				addUniqueLabels(duplicateLabelsFound, label);				
+				addToVectorIfNotAlreadyThere(duplicateLabelsFound, label);				
 			foundLabels.add(label);
 			
 			if(!thisSpec.getType().isGrid())
@@ -440,19 +440,17 @@ public class UiCustomFieldsDlg extends JDialog
 		return duplicateLabelsFound;
 	}
 
-	private void addUniqueLabels(Vector duplicateLabelsFound, String label)
+	private void addToVectorIfNotAlreadyThere(Vector vector, String label)
 	{
-		if(!duplicateLabelsFound.contains(label))
-			duplicateLabelsFound.add(label);
+		if(!vector.contains(label))
+			vector.add(label);
 	}
 
 	private void addAllUniqueLabels(Vector duplicateLabelsFound, Vector duplicatedGridLabels)
 	{
 		for(int j=0;j<duplicatedGridLabels.size(); ++j)
 		{
-			Object gridLabel = duplicatedGridLabels.get(j);
-			if(!duplicateLabelsFound.contains(gridLabel))
-				duplicateLabelsFound.add(gridLabel);				
+			addToVectorIfNotAlreadyThere(duplicateLabelsFound, (String)duplicatedGridLabels.get(j));
 		}
 	}
 
@@ -463,10 +461,9 @@ public class UiCustomFieldsDlg extends JDialog
 		HashSet uniqueGridColumnLabels = new HashSet();
 		for(Iterator iter = gridLabels.iterator(); iter.hasNext();)
 		{
-			String gridColumnLabel = (String) iter.next();
+			String gridColumnLabel = ((String)iter.next()).trim();
 			if(uniqueGridColumnLabels.contains(gridColumnLabel))
-				if(!duplicatedGridLabels.contains(gridColumnLabel))
-					duplicatedGridLabels.add(gridColumnLabel);				
+				addToVectorIfNotAlreadyThere(duplicatedGridLabels, gridColumnLabel);
 			uniqueGridColumnLabels.add(gridColumnLabel);
 		}
 		return duplicatedGridLabels;
