@@ -41,6 +41,8 @@ import org.martus.client.search.TestFancySearchTableModel;
 import org.martus.client.search.TestSearchParser;
 import org.martus.client.search.TestSearchTreeNode;
 import org.martus.client.swingui.grids.TestGridTableModel;
+import org.martus.common.fieldspec.TestCustomFieldSpecValidator;
+import org.martus.common.fieldspec.TestCustomFieldTemplate;
 
 public class TestClient
 {
