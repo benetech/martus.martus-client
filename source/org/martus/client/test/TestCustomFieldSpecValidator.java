@@ -27,7 +27,6 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.test;
 
 import java.util.Vector;
-
 import org.martus.common.FieldCollection;
 import org.martus.common.LegacyCustomFields;
 import org.martus.common.bulletin.BulletinConstants;
@@ -522,6 +521,37 @@ public class TestCustomFieldSpecValidator extends TestCaseEnhanced
 		verifyExpectedError("Unknown Type Bottom Section", CustomFieldError.CODE_UNKNOWN_TYPE, tag2, label2, null, (CustomFieldError)errors.get(1));
 	}
 
+	public void testUnknownTypeInsideGrids() throws Exception
+	{
+		String gridTag = "Tag";
+		String gridLabel = "Label";
+
+		TestGridFieldSpec gridWithUnknownColumnType = new TestGridFieldSpec();
+		gridWithUnknownColumnType.setTag(gridTag);
+		gridWithUnknownColumnType.setLabel(gridLabel);
+		String columnTag = "weirdTag2";
+		String columnLabel = "weird Label2";
+		String xmlFieldUnknownType2 = "<CustomFields><Field><Tag>"+columnTag+"</Tag>" +
+			"<Label>" + columnLabel + "</Label><Type>xxx</Type>" +
+			"</Field></CustomFields>";
+		FieldSpec badSpecBottomSection = FieldCollection.parseXml(xmlFieldUnknownType2)[0]; 
+		
+		gridWithUnknownColumnType.addColumn(badSpecBottomSection);
+
+		
+		FieldSpec[] specsTopSection = StandardFieldSpecs.getDefaultTopSectionFieldSpecs();
+		specsTopSection = addFieldSpec(specsTopSection, gridWithUnknownColumnType);
+		
+		FieldSpec[] specsBottomSection = StandardFieldSpecs.getDefaultBottomSectionFieldSpecs();
+
+		CustomFieldSpecValidator checker = new CustomFieldSpecValidator(specsTopSection, specsBottomSection);
+		assertFalse("didn't detect unknown?", checker.isValid());
+
+		Vector errors = checker.getAllErrors();
+		assertEquals("Should have 1 error", 1, errors.size());
+		verifyExpectedError("Unknown Type", CustomFieldError.CODE_UNKNOWN_TYPE, gridTag, columnLabel, null, (CustomFieldError)errors.get(0));
+	}
+
 	public void testStandardFieldWithLabel() throws Exception
 	{
 		FieldSpec[] specsTopSection = StandardFieldSpecs.getDefaultTopSectionFieldSpecs();
@@ -617,6 +647,15 @@ public class TestCustomFieldSpecValidator extends TestCaseEnhanced
 		
 		return allNonRequiredMartusFieldSpecs;
 		
+	}
+	
+	class TestGridFieldSpec extends GridFieldSpec
+	{
+
+		public boolean isValidColumnType(FieldType columnType)
+		{
+			return true;
+		}
 	}
 	
 }
