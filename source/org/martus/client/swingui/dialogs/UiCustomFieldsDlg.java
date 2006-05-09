@@ -440,7 +440,7 @@ public class UiCustomFieldsDlg extends JDialog
 		return duplicateLabelsFound;
 	}
 
-	private void addToVectorIfNotAlreadyThere(Vector vector, String label)
+	private void addToVectorIfNotAlreadyThere(Vector vector, Object label)
 	{
 		if(!vector.contains(label))
 			vector.add(label);
@@ -450,7 +450,7 @@ public class UiCustomFieldsDlg extends JDialog
 	{
 		for(int j=0;j<duplicatedGridLabels.size(); ++j)
 		{
-			addToVectorIfNotAlreadyThere(duplicateLabelsFound, (String)duplicatedGridLabels.get(j));
+			addToVectorIfNotAlreadyThere(duplicateLabelsFound, duplicatedGridLabels.get(j));
 		}
 	}
 
