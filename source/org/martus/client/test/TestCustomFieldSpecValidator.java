@@ -446,6 +446,7 @@ public class TestCustomFieldSpecValidator extends TestCaseEnhanced
 	{
 		String columnTag = "dd";
 		String columnEmptyLabel ="";
+		String columnSpaceLabel =" ";
 		FieldSpec[] specsTopSection = StandardFieldSpecs.getDefaultTopSectionFieldSpecs();
 		FieldSpec[] specsBottomSection = StandardFieldSpecs.getDefaultBottomSectionFieldSpecs();
 
@@ -457,13 +458,15 @@ public class TestCustomFieldSpecValidator extends TestCaseEnhanced
 		gridWithEmptyColumnLabel.setLabel(gridLabel);
 		
 		gridWithEmptyColumnLabel.addColumn(LegacyCustomFields.createFromLegacy(columnTag+","+columnEmptyLabel));
+		gridWithEmptyColumnLabel.addColumn(LegacyCustomFields.createFromLegacy(columnTag+","+columnSpaceLabel));
 		specsTopSection = addFieldSpec(specsTopSection, gridWithEmptyColumnLabel);
 
 		CustomFieldSpecValidator checker = new CustomFieldSpecValidator(specsTopSection, specsBottomSection);
 		assertFalse("valid?", checker.isValid());
 		Vector errors = checker.getAllErrors();
-		assertEquals("Should have 1 error", 1, errors.size());
-		verifyExpectedError("Empty Column Label in Grids", CustomFieldError.CODE_MISSING_LABEL, gridTag, columnEmptyLabel, null, (CustomFieldError)errors.get(0));
+		assertEquals("Should have 2 error", 2, errors.size());
+		verifyExpectedError("Empty Column Label in Grids", CustomFieldError.CODE_MISSING_LABEL, gridTag, null, null, (CustomFieldError)errors.get(0));
+		verifyExpectedError("Space Column Label in Grids", CustomFieldError.CODE_MISSING_LABEL, gridTag, null, null, (CustomFieldError)errors.get(1));
 	}
 
 	public void testMissingCustomLabel() throws Exception
