@@ -37,10 +37,9 @@ public class BulletinXmlConstants
 	public final static String LocalIdElementName = "LocalId";
 	public final static String AllPrivateElementName = "AllPrivate";
 	public final static String AccountIdElementName = "AuthorAccountId";
-	public final static String AttachmentsListElementName = "AttachmentList";
-	public final static String AttachmentElementName = "Attachment";	
 	public final static String HistoryElementName = "History";
 	public final static String AncestorElementName = "Ancestor";
+	public final static String TagAttributeName = "tag";
 	public final static String ATTACHMENT_TAG = "Attachment";
 	public final static String FILENAME_TAG = "Filename";
 	public final static String TYPE = "Type";
@@ -49,6 +48,15 @@ public class BulletinXmlConstants
 	public final static String LABEL = "Label";
 	public final static String FIELD = "Field";
 	public final static String NEW_LINE = "\n";
+	public final static String MartusBulletinsElementName = "MartusBulletins";
+	public final static String MartusBulletinElementName = "MartusBulletin";
+	public final static String TopSectionAttachmentListElementName = "TopAttachmentList";
+	public final static String BottomSectionAttachmentListElementName = "BottomAttachmentList";
+	public final static String DateSimple = "Simple:";
+	public final static String DateRange = "Range:";
+	public final static String FieldValuesElementName = "FieldValues";
+	public final static String PrivateFieldSpecsElementName = "PrivateFieldSpecs";
+	public final static String MainFieldSpecsElementName = "MainFieldSpecs";
 
 	public final static String VersionNumber = "6";
 

@@ -112,7 +112,7 @@ public class BulletinXmlExporter
 		{
 			dest.write(MartusXml.getTagStart(BulletinXmlConstants.PublicDataElementName));
 			writeFields(dest, b, b.getTopSectionFieldSpecs());
-			writeAttachments(dest, b.getPublicAttachments());
+			writeAttachments(dest, b.getPublicAttachments(), BulletinXmlConstants.TopSectionAttachmentListElementName);
 			dest.write(MartusXml.getTagEnd(BulletinXmlConstants.PublicDataElementName));
 		}
 
@@ -120,7 +120,7 @@ public class BulletinXmlExporter
 		{
 			dest.write(MartusXml.getTagStart(BulletinXmlConstants.PrivateDataElementName));
 			writeFields(dest, b, b.getBottomSectionFieldSpecs());
-			writeAttachments(dest, b.getPrivateAttachments());
+			writeAttachments(dest, b.getPrivateAttachments(), BulletinXmlConstants.BottomSectionAttachmentListElementName);
 			dest.write(MartusXml.getTagEnd(BulletinXmlConstants.PrivateDataElementName));
 		}
 
@@ -128,19 +128,19 @@ public class BulletinXmlExporter
 		dest.write(BulletinXmlConstants.NEW_LINE);
 	}
 
-	static void writeAttachments(Writer dest, AttachmentProxy[] publicAttachments)
+	static void writeAttachments(Writer dest, AttachmentProxy[] attachments, String attachmentSectionTag)
 		throws IOException
 	{
-		if(publicAttachments.length == 0)
+		if(attachments.length == 0)
 			return;
 
-		dest.write(MartusXml.getTagStart(BulletinXmlConstants.AttachmentsListElementName));
-		for (int i = 0; i < publicAttachments.length; i++)
+		dest.write(MartusXml.getTagStart(attachmentSectionTag));
+		for (int i = 0; i < attachments.length; i++)
 		{
-			AttachmentProxy proxy = publicAttachments[i];
-			writeElement(dest, "", BulletinXmlConstants.AttachmentElementName, "", proxy.getLabel());
+			AttachmentProxy proxy = attachments[i];
+			writeElement(dest, "", BulletinXmlConstants.ATTACHMENT_TAG, "", proxy.getLabel());
 		}
-		dest.write(MartusXml.getTagEnd(BulletinXmlConstants.AttachmentsListElementName));
+		dest.write(MartusXml.getTagEnd(attachmentSectionTag));
 	}
 
 	void writeFields(Writer dest, Bulletin b, FieldSpec[] specs)
