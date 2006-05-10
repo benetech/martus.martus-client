@@ -41,8 +41,6 @@ import org.martus.client.search.TestFancySearchTableModel;
 import org.martus.client.search.TestSearchParser;
 import org.martus.client.search.TestSearchTreeNode;
 import org.martus.client.swingui.grids.TestGridTableModel;
-import org.martus.common.fieldspec.TestCustomFieldSpecValidator;
-import org.martus.common.fieldspec.TestCustomFieldTemplate;
 
 public class TestClient
 {
@@ -68,17 +66,15 @@ public class TestClient
 		suite.addTest(new TestSuite(TestBulletinXmlExporter.class));
 		suite.addTest(new TestSuite(TestClientBulletinStore.class));
 		suite.addTest(new TestSuite(TestConfigInfo.class));
-		suite.addTest(new TestSuite(TestCustomFieldSpecValidator.class));
-		suite.addTest(new TestSuite(TestCustomFieldTemplate.class));
 		suite.addTest(new TestSuite(TestFancySearchHelper.class));
 		suite.addTest(new TestSuite(TestFancySearchTableModel.class));
 		suite.addTest(new TestSuite(TestFolderList.class));
 		suite.addTest(new TestSuite(TestGridTableModel.class));
 		suite.addTest(new TestSuite(TestImporterOfXmlFilesOfBulletins.class));
 		suite.addTest(new TestSuite(TestKnownFieldSpecCache.class));
+		suite.addTest(new TestSuite(TestLocalization.class));
 		suite.addTest(new TestSuite(TestMartusApp_NoServer.class));
 		suite.addTest(new TestSuite(TestMartusFlexidate.class));
-		suite.addTest(new TestSuite(TestLocalization.class));
 		suite.addTest(new TestSuite(TestMartusUserNameAndPassword.class));
 		suite.addTest(new TestSuite(TestRetrieveCommand.class));
 		suite.addTest(new TestSuite(TestReportFormat.class));
