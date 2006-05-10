@@ -34,7 +34,7 @@ public class BulletinXmlConstants
 	public final static String BulletinElementName = "MartusBulletin";
 	public final static String PublicDataElementName = "PublicData";
 	public final static String PrivateDataElementName = "PrivateData";
-	public final static String LocalIdElementName = "LocalId";
+	public final static String LocalIdElementName = "BulletinLocalId";
 	public final static String AllPrivateElementName = "AllPrivate";
 	public final static String AccountIdElementName = "AuthorAccountId";
 	public final static String HistoryElementName = "History";
