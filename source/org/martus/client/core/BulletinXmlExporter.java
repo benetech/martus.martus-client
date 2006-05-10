@@ -222,14 +222,16 @@ public class BulletinXmlExporter
 	public final static String AttachmentElementName = "Attachment";	
 	public final static String HistoryElementName = "History";
 	public final static String AncestorElementName = "Ancestor";
-	
-	private final static String NEW_LINE = "\n";
-	private final static String TYPE = "Type";
-	private final static String TAG = "Tag";
-	private final static String VALUE = "Value";
-	private final static String LABEL = "Label";
+	public final static String ATTACHMENT_TAG = "Attachment";
+	public final static String FILENAME_TAG = "Filename";
+	public final static String TYPE = "Type";
+	public final static String TAG = "Tag";
+	public final static String VALUE = "Value";
+	public final static String LABEL = "Label";
+	public final static String FIELD = "Field";
+	public final static String NEW_LINE = "\n";
 
-	private final static String VersionNumber = "6";
+	public final static String VersionNumber = "6";
 	
 	
 	MiniLocalization localization;
