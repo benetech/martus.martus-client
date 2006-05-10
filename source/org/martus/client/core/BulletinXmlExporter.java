@@ -50,82 +50,82 @@ public class BulletinXmlExporter
 	public void exportBulletins(Writer dest, Vector bulletins, boolean includePrivateData)
 		throws IOException
 	{
-		dest.write(MartusXml.getTagStartWithNewline(ExportedBulletinsElementName));
+		dest.write(MartusXml.getTagStartWithNewline(BulletinXmlConstants.ExportedBulletinsElementName));
 		writeXMLVersion(dest);
 		
 		if(includePrivateData)
-			writeElement(dest, "", PublicAndPrivateElementName, "", "");
+			writeElement(dest, "", BulletinXmlConstants.PublicAndPrivateElementName, "", "");
 		else
-			writeElement(dest, "", PublicOnlyElementName, "", "");
-		dest.write(NEW_LINE);
+			writeElement(dest, "", BulletinXmlConstants.PublicOnlyElementName, "", "");
+		dest.write(BulletinXmlConstants.NEW_LINE);
 
 		for (int i = 0; i < bulletins.size(); i++)
 		{
 			Bulletin b = (Bulletin)bulletins.get(i);
 			exportOneBulletin(b, dest, includePrivateData);
 		}
-		dest.write(MartusXml.getTagEnd(ExportedBulletinsElementName));
+		dest.write(MartusXml.getTagEnd(BulletinXmlConstants.ExportedBulletinsElementName));
 	}
 
 	private static void writeXMLVersion(Writer dest) throws IOException
 	{
-		dest.write(MartusXml.getTagStart(VersionXMLElementName));
-		dest.write(VersionNumber);
-		dest.write(MartusXml.getTagEnd(VersionXMLElementName));
+		dest.write(MartusXml.getTagStart(BulletinXmlConstants.VersionXMLElementName));
+		dest.write(BulletinXmlConstants.VersionNumber);
+		dest.write(MartusXml.getTagEnd(BulletinXmlConstants.VersionXMLElementName));
 		dest.write("<!-- XML format Version 2: added Grid columns Labels-->");
-		dest.write(NEW_LINE);
+		dest.write(BulletinXmlConstants.NEW_LINE);
 		dest.write("<!-- XML format Version 3: added Dropdowns and Messages-->");
-		dest.write(NEW_LINE);
+		dest.write(BulletinXmlConstants.NEW_LINE);
 		dest.write("<!-- XML format Version 4: added Field Types-->");
-		dest.write(NEW_LINE);
+		dest.write(BulletinXmlConstants.NEW_LINE);
 		dest.write("<!-- XML format Version 5: added Grid FieldSpec Types-->");
-		dest.write(NEW_LINE);
+		dest.write(BulletinXmlConstants.NEW_LINE);
 		dest.write("<!-- XML format Version 6: Daterange grid cells now exported as yyyy-mm-dd,yyyy-mm-dd-->");
-		dest.write(NEW_LINE);
+		dest.write(BulletinXmlConstants.NEW_LINE);
 		
-		dest.write(NEW_LINE);
+		dest.write(BulletinXmlConstants.NEW_LINE);
 	}
 
 	void exportOneBulletin(Bulletin b, Writer dest, boolean includePrivateData) throws IOException
 	{
-		dest.write(MartusXml.getTagStartWithNewline(BulletinElementName));
+		dest.write(MartusXml.getTagStartWithNewline(BulletinXmlConstants.BulletinElementName));
 
-		writeElement(dest, "", LocalIdElementName, "", b.getLocalId());
-		writeElement(dest, "", AccountIdElementName, "", b.getAccount());
+		writeElement(dest, "", BulletinXmlConstants.LocalIdElementName, "", b.getLocalId());
+		writeElement(dest, "", BulletinXmlConstants.AccountIdElementName, "", b.getAccount());
 		if(b.isAllPrivate())
-			writeElement(dest, "", AllPrivateElementName, "", "");
+			writeElement(dest, "", BulletinXmlConstants.AllPrivateElementName, "", "");
 		
 		BulletinHistory history = b.getHistory();
 		if(history.size() > 0)
 		{
-			dest.write(MartusXml.getTagStartWithNewline(HistoryElementName));
+			dest.write(MartusXml.getTagStartWithNewline(BulletinXmlConstants.HistoryElementName));
 			for(int i=0; i < history.size(); ++i)
 			{
-				dest.write(MartusXml.getTagStart(AncestorElementName));
+				dest.write(MartusXml.getTagStart(BulletinXmlConstants.AncestorElementName));
 				dest.write(history.get(i));
-				dest.write(MartusXml.getTagEnd(AncestorElementName));
+				dest.write(MartusXml.getTagEnd(BulletinXmlConstants.AncestorElementName));
 			}
-			dest.write(MartusXml.getTagEnd(HistoryElementName));
+			dest.write(MartusXml.getTagEnd(BulletinXmlConstants.HistoryElementName));
 		}
 
 		if(includePrivateData || !b.isAllPrivate())
 		{
-			dest.write(MartusXml.getTagStart(PublicDataElementName));
+			dest.write(MartusXml.getTagStart(BulletinXmlConstants.PublicDataElementName));
 			writeFields(dest, b, b.getTopSectionFieldSpecs());
 			writeAttachments(dest, b.getPublicAttachments());
-			dest.write(MartusXml.getTagEnd(PublicDataElementName));
+			dest.write(MartusXml.getTagEnd(BulletinXmlConstants.PublicDataElementName));
 		}
 
 		if(includePrivateData)
 		{
-			dest.write(MartusXml.getTagStart(PrivateDataElementName));
+			dest.write(MartusXml.getTagStart(BulletinXmlConstants.PrivateDataElementName));
 			writeFields(dest, b, b.getBottomSectionFieldSpecs());
 			writeAttachments(dest, b.getPrivateAttachments());
-			dest.write(MartusXml.getTagEnd(PrivateDataElementName));
+			dest.write(MartusXml.getTagEnd(BulletinXmlConstants.PrivateDataElementName));
 		}
 
-		dest.write(MartusXml.getTagEnd(BulletinElementName));
-		dest.write(NEW_LINE);
+		dest.write(MartusXml.getTagEnd(BulletinXmlConstants.BulletinElementName));
+		dest.write(BulletinXmlConstants.NEW_LINE);
 	}
 
 	static void writeAttachments(Writer dest, AttachmentProxy[] publicAttachments)
@@ -134,13 +134,13 @@ public class BulletinXmlExporter
 		if(publicAttachments.length == 0)
 			return;
 
-		dest.write(MartusXml.getTagStart(AttachmentsListElementName));
+		dest.write(MartusXml.getTagStart(BulletinXmlConstants.AttachmentsListElementName));
 		for (int i = 0; i < publicAttachments.length; i++)
 		{
 			AttachmentProxy proxy = publicAttachments[i];
-			writeElement(dest, "", AttachmentElementName, "", proxy.getLabel());
+			writeElement(dest, "", BulletinXmlConstants.AttachmentElementName, "", proxy.getLabel());
 		}
-		dest.write(MartusXml.getTagEnd(AttachmentsListElementName));
+		dest.write(MartusXml.getTagEnd(BulletinXmlConstants.AttachmentsListElementName));
 	}
 
 	void writeFields(Writer dest, Bulletin b, FieldSpec[] specs)
@@ -158,10 +158,10 @@ public class BulletinXmlExporter
 			{
 				GridFieldSpec grid = (GridFieldSpec)spec;
 				String columnLabels = grid.getDetailsXml();
-				final String typeTagAndData = getXmlEncodedTagWithData(TYPE, FieldSpec.getTypeString(spec.getType()));
-				final String tagTagAndData = getXmlEncodedTagWithData(TAG, tag);
-				final String labelTagAndData = getXmlEncodedTagWithData(LABEL, spec.getLabel());
-				final String valueTagAndData = MartusXml.getTagWithData(VALUE, value + columnLabels);
+				final String typeTagAndData = getXmlEncodedTagWithData(BulletinXmlConstants.TYPE, FieldSpec.getTypeString(spec.getType()));
+				final String tagTagAndData = getXmlEncodedTagWithData(BulletinXmlConstants.TAG, tag);
+				final String labelTagAndData = getXmlEncodedTagWithData(BulletinXmlConstants.LABEL, spec.getLabel());
+				final String valueTagAndData = MartusXml.getTagWithData(BulletinXmlConstants.VALUE, value + columnLabels);
 				writeElementDirect(dest, typeTagAndData, tagTagAndData, labelTagAndData, valueTagAndData);
 			}
 			else
@@ -185,15 +185,15 @@ public class BulletinXmlExporter
 		String xmlValueAndFieldData = "";
 		
 		if(fieldType.length() > 0)
-			xmlFieldTypeAndValue = getXmlEncodedTagWithData(TYPE, fieldType);
+			xmlFieldTypeAndValue = getXmlEncodedTagWithData(BulletinXmlConstants.TYPE, fieldType);
 
-		xmlTagAndValue = getXmlEncodedTagWithData(TAG, tag);
+		xmlTagAndValue = getXmlEncodedTagWithData(BulletinXmlConstants.TAG, tag);
 
 		if (rawLabel.length() > 0)
-			xmlLabelAndValue = getXmlEncodedTagWithData(LABEL, rawLabel);
+			xmlLabelAndValue = getXmlEncodedTagWithData(BulletinXmlConstants.LABEL, rawLabel);
 		
 		if (rawFieldData.length() > 0)
-			xmlValueAndFieldData = getXmlEncodedTagWithData(VALUE, rawFieldData);
+			xmlValueAndFieldData = getXmlEncodedTagWithData(BulletinXmlConstants.VALUE, rawFieldData);
 		writeElementDirect(dest, xmlFieldTypeAndValue, xmlTagAndValue, xmlLabelAndValue, xmlValueAndFieldData);		
 	}	
 	
@@ -207,31 +207,6 @@ public class BulletinXmlExporter
 		dest.write(MartusXml.getTagEnd(MartusXml.tagField));		
 	}
 	
-
-	public final static String ExportedBulletinsElementName = "ExportedMartusBulletins";
-	public final static String VersionXMLElementName = "MartusBulletinExportFormatVersion";
-	public final static String PublicOnlyElementName = "PublicDataOnly";
-	public final static String PublicAndPrivateElementName = "PublicAndPrivateData";
-	public final static String BulletinElementName = "MartusBulletin";
-	public final static String PublicDataElementName = "PublicData";
-	public final static String PrivateDataElementName = "PrivateData";
-	public final static String LocalIdElementName = "LocalId";
-	public final static String AllPrivateElementName = "AllPrivate";
-	public final static String AccountIdElementName = "AuthorAccountId";
-	public final static String AttachmentsListElementName = "AttachmentList";
-	public final static String AttachmentElementName = "Attachment";	
-	public final static String HistoryElementName = "History";
-	public final static String AncestorElementName = "Ancestor";
-	public final static String ATTACHMENT_TAG = "Attachment";
-	public final static String FILENAME_TAG = "Filename";
-	public final static String TYPE = "Type";
-	public final static String TAG = "Tag";
-	public final static String VALUE = "Value";
-	public final static String LABEL = "Label";
-	public final static String FIELD = "Field";
-	public final static String NEW_LINE = "\n";
-
-	public final static String VersionNumber = "6";
 	
 	
 	MiniLocalization localization;
