@@ -29,7 +29,6 @@ package org.martus.client.core;
 import java.io.IOException;
 import java.io.Writer;
 import java.util.Vector;
-
 import org.martus.common.MartusXml;
 import org.martus.common.MiniLocalization;
 import org.martus.common.bulletin.AttachmentProxy;
@@ -84,23 +83,7 @@ public class BulletinXmlExporter
 	{
 		dest.write(MartusXml.getTagStartWithNewline(BulletinXmlConstants.BULLETIN));
 
-		writeElement(dest, "", BulletinXmlConstants.LOCAL_ID, "", b.getLocalId());
-		writeElement(dest, "", BulletinXmlConstants.ACCOUNT_ID, "", b.getAccount());
-		if(b.isAllPrivate())
-			writeElement(dest, "", BulletinXmlConstants.ALL_PRIVATE, "", "");
-		
-		BulletinHistory history = b.getHistory();
-		if(history.size() > 0)
-		{
-			dest.write(MartusXml.getTagStartWithNewline(BulletinXmlConstants.HISTORY));
-			for(int i=0; i < history.size(); ++i)
-			{
-				dest.write(MartusXml.getTagStart(BulletinXmlConstants.ANCESTOR));
-				dest.write(history.get(i));
-				dest.write(MartusXml.getTagEnd(BulletinXmlConstants.ANCESTOR));
-			}
-			dest.write(MartusXml.getTagEnd(BulletinXmlConstants.HISTORY));
-		}
+		writeBulletinMetaData(dest, b);
 
 		if(includePrivateData || !b.isAllPrivate())
 		{
@@ -120,6 +103,29 @@ public class BulletinXmlExporter
 
 		dest.write(MartusXml.getTagEnd(BulletinXmlConstants.BULLETIN));
 		dest.write(BulletinXmlConstants.NEW_LINE);
+	}
+
+	private void writeBulletinMetaData(Writer dest, Bulletin b) throws IOException
+	{
+		dest.write(MartusXml.getTagStartWithNewline(BulletinXmlConstants.BULLETIN_META_DATA));
+		writeElement(dest, "", BulletinXmlConstants.LOCAL_ID, "", b.getLocalId());
+		writeElement(dest, "", BulletinXmlConstants.ACCOUNT_ID, "", b.getAccount());
+		if(b.isAllPrivate())
+			writeElement(dest, "", BulletinXmlConstants.ALL_PRIVATE, "", "");
+		
+		BulletinHistory history = b.getHistory();
+		if(history.size() > 0)
+		{
+			dest.write(MartusXml.getTagStartWithNewline(BulletinXmlConstants.HISTORY));
+			for(int i=0; i < history.size(); ++i)
+			{
+				dest.write(MartusXml.getTagStart(BulletinXmlConstants.ANCESTOR));
+				dest.write(history.get(i));
+				dest.write(MartusXml.getTagEnd(BulletinXmlConstants.ANCESTOR));
+			}
+			dest.write(MartusXml.getTagEnd(BulletinXmlConstants.HISTORY));
+		}
+		dest.write(MartusXml.getTagEnd(BulletinXmlConstants.BULLETIN_META_DATA));
 	}
 
 	private void writeAttachments(Writer dest, AttachmentProxy[] attachments, String attachmentSectionTag)

@@ -84,6 +84,7 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 		assertContains("<MartusBulletins>", result);
 		assertContains("<MartusBulletin>", result);
 		assertContains("<ExportMetaData>", result);
+		assertContains("<BulletinMetaData>", result);
 		assertContains(b.getAccount(), result);
 		assertContains(b.getLocalId(), result);
 		assertContains(sampleAuthor, result);
