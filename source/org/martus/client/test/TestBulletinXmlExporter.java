@@ -88,6 +88,8 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 		assertContains(b.getAccount(), result);
 		assertContains(b.getLocalId(), result);
 		assertContains(sampleAuthor, result);
+		assertContains("<MainFieldSpecs>", result);
+		assertNotContains("<PrivateFieldSpecs>", result);
 		assertNotContains("<PrivateData>", result);
 		assertNotContains("<AttachmentList>", result);
 		assertNotContains("<History>", result);
@@ -237,6 +239,11 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 
 		String publicAndPrivate = doExport(list, true);
 		assertContains("<Field>\n<Tag>PublicAndPrivateData</Tag>", publicAndPrivate);
+		
+		assertContains("<PrivateData>", publicAndPrivate);
+		assertContains("<MainFieldSpecs>", publicAndPrivate);
+		assertContains("<PrivateFieldSpecs>", publicAndPrivate);
+		
 		assertContains(samplePublic, publicAndPrivate);
 		assertContains(samplePrivate, publicAndPrivate);
 	}
@@ -275,6 +282,8 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 		assertNotContains(sampleAuthor, publicOnly);
 		assertNotContains("<PublicData>", publicOnly);
 		assertNotContains("<PrivateData>", publicOnly);
+		assertNotContains("<MainFieldSpecs>", publicOnly);
+		assertNotContains("<PrivateFieldSpecs>", publicOnly);
 
 		assertContains(b.getAccount(), publicAndPrivate);
 		assertContains(b.getLocalId(), publicAndPrivate);
@@ -282,6 +291,8 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 		assertContains(sampleAuthor, publicAndPrivate);
 		assertContains("<PublicData>", publicAndPrivate);
 		assertContains("<PrivateData>", publicAndPrivate);
+		assertContains("<MainFieldSpecs>", publicAndPrivate);
+		assertContains("<PrivateFieldSpecs>", publicAndPrivate);
 	}
 
 	public void testExportCustomFieldValue() throws Exception

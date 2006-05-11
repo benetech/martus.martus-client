@@ -56,7 +56,7 @@ public class BulletinXmlExporter
 		for (int i = 0; i < bulletins.size(); i++)
 		{
 			Bulletin b = (Bulletin)bulletins.get(i);
-			exportOneBulletin(b, dest, includePrivateData);
+			exportOneBulletin(dest, b, includePrivateData);
 		}
 		dest.write(MartusXml.getTagEnd(BulletinXmlConstants.MARTUS_BULLETINS));
 	}
@@ -101,12 +101,31 @@ public class BulletinXmlExporter
 		}
 		dest.write(MartusXml.getTagEnd(BulletinXmlConstants.BULLETIN_META_DATA));
 	}
+	
+	private void writeBulletinFieldSpecs(Writer dest, Bulletin b, boolean includePrivateData) throws IOException
+	{
+		if(includePrivateData || !b.isAllPrivate())
+			writeFieldSpecs(dest, b.getTopSectionFieldSpecs(), BulletinXmlConstants.MAIN_FIELD_SPECS);
+		if(includePrivateData)
+			writeFieldSpecs(dest, b.getBottomSectionFieldSpecs(), BulletinXmlConstants.PRIVATE_FIELD_SPECS);
+	}
 
-	private void exportOneBulletin(Bulletin b, Writer dest, boolean includePrivateData) throws IOException
+	private void writeFieldSpecs(Writer dest, FieldSpec[] specs, String xmlTag) throws IOException
+	{
+		dest.write(MartusXml.getTagStartWithNewline(xmlTag));
+	
+		
+		
+		dest.write(MartusXml.getTagEnd(xmlTag));
+		dest.write(BulletinXmlConstants.NEW_LINE);
+	}
+
+	private void exportOneBulletin(Writer dest, Bulletin b, boolean includePrivateData) throws IOException
 	{
 		dest.write(MartusXml.getTagStartWithNewline(BulletinXmlConstants.BULLETIN));
 
 		writeBulletinMetaData(dest, b);
+		writeBulletinFieldSpecs(dest, b, includePrivateData);
 
 		if(includePrivateData || !b.isAllPrivate())
 		{
