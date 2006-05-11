@@ -80,12 +80,7 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 		Vector list = new Vector();
 		list.add(b);
 		String result = doExport(list, false);
-		assertContains("<MartusBulletinExportFormatVersion>6</MartusBulletinExportFormatVersion>", result);
-		assertContains("<!-- XML format Version 2: added Grid columns Labels-->", result);
-		assertContains("<!-- XML format Version 3: added Dropdowns and Messages-->", result);
-		assertContains("<!-- XML format Version 4: added Field Types-->", result);
-		assertContains("<!-- XML format Version 5: added Grid FieldSpec Types-->", result);
-		assertContains("<!-- XML format Version 6: Daterange grid cells now exported as yyyy-mm-dd,yyyy-mm-dd-->", result);
+		assertContains("<MartusBulletinExportFormatVersion>1</MartusBulletinExportFormatVersion>", result);
 
 		assertContains("<MartusBulletins>", result);
 		assertContains("<MartusBulletin>", result);

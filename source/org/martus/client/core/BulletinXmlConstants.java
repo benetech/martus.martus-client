@@ -60,6 +60,6 @@ public class BulletinXmlConstants
 	public final static String DATE_SIMPLE = "Simple:";
 	public final static String DATE_RANGE = "Range:";
 
-	public final static String XML_EXPORT_VERSION_NUMBER = "6";
+	public final static String XML_EXPORT_VERSION_NUMBER = "1";
 
 }

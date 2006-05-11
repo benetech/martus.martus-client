@@ -72,18 +72,6 @@ public class BulletinXmlExporter
 		dest.write(MartusXml.getTagStart(BulletinXmlConstants.XML_EXPORT_VERSION));
 		dest.write(BulletinXmlConstants.XML_EXPORT_VERSION_NUMBER);
 		dest.write(MartusXml.getTagEnd(BulletinXmlConstants.XML_EXPORT_VERSION));
-		dest.write("<!-- XML format Version 2: added Grid columns Labels-->");
-		dest.write(BulletinXmlConstants.NEW_LINE);
-		dest.write("<!-- XML format Version 3: added Dropdowns and Messages-->");
-		dest.write(BulletinXmlConstants.NEW_LINE);
-		dest.write("<!-- XML format Version 4: added Field Types-->");
-		dest.write(BulletinXmlConstants.NEW_LINE);
-		dest.write("<!-- XML format Version 5: added Grid FieldSpec Types-->");
-		dest.write(BulletinXmlConstants.NEW_LINE);
-		dest.write("<!-- XML format Version 6: Daterange grid cells now exported as yyyy-mm-dd,yyyy-mm-dd-->");
-		dest.write(BulletinXmlConstants.NEW_LINE);
-		
-		dest.write(BulletinXmlConstants.NEW_LINE);
 	}
 
 	void exportOneBulletin(Bulletin b, Writer dest, boolean includePrivateData) throws IOException
