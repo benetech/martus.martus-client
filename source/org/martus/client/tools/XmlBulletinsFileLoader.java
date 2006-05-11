@@ -51,7 +51,7 @@ public class XmlBulletinsFileLoader extends SimpleXmlDefaultLoader
 {
 	public XmlBulletinsFileLoader(MartusCrypto cryptoToUse, File baseAttachmentsDirectoryToUse)
 	{
-		super(BulletinXmlConstants.MartusBulletinsElementName);
+		super(BulletinXmlConstants.MARTUS_BULLETINS);
 		security = cryptoToUse;
 		bulletins = new Vector();
 		fieldSpecValidationErrors = new Vector();
@@ -63,7 +63,7 @@ public class XmlBulletinsFileLoader extends SimpleXmlDefaultLoader
 	public SimpleXmlDefaultLoader startElement(String tag)
 		throws SAXParseException
 	{
-		if(tag.equals(BulletinXmlConstants.MartusBulletinElementName))
+		if(tag.equals(BulletinXmlConstants.MARTUS_BULLETIN))
 		{
 			currentBulletinLoader = new XmlBulletinLoader();
 			return currentBulletinLoader;
@@ -74,7 +74,7 @@ public class XmlBulletinsFileLoader extends SimpleXmlDefaultLoader
 	public void endElement(String tag, SimpleXmlDefaultLoader ended)
 		throws SAXParseException
 	{
-		if(tag.equals(BulletinXmlConstants.MartusBulletinElementName))
+		if(tag.equals(BulletinXmlConstants.MARTUS_BULLETIN))
 		{
 			mainFields = currentBulletinLoader.getMainFieldSpecs();
 			privateFields = currentBulletinLoader.getPrivateFieldSpecs();
@@ -217,11 +217,11 @@ public class XmlBulletinsFileLoader extends SimpleXmlDefaultLoader
 	
 	private String extractRealDateValue(String xmlValue)
 	{
-		if(xmlValue.startsWith(BulletinXmlConstants.DateSimple))
-			return xmlValue.substring(BulletinXmlConstants.DateSimple.length());
-		if(xmlValue.startsWith(BulletinXmlConstants.DateRange))
+		if(xmlValue.startsWith(BulletinXmlConstants.DATE_SIMPLE))
+			return xmlValue.substring(BulletinXmlConstants.DATE_SIMPLE.length());
+		if(xmlValue.startsWith(BulletinXmlConstants.DATE_RANGE))
 		{
-			String rawDateRange = xmlValue.substring(BulletinXmlConstants.DateRange.length());
+			String rawDateRange = xmlValue.substring(BulletinXmlConstants.DATE_RANGE.length());
 			return MartusFlexidate.createMartusDateStringFromBeginAndEndDateString(rawDateRange);
 		}
 		return xmlValue;

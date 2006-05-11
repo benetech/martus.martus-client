@@ -27,37 +27,40 @@ package org.martus.client.core;
 
 public class BulletinXmlConstants 
 {
-	public final static String ExportedBulletinsElementName = "ExportedMartusBulletins";
-	public final static String VersionXMLElementName = "MartusBulletinExportFormatVersion";
-	public final static String PublicOnlyElementName = "PublicDataOnly";
-	public final static String PublicAndPrivateElementName = "PublicAndPrivateData";
-	public final static String BulletinElementName = "MartusBulletin";
-	public final static String PublicDataElementName = "PublicData";
-	public final static String PrivateDataElementName = "PrivateData";
-	public final static String LocalIdElementName = "BulletinLocalId";
-	public final static String AllPrivateElementName = "AllPrivate";
-	public final static String AccountIdElementName = "AuthorAccountId";
-	public final static String HistoryElementName = "History";
-	public final static String AncestorElementName = "Ancestor";
-	public final static String TagAttributeName = "tag";
-	public final static String ATTACHMENT_TAG = "Attachment";
-	public final static String FILENAME_TAG = "Filename";
+	public final static String NEW_LINE = "\n";
+
+	public final static String EXPORTED_BULLETINS = "ExportedMartusBulletins";
+	public final static String XML_EXPORT_VERSION = "MartusBulletinExportFormatVersion";
+	public final static String PUBLIC_ONLY = "PublicDataOnly";
+	public final static String PUBLIC_AND_PRIVATE = "PublicAndPrivateData";
+	public final static String BULLETIN = "MartusBulletin";
+	public final static String PUBLIC_DATA = "PublicData";
+	public final static String PRIVATE_DATA = "PrivateData";
+	public final static String LOCAL_ID = "BulletinLocalId";
+	public final static String ALL_PRIVATE = "AllPrivate";
+	public final static String ACCOUNT_ID = "AuthorAccountId";
+	public final static String HISTORY = "History";
+	public final static String ANCESTOR = "Ancestor";
+	public final static String ATTACHMENT = "Attachment";
+	public final static String FILENAME = "Filename";
 	public final static String TYPE = "Type";
 	public final static String TAG = "Tag";
 	public final static String VALUE = "Value";
 	public final static String LABEL = "Label";
 	public final static String FIELD = "Field";
-	public final static String NEW_LINE = "\n";
-	public final static String MartusBulletinsElementName = "MartusBulletins";
-	public final static String MartusBulletinElementName = "MartusBulletin";
-	public final static String TopSectionAttachmentListElementName = "TopAttachmentList";
-	public final static String BottomSectionAttachmentListElementName = "BottomAttachmentList";
-	public final static String DateSimple = "Simple:";
-	public final static String DateRange = "Range:";
-	public final static String FieldValuesElementName = "FieldValues";
-	public final static String PrivateFieldSpecsElementName = "PrivateFieldSpecs";
-	public final static String MainFieldSpecsElementName = "MainFieldSpecs";
+	public final static String MARTUS_BULLETINS = "MartusBulletins";
+	public final static String MARTUS_BULLETIN = "MartusBulletin";
+	public final static String TOP_SECTION_ATTACHMENT_LIST = "TopAttachmentList";
+	public final static String BOTTOM_SECTION_ATTACHMENT_LIST = "BottomAttachmentList";
+	public final static String FIELD_VALUES = "FieldValues";
+	public final static String MAIN_FIELD_SPECS = "MainFieldSpecs";
+	public final static String PRIVATE_FIELD_SPECS = "PrivateFieldSpecs";
 
-	public final static String VersionNumber = "6";
+	public final static String TAG_ATTRIBUTE = "tag";
+
+	public final static String DATE_SIMPLE = "Simple:";
+	public final static String DATE_RANGE = "Range:";
+
+	public final static String XML_EXPORT_VERSION_NUMBER = "6";
 
 }
