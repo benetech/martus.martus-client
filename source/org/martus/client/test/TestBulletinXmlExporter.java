@@ -30,7 +30,6 @@ import java.io.File;
 import java.io.IOException;
 import java.io.StringWriter;
 import java.util.Vector;
-
 import org.martus.client.bulletinstore.ClientBulletinStore;
 import org.martus.client.core.BulletinXmlExporter;
 import org.martus.common.FieldCollection;
@@ -42,10 +41,15 @@ import org.martus.common.bulletin.AttachmentProxy;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.bulletin.BulletinConstants;
 import org.martus.common.crypto.MartusCrypto.EncryptionException;
+import org.martus.common.fieldspec.ChoiceItem;
+import org.martus.common.fieldspec.DropDownFieldSpec;
 import org.martus.common.fieldspec.FieldSpec;
+import org.martus.common.fieldspec.FieldTypeBoolean;
 import org.martus.common.fieldspec.FieldTypeDateRange;
+import org.martus.common.fieldspec.FieldTypeMessage;
 import org.martus.common.fieldspec.GridFieldSpec;
 import org.martus.common.fieldspec.StandardFieldSpecs;
+import org.martus.common.fieldspec.TestCustomFieldSpecValidator;
 import org.martus.common.packet.BulletinHistory;
 import org.martus.common.packet.FieldDataPacket;
 import org.martus.common.utilities.MartusFlexidate;
@@ -95,6 +99,147 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 		assertNotContains("<History>", result);
 
 		//System.out.println(result);
+	}
+	
+	public void testExportingFieldSpecs() throws Exception
+	{
+		FieldSpec[] topSpecs = StandardFieldSpecs.getDefaultTopSectionFieldSpecs();
+		FieldSpec[] bottomSpecs = StandardFieldSpecs.getDefaultBottomSectionFieldSpecs();
+		String choice1 = "choice A";
+		String choice2 = "choice B";
+
+		ChoiceItem[] choicesNoDups = {new ChoiceItem("no Dup", choice1), new ChoiceItem("second", choice2)};
+		String dropdownTag = "ddTag";
+		String dropdownLabel = "dropdown column label";
+		DropDownFieldSpec dropDownSpecNoDuplicates = new DropDownFieldSpec(choicesNoDups);
+		dropDownSpecNoDuplicates.setLabel(dropdownLabel);
+		dropDownSpecNoDuplicates.setTag(dropdownTag);
+		
+		String booleanLabel = "Boolean Label";
+		String booleanTag = "TagBoolean";
+		FieldSpec booleanSpec = FieldSpec.createFieldSpec(booleanLabel, new FieldTypeBoolean());
+		booleanSpec.setTag(booleanTag);
+		
+		GridFieldSpec gridWithNoDuplicateDropdownEntries = new GridFieldSpec();
+		String gridTag = "GridTag";
+		String gridLabel = "Grid Label";
+		gridWithNoDuplicateDropdownEntries.setTag(gridTag);
+		gridWithNoDuplicateDropdownEntries.setLabel(gridLabel);
+		gridWithNoDuplicateDropdownEntries.addColumn(dropDownSpecNoDuplicates);
+		gridWithNoDuplicateDropdownEntries.addColumn(booleanSpec);
+
+		String messageLabel = "message Label";
+		String messageTag = "messageTag";
+		FieldSpec messageSpec = FieldSpec.createFieldSpec(messageLabel, new FieldTypeMessage());
+		messageSpec.setTag(messageTag);
+		
+		topSpecs = TestCustomFieldSpecValidator.addFieldSpec(topSpecs, gridWithNoDuplicateDropdownEntries);
+		bottomSpecs = TestCustomFieldSpecValidator.addFieldSpec(bottomSpecs,dropDownSpecNoDuplicates);
+		bottomSpecs = TestCustomFieldSpecValidator.addFieldSpec(bottomSpecs,booleanSpec);
+		bottomSpecs = TestCustomFieldSpecValidator.addFieldSpec(bottomSpecs, messageSpec);
+		
+		Bulletin b = new Bulletin(store.getSignatureGenerator(), topSpecs, bottomSpecs);
+		b.setAllPrivate(false);
+
+		final String sampleAuthor = "someone special";
+		b.set(BulletinConstants.TAGAUTHOR, sampleAuthor);
+
+		String expectedTopFieldSpecs = "<MainFieldSpecs>\n" +
+			  "<Field type='LANGUAGE'>\n" +
+			  "<Tag>language</Tag>\n" + 
+			  "<Label></Label>\n" + 
+			  "</Field>\n" +
+			  "<Field type='STRING'>\n" +
+			  "<Tag>author</Tag>\n" + 
+			  "<Label></Label>\n" + 
+			  "</Field>\n" +
+			  "<Field type='STRING'>\n" +
+			  "<Tag>organization</Tag>\n" + 
+			  "<Label></Label>\n" + 
+			  "</Field>\n" +
+			  "<Field type='STRING'>\n" +
+			  "<Tag>title</Tag>\n" + 
+			  "<Label></Label>\n" + 
+			  "</Field>\n" +
+			  "<Field type='STRING'>\n" +
+			  "<Tag>location</Tag>\n" + 
+			  "<Label></Label>\n" + 
+			  "</Field>\n" +
+			  "<Field type='STRING'>\n" +
+			  "<Tag>keywords</Tag>\n" + 
+			  "<Label></Label>\n" + 
+			  "</Field>\n" +
+			  "<Field type='DATERANGE'>\n" +
+			  "<Tag>eventdate</Tag>\n" + 
+			  "<Label></Label>\n" + 
+			  "</Field>\n" +
+			  "<Field type='DATE'>\n" +
+			  "<Tag>entrydate</Tag>\n" + 
+			  "<Label></Label>\n" + 
+			  "</Field>\n" +
+			  "<Field type='MULTILINE'>\n" +
+			  "<Tag>summary</Tag>\n" + 
+			  "<Label></Label>\n" + 
+			  "</Field>\n" +
+			  "<Field type='MULTILINE'>\n" +
+			  "<Tag>publicinfo</Tag>\n" + 
+			  "<Label></Label>\n" + 
+			  "</Field>\n" +
+			  "<Field type='GRID'>\n" +
+			  "<Tag>"+gridTag+"</Tag>\n" +
+			  "<Label>"+gridLabel+"</Label>\n" +
+			  "<GridSpecDetails>\n" +
+			  "<Column type='DROPDOWN'>\n" +
+			  "<Tag>"+dropdownTag+"</Tag>\n" +
+			  "<Label>"+dropdownLabel+"</Label>\n" +
+			  "<Choices>\n" +
+			  "<Choice>"+choice1+"</Choice>\n" +
+			  "<Choice>"+choice2+"</Choice>\n" +
+			  "</Choices>\n" +
+			  "</Column>\n" +
+			  "<Column type='BOOLEAN'>\n" +
+			  "<Tag>"+booleanTag+"</Tag>\n" +
+			  "<Label>"+booleanLabel+"</Label>\n" +
+			  "</Column>\n" +
+			  "</GridSpecDetails>\n" +
+			  "</Field>\n" +
+			  "</MainFieldSpecs>\n\n";
+
+		BulletinXmlExporter exporter = new BulletinXmlExporter(new MiniLocalization());
+		StringWriter writer = new StringWriter();
+		exporter.writeFieldSpecs(writer, b.getTopSectionFieldSpecs(), "MainFieldSpecs");
+		String result = writer.toString();
+		writer.close();
+		assertEquals(expectedTopFieldSpecs, result);
+		
+		String expectedBottomFieldSpecs = "<PrivateFieldSpecs>\n" +
+		  "<Field type='MULTILINE'>\n" +
+		  "<Tag>privateinfo</Tag>\n" + 
+		  "<Label></Label>\n" + 
+		  "</Field>\n" +
+		  "<Field type='DROPDOWN'>\n" +
+		  "<Tag>"+dropdownTag+"</Tag>\n" +
+		  "<Label>"+dropdownLabel+"</Label>\n" +
+		  "<Choices>\n" +
+		  "<Choice>"+choice1+"</Choice>\n" +
+		  "<Choice>"+choice2+"</Choice>\n" +
+		  "</Choices>\n" +
+		  "</Field>\n" +
+		  "<Field type='BOOLEAN'>\n" +
+		  "<Tag>"+booleanTag+"</Tag>\n" +
+		  "<Label>"+booleanLabel+"</Label>\n" +
+		  "</Field>\n" +
+		  "<Field type='MESSAGE'>\n" +
+		  "<Tag>"+messageTag+"</Tag>\n" +
+		  "<Label>"+messageLabel+"</Label>\n" +
+		  "</Field>\n" +
+		  "</PrivateFieldSpecs>\n\n";
+
+	writer = new StringWriter();
+	exporter.writeFieldSpecs(writer, b.getBottomSectionFieldSpecs(), "PrivateFieldSpecs");
+	result = writer.toString();
+	writer.close();
+	assertEquals(expectedBottomFieldSpecs, result);
 	}
 	
 	public void testExportGrids() throws Exception

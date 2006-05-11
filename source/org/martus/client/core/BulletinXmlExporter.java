@@ -110,12 +110,13 @@ public class BulletinXmlExporter
 			writeFieldSpecs(dest, b.getBottomSectionFieldSpecs(), BulletinXmlConstants.PRIVATE_FIELD_SPECS);
 	}
 
-	private void writeFieldSpecs(Writer dest, FieldSpec[] specs, String xmlTag) throws IOException
+	public void writeFieldSpecs(Writer dest, FieldSpec[] specs, String xmlTag) throws IOException
 	{
 		dest.write(MartusXml.getTagStartWithNewline(xmlTag));
-	
-		
-		
+		for(int i = 0; i < specs.length; i++)
+		{
+			dest.write(specs[i].toXml(BulletinXmlConstants.FIELD));
+		}
 		dest.write(MartusXml.getTagEnd(xmlTag));
 		dest.write(BulletinXmlConstants.NEW_LINE);
 	}
