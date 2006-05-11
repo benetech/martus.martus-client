@@ -32,6 +32,7 @@ public class BulletinXmlConstants
 	public final static String XML_EXPORT_VERSION = "MartusBulletinExportFormatVersion";
 	public final static String PUBLIC_ONLY = "PublicDataOnly";
 	public final static String PUBLIC_AND_PRIVATE = "PublicAndPrivateData";
+	public final static String EXPORT_META_DATA = "ExportMetaData";
 	public final static String BULLETIN = "MartusBulletin";
 	public final static String PUBLIC_DATA = "PublicData";
 	public final static String PRIVATE_DATA = "PrivateData";

@@ -81,9 +81,9 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 		list.add(b);
 		String result = doExport(list, false);
 		assertContains("<MartusBulletinExportFormatVersion>1</MartusBulletinExportFormatVersion>", result);
-
 		assertContains("<MartusBulletins>", result);
 		assertContains("<MartusBulletin>", result);
+		assertContains("<ExportMetaData>", result);
 		assertContains(b.getAccount(), result);
 		assertContains(b.getLocalId(), result);
 		assertContains(sampleAuthor, result);
