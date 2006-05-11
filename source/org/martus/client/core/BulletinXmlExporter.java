@@ -50,7 +50,7 @@ public class BulletinXmlExporter
 	public void exportBulletins(Writer dest, Vector bulletins, boolean includePrivateData)
 		throws IOException
 	{
-		dest.write(MartusXml.getTagStartWithNewline(BulletinXmlConstants.EXPORTED_BULLETINS));
+		dest.write(MartusXml.getTagStartWithNewline(BulletinXmlConstants.MARTUS_BULLETINS));
 		writeXMLVersion(dest);
 		
 		if(includePrivateData)
@@ -64,7 +64,7 @@ public class BulletinXmlExporter
 			Bulletin b = (Bulletin)bulletins.get(i);
 			exportOneBulletin(b, dest, includePrivateData);
 		}
-		dest.write(MartusXml.getTagEnd(BulletinXmlConstants.EXPORTED_BULLETINS));
+		dest.write(MartusXml.getTagEnd(BulletinXmlConstants.MARTUS_BULLETINS));
 	}
 
 	private static void writeXMLVersion(Writer dest) throws IOException

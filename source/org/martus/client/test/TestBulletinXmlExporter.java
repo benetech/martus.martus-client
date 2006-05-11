@@ -87,7 +87,7 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 		assertContains("<!-- XML format Version 5: added Grid FieldSpec Types-->", result);
 		assertContains("<!-- XML format Version 6: Daterange grid cells now exported as yyyy-mm-dd,yyyy-mm-dd-->", result);
 
-		assertContains("<ExportedMartusBulletins>", result);
+		assertContains("<MartusBulletins>", result);
 		assertContains("<MartusBulletin>", result);
 		assertContains(b.getAccount(), result);
 		assertContains(b.getLocalId(), result);

@@ -29,7 +29,6 @@ public class BulletinXmlConstants
 {
 	public final static String NEW_LINE = "\n";
 
-	public final static String EXPORTED_BULLETINS = "ExportedMartusBulletins";
 	public final static String XML_EXPORT_VERSION = "MartusBulletinExportFormatVersion";
 	public final static String PUBLIC_ONLY = "PublicDataOnly";
 	public final static String PUBLIC_AND_PRIVATE = "PublicAndPrivateData";
