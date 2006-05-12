@@ -189,7 +189,7 @@ public class BulletinXmlExporter
 			}
 			else
 			{
-				writeElement(dest,FieldSpec.getTypeString(spec.getType()), tag, spec.getLabel(), value);
+				writeElement(dest, tag, value);
 			}
 		}
 		
@@ -198,6 +198,13 @@ public class BulletinXmlExporter
 	private static String getXmlEncodedTagWithData(String tagName, String data)
 	{
 		return MartusXml.getTagWithData(tagName, XmlUtilities.getXmlEncoded(data));
+	}
+	
+	private static void writeElement(Writer dest, String tag, String fieldData) throws IOException
+	{
+		dest.write(MartusXml.getTagStartWithNewline("Field "+BulletinXmlConstants.TAG_ATTRIBUTE+"='"+tag+"'"));
+		dest.write(getXmlEncodedTagWithData(BulletinXmlConstants.VALUE, fieldData));
+		dest.write(MartusXml.getTagEnd(MartusXml.tagField));		
 	}
 
 	private static void writeElement(Writer dest, String fieldType, String tag, String rawLabel, String rawFieldData) throws IOException

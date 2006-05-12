@@ -356,10 +356,7 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 		String result = writer.toString();
 
 		assertContains(sampleTitle1, result);
-		assertContains("<Type>DATE</Type>", result);
-		assertContains("<Type>STRING</Type>", result);
-		assertContains("<Type>MULTILINE</Type>", result);
-		assertContains("<Type>LANGUAGE</Type>", result);
+		assertContains("<Field tag='title'", result);
 		assertContains(sampleTitle2, result);
 	}
 
