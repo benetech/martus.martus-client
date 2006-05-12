@@ -47,17 +47,17 @@ public class BulletinXmlExporter
 		localization = localizationToUse;
 	}
 	
-	public void exportBulletins(Writer dest, Vector bulletins, boolean includePrivateData)
+	public void exportBulletins(Writer dest, Vector bulletins, boolean includePrivateData, boolean includeAttachments)
 		throws IOException
 	{
 		dest.write(MartusXml.getTagStartWithNewline(BulletinXmlConstants.MARTUS_BULLETINS));
 		writeXMLVersion(dest);
-		writeExportMetaData(dest, includePrivateData);
+		writeExportMetaData(dest, includePrivateData, includeAttachments);
 
 		for (int i = 0; i < bulletins.size(); i++)
 		{
 			Bulletin b = (Bulletin)bulletins.get(i);
-			exportOneBulletin(dest, b, includePrivateData);
+			exportOneBulletin(dest, b, includePrivateData, includeAttachments);
 		}
 		dest.write(MartusXml.getTagEnd(BulletinXmlConstants.MARTUS_BULLETINS));
 	}
@@ -69,7 +69,7 @@ public class BulletinXmlExporter
 		dest.write(MartusXml.getTagEnd(BulletinXmlConstants.XML_EXPORT_VERSION));
 	}
 	
-	private void writeExportMetaData(Writer dest, boolean includePrivateData) throws IOException
+	private void writeExportMetaData(Writer dest, boolean includePrivateData, boolean includeAttachments) throws IOException
 	{
 		dest.write(MartusXml.getTagStartWithNewline(BulletinXmlConstants.EXPORT_META_DATA));
 		if(includePrivateData)
@@ -78,9 +78,13 @@ public class BulletinXmlExporter
 		}
 		else
 		{
-			dest.write("<!--  No Private FieldSpecs or Data was exported  -->");
+			dest.write("<!--  No Private FieldSpecs or Data was exported  -->\n");
 			writeElement(dest, "", BulletinXmlConstants.PUBLIC_ONLY, "", "");
 		}
+		
+		if(!includeAttachments)
+			writeElement(dest, "", BulletinXmlConstants.NO_ATTACHMENTS_EXPORTED, "", "");
+		
 		dest.write(MartusXml.getTagEnd(BulletinXmlConstants.EXPORT_META_DATA));
 		dest.write(BulletinXmlConstants.NEW_LINE);
 	}
@@ -127,7 +131,7 @@ public class BulletinXmlExporter
 		dest.write(BulletinXmlConstants.NEW_LINE);
 	}
 
-	private void exportOneBulletin(Writer dest, Bulletin b, boolean includePrivateData) throws IOException
+	private void exportOneBulletin(Writer dest, Bulletin b, boolean includePrivateData, boolean includeAttachments) throws IOException
 	{
 		dest.write(MartusXml.getTagStartWithNewline(BulletinXmlConstants.BULLETIN));
 
@@ -138,13 +142,15 @@ public class BulletinXmlExporter
 		if(includePrivateData || !b.isAllPrivate())
 		{
 			writeFields(dest, b, b.getTopSectionFieldSpecs());
-			writeAttachments(dest, b.getPublicAttachments(), BulletinXmlConstants.TOP_SECTION_ATTACHMENT_LIST);
+			if(includeAttachments)
+				writeAttachments(dest, b.getPublicAttachments(), BulletinXmlConstants.TOP_SECTION_ATTACHMENT_LIST);
 		}
 
 		if(includePrivateData)
 		{
 			writeFields(dest, b, b.getBottomSectionFieldSpecs());
-			writeAttachments(dest, b.getPrivateAttachments(), BulletinXmlConstants.BOTTOM_SECTION_ATTACHMENT_LIST);
+			if(includeAttachments)
+				writeAttachments(dest, b.getPrivateAttachments(), BulletinXmlConstants.BOTTOM_SECTION_ATTACHMENT_LIST);
 		}
 		dest.write(MartusXml.getTagEnd(BulletinXmlConstants.FIELD_VALUES));
 

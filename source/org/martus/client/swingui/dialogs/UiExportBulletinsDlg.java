@@ -147,7 +147,9 @@ public class UiExportBulletinsDlg extends JDialog implements ActionListener
 		try
 		{
 			UnicodeWriter writer = new UnicodeWriter(destFile);
-			exporter.exportBulletins(writer, bulletins, userWantsToExportPrivate());
+			boolean userWantsToExportPrivate = userWantsToExportPrivate();
+			boolean userWantsToExportAttachments = false;
+			exporter.exportBulletins(writer, bulletins, userWantsToExportPrivate, userWantsToExportAttachments);
 			writer.close();
 			mainWindow.notifyDlg("ExportComplete");
 		}

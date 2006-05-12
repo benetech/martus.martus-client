@@ -83,12 +83,13 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 
 		Vector list = new Vector();
 		list.add(b);
-		String result = doExport(list, false);
+		String result = doExport(list, false, false);
 		assertContains("<MartusBulletinExportFormatVersion>1</MartusBulletinExportFormatVersion>", result);
 		assertContains("<MartusBulletins>", result);
 		assertContains("<MartusBulletin>", result);
 		assertContains("<ExportMetaData>", result);
 		assertContains("<BulletinMetaData>", result);
+		assertContains("<Field>\n<Tag>NoAttachmentsExported</Tag>", result);
 		assertContains(b.getAccount(), result);
 		assertContains(b.getLocalId(), result);
 		assertContains(sampleAuthor, result);
@@ -278,7 +279,7 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 		
 		Vector list = new Vector();
 		list.add(b);
-		String result = doExport(list, false);
+		String result = doExport(list, false, false);
 		assertContains("<Field tag='MyGridTag'>\n" +
 				"<Value><GridData columns='3'>\n" +
 				"<Row>\n" +
@@ -305,7 +306,7 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 		
 		Vector list = new Vector();
 		list.add(b);
-		String result = doExport(list, false);
+		String result = doExport(list, false, false);
 		
 		assertContains("<History>", result);
 		assertContains("<Ancestor>", result);
@@ -322,10 +323,17 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 
 		Vector list = new Vector();
 		list.add(b);
-		String result = doExport(list, false);
+		String result = doExport(list, false, true);
+		assertNotContains("<Field>\n<Tag>NoAttachmentsExported</Tag>", result);
 
 		assertContains(sampleAttachmentFile1.getName(), result);
 		assertContains(sampleAttachmentFile2.getName(), result);
+
+		result = doExport(list, false, false);
+		assertContains("<Field>\n<Tag>NoAttachmentsExported</Tag>", result);
+
+		assertNotContains(sampleAttachmentFile1.getName(), result);
+		assertNotContains(sampleAttachmentFile2.getName(), result);
 	}
 
 	public void testExportMultipleBulletins() throws Exception
@@ -345,7 +353,7 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 		list.add(b1);
 		list.add(b2);
 		BulletinXmlExporter exporter = new BulletinXmlExporter(new MiniLocalization());
-		exporter.exportBulletins(writer, list, false);
+		exporter.exportBulletins(writer, list, false, false);
 		String result = writer.toString();
 
 		assertContains(sampleTitle1, result);
@@ -366,12 +374,12 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 
 		Vector list = new Vector();
 		list.add(b);
-		String publicOnly = doExport(list, false);
+		String publicOnly = doExport(list, false, false);
 		assertContains("<Field>\n<Tag>PublicDataOnly</Tag>", publicOnly);
 		assertContains(samplePublic, publicOnly);
 		assertNotContains(samplePrivate, publicOnly);
 
-		String publicAndPrivate = doExport(list, true);
+		String publicAndPrivate = doExport(list, true, false);
 		assertContains("<Field>\n<Tag>PublicAndPrivateData</Tag>", publicAndPrivate);
 		
 		assertContains("<FieldValues>", publicAndPrivate);
@@ -391,10 +399,10 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 		Vector list = new Vector();
 		list.add(b);
 
-		String publicOnly = doExport(list, false);
+		String publicOnly = doExport(list, false, true);
 		assertNotContains(sampleAttachmentFile1.getName(), publicOnly);
 
-		String publicAndPrivate = doExport(list, true);
+		String publicAndPrivate = doExport(list, true, true);
 		assertContains(sampleAttachmentFile1.getName(), publicAndPrivate);
 	}
 
@@ -407,8 +415,8 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 
 		Vector list = new Vector();
 		list.add(b);
-		String publicOnly = doExport(list, false);
-		String publicAndPrivate = doExport(list, true);
+		String publicOnly = doExport(list, false, false);
+		String publicAndPrivate = doExport(list, true, false);
 
 		assertContains(b.getAccount(), publicOnly);
 		assertContains(b.getLocalId(), publicOnly);
@@ -462,7 +470,7 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 		Vector list = new Vector();
 		list.add(b);
 
-		String result = doExport(list, false);
+		String result = doExport(list, false, false);
 
 		assertContains(samplePublic, result);
 		assertContains("<FieldValues>", result);
@@ -475,7 +483,7 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 		list = new Vector();
 		list.add(b);
 
-		result = doExport(list, false);
+		result = doExport(list, false, false);
 
 		assertContains(samplePublic, result);
 		assertContains("<FieldValues>", result);
@@ -510,7 +518,7 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 		Vector list = new Vector();
 		list.add(b);
 
-		String result = doExport(list, false);
+		String result = doExport(list, false, false);
 		
 		assertContains("<FieldValues>", result);
 		assertContains("<Tag>A</Tag>", result);
@@ -553,7 +561,7 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 		Vector list = new Vector();
 		list.add(b);
 		BulletinXmlExporter exporter = new BulletinXmlExporter(new MiniLocalization());
-		exporter.exportBulletins(dest, list, true);
+		exporter.exportBulletins(dest, list, true, false);
 		final String result = dest.toString();
 		return result;
 	}
@@ -589,11 +597,11 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 		assertContains("didn't write good date range?", "2005-05-01,2005-05-30", result);
 	}
 	
-	String doExport(Vector list, boolean includePrivateData) throws IOException
+	String doExport(Vector list, boolean includePrivateData, boolean includeAttachments) throws IOException
 	{
 		StringWriter writer = new StringWriter();
 		BulletinXmlExporter exporter = new BulletinXmlExporter(new MiniLocalization());
-		exporter.exportBulletins(writer, list, includePrivateData);
+		exporter.exportBulletins(writer, list, includePrivateData, includeAttachments);
 		String result = writer.toString();
 		return result;
 	}
