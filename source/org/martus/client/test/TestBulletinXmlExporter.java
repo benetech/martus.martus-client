@@ -72,7 +72,7 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 		}
 	}
 
-	public void testExportOneBulletin() throws Exception
+	public void testBasics() throws Exception
 	{
 		Bulletin b = new Bulletin(store.getSignatureGenerator());
 		b.setAllPrivate(false);
@@ -93,12 +93,11 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 		assertContains(b.getLocalId(), result);
 		assertContains(sampleAuthor, result);
 		assertContains("<MainFieldSpecs>", result);
+		assertContains("<FieldValues>", result);
 		assertNotContains("<PrivateFieldSpecs>", result);
 		assertNotContains("<PrivateData>", result);
 		assertNotContains("<AttachmentList>", result);
 		assertNotContains("<History>", result);
-
-		//System.out.println(result);
 	}
 	
 	public void testExportingFieldSpecs() throws Exception
@@ -385,7 +384,7 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 		String publicAndPrivate = doExport(list, true);
 		assertContains("<Field>\n<Tag>PublicAndPrivateData</Tag>", publicAndPrivate);
 		
-		assertContains("<PrivateData>", publicAndPrivate);
+		assertContains("<FieldValues>", publicAndPrivate);
 		assertContains("<MainFieldSpecs>", publicAndPrivate);
 		assertContains("<PrivateFieldSpecs>", publicAndPrivate);
 		
@@ -425,8 +424,7 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 		assertContains(b.getLocalId(), publicOnly);
 		assertContains("<Field>\n<Tag>AllPrivate</Tag>", publicOnly);
 		assertNotContains(sampleAuthor, publicOnly);
-		assertNotContains("<PublicData>", publicOnly);
-		assertNotContains("<PrivateData>", publicOnly);
+		assertContains("<FieldValues>", publicOnly);
 		assertNotContains("<MainFieldSpecs>", publicOnly);
 		assertNotContains("<PrivateFieldSpecs>", publicOnly);
 
@@ -434,8 +432,7 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 		assertContains(b.getLocalId(), publicAndPrivate);
 		assertContains("<Tag>AllPrivate</Tag>", publicAndPrivate);
 		assertContains(sampleAuthor, publicAndPrivate);
-		assertContains("<PublicData>", publicAndPrivate);
-		assertContains("<PrivateData>", publicAndPrivate);
+		assertContains("<FieldValues>", publicAndPrivate);
 		assertContains("<MainFieldSpecs>", publicAndPrivate);
 		assertContains("<PrivateFieldSpecs>", publicAndPrivate);
 	}
@@ -477,7 +474,7 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 		String result = doExport(list, false);
 
 		assertContains(samplePublic, result);
-		assertContains("<PublicData>", result);
+		assertContains("<FieldValues>", result);
 		assertContains("<Value>a&lt;bc</Value>", result);
 		assertContains("<Value>&amp;test</Value>", result);
 
@@ -490,7 +487,7 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 		result = doExport(list, false);
 
 		assertContains(samplePublic, result);
-		assertContains("<PublicData>", result);
+		assertContains("<FieldValues>", result);
 		assertContains("<Value>&gt;</Value>", result);
 		assertContains("<Value>&amp;</Value>", result);						
 		
@@ -524,7 +521,7 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 
 		String result = doExport(list, false);
 		
-		assertContains("<PublicData>", result);
+		assertContains("<FieldValues>", result);
 		assertContains("<Tag>A</Tag>", result);
 		assertContains("<Label>N</Label>", result);		
 	}

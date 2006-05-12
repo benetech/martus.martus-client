@@ -34,8 +34,6 @@ public class BulletinXmlConstants
 	public final static String PUBLIC_AND_PRIVATE = "PublicAndPrivateData";
 	public final static String EXPORT_META_DATA = "ExportMetaData";
 	public final static String BULLETIN = "MartusBulletin";
-	public final static String PUBLIC_DATA = "PublicData";
-	public final static String PRIVATE_DATA = "PrivateData";
 	public final static String BULLETIN_META_DATA = "BulletinMetaData";
 	public final static String LOCAL_ID = "BulletinLocalId";
 	public final static String ALL_PRIVATE = "AllPrivate";

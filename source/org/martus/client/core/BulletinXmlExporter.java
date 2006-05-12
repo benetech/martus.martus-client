@@ -128,21 +128,19 @@ public class BulletinXmlExporter
 		writeBulletinMetaData(dest, b);
 		writeBulletinFieldSpecs(dest, b, includePrivateData);
 
+		dest.write(MartusXml.getTagStart(BulletinXmlConstants.FIELD_VALUES));
 		if(includePrivateData || !b.isAllPrivate())
 		{
-			dest.write(MartusXml.getTagStart(BulletinXmlConstants.PUBLIC_DATA));
 			writeFields(dest, b, b.getTopSectionFieldSpecs());
 			writeAttachments(dest, b.getPublicAttachments(), BulletinXmlConstants.TOP_SECTION_ATTACHMENT_LIST);
-			dest.write(MartusXml.getTagEnd(BulletinXmlConstants.PUBLIC_DATA));
 		}
 
 		if(includePrivateData)
 		{
-			dest.write(MartusXml.getTagStart(BulletinXmlConstants.PRIVATE_DATA));
 			writeFields(dest, b, b.getBottomSectionFieldSpecs());
 			writeAttachments(dest, b.getPrivateAttachments(), BulletinXmlConstants.BOTTOM_SECTION_ATTACHMENT_LIST);
-			dest.write(MartusXml.getTagEnd(BulletinXmlConstants.PRIVATE_DATA));
 		}
+		dest.write(MartusXml.getTagEnd(BulletinXmlConstants.FIELD_VALUES));
 
 		dest.write(MartusXml.getTagEnd(BulletinXmlConstants.BULLETIN));
 		dest.write(BulletinXmlConstants.NEW_LINE);
