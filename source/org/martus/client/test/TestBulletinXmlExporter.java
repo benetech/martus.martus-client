@@ -30,8 +30,10 @@ import java.io.File;
 import java.io.IOException;
 import java.io.StringWriter;
 import java.util.Vector;
+
 import org.martus.client.bulletinstore.ClientBulletinStore;
 import org.martus.client.core.BulletinXmlExporter;
+import org.martus.client.tools.XmlBulletinsImporter;
 import org.martus.common.FieldCollection;
 import org.martus.common.FieldCollectionForTesting;
 import org.martus.common.GridData;
@@ -46,6 +48,7 @@ import org.martus.common.fieldspec.ChoiceItem;
 import org.martus.common.fieldspec.DropDownFieldSpec;
 import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.fieldspec.FieldTypeBoolean;
+import org.martus.common.fieldspec.FieldTypeDate;
 import org.martus.common.fieldspec.FieldTypeDateRange;
 import org.martus.common.fieldspec.FieldTypeMessage;
 import org.martus.common.fieldspec.GridFieldSpec;
@@ -56,6 +59,7 @@ import org.martus.common.packet.FieldDataPacket;
 import org.martus.common.utilities.MartusFlexidate;
 import org.martus.util.MultiCalendar;
 import org.martus.util.TestCaseEnhanced;
+import org.martus.util.inputstreamwithseek.StringInputStreamWithSeek;
 
 public class TestBulletinXmlExporter extends TestCaseEnhanced
 {
@@ -609,6 +613,104 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 		assertNotContains("exported raw flexidate?", rawDateRangeString, result);
 		assertContains("didn't write good date range?", "2005-05-01,2005-05-30", result);
 	}
+	
+	public void testEndToEndExportAndThenImport() throws Exception
+	{
+		FieldSpec[] topSpecs = StandardFieldSpecs.getDefaultTopSectionFieldSpecs();
+		FieldSpec[] bottomSpecs = StandardFieldSpecs.getDefaultBottomSectionFieldSpecs();
+		String choice1 = "choice A";
+		String choice2 = "choice B";
+
+		ChoiceItem[] choicesNoDups = {new ChoiceItem("no Dup", choice1), new ChoiceItem("second", choice2)};
+		String dropdownTag = "ddTag";
+		String dropdownLabel = "dropdown column label";
+		DropDownFieldSpec dropDownSpec = new DropDownFieldSpec(choicesNoDups);
+		dropDownSpec.setLabel(dropdownLabel);
+		dropDownSpec.setTag(dropdownTag);
+		
+		String booleanLabel = "Boolean Label";
+		String booleanTag = "TagBoolean";
+		FieldSpec booleanSpec = FieldSpec.createFieldSpec(booleanLabel, new FieldTypeBoolean());
+		booleanSpec.setTag(booleanTag);
+		String dateLabel = "Simple Date Label";
+		String dateTag = "TagDate";
+		FieldSpec dateSpec = FieldSpec.createFieldSpec(dateLabel, new FieldTypeDate());
+		dateSpec.setTag(dateTag);
+		
+		GridFieldSpec gridSpec = new GridFieldSpec();
+		String gridTag = "GridTag";
+		String gridLabel = "Grid Label";
+		gridSpec.setTag(gridTag);
+		gridSpec.setLabel(gridLabel);
+		gridSpec.addColumn(dropDownSpec);
+		gridSpec.addColumn(booleanSpec);
+		gridSpec.addColumn(dateSpec);
+
+		String messageLabel = "message Label";
+		String messageTag = "messageTag";
+		FieldSpec messageSpec = FieldSpec.createFieldSpec(messageLabel, new FieldTypeMessage());
+		messageSpec.setTag(messageTag);
+		
+		topSpecs = TestCustomFieldSpecValidator.addFieldSpec(topSpecs, gridSpec);
+		bottomSpecs = TestCustomFieldSpecValidator.addFieldSpec(bottomSpecs,dropDownSpec);
+		bottomSpecs = TestCustomFieldSpecValidator.addFieldSpec(bottomSpecs,booleanSpec);
+		bottomSpecs = TestCustomFieldSpecValidator.addFieldSpec(bottomSpecs, messageSpec);
+		
+		Bulletin b = new Bulletin(store.getSignatureGenerator(), topSpecs, bottomSpecs);
+		b.setAllPrivate(false);
+
+		GridData gridData = new GridData(gridSpec);
+		GridRow row = new GridRow(gridSpec);
+		row.setCellText(0, choice1);
+		row.setCellText(1, "True");
+		row.setCellText(2, "20060504");
+		gridData.addRow(row);
+		b.set(gridTag, gridData.getXmlRepresentation());
+		String sampleAuthor = "someone special";
+		b.set(BulletinConstants.TAGAUTHOR, sampleAuthor);
+		b.set(BulletinConstants.TAGLANGUAGE, MiniLocalization.ENGLISH);
+		b.set(BulletinConstants.TAGEVENTDATE, "1970-01-01,19700101+3");
+		String privateDate = "20060508";
+		b.set(dateTag, privateDate);
+		b.set(dropdownTag, choice2);
+		b.set(booleanTag, "False");
+		b.set(BulletinConstants.TAGPRIVATEINFO, "Private Data");
+		b.setSealed();
+
+		String localId1 = "pretend local id";
+		String localId2 = "another fake local id";
+
+		BulletinHistory fakeHistory = new BulletinHistory();
+		fakeHistory.add(localId1);
+		fakeHistory.add(localId2);
+		
+		b.setHistory(fakeHistory);
+		
+		Vector list = new Vector();
+		list.add(b);
+		String result = doExport(list, true, false);
+		StringInputStreamWithSeek stream = new StringInputStreamWithSeek(result);
+		XmlBulletinsImporter importer = new XmlBulletinsImporter(store.getSignatureGenerator(), stream);
+		Bulletin[] resultingBulletins = importer.getBulletins();
+		Bulletin b2 = resultingBulletins[0];
+		assertNotEquals("Should have created a bran new bulletin", b.getLocalId(), b2.getLocalId());
+		assertTrue("Import should always be a draft", b2.isDraft());
+		assertTrue("Import should always be private", b2.isAllPrivate());
+		assertEquals(3, b.getVersion());
+		assertEquals("Import should start a version #1", 1, b2.getVersion());
+		verifyMatchingData(topSpecs, b, b2);
+		verifyMatchingData(bottomSpecs, b, b2);
+	}
+
+	private void verifyMatchingData(FieldSpec[] specs, Bulletin b, Bulletin b2)
+	{
+		for(int i = 0; i < specs.length; ++i)
+		{
+			String tag = specs[i].getTag();
+			assertEquals("Data not the same for:"+tag, b.get(tag), b2.get(tag));
+		}
+	}
+	
 	
 	String doExport(Vector list, boolean includePrivateData, boolean includeAttachments) throws IOException
 	{
