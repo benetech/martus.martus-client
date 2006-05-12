@@ -81,7 +81,6 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 		final String sampleAuthor = "someone special";
 
 		b.set(BulletinConstants.TAGAUTHOR, sampleAuthor);
-
 		Vector list = new Vector();
 		list.add(b);
 		String result = doExport(list, false, false);
@@ -89,8 +88,9 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 		assertContains("<MartusBulletins>", result);
 		assertContains("<MartusBulletin>", result);
 		assertContains("<ExportMetaData>", result);
+		assertContains("<BulletinVersion>1</BulletinVersion>", result);
 		assertContains("<BulletinMetaData>", result);
-		assertContains("<Field>\n<Tag>NoAttachmentsExported</Tag>", result);
+		assertContains("<NoAttachmentsExported></NoAttachmentsExported>", result);
 		assertContains(b.getAccount(), result);
 		assertContains(b.getLocalId(), result);
 		assertContains(sampleAuthor, result);
@@ -309,6 +309,7 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 		list.add(b);
 		String result = doExport(list, false, false);
 		
+		assertContains("<BulletinVersion>3</BulletinVersion>", result);
 		assertContains("<History>", result);
 		assertContains("<Ancestor>", result);
 		assertContains(localId1, result);
@@ -325,7 +326,7 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 		Vector list = new Vector();
 		list.add(b);
 		String result = doExport(list, false, true);
-		assertNotContains("<Field>\n<Tag>NoAttachmentsExported</Tag>", result);
+		assertNotContains("<NoAttachmentsExported></NoAttachmentsExported>", result);
 		assertContains(BulletinXmlConstants.TOP_SECTION_ATTACHMENT_LIST, result);
 		assertNotContains(BulletinXmlConstants.BOTTOM_SECTION_ATTACHMENT_LIST, result);
 
@@ -333,7 +334,7 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 		assertContains(sampleAttachmentFile2.getName(), result);
 
 		result = doExport(list, false, false);
-		assertContains("<Field>\n<Tag>NoAttachmentsExported</Tag>", result);
+		assertContains("<NoAttachmentsExported></NoAttachmentsExported>", result);
 		assertNotContains(BulletinXmlConstants.TOP_SECTION_ATTACHMENT_LIST, result);
 		assertNotContains(BulletinXmlConstants.BOTTOM_SECTION_ATTACHMENT_LIST, result);
 
@@ -380,12 +381,12 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 		Vector list = new Vector();
 		list.add(b);
 		String publicOnly = doExport(list, false, false);
-		assertContains("<Field>\n<Tag>PublicDataOnly</Tag>", publicOnly);
+		assertContains("<NoAttachmentsExported></NoAttachmentsExported>", publicOnly);
 		assertContains(samplePublic, publicOnly);
 		assertNotContains(samplePrivate, publicOnly);
 
 		String publicAndPrivate = doExport(list, true, false);
-		assertContains("<Field>\n<Tag>PublicAndPrivateData</Tag>", publicAndPrivate);
+		assertContains("<PublicAndPrivateData></PublicAndPrivateData>", publicAndPrivate);
 		
 		assertContains("<FieldValues>", publicAndPrivate);
 		assertContains("<MainFieldSpecs>", publicAndPrivate);
@@ -429,7 +430,7 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 
 		assertContains(b.getAccount(), publicOnly);
 		assertContains(b.getLocalId(), publicOnly);
-		assertContains("<Field>\n<Tag>AllPrivate</Tag>", publicOnly);
+		assertContains("<AllPrivate></AllPrivate>", publicOnly);
 		assertNotContains(sampleAuthor, publicOnly);
 		assertContains("<FieldValues>", publicOnly);
 		assertContains("<!--  No Private FieldSpecs or Data was exported  -->", publicOnly);
@@ -438,7 +439,7 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 
 		assertContains(b.getAccount(), publicAndPrivate);
 		assertContains(b.getLocalId(), publicAndPrivate);
-		assertContains("<Tag>AllPrivate</Tag>", publicAndPrivate);
+		assertContains("<AllPrivate></AllPrivate>", publicAndPrivate);
 		assertContains(sampleAuthor, publicAndPrivate);
 		assertContains("<FieldValues>", publicAndPrivate);
 		assertContains("<MainFieldSpecs>", publicAndPrivate);

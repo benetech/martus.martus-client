@@ -64,9 +64,7 @@ public class BulletinXmlExporter
 	
 	private void writeXMLVersion(Writer dest) throws IOException
 	{
-		dest.write(MartusXml.getTagStart(BulletinXmlConstants.XML_EXPORT_VERSION));
-		dest.write(BulletinXmlConstants.XML_EXPORT_VERSION_NUMBER);
-		dest.write(MartusXml.getTagEnd(BulletinXmlConstants.XML_EXPORT_VERSION));
+		dest.write(getXmlEncodedTagWithData(BulletinXmlConstants.XML_EXPORT_VERSION,BulletinXmlConstants.XML_EXPORT_VERSION_NUMBER));
 	}
 	
 	private void writeExportMetaData(Writer dest, boolean includePrivateData, boolean includeAttachments) throws IOException
@@ -74,16 +72,16 @@ public class BulletinXmlExporter
 		dest.write(MartusXml.getTagStartWithNewline(BulletinXmlConstants.EXPORT_META_DATA));
 		if(includePrivateData)
 		{
-			writeElement(dest, "", BulletinXmlConstants.PUBLIC_AND_PRIVATE, "", "");
+			dest.write(getXmlEncodedTagWithData(BulletinXmlConstants.PUBLIC_AND_PRIVATE,""));
 		}
 		else
 		{
 			dest.write("<!--  No Private FieldSpecs or Data was exported  -->\n");
-			writeElement(dest, "", BulletinXmlConstants.PUBLIC_ONLY, "", "");
+			dest.write(getXmlEncodedTagWithData(BulletinXmlConstants.PUBLIC_ONLY,""));
 		}
 		
 		if(!includeAttachments)
-			writeElement(dest, "", BulletinXmlConstants.NO_ATTACHMENTS_EXPORTED, "", "");
+			dest.write(getXmlEncodedTagWithData(BulletinXmlConstants.NO_ATTACHMENTS_EXPORTED,""));
 		
 		dest.write(MartusXml.getTagEnd(BulletinXmlConstants.EXPORT_META_DATA));
 		dest.write(BulletinXmlConstants.NEW_LINE);
@@ -92,10 +90,11 @@ public class BulletinXmlExporter
 	private void writeBulletinMetaData(Writer dest, Bulletin b) throws IOException
 	{
 		dest.write(MartusXml.getTagStartWithNewline(BulletinXmlConstants.BULLETIN_META_DATA));
-		writeElement(dest, "", BulletinXmlConstants.LOCAL_ID, "", b.getLocalId());
-		writeElement(dest, "", BulletinXmlConstants.ACCOUNT_ID, "", b.getAccount());
+		dest.write(getXmlEncodedTagWithData(BulletinXmlConstants.BULLETIN_VERSION,Integer.toString(b.getVersion())));
+		dest.write(getXmlEncodedTagWithData(BulletinXmlConstants.ACCOUNT_ID, b.getAccount()));
+		dest.write(getXmlEncodedTagWithData(BulletinXmlConstants.LOCAL_ID, b.getLocalId()));
 		if(b.isAllPrivate())
-			writeElement(dest, "", BulletinXmlConstants.ALL_PRIVATE, "", "");
+			dest.write(getXmlEncodedTagWithData(BulletinXmlConstants.ALL_PRIVATE, ""));
 		
 		BulletinHistory history = b.getHistory();
 		if(history.size() > 0)
@@ -103,9 +102,7 @@ public class BulletinXmlExporter
 			dest.write(MartusXml.getTagStartWithNewline(BulletinXmlConstants.HISTORY));
 			for(int i=0; i < history.size(); ++i)
 			{
-				dest.write(MartusXml.getTagStart(BulletinXmlConstants.ANCESTOR));
-				dest.write(history.get(i));
-				dest.write(MartusXml.getTagEnd(BulletinXmlConstants.ANCESTOR));
+				dest.write(getXmlEncodedTagWithData(BulletinXmlConstants.ANCESTOR, history.get(i)));
 			}
 			dest.write(MartusXml.getTagEnd(BulletinXmlConstants.HISTORY));
 		}
