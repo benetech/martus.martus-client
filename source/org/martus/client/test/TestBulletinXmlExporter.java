@@ -29,6 +29,7 @@ package org.martus.client.test;
 import java.io.File;
 import java.io.IOException;
 import java.io.StringWriter;
+import java.util.Arrays;
 import java.util.Vector;
 
 import org.martus.client.bulletinstore.ClientBulletinStore;
@@ -656,8 +657,8 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 		bottomSpecs = TestCustomFieldSpecValidator.addFieldSpec(bottomSpecs,booleanSpec);
 		bottomSpecs = TestCustomFieldSpecValidator.addFieldSpec(bottomSpecs, messageSpec);
 		
-		Bulletin b = new Bulletin(store.getSignatureGenerator(), topSpecs, bottomSpecs);
-		b.setAllPrivate(false);
+		Bulletin exported = new Bulletin(store.getSignatureGenerator(), topSpecs, bottomSpecs);
+		exported.setAllPrivate(false);
 
 		GridData gridData = new GridData(gridSpec);
 		GridRow row = new GridRow(gridSpec);
@@ -665,17 +666,17 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 		row.setCellText(1, "True");
 		row.setCellText(2, "20060504");
 		gridData.addRow(row);
-		b.set(gridTag, gridData.getXmlRepresentation());
+		exported.set(gridTag, gridData.getXmlRepresentation());
 		String sampleAuthor = "someone special";
-		b.set(BulletinConstants.TAGAUTHOR, sampleAuthor);
-		b.set(BulletinConstants.TAGLANGUAGE, MiniLocalization.ENGLISH);
-		b.set(BulletinConstants.TAGEVENTDATE, "1970-01-01,19700101+3");
+		exported.set(BulletinConstants.TAGAUTHOR, sampleAuthor);
+		exported.set(BulletinConstants.TAGLANGUAGE, MiniLocalization.ENGLISH);
+		exported.set(BulletinConstants.TAGEVENTDATE, "1970-01-01,19700101+3");
 		String privateDate = "20060508";
-		b.set(dateTag, privateDate);
-		b.set(dropdownTag, choice2);
-		b.set(booleanTag, "False");
-		b.set(BulletinConstants.TAGPRIVATEINFO, "Private Data");
-		b.setSealed();
+		exported.set(dateTag, privateDate);
+		exported.set(dropdownTag, choice2);
+		exported.set(booleanTag, "False");
+		exported.set(BulletinConstants.TAGPRIVATEINFO, "Private Data");
+		exported.setSealed();
 
 		String localId1 = "pretend local id";
 		String localId2 = "another fake local id";
@@ -684,22 +685,30 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 		fakeHistory.add(localId1);
 		fakeHistory.add(localId2);
 		
-		b.setHistory(fakeHistory);
+		exported.setHistory(fakeHistory);
 		
 		Vector list = new Vector();
-		list.add(b);
+		list.add(exported);
 		String result = doExport(list, true, false);
 		StringInputStreamWithSeek stream = new StringInputStreamWithSeek(result);
 		XmlBulletinsImporter importer = new XmlBulletinsImporter(store.getSignatureGenerator(), stream);
 		Bulletin[] resultingBulletins = importer.getBulletins();
-		Bulletin b2 = resultingBulletins[0];
-		assertNotEquals("Should have created a bran new bulletin", b.getLocalId(), b2.getLocalId());
-		assertTrue("Import should always be a draft", b2.isDraft());
-		assertTrue("Import should always be private", b2.isAllPrivate());
-		assertEquals(3, b.getVersion());
-		assertEquals("Import should start a version #1", 1, b2.getVersion());
-		verifyMatchingData(topSpecs, b, b2);
-		verifyMatchingData(bottomSpecs, b, b2);
+		Bulletin imported = resultingBulletins[0];
+
+		assertNotEquals("Should have created a bran new bulletin", exported.getLocalId(), imported.getLocalId());
+		Arrays.equals(exported.getTopSectionFieldSpecs(), imported.getTopSectionFieldSpecs());
+		Arrays.equals(exported.getBottomSectionFieldSpecs(), imported.getBottomSectionFieldSpecs());
+		
+		assertTrue("exported should be a sealed", exported.isSealed());
+		assertTrue("Import should always be a draft", imported.isDraft());
+		assertFalse("exported should be public", exported.isAllPrivate());
+		assertTrue("Import should always be private", imported.isAllPrivate());
+		assertEquals("exported should be at version 3", 3, exported.getVersion());
+		assertEquals("Import should start a version 1", 1, imported.getVersion());
+		assertEquals("export should have a history", 2, exported.getHistory().size());
+		assertEquals("Import should not have a history", 0, imported.getHistory().size());
+		verifyMatchingData(topSpecs, exported, imported);
+		verifyMatchingData(bottomSpecs, exported, imported);
 	}
 
 	private void verifyMatchingData(FieldSpec[] specs, Bulletin b, Bulletin b2)
