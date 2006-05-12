@@ -94,6 +94,8 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 		assertContains("<MartusBulletin>", result);
 		assertContains("<ExportMetaData>", result);
 		assertContains("<BulletinVersion>1</BulletinVersion>", result);
+		assertContains("<BulletinStatus>"+draftTranslation+"</BulletinStatus>", result);
+		assertNotContains("<BulletinStatus>"+sealedTranslation+"</BulletinStatus>", result);
 		MiniLocalization localization = new MiniLocalization();
 		String lastSavedDateTime = localization.formatDateTime(b.getLastSavedTime());
 		assertContains("<BulletinLastSavedDateTime>"+lastSavedDateTime+"</BulletinLastSavedDateTime>", result);
@@ -354,6 +356,7 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 	{
 		Bulletin b1 = new Bulletin(store.getSignatureGenerator());
 		b1.setAllPrivate(false);
+		b1.setSealed();
 		Bulletin b2 = new Bulletin(store.getSignatureGenerator());
 		b2.setAllPrivate(false);
 
@@ -362,17 +365,17 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 		b1.set(BulletinConstants.TAGTITLE, sampleTitle1);
 		b2.set(BulletinConstants.TAGTITLE, sampleTitle2);
 
-		StringWriter writer = new StringWriter();
 		Vector list = new Vector();
 		list.add(b1);
 		list.add(b2);
-		BulletinXmlExporter exporter = new BulletinXmlExporter(new MiniLocalization());
-		exporter.exportBulletins(writer, list, false, false);
-		String result = writer.toString();
+		String result = doExport(list, true, true);
 
 		assertContains(sampleTitle1, result);
 		assertContains("<Field tag='title'", result);
 		assertContains(sampleTitle2, result);
+		assertContains("<BulletinStatus>"+sealedTranslation+"</BulletinStatus>", result);
+		assertContains("<BulletinStatus>"+draftTranslation+"</BulletinStatus>", result);
+
 	}
 
 	public void testExportPrivateData() throws Exception
@@ -575,12 +578,9 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 
 	private String getExportedXml(Bulletin b) throws IOException
 	{
-		StringWriter dest = new StringWriter();
 		Vector list = new Vector();
 		list.add(b);
-		BulletinXmlExporter exporter = new BulletinXmlExporter(new MiniLocalization());
-		exporter.exportBulletins(dest, list, true, false);
-		final String result = dest.toString();
+		final String result = doExport(list, true, false);
 		return result;
 	}
 
@@ -724,7 +724,10 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 	String doExport(Vector list, boolean includePrivateData, boolean includeAttachments) throws IOException
 	{
 		StringWriter writer = new StringWriter();
-		BulletinXmlExporter exporter = new BulletinXmlExporter(new MiniLocalization());
+		MiniLocalization miniLocalization = new MiniLocalization();
+		miniLocalization.addEnglishTranslations(new String[]{"status:draft="+draftTranslation, "status:sealed="+sealedTranslation});
+		miniLocalization.setCurrentLanguageCode(MiniLocalization.ENGLISH);
+		BulletinXmlExporter exporter = new BulletinXmlExporter(miniLocalization);
 		exporter.exportBulletins(writer, list, includePrivateData, includeAttachments);
 		String result = writer.toString();
 		return result;
@@ -748,5 +751,7 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 		return sampleAttachmentFile;
 	}
 
+	static final String draftTranslation = "Draft";
+	static final String sealedTranslation = "Sealed";
 	static ClientBulletinStore store;
 }

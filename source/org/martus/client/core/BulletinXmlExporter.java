@@ -90,13 +90,19 @@ public class BulletinXmlExporter
 	private void writeBulletinMetaData(Writer dest, Bulletin b) throws IOException
 	{
 		dest.write(MartusXml.getTagStartWithNewline(BulletinXmlConstants.BULLETIN_META_DATA));
-		dest.write(getXmlEncodedTagWithData(BulletinXmlConstants.BULLETIN_VERSION,Integer.toString(b.getVersion())));
 		dest.write(getXmlEncodedTagWithData(BulletinXmlConstants.ACCOUNT_ID, b.getAccount()));
 		dest.write(getXmlEncodedTagWithData(BulletinXmlConstants.LOCAL_ID, b.getLocalId()));
 		dest.write(getXmlEncodedTagWithData(BulletinXmlConstants.BULLETIN_LAST_SAVED_DATE_TIME, localization.formatDateTime(b.getLastSavedTime())));
 		if(b.isAllPrivate())
 			dest.write(getXmlEncodedTagWithData(BulletinXmlConstants.ALL_PRIVATE, ""));
-		
+		writeBulletinStatus(dest, b);			
+		writeBulletinHistory(dest, b);
+		dest.write(MartusXml.getTagEnd(BulletinXmlConstants.BULLETIN_META_DATA));
+	}
+
+	private void writeBulletinHistory(Writer dest, Bulletin b) throws IOException
+	{
+		dest.write(getXmlEncodedTagWithData(BulletinXmlConstants.BULLETIN_VERSION,Integer.toString(b.getVersion())));
 		BulletinHistory history = b.getHistory();
 		if(history.size() > 0)
 		{
@@ -107,7 +113,14 @@ public class BulletinXmlExporter
 			}
 			dest.write(MartusXml.getTagEnd(BulletinXmlConstants.HISTORY));
 		}
-		dest.write(MartusXml.getTagEnd(BulletinXmlConstants.BULLETIN_META_DATA));
+	}
+
+	private void writeBulletinStatus(Writer dest, Bulletin b) throws IOException
+	{
+		String status = localization.getStatusLabel("draft");
+		if(b.isSealed())
+			status = localization.getStatusLabel("sealed");
+		dest.write(getXmlEncodedTagWithData(BulletinXmlConstants.BULLETIN_STATUS, status));
 	}
 	
 	private void writeBulletinFieldSpecs(Writer dest, Bulletin b, boolean includePrivateData) throws IOException
