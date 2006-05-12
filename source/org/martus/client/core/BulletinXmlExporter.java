@@ -138,7 +138,7 @@ public class BulletinXmlExporter
 		writeBulletinMetaData(dest, b);
 		writeBulletinFieldSpecs(dest, b, includePrivateData);
 
-		dest.write(MartusXml.getTagStart(BulletinXmlConstants.FIELD_VALUES));
+		dest.write(MartusXml.getTagStartWithNewline(BulletinXmlConstants.FIELD_VALUES));
 		if(includePrivateData || !b.isAllPrivate())
 		{
 			writeFields(dest, b, b.getTopSectionFieldSpecs());
@@ -164,7 +164,7 @@ public class BulletinXmlExporter
 		if(attachments.length == 0)
 			return;
 
-		dest.write(MartusXml.getTagStart(attachmentSectionTag));
+		dest.write(MartusXml.getTagStartWithNewline(attachmentSectionTag));
 		for (int i = 0; i < attachments.length; i++)
 		{
 			AttachmentProxy proxy = attachments[i];
