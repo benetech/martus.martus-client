@@ -274,26 +274,13 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 		Vector list = new Vector();
 		list.add(b);
 		String result = doExport(list, false);
-		assertContains("<Field>\n" +
-				"<Type>GRID</Type>\n" +
-				"<Tag>MyGridTag</Tag>\n" +
-				"<Label>Victim Information</Label>\n" +
+		assertContains("<Field tag='MyGridTag'>\n" +
 				"<Value><GridData columns='2'>\n" +
 				"<Row>\n" +
 				"<Column>rowData1</Column>\n" +
 				"<Column>rowData2</Column>\n" +
 				"</Row>\n" +
 				"</GridData>\n" +
-				"<GridSpecDetails>\n" +
-				"<Column type='STRING'>\n" +
-				"<Tag></Tag>\n" +
-				"<Label>Name of Victim</Label>\n" +
-				"</Column>\n" +
-				"<Column type='STRING'>\n" +
-				"<Tag></Tag>\n" +
-				"<Label>Age of Victim</Label>\n" +
-				"</Column>\n" +
-				"</GridSpecDetails>\n" +
 				"</Value>\n" +
 				"</Field>", result);
 	}

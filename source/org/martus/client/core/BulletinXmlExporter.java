@@ -29,13 +29,13 @@ package org.martus.client.core;
 import java.io.IOException;
 import java.io.Writer;
 import java.util.Vector;
+
 import org.martus.common.MartusXml;
 import org.martus.common.MiniLocalization;
 import org.martus.common.bulletin.AttachmentProxy;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.field.MartusField;
 import org.martus.common.fieldspec.FieldSpec;
-import org.martus.common.fieldspec.GridFieldSpec;
 import org.martus.common.packet.BulletinHistory;
 import org.martus.util.xml.XmlUtilities;
 
@@ -179,13 +179,8 @@ public class BulletinXmlExporter
 			String value = field.getExportableData(localization);
 			if(spec.getType().isGrid())
 			{
-				GridFieldSpec grid = (GridFieldSpec)spec;
-				String columnLabels = grid.getDetailsXml();
-				final String typeTagAndData = getXmlEncodedTagWithData(BulletinXmlConstants.TYPE, FieldSpec.getTypeString(spec.getType()));
-				final String tagTagAndData = getXmlEncodedTagWithData(BulletinXmlConstants.TAG, tag);
-				final String labelTagAndData = getXmlEncodedTagWithData(BulletinXmlConstants.LABEL, spec.getLabel());
-				final String valueTagAndData = MartusXml.getTagWithData(BulletinXmlConstants.VALUE, value + columnLabels);
-				writeElementDirect(dest, typeTagAndData, tagTagAndData, labelTagAndData, valueTagAndData);
+				String valueTagAndData = MartusXml.getTagWithData(BulletinXmlConstants.VALUE, value);
+				writeElementDirect(dest, tag, valueTagAndData);
 			}
 			else
 			{
@@ -202,8 +197,14 @@ public class BulletinXmlExporter
 	
 	private static void writeElement(Writer dest, String tag, String fieldData) throws IOException
 	{
+		String xmlFieldTagWithData = getXmlEncodedTagWithData(BulletinXmlConstants.VALUE, fieldData);
+		writeElementDirect(dest, tag, xmlFieldTagWithData);
+	}
+
+	private static void writeElementDirect(Writer dest, String tag, String xmlFieldData) throws IOException
+	{
 		dest.write(MartusXml.getTagStartWithNewline("Field "+BulletinXmlConstants.TAG_ATTRIBUTE+"='"+tag+"'"));
-		dest.write(getXmlEncodedTagWithData(BulletinXmlConstants.VALUE, fieldData));
+		dest.write(xmlFieldData);
 		dest.write(MartusXml.getTagEnd(MartusXml.tagField));		
 	}
 
