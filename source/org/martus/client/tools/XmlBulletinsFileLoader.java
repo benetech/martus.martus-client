@@ -32,11 +32,11 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Vector;
 
-import org.martus.client.core.BulletinXmlConstants;
 import org.martus.common.FieldCollection;
 import org.martus.common.GridData;
 import org.martus.common.bulletin.AttachmentProxy;
 import org.martus.common.bulletin.Bulletin;
+import org.martus.common.bulletin.BulletinXmlConstants;
 import org.martus.common.crypto.MartusCrypto;
 import org.martus.common.crypto.MartusCrypto.EncryptionException;
 import org.martus.common.fieldspec.CustomFieldError;

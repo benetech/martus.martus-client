@@ -28,9 +28,9 @@ package org.martus.client.tools;
 import java.util.HashMap;
 import java.util.Vector;
 
-import org.martus.client.core.BulletinXmlConstants;
 import org.martus.common.FieldCollection;
 import org.martus.common.GridData;
+import org.martus.common.bulletin.BulletinXmlConstants;
 import org.martus.common.field.MartusField;
 import org.martus.common.fieldspec.GridFieldSpec;
 import org.martus.util.xml.SimpleXmlDefaultLoader;
