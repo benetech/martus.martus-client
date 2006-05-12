@@ -522,6 +522,14 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 		assertContains("didn't write escaped?", "a &lt; b &amp;&amp; b &gt; c", result);
 	}
 
+	public void testExportSimpleDate() throws Exception
+	{
+		Bulletin b = new Bulletin(store.getSignatureGenerator());
+		String entryDate = b.get(Bulletin.TAGENTRYDATE);
+		final String result = getExportedXml(b);
+		assertContains("didn't write good simple date?", "Simple:"+entryDate, result);
+	}
+
 	public void testExportDateRange() throws Exception
 	{
 		String rawDateRangeString = createSampleDateRangeString();
@@ -530,7 +538,7 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 		b.set(Bulletin.TAGEVENTDATE, rawDateRangeString);
 		final String result = getExportedXml(b);
 		assertNotContains("exported raw flexidate?", rawDateRangeString, result);
-		assertContains("didn't write good date range?", "2005-05-01,2005-05-30", result);
+		assertContains("didn't write good date range?", "Range:2005-05-01,2005-05-30", result);
 	}
 
 	private String getExportedXml(Bulletin b) throws IOException

@@ -182,6 +182,16 @@ public class BulletinXmlExporter
 				String valueTagAndData = MartusXml.getTagWithData(BulletinXmlConstants.VALUE, value);
 				writeElementDirect(dest, tag, valueTagAndData);
 			}
+			if(spec.getType().isDate())
+			{
+				String simpleDateValue = BulletinXmlConstants.DATE_SIMPLE+ value;
+				writeElement(dest, tag, simpleDateValue);				
+			}
+			if(spec.getType().isDateRange())
+			{
+				String simpleDateValue = BulletinXmlConstants.DATE_RANGE+ value;
+				writeElement(dest, tag, simpleDateValue);				
+			}
 			else
 			{
 				writeElement(dest, tag, value);
