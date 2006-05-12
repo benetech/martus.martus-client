@@ -257,6 +257,10 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 				"<Tag></Tag>\n" +
 				"<Label>Age of Victim</Label>\n" +
 				"</Column>\n" +
+				"<Column type='DATE'>\n" +
+				"<Tag></Tag>\n" +
+				"<Label>Date Of Event</Label>\n" +
+				"</Column>\n" +
 				"</GridSpecDetails>" +
 				"</Field></CustomFields>";
 		GridFieldSpec newSpec = (GridFieldSpec)FieldCollection.parseXml(xmlFieldType)[0]; 
@@ -268,6 +272,7 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 		GridRow row = new GridRow(newSpec);
 		row.setCellText(0, "rowData1");
 		row.setCellText(1, "rowData2");
+		row.setCellText(2, "20060504");
 		gridData.addRow(row);
 		b.set(gridTag, gridData.getXmlRepresentation());
 		
@@ -275,10 +280,11 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 		list.add(b);
 		String result = doExport(list, false);
 		assertContains("<Field tag='MyGridTag'>\n" +
-				"<Value><GridData columns='2'>\n" +
+				"<Value><GridData columns='3'>\n" +
 				"<Row>\n" +
 				"<Column>rowData1</Column>\n" +
 				"<Column>rowData2</Column>\n" +
+				"<Column>Simple:20060504</Column>\n" +
 				"</Row>\n" +
 				"</GridData>\n" +
 				"</Value>\n" +
