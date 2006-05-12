@@ -40,6 +40,7 @@ import org.martus.common.MiniLocalization;
 import org.martus.common.bulletin.AttachmentProxy;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.bulletin.BulletinConstants;
+import org.martus.common.bulletin.BulletinXmlConstants;
 import org.martus.common.crypto.MartusCrypto.EncryptionException;
 import org.martus.common.fieldspec.ChoiceItem;
 import org.martus.common.fieldspec.DropDownFieldSpec;
@@ -325,12 +326,16 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 		list.add(b);
 		String result = doExport(list, false, true);
 		assertNotContains("<Field>\n<Tag>NoAttachmentsExported</Tag>", result);
+		assertContains(BulletinXmlConstants.TOP_SECTION_ATTACHMENT_LIST, result);
+		assertNotContains(BulletinXmlConstants.BOTTOM_SECTION_ATTACHMENT_LIST, result);
 
 		assertContains(sampleAttachmentFile1.getName(), result);
 		assertContains(sampleAttachmentFile2.getName(), result);
 
 		result = doExport(list, false, false);
 		assertContains("<Field>\n<Tag>NoAttachmentsExported</Tag>", result);
+		assertNotContains(BulletinXmlConstants.TOP_SECTION_ATTACHMENT_LIST, result);
+		assertNotContains(BulletinXmlConstants.BOTTOM_SECTION_ATTACHMENT_LIST, result);
 
 		assertNotContains(sampleAttachmentFile1.getName(), result);
 		assertNotContains(sampleAttachmentFile2.getName(), result);
@@ -401,8 +406,12 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 
 		String publicOnly = doExport(list, false, true);
 		assertNotContains(sampleAttachmentFile1.getName(), publicOnly);
+		assertNotContains(BulletinXmlConstants.TOP_SECTION_ATTACHMENT_LIST, publicOnly);
+		assertNotContains(BulletinXmlConstants.BOTTOM_SECTION_ATTACHMENT_LIST, publicOnly);
 
 		String publicAndPrivate = doExport(list, true, true);
+		assertNotContains(BulletinXmlConstants.TOP_SECTION_ATTACHMENT_LIST, publicAndPrivate);
+		assertContains(BulletinXmlConstants.BOTTOM_SECTION_ATTACHMENT_LIST, publicAndPrivate);
 		assertContains(sampleAttachmentFile1.getName(), publicAndPrivate);
 	}
 
