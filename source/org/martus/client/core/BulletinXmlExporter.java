@@ -93,6 +93,7 @@ public class BulletinXmlExporter
 		dest.write(getXmlEncodedTagWithData(BulletinXmlConstants.BULLETIN_VERSION,Integer.toString(b.getVersion())));
 		dest.write(getXmlEncodedTagWithData(BulletinXmlConstants.ACCOUNT_ID, b.getAccount()));
 		dest.write(getXmlEncodedTagWithData(BulletinXmlConstants.LOCAL_ID, b.getLocalId()));
+		dest.write(getXmlEncodedTagWithData(BulletinXmlConstants.BULLETIN_LAST_SAVED_DATE_TIME, localization.formatDateTime(b.getLastSavedTime())));
 		if(b.isAllPrivate())
 			dest.write(getXmlEncodedTagWithData(BulletinXmlConstants.ALL_PRIVATE, ""));
 		

@@ -89,6 +89,9 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 		assertContains("<MartusBulletin>", result);
 		assertContains("<ExportMetaData>", result);
 		assertContains("<BulletinVersion>1</BulletinVersion>", result);
+		MiniLocalization localization = new MiniLocalization();
+		String lastSavedDateTime = localization.formatDateTime(b.getLastSavedTime());
+		assertContains("<BulletinLastSavedDateTime>"+lastSavedDateTime+"</BulletinLastSavedDateTime>", result);
 		assertContains("<BulletinMetaData>", result);
 		assertContains("<NoAttachmentsExported></NoAttachmentsExported>", result);
 		assertContains(b.getAccount(), result);
