@@ -425,6 +425,7 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 		assertContains("<Field>\n<Tag>AllPrivate</Tag>", publicOnly);
 		assertNotContains(sampleAuthor, publicOnly);
 		assertContains("<FieldValues>", publicOnly);
+		assertContains("<!--  No Private FieldSpecs or Data was exported  -->", publicOnly);
 		assertNotContains("<MainFieldSpecs>", publicOnly);
 		assertNotContains("<PrivateFieldSpecs>", publicOnly);
 

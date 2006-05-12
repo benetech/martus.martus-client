@@ -72,9 +72,14 @@ public class BulletinXmlExporter
 	{
 		dest.write(MartusXml.getTagStartWithNewline(BulletinXmlConstants.EXPORT_META_DATA));
 		if(includePrivateData)
+		{
 			writeElement(dest, "", BulletinXmlConstants.PUBLIC_AND_PRIVATE, "", "");
+		}
 		else
+		{
+			dest.write("<!--  No Private FieldSpecs or Data was exported  -->");
 			writeElement(dest, "", BulletinXmlConstants.PUBLIC_ONLY, "", "");
+		}
 		dest.write(MartusXml.getTagEnd(BulletinXmlConstants.EXPORT_META_DATA));
 		dest.write(BulletinXmlConstants.NEW_LINE);
 	}
