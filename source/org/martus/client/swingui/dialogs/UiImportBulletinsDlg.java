@@ -74,22 +74,6 @@ public class UiImportBulletinsDlg extends JDialog implements ActionListener
 		return importFile;
 	}	
 	
-	class BulletinImportFileFilter extends FileFilter
-	{
-		public boolean accept(File pathname)
-		{
-			if(pathname.isDirectory())
-				return true;
-			return(pathname.getName().endsWith(MartusApp.MARTUS_IMPORT_EXPORT_EXTENSION));
-		}
-
-		public String getDescription()
-		{
-			return mainWindow.getLocalization().getFieldLabel("BulletinImportFiles");
-		}
-	}
-	
-
 	private void constructDialog()
 	{
 		MartusLocalization localization = mainWindow.getLocalization();
@@ -118,7 +102,20 @@ public class UiImportBulletinsDlg extends JDialog implements ActionListener
 	
 	}	
 	
-	
+	class BulletinImportFileFilter extends FileFilter
+	{
+		public boolean accept(File pathname)
+		{
+			if(pathname.isDirectory())
+				return true;
+			return(pathname.getName().endsWith(MartusApp.MARTUS_IMPORT_EXPORT_EXTENSION));
+		}
+
+		public String getDescription()
+		{
+			return mainWindow.getLocalization().getFieldLabel("BulletinImportFiles");
+		}
+	}
 
 	public void actionPerformed(ActionEvent e)
 	{
