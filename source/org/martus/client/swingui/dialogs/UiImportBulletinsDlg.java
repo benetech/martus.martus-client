@@ -35,6 +35,7 @@ import java.util.HashMap;
 import java.util.Map;
 import javax.swing.Box;
 import javax.swing.JDialog;
+import javax.swing.JPanel;
 import javax.swing.filechooser.FileFilter;
 import org.martus.client.core.MartusApp;
 import org.martus.client.swingui.MartusLocalization;
@@ -80,12 +81,12 @@ public class UiImportBulletinsDlg extends JDialog implements ActionListener
 		setTitle(localization.getWindowTitle(IMPORT_BULLETINS_TITLE));
 		Container contentPane = getContentPane();
 		contentPane.setLayout(new BorderLayout());
-
 		
 		importingFolder = new UiNormalTextEditor(localization, 40);
 		contentPane.add(new UiLabel(localization.getFieldLabel("ImportBulletinsIntoWhichFolder")), BorderLayout.NORTH);
-		contentPane.add(importingFolder.getComponent(), BorderLayout.CENTER);
-		
+		JPanel panel = new JPanel();
+		panel. add(importingFolder.getComponent());
+		contentPane.add(panel, BorderLayout.CENTER);
 		
 		ok = new UiButton(localization.getButtonLabel("Continue"));
 		ok.addActionListener(this);
@@ -93,7 +94,7 @@ public class UiImportBulletinsDlg extends JDialog implements ActionListener
 		UiButton cancel = new UiButton(localization.getButtonLabel("cancel"));
 		cancel.addActionListener(this);
 		Box buttons = Box.createHorizontalBox();
-		Utilities.addComponentsRespectingOrientation(buttons, new Component[]{ok, cancel});
+		Utilities.addComponentsRespectingOrientation(buttons, new Component[]{ok, cancel, Box.createHorizontalGlue()});
 		contentPane.add(buttons, BorderLayout.SOUTH);
 		
 		Utilities.centerDlg(this);
