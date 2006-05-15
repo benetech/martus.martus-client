@@ -802,6 +802,11 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	{
 		ClientBulletinStore store = getStore();
 		BulletinFolder folder = store.getFolderSaved();
+		selectFolder(folder);
+	}
+
+	public void selectFolder(BulletinFolder folder)
+	{
 		folders.selectFolder(folder.getName());
 	}
 

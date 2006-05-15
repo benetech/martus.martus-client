@@ -37,13 +37,16 @@ import javax.swing.Box;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.filechooser.FileFilter;
+import org.martus.client.bulletinstore.BulletinFolder;
+import org.martus.client.bulletinstore.ClientBulletinStore;
 import org.martus.client.core.MartusApp;
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.client.swingui.fields.UiNormalTextEditor;
+import org.martus.client.tools.ImporterOfXmlFilesOfBulletins;
 import org.martus.swing.UiButton;
 import org.martus.swing.UiFileChooser;
 import org.martus.swing.UiLabel;
+import org.martus.swing.UiTextField;
 import org.martus.swing.Utilities;
 
 public class UiImportBulletinsDlg extends JDialog implements ActionListener
@@ -82,14 +85,16 @@ public class UiImportBulletinsDlg extends JDialog implements ActionListener
 		Container contentPane = getContentPane();
 		contentPane.setLayout(new BorderLayout());
 		
-		importingFolder = new UiNormalTextEditor(localization, 40);
+		importingFolder = new UiTextField(20);
+		
 		contentPane.add(new UiLabel(localization.getFieldLabel("ImportBulletinsIntoWhichFolder")), BorderLayout.NORTH);
 		JPanel panel = new JPanel();
-		panel. add(importingFolder.getComponent());
+		panel. add(importingFolder);
 		contentPane.add(panel, BorderLayout.CENTER);
 		
 		ok = new UiButton(localization.getButtonLabel("Continue"));
 		ok.addActionListener(this);
+		getRootPane().setDefaultButton(ok);
 		
 		UiButton cancel = new UiButton(localization.getButtonLabel("cancel"));
 		cancel.addActionListener(this);
@@ -122,38 +127,58 @@ public class UiImportBulletinsDlg extends JDialog implements ActionListener
 	{
 		if(e.getSource().equals(ok))
 		{
-			doImport();
+			if(!doImport())
+				return;
 		}
 		dispose();
 	}
 	
-	public Map getTokenReplacement() 
+	public Map getTokenReplacement(int bulletinsImported) 
 	{
 		HashMap map = new HashMap();
-		map.put("#BulletinsImported#", Integer.toString(1));
+		map.put("#BulletinsImported#", Integer.toString(bulletinsImported));
 		map.put("#ImportFolder#", importingFolder.getText());
 		return map;
 	}
 	
-	
-	private void doImport()
+	private boolean doImport()
 	{
+		String folderName = importingFolder.getText();
+		ClientBulletinStore clientStore =mainWindow.getStore();
+		if(folderName.length() == 0)
+		{
+			mainWindow.notifyDlg("NoImportFileSpecified");
+			return false;
+		}
+		if(!clientStore.isFolderNameValid(folderName))
+		{
+			mainWindow.notifyDlg("ErrorRenameFolder");
+			return false;
+		}
+		
 		try
 		{
-			mainWindow.notifyDlg(mainWindow, "ImportComplete", getTokenReplacement());
+			File[] xmlFilesToImport = new File[] {fileToImport};
+			BulletinFolder folder = mainWindow.getStore().createOrFindFolder(importingFolder.getText());
+			ImporterOfXmlFilesOfBulletins importer = new ImporterOfXmlFilesOfBulletins(xmlFilesToImport,clientStore, folder, System.out);
+			importer.importFiles();
+			mainWindow.folderContentsHaveChanged(folder);
+			mainWindow.folderTreeContentsHaveChanged();
+			mainWindow.selectFolder(folder);
+			mainWindow.notifyDlg(mainWindow, "ImportComplete", getTokenReplacement(importer.getNumberOfBulletinsImported()));
 		}
 		catch (Exception e)
 		{
 			mainWindow.notifyDlg("ErrorImportingBulletins");
 		}
-		
+		return true;
 	}
 
 	private static final String IMPORT_BULLETINS_TITLE = "ImportBulletins";
 	UiMainWindow mainWindow;
 	UiButton ok;
 	File fileToImport;
-	UiNormalTextEditor importingFolder;
+	UiTextField importingFolder;
 }
 	
 	

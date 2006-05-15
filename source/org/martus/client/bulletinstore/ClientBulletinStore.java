@@ -385,15 +385,8 @@ public class ClientBulletinStore extends BulletinStore
 
 	public synchronized boolean renameFolder(String oldName, String newName)
 	{		
-		if (newName.length() == 0 || newName.startsWith(" "))
+		if(!isFolderNameValid(newName))
 			return false;
-			
-		char[] strOfArray = newName.toCharArray();								
-		for(int i = 0; i < strOfArray.length; ++i)
-		{			
-			if (!MartusUtilities.isValidCharInFolder(strOfArray[i]))
-				return false;
-		}	
 		
 		if(findFolder(newName) != null)
 			return false;
@@ -404,6 +397,20 @@ public class ClientBulletinStore extends BulletinStore
 
 		folder.setName(newName);
 		saveFolders();
+		return true;
+	}
+
+	public boolean isFolderNameValid(String newName)
+	{
+		if (newName.length() == 0 || newName.startsWith(" "))
+			return false;
+			
+		char[] strOfArray = newName.toCharArray();								
+		for(int i = 0; i < strOfArray.length; ++i)
+		{			
+			if (!MartusUtilities.isValidCharInFolder(strOfArray[i]))
+				return false;
+		}	
 		return true;
 	}
 
