@@ -37,6 +37,7 @@ import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JDialog;
 import org.martus.client.core.BulletinXmlExporter;
+import org.martus.client.core.MartusApp;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.clientside.UiLocalization;
 import org.martus.common.bulletin.Bulletin;
@@ -120,7 +121,7 @@ public class UiExportBulletinsDlg extends JDialog implements ActionListener
 	{
 		String windowTitle = mainWindow.getLocalization().getWindowTitle("ExportBulletinsSaveAs");
 		if(defaultFileName != null && defaultFileName.length() > 0)
-			defaultFileName += ".xml";
+			defaultFileName += MartusApp.MARTUS_IMPORT_EXPORT_EXTENSION;
 		else
 			defaultFileName = null;
 	

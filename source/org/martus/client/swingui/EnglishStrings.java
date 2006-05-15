@@ -198,6 +198,8 @@ public class EnglishStrings
 "wintitle:notifyRetrieveInProgress=Retrieve In Progress",
 "wintitle:notifyRetrieveFileDataVersionError=Warning",
 "wintitle:notifyRetrieveFileError=Error",
+"wintitle:notifyImportComplete=Import Complete",
+"wintitle:notifyErrorImportingBulletins",
 
 "wintitle:inputservername=Server Name",
 "wintitle:inputserverpubliccode=Server Identification",
@@ -272,8 +274,8 @@ public class EnglishStrings
 "wintitle:confirmSendWithPublicData=Confirm Save With Public Data",
 "wintitle:DeleteMyDataFromThisComputer=Delete My Data From This Computer",
 "wintitle:RemoveMartsFromThisComputer=Remove Martus From This Computer",
-
 "wintitle:ResendBulletins=Resend Bulletins",
+"wintitle:ImportBulletins=Import Bulletins",
 
 "button:help=Help",
 "button:create=Create",
@@ -351,6 +353,7 @@ public class EnglishStrings
 "menu:CreateNewBulletin=Create New Bulletin",
 "menu:printBulletin=Print Bulletin(s) / Create Report File",
 "menu:ExportBulletins=Export Bulletins",
+"menu:ImportBulletins=Import Bulletins",
 "menu:ExportFolder=Export Folder",
 "menu:exit=Exit",
 "menu:edit=Edit",
@@ -432,6 +435,7 @@ public class EnglishStrings
 "field:HelpExample2DefaultDetails=List Victim Names and Ages:",
 "field:HelpExampleEtcDefaultDetails=etc...",
 "field:PublicInformationFiles=Public Information Files",
+"field:BulletinImportFiles=Bulletin Import Files",
 "field:NormalKeyboardMsg1=Remember: Entering your password using the regular keyboard may reduce security.",
 "field:NormalKeyboardMsg2=For maximum security switch to the on-screen keyboard.",
 "field:RetrieveSummariesMessage=All bulletins retrieved will still remain on the server.\nYou can only retrieve bulletins that are not currently on your computer.",
@@ -723,6 +727,8 @@ public class EnglishStrings
 "field:notifyRetrieveFileDataVersionErrorcause=A retrieve was in progress when you upgraded to a newer version of Martus. That retrieve will be canceled, so you should re-select any bulletins that had not yet been retrieved.",
 "field:notifyRetrieveFileErrorcause=An error has prevented Martus from continuing the retrieve that was in progress. You should re-select any bulletins that had not yet been retrieved.",
 "field:notifyNoGridRowSelectedcause=No row selected.",
+"field:notifyImportCompletecause=Import complete.  Successfuly imported #BulletinsImported# bulletins into '#ImportFolder#' folder.",
+"field:notifyErrorImportingBulletinscause=There was an error importing bulletings into Martus.  Not all bulletins were imported.",
 
 "field:IncompatibleMtfVersion=The version of this translation is not compatible with this version of Martus.  It is recommended that you do not continue to use this translation version and go to (http://www.martus.org/downloads) for the appropriate version.",
 "field:IncompatibleMtfVersionTranslation=#MtfLanguage# Translation Version: #MtfVersionNumber#",
@@ -892,6 +898,7 @@ public class EnglishStrings
 "field:BulletinDetailsInProgressTitle=(in progress)",
 "field:BulletinHeadQuartersHQInfoForView=The following Headquarters account(s) can view the private information in this bulletin, and can send this bulletin to a server.",
 "field:BulletinHeadQuartersHQInfoForModify=The selected Headquarters account(s) will be able to view the private information in this bulletin, or send this bulletin to a server, after you save it.\n\nTo add a new Headquarters account use the Tools/Configure Headquarters menu option.",
+"field:ImportBulletinsIntoWhichFolder=Import bulletins into which Folder?",
 
 "field:mdyOrder=Date format sequence",
 "field:DateDelimiter=Date delimiter",

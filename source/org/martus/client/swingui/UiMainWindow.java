@@ -84,6 +84,7 @@ import org.martus.client.swingui.dialogs.UiContactInfoDlg;
 import org.martus.client.swingui.dialogs.UiCreateNewAccountProcess;
 import org.martus.client.swingui.dialogs.UiExportBulletinsDlg;
 import org.martus.client.swingui.dialogs.UiFancySearchDlg;
+import org.martus.client.swingui.dialogs.UiImportBulletinsDlg;
 import org.martus.client.swingui.dialogs.UiInitialSigninDlg;
 import org.martus.client.swingui.dialogs.UiModelessBusyDlg;
 import org.martus.client.swingui.dialogs.UiOnlineHelpDlg;
@@ -2216,6 +2217,11 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		if(bulletins.size()==1)
 			defaultFileName = ((Bulletin)bulletins.get(0)).toFileName();
 		new UiExportBulletinsDlg(this, bulletins, defaultFileName);
+	}
+	
+	public void doImportBulletins()
+	{
+		new UiImportBulletinsDlg(this);
 	}
 	
 	public Vector getSelectedBulletins(String tagZeroBulletinsSelected)

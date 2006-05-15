@@ -1867,6 +1867,7 @@ public class MartusApp
 	public RetrieveCommand currentRetrieveCommand;
 
 	public static final String PUBLIC_INFO_EXTENSION = ".mpi";
+	public static final String MARTUS_IMPORT_EXPORT_EXTENSION = ".xml";
 	public static final String CUSTOMIZATION_TEMPLATE_EXTENSION = ".mct";
 	public static final String DEFAULT_DETAILS_EXTENSION = ".txt";
 	public static final String AUTHENTICATE_SERVER_FAILED = "Failed to Authenticate Server";

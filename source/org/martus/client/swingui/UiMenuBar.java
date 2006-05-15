@@ -52,6 +52,7 @@ import org.martus.client.swingui.actions.ActionMenuExportFolder;
 import org.martus.client.swingui.actions.ActionMenuExportMyPublicKey;
 import org.martus.client.swingui.actions.ActionMenuFoldersOrganize;
 import org.martus.client.swingui.actions.ActionMenuHelp;
+import org.martus.client.swingui.actions.ActionMenuImportBulletins;
 import org.martus.client.swingui.actions.ActionMenuModifyBulletin;
 import org.martus.client.swingui.actions.ActionMenuPasteBulletins;
 import org.martus.client.swingui.actions.ActionMenuPreferences;
@@ -90,6 +91,7 @@ public class UiMenuBar extends JMenuBar
 		file.addSeparator();
 		file.add(new ActionMenuExportFolder(mainWindow));
 		file.add(new ActionMenuExportBulletins(mainWindow));
+		file.add(new ActionMenuImportBulletins(mainWindow));
 		file.addSeparator();
 		file.add(new ActionMenuExit(mainWindow));
 
