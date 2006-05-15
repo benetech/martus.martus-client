@@ -39,20 +39,11 @@ public class UiNormalTextEditor extends UiNormalTextField
 	public UiNormalTextEditor(MartusLocalization localizationToUse, int numberColumns)
 	{
 		super(localizationToUse);
-		widget = new UiTextAreaWithPadding(1, numberColumns);
+		widget = new UiTextArea(1, numberColumns);
 		widget.setLineWrap(true);
 		widget.setWrapStyleWord(true);
 		widget.addKeyListener(new myKeyListener());
 		supportContextMenu();
-	}
-	
-	class UiTextAreaWithPadding extends UiTextArea
-	{
-		public UiTextAreaWithPadding(int rows, int cols)
-		{
-			super(rows, cols);
-		}
-
 	}
 	
 	public JComponent[] getFocusableComponents()
