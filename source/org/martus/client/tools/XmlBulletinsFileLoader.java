@@ -36,7 +36,7 @@ import org.martus.common.FieldCollection;
 import org.martus.common.GridData;
 import org.martus.common.bulletin.AttachmentProxy;
 import org.martus.common.bulletin.Bulletin;
-import org.martus.common.bulletin.BulletinXmlConstants;
+import org.martus.common.bulletin.BulletinXmlExportImportConstants;
 import org.martus.common.crypto.MartusCrypto;
 import org.martus.common.crypto.MartusCrypto.EncryptionException;
 import org.martus.common.fieldspec.CustomFieldError;
@@ -51,7 +51,7 @@ public class XmlBulletinsFileLoader extends SimpleXmlDefaultLoader
 {
 	public XmlBulletinsFileLoader(MartusCrypto cryptoToUse, File baseAttachmentsDirectoryToUse)
 	{
-		super(BulletinXmlConstants.MARTUS_BULLETINS);
+		super(BulletinXmlExportImportConstants.MARTUS_BULLETINS);
 		security = cryptoToUse;
 		bulletins = new Vector();
 		fieldSpecValidationErrors = new Vector();
@@ -63,7 +63,7 @@ public class XmlBulletinsFileLoader extends SimpleXmlDefaultLoader
 	public SimpleXmlDefaultLoader startElement(String tag)
 		throws SAXParseException
 	{
-		if(tag.equals(BulletinXmlConstants.MARTUS_BULLETIN))
+		if(tag.equals(BulletinXmlExportImportConstants.MARTUS_BULLETIN))
 		{
 			currentBulletinLoader = new XmlBulletinLoader();
 			return currentBulletinLoader;
@@ -74,7 +74,7 @@ public class XmlBulletinsFileLoader extends SimpleXmlDefaultLoader
 	public void endElement(String tag, SimpleXmlDefaultLoader ended)
 		throws SAXParseException
 	{
-		if(tag.equals(BulletinXmlConstants.MARTUS_BULLETIN))
+		if(tag.equals(BulletinXmlExportImportConstants.MARTUS_BULLETIN))
 		{
 			mainFields = currentBulletinLoader.getMainFieldSpecs();
 			privateFields = currentBulletinLoader.getPrivateFieldSpecs();
@@ -217,11 +217,11 @@ public class XmlBulletinsFileLoader extends SimpleXmlDefaultLoader
 	
 	private String extractRealDateValue(String xmlValue)
 	{
-		if(xmlValue.startsWith(BulletinXmlConstants.DATE_SIMPLE))
-			return xmlValue.substring(BulletinXmlConstants.DATE_SIMPLE.length());
-		if(xmlValue.startsWith(BulletinXmlConstants.DATE_RANGE))
+		if(xmlValue.startsWith(BulletinXmlExportImportConstants.DATE_SIMPLE))
+			return xmlValue.substring(BulletinXmlExportImportConstants.DATE_SIMPLE.length());
+		if(xmlValue.startsWith(BulletinXmlExportImportConstants.DATE_RANGE))
 		{
-			String rawDateRange = xmlValue.substring(BulletinXmlConstants.DATE_RANGE.length());
+			String rawDateRange = xmlValue.substring(BulletinXmlExportImportConstants.DATE_RANGE.length());
 			return MartusFlexidate.createMartusDateStringFromBeginAndEndDateString(rawDateRange);
 		}
 		return xmlValue;
