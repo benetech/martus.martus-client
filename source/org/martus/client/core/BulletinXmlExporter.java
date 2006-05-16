@@ -125,10 +125,15 @@ public class BulletinXmlExporter
 	
 	private void writeBulletinFieldSpecs(Writer dest, Bulletin b, boolean includePrivateData) throws IOException
 	{
-		if(includePrivateData || !b.isAllPrivate())
+		if(shouldIncludeTopSection(b, includePrivateData))
 			writeFieldSpecs(dest, b.getTopSectionFieldSpecs(), BulletinXmlConstants.MAIN_FIELD_SPECS);
 		if(includePrivateData)
 			writeFieldSpecs(dest, b.getBottomSectionFieldSpecs(), BulletinXmlConstants.PRIVATE_FIELD_SPECS);
+	}
+
+	private boolean shouldIncludeTopSection(Bulletin b, boolean includePrivateData)
+	{
+		return includePrivateData || !b.isAllPrivate();
 	}
 
 	public void writeFieldSpecs(Writer dest, FieldSpec[] specs, String xmlTag) throws IOException
@@ -150,7 +155,7 @@ public class BulletinXmlExporter
 		writeBulletinFieldSpecs(dest, b, includePrivateData);
 
 		dest.write(MartusXml.getTagStartWithNewline(BulletinXmlConstants.FIELD_VALUES));
-		if(includePrivateData || !b.isAllPrivate())
+		if(shouldIncludeTopSection(b, includePrivateData))
 		{
 			writeFields(dest, b, b.getTopSectionFieldSpecs());
 			if(includeAttachments)
