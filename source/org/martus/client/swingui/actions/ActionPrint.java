@@ -108,7 +108,7 @@ public class ActionPrint extends UiMartusAction
 			if(result.wasCancelChoosen())
 				return;
 			
-			destination = result.getFileChoosen();
+			destination = result.getChosenFile();
 			if(!destination.exists())
 				break;
 			if(mainWindow.confirmDlg(mainWindow, "OverWriteExistingFile"))

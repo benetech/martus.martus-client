@@ -178,7 +178,7 @@ public class UiCustomFieldsDlg extends JDialog
 			UiFileChooser.FileDialogResults results = UiFileChooser.displayFileOpenDialog(mainWindow, windowTitle, null, currentDirectory, buttonLabel, filter);
 			if (results.wasCancelChoosen())
 				return;
-			File importFile = results.getFileChoosen();
+			File importFile = results.getChosenFile();
 
 			CustomFieldTemplate template = new CustomFieldTemplate();
 			
@@ -233,7 +233,7 @@ public class UiCustomFieldsDlg extends JDialog
 			
 			if (results.wasCancelChoosen())
 				return;
-			File destFileOriginal = results.getFileChoosen();
+			File destFileOriginal = results.getChosenFile();
 			File destFile = null;
 			if(destFileOriginal.getName().endsWith(MartusApp.CUSTOMIZATION_TEMPLATE_EXTENSION))
 				destFile = destFileOriginal;

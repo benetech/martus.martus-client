@@ -295,7 +295,7 @@ public class UiConfigureHQs extends JDialog
 		if (results.wasCancelChoosen())
 			return null;
 		
-		File importFile = results.getFileChoosen();
+		File importFile = results.getChosenFile();
 		String publicKeyString = mainWindow.getApp().extractPublicInfo(importFile);
 
 		String publicCode = MartusCrypto.computePublicCode(publicKeyString);

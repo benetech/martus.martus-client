@@ -208,12 +208,12 @@ public class UiAttachmentEditor extends UiParagraphPanel
 				results = UiFileChooser.displayFileOpenDialog(UiAttachmentEditor.this, null, UiFileChooser.NO_FILE_SELECTED, last, buttonLabel, null);
 				if (results.wasCancelChoosen())
 					return;
-				if(results.getFileChoosen().isFile())
+				if(results.getChosenFile().isFile())
 					break;
 				mainWindow.notifyDlg("AttachmentNotAFile");
 			}
 			setLastAttachmentLoadDirectory(results.getCurrentDirectory());
-			AttachmentProxy a = new AttachmentProxy(results.getFileChoosen());
+			AttachmentProxy a = new AttachmentProxy(results.getChosenFile());
 			model.add(a);
 		}
 	}

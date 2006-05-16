@@ -59,7 +59,7 @@ public class UiRecoverKeyPairFromBackup
 			UiFileChooser.FileDialogResults results = UiFileChooser.displayFileOpenDialog(mainWindow, windowTitle, UiFileChooser.NO_FILE_SELECTED, startingDirectory);
 			if (!results.wasCancelChoosen())
 			{
-				File backupFile = results.getFileChoosen();
+				File backupFile = results.getChosenFile();
 				try
 				{
 					attemptSignIn(backupFile);

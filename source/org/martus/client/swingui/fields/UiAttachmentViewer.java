@@ -223,7 +223,7 @@ public class UiAttachmentViewer extends UiParagraphPanel  implements DragGesture
 			if(results.wasCancelChoosen())
 				return;
 			setLastAttachmentSaveDirectory(results.getCurrentDirectory());
-			File outputFile = results.getFileChoosen();
+			File outputFile = results.getChosenFile();
 			if(outputFile.exists())
 			{
 				if(!mainWindow.confirmDlg("OverWriteExistingFile"))

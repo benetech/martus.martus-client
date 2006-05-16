@@ -1860,7 +1860,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		
 		if (results.wasCancelChoosen())
 			return;
-		File newBackupFile = results.getFileChoosen();
+		File newBackupFile = results.getChosenFile();
 		if(newBackupFile.exists())
 			if(!confirmDlg("OverWriteExistingFile"))
 				return;

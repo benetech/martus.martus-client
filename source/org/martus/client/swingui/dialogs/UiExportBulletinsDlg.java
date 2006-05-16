@@ -129,7 +129,7 @@ public class UiExportBulletinsDlg extends JDialog implements ActionListener
 		if (results.wasCancelChoosen())
 			return null;
 
-		File destFile = results.getFileChoosen();
+		File destFile = results.getChosenFile();
 		if(destFile.exists())
 			if(!mainWindow.confirmDlg("OverWriteExistingFile"))
 				return null;

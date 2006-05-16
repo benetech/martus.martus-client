@@ -72,7 +72,7 @@ public class UiImportBulletinsDlg extends JDialog implements ActionListener
 		if (results.wasCancelChoosen())
 			return null;
 	
-		File importFile = results.getFileChoosen();
+		File importFile = results.getChosenFile();
 		if(!importFile.exists() || !importFile.isFile() )
 			return null;
 		return importFile;

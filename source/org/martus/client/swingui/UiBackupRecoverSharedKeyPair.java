@@ -200,7 +200,7 @@ public class UiBackupRecoverSharedKeyPair
 			
 			if (!results.wasCancelChoosen())
 			{
-				firstShareFile = results.getFileChoosen();
+				firstShareFile = results.getChosenFile();
 				if(firstShareFile != null && firstShareFile.isFile())
 				{
 					if(getRootKeyShareFileName(firstShareFile) != null)
