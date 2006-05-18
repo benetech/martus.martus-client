@@ -31,18 +31,14 @@ import java.awt.Container;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
-import java.util.HashMap;
-import java.util.Map;
 import javax.swing.Box;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.filechooser.FileFilter;
-import org.martus.client.bulletinstore.BulletinFolder;
 import org.martus.client.bulletinstore.ClientBulletinStore;
 import org.martus.client.core.MartusApp;
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.client.tools.ImporterOfXmlFilesOfBulletins;
 import org.martus.swing.UiButton;
 import org.martus.swing.UiFileChooser;
 import org.martus.swing.UiLabel;
@@ -127,23 +123,17 @@ public class UiImportBulletinsDlg extends JDialog implements ActionListener
 	{
 		if(e.getSource().equals(ok))
 		{
-			if(!doImport())
+			if(!folderValid())
 				return;
+			okToImport = true;
 		}
 		dispose();
 	}
 	
-	public Map getTokenReplacement(int bulletinsImported) 
-	{
-		HashMap map = new HashMap();
-		map.put("#BulletinsImported#", Integer.toString(bulletinsImported));
-		map.put("#ImportFolder#", importingFolder.getText());
-		return map;
-	}
 	
-	private boolean doImport()
+	private boolean folderValid()
 	{
-		String folderName = importingFolder.getText();
+		folderName = importingFolder.getText();
 		ClientBulletinStore clientStore =mainWindow.getStore();
 		if(folderName.length() == 0)
 		{
@@ -155,30 +145,31 @@ public class UiImportBulletinsDlg extends JDialog implements ActionListener
 			mainWindow.notifyDlg("ErrorRenameFolder");
 			return false;
 		}
-		
-		try
-		{
-			File[] xmlFilesToImport = new File[] {fileToImport};
-			BulletinFolder folder = mainWindow.getStore().createOrFindFolder(importingFolder.getText());
-			ImporterOfXmlFilesOfBulletins importer = new ImporterOfXmlFilesOfBulletins(xmlFilesToImport,clientStore, folder, System.out);
-			importer.importFiles();
-			mainWindow.folderContentsHaveChanged(folder);
-			mainWindow.folderTreeContentsHaveChanged();
-			mainWindow.selectFolder(folder);
-			mainWindow.notifyDlg(mainWindow, "ImportComplete", getTokenReplacement(importer.getNumberOfBulletinsImported()));
-		}
-		catch (Exception e)
-		{
-			mainWindow.notifyDlg("ErrorImportingBulletins");
-		}
 		return true;
 	}
+	
+	public String getFolderNameToImportBulletinsInto()
+	{
+		return folderName;
+	}
+	public File getXmlFileToImport()
+	{
+		return fileToImport;
+	}
+	
+	public boolean okToImport()
+	{
+		return okToImport;
+	}
+
 
 	private static final String IMPORT_BULLETINS_TITLE = "ImportBulletins";
 	UiMainWindow mainWindow;
-	UiButton ok;
-	File fileToImport;
-	UiTextField importingFolder;
+	private UiButton ok;
+	private UiTextField importingFolder;
+	private File fileToImport;
+	private String folderName;
+	boolean okToImport;
 }
 	
 	

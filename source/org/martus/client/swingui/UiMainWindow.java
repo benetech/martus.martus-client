@@ -54,7 +54,6 @@ import java.util.Map;
 import java.util.Stack;
 import java.util.TimerTask;
 import java.util.Vector;
-
 import javax.swing.AbstractAction;
 import javax.swing.ImageIcon;
 import javax.swing.JComponent;
@@ -63,9 +62,9 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JSplitPane;
 import javax.swing.SwingUtilities;
-
 import org.martus.client.bulletinstore.BulletinFolder;
 import org.martus.client.bulletinstore.ClientBulletinStore;
+import org.martus.client.bulletinstore.ImportBulletins;
 import org.martus.client.core.BackgroundUploader;
 import org.martus.client.core.ConfigInfo;
 import org.martus.client.core.MartusApp;
@@ -2226,8 +2225,14 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	
 	public void doImportBulletins()
 	{
-		new UiImportBulletinsDlg(this);
+		UiImportBulletinsDlg dlg = new UiImportBulletinsDlg(this);
+		if(dlg.okToImport())
+		{
+			ImportBulletins importer = new ImportBulletins(this);
+			importer.doImport(dlg.getXmlFileToImport(), dlg.getFolderNameToImportBulletinsInto());
+		}
 	}
+	
 	
 	public Vector getSelectedBulletins(String tagZeroBulletinsSelected)
 	{

@@ -41,7 +41,7 @@ import org.martus.clientside.UiLocalization;
 import org.martus.swing.UiButton;
 import org.martus.swing.UiLabel;
 
-public class UiProgressRetrieveDlg extends JDialog
+abstract public class UiProgressRetrieveDlg extends JDialog
 {
 	public UiProgressRetrieveDlg(UiMainWindow window, String tag)
 	{
@@ -81,12 +81,7 @@ public class UiProgressRetrieveDlg extends JDialog
 		cancel.setEnabled(false);
 	}
 
-	public void beginRetrieve()
-	{
-		setVisible(true);
-	}
-
-	public void finishedRetrieve()
+	public void finished()
 	{
 		dispose();
 	}

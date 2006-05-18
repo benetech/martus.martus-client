@@ -76,7 +76,7 @@ public class Retriever
 	public void finishedRetrieve()
 	{
 		if(progressDlg != null)
-			progressDlg.finishedRetrieve();
+			progressDlg.finished();
 	}
 
 	public String getResult()

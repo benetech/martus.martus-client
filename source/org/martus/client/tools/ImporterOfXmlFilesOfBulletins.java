@@ -30,26 +30,41 @@ import java.io.FileInputStream;
 import java.io.PrintStream;
 import org.martus.client.bulletinstore.BulletinFolder;
 import org.martus.client.bulletinstore.ClientBulletinStore;
+import org.martus.client.swingui.dialogs.UiImporterProgressMeterDlg;
 import org.martus.client.tools.XmlBulletinsImporter.FieldSpecVerificationException;
 import org.martus.common.bulletin.Bulletin;
 
 public class ImporterOfXmlFilesOfBulletins
 {
-	public ImporterOfXmlFilesOfBulletins(File[] bulletinXmlFilesToImportToUse, ClientBulletinStore clientStoreToUse, BulletinFolder importFolderToUse, PrintStream progressMonitorToUse)
+	public ImporterOfXmlFilesOfBulletins(File[] bulletinXmlFilesToImportToUse, ClientBulletinStore clientStoreToUse, BulletinFolder importFolderToUse, PrintStream consoleMonitorToUse)
+	{
+		this(bulletinXmlFilesToImportToUse, clientStoreToUse, importFolderToUse, consoleMonitorToUse, null);
+	}
+
+	public ImporterOfXmlFilesOfBulletins(File[] bulletinXmlFilesToImportToUse, ClientBulletinStore clientStoreToUse, BulletinFolder importFolderToUse,UiImporterProgressMeterDlg progressMeterToUse)
+	{
+		this(bulletinXmlFilesToImportToUse, clientStoreToUse, importFolderToUse, null, progressMeterToUse);
+	}
+
+	private ImporterOfXmlFilesOfBulletins(File[] bulletinXmlFilesToImportToUse, ClientBulletinStore clientStoreToUse, BulletinFolder importFolderToUse, PrintStream consoleMonitorToUse, UiImporterProgressMeterDlg progressMeterToUse)
 	{
 		super();
-		progressMonitor = progressMonitorToUse;
+		progressMeter = progressMeterToUse;
+		consoleMonitor = consoleMonitorToUse;
 		bulletinXmlFilesToImport = bulletinXmlFilesToImportToUse;
 		clientStore = clientStoreToUse;
 		importFolder = importFolderToUse;
 		baseAttachmentsDirectory = null;
+		totalBulletins = 0;
+		bulletinsSuccessfullyImported = 0;
 	}
+	
 	
 	public void importFiles()  throws FieldSpecVerificationException, Exception
 	{
 		for(int i= 0; i < bulletinXmlFilesToImport.length; ++i)
 		{
-			bulletinsImported += importOneXmlFile(bulletinXmlFilesToImport[i]);
+			bulletinsSuccessfullyImported += importOneXmlFile(bulletinXmlFilesToImport[i]);
 		}
 	}
 	
@@ -64,32 +79,52 @@ public class ImporterOfXmlFilesOfBulletins
 		XmlBulletinsImporter importer = new XmlBulletinsImporter(clientStore.getSignatureVerifier(), xmlIn, baseAttachmentsDirectory);
 		Bulletin[] bulletins = importer.getBulletins();
 		importFolder.prepareForBulkOperation();
-		try
+		int numberOfBulletinsImportedFromXmlFile = 0;
+		int bulletinsToImport = bulletins.length;
+		totalBulletins += bulletinsToImport;
+		for(int j = 0; j < bulletinsToImport; ++j)
 		{
-			for(int j = 0; j < bulletins.length; ++j)
+			Bulletin b =  bulletins[j];
+			if(progressMeter != null)
 			{
-				Bulletin b =  bulletins[j];
-				progressMonitor.println("Importing:" +b.get(Bulletin.TAGTITLE));
+				if(progressMeter.shouldExit())
+					break;
+				progressMeter.updateBulletinCountMeter(j, bulletinsToImport);
+			}
+			if(consoleMonitor != null)
+				consoleMonitor.println("Importing:" +b.get(Bulletin.TAGTITLE));
+			try
+			{
 				clientStore.saveBulletin(b);
 				clientStore.addBulletinToFolder(importFolder, b.getUniversalId());
+				++numberOfBulletinsImportedFromXmlFile;
+			}
+			catch(Exception e)
+			{
+				e.printStackTrace();
 			}
 		}
-		finally
-		{
-			clientStore.saveFolders();
-		}
-		return bulletins.length;
+
+		clientStore.saveFolders();
+		return numberOfBulletinsImportedFromXmlFile;
 	}
 	
 	public int getNumberOfBulletinsImported()
 	{
-		return bulletinsImported;
+		return bulletinsSuccessfullyImported;
 	}
 
-	private int bulletinsImported;
+	public int getTotalNumberOfBulletins()
+	{
+		return totalBulletins;
+	}
+
+	private int bulletinsSuccessfullyImported;
+	private int totalBulletins;
 	private File[] bulletinXmlFilesToImport;
 	private ClientBulletinStore clientStore;
 	private BulletinFolder importFolder;
-	private PrintStream progressMonitor;
+	private UiImporterProgressMeterDlg progressMeter;
+	private PrintStream consoleMonitor;
 	public File baseAttachmentsDirectory;
 }

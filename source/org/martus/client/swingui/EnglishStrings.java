@@ -42,6 +42,7 @@ public class EnglishStrings
 "wintitle:BulletinDetailsDialog=Bulletin Details",
 "wintitle:IncompatibleMtfVersion=Incompatible Translation Version",
 "wintitle:DuplicateLabelsInCustomTemplate=Warning Duplicate Labels Found",
+"wintitle:ImportProgress=Importing Bulletins",
 
 "wintitle:confirmsend=Confirm Save Bulletin",
 "wintitle:confirmretrieve=Confirm Retrieve Bulletins",
@@ -728,7 +729,7 @@ public class EnglishStrings
 "field:notifyRetrieveFileDataVersionErrorcause=A retrieve was in progress when you upgraded to a newer version of Martus. That retrieve will be canceled, so you should re-select any bulletins that had not yet been retrieved.",
 "field:notifyRetrieveFileErrorcause=An error has prevented Martus from continuing the retrieve that was in progress. You should re-select any bulletins that had not yet been retrieved.",
 "field:notifyNoGridRowSelectedcause=No row selected.",
-"field:notifyImportCompletecause=Import complete.  Successfuly imported #BulletinsImported# bulletins into folder:#ImportFolder#",
+"field:notifyImportCompletecause=Import complete.  Successfuly imported #BulletinsSuccessfullyImported# of #TotalBulletinsToImport# bulletins into folder:#ImportFolder#",
 "field:notifyErrorImportingBulletinscause=There was an error importing bulletings into Martus.  Not all bulletins were imported.",
 "field:notifyNoImportFileSpecifiedcause=No folder specified.  You must enter a folder you wish the files to be imported into.  This folder can already exist in the system, or can be a new folder.",
 
@@ -901,6 +902,7 @@ public class EnglishStrings
 "field:BulletinHeadQuartersHQInfoForView=The following Headquarters account(s) can view the private information in this bulletin, and can send this bulletin to a server.",
 "field:BulletinHeadQuartersHQInfoForModify=The selected Headquarters account(s) will be able to view the private information in this bulletin, or send this bulletin to a server, after you save it.\n\nTo add a new Headquarters account use the Tools/Configure Headquarters menu option.",
 "field:ImportBulletinsIntoWhichFolder=Import bulletins into which Folder?",
+"field:ImportProgress=Importing",
 
 "field:mdyOrder=Date format sequence",
 "field:DateDelimiter=Date delimiter",
