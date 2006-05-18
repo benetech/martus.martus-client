@@ -28,8 +28,10 @@ package org.martus.client.core;
 
 import java.io.IOException;
 import java.io.Writer;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.Vector;
-
 import org.martus.common.MartusXml;
 import org.martus.common.MiniLocalization;
 import org.martus.common.bulletin.AttachmentProxy;
@@ -92,7 +94,13 @@ public class BulletinXmlExporter
 		dest.write(MartusXml.getTagStartWithNewline(BulletinXmlExportImportConstants.BULLETIN_META_DATA));
 		dest.write(getXmlEncodedTagWithData(BulletinXmlExportImportConstants.ACCOUNT_ID, b.getAccount()));
 		dest.write(getXmlEncodedTagWithData(BulletinXmlExportImportConstants.LOCAL_ID, b.getLocalId()));
-		dest.write(getXmlEncodedTagWithData(BulletinXmlExportImportConstants.BULLETIN_LAST_SAVED_DATE_TIME, localization.formatDateTime(b.getLastSavedTime())));
+		
+		GregorianCalendar cal = new GregorianCalendar();
+		cal.setTime(new Date(b.getLastSavedTime()));
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+		String dateAndTime = format.format(cal.getTime());
+		dest.write(getXmlEncodedTagWithData(BulletinXmlExportImportConstants.BULLETIN_LAST_SAVED_DATE_TIME, dateAndTime));
+
 		if(b.isAllPrivate())
 			dest.write(getXmlEncodedTagWithData(BulletinXmlExportImportConstants.ALL_PRIVATE, ""));
 		writeBulletinStatus(dest, b);			

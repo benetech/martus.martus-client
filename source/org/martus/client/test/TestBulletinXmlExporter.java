@@ -29,9 +29,11 @@ package org.martus.client.test;
 import java.io.File;
 import java.io.IOException;
 import java.io.StringWriter;
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.Vector;
-
 import org.martus.client.bulletinstore.ClientBulletinStore;
 import org.martus.client.core.BulletinXmlExporter;
 import org.martus.client.tools.XmlBulletinsImporter;
@@ -98,8 +100,12 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 		assertNotContains("<BulletinStatus>sealed</BulletinStatus>", result);
 		assertContains("<BulletinStatus-Localized>"+draftTranslation+"</BulletinStatus-Localized>", result);
 		assertNotContains("<BulletinStatus-Localized>"+sealedTranslation+"</BulletinStatus-Localized>", result);
-		MiniLocalization localization = new MiniLocalization();
-		String lastSavedDateTime = localization.formatDateTime(b.getLastSavedTime());
+
+		GregorianCalendar cal = new GregorianCalendar();
+		cal.setTime(new Date(b.getLastSavedTime()));
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+		String lastSavedDateTime = format.format(cal.getTime());
+		
 		assertContains("<BulletinLastSavedDateTime>"+lastSavedDateTime+"</BulletinLastSavedDateTime>", result);
 		assertContains("<BulletinMetaData>", result);
 		assertContains("<NoAttachmentsExported></NoAttachmentsExported>", result);
