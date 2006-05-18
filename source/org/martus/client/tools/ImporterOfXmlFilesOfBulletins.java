@@ -61,11 +61,8 @@ public class ImporterOfXmlFilesOfBulletins
 	private int importOneXmlFile(File bulletinXmlFileToImport) throws FieldSpecVerificationException, Exception
 	{
 		FileInputStream xmlIn = new FileInputStream(bulletinXmlFileToImport);
-		long s = System.currentTimeMillis();
-		System.out.println(s);
 		XmlBulletinsImporter importer = new XmlBulletinsImporter(clientStore.getSignatureVerifier(), xmlIn, baseAttachmentsDirectory);
 		Bulletin[] bulletins = importer.getBulletins();
-		System.out.println((System.currentTimeMillis() -s) / 1000);
 		importFolder.prepareForBulkOperation();
 		try
 		{
@@ -75,7 +72,6 @@ public class ImporterOfXmlFilesOfBulletins
 				progressMonitor.println("Importing:" +b.get(Bulletin.TAGTITLE));
 				clientStore.saveBulletin(b);
 				clientStore.addBulletinToFolder(importFolder, b.getUniversalId());
-				System.out.println((System.currentTimeMillis() -s)/1000);
 			}
 		}
 		finally
