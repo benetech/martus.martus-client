@@ -94,8 +94,10 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 		assertContains("<MartusBulletin>", result);
 		assertContains("<ExportMetaData>", result);
 		assertContains("<BulletinVersion>1</BulletinVersion>", result);
-		assertContains("<BulletinStatus>"+draftTranslation+"</BulletinStatus>", result);
-		assertNotContains("<BulletinStatus>"+sealedTranslation+"</BulletinStatus>", result);
+		assertContains("<BulletinStatus>draft</BulletinStatus>", result);
+		assertNotContains("<BulletinStatus>sealed</BulletinStatus>", result);
+		assertContains("<BulletinStatus-Localized>"+draftTranslation+"</BulletinStatus-Localized>", result);
+		assertNotContains("<BulletinStatus-Localized>"+sealedTranslation+"</BulletinStatus-Localized>", result);
 		MiniLocalization localization = new MiniLocalization();
 		String lastSavedDateTime = localization.formatDateTime(b.getLastSavedTime());
 		assertContains("<BulletinLastSavedDateTime>"+lastSavedDateTime+"</BulletinLastSavedDateTime>", result);
@@ -373,8 +375,10 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 		assertContains(sampleTitle1, result);
 		assertContains("<Field tag='title'", result);
 		assertContains(sampleTitle2, result);
-		assertContains("<BulletinStatus>"+sealedTranslation+"</BulletinStatus>", result);
-		assertContains("<BulletinStatus>"+draftTranslation+"</BulletinStatus>", result);
+		assertContains("<BulletinStatus>draft</BulletinStatus>", result);
+		assertContains("<BulletinStatus>sealed</BulletinStatus>", result);
+		assertContains("<BulletinStatus-Localized>"+draftTranslation+"</BulletinStatus-Localized>", result);
+		assertContains("<BulletinStatus-Localized>"+sealedTranslation+"</BulletinStatus-Localized>", result);
 
 	}
 

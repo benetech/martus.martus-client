@@ -117,10 +117,15 @@ public class BulletinXmlExporter
 
 	private void writeBulletinStatus(Writer dest, Bulletin b) throws IOException
 	{
-		String status = localization.getStatusLabel("draft");
+		String statusLocalized = localization.getStatusLabel("draft");
+		String status = Bulletin.STATUSDRAFT;
 		if(b.isSealed())
-			status = localization.getStatusLabel("sealed");
+		{
+			statusLocalized = localization.getStatusLabel("sealed");
+			status = Bulletin.STATUSSEALED;
+		}
 		dest.write(getXmlEncodedTagWithData(BulletinXmlExportImportConstants.BULLETIN_STATUS, status));
+		dest.write(getXmlEncodedTagWithData(BulletinXmlExportImportConstants.BULLETIN_STATUS_LOCALIZED, statusLocalized));
 	}
 	
 	private void writeBulletinFieldSpecs(Writer dest, Bulletin b, boolean includePrivateData) throws IOException
