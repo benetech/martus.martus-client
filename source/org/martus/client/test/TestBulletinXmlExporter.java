@@ -670,7 +670,7 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 		String sampleAuthor = "someone special";
 		exported.set(BulletinConstants.TAGAUTHOR, sampleAuthor);
 		exported.set(BulletinConstants.TAGLANGUAGE, MiniLocalization.ENGLISH);
-		exported.set(BulletinConstants.TAGEVENTDATE, "1970-01-01,19700101+3");
+		exported.set(BulletinConstants.TAGEVENTDATE, "1970-01-01,19700101+0");
 		String privateDate = "20060508";
 		exported.set(dateTag, privateDate);
 		exported.set(dropdownTag, choice2);
