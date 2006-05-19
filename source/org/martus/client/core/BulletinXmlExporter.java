@@ -202,12 +202,11 @@ public class BulletinXmlExporter
 		dest.write(MartusXml.getTagStartWithNewline(attachmentSectionTag));
 		for (int i = 0; i < attachments.length; i++)
 		{
+			AttachmentProxy proxy = attachments[i];
+			String fileName = proxy.getLabel();
+			File attachment = new File(attachmentsDirectory, fileName);
 			try
 			{
-				AttachmentProxy proxy = attachments[i];
-				String fileName = proxy.getLabel();
-				File attachment = new File(attachmentsDirectory, fileName);
-				
 				if(attachment.exists())
 				{
 					String nameOnly = UiAttachmentViewer.extractFileNameOnly(fileName);
@@ -224,8 +223,8 @@ public class BulletinXmlExporter
 			}
 			catch(Exception e)
 			{
-				System.out.println("Unable to save file.");
-				e.printStackTrace();				
+				dest.write(getXmlEncodedTagWithData(BulletinXmlExportImportConstants.EXPORT_ERROR_ATTACHMENT_FILENAME, fileName));
+				attachment.delete();
 			}
 		}
 		dest.write(MartusXml.getTagEnd(attachmentSectionTag));

@@ -402,6 +402,24 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 		assertEquals("Private Attachment 1's data doesn't match export?", UnicodeReader.getFileContents(sampleAttachmentFile1), UnicodeReader.getFileContents(exportedAttachmentFile1));
 	}
 
+	public void testExportAttachmentFailure() throws Exception
+	{
+		Bulletin b = new Bulletin(store.getSignatureGenerator());
+		b.setAllPrivate(false);
+		final File sampleAttachmentFile1 = addNewPrivateSampleAttachment(b);
+		File exportedAttachmentFile1 = new File(attachmentDirectory, sampleAttachmentFile1.getName());
+		assertFalse(exportedAttachmentFile1.exists());
+		Vector list = new Vector();
+		list.add(b);
+
+		String publicAndPrivate = doExport(list, true, true);
+		assertNotContains(BulletinXmlExportImportConstants.TOP_SECTION_ATTACHMENT_LIST, publicAndPrivate);
+		assertContains(BulletinXmlExportImportConstants.BOTTOM_SECTION_ATTACHMENT_LIST, publicAndPrivate);
+		assertContains(sampleAttachmentFile1.getName(), publicAndPrivate);
+		assertContains("<Error Exporting Attachment>"+sampleAttachmentFile1.getName()+"</Error Exporting Attachment>", publicAndPrivate);
+		assertFalse("exported Private Attachment 1 exists?", exportedAttachmentFile1.exists());
+	}
+
 	public void testExportMultipleBulletins() throws Exception
 	{
 		Bulletin b1 = new Bulletin(store.getSignatureGenerator());
