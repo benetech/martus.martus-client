@@ -886,6 +886,11 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		notifyDlg(getCurrentActiveFrame(), baseTag, emptyTokenReplacement);
 	}
 	
+	public void notifyDlg(String baseTag, Map tokenReplacement)
+	{
+		notifyDlg(getCurrentActiveFrame(), baseTag, tokenReplacement);
+	}
+
 	public void notifyDlg(JFrame parent, String baseTag)
 	{
 		HashMap emptyTokenReplacement = new HashMap();

@@ -55,7 +55,7 @@ public class ImportBulletins
 			mainWindow.folderTreeContentsHaveChanged();
 			int numberOfBulletinsImported = importThread.getNumberOfBulletinsImported();
 			int totalBulletins = importThread.getTotalBulletins();
-			mainWindow.notifyDlg(mainWindow, "ImportComplete", getTokenReplacementImporter(numberOfBulletinsImported, totalBulletins, importingFolderName));
+			mainWindow.notifyDlg("ImportComplete", getTokenReplacementImporter(numberOfBulletinsImported, totalBulletins, importingFolderName));
 		}
 		catch (Exception e)
 		{

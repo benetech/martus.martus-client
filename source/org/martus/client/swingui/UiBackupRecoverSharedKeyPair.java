@@ -64,7 +64,7 @@ public class UiBackupRecoverSharedKeyPair
 
 	public boolean recoverKeyPairFromMultipleUnencryptedFiles()
 	{
-		mainWindow.notifyDlg(mainWindow, "RecoveryProcessKeyShare",UiBackupRecoverSharedKeyPair.getTokenReplacement());
+		mainWindow.notifyDlg("RecoveryProcessKeyShare",UiBackupRecoverSharedKeyPair.getTokenReplacement());
 		
 		File firstShareFile = getRecoveryDriveToUse();
 		if(firstShareFile == null)
