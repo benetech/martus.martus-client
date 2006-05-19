@@ -123,17 +123,25 @@ public class XmlBulletinsFileLoader extends SimpleXmlDefaultLoader
 		return bulletin;
 	}
 	
-	private void addAttachmentsToBulletin(Bulletin bulletin, Vector attachmentFileNames, String sectionToAddAttachments) throws IOException, EncryptionException
+	private void addAttachmentsToBulletin(Bulletin bulletin, Vector attachmentFileNames, String sectionToAddAttachments) 
 	{
 		for(int i = 0; i < attachmentFileNames.size(); ++i)
 		{
 			String attachmentFileName = (String)attachmentFileNames.get(i);
-			File attachmentFile = getAttachmentFile(attachmentFileName);
-			AttachmentProxy attachment = new AttachmentProxy(attachmentFile);
-			if(sectionToAddAttachments.equals(Bulletin.TOP_SECTION))
-				bulletin.addPublicAttachment(attachment);
-			else
-				bulletin.addPrivateAttachment(attachment);
+			File attachmentFile;
+			try
+			{
+				attachmentFile = getAttachmentFile(attachmentFileName);
+				AttachmentProxy attachment = new AttachmentProxy(attachmentFile);
+				if(sectionToAddAttachments.equals(Bulletin.TOP_SECTION))
+					bulletin.addPublicAttachment(attachment);
+				else
+					bulletin.addPrivateAttachment(attachment);
+			}
+			catch (Exception e)
+			{
+				//TODO keep track of all attachments which failed to be added to the bulletin and show in UI
+			}
 		}
 	}
 
