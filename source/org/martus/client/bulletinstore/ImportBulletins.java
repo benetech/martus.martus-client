@@ -80,6 +80,7 @@ public class ImportBulletins
 			try
 			{
 				importer = new ImporterOfXmlFilesOfBulletins(filesToImport, clientStore, importFolder, progressMeter);
+				importer.setAttachmentsDirectory(filesToImport[0].getParentFile());
 				importer.importFiles();
 			}
 			catch (Exception e)
