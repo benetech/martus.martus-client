@@ -231,7 +231,7 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 			  "</Field>\n" +
 			  "</MainFieldSpecs>\n\n";
 
-		BulletinXmlExporter exporter = new BulletinXmlExporter(null, new MiniLocalization());
+		BulletinXmlExporter exporter = new BulletinXmlExporter(null, new MiniLocalization(), null);
 		StringWriter writer = new StringWriter();
 		exporter.writeFieldSpecs(writer, b.getTopSectionFieldSpecs(), "MainFieldSpecs");
 		String result = writer.toString();
@@ -803,7 +803,7 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 		MiniLocalization miniLocalization = new MiniLocalization();
 		miniLocalization.addEnglishTranslations(new String[]{"status:draft="+draftTranslation, "status:sealed="+sealedTranslation});
 		miniLocalization.setCurrentLanguageCode(MiniLocalization.ENGLISH);
-		BulletinXmlExporter exporter = new BulletinXmlExporter(app, miniLocalization);
+		BulletinXmlExporter exporter = new BulletinXmlExporter(app, miniLocalization, null);
 		exporter.exportBulletins(writer, list, includePrivateData, includeAttachments, attachmentDirectory);
 		failingAttachments = exporter.getNumberOfFailingAttachments();
 		String result = writer.toString();

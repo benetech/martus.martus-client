@@ -29,7 +29,7 @@ import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.client.swingui.dialogs.UiImporterProgressMeterDlg;
+import org.martus.client.swingui.dialogs.UiImportExportProgressMeterDlg;
 import org.martus.client.tools.ImporterOfXmlFilesOfBulletins;
 
 public class ImportBulletins
@@ -45,11 +45,11 @@ public class ImportBulletins
 		try
 		{
 			File[] xmlFilesToImport = new File[] {xmlFileToImport};
-			UiImporterProgressMeterDlg progressRetrieveDlg = new UiImporterProgressMeterDlg(mainWindow, "ImportProgress");
+			UiImportExportProgressMeterDlg progressDlg = new UiImportExportProgressMeterDlg(mainWindow, "ImportProgress");
 			BulletinFolder importFolder = mainWindow.getStore().createOrFindFolder(importingFolderName);
-			ImporterThread importThread = new ImporterThread(xmlFilesToImport, importingFolderName, progressRetrieveDlg);
+			ImporterThread importThread = new ImporterThread(xmlFilesToImport, importingFolderName, progressDlg);
 			importThread.start();
-			progressRetrieveDlg.setVisible(true);
+			progressDlg.setVisible(true);
 			mainWindow.selectFolder(importFolder);
 			mainWindow.folderContentsHaveChanged(importFolder);
 			mainWindow.folderTreeContentsHaveChanged();
@@ -65,7 +65,7 @@ public class ImportBulletins
 	
 	class ImporterThread extends Thread
 	{
-		public ImporterThread(File[] xmlFilesToImport, String importingFolderName, UiImporterProgressMeterDlg progressRetrieveDlgToUse)
+		public ImporterThread(File[] xmlFilesToImport, String importingFolderName, UiImportExportProgressMeterDlg progressRetrieveDlgToUse)
 		{
 			clientStore = mainWindow.getStore();
 			BulletinFolder folder = clientStore.createOrFindFolder(importingFolderName);
@@ -105,7 +105,7 @@ public class ImportBulletins
 		
 		private File[] filesToImport;
 		private BulletinFolder importFolder;
-		private UiImporterProgressMeterDlg progressMeter;
+		private UiImportExportProgressMeterDlg progressMeter;
 		private ClientBulletinStore clientStore;
 		private ImporterOfXmlFilesOfBulletins importer;
 	}

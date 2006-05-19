@@ -34,6 +34,7 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.Vector;
 
+import org.martus.client.swingui.dialogs.UiImportExportProgressMeterDlg;
 import org.martus.client.swingui.fields.UiAttachmentViewer;
 import org.martus.common.MartusXml;
 import org.martus.common.MiniLocalization;
@@ -49,11 +50,13 @@ import org.martus.util.xml.XmlUtilities;
 
 public class BulletinXmlExporter
 {
-	public BulletinXmlExporter(MartusApp appToUse, MiniLocalization localizationToUse)
+	public BulletinXmlExporter(MartusApp appToUse, MiniLocalization localizationToUse, UiImportExportProgressMeterDlg progressMeterToUse)
 	{
 		app = appToUse;
 		localization = localizationToUse;
+		progressMeter = progressMeterToUse;
 		failingAttachments = 0;
+		bulletinsExported = 0;
 	}
 	
 	public void exportBulletins(Writer dest, Vector bulletins, boolean includePrivateData, boolean includeAttachments, File attachmentsDirectory)
@@ -63,12 +66,25 @@ public class BulletinXmlExporter
 		writeXMLVersion(dest);
 		writeExportMetaData(dest, includePrivateData, includeAttachments);
 
-		for (int i = 0; i < bulletins.size(); i++)
+		int bulletinCount = bulletins.size();
+		for (int i = 0; i < bulletinCount; i++)
 		{
+			if(progressMeter != null)
+			{
+				progressMeter.updateBulletinCountMeter(i+1, bulletins.size());
+				if(progressMeter.shouldExit())
+					break;
+			}
 			Bulletin b = (Bulletin)bulletins.get(i);
 			exportOneBulletin(dest, b, includePrivateData, includeAttachments, attachmentsDirectory);
+			++bulletinsExported;
 		}
 		dest.write(MartusXml.getTagEnd(BulletinXmlExportImportConstants.MARTUS_BULLETINS));
+	}
+	
+	public int getNumberOfBulletinsExported()
+	{
+		return bulletinsExported;
 	}
 	
 	public int getNumberOfFailingAttachments()
@@ -281,6 +297,8 @@ public class BulletinXmlExporter
 
 	MiniLocalization localization;
 	MartusApp app;
+	int bulletinsExported;
 	int failingAttachments;
+	UiImportExportProgressMeterDlg progressMeter;
 
 }

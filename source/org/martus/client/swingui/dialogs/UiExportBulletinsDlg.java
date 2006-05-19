@@ -31,14 +31,13 @@ import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
-import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Vector;
+
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JDialog;
-import org.martus.client.core.BulletinXmlExporter;
+
+import org.martus.client.bulletinstore.ExportBulletins;
 import org.martus.client.core.MartusApp;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.clientside.UiLocalization;
@@ -52,7 +51,6 @@ import org.martus.swing.UiScrollPane;
 import org.martus.swing.UiVBox;
 import org.martus.swing.UiWrappedTextArea;
 import org.martus.swing.Utilities;
-import org.martus.util.UnicodeWriter;
 
 public class UiExportBulletinsDlg extends JDialog implements ActionListener
 {
@@ -151,41 +149,12 @@ public class UiExportBulletinsDlg extends JDialog implements ActionListener
 	{
 		return includeAttachments.isSelected();
 	}
-
-	void doExport(File destFile)
-	{
-		BulletinXmlExporter exporter = new BulletinXmlExporter(mainWindow.getApp(), mainWindow.getLocalization());
-		try
-		{
-			mainWindow.setWaitingCursor();
-			UnicodeWriter writer = new UnicodeWriter(destFile);
-			boolean userWantsToExportPrivate = userWantsToExportPrivate();
-			boolean userWantsToExportAttachments = userWantsToExportAttachments();
-			exporter.exportBulletins(writer, bulletins, userWantsToExportPrivate, userWantsToExportAttachments, destFile.getParentFile());
-			writer.close();
-			mainWindow.resetCursor();
-			int numberOfMissingAttachment = exporter.getNumberOfFailingAttachments();
-			if(numberOfMissingAttachment > 0)
-			{
-				mainWindow.notifyDlg("ExportCompleteMissingAttachments", getTokenReplacementImporter(numberOfMissingAttachment));
-			}
-			else
-				mainWindow.notifyDlg("ExportComplete");
-		}
-		catch (IOException e)
-		{
-			mainWindow.resetCursor();
-			mainWindow.notifyDlg("ErrorWritingFile");
-		}
-	}
-
-	Map getTokenReplacementImporter(int numberOfMissingAttachment) 
-	{
-		HashMap map = new HashMap();
-		map.put("#AttachmentsNotExported#", Integer.toString(numberOfMissingAttachment));
-		return map;
-	}
 	
+	public void doExport(File destFile)
+	{
+		ExportBulletins exporter = new ExportBulletins(mainWindow);
+		exporter.doExport(destFile, bulletins, userWantsToExportPrivate(), userWantsToExportAttachments());
+	}
 	
 	public void actionPerformed(ActionEvent ae)
 	{
@@ -214,6 +183,7 @@ public class UiExportBulletinsDlg extends JDialog implements ActionListener
 			if(destFile == null)
 				return;
 
+			
 			doExport(destFile);
 		}
 

@@ -43,6 +43,8 @@ public class EnglishStrings
 "wintitle:IncompatibleMtfVersion=Incompatible Translation Version",
 "wintitle:DuplicateLabelsInCustomTemplate=Warning Duplicate Labels Found",
 "wintitle:ImportProgress=Importing Bulletins",
+"wintitle:ExportProgress=Exporting Bulletins",
+
 
 "wintitle:confirmsend=Confirm Save Bulletin",
 "wintitle:confirmretrieve=Confirm Retrieve Bulletins",
@@ -684,8 +686,8 @@ public class EnglishStrings
 "field:notifyRetrievePreviewNotAvailableYetcause=Preview not yet available for this bulletin. Please wait until the information has been retrieved from the server, and then try again.",
 "field:notifyRetrievedOnlySomeSummariescause=Errors occurred while retrieving bulletin summaries.  Some of the bulletins on the server will not be shown.",
 "field:notifyConfirmCorrectDefaultDetailsDatacause=Please confirm that the default details retrieved are correct.",
-"field:notifyExportCompletecause=Export completed successfully",
-"field:notifyExportCompleteMissingAttachmentscause=Export complete.  Unfortunately #AttachmentsNotExported# attachments were not exported due to errors.",
+"field:notifyExportCompletecause=Successfully exported #BulletinsExported# of #TotalBulletinsToExport# bulletins.",
+"field:notifyExportCompleteMissingAttachmentscause=Exported #BulletinsExported# of #TotalBulletinsToExport# bulletins.  Unfortunately #AttachmentsNotExported# attachments were not exported due to errors.",
 
 "field:notifyErrorWritingFilecause=An error prevented the file from being written. Check to make sure the disk is not full or write protected.",
 "field:notifyErrorReadingFilecause=An error prevented the file from being read.",
@@ -908,6 +910,7 @@ public class EnglishStrings
 "field:BulletinHeadQuartersHQInfoForModify=The selected Headquarters account(s) will be able to view the private information in this bulletin, or send this bulletin to a server, after you save it.\n\nTo add a new Headquarters account use the Tools/Configure Headquarters menu option.",
 "field:ImportBulletinsIntoWhichFolder=Import bulletins into which Folder?",
 "field:ImportProgress=Importing",
+"field:ExportProgress=Exporting",
 
 "field:mdyOrder=Date format sequence",
 "field:DateDelimiter=Date delimiter",

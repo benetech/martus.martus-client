@@ -30,7 +30,7 @@ import java.io.FileInputStream;
 import java.io.PrintStream;
 import org.martus.client.bulletinstore.BulletinFolder;
 import org.martus.client.bulletinstore.ClientBulletinStore;
-import org.martus.client.swingui.dialogs.UiImporterProgressMeterDlg;
+import org.martus.client.swingui.dialogs.UiImportExportProgressMeterDlg;
 import org.martus.client.tools.XmlBulletinsImporter.FieldSpecVerificationException;
 import org.martus.common.bulletin.Bulletin;
 
@@ -41,12 +41,12 @@ public class ImporterOfXmlFilesOfBulletins
 		this(bulletinXmlFilesToImportToUse, clientStoreToUse, importFolderToUse, consoleMonitorToUse, null);
 	}
 
-	public ImporterOfXmlFilesOfBulletins(File[] bulletinXmlFilesToImportToUse, ClientBulletinStore clientStoreToUse, BulletinFolder importFolderToUse,UiImporterProgressMeterDlg progressMeterToUse)
+	public ImporterOfXmlFilesOfBulletins(File[] bulletinXmlFilesToImportToUse, ClientBulletinStore clientStoreToUse, BulletinFolder importFolderToUse,UiImportExportProgressMeterDlg progressMeterToUse)
 	{
 		this(bulletinXmlFilesToImportToUse, clientStoreToUse, importFolderToUse, null, progressMeterToUse);
 	}
 
-	private ImporterOfXmlFilesOfBulletins(File[] bulletinXmlFilesToImportToUse, ClientBulletinStore clientStoreToUse, BulletinFolder importFolderToUse, PrintStream consoleMonitorToUse, UiImporterProgressMeterDlg progressMeterToUse)
+	private ImporterOfXmlFilesOfBulletins(File[] bulletinXmlFilesToImportToUse, ClientBulletinStore clientStoreToUse, BulletinFolder importFolderToUse, PrintStream consoleMonitorToUse, UiImportExportProgressMeterDlg progressMeterToUse)
 	{
 		super();
 		progressMeter = progressMeterToUse;
@@ -124,7 +124,7 @@ public class ImporterOfXmlFilesOfBulletins
 	private File[] bulletinXmlFilesToImport;
 	private ClientBulletinStore clientStore;
 	private BulletinFolder importFolder;
-	private UiImporterProgressMeterDlg progressMeter;
+	private UiImportExportProgressMeterDlg progressMeter;
 	private PrintStream consoleMonitor;
 	public File baseAttachmentsDirectory;
 }

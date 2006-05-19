@@ -29,10 +29,10 @@ import org.martus.client.swingui.UiMainWindow;
 import org.martus.swing.UiVBox;
 import org.martus.swing.Utilities;
 
-public class UiImporterProgressMeterDlg extends UiProgressRetrieveDlg
+public class UiImportExportProgressMeterDlg extends UiProgressRetrieveDlg
 {
 
-	public UiImporterProgressMeterDlg(UiMainWindow window, String tag)
+	public UiImportExportProgressMeterDlg(UiMainWindow window, String tag)
 	{
 		super(window, tag);
 		UiVBox vBox = new UiVBox();
