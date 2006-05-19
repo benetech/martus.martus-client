@@ -62,6 +62,8 @@ import org.martus.common.packet.FieldDataPacket;
 import org.martus.common.utilities.MartusFlexidate;
 import org.martus.util.MultiCalendar;
 import org.martus.util.TestCaseEnhanced;
+import org.martus.util.UnicodeReader;
+import org.martus.util.UnicodeWriter;
 import org.martus.util.inputstreamwithseek.StringInputStreamWithSeek;
 
 public class TestBulletinXmlExporter extends TestCaseEnhanced
@@ -74,9 +76,11 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 	public void setUp() throws Exception
 	{
 		super.setUp();
-		if(store==null)
+		if(app == null)
 		{
-			store = new MockBulletinStore();
+			app = MockMartusApp.create();
+			attachmentDirectory = createTempDirectory();
+			store = app.getStore();
 		}
 	}
 
@@ -224,7 +228,7 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 			  "</Field>\n" +
 			  "</MainFieldSpecs>\n\n";
 
-		BulletinXmlExporter exporter = new BulletinXmlExporter(new MiniLocalization());
+		BulletinXmlExporter exporter = new BulletinXmlExporter(null, new MiniLocalization());
 		StringWriter writer = new StringWriter();
 		exporter.writeFieldSpecs(writer, b.getTopSectionFieldSpecs(), "MainFieldSpecs");
 		String result = writer.toString();
@@ -338,26 +342,62 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 	{
 		Bulletin b = new Bulletin(store.getSignatureGenerator());
 		b.setAllPrivate(false);
-		final File sampleAttachmentFile1 = addNewPublicSampleAttachment(b);
-		final File sampleAttachmentFile2 = addNewPublicSampleAttachment(b);
-
+		final File sampleAttachmentFile1 = addNewPublicSampleAttachment(b, "Attachment 1's Data");
+		final File sampleAttachmentFile2 = addNewPublicSampleAttachment(b, "Attachment 2's Data");
+		File exportedAttachmentFile1 = new File(attachmentDirectory, sampleAttachmentFile1.getName()); 
+		File exportedAttachmentFile2 = new File(attachmentDirectory, sampleAttachmentFile2.getName()); 
+		app.getStore().saveBulletin(b);
 		Vector list = new Vector();
 		list.add(b);
-		String result = doExport(list, false, true);
+		
+		String result = doExport(list, false, false);
+		assertContains("<NoAttachmentsExported></NoAttachmentsExported>", result);
+		assertNotContains(BulletinXmlExportImportConstants.TOP_SECTION_ATTACHMENT_LIST, result);
+		assertNotContains(BulletinXmlExportImportConstants.BOTTOM_SECTION_ATTACHMENT_LIST, result);
+		assertNotContains(sampleAttachmentFile1.getName(), result);
+		assertNotContains(sampleAttachmentFile2.getName(), result);
+		assertFalse("Attachment 1 exists?", exportedAttachmentFile1.exists());
+		assertFalse("Attachment 2 exists?", exportedAttachmentFile2.exists());
+		
+		result = doExport(list, false, true);
 		assertNotContains("<NoAttachmentsExported></NoAttachmentsExported>", result);
 		assertContains(BulletinXmlExportImportConstants.TOP_SECTION_ATTACHMENT_LIST, result);
 		assertNotContains(BulletinXmlExportImportConstants.BOTTOM_SECTION_ATTACHMENT_LIST, result);
 
+		assertContains(BulletinXmlExportImportConstants.ATTACHMENT, result);
+		assertContains(BulletinXmlExportImportConstants.FILENAME, result);
 		assertContains(sampleAttachmentFile1.getName(), result);
 		assertContains(sampleAttachmentFile2.getName(), result);
+		assertTrue("Attachment 1 doesn't exist?", exportedAttachmentFile1.exists());
+		assertTrue("Attachment 2 doesn't exist?", exportedAttachmentFile2.exists());
+		assertEquals("Attachment 1's data doesn't match export?", UnicodeReader.getFileContents(sampleAttachmentFile1), UnicodeReader.getFileContents(exportedAttachmentFile1));
+		assertEquals("Attachment 2's data doesn't match export?", UnicodeReader.getFileContents(sampleAttachmentFile2), UnicodeReader.getFileContents(exportedAttachmentFile2));
+		exportedAttachmentFile1.delete();
+		exportedAttachmentFile2.delete();
 
-		result = doExport(list, false, false);
-		assertContains("<NoAttachmentsExported></NoAttachmentsExported>", result);
-		assertNotContains(BulletinXmlExportImportConstants.TOP_SECTION_ATTACHMENT_LIST, result);
-		assertNotContains(BulletinXmlExportImportConstants.BOTTOM_SECTION_ATTACHMENT_LIST, result);
+	}
 
-		assertNotContains(sampleAttachmentFile1.getName(), result);
-		assertNotContains(sampleAttachmentFile2.getName(), result);
+	public void testExportWithPrivateAttachment() throws Exception
+	{
+		Bulletin b = new Bulletin(store.getSignatureGenerator());
+		b.setAllPrivate(false);
+		final File sampleAttachmentFile1 = addNewPrivateSampleAttachment(b);
+		File exportedAttachmentFile1 = new File(attachmentDirectory, sampleAttachmentFile1.getName()); 
+		app.getStore().saveBulletin(b);
+		Vector list = new Vector();
+		list.add(b);
+
+		String publicOnly = doExport(list, false, true);
+		assertNotContains(sampleAttachmentFile1.getName(), publicOnly);
+		assertNotContains(BulletinXmlExportImportConstants.TOP_SECTION_ATTACHMENT_LIST, publicOnly);
+		assertNotContains(BulletinXmlExportImportConstants.BOTTOM_SECTION_ATTACHMENT_LIST, publicOnly);
+
+		String publicAndPrivate = doExport(list, true, true);
+		assertNotContains(BulletinXmlExportImportConstants.TOP_SECTION_ATTACHMENT_LIST, publicAndPrivate);
+		assertContains(BulletinXmlExportImportConstants.BOTTOM_SECTION_ATTACHMENT_LIST, publicAndPrivate);
+		assertContains(sampleAttachmentFile1.getName(), publicAndPrivate);
+		assertTrue("Private Attachment 1 doesn't exist?", exportedAttachmentFile1.exists());
+		assertEquals("Private Attachment 1's data doesn't match export?", UnicodeReader.getFileContents(sampleAttachmentFile1), UnicodeReader.getFileContents(exportedAttachmentFile1));
 	}
 
 	public void testExportMultipleBulletins() throws Exception
@@ -417,26 +457,6 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 		assertContains(samplePrivate, publicAndPrivate);
 	}
 
-	public void testExportWithPrivateAttachment() throws Exception
-	{
-		Bulletin b = new Bulletin(store.getSignatureGenerator());
-		b.setAllPrivate(false);
-		final File sampleAttachmentFile1 = addNewPrivateSampleAttachment(b);
-
-		Vector list = new Vector();
-		list.add(b);
-
-		String publicOnly = doExport(list, false, true);
-		assertNotContains(sampleAttachmentFile1.getName(), publicOnly);
-		assertNotContains(BulletinXmlExportImportConstants.TOP_SECTION_ATTACHMENT_LIST, publicOnly);
-		assertNotContains(BulletinXmlExportImportConstants.BOTTOM_SECTION_ATTACHMENT_LIST, publicOnly);
-
-		String publicAndPrivate = doExport(list, true, true);
-		assertNotContains(BulletinXmlExportImportConstants.TOP_SECTION_ATTACHMENT_LIST, publicAndPrivate);
-		assertContains(BulletinXmlExportImportConstants.BOTTOM_SECTION_ATTACHMENT_LIST, publicAndPrivate);
-		assertContains(sampleAttachmentFile1.getName(), publicAndPrivate);
-	}
-
 	public void testExportAnAllPrivateBulletin() throws Exception
 	{
 		Bulletin b = new Bulletin(store.getSignatureGenerator());
@@ -447,7 +467,6 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 		Vector list = new Vector();
 		list.add(b);
 		String publicOnly = doExport(list, false, false);
-		String publicAndPrivate = doExport(list, true, false);
 
 		assertContains(b.getAccount(), publicOnly);
 		assertContains(b.getLocalId(), publicOnly);
@@ -458,6 +477,7 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 		assertNotContains("<MainFieldSpecs>", publicOnly);
 		assertNotContains("<PrivateFieldSpecs>", publicOnly);
 
+		String publicAndPrivate = doExport(list, true, false);
 		assertContains(b.getAccount(), publicAndPrivate);
 		assertContains(b.getLocalId(), publicAndPrivate);
 		assertContains("<AllPrivate></AllPrivate>", publicAndPrivate);
@@ -737,16 +757,19 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 		MiniLocalization miniLocalization = new MiniLocalization();
 		miniLocalization.addEnglishTranslations(new String[]{"status:draft="+draftTranslation, "status:sealed="+sealedTranslation});
 		miniLocalization.setCurrentLanguageCode(MiniLocalization.ENGLISH);
-		BulletinXmlExporter exporter = new BulletinXmlExporter(miniLocalization);
-		exporter.exportBulletins(writer, list, includePrivateData, includeAttachments);
+		BulletinXmlExporter exporter = new BulletinXmlExporter(app, miniLocalization);
+		exporter.exportBulletins(writer, list, includePrivateData, includeAttachments, attachmentDirectory);
 		String result = writer.toString();
 		return result;
 	}
 
-	File addNewPublicSampleAttachment(Bulletin b)
+	File addNewPublicSampleAttachment(Bulletin b, String attachmentData)
 		throws IOException, EncryptionException
 	{
 		final File sampleAttachmentFile = createTempFile();
+		UnicodeWriter writer = new UnicodeWriter(sampleAttachmentFile);
+		writer.write(attachmentData);
+		writer.close();
 		AttachmentProxy ap = new AttachmentProxy(sampleAttachmentFile);
 		b.addPublicAttachment(ap);
 		return sampleAttachmentFile;
@@ -764,4 +787,6 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 	static final String draftTranslation = "Draft";
 	static final String sealedTranslation = "Sealed";
 	static ClientBulletinStore store;
+	static MockMartusApp app;
+	static File attachmentDirectory;
 }

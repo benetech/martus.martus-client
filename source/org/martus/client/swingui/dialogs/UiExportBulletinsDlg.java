@@ -69,6 +69,7 @@ public class UiExportBulletinsDlg extends JDialog implements ActionListener
 		setTitle(localization.getWindowTitle("ExportBulletins"));
 		
 		includePrivate = new UiCheckBox(localization.getFieldLabel("ExportPrivateData"));
+		includeAttachments = new UiCheckBox(localization.getFieldLabel("ExportAttachments"));
 		ok = new UiButton(localization.getButtonLabel("Continue"));
 		ok.addActionListener(this);
 		
@@ -90,6 +91,8 @@ public class UiExportBulletinsDlg extends JDialog implements ActionListener
 		upperStuff.addCentered(tocMsgAreaScrollPane);
 		upperStuff.addSpace();
 		upperStuff.add(includePrivate);
+		upperStuff.addSpace();
+		upperStuff.add(includeAttachments);
 		upperStuff.addSpace();
 		
 		UiVBox vBoxAll = new UiVBox();
@@ -142,15 +145,20 @@ public class UiExportBulletinsDlg extends JDialog implements ActionListener
 		return includePrivate.isSelected();
 	}
 
+	boolean userWantsToExportAttachments()
+	{
+		return includeAttachments.isSelected();
+	}
+
 	void doExport(File destFile)
 	{
-		BulletinXmlExporter exporter = new BulletinXmlExporter(mainWindow.getLocalization());
+		BulletinXmlExporter exporter = new BulletinXmlExporter(mainWindow.getApp(), mainWindow.getLocalization());
 		try
 		{
 			UnicodeWriter writer = new UnicodeWriter(destFile);
 			boolean userWantsToExportPrivate = userWantsToExportPrivate();
-			boolean userWantsToExportAttachments = false;
-			exporter.exportBulletins(writer, bulletins, userWantsToExportPrivate, userWantsToExportAttachments);
+			boolean userWantsToExportAttachments = userWantsToExportAttachments();
+			exporter.exportBulletins(writer, bulletins, userWantsToExportPrivate, userWantsToExportAttachments, destFile.getAbsoluteFile());
 			writer.close();
 			mainWindow.notifyDlg("ExportComplete");
 		}
@@ -197,6 +205,7 @@ public class UiExportBulletinsDlg extends JDialog implements ActionListener
 	UiMainWindow mainWindow;
 	Vector bulletins;
 	JCheckBox includePrivate;
+	JCheckBox includeAttachments;
 	JButton ok;
 	JButton cancel;
 	String defaultFileName;

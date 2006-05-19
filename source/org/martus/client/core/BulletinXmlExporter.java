@@ -26,6 +26,7 @@ Boston, MA 02111-1307, USA.
 
 package org.martus.client.core;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.Writer;
 import java.text.SimpleDateFormat;
@@ -36,7 +37,9 @@ import org.martus.common.MartusXml;
 import org.martus.common.MiniLocalization;
 import org.martus.common.bulletin.AttachmentProxy;
 import org.martus.common.bulletin.Bulletin;
+import org.martus.common.bulletin.BulletinLoader;
 import org.martus.common.bulletin.BulletinXmlExportImportConstants;
+import org.martus.common.database.ReadableDatabase;
 import org.martus.common.field.MartusField;
 import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.packet.BulletinHistory;
@@ -44,12 +47,13 @@ import org.martus.util.xml.XmlUtilities;
 
 public class BulletinXmlExporter
 {
-	public BulletinXmlExporter(MiniLocalization localizationToUse)
+	public BulletinXmlExporter(MartusApp appToUse, MiniLocalization localizationToUse)
 	{
+		app = appToUse;
 		localization = localizationToUse;
 	}
 	
-	public void exportBulletins(Writer dest, Vector bulletins, boolean includePrivateData, boolean includeAttachments)
+	public void exportBulletins(Writer dest, Vector bulletins, boolean includePrivateData, boolean includeAttachments, File attachmentsDirectory)
 		throws IOException
 	{
 		dest.write(MartusXml.getTagStartWithNewline(BulletinXmlExportImportConstants.MARTUS_BULLETINS));
@@ -59,7 +63,7 @@ public class BulletinXmlExporter
 		for (int i = 0; i < bulletins.size(); i++)
 		{
 			Bulletin b = (Bulletin)bulletins.get(i);
-			exportOneBulletin(dest, b, includePrivateData, includeAttachments);
+			exportOneBulletin(dest, b, includePrivateData, includeAttachments, attachmentsDirectory);
 		}
 		dest.write(MartusXml.getTagEnd(BulletinXmlExportImportConstants.MARTUS_BULLETINS));
 	}
@@ -160,7 +164,7 @@ public class BulletinXmlExporter
 		dest.write(BulletinXmlExportImportConstants.NEW_LINE);
 	}
 
-	private void exportOneBulletin(Writer dest, Bulletin b, boolean includePrivateData, boolean includeAttachments) throws IOException
+	private void exportOneBulletin(Writer dest, Bulletin b, boolean includePrivateData, boolean includeAttachments, File attachmentsDirectory) throws IOException
 	{
 		dest.write(MartusXml.getTagStartWithNewline(BulletinXmlExportImportConstants.BULLETIN));
 
@@ -172,14 +176,14 @@ public class BulletinXmlExporter
 		{
 			writeFields(dest, b, b.getTopSectionFieldSpecs());
 			if(includeAttachments)
-				writeAttachments(dest, b.getPublicAttachments(), BulletinXmlExportImportConstants.TOP_SECTION_ATTACHMENT_LIST);
+				writeAttachments(dest, attachmentsDirectory, b.getPublicAttachments(), BulletinXmlExportImportConstants.TOP_SECTION_ATTACHMENT_LIST);
 		}
 
 		if(includePrivateData)
 		{
 			writeFields(dest, b, b.getBottomSectionFieldSpecs());
 			if(includeAttachments)
-				writeAttachments(dest, b.getPrivateAttachments(), BulletinXmlExportImportConstants.BOTTOM_SECTION_ATTACHMENT_LIST);
+				writeAttachments(dest, attachmentsDirectory, b.getPrivateAttachments(), BulletinXmlExportImportConstants.BOTTOM_SECTION_ATTACHMENT_LIST);
 		}
 		dest.write(MartusXml.getTagEnd(BulletinXmlExportImportConstants.FIELD_VALUES));
 
@@ -187,7 +191,7 @@ public class BulletinXmlExporter
 		dest.write(BulletinXmlExportImportConstants.NEW_LINE);
 	}
 
-	private void writeAttachments(Writer dest, AttachmentProxy[] attachments, String attachmentSectionTag)
+	private void writeAttachments(Writer dest, File attachmentsDirectory, AttachmentProxy[] attachments, String attachmentSectionTag)
 		throws IOException
 	{
 		if(attachments.length == 0)
@@ -196,8 +200,21 @@ public class BulletinXmlExporter
 		dest.write(MartusXml.getTagStartWithNewline(attachmentSectionTag));
 		for (int i = 0; i < attachments.length; i++)
 		{
+			dest.write(MartusXml.getTagStartWithNewline(BulletinXmlExportImportConstants.ATTACHMENT));
 			AttachmentProxy proxy = attachments[i];
-			writeElement(dest, "", BulletinXmlExportImportConstants.ATTACHMENT, "", proxy.getLabel());
+			dest.write(getXmlEncodedTagWithData(BulletinXmlExportImportConstants.FILENAME, proxy.getLabel()));
+			dest.write(MartusXml.getTagEnd(BulletinXmlExportImportConstants.ATTACHMENT));
+			File attachment = new File(attachmentsDirectory, proxy.getLabel());
+			try
+			{
+				ReadableDatabase db = app.getStore().getDatabase();
+				BulletinLoader.extractAttachmentToFile(db, proxy, app.getSecurity(), attachment);
+			}
+			catch(Exception e)
+			{
+				System.out.println("Unable to save file.");
+				e.printStackTrace();				
+			}
 		}
 		dest.write(MartusXml.getTagEnd(attachmentSectionTag));
 	}
@@ -244,35 +261,7 @@ public class BulletinXmlExporter
 		dest.write(MartusXml.getTagEnd(MartusXml.tagField));		
 	}
 
-	private static void writeElement(Writer dest, String fieldType, String tag, String rawLabel, String rawFieldData) throws IOException
-	{	
-		String xmlFieldTypeAndValue = "";
-		String xmlTagAndValue = "";
-		String xmlLabelAndValue = "";
-		String xmlValueAndFieldData = "";
-		
-		if(fieldType.length() > 0)
-			xmlFieldTypeAndValue = getXmlEncodedTagWithData(BulletinXmlExportImportConstants.TYPE, fieldType);
-
-		xmlTagAndValue = getXmlEncodedTagWithData(BulletinXmlExportImportConstants.TAG, tag);
-
-		if (rawLabel.length() > 0)
-			xmlLabelAndValue = getXmlEncodedTagWithData(BulletinXmlExportImportConstants.LABEL, rawLabel);
-		
-		if (rawFieldData.length() > 0)
-			xmlValueAndFieldData = getXmlEncodedTagWithData(BulletinXmlExportImportConstants.VALUE, rawFieldData);
-		writeElementDirect(dest, xmlFieldTypeAndValue, xmlTagAndValue, xmlLabelAndValue, xmlValueAndFieldData);		
-	}	
-	
-	private static void writeElementDirect(Writer dest, String xmlEncodeType, String xmlEncodedTag, String xmlEncodedLabel, String xmlEncodedFieldData) throws IOException
-	{						
-		dest.write(MartusXml.getTagStartWithNewline("Field"));
-		dest.write(xmlEncodeType);
-		dest.write(xmlEncodedTag);
-		dest.write(xmlEncodedLabel);
-		dest.write(xmlEncodedFieldData);
-		dest.write(MartusXml.getTagEnd(MartusXml.tagField));		
-	}
-	
 	MiniLocalization localization;
+	MartusApp app;
+
 }
