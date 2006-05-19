@@ -33,6 +33,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.Vector;
+
+import org.martus.client.swingui.fields.UiAttachmentViewer;
 import org.martus.common.MartusXml;
 import org.martus.common.MiniLocalization;
 import org.martus.common.bulletin.AttachmentProxy;
@@ -200,15 +202,25 @@ public class BulletinXmlExporter
 		dest.write(MartusXml.getTagStartWithNewline(attachmentSectionTag));
 		for (int i = 0; i < attachments.length; i++)
 		{
-			dest.write(MartusXml.getTagStartWithNewline(BulletinXmlExportImportConstants.ATTACHMENT));
-			AttachmentProxy proxy = attachments[i];
-			dest.write(getXmlEncodedTagWithData(BulletinXmlExportImportConstants.FILENAME, proxy.getLabel()));
-			dest.write(MartusXml.getTagEnd(BulletinXmlExportImportConstants.ATTACHMENT));
-			File attachment = new File(attachmentsDirectory, proxy.getLabel());
 			try
 			{
+				AttachmentProxy proxy = attachments[i];
+				String fileName = proxy.getLabel();
+				File attachment = new File(attachmentsDirectory, fileName);
+				
+				if(attachment.exists())
+				{
+					String nameOnly = UiAttachmentViewer.extractFileNameOnly(fileName);
+					String extensionOnly = UiAttachmentViewer.extractExtentionOnly(fileName);
+					
+					attachment = File.createTempFile(nameOnly, extensionOnly, attachmentsDirectory);
+				}
 				ReadableDatabase db = app.getStore().getDatabase();
 				BulletinLoader.extractAttachmentToFile(db, proxy, app.getSecurity(), attachment);
+
+				dest.write(MartusXml.getTagStartWithNewline(BulletinXmlExportImportConstants.ATTACHMENT));
+				dest.write(getXmlEncodedTagWithData(BulletinXmlExportImportConstants.FILENAME, attachment.getName()));
+				dest.write(MartusXml.getTagEnd(BulletinXmlExportImportConstants.ATTACHMENT));
 			}
 			catch(Exception e)
 			{

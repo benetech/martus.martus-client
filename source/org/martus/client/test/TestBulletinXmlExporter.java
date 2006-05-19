@@ -34,6 +34,7 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.Vector;
+
 import org.martus.client.bulletinstore.ClientBulletinStore;
 import org.martus.client.core.BulletinXmlExporter;
 import org.martus.client.tools.XmlBulletinsImporter;
@@ -47,6 +48,7 @@ import org.martus.common.bulletin.Bulletin;
 import org.martus.common.bulletin.BulletinConstants;
 import org.martus.common.bulletin.BulletinXmlExportImportConstants;
 import org.martus.common.crypto.MartusCrypto.EncryptionException;
+import org.martus.common.database.ReadableDatabase;
 import org.martus.common.fieldspec.ChoiceItem;
 import org.martus.common.fieldspec.DropDownFieldSpec;
 import org.martus.common.fieldspec.FieldSpec;
@@ -408,6 +410,16 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 		Bulletin b2 = new Bulletin(store.getSignatureGenerator());
 		b2.setAllPrivate(false);
 
+		File sampleAttachmentFile1 = addNewPublicSampleAttachment(b1, "Attachment 1's Data");
+		File sampleAttachmentFile2 = addNewPublicSampleAttachment(b2, "Attachment 2's Data");
+
+		AttachmentProxy ap1 = b1.getPublicAttachments()[0];  
+		AttachmentProxy ap2 = b2.getPublicAttachments()[0];
+		ap2.setLabel(ap1.getLabel()); //Now both attachments have the same name
+		
+		app.getStore().saveBulletin(b1);
+		app.getStore().saveBulletin(b2);
+
 		final String sampleTitle1 = "a big event took place!";
 		final String sampleTitle2 = "watch this space";
 		b1.set(BulletinConstants.TAGTITLE, sampleTitle1);
@@ -426,6 +438,20 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 		assertContains("<BulletinStatus-Localized>"+draftTranslation+"</BulletinStatus-Localized>", result);
 		assertContains("<BulletinStatus-Localized>"+sealedTranslation+"</BulletinStatus-Localized>", result);
 
+		
+		StringInputStreamWithSeek stream = new StringInputStreamWithSeek(result);
+		XmlBulletinsImporter importer = new XmlBulletinsImporter(store.getSignatureGenerator(), stream, attachmentDirectory);
+		Bulletin[] resultingBulletins = importer.getBulletins();
+		Bulletin imported1 = resultingBulletins[0];
+		Bulletin imported2 = resultingBulletins[1];
+		app.getStore().saveBulletin(imported1);
+		app.getStore().saveBulletin(imported2);
+		
+		ReadableDatabase db = app.getStore().getDatabase();
+		File imported1File = imported1.getAsFileProxy(imported1.getPublicAttachments()[0],db,Bulletin.STATUSDRAFT).getFile();
+		File imported2File = imported2.getAsFileProxy(imported2.getPublicAttachments()[0],db,Bulletin.STATUSDRAFT).getFile();
+		assertEquals("attachment 1's data doesn't match?", UnicodeReader.getFileContents(sampleAttachmentFile1), UnicodeReader.getFileContents(imported1File));
+		assertEquals("attachment 2's data doesn't match?", UnicodeReader.getFileContents(sampleAttachmentFile2), UnicodeReader.getFileContents(imported2File));
 	}
 
 	public void testExportPrivateData() throws Exception
@@ -774,6 +800,7 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 		b.addPublicAttachment(ap);
 		return sampleAttachmentFile;
 	}
+
 
 	File addNewPrivateSampleAttachment(Bulletin b)
 		throws IOException, EncryptionException

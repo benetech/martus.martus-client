@@ -136,7 +136,7 @@ public class UiAttachmentViewer extends UiParagraphPanel  implements DragGesture
 		return selection;
 	}
 
-	public String extractFileNameOnly(String fullName)
+	public static String extractFileNameOnly(String fullName)
 	{
 		int index = fullName.lastIndexOf('.');
 		if(index == -1)
@@ -149,7 +149,7 @@ public class UiAttachmentViewer extends UiParagraphPanel  implements DragGesture
 		return fileNameOnly;
 	}
 
-	public String extractExtentionOnly(String fullName)
+	public static String extractExtentionOnly(String fullName)
 	{
 		int index = fullName.lastIndexOf('.');
 		if(index == -1)
