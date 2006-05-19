@@ -153,6 +153,8 @@ public class EnglishStrings
 "wintitle:notifyRetrievedOnlySomeSummaries=Error During Retrieve",
 "wintitle:notifyConfirmCorrectDefaultDetailsData=Confirm Correct Default Details Content",
 "wintitle:notifyExportComplete=Export Bulletins",
+"wintitle:notifyExportCompleteMissingAttachments=Export Bulletins",
+
 "wintitle:notifyErrorWritingFile=Error Writing File",
 "wintitle:notifyErrorReadingFile=Error Reading File",
 "wintitle:notifyExportZeroBulletins=No Bulletins Selected",
@@ -683,6 +685,8 @@ public class EnglishStrings
 "field:notifyRetrievedOnlySomeSummariescause=Errors occurred while retrieving bulletin summaries.  Some of the bulletins on the server will not be shown.",
 "field:notifyConfirmCorrectDefaultDetailsDatacause=Please confirm that the default details retrieved are correct.",
 "field:notifyExportCompletecause=Export completed successfully",
+"field:notifyExportCompleteMissingAttachmentscause=Export complete.  Unfortunately #AttachmentsNotExported# attachments were not exported due to errors.",
+
 "field:notifyErrorWritingFilecause=An error prevented the file from being written. Check to make sure the disk is not full or write protected.",
 "field:notifyErrorReadingFilecause=An error prevented the file from being read.",
 "field:notifyExportZeroBulletinscause=To export bulletins, select them first, and then perform the export operation.",

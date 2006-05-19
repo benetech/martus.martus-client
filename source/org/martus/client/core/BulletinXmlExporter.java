@@ -53,6 +53,7 @@ public class BulletinXmlExporter
 	{
 		app = appToUse;
 		localization = localizationToUse;
+		failingAttachments = 0;
 	}
 	
 	public void exportBulletins(Writer dest, Vector bulletins, boolean includePrivateData, boolean includeAttachments, File attachmentsDirectory)
@@ -68,6 +69,11 @@ public class BulletinXmlExporter
 			exportOneBulletin(dest, b, includePrivateData, includeAttachments, attachmentsDirectory);
 		}
 		dest.write(MartusXml.getTagEnd(BulletinXmlExportImportConstants.MARTUS_BULLETINS));
+	}
+	
+	public int getNumberOfFailingAttachments()
+	{
+		return failingAttachments;
 	}
 	
 	private void writeXMLVersion(Writer dest) throws IOException
@@ -224,6 +230,7 @@ public class BulletinXmlExporter
 			catch(Exception e)
 			{
 				dest.write(getXmlEncodedTagWithData(BulletinXmlExportImportConstants.EXPORT_ERROR_ATTACHMENT_FILENAME, fileName));
+				++failingAttachments;
 				attachment.delete();
 			}
 		}
@@ -274,5 +281,6 @@ public class BulletinXmlExporter
 
 	MiniLocalization localization;
 	MartusApp app;
+	int failingAttachments;
 
 }

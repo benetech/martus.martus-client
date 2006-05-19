@@ -78,6 +78,7 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 	public void setUp() throws Exception
 	{
 		super.setUp();
+		failingAttachments = 0;
 		if(app == null)
 		{
 			app = MockMartusApp.create();
@@ -416,8 +417,9 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 		assertNotContains(BulletinXmlExportImportConstants.TOP_SECTION_ATTACHMENT_LIST, publicAndPrivate);
 		assertContains(BulletinXmlExportImportConstants.BOTTOM_SECTION_ATTACHMENT_LIST, publicAndPrivate);
 		assertContains(sampleAttachmentFile1.getName(), publicAndPrivate);
-		assertContains("<Error Exporting Attachment>"+sampleAttachmentFile1.getName()+"</Error Exporting Attachment>", publicAndPrivate);
+		assertContains("<ErrorExportingAttachment>"+sampleAttachmentFile1.getName()+"</ErrorExportingAttachment>", publicAndPrivate);
 		assertFalse("exported Private Attachment 1 exists?", exportedAttachmentFile1.exists());
+		assertEquals("Should have 1 failing attachment?",1, failingAttachments);
 	}
 
 	public void testExportMultipleBulletins() throws Exception
@@ -455,7 +457,7 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 		assertContains("<BulletinStatus>sealed</BulletinStatus>", result);
 		assertContains("<BulletinStatus-Localized>"+draftTranslation+"</BulletinStatus-Localized>", result);
 		assertContains("<BulletinStatus-Localized>"+sealedTranslation+"</BulletinStatus-Localized>", result);
-
+		assertEquals("Has failing attachments?",0, failingAttachments);
 		
 		StringInputStreamWithSeek stream = new StringInputStreamWithSeek(result);
 		XmlBulletinsImporter importer = new XmlBulletinsImporter(store.getSignatureGenerator(), stream, attachmentDirectory);
@@ -803,10 +805,11 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 		miniLocalization.setCurrentLanguageCode(MiniLocalization.ENGLISH);
 		BulletinXmlExporter exporter = new BulletinXmlExporter(app, miniLocalization);
 		exporter.exportBulletins(writer, list, includePrivateData, includeAttachments, attachmentDirectory);
+		failingAttachments = exporter.getNumberOfFailingAttachments();
 		String result = writer.toString();
 		return result;
 	}
-
+	
 	File addNewPublicSampleAttachment(Bulletin b, String attachmentData)
 		throws IOException, EncryptionException
 	{
@@ -834,4 +837,5 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 	static ClientBulletinStore store;
 	static MockMartusApp app;
 	static File attachmentDirectory;
+	int failingAttachments;
 }

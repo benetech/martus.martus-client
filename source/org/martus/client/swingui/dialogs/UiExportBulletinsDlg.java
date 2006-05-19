@@ -32,6 +32,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Vector;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -155,19 +157,36 @@ public class UiExportBulletinsDlg extends JDialog implements ActionListener
 		BulletinXmlExporter exporter = new BulletinXmlExporter(mainWindow.getApp(), mainWindow.getLocalization());
 		try
 		{
+			mainWindow.setWaitingCursor();
 			UnicodeWriter writer = new UnicodeWriter(destFile);
 			boolean userWantsToExportPrivate = userWantsToExportPrivate();
 			boolean userWantsToExportAttachments = userWantsToExportAttachments();
 			exporter.exportBulletins(writer, bulletins, userWantsToExportPrivate, userWantsToExportAttachments, destFile.getParentFile());
 			writer.close();
-			mainWindow.notifyDlg("ExportComplete");
+			mainWindow.resetCursor();
+			int numberOfMissingAttachment = exporter.getNumberOfFailingAttachments();
+			if(numberOfMissingAttachment > 0)
+			{
+				mainWindow.notifyDlg("ExportCompleteMissingAttachments", getTokenReplacementImporter(numberOfMissingAttachment));
+			}
+			else
+				mainWindow.notifyDlg("ExportComplete");
 		}
 		catch (IOException e)
 		{
+			mainWindow.resetCursor();
 			mainWindow.notifyDlg("ErrorWritingFile");
 		}
 	}
 
+	Map getTokenReplacementImporter(int numberOfMissingAttachment) 
+	{
+		HashMap map = new HashMap();
+		map.put("#AttachmentsNotExported#", Integer.toString(numberOfMissingAttachment));
+		return map;
+	}
+	
+	
 	public void actionPerformed(ActionEvent ae)
 	{
 		if(ae.getSource().equals(ok))
