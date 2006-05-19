@@ -36,6 +36,7 @@ import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.filechooser.FileFilter;
 import org.martus.client.bulletinstore.ClientBulletinStore;
+import org.martus.client.bulletinstore.ImportBulletins;
 import org.martus.client.core.MartusApp;
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
@@ -125,9 +126,15 @@ public class UiImportBulletinsDlg extends JDialog implements ActionListener
 		{
 			if(!folderValid())
 				return;
-			okToImport = true;
+			doImport();
 		}
 		dispose();
+	}
+	
+	private void doImport()
+	{
+		ImportBulletins importer = new ImportBulletins(mainWindow);
+		importer.doImport(fileToImport, folderName);
 	}
 	
 	
@@ -148,21 +155,6 @@ public class UiImportBulletinsDlg extends JDialog implements ActionListener
 		return true;
 	}
 	
-	public String getFolderNameToImportBulletinsInto()
-	{
-		return folderName;
-	}
-	public File getXmlFileToImport()
-	{
-		return fileToImport;
-	}
-	
-	public boolean okToImport()
-	{
-		return okToImport;
-	}
-
-
 	private static final String IMPORT_BULLETINS_TITLE = "ImportBulletins";
 	UiMainWindow mainWindow;
 	private UiButton ok;
