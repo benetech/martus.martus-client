@@ -153,7 +153,7 @@ public class UiFlexiDateEditor extends UiField
 		return new JComponent[]{exactDateRB, flexiDateRB, mdy[0], mdy[1], mdy[2],};
 	}
 
-	private final class RadioItemListener implements ItemListener
+	final class RadioItemListener implements ItemListener
 	{
 		public void itemStateChanged(ItemEvent e)
 		{
