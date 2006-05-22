@@ -69,13 +69,14 @@ public class BulletinXmlExporter
 		int bulletinCount = bulletins.size();
 		for (int i = 0; i < bulletinCount; i++)
 		{
+			Bulletin b = (Bulletin)bulletins.get(i);
 			if(progressMeter != null)
 			{
 				progressMeter.updateBulletinCountMeter(i+1, bulletins.size());
+				progressMeter.updateBulletinTitle(b.get(Bulletin.TAGTITLE));
 				if(progressMeter.shouldExit())
 					break;
 			}
-			Bulletin b = (Bulletin)bulletins.get(i);
 			exportOneBulletin(dest, b, includePrivateData, includeAttachments, attachmentsDirectory);
 			++bulletinsExported;
 		}

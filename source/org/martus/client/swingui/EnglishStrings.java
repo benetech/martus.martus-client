@@ -911,6 +911,7 @@ public class EnglishStrings
 "field:ImportBulletinsIntoWhichFolder=Import bulletins into which Folder?",
 "field:ImportProgress=Importing",
 "field:ExportProgress=Exporting",
+"field:ImportExportBulletinTitle=Bulletin",
 
 "field:mdyOrder=Date format sequence",
 "field:DateDelimiter=Date delimiter",

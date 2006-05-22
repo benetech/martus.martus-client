@@ -25,8 +25,13 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.dialogs;
 
+import java.awt.BorderLayout;
+import java.awt.Component;
+import javax.swing.Box;
+import javax.swing.JPanel;
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.swing.UiVBox;
+import org.martus.swing.UiLabel;
+import org.martus.swing.UiTextField;
 import org.martus.swing.Utilities;
 
 public class UiImportExportProgressMeterDlg extends UiProgressRetrieveDlg
@@ -35,15 +40,32 @@ public class UiImportExportProgressMeterDlg extends UiProgressRetrieveDlg
 	public UiImportExportProgressMeterDlg(UiMainWindow window, String tag)
 	{
 		super(window, tag);
-		UiVBox vBox = new UiVBox();
-		vBox.addSpace();
-		vBox.addCentered(bulletinCountMeter);
-		vBox.addSpace();
-		vBox.addCentered(cancel);
-		vBox.addSpace();
-		getContentPane().add(vBox);
+		getContentPane().setLayout(new BorderLayout());
+		Box hBox = Box.createHorizontalBox();
+		UiLabel bulletinTitle = new UiLabel(window.getLocalization().getFieldLabel("ImportExportBulletinTitle") + " ");
+		currentBulletinTitle = new UiTextField(30);
+		currentBulletinTitle.setEditable(false);
+		
+		Component[] items = {bulletinTitle,currentBulletinTitle};
+		Utilities.addComponentsRespectingOrientation(hBox, items);
+		
+		JPanel cancelPanel = new JPanel();
+		cancelPanel.add(cancel);
+		
+		JPanel meterPanel = new JPanel();
+		meterPanel.add(bulletinCountMeter);
+		
+		getContentPane().add(hBox, BorderLayout.NORTH);
+		getContentPane().add(meterPanel, BorderLayout.CENTER);
+		getContentPane().add(cancelPanel, BorderLayout.SOUTH);
 		Utilities.centerDlg(this);
 	}
 	
+	public void updateBulletinTitle(String bulletinTitle)
+	{
+		currentBulletinTitle.setText(bulletinTitle);
+	}
+	
+	private UiTextField currentBulletinTitle;
 	
 }
