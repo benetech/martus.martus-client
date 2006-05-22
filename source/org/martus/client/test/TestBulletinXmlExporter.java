@@ -33,8 +33,8 @@ import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.HashMap;
 import java.util.Vector;
-
 import org.martus.client.bulletinstore.ClientBulletinStore;
 import org.martus.client.core.BulletinXmlExporter;
 import org.martus.client.tools.XmlBulletinsImporter;
@@ -786,6 +786,57 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 		verifyMatchingData(topSpecs, exported, imported);
 		verifyMatchingData(bottomSpecs, exported, imported);
 	}
+	
+	public void testBadAttachments()throws Exception
+	{
+		Bulletin b1 = new Bulletin(store.getSignatureGenerator());
+		b1.setAllPrivate(false);
+		b1.setSealed();
+
+		File sampleAttachmentFile1 = addNewPublicSampleAttachment(b1, "Attachment 1's Data");
+		File sampleAttachmentFile2 = addNewPublicSampleAttachment(b1, "Attachment 2's Data");
+		File sampleAttachmentFile3 = addNewPublicSampleAttachment(b1, "Attachment 3's Data");
+
+		
+		app.getStore().saveBulletin(b1);
+
+		String bulletinTitle = "attachment test";
+		b1.set(BulletinConstants.TAGTITLE, bulletinTitle);
+
+		Vector list = new Vector();
+		list.add(b1);
+		String result = doExport(list, true, true);
+
+		assertEquals("Has failing attachments?",0, failingAttachments);
+		File missingAttachment1 = new File(attachmentDirectory, sampleAttachmentFile1.getName());
+		missingAttachment1.delete();
+		File missingAttachment3 = new File(attachmentDirectory, sampleAttachmentFile3.getName());
+		missingAttachment3.delete();
+		
+		StringInputStreamWithSeek stream = new StringInputStreamWithSeek(result);
+		XmlBulletinsImporter importer = new XmlBulletinsImporter(store.getSignatureGenerator(), stream, attachmentDirectory);
+		Bulletin[] resultingBulletins = importer.getBulletins();
+		Bulletin imported1 = resultingBulletins[0];
+
+		HashMap attachmentErrors = importer.getMissingAttachmentsMap();
+		assertEquals("Should have 1 error", 1, attachmentErrors.size());
+		
+		String[] bulletinTitlesWithAttachmentErrors = new String[attachmentErrors.size()]; 
+		attachmentErrors.keySet().toArray(bulletinTitlesWithAttachmentErrors);
+		String titleOfBulletinWithMissingAttachment = bulletinTitlesWithAttachmentErrors[0];
+		assertEquals("Wrong bulletin Title of failing attachment?", bulletinTitle, titleOfBulletinWithMissingAttachment);
+		
+		String listOfFailingAttachmentsForBulletin = sampleAttachmentFile1.getName() + ", " + sampleAttachmentFile3.getName();
+		assertEquals("Wrong attachment Title of failing attachment?", listOfFailingAttachmentsForBulletin , attachmentErrors.get(titleOfBulletinWithMissingAttachment));
+		
+		assertEquals("Should only have 1 attachment", 1, imported1.getPublicAttachments().length);
+		
+		app.getStore().saveBulletin(imported1);
+		ReadableDatabase db = app.getStore().getDatabase();
+		File imported2File = imported1.getAsFileProxy(imported1.getPublicAttachments()[0],db,Bulletin.STATUSDRAFT).getFile();
+		assertEquals("attachment 2's data doesn't match?", UnicodeReader.getFileContents(sampleAttachmentFile2), UnicodeReader.getFileContents(imported2File));
+	}
+	
 
 	private void verifyMatchingData(FieldSpec[] specs, Bulletin b, Bulletin b2)
 	{

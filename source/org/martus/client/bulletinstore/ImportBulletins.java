@@ -53,6 +53,10 @@ public class ImportBulletins
 			mainWindow.selectFolder(importFolder);
 			mainWindow.folderContentsHaveChanged(importFolder);
 			mainWindow.folderTreeContentsHaveChanged();
+			
+			if(importThread.hasMissingAttachments())
+				showAttachmentErrors(importThread);
+			
 			int numberOfBulletinsImported = importThread.getNumberOfBulletinsImported();
 			int totalBulletins = importThread.getTotalBulletins();
 			mainWindow.notifyDlg("ImportComplete", getTokenReplacementImporter(numberOfBulletinsImported, totalBulletins, importingFolderName));
@@ -61,6 +65,12 @@ public class ImportBulletins
 		{
 			mainWindow.notifyDlg("ErrorImportingBulletins");
 		}
+	}
+
+	private void showAttachmentErrors(ImporterThread importThread)
+	{
+		HashMap missingAttachmentsMap = importThread.getMissingAttachmentsMap();
+		mainWindow.notifyDlg("ImportMissingAttachments", getTokenReplacementMissingAttachments(missingAttachmentsMap));
 	}
 	
 	class ImporterThread extends Thread
@@ -103,6 +113,16 @@ public class ImportBulletins
 			return importer.getTotalNumberOfBulletins();
 		}
 		
+		public boolean hasMissingAttachments()
+		{
+			return importer.hasMissingAttachments();
+		}
+		
+		public HashMap getMissingAttachmentsMap()
+		{
+			return importer.getMissingAttachmentsMap();
+		}
+		
 		private File[] filesToImport;
 		private BulletinFolder importFolder;
 		private UiImportExportProgressMeterDlg progressMeter;
@@ -117,6 +137,27 @@ public class ImportBulletins
 		map.put("#BulletinsSuccessfullyImported#", Integer.toString(bulletinsImported));
 		map.put("#TotalBulletinsToImport#", Integer.toString(totalBulletins));
 		map.put("#ImportFolder#", folder);
+		return map;
+	}
+
+	Map getTokenReplacementMissingAttachments(HashMap missingAttachmentsMap) 
+	{
+		
+		String[] bulletinTitles = new String[missingAttachmentsMap.size()];
+		missingAttachmentsMap.keySet().toArray(bulletinTitles);
+		StringBuffer listOfErrors = new StringBuffer();
+		for(int i = 0; i < bulletinTitles.length; i++)
+		{
+			String bulletinTitle = bulletinTitles[i];
+			listOfErrors.append(bulletinTitle);
+			listOfErrors.append(" : ");
+			listOfErrors.append((String)missingAttachmentsMap.get(bulletinTitle));
+			listOfErrors.append("\n");
+		}
+
+		
+		HashMap map = new HashMap();
+		map.put("#ImportMissingAttachments#", listOfErrors.toString());
 		return map;
 	}
 

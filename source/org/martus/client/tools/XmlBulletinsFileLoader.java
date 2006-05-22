@@ -54,6 +54,7 @@ public class XmlBulletinsFileLoader extends SimpleXmlDefaultLoader
 		super(BulletinXmlExportImportConstants.MARTUS_BULLETINS);
 		security = cryptoToUse;
 		bulletins = new Vector();
+		attachmentErrors = new HashMap();
 		fieldSpecValidationErrors = new Vector();
 		topSectionAttachments = new Vector();
 		bottomSectionAttachments = new Vector();
@@ -140,7 +141,14 @@ public class XmlBulletinsFileLoader extends SimpleXmlDefaultLoader
 			}
 			catch (Exception e)
 			{
-				//TODO keep track of all attachments which failed to be added to the bulletin and show in UI
+				String title = bulletin.get(Bulletin.TAGTITLE);
+				if(attachmentErrors.containsKey(title))
+				{
+					String previousFailingAttachments = (String)attachmentErrors.get(title);
+					attachmentFileName = previousFailingAttachments + ", " + attachmentFileName;
+					
+				}
+				attachmentErrors.put(title, attachmentFileName);
 			}
 		}
 	}
@@ -156,6 +164,11 @@ public class XmlBulletinsFileLoader extends SimpleXmlDefaultLoader
 	public Bulletin[] getBulletins()
 	{
 		  return (Bulletin[])bulletins.toArray(new Bulletin[0]);
+	}
+	
+	public HashMap getMissingAttachmentsMap()
+	{
+		return attachmentErrors;
 	}
 	
 	public boolean didFieldSpecVerificationErrorOccur()
@@ -262,4 +275,5 @@ public class XmlBulletinsFileLoader extends SimpleXmlDefaultLoader
 	Vector fieldSpecValidationErrors;
 	File baseAttachmentsDirectory;
 	private MartusCrypto security;
+	private HashMap attachmentErrors;
 }

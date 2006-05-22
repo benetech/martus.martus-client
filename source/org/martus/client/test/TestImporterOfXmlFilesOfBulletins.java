@@ -290,6 +290,8 @@ public class TestImporterOfXmlFilesOfBulletins extends TestCaseEnhanced
 		ImporterOfXmlFilesOfBulletins importer = new ImporterOfXmlFilesOfBulletins(xmlFiles, clientStore, importFolder, nullPrinter);
 		importer.setAttachmentsDirectory(xmlInputDirectory);
 		importer.importFiles();
+		assertFalse(importer.hasMissingAttachments());
+
 		xmlBulletinWithAttachments.delete();
 		
 		UnicodeReader reader = new UnicodeReader(attachment1);
@@ -357,19 +359,9 @@ public class TestImporterOfXmlFilesOfBulletins extends TestCaseEnhanced
 		PrintStream nullPrinter = new PrintStream(new ByteArrayOutputStream());
 		ImporterOfXmlFilesOfBulletins importer = new ImporterOfXmlFilesOfBulletins(xmlFiles, clientStore, importFolder, nullPrinter);
 		importer.setAttachmentsDirectory(xmlInputDirectory);
-		try
-		{
-			importer.importFiles();
-			fail("Should have thrown when attachment didn't exist");
-		}
-		catch(FieldSpecVerificationException expected)
-		{
-			Vector errors = expected.getErrors();
-			CustomFieldError element = (CustomFieldError) errors.get(0);
- 			File attachment1 = new File(xmlInputDirectory, "$$$Sample Attachment1.txt");			
- 			assertEquals("Not an IO error for missing attachment file?", CustomFieldError.CODE_IO_ERROR, element.getCode());
-			assertEquals("File which wasn't found was not named?",element.getType(), attachment1.getAbsolutePath());
-		}
+		importer.importFiles();
+		assertTrue(importer.hasMissingAttachments());
+		assertEquals(1, importer.getMissingAttachmentsMap().size());
 		xmlBulletinWithAttachments.delete();
 	}
 	

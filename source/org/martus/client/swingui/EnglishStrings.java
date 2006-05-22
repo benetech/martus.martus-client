@@ -206,6 +206,7 @@ public class EnglishStrings
 "wintitle:notifyRetrieveFileError=Error",
 "wintitle:notifyImportComplete=Import Complete",
 "wintitle:notifyErrorImportingBulletins=Error Importing Bulletins",
+"wintitle:notifyImportMissingAttachments=Warning Missing Attachments",
 
 "wintitle:inputservername=Server Name",
 "wintitle:inputserverpubliccode=Server Identification",
@@ -735,9 +736,11 @@ public class EnglishStrings
 "field:notifyRetrieveFileDataVersionErrorcause=A retrieve was in progress when you upgraded to a newer version of Martus. That retrieve will be canceled, so you should re-select any bulletins that had not yet been retrieved.",
 "field:notifyRetrieveFileErrorcause=An error has prevented Martus from continuing the retrieve that was in progress. You should re-select any bulletins that had not yet been retrieved.",
 "field:notifyNoGridRowSelectedcause=No row selected.",
-"field:notifyImportCompletecause=Import complete.  Successfuly imported #BulletinsSuccessfullyImported# of #TotalBulletinsToImport# bulletins into folder:#ImportFolder#",
+"field:notifyImportCompletecause=Import complete.  Imported #BulletinsSuccessfullyImported# of #TotalBulletinsToImport# bulletins into folder: #ImportFolder#",
 "field:notifyErrorImportingBulletinscause=There was an error importing bulletings into Martus.  Not all bulletins were imported.",
 "field:notifyNoImportFileSpecifiedcause=No folder specified.  You must enter a folder you wish the files to be imported into.  This folder can already exist in the system, or can be a new folder.",
+"field:notifyImportMissingAttachmentscause=Not all attachments were imported.  The following bulletins had problems importing these attachments.\n\n#ImportMissingAttachments#",
+
 
 "field:IncompatibleMtfVersion=The version of this translation is not compatible with this version of Martus.  It is recommended that you do not continue to use this translation version and go to (http://www.martus.org/downloads) for the appropriate version.",
 "field:IncompatibleMtfVersionTranslation=#MtfLanguage# Translation Version: #MtfVersionNumber#",

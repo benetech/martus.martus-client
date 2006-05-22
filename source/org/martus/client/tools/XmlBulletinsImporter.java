@@ -77,6 +77,11 @@ public class XmlBulletinsImporter
 	{
 		return bulletinsLoader.getBulletins();
 	}
+	
+	public HashMap getMissingAttachmentsMap()
+	{
+		return bulletinsLoader.getMissingAttachmentsMap();
+	}
 
 	//These are currently used in tests, I think its good to keep them for now
 	public FieldSpec[] getMainFieldSpecs()
