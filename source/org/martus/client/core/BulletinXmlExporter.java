@@ -29,9 +29,6 @@ package org.martus.client.core;
 import java.io.File;
 import java.io.IOException;
 import java.io.Writer;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.Vector;
 
 import org.martus.client.swingui.dialogs.UiImportExportProgressMeterDlg;
@@ -124,11 +121,9 @@ public class BulletinXmlExporter
 		dest.write(getXmlEncodedTagWithData(BulletinXmlExportImportConstants.ACCOUNT_ID, b.getAccount()));
 		dest.write(getXmlEncodedTagWithData(BulletinXmlExportImportConstants.LOCAL_ID, b.getLocalId()));
 		
-		GregorianCalendar cal = new GregorianCalendar();
-		cal.setTime(new Date(b.getLastSavedTime()));
-		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-		String dateAndTime = format.format(cal.getTime());
-		dest.write(getXmlEncodedTagWithData(BulletinXmlExportImportConstants.BULLETIN_LAST_SAVED_DATE_TIME, dateAndTime));
+		long lastSavedTime = b.getLastSavedTime();
+		dest.write(getXmlEncodedTagWithData(BulletinXmlExportImportConstants.BULLETIN_LAST_SAVED_DATE_TIME, Long.toString(lastSavedTime)));
+		dest.write(getXmlEncodedTagWithData(BulletinXmlExportImportConstants.BULLETIN_LAST_SAVED_DATE_TIME_LOCALIZED, localization.formatDateTime(b.getLastSavedTime())));
 
 		if(b.isAllPrivate())
 			dest.write(getXmlEncodedTagWithData(BulletinXmlExportImportConstants.ALL_PRIVATE, ""));

@@ -29,12 +29,10 @@ package org.martus.client.test;
 import java.io.File;
 import java.io.IOException;
 import java.io.StringWriter;
-import java.text.SimpleDateFormat;
 import java.util.Arrays;
-import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.Vector;
+
 import org.martus.client.bulletinstore.ClientBulletinStore;
 import org.martus.client.core.BulletinXmlExporter;
 import org.martus.client.tools.XmlBulletinsImporter;
@@ -95,6 +93,7 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 		final String sampleAuthor = "someone special";
 
 		b.set(BulletinConstants.TAGAUTHOR, sampleAuthor);
+		store.saveBulletin(b);
 		Vector list = new Vector();
 		list.add(b);
 		String result = doExport(list, false, false);
@@ -105,15 +104,14 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 		assertContains("<BulletinVersion>1</BulletinVersion>", result);
 		assertContains("<BulletinStatus>draft</BulletinStatus>", result);
 		assertNotContains("<BulletinStatus>sealed</BulletinStatus>", result);
-		assertContains("<BulletinStatus-Localized>"+draftTranslation+"</BulletinStatus-Localized>", result);
-		assertNotContains("<BulletinStatus-Localized>"+sealedTranslation+"</BulletinStatus-Localized>", result);
+		assertContains("<LocalizedBulletinStatus>"+draftTranslation+"</LocalizedBulletinStatus>", result);
+		assertNotContains("<LocalizedBulletinStatus>"+sealedTranslation+"</LocalizedBulletinStatus>", result);
 
-		GregorianCalendar cal = new GregorianCalendar();
-		cal.setTime(new Date(b.getLastSavedTime()));
-		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-		String lastSavedDateTime = format.format(cal.getTime());
+		MiniLocalization miniLocalization = new MiniLocalization();
+		String lastSavedDateTime = miniLocalization.formatDateTime(b.getLastSavedTime());
 		
-		assertContains("<BulletinLastSavedDateTime>"+lastSavedDateTime+"</BulletinLastSavedDateTime>", result);
+		assertContains("<BulletinLastSavedDateTime>"+Long.toString(b.getLastSavedTime())+"</BulletinLastSavedDateTime>", result);
+		assertContains("<LocalizedBulletinLastSavedDateTime>"+lastSavedDateTime+"</LocalizedBulletinLastSavedDateTime>", result);
 		assertContains("<BulletinMetaData>", result);
 		assertContains("<NoAttachmentsExported></NoAttachmentsExported>", result);
 		assertContains(b.getAccount(), result);
@@ -410,6 +408,7 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 		final File sampleAttachmentFile1 = addNewPrivateSampleAttachment(b);
 		File exportedAttachmentFile1 = new File(attachmentDirectory, sampleAttachmentFile1.getName());
 		assertFalse(exportedAttachmentFile1.exists());
+		//Don't save the bulletin to ensure a failing attachment export.
 		Vector list = new Vector();
 		list.add(b);
 
@@ -455,8 +454,8 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 		assertContains(sampleTitle2, result);
 		assertContains("<BulletinStatus>draft</BulletinStatus>", result);
 		assertContains("<BulletinStatus>sealed</BulletinStatus>", result);
-		assertContains("<BulletinStatus-Localized>"+draftTranslation+"</BulletinStatus-Localized>", result);
-		assertContains("<BulletinStatus-Localized>"+sealedTranslation+"</BulletinStatus-Localized>", result);
+		assertContains("<LocalizedBulletinStatus>"+draftTranslation+"</LocalizedBulletinStatus>", result);
+		assertContains("<LocalizedBulletinStatus>"+sealedTranslation+"</LocalizedBulletinStatus>", result);
 		assertEquals("Has failing attachments?",0, failingAttachments);
 		
 		StringInputStreamWithSeek stream = new StringInputStreamWithSeek(result);
