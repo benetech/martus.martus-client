@@ -1,7 +1,7 @@
 /*
 
 The Martus(tm) free, social justice documentation and
-monitoring software. Copyright (C) 2005, Beneficent
+monitoring software. Copyright (C) 2006, Beneficent
 Technology, Inc. (Benetech).
 
 Martus is free software; you can redistribute it and/or
@@ -23,25 +23,42 @@ Software Foundation, Inc., 59 Temple Place - Suite 330,
 Boston, MA 02111-1307, USA.
 
 */
-
 package org.martus.client.swingui.actions;
 
 import java.awt.event.ActionEvent;
 import java.util.Set;
+import java.util.Vector;
 
 import org.martus.client.swingui.UiMainWindow;
+import org.martus.common.packet.UniversalId;
 
-public class ActionMenuSearch extends UiMenuAction
+public class ActionMenuReports extends ActionPrint
 {
-	public ActionMenuSearch(UiMainWindow mainWindowToUse)
+	public ActionMenuReports(UiMainWindow mainWindowToUse)
 	{
-		super(mainWindowToUse, "search");
+		super(mainWindowToUse, "Reports");
+	}
+
+	public boolean isEnabled()
+	{
+		return true;
 	}
 
 	public void actionPerformed(ActionEvent ae)
 	{
 		Set bulletinIdsFromSearch = mainWindow.doSearch();
-		mainWindow.updateSearchFolderAndNotifyUserOfTheResults(bulletinIdsFromSearch);
+		if(bulletinIdsFromSearch == null)
+			return;
+		int bulletinsMatched = bulletinIdsFromSearch.size();
+		if(bulletinIdsFromSearch.size() == 0)
+		{
+			mainWindow.notifyDlg("SearchFailed");
+			return;
+		}
+		mainWindow.showNumberOfBulletinsFound(bulletinsMatched, "ReportFound");
+		UniversalId[] bulletinIds = (UniversalId[])bulletinIdsFromSearch.toArray(new UniversalId[0]);
+		Vector bulletinsToReportOn = mainWindow.getBulletins(bulletinIds);
+		printBulletins(bulletinsToReportOn);
 	}
 
 }

@@ -40,6 +40,7 @@ import java.io.ObjectOutputStream;
 import java.io.UnsupportedEncodingException;
 import java.util.Date;
 import java.util.Enumeration;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 import java.util.Vector;
@@ -1105,15 +1106,11 @@ public class MartusApp
 		setLastUploadRemindedTime(new Date());
 	}
 
-	public void search(SearchTreeNode searchNode, boolean searchFinalVersionsOnly)
+	public Set search(SearchTreeNode searchNode, boolean searchFinalVersionsOnly)
 	{
 		BulletinSearcher matcher = new BulletinSearcher(searchNode);
-
-		BulletinFolder searchFolder = createOrFindFolder(store.getSearchFolderName());
-		searchFolder.removeAll();
-		searchFolder.prepareForBulkOperation();
-
 		Set uids = store.getAllBulletinLeafUids();
+		Set matchedBulletinUids = new HashSet();
 		for(Iterator iter = uids.iterator(); iter.hasNext();)
 		{
 			UniversalId leafBulletinUid = (UniversalId) iter.next();
@@ -1133,23 +1130,37 @@ public class MartusApp
 				Bulletin b = store.getBulletinRevision((UniversalId)allRevisions.get(j));
 				if(b != null && matcher.doesMatch(new SafeReadableBulletin(b, localization), localization))
 				{	
-					try
-					{
-						store.addBulletinToFolder(searchFolder, leafBulletinUid);
-					}
-					catch (BulletinAlreadyExistsException safeToIgnoreException)
-					{
-					}
-					catch (AddOlderVersionToFolderFailedException safeToIgnoreException)
-					{
-					}
-					catch (IOException e)
-					{
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
+					matchedBulletinUids.add(leafBulletinUid);
 				}
 			}
+		}
+		return matchedBulletinUids;
+	}
+	
+	public void updateSearchFolder(Set bulletinIdsToAdd)
+	{
+		BulletinFolder searchFolder = createOrFindFolder(store.getSearchFolderName());
+		searchFolder.removeAll();
+		searchFolder.prepareForBulkOperation();
+		for (Iterator iter = bulletinIdsToAdd.iterator(); iter.hasNext();)
+		{
+			UniversalId leafBulletinUid = (UniversalId) iter.next();
+			try
+			{
+				store.addBulletinToFolder(searchFolder, leafBulletinUid);
+			}
+			catch (BulletinAlreadyExistsException safeToIgnoreException)
+			{
+			}
+			catch (AddOlderVersionToFolderFailedException safeToIgnoreException)
+			{
+			}
+			catch (IOException e)
+			{
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
 		}
 		store.saveFolders();
 	}

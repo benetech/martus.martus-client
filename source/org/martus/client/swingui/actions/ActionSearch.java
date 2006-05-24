@@ -27,6 +27,7 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.swingui.actions;
 
 import java.awt.event.ActionEvent;
+import java.util.Set;
 
 import org.martus.client.swingui.UiMainWindow;
 
@@ -39,7 +40,8 @@ public class ActionSearch extends UiButtonAction
 
 	public void actionPerformed(ActionEvent ae)
 	{
-		mainWindow.doSearch();
+		Set bulletinIdsFromSearch = mainWindow.doSearch();
+		mainWindow.updateSearchFolderAndNotifyUserOfTheResults(bulletinIdsFromSearch);
 	}
 
 }

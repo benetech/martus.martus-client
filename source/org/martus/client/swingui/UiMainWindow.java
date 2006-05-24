@@ -51,6 +51,7 @@ import java.net.URL;
 import java.nio.channels.FileLock;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 import java.util.Stack;
 import java.util.TimerTask;
 import java.util.Vector;
@@ -1208,7 +1209,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		}
 	}
 	
-	public void doSearch()
+	public Set doSearch()
 	{
 		// TODO: Allow either the old UiSimpleSearchDlg or the new UiFancySearchDlg
 		UiFancySearchDlg searchDlg = new UiFancySearchDlg(this);
@@ -1216,35 +1217,48 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		searchDlg.setSearchFinalBulletinsOnly(uiState.searchFinalBulletinsOnly());
 		searchDlg.setVisible(true);
 		if(!searchDlg.getResults())
-			return;
-		setWaitingCursor();
+			return null;
 
 		boolean searchFinalBulletinsOnly = searchDlg.searchFinalBulletinsOnly();
 		uiState.setSearchFinalBulletinsOnly(searchFinalBulletinsOnly);
-		app.search(searchDlg.getSearchTree(), searchFinalBulletinsOnly);
+		setWaitingCursor();
+		Set searchResults = app.search(searchDlg.getSearchTree(), searchFinalBulletinsOnly);
+		resetCursor();
+		return searchResults;
+	}
+
+	public void updateSearchFolderAndNotifyUserOfTheResults(Set matchedBulletinsFromSearch)
+	{
+		if(matchedBulletinsFromSearch == null)
+			return;
+		app.updateSearchFolder(matchedBulletinsFromSearch);
 		ClientBulletinStore store = getStore();
 		BulletinFolder searchFolder = store.findFolder(store.getSearchFolderName());
 		folders.folderTreeContentsHaveChanged();
 		folders.folderContentsHaveChanged(searchFolder);
 		int bulletinsFound = searchFolder.getBulletinCount();
-		resetCursor();
 		if(bulletinsFound > 0)
 		{
 			selectSearchFolder();
-			String title = getLocalization().getWindowTitle("notifySearchFound");
-			String cause = getLocalization().getFieldLabel("notifySearchFoundcause");
-			String ok = getLocalization().getButtonLabel("ok");
-			String[] buttons = { ok };
-			cause = replaceToken(cause , "#NumberBulletinsFound#", (new Integer(bulletinsFound)).toString());
-			UiOptionPane pane = new UiOptionPane(cause, UiOptionPane.INFORMATION_MESSAGE, UiOptionPane.DEFAULT_OPTION,
-									null, buttons);
-			JDialog dialog = pane.createDialog(this, title);
-			dialog.setVisible(true);
+			showNumberOfBulletinsFound(bulletinsFound, "SearchFound");
 		}
 		else
 		{
 			notifyDlg("SearchFailed");
 		}
+	}
+
+	public void showNumberOfBulletinsFound(int bulletinsFound,String messageTag)
+	{
+		String title = getLocalization().getWindowTitle("notifySearchFound");
+		String message = getLocalization().getFieldLabel(messageTag);
+		String ok = getLocalization().getButtonLabel("ok");
+		String[] buttons = { ok };
+		message = replaceToken(message , "#NumberBulletinsFound#", (new Integer(bulletinsFound)).toString());
+		UiOptionPane pane = new UiOptionPane(message, UiOptionPane.INFORMATION_MESSAGE, UiOptionPane.DEFAULT_OPTION,
+								null, buttons);
+		JDialog dialog = pane.createDialog(this, title);
+		dialog.setVisible(true);
 	}
 
 	public void aboutMartus()
@@ -2246,7 +2260,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		return getBulletins(uids);
 	}
 	
-	Vector getBulletins(UniversalId[] uids)
+	public Vector getBulletins(UniversalId[] uids)
 	{
 		Vector bulletins = new Vector();
 		for (int i = 0; i < uids.length; i++)

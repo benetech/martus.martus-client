@@ -60,6 +60,7 @@ import org.martus.client.swingui.actions.ActionMenuQuickEraseDeleteMyData;
 import org.martus.client.swingui.actions.ActionMenuQuickEraseRemoveMartus;
 import org.martus.client.swingui.actions.ActionMenuRemoveServer;
 import org.martus.client.swingui.actions.ActionMenuFolderRename;
+import org.martus.client.swingui.actions.ActionMenuReports;
 import org.martus.client.swingui.actions.ActionMenuResendBulletins;
 import org.martus.client.swingui.actions.ActionMenuRetrieveHQDraftBulletins;
 import org.martus.client.swingui.actions.ActionMenuRetrieveHQSealedBulletins;
@@ -88,6 +89,7 @@ public class UiMenuBar extends JMenuBar
 
 		file.add(new ActionMenuCreateNewBulletin(mainWindow));
 		file.add(actionMenuPrint);
+		file.add(new ActionMenuReports(mainWindow));
 		file.addSeparator();
 		file.add(new ActionMenuExportFolder(mainWindow));
 		file.add(new ActionMenuExportBulletins(mainWindow));

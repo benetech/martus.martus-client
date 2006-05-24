@@ -359,6 +359,7 @@ public class EnglishStrings
 "menu:file=File",
 "menu:CreateNewBulletin=Create New Bulletin",
 "menu:printBulletin=Print Bulletin(s) / Create Report File",
+"menu:Reports=Reports",
 "menu:ExportBulletins=Export Bulletins",
 "menu:ImportBulletins=Import Bulletins",
 "menu:ExportFolder=Export Folder",
@@ -662,7 +663,7 @@ public class EnglishStrings
 "field:notifyUnableToSaveAttachmentcause=Unable to save the selected attachment for some reason.  Try saving it to a different file.",
 "field:notifyUnableToViewAttachmentcause=Unable to view the selected attachment for some reason.",
 "field:notifySearchFailedcause=Sorry, no bulletins were found.",
-"field:notifySearchFoundcause=#NumberBulletinsFound# bulletins matched the search, and have been added to the Search Results folder.\n Note that both current and earlier versions of each bulletin were searched.",
+
 "field:notifyServerErrorcause=Server Error, the server may be down, please try again later",
 "field:notifyFoundOrphanscause=One or more bulletins were not in any folder. These lost bulletins have been placed into the Recovered Bulletins folder.",
 "field:notifyFoundDamagedBulletinscause=One or more bulletins were severely damaged, and cannot be displayed. If these bulletins were backed up to a server, you may be able to retrieve undamaged copies from there.",
@@ -878,6 +879,8 @@ public class EnglishStrings
 "field:FancySearchHelpMsg3=" + 
 	"You can use the word #Or# or #And#, or you can use the English words \"#OrEnglish#\" and \"#AndEnglish#\" to search.\n\n" +  
 	"You need to put spaces before and after any #Or# / #And# keywords you use in your search.\n", 
+"field:SearchFound=#NumberBulletinsFound# bulletins matched the search, and have been added to the Search Results folder.",
+"field:ReportFound=#NumberBulletinsFound# bulletins matched the search.",
 
 "field:WasSentYes=Yes",
 "field:WasSentNo=No",
