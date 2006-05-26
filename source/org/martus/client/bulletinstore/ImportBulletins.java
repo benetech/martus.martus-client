@@ -28,6 +28,7 @@ package org.martus.client.bulletinstore;
 import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
+
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.dialogs.UiImportExportProgressMeterDlg;
 import org.martus.client.tools.ImporterOfXmlFilesOfBulletins;
@@ -56,7 +57,8 @@ public class ImportBulletins
 			
 			if(importThread.hasMissingAttachments())
 				showAttachmentErrors(importThread);
-			
+			if(importThread.hasBulletinsNotImported())		
+				showBulletinsNotImported(importThread);
 			int numberOfBulletinsImported = importThread.getNumberOfBulletinsImported();
 			int totalBulletins = importThread.getTotalBulletins();
 			mainWindow.notifyDlg("ImportComplete", getTokenReplacementImporter(numberOfBulletinsImported, totalBulletins, importingFolderName));
@@ -70,7 +72,13 @@ public class ImportBulletins
 	private void showAttachmentErrors(ImporterThread importThread)
 	{
 		HashMap missingAttachmentsMap = importThread.getMissingAttachmentsMap();
-		mainWindow.notifyDlg("ImportMissingAttachments", getTokenReplacementMissingAttachments(missingAttachmentsMap));
+		mainWindow.notifyDlg("ImportMissingAttachments", getTokenReplacementImportErrors(missingAttachmentsMap, "#ImportMissingAttachments#"));
+	}
+	
+	private void showBulletinsNotImported(ImporterThread importThread)
+	{
+		HashMap missingBulletins = importThread.getBulletinsNotImported();
+		mainWindow.notifyDlg("ImportBulletinsNotImported", getTokenReplacementImportErrors(missingBulletins, "#ImportBulletinsNotImported#"));
 	}
 	
 	class ImporterThread extends Thread
@@ -123,6 +131,16 @@ public class ImportBulletins
 			return importer.getMissingAttachmentsMap();
 		}
 		
+		public boolean hasBulletinsNotImported()
+		{
+			return importer.hasBulletinsNotImported();		
+		}
+
+		public HashMap getBulletinsNotImported()
+		{
+			return importer.getBulletinsNotImported();
+		}
+		
 		private File[] filesToImport;
 		private BulletinFolder importFolder;
 		private UiImportExportProgressMeterDlg progressMeter;
@@ -140,27 +158,30 @@ public class ImportBulletins
 		return map;
 	}
 
-	Map getTokenReplacementMissingAttachments(HashMap missingAttachmentsMap) 
+	Map getTokenReplacementImportErrors(HashMap importErrors, String tokenToUse) 
 	{
 		
-		String[] bulletinTitles = new String[missingAttachmentsMap.size()];
-		missingAttachmentsMap.keySet().toArray(bulletinTitles);
+		String[] bulletinTitles = new String[importErrors.size()];
+		importErrors.keySet().toArray(bulletinTitles);
 		StringBuffer listOfErrors = new StringBuffer();
 		for(int i = 0; i < bulletinTitles.length; i++)
 		{
 			String bulletinTitle = bulletinTitles[i];
 			listOfErrors.append(bulletinTitle);
-			listOfErrors.append(" : ");
-			listOfErrors.append((String)missingAttachmentsMap.get(bulletinTitle));
+			String specificProblem = (String)importErrors.get(bulletinTitle);
+			if(specificProblem != null)
+			{
+				listOfErrors.append(" : ");
+				listOfErrors.append(specificProblem);
+			}
 			listOfErrors.append("\n");
 		}
 
 		
 		HashMap map = new HashMap();
-		map.put("#ImportMissingAttachments#", listOfErrors.toString());
+		map.put(tokenToUse, listOfErrors.toString());
 		return map;
 	}
 
 	UiMainWindow mainWindow;
-	
 }

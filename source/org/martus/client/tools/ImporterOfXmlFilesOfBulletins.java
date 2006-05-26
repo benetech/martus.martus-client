@@ -29,6 +29,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.PrintStream;
 import java.util.HashMap;
+
 import org.martus.client.bulletinstore.BulletinFolder;
 import org.martus.client.bulletinstore.ClientBulletinStore;
 import org.martus.client.swingui.dialogs.UiImportExportProgressMeterDlg;
@@ -59,6 +60,7 @@ public class ImporterOfXmlFilesOfBulletins
 		totalBulletins = 0;
 		bulletinsSuccessfullyImported = 0;
 		incompleteBulletinsMissingAttachments = new HashMap();
+		incompleteBulletins = new HashMap();
 	}
 	
 	
@@ -106,7 +108,7 @@ public class ImporterOfXmlFilesOfBulletins
 			}
 			catch(Exception e)
 			{
-				e.printStackTrace();
+				incompleteBulletins.put(b.get(Bulletin.TAGTITLE), e.getMessage());
 			}
 		}
 
@@ -134,6 +136,16 @@ public class ImporterOfXmlFilesOfBulletins
 		return incompleteBulletinsMissingAttachments;
 	}
 
+	public boolean hasBulletinsNotImported()
+	{
+		return (incompleteBulletins.size() > 0);		
+	}
+
+	public HashMap getBulletinsNotImported()
+	{
+		return incompleteBulletins;
+	}
+
 	private int bulletinsSuccessfullyImported;
 	private int totalBulletins;
 	private File[] bulletinXmlFilesToImport;
@@ -143,4 +155,5 @@ public class ImporterOfXmlFilesOfBulletins
 	private PrintStream consoleMonitor;
 	public File baseAttachmentsDirectory;
 	private HashMap incompleteBulletinsMissingAttachments;
+	private HashMap incompleteBulletins;
 }

@@ -207,6 +207,7 @@ public class EnglishStrings
 "wintitle:notifyImportComplete=Import Complete",
 "wintitle:notifyErrorImportingBulletins=Error Importing Bulletins",
 "wintitle:notifyImportMissingAttachments=Warning Missing Attachments",
+"wintitle:notifyImportBulletinsNotImported=Warning Bulletins Not Imported",
 
 "wintitle:inputservername=Server Name",
 "wintitle:inputserverpubliccode=Server Identification",
@@ -741,7 +742,7 @@ public class EnglishStrings
 "field:notifyErrorImportingBulletinscause=There was an error importing bulletings into Martus.  Not all bulletins were imported.",
 "field:notifyNoImportFileSpecifiedcause=No folder specified.  You must enter a folder you wish the files to be imported into.  This folder can already exist in the system, or can be a new folder.",
 "field:notifyImportMissingAttachmentscause=Not all attachments were imported.  The following bulletins had problems importing these attachments.\n\n#ImportMissingAttachments#",
-
+"field:notifyImportBulletinsNotImportedcause=Not all bulletins were imported.  The following bulletins had problems during import.\n\n#ImportBulletinsNotImported#",
 
 "field:IncompatibleMtfVersion=The version of this translation is not compatible with this version of Martus.  It is recommended that you do not continue to use this translation version and go to (http://www.martus.org/downloads) for the appropriate version.",
 "field:IncompatibleMtfVersionTranslation=#MtfLanguage# Translation Version: #MtfVersionNumber#",

@@ -27,10 +27,12 @@ package org.martus.client.test;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintStream;
 import java.util.HashMap;
 import java.util.Vector;
+
 import org.martus.client.bulletinstore.BulletinFolder;
 import org.martus.client.bulletinstore.ClientBulletinStore;
 import org.martus.client.tools.ImporterOfXmlFilesOfBulletins;
@@ -43,6 +45,7 @@ import org.martus.common.bulletin.PendingAttachmentList;
 import org.martus.common.bulletinstore.BulletinStore;
 import org.martus.common.crypto.MartusCrypto;
 import org.martus.common.crypto.MockMartusSecurity;
+import org.martus.common.crypto.MartusCrypto.CryptoException;
 import org.martus.common.database.DatabaseKey;
 import org.martus.common.database.MockClientDatabase;
 import org.martus.common.fieldspec.CustomFieldError;
@@ -71,6 +74,8 @@ public class TestImporterOfXmlFilesOfBulletins extends TestCaseEnhanced
 			dataDirectory = createTempDirectory();
 			clientStore.doAfterSigninInitialization(dataDirectory);
 			clientStore.createFieldSpecCacheFromDatabase();
+			nullPrinter = new PrintStream(new ByteArrayOutputStream());
+			
 		}
 		importFolder = clientStore.createOrFindFolder("Import");
 		xmlInputDirectory = createTempDirectory();
@@ -245,7 +250,6 @@ public class TestImporterOfXmlFilesOfBulletins extends TestCaseEnhanced
 		copyResourceFileToLocalFile(xmlBulletin2, "SampleXmlTwoBulletins.xml");
 		xmlBulletin2.deleteOnExit();
 		File[] xmlFiles = new File[] {xmlBulletin1, xmlBulletin2};
-		PrintStream nullPrinter = new PrintStream(new ByteArrayOutputStream());
 		ImporterOfXmlFilesOfBulletins importer = new ImporterOfXmlFilesOfBulletins(xmlFiles, clientStore, importFolder, nullPrinter);
 		importer.importFiles();
 		xmlBulletin1.delete();
@@ -286,7 +290,6 @@ public class TestImporterOfXmlFilesOfBulletins extends TestCaseEnhanced
 		
 		clientStore.deleteAllBulletins();
 		File[] xmlFiles = new File[] {xmlBulletinWithAttachments};
-		PrintStream nullPrinter = new PrintStream(new ByteArrayOutputStream());
 		ImporterOfXmlFilesOfBulletins importer = new ImporterOfXmlFilesOfBulletins(xmlFiles, clientStore, importFolder, nullPrinter);
 		importer.setAttachmentsDirectory(xmlInputDirectory);
 		importer.importFiles();
@@ -356,7 +359,6 @@ public class TestImporterOfXmlFilesOfBulletins extends TestCaseEnhanced
 	
 		clientStore.deleteAllBulletins();
 		File[] xmlFiles = new File[] {xmlBulletinWithAttachments};
-		PrintStream nullPrinter = new PrintStream(new ByteArrayOutputStream());
 		ImporterOfXmlFilesOfBulletins importer = new ImporterOfXmlFilesOfBulletins(xmlFiles, clientStore, importFolder, nullPrinter);
 		importer.setAttachmentsDirectory(xmlInputDirectory);
 		importer.importFiles();
@@ -365,6 +367,49 @@ public class TestImporterOfXmlFilesOfBulletins extends TestCaseEnhanced
 		xmlBulletinWithAttachments.delete();
 	}
 	
+	public void testImportXMLWithFailingBulletins() throws Exception
+	{
+		FaultyClientBulletinStore faultyStore = new FaultyClientBulletinStore(security);
+		File faultyDataDirectory = createTempDirectory();
+
+		faultyStore.doAfterSigninInitialization(faultyDataDirectory);
+		faultyStore.createFieldSpecCacheFromDatabase();
+		faultyStore.saveFolders();
+
+
+		File xmlBulletin1 = new File(xmlInputDirectory, "$$$bulletin1.xml");
+		copyResourceFileToLocalFile(xmlBulletin1, "SampleXmlBulletin.xml");
+		xmlBulletin1.deleteOnExit();
+		
+		ImporterOfXmlFilesOfBulletins importer = new ImporterOfXmlFilesOfBulletins(new File[]{xmlBulletin1}, faultyStore, importFolder, nullPrinter);
+		importer.setAttachmentsDirectory(xmlInputDirectory);
+		importer.importFiles();
+		assertEquals(0, importer.getNumberOfBulletinsImported());
+		assertEquals(1, importer.getTotalNumberOfBulletins());
+		assertTrue(importer.hasBulletinsNotImported());
+		assertEquals(1, importer.getBulletinsNotImported().size());
+		HashMap errors = importer.getBulletinsNotImported();
+		String bulletinSampleTitle = "import export example";
+		assertTrue("Bulletin title wasn't found?", errors.containsKey(bulletinSampleTitle));
+		assertEquals(ERROR_SAVING_BULLETIN_MSG, errors.get(bulletinSampleTitle));
+		faultyStore.deleteAllData();
+		DirectoryUtils.deleteEntireDirectoryTree(faultyDataDirectory);
+	}
+	
+	class FaultyClientBulletinStore extends ClientBulletinStore
+	{
+		public FaultyClientBulletinStore(MartusCrypto cryptoToUse)
+		{
+			super(cryptoToUse);
+		}
+
+		public void saveBulletin(Bulletin b) throws IOException, CryptoException
+		{
+			throw new IOException(ERROR_SAVING_BULLETIN_MSG);
+		}
+	}
+
+	final String ERROR_SAVING_BULLETIN_MSG = "Error Saving Bulletin";
 	final String expectedErrorMessage = "100 :  : author : \n" +
 	"100 :  : title : \n" +
 	"108 : DROPDOWN : BulletinSourceDuplicateEntries : Source of bulletin information\n" +
@@ -372,6 +417,7 @@ public class TestImporterOfXmlFilesOfBulletins extends TestCaseEnhanced
 
 	static ClientBulletinStore clientStore;
 	static BulletinFolder importFolder;
+	static PrintStream nullPrinter;
 	static File dataDirectory;
 	static MartusCrypto security;
 	static File xmlInputDirectory;
