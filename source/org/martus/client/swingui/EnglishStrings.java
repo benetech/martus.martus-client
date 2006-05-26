@@ -359,7 +359,7 @@ public class EnglishStrings
 
 "menu:file=File",
 "menu:CreateNewBulletin=Create New Bulletin",
-"menu:printBulletin=Print Bulletin(s) / Create Report File",
+"menu:printBulletin=Print Bulletin(s)",
 "menu:Reports=Reports",
 "menu:ExportBulletins=Export Bulletins",
 "menu:ImportBulletins=Import Bulletins",
