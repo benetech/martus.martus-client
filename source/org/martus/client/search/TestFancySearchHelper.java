@@ -52,7 +52,6 @@ import org.martus.common.fieldspec.FieldTypeDropdown;
 import org.martus.common.fieldspec.FieldTypeMessage;
 import org.martus.common.fieldspec.FieldTypeMultiline;
 import org.martus.common.fieldspec.FieldTypeNormal;
-import org.martus.common.fieldspec.FieldTypeSearchValue;
 import org.martus.common.fieldspec.FieldTypeUnknown;
 import org.martus.common.fieldspec.GridFieldSpec;
 import org.martus.common.fieldspec.StandardFieldSpecs;
@@ -285,7 +284,7 @@ public class TestFancySearchHelper extends TestCaseEnhanced
 		assertEquals(4, spec.getColumnCount());
 		assertEquals("no field column?", new FieldTypeDropdown(), spec.getColumnType(0));
 		assertEquals("no op column?", new FieldTypeDropdown(), spec.getColumnType(1));
-		assertEquals("no value column?", new FieldTypeSearchValue(), spec.getColumnType(2));
+		assertEquals("no value column?", new FieldTypeNormal(), spec.getColumnType(2));
 		assertEquals("no andor column?", new FieldTypeDropdown(), spec.getColumnType(3));
 	}
 	
@@ -308,7 +307,7 @@ public class TestFancySearchHelper extends TestCaseEnhanced
 		GridFieldSpec spec = new GridFieldSpec();
 		spec.addColumn(fieldColumnSpec);
 		spec.addColumn(FieldSpec.createStandardField("op", new FieldTypeNormal()));
-		spec.addColumn(FieldSpec.createStandardField("value", new FieldTypeSearchValue()));
+		spec.addColumn(FieldSpec.createStandardField("value", new FieldTypeNormal()));
 		spec.addColumn(FieldSpec.createStandardField("andor", new FieldTypeNormal()));
 		GridData data = new GridData(spec);
 		addRow(data, fields[0].getCode(), "=", "1", "or");
@@ -330,7 +329,7 @@ public class TestFancySearchHelper extends TestCaseEnhanced
 		GridFieldSpec spec = new GridFieldSpec();
 		spec.addColumn(fieldColumnSpec);
 		spec.addColumn(FieldSpec.createStandardField("op", new FieldTypeNormal()));
-		spec.addColumn(FieldSpec.createStandardField("value", new FieldTypeSearchValue()));
+		spec.addColumn(FieldSpec.createStandardField("value", new FieldTypeNormal()));
 		spec.addColumn(FieldSpec.createStandardField("andor", new FieldTypeNormal()));
 		GridData data = new GridData(spec);
 		addRow(data, fields[0].getCode(), "=", "value", "or");
@@ -351,7 +350,7 @@ public class TestFancySearchHelper extends TestCaseEnhanced
 		GridFieldSpec spec = new GridFieldSpec();
 		spec.addColumn(fieldColumnSpec);
 		spec.addColumn(FieldSpec.createStandardField("op", new FieldTypeNormal()));
-		spec.addColumn(FieldSpec.createStandardField("value", new FieldTypeSearchValue()));
+		spec.addColumn(FieldSpec.createStandardField("value", new FieldTypeNormal()));
 		spec.addColumn(FieldSpec.createStandardField("andor", new FieldTypeNormal()));
 		GridData data = new GridData(spec);
 		addRow(data, fields[0].getCode(), "=", "b", "or");
@@ -379,7 +378,7 @@ public class TestFancySearchHelper extends TestCaseEnhanced
 		GridFieldSpec spec = new GridFieldSpec();
 		spec.addColumn(fieldColumnSpec);
 		spec.addColumn(FieldSpec.createStandardField("op", new FieldTypeNormal()));
-		spec.addColumn(FieldSpec.createStandardField("value", new FieldTypeSearchValue()));
+		spec.addColumn(FieldSpec.createStandardField("value", new FieldTypeNormal()));
 		spec.addColumn(FieldSpec.createStandardField("andor", new FieldTypeNormal()));
 		GridData data = new GridData(spec);
 		addRow(data, "", "", "whiz", "or");

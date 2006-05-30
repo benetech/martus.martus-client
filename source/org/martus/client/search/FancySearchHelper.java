@@ -46,7 +46,6 @@ import org.martus.common.fieldspec.FieldType;
 import org.martus.common.fieldspec.FieldTypeAnyField;
 import org.martus.common.fieldspec.FieldTypeDate;
 import org.martus.common.fieldspec.FieldTypeNormal;
-import org.martus.common.fieldspec.FieldTypeSearchValue;
 import org.martus.common.fieldspec.GridFieldSpec;
 import org.martus.common.fieldspec.StandardFieldSpecs;
 import org.martus.common.fieldspec.GridFieldSpec.UnsupportedFieldTypeException;
@@ -228,7 +227,7 @@ public class FancySearchHelper
 			
 			String valueColumnTag = "value";
 			String valueColumnHeader = getLocalization().getFieldLabel("SearchGridHeaderValue");
-			spec.addColumn(FieldSpec.createCustomField(valueColumnTag, valueColumnHeader, new FieldTypeSearchValue()));
+			spec.addColumn(FieldSpec.createCustomField(valueColumnTag, valueColumnHeader, new FieldTypeNormal()));
 			spec.addColumn(createAndOrColumnSpec());
 		}
 		catch (UnsupportedFieldTypeException e)

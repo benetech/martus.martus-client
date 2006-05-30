@@ -40,7 +40,6 @@ import org.martus.common.fieldspec.FieldTypeDropdown;
 import org.martus.common.fieldspec.FieldTypeGrid;
 import org.martus.common.fieldspec.FieldTypeMultiline;
 import org.martus.common.fieldspec.FieldTypeNormal;
-import org.martus.common.fieldspec.FieldTypeSearchValue;
 import org.martus.common.fieldspec.GridFieldSpec;
 import org.martus.util.TestCaseEnhanced;
 
@@ -64,7 +63,7 @@ public class TestFancySearchTableModel extends TestCaseEnhanced
 		GridFieldSpec gridSpec = helper.getGridSpec(store);
 		FancySearchTableModel model = new FancySearchTableModel(gridSpec, localization);
 		model.addEmptyRow();
-		assertEquals(new FieldTypeSearchValue(), model.getColumnType(FancySearchTableModel.valueColumn));
+		assertEquals(new FieldTypeNormal(), model.getColumnType(FancySearchTableModel.valueColumn));
 
 		DropDownFieldSpec fieldsSpec = (DropDownFieldSpec)model.getFieldSpecForColumn(FancySearchHelper.COLUMN_FIELD);
 		
