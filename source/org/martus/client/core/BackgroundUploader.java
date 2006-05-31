@@ -51,6 +51,7 @@ import org.martus.common.crypto.MartusCrypto.MartusSignatureException;
 import org.martus.common.crypto.MartusCrypto.NoKeyPairException;
 import org.martus.common.database.DatabaseKey;
 import org.martus.common.database.ReadableDatabase;
+import org.martus.common.database.Database.RecordHiddenException;
 import org.martus.common.network.NetworkInterfaceConstants;
 import org.martus.common.network.NetworkResponse;
 import org.martus.common.packet.Packet;
@@ -90,7 +91,7 @@ public class BackgroundUploader
 	}
 
 	public String uploadBulletin(Bulletin b) throws
-			InvalidPacketException, WrongPacketTypeException, SignatureVerificationException, DecryptionException, NoKeyPairException, CryptoException, FileNotFoundException, MartusSignatureException, FileTooLargeException, IOException
+			InvalidPacketException, WrongPacketTypeException, SignatureVerificationException, DecryptionException, NoKeyPairException, CryptoException, FileNotFoundException, MartusSignatureException, FileTooLargeException, IOException, RecordHiddenException
 	{
 		ClientBulletinStore store = app.getStore();
 		if(b.isSealed() && store.isProbablyOnServer(b))
@@ -230,6 +231,10 @@ public class BackgroundUploader
 			uploadResult.exceptionThrown = e.toString();
 		} 
 		catch (IOException e)
+		{
+			uploadResult.exceptionThrown = e.toString();
+		}
+		catch (RecordHiddenException e)
 		{
 			uploadResult.exceptionThrown = e.toString();
 		}
