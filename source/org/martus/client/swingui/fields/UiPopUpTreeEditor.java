@@ -36,7 +36,6 @@ import java.util.Vector;
 import javax.swing.Box;
 import javax.swing.JComponent;
 import javax.swing.JDialog;
-import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTree;
 import javax.swing.tree.DefaultMutableTreeNode;
@@ -56,7 +55,6 @@ public class UiPopUpTreeEditor extends UiField implements ActionListener
 {
 	public UiPopUpTreeEditor(UiLocalization localizationToUse)
 	{
-		owner = null;
 		localization = localizationToUse;
 		
 		listeners = new Vector();
@@ -98,9 +96,12 @@ public class UiPopUpTreeEditor extends UiField implements ActionListener
 	
 	public void actionPerformed(ActionEvent event)
 	{
-		FieldTreeDialog dlg = new FieldTreeDialog(owner, spec, localization);
+		FieldTreeDialog dlg = FieldTreeDialog.create(panel, spec, localization);
 		dlg.setVisible(true);
 		DefaultMutableTreeNode selectedNode = dlg.getSelectedNode();
+		if(selectedNode == null)
+			return;
+		
 		selectedItem = (SearchableFieldChoiceItem)selectedNode.getUserObject();
 		label.setText(selectedNode.toString());
 		notifyListeners();
@@ -123,7 +124,13 @@ public class UiPopUpTreeEditor extends UiField implements ActionListener
 	
 	static class FieldTreeDialog extends JDialog
 	{
-		public FieldTreeDialog(JFrame owner, PopUpTreeFieldSpec spec, UiLocalization localization)
+		static public FieldTreeDialog create(JComponent parent, PopUpTreeFieldSpec spec, UiLocalization localization)
+		{
+			Container topLevel = parent.getTopLevelAncestor();
+			return new FieldTreeDialog((JDialog)topLevel, spec, localization);
+		}
+		
+		public FieldTreeDialog(JDialog owner, PopUpTreeFieldSpec spec, UiLocalization localization)
 		{
 			super(owner);
 			TreeModel model = spec.getModel();
@@ -213,7 +220,6 @@ public class UiPopUpTreeEditor extends UiField implements ActionListener
 		DefaultMutableTreeNode selectedNode;
 	}
 
-	JFrame owner;
 	UiLocalization localization;
 	PopUpTreeFieldSpec spec;
 	JPanel panel;
