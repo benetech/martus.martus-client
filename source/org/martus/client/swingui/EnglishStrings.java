@@ -356,6 +356,7 @@ public class EnglishStrings
 "button:SearchFinalBulletinsOnly=Only search most recent version of bulletins",
 "button:DeleteSelectedGridRow=Delete Selected Row",
 "button:InsertEmptyGridRow=Insert Row",
+"button:PopUpTreeChoose=Choose Field...",
 
 "menu:file=File",
 "menu:CreateNewBulletin=Create New Bulletin",

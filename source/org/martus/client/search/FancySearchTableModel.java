@@ -38,6 +38,7 @@ import org.martus.common.fieldspec.DropDownFieldSpec;
 import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.fieldspec.FieldType;
 import org.martus.common.fieldspec.GridFieldSpec;
+import org.martus.common.fieldspec.PopUpTreeFieldSpec;
 
 public class FancySearchTableModel extends GridTableModel implements TableModelListener
 {
@@ -62,18 +63,17 @@ public class FancySearchTableModel extends GridTableModel implements TableModelL
 	private FieldSpec getSelectedFieldSpec(int row)
 	{
 		String selectedFieldTag = (String)getValueAt(row, fieldColumn);
-		DropDownFieldSpec fieldColumnSpec = (DropDownFieldSpec)getFieldSpecForColumn(fieldColumn);
+		PopUpTreeFieldSpec fieldColumnSpec = (PopUpTreeFieldSpec)getFieldSpecForColumn(fieldColumn);
 		return getFieldSpecForChosenField(selectedFieldTag, fieldColumnSpec);
 	}
 
-	public static FieldSpec getFieldSpecForChosenField(String selectedFieldTag, DropDownFieldSpec fieldColumnSpec)
+	public static FieldSpec getFieldSpecForChosenField(String selectedFieldTag, PopUpTreeFieldSpec fieldColumnSpec)
 	{
-		int foundAt = fieldColumnSpec.findCode(selectedFieldTag);
-		if(foundAt < 0)
+		ChoiceItem selectedFieldChoiceItem = fieldColumnSpec.findCode(selectedFieldTag);
+		if(selectedFieldChoiceItem == null)
 		{
 			throw new RuntimeException("Couldn't find " + selectedFieldTag + " in " + fieldColumnSpec.toString());
 		}
-		ChoiceItem selectedFieldChoiceItem = fieldColumnSpec.getChoice(foundAt);
 		FieldSpec selectedFieldSpec = selectedFieldChoiceItem.getSpec();
 		return selectedFieldSpec;
 	}

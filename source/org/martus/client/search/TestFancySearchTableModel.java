@@ -41,6 +41,8 @@ import org.martus.common.fieldspec.FieldTypeGrid;
 import org.martus.common.fieldspec.FieldTypeMultiline;
 import org.martus.common.fieldspec.FieldTypeNormal;
 import org.martus.common.fieldspec.GridFieldSpec;
+import org.martus.common.fieldspec.PopUpTreeFieldSpec;
+import org.martus.common.fieldspec.SearchableFieldChoiceItem;
 import org.martus.util.TestCaseEnhanced;
 
 public class TestFancySearchTableModel extends TestCaseEnhanced
@@ -65,20 +67,17 @@ public class TestFancySearchTableModel extends TestCaseEnhanced
 		model.addEmptyRow();
 		assertEquals(new FieldTypeNormal(), model.getColumnType(FancySearchTableModel.valueColumn));
 
-		DropDownFieldSpec fieldsSpec = (DropDownFieldSpec)model.getFieldSpecForColumn(FancySearchHelper.COLUMN_FIELD);
+		PopUpTreeFieldSpec fieldsSpec = (PopUpTreeFieldSpec)model.getFieldSpecForColumn(FancySearchHelper.COLUMN_FIELD);
 		
-		int beginDateAt = FancySearchHelper.findSearchTag(fieldsSpec, "eventdate.begin");
-		SearchableFieldChoiceItem beginDateItem = (SearchableFieldChoiceItem)fieldsSpec.getChoice(beginDateAt);
+		SearchableFieldChoiceItem beginDateItem = FancySearchHelper.findSearchTag(fieldsSpec, "eventdate.begin");
 		model.setValueAt(beginDateItem.getCode(), 0, FancySearchTableModel.fieldColumn);
 		assertEquals(new FieldTypeDate(), model.getCellType(0, FancySearchTableModel.valueColumn));
 		
-		int authorAt = FancySearchHelper.findSearchTag(fieldsSpec, "author");
-		SearchableFieldChoiceItem authorItem = (SearchableFieldChoiceItem)fieldsSpec.getChoice(authorAt);
+		SearchableFieldChoiceItem authorItem = FancySearchHelper.findSearchTag(fieldsSpec, "author");
 		model.setValueAt(authorItem.getCode(), 0, FancySearchTableModel.fieldColumn);
 		assertEquals(new FieldTypeNormal(), model.getCellType(0, FancySearchTableModel.valueColumn));
 		
-		int languageAt = FancySearchHelper.findSearchTag(fieldsSpec, "language");
-		SearchableFieldChoiceItem languageItem = (SearchableFieldChoiceItem)fieldsSpec.getChoice(languageAt);
+		SearchableFieldChoiceItem languageItem = FancySearchHelper.findSearchTag(fieldsSpec, "language");
 		model.setValueAt(languageItem.getCode(), 0, FancySearchTableModel.fieldColumn);
 		assertEquals(new FieldTypeDropdown(), model.getCellType(0, FancySearchTableModel.valueColumn));
 		app.deleteAllFiles();

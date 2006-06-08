@@ -32,6 +32,10 @@ import java.util.Iterator;
 import java.util.Set;
 import java.util.Vector;
 
+import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.DefaultTreeModel;
+import javax.swing.tree.TreeModel;
+
 import org.martus.client.bulletinstore.ClientBulletinStore;
 import org.martus.client.swingui.dialogs.UiDialogLauncher;
 import org.martus.clientside.UiLocalization;
@@ -47,6 +51,8 @@ import org.martus.common.fieldspec.FieldTypeAnyField;
 import org.martus.common.fieldspec.FieldTypeDate;
 import org.martus.common.fieldspec.FieldTypeNormal;
 import org.martus.common.fieldspec.GridFieldSpec;
+import org.martus.common.fieldspec.PopUpTreeFieldSpec;
+import org.martus.common.fieldspec.SearchableFieldChoiceItem;
 import org.martus.common.fieldspec.StandardFieldSpecs;
 import org.martus.common.fieldspec.GridFieldSpec.UnsupportedFieldTypeException;
 import org.martus.util.TokenReplacement;
@@ -75,7 +81,7 @@ public class FancySearchHelper
 		return model;
 	}
 	
-	public DropDownFieldSpec createFieldColumnSpec(ClientBulletinStore storeToUse)
+	public PopUpTreeFieldSpec createFieldColumnSpec(ClientBulletinStore storeToUse)
 	{
 		Set allAvailableFields = new HashSet();
 		allAvailableFields.add(createLastSavedDateChoice());
@@ -87,9 +93,14 @@ public class FancySearchHelper
 		sortedFields.insertElementAt(createAnyFieldChoice(), 0);
 		ChoiceItem[] fieldChoices = (ChoiceItem[])sortedFields.toArray(new ChoiceItem[0]);
 		
-		DropDownFieldSpec fieldColumnSpec = new DropDownFieldSpec();
+		DefaultMutableTreeNode root = new DefaultMutableTreeNode();
+		for(int i = 0; i < fieldChoices.length; ++i)
+		{
+			root.add(new DefaultMutableTreeNode(fieldChoices[i]));
+		}
+		TreeModel fieldChoiceModel = new DefaultTreeModel(root);
+		PopUpTreeFieldSpec fieldColumnSpec = new PopUpTreeFieldSpec(fieldChoiceModel);
 		fieldColumnSpec.setLabel(getLocalization().getFieldLabel("SearchGridHeaderField"));
-		fieldColumnSpec.setChoices(fieldChoices);
 		return fieldColumnSpec;
 	}
 
@@ -297,7 +308,7 @@ public class FancySearchHelper
 		String value = gridData.getValueAt(row, 2);
 		value = value.trim();
 
-		DropDownFieldSpec fieldColumnSpec = (DropDownFieldSpec)gridData.getSpec().getFieldSpec(0);
+		PopUpTreeFieldSpec fieldColumnSpec = (PopUpTreeFieldSpec)gridData.getSpec().getFieldSpec(0);
 		FieldSpec specForThisValue = FancySearchTableModel.getFieldSpecForChosenField(fieldName, fieldColumnSpec);
 		
 		String localAnd = getLocalization().getKeyword(SearchParser.ENGLISH_AND_KEYWORD);
@@ -306,23 +317,9 @@ public class FancySearchHelper
 		return parser.parse(specForThisValue, op, value);
 	}
 	
-	public static int findSearchTag(DropDownFieldSpec specOfFieldColumn, String tagToFind)
+	public static SearchableFieldChoiceItem findSearchTag(PopUpTreeFieldSpec specOfFieldColumn, String tagToFind)
 	{
-		for(int i=0; i < specOfFieldColumn.getCount(); ++i)
-		{
-			try
-			{
-				SearchableFieldChoiceItem item = (SearchableFieldChoiceItem)specOfFieldColumn.getChoice(i);
-				if(item.getSearchTag().equals(tagToFind))
-					return i;
-			}
-			catch (RuntimeException e)
-			{
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
-		return -1;
+		return specOfFieldColumn.findSearchTag(tagToFind);
 	}
 
 	public static final int COLUMN_ROW_NUMBER = 0;

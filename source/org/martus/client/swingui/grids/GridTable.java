@@ -51,6 +51,7 @@ import org.martus.common.fieldspec.FieldTypeGrid;
 import org.martus.common.fieldspec.FieldTypeLanguage;
 import org.martus.common.fieldspec.FieldTypeMultiline;
 import org.martus.common.fieldspec.FieldTypeNormal;
+import org.martus.common.fieldspec.FieldTypePopUpTree;
 import org.martus.swing.UiTableWithCellEditingProtection;
 import org.martus.util.language.LanguageOptions;
 
@@ -157,6 +158,7 @@ public class GridTable extends UiTableWithCellEditingProtection
 		map.put(new FieldTypeMultiline(), new GridNormalCellEditor(localization));
 		map.put(new FieldTypeAnyField(), new GridNormalCellEditor(localization));
 		map.put(new FieldTypeGrid(), new GridNormalCellEditor(localization));
+		map.put(new FieldTypePopUpTree(), new GridPopUpTreeCellEditor(localization));
 		return map;
 	}
 	
@@ -173,6 +175,7 @@ public class GridTable extends UiTableWithCellEditingProtection
 		map.put(new FieldTypeMultiline(), new GridNormalCellEditor(localization));
 		map.put(new FieldTypeAnyField(), new GridNormalCellEditor(localization));
 		map.put(new FieldTypeGrid(), new GridNormalCellEditor(localization));
+		map.put(new FieldTypePopUpTree(), new GridPopUpTreeCellEditor(localization));
 		return map;
 	}
 

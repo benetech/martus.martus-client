@@ -27,15 +27,17 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.search;
 
 import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.JTable;
-import javax.swing.event.PopupMenuEvent;
-import javax.swing.event.PopupMenuListener;
+
 import org.martus.client.bulletinstore.ClientBulletinStore;
 import org.martus.client.swingui.dialogs.UiDialogLauncher;
 import org.martus.client.swingui.fields.UiGridEditor;
-import org.martus.client.swingui.grids.GridDropDownCellEditor;
+import org.martus.client.swingui.fields.UiPopUpTreeEditor;
+import org.martus.client.swingui.grids.GridPopUpTreeCellEditor;
 import org.martus.client.swingui.grids.GridTable;
-import org.martus.swing.UiComboBox;
 import org.martus.swing.Utilities;
 
 public class FancySearchGridEditor extends UiGridEditor
@@ -73,10 +75,10 @@ public class FancySearchGridEditor extends UiGridEditor
 		searchTable.setColumnWidth(searchForColumn, widthToHoldDates);
 	}
 
-	private GridDropDownCellEditor getFieldColumnEditor()
+	private GridPopUpTreeCellEditor getFieldColumnEditor()
 	{
 		int column = FancySearchTableModel.fieldColumn;
-		return (GridDropDownCellEditor)getTable().getCellEditor(0, column);
+		return (GridPopUpTreeCellEditor)getTable().getCellEditor(0, column);
 	}
 	
 	public SearchTreeNode getSearchTree()
@@ -86,24 +88,15 @@ public class FancySearchGridEditor extends UiGridEditor
 
 	private void addListenerSoFieldChangeCanTriggerRepaintOfValueColumn()
 	{
-		UiComboBox fieldChoiceCombo = (UiComboBox)getFieldColumnEditor().getComponent();
-		fieldChoiceCombo.addPopupMenuListener(new DropDownPopUpListener());
+		UiPopUpTreeEditor fieldChoiceEditor = getFieldColumnEditor().getPopUpTreeEditor();
+		fieldChoiceEditor.addActionListener(new PopUpActionHandler());
 	}
 
-	class DropDownPopUpListener implements PopupMenuListener
+	class PopUpActionHandler implements ActionListener
 	{
-		public void popupMenuCanceled(PopupMenuEvent event)
+		public void actionPerformed(ActionEvent e)
 		{
-		}
-	
-		public void popupMenuWillBecomeInvisible(PopupMenuEvent event)
-		{
-			//System.out.println("will become invisible: " + ((JComboBox)event.getSource()).getSelectedIndex());
 			stopCellEditing();
-		}
-	
-		public void popupMenuWillBecomeVisible(PopupMenuEvent event)
-		{
 		}
 	}
 
