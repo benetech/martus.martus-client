@@ -32,8 +32,6 @@ import java.util.Set;
 import java.util.Vector;
 
 import javax.swing.tree.DefaultMutableTreeNode;
-import javax.swing.tree.DefaultTreeModel;
-import javax.swing.tree.TreeModel;
 
 import org.martus.client.bulletinstore.ClientBulletinStore;
 import org.martus.client.swingui.MartusLocalization;
@@ -60,6 +58,7 @@ import org.martus.common.fieldspec.FieldTypePopUpTree;
 import org.martus.common.fieldspec.FieldTypeUnknown;
 import org.martus.common.fieldspec.GridFieldSpec;
 import org.martus.common.fieldspec.PopUpTreeFieldSpec;
+import org.martus.common.fieldspec.SearchFieldTreeModel;
 import org.martus.common.fieldspec.SearchableFieldChoiceItem;
 import org.martus.common.fieldspec.StandardFieldSpecs;
 import org.martus.common.fieldspec.GridFieldSpec.UnsupportedFieldTypeException;
@@ -302,12 +301,12 @@ public class TestFancySearchHelper extends TestCaseEnhanced
 		assertEquals("or", spec.getChoice(1).getCode());
 	}
 	
-	TreeModel createSearchFieldModel(ChoiceItem[] choices)
+	SearchFieldTreeModel createSearchFieldModel(ChoiceItem[] choices)
 	{
 		DefaultMutableTreeNode root = new DefaultMutableTreeNode();
 		for(int i = 0; i < choices.length; ++i)
 			root.add(new DefaultMutableTreeNode(choices[i]));
-		DefaultTreeModel model = new DefaultTreeModel(root);
+		SearchFieldTreeModel model = new SearchFieldTreeModel(root);
 		return model;
 	}
 	

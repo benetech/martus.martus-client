@@ -45,6 +45,7 @@ import javax.swing.tree.TreeSelectionModel;
 
 import org.martus.clientside.UiLocalization;
 import org.martus.common.fieldspec.PopUpTreeFieldSpec;
+import org.martus.common.fieldspec.SearchFieldTreeModel;
 import org.martus.common.fieldspec.SearchableFieldChoiceItem;
 import org.martus.swing.UiButton;
 import org.martus.swing.UiLabel;
@@ -97,6 +98,7 @@ public class UiPopUpTreeEditor extends UiField implements ActionListener
 	public void actionPerformed(ActionEvent event)
 	{
 		FieldTreeDialog dlg = FieldTreeDialog.create(panel, spec, localization);
+		dlg.selectCode(getText());
 		dlg.setVisible(true);
 		DefaultMutableTreeNode selectedNode = dlg.getSelectedNode();
 		if(selectedNode == null)
@@ -130,11 +132,12 @@ public class UiPopUpTreeEditor extends UiField implements ActionListener
 			return new FieldTreeDialog((JDialog)topLevel, spec, localization);
 		}
 		
-		public FieldTreeDialog(JDialog owner, PopUpTreeFieldSpec spec, UiLocalization localization)
+		public FieldTreeDialog(JDialog owner, PopUpTreeFieldSpec specToUse, UiLocalization localization)
 		{
 			super(owner);
-			TreeModel model = spec.getModel();
-			tree = new JTree(model);
+			spec = specToUse;
+			
+			tree = new SearchFieldTree(spec.getModel());
 			tree.setRootVisible(false);
 			tree.getSelectionModel().setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);
 			tree.addMouseListener(new MouseHandler());
@@ -156,6 +159,11 @@ public class UiPopUpTreeEditor extends UiField implements ActionListener
 			contentPane.add(buttonBox, BorderLayout.AFTER_LAST_LINE);
 			pack();
 			
+		}
+		
+		public void selectCode(String code)
+		{
+			tree.selectNodeContainingItem(spec.findCode(code));
 		}
 		
 		public DefaultMutableTreeNode getSelectedNode()
@@ -216,8 +224,30 @@ public class UiPopUpTreeEditor extends UiField implements ActionListener
 		UiButton okButton;
 		UiButton cancelButton;
 		
-		JTree tree;
+		PopUpTreeFieldSpec spec;
+		SearchFieldTree tree;
 		DefaultMutableTreeNode selectedNode;
+	}
+	
+	static class SearchFieldTree extends JTree
+	{
+		public SearchFieldTree(TreeModel model)
+		{
+			super(model);
+		}
+		
+		public void selectNodeContainingItem(SearchableFieldChoiceItem selectedItem)
+		{
+			SearchFieldTreeModel model = (SearchFieldTreeModel)getModel();
+			TreePath rootPath = new TreePath(model.getRoot());
+			TreePath foundPath = model.findObject(rootPath, selectedItem.getCode());
+			if(foundPath == null)
+				throw new RuntimeException("Unable to find in tree: " + selectedItem);
+			
+			clearSelection();
+			addSelectionPath(foundPath);
+			scrollPathToVisible(foundPath);
+		}
 	}
 
 	UiLocalization localization;

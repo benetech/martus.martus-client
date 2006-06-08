@@ -33,8 +33,6 @@ import java.util.Set;
 import java.util.Vector;
 
 import javax.swing.tree.DefaultMutableTreeNode;
-import javax.swing.tree.DefaultTreeModel;
-import javax.swing.tree.TreeModel;
 
 import org.martus.client.bulletinstore.ClientBulletinStore;
 import org.martus.client.swingui.dialogs.UiDialogLauncher;
@@ -52,6 +50,7 @@ import org.martus.common.fieldspec.FieldTypeDate;
 import org.martus.common.fieldspec.FieldTypeNormal;
 import org.martus.common.fieldspec.GridFieldSpec;
 import org.martus.common.fieldspec.PopUpTreeFieldSpec;
+import org.martus.common.fieldspec.SearchFieldTreeModel;
 import org.martus.common.fieldspec.SearchableFieldChoiceItem;
 import org.martus.common.fieldspec.StandardFieldSpecs;
 import org.martus.common.fieldspec.GridFieldSpec.UnsupportedFieldTypeException;
@@ -98,7 +97,7 @@ public class FancySearchHelper
 		{
 			root.add(new DefaultMutableTreeNode(fieldChoices[i]));
 		}
-		TreeModel fieldChoiceModel = new DefaultTreeModel(root);
+		SearchFieldTreeModel fieldChoiceModel = new SearchFieldTreeModel(root);
 		PopUpTreeFieldSpec fieldColumnSpec = new PopUpTreeFieldSpec(fieldChoiceModel);
 		fieldColumnSpec.setLabel(getLocalization().getFieldLabel("SearchGridHeaderField"));
 		return fieldColumnSpec;
