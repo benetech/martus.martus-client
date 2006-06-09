@@ -27,9 +27,6 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.search;
 
 //FIXME: Stuff to fix:
-//3. look into tab focus
-//4. space bar should pop up the dialog
-//5. set tree dialog position appropriately
 //7. set good leaf icon
 
 import java.util.HashSet;

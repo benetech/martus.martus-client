@@ -30,6 +30,8 @@ import java.awt.Container;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.Vector;
@@ -76,6 +78,11 @@ public class UiPopUpTreeEditor extends UiField implements ActionListener
 	{
 		return panel;
 	}
+	
+	public void simulateButtonPress()
+	{
+		doPopUp();
+	}
 
 	public JComponent[] getFocusableComponents()
 	{
@@ -99,6 +106,11 @@ public class UiPopUpTreeEditor extends UiField implements ActionListener
 	}
 	
 	public void actionPerformed(ActionEvent event)
+	{
+		doPopUp();
+	}
+
+	private void doPopUp()
 	{
 		FieldTreeDialog dlg = FieldTreeDialog.create(panel, spec, localization);
 		dlg.selectCode(getText());
@@ -147,7 +159,7 @@ public class UiPopUpTreeEditor extends UiField implements ActionListener
 			tree.setRootVisible(false);
 			tree.getSelectionModel().setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);
 			tree.addMouseListener(new MouseHandler());
-			tree.addSelectionRow(0);
+			tree.addKeyListener(new KeyHandler());
 			
 			okButton = new UiButton(localization.getButtonLabel("ok"));
 			okButton.addActionListener(new OkButtonHandler());
@@ -165,7 +177,8 @@ public class UiPopUpTreeEditor extends UiField implements ActionListener
 			contentPane.add(buttonBox, BorderLayout.AFTER_LAST_LINE);
 			pack();
 			Utilities.fitInScreen(this);
-			
+
+			getRootPane().setDefaultButton(okButton);
 		}
 		
 		public void selectCode(String code)
@@ -235,6 +248,15 @@ public class UiPopUpTreeEditor extends UiField implements ActionListener
 			}
 		}
 		
+		class KeyHandler extends KeyAdapter
+		{
+			public void keyTyped(KeyEvent e)
+			{
+				if(e.getKeyChar() == KeyEvent.VK_ESCAPE)
+					dispose();
+			}
+		}
+
 		UiButton okButton;
 		UiButton cancelButton;
 		

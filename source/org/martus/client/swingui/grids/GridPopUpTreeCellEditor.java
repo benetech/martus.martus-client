@@ -69,6 +69,13 @@ public class GridPopUpTreeCellEditor extends GridCellEditorAndRenderer
 		setFieldSpec(tableToUse, row, column);
 		return super.getTableCellRendererComponent(tableToUse, codeString, isSelected, hasFocus, row, column);
 	}
+	
+	public void spaceWasPressed()
+	{
+		((UiPopUpTreeEditor)getUiField()).simulateButtonPress();
+	}
+	
 
 	PopUpTreeFieldSpec spec;
+
 }
