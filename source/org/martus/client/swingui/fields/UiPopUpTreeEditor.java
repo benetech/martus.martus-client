@@ -178,7 +178,7 @@ public class UiPopUpTreeEditor extends UiField implements ActionListener
 			SearchFieldTreeNode node = (SearchFieldTreeNode)selectedPath.getLastPathComponent();
 			if(node == null)
 				return;
-			if(node.isSelectable())
+			if(!node.isSelectable())
 				return;
 			selectedNode = node;
 			dispose();
