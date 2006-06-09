@@ -26,10 +26,10 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.search;
 
 import java.util.Collections;
-import java.util.Comparator;
 
 import javax.swing.tree.DefaultMutableTreeNode;
 
+import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.fieldspec.SearchableFieldChoiceItem;
 
 public class SearchFieldTreeNode extends DefaultMutableTreeNode
@@ -49,12 +49,25 @@ public class SearchFieldTreeNode extends DefaultMutableTreeNode
 		return (getChildCount() == 0);
 	}
 	
-	public void sortChildren()
+	public void sortChildren(String languageCode)
 	{
 		if(children == null)
 			return;
 		
-		Collections.sort(children, new SearchFieldTreeNodeComparator());
+		Collections.sort(children, new SearchFieldTreeNodeComparator(languageCode));
+	}
+	
+	public String toString()
+	{
+		if(getParent() == null)
+			return "";
+		
+		if(getParent().getParent() == null)
+			return getUserObject().toString();
+		
+		SearchableFieldChoiceItem choice = (SearchableFieldChoiceItem)getUserObject();
+		return FieldSpec.getTypeString(choice.getType()) + ": " + choice.getSpec().getTag();
+			
 	}
 	
 	public String getSortValue()
@@ -66,14 +79,19 @@ public class SearchFieldTreeNode extends DefaultMutableTreeNode
 		return choice.getSpec().getLabel();
 	}
 	
-	static class SearchFieldTreeNodeComparator implements Comparator
+	static class SearchFieldTreeNodeComparator extends SaneCollator
 	{
+		public SearchFieldTreeNodeComparator(String languageCode)
+		{
+			super(languageCode);
+		}
+		
 		public int compare(Object o1, Object o2)
 		{
 			SearchFieldTreeNode node1 = (SearchFieldTreeNode)o1;
 			SearchFieldTreeNode node2 = (SearchFieldTreeNode)o2;
 			
-			return node1.getSortValue().compareTo(node2.getSortValue());
+			return super.compare(node1.getSortValue(), node2.getSortValue());
 		}
 		
 	}

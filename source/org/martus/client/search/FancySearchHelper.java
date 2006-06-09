@@ -27,7 +27,6 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.search;
 
 //FIXME: Stuff to fix:
-//2. show tag and type at second level
 //3. look into tab focus
 //4. space bar should pop up the dialog
 //5. set tree dialog position appropriately
@@ -91,7 +90,7 @@ public class FancySearchHelper
 		allAvailableFields.add(createLastSavedDateChoice());
 		allAvailableFields.addAll(convertToChoiceItems(storeToUse.getAllKnownFieldSpecs()));
 		
-		SearchFieldTreeModel fieldChoiceModel = new SearchFieldTreeModel(allAvailableFields.asTree());
+		SearchFieldTreeModel fieldChoiceModel = new SearchFieldTreeModel(allAvailableFields.asTree(getLocalization()));
 		PopUpTreeFieldSpec fieldColumnSpec = new PopUpTreeFieldSpec(fieldChoiceModel);
 		fieldColumnSpec.setLabel(getLocalization().getFieldLabel("SearchGridHeaderField"));
 		return fieldColumnSpec;

@@ -58,6 +58,7 @@ import java.util.Set;
 
 import javax.swing.tree.TreeNode;
 
+import org.martus.clientside.UiLocalization;
 import org.martus.common.fieldspec.ChoiceItem;
 import org.martus.common.fieldspec.SearchableFieldChoiceItem;
 
@@ -83,7 +84,7 @@ class FieldChoicesByLabel extends HashMap
 		}
 	}
 	
-	public TreeNode asTree()
+	public TreeNode asTree(UiLocalization localization)
 	{
 		SearchFieldTreeNode root = new SearchFieldTreeNode("");
 		Iterator iter = keySet().iterator();
@@ -102,7 +103,7 @@ class FieldChoicesByLabel extends HashMap
 				root.add(parent);
 			}
 		}
-		root.sortChildren();
+		root.sortChildren(localization.getCurrentLanguageCode());
 		return root;
 	}
 	
