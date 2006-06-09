@@ -27,6 +27,7 @@ package org.martus.client.swingui.fields;
 
 import java.awt.BorderLayout;
 import java.awt.Container;
+import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
@@ -51,6 +52,7 @@ import org.martus.common.fieldspec.SearchableFieldChoiceItem;
 import org.martus.swing.UiButton;
 import org.martus.swing.UiLabel;
 import org.martus.swing.UiScrollPane;
+import org.martus.swing.Utilities;
 
 
 public class UiPopUpTreeEditor extends UiField implements ActionListener
@@ -130,13 +132,16 @@ public class UiPopUpTreeEditor extends UiField implements ActionListener
 		static public FieldTreeDialog create(JComponent parent, PopUpTreeFieldSpec spec, UiLocalization localization)
 		{
 			Container topLevel = parent.getTopLevelAncestor();
-			return new FieldTreeDialog((JDialog)topLevel, spec, localization);
+			return new FieldTreeDialog((JDialog)topLevel, parent.getLocationOnScreen(), spec, localization);
 		}
 		
-		public FieldTreeDialog(JDialog owner, PopUpTreeFieldSpec specToUse, UiLocalization localization)
+		public FieldTreeDialog(JDialog owner, Point location, PopUpTreeFieldSpec specToUse, UiLocalization localization)
 		{
 			super(owner);
 			spec = specToUse;
+			
+			setTitle(localization.getButtonLabel("PopUpTreeChoose"));
+			setLocation(location);
 			
 			tree = new SearchFieldTree(spec.getModel());
 			tree.setRootVisible(false);
@@ -159,6 +164,7 @@ public class UiPopUpTreeEditor extends UiField implements ActionListener
 			contentPane.add(new UiScrollPane(tree), BorderLayout.CENTER);
 			contentPane.add(buttonBox, BorderLayout.AFTER_LAST_LINE);
 			pack();
+			Utilities.fitInScreen(this);
 			
 		}
 		
