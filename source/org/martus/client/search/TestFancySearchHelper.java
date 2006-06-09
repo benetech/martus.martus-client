@@ -98,9 +98,10 @@ public class TestFancySearchHelper extends TestCaseEnhanced
 		localization.setCurrentLanguageCode(languageCode);
 		
 		PopUpTreeFieldSpec spec = helper.createFieldColumnSpec(getStore());
-//		SearchableFieldChoiceItem allFieldsItem = (SearchableFieldChoiceItem)spec.getChoice(0);
-//		assertEquals("ALL FIELDS not first?", "", allFieldsItem.getSearchTag());
-		System.out.println("WARNING: Skipping a test in TestFancySearchHelper.testCreateFieldColumnSpec!");
+		SearchFieldTreeNode root = (SearchFieldTreeNode)spec.getModel().getRoot();
+		SearchFieldTreeNode firstNode = (SearchFieldTreeNode)root.getChildAt(0);
+		SearchableFieldChoiceItem allFieldsItem = firstNode.getChoiceItem();
+		assertEquals("ALL FIELDS not first?", "", allFieldsItem.getSearchTag());
 		
 		assertNotNull("no last-saved date?", FancySearchHelper.findSearchTag(spec, Bulletin.PSEUDOFIELD_LAST_SAVED_DATE));
 		assertNotNull("no author?", FancySearchHelper.findSearchTag(spec, BulletinConstants.TAGAUTHOR));

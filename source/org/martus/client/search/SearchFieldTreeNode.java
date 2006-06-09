@@ -49,6 +49,11 @@ public class SearchFieldTreeNode extends DefaultMutableTreeNode
 		return (getChildCount() == 0);
 	}
 	
+	public SearchableFieldChoiceItem getChoiceItem()
+	{
+		return (SearchableFieldChoiceItem)getUserObject();
+	}
+	
 	public void sortChildren(String languageCode)
 	{
 		if(children == null)
@@ -65,7 +70,7 @@ public class SearchFieldTreeNode extends DefaultMutableTreeNode
 		if(getParent().getParent() == null)
 			return getUserObject().toString();
 		
-		SearchableFieldChoiceItem choice = (SearchableFieldChoiceItem)getUserObject();
+		SearchableFieldChoiceItem choice = getChoiceItem();
 		return FieldSpec.getTypeString(choice.getType()) + ": " + choice.getSpec().getTag();
 			
 	}
@@ -75,7 +80,7 @@ public class SearchFieldTreeNode extends DefaultMutableTreeNode
 		if(getChildCount() > 0)
 			return (String)getUserObject();
 
-		SearchableFieldChoiceItem choice = (SearchableFieldChoiceItem)getUserObject();
+		SearchableFieldChoiceItem choice = getChoiceItem();
 		return choice.getSpec().getLabel();
 	}
 	
