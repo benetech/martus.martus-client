@@ -216,7 +216,14 @@ public class UiPopUpTreeEditor extends UiField implements ActionListener
 			
 			public void mouseReleased(MouseEvent e)
 			{
-				if(e.getClickCount() == 2)
+				if(e.getClickCount() != 2)
+					return;
+				
+				DefaultMutableTreeNode node = getSelectedNode();
+				if(node == null)
+					return;
+				
+				if(node.getChildCount() == 0)
 					saveAndExit();
 			}
 		}

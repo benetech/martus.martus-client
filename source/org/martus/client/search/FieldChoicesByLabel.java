@@ -1,0 +1,119 @@
+/*
+
+The Martus(tm) free, social justice documentation and
+monitoring software. Copyright (C) 2006, Beneficent
+Technology, Inc. (Benetech).
+
+Martus is free software; you can redistribute it and/or
+modify it under the terms of the GNU General Public License
+as published by the Free Software Foundation; either
+version 2 of the License, or (at your option) any later
+version with the additions and exceptions described in the
+accompanying Martus license file entitled "license.txt".
+
+It is distributed WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, including warranties of fitness of purpose or
+merchantability.  See the accompanying Martus License and
+GPL license for more details on the required license terms
+for this software.
+
+You should have received a copy of the GNU General Public
+License along with this program; if not, write to the Free
+Software Foundation, Inc., 59 Temple Place - Suite 330,
+Boston, MA 02111-1307, USA.
+
+*/
+/*
+
+The Martus(tm) free, social justice documentation and
+monitoring software. Copyright (C) 2006, Beneficent
+Technology, Inc. (Benetech).
+
+Martus is free software; you can redistribute it and/or
+modify it under the terms of the GNU General Public License
+as published by the Free Software Foundation; either
+version 2 of the License, or (at your option) any later
+version with the additions and exceptions described in the
+accompanying Martus license file entitled "license.txt".
+
+It is distributed WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, including warranties of fitness of purpose or
+merchantability.  See the accompanying Martus License and
+GPL license for more details on the required license terms
+for this software.
+
+You should have received a copy of the GNU General Public
+License along with this program; if not, write to the Free
+Software Foundation, Inc., 59 Temple Place - Suite 330,
+Boston, MA 02111-1307, USA.
+
+*/
+
+package org.martus.client.search;
+
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Set;
+
+import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.TreeNode;
+
+import org.martus.common.fieldspec.ChoiceItem;
+
+class FieldChoicesByLabel extends HashMap
+{
+	public void add(ChoiceItem itemToAdd)
+	{
+		String label = itemToAdd.getSpec().getLabel();
+		Set choicesForThatLabel = (Set)get(label);
+		if(choicesForThatLabel == null)
+			choicesForThatLabel = new HashSet();
+		choicesForThatLabel.add(itemToAdd);
+		put(label, choicesForThatLabel);
+	}
+	
+	public void addAll(Set itemsToAdd)
+	{
+		Iterator iter = itemsToAdd.iterator();
+		while(iter.hasNext())
+		{
+			ChoiceItem choice = (ChoiceItem)iter.next();
+			add(choice);
+		}
+	}
+	
+	public TreeNode asTree()
+	{
+		DefaultMutableTreeNode root = new DefaultMutableTreeNode();
+		Iterator iter = keySet().iterator();
+		while(iter.hasNext())
+		{
+			String label = (String)iter.next();
+			Set choices = (Set)get(label);
+			if(choices.size() == 1)
+			{
+				root.add(new DefaultMutableTreeNode(choices.toArray()[0]));
+			}
+			else
+			{
+				DefaultMutableTreeNode parent = new DefaultMutableTreeNode(label);
+				addChildNodes(parent, choices);
+				root.add(parent);
+			}
+		}
+		
+		return root;
+	}
+	
+	void addChildNodes(DefaultMutableTreeNode node, Set choicesToAdd)
+	{
+		Iterator iter = choicesToAdd.iterator();
+		while(iter.hasNext())
+		{
+			ChoiceItem choice = (ChoiceItem)iter.next();
+			node.add(new DefaultMutableTreeNode(choice));
+		}
+		
+	}
+}

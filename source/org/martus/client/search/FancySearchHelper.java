@@ -26,13 +26,17 @@ Boston, MA 02111-1307, USA.
 
 package org.martus.client.search;
 
-import java.util.Collections;
+//FIXME: Stuff to fix:
+//2. create true tree nesting (with proper sorting)
+//3. look into tab focus
+//4. space bar should pop up the dialog
+//5. set tree dialog position appropriately
+//7. set good leaf icon
+
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
-import java.util.Vector;
 
-import javax.swing.tree.DefaultMutableTreeNode;
 
 import org.martus.client.bulletinstore.ClientBulletinStore;
 import org.martus.client.swingui.dialogs.UiDialogLauncher;
@@ -82,22 +86,18 @@ public class FancySearchHelper
 	
 	public PopUpTreeFieldSpec createFieldColumnSpec(ClientBulletinStore storeToUse)
 	{
-		Set allAvailableFields = new HashSet();
+		FieldChoicesByLabel allAvailableFields = new FieldChoicesByLabel();
 		allAvailableFields.add(createLastSavedDateChoice());
 		allAvailableFields.addAll(convertToChoiceItems(storeToUse.getAllKnownFieldSpecs()));
 
-		Vector sortedFields = new Vector(allAvailableFields);
-		Collections.sort(sortedFields, new SaneCollator(getLocalization().getCurrentLanguageCode()));
+//		Vector sortedFields = allAvailableFields.asVector();
+//		Collections.sort(sortedFields, new SaneCollator(getLocalization().getCurrentLanguageCode()));
 
-		sortedFields.insertElementAt(createAnyFieldChoice(), 0);
-		ChoiceItem[] fieldChoices = (ChoiceItem[])sortedFields.toArray(new ChoiceItem[0]);
+//		sortedFields.insertElementAt(createAnyFieldChoice(), 0);
+//		ChoiceItem[] fieldChoices = (ChoiceItem[])sortedFields.toArray(new ChoiceItem[0]);
+		allAvailableFields.add(createAnyFieldChoice());
 		
-		DefaultMutableTreeNode root = new DefaultMutableTreeNode();
-		for(int i = 0; i < fieldChoices.length; ++i)
-		{
-			root.add(new DefaultMutableTreeNode(fieldChoices[i]));
-		}
-		SearchFieldTreeModel fieldChoiceModel = new SearchFieldTreeModel(root);
+		SearchFieldTreeModel fieldChoiceModel = new SearchFieldTreeModel(allAvailableFields.asTree());
 		PopUpTreeFieldSpec fieldColumnSpec = new PopUpTreeFieldSpec(fieldChoiceModel);
 		fieldColumnSpec.setLabel(getLocalization().getFieldLabel("SearchGridHeaderField"));
 		return fieldColumnSpec;
