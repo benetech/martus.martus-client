@@ -43,6 +43,7 @@ import javax.swing.tree.TreeModel;
 import javax.swing.tree.TreePath;
 import javax.swing.tree.TreeSelectionModel;
 
+import org.martus.client.search.SearchFieldTreeNode;
 import org.martus.clientside.UiLocalization;
 import org.martus.common.fieldspec.PopUpTreeFieldSpec;
 import org.martus.common.fieldspec.SearchFieldTreeModel;
@@ -171,10 +172,15 @@ public class UiPopUpTreeEditor extends UiField implements ActionListener
 			return selectedNode;
 		}
 		
-		void saveAndExit()
+		void saveAndExitIfValidSelection()
 		{
 			TreePath selectedPath = tree.getSelectionPath();
-			selectedNode = (DefaultMutableTreeNode)selectedPath.getLastPathComponent();
+			SearchFieldTreeNode node = (SearchFieldTreeNode)selectedPath.getLastPathComponent();
+			if(node == null)
+				return;
+			if(node.isSelectable())
+				return;
+			selectedNode = node;
 			dispose();
 		}
 		
@@ -182,7 +188,7 @@ public class UiPopUpTreeEditor extends UiField implements ActionListener
 		{
 			public void actionPerformed(ActionEvent e)
 			{
-				saveAndExit();
+				saveAndExitIfValidSelection();
 			}
 			
 		}
@@ -219,12 +225,7 @@ public class UiPopUpTreeEditor extends UiField implements ActionListener
 				if(e.getClickCount() != 2)
 					return;
 				
-				DefaultMutableTreeNode node = getSelectedNode();
-				if(node == null)
-					return;
-				
-				if(node.getChildCount() == 0)
-					saveAndExit();
+				saveAndExitIfValidSelection();
 			}
 		}
 		

@@ -41,5 +41,13 @@ public class SearchFieldTreeNode extends DefaultMutableTreeNode
 		super(choiceItem);
 	}
 	
+	public boolean isSelectable()
+	{
+		return (getChildCount() == 0);
+	}
 	
+	public void sortChildren()
+	{
+		
+	}
 }

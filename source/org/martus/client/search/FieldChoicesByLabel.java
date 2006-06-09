@@ -56,10 +56,10 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
-import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.TreeNode;
 
 import org.martus.common.fieldspec.ChoiceItem;
+import org.martus.common.fieldspec.SearchableFieldChoiceItem;
 
 class FieldChoicesByLabel extends HashMap
 {
@@ -85,7 +85,7 @@ class FieldChoicesByLabel extends HashMap
 	
 	public TreeNode asTree()
 	{
-		DefaultMutableTreeNode root = new DefaultMutableTreeNode();
+		SearchFieldTreeNode root = new SearchFieldTreeNode("");
 		Iterator iter = keySet().iterator();
 		while(iter.hasNext())
 		{
@@ -93,26 +93,26 @@ class FieldChoicesByLabel extends HashMap
 			Set choices = (Set)get(label);
 			if(choices.size() == 1)
 			{
-				root.add(new DefaultMutableTreeNode(choices.toArray()[0]));
+				root.add(new SearchFieldTreeNode((SearchableFieldChoiceItem)choices.toArray()[0]));
 			}
 			else
 			{
-				DefaultMutableTreeNode parent = new DefaultMutableTreeNode(label);
+				SearchFieldTreeNode parent = new SearchFieldTreeNode(label);
 				addChildNodes(parent, choices);
 				root.add(parent);
 			}
 		}
-		
+		root.sortChildren();
 		return root;
 	}
 	
-	void addChildNodes(DefaultMutableTreeNode node, Set choicesToAdd)
+	void addChildNodes(SearchFieldTreeNode node, Set choicesToAdd)
 	{
 		Iterator iter = choicesToAdd.iterator();
 		while(iter.hasNext())
 		{
-			ChoiceItem choice = (ChoiceItem)iter.next();
-			node.add(new DefaultMutableTreeNode(choice));
+			SearchableFieldChoiceItem choice = (SearchableFieldChoiceItem)iter.next();
+			node.add(new SearchFieldTreeNode(choice));
 		}
 		
 	}
