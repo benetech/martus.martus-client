@@ -26,9 +26,6 @@ Boston, MA 02111-1307, USA.
 
 package org.martus.client.search;
 
-//FIXME: Stuff to fix:
-//7. set good leaf icon
-
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
