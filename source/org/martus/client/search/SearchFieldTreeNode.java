@@ -25,6 +25,9 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.search;
 
+import java.util.Collections;
+import java.util.Comparator;
+
 import javax.swing.tree.DefaultMutableTreeNode;
 
 import org.martus.common.fieldspec.SearchableFieldChoiceItem;
@@ -48,6 +51,30 @@ public class SearchFieldTreeNode extends DefaultMutableTreeNode
 	
 	public void sortChildren()
 	{
+		if(children == null)
+			return;
+		
+		Collections.sort(children, new SearchFieldTreeNodeComparator());
+	}
+	
+	public String getSortValue()
+	{
+		if(getChildCount() > 0)
+			return (String)getUserObject();
+
+		SearchableFieldChoiceItem choice = (SearchableFieldChoiceItem)getUserObject();
+		return choice.getSpec().getLabel();
+	}
+	
+	static class SearchFieldTreeNodeComparator implements Comparator
+	{
+		public int compare(Object o1, Object o2)
+		{
+			SearchFieldTreeNode node1 = (SearchFieldTreeNode)o1;
+			SearchFieldTreeNode node2 = (SearchFieldTreeNode)o2;
+			
+			return node1.getSortValue().compareTo(node2.getSortValue());
+		}
 		
 	}
 }
