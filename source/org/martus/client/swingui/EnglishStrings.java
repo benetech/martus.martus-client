@@ -883,7 +883,8 @@ public class EnglishStrings
 	"You need to put spaces before and after any #Or# / #And# keywords you use in your search.\n", 
 "field:SearchFound=#NumberBulletinsFound# bulletins matched the search, and have been added to the Search Results folder.",
 "field:ReportFound=#NumberBulletinsFound# bulletins matched the search.",
-
+"field:CustomXMLTopSection=Top Section of Bulletin",
+"field:CustomXMLBottomSection=Bottom/Private Section of Bulletin",
 "field:WasSentYes=Yes",
 "field:WasSentNo=No",
 

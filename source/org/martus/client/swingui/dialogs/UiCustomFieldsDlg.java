@@ -116,9 +116,13 @@ public class UiCustomFieldsDlg extends JDialog
 		customFieldsPanel.setBorder(new EmptyBorder(10,10,10,10));
 		customFieldsPanel.setLayout(new BoxLayout(customFieldsPanel, BoxLayout.Y_AXIS));
 		customFieldsPanel.add(label);
-		customFieldsPanel.add(new UiLabel(" "));
+		Box topBox = Box.createHorizontalBox();
+		Utilities.addComponentsRespectingOrientation(topBox, new Component[] {new UiLabel(localization.getFieldLabel("CustomXMLTopSection")), Box.createHorizontalGlue()});
+		customFieldsPanel.add(topBox);
 		customFieldsPanel.add(topSectionTextPane);
-		customFieldsPanel.add(new UiLabel(" "));
+		Box bottomBox = Box.createHorizontalBox();
+		Utilities.addComponentsRespectingOrientation(bottomBox, new Component[] {new UiLabel(localization.getFieldLabel("CustomXMLBottomSection")), Box.createHorizontalGlue()});
+		customFieldsPanel.add(bottomBox);
 		customFieldsPanel.add(bottomSectionTextPane);
 		customFieldsPanel.add(new UiLabel(" "));
 		customFieldsPanel.add(buttons);
