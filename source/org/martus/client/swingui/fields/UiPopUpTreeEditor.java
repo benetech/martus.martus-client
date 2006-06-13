@@ -38,12 +38,15 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.Vector;
 
+import javax.swing.AbstractAction;
 import javax.swing.Box;
 import javax.swing.Icon;
 import javax.swing.JComponent;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.JTree;
+import javax.swing.event.TreeSelectionEvent;
+import javax.swing.event.TreeSelectionListener;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeCellRenderer;
 import javax.swing.tree.TreeModel;
@@ -143,7 +146,7 @@ public class UiPopUpTreeEditor extends UiField implements ActionListener
 		listeners.add(listenerToAdd);
 	}
 	
-	static class FieldTreeDialog extends JDialog
+	static class FieldTreeDialog extends JDialog implements TreeSelectionListener
 	{
 		static public FieldTreeDialog create(JComponent parent, PopUpTreeFieldSpec spec, UiLocalization localization)
 		{
@@ -159,16 +162,18 @@ public class UiPopUpTreeEditor extends UiField implements ActionListener
 			setTitle(localization.getButtonLabel("PopUpTreeChoose"));
 			setLocation(location);
 			
+			okAction = new OkAction(localization.getButtonLabel("ok"));
+
 			tree = new SearchFieldTree(spec.getModel());
 			tree.setRootVisible(false);
 			tree.getSelectionModel().setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);
 			tree.addMouseListener(new MouseHandler());
 			tree.addKeyListener(new KeyHandler());
+			tree.addTreeSelectionListener(this);
 			tree.setShowsRootHandles(true);
 			tree.setCellRenderer(new BlankLeafRenderer());
 			
-			okButton = new UiButton(localization.getButtonLabel("ok"));
-			okButton.addActionListener(new OkButtonHandler());
+			okButton = new UiButton(okAction);
 			cancelButton = new UiButton(localization.getButtonLabel("cancel"));
 			cancelButton.addActionListener(new CancelButtonHandler());
 			Box buttonBox = Box.createHorizontalBox();
@@ -199,18 +204,42 @@ public class UiPopUpTreeEditor extends UiField implements ActionListener
 		
 		void saveAndExitIfValidSelection()
 		{
-			TreePath selectedPath = tree.getSelectionPath();
-			SearchFieldTreeNode node = (SearchFieldTreeNode)selectedPath.getLastPathComponent();
-			if(node == null)
+			if(!isSelectionValid())
 				return;
-			if(!node.isSelectable())
-				return;
-			selectedNode = node;
+			selectedNode = getSelectionIfAny();
 			dispose();
 		}
 		
-		class OkButtonHandler implements ActionListener
+		SearchFieldTreeNode getSelectionIfAny()
 		{
+			TreePath selectedPath = tree.getSelectionPath();
+			if(selectedPath == null)
+				return null;
+			SearchFieldTreeNode node = (SearchFieldTreeNode)selectedPath.getLastPathComponent();
+			if(node == null)
+				return null;
+			if(!node.isSelectable())
+				return null;
+			return node;
+		}
+		
+		boolean isSelectionValid()
+		{
+			return (getSelectionIfAny() != null);
+		}
+		
+		public void valueChanged(TreeSelectionEvent e)
+		{
+			okAction.setEnabled(isSelectionValid());
+		}
+		
+		class OkAction extends AbstractAction
+		{
+			public OkAction(String label)
+			{
+				super(label);
+			}
+
 			public void actionPerformed(ActionEvent e)
 			{
 				saveAndExitIfValidSelection();
@@ -263,6 +292,7 @@ public class UiPopUpTreeEditor extends UiField implements ActionListener
 			}
 		}
 
+		OkAction okAction;
 		UiButton okButton;
 		UiButton cancelButton;
 		
