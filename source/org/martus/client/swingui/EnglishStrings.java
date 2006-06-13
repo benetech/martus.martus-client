@@ -288,7 +288,7 @@ public class EnglishStrings
 "button:help=Help",
 "button:create=Create",
 "button:search=Search",
-"button:print=Print/Report",
+"button:print=Print",
 "button:connectserver=Connect",
 "button:send=Save Sealed",
 "button:savedraft=Save Draft",
