@@ -26,7 +26,9 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.swingui.fields;
 
 import java.awt.BorderLayout;
+import java.awt.Component;
 import java.awt.Container;
+import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -37,11 +39,13 @@ import java.awt.event.MouseListener;
 import java.util.Vector;
 
 import javax.swing.Box;
+import javax.swing.Icon;
 import javax.swing.JComponent;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.JTree;
 import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.DefaultTreeCellRenderer;
 import javax.swing.tree.TreeModel;
 import javax.swing.tree.TreePath;
 import javax.swing.tree.TreeSelectionModel;
@@ -160,6 +164,8 @@ public class UiPopUpTreeEditor extends UiField implements ActionListener
 			tree.getSelectionModel().setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);
 			tree.addMouseListener(new MouseHandler());
 			tree.addKeyListener(new KeyHandler());
+			tree.setShowsRootHandles(true);
+			tree.setCellRenderer(new BlankLeafRenderer());
 			
 			okButton = new UiButton(localization.getButtonLabel("ok"));
 			okButton.addActionListener(new OkButtonHandler());
@@ -263,6 +269,38 @@ public class UiPopUpTreeEditor extends UiField implements ActionListener
 		PopUpTreeFieldSpec spec;
 		SearchFieldTree tree;
 		DefaultMutableTreeNode selectedNode;
+	}
+	
+	static class BlankLeafRenderer extends DefaultTreeCellRenderer
+	{
+		public BlankLeafRenderer()
+		{
+			
+		}
+
+		public Icon getLeafIcon()
+		{
+			return new BlankIcon();
+		}
+		
+		static class BlankIcon implements Icon
+		{
+			public int getIconHeight()
+			{
+				return 0;
+			}
+
+			public int getIconWidth()
+			{
+				return 0;
+			}
+
+			public void paintIcon(Component c, Graphics g, int x, int y)
+			{
+			}
+			
+		}
+		
 	}
 	
 	static class SearchFieldTree extends JTree
