@@ -60,6 +60,7 @@ import org.martus.common.fieldspec.TestCustomFieldSpecValidator;
 import org.martus.common.packet.BulletinHistory;
 import org.martus.common.packet.FieldDataPacket;
 import org.martus.common.utilities.MartusFlexidate;
+import org.martus.util.DirectoryUtils;
 import org.martus.util.MultiCalendar;
 import org.martus.util.TestCaseEnhanced;
 import org.martus.util.UnicodeReader;
@@ -83,6 +84,13 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 			attachmentDirectory = createTempDirectory();
 			store = app.getStore();
 		}
+	}
+	
+	public void tearDown() throws Exception
+	{
+		DirectoryUtils.deleteAllFilesOnlyInDirectory(attachmentDirectory);
+		app.deleteAllFiles();
+		store.deleteAllData();
 	}
 
 	public void testBasics() throws Exception
