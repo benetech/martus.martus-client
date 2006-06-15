@@ -64,10 +64,7 @@ public class SearchFieldTreeNode extends DefaultMutableTreeNode
 	
 	public String toString()
 	{
-		if(getParent() == null)
-			return "";
-		
-		if(getParent().getParent() == null)
+		if(getParent() == null || getParent().getParent() == null)
 			return getUserObject().toString();
 		
 		SearchableFieldChoiceItem choice = getChoiceItem();

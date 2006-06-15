@@ -51,10 +51,11 @@ Boston, MA 02111-1307, USA.
 
 package org.martus.client.search;
 
-import java.util.HashMap;
-import java.util.HashSet;
+import java.util.Arrays;
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.Set;
+import java.util.Vector;
 
 import javax.swing.tree.TreeNode;
 
@@ -66,17 +67,12 @@ class FieldChoicesByLabel
 {
 	public FieldChoicesByLabel()
 	{
-		map = new HashMap();
+		allChoices = new Vector();
 	}
 	
 	public void add(ChoiceItem itemToAdd)
 	{
-		String label = itemToAdd.getSpec().getLabel();
-		Set choicesForThatLabel = (Set)map.get(label);
-		if(choicesForThatLabel == null)
-			choicesForThatLabel = new HashSet();
-		choicesForThatLabel.add(itemToAdd);
-		map.put(label, choicesForThatLabel);
+		allChoices.add(itemToAdd);
 	}
 	
 	public void addAll(Set itemsToAdd)
@@ -92,36 +88,61 @@ class FieldChoicesByLabel
 	public TreeNode asTree(UiLocalization localization)
 	{
 		SearchFieldTreeNode root = new SearchFieldTreeNode("");
-		Iterator iter = map.keySet().iterator();
-		while(iter.hasNext())
+
+		SearchableFieldChoiceItem[] choices = getChoicesAsArray();
+		Arrays.sort(choices, new LabelTagTypeSorter());
+		int index = 0;
+		while(index < choices.length)
 		{
-			String label = (String)iter.next();
-			Set choices = (Set)map.get(label);
-			if(choices.size() == 1)
-			{
-				root.add(new SearchFieldTreeNode((SearchableFieldChoiceItem)choices.toArray()[0]));
-			}
-			else
-			{
-				SearchFieldTreeNode parent = new SearchFieldTreeNode(label);
-				addChildNodes(parent, choices);
-				root.add(parent);
-			}
+			String label = choices[index].getSpec().getLabel();
+			SearchFieldTreeNode node = new SearchFieldTreeNode(label);
+			node.add(new SearchFieldTreeNode(choices[index]));
+			addSimilarNodes(node, choices, index + 1);
+			index += node.getChildCount();
+			node = pullUpIfOnlyOneChild(node);
+			root.add(node);
 		}
-		root.sortChildren(localization.getCurrentLanguageCode());
+
 		return root;
 	}
-	
-	void addChildNodes(SearchFieldTreeNode node, Set choicesToAdd)
+
+	private SearchableFieldChoiceItem[] getChoicesAsArray()
 	{
-		Iterator iter = choicesToAdd.iterator();
-		while(iter.hasNext())
+		return (SearchableFieldChoiceItem[])allChoices.toArray(new SearchableFieldChoiceItem[0]);
+	}
+	
+	private SearchFieldTreeNode pullUpIfOnlyOneChild(SearchFieldTreeNode node)
+	{
+		if(node.getChildCount() == 1)
+			node = (SearchFieldTreeNode)node.getChildAt(0);
+		return node;
+	}
+	
+	private void addSimilarNodes(SearchFieldTreeNode parent, SearchableFieldChoiceItem[] choices, int startAt)
+	{
+		String label = parent.toString();
+		int index = startAt;
+		while(index < choices.length && choices[index].getSpec().getLabel().equals(label))
 		{
-			SearchableFieldChoiceItem choice = (SearchableFieldChoiceItem)iter.next();
-			node.add(new SearchFieldTreeNode(choice));
+			SearchableFieldChoiceItem choice = choices[index];
+			parent.add(new SearchFieldTreeNode(choice));
+			++index;
 		}
 		
 	}
 	
-	HashMap map;
+	static class LabelTagTypeSorter implements Comparator
+	{
+		public int compare(Object o1, Object o2)
+		{
+			ChoiceItem choice1 = (ChoiceItem)o1;
+			ChoiceItem choice2 = (ChoiceItem)o2;
+			String value1 = choice1.getSpec().getLabel() + choice1.getSpec().getTag() + choice1.getType();
+			String value2 = choice2.getSpec().getLabel() + choice2.getSpec().getTag() + choice2.getType();
+			return (value1.compareTo(value2));
+		}
+		
+	}
+	
+	Vector allChoices;
 }
