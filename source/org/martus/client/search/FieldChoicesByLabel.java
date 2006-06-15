@@ -62,16 +62,21 @@ import org.martus.clientside.UiLocalization;
 import org.martus.common.fieldspec.ChoiceItem;
 import org.martus.common.fieldspec.SearchableFieldChoiceItem;
 
-class FieldChoicesByLabel extends HashMap
+class FieldChoicesByLabel
 {
+	public FieldChoicesByLabel()
+	{
+		map = new HashMap();
+	}
+	
 	public void add(ChoiceItem itemToAdd)
 	{
 		String label = itemToAdd.getSpec().getLabel();
-		Set choicesForThatLabel = (Set)get(label);
+		Set choicesForThatLabel = (Set)map.get(label);
 		if(choicesForThatLabel == null)
 			choicesForThatLabel = new HashSet();
 		choicesForThatLabel.add(itemToAdd);
-		put(label, choicesForThatLabel);
+		map.put(label, choicesForThatLabel);
 	}
 	
 	public void addAll(Set itemsToAdd)
@@ -87,11 +92,11 @@ class FieldChoicesByLabel extends HashMap
 	public TreeNode asTree(UiLocalization localization)
 	{
 		SearchFieldTreeNode root = new SearchFieldTreeNode("");
-		Iterator iter = keySet().iterator();
+		Iterator iter = map.keySet().iterator();
 		while(iter.hasNext())
 		{
 			String label = (String)iter.next();
-			Set choices = (Set)get(label);
+			Set choices = (Set)map.get(label);
 			if(choices.size() == 1)
 			{
 				root.add(new SearchFieldTreeNode((SearchableFieldChoiceItem)choices.toArray()[0]));
@@ -117,4 +122,6 @@ class FieldChoicesByLabel extends HashMap
 		}
 		
 	}
+	
+	HashMap map;
 }
