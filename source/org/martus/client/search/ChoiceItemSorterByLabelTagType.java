@@ -51,84 +51,28 @@ Boston, MA 02111-1307, USA.
 
 package org.martus.client.search;
 
-import java.util.Arrays;
-import java.util.Iterator;
-import java.util.Set;
-import java.util.Vector;
+import java.util.Comparator;
 
-import javax.swing.tree.TreeNode;
-
-import org.martus.clientside.UiLocalization;
 import org.martus.common.fieldspec.ChoiceItem;
-import org.martus.common.fieldspec.SearchableFieldChoiceItem;
+import org.martus.common.fieldspec.FieldSpec;
 
-class FieldChoicesByLabel
+class ChoiceItemSorterByLabelTagType implements Comparator
 {
-	public FieldChoicesByLabel()
+	public int compare(Object o1, Object o2)
 	{
-		allChoices = new Vector();
-	}
-	
-	public void add(ChoiceItem itemToAdd)
-	{
-		allChoices.add(itemToAdd);
-	}
-	
-	public void addAll(Set itemsToAdd)
-	{
-		Iterator iter = itemsToAdd.iterator();
-		while(iter.hasNext())
-		{
-			ChoiceItem choice = (ChoiceItem)iter.next();
-			add(choice);
-		}
-	}
-	
-	public TreeNode asTree(UiLocalization localization)
-	{
-		SearchFieldTreeNode root = new SearchFieldTreeNode("");
-
-		SearchableFieldChoiceItem[] choices = getChoicesAsArray();
-		Arrays.sort(choices, new ChoiceItemSorterByLabelTagType());
-		int index = 0;
-		while(index < choices.length)
-		{
-			String label = choices[index].getSpec().getLabel();
-			SearchFieldTreeNode node = new SearchFieldTreeNode(label);
-			node.add(new SearchFieldTreeNode(choices[index]));
-			addSimilarNodes(node, choices, index + 1);
-			index += node.getChildCount();
-			node = pullUpIfOnlyOneChild(node);
-			root.add(node);
-		}
-
-		return root;
-	}
-
-	private SearchableFieldChoiceItem[] getChoicesAsArray()
-	{
-		return (SearchableFieldChoiceItem[])allChoices.toArray(new SearchableFieldChoiceItem[0]);
-	}
-	
-	private SearchFieldTreeNode pullUpIfOnlyOneChild(SearchFieldTreeNode node)
-	{
-		if(node.getChildCount() == 1)
-			node = (SearchFieldTreeNode)node.getChildAt(0);
-		return node;
-	}
-	
-	private void addSimilarNodes(SearchFieldTreeNode parent, SearchableFieldChoiceItem[] choices, int startAt)
-	{
-		String label = parent.toString();
-		int index = startAt;
-		while(index < choices.length && choices[index].getSpec().getLabel().equals(label))
-		{
-			SearchableFieldChoiceItem choice = choices[index];
-			parent.add(new SearchFieldTreeNode(choice));
-			++index;
-		}
+		ChoiceItem choice1 = (ChoiceItem)o1;
+		ChoiceItem choice2 = (ChoiceItem)o2;
+		FieldSpec spec1 = choice1.getSpec();
+		FieldSpec spec2 = choice2.getSpec();
+		int labelComparison = spec1.getLabel().compareTo(spec2.getLabel());
+		if(labelComparison != 0)
+			return labelComparison;
+		int tagComparison = spec1.getTag().compareTo(spec2.getTag());
+		if(tagComparison != 0)
+			return tagComparison;
 		
+		int typeComparison = choice1.getType().getTypeName().compareTo(choice2.getType().getTypeName());
+		return typeComparison;
 	}
 	
-	Vector allChoices;
 }

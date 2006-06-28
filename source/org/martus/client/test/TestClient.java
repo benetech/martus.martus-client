@@ -36,6 +36,7 @@ import org.martus.client.bulletinstore.TestKnownFieldSpecCache;
 import org.martus.client.core.TestSafeReadableBulletin;
 import org.martus.client.reports.TestReportFormat;
 import org.martus.client.search.TestBulletinSearcher;
+import org.martus.client.search.TestChoiceItemSorterByLabelTagType;
 import org.martus.client.search.TestFancySearchHelper;
 import org.martus.client.search.TestFancySearchTableModel;
 import org.martus.client.search.TestSearchParser;
@@ -64,6 +65,7 @@ public class TestClient
 		suite.addTest(new TestSuite(TestBulletinSearcher.class));
 		suite.addTest(new TestSuite(TestBulletinTableModel.class));
 		suite.addTest(new TestSuite(TestBulletinXmlExporter.class));
+		suite.addTest(new TestSuite(TestChoiceItemSorterByLabelTagType.class));
 		suite.addTest(new TestSuite(TestClientBulletinStore.class));
 		suite.addTest(new TestSuite(TestConfigInfo.class));
 		suite.addTest(new TestSuite(TestFancySearchHelper.class));
