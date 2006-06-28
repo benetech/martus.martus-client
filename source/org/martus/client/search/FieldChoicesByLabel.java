@@ -52,6 +52,7 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.search;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.Set;
 import java.util.Vector;
@@ -60,6 +61,8 @@ import javax.swing.tree.TreeNode;
 
 import org.martus.clientside.UiLocalization;
 import org.martus.common.fieldspec.ChoiceItem;
+import org.martus.common.fieldspec.DropDownFieldSpec;
+import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.fieldspec.SearchableFieldChoiceItem;
 
 class FieldChoicesByLabel
@@ -88,8 +91,11 @@ class FieldChoicesByLabel
 	{
 		SearchFieldTreeNode root = new SearchFieldTreeNode("");
 
+		Collections.sort(allChoices, new ChoiceItemSorterByLabelTagType());
+		
+		mergeSimilarDropdowns();
+
 		SearchableFieldChoiceItem[] choices = getChoicesAsArray();
-		Arrays.sort(choices, new ChoiceItemSorterByLabelTagType());
 		int index = 0;
 		while(index < choices.length)
 		{
@@ -103,6 +109,64 @@ class FieldChoicesByLabel
 		}
 
 		return root;
+	}
+	
+	void mergeSimilarDropdowns()
+	{
+		int mergeInto = 0;
+		while(mergeInto + 1 < allChoices.size())
+		{
+			int mergeFrom = mergeInto + 1;
+			SearchableFieldChoiceItem into = ((SearchableFieldChoiceItem)allChoices.get(mergeInto));
+			SearchableFieldChoiceItem from = ((SearchableFieldChoiceItem)allChoices.get(mergeFrom));
+			if(areDropDownChoicesMergeable(into, from))
+			{
+				SearchableFieldChoiceItem result = mergeDropDownChoices(into, from);
+				allChoices.set(mergeInto, result);
+				allChoices.remove(mergeFrom);
+			}
+			else
+			{
+				++mergeInto;
+			}
+		}
+	}
+	
+	public static boolean areDropDownChoicesMergeable(SearchableFieldChoiceItem choice1, SearchableFieldChoiceItem choice2)
+	{
+		FieldSpec spec1 = choice1.getSpec();
+		FieldSpec spec2 = choice2.getSpec();
+		if(!spec1.getType().isDropdown())
+			return false;
+		if(!spec2.getType().isDropdown())
+			return false;
+		if(!spec1.getTag().equals(spec2.getTag()))
+			return false;
+		if(!spec1.getLabel().equals(spec2.getLabel()))
+			return false;
+		return true;
+	}
+	
+	public static SearchableFieldChoiceItem mergeDropDownChoices(SearchableFieldChoiceItem mergeInto, SearchableFieldChoiceItem mergeFrom)
+	{
+		if(!areDropDownChoicesMergeable(mergeInto, mergeFrom))
+			throw new RuntimeException("Attempted to merge unmergeable fieldspecs");
+		
+		DropDownFieldSpec specInto = (DropDownFieldSpec)mergeInto.getSpec();
+		DropDownFieldSpec specFrom = (DropDownFieldSpec)mergeFrom.getSpec();
+		
+		Vector choices = new Vector(Arrays.asList(specInto.getAllChoices()));
+		ChoiceItem[] moreChoices = specFrom.getAllChoices();
+		for(int i = 0; i < moreChoices.length; ++i)
+		{
+			if(!choices.contains(moreChoices[i]))
+				choices.add(moreChoices[i]);
+		}
+		
+		DropDownFieldSpec resultSpec = new DropDownFieldSpec((ChoiceItem[])choices.toArray(new ChoiceItem[0]));
+		resultSpec.setTag(mergeInto.getSpec().getTag());
+		resultSpec.setLabel(mergeInto.getSpec().getLabel());
+		return new SearchableFieldChoiceItem(resultSpec);
 	}
 
 	private SearchableFieldChoiceItem[] getChoicesAsArray()
