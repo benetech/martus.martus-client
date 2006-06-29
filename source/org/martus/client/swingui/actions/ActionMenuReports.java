@@ -25,14 +25,27 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.actions;
 
+import java.awt.BorderLayout;
+import java.awt.Container;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.Vector;
 
+import javax.swing.Box;
+import javax.swing.JDialog;
+
 import org.martus.client.core.SortableBulletinList;
+import org.martus.client.search.FancySearchHelper;
 import org.martus.client.search.SearchTreeNode;
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.common.bulletin.Bulletin;
+import org.martus.client.swingui.dialogs.UiDialogLauncher;
+import org.martus.client.swingui.fields.UiPopUpTreeEditor;
+import org.martus.clientside.UiLocalization;
+import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.packet.UniversalId;
+import org.martus.swing.UiButton;
+import org.martus.swing.UiWrappedTextArea;
+import org.martus.swing.Utilities;
 
 public class ActionMenuReports extends ActionPrint
 {
@@ -48,25 +61,100 @@ public class ActionMenuReports extends ActionPrint
 
 	public void actionPerformed(ActionEvent ae)
 	{
-		SearchTreeNode searchTree = mainWindow.askUserForSearchCriteria();
-		if(searchTree == null)
-			return;
-		
-		String[] sortTags = new String[] {Bulletin.TAGTITLE};
-
-		SortableBulletinList bulletinIdsFromSearch = mainWindow.doSearch(searchTree, sortTags);
-		if(bulletinIdsFromSearch == null)
-			return;
-		int bulletinsMatched = bulletinIdsFromSearch.size();
-		if(bulletinIdsFromSearch.size() == 0)
+		try
 		{
-			mainWindow.notifyDlg("SearchFailed");
-			return;
+			SearchTreeNode searchTree = mainWindow.askUserForSearchCriteria();
+			if(searchTree == null)
+				return;
+			
+			SortFieldsDialog dlg = new SortFieldsDialog(mainWindow);
+			dlg.setVisible(true);
+			if(!dlg.ok())
+				return;
+			
+			String[] sortTags = dlg.getSortTags();
+
+			SortableBulletinList bulletinIdsFromSearch = mainWindow.doSearch(searchTree, sortTags);
+			if(bulletinIdsFromSearch == null)
+				return;
+			int bulletinsMatched = bulletinIdsFromSearch.size();
+			if(bulletinIdsFromSearch.size() == 0)
+			{
+				mainWindow.notifyDlg("SearchFailed");
+				return;
+			}
+			mainWindow.showNumberOfBulletinsFound(bulletinsMatched, "ReportFound");
+			UniversalId[] bulletinIds = bulletinIdsFromSearch.getSortedUniversalIds();
+			Vector bulletinsToReportOn = mainWindow.getBulletins(bulletinIds);
+			printBulletins(bulletinsToReportOn);
+		} 
+		catch (Exception e)
+		{
+			e.printStackTrace();
+			mainWindow.notifyDlgBeep("UnexpectedError");
 		}
-		mainWindow.showNumberOfBulletinsFound(bulletinsMatched, "ReportFound");
-		UniversalId[] bulletinIds = bulletinIdsFromSearch.getSortedUniversalIds();
-		Vector bulletinsToReportOn = mainWindow.getBulletins(bulletinIds);
-		printBulletins(bulletinsToReportOn);
+	}
+	
+	static class SortFieldsDialog extends JDialog implements ActionListener
+	{
+		public SortFieldsDialog(UiMainWindow mainWindow)
+		{
+			super(mainWindow);
+			setModal(true);
+			Container contentPane = getContentPane();
+			contentPane.setLayout(new BorderLayout());
+			UiLocalization localization = mainWindow.getLocalization();
+			String text = localization.getFieldLabel("ChooseSortFields");
+			okButton = new UiButton(localization.getButtonLabel("OK"));
+			okButton.addActionListener(this);
+			UiButton cancelButton = new UiButton(localization.getButtonLabel("Cancel"));
+			cancelButton.addActionListener(this);
+			Box buttonBar = Box.createHorizontalBox();
+			buttonBar.add(okButton);
+			buttonBar.add(cancelButton);
+			contentPane.add(new UiWrappedTextArea(text), BorderLayout.BEFORE_FIRST_LINE);
+			
+			sortChooser = new UiPopUpTreeEditor(localization);
+			UiDialogLauncher launcher = new UiDialogLauncher(mainWindow, localization);
+			FancySearchHelper helper = new FancySearchHelper(mainWindow.getStore(), launcher);
+			sortChooser.setSpec(helper.createFieldColumnSpec(mainWindow.getStore()));
+			sortChooser.setText("");
+			
+			contentPane.add(sortChooser.getComponent(), BorderLayout.CENTER);
+			contentPane.add(buttonBar, BorderLayout.AFTER_LAST_LINE);
+			
+			pack();
+			Utilities.centerDlg(this);
+		}
+		
+		public String[] getSortTags() throws Exception
+		{
+			String specXml = sortChooser.getText();
+			if(specXml.length() == 0)
+				return new String[0];
+			
+			FieldSpec selectedSpec = FieldSpec.createFromXml(specXml);
+			
+			return new String[] {selectedSpec.getTag()};
+		}
+
+		public void actionPerformed(ActionEvent e)
+		{
+			if(e.getSource().equals(okButton))
+			{
+				hitOk = true;
+			}
+			dispose();
+		}
+		
+		public boolean ok()
+		{
+			return hitOk;
+		}
+
+		UiPopUpTreeEditor sortChooser;
+		boolean hitOk;
+		UiButton okButton;
 	}
 
 }
