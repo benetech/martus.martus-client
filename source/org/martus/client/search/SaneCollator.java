@@ -38,7 +38,7 @@ import java.util.Locale;
 */
 public class SaneCollator implements Comparator
 {
-	SaneCollator(String languageCode)
+	public SaneCollator(String languageCode)
 	{
 		collator = Collator.getInstance(new Locale(languageCode));
 	}

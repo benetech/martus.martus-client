@@ -1109,7 +1109,7 @@ public class MartusApp
 	{
 		BulletinSearcher matcher = new BulletinSearcher(searchNode);
 		Set uids = store.getAllBulletinLeafUids();
-		SortableBulletinList matchedBulletinUids = new SortableBulletinList(tagsForSorting);
+		SortableBulletinList matchedBulletinUids = new SortableBulletinList(localization.getCurrentLanguageCode(), tagsForSorting);
 		for(Iterator iter = uids.iterator(); iter.hasNext();)
 		{
 			UniversalId leafBulletinUid = (UniversalId) iter.next();

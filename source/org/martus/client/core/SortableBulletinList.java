@@ -30,32 +30,34 @@ import java.util.Comparator;
 import java.util.HashSet;
 import java.util.Iterator;
 
+import org.martus.client.search.SaneCollator;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.packet.UniversalId;
 
 public class SortableBulletinList
 {
-	public SortableBulletinList(String[] tagsForSorting)
+	public SortableBulletinList(String languageCode, String[] tagsForSorting)
 	{
 		tags = tagsForSorting;
-		set = new HashSet();
+		sorter = new PartialBulletinSorter(languageCode, tags);
+		partialBulletins = new HashSet();
 	}
 	
 	public void add(Bulletin b)
 	{
 		PartialBulletin pb = new PartialBulletin(b, tags);
-		set.add(pb);
+		partialBulletins.add(pb);
 	}
 	
 	public int size()
 	{
-		return set.size();
+		return partialBulletins.size();
 	}
 	
 	public UniversalId[] getUniversalIds()
 	{
 		UniversalId[] uids = new UniversalId[size()];
-		Iterator iter = set.iterator();
+		Iterator iter = partialBulletins.iterator();
 		int next = 0;
 		while(iter.hasNext())
 		{
@@ -68,8 +70,8 @@ public class SortableBulletinList
 	
 	public UniversalId[] getSortedUniversalIds()
 	{
-		PartialBulletin[] bulletins = (PartialBulletin[])set.toArray(new PartialBulletin[0]);
-		Arrays.sort(bulletins, new PartialBulletinSorter(tags));
+		PartialBulletin[] bulletins = (PartialBulletin[])partialBulletins.toArray(new PartialBulletin[0]);
+		Arrays.sort(bulletins, sorter);
 		UniversalId[] uids = new UniversalId[bulletins.length];
 		for(int i = 0; i < bulletins.length; ++i)
 			uids[i] = bulletins[i].getUniversalId();
@@ -79,9 +81,10 @@ public class SortableBulletinList
 	
 	static class PartialBulletinSorter implements Comparator
 	{
-		public PartialBulletinSorter(String[] tagsToSortBy)
+		public PartialBulletinSorter(String languageCode, String[] tagsToSortBy)
 		{
 			tags = tagsToSortBy;
+			collator = new SaneCollator(languageCode);
 		}
 		
 		public int compare(Object o1, Object o2)
@@ -90,7 +93,9 @@ public class SortableBulletinList
 			PartialBulletin pb2 = (PartialBulletin)o2;
 			for(int i = 0; i < tags.length; ++i)
 			{
-				int result = pb1.getData(tags[i]).compareTo(pb2.getData(tags[i]));
+				String s1 = pb1.getData(tags[i]);
+				String s2 = pb2.getData(tags[i]);
+				int result = collator.compare(s1, s2);
 				if(result != 0)
 					return result;
 			}
@@ -98,8 +103,10 @@ public class SortableBulletinList
 		}
 
 		String[] tags;
+		SaneCollator collator;
 	}
 	
+	Comparator sorter;
 	String[] tags;
-	HashSet set;
+	HashSet partialBulletins;
 }

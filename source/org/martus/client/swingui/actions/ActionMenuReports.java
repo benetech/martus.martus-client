@@ -29,7 +29,9 @@ import java.awt.event.ActionEvent;
 import java.util.Vector;
 
 import org.martus.client.core.SortableBulletinList;
+import org.martus.client.search.SearchTreeNode;
 import org.martus.client.swingui.UiMainWindow;
+import org.martus.common.bulletin.Bulletin;
 import org.martus.common.packet.UniversalId;
 
 public class ActionMenuReports extends ActionPrint
@@ -46,7 +48,13 @@ public class ActionMenuReports extends ActionPrint
 
 	public void actionPerformed(ActionEvent ae)
 	{
-		SortableBulletinList bulletinIdsFromSearch = mainWindow.doSearch();
+		SearchTreeNode searchTree = mainWindow.askUserForSearchCriteria();
+		if(searchTree == null)
+			return;
+		
+		String[] sortTags = new String[] {Bulletin.TAGTITLE};
+
+		SortableBulletinList bulletinIdsFromSearch = mainWindow.doSearch(searchTree, sortTags);
 		if(bulletinIdsFromSearch == null)
 			return;
 		int bulletinsMatched = bulletinIdsFromSearch.size();
@@ -56,7 +64,7 @@ public class ActionMenuReports extends ActionPrint
 			return;
 		}
 		mainWindow.showNumberOfBulletinsFound(bulletinsMatched, "ReportFound");
-		UniversalId[] bulletinIds = bulletinIdsFromSearch.getUniversalIds();
+		UniversalId[] bulletinIds = bulletinIdsFromSearch.getSortedUniversalIds();
 		Vector bulletinsToReportOn = mainWindow.getBulletins(bulletinIds);
 		printBulletins(bulletinsToReportOn);
 	}

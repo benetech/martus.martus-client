@@ -55,4 +55,17 @@ public class TestPartialBulletin extends TestCaseEnhanced
 			assertEquals("Didn't store " + tag + "?", b.get(tag), pb.getData(tag));
 		}
 	}
+	
+	public void testPseudoTags() throws Exception
+	{
+		String tags[] = {Bulletin.PSEUDOFIELD_LAST_SAVED_DATE, Bulletin.PSEUDOFIELD_LOCAL_ID};
+		MockMartusSecurity security = MockMartusSecurity.createClient();
+		Bulletin b = new Bulletin(security);
+		for(int i = 0; i < tags.length; ++i)
+			assertNotEquals("Pseudotag not working: " + tags[i] + "?", "", b.get(tags[i]));
+		PartialBulletin pb = new PartialBulletin(b, tags);
+		for(int i = 0; i < tags.length; ++i)
+			assertEquals("Didn't copy pseudo tag " + tags[i] + "?", b.get(tags[i]), pb.getData(tags[i]));
+	}
+
 }

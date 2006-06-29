@@ -75,6 +75,7 @@ import org.martus.client.core.TransferableBulletinList;
 import org.martus.client.core.MartusApp.LoadConfigInfoException;
 import org.martus.client.core.MartusApp.MartusAppInitializationException;
 import org.martus.client.core.MartusApp.SaveConfigInfoException;
+import org.martus.client.search.SearchTreeNode;
 import org.martus.client.swingui.bulletincomponent.UiBulletinPreviewPane;
 import org.martus.client.swingui.bulletintable.UiBulletinTablePane;
 import org.martus.client.swingui.dialogs.UiAboutDlg;
@@ -1211,22 +1212,33 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	
 	public SortableBulletinList doSearch()
 	{
-		// TODO: Allow either the old UiSimpleSearchDlg or the new UiFancySearchDlg
+		SearchTreeNode searchTree = askUserForSearchCriteria();
+		String[] sortTags = new String[0];
+
+		return doSearch(searchTree, sortTags);
+	}
+
+	public SortableBulletinList doSearch(SearchTreeNode searchTree, String[] sortTags)
+	{
+		setWaitingCursor();
+		SortableBulletinList searchResults = app.search(searchTree, sortTags, uiState.searchFinalBulletinsOnly);
+		resetCursor();
+
+		return searchResults;
+	}
+	
+	public SearchTreeNode askUserForSearchCriteria()
+	{
 		UiFancySearchDlg searchDlg = new UiFancySearchDlg(this);
-		//UiSimpleSearchDlg searchDlg = new UiSimpleSearchDlg(this);
 		searchDlg.setSearchFinalBulletinsOnly(uiState.searchFinalBulletinsOnly());
 		searchDlg.setVisible(true);
 		if(!searchDlg.getResults())
 			return null;
 		
-		String[] sortTags = new String[0];
 
 		boolean searchFinalBulletinsOnly = searchDlg.searchFinalBulletinsOnly();
 		uiState.setSearchFinalBulletinsOnly(searchFinalBulletinsOnly);
-		setWaitingCursor();
-		SortableBulletinList searchResults = app.search(searchDlg.getSearchTree(), sortTags, searchFinalBulletinsOnly);
-		resetCursor();
-		return searchResults;
+		return searchDlg.getSearchTree();
 	}
 
 	public void updateSearchFolderAndNotifyUserOfTheResults(SortableBulletinList matchedBulletinsFromSearch)

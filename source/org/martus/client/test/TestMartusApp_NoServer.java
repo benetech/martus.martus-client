@@ -1570,6 +1570,8 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		assertNull("Search results already exists?", store.findFolder(store.getSearchFolderName()));
 
 		appWithAccount.loadSampleData(); //SLOW!!!
+		appWithAccount.getLocalization().setCurrentLanguageCode(MiniLocalization.ENGLISH);
+
 		
 		Bulletin b = store.getBulletinRevision((UniversalId)(new Vector(store.getAllBulletinLeafUids()).get(0)));
 		String andKeyword = "and";
@@ -1593,6 +1595,8 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 	public void testSearchOlderVersionsAndFinalVersions() throws Exception
 	{
 		TRACE_BEGIN("testSearchOlderVersionsAndFinalVersions");
+		appWithAccount.getLocalization().setCurrentLanguageCode(MiniLocalization.ENGLISH);
+
 		ClientBulletinStore store = appWithAccount.getStore();
 		String andKeyword = "and";
 		String orKeyword = "or";

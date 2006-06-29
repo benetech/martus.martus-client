@@ -25,6 +25,7 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.core;
 
+import org.martus.common.MiniLocalization;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.crypto.MockMartusSecurity;
 import org.martus.common.packet.UniversalId;
@@ -43,7 +44,7 @@ public class TestSortableBulletinList extends TestCaseEnhanced
 		
 		String tags[] = {Bulletin.TAGAUTHOR, Bulletin.TAGTITLE};
 
-		SortableBulletinList list = new SortableBulletinList(tags);
+		SortableBulletinList list = new SortableBulletinList(MiniLocalization.ENGLISH, tags);
 		String[] authors = {"Sue", "Wendy", "Alan", "Wendy", };
 		String[] titles = {"Wow", "Yowza", "Yippee", "Eureka!", };
 		Bulletin[] bulletins = new Bulletin[authors.length];
@@ -61,4 +62,5 @@ public class TestSortableBulletinList extends TestCaseEnhanced
 		assertEquals("Wendy/Eureka not third?", bulletins[3].getUniversalId(), uids[2]);
 		assertEquals("Wendy Yowza not last?", bulletins[1].getUniversalId(), uids[3]);
 	}
+	
 }
