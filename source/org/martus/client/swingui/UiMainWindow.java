@@ -1218,11 +1218,13 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		searchDlg.setVisible(true);
 		if(!searchDlg.getResults())
 			return null;
+		
+		String[] sortTags = new String[0];
 
 		boolean searchFinalBulletinsOnly = searchDlg.searchFinalBulletinsOnly();
 		uiState.setSearchFinalBulletinsOnly(searchFinalBulletinsOnly);
 		setWaitingCursor();
-		SortableBulletinList searchResults = app.search(searchDlg.getSearchTree(), searchFinalBulletinsOnly);
+		SortableBulletinList searchResults = app.search(searchDlg.getSearchTree(), sortTags, searchFinalBulletinsOnly);
 		resetCursor();
 		return searchResults;
 	}

@@ -2138,7 +2138,8 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 	{
 		SearchParser parser = new SearchParser(andKeyword, orKeyword);
 		SearchTreeNode searchNode = parser.parseJustAmazonValueForTesting(searchFor);
-		app.updateSearchFolder(app.search(searchNode, searchFinalBulletinVersionsOnly));
+		String[] sortTags = new String[0];
+		app.updateSearchFolder(app.search(searchNode, sortTags, searchFinalBulletinVersionsOnly));
 	}
 
 

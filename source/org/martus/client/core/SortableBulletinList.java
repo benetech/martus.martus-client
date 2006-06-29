@@ -25,20 +25,25 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.core;
 
+import java.util.Arrays;
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.Iterator;
 
+import org.martus.common.bulletin.Bulletin;
 import org.martus.common.packet.UniversalId;
 
 public class SortableBulletinList
 {
-	public SortableBulletinList()
+	public SortableBulletinList(String[] tagsForSorting)
 	{
+		tags = tagsForSorting;
 		set = new HashSet();
 	}
 	
-	public void add(PartialBulletin pb)
+	public void add(Bulletin b)
 	{
+		PartialBulletin pb = new PartialBulletin(b, tags);
 		set.add(pb);
 	}
 	
@@ -61,5 +66,40 @@ public class SortableBulletinList
 		return uids;
 	}
 	
+	public UniversalId[] getSortedUniversalIds()
+	{
+		PartialBulletin[] bulletins = (PartialBulletin[])set.toArray(new PartialBulletin[0]);
+		Arrays.sort(bulletins, new PartialBulletinSorter(tags));
+		UniversalId[] uids = new UniversalId[bulletins.length];
+		for(int i = 0; i < bulletins.length; ++i)
+			uids[i] = bulletins[i].getUniversalId();
+		
+		return uids;
+	}
+	
+	static class PartialBulletinSorter implements Comparator
+	{
+		public PartialBulletinSorter(String[] tagsToSortBy)
+		{
+			tags = tagsToSortBy;
+		}
+		
+		public int compare(Object o1, Object o2)
+		{
+			PartialBulletin pb1 = (PartialBulletin)o1;
+			PartialBulletin pb2 = (PartialBulletin)o2;
+			for(int i = 0; i < tags.length; ++i)
+			{
+				int result = pb1.getData(tags[i]).compareTo(pb2.getData(tags[i]));
+				if(result != 0)
+					return result;
+			}
+			return 0;
+		}
+
+		String[] tags;
+	}
+	
+	String[] tags;
 	HashSet set;
 }

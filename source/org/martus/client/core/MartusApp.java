@@ -1105,11 +1105,11 @@ public class MartusApp
 		setLastUploadRemindedTime(new Date());
 	}
 
-	public SortableBulletinList search(SearchTreeNode searchNode, boolean searchFinalVersionsOnly)
+	public SortableBulletinList search(SearchTreeNode searchNode, String[] tagsForSorting, boolean searchFinalVersionsOnly)
 	{
 		BulletinSearcher matcher = new BulletinSearcher(searchNode);
 		Set uids = store.getAllBulletinLeafUids();
-		SortableBulletinList matchedBulletinUids = new SortableBulletinList();
+		SortableBulletinList matchedBulletinUids = new SortableBulletinList(tagsForSorting);
 		for(Iterator iter = uids.iterator(); iter.hasNext();)
 		{
 			UniversalId leafBulletinUid = (UniversalId) iter.next();
@@ -1130,8 +1130,7 @@ public class MartusApp
 				Bulletin b = store.getBulletinRevision((UniversalId)allRevisions.get(j));
 				if(b != null && matcher.doesMatch(new SafeReadableBulletin(b, localization), localization))
 				{
-					PartialBulletin pb = new PartialBulletin(latestRevision);
-					matchedBulletinUids.add(pb);
+					matchedBulletinUids.add(latestRevision);
 				}
 			}
 		}

@@ -32,11 +32,6 @@ import org.martus.common.packet.UniversalId;
 
 public class PartialBulletin
 {
-	public PartialBulletin(Bulletin copyFrom)
-	{
-		this(copyFrom, new String[0]);
-	}
-	
 	public PartialBulletin(Bulletin copyFrom, String[] tagsToStore)
 	{
 		fieldData = new HashMap();
