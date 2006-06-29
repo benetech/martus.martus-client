@@ -27,8 +27,8 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.swingui.actions;
 
 import java.awt.event.ActionEvent;
-import java.util.Set;
 
+import org.martus.client.core.SortableBulletinList;
 import org.martus.client.swingui.UiMainWindow;
 
 public class ActionMenuSearch extends UiMenuAction
@@ -40,7 +40,7 @@ public class ActionMenuSearch extends UiMenuAction
 
 	public void actionPerformed(ActionEvent ae)
 	{
-		Set bulletinIdsFromSearch = mainWindow.doSearch();
+		SortableBulletinList bulletinIdsFromSearch = mainWindow.doSearch();
 		mainWindow.updateSearchFolderAndNotifyUserOfTheResults(bulletinIdsFromSearch);
 	}
 

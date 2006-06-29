@@ -40,7 +40,6 @@ import java.io.ObjectOutputStream;
 import java.io.UnsupportedEncodingException;
 import java.util.Date;
 import java.util.Enumeration;
-import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 import java.util.Vector;
@@ -1106,19 +1105,20 @@ public class MartusApp
 		setLastUploadRemindedTime(new Date());
 	}
 
-	public Set search(SearchTreeNode searchNode, boolean searchFinalVersionsOnly)
+	public SortableBulletinList search(SearchTreeNode searchNode, boolean searchFinalVersionsOnly)
 	{
 		BulletinSearcher matcher = new BulletinSearcher(searchNode);
 		Set uids = store.getAllBulletinLeafUids();
-		Set matchedBulletinUids = new HashSet();
+		SortableBulletinList matchedBulletinUids = new SortableBulletinList();
 		for(Iterator iter = uids.iterator(); iter.hasNext();)
 		{
 			UniversalId leafBulletinUid = (UniversalId) iter.next();
+			Bulletin latestRevision = store.getBulletinRevision(leafBulletinUid);
 			Vector allRevisions = new Vector();
 			allRevisions.add(leafBulletinUid);
 			if(!searchFinalVersionsOnly)
 			{
-				BulletinHistory history = store.getBulletinRevision(leafBulletinUid).getHistory();
+				BulletinHistory history = latestRevision.getHistory();
 				for(int h=0; h<history.size(); ++h)
 				{
 					allRevisions.add(UniversalId.createFromAccountAndLocalId(leafBulletinUid.getAccountId(), history.get(h)));
@@ -1129,22 +1129,24 @@ public class MartusApp
 			{
 				Bulletin b = store.getBulletinRevision((UniversalId)allRevisions.get(j));
 				if(b != null && matcher.doesMatch(new SafeReadableBulletin(b, localization), localization))
-				{	
-					matchedBulletinUids.add(leafBulletinUid);
+				{
+					PartialBulletin pb = new PartialBulletin(latestRevision);
+					matchedBulletinUids.add(pb);
 				}
 			}
 		}
 		return matchedBulletinUids;
 	}
 	
-	public void updateSearchFolder(Set bulletinIdsToAdd)
+	public void updateSearchFolder(SortableBulletinList partialBulletinsToAdd)
 	{
 		BulletinFolder searchFolder = createOrFindFolder(store.getSearchFolderName());
 		searchFolder.removeAll();
 		searchFolder.prepareForBulkOperation();
-		for (Iterator iter = bulletinIdsToAdd.iterator(); iter.hasNext();)
+		UniversalId[] uids = partialBulletinsToAdd.getUniversalIds();
+		for(int i = 0; i < uids.length; ++i)
 		{
-			UniversalId leafBulletinUid = (UniversalId) iter.next();
+			UniversalId leafBulletinUid = uids[i];
 			try
 			{
 				store.addBulletinToFolder(searchFolder, leafBulletinUid);

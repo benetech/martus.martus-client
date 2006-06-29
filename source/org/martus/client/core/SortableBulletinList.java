@@ -1,7 +1,7 @@
 /*
 
 The Martus(tm) free, social justice documentation and
-monitoring software. Copyright (C) 2005, Beneficent
+monitoring software. Copyright (C) 2006, Beneficent
 Technology, Inc. (Benetech).
 
 Martus is free software; you can redistribute it and/or
@@ -23,25 +23,43 @@ Software Foundation, Inc., 59 Temple Place - Suite 330,
 Boston, MA 02111-1307, USA.
 
 */
+package org.martus.client.core;
 
-package org.martus.client.swingui.actions;
+import java.util.HashSet;
+import java.util.Iterator;
 
-import java.awt.event.ActionEvent;
+import org.martus.common.packet.UniversalId;
 
-import org.martus.client.core.SortableBulletinList;
-import org.martus.client.swingui.UiMainWindow;
-
-public class ActionSearch extends UiButtonAction
+public class SortableBulletinList
 {
-	public ActionSearch(UiMainWindow mainWindowToUse)
+	public SortableBulletinList()
 	{
-		super(mainWindowToUse, "search");
+		set = new HashSet();
 	}
-
-	public void actionPerformed(ActionEvent ae)
+	
+	public void add(PartialBulletin pb)
 	{
-		SortableBulletinList bulletinIdsFromSearch = mainWindow.doSearch();
-		mainWindow.updateSearchFolderAndNotifyUserOfTheResults(bulletinIdsFromSearch);
+		set.add(pb);
 	}
-
+	
+	public int size()
+	{
+		return set.size();
+	}
+	
+	public UniversalId[] getUniversalIds()
+	{
+		UniversalId[] uids = new UniversalId[size()];
+		Iterator iter = set.iterator();
+		int next = 0;
+		while(iter.hasNext())
+		{
+			PartialBulletin pb = (PartialBulletin)iter.next();
+			uids[next++] = pb.getUniversalId();
+		}
+		
+		return uids;
+	}
+	
+	HashSet set;
 }

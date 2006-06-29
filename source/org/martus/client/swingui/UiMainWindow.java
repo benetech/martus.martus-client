@@ -51,7 +51,6 @@ import java.net.URL;
 import java.nio.channels.FileLock;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;
 import java.util.Stack;
 import java.util.TimerTask;
 import java.util.Vector;
@@ -71,6 +70,7 @@ import org.martus.client.core.BackgroundUploader;
 import org.martus.client.core.ConfigInfo;
 import org.martus.client.core.MartusApp;
 import org.martus.client.core.RetrieveCommand;
+import org.martus.client.core.SortableBulletinList;
 import org.martus.client.core.TransferableBulletinList;
 import org.martus.client.core.MartusApp.LoadConfigInfoException;
 import org.martus.client.core.MartusApp.MartusAppInitializationException;
@@ -1209,7 +1209,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		}
 	}
 	
-	public Set doSearch()
+	public SortableBulletinList doSearch()
 	{
 		// TODO: Allow either the old UiSimpleSearchDlg or the new UiFancySearchDlg
 		UiFancySearchDlg searchDlg = new UiFancySearchDlg(this);
@@ -1222,12 +1222,12 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		boolean searchFinalBulletinsOnly = searchDlg.searchFinalBulletinsOnly();
 		uiState.setSearchFinalBulletinsOnly(searchFinalBulletinsOnly);
 		setWaitingCursor();
-		Set searchResults = app.search(searchDlg.getSearchTree(), searchFinalBulletinsOnly);
+		SortableBulletinList searchResults = app.search(searchDlg.getSearchTree(), searchFinalBulletinsOnly);
 		resetCursor();
 		return searchResults;
 	}
 
-	public void updateSearchFolderAndNotifyUserOfTheResults(Set matchedBulletinsFromSearch)
+	public void updateSearchFolderAndNotifyUserOfTheResults(SortableBulletinList matchedBulletinsFromSearch)
 	{
 		if(matchedBulletinsFromSearch == null)
 			return;

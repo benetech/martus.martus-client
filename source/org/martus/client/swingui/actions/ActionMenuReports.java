@@ -26,9 +26,9 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.swingui.actions;
 
 import java.awt.event.ActionEvent;
-import java.util.Set;
 import java.util.Vector;
 
+import org.martus.client.core.SortableBulletinList;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.common.packet.UniversalId;
 
@@ -46,7 +46,7 @@ public class ActionMenuReports extends ActionPrint
 
 	public void actionPerformed(ActionEvent ae)
 	{
-		Set bulletinIdsFromSearch = mainWindow.doSearch();
+		SortableBulletinList bulletinIdsFromSearch = mainWindow.doSearch();
 		if(bulletinIdsFromSearch == null)
 			return;
 		int bulletinsMatched = bulletinIdsFromSearch.size();
@@ -56,7 +56,7 @@ public class ActionMenuReports extends ActionPrint
 			return;
 		}
 		mainWindow.showNumberOfBulletinsFound(bulletinsMatched, "ReportFound");
-		UniversalId[] bulletinIds = (UniversalId[])bulletinIdsFromSearch.toArray(new UniversalId[0]);
+		UniversalId[] bulletinIds = bulletinIdsFromSearch.getUniversalIds();
 		Vector bulletinsToReportOn = mainWindow.getBulletins(bulletinIds);
 		printBulletins(bulletinsToReportOn);
 	}

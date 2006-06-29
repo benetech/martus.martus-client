@@ -33,6 +33,7 @@ import org.martus.client.bulletinstore.TestBulletinCache;
 import org.martus.client.bulletinstore.TestBulletinFolder;
 import org.martus.client.bulletinstore.TestClientBulletinStore;
 import org.martus.client.bulletinstore.TestKnownFieldSpecCache;
+import org.martus.client.core.TestPartialBulletin;
 import org.martus.client.core.TestSafeReadableBulletin;
 import org.martus.client.reports.TestReportFormat;
 import org.martus.client.search.TestBulletinSearcher;
@@ -78,6 +79,7 @@ public class TestClient
 		suite.addTest(new TestSuite(TestMartusApp_NoServer.class));
 		suite.addTest(new TestSuite(TestMartusFlexidate.class));
 		suite.addTest(new TestSuite(TestMartusUserNameAndPassword.class));
+		suite.addTest(new TestSuite(TestPartialBulletin.class));
 		suite.addTest(new TestSuite(TestRetrieveCommand.class));
 		suite.addTest(new TestSuite(TestReportFormat.class));
 		//suite.addTest(new TestSuite(TestReportRunner.class));
