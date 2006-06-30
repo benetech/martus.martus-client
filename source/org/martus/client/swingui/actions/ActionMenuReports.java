@@ -33,6 +33,7 @@ import java.util.Vector;
 
 import javax.swing.Box;
 import javax.swing.JDialog;
+import javax.swing.JPanel;
 
 import org.martus.client.core.SortableBulletinList;
 import org.martus.client.search.FancySearchHelper;
@@ -47,6 +48,15 @@ import org.martus.swing.UiButton;
 import org.martus.swing.UiWrappedTextArea;
 import org.martus.swing.Utilities;
 
+
+/* TODO:
+ * - Remove "any field"
+ * - Default to something reasonable like "Last Saved"
+ * - Move or eliminate the "xx bulletins found" notification
+ * - Allow multiple sort fields (3?)
+ * - Clean up the code in ActionMenuReport
+ * 
+ */
 public class ActionMenuReports extends ActionPrint
 {
 	public ActionMenuReports(UiMainWindow mainWindowToUse)
@@ -104,10 +114,11 @@ public class ActionMenuReports extends ActionPrint
 			Container contentPane = getContentPane();
 			contentPane.setLayout(new BorderLayout());
 			UiLocalization localization = mainWindow.getLocalization();
-			String text = localization.getFieldLabel("ChooseSortFields");
-			okButton = new UiButton(localization.getButtonLabel("OK"));
+			setTitle(localization.getWindowTitle("ReportChooseSortFields"));
+			String text = localization.getFieldLabel("ReportChooseSortFields");
+			okButton = new UiButton(localization.getButtonLabel("ok"));
 			okButton.addActionListener(this);
-			UiButton cancelButton = new UiButton(localization.getButtonLabel("Cancel"));
+			UiButton cancelButton = new UiButton(localization.getButtonLabel("cancel"));
 			cancelButton.addActionListener(this);
 			Box buttonBar = Box.createHorizontalBox();
 			buttonBar.add(okButton);
@@ -120,7 +131,10 @@ public class ActionMenuReports extends ActionPrint
 			sortChooser.setSpec(helper.createFieldColumnSpec(mainWindow.getStore()));
 			sortChooser.setText("");
 			
-			contentPane.add(sortChooser.getComponent(), BorderLayout.CENTER);
+			JPanel sortChooserPanel = new JPanel(new BorderLayout());
+			sortChooserPanel.add(sortChooser.getComponent(), BorderLayout.BEFORE_LINE_BEGINS);
+			
+			contentPane.add(sortChooserPanel, BorderLayout.CENTER);
 			contentPane.add(buttonBar, BorderLayout.AFTER_LAST_LINE);
 			
 			pack();

@@ -278,6 +278,7 @@ public class EnglishStrings
 "wintitle:warningDeleteSingleBulletin=Confirm Delete Bulletin",
 "wintitle:warningDeleteMultipleBulletins=Confirm Delete Bulletins",
 
+"wintitle:ReportChooseSortFields=Choose Sort Fields",
 "wintitle:PrintOptions=Print Options",
 "wintitle:confirmSendWithPublicData=Confirm Save With Public Data",
 "wintitle:DeleteMyDataFromThisComputer=Delete My Data From This Computer",
@@ -883,6 +884,7 @@ public class EnglishStrings
 	"You need to put spaces before and after any #Or# / #And# keywords you use in your search.\n", 
 "field:SearchFound=#NumberBulletinsFound# bulletins matched the search, and have been added to the Search Results folder.",
 "field:ReportFound=#NumberBulletinsFound# bulletins matched the search.",
+"field:ReportChooseSortFields=Choose how the bulletins will be sorted in the output. The bulletins will be ordered by the first field chosen. When two bulletins have the same value in that field, they will be sorted by the next sort field, and so on.",
 "field:CustomXMLTopSection=Top Section of Bulletin",
 "field:CustomXMLBottomSection=Bottom/Private Section of Bulletin",
 "field:WasSentYes=Yes",
