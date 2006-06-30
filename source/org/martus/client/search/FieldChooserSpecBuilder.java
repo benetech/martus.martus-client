@@ -38,7 +38,6 @@ import org.martus.common.fieldspec.ChoiceItem;
 import org.martus.common.fieldspec.DropDownFieldSpec;
 import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.fieldspec.FieldType;
-import org.martus.common.fieldspec.FieldTypeAnyField;
 import org.martus.common.fieldspec.FieldTypeDate;
 import org.martus.common.fieldspec.FieldTypeNormal;
 import org.martus.common.fieldspec.GridFieldSpec;
@@ -56,10 +55,10 @@ public class FieldChooserSpecBuilder
 		localization = localizationToUse;
 	}
 	
-	public PopUpTreeFieldSpec createFieldColumnSpec(ClientBulletinStore storeToUse)
+	public PopUpTreeFieldSpec createSpec(ClientBulletinStore storeToUse)
 	{
 		FieldChoicesByLabel allAvailableFields = new FieldChoicesByLabel();
-		allAvailableFields.add(createAnyFieldChoice());
+		addSpecialFields(allAvailableFields);
 		allAvailableFields.add(createLastSavedDateChoice());
 		allAvailableFields.addAll(convertToChoiceItems(storeToUse.getAllKnownFieldSpecs()));
 		
@@ -68,16 +67,11 @@ public class FieldChooserSpecBuilder
 		fieldColumnSpec.setLabel(getLocalization().getFieldLabel("SearchGridHeaderField"));
 		return fieldColumnSpec;
 	}
-
-	private ChoiceItem createAnyFieldChoice()
+	
+	public void addSpecialFields(FieldChoicesByLabel fields)
 	{
-		String tag = "";
-		String label = getLocalization().getFieldLabel("SearchAnyField");
-		FieldType type = new FieldTypeAnyField();
-		FieldSpec spec = FieldSpec.createCustomField(tag, label, type);
-		return new SearchableFieldChoiceItem("", spec);
 	}
-
+	
 	private ChoiceItem createLastSavedDateChoice()
 	{
 		String tag = Bulletin.PSEUDOFIELD_LAST_SAVED_DATE;
@@ -110,6 +104,10 @@ public class FieldChooserSpecBuilder
 
 		Set choicesForThisField = new HashSet();
 		final FieldType thisType = spec.getType();
+		
+		if(shouldOmitType(thisType))
+			return choicesForThisField;
+		
 		String displayString = spec.getLabel();
 		if(StandardFieldSpecs.isStandardFieldTag(fullTagChain))
 			displayString = getLocalization().getFieldLabel(fullTagChain);
@@ -164,6 +162,11 @@ public class FieldChooserSpecBuilder
 		ChoiceItem choiceItem = new SearchableFieldChoiceItem(thisSpec);
 		choicesForThisField.add(choiceItem);
 		return choicesForThisField;
+	}
+	
+	public boolean shouldOmitType(FieldType type)
+	{
+		return false;
 	}
 
 	private boolean shouldSearchSpecTypeBeTheFieldSpecType(final FieldType thisType)

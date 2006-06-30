@@ -36,12 +36,14 @@ import javax.swing.JDialog;
 import javax.swing.JPanel;
 
 import org.martus.client.core.SortableBulletinList;
-import org.martus.client.search.FieldChooserSpecBuilder;
 import org.martus.client.search.SearchTreeNode;
+import org.martus.client.search.SortFieldChooserSpecBuilder;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.fields.UiPopUpTreeEditor;
 import org.martus.clientside.UiLocalization;
+import org.martus.common.bulletin.Bulletin;
 import org.martus.common.fieldspec.FieldSpec;
+import org.martus.common.fieldspec.PopUpTreeFieldSpec;
 import org.martus.common.packet.UniversalId;
 import org.martus.swing.UiButton;
 import org.martus.swing.UiWrappedTextArea;
@@ -49,8 +51,8 @@ import org.martus.swing.Utilities;
 
 
 /* TODO:
- * - Remove "any field"
- * - Default to something reasonable like "Last Saved"
+ * - Searches on nested grid fields aren't working
+ * - Make sure searches on begin/end dates work
  * - Move or eliminate the "xx bulletins found" notification
  * - Allow multiple sort fields (3?)
  * - Clean up the code in ActionMenuReport
@@ -125,9 +127,10 @@ public class ActionMenuReports extends ActionPrint
 			contentPane.add(new UiWrappedTextArea(text), BorderLayout.BEFORE_FIRST_LINE);
 			
 			sortChooser = new UiPopUpTreeEditor(localization);
-			FieldChooserSpecBuilder builder = new FieldChooserSpecBuilder(localization);
-			sortChooser.setSpec(builder.createFieldColumnSpec(mainWindow.getStore()));
-			sortChooser.setText("");
+			SortFieldChooserSpecBuilder builder = new SortFieldChooserSpecBuilder(localization);
+			PopUpTreeFieldSpec spec = builder.createSpec(mainWindow.getStore());
+			sortChooser.setSpec(spec);
+			sortChooser.setText(spec.findSearchTag(Bulletin.PSEUDOFIELD_LAST_SAVED_DATE).getCode());
 			
 			JPanel sortChooserPanel = new JPanel(new BorderLayout());
 			sortChooserPanel.add(sortChooser.getComponent(), BorderLayout.BEFORE_LINE_BEGINS);

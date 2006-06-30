@@ -69,8 +69,8 @@ public class FancySearchHelper
 
 		try
 		{
-			FieldChooserSpecBuilder builder = new FieldChooserSpecBuilder(getLocalization());
-			spec.addColumn(builder.createFieldColumnSpec(storeToUse));
+			FieldChooserSpecBuilder builder = new SearchFieldChooserSpecBuilder(getLocalization());
+			spec.addColumn(builder.createSpec(storeToUse));
 			
 			spec.addColumn(FancySearchTableModel.getCurrentOpColumnSpec(new FieldTypeAnyField(), getLocalization()));
 			
