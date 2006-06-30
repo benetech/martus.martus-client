@@ -49,12 +49,6 @@ import org.martus.swing.UiWrappedTextArea;
 import org.martus.swing.Utilities;
 
 
-/* TODO:
- * - Move or eliminate the "xx bulletins found" notification
- * - Allow multiple sort fields (3?)
- * - Clean up the code in ActionMenuReport
- * 
- */
 public class ActionMenuReports extends ActionPrint
 {
 	public ActionMenuReports(UiMainWindow mainWindowToUse)
