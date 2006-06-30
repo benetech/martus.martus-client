@@ -31,21 +31,24 @@ import java.util.HashSet;
 import java.util.Iterator;
 
 import org.martus.client.search.SaneCollator;
+import org.martus.common.MiniLocalization;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.packet.UniversalId;
 
 public class SortableBulletinList
 {
-	public SortableBulletinList(String languageCode, String[] tagsForSorting)
+	public SortableBulletinList(MiniLocalization localizationToUse, String[] tagsForSorting)
 	{
+		localization = localizationToUse;
 		tags = tagsForSorting;
-		sorter = new PartialBulletinSorter(languageCode, tags);
+		sorter = new PartialBulletinSorter(localization.getCurrentLanguageCode(), tags);
 		partialBulletins = new HashSet();
 	}
 	
 	public void add(Bulletin b)
 	{
-		PartialBulletin pb = new PartialBulletin(b, tags);
+		SafeReadableBulletin readableBulletin = new SafeReadableBulletin(b, localization);
+		PartialBulletin pb = new PartialBulletin(readableBulletin, tags);
 		partialBulletins.add(pb);
 	}
 	
@@ -70,13 +73,19 @@ public class SortableBulletinList
 	
 	public UniversalId[] getSortedUniversalIds()
 	{
-		PartialBulletin[] bulletins = (PartialBulletin[])partialBulletins.toArray(new PartialBulletin[0]);
-		Arrays.sort(bulletins, sorter);
+		PartialBulletin[] bulletins = getSortedPartialBulletins();
 		UniversalId[] uids = new UniversalId[bulletins.length];
 		for(int i = 0; i < bulletins.length; ++i)
 			uids[i] = bulletins[i].getUniversalId();
 		
 		return uids;
+	}
+
+	public PartialBulletin[] getSortedPartialBulletins()
+	{
+		PartialBulletin[] bulletins = (PartialBulletin[])partialBulletins.toArray(new PartialBulletin[0]);
+		Arrays.sort(bulletins, sorter);
+		return bulletins;
 	}
 	
 	static class PartialBulletinSorter implements Comparator
@@ -95,6 +104,12 @@ public class SortableBulletinList
 			{
 				String s1 = pb1.getData(tags[i]);
 				String s2 = pb2.getData(tags[i]);
+				if(s1 == null && s2 == null)
+					return 0;
+				if(s1 == null)
+					return -1;
+				if(s2 == null)
+					return 1;
 				int result = collator.compare(s1, s2);
 				if(result != 0)
 					return result;
@@ -106,6 +121,7 @@ public class SortableBulletinList
 		SaneCollator collator;
 	}
 	
+	MiniLocalization localization;
 	Comparator sorter;
 	String[] tags;
 	HashSet partialBulletins;

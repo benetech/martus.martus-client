@@ -31,6 +31,7 @@ import org.martus.common.bulletin.Bulletin;
 import org.martus.common.field.MartusField;
 import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.fieldspec.FieldType;
+import org.martus.common.packet.UniversalId;
 
 
 /*
@@ -57,6 +58,11 @@ public class SafeReadableBulletin
 		return realBulletin.getField(tag);
 	}
 	
+	public UniversalId getUniversalId()
+	{
+		return realBulletin.getUniversalId();
+	}
+	
 	public String getLocalId()
 	{
 		return realBulletin.getLocalId();
@@ -74,7 +80,12 @@ public class SafeReadableBulletin
 	
 	public MartusField getPossiblyNestedField(FieldSpec nestedFieldTag)
 	{
-		String[] tags = parseNestedTags(nestedFieldTag.getTag());
+		return getPossiblyNestedField(nestedFieldTag.getTag());
+	}
+
+	public MartusField getPossiblyNestedField(String tag)
+	{
+		String[] tags = parseNestedTags(tag);
 		MartusField field = null;
 		
 		for(int i=0; i < tags.length; ++i)

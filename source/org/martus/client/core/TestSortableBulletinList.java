@@ -28,7 +28,13 @@ package org.martus.client.core;
 import org.martus.common.MiniLocalization;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.crypto.MockMartusSecurity;
+import org.martus.common.field.MartusDateRangeField;
+import org.martus.common.fieldspec.FieldSpec;
+import org.martus.common.fieldspec.FieldTypeNormal;
+import org.martus.common.fieldspec.StandardFieldSpecs;
 import org.martus.common.packet.UniversalId;
+import org.martus.common.utilities.MartusFlexidate;
+import org.martus.util.MultiCalendar;
 import org.martus.util.TestCaseEnhanced;
 
 public class TestSortableBulletinList extends TestCaseEnhanced
@@ -40,11 +46,13 @@ public class TestSortableBulletinList extends TestCaseEnhanced
 
 	public void testBasics() throws Exception
 	{
+		MiniLocalization localization = new MiniLocalization();
+		localization.setCurrentLanguageCode(MiniLocalization.ENGLISH);
 		MockMartusSecurity security = MockMartusSecurity.createClient();
 		
 		String tags[] = {Bulletin.TAGAUTHOR, Bulletin.TAGTITLE};
 
-		SortableBulletinList list = new SortableBulletinList(MiniLocalization.ENGLISH, tags);
+		SortableBulletinList list = new SortableBulletinList(localization, tags);
 		String[] authors = {"Sue", "Wendy", "Alan", "Wendy", };
 		String[] titles = {"Wow", "Yowza", "Yippee", "Eureka!", };
 		Bulletin[] bulletins = new Bulletin[authors.length];
@@ -61,6 +69,65 @@ public class TestSortableBulletinList extends TestCaseEnhanced
 		assertEquals("Sue not second?", bulletins[0].getUniversalId(), uids[1]);
 		assertEquals("Wendy/Eureka not third?", bulletins[3].getUniversalId(), uids[2]);
 		assertEquals("Wendy Yowza not last?", bulletins[1].getUniversalId(), uids[3]);
+	}
+	
+	public void testSubFields() throws Exception
+	{
+		MiniLocalization localization = new MiniLocalization();
+		localization.setCurrentLanguageCode(MiniLocalization.ENGLISH);
+		MockMartusSecurity security = MockMartusSecurity.createClient();
+		
+		MultiCalendar lowDate = MultiCalendar.createFromGregorianYearMonthDay(1995, 12, 27);
+		MultiCalendar middleDate = MultiCalendar.createFromGregorianYearMonthDay(2003, 07, 25);
+		MultiCalendar highDate = MultiCalendar.createFromGregorianYearMonthDay(2007, 01, 14);
+		
+		Bulletin lowHigh = new Bulletin(security);
+		lowHigh.set(Bulletin.TAGEVENTDATE, MartusFlexidate.toBulletinFlexidateFormat(lowDate, highDate));
+		
+		Bulletin middle = new Bulletin(security);
+		middle.set(Bulletin.TAGEVENTDATE, MartusFlexidate.toBulletinFlexidateFormat(middleDate, middleDate));
+		
+		Bulletin highLow = new Bulletin(security);
+		highLow.set(Bulletin.TAGEVENTDATE, MartusFlexidate.toBulletinFlexidateFormat(highDate, highDate));
+		
+		String tags[] = {Bulletin.TAGEVENTDATE + "." + MartusDateRangeField.SUBFIELD_BEGIN};
+		SortableBulletinList begin = new SortableBulletinList(localization, tags);
+		begin.add(lowHigh);
+		begin.add(middle);
+		begin.add(highLow);
+		
+		PartialBulletin[] beginBulletins = begin.getSortedPartialBulletins();
+		assertEquals("begin low not first?", lowDate.toIsoDateString(), beginBulletins[0].getData(tags[0]));
+		assertEquals("begin middle not middle?", middleDate.toIsoDateString(), beginBulletins[1].getData(tags[0]));
+		assertEquals("begin high not last?", highDate.toIsoDateString(), beginBulletins[2].getData(tags[0]));
+	}
+	
+	public void testMissingFieldSorting() throws Exception
+	{
+		MiniLocalization localization = new MiniLocalization();
+		localization.setCurrentLanguageCode(MiniLocalization.ENGLISH);
+		MockMartusSecurity security = MockMartusSecurity.createClient();
+		
+		String tag = "tag";
+		FieldSpec[] publicFields = new FieldSpec[] {
+			FieldSpec.createCustomField(tag, "Label", new FieldTypeNormal()),
+		};
+		Bulletin missingCustom = new Bulletin(security);
+		Bulletin hasEmptyCustom = new Bulletin(security, publicFields, StandardFieldSpecs.getDefaultBottomSectionFieldSpecs());
+		Bulletin hasFullCustom = new Bulletin(security, publicFields, StandardFieldSpecs.getDefaultBottomSectionFieldSpecs());
+		hasFullCustom.set(tag, "blah blah blah");
+		
+		String[] tags = {tag};
+		SortableBulletinList list = new SortableBulletinList(localization, tags);
+		list.add(missingCustom);
+		list.add(hasEmptyCustom);
+		list.add(hasFullCustom);
+		
+		PartialBulletin[] result = list.getSortedPartialBulletins();
+		assertEquals("Null not first?", null, result[0].getData(tag));
+		assertEquals("Empty not next?", "", result[1].getData(tag));
+		assertEquals("Full not last?", hasFullCustom.get(tag), result[2].getData(tag));
+		
 	}
 	
 }

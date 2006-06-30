@@ -25,8 +25,12 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.core;
 
+import org.martus.common.MiniLocalization;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.crypto.MockMartusSecurity;
+import org.martus.common.field.MartusDateRangeField;
+import org.martus.common.utilities.MartusFlexidate;
+import org.martus.util.MultiCalendar;
 import org.martus.util.TestCaseEnhanced;
 
 public class TestPartialBulletin extends TestCaseEnhanced
@@ -36,17 +40,23 @@ public class TestPartialBulletin extends TestCaseEnhanced
 		super(name);
 	}
 	
+	public void setUp() throws Exception
+	{
+		localization = new MiniLocalization();
+		localization.setCurrentLanguageCode(MiniLocalization.ENGLISH);
+	}
+	
 	public void testBasics() throws Exception
 	{
 		MockMartusSecurity security = MockMartusSecurity.createClient();
 		Bulletin b = new Bulletin(security);
 		String[] tagsToStore = new String[] {
 			Bulletin.TAGTITLE,
-			Bulletin.TAGSTATUS,
+			Bulletin.TAGLANGUAGE,
 		};
 		for(int i = 0; i < tagsToStore.length; ++i)
 			b.set(tagsToStore[i], tagsToStore[i]);
-		PartialBulletin pb = new PartialBulletin(b, tagsToStore);
+		PartialBulletin pb = new PartialBulletin(new SafeReadableBulletin(b, localization), tagsToStore);
 		
 		assertEquals("Didn't copy uid?", b.getUniversalId(), pb.getUniversalId());
 		for(int i = 0; i < tagsToStore.length; ++i)
@@ -58,14 +68,35 @@ public class TestPartialBulletin extends TestCaseEnhanced
 	
 	public void testPseudoTags() throws Exception
 	{
-		String tags[] = {Bulletin.PSEUDOFIELD_LAST_SAVED_DATE, Bulletin.PSEUDOFIELD_LOCAL_ID};
+		String tags[] = {Bulletin.PSEUDOFIELD_LAST_SAVED_DATE, Bulletin.PSEUDOFIELD_LOCAL_ID, Bulletin.TAGSTATUS,};
 		MockMartusSecurity security = MockMartusSecurity.createClient();
 		Bulletin b = new Bulletin(security);
 		for(int i = 0; i < tags.length; ++i)
 			assertNotEquals("Pseudotag not working: " + tags[i] + "?", "", b.get(tags[i]));
-		PartialBulletin pb = new PartialBulletin(b, tags);
+		PartialBulletin pb = new PartialBulletin(new SafeReadableBulletin(b, localization), tags);
 		for(int i = 0; i < tags.length; ++i)
 			assertEquals("Didn't copy pseudo tag " + tags[i] + "?", b.get(tags[i]), pb.getData(tags[i]));
 	}
+	
+	public void testSubFields() throws Exception
+	{
+		MockMartusSecurity security = MockMartusSecurity.createClient();
+		Bulletin b = new Bulletin(security);
 
+		MultiCalendar beginDate = MultiCalendar.createFromGregorianYearMonthDay(2003, 07, 25);
+		MultiCalendar endDate = MultiCalendar.createFromGregorianYearMonthDay(2007, 01, 14);
+		b.set(Bulletin.TAGEVENTDATE, MartusFlexidate.toBulletinFlexidateFormat(beginDate, endDate));
+
+		SafeReadableBulletin readableBulletin = new SafeReadableBulletin(b, localization);
+		String tags[] = {Bulletin.TAGEVENTDATE + "." + MartusDateRangeField.SUBFIELD_BEGIN};
+		PartialBulletin pb = new PartialBulletin(readableBulletin, tags);
+		for(int i = 0; i < tags.length; ++i)
+		{
+			String expected = readableBulletin.getPossiblyNestedField(tags[i]).getData();
+			assertEquals("Didn't copy subfield " + tags[i] + "?", expected, pb.getData(tags[i]));
+		}
+		
+	}
+
+	MiniLocalization localization;
 }

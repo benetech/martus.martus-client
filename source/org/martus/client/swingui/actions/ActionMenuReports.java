@@ -42,7 +42,6 @@ import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.fields.UiPopUpTreeEditor;
 import org.martus.clientside.UiLocalization;
 import org.martus.common.bulletin.Bulletin;
-import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.fieldspec.PopUpTreeFieldSpec;
 import org.martus.common.packet.UniversalId;
 import org.martus.swing.UiButton;
@@ -51,8 +50,6 @@ import org.martus.swing.Utilities;
 
 
 /* TODO:
- * - Searches on nested grid fields aren't working
- * - Make sure searches on begin/end dates work
  * - Move or eliminate the "xx bulletins found" notification
  * - Allow multiple sort fields (3?)
  * - Clean up the code in ActionMenuReport
@@ -144,13 +141,10 @@ public class ActionMenuReports extends ActionPrint
 		
 		public String[] getSortTags() throws Exception
 		{
-			String specXml = sortChooser.getText();
-			if(specXml.length() == 0)
-				return new String[0];
+			String searchTag = sortChooser.getSelectedSearchTag();
 			
-			FieldSpec selectedSpec = FieldSpec.createFromXml(specXml);
-			
-			return new String[] {selectedSpec.getTag()};
+			//System.out.println("ActionMenuReport.getSortTags: " + searchTag);
+			return new String[] {searchTag};
 		}
 
 		public void actionPerformed(ActionEvent e)

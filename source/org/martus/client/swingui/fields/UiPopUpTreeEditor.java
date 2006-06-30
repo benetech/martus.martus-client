@@ -107,6 +107,11 @@ public class UiPopUpTreeEditor extends UiField implements ActionListener
 		label.setText(selectedItem.toString());
 	}
 	
+	public String getSelectedSearchTag()
+	{
+		return selectedItem.getSearchTag();
+	}
+	
 	public void setSpec(PopUpTreeFieldSpec specToUse)
 	{
 		spec = specToUse;
