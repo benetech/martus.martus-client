@@ -36,10 +36,9 @@ import javax.swing.JDialog;
 import javax.swing.JPanel;
 
 import org.martus.client.core.SortableBulletinList;
-import org.martus.client.search.FancySearchHelper;
+import org.martus.client.search.FieldChooserSpecBuilder;
 import org.martus.client.search.SearchTreeNode;
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.client.swingui.dialogs.UiDialogLauncher;
 import org.martus.client.swingui.fields.UiPopUpTreeEditor;
 import org.martus.clientside.UiLocalization;
 import org.martus.common.fieldspec.FieldSpec;
@@ -126,9 +125,8 @@ public class ActionMenuReports extends ActionPrint
 			contentPane.add(new UiWrappedTextArea(text), BorderLayout.BEFORE_FIRST_LINE);
 			
 			sortChooser = new UiPopUpTreeEditor(localization);
-			UiDialogLauncher launcher = new UiDialogLauncher(mainWindow, localization);
-			FancySearchHelper helper = new FancySearchHelper(mainWindow.getStore(), launcher);
-			sortChooser.setSpec(helper.createFieldColumnSpec(mainWindow.getStore()));
+			FieldChooserSpecBuilder builder = new FieldChooserSpecBuilder(localization);
+			sortChooser.setSpec(builder.createFieldColumnSpec(mainWindow.getStore()));
 			sortChooser.setText("");
 			
 			JPanel sortChooserPanel = new JPanel(new BorderLayout());
