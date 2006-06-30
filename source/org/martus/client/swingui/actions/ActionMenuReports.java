@@ -113,7 +113,17 @@ public class ActionMenuReports extends ActionPrint
 			contentPane.setLayout(new BorderLayout());
 			UiLocalization localization = mainWindow.getLocalization();
 			setTitle(localization.getWindowTitle("ReportChooseSortFields"));
+
 			String text = localization.getFieldLabel("ReportChooseSortFields");
+
+			sortChooser = new UiPopUpTreeEditor(localization);
+			SortFieldChooserSpecBuilder builder = new SortFieldChooserSpecBuilder(localization);
+			PopUpTreeFieldSpec spec = builder.createSpec(mainWindow.getStore());
+			sortChooser.setSpec(spec);
+			sortChooser.setText(spec.findSearchTag(Bulletin.PSEUDOFIELD_LAST_SAVED_DATE).getCode());
+			JPanel sortChooserPanel = new JPanel(new BorderLayout());
+			sortChooserPanel.add(sortChooser.getComponent(), BorderLayout.BEFORE_LINE_BEGINS);
+			
 			okButton = new UiButton(localization.getButtonLabel("ok"));
 			okButton.addActionListener(this);
 			UiButton cancelButton = new UiButton(localization.getButtonLabel("cancel"));
@@ -121,17 +131,8 @@ public class ActionMenuReports extends ActionPrint
 			Box buttonBar = Box.createHorizontalBox();
 			buttonBar.add(okButton);
 			buttonBar.add(cancelButton);
+
 			contentPane.add(new UiWrappedTextArea(text), BorderLayout.BEFORE_FIRST_LINE);
-			
-			sortChooser = new UiPopUpTreeEditor(localization);
-			SortFieldChooserSpecBuilder builder = new SortFieldChooserSpecBuilder(localization);
-			PopUpTreeFieldSpec spec = builder.createSpec(mainWindow.getStore());
-			sortChooser.setSpec(spec);
-			sortChooser.setText(spec.findSearchTag(Bulletin.PSEUDOFIELD_LAST_SAVED_DATE).getCode());
-			
-			JPanel sortChooserPanel = new JPanel(new BorderLayout());
-			sortChooserPanel.add(sortChooser.getComponent(), BorderLayout.BEFORE_LINE_BEGINS);
-			
 			contentPane.add(sortChooserPanel, BorderLayout.CENTER);
 			contentPane.add(buttonBar, BorderLayout.AFTER_LAST_LINE);
 			
