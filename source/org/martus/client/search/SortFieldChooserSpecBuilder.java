@@ -39,6 +39,8 @@ public class SortFieldChooserSpecBuilder extends FieldChooserSpecBuilder
 	{
 		if(type.isMultiline())
 			return true;
+		if(type.isGrid())
+			return true;
 		
 		return false;
 	}

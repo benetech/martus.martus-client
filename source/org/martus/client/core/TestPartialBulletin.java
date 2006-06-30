@@ -25,10 +25,14 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.core;
 
+import org.martus.common.GridData;
 import org.martus.common.MiniLocalization;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.crypto.MockMartusSecurity;
 import org.martus.common.field.MartusDateRangeField;
+import org.martus.common.fieldspec.FieldSpec;
+import org.martus.common.fieldspec.FieldTypeNormal;
+import org.martus.common.fieldspec.GridFieldSpec;
 import org.martus.common.utilities.MartusFlexidate;
 import org.martus.util.MultiCalendar;
 import org.martus.util.TestCaseEnhanced;
@@ -96,6 +100,25 @@ public class TestPartialBulletin extends TestCaseEnhanced
 			assertEquals("Didn't copy subfield " + tags[i] + "?", expected, pb.getData(tags[i]));
 		}
 		
+	}
+	
+	public void testGridColumns() throws Exception
+	{
+		MockMartusSecurity security = MockMartusSecurity.createClient();
+		GridFieldSpec gridSpec = new GridFieldSpec();
+		gridSpec.setTag("grid");
+		gridSpec.setLabel("Grid");
+		gridSpec.addColumn(FieldSpec.createCustomField("", "Label", new FieldTypeNormal()));
+		Bulletin b = new Bulletin(security, new FieldSpec[] {gridSpec}, new FieldSpec[0]);
+		GridData gridData = new GridData(gridSpec);
+		gridData.addEmptyRow();
+		gridData.setValueAt("Data", 0, 0);
+		b.set(gridSpec.getTag(), gridData.getXmlRepresentation());
+		SafeReadableBulletin readableBulletin = new SafeReadableBulletin(b, localization);
+		String[] tags = {gridSpec.getTag() + "." + "Label"}; 
+		PartialBulletin pb = new PartialBulletin(readableBulletin, tags);
+		String gotData = pb.getData(tags[0]);
+		assertEquals("Didn't blank out grid cell?", "", gotData);
 	}
 
 	MiniLocalization localization;

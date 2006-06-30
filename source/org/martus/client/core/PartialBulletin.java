@@ -42,6 +42,7 @@ public class PartialBulletin
 			MartusField field = copyFrom.getPossiblyNestedField(tagsToStore[i]);
 			if(field != null)
 				fieldData.put(tagsToStore[i], field.getData());
+			//System.out.println("PartialBulletin copying: " + field);
 		}
 	}
 	

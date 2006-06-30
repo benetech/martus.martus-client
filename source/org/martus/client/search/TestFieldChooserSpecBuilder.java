@@ -35,9 +35,11 @@ import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.test.MockBulletinStore;
 import org.martus.client.test.MockMartusApp;
 import org.martus.common.EnglishCommonStrings;
+import org.martus.common.GridData;
 import org.martus.common.MiniLocalization;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.bulletin.BulletinConstants;
+import org.martus.common.crypto.MartusCrypto;
 import org.martus.common.field.MartusDateRangeField;
 import org.martus.common.fieldspec.ChoiceItem;
 import org.martus.common.fieldspec.CustomDropDownFieldSpec;
@@ -124,6 +126,25 @@ public class TestFieldChooserSpecBuilder extends TestCaseEnhanced
 		
 		PopUpTreeFieldSpec spec = sortBuilder.createSpec(getStore());
 		assertNull("multiline is sortable?", spec.findSearchTag(Bulletin.TAGPUBLICINFO));
+	}
+
+	public void testGridNotSortable() throws Exception
+	{
+		GridFieldSpec gridSpec = new GridFieldSpec();
+		gridSpec.setTag("grid");
+		gridSpec.setLabel("Grid");
+		gridSpec.addColumn(FieldSpec.createCustomField("", "Label", new FieldTypeNormal()));
+		MartusCrypto security = getStore().getSignatureGenerator();
+		Bulletin b = new Bulletin(security, new FieldSpec[] {gridSpec}, new FieldSpec[0]);
+		GridData gridData = new GridData(gridSpec);
+		gridData.addEmptyRow();
+		gridData.setValueAt("Data", 0, 0);
+		b.set(gridSpec.getTag(), gridData.getXmlRepresentation());
+		getStore().saveBulletin(b);
+		
+		PopUpTreeFieldSpec spec = sortBuilder.createSpec(getStore());
+		assertNull("grid is sortable?", spec.findSearchTag(gridSpec.getTag()));
+		assertNull("grid column is sortable?", spec.findSearchTag(gridSpec.getTag() + ".Label"));
 	}
 
 	public void testGetChoiceItemsForThisField() throws Exception

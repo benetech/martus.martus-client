@@ -143,7 +143,7 @@ public class ActionMenuReports extends ActionPrint
 		{
 			String searchTag = sortChooser.getSelectedSearchTag();
 			
-			//System.out.println("ActionMenuReport.getSortTags: " + searchTag);
+			System.out.println("ActionMenuReport.getSortTags: " + searchTag);
 			return new String[] {searchTag};
 		}
 
