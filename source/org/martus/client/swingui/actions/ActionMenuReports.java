@@ -110,11 +110,10 @@ public class ActionMenuReports extends ActionPrint
 
 			String text = localization.getFieldLabel("ReportChooseSortFields");
 
-			sortChooser = new UiPopUpTreeEditor(localization);
 			SortFieldChooserSpecBuilder builder = new SortFieldChooserSpecBuilder(localization);
 			PopUpTreeFieldSpec spec = builder.createSpec(mainWindow.getStore());
-			sortChooser.setSpec(spec);
-			sortChooser.setText(spec.findSearchTag(Bulletin.PSEUDOFIELD_LAST_SAVED_DATE).getCode());
+			String defaultCode = spec.findSearchTag(Bulletin.PSEUDOFIELD_LAST_SAVED_DATE).getCode();
+			sortChooser = createSortChooser(mainWindow, spec, defaultCode);
 			JPanel sortChooserPanel = new JPanel(new BorderLayout());
 			sortChooserPanel.add(sortChooser.getComponent(), BorderLayout.BEFORE_LINE_BEGINS);
 			
@@ -132,6 +131,15 @@ public class ActionMenuReports extends ActionPrint
 			
 			pack();
 			Utilities.centerDlg(this);
+		}
+
+		private UiPopUpTreeEditor createSortChooser(UiMainWindow mainWindow, PopUpTreeFieldSpec spec, String defaultCode)
+		{
+			UiLocalization localization = mainWindow.getLocalization();
+			UiPopUpTreeEditor chooser = new UiPopUpTreeEditor(localization);
+			chooser.setSpec(spec);
+			chooser.setText(defaultCode);
+			return chooser;
 		}
 		
 		public String[] getSortTags() throws Exception
