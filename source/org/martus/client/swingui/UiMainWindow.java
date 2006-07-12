@@ -1213,8 +1213,10 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	public SortableBulletinList doSearch()
 	{
 		SearchTreeNode searchTree = askUserForSearchCriteria();
+		if(searchTree == null)
+			return null;
+		
 		String[] sortTags = new String[0];
-
 		return doSearch(searchTree, sortTags);
 	}
 
@@ -1236,8 +1238,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 			return null;
 		
 
-		boolean searchFinalBulletinsOnly = searchDlg.searchFinalBulletinsOnly();
-		uiState.setSearchFinalBulletinsOnly(searchFinalBulletinsOnly);
+		uiState.setSearchFinalBulletinsOnly(searchDlg.searchFinalBulletinsOnly());
 		return searchDlg.getSearchTree();
 	}
 
