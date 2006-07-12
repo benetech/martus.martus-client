@@ -91,7 +91,7 @@ class FieldChoicesByLabel
 	{
 		SearchFieldTreeNode root = new SearchFieldTreeNode("");
 
-		Collections.sort(allChoices, new ChoiceItemSorterByLabelTagType());
+		Collections.sort(allChoices, new ChoiceItemSorterByMiniFieldSpec());
 		
 		mergeSimilarDropdowns();
 

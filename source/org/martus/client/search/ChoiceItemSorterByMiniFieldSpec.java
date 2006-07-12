@@ -54,25 +54,17 @@ package org.martus.client.search;
 import java.util.Comparator;
 
 import org.martus.common.fieldspec.ChoiceItem;
-import org.martus.common.fieldspec.FieldSpec;
+import org.martus.common.fieldspec.MiniFieldSpec;
 
-class ChoiceItemSorterByLabelTagType implements Comparator
+class ChoiceItemSorterByMiniFieldSpec implements Comparator
 {
 	public int compare(Object o1, Object o2)
 	{
 		ChoiceItem choice1 = (ChoiceItem)o1;
 		ChoiceItem choice2 = (ChoiceItem)o2;
-		FieldSpec spec1 = choice1.getSpec();
-		FieldSpec spec2 = choice2.getSpec();
-		int labelComparison = spec1.getLabel().compareTo(spec2.getLabel());
-		if(labelComparison != 0)
-			return labelComparison;
-		int tagComparison = spec1.getTag().compareTo(spec2.getTag());
-		if(tagComparison != 0)
-			return tagComparison;
-		
-		int typeComparison = choice1.getType().getTypeName().compareTo(choice2.getType().getTypeName());
-		return typeComparison;
+		MiniFieldSpec spec1 = new MiniFieldSpec(choice1.getSpec());
+		MiniFieldSpec spec2 = new MiniFieldSpec(choice2.getSpec());
+		return spec1.compareTo(spec2);
 	}
 	
 }
