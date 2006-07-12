@@ -102,6 +102,10 @@ public class ActionMenuReports extends ActionPrint
 		public SortFieldsDialog(UiMainWindow mainWindow)
 		{
 			super(mainWindow);
+			
+			if(sortTags == null)
+				sortTags = new String[] {Bulletin.TAGENTRYDATE};
+			
 			setModal(true);
 			Container contentPane = getContentPane();
 			contentPane.setLayout(new BorderLayout());
@@ -112,7 +116,7 @@ public class ActionMenuReports extends ActionPrint
 
 			SortFieldChooserSpecBuilder builder = new SortFieldChooserSpecBuilder(localization);
 			PopUpTreeFieldSpec spec = builder.createSpec(mainWindow.getStore());
-			String defaultCode = spec.findSearchTag(Bulletin.PSEUDOFIELD_LAST_SAVED_DATE).getCode();
+			String defaultCode = spec.findSearchTag(sortTags[0]).getCode();
 			sortChooser = createSortChooser(mainWindow, spec, defaultCode);
 			JPanel sortChooserPanel = new JPanel(new BorderLayout());
 			sortChooserPanel.add(sortChooser.getComponent(), BorderLayout.BEFORE_LINE_BEGINS);
@@ -142,18 +146,24 @@ public class ActionMenuReports extends ActionPrint
 			return chooser;
 		}
 		
-		public String[] getSortTags() throws Exception
+		void memorizeSortFields()
 		{
 			String searchTag = sortChooser.getSelectedSearchTag();
 			
 			System.out.println("ActionMenuReport.getSortTags: " + searchTag);
-			return new String[] {searchTag};
+			sortTags = new String[] {searchTag};
+		}
+		
+		public String[] getSortTags() throws Exception
+		{
+			return sortTags;
 		}
 
 		public void actionPerformed(ActionEvent e)
 		{
 			if(e.getSource().equals(okButton))
 			{
+				memorizeSortFields();
 				hitOk = true;
 			}
 			dispose();
@@ -167,6 +177,7 @@ public class ActionMenuReports extends ActionPrint
 		UiPopUpTreeEditor sortChooser;
 		boolean hitOk;
 		UiButton okButton;
+		private static String[] sortTags;
 	}
 
 }
