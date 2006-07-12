@@ -39,7 +39,21 @@ public class TestReportFormat extends TestCaseEnhanced
 	public void testDetailSection()
 	{
 		String sampleDetailSection = "blah blah blah";
-		ReportFormat rf = new ReportFormat(sampleDetailSection);
+		ReportFormat rf = new ReportFormat();
+		rf.setDetailSection(sampleDetailSection);
 		assertEquals(sampleDetailSection, rf.getDetailSection());
+	}
+	
+	public void testToJson()
+	{
+		ReportFormat rf = new ReportFormat();
+		rf.setStartSection("start");
+		rf.setEndSection("end");
+		rf.setDetailSection("detail");
+		
+		ReportFormat got = new ReportFormat(rf.toJson());
+		assertEquals("didn't save start?", rf.getStartSection(), got.getStartSection());
+		assertEquals("didn't save detail?", rf.getDetailSection(), got.getDetailSection());
+		assertEquals("didn't save end?", rf.getEndSection(), got.getEndSection());
 	}
 }

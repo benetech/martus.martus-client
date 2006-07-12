@@ -26,18 +26,69 @@ Boston, MA 02111-1307, USA.
 
 package org.martus.client.reports;
 
+import org.json.JSONObject;
+
 
 public class ReportFormat
 {
-	public ReportFormat(String detailSection)
+	public ReportFormat()
 	{
-		this.detailSection = detailSection;
+		setStartSection("");
+		setDetailSection("");
+		setEndSection("");
+	}
+	
+	public ReportFormat(JSONObject json)
+	{
+		setStartSection(json.getString(TAG_START_SECTION));
+		setDetailSection(json.getString(TAG_DETAIL_SECTION));
+		setEndSection(json.getString(TAG_END_SECTION));
+	}
+	
+	public void setStartSection(String section)
+	{
+		startSection = section;
+	}
+	
+	public String getStartSection()
+	{
+		return startSection;
+	}
+	
+	public void setEndSection(String section)
+	{
+		endSection = section;
+	}
+	
+	public String getEndSection()
+	{
+		return endSection;
+	}
+	
+	public void setDetailSection(String section)
+	{
+		detailSection = section;
 	}
 	
 	public String getDetailSection()
 	{
 		return detailSection;
 	}
+	
+	public JSONObject toJson()
+	{
+		JSONObject json = new JSONObject();
+		json.put(TAG_START_SECTION, getStartSection());
+		json.put(TAG_DETAIL_SECTION, getDetailSection());
+		json.put(TAG_END_SECTION, getEndSection());
+		return json;
+	}
+	
+	final static String TAG_START_SECTION = "StartSection";
+	final static String TAG_DETAIL_SECTION = "DetailSection";
+	final static String TAG_END_SECTION = "EndSection";
 
+	private String startSection;
 	private String detailSection;
+	private String endSection;
 }

@@ -95,7 +95,8 @@ public class TestReportRunner extends TestCaseEnhanced
 		MockMartusApp app = MockMartusApp.create();
 		app.loadSampleData();
 		BulletinStore store = app.getStore();
-		ReportFormat rf = new ReportFormat("$i. $bulletin.localId\n");
+		ReportFormat rf = new ReportFormat();
+		rf.setDetailSection("$i. $bulletin.localId\n");
 		StringWriter result = new StringWriter();
 		Vector keys = store.scanForLeafKeys();
 		rr.runReport(rf, store.getDatabase(), keys, result);
@@ -132,11 +133,41 @@ public class TestReportRunner extends TestCaseEnhanced
 		
 		Vector keys = new Vector();
 		keys.add(b.getDatabaseKey());
-		ReportFormat rf = new ReportFormat("$bulletin.field('custom')");
+		ReportFormat rf = new ReportFormat();
+		rf.setDetailSection("$bulletin.field('custom')");
 		StringWriter result = new StringWriter();
 		rr.runReport(rf, app.getStore().getDatabase(), keys, result);
 		
 		assertEquals(sampleCustomData, result.toString());
+	}
+	
+	public void testStartSection() throws Exception
+	{
+		ReportFormat rf = new ReportFormat();
+		String startSection = "start";
+		rf.setStartSection(startSection);
+		String result = runReportOnSampleData(rf);
+		assertEquals("didn't output start section just once?", startSection, result);
+	}
+
+	public void testEndSection() throws Exception
+	{
+		ReportFormat rf = new ReportFormat();
+		String endSection = "end";
+		rf.setEndSection(endSection);
+		String result = runReportOnSampleData(rf);
+		assertEquals("didn't output end section just once?", endSection, result);
+	}
+
+	private String runReportOnSampleData(ReportFormat rf) throws Exception
+	{
+		MockMartusApp app = MockMartusApp.create();
+		app.loadSampleData();
+		BulletinStore store = app.getStore();
+		Vector keys = store.scanForLeafKeys();
+		StringWriter result = new StringWriter();
+		rr.runReport(rf, store.getDatabase(), keys, result);
+		return result.toString();
 	}
 	
 	private String performMerge(String template) throws Exception

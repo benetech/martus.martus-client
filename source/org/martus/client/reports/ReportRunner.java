@@ -56,6 +56,7 @@ public class ReportRunner
 	{
 		Context context = new VelocityContext();
 		
+		performMerge(rf.getStartSection(), destination, context);
 		for(int i=0; i < keysToInclude.size(); ++i)
 		{
 			DatabaseKey key = (DatabaseKey)keysToInclude.get(i);
@@ -64,7 +65,9 @@ public class ReportRunner
 			
 			context.put("i", new Integer(i+1));
 			performMerge(rf.getDetailSection(), destination, context);
+			context.remove("bulletin");
 		}
+		performMerge(rf.getEndSection(), destination, context);
 	}
 	
 	public void performMerge(String template, Writer result, Context context) throws Exception
