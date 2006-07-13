@@ -202,10 +202,10 @@ public class ActionMenuReports extends ActionPrint
 //		}
 
 		if(sendToDisk)
-			printToDisk(rf, partialBulletinsToPrint);
+			printToDisk(rf, partialBulletinsToPrint, includePrivateData);
 	}
 	
-	void printToDisk(ReportFormat rf, PartialBulletin[] partialBulletinsToPrint) throws Exception
+	void printToDisk(ReportFormat rf, PartialBulletin[] partialBulletinsToPrint, boolean includePrivate) throws Exception
 	{
 		File destFile = chooseDestinationFile();
 		if(destFile == null)
@@ -214,9 +214,14 @@ public class ActionMenuReports extends ActionPrint
 		UnicodeWriter destination = new UnicodeWriter(destFile);
 		Vector keys = new Vector();
 		for(int i = 0; i < partialBulletinsToPrint.length; ++i)
-			keys.add(DatabaseKey.createLegacyKey(partialBulletinsToPrint[i].getUniversalId()));
+		{
+			boolean isAllPrivate = FieldSpec.TRUESTRING.equals(partialBulletinsToPrint[i].getData(Bulletin.PSEUDOFIELD_ALL_PRIVATE));
+			if(includePrivate || !isAllPrivate)
+				keys.add(DatabaseKey.createLegacyKey(partialBulletinsToPrint[i].getUniversalId()));
+		}
 		ReportRunner rr = new ReportRunner(mainWindow.getApp().getSecurity(), mainWindow.getLocalization());
 		rr.runReport(rf, mainWindow.getStore().getDatabase(), keys, destination);
+		destination.close();
 	}
 		
 	static class RunOrCreateReportDialog extends JDialog implements ActionListener
