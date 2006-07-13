@@ -94,8 +94,8 @@ public class TestBulletinSearcher extends TestCaseEnhanced
 		SafeReadableBulletin b = new SafeReadableBulletin(realBulletin, localization);
 		BulletinSearcher contains = new BulletinSearcher(new SearchTreeNode(noSuchField, "", sampleValue));
 		assertFalse(": matched non-existant field?", contains.doesMatch(b, localization));
-		BulletinSearcher lessThan = new BulletinSearcher(new SearchTreeNode(noSuchField, "<", sampleValue));
-		assertFalse("< matched non-existant field?", lessThan.doesMatch(b, localization));
+		BulletinSearcher greaterThan = new BulletinSearcher(new SearchTreeNode(noSuchField, ">", sampleValue));
+		assertFalse("> matched non-existant field?", greaterThan.doesMatch(b, localization));
 		
 	}
 

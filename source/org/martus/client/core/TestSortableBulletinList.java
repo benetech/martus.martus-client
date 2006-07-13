@@ -113,20 +113,17 @@ public class TestSortableBulletinList extends TestCaseEnhanced
 			FieldSpec.createCustomField(tag, "Label", new FieldTypeNormal()),
 		};
 		Bulletin missingCustom = new Bulletin(security);
-		Bulletin hasEmptyCustom = new Bulletin(security, publicFields, StandardFieldSpecs.getDefaultBottomSectionFieldSpecs());
 		Bulletin hasFullCustom = new Bulletin(security, publicFields, StandardFieldSpecs.getDefaultBottomSectionFieldSpecs());
 		hasFullCustom.set(tag, "blah blah blah");
 		
 		String[] tags = {tag};
 		SortableBulletinList list = new SortableBulletinList(localization, tags);
 		list.add(missingCustom);
-		list.add(hasEmptyCustom);
 		list.add(hasFullCustom);
 		
 		PartialBulletin[] result = list.getSortedPartialBulletins();
-		assertEquals("Null not first?", null, result[0].getData(tag));
-		assertEquals("Empty not next?", "", result[1].getData(tag));
-		assertEquals("Full not last?", hasFullCustom.get(tag), result[2].getData(tag));
+		assertEquals("Missing not first?", "", result[0].getData(tag));
+		assertEquals("Full not last?", hasFullCustom.get(tag), result[1].getData(tag));
 		
 	}
 	

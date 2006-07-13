@@ -31,6 +31,7 @@ import org.martus.common.bulletin.Bulletin;
 import org.martus.common.field.MartusField;
 import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.fieldspec.FieldType;
+import org.martus.common.fieldspec.FieldTypeNormal;
 import org.martus.common.packet.UniversalId;
 
 
@@ -59,9 +60,13 @@ public class SafeReadableBulletin
 		{
 			MartusField original = realBulletin.getField(tag);
 			if(original == null)
-				return null;
+			{
+				FieldSpec plainSpec = FieldSpec.createCustomField(tag, tag, new FieldTypeNormal());
+				MartusField empty = new MartusField(plainSpec);
+				return empty;
+			}
 			
-			MartusField result = new MartusField(original);
+			MartusField result = original.createClone();
 			
 			if(omitPrivate)
 			{
