@@ -113,7 +113,8 @@ public class ActionMenuReports extends ActionPrint
 	
 	ReportFormat chooseReport() throws Exception
 	{
-		FileDialogResults results = UiFileChooser.displayFileOpenDialog(mainWindow, "Run Report", "");
+		String title = getLocalization().getWindowTitle("ChooseReportToRun");
+		FileDialogResults results = UiFileChooser.displayFileOpenDialog(mainWindow, title, "");
 		if(results.wasCancelChoosen())
 			return null;
 		
@@ -129,7 +130,9 @@ public class ActionMenuReports extends ActionPrint
 		TabularReportBuilder builder = new TabularReportBuilder(getLocalization());
 		FieldSpec[] specs = StandardFieldSpecs.getDefaultTopSectionFieldSpecs();
 		ReportFormat rf = builder.createTabular(specs);
-		FileDialogResults results = UiFileChooser.displayFileSaveDialog(mainWindow, "Save Report As", "");
+		
+		String title = getLocalization().getWindowTitle("SaveReportAs");
+		FileDialogResults results = UiFileChooser.displayFileSaveDialog(mainWindow, title, "");
 		if(results.wasCancelChoosen())
 			return null;
 		UnicodeWriter writer = new UnicodeWriter(results.getChosenFile());
