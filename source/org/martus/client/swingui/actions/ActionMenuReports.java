@@ -29,24 +29,37 @@ import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.util.Vector;
 
 import javax.swing.Box;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 
+import org.json.JSONObject;
 import org.martus.client.core.SortableBulletinList;
+import org.martus.client.reports.ReportFormat;
+import org.martus.client.reports.ReportRunner;
+import org.martus.client.reports.TabularReportBuilder;
 import org.martus.client.search.SearchTreeNode;
 import org.martus.client.search.SortFieldChooserSpecBuilder;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.fields.UiPopUpTreeEditor;
 import org.martus.clientside.UiLocalization;
+import org.martus.common.MiniLocalization;
 import org.martus.common.bulletin.Bulletin;
+import org.martus.common.database.DatabaseKey;
+import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.fieldspec.PopUpTreeFieldSpec;
+import org.martus.common.fieldspec.StandardFieldSpecs;
 import org.martus.common.packet.UniversalId;
 import org.martus.swing.UiButton;
+import org.martus.swing.UiFileChooser;
 import org.martus.swing.UiWrappedTextArea;
 import org.martus.swing.Utilities;
+import org.martus.swing.UiFileChooser.FileDialogResults;
+import org.martus.util.UnicodeReader;
+import org.martus.util.UnicodeWriter;
 
 
 public class ActionMenuReports extends ActionPrint
@@ -65,36 +78,161 @@ public class ActionMenuReports extends ActionPrint
 	{
 		try
 		{
-			SearchTreeNode searchTree = mainWindow.askUserForSearchCriteria();
-			if(searchTree == null)
-				return;
+			MiniLocalization localization = mainWindow.getLocalization();
 			
-			SortFieldsDialog dlg = new SortFieldsDialog(mainWindow);
-			dlg.setVisible(true);
-			if(!dlg.ok())
+			String runButtonLabel = localization.getButtonLabel("RunReport");
+			String createButtonLabel = localization.getButtonLabel("CreateReport");
+			String cancelButtonLabel = localization.getButtonLabel("cancel");
+			String[] buttonLabels = {runButtonLabel, createButtonLabel, cancelButtonLabel, };
+			RunOrCreateReportDialog runOrCreate = new RunOrCreateReportDialog(mainWindow, buttonLabels);
+			runOrCreate.setVisible(true);
+			String pressed = runOrCreate.getPressedButtonLabel();
+			if(pressed == null || pressed.equals(cancelButtonLabel))
 				return;
-			
-			String[] sortTags = dlg.getSortTags();
-
-			SortableBulletinList bulletinIdsFromSearch = mainWindow.doSearch(searchTree, sortTags);
-			if(bulletinIdsFromSearch == null)
-				return;
-			int bulletinsMatched = bulletinIdsFromSearch.size();
-			if(bulletinIdsFromSearch.size() == 0)
+			if(pressed.equals(runButtonLabel))
 			{
-				mainWindow.notifyDlg("SearchFailed");
-				return;
+				ReportFormat rf = chooseReport();
+				if(rf == null)
+					return;
+				runReport(rf);
 			}
-			mainWindow.showNumberOfBulletinsFound(bulletinsMatched, "ReportFound");
-			UniversalId[] bulletinIds = bulletinIdsFromSearch.getSortedUniversalIds();
-			Vector bulletinsToReportOn = mainWindow.getBulletins(bulletinIds);
-			printBulletins(bulletinsToReportOn);
-		} 
+			if(pressed.equals(createButtonLabel))
+			{
+				ReportFormat rf = createReport();
+				if(rf == null)
+					return;
+				runReport(rf);
+			}
+		}
 		catch (Exception e)
 		{
 			e.printStackTrace();
 			mainWindow.notifyDlgBeep("UnexpectedError");
 		}
+	}
+	
+	ReportFormat chooseReport() throws Exception
+	{
+		FileDialogResults results = UiFileChooser.displayFileOpenDialog(mainWindow, "Run Report", "");
+		if(results.wasCancelChoosen())
+			return null;
+		
+		UnicodeReader reader = new UnicodeReader(results.getChosenFile());
+		String reportFormatText = reader.readAll();
+		reader.close();
+		
+		return new ReportFormat(new JSONObject(reportFormatText));
+	}
+	
+	ReportFormat createReport() throws Exception
+	{
+		TabularReportBuilder builder = new TabularReportBuilder(getLocalization());
+		FieldSpec[] specs = StandardFieldSpecs.getDefaultTopSectionFieldSpecs();
+		ReportFormat rf = builder.createTabular(specs);
+		FileDialogResults results = UiFileChooser.displayFileSaveDialog(mainWindow, "Save Report As", "");
+		if(results.wasCancelChoosen())
+			return null;
+		UnicodeWriter writer = new UnicodeWriter(results.getChosenFile());
+		writer.write(rf.toJson().toString());
+		writer.close();
+		return rf;
+	}
+	
+	void runReport(ReportFormat rf) throws Exception
+	{
+		SearchTreeNode searchTree = mainWindow.askUserForSearchCriteria();
+		if(searchTree == null)
+			return;
+		
+		SortFieldsDialog dlg = new SortFieldsDialog(mainWindow);
+		dlg.setVisible(true);
+		if(!dlg.ok())
+			return;
+		
+		String[] sortTags = dlg.getSortTags();
+
+		SortableBulletinList bulletinIdsFromSearch = mainWindow.doSearch(searchTree, sortTags);
+		if(bulletinIdsFromSearch == null)
+			return;
+		int bulletinsMatched = bulletinIdsFromSearch.size();
+		if(bulletinIdsFromSearch.size() == 0)
+		{
+			mainWindow.notifyDlg("SearchFailed");
+			return;
+		}
+		mainWindow.showNumberOfBulletinsFound(bulletinsMatched, "ReportFound");
+		UniversalId[] bulletinIds = bulletinIdsFromSearch.getSortedUniversalIds();
+		printBulletins(rf, bulletinIds);
+//			Vector bulletinsToReportOn = mainWindow.getBulletins(bulletinIds);
+//			printBulletins(bulletinsToReportOn);
+	}
+	
+	void printBulletins(ReportFormat rf, UniversalId[] uidsToPrint) throws Exception
+	{
+		mainWindow.notifyDlg(mainWindow, "AskAboutPrivateAndDiskHere");
+//		UiPrintBulletinDlg dlg = new UiPrintBulletinDlg(mainWindow, currentSelectedBulletins);
+//		dlg.setVisible(true);		
+//		if (!dlg.wasContinueButtonPressed())
+//			return;							
+//		boolean includePrivateData = dlg.wantsPrivateData();
+//		boolean sendToDisk = dlg.wantsToPrintToDisk();
+//
+//		if(sendToDisk)
+//		{
+//			printToDisk(currentSelectedBulletins, includePrivateData);
+//		}
+//		else
+//		{
+//			printToPrinter(currentSelectedBulletins, includePrivateData);
+//		}
+
+		File destFile = chooseDestinationFile();
+		if(destFile == null)
+			return;
+		
+		UnicodeWriter destination = new UnicodeWriter(destFile);
+		Vector keys = new Vector();
+		for(int i = 0; i < uidsToPrint.length; ++i)
+			keys.add(DatabaseKey.createLegacyKey(uidsToPrint[i]));
+		ReportRunner rr = new ReportRunner(mainWindow.getApp().getSecurity(), mainWindow.getLocalization());
+		rr.runReport(rf, mainWindow.getStore().getDatabase(), keys, destination);
+	}
+		
+	static class RunOrCreateReportDialog extends JDialog implements ActionListener
+	{
+		public RunOrCreateReportDialog(UiMainWindow mainWindow, String[] buttonLabels)
+		{
+			super(mainWindow);
+			setModal(true);
+			setTitle(mainWindow.getLocalization().getWindowTitle("RunOrCreateReport"));
+			Container panel = getContentPane();
+			Box buttonBox = Box.createHorizontalBox();
+			buttonBox.add(Box.createHorizontalGlue());
+			for(int i = 0; i < buttonLabels.length; ++i)
+			{
+				UiButton button = new UiButton(buttonLabels[i]);
+				button.addActionListener(this);
+				buttonBox.add(button);
+			}
+			
+			panel.add(buttonBox);
+			pack();
+			Utilities.centerDlg(this);
+		}
+		
+		public String getPressedButtonLabel()
+		{
+			return pressedButtonLabel;
+		}
+
+		public void actionPerformed(ActionEvent event)
+		{
+			UiButton button = (UiButton)event.getSource();
+			pressedButtonLabel = button.getText();
+			dispose();
+		}
+		
+		String pressedButtonLabel;
 	}
 	
 	static class SortFieldsDialog extends JDialog implements ActionListener
