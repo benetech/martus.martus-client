@@ -37,6 +37,7 @@ import javax.swing.JDialog;
 import javax.swing.JPanel;
 
 import org.json.JSONObject;
+import org.martus.client.core.PartialBulletin;
 import org.martus.client.core.SortableBulletinList;
 import org.martus.client.reports.ReportFormat;
 import org.martus.client.reports.ReportRunner;
@@ -44,6 +45,7 @@ import org.martus.client.reports.TabularReportBuilder;
 import org.martus.client.search.SearchTreeNode;
 import org.martus.client.search.SortFieldChooserSpecBuilder;
 import org.martus.client.swingui.UiMainWindow;
+import org.martus.client.swingui.dialogs.UiPrintBulletinDlg;
 import org.martus.client.swingui.fields.UiPopUpTreeEditor;
 import org.martus.clientside.UiLocalization;
 import org.martus.common.MiniLocalization;
@@ -52,7 +54,6 @@ import org.martus.common.database.DatabaseKey;
 import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.fieldspec.PopUpTreeFieldSpec;
 import org.martus.common.fieldspec.StandardFieldSpecs;
-import org.martus.common.packet.UniversalId;
 import org.martus.swing.UiButton;
 import org.martus.swing.UiFileChooser;
 import org.martus.swing.UiWrappedTextArea;
@@ -152,34 +153,45 @@ public class ActionMenuReports extends ActionPrint
 		if(!dlg.ok())
 			return;
 		
-		String[] sortTags = dlg.getSortTags();
+		String[] userSortTags = dlg.getSortTags();
+		String[] sortTags = new String[userSortTags.length + 1];
+		System.arraycopy(userSortTags, 0, sortTags, 0, userSortTags.length);
+		sortTags[userSortTags.length] = Bulletin.PSEUDOFIELD_ALL_PRIVATE;
 
-		SortableBulletinList bulletinIdsFromSearch = mainWindow.doSearch(searchTree, sortTags);
-		if(bulletinIdsFromSearch == null)
+		SortableBulletinList sortableList = mainWindow.doSearch(searchTree, sortTags);
+		if(sortableList == null)
 			return;
-		int bulletinsMatched = bulletinIdsFromSearch.size();
-		if(bulletinIdsFromSearch.size() == 0)
+		int bulletinsMatched = sortableList.size();
+		if(sortableList.size() == 0)
 		{
 			mainWindow.notifyDlg("SearchFailed");
 			return;
 		}
 		mainWindow.showNumberOfBulletinsFound(bulletinsMatched, "ReportFound");
-		UniversalId[] bulletinIds = bulletinIdsFromSearch.getSortedUniversalIds();
-		printBulletins(rf, bulletinIds);
+		PartialBulletin[] sortedPartialBulletins = sortableList.getSortedPartialBulletins();
+		printBulletins(rf, sortedPartialBulletins);
 //			Vector bulletinsToReportOn = mainWindow.getBulletins(bulletinIds);
 //			printBulletins(bulletinsToReportOn);
 	}
 	
-	void printBulletins(ReportFormat rf, UniversalId[] uidsToPrint) throws Exception
+	void printBulletins(ReportFormat rf, PartialBulletin[] partialBulletinsToPrint) throws Exception
 	{
-		mainWindow.notifyDlg(mainWindow, "AskAboutPrivateAndDiskHere");
-//		UiPrintBulletinDlg dlg = new UiPrintBulletinDlg(mainWindow, currentSelectedBulletins);
-//		dlg.setVisible(true);		
-//		if (!dlg.wasContinueButtonPressed())
-//			return;							
-//		boolean includePrivateData = dlg.wantsPrivateData();
-//		boolean sendToDisk = dlg.wantsToPrintToDisk();
-//
+		boolean isAnyBulletinAllPrivate = false;
+		for(int i = 0; i < partialBulletinsToPrint.length; ++i)
+		{
+			if(FieldSpec.TRUESTRING.equals(partialBulletinsToPrint[i].getData(Bulletin.PSEUDOFIELD_ALL_PRIVATE)))
+			{
+				isAnyBulletinAllPrivate = true;
+				break;
+			}
+		}
+		UiPrintBulletinDlg dlg = new UiPrintBulletinDlg(mainWindow, isAnyBulletinAllPrivate);
+		dlg.setVisible(true);		
+		if (!dlg.wasContinueButtonPressed())
+			return;							
+		boolean includePrivateData = dlg.wantsPrivateData();
+		boolean sendToDisk = dlg.wantsToPrintToDisk();
+
 //		if(sendToDisk)
 //		{
 //			printToDisk(currentSelectedBulletins, includePrivateData);
@@ -189,14 +201,20 @@ public class ActionMenuReports extends ActionPrint
 //			printToPrinter(currentSelectedBulletins, includePrivateData);
 //		}
 
+		if(sendToDisk)
+			printToDisk(rf, partialBulletinsToPrint);
+	}
+	
+	void printToDisk(ReportFormat rf, PartialBulletin[] partialBulletinsToPrint) throws Exception
+	{
 		File destFile = chooseDestinationFile();
 		if(destFile == null)
 			return;
 		
 		UnicodeWriter destination = new UnicodeWriter(destFile);
 		Vector keys = new Vector();
-		for(int i = 0; i < uidsToPrint.length; ++i)
-			keys.add(DatabaseKey.createLegacyKey(uidsToPrint[i]));
+		for(int i = 0; i < partialBulletinsToPrint.length; ++i)
+			keys.add(DatabaseKey.createLegacyKey(partialBulletinsToPrint[i].getUniversalId()));
 		ReportRunner rr = new ReportRunner(mainWindow.getApp().getSecurity(), mainWindow.getLocalization());
 		rr.runReport(rf, mainWindow.getStore().getDatabase(), keys, destination);
 	}

@@ -55,9 +55,14 @@ public class UiPrintBulletinDlg extends JDialog implements ActionListener
 {
 	public UiPrintBulletinDlg(UiMainWindow mainWindowToUse, Vector bulletinsToPrint)
 	{
+		this(mainWindowToUse, isAnyBulletinAllPrivate(bulletinsToPrint));	
+	}
+	
+	public UiPrintBulletinDlg(UiMainWindow mainWindowToUse, boolean warnAboutPrivateData)
+	{
 		super(mainWindowToUse, "", true);
 		mainWindow = mainWindowToUse;
-		allPrivateData = isAnyBulletinAllPrivate(bulletinsToPrint);	
+		allPrivateData = warnAboutPrivateData;
 		init();	
 	}
 	
@@ -153,7 +158,7 @@ public class UiPrintBulletinDlg extends JDialog implements ActionListener
 		dispose();
 	}
 	
-	private boolean isAnyBulletinAllPrivate(Vector currentSelectedBulletins)
+	private static boolean isAnyBulletinAllPrivate(Vector currentSelectedBulletins)
 	{
 		boolean isAnyAllPrivate = false;
 		Iterator iter = currentSelectedBulletins.iterator();
