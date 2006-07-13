@@ -52,7 +52,7 @@ public class ReportRunner
 		engine.init();
 	}
 	
-	public void runReport(ReportFormat rf, ReadableDatabase db, Vector keysToInclude, Writer destination) throws Exception
+	public void runReport(ReportFormat rf, ReadableDatabase db, Vector keysToInclude, Writer destination, boolean includePrivate) throws Exception
 	{
 		Context context = new VelocityContext();
 		
@@ -61,7 +61,10 @@ public class ReportRunner
 		{
 			DatabaseKey key = (DatabaseKey)keysToInclude.get(i);
 			Bulletin b = BulletinLoader.loadFromDatabase(db, key, signatureVerifier);
-			context.put("bulletin", new SafeReadableBulletin(b, localization));
+			SafeReadableBulletin safeReadableBulletin = new SafeReadableBulletin(b, localization);
+			if(!includePrivate)
+				safeReadableBulletin.removePrivateData();
+			context.put("bulletin", safeReadableBulletin);
 			
 			context.put("i", new Integer(i+1));
 			performMerge(rf.getDetailSection(), destination, context);

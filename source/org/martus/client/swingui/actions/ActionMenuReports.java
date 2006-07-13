@@ -220,7 +220,7 @@ public class ActionMenuReports extends ActionPrint
 				keys.add(DatabaseKey.createLegacyKey(partialBulletinsToPrint[i].getUniversalId()));
 		}
 		ReportRunner rr = new ReportRunner(mainWindow.getApp().getSecurity(), mainWindow.getLocalization());
-		rr.runReport(rf, mainWindow.getStore().getDatabase(), keys, destination);
+		rr.runReport(rf, mainWindow.getStore().getDatabase(), keys, destination, includePrivate);
 		destination.close();
 	}
 		

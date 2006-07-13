@@ -99,7 +99,7 @@ public class TestReportRunner extends TestCaseEnhanced
 		rf.setDetailSection("$i. $bulletin.localId\n");
 		StringWriter result = new StringWriter();
 		Vector keys = store.scanForLeafKeys();
-		rr.runReport(rf, store.getDatabase(), keys, result);
+		rr.runReport(rf, store.getDatabase(), keys, result, true);
 		StringBuffer expected = new StringBuffer();
 		for(int i=0; i < keys.size(); ++i)
 		{
@@ -136,7 +136,7 @@ public class TestReportRunner extends TestCaseEnhanced
 		ReportFormat rf = new ReportFormat();
 		rf.setDetailSection("$bulletin.field('custom')");
 		StringWriter result = new StringWriter();
-		rr.runReport(rf, app.getStore().getDatabase(), keys, result);
+		rr.runReport(rf, app.getStore().getDatabase(), keys, result, true);
 		
 		assertEquals(sampleCustomData, result.toString());
 	}
@@ -158,7 +158,7 @@ public class TestReportRunner extends TestCaseEnhanced
 		String result = runReportOnSampleData(rf);
 		assertEquals("didn't output end section just once?", endSection, result);
 	}
-
+	
 	private String runReportOnSampleData(ReportFormat rf) throws Exception
 	{
 		MockMartusApp app = MockMartusApp.create();
@@ -166,7 +166,7 @@ public class TestReportRunner extends TestCaseEnhanced
 		BulletinStore store = app.getStore();
 		Vector keys = store.scanForLeafKeys();
 		StringWriter result = new StringWriter();
-		rr.runReport(rf, store.getDatabase(), keys, result);
+		rr.runReport(rf, store.getDatabase(), keys, result, true);
 		return result.toString();
 	}
 	

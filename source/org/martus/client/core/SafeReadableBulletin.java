@@ -55,7 +55,27 @@ public class SafeReadableBulletin
 	
 	public MartusField field(String tag)
 	{
-		return realBulletin.getField(tag);
+		try
+		{
+			MartusField original = realBulletin.getField(tag);
+			if(original == null)
+				return null;
+			
+			MartusField result = new MartusField(original);
+			
+			if(omitPrivate)
+			{
+				if(realBulletin.isAllPrivate() || realBulletin.isFieldInPrivateSection(tag))
+					result.setData("");
+			}
+			
+			return result;
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+			return null;
+		}
 	}
 	
 	public UniversalId getUniversalId()
@@ -101,6 +121,11 @@ public class SafeReadableBulletin
 		return field;
 	}
 	
+	public void removePrivateData()
+	{
+		omitPrivate = true;
+	}
+	
 	public static String[] parseNestedTags(String tagsToParse)
 	{
 		return tagsToParse.split("\\.");
@@ -108,4 +133,5 @@ public class SafeReadableBulletin
 
 	Bulletin realBulletin;
 	MiniLocalization localization;
+	boolean omitPrivate;
 }

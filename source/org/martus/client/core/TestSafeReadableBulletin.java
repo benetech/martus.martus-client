@@ -26,6 +26,9 @@ Boston, MA 02111-1307, USA.
 
 package org.martus.client.core;
 
+import org.martus.common.MiniLocalization;
+import org.martus.common.bulletin.Bulletin;
+import org.martus.common.crypto.MockMartusSecurity;
 import org.martus.util.TestCaseEnhanced;
 
 public class TestSafeReadableBulletin extends TestCaseEnhanced
@@ -45,4 +48,22 @@ public class TestSafeReadableBulletin extends TestCaseEnhanced
 		assertEquals("gh", result[2]);
 	}
 
+	public void testRemovePrivateFieldData() throws Exception
+	{
+		MiniLocalization localization = new MiniLocalization();
+		MockMartusSecurity security = MockMartusSecurity.createClient();
+		Bulletin b = new Bulletin(security);
+		b.setAllPrivate(false);
+		b.set(Bulletin.TAGPUBLICINFO, "public");
+		b.set(Bulletin.TAGPRIVATEINFO, "private");
+		SafeReadableBulletin srb = new SafeReadableBulletin(b, localization);
+		srb.removePrivateData();
+		assertEquals("removed public?", b.get(Bulletin.TAGPUBLICINFO), srb.field(Bulletin.TAGPUBLICINFO).getData());
+		assertEquals("didn't remove private?", "", srb.field(Bulletin.TAGPRIVATEINFO).getData());
+		
+		b.setAllPrivate(true);
+		SafeReadableBulletin srbAllPrivate = new SafeReadableBulletin(b, localization);
+		srbAllPrivate.removePrivateData();
+		assertEquals("didn't remove public?", "", srbAllPrivate.field(Bulletin.TAGPUBLICINFO).getData());
+	}
 }
