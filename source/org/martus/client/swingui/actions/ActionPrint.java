@@ -96,17 +96,16 @@ public class ActionPrint extends UiMartusAction
 			printToPrinter(currentSelectedBulletins, includePrivateData);
 		}
 	}
-	
-	private void printToDisk(Vector currentSelectedBulletins, boolean includePrivateData)
+
+	File chooseDestinationFile()
 	{
-		
 		String title = getLocalization().getWindowTitle("PrintToWhichFile");
 		File destination = new File(getLocalization().getFieldLabel("DefaultPrintToDiskFileName"));
 		while(true)
 		{
 			UiFileChooser.FileDialogResults result = UiFileChooser.displayFileSaveDialog(mainWindow, title, destination);
 			if(result.wasCancelChoosen())
-				return;
+				return null;
 			
 			destination = result.getChosenFile();
 			if(!destination.exists())
@@ -114,6 +113,13 @@ public class ActionPrint extends UiMartusAction
 			if(mainWindow.confirmDlg(mainWindow, "OverWriteExistingFile"))
 				break;
 		}
+		
+		return destination;
+	}
+	
+	private void printToDisk(Vector currentSelectedBulletins, boolean includePrivateData)
+	{
+		File destination = chooseDestinationFile();
 		
 		try
 		{
