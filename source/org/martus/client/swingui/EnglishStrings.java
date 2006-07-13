@@ -808,7 +808,7 @@ public class EnglishStrings
 "field:SearchEntry=Search for:",
 "field:ExportPrivateData=Include private data in export",
 "field:ExportAttachments=Include attachments in export",
-"field:ExportBulletinDetails=Information from the selected bulletins (listed below) will be exported to an XML file that you specify.  This operation exists so you can bring Martus Bulletins into another application that does import XML files.\n\n  You can also import these bulletins back into Martus but the imported bulletins will be new unique bulletins.",
+"field:ExportBulletinDetails=Information from the selected bulletins (listed below) will be exported to an XML file that you specify.  These files can then be used to import the Martus bulletin information into another application.\n\n  You could also use this XML file to import these bulletins back into Martus (as new unique bulletins) if desired.  Please email help@martus.org if you need assistance with this type of importing.",
 "field:HowToCreateNewAccount=One or more accounts already exist on this computer. To create an additional account with a new username and passphrase, click OK.",
 "field:HowToCreateInitialAccount=No accounts exist on this computer.  To create a new account click OK.  Otherwise you can click on the Restore Account tab to restore an account which was previously backed up.",
 "field:UntitledBulletin=Untitled Bulletin",
