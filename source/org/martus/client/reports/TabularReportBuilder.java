@@ -25,10 +25,17 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.reports;
 
+import org.martus.common.MiniLocalization;
 import org.martus.common.fieldspec.FieldSpec;
+import org.martus.common.fieldspec.StandardFieldSpecs;
 
 public class TabularReportBuilder
 {
+	public TabularReportBuilder(MiniLocalization localizationToUse)
+	{
+		localization = localizationToUse;
+	}
+	
 	public ReportFormat createTabular(FieldSpec[] specs)
 	{
 		ReportFormat rf = new ReportFormat();
@@ -48,7 +55,11 @@ public class TabularReportBuilder
 		for(int i = 0; i < specs.length; ++i)
 		{
 			startBuffer.append("<td>");
-			startBuffer.append(specs[i].getLabel());
+			FieldSpec spec = specs[i];
+			String label = spec.getLabel();
+			if(StandardFieldSpecs.isStandardFieldTag(spec.getTag()))
+				label = localization.getFieldLabel(spec.getTag());
+			startBuffer.append(label);
 			startBuffer.append("</td>");
 		}
 		startBuffer.append("</tr>");
@@ -62,7 +73,7 @@ public class TabularReportBuilder
 		for(int i = 0; i < specs.length; ++i)
 		{
 			detailBuffer.append("<td>");
-			detailBuffer.append("$bulletin." + specs[i].getTag());
+			detailBuffer.append("$bulletin.field('" + specs[i].getTag() + "')");
 			detailBuffer.append("</td>");
 		}
 		detailBuffer.append("</tr>");
@@ -75,4 +86,6 @@ public class TabularReportBuilder
 		endBuffer.append("</table></html>");
 		return endBuffer.toString();
 	}
+	
+	MiniLocalization localization;
 }

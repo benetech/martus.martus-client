@@ -25,6 +25,7 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.reports;
 
+import org.martus.common.MiniLocalization;
 import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.fieldspec.FieldTypeNormal;
 import org.martus.util.TestCaseEnhanced;
@@ -43,7 +44,7 @@ public class TestTabularReportBuilder extends TestCaseEnhanced
 			FieldSpec.createCustomField("tag2", "Label2", new FieldTypeNormal()),
 			FieldSpec.createCustomField("tag3", "Label3", new FieldTypeNormal()),
 		};
-		TabularReportBuilder builder = new TabularReportBuilder();
+		TabularReportBuilder builder = new TabularReportBuilder(new MiniLocalization());
 		ReportFormat rf = builder.createTabular(specs);
 		
 		String startSection = rf.getStartSection();
@@ -57,7 +58,7 @@ public class TestTabularReportBuilder extends TestCaseEnhanced
 		String detailSection = rf.getDetailSection();
 		for(int i = 0; i < specs.length; ++i)
 		{
-			String tag = "$bulletin." + specs[i].getTag();
+			String tag = "$bulletin.field('" + specs[i].getTag() + "')";
 			assertContains("Missing " + tag + "?", tag, detailSection);
 		}
 		
