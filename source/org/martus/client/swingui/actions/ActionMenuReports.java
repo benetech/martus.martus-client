@@ -35,6 +35,7 @@ import java.util.Vector;
 import javax.swing.Box;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
+import javax.swing.filechooser.FileFilter;
 
 import org.json.JSONObject;
 import org.martus.client.core.PartialBulletin;
@@ -115,7 +116,11 @@ public class ActionMenuReports extends ActionPrint
 	ReportFormat chooseReport() throws Exception
 	{
 		String title = getLocalization().getWindowTitle("ChooseReportToRun");
-		FileDialogResults results = UiFileChooser.displayFileOpenDialog(mainWindow, title, "");
+		File directory = mainWindow.getApp().getCurrentAccountDirectory();
+		String buttonLabel = getLocalization().getButtonLabel("Select");
+		FileFilter filter = new ReportFormatFilter(getLocalization());
+		FileDialogResults results = UiFileChooser.displayFileOpenDialog(mainWindow, 
+				title, directory, buttonLabel, filter);
 		if(results.wasCancelChoosen())
 			return null;
 		
@@ -133,10 +138,16 @@ public class ActionMenuReports extends ActionPrint
 		ReportFormat rf = builder.createTabular(specs);
 		
 		String title = getLocalization().getWindowTitle("SaveReportAs");
-		FileDialogResults results = UiFileChooser.displayFileSaveDialog(mainWindow, title, "");
+		File directory = mainWindow.getApp().getCurrentAccountDirectory();
+		FileFilter filter = new ReportFormatFilter(getLocalization());
+		FileDialogResults results = UiFileChooser.displayFileSaveDialog(mainWindow, 
+				title, directory, filter);
 		if(results.wasCancelChoosen())
 			return null;
-		UnicodeWriter writer = new UnicodeWriter(results.getChosenFile());
+		File file = results.getChosenFile();
+		if(!file.getName().toLowerCase().endsWith(MRF_FILE_EXTENSION))
+			file = new File(file.getAbsolutePath() + MRF_FILE_EXTENSION);
+		UnicodeWriter writer = new UnicodeWriter(file);
 		writer.write(rf.toJson().toString());
 		writer.close();
 		return rf;
@@ -344,4 +355,27 @@ public class ActionMenuReports extends ActionPrint
 		private static String[] sortTags;
 	}
 
+	class ReportFormatFilter extends FileFilter
+	{
+		public ReportFormatFilter(MiniLocalization localizationToUse)
+		{
+			localization = localizationToUse;
+		}
+		
+		public boolean accept(File f)
+		{
+			return (f.getName().toLowerCase().endsWith(MRF_FILE_EXTENSION));
+		}
+
+		public String getDescription()
+		{
+			return localization.getFieldLabel("MartusReportFormat");
+		}
+
+		MiniLocalization localization;
+	}
+
+	private static final String MRF_FILE_EXTENSION = ".mrf";
+
 }
+
