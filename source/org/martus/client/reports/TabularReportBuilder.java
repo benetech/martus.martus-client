@@ -73,7 +73,7 @@ public class TabularReportBuilder
 		for(int i = 0; i < specs.length; ++i)
 		{
 			detailBuffer.append("<td>");
-			detailBuffer.append("$bulletin.get('" + specs[i].getTag() + "')");
+			detailBuffer.append("$bulletin.html('" + specs[i].getTag() + "')");
 			detailBuffer.append("</td>");
 		}
 		detailBuffer.append("</tr>");

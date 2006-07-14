@@ -79,4 +79,17 @@ public class TestSafeReadableBulletin extends TestCaseEnhanced
 		assertEquals(tagEnglish, srb.field(tagLanguage).getData());
 		assertEquals(localization.getLanguageName(tagEnglish), srb.get(tagLanguage));
 	}
+	
+	public void testHtmlEscaping() throws Exception
+	{
+		MiniLocalization localization = new MiniLocalization();
+		MockMartusSecurity security = MockMartusSecurity.createClient();
+		Bulletin b = new Bulletin(security);
+		String tagTitle = Bulletin.TAGTITLE; 
+		b.set(tagTitle, "<>&");
+		SafeReadableBulletin srb = new SafeReadableBulletin(b, localization);
+		assertEquals("Didn't html escape?", "&lt;&gt;&amp;", srb.html(tagTitle));
+	}
+	
+
 }
