@@ -54,6 +54,11 @@ public class SafeReadableBulletin
 		localization = localizationToUse;
 	}
 	
+	public String get(String tag)
+	{
+		return field(tag).getSearchableData(localization);
+	}
+	
 	public MartusField field(String tag)
 	{
 		try
@@ -61,9 +66,7 @@ public class SafeReadableBulletin
 			MartusField original = realBulletin.getField(tag);
 			if(original == null)
 			{
-				FieldSpec plainSpec = FieldSpec.createCustomField(tag, tag, new FieldTypeNormal());
-				MartusField empty = new MartusField(plainSpec);
-				return empty;
+				return createEmptyField(tag);
 			}
 			
 			MartusField result = original.createClone();
@@ -79,8 +82,15 @@ public class SafeReadableBulletin
 		catch(Exception e)
 		{
 			e.printStackTrace();
-			return null;
+			return createEmptyField(tag);
 		}
+	}
+
+	private MartusField createEmptyField(String tag)
+	{
+		FieldSpec plainSpec = FieldSpec.createCustomField(tag, tag, new FieldTypeNormal());
+		MartusField empty = new MartusField(plainSpec);
+		return empty;
 	}
 	
 	public UniversalId getUniversalId()

@@ -66,4 +66,17 @@ public class TestSafeReadableBulletin extends TestCaseEnhanced
 		srbAllPrivate.removePrivateData();
 		assertEquals("didn't remove public?", "", srbAllPrivate.field(Bulletin.TAGPUBLICINFO).getData());
 	}
+	
+	public void testFormattedData() throws Exception
+	{
+		MiniLocalization localization = new MiniLocalization();
+		MockMartusSecurity security = MockMartusSecurity.createClient();
+		Bulletin b = new Bulletin(security);
+		String tagEnglish = MiniLocalization.ENGLISH;
+		String tagLanguage = Bulletin.TAGLANGUAGE; 
+		b.set(tagLanguage, tagEnglish);
+		SafeReadableBulletin srb = new SafeReadableBulletin(b, localization);
+		assertEquals(tagEnglish, srb.field(tagLanguage).getData());
+		assertEquals(localization.getLanguageName(tagEnglish), srb.get(tagLanguage));
+	}
 }

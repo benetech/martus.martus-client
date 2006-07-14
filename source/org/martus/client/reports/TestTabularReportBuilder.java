@@ -58,7 +58,7 @@ public class TestTabularReportBuilder extends TestCaseEnhanced
 		String detailSection = rf.getDetailSection();
 		for(int i = 0; i < specs.length; ++i)
 		{
-			String tag = "$bulletin.field('" + specs[i].getTag() + "')";
+			String tag = "$bulletin.get('" + specs[i].getTag() + "')";
 			assertContains("Missing " + tag + "?", tag, detailSection);
 		}
 		
