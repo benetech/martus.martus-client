@@ -33,7 +33,6 @@ import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.fieldspec.FieldType;
 import org.martus.common.fieldspec.FieldTypeNormal;
 import org.martus.common.packet.UniversalId;
-import org.martus.util.xml.XmlUtilities;
 
 
 /*
@@ -57,11 +56,11 @@ public class SafeReadableBulletin
 	
 	public String html(String tag)
 	{
-		String formattedText = get(tag);
-		return XmlUtilities.getXmlEncoded(formattedText);
+		MartusField field = getPossiblyNestedField(tag);
+		return field.getHtmlData(localization);
 	}
 	
-	public String get(String tag)
+	public String getSearchable(String tag)
 	{
 		return field(tag).getSearchableData(localization);
 	}
