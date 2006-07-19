@@ -56,8 +56,16 @@ public class SafeReadableBulletin
 	
 	public String html(String tag)
 	{
-		MartusField field = getPossiblyNestedField(tag);
-		return field.getHtmlData(localization);
+		try
+		{
+			MartusField field = getPossiblyNestedField(tag);
+			return field.getHtmlData(localization);
+		} 
+		catch (Exception e)
+		{
+			e.printStackTrace();
+			return localization.getFieldLabel("ReportFieldError");
+		}
 	}
 	
 	public String getSearchable(String tag)
