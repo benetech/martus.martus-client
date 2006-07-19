@@ -34,6 +34,7 @@ import java.util.Vector;
 
 import javax.swing.Box;
 import javax.swing.JDialog;
+import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.filechooser.FileFilter;
 
@@ -43,8 +44,10 @@ import org.martus.client.core.SortableBulletinList;
 import org.martus.client.reports.ReportFormat;
 import org.martus.client.reports.ReportRunner;
 import org.martus.client.reports.TabularReportBuilder;
+import org.martus.client.search.FieldChooserSpecBuilder;
 import org.martus.client.search.SearchTreeNode;
 import org.martus.client.search.SortFieldChooserSpecBuilder;
+import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.dialogs.UiPrintBulletinDlg;
 import org.martus.client.swingui.fields.UiPopUpTreeEditor;
@@ -53,10 +56,11 @@ import org.martus.common.MiniLocalization;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.database.DatabaseKey;
 import org.martus.common.fieldspec.FieldSpec;
+import org.martus.common.fieldspec.MiniFieldSpec;
 import org.martus.common.fieldspec.PopUpTreeFieldSpec;
-import org.martus.common.fieldspec.StandardFieldSpecs;
 import org.martus.swing.UiButton;
 import org.martus.swing.UiFileChooser;
+import org.martus.swing.UiScrollPane;
 import org.martus.swing.UiWrappedTextArea;
 import org.martus.swing.Utilities;
 import org.martus.swing.UiFileChooser.FileDialogResults;
@@ -134,7 +138,10 @@ public class ActionMenuReports extends ActionPrint
 	ReportFormat createReport() throws Exception
 	{
 		TabularReportBuilder builder = new TabularReportBuilder(getLocalization());
-		FieldSpec[] specs = StandardFieldSpecs.getDefaultTopSectionFieldSpecs();
+		MiniFieldSpec[] specs = askUserWhichFieldsToInclude();
+		if(specs == null)
+			return null;
+		
 		ReportFormat rf = builder.createTabular(specs);
 		
 		String title = getLocalization().getWindowTitle("SaveReportAs");
@@ -234,7 +241,86 @@ public class ActionMenuReports extends ActionPrint
 		rr.runReport(rf, mainWindow.getStore().getDatabase(), keys, destination, includePrivate);
 		destination.close();
 	}
+	
+	MiniFieldSpec[] askUserWhichFieldsToInclude()
+	{
+		ChooseTabularReportFieldsDialog dlg = new ChooseTabularReportFieldsDialog(mainWindow);
+		dlg.show();
+		return dlg.getSelectedSpecs();
+	}
+	
+	static class ChooseTabularReportFieldsDialog extends JDialog implements ActionListener
+	{
+		public ChooseTabularReportFieldsDialog(UiMainWindow mainWindow)
+		{
+			super(mainWindow);
+			setModal(true);
+			MartusLocalization localization = mainWindow.getLocalization();
+			setTitle(localization.getWindowTitle("ChooseTabularReportFields"));
+			
+			fieldSelector = new ReportFieldSelector(mainWindow);
+			
+			okButton = new UiButton(localization.getButtonLabel("ok"));
+			okButton.addActionListener(this);
+			UiButton cancelButton = new UiButton(localization.getButtonLabel("cancel"));
+			cancelButton.addActionListener(this);
+			Box buttonBar = Box.createHorizontalBox();
+			buttonBar.add(okButton);
+			buttonBar.add(cancelButton);
+
+			JPanel panel = new JPanel(new BorderLayout());
+			panel.add(new UiScrollPane(fieldSelector), BorderLayout.CENTER);
+			panel.add(buttonBar, BorderLayout.AFTER_LAST_LINE);
+
+			getContentPane().add(panel);
+			pack();
+			Utilities.centerDlg(this);
+		}
 		
+		public void actionPerformed(ActionEvent e)
+		{
+			if(e.getSource().equals(okButton))
+			{
+				selectedSpecs = fieldSelector.getSelectedItems();
+			}
+			dispose();
+		}
+		
+		public MiniFieldSpec[] getSelectedSpecs()
+		{
+			return selectedSpecs;
+		}
+		
+		static class ReportFieldSelector extends JPanel
+		{
+			public ReportFieldSelector(UiMainWindow mainWindow)
+			{
+				super(new BorderLayout());
+				FieldChooserSpecBuilder builder = new FieldChooserSpecBuilder(mainWindow.getLocalization());
+				list = new JList(builder.createMiniSpecArray(mainWindow.getStore()));
+				add(list, BorderLayout.CENTER);
+			}
+			
+			public MiniFieldSpec[] getSelectedItems()
+			{
+				Object[] selected = list.getSelectedValues();
+				MiniFieldSpec[] selectedItems = new MiniFieldSpec[selected.length];
+				for(int i = 0; i < selected.length; ++i)
+					selectedItems[i] = (MiniFieldSpec)selected[i];
+				
+				return selectedItems;
+			}
+			
+			JList list;
+		}
+			
+		
+		
+		UiButton okButton;
+		ReportFieldSelector fieldSelector;
+		MiniFieldSpec[] selectedSpecs;
+	}
+	
 	static class RunOrCreateReportDialog extends JDialog implements ActionListener
 	{
 		public RunOrCreateReportDialog(UiMainWindow mainWindow, String[] buttonLabels)

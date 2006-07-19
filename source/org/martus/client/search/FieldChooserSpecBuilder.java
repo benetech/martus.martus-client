@@ -41,6 +41,7 @@ import org.martus.common.fieldspec.FieldType;
 import org.martus.common.fieldspec.FieldTypeDate;
 import org.martus.common.fieldspec.FieldTypeNormal;
 import org.martus.common.fieldspec.GridFieldSpec;
+import org.martus.common.fieldspec.MiniFieldSpec;
 import org.martus.common.fieldspec.PopUpTreeFieldSpec;
 import org.martus.common.fieldspec.SearchFieldTreeModel;
 import org.martus.common.fieldspec.SearchableFieldChoiceItem;
@@ -57,15 +58,27 @@ public class FieldChooserSpecBuilder
 	
 	public PopUpTreeFieldSpec createSpec(ClientBulletinStore storeToUse)
 	{
-		FieldChoicesByLabel allAvailableFields = new FieldChoicesByLabel();
-		addSpecialFields(allAvailableFields);
-		allAvailableFields.add(createLastSavedDateChoice());
-		allAvailableFields.addAll(convertToChoiceItems(storeToUse.getAllKnownFieldSpecs()));
+		FieldChoicesByLabel allAvailableFields = buildFieldChoicesByLabel(storeToUse);
 		
 		SearchFieldTreeModel fieldChoiceModel = new SearchFieldTreeModel(allAvailableFields.asTree(getLocalization()));
 		PopUpTreeFieldSpec fieldColumnSpec = new PopUpTreeFieldSpec(fieldChoiceModel);
 		fieldColumnSpec.setLabel(getLocalization().getFieldLabel("SearchGridHeaderField"));
 		return fieldColumnSpec;
+	}
+
+	private FieldChoicesByLabel buildFieldChoicesByLabel(ClientBulletinStore storeToUse)
+	{
+		FieldChoicesByLabel allAvailableFields = new FieldChoicesByLabel();
+		addSpecialFields(allAvailableFields);
+		allAvailableFields.add(createLastSavedDateChoice());
+		allAvailableFields.addAll(convertToChoiceItems(storeToUse.getAllKnownFieldSpecs()));
+		return allAvailableFields;
+	}
+	
+	public MiniFieldSpec[] createMiniSpecArray(ClientBulletinStore storeToUse)
+	{
+		FieldChoicesByLabel allAvailableFields = buildFieldChoicesByLabel(storeToUse);
+		return allAvailableFields.asArray(localization);
 	}
 	
 	public void addSpecialFields(FieldChoicesByLabel fields)

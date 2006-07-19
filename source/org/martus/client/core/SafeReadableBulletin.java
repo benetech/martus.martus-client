@@ -59,10 +59,13 @@ public class SafeReadableBulletin
 		try
 		{
 			MartusField field = getPossiblyNestedField(tag);
+			if(field == null)
+				return "";
 			return field.getHtmlData(localization);
 		} 
 		catch (Exception e)
 		{
+			System.out.println("SafeReadableBulletin.html failed for tag: " + tag);
 			e.printStackTrace();
 			return localization.getFieldLabel("ReportFieldError");
 		}
