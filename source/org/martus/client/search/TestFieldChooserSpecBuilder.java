@@ -222,7 +222,9 @@ public class TestFieldChooserSpecBuilder extends TestCaseEnhanced
 				FieldSpec gridChoiceNormalColumnSpec = gridChoiceNormalColumn.getSpec();
 				assertEquals("bad normal grid column?", new FieldTypeNormal(), gridChoiceNormalColumnSpec.getType());
 				assertEquals("Grid Label: column 1", gridChoiceNormalColumnSpec.getLabel());
-				assertEquals("gridtag.column 1", gridChoiceNormalColumnSpec.getTag());
+				assertEquals("column 1", gridChoiceNormalColumnSpec.getSubFieldTag());
+				assertEquals("column parent not the grid?", gridSpec.getTag(), gridChoiceNormalColumnSpec.getParent().getTag());
+				assertEquals("wrong column fulltag?", "gridtag.column 1", gridChoiceNormalColumnSpec.getTag());
 			}
 			else
 			{

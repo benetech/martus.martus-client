@@ -39,6 +39,7 @@ import org.martus.common.fieldspec.DropDownFieldSpec;
 import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.fieldspec.FieldType;
 import org.martus.common.fieldspec.FieldTypeDate;
+import org.martus.common.fieldspec.FieldTypeDateRange;
 import org.martus.common.fieldspec.FieldTypeNormal;
 import org.martus.common.fieldspec.GridFieldSpec;
 import org.martus.common.fieldspec.MiniFieldSpec;
@@ -109,10 +110,10 @@ public class FieldChooserSpecBuilder
 
 	public Set getChoiceItemsForThisField(FieldSpec spec)
 	{
-		return getChoiceItemsForThisField(spec, spec.getTag(), "");
+		return getChoiceItemsForThisField(null, spec, spec.getTag(), "");
 	}
 	
-	public Set getChoiceItemsForThisField(FieldSpec spec, String fullTagChain, String displayPrefix)
+	public Set getChoiceItemsForThisField(FieldSpec parent, FieldSpec spec, String possiblySanitizedTag, String displayPrefix)
 	{
 
 		Set choicesForThisField = new HashSet();
@@ -121,11 +122,12 @@ public class FieldChooserSpecBuilder
 		if(shouldOmitType(thisType))
 			return choicesForThisField;
 		
+		String tag = possiblySanitizedTag;
 		String displayString = spec.getLabel();
-		if(StandardFieldSpecs.isStandardFieldTag(fullTagChain))
-			displayString = getLocalization().getFieldLabel(fullTagChain);
+		if(StandardFieldSpecs.isStandardFieldTag(tag))
+			displayString = getLocalization().getFieldLabel(tag);
 		else if(displayString.trim().equals(""))
-			displayString = fullTagChain;
+			displayString = tag;
 
 		displayString = displayPrefix + displayString;
 
@@ -136,8 +138,9 @@ public class FieldChooserSpecBuilder
 		// dateranges create multiple entries
 		if(thisType.isDateRange())
 		{
-			choicesForThisField.addAll(getDateRangeChoiceItem(fullTagChain, MartusDateRangeField.SUBFIELD_BEGIN, displayString));
-			choicesForThisField.addAll(getDateRangeChoiceItem(fullTagChain, MartusDateRangeField.SUBFIELD_END, displayString));
+			FieldSpec specWithParentAndTag = FieldSpec.createSubField(parent, tag, displayString, new FieldTypeDateRange());
+			choicesForThisField.addAll(getDateRangeChoiceItem(specWithParentAndTag, MartusDateRangeField.SUBFIELD_BEGIN));
+			choicesForThisField.addAll(getDateRangeChoiceItem(specWithParentAndTag, MartusDateRangeField.SUBFIELD_END));
 			return choicesForThisField;
 		}
 		
@@ -146,7 +149,8 @@ public class FieldChooserSpecBuilder
 		{
 			DropDownFieldSpec originalSpec = (DropDownFieldSpec)spec;
 			DropDownFieldSpec specWithBetterLabel = new DropDownFieldSpec(originalSpec.getAllChoices());
-			specWithBetterLabel.setTag(fullTagChain);
+			specWithBetterLabel.setParent(parent);
+			specWithBetterLabel.setTag(tag);
 			specWithBetterLabel.setLabel(displayString);
 			choicesForThisField.add(new SearchableFieldChoiceItem(specWithBetterLabel));
 			return choicesForThisField;
@@ -159,8 +163,9 @@ public class FieldChooserSpecBuilder
 			for(int i=0; i < gridSpec.getColumnCount(); ++i)
 			{
 				final FieldSpec columnSpec = gridSpec.getFieldSpec(i);
-				String columnTag = fullTagChain + "." + MartusGridField.sanitizeLabel(columnSpec.getLabel());
-				choicesForThisField.addAll(getChoiceItemsForThisField(columnSpec, columnTag, displayString + ": "));
+				String sanitizedTag = MartusGridField.sanitizeLabel(columnSpec.getLabel());
+				String columnDisplayPrefix = displayString + ": ";
+				choicesForThisField.addAll(getChoiceItemsForThisField(gridSpec, columnSpec, sanitizedTag, columnDisplayPrefix));
 			}
 			return choicesForThisField;
 		}
@@ -171,7 +176,7 @@ public class FieldChooserSpecBuilder
 		if(shouldSearchSpecTypeBeTheFieldSpecType(thisType))
 			choiceSpecType = thisType;
 
-		FieldSpec thisSpec = FieldSpec.createCustomField(fullTagChain, displayString, choiceSpecType);
+		FieldSpec thisSpec = FieldSpec.createSubField(parent, tag, displayString, choiceSpecType);
 		ChoiceItem choiceItem = new SearchableFieldChoiceItem(thisSpec);
 		choicesForThisField.add(choiceItem);
 		return choicesForThisField;
@@ -187,15 +192,15 @@ public class FieldChooserSpecBuilder
 		return (thisType.isDate() || thisType.isLanguage() || thisType.isBoolean()); 
 	}
 	
-	private Set getDateRangeChoiceItem(String tag, String subfield, String baseDisplayString) 
+	private Set getDateRangeChoiceItem(FieldSpec spec, String subfield) 
 	{
+		String baseDisplayString = spec.getLabel();
 		Set itemIfAny = new HashSet();
-		String fullTag = tag + "." + subfield;
 		String displayTemplate = getLocalization().getFieldLabel("DateRangeTemplate" + subfield);
 		try
 		{
 			String fullDisplayString = TokenReplacement.replaceToken(displayTemplate, "#FieldLabel#", baseDisplayString);
-			FieldSpec dateSpec = FieldSpec.createCustomField(fullTag, fullDisplayString, new FieldTypeDate());
+			FieldSpec dateSpec = FieldSpec.createSubField(spec, subfield, fullDisplayString, new FieldTypeDate());
 			itemIfAny.add(new SearchableFieldChoiceItem(dateSpec));
 		}
 		catch (TokenInvalidException e)

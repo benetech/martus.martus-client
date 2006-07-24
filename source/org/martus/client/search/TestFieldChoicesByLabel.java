@@ -31,6 +31,7 @@ import org.martus.common.fieldspec.ChoiceItem;
 import org.martus.common.fieldspec.DropDownFieldSpec;
 import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.fieldspec.FieldTypeNormal;
+import org.martus.common.fieldspec.GridFieldSpec;
 import org.martus.common.fieldspec.SearchableFieldChoiceItem;
 import org.martus.util.TestCaseEnhanced;
 
@@ -73,7 +74,7 @@ public class TestFieldChoicesByLabel extends TestCaseEnhanced
 		try
 		{
 			FieldChoicesByLabel.mergeDropDownChoices(choiceA, choiceB);
-			fail("Should have thrown for merging non-dropdown field");
+			fail("Should have thrown for merging different tags");
 		}
 		catch(RuntimeException ignoreExpected)
 		{
@@ -87,7 +88,7 @@ public class TestFieldChoicesByLabel extends TestCaseEnhanced
 		try
 		{
 			FieldChoicesByLabel.mergeDropDownChoices(choiceA, choiceB);
-			fail("Should have thrown for merging non-dropdown field");
+			fail("Should have thrown for merging different labels");
 		}
 		catch(RuntimeException ignoreExpected)
 		{
@@ -95,12 +96,33 @@ public class TestFieldChoicesByLabel extends TestCaseEnhanced
 
 		a.setTag("tag");
 		b.setTag("tag");
+		a.setLabel("1");
+		b.setLabel("2");
+		a.setParent(b);
+		b.setParent(null);
+		assertFalse("different parents mergeable?", FieldChoicesByLabel.areDropDownChoicesMergeable(choiceA, choiceB));
+		try
+		{
+			FieldChoicesByLabel.mergeDropDownChoices(choiceA, choiceB);
+			fail("Should have thrown for merging different parents");
+		}
+		catch(RuntimeException ignoreExpected)
+		{
+		}
+
+		a.setTag("tag");
+		b.setTag("tag");
+		GridFieldSpec parent = new GridFieldSpec();
+		parent.setTag("grid");
+		a.setParent(parent);
+		b.setParent(parent);
 		a.setLabel("Label");
 		b.setLabel("Label");
 		assertTrue("not mergeable?", FieldChoicesByLabel.areDropDownChoicesMergeable(choiceA, choiceB));
 		SearchableFieldChoiceItem merged = FieldChoicesByLabel.mergeDropDownChoices(choiceA, choiceB);
 		assertEquals("wrong search tag?", choiceA.getSearchTag(), merged.getSearchTag());
 		assertEquals("wrong display?", a.getLabel(), merged.toString());
+		assertEquals("wrong parent?", a.getParent(), merged.getSpec().getParent());
 		DropDownFieldSpec mergedSpec = (DropDownFieldSpec)merged.getSpec();
 		assertEquals("wrong choices?", 3, mergedSpec.getCount());
 		for(int i = 0; i < a.getCount(); ++i)

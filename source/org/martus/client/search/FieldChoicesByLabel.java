@@ -178,8 +178,9 @@ public class FieldChoicesByLabel
 		}
 		
 		DropDownFieldSpec resultSpec = new DropDownFieldSpec((ChoiceItem[])choices.toArray(new ChoiceItem[0]));
-		resultSpec.setTag(mergeInto.getSpec().getTag());
+		resultSpec.setTag(mergeInto.getSpec().getSubFieldTag());
 		resultSpec.setLabel(mergeInto.getSpec().getLabel());
+		resultSpec.setParent(mergeInto.getSpec().getParent());
 		return new SearchableFieldChoiceItem(resultSpec);
 	}
 
