@@ -143,20 +143,38 @@ public class ActionMenuReports extends ActionPrint
 		
 		ReportFormat rf = builder.createTabular(specs);
 		
-		String title = getLocalization().getWindowTitle("SaveReportAs");
-		File directory = mainWindow.getApp().getCurrentAccountDirectory();
-		FileFilter filter = new ReportFormatFilter(getLocalization());
-		FileDialogResults results = UiFileChooser.displayFileSaveDialog(mainWindow, 
-				title, directory, filter);
-		if(results.wasCancelChoosen())
+		File file = askForReportFileToSaveTo();
+		if(file == null)
 			return null;
-		File file = results.getChosenFile();
-		if(!file.getName().toLowerCase().endsWith(MRF_FILE_EXTENSION))
-			file = new File(file.getAbsolutePath() + MRF_FILE_EXTENSION);
+		
 		UnicodeWriter writer = new UnicodeWriter(file);
 		writer.write(rf.toJson().toString());
 		writer.close();
 		return rf;
+	}
+	
+	File askForReportFileToSaveTo()
+	{
+		String title = getLocalization().getWindowTitle("SaveReportAs");
+		File directory = mainWindow.getApp().getCurrentAccountDirectory();
+		FileFilter filter = new ReportFormatFilter(getLocalization());
+		File file = null;
+		while(true)
+		{
+			FileDialogResults results = UiFileChooser.displayFileSaveDialog(mainWindow, 
+					title, directory, filter);
+			if(results.wasCancelChoosen())
+				return null;
+			file = results.getChosenFile();
+			if(!file.getName().toLowerCase().endsWith(MRF_FILE_EXTENSION))
+				file = new File(file.getAbsolutePath() + MRF_FILE_EXTENSION);
+			if(!file.exists())
+				break;
+			if(mainWindow.confirmDlg(mainWindow, "OverWriteExistingFile"))
+				break;
+		}
+		
+		return file;
 	}
 	
 	void runReport(ReportFormat rf) throws Exception
@@ -243,9 +261,20 @@ public class ActionMenuReports extends ActionPrint
 	
 	FieldSpec[] askUserWhichFieldsToInclude()
 	{
-		ChooseTabularReportFieldsDialog dlg = new ChooseTabularReportFieldsDialog(mainWindow);
-		dlg.show();
-		return dlg.getSelectedSpecs();
+		while(true)
+		{
+			ChooseTabularReportFieldsDialog dlg = new ChooseTabularReportFieldsDialog(mainWindow);
+			dlg.show();
+			FieldSpec[] selectedSpecs = dlg.getSelectedSpecs();
+			if(selectedSpecs == null)
+				return null;
+			if(selectedSpecs.length == 0)
+			{
+				mainWindow.notifyDlg(mainWindow, "NoReportFieldsSelected");
+				continue;
+			}
+			return selectedSpecs;
+		}
 	}
 	
 	static class ChooseTabularReportFieldsDialog extends JDialog implements ActionListener

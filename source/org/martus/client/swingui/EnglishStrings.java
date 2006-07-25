@@ -208,6 +208,7 @@ public class EnglishStrings
 "wintitle:notifyErrorImportingBulletins=Error Importing Bulletins",
 "wintitle:notifyImportMissingAttachments=Warning Missing Attachments",
 "wintitle:notifyImportBulletinsNotImported=Warning Bulletins Not Imported",
+"wintitle:notifyNoReportFieldsSelected=Create Report",
 
 "wintitle:inputservername=Server Name",
 "wintitle:inputserverpubliccode=Server Identification",
@@ -278,6 +279,7 @@ public class EnglishStrings
 "wintitle:warningDeleteSingleBulletin=Confirm Delete Bulletin",
 "wintitle:warningDeleteMultipleBulletins=Confirm Delete Bulletins",
 
+"wintitle:RunOrCreateReport=Reports",
 "wintitle:ReportChooseSortFields=Choose Sort Fields",
 "wintitle:PrintOptions=Print Options",
 "wintitle:confirmSendWithPublicData=Confirm Save With Public Data",
@@ -358,6 +360,8 @@ public class EnglishStrings
 "button:DeleteSelectedGridRow=Delete Selected Row",
 "button:InsertEmptyGridRow=Insert Row",
 "button:PopUpTreeChoose=Choose Field...",
+"button:RunReport=Run Existing Report",
+"button:CreateReport=Create a New Report",
 
 "menu:file=File",
 "menu:CreateNewBulletin=Create New Bulletin",
@@ -745,6 +749,7 @@ public class EnglishStrings
 "field:notifyNoImportFileSpecifiedcause=No folder specified.  You must enter a folder you wish the files to be imported into.  This folder can already exist in the system, or can be a new folder.",
 "field:notifyImportMissingAttachmentscause=Not all attachments were imported.  The following bulletins had problems importing these attachments.\n\n#ImportMissingAttachments#",
 "field:notifyImportBulletinsNotImportedcause=Not all bulletins were imported.  The following bulletins had problems during import.\n\n#ImportBulletinsNotImported#",
+"field:notifyNoReportFieldsSelectedcause=You must select at least one field to be included in the report.",
 
 "field:IncompatibleMtfVersion=The version of this translation is not compatible with this version of Martus.  It is recommended that you do not continue to use this translation version and go to (http://www.martus.org/downloads) for the appropriate version.",
 "field:IncompatibleMtfVersionTranslation=#MtfLanguage# Translation Version: #MtfVersionNumber#",
