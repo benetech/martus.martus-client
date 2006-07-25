@@ -55,6 +55,7 @@ public class ReportRunner
 	public void runReport(ReportFormat rf, ReadableDatabase db, Vector keysToInclude, Writer destination, boolean includePrivate) throws Exception
 	{
 		Context context = new VelocityContext();
+		context.put("localization", localization);
 		
 		performMerge(rf.getStartSection(), destination, context);
 		for(int i=0; i < keysToInclude.size(); ++i)
