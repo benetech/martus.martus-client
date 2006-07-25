@@ -27,6 +27,8 @@ package org.martus.client.reports;
 
 import org.martus.common.MiniLocalization;
 import org.martus.common.fieldspec.FieldSpec;
+import org.martus.common.fieldspec.FieldTypeDate;
+import org.martus.common.fieldspec.FieldTypeDateRange;
 import org.martus.common.fieldspec.FieldTypeNormal;
 import org.martus.util.TestCaseEnhanced;
 
@@ -71,6 +73,14 @@ public class TestTabularReportBuilder extends TestCaseEnhanced
 	
 	public void testSubFields() throws Exception
 	{
+		FieldSpec range = FieldSpec.createCustomField("range", "Date Range", new FieldTypeDateRange());
+		FieldSpec begin = FieldSpec.createSubField(range, "begin", "Range Begin", new FieldTypeDate());
+		FieldSpec specs[] = {begin};
+		TabularReportBuilder builder = new TabularReportBuilder(new MiniLocalization());
+		ReportFormat rf = builder.createTabular(specs);
+		String detail = rf.getDetailSection();
+		String expected = "$bulletin.field('range', 'Date Range', 'DATERANGE').getSubField('begin', $localization).html($localization)";
+		assertContains("Bad date range subfield?", expected, detail);
 		
 	}
 }

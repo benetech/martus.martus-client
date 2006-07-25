@@ -73,14 +73,37 @@ public class TabularReportBuilder
 		for(int i = 0; i < specs.length; ++i)
 		{
 			detailBuffer.append("<td>");
-			detailBuffer.append("$bulletin.field('" + specs[i].getTag() + 
-					"', '" + specs[i].getLabel() +
-					"', '" + specs[i].getType().getTypeName() +
-					"').html($localization)");
+			FieldSpec spec = specs[i];
+			detailBuffer.append(getFieldCall(spec));
+			detailBuffer.append(".html($localization)");
 			detailBuffer.append("</td>");
 		}
 		detailBuffer.append("</tr>");
 		return detailBuffer.toString();
+	}
+
+	private String getFieldCall(FieldSpec spec)
+	{
+		StringBuffer result = new StringBuffer();
+		if(spec.getParent() == null)
+		{
+			result.append("$bulletin.field('");
+			result.append(spec.getTag());
+			result.append("', '");
+			result.append(spec.getLabel());
+			result.append("', '");
+			result.append(spec.getType().getTypeName());
+			result.append("')");
+		}
+		else
+		{
+			result.append(getFieldCall(spec.getParent()));
+			result.append(".getSubField('");
+			result.append(spec.getSubFieldTag());
+			result.append("', $localization)");
+		}
+			
+		return result.toString();
 	}
 
 	private String createEndSection()
