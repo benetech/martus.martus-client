@@ -112,13 +112,15 @@ public class TestPartialBulletin extends TestCaseEnhanced
 		Bulletin b = new Bulletin(security, new FieldSpec[] {gridSpec}, new FieldSpec[0]);
 		GridData gridData = new GridData(gridSpec);
 		gridData.addEmptyRow();
-		gridData.setValueAt("Data", 0, 0);
+		String sampleCellValue = "Data";
+		gridData.setValueAt(sampleCellValue, 0, 0);
 		b.set(gridSpec.getTag(), gridData.getXmlRepresentation());
+		
 		SafeReadableBulletin readableBulletin = new SafeReadableBulletin(b, localization);
 		String[] tags = {gridSpec.getTag() + "." + "Label"}; 
 		PartialBulletin pb = new PartialBulletin(readableBulletin, tags);
 		String gotData = pb.getData(tags[0]);
-		assertEquals("Didn't blank out grid cell?", "", gotData);
+		assertEquals("No grid cell data?", sampleCellValue + "\n", gotData);
 	}
 
 	MiniLocalization localization;

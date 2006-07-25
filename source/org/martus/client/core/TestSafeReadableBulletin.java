@@ -29,6 +29,7 @@ package org.martus.client.core;
 import org.martus.common.MiniLocalization;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.crypto.MockMartusSecurity;
+import org.martus.common.field.MartusField;
 import org.martus.util.TestCaseEnhanced;
 
 public class TestSafeReadableBulletin extends TestCaseEnhanced
@@ -80,16 +81,15 @@ public class TestSafeReadableBulletin extends TestCaseEnhanced
 		assertEquals(localization.getLanguageName(tagEnglish), srb.getSearchable(tagLanguage));
 	}
 	
-	public void testHtmlEscaping() throws Exception
+	public void testMissingField() throws Exception
 	{
 		MiniLocalization localization = new MiniLocalization();
 		MockMartusSecurity security = MockMartusSecurity.createClient();
 		Bulletin b = new Bulletin(security);
-		String tagTitle = Bulletin.TAGTITLE; 
-		b.set(tagTitle, "<>&");
 		SafeReadableBulletin srb = new SafeReadableBulletin(b, localization);
-		assertEquals("Didn't html escape?", "&lt;&gt;&amp;", srb.html(tagTitle));
+		MartusField noSuchField = srb.field("whoop-de-doo!");
+		assertNotNull("Returned null for missing field?", noSuchField);
+		MartusField noSuchSubField = noSuchField.getSubField("whatever", localization);
+		assertNotNull("Returned null for missing subfield?", noSuchSubField);
 	}
-	
-
 }

@@ -151,7 +151,7 @@ public class TestBulletinSearcher extends TestCaseEnhanced
 		SafeReadableBulletin b = new SafeReadableBulletin(realBulletin, localization);
 		FieldSpec noSuchField = FieldSpec.createStandardField("no.such.field", new FieldTypeNormal());
 		MartusField noSuchFieldResult = b.getPossiblyNestedField(noSuchField);
-		assertNull("didn't return null for bogus field?", noSuchFieldResult);
+		assertEquals("didn't return empty field for bogus field?", "", noSuchFieldResult.getData());
 		FieldSpec noSubField = FieldSpec.createStandardField("entrydate.no.such.subfield", new FieldTypeNormal());
 		MartusField noSubfieldResult = b.getPossiblyNestedField(noSubField);
 		assertNull("didn't return null for bogus subfield?", noSubfieldResult);
@@ -190,7 +190,7 @@ public class TestBulletinSearcher extends TestCaseEnhanced
 
 		Bulletin emptyBulletin = new Bulletin(security, specs, StandardFieldSpecs.getDefaultBottomSectionFieldSpecs());
 		SafeReadableBulletin eb = new SafeReadableBulletin(emptyBulletin, localization);
-		assertNull("returned searchable for empty grid?", eb.getPossiblyNestedField(firstColumn));
+		assertEquals("didn't return empty field for empty grid?", "", eb.getPossiblyNestedField(firstColumn).getData());
 		
 	}
 	

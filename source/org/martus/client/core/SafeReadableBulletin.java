@@ -28,10 +28,10 @@ package org.martus.client.core;
 
 import org.martus.common.MiniLocalization;
 import org.martus.common.bulletin.Bulletin;
+import org.martus.common.field.EmptyMartusFieldWithInfiniteSubFields;
 import org.martus.common.field.MartusField;
 import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.fieldspec.FieldType;
-import org.martus.common.fieldspec.FieldTypeNormal;
 import org.martus.common.packet.UniversalId;
 
 
@@ -54,26 +54,14 @@ public class SafeReadableBulletin
 		localization = localizationToUse;
 	}
 	
-	public String html(String tag)
-	{
-		try
-		{
-			MartusField field = getPossiblyNestedField(tag);
-			if(field == null)
-				return "";
-			return field.getHtmlData(localization);
-		} 
-		catch (Exception e)
-		{
-			System.out.println("SafeReadableBulletin.html failed for tag: " + tag);
-			e.printStackTrace();
-			return localization.getFieldLabel("ReportFieldError");
-		}
-	}
-	
 	public String getSearchable(String tag)
 	{
 		return field(tag).getSearchableData(localization);
+	}
+	
+	public MartusField field(String tag, String label, String typeString)
+	{
+		return field(tag);
 	}
 	
 	public MartusField field(String tag)
@@ -105,8 +93,7 @@ public class SafeReadableBulletin
 
 	private MartusField createEmptyField(String tag)
 	{
-		FieldSpec plainSpec = FieldSpec.createCustomField(tag, tag, new FieldTypeNormal());
-		MartusField empty = new MartusField(plainSpec);
+		MartusField empty = new EmptyMartusFieldWithInfiniteSubFields(tag);
 		return empty;
 	}
 	
