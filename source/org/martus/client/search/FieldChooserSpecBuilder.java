@@ -42,7 +42,6 @@ import org.martus.common.fieldspec.FieldTypeDate;
 import org.martus.common.fieldspec.FieldTypeDateRange;
 import org.martus.common.fieldspec.FieldTypeNormal;
 import org.martus.common.fieldspec.GridFieldSpec;
-import org.martus.common.fieldspec.MiniFieldSpec;
 import org.martus.common.fieldspec.PopUpTreeFieldSpec;
 import org.martus.common.fieldspec.SearchFieldTreeModel;
 import org.martus.common.fieldspec.SearchableFieldChoiceItem;
@@ -76,7 +75,7 @@ public class FieldChooserSpecBuilder
 		return allAvailableFields;
 	}
 	
-	public MiniFieldSpec[] createMiniSpecArray(ClientBulletinStore storeToUse)
+	public FieldSpec[] createMiniSpecArray(ClientBulletinStore storeToUse)
 	{
 		FieldChoicesByLabel allAvailableFields = buildFieldChoicesByLabel(storeToUse);
 		return allAvailableFields.asArray(localization);

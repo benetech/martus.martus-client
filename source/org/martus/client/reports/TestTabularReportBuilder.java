@@ -28,7 +28,6 @@ package org.martus.client.reports;
 import org.martus.common.MiniLocalization;
 import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.fieldspec.FieldTypeNormal;
-import org.martus.common.fieldspec.MiniFieldSpec;
 import org.martus.util.TestCaseEnhanced;
 
 public class TestTabularReportBuilder extends TestCaseEnhanced
@@ -40,10 +39,10 @@ public class TestTabularReportBuilder extends TestCaseEnhanced
 
 	public void testCreateTabularReport()
 	{
-		MiniFieldSpec[] specs = new MiniFieldSpec[] {
-			new MiniFieldSpec(FieldSpec.createCustomField("tag1", "Label1", new FieldTypeNormal())),
-			new MiniFieldSpec(FieldSpec.createCustomField("tag2", "Label2", new FieldTypeNormal())),
-			new MiniFieldSpec(FieldSpec.createCustomField("tag3", "Label3", new FieldTypeNormal())),
+		FieldSpec[] specs = new FieldSpec[] {
+			FieldSpec.createCustomField("tag1", "Label1", new FieldTypeNormal()),
+			FieldSpec.createCustomField("tag2", "Label2", new FieldTypeNormal()),
+			FieldSpec.createCustomField("tag3", "Label3", new FieldTypeNormal()),
 		};
 		TabularReportBuilder builder = new TabularReportBuilder(new MiniLocalization());
 		ReportFormat rf = builder.createTabular(specs);
@@ -59,11 +58,19 @@ public class TestTabularReportBuilder extends TestCaseEnhanced
 		String detailSection = rf.getDetailSection();
 		for(int i = 0; i < specs.length; ++i)
 		{
-			String tag = "$bulletin.html('" + specs[i].getTag() + "')";
-			assertContains("Missing " + tag + "?", tag, detailSection);
+			String fieldCall = "$bulletin.field('" + specs[i].getTag() + 
+			"', '" + specs[i].getLabel() + 
+			"', '" + specs[i].getType().getTypeName() + 
+			"').html($localization)";
+			assertContains("Missing " + specs[i].getTag() + "?", fieldCall, detailSection);
 		}
 		
 		String endSection = rf.getEndSection();
 		assertContains("</html>", endSection);
+	}
+	
+	public void testSubFields() throws Exception
+	{
+		
 	}
 }

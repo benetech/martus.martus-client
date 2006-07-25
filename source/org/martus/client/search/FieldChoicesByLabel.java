@@ -63,7 +63,6 @@ import org.martus.clientside.UiLocalization;
 import org.martus.common.fieldspec.ChoiceItem;
 import org.martus.common.fieldspec.DropDownFieldSpec;
 import org.martus.common.fieldspec.FieldSpec;
-import org.martus.common.fieldspec.MiniFieldSpec;
 import org.martus.common.fieldspec.SearchableFieldChoiceItem;
 
 public class FieldChoicesByLabel
@@ -88,17 +87,17 @@ public class FieldChoicesByLabel
 		}
 	}
 	
-	public MiniFieldSpec[] asArray(UiLocalization localization)
+	public FieldSpec[] asArray(UiLocalization localization)
 	{
 		Collections.sort(allChoices, new ChoiceItemSorterByMiniFieldSpec());
-		MiniFieldSpec[] miniSpecs = new MiniFieldSpec[allChoices.size()]; 
+		FieldSpec[] specs = new FieldSpec[allChoices.size()]; 
 		for(int i = 0; i < allChoices.size(); ++i)
 		{
 			ChoiceItem choice = (ChoiceItem)allChoices.get(i);
-			miniSpecs[i] = new MiniFieldSpec(choice.getSpec());
+			specs[i] = choice.getSpec();
 		}
 		
-		return miniSpecs;
+		return specs;
 	}
 	
 	public TreeNode asTree(UiLocalization localization)

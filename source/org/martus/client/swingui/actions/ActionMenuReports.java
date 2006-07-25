@@ -56,7 +56,6 @@ import org.martus.common.MiniLocalization;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.database.DatabaseKey;
 import org.martus.common.fieldspec.FieldSpec;
-import org.martus.common.fieldspec.MiniFieldSpec;
 import org.martus.common.fieldspec.PopUpTreeFieldSpec;
 import org.martus.swing.UiButton;
 import org.martus.swing.UiFileChooser;
@@ -138,7 +137,7 @@ public class ActionMenuReports extends ActionPrint
 	ReportFormat createReport() throws Exception
 	{
 		TabularReportBuilder builder = new TabularReportBuilder(getLocalization());
-		MiniFieldSpec[] specs = askUserWhichFieldsToInclude();
+		FieldSpec[] specs = askUserWhichFieldsToInclude();
 		if(specs == null)
 			return null;
 		
@@ -242,7 +241,7 @@ public class ActionMenuReports extends ActionPrint
 		destination.close();
 	}
 	
-	MiniFieldSpec[] askUserWhichFieldsToInclude()
+	FieldSpec[] askUserWhichFieldsToInclude()
 	{
 		ChooseTabularReportFieldsDialog dlg = new ChooseTabularReportFieldsDialog(mainWindow);
 		dlg.show();
@@ -286,7 +285,7 @@ public class ActionMenuReports extends ActionPrint
 			dispose();
 		}
 		
-		public MiniFieldSpec[] getSelectedSpecs()
+		public FieldSpec[] getSelectedSpecs()
 		{
 			return selectedSpecs;
 		}
@@ -301,12 +300,12 @@ public class ActionMenuReports extends ActionPrint
 				add(list, BorderLayout.CENTER);
 			}
 			
-			public MiniFieldSpec[] getSelectedItems()
+			public FieldSpec[] getSelectedItems()
 			{
 				Object[] selected = list.getSelectedValues();
-				MiniFieldSpec[] selectedItems = new MiniFieldSpec[selected.length];
+				FieldSpec[] selectedItems = new FieldSpec[selected.length];
 				for(int i = 0; i < selected.length; ++i)
-					selectedItems[i] = (MiniFieldSpec)selected[i];
+					selectedItems[i] = (FieldSpec)selected[i];
 				
 				return selectedItems;
 			}
@@ -318,7 +317,7 @@ public class ActionMenuReports extends ActionPrint
 		
 		UiButton okButton;
 		ReportFieldSelector fieldSelector;
-		MiniFieldSpec[] selectedSpecs;
+		FieldSpec[] selectedSpecs;
 	}
 	
 	static class RunOrCreateReportDialog extends JDialog implements ActionListener
