@@ -26,12 +26,19 @@ Boston, MA 02111-1307, USA.
 
 package org.martus.client.core;
 
+import java.util.Arrays;
+import java.util.List;
+
 import org.martus.common.MiniLocalization;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.field.EmptyMartusFieldWithInfiniteSubFields;
 import org.martus.common.field.MartusField;
 import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.fieldspec.FieldType;
+import org.martus.common.fieldspec.FieldTypeMessage;
+import org.martus.common.fieldspec.FieldTypeMultiline;
+import org.martus.common.fieldspec.FieldTypeNormal;
+import org.martus.common.fieldspec.StandardFieldSpecs;
 import org.martus.common.packet.UniversalId;
 
 
@@ -54,14 +61,41 @@ public class SafeReadableBulletin
 		localization = localizationToUse;
 	}
 	
-	public String getSearchable(String tag)
-	{
-		return field(tag).getSearchableData(localization);
-	}
-	
 	public MartusField field(String tag, String label, String typeString)
 	{
-		return field(tag);
+		MartusField candidate = field(tag);
+		if(doesLabelMatch(candidate, label) && doesTypeMatch(candidate, typeString))
+			return candidate;
+		
+		return createEmptyField(tag);
+	}
+
+	private boolean doesTypeMatch(MartusField candidate, String typeString)
+	{
+		String candidateTypeName = candidate.getType().getTypeName();
+		if(candidateTypeName.equals(typeString))
+			return true;
+		
+		String[] stringTypes = new String[] {
+			new FieldTypeNormal().getTypeName(),
+			new FieldTypeMultiline().getTypeName(),
+			new FieldTypeMessage().getTypeName(),
+		};
+		
+		List stringTypeList = Arrays.asList(stringTypes);
+		if(stringTypeList.contains(candidateTypeName) && 
+				stringTypeList.contains(typeString))
+			return true;
+		
+		return false;
+	}
+
+	private boolean doesLabelMatch(MartusField candidate, String label)
+	{
+		if(StandardFieldSpecs.isStandardFieldTag(candidate.getTag()))
+			return true;
+		
+		return candidate.getLabel().equals(label);
 	}
 	
 	public MartusField field(String tag)

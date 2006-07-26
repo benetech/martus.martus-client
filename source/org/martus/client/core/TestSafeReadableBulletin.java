@@ -30,6 +30,11 @@ import org.martus.common.MiniLocalization;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.crypto.MockMartusSecurity;
 import org.martus.common.field.MartusField;
+import org.martus.common.fieldspec.FieldSpec;
+import org.martus.common.fieldspec.FieldTypeDate;
+import org.martus.common.fieldspec.FieldTypeMultiline;
+import org.martus.common.fieldspec.FieldTypeNormal;
+import org.martus.common.fieldspec.StandardFieldSpecs;
 import org.martus.util.TestCaseEnhanced;
 
 public class TestSafeReadableBulletin extends TestCaseEnhanced
@@ -68,19 +73,6 @@ public class TestSafeReadableBulletin extends TestCaseEnhanced
 		assertEquals("didn't remove public?", "", srbAllPrivate.field(Bulletin.TAGPUBLICINFO).getData());
 	}
 	
-	public void testSearchableData() throws Exception
-	{
-		MiniLocalization localization = new MiniLocalization();
-		MockMartusSecurity security = MockMartusSecurity.createClient();
-		Bulletin b = new Bulletin(security);
-		String tagEnglish = MiniLocalization.ENGLISH;
-		String tagLanguage = Bulletin.TAGLANGUAGE; 
-		b.set(tagLanguage, tagEnglish);
-		SafeReadableBulletin srb = new SafeReadableBulletin(b, localization);
-		assertEquals(tagEnglish, srb.field(tagLanguage).getData());
-		assertEquals(localization.getLanguageName(tagEnglish), srb.getSearchable(tagLanguage));
-	}
-	
 	public void testMissingField() throws Exception
 	{
 		MiniLocalization localization = new MiniLocalization();
@@ -91,5 +83,33 @@ public class TestSafeReadableBulletin extends TestCaseEnhanced
 		assertNotNull("Returned null for missing field?", noSuchField);
 		MartusField noSuchSubField = noSuchField.getSubField("whatever", localization);
 		assertNotNull("Returned null for missing subfield?", noSuchSubField);
+	}
+	
+	public void testFieldWrongLabel() throws Exception
+	{
+		String tag = "tag";
+		String label = "Label";
+		String sampleData = "sample data";
+		String sampleAuthor = "Mark Twain";
+		
+		MiniLocalization localization = new MiniLocalization();
+		MockMartusSecurity security = MockMartusSecurity.createClient();
+		FieldSpec[] customBottomSpecs = {
+			FieldSpec.createCustomField("tag", "Label", new FieldTypeNormal()),	
+		};
+		Bulletin b = new Bulletin(security, StandardFieldSpecs.getDefaultTopSectionFieldSpecs(), customBottomSpecs);
+		b.set(tag, sampleData);
+		b.set(Bulletin.TAGAUTHOR, sampleAuthor);
+		
+		SafeReadableBulletin srb = new SafeReadableBulletin(b, localization);
+		MartusField wrongLabel = srb.field(tag, "Wrong Label", new FieldTypeNormal().getTypeName());
+		assertEquals("Didn't check label?", "", wrongLabel.getData());
+		MartusField similarType = srb.field(tag, label, new FieldTypeMultiline().getTypeName());
+		assertEquals("Too picky about types?", sampleData, similarType.getData());
+		MartusField differentType = srb.field(tag, label, new FieldTypeDate().getTypeName());
+		assertEquals("Didn't check type?", "", differentType.getData());
+		
+		MartusField standardWithWrongLabel = srb.field(Bulletin.TAGAUTHOR, "not author", new FieldTypeNormal().getTypeName());
+		assertEquals("Too picky about standard field label?", sampleAuthor, standardWithWrongLabel.getData());
 	}
 }
