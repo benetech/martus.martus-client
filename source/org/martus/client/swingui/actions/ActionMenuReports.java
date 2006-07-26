@@ -30,12 +30,16 @@ import java.awt.Container;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.io.StringWriter;
+import java.io.Writer;
 import java.util.Vector;
 
 import javax.swing.Box;
+import javax.swing.JComponent;
 import javax.swing.JDialog;
 import javax.swing.JList;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.filechooser.FileFilter;
 
 import org.json.JSONObject;
@@ -57,8 +61,10 @@ import org.martus.common.bulletin.Bulletin;
 import org.martus.common.database.DatabaseKey;
 import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.fieldspec.PopUpTreeFieldSpec;
+import org.martus.swing.PrintUtilities;
 import org.martus.swing.UiButton;
 import org.martus.swing.UiFileChooser;
+import org.martus.swing.UiLabel;
 import org.martus.swing.UiScrollPane;
 import org.martus.swing.UiWrappedTextArea;
 import org.martus.swing.Utilities;
@@ -227,17 +233,10 @@ public class ActionMenuReports extends ActionPrint
 		boolean includePrivateData = dlg.wantsPrivateData();
 		boolean sendToDisk = dlg.wantsToPrintToDisk();
 
-//		if(sendToDisk)
-//		{
-//			printToDisk(currentSelectedBulletins, includePrivateData);
-//		}
-//		else
-//		{
-//			printToPrinter(currentSelectedBulletins, includePrivateData);
-//		}
-
 		if(sendToDisk)
 			printToDisk(rf, partialBulletinsToPrint, includePrivateData);
+		else
+			printToPrinter(rf, partialBulletinsToPrint, includePrivateData);
 	}
 	
 	void printToDisk(ReportFormat rf, PartialBulletin[] partialBulletinsToPrint, boolean includePrivate) throws Exception
@@ -247,6 +246,12 @@ public class ActionMenuReports extends ActionPrint
 			return;
 		
 		UnicodeWriter destination = new UnicodeWriter(destFile);
+		printToWriter(destination, rf, partialBulletinsToPrint, includePrivate);
+		destination.close();
+	}
+
+	private void printToWriter(Writer destination, ReportFormat rf, PartialBulletin[] partialBulletinsToPrint, boolean includePrivate) throws Exception
+	{
 		Vector keys = new Vector();
 		for(int i = 0; i < partialBulletinsToPrint.length; ++i)
 		{
@@ -256,9 +261,31 @@ public class ActionMenuReports extends ActionPrint
 		}
 		ReportRunner rr = new ReportRunner(mainWindow.getApp().getSecurity(), mainWindow.getLocalization());
 		rr.runReport(rf, mainWindow.getStore().getDatabase(), keys, destination, includePrivate);
-		destination.close();
 	}
 	
+	void printToPrinter(ReportFormat rf, PartialBulletin[] partialBulletinsToPrint, boolean includePrivate) throws Exception
+	{
+		StringWriter writer = new StringWriter();
+		printToWriter(writer, rf, partialBulletinsToPrint, includePrivate);
+		writer.close();
+		
+		UiLabel previewText = new UiLabel(writer.toString());
+		JComponent scrollablePreview = new JScrollPane(previewText);
+		boolean doPreview = false;
+		
+		if(doPreview)
+		{
+			JDialog previewDlg = new JDialog(mainWindow);
+			previewDlg.getContentPane().add(scrollablePreview);
+			previewDlg.setModal(true);
+			previewDlg.pack();
+			Utilities.centerDlg(previewDlg);
+			previewDlg.setVisible(true);
+		}
+		
+		PrintUtilities.printComponent(previewText);
+	}
+
 	FieldSpec[] askUserWhichFieldsToInclude()
 	{
 		while(true)
