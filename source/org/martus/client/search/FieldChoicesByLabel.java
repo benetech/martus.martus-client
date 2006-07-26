@@ -60,6 +60,7 @@ import java.util.Vector;
 import javax.swing.tree.TreeNode;
 
 import org.martus.clientside.UiLocalization;
+import org.martus.common.MiniLocalization;
 import org.martus.common.fieldspec.ChoiceItem;
 import org.martus.common.fieldspec.DropDownFieldSpec;
 import org.martus.common.fieldspec.FieldSpec;
@@ -102,7 +103,7 @@ public class FieldChoicesByLabel
 	
 	public TreeNode asTree(UiLocalization localization)
 	{
-		SearchFieldTreeNode root = new SearchFieldTreeNode("");
+		SearchFieldTreeNode root = new SearchFieldTreeNode("", localization);
 
 		Collections.sort(allChoices, new ChoiceItemSorterByMiniFieldSpec());
 		
@@ -113,9 +114,9 @@ public class FieldChoicesByLabel
 		while(index < choices.length)
 		{
 			String label = choices[index].getSpec().getLabel();
-			SearchFieldTreeNode node = new SearchFieldTreeNode(label);
-			node.add(new SearchFieldTreeNode(choices[index]));
-			addSimilarNodes(node, choices, index + 1);
+			SearchFieldTreeNode node = new SearchFieldTreeNode(label, localization);
+			node.add(new SearchFieldTreeNode(choices[index], localization));
+			addSimilarNodes(node, choices, index + 1, localization);
 			index += node.getChildCount();
 			node = pullUpIfOnlyOneChild(node);
 			root.add(node);
@@ -195,14 +196,14 @@ public class FieldChoicesByLabel
 		return node;
 	}
 	
-	private void addSimilarNodes(SearchFieldTreeNode parent, SearchableFieldChoiceItem[] choices, int startAt)
+	private void addSimilarNodes(SearchFieldTreeNode parent, SearchableFieldChoiceItem[] choices, int startAt, MiniLocalization localization)
 	{
 		String label = parent.toString();
 		int index = startAt;
 		while(index < choices.length && choices[index].getSpec().getLabel().equals(label))
 		{
 			SearchableFieldChoiceItem choice = choices[index];
-			parent.add(new SearchFieldTreeNode(choice));
+			parent.add(new SearchFieldTreeNode(choice, localization));
 			++index;
 		}
 		
