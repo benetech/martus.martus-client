@@ -284,6 +284,11 @@ public class UiPopUpTreeEditor extends UiField implements ActionListener
 				if(e.getClickCount() != 2)
 					return;
 				
+				JTree clickedTree = (JTree)e.getSource();
+				TreePath path = clickedTree.getPathForLocation(e.getX(), e.getY());
+				if(path == null)
+					return;
+				
 				saveAndExitIfValidSelection();
 			}
 		}
