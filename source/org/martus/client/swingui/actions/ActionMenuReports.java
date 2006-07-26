@@ -126,7 +126,7 @@ public class ActionMenuReports extends ActionPrint
 	{
 		String title = getLocalization().getWindowTitle("ChooseReportToRun");
 		File directory = mainWindow.getApp().getCurrentAccountDirectory();
-		String buttonLabel = getLocalization().getButtonLabel("Select");
+		String buttonLabel = getLocalization().getButtonLabel("SelectReport");
 		FileFilter filter = new ReportFormatFilter(getLocalization());
 		FileDialogResults results = UiFileChooser.displayFileOpenDialog(mainWindow, 
 				title, directory, buttonLabel, filter);

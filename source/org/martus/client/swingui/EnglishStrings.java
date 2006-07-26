@@ -274,6 +274,7 @@ public class EnglishStrings
 "wintitle:ImportCustomizationTemplateOpen=Import Customization Template",
 "wintitle:SetFolderOrder=Folder Order",
 "wintitle:FancySearchHelp=Search Help",
+"wintitle:ChooseReportToRun=Reports",
 
 "wintitle:warningdeletefolder=Confirm Delete Folder",
 "wintitle:warningDeleteSingleBulletin=Confirm Delete Bulletin",
@@ -362,6 +363,7 @@ public class EnglishStrings
 "button:PopUpTreeChoose=Choose Field...",
 "button:RunReport=Run Existing Report",
 "button:CreateReport=Create a New Report",
+"button:SelectReport=Select",
 
 "menu:file=File",
 "menu:CreateNewBulletin=Create New Bulletin",
@@ -891,6 +893,7 @@ public class EnglishStrings
 "field:ReportFound=#NumberBulletinsFound# bulletins matched the search.",
 "field:ReportChooseSortFields=Choose how the bulletins will be sorted in the output. The bulletins will be ordered by the first field chosen. When two bulletins have the same value in that field, they will be sorted by the next sort field, and so on.",
 "field:ReportFieldError=*Error retrieving field*",
+"field:MartusReportFormat=Martus Report Format (.mrf)",
 "field:CustomXMLTopSection=Top Section of Bulletin",
 "field:CustomXMLBottomSection=Bottom/Private Section of Bulletin",
 "field:WasSentYes=Yes",
