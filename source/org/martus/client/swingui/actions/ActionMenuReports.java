@@ -26,6 +26,7 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.swingui.actions;
 
 import java.awt.BorderLayout;
+import java.awt.Component;
 import java.awt.Container;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -37,10 +38,11 @@ import java.util.Vector;
 import javax.swing.Box;
 import javax.swing.JComponent;
 import javax.swing.JDialog;
-import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.event.TableModelListener;
 import javax.swing.filechooser.FileFilter;
+import javax.swing.table.TableModel;
 
 import org.json.JSONObject;
 import org.martus.client.core.PartialBulletin;
@@ -66,7 +68,9 @@ import org.martus.swing.UiButton;
 import org.martus.swing.UiFileChooser;
 import org.martus.swing.UiLabel;
 import org.martus.swing.UiScrollPane;
+import org.martus.swing.UiTable;
 import org.martus.swing.UiWrappedTextArea;
+import org.martus.swing.UiWrappedTextPanel;
 import org.martus.swing.Utilities;
 import org.martus.swing.UiFileChooser.FileDialogResults;
 import org.martus.util.UnicodeReader;
@@ -310,8 +314,10 @@ public class ActionMenuReports extends ActionPrint
 		{
 			super(mainWindow);
 			setModal(true);
+			
+			String dialogTag = "ChooseTabularReportFields";
 			MartusLocalization localization = mainWindow.getLocalization();
-			setTitle(localization.getWindowTitle("ChooseTabularReportFields"));
+			setTitle(localization.getWindowTitle(dialogTag));
 			
 			fieldSelector = new ReportFieldSelector(mainWindow);
 			
@@ -320,10 +326,11 @@ public class ActionMenuReports extends ActionPrint
 			UiButton cancelButton = new UiButton(localization.getButtonLabel("cancel"));
 			cancelButton.addActionListener(this);
 			Box buttonBar = Box.createHorizontalBox();
-			buttonBar.add(okButton);
-			buttonBar.add(cancelButton);
+			Component[] buttons = {Box.createHorizontalGlue(), okButton, cancelButton};
+			Utilities.addComponentsRespectingOrientation(buttonBar, buttons);
 
 			JPanel panel = new JPanel(new BorderLayout());
+			panel.add(new UiWrappedTextPanel(localization.getFieldLabel(dialogTag)), BorderLayout.BEFORE_FIRST_LINE);
 			panel.add(new UiScrollPane(fieldSelector), BorderLayout.CENTER);
 			panel.add(buttonBar, BorderLayout.AFTER_LAST_LINE);
 
@@ -353,31 +360,27 @@ public class ActionMenuReports extends ActionPrint
 				super(new BorderLayout());
 				FieldChooserSpecBuilder builder = new FieldChooserSpecBuilder(mainWindow.getLocalization());
 				FieldSpec[] rawFieldSpecs = builder.createFieldSpecArray(mainWindow.getStore());
-				list = new JList(wrapSpecs(rawFieldSpecs));
-				add(list, BorderLayout.CENTER);
+				model = new SpecTableModel(rawFieldSpecs, mainWindow.getLocalization());
+				table = new UiTable(model);
+				table.setMaxGridWidth(40);
+				table.useMaxWidth();
+				table.setFocusable(false);
+				table.createDefaultColumnsFromModel();
+				table.setColumnSelectionAllowed(false);
+				add(new JScrollPane(table), BorderLayout.CENTER);
 			}
 			
 			public FieldSpec[] getSelectedItems()
 			{
-				Object[] selected = list.getSelectedValues();
-				FieldSpec[] selectedItems = new FieldSpec[selected.length];
-				for(int i = 0; i < selected.length; ++i)
-					selectedItems[i] = ((PrettyFieldSpecWrapper)selected[i]).getSpec();
-				
+				int[] selectedRows = table.getSelectedRows();
+				FieldSpec[] selectedItems = new FieldSpec[selectedRows.length];
+				for(int i = 0; i < selectedRows.length; ++i)
+					selectedItems[i] = model.getSpec(selectedRows[i]);
 				return selectedItems;
 			}
 			
-			public PrettyFieldSpecWrapper[] wrapSpecs(FieldSpec[] specsToWrap)
-			{
-				int size = specsToWrap.length;
-				PrettyFieldSpecWrapper[] wrappedSpecs = new PrettyFieldSpecWrapper[size];
-				for(int i = 0; i < size; ++i)
-					wrappedSpecs[i] = new PrettyFieldSpecWrapper(specsToWrap[i]);
-				
-				return wrappedSpecs;
-			}
-			
-			JList list;
+			SpecTableModel model;
+			UiTable table;
 		}
 			
 		
@@ -387,26 +390,77 @@ public class ActionMenuReports extends ActionPrint
 		FieldSpec[] selectedSpecs;
 	}
 	
-	static class PrettyFieldSpecWrapper
+	static class SpecTableModel implements TableModel
 	{
-		public PrettyFieldSpecWrapper(FieldSpec specToWrap)
+		public SpecTableModel(FieldSpec[] specsToUse, MiniLocalization localizationToUse)
 		{
-			spec = specToWrap;
+			specs = specsToUse;
+			localization = localizationToUse;
 		}
 		
-		public FieldSpec getSpec()
+		public FieldSpec getSpec(int row)
 		{
-			return spec;
+			return specs[row];
 		}
 		
-		public String toString()
+		public int getColumnCount()
 		{
-			return spec.getLabel() + "(" + spec.getType().getTypeName() + ": " + spec.getTag() + ")";
+			return columnTags.length;
 		}
-		
-		FieldSpec spec;
-	}
 
+		public String getColumnName(int column)
+		{
+			return localization.getButtonLabel(columnTags[column]);
+		}
+
+		public int getRowCount()
+		{
+			return specs.length;
+		}
+
+		public Object getValueAt(int row, int column)
+		{
+			FieldSpec spec = getSpec(row);
+			switch(column)
+			{
+				case 0: return spec.getLabel();
+				case 1: return localization.getFieldLabel("FieldType" + spec.getType().getTypeName());
+				case 2: return spec.getTag();
+				default: throw new RuntimeException("Unknown column: " + column);
+			}
+		}
+
+		public boolean isCellEditable(int rowIndex, int columnIndex)
+		{
+			return false;
+		}
+
+		public Class getColumnClass(int columnIndex)
+		{
+			return String.class;
+		}
+
+		public void setValueAt(Object aValue, int rowIndex, int columnIndex)
+		{
+			throw new RuntimeException("Not supported");
+		}
+
+		public void addTableModelListener(TableModelListener l)
+		{
+			return;
+		}
+
+		public void removeTableModelListener(TableModelListener l)
+		{
+			return;
+		}
+		
+		static final String[] columnTags = {"FieldLabel", "FieldType", "FieldTag"};
+
+		FieldSpec[] specs;
+		MiniLocalization localization;
+	}
+	
 	static class RunOrCreateReportDialog extends JDialog implements ActionListener
 	{
 		public RunOrCreateReportDialog(UiMainWindow mainWindow, String[] buttonLabels)

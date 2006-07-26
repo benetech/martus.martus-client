@@ -275,6 +275,7 @@ public class EnglishStrings
 "wintitle:SetFolderOrder=Folder Order",
 "wintitle:FancySearchHelp=Search Help",
 "wintitle:ChooseReportToRun=Reports",
+"wintitle:ChooseTabularReportFields=Create Report",
 
 "wintitle:warningdeletefolder=Confirm Delete Folder",
 "wintitle:warningDeleteSingleBulletin=Confirm Delete Bulletin",
@@ -364,6 +365,9 @@ public class EnglishStrings
 "button:RunReport=Run Existing Report",
 "button:CreateReport=Create a New Report",
 "button:SelectReport=Select",
+"button:FieldLabel=Field Label",
+"button:FieldType=Type",
+"button:FieldTag=Tag",
 
 "menu:file=File",
 "menu:CreateNewBulletin=Create New Bulletin",
@@ -893,6 +897,7 @@ public class EnglishStrings
 "field:ReportFound=#NumberBulletinsFound# bulletins matched the search.",
 "field:ReportChooseSortFields=Choose how the bulletins will be sorted in the output. The bulletins will be ordered by the first field chosen. When two bulletins have the same value in that field, they will be sorted by the next sort field, and so on.",
 "field:ReportFieldError=*Error retrieving field*",
+"field:ChooseTabularReportFields=Use Ctrl-Click or Shift-Click to select the fields (columns) that will appear in this report. ",
 "field:MartusReportFormat=Martus Report Format (.mrf)",
 "field:CustomXMLTopSection=Top Section of Bulletin",
 "field:CustomXMLBottomSection=Bottom/Private Section of Bulletin",
@@ -945,6 +950,16 @@ public class EnglishStrings
 "field:CalendarSystemGregorian=Default (2005-05-31)",
 "field:CalendarSystemThai=Thai Solar (2548-05-31)",
 "field:CalendarSystemPersian=Persian (1384-03-10)",
+
+"field:FieldTypeSTRING=Text",
+"field:FieldTypeBOOLEAN=Yes/No",
+"field:FieldTypeDATE=Date",
+"field:FieldTypeDATERANGE=Date Range",
+"field:FieldTypeDROPDOWN=Dropdown",
+"field:FieldTypeLANGUAGE=Language",
+"field:FieldTypeMULTILINE=Long Text",
+"field:FieldTypeMESSAGE=Message",
+"field:FieldTypeGRID=Grid",
 
 "folder:%OutBox=Unsent Bulletins",
 "folder:%Sent=Saved Bulletins",
