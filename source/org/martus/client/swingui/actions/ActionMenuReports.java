@@ -352,7 +352,8 @@ public class ActionMenuReports extends ActionPrint
 			{
 				super(new BorderLayout());
 				FieldChooserSpecBuilder builder = new FieldChooserSpecBuilder(mainWindow.getLocalization());
-				list = new JList(builder.createMiniSpecArray(mainWindow.getStore()));
+				FieldSpec[] rawFieldSpecs = builder.createFieldSpecArray(mainWindow.getStore());
+				list = new JList(wrapSpecs(rawFieldSpecs));
 				add(list, BorderLayout.CENTER);
 			}
 			
@@ -361,9 +362,19 @@ public class ActionMenuReports extends ActionPrint
 				Object[] selected = list.getSelectedValues();
 				FieldSpec[] selectedItems = new FieldSpec[selected.length];
 				for(int i = 0; i < selected.length; ++i)
-					selectedItems[i] = (FieldSpec)selected[i];
+					selectedItems[i] = ((PrettyFieldSpecWrapper)selected[i]).getSpec();
 				
 				return selectedItems;
+			}
+			
+			public PrettyFieldSpecWrapper[] wrapSpecs(FieldSpec[] specsToWrap)
+			{
+				int size = specsToWrap.length;
+				PrettyFieldSpecWrapper[] wrappedSpecs = new PrettyFieldSpecWrapper[size];
+				for(int i = 0; i < size; ++i)
+					wrappedSpecs[i] = new PrettyFieldSpecWrapper(specsToWrap[i]);
+				
+				return wrappedSpecs;
 			}
 			
 			JList list;
@@ -376,6 +387,26 @@ public class ActionMenuReports extends ActionPrint
 		FieldSpec[] selectedSpecs;
 	}
 	
+	static class PrettyFieldSpecWrapper
+	{
+		public PrettyFieldSpecWrapper(FieldSpec specToWrap)
+		{
+			spec = specToWrap;
+		}
+		
+		public FieldSpec getSpec()
+		{
+			return spec;
+		}
+		
+		public String toString()
+		{
+			return spec.getLabel() + "(" + spec.getType().getTypeName() + ": " + spec.getTag() + ")";
+		}
+		
+		FieldSpec spec;
+	}
+
 	static class RunOrCreateReportDialog extends JDialog implements ActionListener
 	{
 		public RunOrCreateReportDialog(UiMainWindow mainWindow, String[] buttonLabels)

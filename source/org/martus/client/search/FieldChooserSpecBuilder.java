@@ -75,7 +75,7 @@ public class FieldChooserSpecBuilder
 		return allAvailableFields;
 	}
 	
-	public FieldSpec[] createMiniSpecArray(ClientBulletinStore storeToUse)
+	public FieldSpec[] createFieldSpecArray(ClientBulletinStore storeToUse)
 	{
 		FieldChoicesByLabel allAvailableFields = buildFieldChoicesByLabel(storeToUse);
 		return allAvailableFields.asArray(localization);
