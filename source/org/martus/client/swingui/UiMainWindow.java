@@ -1217,16 +1217,64 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 			return null;
 		
 		String[] sortTags = new String[0];
-		return doSearch(searchTree, sortTags);
+		try
+		{
+			return doSearch(searchTree, sortTags);
+		} 
+		catch (Exception e)
+		{
+			e.printStackTrace();
+			notifyDlg("UnexpectedError");
+			return null;
+		}
 	}
 
-	public SortableBulletinList doSearch(SearchTreeNode searchTree, String[] sortTags)
+	public SortableBulletinList doSearch(SearchTreeNode searchTree, String[] sortTags) throws Exception
+	{
+		SearchThread thread = new SearchThread(this, searchTree, sortTags);
+		doBackgroundWork(thread, "BackgroundSearching");
+		return thread.getResults();
+	}
+	
+	public void doBackgroundWork(WorkerThread worker, String dialogTag) throws Exception
 	{
 		setWaitingCursor();
-		SortableBulletinList searchResults = app.search(searchTree, sortTags, uiState.searchFinalBulletinsOnly);
-		resetCursor();
-
-		return searchResults;
+		try
+		{
+			ModalBusyDialog dlg = new ModalBusyDialog(this, dialogTag);
+			worker.start(dlg);
+			dlg.setVisible(true);
+			worker.cleanup();
+		}
+		finally
+		{
+			resetCursor();
+		}
+	}
+	
+	static class SearchThread extends WorkerThread
+	{
+		public SearchThread(UiMainWindow mainWindowToUse, SearchTreeNode searchTreeToUse, String[] sortTagsToUse)
+		{
+			mainWindow = mainWindowToUse;
+			searchTree = searchTreeToUse;
+			sortTags = sortTagsToUse;
+		}
+		
+		public void doTheWorkWithNO_SWING_CALLS()
+		{
+			searchResults = mainWindow.getApp().search(searchTree, sortTags, mainWindow.uiState.searchFinalBulletinsOnly);
+		}
+		
+		public SortableBulletinList getResults()
+		{
+			return searchResults;
+		}
+		
+		UiMainWindow mainWindow;
+		SearchTreeNode searchTree;
+		String[] sortTags;
+		SortableBulletinList searchResults;
 	}
 	
 	public SearchTreeNode askUserForSearchCriteria()
@@ -2475,7 +2523,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	public static final String STATUS_SERVER_NOT_CONFIGURED = "ServerNotConfiguredProgressMessage";
 	
 	private MartusApp app;
-	private CurrentUiState uiState;
+	CurrentUiState uiState;
 	UiBulletinPreviewPane preview;
 	private JSplitPane previewSplitter;
 	private FolderSplitPane folderSplitter;

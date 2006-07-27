@@ -964,6 +964,10 @@ public class EnglishStrings
 "field:FieldTypeMESSAGE=Message",
 "field:FieldTypeGRID=Grid",
 
+"field:BackgroundSearching=Searching...",
+"field:BackgroundSorting=Sorting Bulletins...",
+"field:BackgroundPrinting=Printing...",
+
 "folder:%OutBox=Unsent Bulletins",
 "folder:%Sent=Saved Bulletins",
 "folder:%Draft=Old Draft Bulletins",
