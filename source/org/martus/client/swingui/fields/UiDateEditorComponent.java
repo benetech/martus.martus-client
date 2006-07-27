@@ -69,12 +69,63 @@ public class UiDateEditorComponent extends Box
 			yCombo.addItem(Integer.toString(2549));
 		}
 		
-		for(int year = minYear; year <= maxYear; ++year)
-			yCombo.addItem(new Integer(year).toString());
+		yCombo.addItem(new YearObject(localization.getFieldLabel("YearUnspecified")));
 		
-		yCombo.setSelectedItem(new Integer(thisYear).toString());
+		for(int year = minYear; year <= maxYear; ++year)
+			yCombo.addItem(new YearObject(year));
+		
+		yCombo.setSelectedIndex(0);
 		return yCombo;
-	}		
+	}
+	
+	static class YearObject
+	{
+		public YearObject(String unknownYearText)
+		{
+			year = MultiCalendar.YEAR_NOT_SPECIFIED;
+			label = unknownYearText;
+		}
+		
+		public YearObject(int yearToUse)
+		{
+			year = yearToUse;
+			label = Integer.toString(year);
+		}
+		
+		public String toString()
+		{
+			return label;
+		}
+		
+		public int getYear()
+		{
+			return year;
+		}
+		
+		public boolean isUnknown()
+		{
+			return (year == MultiCalendar.YEAR_NOT_SPECIFIED);
+		}
+		
+		public int hashCode()
+		{
+			return year;
+		}
+
+		public boolean equals(Object rawOther)
+		{
+			if(! (rawOther instanceof YearObject))
+				return false;
+			
+			YearObject other = (YearObject)rawOther;
+			return (year == other.year);
+		}
+		
+		
+		
+		int year;
+		String label;
+	}
 	
 	private UiComboBox createMonthCombo()
 	{
@@ -133,11 +184,20 @@ public class UiDateEditorComponent extends Box
 
 	public MultiCalendar getDate()
 	{
-		int year = Integer.parseInt((String)yearCombo.getSelectedItem());
+		YearObject yearObject = (YearObject)yearCombo.getSelectedItem();
+		if(yearObject.isUnknown())
+			return createUnknownDateMultiCalendar();
+		
+		int year = yearObject.getYear();
 		int month = monthCombo.getSelectedIndex()+1;
 		int day = dayCombo.getSelectedIndex()+1;
 
 		return localization.createCalendarFromLocalizedYearMonthDay(year, month, day);
+	}
+
+	private MultiCalendar createUnknownDateMultiCalendar()
+	{
+		return MultiCalendar.createFromGregorianYearMonthDay(0, 1, 1);
 	}
 
 	public void setStoredDateText(String newText)
@@ -145,6 +205,9 @@ public class UiDateEditorComponent extends Box
 		try
 		{
 			MultiCalendar cal = localization.createCalendarFromIsoDateString(newText);
+			if(cal.getGregorianYear() == MultiCalendar.YEAR_NOT_SPECIFIED)
+				setUnknownDate();
+			
 			setDate(cal);
 		}
 		catch(Exception e)
@@ -152,10 +215,17 @@ public class UiDateEditorComponent extends Box
 			System.out.println(e);
 		}			
 	}
+	
+	private void setUnknownDate()
+	{
+		yearCombo.setSelectedIndex(0);
+		monthCombo.setSelectedIndex(0);
+		dayCombo.setSelectedIndex(0);
+	}
 
 	public void setDate(MultiCalendar cal)
 	{
-		yearCombo.setSelectedItem( Integer.toString(localization.getLocalizedYear(cal)));
+		yearCombo.setSelectedItem(new YearObject(localization.getLocalizedYear(cal)));
 		monthCombo.setSelectedIndex((localization.getLocalizedMonth(cal) - 1));
 		dayCombo.setSelectedIndex((localization.getLocalizedDay(cal) - 1));
 	}

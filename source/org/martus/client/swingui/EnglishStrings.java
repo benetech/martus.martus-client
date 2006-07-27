@@ -847,6 +847,8 @@ public class EnglishStrings
 "field:HQsSetAsDefault=Default Headquarters accounts will be selected for each new bulletin or version.",
 "field:DateExact=Exact Date",
 "field:DateRange=Date Range",
+"field:YearUnspecified=Unknown",
+"field:DateNotSpecified=Unknown",
 "field:UnknownDateSave=Unknown",
 "field:AttachmentSizeUnknown=Unknown",
 "field:ConfigureHQsCurrentHQs=Current Headquarters",

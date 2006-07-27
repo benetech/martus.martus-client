@@ -226,7 +226,11 @@ public class UiFlexiDateEditor extends UiField
 		if(isExactDate())
 			return MartusFlexidate.toStoredDateFormat(beginDate);
 		
-		return MartusFlexidate.toBulletinFlexidateFormat(beginDate, getEndDate());
+		MultiCalendar endDate = getEndDate();
+		if(endDate.getGregorianYear() == MultiCalendar.YEAR_NOT_SPECIFIED)
+			return MartusFlexidate.toStoredDateFormat(beginDate);
+		
+		return MartusFlexidate.toBulletinFlexidateFormat(beginDate, endDate);
 	}
 
 	private MultiCalendar getBeginDate() 
