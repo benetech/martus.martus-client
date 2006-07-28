@@ -472,15 +472,15 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		assertTrue("didn't put in outbox?", outbox.contains(b));
 		assertTrue("didn't put in saved?", appWithAccount.getFolderSaved().contains(b));
 		assertTrue("didn't save folders?", store.getFoldersFile().exists());
-		assertFalse("marked as sent?", store.isProbablyOnServer(b));
-		assertTrue("didn't mark as unsent?", store.isProbablyNotOnServer(b));
+		assertFalse("marked as sent?", store.isProbablyOnServer(b.getUniversalId()));
+		assertTrue("didn't mark as unsent?", store.isProbablyNotOnServer(b.getUniversalId()));
 		
 		store.setIsOnServer(b);
 		store.moveBulletin(b, outbox, discarded);
 		appWithAccount.saveBulletin(b, outbox);
 		assertFalse("didn't remove from discarded?", discarded.contains(b));
-		assertFalse("not unmarked as sent?", store.isProbablyOnServer(b));
-		assertTrue("didn't remark as unsent?", store.isProbablyNotOnServer(b));
+		assertFalse("not unmarked as sent?", store.isProbablyOnServer(b.getUniversalId()));
+		assertTrue("didn't remark as unsent?", store.isProbablyNotOnServer(b.getUniversalId()));
 	}
 	
 	public void testLoadOldCustomFieldConfigInfo() throws Exception

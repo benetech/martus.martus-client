@@ -34,6 +34,7 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.Vector;
+
 import org.martus.client.bulletinstore.ClientBulletinStore.AddOlderVersionToFolderFailedException;
 import org.martus.client.bulletinstore.ClientBulletinStore.BulletinAlreadyExistsException;
 import org.martus.client.core.MartusClientXml;
@@ -196,17 +197,17 @@ public class TestClientBulletinStore extends TestCaseEnhanced
     	original.setSealed();
     	testStore.saveBulletin(original);
     	testStore.setIsOnServer(original);
-    	assertTrue("original not on server?", testStore.isProbablyOnServer(original));
+    	assertTrue("original not on server?", testStore.isProbablyOnServer(original.getUniversalId()));
 
     	Bulletin clone = testStore.createNewDraft(original, customPublicSpecs, customPrivateSpecs);
     	testStore.saveBulletin(clone);
     	testStore.setIsOnServer(clone);
     	
-    	assertTrue("new version not on server?", testStore.isProbablyOnServer(clone));
-    	assertTrue("original still not on server?", testStore.isProbablyOnServer(original));
+    	assertTrue("new version not on server?", testStore.isProbablyOnServer(clone.getUniversalId()));
+    	assertTrue("original still not on server?", testStore.isProbablyOnServer(original.getUniversalId()));
     	
     	testStore.removeBulletinFromAllFolders(clone);
-    	assertFalse("didn't remove original?", testStore.isProbablyOnServer(original));
+    	assertFalse("didn't remove original?", testStore.isProbablyOnServer(original.getUniversalId()));
 	}
     
     public void testCreateEmptyClone() throws Exception
@@ -486,8 +487,8 @@ public class TestClientBulletinStore extends TestCaseEnhanced
 		assertEquals(0, f.getBulletinCount());
 		assertEquals(originalRecordCount, db.getRecordCount());
 		
-		BulletinCache cache = testStore.getCache();
-		assertNull("found destroyed bulletin?", cache.find(b.getUniversalId()));
+		PartialBulletinCache cache = testStore.getCache();
+		assertFalse("found a destroyed bulletin?", cache.isBulletinCached(b.getUniversalId()));
 	}
 
 	public void testGetFieldData() throws Exception
@@ -839,16 +840,16 @@ public class TestClientBulletinStore extends TestCaseEnhanced
 		Bulletin b = testStore.createEmptyBulletin();
 		testStore.saveBulletin(b);
 		testStore.setIsOnServer(b);
-		assertTrue("not in on?", testStore.isProbablyOnServer(b));
-		assertFalse("in not on?", testStore.isProbablyNotOnServer(b));
+		assertTrue("not in on?", testStore.isProbablyOnServer(b.getUniversalId()));
+		assertFalse("in not on?", testStore.isProbablyNotOnServer(b.getUniversalId()));
 		testStore.setIsOnServer(b);
-		assertTrue("not still in on?", testStore.isProbablyOnServer(b));
-		assertFalse("now in not on?", testStore.isProbablyNotOnServer(b));
+		assertTrue("not still in on?", testStore.isProbablyOnServer(b.getUniversalId()));
+		assertFalse("now in not on?", testStore.isProbablyNotOnServer(b.getUniversalId()));
 		
 		testStore.setIsNotOnServer(b);
 		testStore.setIsOnServer(b);
-		assertTrue("not again in on?", testStore.isProbablyOnServer(b));
-		assertFalse("still in not on?", testStore.isProbablyNotOnServer(b));
+		assertTrue("not again in on?", testStore.isProbablyOnServer(b.getUniversalId()));
+		assertFalse("still in not on?", testStore.isProbablyNotOnServer(b.getUniversalId()));
 	}
 
 	public void testSetIsNotOnServer() throws Exception
@@ -856,16 +857,16 @@ public class TestClientBulletinStore extends TestCaseEnhanced
 		Bulletin b = testStore.createEmptyBulletin();
 		testStore.saveBulletin(b);
 		testStore.setIsNotOnServer(b);
-		assertTrue("not in not on?", testStore.isProbablyNotOnServer(b));
-		assertFalse("in on?", testStore.isProbablyOnServer(b));
+		assertTrue("not in not on?", testStore.isProbablyNotOnServer(b.getUniversalId()));
+		assertFalse("in on?", testStore.isProbablyOnServer(b.getUniversalId()));
 		testStore.setIsNotOnServer(b);
-		assertTrue("not still in not on?", testStore.isProbablyNotOnServer(b));
-		assertFalse("now in on?", testStore.isProbablyOnServer(b));
+		assertTrue("not still in not on?", testStore.isProbablyNotOnServer(b.getUniversalId()));
+		assertFalse("now in on?", testStore.isProbablyOnServer(b.getUniversalId()));
 		
 		testStore.setIsOnServer(b);
 		testStore.setIsNotOnServer(b);
-		assertTrue("not again in not on?", testStore.isProbablyNotOnServer(b));
-		assertFalse("still in on?", testStore.isProbablyOnServer(b));
+		assertTrue("not again in not on?", testStore.isProbablyNotOnServer(b.getUniversalId()));
+		assertFalse("still in on?", testStore.isProbablyOnServer(b.getUniversalId()));
 	}
 	
 	public void testClearnOnServerLists() throws Exception
@@ -880,10 +881,10 @@ public class TestClientBulletinStore extends TestCaseEnhanced
 		
 		testStore.clearOnServerLists();
 		
-		assertFalse("on still on?", testStore.isProbablyOnServer(on));
-		assertFalse("on now off?", testStore.isProbablyNotOnServer(on));
-		assertFalse("off now on?", testStore.isProbablyOnServer(off));
-		assertFalse("off still off?", testStore.isProbablyNotOnServer(off));
+		assertFalse("on still on?", testStore.isProbablyOnServer(on.getUniversalId()));
+		assertFalse("on now off?", testStore.isProbablyNotOnServer(on.getUniversalId()));
+		assertFalse("off now on?", testStore.isProbablyOnServer(off.getUniversalId()));
+		assertFalse("off still off?", testStore.isProbablyNotOnServer(off.getUniversalId()));
 	}
 	
 	public void testUpdateOnServerLists() throws Exception
@@ -929,18 +930,18 @@ public class TestClientBulletinStore extends TestCaseEnhanced
 		
 		testStore.updateOnServerLists(onServer);
 		
-		assertTrue("thought sent; not on server", testStore.isProbablyNotOnServer(sentButNotOnServer));
-		assertTrue("unknown; is on server", testStore.isProbablyNotOnServer(unknownAndNotOnServer));
-		assertTrue("thought unsent; not on server", testStore.isProbablyNotOnServer(unsentToAndNotOnServer));
+		assertTrue("thought sent; not on server", testStore.isProbablyNotOnServer(sentButNotOnServer.getUniversalId()));
+		assertTrue("unknown; is on server", testStore.isProbablyNotOnServer(unknownAndNotOnServer.getUniversalId()));
+		assertTrue("thought unsent; not on server", testStore.isProbablyNotOnServer(unsentToAndNotOnServer.getUniversalId()));
 		
-		assertTrue("thought sent; is on server", testStore.isProbablyOnServer(sentAndOnServer));
-		assertTrue("unknown; is on server", testStore.isProbablyOnServer(unknownButOnServer));
-		assertTrue("thought unsent; is on server", testStore.isProbablyOnServer(unsentButOnServer));
+		assertTrue("thought sent; is on server", testStore.isProbablyOnServer(sentAndOnServer.getUniversalId()));
+		assertTrue("unknown; is on server", testStore.isProbablyOnServer(unknownButOnServer.getUniversalId()));
+		assertTrue("thought unsent; is on server", testStore.isProbablyOnServer(unsentButOnServer.getUniversalId()));
 		
-		assertTrue("thought sent; in draft outbox; on server", testStore.isProbablyOnServer(draftInOutboxSentAndOnServer));
-		assertFalse("(1) unknown; in draft outbox; on server", testStore.isProbablyOnServer(draftInOutboxUnknownButOnServer));
-		assertFalse("(2) unknown; in draft outbox; on server", testStore.isProbablyNotOnServer(draftInOutboxUnknownButOnServer));
-		assertTrue("thought unsent; in draft outbox; on server", testStore.isProbablyNotOnServer(draftInOutboxUnsentButOnServer));
+		assertTrue("thought sent; in draft outbox; on server", testStore.isProbablyOnServer(draftInOutboxSentAndOnServer.getUniversalId()));
+		assertFalse("(1) unknown; in draft outbox; on server", testStore.isProbablyOnServer(draftInOutboxUnknownButOnServer.getUniversalId()));
+		assertFalse("(2) unknown; in draft outbox; on server", testStore.isProbablyNotOnServer(draftInOutboxUnknownButOnServer.getUniversalId()));
+		assertTrue("thought unsent; in draft outbox; on server", testStore.isProbablyNotOnServer(draftInOutboxUnsentButOnServer.getUniversalId()));
 		
 		assertTrue("didn't save folders?", testStore.getFoldersFile().exists());
 	}

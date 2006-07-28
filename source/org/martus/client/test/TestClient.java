@@ -29,16 +29,15 @@ package org.martus.client.test;
 import junit.framework.Test;
 import junit.framework.TestSuite;
 
-import org.martus.client.bulletinstore.TestBulletinCache;
 import org.martus.client.bulletinstore.TestBulletinFolder;
 import org.martus.client.bulletinstore.TestClientBulletinStore;
 import org.martus.client.bulletinstore.TestKnownFieldSpecCache;
 import org.martus.client.core.TestPartialBulletin;
 import org.martus.client.core.TestSafeReadableBulletin;
 import org.martus.client.core.TestSortableBulletinList;
-import org.martus.client.reports.TestTabularReportBuilder;
 import org.martus.client.reports.TestReportFormat;
 import org.martus.client.reports.TestReportRunner;
+import org.martus.client.reports.TestTabularReportBuilder;
 import org.martus.client.search.TestBulletinSearcher;
 import org.martus.client.search.TestChoiceItemSorterByLabelTagType;
 import org.martus.client.search.TestFancySearchHelper;
@@ -65,7 +64,6 @@ public class TestClient
 		TestSuite suite= new TestSuite("All Client Martus Tests");
 		
 		suite.addTest(new TestSuite(TestBackgroundRetriever.class));
-		suite.addTest(new TestSuite(TestBulletinCache.class));
 		suite.addTest(new TestSuite(TestBulletinFolder.class));
 		suite.addTest(new TestSuite(TestBulletinSearcher.class));
 		suite.addTest(new TestSuite(TestBulletinTableModel.class));

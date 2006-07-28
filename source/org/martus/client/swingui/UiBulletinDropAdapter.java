@@ -280,7 +280,7 @@ public abstract class UiBulletinDropAdapter implements DropTargetListener
 		ZipFile zip = new ZipFile(file);
 		BulletinHeaderPacket bhp = BulletinHeaderPacket.loadFromZipFile(zip, store.getSignatureVerifier());
 		Bulletin old = store.getBulletinRevision(bhp.getUniversalId());
-		boolean isMyBulletin = store.isMyBulletin(bhp);
+		boolean isMyBulletin = store.isMyBulletin(bhp.getUniversalId());
 		boolean doesBulletinRevisionExist = old != null;
 		
 		if(!isMyBulletin && doesBulletinRevisionExist)

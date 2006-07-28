@@ -1,7 +1,7 @@
 /*
 
 The Martus(tm) free, social justice documentation and
-monitoring software. Copyright (C) 2001-2004, Beneficent
+monitoring software. Copyright (C) 2006, Beneficent
 Technology, Inc. (Benetech).
 
 Martus is free software; you can redistribute it and/or
@@ -23,57 +23,53 @@ Software Foundation, Inc., 59 Temple Place - Suite 330,
 Boston, MA 02111-1307, USA.
 
 */
-
 package org.martus.client.bulletinstore;
 
+import java.util.HashMap;
+
+import org.martus.client.core.PartialBulletin;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.packet.UniversalId;
 
-
-public class BulletinCache
+public class PartialBulletinCache
 {
-	public BulletinCache()
+	public PartialBulletinCache(String[] tagsToStore)
 	{
-		cache = new Bulletin[MAX_SIZE];
-	}
-	
-	public Bulletin find(UniversalId uid)
-	{
-		int at = indexOf(uid);
-		if(at >= 0)
-			return cache[at];
-			
-		return null;
+		tags = tagsToStore;
+		uidsToPartialBulletins = new HashMap();
 	}
 	
 	public void add(Bulletin b)
 	{
-		if(indexOf(b.getUniversalId()) >= 0)
-			return;
-			
-		if(addNextAt >= MAX_SIZE)
-			addNextAt = 0;
-		cache[addNextAt++] = b;
+		PartialBulletin pb = new PartialBulletin(b, tags);
+		uidsToPartialBulletins.put(b.getUniversalId(), pb);
 	}
 	
 	public void remove(UniversalId uid)
 	{
-		int at = indexOf(uid);
-		if(at >= 0)
-			cache[at] = null;
+		uidsToPartialBulletins.remove(uid);
 	}
 	
-	private int indexOf(UniversalId uid)
+	public boolean isBulletinCached(UniversalId uid)
 	{
-		for(int i=0; i < MAX_SIZE; ++i)
-		{
-			if(cache[i] != null && cache[i].getUniversalId().equals(uid))
-				return i;
-		}
-		return -1;
+		return getPartialBulletin(uid) != null;
+	}
+	
+	public String getFieldData(UniversalId uid, String fieldTag)
+	{
+		PartialBulletin pb = getPartialBulletin(uid);
+		String data = pb.getData(fieldTag);
+		if(data == null)
+			data = "";
+		return data;
 	}
 
-	public static final int MAX_SIZE = 1000;
-	private int addNextAt;
-	private Bulletin[] cache;
+	private PartialBulletin getPartialBulletin(UniversalId uid)
+	{
+		PartialBulletin pb = (PartialBulletin)uidsToPartialBulletins.get(uid);
+		return pb;
+	}
+	
+	String[] tags;
+	HashMap uidsToPartialBulletins;
 }

@@ -45,6 +45,7 @@ import java.util.Vector;
 import java.util.zip.ZipFile;
 
 import org.martus.client.core.MartusClientXml;
+import org.martus.client.swingui.bulletintable.BulletinTableModel;
 import org.martus.common.MartusUtilities;
 import org.martus.common.MartusXml;
 import org.martus.common.MartusUtilities.FileVerificationException;
@@ -61,6 +62,7 @@ import org.martus.common.database.DatabaseKey;
 import org.martus.common.database.Database.RecordHiddenException;
 import org.martus.common.database.FileDatabase.MissingAccountMapException;
 import org.martus.common.database.FileDatabase.MissingAccountMapSignatureException;
+import org.martus.common.field.MartusField;
 import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.fieldspec.StandardFieldSpecs;
 import org.martus.common.packet.BulletinHeaderPacket;
@@ -96,7 +98,7 @@ public class ClientBulletinStore extends BulletinStore
 	public ClientBulletinStore(MartusCrypto cryptoToUse)
 	{
 		setSignatureGenerator(cryptoToUse);
-		bulletinDataCache = new BulletinCache();
+		bulletinDataCache = new PartialBulletinCache(getTagsOfCachedFields());
 	}
 	
 	public void doAfterSigninInitialization(File dataRootDirectory) throws FileVerificationException, MissingAccountMapException, MissingAccountMapSignatureException
@@ -269,13 +271,13 @@ public class ClientBulletinStore extends BulletinStore
 		}
 	}
 
-	public String getSentTag(Bulletin b)
+	public String getSentTag(UniversalId uid)
 	{
-		boolean knownNotOnServer = isProbablyNotOnServer(b);
+		boolean knownNotOnServer = isProbablyNotOnServer(uid);
 
-		if(getFolderDraftOutbox().contains(b))
+		if(getFolderDraftOutbox().contains(uid))
 		{
-			if(isMyBulletin(b.getBulletinHeaderPacket()))
+			if(isMyBulletin(uid))
 				return WAS_SENT_NO;
 			if(!knownNotOnServer)
 				return null;
@@ -284,7 +286,7 @@ public class ClientBulletinStore extends BulletinStore
 		if(knownNotOnServer)
 			return WAS_SENT_NO;
 
-		if(isProbablyOnServer(b))
+		if(isProbablyOnServer(uid))
 			return WAS_SENT_YES;
 		
 		return null;
@@ -292,23 +294,22 @@ public class ClientBulletinStore extends BulletinStore
 
 	public String getFieldData(UniversalId uid, String fieldTag)
 	{
-		Bulletin b = getBulletinRevision(uid);
-		
-		if(fieldTag.equals(Bulletin.TAGWASSENT))
+		if(fieldTag.equals(Bulletin.TAGWASSENT) || fieldTag.equals(Bulletin.PSEUDOFIELD_WAS_SENT))
 		{
-			String tag = getSentTag(b);
+			String tag = getSentTag(uid);
 			if(tag == null)
 				return "";
 			return tag;
 		}
 			
-		if(fieldTag.equals(Bulletin.TAGSTATUS))
-			return b.getStatus();
-			
-		if (fieldTag.equals(Bulletin.TAGLASTSAVED))
-			return Long.toString(b.getLastSavedTime());			
+		if(bulletinDataCache.isBulletinCached(uid))
+			return bulletinDataCache.getFieldData(uid, fieldTag);
 		
-		return b.get(fieldTag);
+		Bulletin b = getBulletinRevision(uid);
+		MartusField field = b.getField(fieldTag);
+		if(field == null)
+			return "";
+		return field.getData();
 	}
 
 	public Bulletin loadFromDatabase(DatabaseKey key) throws
@@ -316,10 +317,6 @@ public class ClientBulletinStore extends BulletinStore
 		Bulletin.DamagedBulletinException,
 		MartusCrypto.NoKeyPairException
 	{
-		Bulletin fromCache = bulletinDataCache.find(key.getUniversalId());
-		if(fromCache != null)
-			return fromCache;
-		
 		Bulletin b = BulletinLoader.loadFromDatabase(getDatabase(), key, getSignatureVerifier());
 		bulletinDataCache.add(b);
 		return b;
@@ -354,9 +351,11 @@ public class ClientBulletinStore extends BulletinStore
 			++startIndex;
 			if(startIndex >= uids.length)
 				startIndex = 0;
-			Bulletin b = getBulletinRevision(uids[startIndex]);
-			if(!isDiscarded(b))
+			if(!isDiscarded(uids[startIndex]))
+			{
+				Bulletin b = getBulletinRevision(uids[startIndex]);
 				return b;
+			}
 		}
 		return null;
 	}
@@ -365,16 +364,16 @@ public class ClientBulletinStore extends BulletinStore
 	{
 		for(int i=0; i < hiddenFolder.getBulletinCount(); ++i)
 		{
-			Bulletin b = hiddenFolder.getBulletinSorted(i);
-			if(!isDiscarded(b))
+			UniversalId uid = hiddenFolder.getBulletinUniversalIdSorted(i);
+			if(!isDiscarded(uid))
 				return true;
 		}
 		return false;
 	}
 	
-	private boolean isDiscarded(Bulletin b)
+	private boolean isDiscarded(UniversalId uid)
 	{
-		return getFolderDiscarded().contains(b);
+		return getFolderDiscarded().contains(uid);
 	}
 
 	public synchronized BulletinFolder createFolder(String name)
@@ -688,15 +687,15 @@ public class ClientBulletinStore extends BulletinStore
 	}
 	
 	// synchronized because updateOnServerLists is called from background thread
-	public synchronized boolean isProbablyOnServer(Bulletin b)
+	public synchronized boolean isProbablyOnServer(UniversalId uid)
 	{
-		return getFolderOnServer().contains(b);
+		return getFolderOnServer().contains(uid);
 	}
 	
 	// synchronized because updateOnServerLists is called from background thread
-	public synchronized boolean isProbablyNotOnServer(Bulletin b)
+	public synchronized boolean isProbablyNotOnServer(UniversalId uid)
 	{
-		return getFolderNotOnServer().contains(b);
+		return getFolderNotOnServer().contains(uid);
 	}
 	
 	public  void setIsOnServer(Bulletin b)
@@ -1314,7 +1313,7 @@ public class ClientBulletinStore extends BulletinStore
 			UniversalId uid = bhp.getUniversalId();
 
 			boolean isSealed = bhp.getStatus().equals(Bulletin.STATUSSEALED);
-			if(forceSameUids || !isMyBulletin(bhp) || isSealed)
+			if(forceSameUids || !isMyBulletin(uid) || isSealed)
 			{
 				importZipFileToStoreWithSameUids(zipFile);
 			}
@@ -1329,11 +1328,6 @@ public class ClientBulletinStore extends BulletinStore
 		}
 
 		saveFolders();
-	}
-
-	public boolean isMyBulletin(BulletinHeaderPacket bhp)
-	{
-		return getAccountId().equals(bhp.getAccountId());
 	}
 
 	public UniversalId importZipFileToStoreWithNewUids(File inputFile) throws
@@ -1405,7 +1399,7 @@ public class ClientBulletinStore extends BulletinStore
 		}
 	}
 
-	public BulletinCache getCache()
+	public PartialBulletinCache getCache()
 	{
 		return bulletinDataCache;
 	}
@@ -1480,8 +1474,13 @@ public class ClientBulletinStore extends BulletinStore
 		visitAllBulletinRevisions(uidCollector);
 		return uidCollector.uidList;
 	}
-
-	public static int maxCachedBulletinCount = 100;
+	
+	private String[] getTagsOfCachedFields()
+	{
+		Vector tags = new Vector(Arrays.asList(BulletinTableModel.sortableFieldTags));
+		tags.remove(Bulletin.PSEUDOFIELD_WAS_SENT);
+		return (String[])tags.toArray(new String[0]);
+	}
 
 	public static final String SAVED_FOLDER = "%Sent";
 	public static final String DISCARDED_FOLDER = "%Discarded";
@@ -1515,6 +1514,6 @@ public class ClientBulletinStore extends BulletinStore
 
 	private FieldSpec[] topSectionFieldSpecs;
 	private FieldSpec[] bottomSectionFieldSpecs;
-	BulletinCache bulletinDataCache;
+	PartialBulletinCache bulletinDataCache;
 	KnownFieldSpecCache knownFieldSpecCache;
 }

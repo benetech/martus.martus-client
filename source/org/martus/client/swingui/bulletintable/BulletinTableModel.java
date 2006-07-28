@@ -95,35 +95,38 @@ public class BulletinTableModel extends AbstractTableModel
 		if(uid == null)
 			return "";
 		
-		Bulletin b = getBulletin(rowIndex);
 		String fieldTag = sortableFieldTags[columnIndex];
+		ClientBulletinStore store = getFolder().getStore();
+		String rawData = store.getFieldData(uid, fieldTag);
 		
 		if(fieldTag.equals(Bulletin.TAGSTATUS))
-		 	return localization.getStatusLabel(b.getStatus());	
+		 	return localization.getStatusLabel(rawData);	
 		
-		ClientBulletinStore store = getFolder().getStore();
-		if(fieldTag.equals(Bulletin.TAGWASSENT))
+		if(fieldTag.equals(Bulletin.PSEUDOFIELD_WAS_SENT))
 		{
-			String tag = store.getSentTag(b);
-			if(tag == null)
+			if(rawData == null || rawData.length() == 0)
 				return "";
-			return localization.getFieldLabel(tag);
+			return localization.getFieldLabel(rawData);
 		}
 											
-		if (fieldTag.equals(Bulletin.TAGLASTSAVED))			 
-			return localization.formatDateTime(b.getLastSavedTime());
+		if (fieldTag.equals(Bulletin.PSEUDOFIELD_LAST_SAVED_TIMESTAMP))
+		{
+			long dateTime = 0L;
+			if(rawData.length() > 0)
+				dateTime = Long.parseLong(rawData);
+			return localization.formatDateTime(dateTime);
+		}
 		
-		String value = store.getFieldData(uid, fieldTag);
 		if (fieldTag.equals(Bulletin.TAGENTRYDATE) || 
 			fieldTag.equals(Bulletin.TAGEVENTDATE))				
 		{
-			return localization.convertStoredDateToDisplay(value);
+			return localization.convertStoredDateToDisplay(rawData);
 		}	
 		
-		if (value.startsWith("<"))
-			return " "+value;				
+		if (rawData.startsWith("<"))
+			return " "+rawData;				
 			
-		return value;
+		return rawData;
 	}
 
 
@@ -142,14 +145,14 @@ public class BulletinTableModel extends AbstractTableModel
 		folder.sortBy(getFieldName(columnIndex));
 	}
 	
-	private static final String[] sortableFieldTags =
+	public static final String[] sortableFieldTags =
 	{
 		BulletinConstants.TAGSTATUS, 
-		BulletinConstants.TAGWASSENT, 
+		Bulletin.PSEUDOFIELD_WAS_SENT, 
 		BulletinConstants.TAGEVENTDATE, 
 		BulletinConstants.TAGTITLE, 
 		BulletinConstants.TAGAUTHOR, 
-		BulletinConstants.TAGLASTSAVED
+		Bulletin.PSEUDOFIELD_LAST_SAVED_TIMESTAMP,
 	};
 
 

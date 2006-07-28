@@ -68,11 +68,11 @@ public class TestBulletinTableModel extends TestCaseEnhanced
 
 		assertEquals("column count", 6, list.getColumnCount());
 		assertEquals("status", list.getFieldName(STATUS));
-		assertEquals("BulletinWasSent", list.getFieldName(WASSENT));
+		assertEquals("_wasSent", list.getFieldName(WASSENT));
 		assertEquals("eventdate", list.getFieldName(EVENTDATE));
 		assertEquals("title", list.getFieldName(TITLE));
 		assertEquals("author", list.getFieldName(AUTHOR));
-		assertEquals("BulletinLastSaved", list.getFieldName(SAVEDDATE));
+		assertEquals("_lastSavedTimestamp", list.getFieldName(SAVEDDATE));
 	}
 
     public void testColumnLabels()
@@ -81,11 +81,11 @@ public class TestBulletinTableModel extends TestCaseEnhanced
 		list.setFolder(folderSaved);
 
 		assertEquals(localization.getFieldLabel(BulletinConstants.TAGSTATUS), list.getColumnName(STATUS));
-		assertEquals(localization.getFieldLabel(BulletinConstants.TAGWASSENT), list.getColumnName(WASSENT));
+		assertEquals(localization.getFieldLabel(Bulletin.PSEUDOFIELD_WAS_SENT), list.getColumnName(WASSENT));
 		assertEquals(localization.getFieldLabel(BulletinConstants.TAGEVENTDATE), list.getColumnName(EVENTDATE));
 		assertEquals(localization.getFieldLabel(BulletinConstants.TAGTITLE), list.getColumnName(TITLE));
 		assertEquals(localization.getFieldLabel(BulletinConstants.TAGAUTHOR), list.getColumnName(AUTHOR));
-		assertEquals(localization.getFieldLabel(BulletinConstants.TAGLASTSAVED), list.getColumnName(SAVEDDATE));
+		assertEquals(localization.getFieldLabel(Bulletin.PSEUDOFIELD_LAST_SAVED_TIMESTAMP), list.getColumnName(SAVEDDATE));
 	}
 
 	public void testRows()

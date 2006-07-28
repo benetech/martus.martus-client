@@ -27,6 +27,7 @@ package org.martus.client.core;
 
 import java.util.HashMap;
 
+import org.martus.common.bulletin.Bulletin;
 import org.martus.common.field.MartusField;
 import org.martus.common.packet.UniversalId;
 
@@ -40,6 +41,20 @@ public class PartialBulletin
 		for(int i = 0; i < tagsToStore.length; ++i)
 		{
 			MartusField field = copyFrom.getPossiblyNestedField(tagsToStore[i]);
+			if(field != null)
+				fieldData.put(tagsToStore[i], field.getData());
+			//System.out.println("PartialBulletin copying: " + field);
+		}
+	}
+	
+	public PartialBulletin(Bulletin copyFrom, String[] tagsToStore)
+	{
+		fieldData = new HashMap();
+
+		uid = copyFrom.getUniversalId();
+		for(int i = 0; i < tagsToStore.length; ++i)
+		{
+			MartusField field = copyFrom.getField(tagsToStore[i]);
 			if(field != null)
 				fieldData.put(tagsToStore[i], field.getData());
 			//System.out.println("PartialBulletin copying: " + field);
