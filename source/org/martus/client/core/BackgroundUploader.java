@@ -94,7 +94,8 @@ public class BackgroundUploader
 			InvalidPacketException, WrongPacketTypeException, SignatureVerificationException, DecryptionException, NoKeyPairException, CryptoException, FileNotFoundException, MartusSignatureException, FileTooLargeException, IOException, RecordHiddenException
 	{
 		ClientBulletinStore store = app.getStore();
-		if(b.isSealed() && store.isProbablyOnServer(b))
+		// FIXME: is it safe to skip if it's "probably" on the server???
+		if(b.isSealed() && store.isProbablyOnServer(b.getUniversalId()))
 			return NetworkInterfaceConstants.DUPLICATE;
 		File tempFile = File.createTempFile("$$$MartusUploadBulletin", null);
 		try
