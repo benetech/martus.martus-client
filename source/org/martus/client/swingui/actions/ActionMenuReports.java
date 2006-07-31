@@ -581,7 +581,7 @@ public class ActionMenuReports extends ActionPrint
 
 			Box multiSortBox = Box.createVerticalBox();
 			
-			sortChooser = new UiPopUpTreeEditor[MAX_SORT_LEVELS];
+			sortChooser = new UiPopUpTreeEditor[sortTags.length];
 			for(int i = 0; i < sortChooser.length; ++i)
 			{
 				String defaultCode = spec.findSearchTag(sortTags[i]).getCode();
@@ -613,9 +613,7 @@ public class ActionMenuReports extends ActionPrint
 		}
 		
 		void memorizeSortFields()
-		{
-			sortTags = new String[sortChooser.length];
-			
+		{			
 			for(int i = 0; i < sortChooser.length; ++i)
 			{
 				String searchTag = sortChooser[i].getSelectedSearchTag();
