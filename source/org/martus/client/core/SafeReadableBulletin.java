@@ -95,7 +95,15 @@ public class SafeReadableBulletin
 		if(StandardFieldSpecs.isStandardFieldTag(candidate.getTag()))
 			return true;
 		
+		if(isPseudofield(candidate))
+			return true;
+		
 		return candidate.getLabel().equals(label);
+	}
+
+	private boolean isPseudofield(MartusField candidate)
+	{
+		return candidate.getTag().startsWith("_");
 	}
 	
 	public MartusField field(String tag)

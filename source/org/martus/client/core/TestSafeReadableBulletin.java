@@ -111,5 +111,8 @@ public class TestSafeReadableBulletin extends TestCaseEnhanced
 		
 		MartusField standardWithWrongLabel = srb.field(Bulletin.TAGAUTHOR, "not author", new FieldTypeNormal().getTypeName());
 		assertEquals("Too picky about standard field label?", sampleAuthor, standardWithWrongLabel.getData());
+		
+		MartusField pseudoFieldWithWrongLabel = srb.field(Bulletin.PSEUDOFIELD_LAST_SAVED_DATE, "Last Saved", new FieldTypeDate().getTypeName());
+		assertEquals("Too picky about pseudofield label?", b.getLastSavedDate(), pseudoFieldWithWrongLabel.getData());
 	}
 }
