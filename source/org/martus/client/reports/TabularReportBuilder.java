@@ -54,13 +54,13 @@ public class TabularReportBuilder
 		startBuffer.append("<tr>");
 		for(int i = 0; i < specs.length; ++i)
 		{
-			startBuffer.append("<td>");
+			startBuffer.append("<th>");
 			FieldSpec spec = specs[i];
 			String label = spec.getLabel();
 			if(StandardFieldSpecs.isStandardFieldTag(spec.getTag()))
 				label = localization.getFieldLabel(spec.getTag());
 			startBuffer.append(label);
-			startBuffer.append("</td>");
+			startBuffer.append("</th>");
 		}
 		startBuffer.append("</tr>");
 		return startBuffer.toString();
