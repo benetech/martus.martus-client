@@ -59,13 +59,13 @@ public class UiFancySearchDlg extends UiSearchDlg
 	{
 		setTitle(localization.getWindowTitle("search"));
 		
-		UiButton search = new UiButton(localization.getButtonLabel("search"));
-		search.addActionListener(this);
-
 		String helpButtonText = localization.getButtonLabel("help"); 
 		UiButton help = new UiButton(helpButtonText);
 		help.addActionListener(new HelpListener(mainWindow));
 		
+		UiButton search = new UiButton(localization.getButtonLabel("search"));
+		search.addActionListener(this);
+
 		UiButton cancel = new UiButton(localization.getButtonLabel("cancel"));
 		cancel.addActionListener(this);
 		UiDialogLauncher dlgLauncher = new UiDialogLauncher(mainWindow.getCurrentActiveFrame(), localization);
@@ -93,7 +93,7 @@ public class UiFancySearchDlg extends UiSearchDlg
 
 		Box buttonBox = Box.createHorizontalBox();
 		buttonBox.setBorder(new EmptyBorder(10,0,0,0));
-		Utilities.addComponentsRespectingOrientation(buttonBox, new Component[] {search, Box.createHorizontalGlue(), help, cancel });
+		Utilities.addComponentsRespectingOrientation(buttonBox, new Component[] {help, Box.createHorizontalGlue(), search, cancel });
 		
 		searchFinalBulletins = new UiCheckBox(localization.getButtonLabel("SearchFinalBulletinsOnly"));
 		searchFinalBulletins.setSelected(false);
