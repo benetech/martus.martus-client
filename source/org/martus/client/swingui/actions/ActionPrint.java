@@ -101,13 +101,16 @@ public class ActionPrint extends UiMartusAction
 	{
 		String title = getLocalization().getWindowTitle("PrintToWhichFile");
 		File destination = new File(getLocalization().getFieldLabel("DefaultPrintToDiskFileName"));
+		
 		while(true)
 		{
-			UiFileChooser.FileDialogResults result = UiFileChooser.displayFileSaveDialog(mainWindow, title, destination);
-			if(result.wasCancelChoosen())
+			UiFileChooser.FileDialogResults results = UiFileChooser.displayFileSaveDialog(mainWindow, title, destination);
+			if(results.wasCancelChoosen())
 				return null;
 			
-			destination = result.getChosenFile();
+			destination = results.getChosenFile();
+			if(!destination.getName().toLowerCase().endsWith(HTML_FILE_EXTENSION))
+				destination = new File(destination.getAbsolutePath() + HTML_FILE_EXTENSION);
 			if(!destination.exists())
 				break;
 			if(mainWindow.confirmDlg(mainWindow, "OverWriteExistingFile"))
@@ -204,5 +207,6 @@ public class ActionPrint extends UiMartusAction
 	}
 
 	
-	static final boolean previewForDebugging = false; 
+	static final boolean previewForDebugging = false;
+	private static final String HTML_FILE_EXTENSION = ".html";
 }
