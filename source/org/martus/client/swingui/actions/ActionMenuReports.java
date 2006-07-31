@@ -561,7 +561,10 @@ public class ActionMenuReports extends ActionPrint
 			super(mainWindow);
 			
 			if(sortTags == null)
-				sortTags = new String[] {Bulletin.TAGENTRYDATE};
+			{
+				sortTags = new String[MAX_SORT_LEVELS];
+				Arrays.fill(sortTags, Bulletin.TAGENTRYDATE);
+			}
 			
 			setModal(true);
 			Container contentPane = getContentPane();
@@ -573,21 +576,27 @@ public class ActionMenuReports extends ActionPrint
 
 			SortFieldChooserSpecBuilder builder = new SortFieldChooserSpecBuilder(localization);
 			PopUpTreeFieldSpec spec = builder.createSpec(mainWindow.getStore());
-			String defaultCode = spec.findSearchTag(sortTags[0]).getCode();
-			sortChooser = createSortChooser(mainWindow, spec, defaultCode);
-			JPanel sortChooserPanel = new JPanel(new BorderLayout());
-			sortChooserPanel.add(sortChooser.getComponent(), BorderLayout.BEFORE_LINE_BEGINS);
 			
+			contentPane.add(new UiWrappedTextArea(text), BorderLayout.BEFORE_FIRST_LINE);
+
+			Box multiSortBox = Box.createVerticalBox();
+			
+			sortChooser = new UiPopUpTreeEditor[MAX_SORT_LEVELS];
+			for(int i = 0; i < sortChooser.length; ++i)
+			{
+				String defaultCode = spec.findSearchTag(sortTags[i]).getCode();
+				sortChooser[i] = createSortChooser(mainWindow, spec, defaultCode);
+				multiSortBox.add(sortChooser[i].getComponent());
+			}
+
+			contentPane.add(multiSortBox, BorderLayout.CENTER);
 			okButton = new UiButton(localization.getButtonLabel("ok"));
 			okButton.addActionListener(this);
 			UiButton cancelButton = new UiButton(localization.getButtonLabel("cancel"));
 			cancelButton.addActionListener(this);
 			Box buttonBar = Box.createHorizontalBox();
 			buttonBar.add(okButton);
-			buttonBar.add(cancelButton);
-
-			contentPane.add(new UiWrappedTextArea(text), BorderLayout.BEFORE_FIRST_LINE);
-			contentPane.add(sortChooserPanel, BorderLayout.CENTER);
+			buttonBar.add(cancelButton);			
 			contentPane.add(buttonBar, BorderLayout.AFTER_LAST_LINE);
 			
 			pack();
@@ -605,10 +614,15 @@ public class ActionMenuReports extends ActionPrint
 		
 		void memorizeSortFields()
 		{
-			String searchTag = sortChooser.getSelectedSearchTag();
+			sortTags = new String[sortChooser.length];
 			
-			System.out.println("ActionMenuReport.getSortTags: " + searchTag);
-			sortTags = new String[] {searchTag};
+			for(int i = 0; i < sortChooser.length; ++i)
+			{
+				String searchTag = sortChooser[i].getSelectedSearchTag();
+				sortTags[i] = searchTag;
+				
+				System.out.println("ActionMenuReport.getSortTags: " + searchTag);
+			}
 		}
 		
 		public String[] getSortTags() throws Exception
@@ -631,7 +645,7 @@ public class ActionMenuReports extends ActionPrint
 			return hitOk;
 		}
 
-		UiPopUpTreeEditor sortChooser;
+		UiPopUpTreeEditor[] sortChooser;
 		boolean hitOk;
 		UiButton okButton;
 		private static String[] sortTags;
@@ -658,6 +672,6 @@ public class ActionMenuReports extends ActionPrint
 	}
 
 	private static final String MRF_FILE_EXTENSION = ".mrf";
-
+	private static final int MAX_SORT_LEVELS = 3;
 }
 
