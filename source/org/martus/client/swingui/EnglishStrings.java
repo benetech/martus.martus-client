@@ -283,7 +283,7 @@ public class EnglishStrings
 
 "wintitle:RunOrCreateReport=Reports",
 "wintitle:ReportChooseSortFields=Reports",
-"wintitle:SaveReportAs=Save Report As...",
+"wintitle:SaveReportAs=Save Report Format As...",
 "wintitle:ChooseReportToRun=Run Report...",
 "wintitle:ChooseTabularReportFields=Create Report",
 "wintitle:PrintOptions=Print Options",
@@ -365,7 +365,7 @@ public class EnglishStrings
 "button:DeleteSelectedGridRow=Delete Selected Row",
 "button:InsertEmptyGridRow=Insert Row",
 "button:PopUpTreeChoose=Choose Field...",
-"button:RunReport=Run Existing Report",
+"button:RunReport=Use Existing Report Format",
 "button:CreateReport=Create a New Report",
 "button:SelectReport=Select",
 "button:FieldLabel=Field Label",
