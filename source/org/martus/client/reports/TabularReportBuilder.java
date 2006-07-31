@@ -50,7 +50,7 @@ public class TabularReportBuilder
 	{
 		StringBuffer startBuffer = new StringBuffer();
 		startBuffer.append("<html>");
-		startBuffer.append("<table>");
+		startBuffer.append("<table border='3' cellpadding='5' cellspacing='0'>");
 		startBuffer.append("<tr>");
 		for(int i = 0; i < specs.length; ++i)
 		{
