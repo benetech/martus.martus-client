@@ -116,6 +116,7 @@ abstract public class UiBulletinComponentDataSection extends UiBulletinComponent
 		//return label;
 		int fixedWidth = 14;
 		UiWrappedTextArea label = new UiWrappedTextArea(labelText, fixedWidth, fixedWidth);
+		label.setFocusable(false);
 		return label;
 	}
 
