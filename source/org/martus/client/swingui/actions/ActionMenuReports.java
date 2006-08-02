@@ -34,7 +34,6 @@ import java.io.File;
 import java.io.StringWriter;
 import java.io.Writer;
 import java.util.Arrays;
-import java.util.Vector;
 
 import javax.swing.Box;
 import javax.swing.JComponent;
@@ -199,8 +198,9 @@ public class ActionMenuReports extends ActionPrint
 		if(!sortDlg.ok())
 			return;
 		
-		String[] sortTags = appendAllPrivateTag(sortDlg.getSortTags());
-		SortableBulletinList sortableList = mainWindow.doSearch(searchTree, sortTags);
+		String[] sortTags = sortDlg.getSortTags();
+		String[] extraTags = {Bulletin.PSEUDOFIELD_ALL_PRIVATE};
+		SortableBulletinList sortableList = mainWindow.doSearch(searchTree, sortTags, extraTags);
 		if(sortableList == null)
 			return;
 		
@@ -212,11 +212,9 @@ public class ActionMenuReports extends ActionPrint
 	
 // Do we really have to tell the user here? Would be better to include the count in the following dialog
 //		mainWindow.showNumberOfBulletinsFound(bulletinsMatched, "ReportFound");
-		SortThread worker = new SortThread(sortableList);
-		mainWindow.doBackgroundWork(worker, "BackgroundSorting");
-		PartialBulletin[] sortedPartialBulletins = worker.getResults();
 
-		boolean isAnyBulletinAllPrivate = areAnyBulletinsAllPrivate(sortedPartialBulletins);
+		PartialBulletin[] unsortedPartialBulletins = sortableList.getUnsortedPartialBulletins();
+		boolean isAnyBulletinAllPrivate = areAnyBulletinsAllPrivate(unsortedPartialBulletins);
 		UiPrintBulletinDlg dlg = new UiPrintBulletinDlg(mainWindow, isAnyBulletinAllPrivate);
 		dlg.setVisible(true);		
 		if (!dlg.wasContinueButtonPressed())
@@ -225,33 +223,20 @@ public class ActionMenuReports extends ActionPrint
 		boolean includePrivateData = dlg.wantsPrivateData();
 		boolean sendToDisk = dlg.wantsToPrintToDisk();
 
+		for(int i = 0; i < unsortedPartialBulletins.length; ++i)
+		{
+			PartialBulletin pb = unsortedPartialBulletins[i];
+			boolean isAllPrivate = FieldSpec.TRUESTRING.equals(pb.getData(Bulletin.PSEUDOFIELD_ALL_PRIVATE));
+			if(isAllPrivate && !includePrivateData)
+				sortableList.remove(pb);
+		}
+
 		if(sendToDisk)
-			printToDisk(rf, sortedPartialBulletins, sortTags, includePrivateData);
+			printToDisk(rf, sortableList, includePrivateData);
 		else
-			printToPrinter(rf, sortedPartialBulletins, sortTags, includePrivateData);
+			printToPrinter(rf, sortableList, includePrivateData);
 	}
 	
-	static class SortThread extends WorkerThread
-	{
-		public SortThread(SortableBulletinList listToSort)
-		{
-			list = listToSort;
-		}
-		
-		public void doTheWorkWithNO_SWING_CALLS()
-		{
-			results = list.getSortedPartialBulletins();
-		}
-		
-		public PartialBulletin[] getResults()
-		{
-			return results;
-		}
-		
-		SortableBulletinList list;
-		PartialBulletin[] results;
-	}
-
 	private boolean areAnyBulletinsAllPrivate(PartialBulletin[] sortedPartialBulletins)
 	{
 		boolean isAnyBulletinAllPrivate = false;
@@ -266,69 +251,52 @@ public class ActionMenuReports extends ActionPrint
 		return isAnyBulletinAllPrivate;
 	}
 
-	private String[] appendAllPrivateTag(String[] rawUserSortTags)
-	{
-		Vector userSortTags = new Vector(Arrays.asList(rawUserSortTags));
-		userSortTags.add(Bulletin.PSEUDOFIELD_ALL_PRIVATE);
-		String[] sortTags = (String[])userSortTags.toArray(new String[0]);
-		return sortTags;
-	}
-	
-	void printToDisk(ReportFormat rf, PartialBulletin[] partialBulletinsToPrint, String[] sortTags, boolean includePrivate) throws Exception
+	void printToDisk(ReportFormat rf, SortableBulletinList list, boolean includePrivate) throws Exception
 	{
 		File destFile = chooseDestinationFile();
 		if(destFile == null)
 			return;
 		
 		UnicodeWriter destination = new UnicodeWriter(destFile);
-		printToWriter(destination, rf, partialBulletinsToPrint, sortTags, includePrivate);
+		printToWriter(destination, rf, list, includePrivate);
 		destination.close();
 	}
 	
 	static class BackgroundPrinter extends WorkerThread
 	{
 		public BackgroundPrinter(UiMainWindow mainWindowToUse, Writer whereToPrint, ReportFormat reportFormatToUse, 
-				PartialBulletin[] partialBulletinsToPrint, String[] sortTagsToUse, boolean shouldIncludePrivate)
+				SortableBulletinList listToPrint, boolean shouldIncludePrivate)
 		{
 			mainWindow = mainWindowToUse;
 			destination = whereToPrint;
 			rf = reportFormatToUse;
-			partialBulletins = partialBulletinsToPrint;
-			sortTags = sortTagsToUse;
+			list = listToPrint;
 			includePrivate = shouldIncludePrivate;
 		}
 		
 		public void doTheWorkWithNO_SWING_CALLS() throws Exception
 		{
-			SortableBulletinList list = new SortableBulletinList(mainWindow.getLocalization(), sortTags);
-			for(int i = 0; i < partialBulletins.length; ++i)
-			{
-				boolean isAllPrivate = FieldSpec.TRUESTRING.equals(partialBulletins[i].getData(Bulletin.PSEUDOFIELD_ALL_PRIVATE));
-				if(includePrivate || !isAllPrivate)
-					list.add(partialBulletins[i]);
-			}
 			ReportRunner rr = new ReportRunner(mainWindow.getApp().getSecurity(), mainWindow.getLocalization());
-			rr.runReport(rf, mainWindow.getStore().getDatabase(), list, sortTags, destination, includePrivate);
+			rr.runReport(rf, mainWindow.getStore().getDatabase(), list, destination, includePrivate);
 		}
 		
 		UiMainWindow mainWindow;
 		Writer destination;
 		ReportFormat rf;
-		PartialBulletin[] partialBulletins;
-		String[] sortTags;
+		SortableBulletinList list;
 		boolean includePrivate;
 	}
 
-	private void printToWriter(Writer destination, ReportFormat rf, PartialBulletin[] partialBulletinsToPrint, String[] sortTags, boolean includePrivate) throws Exception
+	private void printToWriter(Writer destination, ReportFormat rf, SortableBulletinList list, boolean includePrivate) throws Exception
 	{
-		BackgroundPrinter worker = new BackgroundPrinter(mainWindow, destination, rf, partialBulletinsToPrint, sortTags, includePrivate);
+		BackgroundPrinter worker = new BackgroundPrinter(mainWindow, destination, rf, list, includePrivate);
 		mainWindow.doBackgroundWork(worker, "BackgroundPrinting");
 	}
 	
-	void printToPrinter(ReportFormat rf, PartialBulletin[] partialBulletinsToPrint, String[] sortTags, boolean includePrivate) throws Exception
+	void printToPrinter(ReportFormat rf, SortableBulletinList list, boolean includePrivate) throws Exception
 	{
 		StringWriter writer = new StringWriter();
-		printToWriter(writer, rf, partialBulletinsToPrint, sortTags, includePrivate);
+		printToWriter(writer, rf, list, includePrivate);
 		writer.close();
 		
 		UiLabel previewText = new UiLabel(writer.toString());

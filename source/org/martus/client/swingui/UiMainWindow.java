@@ -1231,7 +1231,12 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 
 	public SortableBulletinList doSearch(SearchTreeNode searchTree, String[] sortTags) throws Exception
 	{
-		SearchThread thread = new SearchThread(this, searchTree, sortTags);
+		return doSearch(searchTree, sortTags, new String[0]);
+	}
+	
+	public SortableBulletinList doSearch(SearchTreeNode searchTree, String[] sortTags, String[] extraTags) throws Exception
+	{
+		SearchThread thread = new SearchThread(this, searchTree, sortTags, extraTags);
 		doBackgroundWork(thread, "BackgroundSearching");
 		return thread.getResults();
 	}
@@ -1254,16 +1259,17 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	
 	static class SearchThread extends WorkerThread
 	{
-		public SearchThread(UiMainWindow mainWindowToUse, SearchTreeNode searchTreeToUse, String[] sortTagsToUse)
+		public SearchThread(UiMainWindow mainWindowToUse, SearchTreeNode searchTreeToUse, String[] sortTagsToUse, String[] extraTagsToUse)
 		{
 			mainWindow = mainWindowToUse;
 			searchTree = searchTreeToUse;
 			sortTags = sortTagsToUse;
+			extraTags = extraTagsToUse;
 		}
 		
 		public void doTheWorkWithNO_SWING_CALLS()
 		{
-			searchResults = mainWindow.getApp().search(searchTree, sortTags, mainWindow.uiState.searchFinalBulletinsOnly);
+			searchResults = mainWindow.getApp().search(searchTree, sortTags, extraTags, mainWindow.uiState.searchFinalBulletinsOnly);
 		}
 		
 		public SortableBulletinList getResults()
@@ -1274,6 +1280,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		UiMainWindow mainWindow;
 		SearchTreeNode searchTree;
 		String[] sortTags;
+		String[] extraTags;
 		SortableBulletinList searchResults;
 	}
 	

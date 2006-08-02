@@ -113,7 +113,7 @@ public class TestReportRunner extends TestCaseEnhanced
 			list.add(BulletinLoader.loadFromDatabase(store.getDatabase(), key, app.getSecurity()));
 		}
 		
-		rr.runReport(rf, store.getDatabase(), list, new String[0], result, true);
+		rr.runReport(rf, store.getDatabase(), list, result, true);
 		StringBuffer expected = new StringBuffer();
 		UniversalId[] uids = list.getSortedUniversalIds();
 		for(int i=0; i < uids.length; ++i)
@@ -151,7 +151,7 @@ public class TestReportRunner extends TestCaseEnhanced
 		ReportFormat rf = new ReportFormat();
 		rf.setDetailSection("$bulletin.field('custom')");
 		StringWriter result = new StringWriter();
-		rr.runReport(rf, app.getStore().getDatabase(), list, new String[0], result, true);
+		rr.runReport(rf, app.getStore().getDatabase(), list, result, true);
 		
 		assertEquals(sampleCustomData, result.toString());
 	}
@@ -222,7 +222,7 @@ public class TestReportRunner extends TestCaseEnhanced
 			list.add(b);
 		}
 		StringWriter result = new StringWriter();
-		rr.runReport(rf, store.getDatabase(), list, sortTags, result, true);
+		rr.runReport(rf, store.getDatabase(), list, result, true);
 		return result.toString();
 	}
 	

@@ -37,18 +37,27 @@ import org.martus.common.packet.UniversalId;
 
 public class SortableBulletinList
 {
-	public SortableBulletinList(MiniLocalization localizationToUse, String[] tagsForSorting)
+	public SortableBulletinList(MiniLocalization localizationToUse, String[] tagsForSorting, String[] extraFieldTagsToUse)
 	{
 		localization = localizationToUse;
-		tags = tagsForSorting;
-		sorter = new PartialBulletinSorter(localization.getCurrentLanguageCode(), tags);
+		sortTags = tagsForSorting;
+		tagsToStore = new String[sortTags.length + extraFieldTagsToUse.length];
+		System.arraycopy(sortTags, 0, tagsToStore, 0, sortTags.length);
+		System.arraycopy(extraFieldTagsToUse, 0, tagsToStore, sortTags.length, extraFieldTagsToUse.length);
+		sorter = new PartialBulletinSorter(localization.getCurrentLanguageCode(), sortTags);
 		partialBulletins = new HashSet();
+		
+	}
+	
+	public SortableBulletinList(MiniLocalization localizationToUse, String[] tagsForSorting)
+	{
+		this(localizationToUse, tagsForSorting, new String[0]);
 	}
 	
 	public void add(Bulletin b)
 	{
 		SafeReadableBulletin readableBulletin = new SafeReadableBulletin(b, localization);
-		PartialBulletin pb = new PartialBulletin(readableBulletin, tags);
+		PartialBulletin pb = new PartialBulletin(readableBulletin, tagsToStore);
 		add(pb);
 	}
 
@@ -57,9 +66,24 @@ public class SortableBulletinList
 		partialBulletins.add(pb);
 	}
 	
+	public void remove(PartialBulletin pb)
+	{
+		partialBulletins.remove(pb);
+	}
+	
 	public int size()
 	{
 		return partialBulletins.size();
+	}
+	
+	public String[] getSortTags()
+	{
+		return sortTags;
+	}
+	
+	public PartialBulletin[] getUnsortedPartialBulletins()
+	{
+		return (PartialBulletin[])partialBulletins.toArray(new PartialBulletin[0]);
 	}
 	
 	public UniversalId[] getUniversalIds()
@@ -128,6 +152,7 @@ public class SortableBulletinList
 	
 	MiniLocalization localization;
 	Comparator sorter;
-	String[] tags;
+	String[] sortTags;
+	String[] tagsToStore;
 	HashSet partialBulletins;
 }

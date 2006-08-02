@@ -1105,11 +1105,11 @@ public class MartusApp
 		setLastUploadRemindedTime(new Date());
 	}
 
-	public SortableBulletinList search(SearchTreeNode searchNode, String[] tagsForSorting, boolean searchFinalVersionsOnly)
+	public SortableBulletinList search(SearchTreeNode searchNode, String[] tagsForSorting, String[] extraTags, boolean searchFinalVersionsOnly)
 	{
 		BulletinSearcher matcher = new BulletinSearcher(searchNode);
 		Set uids = store.getAllBulletinLeafUids();
-		SortableBulletinList matchedBulletinUids = new SortableBulletinList(localization, tagsForSorting);
+		SortableBulletinList matchedBulletinUids = new SortableBulletinList(localization, tagsForSorting, extraTags);
 		for(Iterator iter = uids.iterator(); iter.hasNext();)
 		{
 			UniversalId leafBulletinUid = (UniversalId) iter.next();

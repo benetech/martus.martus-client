@@ -41,6 +41,7 @@ import org.martus.common.bulletin.BulletinLoader;
 import org.martus.common.crypto.MartusCrypto;
 import org.martus.common.database.DatabaseKey;
 import org.martus.common.database.ReadableDatabase;
+import org.martus.common.field.MartusField;
 import org.martus.common.packet.UniversalId;
 
 
@@ -55,13 +56,14 @@ public class ReportRunner
 		engine.init();
 	}
 	
-	public void runReport(ReportFormat rf, ReadableDatabase db, SortableBulletinList bulletins, String[] sortTags, Writer destination, boolean includePrivate) throws Exception
+	public void runReport(ReportFormat rf, ReadableDatabase db, SortableBulletinList bulletins, Writer destination, boolean includePrivate) throws Exception
 	{
 		UniversalId[] uids = bulletins.getSortedUniversalIds();
 
 		Context context = new VelocityContext();
 		context.put("localization", localization);
 		
+		String[] sortTags = bulletins.getSortTags();
 		String[] previousBreakValues = new String[sortTags.length];
 		Arrays.fill(previousBreakValues, "");
 		int[] breakCounts = new int[sortTags.length];
@@ -78,7 +80,11 @@ public class ReportRunner
 			
 			for(int breakLevel = sortTags.length - 1; breakLevel >= 0; --breakLevel)
 			{
-				String current = b.getField(sortTags[breakLevel]).getData();
+				String current = "";
+				MartusField thisField = b.getField(sortTags[breakLevel]);
+				if(thisField != null)
+					current = thisField.getData();
+
 				if(!current.equals(previousBreakValues[breakLevel]))
 				{
 					if(bulletin > 0)
