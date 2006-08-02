@@ -31,13 +31,18 @@ import java.util.Vector;
 
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.context.Context;
+import org.martus.client.bulletinstore.BulletinFolder;
+import org.martus.client.core.SortableBulletinList;
 import org.martus.client.test.MockMartusApp;
 import org.martus.common.LegacyCustomFields;
 import org.martus.common.MiniLocalization;
 import org.martus.common.bulletin.Bulletin;
+import org.martus.common.bulletin.BulletinLoader;
 import org.martus.common.bulletinstore.BulletinStore;
+import org.martus.common.crypto.MartusCrypto;
 import org.martus.common.crypto.MockMartusSecurity;
 import org.martus.common.database.DatabaseKey;
+import org.martus.common.database.ReadableDatabase;
 import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.fieldspec.FieldTypeBoolean;
 import org.martus.common.fieldspec.FieldTypeDate;
@@ -45,6 +50,7 @@ import org.martus.common.fieldspec.FieldTypeDateRange;
 import org.martus.common.fieldspec.FieldTypeLanguage;
 import org.martus.common.fieldspec.FieldTypeMultiline;
 import org.martus.common.fieldspec.FieldTypeNormal;
+import org.martus.common.packet.UniversalId;
 import org.martus.util.TestCaseEnhanced;
 
 
@@ -99,7 +105,7 @@ public class TestReportRunner extends TestCaseEnhanced
 		rf.setDetailSection("$i. $bulletin.localId\n");
 		StringWriter result = new StringWriter();
 		Vector keys = store.scanForLeafKeys();
-		rr.runReport(rf, store.getDatabase(), keys, result, true);
+		rr.runReport(rf, store.getDatabase(), keys, new String[0], result, true);
 		StringBuffer expected = new StringBuffer();
 		for(int i=0; i < keys.size(); ++i)
 		{
@@ -136,7 +142,7 @@ public class TestReportRunner extends TestCaseEnhanced
 		ReportFormat rf = new ReportFormat();
 		rf.setDetailSection("$bulletin.field('custom')");
 		StringWriter result = new StringWriter();
-		rr.runReport(rf, app.getStore().getDatabase(), keys, result, true);
+		rr.runReport(rf, app.getStore().getDatabase(), keys, new String[0], result, true);
 		
 		assertEquals(sampleCustomData, result.toString());
 	}
@@ -149,7 +155,30 @@ public class TestReportRunner extends TestCaseEnhanced
 		String result = runReportOnSampleData(rf);
 		assertEquals("didn't output start section just once?", startSection, result);
 	}
+	
+	public void testBreakSection() throws Exception
+	{
+		MockMartusApp app = MockMartusApp.create();
+		createAndSaveSampleBulletin(app, "a", "1");
+		createAndSaveSampleBulletin(app, "a", "2");
+		createAndSaveSampleBulletin(app, "b", "1");
+		ReportFormat rf = new ReportFormat();
+		String breakSection = "#foreach( $value in $BreakValues )\n" +
+				"$value " +
+				"#end\n\n";
+		rf.setBreakSection(breakSection);
+		String result = runReportOnAppData(rf, app);
+		assertEquals("a 1 \na 2 \na \nb 1 \nb \n", result);
+	}
 
+	private void createAndSaveSampleBulletin(MockMartusApp app, String author, String summary) throws Exception
+	{
+		BulletinFolder outbox = app.getFolderDraftOutbox();
+		Bulletin b = app.createBulletin();
+		b.set(Bulletin.TAGAUTHOR, author);
+		b.set(Bulletin.TAGSUMMARY, summary);
+		app.saveBulletin(b, outbox);
+	}
 	public void testEndSection() throws Exception
 	{
 		ReportFormat rf = new ReportFormat();
@@ -163,10 +192,33 @@ public class TestReportRunner extends TestCaseEnhanced
 	{
 		MockMartusApp app = MockMartusApp.create();
 		app.loadSampleData();
+		return runReportOnAppData(rf, app);
+	}
+
+	private String runReportOnAppData(ReportFormat rf, MockMartusApp app) throws Exception
+	{
 		BulletinStore store = app.getStore();
-		Vector keys = store.scanForLeafKeys();
+		MartusCrypto security = app.getSecurity();
+		ReadableDatabase db = store.getDatabase();
+		Vector unsortedKeys = store.scanForLeafKeys();
+		String[] sortTags = {Bulletin.TAGAUTHOR, Bulletin.TAGSUMMARY};
+		MiniLocalization localization = new MiniLocalization();
+		localization.setCurrentLanguageCode(MiniLocalization.ENGLISH);
+		SortableBulletinList list = new SortableBulletinList(localization, sortTags);
+		for(int i = 0; i < unsortedKeys.size(); ++i)
+		{
+			DatabaseKey key = (DatabaseKey)unsortedKeys.get(i);
+			Bulletin b = BulletinLoader.loadFromDatabase(db, key, security);
+			list.add(b);
+		}
+		UniversalId[] uids = list.getSortedUniversalIds();
+		Vector keys = new Vector();
+		for(int i = 0; i < uids.length; ++i)
+		{
+			keys.add(DatabaseKey.createLegacyKey(uids[i]));
+		}
 		StringWriter result = new StringWriter();
-		rr.runReport(rf, store.getDatabase(), keys, result, true);
+		rr.runReport(rf, store.getDatabase(), keys, sortTags, result, true);
 		return result.toString();
 	}
 	

@@ -35,6 +35,7 @@ public class ReportFormat
 	{
 		setStartSection("");
 		setDetailSection("");
+		setBreakSection("");
 		setEndSection("");
 	}
 	
@@ -42,6 +43,7 @@ public class ReportFormat
 	{
 		setStartSection(json.getString(TAG_START_SECTION));
 		setDetailSection(json.getString(TAG_DETAIL_SECTION));
+		setBreakSection(json.optString(TAG_BREAK_SECTION, ""));
 		setEndSection(json.getString(TAG_END_SECTION));
 	}
 	
@@ -75,20 +77,33 @@ public class ReportFormat
 		return detailSection;
 	}
 	
+	public void setBreakSection(String section)
+	{
+		breakSection = section;
+	}
+	
+	public String getBreakSection()
+	{
+		return breakSection;
+	}
+	
 	public JSONObject toJson()
 	{
 		JSONObject json = new JSONObject();
 		json.put(TAG_START_SECTION, getStartSection());
 		json.put(TAG_DETAIL_SECTION, getDetailSection());
 		json.put(TAG_END_SECTION, getEndSection());
+		json.put(TAG_BREAK_SECTION, getBreakSection());
 		return json;
 	}
 	
 	final static String TAG_START_SECTION = "StartSection";
 	final static String TAG_DETAIL_SECTION = "DetailSection";
 	final static String TAG_END_SECTION = "EndSection";
+	final static String TAG_BREAK_SECTION = "BreakSection";
 
 	private String startSection;
 	private String detailSection;
+	private String breakSection;
 	private String endSection;
 }

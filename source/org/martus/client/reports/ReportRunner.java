@@ -27,6 +27,7 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.reports;
 
 import java.io.Writer;
+import java.util.Arrays;
 import java.util.Vector;
 
 import org.apache.velocity.VelocityContext;
@@ -52,26 +53,53 @@ public class ReportRunner
 		engine.init();
 	}
 	
-	public void runReport(ReportFormat rf, ReadableDatabase db, Vector keysToInclude, Writer destination, boolean includePrivate) throws Exception
+	public void runReport(ReportFormat rf, ReadableDatabase db, Vector keysToInclude, String[] sortTags, Writer destination, boolean includePrivate) throws Exception
 	{
 		Context context = new VelocityContext();
 		context.put("localization", localization);
 		
+		String[] previousBreakValues = new String[sortTags.length];
+		Arrays.fill(previousBreakValues, "");
+		
 		performMerge(rf.getStartSection(), destination, context);
-		for(int i=0; i < keysToInclude.size(); ++i)
+		for(int bulletin = 0; bulletin < keysToInclude.size(); ++bulletin)
 		{
-			DatabaseKey key = (DatabaseKey)keysToInclude.get(i);
+			DatabaseKey key = (DatabaseKey)keysToInclude.get(bulletin);
 			Bulletin b = BulletinLoader.loadFromDatabase(db, key, signatureVerifier);
 			SafeReadableBulletin safeReadableBulletin = new SafeReadableBulletin(b, localization);
 			if(!includePrivate)
 				safeReadableBulletin.removePrivateData();
-			context.put("bulletin", safeReadableBulletin);
 			
-			context.put("i", new Integer(i+1));
+			for(int breakLevel = sortTags.length - 1; breakLevel >= 0; --breakLevel)
+			{
+				String current = b.getField(sortTags[breakLevel]).getData();
+				if(!current.equals(previousBreakValues[breakLevel]))
+				{
+					if(bulletin > 0)
+						performBreak(rf, context, destination, previousBreakValues, breakLevel);
+					previousBreakValues[breakLevel] = current;
+				}
+			}
+			
+			context.put("i", new Integer(bulletin+1));
+			context.put("bulletin", safeReadableBulletin);
 			performMerge(rf.getDetailSection(), destination, context);
+
 			context.remove("bulletin");
 		}
+		for(int breakLevel = sortTags.length - 1; breakLevel >= 0; --breakLevel)
+			performBreak(rf, context, destination, previousBreakValues, breakLevel);
+		
 		performMerge(rf.getEndSection(), destination, context);
+	}
+
+	private void performBreak(ReportFormat rf, Context context, Writer destination, String[] previousBreakValues, int breakLevel) throws Exception
+	{
+		Vector breakValues = new Vector();
+		for(int i = 0; i < breakLevel + 1; ++i)
+			breakValues.add(previousBreakValues[i]);
+		context.put("BreakValues", breakValues);
+		performMerge(rf.getBreakSection(), destination, context);
 	}
 	
 	public void performMerge(String template, Writer result, Context context) throws Exception

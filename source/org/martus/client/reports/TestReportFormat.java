@@ -50,10 +50,12 @@ public class TestReportFormat extends TestCaseEnhanced
 		rf.setStartSection("start");
 		rf.setEndSection("end");
 		rf.setDetailSection("detail");
+		rf.setBreakSection("break");
 		
 		ReportFormat got = new ReportFormat(rf.toJson());
 		assertEquals("didn't save start?", rf.getStartSection(), got.getStartSection());
 		assertEquals("didn't save detail?", rf.getDetailSection(), got.getDetailSection());
 		assertEquals("didn't save end?", rf.getEndSection(), got.getEndSection());
+		assertEquals("didn't save break?", rf.getBreakSection(), got.getBreakSection());
 	}
 }

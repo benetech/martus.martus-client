@@ -227,9 +227,9 @@ public class ActionMenuReports extends ActionPrint
 		boolean sendToDisk = dlg.wantsToPrintToDisk();
 
 		if(sendToDisk)
-			printToDisk(rf, sortedPartialBulletins, includePrivateData);
+			printToDisk(rf, sortedPartialBulletins, sortTags, includePrivateData);
 		else
-			printToPrinter(rf, sortedPartialBulletins, includePrivateData);
+			printToPrinter(rf, sortedPartialBulletins, sortTags, includePrivateData);
 	}
 	
 	static class SortThread extends WorkerThread
@@ -275,25 +275,27 @@ public class ActionMenuReports extends ActionPrint
 		return sortTags;
 	}
 	
-	void printToDisk(ReportFormat rf, PartialBulletin[] partialBulletinsToPrint, boolean includePrivate) throws Exception
+	void printToDisk(ReportFormat rf, PartialBulletin[] partialBulletinsToPrint, String[] sortTags, boolean includePrivate) throws Exception
 	{
 		File destFile = chooseDestinationFile();
 		if(destFile == null)
 			return;
 		
 		UnicodeWriter destination = new UnicodeWriter(destFile);
-		printToWriter(destination, rf, partialBulletinsToPrint, includePrivate);
+		printToWriter(destination, rf, partialBulletinsToPrint, sortTags, includePrivate);
 		destination.close();
 	}
 	
 	static class BackgroundPrinter extends WorkerThread
 	{
-		public BackgroundPrinter(UiMainWindow mainWindowToUse, Writer whereToPrint, ReportFormat reportFormatToUse, PartialBulletin[] partialBulletinsToPrint, boolean shouldIncludePrivate)
+		public BackgroundPrinter(UiMainWindow mainWindowToUse, Writer whereToPrint, ReportFormat reportFormatToUse, 
+				PartialBulletin[] partialBulletinsToPrint, String[] sortTagsToUse, boolean shouldIncludePrivate)
 		{
 			mainWindow = mainWindowToUse;
 			destination = whereToPrint;
 			rf = reportFormatToUse;
 			partialBulletins = partialBulletinsToPrint;
+			sortTags = sortTagsToUse;
 			includePrivate = shouldIncludePrivate;
 		}
 		
@@ -307,26 +309,27 @@ public class ActionMenuReports extends ActionPrint
 					keys.add(DatabaseKey.createLegacyKey(partialBulletins[i].getUniversalId()));
 			}
 			ReportRunner rr = new ReportRunner(mainWindow.getApp().getSecurity(), mainWindow.getLocalization());
-			rr.runReport(rf, mainWindow.getStore().getDatabase(), keys, destination, includePrivate);
+			rr.runReport(rf, mainWindow.getStore().getDatabase(), keys, sortTags, destination, includePrivate);
 		}
 		
 		UiMainWindow mainWindow;
 		Writer destination;
 		ReportFormat rf;
 		PartialBulletin[] partialBulletins;
+		String[] sortTags;
 		boolean includePrivate;
 	}
 
-	private void printToWriter(Writer destination, ReportFormat rf, PartialBulletin[] partialBulletinsToPrint, boolean includePrivate) throws Exception
+	private void printToWriter(Writer destination, ReportFormat rf, PartialBulletin[] partialBulletinsToPrint, String[] sortTags, boolean includePrivate) throws Exception
 	{
-		BackgroundPrinter worker = new BackgroundPrinter(mainWindow, destination, rf, partialBulletinsToPrint, includePrivate);
+		BackgroundPrinter worker = new BackgroundPrinter(mainWindow, destination, rf, partialBulletinsToPrint, sortTags, includePrivate);
 		mainWindow.doBackgroundWork(worker, "BackgroundPrinting");
 	}
 	
-	void printToPrinter(ReportFormat rf, PartialBulletin[] partialBulletinsToPrint, boolean includePrivate) throws Exception
+	void printToPrinter(ReportFormat rf, PartialBulletin[] partialBulletinsToPrint, String[] sortTags, boolean includePrivate) throws Exception
 	{
 		StringWriter writer = new StringWriter();
-		printToWriter(writer, rf, partialBulletinsToPrint, includePrivate);
+		printToWriter(writer, rf, partialBulletinsToPrint, sortTags, includePrivate);
 		writer.close();
 		
 		UiLabel previewText = new UiLabel(writer.toString());
