@@ -62,7 +62,6 @@ import org.martus.client.swingui.fields.UiPopUpTreeEditor;
 import org.martus.clientside.UiLocalization;
 import org.martus.common.MiniLocalization;
 import org.martus.common.bulletin.Bulletin;
-import org.martus.common.database.DatabaseKey;
 import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.fieldspec.PopUpTreeFieldSpec;
 import org.martus.swing.PrintUtilities;
@@ -301,15 +300,15 @@ public class ActionMenuReports extends ActionPrint
 		
 		public void doTheWorkWithNO_SWING_CALLS() throws Exception
 		{
-			Vector keys = new Vector();
+			SortableBulletinList list = new SortableBulletinList(mainWindow.getLocalization(), sortTags);
 			for(int i = 0; i < partialBulletins.length; ++i)
 			{
 				boolean isAllPrivate = FieldSpec.TRUESTRING.equals(partialBulletins[i].getData(Bulletin.PSEUDOFIELD_ALL_PRIVATE));
 				if(includePrivate || !isAllPrivate)
-					keys.add(DatabaseKey.createLegacyKey(partialBulletins[i].getUniversalId()));
+					list.add(partialBulletins[i]);
 			}
 			ReportRunner rr = new ReportRunner(mainWindow.getApp().getSecurity(), mainWindow.getLocalization());
-			rr.runReport(rf, mainWindow.getStore().getDatabase(), keys, sortTags, destination, includePrivate);
+			rr.runReport(rf, mainWindow.getStore().getDatabase(), list, sortTags, destination, includePrivate);
 		}
 		
 		UiMainWindow mainWindow;

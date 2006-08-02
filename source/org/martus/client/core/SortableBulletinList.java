@@ -49,6 +49,11 @@ public class SortableBulletinList
 	{
 		SafeReadableBulletin readableBulletin = new SafeReadableBulletin(b, localization);
 		PartialBulletin pb = new PartialBulletin(readableBulletin, tags);
+		add(pb);
+	}
+
+	public void add(PartialBulletin pb)
+	{
 		partialBulletins.add(pb);
 	}
 	

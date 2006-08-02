@@ -99,20 +99,28 @@ public class TestReportRunner extends TestCaseEnhanced
 	public void testRunReport() throws Exception
 	{
 		MockMartusApp app = MockMartusApp.create();
+		app.getLocalization().setCurrentLanguageCode(MiniLocalization.ENGLISH);
 		app.loadSampleData();
 		BulletinStore store = app.getStore();
 		ReportFormat rf = new ReportFormat();
 		rf.setDetailSection("$i. $bulletin.localId\n");
 		StringWriter result = new StringWriter();
 		Vector keys = store.scanForLeafKeys();
-		rr.runReport(rf, store.getDatabase(), keys, new String[0], result, true);
-		StringBuffer expected = new StringBuffer();
-		for(int i=0; i < keys.size(); ++i)
+		SortableBulletinList list = new SortableBulletinList(app.getLocalization(), new String[0]);
+		for(int i = 0; i < keys.size(); ++i)
 		{
 			DatabaseKey key = (DatabaseKey)keys.get(i);
+			list.add(BulletinLoader.loadFromDatabase(store.getDatabase(), key, app.getSecurity()));
+		}
+		
+		rr.runReport(rf, store.getDatabase(), list, new String[0], result, true);
+		StringBuffer expected = new StringBuffer();
+		UniversalId[] uids = list.getSortedUniversalIds();
+		for(int i=0; i < uids.length; ++i)
+		{
 			expected.append(Integer.toString(i+1));
 			expected.append(". ");
-			expected.append(key.getLocalId());
+			expected.append(uids[i].getLocalId());
 			expected.append("\n");
 		}
 		assertEquals(new String(expected), result.toString());
@@ -132,17 +140,18 @@ public class TestReportRunner extends TestCaseEnhanced
 		};
 		
 		MockMartusApp app = MockMartusApp.create();
+		app.getLocalization().setCurrentLanguageCode(MiniLocalization.ENGLISH);
 		Bulletin b = new Bulletin(app.getSecurity(), specs, new FieldSpec[0]);
 		String sampleCustomData = "Robert Plant";
 		b.set("custom", sampleCustomData);
 		app.saveBulletin(b, app.getFolderDraftOutbox());
 		
-		Vector keys = new Vector();
-		keys.add(b.getDatabaseKey());
+		SortableBulletinList list = new SortableBulletinList(app.getLocalization(), new String[0]);
+		list.add(b);
 		ReportFormat rf = new ReportFormat();
 		rf.setDetailSection("$bulletin.field('custom')");
 		StringWriter result = new StringWriter();
-		rr.runReport(rf, app.getStore().getDatabase(), keys, new String[0], result, true);
+		rr.runReport(rf, app.getStore().getDatabase(), list, new String[0], result, true);
 		
 		assertEquals(sampleCustomData, result.toString());
 	}
@@ -212,14 +221,8 @@ public class TestReportRunner extends TestCaseEnhanced
 			Bulletin b = BulletinLoader.loadFromDatabase(db, key, security);
 			list.add(b);
 		}
-		UniversalId[] uids = list.getSortedUniversalIds();
-		Vector keys = new Vector();
-		for(int i = 0; i < uids.length; ++i)
-		{
-			keys.add(DatabaseKey.createLegacyKey(uids[i]));
-		}
 		StringWriter result = new StringWriter();
-		rr.runReport(rf, store.getDatabase(), keys, sortTags, result, true);
+		rr.runReport(rf, store.getDatabase(), list, sortTags, result, true);
 		return result.toString();
 	}
 	

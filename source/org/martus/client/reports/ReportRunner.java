@@ -34,12 +34,14 @@ import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.VelocityEngine;
 import org.apache.velocity.context.Context;
 import org.martus.client.core.SafeReadableBulletin;
+import org.martus.client.core.SortableBulletinList;
 import org.martus.common.MiniLocalization;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.bulletin.BulletinLoader;
 import org.martus.common.crypto.MartusCrypto;
 import org.martus.common.database.DatabaseKey;
 import org.martus.common.database.ReadableDatabase;
+import org.martus.common.packet.UniversalId;
 
 
 public class ReportRunner
@@ -53,8 +55,10 @@ public class ReportRunner
 		engine.init();
 	}
 	
-	public void runReport(ReportFormat rf, ReadableDatabase db, Vector keysToInclude, String[] sortTags, Writer destination, boolean includePrivate) throws Exception
+	public void runReport(ReportFormat rf, ReadableDatabase db, SortableBulletinList bulletins, String[] sortTags, Writer destination, boolean includePrivate) throws Exception
 	{
+		UniversalId[] uids = bulletins.getSortedUniversalIds();
+
 		Context context = new VelocityContext();
 		context.put("localization", localization);
 		
@@ -64,9 +68,9 @@ public class ReportRunner
 		Arrays.fill(breakCounts, 0);
 		
 		performMerge(rf.getStartSection(), destination, context);
-		for(int bulletin = 0; bulletin < keysToInclude.size(); ++bulletin)
+		for(int bulletin = 0; bulletin < uids.length; ++bulletin)
 		{
-			DatabaseKey key = (DatabaseKey)keysToInclude.get(bulletin);
+			DatabaseKey key = DatabaseKey.createLegacyKey(uids[bulletin]);
 			Bulletin b = BulletinLoader.loadFromDatabase(db, key, signatureVerifier);
 			SafeReadableBulletin safeReadableBulletin = new SafeReadableBulletin(b, localization);
 			if(!includePrivate)
