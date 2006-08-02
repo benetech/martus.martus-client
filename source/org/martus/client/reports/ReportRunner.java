@@ -60,6 +60,8 @@ public class ReportRunner
 		
 		String[] previousBreakValues = new String[sortTags.length];
 		Arrays.fill(previousBreakValues, "");
+		int[] breakCounts = new int[sortTags.length];
+		Arrays.fill(breakCounts, 0);
 		
 		performMerge(rf.getStartSection(), destination, context);
 		for(int bulletin = 0; bulletin < keysToInclude.size(); ++bulletin)
@@ -76,28 +78,35 @@ public class ReportRunner
 				if(!current.equals(previousBreakValues[breakLevel]))
 				{
 					if(bulletin > 0)
-						performBreak(rf, context, destination, previousBreakValues, breakLevel);
+						performBreak(rf, context, destination, previousBreakValues, breakLevel, breakCounts[breakLevel]);
 					previousBreakValues[breakLevel] = current;
+					breakCounts[breakLevel] = 0;
 				}
 			}
 			
 			context.put("i", new Integer(bulletin+1));
 			context.put("bulletin", safeReadableBulletin);
 			performMerge(rf.getDetailSection(), destination, context);
-
+			
+			for(int breakLevel = sortTags.length - 1; breakLevel >= 0; --breakLevel)
+			{
+				++breakCounts[breakLevel];
+			}
+			
 			context.remove("bulletin");
 		}
 		for(int breakLevel = sortTags.length - 1; breakLevel >= 0; --breakLevel)
-			performBreak(rf, context, destination, previousBreakValues, breakLevel);
+			performBreak(rf, context, destination, previousBreakValues, breakLevel, breakCounts[breakLevel]);
 		
 		performMerge(rf.getEndSection(), destination, context);
 	}
 
-	private void performBreak(ReportFormat rf, Context context, Writer destination, String[] previousBreakValues, int breakLevel) throws Exception
+	private void performBreak(ReportFormat rf, Context context, Writer destination, String[] previousBreakValues, int breakLevel, int breakCount) throws Exception
 	{
 		Vector breakValues = new Vector();
 		for(int i = 0; i < breakLevel + 1; ++i)
 			breakValues.add(previousBreakValues[i]);
+		context.put("BreakCount", new Integer(breakCount));
 		context.put("BreakValues", breakValues);
 		performMerge(rf.getBreakSection(), destination, context);
 	}

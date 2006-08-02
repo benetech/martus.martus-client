@@ -163,12 +163,13 @@ public class TestReportRunner extends TestCaseEnhanced
 		createAndSaveSampleBulletin(app, "a", "2");
 		createAndSaveSampleBulletin(app, "b", "1");
 		ReportFormat rf = new ReportFormat();
-		String breakSection = "#foreach( $value in $BreakValues )\n" +
+		String breakSection = "$BreakCount:\n" +
+				"#foreach( $value in $BreakValues )\n" +
 				"$value " +
 				"#end\n\n";
 		rf.setBreakSection(breakSection);
 		String result = runReportOnAppData(rf, app);
-		assertEquals("a 1 \na 2 \na \nb 1 \nb \n", result);
+		assertEquals("1:\na 1 \n1:\na 2 \n2:\na \n1:\nb 1 \n1:\nb \n", result);
 	}
 
 	private void createAndSaveSampleBulletin(MockMartusApp app, String author, String summary) throws Exception
