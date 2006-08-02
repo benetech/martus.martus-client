@@ -41,6 +41,7 @@ public class TabularReportBuilder
 		ReportFormat rf = new ReportFormat();
 		rf.setStartSection(createStartSection(specs));
 		rf.setDetailSection(createDetailSection(specs));
+		rf.setBreakSection(createBreakSection());
 		rf.setEndSection(createEndSection());
 
 		return rf;
@@ -104,6 +105,11 @@ public class TabularReportBuilder
 		}
 			
 		return result.toString();
+	}
+	
+	private String createBreakSection()
+	{
+		return "<tr><td colspan='999'>---- $BreakCount: $BreakValues.get(0)</td></tr>";
 	}
 
 	private String createEndSection()

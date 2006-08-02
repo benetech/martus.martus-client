@@ -63,10 +63,13 @@ public class ReportRunner
 		Context context = new VelocityContext();
 		context.put("localization", localization);
 		
-		String[] sortTags = bulletins.getSortTags();
-		String[] previousBreakValues = new String[sortTags.length];
+		String[] breakTags = bulletins.getSortTags();
+		if(!options.printBreaks)
+			breakTags = new String[0];
+		
+		String[] previousBreakValues = new String[breakTags.length];
 		Arrays.fill(previousBreakValues, "");
-		int[] breakCounts = new int[sortTags.length];
+		int[] breakCounts = new int[breakTags.length];
 		Arrays.fill(breakCounts, 0);
 		
 		performMerge(rf.getStartSection(), destination, context);
@@ -78,10 +81,10 @@ public class ReportRunner
 			if(!options.includePrivate)
 				safeReadableBulletin.removePrivateData();
 			
-			for(int breakLevel = sortTags.length - 1; breakLevel >= 0; --breakLevel)
+			for(int breakLevel = breakTags.length - 1; breakLevel >= 0; --breakLevel)
 			{
 				String current = "";
-				MartusField thisField = b.getField(sortTags[breakLevel]);
+				MartusField thisField = b.getField(breakTags[breakLevel]);
 				if(thisField != null)
 					current = thisField.getData();
 
@@ -98,14 +101,14 @@ public class ReportRunner
 			context.put("bulletin", safeReadableBulletin);
 			performMerge(rf.getDetailSection(), destination, context);
 			
-			for(int breakLevel = sortTags.length - 1; breakLevel >= 0; --breakLevel)
+			for(int breakLevel = breakTags.length - 1; breakLevel >= 0; --breakLevel)
 			{
 				++breakCounts[breakLevel];
 			}
 			
 			context.remove("bulletin");
 		}
-		for(int breakLevel = sortTags.length - 1; breakLevel >= 0; --breakLevel)
+		for(int breakLevel = breakTags.length - 1; breakLevel >= 0; --breakLevel)
 			performBreak(rf, context, destination, previousBreakValues, breakLevel, breakCounts[breakLevel]);
 		
 		performMerge(rf.getEndSection(), destination, context);
@@ -114,7 +117,7 @@ public class ReportRunner
 	private void performBreak(ReportFormat rf, Context context, Writer destination, String[] previousBreakValues, int breakLevel, int breakCount) throws Exception
 	{
 		Vector breakValues = new Vector();
-		for(int i = 0; i < breakLevel + 1; ++i)
+		for(int i = breakLevel; i >= 0; --i)
 			breakValues.add(previousBreakValues[i]);
 		context.put("BreakCount", new Integer(breakCount));
 		context.put("BreakValues", breakValues);

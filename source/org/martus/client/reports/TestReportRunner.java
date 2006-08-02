@@ -26,6 +26,7 @@ Boston, MA 02111-1307, USA.
 
 package org.martus.client.reports;
 
+import java.io.IOException;
 import java.io.StringWriter;
 import java.util.Vector;
 
@@ -38,9 +39,11 @@ import org.martus.common.LegacyCustomFields;
 import org.martus.common.MiniLocalization;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.bulletin.BulletinLoader;
+import org.martus.common.bulletin.Bulletin.DamagedBulletinException;
 import org.martus.common.bulletinstore.BulletinStore;
 import org.martus.common.crypto.MartusCrypto;
 import org.martus.common.crypto.MockMartusSecurity;
+import org.martus.common.crypto.MartusCrypto.NoKeyPairException;
 import org.martus.common.database.DatabaseKey;
 import org.martus.common.database.ReadableDatabase;
 import org.martus.common.fieldspec.FieldSpec;
@@ -180,8 +183,14 @@ public class TestReportRunner extends TestCaseEnhanced
 				"$value " +
 				"#end\n\n";
 		rf.setBreakSection(breakSection);
-		String result = runReportOnAppData(rf, app);
-		assertEquals("1:\na 1 \n1:\na 2 \n2:\na \n1:\nb 1 \n1:\nb \n", result);
+		RunReportOptions options = new RunReportOptions();
+		
+		options.printBreaks = true;
+		String result = runReportOnAppData(rf, app, options);
+		assertEquals("1:\n1 a \n1:\n2 a \n2:\na \n1:\n1 b \n1:\nb \n", result);
+		
+		options.printBreaks = false;
+		assertEquals("Still had output?", "", runReportOnAppData(rf, app, options));
 	}
 
 	private void createAndSaveSampleBulletin(MockMartusApp app, String author, String summary) throws Exception
@@ -210,6 +219,12 @@ public class TestReportRunner extends TestCaseEnhanced
 
 	private String runReportOnAppData(ReportFormat rf, MockMartusApp app) throws Exception
 	{
+		RunReportOptions options = new RunReportOptions();
+		return runReportOnAppData(rf, app, options);
+	}
+
+	private String runReportOnAppData(ReportFormat rf, MockMartusApp app, RunReportOptions options) throws IOException, DamagedBulletinException, NoKeyPairException, Exception
+	{
 		BulletinStore store = app.getStore();
 		MartusCrypto security = app.getSecurity();
 		ReadableDatabase db = store.getDatabase();
@@ -225,7 +240,6 @@ public class TestReportRunner extends TestCaseEnhanced
 			list.add(b);
 		}
 		StringWriter result = new StringWriter();
-		RunReportOptions options = new RunReportOptions();
 		rr.runReport(rf, store.getDatabase(), list, result, options);
 		return result.toString();
 	}

@@ -33,7 +33,7 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.StringWriter;
 import java.io.Writer;
-import java.util.Arrays;
+import java.util.Vector;
 
 import javax.swing.Box;
 import javax.swing.JComponent;
@@ -66,6 +66,7 @@ import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.fieldspec.PopUpTreeFieldSpec;
 import org.martus.swing.PrintUtilities;
 import org.martus.swing.UiButton;
+import org.martus.swing.UiCheckBox;
 import org.martus.swing.UiFileChooser;
 import org.martus.swing.UiLabel;
 import org.martus.swing.UiScrollPane;
@@ -110,6 +111,12 @@ public class ActionMenuReports extends ActionPrint
 				ReportFormat rf = chooseReport();
 				if(rf == null)
 					return;
+				
+				if(rf.getVersion() < ReportFormat.EXPECTED_VERSION)
+					mainWindow.notifyDlg("ReportFormatIsOld");
+				else if(rf.getVersion() > ReportFormat.EXPECTED_VERSION)
+					mainWindow.notifyDlg("ReportFormatIsTooNew");
+				
 				runReport(rf);
 			}
 			if(pressed.equals(createButtonLabel))
@@ -211,6 +218,9 @@ public class ActionMenuReports extends ActionPrint
 			return;
 		}
 	
+		RunReportOptions options = new RunReportOptions();
+		options.printBreaks = sortDlg.getPrintBreaks();
+		
 // Do we really have to tell the user here? Would be better to include the count in the following dialog
 //		mainWindow.showNumberOfBulletinsFound(bulletinsMatched, "ReportFound");
 
@@ -224,7 +234,6 @@ public class ActionMenuReports extends ActionPrint
 		boolean includePrivateData = dlg.wantsPrivateData();
 		boolean sendToDisk = dlg.wantsToPrintToDisk();
 		
-		RunReportOptions options = new RunReportOptions();
 		options.includePrivate = includePrivateData;
 
 		for(int i = 0; i < unsortedPartialBulletins.length; ++i)
@@ -535,10 +544,7 @@ public class ActionMenuReports extends ActionPrint
 			super(mainWindow);
 			
 			if(sortTags == null)
-			{
-				sortTags = new String[MAX_SORT_LEVELS];
-				Arrays.fill(sortTags, Bulletin.TAGENTRYDATE);
-			}
+				sortTags = new Vector();
 			
 			setModal(true);
 			Container contentPane = getContentPane();
@@ -555,15 +561,28 @@ public class ActionMenuReports extends ActionPrint
 
 			Box multiSortBox = Box.createVerticalBox();
 			
-			sortChooser = new UiPopUpTreeEditor[sortTags.length];
+			sortChooser = new UiPopUpTreeEditor[MAX_SORT_LEVELS];
 			for(int i = 0; i < sortChooser.length; ++i)
 			{
-				String defaultCode = spec.findSearchTag(sortTags[i]).getCode();
-				sortChooser[i] = createSortChooser(mainWindow, spec, defaultCode);
+				sortChooser[i] = createSortChooser(mainWindow, spec);
 				multiSortBox.add(sortChooser[i].getComponent());
 			}
+			
+			for(int i = 0; i < sortChooser.length; ++i)
+			{
+				String selectedCode = "";
+				if(i < sortTags.size())
+					selectedCode = spec.findSearchTag((String)sortTags.get(i)).getCode();
+				sortChooser[i].setText(selectedCode);
+			}
+			
+			breakChoice = new UiCheckBox(localization.getFieldLabel("ReportIncludeSummaryCounts"));
 
-			contentPane.add(multiSortBox, BorderLayout.CENTER);
+			Box mainArea = Box.createVerticalBox();
+			mainArea.add(multiSortBox);
+			mainArea.add(breakChoice);
+			
+			contentPane.add(mainArea, BorderLayout.CENTER);
 			okButton = new UiButton(localization.getButtonLabel("ok"));
 			okButton.addActionListener(this);
 			UiButton cancelButton = new UiButton(localization.getButtonLabel("cancel"));
@@ -577,21 +596,23 @@ public class ActionMenuReports extends ActionPrint
 			Utilities.centerDlg(this);
 		}
 
-		private UiPopUpTreeEditor createSortChooser(UiMainWindow mainWindow, PopUpTreeFieldSpec spec, String defaultCode)
+		private UiPopUpTreeEditor createSortChooser(UiMainWindow mainWindow, PopUpTreeFieldSpec spec)
 		{
 			UiLocalization localization = mainWindow.getLocalization();
 			UiPopUpTreeEditor chooser = new UiPopUpTreeEditor(localization);
 			chooser.setSpec(spec);
-			chooser.setText(defaultCode);
 			return chooser;
 		}
 		
 		void memorizeSortFields()
 		{			
+			sortTags.clear();
 			for(int i = 0; i < sortChooser.length; ++i)
 			{
 				String searchTag = sortChooser[i].getSelectedSearchTag();
-				sortTags[i] = searchTag;
+				if(searchTag.length() == 0)
+					break;
+				sortTags.add(searchTag);
 				
 				System.out.println("ActionMenuReport.getSortTags: " + searchTag);
 			}
@@ -599,7 +620,12 @@ public class ActionMenuReports extends ActionPrint
 		
 		public String[] getSortTags() throws Exception
 		{
-			return sortTags;
+			return (String[])sortTags.toArray(new String[0]);
+		}
+		
+		public boolean getPrintBreaks()
+		{
+			return breakChoice.isSelected();
 		}
 
 		public void actionPerformed(ActionEvent e)
@@ -620,7 +646,8 @@ public class ActionMenuReports extends ActionPrint
 		UiPopUpTreeEditor[] sortChooser;
 		boolean hitOk;
 		UiButton okButton;
-		private static String[] sortTags;
+		UiCheckBox breakChoice;
+		private static Vector sortTags;
 	}
 
 	class ReportFormatFilter extends FileFilter

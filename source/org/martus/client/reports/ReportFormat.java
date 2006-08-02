@@ -37,14 +37,21 @@ public class ReportFormat
 		setDetailSection("");
 		setBreakSection("");
 		setEndSection("");
+		version = 0;
 	}
 	
 	public ReportFormat(JSONObject json)
 	{
+		version = json.optInt(TAG_VERSION, 0);
 		setStartSection(json.getString(TAG_START_SECTION));
 		setDetailSection(json.getString(TAG_DETAIL_SECTION));
 		setBreakSection(json.optString(TAG_BREAK_SECTION, ""));
 		setEndSection(json.getString(TAG_END_SECTION));
+	}
+	
+	public int getVersion()
+	{
+		return version;
 	}
 	
 	public void setStartSection(String section)
@@ -90,6 +97,7 @@ public class ReportFormat
 	public JSONObject toJson()
 	{
 		JSONObject json = new JSONObject();
+		json.put(TAG_VERSION, EXPECTED_VERSION);
 		json.put(TAG_START_SECTION, getStartSection());
 		json.put(TAG_DETAIL_SECTION, getDetailSection());
 		json.put(TAG_END_SECTION, getEndSection());
@@ -97,11 +105,15 @@ public class ReportFormat
 		return json;
 	}
 	
+	final static String TAG_VERSION = "Version";
 	final static String TAG_START_SECTION = "StartSection";
 	final static String TAG_DETAIL_SECTION = "DetailSection";
 	final static String TAG_END_SECTION = "EndSection";
 	final static String TAG_BREAK_SECTION = "BreakSection";
+	
+	public final static int EXPECTED_VERSION = 1;
 
+	private int version;
 	private String startSection;
 	private String detailSection;
 	private String breakSection;

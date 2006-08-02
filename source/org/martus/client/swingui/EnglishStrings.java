@@ -211,6 +211,8 @@ public class EnglishStrings
 "wintitle:notifyImportMissingAttachments=Warning Missing Attachments",
 "wintitle:notifyImportBulletinsNotImported=Warning Bulletins Not Imported",
 "wintitle:notifyNoReportFieldsSelected=Create Report",
+"wintitle:notifyReportFormatIsOld=Reports",
+"wintitle:notifyReportFormatIsTooNew=Reports",
 
 "wintitle:inputservername=Server Name",
 "wintitle:inputserverpubliccode=Server Identification",
@@ -760,6 +762,8 @@ public class EnglishStrings
 "field:notifyImportMissingAttachmentscause=Not all attachments were imported.  The following bulletins had problems importing these attachments.\n\n#ImportMissingAttachments#",
 "field:notifyImportBulletinsNotImportedcause=Not all bulletins were imported.  The following bulletins had problems during import.\n\n#ImportBulletinsNotImported#",
 "field:notifyNoReportFieldsSelectedcause=You must select at least one field to be included in the report.",
+"field:notifyReportFormatIsOldcause=This report format was created with an earlier version of Martus, so it may not work correctly",
+"field:notifyReportFormatIsTooNewcause=This report format was created with a newer version of Martus, so it may not work correctly",
 
 "field:IncompatibleMtfVersion=The version of this translation is not compatible with this version of Martus.  It is recommended that you do not continue to use this translation version and go to (http://www.martus.org/downloads) for the appropriate version.",
 "field:IncompatibleMtfVersionTranslation=#MtfLanguage# Translation Version: #MtfVersionNumber#",
@@ -909,6 +913,7 @@ public class EnglishStrings
 "field:CustomXMLBottomSection=Bottom/Private Section of Bulletin",
 "field:WasSentYes=Yes",
 "field:WasSentNo=No",
+"field:NotSorted=(none)",
 
 "field:BulletinViewHeading=Martus Bulletin",
 "field:ViewBulletinHQInfo=#NumberOfHQs# Headquarter account(s) can view this private information",
