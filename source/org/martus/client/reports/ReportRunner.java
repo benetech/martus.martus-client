@@ -56,7 +56,7 @@ public class ReportRunner
 		engine.init();
 	}
 	
-	public void runReport(ReportFormat rf, ReadableDatabase db, SortableBulletinList bulletins, Writer destination, boolean includePrivate) throws Exception
+	public void runReport(ReportFormat rf, ReadableDatabase db, SortableBulletinList bulletins, Writer destination, RunReportOptions options) throws Exception
 	{
 		UniversalId[] uids = bulletins.getSortedUniversalIds();
 
@@ -75,7 +75,7 @@ public class ReportRunner
 			DatabaseKey key = DatabaseKey.createLegacyKey(uids[bulletin]);
 			Bulletin b = BulletinLoader.loadFromDatabase(db, key, signatureVerifier);
 			SafeReadableBulletin safeReadableBulletin = new SafeReadableBulletin(b, localization);
-			if(!includePrivate)
+			if(!options.includePrivate)
 				safeReadableBulletin.removePrivateData();
 			
 			for(int breakLevel = sortTags.length - 1; breakLevel >= 0; --breakLevel)

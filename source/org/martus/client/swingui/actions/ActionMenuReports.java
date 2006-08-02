@@ -49,6 +49,7 @@ import org.martus.client.core.PartialBulletin;
 import org.martus.client.core.SortableBulletinList;
 import org.martus.client.reports.ReportFormat;
 import org.martus.client.reports.ReportRunner;
+import org.martus.client.reports.RunReportOptions;
 import org.martus.client.reports.TabularReportBuilder;
 import org.martus.client.search.FieldChooserSpecBuilder;
 import org.martus.client.search.SearchTreeNode;
@@ -222,6 +223,9 @@ public class ActionMenuReports extends ActionPrint
 		
 		boolean includePrivateData = dlg.wantsPrivateData();
 		boolean sendToDisk = dlg.wantsToPrintToDisk();
+		
+		RunReportOptions options = new RunReportOptions();
+		options.includePrivate = includePrivateData;
 
 		for(int i = 0; i < unsortedPartialBulletins.length; ++i)
 		{
@@ -232,9 +236,9 @@ public class ActionMenuReports extends ActionPrint
 		}
 
 		if(sendToDisk)
-			printToDisk(rf, sortableList, includePrivateData);
+			printToDisk(rf, sortableList, options);
 		else
-			printToPrinter(rf, sortableList, includePrivateData);
+			printToPrinter(rf, sortableList, options);
 	}
 	
 	private boolean areAnyBulletinsAllPrivate(PartialBulletin[] sortedPartialBulletins)
@@ -251,52 +255,52 @@ public class ActionMenuReports extends ActionPrint
 		return isAnyBulletinAllPrivate;
 	}
 
-	void printToDisk(ReportFormat rf, SortableBulletinList list, boolean includePrivate) throws Exception
+	void printToDisk(ReportFormat rf, SortableBulletinList list, RunReportOptions options) throws Exception
 	{
 		File destFile = chooseDestinationFile();
 		if(destFile == null)
 			return;
 		
 		UnicodeWriter destination = new UnicodeWriter(destFile);
-		printToWriter(destination, rf, list, includePrivate);
+		printToWriter(destination, rf, list, options);
 		destination.close();
 	}
 	
 	static class BackgroundPrinter extends WorkerThread
 	{
 		public BackgroundPrinter(UiMainWindow mainWindowToUse, Writer whereToPrint, ReportFormat reportFormatToUse, 
-				SortableBulletinList listToPrint, boolean shouldIncludePrivate)
+				SortableBulletinList listToPrint, RunReportOptions optionsToUse)
 		{
 			mainWindow = mainWindowToUse;
 			destination = whereToPrint;
 			rf = reportFormatToUse;
 			list = listToPrint;
-			includePrivate = shouldIncludePrivate;
+			options = optionsToUse;
 		}
 		
 		public void doTheWorkWithNO_SWING_CALLS() throws Exception
 		{
 			ReportRunner rr = new ReportRunner(mainWindow.getApp().getSecurity(), mainWindow.getLocalization());
-			rr.runReport(rf, mainWindow.getStore().getDatabase(), list, destination, includePrivate);
+			rr.runReport(rf, mainWindow.getStore().getDatabase(), list, destination, options);
 		}
 		
 		UiMainWindow mainWindow;
 		Writer destination;
 		ReportFormat rf;
 		SortableBulletinList list;
-		boolean includePrivate;
+		RunReportOptions options;
 	}
 
-	private void printToWriter(Writer destination, ReportFormat rf, SortableBulletinList list, boolean includePrivate) throws Exception
+	private void printToWriter(Writer destination, ReportFormat rf, SortableBulletinList list, RunReportOptions options) throws Exception
 	{
-		BackgroundPrinter worker = new BackgroundPrinter(mainWindow, destination, rf, list, includePrivate);
+		BackgroundPrinter worker = new BackgroundPrinter(mainWindow, destination, rf, list, options);
 		mainWindow.doBackgroundWork(worker, "BackgroundPrinting");
 	}
 	
-	void printToPrinter(ReportFormat rf, SortableBulletinList list, boolean includePrivate) throws Exception
+	void printToPrinter(ReportFormat rf, SortableBulletinList list, RunReportOptions options) throws Exception
 	{
 		StringWriter writer = new StringWriter();
-		printToWriter(writer, rf, list, includePrivate);
+		printToWriter(writer, rf, list, options);
 		writer.close();
 		
 		UiLabel previewText = new UiLabel(writer.toString());
