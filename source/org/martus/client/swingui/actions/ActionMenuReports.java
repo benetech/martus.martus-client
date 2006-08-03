@@ -136,16 +136,29 @@ public class ActionMenuReports extends ActionPrint
 	
 	ReportFormat chooseReport() throws Exception
 	{
+		File chosenFile = null;
 		String title = getLocalization().getWindowTitle("ChooseReportToRun");
 		File directory = mainWindow.getApp().getCurrentAccountDirectory();
 		String buttonLabel = getLocalization().getButtonLabel("SelectReport");
 		FileFilter filter = new ReportFormatFilter(getLocalization());
-		FileDialogResults results = UiFileChooser.displayFileOpenDialog(mainWindow, 
-				title, directory, buttonLabel, filter);
-		if(results.wasCancelChoosen())
-			return null;
+		while(true)
+		{
+			FileDialogResults results = UiFileChooser.displayFileOpenDialog(mainWindow, 
+					title, directory, buttonLabel, filter);
+			if(results.wasCancelChoosen())
+				return null;
+			
+			chosenFile = results.getChosenFile();
+			if(!chosenFile.exists())
+				continue;
+			
+			if(!chosenFile.isDirectory())
+				break;
+			
+			directory = chosenFile;
+		}
 		
-		UnicodeReader reader = new UnicodeReader(results.getChosenFile());
+		UnicodeReader reader = new UnicodeReader(chosenFile);
 		String reportFormatText = reader.readAll();
 		reader.close();
 		
@@ -659,6 +672,8 @@ public class ActionMenuReports extends ActionPrint
 		
 		public boolean accept(File f)
 		{
+			if(f.isDirectory())
+				return true;
 			return (f.getName().toLowerCase().endsWith(MRF_FILE_EXTENSION));
 		}
 
