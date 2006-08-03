@@ -33,31 +33,32 @@ import java.util.Iterator;
 import org.martus.client.search.SaneCollator;
 import org.martus.common.MiniLocalization;
 import org.martus.common.bulletin.Bulletin;
+import org.martus.common.fieldspec.MiniFieldSpec;
 import org.martus.common.packet.UniversalId;
 
 public class SortableBulletinList
 {
-	public SortableBulletinList(MiniLocalization localizationToUse, String[] tagsForSorting, String[] extraFieldTagsToUse)
+	public SortableBulletinList(MiniLocalization localizationToUse, MiniFieldSpec[] specsForSorting, MiniFieldSpec[] extraSpecsToUse)
 	{
 		localization = localizationToUse;
-		sortTags = tagsForSorting;
-		tagsToStore = new String[sortTags.length + extraFieldTagsToUse.length];
-		System.arraycopy(sortTags, 0, tagsToStore, 0, sortTags.length);
-		System.arraycopy(extraFieldTagsToUse, 0, tagsToStore, sortTags.length, extraFieldTagsToUse.length);
-		sorter = new PartialBulletinSorter(localization.getCurrentLanguageCode(), sortTags);
+		sortSpecs = specsForSorting;
+		specsToStore = new MiniFieldSpec[sortSpecs.length + extraSpecsToUse.length];
+		System.arraycopy(sortSpecs, 0, specsToStore, 0, sortSpecs.length);
+		System.arraycopy(extraSpecsToUse, 0, specsToStore, sortSpecs.length, extraSpecsToUse.length);
+		sorter = new PartialBulletinSorter(localization.getCurrentLanguageCode(), sortSpecs);
 		partialBulletins = new HashSet();
 		
 	}
 	
-	public SortableBulletinList(MiniLocalization localizationToUse, String[] tagsForSorting)
+	public SortableBulletinList(MiniLocalization localizationToUse, MiniFieldSpec[] specsForSorting)
 	{
-		this(localizationToUse, tagsForSorting, new String[0]);
+		this(localizationToUse, specsForSorting, new MiniFieldSpec[0]);
 	}
 	
 	public void add(Bulletin b)
 	{
 		SafeReadableBulletin readableBulletin = new SafeReadableBulletin(b, localization);
-		PartialBulletin pb = new PartialBulletin(readableBulletin, tagsToStore);
+		PartialBulletin pb = new PartialBulletin(readableBulletin, specsToStore);
 		add(pb);
 	}
 
@@ -76,9 +77,9 @@ public class SortableBulletinList
 		return partialBulletins.size();
 	}
 	
-	public String[] getSortTags()
+	public MiniFieldSpec[] getSortSpecs()
 	{
-		return sortTags;
+		return sortSpecs;
 	}
 	
 	public PartialBulletin[] getUnsortedPartialBulletins()
@@ -119,9 +120,9 @@ public class SortableBulletinList
 	
 	static class PartialBulletinSorter implements Comparator
 	{
-		public PartialBulletinSorter(String languageCode, String[] tagsToSortBy)
+		public PartialBulletinSorter(String languageCode, MiniFieldSpec[] specsToSortBy)
 		{
-			tags = tagsToSortBy;
+			specs = specsToSortBy;
 			collator = new SaneCollator(languageCode);
 		}
 		
@@ -129,10 +130,10 @@ public class SortableBulletinList
 		{
 			PartialBulletin pb1 = (PartialBulletin)o1;
 			PartialBulletin pb2 = (PartialBulletin)o2;
-			for(int i = 0; i < tags.length; ++i)
+			for(int i = 0; i < specs.length; ++i)
 			{
-				String s1 = pb1.getData(tags[i]);
-				String s2 = pb2.getData(tags[i]);
+				String s1 = pb1.getData(specs[i].getTag());
+				String s2 = pb2.getData(specs[i].getTag());
 				if(s1 == null && s2 == null)
 					return 0;
 				if(s1 == null)
@@ -146,13 +147,13 @@ public class SortableBulletinList
 			return 0;
 		}
 
-		String[] tags;
+		MiniFieldSpec[] specs;
 		SaneCollator collator;
 	}
 	
 	MiniLocalization localization;
 	Comparator sorter;
-	String[] sortTags;
-	String[] tagsToStore;
+	MiniFieldSpec[] sortSpecs;
+	MiniFieldSpec[] specsToStore;
 	HashSet partialBulletins;
 }

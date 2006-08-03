@@ -124,6 +124,7 @@ import org.martus.common.bulletin.Bulletin;
 import org.martus.common.crypto.MartusCrypto;
 import org.martus.common.database.FileDatabase.MissingAccountMapException;
 import org.martus.common.database.FileDatabase.MissingAccountMapSignatureException;
+import org.martus.common.fieldspec.MiniFieldSpec;
 import org.martus.common.network.NetworkInterfaceConstants;
 import org.martus.common.packet.Packet;
 import org.martus.common.packet.UniversalId;
@@ -1216,10 +1217,10 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		if(searchTree == null)
 			return null;
 		
-		String[] sortTags = new String[0];
+		MiniFieldSpec[] sortSpecs = new MiniFieldSpec[0];
 		try
 		{
-			return doSearch(searchTree, sortTags);
+			return doSearch(searchTree, sortSpecs);
 		} 
 		catch (Exception e)
 		{
@@ -1229,14 +1230,14 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		}
 	}
 
-	public SortableBulletinList doSearch(SearchTreeNode searchTree, String[] sortTags) throws Exception
+	public SortableBulletinList doSearch(SearchTreeNode searchTree, MiniFieldSpec[] sortSpecs) throws Exception
 	{
-		return doSearch(searchTree, sortTags, new String[0]);
+		return doSearch(searchTree, sortSpecs, new MiniFieldSpec[0]);
 	}
 	
-	public SortableBulletinList doSearch(SearchTreeNode searchTree, String[] sortTags, String[] extraTags) throws Exception
+	public SortableBulletinList doSearch(SearchTreeNode searchTree, MiniFieldSpec[] sortSpecs, MiniFieldSpec[] extraSpecs) throws Exception
 	{
-		SearchThread thread = new SearchThread(this, searchTree, sortTags, extraTags);
+		SearchThread thread = new SearchThread(this, searchTree, sortSpecs, extraSpecs);
 		doBackgroundWork(thread, "BackgroundSearching");
 		return thread.getResults();
 	}
@@ -1259,17 +1260,17 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	
 	static class SearchThread extends WorkerThread
 	{
-		public SearchThread(UiMainWindow mainWindowToUse, SearchTreeNode searchTreeToUse, String[] sortTagsToUse, String[] extraTagsToUse)
+		public SearchThread(UiMainWindow mainWindowToUse, SearchTreeNode searchTreeToUse, MiniFieldSpec[] sortSpecsToUse, MiniFieldSpec[] extraSpecsToUse)
 		{
 			mainWindow = mainWindowToUse;
 			searchTree = searchTreeToUse;
-			sortTags = sortTagsToUse;
-			extraTags = extraTagsToUse;
+			sortSpecs = sortSpecsToUse;
+			extraSpecs = extraSpecsToUse;
 		}
 		
 		public void doTheWorkWithNO_SWING_CALLS()
 		{
-			searchResults = mainWindow.getApp().search(searchTree, sortTags, extraTags, mainWindow.uiState.searchFinalBulletinsOnly);
+			searchResults = mainWindow.getApp().search(searchTree, sortSpecs, extraSpecs, mainWindow.uiState.searchFinalBulletinsOnly);
 		}
 		
 		public SortableBulletinList getResults()
@@ -1279,8 +1280,8 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		
 		UiMainWindow mainWindow;
 		SearchTreeNode searchTree;
-		String[] sortTags;
-		String[] extraTags;
+		MiniFieldSpec[] sortSpecs;
+		MiniFieldSpec[] extraSpecs;
 		SortableBulletinList searchResults;
 	}
 	

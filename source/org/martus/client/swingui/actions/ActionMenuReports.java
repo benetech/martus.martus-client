@@ -63,6 +63,8 @@ import org.martus.clientside.UiLocalization;
 import org.martus.common.MiniLocalization;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.fieldspec.FieldSpec;
+import org.martus.common.fieldspec.FieldTypeBoolean;
+import org.martus.common.fieldspec.MiniFieldSpec;
 import org.martus.common.fieldspec.PopUpTreeFieldSpec;
 import org.martus.swing.PrintUtilities;
 import org.martus.swing.UiButton;
@@ -219,8 +221,10 @@ public class ActionMenuReports extends ActionPrint
 		if(!sortDlg.ok())
 			return;
 		
-		String[] sortTags = sortDlg.getSortTags();
-		String[] extraTags = {Bulletin.PSEUDOFIELD_ALL_PRIVATE};
+		MiniFieldSpec[] sortTags = sortDlg.getSelecteMiniFieldSpecs();
+		FieldSpec allPrivateSpec = FieldSpec.createStandardField(Bulletin.PSEUDOFIELD_ALL_PRIVATE, new FieldTypeBoolean());
+		MiniFieldSpec allPrivateMiniSpec = new MiniFieldSpec(allPrivateSpec);
+		MiniFieldSpec[] extraTags = {allPrivateMiniSpec};
 		SortableBulletinList sortableList = mainWindow.doSearch(searchTree, sortTags, extraTags);
 		if(sortableList == null)
 			return;
@@ -556,8 +560,8 @@ public class ActionMenuReports extends ActionPrint
 		{
 			super(mainWindow);
 			
-			if(sortTags == null)
-				sortTags = new Vector();
+			if(sortMiniSpecs == null)
+				sortMiniSpecs = new Vector();
 			
 			setModal(true);
 			Container contentPane = getContentPane();
@@ -583,10 +587,10 @@ public class ActionMenuReports extends ActionPrint
 			
 			for(int i = 0; i < sortChooser.length; ++i)
 			{
-				String selectedCode = "";
-				if(i < sortTags.size())
-					selectedCode = spec.findSearchTag((String)sortTags.get(i)).getCode();
-				sortChooser[i].setText(selectedCode);
+				MiniFieldSpec selectedSpec = null;
+				if(i < sortMiniSpecs.size())
+					selectedSpec = (MiniFieldSpec)sortMiniSpecs.get(i);
+				sortChooser[i].select(selectedSpec);
 			}
 			
 			breakChoice = new UiCheckBox(localization.getFieldLabel("ReportIncludeSummaryCounts"));
@@ -619,21 +623,21 @@ public class ActionMenuReports extends ActionPrint
 		
 		void memorizeSortFields()
 		{			
-			sortTags.clear();
+			sortMiniSpecs.clear();
 			for(int i = 0; i < sortChooser.length; ++i)
 			{
-				String searchTag = sortChooser[i].getSelectedSearchTag();
-				if(searchTag.length() == 0)
+				MiniFieldSpec spec = sortChooser[i].getSelectedMiniFieldSpec();
+				if(spec.getTag().length() == 0)
 					break;
-				sortTags.add(searchTag);
+				sortMiniSpecs.add(spec);
 				
-				System.out.println("ActionMenuReport.getSortTags: " + searchTag);
+				System.out.println("ActionMenuReport.getSortTags: " + spec);
 			}
 		}
 		
-		public String[] getSortTags() throws Exception
+		public MiniFieldSpec[] getSelecteMiniFieldSpecs() throws Exception
 		{
-			return (String[])sortTags.toArray(new String[0]);
+			return (MiniFieldSpec[])sortMiniSpecs.toArray(new MiniFieldSpec[0]);
 		}
 		
 		public boolean getPrintBreaks()
@@ -660,7 +664,7 @@ public class ActionMenuReports extends ActionPrint
 		boolean hitOk;
 		UiButton okButton;
 		UiCheckBox breakChoice;
-		private static Vector sortTags;
+		private static Vector sortMiniSpecs;
 	}
 
 	class ReportFormatFilter extends FileFilter

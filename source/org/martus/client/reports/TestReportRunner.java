@@ -53,6 +53,8 @@ import org.martus.common.fieldspec.FieldTypeDateRange;
 import org.martus.common.fieldspec.FieldTypeLanguage;
 import org.martus.common.fieldspec.FieldTypeMultiline;
 import org.martus.common.fieldspec.FieldTypeNormal;
+import org.martus.common.fieldspec.MiniFieldSpec;
+import org.martus.common.fieldspec.StandardFieldSpecs;
 import org.martus.common.packet.UniversalId;
 import org.martus.util.TestCaseEnhanced;
 
@@ -109,7 +111,7 @@ public class TestReportRunner extends TestCaseEnhanced
 		rf.setDetailSection("$i. $bulletin.localId\n");
 		StringWriter result = new StringWriter();
 		Vector keys = store.scanForLeafKeys();
-		SortableBulletinList list = new SortableBulletinList(app.getLocalization(), new String[0]);
+		SortableBulletinList list = new SortableBulletinList(app.getLocalization(), new MiniFieldSpec[0]);
 		for(int i = 0; i < keys.size(); ++i)
 		{
 			DatabaseKey key = (DatabaseKey)keys.get(i);
@@ -151,7 +153,7 @@ public class TestReportRunner extends TestCaseEnhanced
 		b.setAllPrivate(false);
 		app.saveBulletin(b, app.getFolderDraftOutbox());
 		
-		SortableBulletinList list = new SortableBulletinList(app.getLocalization(), new String[0]);
+		SortableBulletinList list = new SortableBulletinList(app.getLocalization(), new MiniFieldSpec[0]);
 		list.add(b);
 		ReportFormat rf = new ReportFormat();
 		rf.setDetailSection("$bulletin.field('custom')");
@@ -178,16 +180,28 @@ public class TestReportRunner extends TestCaseEnhanced
 		createAndSaveSampleBulletin(app, "a", "2");
 		createAndSaveSampleBulletin(app, "b", "1");
 		ReportFormat rf = new ReportFormat();
-		String breakSection = "$BreakCount:\n" +
-				"#foreach( $value in $BreakValues )\n" +
-				"$value " +
+		String breakSection = "$BreakLevel had $BreakCount\n" +
+				"#foreach($x in [0..$BreakLevel])\n" +
+				"$BreakFields.getLabel($x): $BreakValues.get($x) " +
 				"#end\n\n";
 		rf.setBreakSection(breakSection);
-		RunReportOptions options = new RunReportOptions();
 		
+		RunReportOptions options = new RunReportOptions();
+		options.includePrivate = true;
 		options.printBreaks = true;
+		
+		MiniLocalization localization = new MiniLocalization();
+		String authorLabel = localization.getFieldLabel(Bulletin.TAGAUTHOR);
+		String summaryLabel = localization.getFieldLabel(Bulletin.TAGSUMMARY);
+		
+		
 		String result = runReportOnAppData(rf, app, options);
-		assertEquals("1:\n1 a \n1:\n2 a \n2:\na \n1:\n1 b \n1:\nb \n", result);
+		assertEquals("1 had 1\n" + authorLabel + ": a " + summaryLabel + ": 1 \n" +
+				"1 had 1\n" + authorLabel + ": a " + summaryLabel + ": 2 \n" +
+				"0 had 2\n" + authorLabel + ": a \n" +
+				"1 had 1\n" + authorLabel + ": b " + summaryLabel + ": 1 \n" +
+				"0 had 1\n" + authorLabel + ": b \n", 
+				result);
 		
 		options.printBreaks = false;
 		assertEquals("Still had output?", "", runReportOnAppData(rf, app, options));
@@ -229,10 +243,14 @@ public class TestReportRunner extends TestCaseEnhanced
 		MartusCrypto security = app.getSecurity();
 		ReadableDatabase db = store.getDatabase();
 		Vector unsortedKeys = store.scanForLeafKeys();
-		String[] sortTags = {Bulletin.TAGAUTHOR, Bulletin.TAGSUMMARY};
+		MiniFieldSpec sortSpecs[] = {
+				new MiniFieldSpec(StandardFieldSpecs.findStandardFieldSpec(Bulletin.TAGAUTHOR)), 
+				new MiniFieldSpec(StandardFieldSpecs.findStandardFieldSpec(Bulletin.TAGSUMMARY)),
+			};
+
 		MiniLocalization localization = new MiniLocalization();
 		localization.setCurrentLanguageCode(MiniLocalization.ENGLISH);
-		SortableBulletinList list = new SortableBulletinList(localization, sortTags);
+		SortableBulletinList list = new SortableBulletinList(localization, sortSpecs);
 		for(int i = 0; i < unsortedKeys.size(); ++i)
 		{
 			DatabaseKey key = (DatabaseKey)unsortedKeys.get(i);

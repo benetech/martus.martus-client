@@ -30,7 +30,9 @@ import org.martus.common.bulletin.Bulletin;
 import org.martus.common.crypto.MockMartusSecurity;
 import org.martus.common.field.MartusDateRangeField;
 import org.martus.common.fieldspec.FieldSpec;
+import org.martus.common.fieldspec.FieldTypeDate;
 import org.martus.common.fieldspec.FieldTypeNormal;
+import org.martus.common.fieldspec.MiniFieldSpec;
 import org.martus.common.fieldspec.StandardFieldSpecs;
 import org.martus.common.packet.UniversalId;
 import org.martus.common.utilities.MartusFlexidate;
@@ -50,7 +52,10 @@ public class TestSortableBulletinList extends TestCaseEnhanced
 		localization.setCurrentLanguageCode(MiniLocalization.ENGLISH);
 		MockMartusSecurity security = MockMartusSecurity.createClient();
 		
-		String tags[] = {Bulletin.TAGAUTHOR, Bulletin.TAGTITLE};
+		MiniFieldSpec tags[] = {
+			new MiniFieldSpec(StandardFieldSpecs.findStandardFieldSpec(Bulletin.TAGAUTHOR)), 
+			new MiniFieldSpec(StandardFieldSpecs.findStandardFieldSpec(Bulletin.TAGTITLE)),
+		};
 
 		SortableBulletinList list = new SortableBulletinList(localization, tags);
 		String[] authors = {"Sue", "Wendy", "Alan", "Wendy", };
@@ -90,16 +95,18 @@ public class TestSortableBulletinList extends TestCaseEnhanced
 		Bulletin highLow = new Bulletin(security);
 		highLow.set(Bulletin.TAGEVENTDATE, MartusFlexidate.toBulletinFlexidateFormat(highDate, highDate));
 		
-		String tags[] = {Bulletin.TAGEVENTDATE + "." + MartusDateRangeField.SUBFIELD_BEGIN};
+		String subTag = Bulletin.TAGEVENTDATE + "." + MartusDateRangeField.SUBFIELD_BEGIN;
+		FieldSpec spec = FieldSpec.createCustomField(subTag, "Event beginning", new FieldTypeDate());
+		MiniFieldSpec tags[] = {new MiniFieldSpec(spec)};
 		SortableBulletinList begin = new SortableBulletinList(localization, tags);
 		begin.add(lowHigh);
 		begin.add(middle);
 		begin.add(highLow);
 		
 		PartialBulletin[] beginBulletins = begin.getSortedPartialBulletins();
-		assertEquals("begin low not first?", lowDate.toIsoDateString(), beginBulletins[0].getData(tags[0]));
-		assertEquals("begin middle not middle?", middleDate.toIsoDateString(), beginBulletins[1].getData(tags[0]));
-		assertEquals("begin high not last?", highDate.toIsoDateString(), beginBulletins[2].getData(tags[0]));
+		assertEquals("begin low not first?", lowDate.toIsoDateString(), beginBulletins[0].getData(subTag));
+		assertEquals("begin middle not middle?", middleDate.toIsoDateString(), beginBulletins[1].getData(subTag));
+		assertEquals("begin high not last?", highDate.toIsoDateString(), beginBulletins[2].getData(subTag));
 	}
 	
 	public void testMissingFieldSorting() throws Exception
@@ -116,7 +123,7 @@ public class TestSortableBulletinList extends TestCaseEnhanced
 		Bulletin hasFullCustom = new Bulletin(security, publicFields, StandardFieldSpecs.getDefaultBottomSectionFieldSpecs());
 		hasFullCustom.set(tag, "blah blah blah");
 		
-		String[] tags = {tag};
+		MiniFieldSpec[] tags = {new MiniFieldSpec(publicFields[0])};
 		SortableBulletinList list = new SortableBulletinList(localization, tags);
 		list.add(missingCustom);
 		list.add(hasFullCustom);

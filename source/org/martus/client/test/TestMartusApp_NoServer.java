@@ -72,6 +72,7 @@ import org.martus.common.database.DatabaseKey;
 import org.martus.common.database.FileDatabase;
 import org.martus.common.fieldspec.ChoiceItem;
 import org.martus.common.fieldspec.FieldSpec;
+import org.martus.common.fieldspec.MiniFieldSpec;
 import org.martus.common.fieldspec.StandardFieldSpecs;
 import org.martus.common.packet.UniversalId;
 import org.martus.swing.Utilities;
@@ -2142,8 +2143,8 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 	{
 		SearchParser parser = new SearchParser(andKeyword, orKeyword);
 		SearchTreeNode searchNode = parser.parseJustAmazonValueForTesting(searchFor);
-		String[] noTags = new String[0];
-		app.updateSearchFolder(app.search(searchNode, noTags, noTags, searchFinalBulletinVersionsOnly));
+		MiniFieldSpec[] noSpecs = new MiniFieldSpec[0];
+		app.updateSearchFolder(app.search(searchNode, noSpecs, noSpecs, searchFinalBulletinVersionsOnly));
 	}
 
 

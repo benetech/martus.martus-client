@@ -42,6 +42,8 @@ import org.martus.common.crypto.MartusCrypto;
 import org.martus.common.database.DatabaseKey;
 import org.martus.common.database.ReadableDatabase;
 import org.martus.common.field.MartusField;
+import org.martus.common.fieldspec.MiniFieldSpec;
+import org.martus.common.fieldspec.StandardFieldSpecs;
 import org.martus.common.packet.UniversalId;
 
 
@@ -63,13 +65,13 @@ public class ReportRunner
 		Context context = new VelocityContext();
 		context.put("localization", localization);
 		
-		String[] breakTags = bulletins.getSortTags();
+		MiniFieldSpec[] breakSpecs = bulletins.getSortSpecs();
 		if(!options.printBreaks)
-			breakTags = new String[0];
+			breakSpecs = new MiniFieldSpec[0];
 		
-		String[] previousBreakValues = new String[breakTags.length];
+		String[] previousBreakValues = new String[breakSpecs.length];
 		Arrays.fill(previousBreakValues, "");
-		int[] breakCounts = new int[breakTags.length];
+		int[] breakCounts = new int[breakSpecs.length];
 		Arrays.fill(breakCounts, 0);
 		
 		performMerge(rf.getStartSection(), destination, context);
@@ -81,17 +83,17 @@ public class ReportRunner
 			if(!options.includePrivate)
 				safeReadableBulletin.removePrivateData();
 			
-			for(int breakLevel = breakTags.length - 1; breakLevel >= 0; --breakLevel)
+			for(int breakLevel = breakSpecs.length - 1; breakLevel >= 0; --breakLevel)
 			{
 				String current = "";
-				MartusField thisField = b.getField(breakTags[breakLevel]);
+				MartusField thisField = safeReadableBulletin.getPossiblyNestedField(breakSpecs[breakLevel]);
 				if(thisField != null)
 					current = thisField.getData();
 
 				if(!current.equals(previousBreakValues[breakLevel]))
 				{
 					if(bulletin > 0)
-						performBreak(rf, context, destination, previousBreakValues, breakLevel, breakCounts[breakLevel]);
+						performBreak(rf, context, destination, breakSpecs, previousBreakValues, breakLevel, breakCounts[breakLevel]);
 					previousBreakValues[breakLevel] = current;
 					breakCounts[breakLevel] = 0;
 				}
@@ -101,32 +103,51 @@ public class ReportRunner
 			context.put("bulletin", safeReadableBulletin);
 			performMerge(rf.getDetailSection(), destination, context);
 			
-			for(int breakLevel = breakTags.length - 1; breakLevel >= 0; --breakLevel)
+			for(int breakLevel = breakSpecs.length - 1; breakLevel >= 0; --breakLevel)
 			{
 				++breakCounts[breakLevel];
 			}
 			
 			context.remove("bulletin");
 		}
-		for(int breakLevel = breakTags.length - 1; breakLevel >= 0; --breakLevel)
-			performBreak(rf, context, destination, previousBreakValues, breakLevel, breakCounts[breakLevel]);
+		for(int breakLevel = breakSpecs.length - 1; breakLevel >= 0; --breakLevel)
+			performBreak(rf, context, destination, breakSpecs, previousBreakValues, breakLevel, breakCounts[breakLevel]);
 		
 		performMerge(rf.getEndSection(), destination, context);
 	}
 
-	private void performBreak(ReportFormat rf, Context context, Writer destination, String[] previousBreakValues, int breakLevel, int breakCount) throws Exception
+	private void performBreak(ReportFormat rf, Context context, Writer destination, MiniFieldSpec[] breakSpecs, String[] previousBreakValues, int breakLevel, int breakCount) throws Exception
 	{
 		Vector breakValues = new Vector();
-		for(int i = breakLevel; i >= 0; --i)
+		BreakFields breakFields = new BreakFields();
+		for(int i = 0; i < breakLevel + 1; ++i)
+		{
 			breakValues.add(previousBreakValues[i]);
+			breakFields.add(breakSpecs[i]);
+		}
 		context.put("BreakCount", new Integer(breakCount));
+		context.put("BreakLevel", new Integer(breakLevel));
 		context.put("BreakValues", breakValues);
+		context.put("BreakFields", breakFields);
 		performMerge(rf.getBreakSection(), destination, context);
 	}
 	
 	public void performMerge(String template, Writer result, Context context) throws Exception
 	{
 		engine.evaluate(context, result, "Martus", template);
+	}
+	
+	public class BreakFields extends Vector
+	{
+		public String getLabel(int i)
+		{
+			MiniFieldSpec spec = (MiniFieldSpec)get(i);
+			String label = spec.getLabel();
+			String tag = spec.getTag();
+			if(StandardFieldSpecs.isStandardFieldTag(tag))
+				label = localization.getFieldLabel(tag);
+			return label;
+		}
 	}
 	
 	VelocityEngine engine;

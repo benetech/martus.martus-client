@@ -38,6 +38,7 @@ import org.martus.common.fieldspec.FieldType;
 import org.martus.common.fieldspec.FieldTypeMessage;
 import org.martus.common.fieldspec.FieldTypeMultiline;
 import org.martus.common.fieldspec.FieldTypeNormal;
+import org.martus.common.fieldspec.MiniFieldSpec;
 import org.martus.common.fieldspec.StandardFieldSpecs;
 import org.martus.common.packet.UniversalId;
 
@@ -59,6 +60,11 @@ public class SafeReadableBulletin
 	{
 		realBulletin = bulletinToWrap;
 		localization = localizationToUse;
+	}
+	
+	public MartusField field(MiniFieldSpec miniSpec)
+	{
+		return field(miniSpec.getTag(), miniSpec.getLabel(), miniSpec.getType().getTypeName());
 	}
 	
 	public MartusField field(String tag, String label, String typeString)
@@ -162,6 +168,11 @@ public class SafeReadableBulletin
 	public MartusField getPossiblyNestedField(FieldSpec nestedFieldTag)
 	{
 		return getPossiblyNestedField(nestedFieldTag.getTag());
+	}
+	
+	public MartusField getPossiblyNestedField(MiniFieldSpec nestedFieldMiniSpec)
+	{
+		return getPossiblyNestedField(nestedFieldMiniSpec.getTag());
 	}
 
 	public MartusField getPossiblyNestedField(String tag)

@@ -29,6 +29,7 @@ import java.util.HashMap;
 
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.field.MartusField;
+import org.martus.common.fieldspec.MiniFieldSpec;
 import org.martus.common.packet.UniversalId;
 
 public class PartialBulletin
@@ -57,6 +58,21 @@ public class PartialBulletin
 			MartusField field = copyFrom.getField(tagsToStore[i]);
 			if(field != null)
 				fieldData.put(tagsToStore[i], field.getData());
+			//System.out.println("PartialBulletin copying: " + field);
+		}
+	}
+	
+	public PartialBulletin(SafeReadableBulletin copyFrom, MiniFieldSpec[] specsToStore)
+	{
+		fieldData = new HashMap();
+
+		uid = copyFrom.getUniversalId();
+		for(int i = 0; i < specsToStore.length; ++i)
+		{
+			MiniFieldSpec spec = specsToStore[i];
+			MartusField field = copyFrom.getPossiblyNestedField(spec);
+			if(field != null)
+				fieldData.put(specsToStore[i].getTag(), field.getData());
 			//System.out.println("PartialBulletin copying: " + field);
 		}
 	}

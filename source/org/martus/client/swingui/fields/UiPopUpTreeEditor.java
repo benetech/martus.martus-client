@@ -55,6 +55,7 @@ import javax.swing.tree.TreeSelectionModel;
 
 import org.martus.client.search.SearchFieldTreeNode;
 import org.martus.clientside.UiLocalization;
+import org.martus.common.fieldspec.MiniFieldSpec;
 import org.martus.common.fieldspec.PopUpTreeFieldSpec;
 import org.martus.common.fieldspec.SearchFieldTreeModel;
 import org.martus.common.fieldspec.SearchableFieldChoiceItem;
@@ -107,9 +108,17 @@ public class UiPopUpTreeEditor extends UiField implements ActionListener
 		label.setText(selectedItem.toString());
 	}
 	
-	public String getSelectedSearchTag()
+	public void select(MiniFieldSpec specToSelect)
 	{
-		return selectedItem.getSearchTag();
+		if(specToSelect == null)
+			setText("");
+		else
+			setText(specToSelect.getTag());
+	}
+	
+	public MiniFieldSpec getSelectedMiniFieldSpec()
+	{
+		return new MiniFieldSpec(selectedItem.getSpec());
 	}
 	
 	public void setSpec(PopUpTreeFieldSpec specToUse)
