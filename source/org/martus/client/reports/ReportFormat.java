@@ -111,7 +111,7 @@ public class ReportFormat
 	final static String TAG_END_SECTION = "EndSection";
 	final static String TAG_BREAK_SECTION = "BreakSection";
 	
-	public final static int EXPECTED_VERSION = 2;
+	public final static int EXPECTED_VERSION = 3;
 
 	private int version;
 	private String startSection;

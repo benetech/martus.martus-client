@@ -42,8 +42,8 @@ import org.martus.common.crypto.MartusCrypto;
 import org.martus.common.database.DatabaseKey;
 import org.martus.common.database.ReadableDatabase;
 import org.martus.common.field.MartusField;
+import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.fieldspec.MiniFieldSpec;
-import org.martus.common.fieldspec.StandardFieldSpecs;
 import org.martus.common.packet.UniversalId;
 
 
@@ -118,16 +118,19 @@ public class ReportRunner
 
 	private void performBreak(ReportFormat rf, Context context, Writer destination, MiniFieldSpec[] breakSpecs, String[] previousBreakValues, int breakLevel, int breakCount) throws Exception
 	{
-		Vector breakValues = new Vector();
 		BreakFields breakFields = new BreakFields();
 		for(int i = 0; i < breakLevel + 1; ++i)
 		{
-			breakValues.add(previousBreakValues[i]);
-			breakFields.add(breakSpecs[i]);
+			MiniFieldSpec miniSpec = breakSpecs[i];
+			FieldSpec spec = miniSpec.getType().createEmptyFieldSpec();
+			spec.setTag(miniSpec.getTag());
+			spec.setLabel(miniSpec.getLabel());
+			MartusField field = new MartusField(spec);
+			field.setData(previousBreakValues[i]);
+			breakFields.add(field);
 		}
 		context.put("BreakCount", new Integer(breakCount));
 		context.put("BreakLevel", new Integer(breakLevel));
-		context.put("BreakValues", breakValues);
 		context.put("BreakFields", breakFields);
 		performMerge(rf.getBreakSection(), destination, context);
 	}
@@ -139,15 +142,6 @@ public class ReportRunner
 	
 	public class BreakFields extends Vector
 	{
-		public String getLabel(int i)
-		{
-			MiniFieldSpec spec = (MiniFieldSpec)get(i);
-			String label = spec.getLabel();
-			String tag = spec.getTag();
-			if(StandardFieldSpecs.isStandardFieldTag(tag))
-				label = localization.getFieldLabel(tag);
-			return label;
-		}
 	}
 	
 	VelocityEngine engine;

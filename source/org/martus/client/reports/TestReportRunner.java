@@ -176,13 +176,15 @@ public class TestReportRunner extends TestCaseEnhanced
 	public void testBreakSection() throws Exception
 	{
 		MockMartusApp app = MockMartusApp.create();
-		createAndSaveSampleBulletin(app, "a", "1");
-		createAndSaveSampleBulletin(app, "a", "2");
-		createAndSaveSampleBulletin(app, "b", "1");
+		String sampleDate = "2004-06-19";
+		createAndSaveSampleBulletin(app, "a", "1", sampleDate);
+		createAndSaveSampleBulletin(app, "a", "2", sampleDate);
+		createAndSaveSampleBulletin(app, "b", "1", sampleDate);
 		ReportFormat rf = new ReportFormat();
 		String breakSection = "$BreakLevel had $BreakCount\n" +
 				"#foreach($x in [0..$BreakLevel])\n" +
-				"$BreakFields.getLabel($x): $BreakValues.get($x) " +
+				"$BreakFields.get($x).getLocalizedLabel($localization): " +
+				"$BreakFields.get($x).html($localization) " +
 				"#end\n\n";
 		rf.setBreakSection(breakSection);
 		
@@ -195,24 +197,34 @@ public class TestReportRunner extends TestCaseEnhanced
 		String summaryLabel = localization.getFieldLabel(Bulletin.TAGSUMMARY);
 		
 		
-		String result = runReportOnAppData(rf, app, options);
+		String sortByAuthorSummary = runReportOnAppData(rf, app, options);
 		assertEquals("1 had 1\n" + authorLabel + ": a " + summaryLabel + ": 1 \n" +
 				"1 had 1\n" + authorLabel + ": a " + summaryLabel + ": 2 \n" +
 				"0 had 2\n" + authorLabel + ": a \n" +
 				"1 had 1\n" + authorLabel + ": b " + summaryLabel + ": 1 \n" +
 				"0 had 1\n" + authorLabel + ": b \n", 
-				result);
+				sortByAuthorSummary);
+		
+		MiniFieldSpec[] entryDateSorting = {
+			new MiniFieldSpec(StandardFieldSpecs.findStandardFieldSpec(Bulletin.TAGENTRYDATE)),
+		};
+		
+		String entryDateLabel = localization.getFieldLabel(Bulletin.TAGENTRYDATE);
+		String formattedDate = localization.convertStoredDateToDisplay(sampleDate);
+		String sortedByEntryDate = runReportOnAppData(rf, app, options, entryDateSorting);
+		assertEquals("0 had 3\n" + entryDateLabel + ": " + formattedDate + " \n", sortedByEntryDate);
 		
 		options.printBreaks = false;
 		assertEquals("Still had output?", "", runReportOnAppData(rf, app, options));
 	}
 
-	private void createAndSaveSampleBulletin(MockMartusApp app, String author, String summary) throws Exception
+	private void createAndSaveSampleBulletin(MockMartusApp app, String author, String summary, String entryDate) throws Exception
 	{
 		BulletinFolder outbox = app.getFolderDraftOutbox();
 		Bulletin b = app.createBulletin();
 		b.set(Bulletin.TAGAUTHOR, author);
 		b.set(Bulletin.TAGSUMMARY, summary);
+		b.set(Bulletin.TAGENTRYDATE, entryDate);
 		app.saveBulletin(b, outbox);
 	}
 	public void testEndSection() throws Exception
@@ -239,15 +251,20 @@ public class TestReportRunner extends TestCaseEnhanced
 
 	private String runReportOnAppData(ReportFormat rf, MockMartusApp app, RunReportOptions options) throws IOException, DamagedBulletinException, NoKeyPairException, Exception
 	{
-		BulletinStore store = app.getStore();
-		MartusCrypto security = app.getSecurity();
-		ReadableDatabase db = store.getDatabase();
-		Vector unsortedKeys = store.scanForLeafKeys();
 		MiniFieldSpec sortSpecs[] = {
 				new MiniFieldSpec(StandardFieldSpecs.findStandardFieldSpec(Bulletin.TAGAUTHOR)), 
 				new MiniFieldSpec(StandardFieldSpecs.findStandardFieldSpec(Bulletin.TAGSUMMARY)),
 			};
 
+		return runReportOnAppData(rf, app, options, sortSpecs);
+	}
+
+	private String runReportOnAppData(ReportFormat rf, MockMartusApp app, RunReportOptions options, MiniFieldSpec[] sortSpecs) throws IOException, DamagedBulletinException, NoKeyPairException, Exception
+	{
+		BulletinStore store = app.getStore();
+		MartusCrypto security = app.getSecurity();
+		ReadableDatabase db = store.getDatabase();
+		Vector unsortedKeys = store.scanForLeafKeys();
 		MiniLocalization localization = new MiniLocalization();
 		localization.setCurrentLanguageCode(MiniLocalization.ENGLISH);
 		SortableBulletinList list = new SortableBulletinList(localization, sortSpecs);

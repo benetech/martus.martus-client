@@ -109,7 +109,11 @@ public class TabularReportBuilder
 	
 	private String createBreakSection()
 	{
-		return "<tr><td colspan='999'>---- $BreakCount: $BreakFields.getLabel($BreakLevel) = $BreakValues.get($BreakLevel)</td></tr>";
+		return "<tr><td colspan='999'>" +
+				"---- $BreakCount: " +
+				"$BreakFields.get($BreakLevel).getLocalizedLabel($localization) = " +
+				"$BreakFields.get($BreakLevel).html($localization) " +
+				"</td></tr>";
 	}
 
 	private String createEndSection()
