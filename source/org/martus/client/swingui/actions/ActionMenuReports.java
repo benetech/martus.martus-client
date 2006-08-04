@@ -605,8 +605,8 @@ public class ActionMenuReports extends ActionPrint
 			UiButton cancelButton = new UiButton(localization.getButtonLabel("cancel"));
 			cancelButton.addActionListener(this);
 			Box buttonBar = Box.createHorizontalBox();
-			buttonBar.add(okButton);
-			buttonBar.add(cancelButton);			
+			Component[] buttons = new Component[] {Box.createHorizontalGlue(), okButton, cancelButton};
+			Utilities.addComponentsRespectingOrientation(buttonBar, buttons);
 			contentPane.add(buttonBar, BorderLayout.AFTER_LAST_LINE);
 			
 			pack();
