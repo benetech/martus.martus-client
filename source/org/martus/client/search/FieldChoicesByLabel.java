@@ -91,6 +91,8 @@ public class FieldChoicesByLabel
 	public FieldSpec[] asArray(UiLocalization localization)
 	{
 		Collections.sort(allChoices, new ChoiceItemSorterByMiniFieldSpec());
+		mergeSimilarDropdowns();
+
 		FieldSpec[] specs = new FieldSpec[allChoices.size()]; 
 		for(int i = 0; i < allChoices.size(); ++i)
 		{
@@ -103,12 +105,10 @@ public class FieldChoicesByLabel
 	
 	public TreeNode asTree(UiLocalization localization)
 	{
-		SearchFieldTreeNode root = new SearchFieldTreeNode("", localization);
-
 		Collections.sort(allChoices, new ChoiceItemSorterByMiniFieldSpec());
-		
 		mergeSimilarDropdowns();
 
+		SearchFieldTreeNode root = new SearchFieldTreeNode("", localization);
 		SearchableFieldChoiceItem[] choices = getChoicesAsArray();
 		int index = 0;
 		while(index < choices.length)
