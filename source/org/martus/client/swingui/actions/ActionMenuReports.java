@@ -62,13 +62,14 @@ import org.martus.client.swingui.fields.UiPopUpTreeEditor;
 import org.martus.clientside.UiLocalization;
 import org.martus.common.MiniLocalization;
 import org.martus.common.bulletin.Bulletin;
+import org.martus.common.fieldspec.ChoiceItem;
 import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.fieldspec.FieldTypeBoolean;
 import org.martus.common.fieldspec.MiniFieldSpec;
 import org.martus.common.fieldspec.PopUpTreeFieldSpec;
 import org.martus.swing.PrintUtilities;
 import org.martus.swing.UiButton;
-import org.martus.swing.UiCheckBox;
+import org.martus.swing.UiComboBox;
 import org.martus.swing.UiFileChooser;
 import org.martus.swing.UiLabel;
 import org.martus.swing.UiScrollPane;
@@ -237,6 +238,7 @@ public class ActionMenuReports extends ActionPrint
 	
 		RunReportOptions options = new RunReportOptions();
 		options.printBreaks = sortDlg.getPrintBreaks();
+		options.hideDetail = sortDlg.getHideDetail();
 		
 // Do we really have to tell the user here? Would be better to include the count in the following dialog
 //		mainWindow.showNumberOfBulletinsFound(bulletinsMatched, "ReportFound");
@@ -593,7 +595,15 @@ public class ActionMenuReports extends ActionPrint
 				sortChooser[i].select(selectedSpec);
 			}
 			
-			breakChoice = new UiCheckBox(localization.getFieldLabel("ReportIncludeSummaryCounts"));
+			detailOnlyChoice = createChoiceItem("ReportDetailOnly", localization);
+			detailAndBreaksChoice = createChoiceItem("ReportDetailWithSummaries", localization);
+			breaksOnlyChoice = createChoiceItem("ReportSummariesOnly", localization);
+			ChoiceItem[] breakChoices = {
+				detailOnlyChoice,
+				detailAndBreaksChoice,
+				breaksOnlyChoice,
+			};
+			breakChoice = new UiComboBox(breakChoices);
 
 			Box mainArea = Box.createVerticalBox();
 			mainArea.add(multiSortBox);
@@ -611,6 +621,11 @@ public class ActionMenuReports extends ActionPrint
 			
 			pack();
 			Utilities.centerDlg(this);
+		}
+		
+		private ChoiceItem createChoiceItem(String tag, MiniLocalization localization)
+		{
+			return new ChoiceItem(tag, localization.getFieldLabel(tag));
 		}
 
 		private UiPopUpTreeEditor createSortChooser(UiMainWindow mainWindow, PopUpTreeFieldSpec spec)
@@ -642,7 +657,12 @@ public class ActionMenuReports extends ActionPrint
 		
 		public boolean getPrintBreaks()
 		{
-			return breakChoice.isSelected();
+			return !detailOnlyChoice.equals(breakChoice.getSelectedItem());
+		}
+		
+		public boolean getHideDetail()
+		{
+			return breaksOnlyChoice.equals(breakChoice.getSelectedItem());
 		}
 
 		public void actionPerformed(ActionEvent e)
@@ -663,8 +683,11 @@ public class ActionMenuReports extends ActionPrint
 		UiPopUpTreeEditor[] sortChooser;
 		boolean hitOk;
 		UiButton okButton;
-		UiCheckBox breakChoice;
+		UiComboBox breakChoice;
 		private static Vector sortMiniSpecs;
+		ChoiceItem detailOnlyChoice;
+		ChoiceItem detailAndBreaksChoice;
+		ChoiceItem breaksOnlyChoice;
 	}
 
 	class ReportFormatFilter extends FileFilter

@@ -26,6 +26,7 @@ Boston, MA 02111-1307, USA.
 
 package org.martus.client.reports;
 
+import java.io.StringWriter;
 import java.io.Writer;
 import java.util.Arrays;
 import java.util.Vector;
@@ -101,7 +102,11 @@ public class ReportRunner
 			
 			context.put("i", new Integer(bulletin+1));
 			context.put("bulletin", safeReadableBulletin);
-			performMerge(rf.getDetailSection(), destination, context);
+			
+			Writer detailDestination = destination;
+			if(options.hideDetail)
+				detailDestination = new StringWriter();
+			performMerge(rf.getDetailSection(), detailDestination, context);
 			
 			for(int breakLevel = breakSpecs.length - 1; breakLevel >= 0; --breakLevel)
 			{

@@ -27,6 +27,12 @@ package org.martus.client.reports;
 
 public class RunReportOptions
 {
+	public RunReportOptions()
+	{
+		
+	}
+	
 	public boolean includePrivate;
+	public boolean hideDetail;
 	public boolean printBreaks;
 }

@@ -175,11 +175,8 @@ public class TestReportRunner extends TestCaseEnhanced
 	
 	public void testBreakSection() throws Exception
 	{
-		MockMartusApp app = MockMartusApp.create();
 		String sampleDate = "2004-06-19";
-		createAndSaveSampleBulletin(app, "a", "1", sampleDate);
-		createAndSaveSampleBulletin(app, "a", "2", sampleDate);
-		createAndSaveSampleBulletin(app, "b", "1", sampleDate);
+		MockMartusApp app = createAppWithBulletinsForBreaks(sampleDate);
 		ReportFormat rf = new ReportFormat();
 		String breakSection = "$BreakLevel had $BreakCount\n" +
 				"#foreach($x in [0..$BreakLevel])\n" +
@@ -190,6 +187,7 @@ public class TestReportRunner extends TestCaseEnhanced
 		
 		RunReportOptions options = new RunReportOptions();
 		options.includePrivate = true;
+		options.hideDetail = false;
 		options.printBreaks = true;
 		
 		MiniLocalization localization = new MiniLocalization();
@@ -216,6 +214,36 @@ public class TestReportRunner extends TestCaseEnhanced
 		
 		options.printBreaks = false;
 		assertEquals("Still had output?", "", runReportOnAppData(rf, app, options));
+	}
+
+	private MockMartusApp createAppWithBulletinsForBreaks(String sampleDate) throws Exception
+	{
+		MockMartusApp app = MockMartusApp.create();
+		createAndSaveSampleBulletin(app, "a", "1", sampleDate);
+		createAndSaveSampleBulletin(app, "a", "2", sampleDate);
+		createAndSaveSampleBulletin(app, "b", "1", sampleDate);
+		return app;
+	}
+	
+	public void testOmitDetail() throws Exception
+	{
+		String sampleDate = "2004-06-19";
+		MockMartusApp app = createAppWithBulletinsForBreaks(sampleDate);
+		RunReportOptions options = new RunReportOptions();
+		options.includePrivate = true;
+		options.printBreaks = true;
+		
+		ReportFormat rf = new ReportFormat();
+		rf.setDetailSection("Detail ");
+		rf.setBreakSection("Break ");
+		
+		String sortByAuthorSummaryWithDetail = runReportOnAppData(rf, app, options);
+		assertEquals("Detail Break Detail Break Break Detail Break Break ", sortByAuthorSummaryWithDetail);
+		
+		options.hideDetail = true;
+		String sortByAuthorSummaryWithoutDetail = runReportOnAppData(rf, app, options);
+		assertEquals("Break Break Break Break Break ", sortByAuthorSummaryWithoutDetail);
+		
 	}
 
 	private void createAndSaveSampleBulletin(MockMartusApp app, String author, String summary, String entryDate) throws Exception
