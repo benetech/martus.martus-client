@@ -605,6 +605,11 @@ public class ActionMenuReports extends ActionPrint
 			};
 			breakChoice = new UiComboBox(breakChoices);
 
+			if(savedBreakChoice == null)
+				breakChoice.setSelectedIndex(0);
+			else
+				breakChoice.setSelectedItem(savedBreakChoice);
+				
 			Box mainArea = Box.createVerticalBox();
 			mainArea.add(multiSortBox);
 			mainArea.add(breakChoice);
@@ -648,6 +653,7 @@ public class ActionMenuReports extends ActionPrint
 				
 				System.out.println("ActionMenuReport.getSortTags: " + spec);
 			}
+			savedBreakChoice = (ChoiceItem)breakChoice.getSelectedItem();
 		}
 		
 		public MiniFieldSpec[] getSelecteMiniFieldSpecs() throws Exception
@@ -684,10 +690,12 @@ public class ActionMenuReports extends ActionPrint
 		boolean hitOk;
 		UiButton okButton;
 		UiComboBox breakChoice;
-		private static Vector sortMiniSpecs;
 		ChoiceItem detailOnlyChoice;
 		ChoiceItem detailAndBreaksChoice;
 		ChoiceItem breaksOnlyChoice;
+
+		private static Vector sortMiniSpecs;
+		private static ChoiceItem savedBreakChoice;
 	}
 
 	class ReportFormatFilter extends FileFilter
