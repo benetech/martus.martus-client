@@ -111,7 +111,7 @@ public class UiPrintBulletinDlg extends JDialog implements ActionListener
 		mainPanel.add(privacyPanel,BorderLayout.NORTH);
 		mainPanel.add(new UiLabel(" "), BorderLayout.CENTER);
 		Box buttons = Box.createHorizontalBox();
-		Utilities.addComponentsRespectingOrientation(buttons, new Component[] {ok, Box.createHorizontalGlue(),cancel});
+		Utilities.addComponentsRespectingOrientation(buttons, new Component[] {Box.createHorizontalGlue(), ok, cancel});
 		mainPanel.add(destinationPanel, BorderLayout.SOUTH);
 
 		getContentPane().setLayout(new BorderLayout());
