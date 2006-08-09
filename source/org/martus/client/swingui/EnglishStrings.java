@@ -905,7 +905,7 @@ public class EnglishStrings
 	"You need to put spaces before and after any #Or# / #And# keywords you use in your search.\n", 
 "field:SearchFound=#NumberBulletinsFound# bulletins matched the search, and have been added to the Search Results folder.",
 "field:ReportFound=#NumberBulletinsFound# bulletins matched the search.",
-"field:ReportChooseSortFields=Choose how the bulletins will be sorted in the output. The bulletins will be ordered by the first field chosen. When two bulletins have the same value in that field, they will be sorted by the next sort field, and so on.",
+"field:ReportChooseSortFields=Choose how the bulletins will be sorted in the report. The bulletins will be ordered by the first field chosen. When two bulletins have the same value in that field, they will be sorted by the next sort field, and so on.",
 "field:ReportFieldError=*Error retrieving field*",
 "field:ReportDetailOnly=Print Bulletin Information",
 "field:ReportDetailWithSummaries=Print Bulletin Information and Summary Counts",
