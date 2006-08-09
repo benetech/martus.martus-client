@@ -757,7 +757,7 @@ public class EnglishStrings
 "field:notifyRetrieveFileErrorcause=An error has prevented Martus from continuing the retrieve that was in progress. You should re-select any bulletins that had not yet been retrieved.",
 "field:notifyNoGridRowSelectedcause=No row selected.",
 "field:notifyImportCompletecause=Import complete.  Imported #BulletinsSuccessfullyImported# of #TotalBulletinsToImport# bulletins into folder: #ImportFolder#",
-"field:notifyErrorImportingBulletinscause=There was an error importing bulletings into Martus.  Not all bulletins were imported.",
+"field:notifyErrorImportingBulletinscause=There was an error importing bulletins into Martus.  Not all bulletins were imported.",
 "field:notifyNoImportFileSpecifiedcause=No folder specified.  You must enter a folder you wish the files to be imported into.  This folder can already exist in the system, or can be a new folder.",
 "field:notifyImportMissingAttachmentscause=Not all attachments were imported.  The following bulletins had problems importing these attachments.\n\n#ImportMissingAttachments#",
 "field:notifyImportBulletinsNotImportedcause=Not all bulletins were imported.  The following bulletins had problems during import.\n\n#ImportBulletinsNotImported#",
