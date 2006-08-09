@@ -26,6 +26,9 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.swingui.fields;
 
 import java.awt.Dimension;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JComponent;
@@ -43,10 +46,15 @@ public class UiDateEditorComponent extends Box
 		allowFuture = allowFutureDates;
 		
 		yearCombo = createYearCombo();
-		monthCombo = createMonthCombo();
-		dayCombo = createDayCombo();
+		monthCombo = new UiComboBox();
+		dayCombo = new UiComboBox();
+		
+		configureMonthCombo();
+		configureDayCombo();
 	
 		addComponentsToBox();
+		
+		yearCombo.addItemListener(new YearChangeListener());
 	}
 
 	private UiComboBox createYearCombo()	
@@ -76,6 +84,16 @@ public class UiDateEditorComponent extends Box
 		
 		yCombo.setSelectedIndex(0);
 		return yCombo;
+	}
+	
+	class YearChangeListener implements ItemListener
+	{
+		public void itemStateChanged(ItemEvent e)
+		{
+			configureMonthCombo();
+			configureDayCombo();
+		}
+		
 	}
 	
 	static class YearObject
@@ -127,17 +145,39 @@ public class UiDateEditorComponent extends Box
 		String label;
 	}
 	
-	private UiComboBox createMonthCombo()
+	private boolean isUnknownYearSelected()
 	{
-		return new UiComboBox(localization.getMonthLabels());
+		return (yearCombo.getSelectedIndex() == 0);
 	}
 	
-	private UiComboBox createDayCombo()
+	void configureMonthCombo()
 	{
-		UiComboBox dCombo = new UiComboBox();
+		boolean shouldBeEnabled = true;
+		monthCombo.removeAllItems();
+		if(isUnknownYearSelected())
+		{
+			monthCombo.addItem("?");
+			shouldBeEnabled = false;
+		}
+		String[] months = localization.getMonthLabels();
+		for(int i = 0; i < months.length; ++i)
+			monthCombo.addItem(months[i]);
+		monthCombo.setEnabled(shouldBeEnabled);
+	}
+	
+	void configureDayCombo()
+	{
+		boolean shouldBeEnabled = true;
+		dayCombo.removeAllItems();
+		if(isUnknownYearSelected())
+		{
+			dayCombo.addItem("?");
+			shouldBeEnabled = false;
+		}
 		for(int day=1; day <= 31; ++day)
-			dCombo.addItem(new Integer(day).toString());
-		return dCombo;
+			dayCombo.addItem(new Integer(day).toString());
+		dayCombo.setEnabled(shouldBeEnabled);
+			
 	}
 	
 	private void addComponentsToBox()
@@ -186,7 +226,7 @@ public class UiDateEditorComponent extends Box
 	{
 		YearObject yearObject = (YearObject)yearCombo.getSelectedItem();
 		if(yearObject.isUnknown())
-			return createUnknownDateMultiCalendar();
+			return MultiCalendar.UNKNOWN;
 		
 		int year = yearObject.getYear();
 		int month = monthCombo.getSelectedIndex()+1;
@@ -195,19 +235,11 @@ public class UiDateEditorComponent extends Box
 		return localization.createCalendarFromLocalizedYearMonthDay(year, month, day);
 	}
 
-	private MultiCalendar createUnknownDateMultiCalendar()
-	{
-		return MultiCalendar.createFromGregorianYearMonthDay(0, 1, 1);
-	}
-
 	public void setStoredDateText(String newText)
 	{
 		try
 		{
 			MultiCalendar cal = localization.createCalendarFromIsoDateString(newText);
-			if(cal.getGregorianYear() == MultiCalendar.YEAR_NOT_SPECIFIED)
-				setUnknownDate();
-			
 			setDate(cal);
 		}
 		catch(Exception e)
@@ -218,13 +250,27 @@ public class UiDateEditorComponent extends Box
 	
 	private void setUnknownDate()
 	{
-		yearCombo.setSelectedIndex(0);
-		monthCombo.setSelectedIndex(0);
-		dayCombo.setSelectedIndex(0);
+		try
+		{
+			yearCombo.setSelectedIndex(0);
+			monthCombo.setSelectedIndex(0);
+			dayCombo.setSelectedIndex(0);
+		}
+		catch(RuntimeException e)
+		{
+			e.printStackTrace();
+			throw(e);
+		}
 	}
 
 	public void setDate(MultiCalendar cal)
 	{
+		if(cal.getGregorianYear() == MultiCalendar.YEAR_NOT_SPECIFIED)
+		{
+			setUnknownDate();
+			return;
+		}
+		
 		yearCombo.setSelectedItem(new YearObject(localization.getLocalizedYear(cal)));
 		monthCombo.setSelectedIndex((localization.getLocalizedMonth(cal) - 1));
 		dayCombo.setSelectedIndex((localization.getLocalizedDay(cal) - 1));
