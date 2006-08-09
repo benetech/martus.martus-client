@@ -71,7 +71,7 @@ public class SearchFieldTreeNode extends DefaultMutableTreeNode
 		
 		SearchableFieldChoiceItem choice = getChoiceItem();
 		String type = localization.getFieldLabel("FieldType" + choice.getType().getTypeName());
-		return type + ": " + choice.getSpec().getTag();
+		return choice.getSpec().getTag()+ ": " + type;
 			
 	}
 	
