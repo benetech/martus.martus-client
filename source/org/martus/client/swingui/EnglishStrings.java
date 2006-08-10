@@ -529,6 +529,8 @@ public class EnglishStrings
 "field:DefaultPrintToDiskFileName=bulletins.html",
 "wintitle:notifyPrintToDiskComplete=Print To Report File",
 "field:notifyPrintToDiskCompletecause=Successfully saved Report",
+"wintitle:notifyPrintCompleted=Reports",
+"field:notifyPrintCompletedcause=Printing Complete",
 
 "wintitle:IncludePrivateData=Include Private Data",
 "field:IncludePrivateData=#TotalBulletins# bulletins were selected for printing.  #AllPrivateBulletins# of them are all private.\n What would you like to include when printing?",
