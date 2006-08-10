@@ -270,7 +270,7 @@ public class ActionMenuReports extends ActionPrint
 		
 		boolean didPrint;
 		if(sendToDisk)
-			didPrint = printToDisk(rf, sortableList, options);				
+			didPrint = printToDisk(textToPrint);				
 		else
 			didPrint = printToPrinter(textToPrint);
 			
@@ -292,14 +292,14 @@ public class ActionMenuReports extends ActionPrint
 		return numberOfAllPrivate;
 	}
 
-	boolean printToDisk(ReportFormat rf, SortableBulletinList list, RunReportOptions options) throws Exception
+	boolean printToDisk(String textToWrite) throws Exception
 	{
 		File destFile = chooseDestinationFile();
 		if(destFile == null)
 			return false;
 
 		UnicodeWriter destination = new UnicodeWriter(destFile);
-		printToWriter(destination, rf, list, options);
+		destination.write(textToWrite);
 		destination.close();
 		return true;
 	}
