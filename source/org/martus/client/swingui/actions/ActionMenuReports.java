@@ -332,16 +332,16 @@ public class ActionMenuReports extends ActionPrint
 		
 		UiLabel previewText = new UiLabel(writer.toString());
 		JComponent scrollablePreview = new JScrollPane(previewText);
-		boolean doPreview = true;
+		boolean doPreview = false;
 		
-		if(doPreview)
 		{
 			JDialog previewDlg = new JDialog(mainWindow);
 			previewDlg.getContentPane().add(scrollablePreview);
 			previewDlg.setModal(true);
 			previewDlg.pack();
 			Utilities.centerDlg(previewDlg);
-			previewDlg.setVisible(true);
+			if(doPreview)
+				previewDlg.setVisible(true);
 		}
 		
 		PrintUtilities.printComponent(previewText);
