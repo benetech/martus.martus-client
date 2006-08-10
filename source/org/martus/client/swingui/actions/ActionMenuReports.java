@@ -248,16 +248,16 @@ public class ActionMenuReports extends ActionPrint
 		if (!dlg.wasContinueButtonPressed())
 			return;			
 		
-		boolean includePrivateData = dlg.wantsPrivateData();
-
-		options.includePrivate = includePrivateData;
-
-		for(int i = 0; i < unsortedPartialBulletins.length; ++i)
+		options.includePrivate = dlg.wantsPrivateData();
+		if(!options.includePrivate)
 		{
-			PartialBulletin pb = unsortedPartialBulletins[i];
-			boolean isAllPrivate = FieldSpec.TRUESTRING.equals(pb.getData(Bulletin.PSEUDOFIELD_ALL_PRIVATE));
-			if(isAllPrivate && !includePrivateData)
-				sortableList.remove(pb);
+			for(int i = 0; i < unsortedPartialBulletins.length; ++i)
+			{
+				PartialBulletin pb = unsortedPartialBulletins[i];
+				boolean isAllPrivate = FieldSpec.TRUESTRING.equals(pb.getData(Bulletin.PSEUDOFIELD_ALL_PRIVATE));
+				if(isAllPrivate)
+					sortableList.remove(pb);
+			}
 		}
 		
 		//TODO: Implement new Preview with Printo to Printer/Disk/Cancel
