@@ -46,6 +46,7 @@ import org.martus.client.search.TestFieldChooserSpecBuilder;
 import org.martus.client.search.TestSearchParser;
 import org.martus.client.search.TestSearchTreeNode;
 import org.martus.client.swingui.grids.TestGridTableModel;
+import org.martus.common.utilities.TestMartusFlexidate;
 
 public class TestClient
 {

@@ -182,9 +182,11 @@ public class UiFlexiDateEditor extends UiField
 	public void validate() throws UiField.DataInvalidException 
 	{
 		
+		MultiCalendar begin = getBeginDate();
 		if(isFlexiDate())
 		{
-			if(getEndDate().before(getBeginDate()))
+			MultiCalendar end = getEndDate();
+			if(begin.isDefinitelyAfter(end))
 			{
 				bgDateBox.requestFocus();
 				throw new DateRangeInvertedException();
@@ -195,14 +197,15 @@ public class UiFlexiDateEditor extends UiField
 			return;		
 		
 		MultiCalendar today = new MultiCalendar();
-		if (getBeginDate().after(today))
+		if(begin.isDefinitelyAfter(today))
 		{
 			bgDateBox.requestFocus();	
 			throw new UiDateEditor.DateFutureException();
 		}
-		if (isFlexiDate())
+		if(isFlexiDate())
 		{		
-			if (getEndDate().after(today))
+			MultiCalendar end = getEndDate();
+			if (end.isDefinitelyAfter(today))
 			{
 				bgDateBox.requestFocus();	
 				throw new UiDateEditor.DateFutureException();				
@@ -227,9 +230,6 @@ public class UiFlexiDateEditor extends UiField
 			return MartusFlexidate.toStoredDateFormat(beginDate);
 		
 		MultiCalendar endDate = getEndDate();
-		if(endDate.getGregorianYear() == MultiCalendar.YEAR_NOT_SPECIFIED)
-			return MartusFlexidate.toStoredDateFormat(beginDate);
-		
 		return MartusFlexidate.toBulletinFlexidateFormat(beginDate, endDate);
 	}
 
