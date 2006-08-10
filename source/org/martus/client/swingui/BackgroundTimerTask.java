@@ -111,7 +111,7 @@ class BackgroundTimerTask extends TimerTask
 			progressMeter.setStatusMessage(UiMainWindow.STATUS_RETRIEVING);
 			doRetrieving();
 			if(!retriever.hasWorkToDo())
-			SwingUtilities.invokeLater(new ThreadedNotifyDlg("RetrieveCompleted"));
+				SwingUtilities.invokeLater(new ThreadedNotifyDlg("RetrieveCompleted"));
 			
 			return;
 		}
