@@ -251,7 +251,7 @@ public class ActionMenuReports extends ActionPrint
 		boolean includePrivateData = dlg.wantsPrivateData();
 
 		//TODO: Implement new Preview with Printo to Printer/Disk/Cancel
-		boolean sendToDisk = false;//dlg.wantsToPrintToDisk();
+		boolean sendToDisk = true;//dlg.wantsToPrintToDisk();
 		
 		options.includePrivate = includePrivateData;
 
