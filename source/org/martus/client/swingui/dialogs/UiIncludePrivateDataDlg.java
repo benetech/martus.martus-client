@@ -94,7 +94,7 @@ public class UiIncludePrivateDataDlg extends JDialog implements ActionListener
 	
 	public boolean wasCancelButtonPressed()
 	{
-		return pressCancel;
+		return pressedCancel;
 	}
 	
 	public void actionPerformed(ActionEvent ae)
@@ -102,12 +102,12 @@ public class UiIncludePrivateDataDlg extends JDialog implements ActionListener
 		if(ae.getSource().equals(publicAndPrivate))
 		{
 			includePrivateData = true;
-			pressCancel = false;
+			pressedCancel = false;
 		}
 		if(ae.getSource().equals(publicOnly))
 		{
 			includePrivateData = false;
-			pressCancel = false;
+			pressedCancel = false;
 		}
 		dispose();
 	}
@@ -118,5 +118,5 @@ public class UiIncludePrivateDataDlg extends JDialog implements ActionListener
 	JButton cancel;
 
 	boolean includePrivateData = false;
-	boolean pressCancel = true;
+	boolean pressedCancel = true;
 }

@@ -84,7 +84,7 @@ public class UiPrintPreviewDlg extends JDialog implements ActionListener
 	
 	public boolean wasCancelButtonPressed()
 	{
-		return pressCancel;
+		return pressedCancel;
 	}
 	
 	public void actionPerformed(ActionEvent ae)
@@ -92,12 +92,12 @@ public class UiPrintPreviewDlg extends JDialog implements ActionListener
 		if(ae.getSource().equals(printToPrinter))
 		{
 			printToDisk = false;
-			pressCancel = false;
+			pressedCancel = false;
 		}
 		if(ae.getSource().equals(printToFile))
 		{
 			printToDisk = true;
-			pressCancel = false;
+			pressedCancel = false;
 		}
 		dispose();
 	}
@@ -108,7 +108,7 @@ public class UiPrintPreviewDlg extends JDialog implements ActionListener
 	JButton cancel;
 
 	boolean printToDisk = false;
-	boolean pressCancel = true;
+	boolean pressedCancel = true;
 	
 	
 }

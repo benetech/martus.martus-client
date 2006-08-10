@@ -31,7 +31,6 @@ import java.awt.Container;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
-import java.io.IOException;
 import java.io.StringWriter;
 import java.io.Writer;
 import java.util.Vector;
@@ -257,9 +256,13 @@ public class ActionMenuReports extends ActionPrint
 					sortableList.remove(pb);
 			}
 		}
-		
-		String textToPreview = getTextFromList(rf, sortableList, options);
-		UiPrintPreviewDlg printPreview = new UiPrintPreviewDlg(mainWindow, textToPreview);
+
+		StringWriter writer = new StringWriter();
+		printToWriter(writer, rf, sortableList, options);
+		writer.close();
+		String textToPrint = writer.toString();
+
+		UiPrintPreviewDlg printPreview = new UiPrintPreviewDlg(mainWindow, textToPrint);
 		printPreview.setVisible(true);		
 		if(printPreview.wasCancelButtonPressed())
 			return;			
@@ -269,21 +272,13 @@ public class ActionMenuReports extends ActionPrint
 		if(sendToDisk)
 			didPrint = printToDisk(rf, sortableList, options);				
 		else
-			didPrint = printToPrinter(rf, sortableList, options);
+			didPrint = printToPrinter(textToPrint);
 			
 		if(didPrint)
 			mainWindow.notifyDlg("PrintCompleted");
 			
 	}
 
-	private String getTextFromList(ReportFormat rf, SortableBulletinList sortableList, RunReportOptions options) throws Exception, IOException
-	{
-		StringWriter writer = new StringWriter();
-		printToWriter(writer, rf, sortableList, options);
-		writer.close();
-		return writer.toString();
-	}
-	
 	private int getNumberOfAllPrivateBulletins(PartialBulletin[] sortedPartialBulletins)
 	{
 		int numberOfAllPrivate = 0;
@@ -340,9 +335,9 @@ public class ActionMenuReports extends ActionPrint
 		mainWindow.doBackgroundWork(worker, "BackgroundPrinting");
 	}
 	
-	boolean printToPrinter(ReportFormat rf, SortableBulletinList list, RunReportOptions options) throws Exception
+	boolean printToPrinter(String textToPrint) throws Exception
 	{
-		UiLabel previewText = new UiLabel(getTextFromList(rf, list, options));
+		UiLabel previewText = new UiLabel(textToPrint);
 		//Java bug: you have to set the size of the component first before printing
 		previewText.setSize(previewText.getPreferredSize());
 		PrintUtilities.printComponent(previewText);
