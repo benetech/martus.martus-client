@@ -38,6 +38,7 @@ public class ReportFormat
 		setDetailSection("");
 		setBreakSection("");
 		setEndSection("");
+		setBulletinPerPage(false);
 		version = 0;
 	}
 	
@@ -49,6 +50,7 @@ public class ReportFormat
 		setDetailSection(json.getString(TAG_DETAIL_SECTION));
 		setBreakSection(json.optString(TAG_BREAK_SECTION, ""));
 		setEndSection(json.getString(TAG_END_SECTION));
+		setBulletinPerPage(json.optBoolean(TAG_BULLETIN_PER_PAGE));
 	}
 	
 	public int getVersion()
@@ -106,6 +108,16 @@ public class ReportFormat
 		return headerSection;
 	}
 	
+	public void setBulletinPerPage(boolean newSetting)
+	{
+		bulletinPerPage = newSetting;
+	}
+	
+	public boolean getBulletinPerPage()
+	{
+		return bulletinPerPage;
+	}
+	
 	public JSONObject toJson()
 	{
 		JSONObject json = new JSONObject();
@@ -115,6 +127,7 @@ public class ReportFormat
 		json.put(TAG_END_SECTION, getEndSection());
 		json.put(TAG_BREAK_SECTION, getBreakSection());
 		json.put(TAG_HEADER_SECTION, getHeaderSection());
+		json.put(TAG_BULLETIN_PER_PAGE, getBulletinPerPage());
 		return json;
 	}
 	
@@ -124,8 +137,9 @@ public class ReportFormat
 	final static String TAG_END_SECTION = "EndSection";
 	final static String TAG_BREAK_SECTION = "BreakSection";
 	final static String TAG_HEADER_SECTION = "HeaderSection";
+	final static String TAG_BULLETIN_PER_PAGE = "BulletinPerPage";
 	
-	public final static int EXPECTED_VERSION = 4;
+	public final static int EXPECTED_VERSION = 5;
 
 	private int version;
 	private String startSection;
@@ -133,4 +147,5 @@ public class ReportFormat
 	private String detailSection;
 	private String breakSection;
 	private String endSection;
+	private boolean bulletinPerPage;
 }

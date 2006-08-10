@@ -256,6 +256,7 @@ public class TestReportRunner extends TestCaseEnhanced
 		b.set(Bulletin.TAGENTRYDATE, entryDate);
 		app.saveBulletin(b, outbox);
 	}
+	
 	public void testEndSection() throws Exception
 	{
 		ReportFormat rf = new ReportFormat();
@@ -263,6 +264,43 @@ public class TestReportRunner extends TestCaseEnhanced
 		rf.setEndSection(endSection);
 		String result = runReportOnSampleData(rf);
 		assertEquals("didn't output end section just once?", endSection, result);
+	}
+	
+	public void testPageReport() throws Exception
+	{
+		MockMartusApp app = MockMartusApp.create();
+		FieldSpec[] topFields = {
+			FieldSpec.createCustomField("tag1", "Label 1", new FieldTypeNormal()),
+			FieldSpec.createCustomField("tag2", "Label 2", new FieldTypeDate()),
+		};
+		Bulletin b = new Bulletin(app.getSecurity(), topFields, StandardFieldSpecs.getDefaultBottomSectionFieldSpecs());
+		b.set(topFields[0].getTag(), "First");
+		b.set(topFields[1].getTag(), "2005-04-07");
+		b.set(Bulletin.TAGPRIVATEINFO, "Secret");
+		app.saveBulletin(b, app.getFolderDraftOutbox());
+		
+
+		ReportFormat rf = new ReportFormat();
+		rf.setBulletinPerPage(true);
+		rf.setDetailSection("TOP:\n" +
+				"#foreach($field in $bulletin.getTopFields())\n" +
+				"$field.getLocalizedLabel($localization) $field.html($localization)\n" +
+				"#end\n" +
+				"BOTTOM:\n" +
+				"#foreach($field in $bulletin.getBottomFields())\n" +
+				"$field.getLocalizedLabel($localization) $field.html($localization)\n" +
+				"#end\n" +
+				"");
+		String expected = "TOP:\n" +
+				"Label 1 First\n" +
+				"Label 2 04/07/2005\n" +
+				"BOTTOM:\n" +
+				"<field:privateinfo> Secret\n";
+		
+		RunReportOptions options = new RunReportOptions();
+		options.includePrivate = true;
+		String result = runReportOnAppData(rf, app, options);
+		assertEquals("Wrong page report output?", expected, result);
 	}
 	
 	private String runReportOnSampleData(ReportFormat rf) throws Exception

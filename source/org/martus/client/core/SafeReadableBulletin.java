@@ -28,6 +28,7 @@ package org.martus.client.core;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Vector;
 
 import org.martus.common.MiniLocalization;
 import org.martus.common.bulletin.Bulletin;
@@ -201,6 +202,24 @@ public class SafeReadableBulletin
 	public static String[] parseNestedTags(String tagsToParse)
 	{
 		return tagsToParse.split("\\.");
+	}
+	
+	public Vector getTopFields()
+	{
+		return getSectionFields(realBulletin.getTopSectionFieldSpecs());
+	}
+	
+	public Vector getBottomFields()
+	{
+		return getSectionFields(realBulletin.getBottomSectionFieldSpecs());
+	}
+	
+	private Vector getSectionFields(FieldSpec[] specs)
+	{
+		Vector fields = new Vector();
+		for(int i = 0; i < specs.length; ++i)
+			fields.add(field(new MiniFieldSpec(specs[i])));
+		return fields;
 	}
 
 	Bulletin realBulletin;
