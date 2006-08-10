@@ -330,18 +330,21 @@ public class ActionMenuReports extends ActionPrint
 		printToWriter(writer, rf, list, options);
 		writer.close();
 		
+		//Java bug: you have to set the size of the component first before printing
 		UiLabel previewText = new UiLabel(writer.toString());
-		//Java bug: you have to render the component in order for it to print for some reason
-		JComponent scrollablePreview = new JScrollPane(previewText);
-		JDialog previewDlg = new JDialog(mainWindow);
-		previewDlg.getContentPane().add(scrollablePreview);
-		previewDlg.setModal(true);
-		previewDlg.pack();
-		Utilities.centerDlg(previewDlg);
-
+		previewText.setSize(previewText.getPreferredSize());
+			
 		boolean doPreview = false;
 		if(doPreview)
+		{
+			JComponent scrollablePreview = new JScrollPane(previewText);
+			JDialog previewDlg = new JDialog(mainWindow);
+			previewDlg.getContentPane().add(scrollablePreview);
+			previewDlg.setModal(true);
+			previewDlg.pack();
+			Utilities.centerDlg(previewDlg);
 			previewDlg.setVisible(true);
+		}
 		
 		PrintUtilities.printComponent(previewText);
 	}
