@@ -34,7 +34,6 @@ import java.io.File;
 import java.io.StringWriter;
 import java.io.Writer;
 import java.util.Vector;
-
 import javax.swing.Box;
 import javax.swing.JComponent;
 import javax.swing.JDialog;
@@ -43,7 +42,6 @@ import javax.swing.JScrollPane;
 import javax.swing.event.TableModelListener;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.table.TableModel;
-
 import org.json.JSONObject;
 import org.martus.client.core.PartialBulletin;
 import org.martus.client.core.SortableBulletinList;
@@ -57,7 +55,7 @@ import org.martus.client.search.SortFieldChooserSpecBuilder;
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.WorkerThread;
-import org.martus.client.swingui.dialogs.UiPrintBulletinDlg;
+import org.martus.client.swingui.dialogs.UiIncludePrivateDataDlg;
 import org.martus.client.swingui.fields.UiPopUpTreeEditor;
 import org.martus.clientside.UiLocalization;
 import org.martus.common.MiniLocalization;
@@ -244,14 +242,16 @@ public class ActionMenuReports extends ActionPrint
 //		mainWindow.showNumberOfBulletinsFound(bulletinsMatched, "ReportFound");
 
 		PartialBulletin[] unsortedPartialBulletins = sortableList.getUnsortedPartialBulletins();
-		boolean isAnyBulletinAllPrivate = areAnyBulletinsAllPrivate(unsortedPartialBulletins);
-		UiPrintBulletinDlg dlg = new UiPrintBulletinDlg(mainWindow, isAnyBulletinAllPrivate);
+		int allPrivateBulletinCount = getNumberOfAllPrivateBulletins(unsortedPartialBulletins);
+		UiIncludePrivateDataDlg dlg = new UiIncludePrivateDataDlg(mainWindow, unsortedPartialBulletins.length, allPrivateBulletinCount);
 		dlg.setVisible(true);		
 		if (!dlg.wasContinueButtonPressed())
 			return;			
 		
 		boolean includePrivateData = dlg.wantsPrivateData();
-		boolean sendToDisk = dlg.wantsToPrintToDisk();
+
+		//TODO: Implement new Preview with Printo to Printer/Disk/Cancel
+		boolean sendToDisk = false;//dlg.wantsToPrintToDisk();
 		
 		options.includePrivate = includePrivateData;
 
@@ -269,18 +269,17 @@ public class ActionMenuReports extends ActionPrint
 			printToPrinter(rf, sortableList, options);
 	}
 	
-	private boolean areAnyBulletinsAllPrivate(PartialBulletin[] sortedPartialBulletins)
+	private int getNumberOfAllPrivateBulletins(PartialBulletin[] sortedPartialBulletins)
 	{
-		boolean isAnyBulletinAllPrivate = false;
+		int numberOfAllPrivate = 0;
 		for(int i = 0; i < sortedPartialBulletins.length; ++i)
 		{
 			if(FieldSpec.TRUESTRING.equals(sortedPartialBulletins[i].getData(Bulletin.PSEUDOFIELD_ALL_PRIVATE)))
 			{
-				isAnyBulletinAllPrivate = true;
-				break;
+				++numberOfAllPrivate;
 			}
 		}
-		return isAnyBulletinAllPrivate;
+		return numberOfAllPrivate;
 	}
 
 	void printToDisk(ReportFormat rf, SortableBulletinList list, RunReportOptions options) throws Exception
@@ -333,7 +332,7 @@ public class ActionMenuReports extends ActionPrint
 		
 		UiLabel previewText = new UiLabel(writer.toString());
 		JComponent scrollablePreview = new JScrollPane(previewText);
-		boolean doPreview = false;
+		boolean doPreview = true;
 		
 		if(doPreview)
 		{
@@ -353,7 +352,7 @@ public class ActionMenuReports extends ActionPrint
 		while(true)
 		{
 			ChooseTabularReportFieldsDialog dlg = new ChooseTabularReportFieldsDialog(mainWindow);
-			dlg.show();
+			dlg.setVisible(true);
 			FieldSpec[] selectedSpecs = dlg.getSelectedSpecs();
 			if(selectedSpecs == null)
 				return null;
@@ -623,6 +622,7 @@ public class ActionMenuReports extends ActionPrint
 			Component[] buttons = new Component[] {Box.createHorizontalGlue(), okButton, cancelButton};
 			Utilities.addComponentsRespectingOrientation(buttonBar, buttons);
 			contentPane.add(buttonBar, BorderLayout.AFTER_LAST_LINE);
+			getRootPane().setDefaultButton(okButton);
 			
 			pack();
 			Utilities.centerDlg(this);

@@ -530,6 +530,11 @@ public class EnglishStrings
 "wintitle:notifyPrintToDiskComplete=Print To Report File",
 "field:notifyPrintToDiskCompletecause=Successfully saved Report",
 
+"wintitle:IncludePrivateData=Include Private Data",
+"field:IncludePrivateData=#TotalBulletins# bulletins were selected for printing.  #AllPrivateBulletins# of them are all private.\n Do you want to print private data?",
+"button:PublicAndPrivateData=Both Public and Private Data",
+"button:PublicOnly=Public Data Only",
+
 "field:VirtualUserNameDescription=(Enter using regular keyboard)",
 "field:VirtualPasswordDescription=Enter Password using mouse with on-screen keyboard below",
 "field:VirtualKeyboardKeys=ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890-+=!@#$%^&*()_,.[]{}<>\\/?|;:~",
