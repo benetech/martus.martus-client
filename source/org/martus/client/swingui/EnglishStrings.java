@@ -214,6 +214,9 @@ public class EnglishStrings
 "wintitle:notifyReportFormatIsOld=Reports",
 "wintitle:notifyReportFormatIsTooNew=Reports",
 
+"wintitle:notifyRetrieveCompleted=Retrieve Complete",
+"field:notifyRetrieveCompletedcause=Retrieving bulletins from the server is complete",
+
 "wintitle:inputservername=Server Name",
 "wintitle:inputserverpubliccode=Server Identification",
 "wintitle:inputservermagicword=Request Upload Permission",
