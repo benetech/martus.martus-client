@@ -250,9 +250,6 @@ public class ActionMenuReports extends ActionPrint
 		
 		boolean includePrivateData = dlg.wantsPrivateData();
 
-		//TODO: Implement new Preview with Printo to Printer/Disk/Cancel
-		boolean sendToDisk = true;//dlg.wantsToPrintToDisk();
-		
 		options.includePrivate = includePrivateData;
 
 		for(int i = 0; i < unsortedPartialBulletins.length; ++i)
@@ -263,8 +260,10 @@ public class ActionMenuReports extends ActionPrint
 				sortableList.remove(pb);
 		}
 		
-		boolean didPrint;
+		//TODO: Implement new Preview with Printo to Printer/Disk/Cancel
+		boolean sendToDisk = true;//dlg.wantsToPrintToDisk();
 		
+		boolean didPrint;
 		if(sendToDisk)
 			didPrint = printToDisk(rf, sortableList, options);				
 		else
