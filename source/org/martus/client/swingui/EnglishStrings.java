@@ -535,6 +535,11 @@ public class EnglishStrings
 "button:PublicAndPrivateData=Both Public and Private Data",
 "button:PublicOnly=Public Data Only",
 
+"wintitle:PrintPreview=Print Preview",
+"button:PrintToPrinter=Print To Printer",
+"button:PrintToFile=Print To File",
+
+
 "field:VirtualUserNameDescription=(Enter using regular keyboard)",
 "field:VirtualPasswordDescription=Enter Password using mouse with on-screen keyboard below",
 "field:VirtualKeyboardKeys=ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890-+=!@#$%^&*()_,.[]{}<>\\/?|;:~",

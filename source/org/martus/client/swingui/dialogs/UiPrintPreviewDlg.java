@@ -29,67 +29,57 @@ import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.HashMap;
 import javax.swing.Box;
 import javax.swing.JButton;
+import javax.swing.JComponent;
 import javax.swing.JDialog;
+import javax.swing.JScrollPane;
+import javax.swing.border.EmptyBorder;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.clientside.UiLocalization;
 import org.martus.swing.UiButton;
-import org.martus.swing.UiWrappedTextArea;
+import org.martus.swing.UiLabel;
 import org.martus.swing.Utilities;
-import org.martus.util.TokenReplacement;
-import org.martus.util.TokenReplacement.TokenInvalidException;
 
-public class UiIncludePrivateDataDlg extends JDialog implements ActionListener
+public class UiPrintPreviewDlg extends JDialog implements ActionListener
 {
-	public UiIncludePrivateDataDlg(UiMainWindow mainWindowToUse, int totalBulletins, int privateOnlyBulletins)
+	
+	public UiPrintPreviewDlg(UiMainWindow mainWindowToUse, String dataToPreview)
 	{
 		super(mainWindowToUse, "", true);
 		mainWindow = mainWindowToUse;
-		init(totalBulletins, privateOnlyBulletins);	
+		init(dataToPreview);	
 	}
 	
-	private void init(int totalBulletins, int privateOnlyBulletins)
+	private void init(String dataToPreview)
 	{
 		UiLocalization localization = mainWindow.getLocalization();
-		setTitle(localization.getWindowTitle("IncludePrivateData"));
+		setTitle(localization.getWindowTitle("PrintPreview"));
 		
-		publicAndPrivate = new UiButton(localization.getButtonLabel("PublicAndPrivateData"));
-		publicAndPrivate.addActionListener(this);		
-		publicOnly = new UiButton(localization.getButtonLabel("PublicOnly"));
-		publicOnly.addActionListener(this);		
+		printToPrinter = new UiButton(localization.getButtonLabel("PrintToPrinter"));
+		printToPrinter.addActionListener(this);		
+		printToFile = new UiButton(localization.getButtonLabel("PrintToFile"));
+		printToFile.addActionListener(this);		
 		cancel = new UiButton(localization.getButtonLabel("cancel"));
 		cancel.addActionListener(this);	
 		
-		HashMap tokenReplacement = new HashMap();
-		tokenReplacement.put("#TotalBulletins#", Integer.toString(totalBulletins));
-		tokenReplacement.put("#AllPrivateBulletins#", Integer.toString(privateOnlyBulletins));
-		
-		String message = localization.getFieldLabel("IncludePrivateData");
-		try
-		{
-			message = TokenReplacement.replaceTokens(message, tokenReplacement);
-		}
-		catch(TokenInvalidException e)
-		{
-			e.printStackTrace();
-		}		
-		
+		UiLabel previewText = new UiLabel(dataToPreview);
+		JComponent scrollablePreview = new JScrollPane(previewText);
+		scrollablePreview.setBorder(new EmptyBorder(5,5,5,5));
 		Box buttons = Box.createHorizontalBox();
-		Utilities.addComponentsRespectingOrientation(buttons, new Component[] {publicOnly,Box.createHorizontalGlue(), publicAndPrivate,Box.createHorizontalGlue(), cancel});
+		Utilities.addComponentsRespectingOrientation(buttons, new Component[] {printToFile,Box.createHorizontalGlue(), printToPrinter,Box.createHorizontalGlue(), cancel});
 
 		getContentPane().setLayout(new BorderLayout());
-		getContentPane().add(new UiWrappedTextArea(message, 40), BorderLayout.CENTER);
+		getContentPane().add(scrollablePreview, BorderLayout.CENTER);
 		getContentPane().add(buttons, BorderLayout.SOUTH);
-		getRootPane().setDefaultButton(publicAndPrivate);
+		getRootPane().setDefaultButton(printToPrinter);
 		Utilities.centerDlg(this);
 		setResizable(true);
 	}
 	
-	public boolean wantsPrivateData()
+	public boolean wantsPrintToDisk()
 	{
-		return includePrivateData;
+		return printToDisk;
 	}
 	
 	public boolean wasCancelButtonPressed()
@@ -99,24 +89,26 @@ public class UiIncludePrivateDataDlg extends JDialog implements ActionListener
 	
 	public void actionPerformed(ActionEvent ae)
 	{
-		if(ae.getSource().equals(publicAndPrivate))
+		if(ae.getSource().equals(printToPrinter))
 		{
-			includePrivateData = true;
+			printToDisk = false;
 			pressCancel = false;
 		}
-		if(ae.getSource().equals(publicOnly))
+		if(ae.getSource().equals(printToFile))
 		{
-			includePrivateData = false;
+			printToDisk = true;
 			pressCancel = false;
 		}
 		dispose();
 	}
 	
 	UiMainWindow mainWindow;	
-	JButton publicAndPrivate;
-	JButton publicOnly;
+	JButton printToPrinter;
+	JButton printToFile;
 	JButton cancel;
 
-	boolean includePrivateData = false;
+	boolean printToDisk = false;
 	boolean pressCancel = true;
+	
+	
 }

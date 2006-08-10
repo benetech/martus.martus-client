@@ -31,11 +31,11 @@ import java.awt.Container;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.io.IOException;
 import java.io.StringWriter;
 import java.io.Writer;
 import java.util.Vector;
 import javax.swing.Box;
-import javax.swing.JComponent;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -56,6 +56,7 @@ import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.WorkerThread;
 import org.martus.client.swingui.dialogs.UiIncludePrivateDataDlg;
+import org.martus.client.swingui.dialogs.UiPrintPreviewDlg;
 import org.martus.client.swingui.fields.UiPopUpTreeEditor;
 import org.martus.clientside.UiLocalization;
 import org.martus.common.MiniLocalization;
@@ -238,14 +239,11 @@ public class ActionMenuReports extends ActionPrint
 		options.printBreaks = sortDlg.getPrintBreaks();
 		options.hideDetail = sortDlg.getHideDetail();
 		
-// Do we really have to tell the user here? Would be better to include the count in the following dialog
-//		mainWindow.showNumberOfBulletinsFound(bulletinsMatched, "ReportFound");
-
 		PartialBulletin[] unsortedPartialBulletins = sortableList.getUnsortedPartialBulletins();
 		int allPrivateBulletinCount = getNumberOfAllPrivateBulletins(unsortedPartialBulletins);
 		UiIncludePrivateDataDlg dlg = new UiIncludePrivateDataDlg(mainWindow, unsortedPartialBulletins.length, allPrivateBulletinCount);
 		dlg.setVisible(true);		
-		if (!dlg.wasContinueButtonPressed())
+		if (dlg.wasCancelButtonPressed())
 			return;			
 		
 		options.includePrivate = dlg.wantsPrivateData();
@@ -260,8 +258,12 @@ public class ActionMenuReports extends ActionPrint
 			}
 		}
 		
-		//TODO: Implement new Preview with Printo to Printer/Disk/Cancel
-		boolean sendToDisk = true;//dlg.wantsToPrintToDisk();
+		String textToPreview = getTextFromList(rf, sortableList, options);
+		UiPrintPreviewDlg printPreview = new UiPrintPreviewDlg(mainWindow, textToPreview);
+		printPreview.setVisible(true);		
+		if(printPreview.wasCancelButtonPressed())
+			return;			
+		boolean sendToDisk = printPreview.wantsPrintToDisk();
 		
 		boolean didPrint;
 		if(sendToDisk)
@@ -272,6 +274,14 @@ public class ActionMenuReports extends ActionPrint
 		if(didPrint)
 			mainWindow.notifyDlg("PrintCompleted");
 			
+	}
+
+	private String getTextFromList(ReportFormat rf, SortableBulletinList sortableList, RunReportOptions options) throws Exception, IOException
+	{
+		StringWriter writer = new StringWriter();
+		printToWriter(writer, rf, sortableList, options);
+		writer.close();
+		return writer.toString();
 	}
 	
 	private int getNumberOfAllPrivateBulletins(PartialBulletin[] sortedPartialBulletins)
@@ -332,26 +342,9 @@ public class ActionMenuReports extends ActionPrint
 	
 	boolean printToPrinter(ReportFormat rf, SortableBulletinList list, RunReportOptions options) throws Exception
 	{
-		StringWriter writer = new StringWriter();
-		printToWriter(writer, rf, list, options);
-		writer.close();
-		
+		UiLabel previewText = new UiLabel(getTextFromList(rf, list, options));
 		//Java bug: you have to set the size of the component first before printing
-		UiLabel previewText = new UiLabel(writer.toString());
 		previewText.setSize(previewText.getPreferredSize());
-			
-		boolean doPreview = false;
-		if(doPreview)
-		{
-			JComponent scrollablePreview = new JScrollPane(previewText);
-			JDialog previewDlg = new JDialog(mainWindow);
-			previewDlg.getContentPane().add(scrollablePreview);
-			previewDlg.setModal(true);
-			previewDlg.pack();
-			Utilities.centerDlg(previewDlg);
-			previewDlg.setVisible(true);
-		}
-		
 		PrintUtilities.printComponent(previewText);
 		return true;
 	}
