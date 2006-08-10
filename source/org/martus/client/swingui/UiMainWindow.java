@@ -551,10 +551,10 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 			File lockFile = new File(app.getMartusDataRootDirectory(), "lock");
 			lockStream = new FileOutputStream(lockFile);
 			lockToPreventTwoInstances = lockStream.getChannel().tryLock();
+			lockFile.deleteOnExit();
 		}
 		catch (Exception e)
 		{
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		if(lockToPreventTwoInstances == null)
