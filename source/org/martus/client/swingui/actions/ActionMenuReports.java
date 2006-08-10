@@ -262,11 +262,17 @@ public class ActionMenuReports extends ActionPrint
 			if(isAllPrivate && !includePrivateData)
 				sortableList.remove(pb);
 		}
-
+		
+		boolean didPrint;
+		
 		if(sendToDisk)
-			printToDisk(rf, sortableList, options);
+			didPrint = printToDisk(rf, sortableList, options);				
 		else
-			printToPrinter(rf, sortableList, options);
+			didPrint = printToPrinter(rf, sortableList, options);
+			
+		if(didPrint)
+			mainWindow.notifyDlg("PrintCompleted");
+			
 	}
 	
 	private int getNumberOfAllPrivateBulletins(PartialBulletin[] sortedPartialBulletins)
@@ -282,15 +288,16 @@ public class ActionMenuReports extends ActionPrint
 		return numberOfAllPrivate;
 	}
 
-	void printToDisk(ReportFormat rf, SortableBulletinList list, RunReportOptions options) throws Exception
+	boolean printToDisk(ReportFormat rf, SortableBulletinList list, RunReportOptions options) throws Exception
 	{
 		File destFile = chooseDestinationFile();
 		if(destFile == null)
-			return;
-		
+			return false;
+
 		UnicodeWriter destination = new UnicodeWriter(destFile);
 		printToWriter(destination, rf, list, options);
 		destination.close();
+		return true;
 	}
 	
 	static class BackgroundPrinter extends WorkerThread
@@ -324,7 +331,7 @@ public class ActionMenuReports extends ActionPrint
 		mainWindow.doBackgroundWork(worker, "BackgroundPrinting");
 	}
 	
-	void printToPrinter(ReportFormat rf, SortableBulletinList list, RunReportOptions options) throws Exception
+	boolean printToPrinter(ReportFormat rf, SortableBulletinList list, RunReportOptions options) throws Exception
 	{
 		StringWriter writer = new StringWriter();
 		printToWriter(writer, rf, list, options);
@@ -347,6 +354,7 @@ public class ActionMenuReports extends ActionPrint
 		}
 		
 		PrintUtilities.printComponent(previewText);
+		return true;
 	}
 
 	FieldSpec[] askUserWhichFieldsToInclude()
