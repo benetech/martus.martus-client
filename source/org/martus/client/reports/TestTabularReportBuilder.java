@@ -51,10 +51,12 @@ public class TestTabularReportBuilder extends TestCaseEnhanced
 		
 		String startSection = rf.getStartSection();
 		assertStartsWith("<html>", startSection);
+		
+		String headerSection = rf.getHeaderSection();
 		for(int i = 0; i < specs.length; ++i)
 		{
 			String label = specs[i].getLabel();
-			assertContains("Missing " + label + "?", label, startSection);
+			assertContains("Missing " + label + "?", label, headerSection);
 		}
 		
 		String detailSection = rf.getDetailSection();

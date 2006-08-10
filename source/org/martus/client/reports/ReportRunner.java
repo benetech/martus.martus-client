@@ -26,7 +26,7 @@ Boston, MA 02111-1307, USA.
 
 package org.martus.client.reports;
 
-import java.io.StringWriter;
+import java.io.IOException;
 import java.io.Writer;
 import java.util.Arrays;
 import java.util.Vector;
@@ -61,6 +61,8 @@ public class ReportRunner
 	
 	public void runReport(ReportFormat rf, ReadableDatabase db, SortableBulletinList bulletins, Writer destination, RunReportOptions options) throws Exception
 	{
+		Writer nullWriter = new NullWriter();
+		
 		UniversalId[] uids = bulletins.getSortedUniversalIds();
 
 		Context context = new VelocityContext();
@@ -76,6 +78,12 @@ public class ReportRunner
 		Arrays.fill(breakCounts, 0);
 		
 		performMerge(rf.getStartSection(), destination, context);
+
+		Writer headerDestination = destination;
+		if(options.hideDetail)
+			headerDestination = nullWriter;
+		performMerge(rf.getHeaderSection(), headerDestination, context);
+
 		for(int bulletin = 0; bulletin < uids.length; ++bulletin)
 		{
 			DatabaseKey key = DatabaseKey.createLegacyKey(uids[bulletin]);
@@ -105,7 +113,7 @@ public class ReportRunner
 			
 			Writer detailDestination = destination;
 			if(options.hideDetail)
-				detailDestination = new StringWriter();
+				detailDestination = nullWriter;
 			performMerge(rf.getDetailSection(), detailDestination, context);
 			
 			for(int breakLevel = breakSpecs.length - 1; breakLevel >= 0; --breakLevel)
@@ -121,6 +129,21 @@ public class ReportRunner
 		performMerge(rf.getEndSection(), destination, context);
 	}
 
+	static class NullWriter extends Writer
+	{
+		public void close() throws IOException
+		{
+		}
+
+		public void flush() throws IOException
+		{
+		}
+
+		public void write(char[] cbuf, int off, int len) throws IOException
+		{
+		}
+	}
+	
 	private void performBreak(ReportFormat rf, Context context, Writer destination, MiniFieldSpec[] breakSpecs, String[] previousBreakValues, int breakLevel, int breakCount) throws Exception
 	{
 		BreakFields breakFields = new BreakFields();

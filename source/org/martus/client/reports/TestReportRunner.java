@@ -236,9 +236,10 @@ public class TestReportRunner extends TestCaseEnhanced
 		ReportFormat rf = new ReportFormat();
 		rf.setDetailSection("Detail ");
 		rf.setBreakSection("Break ");
+		rf.setHeaderSection("Header ");
 		
 		String sortByAuthorSummaryWithDetail = runReportOnAppData(rf, app, options);
-		assertEquals("Detail Break Detail Break Break Detail Break Break ", sortByAuthorSummaryWithDetail);
+		assertEquals("Header Detail Break Detail Break Break Detail Break Break ", sortByAuthorSummaryWithDetail);
 		
 		options.hideDetail = true;
 		String sortByAuthorSummaryWithoutDetail = runReportOnAppData(rf, app, options);

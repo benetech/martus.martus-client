@@ -34,6 +34,7 @@ public class ReportFormat
 	public ReportFormat()
 	{
 		setStartSection("");
+		setHeaderSection("");
 		setDetailSection("");
 		setBreakSection("");
 		setEndSection("");
@@ -44,6 +45,7 @@ public class ReportFormat
 	{
 		version = json.optInt(TAG_VERSION, 0);
 		setStartSection(json.getString(TAG_START_SECTION));
+		setHeaderSection(json.optString(TAG_HEADER_SECTION, ""));
 		setDetailSection(json.getString(TAG_DETAIL_SECTION));
 		setBreakSection(json.optString(TAG_BREAK_SECTION, ""));
 		setEndSection(json.getString(TAG_END_SECTION));
@@ -94,6 +96,16 @@ public class ReportFormat
 		return breakSection;
 	}
 	
+	public void setHeaderSection(String section)
+	{
+		headerSection = section;
+	}
+	
+	public String getHeaderSection()
+	{
+		return headerSection;
+	}
+	
 	public JSONObject toJson()
 	{
 		JSONObject json = new JSONObject();
@@ -102,6 +114,7 @@ public class ReportFormat
 		json.put(TAG_DETAIL_SECTION, getDetailSection());
 		json.put(TAG_END_SECTION, getEndSection());
 		json.put(TAG_BREAK_SECTION, getBreakSection());
+		json.put(TAG_HEADER_SECTION, getHeaderSection());
 		return json;
 	}
 	
@@ -110,11 +123,13 @@ public class ReportFormat
 	final static String TAG_DETAIL_SECTION = "DetailSection";
 	final static String TAG_END_SECTION = "EndSection";
 	final static String TAG_BREAK_SECTION = "BreakSection";
+	final static String TAG_HEADER_SECTION = "HeaderSection";
 	
-	public final static int EXPECTED_VERSION = 3;
+	public final static int EXPECTED_VERSION = 4;
 
 	private int version;
 	private String startSection;
+	private String headerSection;
 	private String detailSection;
 	private String breakSection;
 	private String endSection;

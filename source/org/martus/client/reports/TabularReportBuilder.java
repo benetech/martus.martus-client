@@ -40,6 +40,7 @@ public class TabularReportBuilder
 	{
 		ReportFormat rf = new ReportFormat();
 		rf.setStartSection(createStartSection(specs));
+		rf.setHeaderSection(createHeaderSection(specs));
 		rf.setDetailSection(createDetailSection(specs));
 		rf.setBreakSection(createBreakSection());
 		rf.setEndSection(createEndSection());
@@ -52,19 +53,25 @@ public class TabularReportBuilder
 		StringBuffer startBuffer = new StringBuffer();
 		startBuffer.append("<html>");
 		startBuffer.append("<table border='3' cellpadding='5' cellspacing='0'>");
-		startBuffer.append("<tr>");
+		return startBuffer.toString();
+	}
+
+	private String createHeaderSection(FieldSpec[] specs)
+	{
+		StringBuffer headerBuffer = new StringBuffer();
+		headerBuffer.append("<tr>");
 		for(int i = 0; i < specs.length; ++i)
 		{
-			startBuffer.append("<th>");
+			headerBuffer.append("<th>");
 			FieldSpec spec = specs[i];
 			String label = spec.getLabel();
 			if(StandardFieldSpecs.isStandardFieldTag(spec.getTag()))
 				label = localization.getFieldLabel(spec.getTag());
-			startBuffer.append(label);
-			startBuffer.append("</th>");
+			headerBuffer.append(label);
+			headerBuffer.append("</th>");
 		}
-		startBuffer.append("</tr>");
-		return startBuffer.toString();
+		headerBuffer.append("</tr>");
+		return headerBuffer.toString();
 	}
 
 	private String createDetailSection(FieldSpec[] specs)
