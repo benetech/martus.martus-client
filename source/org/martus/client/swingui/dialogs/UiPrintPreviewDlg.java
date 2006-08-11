@@ -70,7 +70,7 @@ public class UiPrintPreviewDlg extends JDialog implements ActionListener
 		JComponent scrollablePreview = new JScrollPane(previewText);
 		scrollablePreview.setBorder(new EmptyBorder(5,5,5,5));
 		Box buttons = Box.createHorizontalBox();
-		Utilities.addComponentsRespectingOrientation(buttons, new Component[] {printToFile,Box.createHorizontalGlue(), printToPrinter,Box.createHorizontalGlue(), cancel});
+		Utilities.addComponentsRespectingOrientation(buttons, new Component[] {Box.createHorizontalGlue(), printToPrinter, printToFile, cancel});
 
 		getContentPane().setLayout(new BorderLayout());
 		getContentPane().add(scrollablePreview, BorderLayout.CENTER);
