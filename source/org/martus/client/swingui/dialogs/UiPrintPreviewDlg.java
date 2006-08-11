@@ -29,12 +29,15 @@ import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
 import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JDialog;
 import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
+
+import org.martus.client.reports.ReportOutput;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.clientside.UiLocalization;
 import org.martus.swing.UiButton;
@@ -44,14 +47,14 @@ import org.martus.swing.Utilities;
 public class UiPrintPreviewDlg extends JDialog implements ActionListener
 {
 	
-	public UiPrintPreviewDlg(UiMainWindow mainWindowToUse, String dataToPreview)
+	public UiPrintPreviewDlg(UiMainWindow mainWindowToUse, ReportOutput output)
 	{
 		super(mainWindowToUse, "", true);
 		mainWindow = mainWindowToUse;
-		init(dataToPreview);	
+		init(output);	
 	}
 	
-	private void init(String dataToPreview)
+	private void init(ReportOutput output)
 	{
 		UiLocalization localization = mainWindow.getLocalization();
 		setTitle(localization.getWindowTitle("PrintPreview"));
@@ -63,7 +66,7 @@ public class UiPrintPreviewDlg extends JDialog implements ActionListener
 		cancel = new UiButton(localization.getButtonLabel("cancel"));
 		cancel.addActionListener(this);	
 		
-		UiLabel previewText = new UiLabel(dataToPreview);
+		UiLabel previewText = new UiLabel(output.getPageText(0));
 		JComponent scrollablePreview = new JScrollPane(previewText);
 		scrollablePreview.setBorder(new EmptyBorder(5,5,5,5));
 		Box buttons = Box.createHorizontalBox();

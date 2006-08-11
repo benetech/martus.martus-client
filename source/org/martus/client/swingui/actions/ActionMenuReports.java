@@ -31,7 +31,6 @@ import java.awt.Container;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
-import java.io.StringWriter;
 import java.io.Writer;
 import java.util.Vector;
 import javax.swing.Box;
@@ -45,6 +44,7 @@ import org.json.JSONObject;
 import org.martus.client.core.PartialBulletin;
 import org.martus.client.core.SortableBulletinList;
 import org.martus.client.reports.ReportFormat;
+import org.martus.client.reports.ReportOutput;
 import org.martus.client.reports.ReportRunner;
 import org.martus.client.reports.RunReportOptions;
 import org.martus.client.reports.TabularReportBuilder;
@@ -257,12 +257,11 @@ public class ActionMenuReports extends ActionPrint
 			}
 		}
 
-		StringWriter writer = new StringWriter();
-		printToWriter(writer, rf, sortableList, options);
-		writer.close();
-		String textToPrint = writer.toString();
+		ReportOutput result = new ReportOutput();
+		printToWriter(result, rf, sortableList, options);
+		result.close();
 
-		UiPrintPreviewDlg printPreview = new UiPrintPreviewDlg(mainWindow, textToPrint);
+		UiPrintPreviewDlg printPreview = new UiPrintPreviewDlg(mainWindow, result);
 		printPreview.setVisible(true);		
 		if(printPreview.wasCancelButtonPressed())
 			return;			
@@ -270,15 +269,15 @@ public class ActionMenuReports extends ActionPrint
 		
 		boolean didPrint;
 		if(sendToDisk)
-			didPrint = printToDisk(textToPrint);				
+			didPrint = printToDisk(result);				
 		else
-			didPrint = printToPrinter(textToPrint);
+			didPrint = printToPrinter(result);
 			
 		if(didPrint)
 			mainWindow.notifyDlg("PrintCompleted");
 			
 	}
-
+	
 	private int getNumberOfAllPrivateBulletins(PartialBulletin[] sortedPartialBulletins)
 	{
 		int numberOfAllPrivate = 0;
@@ -292,14 +291,14 @@ public class ActionMenuReports extends ActionPrint
 		return numberOfAllPrivate;
 	}
 
-	boolean printToDisk(String textToWrite) throws Exception
+	boolean printToDisk(ReportOutput output) throws Exception
 	{
 		File destFile = chooseDestinationFile();
 		if(destFile == null)
 			return false;
 
 		UnicodeWriter destination = new UnicodeWriter(destFile);
-		destination.write(textToWrite);
+		destination.write(output.getPageText(0));
 		destination.close();
 		return true;
 	}
@@ -335,9 +334,9 @@ public class ActionMenuReports extends ActionPrint
 		mainWindow.doBackgroundWork(worker, "BackgroundPrinting");
 	}
 	
-	boolean printToPrinter(String textToPrint) throws Exception
+	boolean printToPrinter(ReportOutput output) throws Exception
 	{
-		UiLabel previewText = new UiLabel(textToPrint);
+		UiLabel previewText = new UiLabel(output.getPageText(0));
 		//Java bug: you have to set the size of the component first before printing
 		previewText.setSize(previewText.getPreferredSize());
 		PrintUtilities.printComponent(previewText);
