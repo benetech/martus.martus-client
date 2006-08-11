@@ -992,7 +992,7 @@ public class EnglishStrings
 
 "field:BackgroundSearching=Searching...",
 "field:BackgroundSorting=Sorting Bulletins...",
-"field:BackgroundPrinting=Printing...",
+"field:BackgroundPrinting=Preparing Output...",
 
 "folder:%OutBox=Unsent Bulletins",
 "folder:%Sent=Saved Bulletins",
