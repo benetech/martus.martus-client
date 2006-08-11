@@ -59,9 +59,9 @@ public class ReportRunner
 		engine.init();
 	}
 	
-	public void runReport(ReportFormat rf, ReadableDatabase db, SortableBulletinList bulletins, Writer destination, RunReportOptions options) throws Exception
+	public void runReport(ReportFormat rf, ReadableDatabase db, SortableBulletinList bulletins, ReportOutput destination, RunReportOptions options) throws Exception
 	{
-		Writer nullWriter = new NullWriter();
+		ReportOutput nullReportOutput = new ReportOutput();
 		
 		UniversalId[] uids = bulletins.getSortedUniversalIds();
 
@@ -79,9 +79,9 @@ public class ReportRunner
 		
 		performMerge(rf.getStartSection(), destination, context);
 
-		Writer headerDestination = destination;
+		ReportOutput headerDestination = destination;
 		if(options.hideDetail)
-			headerDestination = nullWriter;
+			headerDestination = nullReportOutput;
 		performMerge(rf.getHeaderSection(), headerDestination, context);
 
 		for(int bulletin = 0; bulletin < uids.length; ++bulletin)
@@ -111,9 +111,13 @@ public class ReportRunner
 			context.put("i", new Integer(bulletin+1));
 			context.put("bulletin", safeReadableBulletin);
 			
-			Writer detailDestination = destination;
+			ReportOutput detailDestination = destination;
 			if(options.hideDetail)
-				detailDestination = nullWriter;
+				detailDestination = nullReportOutput;
+			
+			if(rf.getBulletinPerPage() && bulletin > 0)
+				destination.startNewPage();
+			
 			performMerge(rf.getDetailSection(), detailDestination, context);
 			
 			for(int breakLevel = breakSpecs.length - 1; breakLevel >= 0; --breakLevel)
@@ -129,7 +133,7 @@ public class ReportRunner
 		performMerge(rf.getEndSection(), destination, context);
 	}
 
-	static class NullWriter extends Writer
+	static class NullReportOutput extends ReportOutput
 	{
 		public void close() throws IOException
 		{
@@ -142,6 +146,7 @@ public class ReportRunner
 		public void write(char[] cbuf, int off, int len) throws IOException
 		{
 		}
+	
 	}
 	
 	private void performBreak(ReportFormat rf, Context context, Writer destination, MiniFieldSpec[] breakSpecs, String[] previousBreakValues, int breakLevel, int breakCount) throws Exception

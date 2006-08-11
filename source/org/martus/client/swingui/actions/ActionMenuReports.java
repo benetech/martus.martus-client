@@ -31,8 +31,8 @@ import java.awt.Container;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
-import java.io.Writer;
 import java.util.Vector;
+
 import javax.swing.Box;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
@@ -40,6 +40,7 @@ import javax.swing.JScrollPane;
 import javax.swing.event.TableModelListener;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.table.TableModel;
+
 import org.json.JSONObject;
 import org.martus.client.core.PartialBulletin;
 import org.martus.client.core.SortableBulletinList;
@@ -305,7 +306,7 @@ public class ActionMenuReports extends ActionPrint
 	
 	static class BackgroundPrinter extends WorkerThread
 	{
-		public BackgroundPrinter(UiMainWindow mainWindowToUse, Writer whereToPrint, ReportFormat reportFormatToUse, 
+		public BackgroundPrinter(UiMainWindow mainWindowToUse, ReportOutput whereToPrint, ReportFormat reportFormatToUse, 
 				SortableBulletinList listToPrint, RunReportOptions optionsToUse)
 		{
 			mainWindow = mainWindowToUse;
@@ -322,13 +323,13 @@ public class ActionMenuReports extends ActionPrint
 		}
 		
 		UiMainWindow mainWindow;
-		Writer destination;
+		ReportOutput destination;
 		ReportFormat rf;
 		SortableBulletinList list;
 		RunReportOptions options;
 	}
 
-	private void printToWriter(Writer destination, ReportFormat rf, SortableBulletinList list, RunReportOptions options) throws Exception
+	private void printToWriter(ReportOutput destination, ReportFormat rf, SortableBulletinList list, RunReportOptions options) throws Exception
 	{
 		BackgroundPrinter worker = new BackgroundPrinter(mainWindow, destination, rf, list, options);
 		mainWindow.doBackgroundWork(worker, "BackgroundPrinting");

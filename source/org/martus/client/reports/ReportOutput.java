@@ -41,6 +41,7 @@ public class ReportOutput extends Writer
 	public void close() throws IOException
 	{
 		pages.add(currentPage.toString());
+		currentPage = null;
 	}
 
 	public void flush() throws IOException
@@ -54,6 +55,8 @@ public class ReportOutput extends Writer
 	
 	public void startNewPage()
 	{
+		pages.add(currentPage.toString());
+		currentPage = new StringWriter();
 	}
 	
 	public String getPageText(int pageIndex)

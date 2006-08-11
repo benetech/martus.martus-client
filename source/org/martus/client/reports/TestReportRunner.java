@@ -109,7 +109,7 @@ public class TestReportRunner extends TestCaseEnhanced
 		BulletinStore store = app.getStore();
 		ReportFormat rf = new ReportFormat();
 		rf.setDetailSection("$i. $bulletin.localId\n");
-		StringWriter result = new StringWriter();
+		ReportOutput result = new ReportOutput();
 		Vector keys = store.scanForLeafKeys();
 		SortableBulletinList list = new SortableBulletinList(app.getLocalization(), new MiniFieldSpec[0]);
 		for(int i = 0; i < keys.size(); ++i)
@@ -120,6 +120,7 @@ public class TestReportRunner extends TestCaseEnhanced
 		
 		RunReportOptions options = new RunReportOptions();
 		rr.runReport(rf, store.getDatabase(), list, result, options);
+		result.close();
 		StringBuffer expected = new StringBuffer();
 		UniversalId[] uids = list.getSortedUniversalIds();
 		for(int i=0; i < uids.length; ++i)
@@ -129,7 +130,7 @@ public class TestReportRunner extends TestCaseEnhanced
 			expected.append(uids[i].getLocalId());
 			expected.append("\n");
 		}
-		assertEquals(new String(expected), result.toString());
+		assertEquals(new String(expected), result.getPageText(0));
 	}
 	
 	public void testCustomField() throws Exception
@@ -157,11 +158,12 @@ public class TestReportRunner extends TestCaseEnhanced
 		list.add(b);
 		ReportFormat rf = new ReportFormat();
 		rf.setDetailSection("$bulletin.field('custom')");
-		StringWriter result = new StringWriter();
+		ReportOutput result = new ReportOutput();
 		RunReportOptions options = new RunReportOptions();
 		rr.runReport(rf, app.getStore().getDatabase(), list, result, options);
+		result.close();
 		
-		assertEquals(sampleCustomData, result.toString());
+		assertEquals(sampleCustomData, result.getPageText(0));
 	}
 	
 	public void testStartSection() throws Exception
@@ -169,8 +171,8 @@ public class TestReportRunner extends TestCaseEnhanced
 		ReportFormat rf = new ReportFormat();
 		String startSection = "start";
 		rf.setStartSection(startSection);
-		String result = runReportOnSampleData(rf);
-		assertEquals("didn't output start section just once?", startSection, result);
+		ReportOutput result = runReportOnSampleData(rf);
+		assertEquals("didn't output start section just once?", startSection, result.getPageText(0));
 	}
 	
 	public void testBreakSection() throws Exception
@@ -195,13 +197,13 @@ public class TestReportRunner extends TestCaseEnhanced
 		String summaryLabel = localization.getFieldLabel(Bulletin.TAGSUMMARY);
 		
 		
-		String sortByAuthorSummary = runReportOnAppData(rf, app, options);
+		ReportOutput sortByAuthorSummary = runReportOnAppData(rf, app, options);
 		assertEquals("1 had 1\n" + authorLabel + ": a " + summaryLabel + ": 1 \n" +
 				"1 had 1\n" + authorLabel + ": a " + summaryLabel + ": 2 \n" +
 				"0 had 2\n" + authorLabel + ": a \n" +
 				"1 had 1\n" + authorLabel + ": b " + summaryLabel + ": 1 \n" +
 				"0 had 1\n" + authorLabel + ": b \n", 
-				sortByAuthorSummary);
+				sortByAuthorSummary.getPageText(0));
 		
 		MiniFieldSpec[] entryDateSorting = {
 			new MiniFieldSpec(StandardFieldSpecs.findStandardFieldSpec(Bulletin.TAGENTRYDATE)),
@@ -209,11 +211,11 @@ public class TestReportRunner extends TestCaseEnhanced
 		
 		String entryDateLabel = localization.getFieldLabel(Bulletin.TAGENTRYDATE);
 		String formattedDate = localization.convertStoredDateToDisplay(sampleDate);
-		String sortedByEntryDate = runReportOnAppData(rf, app, options, entryDateSorting);
-		assertEquals("0 had 3\n" + entryDateLabel + ": " + formattedDate + " \n", sortedByEntryDate);
+		ReportOutput sortedByEntryDate = runReportOnAppData(rf, app, options, entryDateSorting);
+		assertEquals("0 had 3\n" + entryDateLabel + ": " + formattedDate + " \n", sortedByEntryDate.getPageText(0));
 		
 		options.printBreaks = false;
-		assertEquals("Still had output?", "", runReportOnAppData(rf, app, options));
+		assertEquals("Still had output?", "", runReportOnAppData(rf, app, options).getPageText(0));
 	}
 
 	private MockMartusApp createAppWithBulletinsForBreaks(String sampleDate) throws Exception
@@ -238,12 +240,12 @@ public class TestReportRunner extends TestCaseEnhanced
 		rf.setBreakSection("Break ");
 		rf.setHeaderSection("Header ");
 		
-		String sortByAuthorSummaryWithDetail = runReportOnAppData(rf, app, options);
-		assertEquals("Header Detail Break Detail Break Break Detail Break Break ", sortByAuthorSummaryWithDetail);
+		ReportOutput sortByAuthorSummaryWithDetail = runReportOnAppData(rf, app, options);
+		assertEquals("Header Detail Break Detail Break Break Detail Break Break ", sortByAuthorSummaryWithDetail.getPageText(0));
 		
 		options.hideDetail = true;
-		String sortByAuthorSummaryWithoutDetail = runReportOnAppData(rf, app, options);
-		assertEquals("Break Break Break Break Break ", sortByAuthorSummaryWithoutDetail);
+		ReportOutput sortByAuthorSummaryWithoutDetail = runReportOnAppData(rf, app, options);
+		assertEquals("Break Break Break Break Break ", sortByAuthorSummaryWithoutDetail.getPageText(0));
 		
 	}
 
@@ -262,15 +264,15 @@ public class TestReportRunner extends TestCaseEnhanced
 		ReportFormat rf = new ReportFormat();
 		String endSection = "end";
 		rf.setEndSection(endSection);
-		String result = runReportOnSampleData(rf);
-		assertEquals("didn't output end section just once?", endSection, result);
+		ReportOutput result = runReportOnSampleData(rf);
+		assertEquals("didn't output end section just once?", endSection, result.getPageText(0));
 	}
 	
 	public void testPageReport() throws Exception
 	{
 		MockMartusApp app = MockMartusApp.create();
 		FieldSpec[] topFields = {
-			FieldSpec.createCustomField("tag1", "Label 1", new FieldTypeNormal()),
+			FieldSpec.createStandardField(Bulletin.TAGAUTHOR, new FieldTypeNormal()),
 			FieldSpec.createCustomField("tag2", "Label 2", new FieldTypeDate()),
 		};
 		Bulletin b = new Bulletin(app.getSecurity(), topFields, StandardFieldSpecs.getDefaultBottomSectionFieldSpecs());
@@ -278,6 +280,12 @@ public class TestReportRunner extends TestCaseEnhanced
 		b.set(topFields[1].getTag(), "2005-04-07");
 		b.set(Bulletin.TAGPRIVATEINFO, "Secret");
 		app.saveBulletin(b, app.getFolderDraftOutbox());
+		
+		Bulletin b2 = new Bulletin(app.getSecurity(), topFields, StandardFieldSpecs.getDefaultBottomSectionFieldSpecs());
+		b2.set(topFields[0].getTag(), "Second");
+		b2.set(topFields[1].getTag(), "2003-03-29");
+		b2.set(Bulletin.TAGPRIVATEINFO, "Another secret");
+		app.saveBulletin(b2, app.getFolderDraftOutbox());
 		
 
 		ReportFormat rf = new ReportFormat();
@@ -291,32 +299,38 @@ public class TestReportRunner extends TestCaseEnhanced
 				"$field.getLocalizedLabel($localization) $field.html($localization)\n" +
 				"#end\n" +
 				"");
-		String expected = "TOP:\n" +
-				"Label 1 First\n" +
+		String expected0 = "TOP:\n" +
+				"<field:author> First\n" +
 				"Label 2 04/07/2005\n" +
 				"BOTTOM:\n" +
 				"<field:privateinfo> Secret\n";
+		String expected1 = "TOP:\n" +
+				"<field:author> Second\n" +
+				"Label 2 03/29/2003\n" +
+				"BOTTOM:\n" +
+				"<field:privateinfo> Another secret\n";
 		
 		RunReportOptions options = new RunReportOptions();
 		options.includePrivate = true;
-		String result = runReportOnAppData(rf, app, options);
-		assertEquals("Wrong page report output?", expected, result);
+		ReportOutput result = runReportOnAppData(rf, app, options);
+		assertEquals("Wrong page report output?", expected0, result.getPageText(0));
+		assertEquals("Wrong page report output?", expected1, result.getPageText(1));
 	}
 	
-	private String runReportOnSampleData(ReportFormat rf) throws Exception
+	private ReportOutput runReportOnSampleData(ReportFormat rf) throws Exception
 	{
 		MockMartusApp app = MockMartusApp.create();
 		app.loadSampleData();
 		return runReportOnAppData(rf, app);
 	}
 
-	private String runReportOnAppData(ReportFormat rf, MockMartusApp app) throws Exception
+	private ReportOutput runReportOnAppData(ReportFormat rf, MockMartusApp app) throws Exception
 	{
 		RunReportOptions options = new RunReportOptions();
 		return runReportOnAppData(rf, app, options);
 	}
 
-	private String runReportOnAppData(ReportFormat rf, MockMartusApp app, RunReportOptions options) throws IOException, DamagedBulletinException, NoKeyPairException, Exception
+	private ReportOutput runReportOnAppData(ReportFormat rf, MockMartusApp app, RunReportOptions options) throws IOException, DamagedBulletinException, NoKeyPairException, Exception
 	{
 		MiniFieldSpec sortSpecs[] = {
 				new MiniFieldSpec(StandardFieldSpecs.findStandardFieldSpec(Bulletin.TAGAUTHOR)), 
@@ -326,7 +340,7 @@ public class TestReportRunner extends TestCaseEnhanced
 		return runReportOnAppData(rf, app, options, sortSpecs);
 	}
 
-	private String runReportOnAppData(ReportFormat rf, MockMartusApp app, RunReportOptions options, MiniFieldSpec[] sortSpecs) throws IOException, DamagedBulletinException, NoKeyPairException, Exception
+	private ReportOutput runReportOnAppData(ReportFormat rf, MockMartusApp app, RunReportOptions options, MiniFieldSpec[] sortSpecs) throws IOException, DamagedBulletinException, NoKeyPairException, Exception
 	{
 		BulletinStore store = app.getStore();
 		MartusCrypto security = app.getSecurity();
@@ -341,9 +355,10 @@ public class TestReportRunner extends TestCaseEnhanced
 			Bulletin b = BulletinLoader.loadFromDatabase(db, key, security);
 			list.add(b);
 		}
-		StringWriter result = new StringWriter();
+		ReportOutput result = new ReportOutput();
 		rr.runReport(rf, store.getDatabase(), list, result, options);
-		return result.toString();
+		result.close();
+		return result;
 	}
 	
 	private String performMerge(String template) throws Exception
