@@ -70,21 +70,35 @@ public class ReportRunner
 		
 		performMerge(rf.getStartSection(), destination);
 
-		ReportOutput headerDestination = destination;
-		if(options.hideDetail)
-			headerDestination = new ReportOutput();
-		performMerge(rf.getHeaderSection(), headerDestination);
-
 		for(int bulletin = 0; bulletin < uids.length; ++bulletin)
 		{
 			SafeReadableBulletin safeReadableBulletin = getCensoredBulletin(db, uids[bulletin], options);
-			
+
+			if(bulletin == 0 || rf.getBulletinPerPage())
+			{
+				ReportOutput headerDestination = destination;
+				if(options.hideDetail)
+					headerDestination = new ReportOutput();
+				performMerge(rf.getHeaderSection(), headerDestination);
+			}
+
 			breakHandler.doBreak(safeReadableBulletin);
 			doDetail(rf, destination, options, bulletin, safeReadableBulletin);
 			breakHandler.incrementCounts();
+
+			if(bulletin == uids.length - 1)
+				breakHandler.doFinalBreak();
+			
+			if(bulletin == uids.length - 1 || rf.getBulletinPerPage())
+				performMerge(rf.getFooterSection(), destination);
+			
+			if(rf.getBulletinPerPage())
+			{
+				performMerge(rf.getFakePageBreakSection(), destination);
+				destination.startNewPage();
+			}
 		}
 		
-		breakHandler.doFinalBreak();
 		
 		performMerge(rf.getEndSection(), destination);
 		context = null;
@@ -98,9 +112,6 @@ public class ReportRunner
 		ReportOutput detailDestination = destination;
 		if(options.hideDetail)
 			detailDestination = new ReportOutput();
-		
-		if(rf.getBulletinPerPage() && bulletin > 0)
-			destination.startNewPage();
 		
 		performMerge(rf.getDetailSection(), detailDestination);
 		context.remove("bulletin");

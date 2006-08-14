@@ -289,6 +289,9 @@ public class TestReportRunner extends TestCaseEnhanced
 
 		ReportFormat rf = new ReportFormat();
 		rf.setBulletinPerPage(true);
+		rf.setHeaderSection("Header\n");
+		rf.setFooterSection("Footer\n");
+		rf.setFakePageBreakSection("----\n");
 		rf.setDetailSection("TOP:\n" +
 				"#foreach($field in $bulletin.getTopFields())\n" +
 				"$field.getLocalizedLabel($localization) $field.html($localization)\n" +
@@ -298,16 +301,22 @@ public class TestReportRunner extends TestCaseEnhanced
 				"$field.getLocalizedLabel($localization) $field.html($localization)\n" +
 				"#end\n" +
 				"");
-		String expected0 = "TOP:\n" +
+		String expected0 = "Header\n" +
+				"TOP:\n" +
 				"<field:author> First\n" +
 				"Label 2 04/07/2005\n" +
 				"BOTTOM:\n" +
-				"<field:privateinfo> Secret\n";
-		String expected1 = "TOP:\n" +
+				"<field:privateinfo> Secret\n" +
+				"Footer\n" +
+				"----\n";
+		String expected1 = "Header\n" +
+				"TOP:\n" +
 				"<field:author> Second\n" +
 				"Label 2 03/29/2003\n" +
 				"BOTTOM:\n" +
-				"<field:privateinfo> Another secret\n";
+				"<field:privateinfo> Another secret\n" +
+				"Footer\n" +
+				"----\n";
 		
 		RunReportOptions options = new RunReportOptions();
 		options.includePrivate = true;
