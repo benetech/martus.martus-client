@@ -359,7 +359,7 @@ abstract public class RetrieveTableModel extends UiTableModel
 		
 		public void retrieveMissingDetailsFromServer()
 		{
-			Vector bulletinSummaries = tableModel.getDownloadableSummaries();
+			Vector bulletinSummaries = new Vector(tableModel.getDownloadableSummaries());
 			Iterator iterator = bulletinSummaries.iterator();
 			int count = 0;
 			int maxCount = bulletinSummaries.size();
