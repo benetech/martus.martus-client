@@ -26,6 +26,7 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.reports;
 
 import org.martus.common.MiniLocalization;
+import org.martus.common.fieldspec.MiniFieldSpec;
 import org.martus.util.TestCaseEnhanced;
 
 public class TestPageReportBuilder extends TestCaseEnhanced
@@ -39,14 +40,14 @@ public class TestPageReportBuilder extends TestCaseEnhanced
 	{
 		MiniLocalization localization = new MiniLocalization();
 		PageReportBuilder builder= new PageReportBuilder(localization);
-		ReportFormat rf = builder.createPageReport();
+		ReportFormat rf = builder.createPageReport(new MiniFieldSpec[0]);
 		assertTrue("Not a page report?", rf.getBulletinPerPage());
 		assertEquals("Start not empty?", "", rf.getStartSection());
 		assertEquals("End not empty?", "", rf.getEndSection());
 		assertContains("<html>", rf.getHeaderSection());
-		assertContains("<table>", rf.getHeaderSection());
+		assertContains("<table", rf.getHeaderSection());
 		assertContains("</table>", rf.getFooterSection());
 		assertContains("</html>", rf.getFooterSection());
-		assertContains("<hr/>", rf.getFakePageBreakSection());
+		assertContains("<hr", rf.getFakePageBreakSection());
 	}
 }

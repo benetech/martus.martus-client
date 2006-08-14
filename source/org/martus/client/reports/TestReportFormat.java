@@ -26,6 +26,12 @@ Boston, MA 02111-1307, USA.
 
 package org.martus.client.reports;
 
+import java.util.Arrays;
+
+import org.martus.common.fieldspec.FieldSpec;
+import org.martus.common.fieldspec.FieldTypeDate;
+import org.martus.common.fieldspec.FieldTypeNormal;
+import org.martus.common.fieldspec.MiniFieldSpec;
 import org.martus.util.TestCaseEnhanced;
 
 
@@ -61,6 +67,19 @@ public class TestReportFormat extends TestCaseEnhanced
 		assertEquals("didn't save break?", rf.getBreakSection(), got.getBreakSection());
 		assertEquals("didn't save header?", rf.getHeaderSection(), got.getHeaderSection());
 		assertEquals("didn't save bulletin-per-page?", rf.getBulletinPerPage(), got.getBulletinPerPage());
+	}
+	
+	public void testSpecs() throws Exception
+	{
+		MiniFieldSpec[] specs = new MiniFieldSpec[] {
+			new MiniFieldSpec(FieldSpec.createCustomField("a", "A: ", new FieldTypeNormal())),	
+			new MiniFieldSpec(FieldSpec.createCustomField("b", "B: ", new FieldTypeDate())),
+		};
+		
+		ReportFormat rf = new ReportFormat();
+		rf.setSpecsToInclude(specs);
+		ReportFormat got = new ReportFormat(rf.toJson());
+		assertTrue("Didn't save/load specs?", Arrays.equals(specs, got.getSpecsToInclude()));
 	}
 	
 }

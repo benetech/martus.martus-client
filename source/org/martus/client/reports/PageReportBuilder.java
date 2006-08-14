@@ -27,6 +27,7 @@ package org.martus.client.reports;
 
 import org.martus.common.MiniLocalization;
 import org.martus.common.bulletin.BulletinHtmlGenerator;
+import org.martus.common.fieldspec.MiniFieldSpec;
 
 public class PageReportBuilder
 {
@@ -35,13 +36,15 @@ public class PageReportBuilder
 		
 	}
 	
-	public ReportFormat createPageReport()
+	public ReportFormat createPageReport(MiniFieldSpec[] specs)
 	{
 		ReportFormat rf = new ReportFormat();
 		rf.setBulletinPerPage(true);
 		rf.setHeaderSection(createHeaderSection());
 		rf.setFakePageBreakSection("<hr></hr>\n");
 		rf.setDetailSection(createDetailSection());
+		rf.setFooterSection("</table></html>");
+		rf.setSpecsToInclude(specs);
 		return rf;
 	}
 	
@@ -71,7 +74,13 @@ public class PageReportBuilder
 	
 	public String getFieldRow()
 	{
-		return "<tr><td align='right' valign='top'>$field.getLocalizedLabel($localization)</td>" +
-				"<td valign='top'>$field.html($localization)</td></tr>\n";
+		return "#if($specsToInclude.contains($field.getMiniSpec()))\n" +
+				"<tr><td align='right' valign='top'>" +
+				"$field.getLocalizedLabel($localization)\n" +
+				"</td>" +
+				"<td valign='top'>" +
+				"$field.html($localization)\n" +
+				"</td></tr>\n" +
+				"#end\n";
 	}
 }

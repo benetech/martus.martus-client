@@ -67,6 +67,20 @@ public class ReportRunner
 
 		context = new VelocityContext();
 		context.put("localization", localization);
+		class Specs extends Vector
+		{
+			public Specs(MiniFieldSpec[] specs)
+			{
+				super(Arrays.asList(specs));
+			}
+			
+			public boolean contains(Object o)
+			{
+				boolean result = super.contains(o);
+				return result;
+			}
+		}
+		context.put("specsToInclude", new Specs(rf.getSpecsToInclude()));
 		
 		performMerge(rf.getStartSection(), destination);
 

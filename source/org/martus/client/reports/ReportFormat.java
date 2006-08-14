@@ -26,13 +26,16 @@ Boston, MA 02111-1307, USA.
 
 package org.martus.client.reports;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
+import org.martus.common.fieldspec.MiniFieldSpec;
 
 
 public class ReportFormat
 {
 	public ReportFormat()
 	{
+		setBulletinPerPage(false);
 		setStartSection("");
 		setHeaderSection("");
 		setDetailSection("");
@@ -40,7 +43,7 @@ public class ReportFormat
 		setFooterSection("");
 		setFakePageBreakSection("");
 		setEndSection("");
-		setBulletinPerPage(false);
+		specsToInclude = new MiniFieldSpec[0];
 		version = 0;
 	}
 	
@@ -55,6 +58,15 @@ public class ReportFormat
 		setFooterSection(json.optString(TAG_FOOTER_SECTION, ""));
 		setFakePageBreakSection(json.optString(TAG_FAKE_PAGE_BREAK_SECTION, ""));
 		setEndSection(json.getString(TAG_END_SECTION));
+		JSONArray specs = json.optJSONArray(TAG_SPECS);
+		if(specs == null)
+			specs = new JSONArray();
+		specsToInclude = new MiniFieldSpec[specs.length()];
+		for(int i = 0; i < specsToInclude.length; ++i)
+		{
+			specsToInclude[i] = new MiniFieldSpec(specs.getJSONObject(i));
+		}
+		
 	}
 	
 	public int getVersion()
@@ -142,6 +154,16 @@ public class ReportFormat
 		return endSection;
 	}
 	
+	public void setSpecsToInclude(MiniFieldSpec[] specs)
+	{
+		specsToInclude = specs;
+	}
+	
+	public MiniFieldSpec[] getSpecsToInclude()
+	{
+		return specsToInclude;
+	}
+	
 	public JSONObject toJson()
 	{
 		JSONObject json = new JSONObject();
@@ -154,6 +176,12 @@ public class ReportFormat
 		json.put(TAG_FOOTER_SECTION, getFooterSection());
 		json.put(TAG_FAKE_PAGE_BREAK_SECTION, getFakePageBreakSection());
 		json.put(TAG_END_SECTION, getEndSection());
+		JSONArray specs = new JSONArray();
+		for(int i = 0; i < specsToInclude.length; ++i)
+		{
+			specs.put(specsToInclude[i].toJson());
+		}
+		json.put(TAG_SPECS, specs);
 		return json;
 	}
 	
@@ -166,6 +194,7 @@ public class ReportFormat
 	final static String TAG_FOOTER_SECTION = "FooterSection";
 	final static String TAG_FAKE_PAGE_BREAK_SECTION = "FakePageBreak";
 	final static String TAG_END_SECTION = "EndSection";
+	final static String TAG_SPECS = "Specs";
 	
 	public final static int EXPECTED_VERSION = 6;
 
@@ -177,6 +206,7 @@ public class ReportFormat
 	private String footerSection;
 	private String fakePageBreakSection;
 	private String endSection;
+	private MiniFieldSpec[] specsToInclude;
 	
 	/* 
 	 * tabular to disk or printer:

@@ -67,6 +67,7 @@ import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.fieldspec.FieldTypeBoolean;
 import org.martus.common.fieldspec.MiniFieldSpec;
 import org.martus.common.fieldspec.PopUpTreeFieldSpec;
+import org.martus.common.fieldspec.StandardFieldSpecs;
 import org.martus.swing.PrintUtilities;
 import org.martus.swing.UiButton;
 import org.martus.swing.UiComboBox;
@@ -202,7 +203,16 @@ public class ActionMenuReports extends ActionPrint
 		if(specs == null)
 			return null;
 		
-		ReportFormat rf = builder.createPageReport();
+		MiniFieldSpec[] miniSpecs = new MiniFieldSpec[specs.length];
+		for(int i = 0; i < miniSpecs.length; ++i)
+		{
+			FieldSpec spec = specs[i];
+			if(StandardFieldSpecs.isStandardFieldTag(spec.getTag()))
+				spec = FieldSpec.createStandardField(spec.getTag(), spec.getType());
+			miniSpecs[i] = new MiniFieldSpec(spec);
+		}
+		
+		ReportFormat rf = builder.createPageReport(miniSpecs);
 		
 		File file = askForReportFileToSaveTo();
 		if(file == null)
