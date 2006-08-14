@@ -25,50 +25,28 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.reports;
 
-import java.io.IOException;
-import java.io.StringWriter;
-import java.io.Writer;
-import java.util.Vector;
+import org.martus.common.MiniLocalization;
+import org.martus.util.TestCaseEnhanced;
 
-public class ReportOutput extends Writer
+public class TestPageReportBuilder extends TestCaseEnhanced
 {
-	public ReportOutput()
+	public TestPageReportBuilder(String name)
 	{
-		pages = new Vector();
-		currentPage = new StringWriter();
-	}
-	
-	public void close() throws IOException
-	{
-		pages.add(currentPage.toString());
-		currentPage = null;
+		super(name);
 	}
 
-	public void flush() throws IOException
+	public void testCreatePageReport()
 	{
+		MiniLocalization localization = new MiniLocalization();
+		PageReportBuilder builder= new PageReportBuilder(localization);
+		ReportFormat rf = builder.createPageReport();
+		assertTrue("Not a page report?", rf.getBulletinPerPage());
+		assertEquals("Start not empty?", "", rf.getStartSection());
+		assertEquals("End not empty?", "", rf.getEndSection());
+		assertContains("<html>", rf.getHeaderSection());
+		assertContains("<table>", rf.getHeaderSection());
+		assertContains("</table>", rf.getFooterSection());
+		assertContains("</html>", rf.getFooterSection());
+		assertContains("<hr/>", rf.getFakePageBreakSection());
 	}
-
-	public void write(char[] cbuf, int off, int len) throws IOException
-	{
-		currentPage.write(cbuf, off, len);
-	}
-	
-	public void startNewPage()
-	{
-		pages.add(currentPage.toString());
-		currentPage = new StringWriter();
-	}
-	
-	public int getPageCount()
-	{
-		return pages.size();
-	}
-	
-	public String getPageText(int pageIndex)
-	{
-		return (String)pages.get(pageIndex);
-	}
-	
-	Vector pages;
-	Writer currentPage;
 }

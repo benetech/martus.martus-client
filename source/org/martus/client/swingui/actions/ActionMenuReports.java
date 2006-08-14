@@ -44,6 +44,7 @@ import javax.swing.table.TableModel;
 import org.json.JSONObject;
 import org.martus.client.core.PartialBulletin;
 import org.martus.client.core.SortableBulletinList;
+import org.martus.client.reports.PageReportBuilder;
 import org.martus.client.reports.ReportFormat;
 import org.martus.client.reports.ReportOutput;
 import org.martus.client.reports.ReportRunner;
@@ -100,9 +101,10 @@ public class ActionMenuReports extends ActionPrint
 			MiniLocalization localization = mainWindow.getLocalization();
 			
 			String runButtonLabel = localization.getButtonLabel("RunReport");
-			String createButtonLabel = localization.getButtonLabel("CreateReport");
+			String createTabularReportButtonLabel = localization.getButtonLabel("CreateTabularReport");
+			String createPageReportButtonLabel = localization.getButtonLabel("CreatePageReport");
 			String cancelButtonLabel = localization.getButtonLabel("cancel");
-			String[] buttonLabels = {runButtonLabel, createButtonLabel, cancelButtonLabel, };
+			String[] buttonLabels = {runButtonLabel, createTabularReportButtonLabel, createPageReportButtonLabel, cancelButtonLabel, };
 			RunOrCreateReportDialog runOrCreate = new RunOrCreateReportDialog(mainWindow, buttonLabels);
 			runOrCreate.setVisible(true);
 			String pressed = runOrCreate.getPressedButtonLabel();
@@ -121,9 +123,16 @@ public class ActionMenuReports extends ActionPrint
 				
 				runReport(rf);
 			}
-			if(pressed.equals(createButtonLabel))
+			if(pressed.equals(createTabularReportButtonLabel))
 			{
-				ReportFormat rf = createReport();
+				ReportFormat rf = createTabularReport();
+				if(rf == null)
+					return;
+				runReport(rf);
+			}
+			if(pressed.equals(createPageReportButtonLabel))
+			{
+				ReportFormat rf = createPageReport();
 				if(rf == null)
 					return;
 				runReport(rf);
@@ -167,7 +176,7 @@ public class ActionMenuReports extends ActionPrint
 		return new ReportFormat(new JSONObject(reportFormatText));
 	}
 	
-	ReportFormat createReport() throws Exception
+	ReportFormat createTabularReport() throws Exception
 	{
 		TabularReportBuilder builder = new TabularReportBuilder(getLocalization());
 		FieldSpec[] specs = askUserWhichFieldsToInclude();
@@ -175,6 +184,25 @@ public class ActionMenuReports extends ActionPrint
 			return null;
 		
 		ReportFormat rf = builder.createTabular(specs);
+		
+		File file = askForReportFileToSaveTo();
+		if(file == null)
+			return null;
+		
+		UnicodeWriter writer = new UnicodeWriter(file);
+		writer.write(rf.toJson().toString());
+		writer.close();
+		return rf;
+	}
+	
+	ReportFormat createPageReport() throws Exception
+	{
+		PageReportBuilder builder = new PageReportBuilder(getLocalization());
+		FieldSpec[] specs = askUserWhichFieldsToInclude();
+		if(specs == null)
+			return null;
+		
+		ReportFormat rf = builder.createPageReport();
 		
 		File file = askForReportFileToSaveTo();
 		if(file == null)
@@ -221,7 +249,7 @@ public class ActionMenuReports extends ActionPrint
 		if(!sortDlg.ok())
 			return;
 		
-		MiniFieldSpec[] sortTags = sortDlg.getSelecteMiniFieldSpecs();
+		MiniFieldSpec[] sortTags = sortDlg.getSelectedMiniFieldSpecs();
 		FieldSpec allPrivateSpec = FieldSpec.createStandardField(Bulletin.PSEUDOFIELD_ALL_PRIVATE, new FieldTypeBoolean());
 		MiniFieldSpec allPrivateMiniSpec = new MiniFieldSpec(allPrivateSpec);
 		MiniFieldSpec[] extraTags = {allPrivateMiniSpec};
@@ -299,7 +327,8 @@ public class ActionMenuReports extends ActionPrint
 			return false;
 
 		UnicodeWriter destination = new UnicodeWriter(destFile);
-		destination.write(output.getPageText(0));
+		for(int page = 0; page < output.getPageCount(); ++page)
+			destination.write(output.getPageText(page));
 		destination.close();
 		return true;
 	}
@@ -337,10 +366,14 @@ public class ActionMenuReports extends ActionPrint
 	
 	boolean printToPrinter(ReportOutput output) throws Exception
 	{
-		UiLabel previewText = new UiLabel(output.getPageText(0));
-		//Java bug: you have to set the size of the component first before printing
-		previewText.setSize(previewText.getPreferredSize());
-		PrintUtilities.printComponent(previewText);
+		UiLabel previewText = new UiLabel();
+		for(int page = 0; page < output.getPageCount(); ++page)
+		{
+			previewText.setText(output.getPageText(0));
+			// NOTE: you have to set the size of the component first before printing
+			previewText.setSize(previewText.getPreferredSize());
+			PrintUtilities.printComponent(previewText);
+		}
 		return true;
 	}
 
@@ -523,8 +556,7 @@ public class ActionMenuReports extends ActionPrint
 			setModal(true);
 			setTitle(mainWindow.getLocalization().getWindowTitle("RunOrCreateReport"));
 			Container panel = getContentPane();
-			Box buttonBox = Box.createHorizontalBox();
-			buttonBox.add(Box.createHorizontalGlue());
+			Box buttonBox = Box.createVerticalBox();
 			for(int i = 0; i < buttonLabels.length; ++i)
 			{
 				UiButton button = new UiButton(buttonLabels[i]);
@@ -653,7 +685,7 @@ public class ActionMenuReports extends ActionPrint
 			savedBreakChoice = (ChoiceItem)breakChoice.getSelectedItem();
 		}
 		
-		public MiniFieldSpec[] getSelecteMiniFieldSpecs() throws Exception
+		public MiniFieldSpec[] getSelectedMiniFieldSpecs() throws Exception
 		{
 			return (MiniFieldSpec[])sortMiniSpecs.toArray(new MiniFieldSpec[0]);
 		}

@@ -52,6 +52,7 @@ public class TabularReportBuilder
 	{
 		StringBuffer startBuffer = new StringBuffer();
 		startBuffer.append("<html>");
+		startBuffer.append("<meta http-equiv='Content-Type' content='text/html;charset=UTF-8'>");
 		startBuffer.append("<table border='3' cellpadding='5' cellspacing='0'>");
 		return startBuffer.toString();
 	}

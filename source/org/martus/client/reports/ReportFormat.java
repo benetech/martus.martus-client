@@ -189,9 +189,9 @@ public class ReportFormat
 	 *  - end </table></html>
 	 *  
 	 * page to disk (multiple bulletins):
-	 *  - start <html>
+	 *  - start 
 	 *  
-	 *  - header <table>
+	 *  - header <html><table>
 	 *  - detail, break,
 	 *  - footer </table>
 	 *  
@@ -199,18 +199,18 @@ public class ReportFormat
 	 *  
 	 *  - header <table>
 	 *  - detail, break,
-	 *  - footer </table>
+	 *  - footer </table></html>
 	 *  
-	 *  - end </html>
+	 *  - end 
 	 * 
 	 * page to printer (for each bulletin):
-	 *  - start <html>
+	 *  - start 
 	 *  
-	 *  - header <table>
+	 *  - header <html><table>
 	 *  - detail, break,
-	 *  - footer </table>
+	 *  - footer </table></html>
 	 *  
-	 *  - end </html>
+	 *  - end 
 	 * 
 	 */
 		

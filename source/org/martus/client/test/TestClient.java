@@ -35,6 +35,7 @@ import org.martus.client.bulletinstore.TestKnownFieldSpecCache;
 import org.martus.client.core.TestPartialBulletin;
 import org.martus.client.core.TestSafeReadableBulletin;
 import org.martus.client.core.TestSortableBulletinList;
+import org.martus.client.reports.TestPageReportBuilder;
 import org.martus.client.reports.TestReportFormat;
 import org.martus.client.reports.TestReportRunner;
 import org.martus.client.reports.TestTabularReportBuilder;
@@ -83,6 +84,7 @@ public class TestClient
 		suite.addTest(new TestSuite(TestMartusApp_NoServer.class));
 		suite.addTest(new TestSuite(TestMartusFlexidate.class));
 		suite.addTest(new TestSuite(TestMartusUserNameAndPassword.class));
+		suite.addTest(new TestSuite(TestPageReportBuilder.class));
 		suite.addTest(new TestSuite(TestPartialBulletin.class));
 		suite.addTest(new TestSuite(TestRetrieveCommand.class));
 		suite.addTest(new TestSuite(TestTabularReportBuilder.class));
