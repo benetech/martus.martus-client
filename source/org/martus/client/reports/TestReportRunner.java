@@ -31,7 +31,6 @@ import java.io.StringWriter;
 import java.util.Vector;
 
 import org.apache.velocity.VelocityContext;
-import org.apache.velocity.context.Context;
 import org.martus.client.bulletinstore.BulletinFolder;
 import org.martus.client.core.SortableBulletinList;
 import org.martus.client.test.MockMartusApp;
@@ -364,10 +363,11 @@ public class TestReportRunner extends TestCaseEnhanced
 	private String performMerge(String template) throws Exception
 	{
 		StringWriter result = new StringWriter();
-		rr.performMerge(template, result, context);
+		rr.context = context;
+		rr.performMerge(template, result);
 		return result.toString();
 	}
 
 	ReportRunner rr;
-	Context context;
+	VelocityContext context;
 }

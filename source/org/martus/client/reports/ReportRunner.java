@@ -33,7 +33,6 @@ import java.util.Vector;
 
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.VelocityEngine;
-import org.apache.velocity.context.Context;
 import org.martus.client.core.SafeReadableBulletin;
 import org.martus.client.core.SortableBulletinList;
 import org.martus.common.MiniLocalization;
@@ -66,31 +65,32 @@ public class ReportRunner
 		UniversalId[] uids = bulletins.getSortedUniversalIds();
 		SummaryBreakHandler breakHandler = new SummaryBreakHandler(rf, destination, options, bulletins.getSortSpecs());
 
-		VelocityContext context = new VelocityContext();
+		context = new VelocityContext();
 		context.put("localization", localization);
 		
-		performMerge(rf.getStartSection(), destination, context);
+		performMerge(rf.getStartSection(), destination);
 
 		ReportOutput headerDestination = destination;
 		if(options.hideDetail)
 			headerDestination = new ReportOutput();
-		performMerge(rf.getHeaderSection(), headerDestination, context);
+		performMerge(rf.getHeaderSection(), headerDestination);
 
 		for(int bulletin = 0; bulletin < uids.length; ++bulletin)
 		{
 			SafeReadableBulletin safeReadableBulletin = getCensoredBulletin(db, uids[bulletin], options);
 			
-			breakHandler.doBreak(context, safeReadableBulletin);
-			doDetail(rf, destination, options, context, bulletin, safeReadableBulletin);
+			breakHandler.doBreak(safeReadableBulletin);
+			doDetail(rf, destination, options, bulletin, safeReadableBulletin);
 			breakHandler.incrementCounts();
 		}
 		
-		breakHandler.doFinalBreak(context);
+		breakHandler.doFinalBreak();
 		
-		performMerge(rf.getEndSection(), destination, context);
+		performMerge(rf.getEndSection(), destination);
+		context = null;
 	}
 
-	private void doDetail(ReportFormat rf, ReportOutput destination, RunReportOptions options, VelocityContext context, int bulletin, SafeReadableBulletin safeReadableBulletin) throws Exception
+	private void doDetail(ReportFormat rf, ReportOutput destination, RunReportOptions options, int bulletin, SafeReadableBulletin safeReadableBulletin) throws Exception
 	{
 		context.put("i", new Integer(bulletin+1));
 		context.put("bulletin", safeReadableBulletin);
@@ -102,7 +102,7 @@ public class ReportRunner
 		if(rf.getBulletinPerPage() && bulletin > 0)
 			destination.startNewPage();
 		
-		performMerge(rf.getDetailSection(), detailDestination, context);
+		performMerge(rf.getDetailSection(), detailDestination);
 		context.remove("bulletin");
 	}
 
@@ -151,7 +151,7 @@ public class ReportRunner
 
 		}
 		
-		public void doBreak(VelocityContext context, SafeReadableBulletin upcomingBulletin) throws Exception
+		public void doBreak(SafeReadableBulletin upcomingBulletin) throws Exception
 		{
 			for(int breakLevel = breakSpecs.length - 1; breakLevel >= 0; --breakLevel)
 			{
@@ -159,16 +159,16 @@ public class ReportRunner
 				if(current == null || !current.equals(previousBreakValues[breakLevel]))
 				{
 					if(breakCounts[0] > 0)
-						performBreak(context, breakLevel);
+						performBreak(breakLevel);
 					previousBreakValues[breakLevel] = current;
 					breakCounts[breakLevel] = 0;
 				}
 			}
 		}
 		
-		public void doFinalBreak(VelocityContext context) throws Exception
+		public void doFinalBreak() throws Exception
 		{
-			doBreak(context, null);
+			doBreak(null);
 		}
 
 		private String getBreakData(SafeReadableBulletin upcomingBulletin, int breakLevel)
@@ -183,7 +183,7 @@ public class ReportRunner
 			return current;
 		}
 		
-		private void performBreak(VelocityContext context, int breakLevel) throws Exception
+		private void performBreak(int breakLevel) throws Exception
 		{
 			BreakFields breakFields = new BreakFields();
 			for(int i = 0; i < breakLevel + 1; ++i)
@@ -199,7 +199,7 @@ public class ReportRunner
 			context.put("BreakLevel", new Integer(breakLevel));
 			context.put("BreakCount", new Integer(breakCounts[breakLevel]));
 			context.put("BreakFields", breakFields);
-			performMerge(breakSection, output, context);
+			performMerge(breakSection, output);
 		}
 		
 		public void incrementCounts()
@@ -217,7 +217,7 @@ public class ReportRunner
 		String[] previousBreakValues;
 	}
 	
-	public void performMerge(String template, Writer result, Context context) throws Exception
+	public void performMerge(String template, Writer result) throws Exception
 	{
 		engine.evaluate(context, result, "Martus", template);
 	}
@@ -229,4 +229,5 @@ public class ReportRunner
 	VelocityEngine engine;
 	MiniLocalization localization;
 	MartusCrypto signatureVerifier;
+	VelocityContext context;
 }
