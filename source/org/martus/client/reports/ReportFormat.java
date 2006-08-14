@@ -37,6 +37,8 @@ public class ReportFormat
 		setHeaderSection("");
 		setDetailSection("");
 		setBreakSection("");
+		setFooterSection("");
+		setFakePageBreakSection("");
 		setEndSection("");
 		setBulletinPerPage(false);
 		version = 0;
