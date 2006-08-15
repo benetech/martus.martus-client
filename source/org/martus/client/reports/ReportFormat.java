@@ -42,6 +42,7 @@ public class ReportFormat
 		setBreakSection("");
 		setFooterSection("");
 		setFakePageBreakSection("");
+		setTotalSection("");
 		setEndSection("");
 		specsToInclude = new MiniFieldSpec[0];
 		version = 0;
@@ -57,6 +58,7 @@ public class ReportFormat
 		setBreakSection(json.optString(TAG_BREAK_SECTION, ""));
 		setFooterSection(json.optString(TAG_FOOTER_SECTION, ""));
 		setFakePageBreakSection(json.optString(TAG_FAKE_PAGE_BREAK_SECTION, ""));
+		setTotalSection(json.optString(TAG_TOTAL_SECTION, ""));
 		setEndSection(json.getString(TAG_END_SECTION));
 		JSONArray specs = json.optJSONArray(TAG_SPECS);
 		if(specs == null)
@@ -144,6 +146,16 @@ public class ReportFormat
 		return fakePageBreakSection;
 	}
 	
+	public void setTotalSection(String section)
+	{
+		totalSection = section;
+	}
+	
+	public String getTotalSection()
+	{
+		return totalSection;
+	}
+	
 	public void setEndSection(String section)
 	{
 		endSection = section;
@@ -175,6 +187,7 @@ public class ReportFormat
 		json.put(TAG_BREAK_SECTION, getBreakSection());
 		json.put(TAG_FOOTER_SECTION, getFooterSection());
 		json.put(TAG_FAKE_PAGE_BREAK_SECTION, getFakePageBreakSection());
+		json.put(TAG_TOTAL_SECTION, getTotalSection());
 		json.put(TAG_END_SECTION, getEndSection());
 		JSONArray specs = new JSONArray();
 		for(int i = 0; i < specsToInclude.length; ++i)
@@ -193,10 +206,11 @@ public class ReportFormat
 	final static String TAG_BREAK_SECTION = "BreakSection";
 	final static String TAG_FOOTER_SECTION = "FooterSection";
 	final static String TAG_FAKE_PAGE_BREAK_SECTION = "FakePageBreak";
+	final static String TAG_TOTAL_SECTION = "TotalSection";
 	final static String TAG_END_SECTION = "EndSection";
 	final static String TAG_SPECS = "Specs";
 	
-	public final static int EXPECTED_VERSION = 6;
+	public final static int EXPECTED_VERSION = 7;
 
 	private int version;
 	private String startSection;
@@ -205,6 +219,7 @@ public class ReportFormat
 	private String breakSection;
 	private String footerSection;
 	private String fakePageBreakSection;
+	private String totalSection;
 	private String endSection;
 	private MiniFieldSpec[] specsToInclude;
 	

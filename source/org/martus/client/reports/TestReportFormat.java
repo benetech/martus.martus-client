@@ -58,6 +58,7 @@ public class TestReportFormat extends TestCaseEnhanced
 		rf.setDetailSection("detail");
 		rf.setBreakSection("break");
 		rf.setHeaderSection("header");
+		rf.setTotalSection("total");
 		rf.setBulletinPerPage(true);
 		
 		ReportFormat got = new ReportFormat(rf.toJson());
@@ -66,6 +67,7 @@ public class TestReportFormat extends TestCaseEnhanced
 		assertEquals("didn't save end?", rf.getEndSection(), got.getEndSection());
 		assertEquals("didn't save break?", rf.getBreakSection(), got.getBreakSection());
 		assertEquals("didn't save header?", rf.getHeaderSection(), got.getHeaderSection());
+		assertEquals("didn't save total?", rf.getTotalSection(), got.getTotalSection());
 		assertEquals("didn't save bulletin-per-page?", rf.getBulletinPerPage(), got.getBulletinPerPage());
 	}
 	

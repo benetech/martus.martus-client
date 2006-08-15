@@ -38,6 +38,7 @@ import org.martus.client.core.TestSortableBulletinList;
 import org.martus.client.reports.TestPageReportBuilder;
 import org.martus.client.reports.TestReportFormat;
 import org.martus.client.reports.TestReportRunner;
+import org.martus.client.reports.TestSummaryCount;
 import org.martus.client.reports.TestTabularReportBuilder;
 import org.martus.client.search.TestBulletinSearcher;
 import org.martus.client.search.TestChoiceItemSorterByLabelTagType;
@@ -94,6 +95,7 @@ public class TestClient
 		suite.addTest(new TestSuite(TestSearchParser.class));
 		suite.addTest(new TestSuite(TestSearchTreeNode.class));
 		suite.addTest(new TestSuite(TestSortableBulletinList.class));
+		suite.addTest(new TestSuite(TestSummaryCount.class));
 		suite.addTest(new TestSuite(TestTokenReplacement.class));
 		suite.addTest(new TestSuite(TestTransferableAttachments.class));
 		suite.addTest(new TestSuite(TestTransferableBulletin.class));
