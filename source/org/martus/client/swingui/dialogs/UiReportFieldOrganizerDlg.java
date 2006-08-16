@@ -62,11 +62,11 @@ public class UiReportFieldOrganizerDlg extends UIReportFieldDlg
 		
 		UiButton addButton = new UiButton(localization.getButtonLabel("AddFieldToReport"));
 		addButton.addActionListener(new AddButtonHandler());
-		UiButton removeButton = new UiButton(localization.getButtonLabel("RemoveFieldFromReport"));
+		removeButton = new UiButton(localization.getButtonLabel("RemoveFieldFromReport"));
 		removeButton.addActionListener(new RemoveButtonHandler());
-		UiButton upButton = new UiButton(localization.getButtonLabel("MoveFieldUpInReport"));
+		upButton = new UiButton(localization.getButtonLabel("MoveFieldUpInReport"));
 		upButton.addActionListener(new UpButtonHandler());
-		UiButton downButton = new UiButton(localization.getButtonLabel("MoveFieldDownInReport"));
+		downButton = new UiButton(localization.getButtonLabel("MoveFieldDownInReport"));
 		downButton.addActionListener(new DownButtonHandler());
 
 		Box sideButtonBar = Box.createVerticalBox();
@@ -75,7 +75,7 @@ public class UiReportFieldOrganizerDlg extends UIReportFieldDlg
 		sideButtonBar.add(upButton);
 		sideButtonBar.add(downButton);
 		
-		UiButton okButton = new UiButton(localization.getButtonLabel("ok"));
+		okButton = new UiButton(localization.getButtonLabel("ok"));
 		okButton.addActionListener(new OkButtonHandler());
 		UiButton cancelButton = new UiButton(localization.getButtonLabel("cancel"));
 		cancelButton.addActionListener(new CancelButtonHandler());
@@ -92,6 +92,7 @@ public class UiReportFieldOrganizerDlg extends UIReportFieldDlg
 		getContentPane().add(panel);
 		pack();
 		Utilities.centerDlg(this);
+		updateButtons();
 	}
 	
 	class AddButtonHandler implements ActionListener
@@ -106,6 +107,7 @@ public class UiReportFieldOrganizerDlg extends UIReportFieldDlg
 			UiReportFieldChooserDlg dlg = new UiReportFieldChooserDlg(mainWindow, (FieldSpec[])possibleSpecsToAdd.toArray(new FieldSpec[0]));
 			dlg.setVisible(true);
 			fieldSelector.addSpecs(dlg.getSelectedSpecs());
+			updateButtons();
 		}
 	}
 
@@ -119,6 +121,7 @@ public class UiReportFieldOrganizerDlg extends UIReportFieldDlg
 				--selectedRow;
 			if(selectedRow >= 0)
 				selectRow(selectedRow);
+			updateButtons();
 		}
 	}
 
@@ -132,6 +135,7 @@ public class UiReportFieldOrganizerDlg extends UIReportFieldDlg
 				return;
 			fieldSelector.moveSpecUp(selectedRow);
 			selectRow(rowSelectionWillMoveTo);
+			updateButtons();
 		}
 	}
 
@@ -145,6 +149,7 @@ public class UiReportFieldOrganizerDlg extends UIReportFieldDlg
 				return;
 			fieldSelector.moveSpecDown(selectedRow);
 			selectRow(rowSelectionWillMoveTo);
+			updateButtons();
 		}
 	}
 
@@ -163,6 +168,31 @@ public class UiReportFieldOrganizerDlg extends UIReportFieldDlg
 		{
 			dispose();
 		}
+	}
+	
+	public void updateButtons()
+	{
+		disableButtons();
+		
+		int specCount = fieldSelector.getSpecCount();
+		if(specCount > 0)
+		{
+			okButton.setEnabled(true);
+			removeButton.setEnabled(true);
+		}
+		if(specCount > 1)
+		{
+			upButton.setEnabled(true);
+			downButton.setEnabled(true);
+		}
+	}
+
+	private void disableButtons()
+	{
+		okButton.setEnabled(false);
+		removeButton.setEnabled(false);
+		upButton.setEnabled(false);
+		downButton.setEnabled(false);
 	}
 
 	public FieldSpec[] getSelectedSpecs()
@@ -186,6 +216,11 @@ public class UiReportFieldOrganizerDlg extends UIReportFieldDlg
 	{
 		return new FieldSpec[0];
 	}
+
+	UiButton okButton;
+	UiButton removeButton;
+	UiButton upButton;
+	UiButton downButton;
 
 	UiMainWindow mainWindow;
 	UiReportFieldSelectorPanel fieldSelector;
