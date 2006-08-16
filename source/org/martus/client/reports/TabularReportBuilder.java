@@ -43,6 +43,7 @@ public class TabularReportBuilder
 		rf.setHeaderSection(createHeaderSection(specs));
 		rf.setDetailSection(createDetailSection(specs));
 		rf.setBreakSection(createBreakSection());
+		rf.setTotalSection(createTotalSection());
 		rf.setEndSection(createEndSection());
 
 		return rf;
@@ -122,6 +123,22 @@ public class TabularReportBuilder
 				"$BreakFields.get($BreakLevel).getLocalizedLabel($localization) = " +
 				"$BreakFields.get($BreakLevel).html($localization) " +
 				"</td></tr>";
+	}
+	
+	private String createTotalSection()
+	{
+		return "<p>$localization.getFieldLabel('ReportNumberOfBulletins') $totals.count()</p>\n" +
+				"#foreach($summary1 in $totals.children())\n" +
+				"<p>$summary1.label(): $summary1.value() = $summary1.count()</p>\n" +
+				"#foreach($summary2 in $summary1.children())\n" +
+				"<p>&nbsp;&nbsp;&nbsp;&nbsp;$summary2.label(): $summary2.value() = $summary2.count()\n" +
+				"</p>#foreach($summary3 in $summary2.children())\n" +
+				"<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$summary3.label(): $summary3.value() = $summary3.count()</p>\n" +
+				"#end\n" +
+				"<p></p>\n" +
+				"#end\n" +
+				"<p></p>\n" +
+				"#end\n";
 	}
 
 	private String createEndSection()
