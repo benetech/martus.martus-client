@@ -52,7 +52,7 @@ import org.martus.client.search.SearchTreeNode;
 import org.martus.client.search.SortFieldChooserSpecBuilder;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.WorkerThread;
-import org.martus.client.swingui.dialogs.UiChooseReportFieldsDlg;
+import org.martus.client.swingui.dialogs.UiReportFieldChooserDlg;
 import org.martus.client.swingui.dialogs.UiIncludePrivateDataDlg;
 import org.martus.client.swingui.dialogs.UiPrintPreviewDlg;
 import org.martus.client.swingui.fields.UiPopUpTreeEditor;
@@ -385,7 +385,7 @@ public class ActionMenuReports extends ActionPrint
 	{
 		while(true)
 		{
-			UiChooseReportFieldsDlg dlg = new UiChooseReportFieldsDlg(mainWindow);
+			UiReportFieldChooserDlg dlg = new UiReportFieldChooserDlg(mainWindow);
 			dlg.setVisible(true);
 			FieldSpec[] selectedSpecs = dlg.getSelectedSpecs();
 			if(selectedSpecs == null)

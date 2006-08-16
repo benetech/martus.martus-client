@@ -46,9 +46,9 @@ import org.martus.swing.UiTable;
 import org.martus.swing.UiWrappedTextPanel;
 import org.martus.swing.Utilities;
 
-public class UiChooseReportFieldsDlg extends JDialog implements ActionListener
+public class UiReportFieldChooserDlg extends JDialog implements ActionListener
 {
-	public UiChooseReportFieldsDlg(UiMainWindow mainWindow)
+	public UiReportFieldChooserDlg(UiMainWindow mainWindow)
 	{
 		super(mainWindow);
 		setModal(true);
@@ -120,10 +120,8 @@ public class UiChooseReportFieldsDlg extends JDialog implements ActionListener
 		SpecTableModel model;
 		UiTable table;
 	}
-			
-		
-		
-		UiButton okButton;
-		ReportFieldSelector fieldSelector;
-		FieldSpec[] selectedSpecs;
-	}
+
+	UiButton okButton;
+	ReportFieldSelector fieldSelector;
+	FieldSpec[] selectedSpecs;
+}
