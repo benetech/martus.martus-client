@@ -34,7 +34,6 @@ import java.awt.event.ActionListener;
 import java.util.HashMap;
 
 import javax.swing.Box;
-import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -53,20 +52,20 @@ import org.martus.swing.Utilities;
 import org.martus.util.TokenReplacement;
 import org.martus.util.TokenReplacement.TokenInvalidException;
 
-public class UiFancySearchDlg extends JDialog  implements ActionListener
+public class UiFancySearchDlg extends JDialog
 {
 	public UiFancySearchDlg(UiMainWindow owner)
 	{
 		super(owner, "", true);
 		localization = owner.getLocalization();
-		searchButton = createBody(owner);
+		createBody(owner);
 		Utilities.centerDlg(this);
 		pack();  //JAVA Bug had to call pack twice to force UiWrappedTextArea to get the right dimension
 		setResizable(true);
 
 	}
 	
-	UiButton createBody(UiMainWindow mainWindow)
+	void createBody(UiMainWindow mainWindow)
 	{
 		setTitle(localization.getWindowTitle("search"));
 		
@@ -75,10 +74,10 @@ public class UiFancySearchDlg extends JDialog  implements ActionListener
 		help.addActionListener(new HelpListener(mainWindow));
 		
 		UiButton search = new UiButton(localization.getButtonLabel("search"));
-		search.addActionListener(this);
+		search.addActionListener(new SearchButtonHandler());
 
 		UiButton cancel = new UiButton(localization.getButtonLabel("cancel"));
-		cancel.addActionListener(this);
+		cancel.addActionListener(new CancelButtonHandler());
 		UiDialogLauncher dlgLauncher = new UiDialogLauncher(mainWindow.getCurrentActiveFrame(), localization);
 		grid = FancySearchGridEditor.create(mainWindow.getStore(), dlgLauncher);
 		grid.setText(getPreviousSearch());
@@ -127,7 +126,6 @@ public class UiFancySearchDlg extends JDialog  implements ActionListener
 
 		getContentPane().add(mainPanel);
 		setInsertButtonAsDefault();
-		return search;
 	}
 
 	private void setInsertButtonAsDefault()
@@ -271,14 +269,24 @@ public class UiFancySearchDlg extends JDialog  implements ActionListener
 		searchFinalBulletins.setSelected(searchFinalOnly);
 	}
 	
-	public void actionPerformed(ActionEvent ae)
+	class SearchButtonHandler implements ActionListener
 	{
-		if(ae.getSource() == searchButton)
+		public void actionPerformed(ActionEvent e)
 		{
 			memorizeSearch();
 			result = true;
+			dispose();
 		}
-		dispose();
+		
+	}
+	
+	class CancelButtonHandler implements ActionListener
+	{
+		public void actionPerformed(ActionEvent e)
+		{
+			dispose();
+		}
+		
 	}
 
 
@@ -292,14 +300,10 @@ public class UiFancySearchDlg extends JDialog  implements ActionListener
 		return localization;
 	}
 
+	private static String previousSearch = "";
 
 	boolean result;
 	MartusLocalization localization;
-	
-	protected JButton searchButton;
-
-
 	FancySearchGridEditor grid;
 	UiCheckBox searchFinalBulletins;
-	private static String previousSearch = "";
 }
