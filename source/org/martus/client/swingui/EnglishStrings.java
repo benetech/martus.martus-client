@@ -377,6 +377,8 @@ public class EnglishStrings
 "button:FieldLabel=Field Label",
 "button:FieldType=Type",
 "button:FieldTag=Tag",
+"button:SaveSearch=Save This Search...",
+"button:LoadSearch=Load Previous Search...",
 
 "menu:file=File",
 "menu:CreateNewBulletin=Create New Bulletin",

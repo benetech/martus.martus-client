@@ -39,6 +39,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import org.martus.client.search.FancySearchGridEditor;
+import org.martus.client.search.SearchSpec;
 import org.martus.client.search.SearchTreeNode;
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
@@ -73,6 +74,14 @@ public class UiFancySearchDlg extends JDialog
 		UiButton help = new UiButton(helpButtonText);
 		help.addActionListener(new HelpListener(mainWindow));
 		
+		String saveButtonText = localization.getButtonLabel("SaveSearch");
+		UiButton save = new UiButton(saveButtonText);
+		save.addActionListener(new SaveButtonHandler(this));
+		
+		String loadButtonText = localization.getButtonLabel("LoadSearch");
+		UiButton load = new UiButton(loadButtonText);
+		load.addActionListener(new LoadButtonHandler(this));
+		
 		UiButton search = new UiButton(localization.getButtonLabel("search"));
 		search.addActionListener(new SearchButtonHandler());
 
@@ -102,7 +111,7 @@ public class UiFancySearchDlg extends JDialog
 
 		Box buttonBox = Box.createHorizontalBox();
 		buttonBox.setBorder(new EmptyBorder(10,0,0,0));
-		Component[] buttons = new Component[] {help, Box.createHorizontalGlue(), search, cancel };
+		Component[] buttons = new Component[] {help, Box.createHorizontalGlue(), load, save, Box.createHorizontalGlue(), search, cancel };
 		Utilities.addComponentsRespectingOrientation(buttonBox, buttons);
 		
 		searchFinalBulletins = new UiCheckBox(localization.getButtonLabel("SearchFinalBulletinsOnly"));
@@ -286,8 +295,41 @@ public class UiFancySearchDlg extends JDialog
 		}
 		
 	}
-
-
+	
+	static class SaveButtonHandler implements ActionListener
+	{
+		public SaveButtonHandler(UiFancySearchDlg dialogToSaveFrom)
+		{
+			dialog = dialogToSaveFrom;
+		}
+		
+		public void actionPerformed(ActionEvent e)
+		{
+			
+		}
+		
+		UiFancySearchDlg dialog;
+	}
+	
+	static class LoadButtonHandler implements ActionListener
+	{
+		public LoadButtonHandler(UiFancySearchDlg dialogToLoadInto)
+		{
+			dialog = dialogToLoadInto;
+		}
+		
+		public void actionPerformed(ActionEvent e)
+		{
+		}
+		
+		UiFancySearchDlg dialog;
+	}
+	
+	SearchSpec getSearchSpec()
+	{
+		return new SearchSpec(getSearchString(), searchFinalBulletinsOnly());
+	}
+	
 	public boolean getResults()
 	{
 		return result;
