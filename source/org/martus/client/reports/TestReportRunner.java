@@ -257,7 +257,9 @@ public class TestReportRunner extends TestCaseEnhanced
 				"1. " + authorLabel + ": b = 1\n" +
 				"2. " + summaryLabel + ": 1 = 1\n", totals.getPageText(0));
 		
-		
+		options.printBreaks = false;
+		ReportOutput noTotals = runReportOnAppData(rf, app, options);
+		assertEquals("printed total section?", "", noTotals.getPageText(0));
 	}
 	
 	public void testOmitDetail() throws Exception

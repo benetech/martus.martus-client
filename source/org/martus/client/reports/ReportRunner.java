@@ -113,9 +113,12 @@ public class ReportRunner
 				destination.startNewPage();
 			}
 		}
-		
-		context.put("totals", breakHandler.getSummaryTotals());
-		performMerge(rf.getTotalSection(), destination);
+
+		if(options.printBreaks)
+		{
+			context.put("totals", breakHandler.getSummaryTotals());
+			performMerge(rf.getTotalSection(), destination);
+		}
 		
 		performMerge(rf.getEndSection(), destination);
 		context = null;
