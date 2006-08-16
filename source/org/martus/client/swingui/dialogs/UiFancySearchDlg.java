@@ -32,14 +32,19 @@ import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.HashMap;
+
 import javax.swing.Box;
+import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
 import org.martus.client.search.FancySearchGridEditor;
 import org.martus.client.search.SearchTreeNode;
+import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.grids.GridTableModel;
+import org.martus.clientside.UiLocalization;
 import org.martus.common.MiniLocalization;
 import org.martus.swing.UiButton;
 import org.martus.swing.UiCheckBox;
@@ -48,11 +53,17 @@ import org.martus.swing.Utilities;
 import org.martus.util.TokenReplacement;
 import org.martus.util.TokenReplacement.TokenInvalidException;
 
-public class UiFancySearchDlg extends UiSearchDlg
+public class UiFancySearchDlg extends JDialog  implements ActionListener
 {
 	public UiFancySearchDlg(UiMainWindow owner)
 	{
-		super(owner);
+		super(owner, "", true);
+		localization = owner.getLocalization();
+		searchButton = createBody(owner);
+		Utilities.centerDlg(this);
+		pack();  //JAVA Bug had to call pack twice to force UiWrappedTextArea to get the right dimension
+		setResizable(true);
+
 	}
 	
 	UiButton createBody(UiMainWindow mainWindow)
@@ -93,7 +104,8 @@ public class UiFancySearchDlg extends UiSearchDlg
 
 		Box buttonBox = Box.createHorizontalBox();
 		buttonBox.setBorder(new EmptyBorder(10,0,0,0));
-		Utilities.addComponentsRespectingOrientation(buttonBox, new Component[] {help, Box.createHorizontalGlue(), search, cancel });
+		Component[] buttons = new Component[] {help, Box.createHorizontalGlue(), search, cancel };
+		Utilities.addComponentsRespectingOrientation(buttonBox, buttons);
 		
 		searchFinalBulletins = new UiCheckBox(localization.getButtonLabel("SearchFinalBulletinsOnly"));
 		searchFinalBulletins.setSelected(false);
@@ -259,6 +271,33 @@ public class UiFancySearchDlg extends UiSearchDlg
 		searchFinalBulletins.setSelected(searchFinalOnly);
 	}
 	
+	public void actionPerformed(ActionEvent ae)
+	{
+		if(ae.getSource() == searchButton)
+		{
+			memorizeSearch();
+			result = true;
+		}
+		dispose();
+	}
+
+
+	public boolean getResults()
+	{
+		return result;
+	}
+
+	public UiLocalization getLocalization()
+	{
+		return localization;
+	}
+
+
+	boolean result;
+	MartusLocalization localization;
+	
+	protected JButton searchButton;
+
 
 	FancySearchGridEditor grid;
 	UiCheckBox searchFinalBulletins;
