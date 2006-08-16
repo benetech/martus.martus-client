@@ -44,19 +44,22 @@ import org.martus.client.core.PartialBulletin;
 import org.martus.client.core.SortableBulletinList;
 import org.martus.client.reports.PageReportBuilder;
 import org.martus.client.reports.ReportFormat;
+import org.martus.client.reports.ReportFormatFilter;
 import org.martus.client.reports.ReportOutput;
 import org.martus.client.reports.ReportRunner;
 import org.martus.client.reports.RunReportOptions;
 import org.martus.client.reports.TabularReportBuilder;
 import org.martus.client.search.SearchTreeNode;
 import org.martus.client.search.SortFieldChooserSpecBuilder;
+import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.WorkerThread;
-import org.martus.client.swingui.dialogs.UiReportFieldChooserDlg;
 import org.martus.client.swingui.dialogs.UiIncludePrivateDataDlg;
 import org.martus.client.swingui.dialogs.UiPrintPreviewDlg;
+import org.martus.client.swingui.dialogs.UiReportFieldChooserDlg;
 import org.martus.client.swingui.fields.UiPopUpTreeEditor;
 import org.martus.clientside.FileDialogHelpers;
+import org.martus.clientside.FormatFilter;
 import org.martus.clientside.UiLocalization;
 import org.martus.common.MiniLocalization;
 import org.martus.common.bulletin.Bulletin;
@@ -69,11 +72,9 @@ import org.martus.common.fieldspec.StandardFieldSpecs;
 import org.martus.swing.PrintUtilities;
 import org.martus.swing.UiButton;
 import org.martus.swing.UiComboBox;
-import org.martus.swing.UiFileChooser;
 import org.martus.swing.UiLabel;
 import org.martus.swing.UiWrappedTextArea;
 import org.martus.swing.Utilities;
-import org.martus.swing.UiFileChooser.FileDialogResults;
 import org.martus.util.UnicodeReader;
 import org.martus.util.UnicodeWriter;
 
@@ -211,26 +212,11 @@ public class ActionMenuReports extends ActionPrint
 	{
 		String title = getLocalization().getWindowTitle("SaveReportAs");
 		File directory = mainWindow.getApp().getCurrentAccountDirectory();
-		FileFilter filter = new ReportFormatFilter(getLocalization());
-		File file = null;
-		while(true)
-		{
-			FileDialogResults results = UiFileChooser.displayFileSaveDialog(mainWindow, 
-					title, directory, filter);
-			if(results.wasCancelChoosen())
-				return null;
-			file = results.getChosenFile();
-			if(!file.getName().toLowerCase().endsWith(MRF_FILE_EXTENSION))
-				file = new File(file.getAbsolutePath() + MRF_FILE_EXTENSION);
-			if(!file.exists())
-				break;
-			if(mainWindow.confirmDlg(mainWindow, "OverWriteExistingFile"))
-				break;
-		}
-		
-		return file;
+		FormatFilter filter = new ReportFormatFilter(getLocalization());
+		MartusLocalization localization = mainWindow.getLocalization();
+		return FileDialogHelpers.doFileSaveDialog(mainWindow, title, directory, filter, localization);
 	}
-	
+
 	void runReport(ReportFormat rf) throws Exception
 	{
 		SearchTreeNode searchTree = mainWindow.askUserForSearchCriteria();
@@ -639,29 +625,6 @@ public class ActionMenuReports extends ActionPrint
 		private static ChoiceItem savedBreakChoice;
 	}
 
-	class ReportFormatFilter extends FileFilter
-	{
-		public ReportFormatFilter(MiniLocalization localizationToUse)
-		{
-			localization = localizationToUse;
-		}
-		
-		public boolean accept(File f)
-		{
-			if(f.isDirectory())
-				return true;
-			return (f.getName().toLowerCase().endsWith(MRF_FILE_EXTENSION));
-		}
-
-		public String getDescription()
-		{
-			return localization.getFieldLabel("MartusReportFormat");
-		}
-
-		MiniLocalization localization;
-	}
-
-	private static final String MRF_FILE_EXTENSION = ".mrf";
 	private static final int MAX_SORT_LEVELS = 3;
 }
 
