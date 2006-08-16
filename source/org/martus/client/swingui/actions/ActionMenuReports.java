@@ -35,8 +35,6 @@ import java.util.Vector;
 
 import javax.swing.Box;
 import javax.swing.JDialog;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 import javax.swing.event.TableModelListener;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.table.TableModel;
@@ -50,12 +48,11 @@ import org.martus.client.reports.ReportOutput;
 import org.martus.client.reports.ReportRunner;
 import org.martus.client.reports.RunReportOptions;
 import org.martus.client.reports.TabularReportBuilder;
-import org.martus.client.search.FieldChooserSpecBuilder;
 import org.martus.client.search.SearchTreeNode;
 import org.martus.client.search.SortFieldChooserSpecBuilder;
-import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.WorkerThread;
+import org.martus.client.swingui.dialogs.UiChooseReportFieldsDlg;
 import org.martus.client.swingui.dialogs.UiIncludePrivateDataDlg;
 import org.martus.client.swingui.dialogs.UiPrintPreviewDlg;
 import org.martus.client.swingui.fields.UiPopUpTreeEditor;
@@ -73,10 +70,7 @@ import org.martus.swing.UiButton;
 import org.martus.swing.UiComboBox;
 import org.martus.swing.UiFileChooser;
 import org.martus.swing.UiLabel;
-import org.martus.swing.UiScrollPane;
-import org.martus.swing.UiTable;
 import org.martus.swing.UiWrappedTextArea;
-import org.martus.swing.UiWrappedTextPanel;
 import org.martus.swing.Utilities;
 import org.martus.swing.UiFileChooser.FileDialogResults;
 import org.martus.util.UnicodeReader;
@@ -391,7 +385,7 @@ public class ActionMenuReports extends ActionPrint
 	{
 		while(true)
 		{
-			ChooseTabularReportFieldsDialog dlg = new ChooseTabularReportFieldsDialog(mainWindow);
+			UiChooseReportFieldsDlg dlg = new UiChooseReportFieldsDlg(mainWindow);
 			dlg.setVisible(true);
 			FieldSpec[] selectedSpecs = dlg.getSelectedSpecs();
 			if(selectedSpecs == null)
@@ -404,90 +398,9 @@ public class ActionMenuReports extends ActionPrint
 			return selectedSpecs;
 		}
 	}
-	
-	static class ChooseTabularReportFieldsDialog extends JDialog implements ActionListener
-	{
-		public ChooseTabularReportFieldsDialog(UiMainWindow mainWindow)
-		{
-			super(mainWindow);
-			setModal(true);
-			
-			String dialogTag = "ChooseTabularReportFields";
-			MartusLocalization localization = mainWindow.getLocalization();
-			setTitle(localization.getWindowTitle(dialogTag));
-			
-			fieldSelector = new ReportFieldSelector(mainWindow);
-			
-			okButton = new UiButton(localization.getButtonLabel("ok"));
-			okButton.addActionListener(this);
-			UiButton cancelButton = new UiButton(localization.getButtonLabel("cancel"));
-			cancelButton.addActionListener(this);
-			Box buttonBar = Box.createHorizontalBox();
-			Component[] buttons = {Box.createHorizontalGlue(), okButton, cancelButton};
-			Utilities.addComponentsRespectingOrientation(buttonBar, buttons);
 
-			JPanel panel = new JPanel(new BorderLayout());
-			panel.add(new UiWrappedTextPanel(localization.getFieldLabel(dialogTag)), BorderLayout.BEFORE_FIRST_LINE);
-			panel.add(new UiScrollPane(fieldSelector), BorderLayout.CENTER);
-			panel.add(buttonBar, BorderLayout.AFTER_LAST_LINE);
-
-			getContentPane().add(panel);
-			pack();
-			Utilities.centerDlg(this);
-		}
-		
-		public void actionPerformed(ActionEvent e)
-		{
-			if(e.getSource().equals(okButton))
-			{
-				selectedSpecs = fieldSelector.getSelectedItems();
-			}
-			dispose();
-		}
-		
-		public FieldSpec[] getSelectedSpecs()
-		{
-			return selectedSpecs;
-		}
-		
-		static class ReportFieldSelector extends JPanel
-		{
-			public ReportFieldSelector(UiMainWindow mainWindow)
-			{
-				super(new BorderLayout());
-				FieldChooserSpecBuilder builder = new FieldChooserSpecBuilder(mainWindow.getLocalization());
-				FieldSpec[] rawFieldSpecs = builder.createFieldSpecArray(mainWindow.getStore());
-				model = new SpecTableModel(rawFieldSpecs, mainWindow.getLocalization());
-				table = new UiTable(model);
-				table.setMaxGridWidth(40);
-				table.useMaxWidth();
-				table.setFocusable(false);
-				table.createDefaultColumnsFromModel();
-				table.setColumnSelectionAllowed(false);
-				add(new JScrollPane(table), BorderLayout.CENTER);
-			}
-			
-			public FieldSpec[] getSelectedItems()
-			{
-				int[] selectedRows = table.getSelectedRows();
-				FieldSpec[] selectedItems = new FieldSpec[selectedRows.length];
-				for(int i = 0; i < selectedRows.length; ++i)
-					selectedItems[i] = model.getSpec(selectedRows[i]);
-				return selectedItems;
-			}
-			
-			SpecTableModel model;
-			UiTable table;
-		}
-			
-		
-		
-		UiButton okButton;
-		ReportFieldSelector fieldSelector;
-		FieldSpec[] selectedSpecs;
-	}
 	
-	static class SpecTableModel implements TableModel
+	static public class SpecTableModel implements TableModel
 	{
 		public SpecTableModel(FieldSpec[] specsToUse, MiniLocalization localizationToUse)
 		{
