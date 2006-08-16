@@ -35,17 +35,14 @@ import java.util.Vector;
 import javax.swing.Box;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
 
-import org.martus.client.reports.SpecTableModel;
 import org.martus.client.search.FieldChooserSpecBuilder;
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.common.fieldspec.FieldSpec;
 import org.martus.swing.UiButton;
 import org.martus.swing.UiScrollPane;
-import org.martus.swing.UiTable;
 import org.martus.swing.UiWrappedTextPanel;
 import org.martus.swing.Utilities;
 
@@ -61,7 +58,8 @@ public class UiReportFieldOrganizerDlg extends JDialog
 		MartusLocalization localization = mainWindow.getLocalization();
 		setTitle(localization.getWindowTitle(dialogTag));
 		
-		fieldSelector = new ReportFieldSelector(mainWindow);
+		fieldSelector = new UiReportFieldSelectorPanel(mainWindow, getEmptyFieldSpecsToStart());
+		fieldSelector.getTable().setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		
 		UiButton addButton = new UiButton(localization.getButtonLabel("AddFieldToReport"));
 		addButton.addActionListener(new AddButtonHandler());
@@ -101,15 +99,14 @@ public class UiReportFieldOrganizerDlg extends JDialog
 	{
 		public void actionPerformed(ActionEvent e)
 		{
-			FieldChooserSpecBuilder allFieldSpecBuilder = new FieldChooserSpecBuilder(mainWindow.getLocalization());
-			FieldSpec[] allFieldSpecs = allFieldSpecBuilder.createFieldSpecArray(mainWindow.getStore());
+			FieldSpec[] allFieldSpecs = getAllFieldSpecs();
 			Vector possibleSpecsToAdd = new Vector(Arrays.asList(allFieldSpecs));
-			FieldSpec[] currentSpecs = fieldSelector.getItems();
+			FieldSpec[] currentSpecs = fieldSelector.getAllItems();
 			if(currentSpecs != null)
 				possibleSpecsToAdd.removeAll(Arrays.asList(currentSpecs));
 			UiReportFieldChooserDlg dlg = new UiReportFieldChooserDlg(mainWindow, (FieldSpec[])possibleSpecsToAdd.toArray(new FieldSpec[0]));
 			dlg.setVisible(true);
-			model.AddSpecs(dlg.getSelectedSpecs());
+			fieldSelector.addSpecs(dlg.getSelectedSpecs());
 		}
 	}
 
@@ -117,9 +114,9 @@ public class UiReportFieldOrganizerDlg extends JDialog
 	{
 		public void actionPerformed(ActionEvent e)
 		{
-			int selectedRow = table.getSelectedRow();
-			model.RemoveSpec(selectedRow);
-			if(selectedRow == table.getRowCount())
+			int selectedRow = fieldSelector.getSelectedRow();
+			fieldSelector.removeSpec(selectedRow);
+			if(selectedRow == fieldSelector.getSpecCount())
 				--selectedRow;
 			if(selectedRow >= 0)
 				selectRow(selectedRow);
@@ -130,11 +127,11 @@ public class UiReportFieldOrganizerDlg extends JDialog
 	{
 		public void actionPerformed(ActionEvent e)
 		{
-			int selectedRow = table.getSelectedRow();
+			int selectedRow = fieldSelector.getSelectedRow();
 			int rowSelectionWillMoveTo = selectedRow-1;
 			if(rowSelectionWillMoveTo < 0)
 				return;
-			model.MoveSpecUp(selectedRow);
+			fieldSelector.moveSpecUp(selectedRow);
 			selectRow(rowSelectionWillMoveTo);
 		}
 	}
@@ -143,11 +140,11 @@ public class UiReportFieldOrganizerDlg extends JDialog
 	{
 		public void actionPerformed(ActionEvent e)
 		{
-			int selectedRow = table.getSelectedRow();
+			int selectedRow = fieldSelector.getSelectedRow();
 			int rowSelectionWillMoveTo = selectedRow+1;
-			if(selectedRow < 0 ||rowSelectionWillMoveTo >= table.getRowCount())
+			if(selectedRow < 0 || rowSelectionWillMoveTo >= fieldSelector.getSpecCount())
 				return;
-			model.MoveSpecDown(selectedRow);
+			fieldSelector.moveSpecDown(selectedRow);
 			selectRow(rowSelectionWillMoveTo);
 		}
 	}
@@ -156,7 +153,7 @@ public class UiReportFieldOrganizerDlg extends JDialog
 	{
 		public void actionPerformed(ActionEvent e)
 		{
-			orderedSpecs = fieldSelector.getItems();
+			orderedSpecs = fieldSelector.getAllItems();
 			dispose();
 		}
 	}
@@ -176,40 +173,22 @@ public class UiReportFieldOrganizerDlg extends JDialog
 	
 	void selectRow(int rowToSelect)
 	{
-		table.getSelectionModel().setSelectionInterval(rowToSelect, rowToSelect);
+		fieldSelector.selectRow(rowToSelect);
 	}
 
-	class ReportFieldSelector extends JPanel
+	FieldSpec[] getAllFieldSpecs()
 	{
-		public ReportFieldSelector(UiMainWindow mainWindow)
-		{
-			super(new BorderLayout());
-			FieldSpec[] emptyFieldSpecs = new FieldSpec[0];
-			model = new SpecTableModel(emptyFieldSpecs, mainWindow.getLocalization());
-			table = new UiTable(model);
-			table.setMaxGridWidth(40);
-			table.useMaxWidth();
-			table.setFocusable(false);
-			table.createDefaultColumnsFromModel();
-			table.setColumnSelectionAllowed(false);
-			table.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
-			add(new JScrollPane(table), BorderLayout.CENTER);
-		}
-		
-		public FieldSpec[] getItems()
-		{
-			int rows = table.getRowCount();
-			FieldSpec[] items = new FieldSpec[rows];
-			for(int i = 0; i < rows; ++i)
-				items[i] = model.getSpec(i);
-			return items;
-		}
-		
+		FieldChooserSpecBuilder allFieldSpecBuilder = new FieldChooserSpecBuilder(mainWindow.getLocalization());
+		FieldSpec[] allFieldSpecs = allFieldSpecBuilder.createFieldSpecArray(mainWindow.getStore());
+		return allFieldSpecs;
+	}
+	
+	FieldSpec[] getEmptyFieldSpecsToStart()
+	{
+		return new FieldSpec[0];
 	}
 
 	UiMainWindow mainWindow;
-	SpecTableModel model;
-	UiTable table;
-	ReportFieldSelector fieldSelector;
+	UiReportFieldSelectorPanel fieldSelector;
 	FieldSpec[] orderedSpecs;
 }

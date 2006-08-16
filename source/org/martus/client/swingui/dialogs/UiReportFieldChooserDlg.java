@@ -33,16 +33,13 @@ import java.awt.event.ActionListener;
 import javax.swing.Box;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 
-import org.martus.client.reports.SpecTableModel;
 import org.martus.client.search.FieldChooserSpecBuilder;
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.common.fieldspec.FieldSpec;
 import org.martus.swing.UiButton;
 import org.martus.swing.UiScrollPane;
-import org.martus.swing.UiTable;
 import org.martus.swing.UiWrappedTextPanel;
 import org.martus.swing.Utilities;
 
@@ -63,7 +60,7 @@ public class UiReportFieldChooserDlg extends JDialog
 		setTitle(localization.getWindowTitle(dialogTag));
 		selectedSpecs = null;
 
-		fieldSelector = new ReportFieldSelector(mainWindow, specsToUse);
+		fieldSelector = new UiReportFieldSelectorPanel(mainWindow, specsToUse);
 		
 		UiButton okButton = new UiButton(localization.getButtonLabel("ok"));
 		okButton.addActionListener(new OkButtonHandler());
@@ -106,34 +103,7 @@ public class UiReportFieldChooserDlg extends JDialog
 		return selectedSpecs;
 	}
 	
-	static class ReportFieldSelector extends JPanel
-	{
-		public ReportFieldSelector(UiMainWindow mainWindow, FieldSpec[] rawFieldSpecs)
-		{
-			super(new BorderLayout());
-			model = new SpecTableModel(rawFieldSpecs, mainWindow.getLocalization());
-			table = new UiTable(model);
-			table.setMaxGridWidth(40);
-			table.useMaxWidth();
-			table.setFocusable(false);
-			table.createDefaultColumnsFromModel();
-			table.setColumnSelectionAllowed(false);
-			add(new JScrollPane(table), BorderLayout.CENTER);
-		}
-		
-		public FieldSpec[] getSelectedItems()
-		{
-			int[] selectedRows = table.getSelectedRows();
-			FieldSpec[] selectedItems = new FieldSpec[selectedRows.length];
-			for(int i = 0; i < selectedRows.length; ++i)
-				selectedItems[i] = model.getSpec(selectedRows[i]);
-			return selectedItems;
-		}
-		
-		SpecTableModel model;
-		UiTable table;
-	}
 
-	ReportFieldSelector fieldSelector;
+	UiReportFieldSelectorPanel fieldSelector;
 	FieldSpec[] selectedSpecs;
 }

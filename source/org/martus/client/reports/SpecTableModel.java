@@ -38,11 +38,11 @@ public class SpecTableModel extends AbstractTableModel
 	public SpecTableModel(FieldSpec[] specsToUse, MiniLocalization localizationToUse)
 	{
 		specs = new Vector();
-		AddSpecs(specsToUse);
+		addSpecs(specsToUse);
 		localization = localizationToUse;
 	}
 	
-	public void AddSpecs(FieldSpec[] specsToAdd)
+	public void addSpecs(FieldSpec[] specsToAdd)
 	{
 		if(specsToAdd == null)
 			return;
@@ -50,7 +50,7 @@ public class SpecTableModel extends AbstractTableModel
 		fireTableDataChanged();
 	}
 	
-	public void RemoveSpec(int row)
+	public void removeSpec(int row)
 	{
 		if(row == -1)
 			return;
@@ -58,7 +58,7 @@ public class SpecTableModel extends AbstractTableModel
 		fireTableRowsDeleted(row, row);
 	}	
 	
-	public void MoveSpecUp(int row)
+	public void moveSpecUp(int row)
 	{
 		if(row < 1)
 			return;
@@ -66,7 +66,7 @@ public class SpecTableModel extends AbstractTableModel
 		swapRows(row, destinationRow);
 	}
 
-	public void MoveSpecDown(int row)
+	public void moveSpecDown(int row)
 	{
 		if(row < 0 || row >= (specs.size() -1))
 			return;
