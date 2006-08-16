@@ -59,7 +59,7 @@ public class UiReportFieldChooserDlg extends JDialog
 		
 		fieldSelector = new ReportFieldSelector(mainWindow);
 		
-		okButton = new UiButton(localization.getButtonLabel("ok"));
+		UiButton okButton = new UiButton(localization.getButtonLabel("ok"));
 		okButton.addActionListener(new OkButtonHandler());
 		UiButton cancelButton = new UiButton(localization.getButtonLabel("cancel"));
 		cancelButton.addActionListener(new CancelButtonHandler());
@@ -130,7 +130,6 @@ public class UiReportFieldChooserDlg extends JDialog
 		UiTable table;
 	}
 
-	UiButton okButton;
 	ReportFieldSelector fieldSelector;
 	FieldSpec[] selectedSpecs;
 }
