@@ -342,6 +342,7 @@ public class ActionMenuReports extends ActionPrint
 		return true;
 	}
 
+	//TODO: Instead of passing in a constant pass in a Factory instead which will create the correct dialog
 	FieldSpec[] askUserWhichFieldsToInclude(int reportType)
 	{
 		while(true)
