@@ -33,7 +33,7 @@ public class ReportFormatFilter extends FormatFilter
 {
 	public ReportFormatFilter(MiniLocalization localization)
 	{
-		description = localization.getFieldLabel("MartusReportFormat");
+		description = localization.getFieldLabel("MartusReportFormatFileFilter");
 	}
 	
 	public String getDescription()

@@ -937,7 +937,7 @@ public class EnglishStrings
 "field:ReportDetailWithSummaries=Print Bulletin Information and Summary Counts",
 "field:ReportSummariesOnly=Print Summary Counts Only",
 "field:ChooseReportFields=Use Ctrl-Click or Shift-Click to select the fields (columns) that will appear in this report. ",
-"field:MartusReportFormat=Martus Report Format (.mrf)",
+"field:MartusReportFormatFileFilter=Martus Report Format (.mrf)",
 "field:MartusSearchSpecFileFilter=Martus Search Specification (.mss)",
 "field:CustomXMLTopSection=Top Section of Bulletin",
 "field:CustomXMLBottomSection=Bottom/Private Section of Bulletin",
