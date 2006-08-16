@@ -39,6 +39,7 @@ import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import org.json.JSONObject;
 import org.martus.client.search.FancySearchGridEditor;
 import org.martus.client.search.SearchSpec;
 import org.martus.client.search.SearchTreeNode;
@@ -53,6 +54,8 @@ import org.martus.swing.UiCheckBox;
 import org.martus.swing.UiWrappedTextPanel;
 import org.martus.swing.Utilities;
 import org.martus.util.TokenReplacement;
+import org.martus.util.UnicodeReader;
+import org.martus.util.UnicodeWriter;
 import org.martus.util.TokenReplacement.TokenInvalidException;
 
 public class UiFancySearchDlg extends JDialog
@@ -311,13 +314,39 @@ public class UiFancySearchDlg extends JDialog
 			dialog = dialogToSaveFrom;
 		}
 		
-		public void actionPerformed(ActionEvent e)
+		public void actionPerformed(ActionEvent event)
 		{
 			UiLocalization localization = dialog.getLocalization();
 			String title = localization.getWindowTitle("SaveSearch");
 			File directory = dialog.mainWindow.getApp().getCurrentAccountDirectory();
 			FormatFilter filter = new SearchSpecFilter(localization);
 			File saveTo = FileDialogHelpers.doFileSaveDialog(dialog.mainWindow, title, directory, filter, localization);
+			if(saveTo == null)
+				return;
+			
+			try
+			{
+				save(saveTo);
+			} 
+			catch (Exception e)
+			{
+				e.printStackTrace();
+				dialog.mainWindow.notifyDlg("ErrorWritingFile");
+			}
+		}
+		
+		void save(File destination) throws Exception
+		{
+			String text = dialog.getSearchSpec().toJson().toString();
+			UnicodeWriter writer = new UnicodeWriter(destination);
+			try
+			{
+				writer.write(text);
+			} 
+			finally
+			{
+				writer.close();
+			}
 		}
 		
 		UiFancySearchDlg dialog;
@@ -330,7 +359,7 @@ public class UiFancySearchDlg extends JDialog
 			dialog = dialogToLoadInto;
 		}
 		
-		public void actionPerformed(ActionEvent e)
+		public void actionPerformed(ActionEvent event)
 		{
 			UiLocalization localization = dialog.getLocalization();
 			String title = localization.getWindowTitle("SaveSearch");
@@ -338,6 +367,33 @@ public class UiFancySearchDlg extends JDialog
 			File directory = dialog.mainWindow.getApp().getCurrentAccountDirectory();
 			FormatFilter filter = new SearchSpecFilter(localization);
 			File loadFrom = FileDialogHelpers.doFileOpenDialog(dialog.mainWindow, title, openButtonLabel, directory, filter);
+			if(loadFrom == null)
+				return;
+			
+			try
+			{
+				SearchSpec spec = load(loadFrom);
+				dialog.setSearchString(spec.getSearchString());
+				dialog.setSearchFinalBulletinsOnly(spec.getFinalOnly());
+			} 
+			catch (Exception e)
+			{
+				e.printStackTrace();
+				dialog.mainWindow.notifyDlg("ErrorReadingFile");
+			}
+		}
+		
+		SearchSpec load(File loadFrom) throws Exception
+		{
+			UnicodeReader reader = new UnicodeReader(loadFrom);
+			try
+			{
+				return new SearchSpec(new JSONObject(reader.readAll()));
+			} 
+			finally
+			{
+				reader.close();
+			}
 		}
 		
 		UiFancySearchDlg dialog;
