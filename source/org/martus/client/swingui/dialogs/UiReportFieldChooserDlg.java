@@ -50,6 +50,11 @@ public class UiReportFieldChooserDlg extends JDialog
 {
 	public UiReportFieldChooserDlg(UiMainWindow mainWindow)
 	{
+		this(mainWindow, new FieldChooserSpecBuilder(mainWindow.getLocalization()).createFieldSpecArray(mainWindow.getStore()));
+	}
+	
+	public UiReportFieldChooserDlg(UiMainWindow mainWindow, FieldSpec[] specsToUse)
+	{
 		super(mainWindow);
 		setModal(true);
 		
@@ -57,8 +62,8 @@ public class UiReportFieldChooserDlg extends JDialog
 		MartusLocalization localization = mainWindow.getLocalization();
 		setTitle(localization.getWindowTitle(dialogTag));
 		selectedSpecs = null;
-		
-		fieldSelector = new ReportFieldSelector(mainWindow);
+
+		fieldSelector = new ReportFieldSelector(mainWindow, specsToUse);
 		
 		UiButton okButton = new UiButton(localization.getButtonLabel("ok"));
 		okButton.addActionListener(new OkButtonHandler());
@@ -103,11 +108,9 @@ public class UiReportFieldChooserDlg extends JDialog
 	
 	static class ReportFieldSelector extends JPanel
 	{
-		public ReportFieldSelector(UiMainWindow mainWindow)
+		public ReportFieldSelector(UiMainWindow mainWindow, FieldSpec[] rawFieldSpecs)
 		{
 			super(new BorderLayout());
-			FieldChooserSpecBuilder builder = new FieldChooserSpecBuilder(mainWindow.getLocalization());
-			FieldSpec[] rawFieldSpecs = builder.createFieldSpecArray(mainWindow.getStore());
 			model = new SpecTableModel(rawFieldSpecs, mainWindow.getLocalization());
 			table = new UiTable(model);
 			table.setMaxGridWidth(40);
