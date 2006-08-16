@@ -1289,12 +1289,14 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	{
 		UiFancySearchDlg searchDlg = new UiFancySearchDlg(this);
 		searchDlg.setSearchFinalBulletinsOnly(uiState.searchFinalBulletinsOnly());
+		searchDlg.setSearchString(uiState.getSearchString());
 		searchDlg.setVisible(true);
 		if(!searchDlg.getResults())
 			return null;
 		
 
 		uiState.setSearchFinalBulletinsOnly(searchDlg.searchFinalBulletinsOnly());
+		uiState.setSearchString(searchDlg.getSearchString());
 		return searchDlg.getSearchTree();
 	}
 

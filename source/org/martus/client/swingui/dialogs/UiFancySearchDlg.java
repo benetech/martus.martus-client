@@ -80,7 +80,6 @@ public class UiFancySearchDlg extends JDialog
 		cancel.addActionListener(new CancelButtonHandler());
 		UiDialogLauncher dlgLauncher = new UiDialogLauncher(mainWindow.getCurrentActiveFrame(), localization);
 		grid = FancySearchGridEditor.create(mainWindow.getStore(), dlgLauncher);
-		grid.setText(getPreviousSearch());
 		clearGridIfAnyProblems();
 
 		JPanel instructionPanel = new JPanel();
@@ -131,7 +130,6 @@ public class UiFancySearchDlg extends JDialog
 	private void setInsertButtonAsDefault()
 	{
 		getRootPane().setDefaultButton(grid.getInsertButton());
-		grid.getTable().setRowSelectionInterval(0,0);
 	}
 	
 	
@@ -249,16 +247,6 @@ public class UiFancySearchDlg extends JDialog
 		return grid.getSearchTree();
 	}
 	
-	void memorizeSearch()
-	{
-		previousSearch = grid.getText();
-	}
-	
-	String getPreviousSearch()
-	{
-		return previousSearch;
-	}
-	
 	public boolean searchFinalBulletinsOnly()
 	{
 		return searchFinalBulletins.isSelected();
@@ -269,11 +257,21 @@ public class UiFancySearchDlg extends JDialog
 		searchFinalBulletins.setSelected(searchFinalOnly);
 	}
 	
+	public String getSearchString()
+	{
+		return grid.getText();
+	}
+	
+	public void setSearchString(String searchString)
+	{
+		grid.setText(searchString);
+		grid.getTable().setRowSelectionInterval(0,0);
+	}
+	
 	class SearchButtonHandler implements ActionListener
 	{
 		public void actionPerformed(ActionEvent e)
 		{
-			memorizeSearch();
 			result = true;
 			dispose();
 		}
@@ -299,8 +297,6 @@ public class UiFancySearchDlg extends JDialog
 	{
 		return localization;
 	}
-
-	private static String previousSearch = "";
 
 	boolean result;
 	MartusLocalization localization;
