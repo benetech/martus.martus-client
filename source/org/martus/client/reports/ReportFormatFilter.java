@@ -25,7 +25,6 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.reports;
 
-import java.io.File;
 
 import org.martus.clientside.FormatFilter;
 import org.martus.common.MiniLocalization;
@@ -37,13 +36,6 @@ public class ReportFormatFilter extends FormatFilter
 		description = localization.getFieldLabel("MartusReportFormat");
 	}
 	
-	public boolean accept(File f)
-	{
-		if(f.isDirectory())
-			return true;
-		return (f.getName().toLowerCase().endsWith(MRF_FILE_EXTENSION));
-	}
-
 	public String getDescription()
 	{
 		return description;

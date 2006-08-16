@@ -31,6 +31,7 @@ import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.util.HashMap;
 
 import javax.swing.Box;
@@ -41,9 +42,10 @@ import javax.swing.border.EmptyBorder;
 import org.martus.client.search.FancySearchGridEditor;
 import org.martus.client.search.SearchSpec;
 import org.martus.client.search.SearchTreeNode;
-import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.grids.GridTableModel;
+import org.martus.clientside.FileDialogHelpers;
+import org.martus.clientside.FormatFilter;
 import org.martus.clientside.UiLocalization;
 import org.martus.common.MiniLocalization;
 import org.martus.swing.UiButton;
@@ -58,48 +60,48 @@ public class UiFancySearchDlg extends JDialog
 	public UiFancySearchDlg(UiMainWindow owner)
 	{
 		super(owner, "", true);
-		localization = owner.getLocalization();
-		createBody(owner);
+		mainWindow = owner;
+		createBody();
 		Utilities.centerDlg(this);
 		pack();  //JAVA Bug had to call pack twice to force UiWrappedTextArea to get the right dimension
 		setResizable(true);
 
 	}
 	
-	void createBody(UiMainWindow mainWindow)
+	void createBody()
 	{
-		setTitle(localization.getWindowTitle("search"));
+		setTitle(getLocalization().getWindowTitle("search"));
 		
-		String helpButtonText = localization.getButtonLabel("help"); 
+		String helpButtonText = getLocalization().getButtonLabel("help"); 
 		UiButton help = new UiButton(helpButtonText);
 		help.addActionListener(new HelpListener(mainWindow));
 		
-		String saveButtonText = localization.getButtonLabel("SaveSearch");
+		String saveButtonText = getLocalization().getButtonLabel("SaveSearch");
 		UiButton save = new UiButton(saveButtonText);
 		save.addActionListener(new SaveButtonHandler(this));
 		
-		String loadButtonText = localization.getButtonLabel("LoadSearch");
+		String loadButtonText = getLocalization().getButtonLabel("LoadSearch");
 		UiButton load = new UiButton(loadButtonText);
 		load.addActionListener(new LoadButtonHandler(this));
 		
-		UiButton search = new UiButton(localization.getButtonLabel("search"));
+		UiButton search = new UiButton(getLocalization().getButtonLabel("search"));
 		search.addActionListener(new SearchButtonHandler());
 
-		UiButton cancel = new UiButton(localization.getButtonLabel("cancel"));
+		UiButton cancel = new UiButton(getLocalization().getButtonLabel("cancel"));
 		cancel.addActionListener(new CancelButtonHandler());
-		UiDialogLauncher dlgLauncher = new UiDialogLauncher(mainWindow.getCurrentActiveFrame(), localization);
+		UiDialogLauncher dlgLauncher = new UiDialogLauncher(mainWindow.getCurrentActiveFrame(), getLocalization());
 		grid = FancySearchGridEditor.create(mainWindow.getStore(), dlgLauncher);
 		clearGridIfAnyProblems();
 
 		JPanel instructionPanel = new JPanel();
 		instructionPanel.setLayout(new BorderLayout());
-		instructionPanel.add(new UiWrappedTextPanel(localization.getFieldLabel("SearchBulletinRules")), BorderLayout.NORTH);
-		UiWrappedTextPanel uiWrappedTextPanel = new UiWrappedTextPanel(localization.getFieldLabel("SearchBulletinAddingRules"));
+		instructionPanel.add(new UiWrappedTextPanel(getLocalization().getFieldLabel("SearchBulletinRules")), BorderLayout.NORTH);
+		UiWrappedTextPanel uiWrappedTextPanel = new UiWrappedTextPanel(getLocalization().getFieldLabel("SearchBulletinAddingRules"));
 		uiWrappedTextPanel.setBorder(new EmptyBorder(10, 0, 10,0));
 		instructionPanel.add(uiWrappedTextPanel, BorderLayout.CENTER);
 		try
 		{
-			String helpInfo = TokenReplacement.replaceToken(localization.getFieldLabel("SearchBulletinHelp"), "#SearchHelpButton#", helpButtonText);
+			String helpInfo = TokenReplacement.replaceToken(getLocalization().getFieldLabel("SearchBulletinHelp"), "#SearchHelpButton#", helpButtonText);
 			UiWrappedTextPanel uiWrappedTextPanel2 = new UiWrappedTextPanel(helpInfo);
 			uiWrappedTextPanel2.setBorder(new EmptyBorder(0,0,10,0));
 			instructionPanel.add(uiWrappedTextPanel2, BorderLayout.SOUTH);
@@ -114,7 +116,7 @@ public class UiFancySearchDlg extends JDialog
 		Component[] buttons = new Component[] {help, Box.createHorizontalGlue(), load, save, Box.createHorizontalGlue(), search, cancel };
 		Utilities.addComponentsRespectingOrientation(buttonBox, buttons);
 		
-		searchFinalBulletins = new UiCheckBox(localization.getButtonLabel("SearchFinalBulletinsOnly"));
+		searchFinalBulletins = new UiCheckBox(getLocalization().getButtonLabel("SearchFinalBulletinsOnly"));
 		searchFinalBulletins.setSelected(false);
 		
 		JPanel bottomPanel = new JPanel();
@@ -171,27 +173,28 @@ public class UiFancySearchDlg extends JDialog
 		
 	}
 	
-	private class HelpListener implements ActionListener
+	private static class HelpListener implements ActionListener
 	{
 		HelpListener(UiMainWindow mainWindowToUse)
 		{
 			mainWindow = mainWindowToUse;
 		}
+		
 		public void actionPerformed(ActionEvent e)
 		{
-			String closeHelpButton = localization.getButtonLabel("CloseHelp");
-			String title = localization.getWindowTitle("FancySearchHelp");
+			String closeHelpButton = getLocalization().getButtonLabel("CloseHelp");
+			String title = getLocalization().getWindowTitle("FancySearchHelp");
 
-			StringBuffer rawHelpMessage = new StringBuffer(localization.getFieldLabel("FancySearchHelpMsg1"));
-			rawHelpMessage.append(localization.getFieldLabel("FancySearchHelpMsg2"));
+			StringBuffer rawHelpMessage = new StringBuffer(getLocalization().getFieldLabel("FancySearchHelpMsg1"));
+			rawHelpMessage.append(getLocalization().getFieldLabel("FancySearchHelpMsg2"));
 			if(notInEnglishSoExplainUsingEnglishAndOr())
-				rawHelpMessage.append(localization.getFieldLabel("FancySearchHelpMsg3"));
+				rawHelpMessage.append(getLocalization().getFieldLabel("FancySearchHelpMsg3"));
 			
 			try
 			{
 				HashMap tokenReplacement = new HashMap();
-				tokenReplacement.put("#And#", localization.getKeyword("and"));
-				tokenReplacement.put("#Or#", localization.getKeyword("or"));
+				tokenReplacement.put("#And#", getLocalization().getKeyword("and"));
+				tokenReplacement.put("#Or#", getLocalization().getKeyword("or"));
 				tokenReplacement.put("#AndEnglish#", "and");
 				tokenReplacement.put("#OrEnglish#", "or");
 				String helpMessage = TokenReplacement.replaceTokens(rawHelpMessage.toString(), tokenReplacement);
@@ -245,7 +248,12 @@ public class UiFancySearchDlg extends JDialog
 		
 		private boolean notInEnglishSoExplainUsingEnglishAndOr()
 		{
-			return !localization.getCurrentLanguageCode().equals(MiniLocalization.ENGLISH);
+			return !getLocalization().getCurrentLanguageCode().equals(MiniLocalization.ENGLISH);
+		}
+		
+		private UiLocalization getLocalization()
+		{
+			return mainWindow.getLocalization();
 		}
 		
 		private UiMainWindow mainWindow;
@@ -305,7 +313,11 @@ public class UiFancySearchDlg extends JDialog
 		
 		public void actionPerformed(ActionEvent e)
 		{
-			
+			UiLocalization localization = dialog.getLocalization();
+			String title = localization.getWindowTitle("SaveSearch");
+			File directory = dialog.mainWindow.getApp().getCurrentAccountDirectory();
+			FormatFilter filter = new SearchSpecFilter(localization);
+			File saveTo = FileDialogHelpers.doFileSaveDialog(dialog.mainWindow, title, directory, filter, localization);
 		}
 		
 		UiFancySearchDlg dialog;
@@ -320,9 +332,34 @@ public class UiFancySearchDlg extends JDialog
 		
 		public void actionPerformed(ActionEvent e)
 		{
+			UiLocalization localization = dialog.getLocalization();
+			String title = localization.getWindowTitle("SaveSearch");
+			String openButtonLabel = localization.getButtonLabel("LoadSearchOkButton");
+			File directory = dialog.mainWindow.getApp().getCurrentAccountDirectory();
+			FormatFilter filter = new SearchSpecFilter(localization);
+			File loadFrom = FileDialogHelpers.doFileOpenDialog(dialog.mainWindow, title, openButtonLabel, directory, filter);
 		}
 		
 		UiFancySearchDlg dialog;
+	}
+	
+	static class SearchSpecFilter extends FormatFilter
+	{
+		public SearchSpecFilter(MiniLocalization localization)
+		{
+			description = localization.getFieldLabel("MartusSearchSpecFileFilter");
+		}
+		public String getExtension()
+		{
+			return ".mss";
+		}
+
+		public String getDescription()
+		{
+			return description;
+		}
+		
+		String description;
 	}
 	
 	SearchSpec getSearchSpec()
@@ -337,11 +374,11 @@ public class UiFancySearchDlg extends JDialog
 
 	public UiLocalization getLocalization()
 	{
-		return localization;
+		return mainWindow.getLocalization();
 	}
 
 	boolean result;
-	MartusLocalization localization;
+	UiMainWindow mainWindow;
 	FancySearchGridEditor grid;
 	UiCheckBox searchFinalBulletins;
 }

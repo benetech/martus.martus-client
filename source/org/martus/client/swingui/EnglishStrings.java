@@ -379,6 +379,7 @@ public class EnglishStrings
 "button:FieldTag=Tag",
 "button:SaveSearch=Save This Search...",
 "button:LoadSearch=Load Previous Search...",
+"button:LoadSearchOkButton=Load",
 
 "menu:file=File",
 "menu:CreateNewBulletin=Create New Bulletin",
@@ -930,6 +931,7 @@ public class EnglishStrings
 "field:ReportSummariesOnly=Print Summary Counts Only",
 "field:ChooseTabularReportFields=Use Ctrl-Click or Shift-Click to select the fields (columns) that will appear in this report. ",
 "field:MartusReportFormat=Martus Report Format (.mrf)",
+"field:MartusSearchSpecFileFilter=Martus Search Specification (.mss)",
 "field:CustomXMLTopSection=Top Section of Bulletin",
 "field:CustomXMLBottomSection=Bottom/Private Section of Bulletin",
 "field:WasSentYes=Yes",
