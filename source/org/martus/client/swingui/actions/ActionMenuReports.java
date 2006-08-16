@@ -56,6 +56,7 @@ import org.martus.client.swingui.dialogs.UiReportFieldChooserDlg;
 import org.martus.client.swingui.dialogs.UiIncludePrivateDataDlg;
 import org.martus.client.swingui.dialogs.UiPrintPreviewDlg;
 import org.martus.client.swingui.fields.UiPopUpTreeEditor;
+import org.martus.clientside.FileDialogHelpers;
 import org.martus.clientside.UiLocalization;
 import org.martus.common.MiniLocalization;
 import org.martus.common.bulletin.Bulletin;
@@ -142,27 +143,15 @@ public class ActionMenuReports extends ActionPrint
 	
 	ReportFormat chooseReport() throws Exception
 	{
-		File chosenFile = null;
+		UiMainWindow owner = mainWindow;
 		String title = getLocalization().getWindowTitle("ChooseReportToRun");
-		File directory = mainWindow.getApp().getCurrentAccountDirectory();
-		String buttonLabel = getLocalization().getButtonLabel("SelectReport");
+		String okButtonLabel = getLocalization().getButtonLabel("SelectReport");
+		File directory = owner.getApp().getCurrentAccountDirectory();
 		FileFilter filter = new ReportFormatFilter(getLocalization());
-		while(true)
-		{
-			FileDialogResults results = UiFileChooser.displayFileOpenDialog(mainWindow, 
-					title, directory, buttonLabel, filter);
-			if(results.wasCancelChoosen())
-				return null;
-			
-			chosenFile = results.getChosenFile();
-			if(!chosenFile.exists())
-				continue;
-			
-			if(!chosenFile.isDirectory())
-				break;
-			
-			directory = chosenFile;
-		}
+		File chosenFile = FileDialogHelpers.doFileOpenDialog(owner, title, okButtonLabel, directory, filter);
+		
+		if(chosenFile == null)
+			return null;
 		
 		UnicodeReader reader = new UnicodeReader(chosenFile);
 		String reportFormatText = reader.readAll();
@@ -170,7 +159,7 @@ public class ActionMenuReports extends ActionPrint
 		
 		return new ReportFormat(new JSONObject(reportFormatText));
 	}
-	
+
 	ReportFormat createTabularReport() throws Exception
 	{
 		TabularReportBuilder builder = new TabularReportBuilder(getLocalization());
