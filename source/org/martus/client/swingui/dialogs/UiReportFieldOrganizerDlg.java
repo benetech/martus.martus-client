@@ -29,6 +29,8 @@ import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Arrays;
+import java.util.Vector;
 
 import javax.swing.Box;
 import javax.swing.JDialog;
@@ -37,6 +39,7 @@ import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
 
 import org.martus.client.reports.SpecTableModel;
+import org.martus.client.search.FieldChooserSpecBuilder;
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.common.fieldspec.FieldSpec;
@@ -98,7 +101,13 @@ public class UiReportFieldOrganizerDlg extends JDialog
 	{
 		public void actionPerformed(ActionEvent e)
 		{
-			UiReportFieldChooserDlg dlg = new UiReportFieldChooserDlg(mainWindow);
+			FieldChooserSpecBuilder allFieldSpecBuilder = new FieldChooserSpecBuilder(mainWindow.getLocalization());
+			FieldSpec[] allFieldSpecs = allFieldSpecBuilder.createFieldSpecArray(mainWindow.getStore());
+			Vector possibleSpecsToAdd = new Vector(Arrays.asList(allFieldSpecs));
+			FieldSpec[] currentSpecs = fieldSelector.getItems();
+			if(currentSpecs != null)
+				possibleSpecsToAdd.removeAll(Arrays.asList(currentSpecs));
+			UiReportFieldChooserDlg dlg = new UiReportFieldChooserDlg(mainWindow, (FieldSpec[])possibleSpecsToAdd.toArray(new FieldSpec[0]));
 			dlg.setVisible(true);
 			model.AddSpecs(dlg.getSelectedSpecs());
 		}
