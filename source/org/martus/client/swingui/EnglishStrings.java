@@ -291,6 +291,7 @@ public class EnglishStrings
 "wintitle:SaveReportAs=Save Report Format As...",
 "wintitle:ChooseReportToRun=Run Report...",
 "wintitle:ChooseReportFields=Create Report",
+"wintitle:OrganizeReportFields=Organize Report Fields",
 "wintitle:PrintOptions=Print Options",
 "wintitle:confirmSendWithPublicData=Confirm Save With Public Data",
 "wintitle:DeleteMyDataFromThisComputer=Delete My Data From This Computer",
@@ -380,6 +381,11 @@ public class EnglishStrings
 "button:SaveSearch=Save This Search...",
 "button:LoadSearch=Load Previous Search...",
 "button:LoadSearchOkButton=Load",
+
+"button:AddFieldToReport=Add",
+"button:RemoveFieldFromReport=Remove",
+"button:MoveFieldUpInReport=Move Up",
+"button:MoveFieldDownInReport=Move Down",
 
 "menu:file=File",
 "menu:CreateNewBulletin=Create New Bulletin",
@@ -538,6 +544,7 @@ public class EnglishStrings
 "field:notifyPrintToDiskCompletecause=Successfully saved Report",
 "wintitle:notifyPrintCompleted=Reports",
 "field:notifyPrintCompletedcause=Printing Complete",
+"field:OrganizeReportFields=Add which Fields you want to appear in your Report, and them organize them accordingly in the order you want them to appear in the tabular report.",
 
 "wintitle:IncludePrivateData=Include Private Data",
 "field:IncludePrivateData=#TotalBulletins# bulletins were selected for printing.  #AllPrivateBulletins# of them are all private.\n What would you like to include when printing?",

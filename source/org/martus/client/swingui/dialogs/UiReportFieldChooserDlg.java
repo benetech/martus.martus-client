@@ -56,6 +56,7 @@ public class UiReportFieldChooserDlg extends JDialog
 		String dialogTag = "ChooseReportFields";
 		MartusLocalization localization = mainWindow.getLocalization();
 		setTitle(localization.getWindowTitle(dialogTag));
+		selectedSpecs = null;
 		
 		fieldSelector = new ReportFieldSelector(mainWindow);
 		

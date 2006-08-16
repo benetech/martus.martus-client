@@ -35,9 +35,8 @@ import java.util.Vector;
 
 import javax.swing.Box;
 import javax.swing.JDialog;
-import javax.swing.event.TableModelListener;
 import javax.swing.filechooser.FileFilter;
-import javax.swing.table.TableModel;
+import javax.swing.table.AbstractTableModel;
 
 import org.json.JSONObject;
 import org.martus.client.core.PartialBulletin;
@@ -56,7 +55,7 @@ import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.WorkerThread;
 import org.martus.client.swingui.dialogs.UiIncludePrivateDataDlg;
 import org.martus.client.swingui.dialogs.UiPrintPreviewDlg;
-import org.martus.client.swingui.dialogs.UiReportFieldChooserDlg;
+import org.martus.client.swingui.dialogs.UiReportFieldOrganizerDlg;
 import org.martus.client.swingui.fields.UiPopUpTreeEditor;
 import org.martus.clientside.FileDialogHelpers;
 import org.martus.clientside.FormatFilter;
@@ -360,7 +359,7 @@ public class ActionMenuReports extends ActionPrint
 	{
 		while(true)
 		{
-			UiReportFieldChooserDlg dlg = new UiReportFieldChooserDlg(mainWindow);
+			UiReportFieldOrganizerDlg dlg = new UiReportFieldOrganizerDlg(mainWindow);
 			dlg.setVisible(true);
 			FieldSpec[] selectedSpecs = dlg.getSelectedSpecs();
 			if(selectedSpecs == null)
@@ -375,17 +374,62 @@ public class ActionMenuReports extends ActionPrint
 	}
 
 	
-	static public class SpecTableModel implements TableModel
+	static public class SpecTableModel extends AbstractTableModel
 	{
 		public SpecTableModel(FieldSpec[] specsToUse, MiniLocalization localizationToUse)
 		{
-			specs = specsToUse;
+			specs = new Vector();
+			AddSpecs(specsToUse);
 			localization = localizationToUse;
+		}
+		
+		public void AddSpecs(FieldSpec[] specsToAdd)
+		{
+			if(specsToAdd == null)
+				return;
+			for(int i = 0; i < specsToAdd.length; ++i)
+			{
+				specs.add(specsToAdd[i]);
+			}
+			fireTableDataChanged();
+		}
+		
+		public void RemoveSpec(int row)
+		{
+			if(row == -1)
+				return;
+			specs.remove(row);
+			fireTableRowsDeleted(row, row);
+		}	
+		
+		public void MoveSpecUp(int row)
+		{
+			if(row < 0)
+				return;
+			int destinationRow = row - 1;
+			swapRows(row, destinationRow);
+		}
+
+		public void MoveSpecDown(int row)
+		{
+			if(row < 0 || row >= (specs.size() -1))
+				return;
+			int destinationRow = row + 1;
+			swapRows(row, destinationRow);
+		}
+
+		private void swapRows(int selectedRow, int destinationRow)
+		{
+			Object destination = specs.get(destinationRow);
+			Object selection = specs.get(selectedRow);
+			specs.setElementAt(selection, destinationRow);
+			specs.setElementAt(destination, selectedRow);
+			fireTableDataChanged();
 		}
 		
 		public FieldSpec getSpec(int row)
 		{
-			return specs[row];
+			return (FieldSpec)specs.get(row);
 		}
 		
 		public int getColumnCount()
@@ -400,7 +444,7 @@ public class ActionMenuReports extends ActionPrint
 
 		public int getRowCount()
 		{
-			return specs.length;
+			return specs.size();
 		}
 
 		public Object getValueAt(int row, int column)
@@ -429,20 +473,10 @@ public class ActionMenuReports extends ActionPrint
 		{
 			throw new RuntimeException("Not supported");
 		}
-
-		public void addTableModelListener(TableModelListener l)
-		{
-			return;
-		}
-
-		public void removeTableModelListener(TableModelListener l)
-		{
-			return;
-		}
 		
 		static final String[] columnTags = {"FieldLabel", "FieldType", "FieldTag"};
 
-		FieldSpec[] specs;
+		Vector specs;
 		MiniLocalization localization;
 	}
 	
