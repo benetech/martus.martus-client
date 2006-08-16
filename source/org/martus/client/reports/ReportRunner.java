@@ -64,7 +64,10 @@ public class ReportRunner
 	public void runReport(ReportFormat rf, ReadableDatabase db, SortableBulletinList bulletins, ReportOutput destination, RunReportOptions options) throws Exception
 	{
 		UniversalId[] uids = bulletins.getSortedUniversalIds();
-		SummaryBreakHandler breakHandler = new SummaryBreakHandler(rf, destination, options, bulletins.getSortSpecs());
+		ReportOutput breakDestination = destination;
+		if(options.hideDetail)
+			breakDestination = new NullReportOutput();
+		SummaryBreakHandler breakHandler = new SummaryBreakHandler(rf, breakDestination, options, bulletins.getSortSpecs());
 
 		context = new VelocityContext();
 		context.put("localization", localization);

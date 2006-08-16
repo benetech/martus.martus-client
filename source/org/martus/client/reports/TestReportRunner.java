@@ -260,6 +260,12 @@ public class TestReportRunner extends TestCaseEnhanced
 		options.printBreaks = false;
 		ReportOutput noTotals = runReportOnAppData(rf, app, options);
 		assertEquals("printed total section?", "", noTotals.getPageText(0));
+		
+		rf.setBreakSection("BREAK");
+		options.printBreaks = true;
+		options.hideDetail = true;
+		ReportOutput totalsOnly = runReportOnAppData(rf, app, options);
+		assertNotContains("Still printed breaks?", "BREAK", totalsOnly.getPageText(0));
 	}
 	
 	public void testOmitDetail() throws Exception
@@ -280,7 +286,7 @@ public class TestReportRunner extends TestCaseEnhanced
 		
 		options.hideDetail = true;
 		ReportOutput sortByAuthorSummaryWithoutDetail = runReportOnAppData(rf, app, options);
-		assertEquals("Break Break Break Break Break ", sortByAuthorSummaryWithoutDetail.getPageText(0));
+		assertEquals("", sortByAuthorSummaryWithoutDetail.getPageText(0));
 		
 	}
 
