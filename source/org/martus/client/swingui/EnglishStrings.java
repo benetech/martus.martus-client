@@ -544,7 +544,7 @@ public class EnglishStrings
 "field:notifyPrintToDiskCompletecause=Successfully saved Report",
 "wintitle:notifyPrintCompleted=Reports",
 "field:notifyPrintCompletedcause=Printing Complete",
-"field:OrganizeReportFields=Add which Fields you want to appear in your Report, and them organize them accordingly in the order you want them to appear in the tabular report.",
+"field:OrganizeReportFields=Add the fields you want to appear in your report, and then arrange them in the order you want them to be printed.",
 
 "wintitle:IncludePrivateData=Include Private Data",
 "field:IncludePrivateData=#TotalBulletins# bulletins were selected for printing.  #AllPrivateBulletins# of them are all private.\n What would you like to include when printing?",

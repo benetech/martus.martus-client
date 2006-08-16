@@ -36,7 +36,6 @@ import java.util.Vector;
 import javax.swing.Box;
 import javax.swing.JDialog;
 import javax.swing.filechooser.FileFilter;
-import javax.swing.table.AbstractTableModel;
 
 import org.json.JSONObject;
 import org.martus.client.core.PartialBulletin;
@@ -374,111 +373,6 @@ public class ActionMenuReports extends ActionPrint
 	}
 
 	
-	static public class SpecTableModel extends AbstractTableModel
-	{
-		public SpecTableModel(FieldSpec[] specsToUse, MiniLocalization localizationToUse)
-		{
-			specs = new Vector();
-			AddSpecs(specsToUse);
-			localization = localizationToUse;
-		}
-		
-		public void AddSpecs(FieldSpec[] specsToAdd)
-		{
-			if(specsToAdd == null)
-				return;
-			for(int i = 0; i < specsToAdd.length; ++i)
-			{
-				specs.add(specsToAdd[i]);
-			}
-			fireTableDataChanged();
-		}
-		
-		public void RemoveSpec(int row)
-		{
-			if(row == -1)
-				return;
-			specs.remove(row);
-			fireTableRowsDeleted(row, row);
-		}	
-		
-		public void MoveSpecUp(int row)
-		{
-			if(row < 0)
-				return;
-			int destinationRow = row - 1;
-			swapRows(row, destinationRow);
-		}
-
-		public void MoveSpecDown(int row)
-		{
-			if(row < 0 || row >= (specs.size() -1))
-				return;
-			int destinationRow = row + 1;
-			swapRows(row, destinationRow);
-		}
-
-		private void swapRows(int selectedRow, int destinationRow)
-		{
-			Object destination = specs.get(destinationRow);
-			Object selection = specs.get(selectedRow);
-			specs.setElementAt(selection, destinationRow);
-			specs.setElementAt(destination, selectedRow);
-			fireTableDataChanged();
-		}
-		
-		public FieldSpec getSpec(int row)
-		{
-			return (FieldSpec)specs.get(row);
-		}
-		
-		public int getColumnCount()
-		{
-			return columnTags.length;
-		}
-
-		public String getColumnName(int column)
-		{
-			return localization.getButtonLabel(columnTags[column]);
-		}
-
-		public int getRowCount()
-		{
-			return specs.size();
-		}
-
-		public Object getValueAt(int row, int column)
-		{
-			FieldSpec spec = getSpec(row);
-			switch(column)
-			{
-				case 0: return spec.getLabel();
-				case 1: return localization.getFieldLabel("FieldType" + spec.getType().getTypeName());
-				case 2: return spec.getTag();
-				default: throw new RuntimeException("Unknown column: " + column);
-			}
-		}
-
-		public boolean isCellEditable(int rowIndex, int columnIndex)
-		{
-			return false;
-		}
-
-		public Class getColumnClass(int columnIndex)
-		{
-			return String.class;
-		}
-
-		public void setValueAt(Object aValue, int rowIndex, int columnIndex)
-		{
-			throw new RuntimeException("Not supported");
-		}
-		
-		static final String[] columnTags = {"FieldLabel", "FieldType", "FieldTag"};
-
-		Vector specs;
-		MiniLocalization localization;
-	}
 	
 	static class RunOrCreateReportDialog extends JDialog implements ActionListener
 	{

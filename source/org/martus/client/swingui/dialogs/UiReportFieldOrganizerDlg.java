@@ -36,9 +36,9 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
 
+import org.martus.client.reports.SpecTableModel;
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.client.swingui.actions.ActionMenuReports.SpecTableModel;
 import org.martus.common.fieldspec.FieldSpec;
 import org.martus.swing.UiButton;
 import org.martus.swing.UiScrollPane;
