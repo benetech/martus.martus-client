@@ -54,61 +54,61 @@ public class TestSummaryCount extends TestCaseEnhanced
 			master.increment(new StringVector(values[i]));
 		}
 		
-		assertEquals("top-level wrong count?", 5, master.getCount());
+		assertEquals("top-level wrong count?", 5, master.count());
 		assertEquals(2, master.getChildCount());
 		
 		SummaryCount a = master.getChild(0);
-		assertEquals(labels[FIRST], a.getLabel());
-		assertEquals("A", a.getValue());
-		assertEquals(4, a.getCount());
+		assertEquals(labels[FIRST], a.label());
+		assertEquals("A", a.value());
+		assertEquals(4, a.count());
 		assertEquals(2, a.getChildCount());
 
 		SummaryCount a1 = a.getChild(0);
-		assertEquals(labels[SECOND], a1.getLabel());
-		assertEquals("1", a1.getValue());
-		assertEquals(3, a1.getCount());
+		assertEquals(labels[SECOND], a1.label());
+		assertEquals("1", a1.value());
+		assertEquals(3, a1.count());
 		assertEquals(2, a1.getChildCount());
 
 		SummaryCount a1a = a1.getChild(0);
-		assertEquals(labels[THIRD], a1a.getLabel());
-		assertEquals("a", a1a.getValue());
-		assertEquals(1, a1a.getCount());
+		assertEquals(labels[THIRD], a1a.label());
+		assertEquals("a", a1a.value());
+		assertEquals(1, a1a.count());
 		assertEquals(0, a1a.getChildCount());
 
 		SummaryCount a1b = a1.getChild(1);
-		assertEquals(labels[THIRD], a1b.getLabel());
-		assertEquals("b", a1b.getValue());
-		assertEquals(2, a1b.getCount());
+		assertEquals(labels[THIRD], a1b.label());
+		assertEquals("b", a1b.value());
+		assertEquals(2, a1b.count());
 		assertEquals(0, a1b.getChildCount());
 
 		SummaryCount a2 = a.getChild(1);
-		assertEquals(labels[SECOND], a2.getLabel());
-		assertEquals("2", a2.getValue());
-		assertEquals(1, a2.getCount());
+		assertEquals(labels[SECOND], a2.label());
+		assertEquals("2", a2.value());
+		assertEquals(1, a2.count());
 		assertEquals(1, a2.getChildCount());
 
 		SummaryCount a2a = a2.getChild(0);
-		assertEquals(labels[THIRD], a2a.getLabel());
-		assertEquals("a", a2a.getValue());
-		assertEquals(1, a2a.getCount());
+		assertEquals(labels[THIRD], a2a.label());
+		assertEquals("a", a2a.value());
+		assertEquals(1, a2a.count());
 		assertEquals(0, a2a.getChildCount());
 
 		SummaryCount b = master.getChild(1);
-		assertEquals(labels[FIRST], b.getLabel());
-		assertEquals("B", b.getValue());
-		assertEquals(1, b.getCount());
+		assertEquals(labels[FIRST], b.label());
+		assertEquals("B", b.value());
+		assertEquals(1, b.count());
 		assertEquals(1, b.getChildCount());
 		
 		SummaryCount b3 = b.getChild(0);
-		assertEquals(labels[SECOND], b3.getLabel());
-		assertEquals("3", b3.getValue());
-		assertEquals(1, b3.getCount());
+		assertEquals(labels[SECOND], b3.label());
+		assertEquals("3", b3.value());
+		assertEquals(1, b3.count());
 		assertEquals(1, b3.getChildCount());
 
 		SummaryCount b3c = b3.getChild(0);
-		assertEquals(labels[THIRD], b3c.getLabel());
-		assertEquals("c", b3c.getValue());
-		assertEquals(1, b3c.getCount());
+		assertEquals(labels[THIRD], b3c.label());
+		assertEquals("c", b3c.value());
+		assertEquals(1, b3c.count());
 		assertEquals(0, b3c.getChildCount());
 
 

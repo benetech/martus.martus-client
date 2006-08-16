@@ -46,6 +46,7 @@ import org.martus.common.database.ReadableDatabase;
 import org.martus.common.field.MartusField;
 import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.fieldspec.MiniFieldSpec;
+import org.martus.common.fieldspec.StandardFieldSpecs;
 import org.martus.common.packet.UniversalId;
 
 
@@ -113,6 +114,8 @@ public class ReportRunner
 			}
 		}
 		
+		context.put("totals", breakHandler.getSummaryTotals());
+		performMerge(rf.getTotalSection(), destination);
 		
 		performMerge(rf.getEndSection(), destination);
 		context = null;
@@ -173,11 +176,27 @@ public class ReportRunner
 			breakCounts = new int[breakSpecs.length];
 			Arrays.fill(breakCounts, 0);
 			
-
+			StringVector breakLabels = new StringVector();
+			for(int i = 0; i < breakSpecsToUse.length; ++i)
+			{
+				MiniFieldSpec spec = breakSpecsToUse[i];
+				breakLabels.add(StandardFieldSpecs.getLocalizedLabel(spec.getTag(), spec.getLabel(), localization));
+			}
+			summaryCounts = new SummaryCount(breakLabels);
 		}
 		
 		public void doBreak(SafeReadableBulletin upcomingBulletin) throws Exception
 		{
+			if(upcomingBulletin != null)
+			{
+				StringVector values = new StringVector();
+				for(int i = 0; i < breakSpecs.length; ++i)
+				{
+					values.add(getBreakData(upcomingBulletin, i));
+				}
+				summaryCounts.increment(values);
+			}
+			
 			for(int breakLevel = breakSpecs.length - 1; breakLevel >= 0; --breakLevel)
 			{
 				String current = getBreakData(upcomingBulletin, breakLevel);
@@ -194,6 +213,11 @@ public class ReportRunner
 		public void doFinalBreak() throws Exception
 		{
 			doBreak(null);
+		}
+		
+		public SummaryCount getSummaryTotals()
+		{
+			return summaryCounts;
 		}
 
 		private String getBreakData(SafeReadableBulletin upcomingBulletin, int breakLevel)
@@ -240,6 +264,7 @@ public class ReportRunner
 		MiniFieldSpec[] breakSpecs;
 		int[] breakCounts;
 		String[] previousBreakValues;
+		SummaryCount summaryCounts;
 	}
 	
 	public void performMerge(String template, Writer result) throws Exception

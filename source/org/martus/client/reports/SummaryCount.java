@@ -45,17 +45,17 @@ public class SummaryCount
 		children = new Vector();
 	}
 	
-	public String getLabel()
+	public String label()
 	{
 		return label;
 	}
 	
-	public String getValue()
+	public String value()
 	{
 		return value;
 	}
 	
-	public int getCount()
+	public int count()
 	{
 		return count;
 	}
@@ -68,6 +68,11 @@ public class SummaryCount
 	public SummaryCount getChild(int index)
 	{
 		return (SummaryCount)children.get(index);
+	}
+	
+	public Vector children()
+	{
+		return children;
 	}
 	
 	public void increment(StringVector values)
@@ -97,7 +102,7 @@ public class SummaryCount
 		for(int i = 0; i < getChildCount(); ++i)
 		{
 			SummaryCount sc = getChild(i);
-			if(sc.getValue().equals(valueToFind))
+			if(sc.value().equals(valueToFind))
 				return i;
 		}
 		

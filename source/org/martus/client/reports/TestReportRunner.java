@@ -231,14 +231,17 @@ public class TestReportRunner extends TestCaseEnhanced
 		String sampleDate = "2004-06-19";
 		MockMartusApp app = createAppWithBulletinsForBreaks(sampleDate);
 		RunReportOptions options = new RunReportOptions();
+		options.printBreaks = true;
+		options.includePrivate = true;
 		
 		ReportFormat rf = new ReportFormat();
-		rf.setTotalSection("#foreach($summary1 in $summaries)\n" +
-				"$summary1.label(): $summary1.value() = $summary1.count()\n" +
+		rf.setTotalSection("TOTALS $totals.count()\n" +
+				"#foreach($summary1 in $totals.children())\n" +
+				"1. $summary1.label(): $summary1.value() = $summary1.count()\n" +
 				"#foreach($summary2 in $summary1.children())\n" +
-				"$summary2.label(): $summary2.value() = $summary2.count()\n" +
+				"2. $summary2.label(): $summary2.value() = $summary2.count()\n" +
 				"#foreach($summary3 in $summary2.children())\n" +
-				"$summary3.label(): $summary3.value() = $summary3.count()\n" +
+				"3. $summary3.label(): $summary3.value() = $summary3.count()\n" +
 				"#end\n" + 
 				"#end\n" + 
 				"#end\n");
@@ -247,12 +250,12 @@ public class TestReportRunner extends TestCaseEnhanced
 		String authorLabel = localization.getFieldLabel(Bulletin.TAGAUTHOR);
 		String summaryLabel = localization.getFieldLabel(Bulletin.TAGSUMMARY);
 		ReportOutput totals = runReportOnAppData(rf, app, options);
-		assertEquals(
-				authorLabel + ": a = 2\n" +
-				summaryLabel + ": 1 = 1\n" +
-				summaryLabel + ": 2 = 1\n" +
-				authorLabel + ": b = 1\n" +
-				summaryLabel + ": 1 = 1\n", totals.getPageText(0));
+		assertEquals("TOTALS 3\n" + 
+				"1. " + authorLabel + ": a = 2\n" +
+				"2. " + summaryLabel + ": 1 = 1\n" +
+				"2. " + summaryLabel + ": 2 = 1\n" +
+				"1. " + authorLabel + ": b = 1\n" +
+				"2. " + summaryLabel + ": 1 = 1\n", totals.getPageText(0));
 		
 		
 	}
