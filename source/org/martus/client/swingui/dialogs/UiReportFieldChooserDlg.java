@@ -46,7 +46,7 @@ import org.martus.swing.UiTable;
 import org.martus.swing.UiWrappedTextPanel;
 import org.martus.swing.Utilities;
 
-public class UiReportFieldChooserDlg extends JDialog implements ActionListener
+public class UiReportFieldChooserDlg extends JDialog
 {
 	public UiReportFieldChooserDlg(UiMainWindow mainWindow)
 	{
@@ -60,9 +60,9 @@ public class UiReportFieldChooserDlg extends JDialog implements ActionListener
 		fieldSelector = new ReportFieldSelector(mainWindow);
 		
 		okButton = new UiButton(localization.getButtonLabel("ok"));
-		okButton.addActionListener(this);
+		okButton.addActionListener(new OkButtonHandler());
 		UiButton cancelButton = new UiButton(localization.getButtonLabel("cancel"));
-		cancelButton.addActionListener(this);
+		cancelButton.addActionListener(new CancelButtonHandler());
 		Box buttonBar = Box.createHorizontalBox();
 		Component[] buttons = {Box.createHorizontalGlue(), okButton, cancelButton};
 		Utilities.addComponentsRespectingOrientation(buttonBar, buttons);
@@ -77,15 +77,24 @@ public class UiReportFieldChooserDlg extends JDialog implements ActionListener
 		Utilities.centerDlg(this);
 	}
 	
-	public void actionPerformed(ActionEvent e)
+	
+	class OkButtonHandler implements ActionListener
 	{
-		if(e.getSource().equals(okButton))
+		public void actionPerformed(ActionEvent e)
 		{
 			selectedSpecs = fieldSelector.getSelectedItems();
+			dispose();
 		}
-		dispose();
 	}
 	
+	class CancelButtonHandler implements ActionListener
+	{
+		public void actionPerformed(ActionEvent e)
+		{
+			dispose();
+		}
+	}
+
 	public FieldSpec[] getSelectedSpecs()
 	{
 		return selectedSpecs;
