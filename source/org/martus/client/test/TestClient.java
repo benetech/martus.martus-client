@@ -46,6 +46,7 @@ import org.martus.client.search.TestFancySearchHelper;
 import org.martus.client.search.TestFancySearchTableModel;
 import org.martus.client.search.TestFieldChooserSpecBuilder;
 import org.martus.client.search.TestSearchParser;
+import org.martus.client.search.TestSearchSpec;
 import org.martus.client.search.TestSearchTreeNode;
 import org.martus.client.swingui.grids.TestGridTableModel;
 import org.martus.common.utilities.TestMartusFlexidate;
@@ -93,6 +94,7 @@ public class TestClient
 		suite.addTest(new TestSuite(TestReportRunner.class));
 		suite.addTest(new TestSuite(TestSafeReadableBulletin.class));
 		suite.addTest(new TestSuite(TestSearchParser.class));
+		suite.addTest(new TestSuite(TestSearchSpec.class));
 		suite.addTest(new TestSuite(TestSearchTreeNode.class));
 		suite.addTest(new TestSuite(TestSortableBulletinList.class));
 		suite.addTest(new TestSuite(TestSummaryCount.class));
