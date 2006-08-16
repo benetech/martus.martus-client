@@ -31,7 +31,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.Box;
-import javax.swing.JDialog;
 import javax.swing.JPanel;
 
 import org.martus.client.search.FieldChooserSpecBuilder;
@@ -43,7 +42,7 @@ import org.martus.swing.UiScrollPane;
 import org.martus.swing.UiWrappedTextPanel;
 import org.martus.swing.Utilities;
 
-public class UiReportFieldChooserDlg extends JDialog
+public class UiReportFieldChooserDlg extends UIReportFieldDlg
 {
 	public UiReportFieldChooserDlg(UiMainWindow mainWindow)
 	{

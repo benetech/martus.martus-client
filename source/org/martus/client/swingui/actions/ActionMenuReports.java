@@ -44,8 +44,10 @@ import org.martus.client.search.SearchTreeNode;
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.WorkerThread;
+import org.martus.client.swingui.dialogs.UIReportFieldDlg;
 import org.martus.client.swingui.dialogs.UiIncludePrivateDataDlg;
 import org.martus.client.swingui.dialogs.UiPrintPreviewDlg;
+import org.martus.client.swingui.dialogs.UiReportFieldChooserDlg;
 import org.martus.client.swingui.dialogs.UiReportFieldOrganizerDlg;
 import org.martus.client.swingui.dialogs.UiRunOrCreateReportDlg;
 import org.martus.client.swingui.dialogs.UiSortFieldsDlg;
@@ -148,7 +150,7 @@ public class ActionMenuReports extends ActionPrint
 	ReportFormat createTabularReport() throws Exception
 	{
 		TabularReportBuilder builder = new TabularReportBuilder(getLocalization());
-		FieldSpec[] specs = askUserWhichFieldsToInclude();
+		FieldSpec[] specs = askUserWhichFieldsToInclude(TABULAR_REPORT);
 		if(specs == null)
 			return null;
 		
@@ -167,7 +169,7 @@ public class ActionMenuReports extends ActionPrint
 	ReportFormat createPageReport() throws Exception
 	{
 		PageReportBuilder builder = new PageReportBuilder(getLocalization());
-		FieldSpec[] specs = askUserWhichFieldsToInclude();
+		FieldSpec[] specs = askUserWhichFieldsToInclude(PAGE_REPORT);
 		if(specs == null)
 			return null;
 		
@@ -340,11 +342,17 @@ public class ActionMenuReports extends ActionPrint
 		return true;
 	}
 
-	FieldSpec[] askUserWhichFieldsToInclude()
+	FieldSpec[] askUserWhichFieldsToInclude(int reportType)
 	{
 		while(true)
 		{
-			UiReportFieldOrganizerDlg dlg = new UiReportFieldOrganizerDlg(mainWindow);
+			UIReportFieldDlg dlg;
+			if(reportType == PAGE_REPORT)
+				dlg = new UiReportFieldChooserDlg(mainWindow);
+			else if(reportType == TABULAR_REPORT)
+				dlg = new UiReportFieldOrganizerDlg(mainWindow);
+			else
+				return null;
 			dlg.setVisible(true);
 			FieldSpec[] selectedSpecs = dlg.getSelectedSpecs();
 			if(selectedSpecs == null)
@@ -357,7 +365,8 @@ public class ActionMenuReports extends ActionPrint
 			return selectedSpecs;
 		}
 	}
-	
+	final int PAGE_REPORT = 1;
+	final int TABULAR_REPORT = 2;
 	
 }
 

@@ -33,7 +33,6 @@ import java.util.Arrays;
 import java.util.Vector;
 
 import javax.swing.Box;
-import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.ListSelectionModel;
 
@@ -46,7 +45,7 @@ import org.martus.swing.UiScrollPane;
 import org.martus.swing.UiWrappedTextPanel;
 import org.martus.swing.Utilities;
 
-public class UiReportFieldOrganizerDlg extends JDialog
+public class UiReportFieldOrganizerDlg extends UIReportFieldDlg
 {
 	public UiReportFieldOrganizerDlg(UiMainWindow mainWindowToUse)
 	{
