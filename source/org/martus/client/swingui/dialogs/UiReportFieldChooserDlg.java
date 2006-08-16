@@ -53,7 +53,7 @@ public class UiReportFieldChooserDlg extends JDialog implements ActionListener
 		super(mainWindow);
 		setModal(true);
 		
-		String dialogTag = "ChooseTabularReportFields";
+		String dialogTag = "ChooseReportFields";
 		MartusLocalization localization = mainWindow.getLocalization();
 		setTitle(localization.getWindowTitle(dialogTag));
 		

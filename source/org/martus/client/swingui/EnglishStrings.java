@@ -290,7 +290,7 @@ public class EnglishStrings
 "wintitle:ReportChooseSortFields=Reports",
 "wintitle:SaveReportAs=Save Report Format As...",
 "wintitle:ChooseReportToRun=Run Report...",
-"wintitle:ChooseTabularReportFields=Create Report",
+"wintitle:ChooseReportFields=Create Report",
 "wintitle:PrintOptions=Print Options",
 "wintitle:confirmSendWithPublicData=Confirm Save With Public Data",
 "wintitle:DeleteMyDataFromThisComputer=Delete My Data From This Computer",
