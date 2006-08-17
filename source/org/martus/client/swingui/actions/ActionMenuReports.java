@@ -169,6 +169,8 @@ public class ActionMenuReports extends ActionPrint
 	{
 		PageReportBuilder builder = new PageReportBuilder(getLocalization());
 		MiniFieldSpec[] specs = askUserWhichFieldsToInclude(PAGE_REPORT);
+		if(specs == null)
+			return null;
 		
 		ReportFormat rf = builder.createPageReport(specs);
 		
