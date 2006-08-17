@@ -149,7 +149,7 @@ public class ActionMenuReports extends ActionPrint
 	ReportFormat createTabularReport() throws Exception
 	{
 		TabularReportBuilder builder = new TabularReportBuilder(getLocalization());
-		FieldSpec[] specs = askUserWhichFieldsToInclude(TABULAR_REPORT);
+		MiniFieldSpec[] specs = askUserWhichFieldsToInclude(TABULAR_REPORT);
 		if(specs == null)
 			return null;
 		
@@ -168,15 +168,9 @@ public class ActionMenuReports extends ActionPrint
 	ReportFormat createPageReport() throws Exception
 	{
 		PageReportBuilder builder = new PageReportBuilder(getLocalization());
-		FieldSpec[] specs = askUserWhichFieldsToInclude(PAGE_REPORT);
-		if(specs == null)
-			return null;
+		MiniFieldSpec[] specs = askUserWhichFieldsToInclude(PAGE_REPORT);
 		
-		MiniFieldSpec[] miniSpecs = new MiniFieldSpec[specs.length];
-		for(int i = 0; i < miniSpecs.length; ++i)
-			miniSpecs[i] = new MiniFieldSpec(specs[i]);
-		
-		ReportFormat rf = builder.createPageReport(miniSpecs);
+		ReportFormat rf = builder.createPageReport(specs);
 		
 		File file = askForReportFileToSaveTo();
 		if(file == null)
@@ -337,7 +331,7 @@ public class ActionMenuReports extends ActionPrint
 	}
 
 	//TODO: Instead of passing in a constant pass in a Factory instead which will create the correct dialog
-	FieldSpec[] askUserWhichFieldsToInclude(int reportType)
+	MiniFieldSpec[] askUserWhichFieldsToInclude(int reportType)
 	{
 		while(true)
 		{
@@ -357,7 +351,10 @@ public class ActionMenuReports extends ActionPrint
 				mainWindow.notifyDlg(mainWindow, "NoReportFieldsSelected");
 				continue;
 			}
-			return selectedSpecs;
+			MiniFieldSpec[] specs = new MiniFieldSpec[selectedSpecs.length];
+			for(int i = 0; i < specs.length; ++i)
+				specs[i] = new MiniFieldSpec(selectedSpecs[i]);
+			return specs;
 		}
 	}
 	final int PAGE_REPORT = 1;

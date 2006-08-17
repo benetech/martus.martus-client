@@ -30,6 +30,7 @@ import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.fieldspec.FieldTypeDate;
 import org.martus.common.fieldspec.FieldTypeDateRange;
 import org.martus.common.fieldspec.FieldTypeNormal;
+import org.martus.common.fieldspec.MiniFieldSpec;
 import org.martus.util.TestCaseEnhanced;
 
 public class TestTabularReportBuilder extends TestCaseEnhanced
@@ -41,10 +42,10 @@ public class TestTabularReportBuilder extends TestCaseEnhanced
 
 	public void testCreateTabularReport()
 	{
-		FieldSpec[] specs = new FieldSpec[] {
-			FieldSpec.createCustomField("tag1", "Label1", new FieldTypeNormal()),
-			FieldSpec.createCustomField("tag2", "Label2", new FieldTypeNormal()),
-			FieldSpec.createCustomField("tag3", "Label3", new FieldTypeNormal()),
+		MiniFieldSpec[] specs = new MiniFieldSpec[] {
+			new MiniFieldSpec(FieldSpec.createCustomField("tag1", "Label1", new FieldTypeNormal())),
+			new MiniFieldSpec(FieldSpec.createCustomField("tag2", "Label2", new FieldTypeNormal())),
+			new MiniFieldSpec(FieldSpec.createCustomField("tag3", "Label3", new FieldTypeNormal())),
 		};
 		TabularReportBuilder builder = new TabularReportBuilder(new MiniLocalization());
 		ReportFormat rf = builder.createTabular(specs);
@@ -77,7 +78,7 @@ public class TestTabularReportBuilder extends TestCaseEnhanced
 	{
 		FieldSpec range = FieldSpec.createCustomField("range", "Date Range", new FieldTypeDateRange());
 		FieldSpec begin = FieldSpec.createSubField(range, "begin", "Range Begin", new FieldTypeDate());
-		FieldSpec specs[] = {begin};
+		MiniFieldSpec specs[] = {new MiniFieldSpec(begin)};
 		TabularReportBuilder builder = new TabularReportBuilder(new MiniLocalization());
 		ReportFormat rf = builder.createTabular(specs);
 		String detail = rf.getDetailSection();

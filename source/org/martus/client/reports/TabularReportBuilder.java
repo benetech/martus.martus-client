@@ -27,7 +27,6 @@ package org.martus.client.reports;
 
 import org.martus.client.core.SafeReadableBulletin;
 import org.martus.common.MiniLocalization;
-import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.fieldspec.MiniFieldSpec;
 import org.martus.common.fieldspec.StandardFieldSpecs;
 
@@ -38,7 +37,7 @@ public class TabularReportBuilder
 		localization = localizationToUse;
 	}
 	
-	public ReportFormat createTabular(FieldSpec[] specs)
+	public ReportFormat createTabular(MiniFieldSpec[] specs)
 	{
 		ReportFormat rf = new ReportFormat();
 		rf.setStartSection(createStartSection());
@@ -60,14 +59,14 @@ public class TabularReportBuilder
 		return startBuffer.toString();
 	}
 
-	private String createHeaderSection(FieldSpec[] specs)
+	private String createHeaderSection(MiniFieldSpec[] specs)
 	{
 		StringBuffer headerBuffer = new StringBuffer();
 		headerBuffer.append("<tr>");
 		for(int i = 0; i < specs.length; ++i)
 		{
 			headerBuffer.append("<th>");
-			MiniFieldSpec spec = new MiniFieldSpec(specs[i]);
+			MiniFieldSpec spec = specs[i];
 			String label = StandardFieldSpecs.getLocalizedLabel(spec.getTag(), spec.getLabel(), localization);
 			headerBuffer.append(label);
 			headerBuffer.append("</th>");
@@ -76,15 +75,14 @@ public class TabularReportBuilder
 		return headerBuffer.toString();
 	}
 
-	private String createDetailSection(FieldSpec[] specs)
+	private String createDetailSection(MiniFieldSpec[] specs)
 	{
 		StringBuffer detailBuffer = new StringBuffer();
 		detailBuffer.append("<tr>");
 		for(int i = 0; i < specs.length; ++i)
 		{
 			detailBuffer.append("<td>");
-			MiniFieldSpec spec = new MiniFieldSpec(specs[i]);
-			detailBuffer.append(getFieldCall(spec));
+			detailBuffer.append(getFieldCall(specs[i]));
 			detailBuffer.append(".html($localization)");
 			detailBuffer.append("</td>");
 		}
