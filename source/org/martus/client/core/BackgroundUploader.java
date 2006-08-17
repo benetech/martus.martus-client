@@ -160,7 +160,7 @@ public class BackgroundUploader
 
 	BackgroundUploader.UploadResult uploadOneBulletin(BulletinFolder uploadFromFolder)
 	{
-		BackgroundUploader.UploadResult uploadResult = new BackgroundUploader.UploadResult();
+		UploadResult uploadResult = new UploadResult();
 	
 		if(!app.isSSLServerAvailable())
 			return uploadResult;
