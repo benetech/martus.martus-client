@@ -25,6 +25,7 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.search;
 
+import org.json.JSONObject;
 import org.martus.util.TestCaseEnhanced;
 
 public class TestSearchSpec extends TestCaseEnhanced
@@ -36,9 +37,11 @@ public class TestSearchSpec extends TestCaseEnhanced
 
 	public void testJson()
 	{
-		SearchSpec spec = new SearchSpec("test", true);
+		JSONObject json = new JSONObject();
+		json.put("test", "Hello");
+		SearchSpec spec = new SearchSpec(json, true);
 		SearchSpec got = new SearchSpec(spec.toJson());
-		assertEquals("Didn't copy searchString?", spec.getSearchString(), got.getSearchString());
+		assertEquals("Didn't copy searchString?", spec.getSearchGrid(), got.getSearchGrid());
 		assertEquals("Didn't copy finalOnly?", spec.getFinalOnly(), got.getFinalOnly());
 	}
 }

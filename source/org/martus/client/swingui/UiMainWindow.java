@@ -49,6 +49,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 import java.nio.channels.FileLock;
+import java.text.ParseException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Stack;
@@ -64,6 +65,7 @@ import javax.swing.JPanel;
 import javax.swing.JSplitPane;
 import javax.swing.SwingUtilities;
 
+import org.json.JSONObject;
 import org.martus.client.bulletinstore.BulletinFolder;
 import org.martus.client.bulletinstore.ClientBulletinStore;
 import org.martus.client.core.BackgroundUploader;
@@ -1213,13 +1215,13 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	
 	public SortableBulletinList doSearch()
 	{
-		SearchTreeNode searchTree = askUserForSearchCriteria();
-		if(searchTree == null)
-			return null;
-		
-		MiniFieldSpec[] sortSpecs = new MiniFieldSpec[0];
 		try
 		{
+			SearchTreeNode searchTree = askUserForSearchCriteria();
+			if(searchTree == null)
+				return null;
+			
+			MiniFieldSpec[] sortSpecs = new MiniFieldSpec[0];
 			return doSearch(searchTree, sortSpecs);
 		} 
 		catch (Exception e)
@@ -1285,18 +1287,22 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		SortableBulletinList searchResults;
 	}
 	
-	public SearchTreeNode askUserForSearchCriteria()
+	public SearchTreeNode askUserForSearchCriteria() throws ParseException
 	{
 		UiFancySearchDlg searchDlg = new UiFancySearchDlg(this);
 		searchDlg.setSearchFinalBulletinsOnly(uiState.searchFinalBulletinsOnly());
-		searchDlg.setSearchString(uiState.getSearchString());
+		String searchString = uiState.getSearchString();
+		JSONObject search = new JSONObject();
+		if(searchString.startsWith("{"))
+			search = new JSONObject(searchString);
+		searchDlg.setSearchAsJson(search);
 		searchDlg.setVisible(true);
 		if(!searchDlg.getResults())
 			return null;
 		
 
 		uiState.setSearchFinalBulletinsOnly(searchDlg.searchFinalBulletinsOnly());
-		uiState.setSearchString(searchDlg.getSearchString());
+		uiState.setSearchString(searchDlg.getSearchAsJson().toString());
 		return searchDlg.getSearchTree();
 	}
 

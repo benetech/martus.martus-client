@@ -277,14 +277,22 @@ public class UiFancySearchDlg extends JDialog
 		searchFinalBulletins.setSelected(searchFinalOnly);
 	}
 	
-	public String getSearchString()
+	public JSONObject getSearchAsJson()
 	{
-		return grid.getText();
+		try
+		{
+			return grid.getSearchAsJson();
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+			return new JSONObject();
+		}
 	}
 	
-	public void setSearchString(String searchString)
+	public void setSearchAsJson(JSONObject searchGrid)
 	{
-		grid.setText(searchString);
+		grid.setFromJson(searchGrid);
 		grid.getTable().setRowSelectionInterval(0,0);
 	}
 	
@@ -373,7 +381,7 @@ public class UiFancySearchDlg extends JDialog
 			try
 			{
 				SearchSpec spec = load(loadFrom);
-				dialog.setSearchString(spec.getSearchString());
+				dialog.setSearchAsJson(spec.getSearchGrid());
 				dialog.setSearchFinalBulletinsOnly(spec.getFinalOnly());
 			} 
 			catch (Exception e)
@@ -420,7 +428,7 @@ public class UiFancySearchDlg extends JDialog
 	
 	SearchSpec getSearchSpec()
 	{
-		return new SearchSpec(getSearchString(), searchFinalBulletinsOnly());
+		return new SearchSpec(getSearchAsJson(), searchFinalBulletinsOnly());
 	}
 	
 	public boolean getResults()

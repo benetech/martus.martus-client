@@ -26,6 +26,8 @@ Boston, MA 02111-1307, USA.
 
 package org.martus.client.search;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.martus.client.bulletinstore.ClientBulletinStore;
 import org.martus.client.swingui.dialogs.UiDialogLauncher;
 import org.martus.clientside.UiLocalization;
@@ -36,6 +38,7 @@ import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.fieldspec.FieldTypeAnyField;
 import org.martus.common.fieldspec.FieldTypeNormal;
 import org.martus.common.fieldspec.GridFieldSpec;
+import org.martus.common.fieldspec.MiniFieldSpec;
 import org.martus.common.fieldspec.PopUpTreeFieldSpec;
 import org.martus.common.fieldspec.SearchableFieldChoiceItem;
 import org.martus.common.fieldspec.GridFieldSpec.UnsupportedFieldTypeException;
@@ -102,6 +105,48 @@ public class FancySearchHelper
 	{
 		return new ChoiceItem(tag, getLocalization().getKeyword(tag));
 	}
+	
+	public void setSearchFromJson(GridData gridData, JSONObject json)
+	{
+		gridData.clear();
+		if(!json.has(TAG_ROWS))
+		{
+			gridData.addEmptyRow();
+			return;
+		}
+		
+		JSONArray rows = json.getJSONArray(TAG_ROWS);
+		for(int i = 0; i < rows.length(); ++i)
+		{
+			JSONObject row = rows.getJSONObject(i);
+			MiniFieldSpec miniSpec = new MiniFieldSpec(row.getJSONObject(TAG_FIELD_TO_SEARCH));
+			
+			gridData.addEmptyRow();
+			gridData.setValueAt(miniSpec.toJson().toString(), i, 0);
+			gridData.setValueAt(row.getString(TAG_COMPARE_HOW), i, 1);
+			gridData.setValueAt(row.getString(TAG_LOOK_FOR), i, 2);
+			gridData.setValueAt(row.getString(TAG_AND_OR), i, 3);
+		}
+	}
+	
+	public JSONObject getSearchAsJson(GridData gridData) throws Exception
+	{
+		JSONObject json = new JSONObject();
+		JSONArray rows = new JSONArray();
+		for(int i = 0; i < gridData.getRowCount(); ++i)
+		{
+			String value = gridData.getValueAt(i, 0);
+			MiniFieldSpec miniSpec = new MiniFieldSpec(new JSONObject(value));
+			JSONObject row = new JSONObject();
+			row.put(TAG_FIELD_TO_SEARCH, miniSpec.toJson());
+			row.put(TAG_COMPARE_HOW, gridData.getValueAt(i, 1));
+			row.put(TAG_LOOK_FOR, gridData.getValueAt(i, 2));
+			row.put(TAG_AND_OR, gridData.getValueAt(i, 3));
+			rows.put(row);
+		}
+		json.put(TAG_ROWS, rows);
+		return json;
+	}
 
 	public SearchTreeNode getSearchTree(GridData gridData)
 	{
@@ -141,18 +186,24 @@ public class FancySearchHelper
 	// into the value area, and the same field is applied to each value
 	private SearchTreeNode createAmazonStyleNode(GridData gridData, int row)
 	{
-		String fieldName = gridData.getValueAt(row, 0);
+		FieldSpec specForThisValue = getFieldToSearchIn(gridData, row);
+
 		String op = gridData.getValueAt(row, 1);
 		String value = gridData.getValueAt(row, 2);
 		value = value.trim();
-
-		PopUpTreeFieldSpec fieldColumnSpec = (PopUpTreeFieldSpec)gridData.getSpec().getFieldSpec(0);
-		FieldSpec specForThisValue = FancySearchTableModel.getFieldSpecForChosenField(fieldName, fieldColumnSpec);
 		
 		String localAnd = getLocalization().getKeyword(SearchParser.ENGLISH_AND_KEYWORD);
 		String localOr = getLocalization().getKeyword(SearchParser.ENGLISH_OR_KEYWORD);
 		SearchParser parser = new SearchParser(localAnd, localOr);
 		return parser.parse(specForThisValue, op, value);
+	}
+
+	private FieldSpec getFieldToSearchIn(GridData gridData, int row)
+	{
+		String miniSpecAsJsonString = gridData.getValueAt(row, 0);
+		PopUpTreeFieldSpec fieldColumnSpec = (PopUpTreeFieldSpec)gridData.getSpec().getFieldSpec(0);
+		SearchableFieldChoiceItem choice = fieldColumnSpec.findCode(miniSpecAsJsonString);
+		return choice.getSpec();
 	}
 	
 	public static SearchableFieldChoiceItem findSearchTag(PopUpTreeFieldSpec specOfFieldColumn, String tagToFind)
@@ -164,6 +215,12 @@ public class FancySearchHelper
 	public static final int COLUMN_FIELD = 1;
 	public static final int COLUMN_COMPARE_HOW = 2;
 	public static final int COLUMN_VALUE = 3;
+	
+	public static final String TAG_ROWS = "Rows";
+	public static final String TAG_FIELD_TO_SEARCH = "FieldToSearch";
+	public static final String TAG_COMPARE_HOW = "CompareHow";
+	public static final String TAG_LOOK_FOR = "LookFor";
+	public static final String TAG_AND_OR = "AndOr";
 	
 	FancySearchTableModel model;
 	UiDialogLauncher dlgLauncher;

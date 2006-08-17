@@ -52,6 +52,7 @@ import org.martus.common.fieldspec.FieldTypeMultiline;
 import org.martus.common.fieldspec.FieldTypeNormal;
 import org.martus.common.fieldspec.FieldTypeUnknown;
 import org.martus.common.fieldspec.GridFieldSpec;
+import org.martus.common.fieldspec.MiniFieldSpec;
 import org.martus.common.fieldspec.PopUpTreeFieldSpec;
 import org.martus.common.fieldspec.SearchableFieldChoiceItem;
 import org.martus.common.fieldspec.StandardFieldSpecs;
@@ -171,7 +172,7 @@ public class TestFieldChooserSpecBuilder extends TestCaseEnhanced
 		assertEquals("not one choice for normal with label?", 1, withLabelChoices.size());
 		{
 			ChoiceItem createdChoice = (ChoiceItem)withLabelChoices.iterator().next();
-			assertEquals(withLabel.toString(), createdChoice.getCode());
+			assertEquals(new MiniFieldSpec(withLabel).toJson().toString(), createdChoice.getCode());
 			assertEquals(withLabel.getLabel(), createdChoice.toString());
 		}
 		

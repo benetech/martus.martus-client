@@ -30,6 +30,8 @@ import java.io.File;
 
 import javax.swing.tree.DefaultMutableTreeNode;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.martus.client.bulletinstore.ClientBulletinStore;
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.dialogs.UiDialogLauncher;
@@ -45,6 +47,7 @@ import org.martus.common.fieldspec.FieldTypeDropdown;
 import org.martus.common.fieldspec.FieldTypeNormal;
 import org.martus.common.fieldspec.FieldTypePopUpTree;
 import org.martus.common.fieldspec.GridFieldSpec;
+import org.martus.common.fieldspec.MiniFieldSpec;
 import org.martus.common.fieldspec.PopUpTreeFieldSpec;
 import org.martus.common.fieldspec.SearchFieldTreeModel;
 import org.martus.common.fieldspec.SearchableFieldChoiceItem;
@@ -116,7 +119,7 @@ public class TestFancySearchHelper extends TestCaseEnhanced
 		spec.addColumn(FieldSpec.createStandardField("value", new FieldTypeNormal()));
 		spec.addColumn(FieldSpec.createStandardField("andor", new FieldTypeNormal()));
 		GridData data = new GridData(spec);
-		addRow(data, fields[0].getCode(), "=", "1", "or");
+		addRow(data, new MiniFieldSpec(booleanSpec).toJson().toString(), "=", "1", "or");
 		
 		SearchTreeNode booleanEquals = helper.getSearchTree(data);
 		assertEquals(SearchTreeNode.VALUE, booleanEquals.getOperation());
@@ -159,12 +162,36 @@ public class TestFancySearchHelper extends TestCaseEnhanced
 		spec.addColumn(FieldSpec.createStandardField("value", new FieldTypeNormal()));
 		spec.addColumn(FieldSpec.createStandardField("andor", new FieldTypeNormal()));
 		GridData data = new GridData(spec);
-		addRow(data, fields[0].getCode(), "=", "b", "or");
-		addRow(data, fields[1].getCode(), "=", "d", "or");
+		addRow(data, new MiniFieldSpec(a).toJson().toString(), "=", "b", "or");
+		addRow(data, new MiniFieldSpec(c).toJson().toString(), "=", "d", "or");
+		
 		SearchTreeNode root = helper.getSearchTree(data);
 		verifyOp("top level", root, SearchTreeNode.OR);
 		verifyFieldCompareOpValue("two rows left", root.getLeft(), a, MartusField.EQUAL, "b");
 		verifyFieldCompareOpValue("two rows right", root.getRight(), c, MartusField.EQUAL, "d");
+		
+		JSONObject json = helper.getSearchAsJson(data);
+		JSONArray rows = json.getJSONArray(FancySearchHelper.TAG_ROWS);
+		assertEquals("didn't jsonize two rows?", 2, rows.length());
+		JSONObject row1 = rows.getJSONObject(0);
+		MiniFieldSpec miniSpec1 = new MiniFieldSpec(fields[0].getSpec());
+		assertEquals("didn't save first code?", miniSpec1, new MiniFieldSpec(row1.getJSONObject(FancySearchHelper.TAG_FIELD_TO_SEARCH)));
+		assertEquals("didn't save first comparehow?", "=", row1.getString(FancySearchHelper.TAG_COMPARE_HOW));
+		assertEquals("didn't save first lookFor?", "b", row1.getString(FancySearchHelper.TAG_LOOK_FOR));
+		assertEquals("didn't save first andor?", "or", row1.getString(FancySearchHelper.TAG_AND_OR));
+		JSONObject row2 = rows.getJSONObject(1);
+		MiniFieldSpec miniSpec2 = new MiniFieldSpec(fields[1].getSpec());
+		assertEquals("didn't save second code?", miniSpec2, new MiniFieldSpec(row2.getJSONObject(FancySearchHelper.TAG_FIELD_TO_SEARCH)));
+		assertEquals("didn't save second comparehow?", "=", row2.getString(FancySearchHelper.TAG_COMPARE_HOW));
+		assertEquals("didn't save second lookFor?", "d", row2.getString(FancySearchHelper.TAG_LOOK_FOR));
+		assertEquals("didn't save second andor?", "or", row2.getString(FancySearchHelper.TAG_AND_OR));
+		
+		GridData got = new GridData(data.getSpec());
+		helper.setSearchFromJson(got, json);
+		assertEquals("didn't restore rows?", data.getRowCount(), got.getRowCount());
+		for(int row = 0; row < got.getRowCount(); ++row)
+			for(int column = 0; column < got.getColumnCount(); ++column)
+				assertEquals("Bad data for row " + row + " col " + column, data.getValueAt(row, column), got.getValueAt(row, column));
 	}
 	
 	public void testGetSearchTreeComplex() throws Exception

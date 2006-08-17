@@ -32,6 +32,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JTable;
 
+import org.json.JSONObject;
 import org.martus.client.bulletinstore.ClientBulletinStore;
 import org.martus.client.swingui.dialogs.UiDialogLauncher;
 import org.martus.client.swingui.fields.UiGridEditor;
@@ -79,6 +80,16 @@ public class FancySearchGridEditor extends UiGridEditor
 	{
 		int column = FancySearchTableModel.fieldColumn;
 		return (GridPopUpTreeCellEditor)getTable().getCellEditor(0, column);
+	}
+	
+	public void setFromJson(JSONObject json)
+	{
+		helper.setSearchFromJson(getGridData(), json);
+	}
+	
+	public JSONObject getSearchAsJson() throws Exception
+	{
+		return helper.getSearchAsJson(getGridData());
 	}
 	
 	public SearchTreeNode getSearchTree()

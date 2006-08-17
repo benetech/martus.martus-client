@@ -29,21 +29,21 @@ import org.json.JSONObject;
 
 public class SearchSpec
 {
-	public SearchSpec(String searchStringToUse, boolean finalOnlyToUse)
+	public SearchSpec(JSONObject searchGridToUse, boolean finalOnlyToUse)
 	{
-		searchString = searchStringToUse;
+		searchGrid = searchGridToUse;
 		finalOnly = finalOnlyToUse;
 	}
 	
 	public SearchSpec(JSONObject json)
 	{
-		searchString = json.getString(TAG_SEARCH_STRING);
+		searchGrid = json.getJSONObject(TAG_SEARCH_GRID);
 		finalOnly = json.getBoolean(TAG_FINAL_ONLY);
 	}
 	
-	public String getSearchString()
+	public JSONObject getSearchGrid()
 	{
-		return searchString;
+		return searchGrid;
 	}
 	
 	public boolean getFinalOnly()
@@ -54,14 +54,14 @@ public class SearchSpec
 	public JSONObject toJson()
 	{
 		JSONObject json = new JSONObject();
-		json.put(TAG_SEARCH_STRING, getSearchString());
+		json.put(TAG_SEARCH_GRID, getSearchGrid());
 		json.put(TAG_FINAL_ONLY, getFinalOnly());
 		return json;
 	}
 	
-	static final String TAG_SEARCH_STRING = "SearchString";
+	static final String TAG_SEARCH_GRID = "SearchGrid";
 	static final String TAG_FINAL_ONLY = "FinalOnly";
 	
-	private String searchString;
+	private JSONObject searchGrid;
 	private boolean finalOnly;
 }

@@ -210,7 +210,7 @@ public class ReportFormat
 	final static String TAG_END_SECTION = "EndSection";
 	final static String TAG_SPECS = "Specs";
 	
-	public final static int EXPECTED_VERSION = 7;
+	public final static int EXPECTED_VERSION = 8;
 
 	private int version;
 	private String startSection;
