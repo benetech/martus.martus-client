@@ -25,8 +25,10 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.reports;
 
+import org.martus.client.core.SafeReadableBulletin;
 import org.martus.common.MiniLocalization;
 import org.martus.common.fieldspec.FieldSpec;
+import org.martus.common.fieldspec.MiniFieldSpec;
 import org.martus.common.fieldspec.StandardFieldSpecs;
 
 public class TabularReportBuilder
@@ -65,10 +67,8 @@ public class TabularReportBuilder
 		for(int i = 0; i < specs.length; ++i)
 		{
 			headerBuffer.append("<th>");
-			FieldSpec spec = specs[i];
-			String label = spec.getLabel();
-			if(StandardFieldSpecs.isStandardFieldTag(spec.getTag()))
-				label = localization.getFieldLabel(spec.getTag());
+			MiniFieldSpec spec = new MiniFieldSpec(specs[i]);
+			String label = StandardFieldSpecs.getLocalizedLabel(spec.getTag(), spec.getLabel(), localization);
 			headerBuffer.append(label);
 			headerBuffer.append("</th>");
 		}
@@ -83,7 +83,7 @@ public class TabularReportBuilder
 		for(int i = 0; i < specs.length; ++i)
 		{
 			detailBuffer.append("<td>");
-			FieldSpec spec = specs[i];
+			MiniFieldSpec spec = new MiniFieldSpec(specs[i]);
 			detailBuffer.append(getFieldCall(spec));
 			detailBuffer.append(".html($localization)");
 			detailBuffer.append("</td>");
@@ -92,24 +92,24 @@ public class TabularReportBuilder
 		return detailBuffer.toString();
 	}
 
-	private String getFieldCall(FieldSpec spec)
+	private String getFieldCall(MiniFieldSpec spec)
 	{
+		String[] tags = SafeReadableBulletin.parseNestedTags(spec.getTag());
+		String topLevelTag = tags[0];
+		
 		StringBuffer result = new StringBuffer();
-		if(spec.getParent() == null)
+		result.append("$bulletin.field('");
+		result.append(topLevelTag);
+		result.append("', '");
+		result.append(spec.getTopLevelLabel());
+		result.append("', '");
+		result.append(spec.getTopLevelType().getTypeName());
+		result.append("')");
+		
+		for(int i = 1; i < tags.length; ++i)
 		{
-			result.append("$bulletin.field('");
-			result.append(spec.getTag());
-			result.append("', '");
-			result.append(spec.getLabel());
-			result.append("', '");
-			result.append(spec.getType().getTypeName());
-			result.append("')");
-		}
-		else
-		{
-			result.append(getFieldCall(spec.getParent()));
 			result.append(".getSubField('");
-			result.append(spec.getSubFieldTag());
+			result.append(tags[i]);
 			result.append("', $localization)");
 		}
 			
