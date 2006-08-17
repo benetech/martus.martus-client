@@ -1555,6 +1555,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	private void cancelRetrieve() throws Exception
 	{
 		getApp().cancelBackgroundRetrieve();
+		setStatusMessageReady();
 	}
 
 	private boolean isRetrieveInProgress()
@@ -2108,7 +2109,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	
 		ClientSideNetworkGateway gateway = getApp().getCurrentNetworkInterfaceGateway();		
 		if(app.isSSLServerAvailable(gateway))
-			setStatusMessageTag(STATUS_READY);	
+			setStatusMessageReady();	
 		else
 			setStatusMessageTag(STATUS_NO_SERVER_AVAILABLE);			
 	}
