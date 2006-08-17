@@ -39,7 +39,7 @@ public class TabularReportBuilder
 	public ReportFormat createTabular(FieldSpec[] specs)
 	{
 		ReportFormat rf = new ReportFormat();
-		rf.setStartSection(createStartSection(specs));
+		rf.setStartSection(createStartSection());
 		rf.setHeaderSection(createHeaderSection(specs));
 		rf.setDetailSection(createDetailSection(specs));
 		rf.setBreakSection(createBreakSection());
@@ -49,7 +49,7 @@ public class TabularReportBuilder
 		return rf;
 	}
 
-	private String createStartSection(FieldSpec[] specs)
+	private String createStartSection()
 	{
 		StringBuffer startBuffer = new StringBuffer();
 		startBuffer.append("<html>");
