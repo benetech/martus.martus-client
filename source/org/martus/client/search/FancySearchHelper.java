@@ -109,24 +109,39 @@ public class FancySearchHelper
 	public void setSearchFromJson(GridData gridData, JSONObject json)
 	{
 		gridData.clear();
-		if(!json.has(TAG_ROWS))
-		{
+		recreateSavedRows(gridData, json);
+		if(gridData.getRowCount() == 0)
 			gridData.addEmptyRow();
+		model.fireTableDataChanged();
+	}
+
+	private void recreateSavedRows(GridData gridData, JSONObject json)
+	{
+		if(!json.has(TAG_ROWS))
 			return;
-		}
 		
 		JSONArray rows = json.getJSONArray(TAG_ROWS);
 		for(int i = 0; i < rows.length(); ++i)
 		{
+
 			JSONObject row = rows.getJSONObject(i);
 			MiniFieldSpec miniSpec = new MiniFieldSpec(row.getJSONObject(TAG_FIELD_TO_SEARCH));
-			
-			gridData.addEmptyRow();
-			gridData.setValueAt(miniSpec.toJson().toString(), i, 0);
-			gridData.setValueAt(row.getString(TAG_COMPARE_HOW), i, 1);
-			gridData.setValueAt(row.getString(TAG_LOOK_FOR), i, 2);
-			gridData.setValueAt(row.getString(TAG_AND_OR), i, 3);
+			String miniSpecAsJsonString = miniSpec.toJson().toString();
+			if(doesFieldExist(gridData, miniSpecAsJsonString))
+			{
+				gridData.addEmptyRow();
+				gridData.setValueAt(miniSpecAsJsonString, i, 0);
+				gridData.setValueAt(row.getString(TAG_COMPARE_HOW), i, 1);
+				gridData.setValueAt(row.getString(TAG_LOOK_FOR), i, 2);
+				gridData.setValueAt(row.getString(TAG_AND_OR), i, 3);
+			}
 		}
+	}
+
+	private boolean doesFieldExist(GridData gridData, String miniSpecAsJsonString)
+	{
+		PopUpTreeFieldSpec fieldColumnSpec = (PopUpTreeFieldSpec)gridData.getSpec().getFieldSpec(0);
+		return (fieldColumnSpec.findCode(miniSpecAsJsonString) != null);
 	}
 	
 	public JSONObject getSearchAsJson(GridData gridData) throws Exception
