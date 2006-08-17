@@ -90,5 +90,5 @@ public class ReportAnswers
 	
 	public final static int EXPECTED_VERSION = 8;
 	
-	private ReportType type;
+	//private ReportType type;
 }
