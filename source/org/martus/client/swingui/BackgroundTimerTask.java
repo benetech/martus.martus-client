@@ -31,9 +31,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.TimerTask;
 import java.util.Vector;
-
 import javax.swing.SwingUtilities;
-
 import org.martus.client.bulletinstore.BulletinFolder;
 import org.martus.client.bulletinstore.ClientBulletinStore;
 import org.martus.client.core.BackgroundRetriever;
@@ -43,6 +41,7 @@ import org.martus.clientside.ClientSideNetworkGateway;
 import org.martus.common.ProgressMeterInterface;
 import org.martus.common.Exceptions.ServerCallFailedException;
 import org.martus.common.Exceptions.ServerNotAvailableException;
+import org.martus.common.bulletin.Bulletin;
 import org.martus.common.crypto.MartusCrypto;
 import org.martus.common.crypto.MartusCrypto.MartusSignatureException;
 import org.martus.common.network.NetworkInterfaceConstants;
@@ -115,8 +114,6 @@ class BackgroundTimerTask extends TimerTask
 			
 			return;
 		}
-		
-		mainWindow.setStatusMessageReady();
 		doUploading();
 	}
 	
@@ -141,36 +138,45 @@ class BackgroundTimerTask extends TimerTask
 		throws InterruptedException, InvocationTargetException
 	{
 		
+		BackgroundUploader.UploadResult uploadResult = new BackgroundUploader.UploadResult();
 		String tag = UiMainWindow.STATUS_READY;
-		if(mainWindow.isServerConfigured())
+		if(!mainWindow.isServerConfigured())
+		{
+			tag = UiMainWindow.STATUS_SERVER_NOT_CONFIGURED;
+		}
+		else
 		{					
-			try
-			{								
-				BackgroundUploader.UploadResult uploadResult = uploader.backgroundUpload(); 
-				mainWindow.uploadResult = uploadResult.result;				
-				if(uploadResult.result == null)
-				{
-					tag = "UploadFailedProgressMessage"; 
-					if(uploadResult.exceptionThrown == null)
-						tag = UiMainWindow.STATUS_NO_SERVER_AVAILABLE;
-				}
-				else if(uploadResult.uid != null)
-				{
-					//System.out.println("UiMainWindow.Tick.run: " + uploadResult);
-					updateDisplay();
-				}
-				else
-					tag = "";							
-			}
-			catch (MartusApp.DamagedBulletinException e)
+			uploadResult = uploader.backgroundUpload(); 
+			mainWindow.uploadResult = uploadResult.result;	
+			if(uploadResult.isHopelesslyDamaged)
 			{
-				ThreadedNotify damagedBulletin = new ThreadedNotify("DamagedBulletinMovedToDiscarded");
+				ThreadedNotify damagedBulletin = new ThreadedNotify("DamagedBulletinMovedToDiscarded", uploadResult.uid);
 				SwingUtilities.invokeAndWait(damagedBulletin);
 				mainWindow.folderContentsHaveChanged(getStore().getFolderSealedOutbox());
 				mainWindow.folderContentsHaveChanged(getStore().getFolderDraftOutbox());
 				mainWindow.folderContentsHaveChanged(getApp().createOrFindFolder(getStore().getNameOfFolderDamaged()));
 				mainWindow.folderTreeContentsHaveChanged();
 			}
+			else if(uploadResult.bulletinNotSentAndRemovedFromQueue)
+			{
+				tag = "UploadFailedProgressMessage"; 
+				ThreadedNotify bulletinNotSent = new ThreadedNotify("UploadFailedBulletinNotSentToServer", uploadResult.uid);
+				SwingUtilities.invokeAndWait(bulletinNotSent);
+				updateDisplay();
+			}
+			else if(uploadResult.result == null)
+			{
+				tag = "UploadFailedProgressMessage"; 
+				if(uploadResult.exceptionThrown == null)
+					tag = UiMainWindow.STATUS_NO_SERVER_AVAILABLE;
+			}
+			else if(uploadResult.uid != null)
+			{
+				//System.out.println("UiMainWindow.Tick.run: " + uploadResult);
+				updateDisplay();
+			}
+			else
+				tag = "";							
 		}
 
 		if(tag.length() > 0)			
@@ -382,16 +388,24 @@ class BackgroundTimerTask extends TimerTask
 
 	class ThreadedNotify implements Runnable
 	{
-		public ThreadedNotify(String tag)
+		public ThreadedNotify(String tag, UniversalId uidToUse)
 		{
 			notifyTag = tag;
+			uid = uidToUse;
 		}
 
 		public void run()
 		{
-			mainWindow.notifyDlg(notifyTag);
+			String bulletinTitle = "";
+			if(uid != null)
+				bulletinTitle = mainWindow.getStore().getBulletinRevision(uid).get(Bulletin.TAGTITLE);
+			
+			HashMap map = new HashMap();
+			map.put("#BulletinTitle#", bulletinTitle);
+			mainWindow.notifyDlg(notifyTag,map);
 		}
 		String notifyTag;
+		UniversalId uid;
 	}
 		
 	class ThreadedServerComplianceDlg implements Runnable

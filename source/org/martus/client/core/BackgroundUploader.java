@@ -69,8 +69,7 @@ public class BackgroundUploader
 		progressMeter = progressMeterToUse;
 	}
 
-	public UploadResult backgroundUpload() throws
-		MartusApp.DamagedBulletinException
+	public UploadResult backgroundUpload()
 	{
 		UploadResult uploadResult = new UploadResult();
 		uploadResult.result = NetworkInterfaceConstants.UNKNOWN;
@@ -79,14 +78,11 @@ public class BackgroundUploader
 		BulletinFolder folderSealedOutbox = app.getFolderSealedOutbox();
 		BulletinFolder folderDraftOutbox = app.getFolderDraftOutbox();
 		if(store.hasAnyNonDiscardedBulletins(folderSealedOutbox))
-			uploadResult = backgroundUploadOneBulletin(folderSealedOutbox);
+			uploadResult = uploadOneBulletin(folderSealedOutbox);
 		else if(store.hasAnyNonDiscardedBulletins(folderDraftOutbox))
-			uploadResult = backgroundUploadOneBulletin(folderDraftOutbox);
+			uploadResult = uploadOneBulletin(folderDraftOutbox);
 		else if(app.getConfigInfo().shouldContactInfoBeSentToServer())
 			uploadResult = sendContactInfoToServer();
-	
-		if(uploadResult.isHopelesslyDamaged)
-			throw new MartusApp.DamagedBulletinException(uploadResult.exceptionThrown);
 		return uploadResult;
 	}
 
@@ -183,12 +179,12 @@ public class BackgroundUploader
 					uploadResult.result.equals(NetworkInterfaceConstants.DUPLICATE))
 			{
 				store.setIsOnServer(b);
-				uploadFromFolder.remove(uploadResult.uid);
-				store.saveFolders();
-				
 				// TODO: Is the file this creates ever used???
 				app.resetLastUploadedTime();
 			}
+			else
+				uploadResult.bulletinNotSentAndRemovedFromQueue = true;
+				
 		}
 		catch (Packet.InvalidPacketException e)
 		{
@@ -218,38 +214,41 @@ public class BackgroundUploader
 		catch (MartusCrypto.NoKeyPairException e)
 		{
 			uploadResult.exceptionThrown = e.toString();
+			uploadResult.bulletinNotSentAndRemovedFromQueue = true;
 		} 
 		catch (FileNotFoundException e)
 		{
 			uploadResult.exceptionThrown = e.toString();
+			uploadResult.bulletinNotSentAndRemovedFromQueue = true;
 		} 
 		catch (MartusCrypto.MartusSignatureException e)
 		{
 			uploadResult.exceptionThrown = e.toString();
+			uploadResult.bulletinNotSentAndRemovedFromQueue = true;
 		} 
 		catch (MartusCrypto.CryptoException e)
 		{
 			uploadResult.exceptionThrown = e.toString();
+			uploadResult.bulletinNotSentAndRemovedFromQueue = true;
 		} 
 		catch (IOException e)
 		{
 			uploadResult.exceptionThrown = e.toString();
+			uploadResult.bulletinNotSentAndRemovedFromQueue = true;
 		}
 		catch (RecordHiddenException e)
 		{
 			uploadResult.exceptionThrown = e.toString();
+			uploadResult.bulletinNotSentAndRemovedFromQueue = true;
 		}
-		return uploadResult;
-	}
-
-	UploadResult backgroundUploadOneBulletin(BulletinFolder uploadFromFolder) throws
-		MartusApp.DamagedBulletinException
-	{
-		UploadResult uploadResult = uploadOneBulletin(uploadFromFolder);
-		
-		if(uploadResult.isHopelesslyDamaged)
-			app.moveBulletinToDamaged(uploadFromFolder, uploadResult.uid);
-
+		finally
+		{
+			if(uploadResult.isHopelesslyDamaged)
+				app.moveBulletinToDamaged(uploadFromFolder, uploadResult.uid);
+			else
+				uploadFromFolder.remove(uploadResult.uid);
+			store.saveFolders();
+		}
 		return uploadResult;
 	}
 
@@ -314,6 +313,7 @@ public class BackgroundUploader
 		public String result;
 		public String exceptionThrown;
 		public boolean isHopelesslyDamaged;
+		public boolean bulletinNotSentAndRemovedFromQueue;
 	}
 	
 	private ContactInfo createContactInfo(ConfigInfo sourceOfInfo)

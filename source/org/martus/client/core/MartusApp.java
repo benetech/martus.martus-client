@@ -1270,15 +1270,6 @@ public class MartusApp
 		store.moveBulletin(b, outbox, damaged);		
 	}
 
-	public static class DamagedBulletinException extends Exception
-	{
-		public DamagedBulletinException(String message)
-		{
-			super(message);
-		}
-
-	}
-
 	public Vector downloadFieldOfficeAccountIds() throws ServerErrorException
 	{
 		if(!isSSLServerAvailable())
