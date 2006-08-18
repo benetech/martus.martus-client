@@ -463,6 +463,7 @@ class BackgroundTimerTask extends TimerTask
 		public void run()
 		{
 			mainWindow.notifyDlg(mainWindow, tag);
+			mainWindow.setStatusMessageReady();
 		}
 		
 		String tag;
