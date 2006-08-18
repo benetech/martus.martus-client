@@ -248,6 +248,15 @@ public class UiPopUpTreeEditor extends UiField implements ActionListener
 		public void valueChanged(TreeSelectionEvent e)
 		{
 			okAction.setEnabled(isSelectionValid());
+			updateScrollerPosition();
+		}
+
+		//Java Bug, remove once we upgrade to Java 1.5 (Fixed post Java 1.4.2)
+		private void updateScrollerPosition()
+		{
+			int rows[] = tree.getSelectionRows();
+			if(rows != null && rows.length>0)
+				tree.scrollRowToVisible(rows[0]);
 		}
 		
 		class OkAction extends AbstractAction
