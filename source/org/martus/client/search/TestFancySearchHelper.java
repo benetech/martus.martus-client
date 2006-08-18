@@ -139,8 +139,18 @@ public class TestFancySearchHelper extends TestCaseEnhanced
 		spec.addColumn(fieldColumnSpec);
 		spec.addColumn(FieldSpec.createStandardField("op", new FieldTypeNormal()));
 		spec.addColumn(FieldSpec.createStandardField("value", new FieldTypeNormal()));
-		spec.addColumn(FieldSpec.createStandardField("andor", new FieldTypeNormal()));
+		spec.addColumn(helper.createAndOrColumnSpec());
 		GridData data = new GridData(spec);
+		
+		data.addEmptyRow();
+		SearchTreeNode emptyRoot = helper.getSearchTree(data);
+		FieldSpec emptySpec = emptyRoot.getField();
+		assertEquals("Empty row wrong as tree?", normalSpec, emptySpec);
+		
+		JSONObject json = helper.getSearchAsJson(data);
+		assertEquals("Empty row wrong as json?", 1, json.getJSONArray(FancySearchHelper.TAG_ROWS).length());
+		
+		data.clear();
 		addRow(data, fields[0].getCode(), "=", "value", "or");
 		SearchTreeNode root = helper.getSearchTree(data);
 		verifyFieldCompareOpValue("single row", root, normalSpec, MartusField.EQUAL, "value");

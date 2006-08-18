@@ -150,8 +150,9 @@ public class FancySearchHelper
 		JSONArray rows = new JSONArray();
 		for(int i = 0; i < gridData.getRowCount(); ++i)
 		{
-			String value = gridData.getValueAt(i, 0);
-			MiniFieldSpec miniSpec = new MiniFieldSpec(new JSONObject(value));
+			FieldSpec spec = getFieldToSearchIn(gridData, i);
+			MiniFieldSpec miniSpec = new MiniFieldSpec(spec);
+			
 			JSONObject row = new JSONObject();
 			row.put(TAG_FIELD_TO_SEARCH, miniSpec.toJson());
 			row.put(TAG_COMPARE_HOW, gridData.getValueAt(i, 1));
@@ -189,6 +190,13 @@ public class FancySearchHelper
 	private int getAndOr(GridData gridData, int opRow)
 	{
 		String andOr = gridData.getValueAt(opRow, 3); 
+		if(andOr.length() == 0)
+		{
+			FieldSpec fieldSpec = gridData.getSpec().getFieldSpec(3);
+			DropDownFieldSpec fieldColumnSpec = (DropDownFieldSpec)fieldSpec;
+			andOr = fieldColumnSpec.getChoice(0).getCode();
+		}
+		
 		if(andOr.equals(SearchParser.ENGLISH_AND_KEYWORD))
 			return SearchTreeNode.AND;
 		if(andOr.equals(SearchParser.ENGLISH_OR_KEYWORD))
@@ -215,8 +223,11 @@ public class FancySearchHelper
 
 	private FieldSpec getFieldToSearchIn(GridData gridData, int row)
 	{
-		String miniSpecAsJsonString = gridData.getValueAt(row, 0);
 		PopUpTreeFieldSpec fieldColumnSpec = (PopUpTreeFieldSpec)gridData.getSpec().getFieldSpec(0);
+		String value = gridData.getValueAt(row, 0);
+		if(value.length() == 0)
+			value = fieldColumnSpec.getFirstChoice().getCode();
+		String miniSpecAsJsonString = value;
 		SearchableFieldChoiceItem choice = fieldColumnSpec.findCode(miniSpecAsJsonString);
 		return choice.getSpec();
 	}
