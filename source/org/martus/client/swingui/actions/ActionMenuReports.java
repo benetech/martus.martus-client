@@ -27,6 +27,8 @@ package org.martus.client.swingui.actions;
 
 import java.awt.event.ActionEvent;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 
 import javax.swing.filechooser.FileFilter;
@@ -58,12 +60,12 @@ import org.martus.clientside.FileDialogHelpers;
 import org.martus.clientside.FormatFilter;
 import org.martus.common.MiniLocalization;
 import org.martus.common.bulletin.Bulletin;
+import org.martus.common.crypto.MartusCrypto;
 import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.fieldspec.FieldTypeBoolean;
 import org.martus.common.fieldspec.MiniFieldSpec;
 import org.martus.swing.PrintUtilities;
 import org.martus.swing.UiLabel;
-import org.martus.util.UnicodeReader;
 import org.martus.util.UnicodeWriter;
 
 
@@ -139,7 +141,7 @@ public class ActionMenuReports extends ActionPrint
 		return rf;
 	}
 	
-	ReportFormat createAndSave(ReportType reportType) throws IOException
+	ReportFormat createAndSave(ReportType reportType) throws Exception
 	{
 		MiniFieldSpec[] specs = askUserWhichFieldsToInclude(reportType);
 		if(specs == null)
@@ -150,11 +152,18 @@ public class ActionMenuReports extends ActionPrint
 		if(file == null)
 			return null;
 		
-		UnicodeWriter writer = new UnicodeWriter(file);
-		writer.write(answers.toJson().toString());
-		writer.close();
+		byte[] answersToEncrypt = answers.toJson().toString().getBytes("UTF-8");
+		byte[] encryptedAnswers = getSecurity().createSignedBundle(answersToEncrypt);
+		FileOutputStream out = new FileOutputStream(file);
+		out.write(encryptedAnswers);
+		out.close();
 		
 		return buildReportFormat(answers);
+	}
+
+	private MartusCrypto getSecurity()
+	{
+		return mainWindow.getApp().getSecurity();
 	}
 
 	private ReportFormat buildReportFormat(ReportAnswers answers)
@@ -184,18 +193,28 @@ public class ActionMenuReports extends ActionPrint
 		
 		if(chosenFile == null)
 			return null;
+	
+		byte[] encryptedAnswers = new byte[(int)chosenFile.length()];
+		FileInputStream in = new FileInputStream(chosenFile);
+		in.read(encryptedAnswers);
+		in.close();
 		
-		UnicodeReader reader = new UnicodeReader(chosenFile);
-		String reportAnswersText = reader.readAll();
-		reader.close();
-		
-		JSONObject json = new JSONObject(reportAnswersText);
-		if(!json.optString(ReportAnswers.TAG_JSON_TYPE).equals(ReportAnswers.JSON_TYPE))
+		try
 		{
-			mainWindow.notifyDlg("NotValidReportFormat");
-			return null;
+			byte[] plainTextAnswers = getSecurity().extractFromSignedBundle(encryptedAnswers);
+
+			String reportAnswersText = new String(plainTextAnswers, "UTF-8");
+			JSONObject json = new JSONObject(reportAnswersText);
+			if(json.optString(ReportAnswers.TAG_JSON_TYPE).equals(ReportAnswers.JSON_TYPE))
+				return new ReportAnswers(json);
+		} 
+		catch (IOException e)
+		{
+			// fall through to the code below
 		}
-		return new ReportAnswers(json);
+
+		mainWindow.notifyDlg("NotValidReportFormat");
+		return null;
 	}
 
 	File askForReportFileToSaveTo()
