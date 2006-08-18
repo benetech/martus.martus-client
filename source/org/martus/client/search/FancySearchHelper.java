@@ -26,6 +26,8 @@ Boston, MA 02111-1307, USA.
 
 package org.martus.client.search;
 
+import java.text.ParseException;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.martus.client.bulletinstore.ClientBulletinStore;
@@ -123,10 +125,9 @@ public class FancySearchHelper
 		JSONArray rows = json.getJSONArray(TAG_ROWS);
 		for(int i = 0; i < rows.length(); ++i)
 		{
-
 			JSONObject row = rows.getJSONObject(i);
-			MiniFieldSpec miniSpec = new MiniFieldSpec(row.getJSONObject(TAG_FIELD_TO_SEARCH));
-			String miniSpecAsJsonString = miniSpec.toJson().toString();
+			JSONObject jsonMiniSpec = row.getJSONObject(TAG_FIELD_TO_SEARCH);
+			String miniSpecAsJsonString = convertSearchFieldFromJsonToGridValue(jsonMiniSpec);
 			if(doesFieldExist(gridData, miniSpecAsJsonString))
 			{
 				gridData.addEmptyRow();
@@ -150,11 +151,11 @@ public class FancySearchHelper
 		JSONArray rows = new JSONArray();
 		for(int i = 0; i < gridData.getRowCount(); ++i)
 		{
-			FieldSpec spec = getFieldToSearchIn(gridData, i);
-			MiniFieldSpec miniSpec = new MiniFieldSpec(spec);
+			String value = gridData.getValueAt(i, 0);
+			JSONObject jsonMiniSpec = convertSearchFieldFromGridValueToJson(value);
 			
 			JSONObject row = new JSONObject();
-			row.put(TAG_FIELD_TO_SEARCH, miniSpec.toJson());
+			row.put(TAG_FIELD_TO_SEARCH, jsonMiniSpec);
 			row.put(TAG_COMPARE_HOW, gridData.getValueAt(i, 1));
 			row.put(TAG_LOOK_FOR, gridData.getValueAt(i, 2));
 			row.put(TAG_AND_OR, gridData.getValueAt(i, 3));
@@ -162,6 +163,27 @@ public class FancySearchHelper
 		}
 		json.put(TAG_ROWS, rows);
 		return json;
+	}
+
+	private String convertSearchFieldFromJsonToGridValue(JSONObject jsonMiniSpec)
+	{
+		String miniSpecAsJsonString = "";
+		if(jsonMiniSpec.length() > 0)
+		{
+				MiniFieldSpec miniSpec = new MiniFieldSpec(jsonMiniSpec);
+				miniSpecAsJsonString = miniSpec.toJson().toString();
+		}
+		return miniSpecAsJsonString;
+	}
+
+	private JSONObject convertSearchFieldFromGridValueToJson(String value) throws ParseException
+	{
+		JSONObject jsonMiniSpec = new JSONObject();
+		if(value.length() > 0)
+		{
+			jsonMiniSpec = new JSONObject(value);
+		}
+		return jsonMiniSpec;
 	}
 
 	public SearchTreeNode getSearchTree(GridData gridData)
