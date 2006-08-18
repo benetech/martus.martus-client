@@ -34,6 +34,7 @@ import org.json.JSONObject;
 import org.martus.client.core.PartialBulletin;
 import org.martus.client.core.SortableBulletinList;
 import org.martus.client.reports.PageReportBuilder;
+import org.martus.client.reports.ReportAnswers;
 import org.martus.client.reports.ReportFormat;
 import org.martus.client.reports.ReportFormatFilter;
 import org.martus.client.reports.ReportOutput;
@@ -149,11 +150,12 @@ public class ActionMenuReports extends ActionPrint
 	ReportFormat createTabularReport() throws Exception
 	{
 		TabularReportBuilder builder = new TabularReportBuilder(getLocalization());
-		MiniFieldSpec[] specs = askUserWhichFieldsToInclude(TABULAR_REPORT);
+		MiniFieldSpec[] specs = askUserWhichFieldsToInclude(ReportAnswers.TABULAR_REPORT);
 		if(specs == null)
 			return null;
 		
-		ReportFormat rf = builder.createTabular(specs);
+		ReportAnswers answers = new ReportAnswers(ReportAnswers.TABULAR_REPORT, specs);
+		ReportFormat rf = builder.createTabular(answers.getSpecs());
 		
 		File file = askForReportFileToSaveTo();
 		if(file == null)
@@ -168,11 +170,12 @@ public class ActionMenuReports extends ActionPrint
 	ReportFormat createPageReport() throws Exception
 	{
 		PageReportBuilder builder = new PageReportBuilder(getLocalization());
-		MiniFieldSpec[] specs = askUserWhichFieldsToInclude(PAGE_REPORT);
+		MiniFieldSpec[] specs = askUserWhichFieldsToInclude(ReportAnswers.PAGE_REPORT);
 		if(specs == null)
 			return null;
 		
-		ReportFormat rf = builder.createPageReport(specs);
+		ReportAnswers answers = new ReportAnswers(ReportAnswers.PAGE_REPORT, specs);
+		ReportFormat rf = builder.createPageReport(answers.getSpecs());
 		
 		File file = askForReportFileToSaveTo();
 		if(file == null)
@@ -333,14 +336,14 @@ public class ActionMenuReports extends ActionPrint
 	}
 
 	//TODO: Instead of passing in a constant pass in a Factory instead which will create the correct dialog
-	MiniFieldSpec[] askUserWhichFieldsToInclude(int reportType)
+	MiniFieldSpec[] askUserWhichFieldsToInclude(ReportAnswers.ReportType reportType)
 	{
 		while(true)
 		{
 			UIReportFieldDlg dlg;
-			if(reportType == PAGE_REPORT)
+			if(reportType.isPage())
 				dlg = new UiReportFieldChooserDlg(mainWindow);
-			else if(reportType == TABULAR_REPORT)
+			else if(reportType.isTabular())
 				dlg = new UiReportFieldOrganizerDlg(mainWindow);
 			else
 				return null;
@@ -359,8 +362,6 @@ public class ActionMenuReports extends ActionPrint
 			return specs;
 		}
 	}
-	final int PAGE_REPORT = 1;
-	final int TABULAR_REPORT = 2;
 	
 }
 

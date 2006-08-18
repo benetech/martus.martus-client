@@ -25,70 +25,126 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.reports;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+import org.martus.common.fieldspec.MiniFieldSpec;
+
 public class ReportAnswers
 {
-	
-	static class ReportType
+	public ReportAnswers(ReportType typeToUse, MiniFieldSpec[] specsToUse)
 	{
-		protected ReportType()
-		{
-		}
-		
-		public boolean isTabular()
-		{
-			return false;
-		}
-		
-		public boolean isPage()
-		{
-			return false;
-		}
-		
+		version = EXPECTED_VERSION;
+		type = typeToUse;
+		specs = specsToUse;
 	}
 	
-	static class ReportTypeTabular extends ReportType
+	public ReportAnswers(JSONObject json)
 	{
-		public boolean isTabular()
-		{
-			return true;
-		}
-
-		public String toString()
-		{
-			return TYPE_TABULAR;
-		}
+		version = json.getInt(TAG_VERSION);
+		type = ReportType.createFromString(json.getString(TAG_TYPE));
+		JSONArray jsonSpecs = json.getJSONArray(TAG_SPECS);
+		specs = new MiniFieldSpec[jsonSpecs.length()];
+		for(int i = 0; i < specs.length; ++i)
+			specs[i] = new MiniFieldSpec(jsonSpecs.getJSONObject(i));
 	}
 	
-	static class ReportTypePage extends ReportType
+	public int getVersion()
 	{
-		public boolean isPage()
-		{
-			return true;
-		}
-
-		public String toString()
-		{
-			return TYPE_PAGE;
-		}
+		return version;
 	}
 	
-	static class ReportTypeFactory
+	public boolean isPageReport()
 	{
-		public static ReportType createFromTypeString(String typeString)
+		return type.isPage();
+	}
+	
+	public boolean isTabularReport()
+	{
+		return type.isTabular();
+	}
+	
+	public MiniFieldSpec[] getSpecs()
+	{
+		return specs;
+	}
+	
+	public JSONObject toJson()
+	{
+		JSONObject json = new JSONObject();
+		json.put(TAG_VERSION, EXPECTED_VERSION);
+		json.put(TAG_TYPE, type.toString());
+		JSONArray jsonSpecs = new JSONArray();
+		for(int i = 0; i < specs.length; ++i)
+			jsonSpecs.put(specs[i].toJson());
+		json.put(TAG_SPECS, jsonSpecs);
+		return json;
+	}
+	
+	public static class ReportType
+	{
+		public static ReportType createFromString(String type)
 		{
-			if(typeString.equals(TYPE_TABULAR))
-				return new ReportTypeTabular();
-			if(typeString.equals(TYPE_PAGE))
-				return new ReportTypePage();
+			if(type.equals(ReportTypePage.TYPE_STRING))
+				return PAGE;
+			if(type.equals(ReportTypeTabular.TYPE_STRING))
+				return TABULAR;
 			
-			throw new RuntimeException("Unknown report type: " + typeString);
+			throw new RuntimeException("Unknown report type: " + type);
 		}
+		
+		public boolean isTabular()
+		{
+			return false;
+		}
+		
+		public boolean isPage()
+		{
+			return false;
+		}
+		
+		public final static ReportType PAGE = new ReportTypePage();
+		public final static ReportType TABULAR = new ReportTypeTabular();
 	}
 	
-	static final String TYPE_TABULAR = "Tabular";
-	static final String TYPE_PAGE = "Page";
+	public static class ReportTypeTabular extends ReportType
+	{
+		public boolean isTabular()
+		{
+			return true;
+		}
+		
+		public String toString()
+		{
+			return TYPE_STRING;
+		}
+
+		public static final String TYPE_STRING = "Tabular";
+	}
+	
+	public static class ReportTypePage extends ReportType
+	{
+		public boolean isPage()
+		{
+			return true;
+		}
+
+		public String toString()
+		{
+			return TYPE_STRING;
+		}
+
+		public static final String TYPE_STRING = "Page";
+	}
+	
+	public final static String TAG_TYPE = "Type";
+	public final static String TAG_VERSION = "Version";
+	public final static String TAG_SPECS = "Specs";
 	
 	public final static int EXPECTED_VERSION = 8;
+	public final static ReportType PAGE_REPORT = ReportType.PAGE;
+	public final static ReportType TABULAR_REPORT = ReportType.TABULAR;
 	
-	//private ReportType type;
+	private int version;
+	private ReportType type;
+	private MiniFieldSpec[] specs;
 }
