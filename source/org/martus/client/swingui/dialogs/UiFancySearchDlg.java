@@ -49,13 +49,12 @@ import org.martus.clientside.FileDialogHelpers;
 import org.martus.clientside.FormatFilter;
 import org.martus.clientside.UiLocalization;
 import org.martus.common.MiniLocalization;
+import org.martus.common.crypto.MartusCrypto;
 import org.martus.swing.UiButton;
 import org.martus.swing.UiCheckBox;
 import org.martus.swing.UiWrappedTextPanel;
 import org.martus.swing.Utilities;
 import org.martus.util.TokenReplacement;
-import org.martus.util.UnicodeReader;
-import org.martus.util.UnicodeWriter;
 import org.martus.util.TokenReplacement.TokenInvalidException;
 
 public class UiFancySearchDlg extends JDialog
@@ -296,6 +295,11 @@ public class UiFancySearchDlg extends JDialog
 		grid.getTable().setRowSelectionInterval(0,0);
 	}
 	
+	public MartusCrypto getSecurity()
+	{
+		return mainWindow.getApp().getSecurity();
+	}
+	
 	class SearchButtonHandler implements ActionListener
 	{
 		public void actionPerformed(ActionEvent e)
@@ -346,15 +350,7 @@ public class UiFancySearchDlg extends JDialog
 		void save(File destination) throws Exception
 		{
 			String text = dialog.getSearchSpec().toJson().toString();
-			UnicodeWriter writer = new UnicodeWriter(destination);
-			try
-			{
-				writer.write(text);
-			} 
-			finally
-			{
-				writer.close();
-			}
+			dialog.getSecurity().saveEncryptedStringToFile(destination, text);
 		}
 		
 		UiFancySearchDlg dialog;
@@ -393,15 +389,8 @@ public class UiFancySearchDlg extends JDialog
 		
 		SearchSpec load(File loadFrom) throws Exception
 		{
-			UnicodeReader reader = new UnicodeReader(loadFrom);
-			try
-			{
-				return new SearchSpec(new JSONObject(reader.readAll()));
-			} 
-			finally
-			{
-				reader.close();
-			}
+			String text = dialog.getSecurity().loadEncryptedStringFromFile(loadFrom);
+			return new SearchSpec(new JSONObject(text));
 		}
 		
 		UiFancySearchDlg dialog;
