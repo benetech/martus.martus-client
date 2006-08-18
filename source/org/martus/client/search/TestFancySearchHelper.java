@@ -149,6 +149,8 @@ public class TestFancySearchHelper extends TestCaseEnhanced
 		
 		JSONObject json = helper.getSearchAsJson(data);
 		assertEquals("Empty row wrong as json?", 1, json.getJSONArray(FancySearchHelper.TAG_ROWS).length());
+		helper.setSearchFromJson(data, json);
+		assertEquals("Didn't save/restore 'Any Field' correctly?", "", data.getValueAt(0, 0));
 		
 		data.clear();
 		addRow(data, fields[0].getCode(), "=", "value", "or");
