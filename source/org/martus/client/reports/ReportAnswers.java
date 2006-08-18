@@ -71,6 +71,7 @@ public class ReportAnswers
 	public JSONObject toJson()
 	{
 		JSONObject json = new JSONObject();
+		json.put(TAG_JSON_TYPE, JSON_TYPE);
 		json.put(TAG_VERSION, EXPECTED_VERSION);
 		json.put(TAG_TYPE, type.toString());
 		JSONArray jsonSpecs = new JSONArray();
@@ -136,11 +137,13 @@ public class ReportAnswers
 		public static final String TYPE_STRING = "Page";
 	}
 	
-	public final static String TAG_TYPE = "Type";
+	public final static String TAG_JSON_TYPE = "JsonType";
+	public final static String TAG_TYPE = "ReportType";
 	public final static String TAG_VERSION = "Version";
 	public final static String TAG_SPECS = "Specs";
 	
-	public final static int EXPECTED_VERSION = 8;
+	public final static String JSON_TYPE = "ReportAnswers";
+	public final static int EXPECTED_VERSION = 9;
 	public final static ReportType PAGE_REPORT = ReportType.PAGE;
 	public final static ReportType TABULAR_REPORT = ReportType.TABULAR;
 	

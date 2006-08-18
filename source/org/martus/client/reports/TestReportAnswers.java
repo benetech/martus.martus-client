@@ -47,7 +47,7 @@ public class TestReportAnswers extends TestCaseEnhanced
 			
 		};
 		ReportAnswers page = new ReportAnswers(ReportAnswers.PAGE_REPORT, specs);
-		assertEquals("Wrong version?", 8, page.getVersion());
+		assertEquals("Wrong version?", 9, page.getVersion());
 		assertTrue("Not page report?", page.isPageReport());
 		assertFalse("Was tabular?", page.isTabularReport());
 		assertTrue("Can't get specs back?", Arrays.equals(specs, page.getSpecs()));

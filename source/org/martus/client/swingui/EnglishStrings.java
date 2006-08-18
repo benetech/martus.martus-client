@@ -212,6 +212,7 @@ public class EnglishStrings
 "wintitle:notifyImportMissingAttachments=Warning Missing Attachments",
 "wintitle:notifyImportBulletinsNotImported=Warning Bulletins Not Imported",
 "wintitle:notifyNoReportFieldsSelected=Create Report",
+"wintitle:notifyNotValidReportFormat=Reports",
 "wintitle:notifyReportFormatIsOld=Reports",
 "wintitle:notifyReportFormatIsTooNew=Reports",
 
@@ -790,6 +791,7 @@ public class EnglishStrings
 "field:notifyImportMissingAttachmentscause=Not all attachments were imported.  The following bulletins had problems importing these attachments.\n\n#ImportMissingAttachments#",
 "field:notifyImportBulletinsNotImportedcause=Not all bulletins were imported.  The following bulletins had problems during import.\n\n#ImportBulletinsNotImported#",
 "field:notifyNoReportFieldsSelectedcause=You must select at least one field to be included in the report.",
+"field:notifyNotValidReportFormatcause=This is not a valid Report Format file",
 "field:notifyReportFormatIsOldcause=This report format was created with an earlier version of Martus, so it may not work correctly",
 "field:notifyReportFormatIsTooNewcause=This report format was created with a newer version of Martus, so it may not work correctly",
 

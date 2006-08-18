@@ -27,6 +27,7 @@ package org.martus.client.swingui.actions;
 
 import java.awt.event.ActionEvent;
 import java.io.File;
+import java.io.IOException;
 
 import javax.swing.filechooser.FileFilter;
 
@@ -41,6 +42,7 @@ import org.martus.client.reports.ReportOutput;
 import org.martus.client.reports.ReportRunner;
 import org.martus.client.reports.RunReportOptions;
 import org.martus.client.reports.TabularReportBuilder;
+import org.martus.client.reports.ReportAnswers.ReportType;
 import org.martus.client.search.SearchTreeNode;
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
@@ -93,33 +95,25 @@ public class ActionMenuReports extends ActionPrint
 			String pressed = runOrCreate.getPressedButtonLabel();
 			if(pressed == null || pressed.equals(cancelButtonLabel))
 				return;
+			
+			ReportFormat rf = null;
 			if(pressed.equals(runButtonLabel))
 			{
-				ReportFormat rf = chooseReport();
-				if(rf == null)
-					return;
-				
-				if(rf.getVersion() < ReportFormat.EXPECTED_VERSION)
-					mainWindow.notifyDlg("ReportFormatIsOld");
-				else if(rf.getVersion() > ReportFormat.EXPECTED_VERSION)
-					mainWindow.notifyDlg("ReportFormatIsTooNew");
-				
-				runReport(rf);
+				rf = chooseAndLoad();
 			}
 			if(pressed.equals(createTabularReportButtonLabel))
 			{
-				ReportFormat rf = createTabularReport();
-				if(rf == null)
-					return;
-				runReport(rf);
+				rf = createAndSave(ReportAnswers.TABULAR_REPORT);
 			}
 			if(pressed.equals(createPageReportButtonLabel))
 			{
-				ReportFormat rf = createPageReport();
-				if(rf == null)
-					return;
-				runReport(rf);
+				rf = createAndSave(ReportAnswers.PAGE_REPORT);
 			}
+
+			if(rf == null)
+				return;
+			
+			runReport(rf);
 		}
 		catch (Exception e)
 		{
@@ -128,7 +122,58 @@ public class ActionMenuReports extends ActionPrint
 		}
 	}
 	
-	ReportFormat chooseReport() throws Exception
+	ReportFormat chooseAndLoad() throws Exception
+	{
+		ReportAnswers answers = chooseReport();
+		if(answers == null)
+			return null;
+		
+		int version = answers.getVersion();
+		
+		if(version < ReportAnswers.EXPECTED_VERSION)
+			mainWindow.notifyDlg("ReportFormatIsOld");
+		else if(version > ReportAnswers.EXPECTED_VERSION)
+			mainWindow.notifyDlg("ReportFormatIsTooNew");
+		
+		ReportFormat rf = buildReportFormat(answers);
+		return rf;
+	}
+	
+	ReportFormat createAndSave(ReportType reportType) throws IOException
+	{
+		MiniFieldSpec[] specs = askUserWhichFieldsToInclude(reportType);
+		if(specs == null)
+			return null;
+		ReportAnswers answers = new ReportAnswers(reportType, specs);
+		
+		File file = askForReportFileToSaveTo();
+		if(file == null)
+			return null;
+		
+		UnicodeWriter writer = new UnicodeWriter(file);
+		writer.write(answers.toJson().toString());
+		writer.close();
+		
+		return buildReportFormat(answers);
+	}
+
+	private ReportFormat buildReportFormat(ReportAnswers answers)
+	{
+		if(answers.isPageReport())
+		{
+			PageReportBuilder builder = new PageReportBuilder(getLocalization());
+			return builder.createPageReport(answers.getSpecs());
+		}
+		else if(answers.isTabularReport())
+		{
+			TabularReportBuilder builder = new TabularReportBuilder(getLocalization());
+			return builder.createTabular(answers.getSpecs());
+		}
+		
+		return null;
+	}
+	
+	ReportAnswers chooseReport() throws Exception
 	{
 		UiMainWindow owner = mainWindow;
 		String title = getLocalization().getWindowTitle("ChooseReportToRun");
@@ -141,52 +186,18 @@ public class ActionMenuReports extends ActionPrint
 			return null;
 		
 		UnicodeReader reader = new UnicodeReader(chosenFile);
-		String reportFormatText = reader.readAll();
+		String reportAnswersText = reader.readAll();
 		reader.close();
 		
-		return new ReportFormat(new JSONObject(reportFormatText));
+		JSONObject json = new JSONObject(reportAnswersText);
+		if(!json.optString(ReportAnswers.TAG_JSON_TYPE).equals(ReportAnswers.JSON_TYPE))
+		{
+			mainWindow.notifyDlg("NotValidReportFormat");
+			return null;
+		}
+		return new ReportAnswers(json);
 	}
 
-	ReportFormat createTabularReport() throws Exception
-	{
-		TabularReportBuilder builder = new TabularReportBuilder(getLocalization());
-		MiniFieldSpec[] specs = askUserWhichFieldsToInclude(ReportAnswers.TABULAR_REPORT);
-		if(specs == null)
-			return null;
-		
-		ReportAnswers answers = new ReportAnswers(ReportAnswers.TABULAR_REPORT, specs);
-		ReportFormat rf = builder.createTabular(answers.getSpecs());
-		
-		File file = askForReportFileToSaveTo();
-		if(file == null)
-			return null;
-		
-		UnicodeWriter writer = new UnicodeWriter(file);
-		writer.write(rf.toJson().toString());
-		writer.close();
-		return rf;
-	}
-	
-	ReportFormat createPageReport() throws Exception
-	{
-		PageReportBuilder builder = new PageReportBuilder(getLocalization());
-		MiniFieldSpec[] specs = askUserWhichFieldsToInclude(ReportAnswers.PAGE_REPORT);
-		if(specs == null)
-			return null;
-		
-		ReportAnswers answers = new ReportAnswers(ReportAnswers.PAGE_REPORT, specs);
-		ReportFormat rf = builder.createPageReport(answers.getSpecs());
-		
-		File file = askForReportFileToSaveTo();
-		if(file == null)
-			return null;
-		
-		UnicodeWriter writer = new UnicodeWriter(file);
-		writer.write(rf.toJson().toString());
-		writer.close();
-		return rf;
-	}
-	
 	File askForReportFileToSaveTo()
 	{
 		String title = getLocalization().getWindowTitle("SaveReportAs");
