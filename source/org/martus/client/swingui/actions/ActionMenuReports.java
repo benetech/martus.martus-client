@@ -27,8 +27,6 @@ package org.martus.client.swingui.actions;
 
 import java.awt.event.ActionEvent;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
 
 import javax.swing.filechooser.FileFilter;
@@ -152,11 +150,7 @@ public class ActionMenuReports extends ActionPrint
 		if(file == null)
 			return null;
 		
-		byte[] answersToEncrypt = answers.toJson().toString().getBytes("UTF-8");
-		byte[] encryptedAnswers = getSecurity().createSignedBundle(answersToEncrypt);
-		FileOutputStream out = new FileOutputStream(file);
-		out.write(encryptedAnswers);
-		out.close();
+		getSecurity().saveEncryptedStringToFile(file, answers.toJson().toString());
 		
 		return buildReportFormat(answers);
 	}
@@ -194,14 +188,9 @@ public class ActionMenuReports extends ActionPrint
 		if(chosenFile == null)
 			return null;
 	
-		byte[] encryptedAnswers = new byte[(int)chosenFile.length()];
-		FileInputStream in = new FileInputStream(chosenFile);
-		in.read(encryptedAnswers);
-		in.close();
-		
 		try
 		{
-			byte[] plainTextAnswers = getSecurity().extractFromSignedBundle(encryptedAnswers);
+			byte[] plainTextAnswers = getSecurity().loadEncryptedStringFromFile(chosenFile);
 
 			String reportAnswersText = new String(plainTextAnswers, "UTF-8");
 			JSONObject json = new JSONObject(reportAnswersText);
