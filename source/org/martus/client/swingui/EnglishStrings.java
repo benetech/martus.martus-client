@@ -1006,7 +1006,7 @@ public class EnglishStrings
 
 "field:BackgroundSearching=Searching...",
 "field:BackgroundSorting=Sorting Bulletins...",
-"field:BackgroundPrinting=Preparing Output...",
+"field:BackgroundPrinting=Preparing Report...",
 
 "folder:%OutBox=Unsent Bulletins",
 "folder:%Sent=Saved Bulletins",
