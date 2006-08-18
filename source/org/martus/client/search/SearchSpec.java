@@ -54,13 +54,20 @@ public class SearchSpec
 	public JSONObject toJson()
 	{
 		JSONObject json = new JSONObject();
+		json.put(TAG_JSON_TYPE, JSON_TYPE);
+		json.put(TAG_VERSION, VERSION);
 		json.put(TAG_SEARCH_GRID, getSearchGrid());
 		json.put(TAG_FINAL_ONLY, getFinalOnly());
 		return json;
 	}
 	
+	static final String TAG_JSON_TYPE = "JsonType";
+	static final String TAG_VERSION = "Version";
 	static final String TAG_SEARCH_GRID = "SearchGrid";
 	static final String TAG_FINAL_ONLY = "FinalOnly";
+	
+	static final String JSON_TYPE = "SearchSpec";
+	static final int VERSION = 1;
 	
 	private JSONObject searchGrid;
 	private boolean finalOnly;
