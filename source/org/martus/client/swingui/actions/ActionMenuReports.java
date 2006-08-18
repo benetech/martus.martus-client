@@ -190,9 +190,7 @@ public class ActionMenuReports extends ActionPrint
 	
 		try
 		{
-			byte[] plainTextAnswers = getSecurity().loadEncryptedStringFromFile(chosenFile);
-
-			String reportAnswersText = new String(plainTextAnswers, "UTF-8");
+			String reportAnswersText = getSecurity().loadEncryptedStringFromFile(chosenFile);
 			JSONObject json = new JSONObject(reportAnswersText);
 			if(json.optString(ReportAnswers.TAG_JSON_TYPE).equals(ReportAnswers.JSON_TYPE))
 				return new ReportAnswers(json);
