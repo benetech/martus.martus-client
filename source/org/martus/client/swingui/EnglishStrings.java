@@ -948,6 +948,7 @@ public class EnglishStrings
 "field:WasSentYes=Yes",
 "field:WasSentNo=No",
 "field:NotSorted=(none)",
+"field:ReportNumberOfBulletins=Total Bulletins:",
 
 "field:BulletinViewHeading=Martus Bulletin",
 "field:ViewBulletinHQInfo=#NumberOfHQs# Headquarter account(s) can view this private information",
