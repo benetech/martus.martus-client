@@ -96,24 +96,24 @@ public class ActionMenuReports extends ActionPrint
 			if(pressed == null || pressed.equals(cancelButtonLabel))
 				return;
 			
-			ReportFormat rf = null;
+			ReportAnswers answers = null;
 			if(pressed.equals(runButtonLabel))
 			{
-				rf = chooseAndLoad();
+				answers = chooseAndLoad();
 			}
 			if(pressed.equals(createTabularReportButtonLabel))
 			{
-				rf = createAndSave(ReportAnswers.TABULAR_REPORT);
+				answers = createAndSave(ReportAnswers.TABULAR_REPORT);
 			}
 			if(pressed.equals(createPageReportButtonLabel))
 			{
-				rf = createAndSave(ReportAnswers.PAGE_REPORT);
+				answers = createAndSave(ReportAnswers.PAGE_REPORT);
 			}
 
-			if(rf == null)
+			if(answers == null)
 				return;
 			
-			runReport(rf);
+			runReport(answers);
 		}
 		catch (Exception e)
 		{
@@ -122,7 +122,7 @@ public class ActionMenuReports extends ActionPrint
 		}
 	}
 	
-	ReportFormat chooseAndLoad() throws Exception
+	ReportAnswers chooseAndLoad() throws Exception
 	{
 		ReportAnswers answers = chooseReport();
 		if(answers == null)
@@ -135,11 +135,10 @@ public class ActionMenuReports extends ActionPrint
 		else if(version > ReportAnswers.EXPECTED_VERSION)
 			mainWindow.notifyDlg("ReportFormatIsTooNew");
 		
-		ReportFormat rf = buildReportFormat(answers);
-		return rf;
+		return answers;
 	}
 	
-	ReportFormat createAndSave(ReportType reportType) throws Exception
+	ReportAnswers createAndSave(ReportType reportType) throws Exception
 	{
 		MiniFieldSpec[] specs = askUserWhichFieldsToInclude(reportType);
 		if(specs == null)
@@ -152,7 +151,7 @@ public class ActionMenuReports extends ActionPrint
 		
 		getSecurity().saveEncryptedStringToFile(file, answers.toJson().toString());
 		
-		return buildReportFormat(answers);
+		return answers;
 	}
 
 	private MartusCrypto getSecurity()
@@ -213,7 +212,7 @@ public class ActionMenuReports extends ActionPrint
 		return FileDialogHelpers.doFileSaveDialog(mainWindow, title, directory, filter, localization);
 	}
 
-	void runReport(ReportFormat rf) throws Exception
+	void runReport(ReportAnswers answers) throws Exception
 	{
 		SearchTreeNode searchTree = mainWindow.askUserForSearchCriteria();
 		if(searchTree == null)
@@ -260,6 +259,8 @@ public class ActionMenuReports extends ActionPrint
 					sortableList.remove(pb);
 			}
 		}
+
+		ReportFormat rf = buildReportFormat(answers);
 
 		ReportOutput result = new ReportOutput();
 		printToWriter(result, rf, sortableList, options);
