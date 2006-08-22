@@ -45,6 +45,7 @@ import org.martus.client.bulletinstore.ClientBulletinStore.AddOlderVersionToFold
 import org.martus.client.core.ConfigInfo;
 import org.martus.client.core.MartusApp;
 import org.martus.client.core.RetrieveCommand;
+import org.martus.client.core.SortableBulletinList;
 import org.martus.client.core.MartusApp.AccountAlreadyExistsException;
 import org.martus.client.core.MartusApp.CannotCreateAccountFileException;
 import org.martus.client.core.MartusApp.SaveConfigInfoException;
@@ -1592,6 +1593,30 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 
 		TRACE_END();
 	}
+	
+	public void testSkipDiscardedBulletins() throws Exception
+	{
+		TRACE_BEGIN("testSkipDiscardedBulletins");
+		appWithAccount.getLocalization().setCurrentLanguageCode(MiniLocalization.ENGLISH);
+
+		Bulletin b1 = appWithAccount.createBulletin();
+		String originalString = "baggins";
+		String commonString = "hobbit";
+		
+		b1.set(Bulletin.TAGPRIVATEINFO, originalString);
+		b1.set(Bulletin.TAGKEYWORDS, commonString);
+		appWithAccount.getStore().saveBulletin(b1);
+		appWithAccount.getStore().ensureBulletinIsInFolder(appWithAccount.getFolderDiscarded(), b1.getUniversalId());
+		
+		String andKeyword = "and";
+		String orKeyword = "or";
+		SearchParser parser = new SearchParser(andKeyword, orKeyword);
+		SearchTreeNode searchNode = parser.parseJustAmazonValueForTesting(originalString);
+		MiniFieldSpec[] noSpecs = new MiniFieldSpec[0];
+		SortableBulletinList result = appWithAccount.search(searchNode, noSpecs, noSpecs, false);
+		assertEquals("found in discarded?", 0, result.size());
+		TRACE_END();
+	}
 
 	public void testSearchOlderVersionsAndFinalVersions() throws Exception
 	{
@@ -2145,6 +2170,7 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		SearchTreeNode searchNode = parser.parseJustAmazonValueForTesting(searchFor);
 		MiniFieldSpec[] noSpecs = new MiniFieldSpec[0];
 		app.updateSearchFolder(app.search(searchNode, noSpecs, noSpecs, searchFinalBulletinVersionsOnly));
+		
 	}
 
 

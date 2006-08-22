@@ -843,7 +843,7 @@ public class EnglishStrings
 "field:timedout1=Martus is still running in the background, but has locked the screen for security.  You must sign in to Martus again to continue working.",
 "field:timedout2=Any unsaved bulletins will be lost unless you sign in to Martus again and save them.",
 "field:defaultFolderName=New Folder",
-"field:SearchBulletinRules=For each row, select a field to search (or choose to match any field), select what kind of comparison to perform, and then enter a value to search for.",
+"field:SearchBulletinRules=For each row, select a field to search (or choose to match any field), select what kind of comparison to perform, and then enter a value to search for.\n\nNOTE: Bulletins that appear only in the Discarded folder will not be searched.",
 "field:SearchBulletinAddingRules=Press Enter to create a new row in the search query.",
 "field:SearchBulletinHelp=Click '#SearchHelpButton#' to get additional information on searching.",
 "field:AccountInfoUserName=User Name: ",

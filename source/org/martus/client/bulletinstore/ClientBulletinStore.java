@@ -809,14 +809,14 @@ public class ClientBulletinStore extends BulletinStore
 		from.remove(uid);
 	}
 
-	public Vector findBulletinInAllVisibleFolders(Bulletin b)
+	public Vector findBulletinInAllVisibleFolders(UniversalId uid)
 	{
 		Vector allFolders= getVisibleFolderNames();
 		Vector foldersContainingBulletin = new Vector();
 		for(int i = 0; i < allFolders.size(); ++i)
 		{
 			BulletinFolder folder = findFolder((String)allFolders.get(i));
-			if(folder != null && folder.contains(b))
+			if(folder != null && folder.contains(uid))
 				foldersContainingBulletin.add(folder);
 		}
 		return foldersContainingBulletin;

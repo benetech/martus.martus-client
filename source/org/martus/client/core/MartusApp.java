@@ -1000,10 +1000,14 @@ public class MartusApp
 		return foundOrphanCount;
 	}
 
-
 	public Vector findBulletinInAllVisibleFolders(Bulletin b)
 	{
-		return store.findBulletinInAllVisibleFolders(b);
+		return findBulletinInAllVisibleFolders(b.getUniversalId());
+	}
+
+	public Vector findBulletinInAllVisibleFolders(UniversalId uid)
+	{
+		return store.findBulletinInAllVisibleFolders(uid);
 	}
 
 	public boolean isDraftOutboxEmpty()
@@ -1114,6 +1118,10 @@ public class MartusApp
 		for(Iterator iter = uids.iterator(); iter.hasNext();)
 		{
 			UniversalId leafBulletinUid = (UniversalId) iter.next();
+			Vector visibleFoldersContainingThisBulletin = findBulletinInAllVisibleFolders(leafBulletinUid);
+			visibleFoldersContainingThisBulletin.remove(getFolderDiscarded());
+			if(visibleFoldersContainingThisBulletin.size() == 0)
+				continue;
 			Bulletin latestRevision = store.getBulletinRevision(leafBulletinUid);
 			Vector allRevisions = new Vector();
 			allRevisions.add(leafBulletinUid);
