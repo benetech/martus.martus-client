@@ -51,7 +51,7 @@ public class ActionPrint extends UiMenuAction
 	
 	public static ActionPrint createWithButtonLabel(UiMainWindow mainWindowToUse)
 	{
-		return new ActionPrint(mainWindowToUse, "print");
+		return new ActionPrint(mainWindowToUse, "printButton");
 	}
 	
 	public ActionPrint(UiMainWindow mainWindowToUse, String label)
