@@ -54,9 +54,9 @@ public class ActionPrint extends UiMenuAction
 		return new ActionPrint(mainWindowToUse, "printButton");
 	}
 	
-	public ActionPrint(UiMainWindow mainWindowToUse, String label)
+	public ActionPrint(UiMainWindow mainWindowToUse, String menuTag)
 	{
-		super(mainWindowToUse, label);
+		super(mainWindowToUse, menuTag);
 	}
 	
 	public boolean isEnabled()
