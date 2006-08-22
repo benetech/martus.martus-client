@@ -29,16 +29,13 @@ import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import javax.swing.Box;
 import javax.swing.JPanel;
-
 import org.martus.client.search.FieldChooserSpecBuilder;
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.common.fieldspec.FieldSpec;
 import org.martus.swing.UiButton;
-import org.martus.swing.UiScrollPane;
 import org.martus.swing.UiWrappedTextPanel;
 import org.martus.swing.Utilities;
 
@@ -71,7 +68,7 @@ public class UiReportFieldChooserDlg extends UIReportFieldDlg
 
 		JPanel panel = new JPanel(new BorderLayout());
 		panel.add(new UiWrappedTextPanel(localization.getFieldLabel(dialogTag)), BorderLayout.BEFORE_FIRST_LINE);
-		panel.add(new UiScrollPane(fieldSelector), BorderLayout.CENTER);
+		panel.add(fieldSelector, BorderLayout.CENTER);
 		panel.add(buttonBar, BorderLayout.AFTER_LAST_LINE);
 
 		getContentPane().add(panel);
