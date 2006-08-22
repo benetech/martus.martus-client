@@ -301,6 +301,9 @@ public class EnglishStrings
 "wintitle:ResendBulletins=Resend Bulletins",
 "wintitle:ImportBulletins=Import Bulletins",
 
+"wintitle:LoadSavedSearch=Load Saved Search",
+"wintitle:SaveSearch=Save Search",
+
 "button:help=Help",
 "button:create=Create",
 "button:search=Search",

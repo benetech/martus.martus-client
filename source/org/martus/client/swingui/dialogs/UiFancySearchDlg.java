@@ -332,7 +332,13 @@ public class UiFancySearchDlg extends JDialog
 			String title = localization.getWindowTitle("SaveSearch");
 			File directory = dialog.mainWindow.getApp().getCurrentAccountDirectory();
 			FormatFilter filter = new SearchSpecFilter(localization);
+			// NOTE: If we pass the frame, the user will still be able to click on 
+			// the fancy search dialog, possibly hiding the modal file save dialog.
+			// If we pass the dialog, Java will STILL set the owner to the frame.
+			// So we must hide the fancy search dialog while anything modal is above it
+			dialog.setVisible(false);
 			File saveTo = FileDialogHelpers.doFileSaveDialog(dialog.mainWindow, title, directory, filter, localization);
+			dialog.setVisible(true);
 			if(saveTo == null)
 				return;
 			
@@ -366,11 +372,17 @@ public class UiFancySearchDlg extends JDialog
 		public void actionPerformed(ActionEvent event)
 		{
 			UiLocalization localization = dialog.getLocalization();
-			String title = localization.getWindowTitle("SaveSearch");
+			String title = localization.getWindowTitle("LoadSavedSearch");
 			String openButtonLabel = localization.getButtonLabel("LoadSearchOkButton");
 			File directory = dialog.mainWindow.getApp().getCurrentAccountDirectory();
 			FormatFilter filter = new SearchSpecFilter(localization);
-			File loadFrom = FileDialogHelpers.doFileOpenDialog(dialog.mainWindow, title, openButtonLabel, directory, filter);
+			// NOTE: If we pass the frame, the user will still be able to click on 
+			// the fancy search dialog, possibly hiding the modal file save dialog.
+			// If we pass the dialog, Java will STILL set the owner to the frame.
+			// So we must hide the fancy search dialog while anything modal is above it
+			dialog.setVisible(false);
+			File loadFrom = FileDialogHelpers.doFileOpenDialog(dialog, title, openButtonLabel, directory, filter);
+			dialog.setVisible(true);
 			if(loadFrom == null)
 				return;
 			
