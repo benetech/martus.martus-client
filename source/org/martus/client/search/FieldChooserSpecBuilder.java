@@ -42,6 +42,7 @@ import org.martus.common.fieldspec.FieldTypeDate;
 import org.martus.common.fieldspec.FieldTypeDateRange;
 import org.martus.common.fieldspec.FieldTypeNormal;
 import org.martus.common.fieldspec.GridFieldSpec;
+import org.martus.common.fieldspec.MiniFieldSpec;
 import org.martus.common.fieldspec.PopUpTreeFieldSpec;
 import org.martus.common.fieldspec.SearchFieldTreeModel;
 import org.martus.common.fieldspec.SearchableFieldChoiceItem;
@@ -58,7 +59,12 @@ public class FieldChooserSpecBuilder
 	
 	public PopUpTreeFieldSpec createSpec(ClientBulletinStore storeToUse)
 	{
-		FieldChoicesByLabel allAvailableFields = buildFieldChoicesByLabel(storeToUse);
+		return createSpec(storeToUse, null);
+	}
+	
+	public PopUpTreeFieldSpec createSpec(ClientBulletinStore storeToUse, MiniFieldSpec[] specsToInclude)
+	{
+		FieldChoicesByLabel allAvailableFields = buildFieldChoicesByLabel(storeToUse, specsToInclude);
 		
 		SearchFieldTreeModel fieldChoiceModel = new SearchFieldTreeModel(allAvailableFields.asTree(getLocalization()));
 		PopUpTreeFieldSpec fieldColumnSpec = new PopUpTreeFieldSpec(fieldChoiceModel);
@@ -66,19 +72,23 @@ public class FieldChooserSpecBuilder
 		return fieldColumnSpec;
 	}
 
-	private FieldChoicesByLabel buildFieldChoicesByLabel(ClientBulletinStore storeToUse)
+	FieldChoicesByLabel buildFieldChoicesByLabel(ClientBulletinStore storeToUse, MiniFieldSpec[] specsToInclude)
 	{
 		FieldChoicesByLabel allAvailableFields = new FieldChoicesByLabel();
-		addSpecialFields(allAvailableFields);
 		allAvailableFields.add(createLastSavedDateChoice());
 		allAvailableFields.addAll(convertToChoiceItems(storeToUse.getAllKnownFieldSpecs()));
+		if(specsToInclude != null)
+		{
+			allAvailableFields.onlyKeep(specsToInclude);
+		}
+		addSpecialFields(allAvailableFields);
 		return allAvailableFields;
 	}
 	
 	public FieldSpec[] createFieldSpecArray(ClientBulletinStore storeToUse)
 	{
-		FieldChoicesByLabel allAvailableFields = buildFieldChoicesByLabel(storeToUse);
-		return allAvailableFields.asArray(localization);
+		FieldChoicesByLabel allAvailableFields = buildFieldChoicesByLabel(storeToUse, null);
+		return allAvailableFields.asArray();
 	}
 	
 	public void addSpecialFields(FieldChoicesByLabel fields)

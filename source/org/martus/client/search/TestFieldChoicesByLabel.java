@@ -26,12 +26,15 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.search;
 
 import java.util.Arrays;
+import java.util.HashSet;
 
 import org.martus.common.fieldspec.ChoiceItem;
 import org.martus.common.fieldspec.DropDownFieldSpec;
 import org.martus.common.fieldspec.FieldSpec;
+import org.martus.common.fieldspec.FieldType;
 import org.martus.common.fieldspec.FieldTypeNormal;
 import org.martus.common.fieldspec.GridFieldSpec;
+import org.martus.common.fieldspec.MiniFieldSpec;
 import org.martus.common.fieldspec.SearchableFieldChoiceItem;
 import org.martus.util.TestCaseEnhanced;
 
@@ -40,6 +43,42 @@ public class TestFieldChoicesByLabel extends TestCaseEnhanced
 	public TestFieldChoicesByLabel(String name)
 	{
 		super(name);
+	}
+	
+	public void testOnlyKeep()
+	{
+		FieldType normal = new FieldTypeNormal();
+		FieldSpec specA = FieldSpec.createCustomField("a", "A", normal);
+		FieldSpec specB = FieldSpec.createCustomField("b", "B", normal);
+		FieldSpec specC = FieldSpec.createCustomField("c", "C", normal);
+		MiniFieldSpec a = new MiniFieldSpec(specA);
+		MiniFieldSpec b = new MiniFieldSpec(specB);
+		MiniFieldSpec c = new MiniFieldSpec(specC);
+		
+		ChoiceItem[] choices = new ChoiceItem[] {
+				new ChoiceItem(specA),
+				new ChoiceItem(specB),
+				new ChoiceItem(specC),
+		};
+		ChoiceItem[] bOnly = runChoicesThroughFilter(choices, new MiniFieldSpec[] {b});
+		assertEquals(1, bOnly.length);
+		assertEquals(choices[1], bOnly[0]);
+		
+		ChoiceItem[] aAndC = runChoicesThroughFilter(choices, new MiniFieldSpec[] {a, c});
+		assertEquals(2, aAndC.length);
+		assertContains(choices[0], Arrays.asList(aAndC));
+		assertContains(choices[2], Arrays.asList(aAndC));
+		
+		
+		
+	}
+
+	private ChoiceItem[] runChoicesThroughFilter(ChoiceItem[] choices, MiniFieldSpec[] keep)
+	{
+		FieldChoicesByLabel  fcbl = new FieldChoicesByLabel();
+		fcbl.addAll(new HashSet(Arrays.asList(choices)));
+		fcbl.onlyKeep(keep);
+		return fcbl.getRawChoices();
 	}
 
 	public void testMergeSimilarDropdowns() throws Exception

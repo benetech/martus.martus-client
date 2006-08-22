@@ -50,7 +50,7 @@ import org.martus.swing.Utilities;
 
 public class UiSortFieldsDlg extends JDialog implements ActionListener
 {
-	public UiSortFieldsDlg(UiMainWindow mainWindow)
+	public UiSortFieldsDlg(UiMainWindow mainWindow, MiniFieldSpec[] specsToAllow)
 	{
 		super(mainWindow);
 		
@@ -66,7 +66,7 @@ public class UiSortFieldsDlg extends JDialog implements ActionListener
 		String text = localization.getFieldLabel("ReportChooseSortFields");
 
 		SortFieldChooserSpecBuilder builder = new SortFieldChooserSpecBuilder(localization);
-		PopUpTreeFieldSpec spec = builder.createSpec(mainWindow.getStore());
+		PopUpTreeFieldSpec spec = builder.createSpec(mainWindow.getStore(), specsToAllow);
 		
 		contentPane.add(new UiWrappedTextArea(text), BorderLayout.BEFORE_FIRST_LINE);
 

@@ -53,6 +53,7 @@ package org.martus.client.search;
 
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 import java.util.Vector;
@@ -64,6 +65,7 @@ import org.martus.common.MiniLocalization;
 import org.martus.common.fieldspec.ChoiceItem;
 import org.martus.common.fieldspec.DropDownFieldSpec;
 import org.martus.common.fieldspec.FieldSpec;
+import org.martus.common.fieldspec.MiniFieldSpec;
 import org.martus.common.fieldspec.SearchableFieldChoiceItem;
 
 public class FieldChoicesByLabel
@@ -88,7 +90,28 @@ public class FieldChoicesByLabel
 		}
 	}
 	
-	public FieldSpec[] asArray(UiLocalization localization)
+	public void onlyKeep(MiniFieldSpec[] specs)
+	{
+		HashSet specSet = new HashSet();
+		specSet.addAll(Arrays.asList(specs));
+		Vector newChoices = new Vector();
+		for(int i = 0; i < allChoices.size(); ++i)
+		{
+			ChoiceItem choice = (ChoiceItem)allChoices.get(i);
+			MiniFieldSpec spec = new MiniFieldSpec(choice.getSpec());
+			if(specSet.contains(spec))
+				newChoices.add(choice);
+		}
+		
+		allChoices = newChoices;
+	}
+	
+	public ChoiceItem[] getRawChoices()
+	{
+		return (ChoiceItem[])allChoices.toArray(new ChoiceItem[0]);
+	}
+	
+	public FieldSpec[] asArray()
 	{
 		Collections.sort(allChoices, new ChoiceItemSorterByLabelTagType());
 		mergeSimilarDropdowns();

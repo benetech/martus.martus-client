@@ -105,7 +105,10 @@ public class UiPopUpTreeEditor extends UiField implements ActionListener
 	public void setText(String newText)
 	{
 		selectedItem = spec.findCode(newText);
-		label.setText(selectedItem.toString());
+		if(selectedItem == null)
+			System.out.println("UiPopUpTreeEditor couldn't setText: " + newText);
+		else
+			label.setText(selectedItem.toString());
 	}
 	
 	public void select(MiniFieldSpec specToSelect)

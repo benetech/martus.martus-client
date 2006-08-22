@@ -216,7 +216,7 @@ public class ActionMenuReports extends ActionPrint
 		if(searchTree == null)
 			return;
 		
-		UiSortFieldsDlg sortDlg = new UiSortFieldsDlg(mainWindow);
+		UiSortFieldsDlg sortDlg = new UiSortFieldsDlg(mainWindow, answers.getSpecs());
 		sortDlg.setVisible(true);
 		if(!sortDlg.ok())
 			return;
