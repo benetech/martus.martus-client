@@ -301,8 +301,7 @@ public class ActionMenuReports extends ActionPrint
 			return false;
 
 		UnicodeWriter destination = new UnicodeWriter(destFile);
-		for(int page = 0; page < output.getPageCount(); ++page)
-			destination.write(output.getPageText(page));
+		destination.write(output.getPrintableDocument());
 		destination.close();
 		return true;
 	}
@@ -342,7 +341,8 @@ public class ActionMenuReports extends ActionPrint
 	{
 		for(int page = 0; page < output.getPageCount(); ++page)
 		{
-			JComponent previewText = ActionPrint.getHtmlViewableComponent(output.getPageText(0));
+			String pageText = output.getPrintablePage(page);
+			JComponent previewText = ActionPrint.getHtmlViewableComponent(pageText);
 			PrintUtilities.printComponent(previewText);
 		}
 		return true;

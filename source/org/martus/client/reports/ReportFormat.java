@@ -36,14 +36,14 @@ public class ReportFormat
 	public ReportFormat()
 	{
 		setBulletinPerPage(false);
-		setStartSection("");
+		setDocumentStartSection("");
 		setHeaderSection("");
 		setDetailSection("");
 		setBreakSection("");
 		setFooterSection("");
 		setFakePageBreakSection("");
 		setTotalSection("");
-		setEndSection("");
+		setDocumentEndSection("");
 		specsToInclude = new MiniFieldSpec[0];
 		version = 0;
 	}
@@ -52,14 +52,14 @@ public class ReportFormat
 	{
 		version = json.optInt(TAG_VERSION, 0);
 		setBulletinPerPage(json.optBoolean(TAG_BULLETIN_PER_PAGE));
-		setStartSection(json.getString(TAG_START_SECTION));
+		setDocumentStartSection(json.getString(TAG_START_SECTION));
 		setHeaderSection(json.optString(TAG_HEADER_SECTION, ""));
 		setDetailSection(json.getString(TAG_DETAIL_SECTION));
 		setBreakSection(json.optString(TAG_BREAK_SECTION, ""));
 		setFooterSection(json.optString(TAG_FOOTER_SECTION, ""));
 		setFakePageBreakSection(json.optString(TAG_FAKE_PAGE_BREAK_SECTION, ""));
 		setTotalSection(json.optString(TAG_TOTAL_SECTION, ""));
-		setEndSection(json.getString(TAG_END_SECTION));
+		setDocumentEndSection(json.getString(TAG_END_SECTION));
 		JSONArray specs = json.optJSONArray(TAG_SPECS);
 		if(specs == null)
 			specs = new JSONArray();
@@ -86,12 +86,12 @@ public class ReportFormat
 		return bulletinPerPage;
 	}
 	
-	public void setStartSection(String section)
+	public void setDocumentStartSection(String section)
 	{
 		startSection = section;
 	}
 	
-	public String getStartSection()
+	public String getDocumentStartSection()
 	{
 		return startSection;
 	}
@@ -156,12 +156,12 @@ public class ReportFormat
 		return totalSection;
 	}
 	
-	public void setEndSection(String section)
+	public void setDocumentEndSection(String section)
 	{
 		endSection = section;
 	}
 	
-	public String getEndSection()
+	public String getDocumentEndSection()
 	{
 		return endSection;
 	}
@@ -181,14 +181,14 @@ public class ReportFormat
 		JSONObject json = new JSONObject();
 		json.put(TAG_VERSION, EXPECTED_VERSION);
 		json.put(TAG_BULLETIN_PER_PAGE, getBulletinPerPage());
-		json.put(TAG_START_SECTION, getStartSection());
+		json.put(TAG_START_SECTION, getDocumentStartSection());
 		json.put(TAG_HEADER_SECTION, getHeaderSection());
 		json.put(TAG_DETAIL_SECTION, getDetailSection());
 		json.put(TAG_BREAK_SECTION, getBreakSection());
 		json.put(TAG_FOOTER_SECTION, getFooterSection());
 		json.put(TAG_FAKE_PAGE_BREAK_SECTION, getFakePageBreakSection());
 		json.put(TAG_TOTAL_SECTION, getTotalSection());
-		json.put(TAG_END_SECTION, getEndSection());
+		json.put(TAG_END_SECTION, getDocumentEndSection());
 		JSONArray specs = new JSONArray();
 		for(int i = 0; i < specsToInclude.length; ++i)
 		{

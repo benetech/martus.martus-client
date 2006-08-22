@@ -169,7 +169,7 @@ public class TestReportRunner extends TestCaseEnhanced
 	{
 		ReportFormat rf = new ReportFormat();
 		String startSection = "start";
-		rf.setStartSection(startSection);
+		rf.setDocumentStartSection(startSection);
 		ReportOutput result = runReportOnSampleData(rf);
 		assertEquals("didn't output start section just once?", startSection, result.getPageText(0));
 	}
@@ -304,7 +304,7 @@ public class TestReportRunner extends TestCaseEnhanced
 	{
 		ReportFormat rf = new ReportFormat();
 		String endSection = "end";
-		rf.setEndSection(endSection);
+		rf.setDocumentEndSection(endSection);
 		ReportOutput result = runReportOnSampleData(rf);
 		assertEquals("didn't output end section just once?", endSection, result.getPageText(0));
 	}

@@ -64,7 +64,7 @@ public class UiPrintPreviewDlg extends JDialog implements ActionListener
 		cancel = new UiButton(localization.getButtonLabel("cancel"));
 		cancel.addActionListener(this);	
 		
-		JComponent previewText = ActionPrint.getHtmlViewableComponent(output.getPageText(0));
+		JComponent previewText = ActionPrint.getHtmlViewableComponent(output.getPrintableDocument());
 		JComponent scrollablePreview = new JScrollPane(previewText);
 		scrollablePreview.setBorder(new EmptyBorder(5,5,5,5));
 		Box buttons = Box.createHorizontalBox();

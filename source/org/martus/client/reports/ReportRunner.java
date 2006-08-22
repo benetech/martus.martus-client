@@ -27,6 +27,7 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.reports;
 
 import java.io.IOException;
+import java.io.StringWriter;
 import java.io.Writer;
 import java.util.Arrays;
 import java.util.Vector;
@@ -86,7 +87,13 @@ public class ReportRunner
 		}
 		context.put("specsToInclude", new Specs(rf.getSpecsToInclude()));
 		
-		performMerge(rf.getStartSection(), destination);
+		StringWriter pageBreak = new StringWriter();
+		performMerge(rf.getFakePageBreakSection(), pageBreak);
+		destination.setFakePageBreak(pageBreak.toString());
+
+		StringWriter documentStart = new StringWriter();
+		performMerge(rf.getDocumentStartSection(), documentStart);
+		destination.setDocumentStart(documentStart.toString());
 
 		for(int bulletin = 0; bulletin < uids.length; ++bulletin)
 		{
@@ -112,7 +119,6 @@ public class ReportRunner
 			
 			if(rf.getBulletinPerPage())
 			{
-				performMerge(rf.getFakePageBreakSection(), destination);
 				destination.startNewPage();
 			}
 		}
@@ -123,7 +129,9 @@ public class ReportRunner
 			performMerge(rf.getTotalSection(), destination);
 		}
 		
-		performMerge(rf.getEndSection(), destination);
+		StringWriter documentEnd = new StringWriter();
+		performMerge(rf.getDocumentEndSection(), documentEnd);
+		destination.setDocumentEnd(documentEnd.toString());
 		context = null;
 	}
 

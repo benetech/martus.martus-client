@@ -50,7 +50,7 @@ public class TestTabularReportBuilder extends TestCaseEnhanced
 		TabularReportBuilder builder = new TabularReportBuilder(new MiniLocalization());
 		ReportFormat rf = builder.createTabular(specs);
 		
-		String startSection = rf.getStartSection();
+		String startSection = rf.getDocumentStartSection();
 		assertStartsWith("<html>", startSection);
 		
 		String headerSection = rf.getHeaderSection();
@@ -70,7 +70,7 @@ public class TestTabularReportBuilder extends TestCaseEnhanced
 			assertContains("Missing " + specs[i].getTag() + "?", fieldCall, detailSection);
 		}
 		
-		String endSection = rf.getEndSection();
+		String endSection = rf.getDocumentEndSection();
 		assertContains("</html>", endSection);
 	}
 	

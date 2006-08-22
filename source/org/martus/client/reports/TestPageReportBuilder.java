@@ -42,8 +42,8 @@ public class TestPageReportBuilder extends TestCaseEnhanced
 		PageReportBuilder builder= new PageReportBuilder(localization);
 		ReportFormat rf = builder.createPageReport(new MiniFieldSpec[0]);
 		assertTrue("Not a page report?", rf.getBulletinPerPage());
-		assertEquals("Start not empty?", "", rf.getStartSection());
-		assertEquals("End not empty?", "", rf.getEndSection());
+		assertEquals("Start not empty?", "", rf.getDocumentStartSection());
+		assertEquals("End not empty?", "", rf.getDocumentEndSection());
 		assertContains("<html>", rf.getHeaderSection());
 		assertContains("<table", rf.getHeaderSection());
 		assertContains("</table>", rf.getFooterSection());

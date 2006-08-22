@@ -40,19 +40,32 @@ public class PageReportBuilder
 	{
 		ReportFormat rf = new ReportFormat();
 		rf.setBulletinPerPage(true);
+		rf.setDocumentStartSection(createStartSection());
 		rf.setHeaderSection(createHeaderSection());
 		rf.setFakePageBreakSection("<hr></hr>\n");
 		rf.setDetailSection(createDetailSection());
-		rf.setFooterSection("</table></html>");
+		rf.setFooterSection("</table>");
+		rf.setDocumentStartSection(createEndSection());
 		rf.setSpecsToInclude(specs);
 		return rf;
+	}
+	
+	public String createStartSection()
+	{
+		StringBuffer result = new StringBuffer();
+		result.append("<html>");
+		result.append("<meta http-equiv='Content-Type' content='text/html;charset=UTF-8'>");
+		return result.toString();
+	}
+
+	public String createEndSection()
+	{
+		return "</html>";
 	}
 	
 	public String createHeaderSection()
 	{
 		StringBuffer result = new StringBuffer();
-		result.append("<html>");
-		result.append("<meta http-equiv='Content-Type' content='text/html;charset=UTF-8'>");
 		BulletinHtmlGenerator.appendTableStart(result, "width='100%'");
 		return result.toString();
 	}

@@ -36,6 +36,8 @@ public class ReportOutput extends Writer
 	{
 		pages = new Vector();
 		currentPage = new StringWriter();
+		documentStart = "";
+		documentEnd = "";
 	}
 	
 	public void close() throws IOException
@@ -51,6 +53,36 @@ public class ReportOutput extends Writer
 	public void write(char[] cbuf, int off, int len) throws IOException
 	{
 		currentPage.write(cbuf, off, len);
+	}
+	
+	public void setDocumentStart(String text)
+	{
+		documentStart = text;
+	}
+	
+	public String getDocumentStart()
+	{
+		return documentStart;
+	}
+	
+	public void setDocumentEnd(String text)
+	{
+		documentEnd = text;
+	}
+	
+	public String getDocumentEnd()
+	{
+		return documentEnd;
+	}
+	
+	public void setFakePageBreak(String text)
+	{
+		fakePageBreak = text;
+	}
+	
+	public String getFakePageBreak()
+	{
+		return fakePageBreak;
 	}
 	
 	public void startNewPage()
@@ -69,6 +101,31 @@ public class ReportOutput extends Writer
 		return (String)pages.get(pageIndex);
 	}
 	
+	public String getPrintableDocument()
+	{
+		StringBuffer text = new StringBuffer();
+		text.append(getDocumentStart());
+		for(int page = 0; page < getPageCount(); ++page)
+		{
+			text.append(getPageText(0));
+			text.append(getFakePageBreak());
+		}
+		text.append(getDocumentEnd());
+		return text.toString();
+	}
+	
+	public String getPrintablePage(int page)
+	{
+		StringBuffer text = new StringBuffer();
+		text.append(getDocumentStart());
+		text.append(getPageText(0));
+		text.append(getDocumentEnd());
+		return text.toString();
+	}
+	
 	Vector pages;
 	Writer currentPage;
+	String documentStart;
+	String documentEnd;
+	String fakePageBreak;
 }

@@ -53,8 +53,8 @@ public class TestReportFormat extends TestCaseEnhanced
 	public void testToJson()
 	{
 		ReportFormat rf = new ReportFormat();
-		rf.setStartSection("start");
-		rf.setEndSection("end");
+		rf.setDocumentStartSection("start");
+		rf.setDocumentEndSection("end");
 		rf.setDetailSection("detail");
 		rf.setBreakSection("break");
 		rf.setHeaderSection("header");
@@ -62,9 +62,9 @@ public class TestReportFormat extends TestCaseEnhanced
 		rf.setBulletinPerPage(true);
 		
 		ReportFormat got = new ReportFormat(rf.toJson());
-		assertEquals("didn't save start?", rf.getStartSection(), got.getStartSection());
+		assertEquals("didn't save start?", rf.getDocumentStartSection(), got.getDocumentStartSection());
 		assertEquals("didn't save detail?", rf.getDetailSection(), got.getDetailSection());
-		assertEquals("didn't save end?", rf.getEndSection(), got.getEndSection());
+		assertEquals("didn't save end?", rf.getDocumentEndSection(), got.getDocumentEndSection());
 		assertEquals("didn't save break?", rf.getBreakSection(), got.getBreakSection());
 		assertEquals("didn't save header?", rf.getHeaderSection(), got.getHeaderSection());
 		assertEquals("didn't save total?", rf.getTotalSection(), got.getTotalSection());

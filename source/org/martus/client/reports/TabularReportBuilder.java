@@ -40,12 +40,12 @@ public class TabularReportBuilder
 	public ReportFormat createTabular(MiniFieldSpec[] specs)
 	{
 		ReportFormat rf = new ReportFormat();
-		rf.setStartSection(createStartSection());
+		rf.setDocumentStartSection(createStartSection());
 		rf.setHeaderSection(createHeaderSection(specs));
 		rf.setDetailSection(createDetailSection(specs));
 		rf.setBreakSection(createBreakSection());
 		rf.setTotalSection(createTotalSection());
-		rf.setEndSection(createEndSection());
+		rf.setDocumentEndSection(createEndSection());
 
 		return rf;
 	}
@@ -55,13 +55,13 @@ public class TabularReportBuilder
 		StringBuffer startBuffer = new StringBuffer();
 		startBuffer.append("<html>");
 		startBuffer.append("<meta http-equiv='Content-Type' content='text/html;charset=UTF-8'>");
-		startBuffer.append("<table border='3' cellpadding='5' cellspacing='0'>");
 		return startBuffer.toString();
 	}
 
 	private String createHeaderSection(MiniFieldSpec[] specs)
 	{
 		StringBuffer headerBuffer = new StringBuffer();
+		headerBuffer.append("<table border='3' cellpadding='5' cellspacing='0'>");
 		headerBuffer.append("<tr>");
 		for(int i = 0; i < specs.length; ++i)
 		{
