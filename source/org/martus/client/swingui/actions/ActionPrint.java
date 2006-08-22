@@ -42,18 +42,16 @@ import org.martus.swing.PrintUtilities;
 import org.martus.swing.UiFileChooser;
 import org.martus.util.UnicodeWriter;
 
-public class ActionPrint extends UiMartusAction
+public class ActionPrint extends UiMenuAction
 {
 	public static ActionPrint createWithMenuLabel(UiMainWindow mainWindowToUse)
 	{
-		String label = mainWindowToUse.getLocalization().getMenuLabel("printBulletin");
-		return new ActionPrint(mainWindowToUse, label);
+		return new ActionPrint(mainWindowToUse, "printBulletin");
 	}
 	
 	public static ActionPrint createWithButtonLabel(UiMainWindow mainWindowToUse)
 	{
-		String label = mainWindowToUse.getLocalization().getButtonLabel("print");
-		return new ActionPrint(mainWindowToUse, label);
+		return new ActionPrint(mainWindowToUse, "print");
 	}
 	
 	public ActionPrint(UiMainWindow mainWindowToUse, String label)
