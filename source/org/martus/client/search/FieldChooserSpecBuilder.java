@@ -88,7 +88,7 @@ public class FieldChooserSpecBuilder
 	public FieldSpec[] createFieldSpecArray(ClientBulletinStore storeToUse)
 	{
 		FieldChoicesByLabel allAvailableFields = buildFieldChoicesByLabel(storeToUse, null);
-		return allAvailableFields.asArray();
+		return allAvailableFields.asArray(getLocalization());
 	}
 	
 	public void addSpecialFields(FieldChoicesByLabel fields)

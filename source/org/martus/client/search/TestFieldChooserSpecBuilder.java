@@ -26,6 +26,7 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.search;
 
 import java.io.File;
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.Set;
 import java.util.Vector;
@@ -81,6 +82,19 @@ public class TestFieldChooserSpecBuilder extends TestCaseEnhanced
 	{
 		tempDir.delete();
 		app.deleteAllFiles();
+	}
+	
+	public void testCaseInsensitiveSorting() throws Exception
+	{
+		FieldSpec upperCase = FieldSpec.createCustomField("upper", "UPPER", new FieldTypeNormal());
+		FieldSpec lowerCase = FieldSpec.createCustomField("lower", "lower", new FieldTypeNormal());
+		
+		ClientBulletinStore store = new MockBulletinStore();
+		Bulletin b = new Bulletin(store.getSignatureGenerator(), new FieldSpec[] {upperCase, lowerCase}, new FieldSpec[0]);
+		store.saveBulletinForTesting(b);
+		
+		Vector specs = new Vector(Arrays.asList(searchBuilder.createFieldSpecArray(store)));
+		assertTrue("Didn't put lower before upper?", specs.indexOf(lowerCase) < specs.indexOf(upperCase));
 	}
 	
 	public void testCreateFieldColumnSpec() throws Exception

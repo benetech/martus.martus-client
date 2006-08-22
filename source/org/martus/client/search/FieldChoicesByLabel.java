@@ -111,9 +111,9 @@ public class FieldChoicesByLabel
 		return (ChoiceItem[])allChoices.toArray(new ChoiceItem[0]);
 	}
 	
-	public FieldSpec[] asArray()
+	public FieldSpec[] asArray(MiniLocalization localization)
 	{
-		Collections.sort(allChoices, new ChoiceItemSorterByLabelTagType());
+		Collections.sort(allChoices, new ChoiceItemSorterByLabelTagType(localization));
 		mergeSimilarDropdowns();
 
 		FieldSpec[] specs = new FieldSpec[allChoices.size()]; 
@@ -128,7 +128,7 @@ public class FieldChoicesByLabel
 	
 	public TreeNode asTree(UiLocalization localization)
 	{
-		Collections.sort(allChoices, new ChoiceItemSorterByLabelTagType());
+		Collections.sort(allChoices, new ChoiceItemSorterByLabelTagType(localization));
 		mergeSimilarDropdowns();
 
 		SearchFieldTreeNode root = new SearchFieldTreeNode("", localization);

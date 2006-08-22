@@ -28,11 +28,17 @@ package org.martus.client.search;
 
 import java.util.Comparator;
 
+import org.martus.common.MiniLocalization;
 import org.martus.common.fieldspec.ChoiceItem;
 import org.martus.common.fieldspec.FieldSpec;
 
 class ChoiceItemSorterByLabelTagType implements Comparator
 {
+	public ChoiceItemSorterByLabelTagType(MiniLocalization localization)
+	{
+		collator = new SaneCollator(localization.getCurrentLanguageCode());
+	}
+	
 	public int compare(Object o1, Object o2)
 	{
 		ChoiceItem choice1 = (ChoiceItem)o1;
@@ -42,7 +48,8 @@ class ChoiceItemSorterByLabelTagType implements Comparator
 	
 	public int compare(FieldSpec spec1, FieldSpec spec2)
 	{
-		int labelResult = spec1.getLabel().compareTo(spec2.getLabel());
+		
+		int labelResult = collator.compare(spec1.getLabel(), spec2.getLabel());
 		if(labelResult != 0)
 			return labelResult;
 		
@@ -57,4 +64,5 @@ class ChoiceItemSorterByLabelTagType implements Comparator
 		return 0;
 	}
 	
+	SaneCollator collator;
 }
