@@ -117,9 +117,12 @@ public class TabularReportBuilder
 	private String createBreakSection()
 	{
 		return "<tr><td colspan='999'>" +
-				"---- $BreakCount: " +
-				"$BreakFields.get($BreakLevel).getLocalizedLabel($localization) = " +
-				"$BreakFields.get($BreakLevel).html($localization) " +
+				"#foreach( $foo in [0..$BreakLevel] )\n" +
+				INDENT + "\n" +
+				"#end " +
+				"$BreakFields.get($BreakLevel).getLocalizedLabel($localization): " +
+				"$BreakFields.get($BreakLevel).html($localization) = " +
+				"$BreakCount: " +
 				"</td></tr>";
 	}
 	
@@ -129,7 +132,7 @@ public class TabularReportBuilder
 				"#foreach($summary1 in $totals.children())\n" +
 				"<p>$summary1.label(): $summary1.value() = $summary1.count()</p>\n" +
 				"#foreach($summary2 in $summary1.children())\n" +
-				"<p>&nbsp;&nbsp;&nbsp;&nbsp;$summary2.label(): $summary2.value() = $summary2.count()\n" +
+				"<p>" + INDENT + "$summary2.label(): $summary2.value() = $summary2.count()\n" +
 				"</p>#foreach($summary3 in $summary2.children())\n" +
 				"<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$summary3.label(): $summary3.value() = $summary3.count()</p>\n" +
 				"#end\n" +
@@ -146,5 +149,7 @@ public class TabularReportBuilder
 		return endBuffer.toString();
 	}
 	
+	private static final String INDENT = "&nbsp;&nbsp;&nbsp;&nbsp;";
+
 	MiniLocalization localization;
 }
