@@ -134,6 +134,19 @@ public class TestFieldChooserSpecBuilder extends TestCaseEnhanced
 		assertEquals("wrong label?", message.getLabel(), item.toString());
 	}
 	
+	public void testAnyFieldShowsFirst() throws Exception
+	{
+		FieldSpec aardvark = FieldSpec.createCustomField("a", "Aardvark", new FieldTypeNormal());
+		ClientBulletinStore store = new MockBulletinStore();
+		Bulletin b = new Bulletin(store.getSignatureGenerator(), new FieldSpec[] {aardvark}, new FieldSpec[0]);
+		b.set(aardvark.getTag(), "whatever");
+		store.saveBulletinForTesting(b);
+		
+		PopUpTreeFieldSpec spec = searchBuilder.createSpec(store);
+		SearchableFieldChoiceItem anyField = spec.getFirstChoice();
+		assertEquals("Any Field not first?", "", anyField.getSpec().getTag());
+	}
+	
 	public void testMultilineNotSortable() throws Exception
 	{
 		Bulletin b = new Bulletin(getStore().getSignatureGenerator());

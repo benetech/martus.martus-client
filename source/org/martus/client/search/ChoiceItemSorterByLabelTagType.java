@@ -48,7 +48,10 @@ class ChoiceItemSorterByLabelTagType implements Comparator
 	
 	public int compare(FieldSpec spec1, FieldSpec spec2)
 	{
-		
+		int anyFieldResult = compareAnyFieldNess(spec1, spec2);
+		if(anyFieldResult != 0)
+			return anyFieldResult;
+
 		int labelResult = collator.compare(spec1.getLabel(), spec2.getLabel());
 		if(labelResult != 0)
 			return labelResult;
@@ -62,6 +65,21 @@ class ChoiceItemSorterByLabelTagType implements Comparator
 			return typeResult;
 		
 		return 0;
+	}
+
+	private int compareAnyFieldNess(FieldSpec spec1, FieldSpec spec2)
+	{
+		int anyFieldResult = 0;
+		if(isAnyField(spec1) && !(isAnyField(spec2)))
+			anyFieldResult = -1;
+		if(isAnyField(spec2) && !(isAnyField(spec1)))
+			anyFieldResult = 1;
+		return anyFieldResult;
+	}
+
+	private boolean isAnyField(FieldSpec spec1)
+	{
+		return spec1.getTag().length() == 0;
 	}
 	
 	SaneCollator collator;
