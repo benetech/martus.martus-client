@@ -28,9 +28,8 @@ package org.martus.client.swingui.actions;
 import java.awt.event.ActionEvent;
 import java.io.File;
 import java.io.IOException;
-
+import javax.swing.JComponent;
 import javax.swing.filechooser.FileFilter;
-
 import org.json.JSONObject;
 import org.martus.client.core.PartialBulletin;
 import org.martus.client.core.SortableBulletinList;
@@ -63,7 +62,6 @@ import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.fieldspec.FieldTypeBoolean;
 import org.martus.common.fieldspec.MiniFieldSpec;
 import org.martus.swing.PrintUtilities;
-import org.martus.swing.UiLabel;
 import org.martus.util.UnicodeWriter;
 
 
@@ -342,12 +340,9 @@ public class ActionMenuReports extends ActionPrint
 	
 	boolean printToPrinter(ReportOutput output) throws Exception
 	{
-		UiLabel previewText = new UiLabel();
 		for(int page = 0; page < output.getPageCount(); ++page)
 		{
-			previewText.setText(output.getPageText(0));
-			// NOTE: you have to set the size of the component first before printing
-			previewText.setSize(previewText.getPreferredSize());
+			JComponent previewText = ActionPrint.getHtmlViewableComponent(output.getPageText(0));
 			PrintUtilities.printComponent(previewText);
 		}
 		return true;

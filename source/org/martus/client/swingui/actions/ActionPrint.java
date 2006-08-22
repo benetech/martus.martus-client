@@ -26,23 +26,20 @@ Boston, MA 02111-1307, USA.
 
 package org.martus.client.swingui.actions;
 
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
-import java.awt.print.PrinterJob;
 import java.io.File;
 import java.io.IOException;
 import java.util.Vector;
-
-import javax.print.attribute.HashPrintRequestAttributeSet;
 import javax.swing.JComponent;
-
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.dialogs.UiPrintBulletinDlg;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.bulletin.BulletinHtmlGenerator;
+import org.martus.swing.HtmlViewer;
 import org.martus.swing.PrintPage;
-import org.martus.swing.PrintPageFormat;
+import org.martus.swing.PrintUtilities;
 import org.martus.swing.UiFileChooser;
-import org.martus.swing.UiLabel;
 import org.martus.util.UnicodeWriter;
 
 public class ActionPrint extends UiMartusAction
@@ -161,20 +158,6 @@ public class ActionPrint extends UiMartusAction
 	
 	private void printToPrinter(Vector currentSelectedBulletins, boolean includePrivateData)
 	{
-		PrintPageFormat format = new PrintPageFormat();
-		PrinterJob job = PrinterJob.getPrinterJob();
-		HashPrintRequestAttributeSet attributes = new HashPrintRequestAttributeSet();
-		while(true)
-		{
-			if (!job.printDialog(attributes))
-				return;
-			format.setFromAttributes(attributes);
-			if(!format.possiblePaperSizeAndTrayMismatch)
-				break;
-			if(!mainWindow.confirmDlg("PrinterWarning"))
-				break;
-		}
-
 		for(int i=0; i < currentSelectedBulletins.size(); ++i)
 		{
 			Bulletin bulletin = (Bulletin)currentSelectedBulletins.get(i);
@@ -184,7 +167,7 @@ public class ActionPrint extends UiMartusAction
 			JComponent view = createBulletinView(bulletin, includePrivateData);
 			if(previewForDebugging)
 				PrintPage.showPreview(view);
-			PrintPage.printJComponent(view, job, format, attributes);
+			PrintUtilities.printComponent(view);
 		}
 	}
 
@@ -192,9 +175,20 @@ public class ActionPrint extends UiMartusAction
 	{
 		int width = mainWindow.getPreviewWidth();		
 		String html = "<html>" + getBulletinHtml(bulletin, includePrivateData, width) + "</html>";
-		JComponent view = new UiLabel(html);
-		//Java bug: you have to set the size of the component first before printing
-		view.setSize(view.getPreferredSize());
+		JComponent view = getHtmlViewableComponent(html);
+		return view;
+	}
+
+	static public JComponent getHtmlViewableComponent(String html)
+	{
+		JComponent view = new HtmlViewer(html,null);
+		Dimension preferredSize = view.getPreferredSize();
+		// NOTE: you have to set the size of the component first before printing
+		// JAVA Bug: We need to also pad the width to prevent clipping this bug was finally fixed in Java 1.5.0-Beta-b32c
+		//			 http://bugs.sun.com/bugdatabase/view_bug.do?bug_id=4352983
+		int fivePercentPadding = (int)(preferredSize.width * 0.05);
+		preferredSize.width += fivePercentPadding;
+		view.setSize(preferredSize);
 		return view;
 	}
 
