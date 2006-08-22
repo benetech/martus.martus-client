@@ -27,10 +27,10 @@ package org.martus.client.swingui.dialogs;
 
 import java.awt.BorderLayout;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 import org.martus.client.reports.SpecTableModel;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.common.fieldspec.FieldSpec;
+import org.martus.swing.UiScrollPane;
 import org.martus.swing.UiTable;
 
 public class UiReportFieldSelectorPanel extends JPanel
@@ -45,7 +45,7 @@ public class UiReportFieldSelectorPanel extends JPanel
 		table.setFocusable(true);
 		table.createDefaultColumnsFromModel();
 		table.setColumnSelectionAllowed(false);
-		add(new JScrollPane(table), BorderLayout.CENTER);
+		add(new UiScrollPane(table), BorderLayout.CENTER);
 	}
 	
 	public UiTable getTable()
