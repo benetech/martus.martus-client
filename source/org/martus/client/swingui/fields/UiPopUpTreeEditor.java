@@ -113,13 +113,16 @@ public class UiPopUpTreeEditor extends UiField implements ActionListener
 	
 	public void select(MiniFieldSpec specToSelect)
 	{
+		setText("");
 		if(specToSelect == null)
-			setText("");
-		else
-		{
-			selectedItem = spec.findSearchTag(specToSelect.getTag());
-			label.setText(selectedItem.toString());
-		}
+			return;
+		
+		SearchableFieldChoiceItem item = spec.findSearchTag(specToSelect.getTag());
+		if(item == null)
+			return;
+		
+		selectedItem = item;
+		label.setText(selectedItem.toString());
 	}
 	
 	public MiniFieldSpec getSelectedMiniFieldSpec()

@@ -187,8 +187,8 @@ public class UiSortFieldsDlg extends JDialog implements ActionListener
 	ChoiceItem detailAndBreaksChoice;
 	ChoiceItem breaksOnlyChoice;
 
-	private Vector sortMiniSpecs;
-	private ChoiceItem savedBreakChoice;
+	private static Vector sortMiniSpecs;
+	private static ChoiceItem savedBreakChoice;
 	private final int MAX_SORT_LEVELS = 3;
 }
 
