@@ -26,10 +26,8 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.swingui.dialogs;
 
 import java.awt.BorderLayout;
-
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-
 import org.martus.client.reports.SpecTableModel;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.common.fieldspec.FieldSpec;
@@ -44,7 +42,7 @@ public class UiReportFieldSelectorPanel extends JPanel
 		table = new UiTable(model);
 		table.setMaxGridWidth(40);
 		table.useMaxWidth();
-		table.setFocusable(false);
+		table.setFocusable(true);
 		table.createDefaultColumnsFromModel();
 		table.setColumnSelectionAllowed(false);
 		add(new JScrollPane(table), BorderLayout.CENTER);
