@@ -80,7 +80,7 @@ public class FancySearchTableModel extends GridTableModel implements TableModelL
 
 	private FieldSpec getCurrentValueColumnSpec(FieldSpec selectedFieldSpec)
 	{
-		if(selectedFieldSpec.getType().isLanguage())
+		if(selectedFieldSpec.getType().isLanguageDropdown())
 			selectedFieldSpec = new DropDownFieldSpec(localization.getLanguageNameChoices());
 
 		return selectedFieldSpec;
@@ -132,7 +132,7 @@ public class FancySearchTableModel extends GridTableModel implements TableModelL
 			opChoiceVector.addAll(getExactChoices());
 			opChoiceVector.addAll(getCompareChoices());
 		}
-		else if(selectedFieldType.isLanguage() || selectedFieldType.isBoolean() || selectedFieldType.isDropdown())
+		else if(selectedFieldType.isLanguageDropdown() || selectedFieldType.isBoolean() || selectedFieldType.isDropdown())
 		{
 			opChoiceVector.addAll(getExactChoices());
 		}

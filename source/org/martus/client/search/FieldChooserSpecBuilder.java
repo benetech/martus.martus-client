@@ -198,7 +198,7 @@ public class FieldChooserSpecBuilder
 
 	private boolean shouldSearchSpecTypeBeTheFieldSpecType(final FieldType thisType)
 	{
-		return (thisType.isDate() || thisType.isLanguage() || thisType.isBoolean()); 
+		return (thisType.isDate() || thisType.isLanguageDropdown() || thisType.isBoolean()); 
 	}
 	
 	private Set getDateRangeChoiceItem(FieldSpec spec, String subfield) 

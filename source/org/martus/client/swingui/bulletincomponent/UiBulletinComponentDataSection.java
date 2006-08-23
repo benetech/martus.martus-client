@@ -142,7 +142,7 @@ abstract public class UiBulletinComponentDataSection extends UiBulletinComponent
 			return createDateField(fieldSpec);
 		if(type.isDateRange())
 			return createFlexiDateField(fieldSpec);
-		if(type.isLanguage())
+		if(type.isLanguageDropdown())
 			return createLanguageField();
 		if(type.isDropdown())
 			return createChoiceField(fieldSpec);

@@ -87,7 +87,7 @@ public class GridTable extends UiTableWithCellEditingProtection
 				setColumnMaxWidth(i, getDateColumnWidth(i));
 			else if(columnType.isDateRange())
 				setColumnMaxWidth(i, getDateRangeColumnWidth(i));
-			else if(columnType.isLanguage())
+			else if(columnType.isLanguageDropdown())
 				setColumnWidthToHeaderWidth(i);
 			else if(columnType.isBoolean())
 				setColumnWidthToHeaderWidth(i);

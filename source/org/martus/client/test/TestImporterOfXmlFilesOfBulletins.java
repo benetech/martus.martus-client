@@ -96,7 +96,7 @@ public class TestImporterOfXmlFilesOfBulletins extends TestCaseEnhanced
 		assertNotNull(mainFieldSpecs);
 		assertEquals(19, mainFieldSpecs.length);
 		FieldSpec field = mainFieldSpecs[0];
-		assertTrue(field.getType().isLanguage());
+		assertTrue(field.getType().isLanguageDropdown());
 		FieldSpec[] privateFieldSpecs = importer.getPrivateFieldSpecs();
 		assertNotNull(privateFieldSpecs);
 		assertEquals(1, privateFieldSpecs.length);
