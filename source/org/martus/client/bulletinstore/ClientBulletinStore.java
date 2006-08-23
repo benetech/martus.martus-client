@@ -328,19 +328,19 @@ public class ClientBulletinStore extends BulletinStore
 		saveBulletin(b, mustEncryptPublicData());
 	}
 
-	public synchronized void discardBulletin(BulletinFolder f, Bulletin b) throws IOException
+	public synchronized void discardBulletin(BulletinFolder f, UniversalId uid) throws IOException
 	{
 		try
 		{
 			if(!f.equals(folderDiscarded))
-				folderDiscarded.add(b);
+				folderDiscarded.add(uid);
 		}
 		catch (BulletinAlreadyExistsException saveToIgnoreException)
 		{
 		}
-		removeBulletinFromFolder(f, b);
-		if(isOrphan(b))
-			destroyBulletin(b);
+		removeBulletinFromFolder(f, uid);
+		if(isOrphan(uid))
+			destroyBulletin(getBulletinRevision(uid));
 	}
 
 	public Bulletin chooseBulletinToUpload(BulletinFolder hiddenFolder, int startIndex)
@@ -1112,13 +1112,13 @@ public class ClientBulletinStore extends BulletinStore
 		return visitor.quarantinedCount;
 	}
 
-	public synchronized boolean isOrphan(Bulletin b)
+	public synchronized boolean isOrphan(UniversalId uid)
 	{
 		Vector allFolders= getVisibleFolderNames();
 		for(int i = 0; i < allFolders.size(); ++i)
 		{
 			BulletinFolder folder = findFolder((String)allFolders.get(i));
-			if(folder != null && folder.contains(b))
+			if(folder != null && folder.contains(uid))
 				return false;
 		}
 

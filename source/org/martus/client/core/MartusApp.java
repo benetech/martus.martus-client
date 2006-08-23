@@ -1024,13 +1024,13 @@ public class MartusApp
 		return false;
 	}
 	
-	public void discardBulletinsFromFolder(BulletinFolder folderToDiscardFrom, Bulletin[] bulletinsToDiscard) throws IOException 
+	public void discardBulletinsFromFolder(BulletinFolder folderToDiscardFrom, UniversalId[] bulletinIDsToDiscard) throws IOException 
 	{
 		store.getFolderDiscarded().prepareForBulkOperation();
-		for (int i = 0; i < bulletinsToDiscard.length; i++)
+		for (int i = 0; i < bulletinIDsToDiscard.length; i++)
 		{
-			Bulletin b = bulletinsToDiscard[i];
-			store.discardBulletin(folderToDiscardFrom, b);
+			UniversalId uid = bulletinIDsToDiscard[i];
+			store.discardBulletin(folderToDiscardFrom, uid);
 		}
 		store.saveFolders();
 	}

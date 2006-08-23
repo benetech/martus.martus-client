@@ -645,12 +645,12 @@ public class UiBulletinTable extends UiTable implements ListSelectionListener, D
 	private void discardAllSelectedBulletins()
 	{		
 		mainWindow.setWaitingCursor();
-		Bulletin[] bulletinsToDiscard = getSelectedBulletins();
+		UniversalId[] bulletinsIDsToDiscard = getSelectedBulletinUids();
 		BulletinFolder folderToDiscardFrom = getFolder();
 		MartusApp app = mainWindow.getApp();
 		try
 		{
-			app.discardBulletinsFromFolder(folderToDiscardFrom, bulletinsToDiscard);
+			app.discardBulletinsFromFolder(folderToDiscardFrom, bulletinsIDsToDiscard);
 		}
 		catch (IOException e)
 		{

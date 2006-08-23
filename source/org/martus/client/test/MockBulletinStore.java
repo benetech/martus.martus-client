@@ -29,7 +29,9 @@ package org.martus.client.test;
 import java.io.File;
 import java.io.IOException;
 
+import org.martus.client.bulletinstore.BulletinFolder;
 import org.martus.client.bulletinstore.ClientBulletinStore;
+import org.martus.common.bulletin.Bulletin;
 import org.martus.common.crypto.MartusCrypto;
 import org.martus.common.crypto.MockMartusSecurity;
 import org.martus.common.database.Database;
@@ -65,6 +67,11 @@ public class MockBulletinStore extends ClientBulletinStore
 		super.deleteAllData();
 		if(getFoldersFile().exists())
 			throw new IOException("Didn't delete folders.dat!");
+	}
+	
+	public void discardBulletin(BulletinFolder folder, Bulletin b) throws IOException
+	{
+		super.discardBulletin(folder, b.getUniversalId());
 	}
 	
 	public Database getWriteableDatabase()

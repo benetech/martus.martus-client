@@ -579,8 +579,11 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		draftOutbox.add(b1);
 		BulletinFolder sealedOutbox = appWithAccount.getFolderSealedOutbox();
 		sealedOutbox.add(b3);
+		appWithAccount.getStore().saveBulletin(b1);
+		appWithAccount.getStore().saveBulletin(b2);
+		appWithAccount.getStore().saveBulletin(b3);
 		
-		appWithAccount.discardBulletinsFromFolder(f1, new Bulletin[] {b1, b3});
+		appWithAccount.discardBulletinsFromFolder(f1, new UniversalId[] {b1.getUniversalId(), b3.getUniversalId()});
 		assertEquals(3, appWithAccount.getStore().getBulletinCount());
 		assertEquals(1, f1.getBulletinCount());
 		assertEquals("removed from draft outbox?", 1, draftOutbox.getBulletinCount());
@@ -593,7 +596,7 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		BulletinFolder savedFolder = appWithAccount.getFolderSaved();
 		try
 		{
-			appWithAccount.discardBulletinsFromFolder(savedFolder, new Bulletin[] {b1, b3});
+			appWithAccount.discardBulletinsFromFolder(savedFolder, new UniversalId[] {b1.getUniversalId(), b3.getUniversalId()});
 			fail("discard damaged record should have thrown");
 		}
 		catch(IOException ignoreExpectedException)
@@ -602,7 +605,9 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		BulletinFolder trash = appWithAccount.getFolderDiscarded();
 		try
 		{
-			appWithAccount.discardBulletinsFromFolder(trash, new Bulletin[] {b1, b3});
+			appWithAccount.getStore().saveBulletin(b1);
+			appWithAccount.getStore().saveBulletin(b3);
+			appWithAccount.discardBulletinsFromFolder(trash, new UniversalId[] {b1.getUniversalId(), b3.getUniversalId()});
 		}
 		catch(IOException e)
 		{

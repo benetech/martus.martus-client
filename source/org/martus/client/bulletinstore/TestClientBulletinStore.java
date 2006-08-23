@@ -1738,11 +1738,11 @@ public class TestClientBulletinStore extends TestCaseEnhanced
 		testStore.saveBulletin(b2);
 
 		testStore.getFolderDraftOutbox().add(b1);
-		assertEquals("hidden-only not an orphan?", true, testStore.isOrphan(b1));
+		assertEquals("hidden-only not an orphan?", true, testStore.isOrphan(b1.getUniversalId()));
 
 		testStore.getFolderSaved().add(b2);
 		testStore.getFolderDraftOutbox().add(b2);
-		assertEquals("hidden-plus is an orphan?", false, testStore.isOrphan(b2));
+		assertEquals("hidden-plus is an orphan?", false, testStore.isOrphan(b2.getUniversalId()));
 	}
 
 	public void testOrphansInVisibleFolders() throws Exception
@@ -1751,9 +1751,9 @@ public class TestClientBulletinStore extends TestCaseEnhanced
 		Bulletin b1 = testStore.createEmptyBulletin();
 		testStore.saveBulletin(b1);
 
-		assertEquals("Not in any folder, bulletin not orphaned?", true, testStore.isOrphan(b1));
+		assertEquals("Not in any folder, bulletin not orphaned?", true, testStore.isOrphan(b1.getUniversalId()));
 		testStore.getFolderSaved().add(b1);
-		assertEquals("In a visible folder, bulletin is orphaned?", false, testStore.isOrphan(b1));
+		assertEquals("In a visible folder, bulletin is orphaned?", false, testStore.isOrphan(b1.getUniversalId()));
 	}
 	
 	
