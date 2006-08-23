@@ -190,13 +190,10 @@ public class UiBulletinTable extends UiTable implements ListSelectionListener, D
 
 	public Bulletin getSingleSelectedBulletin()
 	{
-		Bulletin[] selected = getSelectedBulletins();
-		Bulletin b = null;
-		if(selected.length == 1)
-		{
-			b = selected[0];
-		}
-		return b;
+		int[] selectedRows = getSelectedRows();
+		if(selectedRows.length == 1)
+			return model.getBulletin(selectedRows[0]);
+		return null;
 	}
 
 	public void selectBulletin(Bulletin b)
@@ -712,15 +709,15 @@ public class UiBulletinTable extends UiTable implements ListSelectionListener, D
 
 		boolean aBulletinIsUnsent = false;
 		Vector visibleFoldersContainingAnyBulletin = new Vector();
-		Bulletin[] bulletins = getSelectedBulletins();
-		for (int i = 0; i < bulletins.length; i++)
+		UniversalId[] bulletinIds = getSelectedBulletinUids();
+		for (int i = 0; i < bulletinIds.length; i++)
 		{
-			Bulletin b = bulletins[i];
-			Vector visibleFoldersContainingThisBulletin = app.findBulletinInAllVisibleFolders(b);
+			UniversalId uid = bulletinIds[i];
+			Vector visibleFoldersContainingThisBulletin = app.findBulletinInAllVisibleFolders(uid);
 			visibleFoldersContainingThisBulletin.remove(folderToDiscardFrom);
 			addUniqueEntriesOnly(visibleFoldersContainingAnyBulletin, visibleFoldersContainingThisBulletin);
 			
-			if(draftOutBox.contains(b) || sealedOutBox.contains(b))
+			if(draftOutBox.contains(uid) || sealedOutBox.contains(uid))
 				aBulletinIsUnsent = true;
 		}
 
