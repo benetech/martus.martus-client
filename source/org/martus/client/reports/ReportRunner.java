@@ -117,7 +117,7 @@ public class ReportRunner
 			if(bulletin == uids.length - 1 || rf.getBulletinPerPage())
 				performMerge(rf.getFooterSection(), destination);
 			
-			if(rf.getBulletinPerPage())
+			if(rf.getBulletinPerPage() && (bulletin + 1 < uids.length))
 			{
 				destination.startNewPage();
 			}
