@@ -80,14 +80,19 @@ public class GridTable extends UiTableWithCellEditingProtection
 		setMaxColumnWidthToHeaderWidth(0);
 		for(int i = 1 ; i < model.getColumnCount(); ++i)
 		{
-			if(model.getColumnType(i).isDropdown())
+			FieldType columnType = model.getColumnType(i);
+			if(columnType.isDropdown())
 				setColumnMaxWidth(i, getDropDownColumnWidth(i, (DropDownFieldSpec)model.getFieldSpecForColumn(i)));
-			else if(model.getColumnType(i).isDate())
+			else if(columnType.isDate())
 				setColumnMaxWidth(i, getDateColumnWidth(i));
-			else if(model.getColumnType(i).isDateRange())
+			else if(columnType.isDateRange())
 				setColumnMaxWidth(i, getDateRangeColumnWidth(i));
-			else
+			else if(columnType.isLanguage())
 				setColumnWidthToHeaderWidth(i);
+			else if(columnType.isBoolean())
+				setColumnWidthToHeaderWidth(i);
+			else
+				setColumnWidthToHeaderWidthWithPadding(i);
 		}
 		setAutoResizeMode(AUTO_RESIZE_OFF);
 	}
