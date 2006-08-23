@@ -45,7 +45,7 @@ public class PageReportBuilder
 		rf.setFakePageBreakSection("<hr></hr>\n");
 		rf.setDetailSection(createDetailSection());
 		rf.setFooterSection("</table>");
-		rf.setDocumentStartSection(createEndSection());
+		rf.setDocumentEndSection(createEndSection());
 		rf.setSpecsToInclude(specs);
 		return rf;
 	}
