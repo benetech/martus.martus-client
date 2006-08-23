@@ -92,7 +92,7 @@ public class GridTable extends UiTableWithCellEditingProtection
 			else if(columnType.isBoolean())
 				setColumnWidthToHeaderWidth(i);
 			else
-				setColumnWidthToHeaderWidthWithPadding(i);
+				setColumnWidthToMinimumRequred(i);
 		}
 		setAutoResizeMode(AUTO_RESIZE_OFF);
 	}
