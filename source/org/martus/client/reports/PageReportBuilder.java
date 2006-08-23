@@ -29,11 +29,11 @@ import org.martus.common.MiniLocalization;
 import org.martus.common.bulletin.BulletinHtmlGenerator;
 import org.martus.common.fieldspec.MiniFieldSpec;
 
-public class PageReportBuilder
+public class PageReportBuilder extends ReportBuilder
 {
 	public PageReportBuilder(MiniLocalization localizationToUse)
 	{
-		
+		super(localizationToUse);
 	}
 	
 	public ReportFormat createPageReport(MiniFieldSpec[] specs)
@@ -45,6 +45,7 @@ public class PageReportBuilder
 		rf.setFakePageBreakSection("<hr></hr>\n");
 		rf.setDetailSection(createDetailSection());
 		rf.setFooterSection("</table>");
+		rf.setTotalSection(createTotalSection());
 		rf.setDocumentEndSection(createEndSection());
 		rf.setSpecsToInclude(specs);
 		return rf;

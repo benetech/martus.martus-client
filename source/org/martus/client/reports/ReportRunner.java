@@ -115,9 +115,16 @@ public class ReportRunner
 				breakHandler.doFinalBreak();
 			
 			if(bulletin == uids.length - 1 || rf.getBulletinPerPage())
-				performMerge(rf.getFooterSection(), destination);
+			{
+				ReportOutput footerDestination = destination;
+				if(options.hideDetail)
+					footerDestination = new ReportOutput();
+				performMerge(rf.getFooterSection(), footerDestination);
+			}
 			
-			if(rf.getBulletinPerPage() && (bulletin + 1 < uids.length))
+			if(rf.getBulletinPerPage() && 
+					(bulletin + 1 < uids.length) &&
+					!destination.isPageEmpty())
 			{
 				destination.startNewPage();
 			}
@@ -125,6 +132,8 @@ public class ReportRunner
 
 		if(options.printBreaks)
 		{
+			if(!destination.isPageEmpty())
+				destination.startNewPage();
 			context.put("totals", breakHandler.getSummaryTotals());
 			performMerge(rf.getTotalSection(), destination);
 		}

@@ -30,11 +30,11 @@ import org.martus.common.MiniLocalization;
 import org.martus.common.fieldspec.MiniFieldSpec;
 import org.martus.common.fieldspec.StandardFieldSpecs;
 
-public class TabularReportBuilder
+public class TabularReportBuilder extends ReportBuilder
 {
 	public TabularReportBuilder(MiniLocalization localizationToUse)
 	{
-		localization = localizationToUse;
+		super(localizationToUse);
 	}
 	
 	public ReportFormat createTabular(MiniFieldSpec[] specs)
@@ -126,30 +126,10 @@ public class TabularReportBuilder
 				"</td></tr>";
 	}
 	
-	private String createTotalSection()
-	{
-		return "<p>$localization.getFieldLabel('ReportNumberOfBulletins') $totals.count()</p>\n" +
-				"#foreach($summary1 in $totals.children())\n" +
-				"<p>$summary1.label(): $summary1.value() = $summary1.count()</p>\n" +
-				"#foreach($summary2 in $summary1.children())\n" +
-				"<p>" + INDENT + "$summary2.label(): $summary2.value() = $summary2.count()\n" +
-				"</p>#foreach($summary3 in $summary2.children())\n" +
-				"<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$summary3.label(): $summary3.value() = $summary3.count()</p>\n" +
-				"#end\n" +
-				"<p></p>\n" +
-				"#end\n" +
-				"<p></p>\n" +
-				"#end\n";
-	}
-
 	private String createEndSection()
 	{
 		StringBuffer endBuffer = new StringBuffer();
 		endBuffer.append("</table></html>");
 		return endBuffer.toString();
 	}
-	
-	private static final String INDENT = "&nbsp;&nbsp;&nbsp;&nbsp;";
-
-	MiniLocalization localization;
 }

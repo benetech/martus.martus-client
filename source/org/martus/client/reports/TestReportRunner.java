@@ -268,6 +268,35 @@ public class TestReportRunner extends TestCaseEnhanced
 		assertNotContains("Still printed breaks?", "BREAK", totalsOnly.getPageText(0));
 	}
 	
+	public void testTotalsInPageReport() throws Exception
+	{
+		MockMartusApp app = MockMartusApp.create();
+		app.loadSampleData();
+
+		ReportFormat rf = new ReportFormat();
+		rf.setBulletinPerPage(true);
+		rf.setTotalSection("Totals");
+		
+		RunReportOptions detailOnly = new RunReportOptions();
+		detailOnly.hideDetail = false;
+		detailOnly.printBreaks = false;
+		ReportOutput details = runReportOnAppData(rf, app, detailOnly);
+		assertEquals("", details.getPrintableDocument());
+		
+		RunReportOptions detailAndSummary = new RunReportOptions();
+		detailAndSummary.hideDetail = false;
+		detailAndSummary.printBreaks = true;
+		ReportOutput both = runReportOnAppData(rf, app, detailAndSummary);
+		assertEquals("Totals", both.getPrintableDocument());
+		
+		RunReportOptions summaryOnly = new RunReportOptions();
+		summaryOnly.hideDetail = true;
+		summaryOnly.printBreaks = true;
+		ReportOutput summary = runReportOnAppData(rf, app, summaryOnly);
+		assertEquals("Totals", summary.getPrintableDocument());
+		
+	}
+	
 	public void testOmitDetail() throws Exception
 	{
 		String sampleDate = "2004-06-19";

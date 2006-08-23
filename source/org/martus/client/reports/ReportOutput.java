@@ -94,6 +94,11 @@ public class ReportOutput extends Writer implements Printable
 		return fakePageBreak;
 	}
 	
+	public boolean isPageEmpty()
+	{
+		return (currentPage.toString().length() == 0);
+	}
+	
 	public void startNewPage()
 	{
 		pages.add(currentPage.toString());

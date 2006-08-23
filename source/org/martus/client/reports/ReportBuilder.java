@@ -26,27 +26,31 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.reports;
 
 import org.martus.common.MiniLocalization;
-import org.martus.common.fieldspec.MiniFieldSpec;
-import org.martus.util.TestCaseEnhanced;
 
-public class TestPageReportBuilder extends TestCaseEnhanced
+public class ReportBuilder
 {
-	public TestPageReportBuilder(String name)
+	protected static final String INDENT = "&nbsp;&nbsp;&nbsp;&nbsp;";
+
+	public ReportBuilder(MiniLocalization localizationToUse)
 	{
-		super(name);
+		localization = localizationToUse;
+	}
+	
+	protected String createTotalSection()
+	{
+		return "<p>$localization.getFieldLabel('ReportNumberOfBulletins') $totals.count()</p>\n" +
+				"#foreach($summary1 in $totals.children())\n" +
+				"<p>$summary1.label(): $summary1.value() = $summary1.count()</p>\n" +
+				"#foreach($summary2 in $summary1.children())\n" +
+				"<p>" + INDENT + "$summary2.label(): $summary2.value() = $summary2.count()\n" +
+				"</p>#foreach($summary3 in $summary2.children())\n" +
+				"<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$summary3.label(): $summary3.value() = $summary3.count()</p>\n" +
+				"#end\n" +
+				"<p></p>\n" +
+				"#end\n" +
+				"<p></p>\n" +
+				"#end\n";
 	}
 
-	public void testCreatePageReport()
-	{
-		MiniLocalization localization = new MiniLocalization();
-		PageReportBuilder builder= new PageReportBuilder(localization);
-		ReportFormat rf = builder.createPageReport(new MiniFieldSpec[0]);
-		assertTrue("Not a page report?", rf.getBulletinPerPage());
-		assertContains("Start not html?", "<html>", rf.getDocumentStartSection());
-		assertContains("End not end html?", "</html>", rf.getDocumentEndSection());
-		assertContains("<table", rf.getHeaderSection());
-		assertContains("</table>", rf.getFooterSection());
-		assertContains("#foreach", rf.getTotalSection());
-		assertContains("<hr", rf.getFakePageBreakSection());
-	}
+	MiniLocalization localization;
 }
