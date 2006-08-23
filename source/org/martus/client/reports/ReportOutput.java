@@ -25,12 +25,21 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.reports;
 
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.print.PageFormat;
+import java.awt.print.Printable;
+import java.awt.print.PrinterException;
 import java.io.IOException;
 import java.io.StringWriter;
 import java.io.Writer;
 import java.util.Vector;
 
-public class ReportOutput extends Writer
+import org.martus.client.swingui.actions.ActionPrint;
+import org.martus.swing.PrintUtilities;
+import org.martus.swing.UiLabel;
+
+public class ReportOutput extends Writer implements Printable
 {
 	public ReportOutput()
 	{
@@ -107,7 +116,7 @@ public class ReportOutput extends Writer
 		text.append(getDocumentStart());
 		for(int page = 0; page < getPageCount(); ++page)
 		{
-			text.append(getPageText(0));
+			text.append(getPageText(page));
 			text.append(getFakePageBreak());
 		}
 		text.append(getDocumentEnd());
@@ -118,9 +127,65 @@ public class ReportOutput extends Writer
 	{
 		StringBuffer text = new StringBuffer();
 		text.append(getDocumentStart());
-		text.append(getPageText(0));
+		text.append(getPageText(page));
 		text.append(getDocumentEnd());
 		return text.toString();
+	}
+	
+	public int print(Graphics g, PageFormat pf, int pageIndex) throws PrinterException
+	{
+		if(pagesPerStoredPage == null)
+			pagesPerStoredPage = computeStartingPages(pf);
+		
+		int printedPage = 0;
+		for(int page = 0; page < getPageCount(); ++page)
+		{
+			int pagesForThisStoredPage = pagesPerStoredPage[page];
+			if(printedPage + pagesForThisStoredPage > pageIndex)
+			{
+				int pageWithinComponent = pageIndex - printedPage;
+				printThisPage(g, pf, page, pageWithinComponent);
+				return Printable.PAGE_EXISTS;
+			}
+			
+			printedPage += pagesForThisStoredPage;
+		}
+		return Printable.NO_SUCH_PAGE;
+	}
+
+	void printThisPage(Graphics g, PageFormat pf, int storedPage, int pageWithinComponent)
+	{
+		String pageText = getPrintablePage(storedPage);
+		UiLabel viewer = createPrintableComponent(pageText);
+
+		// for faster printing, turn off double buffering
+		PrintUtilities.disableDoubleBuffering(viewer);
+		Graphics2D g2 = PrintUtilities.getTranslatedGraphics(g, pf, pageWithinComponent, viewer);
+		viewer.paint(g2); // repaint the page for printing
+		PrintUtilities.enableDoubleBuffering(viewer);
+	}
+	
+	int[] computeStartingPages(PageFormat pf)
+	{
+		int printedPage = 0;
+		int[] pagesPer = new int[getPageCount()];
+		for(int page = 0; page < getPageCount(); ++page)
+		{
+			String pageText = getPrintablePage(page);
+			UiLabel viewer = createPrintableComponent(pageText);
+			int pagesForThisStoredPage = PrintUtilities.computePageCountWithinComponent(pf, viewer);
+			pagesPer[page] = pagesForThisStoredPage;
+			printedPage += pagesForThisStoredPage;
+		}
+		
+		return pagesPer;
+	}
+
+	private UiLabel createPrintableComponent(String pageText)
+	{
+		UiLabel viewer = new UiLabel(pageText);
+		ActionPrint.setReasonableSize(viewer);
+		return viewer;
 	}
 	
 	Vector pages;
@@ -128,4 +193,6 @@ public class ReportOutput extends Writer
 	String documentStart;
 	String documentEnd;
 	String fakePageBreak;
+	
+	int[] pagesPerStoredPage;
 }

@@ -26,10 +26,13 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.swingui.actions;
 
 import java.awt.event.ActionEvent;
+import java.awt.print.PrinterJob;
 import java.io.File;
 import java.io.IOException;
-import javax.swing.JComponent;
+
+import javax.print.attribute.HashPrintRequestAttributeSet;
 import javax.swing.filechooser.FileFilter;
+
 import org.json.JSONObject;
 import org.martus.client.core.PartialBulletin;
 import org.martus.client.core.SortableBulletinList;
@@ -61,7 +64,6 @@ import org.martus.common.crypto.MartusCrypto;
 import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.fieldspec.FieldTypeBoolean;
 import org.martus.common.fieldspec.MiniFieldSpec;
-import org.martus.swing.PrintUtilities;
 import org.martus.util.UnicodeWriter;
 
 
@@ -339,12 +341,13 @@ public class ActionMenuReports extends ActionPrint
 	
 	boolean printToPrinter(ReportOutput output) throws Exception
 	{
-		for(int page = 0; page < output.getPageCount(); ++page)
-		{
-			String pageText = output.getPrintablePage(page);
-			JComponent previewText = ActionPrint.getHtmlViewableComponent(pageText);
-			PrintUtilities.printComponent(previewText);
-		}
+		PrinterJob printJob = PrinterJob.getPrinterJob();
+		printJob.setPrintable(output);
+		HashPrintRequestAttributeSet attributes = new HashPrintRequestAttributeSet();
+		if(!printJob.printDialog(attributes))
+			return false;
+		
+		printJob.print(attributes);
 		return true;
 	}
 
