@@ -171,7 +171,7 @@ public class TestReportRunner extends TestCaseEnhanced
 		String startSection = "start";
 		rf.setDocumentStartSection(startSection);
 		ReportOutput result = runReportOnSampleData(rf);
-		assertEquals("didn't output start section just once?", startSection, result.getPageText(0));
+		assertEquals("didn't output start section?", startSection, result.getDocumentStart());
 	}
 	
 	public void testBreakSection() throws Exception
@@ -306,7 +306,7 @@ public class TestReportRunner extends TestCaseEnhanced
 		String endSection = "end";
 		rf.setDocumentEndSection(endSection);
 		ReportOutput result = runReportOnSampleData(rf);
-		assertEquals("didn't output end section just once?", endSection, result.getPageText(0));
+		assertEquals("didn't output end section?", endSection, result.getDocumentEnd());
 	}
 	
 	public void testPageReport() throws Exception
@@ -349,22 +349,21 @@ public class TestReportRunner extends TestCaseEnhanced
 				"Label 2 04/07/2005\n" +
 				"BOTTOM:\n" +
 				"<field:privateinfo> Secret\n" +
-				"Footer\n" +
-				"----\n";
+				"Footer\n";
 		String expected1 = "Header\n" +
 				"TOP:\n" +
 				"<field:author> Second\n" +
 				"Label 2 03/29/2003\n" +
 				"BOTTOM:\n" +
 				"<field:privateinfo> Another secret\n" +
-				"Footer\n" +
-				"----\n";
+				"Footer\n";
 		
 		RunReportOptions options = new RunReportOptions();
 		options.includePrivate = true;
 		ReportOutput result = runReportOnAppData(rf, app, options);
 		assertEquals("Wrong page report output?", expected0, result.getPageText(0));
 		assertEquals("Wrong page report output?", expected1, result.getPageText(1));
+		assertEquals("Didn't set fake page break?", "----\n", result.getFakePageBreak());
 	}
 	
 	private ReportOutput runReportOnSampleData(ReportFormat rf) throws Exception
