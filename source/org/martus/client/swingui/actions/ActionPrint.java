@@ -180,6 +180,12 @@ public class ActionPrint extends UiMenuAction
 	static public JComponent getHtmlViewableComponent(String html)
 	{
 		JComponent view = new HtmlViewer(html,null);
+		setReasonableSize(view);
+		return view;
+	}
+
+	public static void setReasonableSize(JComponent view)
+	{
 		Dimension preferredSize = view.getPreferredSize();
 		// NOTE: you have to set the size of the component first before printing
 		// JAVA Bug: We need to also pad the width to prevent clipping this bug was finally fixed in Java 1.5.0-Beta-b32c
@@ -187,7 +193,6 @@ public class ActionPrint extends UiMenuAction
 		int fivePercentPadding = (int)(preferredSize.width * 0.05);
 		preferredSize.width += fivePercentPadding;
 		view.setSize(preferredSize);
-		return view;
 	}
 
 	private String getBulletinHtml(Bulletin bulletin, boolean includePrivateData, int width)
