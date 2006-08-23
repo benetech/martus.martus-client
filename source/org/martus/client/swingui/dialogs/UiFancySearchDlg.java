@@ -337,19 +337,25 @@ public class UiFancySearchDlg extends JDialog
 			// If we pass the dialog, Java will STILL set the owner to the frame.
 			// So we must hide the fancy search dialog while anything modal is above it
 			dialog.setVisible(false);
-			File saveTo = FileDialogHelpers.doFileSaveDialog(dialog.mainWindow, title, directory, filter, localization);
-			dialog.setVisible(true);
-			if(saveTo == null)
-				return;
-			
 			try
 			{
-				save(saveTo);
-			} 
-			catch (Exception e)
+				File saveTo = FileDialogHelpers.doFileSaveDialog(dialog.mainWindow, title, directory, filter, localization);
+				if(saveTo == null)
+					return;
+				
+				try
+				{
+					save(saveTo);
+				} 
+				catch (Exception e)
+				{
+					e.printStackTrace();
+					dialog.mainWindow.notifyDlg("ErrorWritingFile");
+				}
+			}
+			finally
 			{
-				e.printStackTrace();
-				dialog.mainWindow.notifyDlg("ErrorWritingFile");
+				dialog.setVisible(true);
 			}
 		}
 		
@@ -381,21 +387,27 @@ public class UiFancySearchDlg extends JDialog
 			// If we pass the dialog, Java will STILL set the owner to the frame.
 			// So we must hide the fancy search dialog while anything modal is above it
 			dialog.setVisible(false);
-			File loadFrom = FileDialogHelpers.doFileOpenDialog(dialog, title, openButtonLabel, directory, filter);
-			dialog.setVisible(true);
-			if(loadFrom == null)
-				return;
-			
 			try
 			{
-				SearchSpec spec = load(loadFrom);
-				dialog.setSearchAsJson(spec.getSearchGrid());
-				dialog.setSearchFinalBulletinsOnly(spec.getFinalOnly());
-			} 
-			catch (Exception e)
+				File loadFrom = FileDialogHelpers.doFileOpenDialog(dialog, title, openButtonLabel, directory, filter);
+				if(loadFrom == null)
+					return;
+				
+				try
+				{
+					SearchSpec spec = load(loadFrom);
+					dialog.setSearchAsJson(spec.getSearchGrid());
+					dialog.setSearchFinalBulletinsOnly(spec.getFinalOnly());
+				} 
+				catch (Exception e)
+				{
+					e.printStackTrace();
+					dialog.mainWindow.notifyDlg("ErrorReadingFile");
+				}
+			}
+			finally
 			{
-				e.printStackTrace();
-				dialog.mainWindow.notifyDlg("ErrorReadingFile");
+				dialog.setVisible(true);
 			}
 		}
 		
