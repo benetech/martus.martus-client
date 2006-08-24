@@ -26,6 +26,9 @@ Boston, MA 02111-1307, USA.
 
 package org.martus.client.swingui;
 
+import java.lang.reflect.InvocationTargetException;
+import javax.swing.SwingUtilities;
+
 public abstract class WorkerThread extends Thread
 {
 	public void start(ModalBusyDialog dlgToNotify)
@@ -57,6 +60,60 @@ public abstract class WorkerThread extends Thread
 		}
 		dlg.workerFinished();
 	}
+
+	public static boolean displayConfirmDlgAndWaitForResponse(UiMainWindow mainWindow, String title, String[] contents) throws InterruptedException, InvocationTargetException
+	{
+		WorkerThread.ThreadedConfirmDlg confirm = new WorkerThread.ThreadedConfirmDlg(mainWindow, title, contents);
+		SwingUtilities.invokeAndWait(confirm);
+		return confirm.getResult();
+	}
+
+	private static class ThreadedConfirmDlg implements Runnable
+	{
+		public ThreadedConfirmDlg(UiMainWindow mainWindowToUse, String titleToUse, String[] contentsToUse)
+		{
+			mainWindow = mainWindowToUse;
+			title = titleToUse;
+			contents = contentsToUse;
+		}
+		
+		public void run()
+		{
+			result = mainWindow.confirmDlg(mainWindow, title, contents);
+		}
+		
+		public boolean getResult()
+		{
+			return result;
+		}
+		
+		UiMainWindow mainWindow;
+		boolean result;
+		String title;
+		String[] contents;
+	}
+
+	public static void displayNotifyDlgAndWaitForResponse(UiMainWindow mainWindow, String resultMessageTag) throws InterruptedException, InvocationTargetException
+	{
+		SwingUtilities.invokeAndWait(new WorkerThread.ThreadedNotifyDlg(mainWindow, resultMessageTag));
+	}
+
+	private static class ThreadedNotifyDlg implements Runnable
+	{
+		public ThreadedNotifyDlg(UiMainWindow mainWindowToUse, String tagToUse)
+		{
+			tag = tagToUse;
+			mainWindow = mainWindowToUse;
+		}
+		
+		public void run()
+		{
+			mainWindow.notifyDlg(mainWindow, tag);
+		}
+		UiMainWindow mainWindow;
+		String tag;
+	}
+	
 	
 	public abstract void doTheWorkWithNO_SWING_CALLS() throws Exception;
 	

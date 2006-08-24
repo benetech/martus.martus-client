@@ -53,13 +53,14 @@ import javax.swing.event.TableModelEvent;
 import javax.swing.table.JTableHeader;
 import org.martus.client.bulletinstore.BulletinFolder;
 import org.martus.client.bulletinstore.ClientBulletinStore;
-import org.martus.client.bulletinstore.ClientBulletinStore.BulletinAlreadyExistsException;
 import org.martus.client.bulletinstore.ClientBulletinStore.AddOlderVersionToFolderFailedException;
+import org.martus.client.bulletinstore.ClientBulletinStore.BulletinAlreadyExistsException;
 import org.martus.client.core.MartusApp;
 import org.martus.client.core.TransferableBulletinList;
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiClipboardUtilities;
 import org.martus.client.swingui.UiMainWindow;
+import org.martus.client.swingui.WorkerThread;
 import org.martus.client.swingui.foldertree.FolderNode;
 import org.martus.clientside.UiLocalization;
 import org.martus.common.bulletin.Bulletin;
@@ -374,82 +375,125 @@ public class UiBulletinTable extends UiTable implements ListSelectionListener, D
 
 	public void doCopyBulletins()
 	{				
-		mainWindow.setWaitingCursor();
-					
-		Bulletin[] selected = getSelectedBulletins();
-		BulletinFolder folder = getFolder();
-		TransferableBulletinList tb = new TransferableBulletinList(getStore(), selected, folder);
+		CopyBulletinsThread thread = new CopyBulletinsThread();
+		try
+		{
+			mainWindow.doBackgroundWork(thread, "BackgroundWorking");
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+	}
 
-		Toolkit toolkit = Toolkit.getDefaultToolkit();
-		Clipboard clipboard = toolkit.getSystemClipboard();
-		Transferable contents = clipboard.getContents(this);
-		mainWindow.lostOwnership(clipboard, contents);
+	class CopyBulletinsThread extends WorkerThread
+	{
+		public CopyBulletinsThread()
+		{
+		}
+		public void doTheWorkWithNO_SWING_CALLS()
+		{
+			Bulletin[] selected = getSelectedBulletins();
+			BulletinFolder folder = getFolder();
+			TransferableBulletinList tb = new TransferableBulletinList(getStore(), selected, folder);
 
-		clipboard.setContents(tb, mainWindow);
-		mainWindow.resetCursor();		
+			Toolkit toolkit = Toolkit.getDefaultToolkit();
+			Clipboard clipboard = toolkit.getSystemClipboard();
+			Transferable contents = clipboard.getContents(this);
+			mainWindow.lostOwnership(clipboard, contents);
+
+			clipboard.setContents(tb, mainWindow);
+		}
 	}
 
 	public void doPasteBulletins()
-	{				 
-		mainWindow.setWaitingCursor();
-		
-		BulletinFolder folder = getFolder();
-		TransferableBulletinList tb = UiClipboardUtilities.getClipboardTransferableBulletin();
-
-		boolean worked = false;
-		String resultMessageTag = null;
-			
-		if(tb == null)
-		{			
-			File[] files = UiClipboardUtilities.getClipboardTransferableFiles();
-			try
-			{
-				if(files != null)
-					dropAdapter.attemptDropFiles(files, folder);
-				worked = true;
-				mainWindow.notifyDlg("OperationCompleted");
-				mainWindow.notifyDlg("FilesWillNotBeDeleted");
-				//if(confirmDeletionOfFile(file.getPath()))
-					//file.delete();
-			}
-			catch (BulletinAlreadyExistsException e)
-			{
-				resultMessageTag = "PasteErrorBulletinAlreadyExists";
-			}
-			catch (AddOlderVersionToFolderFailedException e)
-			{
-				resultMessageTag = "PasteErrorBulletinOlder";
-			}
-			catch (Exception e)
-			{
-				resultMessageTag = "PasteError";
-			}
-		}
-		else
+	{				
+		PasteBulletinsThread thread = new PasteBulletinsThread();
+		try
 		{
-			try
-			{
-				dropAdapter.attemptDropBulletins(tb.getBulletins(), folder);
-				worked = true;
-			}
-			catch (BulletinAlreadyExistsException e)
-			{
-				resultMessageTag = "PasteErrorBulletinAlreadyExists";
-			}
-			catch (AddOlderVersionToFolderFailedException e)
-			{
-				resultMessageTag = "PasteErrorBulletinOlder";
-			}
-			catch (IOException e)
-			{
-				resultMessageTag = "PasteError";
-			}
+			mainWindow.doBackgroundWork(thread, "BackgroundWorking");
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+	}
+
+	class PasteBulletinsThread extends WorkerThread
+	{
+		public PasteBulletinsThread()
+		{
 		}
 
-		if(!worked)
-			mainWindow.notifyDlgBeep(resultMessageTag);
-		
-		mainWindow.resetCursor();	
+		public void doTheWorkWithNO_SWING_CALLS()
+		{
+			BulletinFolder folder = getFolder();
+			TransferableBulletinList tb = UiClipboardUtilities.getClipboardTransferableBulletin();
+
+			boolean worked = false;
+			String resultMessageTag = null;
+				
+			if(tb == null)
+			{			
+				File[] files = UiClipboardUtilities.getClipboardTransferableFiles();
+				try
+				{
+					if(files != null)
+						dropAdapter.attemptDropFiles(files, folder);
+					worked = true;
+					WorkerThread.displayNotifyDlgAndWaitForResponse(mainWindow, "OperationCompleted");
+					WorkerThread.displayNotifyDlgAndWaitForResponse(mainWindow, "FilesWillNotBeDeleted");
+					//if(confirmDeletionOfFile(file.getPath()))
+						//file.delete();
+				}
+				catch (BulletinAlreadyExistsException e)
+				{
+					resultMessageTag = "PasteErrorBulletinAlreadyExists";
+				}
+				catch (AddOlderVersionToFolderFailedException e)
+				{
+					resultMessageTag = "PasteErrorBulletinOlder";
+				}
+				catch (Exception e)
+				{
+					resultMessageTag = "PasteError";
+				}
+			}
+			else
+			{
+				try
+				{
+					dropAdapter.attemptDropBulletins(tb.getBulletins(), folder);
+					worked = true;
+				}
+				catch (BulletinAlreadyExistsException e)
+				{
+					resultMessageTag = "PasteErrorBulletinAlreadyExists";
+				}
+				catch (AddOlderVersionToFolderFailedException e)
+				{
+					resultMessageTag = "PasteErrorBulletinOlder";
+				}
+				catch (IOException e)
+				{
+					resultMessageTag = "PasteError";
+				}
+			}
+
+			if(!worked)
+			{
+				Toolkit.getDefaultToolkit().beep();
+				try
+				{
+					WorkerThread.displayNotifyDlgAndWaitForResponse(mainWindow,resultMessageTag);
+				}
+				catch(Exception e)
+				{
+					e.printStackTrace();
+				}
+			}
+			
+		}
 	}
 	
 	public void doResendBulletins()
@@ -617,34 +661,45 @@ public class UiBulletinTable extends UiTable implements ListSelectionListener, D
 		}
 	}
 
-
-
 	public void doDiscardBulletins()
-	{
-		boolean okToDiscard = true;
-		Bulletin[] bulletins = getSelectedBulletins();
-		if(bulletins.length == 0 || bulletins[0] == null)
-			return;
-					
-		if(bulletins.length == 1)
+	{				
+		DiscardBulletinsThread thread = new DiscardBulletinsThread();
+		try
 		{
-			okToDiscard = confirmDiscardSingleBulletin(bulletins[0]);
+			mainWindow.doBackgroundWork(thread, "BackgroundWorking");
 		}
-		else
+		catch(Exception e)
 		{
-			okToDiscard = confirmDiscardMultipleBulletins();
+			e.printStackTrace();
 		}
-
-		if(okToDiscard)
-		{						
-			discardAllSelectedBulletins();			
-		}
-		
 	}
 
-	private void discardAllSelectedBulletins()
+	class DiscardBulletinsThread extends WorkerThread
+	{
+		public DiscardBulletinsThread()
+		{
+		}
+
+		public void doTheWorkWithNO_SWING_CALLS()
+		{
+			boolean okToDiscard = true;
+			UniversalId[] bulletinsUids = getSelectedBulletinUids();
+			if(bulletinsUids.length == 0)
+				return;
+						
+			if(bulletinsUids.length == 1)
+				okToDiscard = confirmDiscardSingleBulletin(getSingleSelectedBulletin());
+			else
+				okToDiscard = confirmDiscardMultipleBulletins();
+
+			if(okToDiscard)
+				discardAllSelectedBulletins();			
+		}
+	}
+
+	
+	void discardAllSelectedBulletins()
 	{		
-		mainWindow.setWaitingCursor();
 		UniversalId[] bulletinsIDsToDiscard = getSelectedBulletinUids();
 		BulletinFolder folderToDiscardFrom = getFolder();
 		MartusApp app = mainWindow.getApp();
@@ -662,10 +717,9 @@ public class UiBulletinTable extends UiTable implements ListSelectionListener, D
 		mainWindow.folderContentsHaveChanged(folderToDiscardFrom);
 		mainWindow.folderContentsHaveChanged(discardedFolder);
 		mainWindow.selectNewCurrentBulletin(getSelectedRow());
-		mainWindow.resetCursor();			
 	}
 
-	private boolean confirmDiscardSingleBulletin(Bulletin b)
+	boolean confirmDiscardSingleBulletin(Bulletin b)
 	{
 		BulletinFolder folderToDiscardFrom = getFolder();
 		if(!isDiscardedFolder(folderToDiscardFrom))
@@ -696,7 +750,7 @@ public class UiBulletinTable extends UiTable implements ListSelectionListener, D
 		return confirmDeleteBulletins(tagMain, tagUnsent, tagInOtherFolders, visibleFoldersContainingThisBulletin);
 	}
 
-	private boolean confirmDiscardMultipleBulletins()
+	boolean confirmDiscardMultipleBulletins()
 	{
 		BulletinFolder folderToDiscardFrom = getFolder();
 		if(!isDiscardedFolder(folderToDiscardFrom))
@@ -766,8 +820,19 @@ public class UiBulletinTable extends UiTable implements ListSelectionListener, D
 		strings.add(localization.getFieldLabel("confirmquestion"));
 		String[] contents = new String[strings.size()];
 		strings.toArray(contents);
-		return mainWindow.confirmDlg(mainWindow, title, contents);
+		try
+		{
+			return WorkerThread.displayConfirmDlgAndWaitForResponse(mainWindow, title, contents);
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		return false;
 	}
+	
+
+	
 
 	private String buildFolderNameList(Vector visibleFoldersContainingThisBulletin)
 	{
@@ -801,6 +866,6 @@ public class UiBulletinTable extends UiTable implements ListSelectionListener, D
 	UiMainWindow mainWindow;
 	BulletinTableModel model;
 	private DragSource dragSource = DragSource.getDefaultDragSource();
-	private UiBulletinTableDropAdapter dropAdapter;
+	UiBulletinTableDropAdapter dropAdapter;
 	TableKeyAdapter keyListener;
 }
