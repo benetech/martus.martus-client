@@ -43,8 +43,8 @@ public class TabularReportBuilder extends ReportBuilder
 		rf.setDocumentStartSection(createStartSection());
 		rf.setHeaderSection(createHeaderSection(specs));
 		rf.setDetailSection(createDetailSection(specs));
-		rf.setBreakSection(createBreakSection());
-		rf.setTotalBreakSection(createTotalBreakSection());
+		rf.setBreakSection(createBreakSection(specs));
+		rf.setTotalBreakSection(createTotalBreakSection(specs));
 		rf.setTotalSection(createTotalSection());
 		rf.setDocumentEndSection(createEndSection());
 
@@ -115,9 +115,10 @@ public class TabularReportBuilder extends ReportBuilder
 		return result.toString();
 	}
 	
-	private String createBreakSection()
+	private String createBreakSection(MiniFieldSpec[] specs)
 	{
-		return "<tr><td colspan='999'><em>" +
+		int columnCount = specs.length;
+		return "<tr><td colspan='" + columnCount + "'><em>" +
 				"#foreach( $foo in [0..$BreakLevel] )\n" +
 				INDENT + "\n" +
 				"#end " +
@@ -127,9 +128,10 @@ public class TabularReportBuilder extends ReportBuilder
 				"</em></td></tr>";
 	}
 	
-	private String createTotalBreakSection()
+	private String createTotalBreakSection(MiniFieldSpec[] specs)
 	{
-		return "<tr><td colspan='999'><strong><em>" +
+		int columnCount = specs.length;
+		return "<tr><td colspan='" + columnCount + "'><strong><em>" +
 				getTotalCountString() + " $TotalBulletinCount" +
 				"</em></strong></td></tr>";
 	}
