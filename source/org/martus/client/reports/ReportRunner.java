@@ -101,13 +101,15 @@ public class ReportRunner
 
 			boolean isFirstBulletin = bulletin == 0;
 			boolean isLastBulletin = bulletin == uids.length - 1;
+			boolean isTopOfPage = isFirstBulletin || rf.getBulletinPerPage();
 
-			if(isFirstBulletin || rf.getBulletinPerPage())
+			if(isTopOfPage)
 			{
+				String section = rf.getHeaderSection();
 				ReportOutput headerDestination = destination;
 				if(options.hideDetail)
 					headerDestination = new ReportOutput();
-				performMerge(rf.getHeaderSection(), headerDestination);
+				performMerge(section, headerDestination);
 			}
 
 			breakHandler.doBreak(safeReadableBulletin);
@@ -132,9 +134,11 @@ public class ReportRunner
 			}
 		}
 
-		if(options.printBreaks)
+		boolean needsSummaryTotalSection = options.printBreaks && (rf.getBulletinPerPage() || options.hideDetail);
+		if(needsSummaryTotalSection)
 		{
-			startNewPage(destination);
+			if(rf.getBulletinPerPage())
+				startNewPage(destination);
 			context.put("totals", breakHandler.getSummaryTotals());
 			performMerge(rf.getTotalSection(), destination);
 		}
@@ -192,11 +196,11 @@ public class ReportRunner
 	
 	class SummaryBreakHandler
 	{
-		public SummaryBreakHandler(ReportFormat rf, ReportOutput destination, RunReportOptions options, MiniFieldSpec[] breakSpecsToUse)
+		public SummaryBreakHandler(ReportFormat reportFormatToUse, ReportOutput destination, RunReportOptions options, MiniFieldSpec[] breakSpecsToUse)
 		{
 			output = destination;
 			
-			breakSection = rf.getBreakSection();
+			rf = reportFormatToUse;
 			breakSpecs = breakSpecsToUse;
 			if(!options.printBreaks)
 				breakSpecs = new MiniFieldSpec[0];
@@ -278,7 +282,11 @@ public class ReportRunner
 			context.put("BreakLevel", new Integer(breakLevel));
 			context.put("BreakCount", new Integer(breakCounts[breakLevel]));
 			context.put("BreakFields", breakFields);
-			performMerge(breakSection, output);
+			
+			ReportOutput breakDestination = output;
+			if(rf.getBulletinPerPage())
+				breakDestination = new ReportOutput();
+			performMerge(rf.getBreakSection(), breakDestination);
 		}
 		
 		public void incrementCounts()
@@ -290,7 +298,7 @@ public class ReportRunner
 		}
 		
 		ReportOutput output;
-		String breakSection;
+		ReportFormat rf;
 		MiniFieldSpec[] breakSpecs;
 		int[] breakCounts;
 		String[] previousBreakValues;

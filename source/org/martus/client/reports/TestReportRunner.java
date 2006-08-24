@@ -233,6 +233,7 @@ public class TestReportRunner extends TestCaseEnhanced
 		RunReportOptions options = new RunReportOptions();
 		options.printBreaks = true;
 		options.includePrivate = true;
+		options.hideDetail = true;
 		
 		ReportFormat rf = new ReportFormat();
 		rf.setTotalSection("TOTALS $totals.count()\n" +
@@ -316,7 +317,7 @@ public class TestReportRunner extends TestCaseEnhanced
 		rf.setFakePageBreakSection(". ");
 		
 		ReportOutput sortByAuthorSummaryWithDetail = runReportOnAppData(rf, app, options);
-		assertEquals("Start Header Detail Break Detail Break Break Detail Break Break Footer . Total . End ", sortByAuthorSummaryWithDetail.getPrintableDocument());
+		assertEquals("Start Header Detail Break Detail Break Break Detail Break Break Footer . End ", sortByAuthorSummaryWithDetail.getPrintableDocument());
 		
 		options.hideDetail = true;
 		ReportOutput sortByAuthorSummaryWithoutDetail = runReportOnAppData(rf, app, options);
@@ -326,7 +327,7 @@ public class TestReportRunner extends TestCaseEnhanced
 		rf.setBulletinPerPage(true);
 		options.hideDetail = false;
 		ReportOutput pageWithDetail = runReportOnAppData(rf, app, options);
-		assertEquals("Start Header Detail Footer . Header Break Detail Footer . Header Break Break Detail Break Break Footer . Total . End ", pageWithDetail.getPrintableDocument());
+		assertEquals("Start Header Detail Footer . Header Detail Footer . Header Detail Footer . Total . End ", pageWithDetail.getPrintableDocument());
 
 		options.hideDetail = true;
 		ReportOutput pageWithoutDetail = runReportOnAppData(rf, app, options);
