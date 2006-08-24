@@ -63,7 +63,7 @@ public abstract class WorkerThread extends Thread
 
 	public boolean displayConfirmDlgAndWaitForResponse(UiMainWindow mainWindow, String title, String[] contents) throws InterruptedException, InvocationTargetException
 	{
-		WorkerThread.ThreadedConfirmDlg confirm = new WorkerThread.ThreadedConfirmDlg(mainWindow, title, contents);
+		ThreadedConfirmDlg confirm = new ThreadedConfirmDlg(mainWindow, title, contents);
 		SwingUtilities.invokeAndWait(confirm);
 		return confirm.getResult();
 	}
@@ -95,12 +95,12 @@ public abstract class WorkerThread extends Thread
 
 	public void displayNotifyDlg(UiMainWindow mainWindow, String resultMessageTag)
 	{
-		SwingUtilities.invokeLater(new WorkerThread.ThreadedNotifyDlg(mainWindow, resultMessageTag));
+		SwingUtilities.invokeLater(new ThreadedNotifyDlg(mainWindow, resultMessageTag));
 	}
 
 	public void displayNotifyDlgAndWaitForResponse(UiMainWindow mainWindow, String resultMessageTag) throws InterruptedException, InvocationTargetException
 	{
-		SwingUtilities.invokeAndWait(new WorkerThread.ThreadedNotifyDlg(mainWindow, resultMessageTag));
+		SwingUtilities.invokeAndWait(new ThreadedNotifyDlg(mainWindow, resultMessageTag));
 	}
 
 	private static class ThreadedNotifyDlg implements Runnable
