@@ -99,7 +99,10 @@ public class ReportRunner
 		{
 			SafeReadableBulletin safeReadableBulletin = getCensoredBulletin(db, uids[bulletin], options);
 
-			if(bulletin == 0 || rf.getBulletinPerPage())
+			boolean isFirstBulletin = bulletin == 0;
+			boolean isLastBulletin = bulletin == uids.length - 1;
+
+			if(isFirstBulletin || rf.getBulletinPerPage())
 			{
 				ReportOutput headerDestination = destination;
 				if(options.hideDetail)
@@ -111,10 +114,10 @@ public class ReportRunner
 			doDetail(rf, destination, options, bulletin, safeReadableBulletin);
 			breakHandler.incrementCounts();
 
-			if(bulletin == uids.length - 1)
+			if(isLastBulletin)
 				breakHandler.doFinalBreak();
 			
-			if(bulletin == uids.length - 1 || rf.getBulletinPerPage())
+			if(isLastBulletin || rf.getBulletinPerPage())
 			{
 				ReportOutput footerDestination = destination;
 				if(options.hideDetail)
@@ -123,7 +126,7 @@ public class ReportRunner
 			}
 			
 			if(rf.getBulletinPerPage() && 
-					(bulletin + 1 < uids.length) &&
+					!isLastBulletin &&
 					!destination.isPageEmpty())
 			{
 				destination.startNewPage();
