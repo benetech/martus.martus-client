@@ -44,6 +44,7 @@ public class TabularReportBuilder extends ReportBuilder
 		rf.setHeaderSection(createHeaderSection(specs));
 		rf.setDetailSection(createDetailSection(specs));
 		rf.setBreakSection(createBreakSection());
+		rf.setTotalBreakSection(createTotalBreakSection());
 		rf.setTotalSection(createTotalSection());
 		rf.setDocumentEndSection(createEndSection());
 
@@ -124,6 +125,13 @@ public class TabularReportBuilder extends ReportBuilder
 				"$BreakFields.get($BreakLevel).html($localization) = " +
 				"$BreakCount: " +
 				"</em></td></tr>";
+	}
+	
+	private String createTotalBreakSection()
+	{
+		return "<tr><td colspan='999'><strong><em>" +
+				getTotalCountString() + " $TotalBulletinCount" +
+				"</em></strong></td></tr>";
 	}
 	
 	private String createEndSection()

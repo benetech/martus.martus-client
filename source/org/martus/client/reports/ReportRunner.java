@@ -116,7 +116,7 @@ public class ReportRunner
 			doDetail(rf, destination, options, bulletin, safeReadableBulletin);
 			breakHandler.incrementCounts();
 
-			if(isLastBulletin)
+			if(isLastBulletin && !rf.getBulletinPerPage())
 				breakHandler.doFinalBreak();
 			
 			if(isLastBulletin || rf.getBulletinPerPage())
@@ -247,6 +247,8 @@ public class ReportRunner
 		public void doFinalBreak() throws Exception
 		{
 			doBreak(null);
+			context.put("TotalBulletinCount", new Integer(getSummaryTotals().count()));
+			performMerge(rf.getTotalBreakSection(), output);
 		}
 		
 		public SummaryCount getSummaryTotals()

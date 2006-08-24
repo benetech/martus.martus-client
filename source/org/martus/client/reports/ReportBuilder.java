@@ -36,9 +36,14 @@ public class ReportBuilder
 		localization = localizationToUse;
 	}
 	
+	String getTotalCountString()
+	{
+		return "$localization.getFieldLabel('ReportNumberOfBulletins') ";
+	}
+	
 	protected String createTotalSection()
 	{
-		return "<p>$localization.getFieldLabel('ReportNumberOfBulletins') $totals.count()</p>\n" +
+		return "<p><strong>" + getTotalCountString() + " $totals.count()</strong></p>\n" +
 				"#foreach($summary1 in $totals.children())\n" +
 				"<p>$summary1.label(): $summary1.value() = $summary1.count()</p>\n" +
 				"#foreach($summary2 in $summary1.children())\n" +

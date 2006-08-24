@@ -312,12 +312,13 @@ public class TestReportRunner extends TestCaseEnhanced
 		rf.setBreakSection("Break ");
 		rf.setHeaderSection("Header ");
 		rf.setFooterSection("Footer ");
+		rf.setTotalBreakSection("TotalBreak ");
 		rf.setTotalSection("Total ");
 		rf.setDocumentEndSection("End ");
 		rf.setFakePageBreakSection(". ");
 		
 		ReportOutput sortByAuthorSummaryWithDetail = runReportOnAppData(rf, app, options);
-		assertEquals("Start Header Detail Break Detail Break Break Detail Break Break Footer . End ", sortByAuthorSummaryWithDetail.getPrintableDocument());
+		assertEquals("Start Header Detail Break Detail Break Break Detail Break Break TotalBreak Footer . End ", sortByAuthorSummaryWithDetail.getPrintableDocument());
 		
 		options.hideDetail = true;
 		ReportOutput sortByAuthorSummaryWithoutDetail = runReportOnAppData(rf, app, options);

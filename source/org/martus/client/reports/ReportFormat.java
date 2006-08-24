@@ -42,6 +42,7 @@ public class ReportFormat
 		setBreakSection("");
 		setFooterSection("");
 		setFakePageBreakSection("");
+		setTotalBreakSection("");
 		setTotalSection("");
 		setDocumentEndSection("");
 		specsToInclude = new MiniFieldSpec[0];
@@ -58,6 +59,7 @@ public class ReportFormat
 		setBreakSection(json.optString(TAG_BREAK_SECTION, ""));
 		setFooterSection(json.optString(TAG_FOOTER_SECTION, ""));
 		setFakePageBreakSection(json.optString(TAG_FAKE_PAGE_BREAK_SECTION, ""));
+		setTotalBreakSection(json.optString(TAG_TOTAL_BREAK_SECTION, ""));
 		setTotalSection(json.optString(TAG_TOTAL_SECTION, ""));
 		setDocumentEndSection(json.getString(TAG_END_SECTION));
 		JSONArray specs = json.optJSONArray(TAG_SPECS);
@@ -146,6 +148,16 @@ public class ReportFormat
 		return fakePageBreakSection;
 	}
 	
+	public void setTotalBreakSection(String section)
+	{
+		totalBreakSection = section;
+	}
+	
+	public String getTotalBreakSection()
+	{
+		return totalBreakSection;
+	}
+	
 	public void setTotalSection(String section)
 	{
 		totalSection = section;
@@ -187,6 +199,7 @@ public class ReportFormat
 		json.put(TAG_BREAK_SECTION, getBreakSection());
 		json.put(TAG_FOOTER_SECTION, getFooterSection());
 		json.put(TAG_FAKE_PAGE_BREAK_SECTION, getFakePageBreakSection());
+		json.put(TAG_TOTAL_BREAK_SECTION, getTotalBreakSection());
 		json.put(TAG_TOTAL_SECTION, getTotalSection());
 		json.put(TAG_END_SECTION, getDocumentEndSection());
 		JSONArray specs = new JSONArray();
@@ -205,9 +218,10 @@ public class ReportFormat
 	final static String TAG_DETAIL_SECTION = "DetailSection";
 	final static String TAG_BREAK_SECTION = "BreakSection";
 	final static String TAG_FOOTER_SECTION = "FooterSection";
-	final static String TAG_FAKE_PAGE_BREAK_SECTION = "FakePageBreak";
+	final static String TAG_TOTAL_BREAK_SECTION = "TotalBreakSection";
 	final static String TAG_TOTAL_SECTION = "TotalSection";
 	final static String TAG_END_SECTION = "EndSection";
+	final static String TAG_FAKE_PAGE_BREAK_SECTION = "FakePageBreak";
 	final static String TAG_SPECS = "Specs";
 	
 	public final static int EXPECTED_VERSION = 8;
@@ -219,46 +233,10 @@ public class ReportFormat
 	private String breakSection;
 	private String footerSection;
 	private String fakePageBreakSection;
+	private String totalBreakSection;
 	private String totalSection;
 	private String endSection;
 	private MiniFieldSpec[] specsToInclude;
-	
-	/* 
-	 * tabular to disk or printer:
-	 *  - start <html><table>
-	 *  
-	 *  - header <tr><th></th></tr>
-	 *  - detail, detail, detail, break,
-	 *  - footer (empty)
-	 *  
-	 *  - end </table></html>
-	 *  
-	 * page to disk (multiple bulletins):
-	 *  - start 
-	 *  
-	 *  - header <html><table>
-	 *  - detail, break,
-	 *  - footer </table>
-	 *  
-	 *  - fakePageBreak <hr/>
-	 *  
-	 *  - header <table>
-	 *  - detail, break,
-	 *  - footer </table></html>
-	 *  
-	 *  - end 
-	 * 
-	 * page to printer (for each bulletin):
-	 *  - start 
-	 *  
-	 *  - header <html><table>
-	 *  - detail, break,
-	 *  - footer </table></html>
-	 *  
-	 *  - end 
-	 * 
-	 */
-		
 	
 	private boolean bulletinPerPage;
 }
