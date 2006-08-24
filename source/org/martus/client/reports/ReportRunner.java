@@ -126,17 +126,15 @@ public class ReportRunner
 			}
 			
 			if(rf.getBulletinPerPage() && 
-					!isLastBulletin &&
-					!destination.isPageEmpty())
+					!isLastBulletin)
 			{
-				destination.startNewPage();
+				startNewPage(destination);
 			}
 		}
 
 		if(options.printBreaks)
 		{
-			if(!destination.isPageEmpty())
-				destination.startNewPage();
+			startNewPage(destination);
 			context.put("totals", breakHandler.getSummaryTotals());
 			performMerge(rf.getTotalSection(), destination);
 		}
@@ -145,6 +143,12 @@ public class ReportRunner
 		performMerge(rf.getDocumentEndSection(), documentEnd);
 		destination.setDocumentEnd(documentEnd.toString());
 		context = null;
+	}
+
+	private void startNewPage(ReportOutput destination)
+	{
+		if(!destination.isPageEmpty())
+			destination.startNewPage();
 	}
 
 	private void doDetail(ReportFormat rf, ReportOutput destination, RunReportOptions options, int bulletin, SafeReadableBulletin safeReadableBulletin) throws Exception
