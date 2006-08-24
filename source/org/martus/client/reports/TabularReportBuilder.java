@@ -116,14 +116,14 @@ public class TabularReportBuilder extends ReportBuilder
 	
 	private String createBreakSection()
 	{
-		return "<tr><td colspan='999'>" +
+		return "<tr><td colspan='999'><em>" +
 				"#foreach( $foo in [0..$BreakLevel] )\n" +
 				INDENT + "\n" +
 				"#end " +
 				"$BreakFields.get($BreakLevel).getLocalizedLabel($localization): " +
 				"$BreakFields.get($BreakLevel).html($localization) = " +
 				"$BreakCount: " +
-				"</td></tr>";
+				"</em></td></tr>";
 	}
 	
 	private String createEndSection()
