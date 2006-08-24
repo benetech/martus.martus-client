@@ -441,8 +441,8 @@ public class UiBulletinTable extends UiTable implements ListSelectionListener, D
 					if(files != null)
 						dropAdapter.attemptDropFiles(files, folder);
 					worked = true;
-					WorkerThread.displayNotifyDlgAndWaitForResponse(mainWindow, "OperationCompleted");
-					WorkerThread.displayNotifyDlgAndWaitForResponse(mainWindow, "FilesWillNotBeDeleted");
+					displayNotifyDlgAndWaitForResponse(mainWindow, "OperationCompleted");
+					displayNotifyDlgAndWaitForResponse(mainWindow, "FilesWillNotBeDeleted");
 					//if(confirmDeletionOfFile(file.getPath()))
 						//file.delete();
 				}
@@ -485,7 +485,7 @@ public class UiBulletinTable extends UiTable implements ListSelectionListener, D
 				Toolkit.getDefaultToolkit().beep();
 				try
 				{
-					WorkerThread.displayNotifyDlgAndWaitForResponse(mainWindow,resultMessageTag);
+					displayNotifyDlgAndWaitForResponse(mainWindow,resultMessageTag);
 				}
 				catch(Exception e)
 				{
