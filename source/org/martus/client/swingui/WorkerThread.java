@@ -93,6 +93,11 @@ public abstract class WorkerThread extends Thread
 		String[] contents;
 	}
 
+	public static void displayNotifyDlg(UiMainWindow mainWindow, String resultMessageTag)
+	{
+		SwingUtilities.invokeLater(new WorkerThread.ThreadedNotifyDlg(mainWindow, resultMessageTag));
+	}
+
 	public static void displayNotifyDlgAndWaitForResponse(UiMainWindow mainWindow, String resultMessageTag) throws InterruptedException, InvocationTargetException
 	{
 		SwingUtilities.invokeAndWait(new WorkerThread.ThreadedNotifyDlg(mainWindow, resultMessageTag));

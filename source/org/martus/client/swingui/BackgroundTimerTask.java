@@ -110,7 +110,7 @@ class BackgroundTimerTask extends TimerTask
 			progressMeter.setStatusMessage(UiMainWindow.STATUS_RETRIEVING);
 			doRetrieving();
 			if(!retriever.hasWorkToDo())
-				SwingUtilities.invokeLater(new ThreadedNotifyDlg("RetrieveCompleted"));
+				doNotifyDlgAndSetStatusMessageReady("RetrieveCompleted");
 			
 			return;
 		}
@@ -128,7 +128,7 @@ class BackgroundTimerTask extends TimerTask
 		catch (Exception e)
 		{
 			String tag = "RetrieveError";
-			SwingUtilities.invokeLater(new ThreadedNotifyDlg(tag));
+			doNotifyDlgAndSetStatusMessageReady(tag);
 			e.printStackTrace();
 		}
 		mainWindow.folderContentsHaveChanged(folder);
@@ -453,22 +453,12 @@ class BackgroundTimerTask extends TimerTask
 		HashMap tokenReplacement;
 	}
 	
-	class ThreadedNotifyDlg implements Runnable
+	void doNotifyDlgAndSetStatusMessageReady(String tagToUse)
 	{
-		public ThreadedNotifyDlg(String tagToUse)
-		{
-			tag = tagToUse;
-		}
-		
-		public void run()
-		{
-			mainWindow.notifyDlg(mainWindow, tag);
-			mainWindow.setStatusMessageReady();
-		}
-		
-		String tag;
+		WorkerThread.displayNotifyDlg(mainWindow, tagToUse);
+		mainWindow.setStatusMessageReady();
 	}
-		
+	
 	MartusApp getApp()
 	{
 		return mainWindow.getApp();
