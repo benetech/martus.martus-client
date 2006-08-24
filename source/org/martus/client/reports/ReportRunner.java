@@ -95,13 +95,14 @@ public class ReportRunner
 		performMerge(rf.getDocumentStartSection(), documentStart);
 		destination.setDocumentStart(documentStart.toString());
 
+		boolean isOneBulletinPerPage = rf.getBulletinPerPage();
 		for(int bulletin = 0; bulletin < uids.length; ++bulletin)
 		{
 			SafeReadableBulletin safeReadableBulletin = getCensoredBulletin(db, uids[bulletin], options);
 
 			boolean isFirstBulletin = bulletin == 0;
 			boolean isLastBulletin = bulletin == uids.length - 1;
-			boolean isTopOfPage = isFirstBulletin || rf.getBulletinPerPage();
+			boolean isTopOfPage = isFirstBulletin || isOneBulletinPerPage;
 
 			if(isTopOfPage)
 			{
@@ -116,10 +117,10 @@ public class ReportRunner
 			doDetail(rf, destination, options, bulletin, safeReadableBulletin);
 			breakHandler.incrementCounts();
 
-			if(isLastBulletin && !rf.getBulletinPerPage())
+			if(isLastBulletin && !isOneBulletinPerPage)
 				breakHandler.doFinalBreak();
 			
-			if(isLastBulletin || rf.getBulletinPerPage())
+			if(isLastBulletin || isOneBulletinPerPage)
 			{
 				ReportOutput footerDestination = destination;
 				if(options.hideDetail)
@@ -127,17 +128,17 @@ public class ReportRunner
 				performMerge(rf.getFooterSection(), footerDestination);
 			}
 			
-			if(rf.getBulletinPerPage() && 
+			if(isOneBulletinPerPage && 
 					!isLastBulletin)
 			{
 				startNewPage(destination);
 			}
 		}
 
-		boolean needsSummaryTotalSection = options.printBreaks && (rf.getBulletinPerPage() || options.hideDetail);
+		boolean needsSummaryTotalSection = options.printBreaks && (isOneBulletinPerPage || options.hideDetail);
 		if(needsSummaryTotalSection)
 		{
-			if(rf.getBulletinPerPage())
+			if(isOneBulletinPerPage)
 				startNewPage(destination);
 			context.put("totals", breakHandler.getSummaryTotals());
 			performMerge(rf.getTotalSection(), destination);
