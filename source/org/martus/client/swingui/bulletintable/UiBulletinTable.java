@@ -695,6 +695,108 @@ public class UiBulletinTable extends UiTable implements ListSelectionListener, D
 			if(okToDiscard)
 				discardAllSelectedBulletins();			
 		}
+
+		boolean confirmDiscardSingleBulletin(Bulletin b)
+		{
+			BulletinFolder folderToDiscardFrom = getFolder();
+			if(!isDiscardedFolder(folderToDiscardFrom))
+				return true;
+
+			MartusApp app = mainWindow.getApp();
+			BulletinFolder draftOutBox = app.getFolderDraftOutbox();
+			BulletinFolder sealedOutBox = app.getFolderSealedOutbox();
+
+			Vector visibleFoldersContainingThisBulletin = app.findBulletinInAllVisibleFolders(b);
+			visibleFoldersContainingThisBulletin.remove(folderToDiscardFrom);
+
+
+			String tagUnsent = null;
+			String tagInOtherFolders = null;
+			if(visibleFoldersContainingThisBulletin.size() > 0)
+			{
+				tagInOtherFolders = "warningDeleteSingleBulletinWithCopies";
+			}
+			else
+			{
+				if(draftOutBox.contains(b) || sealedOutBox.contains(b))
+					tagUnsent = "warningDeleteSingleUnsentBulletin";
+			}
+			
+			String tagMain = "warningDeleteSingleBulletin";
+
+			return confirmDeleteBulletins(tagMain, tagUnsent, tagInOtherFolders, visibleFoldersContainingThisBulletin);
+		}
+
+		boolean confirmDiscardMultipleBulletins()
+		{
+			BulletinFolder folderToDiscardFrom = getFolder();
+			if(!isDiscardedFolder(folderToDiscardFrom))
+				return true;
+
+			MartusApp app = mainWindow.getApp();
+
+			BulletinFolder draftOutBox = app.getFolderDraftOutbox();
+			BulletinFolder sealedOutBox = app.getFolderSealedOutbox();
+
+			boolean aBulletinIsUnsent = false;
+			Vector visibleFoldersContainingAnyBulletin = new Vector();
+			UniversalId[] bulletinIds = getSelectedBulletinUids();
+			for (int i = 0; i < bulletinIds.length; i++)
+			{
+				UniversalId uid = bulletinIds[i];
+				Vector visibleFoldersContainingThisBulletin = app.findBulletinInAllVisibleFolders(uid);
+				visibleFoldersContainingThisBulletin.remove(folderToDiscardFrom);
+				addUniqueEntriesOnly(visibleFoldersContainingAnyBulletin, visibleFoldersContainingThisBulletin);
+				
+				if(draftOutBox.contains(uid) || sealedOutBox.contains(uid))
+					aBulletinIsUnsent = true;
+			}
+
+			String tagUnsent = null;
+			if(aBulletinIsUnsent)
+				tagUnsent = "warningDeleteMultipleUnsentBulletins";
+
+			String tagInOtherFolders = null;
+			if(visibleFoldersContainingAnyBulletin.size() > 0)
+				tagInOtherFolders = "warningDeleteMultipleBulletinsWithCopies";
+			
+			String tagMain = "warningDeleteMultipleBulletins";
+
+			return confirmDeleteBulletins(tagMain, tagUnsent, tagInOtherFolders, visibleFoldersContainingAnyBulletin);
+		}
+
+		private boolean confirmDeleteBulletins(String tagMain, String tagUnsent, String tagInOtherFolders, Vector foldersToList)
+		{
+			UiLocalization localization = mainWindow.getLocalization();
+			String title = localization.getWindowTitle(tagMain);
+
+			Vector strings = new Vector();
+			strings.add(localization.getFieldLabel(tagMain));
+			strings.add("");
+			if(tagUnsent != null)
+			{
+				strings.add(localization.getFieldLabel(tagUnsent));
+				strings.add("");
+			}
+			if(tagInOtherFolders != null)
+			{
+				strings.add(localization.getFieldLabel(tagInOtherFolders));
+				strings.add(buildFolderNameList(foldersToList));
+				strings.add("");
+			}
+			strings.add(localization.getFieldLabel("confirmquestion"));
+			String[] contents = new String[strings.size()];
+			strings.toArray(contents);
+			try
+			{
+				return displayConfirmDlgAndWaitForResponse(mainWindow, title, contents);
+			}
+			catch(Exception e)
+			{
+				e.printStackTrace();
+			}
+			return false;
+		}
 	}
 
 	
@@ -719,76 +821,7 @@ public class UiBulletinTable extends UiTable implements ListSelectionListener, D
 		mainWindow.selectNewCurrentBulletin(getSelectedRow());
 	}
 
-	boolean confirmDiscardSingleBulletin(Bulletin b)
-	{
-		BulletinFolder folderToDiscardFrom = getFolder();
-		if(!isDiscardedFolder(folderToDiscardFrom))
-			return true;
-
-		MartusApp app = mainWindow.getApp();
-		BulletinFolder draftOutBox = app.getFolderDraftOutbox();
-		BulletinFolder sealedOutBox = app.getFolderSealedOutbox();
-
-		Vector visibleFoldersContainingThisBulletin = app.findBulletinInAllVisibleFolders(b);
-		visibleFoldersContainingThisBulletin.remove(folderToDiscardFrom);
-
-
-		String tagUnsent = null;
-		String tagInOtherFolders = null;
-		if(visibleFoldersContainingThisBulletin.size() > 0)
-		{
-			tagInOtherFolders = "warningDeleteSingleBulletinWithCopies";
-		}
-		else
-		{
-			if(draftOutBox.contains(b) || sealedOutBox.contains(b))
-				tagUnsent = "warningDeleteSingleUnsentBulletin";
-		}
-		
-		String tagMain = "warningDeleteSingleBulletin";
-
-		return confirmDeleteBulletins(tagMain, tagUnsent, tagInOtherFolders, visibleFoldersContainingThisBulletin);
-	}
-
-	boolean confirmDiscardMultipleBulletins()
-	{
-		BulletinFolder folderToDiscardFrom = getFolder();
-		if(!isDiscardedFolder(folderToDiscardFrom))
-			return true;
-
-		MartusApp app = mainWindow.getApp();
-
-		BulletinFolder draftOutBox = app.getFolderDraftOutbox();
-		BulletinFolder sealedOutBox = app.getFolderSealedOutbox();
-
-		boolean aBulletinIsUnsent = false;
-		Vector visibleFoldersContainingAnyBulletin = new Vector();
-		UniversalId[] bulletinIds = getSelectedBulletinUids();
-		for (int i = 0; i < bulletinIds.length; i++)
-		{
-			UniversalId uid = bulletinIds[i];
-			Vector visibleFoldersContainingThisBulletin = app.findBulletinInAllVisibleFolders(uid);
-			visibleFoldersContainingThisBulletin.remove(folderToDiscardFrom);
-			addUniqueEntriesOnly(visibleFoldersContainingAnyBulletin, visibleFoldersContainingThisBulletin);
-			
-			if(draftOutBox.contains(uid) || sealedOutBox.contains(uid))
-				aBulletinIsUnsent = true;
-		}
-
-		String tagUnsent = null;
-		if(aBulletinIsUnsent)
-			tagUnsent = "warningDeleteMultipleUnsentBulletins";
-
-		String tagInOtherFolders = null;
-		if(visibleFoldersContainingAnyBulletin.size() > 0)
-			tagInOtherFolders = "warningDeleteMultipleBulletinsWithCopies";
-		
-		String tagMain = "warningDeleteMultipleBulletins";
-
-		return confirmDeleteBulletins(tagMain, tagUnsent, tagInOtherFolders, visibleFoldersContainingAnyBulletin);
-	}
-
-	private void addUniqueEntriesOnly(Vector to, Vector from)
+	void addUniqueEntriesOnly(Vector to, Vector from)
 	{
 		for(int i = 0 ; i < from.size(); ++i)
 		{
@@ -798,50 +831,10 @@ public class UiBulletinTable extends UiTable implements ListSelectionListener, D
 		}
 	}
 
-	private boolean confirmDeleteBulletins(String tagMain, String tagUnsent, String tagInOtherFolders, Vector foldersToList)
-	{
-		UiLocalization localization = mainWindow.getLocalization();
-		String title = localization.getWindowTitle(tagMain);
-
-		Vector strings = new Vector();
-		strings.add(localization.getFieldLabel(tagMain));
-		strings.add("");
-		if(tagUnsent != null)
-		{
-			strings.add(localization.getFieldLabel(tagUnsent));
-			strings.add("");
-		}
-		if(tagInOtherFolders != null)
-		{
-			strings.add(localization.getFieldLabel(tagInOtherFolders));
-			strings.add(buildFolderNameList(foldersToList));
-			strings.add("");
-		}
-		strings.add(localization.getFieldLabel("confirmquestion"));
-		String[] contents = new String[strings.size()];
-		strings.toArray(contents);
-		
-		try
-		{
-			return new ConfirmThreaded().displayConfirmDlgAndWaitForResponse(mainWindow, title, contents);
-		}
-		catch(Exception e)
-		{
-			e.printStackTrace();
-		}
-		return false;
-	}
 	
-	class ConfirmThreaded extends WorkerThread
-	{
-		public void doTheWorkWithNO_SWING_CALLS() throws Exception
-		{
-		}
-	}
-
 	
 
-	private String buildFolderNameList(Vector visibleFoldersContainingThisBulletin)
+	String buildFolderNameList(Vector visibleFoldersContainingThisBulletin)
 	{
 		UiLocalization localization = mainWindow.getLocalization();
 		String names = "";
@@ -854,7 +847,7 @@ public class UiBulletinTable extends UiTable implements ListSelectionListener, D
 		return names;
 	}
 
-	private boolean isDiscardedFolder(BulletinFolder f)
+	boolean isDiscardedFolder(BulletinFolder f)
 	{
 		return f.equals(f.getStore().getFolderDiscarded());
 	}
