@@ -820,9 +820,10 @@ public class UiBulletinTable extends UiTable implements ListSelectionListener, D
 		strings.add(localization.getFieldLabel("confirmquestion"));
 		String[] contents = new String[strings.size()];
 		strings.toArray(contents);
+		
 		try
 		{
-			return WorkerThread.displayConfirmDlgAndWaitForResponse(mainWindow, title, contents);
+			return new ConfirmThreaded().displayConfirmDlgAndWaitForResponse(mainWindow, title, contents);
 		}
 		catch(Exception e)
 		{
@@ -831,6 +832,12 @@ public class UiBulletinTable extends UiTable implements ListSelectionListener, D
 		return false;
 	}
 	
+	class ConfirmThreaded extends WorkerThread
+	{
+		public void doTheWorkWithNO_SWING_CALLS() throws Exception
+		{
+		}
+	}
 
 	
 

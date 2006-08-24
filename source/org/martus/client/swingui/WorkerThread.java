@@ -61,7 +61,7 @@ public abstract class WorkerThread extends Thread
 		dlg.workerFinished();
 	}
 
-	public static boolean displayConfirmDlgAndWaitForResponse(UiMainWindow mainWindow, String title, String[] contents) throws InterruptedException, InvocationTargetException
+	public boolean displayConfirmDlgAndWaitForResponse(UiMainWindow mainWindow, String title, String[] contents) throws InterruptedException, InvocationTargetException
 	{
 		WorkerThread.ThreadedConfirmDlg confirm = new WorkerThread.ThreadedConfirmDlg(mainWindow, title, contents);
 		SwingUtilities.invokeAndWait(confirm);
