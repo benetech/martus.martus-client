@@ -310,7 +310,17 @@ public class ReportRunner
 	
 	public void performMerge(String template, Writer result) throws Exception
 	{
-		engine.evaluate(context, result, "Martus", template);
+		try
+		{
+			engine.evaluate(context, result, "Martus", template);
+		}
+		catch(Exception e)
+		{
+			System.out.println("-----TEMPLATE-----");
+			System.out.println(template);
+			System.out.println("------------------");
+			throw(e);
+		}
 	}
 	
 	public class BreakFields extends Vector

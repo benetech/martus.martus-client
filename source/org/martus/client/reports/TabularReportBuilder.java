@@ -55,15 +55,15 @@ public class TabularReportBuilder extends ReportBuilder
 	{
 		StringBuffer startBuffer = new StringBuffer();
 		startBuffer.append("<html>");
-		startBuffer.append("<meta http-equiv='Content-Type' content='text/html;charset=UTF-8'>");
+		startBuffer.append("<meta http-equiv='Content-Type' content='text/html;charset=UTF-8'>\n");
 		return startBuffer.toString();
 	}
 
 	private String createHeaderSection(MiniFieldSpec[] specs)
 	{
 		StringBuffer headerBuffer = new StringBuffer();
-		headerBuffer.append("<table border='3' cellpadding='5' cellspacing='0'>");
-		headerBuffer.append("<tr>");
+		headerBuffer.append("<table border='3' cellpadding='5' cellspacing='0'>\n");
+		headerBuffer.append("<tr>\n");
 		for(int i = 0; i < specs.length; ++i)
 		{
 			headerBuffer.append("<th>");
@@ -72,14 +72,14 @@ public class TabularReportBuilder extends ReportBuilder
 			headerBuffer.append(label);
 			headerBuffer.append("</th>");
 		}
-		headerBuffer.append("</tr>");
+		headerBuffer.append("</tr>\n");
 		return headerBuffer.toString();
 	}
 
 	private String createDetailSection(MiniFieldSpec[] specs)
 	{
 		StringBuffer detailBuffer = new StringBuffer();
-		detailBuffer.append("<tr>");
+		detailBuffer.append("<tr>\n");
 		for(int i = 0; i < specs.length; ++i)
 		{
 			detailBuffer.append("<td>");
@@ -87,7 +87,7 @@ public class TabularReportBuilder extends ReportBuilder
 			detailBuffer.append(".html($localization)");
 			detailBuffer.append("</td>");
 		}
-		detailBuffer.append("</tr>");
+		detailBuffer.append("</tr>\n");
 		return detailBuffer.toString();
 	}
 
@@ -125,7 +125,7 @@ public class TabularReportBuilder extends ReportBuilder
 				"$BreakFields.get($BreakLevel).getLocalizedLabel($localization): " +
 				"$BreakFields.get($BreakLevel).html($localization) = " +
 				"$BreakCount: " +
-				"</em></td></tr>";
+				"</em></td></tr>\n";
 	}
 	
 	private String createTotalBreakSection(MiniFieldSpec[] specs)
@@ -133,13 +133,13 @@ public class TabularReportBuilder extends ReportBuilder
 		int columnCount = specs.length;
 		return "<tr><td colspan='" + columnCount + "'><strong><em>" +
 				getTotalCountString() + " $TotalBulletinCount" +
-				"</em></strong></td></tr>";
+				"</em></strong></td></tr>\n";
 	}
 	
 	private String createEndSection()
 	{
 		StringBuffer endBuffer = new StringBuffer();
-		endBuffer.append("</table></html>");
+		endBuffer.append("</table></html>\n");
 		return endBuffer.toString();
 	}
 }

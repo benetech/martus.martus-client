@@ -55,7 +55,7 @@ public class PageReportBuilder extends ReportBuilder
 	{
 		StringBuffer result = new StringBuffer();
 		result.append("<html>");
-		result.append("<meta http-equiv='Content-Type' content='text/html;charset=UTF-8'>");
+		result.append("<meta http-equiv='Content-Type' content='text/html;charset=UTF-8'>\n");
 		return result.toString();
 	}
 
