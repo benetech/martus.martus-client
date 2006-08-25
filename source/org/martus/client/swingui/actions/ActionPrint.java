@@ -28,10 +28,13 @@ package org.martus.client.swingui.actions;
 
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
+import java.awt.print.PrinterJob;
 import java.io.File;
 import java.io.IOException;
 import java.util.Vector;
+
 import javax.swing.JComponent;
+
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.dialogs.UiPrintBulletinDlg;
 import org.martus.common.bulletin.Bulletin;
@@ -41,6 +44,7 @@ import org.martus.swing.PrintPage;
 import org.martus.swing.PrintUtilities;
 import org.martus.swing.UiFileChooser;
 import org.martus.util.UnicodeWriter;
+import org.martus.util.language.LanguageOptions;
 
 public class ActionPrint extends UiMenuAction
 {
@@ -187,12 +191,23 @@ public class ActionPrint extends UiMenuAction
 	public static void setReasonableSize(JComponent view)
 	{
 		Dimension preferredSize = view.getPreferredSize();
+		adjustMinPreferredSizeForRtoL(preferredSize);
 		// NOTE: you have to set the size of the component first before printing
 		// JAVA Bug: We need to also pad the width to prevent clipping this bug was finally fixed in Java 1.5.0-Beta-b32c
 		//			 http://bugs.sun.com/bugdatabase/view_bug.do?bug_id=4352983
 		int fivePercentPadding = (int)(preferredSize.width * 0.05);
 		preferredSize.width += fivePercentPadding;
 		view.setSize(preferredSize);
+	}
+
+	private static void adjustMinPreferredSizeForRtoL(Dimension preferredSize)
+	{
+		if(!LanguageOptions.isRightToLeftLanguage())
+			return;
+		//TODO: Pass in the real PageFormat so we know the actual ImageWidth
+		double printableImageWdith = PrinterJob.getPrinterJob().defaultPage().getImageableWidth();
+		if(preferredSize.width < printableImageWdith)
+			preferredSize.width = (int)printableImageWdith;
 	}
 
 	private String getBulletinHtml(Bulletin bulletin, boolean includePrivateData, int width)
