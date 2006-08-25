@@ -28,6 +28,7 @@ package org.martus.client.reports;
 import org.martus.common.MiniLocalization;
 import org.martus.common.bulletin.BulletinHtmlGenerator;
 import org.martus.common.fieldspec.MiniFieldSpec;
+import org.martus.util.language.LanguageOptions;
 
 public class PageReportBuilder extends ReportBuilder
 {
@@ -88,12 +89,23 @@ public class PageReportBuilder extends ReportBuilder
 	
 	public String getFieldRow()
 	{
+		String leftData = "$field.getLocalizedLabel($localization)\n";
+		String rightData = "$field.html($localization)\n";
+		String align = "left";
+		if(LanguageOptions.isRightToLeftLanguage())
+		{
+			String tmp = leftData;
+			leftData = rightData;
+			rightData = tmp;
+			align = "right";
+		}
+		
 		return "#if($specsToInclude.contains($field.getMiniSpec()))\n" +
-				"<tr><td align='right' valign='top'>" +
-				"$field.getLocalizedLabel($localization)\n" +
+				"<tr><td align='"+align+"' valign='top'>" +
+				leftData +
 				"</td>" +
 				"<td valign='top'>" +
-				"$field.html($localization)\n" +
+				rightData +
 				"</td></tr>\n" +
 				"#end\n";
 	}
