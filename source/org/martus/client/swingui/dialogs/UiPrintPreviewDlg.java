@@ -29,17 +29,19 @@ import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
 import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JDialog;
-import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
+
 import org.martus.client.reports.ReportOutput;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.actions.ActionPrint;
 import org.martus.clientside.UiLocalization;
 import org.martus.swing.UiButton;
+import org.martus.swing.UiScrollPane;
 import org.martus.swing.Utilities;
 
 public class UiPrintPreviewDlg extends JDialog implements ActionListener
@@ -65,7 +67,7 @@ public class UiPrintPreviewDlg extends JDialog implements ActionListener
 		cancel.addActionListener(this);	
 		
 		JComponent previewText = ActionPrint.getHtmlViewableComponent(output.getPrintableDocument());
-		JComponent scrollablePreview = new JScrollPane(previewText);
+		JComponent scrollablePreview = new UiScrollPane(previewText);
 		scrollablePreview.setBorder(new EmptyBorder(5,5,5,5));
 		Box buttons = Box.createHorizontalBox();
 		Utilities.addComponentsRespectingOrientation(buttons, new Component[] {Box.createHorizontalGlue(), printToPrinter, printToFile, cancel});
