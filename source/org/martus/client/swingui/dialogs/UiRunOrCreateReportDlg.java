@@ -28,12 +28,10 @@ package org.martus.client.swingui.dialogs;
 import java.awt.Container;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
-import javax.swing.Box;
 import javax.swing.JDialog;
-
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.swing.UiButton;
+import org.martus.swing.UiVBox;
 import org.martus.swing.Utilities;
 
 public class UiRunOrCreateReportDlg extends JDialog implements ActionListener
@@ -44,7 +42,7 @@ public class UiRunOrCreateReportDlg extends JDialog implements ActionListener
 		setModal(true);
 		setTitle(mainWindow.getLocalization().getWindowTitle("RunOrCreateReport"));
 		Container panel = getContentPane();
-		Box buttonBox = Box.createVerticalBox();
+		UiVBox buttonBox = new UiVBox();
 		for(int i = 0; i < buttonLabels.length; ++i)
 		{
 			UiButton button = new UiButton(buttonLabels[i]);

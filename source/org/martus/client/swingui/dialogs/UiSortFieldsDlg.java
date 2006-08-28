@@ -45,6 +45,7 @@ import org.martus.common.fieldspec.MiniFieldSpec;
 import org.martus.common.fieldspec.PopUpTreeFieldSpec;
 import org.martus.swing.UiButton;
 import org.martus.swing.UiComboBox;
+import org.martus.swing.UiVBox;
 import org.martus.swing.UiWrappedTextArea;
 import org.martus.swing.Utilities;
 
@@ -70,7 +71,7 @@ public class UiSortFieldsDlg extends JDialog implements ActionListener
 		
 		contentPane.add(new UiWrappedTextArea(text), BorderLayout.BEFORE_FIRST_LINE);
 
-		Box multiSortBox = Box.createVerticalBox();
+		UiVBox multiSortBox = new UiVBox();
 		
 		sortChooser = new UiPopUpTreeEditor[MAX_SORT_LEVELS];
 		for(int i = 0; i < sortChooser.length; ++i)

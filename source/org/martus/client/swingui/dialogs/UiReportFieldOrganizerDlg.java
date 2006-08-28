@@ -42,6 +42,7 @@ import org.martus.client.swingui.UiMainWindow;
 import org.martus.common.fieldspec.FieldSpec;
 import org.martus.swing.UiButton;
 import org.martus.swing.UiScrollPane;
+import org.martus.swing.UiVBox;
 import org.martus.swing.UiWrappedTextPanel;
 import org.martus.swing.Utilities;
 
@@ -69,7 +70,7 @@ public class UiReportFieldOrganizerDlg extends UIReportFieldDlg
 		downButton = new UiButton(localization.getButtonLabel("MoveFieldDownInReport"));
 		downButton.addActionListener(new DownButtonHandler());
 
-		Box sideButtonBar = Box.createVerticalBox();
+		UiVBox sideButtonBar = new UiVBox();
 		sideButtonBar.add(addButton);
 		sideButtonBar.add(removeButton);
 		sideButtonBar.add(upButton);
