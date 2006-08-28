@@ -181,7 +181,7 @@ public class TestReportRunner extends TestCaseEnhanced
 		ReportFormat rf = new ReportFormat();
 		String breakSection = "$BreakLevel had $BreakCount\n" +
 				"#foreach($x in [0..$BreakLevel])\n" +
-				"$BreakFields.get($x).getLocalizedLabel($localization): " +
+				"$BreakFields.get($x).getLocalizedLabelHtml($localization): " +
 				"$BreakFields.get($x).html($localization) " +
 				"#end\n\n";
 		rf.setBreakSection(breakSection);
@@ -192,8 +192,8 @@ public class TestReportRunner extends TestCaseEnhanced
 		options.printBreaks = true;
 		
 		MiniLocalization localization = new MiniLocalization();
-		String authorLabel = localization.getFieldLabel(Bulletin.TAGAUTHOR);
-		String summaryLabel = localization.getFieldLabel(Bulletin.TAGSUMMARY);
+		String authorLabel = localization.getFieldLabelHtml(Bulletin.TAGAUTHOR);
+		String summaryLabel = localization.getFieldLabelHtml(Bulletin.TAGSUMMARY);
 		
 		
 		ReportOutput sortByAuthorSummary = runReportOnAppData(rf, app, options);
@@ -208,7 +208,7 @@ public class TestReportRunner extends TestCaseEnhanced
 			new MiniFieldSpec(StandardFieldSpecs.findStandardFieldSpec(Bulletin.TAGENTRYDATE)),
 		};
 		
-		String entryDateLabel = localization.getFieldLabel(Bulletin.TAGENTRYDATE);
+		String entryDateLabel = localization.getFieldLabelHtml(Bulletin.TAGENTRYDATE);
 		String formattedDate = localization.convertStoredDateToDisplay(sampleDate);
 		ReportOutput sortedByEntryDate = runReportOnAppData(rf, app, options, entryDateSorting);
 		assertEquals("0 had 3\n" + entryDateLabel + ": " + formattedDate + " \n", sortedByEntryDate.getPageText(0));
@@ -248,8 +248,8 @@ public class TestReportRunner extends TestCaseEnhanced
 				"#end\n");
 		
 		MiniLocalization localization = new MiniLocalization();
-		String authorLabel = localization.getFieldLabel(Bulletin.TAGAUTHOR);
-		String summaryLabel = localization.getFieldLabel(Bulletin.TAGSUMMARY);
+		String authorLabel = localization.getFieldLabelHtml(Bulletin.TAGAUTHOR);
+		String summaryLabel = localization.getFieldLabelHtml(Bulletin.TAGSUMMARY);
 		ReportOutput totals = runReportOnAppData(rf, app, options);
 		assertEquals("TOTALS 3\n" + 
 				"1. " + authorLabel + ": a = 2\n" +

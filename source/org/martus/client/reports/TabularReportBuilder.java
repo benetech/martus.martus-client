@@ -68,7 +68,7 @@ public class TabularReportBuilder extends ReportBuilder
 		{
 			headerBuffer.append("<th>");
 			MiniFieldSpec spec = specs[i];
-			String label = StandardFieldSpecs.getLocalizedLabel(spec.getTag(), spec.getLabel(), localization);
+			String label = StandardFieldSpecs.getLocalizedLabelHtml(spec.getTag(), spec.getLabel(), localization);
 			headerBuffer.append(label);
 			headerBuffer.append("</th>");
 		}
@@ -122,9 +122,9 @@ public class TabularReportBuilder extends ReportBuilder
 				"#foreach( $foo in [0..$BreakLevel] )\n" +
 				INDENT + "\n" +
 				"#end " +
-				"$BreakFields.get($BreakLevel).getLocalizedLabel($localization): " +
+				"$BreakFields.get($BreakLevel).getLocalizedLabelHtml($localization): " +
 				"$BreakFields.get($BreakLevel).html($localization) = " +
-				"$BreakCount: " +
+				"$BreakCount" +
 				"</em></td></tr>\n";
 	}
 	

@@ -89,7 +89,7 @@ public class PageReportBuilder extends ReportBuilder
 	
 	public String getFieldRow()
 	{
-		String leftData = "$field.getLocalizedLabel($localization)\n";
+		String leftData = "$field.getLocalizedLabelHtml($localization)\n";
 		String rightData = "$field.html($localization)\n";
 		String align = "left";
 		if(LanguageOptions.isRightToLeftLanguage())

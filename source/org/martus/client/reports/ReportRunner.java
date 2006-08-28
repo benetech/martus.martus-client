@@ -215,7 +215,7 @@ public class ReportRunner
 			for(int i = 0; i < breakSpecsToUse.length; ++i)
 			{
 				MiniFieldSpec spec = breakSpecsToUse[i];
-				breakLabels.add(StandardFieldSpecs.getLocalizedLabel(spec.getTag(), spec.getLabel(), localization));
+				breakLabels.add(StandardFieldSpecs.getLocalizedLabelHtml(spec.getTag(), spec.getLabel(), localization));
 			}
 			summaryCounts = new SummaryCount(breakLabels);
 		}

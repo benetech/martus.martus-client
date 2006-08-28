@@ -38,7 +38,7 @@ public class ReportBuilder
 	
 	String getTotalCountString()
 	{
-		return "$localization.getFieldLabel('ReportNumberOfBulletins') ";
+		return "$localization.getFieldLabelHtml('ReportNumberOfBulletins') ";
 	}
 	
 	protected String createTotalSection()
@@ -46,13 +46,13 @@ public class ReportBuilder
 		return "<p><strong>" + getTotalCountString() + " $totals.count()</strong></p>\n" +
 				"#foreach($summary1 in $totals.children())\n" +
 				"<p>$summary1.label(): $summary1.value() = $summary1.count()</p>\n" +
-				"#foreach($summary2 in $summary1.children())\n" +
-				"<p>" + INDENT + "$summary2.label(): $summary2.value() = $summary2.count()\n" +
-				"</p>#foreach($summary3 in $summary2.children())\n" +
-				"<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$summary3.label(): $summary3.value() = $summary3.count()</p>\n" +
-				"#end\n" +
-				"<p></p>\n" +
-				"#end\n" +
+					"#foreach($summary2 in $summary1.children())\n" +
+					"<p>" + INDENT + "$summary2.label(): $summary2.value() = $summary2.count()\n" +
+						"</p>#foreach($summary3 in $summary2.children())\n" +
+							"<p>"+ INDENT + INDENT + "$summary3.label(): $summary3.value() = $summary3.count()</p>\n" +
+						"#end\n" +
+					"<p></p>\n" +
+					"#end\n" +
 				"<p></p>\n" +
 				"#end\n";
 	}
