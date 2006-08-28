@@ -32,6 +32,7 @@ import org.martus.common.fieldspec.FieldTypeDateRange;
 import org.martus.common.fieldspec.FieldTypeNormal;
 import org.martus.common.fieldspec.MiniFieldSpec;
 import org.martus.util.TestCaseEnhanced;
+import org.martus.util.language.LanguageOptions;
 
 public class TestTabularReportBuilder extends TestCaseEnhanced
 {
@@ -49,6 +50,7 @@ public class TestTabularReportBuilder extends TestCaseEnhanced
 		};
 		TabularReportBuilder builder = new TabularReportBuilder(new MiniLocalization());
 		ReportFormat rf = builder.createTabular(specs);
+		
 		
 		String startSection = rf.getDocumentStartSection();
 		assertStartsWith("<html>", startSection);
@@ -72,6 +74,11 @@ public class TestTabularReportBuilder extends TestCaseEnhanced
 		
 		String endSection = rf.getDocumentEndSection();
 		assertContains("</html>", endSection);
+
+		LanguageOptions.setDirectionRightToLeft();
+		ReportFormat rf2 = builder.createTabular(specs);
+		assertNotEquals("Didn't swap column Headers?", rf.getHeaderSection(), rf2.getHeaderSection());
+		LanguageOptions.setDirectionLeftToRight();
 	}
 	
 	public void testSubFields() throws Exception

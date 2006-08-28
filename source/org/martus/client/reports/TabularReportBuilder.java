@@ -65,7 +65,17 @@ public class TabularReportBuilder extends ReportBuilder
 		StringBuffer headerBuffer = new StringBuffer();
 		headerBuffer.append("<table border='3' cellpadding='5' cellspacing='0'>\n");
 		headerBuffer.append("<tr>\n");
-		for(int i = 0; i < specs.length; ++i)
+
+		int start = 0;
+		int end = specs.length;
+		int increment = 1;
+		if(LanguageOptions.isRightToLeftLanguage())
+		{
+			start = specs.length -1;
+			end = -1;
+			increment = -1;
+		}
+		for(int i = start; i !=  end; i += increment)
 		{
 			headerBuffer.append("<th>");
 			MiniFieldSpec spec = specs[i];
@@ -90,7 +100,16 @@ public class TabularReportBuilder extends ReportBuilder
 	{
 		StringBuffer detailBuffer = new StringBuffer();
 		detailBuffer.append("<tr>\n");
-		for(int i = 0; i < specs.length; ++i)
+		int start = 0;
+		int end = specs.length;
+		int increment = 1;
+		if(LanguageOptions.isRightToLeftLanguage())
+		{
+			start = specs.length -1;
+			end = -1;
+			increment = -1;
+		}
+		for(int i = start; i !=  end; i += increment)
 		{
 			detailBuffer.append(getColumnStart());
 			detailBuffer.append(getFieldCall(specs[i]));
