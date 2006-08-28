@@ -26,6 +26,7 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.reports;
 
 import org.martus.common.MiniLocalization;
+import org.martus.util.language.LanguageOptions;
 
 public class ReportBuilder
 {
@@ -38,23 +39,49 @@ public class ReportBuilder
 	
 	String getTotalCountString()
 	{
-		return "$localization.getFieldLabelHtml('ReportNumberOfBulletins') ";
+		return "$localization.getFieldLabelHtml('ReportNumberOfBulletins')";
 	}
 	
+	protected String getTableRowStart(int columnCount)
+	{
+		String align = "left";
+		if(LanguageOptions.isRightToLeftLanguage())
+			align = "right";
+		return "<tr><td align='"+align+"'" + "colspan='" + columnCount + "'><em>";
+	}
+	
+	protected String getTableRowEnd()
+	{
+		return "</em></td></tr>\n";
+	}
+
 	protected String createTotalSection()
 	{
-		return "<p><strong>" + getTotalCountString() + " $totals.count()</strong></p>\n" +
+		String totalSection = "<table>" +
+				getTableRowStart(1)+ "<strong>" + getTotalCountString() + " $totals.count()</strong>" + getTableRowEnd() +
 				"#foreach($summary1 in $totals.children())\n" +
-				"<p>$summary1.label(): $summary1.value() = $summary1.count()</p>\n" +
-					"#foreach($summary2 in $summary1.children())\n" +
-					"<p>" + INDENT + "$summary2.label(): $summary2.value() = $summary2.count()\n" +
-						"</p>#foreach($summary3 in $summary2.children())\n" +
-							"<p>"+ INDENT + INDENT + "$summary3.label(): $summary3.value() = $summary3.count()</p>\n" +
-						"#end\n" +
-					"<p></p>\n" +
-					"#end\n" +
-				"<p></p>\n" +
-				"#end\n";
+				getTableRowStart(1) + getSumaryTotal("1") + getTableRowEnd() +
+				"#foreach($summary2 in $summary1.children())\n" +
+				getTableRowStart(1) + INDENT + getSumaryTotal("2")+ INDENT + getTableRowEnd() +
+				"#foreach($summary3 in $summary2.children())\n" +
+				getTableRowStart(1) + INDENT + INDENT + getSumaryTotal("3")+ INDENT + INDENT + getTableRowEnd() +
+				"#end\n" +
+				"#end\n" +
+				"#end\n</table>";
+		
+		return totalSection;
+	}
+	
+	private String getSumaryTotal(String summaryNumber)
+	{
+		String sumaryId = "$summary" + summaryNumber;
+		String label = ".label()";
+		String value = ".value()";
+		String count = ".count()";
+		String item1 = sumaryId + label + ": ";
+		String item2 = sumaryId + value + " = ";
+		String item3 = sumaryId + count;
+		return item1+item2+item3;
 	}
 
 	MiniLocalization localization;

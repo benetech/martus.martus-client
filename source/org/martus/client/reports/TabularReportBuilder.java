@@ -29,6 +29,7 @@ import org.martus.client.core.SafeReadableBulletin;
 import org.martus.common.MiniLocalization;
 import org.martus.common.fieldspec.MiniFieldSpec;
 import org.martus.common.fieldspec.StandardFieldSpecs;
+import org.martus.util.language.LanguageOptions;
 
 public class TabularReportBuilder extends ReportBuilder
 {
@@ -76,13 +77,22 @@ public class TabularReportBuilder extends ReportBuilder
 		return headerBuffer.toString();
 	}
 
+	private String getColumnStart()
+	{
+		String align = "left";
+		if(LanguageOptions.isRightToLeftLanguage())
+			align = "right";
+		return "<td align='"+align+"'>";
+	}
+
+	
 	private String createDetailSection(MiniFieldSpec[] specs)
 	{
 		StringBuffer detailBuffer = new StringBuffer();
 		detailBuffer.append("<tr>\n");
 		for(int i = 0; i < specs.length; ++i)
 		{
-			detailBuffer.append("<td>");
+			detailBuffer.append(getColumnStart());
 			detailBuffer.append(getFieldCall(specs[i]));
 			detailBuffer.append(".html($localization)");
 			detailBuffer.append("</td>");
@@ -118,22 +128,32 @@ public class TabularReportBuilder extends ReportBuilder
 	private String createBreakSection(MiniFieldSpec[] specs)
 	{
 		int columnCount = specs.length;
-		return "<tr><td colspan='" + columnCount + "'><em>" +
-				"#foreach( $foo in [0..$BreakLevel] )\n" +
+		StringBuffer breakSection = new StringBuffer();
+		breakSection.append(getTableRowStart(columnCount));
+		breakSection.append(getIndent());
+		breakSection.append("$BreakFields.get($BreakLevel).getLocalizedLabelHtml($localization): ");
+		breakSection.append("$BreakFields.get($BreakLevel).html($localization) = ");
+		breakSection.append("$BreakCount");
+		breakSection.append(getIndent());
+		breakSection.append(getTableRowEnd());
+		
+		return breakSection.toString();
+	}
+
+	
+	private String getIndent()
+	{
+		return "#foreach( $foo in [0..$BreakLevel] )\n" +
 				INDENT + "\n" +
-				"#end " +
-				"$BreakFields.get($BreakLevel).getLocalizedLabelHtml($localization): " +
-				"$BreakFields.get($BreakLevel).html($localization) = " +
-				"$BreakCount" +
-				"</em></td></tr>\n";
+				"#end ";
 	}
 	
 	private String createTotalBreakSection(MiniFieldSpec[] specs)
 	{
 		int columnCount = specs.length;
-		return "<tr><td colspan='" + columnCount + "'><strong><em>" +
-				getTotalCountString() + " $TotalBulletinCount" +
-				"</em></strong></td></tr>\n";
+		return getTableRowStart(columnCount) +
+				"<strong>"+getTotalCountString() + " $TotalBulletinCount</strong>" +
+			   getTableRowEnd();
 	}
 	
 	private String createEndSection()

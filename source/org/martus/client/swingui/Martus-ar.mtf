@@ -1,10 +1,10 @@
 ﻿# Martus Client Translation File
 # Language code:  ar
 # Language name:  Arabic
-# Translated by:  MID Foundation; Localize; Mounaim Elkhezzani
-# Exported date:  Wed Mar 15 11:20:44 PST 2006
-# Client version: pre-2.9 internal
-# Client build:   20060314.1712
+# Translated by:  
+# Exported date:  Fri Aug 25 14:46:06 PDT 2006
+# Client version: pre 3.0 internal
+# Client build:   20060825.1756
 #
 # This file MUST be saved in UTF-8 format!
 # Lines beginning with # are comments and are ignored by Martus
@@ -69,10 +69,29 @@
 #      a particular value.
 #      For Example. #TotalNumberOfFilesInBackup# = '5'
 #                   #Titles# = 'A list of bulletin titles'
-# 12.  If you want your language to appear left to right,
+# 12.  Do not translate the numbers in the field:translationVersion string.
+# 13.  Do not translate the numbers in the field:ErrorCustomFields string.
+# 14.  For Thai and Persian months, please do the following:
+#          - for a Thai translation, Thai months should be the same as the translation
+#            of regular months, and Persian dates are the same as in English.
+#          - for a Persian translation, both Thai and Persian months
+#            should be the same as the translation of regular months
+#          - for an Arabic translation, Thai months should be the same as
+#            the translation of regular months, but do an Arabic translation
+#            (or transliteration) of Persian dates (not the same as in English).
+#          - for all other languages, Thai and Persian dates can be the same
+#            as the translation of regular months
+# 15       - We have file filters like 'Martus Report Format (.mrf)'
+#            and 'Martus Search Specification (.mss)'.
+#            The descriptive names should be translated, but the (.mrf) and (.mss)
+#            must not be translated.
+# 16.  If you want your language to appear left to right,
 #      Comment the next line (by adding a # in front of !right-to-left)
 !right-to-left
 #
+
+#____________________________=Add
+-61cc-button:AddFieldToReport=<Add>
 
 #________________________=Show all bulletins on this server and on this computer.
 -e9a2-button:AllSummaries=عرض جميع النشرات على هذا الجهاز وعلى الخادم
@@ -98,6 +117,12 @@
 #____________________=Continue
 -2e02-button:Continue=استمرار
 
+#____________________________=Create New Page Report
+-1d7a-button:CreatePageReport=<Create New Page Report>
+
+#_______________________________=Create New Tabular Report
+-34ee-button:CreateTabularReport=<Create New Tabular Report>
+
 #__________________=Delete
 -f6fd-button:Delete=حذف 
 
@@ -110,6 +135,15 @@
 #_________________________________=Show bulletins that are only on the server.
 -b795-button:DownloadableSummaries=عرض النشرات الموجودة على الخادم فقط
 
+#______________________=Field Label
+-6492-button:FieldLabel=عنوان الحقل
+
+#____________________=Tag
+-9829-button:FieldTag=رمز
+
+#_____________________=Type
+-3deb-button:FieldType=نوع
+
 #___________________________=Down
 -bf93-button:FolderOrderDown=أسفل
 
@@ -117,13 +151,28 @@
 -2038-button:FolderOrderUp=أعلى
 
 #______________________________=Insert Row
--9f53-button:InsertEmptyGridRow=ادرج صف
+-9f53-button:InsertEmptyGridRow=أدرج صف
 
 #_________________=Leave
 -7e35-button:Leave=ترك
 
+#______________________=Load Previous Search...
+-75f7-button:LoadSearch=<Load Previous Search...>
+
+#______________________________=Load
+-ddcb-button:LoadSearchOkButton=<Load>
+
+#_________________________________=Move Down
+-4158-button:MoveFieldDownInReport=<Move Down>
+
+#_______________________________=Move Up
+-c637-button:MoveFieldUpInReport=<Move Up>
+
 #_________________________=New Account
 -1d19-button:NewAccountTab=حساب جديد 
+
+#___________________________=Choose Field...
+-288f-button:PopUpTreeChoose=اختر مجالا...
 
 #___________________=Preview
 -f1fb-button:Preview=عرض 
@@ -134,11 +183,20 @@
 #_________________________________=Include private information
 -6c53-button:PrintPublicAndPrivate=تضمين المعلومات الخاصة
 
-#_______________________=Send report output to a file
--89b9-button:PrintToDisk=إرسال التقرير إلى ملف على القرص
+#_______________________=Send report to a file
+-b154-button:PrintToDisk=إرسال التقرير إلى ملف
 
-#__________________________=Print to a printer
--7bac-button:PrintToPrinter=إرسال إلى الطابعة
+#_______________________=Print To File
+-a5d9-button:PrintToFile=<Print To File>
+
+#__________________________=Print To Printer
+-319b-button:PrintToPrinter=<إرسال إلى الطابعة>
+
+#________________________________=Both Public and Private Data
+-8685-button:PublicAndPrivateData=<Both Public and Private Data>
+
+#______________________=Public Data Only
+-4baa-button:PublicOnly=<Public Data Only>
 
 #__________________________________=Restore account from backup key file
 -f447-button:RecoverAccountByBackup=استعادة حساب بملف شفرتي دخول احتياطي 
@@ -149,6 +207,9 @@
 #_____________________________=Restore Account
 -d7da-button:RecoverAccountTab=استعادة حساب 
 
+#_________________________________=Remove
+-e963-button:RemoveFieldFromReport=<Remove>
+
 #_________________________=Reset Contents
 -6f62-button:ResetContents=حذف المحتويات 
 
@@ -158,8 +219,17 @@
 #______________________________________________=Retrieve latest bulletin version only
 -3449-button:RetrieveLatestBulletinRevisionOnly=استرجاع آخر نشرة فقط
 
+#_____________________=Use Existing Report Format
+-b052-button:RunReport=استخدم شكل التقرير القائم
+
+#______________________=Save This Search...
+-e372-button:SaveSearch=<Save This Search...>
+
 #____________________________________=Only search most recent version of bulletins
 -852f-button:SearchFinalBulletinsOnly=البحث عن أحدث إصدار للنشرات فقط
+
+#________________________=Select
+-8598-button:SelectReport=اختر
 
 #__________________________________=Accept
 -bb54-button:ServerComplianceAccept=قبول 
@@ -269,8 +339,8 @@
 #______________=OK
 -9ce3-button:ok=موافق 
 
-#_________________=Print/Report
--5fdf-button:print=طباعة/نشرة
+#_________________=Print
+-5b22-button:print=طباعة 
 
 #____________________________=Remove Attachment
 -6f6d-button:removeattachment=إزالة مرفق
@@ -319,6 +389,18 @@
 
 #_________________________=Author (required)
 -4a0b-field:AuthorRequired=الكاتب (ضروري)
+
+#_____________________________=Preparing Report...
+-7651-field:BackgroundPrinting=<جاري الطبع>
+
+#______________________________=Searching...
+-ba2b-field:BackgroundSearching=جاري البحث...
+
+#____________________________=Sorting Bulletins...
+-5a5a-field:BackgroundSorting=فرز النشرات...
+
+#____________________________=Working...
+-049a-field:BackgroundWorking=<Working...>
 
 #___________________________________=Your key is required to read your private bulletin information or to create new bulletins.  To ensure that you'll always have access to your data, it is extremely important to keep a backup of your key.\n\nMartus offers two methods for backing up your key, either of which may be used, but we strongly recommend using both backup methods.  The first method creates a single, password encrypted key back up file onto removable media (e.g. floppy disk, cd, USB storage) or a network drive; the second method backs up the key in #TotalNumberOfFilesInBackup# separate pieces (not encrypted with your password) onto multiple floppy disks (or other removable media).\n
 -ff3d-field:BackupKeyPairGeneralInfo=شفرتك ضرورية لقراءة معلومات نشرتك الخاصة أو لإنشاء نشرة جديدة. لضمان الوصول لبياناتك بشكل مستمر، من المهم جدا أن تحتفظ بنسخة احتياطية من شفرتك. \n\nMartusيوفر طريقتين للاحتفاظ بنسخة احتياطية من ملف شفرة دخولك، ويمكن استخدام أي منها ولكننا نوصي بشدة باستخدام كليهما.  تعتمد الطريقة الأولى على إنشاء نسخة احتياطية واحدة من ملف شفرة دخولك يتم تشفيرها بكلمة مرور ويتم تخزينها على وسائط تخزين متنقلة (مثل الأقراص المرنة والأقراص المضغوطة أو أجهزة UBS للتخزين) أو على قرص الشبكة. أما الطريقة الثانية فهي طريقة التجزيء السري وتعتمد على حفظ نسخة احتياطية من ملف شفرة دخولك  في #TotalNumberOfFilesInBackup#  في أجزاء مختلفة (غير مشفرة بكلمة مرورك) على أقراص مرنة متعددة (أو وسائل تخزين أخرى محمولة).  
@@ -383,6 +465,9 @@
 #_____________________=Bulletin Id:
 -a081-field:BulletinId=هوية النشرة: 
 
+#______________________________=Bulletin Import Files
+-1106-field:BulletinImportFiles=ملفات النشرة المستوردة
+
 #____________________________=Last Saved
 -eb05-field:BulletinLastSaved=الحفظ الأخير
 
@@ -415,6 +500,9 @@
 
 #_____________________________=Thai Solar (2548-05-31)
 -2be4-field:CalendarSystemThai=(2548-05-31) تايلاندي شمسي 
+
+#_____________________________=Use Ctrl-Click or Shift-Click to select the fields (columns) that will appear in this report. 
+-e4a8-field:ChooseReportFields=<Use Ctrl-Click or Shift-Click to select the fields (columns) that will appear in this report. >
 
 #_____________________________________=Download Progress
 -8b0e-field:ChunkProgressStatusMessage=جاري التحميل
@@ -450,10 +538,16 @@
 -4ccc-field:CreateCustomFieldsHelp2=بالنسبة للحقول المخصصة (غير النمطية) قم أولا باختيار نوع  الحقل الذي تريده. تتمثل الاختيارات المتوفرة في'BOOLEAN'   (ضروري أو) و 'DATE' (التاريخ) و 'DATERANGE' (المدى التاريخي) و 'DROPDOWN' (قائمة منسدلة) و 'GRID' (شبكة) و 'LANGUAGE' (اللغة) و 'MESSAGE' (رسالة) و 'MULTILINE' (أسطر متعددة) و 'STRING (تسلسل حرفي). \n\n ستحتاج إلى رمز هوية فريد لكل حقل مخصص. قد يكون هذا الرمز أي كلمة باستثناء تلك الكلمات المستخدمة من قبل النظام (مثال: 'author' (مؤلف) و 'summary' (تلخيص) و 'location' (الموضع) و 'title' (عنوان) إلخ.) ولا يمكن أن تحتوي على أحرف فراغ أو على أحرف خاصة. من بين الخيارات (’اسمالضحية’) أو (’خيارلونالعينين’) إلخ. \n\nثم ستحتاج إلى اسم يتم عرضه بجانب حقلك الجديد مثل (’اسم الشاهد الأول’). \n\nملاحظات إضافية\n1. تكون الوثائق في صيغة XML حساسة لنوع الحروف اللاتينية المستخدمة (كلمة 'Witness' مختلفة عن كلمة 'witness' ) \n2. تكون علامات الاقتباس مفردة أو مزدوجة طالما كانتا متشابهتان (مثال: كلمة 'STRING" بهذه الصيغة غير صحيحة، يجب أن تكون 'STRING' أو "STRING" )\n3. يتم عرض الإثبات أو النفي في صيغة مربع اختيار عند التحرير وفي صيغة نعم/لا عند الاستعراض أو الطباعة. \n4. استخدم حقول "MESSAGE" (رسالة) لإعطاء التعليمات عن طريقة إدخال البيانات ولإنشاء تعليقات/ملاحظات يتم عرضها في كل نشرة. \n\nراجع المثال أدناه:\n\n   
 
 #__________________________________=\n<Field type='DROPDOWN'>\n<Tag>BulletinSource</Tag>\n<Label>Source of bulletin information</Label>\n<Choices>\n<Choice>Media/Press</Choice>\n<Choice>Legal Report</Choice>\n<Choice>Personal Interview</Choice>\n<Choice>Other</Choice>\n</Choices>\n</Field>\n\n<Field type='STRING'>\n<Tag>SpecifyOther</Tag>\n<Label>If "Other", please specify:</Label>\n</Field>\n\n<Field type='STRING'>\n<Tag>IntervieweeName</Tag>\n<Label>Interviewee Name</Label>\n</Field>\n\n<Field type='LANGUAGE'>\n<Tag>IntervieweeLanguage</Tag>\n<Label>Interviewee Speaks</Label>\n</Field>\n\n<Field type='DATERANGE'>\n<Tag>InterviewDates</Tag>\n<Label>Date(s) of interview(s)</Label>\n</Field>\n\n<Field type='BOOLEAN'>\n<Tag>Anonymous</Tag>\n<Label>Does interviewee wish to remain anonymous?</Label>\n</Field>\n\n<Field type='GRID'>\n<Tag>VictimInformationGrid</Tag>\n<Label>Victim Information</Label>\n<GridSpecDetails>\n<Column type='STRING'><Tag></Tag><Label>First Name</Label></Column>\n<Column type='STRING'><Tag></Tag><Label>Last Name</Label></Column>\n<Column type='BOOLEAN'><Tag></Tag><Label>Is Identified?</Label></Column>\n<Column type='DATE'><Tag></Tag><Label>Date of Birth</Label></Column>\n<Column type='DROPDOWN'><Tag></Tag><Label>Sex</Label>\n<Choices>\n<Choice>Male</Choice>\n<Choice>Female</Choice>\n<Choice>Unknown</Choice>\n</Choices></Column>\n<Column type='STRING'><Tag></Tag><Label>Ethnicity</Label></Column>\n</GridSpecDetails>\n</Field>\n\n<Field type='MESSAGE'>\n<Tag>MessageProfession</Tag>\n<Label>Profession History Table Note</Label>\n<Message>If you have information about a person who has had different professions over time, enter multiple rows with the same First and Last Names and show the date ranges for each profession on a separate row.</Message>\n</Field>\n\n<Field type='GRID'>\n<Tag>ProfessionHistoryGrid</Tag>\n<Label>Profession History</Label>\n<GridSpecDetails>\n<Column type='STRING'><Tag></Tag><Label>First Name</Label></Column>\n<Column type='STRING'><Tag></Tag><Label>Last Name</Label></Column>\n<Column type='STRING'><Tag></Tag><Label>Profession</Label></Column>\n<Column type='DATERANGE'><Tag></Tag><Label>Dates of Profession</Label></Column>\n</GridSpecDetails>\n</Field>\n
--4d55-field:CreateCustomFieldsHelp3=\n<Field type='DROPDOWN'>\n<Tag>مصدرالنشرة</Tag>\n<Label>مصدر معلومات النشرة</Label>\n<Choices>\n<Choice>وسائل الإعلام/صحف</Choice>\n<Choice>تقرير قانوني</Choice>\n<Choice>لقاء شخصي</Choice>\n<Choice>غير ذلك</Choice>\n</Choices>\n</Field>\n\n<Field type='STRING'>\n<Tag>غيرذلك</Tag>\n<Label>إذا كان "غير ذلك" الرجاء أن تذكر بوضوح:</Label>\n</Field>\n\n<Field type='STRING'>\n<Tag>اسمالمتحدث</Tag>\n<Label>اسم المتحدث</Label>\n</Field>\n\n<Field type='LANGUAGE'>\n<Tag>لغةالمتحدث</Tag>\n<Label>لغة المتحدث</Label>\n</Field>\n\n<Field type='DATERANGE'>\n<Tag>تواريخاللقاءات</Tag>\n<Label>تاريخ (تواريخ) اللقاء (اللقاءات)</Label>\n</Field>\n\n<Field type='BOOLEAN'>\n<Tag>مجهولا</Tag>\n<Label>هل يريد المتحدث أن يبقى مجهول الهوية؟</Label>\n</Field>\n\n<Field type='GRID'>\n<Tag>جدولبياناتالضحية</Tag>\n<Label>معلومات الضحية</Label>\n<GridSpecDetails>\n<Column type='STRING'><Tag></Tag><Label>الاسم</Label></Column>\n<Column type='STRING'><Tag></Tag><Label>اللقب العائلي</Label></Column>\n<Column type='BOOLEAN'><Tag></Tag><Label>هل معروف؟</Label></Column>\n<Column type='DATE'><Tag></Tag><Label>تاريخ الولادة</Label></Column>\n<Column type='DROPDOWN'><Tag></Tag><Label>الجنس</Label>\n<Choices>\n<Choice>ذكر</Choice>\n<Choice>أنثى</Choice>\n<Choice>غير معروف</Choice>\n</Choices></Column>\n<Column type='STRING'><Tag></Tag><Label>العرق</Label></Column>\n</GridSpecDetails>\n</Field>\n\n<Field type='MESSAGE'>\n<Tag>مهنةالرسالة</Tag>\n<Label>جدول التجربة العملية </Label>\n<Message> إذا كانت لديك معلومات حول شخص شغل وظائف مختلفة، أدخل صفوفا متعددة باستخدام نفس الاسم واللقب العائلي وأدخل المدى التاريخي لكل وظيفة في صف مختلف.</Message>\n</Field>\n\n<Field type='GRID'>\n<Tag>جدولالتجربةالعملية</Tag>\n<Label>التجربة العملية</Label>\n<GridSpecDetails>\n<Column type='STRING'><Tag></Tag><Label>الاسم </Label></Column>\n<Column type='STRING'><Tag></Tag><Label>اللقب العائلي</Label></Column>\n<Column type='STRING'><Tag></Tag><Label>المهنة</Label></Column>\n<Column type='DATERANGE'><Tag></Tag><Label>تواريخ الوظائف</Label></Column>\n</GridSpecDetails>\n</Field>\n
+-4d55-field:CreateCustomFieldsHelp3=\n<Field type='DROPDOWN'>\n<Tag>مصدر النشرة</Tag>\n<Label>مصدر معلومات النشرة</Label>\n<Choices>\n<Choice>وسائل الإعلام/صحف</Choice>\n<Choice>تقرير قانوني</Choice>\n<Choice>لقاء شخصي</Choice>\n<Choice>غير ذلك</Choice>\n</Choices>\n</Field>\n\n<Field type='STRING'>\n<Tag>غير ذلك</Tag>\n<Label>إذا كان "غير ذلك" الرجاء أن تذكر بوضوح:</Label>\n</Field>\n\n<Field type='STRING'>\n<Tag>اسم المتحدث</Tag>\n<Label>اسم المتحدث</Label>\n</Field>\n\n<Field type='LANGUAGE'>\n<Tag>لغةالمتحدث</Tag>\n<Label>لغة المتحدث</Label>\n</Field>\n\n<Field type='DATERANGE'>\n<Tag>تواريخ اللقاءات</Tag>\n<Label>تاريخ (تواريخ) اللقاء (اللقاءات)</Label>\n</Field>\n\n<Field type='BOOLEAN'>\n<Tag>مجهولا</Tag>\n<Label>هل يريد المتحدث أن يبقى مجهول الهوية؟</Label>\n</Field>\n\n<Field type='GRID'>\n<Tag>جدول بيانات الضحية</Tag>\n<Label>معلومات الضحية</Label>\n<GridSpecDetails>\n<Column type='STRING'><Tag></Tag><Label>الاسم</Label></Column>\n<Column type='STRING'><Tag></Tag><Label>اللقب العائلي</Label></Column>\n<Column type='BOOLEAN'><Tag></Tag><Label>هل معروف؟</Label></Column>\n<Column type='DATE'><Tag></Tag><Label>تاريخ الولادة</Label></Column>\n<Column type='DROPDOWN'><Tag></Tag><Label>الجنس</Label>\n<Choices>\n<Choice>ذكر</Choice>\n<Choice>أنثى</Choice>\n<Choice>غير معروف</Choice>\n</Choices></Column>\n<Column type='STRING'><Tag></Tag><Label>العرق</Label></Column>\n</GridSpecDetails>\n</Field>\n\n<Field type='MESSAGE'>\n<Tag>مهنةالرسالة</Tag>\n<Label>جدول التجربة العملية </Label>\n<Message> إذا كانت لديك معلومات حول شخص شغل وظائف مختلفة، أدخل صفوفا متعددة باستخدام نفس الاسم واللقب العائلي وأدخل المدى التاريخي لكل وظيفة في صف مختلف.</Message>\n</Field>\n\n<Field type='GRID'>\n<Tag>جدول التجربةالعملية</Tag>\n<Label>التجربة العملية</Label>\n<GridSpecDetails>\n<Column type='STRING'><Tag></Tag><Label>الاسم </Label></Column>\n<Column type='STRING'><Tag></Tag><Label>اللقب العائلي</Label></Column>\n<Column type='STRING'><Tag></Tag><Label>المهنة</Label></Column>\n<Column type='DATERANGE'><Tag></Tag><Label>تواريخ الوظائف</Label></Column>\n</GridSpecDetails>\n</Field>\n
 
 #____________________________________=Please enter your new username and password.
 -aec2-field:CreateNewUserNamePassword=الرجاء القيام بإدخال اسم المستخدم وكلمة المرور 
+
+#_________________________________=Bottom/Private Section of Bulletin
+-cf48-field:CustomXMLBottomSection=الجزء الأسفل/الخاص من النشرة
+
+#______________________________=Top Section of Bulletin
+-cff1-field:CustomXMLTopSection=الجزء الأعلى من النشرة
 
 #_____________________________________=Customization Template Files
 -9210-field:CustomizationTemplateFiles=ملفات قوالب التحوير
@@ -463,18 +557,18 @@
 
 #____________________________=Dash (00-00-00)
 -997c-field:DateDelimiterDash=(00-00-00)عارضة 
-# AB2006-03-15:  I assume that the example in parentheses should switch to be on the other side of the translation of "Dash".
 
 #___________________________=Dot (00.00.00)
 -66ea-field:DateDelimiterDot= (00.00.00)نقطة 
-# AB2006-03-15:  Same instructions as above.
 
 #_____________________________=Slash (00/00/00)
 -404d-field:DateDelimiterSlash=(00/00/00)خط مائل
-# AB2006-03-15:  Same instructions as above.
 
 #____________________=Exact Date
 -8a81-field:DateExact=التاريخ الفعلي
+
+#___________________________=Unknown
+-bc78-field:DateNotSpecified=مجهول
 
 #______________________=Day
 -987b-field:DatePartDay=اليوم
@@ -518,6 +612,15 @@
 #______________________=Do not prompt
 -448d-field:DonotPrompt=لا تنبيه
 
+#__________________________=Labels
+-2228-field:DuplicateLabels=عناوين
+
+#__________________________________________=The following labels appear more than once in your template.
+-3f09-field:DuplicateLabelsInCustomTemplate=الأسماء التالية تظهر أكثر من مرة في القالب. 
+
+#__________________________________________________=Do you want to save this template with the duplicate labels?
+-79bc-field:DuplicateLabelsInCustomTemplateContinue=هل تريد أن تحفظ هذا القالب بأسماء مكررة؟
+
 #________________________________=Unable to back up the key file on this disk.
 -bda3-field:ErrorBackingupKeyPair=فشل النسخ الاحتياطي لملف شفرتي الدخول على هذا القرص. 
 
@@ -533,8 +636,9 @@
 #__________________________________=LABEL
 -64b8-field:ErrorCustomFieldHeader4=عنوان
 
-#____________________________=There is an error in the custom field definitions. Each problem is identified with the following codes:\n   100 - Required standard field is missing\n   101 - Custom field does not have a correct tag.\n   102 - A previous Tag already exists with this name.\n   103 - Custom field does not have a label.\n   104 - Unrecognized Field Type.\n   105 - A label was found in a standard field.\n   106 - XML Parse Error.\n   107 - Tag contains illegal characters.\n   108 - Duplicate entry in Dropdown field.\n   109 - No Choices in Dropdown field.\n   200 - All fields empty.\n   201 - Unrecognized Headquarters created this template.\n   202 - Security validation error.\n   203 - File Error.\n   204 - Imported XML Missing Field.
--0b96-field:ErrorCustomFields=هناك خطأ في تعريفات الحقل المخصص. يتم تعريف كل خطأ من خلال الرموز التالية:\n 100 – حقل نمطي ضروري مفقود\n 101 – الحقل المخصص لا يتضمن الرمز الصحيح.\n 102 – يوجد رمز بنفس الاسم. \n 103 – لا يتضمن الحقل المخصص على تسمية. \n 104 – نوع حقل غير معروف.\n 105 – توجد تسمية في حقل نمطي.\n 106 – خطأ تجزئة XML.\n 107 - يحتوي الرمز على أحرف ممنوعة.\n 108 – إدخال مزدوج في حقل منسدل.\n 109 – لا يوجد خيار في حقل منسدل.\n 200 – جميع الحقول فارغة.\n 201 – مركز رئيسي غير معروف قام بإنشاء هذا القالب.\n 202 – خطأ تصحيح أمني.\n 203 – خطأ ملف.\n 204 – مجال XML  المستورد ناقص.
+#____________________________=There is an error in the custom field definitions. Each problem is identified with the following codes:\n   100 - Required standard field is missing\n   101 - Custom field does not have a correct tag.\n   102 - A previous Tag already exists with this name.\n   103 - Custom field does not have a label.\n   104 - Unrecognized Field Type.\n   105 - A label was found in a standard field.\n   106 - XML Parse Error.\n   107 - Tag contains illegal characters.\n   108 - Duplicate entry in Dropdown field.\n   109 - No Choices in Dropdown field.\n   110 - System/Standard field tag cannot be used for custom field.\n   111 - Standard Public field cannot be placed in bottom/Private section.\n   112 - Standard Private field cannot be placed in the top section.\n   200 - All fields empty.\n   201 - Unrecognized Headquarters created this template.\n   202 - Security validation error.\n   203 - File Error.\n   204 - Imported XML Missing Field.
+-71f2-field:ErrorCustomFields=<هناك خطأ في تعريفات الحقل المخصص. يتم تعريف كل خطأ من خلال الرموز التالية:\n 100 – حقل نمطي ضروري مفقود\n 101 – الحقل المخصص لا يتضمن الرمز الصحيح.\n 102 – يوجد رمز بنفس الاسم. \n 103 – لا يتضمن الحقل المخصص على تسمية. \n 104 – نوع حقل غير معروف.\n 105 – توجد تسمية في حقل نمطي.\n 106 – خطأ تجزئة XML.\n 107 - يحتوي الرمز على أحرف ممنوعة.\n 108 – إدخال مزدوج في حقل منسدل.\n 109 – لا يوجد خيار في حقل منسدل.\n 200 – جميع الحقول فارغة.\n 201 – مركز رئيسي غير معروف قام بإنشاء هذا القالب.\n 202 – خطأ تصحيح أمني.\n 203 – خطأ ملف.\n 204 – مجال XML  المستورد ناقص.>
+#[VT 2006-08-25: We added 110-112 to the English version. Please update the Arabic to match the English. Thanks.]
 
 #_________________________________________=A previous backup file exists.  You must save each file on its own removable media disk.
 -db93-field:ErrorPreviousBackupShareExists=يوجد ملف مجزأ سابق. يجب عليك حفظ كل ملف على قرص بمفرده. 
@@ -551,11 +655,18 @@
 #___________________________=Exit when complete
 -30e3-field:ExitWhenComplete=اخرج بعد الانتهاء 
 
-#________________________________=Information from the selected bulletins (listed below) will be exported to an XML file that you specify.\n\nPlease Note: This is a one way operation, you will not be able to import the XML file saved back into Martus.  This operation exists so you can bring Martus Bulletins into another application that does import XML files.
--7ae7-field:ExportBulletinDetails=سيتم تصدير المعلومات الموجودة في النشرات المُختارة (المصنفة أسفله) إلى ملف XML تقوم بتحديده. \n\nرجاء ملاحظة: هذه عملية ذات مسار واحد، أي أنه لن يمكنك استيراد ملف XML مرة أخرى إلى Martus. تتوافر هذه العملية حتى يمكنك جلب نشرات Martus إلى تطبيق آخر يدعم استيراد ملفات XML.
+#____________________________=Include attachments in export
+-1a48-field:ExportAttachments=تضمين مرفقات للتصدير
+
+#________________________________=Information from the selected bulletins (listed below) will be exported to an XML file that you specify.  These files can then be used to import the Martus bulletin information into another application.\n\n  You could also use this XML file to import these bulletins back into Martus (as new unique bulletins) if desired.  Please email help@martus.org if you need assistance with this type of importing.
+-a8c0-field:ExportBulletinDetails=<سيتم تصدير المعلومات الموجودة في النشرات المُختارة (المصنفة أسفله) إلى ملف XML تقوم بتحديده. \n\nرجاء ملاحظة: هذه عملية ذات مسار واحد، أي أنه لن يمكنك استيراد ملف XML مرة أخرى إلى Martus. تتوافر هذه العملية حتى يمكنك جلب نشرات Martus إلى تطبيق آخر يدعم استيراد ملفات XML.>
+#[VT 2006-08-25: The English version has been updated. Please update the Arabic to match the English. I'm not sure if it's been updated, as the < > are still around the Arabic, and I don't see help@martus.org in the Arabic translation. Thanks.]
 
 #____________________________=Include private data in export
 -4bb6-field:ExportPrivateData=تضمين بيانات خاصة في التصدير
+
+#_________________________=Exporting
+-c373-field:ExportProgress=التصدير
 
 #____________________________=Exported Bulletins
 -0b4e-field:ExportedBulletins=النشرات المُصّدرة
@@ -568,6 +679,33 @@
 
 #______________________________=You can use the word #Or# or #And#, or you can use the English words "#OrEnglish#" and "#AndEnglish#" to search.\n\nYou need to put spaces before and after any #Or# / #And# keywords you use in your search.\n
 -1573-field:FancySearchHelpMsg3=بإمكانك استخدام الكلمات  #Or#   أو #And#  أو بإمكانك استخدام الكلمات الإنجليزية “#OrEnglish#” و “#AndEnglish#” للقيام بالبحث. \n\nيجب أن تترك فضاءات قبل وبعد كلمات  #Or#  و  #And#  التي تستخدمها في البحث.\n
+
+#___________________________=Yes/No
+-9f62-field:FieldTypeBOOLEAN=نعم/لا
+
+#________________________=Date
+-eb9a-field:FieldTypeDATE=التاريخ
+
+#_____________________________=Date Range
+-6bb4-field:FieldTypeDATERANGE=فترة التاريخ
+
+#____________________________=Dropdown List
+-da4a-field:FieldTypeDROPDOWN=قائمة انسدالية
+
+#________________________=Grid/Table
+-be86-field:FieldTypeGRID=شبكة/جدول
+
+#____________________________=Language
+-89b8-field:FieldTypeLANGUAGE=اللغة
+
+#___________________________=Message
+-68f4-field:FieldTypeMESSAGE=الرسالة
+
+#_____________________________=Text with Scrollbar
+-c0c1-field:FieldTypeMULTILINE=نص بعارضة الانسدال
+
+#__________________________=Text
+-c332-field:FieldTypeSTRING=نص
 
 #______________________________________=This file name should be unique and identifiable to you but we recommend not using your user name.  Each file will be generated with this name and its number sequence.
 -02b6-field:GetShareFileNameDescription=يجب أن يكون اسم هذا الملف فريدا و يسهل عليك معرفته ولكننا لا نوصي باستخدام اسم المستخدم الخاص بك. سيتم إنشاء كل ملف بهذا الاسم بالإضافة إلى رقم الترتيب.
@@ -585,7 +723,7 @@
 -2274-field:HQsSetAsProxyUploader=حسابات المركز الرئيسي هذه يُسمح لها بالإطلاع على المعلومات الخاصة بهذه النشرة و بإرسال هذه النشرة إلى الخادم نيابة عنك.
 
 #_______________________________=Selected?
--9c09-field:HeadQuartersSelected=أُختيرت؟
+-9c09-field:HeadQuartersSelected=هل تم الاختيار؟
 
 #_____________________________=Enter questions, details, or other information your organization wants to have answered in future bulletins created.
 -704c-field:HelpDefaultDetails=قم بإدخال أسئلة وتفاصيل ومعلومات أخرى تريد منظمتك إجابة لها في نشرات تقوم بإنشائها في المستقبل.
@@ -611,6 +749,18 @@
 #________________________________=One or more accounts already exist on this computer. To create an additional account with a new username and passphrase, click OK.
 -02f2-field:HowToCreateNewAccount=يوجد حسابا أو أكثر على هذا الجهاز بالفعل. لإنشاء حساب إضافي باسم مستخدم و كلمة مرور جديدين، انقر "موافق."
 
+#_________________________________________=Import bulletins into which Folder?
+-5efa-field:ImportBulletinsIntoWhichFolder=هل تريد استيراد النشرات إلى المغلف؟  > to Arabic. Thanks.]
+
+#____________________________________=Bulletin
+-6ef0-field:ImportExportBulletinTitle=نشرة
+
+#_________________________=Importing
+-90ab-field:ImportProgress=استيراد
+
+#_____________________________=#TotalBulletins# bulletins were selected for printing.  #AllPrivateBulletins# of them are all private.\n What would you like to include when printing?
+-abb2-field:IncludePrivateData=<#TotalBulletins# bulletins were selected for printing.  #AllPrivateBulletins# of them are all private.\n What would you like to include when printing?>
+
 #_________________________________=The version of this translation is not compatible with this version of Martus.  It is recommended that you do not continue to use this translation version and go to (http://www.martus.org/downloads) for the appropriate version.
 -a747-field:IncompatibleMtfVersion=ترجمة هذا الإصدار غير مواءمة لهذا الإصدار من Martus . من الأفضل أن تتوقف عن استعمال هذا الإصدار وأن تنزل الإصدار المناسب من موقعنا  (http://www.martus.org/downloads)
 
@@ -619,6 +769,12 @@
 
 #____________________________________________=#MtfLanguage# Translation Version: #MtfVersionNumber#
 -8dde-field:IncompatibleMtfVersionTranslation=#MtfLanguage# إصدار الترجمة: #MtfVersionNumber#
+
+#_______________________________________=Martus Report Format (.mrf)
+-62cd-field:MartusReportFormatFileFilter=<Martus Report Format (.mrf)>
+
+#_____________________________________=Martus Search Specification (.mss)
+-76c0-field:MartusSearchSpecFileFilter=<Martus Search Specification (.mss)>
 
 #_______________________=Warning: Portions may be missing or damaged
 -00a9-field:MayBeDamaged=تحذير: قد تكون بها أجزاء ناقصة أو خربة. 
@@ -644,6 +800,9 @@
 #_____________________________________=The author has not given you permission to view the private portions of this bulletin.
 -ba2f-field:NotAuthorizedToViewPrivate=لم يمنحك المؤلف حق الإطلاع على الأجزاء الخاصة بهذه النشرة.
 
+#____________________=(none)
+-3c6b-field:NotSorted=(لا شيء)
+
 #____________________________=Details:
 -1daa-field:OnlineHelpMessage=التفاصيل:
 
@@ -656,11 +815,14 @@
 #_______________________________=Organization (required)
 -2f27-field:OrganizationRequired=المنظمة (ضروري)
 
+#_______________________________=Add the fields you want to appear in your report, and then arrange them in the order you want them to be printed.
+-b511-field:OrganizeReportFields=<Add the fields you want to appear in your report, and then arrange them in the order you want them to be printed.>
+
 #__________________________________=You have the option to include or exclude the selected bulletin's private information in this print out or report file. If you choose to print private data, it will be visible to anyone who sees the print out or report file.
 -2bd3-field:PrintPrivateDataMessage=بإمكانك تضمين أو استثناء المعلومات الخاصة للنشرة المحددة في طباعة هذا التقرير. إذا قررت طباعة البيانات الخاصة سيتمكن كل شخص يقرأ الوثيقة أو تقرير الطباعة من الاطلاع على البيانات الخاصة. 
 
-#_______________________________=You can print the bulletin contents to a printer, or send the formatted report output to a file.
--41ba-field:PrintToPrinterOrDisk=بإمكانك إرسال محتويات النشرة إلى الطابعة أو إرسال التقرير المنسق إلى ملف على القرص.
+#_______________________________=You can print the bulletin contents to a printer, or send the formatted report to a file.
+-f988-field:PrintToPrinterOrDisk=بإمكانك إرسال محتويات النشرة إلى الطابعة أو إرسال التقرير المنسق إلى ملف.
 
 #_________________________________=Public Information Files
 -90f9-field:PublicInformationFiles=ملفات المعلومات العامة
@@ -704,6 +866,28 @@
 #_____________________________=Are you sure you want to do this?
 -bfb8-field:RemoveServerLabel2=هل تريد فعلا القيام بذلك؟
 
+#_________________________________=Choose how the bulletins will be sorted in the report. The bulletins will be ordered by the first field chosen. When two bulletins have the same value in that field, they will be sorted by the next sort field, and so on.
+-551d-field:ReportChooseSortFields=اختر كيف تريد أن تفرز في التقرير. النشرات طلبها بناء على المجال الأول المختار. لما يكون للنشرتين نفس القيمة في هذا المجال، سيتم فرزها بناء على مجال الفرز القادم وهكذا. 
+
+#___________________________=Print Bulletin Information
+-fb16-field:ReportDetailOnly=أطبع معلومات النشرة
+
+#____________________________________=Print Bulletin Information and Summary Counts
+-cdea-field:ReportDetailWithSummaries=أطبع معلومات النشرة وتقارير موجزة
+
+#___________________________=*Error retrieving field*
+-6d15-field:ReportFieldError=* خطأ في استرجاع المجال*
+
+#______________________=#NumberBulletinsFound# bulletins matched the search.
+-fc88-field:ReportFound=#عدد النشرات الموجودة# النشرات تطابق البحث
+#[VT 2006-08-25: Do not translate the English words within the # signs (#NumberBulletinsFound#).]
+
+#__________________________________=Total Bulletins:
+-b840-field:ReportNumberOfBulletins=أطبع التقارير 
+
+#______________________________=Print Summary Counts Only
+-9ca4-field:ReportSummariesOnly=أطبع التقارير الموجزة فقط
+
 #__________________________________________=Retrieving Field Desk Draft Bulletins
 -c881-field:RetrieveHQDraftBulletinProgress=استرجاع مسودات الموقع 
 
@@ -746,11 +930,15 @@
 #_____________________________=Click '#SearchHelpButton#' to get additional information on searching.
 -eb4b-field:SearchBulletinHelp=أنقر  '#SearchHelpButton#'  للحصول على معلومات إضافية حول البحث.
 
-#______________________________=For each row, select a field to search (or choose to match any field), select what kind of comparison to perform, and then enter a value to search for.
--6878-field:SearchBulletinRules=لكل صف قم بتحديد حقل بحث (أو قم بالاختيار لمناسبة أي حقل) قم بتحديد نوع المقارنة ثم أدخل قيمة للبحث عنها. 
+#______________________________=For each row, select a field to search (or choose to match any field), select what kind of comparison to perform, and then enter a value to search for.\n\nNOTE: Bulletins that appear only in the Discarded folder will not be searched.
+-3fd2-field:SearchBulletinRules=<لكل صف قم بتحديد حقل بحث (أو قم بالاختيار لمناسبة أي حقل) قم بتحديد نوع المقارنة ثم أدخل قيمة للبحث عنها. >
 
 #______________________=Search for:
 -0c73-field:SearchEntry=بحث عن: 
+
+#______________________=#NumberBulletinsFound# bulletins matched the search, and have been added to the Search Results folder.
+-998d-field:SearchFound=#عدد النشرات الموجودة# النشرات تطابق البحث وتمت إضافتها لمغلف نتائج البحثز
+#[VT 2006-08-25: Do not translate the English words within the # signs (#NumberBulletinsFound#). Thanks.]
 
 #________________________________=Field(s) to search
 -9acd-field:SearchGridHeaderField=حقل (حقول) للبحث
@@ -853,6 +1041,19 @@
 
 #_____________________=Yes
 -5397-field:WasSentYes=نعم
+
+#__________________________=Unknown
+-bc78-field:YearUnspecified=مجهول
+
+#_________________________=Last Saved
+-eb05-field:_lastSavedDate= الحفظ الأخير
+
+#______________________________=Last Saved
+-eb05-field:_lastSavedTimestamp= الحفظ الأخير
+
+#___________________=Sent
+-35f4-field:_wasSent=تم إرساله
+#[VT 2006-08-25: The translation in an earlier field, “field:BulletinWasSent” was “تم الإرسال”; please pick whichever one you think is best and make them consistent. Thank you.]
 
 #____________________________=Built on
 -5342-field:aboutDlgBuildDate=إنشاء في
@@ -1328,8 +1529,8 @@
 #____________________________________________=Martus needs to keep a list of all the fields in all the bulletins in your system.\n\nThis list does not exist, so it will be created now. This may take a few seconds per bulletin on a slower computer.
 -8773-field:notifyCreatingFieldSpecCachecause=من الضروري أن يحتفظ Martus بقائمة جميع الحقول في جميع النشرات في نظامك.\n\nهذه القائمة غير موجود، سيتم إنشائها الآن. قد يتطلب ذلك بعض الثواني لكل نشرة إذا كان الجهاز بطيئا.
 
-#_____________________________________________________=An error occurred during upload, and the damaged bulletin has been moved to the Damaged Bulletins folder.
--ed3b-field:notifyDamagedBulletinMovedToDiscardedcause=حدثت مشكلة أثناء الإرسال وتم نقل النشرة الخربة إلى مجلد النشرات الخربة. 
+#_____________________________________________________=An error occurred during upload, and the damaged bulletin:'#BulletinTitle#' has been moved to the Damaged Bulletins folder.
+-3229-field:notifyDamagedBulletinMovedToDiscardedcause=<حدثت مشكلة أثناء الإرسال وتم نقل النشرة الخربة إلى مجلد النشرات الخربة. >
 
 #______________________________________________=Error: Unable to delete all of those draft bulletins from the server. Some of them may have been deleted.
 -916e-field:notifyDeleteServerDraftsFailedcause=مشكلة: غير قادر على حذف جميع هذه المسودات من الخادم. ربما قد تم حذف بعضها.
@@ -1354,6 +1555,12 @@
 
 #_________________________________________________________=There was an error saving your template.
 -88ed-field:notifyErrorExportingCustomizationTemplatecause=توجد مشكلة في حفظ قالبك.
+
+#_____________________________________________=There was an error importing bulletins into Martus.  Not all bulletins were imported.
+-539b-field:notifyErrorImportingBulletinscause=حدث خطأ في استيراد النشرات إلى Martus لم يتم استيراد كل النشرات. 
+
+#_______________________________________________________________=The customization template you are trying to import was created by a newer version of Martus.  You need to upgrade to the latest version of Martus before you can import this template.
+-39dd-field:notifyErrorImportingCustomizationTemplateFuturecause=قالب الإعداد الذي تحاول استيراده تم إنشاءه بإصدار أحدث لبرنامج Martus. عليك الترقية لآخر إصدار من Martus قبل أن تستطيع استيراد القالب. 
 
 #_________________________________________________________=There was an error importing this template.
 -4a9a-field:notifyErrorImportingCustomizationTemplatecause= توجد مشكلة في استيراد هذا القالب.
@@ -1385,8 +1592,12 @@
 #___________________________________________=You will have to select a server for any bulletins to be backed up to that server, or to retrieve bulletins from that server.
 -83c4-field:notifyExistingServerRemovedcause=سيتحتم عليك اختيار خادم للاحتفاظ عليه بأية نشرات و استرجاعها منه عند الضرورة. 
 
-#____________________________________=Export completed successfully
--65b9-field:notifyExportCompletecause=تم التصدير بنجاح
+#______________________________________________________=Exported #BulletinsExported# of #TotalBulletinsToExport# bulletins.  Unfortunately #AttachmentsNotExported# attachments were not exported due to errors.
+-2a40-field:notifyExportCompleteMissingAttachmentscause=<Exported #BulletinsExported# of #TotalBulletinsToExport# bulletins.  Unfortunately #AttachmentsNotExported# attachments were not exported due to errors.>
+#[VT 2006-08-25: Please translate the English within < > to Arabic. Thanks.]
+
+#____________________________________=Successfully exported #BulletinsExported# of #TotalBulletinsToExport# bulletins.
+-439b-field:notifyExportCompletecause=تم تصدير #BulletinsExported#بنجاح لنشرات #TotalBulletinsToExport# 
 
 #_______________________________________=The folder you are trying to export does not contain any bulletins.  Select a folder which has bulletins before exporting the folder.
 -c5f5-field:notifyExportFolderEmptycause=المجلد الذي تحاول تصديره لا يحتوي على أية نشرات. قم باختيار مجلد به نشرات حتى يمكنك تصديره.
@@ -1418,6 +1629,18 @@
 #_______________________________________________=The Headquarters label you entered is already assigned to another Headquarters account.  Please use a different label.
 -91ca-field:notifyHeadquarterLabelDuplicatecause=اسم المركز الرئيسي الذي أدخلته هو مخصص بالفعل لحساب مركز رئيسي آخر. الرجاء استخدام اسم آخر.
 
+#________________________________________________=Not all bulletins were imported.  The following bulletins had problems during import.\n\n#ImportBulletinsNotImported#
+-9768-field:notifyImportBulletinsNotImportedcause=لم يتم استيراد كل النشرات الملفات التالية حدثت فيها مشاكل خلال الاستيراد.#عدد النشرات غير المستوردة#.
+#[VT 2006-08-25: Please do not translate the English words within # signs. See translation instructions at top of file. Thank you.]
+
+#____________________________________=Import complete.  Imported #BulletinsSuccessfullyImported# of #TotalBulletinsToImport# bulletins into folder: #ImportFolder#
+-0e20-field:notifyImportCompletecause=انتهت عملية الاستيراد. عدد النشرات المستوردة بنجاح من عدد النشرات الإجمالي للاستيراد إلى المغلف: #مغلف الاستيراد#
+#[VT 2006-08-25: Please do not translate the English words within # signs. See translation instructions at top of file. Thank you.]
+
+#______________________________________________=Not all attachments were imported.  The following bulletins had problems importing these attachments.\n\n#ImportMissingAttachments#
+-4e91-field:notifyImportMissingAttachmentscause=لم يتم استيراد كل المرفقات. النشرات التالية فيها مشاكل لاستيراد هذه المرفقات. #المرفقات المستوردة ناقصة#.
+#[VT 2006-08-25: Please do not translate the English words within # signs. See translation instructions at top of file. Thank you.]
+
 #___________________________________________________________=Successfully imported customization template.
 -c78c-field:notifyImportingCustomizationTemplateSuccesscause= لقد تم استيراد قالب التحوير بنجاح.
 
@@ -1432,6 +1655,15 @@
 
 #___________________________________=Please select a Headquarters first.
 -1d19-field:notifyNoHQsSelectedcause=الرجاء اختيار مركز رئيسي أولا.
+
+#___________________________________________=No folder specified.  You must enter a folder you wish the files to be imported into.  This folder can already exist in the system, or can be a new folder.
+-05f7-field:notifyNoImportFileSpecifiedcause=ليم يتم تحديد المغلف. عليك دخول المغلف المقصود استيراد الملفات إليه. هذا المغلف يمكن أن يوجد في النظام أو يمكن أن يكون في مغلف جديد.
+
+#____________________________________________=You must select at least one field to be included in the report.
+-9390-field:notifyNoReportFieldsSelectedcause=عليك اختيار مجال واحد على الأقل لضمه في التقرير.
+
+#__________________________________________=This is not a valid Report Format file
+-500f-field:notifyNotValidReportFormatcause=<This is not a valid Report Format file>
 
 #________________________________________=Operation completed.
 -1a65-field:notifyOperationCompletedcause=تم إنجاز العملية 
@@ -1456,6 +1688,9 @@
 
 #____________________________________________=You may only preview one bulletin at a time.  Please only select one bulletin to preview.
 -fbee-field:notifyPreviewOneBulletinOnlycause=يمكنك استعراض نشرة واحدة فقط في المرة. الرجاء اختيار نشرة واحدة فقط لاستعراضها.
+
+#____________________________________=Printing Complete
+-ab0a-field:notifyPrintCompletedcause=<Printing Complete>
 
 #_________________________________________=Successfully saved Report
 -45d7-field:notifyPrintToDiskCompletecause=تم حفظ التقرير بنحاح
@@ -1484,6 +1719,12 @@
 #______________________________________=Please remember your username and password. It cannot be recovered.
 -e9e0-field:notifyRememberPasswordcause=تذكر دائما اسم المستخدم و كلمة المرور. فلن يمكن استعادتهما.
 
+#_______________________________________=This report format was created with an earlier version of Martus, so it may not work correctly
+-ed82-field:notifyReportFormatIsOldcause=هذا التنسيق للتقرير تم إنشاءه بإصدار سابق لبرنامج Martus ولذلك قد لا يعمل بشكل صحيح.
+
+#__________________________________________=This report format was created with a newer version of Martus, so it may not work correctly
+-305e-field:notifyReportFormatIsTooNewcause= هذا التنسيق للتقرير تم إنشاءه بإصدار  سابق لبرنامج Martus ولذلك قد لا يعمل بشكل صحيح 
+
 #____________________________________________________=One or more bulletins were unable to be resent because you are not authorized to upload them.
 -d248-field:notifyResendErrorNotAuthorizedToSendcause= م يتسن إعادة إرسال واحدة أو أكثر من النشرات لأنه غير مصرح لك بإرسالها للخادم.
 
@@ -1492,6 +1733,9 @@
 
 #______________________________________=Bulletin download cancelled.  Some bulletins may have already been downloaded.
 -87b3-field:notifyRetrieveCanceledcause=تم إلغاء تحميل النشرة. ربما قد تم تحميل بعض النشرات بالفعل.
+
+#_______________________________________=Retrieving bulletins from the server is complete
+-1ade-field:notifyRetrieveCompletedcause=<Retrieving bulletins from the server is complete>
 
 #___________________________________=An error has occurred while retrieving a bulletin.
 -6201-field:notifyRetrieveErrorcause=حدث مشكلة ماأثناء استرجاع النشرة
@@ -1505,6 +1749,9 @@
 #________________________________________=A retrieve is already in progress. You cannot start another retrieve until that one has finished.
 -3e55-field:notifyRetrieveInProgresscause=جاري استرجاع ما. لا يمكنك بدء عملية استرجاع أخرى الا بانتهاء ذلك الاسترجاع
 
+#____________________________________________________=Preview not yet available for this bulletin. Please wait until the information has been retrieved from the server, and then try again.
+-8fd7-field:notifyRetrievePreviewNotAvailableYetcause=المعاينة ليس متاحة بعد لهذه النشرة. الرجاء الانتظار حتى يتم استرجاع المعلومات من الخادم ثم إعادة المحاولة. 
+
 #________________________________________________=Errors occurred while retrieving bulletin summaries.  Some of the bulletins on the server will not be shown.
 -6f6f-field:notifyRetrievedOnlySomeSummariescause=حدثت مشكلات أثناء استرجاع الملخصات. لن يتم عرض بعض النشرات الموجودة على الخادم.
 
@@ -1516,9 +1763,6 @@
 
 #__________________________________=Sorry, no bulletins were found.
 -5bd8-field:notifySearchFailedcause=نأسف، لم يتم العثور على نشرات.
-
-#_________________________________=#NumberBulletinsFound# bulletins matched the search, and have been added to the Search Results folder.\n Note that both current and earlier versions of each bulletin were searched.
--5639-field:notifySearchFoundcause= #NumberBulletinsFound# توافق البحث وتم إضافته إلى مجلد نتائج البحث. \nلاحظ أنه تم البحث في كل من النسخ الحالية و السابقة لكل نشرة.
 
 #_____________________________________=The Server Public Code does not match the one you entered.
 -efe3-field:notifyServerCodeWrongcause= الكود العام للخادم لا يضاهي الكود الذي أدخلته.
@@ -1540,6 +1784,9 @@
 
 #_____________________________________=An unexpected error has occurred. Please report this problem to help@martus.org.
 -3cb4-field:notifyUnexpectedErrorcause=حدثت مشكلة غير متوقعة. الرجاء الإبلاغ عن هذه المشكلة للعنوان التالي: help@martus.org
+
+#_________________________________________________________=An error occurred during upload, and the bulletin:'#BulletinTitle#' has not been sent to the server.  You may try and resend the bulletin later.
+-4325-field:notifyUploadFailedBulletinNotSentToServercause=<An error occurred during upload, and the bulletin:'#BulletinTitle#' has not been sent to the server.  You may try and resend the bulletin later.>
 
 #_______________________________________=The user name you chose already exists on this system, please choose a different user name.
 -bbb0-field:notifyUserAlreadyExistscause=اسم المستخدم الذي اخترته يتواجد بالفعل على هذا النظام، الرجاء اختيار اسم مستخدم مختلف.
@@ -1643,17 +1890,17 @@
 #__________________=Summary
 -12b7-field:summary=ملخص
 
-#____________________=For security reasons, you must sign into Martus again.
--a575-field:timedout1=لأسباب أمنية، يجب أن تدخل لبرنامج Martus مرة أخرى.
+#____________________=Martus is still running in the background, but has locked the screen for security.  You must sign in to Martus again to continue working.
+-a252-field:timedout1=<لأسباب أمنية، يجب أن تدخل لبرنامج Martus مرة أخرى.>
 
-#____________________=Any unsaved bulletins will be lost unless you sign in and save them.
--24c5-field:timedout2=سوف تضيع أية نشرات لم يتم حفظها إلا إذا قمت بالدخول و حفظتها.
+#____________________=Any unsaved bulletins will be lost unless you sign in to Martus again and save them.
+-3f66-field:timedout2=<سوف تضيع أية نشرات لم يتم حفظها إلا إذا قمت بالدخول و حفظتها.>
 
 #________________=Title
 -768e-field:title=العنوان 
 
-#_____________________________=Arabic 2.9 
--649d-field:translationVersion=2.9 العربية  
+#_____________________________=English pre 3.0 internal
+-649d-field:translationVersion=pre 3.0 internal  العربية    
 
 #___________________=Username
 -84c2-field:username=اسم المستخدم 
@@ -1928,6 +2175,9 @@
 #___________________________=Export My Public Account Id
 -2b8a-menu:ExportMyPublicKey=تصدير هوية حسابي العام 
 
+#_________________________=Import Bulletins
+-4094-menu:ImportBulletins=استيراد نشرات
+
 #_________________________=Organize Folders
 -1ee2-menu:OrganizeFolders=ترتيب الملفات
 
@@ -1948,6 +2198,9 @@
 
 #______________________=Rename Folder
 -5e31-menu:RenameFolder=إعادة تسمية مجلد 
+
+#_________________=Reports
+-88bc-menu:Reports=تقارير
 
 #_________________________=Resend Bulletin(s)
 -21a8-menu:ResendBulletins= إعادة إرسال النشرة(ات)
@@ -2018,8 +2271,11 @@
 #_______________=Paste
 -db24-menu:paste=لصق
 
-#_______________________=Print Bulletin(s) / Create Report File
--ecef-menu:printBulletin=طباعة نشرة (نشرات) / إنشاء ملف تقريري
+#_______________________=Print Bulletin(s)
+-c705-menu:printBulletin=طباعة نشرة (نشرات)
+
+#_____________________=Print
+-5b22-menu:printButton=<Print>
 
 #________________=Search
 -bce0-menu:search=بحث 
@@ -2168,6 +2424,12 @@
 #______________________________=Details Field Default Content
 -a39b-wintitle:BulletinTemplate=المحتوى التلقائي لحقل التفاصيل 
 
+#________________________________=Create Report
+-446e-wintitle:ChooseReportFields=<Create Report>
+
+#_______________________________=Run Report...
+-56fb-wintitle:ChooseReportToRun=شغّل التقرير...
+
 #__________________________=Server Configuration
 -add5-wintitle:ConfigServer=تهيئة الخادم
 
@@ -2188,6 +2450,10 @@
 
 #_________________________________________________=Retrieving Bulletin Summaries
 -2a45-wintitle:DeleteServerDraftsBulletinSummaries=استرجاع ملخصات النشرات 
+
+#_____________________________________________=Warning Duplicate Labels Found
+-8e46-wintitle:DuplicateLabelsInCustomTemplate=تحذير بوجود نظير عنوان
+#[VT 2006-08-25: It looks as though the word “عنوان” appears a few times throughout the .mtf as the Arabic translation for “title”, “name”, as well as “label”… this might be ok, but we’re curious – could you check and let us know what you think? Thank you.]
 
 #____________________________________=Attachment Missing
 -11e1-wintitle:ErrorAttachmentMissing=لا يوجد ملف مرفق 
@@ -2225,6 +2491,9 @@
 #_______________________________________________=Export Customization Template
 -5318-wintitle:ExportCustomizationTemplateSaveAs=تصدير قالب التحوير 
 
+#____________________________=Exporting Bulletins
+-1c8c-wintitle:ExportProgress=تصدير النشرات
+
 #_____________________________=Search Help
 -53b6-wintitle:FancySearchHelp=تعليمات البحث
 
@@ -2234,17 +2503,29 @@
 #________________________________=Help on Bulletin Details Field Default Content
 -96cb-wintitle:HelpDefaultDetails=تعليمات عن المحتوى التلقائي لحقل التفاصيل بالنشرة
 
+#_____________________________=Import Bulletins
+-4094-wintitle:ImportBulletins=تصدير النشرات
+
 #_____________________________________________=Import Customization Template
 -0188-wintitle:ImportCustomizationTemplateOpen=استيراد قالب التحوير 
 
 #_______________________________=Import Headquarters Public Account Id File
 -9300-wintitle:ImportHQPublicKey=استيراد ملف هوية الحساب العام للمركز الرئيسي
 
+#____________________________=Importing Bulletins
+-2c20-wintitle:ImportProgress=استيراد النشرات
+
+#________________________________=Include Private Data
+-e6dc-wintitle:IncludePrivateData=<Include Private Data>
+
 #____________________________________=Incompatible Translation Version
 -e91d-wintitle:IncompatibleMtfVersion=إصدار الترجمة غير مواءم
 
 #________________________________=Load Default Details Field Content
 -4e2f-wintitle:LoadDefaultDetails=تحميل محتوى حقل التفاصيل التلقائية 
+
+#_____________________________=Load Saved Search
+-7e7a-wintitle:LoadSavedSearch=<Load Saved Search>
 
 #__________________________=Martus SignIn
 -0615-wintitle:MartusSignIn=الدخول لبرنامج Martus
@@ -2255,11 +2536,17 @@
 #__________________________________=Validate User
 -6030-wintitle:MartusSignInValidate=التحقق من المستخدم
 
+#__________________________________=Organize Report Fields
+-1e3e-wintitle:OrganizeReportFields=<Organize Report Fields>
+
 #_____________________________________=Cannot Paste Bulletin(s)
 -c05f-wintitle:PasteErrorBulletinOlder=لا أستطيع لصق النشرة(ات)
 
 #__________________________=Print Options
 -183a-wintitle:PrintOptions=خيارات الطباعة
+
+#__________________________=Print Preview
+-68e2-wintitle:PrintPreview=<Print Preview>
 
 #______________________________=Print to which file
 -7cfe-wintitle:PrintToWhichFile=طباعة إلى أي كلف
@@ -2275,6 +2562,9 @@
 
 #__________________________=Remove Server
 -49c2-wintitle:RemoveServer=إزالة خادم 
+
+#____________________________________=Reports
+-88bc-wintitle:ReportChooseSortFields=تقارير
 
 #_____________________________=Resend Bulletins
 -273f-wintitle:ResendBulletins= إعادة إرسال نشرات 
@@ -2315,8 +2605,17 @@
 #_______________________________________=Retrieve My Sealed Bulletins
 -68b9-wintitle:RetrieveMySealedBulletins=استرجاع نشراتي المختومة  
 
+#_______________________________=Reports
+-88bc-wintitle:RunOrCreateReport=تقارير
+
 #_______________________________________=of
 -de04-wintitle:SaveRecoverShareKeyPairOf=من
+
+#__________________________=Save Report Format As...
+-8c3d-wintitle:SaveReportAs=أحفظ التقرير في تنسيق...
+
+#________________________=Save Search
+-1340-wintitle:SaveSearch=<Save Search>
 
 #______________________________=Saving Backup Disk
 -9204-wintitle:SaveShareKeyPair=جاري حفظ القرص الاحتياطي
@@ -2594,8 +2893,14 @@
 #_______________________________________________________=Error Exporting Template
 -f4cc-wintitle:notifyErrorExportingCustomizationTemplate=حدثت مشكلة في تصدير القالب
 
+#___________________________________________=Error Importing Bulletins
+-aeb8-wintitle:notifyErrorImportingBulletins=حدث خطأ في استيراد النشرات
+
 #_______________________________________________________=Error Importing Template
 -4f1a-wintitle:notifyErrorImportingCustomizationTemplate= حدثت مشكلة في استيراد القالب 
+
+#_____________________________________________________________=Error Importing Template
+-4f1a-wintitle:notifyErrorImportingCustomizationTemplateFuture=خطأ في استيراد النمط
 
 #____________________________________=Error Reading File
 -73ad-wintitle:notifyErrorReadingFile=حدثت مشكلة في قراءة الملف 
@@ -2627,6 +2932,9 @@
 #__________________________________=Export Bulletins
 -a86c-wintitle:notifyExportComplete=تصدير نشرات 
 
+#____________________________________________________=Export Bulletins
+-a86c-wintitle:notifyExportCompleteMissingAttachments=نشرات التصدير
+
 #_____________________________________=Error Exporting Folder
 -d6d7-wintitle:notifyExportFolderEmpty=حدثت مشكلة أثناء تصدير النشرات
 
@@ -2657,6 +2965,16 @@
 #_____________________________________________=Headquarter Label Invalid
 -106b-wintitle:notifyHeadquarterLabelDuplicate=اسم المركز الرئيسي غير صالح
 
+#______________________________________________=Warning Bulletins Not Imported
+-59d8-wintitle:notifyImportBulletinsNotImported=تحذي بعدم إتمام الاستيراد
+#[VT 2006-08-25: Earlier, the word “Bulletin” seems to be translated differently – for example, “Bulletin Details” is translated as follows: ” تفاصيل النشرة...” Can you double check that the word bulletin is in this translation? Our pattern recognition might very well be off ☺ but it would be great if you could check. Thanks!]
+
+#__________________________________=Import Complete
+-a5cb-wintitle:notifyImportComplete=الاستيراد مكتمل
+
+#____________________________________________=Warning Missing Attachments
+-79ef-wintitle:notifyImportMissingAttachments=تحذير بنقص المرفقات
+
 #_________________________________________________________=Importing Template Succeeded
 -ac8c-wintitle:notifyImportingCustomizationTemplateSuccess= تم استيراد القالب بنجاح
 
@@ -2672,6 +2990,15 @@
 #_________________________________=No Headquarters Selected
 -9140-wintitle:notifyNoHQsSelected=لم يتم تحديد مراكز رئيسية
 
+#_________________________________________=No Folder Specified
+-4b6e-wintitle:notifyNoImportFileSpecified=لم يتم تحديد ملف
+
+#__________________________________________=Create Report
+-446e-wintitle:notifyNoReportFieldsSelected=إنشاء تقرير
+
+#________________________________________=Reports
+-88bc-wintitle:notifyNotValidReportFormat=<Reports>
+
 #______________________________________=Finished
 -355b-wintitle:notifyOperationCompleted=تم الانتهاء من الإجراء 
 
@@ -2682,7 +3009,7 @@
 -2e9b-wintitle:notifyPasswordMatchesUserName=معلومات إقامة حساب غير صحيحة 
 
 #______________________________=Error Pasting Bulletin(s)
--9288-wintitle:notifyPasteError=حدثت مشكلة أثناء لصق النشرة(ات)
+-9288-wintitle:notifyPasteError=حدثت مشكلة أثناء لصق النشرة(ت)
 
 #___________________________________________________=Cannot Paste Bulletin(s)
 -c05f-wintitle:notifyPasteErrorBulletinAlreadyExists=غير قادر على لصق النشرة(ات)
@@ -2692,6 +3019,9 @@
 
 #__________________________________________=Preview One Bulletin Only
 -5b0a-wintitle:notifyPreviewOneBulletinOnly=استعرض نشرة واحدة فقط 
+
+#__________________________________=Reports
+-88bc-wintitle:notifyPrintCompleted=<Reports>
 
 #_______________________________________=Print To Report File
 -c1b2-wintitle:notifyPrintToDiskComplete=طباعة إلى ملف التقرير
@@ -2720,6 +3050,12 @@
 #____________________________________=Remember Your Password
 -2bc6-wintitle:notifyRememberPassword=تذكر كلمة مرورك 
 
+#_____________________________________=Reports
+-88bc-wintitle:notifyReportFormatIsOld=تقارير
+
+#________________________________________=Reports
+-88bc-wintitle:notifyReportFormatIsTooNew= تقارير 
+
 #_______________________________=Error Sending Bulletin
 -eaab-wintitle:notifyResendError= مشكلة في إرسال النشرة 
 
@@ -2728,6 +3064,9 @@
 
 #____________________________________=Bulletin Download Canceled
 -f8d3-wintitle:notifyRetrieveCanceled=تم إلغاء تنزيل النشرة 
+
+#_____________________________________=Retrieve Complete
+-653b-wintitle:notifyRetrieveCompleted=<Retrieve Complete>
 
 #_________________________________=Retrieve Error
 -8ed0-wintitle:notifyRetrieveError=خطأ في الاسترجاع
@@ -2740,6 +3079,9 @@
 
 #______________________________________=Retrieve In Progress
 -6983-wintitle:notifyRetrieveInProgress=جاري الاسترجاع
+
+#__________________________________________________=Unable To Preview
+-061a-wintitle:notifyRetrievePreviewNotAvailableYet=تعذرت المعاينة
 
 #______________________________________________=Error During Retrieve
 -f2d7-wintitle:notifyRetrievedOnlySomeSummaries=حدثت مشكلة أثناء الاسترجاع 
@@ -2776,6 +3118,9 @@
 
 #___________________________________=Unexpected Error
 -d17c-wintitle:notifyUnexpectedError= مشكلة غير متوقعة 
+
+#_______________________________________________________=Unable to Send Bulletin To Server
+-2c28-wintitle:notifyUploadFailedBulletinNotSentToServer=<Unable to Send Bulletin To Server>
 
 #_____________________________________=User Already Exists
 -eecc-wintitle:notifyUserAlreadyExists=المستخدم موجود بالفعل 
