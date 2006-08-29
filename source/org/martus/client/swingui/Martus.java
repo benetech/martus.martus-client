@@ -30,6 +30,8 @@ import java.awt.Toolkit;
 
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
+
+import org.martus.common.VersionBuildDate;
 import org.martus.swing.UiOptionPane;
 import org.martus.swing.Utilities;
 
@@ -47,6 +49,9 @@ class Martus
 			UiOptionPane.showMessageDialog(null, errorMessage, "Error", JOptionPane.ERROR_MESSAGE);
 			System.exit(2);
 		}
+		
+		System.out.println(UiConstants.programName);
+		System.out.println(UiConstants.versionLabel + " " + VersionBuildDate.getVersionBuildDate());
 
 		if(args.length >0)
 		{
