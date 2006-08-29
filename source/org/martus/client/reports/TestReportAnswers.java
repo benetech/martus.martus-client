@@ -27,6 +27,7 @@ package org.martus.client.reports;
 
 import java.util.Arrays;
 
+import org.martus.common.MiniLocalization;
 import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.fieldspec.FieldTypeNormal;
 import org.martus.common.fieldspec.MiniFieldSpec;
@@ -46,18 +47,22 @@ public class TestReportAnswers extends TestCaseEnhanced
 			new MiniFieldSpec(FieldSpec.createCustomField("b", "B", new FieldTypeNormal())),
 			
 		};
-		ReportAnswers page = new ReportAnswers(ReportAnswers.PAGE_REPORT, specs);
+		MiniLocalization localization = new MiniLocalization();
+		localization.setCurrentLanguageCode("xy");
+		ReportAnswers page = new ReportAnswers(ReportAnswers.PAGE_REPORT, specs, localization);
 		assertEquals("Wrong version?", 9, page.getVersion());
 		assertTrue("Not page report?", page.isPageReport());
 		assertFalse("Was tabular?", page.isTabularReport());
 		assertTrue("Can't get specs back?", Arrays.equals(specs, page.getSpecs()));
+		assertEquals("Wrong language?", localization.getCurrentLanguageCode(), page.getLanguageCode());
 		
 		ReportAnswers gotPage = new ReportAnswers(page.toJson());
 		assertEquals("Didn't save version?", ReportAnswers.EXPECTED_VERSION, gotPage.getVersion());
 		assertTrue("Didn't save page-ness?", gotPage.isPageReport());
 		assertTrue("Didn't save/load specs?", Arrays.equals(page.getSpecs(), gotPage.getSpecs()));
+		assertEquals("Didn't save/load language?", localization.getCurrentLanguageCode(), gotPage.getLanguageCode());
 		
-		ReportAnswers tabular = new ReportAnswers(ReportAnswers.TABULAR_REPORT, specs);
+		ReportAnswers tabular = new ReportAnswers(ReportAnswers.TABULAR_REPORT, specs, localization);
 		assertTrue("Not tabular report?", tabular.isTabularReport());
 		assertFalse("Was page?", tabular.isPageReport());
 	}

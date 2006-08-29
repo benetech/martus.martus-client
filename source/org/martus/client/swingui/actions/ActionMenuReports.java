@@ -135,6 +135,11 @@ public class ActionMenuReports extends ActionPrint
 		else if(version > ReportAnswers.EXPECTED_VERSION)
 			mainWindow.notifyDlg("ReportFormatIsTooNew");
 		
+		String language = answers.getLanguageCode();
+		if(!language.equals(getLocalization().getCurrentLanguageCode()))
+		{
+			mainWindow.notifyDlg("ReportFormatDifferentLanguage");
+		}
 		return answers;
 	}
 	
@@ -143,7 +148,7 @@ public class ActionMenuReports extends ActionPrint
 		MiniFieldSpec[] specs = askUserWhichFieldsToInclude(reportType);
 		if(specs == null)
 			return null;
-		ReportAnswers answers = new ReportAnswers(reportType, specs);
+		ReportAnswers answers = new ReportAnswers(reportType, specs, getLocalization());
 		
 		File file = askForReportFileToSaveTo();
 		if(file == null)

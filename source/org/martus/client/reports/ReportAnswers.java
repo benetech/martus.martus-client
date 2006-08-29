@@ -27,15 +27,17 @@ package org.martus.client.reports;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.martus.common.MiniLocalization;
 import org.martus.common.fieldspec.MiniFieldSpec;
 
 public class ReportAnswers
 {
-	public ReportAnswers(ReportType typeToUse, MiniFieldSpec[] specsToUse)
+	public ReportAnswers(ReportType typeToUse, MiniFieldSpec[] specsToUse, MiniLocalization localizationToUse)
 	{
 		version = EXPECTED_VERSION;
 		type = typeToUse;
 		specs = specsToUse;
+		languageCode = localizationToUse.getCurrentLanguageCode();
 	}
 	
 	public ReportAnswers(JSONObject json)
@@ -46,6 +48,7 @@ public class ReportAnswers
 		specs = new MiniFieldSpec[jsonSpecs.length()];
 		for(int i = 0; i < specs.length; ++i)
 			specs[i] = new MiniFieldSpec(jsonSpecs.getJSONObject(i));
+		languageCode = json.optString(TAG_LANGUAGE, MiniLocalization.LANGUAGE_OTHER);
 	}
 	
 	public int getVersion()
@@ -68,6 +71,11 @@ public class ReportAnswers
 		return specs;
 	}
 	
+	public String getLanguageCode()
+	{
+		return languageCode;
+	}
+	
 	public JSONObject toJson()
 	{
 		JSONObject json = new JSONObject();
@@ -78,6 +86,7 @@ public class ReportAnswers
 		for(int i = 0; i < specs.length; ++i)
 			jsonSpecs.put(specs[i].toJson());
 		json.put(TAG_SPECS, jsonSpecs);
+		json.put(TAG_LANGUAGE, getLanguageCode());
 		return json;
 	}
 	
@@ -141,6 +150,7 @@ public class ReportAnswers
 	public final static String TAG_TYPE = "ReportType";
 	public final static String TAG_VERSION = "Version";
 	public final static String TAG_SPECS = "Specs";
+	public final static String TAG_LANGUAGE = "Language";
 	
 	public final static String JSON_TYPE = "ReportAnswers";
 	public final static int EXPECTED_VERSION = 9;
@@ -150,4 +160,5 @@ public class ReportAnswers
 	private int version;
 	private ReportType type;
 	private MiniFieldSpec[] specs;
+	private String languageCode;
 }
