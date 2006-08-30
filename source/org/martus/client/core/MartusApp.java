@@ -1148,7 +1148,7 @@ public class MartusApp
 			}
 		}
 		long endTime = System.currentTimeMillis();
-		System.out.println("Search took:"+(endTime-startTime)/1000+" Seconds, " + matchedBulletinUids.size() +" matches found, " + revisionsSearched + " revisions were searched.");
+		System.out.println("Search took:"+(endTime-startTime)/1000+" Seconds, " + matchedBulletinUids.size() +" matches found, " +uids.size()+" leafs, "+ revisionsSearched + " revisions were searched.");
 		
 		return matchedBulletinUids;
 	}
