@@ -87,6 +87,21 @@ public class PartialBulletin
 		return (String)fieldData.get(tag);
 	}
 	
+	public boolean equals(Object rawOther)
+	{
+		if(!(rawOther instanceof PartialBulletin))
+			return false;
+		
+		PartialBulletin other = (PartialBulletin)rawOther;
+		return (uid.equals(other.uid) && fieldData.equals(other.fieldData));
+	}
+	
+	public int hashCode()
+	{
+		return uid.hashCode();
+	}
+
+	
 	UniversalId uid;
 	HashMap fieldData;
 }

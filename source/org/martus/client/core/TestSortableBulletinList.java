@@ -134,4 +134,25 @@ public class TestSortableBulletinList extends TestCaseEnhanced
 		
 	}
 	
+	public void testDuplicates() throws Exception
+	{
+		MiniLocalization localization = new MiniLocalization();
+		localization.setCurrentLanguageCode(MiniLocalization.ENGLISH);
+		MockMartusSecurity security = MockMartusSecurity.createClient();
+		
+		MiniFieldSpec tags[] = {
+			new MiniFieldSpec(StandardFieldSpecs.findStandardFieldSpec(Bulletin.TAGAUTHOR)), 
+			new MiniFieldSpec(StandardFieldSpecs.findStandardFieldSpec(Bulletin.TAGTITLE)),
+		};
+
+		SortableBulletinList list = new SortableBulletinList(localization, tags);
+		Bulletin b = new Bulletin(security);
+		list.add(b);
+		list.add(b);
+		UniversalId[] uids = list.getSortedUniversalIds();
+		assertEquals("Added twice?", 1, uids.length);
+		assertEquals("Wrong uid???", b.getUniversalId(), uids[0]);
+		
+	}
+	
 }

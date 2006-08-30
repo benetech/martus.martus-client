@@ -122,6 +122,28 @@ public class TestPartialBulletin extends TestCaseEnhanced
 		String gotData = pb.getData(tags[0]);
 		assertEquals("No grid cell data?", sampleCellValue + "\n", gotData);
 	}
+	
+	public void testEquals() throws Exception
+	{
+		MockMartusSecurity security = MockMartusSecurity.createClient();
+		Bulletin b1 = new Bulletin(security);
+		Bulletin b2 = new Bulletin(security);
+		String[] tagsToStore = new String[] {
+			Bulletin.TAGTITLE,
+			Bulletin.TAGLANGUAGE,
+		};
+		for(int i = 0; i < tagsToStore.length; ++i)
+		{
+			b1.set(tagsToStore[i], tagsToStore[i]);
+			b2.set(tagsToStore[i], "Not " + tagsToStore[i]);
+		}
+		PartialBulletin pb1 = new PartialBulletin(new SafeReadableBulletin(b1, localization), tagsToStore);
+		PartialBulletin pb2a = new PartialBulletin(new SafeReadableBulletin(b2, localization), tagsToStore);
+		PartialBulletin pb2b = new PartialBulletin(new SafeReadableBulletin(b2, localization), tagsToStore);
+		assertNotEquals("not seeing different?", pb1, pb2a);
+		assertEquals("identical not equal?", pb2a, pb2b);
+		assertEquals("hashes not consistent?", pb2a.hashCode(), pb2b.hashCode());
+	}
 
 	MiniLocalization localization;
 }
