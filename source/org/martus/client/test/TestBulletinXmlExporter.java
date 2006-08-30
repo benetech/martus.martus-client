@@ -66,6 +66,7 @@ import org.martus.util.TestCaseEnhanced;
 import org.martus.util.UnicodeReader;
 import org.martus.util.UnicodeWriter;
 import org.martus.util.inputstreamwithseek.StringInputStreamWithSeek;
+import org.martus.util.xml.XmlUtilities;
 
 public class TestBulletinXmlExporter extends TestCaseEnhanced
 {
@@ -488,6 +489,7 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 
 		final String samplePublic = "someone special";
 		final String samplePrivate = "shhhhh! it's private!";
+		final String encodedSamplePrivate = XmlUtilities.getXmlEncoded(samplePrivate);
 
 		b.set(BulletinConstants.TAGPUBLICINFO, samplePublic);
 		b.set(BulletinConstants.TAGPRIVATEINFO, samplePrivate);		
@@ -507,7 +509,7 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 		assertContains("<PrivateFieldSpecs>", publicAndPrivate);
 		
 		assertContains(samplePublic, publicAndPrivate);
-		assertContains(samplePrivate, publicAndPrivate);
+		assertContains(encodedSamplePrivate, publicAndPrivate);
 	}
 
 	public void testExportAnAllPrivateBulletin() throws Exception
