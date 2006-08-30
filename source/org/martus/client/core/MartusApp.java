@@ -1140,6 +1140,7 @@ public class MartusApp
 				if(b != null && matcher.doesMatch(new SafeReadableBulletin(b, localization), localization))
 				{
 					matchedBulletinUids.add(latestRevision);
+					break;
 				}
 			}
 		}
