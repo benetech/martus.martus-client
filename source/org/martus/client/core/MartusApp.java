@@ -1112,6 +1112,8 @@ public class MartusApp
 
 	public SortableBulletinList search(SearchTreeNode searchNode, MiniFieldSpec[] specsForSorting, MiniFieldSpec[] extraSpecs, boolean searchFinalVersionsOnly)
 	{
+		long startTime = System.currentTimeMillis();
+		long revisionsSearched = 0;
 		BulletinSearcher matcher = new BulletinSearcher(searchNode);
 		Set uids = store.getAllBulletinLeafUids();
 		SortableBulletinList matchedBulletinUids = new SortableBulletinList(localization, specsForSorting, extraSpecs);
@@ -1137,6 +1139,7 @@ public class MartusApp
 			for(int j = 0; j < allRevisions.size(); ++j)
 			{
 				Bulletin b = store.getBulletinRevision((UniversalId)allRevisions.get(j));
+				++revisionsSearched;
 				if(b != null && matcher.doesMatch(new SafeReadableBulletin(b, localization), localization))
 				{
 					matchedBulletinUids.add(latestRevision);
@@ -1144,6 +1147,9 @@ public class MartusApp
 				}
 			}
 		}
+		long endTime = System.currentTimeMillis();
+		System.out.println("Search took:"+(endTime-startTime)/1000+" Seconds, " + matchedBulletinUids.size() +" matches found, " + revisionsSearched + " revisions were searched.");
+		
 		return matchedBulletinUids;
 	}
 	
