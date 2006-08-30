@@ -2379,7 +2379,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 
 	public boolean isOnlyOneBulletinSelected()
 	{
-		return (table.getSingleSelectedBulletin() != null);
+		return (table.getSelectedBulletinUids().length == 1);
 	}
 	
 	static public String getDisplayVersionInfo(UiLocalization localization)
