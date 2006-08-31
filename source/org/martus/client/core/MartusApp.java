@@ -110,6 +110,7 @@ import org.martus.common.packet.Packet.WrongPacketTypeException;
 import org.martus.jarverifier.JarVerifier;
 import org.martus.util.Base64;
 import org.martus.util.DirectoryUtils;
+import org.martus.util.Stopwatch;
 import org.martus.util.StreamCopier;
 import org.martus.util.UnicodeReader;
 import org.martus.util.UnicodeWriter;
@@ -1112,7 +1113,8 @@ public class MartusApp
 
 	public SortableBulletinList search(SearchTreeNode searchNode, MiniFieldSpec[] specsForSorting, MiniFieldSpec[] extraSpecs, boolean searchFinalVersionsOnly)
 	{
-		long startTime = System.currentTimeMillis();
+		Stopwatch stopWatch = new Stopwatch();
+		stopWatch.start();
 		long revisionsSearched = 0;
 		BulletinSearcher matcher = new BulletinSearcher(searchNode);
 		Set uids = store.getAllBulletinLeafUids();
@@ -1147,8 +1149,8 @@ public class MartusApp
 				}
 			}
 		}
-		long endTime = System.currentTimeMillis();
-		System.out.println("Search took:"+(endTime-startTime)/1000+" Seconds, " + matchedBulletinUids.size() +" matches found, " +uids.size()+" leafs, "+ revisionsSearched + " revisions were searched.");
+		stopWatch.stop();
+		System.out.println("Search took:"+stopWatch.elapsedInSeconds()+" Seconds, " + matchedBulletinUids.size() +" matches found, " +uids.size()+" leafs, "+ revisionsSearched + " revisions were searched.");
 		
 		return matchedBulletinUids;
 	}
