@@ -232,17 +232,34 @@ public class ReportRunner
 				summaryCounts.increment(values);
 			}
 			
-			for(int breakLevel = breakSpecs.length - 1; breakLevel >= 0; --breakLevel)
+			int breakLevel = computeBreakLevel(upcomingBulletin);
+			
+			if(breakLevel < 0)
+				return;
+			
+			for(int level = breakSpecs.length - 1; level >= breakLevel; --level)
 			{
-				String current = getBreakData(upcomingBulletin, breakLevel);
-				if(current == null || !current.equals(previousBreakValues[breakLevel]))
+				if(breakCounts[0] > 0)
+					performBreak(level);
+				String current = getBreakData(upcomingBulletin, level);
+				previousBreakValues[level] = current;
+				breakCounts[level] = 0;
+			}
+		}
+
+		private int computeBreakLevel(SafeReadableBulletin upcomingBulletin)
+		{
+			int breakLevel = -1;
+			for(int level = 0; level < breakSpecs.length; ++level)
+			{
+				String current = getBreakData(upcomingBulletin, level);
+				if(current == null || !current.equals(previousBreakValues[level]))
 				{
-					if(breakCounts[0] > 0)
-						performBreak(breakLevel);
-					previousBreakValues[breakLevel] = current;
-					breakCounts[breakLevel] = 0;
+					breakLevel = level;
+					break;
 				}
 			}
+			return breakLevel;
 		}
 		
 		public void doFinalBreak() throws Exception

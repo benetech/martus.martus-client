@@ -213,10 +213,10 @@ public class TestReportRunner extends TestCaseEnhanced
 		
 		
 		ReportOutput sortByAuthorSummary = runReportOnAppData(rf, app, options);
-		assertEquals("1 had 1\n" + authorLabel + ": a " + summaryLabel + ": 1 \n" +
+		assertEquals("1 had 2\n" + authorLabel + ": a " + summaryLabel + ": 1 \n" +
 				"1 had 1\n" + authorLabel + ": a " + summaryLabel + ": 2 \n" +
-				"0 had 2\n" + authorLabel + ": a \n" +
-				"1 had 1\n" + authorLabel + ": b " + summaryLabel + ": 1 \n" +
+				"0 had 3\n" + authorLabel + ": a \n" +
+				"1 had 1\n" + authorLabel + ": b " + summaryLabel + ": 2 \n" +
 				"0 had 1\n" + authorLabel + ": b \n", 
 				sortByAuthorSummary.getPageText(0));
 		
@@ -227,7 +227,7 @@ public class TestReportRunner extends TestCaseEnhanced
 		String entryDateLabel = localization.getFieldLabelHtml(Bulletin.TAGENTRYDATE);
 		String formattedDate = localization.convertStoredDateToDisplay(sampleDate);
 		ReportOutput sortedByEntryDate = runReportOnAppData(rf, app, options, entryDateSorting);
-		assertEquals("0 had 3\n" + entryDateLabel + ": " + formattedDate + " \n", sortedByEntryDate.getPageText(0));
+		assertEquals("0 had 4\n" + entryDateLabel + ": " + formattedDate + " \n", sortedByEntryDate.getPageText(0));
 		
 		options.printBreaks = false;
 		assertEquals("Still had output?", "", runReportOnAppData(rf, app, options).getPageText(0));
@@ -237,8 +237,9 @@ public class TestReportRunner extends TestCaseEnhanced
 	{
 		MockMartusApp app = MockMartusApp.create();
 		createAndSaveSampleBulletin(app, "a", "1", sampleDate);
+		createAndSaveSampleBulletin(app, "a", "1", sampleDate);
 		createAndSaveSampleBulletin(app, "a", "2", sampleDate);
-		createAndSaveSampleBulletin(app, "b", "1", sampleDate);
+		createAndSaveSampleBulletin(app, "b", "2", sampleDate);
 		return app;
 	}
 
@@ -267,12 +268,12 @@ public class TestReportRunner extends TestCaseEnhanced
 		String authorLabel = localization.getFieldLabelHtml(Bulletin.TAGAUTHOR);
 		String summaryLabel = localization.getFieldLabelHtml(Bulletin.TAGSUMMARY);
 		ReportOutput totals = runReportOnAppData(rf, app, options);
-		assertEquals("TOTALS 3\n" + 
-				"1. " + authorLabel + ": a = 2\n" +
-				"2. " + summaryLabel + ": 1 = 1\n" +
+		assertEquals("TOTALS 4\n" + 
+				"1. " + authorLabel + ": a = 3\n" +
+				"2. " + summaryLabel + ": 1 = 2\n" +
 				"2. " + summaryLabel + ": 2 = 1\n" +
 				"1. " + authorLabel + ": b = 1\n" +
-				"2. " + summaryLabel + ": 1 = 1\n", totals.getPageText(0));
+				"2. " + summaryLabel + ": 2 = 1\n", totals.getPageText(0));
 		
 		options.printBreaks = false;
 		ReportOutput noTotals = runReportOnAppData(rf, app, options);
@@ -334,7 +335,7 @@ public class TestReportRunner extends TestCaseEnhanced
 		rf.setFakePageBreakSection(". ");
 		
 		ReportOutput sortByAuthorSummaryWithDetail = runReportOnAppData(rf, app, options);
-		assertEquals("Start Header Detail Break Detail Break Break Detail Break Break TotalBreak Footer . End ", sortByAuthorSummaryWithDetail.getPrintableDocument());
+		assertEquals("Start Header Detail Detail Break Detail Break Break Detail Break Break TotalBreak Footer . End ", sortByAuthorSummaryWithDetail.getPrintableDocument());
 		
 		options.hideDetail = true;
 		ReportOutput sortByAuthorSummaryWithoutDetail = runReportOnAppData(rf, app, options);
@@ -344,7 +345,7 @@ public class TestReportRunner extends TestCaseEnhanced
 		rf.setBulletinPerPage(true);
 		options.hideDetail = false;
 		ReportOutput pageWithDetail = runReportOnAppData(rf, app, options);
-		assertEquals("Start Header Detail Footer . Header Detail Footer . Header Detail Footer . Total . End ", pageWithDetail.getPrintableDocument());
+		assertEquals("Start Header Detail Footer . Header Detail Footer . Header Detail Footer . Header Detail Footer . Total . End ", pageWithDetail.getPrintableDocument());
 
 		options.hideDetail = true;
 		ReportOutput pageWithoutDetail = runReportOnAppData(rf, app, options);
