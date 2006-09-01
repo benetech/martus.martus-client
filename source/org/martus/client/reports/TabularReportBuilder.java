@@ -80,7 +80,7 @@ public class TabularReportBuilder extends ReportBuilder
 			headerBuffer.append("<th>");
 			MiniFieldSpec spec = specs[i];
 			String label = StandardFieldSpecs.getLocalizedLabelHtml(spec.getTag(), spec.getLabel(), localization);
-			headerBuffer.append(label);
+			headerBuffer.append(bodyEscape(label));
 			headerBuffer.append("</th>");
 		}
 		headerBuffer.append("</tr>\n");
@@ -120,25 +120,25 @@ public class TabularReportBuilder extends ReportBuilder
 		return detailBuffer.toString();
 	}
 
-	private String getFieldCall(MiniFieldSpec spec)
+	public String getFieldCall(MiniFieldSpec spec)
 	{
 		String[] tags = SafeReadableBulletin.parseNestedTags(spec.getTag());
 		String topLevelTag = tags[0];
 		
 		StringBuffer result = new StringBuffer();
-		result.append("$bulletin.field('");
-		result.append(topLevelTag);
-		result.append("', '");
-		result.append(spec.getTopLevelLabel());
-		result.append("', '");
-		result.append(spec.getTopLevelType().getTypeName());
-		result.append("')");
+		result.append("$bulletin.field(\"");
+		result.append(quotedEscape(topLevelTag));
+		result.append("\", \"");
+		result.append(quotedEscape(spec.getTopLevelLabel()));
+		result.append("\", \"");
+		result.append(quotedEscape(spec.getTopLevelType().getTypeName()));
+		result.append("\")");
 		
 		for(int i = 1; i < tags.length; ++i)
 		{
-			result.append(".getSubField('");
-			result.append(tags[i]);
-			result.append("', $localization)");
+			result.append(".getSubField(\"");
+			result.append(quotedEscape(tags[i]));
+			result.append("\", $localization)");
 		}
 			
 		return result.toString();

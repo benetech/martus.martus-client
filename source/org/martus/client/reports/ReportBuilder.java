@@ -30,11 +30,35 @@ import org.martus.util.language.LanguageOptions;
 
 public class ReportBuilder
 {
-	protected static final String INDENT = "&nbsp;&nbsp;&nbsp;&nbsp;";
-
 	public ReportBuilder(MiniLocalization localizationToUse)
 	{
 		localization = localizationToUse;
+	}
+	
+	/*
+	 * Escape template text to protect from velocity. 
+	 * Problem characters: \ # $ '
+	 */
+	public static String bodyEscape(String raw)
+	{
+		String result = raw;
+		result = result.replaceAll("\\\\", "\\\\\\\\");	// must be first!
+		result = result.replaceAll("\\#([a-zA-Z])", "\\\\\\#$1");
+		result = result.replaceAll("\\$([a-zA-Z])", "\\\\\\$$1");
+		result = result.replaceAll("\\'", "\\\\\\'");
+		return result;
+	}
+	
+	/* 
+	 * Escape text inside single quotes to protect from velocity.
+	 * Problem characters: \ "
+	 */
+	public static String quotedEscape(String raw)
+	{
+		String result = raw;
+		result = result.replaceAll("\\\\", "\\\\\\\\");	// must be first!
+		result = result.replaceAll("\\\"", "\\\\042");
+		return result;
 	}
 	
 	String getTotalCountString()
@@ -83,6 +107,8 @@ public class ReportBuilder
 		String item3 = sumaryId + count;
 		return item1+item2+item3;
 	}
+
+	protected static final String INDENT = "&nbsp;&nbsp;&nbsp;&nbsp;";
 
 	MiniLocalization localization;
 }

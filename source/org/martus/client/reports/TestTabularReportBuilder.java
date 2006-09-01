@@ -33,6 +33,7 @@ import org.martus.common.fieldspec.FieldTypeNormal;
 import org.martus.common.fieldspec.MiniFieldSpec;
 import org.martus.util.TestCaseEnhanced;
 import org.martus.util.language.LanguageOptions;
+import org.martus.util.xml.XmlUtilities;
 
 public class TestTabularReportBuilder extends TestCaseEnhanced
 {
@@ -44,7 +45,7 @@ public class TestTabularReportBuilder extends TestCaseEnhanced
 	public void testCreateTabularReport()
 	{
 		MiniFieldSpec[] specs = new MiniFieldSpec[] {
-			new MiniFieldSpec(FieldSpec.createCustomField("tag1", "Label1", new FieldTypeNormal())),
+			new MiniFieldSpec(FieldSpec.createCustomField("tag1", "Label1'#$\\", new FieldTypeNormal())),
 			new MiniFieldSpec(FieldSpec.createCustomField("tag2", "Label2", new FieldTypeNormal())),
 			new MiniFieldSpec(FieldSpec.createCustomField("tag3", "Label3", new FieldTypeNormal())),
 		};
@@ -58,17 +59,17 @@ public class TestTabularReportBuilder extends TestCaseEnhanced
 		String headerSection = rf.getHeaderSection();
 		for(int i = 0; i < specs.length; ++i)
 		{
-			String label = specs[i].getLabel();
+			String label = ReportBuilder.bodyEscape(XmlUtilities.getXmlEncoded(specs[i].getLabel()));
 			assertContains("Missing " + label + "?", label, headerSection);
 		}
 		
 		String detailSection = rf.getDetailSection();
 		for(int i = 0; i < specs.length; ++i)
 		{
-			String fieldCall = "$bulletin.field('" + specs[i].getTag() + 
-			"', '" + specs[i].getLabel() + 
-			"', '" + specs[i].getType().getTypeName() + 
-			"').html($localization)";
+			String fieldCall = "$bulletin.field(\"" + specs[i].getTag() + 
+			"\", \"" + ReportBuilder.quotedEscape(specs[i].getLabel()) + 
+			"\", \"" + specs[i].getType().getTypeName() + 
+			"\").html($localization)";
 			assertContains("Missing " + specs[i].getTag() + "?", fieldCall, detailSection);
 		}
 		
@@ -81,6 +82,17 @@ public class TestTabularReportBuilder extends TestCaseEnhanced
 		LanguageOptions.setDirectionLeftToRight();
 	}
 	
+	public void testFieldCall() throws Exception
+	{
+		String tag = "a$b#c'd\\e\"";
+		String label = "a$b#c'd\\e\"";
+		FieldSpec spec = FieldSpec.createCustomField(tag, label, new FieldTypeNormal());
+		MiniFieldSpec miniSpec = new MiniFieldSpec(spec);
+		TabularReportBuilder builder = new TabularReportBuilder(new MiniLocalization());
+		String call = builder.getFieldCall(miniSpec);
+		assertEquals("Didn't encode the call?", "$bulletin.field(\"a$b#c'd\\\\e\\042\", \"a$b#c'd\\\\e\\042\", \"STRING\")", call);
+	}
+	
 	public void testSubFields() throws Exception
 	{
 		FieldSpec range = FieldSpec.createCustomField("range", "Date Range", new FieldTypeDateRange());
@@ -89,7 +101,7 @@ public class TestTabularReportBuilder extends TestCaseEnhanced
 		TabularReportBuilder builder = new TabularReportBuilder(new MiniLocalization());
 		ReportFormat rf = builder.createTabular(specs);
 		String detail = rf.getDetailSection();
-		String expected = "$bulletin.field('range', 'Date Range', 'DATERANGE').getSubField('begin', $localization).html($localization)";
+		String expected = "$bulletin.field(\"range\", \"Date Range\", \"DATERANGE\").getSubField(\"begin\", $localization).html($localization)";
 		assertContains("Bad date range subfield?", expected, detail);
 		
 	}

@@ -37,6 +37,7 @@ import org.martus.client.core.TestSafeReadableBulletin;
 import org.martus.client.core.TestSortableBulletinList;
 import org.martus.client.reports.TestPageReportBuilder;
 import org.martus.client.reports.TestReportAnswers;
+import org.martus.client.reports.TestReportBuilder;
 import org.martus.client.reports.TestReportFormat;
 import org.martus.client.reports.TestReportRunner;
 import org.martus.client.reports.TestSummaryCount;
@@ -90,6 +91,7 @@ public class TestClient
 		suite.addTest(new TestSuite(TestPageReportBuilder.class));
 		suite.addTest(new TestSuite(TestPartialBulletin.class));
 		suite.addTest(new TestSuite(TestReportAnswers.class));
+		suite.addTest(new TestSuite(TestReportBuilder.class));
 		suite.addTest(new TestSuite(TestRetrieveCommand.class));
 		suite.addTest(new TestSuite(TestTabularReportBuilder.class));
 		suite.addTest(new TestSuite(TestReportFormat.class));

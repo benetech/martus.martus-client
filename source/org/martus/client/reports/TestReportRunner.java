@@ -100,6 +100,22 @@ public class TestReportRunner extends TestCaseEnhanced
 		assertEquals("\n  dog\n  cat\n  monkey\n$nosuchvariable", performMerge(template));
 	}
 	
+	public void testSpecialCharacters() throws Exception
+	{
+		char[] allAscii = new char[128];
+		for(int i =0; i < allAscii.length; ++i)
+			allAscii[i] = (char)i;
+		allAscii['\''] = ' ';
+		allAscii['"'] = ' ';
+		allAscii['<'] = ' ';
+		allAscii['>'] = ' ';
+		
+		String nastyLabel = new String(allAscii);
+		String template = nastyLabel + ": $field('" + nastyLabel + "')";
+		assertEquals("Didn't handle bad characters properly?", template, performMerge(template));
+		
+	}
+	
 	public void testRunReport() throws Exception
 	{
 		MockMartusApp app = MockMartusApp.create();
