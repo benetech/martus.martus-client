@@ -25,7 +25,9 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.dialogs;
 
+import java.awt.BorderLayout;
 import java.awt.Component;
+import java.awt.ComponentOrientation;
 
 import javax.swing.ButtonGroup;
 import javax.swing.ButtonModel;
@@ -37,6 +39,7 @@ import javax.swing.JTabbedPane;
 import org.martus.clientside.CurrentUiState;
 import org.martus.clientside.UiLocalization;
 import org.martus.swing.UiLabel;
+import org.martus.swing.UiLanguageDirection;
 import org.martus.swing.UiParagraphPanel;
 import org.martus.swing.UiRadioButton;
 import org.martus.swing.UiTabbedPane;
@@ -51,19 +54,24 @@ public class UiInitialSigninDlg extends UiSigninDlg
 		super(localizationToUse, uiStateToUse, owner, mode, userName, password);
 	}
 
-	protected JPanel createMainPanel()
+	protected Component createMainPanel()
 	{
-		JPanel scrolledPanel = new JPanel(); 
+		JPanel forceProperAlignment = new JPanel(new BorderLayout());
+		String side = BorderLayout.BEFORE_LINE_BEGINS;
+		if(UiLanguageDirection.getComponentOrientation() == ComponentOrientation.RIGHT_TO_LEFT)
+			side = BorderLayout.AFTER_LINE_ENDS;
+		forceProperAlignment.add(signinPane, side);
+
 		tabbedPane = new UiTabbedPane();
 		tabLabelSignIn = localization.getButtonLabel("SignIn");
 		tabLabelNewAccount = localization.getButtonLabel("NewAccountTab");
 		tabLabelRecoverAccount = localization.getButtonLabel("RecoverAccountTab");
 		if(currentMode == INITIAL)
-			tabbedPane.add(signinPane,tabLabelSignIn);
+			tabbedPane.add(forceProperAlignment,tabLabelSignIn);
 		tabbedPane.add(createNewAccountPanel(), tabLabelNewAccount);
 		tabbedPane.add(createRecoverAccountPanel(), tabLabelRecoverAccount);
-		scrolledPanel.add(tabbedPane);
-		return scrolledPanel;
+		
+		return tabbedPane;
 	}
 
 	JComponent createNewAccountPanel()
