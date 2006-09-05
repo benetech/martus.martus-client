@@ -50,6 +50,7 @@ public class XmlBulletinsImporter
 		try
 		{
 			bulletinsLoader = new XmlBulletinsFileLoader(security, baseAttachmentsDirectory);
+			bulletinsLoader.allowSpaceOnlyCustomLabels = true;
 			bulletinsLoader.parse(reader);
 			if(bulletinsLoader.didFieldSpecVerificationErrorOccur())
 				throw new FieldSpecVerificationException(bulletinsLoader.getErrors());

@@ -250,7 +250,7 @@ public class XmlBulletinsFileLoader extends SimpleXmlDefaultLoader
 
 	private void validateMainFields(FieldCollection fieldsTopSection, FieldCollection fieldsBottomSection)
 	{
-		CustomFieldSpecValidator validator = new CustomFieldSpecValidator(fieldsTopSection, fieldsBottomSection);
+		CustomFieldSpecValidator validator = new CustomFieldSpecValidator(fieldsTopSection, fieldsBottomSection, allowSpaceOnlyCustomLabels);
 		for (Iterator iter = fieldTagValuesMap.entrySet().iterator(); iter.hasNext();)
 		{
 			Map.Entry element = (Map.Entry) iter.next();
@@ -263,6 +263,8 @@ public class XmlBulletinsFileLoader extends SimpleXmlDefaultLoader
 			fieldSpecValidationErrors.add(validator);
 		}
 	}
+	
+	public boolean allowSpaceOnlyCustomLabels;
 
 	private XmlBulletinLoader currentBulletinLoader;
 	public FieldCollection mainFields;

@@ -94,7 +94,7 @@ public class TestImporterOfXmlFilesOfBulletins extends TestCaseEnhanced
 		XmlBulletinsImporter importer = new XmlBulletinsImporter(security, xmlIn);
 		FieldSpec[] mainFieldSpecs = importer.getMainFieldSpecs();
 		assertNotNull(mainFieldSpecs);
-		assertEquals(19, mainFieldSpecs.length);
+		assertEquals(20, mainFieldSpecs.length);
 		FieldSpec field = mainFieldSpecs[0];
 		assertTrue(field.getType().isLanguageDropdown());
 		FieldSpec[] privateFieldSpecs = importer.getPrivateFieldSpecs();

@@ -154,7 +154,17 @@
 </Column>
 </GridSpecDetails>
 </Field>
+
+<Field type='MESSAGE'>
+<Tag>MessageWithoutLabel</Tag>
+<Label> </Label>
+<Message>Message fields with space-only labels must still be importable</Message>
+</Field>
+
+
 </MainFieldSpecs>
+
+
 <PrivateFieldSpecs>
 <Field type='MULTILINE'>
 <Tag>privateinfo</Tag>
