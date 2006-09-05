@@ -103,6 +103,7 @@ public class ImportBulletins
 			}
 			catch (Exception e)
 			{
+				e.printStackTrace();
 				mainWindow.notifyDlg("ErrorImportingBulletins");
 			}
 			finally
