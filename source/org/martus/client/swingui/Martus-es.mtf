@@ -1,10 +1,10 @@
 ﻿# Martus Client Translation File
 # Language code:  es
 # Language name:  Spanish
-# Translated by:  Benetech; CPSR-Perú
-# Exported date:  Wed Mar 15 11:20:32 PST 2006
-# Client version: pre-2.9 internal
-# Client build:   20060314.1712
+# Translated by:  Katitza Rodríguez
+# Exported date:  Mon Sep 04 10:32:06 PDT 2006
+# Client version: pre 3.0 internal
+# Client build:   20060901.1760
 #
 # This file MUST be saved in UTF-8 format!
 # Lines beginning with # are comments and are ignored by Martus
@@ -69,10 +69,29 @@
 #      a particular value.
 #      For Example. #TotalNumberOfFilesInBackup# = '5'
 #                   #Titles# = 'A list of bulletin titles'
-# 12.  If you want your language to appear right to left,
+# 12.  Do not translate the numbers in the field:translationVersion string.
+# 13.  Do not translate the numbers in the field:ErrorCustomFields string.
+# 14.  For Thai and Persian months, please do the following:
+#          - for a Thai translation, Thai months should be the same as the translation
+#            of regular months, and Persian dates are the same as in English.
+#          - for a Persian translation, both Thai and Persian months
+#            should be the same as the translation of regular months
+#          - for an Arabic translation, Thai months should be the same as
+#            the translation of regular months, but do an Arabic translation
+#            (or transliteration) of Persian dates (not the same as in English).
+#          - for all other languages, Thai and Persian dates can be the same
+#            as the translation of regular months
+# 15       - We have file filters like 'Martus Report Format (.mrf)'
+#            and 'Martus Search Specification (.mss)'.
+#            The descriptive names should be translated, but the (.mrf) and (.mss)
+#            must not be translated.
+# 16.  If you want your language to appear right to left,
 #      Uncomment the next line (by removing the # in front of #!right-to-left)
 #!right-to-left
 #
+
+#____________________________=Add
+-61cc-button:AddFieldToReport=Agregar
 
 #________________________=Show all bulletins on this server and on this computer.
 -e9a2-button:AllSummaries=Mostrar todos los boletines en este servidor y en este ordenador.
@@ -98,6 +117,12 @@
 #____________________=Continue
 -2e02-button:Continue=Continuar
 
+#____________________________=Create New Page Report
+-1d7a-button:CreatePageReport=Crear nueva página de reporte
+
+#_______________________________=Create New Tabular Report
+-34ee-button:CreateTabularReport=Crear nuevo reporte tabular
+
 #__________________=Delete
 -f6fd-button:Delete=Eliminar
 
@@ -109,6 +134,15 @@
 
 #_________________________________=Show bulletins that are only on the server.
 -b795-button:DownloadableSummaries=Mostrar sólo los boletines en el servidor.
+
+#______________________=Field Label
+-6492-button:FieldLabel=Título del campo
+
+#____________________=Tag
+-9829-button:FieldTag=Nombre de identificación
+
+#_____________________=Type
+-3deb-button:FieldType=Tipo
 
 #___________________________=Down
 -bf93-button:FolderOrderDown=Bajar
@@ -122,8 +156,23 @@
 #_________________=Leave
 -7e35-button:Leave=Salir
 
+#______________________=Load Previous Search...
+-75f7-button:LoadSearch=Cargar búsqueda previa...
+
+#______________________________=Load
+-ddcb-button:LoadSearchOkButton=Cargar
+
+#_________________________________=Move Down
+-4158-button:MoveFieldDownInReport=Bajar
+
+#_______________________________=Move Up
+-c637-button:MoveFieldUpInReport=Subir
+
 #_________________________=New Account
 -1d19-button:NewAccountTab=Nueva cuenta
+
+#___________________________=Choose Field...
+-288f-button:PopUpTreeChoose=Seleccionar campo...
 
 #___________________=Preview
 -f1fb-button:Preview=Vista previa
@@ -134,11 +183,20 @@
 #_________________________________=Include private information
 -6c53-button:PrintPublicAndPrivate=Incluir información privada
 
-#_______________________=Send report output to a file
--89b9-button:PrintToDisk=Enviar reporte a un archivo
+#_______________________=Send report to a file
+-b154-button:PrintToDisk=Enviar reporte a un archivo
 
-#__________________________=Print to a printer
--7bac-button:PrintToPrinter=Enviar a impresora
+#_______________________=Print To File
+-a5d9-button:PrintToFile=Enviar a archivo
+
+#__________________________=Print To Printer
+-319b-button:PrintToPrinter=Imprimir
+
+#________________________________=Both Public and Private Data
+-8685-button:PublicAndPrivateData=Información pública y privada
+
+#______________________=Public Data Only
+-4baa-button:PublicOnly=Sólo información pública
 
 #__________________________________=Restore account from backup key file
 -f447-button:RecoverAccountByBackup=Recuperar cuenta de una copia de seguridad
@@ -149,6 +207,9 @@
 #_____________________________=Restore Account
 -d7da-button:RecoverAccountTab=Recuperar cuenta
 
+#_________________________________=Remove
+-e963-button:RemoveFieldFromReport=Remover
+
 #_________________________=Reset Contents
 -6f62-button:ResetContents=Revertir contenido
 
@@ -158,8 +219,17 @@
 #______________________________________________=Retrieve latest bulletin version only
 -3449-button:RetrieveLatestBulletinRevisionOnly=Bajar la última versión del boletín
 
+#_____________________=Use Existing Report Format
+-b052-button:RunReport=Usar el formato de reporte existente
+
+#______________________=Save This Search...
+-e372-button:SaveSearch=Guardar esta búsqueda...
+
 #____________________________________=Only search most recent version of bulletins
 -852f-button:SearchFinalBulletinsOnly=Solo buscar la versión más reciente de los boletines
+
+#________________________=Select
+-8598-button:SelectReport=Seleccionar
 
 #__________________________________=Accept
 -bb54-button:ServerComplianceAccept=Aceptar
@@ -269,8 +339,8 @@
 #______________=OK
 -9ce3-button:ok=Aceptar
 
-#_________________=Print/Report
--5fdf-button:print=Imprimir/Reporte
+#_________________=Print
+-5b22-button:print=Imprimir
 
 #____________________________=Remove Attachment
 -6f6d-button:removeattachment=Eliminar archivo adjunto
@@ -319,6 +389,18 @@
 
 #_________________________=Author (required)
 -4a0b-field:AuthorRequired=Autor (requerido)
+
+#_____________________________=Preparing Report...
+-7651-field:BackgroundPrinting=Preparando reporte...
+
+#______________________________=Searching...
+-ba2b-field:BackgroundSearching=Buscando...
+
+#____________________________=Sorting Bulletins...
+-5a5a-field:BackgroundSorting=Clasificando boletines...
+
+#____________________________=Working...
+-049a-field:BackgroundWorking=Procesando...
 
 #___________________________________=Your key is required to read your private bulletin information or to create new bulletins.  To ensure that you'll always have access to your data, it is extremely important to keep a backup of your key.\n\nMartus offers two methods for backing up your key, either of which may be used, but we strongly recommend using both backup methods.  The first method creates a single, password encrypted key back up file onto removable media (e.g. floppy disk, cd, USB storage) or a network drive; the second method backs up the key in #TotalNumberOfFilesInBackup# separate pieces (not encrypted with your password) onto multiple floppy disks (or other removable media).\n
 -ff3d-field:BackupKeyPairGeneralInfo=Su llave es un elemento requerido para poder leer la información privada de sus boletines o para crear nuevos boletines. Es importante tener copias de seguridad de su llave para estar seguro que siempre va a tener acceso a su información.\n\nMartus le ofrece dos métodos para crear copias de seguridad de su llave, puede escoger el que más le convenga pero le recomendamos que use ambos métodos. El primer método crea una sola copia de su llave, cifrada y protegida con su contraseña, a un medio removible (como una unidad USB, un disco CD-ROM o un disquete) o a un disco de red. El segundo método crea múltiples copias de seguridad seccionando su llave en #TotalNumberOfFilesInBackup# partes (sin protegerlas con su contraseña) y copiándolas a medios removibles como disquetes.\n
@@ -383,6 +465,9 @@
 #_____________________=Bulletin Id:
 -a081-field:BulletinId=Identificación del boletín:
 
+#______________________________=Bulletin Import Files
+-1106-field:BulletinImportFiles=Archivos necesarios para importar el boletín.
+
 #____________________________=Last Saved
 -eb05-field:BulletinLastSaved=Última modificación
 
@@ -415,6 +500,9 @@
 
 #_____________________________=Thai Solar (2548-05-31)
 -2be4-field:CalendarSystemThai=Tailandés Solar (2548-05-31)
+
+#_____________________________=Use Ctrl-Click or Shift-Click to select the fields (columns) that will appear in this report. 
+-e4a8-field:ChooseReportFields=Use Ctrl-Click o Shift-Click para seleccionar los campos (columnas) que aparecerán en este reporte.
 
 #_____________________________________=Download Progress
 -8b0e-field:ChunkProgressStatusMessage=Descarga en progreso
@@ -455,8 +543,14 @@
 #____________________________________=Please enter your new username and password.
 -aec2-field:CreateNewUserNamePassword=Escriba su nuevo nombre de usuario y contraseña.
 
+#_________________________________=Bottom/Private Section of Bulletin
+-cf48-field:CustomXMLBottomSection=Sección inferior/privada del boletín
+
+#______________________________=Top Section of Bulletin
+-cff1-field:CustomXMLTopSection=Sección superior del boletín
+
 #_____________________________________=Customization Template Files
--9210-field:CustomizationTemplateFiles=Archivos de pantillas personalizadas
+-9210-field:CustomizationTemplateFiles=Archivos de plantillas personalizadas
 
 #________________________=Date delimiter
 -36d4-field:DateDelimiter=Separador de fechas
@@ -472,6 +566,9 @@
 
 #____________________=Exact Date
 -8a81-field:DateExact=Fecha exacta
+
+#___________________________=Unknown
+-bc78-field:DateNotSpecified=Desconocido
 
 #______________________=Day
 -987b-field:DatePartDay=Día
@@ -515,6 +612,15 @@
 #______________________=Do not prompt
 -448d-field:DonotPrompt=No preguntar nuevamente
 
+#__________________________=Labels
+-2228-field:DuplicateLabels=Títulos
+
+#__________________________________________=The following labels appear more than once in your template.
+-3f09-field:DuplicateLabelsInCustomTemplate=Los siguientes títulos aparecen más de una vez en su plantilla.
+
+#__________________________________________________=Do you want to save this template with the duplicate labels?
+-79bc-field:DuplicateLabelsInCustomTemplateContinue=¿Desea grabar esta plantilla con los títulos duplicados?
+
 #________________________________=Unable to back up the key file on this disk.
 -bda3-field:ErrorBackingupKeyPair=No se pudo guardar el archivo de llave en este disco.
 
@@ -530,8 +636,8 @@
 #__________________________________=LABEL
 -64b8-field:ErrorCustomFieldHeader4=TÍTULO
 
-#____________________________=There is an error in the custom field definitions. Each problem is identified with the following codes:\n   100 - Required standard field is missing\n   101 - Custom field does not have a correct tag.\n   102 - A previous Tag already exists with this name.\n   103 - Custom field does not have a label.\n   104 - Unrecognized Field Type.\n   105 - A label was found in a standard field.\n   106 - XML Parse Error.\n   107 - Tag contains illegal characters.\n   108 - Duplicate entry in Dropdown field.\n   109 - No Choices in Dropdown field.\n   200 - All fields empty.\n   201 - Unrecognized Headquarters created this template.\n   202 - Security validation error.\n   203 - File Error.\n   204 - Imported XML Missing Field.
--0b96-field:ErrorCustomFields=Se encontró un error en la definición de los campos personalizados. Cada problema es identificado con los siguientes códigos:\n   100 - Falta un campo estándar requerido\n   101 - Un campo personalizado tiene un nombre de identificación incorrecto.\n   102 - Hay un nombre de identificación duplicado.\n   103 - Campo personalizado no tiene título.\n   104 - Tipo de campo desconocido.\n   105 - Se encontró un título en un campo estándar.\n   106 - XML Error al leer documento.\n   107 - Nombre de identificación contiene caracteres inválidos.\n   108 - Ingreso duplicado en lista desplegable\n   109 - No hay opciones en la lista desplegable.\n   200 - Todos los campos vacíos.\n   201 - Una cuenta de oficina central desconocida creó esta plantilla.\n   202 - Error de validación de seguridad.\n   203 - Error de archivo.\n   204 - Falta campos en el XML importado.
+#____________________________=There is an error in the custom field definitions. Each problem is identified with the following codes:\n   100 - Required standard field is missing\n   101 - Custom field does not have a correct tag.\n   102 - A previous Tag already exists with this name.\n   103 - Custom field does not have a label.\n   104 - Unrecognized Field Type.\n   105 - A label was found in a standard field.\n   106 - XML Parse Error.\n   107 - Tag contains illegal characters.\n   108 - Duplicate entry in Dropdown field.\n   109 - No Choices in Dropdown field.\n   110 - System/Standard field tag cannot be used for custom field.\n   111 - Standard Public field cannot be placed in bottom/Private section.\n   112 - Standard Private field cannot be placed in the top section.\n   200 - All fields empty.\n   201 - Unrecognized Headquarters created this template.\n   202 - Security validation error.\n   203 - File Error.\n   204 - Imported XML Missing Field.
+-71f2-field:ErrorCustomFields=Hay un error en la definición de los campos personalizados. Cada problema es identificado con los siguientes códigos:\n   100 - Falta un campo estándar requerido.\n   101 - Un campo personalizado tiene un nombre de identificación incorrecto.\n   102 - Hay un nombre de identificación duplicado.\n   103 - Un campo personalizado no tiene título.\n   104 - Tipo de campo desconocido.\n   105 - Se encontró un título en un campo estándar.\n   106 - Error XML al leer el documento.\n   107 - El nombre de identificación contiene caracteres inválidos.\n   108 - Ingreso duplicado en lista desplegable\n   109 - No hay opciones en la lista desplegable.\n   110 - El nombre de identificación del campo estándar/sistema no puede ser usado en campos personalizados.\n   111 - El campo público estándar no puede ser puesto en la parte inferior/privada del boletín.\n   112 - El campo privado estándar no puede ser puesto en la parte superior del boletín.\n   200 - Todos los campos vacíos.\n   201 - Una cuenta de oficina central desconocida creó esta plantilla.\n   202 - Error de validación de seguridad.\n   203 - Error de archivo.\n   204 - Falta campos en el XML importado.
 
 #_________________________________________=A previous backup file exists.  You must save each file on its own removable media disk.
 -db93-field:ErrorPreviousBackupShareExists=Una pieza de un archivo de seguridad ya existe en este medio. Cada pieza debe ser guardada en su propio medio removible.
@@ -548,11 +654,17 @@
 #___________________________=Exit when complete
 -30e3-field:ExitWhenComplete=Salir al terminar
 
-#________________________________=Information from the selected bulletins (listed below) will be exported to an XML file that you specify.\n\nPlease Note: This is a one way operation, you will not be able to import the XML file saved back into Martus.  This operation exists so you can bring Martus Bulletins into another application that does import XML files.
--7ae7-field:ExportBulletinDetails=La información de los boletines seleccionados (listados abajo) van a ser exportados al archivo XML que especifique.\n\nNota: No es posible importar el archivo XML a Martus.  Esta operación sólo existe para transferir boletines de Martus a otro programa que importe archivos XML.
+#____________________________=Include attachments in export
+-1a48-field:ExportAttachments=Incluye adjuntos al exportar
+
+#________________________________=Information from the selected bulletins (listed below) will be exported to an XML file that you specify.  These files can then be used to import the Martus bulletin information into another application.\n\n  You could also use this XML file to import these bulletins back into Martus (as new unique bulletins) if desired.  Please email help@martus.org if you need assistance with this type of importing.
+-a8c0-field:ExportBulletinDetails=La información de los boletines seleccionados (listados abajo) van a ser exportados al archivo XML que especifique. Estos archivos pueden ser usados para importar la información del boletín de Martus a otra aplicación. Si desea, también puede usar este archivo XML para importar estos boletines de regreso a Martus (como nuevos boletines únicos). Por favor envíe un mensaje a help@martus.org si requiere asistencia con este tipo de importación.
 
 #____________________________=Include private data in export
 -4bb6-field:ExportPrivateData=Exportar también la información privada
+
+#_________________________=Exporting
+-c373-field:ExportProgress=Exportando
 
 #____________________________=Exported Bulletins
 -0b4e-field:ExportedBulletins=Boletines exportados
@@ -565,6 +677,33 @@
 
 #______________________________=You can use the word #Or# or #And#, or you can use the English words "#OrEnglish#" and "#AndEnglish#" to search.\n\nYou need to put spaces before and after any #Or# / #And# keywords you use in your search.\n
 -1573-field:FancySearchHelpMsg3=Puede usar las palabras #Or# o #And#, o también puede usar las palabras en inglés "#OrEnglish#" y "#AndEnglish#" en su búsqueda.\n\nNecesita poner espacios alrededor de las palabras #Or# / #And# que use en sus búsquedas.\n
+
+#___________________________=Yes/No
+-9f62-field:FieldTypeBOOLEAN=Sí/No
+
+#________________________=Date
+-eb9a-field:FieldTypeDATE=Fecha
+
+#_____________________________=Date Range
+-6bb4-field:FieldTypeDATERANGE=Rango de fecha
+
+#____________________________=Dropdown List
+-da4a-field:FieldTypeDROPDOWN=Lista desplegada
+
+#________________________=Grid/Table
+-be86-field:FieldTypeGRID=Mapa personalizado/Tabla
+
+#____________________________=Language
+-89b8-field:FieldTypeLANGUAGE=Lenguaje
+
+#___________________________=Message
+-68f4-field:FieldTypeMESSAGE=Mensaje
+
+#_____________________________=Text with Scrollbar
+-c0c1-field:FieldTypeMULTILINE=Texto con barra de desplazamiento
+
+#__________________________=Text
+-c332-field:FieldTypeSTRING=Texto
 
 #______________________________________=This file name should be unique and identifiable to you but we recommend not using your user name.  Each file will be generated with this name and its number sequence.
 -02b6-field:GetShareFileNameDescription=El nombre del archivo tiene que ser único e identificable. Le recomendamos no usar su nombre de usuario.  Cada archivo generado usará el nombre que escoja y un número en secuencia.
@@ -608,6 +747,18 @@
 #________________________________=One or more accounts already exist on this computer. To create an additional account with a new username and passphrase, click OK.
 -02f2-field:HowToCreateNewAccount=Ya existe una o más cuentas en este ordenador. Oprima Aceptar para crear una cuenta adicional con un nuevo nombre de usuario y contraseña.
 
+#_________________________________________=Import bulletins into which Folder?
+-5efa-field:ImportBulletinsIntoWhichFolder=¿A cuál carpeta importar los boletines?
+
+#____________________________________=Bulletin
+-6ef0-field:ImportExportBulletinTitle=Boletín
+
+#_________________________=Importing
+-90ab-field:ImportProgress=Importando
+
+#_____________________________=#TotalBulletins# bulletins were selected for printing.  #AllPrivateBulletins# of them are all private.\n What would you like to include when printing?
+-abb2-field:IncludePrivateData=#TotalBulletins# boletines fueron seleccionados para imprimir. #AllPrivateBulletins# de ellos son privados. ¿Cuáles desea imprimir?
+
 #_________________________________=The version of this translation is not compatible with this version of Martus.  It is recommended that you do not continue to use this translation version and go to (http://www.martus.org/downloads) for the appropriate version.
 -a747-field:IncompatibleMtfVersion=La versión de esta traducción no es compatible con esta versión del programa de Martus.  Le recomendamos que no siga usando esta traducción y que visite el sitio web (http://www.martus.org/downloads) para descargar una versión apropiada.
 
@@ -616,6 +767,12 @@
 
 #____________________________________________=#MtfLanguage# Translation Version: #MtfVersionNumber#
 -8dde-field:IncompatibleMtfVersionTranslation=Versión de traducción (#MtfLanguage#): #MtfVersionNumber#
+
+#_______________________________________=Martus Report Format (.mrf)
+-62cd-field:MartusReportFormatFileFilter=Formato de reporte Martus (.mrf)
+
+#_____________________________________=Martus Search Specification (.mss)
+-76c0-field:MartusSearchSpecFileFilter=Especificación de búsqueda Martus (.mss)
 
 #_______________________=Warning: Portions may be missing or damaged
 -00a9-field:MayBeDamaged=Advertencia: Algunas partes pueden estar dañadas o perdidas.
@@ -641,6 +798,9 @@
 #_____________________________________=The author has not given you permission to view the private portions of this bulletin.
 -ba2f-field:NotAuthorizedToViewPrivate=El autor no le ha dado permiso para ver la información privada de este boletín.
 
+#____________________=(none)
+-3c6b-field:NotSorted=(ninguno)
+
 #____________________________=Details:
 -1daa-field:OnlineHelpMessage=Detalles:
 
@@ -653,11 +813,14 @@
 #_______________________________=Organization (required)
 -2f27-field:OrganizationRequired=Organización (requerido)
 
+#_______________________________=Add the fields you want to appear in your report, and then arrange them in the order you want them to be printed.
+-b511-field:OrganizeReportFields=Agregue los campos que desea que aparezcan en su reporte y después arréglelos en el orden que quisiera que fuesen impresos.
+
 #__________________________________=You have the option to include or exclude the selected bulletin's private information in this print out or report file. If you choose to print private data, it will be visible to anyone who sees the print out or report file.
 -2bd3-field:PrintPrivateDataMessage=Tiene la opción de incluir o excluir la información privada del boletín seleccionado al imprimirlo o al enviarlo a un archivo. Si elije imprimir los datos privados, personas con accesso a la copia impresa o el archivo del reporte podrán leer toda su información privada.
 
-#_______________________________=You can print the bulletin contents to a printer, or send the formatted report output to a file.
--41ba-field:PrintToPrinterOrDisk=Puede imprimir el contenido del boletín a una impresora, o enviar un reporte a un archivo.
+#_______________________________=You can print the bulletin contents to a printer, or send the formatted report to a file.
+-f988-field:PrintToPrinterOrDisk=Puede imprimir el contenido del boletín o enviar el reporte formateado a un archivo.
 
 #_________________________________=Public Information Files
 -90f9-field:PublicInformationFiles=Archivos de información pública
@@ -701,6 +864,27 @@
 #_____________________________=Are you sure you want to do this?
 -bfb8-field:RemoveServerLabel2=¿Está seguro que quiere hacer esto?
 
+#_________________________________=Choose how the bulletins will be sorted in the report. The bulletins will be ordered by the first field chosen. When two bulletins have the same value in that field, they will be sorted by the next sort field, and so on.
+-551d-field:ReportChooseSortFields=Elija la manera en la que los boletines van a ser clasificados en el reporte. Los boletines serán ordenados por el primer campo seleccionado. Cuando dos boletines tengan el mismo valor en ese campo, serán clasificados según el siguiente campo clasificador, y así sucesivamente.
+
+#___________________________=Print Bulletin Information
+-fb16-field:ReportDetailOnly=Imprimir información del boletín
+
+#____________________________________=Print Bulletin Information and Summary Counts
+-cdea-field:ReportDetailWithSummaries=Imprimir información del boletín y el Conteo-Resumen.
+
+#___________________________=*Error retrieving field*
+-6d15-field:ReportFieldError=*Error al descargar campo*
+
+#______________________=#NumberBulletinsFound# bulletins matched the search.
+-fc88-field:ReportFound=#NumberBulletinsFound# boletines encajan con la búsqueda.
+
+#__________________________________=Total Bulletins:
+-b840-field:ReportNumberOfBulletins=Total de boletines:
+
+#______________________________=Print Summary Counts Only
+-9ca4-field:ReportSummariesOnly=Imprimir sólo el Conteo-Resumen
+
 #__________________________________________=Retrieving Field Desk Draft Bulletins
 -c881-field:RetrieveHQDraftBulletinProgress=Bajando borradores de oficinas regionales
 
@@ -743,17 +927,20 @@
 #_____________________________=Click '#SearchHelpButton#' to get additional information on searching.
 -eb4b-field:SearchBulletinHelp=Oprima '#SearchHelpButton#' para información adicional sobre la búsqueda.
 
-#______________________________=For each row, select a field to search (or choose to match any field), select what kind of comparison to perform, and then enter a value to search for.
--6878-field:SearchBulletinRules=Elija el campo a buscar para cada fila (o elija buscar en todos los campos), seleccione el tipo de comparación, y luego ingrese el término de búsqueda.
+#______________________________=For each row, select a field to search (or choose to match any field), select what kind of comparison to perform, and then enter a value to search for.\n\nNOTE: Bulletins that appear only in the Discarded folder will not be searched.
+-3fd2-field:SearchBulletinRules=Para cada fila, seleccione el campo a buscar (o elija buscar en todos los campos), seleccione el tipo de comparación a ejecutar y luego ingrese el valor de búsqueda.\n\nNOTA: Los boletines que aparecen solamente en la carpeta de boletines desechados no serán buscados.
 
 #______________________=Search for:
 -0c73-field:SearchEntry=Buscar:
+
+#______________________=#NumberBulletinsFound# bulletins matched the search, and have been added to the Search Results folder.
+-998d-field:SearchFound=#NumberBulletinsFound# boletines que encajan con la búsqueda y que han sido agregados a la carpeta Resultados de Búsqueda.
 
 #________________________________=Field(s) to search
 -9acd-field:SearchGridHeaderField=Campo(s) donde buscar
 
 #_____________________________=Compare how?
--693f-field:SearchGridHeaderOp=Comparar como
+-693f-field:SearchGridHeaderOp=¿Comparar cómo?
 
 #________________________________=Search for...
 -f864-field:SearchGridHeaderValue=Términos de búsqueda...
@@ -850,6 +1037,18 @@
 
 #_____________________=Yes
 -5397-field:WasSentYes=Sí
+
+#__________________________=Unknown
+-bc78-field:YearUnspecified=Desconocido
+
+#_________________________=Last Saved
+-eb05-field:_lastSavedDate=Última modificación
+
+#______________________________=Last Saved
+-eb05-field:_lastSavedTimestamp=Última modificación
+
+#___________________=Sent
+-35f4-field:_wasSent=Enviado
 
 #____________________________=Built on
 -5342-field:aboutDlgBuildDate=Creado en
@@ -990,7 +1189,7 @@
 -518e-field:confirmEnterCustomFieldseffect=Modificar los campos de los boletines es una operación avanzada.  Solo debe continuar si usted está seguro que entiende esta característica del programa.
 
 #_________________________________________________=The file you chose is not part of a key backup set.  These files are named '<name you picked>-#.dat' where # is the sequence number in the disk set previously created.
--2e41-field:confirmErrorRecoverIvalidFileNamecause=El archivo que eligió no es parte de las copias de seguridad de su llave de Martus.  Los archivos de las copias de seguridad se llaman '<nombre que eligió>-#.dat' donde # es el número del archivo en la secuencia de copias removidas.
+-2e41-field:confirmErrorRecoverIvalidFileNamecause=El archivo que eligió no es parte de las copias de seguridad de su llave Martus.  Los archivos de las copias de seguridad se llaman '<nombre que eligió>-#.dat' donde # es el número del archivo en la secuencia de copias removidas.
 
 #__________________________________________________=Choosing yes will bring up the file selection dialog again so you may pick a different file.
 -c237-field:confirmErrorRecoverIvalidFileNameeffect=Oprima Sí para elegir un archivo diferente.
@@ -1104,7 +1303,7 @@
 -bbcf-field:confirmResetDefaultDetailseffect=Después de verificar el contenido puede aceptarlo, modificarlo u oprimir cancelar para mantener el contenido original.
 
 #____________________________________________=The following bulletin(s) selected for retrieval are newer versions of bulletins already on this computer:\n\n#Titles#
--050c-field:confirmRetrieveNewerVersionscause=El(Los) siguiente(s) boletín(es) seleccionados para bajar son nuevas versiones de boletines que ya tiene en su ordenador:\n\n#TITLES#
+-050c-field:confirmRetrieveNewerVersionscause=El(Los) siguiente(s) boletín(es) seleccionados para bajar son nuevas versiones de boletines que ya tiene en su ordenador:\n\n#Titles#
 
 #_____________________________________________=Each older version will be replaced by the newer version from the server.
 -1d86-field:confirmRetrieveNewerVersionseffect=Cada versión anterior va a ser reemplazada por la nueva versión del servidor.
@@ -1164,13 +1363,13 @@
 -e63e-field:confirmUseBulletinsDraftCustomFieldseffect=Oprima '#UseOldCustomFields#' para usar los campos personalizados originales y los datos del borrador.  Oprima '#UseNewCustomFields#' para usar sus campos personalizados actuales y transferir los campos similares al borrador nuevo, pero podrá perder partes de la información del borrador original.
 
 #________________________________________________=Warning: acctmap.txt file in your account's packets directory is missing or is corrupt.  This may indicate someone has tried to tamper with your data or could be caused by a hardware error.
--61cb-field:confirmWarnMissingAccountMapFilecause=Advertencia: El archivo acctmap.txt en la carpeta de su cuenta esta dañado o no existe.  Esto puede indicar que alguien ha intentado modificar su información o que su computador sufrió de fallas de hardware.
+-61cb-field:confirmWarnMissingAccountMapFilecause=Advertencia: El archivo acctmap.txt en el directorio packets de su cuenta está dañado o no existe.  Esto puede indicar que alguien ha intentado modificar su información o que su computador sufrió fallas de hardware.
 
 #_________________________________________________=Clicking on Yes will delete all of your bulletins and continue to load Martus.  Clicking on No will exit Martus so you can try to recover or repair this file manually.
 -20ee-field:confirmWarnMissingAccountMapFileeffect=Oprima Sí para borrar todos sus boletines y continuar cargando Martus. Oprima No para salir de Martus y que intente recuperar o reparar el archivo manualmente.
 
 #__________________________________________________________________=Warning: acctmap.txt.sig file is missing or is corrupt in your account's packets directory.  If you have just upgraded to a new version of Martus this warning is harmless and you should click on No.  Otherwise this may indicate someone has tried to tamper with your data or could be caused by a hardware error.
--e1b1-field:confirmWarnMissingOrCorruptAccountMapSignatureFilecause=Advertencia: El archivo acctmap.txt.sig de la carpeta de paquetes de su cuenta está dañado o no se encontró. Puede ignorar esta advertencia y oprimir No, si es que acaba de actualizar su copia de Martus. Si no es así, entonces puede que esto signifique que alguien ha intentado modificar su información o puede que haya sido causado por una falla de hardware.
+-e1b1-field:confirmWarnMissingOrCorruptAccountMapSignatureFilecause=Advertencia: El archivo acctmap.txt.sig del directorio packets de su cuenta está dañado o no se encontró. Puede ignorar esta advertencia y oprimir No, si es que acaba de actualizar su copia de Martus. Si no es así, entonces puede que esto signifique que alguien ha intentado modificar su información o puede que haya sido causado por una falla de hardware.
 
 #___________________________________________________________________=Clicking on Yes will try to generate a new acctmap.txt.sig file and continue to load Martus.  Clicking on No will exit Martus.
 -3ca4-field:confirmWarnMissingOrCorruptAccountMapSignatureFileeffect=Oprima Sí para intentar generar un nuevo archivo accountmap.txt.sig y continuar cargando Martus. Oprima No para salir de Martus.
@@ -1325,8 +1524,8 @@
 #____________________________________________=Martus needs to keep a list of all the fields in all the bulletins in your system.\n\nThis list does not exist, so it will be created now. This may take a few seconds per bulletin on a slower computer.
 -8773-field:notifyCreatingFieldSpecCachecause=Martus necesita mantener una lista de todos los campos de todos los boletines en su ordenador.\n\nEsta lista no existe por lo que tendrá que crearse ahora. En ordenadores lentos puede que esta operación tome unos segundos por cada boletín.
 
-#_____________________________________________________=An error occurred during upload, and the damaged bulletin has been moved to the Damaged Bulletins folder.
--ed3b-field:notifyDamagedBulletinMovedToDiscardedcause=Ocurrió un error durante el envío y el boletín dañado se movió a la carpeta de boletines dañados.
+#_____________________________________________________=An error occurred during upload, and the damaged bulletin:'#BulletinTitle#' has been moved to the Damaged Bulletins folder.
+-3229-field:notifyDamagedBulletinMovedToDiscardedcause=Ocurrió un error durante el envío y el boletín dañado: '#BulletinTitle#' ha sido movido a la carpeta de boletines dañados.
 
 #______________________________________________=Error: Unable to delete all of those draft bulletins from the server. Some of them may have been deleted.
 -916e-field:notifyDeleteServerDraftsFailedcause=Error: No se pudo eliminar todos los borradores del servidor. Puede que algunos de ellos se hayan borrado.
@@ -1352,8 +1551,14 @@
 #_________________________________________________________=There was an error saving your template.
 -88ed-field:notifyErrorExportingCustomizationTemplatecause=Hubo un error guardando su plantilla. 
 
+#_____________________________________________=There was an error importing bulletins into Martus.  Not all bulletins were imported.
+-539b-field:notifyErrorImportingBulletinscause=Hubo un error al importar los boletines a Martus. No todos fueron importados.
+
+#_______________________________________________________________=The customization template you are trying to import was created by a newer version of Martus.  You need to upgrade to the latest version of Martus before you can import this template.
+-39dd-field:notifyErrorImportingCustomizationTemplateFuturecause=La personalización de la plantilla que está tratando de importar fue creada con una nueva versión de Martus.  Necesita actualizar Martus a su última versión antes de importar esta plantilla.
+
 #_________________________________________________________=There was an error importing this template.
--4a9a-field:notifyErrorImportingCustomizationTemplatecause=Hubo un error importando esta plantilla. 
+-4a9a-field:notifyErrorImportingCustomizationTemplatecause=Hubo un error al importar esta plantilla. 
 
 #______________________________________=An error prevented the file from being read.
 -1ad3-field:notifyErrorReadingFilecause=Un error interrumpió la lectura del archivo.
@@ -1382,8 +1587,11 @@
 #___________________________________________=You will have to select a server for any bulletins to be backed up to that server, or to retrieve bulletins from that server.
 -83c4-field:notifyExistingServerRemovedcause=Necesita elegir un servidor al cual enviar o bajar boletines.
 
-#____________________________________=Export completed successfully
--65b9-field:notifyExportCompletecause=La exportación se completó satisfactoriamente.
+#______________________________________________________=Exported #BulletinsExported# of #TotalBulletinsToExport# bulletins.  Unfortunately #AttachmentsNotExported# attachments were not exported due to errors.
+-2a40-field:notifyExportCompleteMissingAttachmentscause=Exportados #BulletinsExported# de #TotalBulletinsToExport# boletines. Lamentablemente #AttachmentsNotExported# adjuntos no fueron exportados debido a errores.
+
+#____________________________________=Successfully exported #BulletinsExported# of #TotalBulletinsToExport# bulletins.
+-439b-field:notifyExportCompletecause=Se exportó satisfactoriamente #BulletinsExported# de #TotalBulletinsToExport# boletines.
 
 #_______________________________________=The folder you are trying to export does not contain any bulletins.  Select a folder which has bulletins before exporting the folder.
 -c5f5-field:notifyExportFolderEmptycause=La carpeta que intenta exportar no contiene boletines.  Elija una carpeta que contenga boletines.
@@ -1415,6 +1623,15 @@
 #_______________________________________________=The Headquarters label you entered is already assigned to another Headquarters account.  Please use a different label.
 -91ca-field:notifyHeadquarterLabelDuplicatecause=El nombre de la oficina central que digitó ya está asignado a otra cuenta de oficina central.  Por favor, utilice otro nombre. 
 
+#________________________________________________=Not all bulletins were imported.  The following bulletins had problems during import.\n\n#ImportBulletinsNotImported#
+-9768-field:notifyImportBulletinsNotImportedcause=No todos los boletines fueron importados. Los siguientes boletines tuvieron problemas durante la importación.\n\n#ImportBulletinsNotImported#
+
+#____________________________________=Import complete.  Imported #BulletinsSuccessfullyImported# of #TotalBulletinsToImport# bulletins into folder: #ImportFolder#
+-0e20-field:notifyImportCompletecause=Importación completada.  Importados #BulletinsSuccessfullyImported# de #TotalBulletinsToImport# boletines a la carpeta: #ImportFolder#
+
+#______________________________________________=Not all attachments were imported.  The following bulletins had problems importing these attachments.\n\n#ImportMissingAttachments#
+-4e91-field:notifyImportMissingAttachmentscause=No todos los adjuntos fueron importados.  Los siguientes boletines tuvieron problemas importando estos adjuntos.\n\n#ImportMissingAttachments#
+
 #___________________________________________________________=Successfully imported customization template.
 -c78c-field:notifyImportingCustomizationTemplateSuccesscause=La plantilla personalizada fue importada exitosamente. 
 
@@ -1429,6 +1646,15 @@
 
 #___________________________________=Please select a Headquarters first.
 -1d19-field:notifyNoHQsSelectedcause=Por favor, elija una cuenta de oficina central primero. 
+
+#___________________________________________=No folder specified.  You must enter a folder you wish the files to be imported into.  This folder can already exist in the system, or can be a new folder.
+-05f7-field:notifyNoImportFileSpecifiedcause=No se ha especificado ninguna carpeta. Debe ingresar los archivos a ser importados en la carpeta que desee. Esta carpeta puede ser una nueva carpeta o una ya existente.
+
+#____________________________________________=You must select at least one field to be included in the report.
+-9390-field:notifyNoReportFieldsSelectedcause=Debe seleccionar al menos un campo para que sea incluido en el reporte.
+
+#__________________________________________=This is not a valid Report Format file
+-500f-field:notifyNotValidReportFormatcause=Este no es un archivo de formato de reporte válido.
 
 #________________________________________=Operation completed.
 -1a65-field:notifyOperationCompletedcause=Operación completada.
@@ -1453,6 +1679,9 @@
 
 #____________________________________________=You may only preview one bulletin at a time.  Please only select one bulletin to preview.
 -fbee-field:notifyPreviewOneBulletinOnlycause=Sólo puede ver un boletín a la vez. Elija sólo un boletín que desee ver en la vista previa.
+
+#____________________________________=Printing Complete
+-ab0a-field:notifyPrintCompletedcause=Impresión terminada
 
 #_________________________________________=Successfully saved Report
 -45d7-field:notifyPrintToDiskCompletecause=El reporte ha sido guardado
@@ -1481,6 +1710,15 @@
 #______________________________________=Please remember your username and password. It cannot be recovered.
 -e9e0-field:notifyRememberPasswordcause=Recuerde su nombre de usuario y contraseña, de perderlos, no los podrá recuperar.
 
+#___________________________________________________=This report format was created in a different language. As a result, some headings may not print properly, and some of the fields may not be available for sorting.
+-eb95-field:notifyReportFormatDifferentLanguagecause=Este formato de reporte fue creado en diferente idioma. Por tanto, puede que algunos encabezados no se impriman correctamente y que ciertos campos no sean clasificados.
+
+#_______________________________________=This report format was created with an earlier version of Martus, so it may not work correctly
+-ed82-field:notifyReportFormatIsOldcause=Este formato de reporte fue creado con una versión anterior de Martus, por lo que puede que no trabaje correctamente.
+
+#__________________________________________=This report format was created with a newer version of Martus, so it may not work correctly
+-305e-field:notifyReportFormatIsTooNewcause=Este formato de reporte fue creado con una versión nueva de Martus, por lo que puede que no trabaje correctamente.
+
 #____________________________________________________=One or more bulletins were unable to be resent because you are not authorized to upload them.
 -d248-field:notifyResendErrorNotAuthorizedToSendcause=Uno o más boletines no pudieron ser reenviados porque no tiene autorización para enviarlos al servidor.
 
@@ -1489,6 +1727,9 @@
 
 #______________________________________=Bulletin download cancelled.  Some bulletins may have already been downloaded.
 -87b3-field:notifyRetrieveCanceledcause=Se canceló la operación. Puede que algunos boletines ya hayan sido bajados.
+
+#_______________________________________=Retrieving bulletins from the server is complete
+-1ade-field:notifyRetrieveCompletedcause=Descarga de boletines del servidor finalizada.
 
 #___________________________________=An error has occurred while retrieving a bulletin.
 -6201-field:notifyRetrieveErrorcause=Ocurrió un error al bajar un boletín.
@@ -1502,6 +1743,9 @@
 #________________________________________=A retrieve is already in progress. You cannot start another retrieve until that one has finished.
 -3e55-field:notifyRetrieveInProgresscause=Los boletines están bajando. No puede volver a iniciar la operación hasta que la bajada de boletines a finalice.
 
+#____________________________________________________=Preview not yet available for this bulletin. Please wait until the information has been retrieved from the server, and then try again.
+-8fd7-field:notifyRetrievePreviewNotAvailableYetcause=Vista previa aún no disponible para este boletín. Por favor espere hasta que la información haya sido descargada del servidor e intente otra vez.
+
 #________________________________________________=Errors occurred while retrieving bulletin summaries.  Some of the bulletins on the server will not be shown.
 -6f6f-field:notifyRetrievedOnlySomeSummariescause=Ocurrieron errores al bajar los resúmenes de los boletines. Algunos de los boletines en el servidor no podrán ser mostrados.
 
@@ -1513,9 +1757,6 @@
 
 #__________________________________=Sorry, no bulletins were found.
 -5bd8-field:notifySearchFailedcause=No se encontró ningún boletín.
-
-#_________________________________=#NumberBulletinsFound# bulletins matched the search, and have been added to the Search Results folder.\n Note that both current and earlier versions of each bulletin were searched.
--5639-field:notifySearchFoundcause=#NumberBulletinsFound# boletines concordaron con la búsqueda y han sido agregados a la carpeta de Resultados de búsqueda.\n  Note que todas las versiones (actuales y previas) fueron buscadas. 
 
 #_____________________________________=The Server Public Code does not match the one you entered.
 -efe3-field:notifyServerCodeWrongcause=El código público del servidor no concuerda con el que escribió.
@@ -1537,6 +1778,9 @@
 
 #_____________________________________=An unexpected error has occurred. Please report this problem to help@martus.org.
 -3cb4-field:notifyUnexpectedErrorcause=Ocurrió un error inesperado. Por favor, reporte este problema a help@martus.org.
+
+#_________________________________________________________=An error occurred during upload, and the bulletin:'#BulletinTitle#' has not been sent to the server.  You may try and resend the bulletin later.
+-4325-field:notifyUploadFailedBulletinNotSentToServercause=Ocurrió un error durante la carga y el boletín:'#BulletinTitle#' no ha sido enviado al servidor. Puede reenviar el boletín luego.
 
 #_______________________________________=The user name you chose already exists on this system, please choose a different user name.
 -bbb0-field:notifyUserAlreadyExistscause=El nombre de usuario que eligió ya está en uso, por favor escoja un nombre diferente.
@@ -1640,17 +1884,17 @@
 #__________________=Summary
 -12b7-field:summary=Resumen
 
-#____________________=For security reasons, you must sign into Martus again.
--a575-field:timedout1=Por motivos de seguridad es necesario que vuelva a ingresar su nombre y contraseña.
+#____________________=Martus is still running in the background, but has locked the screen for security.  You must sign in to Martus again to continue working.
+-a252-field:timedout1=Martus está aún ejecutándose en un segundo plano, pero por motivos de seguridad ha bloqueado la pantalla. Vuelva a ingresar su usuario y contraseña para continuar trabajando.
 
-#____________________=Any unsaved bulletins will be lost unless you sign in and save them.
--24c5-field:timedout2=Los boletines que no han sido guardados se perderán a menos que vuelva a ingresar a Martus y los guarde.
+#____________________=Any unsaved bulletins will be lost unless you sign in to Martus again and save them.
+-3f66-field:timedout2=Algunos boletines no guardados se perderán a menos que vuelva a ingresar a Martus y los guarde.
 
 #________________=Title
 -768e-field:title=Título
 
-#_____________________________=Spanish 2.9
--649d-field:translationVersion=Español 2.9 
+#_____________________________=Spanish pre 3.0 internal 
+-649d-field:translationVersion=Español pre 3.0 internal 
 
 #___________________=Username
 -84c2-field:username=Nombre de usuario
@@ -1925,6 +2169,9 @@
 #___________________________=Export My Public Account Id
 -2b8a-menu:ExportMyPublicKey=Exportar mi identificación de cuenta pública
 
+#_________________________=Import Bulletins
+-4094-menu:ImportBulletins=Importar boletines
+
 #_________________________=Organize Folders
 -1ee2-menu:OrganizeFolders=Organizar carpetas
 
@@ -1945,6 +2192,9 @@
 
 #______________________=Rename Folder
 -5e31-menu:RenameFolder=Renombrar carpeta
+
+#_________________=Reports
+-88bc-menu:Reports=Reportes
 
 #_________________________=Resend Bulletin(s)
 -21a8-menu:ResendBulletins=Volver a enviar boletín(es)
@@ -2015,8 +2265,11 @@
 #_______________=Paste
 -db24-menu:paste=Pegar
 
-#_______________________=Print Bulletin(s) / Create Report File
--ecef-menu:printBulletin=Imprimir boletín / Crear archivo de reporte
+#_______________________=Print Bulletin(s)
+-c705-menu:printBulletin=Imprimir boletín(es)
+
+#_____________________=Print
+-5b22-menu:printButton=Imprimir
 
 #________________=Search
 -bce0-menu:search=Búsqueda
@@ -2165,6 +2418,12 @@
 #______________________________=Details Field Default Content
 -a39b-wintitle:BulletinTemplate=Contenido predeterminado del campo Detalles
 
+#________________________________=Create Report
+-446e-wintitle:ChooseReportFields=Crear reporte
+
+#_______________________________=Run Report...
+-56fb-wintitle:ChooseReportToRun=Ejecutar reporte...
+
 #__________________________=Server Configuration
 -add5-wintitle:ConfigServer=Configuración del servidor
 
@@ -2186,8 +2445,11 @@
 #_________________________________________________=Retrieving Bulletin Summaries
 -2a45-wintitle:DeleteServerDraftsBulletinSummaries=Bajando resúmenes de boletines
 
+#_____________________________________________=Warning Duplicate Labels Found
+-8e46-wintitle:DuplicateLabelsInCustomTemplate=Advertencia: se encontró títulos duplicados
+
 #____________________________________=Attachment Missing
--11e1-wintitle:ErrorAttachmentMissing=Archivo adjunto no se ubicó
+-11e1-wintitle:ErrorAttachmentMissing=No se ubicó el archivo adjunto
 
 #___________________________________=Error
 -7f2f-wintitle:ErrorBackingupKeyPair=Error
@@ -2202,7 +2464,7 @@
 -1228-wintitle:ErrorDateRangeInverted=Rango de fechas no son válidos
 
 #____________________________________________=Previous File Exists
--a449-wintitle:ErrorPreviousBackupShareExists=Archivo ya existe
+-a449-wintitle:ErrorPreviousBackupShareExists=El archivo ya existe
 
 #________________________________________________=No Appropriate File Found
 -c15e-wintitle:ErrorRecoverNoAppropriateFileFound=No hay archivo
@@ -2222,6 +2484,9 @@
 #_______________________________________________=Export Customization Template
 -5318-wintitle:ExportCustomizationTemplateSaveAs=Exportar plantilla personalizada
 
+#____________________________=Exporting Bulletins
+-1c8c-wintitle:ExportProgress=Exportando boletines
+
 #_____________________________=Search Help
 -53b6-wintitle:FancySearchHelp=Ayuda de búsqueda
 
@@ -2231,17 +2496,29 @@
 #________________________________=Help on Bulletin Details Field Default Content
 -96cb-wintitle:HelpDefaultDetails=Ayuda sobre detalles personalizados del boletín
 
+#_____________________________=Import Bulletins
+-4094-wintitle:ImportBulletins=Importar boletines
+
 #_____________________________________________=Import Customization Template
 -0188-wintitle:ImportCustomizationTemplateOpen=Importar plantilla personalizada
 
 #_______________________________=Import Headquarters Public Account Id File
 -9300-wintitle:ImportHQPublicKey=Importar identificación pública de la oficina central
 
+#____________________________=Importing Bulletins
+-2c20-wintitle:ImportProgress=Importando Boletines
+
+#________________________________=Include Private Data
+-e6dc-wintitle:IncludePrivateData=Incluir información privada
+
 #____________________________________=Incompatible Translation Version
 -e91d-wintitle:IncompatibleMtfVersion=Versión de traducción incompatible
 
 #________________________________=Load Default Details Field Content
 -4e2f-wintitle:LoadDefaultDetails=Cargar detalles predeterminados
+
+#_____________________________=Load Saved Search
+-7e7a-wintitle:LoadSavedSearch=Cargar búsqueda guardada
 
 #__________________________=Martus SignIn
 -0615-wintitle:MartusSignIn=Inicio de Martus
@@ -2252,11 +2529,17 @@
 #__________________________________=Validate User
 -6030-wintitle:MartusSignInValidate=Verificando usuario
 
+#__________________________________=Organize Report Fields
+-1e3e-wintitle:OrganizeReportFields=Organice reporte de campos 
+
 #_____________________________________=Cannot Paste Bulletin(s)
 -c05f-wintitle:PasteErrorBulletinOlder=No se pudo pegar boletín(es)
 
 #__________________________=Print Options
 -183a-wintitle:PrintOptions=Opciones de impresión
+
+#__________________________=Print Preview
+-68e2-wintitle:PrintPreview=Impresión previa
 
 #______________________________=Print to which file
 -7cfe-wintitle:PrintToWhichFile=archivo para reporte
@@ -2272,6 +2555,9 @@
 
 #__________________________=Remove Server
 -49c2-wintitle:RemoveServer=Remover servidor
+
+#____________________________________=Reports
+-88bc-wintitle:ReportChooseSortFields=Reportes
 
 #_____________________________=Resend Bulletins
 -273f-wintitle:ResendBulletins=Reenviar boletines
@@ -2312,8 +2598,17 @@
 #_______________________________________=Retrieve My Sealed Bulletins
 -68b9-wintitle:RetrieveMySealedBulletins=Bajar mis boletines sellados
 
+#_______________________________=Reports
+-88bc-wintitle:RunOrCreateReport=Reportes
+
 #_______________________________________=of
 -de04-wintitle:SaveRecoverShareKeyPairOf=de
+
+#__________________________=Save Report Format As...
+-8c3d-wintitle:SaveReportAs=Guardar formato de reporte como...
+
+#________________________=Save Search
+-1340-wintitle:SaveSearch=Guardar búsqueda
 
 #______________________________=Saving Backup Disk
 -9204-wintitle:SaveShareKeyPair=Guardando disco de seguridad
@@ -2591,8 +2886,14 @@
 #_______________________________________________________=Error Exporting Template
 -f4cc-wintitle:notifyErrorExportingCustomizationTemplate=Error exportando plantilla
 
+#___________________________________________=Error Importing Bulletins
+-aeb8-wintitle:notifyErrorImportingBulletins=Error importando boletines
+
 #_______________________________________________________=Error Importing Template
 -4f1a-wintitle:notifyErrorImportingCustomizationTemplate=Error importando plantilla 
+
+#_____________________________________________________________=Error Importing Template
+-4f1a-wintitle:notifyErrorImportingCustomizationTemplateFuture=Error importando plantilla
 
 #____________________________________=Error Reading File
 -73ad-wintitle:notifyErrorReadingFile=Error al leer archivo
@@ -2624,6 +2925,9 @@
 #__________________________________=Export Bulletins
 -a86c-wintitle:notifyExportComplete=Exportar boletines
 
+#____________________________________________________=Export Bulletins
+-a86c-wintitle:notifyExportCompleteMissingAttachments=Exportar boletines
+
 #_____________________________________=Error Exporting Folder
 -d6d7-wintitle:notifyExportFolderEmpty=Error al exportar carpeta
 
@@ -2654,6 +2958,15 @@
 #_____________________________________________=Headquarter Label Invalid
 -106b-wintitle:notifyHeadquarterLabelDuplicate=Nombre de oficina central no es válido 
 
+#______________________________________________=Warning Bulletins Not Imported
+-59d8-wintitle:notifyImportBulletinsNotImported=Advertencia: boletines no importados
+
+#__________________________________=Import Complete
+-a5cb-wintitle:notifyImportComplete=Importación completada
+
+#____________________________________________=Warning Missing Attachments
+-79ef-wintitle:notifyImportMissingAttachments=Advertencia: adjuntos faltantes
+
 #_________________________________________________________=Importing Template Succeeded
 -ac8c-wintitle:notifyImportingCustomizationTemplateSuccess=Plantilla importada exitosamente
 
@@ -2668,6 +2981,15 @@
 
 #_________________________________=No Headquarters Selected
 -9140-wintitle:notifyNoHQsSelected=No hay ninguna oficina central seleccionada
+
+#_________________________________________=No Folder Specified
+-4b6e-wintitle:notifyNoImportFileSpecified=No se ha especificado una carpeta
+
+#__________________________________________=Create Report
+-446e-wintitle:notifyNoReportFieldsSelected=Crear reporte
+
+#________________________________________=Reports
+-88bc-wintitle:notifyNotValidReportFormat=Reportes
 
 #______________________________________=Finished
 -355b-wintitle:notifyOperationCompleted=Completada
@@ -2689,6 +3011,9 @@
 
 #__________________________________________=Preview One Bulletin Only
 -5b0a-wintitle:notifyPreviewOneBulletinOnly=Ver sólo un boletín
+
+#__________________________________=Reports
+-88bc-wintitle:notifyPrintCompleted=Reportes
 
 #_______________________________________=Print To Report File
 -c1b2-wintitle:notifyPrintToDiskComplete=Imprimir archivo de reporte
@@ -2717,6 +3042,15 @@
 #____________________________________=Remember Your Password
 -2bc6-wintitle:notifyRememberPassword=Recuerde su contraseña
 
+#_________________________________________________=Reports
+-88bc-wintitle:notifyReportFormatDifferentLanguage=Reportes
+
+#_____________________________________=Reports
+-88bc-wintitle:notifyReportFormatIsOld=Reportes
+
+#________________________________________=Reports
+-88bc-wintitle:notifyReportFormatIsTooNew=Reportes
+
 #_______________________________=Error Sending Bulletin
 -eaab-wintitle:notifyResendError=Error al enviar boletín
 
@@ -2725,6 +3059,9 @@
 
 #____________________________________=Bulletin Download Canceled
 -f8d3-wintitle:notifyRetrieveCanceled=Operación cancelada
+
+#_____________________________________=Retrieve Complete
+-653b-wintitle:notifyRetrieveCompleted=Descarga completa
 
 #_________________________________=Retrieve Error
 -8ed0-wintitle:notifyRetrieveError=Error al bajar
@@ -2737,6 +3074,9 @@
 
 #______________________________________=Retrieve In Progress
 -6983-wintitle:notifyRetrieveInProgress=Bajada de boletines en proceso
+
+#__________________________________________________=Unable To Preview
+-061a-wintitle:notifyRetrievePreviewNotAvailableYet=No se permite vista previa
 
 #______________________________________________=Error During Retrieve
 -f2d7-wintitle:notifyRetrievedOnlySomeSummaries=Error al bajar boletines
@@ -2773,6 +3113,9 @@
 
 #___________________________________=Unexpected Error
 -d17c-wintitle:notifyUnexpectedError=Error inesperado
+
+#_______________________________________________________=Unable to Send Bulletin To Server
+-2c28-wintitle:notifyUploadFailedBulletinNotSentToServer=No es posible enviar el boletín al servidor
 
 #_____________________________________=User Already Exists
 -eecc-wintitle:notifyUserAlreadyExists=Usuario ya existe
