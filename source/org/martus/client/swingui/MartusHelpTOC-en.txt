@@ -40,8 +40,10 @@
 6k. Viewing and saving attachments
 6l. Viewing damaged bulletins
 6m. Searching for specific bulletins
-6n. Printing bulletins and creating bulletin reports
-6o. Exporting bulletin data
+6n. Printing bulletins
+6o. Creating bulletin reports
+6p. Exporting bulletin data
+6q. Importing bulletin(s)
 7. Deleting Your Bulletins and Account Information
 8. Deleting All Martus Data, Including the Application
 9. Keeping Your Data Secure
