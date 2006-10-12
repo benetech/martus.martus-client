@@ -2,9 +2,9 @@
 # Language code:  th
 # Language name:  Thai
 # Translated by:  ITIE; ThaiNGO
-# Exported date:  Fri Mar 24 17:47:55 PST 2006
-# Client version: 2.9
-# Client build:   20060322.1716
+# Exported date:  Wed Sep 06 16:10:00 PDT 2006
+# Client version: 3.0
+# Client build:   20060905.1762
 #
 # This file MUST be saved in UTF-8 format!
 # Lines beginning with # are comments and are ignored by Martus
@@ -69,10 +69,29 @@
 #      a particular value.
 #      For Example. #TotalNumberOfFilesInBackup# = '5'
 #                   #Titles# = 'A list of bulletin titles'
-# 12.  If you want your language to appear right to left,
+# 12.  Do not translate the numbers in the field:translationVersion string.
+# 13.  Do not translate the numbers in the field:ErrorCustomFields string.
+# 14.  For Thai and Persian months, please do the following:
+#          - for a Thai translation, Thai months should be the same as the translation
+#            of regular months, and Persian dates are the same as in English.
+#          - for a Persian translation, both Thai and Persian months
+#            should be the same as the translation of regular months
+#          - for an Arabic translation, Thai months should be the same as
+#            the translation of regular months, but do an Arabic translation
+#            (or transliteration) of Persian dates (not the same as in English).
+#          - for all other languages, Thai and Persian dates can be the same
+#            as the translation of regular months
+# 15       - We have file filters like 'Martus Report Format (.mrf)'
+#            and 'Martus Search Specification (.mss)'.
+#            The descriptive names should be translated, but the (.mrf) and (.mss)
+#            must not be translated.
+# 16.  If you want your language to appear right to left,
 #      Uncomment the next line (by removing the # in front of #!right-to-left)
 #!right-to-left
 #
+
+#____________________________=Add
+-61cc-button:AddFieldToReport=เพิ่ม
 
 #________________________=Show all bulletins on this server and on this computer.
 -e9a2-button:AllSummaries=แสดงรายงานทั้งหมดที่มีในเซิร์ฟเวอร์นี้ และคอมพิวเตอร์เครื่องนี้
@@ -98,6 +117,13 @@
 #____________________=Continue
 -2e02-button:Continue=ต่อไป
 
+#____________________________=Create New Page Report
+-1d7a-button:CreatePageReport=สร้างหน้ารายงานใหม่
+
+#_______________________________=Create New Tabular Report
+
+-34ee-button:CreateTabularReport=สร้างตารางรายงานใหม่
+
 #__________________=Delete
 -f6fd-button:Delete=ลบ
 
@@ -109,6 +135,15 @@
 
 #_________________________________=Show bulletins that are only on the server.
 -b795-button:DownloadableSummaries=แสดงรายงานเฉพาะที่อยู่บนเซิร์ฟเวอร์นี้
+
+#______________________=Field Label
+-6492-button:FieldLabel=ป้ายชื่อช่องข้อมูล
+
+#____________________=Tag
+-9829-button:FieldTag=ป้าย
+
+#_____________________=Type
+-3deb-button:FieldType=ชนิด
 
 #___________________________=Down
 -bf93-button:FolderOrderDown=ลง
@@ -122,8 +157,23 @@
 #_________________=Leave
 -7e35-button:Leave=ออก
 
+#______________________=Load Previous Search...
+-75f7-button:LoadSearch=โหลดการค้นหาก่อนหน้านี้
+
+#______________________________=Load
+-ddcb-button:LoadSearchOkButton=โหลด
+
+#_________________________________=Move Down
+-4158-button:MoveFieldDownInReport=เลื่อนลง
+
+#_______________________________=Move Up
+-c637-button:MoveFieldUpInReport=เลื่อนขึ้น
+
 #_________________________=New Account
 -1d19-button:NewAccountTab=ชื่อบัญชีใหม่
+
+#___________________________=Choose Field...
+-288f-button:PopUpTreeChoose=เลือกช่อง...
 
 #___________________=Preview
 -f1fb-button:Preview=ภาพก่อนพิมพ์
@@ -134,11 +184,20 @@
 #_________________________________=Include private information
 -6c53-button:PrintPublicAndPrivate=รวมข้อมูลความลับ
 
-#_______________________=Send report output to a file
--89b9-button:PrintToDisk=พิมพ์รายงานเป็นไฟล์
+#_______________________=Send report to a file
+-b154-button:PrintToDisk=ส่งรายงานเป็นไฟล์
 
-#__________________________=Print to a printer
--7bac-button:PrintToPrinter=พิมพ์ไปยังเครื่องพิมพ์
+#_______________________=Print To File
+-a5d9-button:PrintToFile=พิมพ์เป็นไฟล์
+
+#__________________________=Print To Printer
+-319b-button:PrintToPrinter=พิมพ์ไปยังเครื่องพิมพ์
+
+#________________________________=Both Public and Private Data
+-8685-button:PublicAndPrivateData=ทั้งข้อมูลสาธารณะและข้อมูลส่วนตัว
+
+#______________________=Public Data Only
+-4baa-button:PublicOnly=เฉพาะข้อมูลสาธารณะ
 
 #__________________________________=Restore account from backup key file
 -f447-button:RecoverAccountByBackup=กู้คืนชื่อบัญชีจากแฟ้มกุญแจที่สำรองไว้
@@ -149,6 +208,9 @@
 #_____________________________=Restore Account
 -d7da-button:RecoverAccountTab=กู้คืนชื่อบัญชี
 
+#_________________________________=Remove
+-e963-button:RemoveFieldFromReport=ลบ
+
 #_________________________=Reset Contents
 -6f62-button:ResetContents=เริ่มใหม่
 
@@ -158,8 +220,17 @@
 #______________________________________________=Retrieve latest bulletin version only
 -3449-button:RetrieveLatestBulletinRevisionOnly=เอาคืนรายงานที่ปรับแก้รุ่นล่าสุดเท่านั้น
 
+#_____________________=Use Existing Report Format
+-b052-button:RunReport=ใช้รูปแบบรายงานที่มีอยู่
+
+#______________________=Save This Search...
+-e372-button:SaveSearch=บันทึกการค้นหานี้...
+
 #____________________________________=Only search most recent version of bulletins
 -852f-button:SearchFinalBulletinsOnly=ค้นหาเฉพาะรายงานรุ่นล่าสุดเท่านั้น
+
+#________________________=Select
+-8598-button:SelectReport=เลือก
 
 #__________________________________=Accept
 -bb54-button:ServerComplianceAccept=ยอมรับ
@@ -269,8 +340,8 @@
 #______________=OK
 -9ce3-button:ok=ตกลง
 
-#_________________=Print/Report
--5fdf-button:print=พิมพ์/รายงาน
+#_________________=Print
+-5b22-button:print=พิมพ์
 
 #____________________________=Remove Attachment
 -6f6d-button:removeattachment=เอาเอกสารแนบออก
@@ -320,6 +391,18 @@
 #_________________________=Author (required)
 -4a0b-field:AuthorRequired=ผู้รายงาน (จำเป็น)
 
+#_____________________________=Preparing Report...
+-7651-field:BackgroundPrinting=กำลังเตรียมรายงาน...
+
+#______________________________=Searching...
+-ba2b-field:BackgroundSearching=กำลังค้นหา...
+
+#____________________________=Sorting Bulletins...
+-5a5a-field:BackgroundSorting=กำลังเรียงรายงาน...
+
+#____________________________=Working...
+-049a-field:BackgroundWorking=กำลังทำงาน...
+
 #___________________________________=Your key is required to read your private bulletin information or to create new bulletins.  To ensure that you'll always have access to your data, it is extremely important to keep a backup of your key.\n\nMartus offers two methods for backing up your key, either of which may be used, but we strongly recommend using both backup methods.  The first method creates a single, password encrypted key back up file onto removable media (e.g. floppy disk, cd, USB storage) or a network drive; the second method backs up the key in #TotalNumberOfFilesInBackup# separate pieces (not encrypted with your password) onto multiple floppy disks (or other removable media).\n
 -ff3d-field:BackupKeyPairGeneralInfo=จำเป็นต้องใช้กุญแจของคุณในการอ่านข้อมูลรายงานความลับของคุณ หรือใช้ในการสร้างรายงานใหม่ เพื่อให้แน่ใจว่าคุณสามารถเข้าถึงข้อมูลของคุณได้เสมอ เป็นสิ่งที่สำคัญอย่างยิ่งที่คุณควรจะสำรองกุญแจของคุณ\n\nMartus มีวิธีการสำรองกุญแจ 2 วิธี ซึ่งคุณจะใช้วิธีใดก็ได้ แต่เราแนะนำเป็นอย่างยิ่งว่า ควรใช้ทั้งสองวิธีในการสำรองข้อมูล วิธีแรกคือการสร้างแฟ้มกุญแจแล้วเข้ารหัสด้วยรหัสผ่านของคุณ ลงในสื่อที่เคลื่อนย้ายได้ (เช่น แผ่นฟลอปปี้ดิสก์ ซีดี หรือยูเอสบีไดรว์) หรือไดร์ฟบนเครือข่าย วิธีที่สองคือ แยกเก็บกุญแจออกเป็น #TotalNumberOfFilesInBackup# ส่วน (แต่ไม่ได้เข้ารหัสด้วยรหัสผ่านของคุณ) ลงในแผ่นฟลอปปี้ดิสก์หลายแผ่น (หรือสื่ออื่นๆ)\n
 
@@ -368,6 +451,7 @@
 #__________________________________=Warning: Some information in this bulletin is not visible
 -eba1-field:BulletinHasUnknownStuff=คำเตือน: ข้อมูลบางอย่างในรายงานไม่สามารถมองเห็นได้
 
+
 #______________________________________________=The selected Headquarters account(s) will be able to view the private information in this bulletin, or send this bulletin to a server, after you save it.\n\nTo add a new Headquarters account use the Tools/Configure Headquarters menu option.
 -6702-field:BulletinHeadQuartersHQInfoForModify=ชื่อบัญชีสำนักงานใหญ่ที่เลือกจะสามารถดูข้อมูลความลับในรายงานนี้ได้ หรือส่งรายงานนี้ไปยังเซิร์ฟเวอร์ หลังจากคุณบันทึกรายงาน \n\nเพิ่มชื่อบัญชีสำนักงานใหญ่ ไปที่เมนู เครื่องมือ/ปรับแต่งค่าสำนักงานใหญ่
 
@@ -382,6 +466,9 @@
 
 #_____________________=Bulletin Id:
 -a081-field:BulletinId=รหัสรายงาน:
+
+#______________________________=Bulletin Import Files
+-1106-field:BulletinImportFiles=นำเข้าไฟล์รายงาน
 
 #____________________________=Last Saved
 -eb05-field:BulletinLastSaved=บันทึกครั้งสุดท้าย
@@ -416,6 +503,9 @@
 #_____________________________=Thai Solar (2548-05-31)
 -2be4-field:CalendarSystemThai=ปฏิทินไทย (2548-05-31)
 
+#_____________________________=Use Ctrl-Click or Shift-Click to select the fields (columns) that will appear in this report. 
+-e4a8-field:ChooseReportFields=กดปุ่ม Ctrl และคลิก หรือ Shift แล้วคลิก เพื่อเลือกคอลัมน์ที่จะแสดงในรายงานนี้
+
 #_____________________________________=Download Progress
 -8b0e-field:ChunkProgressStatusMessage=ความคืบหน้าการดาวน์โหลด
 
@@ -429,7 +519,7 @@
 -6bd3-field:ConfigureHQsCurrentHQs=สำนักงานใหญ่ปัจจุบัน
 
 #_______________________________________=Default?
--0e2c-field:ConfigureHeadQuartersDefault=ค่าเริ่มต้นหรือไม่
+-0e2c-field:ConfigureHeadQuartersDefault=ค่าเริ่มต้นหรือไม่?
 
 #_________________________________________=All other fields currently are stored on disk.
 -7e7c-field:ContactInfoDescriptionOfFields=ข้อมูลอื่นๆ ถูกเก็บบนดิสก์
@@ -455,6 +545,12 @@
 #____________________________________=Please enter your new username and password.
 -aec2-field:CreateNewUserNamePassword=โปรดใส่ชื่อผู้ใช้ และรหัสผ่าน
 
+#_________________________________=Bottom/Private Section of Bulletin
+-cf48-field:CustomXMLBottomSection=ล่าง/เป็นพื้นที่ข้อมูลส่วนตัว
+
+#______________________________=Top Section of Bulletin
+-cff1-field:CustomXMLTopSection=ส่วนบนสุดของรายงาน
+
 #_____________________________________=Customization Template Files
 -9210-field:CustomizationTemplateFiles=การกำหนดไฟล์แม่แบบ
 
@@ -472,6 +568,9 @@
 
 #____________________=Exact Date
 -8a81-field:DateExact=วันที่แน่นอน
+
+#___________________________=Unknown
+-bc78-field:DateNotSpecified=ไม่รู้จัก
 
 #______________________=Day
 -987b-field:DatePartDay=วัน
@@ -515,6 +614,16 @@
 #______________________=Do not prompt
 -448d-field:DonotPrompt=ไม่ต้องรอการยืนยัน
 
+#__________________________=Labels
+-2228-field:DuplicateLabels=ป้ายชื่อ
+
+
+#__________________________________________=The following labels appear more than once in your template.
+-3f09-field:DuplicateLabelsInCustomTemplate=ป้ายชื่อตามที่ปรากฎมีอยู่แล้วในเทมเพลทนี้
+
+#__________________________________________________=Do you want to save this template with the duplicate labels?
+-79bc-field:DuplicateLabelsInCustomTemplateContinue=คุณต้องการบันทึกป้ายชื่อที่ซ้ำกันในเทมเพลทนี้หรือไม่?
+
 #________________________________=Unable to back up the key file on this disk.
 -bda3-field:ErrorBackingupKeyPair=ไม่สามารถสำรองข้อมูลแฟ้มกุญลงบนแผ่นฟลอปปี้ดิสก์นี้ได้
 
@@ -530,8 +639,8 @@
 #__________________________________=LABEL
 -64b8-field:ErrorCustomFieldHeader4=ป้ายชื่อ
 
-#____________________________=There is an error in the custom field definitions. Each problem is identified with the following codes:\n   100 - Required standard field is missing\n   101 - Custom field does not have a correct tag.\n   102 - A previous Tag already exists with this name.\n   103 - Custom field does not have a label.\n   104 - Unrecognized Field Type.\n   105 - A label was found in a standard field.\n   106 - XML Parse Error.\n   107 - Tag contains illegal characters.\n   108 - Duplicate entry in Dropdown field.\n   109 - No Choices in Dropdown field.\n   200 - All fields empty.\n   201 - Unrecognized Headquarters created this template.\n   202 - Security validation error.\n   203 - File Error.\n   204 - Imported XML Missing Field.
--0b96-field:ErrorCustomFields=เกิดข้อผิดพลาดในการกำหนดช่องข้อมูลกำหนดเอง แต่ละปัญหาจะถูกระบุด้วยรหัสดังนี้:\n   100 - ช่องข้อมูลมาตรฐานที่จำเป็นต้องมี ได้หายไป\n   101 - ช่องข้อมูลกำหนดเองไม่มีแท็กที่ถูกต้อง\n   102 - แท็กก่อนหน้ามีชื่อนี้อยู่แล้ว\n   103 - ช่องข้อมูลกำหนดเองไม่มีป้ายชื่อ\n   104 - ประเภทของช่องข้อมูลไม่ถูกต้อง\n   105 - พบป้ายชื่อในช่องข้อมูลมาตรฐาน\n   106 - รูปแบบโครงสร้างของ XML ไม่ถูกต้อง\n   107 - ในแท็กมีอักขระที่ไม่อนุญาตให้ใช้\n   108 - ใส่กรอบข้อมูลซ้ำซ้อน\n   109 - ไม่มีตัวเลือกในช่องดรอปดาวน์\n   200 - ไม่พบข้อมูลในช่องข้อมูล\n   201 - บัญชีสำนักงานใหญ่ไม่ถูกต้องในแม่แบบนี้\n   202 - ระบบรักษาความปลอดภัยผิดพลาด\n   203 - ไฟล์ผิดพลาด\n   204 -  ช่องข้อมูล XML ที่นำเข้าหายไป.
+#____________________________=There is an error in the custom field definitions. Each problem is identified with the following codes:\n   100 - Required standard field is missing\n   101 - Custom field does not have a correct tag.\n   102 - A previous Tag already exists with this name.\n   103 - Custom field does not have a label.\n   104 - Unrecognized Field Type.\n   105 - A label was found in a standard field.\n   106 - XML Parse Error.\n   107 - Tag contains illegal characters.\n   108 - Duplicate entry in Dropdown field.\n   109 - No Choices in Dropdown field.\n   110 - System/Standard field tag cannot be used for custom field.\n   111 - Standard Public field cannot be placed in bottom/Private section.\n   112 - Standard Private field cannot be placed in the top section.\n   200 - All fields empty.\n   201 - Unrecognized Headquarters created this template.\n   202 - Security validation error.\n   203 - File Error.\n   204 - Imported XML Missing Field.
+-71f2-field:ErrorCustomFields=เกิดข้อผิดพลาดในการกำหนดช่องข้อมูลกำหนดเอง แต่ละปัญหาจะถูกระบุด้วยรหัสดังนี้:\n   100 - ช่องข้อมูลมาตรฐานที่จำเป็นต้องมี ได้หายไป\n   101 - ช่องข้อมูลกำหนดเองไม่มีแท็กที่ถูกต้อง\n   102 - แท็กก่อนหน้ามีชื่อนี้อยู่แล้ว\n   103 - ช่องข้อมูลกำหนดเองไม่มีป้ายชื่อ\n   104 - ประเภทของช่องข้อมูลไม่ถูกต้อง\n   105 - พบป้ายชื่อในช่องข้อมูลมาตรฐาน\n   106 - รูปแบบโครงสร้างของ XML ไม่ถูกต้อง\n   107 - ในแท็กมีอักขระที่ไม่อนุญาตให้ใช้\n   108 - ใส่กรอบข้อมูลซ้ำซ้อน\n   109 - ไม่มีตัวเลือกในช่องดรอปดาวน์\n   110 - ระบบ/มาตรฐานของแท็กช่องข้อมูลไม่สามารถใช้กับช่องข้อมูลกำหนดเอง\n 111 - มาตรฐานข้อมูลสาธารณะไม่สามารถทับพิ้นที่ข้อมูลส่วนตัวด้านล่าง\n   112 - มาตรฐานช่องข้อมูลส่วนตัวไม่สามารถทับพื้นที่ด้านบนได้ \n   200 - ไม่พบข้อมูลในช่องข้อมูล\n   201 - บัญชีสำนักงานใหญ่ไม่ถูกต้องในแม่แบบนี้\n   202 - ระบบรักษาความปลอดภัยผิดพลาด\n   203 - ไฟล์ผิดพลาด\n   204 -  ช่องข้อมูล XML ที่นำเข้าหายไป.
 
 #_________________________________________=A previous backup file exists.  You must save each file on its own removable media disk.
 -db93-field:ErrorPreviousBackupShareExists=แฟ้มข้อมูลก่อนหน้ายังมีอยู่ คุณต้องบันทึกแต่ละไฟล์บนแผ่นฟลอปปี้ดิสก์ทีละแผ่น
@@ -548,11 +657,18 @@
 #___________________________=Exit when complete
 -30e3-field:ExitWhenComplete=ออกทันทีเมื่อเสร็จแล้ว
 
-#________________________________=Information from the selected bulletins (listed below) will be exported to an XML file that you specify.\n\nPlease Note: This is a one way operation, you will not be able to import the XML file saved back into Martus.  This operation exists so you can bring Martus Bulletins into another application that does import XML files.
--7ae7-field:ExportBulletinDetails=ข้อมูลจากรายงานที่เลือก (ตามรายการด้านล่าง) จะถูกส่งออกเป็นแฟ้ม XML ตามที่คุณต้องการ\n\nข้อควรจำ: นี่เป็นการกระทำทิศทางเดียว คุณไม่สามารถนำเข้าแฟ้ม XML แล้วบันทึกกลับคืนแก่ Martus ได้ เมื่อการดำเนินการนี้เสร็จเรียบร้อยแล้วคุณสามารถนำเอารายงาน Martus นี้ไปใช้ในโปรแกรมประยุกต์อื่นได้โดยการนำเข้าแฟ้ม XML นี้
+#____________________________=Include attachments in export
+-1a48-field:ExportAttachments=รวมไพล์แนบตอนส่งออก
+
+#________________________________=Information from the selected bulletins (listed below) will be exported to an XML file that you specify.  These files can then be used to import the Martus bulletin information into another application.\n\n  You could also use this XML file to import these bulletins back into Martus (as new unique bulletins) if desired.  Please email help@martus.org if you need assistance with this type of importing.
+
+-a8c0-field:ExportBulletinDetails=ข้อมูลจากรายงานที่เลือก (ตามรายการด้านล่าง) จะถูกส่งออกเป็นแฟ้ม XML ตามที่คุณต้องการ แฟ้มนี้สามารถถูกนำเข้าจากระบบรายงาน Martus ไปโปรแกรมอื่นๆได้ \n\n คุณสามารถใช้แฟ้ม XML นี้เพื่อนำเข้ารายงานกลับสู่โปรแกรม Martus (ซึ่งจะเป็นรายงานอันใหม่) ดังที่ต้องการ หากคุณต้องการความช่วยเหลือเกี่ยวกับการนำเข้าแฟ้มชนิกนี้กรุณาส่งอีเมล์มาที่ help@martus.org
 
 #____________________________=Include private data in export
 -4bb6-field:ExportPrivateData=รวมข้อมูลความลับในการส่งออกด้วย
+
+#_________________________=Exporting
+-c373-field:ExportProgress=กำลังส่งออก
 
 #____________________________=Exported Bulletins
 -0b4e-field:ExportedBulletins=รายงานที่ถูกส่งออก
@@ -565,6 +681,33 @@
 
 #______________________________=You can use the word #Or# or #And#, or you can use the English words "#OrEnglish#" and "#AndEnglish#" to search.\n\nYou need to put spaces before and after any #Or# / #And# keywords you use in your search.\n
 -1573-field:FancySearchHelpMsg3=คุณสามารถใช้คำว่า #Or# หรือ #And# หรือคุณสามารถใช้คำภาษาอังกฤษ "#OrEnglish#" และ "#AndEnglish#" เพื่อค้นหา\n\nคุณต้องเว้นวรรคก่อนและหลังทุกๆ #Or# / #And# ในคำสำคัญที่คุณใช้ค้นหา\n
+
+#___________________________=Yes/No
+-9f62-field:FieldTypeBOOLEAN=ใช่/ไม่
+
+#________________________=Date
+-eb9a-field:FieldTypeDATE=วันที่
+
+#_____________________________=Date Range
+-6bb4-field:FieldTypeDATERANGE=ช่วงวันที่
+
+#____________________________=Dropdown List
+-da4a-field:FieldTypeDROPDOWN=รายการ
+
+#________________________=Grid/Table
+-be86-field:FieldTypeGRID=ตาราง
+
+#____________________________=Language
+-89b8-field:FieldTypeLANGUAGE=ภาษา
+
+#___________________________=Message
+-68f4-field:FieldTypeMESSAGE=ข้อความ
+
+#_____________________________=Text with Scrollbar
+-c0c1-field:FieldTypeMULTILINE=ข้อความพร้อมแถบเลื่อน
+
+#__________________________=Text
+-c332-field:FieldTypeSTRING=ข้อความ
 
 #______________________________________=This file name should be unique and identifiable to you but we recommend not using your user name.  Each file will be generated with this name and its number sequence.
 -02b6-field:GetShareFileNameDescription=ชื่อแฟ้มข้อมูลจะต้องแตกต่างจากผู้อื่น และบ่งบอกถึงตัวคุณ แต่เราแนะนำว่าไม่ควรใช้เฉพาะชื่อผู้ใช้ของคุณ แต่ละแฟ้มจะสร้างด้วยชื่อนี้ และตัวเลขลำดับของแฟ้ม
@@ -582,7 +725,7 @@
 -2274-field:HQsSetAsProxyUploader=ชื่อบัญชีของสำนักงานใหญ่เหล่านี้ได้รับอนุญาตให้ดูข้อมูลความลับในรายงานนี้ได้ และสามารถส่งรายงานนี้ไปยังเซิร์ฟเวอร์ภายใต้ชื่อของคุณได้
 
 #_______________________________=Selected?
--9c09-field:HeadQuartersSelected=เลือกหรือไม่
+-9c09-field:HeadQuartersSelected=เลือกหรือไม่?
 
 #_____________________________=Enter questions, details, or other information your organization wants to have answered in future bulletins created.
 -704c-field:HelpDefaultDetails=ป้อนคำถาม รายละเอียด หรือข้อมูลอื่นๆ ที่องค์กรของคุณต้องการจะตอบคำถาม ในรายงานที่สร้างขึ้นมาในอนาคต
@@ -608,6 +751,18 @@
 #________________________________=One or more accounts already exist on this computer. To create an additional account with a new username and passphrase, click OK.
 -02f2-field:HowToCreateNewAccount=ชื่อบัญชีบางชื่อ มีอยู่แล้วบนเครื่องคอมพิวเตอร์นี้ ถ้าต้องการสร้างชื่อบัญชีใหม่เพิ่มเติม ให้คลิก ตกลง
 
+#_________________________________________=Import bulletins into which Folder?
+-5efa-field:ImportBulletinsIntoWhichFolder=นำเข้ารายงานไปที่แฟ้มใด?
+
+#____________________________________=Bulletin
+-6ef0-field:ImportExportBulletinTitle=รายงาน
+
+#_________________________=Importing
+-90ab-field:ImportProgress=กำลังนำเข้า
+
+#_____________________________=#TotalBulletins# bulletins were selected for printing.  #AllPrivateBulletins# of them are all private.\n What would you like to include when printing?
+-abb2-field:IncludePrivateData=#TotalBulletins# รายงานที่ถูกเลือกสำหรับพิมพ์.  #AllPrivateBulletins# ทั้งหมดที่คือข้อมูลส่วนตัว\n คุณต้องการรวมส่วนใดเมื่อสั่งพิมพ์?
+
 #_________________________________=The version of this translation is not compatible with this version of Martus.  It is recommended that you do not continue to use this translation version and go to (http://www.martus.org/downloads) for the appropriate version.
 -a747-field:IncompatibleMtfVersion=การแปลภาษาเข้ากันไม่ได้กับโปรแกรม Martus ในรุ่นนี้ โปรแกรม Martus ไม่แนะนำให้ใช้การแปลภาษาชุดนี้ กรุณาไปที่ (http://www.martus.org/downloads) เพื่อดาวน์โหลดชุดแปลภาษาที่เหมาะสม
 
@@ -616,6 +771,14 @@
 
 #____________________________________________=#MtfLanguage# Translation Version: #MtfVersionNumber#
 -8dde-field:IncompatibleMtfVersionTranslation=#MtfLanguage# การแปลภาษารุ่น: #MtfVersionNumber#
+
+#_______________________________________=Martus Report Format (.mrf)
+-62cd-field:MartusReportFormatFileFilter=ไพล์รายงาน Martus(.mrf)
+
+#_____________________________________=Martus Search Specification (.mss)
+-76c0-field:MartusSearchSpecFileFilter=Martus ระบุการค้นหา(.mss)
+#[VT 2006-10-02: In the translation of Martus Report Format (above), I see the word "Martus" in English. However, I don't see it here in the translation of Martus Search Specification. This may be alright, but it would be great if you could make the two translations consistent. Thanks!]
+
 
 #_______________________=Warning: Portions may be missing or damaged
 -00a9-field:MayBeDamaged=คำเตือน: ข้อมูลบางอย่างอาจสูญหายหรือถูกทำลายได้
@@ -641,6 +804,9 @@
 #_____________________________________=The author has not given you permission to view the private portions of this bulletin.
 -ba2f-field:NotAuthorizedToViewPrivate=ผู้รายงานยังไม่ได้ให้สิทธิ์คุณในการดูส่วนที่เป็นข้อมูลความลับในรายงานนี้
 
+#____________________=(none)
+-3c6b-field:NotSorted=(ไม่)
+
 #____________________________=Details:
 -1daa-field:OnlineHelpMessage=รายละเอียด:
 
@@ -653,11 +819,14 @@
 #_______________________________=Organization (required)
 -2f27-field:OrganizationRequired=องค์กร/หน่วยงาน (จำเป็น)
 
+#_______________________________=Add the fields you want to appear in your report, and then arrange them in the order you want them to be printed.
+-b511-field:OrganizeReportFields=เพิ่มช่องข้อมูลที่ต้องการให้ปรากฎในรายงานของคุณและเรียงลำดับข้อมูลที่ต้องการให้พิมพ์ออก
+
 #__________________________________=You have the option to include or exclude the selected bulletin's private information in this print out or report file. If you choose to print private data, it will be visible to anyone who sees the print out or report file.
 -2bd3-field:PrintPrivateDataMessage=คุณมีทางเลือกที่จะรวมหรือไม่รวมข้อมูลความลับของรายงานที่ถูกเลือกที่จะพิมพ์ออกหรือพิมพ์เป็นไฟล์รายงาน ถ้าคุณเลือกพิมพ์ข้อมูลความลับใครก็ตามที่ดูสิ่งที่พิมพ์หรือไฟล์รายงานที่ออกมา จะสามารถอ่านข้อมูลความลับของคุณได้
 
-#_______________________________=You can print the bulletin contents to a printer, or send the formatted report output to a file.
--41ba-field:PrintToPrinterOrDisk=คุณสามารถพิมพ์เนื้อหารายงานไปยังเครื่องพิมพ์ หรือส่งพิมพ์รายงานออกเป็นไฟล์
+#_______________________________=You can print the bulletin contents to a printer, or send the formatted report to a file.
+-f988-field:PrintToPrinterOrDisk=คุณสามารถพิมพ์เนื้อหารายงานไปยังเครื่องพิมพ์ หรือส่งพิมพ์รายงานที่จัดระบบแล้วออกเป็นไฟล์
 
 #_________________________________=Public Information Files
 -90f9-field:PublicInformationFiles=แฟ้มข้อมูลสาธารณะ
@@ -701,6 +870,29 @@
 #_____________________________=Are you sure you want to do this?
 -bfb8-field:RemoveServerLabel2=คุณแน่ใจที่จะทำสิ่งนี้?
 
+#_________________________________=Choose how the bulletins will be sorted in the report. The bulletins will be ordered by the first field chosen. When two bulletins have the same value in that field, they will be sorted by the next sort field, and so on.
+-551d-field:ReportChooseSortFields=เลือกชนิดของการจัดเรียงข้อมูลในรายงาน รายงานจะถูกจัดลำดับโดยช่องข้อมูลแรกที่ถูกเลือก เมื่อมีลักษณะข้อมูลในรายงานเหมือนกันโปรแกรมจะจัดเรียงข้อมูลในลำดับต่อไป และดำเนินการต่อ
+
+#___________________________=Print Bulletin Information
+-fb16-field:ReportDetailOnly=พิมพ์ข้อมูลรายงาน
+
+#____________________________________=Print Bulletin Information and Summary Counts
+-cdea-field:ReportDetailWithSummaries=พิมพ์ข้อมูลรายงานและสรุปจำนวน
+
+#___________________________=*Error retrieving field*
+-6d15-field:ReportFieldError=*มีความผิดพลาดในการเรียกดูช่องข้อมูล*
+#[VT 2006-10-02: There are "*" around the English, but none around the Thai. This may be fine, but I just wanted to check in with you about it. Thanks.]
+
+#______________________=#NumberBulletinsFound# bulletins matched the search.
+-fc88-field:ReportFound=#NumberBulletinsFound# รายงานที่เข้ากับการค้นหา
+#[VT 2006-10-02: Items within # signs should remain in English. It would be great if you could change #จำนวนรายงานที่พบ#  to #NumberBulletinsFound#. Thanks.]
+
+#__________________________________=Total Bulletins:
+-b840-field:ReportNumberOfBulletins=รายงานทั้งหมด
+
+#______________________________=Print Summary Counts Only
+-9ca4-field:ReportSummariesOnly=พิมพ์จำนวนสรุปเท่านั้น
+
 #__________________________________________=Retrieving Field Desk Draft Bulletins
 -c881-field:RetrieveHQDraftBulletinProgress=กำลังเอาข้อมูลร่างรายงานคืนจากพื้นที่
 
@@ -735,7 +927,7 @@
 -7a0b-field:ScrubDataBeforeDelete=ทำลายข้อมูลก่อนที่จะลบทิ้ง
 
 #_________________________=--Any Field--
--bcaa-field:SearchAnyField=--ทุกช่องข้อมูล--
+-bcaa-field:SearchAnyField=--ทุกช่องข้อมูล---
 
 #____________________________________=Press Enter to create a new row in the search query.
 -8f11-field:SearchBulletinAddingRules=กรุณากด Enter เพื่อสร้างแถวใหม่ในการค้นหา
@@ -743,11 +935,14 @@
 #_____________________________=Click '#SearchHelpButton#' to get additional information on searching.
 -eb4b-field:SearchBulletinHelp=กด '#SearchHelpButton#' เพื่อข้อมูลเพิ่มเติมในการค้นหา
 
-#______________________________=For each row, select a field to search (or choose to match any field), select what kind of comparison to perform, and then enter a value to search for.
--6878-field:SearchBulletinRules=ในแต่ละแถว เลือกช่องข้อมูลที่จะค้นหา (หรือเลือกเพื่อเข้าได้กับทุกช่องข้อมูล)  เลือกชนิดเพื่อเปรียบเทียบข้อมูล และจากนั้นจึงใส่ค่าเพื่อทำการค้นหา 
+#______________________________=For each row, select a field to search (or choose to match any field), select what kind of comparison to perform, and then enter a value to search for.\n\nNOTE: Bulletins that appear only in the Discarded folder will not be searched.
+-3fd2-field:SearchBulletinRules=ในแต่ละแถว เลือกช่องข้อมูลที่จะค้นหา (หรือเลือกเพื่อเข้าได้กับทุกช่องข้อมูล)  เลือกชนิดเพื่อเปรียบเทียบข้อมูล และจากนั้นจึงใส่ค่าเพื่อทำการค้นหา\n\nหมายเหตุ:รายงานที่อยู่ในแฟ้มข้อมูลลบทิ้งจะไม่ถูกค้นหา 
 
 #______________________=Search for:
 -0c73-field:SearchEntry=ค้นหา:
+
+#______________________=#NumberBulletinsFound# bulletins matched the search, and have been added to the Search Results folder.
+-998d-field:SearchFound=#NumberBulletinsFound# รายงานที่เข้ากับการค้นหาและอยู่ในแฟ้มสรุปการค้นหาแล้ว
 
 #________________________________=Field(s) to search
 -9acd-field:SearchGridHeaderField=ค้นหาช่องข้อมูล
@@ -851,6 +1046,18 @@
 #_____________________=Yes
 -5397-field:WasSentYes=ใช่
 
+#__________________________=Unknown
+-bc78-field:YearUnspecified=ไม่ทราบ
+
+#_________________________=Last Saved
+-eb05-field:_lastSavedDate=บันทึกล่าสุด
+
+#______________________________=Last Saved
+-eb05-field:_lastSavedTimestamp=บันทึกล่าสุด
+
+#___________________=Sent
+-35f4-field:_wasSent=ส่งแล้ว
+
 #____________________________=Built on
 -5342-field:aboutDlgBuildDate=สร้างเมื่อ
 
@@ -912,7 +1119,7 @@
 -49e1-field:confirmCancelBackupRecoveryeffect=ถ้าตอบใช่ คุณจะออกจาก Martus
 
 #___________________________________________=You have chosen to cancel modifying this bulletin.
--deab-field:confirmCancelModifyBulletincause=คุณต้องการยกเลิกการสำรองข้อมูลครั้งนี้?
+-deab-field:confirmCancelModifyBulletincause=คุณต้องการยกเลิกการสำรองข้อมูลครั้งนี้
 
 #____________________________________________=Any changes you have made to this bulletin will be discarded.
 -3819-field:confirmCancelModifyBulletineffect=การเปลี่ยนแปลงที่คุณทำกับรายงานนี้จะถูกยกเลิก
@@ -991,6 +1198,7 @@
 
 #_________________________________________________=The file you chose is not part of a key backup set.  These files are named '<name you picked>-#.dat' where # is the sequence number in the disk set previously created.
 -2e41-field:confirmErrorRecoverIvalidFileNamecause=แฟ้มข้อมูลที่คุณเลือก ไม่ใช่ส่วนหนึ่งของกุญแจสำรอง แฟ้มข้อมูลต้องอยู่ในลักษณะ <ชื่อไฟล์ที่ได้เลือก>-#.dat เมื่อ # คือลำดับเลขในชุดแผ่นฟลอปปี้ดิสก์ที่สร้างขึ้นมาก่อนหน้านี้
+
 
 #__________________________________________________=Choosing yes will bring up the file selection dialog again so you may pick a different file.
 -c237-field:confirmErrorRecoverIvalidFileNameeffect=ถ้าตอบ ใช่ จะให้คุณเลือกแฟ้มใหม่อีกครั้ง
@@ -1128,7 +1336,7 @@
 -9ff2-field:confirmSetImportPublicKeyeffect=ถ้าตอบ ใช่ คุณยินยอมให้เครื่องนี้ ดูข้อมูลรายงานต่างๆ ของคุณได้
 
 #__________________________________________________________=The bulletin entitled "#Title#" already exists in this system.  Do you wish to delete the old bulletin and replace it with this bulletin?
--2692-field:confirmUnAuthoredBulletinDeleteBeforePastecause=รายงานที่มีชื่อเรื่อง "#Title#" มีปรากฏอยู่แล้วในระบบนี้ คุณต้องการที่จะลบรายงานเก่าและวางทับด้วยรายงานนี้หรือไม่
+-2692-field:confirmUnAuthoredBulletinDeleteBeforePastecause=รายงานที่มีชื่อเรื่อง "#Title#" มีปรากฏอยู่แล้วในระบบนี้ คุณต้องการที่จะลบรายงานเก่าและวางทับด้วยรายงานนี้หรือไม่?
 
 #___________________________________________________________=Answering Yes will replace the old bulletin with this bulletin.  Answering on No will leave the original bulletin and skip this file.
 -6bf3-field:confirmUnAuthoredBulletinDeleteBeforePasteeffect=ถ้าตอบ ใช่ จะวางทับรายงานเก่าด้วยรายงานอันนี้ ถ้าตอบ ไม่ไช่ จะปล่อยรายงานต้นฉบับไว้ดังเดิมและข้ามไฟล์นี้ไป
@@ -1146,19 +1354,19 @@
 -bf33-field:confirmUndoCustomFieldseffect=รายงานที่ถูกสร้างขึ้นใหม่ด้วยชื่อบัญชีนี้ จะไม่มีช่องข้อมูลกำหนดเองอีกต่อไป
 
 #_____________________________________=Please Note: There are bulletins that have not been sent to a server.  Do you still want to exit?
--d0f3-field:confirmUploadRemindercause=ข้อควรจำ: มีรายงานที่ยังไม่ได้ส่งไปยังเซิร์ฟเวอร์ คุณยังคงต้องการออกอีกหรือไม่
+-d0f3-field:confirmUploadRemindercause=ข้อควรจำ: มีรายงานที่ยังไม่ได้ส่งไปยังเซิร์ฟเวอร์ คุณยังคงต้องการออกอีกหรือไม่?
 
 #______________________________________=Clicking on Yes will exit Martus, and leave the unsent bulletins.  They will be sent the next time you run Martus and connect to a server.
 -7c7f-field:confirmUploadRemindereffect=ถ้าตอบ ใช่ จะออกจาก Martus รายงานที่ยังไม่ได้ส่งจะถูกส่งในครั้งต่อไปเมื่อคุณใช้งาน Martus และติดต่อไปยังเซิร์ฟเวอร์
 
 #_______________________________________________=The bulletin you are about to create is based on a previous bulletin whose custom fields are different from your current custom fields.  Do you wish to use the original bulletin's custom fields?
--a6ca-field:confirmUseBulletinsCustomFieldscause=รายงานที่คุณกำลังสร้างอยู่บนพื้นฐานของรายงานก่อนหน้านี้ ซึ่งมีช่องข้อมูลกำหนดเองที่แตกต่างจากช่องข้อมูลกำหนดเองของคุณในตอนนี้ คุณต้องการใช้ช่องข้อมูลกำหนดเองของรายงานต้นฉบับหรือไม่
+-a6ca-field:confirmUseBulletinsCustomFieldscause=รายงานที่คุณกำลังสร้างอยู่บนพื้นฐานของรายงานก่อนหน้านี้ ซึ่งมีช่องข้อมูลกำหนดเองที่แตกต่างจากช่องข้อมูลกำหนดเองของคุณในตอนนี้ คุณต้องการใช้ช่องข้อมูลกำหนดเองของรายงานต้นฉบับหรือไม่?
 
 #________________________________________________=Answering '#UseOldCustomFields#' will use the old custom fields and all bulletin data.  Answering '#UseNewCustomFields#' will use your current custom fields and copy all similar fields to the new bulletin but you may lose some of the original bulletin's data.
 -4ce8-field:confirmUseBulletinsCustomFieldseffect=ถ้าตอบ '#UseOldCustomFields#'จะใช้ช่องข้อมูลกำหนดเองอันเก่าและข้อมูลรายงานอันเก่าทั้งหมด ถ้าตอบ '#UseNewCustomFields#' จะใช้ช่องข้อมูลกำหนดเองของชุดปัจจุบันและทำสำเนาช่องข้อมูลที่เหมือนกันทั้งหมดใส่ในรายงานใหม่ แต่คุณอาจเสียข้อมูลรายงานต้นฉบับบางส่วน
 
 #____________________________________________________=The draft bulletin you are about to modify has custom fields which are different from your current custom fields.  Do you wish to use the original bulletin's custom fields?
--ac9d-field:confirmUseBulletinsDraftCustomFieldscause=ร่างรายงานที่คุณปรับปรุงช่องข้อมูลกำหนดเอง จะมีความแตกต่างกับข้อมูลกำหนดเองของคุณในปัจจุบัน คุณต้องการจะใช้ช่องข้อมูลเริ่มแรกของรายงานหรือไม่
+-ac9d-field:confirmUseBulletinsDraftCustomFieldscause=ร่างรายงานที่คุณปรับปรุงช่องข้อมูลกำหนดเอง จะมีความแตกต่างกับข้อมูลกำหนดเองของคุณในปัจจุบัน คุณต้องการจะใช้ช่องข้อมูลเริ่มแรกของรายงานหรือไม่?
 
 #_____________________________________________________=Answering '#UseOldCustomFields#' will use the old custom fields and all bulletin data.  Answering '#UseNewCustomFields#' will use your current custom fields and copy all similar fields to this new draft bulletin but you may lose some of the original bulletin's data.
 -e63e-field:confirmUseBulletinsDraftCustomFieldseffect=ถ้าตอบ '#UseOldCustomFields#' จะใช้ช่องข้อมูลกำหนดเองเดิมทั้งหมดกับทุกรายงาน ถ้าตอบ '#UseNewCustomFields#' จะใช้ช่องข้อมูลกำหนดเองปัจจุบันและสำเนาทุกช่องข้อมูลไปสู่ร่างรายงานใหม่นี้ึ่ซึ่งคุณอาจจะสูญเสียข้อมูลบนร่างรายงานเดิม
@@ -1206,7 +1414,7 @@
 -8571-field:confirmgeneralBackupKeyPairMsgeffect=เลือก ใช่ จะนำคุณผ่านกระบวนการสำรองข้อมูล เลือก ไม่ใช่ จะข้ามขั้นตอนที่สำคัญนี้ไป
 
 #_________________________________________=The text "#SearchString#" was not found.  Do you wish to search from the beginning?
--25f6-field:confirmhelpStringNotFoundcause=ไม่พบข้อความ "#SearchString#" คุณต้องการค้นหาตั้งแต่ต้นหรือไม่
+-25f6-field:confirmhelpStringNotFoundcause=ไม่พบข้อความ "#SearchString#" คุณต้องการค้นหาตั้งแต่ต้นหรือไม่?
 
 #__________________________________________=Clicking on Yes will search for "#SearchString#" from the beginning.
 -0981-field:confirmhelpStringNotFoundeffect=คลิกที่ ใช่ จะทำการค้นหา "#SearchString#" ตั้งแต่เริ่มต้น
@@ -1325,8 +1533,8 @@
 #____________________________________________=Martus needs to keep a list of all the fields in all the bulletins in your system.\n\nThis list does not exist, so it will be created now. This may take a few seconds per bulletin on a slower computer.
 -8773-field:notifyCreatingFieldSpecCachecause=Martus ต้องการเก็บรายชื่อช่องข้อมูลทั้งหมดในทุกรายงานบนระบบของคุณ\n\nไพล์นี้จะไม่ปรากฎซึ่งมันจะถูกสร้างเดี๊ยวนี้ ทั้งนี้อาจใช้เวลาหลายวินาทีต่อหนึ่งรายงานบนเครื่องคอมพิวเตอร์ที่ช้า
 
-#_____________________________________________________=An error occurred during upload, and the damaged bulletin has been moved to the Damaged Bulletins folder.
--ed3b-field:notifyDamagedBulletinMovedToDiscardedcause=เกิดข้อผิดพลาดขณะกำลังอัพโหลด และรายงานที่เสียหายได้ถูกย้ายไปสู่โฟลเดอร์รายงานที่เสียหาย
+#_____________________________________________________=An error occurred during upload, and the damaged bulletin:'#BulletinTitle#' has been moved to the Damaged Bulletins folder.
+-3229-field:notifyDamagedBulletinMovedToDiscardedcause=เกิดข้อผิดพลาดขณะกำลังอัพโหลด และรายงานที่เสียหาย'#BulletinTitle#' ได้ถูกย้ายไปสู่โฟลเดอร์รายงานที่เสียหาย
 
 #______________________________________________=Error: Unable to delete all of those draft bulletins from the server. Some of them may have been deleted.
 -916e-field:notifyDeleteServerDraftsFailedcause=ข้อผิดพลาด: ไม่สามารถลบร่างรายงานทั้งหมดที่อยู่บนเซิร์ฟเวอร์ได้ รายงานบางฉบับถูกลบไปแล้ว
@@ -1352,6 +1560,12 @@
 #_________________________________________________________=There was an error saving your template.
 -88ed-field:notifyErrorExportingCustomizationTemplatecause=มีข้อผิดพลาดในการบันทึกแม่แบบของคุณ
 
+#_____________________________________________=There was an error importing bulletins into Martus.  Not all bulletins were imported.
+-539b-field:notifyErrorImportingBulletinscause=มีความผิดพลาดขณะนำเข้ารายงานสู่ Martus รายงานไม่ได้ถูกนำเข้าทั้งหมด
+
+#_______________________________________________________________=The customization template you are trying to import was created by a newer version of Martus.  You need to upgrade to the latest version of Martus before you can import this template.
+-39dd-field:notifyErrorImportingCustomizationTemplateFuturecause=เทมเพลทที่คุณกำลังนำเข้าถูกสร้างโดย Martus รุ่นใหม่กว่า คุณต้องปรับปรุงรุ่นของ Martus เป็นรุ่นล่าสุดก่อนจึงจะสามารถเข้าเทมเพลทได้
+
 #_________________________________________________________=There was an error importing this template.
 -4a9a-field:notifyErrorImportingCustomizationTemplatecause=มีข้อผิดพลาดในการนำเข้าแม่แบบ
 
@@ -1373,6 +1587,7 @@
 #_______________________________________=Unable to save configuration file.
 -896e-field:notifyErrorSavingConfigcause=ไม่สามารถบันทึกข้อมูลแฟ้มปรับแต่งได้
 
+
 #______________________________________=Unable to save current screen layout.
 -2bad-field:notifyErrorSavingStatecause=ไม่สามารถบันทึกรูปแบบหน้าจอปัจจุบันได้
 
@@ -1382,8 +1597,11 @@
 #___________________________________________=You will have to select a server for any bulletins to be backed up to that server, or to retrieve bulletins from that server.
 -83c4-field:notifyExistingServerRemovedcause=คุณได้เลือกเซิร์ฟเวอร์สำหรับรายงานต่างๆ เพื่อสำรองข้อมูลแก่เซิร์ฟเวอร์ หรือเอารายงานคืนจากเซิร์ฟเวอร์
 
-#____________________________________=Export completed successfully
--65b9-field:notifyExportCompletecause=ส่งออกข้อมูลเรียบร้อยแล้ว
+#______________________________________________________=Exported #BulletinsExported# of #TotalBulletinsToExport# bulletins.  Unfortunately #AttachmentsNotExported# attachments were not exported due to errors.
+-2a40-field:notifyExportCompleteMissingAttachmentscause=ส่งออกแล้ว #BulletinsExported# ของ #TotalBulletinsToExport# รายงาน.  แต่ไม่สามารถส่งออก#AttachmentsNotExported# ระหว่างเกิดความผิดพลาด
+
+#____________________________________=Successfully exported #BulletinsExported# of #TotalBulletinsToExport# bulletins.
+-439b-field:notifyExportCompletecause=ส่งออกข้อมูลเรียบร้อยแล้ว #BulletinsExported# ของทั้งหมด #TotalBulletinsToExport# รายงาน
 
 #_______________________________________=The folder you are trying to export does not contain any bulletins.  Select a folder which has bulletins before exporting the folder.
 -c5f5-field:notifyExportFolderEmptycause=โฟลเดอร์ที่คุณพยายามส่งออกไม่มีรายงานใดอยู่เลย โปรดเลือกโฟลเดอร์ที่มีรายงาน ก่อนส่งออกข้อมูล
@@ -1401,7 +1619,7 @@
 -8965-field:notifyFilesWillNotBeDeletedcause=แฟ้มข้อมูลต้นฉบับไม่ได้ถูกลบออกไปจากเครื่องคอมพิวเตอร์นี้ คุณต้องลบไฟล์เหล่านี้เองถ้าคุณต้องการ
 
 #___________________________________________=An error occurred during the conversion of your folders. You can still use Martus, but if the Outbox or Drafts folders still exist, do not use them.
--73de-field:notifyFolderMigrationFailedcause=เกิดข้อผิดพลาดระหว่างการแปลงโฟลเดอร์ของคุณ คุณยังคงสามารถใช้งาน Martus ต่อได้ แต่ถ้าโฟลเดอร์ Outbox (รายงานที่รอส่ง) หรือ Drafts (ร่างรายงาน) ยังปรากฏอยู่ อย่าใช้โฟลเดอร์เหล่านี้
+-73de-field:notifyFolderMigrationFailedcause=เกิดข้อผิดพลาดระหว่างการแปลงโฟลเดอร์ของคุณ คุณยังคงสามารถใช้งาน Martus ต่อได้ แต่ถ้าโฟลเดอร์ รายงานที่รอส่ง หรือ ร่างรายงาน ยังปรากฏอยู่ อย่าใช้โฟลเดอร์เหล่านี้
 
 #___________________________________________=One or more bulletins were severely damaged, and cannot be displayed. If these bulletins were backed up to a server, you may be able to retrieve undamaged copies from there.
 -399f-field:notifyFoundDamagedBulletinscause=รายงานบางส่วนได้รับความเสียหาย และไม่สามารถแสดงให้ดูได้ ถ้ารายงานเหล่านี้ได้สำรองข้อมูลไว้ที่เซิร์ฟเวอร์ คุณสามารถเอาสำเนาที่เก็บไว้ที่เซิร์ฟเวอร์คืนมาได้
@@ -1414,6 +1632,15 @@
 
 #_______________________________________________=The Headquarters label you entered is already assigned to another Headquarters account.  Please use a different label.
 -91ca-field:notifyHeadquarterLabelDuplicatecause=ป้ายชื่อสำนักงานใหญ่ที่คุณใส่นั้น ได้ถูกกำหนดให้ชื่อบัญชีสำนักงานใหญ่อื่นแล้ว กรุณาใช้ป้ายชื่ออื่น
+
+#________________________________________________=Not all bulletins were imported.  The following bulletins had problems during import.\n\n#ImportBulletinsNotImported#
+-9768-field:notifyImportBulletinsNotImportedcause=รายงานไม่ได้ถูกนำเข้าทั้งหมดรายงานต่อไปนี้มีปัญหาระหว่างการนำเข้า\n\n#ImportBulletinsNotImported#>
+
+#____________________________________=Import complete.  Imported #BulletinsSuccessfullyImported# of #TotalBulletinsToImport# bulletins into folder: #ImportFolder#
+-0e20-field:notifyImportCompletecause=นำเข้าแล้ว #BulletinsSuccessfullyImported# ของ#TotalBulletinsToImport# รายงานในแฟ้ม: #ImportFolder#
+
+#______________________________________________=Not all attachments were imported.  The following bulletins had problems importing these attachments.\n\n#ImportMissingAttachments#
+-4e91-field:notifyImportMissingAttachmentscause=ไฟล์แนบไม่ได้ถูกนำเข้าทั้งหมด รายงานต่อไปนี้มีปัญหาเรื่องการนำเข้าไฟล์แนบ\n\n#ImportMissingAttachments#
 
 #___________________________________________________________=Successfully imported customization template.
 -c78c-field:notifyImportingCustomizationTemplateSuccesscause=การนำเข้าแม่แบบกำหนดเองสำเร็จแล้ว
@@ -1429,6 +1656,15 @@
 
 #___________________________________=Please select a Headquarters first.
 -1d19-field:notifyNoHQsSelectedcause=กรุณาเลือกสำนักงานใหญ่ก่อน
+
+#___________________________________________=No folder specified.  You must enter a folder you wish the files to be imported into.  This folder can already exist in the system, or can be a new folder.
+-05f7-field:notifyNoImportFileSpecifiedcause=ไม่ได้ระบุแฟ้ม คุณต้องระบุแฟ้มปลายทางที่คุณต้องการนำเข้า แฟ้มนี้จะมีอยู่แล้วหรือเป็นแฟ้มที่สร้างใหม่ก็ได้
+
+#____________________________________________=You must select at least one field to be included in the report.
+-9390-field:notifyNoReportFieldsSelectedcause=คุณต้องเลือกช่องช้อมูลล่าสุดที่จะถูกรวมในรายงาน
+
+#__________________________________________=This is not a valid Report Format file
+-500f-field:notifyNotValidReportFormatcause=อันนี้ไม่ใช่ไพล์รูปแบบรายงานที่ถูกต้อง
 
 #________________________________________=Operation completed.
 -1a65-field:notifyOperationCompletedcause=ดำเนินการเรียบร้อยแล้ว
@@ -1454,6 +1690,9 @@
 #____________________________________________=You may only preview one bulletin at a time.  Please only select one bulletin to preview.
 -fbee-field:notifyPreviewOneBulletinOnlycause=คุณสามารถดูรายงานได้เพียงครั้งละหนึ่งรายงาน โปรดเลือกเพียงรายงานเดียว
 
+#____________________________________=Printing Complete
+-ab0a-field:notifyPrintCompletedcause=การพิมพ์เรียบร้อย
+
 #_________________________________________=Successfully saved Report
 -45d7-field:notifyPrintToDiskCompletecause=บันทึกรายงานเสร็จแล้ว
 
@@ -1470,6 +1709,7 @@
 -efa0-field:notifyRecoveryOfKeyPairCompletecause=การกู้คืนแฟ้มกุญแจเสร็จสมบูรณ์ ตอนนี้คุณสามารถเข้าสู่ระบบ Martus ได้แล้ว
 
 #________________________________________________=You have successfully restored your key from your backup files.  It is very important that you now re-distribute your backup files.  We also recommend you backup your key as a single password-encrypted file, though you do not need to recreate the multiple file backup.
+
 -f50c-field:notifyRecoveryOfKeyShareCompletecause=คุณกู้คืนข้อมูลกุญแจจากแฟ้มข้อมูลกุญแจได้สำเร็จ มันสำคัญมากที่คุณจะกระจายแฟ้มสำรองกุญแจใหม่อีกครั้ง เราแนะนำให้คุณสำรองข้อมูลกุญแจโดยเข้ารหัสไว้ ด้วยวิธีนี้คุณไม่จำเป็นต้องสร้างแฟ้มสำรองกุญแจแบบหลายแฟ้มอีก
 
 #_______________________________________________=To restore your key, first you must find the backup file you saved previously.  Using the 'Restore Key from Backup File' dialog box find the file on your computer's hard drive, a network drive, or removable media disk then click the Open button.  Martus will then ask you for your user name and password and restore your key so you can log in normally and access your account.
@@ -1481,6 +1721,15 @@
 #______________________________________=Please remember your username and password. It cannot be recovered.
 -e9e0-field:notifyRememberPasswordcause=โปรดจำชื่อผู้ใช้และรหัสผ่านให้ดี มันไม่สามารถกู้คืนได้
 
+#___________________________________________________=This report format was created in a different language. As a result, some headings may not print properly, and some of the fields may not be available for sorting.
+-eb95-field:notifyReportFormatDifferentLanguagecause=รูปแบบรายงานนี้ถูกสร้างในภาษาอื่น ในการสรุปหัวของบางรายงานอาจจะพิมพ์ออกไม่ถูกต้อง และบางช่องข้อมูลไม่สามารถจัดเรียงข้อมูลได้
+
+#_______________________________________=This report format was created with an earlier version of Martus, so it may not work correctly
+-ed82-field:notifyReportFormatIsOldcause=รูปแบบรายงานนี้ถูกสร้างกับโปรแกรม Martus รุ่นก่อนหน้า ซึ่งอาจจะทำงานไม่ถูกต้อง
+
+#__________________________________________=This report format was created with a newer version of Martus, so it may not work correctly
+-305e-field:notifyReportFormatIsTooNewcause=รูปแบบรายงานนี้ถูกสร้างกับโปรแกรม Martus รุ่นใหม่กว่า ซึ่งอาจจะทำงานไม่ถูกต้อง
+
 #____________________________________________________=One or more bulletins were unable to be resent because you are not authorized to upload them.
 -d248-field:notifyResendErrorNotAuthorizedToSendcause=รายงานหนึ่งรายงานหรือมากกว่านั้นไม่สามารถถูกส่งได้อีก เนื่องจากคุณไม่ได้รับอนุญาตให้อัพโหลดรายงานเหล่านี้
 
@@ -1490,6 +1739,9 @@
 #______________________________________=Bulletin download cancelled.  Some bulletins may have already been downloaded.
 -87b3-field:notifyRetrieveCanceledcause=การดาวน์โหลดรายงานถูกยกเลิก บางรายงานอาจจะถูกดาวน์โหลดเรียบแล้ว
 
+#_______________________________________=Retrieving bulletins from the server is complete
+-1ade-field:notifyRetrieveCompletedcause=การดึงรายงานจากเครื่องเซิร์ฟเวอร์เรียบร้อยแล้ว
+
 #___________________________________=An error has occurred while retrieving a bulletin.
 -6201-field:notifyRetrieveErrorcause=มีข้อผิดพลาดเกินดึ้นขณะเอาข้อมูลคืน
 
@@ -1498,10 +1750,12 @@
 
 #_______________________________________=An error has prevented Martus from continuing the retrieve that was in progress. You should re-select any bulletins that had not yet been retrieved.
 -8149-field:notifyRetrieveFileErrorcause= การผิดพลาดทำให้ข้อมูลที่อยู่ระหว่างเอาคืนหยุดกลางครัน คุณจะต้องเลือกรายงานที่คุณยังไม่ได้คืนอีกครั้ง
-# AB2006-04-18:  I don't see "Martus" in the Thai translation anywhere (we usually keep it in English)?
 
 #________________________________________=A retrieve is already in progress. You cannot start another retrieve until that one has finished.
 -3e55-field:notifyRetrieveInProgresscause=อยู่ในระหว่างการเอาคืนข้อมูล คุณไม่สามารถเริ่มการเอาคืนข้อมูลอีกจนกว่าข้อมูลที่กำลังเอาคืนเสร็จสิ้น
+
+#____________________________________________________=Preview not yet available for this bulletin. Please wait until the information has been retrieved from the server, and then try again.
+-8fd7-field:notifyRetrievePreviewNotAvailableYetcause=ตัวอย่างยังไม่สามารถแสดงในรายงานนี้ กรุณารอจนกว่าข้อมูลจะถูกเรียกคืนจากเซิร์ฟเวอร์ จากนั้นจึงลองอีกครั้ง
 
 #________________________________________________=Errors occurred while retrieving bulletin summaries.  Some of the bulletins on the server will not be shown.
 -6f6f-field:notifyRetrievedOnlySomeSummariescause=เกิดข้อผิดพลาดขึ้นขณะทำการเอาสรุปรายงานคืน เซิร์ฟเวอร์อาจไม่สามารถแสดงรายงานบางรายงานได้
@@ -1514,9 +1768,6 @@
 
 #__________________________________=Sorry, no bulletins were found.
 -5bd8-field:notifySearchFailedcause=เสียใจด้วย ไม่พบรายงานใดๆ
-
-#_________________________________=#NumberBulletinsFound# bulletins matched the search, and have been added to the Search Results folder.\n Note that both current and earlier versions of each bulletin were searched.
--5639-field:notifySearchFoundcause=#NumberBulletinsFound# จำนวนรายงานที่พบ  และได้ถูกใส่ในโฟลเดอร์ผลการค้นหา.\n แสดงว่ารายงานทุกฉบับได้ถูกค้นหาทั้งในรุ่นปัจจุบันและก่อนหน้านี้
 
 #_____________________________________=The Server Public Code does not match the one you entered.
 -efe3-field:notifyServerCodeWrongcause=รหัสสาธารณะของเซิร์ฟเวอร์ ไม่ตรงกับรหัสที่คุณได้ป้อนไว้
@@ -1539,6 +1790,9 @@
 #_____________________________________=An unexpected error has occurred. Please report this problem to help@martus.org.
 -3cb4-field:notifyUnexpectedErrorcause=เกิดข้อผิดพลาดที่ไม่คาดคิด โปรดรายงานปัญหานี้ไปที่ help@martus.org
 
+#_________________________________________________________=An error occurred during upload, and the bulletin:'#BulletinTitle#' has not been sent to the server.  You may try and resend the bulletin later.
+-4325-field:notifyUploadFailedBulletinNotSentToServercause=มีความผิดพลาดเกิดขึ้นระหว่างการอัปโหลด:'#BulletinTitle#' ไม่ได้ถูกส่งไปยังเซิร์ฟเวอร์  คุณอาจลองพยายามส่งรายงานนี้อีกครั้ง
+
 #_______________________________________=The user name you chose already exists on this system, please choose a different user name.
 -bbb0-field:notifyUserAlreadyExistscause=ชื่อผู้ใช้ที่คุณเลือกมีอยู่แล้วในระบบนี้ โปรดเลือกชื่อผู้ใช้อื่นแทน
 
@@ -1547,6 +1801,7 @@
 
 #__________________________________________________=You have chosen not to use this server
 -91af-field:notifyUserRejectedServerCompliancecause=คุณได้เลือกไม่ใช้เซิร์ฟเวอร์นี้
+
 
 #______________________________________________=Verification of all disks passed.
 -7d7f-field:notifyVerifyKeyPairSharePassedcause=การตรวจสอบแผ่นฟลอปปี้ดิสก์ทั้งหมดผ่านแล้ว:
@@ -1617,6 +1872,7 @@
 #________________________________=Prevent creating public bulletins
 -7c9e-field:preferencesAllPrivate=ป้องกันการสร้างรายงานสาธารณะ
 
+
 #______________________=Private
 -237d-field:privateinfo=ความลับ
 
@@ -1641,17 +1897,17 @@
 #__________________=Summary
 -12b7-field:summary=สรุป
 
-#____________________=For security reasons, you must sign into Martus again.
--a575-field:timedout1=ด้วยเหตุผลด้านความปลอดภัย คุณต้องเข้าสู่ระบบใหม่อีกครั้ง
+#____________________=Martus is still running in the background, but has locked the screen for security.  You must sign in to Martus again to continue working.
+-a252-field:timedout1=Martus ยังทำงานอยู่แต่ล็อคหน้าจอไว้เพื่อความปลอดภัย คุณต้องเข้าสู่ระบบ Martus อีกครั้งเพื่อทำงานต่อ
 
-#____________________=Any unsaved bulletins will be lost unless you sign in and save them.
--24c5-field:timedout2=รายงานใดก็ตามที่ยังไม่ได้บันทึกจะสูญหายทันที เว้นแต่คุณจะเข้าสู่ระบบเพื่อบันทึกทันที
+#____________________=Any unsaved bulletins will be lost unless you sign in to Martus again and save them.
+-3f66-field:timedout2=รายงานใดก็ตามที่ยังไม่ได้บันทึกจะสูญหายทันที เว้นแต่คุณจะเข้าสู่ระบบMartusอีกครั้งเพื่อบันทึก
 
 #________________=Title
 -768e-field:title=ชื่อเรื่อง
 
-#_____________________________=Thai 2.9
--649d-field:translationVersion=ไทย  2.9
+#_____________________________=English 3.0
+-649d-field:translationVersion=ไทย  3.0 
 
 #___________________=Username
 -84c2-field:username=ชื่อผู้ใช้
@@ -1926,6 +2182,11 @@
 #___________________________=Export My Public Account Id
 -2b8a-menu:ExportMyPublicKey=ส่งออกชื่อบัญชีสาธารณะของฉัน
 
+#_________________________=Import Bulletins
+-4094-menu:ImportBulletins=นำเข้ารายงาน
+
+
+
 #_________________________=Organize Folders
 -1ee2-menu:OrganizeFolders=จัดการแฟ้ม
 
@@ -1946,6 +2207,9 @@
 
 #______________________=Rename Folder
 -5e31-menu:RenameFolder=เปลี่ยนชื่อโฟลเดอร์
+
+#_________________=Reports
+-88bc-menu:Reports=รายงาน
 
 #_________________________=Resend Bulletin(s)
 -21a8-menu:ResendBulletins=ส่งรายงานอีกครั้ง
@@ -2016,8 +2280,11 @@
 #_______________=Paste
 -db24-menu:paste=วาง
 
-#_______________________=Print Bulletin(s) / Create Report File
--ecef-menu:printBulletin=พิมพ์รายงาน / สร้างไฟล์รายงาน
+#_______________________=Print Bulletin(s)
+-c705-menu:printBulletin=พิมพ์รายงาน 
+
+#_____________________=Print
+-5b22-menu:printButton=พิมพ์
 
 #________________=Search
 -bce0-menu:search=ค้นหา
@@ -2103,6 +2370,7 @@
 #________________=Sep
 -fdd2-month:Thai9=ก.ย.
 
+
 #______________=Apr
 -befd-month:apr=เม.ย.
 
@@ -2154,6 +2422,7 @@
 #___________________________________________________=Backup Key Information 
 -53df-wintitle:BackupKeyPairToSecretShareInformation=สำรองข้อมูลกุญแจ
 
+
 #__________________________________________________=Backup Complete
 -8b15-wintitle:BackupSecretShareCompleteInformation=สำรองข้อมูลเรียบร้อยแล้ว
 
@@ -2165,6 +2434,12 @@
 
 #______________________________=Details Field Default Content
 -a39b-wintitle:BulletinTemplate=ค่าเริ่มต้นช่องข้อมูลรายละเอียด
+
+#________________________________=Create Report
+-446e-wintitle:ChooseReportFields=สร้างรายงาน
+
+#_______________________________=Run Report...
+-56fb-wintitle:ChooseReportToRun=รายงานที่ทำงาน...
 
 #__________________________=Server Configuration
 -add5-wintitle:ConfigServer=ปรับแต่งค่าเกี่ยวกับเซิร์ฟเวอร์
@@ -2186,6 +2461,9 @@
 
 #_________________________________________________=Retrieving Bulletin Summaries
 -2a45-wintitle:DeleteServerDraftsBulletinSummaries=เอาสรุปรายงานคืน
+
+#_____________________________________________=Warning Duplicate Labels Found
+-8e46-wintitle:DuplicateLabelsInCustomTemplate=คำเตือนพบป้ายชื่อซ้ำ
 
 #____________________________________=Attachment Missing
 -11e1-wintitle:ErrorAttachmentMissing=เอกสารแนบหายไป
@@ -2223,6 +2501,9 @@
 #_______________________________________________=Export Customization Template
 -5318-wintitle:ExportCustomizationTemplateSaveAs=ส่งออกแม่แบบกำหนดเอง
 
+#____________________________=Exporting Bulletins
+-1c8c-wintitle:ExportProgress=กำลังส่งออกรายงาน
+
 #_____________________________=Search Help
 -53b6-wintitle:FancySearchHelp=ช่วยเหลือการค้นหา
 
@@ -2232,17 +2513,29 @@
 #________________________________=Help on Bulletin Details Field Default Content
 -96cb-wintitle:HelpDefaultDetails=วิธีใช้งาน ค่าเริ่มต้นช่องข้อมูลรายละเอียด
 
+#_____________________________=Import Bulletins
+-4094-wintitle:ImportBulletins=นำเข้ารายงาน
+
 #_____________________________________________=Import Customization Template
 -0188-wintitle:ImportCustomizationTemplateOpen=นำเข้าแม่แบบกำหนดเอง
 
 #_______________________________=Import Headquarters Public Account Id File
 -9300-wintitle:ImportHQPublicKey=นำเข้าแฟ้มชื่อบัญชีสาธารณะของสำนักงานใหญ่
 
+#____________________________=Importing Bulletins
+-2c20-wintitle:ImportProgress=กำลังนำเข้ารายงาน
+
+#________________________________=Include Private Data
+-e6dc-wintitle:IncludePrivateData=รวมข้อมูลส่วนตัว
+
 #____________________________________=Incompatible Translation Version
 -e91d-wintitle:IncompatibleMtfVersion=รุ่นของการแปลภาษาไม่เข้ากัน
 
 #________________________________=Load Default Details Field Content
 -4e2f-wintitle:LoadDefaultDetails=โหลดค่าเริ่มต้นช่องข้อมูลรายละเอียด
+
+#_____________________________=Load Saved Search
+-7e7a-wintitle:LoadSavedSearch=โหลดการค้นหาที่บันทึกแล้ว
 
 #__________________________=Martus SignIn
 -0615-wintitle:MartusSignIn=เข้าสู่ระบบ Martus
@@ -2253,11 +2546,17 @@
 #__________________________________=Validate User
 -6030-wintitle:MartusSignInValidate=ตรวจสอบผู้ใช้
 
+#__________________________________=Organize Report Fields
+-1e3e-wintitle:OrganizeReportFields=จัดการไฟล์รายงาน
+
 #_____________________________________=Cannot Paste Bulletin(s)
 -c05f-wintitle:PasteErrorBulletinOlder=ไม่สามารถวางรายงานได้
 
 #__________________________=Print Options
 -183a-wintitle:PrintOptions=ตัวเลือกการพิมพ์
+
+#__________________________=Print Preview
+-68e2-wintitle:PrintPreview=ตัวอย่างก่อนพิมพ์
 
 #______________________________=Print to which file
 -7cfe-wintitle:PrintToWhichFile=พิมพ์ไปยังไฟล์ไหน
@@ -2273,6 +2572,9 @@
 
 #__________________________=Remove Server
 -49c2-wintitle:RemoveServer=ถอดถอนเซิร์ฟเวอร์
+
+#____________________________________=Reports
+-88bc-wintitle:ReportChooseSortFields=รายงาน
 
 #_____________________________=Resend Bulletins
 -273f-wintitle:ResendBulletins=ส่งรายงานอีกครั้ง
@@ -2301,6 +2603,7 @@
 #______________________________________________=Retrieving Bulletin Summaries
 -2a45-wintitle:RetrieveMyDraftBulletinSummaries=กำลังเอาสรุปรายงานคืน
 
+
 #______________________________________=Retrieve My Draft Bulletins
 -eea7-wintitle:RetrieveMyDraftBulletins=เอาร่างรายงานของฉันคืน
 
@@ -2313,8 +2616,17 @@
 #_______________________________________=Retrieve My Sealed Bulletins
 -68b9-wintitle:RetrieveMySealedBulletins=เอารายงานปิดผนึกของฉันคืน
 
+#_______________________________=Reports
+-88bc-wintitle:RunOrCreateReport=รายงาน
+
 #_______________________________________=of
 -de04-wintitle:SaveRecoverShareKeyPairOf=ของ
+
+#__________________________=Save Report Format As...
+-8c3d-wintitle:SaveReportAs=บันทึกรูปแบบรายงานเป็น...
+
+#________________________=Save Search
+-1340-wintitle:SaveSearch=บันทึกการค้นหา
 
 #______________________________=Saving Backup Disk
 -9204-wintitle:SaveShareKeyPair=กำลังบันทึกข้อมูลสำรองลงดิสก์
@@ -2592,8 +2904,14 @@
 #_______________________________________________________=Error Exporting Template
 -f4cc-wintitle:notifyErrorExportingCustomizationTemplate=ข้อผิดพลาดในการส่งออกแม่แบบ
 
+#___________________________________________=Error Importing Bulletins
+-aeb8-wintitle:notifyErrorImportingBulletins=การนำเข้ารายงานผิดพลาด
+
 #_______________________________________________________=Error Importing Template
 -4f1a-wintitle:notifyErrorImportingCustomizationTemplate=ข้อผิดพลาดในการนำเข้าแม่แบบ
+
+#_____________________________________________________________=Error Importing Template
+-4f1a-wintitle:notifyErrorImportingCustomizationTemplateFuture=การนำเข้าเทมเพลทผิดพลาด
 
 #____________________________________=Error Reading File
 -73ad-wintitle:notifyErrorReadingFile=ข้อผิดพลาดในการอ่านแฟ้ม
@@ -2616,6 +2934,7 @@
 #____________________________________=Error Saving State
 -884d-wintitle:notifyErrorSavingState=ข้อผิดพลาดขณะบันทึกสถานะ
 
+
 #____________________________________=Error Writing File
 -fabf-wintitle:notifyErrorWritingFile=ข้อผิดพลาดขณะเขียนแฟ้ม
 
@@ -2624,6 +2943,9 @@
 
 #__________________________________=Export Bulletins
 -a86c-wintitle:notifyExportComplete=ส่งออกรายงาน
+
+#____________________________________________________=Export Bulletins
+-a86c-wintitle:notifyExportCompleteMissingAttachments=ส่งออกรายงาน
 
 #_____________________________________=Error Exporting Folder
 -d6d7-wintitle:notifyExportFolderEmpty=ข้อผิดพลาดขณะส่งออกโฟลเดอร์
@@ -2655,6 +2977,15 @@
 #_____________________________________________=Headquarter Label Invalid
 -106b-wintitle:notifyHeadquarterLabelDuplicate=ไม่พบป้ายชื่อสำนักงานใหญ่
 
+#______________________________________________=Warning Bulletins Not Imported
+-59d8-wintitle:notifyImportBulletinsNotImported=เตือนรายงานไม่ได้นำเข้า
+
+#__________________________________=Import Complete
+-a5cb-wintitle:notifyImportComplete=นำเข้าเรียบร้อย
+
+#____________________________________________=Warning Missing Attachments
+-79ef-wintitle:notifyImportMissingAttachments=เตือนไฟล์แนบหายไป
+
 #_________________________________________________________=Importing Template Succeeded
 -ac8c-wintitle:notifyImportingCustomizationTemplateSuccess=นำเข้าแม่แบบสำเร็จแล้ว
 
@@ -2669,6 +3000,15 @@
 
 #_________________________________=No Headquarters Selected
 -9140-wintitle:notifyNoHQsSelected=ไม่มีสำนักงานใหญ่ถูกเลือก
+
+#_________________________________________=No Folder Specified
+-4b6e-wintitle:notifyNoImportFileSpecified=ไม่ได้ระบุแฟ้ม
+
+#__________________________________________=Create Report
+-446e-wintitle:notifyNoReportFieldsSelected=สร้างรายงาน
+
+#________________________________________=Reports
+-88bc-wintitle:notifyNotValidReportFormat=รายงาน
 
 #______________________________________=Finished
 -355b-wintitle:notifyOperationCompleted=เสร็จแล้ว
@@ -2690,6 +3030,9 @@
 
 #__________________________________________=Preview One Bulletin Only
 -5b0a-wintitle:notifyPreviewOneBulletinOnly=ดูรายงานได้ครั้งละหนึ่งรายงานเท่านั้น
+
+#__________________________________=Reports
+-88bc-wintitle:notifyPrintCompleted=รายงาน
 
 #_______________________________________=Print To Report File
 -c1b2-wintitle:notifyPrintToDiskComplete=พิมพ์รายงานเป็นไฟล์
@@ -2718,6 +3061,15 @@
 #____________________________________=Remember Your Password
 -2bc6-wintitle:notifyRememberPassword=จำรหัสผ่านของคุณไว้ให้ดี
 
+#_________________________________________________=Reports
+-88bc-wintitle:notifyReportFormatDifferentLanguage=รายงาน
+
+#_____________________________________=Reports
+-88bc-wintitle:notifyReportFormatIsOld=รายงาน
+
+#________________________________________=Reports
+-88bc-wintitle:notifyReportFormatIsTooNew=รายงาน
+
 #_______________________________=Error Sending Bulletin
 -eaab-wintitle:notifyResendError=ข้อผิดพลาดขณะส่งรายงาน
 
@@ -2726,6 +3078,9 @@
 
 #____________________________________=Bulletin Download Canceled
 -f8d3-wintitle:notifyRetrieveCanceled=การดาวน์โหลดรายงานถูกยกเลิก
+
+#_____________________________________=Retrieve Complete
+-653b-wintitle:notifyRetrieveCompleted=เรียกข้อมูลเรียบร้อย
 
 #_________________________________=Retrieve Error
 -8ed0-wintitle:notifyRetrieveError=เอาข้อมูลคืนผิดพลาด
@@ -2738,6 +3093,9 @@
 
 #______________________________________=Retrieve In Progress
 -6983-wintitle:notifyRetrieveInProgress=อยู่ระหว่างเอาข้อมูลคืน
+
+#__________________________________________________=Unable To Preview
+-061a-wintitle:notifyRetrievePreviewNotAvailableYet=ไม่แสดงตัวอย่าง
 
 #______________________________________________=Error During Retrieve
 -f2d7-wintitle:notifyRetrievedOnlySomeSummaries=ข้อผิดพลาดขณะเอาคืน
@@ -2774,6 +3132,10 @@
 
 #___________________________________=Unexpected Error
 -d17c-wintitle:notifyUnexpectedError=เกิดข้อผิดพลาดที่ไม่คาดคิด
+
+
+#_______________________________________________________=Unable to Send Bulletin To Server
+-2c28-wintitle:notifyUploadFailedBulletinNotSentToServer=ไม่ส่งรายงานไปยังเซิร์ฟเวอร์
 
 #_____________________________________=User Already Exists
 -eecc-wintitle:notifyUserAlreadyExists=ชื่อผู้ใช้มีอยู่แล้ว
@@ -2831,6 +3193,7 @@
 
 #_____________________=Options
 -6bf5-wintitle:options=ตัวเลือก
+
 
 #_______________________________=Back up key file
 -d004-wintitle:saveBackupKeyPair=สำรองข้อมูลแฟ้มกุญแจ
