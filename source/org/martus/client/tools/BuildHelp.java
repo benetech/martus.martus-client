@@ -75,10 +75,12 @@ public class BuildHelp
 		
 		while(true)
 		{	
-			String line = in.readLine();
+			String line = in.readLine().trim();
 			if(line.length()==0)
 				break;
 			int lastWordPos = line.lastIndexOf('\t');
+			if(lastWordPos == -1)
+				continue;
 			String lineWithoutPage = line.substring(0,lastWordPos).trim(); 
 			out.writeln(lineWithoutPage);
 			tableOfContents.add(lineWithoutPage);
@@ -93,7 +95,7 @@ public class BuildHelp
 		//Skip past TOC
 		while(true)
 		{	
-			String line = in.readLine();
+			String line = in.readLine().trim();
 			if(line.length()==0)
 				break;
 		}

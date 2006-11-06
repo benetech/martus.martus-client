@@ -2,9 +2,9 @@
 # Language code:  ru
 # Language name:  Russian
 # Translated by:  Inna Kremen
-# Exported date:  Wed Mar 15 11:20:35 PST 2006
-# Client version: pre-2.9 internal
-# Client build:   20060314.1712
+# Exported date:  Wed Sep 06 16:02:52 PDT 2006
+# Client version: pre 3.0 internal
+# Client build:   20060905.1762
 #
 # This file MUST be saved in UTF-8 format!
 # Lines beginning with # are comments and are ignored by Martus
@@ -69,10 +69,31 @@
 #      a particular value.
 #      For Example. #TotalNumberOfFilesInBackup# = '5'
 #                   #Titles# = 'A list of bulletin titles'
-# 12.  If you want your language to appear right to left,
+# 12.  Do not translate the numbers in the field:translationVersion string.
+# 13.  Do not translate the numbers in the field:ErrorCustomFields string.
+# 14.  For Thai and Persian months, please do the following:
+
+
+#          - for a Thai translation, Thai months should be the same as the translation
+#            of regular months, and Persian dates are the same as in English.
+#          - for a Persian translation, both Thai and Persian months
+#            should be the same as the translation of regular months
+#          - for an Arabic translation, Thai months should be the same as
+#            the translation of regular months, but do an Arabic translation
+#            (or transliteration) of Persian dates (not the same as in English).
+#          - for all other languages, Thai and Persian dates can be the same
+#            as the translation of regular months
+# 15       - We have file filters like 'Martus Report Format (.mrf)'
+#            and 'Martus Search Specification (.mss)'.
+#            The descriptive names should be translated, but the (.mrf) and (.mss)
+#            must not be translated.
+# 16.  If you want your language to appear right to left,
 #      Uncomment the next line (by removing the # in front of #!right-to-left)
 #!right-to-left
 #
+
+#____________________________=Add
+-61cc-button:AddFieldToReport=Добавить
 
 #________________________=Show all bulletins on this server and on this computer.
 -e9a2-button:AllSummaries=Показать все сводки на данном сервере и на данном компьютере
@@ -98,6 +119,12 @@
 #____________________=Continue
 -2e02-button:Continue=Продолжить
 
+#____________________________=Create New Page Report
+-1d7a-button:CreatePageReport=Создать новый постраничный отчет
+
+#_______________________________=Create New Tabular Report
+-34ee-button:CreateTabularReport=Создать новый табличный отчет
+
 #__________________=Delete
 -f6fd-button:Delete=Удалить
 
@@ -109,6 +136,15 @@
 
 #_________________________________=Show bulletins that are only on the server.
 -b795-button:DownloadableSummaries=Показать сводки, имеющиеся только на сервере
+
+#______________________=Field Label
+-6492-button:FieldLabel=Метка поля
+
+#____________________=Tag
+-9829-button:FieldTag=Тег
+
+#_____________________=Type
+-3deb-button:FieldType=Тип
 
 #___________________________=Down
 -bf93-button:FolderOrderDown=Вниз
@@ -122,8 +158,23 @@
 #_________________=Leave
 -7e35-button:Leave=Оставить
 
+#______________________=Load Previous Search...
+-75f7-button:LoadSearch=Загрузить критерии поиска...
+
+#______________________________=Load
+-ddcb-button:LoadSearchOkButton=Загрузить
+
+#_________________________________=Move Down
+-4158-button:MoveFieldDownInReport=Переместить ниже
+
+#_______________________________=Move Up
+-c637-button:MoveFieldUpInReport=Переместить выше
+
 #_________________________=New Account
 -1d19-button:NewAccountTab=Новая учетная запись
+
+#___________________________=Choose Field...
+-288f-button:PopUpTreeChoose=Выбрать поле...
 
 #___________________=Preview
 -f1fb-button:Preview=Предварительный просмотр
@@ -134,11 +185,20 @@
 #_________________________________=Include private information
 -6c53-button:PrintPublicAndPrivate=Печатать также конфиденциальную информацию
 
-#_______________________=Send report output to a file
--89b9-button:PrintToDisk=Печать в файл отчета
+#_______________________=Send report to a file
+-b154-button:PrintToDisk=Сохранить в файл отчета
 
-#__________________________=Print to a printer
--7bac-button:PrintToPrinter=Вывод на принтер
+#_______________________=Print To File
+-a5d9-button:PrintToFile=Печать в файл
+
+#__________________________=Print To Printer
+-319b-button:PrintToPrinter=Печать на принтер
+
+#________________________________=Both Public and Private Data
+-8685-button:PublicAndPrivateData=Общие и конфиденциальные данные
+
+#______________________=Public Data Only
+-4baa-button:PublicOnly=Только общие данные
 
 #__________________________________=Restore account from backup key file
 -f447-button:RecoverAccountByBackup=Восстановить учетную запись по резервной копии ключа
@@ -149,6 +209,9 @@
 #_____________________________=Restore Account
 -d7da-button:RecoverAccountTab=Восстановить учетную запись
 
+#_________________________________=Remove
+-e963-button:RemoveFieldFromReport=Удалить
+
 #_________________________=Reset Contents
 -6f62-button:ResetContents=Вернуться к исходному содержанию
 
@@ -158,8 +221,17 @@
 #______________________________________________=Retrieve latest bulletin version only
 -3449-button:RetrieveLatestBulletinRevisionOnly=Загрузить только последнюю версию данной сводки
 
+#_____________________=Use Existing Report Format
+-b052-button:RunReport=Использовать существующий формат отчета
+
+#______________________=Save This Search...
+-e372-button:SaveSearch=Сохранить критерии поиска...
+
 #____________________________________=Only search most recent version of bulletins
 -852f-button:SearchFinalBulletinsOnly=Искать только в последних версиях сводок
+
+#________________________=Select
+-8598-button:SelectReport=Выбрать
 
 #__________________________________=Accept
 -bb54-button:ServerComplianceAccept=Принять
@@ -269,8 +341,8 @@
 #______________=OK
 -9ce3-button:ok=OK
 
-#_________________=Print/Report
--5fdf-button:print=Печать/Отчет
+#_________________=Print
+-5b22-button:print=Печать
 
 #____________________________=Remove Attachment
 -6f6d-button:removeattachment=Удалить вложение
@@ -319,6 +391,18 @@
 
 #_________________________=Author (required)
 -4a0b-field:AuthorRequired=Автор (обязательно)
+
+#_____________________________=Preparing Report...
+-7651-field:BackgroundPrinting=Подготовка отчета...
+
+#______________________________=Searching...
+-ba2b-field:BackgroundSearching=Поиск...
+
+#____________________________=Sorting Bulletins...
+-5a5a-field:BackgroundSorting=Сортировка сводок...
+
+#____________________________=Working...
+-049a-field:BackgroundWorking=Работа...
 
 #___________________________________=Your key is required to read your private bulletin information or to create new bulletins.  To ensure that you'll always have access to your data, it is extremely important to keep a backup of your key.\n\nMartus offers two methods for backing up your key, either of which may be used, but we strongly recommend using both backup methods.  The first method creates a single, password encrypted key back up file onto removable media (e.g. floppy disk, cd, USB storage) or a network drive; the second method backs up the key in #TotalNumberOfFilesInBackup# separate pieces (not encrypted with your password) onto multiple floppy disks (or other removable media).\n
 -ff3d-field:BackupKeyPairGeneralInfo=Ваш ключ необходим для чтения конфиденциальной информации из Ваших сводок и для создания новых сводок.  Чтобы Вам был гарантирован постоянный доступ к Вашим данным, очень важно сохранить резервную копию Вашего ключа.\n\nMartus предлагает два метода сохранения. Можно использовать любой метод, но мы настоятельно рекомендуем воспользоваться обоими.  Первый метод - создать один файл резервной копии, зашифрованный паролем, на сменном носителе (например, на дискете, на компакт-диске, на USB-носителе) или на сетевом диске; второй метод - сохранить ключ, разбив его на #TotalNumberOfFilesInBackup# частей (не зашифрованных Вашим паролем), которые записываются на отдельные дискеты (или другие сменные носители).\n
@@ -383,6 +467,9 @@
 #_____________________=Bulletin Id:
 -a081-field:BulletinId=Идентификатор сводки:
 
+#______________________________=Bulletin Import Files
+-1106-field:BulletinImportFiles=Файлы импорта сводок
+
 #____________________________=Last Saved
 -eb05-field:BulletinLastSaved=Сохранена 
 
@@ -415,6 +502,9 @@
 
 #_____________________________=Thai Solar (2548-05-31)
 -2be4-field:CalendarSystemThai=Тайский солнечный (2548-05-31)
+
+#_____________________________=Use Ctrl-Click or Shift-Click to select the fields (columns) that will appear in this report. 
+-e4a8-field:ChooseReportFields=Удерживая нажатой клавишу Ctrl или Shift, выделите мышью поля или столбцы, которые будут включены в отчет.
 
 #_____________________________________=Download Progress
 -8b0e-field:ChunkProgressStatusMessage=Загружается
@@ -455,6 +545,12 @@
 #____________________________________=Please enter your new username and password.
 -aec2-field:CreateNewUserNamePassword=Введите Ваше новое имя пользователя и новый пароль.
 
+#_________________________________=Bottom/Private Section of Bulletin
+-cf48-field:CustomXMLBottomSection=Нижний (конфиденциальный) раздел сводки
+
+#______________________________=Top Section of Bulletin
+-cff1-field:CustomXMLTopSection=Верхний раздел сводки
+
 #_____________________________________=Customization Template Files
 -9210-field:CustomizationTemplateFiles=Файлы шаблонов настройки полей
 
@@ -472,6 +568,9 @@
 
 #____________________=Exact Date
 -8a81-field:DateExact=Точная дата
+
+#___________________________=Unknown
+-bc78-field:DateNotSpecified=Неизвестна
 
 #______________________=Day
 -987b-field:DatePartDay=День
@@ -515,6 +614,15 @@
 #______________________=Do not prompt
 -448d-field:DonotPrompt=Без запроса
 
+#__________________________=Labels
+-2228-field:DuplicateLabels=Метки
+
+#__________________________________________=The following labels appear more than once in your template.
+-3f09-field:DuplicateLabelsInCustomTemplate=Следующие метки встречаются в Вашем шаблоне более одного раза.
+
+#__________________________________________________=Do you want to save this template with the duplicate labels?
+-79bc-field:DuplicateLabelsInCustomTemplateContinue=Хотите сохранить шаблон с повторяющимися метками?
+
 #________________________________=Unable to back up the key file on this disk.
 -bda3-field:ErrorBackingupKeyPair=Невозможно сохранить файл ключа на данный диск.
 
@@ -530,8 +638,8 @@
 #__________________________________=LABEL
 -64b8-field:ErrorCustomFieldHeader4=МЕТКА
 
-#____________________________=There is an error in the custom field definitions. Each problem is identified with the following codes:\n   100 - Required standard field is missing\n   101 - Custom field does not have a correct tag.\n   102 - A previous Tag already exists with this name.\n   103 - Custom field does not have a label.\n   104 - Unrecognized Field Type.\n   105 - A label was found in a standard field.\n   106 - XML Parse Error.\n   107 - Tag contains illegal characters.\n   108 - Duplicate entry in Dropdown field.\n   109 - No Choices in Dropdown field.\n   200 - All fields empty.\n   201 - Unrecognized Headquarters created this template.\n   202 - Security validation error.\n   203 - File Error.\n   204 - Imported XML Missing Field.
--0b96-field:ErrorCustomFields=При настройке полей в сводке допущена ошибка. Типы ошибок обозначаются следующими кодами:\n   100 - Отсутствует обязательное стандартное поле.\n   101 - Тег поля отсутствует или задан неверно.\n   102 - Тег с этим именем уже был задан ранее.\n   103 - Метка пользовательского поля отсутствует.\n   104 - Невозможно распознать тип поля.\n   105 - Стандартному полю присвоена метка.\n   106 - Ошибка формата XML.\n   107 - Тег содержит недопустимые символы.\n   108 - Дублирование элемента в выпадающем списке.\n   109 - В выпадающем списке отсутствуют элементы.\n   200 - Все поля пустые.\n   201 - Невозможно распознать главную учетную запись, создавшую данный шаблон.\n   202 - Ошибка при проверке защиты.\n   203 - Ошибка файла.\n   204 - Поле отсутствует в импортируемом XML-файле.
+#____________________________=There is an error in the custom field definitions. Each problem is identified with the following codes:\n   100 - Required standard field is missing\n   101 - Custom field does not have a correct tag.\n   102 - A previous Tag already exists with this name.\n   103 - Custom field does not have a label.\n   104 - Unrecognized Field Type.\n   105 - A label was found in a standard field.\n   106 - XML Parse Error.\n   107 - Tag contains illegal characters.\n   108 - Duplicate entry in Dropdown field.\n   109 - No Choices in Dropdown field.\n   110 - System/Standard field tag cannot be used for custom field.\n   111 - Standard Public field cannot be placed in bottom/Private section.\n   112 - Standard Private field cannot be placed in the top section.\n   200 - All fields empty.\n   201 - Unrecognized Headquarters created this template.\n   202 - Security validation error.\n   203 - File Error.\n   204 - Imported XML Missing Field.
+-71f2-field:ErrorCustomFields=При настройке полей в сводке допущена ошибка. Типы ошибок обозначаются следующими кодами:\n   100 - Отсутствует обязательное стандартное поле.\n   101 - Тег поля отсутствует или задан неверно.\n   102 - Тег с этим именем уже был задан ранее.\n   103 - Метка пользовательского поля отсутствует.\n   104 - Невозможно распознать тип поля.\n   105 - Стандартному полю присвоена метка.\n   106 - Ошибка формата XML.\n   107 - Тег содержит недопустимые символы.\n   108 - Дублирование элемента в выпадающем списке.\n   109 - В выпадающем списке отсутствуют элементы. \n   110 – Тег системного (стандартного) поля нельзя применять в пользовательском поле.\n   111 – Стандартное общедоступное поле не может размещаться в нижнем (конфиденциальном) разделе.\n   112 - Стандартное конфиденциальное поле не может размещаться в верхнем разделе.\n   200 - Все поля пустые.\n   201 - Невозможно распознать главную учетную запись, создавшую данный шаблон.\n   202 - Ошибка при проверке защиты.\n   203 - Ошибка файла.\n   204 - Поле отсутствует в импортируемом XML-файле.
 
 #_________________________________________=A previous backup file exists.  You must save each file on its own removable media disk.
 -db93-field:ErrorPreviousBackupShareExists=На диске уже есть файл разбивки резервной копии ключа. Сохраняйте файлы разбивки на отдельных дисках.
@@ -548,11 +656,17 @@
 #___________________________=Exit when complete
 -30e3-field:ExitWhenComplete=Выйти после завершения
 
-#________________________________=Information from the selected bulletins (listed below) will be exported to an XML file that you specify.\n\nPlease Note: This is a one way operation, you will not be able to import the XML file saved back into Martus.  This operation exists so you can bring Martus Bulletins into another application that does import XML files.
--7ae7-field:ExportBulletinDetails=Информация из выбранных сводок (перечисленных ниже) будет экспортирована в заданный Вами файл XML.\n\nВнимание: Эта операция односторонняя, импортировать файл XML обратно в Martus невозможно. Эта функция предназначена для переноса информации из сводок Martus в другие приложения, поддерживающие файлы XML.
+#____________________________=Include attachments in export
+-1a48-field:ExportAttachments=Экспортировать также вложения
+
+#________________________________=Information from the selected bulletins (listed below) will be exported to an XML file that you specify.  These files can then be used to import the Martus bulletin information into another application.\n\n  You could also use this XML file to import these bulletins back into Martus (as new unique bulletins) if desired.  Please email help@martus.org if you need assistance with this type of importing.
+-a8c0-field:ExportBulletinDetails=Информация из выбранных сводок (перечисленных ниже) будет экспортирована в заданный Вами файл формата XML.  С помощью подобных файлов можно импортировать информацию из сводок Martus в другие приложения.\n\n  Вы можете также использовать данный файл XML, чтобы при желании импортировать данные сводки обратно в Martus (как новые, уникальные сводки).  Более подробную справку об этом методе импорта можно получить, послав запрос по электронной почте help@martus.org
 
 #____________________________=Include private data in export
 -4bb6-field:ExportPrivateData=Экспортировать также конфиденциальные данные
+
+#_________________________=Exporting
+-c373-field:ExportProgress=Экспорт
 
 #____________________________=Exported Bulletins
 -0b4e-field:ExportedBulletins=Экспортированные сводки
@@ -565,6 +679,33 @@
 
 #______________________________=You can use the word #Or# or #And#, or you can use the English words "#OrEnglish#" and "#AndEnglish#" to search.\n\nYou need to put spaces before and after any #Or# / #And# keywords you use in your search.\n
 -1573-field:FancySearchHelpMsg3=При поиске можно использовать слова-связки "#Or#" и "#And#" или же английские слова "#OrEnglish#" (или) и "#AndEnglish#" (и).\n\nКаждую связку "#Or#" или "#And#" следует отделять с обеих сторон пробелами.\n
+
+#___________________________=Yes/No
+-9f62-field:FieldTypeBOOLEAN=Да/Нет
+
+#________________________=Date
+-eb9a-field:FieldTypeDATE=Дата
+
+#_____________________________=Date Range
+-6bb4-field:FieldTypeDATERANGE=Диапазон дат
+
+#____________________________=Dropdown List
+-da4a-field:FieldTypeDROPDOWN=Выпадающий список
+
+#________________________=Grid/Table
+-be86-field:FieldTypeGRID=Таблица (сетка)
+
+#____________________________=Language
+-89b8-field:FieldTypeLANGUAGE=Язык
+
+#___________________________=Message
+-68f4-field:FieldTypeMESSAGE=Сообщение
+
+#_____________________________=Text with Scrollbar
+-c0c1-field:FieldTypeMULTILINE=Текст с полосой прокрутки
+
+#__________________________=Text
+-c332-field:FieldTypeSTRING=Текст
 
 #______________________________________=This file name should be unique and identifiable to you but we recommend not using your user name.  Each file will be generated with this name and its number sequence.
 -02b6-field:GetShareFileNameDescription=Имя файла должно быть уникальным и понятным для Вас. Не рекомендуем называть файл Вашим именем пользователя.  Каждый создаваемый файл будет иметь это имя и порядковый номер.
@@ -608,6 +749,18 @@
 #________________________________=One or more accounts already exist on this computer. To create an additional account with a new username and passphrase, click OK.
 -02f2-field:HowToCreateNewAccount=На этом компьютере уже имеются учетные записи. Чтобы создать новую учетную запись с новым именем пользователя и паролем, нажмите OK.
 
+#_________________________________________=Import bulletins into which Folder?
+-5efa-field:ImportBulletinsIntoWhichFolder=В какую папку импортировать сводки?
+
+#____________________________________=Bulletin
+-6ef0-field:ImportExportBulletinTitle=Сводка
+
+#_________________________=Importing
+-90ab-field:ImportProgress=Импорт
+
+#_____________________________=#TotalBulletins# bulletins were selected for printing.  #AllPrivateBulletins# of them are all private.\n What would you like to include when printing?
+-abb2-field:IncludePrivateData=Для печати выбрано #TotalBulletins# сводок.  #AllPrivateBulletins# из них полностью конфиденциальные.\n Что включить в распечатку?
+
 #_________________________________=The version of this translation is not compatible with this version of Martus.  It is recommended that you do not continue to use this translation version and go to (http://www.martus.org/downloads) for the appropriate version.
 -a747-field:IncompatibleMtfVersion=Данная версия перевода не соответствует используемой версии Martus.  Рекомендуем Вам не пользоваться этим переводом в дальнейшем и найти нужную версию перевода на странице загрузки (http://www.martus.org/downloads).
 
@@ -616,6 +769,12 @@
 
 #____________________________________________=#MtfLanguage# Translation Version: #MtfVersionNumber#
 -8dde-field:IncompatibleMtfVersionTranslation=#MtfLanguage# Версия перевода: #MtfVersionNumber#
+
+#_______________________________________=Martus Report Format (.mrf)
+-62cd-field:MartusReportFormatFileFilter=Формат отчета Martus (.mrf)
+
+#_____________________________________=Martus Search Specification (.mss)
+-76c0-field:MartusSearchSpecFileFilter=Спецификация поиска Martus (.mss)
 
 #_______________________=Warning: Portions may be missing or damaged
 -00a9-field:MayBeDamaged=Предупреждение: Информация может быть частично потеряна или повреждена
@@ -630,6 +789,7 @@
 -2b9f-field:NoHQsConfigured=Для данной сводки главные учетные записи не заданы.
 
 #___________________________________________=Server Not Available
+
 -c79c-field:NoServerAvailableProgressMessage=Сервер недоступен
 
 #_____________________________=Remember: Entering your password using the regular keyboard may reduce security.
@@ -640,6 +800,10 @@
 
 #_____________________________________=The author has not given you permission to view the private portions of this bulletin.
 -ba2f-field:NotAuthorizedToViewPrivate=У Вас нет разрешения от автора на просмотр конфиденциальной информации из данной сводки.
+
+#____________________=(none)
+-3c6b-field:NotSorted=(нет)
+#[VT 2006-10-16: It looks as though this is the Russian word for "no", whereas the English is "none". This may be fine, but could you let us know what you think? Thanks.]
 
 #____________________________=Details:
 -1daa-field:OnlineHelpMessage=Подробности:
@@ -653,11 +817,16 @@
 #_______________________________=Organization (required)
 -2f27-field:OrganizationRequired=Организация (обязательно)
 
+#_______________________________=Add the fields you want to appear in your report, and then arrange them in the order you want them to be printed.
+-b511-field:OrganizeReportFields=Добавьте в отчет поля по своему выбору и затем расположите их в том порядке, в каком Вы желаете их распечатать.
+#[VT 2006-10-16: I have been using an online translation website to help me in reviewing translations. I completely understand that these sites are very seriously limited in their accuracy, but I wanted to check in with you about something nonetheless. When I translated the Russian from this field, I received the following from the website: "Add into the report of field on your selection and then you will arrange them in that order, in which you desire to unseal them." The only aspect of this which I thought I should check in with you about was the "in which you desire to unseal them", since this field discusses the order in which users want to print fields. This may be fine, but it would be great if you could review this and let me know what you think. Thanks.]
+
 #__________________________________=You have the option to include or exclude the selected bulletin's private information in this print out or report file. If you choose to print private data, it will be visible to anyone who sees the print out or report file.
 -2bd3-field:PrintPrivateDataMessage=Вы можете выбрать, выводить или не выводить на печать или в файл отчета конфиденциальную информацию из данной сводки. Если Вы выберете печать конфиденциальных данных, с ними сможет ознакомиться любой, кто увидит распечатку или просмотрит файл отчета.
 
-#_______________________________=You can print the bulletin contents to a printer, or send the formatted report output to a file.
--41ba-field:PrintToPrinterOrDisk=Вы можете распечатать содержимое сводки на принтере или сохранить данные, отформатированные для вывода, в файл на диске (файл отчета).
+#_______________________________=You can print the bulletin contents to a printer, or send the formatted report to a file.
+-f988-field:PrintToPrinterOrDisk=Вы можете распечатать содержимое сводки на принтере или сохранить отформатированный отчет в файл на диске.
+#[VT 2006-10-16: It looks as though here, the online translating tool that I sometimes refer to is also translating your word for "print" as "unseal". It would be great if you could check on this as well. Thanks.]
 
 #_________________________________=Public Information Files
 -90f9-field:PublicInformationFiles=Файлы общедоступной информации
@@ -701,6 +870,30 @@
 #_____________________________=Are you sure you want to do this?
 -bfb8-field:RemoveServerLabel2=Вы уверены, что хотите этого?
 
+#_________________________________=Choose how the bulletins will be sorted in the report. The bulletins will be ordered by the first field chosen. When two bulletins have the same value in that field, they will be sorted by the next sort field, and so on.
+-551d-field:ReportChooseSortFields=Выберите порядок сортировки полей в отчете. Сводки будут отсортированы по первому выбранному полю. Если значения этого поля совпадают, сортировка продолжится по следующему полю и т.д.
+
+#___________________________=Print Bulletin Information
+-fb16-field:ReportDetailOnly=Печать данных из сводок
+
+#____________________________________=Print Bulletin Information and Summary Counts
+-cdea-field:ReportDetailWithSummaries=Печать данных из сводок и значений счетчиков
+
+#___________________________=*Error retrieving field*
+-6d15-field:ReportFieldError=*Ошибка при загрузке поля*
+
+#______________________=#NumberBulletinsFound# bulletins matched the search.
+-fc88-field:ReportFound=По заданным критериям найдено #NumberBulletinsFound# сводок.
+
+#__________________________________=Total Bulletins:
+-b840-field:ReportNumberOfBulletins=Всего сводок:
+#[VT 2006-10-16: The online translator I often refer to has translated this to mean "In all the summaries". Again, this may be an error on the part of the translation tool, but it would be wonderful if you could look over it and let me know what you think. Thanks.]
+
+
+#______________________________=Print Summary Counts Only
+-9ca4-field:ReportSummariesOnly=Печать значений счетчиков
+#[VT 2006-10-16: Similarly, the online translator returned "Press the values of the counters" for the above Russian translation. It would be great if you could let us know what you think. Thanks.]
+
 #__________________________________________=Retrieving Field Desk Draft Bulletins
 -c881-field:RetrieveHQDraftBulletinProgress=Загрузка черновых сводок подчиненных учетных записей
 
@@ -741,13 +934,17 @@
 -8f11-field:SearchBulletinAddingRules=Нажмите Enter, чтобы создать новую строку в поле запроса на поиск.
 
 #_____________________________=Click '#SearchHelpButton#' to get additional information on searching.
--eb4b-field:SearchBulletinHelp=Для получения дополнительной справки о поиске нажмите кнопку '#SearchHelpButton#'.
+-eb4b-field:SearchBulletinHelp=Для получения дополнительной справки по поиску нажмите кнопку '#SearchHelpButton#'.
 
-#______________________________=For each row, select a field to search (or choose to match any field), select what kind of comparison to perform, and then enter a value to search for.
--6878-field:SearchBulletinRules=В каждой строке выберите поле для поиска (можно задать поиск по всем полям), задайте критерий сравнения содержимого поля со строкой поиска и затем введите саму строку поиска.
+#______________________________=For each row, select a field to search (or choose to match any field), select what kind of comparison to perform, and then enter a value to search for.\n\nNOTE: Bulletins that appear only in the Discarded folder will not be searched.
+-3fd2-field:SearchBulletinRules=В каждой строке выберите поле для поиска (можно задать поиск по всем полям), задайте критерий сравнения содержимого поля со строкой поиска и затем введите саму строку поиска.\n\nВНИМАНИЕ: Сводки, отображающиеся только в папке «Удаленные», в область поиска не включаются.
 
 #______________________=Search for:
 -0c73-field:SearchEntry=Искать:
+
+#______________________=#NumberBulletinsFound# bulletins matched the search, and have been added to the Search Results folder.
+-998d-field:SearchFound=По заданным критериям найдено #NumberBulletinsFound# сводок, которые добавлены в папку «Найденные».
+#[VT 2006-10-16: I think I see another pattern in how the online translator is interpreting the translations – it repeatedly reads " сводок " to mean "summaries" rather than "bulletins". Could you let us know what you think? Again, this may be fine, but we appreciate it if you could help us learn more. Thanks.]
 
 #________________________________=Field(s) to search
 -9acd-field:SearchGridHeaderField=Поля для поиска
@@ -839,6 +1036,7 @@
 #_______________________________=Space
 -6d8c-field:VirtualKeyboardSpace=Пробел
 
+
 #_____________________________________=Enter Password using mouse with on-screen keyboard below
 -d6ef-field:VirtualPasswordDescription=Введите пароль, нажимая мышью клавиши на экранной клавиатуре, изображенной ниже
 
@@ -850,6 +1048,18 @@
 
 #_____________________=Yes
 -5397-field:WasSentYes=Да
+
+#__________________________=Unknown
+-bc78-field:YearUnspecified=Неизвестно
+
+#_________________________=Last Saved
+-eb05-field:_lastSavedDate=Последнее сохранение
+
+#______________________________=Last Saved
+-eb05-field:_lastSavedTimestamp=Последнее сохранение
+
+#___________________=Sent
+-35f4-field:_wasSent=Отправлена
 
 #____________________________=Built on
 -5342-field:aboutDlgBuildDate=Встроено:
@@ -1227,6 +1437,7 @@
 -a3fe-field:confirmsendcause=Вы выбрали операцию отправки чистовой сводки на сервер Martus.
 
 #____________________________=This will permanently seal the bulletin and you will not be allowed to make any further modifications to it except by creating a new version of the bulletin.
+
 -0de0-field:confirmsendeffect=Данная сводка будет закрыта для записи, и вносить в нее изменения можно будет, только создав ее новую версию.
 
 #_____________________=Connecting...
@@ -1290,6 +1501,7 @@
 -438b-field:messageErrorDateInFuturecause=Данная дата относится к будущему:
 
 #_____________________________________________=This date range has an end date that is earlier than the start date:
+
 -e4dc-field:messageErrorDateRangeInvertedcause=Конечная дата диапазона предшествует начальной:
 
 #_________________________________=The current server has sent this message:
@@ -1325,8 +1537,8 @@
 #____________________________________________=Martus needs to keep a list of all the fields in all the bulletins in your system.\n\nThis list does not exist, so it will be created now. This may take a few seconds per bulletin on a slower computer.
 -8773-field:notifyCreatingFieldSpecCachecause=Программе Martus требуется сохранить список всех полей во всех сводках, имеющихся в Вашей системе.\n\nСоответствующий список отсутствует, так что он будет создан сейчас. На более медленных компьютерах этот процесс может занять по нескольку секунд для каждой сводки.
 
-#_____________________________________________________=An error occurred during upload, and the damaged bulletin has been moved to the Damaged Bulletins folder.
--ed3b-field:notifyDamagedBulletinMovedToDiscardedcause=При отправке произошла ошибка. Отправляемая сводка перемещена в папку поврежденных сводок.
+#_____________________________________________________=An error occurred during upload, and the damaged bulletin:'#BulletinTitle#' has been moved to the Damaged Bulletins folder.
+-3229-field:notifyDamagedBulletinMovedToDiscardedcause=При отправке произошла ошибка. Отправляемая сводка: '#BulletinTitle#' перемещена в папку поврежденных сводок.
 
 #______________________________________________=Error: Unable to delete all of those draft bulletins from the server. Some of them may have been deleted.
 -916e-field:notifyDeleteServerDraftsFailedcause=Ошибка: Невозможно удалить все данные черновые сводки с сервера. Возможно, произошло удаление некоторых сводок.
@@ -1351,6 +1563,12 @@
 
 #_________________________________________________________=There was an error saving your template.
 -88ed-field:notifyErrorExportingCustomizationTemplatecause=При сохранении шаблона произошла ошибка.
+
+#_____________________________________________=There was an error importing bulletins into Martus.  Not all bulletins were imported.
+-539b-field:notifyErrorImportingBulletinscause=При импорте сводок в Martus произошла ошибка.  Импортированы не все сводки.
+
+#_______________________________________________________________=The customization template you are trying to import was created by a newer version of Martus.  You need to upgrade to the latest version of Martus before you can import this template.
+-39dd-field:notifyErrorImportingCustomizationTemplateFuturecause=Шаблон настройки полей, который Вы пытаетесь импортировать, создан более новой версией Martus.  Чтобы импортировать этот шаблон, Вам следует обновить версию Martus.
 
 #_________________________________________________________=There was an error importing this template.
 -4a9a-field:notifyErrorImportingCustomizationTemplatecause=При импорте данного шаблона произошла ошибка.
@@ -1382,8 +1600,11 @@
 #___________________________________________=You will have to select a server for any bulletins to be backed up to that server, or to retrieve bulletins from that server.
 -83c4-field:notifyExistingServerRemovedcause=Вам следует выбрать сервер для сохранения на нем Ваших сводок или для загрузки сводок, имеющихся на этом сервере.
 
-#____________________________________=Export completed successfully
--65b9-field:notifyExportCompletecause=Экспорт выполнен успешно
+#______________________________________________________=Exported #BulletinsExported# of #TotalBulletinsToExport# bulletins.  Unfortunately #AttachmentsNotExported# attachments were not exported due to errors.
+-2a40-field:notifyExportCompleteMissingAttachmentscause=Экспортировано #BulletinsExported# из #TotalBulletinsToExport# сводок.  К сожалению, вложения #AttachmentsNotExported# экспортированы не были, так как произошла ошибка.
+
+#____________________________________=Successfully exported #BulletinsExported# of #TotalBulletinsToExport# bulletins.
+-439b-field:notifyExportCompletecause=Успешно экспортировано #BulletinsExported# из #TotalBulletinsToExport# сводок.
 
 #_______________________________________=The folder you are trying to export does not contain any bulletins.  Select a folder which has bulletins before exporting the folder.
 -c5f5-field:notifyExportFolderEmptycause=Папка, которую Вы пытаетесь экспортировать, не содержит сводок. Выберите для экспорта папку, в которой имеются сводки.
@@ -1415,6 +1636,15 @@
 #_______________________________________________=The Headquarters label you entered is already assigned to another Headquarters account.  Please use a different label.
 -91ca-field:notifyHeadquarterLabelDuplicatecause=Введенная Вами метка уже присвоена другой главной учетной записи. Введите другую метку.
 
+#________________________________________________=Not all bulletins were imported.  The following bulletins had problems during import.\n\n#ImportBulletinsNotImported#
+-9768-field:notifyImportBulletinsNotImportedcause=Импортированы не все сводки. Проблемы возникли при импорте следующих сводок.\n\n#ImportBulletinsNotImported#
+
+#____________________________________=Import complete.  Imported #BulletinsSuccessfullyImported# of #TotalBulletinsToImport# bulletins into folder: #ImportFolder#
+-0e20-field:notifyImportCompletecause=Импорт выполнен.  Импортировано #BulletinsSuccessfullyImported# из #TotalBulletinsToImport# сводок в папку: #ImportFolder#
+
+#______________________________________________=Not all attachments were imported.  The following bulletins had problems importing these attachments.\n\n#ImportMissingAttachments#
+-4e91-field:notifyImportMissingAttachmentscause=Импортированы не все вложения.  Проблемы возникли при импорте следующих вложений из сводок.\n\n#ImportMissingAttachments#
+
 #___________________________________________________________=Successfully imported customization template.
 -c78c-field:notifyImportingCustomizationTemplateSuccesscause=Импорт шаблона настройки полей успешно завершен.
 
@@ -1429,6 +1659,15 @@
 
 #___________________________________=Please select a Headquarters first.
 -1d19-field:notifyNoHQsSelectedcause=Вначале выберите главную учетную запись.
+
+#___________________________________________=No folder specified.  You must enter a folder you wish the files to be imported into.  This folder can already exist in the system, or can be a new folder.
+-05f7-field:notifyNoImportFileSpecifiedcause=Не указана папка. Укажите папку, в которую следует импортировать файлы. Эта папка может быть новой или уже иметься в системе.
+
+#____________________________________________=You must select at least one field to be included in the report.
+-9390-field:notifyNoReportFieldsSelectedcause=Выберите хотя бы одно поле для включения в отчет.
+
+#__________________________________________=This is not a valid Report Format file
+-500f-field:notifyNotValidReportFormatcause=Данный файл формата отчета неправилен.
 
 #________________________________________=Operation completed.
 -1a65-field:notifyOperationCompletedcause=Операция выполнена.
@@ -1453,6 +1692,9 @@
 
 #____________________________________________=You may only preview one bulletin at a time.  Please only select one bulletin to preview.
 -fbee-field:notifyPreviewOneBulletinOnlycause=Одновременно возможен предварительный просмотр только одной сводки. Выберите одну сводку для предварительного просмотра.
+
+#____________________________________=Printing Complete
+-ab0a-field:notifyPrintCompletedcause=Печать выполнена
 
 #_________________________________________=Successfully saved Report
 -45d7-field:notifyPrintToDiskCompletecause=Отчет успешно сохранен
@@ -1481,6 +1723,16 @@
 #______________________________________=Please remember your username and password. It cannot be recovered.
 -e9e0-field:notifyRememberPasswordcause=Запомните свое имя пользователя и пароль - в случае утраты их невозможно восстановить.
 
+#___________________________________________________=This report format was created in a different language. As a result, some headings may not print properly, and some of the fields may not be available for sorting.
+
+-eb95-field:notifyReportFormatDifferentLanguagecause=Данный формат отчета создан на другом языке. Некоторые заголовки могут выводиться неправильно, а некторые поля – недоступны для сортировки.
+
+#_______________________________________=This report format was created with an earlier version of Martus, so it may not work correctly
+-ed82-field:notifyReportFormatIsOldcause=Данный формат отчета создан в более ранней версии Martus, поэтому может работать неправильно
+
+#__________________________________________=This report format was created with a newer version of Martus, so it may not work correctly
+-305e-field:notifyReportFormatIsTooNewcause=Данный формат отчета создан в более поздней версии Martus, поэтому может работать неправильно
+
 #____________________________________________________=One or more bulletins were unable to be resent because you are not authorized to upload them.
 -d248-field:notifyResendErrorNotAuthorizedToSendcause=Отправка некоторых сводок не выполнена, так как Вы не обладаете правами для их отправки.
 
@@ -1489,6 +1741,9 @@
 
 #______________________________________=Bulletin download cancelled.  Some bulletins may have already been downloaded.
 -87b3-field:notifyRetrieveCanceledcause=Загрузка сводки (сводок) отменена. Некоторые сводки могут быть уже загружены.
+
+#_______________________________________=Retrieving bulletins from the server is complete
+-1ade-field:notifyRetrieveCompletedcause=Загрузка сводок с сервера выполнена
 
 #___________________________________=An error has occurred while retrieving a bulletin.
 -6201-field:notifyRetrieveErrorcause=При загрузке сводки произошла ошибка.
@@ -1502,6 +1757,9 @@
 #________________________________________=A retrieve is already in progress. You cannot start another retrieve until that one has finished.
 -3e55-field:notifyRetrieveInProgresscause=Загрузка уже выполняется. Невозможно начать новый процесс загрузки, пока не завершился текущий.
 
+#____________________________________________________=Preview not yet available for this bulletin. Please wait until the information has been retrieved from the server, and then try again.
+-8fd7-field:notifyRetrievePreviewNotAvailableYetcause=Предварительный просмотр данной сводки сейчас невозможен. Подождите, пока информация полностью загрузится с сервера, и повторите попытку.
+
 #________________________________________________=Errors occurred while retrieving bulletin summaries.  Some of the bulletins on the server will not be shown.
 -6f6f-field:notifyRetrievedOnlySomeSummariescause=При загрузке краткой информации из сводок произошли ошибки.  Некоторые сводки, находящиеся на сервере, не будут показаны.
 
@@ -1513,9 +1771,6 @@
 
 #__________________________________=Sorry, no bulletins were found.
 -5bd8-field:notifySearchFailedcause=Извините, сводок не найдено.
-
-#_________________________________=#NumberBulletinsFound# bulletins matched the search, and have been added to the Search Results folder.\n Note that both current and earlier versions of each bulletin were searched.
--5639-field:notifySearchFoundcause=Найдено #NumberBulletinsFound# сводок, которые добавлены в папку "Найденные".\n Напоминаем, что поиск велся как по текущей версии, так и по более ранним версиям каждой сводки.
 
 #_____________________________________=The Server Public Code does not match the one you entered.
 -efe3-field:notifyServerCodeWrongcause=Введенный Вами код не соответствует общему коду сервера.
@@ -1537,6 +1792,9 @@
 
 #_____________________________________=An unexpected error has occurred. Please report this problem to help@martus.org.
 -3cb4-field:notifyUnexpectedErrorcause=Произошла непредвиденная ошибка. Просим сообщить о возникшей проблеме по электронной почте: help@martus.org
+
+#_________________________________________________________=An error occurred during upload, and the bulletin:'#BulletinTitle#' has not been sent to the server.  You may try and resend the bulletin later.
+-4325-field:notifyUploadFailedBulletinNotSentToServercause=При отправке произошла ошибка, и сводка: '#BulletinTitle#' не была отправлена на сервер. Вы можете повторить отправку данной сводки позже.
 
 #_______________________________________=The user name you chose already exists on this system, please choose a different user name.
 -bbb0-field:notifyUserAlreadyExistscause=В данной системе уже существует пользователь с выбранным Вами именем. Выберите другое имя пользователя.
@@ -1577,6 +1835,7 @@
 #______________________________________=The current server is not responding or may need to be configured from the server menu.
 -9b3c-field:notifyretrievenoservercause=Текущий сервер не отвечает
 
+
 #_____________________________________=No bulletins were selected
 -3dbb-field:notifyretrievenothingcause=Не выбраны сводки
 
@@ -1605,6 +1864,7 @@
 -71c7-field:password2=(повторите пароль)
 
 #________________=Phone Number
+
 -ab25-field:phone=Номер телефона
 
 #___________________________________=Automatically adjust legacy Persian dates
@@ -1634,23 +1894,24 @@
 #_______________________________________=For security reasons, we must validate your username and password.
 -0381-field:securityServerConfigValidate=В целях безопасности требуется проверка Вашего имени пользователя и пароля.
 
+
 #_________________=Status
 -bae7-field:status=Состояние
 
 #__________________=Summary
 -12b7-field:summary=Краткое содержание
 
-#____________________=For security reasons, you must sign into Martus again.
--a575-field:timedout1=В целях безопасности войдите в систему Martus еще раз.
+#____________________=Martus is still running in the background, but has locked the screen for security.  You must sign in to Martus again to continue working.
+-a252-field:timedout1=Программа Martus продолжает работать в фоновом режиме, но экран заблокирован в целях безопасности. Для продолжения работы войдите в систему Martus заново.
 
-#____________________=Any unsaved bulletins will be lost unless you sign in and save them.
--24c5-field:timedout2=Чтобы несохраненные сводки не были потеряны, войдите в систему и сохраните их.
+#____________________=Any unsaved bulletins will be lost unless you sign in to Martus again and save them.
+-3f66-field:timedout2=Чтобы несохраненные сводки не были потеряны, войдите в систему Martus заново и сохраните их.
 
 #________________=Title
 -768e-field:title=Заголовок
 
-#_____________________________=Russian 2.9 
--649d-field:translationVersion=Русский 2.9 
+#_____________________________=Russian 3.0
+-649d-field:translationVersion=Русский 3.0
 
 #___________________=Username
 -84c2-field:username=Имя пользователя
@@ -1678,6 +1939,7 @@
 
 #________________________________________________=NOTE: A copy of this bulletin exists in one or more other folders, and those copies will not be removed.
 -c4bc-field:warningDeleteSingleBulletinWithCopies=ВНИМАНИЕ: В другой папке (папках) имеется копия (копии) данной сводки. Эта копия (копии) удалена не будет. 
+
 
 #____________________________________________=WARNING: This bulletin has not been sent to a server since it was last modified. Deleting it will prevent the latest changes from being backed up.
 -523e-field:warningDeleteSingleUnsentBulletin=ВНИМАНИЕ: Данная сводка не была отправлена на сервер после последнего редактирования. Удаление этой сводки приведет к потере последних внесенных изменений.
@@ -1817,6 +2079,7 @@
 #________________=Dutch
 -334a-language:nl=Голландский
 
+
 #________________=Oriya
 -c106-language:or=Орийя
 
@@ -1925,6 +2188,9 @@
 #___________________________=Export My Public Account Id
 -2b8a-menu:ExportMyPublicKey=Экспортировать собственный общий идентификатор учетной записи
 
+#_________________________=Import Bulletins
+-4094-menu:ImportBulletins=Импорт сводок
+
 #_________________________=Organize Folders
 -1ee2-menu:OrganizeFolders=Организация папок
 
@@ -1945,6 +2211,9 @@
 
 #______________________=Rename Folder
 -5e31-menu:RenameFolder=Переименовать папку
+
+#_________________=Reports
+-88bc-menu:Reports=Отчеты
 
 #_________________________=Resend Bulletin(s)
 -21a8-menu:ResendBulletins=Отправить сводки на сервер заново
@@ -2015,8 +2284,11 @@
 #_______________=Paste
 -db24-menu:paste=Вставка
 
-#_______________________=Print Bulletin(s) / Create Report File
--ecef-menu:printBulletin=Печать сводок / Создание файла отчёта
+#_______________________=Print Bulletin(s)
+-c705-menu:printBulletin=Печать сводок
+
+#_____________________=Print
+-5b22-menu:printButton=Печать
 
 #________________=Search
 -bce0-menu:search=Поиск
@@ -2141,6 +2413,7 @@
 #_________________=Draft
 -23d3-status:draft=Черновая
 
+
 #__________________=Sealed
 -66c9-status:sealed=Чистовая
 
@@ -2160,10 +2433,18 @@
 -6fa9-wintitle:BulletinDetailsDialog=Сведения о сводке
 
 #_____________________________=Bulletin Preview
+
 -9d3b-wintitle:BulletinPreview=Предварительный просмотр сводки
 
 #______________________________=Details Field Default Content
 -a39b-wintitle:BulletinTemplate=Содержимое шаблона для поля "Подробности"
+
+#________________________________=Create Report
+-446e-wintitle:ChooseReportFields=Создание отчета
+
+#_______________________________=Run Report...
+-56fb-wintitle:ChooseReportToRun=Обработка отчета...
+
 
 #__________________________=Server Configuration
 -add5-wintitle:ConfigServer=Настройка сервера
@@ -2185,6 +2466,9 @@
 
 #_________________________________________________=Retrieving Bulletin Summaries
 -2a45-wintitle:DeleteServerDraftsBulletinSummaries=Загрузка краткой информации из сводок
+
+#_____________________________________________=Warning Duplicate Labels Found
+-8e46-wintitle:DuplicateLabelsInCustomTemplate=Предупреждение: Метки повторяются
 
 #____________________________________=Attachment Missing
 -11e1-wintitle:ErrorAttachmentMissing=Нет вложения
@@ -2222,6 +2506,9 @@
 #_______________________________________________=Export Customization Template
 -5318-wintitle:ExportCustomizationTemplateSaveAs=Экспорт шаблона настройки полей
 
+#____________________________=Exporting Bulletins
+-1c8c-wintitle:ExportProgress=Экспортируются сводки
+
 #_____________________________=Search Help
 -53b6-wintitle:FancySearchHelp=Справка по поиску
 
@@ -2231,17 +2518,29 @@
 #________________________________=Help on Bulletin Details Field Default Content
 -96cb-wintitle:HelpDefaultDetails=Справка: Шаблон для поля "Подробности"
 
+#_____________________________=Import Bulletins
+-4094-wintitle:ImportBulletins=Импорт сводок
+
 #_____________________________________________=Import Customization Template
 -0188-wintitle:ImportCustomizationTemplateOpen=Импорт шаблона настройки полей
 
 #_______________________________=Import Headquarters Public Account Id File
 -9300-wintitle:ImportHQPublicKey=Импорт файла общего идентификационного ключа главной учетной записи
 
+#____________________________=Importing Bulletins
+-2c20-wintitle:ImportProgress=Импортируются сводки
+
+#________________________________=Include Private Data
+-e6dc-wintitle:IncludePrivateData=Включение конфиденциальных данных
+
 #____________________________________=Incompatible Translation Version
 -e91d-wintitle:IncompatibleMtfVersion=Несовместимая версия перевода
 
 #________________________________=Load Default Details Field Content
 -4e2f-wintitle:LoadDefaultDetails=Загрузка шаблона для поля "Подробности"
+
+#_____________________________=Load Saved Search
+-7e7a-wintitle:LoadSavedSearch=Загрузка сохраненных критериев поиска
 
 #__________________________=Martus SignIn
 -0615-wintitle:MartusSignIn=Вход в систему Martus
@@ -2252,11 +2551,17 @@
 #__________________________________=Validate User
 -6030-wintitle:MartusSignInValidate=Подтверждение прав пользователя
 
+#__________________________________=Organize Report Fields
+-1e3e-wintitle:OrganizeReportFields=Организация полей отчета
+
 #_____________________________________=Cannot Paste Bulletin(s)
 -c05f-wintitle:PasteErrorBulletinOlder=Невозможна вставка сводок
 
 #__________________________=Print Options
 -183a-wintitle:PrintOptions=Параметры печати
+
+#__________________________=Print Preview
+-68e2-wintitle:PrintPreview=Предварительный просмотр
 
 #______________________________=Print to which file
 -7cfe-wintitle:PrintToWhichFile=Файл для печати
@@ -2272,6 +2577,9 @@
 
 #__________________________=Remove Server
 -49c2-wintitle:RemoveServer=Удаление соединения с сервером
+
+#____________________________________=Reports
+-88bc-wintitle:ReportChooseSortFields=Отчеты
 
 #_____________________________=Resend Bulletins
 -273f-wintitle:ResendBulletins=Повторная отправка сводок
@@ -2312,8 +2620,18 @@
 #_______________________________________=Retrieve My Sealed Bulletins
 -68b9-wintitle:RetrieveMySealedBulletins=Загрузка собственных чистовых сводок
 
+#_______________________________=Reports
+-88bc-wintitle:RunOrCreateReport=Отчеты
+
 #_______________________________________=of
 -de04-wintitle:SaveRecoverShareKeyPairOf=из
+
+#__________________________=Save Report Format As...
+-8c3d-wintitle:SaveReportAs=Сохранение формата файла отчета
+
+#________________________=Save Search
+-1340-wintitle:SaveSearch=Сохранение критериев поиска
+
 
 #______________________________=Saving Backup Disk
 -9204-wintitle:SaveShareKeyPair=Сохранение резервной копии на диск
@@ -2329,6 +2647,7 @@
 
 #____________________________=Folder Order
 -8c2d-wintitle:SetFolderOrder=Порядок следования папок
+
 
 #___________________________________=Verifying Disk
 -6387-wintitle:VerifyingKeyPairShare=Проверка диска
@@ -2350,6 +2669,7 @@
 
 #_________________________________________=Cancel Backup Restore
 -3b7c-wintitle:confirmCancelBackupRecovery=Отмена восстановления
+
 
 #_________________________________________=Cancel Modify Bulletin
 -276b-wintitle:confirmCancelModifyBulletin=Отмена изменений сводки
@@ -2475,6 +2795,7 @@
 -0b6f-wintitle:confirmUseBulletinsCustomFields=Выбор полей пользователя
 
 #__________________________________________________=Custom Fields Selection
+
 -0b6f-wintitle:confirmUseBulletinsDraftCustomFields=Выбор полей пользователя
 
 #______________________________________________=Accountmap File Missing Or Corrupt
@@ -2591,8 +2912,14 @@
 #_______________________________________________________=Error Exporting Template
 -f4cc-wintitle:notifyErrorExportingCustomizationTemplate=Ошибка при экспорте шаблона
 
+#___________________________________________=Error Importing Bulletins
+-aeb8-wintitle:notifyErrorImportingBulletins=Ошибка при импорте сводок
+
 #_______________________________________________________=Error Importing Template
 -4f1a-wintitle:notifyErrorImportingCustomizationTemplate=Ошибка при импорте шаблона
+
+#_____________________________________________________________=Error Importing Template
+-4f1a-wintitle:notifyErrorImportingCustomizationTemplateFuture=Ошибка при импорте шаблона
 
 #____________________________________=Error Reading File
 -73ad-wintitle:notifyErrorReadingFile=Ошибка чтения файла
@@ -2602,6 +2929,7 @@
 
 #_____________________________________=Unable to Rename Folder
 -1ce2-wintitle:notifyErrorRenameFolder=Невозможно переименовать папку
+
 
 #___________________________________________=Unable to Rename Folder
 -1ce2-wintitle:notifyErrorRenameFolderExists=Невозможно переименовать папку
@@ -2623,6 +2951,9 @@
 
 #__________________________________=Export Bulletins
 -a86c-wintitle:notifyExportComplete=Экспорт сводок
+
+#____________________________________________________=Export Bulletins
+-a86c-wintitle:notifyExportCompleteMissingAttachments=Экспорт сводок
 
 #_____________________________________=Error Exporting Folder
 -d6d7-wintitle:notifyExportFolderEmpty=Ошибка экспорта папки
@@ -2654,6 +2985,15 @@
 #_____________________________________________=Headquarter Label Invalid
 -106b-wintitle:notifyHeadquarterLabelDuplicate=Неверная метка
 
+#______________________________________________=Warning Bulletins Not Imported
+-59d8-wintitle:notifyImportBulletinsNotImported=Предупреждение: сводки не импортированы
+
+#__________________________________=Import Complete
+-a5cb-wintitle:notifyImportComplete=Импорт выполнен
+
+#____________________________________________=Warning Missing Attachments
+-79ef-wintitle:notifyImportMissingAttachments=Предупреждение: отсутствуют вложения
+
 #_________________________________________________________=Importing Template Succeeded
 -ac8c-wintitle:notifyImportingCustomizationTemplateSuccess=Шаблон успешно импортирован
 
@@ -2668,6 +3008,15 @@
 
 #_________________________________=No Headquarters Selected
 -9140-wintitle:notifyNoHQsSelected=Главные учетные записи не выбраны
+
+#_________________________________________=No Folder Specified
+-4b6e-wintitle:notifyNoImportFileSpecified=Не указана папка
+
+#__________________________________________=Create Report
+-446e-wintitle:notifyNoReportFieldsSelected=Создание отчета
+
+#________________________________________=Reports
+-88bc-wintitle:notifyNotValidReportFormat=Отчеты
 
 #______________________________________=Finished
 -355b-wintitle:notifyOperationCompleted=Завершение
@@ -2690,8 +3039,11 @@
 #__________________________________________=Preview One Bulletin Only
 -5b0a-wintitle:notifyPreviewOneBulletinOnly=Просмотр только одной сводки
 
+#__________________________________=Reports
+-88bc-wintitle:notifyPrintCompleted=Отчеты
+
 #_______________________________________=Print To Report File
--c1b2-wintitle:notifyPrintToDiskComplete=Печать в файл отчета
+-c1b2-wintitle:notifyPrintToDiskComplete=Вывод в файл отчета
 
 #______________________________________=No Bulletins Selected
 -c1d6-wintitle:notifyPrintZeroBulletins=Не выбраны сводки
@@ -2717,6 +3069,15 @@
 #____________________________________=Remember Your Password
 -2bc6-wintitle:notifyRememberPassword=Запомните свой пароль
 
+#_________________________________________________=Reports
+-88bc-wintitle:notifyReportFormatDifferentLanguage=Отчеты
+
+#_____________________________________=Reports
+-88bc-wintitle:notifyReportFormatIsOld=Отчеты
+
+#________________________________________=Reports
+-88bc-wintitle:notifyReportFormatIsTooNew=Отчеты
+
 #_______________________________=Error Sending Bulletin
 -eaab-wintitle:notifyResendError=Ошибка при отправке сводки
 
@@ -2725,6 +3086,9 @@
 
 #____________________________________=Bulletin Download Canceled
 -f8d3-wintitle:notifyRetrieveCanceled=Загрузка сводки отменена
+
+#_____________________________________=Retrieve Complete
+-653b-wintitle:notifyRetrieveCompleted=Загрузка выполнена
 
 #_________________________________=Retrieve Error
 -8ed0-wintitle:notifyRetrieveError=Ошибка загрузки
@@ -2737,6 +3101,9 @@
 
 #______________________________________=Retrieve In Progress
 -6983-wintitle:notifyRetrieveInProgress=Выполняется загрузка
+
+#__________________________________________________=Unable To Preview
+-061a-wintitle:notifyRetrievePreviewNotAvailableYet=Просмотр невозможен
 
 #______________________________________________=Error During Retrieve
 -f2d7-wintitle:notifyRetrievedOnlySomeSummaries=Ошибка при загрузке
@@ -2773,6 +3140,9 @@
 
 #___________________________________=Unexpected Error
 -d17c-wintitle:notifyUnexpectedError=Непредвиденная ошибка
+
+#_______________________________________________________=Unable to Send Bulletin To Server
+-2c28-wintitle:notifyUploadFailedBulletinNotSentToServer=Невозможно отправить сводку на сервер
 
 #_____________________________________=User Already Exists
 -eecc-wintitle:notifyUserAlreadyExists=Имя пользователя занято
@@ -2851,4 +3221,3 @@
 
 #_________________________________=Confirm Delete Folder
 -1a75-wintitle:warningdeletefolder=Подтверждение удаления папки
-

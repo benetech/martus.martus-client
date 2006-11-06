@@ -94,7 +94,7 @@
 -61cc-button:AddFieldToReport=Agregar
 
 #________________________=Show all bulletins on this server and on this computer.
--e9a2-button:AllSummaries=Mostrar todos los boletines en este servidor y en este ordenador.
+-e9a2-button:AllSummaries=Mostrar todos los boletines en este servidor y en esta computadora.
 
 #________________=Back
 -b52b-button:Back=Atrás
@@ -607,7 +607,7 @@
 -5c38-field:DeleteKeypair=Eliminar archivo de llave
 
 #____________________________________=You can only delete draft bulletins from the server that are not currently on your computer.
--8ded-field:DeleteServerDraftsMessage=Sólo puede eliminar borradores en el servidor que no estén presentes en su ordenador.
+-8ded-field:DeleteServerDraftsMessage=Sólo puede eliminar borradores en el servidor que no estén presentes en su computadora.
 
 #______________________=Do not prompt
 -448d-field:DonotPrompt=No preguntar nuevamente
@@ -745,7 +745,7 @@
 -7d69-field:HowToCreateInitialAccount=No existe ninguna cuenta en este sistema. Oprima Aceptar para crear una cuenta nueva. Elija 'Recuperar cuenta' para restaurar una cuenta de la que tenga una copia de seguridad.
 
 #________________________________=One or more accounts already exist on this computer. To create an additional account with a new username and passphrase, click OK.
--02f2-field:HowToCreateNewAccount=Ya existe una o más cuentas en este ordenador. Oprima Aceptar para crear una cuenta adicional con un nuevo nombre de usuario y contraseña.
+-02f2-field:HowToCreateNewAccount=Ya existe una o más cuentas en esta computadora. Oprima Aceptar para crear una cuenta adicional con un nuevo nombre de usuario y contraseña.
 
 #_________________________________________=Import bulletins into which Folder?
 -5efa-field:ImportBulletinsIntoWhichFolder=¿A cuál carpeta importar los boletines?
@@ -832,7 +832,7 @@
 -23dc-field:QuickEraseWillExitMartus=Salir de Martus al terminar.
 
 #_______________________________________=This will NOT remove any bulletins from the server, any Martus files copied outside of the Martus directory, or any of your bulletins or Martus files on another computer.
--8ee9-field:QuickEraseWillNotRemoveItems=Esto NO removerá ningún boletín del servidor, archivos que haya copiado fuera de la carpeta de Martus, o sus archivos y boletines de Martus que esten en otro ordenador.
+-8ee9-field:QuickEraseWillNotRemoveItems=Esto NO removerá ningún boletín del servidor, archivos que haya copiado fuera de la carpeta de Martus, o sus archivos y boletines de Martus que esten en otra computadora.
 
 #____________________________________=Delete your Martus key, bulletins, folders, and configuration information (such as your Headquarters, server, and custom field settings).
 -cf3b-field:QuickEraseWillRemoveItems=Elimine su archivo de llaves, boletines, carpetas y configuración (tal como cuentas de oficina central, servidores y campos personalizados).
@@ -841,7 +841,7 @@
 -c2a2-field:RecoverAccount=Recuperar su cuenta existente desde una copia de seguridad
 
 #_________________________________________________________=IMPORTANT: There are other Martus accounts on this system.
--e62e-field:RemoveMartusFromSystemMultipleAccountsWarning1=IMPORTANTE: Hay otras cuentas de Martus en este ordenador.
+-e62e-field:RemoveMartusFromSystemMultipleAccountsWarning1=IMPORTANTE: Hay otras cuentas de Martus en esta computadora.
 
 #_________________________________________________________=All of their data will be removed as well!
 -8e74-field:RemoveMartusFromSystemMultipleAccountsWarning2=¡La información de todas las cuentas va a ser eliminada también!
@@ -910,7 +910,7 @@
 -828a-field:RetrieveMySealedBulletinSummaries=Bajando resúmenes de boletines sellados
 
 #___________________________________=All bulletins retrieved will still remain on the server.\nYou can only retrieve bulletins that are not currently on your computer.
--fdb6-field:RetrieveSummariesMessage=Sólo puede bajar boletines que no tenga en su ordenador.\nLos boletines que baje sólo son copias, los boletines originales se quedarán en el servidor.
+-fdb6-field:RetrieveSummariesMessage=Sólo puede bajar boletines que no tenga en su computadora.\nLos boletines que baje sólo son copias, los boletines originales se quedarán en el servidor.
 
 #____________________________________=Please retype your username and password for verification.
 -67cd-field:RetypeUserNameAndPassword=Por favor, vuelva a escribir su nombre y contraseña para verificarlos.
@@ -1087,7 +1087,7 @@
 -5086-field:authorizing=Autorizando...
 
 #_______________________________________________=Save your password encrypted key backup file to a single floppy disk or other removable media.  Then store this disk in a safe place. You will use this disk, with your username and password, to restore your data if your system files are ever damaged.  To restore this password-protected key in the future, select 'Restore Account' and 'Restore account from backup key file' when signing into Martus.
--e692-field:confirmBackupKeyPairInformationcause=Guarde la copia de seguridad cifrada con su contraseña a un medio removible, como un disquete. Guarde el medio removible en un lugar seguro. Va a necesitar este disco y su nombre de usuario y contraseña, para recuperar su cuenta de Martus e información en caso de que su computador o su contenido sea dañado. Para recuperar su cuenta de esta copia de seguridad, elija 'Recuperar cuenta' y luego 'Recuperar cuenta de una copia de seguridad' al iniciar Martus.
+-e692-field:confirmBackupKeyPairInformationcause=Guarde la copia de seguridad cifrada con su contraseña a un medio removible, como un disquete. Guarde el medio removible en un lugar seguro. Va a necesitar este disco y su nombre de usuario y contraseña, para recuperar su cuenta de Martus e información en caso de que su computadorao su contenido sea dañado. Para recuperar su cuenta de esta copia de seguridad, elija 'Recuperar cuenta' y luego 'Recuperar cuenta de una copia de seguridad' al iniciar Martus.
 
 #________________________________________________=Choosing Yes will begin the backup process.
 -0b47-field:confirmBackupKeyPairInformationeffect=Oprima Sí para iniciar la copia de seguridad
@@ -1141,7 +1141,7 @@
 -5b61-field:confirmCancelShareVerifyeffect=Oprima Sí para salir del proceso de verificación.
 
 #_________________________________________=You have chosen to remove all selected Headquarters accounts.  Any existing saved bulletins will still be visible by the old Headquarters.  If you want to disallow Headquarters viewing access to previously created Draft bulletins they must be re-saved after revoking the Headquarters.  New versions of sealed bulletins will not be able to be viewed by Headquarters, but any old versions of sealed bulletins that already are on a Headquarters' computer CANNOT be reset to be non-viewable by the Headquarters.
--9959-field:confirmClearHQInformationcause=Escogió eliminar todas las cuentas de oficina central seleccionadas.  Los boletines que estén guardados todavía pueden ser vistos por la oficina central eliminada. Si no quiere que la oficina central eliminada pueda ver sus borradores tendrá que guardarlos nuevamente una vez que elimine la cuenta de la oficina central. Nuevas versiones de boletines sellados no podrán ser vistos por la oficina central eliminada, pero versiones anteriores de un boletín que estén en el ordenador de la oficina central no pueden ser reconfigurados para que no sean vistos.
+-9959-field:confirmClearHQInformationcause=Escogió eliminar todas las cuentas de oficina central seleccionadas.  Los boletines que estén guardados todavía pueden ser vistos por la oficina central eliminada. Si no quiere que la oficina central eliminada pueda ver sus borradores tendrá que guardarlos nuevamente una vez que elimine la cuenta de la oficina central. Nuevas versiones de boletines sellados no podrán ser vistos por la oficina central eliminada, pero versiones anteriores de un boletín que estén en la computadora de la oficina central no pueden ser reconfigurados para que no sean vistos.
 
 #__________________________________________=By clicking on Yes, any draft or sealed bulletins saved in the future will no longer be accessible by your Headquarters.
 -4a87-field:confirmClearHQInformationeffect=Al oprimir Sí, los boletines que selle o borradores que guarde en el futuro no podrán ser vistos por la oficina central.
@@ -1165,7 +1165,7 @@
 -8eb7-field:confirmDateRageInvalideffect=Oprima Si para corregir el problema.  Oprima No para revertir al valor original de la fecha.
 
 #___________________________________=You are about to delete your Martus data from this computer.
--ee9a-field:confirmDeleteMyDatacause=Está a punto de eliminar su información de Martus de este ordenador.
+-ee9a-field:confirmDeleteMyDatacause=Está a punto de eliminar su información de Martus de esta computadora.
 
 #____________________________________=Answering Yes will delete your data and exit Martus.  Answering No will return you to Martus with nothing deleted.
 -7f90-field:confirmDeleteMyDataeffect=Oprima Sí para eliminar su información de Martus y salir.  Oprima No para regresar a Martus sin eliminar nada.
@@ -1231,7 +1231,7 @@
 -3170-field:confirmNewerConfigInfoFileFoundeffect=Oprima Sí para continuar usando la versión anterior de Martus.  Oprima No para salir de Martus y pueda actualizar su copia a la versión más reciente.
 
 #___________________________________________________________=Warning: the bulletin you are currently viewing is not yours.  Attachments can contain viruses, or malicious programs harmful to your computer.
--8e42-field:confirmNotYourBulletinViewAttachmentAnywayscause=Advertencia: El  boletín que está examinando no le pertenece.  Verifique que los archivos adjuntos no tienen un virus o programas que puedan dañar su ordenador.
+-8e42-field:confirmNotYourBulletinViewAttachmentAnywayscause=Advertencia: El  boletín que está examinando no le pertenece.  Verifique que los archivos adjuntos no tienen un virus o programas que puedan dañar su computadora.
 
 #____________________________________________________________=Clicking on Yes will display the attachment, clicking on No will not try to display the attachment.
 -b6bf-field:confirmNotYourBulletinViewAttachmentAnywayseffect=Oprima Sí para ver el contenido del archivo adjunto, oprima No para continuar sin ver el contenido.
@@ -1285,7 +1285,7 @@
 -3252-field:confirmRemoveAttachmenteffect=Los archivos adjuntos seleccionados va a ser eliminados permanentemente de este boletín.
 
 #___________________________________=You are about to delete all Martus data from this computer.
--af45-field:confirmRemoveMartuscause=Esta a punto de eliminar todos los datos de Martus de este ordenador.
+-af45-field:confirmRemoveMartuscause=Esta a punto de eliminar todos los datos de Martus de esta computadora.
 
 #____________________________________=Answering Yes will delete all data, uninstall Martus and exit the program.  Answering No will return you to Martus with nothing deleted.
 -b6a1-field:confirmRemoveMartuseffect=Oprima Sí para eliminar todos los datos, desinstalar Martus y salir del programa. Oprima No para regresar a Martus sin eliminar nada.
@@ -1303,7 +1303,7 @@
 -bbcf-field:confirmResetDefaultDetailseffect=Después de verificar el contenido puede aceptarlo, modificarlo u oprimir cancelar para mantener el contenido original.
 
 #____________________________________________=The following bulletin(s) selected for retrieval are newer versions of bulletins already on this computer:\n\n#Titles#
--050c-field:confirmRetrieveNewerVersionscause=El(Los) siguiente(s) boletín(es) seleccionados para bajar son nuevas versiones de boletines que ya tiene en su ordenador:\n\n#Titles#
+-050c-field:confirmRetrieveNewerVersionscause=El(Los) siguiente(s) boletín(es) seleccionados para bajar son nuevas versiones de boletines que ya tiene en su computadora:\n\n#Titles#
 
 #_____________________________________________=Each older version will be replaced by the newer version from the server.
 -1d86-field:confirmRetrieveNewerVersionseffect=Cada versión anterior va a ser reemplazada por la nueva versión del servidor.
@@ -1363,7 +1363,7 @@
 -e63e-field:confirmUseBulletinsDraftCustomFieldseffect=Oprima '#UseOldCustomFields#' para usar los campos personalizados originales y los datos del borrador.  Oprima '#UseNewCustomFields#' para usar sus campos personalizados actuales y transferir los campos similares al borrador nuevo, pero podrá perder partes de la información del borrador original.
 
 #________________________________________________=Warning: acctmap.txt file in your account's packets directory is missing or is corrupt.  This may indicate someone has tried to tamper with your data or could be caused by a hardware error.
--61cb-field:confirmWarnMissingAccountMapFilecause=Advertencia: El archivo acctmap.txt en el directorio packets de su cuenta está dañado o no existe.  Esto puede indicar que alguien ha intentado modificar su información o que su computador sufrió fallas de hardware.
+-61cb-field:confirmWarnMissingAccountMapFilecause=Advertencia: El archivo acctmap.txt en el directorio packets de su cuenta está dañado o no existe.  Esto puede indicar que alguien ha intentado modificar su información o que su computadorasufrió fallas de hardware.
 
 #_________________________________________________=Clicking on Yes will delete all of your bulletins and continue to load Martus.  Clicking on No will exit Martus so you can try to recover or repair this file manually.
 -20ee-field:confirmWarnMissingAccountMapFileeffect=Oprima Sí para borrar todos sus boletines y continuar cargando Martus. Oprima No para salir de Martus y que intente recuperar o reparar el archivo manualmente.
@@ -1384,7 +1384,7 @@
 -f068-field:confirmWarningSwitchToNormalKeyboardcause=¡Advertencia! El usar el teclado de hardware para escribir su contraseña reduce la seguridad del sistema de Martus y facilita el acceso a su información privada a terceras personas.
 
 #_____________________________________________________=If this is a Headquarters computer, it is especially important to use the on-screen keyboard, because an attacker could gain access to all the private data that you are authorized to view.
--4379-field:confirmWarningSwitchToNormalKeyboardeffect=Si este ordenador es de su oficina central es importante que utilice el teclado en la pantalla de otra manera un intruso podría acceder a los boletines que usted está autorizado a ver.
+-4379-field:confirmWarningSwitchToNormalKeyboardeffect=Si esta computadora es de su oficina central es importante que utilice el teclado en la pantalla de otra manera un intruso podría acceder a los boletines que usted está autorizado a ver.
 
 #_________________________________________________=A single encrypted backup file of your key has yet to be created.
 -71c0-field:confirmbackupIncompleteEncryptedNeeded=Todavía no ha creado una copia de seguridad cifrada de su llave.
@@ -1498,7 +1498,7 @@
 -040a-field:notifyAccountCodeWrongcause=El código público no concuerda con el que escribió.
 
 #____________________________________=A copy of Martus is already running on this computer. You must close that copy before starting a new copy.
--614e-field:notifyAlreadyRunningcause=Ya existe una copia de Martus activa en este ordenador. Tiene que salir de esa copia antes de intentar iniciar Martus nuevamente.
+-614e-field:notifyAlreadyRunningcause=Ya existe una copia de Martus activa en esta computadora. Tiene que salir de esa copia antes de intentar iniciar Martus nuevamente.
 
 #_______________________________________________=You currently are viewing this version of the bulletin.
 -8a02-field:notifyAlreadyViewingThisVersioncause=Está viendo esta versión del boletín.
@@ -1522,7 +1522,7 @@
 -c8e7-field:notifyCreateAccountFailedcause=Ocurrió un error al intentar crear su cuenta.
 
 #____________________________________________=Martus needs to keep a list of all the fields in all the bulletins in your system.\n\nThis list does not exist, so it will be created now. This may take a few seconds per bulletin on a slower computer.
--8773-field:notifyCreatingFieldSpecCachecause=Martus necesita mantener una lista de todos los campos de todos los boletines en su ordenador.\n\nEsta lista no existe por lo que tendrá que crearse ahora. En ordenadores lentos puede que esta operación tome unos segundos por cada boletín.
+-8773-field:notifyCreatingFieldSpecCachecause=Martus necesita mantener una lista de todos los campos de todos los boletines en su computadora.\n\nEsta lista no existe por lo que tendrá que crearse ahora. En computadoras lentas puede que esta operación tome unos segundos por cada boletín.
 
 #_____________________________________________________=An error occurred during upload, and the damaged bulletin:'#BulletinTitle#' has been moved to the Damaged Bulletins folder.
 -3229-field:notifyDamagedBulletinMovedToDiscardedcause=Ocurrió un error durante el envío y el boletín dañado: '#BulletinTitle#' ha sido movido a la carpeta de boletines dañados.
@@ -1606,7 +1606,7 @@
 -aed9-field:notifyExportingCustomizationTemplateSuccesscause=La plantilla personalizada fue exportada exitosamente. 
 
 #___________________________________________=The original files have not been deleted from your computer, you must delete them manually if you wish.
--8965-field:notifyFilesWillNotBeDeletedcause=No se han eliminado de su computador los archivos originales. Si lo desea tendrá que eliminarlos manualmente.
+-8965-field:notifyFilesWillNotBeDeletedcause=No se han eliminado de su computadora los archivos originales. Si lo desea tendrá que eliminarlos manualmente.
 
 #___________________________________________=An error occurred during the conversion of your folders. You can still use Martus, but if the Outbox or Drafts folders still exist, do not use them.
 -73de-field:notifyFolderMigrationFailedcause=Occurrió un error durante la conversión de las carpetas. Todavía puede usar Martus pero si la carpeta bandeja de salida o la carpeta de borradores todavia existen, no las use.
@@ -1909,7 +1909,7 @@
 -cc6d-field:waitingForKeyPairGeneration=Espere un momento mientras creamos su cuenta...
 
 #_________________________________________=You have chosen to permanently delete bulletins from the Discarded Bulletins folder. Even if these bulletins were recently cut or copied, you will not be able to paste them. If they have already been sent to a server, they will remain on the server. This action will only delete them from this computer.
--3fc8-field:warningDeleteMultipleBulletins=Escogió eliminar permanentemente boletines de la carpeta de boletines desechados. No podrá pegar estos boletines aún si han sido copiados o cortados recientemente. Si los envió a un servidor, estos permanecerán en el servidor. Esta acción sólo los elimina de este ordenador.
+-3fc8-field:warningDeleteMultipleBulletins=Escogió eliminar permanentemente boletines de la carpeta de boletines desechados. No podrá pegar estos boletines aún si han sido copiados o cortados recientemente. Si los envió a un servidor, estos permanecerán en el servidor. Esta acción sólo los elimina de esta computadora.
 
 #___________________________________________________=NOTE: Copies of one or more of these bulletins exist in one or more other folders. Those copies will not be removed.
 -7d03-field:warningDeleteMultipleBulletinsWithCopies=NOTA: Existen una o más copias de estos boletines en otras carpetas. Esas copias no serán removidas.
@@ -1918,7 +1918,7 @@
 -97ce-field:warningDeleteMultipleUnsentBulletins=ADVERTENCIA: Uno o más de estos boletines no han sido enviados a un servidor desde la última vez que fueron modificados. Los últimos cambios a estos boletines no van a ser guardados si es que los elimina.
 
 #______________________________________=You have chosen to permanently delete a bulletin from the Discarded Bulletins folder. Even if this bulletin was recently cut or copied, you will not be able to paste it. If this bulletin has already been sent to a server, it will remain on the server. This action will only delete it from this computer.
--06b6-field:warningDeleteSingleBulletin=Escogió eliminar permanentemente este boletín de la carpeta de boletines desechados. No podrá pegar este boletín aún si lo ha copiado o cortado recientemente. Si lo envió a un servidor, éste permanecerá en el servidor. Esta acción sólo lo elimina de este ordenador.
+-06b6-field:warningDeleteSingleBulletin=Escogió eliminar permanentemente este boletín de la carpeta de boletines desechados. No podrá pegar este boletín aún si lo ha copiado o cortado recientemente. Si lo envió a un servidor, éste permanecerá en el servidor. Esta acción sólo lo elimina de esta computadora.
 
 #________________________________________________=NOTE: A copy of this bulletin exists in one or more other folders, and those copies will not be removed.
 -c4bc-field:warningDeleteSingleBulletinWithCopies=NOTA: Existe una copia de este boletín en otras carpetas. Esas copias no serán removidas.
@@ -2437,7 +2437,7 @@
 -9de4-wintitle:DeleteBulletinFile=Eliminar archivo de boletín
 
 #__________________________________________=Delete My Data From This Computer
--216c-wintitle:DeleteMyDataFromThisComputer=Eliminar mis datos de este ordenador
+-216c-wintitle:DeleteMyDataFromThisComputer=Eliminar mis datos de esta computadora
 
 #______________________________________=Delete My Drafts From Server
 -b43a-wintitle:DeleteMyDraftsFromServer=Eliminar mis borradores del servidor
@@ -2551,7 +2551,7 @@
 -f910-wintitle:RecoverShareKeyPair=Recuperar de discos de seguridad
 
 #_________________________________________=Remove Martus From This Computer
--31b5-wintitle:RemoveMartsFromThisComputer=Eliminar Martus de este ordenador
+-31b5-wintitle:RemoveMartsFromThisComputer=Eliminar Martus de esta computadora
 
 #__________________________=Remove Server
 -49c2-wintitle:RemoveServer=Remover servidor
