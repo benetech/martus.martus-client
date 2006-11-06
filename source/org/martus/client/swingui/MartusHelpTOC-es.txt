@@ -40,8 +40,10 @@
 6k. ¿Cómo ver y guardar archivos adjuntos a un boletín?
 6l. ¿Cómo ver boletines dañados?
 6m. ¿Cómo buscar boletines específicos?
-6n. ¿Cómo imprimir boletines y crear reportes?
-6o. ¿Cómo exportar la información de sus boletines?
+6n. ¿Cómo imprimir boletines?
+6o. ¿Cómo crear reportes?
+6p. ¿Cómo exportar la información de sus boletines?
+6q. ¿Cómo importar boletin(es)?
 7. Eliminar todos sus boletines y la información de su cuenta
 8. Eliminar toda la información en Martus, incluyendo el programa
 9. Para mantener su información segura
@@ -49,7 +51,7 @@
 9b. ¿Cómo hacer una copia de seguridad de su llave?
 9c. ¿Cómo recuperar su llave de una copia de seguridad?
 9d. Precauciones en el uso de su contraseña
-9e. Uso seguro de su ordenador
+9e. Uso seguro de su computadora
 9f. Compartiendo su información privada con colegas
 9g. ¿Cómo permitir que otras cuentas envíen sus boletines a un servidor?
 9h. ¿Cómo cambiar su nombre de usuario o contraseña?
