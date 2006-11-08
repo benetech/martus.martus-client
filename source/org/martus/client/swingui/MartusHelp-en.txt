@@ -124,7 +124,7 @@ Note: Only use full-size CDs in a CD drive that has a slot without a mechanical 
 4. Copy the Martus folder from the CD into the /Library/Java folder on your hard disk. This will result in a folder called /Library/Java/Martus.
 5. If desired, you can also copy the README files from the main CD folder to your computer.  These files contain a list of changes between versions of Martus.
 6. If desired, create a script to run Martus. To run the Martus program, open a Terminal window, go to the /Library/Java/Martus folder and type:   
-       Java -Xbootclasspath/p:/Library/Java/Extensions/bc-jce.jar -jar martus.jar
+    Java -Xbootclasspath/p:/Library/Java/Extensions/bc-jce.jar -jar martus.jar
 
 To install Martus for Linux:
 Installation instructions for Linux are included in the LinuxJavaInstall.txt file found in the Martus/Docs directory on the installation CD. You'll find the same file in the Martus/Docs directory on your hard disk after you install Martus.
@@ -241,7 +241,7 @@ When you set up your account, you create a username and password. Use a password
  
 1. Start Martus. Click OK in the Martus Welcome dialog box. The Martus Sign-in dialog box opens. 
 • To start Martus in Windows, choose Start > Programs > Martus > Martus, double-click the Martus shortcut on the desktop or in the Martus directory, or choose Start > Run and then type the following text: 
-       C:\Martus\bin\javaw.exe -Xbootclasspath/p:C:\Martus\lib\ext\bc-jce.jar -jar C:\Martus\martus.jar 
+    C:\Martus\bin\javaw.exe -Xbootclasspath/p:C:\Martus\lib\ext\bc-jce.jar -jar C:\Martus\martus.jar 
 • To start Martus in Mac OS, open a Terminal window, go to the /Library/Java/Martus folder and type:   Java -Xbootclasspath/p:/Library/Java/Extensions/bc-jce.jar -jar martus.jar 
 • To start Martus in Linux, run a script you’ve created or type:
 
@@ -263,7 +263,7 @@ Note: If you prefer to type your password using the computer’s keyboard, click
 7. Enter the same username and password to verify them, and then click OK. 
 8. If you want to provide contact information, enter it now. (It may take a few seconds for the Martus Setup Contact Information dialog box to appear.) If you do not enter anything for Author and Organization, Martus will prompt you for the information every time you start the application.
 
-       
+    
 
 The Author and Organization information appear in every bulletin you create. Public bulletin data (that is, data that has not specifically been labeled private) may be available to researchers, the press, and the public through the Martus Search Engine. This contact information provides a way for someone to follow up with you or your organization for more information about your bulletins. (If you do not want to make your bulletin data available publicly, you can choose to make all of your data private.)
 
@@ -645,24 +645,21 @@ Note: If multiple fields have the same label, click the plus sign next to the la
 
 Note: There are several ways bulletin fields can compare to search terms.
 
-Option
-Returns
-contains
-Any bulletins in which the specified field contains the search terms
-=
-Only the bulletins in which the specified field exactly match the search terms
-!=
-Bulletins in which the specified field does not match the search terms
->
-Bulletins in which the field’s value is greater than the search value
->=
-Bulletins in which the field’s value is greater than or equal to the search value
-<
-Bulletins in which the field’s value is less than the search value
-<=
-Bulletins in which the field’s value is less than or equal to the search value
-      
-    
+----------------------------------------------------
+  
+       " Option "  :  Returns
+  
+       " contains "  :  Any bulletins in which the specified field contains the search terms
+       " = "  :  Only the bulletins in which the specified field exactly match the search terms
+       " != "  :  Bulletins in which the specified field does not match the search terms
+        " > "  :  Bulletins in which the field’s value is greater than the search value
+        " >= "  :  Bulletins in which the field’s value is greater than or equal to the search value
+        " < "  :  Bulletins in which the field’s value is less than the search value
+        " <= "  :  Bulletins in which the field’s value is less than or equal to the search value 
+  
+----------------------------------------------------
+  
+   
 5. Click Search.
 6. When the search is complete, the Search Results dialog box reports how many bulletins were found that matched your criteria. Click OK. 
 7. The Search Results folder lists the bulletins found in your search. (The folder contains copies of the bulletins; the originals remain in their original folders.) If your search resulted in no bulletins, the Search Results folder will still contain the bulletins from the previous search.
@@ -1257,7 +1254,7 @@ Web browsers or word-processing applications may not display accents correctly i
 
 23. I’m having problems connecting to the server. What should I do?
 If Martus reports that the server isn’t available or that you can’t connect, first try to “ping” the server. To ping the server, open a command prompt window in Windows (or a Terminal window in Mac) and type
-              ping server-ip-address 
+       ping server-ip-address 
 (where server-ip-address is the same address you entered when you set up the server), and then press Return. 
 
 Email the results that appear on your computer to help@martus.org and serverinfo@martus.org. Be sure to mention that you can’t connect to the server through Martus and tell us what time you tried. We’ll determine the nature of the problem and work with the server administrator to resolve it.
