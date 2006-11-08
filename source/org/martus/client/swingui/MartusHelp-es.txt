@@ -650,25 +650,20 @@ Nota: Sí múltiples campos tienen el mismo título, haga clic en el signo más 
 
 Nota: Existen varias formas en la que los campos del boletín pueden compararse con los términos de búsqueda.
 
+----------------------------------------------------
 
------------------------------------------------------------------------
-Opciones | Resultados
+     " Opciones "  :  Resultados
 
-   * "Contiene" | Cualquier boletín en las cuales el campo especificado contenga los términos de búsqueda.
+     " Contiene "  :  Cualquier boletín en las cuales el campo especificado contenga los términos de búsqueda.
+     " = "  :   Sólamente los boletines en los cuales el campo especificado empareja exactamente con los términos de búsqueda.
+     " != "  :  Boletines en los cuales el campo especificado no empareja con los términos de búsqueda.
+     " > "  :  Boletines en los cuales el valor del campo es mayor que el valor de búsqueda.
+     " >= "  :  Boletines en los cuales el valor del campo es mayor que o igual al valor de búsqueda.
+     " < "  :  Boletines en los cuales el valor del campo es menor que el valor de búsqueda.
+     " <= "  :  Boletines en los cuales el valor del campo es menor que o igual al valor de búsqueda.
 
-   * "=" | Sólamente los boletines en los cuales el campo especificado empareja exactamente con los términos de búsqueda.
-
-   * "!=" | Boletines en los cuales el campo especificado no empareja con los términos de búsqueda.
-
-   * ">" | Boletines en los cuales el valor del campo es mayor que el valor de búsqueda.
-
-   * ">=" | Boletines en los cuales el valor del campo es mayor que o igual al valor de búsqueda.
-
-   * "<" | Boletines en los cuales el valor del campo es menor que el valor de búsqueda.
-
-   * "<=" | Boletines en los cuales el valor del campo es menor que o igual al valor de búsqueda.
------------------------------------------------------------------------
-  
+----------------------------------------------------
+ 
 5. Oprima ‘Buscar’.
 6. Cuando la búsqueda se ha completado, la ventana de resultados le mostrará los boletines que se encontraron. Oprima ‘Aceptar’.
 7. La carpeta ‘Resultados de búsqueda’ contiene todos los boletines encontrados por su búsqueda. (La carpeta sólo contiene copias de los resultados, los originales se mantienen en su carpeta original.) Si su búsqueda resultó sin boletines, la carpeta ‘Resultados de búsqueda’ seguirá incluyendo los boletines de la búsqueda anterior.
