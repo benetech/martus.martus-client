@@ -976,13 +976,13 @@
 -ad90-field:ServerMagicWordEntry=كلمة الخادم السحرية: 
 
 #__________________________=Server name or IP address:
--aa94-field:ServerNameEntry=اسم الخادم أو عنوان IP الخاص به: 
+-aa94-field:ServerNameEntry=اسم الخادم أو عنوان IP الخاص به 
 
 #_____________________________________________=Server needs to be configured.
 -26de-field:ServerNotConfiguredProgressMessage=يلزم تهيئة الخادم. 
 
 #________________________________=Server Public Identification Code:
--0cf3-field:ServerPublicCodeEntry=:كود التعريف العام للخادم
+-0cf3-field:ServerPublicCodeEntry=كود التعريف العام للخادم
 
 #_________________________________=The following server has been selected:
 -d09b-field:ServerSelectionResults=تم اختيار الخادم التالي: 
@@ -2468,7 +2468,7 @@
 -446e-wintitle:ChooseReportFields=إنشاء تقرير
 
 #_______________________________=Run Report...
--56fb-wintitle:ChooseReportToRun=...افتح التقرير
+-56fb-wintitle:ChooseReportToRun=افتح التقرير
 
 #__________________________=Server Configuration
 -add5-wintitle:ConfigServer=تهيئة الخادم
