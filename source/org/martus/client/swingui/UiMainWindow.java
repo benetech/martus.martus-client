@@ -130,6 +130,7 @@ import org.martus.common.fieldspec.MiniFieldSpec;
 import org.martus.common.network.NetworkInterfaceConstants;
 import org.martus.common.packet.Packet;
 import org.martus.common.packet.UniversalId;
+import org.martus.common.packet.XmlPacketLoader;
 import org.martus.swing.FontHandler;
 import org.martus.swing.UiFileChooser;
 import org.martus.swing.UiLanguageDirection;
@@ -2242,6 +2243,11 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 			return;
 		saveState();
 		getStore().prepareToExitNormally();
+		System.out.println("exitNormally:");
+		System.out.println("    verifyPacket: " + Packet.callsToVerifyPacketSignature + 
+				" calls took total " + Packet.millisInVerifyPacketSignature + " ms");
+		System.out.println("    loadPacket:   " + XmlPacketLoader.callsToXmlPacketLoader + 
+				" calls took total " + XmlPacketLoader.millisInXmlPacketLoader + " ms");
 		exitWithoutSavingState();
 	}
 
