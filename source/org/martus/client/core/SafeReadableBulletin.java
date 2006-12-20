@@ -207,6 +207,25 @@ public class SafeReadableBulletin
 	public Vector getTopFields()
 	{
 		return getSectionFields(realBulletin.getTopSectionFieldSpecs());
+
+// TODO: This code seems to fix the reporting problem 
+// (date range portions not shown in Page reports)
+// but I haven't been able to write a test that verifies it yet.
+//		FieldSpec[] topLevelFieldSpecs = realBulletin.getTopSectionFieldSpecs();
+//		FieldChooserSpecBuilder builder = new FieldChooserSpecBuilder(localization);
+//		HashSet topLevelFieldSpecSet = new HashSet(Arrays.asList(topLevelFieldSpecs));
+//		Set choices = builder.convertToChoiceItems(topLevelFieldSpecSet);
+//
+//		Vector availableMiniSpecs = new Vector();
+//		Iterator iter = choices.iterator();
+//		while(iter.hasNext())
+//		{
+//			ChoiceItem choice = (ChoiceItem)iter.next();
+//			MiniFieldSpec miniSpec = new MiniFieldSpec(choice.getSpec());
+//			availableMiniSpecs.add(miniSpec);
+//		}
+		
+//		return availableMiniSpecs;
 	}
 	
 	public Vector getBottomFields()
