@@ -35,7 +35,6 @@ import java.util.Vector;
 
 import javax.swing.tree.TreeNode;
 
-import org.martus.clientside.UiLocalization;
 import org.martus.common.MiniLocalization;
 import org.martus.common.fieldspec.ChoiceItem;
 import org.martus.common.fieldspec.DropDownFieldSpec;
@@ -101,7 +100,7 @@ public class FieldChoicesByLabel
 		return specs;
 	}
 	
-	public TreeNode asTree(UiLocalization localization)
+	public TreeNode asTree(MiniLocalization localization)
 	{
 		Collections.sort(allChoices, new ChoiceItemSorterByLabelTagType(localization));
 		mergeSimilarDropdowns();
