@@ -25,12 +25,12 @@
 5c. Création d'une nouvelle version d'un communiqué verrouillé
 5d. Modification d'un brouillon
 5e. Mise au rebut d'un brouillon
-5f. Mise au rebut d'un communiqué verrouillé
+5f. Suppression d'un communiqué verrouillé
 6. Gestion des Communiqués
 6a. Dossiers par défaut
 6b. Autres dossiers créés par Martus
 6c. Création de dossiers
-6d. Mise au rebut et suppression de communiqués
+6d. Suppression de communiqués
 6e. Organisation des communiqués
 6f. Placement des communiqués sur le bureau Windows
 6g. Extraction des communiqués verrouillés
@@ -40,8 +40,10 @@
 6k. Visualisation et enregistrement des pièces jointes
 6l. Visualisation des communiqués endommagés
 6m. Recherche de communiqués spécifiques
-6n. Impression des communiqués et création des rapports.
-6o. Exportation des données des communiqués
+6n. Impression des communiqués.
+6o. Création de rapports de communiqués
+6p. Exportation des données des communiqués
+6q. Importation communiqué(s)
 7. Suppression de Vos Communiqués et de Vos Informations de Compte
 8. Suppression de Toutes les Données Martus, y Compris l'Application
 9. Sécurité de Vos Données

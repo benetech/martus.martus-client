@@ -1,8 +1,9 @@
 ﻿# Martus Client Translation File
 # Language code:  fr
 # Language name:  French
-# Translated by:  Caroline Garcia
-# Exported date:  Wed Sep 06 16:10:26 PDT 2006
+# Translated by:  MID Foundation, Caroline Garcia, Benetech
+# Exported date:  Wed Sep 06 16:10:26 PDT 2006 
+#                 - updated 2006-12-28 and 2007-01-02
 # Client version: 3.0
 # Client build:   20060905.1762
 #
@@ -202,7 +203,7 @@
 -8685-button:PublicAndPrivateData=Données publiques et privées
 
 #______________________=Public Data Only
--4baa-button:PublicOnly=Uniquement les donnés privées
+-4baa-button:PublicOnly=Uniquement les données publiques 
 
 #__________________________________=Restore account from backup key file
 -f447-button:RecoverAccountByBackup=Restaurer le compte depuis le fichier de sauvegarde de clé
@@ -229,7 +230,7 @@
 -b052-button:RunReport=Utiliser le format de rapport existant
 
 #______________________=Save This Search...
--e372-button:SaveSearch=Sauvegarder cette recherche...
+-e372-button:SaveSearch=Enregistrer cette recherche...
 
 #____________________________________=Only search most recent version of bulletins
 -852f-button:SearchFinalBulletinsOnly=Rechercher uniquement la dernière version des communiqués
@@ -633,7 +634,7 @@
 #__________________________________________=The following labels appear more than once in your template.
 -3f09-field:DuplicateLabelsInCustomTemplate=Les étiquettes suivantes apparaissent plus d’une fois dans votre modèle.
 #__________________________________________________=Do you want to save this template with the duplicate labels?
--79bc-field:DuplicateLabelsInCustomTemplateContinue=Voulez-vous sauvegarder ce modèle avec les étiquettes en double ?
+-79bc-field:DuplicateLabelsInCustomTemplateContinue=Voulez-vous enregistrer ce modèle avec les étiquettes en double ?
 
 #________________________________=Unable to back up the key file on this disk.
 -bda3-field:ErrorBackingupKeyPair=Impossible de sauvegarder le fichier de clé sur ce disque.
@@ -886,8 +887,7 @@
 -fb16-field:ReportDetailOnly=Imprimer les informations du communiqué
 
 #____________________________________=Print Bulletin Information and Summary Counts
--cdea-field:ReportDetailWithSummaries=Imprimer les décomptes sommaires et les informations du communiqué
-
+-cdea-field:ReportDetailWithSummaries=Imprimer les informations du communiqué et le résumé des comptes 
 
 #___________________________=*Error retrieving field*
 -6d15-field:ReportFieldError=*Erreur lors de l’extraction de champ*
@@ -899,7 +899,7 @@
 -b840-field:ReportNumberOfBulletins=Total des communiqués :
 
 #______________________________=Print Summary Counts Only
--9ca4-field:ReportSummariesOnly=Imprimer uniquement les décomptes sommaires
+-9ca4-field:ReportSummariesOnly=Imprimer uniquement le résumé des comptes 
 
 #__________________________________________=Retrieving Field Desk Draft Bulletins
 -c881-field:RetrieveHQDraftBulletinProgress=Extraction des Brouillons de Communiqués de Bureau de Terrain
