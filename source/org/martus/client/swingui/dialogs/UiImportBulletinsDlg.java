@@ -62,10 +62,11 @@ public class UiImportBulletinsDlg extends JDialog implements ActionListener
 	
 	private File getFileToImport()
 	{
-		String continueLabel = mainWindow.getLocalization().getButtonLabel("Continue");
+		MartusLocalization localization = mainWindow.getLocalization();
+		String continueLabel = localization.getButtonLabel("Continue");
 		File homeDirectory = UiFileChooser.getHomeDirectoryFile();
 		BulletinImportFileFilter importFilter = new BulletinImportFileFilter();
-		UiFileChooser.FileDialogResults results = UiFileChooser.displayFileOpenDialog(UiImportBulletinsDlg.this, IMPORT_BULLETINS_TITLE, null, homeDirectory, continueLabel,importFilter);
+		UiFileChooser.FileDialogResults results = UiFileChooser.displayFileOpenDialog(UiImportBulletinsDlg.this, localization.getWindowTitle(IMPORT_BULLETINS_TITLE), null, homeDirectory, continueLabel,importFilter);
 		if (results.wasCancelChoosen())
 			return null;
 	
