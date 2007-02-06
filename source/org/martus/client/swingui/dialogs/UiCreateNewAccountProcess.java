@@ -60,7 +60,7 @@ public class UiCreateNewAccountProcess
 			if (signinDlg1.getUserChoice() != UiSigninDlg.SIGN_IN)
 				return;
 
-			userName1 = signinDlg1.getName();
+			userName1 = signinDlg1.getNameText();
 			userPassword1 = signinDlg1.getPassword();
 			
 			if(!userName1.equals(originalUserName))
@@ -150,7 +150,7 @@ public class UiCreateNewAccountProcess
 		{	
 			signinDlg = new UiSigninDlg(mainWindow.getLocalization(), mainWindow.getCurrentUiState(), mainWindow, mode, userName, userPassword);
 			userChoice = signinDlg.getUserChoice();
-			userName = signinDlg.getName();
+			userName = signinDlg.getNameText();
 			userPassword = signinDlg.getPassword();
 		}
 		UiPasswordField.scrubData(userPassword);

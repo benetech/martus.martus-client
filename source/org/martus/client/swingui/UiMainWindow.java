@@ -2163,7 +2163,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 				else
 					signinDlg = new UiSigninDlg(getLocalization(), getCurrentUiState(), getCurrentActiveFrame(), mode, userName, userPassword);
 				userChoice = signinDlg.getUserChoice();
-				userName = signinDlg.getName();
+				userName = signinDlg.getNameText();
 				userPassword = signinDlg.getPassword();
 			}
 			if (userChoice != UiSigninDlg.SIGN_IN)

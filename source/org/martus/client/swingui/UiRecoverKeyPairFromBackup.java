@@ -119,7 +119,7 @@ public class UiRecoverKeyPairFromBackup
 		{	
 			signinDlg = new UiSigninDlg(localization, mainWindow.getCurrentUiState(), mainWindow, UiSigninDlg.SECURITY_VALIDATE, userName, userPassword);
 			userChoice = signinDlg.getUserChoice();
-			userName = signinDlg.getName();
+			userName = signinDlg.getNameText();
 			userPassword = signinDlg.getPassword();
 		}
 		if(userChoice != UiSigninDlg.SIGN_IN)
