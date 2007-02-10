@@ -372,8 +372,10 @@ public class MartusApp
 			plainTextContactOutputStream.close();
 			encryptedContactFileInputStream.close();
 			
-			FieldSpec[] specs = getCustomFieldSpecsTopSection(configInfo);
-			store.setTopSectionFieldSpecs(specs);
+			FieldSpec[] specsTop = getCustomFieldSpecsTopSection(configInfo);
+			store.setTopSectionFieldSpecs(specsTop);
+			FieldSpec[] specsBottom = getCustomFieldSpecsBottomSection(configInfo);
+			store.setBottomSectionFieldSpecs(specsBottom);
 			
 			convertLegacyHQToMultipleHQs();
 			

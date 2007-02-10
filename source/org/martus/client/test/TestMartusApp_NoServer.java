@@ -73,6 +73,7 @@ import org.martus.common.database.DatabaseKey;
 import org.martus.common.database.FileDatabase;
 import org.martus.common.fieldspec.ChoiceItem;
 import org.martus.common.fieldspec.FieldSpec;
+import org.martus.common.fieldspec.FieldTypeMultiline;
 import org.martus.common.fieldspec.MiniFieldSpec;
 import org.martus.common.fieldspec.StandardFieldSpecs;
 import org.martus.common.packet.UniversalId;
@@ -826,14 +827,39 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 
 		originalInfo.setAuthor("blah");
 		assertEquals("should have been set", "blah", appWithAccount.getConfigInfo().getAuthor());
+	
+		FieldSpec[] topSpecs = {FieldSpec.createCustomField("TopTag", "Top Label", new FieldTypeMultiline()),}; 
+		FieldCollection fields = new FieldCollection(topSpecs);
+		String xmlTop = fields.toString();
+		originalInfo.setCustomFieldTopSectionXml(xmlTop);
+		assertEquals("Top section should have been set", xmlTop, appWithAccount.getConfigInfo().getCustomFieldTopSectionXml());
+
+		FieldSpec[] bottomSpecs = {FieldSpec.createCustomField("BottomTag", "Bottom Label", new FieldTypeMultiline()),};
+		fields = new FieldCollection(bottomSpecs);
+		String xmlBottom = fields.toString();
+		originalInfo.setCustomFieldBottomSectionXml(xmlBottom);
+		assertEquals("Bottom section should have been set", xmlBottom, appWithAccount.getConfigInfo().getCustomFieldBottomSectionXml());
+
 		appWithAccount.saveConfigInfo();
 		assertEquals("should still be there", "blah", appWithAccount.getConfigInfo().getAuthor());
+		assertEquals("Top section should still be there", xmlTop, appWithAccount.getConfigInfo().getCustomFieldTopSectionXml());
+		assertEquals("Bottom section should still be there", xmlBottom, appWithAccount.getConfigInfo().getCustomFieldBottomSectionXml());
 		assertEquals("save didn't work!", true, file.exists());
 
 		originalInfo.setAuthor("something else");
 		appWithAccount.loadConfigInfo();
 		assertNotNull("ContactInfo null", appWithAccount.getConfigInfo());
 		assertEquals("should have reloaded", "blah", appWithAccount.getConfigInfo().getAuthor());
+		assertEquals("should have reloaded Top section", xmlTop, appWithAccount.getConfigInfo().getCustomFieldTopSectionXml());
+		assertEquals("should have reloaded Bottom section", xmlBottom, appWithAccount.getConfigInfo().getCustomFieldBottomSectionXml());
+		FieldSpec[] topSpecsFromStore = appWithAccount.getStore().getTopSectionFieldSpecs();
+		fields = new FieldCollection(topSpecsFromStore);
+		String xmlTopFromStore = fields.toString();
+		assertEquals("Store doesn't have updated Top section?", xmlTop, xmlTopFromStore);
+		FieldSpec[] bottomSpecsFromStore = appWithAccount.getStore().getBottomSectionFieldSpecs();
+		fields = new FieldCollection(bottomSpecsFromStore);
+		String xmlBottomFromStore = fields.toString();
+		assertEquals("store doesn't have updated Bottom section?", xmlBottom, xmlBottomFromStore);
 
 		File sigFile = appWithAccount.getConfigInfoSignatureFile();
 		sigFile.delete();
