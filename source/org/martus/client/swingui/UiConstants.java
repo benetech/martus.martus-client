@@ -1,8 +1,8 @@
 /*
 
 The Martus(tm) free, social justice documentation and
-monitoring software. Copyright (C) 2001-2006, Beneficent
-Technology, Inc. (Benetech).
+monitoring software. Copyright (C) 2001-2007, Beneficent
+Technology, Inc. (The Benetech Initiative).
 
 Martus is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
@@ -33,7 +33,7 @@ public class UiConstants
 	// and change other occurances as required by the license.
 	public static final String programName = "Martus(TM)";
 	public static String versionLabel = "post 3.0 internal";
-	public static final String copyright = "Copyright 2001-2006 Beneficent Technology, Inc.";
+	public static final String copyright = "© Copyright 2001-2007, Beneficent Technology, Inc. (The Benetech Initiative)";
 	public static final String website = "(Benetech, at www.benetech.org)";
 
 }
