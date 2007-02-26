@@ -33,7 +33,8 @@ public class UiConstants
 	// and change other occurances as required by the license.
 	public static final String programName = "Martus(TM)";
 	public static String versionLabel = "post 3.0 internal";
-	public static final String copyright = "© Copyright 2001-2007, Beneficent Technology, Inc. (The Benetech Initiative)";
+	public static final String copyrightSymbol = "\u00A9 "; 
+	public static final String copyright = copyrightSymbol + "Copyright 2001-2007, Beneficent Technology, Inc. (The Benetech Initiative)";
 	public static final String website = "(Benetech, at www.benetech.org)";
 
 }
