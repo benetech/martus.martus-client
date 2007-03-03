@@ -29,6 +29,7 @@ import java.awt.event.ActionEvent;
 import java.awt.print.PrinterJob;
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
 
 import javax.print.attribute.HashPrintRequestAttributeSet;
 import javax.swing.filechooser.FileFilter;
@@ -256,12 +257,38 @@ public class ActionMenuReports extends ActionPrint
 		options.includePrivate = dlg.wantsPrivateData();
 		if(!options.includePrivate)
 		{
+			boolean areAllBulletinPrivate = true;
 			for(int i = 0; i < unsortedPartialBulletins.length; ++i)
 			{
 				PartialBulletin pb = unsortedPartialBulletins[i];
 				boolean isAllPrivate = FieldSpec.TRUESTRING.equals(pb.getData(Bulletin.PSEUDOFIELD_ALL_PRIVATE));
-				if(isAllPrivate)
-					sortableList.remove(pb);
+				if(!isAllPrivate)
+				{
+					areAllBulletinPrivate = false;
+					break;
+				}
+			}
+			
+			if(areAllBulletinPrivate)
+			{
+				MartusLocalization localization = mainWindow.getLocalization();
+				String cancel = localization.getButtonLabel("cancel");
+				String includePublic = mainWindow.getLocalization().getButtonLabel("IncludePrivateBulletins");
+				String[] buttons = {includePublic, cancel};
+				HashMap emptyTokenReplacement = new HashMap();
+				if(!mainWindow.confirmCustomButtonsDlg(mainWindow, "ReportIncludePrivate", buttons, emptyTokenReplacement))
+					return;
+				options.includePrivate = true;
+			}
+			else
+			{
+				for(int i = 0; i < unsortedPartialBulletins.length; ++i)
+				{
+					PartialBulletin pb = unsortedPartialBulletins[i];
+					boolean isAllPrivate = FieldSpec.TRUESTRING.equals(pb.getData(Bulletin.PSEUDOFIELD_ALL_PRIVATE));
+					if(isAllPrivate)
+						sortableList.remove(pb);
+				}
 			}
 		}
 

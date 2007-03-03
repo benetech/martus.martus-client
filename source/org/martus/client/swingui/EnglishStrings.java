@@ -101,6 +101,7 @@ public class EnglishStrings
 "wintitle:confirmDateRageInvalid=Date Range Invalid",
 "wintitle:confirmPrintAllPrivateData=Print All Private Data",
 "wintitle:confirmCancelRetrieve=Cancel Retrieve",
+"wintitle:confirmReportIncludePrivate=All Bulletins Private",
 
 "wintitle:notifyDropErrorBulletinExists=Cannot Move Bulletin(s)",
 "wintitle:notifyDropErrorBulletinOlder=Cannot Move Bulletin(s)",
@@ -393,6 +394,8 @@ public class EnglishStrings
 "button:MoveFieldUpInReport=Move Up",
 "button:MoveFieldDownInReport=Move Down",
 
+"button:IncludePrivateBulletins=Include Private Bulletins",
+
 "menu:file=File",
 "menu:CreateNewBulletin=Create New Bulletin",
 "menu:printBulletin=Print Bulletin(s)",
@@ -562,7 +565,6 @@ public class EnglishStrings
 "button:PrintToPrinter=Print To Printer",
 "button:PrintToFile=Print To File",
 
-
 "field:VirtualUserNameDescription=(Enter using regular keyboard)",
 "field:VirtualPasswordDescription=Enter Password using mouse with on-screen keyboard below",
 "field:VirtualKeyboardKeys=ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890-+=!@#$%^&*()_,.[]{}<>\\/?|;:~",
@@ -614,6 +616,8 @@ public class EnglishStrings
 "field:confirmWarnMissingOrCorruptAccountMapSignatureFileeffect=Clicking on Yes will try to generate a new acctmap.txt.sig file and continue to load Martus.  Clicking on No will exit Martus.",
 "field:confirmWarnMissingAccountMapFilecause=Warning: acctmap.txt file in your account's packets directory is missing or is corrupt.  This may indicate someone has tried to tamper with your data or could be caused by a hardware error.",		
 "field:confirmWarnMissingAccountMapFileeffect=Clicking on Yes will delete all of your bulletins and continue to load Martus.  Clicking on No will exit Martus so you can try to recover or repair this file manually.",
+"field:confirmReportIncludePrivatecause=There are no bulletins that are public only. Include private bulletins?",
+"field:confirmReportIncludePrivateeffect=Press 'Include Private Bulletins' to continue with private bulletins included, or press 'Cancel' to exit and return to Martus.",
 
 "field:confirmBackupKeyPairSecretSharecause=We recommend that you now create #TotalNumberOfFilesInBackup# separate key backup files of which any #MinimumNumberOfFilesNeededForRecovery# can be used to reconstruct your key without a user name or password being required.",
 "field:confirmBackupKeyPairSecretShareeffect=By choosing Yes, you will be prompted to save pieces of your key onto removable disks.",
