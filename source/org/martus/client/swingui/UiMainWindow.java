@@ -1408,7 +1408,9 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	public void doPreferences()
 	{
 		saveState();
-		new UiPreferencesDlg(this);
+		UiPreferencesDlg dlg = new UiPreferencesDlg(this);
+		dlg.setVisible(true);
+
 		initializeViews();
 		restoreState();
 		setVisible(true);

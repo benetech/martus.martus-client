@@ -119,7 +119,6 @@ public class UiPreferencesDlg extends JDialog implements ActionListener
 		
 		Utilities.centerDlg(this);
 		setResizable(true);
-		setVisible(true);
 	}
 	
 	private String buildMdyLabel(String mdyOrder)
