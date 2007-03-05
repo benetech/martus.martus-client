@@ -531,6 +531,7 @@ public class EnglishStrings
 "field:preferencesAdjustThai=Automatically adjust legacy Thai dates",
 "field:preferencesAdjustPersian=Automatically adjust legacy Persian dates",
 "field:preferencesAllPrivate=Prevent creating public bulletins",
+"field:preferencesCheckFieldOfficeBulletins=Automatically check for new Field Office bulletins",
 "field:HeadQuartersSelected=Selected?",
 "field:ConfigureHeadQuartersDefault=Default?",
 "field:CustomizationTemplateFiles=Customization Template Files",

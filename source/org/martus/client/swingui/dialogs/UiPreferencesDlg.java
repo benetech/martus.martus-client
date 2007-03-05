@@ -31,7 +31,6 @@ import java.awt.event.ActionListener;
 import java.util.Vector;
 
 import javax.swing.JButton;
-import javax.swing.JCheckBox;
 import javax.swing.JDialog;
 
 import org.martus.client.swingui.MartusLocalization;
@@ -96,6 +95,10 @@ public class UiPreferencesDlg extends JDialog implements ActionListener
 		allPrivate.setText(localization.getFieldLabel("preferencesAllPrivate"));
 		allPrivate.setSelected(owner.getBulletinsAlwaysPrivate());
 		
+		checkFieldOfficeBulletins = new UiCheckBox();
+		checkFieldOfficeBulletins.setText(localization.getFieldLabel("preferencesCheckFieldOfficeBulletins"));
+		checkFieldOfficeBulletins.setSelected(owner.getCheckFieldOfficeBulletins());
+
 		UiParagraphPanel preferences = new UiParagraphPanel();
 		preferences.addComponents(new UiLabel(localization.getFieldLabel("language")), languageDropdown.getComponent());
 		preferences.addComponents(new UiLabel(localization.getFieldLabel("mdyOrder")), mdyDropdown.getComponent());
@@ -106,6 +109,7 @@ public class UiPreferencesDlg extends JDialog implements ActionListener
 		
 		preferences.addBlankLine();
 		preferences.addOnNewLine(allPrivate);
+		preferences.addOnNewLine(checkFieldOfficeBulletins);
 		preferences.addBlankLine();
 		
 		ok = new UiButton(localization.getButtonLabel("ok"));
@@ -129,6 +133,11 @@ public class UiPreferencesDlg extends JDialog implements ActionListener
 	public boolean isAllPrivateChecked()
 	{
 		return allPrivate.isSelected();
+	}
+	
+	public boolean isCheckFieldOfficeBulletinsChecked()
+	{
+		return checkFieldOfficeBulletins.isSelected();
 	}
 	
 	private String buildMdyLabel(String mdyOrder)
@@ -182,7 +191,8 @@ public class UiPreferencesDlg extends JDialog implements ActionListener
 	private UiChoiceEditor calendarDropdown;
 	private UiCheckBox adjustThai;
 	private UiCheckBox adjustPersian;
-	private JCheckBox allPrivate;
+	private UiCheckBox allPrivate;
+	private UiCheckBox checkFieldOfficeBulletins;
 	private JButton ok;
 	private JButton cancel;
 	

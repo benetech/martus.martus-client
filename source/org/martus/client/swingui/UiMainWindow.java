@@ -1413,6 +1413,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		if(dlg.getResult())
 		{
 			app.getConfigInfo().setForceBulletinsAllPrivate(dlg.isAllPrivateChecked());
+			app.getConfigInfo().setCheckForFieldOfficeBulletins(dlg.isCheckFieldOfficeBulletinsChecked());
 			saveConfigInfo();
 			initializeViews();
 			restoreState();
@@ -2369,6 +2370,11 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	public boolean getBulletinsAlwaysPrivate()
 	{
 		return app.getConfigInfo().shouldForceBulletinsAllPrivate();
+	}
+
+	public boolean getCheckFieldOfficeBulletins()
+	{
+		return app.getConfigInfo().getCheckForFieldOfficeBulletins();
 	}
 
 	public boolean isAnyBulletinSelected()
