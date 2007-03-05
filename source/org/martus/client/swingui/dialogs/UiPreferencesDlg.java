@@ -121,6 +121,16 @@ public class UiPreferencesDlg extends JDialog implements ActionListener
 		setResizable(true);
 	}
 	
+	public boolean getResult()
+	{
+		return result;
+	}
+	
+	public boolean isAllPrivateChecked()
+	{
+		return allPrivate.isSelected();
+	}
+	
 	private String buildMdyLabel(String mdyOrder)
 	{
 		UiLocalization localization = owner.getLocalization();
@@ -159,7 +169,7 @@ public class UiPreferencesDlg extends JDialog implements ActionListener
 			localization.setCurrentLanguageCode(languageDropdown.getText());
 			localization.setAdjustThaiLegacyDates(adjustThai.isSelected());
 			localization.setAdjustPersianLegacyDates(adjustPersian.isSelected());
-			owner.setBulletinsAlwaysPrivate(allPrivate.isSelected());
+			result = true;
 		}
 		dispose();
 	}
@@ -175,4 +185,6 @@ public class UiPreferencesDlg extends JDialog implements ActionListener
 	private JCheckBox allPrivate;
 	private JButton ok;
 	private JButton cancel;
+	
+	private boolean result;
 }

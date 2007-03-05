@@ -1410,6 +1410,10 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		saveState();
 		UiPreferencesDlg dlg = new UiPreferencesDlg(this);
 		dlg.setVisible(true);
+		if(dlg.getResult())
+		{
+			setBulletinsAlwaysPrivate(dlg.isAllPrivateChecked());
+		}
 
 		initializeViews();
 		restoreState();
