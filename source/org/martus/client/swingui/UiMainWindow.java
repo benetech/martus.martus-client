@@ -1413,24 +1413,12 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		if(dlg.getResult())
 		{
 			app.getConfigInfo().setForceBulletinsAllPrivate(dlg.isAllPrivateChecked());
-			saveAppConfigInfo();
+			saveConfigInfo();
 			initializeViews();
 			restoreState();
 			setVisible(true);
 		}
 
-	}
-
-	private void saveAppConfigInfo() 
-	{
-		try
-		{
-			app.saveConfigInfo();
-		}
-		catch (SaveConfigInfoException e)
-		{
-			notifyDlg("ErrorSavingConfig");
-		}
 	}
 
 	public boolean doContactInfo()
