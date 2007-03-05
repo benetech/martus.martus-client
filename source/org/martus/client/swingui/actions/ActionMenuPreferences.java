@@ -39,7 +39,7 @@ public class ActionMenuPreferences extends UiMenuAction
 
 	public void actionPerformed(ActionEvent ae)
 	{
-		mainWindow.doLocalize();
+		mainWindow.doPreferences();
 	}
 
 }

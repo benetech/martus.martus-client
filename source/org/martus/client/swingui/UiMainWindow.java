@@ -1405,7 +1405,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		return preview.getView().getWidth();
 	}
 
-	public void doLocalize()
+	public void doPreferences()
 	{
 		saveState();
 		new UiPreferencesDlg(this);
