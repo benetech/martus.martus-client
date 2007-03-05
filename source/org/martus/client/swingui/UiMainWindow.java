@@ -1412,12 +1412,25 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		dlg.setVisible(true);
 		if(dlg.getResult())
 		{
-			setBulletinsAlwaysPrivate(dlg.isAllPrivateChecked());
+			app.getConfigInfo().setForceBulletinsAllPrivate(dlg.isAllPrivateChecked());
+			saveAppConfigInfo();
+			initializeViews();
+			restoreState();
+			setVisible(true);
 		}
 
-		initializeViews();
-		restoreState();
-		setVisible(true);
+	}
+
+	private void saveAppConfigInfo() 
+	{
+		try
+		{
+			app.saveConfigInfo();
+		}
+		catch (SaveConfigInfoException e)
+		{
+			notifyDlg("ErrorSavingConfig");
+		}
 	}
 
 	public boolean doContactInfo()
@@ -2370,20 +2383,6 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		return app.getConfigInfo().shouldForceBulletinsAllPrivate();
 	}
 
-	public void setBulletinsAlwaysPrivate(boolean newAllPrivateState)
-	{
-		app.getConfigInfo().setForceBulletinsAllPrivate(newAllPrivateState);
-		try
-		{
-			app.saveConfigInfo();
-		}
-		catch (SaveConfigInfoException e)
-		{
-			notifyDlg("ErrorSavingConfig");
-		}
-		
-	}
-	
 	public boolean isAnyBulletinSelected()
 	{
 		return (table.getSelectedBulletinUids().length > 0);
