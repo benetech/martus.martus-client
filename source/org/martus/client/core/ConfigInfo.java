@@ -73,6 +73,7 @@ public class ConfigInfo
 	public void setBulletinVersioningAware(boolean newBulletinVersioningAware){this.bulletinVersioningAware = newBulletinVersioningAware;}
 	public void setDefaultHQKeysXml(String defaultHQKeysXml){this.defaultHQKeysXml = defaultHQKeysXml;}
 	public void setCustomFieldBottomSectionXml(String newXml)	{customFieldBottomSectionXml = newXml;}
+	public void setCheckForFieldOfficeBulletins(boolean newCheckForBulletins){checkForFieldOfficeBulletins = newCheckForBulletins;}
 
 	public void clearHQKey()						{ legacyHQKey = ""; }
 	public void clearPromptUserRequestSendToServer() { mustAskUserToSendToServer = false; }
@@ -100,6 +101,7 @@ public class ConfigInfo
 	public boolean isBulletinVersioningAware()	{return bulletinVersioningAware;}
 	public String getDefaultHQKeysXml()		{return defaultHQKeysXml;}
 	public String getCustomFieldBottomSectionXml() {return customFieldBottomSectionXml;}
+	public boolean getCheckForFieldOfficeBulletins() {return checkForFieldOfficeBulletins;}
 	
 	public boolean isServerConfigured()
 	{
@@ -192,6 +194,9 @@ public class ConfigInfo
 			if(loaded.version >= 12)
 				loaded.customFieldBottomSectionXml = in.readUTF();
 
+			if(loaded.version >= 13)
+				loaded.checkForFieldOfficeBulletins = in.readBoolean();
+			
 			in.close();
 		}
 		catch (Exception e)
@@ -228,6 +233,7 @@ public class ConfigInfo
 			out.writeBoolean(bulletinVersioningAware);
 			out.writeUTF(defaultHQKeysXml);
 			out.writeUTF(customFieldBottomSectionXml);
+			out.writeBoolean(checkForFieldOfficeBulletins);
 
 			out.close();
 		}
@@ -239,7 +245,7 @@ public class ConfigInfo
 	
 	private boolean mustAskUserToSendToServer;
 
-	public static final short VERSION = 12;
+	public static final short VERSION = 13;
 	//Version 1
 	private short version;
 	private String author;
@@ -274,5 +280,6 @@ public class ConfigInfo
 	private String defaultHQKeysXml;
 	//Version 12
 	private String customFieldBottomSectionXml;
-	
+	//Version 13
+	private boolean checkForFieldOfficeBulletins;
 }

@@ -54,7 +54,7 @@ public class TestConfigInfo extends TestCaseEnhanced
 		ConfigInfo info = new ConfigInfo();
 		verifyEmptyInfo(info, "constructor");
 		
-		assertEquals(12, ConfigInfo.VERSION);
+		assertEquals(13, ConfigInfo.VERSION);
 
 		info.setAuthor("fred");
 		assertEquals("fred", info.getAuthor());
@@ -215,6 +215,7 @@ public class TestConfigInfo extends TestCaseEnhanced
 		info.setBulletinVersioningAware(sampleBulletinVersioningAware);
 		info.setDefaultHQKeysXml(sampleDefaultHQKeysXml);
 		info.setCustomFieldBottomSectionXml(sampleCustomFieldBottomSectionXml);
+		info.setCheckForFieldOfficeBulletins(sampleCheckForFieldOfficeBulletins);
 	}
 
 	void verifyEmptyInfo(ConfigInfo info, String label)
@@ -241,6 +242,7 @@ public class TestConfigInfo extends TestCaseEnhanced
 		assertEquals(label + ": sampleBulletinVersioningAware", true, info.isBulletinVersioningAware());
 		assertEquals(label + ": sampleDefaultHQKeysXml", "", info.getDefaultHQKeysXml());
 		assertEquals(label + ": sampleCustomFieldBottomSectionXml", "", info.getCustomFieldBottomSectionXml());
+		assertEquals(label + ": sampleCheckForFieldOfficeBulletins", false, info.getCheckForFieldOfficeBulletins());
 		
 	}
 
@@ -322,6 +324,11 @@ public class TestConfigInfo extends TestCaseEnhanced
 			assertEquals(label + ": sampleCustomFieldBottomSectionXml", sampleCustomFieldBottomSectionXml, info.getCustomFieldBottomSectionXml());	
 		else
 			assertEquals(label + ": sampleCustomFieldBottomSectionXml", "", info.getCustomFieldBottomSectionXml());
+
+		if(VERSION >= 13)
+			assertEquals(label + ": sampleCheckForFieldOfficeBulletins", sampleCheckForFieldOfficeBulletins, info.getCheckForFieldOfficeBulletins());	
+		else
+			assertEquals(label + ": sampleCheckForFieldOfficeBulletins", false, info.getCheckForFieldOfficeBulletins());
 	}
 
 	void verifyLoadSpecificVersion(ByteArrayInputStream inputStream, short VERSION)
@@ -390,6 +397,10 @@ public class TestConfigInfo extends TestCaseEnhanced
 		{
 			out.writeUTF(sampleCustomFieldBottomSectionXml);
 		}
+		if(VERSION >= 13)
+		{
+			out.writeBoolean(sampleCheckForFieldOfficeBulletins);
+		}
 		out.close();
 		return outputStream.toByteArray();
 	}
@@ -430,6 +441,8 @@ public class TestConfigInfo extends TestCaseEnhanced
 	final String sampleDefaultHQKeysXml = "<HQs>defaultHQ</HQs>";
 //Version 12
 	final String sampleCustomFieldBottomSectionXml = "<CustomFields></CustomFields>";
+//Version 13
+	final boolean sampleCheckForFieldOfficeBulletins = true;
 	
 	
 }
