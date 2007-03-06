@@ -498,6 +498,8 @@ public class EnglishStrings
 "field:StatusReady=Ready",
 "field:StatusRetrieving=Retrieving...",
 "field:StatusConnecting=Connecting to server",
+"field:statusCheckingForNewFieldOfficeBulletins=Checking for new Field Office bulletins...",
+"field:statusNewFieldOfficeBulletins=New Field Office bulletins found on server",
 "field:RetrieveMySealedBulletinProgress=Retrieving My Sealed Bulletins",
 "field:RetrieveMyDraftBulletinProgress=Retrieving My Draft Bulletins",
 "field:RetrieveHQSealedBulletinProgress=Retrieving Field Desk Sealed Bulletins",

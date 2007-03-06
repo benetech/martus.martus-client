@@ -29,9 +29,13 @@ package org.martus.client.swingui;
 import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Set;
 import java.util.TimerTask;
 import java.util.Vector;
+
 import javax.swing.SwingUtilities;
+
 import org.martus.client.bulletinstore.BulletinFolder;
 import org.martus.client.bulletinstore.ClientBulletinStore;
 import org.martus.client.core.BackgroundRetriever;
@@ -44,6 +48,7 @@ import org.martus.common.Exceptions.ServerNotAvailableException;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.crypto.MartusCrypto;
 import org.martus.common.crypto.MartusCrypto.MartusSignatureException;
+import org.martus.common.database.DatabaseKey;
 import org.martus.common.network.NetworkInterfaceConstants;
 import org.martus.common.network.NetworkResponse;
 import org.martus.common.packet.UniversalId;
@@ -71,6 +76,8 @@ class BackgroundTimerTask extends TimerTask
 			return;
 		if(mainWindow.preparingToExitMartus)
 			return;
+		if(checkingForNewFieldOfficeBulletins)
+			return;
 			
 		if(!getApp().isServerConfigured())
 		{
@@ -85,6 +92,7 @@ class BackgroundTimerTask extends TimerTask
 			checkForNewsFromServer();
 			getUpdatedListOfBulletinsOnServer();
 			doRetrievingOrUploading();
+			checkForNewFieldOfficeBulletins();
 		}
 		catch(Exception e)
 		{
@@ -183,6 +191,69 @@ class BackgroundTimerTask extends TimerTask
 			mainWindow.setStatusMessageTag(tag);
 	}
 	
+	private void checkForNewFieldOfficeBulletins()
+	{
+		if(!getApp().getConfigInfo().getCheckForFieldOfficeBulletins())
+			return;
+		if(System.currentTimeMillis() < nextCheckForFieldOfficeBulletins)
+			return;
+		if(!isServerAvailable())
+			return;
+		
+
+		nextCheckForFieldOfficeBulletins = System.currentTimeMillis() + MINIMUM_TIME_BETWEEN_FIELD_OFFICE_CHECKS_MILLIS;
+		try
+		{
+			checkingForNewFieldOfficeBulletins = true;
+			mainWindow.setStatusMessageTag("statusCheckingForNewFieldOfficeBulletins");
+			FieldOfficeBulletinChecker checker = new FieldOfficeBulletinChecker();
+			SwingUtilities.invokeLater(checker);
+		}
+		finally
+		{
+			checkingForNewFieldOfficeBulletins = false;
+		}
+
+	}
+	
+	class FieldOfficeBulletinChecker implements Runnable
+	{
+		public void run() 
+		{
+			try
+			{
+				long keepStatusUntil = System.currentTimeMillis() + 1000;
+				Set fieldOfficeUidsOnServer = getFieldOfficeUidsOnServer();
+				Iterator iter = fieldOfficeUidsOnServer.iterator();
+				while(iter.hasNext())
+				{
+					UniversalId uid = (UniversalId)iter.next();
+					DatabaseKey key = DatabaseKey.createLegacyKey(uid);
+					if(!getStore().doesBulletinRevisionExist(key))
+					{
+						foundNew = true;
+						break;
+					}
+				}
+				
+				long remaining = keepStatusUntil - System.currentTimeMillis();
+				if(remaining > 0)
+					Thread.sleep(remaining);
+			}
+			catch(Exception e)
+			{
+				e.printStackTrace();
+			}
+
+			if(foundNew)
+				mainWindow.setStatusMessageTag("statusNewFieldOfficeBulletins");
+			else
+				mainWindow.setStatusMessageReady();
+		}
+
+		boolean foundNew = false;
+	}
+	
 	private void getUpdatedListOfBulletinsOnServer()
 	{
 		if(gotUpdatedOnServerUids)
@@ -197,19 +268,7 @@ class BackgroundTimerTask extends TimerTask
 		{
 			uidsOnServer.addAll(getUidsFromServer(myAccountId));
 			
-			ClientSideNetworkGateway gateway = getApp().getCurrentNetworkInterfaceGateway();
-			MartusCrypto security = getApp().getSecurity();
-			NetworkResponse myFieldOfficesResponse = gateway.getFieldOfficeAccountIds(security, getApp().getAccountId());
-			if(NetworkInterfaceConstants.OK.equals(myFieldOfficesResponse.getResultCode()))
-			{
-				Vector fieldOfficeAccounts = myFieldOfficesResponse.getResultVector();
-				System.out.println("My FO accounts: " + fieldOfficeAccounts.size());
-				for(int i = 0; i < fieldOfficeAccounts.size(); ++i)
-				{
-					String fieldOfficeAccountId = (String)fieldOfficeAccounts.get(i);
-					uidsOnServer.addAll(getUidsFromServer(fieldOfficeAccountId));
-				}
-			}
+			uidsOnServer.addAll(getFieldOfficeUidsOnServer());
 			getStore().updateOnServerLists(uidsOnServer);
 
 			class CurrentFolderRefresher implements Runnable
@@ -229,6 +288,26 @@ class BackgroundTimerTask extends TimerTask
 		
 		System.out.println("Exiting BackgroundUploadTimerTask.getUpdatedListOfBulletinsOnServer");
 		mainWindow.setStatusMessageTag(UiMainWindow.STATUS_READY);
+	}
+
+	Set getFieldOfficeUidsOnServer() throws MartusSignatureException 
+	{
+		HashSet uidsOnServer = new HashSet(1000);
+		ClientSideNetworkGateway gateway = getApp().getCurrentNetworkInterfaceGateway();
+		MartusCrypto security = getApp().getSecurity();
+		NetworkResponse myFieldOfficesResponse = gateway.getFieldOfficeAccountIds(security, getApp().getAccountId());
+		if(NetworkInterfaceConstants.OK.equals(myFieldOfficesResponse.getResultCode()))
+		{
+			Vector fieldOfficeAccounts = myFieldOfficesResponse.getResultVector();
+			System.out.println("My FO accounts: " + fieldOfficeAccounts.size());
+			for(int i = 0; i < fieldOfficeAccounts.size(); ++i)
+			{
+				String fieldOfficeAccountId = (String)fieldOfficeAccounts.get(i);
+				uidsOnServer.addAll(getUidsFromServer(fieldOfficeAccountId));
+			}
+		}
+		
+		return uidsOnServer;
 	}
 	
 	private Vector getUidsFromServer(String accountId) throws MartusSignatureException
@@ -478,14 +557,19 @@ class BackgroundTimerTask extends TimerTask
 	{
 		return getApp().getStore();
 	}
+	
+	public static long MINIMUM_TIME_BETWEEN_FIELD_OFFICE_CHECKS_MILLIS = 1000 * 60;
 
 	UiMainWindow mainWindow;
 	BackgroundUploader uploader;
 	BackgroundRetriever retriever;
 
+	long nextCheckForFieldOfficeBulletins;
+	
 	boolean alreadyCheckedCompliance;
 	boolean inComplianceDialog;
 	boolean alreadyGotNews;
 	boolean gotUpdatedOnServerUids;
+	boolean checkingForNewFieldOfficeBulletins;
 }
 
