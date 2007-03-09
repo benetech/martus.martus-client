@@ -81,7 +81,8 @@ public class ReportRunner
 			
 			public boolean contains(Object o)
 			{
-				boolean result = super.contains(o);
+				MiniFieldSpec spec = (MiniFieldSpec)o;
+				boolean result = super.contains(spec);
 				return result;
 			}
 		}
