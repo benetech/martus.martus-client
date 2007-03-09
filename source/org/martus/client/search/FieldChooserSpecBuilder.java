@@ -30,7 +30,7 @@ import java.util.Iterator;
 import java.util.Set;
 
 import org.martus.client.bulletinstore.ClientBulletinStore;
-import org.martus.clientside.UiLocalization;
+import org.martus.common.MiniLocalization;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.field.MartusDateRangeField;
 import org.martus.common.field.MartusGridField;
@@ -52,7 +52,7 @@ import org.martus.util.TokenReplacement.TokenInvalidException;
 
 public class FieldChooserSpecBuilder
 {
-	public FieldChooserSpecBuilder(UiLocalization localizationToUse)
+	public FieldChooserSpecBuilder(MiniLocalization localizationToUse)
 	{
 		localization = localizationToUse;
 	}
@@ -104,7 +104,7 @@ public class FieldChooserSpecBuilder
 		return new SearchableFieldChoiceItem(spec);
 	}
 
-	private Set convertToChoiceItems(Set specs)
+	public Set convertToChoiceItems(Set specs)
 	{
 		Set allChoices = new HashSet();
 		Iterator iter = specs.iterator();
@@ -221,10 +221,10 @@ public class FieldChooserSpecBuilder
 		return itemIfAny;
 	}
 	
-	UiLocalization getLocalization()
+	MiniLocalization getLocalization()
 	{
 		return localization;
 	}
 
-	UiLocalization localization;
+	MiniLocalization localization;
 }
