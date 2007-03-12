@@ -26,15 +26,23 @@ Boston, MA 02111-1307, USA.
 
 package org.martus.client.core;
 
+import java.util.Vector;
+
+import org.martus.common.GridData;
 import org.martus.common.MiniLocalization;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.crypto.MockMartusSecurity;
+import org.martus.common.field.MartusDateRangeField;
 import org.martus.common.field.MartusField;
+import org.martus.common.field.MartusGridField;
 import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.fieldspec.FieldTypeDate;
 import org.martus.common.fieldspec.FieldTypeMultiline;
 import org.martus.common.fieldspec.FieldTypeNormal;
+import org.martus.common.fieldspec.GridFieldSpec;
 import org.martus.common.fieldspec.StandardFieldSpecs;
+import org.martus.common.utilities.MartusFlexidate;
+import org.martus.util.MultiCalendar;
 import org.martus.util.TestCaseEnhanced;
 
 public class TestSafeReadableBulletin extends TestCaseEnhanced
@@ -114,5 +122,69 @@ public class TestSafeReadableBulletin extends TestCaseEnhanced
 		
 		MartusField pseudoFieldWithWrongLabel = srb.field(Bulletin.PSEUDOFIELD_LAST_SAVED_DATE, "Last Saved", new FieldTypeDate().getTypeName());
 		assertEquals("Too picky about pseudofield label?", b.getLastSavedDate(), pseudoFieldWithWrongLabel.getData());
+	}
+	
+	public void testDateRangeMiniSpecs() throws Exception
+	{
+		MiniLocalization localization = new MiniLocalization();
+		MockMartusSecurity security = MockMartusSecurity.createClient();
+
+		Bulletin b = new Bulletin(security);
+		MultiCalendar beginDate = MultiCalendar.createFromGregorianYearMonthDay(2007, 5, 29);
+		MultiCalendar endDate = MultiCalendar.createFromGregorianYearMonthDay(2007, 9, 18);
+		b.set(Bulletin.TAGEVENTDATE, MartusFlexidate.toBulletinFlexidateFormat(beginDate, endDate));
+		SafeReadableBulletin srb = new SafeReadableBulletin(b, localization);
+		String endTag = Bulletin.TAGEVENTDATE + "." + MartusDateRangeField.SUBFIELD_END;
+		assertEquals(endDate.toIsoDateString(), srb.getPossiblyNestedField(endTag).getData());
+
+		boolean found = false;
+		Vector topFields = srb.getTopFields();
+		for(int i = 0; i < topFields.size(); ++i)
+		{
+			MartusField field = (MartusField)topFields.get(i);
+			if(field.getTag().equals(endTag))
+			{
+				found = true;
+				assertEquals("wrong value?", endDate.toIsoDateString(), field.getData());
+			}
+		}
+		assertTrue("didn't find event date end?", found);
+	}
+	
+	public void testGridFieldColumn() throws Exception
+	{
+		MiniLocalization localization = new MiniLocalization();
+		MockMartusSecurity security = MockMartusSecurity.createClient();
+
+		GridFieldSpec gridSpec = new GridFieldSpec();
+		gridSpec.setTag("Tag");
+		gridSpec.setLabel("Label");
+		FieldSpec columnSpec = FieldSpec.createCustomField("", "Grid.Column", new FieldTypeNormal());
+		gridSpec.addColumn(columnSpec);
+		FieldSpec[] section = new FieldSpec[] {gridSpec, };
+		Bulletin b = new Bulletin(security, section, StandardFieldSpecs.getDefaultBottomSectionFieldSpecs());
+		MartusGridField grid = (MartusGridField)b.getField("Tag");
+		GridData gridData = grid.getGridData();
+		gridData.addEmptyRow();
+		gridData.setValueAt("Hello", 0, 0);
+		grid.setData(gridData.getXmlRepresentation());
+		
+		SafeReadableBulletin srb = new SafeReadableBulletin(b, localization);
+		String fullColumnTag = gridSpec.getTag() + "." + MartusGridField.sanitizeLabel(columnSpec.getLabel());
+		
+		boolean found = false;
+		Vector topFields = srb.getTopFields();
+		for(int i = 0; i < topFields.size(); ++i)
+		{
+			MartusField field = (MartusField)topFields.get(i);
+			if(field.getTag().equals(fullColumnTag))
+			{
+				found = true;
+				assertEquals("wrong value?", gridData.getValueAt(0, 0)+"\n", field.getData());
+				assertEquals("wrong label?", gridSpec.getLabel() + ": " + columnSpec.getLabel(), field.getLabel());
+			}
+		}
+		assertTrue("didn't find grid column?", found);
+		
 	}
 }

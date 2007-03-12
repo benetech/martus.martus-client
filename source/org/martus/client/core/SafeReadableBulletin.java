@@ -27,13 +27,18 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.core;
 
 import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 import java.util.Vector;
 
+import org.martus.client.search.FieldChooserSpecBuilder;
 import org.martus.common.MiniLocalization;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.field.EmptyMartusFieldWithInfiniteSubFields;
 import org.martus.common.field.MartusField;
+import org.martus.common.fieldspec.ChoiceItem;
 import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.fieldspec.FieldType;
 import org.martus.common.fieldspec.FieldTypeMessage;
@@ -173,7 +178,12 @@ public class SafeReadableBulletin
 	
 	public MartusField getPossiblyNestedField(MiniFieldSpec nestedFieldMiniSpec)
 	{
-		return getPossiblyNestedField(nestedFieldMiniSpec.getTag());
+		MartusField field = getPossiblyNestedField(nestedFieldMiniSpec.getTag());
+		
+		// TODO: The following line is a necessary hack which should be improved
+		field.setLabel(nestedFieldMiniSpec.getLabel());
+		
+		return field;
 	}
 
 	public MartusField getPossiblyNestedField(String tag)
@@ -206,41 +216,32 @@ public class SafeReadableBulletin
 	
 	public Vector getTopFields()
 	{
-		return getSectionFields(realBulletin.getTopSectionFieldSpecs());
-
-// TODO: This code seems to fix the reporting problem 
-// (date range portions not shown in Page reports)
-// but I haven't been able to write a test that verifies it yet.
-//		FieldSpec[] topLevelFieldSpecs = realBulletin.getTopSectionFieldSpecs();
-//		FieldChooserSpecBuilder builder = new FieldChooserSpecBuilder(localization);
-//		HashSet topLevelFieldSpecSet = new HashSet(Arrays.asList(topLevelFieldSpecs));
-//		Set choices = builder.convertToChoiceItems(topLevelFieldSpecSet);
-//
-//		Vector availableMiniSpecs = new Vector();
-//		Iterator iter = choices.iterator();
-//		while(iter.hasNext())
-//		{
-//			ChoiceItem choice = (ChoiceItem)iter.next();
-//			MiniFieldSpec miniSpec = new MiniFieldSpec(choice.getSpec());
-//			availableMiniSpecs.add(miniSpec);
-//		}
-		
-//		return availableMiniSpecs;
+		return getFieldsFromSpecs(realBulletin.getTopSectionFieldSpecs());
 	}
-	
+
 	public Vector getBottomFields()
 	{
-		return getSectionFields(realBulletin.getBottomSectionFieldSpecs());
+		return getFieldsFromSpecs(realBulletin.getBottomSectionFieldSpecs());
 	}
 	
-	private Vector getSectionFields(FieldSpec[] specs)
+	private Vector getFieldsFromSpecs(FieldSpec[] topLevelFieldSpecs) 
 	{
+		FieldChooserSpecBuilder builder = new FieldChooserSpecBuilder(localization);
+		HashSet topLevelFieldSpecSet = new HashSet(Arrays.asList(topLevelFieldSpecs));
+		Set choices = builder.convertToChoiceItems(topLevelFieldSpecSet);
+
 		Vector fields = new Vector();
-		for(int i = 0; i < specs.length; ++i)
-			fields.add(field(new MiniFieldSpec(specs[i])));
+		Iterator iter = choices.iterator();
+		while(iter.hasNext())
+		{
+			ChoiceItem choice = (ChoiceItem)iter.next();
+			MiniFieldSpec miniSpec = new MiniFieldSpec(choice.getSpec());
+			MartusField field = getPossiblyNestedField(miniSpec);
+			fields.add(field);
+		}
 		return fields;
 	}
-
+	
 	Bulletin realBulletin;
 	MiniLocalization localization;
 	boolean omitPrivate;
