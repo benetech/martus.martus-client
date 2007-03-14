@@ -201,7 +201,7 @@ class BackgroundTimerTask extends TimerTask
 			return;
 		
 
-		nextCheckForFieldOfficeBulletins = System.currentTimeMillis() + MINIMUM_TIME_BETWEEN_FIELD_OFFICE_CHECKS_MILLIS;
+		nextCheckForFieldOfficeBulletins = System.currentTimeMillis() + (1000 * mainWindow.timeBetweenFieldOfficeChecksSeconds);
 		try
 		{
 			checkingForNewFieldOfficeBulletins = true;
@@ -558,8 +558,6 @@ class BackgroundTimerTask extends TimerTask
 		return getApp().getStore();
 	}
 	
-	public static long MINIMUM_TIME_BETWEEN_FIELD_OFFICE_CHECKS_MILLIS = 1000 * 60;
-
 	UiMainWindow mainWindow;
 	BackgroundUploader uploader;
 	BackgroundRetriever retriever;
