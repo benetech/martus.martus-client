@@ -75,10 +75,15 @@ public class TestTabularReportBuilder extends TestCaseEnhanced
 		
 		String endSection = rf.getDocumentEndSection();
 		assertContains("</html>", endSection);
+		String expectedBreakSectionLtoR = "<tr><td align='left'colspan='3'><em>#foreach( $foo in [0..$BreakLevel] )\n&nbsp;&nbsp;&nbsp;&nbsp;\n#end $BreakFields.get($BreakLevel).getLocalizedLabelHtml($localization): $BreakFields.get($BreakLevel).html($localization) = $BreakCount</em></td></tr>\n";
+		assertEquals("Break Section not correct for LtoR?", expectedBreakSectionLtoR, rf.getBreakSection());
 
 		LanguageOptions.setDirectionRightToLeft();
 		ReportFormat rf2 = builder.createTabular(specs);
 		assertNotEquals("Didn't swap column Headers?", rf.getHeaderSection(), rf2.getHeaderSection());
+		assertNotEquals("Didn't swap break Sections?", rf.getBreakSection(), rf2.getBreakSection());
+		String expectedBreakSectionRtoL = "<tr><td align='right'colspan='3'><em><table border='0'><tr><td align='right'><em> = $BreakCount</em></td><td align='right'><em>$BreakFields.get($BreakLevel).html($localization)</em></td><td align='right'<em>#foreach( $foo in [0..$BreakLevel] )\n&nbsp;&nbsp;&nbsp;&nbsp;\n#end $BreakFields.get($BreakLevel).getLocalizedLabelHtml($localization): </em></td></tr>\n</table></em></td></tr>\n";
+		assertEquals("Break Section not correct for RtoL?", expectedBreakSectionRtoL, rf2.getBreakSection());
 		LanguageOptions.setDirectionLeftToRight();
 	}
 	

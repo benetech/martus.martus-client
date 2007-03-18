@@ -149,11 +149,27 @@ public class TabularReportBuilder extends ReportBuilder
 		int columnCount = specs.length;
 		StringBuffer breakSection = new StringBuffer();
 		breakSection.append(getTableRowStart(columnCount));
-		breakSection.append(getIndent());
-		breakSection.append("$BreakFields.get($BreakLevel).getLocalizedLabelHtml($localization): ");
-		breakSection.append("$BreakFields.get($BreakLevel).html($localization) = ");
-		breakSection.append("$BreakCount");
-		breakSection.append(getIndent());
+		String localizedLabel = "$BreakFields.get($BreakLevel).getLocalizedLabelHtml($localization): ";
+		String breakItem = "$BreakFields.get($BreakLevel).html($localization)";
+		String breakCount = " = $BreakCount";
+		if(LanguageOptions.isRightToLeftLanguage())
+		{
+			breakSection.append("<table border='0'><tr>");
+			breakSection.append("<td align='right'><em>"+breakCount+"</em></td>");
+			breakSection.append("<td align='right'><em>"+breakItem+"</em></td>");
+			breakSection.append("<td align='right'<em>");
+			breakSection.append(getIndent());
+			breakSection.append(localizedLabel);
+			breakSection.append(getTableRowEnd());
+			breakSection.append("</table>");
+		}
+		else
+		{
+			breakSection.append(getIndent());
+			breakSection.append(localizedLabel);
+			breakSection.append(breakItem);
+			breakSection.append(breakCount);
+		}
 		breakSection.append(getTableRowEnd());
 		
 		return breakSection.toString();
