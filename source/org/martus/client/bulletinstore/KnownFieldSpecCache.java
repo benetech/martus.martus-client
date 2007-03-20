@@ -39,7 +39,13 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
+import java.util.TreeMap;
+import java.util.Vector;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+import org.martus.common.FieldCollection;
+import org.martus.common.FieldSpecCollection;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.bulletinstore.BulletinStoreCache;
 import org.martus.common.crypto.MartusCrypto;
@@ -104,10 +110,9 @@ public class KnownFieldSpecCache extends BulletinStoreCache implements ReadableD
 	
 	public void revisionWasSaved(Bulletin b)
 	{
-		Set publicAndPrivateSpecs = new HashSet();
-		publicAndPrivateSpecs.addAll(arrayToSet(b.getTopSectionFieldSpecs()));
-		publicAndPrivateSpecs.addAll(arrayToSet(b.getBottomSectionFieldSpecs()));
-		setSpecs(b.getUniversalId(), publicAndPrivateSpecs);
+		FieldSpecCollection publicSpecs = new FieldSpecCollection(b.getTopSectionFieldSpecs());
+		FieldSpecCollection privateSpecs = new FieldSpecCollection(b.getBottomSectionFieldSpecs());
+		setSpecs(b.getUniversalId(), new FieldSpecCollection[] {publicSpecs, privateSpecs});
 	}
 
 	public void revisionWasRemoved(UniversalId uid)
@@ -127,7 +132,8 @@ public class KnownFieldSpecCache extends BulletinStoreCache implements ReadableD
 		while(iter.hasNext())
 		{
 			Map specsForOneAccount = (Map)iter.next();
-			knownSpecs.addAll(getSpecsForAccount(specsForOneAccount));
+			Set specsForAccount = getSpecsForAccount(specsForOneAccount);
+			knownSpecs.addAll(specsForAccount);
 		}
 			
 		return knownSpecs;
@@ -157,7 +163,9 @@ public class KnownFieldSpecCache extends BulletinStoreCache implements ReadableD
 		try
 		{
 			dataOut.writeByte(FILE_VERSION);
-			writeAllAccountsData(dataOut);
+			JsonFieldSpecCache json = new JsonFieldSpecCache();
+			json.build();
+			dataOut.writeUTF(json.toString());
 		}
 		finally
 		{
@@ -165,46 +173,260 @@ public class KnownFieldSpecCache extends BulletinStoreCache implements ReadableD
 		}
 		return plain.toByteArray();
 	}
+	
+	/*
+	 * Builds a JSON file with this structure:
+	 *   TAG_VERSION: {version}
+	 *   TAG_ALL_SECTION_SPECS: Array, one entry for each SpecCollection:
+	 *   	Array, one entry for each Spec: Spec XML
+	 *   TAG_SPEC_INDEXES_FOR_ALL_ACCOUNTS: Array, one entry for each Account:
+	 *   	Account: Array, one entry for each LocalId:
+	 *   		LocalId: Array of SpecCollection indexes: indexes
+	 */
+	
+	class OurJsonObject extends JSONObject
+	{
+		public OurJsonObject()
+		{
+			super();
+		}
+		
+		public OurJsonObject(String jsonString) throws Exception
+		{
+			super(jsonString);
+		}
+		
+		public void clear()
+		{
+			Iterator keys = keys();
+			while(keys.hasNext())
+			{
+				String key = (String)keys.next();
+				remove(key);
+			}
+		}
+	}
+	
+	class OurJsonArray extends JSONArray
+	{
+		public OurJsonArray()
+		{
+			super();
+		}
+		
+		public OurJsonArray(String jsonString) throws Exception
+		{
+			super(jsonString);
+		}
+		
+		public void clear()
+		{
+			while(length() > 0)
+				removeAt(0);
+		}
+	}
+	
+	class JsonFieldSpecCache extends OurJsonObject
+	{
+		public JsonFieldSpecCache()
+		{
+			super();
+		}
+		
+		public JsonFieldSpecCache(String jsonString) throws Exception
+		{
+			super(jsonString);
+		}
+		
+		public void build()
+		{
+			clear();
+			put(TAG_VERSION, FILE_VERSION);
+			JsonAllFieldSpecs allSpecs = new JsonAllFieldSpecs();
+			allSpecs.build();
+			put(TAG_ALL_SECTION_SPECS, allSpecs);
+			JsonSpecIndexesForAllBulletins specIndexes = new JsonSpecIndexesForAllBulletins();
+			specIndexes.build(allSpecs);
+			put(TAG_SPEC_INDEXES_FOR_ALL_ACCOUNTS, specIndexes);
+			
+		}
+		
+		public JsonAllFieldSpecs getAllFieldSpecs() throws Exception
+		{
+			return new JsonAllFieldSpecs(getJSONArray(TAG_ALL_SECTION_SPECS).toString());
+		}
 
-	private void writeAllAccountsData(DataOutputStream dataOut) throws IOException
-	{
-		Collection accountIds = accountsToMapsOfLocalIdsToSetsOfSpecs.keySet();
-		Iterator iter = accountIds.iterator();
-		while(iter.hasNext())
+		public JsonSpecIndexesForAllBulletins getSpecIndexesForAllBulletins() throws Exception 
 		{
-			String accountId = (String)iter.next();
-			dataOut.writeUTF(accountId);
-			writeOneAccountsData(dataOut, accountId);
+			return new JsonSpecIndexesForAllBulletins(getJSONObject(TAG_SPEC_INDEXES_FOR_ALL_ACCOUNTS).toString());
 		}
-		dataOut.writeUTF("");
 	}
 	
-	private void writeOneAccountsData(DataOutputStream dataOut, String accountId) throws IOException
+	class JsonAllFieldSpecs extends OurJsonArray
 	{
-		Map localIdsToSetOfSpecs = (Map)accountsToMapsOfLocalIdsToSetsOfSpecs.get(accountId);
-		Collection localIds = localIdsToSetOfSpecs.keySet();
-		Iterator iter = localIds.iterator();
-		while(iter.hasNext())
+		public JsonAllFieldSpecs()
 		{
-			String localId = (String)iter.next();
-			dataOut.writeUTF(localId);
-			Set specs = (Set)localIdsToSetOfSpecs.get(localId);
-			writeSpecs(dataOut, specs);
+			super();
 		}
-		dataOut.writeUTF("");
+		
+		public JsonAllFieldSpecs(String jsonString) throws Exception
+		{
+			super(jsonString);
+		}
+		
+		public void build()
+		{
+			clear();
+			
+			specCollectionToIndex = new TreeMap();
+			for(int i = 0; i < FieldCollection.existingFieldSpecTemplates.size(); ++i)
+			{
+				FieldSpecCollection specs = (FieldSpecCollection)FieldCollection.existingFieldSpecTemplates.get(i);
+				specCollectionToIndex.put(specs, new Integer(i));
+				
+				JsonSpecsCollection jsonSpecsCollection = new JsonSpecsCollection();
+				jsonSpecsCollection.build(specs);
+				put(jsonSpecsCollection);
+			}
+		}
+		
+		public int getIndexOf(FieldSpecCollection collection)
+		{
+			Integer index = (Integer)specCollectionToIndex.get(collection);
+			return index.intValue();
+		}
+		
+		public JsonSpecsCollection getSpecsCollection(int index) throws Exception 
+		{
+			return new JsonSpecsCollection(getJSONArray(index).toString());
+		}
+
+		TreeMap specCollectionToIndex;
+
+	}
+
+	class JsonSpecsCollection extends OurJsonArray
+	{
+		public JsonSpecsCollection()
+		{
+			super();
+		}
+		
+		public JsonSpecsCollection(String jsonString) throws Exception
+		{
+			super(jsonString);
+		}
+		
+		public void build(FieldSpecCollection specs)
+		{	
+			clear();
+			for(int spec = 0; spec < specs.size(); ++spec)
+				put(specs.get(spec).toString());
+		}
+		
+		public FieldSpecCollection getFieldSpecCollection() throws Exception
+		{
+			FieldSpecCollection specs = new FieldSpecCollection(length());
+			for(int spec = 0; spec < specs.size(); ++spec)
+				specs.set(spec, FieldSpec.createFromXml(getString(spec)));
+			
+			return specs;
+		}
+		
 	}
 	
-	private void writeSpecs(DataOutputStream dataOut, Set specs) throws IOException
+	class JsonSpecIndexesForAllBulletins extends OurJsonObject
 	{
-		Iterator iter = specs.iterator();
-		while(iter.hasNext())
+		public JsonSpecIndexesForAllBulletins()
 		{
-			FieldSpec spec = (FieldSpec)iter.next();
-			dataOut.writeUTF(spec.toString());
+			super();
 		}
-		dataOut.writeUTF("");
+		
+		public JsonSpecIndexesForAllBulletins(String jsonString) throws Exception
+		{
+			super(jsonString);
+		}
+		
+		public void build(JsonAllFieldSpecs allSpecs)
+		{
+			Collection accountIds = accountsToMapsOfLocalIdsToSetsOfSpecs.keySet();
+			Iterator iter = accountIds.iterator();
+			while(iter.hasNext())
+			{
+				String accountId = (String)iter.next();
+				JsonSpecIndexesForOneAccount specIndexesForAccount = new JsonSpecIndexesForOneAccount();
+				specIndexesForAccount.build(allSpecs, accountId);
+				put(accountId, specIndexesForAccount);
+			}
+			
+		}
+
+		public JsonSpecIndexesForOneAccount getSpecIndexesForAccount(String accountId) throws Exception 
+		{
+			return new JsonSpecIndexesForOneAccount(getJSONObject(accountId).toString());
+		}
 	}
 	
+	class JsonSpecIndexesForOneAccount extends OurJsonObject
+	{
+		public JsonSpecIndexesForOneAccount()
+		{
+			super();
+		}
+		
+		public JsonSpecIndexesForOneAccount(String jsonString) throws Exception
+		{
+			super(jsonString);
+		}
+		
+		public void build(JsonAllFieldSpecs allSpecs, String accountId)
+		{
+			Map localIdsToSetOfSpecs = (Map)accountsToMapsOfLocalIdsToSetsOfSpecs.get(accountId);
+			if(localIdsToSetOfSpecs == null)
+				return;
+			
+			Collection localIds = localIdsToSetOfSpecs.keySet();
+			Iterator iter = localIds.iterator();
+			while(iter.hasNext())
+			{
+				String localId = (String)iter.next();
+				FieldSpecCollection[] specs = (FieldSpecCollection[])localIdsToSetOfSpecs.get(localId);
+				if(specs == null)
+					specs = new FieldSpecCollection[0];
+				JsonSpecIndexesForOneBulletin specIndexesForBulletin = new JsonSpecIndexesForOneBulletin();
+				specIndexesForBulletin.build(allSpecs, specs);
+				put(localId, specIndexesForBulletin);
+			}
+		}
+
+		public JsonSpecIndexesForOneBulletin getSpecIndexesForBulletin(String localId) throws Exception 
+		{
+			return new JsonSpecIndexesForOneBulletin(getJSONArray(localId).toString());
+		}
+	}
+	
+	class JsonSpecIndexesForOneBulletin extends OurJsonArray
+	{
+		public JsonSpecIndexesForOneBulletin()
+		{
+			super();
+		}
+		
+		public JsonSpecIndexesForOneBulletin(String jsonString) throws Exception
+		{
+			super(jsonString);
+		}
+		
+		public void build(JsonAllFieldSpecs allSpecs, FieldSpecCollection[] specCollections)
+		{
+			for(int i = 0; i < specCollections.length; ++i)
+			{
+				put(allSpecs.getIndexOf(specCollections[i]));
+			}
+			
+		}
+	}
+
 	public void loadFromStream(InputStream in) throws Exception
 	{
 		DataInputStream dataIn = new DataInputStream(in);
@@ -231,7 +453,9 @@ public class KnownFieldSpecCache extends BulletinStoreCache implements ReadableD
 		{
 			if(dataIn.readByte() != FILE_VERSION)
 				throw new IOException("Bad version of field spec cache file");
-			readAllAccountsData(dataIn);
+			String jsonString = dataIn.readUTF();
+			JsonFieldSpecCache json = new JsonFieldSpecCache(jsonString);
+			populateCacheFromJson(json);
 		}
 		finally
 		{
@@ -240,71 +464,56 @@ public class KnownFieldSpecCache extends BulletinStoreCache implements ReadableD
 		
 	}
 	
-	private void readAllAccountsData(DataInputStream dataIn) throws Exception
+	private void populateCacheFromJson(JsonFieldSpecCache json) throws Exception
 	{
-		while(true)
+		if(json.getInt(TAG_VERSION) != FILE_VERSION)
+			throw new IOException("Bad version of field spec cache file");
+		
+		JsonAllFieldSpecs allSpecs = json.getAllFieldSpecs();
+		JsonSpecIndexesForAllBulletins specIndexesForAll = json.getSpecIndexesForAllBulletins();
+		Iterator accounts = specIndexesForAll.keys();
+		while(accounts.hasNext())
 		{
-			String accountId = dataIn.readUTF();
-			if(accountId.length() == 0)
-				break;
-			Map localIdsToVectorsOfSpecs = new HashMap();
-			accountsToMapsOfLocalIdsToSetsOfSpecs.put(accountId, localIdsToVectorsOfSpecs);
-			readOneAccountsData(dataIn, localIdsToVectorsOfSpecs);
+			String accountId = (String)accounts.next();
+			JsonSpecIndexesForOneAccount specIndexesForAccount = specIndexesForAll.getSpecIndexesForAccount(accountId);
+			Iterator bulletins = specIndexesForAccount.keys();
+			while(bulletins.hasNext())
+			{
+				String localId = (String)bulletins.next();
+				JsonSpecIndexesForOneBulletin specIndexesForBulletin = specIndexesForAccount.getSpecIndexesForBulletin(localId);
+				
+				FieldSpecCollection[] specsForBulletin = new FieldSpecCollection[specIndexesForBulletin.length()];
+				for(int i = 0; i < specIndexesForBulletin.length(); ++i)
+				{
+					int index = specIndexesForBulletin.getInt(i);
+					JsonSpecsCollection jsonSpecs = allSpecs.getSpecsCollection(index);
+					FieldSpecCollection specs = jsonSpecs.getFieldSpecCollection();
+					specsForBulletin[i] = specs;
+				}
+				UniversalId uid = UniversalId.createFromAccountAndLocalId(accountId, localId);
+				setSpecs(uid, specsForBulletin);
+			}
 		}
+		
 	}
 	
-	private void readOneAccountsData(DataInputStream dataIn, Map localIdsToVectorsOfSpecs) throws Exception
-	{
-		while(true)
-		{
-			String localId = dataIn.readUTF();
-			if(localId.length() == 0)
-				break;
-			Set specs = new HashSet();
-			localIdsToVectorsOfSpecs.put(localId, specs);
-			readSpecs(dataIn, specs);
-		}
-	}
-	
-	private void readSpecs(DataInputStream dataIn, Set specsToPopulate) throws Exception
-	{
-		while(true)
-		{
-			String specString = dataIn.readUTF();
-			if(specString.length() == 0)
-				break;
-			FieldSpec spec = FieldSpec.createFromXml(specString);
-			specsToPopulate.add(spec);
-		}
-	}
-
-	private Set getSpecsForAccount(Map specsForOneAccount)
+	private Set getSpecsForAccount(Map specCollectionsForOneAccount)
 	{
 		Set specsForThisAccount = new HashSet();
 		
-		Collection localIds = specsForOneAccount.keySet();
+		Collection localIds = specCollectionsForOneAccount.keySet();
 		Iterator outerIter = localIds.iterator();
 		while(outerIter.hasNext())
 		{
 			String localId = (String)outerIter.next();
-			Set specsForOneBulletin = (Set)specsForOneAccount.get(localId);
-			specsForThisAccount.addAll(getSpecsForBulletin(specsForOneBulletin));
+			FieldSpecCollection[] specCollectionsForOneBulletin = (FieldSpecCollection[])specCollectionsForOneAccount.get(localId);
+			if(specCollectionsForOneBulletin == null)
+				specCollectionsForOneBulletin = new FieldSpecCollection[0];
+			for(int i = 0; i < specCollectionsForOneBulletin.length; ++i)
+				specsForThisAccount.addAll(specCollectionsForOneBulletin[i].asSet());
 		}
 		
 		return specsForThisAccount;
-	}
-
-	private Set getSpecsForBulletin(Set specsForOneBulletin)
-	{
-		Set specsForThisBulletin = new HashSet();
-		Iterator innerIter = specsForOneBulletin.iterator();
-		while(innerIter.hasNext())
-		{
-			FieldSpec spec = (FieldSpec)innerIter.next();
-			specsForThisBulletin.add(spec);
-		}
-		
-		return specsForThisBulletin;
 	}
 
 	public void visit(DatabaseKey key)
@@ -324,13 +533,13 @@ public class KnownFieldSpecCache extends BulletinStoreCache implements ReadableD
 			String status = bhp.getStatus();
 			String accountId = bhp.getAccountId();
 			
-			Set publicAndPrivateSpecs = new HashSet();
+			Vector publicAndPrivateSpecs = new Vector();
 			try
 			{
 				String packetLocalId = bhp.getFieldDataPacketId();
 				FieldSpec[] defaultSpecs = StandardFieldSpecs.getDefaultTopSectionFieldSpecs();
-				Set packetSpecs = loadFieldSpecsForPacket(accountId, packetLocalId, status, defaultSpecs);
-				publicAndPrivateSpecs.addAll(packetSpecs);
+				FieldSpecCollection packetSpecs = loadFieldSpecsForPacket(accountId, packetLocalId, status, defaultSpecs);
+				publicAndPrivateSpecs.add(packetSpecs);
 			}
 			catch(DecryptionException e)
 			{
@@ -341,15 +550,15 @@ public class KnownFieldSpecCache extends BulletinStoreCache implements ReadableD
 			{
 				String packetLocalId = bhp.getPrivateFieldDataPacketId();
 				FieldSpec[] defaultSpecs = StandardFieldSpecs.getDefaultBottomSectionFieldSpecs();
-				Set packetSpecs = loadFieldSpecsForPacket(accountId, packetLocalId, status, defaultSpecs);
-				publicAndPrivateSpecs.addAll(packetSpecs);
+				FieldSpecCollection packetSpecs = loadFieldSpecsForPacket(accountId, packetLocalId, status, defaultSpecs);
+				publicAndPrivateSpecs.add(packetSpecs);
 			}
 			catch(DecryptionException e)
 			{
 				// ignore because it's probably not our bulletin, and we certainly can't search it
 			}
 
-			setSpecs(bhp.getUniversalId(), publicAndPrivateSpecs);
+			setSpecs(bhp.getUniversalId(), (FieldSpecCollection[])publicAndPrivateSpecs.toArray(new FieldSpecCollection[0]));
 		}
 		catch(Exception e)
 		{
@@ -360,12 +569,11 @@ public class KnownFieldSpecCache extends BulletinStoreCache implements ReadableD
 		}
 	}
 
-	private Set loadFieldSpecsForPacket(String accountId, String packetLocalId, String status, FieldSpec[] defaultSpecs) throws IOException, CryptoException, InvalidPacketException, WrongPacketTypeException, SignatureVerificationException, DecryptionException, NoKeyPairException
+	private FieldSpecCollection loadFieldSpecsForPacket(String accountId, String packetLocalId, String status, FieldSpec[] defaultSpecs) throws IOException, CryptoException, InvalidPacketException, WrongPacketTypeException, SignatureVerificationException, DecryptionException, NoKeyPairException
 	{
 		UniversalId packetUid = UniversalId.createFromAccountAndLocalId(accountId, packetLocalId);
 		FieldDataPacket fdp = loadFieldDataPacket(packetUid, status, defaultSpecs);
-		Set specs = arrayToSet(fdp.getFieldSpecs());
-		return specs;
+		return new FieldSpecCollection(fdp.getFieldSpecs());
 	}
 
 	private FieldDataPacket loadFieldDataPacket(UniversalId publicPacketUid, String status, FieldSpec[] defaultSpecs) throws IOException, CryptoException, InvalidPacketException, WrongPacketTypeException, SignatureVerificationException, DecryptionException, NoKeyPairException
@@ -389,7 +597,7 @@ public class KnownFieldSpecCache extends BulletinStoreCache implements ReadableD
 		}
 	}
 
-	private void setSpecs(UniversalId bulletinUid, Set specs)
+	private void setSpecs(UniversalId bulletinUid, FieldSpecCollection[] specs)
 	{
 		String accountId = bulletinUid.getAccountId();
 		String localId = bulletinUid.getLocalId();
@@ -410,15 +618,10 @@ public class KnownFieldSpecCache extends BulletinStoreCache implements ReadableD
 		return specsForOneAccount;
 	}
 	
-	private Set arrayToSet(FieldSpec[] array)
-	{
-		Set vector = new HashSet();
-		for(int i=0; i < array.length; ++i)
-			vector.add(array[i]);
-		return vector;
-	}
-	
-	private static final int FILE_VERSION = 0;
+	private static final int FILE_VERSION = 1;
+	private static final String TAG_VERSION = "Version";
+	private static final String TAG_ALL_SECTION_SPECS = "AllSectionSpecs";
+	private static final String TAG_SPEC_INDEXES_FOR_ALL_ACCOUNTS = "SpecIndexesForAllAccounts";
 
 	ReadableDatabase db;
 	MartusCrypto security;
