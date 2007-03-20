@@ -132,7 +132,7 @@ public class TestKnownFieldSpecCache extends TestCaseEnhanced
 		KnownFieldSpecCache reloaded = new KnownFieldSpecCache(new MockClientDatabase(), security);
 		reloaded.loadFromStream(loadable);
 		Set specs = reloaded.getAllKnownFieldSpecs();
-		assertEquals("Didn't reload properly?", specs, cache.getAllKnownFieldSpecs());
+		assertEquals("Didn't reload properly?", cache.getAllKnownFieldSpecs(), specs);
 		assertEquals("Didn't load correct count?", sampleDataSpecTags.length, specs.size());
 	}
 	
