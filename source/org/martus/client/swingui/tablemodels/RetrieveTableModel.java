@@ -26,6 +26,8 @@ Boston, MA 02111-1307, USA.
 
 package org.martus.client.swingui.tablemodels;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
@@ -104,6 +106,21 @@ abstract public class RetrieveTableModel extends UiTableModel
 	public Object getValueAt(int row, int column)
 	{
 		BulletinSummary summary = (BulletinSummary)currentSummaries.get(row);
+		return getFormattedValueAt(summary, column);
+	}
+
+	private Object getFormattedValueAt(BulletinSummary summary, int column) 
+	{
+		Object unformatted = getUnformattedValueAt(summary, column);
+		if(column == COLUMN_LAST_DATE_SAVED)
+		{
+			long value = ((Long)unformatted).longValue();
+			return getLocalization().formatDateTime(value);
+		}
+		return unformatted;
+	}
+
+	Object getUnformattedValueAt(BulletinSummary summary, int column) {
 		if(column == COLUMN_RETRIEVE_FLAG)
 			return new Boolean(summary.isChecked());
 		if(column == COLUMN_TITLE)
@@ -111,7 +128,7 @@ abstract public class RetrieveTableModel extends UiTableModel
 		if(column == COLUMN_AUTHOR)
 			return summary.getAuthor();
 		if(column == COLUMN_LAST_DATE_SAVED)
-			return getLocalization().formatDateTime(summary.getDateTimeSaved());
+			return new Long(summary.getDateTimeSaved());
 		if(column == COLUMN_BULLETIN_SIZE)
 			return  getSizeInKbytes(summary.getSize());
 		if(column == COLUMN_DELETE_FLAG)
@@ -162,11 +179,52 @@ abstract public class RetrieveTableModel extends UiTableModel
 	public void changeToDownloadableSummaries()
 	{
 		currentSummaries = downloadableSummaries;
+		sortCurrentSummaries();
 	}
 
 	public void changeToAllSummaries()
 	{
 		currentSummaries = allSummaries;
+		sortCurrentSummaries();
+	}
+	
+	public void setCurrentSortColumn(int column)
+	{
+		currentSortColumn = column;
+		sortCurrentSummaries();
+	}
+	
+	public void sortCurrentSummaries()
+	{
+		Collections.sort(currentSummaries, new SummarySorter(currentSortColumn));
+		fireTableDataChanged();
+	}
+	
+	class SummarySorter implements Comparator
+	{
+		public SummarySorter(int columnToSortBy)
+		{
+			column = columnToSortBy;
+		}
+
+		public int compare(Object first, Object second) 
+		{
+			BulletinSummary s1 = (BulletinSummary)first;
+			BulletinSummary s2 = (BulletinSummary)second;
+			
+			Comparable value1 = toComparable(getUnformattedValueAt(s1, column));
+			Comparable value2 = toComparable(getUnformattedValueAt(s2, column)); 
+			return value1.compareTo(value2);
+		}
+		
+		Comparable toComparable(Object value)
+		{
+			if(value instanceof Boolean)
+				value = new ComparableBoolean((Boolean)value);
+			return (Comparable)value;
+		}
+		
+		int column;
 	}
 
 	public void setAllFlags(boolean flagState)
@@ -496,7 +554,7 @@ abstract public class RetrieveTableModel extends UiTableModel
 		return false;
 	}
 
-	public static Object getSizeInKbytes(int sizeKb)
+	public static Integer getSizeInKbytes(int sizeKb)
 	{
 		sizeKb /= 1000;
 		if(sizeKb <= 0)
@@ -569,10 +627,32 @@ abstract public class RetrieveTableModel extends UiTableModel
 		}
 		
 	}
+	
+	static class ComparableBoolean implements Comparable
+	{
+		public ComparableBoolean(Boolean valueToWrap)
+		{
+			if(valueToWrap.booleanValue())
+				value = new Integer(1);
+			else
+				value = new Integer(0);
+		}
+		
+		public int compareTo(Object rawOther) 
+		{
+			if(! (rawOther instanceof ComparableBoolean) )
+				return 0;
+			ComparableBoolean other = (ComparableBoolean)rawOther;
+			return value.compareTo(other.value);
+		}
+		
+		Integer value;
+	}
 
 	MartusApp app;
 	UiLocalization localization;
 	int columnCount;
+	int currentSortColumn;
 	
 	ClientBulletinStore store;
 	RetrieveSummariesProgressMeter progressHandler;

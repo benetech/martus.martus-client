@@ -33,14 +33,19 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.Vector;
+
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
+import javax.swing.table.JTableHeader;
 import javax.swing.table.TableModel;
+
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.tablemodels.RetrieveTableModel;
 import org.martus.clientside.UiLocalization;
@@ -81,7 +86,9 @@ public abstract class UiServerSummariesDlg extends JDialog
 		table.setRenderers(model);
 
 		table.createDefaultColumnsFromModel();
-		tableBox.addCentered(table.getTableHeader());
+		JTableHeader tableHeader = table.getTableHeader();
+		tableHeader.addMouseListener(new HeaderMouseListener(table));
+		tableBox.addCentered(tableHeader);
 		tableBox.addCentered(new UiScrollPane(table));
 
 		JPanel topPanel = new JPanel();
@@ -225,6 +232,10 @@ public abstract class UiServerSummariesDlg extends JDialog
 			super.doLayout();
 		}
 
+		public void sort(int column)
+		{
+			model.setCurrentSortColumn(column);
+		}
 	}
 
 
@@ -305,6 +316,28 @@ public abstract class UiServerSummariesDlg extends JDialog
 			model.changeToAllSummaries();
 			model.fireTableStructureChanged();
 		}
+	}
+
+	public class HeaderMouseListener extends MouseAdapter 
+	{
+		public HeaderMouseListener(RetrieveJTable tableToManage)
+		{
+			retrieveTable = tableToManage;
+		}
+		
+		public void mouseClicked(MouseEvent e) 
+		{
+			JTableHeader header = (JTableHeader)e.getSource();
+			int clickedColumn = header.columnAtPoint(e.getPoint());
+			if (clickedColumn < 0)
+				return;
+
+			// NOTE: If we allow columns to be reordered, we must 
+			// translate clickedColumn to the correct column ourselves
+			retrieveTable.sort(clickedColumn);
+		}
+		
+		RetrieveJTable retrieveTable;
 	}
 
 	private UiVBox tableBox;
