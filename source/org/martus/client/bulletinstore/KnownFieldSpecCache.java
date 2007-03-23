@@ -30,6 +30,7 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -44,7 +45,6 @@ import java.util.Vector;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
-import org.martus.common.FieldCollection;
 import org.martus.common.FieldSpecCollection;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.bulletinstore.BulletinStoreCache;
@@ -63,6 +63,7 @@ import org.martus.common.packet.UniversalId;
 import org.martus.common.packet.Packet.InvalidPacketException;
 import org.martus.common.packet.Packet.SignatureVerificationException;
 import org.martus.common.packet.Packet.WrongPacketTypeException;
+import org.martus.util.UnicodeWriter;
 import org.martus.util.inputstreamwithseek.InputStreamWithSeek;
 
 public class KnownFieldSpecCache extends BulletinStoreCache implements ReadableDatabase.PacketVisitor
@@ -165,7 +166,11 @@ public class KnownFieldSpecCache extends BulletinStoreCache implements ReadableD
 			dataOut.writeByte(FILE_VERSION);
 			JsonFieldSpecCache json = new JsonFieldSpecCache();
 			json.build();
-			dataOut.writeUTF(json.toString());
+			String jsonString = json.toString();
+
+			dataOut.writeInt(jsonString.length());
+			for(int i = 0; i < jsonString.length(); ++i)
+				dataOut.writeChar(jsonString.charAt(i));
 		}
 		finally
 		{
@@ -244,10 +249,10 @@ public class KnownFieldSpecCache extends BulletinStoreCache implements ReadableD
 			put(TAG_VERSION, FILE_VERSION);
 			JsonAllFieldSpecs allSpecs = new JsonAllFieldSpecs();
 			allSpecs.build();
-			put(TAG_ALL_SECTION_SPECS, allSpecs);
 			JsonSpecIndexesForAllBulletins specIndexes = new JsonSpecIndexesForAllBulletins();
 			specIndexes.build(allSpecs);
 			put(TAG_SPEC_INDEXES_FOR_ALL_ACCOUNTS, specIndexes);
+			put(TAG_ALL_SECTION_SPECS, allSpecs);
 			
 		}
 		
@@ -277,22 +282,20 @@ public class KnownFieldSpecCache extends BulletinStoreCache implements ReadableD
 		public void build()
 		{
 			clear();
-			
 			specCollectionToIndex = new TreeMap();
-			for(int i = 0; i < FieldCollection.existingFieldSpecTemplates.size(); ++i)
-			{
-				FieldSpecCollection specs = (FieldSpecCollection)FieldCollection.existingFieldSpecTemplates.get(i);
-				specCollectionToIndex.put(specs, new Integer(i));
-				
-				JsonSpecsCollection jsonSpecsCollection = new JsonSpecsCollection();
-				jsonSpecsCollection.build(specs);
-				put(jsonSpecsCollection);
-			}
 		}
 		
 		public int getIndexOf(FieldSpecCollection collection)
 		{
 			Integer index = (Integer)specCollectionToIndex.get(collection);
+			if(index == null)
+			{
+				index = new Integer(specCollectionToIndex.size());
+				specCollectionToIndex.put(collection, index);
+				JsonSpecsCollection jsonSpecsCollection = new JsonSpecsCollection();
+				jsonSpecsCollection.build(collection);
+				put(jsonSpecsCollection);
+			}
 			return index.intValue();
 		}
 		
@@ -453,8 +456,11 @@ public class KnownFieldSpecCache extends BulletinStoreCache implements ReadableD
 		{
 			if(dataIn.readByte() != FILE_VERSION)
 				throw new IOException("Bad version of field spec cache file");
-			String jsonString = dataIn.readUTF();
-			JsonFieldSpecCache json = new JsonFieldSpecCache(jsonString);
+			int length = dataIn.readInt();
+			StringBuffer jsonString = new StringBuffer(length);
+			for(int i = 0; i < length; ++i)
+				jsonString.append(dataIn.readChar());
+			JsonFieldSpecCache json = new JsonFieldSpecCache(jsonString.toString());
 			populateCacheFromJson(json);
 		}
 		finally
@@ -618,7 +624,7 @@ public class KnownFieldSpecCache extends BulletinStoreCache implements ReadableD
 		return specsForOneAccount;
 	}
 	
-	private static final int FILE_VERSION = 1;
+	private static final int FILE_VERSION = 2;
 	private static final String TAG_VERSION = "Version";
 	private static final String TAG_ALL_SECTION_SPECS = "AllSectionSpecs";
 	private static final String TAG_SPEC_INDEXES_FOR_ALL_ACCOUNTS = "SpecIndexesForAllAccounts";
