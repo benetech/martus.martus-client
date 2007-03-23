@@ -125,26 +125,18 @@ public class ClientBulletinStore extends BulletinStore
 		createKnownFieldSpecCache();
 	}
 
-	public void prepareToExitNormally()
+	public void prepareToExitNormally() throws Exception
 	{
 		saveBulletinDataCache();
 		saveFieldSpecCache();
 		getSignatureGenerator().flushSessionKeyCache();
 	}
 
-	private void saveFieldSpecCache()
+	private void saveFieldSpecCache() throws Exception
 	{
-		try
-		{
-			OutputStream out = new FileOutputStream(getFieldSpecCacheFile());
-			knownFieldSpecCache.saveToStream(out);
-			out.close();
-		}
-		catch (Exception e)
-		{
-			e.printStackTrace();
-			// nothing we can do about it
-		}
+		OutputStream out = new FileOutputStream(getFieldSpecCacheFile());
+		knownFieldSpecCache.saveToStream(out);
+		out.close();
 	}
 	
 	public void prepareToExitWithoutSavingState()
