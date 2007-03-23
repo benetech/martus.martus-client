@@ -201,19 +201,10 @@ class BackgroundTimerTask extends TimerTask
 			return;
 		
 
-		nextCheckForFieldOfficeBulletins = System.currentTimeMillis() + (1000 * mainWindow.timeBetweenFieldOfficeChecksSeconds);
-		try
-		{
-			checkingForNewFieldOfficeBulletins = true;
-			mainWindow.setStatusMessageTag("statusCheckingForNewFieldOfficeBulletins");
-			FieldOfficeBulletinChecker checker = new FieldOfficeBulletinChecker();
-			SwingUtilities.invokeLater(checker);
-		}
-		finally
-		{
-			checkingForNewFieldOfficeBulletins = false;
-		}
-
+		checkingForNewFieldOfficeBulletins = true;
+		mainWindow.setStatusMessageTag("statusCheckingForNewFieldOfficeBulletins");
+		FieldOfficeBulletinChecker checker = new FieldOfficeBulletinChecker();
+		SwingUtilities.invokeLater(checker);
 	}
 	
 	class FieldOfficeBulletinChecker implements Runnable
@@ -244,6 +235,9 @@ class BackgroundTimerTask extends TimerTask
 			{
 				e.printStackTrace();
 			}
+
+			nextCheckForFieldOfficeBulletins = System.currentTimeMillis() + (1000 * mainWindow.timeBetweenFieldOfficeChecksSeconds);
+			checkingForNewFieldOfficeBulletins = false;
 
 			if(foundNew)
 				mainWindow.setStatusMessageTag("statusNewFieldOfficeBulletins");
