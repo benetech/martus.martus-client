@@ -2261,13 +2261,23 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 			askAndBackupKeypairIfRequired();
 		if(doUploadReminderOnExit())
 			return;
-		saveState();
-		getStore().prepareToExitNormally();
-		System.out.println("exitNormally:");
-		System.out.println("    verifyPacket: " + Packet.callsToVerifyPacketSignature + 
-				" calls took total " + Packet.millisInVerifyPacketSignature + " ms");
-		System.out.println("    loadPacket:   " + XmlPacketLoader.callsToXmlPacketLoader + 
-				" calls took total " + XmlPacketLoader.millisInXmlPacketLoader + " ms");
+		
+		try
+		{
+			saveState();
+			getStore().prepareToExitNormally();
+			System.out.println("exitNormally:");
+			System.out.println("    verifyPacket: " + Packet.callsToVerifyPacketSignature + 
+					" calls took total " + Packet.millisInVerifyPacketSignature + " ms");
+			System.out.println("    loadPacket:   " + XmlPacketLoader.callsToXmlPacketLoader + 
+					" calls took total " + XmlPacketLoader.millisInXmlPacketLoader + " ms");
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+			notifyDlg("ErrorDuringExit");
+		}
+
 		exitWithoutSavingState();
 	}
 
