@@ -200,52 +200,44 @@ class BackgroundTimerTask extends TimerTask
 		if(!isServerAvailable())
 			return;
 		
-
 		checkingForNewFieldOfficeBulletins = true;
-		mainWindow.setStatusMessageTag("statusCheckingForNewFieldOfficeBulletins");
-		FieldOfficeBulletinChecker checker = new FieldOfficeBulletinChecker();
-		SwingUtilities.invokeLater(checker);
-	}
-	
-	class FieldOfficeBulletinChecker implements Runnable
-	{
-		public void run() 
+		boolean foundNew = false;
+		try
 		{
-			try
+			mainWindow.setStatusMessageTag("statusCheckingForNewFieldOfficeBulletins");
+			long keepStatusUntil = System.currentTimeMillis() + 1000;
+			Set fieldOfficeUidsOnServer = getFieldOfficeUidsOnServer();
+			Iterator iter = fieldOfficeUidsOnServer.iterator();
+			while(iter.hasNext())
 			{
-				long keepStatusUntil = System.currentTimeMillis() + 1000;
-				Set fieldOfficeUidsOnServer = getFieldOfficeUidsOnServer();
-				Iterator iter = fieldOfficeUidsOnServer.iterator();
-				while(iter.hasNext())
+				UniversalId uid = (UniversalId)iter.next();
+				DatabaseKey key = DatabaseKey.createLegacyKey(uid);
+				if(!getStore().doesBulletinRevisionExist(key))
 				{
-					UniversalId uid = (UniversalId)iter.next();
-					DatabaseKey key = DatabaseKey.createLegacyKey(uid);
-					if(!getStore().doesBulletinRevisionExist(key))
-					{
-						foundNew = true;
-						break;
-					}
+					foundNew = true;
+					break;
 				}
-				
-				long remaining = keepStatusUntil - System.currentTimeMillis();
-				if(remaining > 0)
-					Thread.sleep(remaining);
 			}
-			catch(Exception e)
-			{
-				e.printStackTrace();
-			}
-
+			
+			long remaining = keepStatusUntil - System.currentTimeMillis();
+			if(remaining > 0)
+				Thread.sleep(remaining);
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
 			nextCheckForFieldOfficeBulletins = System.currentTimeMillis() + (1000 * mainWindow.timeBetweenFieldOfficeChecksSeconds);
 			checkingForNewFieldOfficeBulletins = false;
-
-			if(foundNew)
-				mainWindow.setStatusMessageTag("statusNewFieldOfficeBulletins");
-			else
-				mainWindow.setStatusMessageReady();
 		}
 
-		boolean foundNew = false;
+
+		if(foundNew)
+			mainWindow.setStatusMessageTag("statusNewFieldOfficeBulletins");
+		else
+			mainWindow.setStatusMessageReady();
 	}
 	
 	private void getUpdatedListOfBulletinsOnServer()
