@@ -379,11 +379,13 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	
 	private void loadFieldSpecCache()
 	{
+		System.out.println("loadFieldSpecCache");
 		if(!getStore().loadFieldSpecCache())
 		{
 			notifyDlg(this, "CreatingFieldSpecCache");
 			getStore().createFieldSpecCacheFromDatabase();
 		}
+		System.out.println("done with loadFieldSpecCache");
 	}
 	
 	private void createBackgroundUploadTasks()
@@ -2434,20 +2436,29 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 
 		public void run()
 		{
+			if(!hasTimedOut())
+				return;
+			
+			System.out.print("Timed out...");
+			System.out.flush();
 			try
 			{
-				if(hasTimedOut())
-				{
-					getStore().prepareToExitNormally();
-					System.out.println("Inactive");
-					ThreadedSignin signin = new ThreadedSignin();
-					SwingUtilities.invokeAndWait(signin);
-				}
+				getStore().prepareToExitNormally();
 			}
 			catch(Exception e)
 			{
 				e.printStackTrace();
 			}
+			System.out.println("Inactive");
+			
+			try 
+			{
+				SwingUtilities.invokeAndWait(new ThreadedSignin());
+			} 
+			catch (Exception e) 
+			{
+				e.printStackTrace();
+			} 
 		}
 
 		boolean hasTimedOut()

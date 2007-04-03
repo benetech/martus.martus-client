@@ -72,13 +72,13 @@ public class KnownFieldSpecCache extends BulletinStoreCache implements ReadableD
 		security = securityToUse;
 	}
 	
-	public void restoreCacheFromSavedState()
+	synchronized public void restoreCacheFromSavedState()
 	{
 		// FIXME: Need to do this for real
 		initializeFromDatabase();
 	}
 	
-	public void initializeFromDatabase()
+	synchronized public void initializeFromDatabase()
 	{
 		createMap();
 		db.visitAllRecords(this);
@@ -89,7 +89,7 @@ public class KnownFieldSpecCache extends BulletinStoreCache implements ReadableD
 		accountsToMapsOfLocalIdsToSetsOfSpecs = new HashMap();
 	}
 	
-	public void storeWasCleared()
+	synchronized public void storeWasCleared()
 	{
 		clear();
 	}
@@ -99,7 +99,7 @@ public class KnownFieldSpecCache extends BulletinStoreCache implements ReadableD
 		accountsToMapsOfLocalIdsToSetsOfSpecs.clear();
 	}
 
-	public void revisionWasSaved(UniversalId uid)
+	synchronized public void revisionWasSaved(UniversalId uid)
 	{
 		DatabaseKey key = findKey(db, uid);
 		if(key == null)
@@ -107,14 +107,14 @@ public class KnownFieldSpecCache extends BulletinStoreCache implements ReadableD
 		addFieldSpecsFromBulletin(key);
 	}
 	
-	public void revisionWasSaved(Bulletin b)
+	synchronized public void revisionWasSaved(Bulletin b)
 	{
 		FieldSpecCollection publicSpecs = new FieldSpecCollection(b.getTopSectionFieldSpecs());
 		FieldSpecCollection privateSpecs = new FieldSpecCollection(b.getBottomSectionFieldSpecs());
 		setSpecs(b.getUniversalId(), new FieldSpecCollection[] {publicSpecs, privateSpecs});
 	}
 
-	public void revisionWasRemoved(UniversalId uid)
+	synchronized public void revisionWasRemoved(UniversalId uid)
 	{
 		String accountId = uid.getAccountId();
 		Map mapForAccount = getMapForAccount(accountId);
@@ -123,7 +123,7 @@ public class KnownFieldSpecCache extends BulletinStoreCache implements ReadableD
 			accountsToMapsOfLocalIdsToSetsOfSpecs.remove(accountId);
 	}
 	
-	public Set getAllKnownFieldSpecs()
+	synchronized public Set getAllKnownFieldSpecs()
 	{
 		Set knownSpecs = new HashSet();
 		Collection specsForAllAccounts = accountsToMapsOfLocalIdsToSetsOfSpecs.values();
@@ -138,7 +138,7 @@ public class KnownFieldSpecCache extends BulletinStoreCache implements ReadableD
 		return knownSpecs;
 	}
 	
-	public void saveToStream(OutputStream out) throws Exception
+	synchronized public void saveToStream(OutputStream out) throws Exception
 	{
 		byte[] plainBytes = getCacheAsBytes();
 		byte[] bundle = security.createSignedBundle(plainBytes);
@@ -428,7 +428,7 @@ public class KnownFieldSpecCache extends BulletinStoreCache implements ReadableD
 		}
 	}
 
-	public void loadFromStream(InputStream in) throws Exception
+	synchronized public void loadFromStream(InputStream in) throws Exception
 	{
 		DataInputStream dataIn = new DataInputStream(in);
 		try
@@ -520,7 +520,7 @@ public class KnownFieldSpecCache extends BulletinStoreCache implements ReadableD
 		return specsForThisAccount;
 	}
 
-	public void visit(DatabaseKey key)
+	synchronized public void visit(DatabaseKey key)
 	{
 		if(!BulletinHeaderPacket.isValidLocalId(key.getLocalId()))
 			return;
