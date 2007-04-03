@@ -723,7 +723,7 @@ public class EnglishStrings
 "field:notifyUnableToSaveAttachmentcause=Unable to save the selected attachment for some reason.  Try saving it to a different file.",
 "field:notifyUnableToViewAttachmentcause=Unable to view the selected attachment for some reason.",
 "field:notifySearchFailedcause=Sorry, no bulletins were found.",
-"field:notifyErrorDuringExitcause=An error has occured, which may have prevented Martus from saving some configuration information. You may see a warning next time you log in.",
+"field:notifyErrorDuringExitcause=An error has occurred, which may have prevented Martus from saving some configuration information. You may see a warning next time you log in.",
 
 "field:notifyServerErrorcause=Server Error, the server may be down, please try again later",
 "field:notifyFoundOrphanscause=One or more bulletins were not in any folder. These lost bulletins have been placed into the Recovered Bulletins folder.",
