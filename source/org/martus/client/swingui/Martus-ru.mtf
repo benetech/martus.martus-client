@@ -2,9 +2,9 @@
 # Language code:  ru
 # Language name:  Russian
 # Translated by:  Inna Kremen
-# Exported date:  Wed Sep 06 16:02:52 PDT 2006
-# Client version: pre 3.0 internal
-# Client build:   20060905.1762
+# Exported date:  Tue Mar 27 20:38:37 PDT 2007
+# Client version: post 3.0 internal
+# Client build:   20070323.1804
 #
 # This file MUST be saved in UTF-8 format!
 # Lines beginning with # are comments and are ignored by Martus
@@ -72,8 +72,6 @@
 # 12.  Do not translate the numbers in the field:translationVersion string.
 # 13.  Do not translate the numbers in the field:ErrorCustomFields string.
 # 14.  For Thai and Persian months, please do the following:
-
-
 #          - for a Thai translation, Thai months should be the same as the translation
 #            of regular months, and Persian dates are the same as in English.
 #          - for a Persian translation, both Thai and Persian months
@@ -151,6 +149,9 @@
 
 #_________________________=Up
 -2038-button:FolderOrderUp=Вверх
+
+#___________________________________=Include Private Bulletins
+-741f-button:IncludePrivateBulletins=Включая конфиденциальные сводки
 
 #______________________________=Insert Row
 -9f53-button:InsertEmptyGridRow=Вставить строку
@@ -789,7 +790,6 @@
 -2b9f-field:NoHQsConfigured=Для данной сводки главные учетные записи не заданы.
 
 #___________________________________________=Server Not Available
-
 -c79c-field:NoServerAvailableProgressMessage=Сервер недоступен
 
 #_____________________________=Remember: Entering your password using the regular keyboard may reduce security.
@@ -803,7 +803,6 @@
 
 #____________________=(none)
 -3c6b-field:NotSorted=(нет)
-#[VT 2006-10-16: It looks as though this is the Russian word for "no", whereas the English is "none". This may be fine, but could you let us know what you think? Thanks.]
 
 #____________________________=Details:
 -1daa-field:OnlineHelpMessage=Подробности:
@@ -819,14 +818,12 @@
 
 #_______________________________=Add the fields you want to appear in your report, and then arrange them in the order you want them to be printed.
 -b511-field:OrganizeReportFields=Добавьте в отчет поля по своему выбору и затем расположите их в том порядке, в каком Вы желаете их распечатать.
-#[VT 2006-10-16: I have been using an online translation website to help me in reviewing translations. I completely understand that these sites are very seriously limited in their accuracy, but I wanted to check in with you about something nonetheless. When I translated the Russian from this field, I received the following from the website: "Add into the report of field on your selection and then you will arrange them in that order, in which you desire to unseal them." The only aspect of this which I thought I should check in with you about was the "in which you desire to unseal them", since this field discusses the order in which users want to print fields. This may be fine, but it would be great if you could review this and let me know what you think. Thanks.]
 
 #__________________________________=You have the option to include or exclude the selected bulletin's private information in this print out or report file. If you choose to print private data, it will be visible to anyone who sees the print out or report file.
 -2bd3-field:PrintPrivateDataMessage=Вы можете выбрать, выводить или не выводить на печать или в файл отчета конфиденциальную информацию из данной сводки. Если Вы выберете печать конфиденциальных данных, с ними сможет ознакомиться любой, кто увидит распечатку или просмотрит файл отчета.
 
 #_______________________________=You can print the bulletin contents to a printer, or send the formatted report to a file.
 -f988-field:PrintToPrinterOrDisk=Вы можете распечатать содержимое сводки на принтере или сохранить отформатированный отчет в файл на диске.
-#[VT 2006-10-16: It looks as though here, the online translating tool that I sometimes refer to is also translating your word for "print" as "unseal". It would be great if you could check on this as well. Thanks.]
 
 #_________________________________=Public Information Files
 -90f9-field:PublicInformationFiles=Файлы общедоступной информации
@@ -887,12 +884,9 @@
 
 #__________________________________=Total Bulletins:
 -b840-field:ReportNumberOfBulletins=Всего сводок:
-#[VT 2006-10-16: The online translator I often refer to has translated this to mean "In all the summaries". Again, this may be an error on the part of the translation tool, but it would be wonderful if you could look over it and let me know what you think. Thanks.]
-
 
 #______________________________=Print Summary Counts Only
 -9ca4-field:ReportSummariesOnly=Печать значений счетчиков
-#[VT 2006-10-16: Similarly, the online translator returned "Press the values of the counters" for the above Russian translation. It would be great if you could let us know what you think. Thanks.]
 
 #__________________________________________=Retrieving Field Desk Draft Bulletins
 -c881-field:RetrieveHQDraftBulletinProgress=Загрузка черновых сводок подчиненных учетных записей
@@ -944,7 +938,6 @@
 
 #______________________=#NumberBulletinsFound# bulletins matched the search, and have been added to the Search Results folder.
 -998d-field:SearchFound=По заданным критериям найдено #NumberBulletinsFound# сводок, которые добавлены в папку «Найденные».
-#[VT 2006-10-16: I think I see another pattern in how the online translator is interpreting the translations – it repeatedly reads " сводок " to mean "summaries" rather than "bulletins". Could you let us know what you think? Again, this may be fine, but we appreciate it if you could help us learn more. Thanks.]
 
 #________________________________=Field(s) to search
 -9acd-field:SearchGridHeaderField=Поля для поиска
@@ -1035,7 +1028,6 @@
 
 #_______________________________=Space
 -6d8c-field:VirtualKeyboardSpace=Пробел
-
 
 #_____________________________________=Enter Password using mouse with on-screen keyboard below
 -d6ef-field:VirtualPasswordDescription=Введите пароль, нажимая мышью клавиши на экранной клавиатуре, изображенной ниже
@@ -1301,6 +1293,12 @@
 #____________________________________=Answering Yes will delete all data, uninstall Martus and exit the program.  Answering No will return you to Martus with nothing deleted.
 -b6a1-field:confirmRemoveMartuseffect=Нажмите "Да", чтобы удалить все данные, завершить работу программы и выполнить её удаление. Нажмите "Нет", чтобы вернуться в Martus, при этом удаления какой-либо информации не произойдет. 
 
+#___________________________________________=There are no bulletins that are public only. Include private bulletins?
+-2562-field:confirmReportIncludePrivatecause=Полностью общедоступные сводки отсутствуют. Включить конфиденциальные сводки?
+
+#____________________________________________=Press 'Include Private Bulletins' to continue with private bulletins included, or press 'Cancel' to exit and return to Martus.
+-42df-field:confirmReportIncludePrivateeffect=Нажмите "Включая конфиденциальные сводки" для продолжения работы также и с конфиденциальными сводками или "Отмена" для прекращения работы и возврата в Martus.
+
 #_______________________________________________________=Do you want to have your contact information sent to the current server?  This information may be sent to other servers, and will be viewable by anyone who has access to your public bulletin information.
 -4809-field:confirmRequestToSendContactInfoToServercause=Хотите ли Вы отправить свои контактные данные на текущий сервер? Эти данные могут быть перенаправлены на другие серверы и будут доступны любому, кто имеет доступ к Вашим общим данным в сводках.
 
@@ -1437,7 +1435,6 @@
 -a3fe-field:confirmsendcause=Вы выбрали операцию отправки чистовой сводки на сервер Martus.
 
 #____________________________=This will permanently seal the bulletin and you will not be allowed to make any further modifications to it except by creating a new version of the bulletin.
-
 -0de0-field:confirmsendeffect=Данная сводка будет закрыта для записи, и вносить в нее изменения можно будет, только создав ее новую версию.
 
 #_____________________=Connecting...
@@ -1501,7 +1498,6 @@
 -438b-field:messageErrorDateInFuturecause=Данная дата относится к будущему:
 
 #_____________________________________________=This date range has an end date that is earlier than the start date:
-
 -e4dc-field:messageErrorDateRangeInvertedcause=Конечная дата диапазона предшествует начальной:
 
 #_________________________________=The current server has sent this message:
@@ -1560,6 +1556,9 @@
 
 #____________________________________________=An unexpected error occurred in generating the key backup files.
 -d237-field:notifyErrorBackingUpKeySharecause=В процессе генерации файлов разбивки ключа произошла непредвиденная ошибка.
+
+#_____________________________________=An error has occured, which may have prevented Martus from saving some configuration information. You may see a warning next time you log in.
+-cad7-field:notifyErrorDuringExitcause=Произошла ошибка, которая могла помешать Martus сохранить настроечные данные полностью. При следующем входе в систему Вы можете увидеть соответствующее предупреждение.
 
 #_________________________________________________________=There was an error saving your template.
 -88ed-field:notifyErrorExportingCustomizationTemplatecause=При сохранении шаблона произошла ошибка.
@@ -1724,7 +1723,6 @@
 -e9e0-field:notifyRememberPasswordcause=Запомните свое имя пользователя и пароль - в случае утраты их невозможно восстановить.
 
 #___________________________________________________=This report format was created in a different language. As a result, some headings may not print properly, and some of the fields may not be available for sorting.
-
 -eb95-field:notifyReportFormatDifferentLanguagecause=Данный формат отчета создан на другом языке. Некоторые заголовки могут выводиться неправильно, а некторые поля – недоступны для сортировки.
 
 #_______________________________________=This report format was created with an earlier version of Martus, so it may not work correctly
@@ -1835,7 +1833,6 @@
 #______________________________________=The current server is not responding or may need to be configured from the server menu.
 -9b3c-field:notifyretrievenoservercause=Текущий сервер не отвечает
 
-
 #_____________________________________=No bulletins were selected
 -3dbb-field:notifyretrievenothingcause=Не выбраны сводки
 
@@ -1864,7 +1861,6 @@
 -71c7-field:password2=(повторите пароль)
 
 #________________=Phone Number
-
 -ab25-field:phone=Номер телефона
 
 #___________________________________=Automatically adjust legacy Persian dates
@@ -1875,6 +1871,9 @@
 
 #________________________________=Prevent creating public bulletins
 -7c9e-field:preferencesAllPrivate=Запретить создание общедоступных сводок 
+
+#_______________________________________________=Automatically check for new Field Desk bulletins
+-b3bc-field:preferencesCheckFieldOfficeBulletins=Автоматическая проверка новых сводок от подчиненных 
 
 #______________________=Private
 -237d-field:privateinfo=Конфиденциально
@@ -1894,9 +1893,14 @@
 #_______________________________________=For security reasons, we must validate your username and password.
 -0381-field:securityServerConfigValidate=В целях безопасности требуется проверка Вашего имени пользователя и пароля.
 
-
 #_________________=Status
 -bae7-field:status=Состояние
+
+#___________________________________________________=Checking for new Field Desk bulletins...
+-4026-field:statusCheckingForNewFieldOfficeBulletins=Проверка новых сводок от подчиненных...
+
+#________________________________________=New Field Desk bulletins found on server
+-eddc-field:statusNewFieldOfficeBulletins=На сервере есть новые сводки от подчиненных
 
 #__________________=Summary
 -12b7-field:summary=Краткое содержание
@@ -1910,9 +1914,9 @@
 #________________=Title
 -768e-field:title=Заголовок
 
-#_____________________________=Russian 3.0
--649d-field:translationVersion=Русский 3.0
-
+#_____________________________=Russian 3.1
+-649d-field:translationVersion=Русский 3.1
+ 
 #___________________=Username
 -84c2-field:username=Имя пользователя
 
@@ -1939,7 +1943,6 @@
 
 #________________________________________________=NOTE: A copy of this bulletin exists in one or more other folders, and those copies will not be removed.
 -c4bc-field:warningDeleteSingleBulletinWithCopies=ВНИМАНИЕ: В другой папке (папках) имеется копия (копии) данной сводки. Эта копия (копии) удалена не будет. 
-
 
 #____________________________________________=WARNING: This bulletin has not been sent to a server since it was last modified. Deleting it will prevent the latest changes from being backed up.
 -523e-field:warningDeleteSingleUnsentBulletin=ВНИМАНИЕ: Данная сводка не была отправлена на сервер после последнего редактирования. Удаление этой сводки приведет к потере последних внесенных изменений.
@@ -2078,7 +2081,6 @@
 
 #________________=Dutch
 -334a-language:nl=Голландский
-
 
 #________________=Oriya
 -c106-language:or=Орийя
@@ -2413,7 +2415,6 @@
 #_________________=Draft
 -23d3-status:draft=Черновая
 
-
 #__________________=Sealed
 -66c9-status:sealed=Чистовая
 
@@ -2433,7 +2434,6 @@
 -6fa9-wintitle:BulletinDetailsDialog=Сведения о сводке
 
 #_____________________________=Bulletin Preview
-
 -9d3b-wintitle:BulletinPreview=Предварительный просмотр сводки
 
 #______________________________=Details Field Default Content
@@ -2444,7 +2444,6 @@
 
 #_______________________________=Run Report...
 -56fb-wintitle:ChooseReportToRun=Обработка отчета...
-
 
 #__________________________=Server Configuration
 -add5-wintitle:ConfigServer=Настройка сервера
@@ -2632,7 +2631,6 @@
 #________________________=Save Search
 -1340-wintitle:SaveSearch=Сохранение критериев поиска
 
-
 #______________________________=Saving Backup Disk
 -9204-wintitle:SaveShareKeyPair=Сохранение резервной копии на диск
 
@@ -2647,7 +2645,6 @@
 
 #____________________________=Folder Order
 -8c2d-wintitle:SetFolderOrder=Порядок следования папок
-
 
 #___________________________________=Verifying Disk
 -6387-wintitle:VerifyingKeyPairShare=Проверка диска
@@ -2669,7 +2666,6 @@
 
 #_________________________________________=Cancel Backup Restore
 -3b7c-wintitle:confirmCancelBackupRecovery=Отмена восстановления
-
 
 #_________________________________________=Cancel Modify Bulletin
 -276b-wintitle:confirmCancelModifyBulletin=Отмена изменений сводки
@@ -2761,6 +2757,9 @@
 #_________________________________=Delete All Data and Remove Martus
 -6fef-wintitle:confirmRemoveMartus=Удаление всех данных и программы Martus
 
+#_________________________________________=All Bulletins Private
+-e4e5-wintitle:confirmReportIncludePrivate=Все сводки конфиденциальные
+
 #_____________________________________________________=Request to Send Contact Info to Server
 -4f40-wintitle:confirmRequestToSendContactInfoToServer=Запрос на отправку контактных данных на сервер
 
@@ -2795,7 +2794,6 @@
 -0b6f-wintitle:confirmUseBulletinsCustomFields=Выбор полей пользователя
 
 #__________________________________________________=Custom Fields Selection
-
 -0b6f-wintitle:confirmUseBulletinsDraftCustomFields=Выбор полей пользователя
 
 #______________________________________________=Accountmap File Missing Or Corrupt
@@ -2909,6 +2907,9 @@
 #__________________________________________=Error Backing Up Key
 -ee40-wintitle:notifyErrorBackingUpKeyShare=Ошибка при сохранении ключа
 
+#___________________________________=Error During Exit
+-e05d-wintitle:notifyErrorDuringExit=Ошибка при выходе
+
 #_______________________________________________________=Error Exporting Template
 -f4cc-wintitle:notifyErrorExportingCustomizationTemplate=Ошибка при экспорте шаблона
 
@@ -2929,7 +2930,6 @@
 
 #_____________________________________=Unable to Rename Folder
 -1ce2-wintitle:notifyErrorRenameFolder=Невозможно переименовать папку
-
 
 #___________________________________________=Unable to Rename Folder
 -1ce2-wintitle:notifyErrorRenameFolderExists=Невозможно переименовать папку
@@ -3221,3 +3221,4 @@
 
 #_________________________________=Confirm Delete Folder
 -1a75-wintitle:warningdeletefolder=Подтверждение удаления папки
+
