@@ -1,6 +1,6 @@
 ﻿--------
 1. Introduction to the Martus™ Software
-Martus™ Software User Guide Version 3.0
+Martus™ Software User Guide Version 3.1
 
 --------
 1a. What is Martus™?
