@@ -2,9 +2,9 @@
 # Language code:  ru
 # Language name:  Russian
 # Translated by:  Inna Kremen
-# Exported date:  Tue Mar 27 20:38:37 PDT 2007
-# Client version: post 3.0 internal
-# Client build:   20070323.1804
+# Exported date:  Tue Apr 03 16:59:59 PDT 2007
+# Client version: 3.1-RC
+# Client build:   20070403.1808
 #
 # This file MUST be saved in UTF-8 format!
 # Lines beginning with # are comments and are ignored by Martus
@@ -1873,7 +1873,7 @@
 -7c9e-field:preferencesAllPrivate=Запретить создание общедоступных сводок 
 
 #_______________________________________________=Automatically check for new Field Desk bulletins
--b3bc-field:preferencesCheckFieldOfficeBulletins=Автоматическая проверка новых сводок от подчиненных 
+-982a-field:preferencesCheckFieldOfficeBulletins=Автоматическая проверка новых сводок от подчиненных 
 
 #______________________=Private
 -237d-field:privateinfo=Конфиденциально
@@ -1897,10 +1897,10 @@
 -bae7-field:status=Состояние
 
 #___________________________________________________=Checking for new Field Desk bulletins...
--4026-field:statusCheckingForNewFieldOfficeBulletins=Проверка новых сводок от подчиненных...
+-68ab-field:statusCheckingForNewFieldOfficeBulletins=Проверка новых сводок от подчиненных...
 
 #________________________________________=New Field Desk bulletins found on server
--eddc-field:statusNewFieldOfficeBulletins=На сервере есть новые сводки от подчиненных
+-a71e-field:statusNewFieldOfficeBulletins=На сервере есть новые сводки от подчиненных
 
 #__________________=Summary
 -12b7-field:summary=Краткое содержание
@@ -1914,9 +1914,9 @@
 #________________=Title
 -768e-field:title=Заголовок
 
-#_____________________________=Russian 3.1
--649d-field:translationVersion=Русский 3.1
- 
+#_____________________________=English 3.1
+-649d-field:translationVersion=Русский 3.1 
+
 #___________________=Username
 -84c2-field:username=Имя пользователя
 
@@ -3221,4 +3221,3 @@
 
 #_________________________________=Confirm Delete Folder
 -1a75-wintitle:warningdeletefolder=Подтверждение удаления папки
-
