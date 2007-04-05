@@ -1,10 +1,10 @@
 ﻿# Martus Client Translation File
 # Language code:  ar
 # Language name:  Arabic
-# Translated by:  MID Foundation; Localize; Mounaim Elkhezzani
-# Exported date:  Thu Sep 07 10:58:40 PDT 2006
-# Client version: 3.0 
-# Client build:   20060905.1762
+# Translated by:  
+# Exported date:  Tue Mar 27 17:30:20 PDT 2007
+# Client version: post 3.0 internal
+# Client build:   20070323.1804
 #
 # This file MUST be saved in UTF-8 format!
 # Lines beginning with # are comments and are ignored by Martus
@@ -40,7 +40,6 @@
 #      since a continuous block of text is needed.
 #  3.  in field:VirtualKeyboardKeys, keep the english alphabet, but include any
 #      non-english characters at the end of the english alphabet/numbers/special
-
 #      characters (e.g. attach entire Thai alphabet at the end of the line)
 #  4.  in CreateCustomFieldsHelp2/3 fields, you can translate tags into foreign
 #      characters (but without punctuation or spaces)
@@ -151,6 +150,8 @@
 #_________________________=Up
 -2038-button:FolderOrderUp=أعلى
 
+#___________________________________=Include Private Bulletins
+-741f-button:IncludePrivateBulletins=ضمّن نشرات خاصة
 
 #______________________________=Insert Row
 -9f53-button:InsertEmptyGridRow=أدرج صف
@@ -178,7 +179,6 @@
 
 #___________________=Preview
 -f1fb-button:Preview=عرض 
-
 
 #___________________________=Print only public information
 -a2a2-button:PrintOnlyPublic=طباعة المعلومات العامة فقط
@@ -336,7 +336,6 @@
 #__________________=Modify
 -9fe4-button:modify=تعديل 
 
-
 #______________=No
 -816c-button:no=لا 
 
@@ -380,7 +379,6 @@
 -c354-field:AccountInfoDirectory=مسار الحساب: 
 
 #________________________________=Public Code:
-
 -63bc-field:AccountInfoPublicCode=الكود العام:
 
 #_______________________________=Public Account Id:
@@ -644,8 +642,6 @@
 #____________________________=There is an error in the custom field definitions. Each problem is identified with the following codes:\n   100 - Required standard field is missing\n   101 - Custom field does not have a correct tag.\n   102 - A previous Tag already exists with this name.\n   103 - Custom field does not have a label.\n   104 - Unrecognized Field Type.\n   105 - A label was found in a standard field.\n   106 - XML Parse Error.\n   107 - Tag contains illegal characters.\n   108 - Duplicate entry in Dropdown field.\n   109 - No Choices in Dropdown field.\n   110 - System/Standard field tag cannot be used for custom field.\n   111 - Standard Public field cannot be placed in bottom/Private section.\n   112 - Standard Private field cannot be placed in the top section.\n   200 - All fields empty.\n   201 - Unrecognized Headquarters created this template.\n   202 - Security validation error.\n   203 - File Error.\n   204 - Imported XML Missing Field.
 -71f2-field:ErrorCustomFields=هناك خطأ في تعريفات الحقل المخصص. يتم تعريف كل خطأ من خلال الرموز التالية:\n 100 - حقل نمطي ضروري مفقود\n 101 - الحقل المخصص لا يتضمن الرمز الصحيح.\n 102 - يوجد رمز بنفس الاسم. \n 103 - لا يتضمن الحقل المخصص على تسمية. \n 104 - نوع حقل غير معروف.\n 105 - توجد تسمية في حقل نمطي.\n 106 - خطأ تجزئة XML.\n 107 - يحتوي الرمز على أحرف ممنوعة.\n 108 - إدخال مزدوج في حقل منسدل.\n 109 - لا يوجد خيار في حقل منسدل. \n 110 - عنوان حقل النظام/ القياس لا يمكن وضعه في مجال أسفل/خاص. \n 111 - الحقل القياسي الخاص لا يمكن وضعه في أعلى المجال. \n 112 - الحقل القياسي الخاص لا يمكن وضعه في أسفل المجال. \n 200 - جميع الحقول فارغة.\n 201 - مركز رئيسي غير معروف قام بإنشاء هذا القالب.\n 202 - خطأ تصحيح أمني.\n 203 - خطأ ملف.\n 204 - مجال XML  المستورد ناقص.
 
-
-
 #_________________________________________=A previous backup file exists.  You must save each file on its own removable media disk.
 -db93-field:ErrorPreviousBackupShareExists=يوجد ملف مجزأ سابق. يجب عليك حفظ كل ملف على قرص بمفرده. 
 
@@ -687,7 +683,6 @@
 
 #___________________________=Yes/No
 -9f62-field:FieldTypeBOOLEAN=نعم/لا
-
 
 #________________________=Date
 -eb9a-field:FieldTypeDATE=التاريخ
@@ -738,7 +733,6 @@
 -d8c8-field:HelpExample1DefaultDetails=هل كان هناك أي شهود؟ 
 
 #_____________________________________=List Victim Names and Ages:
-
 -d4c9-field:HelpExample2DefaultDetails=اذكر أسماء و أعمار الضحايا:
 
 #____________________________________=Example:
@@ -767,7 +761,6 @@
 
 #_____________________________=#TotalBulletins# bulletins were selected for printing.  #AllPrivateBulletins# of them are all private.\n What would you like to include when printing?
 -abb2-field:IncludePrivateData= تم انتقاء النشرات #TotalBulletins#للطبع. كل #AllPrivateBulletins# منها جميعها خاصة.\nما ذا تريد أن يشملها الطبع؟   
-
 
 #_________________________________=The version of this translation is not compatible with this version of Martus.  It is recommended that you do not continue to use this translation version and go to (http://www.martus.org/downloads) for the appropriate version.
 -a747-field:IncompatibleMtfVersion=ترجمة هذا الإصدار غير مواءمة لهذا الإصدار من Martus . من الأفضل أن تتوقف عن استعمال هذا الإصدار وأن تنزل الإصدار المناسب من موقعنا  (http://www.martus.org/downloads)
@@ -828,7 +821,6 @@
 
 #__________________________________=You have the option to include or exclude the selected bulletin's private information in this print out or report file. If you choose to print private data, it will be visible to anyone who sees the print out or report file.
 -2bd3-field:PrintPrivateDataMessage=بإمكانك تضمين أو استثناء المعلومات الخاصة للنشرة المحددة في طباعة هذا التقرير. إذا قررت طباعة البيانات الخاصة سيتمكن كل شخص يقرأ الوثيقة أو تقرير الطباعة من الاطلاع على البيانات الخاصة. 
-
 
 #_______________________________=You can print the bulletin contents to a printer, or send the formatted report to a file.
 -f988-field:PrintToPrinterOrDisk=بإمكانك إرسال محتويات النشرة إلى الطابعة أو إرسال التقرير المنسق إلى ملف.
@@ -911,7 +903,6 @@
 #__________________________________________=Retrieving My Draft Bulletins
 -61c0-field:RetrieveMyDraftBulletinProgress=استرجاع مسوداتي
 
-
 #___________________________________________=Retrieving My Draft Bulletin Summaries
 -58e0-field:RetrieveMyDraftBulletinSummaries=استرجاع ملخصات مسوداتي
 
@@ -991,7 +982,6 @@
 -4497-field:SetFolderOrder=لتغيير وضع الملف، قم بتحديد اسم الملف واستخدام أزرار  #MoveFolderUp# / #MoveFolderDown# .
 
 #___________________________________=Human Rights Bulletin System
-
 -fe5b-field:SplashProductDescription=نظام Martus لنشرات حقوق الإنسان 
 
 #___________________________=Connecting to server
@@ -1068,7 +1058,6 @@
 
 #__________________________=Martus Software is developed by Benetech in partnership with the Information Program of the Open Society Institute, Aspiration, and the John D. and Catherine T. MacArthur Foundation.
 -3033-field:aboutDlgCredits=قامت شركة Benetech بتطوير برنامج Martus بالتعاون مع برنامج المعلومات بمعهد المجتمع المفتوح (Open Society Institute)، و منظمة أسبيريشن (Aspiration)، و مؤسسة جون دي و كاترين تي. ماك أرثر (John D. and Catherine T. MacArthur Foundation). 
-
 
 #_____________________________=Martus comes with ABSOLUTELY NO WARRANTY, and is made available under license terms in the file named license.txt in the Martus directory. This is free software, and you are welcome to redistribute it under certain conditions discussed in license.txt. 
 -8b41-field:aboutDlgDisclaimer=ليس لبرنامج Martus أية ضمانات، ويتم إصداره تحت شروط الترخيص المذكورة في ملف license.txt الموجود في مجلد Martus. هذا البرنامج برنامج مجاني ونرحب بتوزيعك إياه تحت شروط معينة مذكورة في license.txt.
@@ -1184,7 +1173,6 @@
 #____________________________________=Answering Yes will delete your data and exit Martus.  Answering No will return you to Martus with nothing deleted.
 -7f90-field:confirmDeleteMyDataeffect=إذا أجبت ب"نعم" فسوف يتم حذف بياناتك و يُغلق برنامج Martus. أما إذا أجبت ب"لا" فسوف تعود لبرنامج Martus دون حذف شيء. 
 
-
 #__________________________________________=Please Note: There are draft bulletins that have been modified and not yet sent to a server.  Do you still want to exit?
 -49ee-field:confirmDraftUploadRemindercause=ملاحظة: توجد مسودات تم تعديلها و لم يتم إرسالها لخادم. هل مازلت تريد الإنهاء؟
 
@@ -1199,7 +1187,6 @@
 
 #________________________________________=You have chosen to customize the fields that will be used in any new bulletins created by this account.
 -2f98-field:confirmEnterCustomFieldscause=لقد اخترت تعديل الحقول التي سيتم استخدامها في أية نشرات جديدة يقوم هذا الحساب بإنشائها.
-
 
 #_________________________________________=Customizing fields is an advanced operation. You should only proceed if you are certain that you understand the feature.
 -518e-field:confirmEnterCustomFieldseffect=عملية تعديل الحقول هي عملية متقدمة. ينبغي عليك الاستمرار فقط إذا كنت تفهم هذه الخاصية.
@@ -1306,6 +1293,12 @@
 #____________________________________=Answering Yes will delete all data, uninstall Martus and exit the program.  Answering No will return you to Martus with nothing deleted.
 -b6a1-field:confirmRemoveMartuseffect=إذا أجبت ب"نعم" سوف تحذف جميع البيانات و ستتم إزالة Martus و الخروج من البرنامج. أما إذا أجبت ب"لا" فسوف تعود لبرنامج Martus دون حذف شيء.
 
+#___________________________________________=There are no bulletins that are public only. Include private bulletins?
+-2562-field:confirmReportIncludePrivatecause=ليست هناك نشرات عامة فقط. هل ترغب في تضمين نشرات خاصة؟
+
+#____________________________________________=Press 'Include Private Bulletins' to continue with private bulletins included, or press 'Cancel' to exit and return to Martus.
+-42df-field:confirmReportIncludePrivateeffect=اضغط على "ضمّن نشرات خاصة" لمواصلة البحث في النشرات الخاصة المُضمنة أو اضغط على "إلغاء" للخروج والعودة إلى مارتوس.
+
 #_______________________________________________________=Do you want to have your contact information sent to the current server?  This information may be sent to other servers, and will be viewable by anyone who has access to your public bulletin information.
 -4809-field:confirmRequestToSendContactInfoToServercause=هل تريد إرسال معلومات الاتصال بك إلى الخادم الحالي؟ قد يتم إرسال هذه المعلومات لخوادم أخرى، و ستكون عرضة لإطلاع أي شخص له صلاحية الوصول للمعلومات العامة بنشراتك.
 
@@ -1360,7 +1353,6 @@
 #________________________________________=New bulletins created with this account will not have any custom fields.
 -bf33-field:confirmUndoCustomFieldseffect=لن تحتوي النشرات الجديدة التي ينشئها هذا الحساب على أية حقول مُعدّلة.
 
-
 #_____________________________________=Please Note: There are bulletins that have not been sent to a server.  Do you still want to exit?
 -d0f3-field:confirmUploadRemindercause=ملاحظة: توجد نشرات بمجلد الصادر لم يتم إرسالها لخادم بعد. هل مازلت تريد الإنهاء. 
 
@@ -1384,7 +1376,6 @@
 
 #_________________________________________________=Clicking on Yes will delete all of your bulletins and continue to load Martus.  Clicking on No will exit Martus so you can try to recover or repair this file manually.
 -20ee-field:confirmWarnMissingAccountMapFileeffect=بالنقر على نعم سيتم حذف جميع نشراتك و سيستمر تحميل  Martus. بالنقر على لا سيتم غلق Martus حتى يتسنى لك استرجاع أو إصلاح هذا الملف يدويا. 
-
 
 #__________________________________________________________________=Warning: acctmap.txt.sig file is missing or is corrupt in your account's packets directory.  If you have just upgraded to a new version of Martus this warning is harmless and you should click on No.  Otherwise this may indicate someone has tried to tamper with your data or could be caused by a hardware error.
 -e1b1-field:confirmWarnMissingOrCorruptAccountMapSignatureFilecause=تحذير: لقد ضاع أو تم إتلاف ملف acctmap.txt.sig الموجود في مجلد packets بحسابك. إذا كنت قد قمت بتحديث إصدار Martus بإصدار جديد فلا تعبأ بهذا التحذير و ينبغي عليك النقر على لا. و إلاّ فقد يُشير ذلك إلى أن شخصا حاول العبث ببياناتك أو أن هناك مشكلة بمكونات جهازك الصلبة. 
@@ -1566,6 +1557,9 @@
 #____________________________________________=An unexpected error occurred in generating the key backup files.
 -d237-field:notifyErrorBackingUpKeySharecause=حدثت مشكلة غير متوقعة أثناء تكوين الملفات الاحتياطية لشفرتي الدخول. 
 
+#_____________________________________=An error has occurred, which may have prevented Martus from saving some configuration information. You may see a warning next time you log in.
+-cad7-field:notifyErrorDuringExitcause=وقع خطأ يجوز أن يكون قد منع مارتوس من حفظ بعض ملعومات الإعداد. قد ترى نصا تحذيريا في المرة القادمة التي تسجل فيها دخولك. 
+
 #_________________________________________________________=There was an error saving your template.
 -88ed-field:notifyErrorExportingCustomizationTemplatecause=توجد مشكلة في حفظ قالبك.
 
@@ -1592,8 +1586,6 @@
 
 #_________________________________________=An error prevented the bulletin from being saved. Check to make sure the disk is not full or write protected.
 -f4c4-field:notifyErrorSavingBulletincause=حدثت مشكلة أثناء حفظ النشرة. تأكد أن القرص به مساحة فارغة و أنه مسموح بالكتابة عليه.
-
-
 
 #_______________________________________=Unable to save configuration file.
 -896e-field:notifyErrorSavingConfigcause=غير قادر على حفظ ملف التهيئة. 
@@ -1706,7 +1698,6 @@
 #_________________________________________=Successfully saved Report
 -45d7-field:notifyPrintToDiskCompletecause=تم حفظ التقرير بنحاح
 
-
 #________________________________________=To print one or more bulletins, select them first, and then perform the print operation.
 -3298-field:notifyPrintZeroBulletinscause=لطباعة نشرة واحدة أو أكثر قم بتحديد النشرات ثم قم بعملية الطباعة.
 
@@ -1755,12 +1746,10 @@
 #___________________________________=An error has occurred while retrieving a bulletin.
 -6201-field:notifyRetrieveErrorcause=حدث مشكلة ما أثناء استرجاع النشرة
 
-
 #__________________________________________________=A retrieve was in progress when you upgraded to a newer version of Martus. That retrieve will be canceled, so you should re-select any bulletins that had not yet been retrieved.
 -28ae-field:notifyRetrieveFileDataVersionErrorcause=كان استرجاع جاري لما قمت بترقية مارتوس لإصدار جديد. سيتم إلغاء هذا الاسترجاع، ولذلك عليك اختيار أي نشرات لم يتم استرجاعها بعد.
 
 #_______________________________________=An error has prevented Martus from continuing the retrieve that was in progress. You should re-select any bulletins that had not yet been retrieved.
-
 -8149-field:notifyRetrieveFileErrorcause=منع خطأ ما مارتوس من متابعة عملية الاسترجاع التي كانت جارية. عليك إعادة اختيار أية نشرات لم يتم استرجاعها بعد.
 
 #________________________________________=A retrieve is already in progress. You cannot start another retrieve until that one has finished.
@@ -1779,7 +1768,6 @@
 -0398-field:notifyRewriteKeyPairSavedcause=تم حفظ اسم المستخدم و كلمة المرور الخاصيّن بك بنجاح. 
 
 #__________________________________=Sorry, no bulletins were found.
-
 -5bd8-field:notifySearchFailedcause=نأسف، لم يتم العثور على نشرات.
 
 #_____________________________________=The Server Public Code does not match the one you entered.
@@ -1849,7 +1837,6 @@
 -3dbb-field:notifyretrievenothingcause=لم يتم اختيار أية نشرات 
 
 #____________________________________=All of the selected bulletins were successfully retrieved from the server
-
 -824a-field:notifyretrieveworkedcause=تم استرجاع جميع النشرات المُختارة من الخادم بنجاح 
 
 #______________________________=The Server has been selected.
@@ -1865,7 +1852,6 @@
 -5192-field:organization=المنظمة 
 
 #___________________=Password
-
 -8be3-field:password=كلمة المرور 
 
 #____________________=Password
@@ -1886,6 +1872,9 @@
 #________________________________=Prevent creating public bulletins
 -7c9e-field:preferencesAllPrivate=منع إنشاء نشرات عامة
 
+#_______________________________________________=Automatically check for new Field Desk bulletins
+-b3bc-field:preferencesCheckFieldOfficeBulletins= تحقق تلقائيا من وجود نشرات مكتب الموقع
+
 #______________________=Private
 -237d-field:privateinfo=خاص 
 
@@ -1904,10 +1893,15 @@
 #_______________________________________=For security reasons, we must validate your username and password.
 -0381-field:securityServerConfigValidate=لأسباب أمنية، يجب التحقق من اسم المستخدم الخاص بك و كلمة مرورك.
 
-
 #_________________=Status
 -bae7-field:status=وضع
 
+#___________________________________________________=Checking for new Field Desk bulletins...
+-4026-field:statusCheckingForNewFieldOfficeBulletins= جاري التحقق من نشرات مكتب الموقع...
+
+#________________________________________=New Field Desk bulletins found on server
+-eddc-field:statusNewFieldOfficeBulletins= تم العثور على نشرات جديدة لمكتب الموقع في الخادم
+ 
 #__________________=Summary
 -12b7-field:summary=ملخص
 
@@ -1920,8 +1914,8 @@
 #________________=Title
 -768e-field:title=العنوان 
 
-#_____________________________=Arabic 3.0 
--649d-field:translationVersion= 3.0  العربية    
+#_____________________________=Arabic 3.1
+-649d-field:translationVersion= 3.1  العربية     
 
 #___________________=Username
 -84c2-field:username=اسم المستخدم 
@@ -1957,7 +1951,6 @@
 -711f-field:warningUnofficialTranslation= تحذير: لم يقم فريق Martus بهذه الترجمة و لذا فقد لا يُعتد بها.\n إذا أردت أن تستخدم ترجمات رسمية، قم بالخروج من Martus ثم قم بإزالة الملف #UseUnofficialTranslationFiles# من مجلد Martus ثم أعد تشغيل البرنامج من جديد. 
 
 #__________________=Web Page
-
 -0163-field:webpage=صفحة ويب
 
 #_____________________________=Damaged Bulletins
@@ -1981,7 +1974,6 @@
 #______________________________________________=Field Desk Draft Bulletins
 -204a-folder:%RetrievedFieldOfficeBulletinDraft=مسودات مكتب الموقع 
 
-
 #________________________________=Retrieved Bulletins
 -6539-folder:%RetrievedMyBulletin=النشرات المُسترجعة
 
@@ -1991,7 +1983,6 @@
 #__________________________=Search Results
 -5e05-folder:%SearchResults=نتائج البحث 
 
-
 #_________________=Saved Bulletins
 -da0b-folder:%Sent=   النشرات المحفوظة 
 
@@ -2000,7 +1991,6 @@
 
 #_______________=or
 -1758-keyword:or=أو 
-
 
 #_______________=-Other-
 -d367-language:?=-لغة أخرى- 
@@ -2063,7 +2053,6 @@
 -b9fe-language:kk=الكازاخستانية 
 
 #________________=Khmer
-
 -3db4-language:km=الخميرية
 
 #________________=Kannada
@@ -2117,7 +2106,6 @@
 #________________=Sindhi
 -e033-language:sd=السندية 
 
-
 #________________=Sinhalese
 -6d55-language:si=السينهالية
 
@@ -2169,7 +2157,6 @@
 #___________________________=Create New Bulletin
 -d799-menu:CreateNewBulletin=إنشاء نشرة جديدة 
 
-
 #_________________________=Create New Folder
 -a0d8-menu:CreateNewFolder=إنشاء مجلد جديد
 
@@ -2178,7 +2165,6 @@
 
 #______________________=Cut Bulletin(s)
 -33c2-menu:CutBulletins=قص نشرة(ات)
-
 
 #____________________________________=Default Details Field Content
 -8ae0-menu:DefaultDetailsFieldContent=محتوى حقل التفاصيل التلقائية 
@@ -2211,7 +2197,6 @@
 -1ee2-menu:OrganizeFolders=ترتيب الملفات
 
 #________________________=Paste Bulletin(s)
-
 -178b-menu:PasteBulletins=لصق نشرة(ات)
 
 #_____________________=Preferences
@@ -2235,13 +2220,10 @@
 #_________________________=Resend Bulletin(s)
 -21a8-menu:ResendBulletins= إعادة إرسال النشرة(ات)
 
-
 #__________________________________=Retrieve Field Desk Draft Bulletins
-
 -a45d-menu:RetrieveHQDraftBulletins=استرجاع مسودات الموقع
 
 #___________________________________=Retrieve Field Desk Sealed Bulletins
-
 -2e56-menu:RetrieveHQSealedBulletins=استرجاع نشرات الموقع المختومة 
 
 #___________________________________=Retrieve My Draft Bulletins
@@ -2259,10 +2241,8 @@
 #______________________________=View My Account Details
 -264b-menu:ViewMyAccountDetails=استعرض تفاصيل حسابي
 
-
 #_______________=About Martus
 -ceff-menu:about=عن Martus
-
 
 #________________________________=Change User Name or Password
 -08e8-menu:changeUserNamePassword=تغيير اسم المستخدم أو كلمة المرور 
@@ -2334,7 +2314,6 @@
 -6c49-month:Persian11=الباهمانية
 
 #____________________=Esfand
-
 -7179-month:Persian12=الاصفاندية
 
 #___________________=Ordibehesht
@@ -2370,12 +2349,10 @@
 #_________________=Nov
 -bb9b-month:Thai11=نوفمبر
 
-
 #_________________=Dec
 -997f-month:Thai12=ديسمبر
 
 #________________=Feb
-
 -dc84-month:Thai2=فبراير
 
 #________________=Mar
@@ -2439,7 +2416,6 @@
 -23d3-status:draft= مسودة 
 
 #__________________=Sealed
-
 -66c9-status:sealed= مختومة 
 
 #_________________________=Account Information
@@ -2447,7 +2423,6 @@
 
 #______________________________________=Backup Key Information
 -f733-wintitle:BackupKeyPairGeneralInfo=نسخ احتياطي لمعلومات شفرة الدخول 
-
 
 #___________________________________________________=Backup Key Information 
 -53df-wintitle:BackupKeyPairToSecretShareInformation= نسخ احتياطي لمعلومات شفرة الدخول 
@@ -2502,7 +2477,6 @@
 
 #_______________________________=Customize Fields Error
 -41ec-wintitle:ErrorCustomFields= مشكلة تعديل حقول
-
 
 #_______________________________=Date Invalid
 -3af5-wintitle:ErrorDateInFuture=تاريخ غير صالح 
@@ -2613,7 +2587,6 @@
 -b7aa-wintitle:RetrieveHQDraftBulletinProgress=جاري استرجاع النشرات 
 
 #______________________________________________=Retrieving Bulletin Summaries
-
 -2a45-wintitle:RetrieveHQDraftBulletinSummaries=استرجاع ملخصات النشرات
 
 #______________________________________=Retrieve Field Desk Draft Bulletins
@@ -2629,7 +2602,6 @@
 -2e56-wintitle:RetrieveHQSealedBulletins=استرجاع نشرات مكتب الموقع المختومة
 
 #_____________________________________________=Retrieving Bulletins
-
 -b7aa-wintitle:RetrieveMyDraftBulletinProgress=جاري استرجاع النشرات
 
 #______________________________________________=Retrieving Bulletin Summaries
@@ -2647,7 +2619,6 @@
 #_______________________________________=Retrieve My Sealed Bulletins
 -68b9-wintitle:RetrieveMySealedBulletins=استرجاع نشراتي المختومة  
 
-
 #_______________________________=Reports
 -88bc-wintitle:RunOrCreateReport=تقارير
 
@@ -2655,7 +2626,6 @@
 -de04-wintitle:SaveRecoverShareKeyPairOf=من
 
 #__________________________=Save Report Format As...
-
 -8c3d-wintitle:SaveReportAs=أحفظ التقرير في تنسيق...
 
 #________________________=Save Search
@@ -2666,7 +2636,6 @@
 
 #______________________________=Server Compliance Statement
 -20f8-wintitle:ServerCompliance=بيان توافق الخادم 
-
 
 #________________________=Server News: Message #CurrentNewsItem# of #MaxNewsItems#
 -7177-wintitle:ServerNews=أخبار الخادم: رسالة #CurrentNewsItem# من #MaxNewsItems#
@@ -2699,7 +2668,6 @@
 -3b7c-wintitle:confirmCancelBackupRecovery=إلغاء استعادة الملف الاحتياطي 
 
 #_________________________________________=Cancel Modify Bulletin
-
 -276b-wintitle:confirmCancelModifyBulletin=إلغاء تعديل النشرة 
 
 #___________________________________=Cancel Retrieve
@@ -2789,6 +2757,9 @@
 #_________________________________=Delete All Data and Remove Martus
 -6fef-wintitle:confirmRemoveMartus= حذف جميع البيانات و إزالة Martus
 
+#_________________________________________=All Bulletins Private
+-e4e5-wintitle:confirmReportIncludePrivate=جميع النشرات خاصة
+
 #_____________________________________________________=Request to Send Contact Info to Server
 -4f40-wintitle:confirmRequestToSendContactInfoToServer=طلب إرسال معلومات الاتصال للخادم 
 
@@ -2810,7 +2781,6 @@
 #________________________________________________________=Bulletin Already Exists
 -c839-wintitle:confirmUnAuthoredBulletinDeleteBeforePaste= النشرة موجودة بالفعل
 
-
 #__________________________________________________=Unable to Restore from Backup File
 -79e5-wintitle:confirmUnableToRecoverFromBackupFile=غير قادر على استعادة الملف من النسخة الاحتياطية
 
@@ -2825,7 +2795,6 @@
 
 #__________________________________________________=Custom Fields Selection
 -0b6f-wintitle:confirmUseBulletinsDraftCustomFields=تحديد الحقول المخصصة
-
 
 #______________________________________________=Accountmap File Missing Or Corrupt
 -e8e7-wintitle:confirmWarnMissingAccountMapFile=ملف Accountmap ضائع أو تالف
@@ -2857,10 +2826,8 @@
 #________________________________=Search Text Not Found
 -daf7-wintitle:helpStringNotFound=لم يتم العثور على نص البحث 
 
-
 #_______________________________=Customize Fields
 -1cb1-wintitle:inputCustomFields=تحوير حقول 
-
 
 #____________________________________=Export My Public Account Id
 -2b8a-wintitle:inputExportMyPublicKey=تصدير هوية حسابي العام 
@@ -2893,7 +2860,6 @@
 -cfce-wintitle:notifyAlreadyRunning=Martus يعمل بالفعل
 
 #_____________________________________________=Bulletin Version Already Being Viewed
-
 -c778-wintitle:notifyAlreadyViewingThisVersion= هذه النسخة من النشرة يتم استعراضها الآن بالفعل
 
 #______________________________________=Attachment Chosen Not a File
@@ -2938,9 +2904,11 @@
 #______________________________=Error Moving Bulletin(s)
 -4cd9-wintitle:notifyDropErrors=حدثت مشكلة أثناء نقل النشرة(ات)
 
-
 #__________________________________________=Error Backing Up Key
 -ee40-wintitle:notifyErrorBackingUpKeyShare=حدثت مشكلة أثناء النسخ الاحتياطي لشفرتي الدخول 
+
+#___________________________________=Error During Exit
+-e05d-wintitle:notifyErrorDuringExit=خطأ أثناء الخروج
 
 #_______________________________________________________=Error Exporting Template
 -f4cc-wintitle:notifyErrorExportingCustomizationTemplate=حدثت مشكلة في تصدير القالب
@@ -2965,7 +2933,6 @@
 
 #___________________________________________=Unable to Rename Folder
 -1ce2-wintitle:notifyErrorRenameFolderExists= غير قادر على إعادة تسمية المجلد 
-
 
 #_______________________________________=Error Saving
 -9dc8-wintitle:notifyErrorSavingBulletin=حدثت مشكلة أثناء الحفظ 
@@ -3070,7 +3037,6 @@
 -27cd-wintitle:notifyPreviewNoBulletinsSelected=لم يتم اختيار أية نشرة
 
 #__________________________________________=Preview One Bulletin Only
-
 -5b0a-wintitle:notifyPreviewOneBulletinOnly=استعرض نشرة واحدة فقط 
 
 #__________________________________=Reports
@@ -3087,7 +3053,6 @@
 
 #_________________________________________________________________________=Restore Succeeded
 -7352-wintitle:notifyRecoveredKeyShareSucceededNewUserNamePasswordRequired=تمت الاستعادة بنجاح 
-
 
 #_____________________________________________=Successful Key Restore
 -b5ca-wintitle:notifyRecoveryOfKeyPairComplete=تمت استعادة شفرتي الدخول بنجاح 
@@ -3126,7 +3091,6 @@
 -653b-wintitle:notifyRetrieveCompleted=تم استكمال الاسترجاع
 
 #_________________________________=Retrieve Error
-
 -8ed0-wintitle:notifyRetrieveError=خطأ في الاسترجاع
 
 #________________________________________________=Warning
@@ -3137,8 +3101,6 @@
 
 #______________________________________=Retrieve In Progress
 -6983-wintitle:notifyRetrieveInProgress=جاري الاسترجاع
-
-
 
 #__________________________________________________=Unable To Preview
 -061a-wintitle:notifyRetrievePreviewNotAvailableYet=تعذرت المعاينة
@@ -3181,6 +3143,7 @@
 
 #_______________________________________________________=Unable to Send Bulletin To Server
 -2c28-wintitle:notifyUploadFailedBulletinNotSentToServer=غير قادر على إرسال النشرة إلى الخادم
+
 #_____________________________________=User Already Exists
 -eecc-wintitle:notifyUserAlreadyExists=المستخدم موجود بالفعل 
 
