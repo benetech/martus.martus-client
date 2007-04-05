@@ -2266,6 +2266,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		
 		try
 		{
+			System.out.println("Saving state");
 			saveState();
 			getStore().prepareToExitNormally();
 			System.out.println("exitNormally:");
