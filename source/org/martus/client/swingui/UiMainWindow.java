@@ -380,14 +380,13 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	
 	private void loadFieldSpecCache()
 	{
-		System.out.print("loadFieldSpecCache...");
-		System.out.flush();
+		MartusLogger.logBeginProcess("loadFieldSpecCache");
 		if(!getStore().loadFieldSpecCache())
 		{
 			notifyDlg(this, "CreatingFieldSpecCache");
 			getStore().createFieldSpecCacheFromDatabase();
 		}
-		System.out.println("Complete");
+		MartusLogger.logEndProcess("loadFieldSpecCache");
 	}
 	
 	private void createBackgroundUploadTasks()
@@ -604,16 +603,15 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 
 	private boolean loadFoldersAndBulletins()
 	{
-		System.out.print("Scanning for unreadable bulletins...");
-		System.out.flush();
+		MartusLogger.logBeginProcess("quarantineUnreadableBulletins");
 		int quarantineCount = app.quarantineUnreadableBulletins();
-		System.out.println("Complete");
+		MartusLogger.logEndProcess("quarantineUnreadableBulletins");
 		if(quarantineCount > 0)
 			notifyDlg("FoundDamagedBulletins");
 
-		MartusLogger.logPartialLine("Loading folders...");
+		MartusLogger.logBeginProcess("loadFolders");
 		app.loadFolders();
-		MartusLogger.logRestOfLine("Complete");
+		MartusLogger.logEndProcess("loadFolders");
 		if(getStore().needsFolderMigration())
 		{
 			if(!confirmDlg("NeedsFolderMigration"))
@@ -630,9 +628,9 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 			}
 		}
 		
-		MartusLogger.logPartialLine("Scanning for orphans...");
+		MartusLogger.logBeginProcess("repairOrphans");
 		int orphanCount = app.repairOrphans();
-		MartusLogger.logRestOfLine("Complete");
+		MartusLogger.logEndProcess("repairOrphans");
 		if(orphanCount > 0)
 			notifyDlg("FoundOrphans");
 
@@ -2279,8 +2277,9 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		
 		try
 		{
-			System.out.println("Saving state");
+			MartusLogger.logBeginProcess("saveState");
 			saveState();
+			MartusLogger.logEndProcess("saveState");
 			getStore().prepareToExitNormally();
 			System.out.println("exitNormally:");
 			System.out.println("    verifyPacket: " + Packet.callsToVerifyPacketSignature + 
@@ -2453,8 +2452,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 			if(!hasTimedOut())
 				return;
 			
-			System.out.print("Timed out...");
-			System.out.flush();
+			MartusLogger.logBeginProcess("Save before timeout");
 			try
 			{
 				getStore().prepareToExitNormally();
@@ -2463,7 +2461,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 			{
 				e.printStackTrace();
 			}
-			System.out.println("Inactive");
+			MartusLogger.logEndProcess("Save before timeout");
 			
 			try 
 			{

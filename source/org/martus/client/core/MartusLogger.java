@@ -26,6 +26,9 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.core;
 
 import java.io.PrintStream;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class MartusLogger 
 {
@@ -34,28 +37,23 @@ public class MartusLogger
 		destination = null;
 	}
 	
-	public static void logPartialLine(String text)
+	public static void logBeginProcess(String text)
 	{
-		if(destination != null)
-		{
-			destination.print(text);
-			destination.flush();
-		}
+		log("Begin " + text);
 	}
 	
-	public static void logRestOfLine(String text)
+	public static void logEndProcess(String text)
 	{
-		if(destination != null)
-		{
-			destination.println(text);
-		}
+		log("End " + text);
 	}
 
 	public static void log(String text)
 	{
 		if(destination != null)
 		{
-			destination.println(text);
+			Date now = new Date();
+			DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			destination.println(df.format(now) + " " + text);
 		}
 	}
 	

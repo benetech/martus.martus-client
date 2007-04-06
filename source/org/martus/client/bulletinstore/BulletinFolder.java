@@ -273,7 +273,7 @@ public class BulletinFolder
 			int sorterDir;
 		}
 	
-		MartusLogger.logPartialLine("Sorting folder...");
+		MartusLogger.logBeginProcess("sortFolder " + name);
 		Object[] uids = rawIdList.toArray(); 
 		if(canSort() && sortTag.length() > 0)
 			Arrays.sort(uids, new Sorter(sortTag, sortDir));
@@ -281,7 +281,7 @@ public class BulletinFolder
 		sortedIdList = new Vector();
 		for(int i = 0; i < uids.length; ++i)
 			sortedIdList.add(uids[i]);
-		MartusLogger.logRestOfLine("Complete");
+		MartusLogger.logEndProcess("sortFolder");
 	}
 
 	private void needSortedIdList()
