@@ -71,6 +71,7 @@ import org.martus.client.bulletinstore.ClientBulletinStore;
 import org.martus.client.core.BackgroundUploader;
 import org.martus.client.core.ConfigInfo;
 import org.martus.client.core.MartusApp;
+import org.martus.client.core.MartusLogger;
 import org.martus.client.core.RetrieveCommand;
 import org.martus.client.core.SortableBulletinList;
 import org.martus.client.core.TransferableBulletinList;
@@ -379,13 +380,14 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	
 	private void loadFieldSpecCache()
 	{
-		System.out.println("loadFieldSpecCache");
+		System.out.print("loadFieldSpecCache...");
+		System.out.flush();
 		if(!getStore().loadFieldSpecCache())
 		{
 			notifyDlg(this, "CreatingFieldSpecCache");
 			getStore().createFieldSpecCacheFromDatabase();
 		}
-		System.out.println("done with loadFieldSpecCache");
+		System.out.println("Complete");
 	}
 	
 	private void createBackgroundUploadTasks()
@@ -602,11 +604,16 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 
 	private boolean loadFoldersAndBulletins()
 	{
+		System.out.print("Scanning for unreadable bulletins...");
+		System.out.flush();
 		int quarantineCount = app.quarantineUnreadableBulletins();
+		System.out.println("Complete");
 		if(quarantineCount > 0)
 			notifyDlg("FoundDamagedBulletins");
 
+		MartusLogger.logPartialLine("Loading folders...");
 		app.loadFolders();
+		MartusLogger.logRestOfLine("Complete");
 		if(getStore().needsFolderMigration())
 		{
 			if(!confirmDlg("NeedsFolderMigration"))
@@ -623,7 +630,9 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 			}
 		}
 		
+		MartusLogger.logPartialLine("Scanning for orphans...");
 		int orphanCount = app.repairOrphans();
+		MartusLogger.logRestOfLine("Complete");
 		if(orphanCount > 0)
 			notifyDlg("FoundOrphans");
 
@@ -767,6 +776,8 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	public void folderSelectionHasChanged(BulletinFolder f)
 	{
 		setWaitingCursor();
+		if(defaultFoldersUnsorted)
+			f.sortBy("");
 		table.setFolder(f);
 		resetCursor();
 	}
@@ -1090,6 +1101,8 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		try
 		{
 			String sortTag = uiState.getCurrentSortTag();
+			if(defaultFoldersUnsorted)
+				sortTag = "";
 			folder.sortBy(sortTag);
 			if(folder.getSortDirection() != uiState.getCurrentSortDirection())
 				folder.sortBy(sortTag);
@@ -2612,6 +2625,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	private static final int BACKGROUND_UPLOAD_CHECK_MILLIS = 5*1000;
 	private static final int BACKGROUND_TIMEOUT_CHECK_EVERY_X_MILLIS = 5*1000;
 	private static final int TIME_BETWEEN_FIELD_OFFICE_CHECKS_SECONDS = 60 * 60;
+	public static boolean defaultFoldersUnsorted;
 
 	private boolean mainWindowInitalizing;
 	private boolean createdNewAccount;

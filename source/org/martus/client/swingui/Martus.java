@@ -27,6 +27,8 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.swingui;
 
 import java.awt.Toolkit;
+import java.util.Arrays;
+import java.util.Vector;
 
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
@@ -53,22 +55,33 @@ class Martus
 		System.out.println(UiConstants.programName);
 		System.out.println(UiConstants.versionLabel + " " + VersionBuildDate.getVersionBuildDate());
 
-		if(args.length >0)
+		Vector options = new Vector(Arrays.asList(args));
+		int foundTestAll = options.indexOf("--testall");
+		if(foundTestAll < 0)
+			foundTestAll = options.indexOf("-testall");
+		if(foundTestAll >= 0)
 		{
-			if(args.length == 1 && args[0].compareToIgnoreCase("-testall")==0)
-			{
-				org.martus.common.test.TestCommon.runTests();
-				org.martus.client.test.TestAll.runTests();
-				System.exit(0);
-			}
-			else
-			{
-				System.out.println("Incorrect command line parameter");
-				System.out.println("The only valid optional commands is:");
-				System.out.println("-testall");
-				System.exit(1);
-			}
+			org.martus.common.test.TestCommon.runTests();
+			org.martus.client.test.TestAll.runTests();
+			System.exit(0);
 		}
+		
+		int foundFoldersUnsorted = options.indexOf("--folders-unsorted");
+		if(foundFoldersUnsorted >= 0)
+		{
+			UiMainWindow.defaultFoldersUnsorted = true;
+			options.remove(foundFoldersUnsorted);
+		}
+		
+		if(options.size() > 0)
+		{
+			System.out.println("Incorrect command line parameter");
+			System.out.println("The only valid options are:");
+			System.out.println("--testall");
+			System.out.println("--folders-unsorted");
+			System.exit(1);
+		}
+		
 		try
 		{
 			if(Utilities.isMSWindows())
