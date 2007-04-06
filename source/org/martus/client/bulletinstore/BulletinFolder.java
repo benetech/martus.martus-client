@@ -32,7 +32,9 @@ import java.util.Comparator;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.Vector;
+
 import org.martus.client.bulletinstore.ClientBulletinStore.BulletinAlreadyExistsException;
+import org.martus.client.core.MartusLogger;
 import org.martus.clientside.UiLocalization;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.database.DatabaseKey;
@@ -270,14 +272,16 @@ public class BulletinFolder
 			String sorterTag;
 			int sorterDir;
 		}
-		
+	
+		MartusLogger.logPartialLine("Sorting folder...");
 		Object[] uids = rawIdList.toArray(); 
-		if(canSort())
+		if(canSort() && sortTag.length() > 0)
 			Arrays.sort(uids, new Sorter(sortTag, sortDir));
 
 		sortedIdList = new Vector();
 		for(int i = 0; i < uids.length; ++i)
 			sortedIdList.add(uids[i]);
+		MartusLogger.logRestOfLine("Complete");
 	}
 
 	private void needSortedIdList()
