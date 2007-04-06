@@ -1,10 +1,10 @@
 ﻿# Martus Client Translation File
 # Language code:  ar
 # Language name:  Arabic
-# Translated by:  
-# Exported date:  Tue Mar 27 17:30:20 PDT 2007
-# Client version: post 3.0 internal
-# Client build:   20070323.1804
+# Translated by:  MID Foundation; Localize; Mounaim Elkhezzani 
+# Exported date:  Thu Apr 05 16:50:11 PDT 2007
+# Client version: 3.1-RC
+# Client build:   20070405.1810
 #
 # This file MUST be saved in UTF-8 format!
 # Lines beginning with # are comments and are ignored by Martus
@@ -1558,7 +1558,7 @@
 -d237-field:notifyErrorBackingUpKeySharecause=حدثت مشكلة غير متوقعة أثناء تكوين الملفات الاحتياطية لشفرتي الدخول. 
 
 #_____________________________________=An error has occurred, which may have prevented Martus from saving some configuration information. You may see a warning next time you log in.
--cad7-field:notifyErrorDuringExitcause=وقع خطأ يجوز أن يكون قد منع مارتوس من حفظ بعض ملعومات الإعداد. قد ترى نصا تحذيريا في المرة القادمة التي تسجل فيها دخولك. 
+-117c-field:notifyErrorDuringExitcause=وقع خطأ يجوز أن يكون قد منع مارتوس من حفظ بعض ملعومات الإعداد. قد ترى نصا تحذيريا في المرة القادمة التي تسجل فيها دخولك. 
 
 #_________________________________________________________=There was an error saving your template.
 -88ed-field:notifyErrorExportingCustomizationTemplatecause=توجد مشكلة في حفظ قالبك.
@@ -1873,7 +1873,7 @@
 -7c9e-field:preferencesAllPrivate=منع إنشاء نشرات عامة
 
 #_______________________________________________=Automatically check for new Field Desk bulletins
--b3bc-field:preferencesCheckFieldOfficeBulletins= تحقق تلقائيا من وجود نشرات مكتب الموقع
+-982a-field:preferencesCheckFieldOfficeBulletins= تحقق تلقائيا من وجود نشرات مكتب الموقع
 
 #______________________=Private
 -237d-field:privateinfo=خاص 
@@ -1897,11 +1897,11 @@
 -bae7-field:status=وضع
 
 #___________________________________________________=Checking for new Field Desk bulletins...
--4026-field:statusCheckingForNewFieldOfficeBulletins= جاري التحقق من نشرات مكتب الموقع...
+-68ab-field:statusCheckingForNewFieldOfficeBulletins= جاري التحقق من نشرات مكتب الموقع...
 
 #________________________________________=New Field Desk bulletins found on server
--eddc-field:statusNewFieldOfficeBulletins= تم العثور على نشرات جديدة لمكتب الموقع في الخادم
- 
+-a71e-field:statusNewFieldOfficeBulletins= تم العثور على نشرات جديدة لمكتب الموقع في الخادم
+
 #__________________=Summary
 -12b7-field:summary=ملخص
 
@@ -1915,7 +1915,7 @@
 -768e-field:title=العنوان 
 
 #_____________________________=Arabic 3.1
--649d-field:translationVersion= 3.1  العربية     
+-649d-field:translationVersion= العربية 3.1 
 
 #___________________=Username
 -84c2-field:username=اسم المستخدم 
