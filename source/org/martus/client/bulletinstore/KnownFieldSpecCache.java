@@ -44,6 +44,7 @@ import java.util.Vector;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.martus.client.core.MartusLogger;
 import org.martus.common.FieldSpecCollection;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.bulletinstore.BulletinStoreCache;
@@ -140,6 +141,7 @@ public class KnownFieldSpecCache extends BulletinStoreCache implements ReadableD
 	
 	synchronized public void saveToStream(OutputStream out) throws Exception
 	{
+		MartusLogger.log("Inside KnownFieldSpecCache.saveToStream");
 		byte[] plainBytes = getCacheAsBytes();
 		byte[] bundle = security.createSignedBundle(plainBytes);
 		DataOutputStream dataOut = new DataOutputStream(out);
@@ -430,6 +432,7 @@ public class KnownFieldSpecCache extends BulletinStoreCache implements ReadableD
 
 	synchronized public void loadFromStream(InputStream in) throws Exception
 	{
+		MartusLogger.log("Inside KnownFieldSpecCache.loadFromStream");
 		DataInputStream dataIn = new DataInputStream(in);
 		try
 		{

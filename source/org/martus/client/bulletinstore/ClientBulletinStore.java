@@ -45,6 +45,7 @@ import java.util.Vector;
 import java.util.zip.ZipFile;
 
 import org.martus.client.core.MartusClientXml;
+import org.martus.client.core.MartusLogger;
 import org.martus.client.swingui.bulletintable.BulletinTableModel;
 import org.martus.common.MartusUtilities;
 import org.martus.common.MartusXml;
@@ -127,8 +128,14 @@ public class ClientBulletinStore extends BulletinStore
 
 	public void prepareToExitNormally() throws Exception
 	{
+		MartusLogger.logBeginProcess("saveSessionKeyCache");
 		saveBulletinDataCache();
+		MartusLogger.logEndProcess("saveSessionKeyCache");
+
+		MartusLogger.logBeginProcess("saveFieldSpecCache");
 		saveFieldSpecCache();
+		MartusLogger.logEndProcess("saveFieldSpecCache");
+
 		getSignatureGenerator().flushSessionKeyCache();
 	}
 
