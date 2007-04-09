@@ -41,8 +41,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.Vector;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
 import org.martus.client.core.MartusLogger;
 import org.martus.common.FieldSpecCollection;
 import org.martus.common.bulletin.Bulletin;
@@ -163,9 +161,8 @@ public class KnownFieldSpecCache extends BulletinStoreCache implements ReadableD
 		try
 		{
 			dataOut.writeByte(FILE_VERSION);
-			JsonFieldSpecCache json = new JsonFieldSpecCache();
-			json.build();
-			json.writeTo(dataOut);
+			PersistableMap fieldSpecCache = createFieldSpecCacheMap();
+			fieldSpecCache.writeTo(dataOut);
 		}
 		finally
 		{
@@ -184,283 +181,111 @@ public class KnownFieldSpecCache extends BulletinStoreCache implements ReadableD
 	 *   		LocalId: Array of SpecCollection indexes: indexes
 	 */
 	
-	static class OurJsonObject extends JSONObject
+	public PersistableMap createFieldSpecCacheMap()
 	{
-		public OurJsonObject()
-		{
-			super();
-		}
-		
-		public OurJsonObject(DataInputStream dataIn) throws Exception
-		{
-			this(readJsonString(dataIn));
-		}
-		
-		public OurJsonObject(String jsonString) throws Exception
-		{
-			super(jsonString);
-		}
-		
-		public void clear()
-		{
-			Iterator keys = keys();
-			while(keys.hasNext())
-			{
-				String key = (String)keys.next();
-				remove(key);
-			}
-		}
-		
-		public void writeTo(DataOutputStream dataOut) throws IOException
-		{
-			String jsonString = toString();
+		HashMap allSpecs = new HashMap();
+		PersistableMap specIndexes = createSpecIndexesForAllBulletins(allSpecs);
 
-			dataOut.writeInt(jsonString.length());
-			for(int i = 0; i < jsonString.length(); ++i)
-				dataOut.writeChar(jsonString.charAt(i));
-
-		}
-		
-		private static String readJsonString(DataInputStream dataIn) throws IOException 
-		{
-			int length = dataIn.readInt();
-			StringBuffer jsonString = new StringBuffer(length);
-			for(int i = 0; i < length; ++i)
-				jsonString.append(dataIn.readChar());
-			return jsonString.toString();
-		}
-
-
+		PersistableMap map = new PersistableMap();
+		map.put(TAG_SPEC_INDEXES_FOR_ALL_ACCOUNTS, specIndexes);
+		map.put(TAG_ALL_SECTION_SPECS, createSpecCollectionVector(allSpecs));
+		return map;
 	}
 	
-	class OurJsonArray extends JSONArray
+	PersistableVector createSpecCollectionVector(Map allSpecs)
 	{
-		public OurJsonArray()
+		PersistableVector vector = new PersistableVector();
+		Iterator iter = allSpecs.keySet().iterator();
+		while(iter.hasNext())
 		{
-			super();
+			FieldSpecCollection fsc = (FieldSpecCollection)iter.next();
+			PersistableInt index = (PersistableInt)allSpecs.get(fsc);
+			vector.putAt(index.asInt(), createSpecCollectionVector(fsc));
 		}
 		
-		public OurJsonArray(String jsonString) throws Exception
-		{
-			super(jsonString);
-		}
-		
-		public void clear()
-		{
-			while(length() > 0)
-				removeAt(0);
-		}
+		return vector;
 	}
 	
-	class JsonFieldSpecCache extends OurJsonObject
+	PersistableVector createSpecCollectionVector(FieldSpecCollection fsc)
 	{
-		public JsonFieldSpecCache()
-		{
-			super();
-		}
-		
-		public JsonFieldSpecCache(String jsonString) throws Exception
-		{
-			super(jsonString);
-		}
-		
-		public JsonFieldSpecCache(DataInputStream dataIn) throws Exception 
-		{
-			super(dataIn);
-		}
+		PersistableVector vector = new PersistableVector();
+		for(int i = 0; i < fsc.size(); ++i)
+			vector.add(new PersistableString(fsc.get(i).toString()));
+		return vector;
+	}
 
-		public void build()
+	//	PersistableVector createSpecsCollection(FieldSpecCollection specs)
+//	{
+//		for(int spec = 0; spec < specs.size(); ++spec)
+//			add(new PersistableString(specs.get(spec).toString()));
+//	}
+//		
+//		public FieldSpecCollection getFieldSpecCollection() throws Exception
+//		{
+//			FieldSpecCollection specs = new FieldSpecCollection(length());
+//			for(int spec = 0; spec < specs.size(); ++spec)
+//				specs.set(spec, FieldSpec.createFromXml(getString(spec)));
+//			
+//			return specs;
+//		}
+//		
+//	}
+//	
+	PersistableMap createSpecIndexesForAllBulletins(HashMap allSpecs)
+	{
+		PersistableMap map = new PersistableMap();
+		
+		Collection accountIds = accountsToMapsOfLocalIdsToSetsOfSpecs.keySet();
+		Iterator iter = accountIds.iterator();
+		while(iter.hasNext())
 		{
-			clear();
-			put(TAG_VERSION, FILE_VERSION);
-			JsonAllFieldSpecs allSpecs = new JsonAllFieldSpecs();
-			allSpecs.build();
-			JsonSpecIndexesForAllBulletins specIndexes = new JsonSpecIndexesForAllBulletins();
-			specIndexes.build(allSpecs);
-			put(TAG_SPEC_INDEXES_FOR_ALL_ACCOUNTS, specIndexes);
-			put(TAG_ALL_SECTION_SPECS, allSpecs);
-			
+			String accountId = (String)iter.next();
+			PersistableMap specIndexesForAccount = createSpecIndexesForAccount(allSpecs, accountId);
+			map.put(accountId, specIndexesForAccount);
 		}
 		
-		public JsonAllFieldSpecs getAllFieldSpecs() throws Exception
-		{
-			return new JsonAllFieldSpecs(getJSONArray(TAG_ALL_SECTION_SPECS).toString());
-		}
-
-		public JsonSpecIndexesForAllBulletins getSpecIndexesForAllBulletins() throws Exception 
-		{
-			return new JsonSpecIndexesForAllBulletins(getJSONObject(TAG_SPEC_INDEXES_FOR_ALL_ACCOUNTS).toString());
-		}
+		return map;
 	}
 	
-	class JsonAllFieldSpecs extends OurJsonArray
+	PersistableMap createSpecIndexesForAccount(HashMap allSpecs, String accountId)
 	{
-		public JsonAllFieldSpecs()
+		PersistableMap map = new PersistableMap();
+		
+		Map localIdsToSetOfSpecs = (Map)accountsToMapsOfLocalIdsToSetsOfSpecs.get(accountId);
+		if(localIdsToSetOfSpecs == null)
+			return map;
+		
+		Collection localIds = localIdsToSetOfSpecs.keySet();
+		Iterator iter = localIds.iterator();
+		while(iter.hasNext())
 		{
-			super();
+			String localId = (String)iter.next();
+			FieldSpecCollection[] specs = (FieldSpecCollection[])localIdsToSetOfSpecs.get(localId);
+			if(specs == null)
+				specs = new FieldSpecCollection[0];
+			PersistableVector specIndexesForBulletin = createSpecIndexesForOneBulletin(allSpecs, specs);
+			map.put(localId, specIndexesForBulletin);
 		}
 		
-		public JsonAllFieldSpecs(String jsonString) throws Exception
+		return map;
+	}
+
+	PersistableVector createSpecIndexesForOneBulletin(HashMap allSpecs, FieldSpecCollection[] specCollections)
+	{
+		PersistableVector specIndexesForOnebulletin = new PersistableVector();
+		for(int i = 0; i < specCollections.length; ++i)
 		{
-			super(jsonString);
-		}
-		
-		public void build()
-		{
-			clear();
-			specCollectionToIndex = new HashMap();
-		}
-		
-		public int getIndexOf(FieldSpecCollection collection)
-		{
-			Integer index = (Integer)specCollectionToIndex.get(collection);
+			FieldSpecCollection thisSpecCollection = specCollections[i];
+			PersistableInt index = (PersistableInt)allSpecs.get(thisSpecCollection);
 			if(index == null)
 			{
-				index = new Integer(specCollectionToIndex.size());
-				specCollectionToIndex.put(collection, index);
-				JsonSpecsCollection jsonSpecsCollection = new JsonSpecsCollection();
-				jsonSpecsCollection.build(collection);
-				put(jsonSpecsCollection);
+				index = new PersistableInt(allSpecs.size());
+				allSpecs.put(thisSpecCollection, index);
 			}
-			return index.intValue();
+			specIndexesForOnebulletin.add(index);
 		}
 		
-		public JsonSpecsCollection getSpecsCollection(int index) throws Exception 
-		{
-			return new JsonSpecsCollection(getJSONArray(index));
-		}
-
-		Map specCollectionToIndex;
-
-	}
-
-	class JsonSpecsCollection extends OurJsonArray
-	{
-		public JsonSpecsCollection()
-		{
-			super();
-		}
-		
-		public JsonSpecsCollection(String jsonString) throws Exception
-		{
-			super(jsonString);
-		}
-		
-		public JsonSpecsCollection(JSONArray copyFrom)
-		{
-			this();
-			for(int i = 0; i < copyFrom.length(); ++i)
-				put(copyFrom.getString(i));
-		}
-		
-		public void build(FieldSpecCollection specs)
-		{	
-			clear();
-			for(int spec = 0; spec < specs.size(); ++spec)
-				put(specs.get(spec).toString());
-		}
-		
-		public FieldSpecCollection getFieldSpecCollection() throws Exception
-		{
-			FieldSpecCollection specs = new FieldSpecCollection(length());
-			for(int spec = 0; spec < specs.size(); ++spec)
-				specs.set(spec, FieldSpec.createFromXml(getString(spec)));
-			
-			return specs;
-		}
-		
-	}
-	
-	class JsonSpecIndexesForAllBulletins extends OurJsonObject
-	{
-		public JsonSpecIndexesForAllBulletins()
-		{
-			super();
-		}
-		
-		public JsonSpecIndexesForAllBulletins(String jsonString) throws Exception
-		{
-			super(jsonString);
-		}
-		
-		public void build(JsonAllFieldSpecs allSpecs)
-		{
-			Collection accountIds = accountsToMapsOfLocalIdsToSetsOfSpecs.keySet();
-			Iterator iter = accountIds.iterator();
-			while(iter.hasNext())
-			{
-				String accountId = (String)iter.next();
-				JsonSpecIndexesForOneAccount specIndexesForAccount = new JsonSpecIndexesForOneAccount();
-				specIndexesForAccount.build(allSpecs, accountId);
-				put(accountId, specIndexesForAccount);
-			}
-			
-		}
-
-		public JsonSpecIndexesForOneAccount getSpecIndexesForAccount(String accountId) throws Exception 
-		{
-			return new JsonSpecIndexesForOneAccount(getJSONObject(accountId).toString());
-		}
-	}
-	
-	class JsonSpecIndexesForOneAccount extends OurJsonObject
-	{
-		public JsonSpecIndexesForOneAccount()
-		{
-			super();
-		}
-		
-		public JsonSpecIndexesForOneAccount(String jsonString) throws Exception
-		{
-			super(jsonString);
-		}
-		
-		public void build(JsonAllFieldSpecs allSpecs, String accountId)
-		{
-			Map localIdsToSetOfSpecs = (Map)accountsToMapsOfLocalIdsToSetsOfSpecs.get(accountId);
-			if(localIdsToSetOfSpecs == null)
-				return;
-			
-			Collection localIds = localIdsToSetOfSpecs.keySet();
-			Iterator iter = localIds.iterator();
-			while(iter.hasNext())
-			{
-				String localId = (String)iter.next();
-				FieldSpecCollection[] specs = (FieldSpecCollection[])localIdsToSetOfSpecs.get(localId);
-				if(specs == null)
-					specs = new FieldSpecCollection[0];
-				JsonSpecIndexesForOneBulletin specIndexesForBulletin = new JsonSpecIndexesForOneBulletin();
-				specIndexesForBulletin.build(allSpecs, specs);
-				put(localId, specIndexesForBulletin);
-			}
-		}
-
-		public JsonSpecIndexesForOneBulletin getSpecIndexesForBulletin(String localId) throws Exception 
-		{
-			return new JsonSpecIndexesForOneBulletin(getJSONArray(localId).toString());
-		}
-	}
-	
-	class JsonSpecIndexesForOneBulletin extends OurJsonArray
-	{
-		public JsonSpecIndexesForOneBulletin()
-		{
-			super();
-		}
-		
-		public JsonSpecIndexesForOneBulletin(String jsonString) throws Exception
-		{
-			super(jsonString);
-		}
-		
-		public void build(JsonAllFieldSpecs allSpecs, FieldSpecCollection[] specCollections)
-		{
-			for(int i = 0; i < specCollections.length; ++i)
-			{
-				put(allSpecs.getIndexOf(specCollections[i]));
-			}
-			
-		}
+		return specIndexesForOnebulletin;
 	}
 
 	synchronized public void loadFromStream(InputStream in) throws Exception
@@ -490,8 +315,8 @@ public class KnownFieldSpecCache extends BulletinStoreCache implements ReadableD
 		{
 			if(dataIn.readByte() != FILE_VERSION)
 				throw new IOException("Bad version of field spec cache file");
-			JsonFieldSpecCache json = new JsonFieldSpecCache(dataIn);
-			populateCacheFromJson(json);
+			PersistableMap fieldSpecCacheMap = (PersistableMap)PersistableObject.createFrom(dataIn);
+			populateCacheFromJson(fieldSpecCacheMap);
 		}
 		finally
 		{
@@ -500,39 +325,56 @@ public class KnownFieldSpecCache extends BulletinStoreCache implements ReadableD
 		
 	}
 	
-	private void populateCacheFromJson(JsonFieldSpecCache json) throws Exception
+	private void populateCacheFromJson(PersistableMap fieldSpecCacheMap) throws Exception
 	{
-		if(json.getInt(TAG_VERSION) != FILE_VERSION)
-			throw new IOException("Bad version of field spec cache file");
-		
-		JsonAllFieldSpecs allSpecs = json.getAllFieldSpecs();
-		JsonSpecIndexesForAllBulletins specIndexesForAll = json.getSpecIndexesForAllBulletins();
-		Iterator accounts = specIndexesForAll.keys();
-		while(accounts.hasNext())
+		PersistableVector allSpecsVector = (PersistableVector)fieldSpecCacheMap.get(TAG_ALL_SECTION_SPECS);
+		HashMap allSpecs = new HashMap();
+		for(int i = 0; i < allSpecsVector.size(); ++i)
 		{
-			String accountId = (String)accounts.next();
-			JsonSpecIndexesForOneAccount specIndexesForAccount = specIndexesForAll.getSpecIndexesForAccount(accountId);
-			Iterator bulletins = specIndexesForAccount.keys();
-			while(bulletins.hasNext())
+			FieldSpecCollection fsc = rebuildFieldSpecCollection((PersistableVector)allSpecsVector.get(i));
+			allSpecs.put(new PersistableInt(i), fsc);
+		}
+		
+		
+		PersistableMap specIndexesForAll = (PersistableMap)fieldSpecCacheMap.get(TAG_SPEC_INDEXES_FOR_ALL_ACCOUNTS);
+
+		PersistableObject[] accounts = specIndexesForAll.keys();
+		for(int a = 0; a < accounts.length; ++a)
+		{
+			PersistableString accountId = (PersistableString)accounts[a];
+			PersistableMap specIndexesForAccount = (PersistableMap)specIndexesForAll.get(accountId);
+			PersistableObject[] localIds = specIndexesForAccount.keys();
+			for(int i = 0; i < localIds.length; ++i)
 			{
-				String localId = (String)bulletins.next();
-				JsonSpecIndexesForOneBulletin specIndexesForBulletin = specIndexesForAccount.getSpecIndexesForBulletin(localId);
+				PersistableString localId = (PersistableString)localIds[i];
+				PersistableVector specIndexesForBulletin = (PersistableVector)specIndexesForAccount.get(localId);
 				
-				FieldSpecCollection[] specsForBulletin = new FieldSpecCollection[specIndexesForBulletin.length()];
-				for(int i = 0; i < specIndexesForBulletin.length(); ++i)
+				FieldSpecCollection[] specsForBulletin = new FieldSpecCollection[specIndexesForBulletin.size()];
+				for(int s = 0; s < specIndexesForBulletin.size(); ++s)
 				{
-					int index = specIndexesForBulletin.getInt(i);
-					JsonSpecsCollection jsonSpecs = allSpecs.getSpecsCollection(index);
-					FieldSpecCollection specs = jsonSpecs.getFieldSpecCollection();
-					specsForBulletin[i] = specs;
+					PersistableInt index = (PersistableInt)specIndexesForBulletin.get(s);
+					specsForBulletin[s] = (FieldSpecCollection)allSpecs.get(index);
 				}
-				UniversalId uid = UniversalId.createFromAccountAndLocalId(accountId, localId);
+				UniversalId uid = UniversalId.createFromAccountAndLocalId(accountId.toString(), localId.toString());
 				setSpecs(uid, specsForBulletin);
 			}
 		}
 		
 	}
 	
+	private FieldSpecCollection rebuildFieldSpecCollection(PersistableVector vector) throws Exception 
+	{
+		Vector specs = new Vector();
+		for(int i = 0; i < vector.size(); ++i)
+		{
+			PersistableString specString = (PersistableString)vector.get(i);
+			specs.add(FieldSpec.createFromXml(specString.toString()));
+		}
+		
+		FieldSpec[] specArray = (FieldSpec[])specs.toArray(new FieldSpec[0]);
+		return new FieldSpecCollection(specArray);
+	}
+
 	private Set getSpecsForAccount(Map specCollectionsForOneAccount)
 	{
 		Set specsForThisAccount = new HashSet();
@@ -654,8 +496,7 @@ public class KnownFieldSpecCache extends BulletinStoreCache implements ReadableD
 		return specsForOneAccount;
 	}
 	
-	private static final int FILE_VERSION = 2;
-	private static final String TAG_VERSION = "Version";
+	private static final int FILE_VERSION = 3;
 	private static final String TAG_ALL_SECTION_SPECS = "AllSectionSpecs";
 	private static final String TAG_SPEC_INDEXES_FOR_ALL_ACCOUNTS = "SpecIndexesForAllAccounts";
 
