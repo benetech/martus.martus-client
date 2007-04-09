@@ -2488,9 +2488,6 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 				getCurrentActiveFrame().setState(ICONIFIED);
 				if(signIn(UiSigninDlg.TIMED_OUT) != UiSigninDlg.SIGN_IN)
 					exitWithoutSavingState();
-				MartusLogger.logBeginProcess("loadFieldSpecCache");
-				getStore().loadFieldSpecCache();
-				MartusLogger.logEndProcess("loadFieldSpecCache");
 				getCurrentActiveFrame().setState(NORMAL);
 //cml			initializeViews();
 			}
