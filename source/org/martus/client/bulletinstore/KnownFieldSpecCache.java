@@ -39,7 +39,6 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
-import java.util.TreeMap;
 import java.util.Vector;
 
 import org.json.JSONArray;
@@ -309,7 +308,7 @@ public class KnownFieldSpecCache extends BulletinStoreCache implements ReadableD
 		public void build()
 		{
 			clear();
-			specCollectionToIndex = new TreeMap();
+			specCollectionToIndex = new HashMap();
 		}
 		
 		public int getIndexOf(FieldSpecCollection collection)
@@ -328,10 +327,10 @@ public class KnownFieldSpecCache extends BulletinStoreCache implements ReadableD
 		
 		public JsonSpecsCollection getSpecsCollection(int index) throws Exception 
 		{
-			return new JsonSpecsCollection(getJSONArray(index).toString());
+			return new JsonSpecsCollection(getJSONArray(index));
 		}
 
-		TreeMap specCollectionToIndex;
+		Map specCollectionToIndex;
 
 	}
 
@@ -345,6 +344,13 @@ public class KnownFieldSpecCache extends BulletinStoreCache implements ReadableD
 		public JsonSpecsCollection(String jsonString) throws Exception
 		{
 			super(jsonString);
+		}
+		
+		public JsonSpecsCollection(JSONArray copyFrom)
+		{
+			this();
+			for(int i = 0; i < copyFrom.length(); ++i)
+				put(copyFrom.getString(i));
 		}
 		
 		public void build(FieldSpecCollection specs)
