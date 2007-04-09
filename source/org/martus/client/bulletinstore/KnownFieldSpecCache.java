@@ -166,11 +166,7 @@ public class KnownFieldSpecCache extends BulletinStoreCache implements ReadableD
 			dataOut.writeByte(FILE_VERSION);
 			JsonFieldSpecCache json = new JsonFieldSpecCache();
 			json.build();
-			String jsonString = json.toString();
-
-			dataOut.writeInt(jsonString.length());
-			for(int i = 0; i < jsonString.length(); ++i)
-				dataOut.writeChar(jsonString.charAt(i));
+			json.writeTo(dataOut);
 		}
 		finally
 		{
@@ -189,11 +185,16 @@ public class KnownFieldSpecCache extends BulletinStoreCache implements ReadableD
 	 *   		LocalId: Array of SpecCollection indexes: indexes
 	 */
 	
-	class OurJsonObject extends JSONObject
+	static class OurJsonObject extends JSONObject
 	{
 		public OurJsonObject()
 		{
 			super();
+		}
+		
+		public OurJsonObject(DataInputStream dataIn) throws Exception
+		{
+			this(readJsonString(dataIn));
 		}
 		
 		public OurJsonObject(String jsonString) throws Exception
@@ -210,6 +211,27 @@ public class KnownFieldSpecCache extends BulletinStoreCache implements ReadableD
 				remove(key);
 			}
 		}
+		
+		public void writeTo(DataOutputStream dataOut) throws IOException
+		{
+			String jsonString = toString();
+
+			dataOut.writeInt(jsonString.length());
+			for(int i = 0; i < jsonString.length(); ++i)
+				dataOut.writeChar(jsonString.charAt(i));
+
+		}
+		
+		private static String readJsonString(DataInputStream dataIn) throws IOException 
+		{
+			int length = dataIn.readInt();
+			StringBuffer jsonString = new StringBuffer(length);
+			for(int i = 0; i < length; ++i)
+				jsonString.append(dataIn.readChar());
+			return jsonString.toString();
+		}
+
+
 	}
 	
 	class OurJsonArray extends JSONArray
@@ -243,6 +265,11 @@ public class KnownFieldSpecCache extends BulletinStoreCache implements ReadableD
 			super(jsonString);
 		}
 		
+		public JsonFieldSpecCache(DataInputStream dataIn) throws Exception 
+		{
+			super(dataIn);
+		}
+
 		public void build()
 		{
 			clear();
@@ -457,11 +484,7 @@ public class KnownFieldSpecCache extends BulletinStoreCache implements ReadableD
 		{
 			if(dataIn.readByte() != FILE_VERSION)
 				throw new IOException("Bad version of field spec cache file");
-			int length = dataIn.readInt();
-			StringBuffer jsonString = new StringBuffer(length);
-			for(int i = 0; i < length; ++i)
-				jsonString.append(dataIn.readChar());
-			JsonFieldSpecCache json = new JsonFieldSpecCache(jsonString.toString());
+			JsonFieldSpecCache json = new JsonFieldSpecCache(dataIn);
 			populateCacheFromJson(json);
 		}
 		finally
