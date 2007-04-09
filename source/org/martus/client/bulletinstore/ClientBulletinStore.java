@@ -141,6 +141,9 @@ public class ClientBulletinStore extends BulletinStore
 
 	private void saveFieldSpecCache() throws Exception
 	{
+		if(knownFieldSpecCache.saving)
+			return;
+		
 		OutputStream out = new FileOutputStream(getFieldSpecCacheFile());
 		knownFieldSpecCache.saveToStream(out);
 		out.close();

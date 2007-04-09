@@ -78,8 +78,16 @@ public class KnownFieldSpecCache extends BulletinStoreCache implements ReadableD
 	
 	synchronized public void initializeFromDatabase()
 	{
-		createMap();
-		db.visitAllRecords(this);
+		try
+		{
+			saving = true;
+			createMap();
+			db.visitAllRecords(this);
+		}
+		finally
+		{
+			saving = false;
+		}
 	}
 
 	private void createMap()
@@ -138,17 +146,19 @@ public class KnownFieldSpecCache extends BulletinStoreCache implements ReadableD
 	
 	synchronized public void saveToStream(OutputStream out) throws Exception
 	{
-		MartusLogger.log("Inside KnownFieldSpecCache.saveToStream");
-		byte[] plainBytes = getCacheAsBytes();
-		byte[] bundle = security.createSignedBundle(plainBytes);
 		DataOutputStream dataOut = new DataOutputStream(out);
 		try
 		{
+			saving = true;
+			MartusLogger.log("Inside KnownFieldSpecCache.saveToStream");
+			byte[] plainBytes = getCacheAsBytes();
+			byte[] bundle = security.createSignedBundle(plainBytes);
 			dataOut.writeInt(bundle.length);
 			dataOut.write(bundle);
 		}
 		finally
 		{
+			saving = false;
 			dataOut.close();
 		}
 		
@@ -500,6 +510,7 @@ public class KnownFieldSpecCache extends BulletinStoreCache implements ReadableD
 	private static final String TAG_ALL_SECTION_SPECS = "AllSectionSpecs";
 	private static final String TAG_SPEC_INDEXES_FOR_ALL_ACCOUNTS = "SpecIndexesForAllAccounts";
 
+	public boolean saving;
 	ReadableDatabase db;
 	MartusCrypto security;
 	Map accountsToMapsOfLocalIdsToSetsOfSpecs;
