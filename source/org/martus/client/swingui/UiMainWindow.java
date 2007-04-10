@@ -344,14 +344,14 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 			if(!sessionSignIn())
 				return false;
 
-			loadFieldSpecCache();
-			
 			loadConfigInfo();
 			if(!createdNewAccount && !justRecovered)
 				askAndBackupKeypairIfRequired();
 			
 			UiModelessBusyDlg waitingForBulletinsToLoad = new UiModelessBusyDlg(getLocalization().getFieldLabel("waitingForBulletinsToLoad"));
 			{
+				loadFieldSpecCache();
+				
 				if(!loadFoldersAndBulletins())
 					return false;
 		
