@@ -204,7 +204,7 @@ public class KnownFieldSpecCache extends BulletinStoreCache implements ReadableD
 	
 	PersistableVector createSpecCollectionVector(Map allSpecs)
 	{
-		System.out.println("createSpecCollectionVector, allSpecs.size() = " + allSpecs.size());
+		MartusLogger.log("createSpecCollectionVector, allSpecs.size() = " + allSpecs.size());
 		PersistableVector vector = new PersistableVector();
 		Iterator iter = allSpecs.keySet().iterator();
 		while(iter.hasNext())
