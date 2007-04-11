@@ -2453,26 +2453,27 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 
 		public void run()
 		{
-			if(!hasTimedOut())
-				return;
-			
-			MartusLogger.logBeginProcess("Save before timeout");
-			try
-			{
-				getStore().prepareToExitNormally();
-			}
-			catch(Exception e)
-			{
-				e.printStackTrace();
-			}
-			MartusLogger.logEndProcess("Save before timeout");
-			
 			try 
 			{
+				if(!hasTimedOut())
+					return;
+				
+				MartusLogger.logBeginProcess("Save before timeout");
+				try
+				{
+					getStore().prepareToExitNormally();
+				}
+				catch(Throwable e)
+				{
+					e.printStackTrace();
+				}
+				MartusLogger.logEndProcess("Save before timeout");
+
 				SwingUtilities.invokeAndWait(new ThreadedSignin());
 			} 
-			catch (Exception e) 
+			catch (Throwable e) 
 			{
+				// No problem, even out of memory, should kill this thread!
 				e.printStackTrace();
 			} 
 		}
