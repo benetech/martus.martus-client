@@ -329,8 +329,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 
 	public boolean run()
 	{
-		JFrame hiddenFrame = new HiddenFrame(getLocalization(), UiConstants.programName);
-		setCurrentActiveFrame(hiddenFrame);
+		setCurrentActiveFrame(this);
 		{
 			String currentLanguageCode = localization.getCurrentLanguageCode();
 			displayDefaultUnofficialTranslationMessageIfNecessary(currentActiveFrame, localization, currentLanguageCode);
@@ -343,6 +342,10 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	
 			if(!sessionSignIn())
 				return false;
+			
+			timeoutChecker = new java.util.Timer(true);
+			TimeoutTimerTask timeoutTimerTask = new TimeoutTimerTask();
+			timeoutChecker.schedule(timeoutTimerTask, 0, BACKGROUND_TIMEOUT_CHECK_EVERY_X_MILLIS);
 
 			loadConfigInfo();
 			if(!createdNewAccount && !justRecovered)
@@ -360,20 +363,23 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 			}
 			waitingForBulletinsToLoad.endDialog();
 
+			MartusLogger.log("reloadPendingRetrieveQueue");
 			reloadPendingRetrieveQueue();
 			
 			requestContactInfo();
 			
+			MartusLogger.log("Showing main window");
 			addWindowListener(new WindowEventHandler());
 			setVisible(true);
 			toFront();
 		}
 
+		MartusLogger.log("Disposing of hidden frame");
 		setCurrentActiveFrame(this);
-		hiddenFrame.dispose();
 
 		createBackgroundUploadTasks();
 
+		MartusLogger.log("Initialization complete");
 		mainWindowInitalizing = false;
 		return true;
     }
@@ -525,8 +531,6 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		}
 
 		inactivityDetector = new UiInactivityDetector();
-		timeoutChecker = new java.util.Timer(true);
-		timeoutChecker.schedule(new TimeoutTimerTask(), 0, BACKGROUND_TIMEOUT_CHECK_EVERY_X_MILLIS);
 
 		return true;
 	}
@@ -2487,7 +2491,10 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 			{
 				getCurrentActiveFrame().setState(ICONIFIED);
 				if(signIn(UiSigninDlg.TIMED_OUT) != UiSigninDlg.SIGN_IN)
+				{
+					System.out.println("Cancelled from timeout signin");
 					exitWithoutSavingState();
+				}
 				getCurrentActiveFrame().setState(NORMAL);
 //cml			initializeViews();
 			}
