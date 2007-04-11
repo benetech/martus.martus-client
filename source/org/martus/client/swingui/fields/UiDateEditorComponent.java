@@ -244,6 +244,7 @@ public class UiDateEditorComponent extends Box
 		}
 		catch(Exception e)
 		{
+			e.printStackTrace();
 			System.out.println(e);
 		}			
 	}
