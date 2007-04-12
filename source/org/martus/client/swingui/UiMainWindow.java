@@ -353,8 +353,6 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 			
 			UiModelessBusyDlg waitingForBulletinsToLoad = new UiModelessBusyDlg(getLocalization().getFieldLabel("waitingForBulletinsToLoad"));
 			{
-				loadFieldSpecCache();
-				
 				if(!loadFoldersAndBulletins())
 					return false;
 		
@@ -371,7 +369,10 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 			MartusLogger.log("Showing main window");
 			addWindowListener(new WindowEventHandler());
 			setVisible(true);
-			toFront();
+			if(timeoutTimerTask.waitingForSignin)
+				setState(ICONIFIED);
+			else
+				toFront();
 		}
 
 		MartusLogger.log("Disposing of hidden frame");
@@ -612,6 +613,8 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		MartusLogger.logEndProcess("quarantineUnreadableBulletins");
 		if(quarantineCount > 0)
 			notifyDlg("FoundDamagedBulletins");
+
+		loadFieldSpecCache();
 
 		MartusLogger.logBeginProcess("loadFolders");
 		app.loadFolders();
@@ -2490,6 +2493,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		{
 			public void run()
 			{
+				waitingForSignin = true;
 				getCurrentActiveFrame().setState(ICONIFIED);
 				if(signIn(UiSigninDlg.TIMED_OUT) != UiSigninDlg.SIGN_IN)
 				{
@@ -2497,9 +2501,12 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 					exitWithoutSavingState();
 				}
 				getCurrentActiveFrame().setState(NORMAL);
+				waitingForSignin = false;
 //cml			initializeViews();
 			}
 		}
+		
+		boolean waitingForSignin;
 	}
 
 	class UploadErrorChecker extends AbstractAction
@@ -2632,7 +2639,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	private static final int TIME_BETWEEN_FIELD_OFFICE_CHECKS_SECONDS = 60 * 60;
 	public static boolean defaultFoldersUnsorted;
 
-	private boolean mainWindowInitalizing;
+	boolean mainWindowInitalizing;
 	private boolean createdNewAccount;
 	private boolean justRecovered;
 	private BackgroundTimerTask backgroundUploadTimerTask;

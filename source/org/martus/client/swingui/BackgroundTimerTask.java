@@ -41,6 +41,7 @@ import org.martus.client.bulletinstore.ClientBulletinStore;
 import org.martus.client.core.BackgroundRetriever;
 import org.martus.client.core.BackgroundUploader;
 import org.martus.client.core.MartusApp;
+import org.martus.client.core.MartusLogger;
 import org.martus.clientside.ClientSideNetworkGateway;
 import org.martus.common.ProgressMeterInterface;
 import org.martus.common.Exceptions.ServerCallFailedException;
@@ -70,6 +71,12 @@ class BackgroundTimerTask extends TimerTask
 
 	public void run()
 	{
+		if(mainWindow.mainWindowInitalizing)
+		{
+			MartusLogger.log("Waiting to contact server until startup is complete");
+			return;
+		}
+		
 		if(mainWindow.inConfigServer)
 			return;
 		if(inComplianceDialog)
