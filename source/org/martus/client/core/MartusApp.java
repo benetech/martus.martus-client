@@ -373,8 +373,10 @@ public class MartusApp
 			encryptedContactFileInputStream.close();
 			
 			FieldSpec[] specsTop = getCustomFieldSpecsTopSection(configInfo);
+			removeSpaceLikeCharactersFromTags(specsTop);
 			store.setTopSectionFieldSpecs(specsTop);
 			FieldSpec[] specsBottom = getCustomFieldSpecsBottomSection(configInfo);
+			removeSpaceLikeCharactersFromTags(specsBottom);
 			store.setBottomSectionFieldSpecs(specsBottom);
 			
 			convertLegacyHQToMultipleHQs();
@@ -386,6 +388,29 @@ public class MartusApp
 			throw new LoadConfigInfoException();
 		}
 	}
+	
+	public static void removeSpaceLikeCharactersFromTags(FieldSpec[] specs)
+	{
+		for(int i = 0; i < specs.length; ++i)
+		{
+			String tag = specs[i].getTag();
+			String stripped = stripSpaceLikeCharacters(tag);
+			specs[i].setTag(stripped);
+		}
+	}
+	
+	public static String stripSpaceLikeCharacters(String tag)
+	{
+		String NORMAL_WHITESPACE = "\\s";
+		String NON_BREAKING_SPACE = "\\xa0";
+		String NARROW_NO_BREAK_SPACE = "\\u202f";
+		String ZERO_WIDTH_NO_BREAK_SPACE = "\\ufeff";
+		String WORD_JOINER = "\\u2060";
+		String regex = "[" + NORMAL_WHITESPACE + NON_BREAKING_SPACE + 
+				NARROW_NO_BREAK_SPACE + ZERO_WIDTH_NO_BREAK_SPACE + WORD_JOINER + "]";
+		return tag.replaceAll(regex, "");
+	}
+
 	
 	private boolean isSignatureFileValid(File dataFile, File sigFile, String accountId) throws FileNotFoundException, IOException, MartusSignatureException 
 	{

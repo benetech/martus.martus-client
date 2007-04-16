@@ -74,6 +74,7 @@ import org.martus.common.database.FileDatabase;
 import org.martus.common.fieldspec.ChoiceItem;
 import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.fieldspec.FieldTypeMultiline;
+import org.martus.common.fieldspec.FieldTypeNormal;
 import org.martus.common.fieldspec.MiniFieldSpec;
 import org.martus.common.fieldspec.StandardFieldSpecs;
 import org.martus.common.packet.UniversalId;
@@ -881,6 +882,19 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 
 		TRACE_END();
 
+	}
+	
+	public void testRemoveSpaceLikeCharactersFromTags() throws Exception
+	{
+		String tagWithSpaceLikeCharacters = "a b\u00a0c\u202fd\ufeffe\u2060f"; 
+		FieldSpec[] specs = new FieldSpec[] {
+			FieldSpec.createStandardField(Bulletin.TAGAUTHOR, new FieldTypeNormal()),
+			FieldSpec.createCustomField(tagWithSpaceLikeCharacters, "Label", new FieldTypeNormal()),
+		};
+		
+		MartusApp.removeSpaceLikeCharactersFromTags(specs);
+		assertEquals(Bulletin.TAGAUTHOR, specs[0].getTag());
+		assertEquals("abcdef", specs[1].getTag());
 	}
 
 	public void testCreateAccountBadDirectory() throws Exception
