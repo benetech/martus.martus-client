@@ -369,10 +369,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 			MartusLogger.log("Showing main window");
 			addWindowListener(new WindowEventHandler());
 			setVisible(true);
-			if(timeoutTimerTask.waitingForSignin)
-				setState(ICONIFIED);
-			else
-				toFront();
+			toFront();
 		}
 
 		MartusLogger.log("Disposing of hidden frame");
