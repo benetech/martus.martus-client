@@ -47,7 +47,7 @@ public class MartusLogger
 		log("End " + text);
 	}
 
-	public static void log(String text)
+	public synchronized static void log(String text)
 	{
 		if(destination != null)
 		{
