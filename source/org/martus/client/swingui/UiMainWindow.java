@@ -330,7 +330,8 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	public boolean run()
 	{
 		setCurrentActiveFrame(this);
-		{
+
+		// TODO: Fix indentation later, when we are not in release freeze
 			String currentLanguageCode = localization.getCurrentLanguageCode();
 			displayDefaultUnofficialTranslationMessageIfNecessary(currentActiveFrame, localization, currentLanguageCode);
 			displayIncompatibleMtfVersionWarningMessageIfNecessary(currentActiveFrame, localization, localization.getCurrentLanguageCode());
@@ -366,19 +367,30 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 			
 			requestContactInfo();
 			
-			MartusLogger.log("Showing main window");
+			MartusLogger.log("Ready to show main window");
 			addWindowListener(new WindowEventHandler());
-			setVisible(true);
-			toFront();
-		}
+			if(timeoutTimerTask.waitingForSignin)
+			{
+				setLocation(100000, 0);
+				setSize(0,0);
+				setEnabled(false);
+			}
+			else
+			{
+				MartusLogger.log("Showing main window");
+				setVisible(true);
+				toFront();
+				mainWindowInitalizing = false;
+			}
+		
 
+		// TODO: Remove this useless line of code when not in release freeze
 		MartusLogger.log("Disposing of hidden frame");
 		setCurrentActiveFrame(this);
 
 		createBackgroundUploadTasks();
 
 		MartusLogger.log("Initialization complete");
-		mainWindowInitalizing = false;
 		return true;
     }
 	
@@ -2497,9 +2509,16 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 					System.out.println("Cancelled from timeout signin");
 					exitWithoutSavingState();
 				}
+				MartusLogger.log("Restoring active frame");
+				if(mainWindowInitalizing)
+				{
+					initializeViews();
+					mainWindowInitalizing = false;
+				}
+				getCurrentActiveFrame().setVisible(true);
+				getCurrentActiveFrame().setEnabled(true);
 				getCurrentActiveFrame().setState(NORMAL);
 				waitingForSignin = false;
-//cml			initializeViews();
 			}
 		}
 		
