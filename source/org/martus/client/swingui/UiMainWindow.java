@@ -188,8 +188,10 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		
 		splashScreen.endDialog();
 		initalizeUiState();
+		
+		setGlassPane(new WindowObscurer());
 	}
-
+	
 	public static String[] getAllEnglishStrings()
 	{
 		String[] clientStrings = EnglishStrings.strings;
@@ -2503,6 +2505,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 			public void run()
 			{
 				waitingForSignin = true;
+				getCurrentActiveFrame().getGlassPane().setVisible(true);
 				getCurrentActiveFrame().setState(ICONIFIED);
 				if(signIn(UiSigninDlg.TIMED_OUT) != UiSigninDlg.SIGN_IN)
 				{
@@ -2515,6 +2518,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 					initializeViews();
 					mainWindowInitalizing = false;
 				}
+				getCurrentActiveFrame().getGlassPane().setVisible(false);
 				getCurrentActiveFrame().setVisible(true);
 				getCurrentActiveFrame().setEnabled(true);
 				getCurrentActiveFrame().setState(NORMAL);
