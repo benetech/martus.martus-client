@@ -1490,12 +1490,19 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		
 		ConfigInfo info = app.getConfigInfo();
 		UiRemoveServerDlg removeDlg = new UiRemoveServerDlg(this, info);
-		if (removeDlg.isYesButtonPressed())
+		if (!removeDlg.isYesButtonPressed())
+			return;
+
+		try
 		{
 			app.setServerInfo("","","");
 			clearStatusMessage();
 			repaint();
-		}			
+		}
+		catch(Exception e)
+		{
+			notifyDlg("ErrorSavingConfig");
+		}
 	}
 
 	
@@ -1531,11 +1538,14 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 			{
 				//TODO:The following line shouldn't be necessary but without it, the trustmanager 
 				//will reject the old server, we don't know why.
-				ClientSideNetworkGateway.buildGateway(previousServerInfo.getServerName(), previousServerInfo.getServerPublicKey()); 
+				ClientSideNetworkGateway.buildGateway(previousServerInfo.getServerName(), previousServerInfo.getServerPublicKey());
+				
 				notifyDlg("UserRejectedServerCompliance");
 				if(serverIPAddress.equals(previousServerInfo.getServerName()) &&
 				   serverPublicKey.equals(previousServerInfo.getServerPublicKey()))
+				{
 					app.setServerInfo("","","");
+				}
 				return;
 			}
 			getStore().clearOnServerLists();
@@ -1579,6 +1589,11 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 			getStore().clearOnServerLists();
 			repaint();
 			setStatusMessageReady();
+		}
+		catch(SaveConfigInfoException e)
+		{
+			e.printStackTrace();
+			notifyDlg("ErrorSavingConfig");
 		}
 		finally
 		{

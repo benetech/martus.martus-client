@@ -489,19 +489,26 @@ class BackgroundTimerTask extends TimerTask
 			
 		public void run()
 		{
-			inComplianceDialog = true;
-			if(mainWindow.confirmServerCompliance("ServerComplianceChangedDescription", newCompliance))
+			try 
 			{
-				String serverAddress = getApp().getConfigInfo().getServerName();
-				String serverKey = getApp().getConfigInfo().getServerPublicKey();
-				getApp().setServerInfo(serverAddress, serverKey, newCompliance);
-			}
-			else
+				inComplianceDialog = true;
+				if(mainWindow.confirmServerCompliance("ServerComplianceChangedDescription", newCompliance))
+				{
+					String serverAddress = getApp().getConfigInfo().getServerName();
+					String serverKey = getApp().getConfigInfo().getServerPublicKey();
+					getApp().setServerInfo(serverAddress, serverKey, newCompliance);
+				}
+				else
+				{
+					getApp().setServerInfo("", "", "");
+					mainWindow.notifyDlg("ExistingServerRemoved");
+				}
+				inComplianceDialog = false;
+			} 
+			catch (Exception e) 
 			{
-				getApp().setServerInfo("", "", "");
-				mainWindow.notifyDlg("ExistingServerRemoved");
+				e.printStackTrace();
 			}
-			inComplianceDialog = false;
 		}
 			
 		String newCompliance;

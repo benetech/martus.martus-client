@@ -194,19 +194,12 @@ public class MartusApp
 		}
 	}
 
-	public void setServerInfo(String serverName, String serverKey, String serverCompliance)
+	public void setServerInfo(String serverName, String serverKey, String serverCompliance) throws SaveConfigInfoException
 	{
 		configInfo.setServerName(serverName);
 		configInfo.setServerPublicKey(serverKey);
 		configInfo.setServerCompliance(serverCompliance);
-		try
-		{
-			saveConfigInfo();
-		}
-		catch (SaveConfigInfoException e)
-		{
-			System.out.println("MartusApp.setServerInfo: Unable to Save ConfigInfo" + e);
-		}
+		saveConfigInfo();
 
 		invalidateCurrentHandlerAndGateway();
 	}
