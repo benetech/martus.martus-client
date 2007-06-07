@@ -28,6 +28,7 @@ package org.martus.client.core;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
@@ -140,12 +141,13 @@ public class ConfigInfo
 		customFieldBottomSectionXml = "";
 	}
 
-	public static ConfigInfo load(InputStream inputStream)
+	public static ConfigInfo load(InputStream inputStream) throws IOException
 	{
 		ConfigInfo loaded =  new ConfigInfo();
+
+		DataInputStream in = new DataInputStream(inputStream);
 		try
 		{
-			DataInputStream in = new DataInputStream(inputStream);
 			loaded.version = in.readShort();
 			loaded.author = in.readUTF();
 			loaded.organization = in.readUTF();
@@ -197,11 +199,10 @@ public class ConfigInfo
 			if(loaded.version >= 13)
 				loaded.checkForFieldOfficeBulletins = in.readBoolean();
 			
-			in.close();
 		}
-		catch (Exception e)
+		finally
 		{
-			System.out.println("ConfigInfo.load " + e);
+			in.close();
 		}
 		return loaded;
 	}

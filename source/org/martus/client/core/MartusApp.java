@@ -384,8 +384,7 @@ public class MartusApp
 		}
 		catch (Exception e)
 		{
-			//System.out.println("Loadcontactinfo: " + e);
-			throw new LoadConfigInfoException();
+			throw new LoadConfigInfoException(e);
 		}
 	}
 	
@@ -1894,6 +1893,14 @@ public class MartusApp
 
 	public class LoadConfigInfoException extends Exception 
 	{
+		public LoadConfigInfoException() 
+		{
+		}
+		
+		public LoadConfigInfoException(Exception e) 
+		{
+			super(e);
+		}
 	}
 
 	public static class MartusAppInitializationException extends Exception

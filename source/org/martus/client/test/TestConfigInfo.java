@@ -331,7 +331,7 @@ public class TestConfigInfo extends TestCaseEnhanced
 			assertEquals(label + ": sampleCheckForFieldOfficeBulletins", false, info.getCheckForFieldOfficeBulletins());
 	}
 
-	void verifyLoadSpecificVersion(ByteArrayInputStream inputStream, short VERSION)
+	void verifyLoadSpecificVersion(ByteArrayInputStream inputStream, short VERSION) throws Exception
 	{
 		ConfigInfo info = new ConfigInfo();
 		info = ConfigInfo.load(inputStream);
