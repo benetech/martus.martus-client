@@ -207,11 +207,11 @@ public class ConfigInfo
 		return loaded;
 	}
 
-	public void save(OutputStream outputStream)
+	public void save(OutputStream outputStream) throws IOException
 	{
+		DataOutputStream out = new DataOutputStream(outputStream);
 		try
 		{
-			DataOutputStream out = new DataOutputStream(outputStream);
 			out.writeShort(VERSION);
 			out.writeUTF(author);
 			out.writeUTF(organization);
@@ -235,12 +235,10 @@ public class ConfigInfo
 			out.writeUTF(defaultHQKeysXml);
 			out.writeUTF(customFieldBottomSectionXml);
 			out.writeBoolean(checkForFieldOfficeBulletins);
-
-			out.close();
 		}
-		catch(Exception e)
+		finally
 		{
-			System.out.println("ConfigInfo.save error: " + e);
+			out.close();
 		}
 	}
 	
