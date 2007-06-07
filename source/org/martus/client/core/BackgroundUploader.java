@@ -303,6 +303,7 @@ public class BackgroundUploader
 		catch (SaveConfigInfoException e)
 		{
 			System.out.println("MartusApp:putContactInfoOnServer Failed to save contactinfo locally:" + e);
+			e.printStackTrace();
 		}
 		return uploadResult;
 	}
