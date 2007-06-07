@@ -59,7 +59,7 @@ import org.martus.common.packet.UniversalId;
 import org.martus.common.packet.Packet.InvalidPacketException;
 import org.martus.common.packet.Packet.SignatureVerificationException;
 import org.martus.common.packet.Packet.WrongPacketTypeException;
-import org.martus.util.Base64;
+import org.martus.util.StreamableBase64;
 
 public class BackgroundUploader
 {
@@ -145,7 +145,7 @@ public class BackgroundUploader
 		
 			String authorId = uid.getAccountId();
 			String bulletinLocalId = uid.getLocalId();
-			String encoded = Base64.encode(chunkBytes);
+			String encoded = StreamableBase64.encode(chunkBytes);
 		
 			NetworkResponse response = app.getCurrentNetworkInterfaceGateway().putBulletinChunk(app.getSecurity(),
 								authorId, bulletinLocalId, totalSize, offset, chunkSize, encoded);

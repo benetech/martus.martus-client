@@ -109,13 +109,13 @@ import org.martus.common.packet.Packet.SignatureVerificationException;
 import org.martus.common.packet.Packet.WrongAccountException;
 import org.martus.common.packet.Packet.WrongPacketTypeException;
 import org.martus.jarverifier.JarVerifier;
-import org.martus.util.Base64;
+import org.martus.util.StreamableBase64;
 import org.martus.util.DirectoryUtils;
 import org.martus.util.Stopwatch;
 import org.martus.util.StreamCopier;
 import org.martus.util.UnicodeReader;
 import org.martus.util.UnicodeWriter;
-import org.martus.util.Base64.InvalidBase64Exception;
+import org.martus.util.StreamableBase64.InvalidBase64Exception;
 import org.martus.util.inputstreamwithseek.ByteArrayInputStreamWithSeek;
 import org.martus.util.inputstreamwithseek.FileInputStreamWithSeek;
 import org.martus.util.inputstreamwithseek.InputStreamWithSeek;
@@ -1342,7 +1342,7 @@ public class MartusApp
 			throw new ServerErrorException(resultCode);
 
 		String xmlEncoded = (String)response.getResultVector().get(0);
-		String xml = new String(Base64.decode(xmlEncoded), "UTF-8");
+		String xml = new String(StreamableBase64.decode(xmlEncoded), "UTF-8");
 		byte[] xmlBytes = xml.getBytes("UTF-8");
 		ByteArrayInputStreamWithSeek in =  new ByteArrayInputStreamWithSeek(xmlBytes);
 		packet.loadFromXml(in, getSecurity());
@@ -1608,7 +1608,7 @@ public class MartusApp
 
 	public void exportPublicInfo(File exportFile) throws
 		IOException,
-		Base64.InvalidBase64Exception,
+		StreamableBase64.InvalidBase64Exception,
 		MartusCrypto.MartusSignatureException
 	{
 		MartusUtilities.exportClientPublicKey(getSecurity(), exportFile);
@@ -1616,7 +1616,7 @@ public class MartusApp
 
 	public String extractPublicInfo(File file) throws
 		IOException,
-		Base64.InvalidBase64Exception,
+		StreamableBase64.InvalidBase64Exception,
 		PublicInformationInvalidException
 	{
 		Vector importedPublicKeyInfo = MartusUtilities.importClientPublicKeyFromFile(file);

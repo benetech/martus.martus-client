@@ -57,7 +57,7 @@ import org.martus.swing.UiTable;
 import org.martus.swing.UiVBox;
 import org.martus.swing.UiWrappedTextArea;
 import org.martus.swing.Utilities;
-import org.martus.util.Base64.InvalidBase64Exception;
+import org.martus.util.StreamableBase64.InvalidBase64Exception;
 
 
 public class UiConfigureHQs extends JDialog

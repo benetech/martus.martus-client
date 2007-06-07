@@ -34,7 +34,7 @@ import org.martus.client.swingui.dialogs.UiSigninDlg;
 import org.martus.clientside.PasswordHelper;
 import org.martus.swing.UiFileChooser;
 import org.martus.swing.UiPasswordField;
-import org.martus.util.Base64.InvalidBase64Exception;
+import org.martus.util.StreamableBase64.InvalidBase64Exception;
 
 
 public class UiRecoverKeyPairFromBackup

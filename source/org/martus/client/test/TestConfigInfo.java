@@ -39,7 +39,7 @@ import org.martus.common.crypto.MartusCrypto;
 import org.martus.common.crypto.MockMartusSecurity;
 import org.martus.common.fieldspec.StandardFieldSpecs;
 import org.martus.common.network.NetworkInterfaceConstants;
-import org.martus.util.Base64;
+import org.martus.util.StreamableBase64;
 import org.martus.util.TestCaseEnhanced;
 
 public class TestConfigInfo extends TestCaseEnhanced
@@ -160,9 +160,9 @@ public class TestConfigInfo extends TestCaseEnhanced
 		assertEquals("Not the publicKey?", signer.getPublicKeyString(), publicKey);
 		int contentSize = ((Integer)(contactInfoVector.get(2))).intValue();
 		assertEquals("Not the encoded correct size?", contentSize + 4, contactInfoVector.size());
-		assertEquals("encoded Author not correct?", sampleAuthor, new String(Base64.decode((String)contactInfoVector.get(3))));
-		assertEquals("encoded Address not correct?", sampleAddress,  new String(Base64.decode((String)contactInfoVector.get(8))));
-		assertEquals("encoded phone not correct?", samplePhone,  new String(Base64.decode((String)contactInfoVector.get(7))));
+		assertEquals("encoded Author not correct?", sampleAuthor, new String(StreamableBase64.decode((String)contactInfoVector.get(3))));
+		assertEquals("encoded Address not correct?", sampleAddress,  new String(StreamableBase64.decode((String)contactInfoVector.get(8))));
+		assertEquals("encoded phone not correct?", samplePhone,  new String(StreamableBase64.decode((String)contactInfoVector.get(7))));
 		
 		Vector decodedContactInfo = ContactInfo.decodeContactInfoVectorIfNecessary(contactInfoVector);
 		Vector alreadyDecodedContactInfo = ContactInfo.decodeContactInfoVectorIfNecessary(decodedContactInfo);

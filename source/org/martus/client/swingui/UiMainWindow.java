@@ -144,7 +144,7 @@ import org.martus.swing.Utilities.Delay;
 import org.martus.util.FileVerifier;
 import org.martus.util.TokenReplacement;
 import org.martus.util.UnicodeReader;
-import org.martus.util.Base64.InvalidBase64Exception;
+import org.martus.util.StreamableBase64.InvalidBase64Exception;
 import org.martus.util.TokenReplacement.TokenInvalidException;
 import org.martus.util.language.LanguageOptions;
 import org.martus.util.xml.XmlUtilities;
