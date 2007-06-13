@@ -1989,7 +1989,7 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 	public void testWindowTitles()
 	{
 		TRACE_BEGIN("testWindowTitles");
-		assertEquals("Martus Human Rights Bulletin System", testAppLocalization.getWindowTitle("main"));
+		assertEquals("Martus Human Rights Bulletin System - TEST VERSION", testAppLocalization.getWindowTitle("main"));
 		TRACE_END();
 	}
 
