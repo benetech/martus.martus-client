@@ -31,6 +31,7 @@ import java.awt.ComponentOrientation;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.io.UnsupportedEncodingException;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Vector;
@@ -142,13 +143,35 @@ public class UiCustomFieldsDlg extends JDialog
 	{
 		public void actionPerformed(ActionEvent ae)
 		{
-			if(!validateXml(topSectionXmlTextArea.getText(), bottomSectionXmlTextArea.getText()))
-			 	return;
-			if(!checkForDuplicateLabels())
+			try 
+			{
+				String topText = topSectionXmlTextArea.getText();
+				String bottomText = bottomSectionXmlTextArea.getText();
+				if(sectionTooLarge(topText) || sectionTooLarge(bottomText))
+				{
+					mainWindow.notifyDlg("CustomFieldSectionTooLarge");
+					return;
+				}
+				if(!validateXml(topText, bottomText))
+				 	return;
+				if(!checkForDuplicateLabels())
+					return;
+				topSectionXmlResult = topText;
+				bottomSectionXmlResult = bottomText;
+			} 
+			catch (Exception e) 
+			{
+				e.printStackTrace();
+				mainWindow.notifyDlg("UnexpectedError");
 				return;
-			topSectionXmlResult = topSectionXmlTextArea.getText();
-			bottomSectionXmlResult = bottomSectionXmlTextArea.getText();
+			}
 			dispose();
+		}
+		
+		boolean sectionTooLarge(String sectionXml) throws UnsupportedEncodingException
+		{
+			final int MAX_SIZE_OF_UTF_STRING_TO_WRITE_TO_DATAOUTPUTSTREAM = 65500;
+			return (sectionXml.getBytes("UTF-8").length > MAX_SIZE_OF_UTF_STRING_TO_WRITE_TO_DATAOUTPUTSTREAM);
 		}
 	}
 
