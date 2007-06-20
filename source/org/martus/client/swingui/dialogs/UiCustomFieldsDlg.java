@@ -150,7 +150,7 @@ public class UiCustomFieldsDlg extends JDialog
 				if(sectionTooLarge(topText) || sectionTooLarge(bottomText))
 				{
 					mainWindow.notifyDlg("CustomFieldSectionTooLarge");
-					return;
+					// return;
 				}
 				if(!validateXml(topText, bottomText))
 				 	return;
