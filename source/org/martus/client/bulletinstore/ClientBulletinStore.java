@@ -907,6 +907,7 @@ public class ClientBulletinStore extends BulletinStore
 		{
 			// TODO: Improve error handling!!!
 			System.out.println("BulletinStore.loadFolders: " + e);
+			e.printStackTrace();
 		}
 	}
 
