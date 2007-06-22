@@ -1153,7 +1153,7 @@ public class ClientBulletinStore extends BulletinStore
 		return new String(xml);
 	}
 
-	public String folderToXml(BulletinFolder folder)
+	public synchronized String folderToXml(BulletinFolder folder)
 	{
 		StringBuffer xml = new StringBuffer();
 		xml.append(MartusClientXml.getFolderTagStart(folder.getName()));
