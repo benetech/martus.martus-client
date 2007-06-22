@@ -176,7 +176,8 @@ public class BulletinFolder
 
 	public Set getAllUniversalIdsUnsorted()
 	{
-		return rawIdList;
+		// return a COPY to avoid synchronization problems between threads
+		return new HashSet(rawIdList);
 	}
 	
 	public UniversalId[] getAllUniversalIdsUnsortedAsArray()
