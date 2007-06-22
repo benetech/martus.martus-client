@@ -1174,7 +1174,13 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 
 	public void selectBulletinInCurrentFolderIfExists(UniversalId id)
 	{
-		BulletinFolder currentFolder = app.getStore().findFolder(folders.getSelectedFolderName());
+		String selectedFolderName = folders.getSelectedFolderName();
+		BulletinFolder currentFolder = app.getStore().findFolder(selectedFolderName);
+		if(currentFolder == null)
+		{
+			System.out.println("Current folder is null: " + selectedFolderName);
+			return;
+		}
 		int position = currentFolder.find(id);
 		if(position != -1)
 			table.setCurrentBulletinIndex(position);
