@@ -27,8 +27,13 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.swingui.bulletincomponent;
 
 import java.awt.Color;
+import java.awt.FlowLayout;
+import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JComponent;
+import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
 
 import org.martus.client.core.LanguageChangeListener;
@@ -46,6 +51,7 @@ import org.martus.common.fieldspec.FieldType;
 import org.martus.common.fieldspec.GridFieldSpec;
 import org.martus.common.fieldspec.StandardFieldSpecs;
 import org.martus.common.packet.FieldDataPacket;
+import org.martus.swing.UiButton;
 import org.martus.swing.UiWrappedTextArea;
 
 
@@ -66,14 +72,16 @@ abstract public class UiBulletinComponentDataSection extends UiBulletinComponent
 		{
 			fields[fieldNum] = createAndAddLabelAndField(specs[fieldNum]);
 		}
-		addComponents(createLabel(getLocalization().getFieldLabel("attachments")), createAttachmentTable());
+		JComponent attachmentTable = createAttachmentTable();
+		String labelText = getLocalization().getFieldLabel("attachments");
+		addComponents(createLabel(labelText, attachmentTable), attachmentTable);
 	}
 
 	public UiField createAndAddLabelAndField(FieldSpec spec)
 	{
 		UiField field = createField(spec);
 		field.initalize();
-		addComponents(createLabel(spec), field.getComponent());
+		addComponents(createLabel(spec, field.getComponent()), field.getComponent());
 		return field;
 	}
 
@@ -100,15 +108,15 @@ abstract public class UiBulletinComponentDataSection extends UiBulletinComponent
 			addAttachment(attachments[i]);
 	}
 
- 	public JComponent createLabel(FieldSpec spec)
+ 	public JComponent createLabel(FieldSpec spec, JComponent field)
 	{
 		String labelText = spec.getLabel();
 		if(labelText.equals(""))
 			labelText = getLocalization().getFieldLabel(spec.getTag());
-		return createLabel(labelText);
+		return createLabel(labelText, field);
 	}
 
-	public JComponent createLabel(String labelText) 
+	public JComponent createLabel(String labelText, JComponent field) 
 	{
 		//TODO: For wrapped labels, we need to take into consideration font size, text alignment, rtol and printing. 
 		//UiWrappedTextArea label = new UiWrappedTextArea(labelText, 30);
@@ -117,7 +125,49 @@ abstract public class UiBulletinComponentDataSection extends UiBulletinComponent
 		int fixedWidth = 14;
 		UiWrappedTextArea label = new UiWrappedTextArea(labelText, fixedWidth, fixedWidth);
 		label.setFocusable(false);
-		return label;
+		
+ 		JPanel panel = new JPanel(new FlowLayout());
+ 		panel.add(new HiderButton(field));
+ 		panel.add(label);
+		return panel;
+	}
+	
+	class HiderButton extends UiButton implements ActionListener
+	{
+		public HiderButton(JComponent fieldToHide)
+		{
+			super("");
+			field = fieldToHide;
+			
+//			float smallFontSize = 8.0F;
+//			setFont(getFont().deriveFont(smallFontSize));
+			setMargin(new Insets(0, 0, 0, 0));
+			addActionListener(this);
+			
+			showField();
+		}
+
+		public void actionPerformed(ActionEvent event) 
+		{
+			if(field.isVisible())
+				hideField();
+			else
+				showField();
+		}
+		
+		public void hideField()
+		{
+			field.setVisible(false);
+			setText("+");
+		}
+
+		public void showField()
+		{
+			field.setVisible(true);
+			setText("-");
+		}
+
+		JComponent field;
 	}
 
 	private UiField createField(FieldSpec fieldSpec)
