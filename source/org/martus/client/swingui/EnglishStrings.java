@@ -31,7 +31,7 @@ import org.martus.common.bulletin.Bulletin;
 public class EnglishStrings
 {
 	public static String strings[] = {
-"wintitle:main=Martus Human Rights Bulletin System - TEST VERSION",
+"wintitle:main=Martus Human Rights Bulletin System",
 "wintitle:create=Create Bulletin",
 "wintitle:options=Options",
 "wintitle:HelpDefaultDetails=Help on Bulletin Details Field Default Content",

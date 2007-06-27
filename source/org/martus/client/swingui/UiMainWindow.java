@@ -158,11 +158,10 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		
 		// This block of code is to create a test version of Martus that 
 		// will expire after a specific date. 
-		// It should be deleted after testing is complete.
-		new UiNotifyDlg(this, "Martus - Test Version", 
-				new String[] {"THIS IS A TEST VERSION OF MARTUS",
-				"Please contact info@martus.org with any questions"}, 
-				new String[] {"OK"});
+//		new UiNotifyDlg(this, "Martus - Test Version", 
+//				new String[] {"THIS IS A TEST VERSION OF MARTUS",
+//				"Please contact info@martus.org with any questions"}, 
+//				new String[] {"OK"});
 		
 		MultiCalendar today = new MultiCalendar();
 		MultiCalendar expires = MultiCalendar.createFromGregorianYearMonthDay(2007, 6, 30);
