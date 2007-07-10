@@ -142,7 +142,6 @@ import org.martus.swing.UiPopupMenu;
 import org.martus.swing.Utilities;
 import org.martus.swing.Utilities.Delay;
 import org.martus.util.FileVerifier;
-import org.martus.util.MultiCalendar;
 import org.martus.util.TokenReplacement;
 import org.martus.util.UnicodeReader;
 import org.martus.util.StreamableBase64.InvalidBase64Exception;
@@ -162,11 +161,11 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 //				new String[] {"THIS IS A TEST VERSION OF MARTUS",
 //				"Please contact info@martus.org with any questions"}, 
 //				new String[] {"OK"});
-		
-		MultiCalendar today = new MultiCalendar();
-		MultiCalendar expires = MultiCalendar.createFromGregorianYearMonthDay(2007, 6, 30);
-		if(today.after(expires))
-			throw new RuntimeException();
+//		
+//		MultiCalendar today = new MultiCalendar();
+//		MultiCalendar expires = MultiCalendar.createFromGregorianYearMonthDay(2007, 6, 30);
+//		if(today.after(expires))
+//			throw new RuntimeException();
 		// End test version block of code
 		
 		cursorStack = new Stack();
