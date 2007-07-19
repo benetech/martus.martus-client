@@ -1,10 +1,10 @@
 ﻿# Martus Client Translation File
 # Language code:  th
 # Language name:  Thai
-# Translated by:  ITIE; ThaiNGO
-# Exported date:  Wed Sep 06 16:10:00 PDT 2006
-# Client version: 3.0
-# Client build:   20060905.1762
+# Translated by:  ITIE; ThaiNGO 
+# Exported date:  Thu May 03 16:13:36 PDT 2007
+# Client version: 3.1
+# Client build:   20070426.1824
 #
 # This file MUST be saved in UTF-8 format!
 # Lines beginning with # are comments and are ignored by Martus
@@ -121,7 +121,6 @@
 -1d7a-button:CreatePageReport=สร้างหน้ารายงานใหม่
 
 #_______________________________=Create New Tabular Report
-
 -34ee-button:CreateTabularReport=สร้างตารางรายงานใหม่
 
 #__________________=Delete
@@ -150,6 +149,9 @@
 
 #_________________________=Up
 -2038-button:FolderOrderUp=ขึ้น
+
+#___________________________________=Include Private Bulletins
+-741f-button:IncludePrivateBulletins=รวมรายงานส่วนตัว
 
 #______________________________=Insert Row
 -9f53-button:InsertEmptyGridRow=เพิ่มแถว
@@ -451,7 +453,6 @@
 #__________________________________=Warning: Some information in this bulletin is not visible
 -eba1-field:BulletinHasUnknownStuff=คำเตือน: ข้อมูลบางอย่างในรายงานไม่สามารถมองเห็นได้
 
-
 #______________________________________________=The selected Headquarters account(s) will be able to view the private information in this bulletin, or send this bulletin to a server, after you save it.\n\nTo add a new Headquarters account use the Tools/Configure Headquarters menu option.
 -6702-field:BulletinHeadQuartersHQInfoForModify=ชื่อบัญชีสำนักงานใหญ่ที่เลือกจะสามารถดูข้อมูลความลับในรายงานนี้ได้ หรือส่งรายงานนี้ไปยังเซิร์ฟเวอร์ หลังจากคุณบันทึกรายงาน \n\nเพิ่มชื่อบัญชีสำนักงานใหญ่ ไปที่เมนู เครื่องมือ/ปรับแต่งค่าสำนักงานใหญ่
 
@@ -617,7 +618,6 @@
 #__________________________=Labels
 -2228-field:DuplicateLabels=ป้ายชื่อ
 
-
 #__________________________________________=The following labels appear more than once in your template.
 -3f09-field:DuplicateLabelsInCustomTemplate=ป้ายชื่อตามที่ปรากฎมีอยู่แล้วในเทมเพลทนี้
 
@@ -661,7 +661,6 @@
 -1a48-field:ExportAttachments=รวมไพล์แนบตอนส่งออก
 
 #________________________________=Information from the selected bulletins (listed below) will be exported to an XML file that you specify.  These files can then be used to import the Martus bulletin information into another application.\n\n  You could also use this XML file to import these bulletins back into Martus (as new unique bulletins) if desired.  Please email help@martus.org if you need assistance with this type of importing.
-
 -a8c0-field:ExportBulletinDetails=ข้อมูลจากรายงานที่เลือก (ตามรายการด้านล่าง) จะถูกส่งออกเป็นแฟ้ม XML ตามที่คุณต้องการ แฟ้มนี้สามารถถูกนำเข้าจากระบบรายงาน Martus ไปโปรแกรมอื่นๆได้ \n\n คุณสามารถใช้แฟ้ม XML นี้เพื่อนำเข้ารายงานกลับสู่โปรแกรม Martus (ซึ่งจะเป็นรายงานอันใหม่) ดังที่ต้องการ หากคุณต้องการความช่วยเหลือเกี่ยวกับการนำเข้าแฟ้มชนิกนี้กรุณาส่งอีเมล์มาที่ help@martus.org
 
 #____________________________=Include private data in export
@@ -777,8 +776,6 @@
 
 #_____________________________________=Martus Search Specification (.mss)
 -76c0-field:MartusSearchSpecFileFilter=Martus ระบุการค้นหา(.mss)
-#[VT 2006-10-02: In the translation of Martus Report Format (above), I see the word "Martus" in English. However, I don't see it here in the translation of Martus Search Specification. This may be alright, but it would be great if you could make the two translations consistent. Thanks!]
-
 
 #_______________________=Warning: Portions may be missing or damaged
 -00a9-field:MayBeDamaged=คำเตือน: ข้อมูลบางอย่างอาจสูญหายหรือถูกทำลายได้
@@ -881,11 +878,9 @@
 
 #___________________________=*Error retrieving field*
 -6d15-field:ReportFieldError=*มีความผิดพลาดในการเรียกดูช่องข้อมูล*
-#[VT 2006-10-02: There are "*" around the English, but none around the Thai. This may be fine, but I just wanted to check in with you about it. Thanks.]
 
 #______________________=#NumberBulletinsFound# bulletins matched the search.
 -fc88-field:ReportFound=#NumberBulletinsFound# รายงานที่เข้ากับการค้นหา
-#[VT 2006-10-02: Items within # signs should remain in English. It would be great if you could change #จำนวนรายงานที่พบ#  to #NumberBulletinsFound#. Thanks.]
 
 #__________________________________=Total Bulletins:
 -b840-field:ReportNumberOfBulletins=รายงานทั้งหมด
@@ -1199,7 +1194,6 @@
 #_________________________________________________=The file you chose is not part of a key backup set.  These files are named '<name you picked>-#.dat' where # is the sequence number in the disk set previously created.
 -2e41-field:confirmErrorRecoverIvalidFileNamecause=แฟ้มข้อมูลที่คุณเลือก ไม่ใช่ส่วนหนึ่งของกุญแจสำรอง แฟ้มข้อมูลต้องอยู่ในลักษณะ <ชื่อไฟล์ที่ได้เลือก>-#.dat เมื่อ # คือลำดับเลขในชุดแผ่นฟลอปปี้ดิสก์ที่สร้างขึ้นมาก่อนหน้านี้
 
-
 #__________________________________________________=Choosing yes will bring up the file selection dialog again so you may pick a different file.
 -c237-field:confirmErrorRecoverIvalidFileNameeffect=ถ้าตอบ ใช่ จะให้คุณเลือกแฟ้มใหม่อีกครั้ง
 
@@ -1298,6 +1292,12 @@
 
 #____________________________________=Answering Yes will delete all data, uninstall Martus and exit the program.  Answering No will return you to Martus with nothing deleted.
 -b6a1-field:confirmRemoveMartuseffect=ถ้าตอบ ใช่ จะลบข้อมูลทั้งหมด, ถอดถอน Martus และออกจากโปรแกรม ถ้าตอบ ไม่ใช่ จะนำคุณกลับไปยัง Martus โดยที่ไม่ทำการลบใดๆ
+
+#___________________________________________=There are no bulletins that are public only. Include private bulletins?
+-2562-field:confirmReportIncludePrivatecause=ไม่พบรายงานที่เป็นสาธารณะอย่างเดียว รวมรายงานส่วนตัวด้วยหรือไม่?
+
+#____________________________________________=Press 'Include Private Bulletins' to continue with private bulletins included, or press 'Cancel' to exit and return to Martus.
+-42df-field:confirmReportIncludePrivateeffect=กด 'รวมรายงานส่วนตัว' เพื่อดำเนินการต่อกับรายงานส่วนตัว หรือกด 'ยกเลิก' เพื่อออกและกลับสู่ Martus
 
 #_______________________________________________________=Do you want to have your contact information sent to the current server?  This information may be sent to other servers, and will be viewable by anyone who has access to your public bulletin information.
 -4809-field:confirmRequestToSendContactInfoToServercause=คุณต้องการส่งข้อมูลการติดต่อของคุณไปยังเซิร์ฟเวอร์ปัจจุบันหรือไม่? ข้อมูลนี้อาจถูกส่งไปยังเซิร์ฟเวอร์อื่น และจะถูกอ่านโดยใครก็ตามที่สามารถดูรายงานสาธารณะของคุณได้
@@ -1555,7 +1555,10 @@
 -9ca2-field:notifyDropErrorscause=มีข้อผิดพลาดที่ไม่คาดคิดเกิดขึ้นขณะย้ายรายงาน (รายงานหลายฉบับ) รายงานอาจได้รับความเสียหาย
 
 #____________________________________________=An unexpected error occurred in generating the key backup files.
--d237-field:notifyErrorBackingUpKeySharecause=มีข้อผิดพลาดที่คาดคิดเกิดขึ้นขณะสร้างแฟ้มกุญแจ
+-d237-field:notifyErrorBackingUpKeySharecause=มีข้อผิดพลาดที่ไม่คาดคิดเกิดขึ้นขณะสร้างแฟ้มกุญแจ
+
+#_____________________________________=An error has occurred, which may have prevented Martus from saving some configuration information. You may see a warning next time you log in.
+-117c-field:notifyErrorDuringExitcause=มีข้อผิดพลาดเกิดขึ้นที่อาจขัดขวาง Martus จากการบันทึกข้อมูลการตั้งค่าบางอย่าง คุณอาจเห็นคำเตือนนี้ในการเข้าระบบครั้งต่อไป 
 
 #_________________________________________________________=There was an error saving your template.
 -88ed-field:notifyErrorExportingCustomizationTemplatecause=มีข้อผิดพลาดในการบันทึกแม่แบบของคุณ
@@ -1586,7 +1589,6 @@
 
 #_______________________________________=Unable to save configuration file.
 -896e-field:notifyErrorSavingConfigcause=ไม่สามารถบันทึกข้อมูลแฟ้มปรับแต่งได้
-
 
 #______________________________________=Unable to save current screen layout.
 -2bad-field:notifyErrorSavingStatecause=ไม่สามารถบันทึกรูปแบบหน้าจอปัจจุบันได้
@@ -1709,7 +1711,6 @@
 -efa0-field:notifyRecoveryOfKeyPairCompletecause=การกู้คืนแฟ้มกุญแจเสร็จสมบูรณ์ ตอนนี้คุณสามารถเข้าสู่ระบบ Martus ได้แล้ว
 
 #________________________________________________=You have successfully restored your key from your backup files.  It is very important that you now re-distribute your backup files.  We also recommend you backup your key as a single password-encrypted file, though you do not need to recreate the multiple file backup.
-
 -f50c-field:notifyRecoveryOfKeyShareCompletecause=คุณกู้คืนข้อมูลกุญแจจากแฟ้มข้อมูลกุญแจได้สำเร็จ มันสำคัญมากที่คุณจะกระจายแฟ้มสำรองกุญแจใหม่อีกครั้ง เราแนะนำให้คุณสำรองข้อมูลกุญแจโดยเข้ารหัสไว้ ด้วยวิธีนี้คุณไม่จำเป็นต้องสร้างแฟ้มสำรองกุญแจแบบหลายแฟ้มอีก
 
 #_______________________________________________=To restore your key, first you must find the backup file you saved previously.  Using the 'Restore Key from Backup File' dialog box find the file on your computer's hard drive, a network drive, or removable media disk then click the Open button.  Martus will then ask you for your user name and password and restore your key so you can log in normally and access your account.
@@ -1802,7 +1803,6 @@
 #__________________________________________________=You have chosen not to use this server
 -91af-field:notifyUserRejectedServerCompliancecause=คุณได้เลือกไม่ใช้เซิร์ฟเวอร์นี้
 
-
 #______________________________________________=Verification of all disks passed.
 -7d7f-field:notifyVerifyKeyPairSharePassedcause=การตรวจสอบแผ่นฟลอปปี้ดิสก์ทั้งหมดผ่านแล้ว:
 
@@ -1872,6 +1872,8 @@
 #________________________________=Prevent creating public bulletins
 -7c9e-field:preferencesAllPrivate=ป้องกันการสร้างรายงานสาธารณะ
 
+#_______________________________________________=Automatically check for new Field Desk bulletins
+-982a-field:preferencesCheckFieldOfficeBulletins=ตรวจสอบรายงานใหม่จากพื้นที่อัตโนมัติ
 
 #______________________=Private
 -237d-field:privateinfo=ความลับ
@@ -1894,6 +1896,12 @@
 #_________________=Status
 -bae7-field:status=สถานะ
 
+#___________________________________________________=Checking for new Field Desk bulletins...
+-68ab-field:statusCheckingForNewFieldOfficeBulletins=กำลังตรวจสอบรายงานใหม่จากพื้นที่
+
+#________________________________________=New Field Desk bulletins found on server
+-a71e-field:statusNewFieldOfficeBulletins=พบรายงานใหม่จากพื้นที่บนเซิร์ฟเวอร์
+
 #__________________=Summary
 -12b7-field:summary=สรุป
 
@@ -1906,8 +1914,8 @@
 #________________=Title
 -768e-field:title=ชื่อเรื่อง
 
-#_____________________________=English 3.0
--649d-field:translationVersion=ไทย  3.0 
+#_____________________________=Thai 3.1
+-649d-field:translationVersion=ไทย  3.1
 
 #___________________=Username
 -84c2-field:username=ชื่อผู้ใช้
@@ -2185,8 +2193,6 @@
 #_________________________=Import Bulletins
 -4094-menu:ImportBulletins=นำเข้ารายงาน
 
-
-
 #_________________________=Organize Folders
 -1ee2-menu:OrganizeFolders=จัดการแฟ้ม
 
@@ -2370,7 +2376,6 @@
 #________________=Sep
 -fdd2-month:Thai9=ก.ย.
 
-
 #______________=Apr
 -befd-month:apr=เม.ย.
 
@@ -2421,7 +2426,6 @@
 
 #___________________________________________________=Backup Key Information 
 -53df-wintitle:BackupKeyPairToSecretShareInformation=สำรองข้อมูลกุญแจ
-
 
 #__________________________________________________=Backup Complete
 -8b15-wintitle:BackupSecretShareCompleteInformation=สำรองข้อมูลเรียบร้อยแล้ว
@@ -2603,7 +2607,6 @@
 #______________________________________________=Retrieving Bulletin Summaries
 -2a45-wintitle:RetrieveMyDraftBulletinSummaries=กำลังเอาสรุปรายงานคืน
 
-
 #______________________________________=Retrieve My Draft Bulletins
 -eea7-wintitle:RetrieveMyDraftBulletins=เอาร่างรายงานของฉันคืน
 
@@ -2754,6 +2757,9 @@
 #_________________________________=Delete All Data and Remove Martus
 -6fef-wintitle:confirmRemoveMartus=ลบข้อมูลทั้งหมดและถอดถอน Martus
 
+#_________________________________________=All Bulletins Private
+-e4e5-wintitle:confirmReportIncludePrivate=รายงานส่วนตัวทั้งหมด
+
 #_____________________________________________________=Request to Send Contact Info to Server
 -4f40-wintitle:confirmRequestToSendContactInfoToServer=ร้องขอเพื่อส่งข้อมูลการติดต่อไปยังเซิร์ฟเวอร์
 
@@ -2901,6 +2907,9 @@
 #__________________________________________=Error Backing Up Key
 -ee40-wintitle:notifyErrorBackingUpKeyShare=ข้อผิดพลาดในการสำรองกุญแจ
 
+#___________________________________=Error During Exit
+-e05d-wintitle:notifyErrorDuringExit=ผิดพลาดขณะออกจากระบบ
+
 #_______________________________________________________=Error Exporting Template
 -f4cc-wintitle:notifyErrorExportingCustomizationTemplate=ข้อผิดพลาดในการส่งออกแม่แบบ
 
@@ -2933,7 +2942,6 @@
 
 #____________________________________=Error Saving State
 -884d-wintitle:notifyErrorSavingState=ข้อผิดพลาดขณะบันทึกสถานะ
-
 
 #____________________________________=Error Writing File
 -fabf-wintitle:notifyErrorWritingFile=ข้อผิดพลาดขณะเขียนแฟ้ม
@@ -3133,7 +3141,6 @@
 #___________________________________=Unexpected Error
 -d17c-wintitle:notifyUnexpectedError=เกิดข้อผิดพลาดที่ไม่คาดคิด
 
-
 #_______________________________________________________=Unable to Send Bulletin To Server
 -2c28-wintitle:notifyUploadFailedBulletinNotSentToServer=ไม่ส่งรายงานไปยังเซิร์ฟเวอร์
 
@@ -3193,7 +3200,6 @@
 
 #_____________________=Options
 -6bf5-wintitle:options=ตัวเลือก
-
 
 #_______________________________=Back up key file
 -d004-wintitle:saveBackupKeyPair=สำรองข้อมูลแฟ้มกุญแจ
