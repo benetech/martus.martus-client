@@ -49,9 +49,9 @@ public class UiBulletinEditor extends UiBulletinComponent implements HeadQuarter
 		// ensure that attachmentEditor gets initialized
 	}
 
-	public UiBulletinComponentDataSection createBulletinComponentDataSection()
+	public UiBulletinComponentDataSection createBulletinComponentDataSection(String sectionName)
 	{
-		return new UiBulletinComponentEditorSection(mainWindow);
+		return new UiBulletinComponentEditorSection(mainWindow, sectionName);
 	}
 
 	public void validateData() throws UiField.DataInvalidException 

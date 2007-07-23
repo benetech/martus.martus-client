@@ -48,9 +48,9 @@ import org.martus.common.fieldspec.GridFieldSpec;
 public class UiBulletinComponentViewSection extends UiBulletinComponentDataSection
 {
 
-	public UiBulletinComponentViewSection(UiMainWindow ownerToUse)
+	public UiBulletinComponentViewSection(UiMainWindow ownerToUse, String sectionName)
 	{
-		super(ownerToUse);
+		super(ownerToUse, sectionName);
 	}
 
 	public UiField createUnknownField()

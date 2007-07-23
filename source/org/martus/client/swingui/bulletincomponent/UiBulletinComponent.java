@@ -50,7 +50,7 @@ abstract public class UiBulletinComponent extends UiParagraphPanel implements Sc
 {
 	abstract public void setEncryptionChangeListener(EncryptionChangeListener listener);
 	abstract public void setLanguageChangeListener(LanguageChangeListener listener);
-	abstract public UiBulletinComponentDataSection createBulletinComponentDataSection();
+	abstract public UiBulletinComponentDataSection createBulletinComponentDataSection(String sectionName);
 	abstract public void copyDataToBulletin(Bulletin bulletin) throws
 			IOException, MartusCrypto.EncryptionException;
 	abstract public void validateData() throws UiField.DataInvalidException; 
@@ -76,8 +76,8 @@ abstract public class UiBulletinComponent extends UiParagraphPanel implements Sc
 	public void createSections()
 	{
 		headerSection = createHeaderSection();
-		publicSection = createDataSection(currentBulletin.getTopSectionFieldSpecs(), SOMETIMES_ENCRYPTED);
-		privateSection = createDataSection(currentBulletin.getBottomSectionFieldSpecs(), ALWAYS_ENCRYPTED);
+		publicSection = createDataSection(Bulletin.TOP_SECTION, currentBulletin.getTopSectionFieldSpecs(), SOMETIMES_ENCRYPTED);
+		privateSection = createDataSection(Bulletin.BOTTOM_SECTION, currentBulletin.getBottomSectionFieldSpecs(), ALWAYS_ENCRYPTED);
 		headquartersSection = createHeadQuartersSection();
 		
 		ensureSectionsLineUp();
@@ -88,10 +88,10 @@ abstract public class UiBulletinComponent extends UiParagraphPanel implements Sc
 		addOnNewLine(headquartersSection);
 	}
 	
-	private UiBulletinComponentDataSection createDataSection(
+	private UiBulletinComponentDataSection createDataSection(String section, 
 			FieldSpec[] fieldSpecs, int encryptionStatus)
 	{
-		UiBulletinComponentDataSection target = createBulletinComponentDataSection();
+		UiBulletinComponentDataSection target = createBulletinComponentDataSection(section);
 		if(encryptionStatus == SOMETIMES_ENCRYPTED)
 			createAllPrivateField(target);
 		target.createLabelsAndFields(fieldSpecs, this);

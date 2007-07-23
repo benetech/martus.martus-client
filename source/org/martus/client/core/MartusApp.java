@@ -40,6 +40,7 @@ import java.io.ObjectOutputStream;
 import java.io.UnsupportedEncodingException;
 import java.util.Date;
 import java.util.Enumeration;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Set;
 import java.util.Vector;
@@ -134,6 +135,7 @@ public class MartusApp
 	public MartusApp(MartusCrypto cryptoToUse, File dataDirectoryToUse, MtfAwareLocalization localizationToUse) throws MartusAppInitializationException
 	{
 		localization = localizationToUse;
+		
 		try
 		{
 			if(cryptoToUse == null)
@@ -146,6 +148,7 @@ public class MartusApp
 			maxNewFolders = MAXFOLDERS;
 			martusDataRootDirectory = dataDirectoryToUse;
 			store = new ClientBulletinStore(cryptoToUse);
+			fieldExpansionStates = new HashMap();
 			if(shouldUseUnofficialTranslations())
 				localization.includeOfficialLanguagesOnly = false;
 			currentRetrieveCommand = new RetrieveCommand();
@@ -1019,6 +1022,19 @@ public class MartusApp
 
 		store.saveFolders();
 		return foundOrphanCount;
+	}
+
+	public boolean isFieldExpanded(String tag) 
+	{
+		Boolean isExpanded = (Boolean)fieldExpansionStates.get(tag);
+		if(isExpanded == null)
+			return true;
+		return isExpanded.booleanValue();
+	}
+
+	public void setFieldExpansionState(String tag, boolean b) 
+	{
+		fieldExpansionStates.put(tag, new Boolean(b));
 	}
 
 	public Vector findBulletinInAllVisibleFolders(Bulletin b)
@@ -1908,6 +1924,7 @@ public class MartusApp
 	protected File currentAccountDirectory;
 	protected MtfAwareLocalization localization;
 	public ClientBulletinStore store;
+	private HashMap fieldExpansionStates;
 	private ConfigInfo configInfo;
 	public NetworkInterface currentNetworkInterfaceHandler;
 	public ClientSideNetworkGateway currentNetworkInterfaceGateway;

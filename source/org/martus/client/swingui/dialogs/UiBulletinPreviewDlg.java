@@ -42,6 +42,7 @@ import org.martus.client.core.LanguageChangeListener;
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.bulletincomponent.UiBulletinComponentViewSection;
+import org.martus.common.bulletin.Bulletin;
 import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.fieldspec.StandardFieldSpecs;
 import org.martus.common.packet.FieldDataPacket;
@@ -63,7 +64,7 @@ public class UiBulletinPreviewDlg extends JDialog implements ActionListener, Lan
 	{
 		this(owner, owner.getLocalization(), "BulletinPreview");
 
-		UiBulletinComponentViewSection view = new UiBulletinComponentViewSection(owner);
+		UiBulletinComponentViewSection view = new UiBulletinComponentViewSection(owner, Bulletin.TOP_SECTION);
 		FieldSpec[] standardFieldTags = StandardFieldSpecs.getDefaultTopSectionFieldSpecs();
 		
 		view.createLabelsAndFields(standardFieldTags, this);

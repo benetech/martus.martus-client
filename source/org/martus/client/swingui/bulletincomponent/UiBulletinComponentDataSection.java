@@ -31,12 +31,15 @@ import java.awt.FlowLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.net.URL;
 
+import javax.swing.ImageIcon;
 import javax.swing.JComponent;
 import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
 
 import org.martus.client.core.LanguageChangeListener;
+import org.martus.client.core.MartusApp;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.fields.UiDateEditor;
 import org.martus.client.swingui.fields.UiDateViewer;
@@ -57,9 +60,10 @@ import org.martus.swing.UiWrappedTextArea;
 
 abstract public class UiBulletinComponentDataSection extends UiBulletinComponentSection
 {
-	UiBulletinComponentDataSection(UiMainWindow mainWindowToUse)
+	UiBulletinComponentDataSection(UiMainWindow mainWindowToUse, String sectionNameToUse)
 	{
 		super(mainWindowToUse);
+		sectionName = sectionNameToUse;
 	}
 
 	public void createLabelsAndFields(FieldSpec[] specs, LanguageChangeListener listener)
@@ -73,8 +77,7 @@ abstract public class UiBulletinComponentDataSection extends UiBulletinComponent
 			fields[fieldNum] = createAndAddLabelAndField(specs[fieldNum]);
 		}
 		JComponent attachmentTable = createAttachmentTable();
-		String labelText = getLocalization().getFieldLabel("attachments");
-		addComponents(createLabel(labelText, attachmentTable), attachmentTable);
+		addComponents(createLabel("_Attachments" + sectionName, "", attachmentTable), attachmentTable);
 	}
 
 	public UiField createAndAddLabelAndField(FieldSpec spec)
@@ -111,13 +114,14 @@ abstract public class UiBulletinComponentDataSection extends UiBulletinComponent
  	public JComponent createLabel(FieldSpec spec, JComponent field)
 	{
 		String labelText = spec.getLabel();
-		if(labelText.equals(""))
-			labelText = getLocalization().getFieldLabel(spec.getTag());
-		return createLabel(labelText, field);
+		return createLabel(spec.getTag(), labelText, field);
 	}
 
-	public JComponent createLabel(String labelText, JComponent field) 
+	public JComponent createLabel(String tag, String labelText, JComponent field) 
 	{
+		if(labelText.equals(""))
+			labelText = getLocalization().getFieldLabel(tag);
+
 		//TODO: For wrapped labels, we need to take into consideration font size, text alignment, rtol and printing. 
 		//UiWrappedTextArea label = new UiWrappedTextArea(labelText, 30);
 		//UiLabel label = new UiLabel(labelText);
@@ -126,47 +130,62 @@ abstract public class UiBulletinComponentDataSection extends UiBulletinComponent
 		UiWrappedTextArea label = new UiWrappedTextArea(labelText, fixedWidth, fixedWidth);
 		label.setFocusable(false);
 		
- 		JPanel panel = new JPanel(new FlowLayout());
- 		panel.add(new HiderButton(field));
+		HiderButton hider = new HiderButton(getMainWindow().getApp(), tag, field);
+
+		JPanel panel = new JPanel(new FlowLayout());
+ 		panel.add(hider);
  		panel.add(label);
 		return panel;
 	}
 	
 	class HiderButton extends UiButton implements ActionListener
 	{
-		public HiderButton(JComponent fieldToHide)
+		public HiderButton(MartusApp appToUse, String tagToUse, JComponent fieldToHide)
 		{
 			super("");
+			app = appToUse;
+			tag = tagToUse;
 			field = fieldToHide;
 			
-//			float smallFontSize = 8.0F;
-//			setFont(getFont().deriveFont(smallFontSize));
 			setMargin(new Insets(0, 0, 0, 0));
 			addActionListener(this);
 			
-			showField();
+			forceState(app.isFieldExpanded(tag));
 		}
 
 		public void actionPerformed(ActionEvent event) 
 		{
-			if(field.isVisible())
-				hideField();
-			else
-				showField();
+			toggleState();
+			app.setFieldExpansionState(tag, field.isVisible());
+		}
+
+		private void toggleState() 
+		{
+			forceState(!field.isVisible());
+		}
+
+		private void forceState(boolean newState) {
+			field.setVisible(newState);
+			refresh();
+		}
+
+		private void refresh() 
+		{
+			String imageName = getAppropriateImageName();
+			URL url = getClass().getResource(imageName);
+			setIcon(new ImageIcon(url));
 		}
 		
-		public void hideField()
+		public String getAppropriateImageName()
 		{
-			field.setVisible(false);
-			setText("+");
+			if(field.isVisible())
+				return "minus.gif";
+			
+			return "plus.gif";
 		}
 
-		public void showField()
-		{
-			field.setVisible(true);
-			setText("-");
-		}
-
+		MartusApp app;
+		String tag;
 		JComponent field;
 	}
 
@@ -314,5 +333,6 @@ abstract public class UiBulletinComponentDataSection extends UiBulletinComponent
 	}
 
 	LanguageChangeListener languageChangeListener;
+	String sectionName;
 
 }

@@ -53,9 +53,9 @@ import org.martus.util.MultiCalendar;
 public class UiBulletinComponentEditorSection extends UiBulletinComponentDataSection
 {
 
-	public UiBulletinComponentEditorSection(UiMainWindow ownerToUse)
+	public UiBulletinComponentEditorSection(UiMainWindow ownerToUse, String sectionName)
 	{
-		super(ownerToUse);
+		super(ownerToUse, sectionName);
 	}
 
 	public UiField createUnknownField()
