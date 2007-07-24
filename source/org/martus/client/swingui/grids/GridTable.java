@@ -96,6 +96,11 @@ public class GridTable extends UiTableWithCellEditingProtection
 		}
 		setAutoResizeMode(AUTO_RESIZE_OFF);
 	}
+	
+	public UiDialogLauncher getDialogLauncher()
+	{
+		return dlgLauncher;
+	}
 
 	public int getDateColumnWidth(int column)
 	{

@@ -35,13 +35,13 @@ import javax.swing.JTable;
 import org.json.JSONObject;
 import org.martus.client.bulletinstore.ClientBulletinStore;
 import org.martus.client.swingui.dialogs.UiDialogLauncher;
-import org.martus.client.swingui.fields.UiGridEditor;
+import org.martus.client.swingui.fields.UiEditableGrid;
 import org.martus.client.swingui.fields.UiPopUpTreeEditor;
 import org.martus.client.swingui.grids.GridPopUpTreeCellEditor;
 import org.martus.client.swingui.grids.GridTable;
 import org.martus.swing.Utilities;
 
-public class FancySearchGridEditor extends UiGridEditor
+public class FancySearchGridEditor extends UiEditableGrid
 {
 	public static FancySearchGridEditor create(ClientBulletinStore storeToSearch, UiDialogLauncher dlgLauncher)
 	{
@@ -53,7 +53,7 @@ public class FancySearchGridEditor extends UiGridEditor
 	
 	private FancySearchGridEditor(FancySearchHelper helperToUse)
 	{
-		super(helperToUse.getModel(), helperToUse.getDialogLauncher());
+		super(helperToUse.getModel(), helperToUse.getDialogLauncher(), NUMBER_OF_COLUMNS_FOR_GRID);
 		helper = helperToUse;
 		getTable().setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
 		setSearchForColumnWideEnoughForDates();
@@ -110,6 +110,8 @@ public class FancySearchGridEditor extends UiGridEditor
 			stopCellEditing();
 		}
 	}
+
+	private static final int NUMBER_OF_COLUMNS_FOR_GRID = 80;
 
 	FancySearchHelper helper;
 }

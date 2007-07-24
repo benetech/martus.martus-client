@@ -98,7 +98,7 @@ public class UiBulletinComponentViewSection extends UiBulletinComponentDataSecti
 		MartusLocalization localization = mainWindow.getLocalization();
 		fieldSpec.setColumnZeroLabel(localization.getFieldLabel("ColumnGridRowNumber"));
 		UiDialogLauncher dlgLauncher = new UiDialogLauncher(mainWindow.getCurrentActiveFrame(), localization);
-		return new UiGridViewer(fieldSpec, dlgLauncher,  mainWindow.getPreviewTextFieldColumns());
+		return new UiGridViewer(fieldSpec, dlgLauncher, mainWindow.getPreviewTextFieldColumns());
 	}
 
 	public JComponent createAttachmentTable()

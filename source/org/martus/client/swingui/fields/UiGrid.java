@@ -29,6 +29,7 @@ import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Vector;
 
 import javax.swing.Box;
 import javax.swing.JComponent;
@@ -40,6 +41,7 @@ import javax.swing.table.TableCellEditor;
 import org.martus.client.swingui.dialogs.UiDialogLauncher;
 import org.martus.client.swingui.grids.GridTable;
 import org.martus.client.swingui.grids.GridTableModel;
+import org.martus.clientside.UiLocalization;
 import org.martus.common.GridData;
 import org.martus.common.fieldspec.GridFieldSpec;
 import org.martus.swing.UiButton;
@@ -66,24 +68,48 @@ abstract public class UiGrid extends UiField
 		UiScrollPane tableScroller = new UiScrollPane(table);
 		widget = new JPanel();
 		widget.setLayout(new BorderLayout());
-		widget.add(tableScroller, BorderLayout.CENTER);
 
-		Box buttonBox = Box.createHorizontalBox();
+		buttonBox = Box.createHorizontalBox();
 		buttonBox.setBorder(new EmptyBorder(10,0,0,0));
-		deleteRow = new UiButton(dlgLauncher.GetLocalization().getButtonLabel("DeleteSelectedGridRow"));
-		deleteRow.addActionListener(new DeleteRowListener(dlgLauncher));
-		insertRow = new UiButton(dlgLauncher.GetLocalization().getButtonLabel("InsertEmptyGridRow"));
-		insertRow.addActionListener(new InsertRowListener(dlgLauncher));
-		Utilities.addComponentsRespectingOrientation(buttonBox, new Component[] {deleteRow, insertRow, Box.createHorizontalGlue()});
-
-		widget.add(buttonBox, BorderLayout.SOUTH);
+		setButtons(createButtons());
 		
-	}	
+		widget.add(buttonBox, BorderLayout.SOUTH);
+		widget.add(tableScroller, BorderLayout.CENTER);
+	} 
 	
-	public UiButton getInsertButton()
+	protected UiLocalization getLocalization()
 	{
-		return insertRow;
+		return table.getDialogLauncher().GetLocalization();
 	}
+	
+	protected Vector createButtons()
+	{
+		return new Vector();
+	}
+	
+	protected UiButton createShowExpandedButton()
+	{
+		UiButton expand = new UiButton(getLocalization().getButtonLabel("ShowGridExpanded"));
+		expand.addActionListener(new ExpandButtonHandler());
+		return expand;
+	}
+	
+	class ExpandButtonHandler implements ActionListener
+	{
+		public void actionPerformed(ActionEvent arg0)
+		{
+			System.out.println("Expand button pressed");
+		}
+		
+	}
+
+	protected void setButtons(Vector buttons) 
+	{
+		buttonBox.removeAll();
+		buttons.add(Box.createHorizontalGlue());
+		Component[] buttonsAsArray = (Component[])buttons.toArray(new Component[0]);
+		Utilities.addComponentsRespectingOrientation(buttonBox, buttonsAsArray);
+	}	
 	
 	public JComponent getComponent()
 	{
@@ -146,76 +172,11 @@ abstract public class UiGrid extends UiField
 		return table;
 	}
 	
-	public void hideDeleteRowButton()
-	{
-		deleteRow.setVisible(false);
-	}
-	
-	public void hideInsertRowButton()
-	{
-		insertRow.setVisible(false);
-	}
-
-	private class DeleteRowListener implements ActionListener
-	{
-		DeleteRowListener(UiDialogLauncher dlgLauncherToUse)
-		{
-			dlgLauncher = dlgLauncherToUse;
-		}
-
-		public void actionPerformed(ActionEvent e)
-		{
-			if(!isRowSelected())
-			{
-				dlgLauncher.ShowNotifyDialog("NoGridRowSelected");
-				return;
-			}
-
-			try 
-			{
-				deleteSelectedRow();
-			} 
-			catch (ArrayIndexOutOfBoundsException e1) 
-			{
-				e1.printStackTrace();
-			}
-		}		
-		UiDialogLauncher dlgLauncher;
-	}
-	
-	private class InsertRowListener implements ActionListener
-	{
-		InsertRowListener(UiDialogLauncher dlgLauncherToUse)
-		{
-			dlgLauncher = dlgLauncherToUse;
-		}
-
-		public void actionPerformed(ActionEvent e)
-		{
-			if(!isRowSelected())
-			{
-				dlgLauncher.ShowNotifyDialog("NoGridRowSelected");
-				return;
-			}
-
-			try 
-			{
-				insertRow();
-			} 
-			catch (ArrayIndexOutOfBoundsException e1) 
-			{
-				e1.printStackTrace();
-			}
-		}		
-		UiDialogLauncher dlgLauncher;
-	}
-	
 	private static final int NO_ROW_SELECTED = -1;
 	private static final int ROW_HEIGHT_PADDING = 10;
 	JPanel widget;
+	Box buttonBox;
 	GridTable table;
 	GridTableModel model;
-	UiButton deleteRow;
-	UiButton insertRow;
 }
 

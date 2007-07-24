@@ -25,6 +25,8 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.fields;
 
+import java.util.Vector;
+
 import javax.swing.JComponent;
 
 import org.martus.client.swingui.dialogs.UiDialogLauncher;
@@ -39,8 +41,13 @@ public class UiGridViewer extends UiGrid
 		table.setMaxGridWidth(maxGridCharacters);
 		table.resizeTable();
 		table.setEnabled(false);
-		hideDeleteRowButton();
-		hideInsertRowButton();
+	}
+
+	protected Vector createButtons()
+	{
+		Vector buttons = super.createButtons();
+		buttons.insertElementAt(createShowExpandedButton(), 0);
+		return buttons;
 	}
 
 	public void setText(String newText)
