@@ -396,6 +396,9 @@ public class EnglishStrings
 "button:MoveFieldUpInReport=Move Up",
 "button:MoveFieldDownInReport=Move Down",
 
+"button:ShowGridExpanded=Show Expanded",
+"button:ShowGridNormal=Show as Grid",
+
 "button:IncludePrivateBulletins=Include Private Bulletins",
 
 "menu:file=File",

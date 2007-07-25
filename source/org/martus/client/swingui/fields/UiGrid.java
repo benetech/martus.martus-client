@@ -114,7 +114,7 @@ abstract public class UiGrid extends UiField
 	
 	void showExpanded()
 	{
-		System.out.println("WARNING: In-progress edits are not yet being saved");
+		stopCellEditing();
 		widget.removeAll();
 		
 		expandedFieldRows = new Vector();
@@ -134,12 +134,15 @@ abstract public class UiGrid extends UiField
 				rowPanel.addComponents(new UiLabel(model.getColumnName(column)), cellComponent);
 				rowFields[column] = cellField;
 			}
-			fakeTable.addComponents(new UiLabel(model.getColumnName(0) + Integer.toString(row)), rowPanel);
+			fakeTable.addComponents(new UiLabel(model.getColumnName(0) + Integer.toString(row+1)), rowPanel);
 		}
 		widget.add(fakeTable);
 		UiButton showCollapsedButton = new UiButton(getLocalization().getButtonLabel("ShowGridNormal"));
 		showCollapsedButton.addActionListener(new CollapseButtonHandler());
-		widget.add(showCollapsedButton, BorderLayout.AFTER_LAST_LINE);
+		Box box = Box.createHorizontalBox();
+		box.setBorder(new EmptyBorder(10,0,0,0));
+		Utilities.addComponentsRespectingOrientation(box, new Component[] {showCollapsedButton, Box.createHorizontalGlue()});
+		widget.add(box, BorderLayout.AFTER_LAST_LINE);
 	}
 	
 	class CollapseButtonHandler implements ActionListener
