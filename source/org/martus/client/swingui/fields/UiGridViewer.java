@@ -29,15 +29,16 @@ import java.util.Vector;
 
 import javax.swing.JComponent;
 
+import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.dialogs.UiDialogLauncher;
 import org.martus.common.fieldspec.GridFieldSpec;
 
 
 public class UiGridViewer extends UiGrid
 {
-	public UiGridViewer(GridFieldSpec fieldSpec, UiDialogLauncher dlgLauncher, int maxGridCharacters)
+	public UiGridViewer(UiMainWindow mainWindowToUse, GridFieldSpec fieldSpec, UiDialogLauncher dlgLauncher, int maxGridCharacters)
 	{
-		super(fieldSpec, dlgLauncher, false);
+		super(mainWindowToUse, fieldSpec, dlgLauncher, false);
 		table.setMaxGridWidth(maxGridCharacters);
 		table.resizeTable();
 		table.setEnabled(false);

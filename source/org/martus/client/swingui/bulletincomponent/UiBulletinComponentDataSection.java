@@ -26,7 +26,6 @@ Boston, MA 02111-1307, USA.
 
 package org.martus.client.swingui.bulletincomponent;
 
-import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
@@ -36,22 +35,18 @@ import java.net.URL;
 import javax.swing.ImageIcon;
 import javax.swing.JComponent;
 import javax.swing.JPanel;
-import javax.swing.border.LineBorder;
 
 import org.martus.client.core.LanguageChangeListener;
 import org.martus.client.core.MartusApp;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.fields.UiDateEditor;
-import org.martus.client.swingui.fields.UiDateViewer;
 import org.martus.client.swingui.fields.UiField;
+import org.martus.client.swingui.fields.UiFieldCreator;
 import org.martus.client.swingui.fields.UiFlexiDateEditor;
 import org.martus.client.swingui.fields.UiField.DataInvalidException;
 import org.martus.common.bulletin.AttachmentProxy;
 import org.martus.common.bulletin.Bulletin;
-import org.martus.common.fieldspec.DropDownFieldSpec;
 import org.martus.common.fieldspec.FieldSpec;
-import org.martus.common.fieldspec.FieldType;
-import org.martus.common.fieldspec.GridFieldSpec;
 import org.martus.common.fieldspec.StandardFieldSpecs;
 import org.martus.common.packet.FieldDataPacket;
 import org.martus.swing.UiButton;
@@ -60,10 +55,11 @@ import org.martus.swing.UiWrappedTextArea;
 
 abstract public class UiBulletinComponentDataSection extends UiBulletinComponentSection
 {
-	UiBulletinComponentDataSection(UiMainWindow mainWindowToUse, String sectionNameToUse)
+	UiBulletinComponentDataSection(UiMainWindow mainWindowToUse, String sectionNameToUse, UiFieldCreator fieldCreatorToUse)
 	{
 		super(mainWindowToUse);
 		sectionName = sectionNameToUse;
+		fieldCreator = fieldCreatorToUse;
 	}
 
 	public void createLabelsAndFields(FieldSpec[] specs, LanguageChangeListener listener)
@@ -74,7 +70,11 @@ abstract public class UiBulletinComponentDataSection extends UiBulletinComponent
 		fields = new UiField[specs.length];
 		for(int fieldNum = 0; fieldNum < specs.length; ++fieldNum)
 		{
-			fields[fieldNum] = createAndAddLabelAndField(specs[fieldNum]);
+			UiField thisField = createAndAddLabelAndField(specs[fieldNum]);
+			if(specs[fieldNum].getType().isLanguageDropdown())
+				thisField.setLanguageListener(listener);
+			fields[fieldNum] = thisField;
+			
 		}
 		JComponent attachmentTable = createAttachmentTable();
 		addComponents(createLabel("_Attachments" + sectionName, "", attachmentTable), attachmentTable);
@@ -82,7 +82,7 @@ abstract public class UiBulletinComponentDataSection extends UiBulletinComponent
 
 	public UiField createAndAddLabelAndField(FieldSpec spec)
 	{
-		UiField field = createField(spec);
+		UiField field = fieldCreator.createField(spec);
 		field.initalize();
 		addComponents(createLabel(spec, field.getComponent()), field.getComponent());
 		return field;
@@ -189,53 +189,6 @@ abstract public class UiBulletinComponentDataSection extends UiBulletinComponent
 		JComponent field;
 	}
 
-	private UiField createField(FieldSpec fieldSpec)
-	{
-		UiField field = null;
-
-		if(fieldSpec.getTag().equals(Bulletin.TAGENTRYDATE))
-			field = createReadOnlyDateField();
-		else
-			field = createNormalField(fieldSpec);
-		field.getComponent().setBorder(new LineBorder(Color.black));
-		return field;
-	}
-
-
-	private UiField createNormalField(FieldSpec fieldSpec)
-	{
-		FieldType type = fieldSpec.getType();
-		if(type.isMultiline())
-			return createMultilineField();
-		if(type.isDate())
-			return createDateField(fieldSpec);
-		if(type.isDateRange())
-			return createFlexiDateField(fieldSpec);
-		if(type.isLanguageDropdown())
-			return createLanguageField();
-		if(type.isDropdown())
-			return createChoiceField(fieldSpec);
-		if(type.isString())
-			return createNormalField();
-		if(type.isMessage())
-			return createMessageField(fieldSpec);
-		if(type.isBoolean())
-			return createBoolField();
-		if(type.isGrid())
-			return createGridField((GridFieldSpec)fieldSpec);
-		
-		return createUnknownField();
-	}
-
-	private UiField createLanguageField()
-	{
-		UiField field;
-		DropDownFieldSpec spec = new DropDownFieldSpec(getLocalization().getLanguageNameChoices());
-		field = createChoiceField(spec);
-		field.setLanguageListener(languageChangeListener);
-		return field;
-	}
-
 	public void updateEncryptedIndicator(boolean isEncrypted)
 	{
 		String iconFileName = "unlocked.jpg";
@@ -311,28 +264,13 @@ abstract public class UiBulletinComponentDataSection extends UiBulletinComponent
 
 	}
 	
-	abstract public UiField createNormalField();
-	abstract public UiField createMultilineField();
-	abstract public UiField createMessageField(FieldSpec spec);
-
-	abstract public UiField createChoiceField(FieldSpec spec);
-	abstract public UiField createDateField(FieldSpec spec);
-	abstract public UiField createFlexiDateField(FieldSpec spec);
-	abstract public UiField createUnknownField();
-	abstract public UiField createBoolField();
-	abstract public UiField createGridField(GridFieldSpec fieldSpec);
 
 	abstract public JComponent createAttachmentTable();
 	abstract public void addAttachment(AttachmentProxy a);
 	abstract public void clearAttachments();
 	abstract public void validateAttachments() throws DataInvalidException;
 
-	public UiField createReadOnlyDateField()
-	{
-		return new UiDateViewer(getLocalization());
-	}
-
 	LanguageChangeListener languageChangeListener;
 	String sectionName;
-
+	UiFieldCreator fieldCreator;
 }

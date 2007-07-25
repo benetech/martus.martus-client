@@ -33,7 +33,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JTable;
 
 import org.json.JSONObject;
-import org.martus.client.bulletinstore.ClientBulletinStore;
+import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.dialogs.UiDialogLauncher;
 import org.martus.client.swingui.fields.UiEditableGrid;
 import org.martus.client.swingui.fields.UiPopUpTreeEditor;
@@ -43,17 +43,17 @@ import org.martus.swing.Utilities;
 
 public class FancySearchGridEditor extends UiEditableGrid
 {
-	public static FancySearchGridEditor create(ClientBulletinStore storeToSearch, UiDialogLauncher dlgLauncher)
+	public static FancySearchGridEditor create(UiMainWindow mainWindowToUse, UiDialogLauncher dlgLauncher)
 	{
-		FancySearchHelper helper = new FancySearchHelper(storeToSearch, dlgLauncher);
-		FancySearchGridEditor gridEditor = new FancySearchGridEditor(helper);
+		FancySearchHelper helper = new FancySearchHelper(mainWindowToUse.getStore(), dlgLauncher);
+		FancySearchGridEditor gridEditor = new FancySearchGridEditor(mainWindowToUse, helper);
 		gridEditor.initalize();
 		return gridEditor;
 	}
 	
-	private FancySearchGridEditor(FancySearchHelper helperToUse)
+	private FancySearchGridEditor(UiMainWindow mainWindowToUse, FancySearchHelper helperToUse)
 	{
-		super(helperToUse.getModel(), helperToUse.getDialogLauncher(), NUMBER_OF_COLUMNS_FOR_GRID);
+		super(mainWindowToUse, helperToUse.getModel(), helperToUse.getDialogLauncher(), NUMBER_OF_COLUMNS_FOR_GRID);
 		helper = helperToUse;
 		getTable().setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
 		setSearchForColumnWideEnoughForDates();

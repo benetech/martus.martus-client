@@ -37,6 +37,7 @@ import javax.swing.JComponent;
 import javax.swing.KeyStroke;
 import javax.swing.table.TableCellEditor;
 
+import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.dialogs.UiDialogLauncher;
 import org.martus.client.swingui.grids.GridCellEditorAndRenderer;
 import org.martus.client.swingui.grids.GridTableModel;
@@ -48,15 +49,15 @@ import org.martus.swing.UiButton;
 
 public class UiEditableGrid extends UiGrid implements FocusListener
 {
-	public UiEditableGrid(GridFieldSpec fieldSpec, UiDialogLauncher dlgLauncher, int maxGridCharacters)
+	public UiEditableGrid(UiMainWindow mainWindowToUse, GridFieldSpec fieldSpec, UiDialogLauncher dlgLauncher, int maxGridCharacters)
 	{
-		super(fieldSpec, dlgLauncher, true);
+		super(mainWindowToUse, fieldSpec, dlgLauncher, true);
 		initialize(maxGridCharacters);
 	}
 	
-	public UiEditableGrid(GridTableModel modelToUse, UiDialogLauncher dlgLauncher, int maxGridCharacters)
+	public UiEditableGrid(UiMainWindow mainWindowToUse, GridTableModel modelToUse, UiDialogLauncher dlgLauncher, int maxGridCharacters)
 	{
-		super(modelToUse, dlgLauncher, true);
+		super(mainWindowToUse, modelToUse, dlgLauncher, true);
 		initialize(maxGridCharacters);
 	}
 	
