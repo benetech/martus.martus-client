@@ -45,8 +45,8 @@ import java.util.Vector;
 import java.util.zip.ZipFile;
 
 import org.martus.client.core.MartusClientXml;
-import org.martus.client.core.MartusLogger;
 import org.martus.client.swingui.bulletintable.BulletinTableModel;
+import org.martus.common.MartusLogger;
 import org.martus.common.MartusUtilities;
 import org.martus.common.MartusXml;
 import org.martus.common.MartusUtilities.FileVerificationException;

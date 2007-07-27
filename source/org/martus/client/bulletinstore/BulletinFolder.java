@@ -34,8 +34,8 @@ import java.util.Set;
 import java.util.Vector;
 
 import org.martus.client.bulletinstore.ClientBulletinStore.BulletinAlreadyExistsException;
-import org.martus.client.core.MartusLogger;
 import org.martus.clientside.UiLocalization;
+import org.martus.common.MartusLogger;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.database.DatabaseKey;
 import org.martus.common.database.ReadableDatabase;

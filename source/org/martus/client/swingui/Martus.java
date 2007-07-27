@@ -33,7 +33,7 @@ import java.util.Vector;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 
-import org.martus.client.core.MartusLogger;
+import org.martus.common.MartusLogger;
 import org.martus.common.VersionBuildDate;
 import org.martus.swing.UiOptionPane;
 import org.martus.swing.Utilities;

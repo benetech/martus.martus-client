@@ -41,8 +41,8 @@ import java.util.Map;
 import java.util.Set;
 import java.util.Vector;
 
-import org.martus.client.core.MartusLogger;
 import org.martus.common.FieldSpecCollection;
+import org.martus.common.MartusLogger;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.bulletinstore.BulletinStoreCache;
 import org.martus.common.crypto.MartusCrypto;
