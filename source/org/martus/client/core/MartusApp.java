@@ -1162,17 +1162,8 @@ public class MartusApp
 			visibleFoldersContainingThisBulletin.remove(getFolderDiscarded());
 			if(visibleFoldersContainingThisBulletin.size() == 0)
 				continue;
-			Bulletin latestRevision = store.getBulletinRevision(leafBulletinUid);
-			Vector allRevisions = new Vector();
-			allRevisions.add(leafBulletinUid);
-			if(!searchFinalVersionsOnly)
-			{
-				BulletinHistory history = latestRevision.getHistory();
-				for(int h=0; h<history.size(); ++h)
-				{
-					allRevisions.add(UniversalId.createFromAccountAndLocalId(leafBulletinUid.getAccountId(), history.get(h)));
-				}
-			}		
+			
+			Vector allRevisions = getRevisionUidsToSearch(leafBulletinUid, searchFinalVersionsOnly);		
 			
 			for(int j = 0; j < allRevisions.size(); ++j)
 			{
@@ -1180,6 +1171,7 @@ public class MartusApp
 				++revisionsSearched;
 				if(b != null && matcher.doesMatch(new SafeReadableBulletin(b, localization), localization))
 				{
+					Bulletin latestRevision = store.getBulletinRevision(leafBulletinUid);
 					matchedBulletinUids.add(latestRevision);
 					break;
 				}
@@ -1189,6 +1181,22 @@ public class MartusApp
 		Logger.global.info("Search took:"+stopWatch.elapsedInSeconds()+" Seconds, " + matchedBulletinUids.size() +" matches found, " +uids.size()+" leafs, "+ revisionsSearched + " revisions were searched.");
 		
 		return matchedBulletinUids;
+	}
+
+	private Vector getRevisionUidsToSearch(UniversalId leafBulletinUid, boolean searchFinalVersionsOnly)
+	{
+		Vector allRevisions = new Vector();
+		allRevisions.add(leafBulletinUid);
+		if(!searchFinalVersionsOnly)
+		{
+			String authorAccountId = leafBulletinUid.getAccountId();
+			BulletinHistory history = store.getBulletinHistory(leafBulletinUid);
+			for(int h=0; h<history.size(); ++h)
+			{
+				allRevisions.add(UniversalId.createFromAccountAndLocalId(authorAccountId, history.get(h)));
+			}
+		}
+		return allRevisions;
 	}
 	
 	public void updateSearchFolder(SortableBulletinList partialBulletinsToAdd)
