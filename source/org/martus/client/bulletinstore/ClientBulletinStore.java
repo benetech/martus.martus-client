@@ -135,8 +135,6 @@ public class ClientBulletinStore extends BulletinStore
 		MartusLogger.logBeginProcess("saveFieldSpecCache");
 		saveFieldSpecCache();
 		MartusLogger.logEndProcess("saveFieldSpecCache");
-
-		getSignatureGenerator().flushSessionKeyCache();
 	}
 
 	private void saveFieldSpecCache() throws Exception
@@ -242,6 +240,26 @@ public class ClientBulletinStore extends BulletinStore
 		for(int f = 0; f < getFolderCount(); ++f)
 		{
 			removeBulletinFromFolder(getFolder(f), id);
+		}
+	}
+	
+	public BulletinHistory getBulletinHistory(UniversalId uid)
+	{
+		DatabaseKey key = DatabaseKey.createLegacyKey(uid);
+		if(!doesBulletinRevisionExist(key))
+			return new BulletinHistory();
+		
+		try
+		{
+			BulletinHeaderPacket bhp = loadBulletinHeaderPacket(getDatabase(), key, getSignatureVerifier());
+			return bhp.getHistory();
+		}
+		catch (Exception e)
+		{
+			//TODO: Better error handling
+			System.out.println("BulletinStore.getBulletinHistory: " + e);
+			e.printStackTrace();
+			return null;
 		}
 	}
 
