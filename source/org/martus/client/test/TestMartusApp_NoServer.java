@@ -1980,9 +1980,12 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		TRACE_BEGIN("testWindowTitles");
 		String[] testLanguageCodes = {"es", "en", "si"};
 		ChoiceItem[] languageChoicesTest = testAppLocalization.getLanguageNameChoices(testLanguageCodes);
-		assertEquals(testAppLocalization.getLanguageName("en"), languageChoicesTest[0].toString());
-		assertEquals(testAppLocalization.getLanguageName("si"), languageChoicesTest[1].toString());
-		assertEquals(testAppLocalization.getLanguageName("es"), languageChoicesTest[2].toString());
+		for(int i = 0; i < languageChoicesTest.length; ++i)
+		{
+			String thisCode = languageChoicesTest[i].getCode();
+			String expectedString = languageChoicesTest[i].toString();
+			assertEquals(expectedString, testAppLocalization.getLanguageName(thisCode));
+		}
 		TRACE_END();
 	}
 
