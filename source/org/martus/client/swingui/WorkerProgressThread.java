@@ -1,8 +1,8 @@
 /*
 
 The Martus(tm) free, social justice documentation and
-monitoring software. Copyright (C) 2006-2007, Beneficent
-Technology, Inc. (The Benetech Initiative).
+monitoring software. Copyright (C) 2006, Beneficent
+Technology, Inc. (Benetech).
 
 Martus is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
@@ -23,15 +23,18 @@ Software Foundation, Inc., 59 Temple Place - Suite 330,
 Boston, MA 02111-1307, USA.
 
 */
-
 package org.martus.client.swingui;
 
 import java.lang.reflect.InvocationTargetException;
+
 import javax.swing.SwingUtilities;
 
-public abstract class WorkerThread extends Thread
+import org.martus.client.swingui.dialogs.UiProgressWithCancelDlg;
+import org.martus.common.ProgressMeterInterface;
+
+public abstract class WorkerProgressThread extends Thread
 {
-	public void start(ModalBusyDialog dlgToNotify)
+	public void start(UiProgressWithCancelDlg dlgToNotify)
 	{
 		dlg = dlgToNotify;
 		super.start();
@@ -66,6 +69,11 @@ public abstract class WorkerThread extends Thread
 		ThreadedConfirmDlg confirm = new ThreadedConfirmDlg(mainWindow, title, contents);
 		SwingUtilities.invokeAndWait(confirm);
 		return confirm.getResult();
+	}
+	
+	public ProgressMeterInterface getProgressMeter()
+	{
+		return dlg;
 	}
 
 	private static class ThreadedConfirmDlg implements Runnable
@@ -122,6 +130,6 @@ public abstract class WorkerThread extends Thread
 	
 	public abstract void doTheWorkWithNO_SWING_CALLS() throws Exception;
 	
-	ModalBusyDialog dlg;
+	UiProgressWithCancelDlg dlg;
 	public Exception thrown;
 }

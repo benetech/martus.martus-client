@@ -102,6 +102,8 @@ public class EnglishStrings
 "wintitle:confirmPrintAllPrivateData=Print All Private Data",
 "wintitle:confirmCancelRetrieve=Cancel Retrieve",
 "wintitle:confirmReportIncludePrivate=All Bulletins Private",
+"wintitle:confirmSearchProgressCancel=Cancel Search",
+"wintitle:confirmReportSearchProgressCancel=Cancel Search",
 
 "wintitle:notifyDropErrorBulletinExists=Cannot Move Bulletin(s)",
 "wintitle:notifyDropErrorBulletinOlder=Cannot Move Bulletin(s)",
@@ -307,6 +309,8 @@ public class EnglishStrings
 
 "wintitle:LoadSavedSearch=Load Saved Search",
 "wintitle:SaveSearch=Save Search",
+"wintitle:SearchProgress=Searching...",
+"wintitle:ReportSearchProgress=Searching...",
 
 "button:help=Help",
 "button:create=Create",
@@ -694,6 +698,11 @@ public class EnglishStrings
 "field:confirmPrintAllPrivateDataeffect=Answering '#PrintBack#' will allow you to return to the previous dialog so you can mark the \"Include private information\" box.  Answering '#PrintContinue#' will print only the public sections of the bulletins and skip those bulletins which are all private.",
 "field:confirmCancelRetrievecause=Bulletins are currently being retrieved from the server.",
 "field:confirmCancelRetrieveeffect=This operation will cancel the current retrieval, so some of the requested bulletins may not be retrieved.",
+"field:confirmSearchProgressCancelcause=The search in progress will be stopped immediately",
+"field:confirmSearchProgressCanceleffect=If you do this, the Search Results will only contain bulletins that have been found so far",
+"field:confirmReportSearchProgressCancelcause=The search in progress will be stopped immediately",
+"field:confirmReportSearchProgressCanceleffect=If you do this, the report will only include the bulletins that have been found so far",
+
 
 "field:confirmDateRageInvalidcause=The date range you entered is invalid.  The end date occurs before the begin date.",
 "field:confirmDateRageInvalideffect=Answering Yes will take you back to the date range to fix the problem.  Answering No will revert the date back to its original value.",
@@ -953,7 +962,9 @@ public class EnglishStrings
 		"Martus will search for any bulletins that contain both the words prison and jail, or contain the word trial.\n",
 "field:FancySearchHelpMsg3=" + 
 	"You can use the word #Or# or #And#, or you can use the English words \"#OrEnglish#\" and \"#AndEnglish#\" to search.\n\n" +  
-	"You need to put spaces before and after any #Or# / #And# keywords you use in your search.\n", 
+	"You need to put spaces before and after any #Or# / #And# keywords you use in your search.\n",
+"field:SearchProgress=Progress: ",
+"field:ReportSearchProgress=Progress: ",
 "field:SearchFound=#NumberBulletinsFound# bulletins matched the search, and have been added to the Search Results folder.",
 "field:ReportFound=#NumberBulletinsFound# bulletins matched the search.",
 "field:ReportChooseSortFields=Choose how the bulletins will be sorted in the report. The bulletins will be ordered by the first field chosen. When two bulletins have the same value in that field, they will be sorted by the next sort field, and so on.",

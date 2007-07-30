@@ -1147,16 +1147,22 @@ public class MartusApp
 		setLastUploadRemindedTime(new Date());
 	}
 
-	public SortableBulletinList search(SearchTreeNode searchNode, MiniFieldSpec[] specsForSorting, MiniFieldSpec[] extraSpecs, boolean searchFinalVersionsOnly)
+	public SortableBulletinList search(SearchTreeNode searchNode, MiniFieldSpec[] specsForSorting, MiniFieldSpec[] extraSpecs, boolean searchFinalVersionsOnly, ProgressMeterInterface progressMeter)
 	{
 		Stopwatch stopWatch = new Stopwatch();
 		stopWatch.start();
 		long revisionsSearched = 0;
 		BulletinSearcher matcher = new BulletinSearcher(searchNode);
-		Set uids = store.getAllBulletinLeafUids();
 		SortableBulletinList matchedBulletinUids = new SortableBulletinList(localization, specsForSorting, extraSpecs);
+
+		Set uids = store.getAllBulletinLeafUids();
+		int totalCount = uids.size();
+		int progressCount = 0;
 		for(Iterator iter = uids.iterator(); iter.hasNext();)
 		{
+			if(progressMeter.shouldExit())
+				break;
+			progressMeter.updateProgressMeter(++progressCount, totalCount);
 			UniversalId leafBulletinUid = (UniversalId) iter.next();
 			Vector visibleFoldersContainingThisBulletin = findBulletinInAllVisibleFolders(leafBulletinUid);
 			visibleFoldersContainingThisBulletin.remove(getFolderDiscarded());

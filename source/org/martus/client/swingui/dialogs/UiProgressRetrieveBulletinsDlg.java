@@ -42,7 +42,7 @@ public class UiProgressRetrieveBulletinsDlg extends UiProgressRetrieveDlg
 		chunkCountMeter.updateProgressMeter(0, 1);
 		UiVBox vBox = new UiVBox();
 		vBox.addSpace();
-		vBox.addCentered(bulletinCountMeter);
+		vBox.addCentered(progressMeter);
 		vBox.addCentered(chunkCountMeter);
 		vBox.addSpace();
 		vBox.addCentered(cancel);

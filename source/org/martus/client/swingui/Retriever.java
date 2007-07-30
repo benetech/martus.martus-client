@@ -114,7 +114,7 @@ public class Retriever
 					{
 						if(progressDlg.shouldExit())
 							break;
-						progressDlg.updateBulletinCountMeter(i, size);
+						progressDlg.updateProgressMeter(i, size);
 					}
 					UniversalId uid = (UniversalId)uidList.get(i);
 					DatabaseKey key = DatabaseKey.createLegacyKey(uid);
@@ -136,7 +136,7 @@ public class Retriever
 			}
 
 			if(progressDlg != null)
-				progressDlg.updateBulletinCountMeter(i, size);
+				progressDlg.updateProgressMeter(i, size);
 
 			if(gotAllBulletins)
 				result = NetworkInterfaceConstants.OK;

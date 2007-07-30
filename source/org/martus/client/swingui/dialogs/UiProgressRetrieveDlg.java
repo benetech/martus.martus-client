@@ -26,79 +26,13 @@ Boston, MA 02111-1307, USA.
 
 package org.martus.client.swingui.dialogs;
 
-import java.awt.BorderLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
-
-import javax.swing.JButton;
-import javax.swing.JDialog;
-
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.client.swingui.UiProgressMeter;
-import org.martus.clientside.UiLocalization;
-import org.martus.swing.UiButton;
-import org.martus.swing.UiLabel;
 
-abstract public class UiProgressRetrieveDlg extends JDialog
+abstract public class UiProgressRetrieveDlg extends UiProgressWithCancelDlg
 {
 	public UiProgressRetrieveDlg(UiMainWindow window, String tag)
 	{
-		super(window, window.getLocalization().getWindowTitle(tag), true);
-		UiLocalization localization = window.getLocalization();
-		setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-		addWindowListener(new WindowEventHandler());
-		cancel = new UiButton(localization.getButtonLabel("cancel"));
-		cancel.addActionListener(new CancelHandler());
-		cancel.setAlignmentX(JButton.CENTER_ALIGNMENT);
-		bulletinCountMeter = new UiProgressMeter(this, localization);
-		bulletinCountMeter.setStatusMessage(tag);
-		updateBulletinCountMeter(0, 1);
-		getContentPane().add(new UiLabel("    "), BorderLayout.EAST);
-		getContentPane().add(new UiLabel("    "), BorderLayout.WEST);
+		super(window, tag);
 	}
 
-	class WindowEventHandler extends WindowAdapter
-	{
-		public void windowClosing(WindowEvent event)
-		{
-			requestExit();
-		}
-	}
-
-	class CancelHandler implements ActionListener
-	{
-		public void actionPerformed(ActionEvent ae)
-		{
-				requestExit();
-		}
-	}
-
-	void requestExit()
-	{
-		isExitRequested = true;
-		cancel.setEnabled(false);
-	}
-
-	public void finished()
-	{
-		dispose();
-	}
-
-	public boolean shouldExit()
-	{
-		return isExitRequested;
-	}
-
-	public void updateBulletinCountMeter(int currentValue, int maxValue)
-	{
-		bulletinCountMeter.updateProgressMeter(currentValue, maxValue);
-	}
-
-
-	public UiProgressMeter bulletinCountMeter;
-	public JButton cancel;
-
-	private boolean isExitRequested;
 }

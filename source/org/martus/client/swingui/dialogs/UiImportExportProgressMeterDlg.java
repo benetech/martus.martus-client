@@ -53,7 +53,7 @@ public class UiImportExportProgressMeterDlg extends UiProgressRetrieveDlg
 		cancelPanel.add(cancel);
 		
 		JPanel meterPanel = new JPanel();
-		meterPanel.add(bulletinCountMeter);
+		meterPanel.add(progressMeter);
 		
 		getContentPane().add(hBox, BorderLayout.NORTH);
 		getContentPane().add(meterPanel, BorderLayout.CENTER);

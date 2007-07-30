@@ -1658,7 +1658,7 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		SearchParser parser = new SearchParser(andKeyword, orKeyword);
 		SearchTreeNode searchNode = parser.parseJustAmazonValueForTesting(originalString);
 		MiniFieldSpec[] noSpecs = new MiniFieldSpec[0];
-		SortableBulletinList result = appWithAccount.search(searchNode, noSpecs, noSpecs, false);
+		SortableBulletinList result = appWithAccount.search(searchNode, noSpecs, noSpecs, false, new NullProgressMeter());
 		assertEquals("found in discarded?", 0, result.size());
 		TRACE_END();
 	}
@@ -2214,7 +2214,7 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		SearchParser parser = new SearchParser(andKeyword, orKeyword);
 		SearchTreeNode searchNode = parser.parseJustAmazonValueForTesting(searchFor);
 		MiniFieldSpec[] noSpecs = new MiniFieldSpec[0];
-		app.updateSearchFolder(app.search(searchNode, noSpecs, noSpecs, searchFinalBulletinVersionsOnly));
+		app.updateSearchFolder(app.search(searchNode, noSpecs, noSpecs, searchFinalBulletinVersionsOnly, new NullProgressMeter()));
 		
 	}
 

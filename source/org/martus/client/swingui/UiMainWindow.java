@@ -93,6 +93,7 @@ import org.martus.client.swingui.dialogs.UiInitialSigninDlg;
 import org.martus.client.swingui.dialogs.UiModelessBusyDlg;
 import org.martus.client.swingui.dialogs.UiOnlineHelpDlg;
 import org.martus.client.swingui.dialogs.UiPreferencesDlg;
+import org.martus.client.swingui.dialogs.UiProgressWithCancelDlg;
 import org.martus.client.swingui.dialogs.UiRemoveServerDlg;
 import org.martus.client.swingui.dialogs.UiServerSummariesDeleteDlg;
 import org.martus.client.swingui.dialogs.UiServerSummariesDlg;
@@ -1298,15 +1299,34 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 
 	public SortableBulletinList doSearch(SearchTreeNode searchTree, MiniFieldSpec[] sortSpecs) throws Exception
 	{
-		return doSearch(searchTree, sortSpecs, new MiniFieldSpec[0]);
+		return doSearch(searchTree, sortSpecs, new MiniFieldSpec[0], "SearchProgress");
 	}
 	
-	public SortableBulletinList doSearch(SearchTreeNode searchTree, MiniFieldSpec[] sortSpecs, MiniFieldSpec[] extraSpecs) throws Exception
+	public SortableBulletinList doSearch(SearchTreeNode searchTree, MiniFieldSpec[] sortSpecs, MiniFieldSpec[] extraSpecs, String progressDialogTag) throws Exception
 	{
+		UiProgressWithCancelDlg dlg = new UiProgressWithCancelDlg(this, progressDialogTag);
 		SearchThread thread = new SearchThread(this, searchTree, sortSpecs, extraSpecs);
-		doBackgroundWork(thread, "BackgroundSearching");
+		doBackgroundWork(thread, dlg);
 		return thread.getResults();
 	}
+
+	public void doBackgroundWork(WorkerProgressThread worker, UiProgressWithCancelDlg progressDialog) throws Exception
+	{
+		setWaitingCursor();
+		try
+		{
+			worker.start(progressDialog);
+			progressDialog.pack();
+			Utilities.centerDlg(progressDialog);
+			progressDialog.setVisible(true);
+			worker.cleanup();
+		}
+		finally
+		{
+			resetCursor();
+		}
+	}
+	
 	
 	public void doBackgroundWork(WorkerThread worker, String dialogTag) throws Exception
 	{
@@ -1324,7 +1344,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		}
 	}
 	
-	static class SearchThread extends WorkerThread
+	static class SearchThread extends WorkerProgressThread
 	{
 		public SearchThread(UiMainWindow mainWindowToUse, SearchTreeNode searchTreeToUse, MiniFieldSpec[] sortSpecsToUse, MiniFieldSpec[] extraSpecsToUse)
 		{
@@ -1336,7 +1356,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		
 		public void doTheWorkWithNO_SWING_CALLS()
 		{
-			searchResults = mainWindow.getApp().search(searchTree, sortSpecs, extraSpecs, mainWindow.uiState.searchFinalBulletinsOnly);
+			searchResults = mainWindow.getApp().search(searchTree, sortSpecs, extraSpecs, mainWindow.uiState.searchFinalBulletinsOnly, getProgressMeter());
 		}
 		
 		public SortableBulletinList getResults()

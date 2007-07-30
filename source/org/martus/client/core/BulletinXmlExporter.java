@@ -69,7 +69,7 @@ public class BulletinXmlExporter
 			Bulletin b = (Bulletin)bulletins.get(i);
 			if(progressMeter != null)
 			{
-				progressMeter.updateBulletinCountMeter(i+1, bulletins.size());
+				progressMeter.updateProgressMeter(i+1, bulletins.size());
 				progressMeter.updateBulletinTitle(b.get(Bulletin.TAGTITLE));
 				if(progressMeter.shouldExit())
 					break;

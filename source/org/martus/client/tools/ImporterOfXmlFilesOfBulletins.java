@@ -94,7 +94,7 @@ public class ImporterOfXmlFilesOfBulletins
 			{
 				if(progressMeter.shouldExit())
 					break;
-				progressMeter.updateBulletinCountMeter(j, bulletinsToImport);
+				progressMeter.updateProgressMeter(j, bulletinsToImport);
 				progressMeter.updateBulletinTitle(b.get(Bulletin.TAGTITLE));
 
 			}
