@@ -40,6 +40,7 @@ import javax.swing.ListSelectionModel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.TableCellEditor;
 
+import org.martus.client.core.MartusApp;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.dialogs.UiDialogLauncher;
 import org.martus.client.swingui.grids.GridTable;
@@ -63,6 +64,7 @@ abstract public class UiGrid extends UiField
 	
 	public UiGrid(UiMainWindow mainWindowToUse, GridTableModel modelToUse, UiDialogLauncher dlgLauncher, boolean isEditable)
 	{
+		app = mainWindowToUse.getApp();
 		model = modelToUse;
 		
 		if(isEditable)
@@ -82,7 +84,15 @@ abstract public class UiGrid extends UiField
 		buttonBox = Box.createHorizontalBox();
 		buttonBox.setBorder(new EmptyBorder(10,0,0,0));
 		setButtons(createButtons());
-		showCollapsed();
+		if(app.isGridExpanded(getGridTag()))
+			showExpanded();
+		else
+			showCollapsed();
+	}
+
+	String getGridTag()
+	{
+		return model.getGridData().getSpec().getTag();
 	} 
 	
 	protected UiLocalization getLocalization()
@@ -106,6 +116,7 @@ abstract public class UiGrid extends UiField
 	{
 		public void actionPerformed(ActionEvent arg0)
 		{
+			app.setGridExpansionState(getGridTag(), true);
 			showExpanded();
 			widget.getTopLevelAncestor().validate();
 		}
@@ -149,6 +160,7 @@ abstract public class UiGrid extends UiField
 	{
 		public void actionPerformed(ActionEvent arg0)
 		{
+			app.setGridExpansionState(getGridTag(), false);
 			showCollapsed();
 			widget.getTopLevelAncestor().validate();
 		}
@@ -255,6 +267,7 @@ abstract public class UiGrid extends UiField
 	private static final int ROW_HEIGHT_PADDING = 10;
 	int FIRST_REAL_FIELD_COLUMN = 1;
 	
+	MartusApp app;
 	UiFieldCreator fieldCreator;
 	JPanel widget;
 	Box buttonBox;

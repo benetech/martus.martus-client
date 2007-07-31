@@ -149,6 +149,7 @@ public class MartusApp
 			martusDataRootDirectory = dataDirectoryToUse;
 			store = new ClientBulletinStore(cryptoToUse);
 			fieldExpansionStates = new HashMap();
+			gridExpansionStates = new HashMap();
 			if(shouldUseUnofficialTranslations())
 				localization.includeOfficialLanguagesOnly = false;
 			currentRetrieveCommand = new RetrieveCommand();
@@ -1035,6 +1036,19 @@ public class MartusApp
 	public void setFieldExpansionState(String tag, boolean b) 
 	{
 		fieldExpansionStates.put(tag, new Boolean(b));
+	}
+	
+	public boolean isGridExpanded(String tag)
+	{
+		Boolean isExpanded = (Boolean)gridExpansionStates.get(tag);
+		if(isExpanded == null)
+			return false;
+		return isExpanded.booleanValue();
+	}
+	
+	public void setGridExpansionState(String tag, boolean b)
+	{
+		gridExpansionStates.put(tag, new Boolean(b));
 	}
 
 	public Vector findBulletinInAllVisibleFolders(Bulletin b)
@@ -1939,6 +1953,7 @@ public class MartusApp
 	protected MtfAwareLocalization localization;
 	public ClientBulletinStore store;
 	private HashMap fieldExpansionStates;
+	private HashMap gridExpansionStates;
 	private ConfigInfo configInfo;
 	public NetworkInterface currentNetworkInterfaceHandler;
 	public ClientSideNetworkGateway currentNetworkInterfaceGateway;
