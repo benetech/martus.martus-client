@@ -142,7 +142,7 @@ abstract public class UiGrid extends UiField
 		Box box = Box.createHorizontalBox();
 		box.setBorder(new EmptyBorder(10,0,0,0));
 		Utilities.addComponentsRespectingOrientation(box, new Component[] {showCollapsedButton, Box.createHorizontalGlue()});
-		widget.add(box, BorderLayout.AFTER_LAST_LINE);
+		widget.add(box, BorderLayout.BEFORE_FIRST_LINE);
 	}
 	
 	class CollapseButtonHandler implements ActionListener
