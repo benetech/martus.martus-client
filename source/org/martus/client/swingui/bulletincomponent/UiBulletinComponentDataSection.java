@@ -26,13 +26,14 @@ Boston, MA 02111-1307, USA.
 
 package org.martus.client.swingui.bulletincomponent;
 
+import java.awt.Component;
 import java.awt.FlowLayout;
+import java.awt.Graphics;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.net.URL;
 
-import javax.swing.ImageIcon;
+import javax.swing.Icon;
 import javax.swing.JComponent;
 import javax.swing.JPanel;
 
@@ -171,22 +172,84 @@ abstract public class UiBulletinComponentDataSection extends UiBulletinComponent
 
 		private void refresh() 
 		{
-			String imageName = getAppropriateImageName();
-			URL url = getClass().getResource(imageName);
-			setIcon(new ImageIcon(url));
+			setIcon(getAppropriateIcon());
 		}
 		
-		public String getAppropriateImageName()
+		public Icon getAppropriateIcon()
 		{
+			int size = field.getFont().getSize();
 			if(field.isVisible())
-				return "minus.gif";
+				return new MinusIcon(size);
 			
-			return "plus.gif";
+			return new PlusIcon(size);
 		}
 
 		MartusApp app;
 		String tag;
 		JComponent field;
+	}
+	
+	abstract class HiderIcon implements Icon
+	{
+		public HiderIcon(int fontSize)
+		{
+			size = fontSize/2;
+			margin = size/10;
+			thickness = size/6 + 1;
+		}
+		
+		public int getIconHeight()
+		{
+			return size;
+		}
+
+		public int getIconWidth()
+		{
+			return size;
+		}
+		
+		protected void drawVerticalLine(Graphics g, int x, int y)
+		{
+			g.fillRect(x + size/2 - thickness/2, y + margin, thickness, size - margin*2);
+		}
+
+		protected void drawHorizontalLine(Graphics g, int x, int y)
+		{
+			g.fillRect(x + margin, y + size/2 - thickness/2, size - margin*2, thickness);
+		}
+
+		int size;
+		int margin;
+		int thickness;
+	}
+	
+	class PlusIcon extends HiderIcon
+	{
+		public PlusIcon(int fontSize)
+		{
+			super(fontSize);
+		}
+
+		public void paintIcon(Component component, Graphics g, int x, int y)
+		{
+			g.setColor(component.getForeground());
+			drawHorizontalLine(g, x, y);
+			drawVerticalLine(g, x, y);
+		}
+	}
+
+	class MinusIcon extends HiderIcon
+	{
+		public MinusIcon(int fontSize)
+		{
+			super(fontSize);
+		}
+
+		public void paintIcon(Component component, Graphics g, int x, int y)
+		{
+			g.setColor(component.getForeground());
+			drawHorizontalLine(g, x, y);
+		}
 	}
 
 	public void updateEncryptedIndicator(boolean isEncrypted)
