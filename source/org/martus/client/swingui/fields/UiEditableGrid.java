@@ -25,6 +25,7 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.fields;
 
+import java.awt.Container;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
@@ -66,7 +67,7 @@ public class UiEditableGrid extends UiGrid implements FocusListener
 		addInsertAndDeleteButtons();
 
 		table.setMaxGridWidth(maxGridCharacters);
-		table.resizeTable(DEFAULT_VISIBLE_ROWS);
+		updateVisibleRowCount();
 
 		bindKeys();
 		addFocusListener(this);
@@ -106,6 +107,12 @@ public class UiEditableGrid extends UiGrid implements FocusListener
 		return table.getFocusableComponents();
 	}
 
+	public void setText(String newText)
+	{
+		super.setText(newText);
+		updateVisibleRowCount();
+	}
+
 	public void focusGained(FocusEvent arg0)
 	{
 	}
@@ -131,6 +138,7 @@ public class UiEditableGrid extends UiGrid implements FocusListener
 
 	public void stopCellEditing()
 	{
+		super.stopCellEditing();
 		TableCellEditor cellEditor = table.getCellEditor();
 		if(cellEditor == null)
 			return;
@@ -201,6 +209,33 @@ public class UiEditableGrid extends UiGrid implements FocusListener
 		component.getActionMap().put(action.getName(), action);
 	}
 	
+	public void insertRow() throws ArrayIndexOutOfBoundsException
+	{
+		stopCellEditing();
+		model.insertEmptyRow(table.getSelectedRow());
+		updateVisibleRowCount();
+	}
+
+	public void deleteSelectedRow() throws ArrayIndexOutOfBoundsException
+	{
+		stopCellEditing();
+		model.deleteSelectedRow(table.getSelectedRow());
+		updateVisibleRowCount();
+	}
+
+	void updateVisibleRowCount()
+	{
+		int rows = table.getRowCount();
+		if(rows < MINIMUM_VISIBLE_ROWS)
+			rows = MINIMUM_VISIBLE_ROWS;
+		if(rows > MAXIMUM_VISIBLE_ROWS)
+			rows = MAXIMUM_VISIBLE_ROWS;
+		table.resizeTable(rows);
+		Container topLevelAncestor = table.getTopLevelAncestor();
+		if(topLevelAncestor != null)
+			topLevelAncestor.validate();
+	}
+
 	abstract class ActionWithName extends AbstractAction
 	{
 		abstract String getName();
@@ -218,6 +253,7 @@ public class UiEditableGrid extends UiGrid implements FocusListener
 			stopCellEditing();
 			model.addEmptyRow();
 			table.changeSelection(getLastRowIndex(),0,false,false);
+			updateVisibleRowCount();
 		}
 	}
 	
@@ -362,7 +398,8 @@ public class UiEditableGrid extends UiGrid implements FocusListener
 	}
 	
 	final int NO_MODIFIERS = 0;
-	private static final int DEFAULT_VISIBLE_ROWS = 5;
+	private static final int MINIMUM_VISIBLE_ROWS = 1;
+	private static final int MAXIMUM_VISIBLE_ROWS = 5;
 	
 	private UiButton insertRow;
 

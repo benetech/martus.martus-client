@@ -38,7 +38,6 @@ import javax.swing.JComponent;
 import javax.swing.JPanel;
 import javax.swing.ListSelectionModel;
 import javax.swing.border.EmptyBorder;
-import javax.swing.table.TableCellEditor;
 
 import org.martus.client.core.MartusApp;
 import org.martus.client.swingui.UiMainWindow;
@@ -229,23 +228,8 @@ abstract public class UiGrid extends UiField
 		return (table.getSelectedRow() != NO_ROW_SELECTED);
 	}
 	
-	public void insertRow() throws ArrayIndexOutOfBoundsException
+	protected void stopCellEditing() 
 	{
-		stopCellEditing();
-		model.insertEmptyRow(table.getSelectedRow());
-	}
-
-	public void deleteSelectedRow() throws ArrayIndexOutOfBoundsException
-	{
-		stopCellEditing();
-		model.deleteSelectedRow(table.getSelectedRow());
-	}
-
-	private void stopCellEditing() 
-	{
-		TableCellEditor cellEditor = table.getCellEditor();
-		if(cellEditor != null)
-			cellEditor.stopCellEditing();
 	}
 	
 	public GridTableModel getGridTableModel()
@@ -271,8 +255,8 @@ abstract public class UiGrid extends UiField
 	UiFieldCreator fieldCreator;
 	JPanel widget;
 	Box buttonBox;
-	GridTable table;
-	GridTableModel model;
+	protected GridTable table;
+	protected GridTableModel model;
 	Vector expandedFieldRows;
 }
 
