@@ -27,15 +27,14 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.swingui.bulletincomponent;
 
 import java.awt.Component;
-import java.awt.FlowLayout;
 import java.awt.Graphics;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.Box;
 import javax.swing.Icon;
 import javax.swing.JComponent;
-import javax.swing.JPanel;
 
 import org.martus.client.core.LanguageChangeListener;
 import org.martus.client.core.MartusApp;
@@ -52,6 +51,7 @@ import org.martus.common.fieldspec.StandardFieldSpecs;
 import org.martus.common.packet.FieldDataPacket;
 import org.martus.swing.UiButton;
 import org.martus.swing.UiWrappedTextArea;
+import org.martus.swing.Utilities;
 
 
 abstract public class UiBulletinComponentDataSection extends UiBulletinComponentSection
@@ -132,10 +132,12 @@ abstract public class UiBulletinComponentDataSection extends UiBulletinComponent
 		label.setFocusable(false);
 		
 		HiderButton hider = new HiderButton(getMainWindow().getApp(), tag, field);
-
-		JPanel panel = new JPanel(new FlowLayout());
- 		panel.add(hider);
- 		panel.add(label);
+		Component spacer = Box.createHorizontalStrut(10);
+			
+		Box panel = Box.createHorizontalBox();
+		hider.setAlignmentY(JComponent.TOP_ALIGNMENT);
+		label.setAlignmentY(JComponent.TOP_ALIGNMENT);
+		Utilities.addComponentsRespectingOrientation(panel, new Component[] {hider, spacer, label});
 		return panel;
 	}
 	
@@ -177,7 +179,7 @@ abstract public class UiBulletinComponentDataSection extends UiBulletinComponent
 		
 		public Icon getAppropriateIcon()
 		{
-			int size = field.getFont().getSize();
+			int size = getFont().getSize();
 			if(field.isVisible())
 				return new MinusIcon(size);
 			
