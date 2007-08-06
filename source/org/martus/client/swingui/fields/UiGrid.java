@@ -150,7 +150,6 @@ abstract public class UiGrid extends UiField
 		UiButton showCollapsedButton = new UiButton(getLocalization().getButtonLabel("ShowGridNormal"));
 		showCollapsedButton.addActionListener(new CollapseButtonHandler());
 		Box box = Box.createHorizontalBox();
-		box.setBorder(new EmptyBorder(10,0,0,0));
 		Utilities.addComponentsRespectingOrientation(box, new Component[] {showCollapsedButton, Box.createHorizontalGlue()});
 		widget.add(box, BorderLayout.BEFORE_FIRST_LINE);
 	}
