@@ -2384,6 +2384,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		}
 		catch(Exception e)
 		{
+			e.printStackTrace();
 			notifyDlg("UnexpectedError");
 		}
 	}
@@ -2402,6 +2403,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		}
 		catch(Exception e)
 		{
+			e.printStackTrace();
 			if(dlg != null)
 				dlg.dispose();
 			doneModifyingBulletin();
