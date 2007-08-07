@@ -145,7 +145,6 @@ abstract public class UiBulletinComponentDataSection extends UiBulletinComponent
 	{
 		public HiderButton(MartusApp appToUse, String tagToUse, JComponent fieldToHide)
 		{
-			super("");
 			app = appToUse;
 			tag = tagToUse;
 			field = fieldToHide;
