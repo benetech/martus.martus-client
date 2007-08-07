@@ -78,20 +78,21 @@ abstract public class UiBulletinComponentDataSection extends UiBulletinComponent
 			
 		}
 		JComponent attachmentTable = createAttachmentTable();
-		addComponents(createLabel("_Attachments" + sectionName, "", attachmentTable), attachmentTable);
+		addLabelAndField(createLabel("_Attachments" + sectionName, "", attachmentTable), attachmentTable);
 	}
 
 	public UiField createAndAddLabelAndField(FieldSpec spec)
 	{
 		UiField field = fieldCreator.createField(spec);
 		field.initalize();
-		addComponents(createLabel(spec, field.getComponent()), field.getComponent());
+		JComponent label = createLabel(spec, field.getComponent());
+		addLabelAndField(label, field.getComponent());
 		return field;
 	}
-
-	public UiField[] getFields()
+	
+	void addLabelAndField(JComponent label, JComponent field)
 	{
-		return fields;
+		addComponents(label, field);
 	}
 
 	public void copyDataFromPacket(FieldDataPacket fdp)
@@ -336,5 +337,6 @@ abstract public class UiBulletinComponentDataSection extends UiBulletinComponent
 
 	LanguageChangeListener languageChangeListener;
 	String sectionName;
+	UiField[] fields;
 	UiFieldCreator fieldCreator;
 }
