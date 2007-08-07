@@ -26,7 +26,9 @@ Boston, MA 02111-1307, USA.
 
 package org.martus.client.swingui.bulletincomponent;
 
+import java.awt.BorderLayout;
 import java.awt.Component;
+import java.awt.Container;
 import java.awt.Graphics;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
@@ -35,6 +37,7 @@ import java.awt.event.ActionListener;
 import javax.swing.Box;
 import javax.swing.Icon;
 import javax.swing.JComponent;
+import javax.swing.JPanel;
 
 import org.martus.client.core.LanguageChangeListener;
 import org.martus.client.core.MartusApp;
@@ -50,6 +53,7 @@ import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.fieldspec.StandardFieldSpecs;
 import org.martus.common.packet.FieldDataPacket;
 import org.martus.swing.UiButton;
+import org.martus.swing.UiLabel;
 import org.martus.swing.UiWrappedTextArea;
 import org.martus.swing.Utilities;
 
@@ -78,15 +82,18 @@ abstract public class UiBulletinComponentDataSection extends UiBulletinComponent
 			
 		}
 		JComponent attachmentTable = createAttachmentTable();
-		addLabelAndField(createLabel("_Attachments" + sectionName, "", attachmentTable), attachmentTable);
+		FieldHolder fieldHolder = new FieldHolder(attachmentTable);
+		JComponent label = createLabel("_Attachments" + sectionName, "", fieldHolder);
+		addLabelAndField(label, fieldHolder);
 	}
 
 	public UiField createAndAddLabelAndField(FieldSpec spec)
 	{
 		UiField field = fieldCreator.createField(spec);
 		field.initalize();
-		JComponent label = createLabel(spec, field.getComponent());
-		addLabelAndField(label, field.getComponent());
+		FieldHolder fieldHolder = new FieldHolder(field.getComponent());
+		JComponent label = createLabel(spec, fieldHolder);
+		addLabelAndField(label, fieldHolder);
 		return field;
 	}
 	
@@ -113,13 +120,13 @@ abstract public class UiBulletinComponentDataSection extends UiBulletinComponent
 			addAttachment(attachments[i]);
 	}
 
- 	public JComponent createLabel(FieldSpec spec, JComponent field)
+ 	public JComponent createLabel(FieldSpec spec, FieldHolder fieldHolder)
 	{
 		String labelText = spec.getLabel();
-		return createLabel(spec.getTag(), labelText, field);
+		return createLabel(spec.getTag(), labelText, fieldHolder);
 	}
 
-	public JComponent createLabel(String tag, String labelText, JComponent field) 
+	public JComponent createLabel(String tag, String labelText, FieldHolder fieldHolder) 
 	{
 		if(labelText.equals(""))
 			labelText = getLocalization().getFieldLabel(tag);
@@ -132,7 +139,7 @@ abstract public class UiBulletinComponentDataSection extends UiBulletinComponent
 		UiWrappedTextArea label = new UiWrappedTextArea(labelText, fixedWidth, fixedWidth);
 		label.setFocusable(false);
 		
-		HiderButton hider = new HiderButton(getMainWindow().getApp(), tag, field);
+		HiderButton hider = new HiderButton(getMainWindow().getApp(), tag, fieldHolder);
 		Component spacer = Box.createHorizontalStrut(10);
 			
 		Box panel = Box.createHorizontalBox();
@@ -144,11 +151,11 @@ abstract public class UiBulletinComponentDataSection extends UiBulletinComponent
 	
 	class HiderButton extends UiButton implements ActionListener
 	{
-		public HiderButton(MartusApp appToUse, String tagToUse, JComponent fieldToHide)
+		public HiderButton(MartusApp appToUse, String tagToUse, FieldHolder fieldToHide)
 		{
 			app = appToUse;
 			tag = tagToUse;
-			field = fieldToHide;
+			fieldHolder = fieldToHide;
 			
 			setMargin(new Insets(0, 0, 0, 0));
 			addActionListener(this);
@@ -159,28 +166,35 @@ abstract public class UiBulletinComponentDataSection extends UiBulletinComponent
 		public void actionPerformed(ActionEvent event) 
 		{
 			toggleState();
-			app.setFieldExpansionState(tag, field.isVisible());
+			app.setFieldExpansionState(tag, fieldHolder.isShown());
 		}
 
 		private void toggleState() 
 		{
-			forceState(!field.isVisible());
+			forceState(!fieldHolder.isShown());
 		}
 
-		private void forceState(boolean newState) {
-			field.setVisible(newState);
+		private void forceState(boolean newState) 
+		{
+			if(newState)
+				fieldHolder.showField();
+			else
+				fieldHolder.hideField();
 			refresh();
 		}
 
 		private void refresh() 
 		{
 			setIcon(getAppropriateIcon());
+			Container topLevelAncestor = getTopLevelAncestor();
+			if(topLevelAncestor != null)
+				topLevelAncestor.validate();
 		}
 		
 		public Icon getAppropriateIcon()
 		{
 			int size = getFont().getSize();
-			if(field.isVisible())
+			if(fieldHolder.isShown())
 				return new MinusIcon(size);
 			
 			return new PlusIcon(size);
@@ -188,7 +202,7 @@ abstract public class UiBulletinComponentDataSection extends UiBulletinComponent
 
 		MartusApp app;
 		String tag;
-		JComponent field;
+		FieldHolder fieldHolder;
 	}
 	
 	abstract class HiderIcon implements Icon
@@ -252,6 +266,38 @@ abstract public class UiBulletinComponentDataSection extends UiBulletinComponent
 			g.setColor(component.getForeground());
 			drawHorizontalLine(g, x, y);
 		}
+	}
+	
+	class FieldHolder extends JPanel
+	{
+		public FieldHolder(JComponent fieldToHold)
+		{
+			super(new BorderLayout());
+			field = fieldToHold;
+			showField();
+		}
+		
+		void showField()
+		{
+			removeAll();
+			add(field);
+			isShown = true;
+		}
+		
+		void hideField()
+		{
+			removeAll();
+			add(new UiLabel(getLocalization().getFieldLabel("FieldIsHidden")));
+			isShown = false;
+		}
+		
+		boolean isShown()
+		{
+			return isShown;
+		}
+		
+		boolean isShown;
+		JComponent field;
 	}
 
 	public void updateEncryptedIndicator(boolean isEncrypted)
