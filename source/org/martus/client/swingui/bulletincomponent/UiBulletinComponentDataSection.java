@@ -29,7 +29,6 @@ package org.martus.client.swingui.bulletincomponent;
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Container;
-import java.awt.Graphics;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -203,69 +202,6 @@ abstract public class UiBulletinComponentDataSection extends UiBulletinComponent
 		MartusApp app;
 		String tag;
 		FieldHolder fieldHolder;
-	}
-	
-	abstract class HiderIcon implements Icon
-	{
-		public HiderIcon(int fontSize)
-		{
-			size = fontSize/2;
-			margin = size/10;
-			thickness = size/6 + 1;
-		}
-		
-		public int getIconHeight()
-		{
-			return size;
-		}
-
-		public int getIconWidth()
-		{
-			return size;
-		}
-		
-		protected void drawVerticalLine(Graphics g, int x, int y)
-		{
-			g.fillRect(x + size/2 - thickness/2, y + margin, thickness, size - margin*2);
-		}
-
-		protected void drawHorizontalLine(Graphics g, int x, int y)
-		{
-			g.fillRect(x + margin, y + size/2 - thickness/2, size - margin*2, thickness);
-		}
-
-		int size;
-		int margin;
-		int thickness;
-	}
-	
-	class PlusIcon extends HiderIcon
-	{
-		public PlusIcon(int fontSize)
-		{
-			super(fontSize);
-		}
-
-		public void paintIcon(Component component, Graphics g, int x, int y)
-		{
-			g.setColor(component.getForeground());
-			drawHorizontalLine(g, x, y);
-			drawVerticalLine(g, x, y);
-		}
-	}
-
-	class MinusIcon extends HiderIcon
-	{
-		public MinusIcon(int fontSize)
-		{
-			super(fontSize);
-		}
-
-		public void paintIcon(Component component, Graphics g, int x, int y)
-		{
-			g.setColor(component.getForeground());
-			drawHorizontalLine(g, x, y);
-		}
 	}
 	
 	class FieldHolder extends JPanel
