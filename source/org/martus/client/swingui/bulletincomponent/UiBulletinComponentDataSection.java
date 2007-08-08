@@ -40,6 +40,7 @@ import javax.swing.JPanel;
 
 import org.martus.client.core.LanguageChangeListener;
 import org.martus.client.core.MartusApp;
+import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.fields.UiDateEditor;
 import org.martus.client.swingui.fields.UiField;
@@ -49,6 +50,7 @@ import org.martus.client.swingui.fields.UiField.DataInvalidException;
 import org.martus.common.bulletin.AttachmentProxy;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.fieldspec.FieldSpec;
+import org.martus.common.fieldspec.FieldTypeBoolean;
 import org.martus.common.fieldspec.StandardFieldSpecs;
 import org.martus.common.packet.FieldDataPacket;
 import org.martus.swing.UiButton;
@@ -74,33 +76,41 @@ abstract public class UiBulletinComponentDataSection extends UiBulletinComponent
 		fields = new UiField[specs.length];
 		for(int fieldNum = 0; fieldNum < specs.length; ++fieldNum)
 		{
-			UiField thisField = createAndAddLabelAndField(specs[fieldNum]);
-			if(specs[fieldNum].getType().isLanguageDropdown())
-				thisField.setLanguageListener(listener);
-			fields[fieldNum] = thisField;
-			
+			FieldSpec spec = specs[fieldNum];
+			fields[fieldNum] = createField(spec, listener);
+			FieldRow fieldRow = new FieldRow(getMainWindow(), spec.getTag(), spec.getLabel(), fields[fieldNum].getComponent());
+			addFieldRow(fieldRow);
 		}
+		
 		JComponent attachmentTable = createAttachmentTable();
-		FieldHolder fieldHolder = new FieldHolder(attachmentTable);
-		JComponent label = createLabel("_Attachments" + sectionName, "", fieldHolder);
-		addLabelAndField(label, fieldHolder);
+		String tag = "_Attachments" + sectionName;
+		FieldRow fieldRow = new FieldRow(getMainWindow(), tag, "", attachmentTable);
+		addFieldRow(fieldRow);
 	}
 
-	public UiField createAndAddLabelAndField(FieldSpec spec)
+	UiField createField(FieldSpec spec, LanguageChangeListener listener)
 	{
 		UiField field = fieldCreator.createField(spec);
 		field.initalize();
-		FieldHolder fieldHolder = new FieldHolder(field.getComponent());
-		JComponent label = createLabel(spec, fieldHolder);
-		addLabelAndField(label, fieldHolder);
+		if(spec.getType().isLanguageDropdown())
+			field.setLanguageListener(listener);
 		return field;
 	}
-	
-	void addLabelAndField(JComponent label, JComponent field)
+
+	UiField createAllPrivateField()
 	{
-		addComponents(label, field);
+		FieldSpec allPrivateFieldSpec = FieldSpec.createStandardField("allprivate", new FieldTypeBoolean());
+		UiField field = createField(allPrivateFieldSpec, null);
+		FieldRow fieldRow = new FieldRow(getMainWindow(), allPrivateFieldSpec.getTag(), allPrivateFieldSpec.getLabel(), field.getComponent());
+		addFieldRow(fieldRow);
+		return field;
 	}
 
+	void addFieldRow(FieldRow row)
+	{
+		addComponents(row.getLabel(), row.getFieldHolder());
+	}
+	
 	public void copyDataFromPacket(FieldDataPacket fdp)
 	{
 		for(int fieldNum = 0; fieldNum < fields.length; ++fieldNum)
@@ -119,36 +129,58 @@ abstract public class UiBulletinComponentDataSection extends UiBulletinComponent
 			addAttachment(attachments[i]);
 	}
 
- 	public JComponent createLabel(FieldSpec spec, FieldHolder fieldHolder)
+	static class FieldRow
 	{
-		String labelText = spec.getLabel();
-		return createLabel(spec.getTag(), labelText, fieldHolder);
-	}
-
-	public JComponent createLabel(String tag, String labelText, FieldHolder fieldHolder) 
-	{
-		if(labelText.equals(""))
-			labelText = getLocalization().getFieldLabel(tag);
-
-		//TODO: For wrapped labels, we need to take into consideration font size, text alignment, rtol and printing. 
-		//UiWrappedTextArea label = new UiWrappedTextArea(labelText, 30);
-		//UiLabel label = new UiLabel(labelText);
-		//return label;
-		int fixedWidth = 14;
-		UiWrappedTextArea label = new UiWrappedTextArea(labelText, fixedWidth, fixedWidth);
-		label.setFocusable(false);
+		public FieldRow(UiMainWindow mainWindowToUse, String tag, String labelText, JComponent fieldComponent)
+		{
+			MartusLocalization localization = mainWindowToUse.getLocalization();
+			fieldHolder = new FieldHolder(fieldComponent, localization);
+			UiWrappedTextArea labelComponent = createLabelComponent(tag, labelText, localization);
+			label = createLabel(tag, labelComponent, mainWindowToUse.getApp());
+		}
 		
-		HiderButton hider = new HiderButton(getMainWindow().getApp(), tag, fieldHolder);
-		Component spacer = Box.createHorizontalStrut(10);
-			
-		Box panel = Box.createHorizontalBox();
-		hider.setAlignmentY(JComponent.TOP_ALIGNMENT);
-		label.setAlignmentY(JComponent.TOP_ALIGNMENT);
-		Utilities.addComponentsRespectingOrientation(panel, new Component[] {hider, spacer, label});
-		return panel;
+		public JComponent getLabel()
+		{
+			return label;
+		}
+		
+		public FieldHolder getFieldHolder()
+		{
+			return fieldHolder;
+		}
+		
+	 	UiWrappedTextArea createLabelComponent(String tag, String labelText, MartusLocalization localization)
+		{
+			if(labelText.equals(""))
+				labelText = localization.getFieldLabel(tag);
+
+			//TODO: For wrapped labels, we need to take into consideration font size, text alignment, rtol and printing. 
+			//UiWrappedTextArea label = new UiWrappedTextArea(labelText, 30);
+			//UiLabel label = new UiLabel(labelText);
+			//return label;
+			int fixedWidth = 14;
+			UiWrappedTextArea labelComponent = new UiWrappedTextArea(labelText, fixedWidth, fixedWidth);
+			labelComponent.setFocusable(false);
+			return labelComponent;
+		}
+
+		JComponent createLabel(String tag, JComponent labelComponent, MartusApp app)
+		{
+			HiderButton hider = new HiderButton(app, tag, fieldHolder);
+			Component spacer = Box.createHorizontalStrut(10);
+				
+			Box panel = Box.createHorizontalBox();
+			hider.setAlignmentY(JComponent.TOP_ALIGNMENT);
+			labelComponent.setAlignmentY(JComponent.TOP_ALIGNMENT);
+			Utilities.addComponentsRespectingOrientation(panel, new Component[] {hider, spacer, labelComponent});
+			return panel;
+		}
+		
+		JComponent label;
+		FieldHolder fieldHolder;
 	}
 	
-	class HiderButton extends UiButton implements ActionListener
+	static class HiderButton extends UiButton implements ActionListener
 	{
 		public HiderButton(MartusApp appToUse, String tagToUse, FieldHolder fieldToHide)
 		{
@@ -204,12 +236,13 @@ abstract public class UiBulletinComponentDataSection extends UiBulletinComponent
 		FieldHolder fieldHolder;
 	}
 	
-	class FieldHolder extends JPanel
+	static class FieldHolder extends JPanel
 	{
-		public FieldHolder(JComponent fieldToHold)
+		public FieldHolder(JComponent fieldToHold, MartusLocalization localizationToUse)
 		{
 			super(new BorderLayout());
 			field = fieldToHold;
+			localization = localizationToUse;
 			showField();
 		}
 		
@@ -223,7 +256,7 @@ abstract public class UiBulletinComponentDataSection extends UiBulletinComponent
 		void hideField()
 		{
 			removeAll();
-			add(new UiLabel(getLocalization().getFieldLabel("FieldIsHidden")));
+			add(new UiLabel(localization.getFieldLabel("FieldIsHidden")));
 			isShown = false;
 		}
 		
@@ -234,6 +267,7 @@ abstract public class UiBulletinComponentDataSection extends UiBulletinComponent
 		
 		boolean isShown;
 		JComponent field;
+		MartusLocalization localization;
 	}
 
 	public void updateEncryptedIndicator(boolean isEncrypted)

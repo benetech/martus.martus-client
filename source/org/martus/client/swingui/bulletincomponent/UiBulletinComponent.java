@@ -42,7 +42,6 @@ import org.martus.client.swingui.fields.UiField;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.crypto.MartusCrypto;
 import org.martus.common.fieldspec.FieldSpec;
-import org.martus.common.fieldspec.FieldTypeBoolean;
 import org.martus.common.packet.FieldDataPacket;
 import org.martus.swing.UiParagraphPanel;
 
@@ -93,19 +92,15 @@ abstract public class UiBulletinComponent extends UiParagraphPanel implements Sc
 	{
 		UiBulletinComponentDataSection target = createBulletinComponentDataSection(section);
 		if(encryptionStatus == SOMETIMES_ENCRYPTED)
-			createAllPrivateField(target);
+		{
+			allPrivateField = target.createAllPrivateField();
+			allPrivateField.setListener(this);
+		}
 		target.createLabelsAndFields(fieldSpecs, this);
 
 		return target;
 	}
 	
-	private void createAllPrivateField(UiBulletinComponentDataSection target)
-	{
-		FieldSpec allPrivateFieldSpec = FieldSpec.createStandardField("allprivate", new FieldTypeBoolean());
-		allPrivateField = target.createAndAddLabelAndField(allPrivateFieldSpec);
-		allPrivateField.setListener(this);
-	}
-
 	private void ensureSectionsLineUp()
 	{
 		publicSection.matchFirstColumnWidth(privateSection);
