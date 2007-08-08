@@ -31,7 +31,9 @@ import java.awt.Font;
 
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import javax.swing.JComponent;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.LineBorder;
 
@@ -42,13 +44,19 @@ import org.martus.common.fieldspec.FieldSpec;
 import org.martus.swing.UiLabel;
 import org.martus.swing.UiParagraphPanel;
 
-abstract public class UiBulletinComponentSection extends UiParagraphPanel
+import com.jhlabs.awt.BasicGridLayout;
+
+abstract public class UiBulletinComponentSection extends JPanel
 {
 	UiBulletinComponentSection(UiMainWindow mainWindowToUse)
 	{
+		super(new BasicGridLayout());
 		mainWindow = mainWindowToUse;
 		setBorder(new EtchedBorder());
-		outdentFirstField();
+		
+		currentGroup = new UiParagraphPanel();
+		currentGroup.outdentFirstField();
+		add(currentGroup);
 
 		sectionHeading = new UiLabel("", null, JLabel.LEFT);
 		sectionHeading.setVerticalTextPosition(JLabel.TOP);
@@ -59,6 +67,11 @@ abstract public class UiBulletinComponentSection extends UiParagraphPanel
 		addComponents(sectionHeading, warningIndicator);
 	}
 	
+	public void addComponents(JComponent labelComponent, JComponent fieldComponent)
+	{
+		currentGroup.addComponents(labelComponent, fieldComponent);
+	}
+
 	public UiMainWindow getMainWindow()
 	{
 		return mainWindow;
@@ -88,17 +101,12 @@ abstract public class UiBulletinComponentSection extends UiParagraphPanel
 		warningIndicator.setVisible(true);
 	}
 
-	int getFirstColumnWidth()
-	{
-		return getFirstColumnMaxWidth(this);
-	}
-
 	void matchFirstColumnWidth(UiBulletinComponentSection otherSection)
 	{
-		int thisWidth = getFirstColumnWidth();
-		int otherWidth = otherSection.getFirstColumnWidth();
+		int thisWidth = currentGroup.getFirstColumnMaxWidth(this);
+		int otherWidth = otherSection.currentGroup.getFirstColumnMaxWidth(otherSection);
 		if(otherWidth > thisWidth)
-			setFirstColumnWidth(otherWidth);
+			currentGroup.setFirstColumnWidth(otherWidth);
 	}
 
 	protected void setSectionIconAndTitle(String iconFileName, String title)
@@ -112,4 +120,6 @@ abstract public class UiBulletinComponentSection extends UiParagraphPanel
 	JLabel sectionHeading;
 	JLabel warningIndicator;
 	FieldSpec[] fieldSpecs;
+	
+	UiParagraphPanel currentGroup;
 }

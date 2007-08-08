@@ -34,6 +34,7 @@ import java.awt.event.ActionListener;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JComponent;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.JViewport;
@@ -77,7 +78,7 @@ public class UiBulletinPreviewDlg extends JDialog implements ActionListener, Lan
 	}
 
 
-	protected void initalizeView(JPanel view)
+	protected void initalizeView(JComponent view)
 	{
 		UiScrollPane scrollPane = new UiScrollPane();
 		scrollPane.getViewport().setScrollMode(JViewport.SIMPLE_SCROLL_MODE);

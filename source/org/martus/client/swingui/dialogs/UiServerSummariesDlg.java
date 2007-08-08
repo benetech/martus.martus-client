@@ -50,7 +50,7 @@ import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.tablemodels.RetrieveTableModel;
 import org.martus.clientside.UiLocalization;
 import org.martus.common.packet.FieldDataPacket;
-import org.martus.swing.ParagraphLayout;
+import org.martus.swing.MartusParagraphLayout;
 import org.martus.swing.UiButton;
 import org.martus.swing.UiLabel;
 import org.martus.swing.UiRadioButton;
@@ -132,12 +132,12 @@ public abstract class UiServerSummariesDlg extends JDialog
 		unCheckAll.addActionListener(new UnCheckAllHandler());
 
   		JPanel panel = new JPanel();
-		panel.setLayout(new ParagraphLayout());
-		panel.add(new UiLabel(""), ParagraphLayout.NEW_PARAGRAPH);
+		panel.setLayout(new MartusParagraphLayout());
+		panel.add(new UiLabel(""), MartusParagraphLayout.NEW_PARAGRAPH);
 		panel.add(createSummariesPanel(localization));
-		panel.add(new UiLabel(""), ParagraphLayout.NEW_PARAGRAPH);
+		panel.add(new UiLabel(""), MartusParagraphLayout.NEW_PARAGRAPH);
 		Utilities.addComponentsRespectingOrientation(panel, new Component[]{checkAll, unCheckAll, preview});
-		panel.add(new UiLabel(""), ParagraphLayout.NEW_PARAGRAPH);
+		panel.add(new UiLabel(""), MartusParagraphLayout.NEW_PARAGRAPH);
 		Utilities.addComponentsRespectingOrientation(panel, new Component[]{ok, cancel});
 
  		JPanel southPanel = new JPanel();
