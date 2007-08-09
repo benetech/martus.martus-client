@@ -31,12 +31,14 @@ import java.awt.Component;
 import java.awt.Font;
 import java.util.Vector;
 
+import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.border.Border;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.LineBorder;
 
@@ -96,8 +98,6 @@ abstract public class UiBulletinComponentSection extends JPanel
 		currentGroup = new FieldGroup(tag, title);
 		add(currentGroup);
 		groups.add(currentGroup);
-
-		currentGroup.setBorder(new LineBorder(Color.BLUE));
 	}
 	
 	class FieldGroup extends JPanel
@@ -105,6 +105,10 @@ abstract public class UiBulletinComponentSection extends JPanel
 		public FieldGroup(String tag, String title)
 		{
 			super(new BasicGridLayout(1, 2));
+			Border empty = BorderFactory.createEmptyBorder(1, 2, 1, 2);
+			Border line = BorderFactory.createLineBorder(Color.BLACK, 2);
+			setBorder(BorderFactory.createCompoundBorder(empty, line));
+
 			contents = new UiParagraphPanel();
 			contents.outdentFirstField();
 			MartusApp app = getMainWindow().getApp();
