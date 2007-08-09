@@ -47,9 +47,10 @@ public class UiBulletinComponentHeaderSection extends UiBulletinComponentSection
 {
 	UiBulletinComponentHeaderSection(UiMainWindow mainWindowToUse, String tagQualifierToUse)
 	{
-		super(mainWindowToUse);
+		super(mainWindowToUse, "_BulletinSectionHeader");
 		tagQualifier = tagQualifierToUse;
 		MartusLocalization localization = getLocalization();
+
 		String buttonText = localization.getButtonLabel("BulletinDetails");
 		JButton detailsButton = new UiButton(buttonText);
 		detailsButton.addActionListener(new DetailsListener());

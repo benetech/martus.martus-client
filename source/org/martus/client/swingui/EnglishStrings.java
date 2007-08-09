@@ -1015,7 +1015,12 @@ public class EnglishStrings
 "field:ImportProgress=Importing",
 "field:ExportProgress=Exporting",
 "field:ImportExportBulletinTitle=Bulletin",
-"field:FieldIsHidden=(Field hidden...Press the + button to show it)",
+"field:DataIsHidden=(Press the + button to show the hidden information)",
+
+"field:_Section_BulletinSectionHeader=Header",
+"field:_Section_BulletinSectionHeadquarters=Headquarters",
+"field:_SectionTopSection=",
+"field:_SectionBottomSection=",
 
 "field:mdyOrder=Date format sequence",
 "field:DateDelimiter=Date delimiter",

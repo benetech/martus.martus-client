@@ -27,8 +27,11 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.swingui.bulletincomponent;
 
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Font;
+import java.util.Vector;
 
+import javax.swing.Box;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JComponent;
@@ -37,39 +40,83 @@ import javax.swing.JPanel;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.LineBorder;
 
+import org.martus.client.core.MartusApp;
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.UiWarningLabel;
 import org.martus.common.fieldspec.FieldSpec;
 import org.martus.swing.UiLabel;
 import org.martus.swing.UiParagraphPanel;
+import org.martus.swing.Utilities;
 
 import com.jhlabs.awt.BasicGridLayout;
 
 abstract public class UiBulletinComponentSection extends JPanel
 {
-	UiBulletinComponentSection(UiMainWindow mainWindowToUse)
+	UiBulletinComponentSection(UiMainWindow mainWindowToUse, String groupTag)
 	{
 		super(new BasicGridLayout());
 		mainWindow = mainWindowToUse;
+		groups = new Vector();
+		
 		setBorder(new EtchedBorder());
 		
-		currentGroup = new UiParagraphPanel();
-		currentGroup.outdentFirstField();
-		add(currentGroup);
-
 		sectionHeading = new UiLabel("", null, JLabel.LEFT);
 		sectionHeading.setVerticalTextPosition(JLabel.TOP);
 		sectionHeading.setFont(sectionHeading.getFont().deriveFont(Font.BOLD));
 		
 		warningIndicator = new UiWarningLabel();
 		clearWarningIndicator();
-		addComponents(sectionHeading, warningIndicator);
+		
+		Box box = Box.createHorizontalBox();
+		Utilities.addComponentsRespectingOrientation(box, new Component[] {
+				sectionHeading, 
+				warningIndicator,
+				Box.createHorizontalGlue(),
+				});
+		add(box);
+
+		groupTag = "_Section" + groupTag;
+		startNewGroup(groupTag, getLocalization().getFieldLabel(groupTag));
 	}
 	
 	public void addComponents(JComponent labelComponent, JComponent fieldComponent)
 	{
 		currentGroup.addComponents(labelComponent, fieldComponent);
+	}
+
+	public void startNewGroup(String tag, String title)
+	{
+		currentGroup = new FieldGroup(tag, title);
+		add(currentGroup);
+		groups.add(currentGroup);
+
+		currentGroup.setBorder(new LineBorder(Color.BLUE));
+	}
+	
+	class FieldGroup extends JPanel
+	{
+		public FieldGroup(String tag, String title)
+		{
+			super(new BasicGridLayout(1, 2));
+			contents = new UiParagraphPanel();
+			contents.outdentFirstField();
+			MartusApp app = getMainWindow().getApp();
+			MartusLocalization localization = getMainWindow().getLocalization();
+			FieldHolder fieldHolder = new FieldHolder(contents, localization);
+
+			JComponent[] firstRow = new JComponent[] {new HiderButton(app, "_Section" + tag, fieldHolder), new UiLabel(title)};
+			JComponent[] secondRow = new JComponent[] {new UiLabel(""), fieldHolder};
+			Utilities.addComponentsRespectingOrientation(this, firstRow);
+			Utilities.addComponentsRespectingOrientation(this, secondRow);
+		}
+		
+		public void addComponents(JComponent left, JComponent right)
+		{
+			contents.addComponents(left, right);
+		}
+		
+		UiParagraphPanel contents;
 	}
 
 	public UiMainWindow getMainWindow()
@@ -103,10 +150,11 @@ abstract public class UiBulletinComponentSection extends JPanel
 
 	void matchFirstColumnWidth(UiBulletinComponentSection otherSection)
 	{
-		int thisWidth = currentGroup.getFirstColumnMaxWidth(this);
-		int otherWidth = otherSection.currentGroup.getFirstColumnMaxWidth(otherSection);
-		if(otherWidth > thisWidth)
-			currentGroup.setFirstColumnWidth(otherWidth);
+// FIXME: Not clear if this is necessary or helpful...either delete it or make it work again
+//		int thisWidth = currentGroup.getFirstColumnMaxWidth(this);
+//		int otherWidth = otherSection.currentGroup.getFirstColumnMaxWidth(otherSection);
+//		if(otherWidth > thisWidth)
+//			currentGroup.setFirstColumnWidth(otherWidth);
 	}
 
 	protected void setSectionIconAndTitle(String iconFileName, String title)
@@ -121,5 +169,6 @@ abstract public class UiBulletinComponentSection extends JPanel
 	JLabel warningIndicator;
 	FieldSpec[] fieldSpecs;
 	
-	UiParagraphPanel currentGroup;
+	FieldGroup currentGroup;
+	Vector groups;
 }

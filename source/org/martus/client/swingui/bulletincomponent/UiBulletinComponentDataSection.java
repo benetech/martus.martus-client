@@ -26,17 +26,10 @@ Boston, MA 02111-1307, USA.
 
 package org.martus.client.swingui.bulletincomponent;
 
-import java.awt.BorderLayout;
 import java.awt.Component;
-import java.awt.Container;
-import java.awt.Insets;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 import javax.swing.Box;
-import javax.swing.Icon;
 import javax.swing.JComponent;
-import javax.swing.JPanel;
 
 import org.martus.client.core.LanguageChangeListener;
 import org.martus.client.core.MartusApp;
@@ -53,8 +46,6 @@ import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.fieldspec.FieldTypeBoolean;
 import org.martus.common.fieldspec.StandardFieldSpecs;
 import org.martus.common.packet.FieldDataPacket;
-import org.martus.swing.UiButton;
-import org.martus.swing.UiLabel;
 import org.martus.swing.UiWrappedTextArea;
 import org.martus.swing.Utilities;
 
@@ -63,7 +54,7 @@ abstract public class UiBulletinComponentDataSection extends UiBulletinComponent
 {
 	UiBulletinComponentDataSection(UiMainWindow mainWindowToUse, String sectionNameToUse, UiFieldCreator fieldCreatorToUse)
 	{
-		super(mainWindowToUse);
+		super(mainWindowToUse, sectionNameToUse);
 		sectionName = sectionNameToUse;
 		fieldCreator = fieldCreatorToUse;
 	}
@@ -79,6 +70,10 @@ abstract public class UiBulletinComponentDataSection extends UiBulletinComponent
 			FieldSpec spec = specs[fieldNum];
 			fields[fieldNum] = createField(spec, listener);
 			FieldRow fieldRow = new FieldRow(getMainWindow(), spec.getTag(), spec.getLabel(), fields[fieldNum].getComponent());
+			
+// TODO: When we have an isSection() field type, uncomment this 
+//			if(spec.getType().isSectionStart())
+//				startNewGroup("_Section" + spec.getTag(), spec.getLabel());
 			addFieldRow(fieldRow);
 		}
 		
@@ -180,96 +175,6 @@ abstract public class UiBulletinComponentDataSection extends UiBulletinComponent
 		FieldHolder fieldHolder;
 	}
 	
-	static class HiderButton extends UiButton implements ActionListener
-	{
-		public HiderButton(MartusApp appToUse, String tagToUse, FieldHolder fieldToHide)
-		{
-			app = appToUse;
-			tag = tagToUse;
-			fieldHolder = fieldToHide;
-			
-			setMargin(new Insets(0, 0, 0, 0));
-			addActionListener(this);
-			
-			forceState(app.isFieldExpanded(tag));
-		}
-
-		public void actionPerformed(ActionEvent event) 
-		{
-			toggleState();
-			app.setFieldExpansionState(tag, fieldHolder.isShown());
-		}
-
-		private void toggleState() 
-		{
-			forceState(!fieldHolder.isShown());
-		}
-
-		private void forceState(boolean newState) 
-		{
-			if(newState)
-				fieldHolder.showField();
-			else
-				fieldHolder.hideField();
-			refresh();
-		}
-
-		private void refresh() 
-		{
-			setIcon(getAppropriateIcon());
-			Container topLevelAncestor = getTopLevelAncestor();
-			if(topLevelAncestor != null)
-				topLevelAncestor.validate();
-		}
-		
-		public Icon getAppropriateIcon()
-		{
-			int size = getFont().getSize();
-			if(fieldHolder.isShown())
-				return new MinusIcon(size);
-			
-			return new PlusIcon(size);
-		}
-
-		MartusApp app;
-		String tag;
-		FieldHolder fieldHolder;
-	}
-	
-	static class FieldHolder extends JPanel
-	{
-		public FieldHolder(JComponent fieldToHold, MartusLocalization localizationToUse)
-		{
-			super(new BorderLayout());
-			field = fieldToHold;
-			localization = localizationToUse;
-			showField();
-		}
-		
-		void showField()
-		{
-			removeAll();
-			add(field);
-			isShown = true;
-		}
-		
-		void hideField()
-		{
-			removeAll();
-			add(new UiLabel(localization.getFieldLabel("FieldIsHidden")));
-			isShown = false;
-		}
-		
-		boolean isShown()
-		{
-			return isShown;
-		}
-		
-		boolean isShown;
-		JComponent field;
-		MartusLocalization localization;
-	}
-
 	public void updateEncryptedIndicator(boolean isEncrypted)
 	{
 		String iconFileName = "unlocked.jpg";

@@ -26,6 +26,7 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.swingui.bulletincomponent;
 
 import javax.swing.ListSelectionModel;
+
 import org.martus.client.swingui.HeadQuartersTableModel;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.common.bulletin.Bulletin;
@@ -37,7 +38,7 @@ abstract public class UiBulletinComponentHeadQuartersSection extends UiBulletinC
 {
 	public UiBulletinComponentHeadQuartersSection(UiMainWindow mainWindowToUse, Bulletin bulletinToUse, String tagQualifierToUse, int widthToUse)
 	{
-		super(mainWindowToUse);
+		super(mainWindowToUse, "_BulletinSectionHeadquarters");
 		bulletin = bulletinToUse;
 		
 		String hqText = getLabel("HQInfoFor" + tagQualifierToUse); 
