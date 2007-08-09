@@ -69,12 +69,14 @@ abstract public class UiBulletinComponentDataSection extends UiBulletinComponent
 		{
 			FieldSpec spec = specs[fieldNum];
 			fields[fieldNum] = createField(spec, listener);
-			FieldRow fieldRow = new FieldRow(getMainWindow(), spec.getTag(), spec.getLabel(), fields[fieldNum].getComponent());
 			
-// TODO: When we have an isSection() field type, uncomment this 
-//			if(spec.getType().isSectionStart())
-//				startNewGroup("_Section" + spec.getTag(), spec.getLabel());
-			addFieldRow(fieldRow);
+			if(spec.getType().isSectionStart())
+				startNewGroup("_Section" + spec.getTag(), spec.getLabel());
+			else
+			{
+				FieldRow fieldRow = new FieldRow(getMainWindow(), spec.getTag(), spec.getLabel(), fields[fieldNum].getComponent());
+				addFieldRow(fieldRow);
+			}
 		}
 		
 		JComponent attachmentTable = createAttachmentTable();

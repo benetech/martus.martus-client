@@ -87,6 +87,12 @@ abstract public class UiBulletinComponentSection extends JPanel
 
 	public void startNewGroup(String tag, String title)
 	{
+		if(currentGroup != null && currentGroup.isEmpty())
+		{
+			groups.remove(currentGroup);
+			remove(currentGroup);
+		}
+
 		currentGroup = new FieldGroup(tag, title);
 		add(currentGroup);
 		groups.add(currentGroup);
@@ -114,6 +120,11 @@ abstract public class UiBulletinComponentSection extends JPanel
 		public void addComponents(JComponent left, JComponent right)
 		{
 			contents.addComponents(left, right);
+		}
+		
+		public boolean isEmpty()
+		{
+			return (contents.getComponentCount() == 0);
 		}
 		
 		UiParagraphPanel contents;
