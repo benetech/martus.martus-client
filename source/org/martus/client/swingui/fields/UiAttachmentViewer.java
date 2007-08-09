@@ -26,6 +26,7 @@ Boston, MA 02111-1307, USA.
 
 package org.martus.client.swingui.fields;
 
+import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.dnd.DnDConstants;
 import java.awt.dnd.DragGestureEvent;
@@ -38,8 +39,11 @@ import java.awt.dnd.DragSourceListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+
 import javax.swing.JButton;
+import javax.swing.JPanel;
 import javax.swing.ListSelectionModel;
+
 import org.martus.client.core.MartusApp;
 import org.martus.client.core.TransferableAttachmentList;
 import org.martus.client.swingui.MartusLocalization;
@@ -50,16 +54,17 @@ import org.martus.common.bulletin.BulletinLoader;
 import org.martus.common.database.ReadableDatabase;
 import org.martus.swing.UiButton;
 import org.martus.swing.UiFileChooser;
-import org.martus.swing.UiParagraphPanel;
 import org.martus.swing.UiScrollPane;
 import org.martus.swing.UiTable;
 import org.martus.swing.UiVBox;
 import org.martus.swing.Utilities;
 
-public class UiAttachmentViewer extends UiParagraphPanel  implements DragGestureListener, DragSourceListener
+public class UiAttachmentViewer extends JPanel  implements DragGestureListener, DragSourceListener
 {
 	public UiAttachmentViewer(UiMainWindow mainWindowToUse)
 	{
+		super(new BorderLayout());
+		
 		mainWindow = mainWindowToUse;
 		app = mainWindow.getApp();
 		model = new AttachmentTableModel(mainWindow, attachmentTable);
@@ -88,7 +93,7 @@ public class UiAttachmentViewer extends UiParagraphPanel  implements DragGesture
 		UiVBox vbox = new UiVBox();
 		vbox.add(attachmentPane);
 		vbox.add(new Component[] {saveButton, viewButton});
-		add(vbox);
+		add(vbox, BorderLayout.CENTER);
 
 		updateTable();
 		attachmentTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);

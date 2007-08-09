@@ -26,6 +26,7 @@ Boston, MA 02111-1307, USA.
 
 package org.martus.client.swingui.fields;
 
+import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.Transferable;
@@ -38,10 +39,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.util.List;
+
 import javax.swing.JButton;
 import javax.swing.JComponent;
+import javax.swing.JPanel;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
+
 import org.martus.client.swingui.UiFocusListener;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.tablemodels.AttachmentTableModel;
@@ -49,17 +53,17 @@ import org.martus.clientside.UiLocalization;
 import org.martus.common.bulletin.AttachmentProxy;
 import org.martus.swing.UiButton;
 import org.martus.swing.UiFileChooser;
-import org.martus.swing.UiParagraphPanel;
 import org.martus.swing.UiScrollPane;
 import org.martus.swing.UiTable;
 import org.martus.swing.UiVBox;
 
 
 
-public class UiAttachmentEditor extends UiParagraphPanel
+public class UiAttachmentEditor extends JPanel
 {
 	public UiAttachmentEditor(UiMainWindow mainWindowToUse)
 	{
+		super(new BorderLayout());
 		mainWindow = mainWindowToUse;
 
 		UiLocalization localization = mainWindowToUse.getLocalization();
@@ -93,7 +97,7 @@ public class UiAttachmentEditor extends UiParagraphPanel
 		UiVBox vbox = new UiVBox();
 		vbox.add(scrollPane);
 		vbox.add(new Component[]{add, remove});
-		add(vbox);
+		add(vbox, BorderLayout.CENTER);
 
 		attachmentTable.resizeTable(VISIBLE_ROW_COUNT);
 	}
