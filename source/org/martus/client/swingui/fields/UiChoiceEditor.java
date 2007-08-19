@@ -122,7 +122,10 @@ public class UiChoiceEditor extends UiChoice implements ActionListener
 			}
 		}
 		System.out.println("UiChoiceEditor.setText: Couldn't find " + newCode + " in " + spec.toString());
-		widget.setSelectedIndex(0);
+		int select = -1;
+		if(widget.getItemCount() > 0)
+			select = 0;
+		widget.setSelectedIndex(select);
 	}
 
 	public void updateChoices()
