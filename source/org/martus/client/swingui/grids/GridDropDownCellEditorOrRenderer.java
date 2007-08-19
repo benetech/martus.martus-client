@@ -31,6 +31,7 @@ import java.awt.Component;
 import javax.swing.JTable;
 
 import org.martus.client.swingui.fields.UiField;
+import org.martus.common.fieldspec.DropDownFieldSpec;
 import org.martus.swing.UiComboBox;
 
 abstract public class GridDropDownCellEditorOrRenderer extends GridCellEditorAndRenderer
@@ -40,8 +41,8 @@ abstract public class GridDropDownCellEditorOrRenderer extends GridCellEditorAnd
 		super(field);
 	}
 
-	abstract void setFieldSpec(JTable tableToUse, int row, int column);
-
+	abstract void setFieldSpec(DropDownFieldSpec spec);
+	
 	public void spaceWasPressed()
 	{
         UiComboBox comboBox = (UiComboBox)getComponent();
@@ -51,14 +52,20 @@ abstract public class GridDropDownCellEditorOrRenderer extends GridCellEditorAnd
 
 	public Component getTableCellEditorComponent(JTable tableToUse, Object codeString, boolean isSelected, int row, int column)
 	{
-		setFieldSpec(tableToUse, row, column);
+		setFieldSpec(getFieldSpecForCell(tableToUse, row, column));
 		return super.getTableCellEditorComponent(tableToUse, codeString, isSelected, row, column);
 	}
 
 	public Component getTableCellRendererComponent(JTable tableToUse, Object codeString, boolean isSelected, boolean hasFocus, int row, int column)
 	{
-		setFieldSpec(tableToUse, row, column);
+		setFieldSpec(getFieldSpecForCell(tableToUse, row, column));
 		return super.getTableCellRendererComponent(tableToUse, codeString, isSelected, hasFocus, row, column);
+	}
+
+	protected DropDownFieldSpec getFieldSpecForCell(JTable tableToUse, int row, int column)
+	{
+		GridTable gridTable = (GridTable)tableToUse;
+		return (DropDownFieldSpec)gridTable.getFieldSpecForCell(row, column);
 	}
 
 }

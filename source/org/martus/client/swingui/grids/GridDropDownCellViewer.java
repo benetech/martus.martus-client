@@ -26,7 +26,6 @@ Boston, MA 02111-1307, USA.
 
 package org.martus.client.swingui.grids;
 
-import javax.swing.JTable;
 import org.martus.client.swingui.fields.UiChoiceViewer;
 import org.martus.common.fieldspec.DropDownFieldSpec;
 
@@ -37,10 +36,8 @@ public class GridDropDownCellViewer extends GridDropDownCellEditorOrRenderer
 		super(new UiChoiceViewer(null));
 	}
 
-	void setFieldSpec(JTable tableToUse, int row, int column)
+	public void setFieldSpec(DropDownFieldSpec spec)
 	{
-		GridTable gridTable = (GridTable)tableToUse;
-		DropDownFieldSpec spec = (DropDownFieldSpec)gridTable.getFieldSpecForCell(row, column);
 		getChoiceViewer().setSpec(spec);
 	}
 

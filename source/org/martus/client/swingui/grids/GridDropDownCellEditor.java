@@ -27,7 +27,6 @@ package org.martus.client.swingui.grids;
 
 import java.awt.event.ActionListener;
 
-import javax.swing.JTable;
 
 import org.martus.client.swingui.fields.UiChoiceEditor;
 import org.martus.common.fieldspec.DropDownFieldSpec;
@@ -39,10 +38,8 @@ public class GridDropDownCellEditor extends GridDropDownCellEditorOrRenderer
 		super(new UiChoiceEditor(null));
 	}
 	
-	void setFieldSpec(JTable tableToUse, int row, int column)
+	public void setFieldSpec(DropDownFieldSpec spec)
 	{
-		GridTable gridTable = (GridTable)tableToUse;
-		DropDownFieldSpec spec = (DropDownFieldSpec)gridTable.getFieldSpecForCell(row, column);
 		getChoiceEditor().setSpec(spec);
 	}
 
