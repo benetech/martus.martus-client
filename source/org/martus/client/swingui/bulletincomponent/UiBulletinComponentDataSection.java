@@ -52,11 +52,15 @@ import org.martus.swing.Utilities;
 
 abstract public class UiBulletinComponentDataSection extends UiBulletinComponentSection
 {
-	UiBulletinComponentDataSection(UiMainWindow mainWindowToUse, String sectionNameToUse, UiFieldCreator fieldCreatorToUse)
+	UiBulletinComponentDataSection(UiMainWindow mainWindowToUse, String sectionNameToUse)
 	{
 		super(mainWindowToUse, sectionNameToUse);
 		sectionName = sectionNameToUse;
-		fieldCreator = fieldCreatorToUse;
+	}
+	
+	void setFieldCreator(UiFieldCreator creatorToUse)
+	{
+		fieldCreator = creatorToUse;
 	}
 
 	public void createLabelsAndFields(FieldSpec[] specs, LanguageChangeListener listener)

@@ -40,7 +40,8 @@ public class UiBulletinComponentEditorSection extends UiBulletinComponentDataSec
 
 	public UiBulletinComponentEditorSection(UiMainWindow ownerToUse, String sectionName)
 	{
-		super(ownerToUse, sectionName, new UiEditableFieldCreator(ownerToUse));
+		super(ownerToUse, sectionName);
+		setFieldCreator(new UiEditableFieldCreator(ownerToUse));
 	}
 
 	public void addAttachment(AttachmentProxy a)
