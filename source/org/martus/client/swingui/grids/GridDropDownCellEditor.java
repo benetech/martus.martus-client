@@ -1,8 +1,8 @@
 /*
 
 The Martus(tm) free, social justice documentation and
-monitoring software. Copyright (C) 2005-2007, Beneficent
-Technology, Inc. (The Benetech Initiative).
+monitoring software. Copyright (C) 2007, Beneficent
+Technology, Inc. (Benetech).
 
 Martus is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
@@ -23,51 +23,20 @@ Software Foundation, Inc., 59 Temple Place - Suite 330,
 Boston, MA 02111-1307, USA.
 
 */
-
 package org.martus.client.swingui.grids;
 
-import java.awt.Component;
 import java.awt.event.ActionListener;
-import javax.swing.JTable;
-import org.martus.client.swingui.fields.UiChoiceEditor;
-import org.martus.client.swingui.fields.UiField;
-import org.martus.common.fieldspec.DropDownFieldSpec;
-import org.martus.swing.UiComboBox;
 
-public class GridDropDownCellEditor extends GridCellEditorAndRenderer
+import javax.swing.JTable;
+
+import org.martus.client.swingui.fields.UiChoiceEditor;
+import org.martus.common.fieldspec.DropDownFieldSpec;
+
+public class GridDropDownCellEditor extends GridDropDownCellEditorOrRenderer
 {
 	GridDropDownCellEditor()
 	{
 		super(new UiChoiceEditor(null));
-	}
-	
-	GridDropDownCellEditor(UiField field)
-	{
-		super(field);
-	}
-
-	public void spaceWasPressed()
-	{
-        UiComboBox comboBox = (UiComboBox)getComponent();
-        if(!comboBox.isPopupVisible())
-        	comboBox.requestFocus();
-	}
-
-	public Component getTableCellEditorComponent(JTable tableToUse, Object codeString, boolean isSelected, int row, int column)
-	{
-		setFieldSpec(tableToUse, row, column);
-		return super.getTableCellEditorComponent(tableToUse, codeString, isSelected, row, column);
-	}
-
-	public Component getTableCellRendererComponent(JTable tableToUse, Object codeString, boolean isSelected, boolean hasFocus, int row, int column)
-	{
-		setFieldSpec(tableToUse, row, column);
-		return super.getTableCellRendererComponent(tableToUse, codeString, isSelected, hasFocus, row, column);
-	}
-
-	public void addActionListener(ActionListener listener)
-	{
-		(getChoiceEditor()).addActionListener(listener);
 	}
 	
 	void setFieldSpec(JTable tableToUse, int row, int column)
@@ -81,4 +50,10 @@ public class GridDropDownCellEditor extends GridCellEditorAndRenderer
 	{
 		return (UiChoiceEditor)uiField;
 	}
+
+	public void addActionListener(ActionListener listener)
+	{
+		(getChoiceEditor()).addActionListener(listener);
+	}
+	
 }

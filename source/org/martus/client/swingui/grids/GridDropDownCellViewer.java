@@ -30,7 +30,7 @@ import javax.swing.JTable;
 import org.martus.client.swingui.fields.UiChoiceViewer;
 import org.martus.common.fieldspec.DropDownFieldSpec;
 
-public class GridDropDownCellViewer extends GridDropDownCellEditor
+public class GridDropDownCellViewer extends GridDropDownCellEditorOrRenderer
 {
 	GridDropDownCellViewer()
 	{
