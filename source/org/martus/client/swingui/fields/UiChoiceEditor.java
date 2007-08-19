@@ -112,17 +112,32 @@ public class UiChoiceEditor extends UiChoice implements ActionListener
 
 	public void setText(String newCode)
 	{
-		int rowToSelect = spec.findCode(newCode);
-		if(rowToSelect < 0)
-			System.out.println("UiChoiceEditor.setText: Couldn't find " + newCode + " in " + spec.toString());
-		widget.setSelectedIndex(rowToSelect);
+		for(int row = 0; row < widget.getItemCount(); ++row)
+		{
+			ChoiceItem choiceItem = (ChoiceItem)widget.getItemAt(row);
+			if(choiceItem.getCode().equals(newCode))
+			{
+				widget.setSelectedIndex(row);
+				return;
+			}
+		}
+		System.out.println("UiChoiceEditor.setText: Couldn't find " + newCode + " in " + spec.toString());
+		widget.setSelectedIndex(0);
 	}
 
 	public void updateChoices()
 	{
+		ChoiceItem[] choices = new ChoiceItem[spec.getCount()];
+		for(int i = 0; i < choices.length; ++i)
+			choices[i] = spec.getChoice(i);
+		setChoices(choices);
+	}
+	
+	public void setChoices(ChoiceItem[] newChoices)
+	{
 		widget.removeAllItems();
-		for(int i = 0; i < spec.getCount(); ++i)
-			widget.addItem(spec.getChoice(i));
+		for(int i = 0; i < newChoices.length; ++i)
+			widget.addItem(newChoices[i]);
 	}
 
 	public void actionPerformed(ActionEvent e) 
