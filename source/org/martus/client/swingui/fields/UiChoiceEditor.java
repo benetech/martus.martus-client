@@ -38,14 +38,18 @@ import javax.swing.JList;
 import org.martus.client.core.LanguageChangeListener;
 import org.martus.common.fieldspec.ChoiceItem;
 import org.martus.common.fieldspec.DropDownFieldSpec;
-import org.martus.common.fieldspec.FieldSpec;
 import org.martus.swing.UiComboBox;
 import org.martus.swing.UiLanguageDirection;
 import org.martus.util.language.LanguageOptions;
 
 public class UiChoiceEditor extends UiChoice implements ActionListener
 {
-	public UiChoiceEditor(FieldSpec dropDownSpec)
+	public UiChoiceEditor()
+	{
+		this(null);
+	}
+	
+	public UiChoiceEditor(DropDownFieldSpec dropDownSpec)
 	{
 		super(dropDownSpec);
 	}
@@ -66,7 +70,7 @@ public class UiChoiceEditor extends UiChoice implements ActionListener
 	
 	public void setSpec(DropDownFieldSpec specToUse)
 	{
-		spec = specToUse;
+		super.setSpec(specToUse);
 		updateChoices();
 	}
 	

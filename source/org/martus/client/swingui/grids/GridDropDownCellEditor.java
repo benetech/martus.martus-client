@@ -35,7 +35,7 @@ public class GridDropDownCellEditor extends GridDropDownCellEditorOrRenderer
 {
 	GridDropDownCellEditor()
 	{
-		super(new UiChoiceEditor(null));
+		super(new UiChoiceEditor());
 	}
 	
 	public void setFieldSpec(DropDownFieldSpec spec)

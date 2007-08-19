@@ -29,7 +29,6 @@ package org.martus.client.swingui.fields;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
 
-import org.martus.common.fieldspec.DropDownFieldSpec;
 import org.martus.common.fieldspec.FieldSpec;
 import org.martus.swing.UiLabel;
 
@@ -45,11 +44,6 @@ public class UiChoiceViewer extends UiChoice
 		widget = new UiLabel();
 	}
 	
-	public void setSpec(DropDownFieldSpec specToUse)
-	{
-		spec = specToUse;
-	}
-
 	public String getText()
 	{
 		return "";
