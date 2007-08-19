@@ -36,6 +36,11 @@ abstract public class UiChoice extends UiField
 		initialize();
 	}
 	
+	public DropDownFieldSpec getSpec()
+	{
+		return spec;
+	}
+	
 	abstract protected void initialize();
 
 	protected DropDownFieldSpec spec;
