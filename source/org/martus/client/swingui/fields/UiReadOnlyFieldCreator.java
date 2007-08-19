@@ -28,6 +28,7 @@ package org.martus.client.swingui.fields;
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.dialogs.UiDialogLauncher;
+import org.martus.common.fieldspec.DropDownFieldSpec;
 import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.fieldspec.GridFieldSpec;
 
@@ -69,7 +70,7 @@ public class UiReadOnlyFieldCreator extends UiFieldCreator
 		return new UiMessageField(spec, mainWindow.getPreviewTextFieldColumns());
 	}
 
-	public UiField createChoiceField(FieldSpec spec)
+	public UiField createChoiceField(DropDownFieldSpec spec)
 	{
 		return new UiChoiceViewer(spec);
 	}

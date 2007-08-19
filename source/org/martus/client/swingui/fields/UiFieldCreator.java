@@ -48,7 +48,7 @@ abstract public class UiFieldCreator
 	abstract public UiField createMultilineField();
 	abstract public UiField createMessageField(FieldSpec spec);
 
-	abstract public UiField createChoiceField(FieldSpec spec);
+	abstract public UiField createChoiceField(DropDownFieldSpec spec);
 	abstract public UiField createDateField(FieldSpec spec);
 	abstract public UiField createFlexiDateField(FieldSpec spec);
 	abstract public UiField createUnknownField();
@@ -90,7 +90,7 @@ abstract public class UiFieldCreator
 		if(type.isLanguageDropdown())
 			return createLanguageField();
 		if(type.isDropdown())
-			return createChoiceField(fieldSpec);
+			return createChoiceField((DropDownFieldSpec)fieldSpec);
 		if(type.isString())
 			return createNormalField();
 		if(type.isMessage())

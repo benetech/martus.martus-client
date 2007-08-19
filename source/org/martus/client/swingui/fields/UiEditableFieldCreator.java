@@ -25,9 +25,17 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.fields;
 
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
+import java.util.HashMap;
+
+import javax.swing.event.TableModelEvent;
+import javax.swing.event.TableModelListener;
+
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.dialogs.UiDialogLauncher;
+import org.martus.common.fieldspec.DropDownFieldSpec;
 import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.fieldspec.GridFieldSpec;
 import org.martus.common.fieldspec.StandardFieldSpecs;
@@ -38,6 +46,7 @@ public class UiEditableFieldCreator extends UiFieldCreator
 	public UiEditableFieldCreator(UiMainWindow mainWindowToUse)
 	{
 		super(mainWindowToUse);
+		gridFields = new HashMap();
 	}
 
 	public UiField createUnknownField()
@@ -60,9 +69,46 @@ public class UiEditableFieldCreator extends UiFieldCreator
 		return new UiMessageField(spec, mainWindow.getEditingTextFieldColumns());
 	}
 
-	public UiField createChoiceField(FieldSpec spec)
+	public UiField createChoiceField(DropDownFieldSpec spec)
 	{
-		return new UiChoiceEditor(spec);
+		UiChoiceEditor dropDownField = new UiChoiceEditor(spec);
+		String gridTag = spec.getDataSourceGridTag();
+		if(gridTag != null)
+		{
+			UiGridEditor grid = (UiGridEditor)gridFields.get(gridTag);
+			DropDownDataSourceHandler dropDownDataSourceHandler = new DropDownDataSourceHandler(dropDownField, grid);
+			dropDownField.getComponent().addFocusListener(dropDownDataSourceHandler);
+			grid.getGridTableModel().addTableModelListener(dropDownDataSourceHandler);
+		}
+		return dropDownField;
+	}
+	
+	class DropDownDataSourceHandler implements FocusListener, TableModelListener
+	{
+		public DropDownDataSourceHandler(UiChoiceEditor dropDownToUpdate, UiGridEditor dataSourceToMonitor)
+		{
+			dropDown = dropDownToUpdate;
+			dataSource = dataSourceToMonitor;
+			gridColumnLabel = dropDown.getSpec().getDataSourceGridColumn();
+		}
+
+		public void focusGained(FocusEvent e)
+		{
+			System.out.println("Populate dropdown from grid column here!");
+		}
+
+		public void focusLost(FocusEvent ignoreThisEvent)
+		{
+		}
+
+		public void tableChanged(TableModelEvent e)
+		{
+			System.out.println("Clear invalid dropdown value here");
+		}
+
+		UiChoiceEditor dropDown;
+		UiGridEditor dataSource;
+		String gridColumnLabel;
 	}
 
 	public UiField createDateField(FieldSpec spec)
@@ -90,8 +136,9 @@ public class UiEditableFieldCreator extends UiFieldCreator
 		fieldSpec.setColumnZeroLabel(localization.getFieldLabel("ColumnGridRowNumber"));
 		UiDialogLauncher dlgLauncher = new UiDialogLauncher(mainWindow.getCurrentActiveFrame(), localization);
 		UiGridEditor gridEditor = new UiGridEditor(mainWindow, fieldSpec, dlgLauncher, mainWindow.getEditingTextFieldColumns());
+		gridFields.put(fieldSpec.getTag(), gridEditor);
 		return gridEditor;
 	}
 	
-
+	HashMap gridFields;
 }
