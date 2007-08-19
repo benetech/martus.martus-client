@@ -27,19 +27,13 @@ package org.martus.client.swingui.fields;
 
 import java.util.HashMap;
 
-import javax.swing.event.TableModelEvent;
-import javax.swing.event.TableModelListener;
-
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.dialogs.UiDialogLauncher;
-import org.martus.client.swingui.grids.GridTableModel;
-import org.martus.common.fieldspec.ChoiceItem;
 import org.martus.common.fieldspec.DropDownFieldSpec;
 import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.fieldspec.GridFieldSpec;
 import org.martus.common.fieldspec.StandardFieldSpecs;
-import org.martus.swing.UiComboBox;
 import org.martus.util.MultiCalendar;
 
 public class UiEditableFieldCreator extends UiFieldCreator
@@ -73,56 +67,9 @@ public class UiEditableFieldCreator extends UiFieldCreator
 	public UiField createChoiceField(DropDownFieldSpec spec)
 	{
 		UiChoiceEditor dropDownField = new UiChoiceEditor(spec);
-		String gridTag = spec.getDataSourceGridTag();
-		if(gridTag != null)
-		{
-			UiGridEditor grid = (UiGridEditor)gridFields.get(gridTag);
-			DropDownDataSourceHandler dropDownDataSourceHandler = new DropDownDataSourceHandler(dropDownField, grid);
-			grid.getGridTableModel().addTableModelListener(dropDownDataSourceHandler);
-		}
 		return dropDownField;
 	}
 	
-	class DropDownDataSourceHandler implements TableModelListener
-	{
-		public DropDownDataSourceHandler(UiChoiceEditor dropDownToUpdate, UiGridEditor dataSourceToMonitor)
-		{
-			dropDown = dropDownToUpdate;
-			dataSource = dataSourceToMonitor;
-			String gridColumnLabel = dropDown.getSpec().getDataSourceGridColumn();
-			gridColumn = dataSource.getGridTableModel().findColumn(gridColumnLabel);
-		}
-
-		public void tableChanged(TableModelEvent e)
-		{
-			String selected = dropDown.getText();
-
-			UiComboBox component = (UiComboBox)dropDown.getComponent();
-			component.removeAllItems();
-			dropDown.setChoices(getCurrentGridValuesAsChoices());
-			
-			dropDown.setText(selected);
-		}
-		
-		ChoiceItem[] getCurrentGridValuesAsChoices()
-		{
-			GridTableModel model = dataSource.getGridTableModel();
-			ChoiceItem[] values = new ChoiceItem[1 + model.getRowCount()];
-			values[0] = new ChoiceItem("", "");
-			for(int row = 0; row < model.getRowCount(); ++row)
-			{
-				String thisValue = (String)model.getValueAt(row, gridColumn);
-				values[row + 1] = new ChoiceItem(thisValue, thisValue);
-			}
-			
-			return values;
-		}
-
-		UiChoiceEditor dropDown;
-		UiGridEditor dataSource;
-		int gridColumn;
-	}
-
 	public UiField createDateField(FieldSpec spec)
 	{
 		MultiCalendar maxDate = null;

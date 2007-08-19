@@ -30,6 +30,7 @@ import java.util.Map;
 
 import org.martus.client.swingui.fields.UiChoice;
 import org.martus.client.swingui.fields.UiChoiceViewer;
+import org.martus.common.fieldspec.ChoiceItem;
 import org.martus.common.fieldspec.DropDownFieldSpec;
 
 public class GridDropDownCellViewer extends GridDropDownCellEditorOrRenderer
@@ -42,6 +43,10 @@ public class GridDropDownCellViewer extends GridDropDownCellEditorOrRenderer
 	public void setFieldSpec(DropDownFieldSpec spec)
 	{
 		getChoiceViewer().setSpec(spec);
+	}
+
+	void setChoices(ChoiceItem[] choices)
+	{
 	}
 
 	private UiChoice getChoiceViewer()

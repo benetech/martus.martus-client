@@ -32,6 +32,8 @@ import java.util.Map;
 import javax.swing.JTable;
 
 import org.martus.client.swingui.fields.UiField;
+import org.martus.client.swingui.fields.UiGridEditor;
+import org.martus.common.fieldspec.ChoiceItem;
 import org.martus.common.fieldspec.DropDownFieldSpec;
 import org.martus.swing.UiComboBox;
 
@@ -44,6 +46,7 @@ abstract public class GridDropDownCellEditorOrRenderer extends GridCellEditorAnd
 	}
 
 	abstract void setFieldSpec(DropDownFieldSpec spec);
+	abstract void setChoices(ChoiceItem[] choices);
 	
 	public void spaceWasPressed()
 	{
@@ -54,13 +57,16 @@ abstract public class GridDropDownCellEditorOrRenderer extends GridCellEditorAnd
 
 	public Component getTableCellEditorComponent(JTable tableToUse, Object codeString, boolean isSelected, int row, int column)
 	{
-		setFieldSpec(getFieldSpecForCell(tableToUse, row, column));
+		DropDownFieldSpec spec = getFieldSpecForCell(tableToUse, row, column);
+		setFieldSpec(spec);
+		setChoices(getCurrentGridValuesAsChoices(spec));
 		return super.getTableCellEditorComponent(tableToUse, codeString, isSelected, row, column);
 	}
 
 	public Component getTableCellRendererComponent(JTable tableToUse, Object codeString, boolean isSelected, boolean hasFocus, int row, int column)
 	{
-		setFieldSpec(getFieldSpecForCell(tableToUse, row, column));
+		DropDownFieldSpec spec = getFieldSpecForCell(tableToUse, row, column);
+		setFieldSpec(spec);
 		return super.getTableCellRendererComponent(tableToUse, codeString, isSelected, hasFocus, row, column);
 	}
 
@@ -68,6 +74,33 @@ abstract public class GridDropDownCellEditorOrRenderer extends GridCellEditorAnd
 	{
 		GridTable gridTable = (GridTable)tableToUse;
 		return (DropDownFieldSpec)gridTable.getFieldSpecForCell(row, column);
+	}
+
+	ChoiceItem[] getCurrentGridValuesAsChoices(DropDownFieldSpec spec)
+	{
+		UiGridEditor dataSource = getGrid(spec);
+		GridTableModel model = dataSource.getGridTableModel();
+		String gridColumnLabel = spec.getDataSourceGridColumn();
+		int gridColumn = dataSource.getGridTableModel().findColumn(gridColumnLabel);
+
+		ChoiceItem[] values = new ChoiceItem[1 + model.getRowCount()];
+		values[0] = new ChoiceItem("", "");
+		for(int row = 0; row < model.getRowCount(); ++row)
+		{
+			String thisValue = (String)model.getValueAt(row, gridColumn);
+			values[row + 1] = new ChoiceItem(thisValue, thisValue);
+		}
+		
+		return values;
+	}
+	
+	UiGridEditor getGrid(DropDownFieldSpec spec)
+	{
+		String gridTag = spec.getDataSourceGridTag();
+		if(gridTag == null)
+			return null;
+		
+		return (UiGridEditor)otherGrids.get(gridTag);
 	}
 
 	Map otherGrids;
