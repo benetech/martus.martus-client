@@ -31,6 +31,7 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Vector;
 
 import javax.swing.JComponent;
@@ -58,10 +59,12 @@ import org.martus.util.language.LanguageOptions;
 public class GridTable extends UiTableWithCellEditingProtection
 {
 	
-	public GridTable(GridTableModel model, UiDialogLauncher dlgLauncherToUse, boolean isTableEditable)
+	public GridTable(GridTableModel model, UiDialogLauncher dlgLauncherToUse, Map otherGridFieldsToUse, boolean isTableEditable)
 	{
 		super(model);
 		dlgLauncher = dlgLauncherToUse;
+		otherGridFields = otherGridFieldsToUse;
+		
 		// NOTE: We need to keep renderers and editors separate, because otherwise
 		// they get confused about focus when you click on a renderer but the 
 		// editor is supposed to end up getting the click because they occupy 
@@ -162,8 +165,8 @@ public class GridTable extends UiTableWithCellEditingProtection
 		map.put(new FieldTypeBoolean(), new GridBooleanCellEditor());
 		map.put(new FieldTypeDate(), new GridDateCellEditor(localization));
 		map.put(new FieldTypeDateRange(), new GridDateRangeCellEditor(dlgLauncher));
-		map.put(new FieldTypeDropdown(), new GridDropDownCellEditor());
-		map.put(new FieldTypeLanguage(), new GridDropDownCellEditor());
+		map.put(new FieldTypeDropdown(), new GridDropDownCellEditor(otherGridFields));
+		map.put(new FieldTypeLanguage(), new GridDropDownCellEditor(otherGridFields));
 		map.put(new FieldTypeNormal(), new GridNormalCellEditor(localization));
 		map.put(new FieldTypeMultiline(), new GridNormalCellEditor(localization));
 		map.put(new FieldTypeAnyField(), new GridNormalCellEditor(localization));
@@ -179,8 +182,8 @@ public class GridTable extends UiTableWithCellEditingProtection
 		map.put(new FieldTypeBoolean(), new GridBooleanCellViewer(localization));
 		map.put(new FieldTypeDate(), new GridDateCellViewer(localization));
 		map.put(new FieldTypeDateRange(), new GridDateRangeCellViewer(localization));
-		map.put(new FieldTypeDropdown(), new GridDropDownCellViewer());
-		map.put(new FieldTypeLanguage(), new GridDropDownCellViewer());
+		map.put(new FieldTypeDropdown(), new GridDropDownCellViewer(otherGridFields));
+		map.put(new FieldTypeLanguage(), new GridDropDownCellViewer(otherGridFields));
 		map.put(new FieldTypeNormal(), new GridNormalCellEditor(localization));
 		map.put(new FieldTypeMultiline(), new GridNormalCellEditor(localization));
 		map.put(new FieldTypeAnyField(), new GridNormalCellEditor(localization));
@@ -236,5 +239,6 @@ public class GridTable extends UiTableWithCellEditingProtection
 	UiDialogLauncher dlgLauncher;
 	HashMap renderers;
 	HashMap editors;
+	Map otherGridFields;
 }
 

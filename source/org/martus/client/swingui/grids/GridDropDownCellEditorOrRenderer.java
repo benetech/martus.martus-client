@@ -27,6 +27,7 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.swingui.grids;
 
 import java.awt.Component;
+import java.util.Map;
 
 import javax.swing.JTable;
 
@@ -36,9 +37,10 @@ import org.martus.swing.UiComboBox;
 
 abstract public class GridDropDownCellEditorOrRenderer extends GridCellEditorAndRenderer
 {
-	GridDropDownCellEditorOrRenderer(UiField field)
+	GridDropDownCellEditorOrRenderer(UiField field, Map otherGridFields)
 	{
 		super(field);
+		otherGrids = otherGridFields;
 	}
 
 	abstract void setFieldSpec(DropDownFieldSpec spec);
@@ -68,4 +70,5 @@ abstract public class GridDropDownCellEditorOrRenderer extends GridCellEditorAnd
 		return (DropDownFieldSpec)gridTable.getFieldSpecForCell(row, column);
 	}
 
+	Map otherGrids;
 }

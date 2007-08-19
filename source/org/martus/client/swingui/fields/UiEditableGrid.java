@@ -31,6 +31,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.awt.event.KeyEvent;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Vector;
 
 import javax.swing.AbstractAction;
@@ -50,15 +52,15 @@ import org.martus.swing.UiButton;
 
 public class UiEditableGrid extends UiGrid implements FocusListener
 {
-	public UiEditableGrid(UiMainWindow mainWindowToUse, GridFieldSpec fieldSpec, UiDialogLauncher dlgLauncher, int maxGridCharacters)
+	public UiEditableGrid(UiMainWindow mainWindowToUse, GridFieldSpec fieldSpec, UiDialogLauncher dlgLauncher, Map gridFields, int maxGridCharacters)
 	{
-		super(mainWindowToUse, fieldSpec, dlgLauncher, true);
+		super(mainWindowToUse, fieldSpec, dlgLauncher, gridFields, true);
 		initialize(maxGridCharacters);
 	}
 	
 	public UiEditableGrid(UiMainWindow mainWindowToUse, GridTableModel modelToUse, UiDialogLauncher dlgLauncher, int maxGridCharacters)
 	{
-		super(mainWindowToUse, modelToUse, dlgLauncher, true);
+		super(mainWindowToUse, modelToUse, dlgLauncher, new HashMap(), true);
 		initialize(maxGridCharacters);
 	}
 	

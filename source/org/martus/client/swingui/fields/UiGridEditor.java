@@ -1,5 +1,6 @@
 package org.martus.client.swingui.fields;
 
+import java.util.Map;
 import java.util.Vector;
 
 import org.martus.client.swingui.UiMainWindow;
@@ -8,9 +9,9 @@ import org.martus.common.fieldspec.GridFieldSpec;
 
 public class UiGridEditor extends UiEditableGrid 
 {
-	public UiGridEditor(UiMainWindow mainWindow, GridFieldSpec fieldSpec, UiDialogLauncher dlgLauncher, int maxGridCharacters)
+	public UiGridEditor(UiMainWindow mainWindow, GridFieldSpec fieldSpec, UiDialogLauncher dlgLauncher, Map gridFields, int maxGridCharacters)
 	{
-		super(mainWindow, fieldSpec, dlgLauncher, maxGridCharacters);
+		super(mainWindow, fieldSpec, dlgLauncher, gridFields, maxGridCharacters);
 	}
 
 	protected Vector createButtons()

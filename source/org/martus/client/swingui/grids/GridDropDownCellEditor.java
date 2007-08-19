@@ -26,16 +26,16 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.swingui.grids;
 
 import java.awt.event.ActionListener;
-
+import java.util.Map;
 
 import org.martus.client.swingui.fields.UiChoiceEditor;
 import org.martus.common.fieldspec.DropDownFieldSpec;
 
 public class GridDropDownCellEditor extends GridDropDownCellEditorOrRenderer
 {
-	GridDropDownCellEditor()
+	GridDropDownCellEditor(Map otherGridFields)
 	{
-		super(new UiChoiceEditor());
+		super(new UiChoiceEditor(), otherGridFields);
 	}
 	
 	public void setFieldSpec(DropDownFieldSpec spec)

@@ -30,6 +30,7 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Map;
 import java.util.Vector;
 
 import javax.swing.BorderFactory;
@@ -56,12 +57,12 @@ import org.martus.swing.Utilities;
 
 abstract public class UiGrid extends UiField
 {
-	public UiGrid(UiMainWindow mainWindowToUse, GridFieldSpec fieldSpec, UiDialogLauncher dlgLauncher, boolean isEditable)
+	public UiGrid(UiMainWindow mainWindowToUse, GridFieldSpec fieldSpec, UiDialogLauncher dlgLauncher, Map gridFields, boolean isEditable)
 	{
-		this(mainWindowToUse, new GridTableModel(fieldSpec), dlgLauncher, isEditable);
+		this(mainWindowToUse, new GridTableModel(fieldSpec), dlgLauncher, gridFields, isEditable);
 	}
 	
-	public UiGrid(UiMainWindow mainWindowToUse, GridTableModel modelToUse, UiDialogLauncher dlgLauncher, boolean isEditable)
+	public UiGrid(UiMainWindow mainWindowToUse, GridTableModel modelToUse, UiDialogLauncher dlgLauncher, Map gridFields, boolean isEditable)
 	{
 		app = mainWindowToUse.getApp();
 		model = modelToUse;
@@ -71,7 +72,7 @@ abstract public class UiGrid extends UiField
 		else
 			fieldCreator = new UiReadOnlyFieldCreator(mainWindowToUse);
 		
-		table = new GridTable(model, dlgLauncher, isEditable);
+		table = new GridTable(model, dlgLauncher, gridFields, isEditable);
 		table.setColumnSelectionAllowed(false);
 		table.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
 		table.setShowGrid(true);
