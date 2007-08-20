@@ -67,6 +67,7 @@ abstract public class GridDropDownCellEditorOrRenderer extends GridCellEditorAnd
 	{
 		DropDownFieldSpec spec = getFieldSpecForCell(tableToUse, row, column);
 		setFieldSpec(spec);
+		setChoices(getCurrentGridValuesAsChoices(spec));
 		return super.getTableCellRendererComponent(tableToUse, codeString, isSelected, hasFocus, row, column);
 	}
 
@@ -79,6 +80,9 @@ abstract public class GridDropDownCellEditorOrRenderer extends GridCellEditorAnd
 	ChoiceItem[] getCurrentGridValuesAsChoices(DropDownFieldSpec spec)
 	{
 		UiGridEditor dataSource = getGrid(spec);
+		if(dataSource == null)
+			return spec.getAllChoices();
+		
 		GridTableModel model = dataSource.getGridTableModel();
 		String gridColumnLabel = spec.getDataSourceGridColumn();
 		int gridColumn = dataSource.getGridTableModel().findColumn(gridColumnLabel);
