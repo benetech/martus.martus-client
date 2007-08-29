@@ -25,8 +25,6 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.fields;
 
-import java.util.HashMap;
-
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.dialogs.UiDialogLauncher;
@@ -41,7 +39,6 @@ public class UiEditableFieldCreator extends UiFieldCreator
 	public UiEditableFieldCreator(UiMainWindow mainWindowToUse)
 	{
 		super(mainWindowToUse);
-		gridFields = new HashMap();
 	}
 
 	public UiField createUnknownField()
@@ -94,10 +91,8 @@ public class UiEditableFieldCreator extends UiFieldCreator
 		MartusLocalization localization = mainWindow.getLocalization();
 		fieldSpec.setColumnZeroLabel(localization.getFieldLabel("ColumnGridRowNumber"));
 		UiDialogLauncher dlgLauncher = new UiDialogLauncher(mainWindow.getCurrentActiveFrame(), localization);
-		UiGridEditor gridEditor = new UiGridEditor(mainWindow, fieldSpec, dlgLauncher, gridFields, mainWindow.getEditingTextFieldColumns());
-		gridFields.put(fieldSpec.getTag(), gridEditor);
+		UiGridEditor gridEditor = new UiGridEditor(mainWindow, fieldSpec, dlgLauncher, editableGridFields, mainWindow.getEditingTextFieldColumns());
+		editableGridFields.put(fieldSpec.getTag(), gridEditor);
 		return gridEditor;
 	}
-	
-	HashMap gridFields;
 }

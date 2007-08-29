@@ -26,6 +26,7 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.swingui.fields;
 
 import java.awt.Color;
+import java.util.HashMap;
 
 import javax.swing.border.LineBorder;
 
@@ -42,6 +43,8 @@ abstract public class UiFieldCreator
 	public UiFieldCreator(UiMainWindow mainWindowToUse)
 	{
 		mainWindow = mainWindowToUse;
+		editableGridFields = new HashMap();
+
 	}
 	
 	abstract public UiField createNormalField();
@@ -54,6 +57,11 @@ abstract public class UiFieldCreator
 	abstract public UiField createUnknownField();
 	abstract public UiField createBoolField();
 	abstract public UiField createGridField(GridFieldSpec fieldSpec);
+	
+	public UiGridEditor getEditableGridField(String tag)
+	{
+		return (UiGridEditor)editableGridFields.get(tag);
+	}
 
 	public UiField createReadOnlyDateField()
 	{
@@ -112,4 +120,5 @@ abstract public class UiFieldCreator
 	}
 
 	UiMainWindow mainWindow;
+	protected HashMap editableGridFields;
 }

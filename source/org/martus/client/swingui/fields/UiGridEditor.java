@@ -5,6 +5,7 @@ import java.util.Vector;
 
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.dialogs.UiDialogLauncher;
+import org.martus.common.fieldspec.ChoiceItem;
 import org.martus.common.fieldspec.GridFieldSpec;
 
 public class UiGridEditor extends UiEditableGrid 
@@ -21,4 +22,19 @@ public class UiGridEditor extends UiEditableGrid
 		return buttons;
 	}
 
+	public ChoiceItem[] buildChoicesFromColumnValues(String gridColumnLabel)
+	{
+		int gridColumn = model.findColumn(gridColumnLabel);
+
+		ChoiceItem[] values = new ChoiceItem[1 + model.getRowCount()];
+		values[0] = new ChoiceItem("", "");
+		for(int row = 0; row < model.getRowCount(); ++row)
+		{
+			String thisValue = (String)model.getValueAt(row, gridColumn);
+			values[row + 1] = new ChoiceItem(thisValue, thisValue);
+		}
+		
+		return values;
+		
+	}
 }

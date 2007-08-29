@@ -46,7 +46,6 @@ import org.martus.client.core.MartusApp;
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.UiWarningLabel;
-import org.martus.common.fieldspec.FieldSpec;
 import org.martus.swing.UiLabel;
 import org.martus.swing.UiParagraphPanel;
 import org.martus.swing.Utilities;
@@ -182,7 +181,6 @@ abstract public class UiBulletinComponentSection extends JPanel
 	protected UiMainWindow mainWindow;
 	JLabel sectionHeading;
 	JLabel warningIndicator;
-	FieldSpec[] fieldSpecs;
 	
 	FieldGroup currentGroup;
 	Vector groups;

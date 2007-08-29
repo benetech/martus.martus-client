@@ -83,19 +83,8 @@ abstract public class GridDropDownCellEditorOrRenderer extends GridCellEditorAnd
 		if(dataSource == null)
 			return spec.getAllChoices();
 		
-		GridTableModel model = dataSource.getGridTableModel();
 		String gridColumnLabel = spec.getDataSourceGridColumn();
-		int gridColumn = dataSource.getGridTableModel().findColumn(gridColumnLabel);
-
-		ChoiceItem[] values = new ChoiceItem[1 + model.getRowCount()];
-		values[0] = new ChoiceItem("", "");
-		for(int row = 0; row < model.getRowCount(); ++row)
-		{
-			String thisValue = (String)model.getValueAt(row, gridColumn);
-			values[row + 1] = new ChoiceItem(thisValue, thisValue);
-		}
-		
-		return values;
+		return dataSource.buildChoicesFromColumnValues(gridColumnLabel);
 	}
 	
 	UiGridEditor getGrid(DropDownFieldSpec spec)
