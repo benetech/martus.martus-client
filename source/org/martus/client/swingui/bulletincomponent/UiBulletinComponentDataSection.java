@@ -37,6 +37,7 @@ import org.martus.client.core.LanguageChangeListener;
 import org.martus.client.core.MartusApp;
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
+import org.martus.client.swingui.fields.UiChoiceEditor;
 import org.martus.client.swingui.fields.UiDateEditor;
 import org.martus.client.swingui.fields.UiField;
 import org.martus.client.swingui.fields.UiFieldCreator;
@@ -121,10 +122,10 @@ abstract public class UiBulletinComponentDataSection extends UiBulletinComponent
 
 		public void tableChanged(TableModelEvent event) 
 		{
-			blankOutInvalidDataDrivenDropdowns();
+			updateDataDrivenDropdowns();
 		}
 
-		private void blankOutInvalidDataDrivenDropdowns() 
+		private void updateDataDrivenDropdowns() 
 		{
 			for(int i = 0; i < fieldSpecs.length; ++i)
 			{
@@ -132,20 +133,27 @@ abstract public class UiBulletinComponentDataSection extends UiBulletinComponent
 				FieldType type = spec.getType();
 				UiField field = fields[i];
 				
-				if(type.isDropdown())
-					blankOutInvalidDataDrivenDropdown((DropDownFieldSpec)spec, field);
-				else if(type.isGrid())
+				if(type.isGrid())
 					blankOutInvalidDataDrivenDropdowns((GridFieldSpec)spec, (UiGrid)field);
+
+				if(type.isDropdown())
+					updateDataDrivenDropdown((DropDownFieldSpec)spec, field);
 			}
 		}
 
-		private void blankOutInvalidDataDrivenDropdown(DropDownFieldSpec spec, UiField field) 
+		private void updateDataDrivenDropdown(DropDownFieldSpec spec, UiField field) 
 		{
 			if(!isDataSourceThisGrid(spec))
 				return;
 			
-			field.setText(ensureValid(spec, field.getText()));
-			field.getComponent().repaint();
+			UiGridEditor dataSourceGrid = fieldCreator.getEditableGridField(spec.getDataSourceGridTag());
+			if(dataSourceGrid == null)
+				return;
+			
+			String existingValue = field.getText();
+			UiChoiceEditor choiceField = (UiChoiceEditor)field;
+			choiceField.setChoices(dataSourceGrid.buildChoicesFromColumnValues(spec.getDataSourceGridColumn()));
+			field.setText(ensureValid(spec, existingValue));
 		}
 
 		private void blankOutInvalidDataDrivenDropdowns(GridFieldSpec gridSpecToBlankOut, UiGrid gridToBlankOut) 
