@@ -30,6 +30,8 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 import java.util.Map;
 import java.util.Vector;
 
@@ -138,6 +140,7 @@ abstract public class UiGrid extends UiField
 			for(int column = FIRST_REAL_FIELD_COLUMN; column < model.getColumnCount(); ++column)
 			{
 				UiField cellField = fieldCreator.createField(model.getFieldSpecForCell(row, column));
+				cellField.getComponent().addFocusListener(new ExpandedGridFieldFocusHandler());
 				String value = (String)model.getValueAt(row, column);
 				cellField.setText(value);
 				JComponent cellComponent = cellField.getComponent();
@@ -153,6 +156,19 @@ abstract public class UiGrid extends UiField
 		Box box = Box.createHorizontalBox();
 		Utilities.addComponentsRespectingOrientation(box, new Component[] {showCollapsedButton, Box.createHorizontalGlue()});
 		widget.add(box, BorderLayout.BEFORE_FIRST_LINE);
+	}
+	
+	class ExpandedGridFieldFocusHandler implements FocusListener
+	{
+		public void focusGained(FocusEvent event) 
+		{
+		}
+
+		public void focusLost(FocusEvent event) 
+		{
+			copyExpandedFieldsToTableModel();
+		}
+		
 	}
 	
 	class CollapseButtonHandler implements ActionListener
