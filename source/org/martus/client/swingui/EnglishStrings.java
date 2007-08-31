@@ -101,7 +101,7 @@ public class EnglishStrings
 "wintitle:confirmDateRageInvalid=Date Range Invalid",
 "wintitle:confirmPrintAllPrivateData=Print All Private Data",
 "wintitle:confirmCancelRetrieve=Cancel Retrieve",
-"wintitle:confirmReportIncludePrivate=All Bulletins Private",
+"wintitle:confirmReportIncludePrivate=All Data Private",
 "wintitle:confirmSearchProgressCancel=Cancel Search",
 "wintitle:confirmReportSearchProgressCancel=Cancel Search",
 
@@ -403,7 +403,7 @@ public class EnglishStrings
 "button:ShowGridExpanded=Show Expanded",
 "button:ShowGridNormal=Show as Grid",
 
-"button:IncludePrivateBulletins=Include Private Bulletins",
+"button:IncludePrivateBulletins=Include Private Data",
 
 "menu:file=File",
 "menu:CreateNewBulletin=Create New Bulletin",
@@ -628,8 +628,8 @@ public class EnglishStrings
 "field:confirmWarnMissingOrCorruptAccountMapSignatureFileeffect=Clicking on Yes will try to generate a new acctmap.txt.sig file and continue to load Martus.  Clicking on No will exit Martus.",
 "field:confirmWarnMissingAccountMapFilecause=Warning: acctmap.txt file in your account's packets directory is missing or is corrupt.  This may indicate someone has tried to tamper with your data or could be caused by a hardware error.",		
 "field:confirmWarnMissingAccountMapFileeffect=Clicking on Yes will delete all of your bulletins and continue to load Martus.  Clicking on No will exit Martus so you can try to recover or repair this file manually.",
-"field:confirmReportIncludePrivatecause=There are no bulletins that are public only. Include private bulletins?",
-"field:confirmReportIncludePrivateeffect=Press 'Include Private Bulletins' to continue with private bulletins included, or press 'Cancel' to exit and return to Martus.",
+"field:confirmReportIncludePrivatecause=There are no bulletins with public data. Include private data?",
+"field:confirmReportIncludePrivateeffect=Press 'Include Private Data' to continue with private data included, or press 'Cancel' to exit and return to Martus.",
 
 "field:confirmBackupKeyPairSecretSharecause=We recommend that you now create #TotalNumberOfFilesInBackup# separate key backup files of which any #MinimumNumberOfFilesNeededForRecovery# can be used to reconstruct your key without a user name or password being required.",
 "field:confirmBackupKeyPairSecretShareeffect=By choosing Yes, you will be prompted to save pieces of your key onto removable disks.",
