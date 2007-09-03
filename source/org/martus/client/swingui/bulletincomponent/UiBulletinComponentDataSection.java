@@ -78,14 +78,16 @@ abstract public class UiBulletinComponentDataSection extends UiBulletinComponent
 				startNewGroup("_Section" + spec.getTag(), spec.getLabel());
 			else
 			{
-				FieldRow fieldRow = new FieldRow(getMainWindow(), spec.getTag(), spec.getLabel(), fields[fieldNum].getComponent());
+				FieldRow fieldRow = new FieldRow(getMainWindow(), spec.getTag(), spec.getLabel());
+				fieldRow.addComponent(fields[fieldNum].getComponent());
 				addFieldRow(fieldRow);
 			}
 		}
 		
 		JComponent attachmentTable = createAttachmentTable();
 		String tag = "_Attachments" + sectionName;
-		FieldRow fieldRow = new FieldRow(getMainWindow(), tag, "", attachmentTable);
+		FieldRow fieldRow = new FieldRow(getMainWindow(), tag, "");
+		fieldRow.addComponent(attachmentTable);
 		addFieldRow(fieldRow);
 	}
 
@@ -100,7 +102,8 @@ abstract public class UiBulletinComponentDataSection extends UiBulletinComponent
 	{
 		FieldSpec allPrivateFieldSpec = FieldSpec.createStandardField("allprivate", new FieldTypeBoolean());
 		UiField field = createField(allPrivateFieldSpec, null);
-		FieldRow fieldRow = new FieldRow(getMainWindow(), allPrivateFieldSpec.getTag(), allPrivateFieldSpec.getLabel(), field.getComponent());
+		FieldRow fieldRow = new FieldRow(getMainWindow(), allPrivateFieldSpec.getTag(), allPrivateFieldSpec.getLabel());
+		fieldRow.addComponent(field.getComponent());
 		addFieldRow(fieldRow);
 		return field;
 	}
@@ -130,13 +133,17 @@ abstract public class UiBulletinComponentDataSection extends UiBulletinComponent
 
 	static class FieldRow
 	{
-		public FieldRow(UiMainWindow mainWindowToUse, String tag, String labelText, JComponent fieldComponent)
+		public FieldRow(UiMainWindow mainWindowToUse, String tag, String labelText)
 		{
 			MartusLocalization localization = mainWindowToUse.getLocalization();
 			fieldHolder = new FieldHolder(localization);
-			fieldHolder.addField(fieldComponent);
 			UiWrappedTextArea labelComponent = createLabelComponent(tag, labelText, localization);
 			label = createLabel(tag, labelComponent, mainWindowToUse.getApp());
+		}
+
+		void addComponent(JComponent fieldComponent) 
+		{
+			fieldHolder.addField(fieldComponent);
 		}
 		
 		public JComponent getLabel()
