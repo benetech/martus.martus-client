@@ -52,13 +52,9 @@ class HiderButton extends UiButton implements ActionListener
 
 	public void actionPerformed(ActionEvent event) 
 	{
-		toggleState();
-		app.setFieldExpansionState(tag, fieldHolder.isShown());
-	}
-
-	private void toggleState() 
-	{
-		forceState(!fieldHolder.isShown());
+		boolean shouldBeVisible = !fieldHolder.isShown();
+		app.setFieldExpansionState(tag, shouldBeVisible);
+		forceState(shouldBeVisible);
 	}
 
 	private void forceState(boolean newState) 
