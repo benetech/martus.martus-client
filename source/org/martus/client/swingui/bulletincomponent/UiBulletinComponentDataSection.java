@@ -138,7 +138,7 @@ abstract public class UiBulletinComponentDataSection extends UiBulletinComponent
 			MartusLocalization localization = mainWindowToUse.getLocalization();
 			fieldHolder = new FieldHolder(localization);
 			UiWrappedTextArea labelComponent = createLabelComponent(tag, labelText, localization);
-			label = createLabel(tag, labelComponent, mainWindowToUse.getApp());
+			label = createLabelWithHider(tag, labelComponent, mainWindowToUse.getApp());
 		}
 
 		void addComponent(JComponent fieldComponent) 
@@ -171,7 +171,7 @@ abstract public class UiBulletinComponentDataSection extends UiBulletinComponent
 			return labelComponent;
 		}
 
-		JComponent createLabel(String tag, JComponent labelComponent, MartusApp app)
+		JComponent createLabelWithHider(String tag, JComponent labelComponent, MartusApp app)
 		{
 			HiderButton hider = new HiderButton(app, tag, fieldHolder);
 			Component spacer = Box.createHorizontalStrut(10);
