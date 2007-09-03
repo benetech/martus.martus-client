@@ -41,7 +41,8 @@ class FieldHolder extends JPanel
 	public FieldHolder(MartusLocalization localizationToUse)
 	{
 		super(new BorderLayout());
-		panel = new JPanel(new BasicGridLayout());
+		BasicGridLayout gridLayout = new BasicGridLayout(1, 0);
+		panel = new JPanel(gridLayout);
 		localization = localizationToUse;
 		showField();
 	}

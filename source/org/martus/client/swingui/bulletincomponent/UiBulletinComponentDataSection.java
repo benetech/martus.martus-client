@@ -28,6 +28,7 @@ package org.martus.client.swingui.bulletincomponent;
 
 import java.awt.Component;
 
+import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.JComponent;
 
@@ -46,6 +47,7 @@ import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.fieldspec.FieldTypeBoolean;
 import org.martus.common.fieldspec.StandardFieldSpecs;
 import org.martus.common.packet.FieldDataPacket;
+import org.martus.swing.UiLabel;
 import org.martus.swing.UiWrappedTextArea;
 import org.martus.swing.Utilities;
 
@@ -69,7 +71,7 @@ abstract public class UiBulletinComponentDataSection extends UiBulletinComponent
 		languageChangeListener = listener;
 
 		fields = new UiField[specs.length];
-		FieldRow fieldRow = new FieldRow(getMainWindow());
+		FieldRow fieldRow = null;
 		for(int fieldNum = 0; fieldNum < specs.length; ++fieldNum)
 		{
 			FieldSpec spec = specs[fieldNum];
@@ -79,18 +81,43 @@ abstract public class UiBulletinComponentDataSection extends UiBulletinComponent
 				startNewGroup("_Section" + spec.getTag(), spec.getLabel());
 			else
 			{
-				fieldRow.setSpec(spec);
+				// FIXME: ask spec whether to keep on line or not
+				boolean keepOnLine = false;
+				if(fieldRow == null || !keepOnLine)
+				{
+					fieldRow = new FieldRow(getMainWindow());
+					fieldRow.setSpec(spec);
+				}
+				else
+				{
+					fieldRow.addComponent(new LabelWithinFieldRow(spec));
+				}
 				fieldRow.addComponent(fields[fieldNum].getComponent());
 				addFieldRow(fieldRow);
-				fieldRow = new FieldRow(getMainWindow());
 			}
 		}
 		
 		JComponent attachmentTable = createAttachmentTable();
 		String tag = "_Attachments" + sectionName;
+		fieldRow = new FieldRow(getMainWindow());
 		fieldRow.setTag(tag);
 		fieldRow.addComponent(attachmentTable);
 		addFieldRow(fieldRow);
+	}
+	
+	class LabelWithinFieldRow extends UiLabel
+	{
+		public LabelWithinFieldRow(FieldSpec spec)
+		{
+			setVerticalAlignment(UiLabel.TOP);
+			setFont(new UiWrappedTextArea("").getFont());
+			setBorder(BorderFactory.createEmptyBorder(0, 10, 0, 10));
+			
+			String labelText = spec.getLabel();
+			if(labelText.equals(""))
+				labelText = getLocalization().getFieldLabel(spec.getTag());
+			setText(labelText);
+		}
 	}
 
 	UiField createField(FieldSpec spec, LanguageChangeListener listener)
