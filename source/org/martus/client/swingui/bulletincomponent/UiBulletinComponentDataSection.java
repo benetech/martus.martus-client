@@ -82,8 +82,7 @@ abstract public class UiBulletinComponentDataSection extends UiBulletinComponent
 			else
 			{
 				// FIXME: ask spec whether to keep on line or not
-				boolean keepOnLine = false;
-				if(fieldRow == null || !keepOnLine)
+				if(fieldRow == null || !spec.keepWithPrevious())
 				{
 					fieldRow = new FieldRow(getMainWindow());
 					fieldRow.setSpec(spec);
