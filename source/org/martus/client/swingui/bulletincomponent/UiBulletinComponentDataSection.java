@@ -69,6 +69,7 @@ abstract public class UiBulletinComponentDataSection extends UiBulletinComponent
 		languageChangeListener = listener;
 
 		fields = new UiField[specs.length];
+		FieldRow fieldRow = new FieldRow(getMainWindow());
 		for(int fieldNum = 0; fieldNum < specs.length; ++fieldNum)
 		{
 			FieldSpec spec = specs[fieldNum];
@@ -78,16 +79,15 @@ abstract public class UiBulletinComponentDataSection extends UiBulletinComponent
 				startNewGroup("_Section" + spec.getTag(), spec.getLabel());
 			else
 			{
-				FieldRow fieldRow = new FieldRow(getMainWindow());
 				fieldRow.setSpec(spec);
 				fieldRow.addComponent(fields[fieldNum].getComponent());
 				addFieldRow(fieldRow);
+				fieldRow = new FieldRow(getMainWindow());
 			}
 		}
 		
 		JComponent attachmentTable = createAttachmentTable();
 		String tag = "_Attachments" + sectionName;
-		FieldRow fieldRow = new FieldRow(getMainWindow());
 		fieldRow.setTag(tag);
 		fieldRow.addComponent(attachmentTable);
 		addFieldRow(fieldRow);
