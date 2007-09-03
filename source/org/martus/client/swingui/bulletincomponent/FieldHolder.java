@@ -30,9 +30,11 @@ import java.awt.BorderLayout;
 
 import javax.swing.JComponent;
 import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.swing.UiLabel;
+import org.martus.swing.UiLanguageDirection;
 
 import com.jhlabs.awt.BasicGridLayout;
 
@@ -49,7 +51,12 @@ class FieldHolder extends JPanel
 
 	public void addField(JComponent fieldToHold) 
 	{
-		panel.add(fieldToHold);
+		// NOTE: BasicGridLayout doesn't support component orientation, 
+		// so we have to fake it
+		int insertAt = panel.getComponentCount();
+		if(UiLanguageDirection.getHorizontalAlignment() == SwingConstants.RIGHT)
+			insertAt = 0;
+		panel.add(fieldToHold, insertAt);
 	}
 	
 	void showField()
