@@ -112,7 +112,8 @@ abstract public class UiBulletinComponentSection extends JPanel
 			contents.outdentFirstField();
 			MartusApp app = getMainWindow().getApp();
 			MartusLocalization localization = getMainWindow().getLocalization();
-			FieldHolder fieldHolder = new FieldHolder(contents, localization);
+			FieldHolder fieldHolder = new FieldHolder(localization);
+			fieldHolder.addField(contents);
 
 			JComponent[] firstRow = new JComponent[] {new HiderButton(app, "_Section" + tag, fieldHolder), new UiLabel(title)};
 			JComponent[] secondRow = new JComponent[] {new UiLabel(""), fieldHolder};

@@ -133,7 +133,8 @@ abstract public class UiBulletinComponentDataSection extends UiBulletinComponent
 		public FieldRow(UiMainWindow mainWindowToUse, String tag, String labelText, JComponent fieldComponent)
 		{
 			MartusLocalization localization = mainWindowToUse.getLocalization();
-			fieldHolder = new FieldHolder(fieldComponent, localization);
+			fieldHolder = new FieldHolder(localization);
+			fieldHolder.addField(fieldComponent);
 			UiWrappedTextArea labelComponent = createLabelComponent(tag, labelText, localization);
 			label = createLabel(tag, labelComponent, mainWindowToUse.getApp());
 		}

@@ -34,20 +34,27 @@ import javax.swing.JPanel;
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.swing.UiLabel;
 
+import com.jhlabs.awt.BasicGridLayout;
+
 class FieldHolder extends JPanel
 {
-	public FieldHolder(JComponent fieldToHold, MartusLocalization localizationToUse)
+	public FieldHolder(MartusLocalization localizationToUse)
 	{
 		super(new BorderLayout());
-		field = fieldToHold;
+		panel = new JPanel(new BasicGridLayout());
 		localization = localizationToUse;
 		showField();
+	}
+
+	public void addField(JComponent fieldToHold) 
+	{
+		panel.add(fieldToHold);
 	}
 	
 	void showField()
 	{
 		removeAll();
-		add(field);
+		add(panel);
 		isShown = true;
 	}
 	
@@ -63,7 +70,7 @@ class FieldHolder extends JPanel
 		return isShown;
 	}
 	
-	boolean isShown;
-	JComponent field;
-	MartusLocalization localization;
+	private boolean isShown;
+	private JPanel panel;
+	private MartusLocalization localization;
 }
