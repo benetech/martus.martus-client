@@ -78,7 +78,8 @@ abstract public class UiBulletinComponentDataSection extends UiBulletinComponent
 				startNewGroup("_Section" + spec.getTag(), spec.getLabel());
 			else
 			{
-				FieldRow fieldRow = new FieldRow(getMainWindow(), spec.getTag(), spec.getLabel());
+				FieldRow fieldRow = new FieldRow(getMainWindow());
+				fieldRow.setSpec(spec);
 				fieldRow.addComponent(fields[fieldNum].getComponent());
 				addFieldRow(fieldRow);
 			}
@@ -86,7 +87,8 @@ abstract public class UiBulletinComponentDataSection extends UiBulletinComponent
 		
 		JComponent attachmentTable = createAttachmentTable();
 		String tag = "_Attachments" + sectionName;
-		FieldRow fieldRow = new FieldRow(getMainWindow(), tag, "");
+		FieldRow fieldRow = new FieldRow(getMainWindow());
+		fieldRow.setTag(tag);
 		fieldRow.addComponent(attachmentTable);
 		addFieldRow(fieldRow);
 	}
@@ -102,7 +104,8 @@ abstract public class UiBulletinComponentDataSection extends UiBulletinComponent
 	{
 		FieldSpec allPrivateFieldSpec = FieldSpec.createStandardField("allprivate", new FieldTypeBoolean());
 		UiField field = createField(allPrivateFieldSpec, null);
-		FieldRow fieldRow = new FieldRow(getMainWindow(), allPrivateFieldSpec.getTag(), allPrivateFieldSpec.getLabel());
+		FieldRow fieldRow = new FieldRow(getMainWindow());
+		fieldRow.setSpec(allPrivateFieldSpec);
 		fieldRow.addComponent(field.getComponent());
 		addFieldRow(fieldRow);
 		return field;
@@ -133,14 +136,23 @@ abstract public class UiBulletinComponentDataSection extends UiBulletinComponent
 
 	static class FieldRow
 	{
-		public FieldRow(UiMainWindow mainWindowToUse, String tag, String labelText)
+		public FieldRow(UiMainWindow mainWindowToUse)
 		{
-			MartusLocalization localization = mainWindowToUse.getLocalization();
+			app = mainWindowToUse.getApp();
+			localization = mainWindowToUse.getLocalization();
 			fieldHolder = new FieldHolder(localization);
-			UiWrappedTextArea labelComponent = createLabelComponent(tag, labelText, localization);
-			label = createLabelWithHider(tag, labelComponent, mainWindowToUse.getApp());
 		}
-
+		
+		public void setSpec(FieldSpec spec)
+		{
+			setTagAndLabel(spec.getTag(), spec.getLabel());
+		}
+		
+		public void setTag(String tag)
+		{
+			setTagAndLabel(tag, "");
+		}
+		
 		void addComponent(JComponent fieldComponent) 
 		{
 			fieldHolder.addField(fieldComponent);
@@ -156,11 +168,8 @@ abstract public class UiBulletinComponentDataSection extends UiBulletinComponent
 			return fieldHolder;
 		}
 		
-	 	UiWrappedTextArea createLabelComponent(String tag, String labelText, MartusLocalization localization)
+		private UiWrappedTextArea createLabelComponent(String tag, String labelText)
 		{
-			if(labelText.equals(""))
-				labelText = localization.getFieldLabel(tag);
-
 			//TODO: For wrapped labels, we need to take into consideration font size, text alignment, rtol and printing. 
 			//UiWrappedTextArea label = new UiWrappedTextArea(labelText, 30);
 			//UiLabel label = new UiLabel(labelText);
@@ -171,7 +180,7 @@ abstract public class UiBulletinComponentDataSection extends UiBulletinComponent
 			return labelComponent;
 		}
 
-		JComponent createLabelWithHider(String tag, JComponent labelComponent, MartusApp app)
+		private JComponent createLabelWithHider(String tag, JComponent labelComponent)
 		{
 			HiderButton hider = new HiderButton(app, tag, fieldHolder);
 			Component spacer = Box.createHorizontalStrut(10);
@@ -183,6 +192,17 @@ abstract public class UiBulletinComponentDataSection extends UiBulletinComponent
 			return panel;
 		}
 		
+		private void setTagAndLabel(String tag, String labelText)
+		{
+			if(labelText.equals(""))
+				labelText = localization.getFieldLabel(tag);
+
+			UiWrappedTextArea labelComponent = createLabelComponent(tag, labelText);
+			label = createLabelWithHider(tag, labelComponent);
+		}
+
+		MartusApp app;
+		MartusLocalization localization;
 		JComponent label;
 		FieldHolder fieldHolder;
 	}
