@@ -66,15 +66,15 @@ public class ConfigInfo
 	public void setSendContactInfoToServer(boolean newSendContactInfoToServer) {sendContactInfoToServer = newSendContactInfoToServer; }
 	public void setServerCompliance(String newCompliance) {serverCompliance = newCompliance;}
 	public void setCustomFieldLegacySpecs(String newSpecs)	{customFieldLegacySpecs = newSpecs;}
-	public void setCustomFieldTopSectionXml(String newXml)	{customFieldTopSectionXml = newXml;}
 	public void setForceBulletinsAllPrivate(boolean newForceBulletinsAllPrivate)	{forceBulletinsAllPrivate = newForceBulletinsAllPrivate; }
 	public void setBackedUpKeypairEncrypted(boolean newBackedUpKeypairEncrypted)	{backedUpKeypairEncrypted = newBackedUpKeypairEncrypted; }
 	public void setBackedUpKeypairShare(boolean newBackedUpKeypairShare)	{backedUpKeypairShare = newBackedUpKeypairShare; }
 	public void setAllHQKeysXml(String allHQKeysXml){this.allHQKeysXml = allHQKeysXml;}
 	public void setBulletinVersioningAware(boolean newBulletinVersioningAware){this.bulletinVersioningAware = newBulletinVersioningAware;}
 	public void setDefaultHQKeysXml(String defaultHQKeysXml){this.defaultHQKeysXml = defaultHQKeysXml;}
-	public void setCustomFieldBottomSectionXml(String newXml)	{customFieldBottomSectionXml = newXml;}
 	public void setCheckForFieldOfficeBulletins(boolean newCheckForBulletins){checkForFieldOfficeBulletins = newCheckForBulletins;}
+	public void setCustomFieldTopSectionXml(String newXml)	{customFieldTopSectionXml = newXml;}
+	public void setCustomFieldBottomSectionXml(String newXml)	{customFieldBottomSectionXml = newXml;}
 
 	public void clearHQKey()						{ legacyHQKey = ""; }
 	public void clearPromptUserRequestSendToServer() { mustAskUserToSendToServer = false; }
@@ -94,15 +94,15 @@ public class ConfigInfo
 	public boolean promptUserRequestSendToServer() { return mustAskUserToSendToServer; }
 	public String getServerCompliance() {return serverCompliance;}
 	public String getCustomFieldLegacySpecs() {return customFieldLegacySpecs;}
-	public String getCustomFieldTopSectionXml()	{return customFieldTopSectionXml;}
 	public boolean shouldForceBulletinsAllPrivate()	{ return forceBulletinsAllPrivate;}
 	public boolean hasUserBackedUpKeypairEncrypted()	{ return backedUpKeypairEncrypted;}
 	public boolean hasUserBackedUpKeypairShare()	{ return backedUpKeypairShare;}
 	public String getAllHQKeysXml()		{return allHQKeysXml;}
 	public boolean isBulletinVersioningAware()	{return bulletinVersioningAware;}
 	public String getDefaultHQKeysXml()		{return defaultHQKeysXml;}
-	public String getCustomFieldBottomSectionXml() {return customFieldBottomSectionXml;}
 	public boolean getCheckForFieldOfficeBulletins() {return checkForFieldOfficeBulletins;}
+	public String getCustomFieldTopSectionXml()	{return customFieldTopSectionXml;}
+	public String getCustomFieldBottomSectionXml() {return customFieldBottomSectionXml;}
 	
 	public boolean isServerConfigured()
 	{
@@ -131,13 +131,13 @@ public class ConfigInfo
 		mustAskUserToSendToServer = false;
 		serverCompliance = "";
 		customFieldLegacySpecs = LegacyCustomFields.buildFieldListString(StandardFieldSpecs.getDefaultTopSectionFieldSpecs());
-		customFieldTopSectionXml = "";
 		forceBulletinsAllPrivate = false;
 		backedUpKeypairEncrypted = false;
 		backedUpKeypairShare = false;
 		allHQKeysXml = "";
 		bulletinVersioningAware = true;
 		defaultHQKeysXml = "";
+		customFieldTopSectionXml = "";
 		customFieldBottomSectionXml = "";
 	}
 
@@ -198,7 +198,12 @@ public class ConfigInfo
 
 			if(loaded.version >= 13)
 				loaded.checkForFieldOfficeBulletins = in.readBoolean();
-			
+
+			if(loaded.version >= 14)
+			{
+				loaded.customFieldTopSectionXml = readLongString(in);
+				loaded.customFieldBottomSectionXml = readLongString(in);
+			}
 		}
 		finally
 		{
@@ -226,15 +231,17 @@ public class ConfigInfo
 			out.writeBoolean(sendContactInfoToServer);
 			out.writeUTF(serverCompliance);
 			out.writeUTF(customFieldLegacySpecs);
-			out.writeUTF(customFieldTopSectionXml);
+			out.writeUTF("");
 			out.writeBoolean(forceBulletinsAllPrivate);
 			out.writeBoolean(backedUpKeypairEncrypted);
 			out.writeBoolean(backedUpKeypairShare);
 			out.writeUTF(allHQKeysXml);
 			out.writeBoolean(bulletinVersioningAware);
 			out.writeUTF(defaultHQKeysXml);
-			out.writeUTF(customFieldBottomSectionXml);
+			out.writeUTF("");
 			out.writeBoolean(checkForFieldOfficeBulletins);
+			writeLongString(out, customFieldTopSectionXml);
+			writeLongString(out, customFieldBottomSectionXml);
 		}
 		finally
 		{
@@ -242,9 +249,26 @@ public class ConfigInfo
 		}
 	}
 	
+	public static void writeLongString(DataOutputStream out, String data) throws IOException
+	{
+		byte[] bytes = data.getBytes("UTF-8");
+		out.writeInt(bytes.length);
+		for(int i = 0; i < bytes.length; ++i)
+			out.writeByte(bytes[i]);
+	}
+	
+	public static String readLongString(DataInputStream in) throws IOException
+	{
+		int length = in.readInt();
+		byte[] bytes = new byte[length];
+		for(int i = 0; i < bytes.length; ++i)
+			bytes[i] = in.readByte();
+		return new String(bytes, "UTF-8");
+	}
+	
 	private boolean mustAskUserToSendToServer;
 
-	public static final short VERSION = 13;
+	public static final short VERSION = 14;
 	//Version 1
 	private short version;
 	private String author;
@@ -265,7 +289,7 @@ public class ConfigInfo
 	//Version 5
 	private String customFieldLegacySpecs;
 	//Version 6
-	private String customFieldTopSectionXml;
+		// was: private String legacyCustomFieldTopSectionXml;
 	//Version 7
 	private boolean forceBulletinsAllPrivate;
 	//Version 8
@@ -278,7 +302,11 @@ public class ConfigInfo
 	//Version 11
 	private String defaultHQKeysXml;
 	//Version 12
-	private String customFieldBottomSectionXml;
+		// was: private String legacyCustomFieldBottomSectionXml;
 	//Version 13
 	private boolean checkForFieldOfficeBulletins;
+	//Version 14
+	private String customFieldTopSectionXml;
+	private String customFieldBottomSectionXml;
+
 }

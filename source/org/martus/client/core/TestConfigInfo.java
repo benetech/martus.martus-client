@@ -53,7 +53,7 @@ public class TestConfigInfo extends TestCaseEnhanced
 		ConfigInfo info = new ConfigInfo();
 		verifyEmptyInfo(info, "constructor");
 		
-		assertEquals(13, ConfigInfo.VERSION);
+		assertEquals(14, ConfigInfo.VERSION);
 
 		info.setAuthor("fred");
 		assertEquals("fred", info.getAuthor());
@@ -191,6 +191,28 @@ public class TestConfigInfo extends TestCaseEnhanced
 		assertTrue("Server should be setup now", newInfo.isServerConfigured());
 	}
 	
+	public void testLongStrings() throws Exception
+	{
+		ConfigInfo info = new ConfigInfo();
+		info.setCustomFieldTopSectionXml(longString);
+		info.setCustomFieldBottomSectionXml(longString);
+		ByteArrayOutputStream out = new ByteArrayOutputStream();
+		info.save(out);
+		ByteArrayInputStream in = new ByteArrayInputStream(out.toByteArray());
+		ConfigInfo loaded = ConfigInfo.load(in);
+		assertEquals("Didn't restore long string for top?", info.getCustomFieldTopSectionXml(), loaded.getCustomFieldTopSectionXml());
+		assertEquals("Didn't restore long string for bottom?", info.getCustomFieldBottomSectionXml(), loaded.getCustomFieldBottomSectionXml());
+	}
+
+	private static String createLongSampleString() 
+	{
+		StringBuffer big = new StringBuffer(100 * 100 * 10);
+		for(int i = 0; i < 100; ++i)
+			for(int j = 0; j < 100; ++j)
+				big.append("abcdefghij");
+		return big.toString();
+	}
+	
 	void setConfigToSampleData(ConfigInfo info, int VERSION)
 	{
 		info.setAuthor(sampleAuthor);
@@ -206,15 +228,15 @@ public class TestConfigInfo extends TestCaseEnhanced
 		info.setSendContactInfoToServer(sampleSendContactInfoToServer);
 		info.setServerCompliance(sampleServerCompliance);
 		info.setCustomFieldLegacySpecs(sampleCustomFieldSpecs);
-		info.setCustomFieldTopSectionXml(sampleCustomFieldTopSectionXml);
 		info.setForceBulletinsAllPrivate(sampleForceAllPrivate);
 		info.setBackedUpKeypairEncrypted(sampleBackedUpKeypairEncrypted);
 		info.setBackedUpKeypairShare(sampleBackedUpKeypairShare);
 		info.setAllHQKeysXml(sampleAllHQKeysXml);
 		info.setBulletinVersioningAware(sampleBulletinVersioningAware);
 		info.setDefaultHQKeysXml(sampleDefaultHQKeysXml);
-		info.setCustomFieldBottomSectionXml(sampleCustomFieldBottomSectionXml);
 		info.setCheckForFieldOfficeBulletins(sampleCheckForFieldOfficeBulletins);
+		info.setCustomFieldTopSectionXml(sampleCustomFieldTopSectionXml);
+		info.setCustomFieldBottomSectionXml(sampleCustomFieldBottomSectionXml);
 	}
 
 	void verifyEmptyInfo(ConfigInfo info, String label)
@@ -233,20 +255,21 @@ public class TestConfigInfo extends TestCaseEnhanced
 		assertEquals(label + ": sampleSendContactInfoToServer", false, info.shouldContactInfoBeSentToServer());
 		assertEquals(label + ": sampleServerComplicance", "", info.getServerCompliance());
 		assertEquals(label + ": sampleCustomFieldSpecs", defaultCustomFieldSpecs, info.getCustomFieldLegacySpecs());
-		assertEquals(label + ": sampleCustomFieldTopSectionXml", "", info.getCustomFieldTopSectionXml());
 		assertEquals(label + ": sampleForceAllPrivate", false, info.shouldForceBulletinsAllPrivate());
 		assertEquals(label + ": sampleBackedUpKeypairEncrypted", false, info.hasUserBackedUpKeypairEncrypted());
 		assertEquals(label + ": sampleBackedUpKeypairShare", false, info.hasUserBackedUpKeypairShare());
 		assertEquals(label + ": sampleAllHQKeysXml", "", info.getAllHQKeysXml());
 		assertEquals(label + ": sampleBulletinVersioningAware", true, info.isBulletinVersioningAware());
 		assertEquals(label + ": sampleDefaultHQKeysXml", "", info.getDefaultHQKeysXml());
-		assertEquals(label + ": sampleCustomFieldBottomSectionXml", "", info.getCustomFieldBottomSectionXml());
 		assertEquals(label + ": sampleCheckForFieldOfficeBulletins", false, info.getCheckForFieldOfficeBulletins());
+		assertEquals(label + ": sampleCustomFieldTopSectionXml", "", info.getCustomFieldTopSectionXml());
+		assertEquals(label + ": sampleCustomFieldBottomSectionXml", "", info.getCustomFieldBottomSectionXml());
 		
 	}
 
 	void verifySampleInfo(ConfigInfo info, String label, int VERSION)
 	{
+		label = label + " (" + VERSION + ")";
 		assertEquals(label + ": Full has contact info", true, info.hasEnoughContactInfo());
 		assertEquals(label + ": sampleSource", sampleAuthor, info.getAuthor());
 		assertEquals(label + ": sampleOrg", sampleOrg, info.getOrganization());
@@ -283,9 +306,9 @@ public class TestConfigInfo extends TestCaseEnhanced
 		else
 			assertEquals(label + ": sampleCustomFieldSpecs", defaultCustomFieldSpecs, info.getCustomFieldLegacySpecs());
 
-		if(VERSION >= 6)
-			assertEquals(label + ": sampleCustomFieldTopSectionXml", sampleCustomFieldTopSectionXml, info.getCustomFieldTopSectionXml());	
-		else
+		if(VERSION >= 6 && VERSION < 14)
+			assertEquals(label + ": sampleCustomFieldTopSectionXml", sampleLegacyCustomFieldTopSectionXml, info.getCustomFieldTopSectionXml());	
+		else if(VERSION < 6)
 			assertEquals(label + ": sampleCustomFieldTopSectionXml", "", info.getCustomFieldTopSectionXml());
 		
 		if(VERSION >= 7)
@@ -319,15 +342,28 @@ public class TestConfigInfo extends TestCaseEnhanced
 		else
 			assertEquals(label + ": sampleDefaultHQKeysXml", "", info.getDefaultHQKeysXml());
 			
-		if(VERSION >= 12)
-			assertEquals(label + ": sampleCustomFieldBottomSectionXml", sampleCustomFieldBottomSectionXml, info.getCustomFieldBottomSectionXml());	
-		else
+		if(VERSION >= 12 && VERSION < 14)
+			assertEquals(label + ": sampleCustomFieldBottomSectionXml", sampleLegacyCustomFieldBottomSectionXml, info.getCustomFieldBottomSectionXml());	
+		else if(VERSION < 12)
 			assertEquals(label + ": sampleCustomFieldBottomSectionXml", "", info.getCustomFieldBottomSectionXml());
 
 		if(VERSION >= 13)
 			assertEquals(label + ": sampleCheckForFieldOfficeBulletins", sampleCheckForFieldOfficeBulletins, info.getCheckForFieldOfficeBulletins());	
 		else
 			assertEquals(label + ": sampleCheckForFieldOfficeBulletins", false, info.getCheckForFieldOfficeBulletins());
+		
+		if(VERSION >= 14)
+		{
+			assertEquals(label + ": sampleCustomFieldTopSectionXml", sampleCustomFieldTopSectionXml, info.getCustomFieldTopSectionXml());
+			assertEquals(label + ": sampleCustomFieldBottomSectionXml", sampleCustomFieldBottomSectionXml, info.getCustomFieldBottomSectionXml());
+		}
+		else
+		{
+			if(VERSION < 6)
+				assertEquals(label + ": sampleCustomFieldTopSectionXml", "", info.getCustomFieldTopSectionXml());
+			if(VERSION < 12)
+				assertEquals(label + ": sampleCustomFieldBottomSectionXml", "", info.getCustomFieldBottomSectionXml());
+		}
 	}
 
 	void verifyLoadSpecificVersion(ByteArrayInputStream inputStream, short VERSION) throws Exception
@@ -369,7 +405,10 @@ public class TestConfigInfo extends TestCaseEnhanced
 		}
 		if(VERSION >= 6)
 		{
-			out.writeUTF(sampleCustomFieldTopSectionXml);
+			if(VERSION < 14)
+				out.writeUTF(sampleLegacyCustomFieldTopSectionXml);
+			else
+				out.writeUTF("");
 		}
 		if(VERSION >= 7)
 		{
@@ -394,11 +433,19 @@ public class TestConfigInfo extends TestCaseEnhanced
 		}
 		if(VERSION >= 12)
 		{
-			out.writeUTF(sampleCustomFieldBottomSectionXml);
+			if(VERSION < 14)
+				out.writeUTF(sampleLegacyCustomFieldBottomSectionXml);
+			else
+				out.writeUTF("");
 		}
 		if(VERSION >= 13)
 		{
 			out.writeBoolean(sampleCheckForFieldOfficeBulletins);
+		}
+		if(VERSION >= 14)
+		{
+			ConfigInfo.writeLongString(out, sampleCustomFieldTopSectionXml);
+			ConfigInfo.writeLongString(out, sampleCustomFieldBottomSectionXml);
 		}
 		out.close();
 		return outputStream.toByteArray();
@@ -406,6 +453,8 @@ public class TestConfigInfo extends TestCaseEnhanced
 	
 	private final String defaultCustomFieldSpecs = LegacyCustomFields.buildFieldListString(StandardFieldSpecs.getDefaultTopSectionFieldSpecs());
 
+	private final static String longString = createLongSampleString();
+	
 //Version 1
 	final String sampleAuthor = "author";
 	final String sampleOrg = "org";
@@ -426,7 +475,7 @@ public class TestConfigInfo extends TestCaseEnhanced
 //Version 5
 	final String sampleCustomFieldSpecs = "language;author;custom,Custom Field;title;entrydate";
 //Version 6
-	final String sampleCustomFieldTopSectionXml = "<CustomFields></CustomFields>";
+	final String sampleLegacyCustomFieldTopSectionXml = "<CustomFields></CustomFields>";
 //Version 7
 	final boolean sampleForceAllPrivate = true;
 //Version 8
@@ -439,9 +488,11 @@ public class TestConfigInfo extends TestCaseEnhanced
 //Version 11
 	final String sampleDefaultHQKeysXml = "<HQs>defaultHQ</HQs>";
 //Version 12
-	final String sampleCustomFieldBottomSectionXml = "<CustomFields></CustomFields>";
+	final String sampleLegacyCustomFieldBottomSectionXml = "<CustomFields></CustomFields>";
 //Version 13
 	final boolean sampleCheckForFieldOfficeBulletins = true;
-	
+//Version 14
+	final String sampleCustomFieldTopSectionXml = longString;
+	final String sampleCustomFieldBottomSectionXml = longString;
 	
 }
