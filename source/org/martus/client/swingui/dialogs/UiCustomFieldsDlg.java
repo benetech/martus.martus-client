@@ -31,10 +31,10 @@ import java.awt.ComponentOrientation;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
-import java.io.UnsupportedEncodingException;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Vector;
+
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -43,6 +43,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.filechooser.FileFilter;
+
 import org.martus.client.core.MartusApp;
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
@@ -147,11 +148,6 @@ public class UiCustomFieldsDlg extends JDialog
 			{
 				String topText = topSectionXmlTextArea.getText();
 				String bottomText = bottomSectionXmlTextArea.getText();
-				if(sectionTooLarge(topText) || sectionTooLarge(bottomText))
-				{
-					mainWindow.notifyDlg("CustomFieldSectionTooLarge");
-					// return;
-				}
 				if(!validateXml(topText, bottomText))
 				 	return;
 				if(!checkForDuplicateLabels())
@@ -168,11 +164,6 @@ public class UiCustomFieldsDlg extends JDialog
 			dispose();
 		}
 		
-		boolean sectionTooLarge(String sectionXml) throws UnsupportedEncodingException
-		{
-			final int MAX_SIZE_OF_UTF_STRING_TO_WRITE_TO_DATAOUTPUTSTREAM = 65500;
-			return (sectionXml.getBytes("UTF-8").length > MAX_SIZE_OF_UTF_STRING_TO_WRITE_TO_DATAOUTPUTSTREAM);
-		}
 	}
 
 	class CancelHandler implements ActionListener
