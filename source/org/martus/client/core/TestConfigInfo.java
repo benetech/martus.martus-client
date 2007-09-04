@@ -24,7 +24,7 @@ Boston, MA 02111-1307, USA.
 
 */
 
-package org.martus.client.test;
+package org.martus.client.core;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -32,7 +32,6 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.util.Vector;
 
-import org.martus.client.core.ConfigInfo;
 import org.martus.common.ContactInfo;
 import org.martus.common.LegacyCustomFields;
 import org.martus.common.crypto.MartusCrypto;

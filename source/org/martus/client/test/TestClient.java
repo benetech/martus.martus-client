@@ -32,6 +32,7 @@ import junit.framework.TestSuite;
 import org.martus.client.bulletinstore.TestBulletinFolder;
 import org.martus.client.bulletinstore.TestClientBulletinStore;
 import org.martus.client.bulletinstore.TestKnownFieldSpecCache;
+import org.martus.client.core.TestConfigInfo;
 import org.martus.client.core.TestPartialBulletin;
 import org.martus.client.core.TestSafeReadableBulletin;
 import org.martus.client.core.TestSortableBulletinList;
