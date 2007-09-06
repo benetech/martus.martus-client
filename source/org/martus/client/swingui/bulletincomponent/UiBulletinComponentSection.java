@@ -52,12 +52,14 @@ import org.martus.swing.Utilities;
 import org.martus.util.language.LanguageOptions;
 
 import com.jhlabs.awt.BasicGridLayout;
+import com.jhlabs.awt.GridLayoutPlus;
 
 abstract public class UiBulletinComponentSection extends JPanel
 {
 	UiBulletinComponentSection(UiMainWindow mainWindowToUse, String groupTag)
 	{
-		super(new BasicGridLayout());
+		GridLayoutPlus layout = new GridLayoutPlus();
+		setLayout(layout);
 		mainWindow = mainWindowToUse;
 		groups = new Vector();
 		

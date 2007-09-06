@@ -44,8 +44,10 @@ import org.martus.common.bulletin.Bulletin;
 import org.martus.common.crypto.MartusCrypto;
 import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.packet.FieldDataPacket;
+import org.martus.util.language.LanguageOptions;
 
-import com.jhlabs.awt.BasicGridLayout;
+import com.jhlabs.awt.Alignment;
+import com.jhlabs.awt.GridLayoutPlus;
 
 abstract public class UiBulletinComponent extends JPanel implements Scrollable, ChangeListener, LanguageChangeListener 
 {
@@ -70,7 +72,11 @@ abstract public class UiBulletinComponent extends JPanel implements Scrollable, 
 
 	public UiBulletinComponent(UiMainWindow mainWindowToUse)
 	{
-		super(new BasicGridLayout());
+		GridLayoutPlus layout = new GridLayoutPlus();
+		layout.setFill(Alignment.FILL_NONE);
+		if(LanguageOptions.isRightToLeftLanguage())
+			layout.setAlignment(Alignment.EAST);
+		setLayout(layout);
 		mainWindow = mainWindowToUse;
 	}
 
