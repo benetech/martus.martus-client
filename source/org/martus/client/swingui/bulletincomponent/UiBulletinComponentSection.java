@@ -49,6 +49,7 @@ import org.martus.client.swingui.UiWarningLabel;
 import org.martus.swing.UiLabel;
 import org.martus.swing.UiParagraphPanel;
 import org.martus.swing.Utilities;
+import org.martus.util.language.LanguageOptions;
 
 import com.jhlabs.awt.BasicGridLayout;
 
@@ -119,6 +120,18 @@ abstract public class UiBulletinComponentSection extends JPanel
 			JComponent[] secondRow = new JComponent[] {new UiLabel(""), fieldHolder};
 			Utilities.addComponentsRespectingOrientation(this, firstRow);
 			Utilities.addComponentsRespectingOrientation(this, secondRow);
+			
+			avoidArabicAlignmentProblem();
+		}
+
+		private void avoidArabicAlignmentProblem()
+		{
+			// NOTE: Without this, in a RtoL language, if the first row of any section
+			// has a narrow field (not a string), it will be left-aligned instead of 
+			// right aligned like the rest of the fields in the section.
+			// After spending 8 hours on it, this was the only quick hack that worked.
+			if(LanguageOptions.isRightToLeftLanguage())
+				addComponents(new JLabel(""), new JLabel(""));
 		}
 		
 		public void addComponents(JComponent left, JComponent right)
