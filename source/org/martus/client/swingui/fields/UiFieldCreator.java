@@ -80,13 +80,13 @@ abstract public class UiFieldCreator
 		if(fieldSpec.getTag().equals(Bulletin.TAGENTRYDATE))
 			field = createReadOnlyDateField();
 		else
-			field = createNormalField(fieldSpec);
+			field = createRegularField(fieldSpec);
 		field.getComponent().setBorder(new LineBorder(Color.black));
 		return field;
 	}
 
 
-	private UiField createNormalField(FieldSpec fieldSpec)
+	private UiField createRegularField(FieldSpec fieldSpec)
 	{
 		FieldType type = fieldSpec.getType();
 		if(type.isMultiline())
