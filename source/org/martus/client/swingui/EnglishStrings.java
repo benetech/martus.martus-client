@@ -904,26 +904,26 @@ public class EnglishStrings
 "field:ErrorCustomFields=There is an error in the custom field definitions. " +
 	"Each problem is identified with the following codes:\n" +
 	"   100 - Required standard field is missing\n" +
-	"   101 - Custom field does not have a correct tag.\n" +
-	"   102 - A previous Tag already exists with this name.\n" +
-	"   103 - Custom field does not have a label.\n" +
-	"   104 - Unrecognized Field Type.\n" +
-	"   105 - A label was found in a standard field.\n" +
-	"   106 - XML Parse Error.\n" +
-	"   107 - Tag contains illegal characters.\n" +
-	"   108 - Duplicate entry in Dropdown field.\n" +
-	"   109 - No Choices in Dropdown field.\n" +
-	"   110 - System/Standard field tag cannot be used for custom field.\n" +
-	"   111 - Standard Public field cannot be placed in bottom/Private section.\n" +
-	"   112 - Standard Private field cannot be placed in the top section.\n" +
-	"   113 - Unknown Data Source Grid Field Tag.\n" +
-	"   114 - Unknown Data Source Grid Column Label.\n" +
+	"   101 - Custom field does not have a correct tag\n" +
+	"   102 - A previous Tag already exists with this name\n" +
+	"   103 - Custom field does not have a label\n" +
+	"   104 - Unrecognized Field Type\n" +
+	"   105 - A label was found in a standard field\n" +
+	"   106 - XML Parse Error (e.g. mismatched quotation marks or bracket syntax)\n" +
+	"   107 - Tag contains illegal characters (e.g. spaces or punctuation)\n" +
+	"   108 - Duplicate entry in Dropdown field\n" +
+	"   109 - No Choices in Dropdown field\n" +
+	"   110 - System/Standard field tag cannot be used for custom field\n" +
+	"   111 - Standard Public field cannot be placed in bottom/Private section\n" +
+	"   112 - Standard Private field cannot be placed in the top section\n" +
+	"   113 - Unknown Data Source Grid Field Tag\n" +
+	"   114 - Unknown Data Source Grid Column Label\n" +
 	"   115 - Dropdown cannot have both choices and data source\n" +
-	"   200 - All fields empty.\n" +
-	"   201 - Unrecognized Headquarters created this template.\n" +
-	"   202 - Security validation error.\n" +
-	"   203 - File Error.\n" +
-	"   204 - Imported XML Missing Field.",
+	"   200 - All fields empty\n" +
+	"   201 - Unrecognized Headquarters created this template\n" +
+	"   202 - Security validation error\n" +
+	"   203 - File Error\n" +
+	"   204 - Imported XML Missing Field",
 "field:ErrorCustomFieldHeader1=CODE",
 "field:ErrorCustomFieldHeader2=TYPE",
 "field:ErrorCustomFieldHeader3=TAG",
