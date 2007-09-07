@@ -904,6 +904,18 @@ public class EnglishStrings
 	"<Label>Does interviewee wish to remain anonymous?</Label>\n" +
 	"</Field>\n" +
 	"\n" +
+	"<Field type='BOOLEAN'>\n" +
+	"<Tag>AdditionalInfo</Tag>\n" +
+	"<Label>Is interviewee willing to give additional information if needed?</Label>\n" +
+	"<KeepWithPrevious/>\n" +
+	"</Field>\n" +
+	"\n" +
+	"<Field type='BOOLEAN'>\n" +
+	"<Tag>Testify</Tag>\n" +
+	"<Label>Is interviewee willing to testify?</Label>\n" +
+	"<KeepWithPrevious/>\n" +
+	"</Field>\n" +
+	"\n" +
 	"<Field type='SECTION'>\n" +
 	"<Tag>peoplesection</Tag>\n" +
 	"<Label>People Section</Label>\n" +
@@ -937,8 +949,19 @@ public class EnglishStrings
 	"<Tag>ProfessionHistoryGrid</Tag>\n" +
 	"<Label>Profession History</Label>\n" +
 	"<GridSpecDetails>\n" +
-	"<Column type='STRING'><Tag></Tag><Label>First Name</Label></Column>\n" +
-	"<Column type='STRING'><Tag></Tag><Label>Last Name</Label></Column>\n" +
+	"<Column type='DROPDOWN'><Tag></Tag><Label>First Name</Label>\n" +
+	"<DataSource>\n" +
+	"<GridFieldTag>VictimInformationGrid</GridFieldTag>\n" +
+	"<GridColumnLabel>First Name</GridColumnLabel>\n" +
+	"</DataSource>\n" +
+	"</Column>\n" +
+	"<Column type='DROPDOWN'><Tag></Tag><Label>Last Name</Label>\n" +
+	"<DataSource>\n" +
+	"<GridFieldTag>VictimInformationGrid</GridFieldTag>\n" +
+	"<GridColumnLabel>Last Name</GridColumnLabel>\n" +
+	"</DataSource>\n" +
+	"</Column>\n" +
+	"\n" + 
 	"<Column type='STRING'><Tag></Tag><Label>Profession</Label></Column>\n" +
 	"<Column type='DATERANGE'><Tag></Tag><Label>Dates of Profession</Label></Column>\n" +
 	"</GridSpecDetails>\n" +
