@@ -75,6 +75,7 @@ abstract public class UiBulletinComponentSection extends JPanel
 		Box box = Box.createHorizontalBox();
 		Utilities.addComponentsRespectingOrientation(box, new Component[] {
 				sectionHeading, 
+				Box.createHorizontalStrut(20),
 				warningIndicator,
 				Box.createHorizontalGlue(),
 				});
