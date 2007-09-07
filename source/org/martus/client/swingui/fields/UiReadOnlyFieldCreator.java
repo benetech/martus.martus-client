@@ -40,7 +40,7 @@ public class UiReadOnlyFieldCreator extends UiFieldCreator
 		// TODO Auto-generated constructor stub
 	}
 
-	public UiField createUnknownField()
+	public UiField createUnknownField(FieldSpec spec)
 	{
 		return new UiUnknownViewer(getLocalization());
 	}
@@ -55,12 +55,12 @@ public class UiReadOnlyFieldCreator extends UiFieldCreator
 		return createReadOnlyDateField();
 	}
 	
-	public UiField createNormalField()
+	public UiField createNormalField(FieldSpec spec)
 	{
 		return new UiNormalTextViewer(getLocalization(), mainWindow.getPreviewTextFieldColumns());
 	}
 
-	public UiField createMultilineField()
+	public UiField createMultilineField(FieldSpec spec)
 	{
 		return new UiMultilineViewer(getLocalization(), mainWindow.getPreviewTextFieldColumns());
 	}
@@ -75,7 +75,7 @@ public class UiReadOnlyFieldCreator extends UiFieldCreator
 		return new UiChoiceViewer(spec);
 	}
 
-	public UiField createBoolField()
+	public UiField createBoolField(FieldSpec spec)
 	{
 		return new UiBoolViewer(getLocalization());
 	}

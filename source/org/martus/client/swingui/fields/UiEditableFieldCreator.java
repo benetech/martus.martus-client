@@ -41,17 +41,17 @@ public class UiEditableFieldCreator extends UiFieldCreator
 		super(mainWindowToUse);
 	}
 
-	public UiField createUnknownField()
+	public UiField createUnknownField(FieldSpec spec)
 	{
 		return new UiUnknownViewer(getLocalization());
 	}
 	
-	public UiField createNormalField()
+	public UiField createNormalField(FieldSpec spec)
 	{
 		return new UiNormalTextEditor(getLocalization(), mainWindow.getEditingTextFieldColumns());
 	}
 
-	public UiField createMultilineField()
+	public UiField createMultilineField(FieldSpec spec)
 	{
 		return new UiMultilineTextEditor(getLocalization(), mainWindow.getEditingTextFieldColumns());
 	}
@@ -81,7 +81,7 @@ public class UiEditableFieldCreator extends UiFieldCreator
 		return new UiFlexiDateEditor(getLocalization(), spec);	
 	}
 
-	public UiField createBoolField()
+	public UiField createBoolField(FieldSpec spec)
 	{
 		return new UiBoolEditor();
 	}

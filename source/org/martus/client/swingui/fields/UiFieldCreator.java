@@ -47,15 +47,15 @@ abstract public class UiFieldCreator
 
 	}
 	
-	abstract public UiField createNormalField();
-	abstract public UiField createMultilineField();
+	abstract public UiField createNormalField(FieldSpec spec);
+	abstract public UiField createMultilineField(FieldSpec spec);
 	abstract public UiField createMessageField(FieldSpec spec);
 
 	abstract public UiField createChoiceField(DropDownFieldSpec spec);
 	abstract public UiField createDateField(FieldSpec spec);
 	abstract public UiField createFlexiDateField(FieldSpec spec);
-	abstract public UiField createUnknownField();
-	abstract public UiField createBoolField();
+	abstract public UiField createUnknownField(FieldSpec spec);
+	abstract public UiField createBoolField(FieldSpec spec);
 	abstract public UiField createGridField(GridFieldSpec fieldSpec);
 	
 	public UiGridEditor getEditableGridField(String tag)
@@ -90,7 +90,7 @@ abstract public class UiFieldCreator
 	{
 		FieldType type = fieldSpec.getType();
 		if(type.isMultiline())
-			return createMultilineField();
+			return createMultilineField(fieldSpec);
 		if(type.isDate())
 			return createDateField(fieldSpec);
 		if(type.isDateRange())
@@ -100,15 +100,15 @@ abstract public class UiFieldCreator
 		if(type.isDropdown())
 			return createChoiceField((DropDownFieldSpec)fieldSpec);
 		if(type.isString())
-			return createNormalField();
+			return createNormalField(fieldSpec);
 		if(type.isMessage())
 			return createMessageField(fieldSpec);
 		if(type.isBoolean())
-			return createBoolField();
+			return createBoolField(fieldSpec);
 		if(type.isGrid())
 			return createGridField((GridFieldSpec)fieldSpec);
 		
-		return createUnknownField();
+		return createUnknownField(fieldSpec);
 	}
 
 	private UiField createLanguageField()
