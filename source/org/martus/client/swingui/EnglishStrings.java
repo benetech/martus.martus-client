@@ -800,7 +800,7 @@ public class EnglishStrings
 "field:notifyErrorRenameFoldercause=Folder names cannot contain punctuation.  They also cannot begin with a space.",
 "field:notifyErrorRenameFolderExistscause=You already have a folder with that name.",
 "field:notifyAlreadyViewingThisVersioncause=You currently are viewing this version of the bulletin.",
-"field:notifyBulletinVersionNotInSystemcause=The bulletin version you are trying to view is currently not on your system.",
+"field:notifyBulletinVersionNotInSystemcause=The bulletin version you are trying to view is currently not on your computer.",
 "field:notifyHeadquarterLabelDuplicatecause=The Headquarters label you entered is already assigned to another Headquarters account.  Please use a different label.",
 "field:notifyNoHQsSelectedcause=Please select a Headquarters first.",
 "field:notifyErrorExportingCustomizationTemplatecause=There was an error saving your template.",
