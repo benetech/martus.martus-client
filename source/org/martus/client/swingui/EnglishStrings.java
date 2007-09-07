@@ -847,6 +847,14 @@ public class EnglishStrings
 	"Then you need a label which is displayed next to your custom field.  " +
 	"An example might be 'Name of 1st Witness'.\n" +
 	"\n" +
+	"You can create sections (which you can hide/unhide) in your bulletins using a SECTION field type.  \n" +
+	"\n" +
+	"You can put multiple fields on a single row in your bulletin by using <KeepWithPrevious/> in the field definition.\n" +
+	"\n" +
+	"You can require certain fields to be entered before saving a bulletin by using <RequiredField/> in the field definition.\n" +
+	"\n" +
+	"You can populate drop-down lists (either inside or outside of a grid) with values that have been entered in a grid elsewhere in your bulletin by using <DataSource> instead of <Choices> in the field definition.\n" +
+	"\n" +
 	"Additional Comments\n" +
 	"1. XML is case-sensitive ('Witness' is not the same as 'witness') \n" +
 	"2. Quotes around type name can be single or double as long as they match " +
@@ -864,6 +872,7 @@ public class EnglishStrings
 	"<Field type='DROPDOWN'>\n" +
 	"<Tag>BulletinSource</Tag>\n" +
 	"<Label>Source of bulletin information</Label>\n" +
+	"<RequiredField/>\n" +
 	"<Choices>\n<Choice>Media/Press</Choice>\n" +
 	"<Choice>Legal Report</Choice>\n" +
 	"<Choice>Personal Interview</Choice>\n" +
