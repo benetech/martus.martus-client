@@ -29,6 +29,7 @@ package org.martus.client.swingui.fields;
 import javax.swing.JComponent;
 
 import org.martus.clientside.UiLocalization;
+import org.martus.common.fieldspec.FieldSpec;
 import org.martus.util.MultiCalendar;
 
 public class UiDateEditor extends UiField
@@ -65,7 +66,7 @@ public class UiDateEditor extends UiField
 
 	}
 	
-	public void validate() throws UiField.DataInvalidException 
+	public void validate(FieldSpec spec) throws UiField.DataInvalidException 
 	{
 		if(allowFutureDates)
 			return;

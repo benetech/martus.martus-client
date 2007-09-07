@@ -32,6 +32,7 @@ import javax.swing.JComponent;
 import javax.swing.event.ChangeListener;
 
 import org.martus.client.core.LanguageChangeListener;
+import org.martus.common.fieldspec.FieldSpec;
 
 abstract public class UiField
 {
@@ -45,8 +46,14 @@ abstract public class UiField
 		focusManager.addFocusableComponents();
 	}
 	
-	public void validate() throws DataInvalidException 
+	public void validate(FieldSpec spec) throws DataInvalidException 
 	{
+		if(spec.isRequiredField())
+		{
+			final String REGEXP_ONLY_SPACES = "\\s*";
+			if(getText().matches(REGEXP_ONLY_SPACES))
+				throw new RequiredFieldIsBlankException();
+		}
 	}
 	
 	public void setListener(ChangeListener listener)
@@ -82,6 +89,19 @@ abstract public class UiField
 			return localizedTag;
 		}
 		String localizedTag;
+	}
+	
+	public static class RequiredFieldIsBlankException extends DataInvalidException
+	{
+		public RequiredFieldIsBlankException()
+		{
+			this(null);
+		}
+		
+		public RequiredFieldIsBlankException(String label)
+		{
+			super(label);
+		}
 	}
 	
 	FocusManager focusManager;

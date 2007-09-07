@@ -280,6 +280,7 @@ public class EnglishStrings
 "wintitle:BackupKeyPairGeneralInfo=Backup Key Information",
 "wintitle:BackupKeyPairToSecretShareInformation=Backup Key Information ",
 "wintitle:ErrorAttachmentMissing=Attachment Missing",
+"wintitle:ErrorRequiredFieldBlank=Required Field Blank",
 "wintitle:helpStringNotFound=Search Text Not Found",
 "wintitle:CreateCustomFieldsHelp=Help on Creating Custom Fields",
 "wintitle:ErrorCustomFields=Customize Fields Error",
@@ -832,6 +833,7 @@ public class EnglishStrings
 "field:messageErrorDateInFuturecause=This date occurs in the future:",
 "field:messageErrorDateRangeInvertedcause=This date range has an end date that is earlier than the start date:",
 "field:messageErrorAttachmentMissingcause=The attachment could not be located.",
+"field:messageErrorRequiredFieldBlankcause=This field is required and cannot be left blank:",
 
 "field:CreateCustomFieldsHelp1=The layout of the bulletins is dictated by an XML document.  By default the standard bulletin fields occur at the top of the Custom Field declaration, but they can be moved if desired.  However, there are four required fields that cannot be removed:  'author', 'entrydate', 'language' and 'title'.\n\n",
 "field:CreateCustomFieldsHelp2=For custom (non-standard) fields, you first select the type of field you want.  The possible choices are 'BOOLEAN', 'DATE', 'DATERANGE', 'DROPDOWN', 'GRID', 'LANGUAGE', 'MESSAGE', 'MULTILINE', and 'STRING'. \n\nFor each custom field you will need a unique identification tag.  This tag can be any word except those already used by the system (eg. 'author', 'summary', 'location', 'title' etc.), and cannot contain spaces or special characters.  Examples of choices are 'VictimsName', 'EyeColorChoice', etc.\n\nThen you need a label which is displayed next to your custom field.  An example might be 'Name of 1st Witness'.\n\nAdditional Comments\n1. XML is case-sensitive ('Witness' is not the same as 'witness') \n2. Quotes around type name can be single or double as long as they match (e.g. 'STRING\" is not valid. It must be 'STRING' or \"STRING\")\n3. A Boolean field will be displayed as a checkbox when editing and Yes/No when previewed or printed.\n4.  Use \"MESSAGE\" fields to give guidance on how to enter data, and to create comments/notes that will be displayed in every bulletin.\n\nSee examples below:\n\n",

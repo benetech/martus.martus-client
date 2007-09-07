@@ -267,7 +267,7 @@ abstract public class UiBulletinComponentDataSection extends UiBulletinComponent
 				label = fieldSpecs[fieldNum].getLabel();
 			try 
 			{
-				fields[fieldNum].validate();
+				fields[fieldNum].validate(fieldSpecs[fieldNum]);
 			} 
 			catch (UiDateEditor.DateFutureException e) 
 			{
@@ -276,6 +276,10 @@ abstract public class UiBulletinComponentDataSection extends UiBulletinComponent
 			catch(UiFlexiDateEditor.DateRangeInvertedException e)
 			{
 				throw new UiFlexiDateEditor.DateRangeInvertedException(label); 
+			}
+			catch(UiField.RequiredFieldIsBlankException e)
+			{
+				throw new UiField.RequiredFieldIsBlankException(label);
 			}
 		}
 		

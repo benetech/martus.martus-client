@@ -54,6 +54,7 @@ import org.martus.client.swingui.bulletincomponent.UiBulletinComponent;
 import org.martus.client.swingui.bulletincomponent.UiBulletinComponentEditorSection;
 import org.martus.client.swingui.bulletincomponent.UiBulletinEditor;
 import org.martus.client.swingui.fields.UiDateEditor;
+import org.martus.client.swingui.fields.UiField;
 import org.martus.client.swingui.fields.UiFlexiDateEditor;
 import org.martus.clientside.UiLocalization;
 import org.martus.common.bulletin.Bulletin;
@@ -187,6 +188,10 @@ public class UiBulletinModifyDlg extends JFrame implements ActionListener, Windo
 		catch(UiBulletinComponentEditorSection.AttachmentMissingException e)
 		{
 			observer.messageDlg(this,"ErrorAttachmentMissing", e.getlocalizedTag());
+		}
+		catch(UiField.RequiredFieldIsBlankException e)
+		{
+			observer.messageDlg(this, "ErrorRequiredFieldBlank", e.getlocalizedTag());
 		}
 		catch (Exception e) 
 		{

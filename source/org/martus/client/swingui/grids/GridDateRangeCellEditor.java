@@ -26,12 +26,15 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.swingui.grids;
 
 import java.awt.Component;
+
 import javax.swing.JComponent;
 import javax.swing.JTable;
+
 import org.martus.client.swingui.dialogs.UiDialogLauncher;
 import org.martus.client.swingui.fields.UiFlexiDateEditor;
 import org.martus.client.swingui.fields.UiGridDateRangeEditorViewer;
 import org.martus.client.swingui.fields.UiField.DataInvalidException;
+import org.martus.common.fieldspec.FieldSpec;
 import org.martus.swing.UiComboBox;
 
 public class GridDateRangeCellEditor extends GridCellEditorAndRenderer
@@ -46,7 +49,7 @@ public class GridDateRangeCellEditor extends GridCellEditorAndRenderer
 	{
 		try
 		{
-			super.uiField.validate();
+			super.uiField.validate(fieldSpecBeingEdited);
 			return super.stopCellEditing();
 		}
 		catch(DataInvalidException e)
@@ -63,6 +66,7 @@ public class GridDateRangeCellEditor extends GridCellEditorAndRenderer
 	public Component getTableCellEditorComponent(JTable tableToUse, Object stringValue, boolean isSelected, int row, int column) 
 	{
 		originalDate = super.uiField.getText();
+		fieldSpecBeingEdited = ((GridTable)tableToUse).getFieldSpecForColumn(column);
 		return super.getTableCellEditorComponent(tableToUse, stringValue, isSelected,
 				row, column);
 	}
@@ -82,5 +86,6 @@ public class GridDateRangeCellEditor extends GridCellEditorAndRenderer
 	}
 
 	String originalDate;
+	FieldSpec fieldSpecBeingEdited;
 	UiDialogLauncher dlgLauncher;
 }

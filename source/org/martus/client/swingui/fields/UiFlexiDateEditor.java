@@ -179,7 +179,7 @@ public class UiFlexiDateEditor extends UiField
 		component.revalidate();		
 	}
 
-	public void validate() throws UiField.DataInvalidException 
+	public void validate(FieldSpec specToValidate) throws UiField.DataInvalidException 
 	{
 		
 		MultiCalendar begin = getBeginDate();
