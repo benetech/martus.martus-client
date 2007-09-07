@@ -25,7 +25,6 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.fields;
 
-import java.awt.Container;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
@@ -47,6 +46,7 @@ import org.martus.client.swingui.grids.GridTableModel;
 import org.martus.clientside.UiLocalization;
 import org.martus.common.fieldspec.GridFieldSpec;
 import org.martus.swing.UiButton;
+import org.martus.swing.UiParagraphPanel;
 
 
 
@@ -225,23 +225,33 @@ public class UiEditableGrid extends UiGrid implements FocusListener
 		updateVisibleRowCount();
 	}
 
-	void updateVisibleRowCount()
-	{
-		int rows = table.getRowCount();
-		if(rows < MINIMUM_VISIBLE_ROWS)
-			rows = MINIMUM_VISIBLE_ROWS;
-		if(rows > MAXIMUM_VISIBLE_ROWS)
-			rows = MAXIMUM_VISIBLE_ROWS;
-		table.resizeTable(rows);
-		Container topLevelAncestor = table.getTopLevelAncestor();
-		if(topLevelAncestor != null)
-			topLevelAncestor.validate();
-	}
-
 	abstract class ActionWithName extends AbstractAction
 	{
 		abstract String getName();
 	}
+	
+	void addButtonsBelowExpandedGrid(UiParagraphPanel fakeTable) 
+	{
+		fakeTable.addOnNewLine(new AppendRowButton());
+	}
+
+	class AppendRowButton extends UiButton implements ActionListener
+	{
+		public AppendRowButton()
+		{
+			super(getLocalization().getButtonLabel("AppendEmptyGridRow"));
+			addActionListener(this);
+		}
+
+		public void actionPerformed(ActionEvent event) 
+		{
+			getGridTableModel().addEmptyRow();
+			showExpanded();
+			
+		}
+	}
+	
+
 	
 	class EnterAction extends ActionWithName
 	{
@@ -400,8 +410,6 @@ public class UiEditableGrid extends UiGrid implements FocusListener
 	}
 	
 	final int NO_MODIFIERS = 0;
-	private static final int MINIMUM_VISIBLE_ROWS = 1;
-	private static final int MAXIMUM_VISIBLE_ROWS = 5;
 	
 	private UiButton insertRow;
 

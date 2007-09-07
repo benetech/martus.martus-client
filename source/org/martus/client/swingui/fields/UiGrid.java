@@ -28,6 +28,7 @@ package org.martus.client.swingui.fields;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Container;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
@@ -150,6 +151,8 @@ abstract public class UiGrid extends UiField
 			}
 			fakeTable.addComponents(new UiLabel(model.getColumnName(0) + Integer.toString(row+1)), rowPanel);
 		}
+		addButtonsBelowExpandedGrid(fakeTable);
+		
 		widget.add(fakeTable);
 		UiButton showCollapsedButton = new UiButton(getLocalization().getButtonLabel("ShowGridNormal"));
 		showCollapsedButton.addActionListener(new CollapseButtonHandler());
@@ -158,6 +161,11 @@ abstract public class UiGrid extends UiField
 		widget.add(box, BorderLayout.BEFORE_FIRST_LINE);
 	}
 	
+	void addButtonsBelowExpandedGrid(UiParagraphPanel fakeTable) 
+	{
+		// NOTE: This method should be overridden where appropriate
+	}
+
 	class ExpandedGridFieldFocusHandler implements FocusListener
 	{
 		public void focusGained(FocusEvent event) 
@@ -186,6 +194,7 @@ abstract public class UiGrid extends UiField
 	{
 		widget.removeAll();
 		copyExpandedFieldsToTableModel();
+		updateVisibleRowCount();
 		expandedFieldRows = null;
 		widget.add(buttonBox, BorderLayout.SOUTH);
 		UiScrollPane tableScroller = new UiScrollPane(table);
@@ -206,6 +215,19 @@ abstract public class UiGrid extends UiField
 				model.setValueAt(value, row, column);
 			}
 		}
+	}
+
+	void updateVisibleRowCount()
+	{
+		int rows = table.getRowCount();
+		if(rows < MINIMUM_VISIBLE_ROWS)
+			rows = MINIMUM_VISIBLE_ROWS;
+		if(rows > MAXIMUM_VISIBLE_ROWS)
+			rows = MAXIMUM_VISIBLE_ROWS;
+		table.resizeTable(rows);
+		Container topLevelAncestor = table.getTopLevelAncestor();
+		if(topLevelAncestor != null)
+			topLevelAncestor.validate();
 	}
 
 	protected void setButtons(Vector buttons) 
@@ -267,6 +289,9 @@ abstract public class UiGrid extends UiField
 	private static final int ROW_HEIGHT_PADDING = 10;
 	int FIRST_REAL_FIELD_COLUMN = 1;
 	
+	private static final int MINIMUM_VISIBLE_ROWS = 1;
+	private static final int MAXIMUM_VISIBLE_ROWS = 5;
+
 	MartusApp app;
 	UiFieldCreator fieldCreator;
 	JPanel widget;

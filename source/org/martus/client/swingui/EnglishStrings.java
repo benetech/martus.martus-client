@@ -382,6 +382,7 @@ public class EnglishStrings
 "button:SearchFinalBulletinsOnly=Only search most recent version of bulletins",
 "button:DeleteSelectedGridRow=Delete Selected Row",
 "button:InsertEmptyGridRow=Insert Row",
+"button:AppendEmptyGridRow=Append Row",
 "button:PopUpTreeChoose=Choose Field...",
 "button:RunReport=Use Existing Report Format",
 "button:CreateTabularReport=Create New Tabular Report",
