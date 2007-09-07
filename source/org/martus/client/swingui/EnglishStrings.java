@@ -836,7 +836,25 @@ public class EnglishStrings
 "field:messageErrorRequiredFieldBlankcause=This field is required and cannot be left blank:",
 
 "field:CreateCustomFieldsHelp1=The layout of the bulletins is dictated by an XML document.  By default the standard bulletin fields occur at the top of the Custom Field declaration, but they can be moved if desired.  However, there are four required fields that cannot be removed:  'author', 'entrydate', 'language' and 'title'.\n\n",
-"field:CreateCustomFieldsHelp2=For custom (non-standard) fields, you first select the type of field you want.  The possible choices are 'BOOLEAN', 'DATE', 'DATERANGE', 'DROPDOWN', 'GRID', 'LANGUAGE', 'MESSAGE', 'MULTILINE', and 'STRING'. \n\nFor each custom field you will need a unique identification tag.  This tag can be any word except those already used by the system (eg. 'author', 'summary', 'location', 'title' etc.), and cannot contain spaces or special characters.  Examples of choices are 'VictimsName', 'EyeColorChoice', etc.\n\nThen you need a label which is displayed next to your custom field.  An example might be 'Name of 1st Witness'.\n\nAdditional Comments\n1. XML is case-sensitive ('Witness' is not the same as 'witness') \n2. Quotes around type name can be single or double as long as they match (e.g. 'STRING\" is not valid. It must be 'STRING' or \"STRING\")\n3. A Boolean field will be displayed as a checkbox when editing and Yes/No when previewed or printed.\n4.  Use \"MESSAGE\" fields to give guidance on how to enter data, and to create comments/notes that will be displayed in every bulletin.\n\nSee examples below:\n\n",
+"field:CreateCustomFieldsHelp2=For custom (non-standard) fields, you first select the type of field you want.  " +
+	"For custom (non-standard) fields, you first select the type of field you want.  The possible choices are 'BOOLEAN', 'DATE', 'DATERANGE', 'DROPDOWN', 'GRID', 'LANGUAGE', 'MESSAGE', 'MULTILINE', 'STRING', and 'SECTION'. \n" +
+	"\n" +
+	"For each custom field you will need a unique identification tag.  " +
+	"This tag can be any word except those already used by the system (eg. 'author', 'summary', 'location', 'title' etc.), " +
+	"and cannot contain spaces or special characters.  " +
+	"Examples of choices are 'VictimsName', 'EyeColorChoice', etc.\n" +
+	"\n" +
+	"Then you need a label which is displayed next to your custom field.  " +
+	"An example might be 'Name of 1st Witness'.\n" +
+	"\n" +
+	"Additional Comments\n" +
+	"1. XML is case-sensitive ('Witness' is not the same as 'witness') \n" +
+	"2. Quotes around type name can be single or double as long as they match " +
+	"(e.g. 'STRING\" is not valid. It must be 'STRING' or \"STRING\")\n" +
+	"3. A Boolean field will be displayed as a checkbox when editing and Yes/No when previewed or printed.\n" +
+	"4.  Use \"MESSAGE\" fields to give guidance on how to enter data, and to create comments/notes that will be displayed in every bulletin.\n" +
+	"\n" +
+	"See examples below:\n\n",
 "field:CreateCustomFieldsHelp3=\n" +
 	"<Field type='SECTION'>\n" +
 	"<Tag>sourcesection</Tag>\n" +
@@ -852,7 +870,70 @@ public class EnglishStrings
 	"<Choice>Other</Choice>\n</Choices>\n" +
 	"</Field>\n" +
 	"\n" +
-	"<Field type='STRING'>\n<Tag>SpecifyOther</Tag>\n<Label>If \"Other\", please specify:</Label>\n</Field>\n\n<Field type='STRING'>\n<Tag>IntervieweeName</Tag>\n<Label>Interviewee Name</Label>\n</Field>\n\n<Field type='LANGUAGE'>\n<Tag>IntervieweeLanguage</Tag>\n<Label>Interviewee Speaks</Label>\n</Field>\n\n<Field type='DATERANGE'>\n<Tag>InterviewDates</Tag>\n<Label>Date(s) of interview(s)</Label>\n</Field>\n\n<Field type='BOOLEAN'>\n<Tag>Anonymous</Tag>\n<Label>Does interviewee wish to remain anonymous?</Label>\n</Field>\n\n<Field type='SECTION'>\n<Tag>peoplesection</Tag>\n<Label>People Section</Label>\n</Field>\n\n<Field type='GRID'>\n<Tag>VictimInformationGrid</Tag>\n<Label>Victim Information</Label>\n<GridSpecDetails>\n<Column type='STRING'><Tag></Tag><Label>First Name</Label></Column>\n<Column type='STRING'><Tag></Tag><Label>Last Name</Label></Column>\n<Column type='BOOLEAN'><Tag></Tag><Label>Is Identified?</Label></Column>\n<Column type='DATE'><Tag></Tag><Label>Date of Birth</Label></Column>\n<Column type='DROPDOWN'><Tag></Tag><Label>Sex</Label>\n<Choices>\n<Choice>Male</Choice>\n<Choice>Female</Choice>\n<Choice>Unknown</Choice>\n</Choices></Column>\n<Column type='STRING'><Tag></Tag><Label>Ethnicity</Label></Column>\n</GridSpecDetails>\n</Field>\n\n<Field type='MESSAGE'>\n<Tag>MessageProfession</Tag>\n<Label>Profession History Table Note</Label>\n<Message>If you have information about a person who has had different professions over time, enter multiple rows with the same First and Last Names and show the date ranges for each profession on a separate row.</Message>\n</Field>\n\n<Field type='GRID'>\n<Tag>ProfessionHistoryGrid</Tag>\n<Label>Profession History</Label>\n<GridSpecDetails>\n<Column type='STRING'><Tag></Tag><Label>First Name</Label></Column>\n<Column type='STRING'><Tag></Tag><Label>Last Name</Label></Column>\n<Column type='STRING'><Tag></Tag><Label>Profession</Label></Column>\n<Column type='DATERANGE'><Tag></Tag><Label>Dates of Profession</Label></Column>\n</GridSpecDetails>\n</Field>\n",
+	"<Field type='STRING'>\n" +
+	"<Tag>SpecifyOther</Tag>\n" +
+	"<Label>If \"Other\", please specify:</Label>\n" +
+	"</Field>\n" +
+	"\n" +
+	"<Field type='STRING'>\n" +
+	"<Tag>IntervieweeName</Tag>\n" +
+	"<Label>Interviewee Name</Label>\n" +
+	"</Field>\n" +
+	"\n" +
+	"<Field type='LANGUAGE'>\n" +
+	"<Tag>IntervieweeLanguage</Tag>\n" +
+	"<Label>Interviewee Speaks</Label>\n" +
+	"</Field>\n" +
+	"\n" +
+	"<Field type='DATERANGE'>\n" +
+	"<Tag>InterviewDates</Tag>\n" +
+	"<Label>Date(s) of interview(s)</Label>\n" +
+	"</Field>\n" +
+	"\n" +
+	"<Field type='BOOLEAN'>\n" +
+	"<Tag>Anonymous</Tag>\n" +
+	"<Label>Does interviewee wish to remain anonymous?</Label>\n" +
+	"</Field>\n" +
+	"\n" +
+	"<Field type='SECTION'>\n" +
+	"<Tag>peoplesection</Tag>\n" +
+	"<Label>People Section</Label>\n" +
+	"</Field>\n" +
+	"\n" +
+	"<Field type='GRID'>\n" +
+	"<Tag>VictimInformationGrid</Tag>\n" +
+	"<Label>Victim Information</Label>\n" +
+	"<GridSpecDetails>\n" +
+	"<Column type='STRING'><Tag></Tag><Label>First Name</Label></Column>\n" +
+	"<Column type='STRING'><Tag></Tag><Label>Last Name</Label></Column>\n" +
+	"<Column type='BOOLEAN'><Tag></Tag><Label>Is Identified?</Label></Column>\n" +
+	"<Column type='DATE'><Tag></Tag><Label>Date of Birth</Label></Column>\n" +
+	"<Column type='DROPDOWN'><Tag></Tag><Label>Sex</Label>\n" +
+		"<Choices>\n<Choice>Male</Choice>\n" +
+		"<Choice>Female</Choice>\n" +
+		"<Choice>Unknown</Choice>\n" +
+		"</Choices>" +
+	"</Column>\n" +
+	"<Column type='STRING'><Tag></Tag><Label>Ethnicity</Label></Column>\n" +
+	"</GridSpecDetails>\n" +
+	"</Field>\n" +
+	"\n" +
+	"<Field type='MESSAGE'>\n" +
+	"<Tag>MessageProfession</Tag>\n" +
+	"<Label>Profession History Table Note</Label>\n" +
+	"<Message>If you have information about a person who has had different professions over time, enter multiple rows with the same First and Last Names and show the date ranges for each profession on a separate row.</Message>\n" +
+	"</Field>\n" +
+	"\n" +
+	"<Field type='GRID'>\n" +
+	"<Tag>ProfessionHistoryGrid</Tag>\n" +
+	"<Label>Profession History</Label>\n" +
+	"<GridSpecDetails>\n" +
+	"<Column type='STRING'><Tag></Tag><Label>First Name</Label></Column>\n" +
+	"<Column type='STRING'><Tag></Tag><Label>Last Name</Label></Column>\n" +
+	"<Column type='STRING'><Tag></Tag><Label>Profession</Label></Column>\n" +
+	"<Column type='DATERANGE'><Tag></Tag><Label>Dates of Profession</Label></Column>\n" +
+	"</GridSpecDetails>\n" +
+	"</Field>\n",
 
 "field:inputservermagicwordentry=If you want to request permission to upload to this server, enter the 'magic word' now:",
 "field:inputImportPublicCodeentry=Enter the Public Identification Code for this account:",
