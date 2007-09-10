@@ -556,7 +556,7 @@ public class EnglishStrings
 "field:DuplicateLabels=Labels",
 "field:DuplicateLabelsInCustomTemplateContinue=Do you want to save this template with the duplicate labels?",
 "field:PrintPrivateDataMessage=You have the option to include or exclude the selected bulletin's private information in this print out. " +
-	"If you choose to print private data, it will be visible to anyone who sees the print out or report file.",
+	"If you choose to print private data, it will be visible to anyone who sees the print out.",
 "button:PrintOnlyPublic=Print only public information",
 "button:PrintPublicAndPrivate=Include private information",
 "field:PrintToPrinterOrDisk=You can print the bulletin contents to a printer or to a file.",
