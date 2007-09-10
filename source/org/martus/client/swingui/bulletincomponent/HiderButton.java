@@ -27,11 +27,14 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.swingui.bulletincomponent;
 
 import java.awt.Container;
+import java.awt.Dimension;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.BorderFactory;
 import javax.swing.Icon;
+import javax.swing.border.BevelBorder;
 
 import org.martus.client.core.MartusApp;
 import org.martus.swing.UiButton;
@@ -43,11 +46,34 @@ class HiderButton extends UiButton implements ActionListener
 		app = appToUse;
 		tag = tagToUse;
 		fieldHolder = fieldToHide;
+		size = 11;
 		
-		setMargin(new Insets(0, 0, 0, 0));
+		//setBorder(BorderFactory.createLineBorder(Color.BLACK));
+		setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
+		setMargin(new Insets(0,0,0,0));
+		setIconTextGap(0);
+		setFocusPainted(false);
+		setContentAreaFilled(false);
 		addActionListener(this);
 		
 		forceState(app.isFieldExpanded(tag));
+	}
+	
+	
+
+	public Dimension getPreferredSize() 
+	{
+		return new Dimension(size, size);
+	}
+
+	public Dimension getMinimumSize()
+	{
+		return getPreferredSize();
+	}
+	
+	public Dimension getMaximumSize()
+	{
+		return getPreferredSize();
 	}
 
 	public void actionPerformed(ActionEvent event) 
@@ -76,7 +102,6 @@ class HiderButton extends UiButton implements ActionListener
 	
 	public Icon getAppropriateIcon()
 	{
-		int size = fieldHolder.getFont().getSize();
 		if(fieldHolder.isShown())
 			return new MinusIcon(size);
 		
@@ -86,4 +111,5 @@ class HiderButton extends UiButton implements ActionListener
 	MartusApp app;
 	String tag;
 	FieldHolder fieldHolder;
+	int size;
 }

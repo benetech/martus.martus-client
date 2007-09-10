@@ -57,11 +57,11 @@ import javax.swing.Icon;
 
 abstract class HiderIcon implements Icon
 {
-	public HiderIcon(int fontSize)
+	public HiderIcon(int sizeToUse)
 	{
-		size = fontSize/2;
-		margin = size/10;
-		thickness = size/6 + 1;
+		size = sizeToUse;
+		margin = 2;
+		thickness = 1;
 	}
 	
 	public int getIconHeight()
