@@ -123,7 +123,7 @@ public class UiBulletinComponentEditorSection extends UiBulletinComponentDataSec
 				UiField field = fields[i];
 				
 				if(type.isGrid())
-					blankOutInvalidDataDrivenDropdowns((GridFieldSpec)spec, (UiGrid)field);
+					updateDataDrivenDropdownsInsideGrid((GridFieldSpec)spec, (UiGrid)field);
 
 				if(type.isDropdown())
 					updateDataDrivenDropdown((DropDownFieldSpec)spec, field);
@@ -141,11 +141,12 @@ public class UiBulletinComponentEditorSection extends UiBulletinComponentDataSec
 			
 			String existingValue = field.getText();
 			UiChoiceEditor choiceField = (UiChoiceEditor)field;
-			choiceField.setChoices(dataSourceGrid.buildChoicesFromColumnValues(spec.getDataSourceGridColumn()));
-			field.setText(ensureValid(spec, existingValue));
+			ChoiceItem[] choices = getCurrentChoiceItems(spec);
+			choiceField.setChoices(choices);
+			field.setText(ensureValid(choices, existingValue));
 		}
 
-		private void blankOutInvalidDataDrivenDropdowns(GridFieldSpec gridSpecToBlankOut, UiGrid gridToBlankOut) 
+		private void updateDataDrivenDropdownsInsideGrid(GridFieldSpec gridSpecToBlankOut, UiGrid gridToBlankOut) 
 		{
 			GridTableModel modelToBlankOut = gridToBlankOut.getGridTableModel();
 			for(int column = 0; column < modelToBlankOut.getColumnCount(); ++column)
@@ -158,10 +159,16 @@ public class UiBulletinComponentEditorSection extends UiBulletinComponentDataSec
 				if(!isDataSourceThisGrid(dropdownSpec))
 					continue;
 				
+				ChoiceItem[] choices = getCurrentChoiceItems(dropdownSpec);
+				if(choices == null)
+					continue;
+				
+				gridToBlankOut.updateDataDrivenColumnWidth(column, choices);
+				
 				for(int row = 0; row < modelToBlankOut.getRowCount(); ++row)
 				{
 					String oldValue = (String)modelToBlankOut.getValueAt(row, column);
-					String newValue = ensureValid(dropdownSpec, oldValue);
+					String newValue = ensureValid(choices, oldValue);
 					if(!newValue.equals(oldValue))
 						modelToBlankOut.setValueAt(newValue, row, column);
 				}
@@ -178,18 +185,22 @@ public class UiBulletinComponentEditorSection extends UiBulletinComponentDataSec
 			return (dataSourceGridTag.equals(modifiedGridTag));
 		}
 		
-		private String ensureValid(DropDownFieldSpec spec, String text) 
+		private String ensureValid(ChoiceItem[] choices, String text) 
 		{
-			UiGridEditor dataSourceGrid = fieldCreator.getEditableGridField(spec.getDataSourceGridTag());
-			if(dataSourceGrid == null)
-				return text;
-			
-			ChoiceItem[] choices = dataSourceGrid.buildChoicesFromColumnValues(spec.getDataSourceGridColumn());
 			for(int i = 0; i < choices.length; ++i)
 				if(choices[i].getCode().equals(text))
 					return text;
 
 			return "";
+		}
+		
+		private ChoiceItem[] getCurrentChoiceItems(DropDownFieldSpec spec)
+		{
+			UiGridEditor dataSourceGrid = fieldCreator.getEditableGridField(spec.getDataSourceGridTag());
+			if(dataSourceGrid == null)
+				return null;
+			
+			return dataSourceGrid.buildChoicesFromColumnValues(spec.getDataSourceGridColumn());
 		}
 
 		UiGrid modifiedGrid;

@@ -40,6 +40,7 @@ import javax.swing.table.TableCellRenderer;
 
 import org.martus.client.swingui.dialogs.UiDialogLauncher;
 import org.martus.clientside.UiLocalization;
+import org.martus.common.fieldspec.ChoiceItem;
 import org.martus.common.fieldspec.DropDownFieldSpec;
 import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.fieldspec.FieldType;
@@ -80,12 +81,22 @@ public class GridTable extends UiTableWithCellEditingProtection
 			editors = createReadOnlyEditorsOrRenderers();
 		}
 		useMaxWidth();
+		setColumnWidthsFromHeadersAndData();
+		setAutoResizeMode(AUTO_RESIZE_OFF);
+	}
+
+	public void setColumnWidthsFromHeadersAndData() 
+	{
+		GridTableModel model = (GridTableModel)getModel();
 		setMaxColumnWidthToHeaderWidth(0);
 		for(int i = 1 ; i < model.getColumnCount(); ++i)
 		{
 			FieldType columnType = model.getColumnType(i);
 			if(columnType.isDropdown())
-				setColumnMaxWidth(i, getDropDownColumnWidth(i, (DropDownFieldSpec)model.getFieldSpecForColumn(i)));
+			{
+				int dropDownColumnWidth = getDropDownColumnWidth(i, (DropDownFieldSpec)model.getFieldSpecForColumn(i));
+				setColumnMaxWidth(i, dropDownColumnWidth);
+			}
 			else if(columnType.isDate())
 				setColumnMaxWidth(i, getDateColumnWidth(i));
 			else if(columnType.isDateRange())
@@ -97,7 +108,12 @@ public class GridTable extends UiTableWithCellEditingProtection
 			else
 				setColumnWidthToMinimumRequred(i);
 		}
-		setAutoResizeMode(AUTO_RESIZE_OFF);
+	}
+	
+	public void updateDataDrivenColumnWidth(int column, ChoiceItem[] choices)
+	{
+		int dropDownColumnWidth = getDropDownColumnWidth(column, choices);
+		setColumnMaxWidth(column, dropDownColumnWidth);
 	}
 	
 	public UiDialogLauncher getDialogLauncher()
@@ -128,12 +144,18 @@ public class GridTable extends UiTableWithCellEditingProtection
 
 	private int getDropDownColumnWidth(int column, DropDownFieldSpec spec)
 	{
+		ChoiceItem[] choices = spec.getAllChoices();
+		return getDropDownColumnWidth(column, choices);
+	}
+
+	private int getDropDownColumnWidth(int column, ChoiceItem[] choices) 
+	{
 		final int SCROLL_BAR_ALLOWANCE = 50;
 		final int DROPDOWN_LANGUAGE_PADDING = 15;
 		int widestWidth = getColumnHeaderWidth(column);
-		for(int i = 0; i < spec.getCount(); ++i)
+		for(int i = 0; i < choices.length; ++i)
 		{
-			String thisValue = spec.getChoice(i).toString();
+			String thisValue = choices[i].toString();
 			int thisWidth = getRenderedWidth(column, thisValue) + SCROLL_BAR_ALLOWANCE;
 			if(thisWidth > widestWidth)
 				widestWidth = thisWidth;

@@ -50,6 +50,7 @@ import org.martus.client.swingui.grids.GridTable;
 import org.martus.client.swingui.grids.GridTableModel;
 import org.martus.clientside.UiLocalization;
 import org.martus.common.GridData;
+import org.martus.common.fieldspec.ChoiceItem;
 import org.martus.common.fieldspec.GridFieldSpec;
 import org.martus.swing.UiButton;
 import org.martus.swing.UiLabel;
@@ -91,6 +92,11 @@ abstract public class UiGrid extends UiField
 			showExpanded();
 		else
 			showCollapsed();
+	}
+	
+	public void updateDataDrivenColumnWidth(int column, ChoiceItem[] choices)
+	{
+		table.updateDataDrivenColumnWidth(column, choices);
 	}
 
 	String getGridTag()
