@@ -121,7 +121,6 @@ abstract public class UiGrid extends UiField
 		{
 			app.setGridExpansionState(getGridTag(), true);
 			showExpanded();
-			widget.getTopLevelAncestor().validate();
 		}
 		
 	}
@@ -159,6 +158,11 @@ abstract public class UiGrid extends UiField
 		Box box = Box.createHorizontalBox();
 		Utilities.addComponentsRespectingOrientation(box, new Component[] {showCollapsedButton, Box.createHorizontalGlue()});
 		widget.add(box, BorderLayout.BEFORE_FIRST_LINE);
+
+		
+		Container topLevelAncestor = widget.getTopLevelAncestor();
+		if(topLevelAncestor != null)
+			topLevelAncestor.validate();
 	}
 	
 	void addButtonsBelowExpandedGrid(UiParagraphPanel fakeTable) 
