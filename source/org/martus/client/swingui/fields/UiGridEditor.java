@@ -1,5 +1,6 @@
 package org.martus.client.swingui.fields;
 
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Vector;
 
@@ -26,15 +27,19 @@ public class UiGridEditor extends UiEditableGrid
 	{
 		int gridColumn = model.findColumn(gridColumnLabel);
 
-		ChoiceItem[] values = new ChoiceItem[1 + model.getRowCount()];
-		values[0] = new ChoiceItem("", "");
+		HashSet existingValues = new HashSet();
+		Vector values = new Vector();
+		values.add(new ChoiceItem("", ""));
+		existingValues.add("");
 		for(int row = 0; row < model.getRowCount(); ++row)
 		{
 			String thisValue = (String)model.getValueAt(row, gridColumn);
-			values[row + 1] = new ChoiceItem(thisValue, thisValue);
+			if(existingValues.contains(thisValue))
+				continue;
+			values.add(new ChoiceItem(thisValue, thisValue));
+			existingValues.add(thisValue);
 		}
 		
-		return values;
-		
+		return (ChoiceItem[])values.toArray(new ChoiceItem[0]);
 	}
 }
