@@ -32,6 +32,7 @@ import org.martus.common.FieldCollection;
 import org.martus.common.GridData;
 import org.martus.common.bulletin.BulletinXmlExportImportConstants;
 import org.martus.common.field.MartusField;
+import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.fieldspec.GridFieldSpec;
 import org.martus.util.xml.SimpleXmlDefaultLoader;
 import org.martus.util.xml.SimpleXmlStringLoader;
@@ -44,6 +45,8 @@ public class XmlBulletinLoader extends SimpleXmlDefaultLoader
 	public XmlBulletinLoader()
 	{
 		super(BulletinXmlExportImportConstants.MARTUS_BULLETIN);
+		mainFieldSpecs = new FieldCollection(new FieldSpec[0]);
+		privateFieldSpecs = new FieldCollection(new FieldSpec[0]);
 		topSectionAttachments = new Vector();
 		bottomSectionAttachments = new Vector();
 	}
