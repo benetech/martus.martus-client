@@ -30,7 +30,6 @@ import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Cursor;
 import java.awt.Dimension;
-import java.awt.Frame;
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.Point;
@@ -121,7 +120,6 @@ import org.martus.common.EnglishCommonStrings;
 import org.martus.common.HQKeys;
 import org.martus.common.MartusLogger;
 import org.martus.common.MartusUtilities;
-import org.martus.common.Version;
 import org.martus.common.MartusUtilities.FileVerificationException;
 import org.martus.common.MartusUtilities.ServerErrorException;
 import org.martus.common.bulletin.Bulletin;
@@ -321,29 +319,6 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		return originalMessage;
 	}
 
-	static class HiddenFrame extends JFrame
-	{
-		HiddenFrame(MartusLocalization localization, String programName)
-		{
-			super(programName);
-			UiMainWindow.updateIcon(this);
-			setTitle(UiSigninDlg.getInitialSigninTitle(localization));
-			if(Version.isRunningUnderWindows())
-			{
-				setState(Frame.ICONIFIED);
-				setVisible(true);
-			}
-			else
-			{
-				Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-				setLocation(screenSize.width + 1, screenSize.height + 1);
-				setVisible(true);
-				toFront();
-			}
-		}
-
-	}
-
 	public boolean run()
 	{
 		setCurrentActiveFrame(this);
@@ -356,62 +331,57 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 			setLocation(screenSize.width, screenSize.height);
 		}
 
-		// TODO: Fix indentation later, when we are not in release freeze
-			String currentLanguageCode = localization.getCurrentLanguageCode();
-			displayDefaultUnofficialTranslationMessageIfNecessary(currentActiveFrame, localization, currentLanguageCode);
-			displayIncompatibleMtfVersionWarningMessageIfNecessary(currentActiveFrame, localization, localization.getCurrentLanguageCode());
-			
-			preventTwoInstances();
-			notifyClientCompliance();
-	
-			mainWindowInitalizing = true;
-	
-			if(!sessionSignIn())
+		String currentLanguageCode = localization.getCurrentLanguageCode();
+		displayDefaultUnofficialTranslationMessageIfNecessary(currentActiveFrame, localization, currentLanguageCode);
+		displayIncompatibleMtfVersionWarningMessageIfNecessary(currentActiveFrame, localization, localization.getCurrentLanguageCode());
+		
+		preventTwoInstances();
+		notifyClientCompliance();
+
+		mainWindowInitalizing = true;
+
+		if(!sessionSignIn())
+			return false;
+		
+		timeoutChecker = new java.util.Timer(true);
+		TimeoutTimerTask timeoutTimerTask = new TimeoutTimerTask();
+		timeoutChecker.schedule(timeoutTimerTask, 0, BACKGROUND_TIMEOUT_CHECK_EVERY_X_MILLIS);
+
+		loadConfigInfo();
+		if(!createdNewAccount && !justRecovered)
+			askAndBackupKeypairIfRequired();
+		
+		UiModelessBusyDlg waitingForBulletinsToLoad = new UiModelessBusyDlg(getLocalization().getFieldLabel("waitingForBulletinsToLoad"));
+		{
+			if(!loadFoldersAndBulletins())
 				return false;
-			
-			timeoutChecker = new java.util.Timer(true);
-			TimeoutTimerTask timeoutTimerTask = new TimeoutTimerTask();
-			timeoutChecker.schedule(timeoutTimerTask, 0, BACKGROUND_TIMEOUT_CHECK_EVERY_X_MILLIS);
+	
+			initializeViews();
+			restoreState();
+		}
+		waitingForBulletinsToLoad.endDialog();
 
-			loadConfigInfo();
-			if(!createdNewAccount && !justRecovered)
-				askAndBackupKeypairIfRequired();
-			
-			UiModelessBusyDlg waitingForBulletinsToLoad = new UiModelessBusyDlg(getLocalization().getFieldLabel("waitingForBulletinsToLoad"));
-			{
-				if(!loadFoldersAndBulletins())
-					return false;
+		MartusLogger.log("reloadPendingRetrieveQueue");
+		reloadPendingRetrieveQueue();
 		
-				initializeViews();
-				restoreState();
-			}
-			waitingForBulletinsToLoad.endDialog();
-
-			MartusLogger.log("reloadPendingRetrieveQueue");
-			reloadPendingRetrieveQueue();
-			
-			requestContactInfo();
-			
-			MartusLogger.log("Ready to show main window");
-			addWindowListener(new WindowEventHandler());
-			if(timeoutTimerTask.waitingForSignin)
-			{
-				setLocation(100000, 0);
-				setSize(0,0);
-				setEnabled(false);
-			}
-			else
-			{
-				MartusLogger.log("Showing main window");
-				setVisible(true);
-				toFront();
-				mainWindowInitalizing = false;
-			}
+		requestContactInfo();
 		
-
-		// TODO: Remove this useless line of code when not in release freeze
-		MartusLogger.log("Disposing of hidden frame");
-		setCurrentActiveFrame(this);
+		MartusLogger.log("Ready to show main window");
+		addWindowListener(new WindowEventHandler());
+		if(timeoutTimerTask.waitingForSignin)
+		{
+			setLocation(100000, 0);
+			setSize(0,0);
+			setEnabled(false);
+		}
+		else
+		{
+			MartusLogger.log("Showing main window");
+			setVisible(true);
+			toFront();
+			mainWindowInitalizing = false;
+		}
+		
 
 		createBackgroundUploadTasks();
 
