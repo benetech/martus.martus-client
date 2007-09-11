@@ -28,10 +28,13 @@ package org.martus.client.bulletinstore;
 import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Vector;
 
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.dialogs.UiImportExportProgressMeterDlg;
 import org.martus.client.tools.ImporterOfXmlFilesOfBulletins;
+import org.martus.client.tools.XmlBulletinsImporter.FieldSpecVerificationException;
+import org.martus.common.MartusLogger;
 
 public class ImportBulletins
 {
@@ -100,6 +103,13 @@ public class ImportBulletins
 				importer = new ImporterOfXmlFilesOfBulletins(filesToImport, clientStore, importFolder, progressMeter);
 				importer.setAttachmentsDirectory(filesToImport[0].getParentFile());
 				importer.importFiles();
+			}
+			catch(FieldSpecVerificationException e)
+			{
+				e.printStackTrace(MartusLogger.getDestination());
+				Vector errors = e.getErrors();
+				for(int i = 0; i < errors.size(); ++i)
+					MartusLogger.log(errors.get(i).toString());
 			}
 			catch (Exception e)
 			{
