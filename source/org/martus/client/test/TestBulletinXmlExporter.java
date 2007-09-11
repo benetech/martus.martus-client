@@ -339,7 +339,7 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 		
 		Vector list = new Vector();
 		list.add(b);
-		String result = doExport(list, false, false);
+		String result = doExport(list, true, false);
 		
 		assertContains("<BulletinVersion>3</BulletinVersion>", result);
 		assertContains("<History>", result);
@@ -523,11 +523,11 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 		list.add(b);
 		String publicOnly = doExport(list, false, false);
 
-		assertContains(b.getAccount(), publicOnly);
-		assertContains(b.getLocalId(), publicOnly);
-		assertContains("<AllPrivate></AllPrivate>", publicOnly);
+		assertNotContains(b.getAccount(), publicOnly);
+		assertNotContains(b.getLocalId(), publicOnly);
+		assertNotContains("<AllPrivate></AllPrivate>", publicOnly);
 		assertNotContains(sampleAuthor, publicOnly);
-		assertContains("<FieldValues>", publicOnly);
+		assertNotContains("<FieldValues>", publicOnly);
 		assertContains("<!--  No Private FieldSpecs or Data was exported  -->", publicOnly);
 		assertNotContains("<MainFieldSpecs>", publicOnly);
 		assertNotContains("<PrivateFieldSpecs>", publicOnly);
