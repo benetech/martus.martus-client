@@ -837,7 +837,7 @@ public class EnglishStrings
 
 "field:CreateCustomFieldsHelp1=The layout of the bulletins is dictated by an XML document.  By default the standard bulletin fields occur at the top of the Custom Field declaration, but they can be moved if desired.  However, there are four required fields that cannot be removed:  'author', 'entrydate', 'language' and 'title'.\n\n",
 "field:CreateCustomFieldsHelp2=For custom (non-standard) fields, you first select the type of field you want.  " +
-	"For custom (non-standard) fields, you first select the type of field you want.  The possible choices are 'BOOLEAN', 'DATE', 'DATERANGE', 'DROPDOWN', 'GRID', 'LANGUAGE', 'MESSAGE', 'MULTILINE', 'STRING', and 'SECTION'. \n" +
+	"The possible choices are 'BOOLEAN', 'DATE', 'DATERANGE', 'DROPDOWN', 'GRID', 'LANGUAGE', 'MESSAGE', 'MULTILINE', 'STRING', and 'SECTION'. \n" +
 	"\n" +
 	"For each custom field you will need a unique identification tag.  " +
 	"This tag can be any word except those already used by the system (eg. 'author', 'summary', 'location', 'title' etc.), " +
