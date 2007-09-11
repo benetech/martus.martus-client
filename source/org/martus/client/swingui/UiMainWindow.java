@@ -347,6 +347,14 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	public boolean run()
 	{
 		setCurrentActiveFrame(this);
+		
+		if(Utilities.isMSWindows())
+		{
+			updateTitle();
+			setVisible(true);
+			Dimension screenSize = Utilities.getViewableScreenSize();
+			setLocation(screenSize.width, screenSize.height);
+		}
 
 		// TODO: Fix indentation later, when we are not in release freeze
 			String currentLanguageCode = localization.getCurrentLanguageCode();
@@ -2139,7 +2147,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	{
 		getContentPane().removeAll();
 		getContentPane().setComponentOrientation(UiLanguageDirection.getComponentOrientation());
-		setTitle(getLocalization().getWindowTitle("main"));
+		updateTitle();
 
 		preview = new UiBulletinPreviewPane(this);
 		table = new UiBulletinTablePane(this);
@@ -2180,6 +2188,10 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		statusBar = new UiStatusBar(getLocalization());		
 		checkServerStatus();	
 		getContentPane().add(statusBar, BorderLayout.SOUTH ); 
+	}
+
+	private void updateTitle() {
+		setTitle(getLocalization().getWindowTitle("main"));
 	}
 
 	class FolderSplitPane extends JSplitPane
