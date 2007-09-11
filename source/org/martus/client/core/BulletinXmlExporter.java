@@ -33,6 +33,7 @@ import java.util.Vector;
 
 import org.martus.client.swingui.dialogs.UiImportExportProgressMeterDlg;
 import org.martus.client.swingui.fields.UiAttachmentViewer;
+import org.martus.common.MartusLogger;
 import org.martus.common.MartusXml;
 import org.martus.common.MiniLocalization;
 import org.martus.common.bulletin.AttachmentProxy;
@@ -74,8 +75,15 @@ public class BulletinXmlExporter
 				if(progressMeter.shouldExit())
 					break;
 			}
-			exportOneBulletin(dest, b, includePrivateData, includeAttachments, attachmentsDirectory);
-			++bulletinsExported;
+			if(!includePrivateData && b.isAllPrivate())
+			{
+				MartusLogger.log("Export skipping all-private bulletin");
+			}
+			else
+			{
+				exportOneBulletin(dest, b, includePrivateData, includeAttachments, attachmentsDirectory);
+				++bulletinsExported;
+			}
 		}
 		dest.write(MartusXml.getTagEnd(BulletinXmlExportImportConstants.MARTUS_BULLETINS));
 	}
