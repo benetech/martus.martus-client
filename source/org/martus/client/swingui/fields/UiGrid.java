@@ -40,6 +40,7 @@ import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.JComponent;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.border.EmptyBorder;
 
@@ -208,6 +209,7 @@ abstract public class UiGrid extends UiField
 		expandedFieldRows = null;
 		widget.add(buttonBox, BorderLayout.SOUTH);
 		UiScrollPane tableScroller = new UiScrollPane(table);
+		tableScroller.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
 		widget.add(tableScroller, BorderLayout.CENTER);
 	}
 	
