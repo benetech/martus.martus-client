@@ -65,4 +65,10 @@ public class UiGridViewer extends UiGrid
 		return new JComponent[0];
 	}
 
+	void copyExpandedFieldsToTableModel() 
+	{
+		// NOTE: Readonly, so never copy fields back into the model
+		return;
+	}
+
 }
