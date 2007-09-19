@@ -91,7 +91,7 @@ public class UiEditableFieldCreator extends UiFieldCreator
 		MartusLocalization localization = mainWindow.getLocalization();
 		fieldSpec.setColumnZeroLabel(localization.getFieldLabel("ColumnGridRowNumber"));
 		UiDialogLauncher dlgLauncher = new UiDialogLauncher(mainWindow.getCurrentActiveFrame(), localization);
-		UiGridEditor gridEditor = new UiGridEditor(mainWindow, fieldSpec, dlgLauncher, editableGridFields, mainWindow.getEditingTextFieldColumns());
+		UiGrid gridEditor = new UiGridEditor(mainWindow, fieldSpec, dlgLauncher, editableGridFields, mainWindow.getEditingTextFieldColumns());
 		editableGridFields.put(fieldSpec.getTag(), gridEditor);
 		return gridEditor;
 	}

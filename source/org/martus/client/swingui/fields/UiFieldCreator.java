@@ -58,9 +58,9 @@ abstract public class UiFieldCreator
 	abstract public UiField createBoolField(FieldSpec spec);
 	abstract public UiField createGridField(GridFieldSpec fieldSpec);
 	
-	public UiGridEditor getEditableGridField(String tag)
+	public UiGrid getEditableGridField(String tag)
 	{
-		return (UiGridEditor)editableGridFields.get(tag);
+		return (UiGrid)editableGridFields.get(tag);
 	}
 
 	public UiField createReadOnlyDateField()

@@ -32,7 +32,7 @@ import java.util.Map;
 import javax.swing.JTable;
 
 import org.martus.client.swingui.fields.UiField;
-import org.martus.client.swingui.fields.UiGridEditor;
+import org.martus.client.swingui.fields.UiGrid;
 import org.martus.common.fieldspec.ChoiceItem;
 import org.martus.common.fieldspec.DropDownFieldSpec;
 import org.martus.swing.UiComboBox;
@@ -79,7 +79,7 @@ abstract public class GridDropDownCellEditorOrRenderer extends GridCellEditorAnd
 
 	ChoiceItem[] getCurrentGridValuesAsChoices(DropDownFieldSpec spec)
 	{
-		UiGridEditor dataSource = getGrid(spec);
+		UiGrid dataSource = getGrid(spec);
 		if(dataSource == null)
 			return spec.getAllChoices();
 		
@@ -87,13 +87,13 @@ abstract public class GridDropDownCellEditorOrRenderer extends GridCellEditorAnd
 		return dataSource.buildChoicesFromColumnValues(gridColumnLabel);
 	}
 	
-	UiGridEditor getGrid(DropDownFieldSpec spec)
+	UiGrid getGrid(DropDownFieldSpec spec)
 	{
 		String gridTag = spec.getDataSourceGridTag();
 		if(gridTag == null)
 			return null;
 		
-		return (UiGridEditor)otherGrids.get(gridTag);
+		return (UiGrid)otherGrids.get(gridTag);
 	}
 
 	Map otherGrids;

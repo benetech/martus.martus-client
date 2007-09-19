@@ -39,7 +39,6 @@ import org.martus.client.swingui.fields.UiChoiceEditor;
 import org.martus.client.swingui.fields.UiEditableFieldCreator;
 import org.martus.client.swingui.fields.UiField;
 import org.martus.client.swingui.fields.UiGrid;
-import org.martus.client.swingui.fields.UiGridEditor;
 import org.martus.client.swingui.grids.GridTableModel;
 import org.martus.common.bulletin.AttachmentProxy;
 import org.martus.common.fieldspec.ChoiceItem;
@@ -135,7 +134,7 @@ public class UiBulletinComponentEditorSection extends UiBulletinComponentDataSec
 			if(!isDataSourceThisGrid(spec))
 				return;
 			
-			UiGridEditor dataSourceGrid = fieldCreator.getEditableGridField(spec.getDataSourceGridTag());
+			UiGrid dataSourceGrid = fieldCreator.getEditableGridField(spec.getDataSourceGridTag());
 			if(dataSourceGrid == null)
 				return;
 			
@@ -196,7 +195,7 @@ public class UiBulletinComponentEditorSection extends UiBulletinComponentDataSec
 		
 		private ChoiceItem[] getCurrentChoiceItems(DropDownFieldSpec spec)
 		{
-			UiGridEditor dataSourceGrid = fieldCreator.getEditableGridField(spec.getDataSourceGridTag());
+			UiGrid dataSourceGrid = fieldCreator.getEditableGridField(spec.getDataSourceGridTag());
 			if(dataSourceGrid == null)
 				return null;
 			

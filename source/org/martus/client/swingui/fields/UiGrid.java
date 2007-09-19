@@ -33,6 +33,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Vector;
 
@@ -52,6 +53,8 @@ import org.martus.client.swingui.grids.GridTableModel;
 import org.martus.clientside.UiLocalization;
 import org.martus.common.GridData;
 import org.martus.common.fieldspec.ChoiceItem;
+import org.martus.common.fieldspec.DropDownFieldSpec;
+import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.fieldspec.GridFieldSpec;
 import org.martus.swing.UiButton;
 import org.martus.swing.UiLabel;
@@ -71,6 +74,7 @@ abstract public class UiGrid extends UiField
 	{
 		app = mainWindowToUse.getApp();
 		model = modelToUse;
+		otherGridFields = gridFields;
 		
 		if(isEditable)
 			fieldCreator = new UiEditableFieldCreator(mainWindowToUse);
@@ -146,7 +150,12 @@ abstract public class UiGrid extends UiField
 			UiParagraphPanel rowPanel = new UiParagraphPanel();
 			for(int column = FIRST_REAL_FIELD_COLUMN; column < model.getColumnCount(); ++column)
 			{
-				UiField cellField = fieldCreator.createField(model.getFieldSpecForCell(row, column));
+				FieldSpec spec = model.getFieldSpecForCell(row, column);
+				if(spec.getType().isDropdown())
+					updateChoicesFromDataSourceIfNecessary((DropDownFieldSpec)spec);
+
+				UiField cellField = fieldCreator.createField(spec);
+				
 				cellField.getComponent().addFocusListener(new ExpandedGridFieldFocusHandler());
 				String value = (String)model.getValueAt(row, column);
 				cellField.setText(value);
@@ -171,7 +180,21 @@ abstract public class UiGrid extends UiField
 		if(topLevelAncestor != null)
 			topLevelAncestor.validate();
 	}
-	
+
+	private void updateChoicesFromDataSourceIfNecessary(DropDownFieldSpec dropDownSpec) 
+	{
+		String dataSourceGridTag = dropDownSpec.getDataSourceGridTag();
+		if(dataSourceGridTag == null)
+			return;
+		
+		UiGrid dataSourceGrid = (UiGrid)otherGridFields.get(dataSourceGridTag);
+		if(dataSourceGrid == null)
+			return;
+
+		ChoiceItem[] choices = dataSourceGrid.buildChoicesFromColumnValues(dropDownSpec.getDataSourceGridColumn());
+		dropDownSpec.setChoices(choices);
+	}
+
 	void addButtonsBelowExpandedGrid(UiParagraphPanel fakeTable) 
 	{
 		// NOTE: This method should be overridden where appropriate
@@ -297,6 +320,29 @@ abstract public class UiGrid extends UiField
 		return table;
 	}
 	
+	public ChoiceItem[] buildChoicesFromColumnValues(String gridColumnLabel) {
+		int gridColumn = model.findColumn(gridColumnLabel);
+		FieldSpec columnSpec = model.getFieldSpecForColumn(gridColumn);
+	
+		HashSet existingValues = new HashSet();
+		Vector values = new Vector();
+		values.add(new ChoiceItem("", ""));
+		existingValues.add("");
+		for(int row = 0; row < model.getRowCount(); ++row)
+		{
+			String thisValue = (String)model.getValueAt(row, gridColumn);
+			if(existingValues.contains(thisValue))
+				continue;
+	
+			String formattedValue = FieldDataFormatter.formatData(columnSpec, thisValue, getLocalization());
+			
+			values.add(new ChoiceItem(thisValue, formattedValue));
+			existingValues.add(thisValue);
+		}
+		
+		return (ChoiceItem[])values.toArray(new ChoiceItem[0]);
+	}
+
 	private static final int NO_ROW_SELECTED = -1;
 	private static final int ROW_HEIGHT_PADDING = 10;
 	int FIRST_REAL_FIELD_COLUMN = 1;
@@ -306,6 +352,7 @@ abstract public class UiGrid extends UiField
 
 	MartusApp app;
 	UiFieldCreator fieldCreator;
+	Map otherGridFields;
 	JPanel widget;
 	Box buttonBox;
 	protected GridTable table;
