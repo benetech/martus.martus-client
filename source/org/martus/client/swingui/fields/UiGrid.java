@@ -93,10 +93,7 @@ abstract public class UiGrid extends UiField
 		buttonBox = Box.createHorizontalBox();
 		buttonBox.setBorder(new EmptyBorder(10,0,0,0));
 		setButtons(createButtons());
-		if(app.isGridExpanded(getGridTag()))
-			showExpanded();
-		else
-			showCollapsed();
+		rebuildWidget();
 	}
 	
 	public void updateDataDrivenColumnWidth(int column, ChoiceItem[] choices)
@@ -132,6 +129,7 @@ abstract public class UiGrid extends UiField
 		{
 			app.setGridExpansionState(getGridTag(), true);
 			showExpanded();
+			widget.getTopLevelAncestor().validate();
 		}
 		
 	}
@@ -174,11 +172,6 @@ abstract public class UiGrid extends UiField
 		Box box = Box.createHorizontalBox();
 		Utilities.addComponentsRespectingOrientation(box, new Component[] {showCollapsedButton, Box.createHorizontalGlue()});
 		widget.add(box, BorderLayout.BEFORE_FIRST_LINE);
-
-		
-		Container topLevelAncestor = widget.getTopLevelAncestor();
-		if(topLevelAncestor != null)
-			topLevelAncestor.validate();
 	}
 
 	private void updateChoicesFromDataSourceIfNecessary(DropDownFieldSpec dropDownSpec) 
@@ -289,11 +282,20 @@ abstract public class UiGrid extends UiField
 		try
 		{
 			model.setFromXml(newText);
+			rebuildWidget();
 		}
 		catch (Exception e)
 		{
 			e.printStackTrace();
 		}
+	}
+
+	private void rebuildWidget() 
+	{
+		if(app.isGridExpanded(getGridTag()))
+			showExpanded();
+		else
+			showCollapsed();
 	}
 
 	public boolean isRowSelected()

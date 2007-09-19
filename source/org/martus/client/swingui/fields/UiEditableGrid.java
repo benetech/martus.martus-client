@@ -247,7 +247,7 @@ public class UiEditableGrid extends UiGrid implements FocusListener
 		{
 			getGridTableModel().addEmptyRow();
 			showExpanded();
-			
+			widget.getTopLevelAncestor().validate();
 		}
 	}
 	

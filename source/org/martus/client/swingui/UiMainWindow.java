@@ -2182,7 +2182,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 			if(previousLocation != location)
 			{
 				previousLocation = location;
-				preview.updateView();
+				preview.repaint();
 			}
 		}
 		int previousLocation = -1;
