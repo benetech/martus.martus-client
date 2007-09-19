@@ -26,6 +26,7 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.swingui.fields;
 
 import java.awt.Color;
+import java.util.Arrays;
 import java.util.HashMap;
 
 import javax.swing.border.LineBorder;
@@ -33,6 +34,7 @@ import javax.swing.border.LineBorder;
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.common.bulletin.Bulletin;
+import org.martus.common.fieldspec.ChoiceItem;
 import org.martus.common.fieldspec.DropDownFieldSpec;
 import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.fieldspec.FieldType;
@@ -114,11 +116,13 @@ abstract public class UiFieldCreator
 	private UiField createLanguageField()
 	{
 		UiField field;
-		DropDownFieldSpec spec = new DropDownFieldSpec(getLocalization().getLanguageNameChoices());
+		ChoiceItem[] languageNameChoices = getLocalization().getLanguageNameChoices();
+		Arrays.sort(languageNameChoices, new ChoiceItem.ChoiceItemSorterByLabel());
+		DropDownFieldSpec spec = new DropDownFieldSpec(languageNameChoices);
 		field = createChoiceField(spec);
 		return field;
 	}
-
+	
 	UiMainWindow mainWindow;
 	protected HashMap editableGridFields;
 }
