@@ -29,6 +29,7 @@ import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.ComponentOrientation;
 
+import javax.swing.Box;
 import javax.swing.ButtonGroup;
 import javax.swing.ButtonModel;
 import javax.swing.JComponent;
@@ -40,7 +41,6 @@ import org.martus.clientside.CurrentUiState;
 import org.martus.clientside.UiLocalization;
 import org.martus.swing.UiLabel;
 import org.martus.swing.UiLanguageDirection;
-import org.martus.swing.UiParagraphPanel;
 import org.martus.swing.UiRadioButton;
 import org.martus.swing.UiTabbedPane;
 import org.martus.swing.UiVBox;
@@ -67,7 +67,7 @@ public class UiInitialSigninDlg extends UiSigninDlg
 		tabLabelNewAccount = localization.getButtonLabel("NewAccountTab");
 		tabLabelRecoverAccount = localization.getButtonLabel("RecoverAccountTab");
 		if(currentMode == INITIAL)
-			tabbedPane.add(forceProperAlignment,tabLabelSignIn);
+ 			tabbedPane.add(forceProperAlignment,tabLabelSignIn);
 		tabbedPane.add(createNewAccountPanel(), tabLabelNewAccount);
 		tabbedPane.add(createRecoverAccountPanel(), tabLabelRecoverAccount);
 		
@@ -85,7 +85,8 @@ public class UiInitialSigninDlg extends UiSigninDlg
 	
 	JComponent createRecoverAccountPanel()
 	{
-		UiParagraphPanel radioButtonPanel = new UiParagraphPanel();
+		Box radioButtonPanel = Box.createVerticalBox();
+		radioButtonPanel.setComponentOrientation(UiLanguageDirection.getComponentOrientation());
 		radioBackupFile = new UiRadioButton(localization.getButtonLabel("RecoverAccountByBackup"), true);
 		radioBackupFile.setActionCommand("backupFile");
 		radioShare = new UiRadioButton(localization.getButtonLabel("RecoverAccountByShare"), false);
@@ -95,8 +96,10 @@ public class UiInitialSigninDlg extends UiSigninDlg
 		recoveryTypeGroup.add(radioBackupFile);
 		recoveryTypeGroup.add(radioShare);
 
-		radioButtonPanel.addOnNewLine(radioBackupFile);
-		radioButtonPanel.addOnNewLine(radioShare);
+		radioBackupFile.setAlignmentX(UiLanguageDirection.getAlignmentX());
+		radioButtonPanel.add(radioBackupFile);
+		radioShare.setAlignmentX(UiLanguageDirection.getAlignmentX());
+		radioButtonPanel.add(radioShare);
 		
 		UiVBox recoverAccountPanel = new UiVBox();
 		recoverAccountPanel.addSpace();
