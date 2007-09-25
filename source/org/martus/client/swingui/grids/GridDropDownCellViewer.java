@@ -47,6 +47,7 @@ public class GridDropDownCellViewer extends GridDropDownCellEditorOrRenderer
 
 	void setChoices(ChoiceItem[] choices)
 	{
+		getChoiceViewer().getSpec().setChoices(choices);
 	}
 
 	private UiChoice getChoiceViewer()
