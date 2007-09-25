@@ -685,7 +685,13 @@ public class EnglishStrings
 "field:confirmUseBulletinsDraftCustomFieldscause=The draft bulletin you are about to modify has custom fields which are different from your current custom fields.  Do you wish to use the original bulletin's custom fields?",
 "field:confirmUseBulletinsDraftCustomFieldseffect=Answering '#UseOldCustomFields#' will use the old custom fields and all bulletin data.  Answering '#UseNewCustomFields#' will use your current custom fields and copy all similar fields to this new draft bulletin but you may lose some of the original bulletin's data.",
 "field:confirmSendWithPublicDatacause=You have chosen to save a completed bulletin.",
-"field:confirmSendWithPublicDataeffect=This will permanently seal the bulletin and you will not be allowed to make any further modifications to it except by creating a new version of the bulletin.\n\nThe public information in this bulletin will be released for possible publication on the Martus Search Engine, and may be viewed by people outside your organization.\n\nIf there is information you do not want to be publicly available, either move that data to the private section of the bulletin or check the 'Keep ALL Information Private' box before saving the bulletin.",
+"field:confirmSendWithPublicDataeffect=This will permanently seal the bulletin and you will not be allowed to make any further modifications to it " +
+		"except by creating a new version of the bulletin.\n\n" +
+		"The public information in this bulletin will be released for possible publication on the Martus Search Engine, " +
+		"and may be viewed by people outside your organization.\n\n" +
+		"If there is information you do not want to be publicly available, " +
+		"either move that data to the bottom (always Private) pane of the bulletin or " +
+		"check the 'Keep ALL Information Private' box before saving the bulletin.",
 "field:confirmUnAuthoredBulletinDeleteBeforePastecause=The bulletin entitled \"#Title#\" already exists in this system.  Do you wish to delete the old bulletin and replace it with this bulletin?",
 "field:confirmUnAuthoredBulletinDeleteBeforePasteeffect=Answering Yes will replace the old bulletin with this bulletin.  Answering on No will leave the original bulletin and skip this file.",
 "field:confirmRemoveMartuscause=You are about to delete all Martus data from this computer.",
@@ -697,7 +703,8 @@ public class EnglishStrings
 "field:confirmRetrieveNewerVersionscause=The following bulletin(s) selected for retrieval are newer versions of bulletins already on this computer:\n\n#Titles#",
 "field:confirmRetrieveNewerVersionseffect=Each older version will be replaced by the newer version from the server.",
 "field:confirmPrintAllPrivateDatacause=One or more bulletins will not be printed because all the information is private, and you marked the \"Print only public information\" box.",
-"field:confirmPrintAllPrivateDataeffect=Answering '#PrintBack#' will allow you to return to the previous dialog so you can mark the \"Include private information\" box.  Answering '#PrintContinue#' will print only the public sections of the bulletins and skip those bulletins which are all private.",
+"field:confirmPrintAllPrivateDataeffect=Answering '#PrintBack#' will allow you to return to the previous dialog so you can mark the \"Include private information\" box. " +
+	"Answering '#PrintContinue#' will print only the public information in the bulletins and skip those bulletins which are all private.",
 "field:confirmCancelRetrievecause=Bulletins are currently being retrieved from the server.",
 "field:confirmCancelRetrieveeffect=This operation will cancel the current retrieval, so some of the requested bulletins may not be retrieved.",
 "field:confirmSearchProgressCancelcause=The search in progress will be stopped immediately.",
