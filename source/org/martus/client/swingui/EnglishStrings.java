@@ -1046,8 +1046,8 @@ public class EnglishStrings
 	"   108 - Duplicate entry in Dropdown field\n" +
 	"   109 - No Choices in Dropdown field\n" +
 	"   110 - System/Standard field tag cannot be used for custom field\n" +
-	"   111 - Standard Public field cannot be placed in bottom/Private section\n" +
-	"   112 - Standard Private field cannot be placed in the top section\n" +
+	"   111 - Standard field in top pane cannot be placed in bottom (always Private) pane\n" +
+	"   112 - Standard field in bottom (always Private) pane cannot be placed in the top pane\n" +
 	"   113 - Data Source Grid not found in same pane as resulting dropdown field\n" +
 	"   114 - Unknown Data Source Grid Column Label\n" +
 	"   115 - Dropdown cannot have both choices and data source\n" +
