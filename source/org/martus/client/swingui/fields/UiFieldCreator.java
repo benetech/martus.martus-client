@@ -45,7 +45,7 @@ abstract public class UiFieldCreator
 	public UiFieldCreator(UiMainWindow mainWindowToUse)
 	{
 		mainWindow = mainWindowToUse;
-		editableGridFields = new HashMap();
+		gridFields = new HashMap();
 
 	}
 	
@@ -60,9 +60,9 @@ abstract public class UiFieldCreator
 	abstract public UiField createBoolField(FieldSpec spec);
 	abstract public UiField createGridField(GridFieldSpec fieldSpec);
 	
-	public UiGrid getEditableGridField(String tag)
+	public UiGrid getGridField(String tag)
 	{
-		return (UiGrid)editableGridFields.get(tag);
+		return (UiGrid)gridFields.get(tag);
 	}
 
 	public UiField createReadOnlyDateField()
@@ -124,5 +124,5 @@ abstract public class UiFieldCreator
 	}
 	
 	UiMainWindow mainWindow;
-	protected HashMap editableGridFields;
+	protected HashMap gridFields;
 }
