@@ -58,9 +58,11 @@ import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.fieldspec.GridFieldSpec;
 import org.martus.swing.UiButton;
 import org.martus.swing.UiLabel;
-import org.martus.swing.UiParagraphPanel;
 import org.martus.swing.UiScrollPane;
 import org.martus.swing.Utilities;
+
+import com.jhlabs.awt.Alignment;
+import com.jhlabs.awt.GridLayoutPlus;
 
 
 abstract public class UiGrid extends UiField
@@ -134,18 +136,32 @@ abstract public class UiGrid extends UiField
 		
 	}
 	
+	class TwoColumnGridLayout extends GridLayoutPlus
+	{
+		public TwoColumnGridLayout()
+		{
+			super(0, 2);
+			setFill(Alignment.FILL_NONE);
+			
+			// right-align the left column and left-align the right column
+			setColAlignment(0, Alignment.NORTHEAST);
+			setColAlignment(1, Alignment.NORTHWEST);
+		}
+	}
+	
 	void showExpanded()
 	{
 		stopCellEditing();
 		widget.removeAll();
 		
 		expandedFieldRows = new Vector();
-		UiParagraphPanel fakeTable = new UiParagraphPanel();
+		JPanel fakeTable = new JPanel(new TwoColumnGridLayout());
 		for(int row = 0; row < model.getRowCount(); ++row)
 		{
 			UiField[] rowFields = new UiField[model.getColumnCount()];
 			expandedFieldRows.add(rowFields);
-			UiParagraphPanel rowPanel = new UiParagraphPanel();
+			
+			JPanel rowPanel = new JPanel(new TwoColumnGridLayout());
 			for(int column = FIRST_REAL_FIELD_COLUMN; column < model.getColumnCount(); ++column)
 			{
 				FieldSpec spec = model.getFieldSpecForCell(row, column);
@@ -159,10 +175,15 @@ abstract public class UiGrid extends UiField
 				cellField.setText(value);
 				JComponent cellComponent = cellField.getComponent();
 				cellComponent.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-				rowPanel.addComponents(new UiLabel(model.getColumnName(column)), cellComponent);
+				Component[] rowComponents = new Component[] {
+						new UiLabel(model.getColumnName(column)), 
+						cellComponent,
+						};
+				Utilities.addComponentsRespectingOrientation(rowPanel, rowComponents);
 				rowFields[column] = cellField;
 			}
-			fakeTable.addComponents(new UiLabel(model.getColumnName(0) + Integer.toString(row+1)), rowPanel);
+			Utilities.addComponentsRespectingOrientation(fakeTable, new Component[] {new UiLabel(model.getColumnName(0) + Integer.toString(row+1)), rowPanel});
+			insertBlankLineOfTwoColumns(fakeTable);
 		}
 		addButtonsBelowExpandedGrid(fakeTable);
 		
@@ -172,6 +193,11 @@ abstract public class UiGrid extends UiField
 		Box box = Box.createHorizontalBox();
 		Utilities.addComponentsRespectingOrientation(box, new Component[] {showCollapsedButton, Box.createHorizontalGlue()});
 		widget.add(box, BorderLayout.BEFORE_FIRST_LINE);
+	}
+
+	private void insertBlankLineOfTwoColumns(JPanel fakeTable)
+	{
+		Utilities.addComponentsRespectingOrientation(fakeTable, new Component[] {new UiLabel(" "), new UiLabel(" ")});
 	}
 
 	private void updateChoicesFromDataSourceIfNecessary(DropDownFieldSpec dropDownSpec) 
@@ -188,7 +214,7 @@ abstract public class UiGrid extends UiField
 		dropDownSpec.setChoices(choices);
 	}
 
-	void addButtonsBelowExpandedGrid(UiParagraphPanel fakeTable) 
+	void addButtonsBelowExpandedGrid(JPanel fakeTable) 
 	{
 		// NOTE: This method should be overridden where appropriate
 	}

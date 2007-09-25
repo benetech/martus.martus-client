@@ -25,6 +25,7 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.fields;
 
+import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
@@ -36,6 +37,7 @@ import java.util.Vector;
 
 import javax.swing.AbstractAction;
 import javax.swing.JComponent;
+import javax.swing.JPanel;
 import javax.swing.KeyStroke;
 import javax.swing.table.TableCellEditor;
 
@@ -46,7 +48,8 @@ import org.martus.client.swingui.grids.GridTableModel;
 import org.martus.clientside.UiLocalization;
 import org.martus.common.fieldspec.GridFieldSpec;
 import org.martus.swing.UiButton;
-import org.martus.swing.UiParagraphPanel;
+import org.martus.swing.UiLabel;
+import org.martus.swing.Utilities;
 
 
 
@@ -230,9 +233,9 @@ public class UiEditableGrid extends UiGrid implements FocusListener
 		abstract String getName();
 	}
 	
-	void addButtonsBelowExpandedGrid(UiParagraphPanel fakeTable) 
+	void addButtonsBelowExpandedGrid(JPanel fakeTable) 
 	{
-		fakeTable.addOnNewLine(new AppendRowButton());
+		Utilities.addComponentsRespectingOrientation(fakeTable, new Component[] {new UiLabel(" "), new AppendRowButton()});
 	}
 
 	class AppendRowButton extends UiButton implements ActionListener
