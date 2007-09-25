@@ -40,12 +40,15 @@ public class UiGridDateRangeEditorViewer extends UiFlexiDateEditor
 	
 	protected boolean isFlexiDate()
 	{
+		if(getBeginDate().isUnknown() && getEndDate().isUnknown())
+			return false;
+		 
 		return true;
 	}
 	
 	protected boolean isExactDate()
 	{
-		return false;
+		return !isFlexiDate();
 	}
 	
 	protected boolean isCustomDate()
