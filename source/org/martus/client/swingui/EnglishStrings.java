@@ -700,10 +700,10 @@ public class EnglishStrings
 "field:confirmPrintAllPrivateDataeffect=Answering '#PrintBack#' will allow you to return to the previous dialog so you can mark the \"Include private information\" box.  Answering '#PrintContinue#' will print only the public sections of the bulletins and skip those bulletins which are all private.",
 "field:confirmCancelRetrievecause=Bulletins are currently being retrieved from the server.",
 "field:confirmCancelRetrieveeffect=This operation will cancel the current retrieval, so some of the requested bulletins may not be retrieved.",
-"field:confirmSearchProgressCancelcause=The search in progress will be stopped immediately",
-"field:confirmSearchProgressCanceleffect=If you do this, the Search Results will only contain bulletins that have been found so far",
-"field:confirmReportSearchProgressCancelcause=The search in progress will be stopped immediately",
-"field:confirmReportSearchProgressCanceleffect=If you do this, the report will only include the bulletins that have been found so far",
+"field:confirmSearchProgressCancelcause=The search in progress will be stopped immediately.",
+"field:confirmSearchProgressCanceleffect=If you do this, the Search Results will only contain bulletins that have been found so far.",
+"field:confirmReportSearchProgressCancelcause=The search in progress will be stopped immediately.",
+"field:confirmReportSearchProgressCanceleffect=If you do this, the report will only include the bulletins that have been found so far.",
 
 
 "field:confirmDateRageInvalidcause=The date range you entered is invalid.  The end date occurs before the begin date.",
