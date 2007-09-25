@@ -233,12 +233,12 @@ public class UiFlexiDateEditor extends UiField
 		return MartusFlexidate.toBulletinFlexidateFormat(beginDate, endDate);
 	}
 
-	private MultiCalendar getBeginDate() 
+	MultiCalendar getBeginDate() 
 	{		
 		return bgDateBox.getDate();
 	}
 	
-	private MultiCalendar getEndDate() 
+	MultiCalendar getEndDate() 
 	{				
 		return endDateBox.getDate();
 	}	
