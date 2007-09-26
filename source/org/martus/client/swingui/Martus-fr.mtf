@@ -1,10 +1,10 @@
 ﻿# Martus Client Translation File
 # Language code:  fr
 # Language name:  French
-# Translated by:  MID Foundation; Caroline Garcia 
-# Exported date:  Wed Sep 12 16:28:06 PDT 2007
+# Translated by:  MID Foundation, Caroline Garcia
+# Exported date:  Tue Sep 25 17:00:13 PDT 2007
 # Client version: pre-3.2
-# Client build:   20070911.1852
+# Client build:   20070925.1856
 #
 # This file MUST be saved in UTF-8 format!
 # Lines beginning with # are comments and are ignored by Martus
@@ -560,11 +560,11 @@
 #____________________________________=Please enter your new username and password.
 -aec2-field:CreateNewUserNamePassword=Veuillez saisir vos nouveaux pseudo et mot de passe.
 
-#_________________________________=Bottom/Private Section of Bulletin
--cf48-field:CustomXMLBottomSection=Partie inférieure/privée du communiqué
+#_________________________________=Bottom (always Private) Pane of Bulletin
+-f953-field:CustomXMLBottomSection=Partie inférieure (toujours privée) du communiqué
 
-#______________________________=Top Section of Bulletin
--cff1-field:CustomXMLTopSection=Partie supérieure du communiqué
+#______________________________=Top Pane of Bulletin
+-e596-field:CustomXMLTopSection=Partie supérieure du communiqué
 
 #_____________________________________=Customization Template Files
 -9210-field:CustomizationTemplateFiles=Fichiers de Modèles Personnalisés
@@ -656,8 +656,13 @@
 #__________________________________=LABEL
 -64b8-field:ErrorCustomFieldHeader4=ETIQUETTE
 
-#____________________________=There is an error in the custom field definitions. Each problem is identified with the following codes:\n   100 - Required standard field is missing\n   101 - Custom field does not have a correct tag\n   102 - A previous Tag already exists with this name\n   103 - Custom field does not have a label\n   104 - Unrecognized Field Type\n   105 - A label was found in a standard field\n   106 - XML Parse Error (e.g. mismatched quotation marks or bracket syntax)\n   107 - Tag contains illegal characters (e.g. spaces or punctuation)\n   108 - Duplicate entry in Dropdown field\n   109 - No Choices in Dropdown field\n   110 - System/Standard field tag cannot be used for custom field\n   111 - Standard Public field cannot be placed in bottom/Private section\n   112 - Standard Private field cannot be placed in the top section\n   113 - Unknown Data Source Grid Field Tag\n   114 - Unknown Data Source Grid Column Label\n   115 - Dropdown cannot have both choices and data source\n   200 - All fields empty\n   201 - Unrecognized Headquarters created this template\n   202 - Security validation error\n   203 - File Error\n   204 - Imported XML Missing Field
--35ec-field:ErrorCustomFields=Erreur dans les définitions de champs personnalisés. Chaque problème est identifié par les codes suivants :\n  100 - Le champ standard obligatoire est manquant\n  101 - Balise incorrecte dans le champ personnalisé.\n  102 - Une balise porte déjà ce nom.\n  103 - Le champ personnalisé n'a pas d'étiquette.\n  104 - Type de champ non reconnu.\n  105 - Une étiquette a été trouvée dans un champ standard.\n  106 - Erreur d'analyse XML (p. ex syntaxe des parenthèses ou guillemets mal accordés).\n  107 - La balise contient des caractères interdits (p. ex. des espaces ou de la ponctuation).\n  108 – Double entrée dans le champ déroulant.\n  109 – Aucun choix dans le champ déroulant.\n  110 – La balise de champ système/standard ne peut pas être utilisée pour le champ personnalisé.\n  111 – Le champ publique standard ne peut pas être placé dans la partie inférieure/privée.\n  112 – Le champ privé standard ne peut pas être placé dans la partie supérieure.\n  113 – Balise de champ de grille de source de données inconnue\n  114 – Etiquette de colonne de grille de source de données inconnue\n  115 – La liste déroulante ne peut comporter à la fois les choix et la source de données\n\n  200 – Tous les champs sont vides.\n  201 – Modèle créé par un Siège non reconnu.\n  202 – Erreur de validation de sécurité.\n  203 – Erreur de fichier.\n  204 – Champ XML importé manquant.
+#____________________________=There is an error in the custom field definitions. Each problem is identified with the following codes:\n   100 - Required standard field is missing\n   101 - Custom field does not have a correct tag\n   102 - A previous Tag already exists with this name\n   103 - Custom field does not have a label\n   104 - Unrecognized Field Type\n   105 - A label was found in a standard field\n   106 - XML Parse Error (e.g. mismatched quotation marks or bracket syntax)\n   107 - Tag contains illegal characters (e.g. spaces or punctuation)\n   108 - Duplicate entry in Dropdown field\n   109 - No Choices in Dropdown field\n   110 - System/Standard field tag cannot be used for custom field\n   111 - Standard field in top pane cannot be placed in bottom (always Private) pane\n   112 - Standard field in bottom (always Private) pane cannot be placed in the top pane\n   113 - Data Source Grid not found in same pane as resulting dropdown field\n   114 - Unknown Data Source Grid Column Label\n   115 - Dropdown cannot have both choices and data source\n   200 - All fields empty\n   201 - Unrecognized Headquarters created this template\n   202 - Security validation error\n   203 - File Error\n   204 - Imported XML Missing Field
+-f5b1-field:ErrorCustomFields=Erreur dans les définitions de champs personnalisés. Chaque problème est identifié par les codes suivants :\n  100 - Le champ standard obligatoire est manquant\n  101 - Balise incorrecte dans le champ personnalisé.\n  102 - Une balise porte déjà ce nom.\n  103 - Le champ personnalisé n'a pas d'étiquette.\n  104 - Type de champ non reconnu.\n  105 - Une étiquette a été trouvée dans un champ standard.\n  106 - Erreur d'analyse XML (p. ex syntaxe des parenthèses ou guillemets mal accordés).\n  107 - La balise contient des caractères interdits (p. ex. des espaces ou de la ponctuation).\n  108 – Double entrée dans le champ déroulant.\n  109 – Aucun choix dans le champ déroulant.\n  110 – La balise de champ système/standard ne peut pas être utilisée pour le champ personnalisé.\n  111 – Le champ standard de la partie supérieure ne peut pas être placé dans la partie inférieure (toujours Privée).\n  112 – Le champ standard de la partie inférieure (toujours Privée) ne peut pas être placé dans la partie supérieure.\n  113 – Balise de champ de grille de source de données non trouvée dans même partie que le champ déroulant résultant.\n  114 – Etiquette de colonne de grille de source de données inconnue\n  115 – La liste déroulante ne peut comporter à la fois les choix et la source de données\n\n  200 – Tous les champs sont vides.\n  201 – Modèle créé par un Siège non reconnu.\n  202 – Erreur de validation de sécurité.\n  203 – Erreur de fichier.\n  204 – Champ XML importé manquant.
+
+
+113 - la Grille de Source de Données non trouvée dans même vitre que s'ensuivant dropdown le champ
+113 - Grille de point d'émission de données non trouvée dans le même carreau comme résultat le champ dropdown.
+
 
 #_________________________________________=A previous backup file exists.  You must save each file on its own removable media disk.
 -db93-field:ErrorPreviousBackupShareExists=Il existe un ancien fichier de sauvegarde. Vous devez enregistrer chaque fichier sur son propre disque amovible.
@@ -1289,8 +1294,8 @@
 #__________________________________________=One or more bulletins will not be printed because all the information is private, and you marked the "Print only public information" box.
 -50c0-field:confirmPrintAllPrivateDatacause=Un ou plusieurs communiqués ne seront pas imprimés car toutes leurs informations sont confidentielles et que vous avez coché la case "Imprimer uniquement les informations publiques".
 
-#___________________________________________=Answering '#PrintBack#' will allow you to return to the previous dialog so you can mark the "Include private information" box.  Answering '#PrintContinue#' will print only the public sections of the bulletins and skip those bulletins which are all private.
--a0a4-field:confirmPrintAllPrivateDataeffect=Si vous répondez '#PrintBack#', vous retournerez à la boîte de dialogue précédente et vous pourrez cocher la case "Inclure les informations confidentielles". Si vous répondez '#PrintContinue#', uniquement les parties publiques des communiqués seront imprimées et les communiqués dont toutes les informations sont privées ne seront pas pris en compte.
+#___________________________________________=Answering '#PrintBack#' will allow you to return to the previous dialog so you can mark the "Include private information" box. Answering '#PrintContinue#' will print only the public information in the bulletins and skip those bulletins which are all private.
+-935c-field:confirmPrintAllPrivateDataeffect=Si vous répondez '#PrintBack#', vous retournerez à la boîte de dialogue précédente et vous pourrez cocher la case "Inclure les informations confidentielles". Si vous répondez '#PrintContinue#', uniquement les informations publiques des communiqués seront imprimées et les communiqués dont toutes les informations sont privées ne seront pas pris en compte.
 
 #_____________________________________=Since you have changed from the default print tray your print out may be incorrect, if you also changed the size of paper used.  You must first select the paper tray and then select the paper size in that order, for both to get set correctly.  If you only wanted to change the paper tray then disregard this message and select 'No'.
 -401e-field:confirmPrinterWarningcause=Vous avez modifié le bac d'alimentation par défaut, et votre impression risque d'être incorrecte si vous avez également modifié la taille du papier. Sélectionnez dans l'ordre : d'abord le bac d'alimentation, puis la taille du papier pour obtenir un réglage correct. Si vous ne souhaitiez modifier que le bac d'alimentation, ne tenez pas compte de ce message et sélectionnez 'Non'.
@@ -1340,11 +1345,11 @@
 #____________________________________________=Press 'Include Private Data' to continue with private data included, or press 'Cancel' to exit and return to Martus.
 -c1bb-field:confirmReportIncludePrivateeffect=Cliquez sur "Inclure les données privées" pour continuer et inclure les données privées, ou cliquez sur Annuler pour quitter et revenir dans Martus.
 
-#_________________________________________________=The search in progress will be stopped immediately
--e9f7-field:confirmReportSearchProgressCancelcause=La recherche en cours sera immédiatement interrompue.
+#_________________________________________________=The search in progress will be stopped immediately.
+-c6a2-field:confirmReportSearchProgressCancelcause=La recherche en cours sera immédiatement interrompue.
 
-#__________________________________________________=If you do this, the report will only include the bulletins that have been found so far
--cdc1-field:confirmReportSearchProgressCanceleffect=Si vous faites ceci, le rapport n’inclura que les communiqués qui ont été trouvés jusque-là.
+#__________________________________________________=If you do this, the report will only include the bulletins that have been found so far.
+-4aa4-field:confirmReportSearchProgressCanceleffect=Si vous faites ceci, le rapport n’inclura que les communiqués qui ont été trouvés jusque-là.
 
 #_______________________________________________________=Do you want to have your contact information sent to the current server?  This information may be sent to other servers, and will be viewable by anyone who has access to your public bulletin information.
 -4809-field:confirmRequestToSendContactInfoToServercause=Souhaitez-vous que les informations de votre contact soient transmises au serveur actuel ? Ces informations peuvent être transmises à d'autres serveurs et resteront accessibles à quiconque ayant accès aux informations figurant sur vos communiqués publics.
@@ -1364,17 +1369,17 @@
 #_____________________________________________=Each older version will be replaced by the newer version from the server.
 -1d86-field:confirmRetrieveNewerVersionseffect=Toute version plus ancienne sera remplacée par la dernière version depuis le serveur.
 
-#___________________________________________=The search in progress will be stopped immediately
--e9f7-field:confirmSearchProgressCancelcause=La recherche en cours sera immédiatement interrompue.
+#___________________________________________=The search in progress will be stopped immediately.
+-c6a2-field:confirmSearchProgressCancelcause=La recherche en cours sera immédiatement interrompue.
 
-#____________________________________________=If you do this, the Search Results will only contain bulletins that have been found so far
--56a7-field:confirmSearchProgressCanceleffect=Si vous faites ceci, les résultats de la recherche n’incluront que les communiqués trouvés jusque-là.
+#____________________________________________=If you do this, the Search Results will only contain bulletins that have been found so far.
+-fcaa-field:confirmSearchProgressCanceleffect=Si vous faites ceci, les résultats de la recherche n’incluront que les communiqués trouvés jusque-là.
 
 #_________________________________________=You have chosen to save a completed bulletin.
 -a3fe-field:confirmSendWithPublicDatacause=Vous avez choisi d'enregistrer un communiqué terminé.
 
-#__________________________________________=This will permanently seal the bulletin and you will not be allowed to make any further modifications to it except by creating a new version of the bulletin.\n\nThe public information in this bulletin will be released for possible publication on the Martus Search Engine, and may be viewed by people outside your organization.\n\nIf there is information you do not want to be publicly available, either move that data to the private section of the bulletin or check the 'Keep ALL Information Private' box before saving the bulletin.
--2df3-field:confirmSendWithPublicDataeffect=Cela verrouillera définitivement le communiqué et vous ne serez plus autorisé à y effectuer d'autres modifications, sauf à créer une nouvelle version du communiqué.\n\nLes informations publiques de ce communiqué seront disponibles pour une publication éventuelle sur le Moteur de Recherche Martus, et pourront être affichées par des tiers extérieurs à votre organisme.\n\nSi vous ne souhaitez pas divulguer certaines informations au public, soit déplacez ces données dans la partie privée du communiqué, soit cochez la case 'Garder Confidentielles TOUTES les Informations' avant d'enregistrer ce communiqué.
+#__________________________________________=This will permanently seal the bulletin and you will not be allowed to make any further modifications to it except by creating a new version of the bulletin.\n\nThe public information in this bulletin will be released for possible publication on the Martus Search Engine, and may be viewed by people outside your organization.\n\nIf there is information you do not want to be publicly available, either move that data to the bottom (always Private) pane of the bulletin or check the 'Keep ALL Information Private' box before saving the bulletin.
+-3544-field:confirmSendWithPublicDataeffect=Cela verrouillera définitivement le communiqué et vous ne serez plus autorisé à y effectuer d'autres modifications, sauf à créer une nouvelle version du communiqué.\n\nLes informations publiques de ce communiqué seront disponibles pour une publication éventuelle sur le Moteur de Recherche Martus, et pourront être affichées par des tiers extérieurs à votre organisme.\n\nSi vous ne souhaitez pas divulguer certaines informations au public, soit déplacez ces données dans la partie inférieure (toujours Privée) du communiqué, soit cochez la case 'Garder Confidentielles TOUTES les Informations' avant d'enregistrer ce communiqué.
 
 #_____________________________________________=Martus software is unable to determine whether this server complies with the official guidelines for operating a secure and reliable Martus server.
 -ab16-field:confirmServerComplianceFailedcause=Le logiciel Martus ne parvient pas à déterminer si ce serveur est conforme aux normes officielles de sécurité et de fiabilité d'exploitation d'un serveur Martus.
@@ -1971,7 +1976,7 @@
 -768e-field:title=Titre
 
 #_____________________________=English pre-3.2
--649d-field:translationVersion=Français pre-3.2 
+-649d-field:translationVersion=Français pre-3.2  
 
 #___________________=Username
 -84c2-field:username=Pseudo
