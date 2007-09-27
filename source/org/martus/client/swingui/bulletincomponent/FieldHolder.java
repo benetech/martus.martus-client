@@ -35,14 +35,18 @@ import org.martus.client.swingui.MartusLocalization;
 import org.martus.swing.UiLabel;
 import org.martus.util.language.LanguageOptions;
 
-import com.jhlabs.awt.BasicGridLayout;
+import com.jhlabs.awt.Alignment;
+import com.jhlabs.awt.GridLayoutPlus;
 
 class FieldHolder extends JPanel
 {
 	public FieldHolder(MartusLocalization localizationToUse)
 	{
 		super(new BorderLayout());
-		BasicGridLayout gridLayout = new BasicGridLayout(1, 0);
+		GridLayoutPlus gridLayout = new GridLayoutPlus(1, 0, 2, 5, 2, 5);
+		gridLayout.setFill(Alignment.FILL_NONE);
+		if(LanguageOptions.isRightToLeftLanguage())
+			gridLayout.setAlignment(Alignment.EAST);
 		panel = new JPanel(gridLayout);
 		localization = localizationToUse;
 		showField();

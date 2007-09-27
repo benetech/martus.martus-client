@@ -47,18 +47,20 @@ import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.UiWarningLabel;
 import org.martus.swing.UiLabel;
-import org.martus.swing.UiParagraphPanel;
 import org.martus.swing.Utilities;
 import org.martus.util.language.LanguageOptions;
 
-import com.jhlabs.awt.BasicGridLayout;
+import com.jhlabs.awt.Alignment;
 import com.jhlabs.awt.GridLayoutPlus;
 
 abstract public class UiBulletinComponentSection extends JPanel
 {
 	UiBulletinComponentSection(UiMainWindow mainWindowToUse, String groupTag)
 	{
-		GridLayoutPlus layout = new GridLayoutPlus();
+		GridLayoutPlus layout = new GridLayoutPlus(0, 1);
+		layout.setFill(Alignment.FILL_NONE);
+		if(LanguageOptions.isRightToLeftLanguage())
+			layout.setAlignment(Alignment.EAST);
 		setLayout(layout);
 		mainWindow = mainWindowToUse;
 		groups = new Vector();
@@ -107,13 +109,21 @@ abstract public class UiBulletinComponentSection extends JPanel
 	{
 		public FieldGroup(String tag, String title)
 		{
-			setLayout(new BasicGridLayout(1, 2));
+			GridLayoutPlus layout = new GridLayoutPlus(0, 2, 5, 5, 5, 5);
+			layout.setFill(Alignment.FILL_NONE);
+			layout.setColAlignment(0, Alignment.EAST);
+			layout.setColAlignment(1, Alignment.WEST);
+			setLayout(layout);
+				
 			Border empty = BorderFactory.createEmptyBorder(1, 2, 1, 2);
 			Border line = BorderFactory.createLineBorder(Color.BLACK, 2);
 			setBorder(BorderFactory.createCompoundBorder(empty, line));
 
-			contents = new UiParagraphPanel();
-			contents.outdentFirstField();
+			GridLayoutPlus contentsLayout = new GridLayoutPlus(0, 2, 5, 5, 5, 5);
+			contentsLayout.setFill(Alignment.FILL_NONE);
+			contentsLayout.setColAlignment(0, Alignment.NORTHEAST);
+			contentsLayout.setColAlignment(1, Alignment.NORTHWEST);
+			contents = new JPanel(contentsLayout);
 			MartusApp app = getMainWindow().getApp();
 			MartusLocalization localization = getMainWindow().getLocalization();
 			FieldHolder fieldHolder = new FieldHolder(localization);
@@ -124,6 +134,8 @@ abstract public class UiBulletinComponentSection extends JPanel
 			Utilities.addComponentsRespectingOrientation(this, firstRow);
 			Utilities.addComponentsRespectingOrientation(this, secondRow);
 			
+			// NOTE: I'm pretty sure the following is NOT needed any more, 
+			// but am not comfortable removing it 2 days before release
 			avoidArabicAlignmentProblem();
 			hasRealComponents = false;
 		}
@@ -140,7 +152,7 @@ abstract public class UiBulletinComponentSection extends JPanel
 		
 		public void addComponents(JComponent left, JComponent right)
 		{
-			contents.addComponents(left, right);
+			Utilities.addComponentsRespectingOrientation(contents, new Component[] {left, right});
 			hasRealComponents = true;
 		}
 		
@@ -149,7 +161,7 @@ abstract public class UiBulletinComponentSection extends JPanel
 			return (!hasRealComponents);
 		}
 		
-		private UiParagraphPanel contents;
+		private JPanel contents;
 		boolean hasRealComponents;
 	}
 
