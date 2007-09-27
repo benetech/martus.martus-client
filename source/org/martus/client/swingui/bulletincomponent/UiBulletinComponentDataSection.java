@@ -38,7 +38,7 @@ import org.martus.client.core.LanguageChangeListener;
 import org.martus.client.core.MartusApp;
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.client.swingui.fields.UiChoiceEditor;
+import org.martus.client.swingui.fields.UiChoice;
 import org.martus.client.swingui.fields.UiDateEditor;
 import org.martus.client.swingui.fields.UiField;
 import org.martus.client.swingui.fields.UiFieldCreator;
@@ -364,7 +364,7 @@ abstract public class UiBulletinComponentDataSection extends UiBulletinComponent
 				return;
 			
 			String existingValue = field.getText();
-			UiChoiceEditor choiceField = (UiChoiceEditor)field;
+			UiChoice choiceField = (UiChoice)field;
 			ChoiceItem[] choices = getCurrentChoiceItems(spec);
 			choiceField.setChoices(choices);
 			field.setText(ensureValid(choices, existingValue));
