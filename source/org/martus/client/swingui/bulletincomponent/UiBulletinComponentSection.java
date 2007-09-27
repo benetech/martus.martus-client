@@ -107,7 +107,7 @@ abstract public class UiBulletinComponentSection extends JPanel
 	{
 		public FieldGroup(String tag, String title)
 		{
-			super(new BasicGridLayout(1, 2));
+			setLayout(new BasicGridLayout(1, 2));
 			Border empty = BorderFactory.createEmptyBorder(1, 2, 1, 2);
 			Border line = BorderFactory.createLineBorder(Color.BLACK, 2);
 			setBorder(BorderFactory.createCompoundBorder(empty, line));
@@ -125,6 +125,7 @@ abstract public class UiBulletinComponentSection extends JPanel
 			Utilities.addComponentsRespectingOrientation(this, secondRow);
 			
 			avoidArabicAlignmentProblem();
+			hasRealComponents = false;
 		}
 
 		private void avoidArabicAlignmentProblem()
@@ -140,14 +141,16 @@ abstract public class UiBulletinComponentSection extends JPanel
 		public void addComponents(JComponent left, JComponent right)
 		{
 			contents.addComponents(left, right);
+			hasRealComponents = true;
 		}
 		
 		public boolean isEmpty()
 		{
-			return (contents.getComponentCount() == 0);
+			return (!hasRealComponents);
 		}
 		
-		UiParagraphPanel contents;
+		private UiParagraphPanel contents;
+		boolean hasRealComponents;
 	}
 
 	public UiMainWindow getMainWindow()
