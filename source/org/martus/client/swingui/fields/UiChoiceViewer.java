@@ -68,6 +68,7 @@ public class UiChoiceViewer extends UiChoice
 
 	public void setChoices(ChoiceItem[] newChoices)
 	{
+		spec.setChoices(newChoices);
 	}
 
 	JLabel widget;
