@@ -968,7 +968,6 @@ public class EnglishStrings
 	"<GridColumnLabel>Last Name</GridColumnLabel>\n" +
 	"</DataSource>\n" +
 	"</Column>\n" +
-	"\n" + 
 	"<Column type='STRING'><Tag></Tag><Label>Profession</Label></Column>\n" +
 	"<Column type='DATERANGE'><Tag></Tag><Label>Dates of Profession</Label></Column>\n" +
 	"</GridSpecDetails>\n" +
