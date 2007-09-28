@@ -186,6 +186,17 @@ abstract public class UiGrid extends UiField
 				cellField.setText(value);
 				JComponent cellComponent = cellField.getComponent();
 				cellComponent.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+				
+				// NOTE: This little hack avoided a last-minute problem where Dates inside expanded grids
+				// were being sized wrong, which caused big problems in Arabic.
+				// the long-term solution is probably to have DateEditor have a panel that 
+				// contains the DateEditorComponent, like DateRange already does, which works
+				if(spec.getType().isDate())
+				{
+					JPanel wrapper = new JPanel(new BorderLayout());
+					wrapper.add(cellComponent, BorderLayout.CENTER);
+					cellComponent = wrapper;
+				}
 				Component[] rowComponents = new Component[] {
 						new UiLabel(model.getColumnName(column)), 
 						cellComponent,
