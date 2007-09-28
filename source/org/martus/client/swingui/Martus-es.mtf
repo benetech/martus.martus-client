@@ -1,10 +1,10 @@
 ﻿# Martus Client Translation File
 # Language code:  es
 # Language name:  Spanish
-# Translated by:  Benetech, Katitza Rodriquez Pereda
-# Exported date:  Tue Sep 25 16:46:04 PDT 2007
+# Translated by:  Benetech, Katitza Rodríguez Pereda
+# Exported date:  Fri Sep 28 11:39:00 PDT 2007
 # Client version: pre-3.2
-# Client build:   20070925.1856
+# Client build:   20070927.1860
 #
 # This file MUST be saved in UTF-8 format!
 # Lines beginning with # are comments and are ignored by Martus
@@ -1970,8 +1970,8 @@
 #________________=Title
 -768e-field:title=Título
 
-#_____________________________=English pre-3.2
--649d-field:translationVersion=Español pre-3.2  
+#_____________________________=English
+-649d-field:translationVersion=Español 3.2   
 
 #___________________=Username
 -84c2-field:username=Nombre de usuario

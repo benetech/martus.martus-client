@@ -2,9 +2,9 @@
 # Language code:  fr
 # Language name:  French
 # Translated by:  MID Foundation, Caroline Garcia
-# Exported date:  Tue Sep 25 17:00:13 PDT 2007
+# Exported date:  Fri Sep 28 11:42:06 PDT 2007
 # Client version: pre-3.2
-# Client build:   20070925.1856
+# Client build:   20070927.1860
 #
 # This file MUST be saved in UTF-8 format!
 # Lines beginning with # are comments and are ignored by Martus
@@ -561,7 +561,7 @@
 -aec2-field:CreateNewUserNamePassword=Veuillez saisir vos nouveaux pseudo et mot de passe.
 
 #_________________________________=Bottom (always Private) Pane of Bulletin
--f953-field:CustomXMLBottomSection=Partie inférieure (toujours privée) du communiqué
+-f953-field:CustomXMLBottomSection=Partie inférieure (toujours Privée) du communiqué
 
 #______________________________=Top Pane of Bulletin
 -e596-field:CustomXMLTopSection=Partie supérieure du communiqué
@@ -657,12 +657,7 @@
 -64b8-field:ErrorCustomFieldHeader4=ETIQUETTE
 
 #____________________________=There is an error in the custom field definitions. Each problem is identified with the following codes:\n   100 - Required standard field is missing\n   101 - Custom field does not have a correct tag\n   102 - A previous Tag already exists with this name\n   103 - Custom field does not have a label\n   104 - Unrecognized Field Type\n   105 - A label was found in a standard field\n   106 - XML Parse Error (e.g. mismatched quotation marks or bracket syntax)\n   107 - Tag contains illegal characters (e.g. spaces or punctuation)\n   108 - Duplicate entry in Dropdown field\n   109 - No Choices in Dropdown field\n   110 - System/Standard field tag cannot be used for custom field\n   111 - Standard field in top pane cannot be placed in bottom (always Private) pane\n   112 - Standard field in bottom (always Private) pane cannot be placed in the top pane\n   113 - Data Source Grid not found in same pane as resulting dropdown field\n   114 - Unknown Data Source Grid Column Label\n   115 - Dropdown cannot have both choices and data source\n   200 - All fields empty\n   201 - Unrecognized Headquarters created this template\n   202 - Security validation error\n   203 - File Error\n   204 - Imported XML Missing Field
--f5b1-field:ErrorCustomFields=Erreur dans les définitions de champs personnalisés. Chaque problème est identifié par les codes suivants :\n  100 - Le champ standard obligatoire est manquant\n  101 - Balise incorrecte dans le champ personnalisé.\n  102 - Une balise porte déjà ce nom.\n  103 - Le champ personnalisé n'a pas d'étiquette.\n  104 - Type de champ non reconnu.\n  105 - Une étiquette a été trouvée dans un champ standard.\n  106 - Erreur d'analyse XML (p. ex syntaxe des parenthèses ou guillemets mal accordés).\n  107 - La balise contient des caractères interdits (p. ex. des espaces ou de la ponctuation).\n  108 – Double entrée dans le champ déroulant.\n  109 – Aucun choix dans le champ déroulant.\n  110 – La balise de champ système/standard ne peut pas être utilisée pour le champ personnalisé.\n  111 – Le champ standard de la partie supérieure ne peut pas être placé dans la partie inférieure (toujours Privée).\n  112 – Le champ standard de la partie inférieure (toujours Privée) ne peut pas être placé dans la partie supérieure.\n  113 – Balise de champ de grille de source de données non trouvée dans même partie que le champ déroulant résultant.\n  114 – Etiquette de colonne de grille de source de données inconnue\n  115 – La liste déroulante ne peut comporter à la fois les choix et la source de données\n\n  200 – Tous les champs sont vides.\n  201 – Modèle créé par un Siège non reconnu.\n  202 – Erreur de validation de sécurité.\n  203 – Erreur de fichier.\n  204 – Champ XML importé manquant.
-
-
-113 - la Grille de Source de Données non trouvée dans même vitre que s'ensuivant dropdown le champ
-113 - Grille de point d'émission de données non trouvée dans le même carreau comme résultat le champ dropdown.
-
+-f5b1-field:ErrorCustomFields=Erreur dans les définitions de champs personnalisés. Chaque problème est identifié par les codes suivants :\n  100 - Le champ standard obligatoire est manquant\n  101 - Balise incorrecte dans le champ personnalisé.\n  102 - Une balise porte déjà ce nom.\n  103 - Le champ personnalisé n'a pas d'étiquette.\n  104 - Type de champ non reconnu.\n  105 - Une étiquette a été trouvée dans un champ standard.\n  106 - Erreur d'analyse XML (p. ex syntaxe des parenthèses ou guillemets mal accordés).\n  107 - La balise contient des caractères interdits (p. ex. des espaces ou de la ponctuation).\n  108 – Double entrée dans le champ déroulant.\n  109 – Aucun choix dans le champ déroulant.\n  110 – La balise de champ système/standard ne peut pas être utilisée pour le champ personnalisé.\n  111 – Le champ standard de la partie supérieure ne peut pas être placé dans la partie inférieure (toujours Privée).\n  112 – Le champ standard de la partie inférieure (toujours Privée) ne peut pas être placé dans la partie supérieure.\n  113 – Balise de champ de grille de source de données non trouvée dans même partie que le champ déroulant résultant.\n  114 – Etiquette de colonne de grille de source de données inconnue\n  115 – La liste déroulante ne peut comporter à la fois les choix et la source de données\n  200 – Tous les champs sont vides.\n  201 – Modèle créé par un Siège non reconnu.\n  202 – Erreur de validation de sécurité.\n  203 – Erreur de fichier.\n  204 – Champ XML importé manquant.
 
 #_________________________________________=A previous backup file exists.  You must save each file on its own removable media disk.
 -db93-field:ErrorPreviousBackupShareExists=Il existe un ancien fichier de sauvegarde. Vous devez enregistrer chaque fichier sur son propre disque amovible.
@@ -1975,8 +1970,8 @@
 #________________=Title
 -768e-field:title=Titre
 
-#_____________________________=English pre-3.2
--649d-field:translationVersion=Français pre-3.2  
+#_____________________________=English
+-649d-field:translationVersion=Français 3.2   
 
 #___________________=Username
 -84c2-field:username=Pseudo
