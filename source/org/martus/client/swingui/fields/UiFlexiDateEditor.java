@@ -41,10 +41,13 @@ import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.fieldspec.StandardFieldSpecs;
 import org.martus.common.utilities.MartusFlexidate;
 import org.martus.swing.UiLabel;
-import org.martus.swing.UiParagraphPanel;
 import org.martus.swing.UiRadioButton;
 import org.martus.swing.Utilities;
 import org.martus.util.MultiCalendar;
+import org.martus.util.language.LanguageOptions;
+
+import com.jhlabs.awt.Alignment;
+import com.jhlabs.awt.GridLayoutPlus;
 
 public class UiFlexiDateEditor extends UiField
 {
@@ -57,8 +60,11 @@ public class UiFlexiDateEditor extends UiField
 	
 	private void init()
 	{
-		component = new JPanel();
-		component.setLayout(new BorderLayout());
+		GridLayoutPlus layout = new GridLayoutPlus(2, 1);
+		layout.setFill(Alignment.FILL_NONE);
+		if(LanguageOptions.isRightToLeftLanguage())
+			layout.setAlignment(Alignment.EAST);
+		component = new JPanel(layout);
 
 		exactDateRB = new UiRadioButton(localization.getFieldLabel("DateExact"), true);			
 		exactDateRB.addItemListener(new RadioItemListener());
@@ -70,16 +76,10 @@ public class UiFlexiDateEditor extends UiField
 		radioGroup.add(exactDateRB);
 		radioGroup.add(flexiDateRB);		
 
-		UiParagraphPanel dateButtons = new UiParagraphPanel();				
-		dateButtons.addComponents(exactDateRB, flexiDateRB);
-		Box dateSelection = Box.createHorizontalBox();
-		Utilities.addComponentsRespectingOrientation(dateSelection, new Component[] {dateButtons, Box.createHorizontalGlue()});
-		component.add(dateSelection, BorderLayout.NORTH);
-		
 		buildBeginDateBox();
 		buildEndDateBox();
 
-		component.add(buildExactDateBox(), BorderLayout.CENTER);
+		removeFlexidatePanel();
 	}
 	
 	private JComponent buildFlexiDateBox()
@@ -167,14 +167,26 @@ public class UiFlexiDateEditor extends UiField
 	
 	void removeExactDatePanel()
 	{
-		component.remove(exactDateBox);	
+		component.removeAll();				
+
+		GridLayoutPlus horizontalLayout = new GridLayoutPlus(1, 0);
+		JPanel dateButtons = new JPanel(horizontalLayout);				
+		Utilities.addComponentsRespectingOrientation(dateButtons, new Component[] {exactDateRB, flexiDateRB});
+		
+		component.add(dateButtons, BorderLayout.NORTH);
 		component.add(buildFlexiDateBox(), BorderLayout.CENTER);																	
 		component.revalidate();		
 	}
 	
 	void removeFlexidatePanel()
 	{
-		component.remove(flexiDateBox);						
+		component.removeAll();		
+		
+		GridLayoutPlus horizontalLayout = new GridLayoutPlus(1, 0);
+		JPanel dateButtons = new JPanel(horizontalLayout);				
+		Utilities.addComponentsRespectingOrientation(dateButtons, new Component[] {exactDateRB, flexiDateRB});
+		
+		component.add(dateButtons, BorderLayout.NORTH);
 		component.add(buildExactDateBox(), BorderLayout.CENTER);
 		component.revalidate();		
 	}
