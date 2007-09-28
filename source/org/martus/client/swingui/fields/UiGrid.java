@@ -149,6 +149,17 @@ abstract public class UiGrid extends UiField
 		}
 	}
 	
+	public void dataDrivenDropdownInsideGridMayNeedToBeUpdated()
+	{
+		// if we are not expanded, the table will automatically refresh 
+		// when the underlying model is changed
+		if(expandedFieldRows == null)
+			return;
+		showExpanded();
+		if(widget.getTopLevelAncestor() != null)
+			widget.getTopLevelAncestor().validate();
+	}
+	
 	void showExpanded()
 	{
 		stopCellEditing();

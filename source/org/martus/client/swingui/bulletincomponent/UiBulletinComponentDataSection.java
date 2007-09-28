@@ -372,6 +372,8 @@ abstract public class UiBulletinComponentDataSection extends UiBulletinComponent
 
 		private void updateDataDrivenDropdownsInsideGrid(GridFieldSpec gridSpecToBlankOut, UiGrid gridToBlankOut) 
 		{
+			boolean needsUpdate = false;
+			
 			GridTableModel modelToBlankOut = gridToBlankOut.getGridTableModel();
 			for(int column = 0; column < modelToBlankOut.getColumnCount(); ++column)
 			{
@@ -382,6 +384,7 @@ abstract public class UiBulletinComponentDataSection extends UiBulletinComponent
 				DropDownFieldSpec dropdownSpec = (DropDownFieldSpec)columnSpec;
 				if(!isDataSourceThisGrid(dropdownSpec))
 					continue;
+				needsUpdate = true;
 				
 				ChoiceItem[] choices = getCurrentChoiceItems(dropdownSpec);
 				if(choices == null)
@@ -397,6 +400,9 @@ abstract public class UiBulletinComponentDataSection extends UiBulletinComponent
 						modelToBlankOut.setValueAt(newValue, row, column);
 				}
 			}
+			
+			if(needsUpdate)
+				gridToBlankOut.dataDrivenDropdownInsideGridMayNeedToBeUpdated();
 		}
 
 		private boolean isDataSourceThisGrid(DropDownFieldSpec spec) 
