@@ -1073,7 +1073,6 @@ public class EnglishStrings
 "field:DateExact=Exact Date",
 "field:DateRange=Date Range",
 "field:YearUnspecified=Unknown",
-"field:DateNotSpecified=Unknown",
 "field:UnknownDateSave=Unknown",
 "field:AttachmentSizeUnknown=Unknown",
 "field:ConfigureHQsCurrentHQs=Current Headquarters",
