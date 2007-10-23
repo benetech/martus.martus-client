@@ -88,9 +88,8 @@ public class AttachmentTableModel extends AbstractTableModel
 		return (AttachmentProxy)attachmentList.get(row);
 	}
 		
-	public AttachmentProxy[] getSelectedAttachments()
+	public AttachmentProxy[] getAttachments(int[] rows)
 	{
-		int[] rows = attachmentTable.getSelectedRows();
 		if(rows.length <= 0)
 			return null;
 		AttachmentProxy[] list = new AttachmentProxy[rows.length];

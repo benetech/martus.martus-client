@@ -252,7 +252,8 @@ public class UiAttachmentViewer extends JPanel  implements DragGestureListener, 
 
 	public void dragGestureRecognized(DragGestureEvent dge)
 	{
-		AttachmentProxy[] attachments = model.getSelectedAttachments();
+		int[] rows = attachmentTable.getSelectedRows();
+		AttachmentProxy[] attachments = model.getAttachments(rows);
 		if(attachments == null)
 			return;
 		TransferableAttachmentList dragable = new TransferableAttachmentList(mainWindow.getStore().getDatabase(), mainWindow.getApp().getSecurity(), attachments);
