@@ -92,7 +92,7 @@ public class AttachmentTableModel extends AbstractTableModel
 			return null;
 		AttachmentProxy[] list = new AttachmentProxy[rows.length];
 		for(int i = 0; i < rows.length; ++i)
-			list[i] = (AttachmentProxy)attachmentList.get(rows[i]);
+			list[i] = getAttachment(i);
 		return list;
 	}
 
@@ -100,11 +100,16 @@ public class AttachmentTableModel extends AbstractTableModel
 	{
 		AttachmentProxy[] list = new AttachmentProxy[attachmentList.size()];
 		for(int i = 0; i < list.length; ++i)
-			list[i] = (AttachmentProxy)attachmentList.get(i);
+			list[i] = getAttachment(i);
 	
 		return list;
 	}
 	
+	public AttachmentProxy getAttachment(int row)
+	{
+		return (AttachmentProxy)attachmentList.get(row);
+	}
+
 	public String getFilenameAt(int row)
 	{
 		return (String)getValueAt(row, 0);
@@ -116,6 +121,12 @@ public class AttachmentTableModel extends AbstractTableModel
 		if(column == 0)
 			return a.getLabel();
 
+		return getSize(a);
+		
+	}
+
+	public String getSize(AttachmentProxy a)
+	{
 		if(a.getFile() != null)
 		{	
 			int size = (int)a.getFile().length();
@@ -148,7 +159,6 @@ public class AttachmentTableModel extends AbstractTableModel
 		size -= 1024;//Public code & overhead
 		size = size * 3 / 4;//Base64 overhead
 		return getSizeInKb(size);
-		
 	}
 
 	private String getSizeInKb(long sizeBytes)
