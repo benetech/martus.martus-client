@@ -36,16 +36,14 @@ import org.martus.common.database.DatabaseKey;
 import org.martus.common.database.ReadableDatabase;
 import org.martus.common.packet.AttachmentPacket;
 import org.martus.common.packet.UniversalId;
-import org.martus.swing.UiTable;
 
 
 public class AttachmentTableModel extends AbstractTableModel
 {
-	public AttachmentTableModel(UiMainWindow window, UiTable table)
+	public AttachmentTableModel(UiMainWindow window)
 	{
 		attachmentList = new Vector();
 		mainWindow = window;
-		attachmentTable = table;
 	}
 
 	public int getRowCount()
@@ -178,5 +176,4 @@ public class AttachmentTableModel extends AbstractTableModel
 
 	Vector attachmentList;
 	UiMainWindow mainWindow;
-	UiTable attachmentTable;
 }

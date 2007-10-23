@@ -73,7 +73,7 @@ public class UiAttachmentEditor extends JPanel
 		remove.addActionListener(new RemoveHandler());
 		remove.setEnabled(false);
 
-		model = new AttachmentTableModel(mainWindow, attachmentTable);
+		model = new AttachmentTableModel(mainWindow);
 		model.addTableModelListener(remove);
 
 		attachmentTable = new UiTable(model);

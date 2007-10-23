@@ -67,7 +67,7 @@ public class UiAttachmentViewer extends JPanel  implements DragGestureListener, 
 		
 		mainWindow = mainWindowToUse;
 		app = mainWindow.getApp();
-		model = new AttachmentTableModel(mainWindow, attachmentTable);
+		model = new AttachmentTableModel(mainWindow);
 
 		attachmentTable = new UiTable(model);
 		attachmentTable.setMaxGridWidth(UiMainWindow.MINIMUM_TEXT_FIELD_WIDTH);
