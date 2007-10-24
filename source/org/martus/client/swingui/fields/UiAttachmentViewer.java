@@ -325,7 +325,7 @@ public class UiAttachmentViewer extends JPanel
 
 		private void addHeader()
 		{
-			header = new ViewAttachmentHeader(this);
+			header = new ViewAttachmentSummaryRow(this);
 			add(header, BorderLayout.BEFORE_FIRST_LINE);
 		}
 		
@@ -382,7 +382,7 @@ public class UiAttachmentViewer extends JPanel
 		
 		AttachmentProxy proxy;
 		boolean isImageInline;
-		ViewAttachmentHeader header;
+		ViewAttachmentSummaryRow header;
 	}
 	
 	class InlineAttachmentComponent extends UiLabel
@@ -478,9 +478,9 @@ public class UiAttachmentViewer extends JPanel
 		UiButton saveButton;
 	}
 	
-	class ViewAttachmentHeader extends ViewAttachmentRow
+	class ViewAttachmentSummaryRow extends ViewAttachmentRow
 	{
-		public ViewAttachmentHeader(ViewSingleAttachmentPanel panel)
+		public ViewAttachmentSummaryRow(ViewSingleAttachmentPanel panel)
 		{
 			AttachmentProxy proxy = panel.getAttachmentProxy();
 
