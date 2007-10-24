@@ -70,8 +70,6 @@ public class UiBulletinPreviewDlg extends JDialog implements ActionListener, Lan
 		
 		view.createLabelsAndFields(standardFieldTags, this);
 		view.copyDataFromPacket(fdp);
-		view.attachmentViewer.saveButton.setVisible(false);
-		view.attachmentViewer.viewButton.setVisible(false);
 		view.updateEncryptedIndicator(fdp.isEncrypted());	
 		
 		initalizeView(view);

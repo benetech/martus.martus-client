@@ -27,7 +27,8 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.swingui.fields;
 
 import java.awt.BorderLayout;
-import java.awt.Component;
+import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.dnd.DnDConstants;
 import java.awt.dnd.DragGestureEvent;
 import java.awt.dnd.DragGestureListener;
@@ -40,74 +41,62 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 
-import javax.swing.JButton;
+import javax.swing.BorderFactory;
+import javax.swing.JComponent;
 import javax.swing.JPanel;
-import javax.swing.ListSelectionModel;
+import javax.swing.border.Border;
 
-import org.martus.client.core.MartusApp;
 import org.martus.client.core.TransferableAttachmentList;
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.tablemodels.AttachmentTableModel;
+import org.martus.common.MartusLogger;
 import org.martus.common.bulletin.AttachmentProxy;
 import org.martus.common.bulletin.BulletinLoader;
+import org.martus.common.crypto.MartusCrypto;
+import org.martus.common.database.DatabaseKey;
 import org.martus.common.database.ReadableDatabase;
+import org.martus.common.packet.UniversalId;
 import org.martus.swing.UiButton;
 import org.martus.swing.UiFileChooser;
-import org.martus.swing.UiScrollPane;
-import org.martus.swing.UiTable;
-import org.martus.swing.UiVBox;
+import org.martus.swing.UiLabel;
 import org.martus.swing.Utilities;
 
-public class UiAttachmentViewer extends JPanel  implements DragGestureListener, DragSourceListener
+import com.jhlabs.awt.Alignment;
+import com.jhlabs.awt.GridLayoutPlus;
+
+public class UiAttachmentViewer extends JPanel
 {
 	public UiAttachmentViewer(UiMainWindow mainWindowToUse)
 	{
-		super(new BorderLayout());
+		GridLayoutPlus layout = new GridLayoutPlus(0, 1, 0, 0, 0, 0);
+		setLayout(layout);
 		
 		mainWindow = mainWindowToUse;
-		app = mainWindow.getApp();
 		model = new AttachmentTableModel(mainWindow);
 
-		attachmentTable = new UiTable(model);
-		attachmentTable.setMaxGridWidth(UiMainWindow.MINIMUM_TEXT_FIELD_WIDTH);
-		attachmentTable.useMaxWidth();
-		attachmentTable.createDefaultColumnsFromModel();
-		attachmentTable.setColumnSelectionAllowed(false);
-		attachmentTable.setMaxColumnWidthToHeaderWidth(1);
-
-		MartusLocalization localization = mainWindowToUse.getLocalization();
-
-		attachmentPane = new UiScrollPane(attachmentTable, UiScrollPane.VERTICAL_SCROLLBAR_NEVER, UiScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-
-		saveButton = new UiButton(localization.getButtonLabel("saveattachment"));
-		saveButton.addActionListener(new SaveHandler());
-		saveButton.setEnabled(false);
-		
-		viewButton = new UiButton(localization.getButtonLabel("viewattachment"));
-		viewButton.addActionListener(new ViewHandler());
-		viewButton.setEnabled(false);
-		if(!Utilities.isMSWindows())
-			viewButton.setVisible(false);
-
-		UiVBox vbox = new UiVBox();
-		vbox.add(attachmentPane);
-		vbox.add(new Component[] {saveButton, viewButton});
-		add(vbox, BorderLayout.CENTER);
-
 		updateTable();
-		attachmentTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		dragSource.createDefaultDragGestureRecognizer(attachmentTable,
-							DnDConstants.ACTION_COPY_OR_MOVE, this);
+	}
+
+	MartusLocalization getLocalization()
+	{
+		return mainWindow.getLocalization();
+	}
+	
+	MartusCrypto getSecurity()
+	{
+		return mainWindow.getApp().getSecurity();
 	}
 
 	public void updateTable()
 	{
-		attachmentTable.resizeTable();
-		int rowCount = model.getRowCount();
-		saveButton.setEnabled(rowCount > 0);
-		viewButton.setEnabled(rowCount > 0);
+		removeAll();
+		for(int row = 0; row < model.getRowCount(); ++row)
+		{
+			add(new ViewSingleAttachmentPanel(model.getAttachment(row)));
+		}
 	}
+	
 	public void addAttachment(AttachmentProxy a)
 	{
 		model.add(a);
@@ -120,26 +109,6 @@ public class UiAttachmentViewer extends JPanel  implements DragGestureListener, 
 		updateTable();
 	}
 
-
-	public int GetSelection()
-	{
-		int selection = attachmentTable.getSelectedRow();
-		int rowCount = attachmentTable.getRowCount();
-		if(selection > rowCount || rowCount <= 0)
-			return -1;
-
-		if(selection == -1)
-		{
-			if(rowCount == 1)
-				selection = 0;
-			else
-			{
-				getToolkit().beep();
-				return -1;
-			}
-		}
-		return selection;
-	}
 
 	public static String extractFileNameOnly(String fullName)
 	{
@@ -175,19 +144,20 @@ public class UiAttachmentViewer extends JPanel  implements DragGestureListener, 
 
 	class ViewHandler implements ActionListener
 	{
+		public ViewHandler(AttachmentProxy proxyToUse)
+		{
+			proxy = proxyToUse;
+		}
+		
 		public void actionPerformed(ActionEvent ae)
 		{
-			int selectedRow = GetSelection();
-			if(selectedRow == -1)
-				return;
-			AttachmentProxy proxy = model.getAttachmentProxyAt(selectedRow);
 			String author = proxy.getUniversalId().getAccountId();
 			if(!author.equals(mainWindow.getApp().getAccountId()))
 			{
 				if(!mainWindow.confirmDlg("NotYourBulletinViewAttachmentAnyways"))
 					return;
 			}
-			String fileName = model.getFilenameAt(selectedRow);
+			String fileName = proxy.getLabel();
 			mainWindow.setWaitingCursor();
 			try
 			{
@@ -195,7 +165,7 @@ public class UiAttachmentViewer extends JPanel  implements DragGestureListener, 
 				temp.deleteOnExit();
 			
 				ReadableDatabase db = mainWindow.getApp().getStore().getDatabase();
-				BulletinLoader.extractAttachmentToFile(db, proxy, app.getSecurity(), temp);
+				BulletinLoader.extractAttachmentToFile(db, proxy, getSecurity(), temp);
 
 				Runtime runtimeViewer = Runtime.getRuntime();
 				String tempFileFullPathName = temp.getPath();
@@ -209,16 +179,20 @@ public class UiAttachmentViewer extends JPanel  implements DragGestureListener, 
 			}
 			mainWindow.resetCursor();
 		}
+		
+		AttachmentProxy proxy;
 	}
 	
 	class SaveHandler implements ActionListener
 	{
+		public SaveHandler(AttachmentProxy proxyToUse)
+		{
+			proxy = proxyToUse;
+		}
+		
 		public void actionPerformed(ActionEvent ae)
 		{
-			int selectedRow = GetSelection();
-			if(selectedRow == -1)
-				return;
-			String fileName = model.getFilenameAt(selectedRow);
+			String fileName = proxy.getLabel();
 
 			File last = getLastAttachmentSaveDirectory();
 			if(last == null)
@@ -235,11 +209,10 @@ public class UiAttachmentViewer extends JPanel  implements DragGestureListener, 
 					return;
 			}
 			mainWindow.setWaitingCursor();
-			AttachmentProxy proxy = model.getAttachmentProxyAt(selectedRow);
 			try
 			{
 				ReadableDatabase db = mainWindow.getApp().getStore().getDatabase();
-				BulletinLoader.extractAttachmentToFile(db, proxy, app.getSecurity(), outputFile);
+				BulletinLoader.extractAttachmentToFile(db, proxy, getSecurity(), outputFile);
 			}
 			catch(Exception e)
 			{
@@ -248,51 +221,122 @@ public class UiAttachmentViewer extends JPanel  implements DragGestureListener, 
 			}
 			mainWindow.resetCursor();
 		}
+
+		AttachmentProxy proxy;
 	}
 
-	public void dragGestureRecognized(DragGestureEvent dge)
+	class AttachmentDragHandler implements DragGestureListener, DragSourceListener
 	{
-		int[] rows = attachmentTable.getSelectedRows();
-		AttachmentProxy[] attachments = model.getAttachments(rows);
-		if(attachments == null)
-			return;
-		TransferableAttachmentList dragable = new TransferableAttachmentList(mainWindow.getStore().getDatabase(), mainWindow.getApp().getSecurity(), attachments);
-		dge.startDrag(DragSource.DefaultCopyDrop, dragable, this);
-	}
-
-	public void dragEnter(DragSourceDragEvent dsde)
-	{
-	}
-
-	public void dragOver(DragSourceDragEvent dsde)
-	{
-	}
-
-	public void dropActionChanged(DragSourceDragEvent dsde)
-	{
-	}
-
-	public void dragDropEnd(DragSourceDropEvent dsde)
-	{
-	}
-
-	public void dragExit(DragSourceEvent dse)
-	{
+		public AttachmentDragHandler(AttachmentProxy proxyToUse)
+		{
+			proxy = proxyToUse;
+		}
+		
+		public void dragGestureRecognized(DragGestureEvent dge)
+		{
+			MartusLogger.log("Dragging: " + proxy.getLabel());
+			AttachmentProxy[] attachments = new AttachmentProxy[] {proxy};
+			TransferableAttachmentList dragable = new TransferableAttachmentList(mainWindow.getStore().getDatabase(), mainWindow.getApp().getSecurity(), attachments);
+			dge.startDrag(DragSource.DefaultCopyDrop, dragable, this);
+		}
+	
+		public void dragEnter(DragSourceDragEvent dsde)
+		{
+		}
+	
+		public void dragOver(DragSourceDragEvent dsde)
+		{
+		}
+	
+		public void dropActionChanged(DragSourceDragEvent dsde)
+		{
+		}
+	
+		public void dragDropEnd(DragSourceDropEvent dsde)
+		{
+		}
+	
+		public void dragExit(DragSourceEvent dse)
+		{
+		}
+		
+		AttachmentProxy proxy;
 	}
 	
+	class ViewSingleAttachmentPanel extends JPanel
+	{
+		public ViewSingleAttachmentPanel(AttachmentProxy proxyToUse)
+		{
+			super(new BorderLayout());
+			proxy = proxyToUse;
+			ViewAttachmentHeader header = new ViewAttachmentHeader(proxy);
+			add(header, BorderLayout.BEFORE_FIRST_LINE);
+			setBorder(BorderFactory.createLineBorder(Color.BLACK));
 
+			DragSource dragSource = DragSource.getDefaultDragSource();
+			dragSource.createDefaultDragGestureRecognizer(this, DnDConstants.ACTION_COPY_OR_MOVE, 
+					new AttachmentDragHandler(proxy));
+		}
+		
+		AttachmentProxy proxy;
+	}
+	
+	class ViewAttachmentHeader extends JPanel
+	{
+		public ViewAttachmentHeader(AttachmentProxy proxy)
+		{
+			GridLayoutPlus layout = new GridLayoutPlus(1, 0, 0, 0, 0, 0);
+			layout.setFill(Alignment.FILL_VERTICAL);
+			setLayout(layout);
+
+			addCell(new UiLabel(proxy.getLabel()), 400);
+			addCell(new UiLabel(model.getSize(proxy) + "k"), 80);
+			if(Utilities.isMSWindows())
+			{
+				UiButton viewButton = new UiButton(getLocalization().getButtonLabel("viewattachment"));
+				if(isAttachmentAvailable(proxy))
+					viewButton.addActionListener(new ViewHandler(proxy));
+				else
+					viewButton.setEnabled(false);
+				addCell(viewButton);
+			}
+
+			UiButton saveButton = new UiButton(getLocalization().getButtonLabel("saveattachment"));
+			if(isAttachmentAvailable(proxy))
+				saveButton.addActionListener(new SaveHandler(proxy));
+			else
+				saveButton.setEnabled(false);
+			addCell(saveButton);
+		}
+		
+		boolean isAttachmentAvailable(AttachmentProxy proxy)
+		{
+			UniversalId uid = proxy.getUniversalId();
+			DatabaseKey key = DatabaseKey.createLegacyKey(uid);
+			return mainWindow.getStore().doesBulletinRevisionExist(key);
+		}
+		
+		JPanel addCell(JComponent contents, int preferredWidth)
+		{
+			JPanel cell = addCell(contents);
+			cell.setPreferredSize(new Dimension(preferredWidth, 1));
+			return cell;
+		}
+		
+		JPanel addCell(JComponent contents)
+		{
+			Border outsideBorder = BorderFactory.createLineBorder(Color.BLACK);
+			Border insideBorder = BorderFactory.createEmptyBorder(2, 2, 2, 2);
+			JPanel cell = new JPanel();
+			cell.setBorder(BorderFactory.createCompoundBorder(outsideBorder, insideBorder));
+			cell.add(contents);
+			add(cell);
+			return cell;
+		}
+	}
 	
 	UiMainWindow mainWindow;
-	MartusApp app;
 	AttachmentTableModel model;
-	UiTable attachmentTable;
-	public JButton saveButton;
-	public JButton viewButton;
-	UiScrollPane attachmentPane;
 
 	private static File lastAttachmentSaveDirectory;
-	private DragSource dragSource = DragSource.getDefaultDragSource();
-
-	static final int VISIBLE_ROW_COUNT = 4;
-
 }
