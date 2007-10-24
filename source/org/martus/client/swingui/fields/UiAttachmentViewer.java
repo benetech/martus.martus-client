@@ -290,7 +290,7 @@ public class UiAttachmentViewer extends JPanel
 			setLayout(layout);
 
 			addCell(new UiLabel(proxy.getLabel()), 400);
-			addCell(new UiLabel(model.getSize(proxy) + "k"), 80);
+			addCell(new UiLabel(model.getSize(proxy)), 80);
 			if(Utilities.isMSWindows())
 			{
 				UiButton viewButton = new UiButton(getLocalization().getButtonLabel("viewattachment"));
