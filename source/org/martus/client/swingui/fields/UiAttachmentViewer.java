@@ -51,6 +51,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.UIManager;
 import javax.swing.border.Border;
 
 import org.martus.client.core.TransferableAttachmentList;
@@ -103,6 +104,10 @@ public class UiAttachmentViewer extends JPanel
 	public void updateTable()
 	{
 		removeAll();
+		JPanel headerContainer = new JPanel(new BorderLayout());
+		headerContainer.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+		headerContainer.add(new ViewAttachmentHeaderRow());
+		add(headerContainer);
 		for(int row = 0; row < model.getRowCount(); ++row)
 		{
 			add(new ViewSingleAttachmentPanel(model.getAttachment(row)));
@@ -394,6 +399,7 @@ public class UiAttachmentViewer extends JPanel
 			Image image = toolkit.getImage(tempFile.getAbsolutePath());
 			ImageIcon icon = new ImageIcon(image);
 			setIcon(icon);
+			setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		}
 		
 		public boolean isValid()
@@ -404,10 +410,14 @@ public class UiAttachmentViewer extends JPanel
 	
 	class MultiButtonPanel extends JPanel
 	{
-		public MultiButtonPanel()
+		public MultiButtonPanel(Color background)
 		{
+			setBackground(background);
 			layout = new CardLayout();
 			setLayout(layout);
+			JComponent emptyPanel = new JPanel();
+			emptyPanel.setBackground(getBackground());
+			add(emptyPanel, "");
 		}
 		
 		public void showCard(String cardName)
@@ -420,8 +430,9 @@ public class UiAttachmentViewer extends JPanel
 	
 	class ViewAttachmentRow extends JPanel
 	{
-		public ViewAttachmentRow()
+		public ViewAttachmentRow(Color backgroundColor)
 		{
+			setBackground(backgroundColor);
 			GridLayoutPlus layout = new GridLayoutPlus(1, 0, 0, 0, 0, 0);
 			layout.setFill(Alignment.FILL_VERTICAL);
 			setLayout(layout);
@@ -430,10 +441,18 @@ public class UiAttachmentViewer extends JPanel
 			hideButton = new UiButton(getLocalization().getButtonLabel("hideattachment"));
 			saveButton = new UiButton(getLocalization().getButtonLabel("saveattachment"));
 			
-			viewHidePanel = new MultiButtonPanel();
-			viewHidePanel.add(new JLabel(), "");
+			viewHidePanel = createMultiButtonPanel();
 			viewHidePanel.add(viewButton, viewButton.getText());
 			viewHidePanel.add(hideButton, hideButton.getText());
+			
+			savePanel = createMultiButtonPanel();
+			savePanel.add(saveButton, saveButton.getText());
+		}
+
+		private MultiButtonPanel createMultiButtonPanel()
+		{
+			MultiButtonPanel panel = new MultiButtonPanel(getBackground());
+			return panel;
 		}
 		
 		public int getLabelColumnWidth()
@@ -451,7 +470,7 @@ public class UiAttachmentViewer extends JPanel
 			addCell(new UiLabel(labelColumnText), getLabelColumnWidth());
 			addCell(new UiLabel(sizeColumnText), getSizeColumnWidth());
 			addCell(viewHidePanel);
-			addCell(saveButton);
+			addCell(savePanel);
 		}
 		
 		JPanel addCell(JComponent contents, int preferredWidth)
@@ -466,6 +485,8 @@ public class UiAttachmentViewer extends JPanel
 			Border outsideBorder = BorderFactory.createLineBorder(Color.BLACK);
 			Border insideBorder = BorderFactory.createEmptyBorder(2, 2, 2, 2);
 			JPanel cell = new JPanel();
+			cell.setBackground(getBackground());
+			cell.setForeground(getForeground());
 			cell.setBorder(BorderFactory.createCompoundBorder(outsideBorder, insideBorder));
 			cell.add(contents);
 			add(cell);
@@ -473,18 +494,33 @@ public class UiAttachmentViewer extends JPanel
 		}
 		
 		MultiButtonPanel viewHidePanel;
+		MultiButtonPanel savePanel;
 		UiButton viewButton;
 		UiButton hideButton;
 		UiButton saveButton;
+	}
+	
+	class ViewAttachmentHeaderRow extends ViewAttachmentRow
+	{
+		public ViewAttachmentHeaderRow()
+		{
+			super(UIManager.getColor("TableHeader.background"));
+			setForeground(UIManager.getColor("TableHeader.foreground"));
+			String labelHeader = getLocalization().getButtonLabel("attachmentLabel");
+			String sizeHeader = getLocalization().getButtonLabel("attachmentSize");
+			createCells(labelHeader, sizeHeader);
+		}
 	}
 	
 	class ViewAttachmentSummaryRow extends ViewAttachmentRow
 	{
 		public ViewAttachmentSummaryRow(ViewSingleAttachmentPanel panel)
 		{
+			super(Color.WHITE);
 			AttachmentProxy proxy = panel.getAttachmentProxy();
 
 			viewHidePanel.showCard(viewButton.getText());
+			savePanel.showCard(saveButton.getText());
 			if(isAttachmentAvailable(proxy))
 			{
 				viewButton.addActionListener(new ViewHandler(panel));
