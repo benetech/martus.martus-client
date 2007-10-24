@@ -402,58 +402,56 @@ public class UiAttachmentViewer extends JPanel
 		}
 	}
 	
-	class ViewAttachmentHeader extends JPanel
+	class MultiButtonPanel extends JPanel
 	{
-		public ViewAttachmentHeader(ViewSingleAttachmentPanel panel)
+		public MultiButtonPanel()
+		{
+			layout = new CardLayout();
+			setLayout(layout);
+		}
+		
+		public void showCard(String cardName)
+		{
+			layout.show(this, cardName);
+		}
+		
+		CardLayout layout;
+	}
+	
+	class ViewAttachmentRow extends JPanel
+	{
+		public ViewAttachmentRow()
 		{
 			GridLayoutPlus layout = new GridLayoutPlus(1, 0, 0, 0, 0, 0);
 			layout.setFill(Alignment.FILL_VERTICAL);
 			setLayout(layout);
 
-			AttachmentProxy proxy = panel.getAttachmentProxy();
-			addCell(new UiLabel(proxy.getLabel()), 400);
-			addCell(new UiLabel(model.getSize(proxy)), 80);
-
 			viewButton = new UiButton(getLocalization().getButtonLabel("viewattachment"));
-			if(isAttachmentAvailable(proxy))
-				viewButton.addActionListener(new ViewHandler(panel));
-			else
-				viewButton.setEnabled(false);
 			hideButton = new UiButton(getLocalization().getButtonLabel("hideattachment"));
-			if(isAttachmentAvailable(proxy))
-				hideButton.addActionListener(new HideHandler(panel));
-			else
-				hideButton.setEnabled(false);
+			saveButton = new UiButton(getLocalization().getButtonLabel("saveattachment"));
 			
-			viewHideLayout = new CardLayout();
-			viewHidePanel = new JPanel(viewHideLayout);
+			viewHidePanel = new MultiButtonPanel();
+			viewHidePanel.add(new JLabel(), "");
 			viewHidePanel.add(viewButton, viewButton.getText());
 			viewHidePanel.add(hideButton, hideButton.getText());
-			addCell(viewHidePanel);
+		}
+		
+		public int getLabelColumnWidth()
+		{
+			return 400;
+		}
+		
+		public int getSizeColumnWidth()
+		{
+			return 80;
+		}
 
-			UiButton saveButton = new UiButton(getLocalization().getButtonLabel("saveattachment"));
-			if(isAttachmentAvailable(proxy))
-				saveButton.addActionListener(new SaveHandler(proxy));
-			else
-				saveButton.setEnabled(false);
+		void createCells(String labelColumnText, String sizeColumnText)
+		{
+			addCell(new UiLabel(labelColumnText), getLabelColumnWidth());
+			addCell(new UiLabel(sizeColumnText), getSizeColumnWidth());
+			addCell(viewHidePanel);
 			addCell(saveButton);
-		}
-		
-		public void showViewButton()
-		{
-			viewHideLayout.show(viewHidePanel, viewButton.getText());
-		}
-		
-		public void showHideButton()
-		{
-			viewHideLayout.show(viewHidePanel, hideButton.getText());
-		}
-		
-		boolean isAttachmentAvailable(AttachmentProxy proxy)
-		{
-			UniversalId uid = proxy.getUniversalId();
-			DatabaseKey key = DatabaseKey.createLegacyKey(uid);
-			return mainWindow.getStore().doesBulletinRevisionExist(key);
 		}
 		
 		JPanel addCell(JComponent contents, int preferredWidth)
@@ -474,10 +472,54 @@ public class UiAttachmentViewer extends JPanel
 			return cell;
 		}
 		
-		CardLayout viewHideLayout;
-		JPanel viewHidePanel;
+		MultiButtonPanel viewHidePanel;
 		UiButton viewButton;
 		UiButton hideButton;
+		UiButton saveButton;
+	}
+	
+	class ViewAttachmentHeader extends ViewAttachmentRow
+	{
+		public ViewAttachmentHeader(ViewSingleAttachmentPanel panel)
+		{
+			AttachmentProxy proxy = panel.getAttachmentProxy();
+
+			viewHidePanel.showCard(viewButton.getText());
+			if(isAttachmentAvailable(proxy))
+			{
+				viewButton.addActionListener(new ViewHandler(panel));
+				hideButton.addActionListener(new HideHandler(panel));
+				saveButton.addActionListener(new SaveHandler(proxy));
+			}
+			else
+			{
+				viewButton.setEnabled(false);
+				hideButton.setEnabled(false);
+				saveButton.setEnabled(false);
+			}
+
+			String labelColumnText = proxy.getLabel();
+			String sizeColumnText = model.getSize(proxy);
+			createCells(labelColumnText, sizeColumnText);
+		}
+
+		public void showViewButton()
+		{
+			viewHidePanel.showCard(viewButton.getText());
+		}
+		
+		public void showHideButton()
+		{
+			viewHidePanel.showCard(hideButton.getText());
+		}
+		
+		boolean isAttachmentAvailable(AttachmentProxy proxy)
+		{
+			UniversalId uid = proxy.getUniversalId();
+			DatabaseKey key = DatabaseKey.createLegacyKey(uid);
+			return mainWindow.getStore().doesBulletinRevisionExist(key);
+		}
+		
 	}
 	
 	UiMainWindow mainWindow;
