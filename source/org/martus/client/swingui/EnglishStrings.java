@@ -220,6 +220,7 @@ public class EnglishStrings
 "wintitle:notifyReportFormatIsOld=Reports",
 "wintitle:notifyReportFormatIsTooNew=Reports",
 "wintitle:notifyReportFormatDifferentLanguage=Reports",
+"wintitle:notifyViewAttachmentNotAvailable=Unable to View Attachment",
 
 "wintitle:notifyRetrieveCompleted=Retrieve Complete",
 "field:notifyRetrieveCompletedcause=Retrieving bulletins from the server is complete",
@@ -349,6 +350,7 @@ public class EnglishStrings
 "button:attachmentSize=Size(Kb)",
 "button:saveattachment=Save Attachment",
 "button:viewattachment=View Attachment",
+"button:hideattachment=Hide Attachment",
 "button:VirtualKeyboardSwitchToNormal=Switch to using regular keyboard",
 "button:VirtualKeyboardSwitchToVirtual=Switch to using on-screen keyboard",
 "button:DownloadableSummaries=Show bulletins that are only on the server.",
@@ -831,6 +833,7 @@ public class EnglishStrings
 "field:notifyReportFormatIsOldcause=This report format was created with an earlier version of Martus, so it may not work correctly",
 "field:notifyReportFormatIsTooNewcause=This report format was created with a newer version of Martus, so it may not work correctly",
 "field:notifyReportFormatDifferentLanguagecause=This report format was created in a different language. As a result, some headings may not print properly, and some of the fields may not be available for sorting.",
+"field:notifyViewAttachmentNotAvailablecause=This computer can only view JPEG, GIF, and PNG image attachments",
 
 "field:IncompatibleMtfVersion=The version of this translation is not compatible with this version of Martus.  It is recommended that you do not continue to use this translation version and go to (http://www.martus.org/downloads) for the appropriate version.",
 "field:IncompatibleMtfVersionTranslation=#MtfLanguage# Translation Version: #MtfVersionNumber#",

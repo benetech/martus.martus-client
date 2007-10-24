@@ -27,8 +27,12 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.swingui.fields;
 
 import java.awt.BorderLayout;
+import java.awt.CardLayout;
 import java.awt.Color;
+import java.awt.Container;
 import java.awt.Dimension;
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.awt.dnd.DnDConstants;
 import java.awt.dnd.DragGestureEvent;
 import java.awt.dnd.DragGestureListener;
@@ -40,9 +44,12 @@ import java.awt.dnd.DragSourceListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.io.IOException;
 
 import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 import javax.swing.JComponent;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.Border;
 
@@ -54,13 +61,18 @@ import org.martus.common.MartusLogger;
 import org.martus.common.bulletin.AttachmentProxy;
 import org.martus.common.bulletin.BulletinLoader;
 import org.martus.common.crypto.MartusCrypto;
+import org.martus.common.crypto.MartusCrypto.CryptoException;
 import org.martus.common.database.DatabaseKey;
 import org.martus.common.database.ReadableDatabase;
 import org.martus.common.packet.UniversalId;
+import org.martus.common.packet.Packet.InvalidPacketException;
+import org.martus.common.packet.Packet.SignatureVerificationException;
+import org.martus.common.packet.Packet.WrongPacketTypeException;
 import org.martus.swing.UiButton;
 import org.martus.swing.UiFileChooser;
 import org.martus.swing.UiLabel;
 import org.martus.swing.Utilities;
+import org.martus.util.StreamableBase64.InvalidBase64Exception;
 
 import com.jhlabs.awt.Alignment;
 import com.jhlabs.awt.GridLayoutPlus;
@@ -110,6 +122,17 @@ public class UiAttachmentViewer extends JPanel
 	}
 
 
+	File extractAttachmentToTempFile(AttachmentProxy proxy) throws IOException, InvalidBase64Exception, InvalidPacketException, SignatureVerificationException, WrongPacketTypeException, CryptoException
+	{
+		String fileName = proxy.getLabel();
+		File temp = File.createTempFile(extractFileNameOnly(fileName), extractExtentionOnly(fileName));
+		temp.deleteOnExit();
+
+		ReadableDatabase db = mainWindow.getApp().getStore().getDatabase();
+		BulletinLoader.extractAttachmentToFile(db, proxy, getSecurity(), temp);
+		return temp;
+	}
+
 	public static String extractFileNameOnly(String fullName)
 	{
 		int index = fullName.lastIndexOf('.');
@@ -142,30 +165,51 @@ public class UiAttachmentViewer extends JPanel
 		return lastAttachmentSaveDirectory;
 	}
 
-	class ViewHandler implements ActionListener
+	class HideHandler implements ActionListener
 	{
-		public ViewHandler(AttachmentProxy proxyToUse)
+		public HideHandler(ViewSingleAttachmentPanel panelToUse)
 		{
-			proxy = proxyToUse;
+			panel = panelToUse;
 		}
 		
 		public void actionPerformed(ActionEvent ae)
 		{
+			panel.hideImage();
+		}
+
+		ViewSingleAttachmentPanel panel;
+	}
+
+	class ViewHandler implements ActionListener
+	{
+		public ViewHandler(ViewSingleAttachmentPanel panelToUse)
+		{
+			panel = panelToUse;
+		}
+		
+		public void actionPerformed(ActionEvent ae)
+		{
+			panel.showImageInline();
+			if(panel.isImageInline)
+				return;
+			
+			if(!Utilities.isMSWindows())
+			{
+				mainWindow.notifyDlg("ViewAttachmentNotAvailable");
+				return;
+			}
+			
+			AttachmentProxy proxy = panel.getAttachmentProxy();
 			String author = proxy.getUniversalId().getAccountId();
 			if(!author.equals(mainWindow.getApp().getAccountId()))
 			{
 				if(!mainWindow.confirmDlg("NotYourBulletinViewAttachmentAnyways"))
 					return;
 			}
-			String fileName = proxy.getLabel();
 			mainWindow.setWaitingCursor();
 			try
 			{
-				File temp = File.createTempFile(extractFileNameOnly(fileName), extractExtentionOnly(fileName));
-				temp.deleteOnExit();
-			
-				ReadableDatabase db = mainWindow.getApp().getStore().getDatabase();
-				BulletinLoader.extractAttachmentToFile(db, proxy, getSecurity(), temp);
+				File temp = extractAttachmentToTempFile(proxy);
 
 				Runtime runtimeViewer = Runtime.getRuntime();
 				String tempFileFullPathName = temp.getPath();
@@ -180,7 +224,7 @@ public class UiAttachmentViewer extends JPanel
 			mainWindow.resetCursor();
 		}
 		
-		AttachmentProxy proxy;
+		ViewSingleAttachmentPanel panel;
 	}
 	
 	class SaveHandler implements ActionListener
@@ -269,37 +313,123 @@ public class UiAttachmentViewer extends JPanel
 		{
 			super(new BorderLayout());
 			proxy = proxyToUse;
-			ViewAttachmentHeader header = new ViewAttachmentHeader(proxy);
-			add(header, BorderLayout.BEFORE_FIRST_LINE);
+
 			setBorder(BorderFactory.createLineBorder(Color.BLACK));
+
+			addHeader();
 
 			DragSource dragSource = DragSource.getDefaultDragSource();
 			dragSource.createDefaultDragGestureRecognizer(this, DnDConstants.ACTION_COPY_OR_MOVE, 
 					new AttachmentDragHandler(proxy));
 		}
+
+		private void addHeader()
+		{
+			header = new ViewAttachmentHeader(this);
+			add(header, BorderLayout.BEFORE_FIRST_LINE);
+		}
+		
+		public AttachmentProxy getAttachmentProxy()
+		{
+			return proxy;
+		}
+		
+		public void showImageInline()
+		{
+			if(!addInlineImage())
+				return;
+			isImageInline = true;
+			header.showHideButton();
+			validateParent();
+			repaint();
+		}
+
+		private void validateParent()
+		{
+			Container top = getTopLevelAncestor();
+			if(top != null)
+				top.validate();
+		}
+		
+		public void hideImage()
+		{
+			isImageInline = false;
+			JLabel emptySpace = new JLabel();
+			emptySpace.setVisible(false);
+			add(emptySpace, BorderLayout.CENTER);
+			header.showViewButton();
+			validateParent();
+			repaint();
+		}
+
+		private boolean addInlineImage()
+		{
+			try
+			{
+				InlineAttachmentComponent image = new InlineAttachmentComponent(proxy);
+				image.validate();
+				if(!image.isValid())
+					return false;
+				add(image, BorderLayout.CENTER);
+				return true;
+			} 
+			catch (Exception e)
+			{
+				MartusLogger.logException(e);
+				return false;
+			}
+		}
 		
 		AttachmentProxy proxy;
+		boolean isImageInline;
+		ViewAttachmentHeader header;
+	}
+	
+	class InlineAttachmentComponent extends UiLabel
+	{
+		public InlineAttachmentComponent(AttachmentProxy proxy) throws Exception
+		{
+			File tempFile = extractAttachmentToTempFile(proxy);
+			Toolkit toolkit = Toolkit.getDefaultToolkit();
+			Image image = toolkit.getImage(tempFile.getAbsolutePath());
+			ImageIcon icon = new ImageIcon(image);
+			setIcon(icon);
+		}
+		
+		public boolean isValid()
+		{
+			return (getIcon().getIconHeight() > 0);
+		}
 	}
 	
 	class ViewAttachmentHeader extends JPanel
 	{
-		public ViewAttachmentHeader(AttachmentProxy proxy)
+		public ViewAttachmentHeader(ViewSingleAttachmentPanel panel)
 		{
 			GridLayoutPlus layout = new GridLayoutPlus(1, 0, 0, 0, 0, 0);
 			layout.setFill(Alignment.FILL_VERTICAL);
 			setLayout(layout);
 
+			AttachmentProxy proxy = panel.getAttachmentProxy();
 			addCell(new UiLabel(proxy.getLabel()), 400);
 			addCell(new UiLabel(model.getSize(proxy)), 80);
-			if(Utilities.isMSWindows())
-			{
-				UiButton viewButton = new UiButton(getLocalization().getButtonLabel("viewattachment"));
-				if(isAttachmentAvailable(proxy))
-					viewButton.addActionListener(new ViewHandler(proxy));
-				else
-					viewButton.setEnabled(false);
-				addCell(viewButton);
-			}
+
+			viewButton = new UiButton(getLocalization().getButtonLabel("viewattachment"));
+			if(isAttachmentAvailable(proxy))
+				viewButton.addActionListener(new ViewHandler(panel));
+			else
+				viewButton.setEnabled(false);
+			hideButton = new UiButton(getLocalization().getButtonLabel("hideattachment"));
+			if(isAttachmentAvailable(proxy))
+				hideButton.addActionListener(new HideHandler(panel));
+			else
+				hideButton.setEnabled(false);
+			
+			viewHideLayout = new CardLayout();
+			viewHidePanel = new JPanel(viewHideLayout);
+			viewHidePanel.add(viewButton, viewButton.getText());
+			viewHidePanel.add(hideButton, hideButton.getText());
+			addCell(viewHidePanel);
 
 			UiButton saveButton = new UiButton(getLocalization().getButtonLabel("saveattachment"));
 			if(isAttachmentAvailable(proxy))
@@ -307,6 +437,16 @@ public class UiAttachmentViewer extends JPanel
 			else
 				saveButton.setEnabled(false);
 			addCell(saveButton);
+		}
+		
+		public void showViewButton()
+		{
+			viewHideLayout.show(viewHidePanel, viewButton.getText());
+		}
+		
+		public void showHideButton()
+		{
+			viewHideLayout.show(viewHidePanel, hideButton.getText());
 		}
 		
 		boolean isAttachmentAvailable(AttachmentProxy proxy)
@@ -333,6 +473,11 @@ public class UiAttachmentViewer extends JPanel
 			add(cell);
 			return cell;
 		}
+		
+		CardLayout viewHideLayout;
+		JPanel viewHidePanel;
+		UiButton viewButton;
+		UiButton hideButton;
 	}
 	
 	UiMainWindow mainWindow;
