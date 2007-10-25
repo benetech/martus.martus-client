@@ -48,14 +48,14 @@ class SaveHandler implements ActionListener
 	{
 		String fileName = proxy.getLabel();
 
-		File last = UiAttachmentComponent.getLastAttachmentSaveDirectory();
+		File last = getLastAttachmentSaveDirectory();
 		if(last == null)
 			last = UiFileChooser.getHomeDirectoryFile();
 		File attachmentFileToSave = new File(last, fileName);
 		UiFileChooser.FileDialogResults results = UiFileChooser.displayFileSaveDialog(mainWindow, null, attachmentFileToSave);
 		if(results.wasCancelChoosen())
 			return;
-		UiAttachmentComponent.setLastAttachmentSaveDirectory(results.getCurrentDirectory());
+		setLastAttachmentSaveDirectory(results.getCurrentDirectory());
 		File outputFile = results.getChosenFile();
 		if(outputFile.exists())
 		{
@@ -76,6 +76,18 @@ class SaveHandler implements ActionListener
 		}
 		mainWindow.resetCursor();
 	}
+
+	static void setLastAttachmentSaveDirectory(File newAttachmentSaveDirectory)
+	{
+		lastAttachmentSaveDirectory = newAttachmentSaveDirectory;
+	}
+
+	static File getLastAttachmentSaveDirectory()
+	{
+		return lastAttachmentSaveDirectory;
+	}
+
+	static File lastAttachmentSaveDirectory;
 
 	UiMainWindow mainWindow;
 	AttachmentProxy proxy;

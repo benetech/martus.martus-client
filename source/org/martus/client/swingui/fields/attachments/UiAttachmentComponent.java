@@ -123,16 +123,6 @@ abstract public class UiAttachmentComponent extends JPanel
 	}
 
 
-	static void setLastAttachmentSaveDirectory(File newAttachmentSaveDirectory)
-	{
-		lastAttachmentSaveDirectory = newAttachmentSaveDirectory;
-	}
-
-	static File getLastAttachmentSaveDirectory()
-	{
-		return lastAttachmentSaveDirectory;
-	}
-
 	class AttachmentDragHandler implements DragGestureListener, DragSourceListener
 	{
 		public AttachmentDragHandler(AttachmentProxy proxyToUse)
@@ -465,8 +455,6 @@ abstract public class UiAttachmentComponent extends JPanel
 
 		ViewSingleAttachmentPanel panel;
 	}
-
-	private static File lastAttachmentSaveDirectory;
 
 	UiMainWindow mainWindow;
 	AttachmentTableModel model;
