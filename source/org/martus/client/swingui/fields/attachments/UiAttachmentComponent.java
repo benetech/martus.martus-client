@@ -53,6 +53,7 @@ import javax.swing.JPanel;
 import javax.swing.UIManager;
 import javax.swing.border.Border;
 
+import org.martus.client.bulletinstore.ClientBulletinStore;
 import org.martus.client.core.TransferableAttachmentList;
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
@@ -385,7 +386,7 @@ abstract public class UiAttachmentComponent extends JPanel
 			savePanel.showCard(saveButton.getText());
 			if(isAttachmentAvailable(proxy))
 			{
-				viewButton.addActionListener(new ViewHandler(panel));
+				viewButton.addActionListener(new ViewHandler(mainWindow, panel));
 				hideButton.addActionListener(new HideHandler(panel));
 				saveButton.addActionListener(new SaveHandler(mainWindow, proxy));
 			}
@@ -467,10 +468,11 @@ abstract public class UiAttachmentComponent extends JPanel
 		ViewSingleAttachmentPanel panel;
 	}
 
-	class ViewHandler implements ActionListener
+	static class ViewHandler implements ActionListener
 	{
-		public ViewHandler(ViewSingleAttachmentPanel panelToUse)
+		public ViewHandler(UiMainWindow mainWindowToUse, ViewSingleAttachmentPanel panelToUse)
 		{
+			mainWindow = mainWindowToUse;
 			panel = panelToUse;
 		}
 		
@@ -496,8 +498,9 @@ abstract public class UiAttachmentComponent extends JPanel
 			mainWindow.setWaitingCursor();
 			try
 			{
-				ReadableDatabase db = mainWindow.getApp().getStore().getDatabase();
-				MartusCrypto security = getSecurity();
+				ClientBulletinStore store = mainWindow.getApp().getStore();
+				ReadableDatabase db = store.getDatabase();
+				MartusCrypto security = store.getSignatureVerifier();
 				File temp = extractAttachmentToTempFile(db, proxy, security);
 
 				Runtime runtimeViewer = Runtime.getRuntime();
@@ -513,6 +516,7 @@ abstract public class UiAttachmentComponent extends JPanel
 			mainWindow.resetCursor();
 		}
 		
+		UiMainWindow mainWindow;
 		ViewSingleAttachmentPanel panel;
 	}
 	
