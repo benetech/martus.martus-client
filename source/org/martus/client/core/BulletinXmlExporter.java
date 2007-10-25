@@ -32,7 +32,6 @@ import java.io.Writer;
 import java.util.Vector;
 
 import org.martus.client.swingui.dialogs.UiImportExportProgressMeterDlg;
-import org.martus.client.swingui.fields.attachments.UiAttachmentViewer;
 import org.martus.common.MartusLogger;
 import org.martus.common.MartusXml;
 import org.martus.common.MiniLocalization;
@@ -235,8 +234,8 @@ public class BulletinXmlExporter
 			{
 				if(attachment.exists())
 				{
-					String nameOnly = UiAttachmentViewer.extractFileNameOnly(fileName);
-					String extensionOnly = UiAttachmentViewer.extractExtentionOnly(fileName);
+					String nameOnly = extractFileNameOnly(fileName);
+					String extensionOnly = extractExtentionOnly(fileName);
 					
 					attachment = File.createTempFile(nameOnly, extensionOnly, attachmentsDirectory);
 				}
@@ -281,6 +280,27 @@ public class BulletinXmlExporter
 		
 	}
 	
+	public static String extractFileNameOnly(String fullName)
+	{
+		int index = fullName.lastIndexOf('.');
+		if(index == -1)
+			index = fullName.length();
+		String fileNameOnly = fullName.substring(0, index);
+		while(fileNameOnly.length() < 3)
+		{
+			fileNameOnly += "_";	
+		}
+		return fileNameOnly;
+	}
+
+	public static String extractExtentionOnly(String fullName)
+	{
+		int index = fullName.lastIndexOf('.');
+		if(index == -1)
+			return null;
+		return fullName.substring(index, fullName.length());
+	}
+
 	private static String getXmlEncodedTagWithData(String tagName, String data)
 	{
 		return MartusXml.getTagWithData(tagName, XmlUtilities.getXmlEncoded(data));

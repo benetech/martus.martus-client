@@ -33,6 +33,7 @@ import java.io.IOException;
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 
+import org.martus.client.core.BulletinXmlExporter;
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.tablemodels.AttachmentTableModel;
@@ -94,32 +95,11 @@ abstract public class UiAttachmentComponent extends JPanel
 	static File extractAttachmentToTempFile(ReadableDatabase db, AttachmentProxy proxy, MartusCrypto security) throws IOException, InvalidBase64Exception, InvalidPacketException, SignatureVerificationException, WrongPacketTypeException, CryptoException
 	{
 		String fileName = proxy.getLabel();
-		File temp = File.createTempFile(extractFileNameOnly(fileName), extractExtentionOnly(fileName));
+		File temp = File.createTempFile(BulletinXmlExporter.extractFileNameOnly(fileName), BulletinXmlExporter.extractExtentionOnly(fileName));
 		temp.deleteOnExit();
 
 		BulletinLoader.extractAttachmentToFile(db, proxy, security, temp);
 		return temp;
-	}
-
-	public static String extractFileNameOnly(String fullName)
-	{
-		int index = fullName.lastIndexOf('.');
-		if(index == -1)
-			index = fullName.length();
-		String fileNameOnly = fullName.substring(0, index);
-		while(fileNameOnly.length() < 3)
-		{
-			fileNameOnly += "_";	
-		}
-		return fileNameOnly;
-	}
-
-	public static String extractExtentionOnly(String fullName)
-	{
-		int index = fullName.lastIndexOf('.');
-		if(index == -1)
-			return null;
-		return fullName.substring(index, fullName.length());
 	}
 
 	UiMainWindow mainWindow;
