@@ -39,11 +39,11 @@ import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import org.martus.client.bulletinstore.ClientBulletinStore;
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.tablemodels.AttachmentTableModel;
 import org.martus.common.MartusLogger;
-import org.martus.common.MiniLocalization;
 import org.martus.common.bulletin.AttachmentProxy;
 import org.martus.common.bulletin.BulletinLoader;
 import org.martus.common.crypto.MartusCrypto;
@@ -124,7 +124,7 @@ abstract public class UiAttachmentComponent extends JPanel
 
 		private void addHeader()
 		{
-			header = new ViewAttachmentSummaryRow(this, getLocalization());
+			header = new ViewAttachmentSummaryRow(mainWindow, this);
 			add(header, BorderLayout.BEFORE_FIRST_LINE);
 		}
 		
@@ -186,18 +186,20 @@ abstract public class UiAttachmentComponent extends JPanel
 	
 	class ViewAttachmentSummaryRow extends ViewAttachmentRow
 	{
-		public ViewAttachmentSummaryRow(ViewSingleAttachmentPanel panel, MiniLocalization localizationToUse)
+		public ViewAttachmentSummaryRow(UiMainWindow mainWindowToUse, ViewSingleAttachmentPanel panel)
 		{
-			super(Color.WHITE, localizationToUse);
+			super(Color.WHITE, mainWindowToUse.getLocalization());
 			AttachmentProxy proxy = panel.getAttachmentProxy();
+			
+			store = mainWindowToUse.getStore();
 
 			viewHidePanel.showCard(viewButton.getText());
 			savePanel.showCard(saveButton.getText());
 			if(isAttachmentAvailable(proxy))
 			{
-				viewButton.addActionListener(new ViewHandler(mainWindow, panel));
+				viewButton.addActionListener(new ViewHandler(mainWindowToUse, panel));
 				hideButton.addActionListener(new HideHandler(panel));
-				saveButton.addActionListener(new SaveHandler(mainWindow, proxy));
+				saveButton.addActionListener(new SaveHandler(mainWindowToUse, proxy));
 			}
 			else
 			{
@@ -225,9 +227,10 @@ abstract public class UiAttachmentComponent extends JPanel
 		{
 			UniversalId uid = proxy.getUniversalId();
 			DatabaseKey key = DatabaseKey.createLegacyKey(uid);
-			return mainWindow.getStore().doesBulletinRevisionExist(key);
+			return store.doesBulletinRevisionExist(key);
 		}
 		
+		ClientBulletinStore store;
 	}
 	
 
