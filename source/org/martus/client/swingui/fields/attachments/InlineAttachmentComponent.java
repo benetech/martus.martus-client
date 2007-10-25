@@ -29,6 +29,7 @@ import java.awt.Color;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.io.File;
+import java.io.IOException;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -36,21 +37,36 @@ import javax.swing.ImageIcon;
 import org.martus.client.bulletinstore.ClientBulletinStore;
 import org.martus.common.bulletin.AttachmentProxy;
 import org.martus.common.crypto.MartusCrypto;
+import org.martus.common.crypto.MartusCrypto.CryptoException;
 import org.martus.common.database.ReadableDatabase;
+import org.martus.common.packet.Packet.InvalidPacketException;
+import org.martus.common.packet.Packet.SignatureVerificationException;
+import org.martus.common.packet.Packet.WrongPacketTypeException;
 import org.martus.swing.UiLabel;
+import org.martus.util.StreamableBase64.InvalidBase64Exception;
 
 class InlineAttachmentComponent extends UiLabel
 {
 	public InlineAttachmentComponent(ClientBulletinStore store, AttachmentProxy proxy) throws Exception
 	{
-		ReadableDatabase db = store.getDatabase();
-		MartusCrypto security = store.getSignatureVerifier();
-		File tempFile = ViewHandler.extractAttachmentToTempFile(db, proxy, security);
+		File tempFile = obtainFileForAttachment(store, proxy);
 		Toolkit toolkit = Toolkit.getDefaultToolkit();
 		Image image = toolkit.getImage(tempFile.getAbsolutePath());
 		ImageIcon icon = new ImageIcon(image);
 		setIcon(icon);
 		setBorder(BorderFactory.createLineBorder(Color.BLACK));
+	}
+
+	private File obtainFileForAttachment(ClientBulletinStore store, AttachmentProxy proxy) throws IOException, InvalidBase64Exception, InvalidPacketException, SignatureVerificationException, WrongPacketTypeException, CryptoException
+	{
+		File attachmentAlreadyAvailableAsFile = proxy.getFile();
+		if(attachmentAlreadyAvailableAsFile != null)
+			return attachmentAlreadyAvailableAsFile;
+		
+		ReadableDatabase db = store.getDatabase();
+		MartusCrypto security = store.getSignatureVerifier();
+		File tempFile = ViewHandler.extractAttachmentToTempFile(db, proxy, security);
+		return tempFile;
 	}
 	
 	public boolean isValid()

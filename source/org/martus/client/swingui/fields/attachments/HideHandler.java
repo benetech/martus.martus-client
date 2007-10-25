@@ -31,7 +31,7 @@ import java.awt.event.ActionListener;
 
 class HideHandler implements ActionListener
 {
-	public HideHandler(ViewAttachmentPanel panelToUse)
+	public HideHandler(AbstractAttachmentPanel panelToUse)
 	{
 		panel = panelToUse;
 	}
@@ -41,5 +41,5 @@ class HideHandler implements ActionListener
 		panel.hideImage();
 	}
 
-	ViewAttachmentPanel panel;
+	AbstractAttachmentPanel panel;
 }
