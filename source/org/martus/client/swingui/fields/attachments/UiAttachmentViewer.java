@@ -36,7 +36,7 @@ public class UiAttachmentViewer extends UiAttachmentComponent
 		updateTable();
 	}
 
-	ViewAttachmentHeaderRow createHeaderRow()
+	AbstractAttachmentRow createHeaderRow()
 	{
 		return new ViewAttachmentHeaderRow(getLocalization());
 	}
