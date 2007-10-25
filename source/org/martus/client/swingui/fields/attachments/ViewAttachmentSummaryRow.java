@@ -34,9 +34,9 @@ import org.martus.common.bulletin.AttachmentProxy;
 import org.martus.common.database.DatabaseKey;
 import org.martus.common.packet.UniversalId;
 
-class ViewAttachmentSummaryRow extends ViewAttachmentRow
+class ViewAttachmentSummaryRow extends AbstractAttachmentRow
 {
-	public ViewAttachmentSummaryRow(UiMainWindow mainWindowToUse, AttachmentTableModel modelToUse, ViewSingleAttachmentPanel panel)
+	public ViewAttachmentSummaryRow(UiMainWindow mainWindowToUse, AttachmentTableModel modelToUse, ViewAttachmentRow panel)
 	{
 		super(Color.WHITE, mainWindowToUse.getLocalization());
 		model = modelToUse;

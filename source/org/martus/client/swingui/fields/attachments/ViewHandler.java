@@ -46,7 +46,7 @@ import org.martus.util.StreamableBase64.InvalidBase64Exception;
 
 class ViewHandler implements ActionListener
 {
-	public ViewHandler(UiMainWindow mainWindowToUse, ViewSingleAttachmentPanel panelToUse)
+	public ViewHandler(UiMainWindow mainWindowToUse, ViewAttachmentRow panelToUse)
 	{
 		mainWindow = mainWindowToUse;
 		panel = panelToUse;
@@ -103,5 +103,5 @@ class ViewHandler implements ActionListener
 	}
 
 	UiMainWindow mainWindow;
-	ViewSingleAttachmentPanel panel;
+	ViewAttachmentRow panel;
 }

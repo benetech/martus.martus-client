@@ -29,7 +29,7 @@ import javax.swing.UIManager;
 
 import org.martus.common.MiniLocalization;
 
-class ViewAttachmentHeaderRow extends ViewAttachmentRow
+class ViewAttachmentHeaderRow extends AbstractAttachmentRow
 {
 	public ViewAttachmentHeaderRow(MiniLocalization localizationToUse)
 	{

@@ -25,97 +25,99 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.fields.attachments;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Dimension;
+import java.awt.Container;
+import java.awt.dnd.DnDConstants;
+import java.awt.dnd.DragSource;
 
 import javax.swing.BorderFactory;
-import javax.swing.JComponent;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.border.Border;
 
-import org.martus.common.MiniLocalization;
-import org.martus.swing.UiButton;
-import org.martus.swing.UiLabel;
-
-import com.jhlabs.awt.Alignment;
-import com.jhlabs.awt.GridLayoutPlus;
+import org.martus.client.swingui.UiMainWindow;
+import org.martus.client.swingui.tablemodels.AttachmentTableModel;
+import org.martus.common.MartusLogger;
+import org.martus.common.bulletin.AttachmentProxy;
 
 class ViewAttachmentRow extends JPanel
 {
-	public ViewAttachmentRow(Color backgroundColor, MiniLocalization localizationToUse)
+	public ViewAttachmentRow(UiMainWindow mainWindowToUse, AttachmentTableModel modelToUse, AttachmentProxy proxyToUse)
 	{
-		localization = localizationToUse;
-		
-		setBackground(backgroundColor);
-		GridLayoutPlus layout = new GridLayoutPlus(1, 0, 0, 0, 0, 0);
-		layout.setFill(Alignment.FILL_VERTICAL);
-		setLayout(layout);
+		super(new BorderLayout());
+		mainWindow = mainWindowToUse;
+		model = modelToUse;
+		proxy = proxyToUse;
 
-		viewButton = new UiButton(localization.getButtonLabel("viewattachment"));
-		hideButton = new UiButton(localization.getButtonLabel("hideattachment"));
-		saveButton = new UiButton(localization.getButtonLabel("saveattachment"));
-		
-		viewHidePanel = createMultiButtonPanel();
-		viewHidePanel.add(viewButton, viewButton.getText());
-		viewHidePanel.add(hideButton, hideButton.getText());
-		
-		savePanel = createMultiButtonPanel();
-		savePanel.add(saveButton, saveButton.getText());
-	}
-	
-	public MiniLocalization getLocalization()
-	{
-		return localization;
+		setBorder(BorderFactory.createLineBorder(Color.BLACK));
+
+		addHeader();
+
+		DragSource dragSource = DragSource.getDefaultDragSource();
+		dragSource.createDefaultDragGestureRecognizer(this, DnDConstants.ACTION_COPY_OR_MOVE, 
+				new AttachmentDragHandler(mainWindow.getStore(), proxy));
 	}
 
-	private MultiButtonPanel createMultiButtonPanel()
+	private void addHeader()
 	{
-		MultiButtonPanel panel = new MultiButtonPanel(getBackground());
-		return panel;
+		header = new ViewAttachmentSummaryRow(mainWindow, model, this);
+		add(header, BorderLayout.BEFORE_FIRST_LINE);
 	}
 	
-	public int getLabelColumnWidth()
+	public AttachmentProxy getAttachmentProxy()
 	{
-		return 400;
+		return proxy;
 	}
 	
-	public int getSizeColumnWidth()
+	public void showImageInline()
 	{
-		return 80;
+		if(!addInlineImage())
+			return;
+		isImageInline = true;
+		header.showHideButton();
+		validateParent();
+		repaint();
 	}
 
-	void createCells(String labelColumnText, String sizeColumnText)
+	private void validateParent()
 	{
-		addCell(new UiLabel(labelColumnText), getLabelColumnWidth());
-		addCell(new UiLabel(sizeColumnText), getSizeColumnWidth());
-		addCell(viewHidePanel);
-		addCell(savePanel);
+		Container top = getTopLevelAncestor();
+		if(top != null)
+			top.validate();
 	}
 	
-	JPanel addCell(JComponent contents, int preferredWidth)
+	public void hideImage()
 	{
-		JPanel cell = addCell(contents);
-		cell.setPreferredSize(new Dimension(preferredWidth, 1));
-		return cell;
+		isImageInline = false;
+		JLabel emptySpace = new JLabel();
+		emptySpace.setVisible(false);
+		add(emptySpace, BorderLayout.CENTER);
+		header.showViewButton();
+		validateParent();
+		repaint();
+	}
+
+	private boolean addInlineImage()
+	{
+		try
+		{
+			InlineAttachmentComponent image = new InlineAttachmentComponent(mainWindow.getStore(), proxy);
+			image.validate();
+			if(!image.isValid())
+				return false;
+			add(image, BorderLayout.CENTER);
+			return true;
+		} 
+		catch (Exception e)
+		{
+			MartusLogger.logException(e);
+			return false;
+		}
 	}
 	
-	JPanel addCell(JComponent contents)
-	{
-		Border outsideBorder = BorderFactory.createLineBorder(Color.BLACK);
-		Border insideBorder = BorderFactory.createEmptyBorder(2, 2, 2, 2);
-		JPanel cell = new JPanel();
-		cell.setBackground(getBackground());
-		cell.setForeground(getForeground());
-		cell.setBorder(BorderFactory.createCompoundBorder(outsideBorder, insideBorder));
-		cell.add(contents);
-		add(cell);
-		return cell;
-	}
-	
-	MiniLocalization localization;
-	MultiButtonPanel viewHidePanel;
-	MultiButtonPanel savePanel;
-	UiButton viewButton;
-	UiButton hideButton;
-	UiButton saveButton;
+	UiMainWindow mainWindow;
+	AttachmentTableModel model;
+	AttachmentProxy proxy;
+	boolean isImageInline;
+	ViewAttachmentSummaryRow header;
 }

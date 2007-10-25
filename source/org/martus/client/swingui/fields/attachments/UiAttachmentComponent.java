@@ -51,7 +51,7 @@ abstract public class UiAttachmentComponent extends JPanel
 	}
 	
 	abstract ViewAttachmentHeaderRow createHeaderRow();
-	abstract ViewSingleAttachmentPanel createAttachmentRow(int row);
+	abstract ViewAttachmentRow createAttachmentRow(int row);
 	
 	protected MartusLocalization getLocalization()
 	{

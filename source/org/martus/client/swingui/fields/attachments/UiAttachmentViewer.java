@@ -41,9 +41,9 @@ public class UiAttachmentViewer extends UiAttachmentComponent
 		return new ViewAttachmentHeaderRow(getLocalization());
 	}
 
-	ViewSingleAttachmentPanel createAttachmentRow(int row)
+	ViewAttachmentRow createAttachmentRow(int row)
 	{
-		return new ViewSingleAttachmentPanel(mainWindow, model, model.getAttachment(row));
+		return new ViewAttachmentRow(mainWindow, model, model.getAttachment(row));
 	}
 
 }
