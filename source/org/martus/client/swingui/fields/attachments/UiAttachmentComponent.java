@@ -28,7 +28,6 @@ package org.martus.client.swingui.fields.attachments;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Container;
-import java.awt.Dimension;
 import java.awt.dnd.DnDConstants;
 import java.awt.dnd.DragSource;
 import java.awt.event.ActionEvent;
@@ -37,11 +36,9 @@ import java.io.File;
 import java.io.IOException;
 
 import javax.swing.BorderFactory;
-import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.UIManager;
-import javax.swing.border.Border;
 
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
@@ -57,11 +54,8 @@ import org.martus.common.packet.UniversalId;
 import org.martus.common.packet.Packet.InvalidPacketException;
 import org.martus.common.packet.Packet.SignatureVerificationException;
 import org.martus.common.packet.Packet.WrongPacketTypeException;
-import org.martus.swing.UiButton;
-import org.martus.swing.UiLabel;
 import org.martus.util.StreamableBase64.InvalidBase64Exception;
 
-import com.jhlabs.awt.Alignment;
 import com.jhlabs.awt.GridLayoutPlus;
 
 abstract public class UiAttachmentComponent extends JPanel
@@ -190,83 +184,11 @@ abstract public class UiAttachmentComponent extends JPanel
 		ViewAttachmentSummaryRow header;
 	}
 	
-	class ViewAttachmentRow extends JPanel
-	{
-		public ViewAttachmentRow(Color backgroundColor)
-		{
-			setBackground(backgroundColor);
-			GridLayoutPlus layout = new GridLayoutPlus(1, 0, 0, 0, 0, 0);
-			layout.setFill(Alignment.FILL_VERTICAL);
-			setLayout(layout);
-
-			viewButton = new UiButton(getLocalization().getButtonLabel("viewattachment"));
-			hideButton = new UiButton(getLocalization().getButtonLabel("hideattachment"));
-			saveButton = new UiButton(getLocalization().getButtonLabel("saveattachment"));
-			
-			viewHidePanel = createMultiButtonPanel();
-			viewHidePanel.add(viewButton, viewButton.getText());
-			viewHidePanel.add(hideButton, hideButton.getText());
-			
-			savePanel = createMultiButtonPanel();
-			savePanel.add(saveButton, saveButton.getText());
-		}
-
-		private MultiButtonPanel createMultiButtonPanel()
-		{
-			MultiButtonPanel panel = new MultiButtonPanel(getBackground());
-			return panel;
-		}
-		
-		public int getLabelColumnWidth()
-		{
-			return 400;
-		}
-		
-		public int getSizeColumnWidth()
-		{
-			return 80;
-		}
-
-		void createCells(String labelColumnText, String sizeColumnText)
-		{
-			addCell(new UiLabel(labelColumnText), getLabelColumnWidth());
-			addCell(new UiLabel(sizeColumnText), getSizeColumnWidth());
-			addCell(viewHidePanel);
-			addCell(savePanel);
-		}
-		
-		JPanel addCell(JComponent contents, int preferredWidth)
-		{
-			JPanel cell = addCell(contents);
-			cell.setPreferredSize(new Dimension(preferredWidth, 1));
-			return cell;
-		}
-		
-		JPanel addCell(JComponent contents)
-		{
-			Border outsideBorder = BorderFactory.createLineBorder(Color.BLACK);
-			Border insideBorder = BorderFactory.createEmptyBorder(2, 2, 2, 2);
-			JPanel cell = new JPanel();
-			cell.setBackground(getBackground());
-			cell.setForeground(getForeground());
-			cell.setBorder(BorderFactory.createCompoundBorder(outsideBorder, insideBorder));
-			cell.add(contents);
-			add(cell);
-			return cell;
-		}
-		
-		MultiButtonPanel viewHidePanel;
-		MultiButtonPanel savePanel;
-		UiButton viewButton;
-		UiButton hideButton;
-		UiButton saveButton;
-	}
-	
 	class ViewAttachmentHeaderRow extends ViewAttachmentRow
 	{
 		public ViewAttachmentHeaderRow()
 		{
-			super(UIManager.getColor("TableHeader.background"));
+			super(UIManager.getColor("TableHeader.background"), getLocalization());
 			setForeground(UIManager.getColor("TableHeader.foreground"));
 			String labelHeader = getLocalization().getButtonLabel("attachmentLabel");
 			String sizeHeader = getLocalization().getButtonLabel("attachmentSize");
@@ -278,7 +200,7 @@ abstract public class UiAttachmentComponent extends JPanel
 	{
 		public ViewAttachmentSummaryRow(ViewSingleAttachmentPanel panel)
 		{
-			super(Color.WHITE);
+			super(Color.WHITE, getLocalization());
 			AttachmentProxy proxy = panel.getAttachmentProxy();
 
 			viewHidePanel.showCard(viewButton.getText());
