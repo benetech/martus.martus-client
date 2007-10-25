@@ -65,11 +65,6 @@ abstract public class UiAttachmentComponent extends JPanel
 		return mainWindow.getLocalization();
 	}
 
-	protected MartusCrypto getSecurity()
-	{
-		return mainWindow.getApp().getSecurity();
-	}
-
 	public void updateTable()
 	{
 		removeAll();
