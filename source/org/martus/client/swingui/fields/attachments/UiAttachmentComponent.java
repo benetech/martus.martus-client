@@ -26,7 +26,6 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.swingui.fields.attachments;
 
 import java.awt.BorderLayout;
-import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Container;
 import java.awt.Dimension;
@@ -189,26 +188,6 @@ abstract public class UiAttachmentComponent extends JPanel
 		AttachmentProxy proxy;
 		boolean isImageInline;
 		ViewAttachmentSummaryRow header;
-	}
-	
-	class MultiButtonPanel extends JPanel
-	{
-		public MultiButtonPanel(Color background)
-		{
-			setBackground(background);
-			layout = new CardLayout();
-			setLayout(layout);
-			JComponent emptyPanel = new JPanel();
-			emptyPanel.setBackground(getBackground());
-			add(emptyPanel, "");
-		}
-		
-		public void showCard(String cardName)
-		{
-			layout.show(this, cardName);
-		}
-		
-		CardLayout layout;
 	}
 	
 	class ViewAttachmentRow extends JPanel
