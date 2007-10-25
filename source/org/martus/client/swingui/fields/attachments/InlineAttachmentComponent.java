@@ -25,10 +25,12 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.fields.attachments;
 
+import java.awt.Color;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.io.File;
 
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 
 import org.martus.client.bulletinstore.ClientBulletinStore;
@@ -48,6 +50,7 @@ class InlineAttachmentComponent extends UiLabel
 		Image image = toolkit.getImage(tempFile.getAbsolutePath());
 		ImageIcon icon = new ImageIcon(image);
 		setIcon(icon);
+		setBorder(BorderFactory.createLineBorder(Color.BLACK));
 	}
 	
 	public boolean isValid()
