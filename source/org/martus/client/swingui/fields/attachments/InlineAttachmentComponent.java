@@ -39,6 +39,7 @@ import org.martus.common.bulletin.AttachmentProxy;
 import org.martus.common.crypto.MartusCrypto;
 import org.martus.common.crypto.MartusCrypto.CryptoException;
 import org.martus.common.database.ReadableDatabase;
+import org.martus.common.packet.AttachmentPacket;
 import org.martus.common.packet.Packet.InvalidPacketException;
 import org.martus.common.packet.Packet.SignatureVerificationException;
 import org.martus.common.packet.Packet.WrongPacketTypeException;
@@ -62,6 +63,14 @@ class InlineAttachmentComponent extends UiLabel
 		File attachmentAlreadyAvailableAsFile = proxy.getFile();
 		if(attachmentAlreadyAvailableAsFile != null)
 			return attachmentAlreadyAvailableAsFile;
+		
+		AttachmentPacket pendingPacket = proxy.getPendingPacket();
+		if(pendingPacket != null)
+		{
+			File tempFileAlreadyAvailable = pendingPacket.getRawFile();
+			if(tempFileAlreadyAvailable != null)
+				return tempFileAlreadyAvailable;
+		}
 		
 		ReadableDatabase db = store.getDatabase();
 		MartusCrypto security = store.getSignatureVerifier();
