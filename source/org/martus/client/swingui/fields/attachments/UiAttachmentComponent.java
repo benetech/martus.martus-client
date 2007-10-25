@@ -50,6 +50,9 @@ abstract public class UiAttachmentComponent extends JPanel
 
 	}
 	
+	abstract ViewAttachmentHeaderRow createHeaderRow();
+	abstract ViewSingleAttachmentPanel createAttachmentRow(int row);
+	
 	protected MartusLocalization getLocalization()
 	{
 		return mainWindow.getLocalization();
@@ -60,14 +63,14 @@ abstract public class UiAttachmentComponent extends JPanel
 		removeAll();
 		JPanel headerContainer = new JPanel(new BorderLayout());
 		headerContainer.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-		headerContainer.add(new ViewAttachmentHeaderRow(getLocalization()));
+		headerContainer.add(createHeaderRow());
 		add(headerContainer);
 		for(int row = 0; row < model.getRowCount(); ++row)
 		{
-			add(new ViewSingleAttachmentPanel(mainWindow, model, model.getAttachment(row)));
+			add(createAttachmentRow(row));
 		}
 	}
-	
+
 	public void addAttachment(AttachmentProxy a)
 	{
 		model.add(a);
@@ -81,6 +84,6 @@ abstract public class UiAttachmentComponent extends JPanel
 	}
 
 
-	UiMainWindow mainWindow;
-	AttachmentTableModel model;
+	protected UiMainWindow mainWindow;
+	protected AttachmentTableModel model;
 }
