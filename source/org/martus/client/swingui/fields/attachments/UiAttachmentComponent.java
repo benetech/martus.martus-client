@@ -114,7 +114,7 @@ abstract public class UiAttachmentComponent extends JPanel
 
 			DragSource dragSource = DragSource.getDefaultDragSource();
 			dragSource.createDefaultDragGestureRecognizer(this, DnDConstants.ACTION_COPY_OR_MOVE, 
-					new AttachmentDragHandler(mainWindow, proxy));
+					new AttachmentDragHandler(mainWindow.getStore(), proxy));
 		}
 
 		private void addHeader()

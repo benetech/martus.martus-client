@@ -33,16 +33,16 @@ import java.awt.dnd.DragSourceDropEvent;
 import java.awt.dnd.DragSourceEvent;
 import java.awt.dnd.DragSourceListener;
 
+import org.martus.client.bulletinstore.ClientBulletinStore;
 import org.martus.client.core.TransferableAttachmentList;
-import org.martus.client.swingui.UiMainWindow;
 import org.martus.common.MartusLogger;
 import org.martus.common.bulletin.AttachmentProxy;
 
 class AttachmentDragHandler implements DragGestureListener, DragSourceListener
 {
-	public AttachmentDragHandler(UiMainWindow mainWindowToUse, AttachmentProxy proxyToUse)
+	public AttachmentDragHandler(ClientBulletinStore storeToUse, AttachmentProxy proxyToUse)
 	{
-		mainWindow = mainWindowToUse;
+		store = storeToUse;
 		proxy = proxyToUse;
 	}
 	
@@ -50,7 +50,7 @@ class AttachmentDragHandler implements DragGestureListener, DragSourceListener
 	{
 		MartusLogger.log("Dragging: " + proxy.getLabel());
 		AttachmentProxy[] attachments = new AttachmentProxy[] {proxy};
-		TransferableAttachmentList dragable = new TransferableAttachmentList(mainWindow.getStore().getDatabase(), mainWindow.getApp().getSecurity(), attachments);
+		TransferableAttachmentList dragable = new TransferableAttachmentList(store.getDatabase(), store.getSignatureVerifier(), attachments);
 		dge.startDrag(DragSource.DefaultCopyDrop, dragable, this);
 	}
 
@@ -74,6 +74,6 @@ class AttachmentDragHandler implements DragGestureListener, DragSourceListener
 	{
 	}
 	
-	UiMainWindow mainWindow;
+	ClientBulletinStore store;
 	AttachmentProxy proxy;
 }
