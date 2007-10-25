@@ -29,9 +29,9 @@ import javax.swing.UIManager;
 
 import org.martus.common.MiniLocalization;
 
-class ViewAttachmentHeaderRow extends AbstractAttachmentRow
+class AttachmentHeaderRow extends AbstractAttachmentRow
 {
-	public ViewAttachmentHeaderRow(MiniLocalization localizationToUse)
+	public AttachmentHeaderRow(MiniLocalization localizationToUse)
 	{
 		super(UIManager.getColor("TableHeader.background"), localizationToUse);
 		setForeground(UIManager.getColor("TableHeader.foreground"));

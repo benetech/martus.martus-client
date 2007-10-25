@@ -50,8 +50,7 @@ abstract public class UiAttachmentComponent extends JPanel
 
 	}
 	
-	abstract AbstractAttachmentRow createHeaderRow();
-	abstract ViewAttachmentPanel createAttachmentPanel(int row);
+	abstract AbstractAttachmentPanel createAttachmentPanel(int row);
 	
 	protected MartusLocalization getLocalization()
 	{
@@ -81,6 +80,12 @@ abstract public class UiAttachmentComponent extends JPanel
 	{
 		model.clear();
 		updateTable();
+	}
+
+
+	protected AbstractAttachmentRow createHeaderRow()
+	{
+		return new AttachmentHeaderRow(getLocalization());
 	}
 
 
