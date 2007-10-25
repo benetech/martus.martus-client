@@ -224,17 +224,17 @@ abstract public class UiAttachmentComponent extends JPanel
 
 			setBorder(BorderFactory.createLineBorder(Color.BLACK));
 
-			addHeader();
+			addSummaryRow();
 
 			DragSource dragSource = DragSource.getDefaultDragSource();
 			dragSource.createDefaultDragGestureRecognizer(this, DnDConstants.ACTION_COPY_OR_MOVE, 
 					new AttachmentDragHandler(proxy));
 		}
 
-		private void addHeader()
+		private void addSummaryRow()
 		{
-			header = new ViewAttachmentSummaryRow(this);
-			add(header, BorderLayout.BEFORE_FIRST_LINE);
+			summaryRow = new ViewAttachmentSummaryRow(this);
+			add(summaryRow, BorderLayout.BEFORE_FIRST_LINE);
 		}
 		
 		public AttachmentProxy getAttachmentProxy()
@@ -247,7 +247,7 @@ abstract public class UiAttachmentComponent extends JPanel
 			if(!addInlineImage())
 				return;
 			isImageInline = true;
-			header.showHideButton();
+			summaryRow.showHideButton();
 			validateParent();
 			repaint();
 		}
@@ -265,7 +265,7 @@ abstract public class UiAttachmentComponent extends JPanel
 			JLabel emptySpace = new JLabel();
 			emptySpace.setVisible(false);
 			add(emptySpace, BorderLayout.CENTER);
-			header.showViewButton();
+			summaryRow.showViewButton();
 			validateParent();
 			repaint();
 		}
@@ -290,7 +290,7 @@ abstract public class UiAttachmentComponent extends JPanel
 		
 		AttachmentProxy proxy;
 		boolean isImageInline;
-		ViewAttachmentSummaryRow header;
+		ViewAttachmentSummaryRow summaryRow;
 	}
 	
 	class InlineAttachmentComponent extends UiLabel
