@@ -53,7 +53,6 @@ import javax.swing.JPanel;
 import javax.swing.UIManager;
 import javax.swing.border.Border;
 
-import org.martus.client.bulletinstore.ClientBulletinStore;
 import org.martus.client.core.TransferableAttachmentList;
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
@@ -70,7 +69,6 @@ import org.martus.common.packet.Packet.InvalidPacketException;
 import org.martus.common.packet.Packet.SignatureVerificationException;
 import org.martus.common.packet.Packet.WrongPacketTypeException;
 import org.martus.swing.UiButton;
-import org.martus.swing.UiFileChooser;
 import org.martus.swing.UiLabel;
 import org.martus.swing.Utilities;
 import org.martus.util.StreamableBase64.InvalidBase64Exception;
@@ -134,51 +132,6 @@ abstract public class UiAttachmentComponent extends JPanel
 	static File getLastAttachmentSaveDirectory()
 	{
 		return lastAttachmentSaveDirectory;
-	}
-
-	static class SaveHandler implements ActionListener
-	{
-		public SaveHandler(UiMainWindow mainWindowToUse, AttachmentProxy proxyToUse)
-		{
-			mainWindow = mainWindowToUse;
-			proxy = proxyToUse;
-		}
-		
-		public void actionPerformed(ActionEvent ae)
-		{
-			String fileName = proxy.getLabel();
-
-			File last = getLastAttachmentSaveDirectory();
-			if(last == null)
-				last = UiFileChooser.getHomeDirectoryFile();
-			File attachmentFileToSave = new File(last, fileName);
-			UiFileChooser.FileDialogResults results = UiFileChooser.displayFileSaveDialog(mainWindow, null, attachmentFileToSave);
-			if(results.wasCancelChoosen())
-				return;
-			setLastAttachmentSaveDirectory(results.getCurrentDirectory());
-			File outputFile = results.getChosenFile();
-			if(outputFile.exists())
-			{
-				if(!mainWindow.confirmDlg("OverWriteExistingFile"))
-					return;
-			}
-			mainWindow.setWaitingCursor();
-			try
-			{
-				ClientBulletinStore store = mainWindow.getApp().getStore();
-				ReadableDatabase db = store.getDatabase();
-				BulletinLoader.extractAttachmentToFile(db, proxy, store.getSignatureVerifier(), outputFile);
-			}
-			catch(Exception e)
-			{
-				mainWindow.notifyDlg("UnableToSaveAttachment");
-				System.out.println("Unable to save file :" + e);
-			}
-			mainWindow.resetCursor();
-		}
-
-		UiMainWindow mainWindow;
-		AttachmentProxy proxy;
 	}
 
 	class AttachmentDragHandler implements DragGestureListener, DragSourceListener
