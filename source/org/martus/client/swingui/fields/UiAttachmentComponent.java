@@ -53,6 +53,7 @@ import javax.swing.JPanel;
 import javax.swing.UIManager;
 import javax.swing.border.Border;
 
+import org.martus.client.bulletinstore.ClientBulletinStore;
 import org.martus.client.core.TransferableAttachmentList;
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
@@ -135,10 +136,11 @@ abstract public class UiAttachmentComponent extends JPanel
 		return lastAttachmentSaveDirectory;
 	}
 
-	class SaveHandler implements ActionListener
+	static class SaveHandler implements ActionListener
 	{
-		public SaveHandler(AttachmentProxy proxyToUse)
+		public SaveHandler(UiMainWindow mainWindowToUse, AttachmentProxy proxyToUse)
 		{
+			mainWindow = mainWindowToUse;
 			proxy = proxyToUse;
 		}
 		
@@ -163,8 +165,9 @@ abstract public class UiAttachmentComponent extends JPanel
 			mainWindow.setWaitingCursor();
 			try
 			{
-				ReadableDatabase db = mainWindow.getApp().getStore().getDatabase();
-				BulletinLoader.extractAttachmentToFile(db, proxy, getSecurity(), outputFile);
+				ClientBulletinStore store = mainWindow.getApp().getStore();
+				ReadableDatabase db = store.getDatabase();
+				BulletinLoader.extractAttachmentToFile(db, proxy, store.getSignatureVerifier(), outputFile);
 			}
 			catch(Exception e)
 			{
@@ -174,6 +177,7 @@ abstract public class UiAttachmentComponent extends JPanel
 			mainWindow.resetCursor();
 		}
 
+		UiMainWindow mainWindow;
 		AttachmentProxy proxy;
 	}
 
@@ -430,7 +434,7 @@ abstract public class UiAttachmentComponent extends JPanel
 			{
 				viewButton.addActionListener(new ViewHandler(panel));
 				hideButton.addActionListener(new HideHandler(panel));
-				saveButton.addActionListener(new SaveHandler(proxy));
+				saveButton.addActionListener(new SaveHandler(mainWindow, proxy));
 			}
 			else
 			{
