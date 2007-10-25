@@ -33,13 +33,7 @@ import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.dnd.DnDConstants;
-import java.awt.dnd.DragGestureEvent;
-import java.awt.dnd.DragGestureListener;
 import java.awt.dnd.DragSource;
-import java.awt.dnd.DragSourceDragEvent;
-import java.awt.dnd.DragSourceDropEvent;
-import java.awt.dnd.DragSourceEvent;
-import java.awt.dnd.DragSourceListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
@@ -53,7 +47,6 @@ import javax.swing.JPanel;
 import javax.swing.UIManager;
 import javax.swing.border.Border;
 
-import org.martus.client.core.TransferableAttachmentList;
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.tablemodels.AttachmentTableModel;
@@ -123,44 +116,6 @@ abstract public class UiAttachmentComponent extends JPanel
 	}
 
 
-	class AttachmentDragHandler implements DragGestureListener, DragSourceListener
-	{
-		public AttachmentDragHandler(AttachmentProxy proxyToUse)
-		{
-			proxy = proxyToUse;
-		}
-		
-		public void dragGestureRecognized(DragGestureEvent dge)
-		{
-			MartusLogger.log("Dragging: " + proxy.getLabel());
-			AttachmentProxy[] attachments = new AttachmentProxy[] {proxy};
-			TransferableAttachmentList dragable = new TransferableAttachmentList(mainWindow.getStore().getDatabase(), mainWindow.getApp().getSecurity(), attachments);
-			dge.startDrag(DragSource.DefaultCopyDrop, dragable, this);
-		}
-	
-		public void dragEnter(DragSourceDragEvent dsde)
-		{
-		}
-	
-		public void dragOver(DragSourceDragEvent dsde)
-		{
-		}
-	
-		public void dropActionChanged(DragSourceDragEvent dsde)
-		{
-		}
-	
-		public void dragDropEnd(DragSourceDropEvent dsde)
-		{
-		}
-	
-		public void dragExit(DragSourceEvent dse)
-		{
-		}
-		
-		AttachmentProxy proxy;
-	}
-	
 	class ViewSingleAttachmentPanel extends JPanel
 	{
 		public ViewSingleAttachmentPanel(AttachmentProxy proxyToUse)
@@ -174,7 +129,7 @@ abstract public class UiAttachmentComponent extends JPanel
 
 			DragSource dragSource = DragSource.getDefaultDragSource();
 			dragSource.createDefaultDragGestureRecognizer(this, DnDConstants.ACTION_COPY_OR_MOVE, 
-					new AttachmentDragHandler(proxy));
+					new AttachmentDragHandler(mainWindow, proxy));
 		}
 
 		private void addHeader()
