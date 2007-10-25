@@ -26,14 +26,19 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.swingui.fields.attachments;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Container;
 
+import javax.swing.BorderFactory;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.tablemodels.AttachmentTableModel;
+import org.martus.common.MartusLogger;
 import org.martus.common.bulletin.AttachmentProxy;
 
-public class AbstractAttachmentPanel extends JPanel
+public abstract class AbstractAttachmentPanel extends JPanel
 {
 	public AbstractAttachmentPanel(UiMainWindow mainWindowToUse, AttachmentTableModel modelToUse, AttachmentProxy proxyToUse)
 	{
@@ -41,14 +46,69 @@ public class AbstractAttachmentPanel extends JPanel
 		mainWindow = mainWindowToUse;
 		model = modelToUse;
 		proxy = proxyToUse;
+		
+		setBorder(BorderFactory.createLineBorder(Color.BLACK));
+
+		summaryRow = createSummaryRow();
+		add(summaryRow, BorderLayout.BEFORE_FIRST_LINE);
 	}
 
+	abstract AbstractAttachmentRow createSummaryRow();
+	
 	public AttachmentProxy getAttachmentProxy()
 	{
 		return proxy;
 	}
 
+	public void showImageInline()
+	{
+		if(!addInlineImage())
+			return;
+		isImageInline = true;
+		summaryRow.showHideButton();
+		validateParent();
+		repaint();
+	}
+
+	private void validateParent()
+	{
+		Container top = getTopLevelAncestor();
+		if(top != null)
+			top.validate();
+	}
+
+	public void hideImage()
+	{
+		isImageInline = false;
+		JLabel emptySpace = new JLabel();
+		emptySpace.setVisible(false);
+		add(emptySpace, BorderLayout.CENTER);
+		summaryRow.showViewButton();
+		validateParent();
+		repaint();
+	}
+
+	private boolean addInlineImage()
+	{
+		try
+		{
+			InlineAttachmentComponent image = new InlineAttachmentComponent(mainWindow.getStore(), proxy);
+			image.validate();
+			if(!image.isValid())
+				return false;
+			add(image, BorderLayout.CENTER);
+			return true;
+		} 
+		catch (Exception e)
+		{
+			MartusLogger.logException(e);
+			return false;
+		}
+	}
+
 	protected UiMainWindow mainWindow;
 	protected AttachmentTableModel model;
 	protected AttachmentProxy proxy;
+	protected boolean isImageInline;
+	protected AbstractAttachmentRow summaryRow;
 }
