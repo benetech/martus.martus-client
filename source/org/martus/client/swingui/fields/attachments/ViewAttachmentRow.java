@@ -42,8 +42,10 @@ import com.jhlabs.awt.GridLayoutPlus;
 
 class ViewAttachmentRow extends JPanel
 {
-	public ViewAttachmentRow(Color backgroundColor, MiniLocalization localization)
+	public ViewAttachmentRow(Color backgroundColor, MiniLocalization localizationToUse)
 	{
+		localization = localizationToUse;
+		
 		setBackground(backgroundColor);
 		GridLayoutPlus layout = new GridLayoutPlus(1, 0, 0, 0, 0, 0);
 		layout.setFill(Alignment.FILL_VERTICAL);
@@ -59,6 +61,11 @@ class ViewAttachmentRow extends JPanel
 		
 		savePanel = createMultiButtonPanel();
 		savePanel.add(saveButton, saveButton.getText());
+	}
+	
+	public MiniLocalization getLocalization()
+	{
+		return localization;
 	}
 
 	private MultiButtonPanel createMultiButtonPanel()
@@ -105,6 +112,7 @@ class ViewAttachmentRow extends JPanel
 		return cell;
 	}
 	
+	MiniLocalization localization;
 	MultiButtonPanel viewHidePanel;
 	MultiButtonPanel savePanel;
 	UiButton viewButton;

@@ -38,12 +38,12 @@ import java.io.IOException;
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.UIManager;
 
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.tablemodels.AttachmentTableModel;
 import org.martus.common.MartusLogger;
+import org.martus.common.MiniLocalization;
 import org.martus.common.bulletin.AttachmentProxy;
 import org.martus.common.bulletin.BulletinLoader;
 import org.martus.common.crypto.MartusCrypto;
@@ -85,7 +85,7 @@ abstract public class UiAttachmentComponent extends JPanel
 		removeAll();
 		JPanel headerContainer = new JPanel(new BorderLayout());
 		headerContainer.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-		headerContainer.add(new ViewAttachmentHeaderRow());
+		headerContainer.add(new ViewAttachmentHeaderRow(getLocalization()));
 		add(headerContainer);
 		for(int row = 0; row < model.getRowCount(); ++row)
 		{
@@ -124,7 +124,7 @@ abstract public class UiAttachmentComponent extends JPanel
 
 		private void addHeader()
 		{
-			header = new ViewAttachmentSummaryRow(this);
+			header = new ViewAttachmentSummaryRow(this, getLocalization());
 			add(header, BorderLayout.BEFORE_FIRST_LINE);
 		}
 		
@@ -184,23 +184,11 @@ abstract public class UiAttachmentComponent extends JPanel
 		ViewAttachmentSummaryRow header;
 	}
 	
-	class ViewAttachmentHeaderRow extends ViewAttachmentRow
-	{
-		public ViewAttachmentHeaderRow()
-		{
-			super(UIManager.getColor("TableHeader.background"), getLocalization());
-			setForeground(UIManager.getColor("TableHeader.foreground"));
-			String labelHeader = getLocalization().getButtonLabel("attachmentLabel");
-			String sizeHeader = getLocalization().getButtonLabel("attachmentSize");
-			createCells(labelHeader, sizeHeader);
-		}
-	}
-	
 	class ViewAttachmentSummaryRow extends ViewAttachmentRow
 	{
-		public ViewAttachmentSummaryRow(ViewSingleAttachmentPanel panel)
+		public ViewAttachmentSummaryRow(ViewSingleAttachmentPanel panel, MiniLocalization localizationToUse)
 		{
-			super(Color.WHITE, getLocalization());
+			super(Color.WHITE, localizationToUse);
 			AttachmentProxy proxy = panel.getAttachmentProxy();
 
 			viewHidePanel.showCard(viewButton.getText());
