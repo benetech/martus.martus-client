@@ -53,7 +53,6 @@ import javax.swing.JPanel;
 import javax.swing.UIManager;
 import javax.swing.border.Border;
 
-import org.martus.client.bulletinstore.ClientBulletinStore;
 import org.martus.client.core.TransferableAttachmentList;
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
@@ -71,7 +70,6 @@ import org.martus.common.packet.Packet.SignatureVerificationException;
 import org.martus.common.packet.Packet.WrongPacketTypeException;
 import org.martus.swing.UiButton;
 import org.martus.swing.UiLabel;
-import org.martus.swing.Utilities;
 import org.martus.util.StreamableBase64.InvalidBase64Exception;
 
 import com.jhlabs.awt.Alignment;
@@ -468,58 +466,6 @@ abstract public class UiAttachmentComponent extends JPanel
 		ViewSingleAttachmentPanel panel;
 	}
 
-	static class ViewHandler implements ActionListener
-	{
-		public ViewHandler(UiMainWindow mainWindowToUse, ViewSingleAttachmentPanel panelToUse)
-		{
-			mainWindow = mainWindowToUse;
-			panel = panelToUse;
-		}
-		
-		public void actionPerformed(ActionEvent ae)
-		{
-			panel.showImageInline();
-			if(panel.isImageInline)
-				return;
-			
-			if(!Utilities.isMSWindows())
-			{
-				mainWindow.notifyDlg("ViewAttachmentNotAvailable");
-				return;
-			}
-			
-			AttachmentProxy proxy = panel.getAttachmentProxy();
-			String author = proxy.getUniversalId().getAccountId();
-			if(!author.equals(mainWindow.getApp().getAccountId()))
-			{
-				if(!mainWindow.confirmDlg("NotYourBulletinViewAttachmentAnyways"))
-					return;
-			}
-			mainWindow.setWaitingCursor();
-			try
-			{
-				ClientBulletinStore store = mainWindow.getApp().getStore();
-				ReadableDatabase db = store.getDatabase();
-				MartusCrypto security = store.getSignatureVerifier();
-				File temp = extractAttachmentToTempFile(db, proxy, security);
-
-				Runtime runtimeViewer = Runtime.getRuntime();
-				String tempFileFullPathName = temp.getPath();
-				Process processView=runtimeViewer.exec("rundll32"+" "+"url.dll,FileProtocolHandler"+" "+tempFileFullPathName);
-				processView.waitFor();
-			}
-			catch(Exception e)
-			{
-				mainWindow.notifyDlg("UnableToViewAttachment");
-				System.out.println("Unable to view file :" + e);
-			}
-			mainWindow.resetCursor();
-		}
-		
-		UiMainWindow mainWindow;
-		ViewSingleAttachmentPanel panel;
-	}
-	
 	private static File lastAttachmentSaveDirectory;
 
 	UiMainWindow mainWindow;
