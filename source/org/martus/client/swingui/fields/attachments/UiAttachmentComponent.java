@@ -27,25 +27,14 @@ package org.martus.client.swingui.fields.attachments;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.io.File;
-import java.io.IOException;
 
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 
-import org.martus.client.core.BulletinXmlExporter;
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.tablemodels.AttachmentTableModel;
 import org.martus.common.bulletin.AttachmentProxy;
-import org.martus.common.bulletin.BulletinLoader;
-import org.martus.common.crypto.MartusCrypto;
-import org.martus.common.crypto.MartusCrypto.CryptoException;
-import org.martus.common.database.ReadableDatabase;
-import org.martus.common.packet.Packet.InvalidPacketException;
-import org.martus.common.packet.Packet.SignatureVerificationException;
-import org.martus.common.packet.Packet.WrongPacketTypeException;
-import org.martus.util.StreamableBase64.InvalidBase64Exception;
 
 import com.jhlabs.awt.GridLayoutPlus;
 
@@ -91,16 +80,6 @@ abstract public class UiAttachmentComponent extends JPanel
 		updateTable();
 	}
 
-
-	static File extractAttachmentToTempFile(ReadableDatabase db, AttachmentProxy proxy, MartusCrypto security) throws IOException, InvalidBase64Exception, InvalidPacketException, SignatureVerificationException, WrongPacketTypeException, CryptoException
-	{
-		String fileName = proxy.getLabel();
-		File temp = File.createTempFile(BulletinXmlExporter.extractFileNameOnly(fileName), BulletinXmlExporter.extractExtentionOnly(fileName));
-		temp.deleteOnExit();
-
-		BulletinLoader.extractAttachmentToFile(db, proxy, security, temp);
-		return temp;
-	}
 
 	UiMainWindow mainWindow;
 	AttachmentTableModel model;

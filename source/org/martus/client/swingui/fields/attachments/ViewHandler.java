@@ -28,13 +28,21 @@ package org.martus.client.swingui.fields.attachments;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.io.IOException;
 
 import org.martus.client.bulletinstore.ClientBulletinStore;
+import org.martus.client.core.BulletinXmlExporter;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.common.bulletin.AttachmentProxy;
+import org.martus.common.bulletin.BulletinLoader;
 import org.martus.common.crypto.MartusCrypto;
+import org.martus.common.crypto.MartusCrypto.CryptoException;
 import org.martus.common.database.ReadableDatabase;
+import org.martus.common.packet.Packet.InvalidPacketException;
+import org.martus.common.packet.Packet.SignatureVerificationException;
+import org.martus.common.packet.Packet.WrongPacketTypeException;
 import org.martus.swing.Utilities;
+import org.martus.util.StreamableBase64.InvalidBase64Exception;
 
 class ViewHandler implements ActionListener
 {
@@ -69,7 +77,7 @@ class ViewHandler implements ActionListener
 			ClientBulletinStore store = mainWindow.getApp().getStore();
 			ReadableDatabase db = store.getDatabase();
 			MartusCrypto security = store.getSignatureVerifier();
-			File temp = UiAttachmentComponent.extractAttachmentToTempFile(db, proxy, security);
+			File temp = extractAttachmentToTempFile(db, proxy, security);
 
 			Runtime runtimeViewer = Runtime.getRuntime();
 			String tempFileFullPathName = temp.getPath();
@@ -84,6 +92,16 @@ class ViewHandler implements ActionListener
 		mainWindow.resetCursor();
 	}
 	
+	static File extractAttachmentToTempFile(ReadableDatabase db, AttachmentProxy proxy, MartusCrypto security) throws IOException, InvalidBase64Exception, InvalidPacketException, SignatureVerificationException, WrongPacketTypeException, CryptoException
+	{
+		String fileName = proxy.getLabel();
+		File temp = File.createTempFile(BulletinXmlExporter.extractFileNameOnly(fileName), BulletinXmlExporter.extractExtentionOnly(fileName));
+		temp.deleteOnExit();
+	
+		BulletinLoader.extractAttachmentToFile(db, proxy, security, temp);
+		return temp;
+	}
+
 	UiMainWindow mainWindow;
 	ViewSingleAttachmentPanel panel;
 }

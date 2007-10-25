@@ -45,7 +45,7 @@ class InlineAttachmentComponent extends UiLabel
 	{
 		ReadableDatabase db = store.getDatabase();
 		MartusCrypto security = store.getSignatureVerifier();
-		File tempFile = UiAttachmentComponent.extractAttachmentToTempFile(db, proxy, security);
+		File tempFile = ViewHandler.extractAttachmentToTempFile(db, proxy, security);
 		Toolkit toolkit = Toolkit.getDefaultToolkit();
 		Image image = toolkit.getImage(tempFile.getAbsolutePath());
 		ImageIcon icon = new ImageIcon(image);
