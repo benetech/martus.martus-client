@@ -224,17 +224,17 @@ abstract public class UiAttachmentComponent extends JPanel
 
 			setBorder(BorderFactory.createLineBorder(Color.BLACK));
 
-			addSummaryRow();
+			addHeader();
 
 			DragSource dragSource = DragSource.getDefaultDragSource();
 			dragSource.createDefaultDragGestureRecognizer(this, DnDConstants.ACTION_COPY_OR_MOVE, 
 					new AttachmentDragHandler(proxy));
 		}
 
-		private void addSummaryRow()
+		private void addHeader()
 		{
-			summaryRow = new ViewAttachmentSummaryRow(this);
-			add(summaryRow, BorderLayout.BEFORE_FIRST_LINE);
+			header = new ViewAttachmentSummaryRow(this);
+			add(header, BorderLayout.BEFORE_FIRST_LINE);
 		}
 		
 		public AttachmentProxy getAttachmentProxy()
@@ -247,7 +247,7 @@ abstract public class UiAttachmentComponent extends JPanel
 			if(!addInlineImage())
 				return;
 			isImageInline = true;
-			summaryRow.showHideButton();
+			header.showHideButton();
 			validateParent();
 			repaint();
 		}
@@ -265,7 +265,7 @@ abstract public class UiAttachmentComponent extends JPanel
 			JLabel emptySpace = new JLabel();
 			emptySpace.setVisible(false);
 			add(emptySpace, BorderLayout.CENTER);
-			summaryRow.showViewButton();
+			header.showViewButton();
 			validateParent();
 			repaint();
 		}
@@ -290,14 +290,16 @@ abstract public class UiAttachmentComponent extends JPanel
 		
 		AttachmentProxy proxy;
 		boolean isImageInline;
-		ViewAttachmentSummaryRow summaryRow;
+		ViewAttachmentSummaryRow header;
 	}
 	
 	class InlineAttachmentComponent extends UiLabel
 	{
 		public InlineAttachmentComponent(AttachmentProxy proxy) throws Exception
 		{
-			File tempFile = extractAttachmentToTempFile(proxy);
+			ReadableDatabase db = mainWindow.getApp().getStore().getDatabase();
+			MartusCrypto security = getSecurity();
+			File tempFile = extractAttachmentToTempFile(db, proxy, security);
 			Toolkit toolkit = Toolkit.getDefaultToolkit();
 			Image image = toolkit.getImage(tempFile.getAbsolutePath());
 			ImageIcon icon = new ImageIcon(image);
@@ -462,14 +464,13 @@ abstract public class UiAttachmentComponent extends JPanel
 	}
 	
 
-	File extractAttachmentToTempFile(AttachmentProxy proxy) throws IOException, InvalidBase64Exception, InvalidPacketException, SignatureVerificationException, WrongPacketTypeException, CryptoException
+	static File extractAttachmentToTempFile(ReadableDatabase db, AttachmentProxy proxy, MartusCrypto security) throws IOException, InvalidBase64Exception, InvalidPacketException, SignatureVerificationException, WrongPacketTypeException, CryptoException
 	{
 		String fileName = proxy.getLabel();
 		File temp = File.createTempFile(extractFileNameOnly(fileName), extractExtentionOnly(fileName));
 		temp.deleteOnExit();
 
-		ReadableDatabase db = mainWindow.getApp().getStore().getDatabase();
-		BulletinLoader.extractAttachmentToFile(db, proxy, getSecurity(), temp);
+		BulletinLoader.extractAttachmentToFile(db, proxy, security, temp);
 		return temp;
 	}
 
@@ -538,7 +539,9 @@ abstract public class UiAttachmentComponent extends JPanel
 			mainWindow.setWaitingCursor();
 			try
 			{
-				File temp = extractAttachmentToTempFile(proxy);
+				ReadableDatabase db = mainWindow.getApp().getStore().getDatabase();
+				MartusCrypto security = getSecurity();
+				File temp = extractAttachmentToTempFile(db, proxy, security);
 
 				Runtime runtimeViewer = Runtime.getRuntime();
 				String tempFileFullPathName = temp.getPath();
