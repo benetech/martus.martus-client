@@ -24,7 +24,7 @@ Boston, MA 02111-1307, USA.
 
 */
 
-package org.martus.client.swingui.fields;
+package org.martus.client.swingui.fields.attachments;
 
 import org.martus.client.swingui.UiMainWindow;
 

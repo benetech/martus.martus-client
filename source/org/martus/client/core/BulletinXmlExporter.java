@@ -32,7 +32,7 @@ import java.io.Writer;
 import java.util.Vector;
 
 import org.martus.client.swingui.dialogs.UiImportExportProgressMeterDlg;
-import org.martus.client.swingui.fields.UiAttachmentViewer;
+import org.martus.client.swingui.fields.attachments.UiAttachmentViewer;
 import org.martus.common.MartusLogger;
 import org.martus.common.MartusXml;
 import org.martus.common.MiniLocalization;

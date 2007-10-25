@@ -29,8 +29,8 @@ package org.martus.client.swingui.bulletincomponent;
 import javax.swing.JComponent;
 
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.client.swingui.fields.UiAttachmentViewer;
 import org.martus.client.swingui.fields.UiReadOnlyFieldCreator;
+import org.martus.client.swingui.fields.attachments.UiAttachmentViewer;
 import org.martus.common.bulletin.AttachmentProxy;
 
 public class UiBulletinComponentViewSection extends UiBulletinComponentDataSection

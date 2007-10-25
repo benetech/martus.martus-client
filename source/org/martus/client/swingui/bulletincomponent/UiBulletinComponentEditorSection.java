@@ -32,9 +32,9 @@ import javax.swing.JComponent;
 
 import org.martus.client.core.LanguageChangeListener;
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.client.swingui.fields.UiAttachmentEditor;
 import org.martus.client.swingui.fields.UiEditableFieldCreator;
 import org.martus.client.swingui.fields.UiField;
+import org.martus.client.swingui.fields.attachments.UiAttachmentEditor;
 import org.martus.common.bulletin.AttachmentProxy;
 import org.martus.common.fieldspec.FieldSpec;
 
