@@ -36,7 +36,7 @@ import org.martus.common.packet.UniversalId;
 
 class ViewAttachmentSummaryRow extends AbstractAttachmentRow
 {
-	public ViewAttachmentSummaryRow(UiMainWindow mainWindowToUse, AttachmentTableModel modelToUse, ViewAttachmentRow panel)
+	public ViewAttachmentSummaryRow(UiMainWindow mainWindowToUse, AttachmentTableModel modelToUse, ViewAttachmentPanel panel)
 	{
 		super(Color.WHITE, mainWindowToUse.getLocalization());
 		model = modelToUse;

@@ -40,9 +40,9 @@ import org.martus.client.swingui.tablemodels.AttachmentTableModel;
 import org.martus.common.MartusLogger;
 import org.martus.common.bulletin.AttachmentProxy;
 
-class ViewAttachmentRow extends JPanel
+class ViewAttachmentPanel extends JPanel
 {
-	public ViewAttachmentRow(UiMainWindow mainWindowToUse, AttachmentTableModel modelToUse, AttachmentProxy proxyToUse)
+	public ViewAttachmentPanel(UiMainWindow mainWindowToUse, AttachmentTableModel modelToUse, AttachmentProxy proxyToUse)
 	{
 		super(new BorderLayout());
 		mainWindow = mainWindowToUse;
