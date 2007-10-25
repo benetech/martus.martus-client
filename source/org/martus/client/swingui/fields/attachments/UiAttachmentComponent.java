@@ -30,8 +30,6 @@ import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Container;
 import java.awt.Dimension;
-import java.awt.Image;
-import java.awt.Toolkit;
 import java.awt.dnd.DnDConstants;
 import java.awt.dnd.DragSource;
 import java.awt.event.ActionEvent;
@@ -40,7 +38,6 @@ import java.io.File;
 import java.io.IOException;
 
 import javax.swing.BorderFactory;
-import javax.swing.ImageIcon;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -175,7 +172,7 @@ abstract public class UiAttachmentComponent extends JPanel
 		{
 			try
 			{
-				InlineAttachmentComponent image = new InlineAttachmentComponent(proxy);
+				InlineAttachmentComponent image = new InlineAttachmentComponent(mainWindow.getStore(), proxy);
 				image.validate();
 				if(!image.isValid())
 					return false;
@@ -192,26 +189,6 @@ abstract public class UiAttachmentComponent extends JPanel
 		AttachmentProxy proxy;
 		boolean isImageInline;
 		ViewAttachmentSummaryRow header;
-	}
-	
-	class InlineAttachmentComponent extends UiLabel
-	{
-		public InlineAttachmentComponent(AttachmentProxy proxy) throws Exception
-		{
-			ReadableDatabase db = mainWindow.getApp().getStore().getDatabase();
-			MartusCrypto security = getSecurity();
-			File tempFile = extractAttachmentToTempFile(db, proxy, security);
-			Toolkit toolkit = Toolkit.getDefaultToolkit();
-			Image image = toolkit.getImage(tempFile.getAbsolutePath());
-			ImageIcon icon = new ImageIcon(image);
-			setIcon(icon);
-			setBorder(BorderFactory.createLineBorder(Color.BLACK));
-		}
-		
-		public boolean isValid()
-		{
-			return (getIcon().getIconHeight() > 0);
-		}
 	}
 	
 	class MultiButtonPanel extends JPanel
