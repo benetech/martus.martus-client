@@ -29,7 +29,6 @@ import java.awt.Color;
 
 import org.martus.client.bulletinstore.ClientBulletinStore;
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.client.swingui.fields.attachments.UiAttachmentComponent.ViewSingleAttachmentPanel;
 import org.martus.client.swingui.tablemodels.AttachmentTableModel;
 import org.martus.common.bulletin.AttachmentProxy;
 import org.martus.common.database.DatabaseKey;

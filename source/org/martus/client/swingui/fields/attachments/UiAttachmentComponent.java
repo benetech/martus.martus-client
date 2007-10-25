@@ -27,20 +27,15 @@ package org.martus.client.swingui.fields.attachments;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Container;
-import java.awt.dnd.DnDConstants;
-import java.awt.dnd.DragSource;
 import java.io.File;
 import java.io.IOException;
 
 import javax.swing.BorderFactory;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.tablemodels.AttachmentTableModel;
-import org.martus.common.MartusLogger;
 import org.martus.common.bulletin.AttachmentProxy;
 import org.martus.common.bulletin.BulletinLoader;
 import org.martus.common.crypto.MartusCrypto;
@@ -84,7 +79,7 @@ abstract public class UiAttachmentComponent extends JPanel
 		add(headerContainer);
 		for(int row = 0; row < model.getRowCount(); ++row)
 		{
-			add(new ViewSingleAttachmentPanel(model.getAttachment(row)));
+			add(new ViewSingleAttachmentPanel(mainWindow, model, model.getAttachment(row)));
 		}
 	}
 	
@@ -101,84 +96,6 @@ abstract public class UiAttachmentComponent extends JPanel
 	}
 
 
-	class ViewSingleAttachmentPanel extends JPanel
-	{
-		public ViewSingleAttachmentPanel(AttachmentProxy proxyToUse)
-		{
-			super(new BorderLayout());
-			proxy = proxyToUse;
-
-			setBorder(BorderFactory.createLineBorder(Color.BLACK));
-
-			addHeader();
-
-			DragSource dragSource = DragSource.getDefaultDragSource();
-			dragSource.createDefaultDragGestureRecognizer(this, DnDConstants.ACTION_COPY_OR_MOVE, 
-					new AttachmentDragHandler(mainWindow.getStore(), proxy));
-		}
-
-		private void addHeader()
-		{
-			header = new ViewAttachmentSummaryRow(mainWindow, model, this);
-			add(header, BorderLayout.BEFORE_FIRST_LINE);
-		}
-		
-		public AttachmentProxy getAttachmentProxy()
-		{
-			return proxy;
-		}
-		
-		public void showImageInline()
-		{
-			if(!addInlineImage())
-				return;
-			isImageInline = true;
-			header.showHideButton();
-			validateParent();
-			repaint();
-		}
-
-		private void validateParent()
-		{
-			Container top = getTopLevelAncestor();
-			if(top != null)
-				top.validate();
-		}
-		
-		public void hideImage()
-		{
-			isImageInline = false;
-			JLabel emptySpace = new JLabel();
-			emptySpace.setVisible(false);
-			add(emptySpace, BorderLayout.CENTER);
-			header.showViewButton();
-			validateParent();
-			repaint();
-		}
-
-		private boolean addInlineImage()
-		{
-			try
-			{
-				InlineAttachmentComponent image = new InlineAttachmentComponent(mainWindow.getStore(), proxy);
-				image.validate();
-				if(!image.isValid())
-					return false;
-				add(image, BorderLayout.CENTER);
-				return true;
-			} 
-			catch (Exception e)
-			{
-				MartusLogger.logException(e);
-				return false;
-			}
-		}
-		
-		AttachmentProxy proxy;
-		boolean isImageInline;
-		ViewAttachmentSummaryRow header;
-	}
-	
 	static File extractAttachmentToTempFile(ReadableDatabase db, AttachmentProxy proxy, MartusCrypto security) throws IOException, InvalidBase64Exception, InvalidPacketException, SignatureVerificationException, WrongPacketTypeException, CryptoException
 	{
 		String fileName = proxy.getLabel();

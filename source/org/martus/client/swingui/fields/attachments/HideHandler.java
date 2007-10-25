@@ -28,7 +28,6 @@ package org.martus.client.swingui.fields.attachments;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import org.martus.client.swingui.fields.attachments.UiAttachmentComponent.ViewSingleAttachmentPanel;
 
 class HideHandler implements ActionListener
 {

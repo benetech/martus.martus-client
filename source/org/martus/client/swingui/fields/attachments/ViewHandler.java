@@ -31,7 +31,6 @@ import java.io.File;
 
 import org.martus.client.bulletinstore.ClientBulletinStore;
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.client.swingui.fields.attachments.UiAttachmentComponent.ViewSingleAttachmentPanel;
 import org.martus.common.bulletin.AttachmentProxy;
 import org.martus.common.crypto.MartusCrypto;
 import org.martus.common.database.ReadableDatabase;
