@@ -64,16 +64,6 @@ class ViewAttachmentSummaryRow extends AbstractAttachmentRow
 		createCells(labelColumnText, sizeColumnText);
 	}
 
-	public void showViewButton()
-	{
-		viewHidePanel.showCard(viewButton.getText());
-	}
-	
-	public void showHideButton()
-	{
-		viewHidePanel.showCard(hideButton.getText());
-	}
-	
 	boolean isAttachmentAvailable(AttachmentProxy proxy)
 	{
 		UniversalId uid = proxy.getUniversalId();

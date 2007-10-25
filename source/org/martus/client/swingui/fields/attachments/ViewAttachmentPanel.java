@@ -33,40 +33,31 @@ import java.awt.dnd.DragSource;
 
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.tablemodels.AttachmentTableModel;
 import org.martus.common.MartusLogger;
 import org.martus.common.bulletin.AttachmentProxy;
 
-class ViewAttachmentPanel extends JPanel
+class ViewAttachmentPanel extends AbstractAttachmentPanel
 {
 	public ViewAttachmentPanel(UiMainWindow mainWindowToUse, AttachmentTableModel modelToUse, AttachmentProxy proxyToUse)
 	{
-		super(new BorderLayout());
-		mainWindow = mainWindowToUse;
-		model = modelToUse;
-		proxy = proxyToUse;
+		super(mainWindowToUse, modelToUse, proxyToUse);
 
 		setBorder(BorderFactory.createLineBorder(Color.BLACK));
 
-		addHeader();
+		addSummaryRow();
 
 		DragSource dragSource = DragSource.getDefaultDragSource();
 		dragSource.createDefaultDragGestureRecognizer(this, DnDConstants.ACTION_COPY_OR_MOVE, 
 				new AttachmentDragHandler(mainWindow.getStore(), proxy));
 	}
 
-	private void addHeader()
+	private void addSummaryRow()
 	{
-		header = new ViewAttachmentSummaryRow(mainWindow, model, this);
-		add(header, BorderLayout.BEFORE_FIRST_LINE);
-	}
-	
-	public AttachmentProxy getAttachmentProxy()
-	{
-		return proxy;
+		summaryRow = new ViewAttachmentSummaryRow(mainWindow, model, this);
+		add(summaryRow, BorderLayout.BEFORE_FIRST_LINE);
 	}
 	
 	public void showImageInline()
@@ -74,7 +65,7 @@ class ViewAttachmentPanel extends JPanel
 		if(!addInlineImage())
 			return;
 		isImageInline = true;
-		header.showHideButton();
+		summaryRow.showHideButton();
 		validateParent();
 		repaint();
 	}
@@ -92,7 +83,7 @@ class ViewAttachmentPanel extends JPanel
 		JLabel emptySpace = new JLabel();
 		emptySpace.setVisible(false);
 		add(emptySpace, BorderLayout.CENTER);
-		header.showViewButton();
+		summaryRow.showViewButton();
 		validateParent();
 		repaint();
 	}
@@ -115,9 +106,6 @@ class ViewAttachmentPanel extends JPanel
 		}
 	}
 	
-	UiMainWindow mainWindow;
-	AttachmentTableModel model;
-	AttachmentProxy proxy;
 	boolean isImageInline;
-	ViewAttachmentSummaryRow header;
+	ViewAttachmentSummaryRow summaryRow;
 }

@@ -112,6 +112,16 @@ abstract class AbstractAttachmentRow extends JPanel
 		return cell;
 	}
 	
+	public void showViewButton()
+	{
+		viewHidePanel.showCard(viewButton.getText());
+	}
+
+	public void showHideButton()
+	{
+		viewHidePanel.showCard(hideButton.getText());
+	}
+
 	MiniLocalization localization;
 	MultiButtonPanel viewHidePanel;
 	MultiButtonPanel savePanel;
