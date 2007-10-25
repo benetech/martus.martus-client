@@ -30,8 +30,6 @@ import java.awt.Color;
 import java.awt.Container;
 import java.awt.dnd.DnDConstants;
 import java.awt.dnd.DragSource;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
 
@@ -39,7 +37,6 @@ import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import org.martus.client.bulletinstore.ClientBulletinStore;
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.tablemodels.AttachmentTableModel;
@@ -48,9 +45,7 @@ import org.martus.common.bulletin.AttachmentProxy;
 import org.martus.common.bulletin.BulletinLoader;
 import org.martus.common.crypto.MartusCrypto;
 import org.martus.common.crypto.MartusCrypto.CryptoException;
-import org.martus.common.database.DatabaseKey;
 import org.martus.common.database.ReadableDatabase;
-import org.martus.common.packet.UniversalId;
 import org.martus.common.packet.Packet.InvalidPacketException;
 import org.martus.common.packet.Packet.SignatureVerificationException;
 import org.martus.common.packet.Packet.WrongPacketTypeException;
@@ -124,7 +119,7 @@ abstract public class UiAttachmentComponent extends JPanel
 
 		private void addHeader()
 		{
-			header = new ViewAttachmentSummaryRow(mainWindow, this);
+			header = new ViewAttachmentSummaryRow(mainWindow, model, this);
 			add(header, BorderLayout.BEFORE_FIRST_LINE);
 		}
 		
@@ -184,56 +179,6 @@ abstract public class UiAttachmentComponent extends JPanel
 		ViewAttachmentSummaryRow header;
 	}
 	
-	class ViewAttachmentSummaryRow extends ViewAttachmentRow
-	{
-		public ViewAttachmentSummaryRow(UiMainWindow mainWindowToUse, ViewSingleAttachmentPanel panel)
-		{
-			super(Color.WHITE, mainWindowToUse.getLocalization());
-			AttachmentProxy proxy = panel.getAttachmentProxy();
-			
-			store = mainWindowToUse.getStore();
-
-			viewHidePanel.showCard(viewButton.getText());
-			savePanel.showCard(saveButton.getText());
-			if(isAttachmentAvailable(proxy))
-			{
-				viewButton.addActionListener(new ViewHandler(mainWindowToUse, panel));
-				hideButton.addActionListener(new HideHandler(panel));
-				saveButton.addActionListener(new SaveHandler(mainWindowToUse, proxy));
-			}
-			else
-			{
-				viewButton.setEnabled(false);
-				hideButton.setEnabled(false);
-				saveButton.setEnabled(false);
-			}
-
-			String labelColumnText = proxy.getLabel();
-			String sizeColumnText = model.getSize(proxy);
-			createCells(labelColumnText, sizeColumnText);
-		}
-
-		public void showViewButton()
-		{
-			viewHidePanel.showCard(viewButton.getText());
-		}
-		
-		public void showHideButton()
-		{
-			viewHidePanel.showCard(hideButton.getText());
-		}
-		
-		boolean isAttachmentAvailable(AttachmentProxy proxy)
-		{
-			UniversalId uid = proxy.getUniversalId();
-			DatabaseKey key = DatabaseKey.createLegacyKey(uid);
-			return store.doesBulletinRevisionExist(key);
-		}
-		
-		ClientBulletinStore store;
-	}
-	
-
 	static File extractAttachmentToTempFile(ReadableDatabase db, AttachmentProxy proxy, MartusCrypto security) throws IOException, InvalidBase64Exception, InvalidPacketException, SignatureVerificationException, WrongPacketTypeException, CryptoException
 	{
 		String fileName = proxy.getLabel();
@@ -263,21 +208,6 @@ abstract public class UiAttachmentComponent extends JPanel
 		if(index == -1)
 			return null;
 		return fullName.substring(index, fullName.length());
-	}
-
-	class HideHandler implements ActionListener
-	{
-		public HideHandler(ViewSingleAttachmentPanel panelToUse)
-		{
-			panel = panelToUse;
-		}
-		
-		public void actionPerformed(ActionEvent ae)
-		{
-			panel.hideImage();
-		}
-
-		ViewSingleAttachmentPanel panel;
 	}
 
 	UiMainWindow mainWindow;
