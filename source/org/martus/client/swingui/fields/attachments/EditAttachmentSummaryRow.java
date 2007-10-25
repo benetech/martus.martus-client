@@ -25,28 +25,27 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.fields.attachments;
 
-import java.awt.dnd.DnDConstants;
-import java.awt.dnd.DragSource;
+import java.awt.Color;
 
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.client.swingui.tablemodels.AttachmentTableModel;
 import org.martus.common.bulletin.AttachmentProxy;
 
-class ViewAttachmentPanel extends AbstractAttachmentPanel
+public class EditAttachmentSummaryRow extends AbstractAttachmentRow
 {
-	public ViewAttachmentPanel(UiMainWindow mainWindowToUse, AttachmentTableModel modelToUse, AttachmentProxy proxyToUse)
+	public EditAttachmentSummaryRow(UiMainWindow mainWindowToUse, UiAttachmentEditor editor, AbstractAttachmentPanel panel)
 	{
-		super(mainWindowToUse, modelToUse, proxyToUse);
+		super(Color.WHITE, mainWindowToUse.getLocalization());
+		AttachmentProxy proxy = panel.getAttachmentProxy();
 
-		DragSource dragSource = DragSource.getDefaultDragSource();
-		dragSource.createDefaultDragGestureRecognizer(this, DnDConstants.ACTION_COPY_OR_MOVE, 
-				new AttachmentDragHandler(mainWindow.getStore(), proxy));
+//		viewHidePanel.showCard(viewButton.getText());
+//		viewButton.addActionListener(new ViewHandler(mainWindowToUse, panel));
 
-		createAndAddSummaryRow();
+		saveRemovePanel.showCard(removeButton.getText());
+		removeButton.addActionListener(new RemoveHandler(mainWindowToUse, editor, proxy));
+		
+		String labelColumnText = proxy.getLabel();
+		String sizeColumnText = editor.model.getSize(proxy);
+		createCells(labelColumnText, sizeColumnText);
 	}
 
-	AbstractAttachmentRow createSummaryRow()
-	{
-		return new ViewAttachmentSummaryRow(mainWindow, model, this);
-	}
 }

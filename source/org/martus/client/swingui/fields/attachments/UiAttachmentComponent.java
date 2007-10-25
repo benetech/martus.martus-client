@@ -27,8 +27,10 @@ package org.martus.client.swingui.fields.attachments;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Container;
 
 import javax.swing.BorderFactory;
+import javax.swing.JComponent;
 import javax.swing.JPanel;
 
 import org.martus.client.swingui.MartusLocalization;
@@ -51,6 +53,7 @@ abstract public class UiAttachmentComponent extends JPanel
 	}
 	
 	abstract AbstractAttachmentPanel createAttachmentPanel(int row);
+	abstract JComponent createAttachmentFooter();
 	
 	protected MartusLocalization getLocalization()
 	{
@@ -68,6 +71,9 @@ abstract public class UiAttachmentComponent extends JPanel
 		{
 			add(createAttachmentPanel(row));
 		}
+		add(createAttachmentFooter());
+		
+		validateParent();
 	}
 
 	public void addAttachment(AttachmentProxy a)
@@ -81,11 +87,34 @@ abstract public class UiAttachmentComponent extends JPanel
 		model.clear();
 		updateTable();
 	}
+	
+	public void removeAttachment(AttachmentProxy a)
+	{
+		for(int row = 0; row < model.getRowCount(); ++row)
+		{
+			if(model.getAttachmentProxyAt(row).equals(a))
+			{				
+				model.remove(row);
+				updateTable();
+				return;
+			}
+		}
+	}
 
 
 	protected AbstractAttachmentRow createHeaderRow()
 	{
 		return new AttachmentHeaderRow(getLocalization());
+	}
+
+	protected void validateParent()
+	{
+		Container top = getTopLevelAncestor();
+		if(top != null)
+		{
+			top.validate();
+			repaint();
+		}
 	}
 
 

@@ -42,11 +42,11 @@ import com.jhlabs.awt.GridLayoutPlus;
 
 abstract class AbstractAttachmentRow extends JPanel
 {
-	public AbstractAttachmentRow(Color backgroundColor, MiniLocalization localizationToUse)
+	public AbstractAttachmentRow(Color background, MiniLocalization localizationToUse)
 	{
 		localization = localizationToUse;
 		
-		setBackground(backgroundColor);
+		setBackground(background);
 		GridLayoutPlus layout = new GridLayoutPlus(1, 0, 0, 0, 0, 0);
 		layout.setFill(Alignment.FILL_VERTICAL);
 		setLayout(layout);
@@ -54,13 +54,15 @@ abstract class AbstractAttachmentRow extends JPanel
 		viewButton = new UiButton(localization.getButtonLabel("viewattachment"));
 		hideButton = new UiButton(localization.getButtonLabel("hideattachment"));
 		saveButton = new UiButton(localization.getButtonLabel("saveattachment"));
+		removeButton = new UiButton(localization.getButtonLabel("removeattachment"));
 		
 		viewHidePanel = createMultiButtonPanel();
 		viewHidePanel.add(viewButton, viewButton.getText());
 		viewHidePanel.add(hideButton, hideButton.getText());
 		
-		savePanel = createMultiButtonPanel();
-		savePanel.add(saveButton, saveButton.getText());
+		saveRemovePanel = createMultiButtonPanel();
+		saveRemovePanel.add(saveButton, saveButton.getText());
+		saveRemovePanel.add(removeButton, removeButton.getText());
 	}
 	
 	public MiniLocalization getLocalization()
@@ -89,7 +91,7 @@ abstract class AbstractAttachmentRow extends JPanel
 		addCell(new UiLabel(labelColumnText), getLabelColumnWidth());
 		addCell(new UiLabel(sizeColumnText), getSizeColumnWidth());
 		addCell(viewHidePanel);
-		addCell(savePanel);
+		addCell(saveRemovePanel);
 	}
 	
 	JPanel addCell(JComponent contents, int preferredWidth)
@@ -124,8 +126,9 @@ abstract class AbstractAttachmentRow extends JPanel
 
 	MiniLocalization localization;
 	MultiButtonPanel viewHidePanel;
-	MultiButtonPanel savePanel;
+	MultiButtonPanel saveRemovePanel;
 	UiButton viewButton;
 	UiButton hideButton;
 	UiButton saveButton;
+	UiButton removeButton;
 }

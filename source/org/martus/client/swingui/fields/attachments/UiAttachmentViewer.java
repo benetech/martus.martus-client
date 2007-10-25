@@ -26,6 +26,9 @@ Boston, MA 02111-1307, USA.
 
 package org.martus.client.swingui.fields.attachments;
 
+import javax.swing.JComponent;
+import javax.swing.JPanel;
+
 import org.martus.client.swingui.UiMainWindow;
 
 public class UiAttachmentViewer extends UiAttachmentComponent
@@ -39,6 +42,11 @@ public class UiAttachmentViewer extends UiAttachmentComponent
 	AbstractAttachmentPanel createAttachmentPanel(int row)
 	{
 		return new ViewAttachmentPanel(mainWindow, model, model.getAttachment(row));
+	}
+
+	JComponent createAttachmentFooter()
+	{
+		return new JPanel();
 	}
 
 }

@@ -26,25 +26,14 @@ Boston, MA 02111-1307, USA.
 
 package org.martus.client.swingui.fields.attachments;
 
-import java.awt.BorderLayout;
 import java.awt.Component;
-import java.awt.datatransfer.DataFlavor;
-import java.awt.datatransfer.Transferable;
-import java.awt.dnd.DropTarget;
-import java.awt.dnd.DropTargetDragEvent;
-import java.awt.dnd.DropTargetDropEvent;
-import java.awt.dnd.DropTargetEvent;
-import java.awt.dnd.DropTargetListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
-import java.util.List;
 
+import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.JComponent;
-import javax.swing.JPanel;
-import javax.swing.event.TableModelEvent;
-import javax.swing.event.TableModelListener;
 
 import org.martus.client.swingui.UiFocusListener;
 import org.martus.client.swingui.UiMainWindow;
@@ -53,120 +42,21 @@ import org.martus.clientside.UiLocalization;
 import org.martus.common.bulletin.AttachmentProxy;
 import org.martus.swing.UiButton;
 import org.martus.swing.UiFileChooser;
-import org.martus.swing.UiScrollPane;
-import org.martus.swing.UiTable;
-import org.martus.swing.UiVBox;
+import org.martus.swing.Utilities;
 
 
 
-public class UiAttachmentEditor extends JPanel
+public class UiAttachmentEditor extends UiAttachmentComponent
 {
 	public UiAttachmentEditor(UiMainWindow mainWindowToUse)
 	{
-		super(new BorderLayout());
-		mainWindow = mainWindowToUse;
-
-		UiLocalization localization = mainWindowToUse.getLocalization();
-		
-		TableRemoveButton remove = new TableRemoveButton(localization.getButtonLabel("removeattachment"));
-		remove.addFocusListener(new UiFocusListener(this));		
-		remove.addActionListener(new RemoveHandler());
-		remove.setEnabled(false);
-
-		model = new AttachmentTableModel(mainWindow);
-		model.addTableModelListener(remove);
-
-		attachmentTable = new UiTable(model);
-		attachmentTable.setMaxGridWidth(40);
-		attachmentTable.useMaxWidth();
-		attachmentTable.setFocusable(false);
-		attachmentTable.createDefaultColumnsFromModel();
-		attachmentTable.setColumnSelectionAllowed(false);
-		attachmentTable.setMaxColumnWidthToHeaderWidth(1);
-
-		new DropTarget(this, new attachmentDropAdapter());
-
-		UiScrollPane scrollPane = new UiScrollPane(attachmentTable);
-		scrollPane.getHorizontalScrollBar().setFocusable(false);
-		scrollPane.getVerticalScrollBar().setFocusable(false);
-
-		JButton add = new UiButton(localization.getButtonLabel("addattachment"));
-		add.addFocusListener(new UiFocusListener(this));		
-		add.addActionListener(new AddHandler());
-
-		UiVBox vbox = new UiVBox();
-		vbox.add(scrollPane);
-		vbox.add(new Component[]{add, remove});
-		add(vbox, BorderLayout.CENTER);
-
-		attachmentTable.resizeTable(VISIBLE_ROW_COUNT);
+		super(mainWindowToUse);
+		updateTable();
 	}
 
-	class attachmentDropAdapter implements DropTargetListener
+	AbstractAttachmentPanel createAttachmentPanel(int row)
 	{
-		public void dragEnter(DropTargetDragEvent dtde)
-		{
-		}
-
-		public void dragOver(DropTargetDragEvent dtde)
-		{
-			if(dtde.isDataFlavorSupported(DataFlavor.javaFileListFlavor))
-				dtde.acceptDrag(dtde.getDropAction());
-			else
-				dtde.rejectDrag();
-		}
-
-		public void dropActionChanged(DropTargetDragEvent dtde)
-		{
-		}
-
-		public void drop(DropTargetDropEvent dtde)
-		{
-			if(!dtde.isDataFlavorSupported(DataFlavor.javaFileListFlavor))
-			{
-				dtde.rejectDrop();
-				return;
-			}
-
-			dtde.acceptDrop(dtde.getDropAction());
-			Transferable t = dtde.getTransferable();
-			List list = null;
-			try
-			{
-				list = (List)t.getTransferData(DataFlavor.javaFileListFlavor);
-			}
-			catch(Exception e)
-			{
-				System.out.println("dropFile exception: " + e);
-				dtde.dropComplete(false);
-				return;
-			}
-
-			if(list.size() == 0)
-			{
-				System.out.println("dropFile: list empty");
-				dtde.dropComplete(false);
-				return;
-			}
-
-			for(int i = 0; i<list.size(); ++i)
-			{	
-				File file = (File)list.get(i);
-				setLastAttachmentLoadDirectory(file.getAbsoluteFile());
-				AttachmentProxy a = new AttachmentProxy(file);
-				model.add(a);
-			}
-			dtde.dropComplete(true);
-		}
-
-		public void dragExit(DropTargetEvent dte)
-		{
-		}
-	}
-	
-	public JComponent[] getFocusableComponents()
-	{
-		return new JComponent[]{attachmentTable};
+		return new EditAttachmentPanel(mainWindow, this, model.getAttachment(row));
 	}
 
 	public AttachmentProxy[] getAttachments()
@@ -174,30 +64,26 @@ public class UiAttachmentEditor extends JPanel
 		return model.getAttachments();
 	}
 
-	public void addAttachment(AttachmentProxy a)
+	JComponent createAttachmentFooter()
 	{
-		model.add(a);
+		JButton add = new UiButton(getLocalization().getButtonLabel("addattachment"));
+		add.addFocusListener(new UiFocusListener(this));		
+		add.addActionListener(new AddHandler(mainWindow, model, this));
+		
+		Box buttonBox = Box.createHorizontalBox();
+		Utilities.addComponentsRespectingOrientation(buttonBox, new Component[] {add, Box.createHorizontalGlue()});
+		return buttonBox;
 	}
 
-	public void clearAttachments()
+	static class AddHandler implements ActionListener
 	{
-		model.clear();
-	}
-
-	static void setLastAttachmentLoadDirectory(File lastAttachmentLoadDirectory)
-	{
-		UiAttachmentEditor.lastAttachmentLoadDirectory =
-			lastAttachmentLoadDirectory;
-	}
-
-	static File getLastAttachmentLoadDirectory()
-	{
-		return lastAttachmentLoadDirectory;
-	}
-
-
-	class AddHandler implements ActionListener
-	{
+		public AddHandler(UiMainWindow mainWindowToUse, AttachmentTableModel modelToUse, UiAttachmentEditor editorToUse)
+		{
+			mainWindow = mainWindowToUse;
+			model = modelToUse;
+			editor = editorToUse;
+		}
+		
 		public void actionPerformed(ActionEvent ae)
 		{
 			File last = getLastAttachmentLoadDirectory();
@@ -209,7 +95,7 @@ public class UiAttachmentEditor extends JPanel
 			UiFileChooser.FileDialogResults results = null;
 			while(true)
 			{	
-				results = UiFileChooser.displayFileOpenDialog(UiAttachmentEditor.this, null, UiFileChooser.NO_FILE_SELECTED, last, buttonLabel, null);
+				results = UiFileChooser.displayFileOpenDialog(editor, null, UiFileChooser.NO_FILE_SELECTED, last, buttonLabel, null);
 				if (results.wasCancelChoosen())
 					return;
 				if(results.getChosenFile().isFile())
@@ -218,48 +104,166 @@ public class UiAttachmentEditor extends JPanel
 			}
 			setLastAttachmentLoadDirectory(results.getCurrentDirectory());
 			AttachmentProxy a = new AttachmentProxy(results.getChosenFile());
-			model.add(a);
+			editor.addAttachment(a);
+			
 		}
-	}
 
-	class RemoveHandler implements ActionListener
-	{
-		public void actionPerformed(ActionEvent ae)
+		static void setLastAttachmentLoadDirectory(File newAttachmentLoadDirectory)
 		{
-			int[] rows = attachmentTable.getSelectedRows();
-			if(rows.length == 0)
-				return;
-			if(!mainWindow.confirmDlg("RemoveAttachment"))
-				return;
-			for(int i = rows.length-1; i >= 0; --i)
-			{
-				model.remove(rows[i]);
-			}
+			lastAttachmentLoadDirectory = newAttachmentLoadDirectory;
 		}
+	
+		static File getLastAttachmentLoadDirectory()
+		{
+			return lastAttachmentLoadDirectory;
+		}
+	
+		private static File lastAttachmentLoadDirectory;
+	
+		UiMainWindow mainWindow;
+		AttachmentTableModel model;
+		UiAttachmentEditor editor;
 	}
 
-
-	UiTable attachmentTable;
-	AttachmentTableModel model;
-	UiMainWindow mainWindow;
-	
-	private static File lastAttachmentLoadDirectory;
-	
-	static final int VISIBLE_ROW_COUNT = 4;
+//	public UiAttachmentEditor(UiMainWindow mainWindowToUse)
+//	{
+//		super(new BorderLayout());
+//		mainWindow = mainWindowToUse;
+//
+//		UiLocalization localization = mainWindowToUse.getLocalization();
+//		
+//		TableRemoveButton remove = new TableRemoveButton(localization.getButtonLabel("removeattachment"));
+//		remove.addFocusListener(new UiFocusListener(this));		
+//		remove.addActionListener(new RemoveHandler());
+//		remove.setEnabled(false);
+//
+//		model = new AttachmentTableModel(mainWindow);
+//		model.addTableModelListener(remove);
+//
+//		attachmentTable = new UiTable(model);
+//		attachmentTable.setMaxGridWidth(40);
+//		attachmentTable.useMaxWidth();
+//		attachmentTable.setFocusable(false);
+//		attachmentTable.createDefaultColumnsFromModel();
+//		attachmentTable.setColumnSelectionAllowed(false);
+//		attachmentTable.setMaxColumnWidthToHeaderWidth(1);
+//
+//		new DropTarget(this, new attachmentDropAdapter());
+//
+//		UiScrollPane scrollPane = new UiScrollPane(attachmentTable);
+//		scrollPane.getHorizontalScrollBar().setFocusable(false);
+//		scrollPane.getVerticalScrollBar().setFocusable(false);
+//
+//		JButton add = new UiButton(localization.getButtonLabel("addattachment"));
+//		add.addFocusListener(new UiFocusListener(this));		
+//		add.addActionListener(new AddHandler());
+//
+//		UiVBox vbox = new UiVBox();
+//		vbox.add(scrollPane);
+//		vbox.add(new Component[]{add, remove});
+//		add(vbox, BorderLayout.CENTER);
+//
+//		attachmentTable.resizeTable(VISIBLE_ROW_COUNT);
+//	}
+//
+//	class attachmentDropAdapter implements DropTargetListener
+//	{
+//		public void dragEnter(DropTargetDragEvent dtde)
+//		{
+//		}
+//
+//		public void dragOver(DropTargetDragEvent dtde)
+//		{
+//			if(dtde.isDataFlavorSupported(DataFlavor.javaFileListFlavor))
+//				dtde.acceptDrag(dtde.getDropAction());
+//			else
+//				dtde.rejectDrag();
+//		}
+//
+//		public void dropActionChanged(DropTargetDragEvent dtde)
+//		{
+//		}
+//
+//		public void drop(DropTargetDropEvent dtde)
+//		{
+//			if(!dtde.isDataFlavorSupported(DataFlavor.javaFileListFlavor))
+//			{
+//				dtde.rejectDrop();
+//				return;
+//			}
+//
+//			dtde.acceptDrop(dtde.getDropAction());
+//			Transferable t = dtde.getTransferable();
+//			List list = null;
+//			try
+//			{
+//				list = (List)t.getTransferData(DataFlavor.javaFileListFlavor);
+//			}
+//			catch(Exception e)
+//			{
+//				System.out.println("dropFile exception: " + e);
+//				dtde.dropComplete(false);
+//				return;
+//			}
+//
+//			if(list.size() == 0)
+//			{
+//				System.out.println("dropFile: list empty");
+//				dtde.dropComplete(false);
+//				return;
+//			}
+//
+//			for(int i = 0; i<list.size(); ++i)
+//			{	
+//				File file = (File)list.get(i);
+//				setLastAttachmentLoadDirectory(file.getAbsoluteFile());
+//				AttachmentProxy a = new AttachmentProxy(file);
+//				model.add(a);
+//			}
+//			dtde.dropComplete(true);
+//		}
+//
+//		public void dragExit(DropTargetEvent dte)
+//		{
+//		}
+//	}
+//	
+//	public JComponent[] getFocusableComponents()
+//	{
+//		return new JComponent[]{attachmentTable};
+//	}
+//
+//	public void addAttachment(AttachmentProxy a)
+//	{
+//		model.add(a);
+//	}
+//
+//	public void clearAttachments()
+//	{
+//		model.clear();
+//	}
+//
+//
+//	UiTable attachmentTable;
+//	AttachmentTableModel model;
+//	UiMainWindow mainWindow;
+//	
+//	
+//	static final int VISIBLE_ROW_COUNT = 4;
 }
 
-class TableRemoveButton extends UiButton implements TableModelListener
-{
-	public TableRemoveButton(String label)
-	{
-		super(label);
-	}
-
-	public void tableChanged(TableModelEvent event)
-	{
-		AttachmentTableModel tableModel = (AttachmentTableModel)event.getSource();
-		setEnabled(tableModel.getRowCount() > 0);
-	}
-
-};
-
+//class TableRemoveButton extends UiButton implements TableModelListener
+//{
+//	public TableRemoveButton(String label)
+//	{
+//		super(label);
+//	}
+//
+//	public void tableChanged(TableModelEvent event)
+//	{
+//		AttachmentTableModel tableModel = (AttachmentTableModel)event.getSource();
+//		setEnabled(tableModel.getRowCount() > 0);
+//	}
+//
+//};
+//

@@ -49,6 +49,10 @@ public abstract class AbstractAttachmentPanel extends JPanel
 		
 		setBorder(BorderFactory.createLineBorder(Color.BLACK));
 
+	}
+
+	protected void createAndAddSummaryRow()
+	{
 		summaryRow = createSummaryRow();
 		add(summaryRow, BorderLayout.BEFORE_FIRST_LINE);
 	}
@@ -67,14 +71,16 @@ public abstract class AbstractAttachmentPanel extends JPanel
 		isImageInline = true;
 		summaryRow.showHideButton();
 		validateParent();
-		repaint();
 	}
 
 	private void validateParent()
 	{
 		Container top = getTopLevelAncestor();
 		if(top != null)
+		{
 			top.validate();
+			repaint();
+		}
 	}
 
 	public void hideImage()

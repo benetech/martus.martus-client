@@ -25,28 +25,29 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.fields.attachments;
 
-import java.awt.dnd.DnDConstants;
-import java.awt.dnd.DragSource;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.client.swingui.tablemodels.AttachmentTableModel;
 import org.martus.common.bulletin.AttachmentProxy;
 
-class ViewAttachmentPanel extends AbstractAttachmentPanel
+class RemoveHandler implements ActionListener
 {
-	public ViewAttachmentPanel(UiMainWindow mainWindowToUse, AttachmentTableModel modelToUse, AttachmentProxy proxyToUse)
+	public RemoveHandler(UiMainWindow mainWindowToUse, UiAttachmentEditor editorToUse, AttachmentProxy proxyToControl)
 	{
-		super(mainWindowToUse, modelToUse, proxyToUse);
-
-		DragSource dragSource = DragSource.getDefaultDragSource();
-		dragSource.createDefaultDragGestureRecognizer(this, DnDConstants.ACTION_COPY_OR_MOVE, 
-				new AttachmentDragHandler(mainWindow.getStore(), proxy));
-
-		createAndAddSummaryRow();
+		mainWindow = mainWindowToUse;
+		editor = editorToUse;
+		proxy = proxyToControl;
 	}
-
-	AbstractAttachmentRow createSummaryRow()
+	
+	public void actionPerformed(ActionEvent ae)
 	{
-		return new ViewAttachmentSummaryRow(mainWindow, model, this);
+		if(!mainWindow.confirmDlg("RemoveAttachment"))
+			return;
+		editor.removeAttachment(proxy);
 	}
+	
+	UiMainWindow mainWindow;
+	UiAttachmentEditor editor;
+	AttachmentProxy proxy;
 }

@@ -25,28 +25,23 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.fields.attachments;
 
-import java.awt.dnd.DnDConstants;
-import java.awt.dnd.DragSource;
-
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.client.swingui.tablemodels.AttachmentTableModel;
 import org.martus.common.bulletin.AttachmentProxy;
 
-class ViewAttachmentPanel extends AbstractAttachmentPanel
+public class EditAttachmentPanel extends AbstractAttachmentPanel
 {
-	public ViewAttachmentPanel(UiMainWindow mainWindowToUse, AttachmentTableModel modelToUse, AttachmentProxy proxyToUse)
+	public EditAttachmentPanel(UiMainWindow mainWindowToUse, UiAttachmentEditor editorToUse, AttachmentProxy proxyToUse)
 	{
-		super(mainWindowToUse, modelToUse, proxyToUse);
-
-		DragSource dragSource = DragSource.getDefaultDragSource();
-		dragSource.createDefaultDragGestureRecognizer(this, DnDConstants.ACTION_COPY_OR_MOVE, 
-				new AttachmentDragHandler(mainWindow.getStore(), proxy));
-
+		super(mainWindowToUse, editorToUse.model, proxyToUse);
+		editor = editorToUse;
 		createAndAddSummaryRow();
+
 	}
 
 	AbstractAttachmentRow createSummaryRow()
 	{
-		return new ViewAttachmentSummaryRow(mainWindow, model, this);
+		return new EditAttachmentSummaryRow(mainWindow, editor, this);
 	}
+
+	UiAttachmentEditor editor;
 }

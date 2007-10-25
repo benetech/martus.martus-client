@@ -36,16 +36,15 @@ import org.martus.common.packet.UniversalId;
 
 class ViewAttachmentSummaryRow extends AbstractAttachmentRow
 {
-	public ViewAttachmentSummaryRow(UiMainWindow mainWindowToUse, AttachmentTableModel modelToUse, ViewAttachmentPanel panel)
+	public ViewAttachmentSummaryRow(UiMainWindow mainWindowToUse, AttachmentTableModel model, ViewAttachmentPanel panel)
 	{
 		super(Color.WHITE, mainWindowToUse.getLocalization());
-		model = modelToUse;
 		AttachmentProxy proxy = panel.getAttachmentProxy();
 		
 		store = mainWindowToUse.getStore();
 
 		viewHidePanel.showCard(viewButton.getText());
-		savePanel.showCard(saveButton.getText());
+		saveRemovePanel.showCard(saveButton.getText());
 		if(isAttachmentAvailable(proxy))
 		{
 			viewButton.addActionListener(new ViewHandler(mainWindowToUse, panel));
@@ -71,6 +70,5 @@ class ViewAttachmentSummaryRow extends AbstractAttachmentRow
 		return store.doesBulletinRevisionExist(key);
 	}
 	
-	AttachmentTableModel model;
 	ClientBulletinStore store;
 }
