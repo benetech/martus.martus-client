@@ -579,6 +579,7 @@ public class EnglishStrings
 	"If a bulletin is sealed, a new version will be created.",
 "field:SkippingBulletinsNotOurs=NOTE: Bulletins authored by other accounts cannot be changed using this command," +
 	"so they are not included in the list above.",
+"field:ChooseHeadquartersToAdd=Select the headquarters listed below that you want to add to all the bulletins listed above.",
 	
 "wintitle:IncludePrivateData=Include Private Data",
 "field:IncludePrivateData=#TotalBulletins# bulletins were selected for printing.  #AllPrivateBulletins# of them are all private.\n What would you like to include when printing?",

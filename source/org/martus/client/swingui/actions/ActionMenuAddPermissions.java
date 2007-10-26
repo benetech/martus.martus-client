@@ -35,10 +35,16 @@ import javax.swing.Box;
 import javax.swing.JDialog;
 
 import org.martus.client.swingui.UiBulletinTitleListComponent;
+import org.martus.client.swingui.UiHeadquartersTable;
 import org.martus.client.swingui.UiMainWindow;
+import org.martus.client.swingui.bulletincomponent.HeadQuartersTableModelEdit;
 import org.martus.clientside.UiLocalization;
+import org.martus.common.HQKeys;
+import org.martus.common.MartusLogger;
+import org.martus.common.HQKeys.HQsException;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.swing.UiButton;
+import org.martus.swing.UiLabel;
 import org.martus.swing.UiScrollPane;
 import org.martus.swing.UiWrappedTextArea;
 import org.martus.swing.Utilities;
@@ -54,7 +60,18 @@ public class ActionMenuAddPermissions extends UiMenuAction
 
 	public boolean isEnabled()
 	{
-		return mainWindow.isAnyBulletinSelected();
+		if(!mainWindow.isAnyBulletinSelected())
+			return false;
+		
+		try
+		{
+			return (mainWindow.getApp().getAllHQKeys().size() > 0);
+		} 
+		catch (HQsException e)
+		{
+			e.printStackTrace();
+			return false;
+		}
 	}
 
 	public void actionPerformed(ActionEvent ae)
@@ -70,8 +87,17 @@ public class ActionMenuAddPermissions extends UiMenuAction
 			mainWindow.notifyDlg("AddPermissionsZeroBulletinsOurs");
 			return;
 		}
-		AddPermissionsDialog dlg = new AddPermissionsDialog(mainWindow, selectedBulletins, ourBulletins);
-		dlg.setVisible(true);
+		try
+		{
+			HQKeys hqKeys = mainWindow.getApp().getAllHQKeys();
+			AddPermissionsDialog dlg = new AddPermissionsDialog(mainWindow, selectedBulletins, ourBulletins, hqKeys);
+			dlg.setVisible(true);
+		} 
+		catch (HQsException e)
+		{
+			MartusLogger.logException(e);
+			mainWindow.unexpectedErrorDlg();
+		}
 	}
 
 	private Vector extractOurBulletins(Vector allBulletins, String ourAccountId)
@@ -89,7 +115,7 @@ public class ActionMenuAddPermissions extends UiMenuAction
 	}
 	static class AddPermissionsDialog extends JDialog
 	{
-		public AddPermissionsDialog(UiMainWindow mainWindow, Vector allBulletins, Vector ourBulletins)
+		public AddPermissionsDialog(UiMainWindow mainWindow, Vector allBulletins, Vector ourBulletins, HQKeys hqKeys)
 		{
 			super(mainWindow);
 			setModal(true);
@@ -112,6 +138,19 @@ public class ActionMenuAddPermissions extends UiMenuAction
 				contentPane.add(new UiWrappedTextArea(skippingBulletinsNotOurs));
 			}
 			
+			contentPane.add(blankLine());
+			String chooseHeadquartersToAdd = localization.getFieldLabel("ChooseHeadquartersToAdd");
+			contentPane.add(new UiWrappedTextArea(chooseHeadquartersToAdd));
+			
+			HeadQuartersTableModelEdit model = new HeadQuartersTableModelEdit(localization);
+			model.addKeys(hqKeys);
+			UiHeadquartersTable hqTable = new UiHeadquartersTable(model);
+			hqTable.setMaxColumnWidthToHeaderWidth(0);
+			UiScrollPane hqScroller = new UiScrollPane(hqTable);
+			contentPane.add(hqScroller);
+			
+			contentPane.add(blankLine());
+
 			Box buttonBox = Box.createHorizontalBox();
 			UiButton okButton = new UiButton(localization.getButtonLabel("AddPermissions"));
 			okButton.addActionListener(new OkButtonHandler());
@@ -127,6 +166,11 @@ public class ActionMenuAddPermissions extends UiMenuAction
 			
 			Utilities.centerDlg(this);
 			setResizable(true);
+		}
+
+		private UiLabel blankLine()
+		{
+			return new UiLabel(" ");
 		}
 		
 		void doOk()
