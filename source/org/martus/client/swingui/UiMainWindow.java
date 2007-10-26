@@ -921,6 +921,11 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		notifyDlg(parent, baseTag);
 	}
 	
+	public void unexpectedErrorDlg()
+	{
+		notifyDlg("UnexpectedError");
+	}
+
 	public void notifyDlg(String baseTag)
 	{
 		HashMap emptyTokenReplacement = new HashMap();
@@ -2703,4 +2708,5 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	private boolean justRecovered;
 	private BackgroundTimerTask backgroundUploadTimerTask;
 	private Stack cursorStack;
+
 }
