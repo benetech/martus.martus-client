@@ -39,10 +39,10 @@ import javax.swing.JDialog;
 
 import org.martus.client.bulletinstore.ExportBulletins;
 import org.martus.client.core.MartusApp;
+import org.martus.client.swingui.UiBulletinTitleListComponent;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.clientside.UiLocalization;
 import org.martus.common.bulletin.Bulletin;
-import org.martus.common.bulletin.BulletinConstants;
 import org.martus.swing.UiButton;
 import org.martus.swing.UiCheckBox;
 import org.martus.swing.UiFileChooser;
@@ -77,8 +77,7 @@ public class UiExportBulletinsDlg extends JDialog implements ActionListener
 		cancel.addActionListener(this);
 		
 		
-		String[] titles = extractTitles(mainWindow, bulletins);
-		UiList bulletinList = new UiList(titles);
+		UiList bulletinList = new UiBulletinTitleListComponent(mainWindow, bulletins);
 		UiScrollPane tocMsgAreaScrollPane = new UiScrollPane(bulletinList,
 				UiScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
 				UiScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
@@ -104,20 +103,6 @@ public class UiExportBulletinsDlg extends JDialog implements ActionListener
 		Utilities.centerDlg(this);
 		setResizable(true);
 		setVisible(true);
-	}
-
-	public static String[] extractTitles(UiMainWindow window, Vector bulletins)
-	{
-		String[] titles = new String[bulletins.size()];
-		for (int i = 0; i < titles.length; i++)
-		{
-			Bulletin b = (Bulletin)bulletins.get(i);
-			String bulletinTitle = b.get(BulletinConstants.TAGTITLE);
-			if(bulletinTitle == null || bulletinTitle.length() == 0)
-				bulletinTitle = window.getLocalization().getFieldLabel("UntitledBulletin");
-			titles[i] = bulletinTitle;
-		}
-		return titles;
 	}
 
 	File askForDestinationFile()
