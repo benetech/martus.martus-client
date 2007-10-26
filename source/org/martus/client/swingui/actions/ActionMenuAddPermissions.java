@@ -89,15 +89,26 @@ public class ActionMenuAddPermissions extends UiMenuAction
 		}
 		try
 		{
-			HQKeys hqKeys = mainWindow.getApp().getAllHQKeys();
-			AddPermissionsDialog dlg = new AddPermissionsDialog(mainWindow, selectedBulletins, ourBulletins, hqKeys);
+			HQKeys allHqKeys = mainWindow.getApp().getAllHQKeys();
+			AddPermissionsDialog dlg = new AddPermissionsDialog(mainWindow, selectedBulletins, ourBulletins, allHqKeys);
 			dlg.setVisible(true);
+			
+			HQKeys selectedHqKeys = dlg.getSelectedHqKeys();
+			if(selectedHqKeys == null)
+				return;
+			
+			addHqKeys(ourBulletins, selectedHqKeys);
 		} 
 		catch (HQsException e)
 		{
 			MartusLogger.logException(e);
 			mainWindow.unexpectedErrorDlg();
 		}
+	}
+	
+	private void addHqKeys(Vector bulletins, HQKeys hqKeys)
+	{
+		System.out.println("addHqKeys: " + bulletins.size() + " bulletins, " + hqKeys.size() + " hq keys");
 	}
 
 	private Vector extractOurBulletins(Vector allBulletins, String ourAccountId)
@@ -115,9 +126,11 @@ public class ActionMenuAddPermissions extends UiMenuAction
 	}
 	static class AddPermissionsDialog extends JDialog
 	{
-		public AddPermissionsDialog(UiMainWindow mainWindow, Vector allBulletins, Vector ourBulletins, HQKeys hqKeys)
+		public AddPermissionsDialog(UiMainWindow mainWindowToUse, Vector allBulletins, Vector ourBulletins, HQKeys hqKeys)
 		{
-			super(mainWindow);
+			super(mainWindowToUse);
+			mainWindow = mainWindowToUse;
+			
 			setModal(true);
 			Container contentPane = getContentPane();
 			contentPane.setLayout(new GridLayoutPlus(0, 1, 2, 2, 2, 2));
@@ -142,13 +155,12 @@ public class ActionMenuAddPermissions extends UiMenuAction
 			String chooseHeadquartersToAdd = localization.getFieldLabel("ChooseHeadquartersToAdd");
 			contentPane.add(new UiWrappedTextArea(chooseHeadquartersToAdd));
 			
-			HeadQuartersTableModelEdit model = new HeadQuartersTableModelEdit(localization);
+			model = new HeadQuartersTableModelEdit(localization);
 			model.addKeys(hqKeys);
 			UiHeadquartersTable hqTable = new UiHeadquartersTable(model);
 			hqTable.setMaxColumnWidthToHeaderWidth(0);
 			UiScrollPane hqScroller = new UiScrollPane(hqTable);
 			contentPane.add(hqScroller);
-			
 			contentPane.add(blankLine());
 
 			Box buttonBox = Box.createHorizontalBox();
@@ -167,6 +179,11 @@ public class ActionMenuAddPermissions extends UiMenuAction
 			Utilities.centerDlg(this);
 			setResizable(true);
 		}
+		
+		public HQKeys getSelectedHqKeys()
+		{
+			return selectedHqKeys;
+		}
 
 		private UiLabel blankLine()
 		{
@@ -175,6 +192,15 @@ public class ActionMenuAddPermissions extends UiMenuAction
 		
 		void doOk()
 		{
+			HQKeys selectedKeys = model.getAllSelectedHeadQuarterKeys();
+			if(selectedKeys.size() == 0)
+			{
+				mainWindow.notifyDlg("AddPermissionsZeroHeadquartersSelected");
+				return;
+			}
+			
+			selectedHqKeys = selectedKeys;
+			
 			dispose();
 		}
 		
@@ -199,5 +225,9 @@ public class ActionMenuAddPermissions extends UiMenuAction
 			}
 			
 		}
+		
+		UiMainWindow mainWindow;
+		HeadQuartersTableModelEdit model;
+		HQKeys selectedHqKeys;
 	}
 }
