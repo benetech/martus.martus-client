@@ -33,23 +33,25 @@ import javax.swing.event.MenuListener;
 
 import org.martus.client.swingui.actions.ActionMenuAbout;
 import org.martus.client.swingui.actions.ActionMenuAccountDetails;
+import org.martus.client.swingui.actions.ActionMenuAddPermissions;
 import org.martus.client.swingui.actions.ActionMenuBackupMyKeyPair;
 import org.martus.client.swingui.actions.ActionMenuChangeUserNamePassword;
 import org.martus.client.swingui.actions.ActionMenuConfigureHQs;
 import org.martus.client.swingui.actions.ActionMenuContactInfo;
 import org.martus.client.swingui.actions.ActionMenuCopyBulletins;
-import org.martus.client.swingui.actions.ActionMenuFolderCreate;
 import org.martus.client.swingui.actions.ActionMenuCreateNewBulletin;
 import org.martus.client.swingui.actions.ActionMenuCustomFields;
 import org.martus.client.swingui.actions.ActionMenuCutBulletins;
 import org.martus.client.swingui.actions.ActionMenuDefaultDetailsFieldContent;
-import org.martus.client.swingui.actions.ActionMenuFolderDelete;
 import org.martus.client.swingui.actions.ActionMenuDeleteMyServerDraftBulletins;
 import org.martus.client.swingui.actions.ActionMenuDiscardBulletins;
 import org.martus.client.swingui.actions.ActionMenuExit;
 import org.martus.client.swingui.actions.ActionMenuExportBulletins;
 import org.martus.client.swingui.actions.ActionMenuExportFolder;
 import org.martus.client.swingui.actions.ActionMenuExportMyPublicKey;
+import org.martus.client.swingui.actions.ActionMenuFolderCreate;
+import org.martus.client.swingui.actions.ActionMenuFolderDelete;
+import org.martus.client.swingui.actions.ActionMenuFolderRename;
 import org.martus.client.swingui.actions.ActionMenuFoldersOrganize;
 import org.martus.client.swingui.actions.ActionMenuHelp;
 import org.martus.client.swingui.actions.ActionMenuImportBulletins;
@@ -59,7 +61,6 @@ import org.martus.client.swingui.actions.ActionMenuPreferences;
 import org.martus.client.swingui.actions.ActionMenuQuickEraseDeleteMyData;
 import org.martus.client.swingui.actions.ActionMenuQuickEraseRemoveMartus;
 import org.martus.client.swingui.actions.ActionMenuRemoveServer;
-import org.martus.client.swingui.actions.ActionMenuFolderRename;
 import org.martus.client.swingui.actions.ActionMenuReports;
 import org.martus.client.swingui.actions.ActionMenuResendBulletins;
 import org.martus.client.swingui.actions.ActionMenuRetrieveHQDraftBulletins;
@@ -113,6 +114,8 @@ public class UiMenuBar extends JMenuBar
 		edit.add(actionMenuSelectAllBulletins);
 		edit.addSeparator();
 		edit.add(actionMenuDiscardBulletins);
+		edit.addSeparator();
+		edit.add(actionMenuAddPermissions);
 
 		UiMenu folders = new UiMenu(localization.getMenuLabel("folders"));
 		FoldersMenuListener folderMenuListener = new FoldersMenuListener();
@@ -222,6 +225,7 @@ public class UiMenuBar extends JMenuBar
 			actionMenuCopyBulletins.setEnabled(actionMenuCopyBulletins.isEnabled());
 			actionMenuPasteBulletins.setEnabled(actionMenuPasteBulletins.isEnabled());
 			actionMenuDiscardBulletins.setEnabled(actionMenuDiscardBulletins.isEnabled());
+			actionMenuAddPermissions.setEnabled(actionMenuAddPermissions.isEnabled());
 		}
 
 		public void initalize()
@@ -233,6 +237,7 @@ public class UiMenuBar extends JMenuBar
 			actionMenuCopyBulletins.setEnabled(false);
 			actionMenuPasteBulletins.setEnabled(false);
 			actionMenuDiscardBulletins.setEnabled(false);
+			actionMenuAddPermissions.setEnabled(false);
 		}
 
 		public void menuDeselected(MenuEvent e) {}
@@ -275,6 +280,8 @@ public class UiMenuBar extends JMenuBar
 		actionMenuFolderRename = new ActionMenuFolderRename(mainWindow);
 		actionMenuFolderDelete = new ActionMenuFolderDelete(mainWindow);
 		actionMenuFolderOrganize = new ActionMenuFoldersOrganize(mainWindow);
+		
+		actionMenuAddPermissions = new ActionMenuAddPermissions(mainWindow);
 	}
 
 
@@ -291,4 +298,5 @@ public class UiMenuBar extends JMenuBar
 	AbstractAction actionMenuFolderRename;
 	AbstractAction actionMenuFolderDelete;
 	AbstractAction actionMenuFolderOrganize;
+	AbstractAction actionMenuAddPermissions;
 }

@@ -46,7 +46,7 @@ public class EnglishStrings
 "wintitle:DuplicateLabelsInCustomTemplate=Warning Duplicate Labels Found",
 "wintitle:ImportProgress=Importing Bulletins",
 "wintitle:ExportProgress=Exporting Bulletins",
-
+"wintitle:AddPermissions=Add Permissions to Bulletins",
 
 "wintitle:confirmsend=Confirm Save Bulletin",
 "wintitle:confirmretrieve=Confirm Retrieve Bulletins",
@@ -221,6 +221,7 @@ public class EnglishStrings
 "wintitle:notifyReportFormatIsTooNew=Reports",
 "wintitle:notifyReportFormatDifferentLanguage=Reports",
 "wintitle:notifyViewAttachmentNotAvailable=Unable to View Attachment",
+"wintitle:notifyAddPermissionsZeroBulletinsOurs=Add Permissions to Bulletins",
 
 "wintitle:notifyRetrieveCompleted=Retrieve Complete",
 "field:notifyRetrieveCompletedcause=Retrieving bulletins from the server is complete",
@@ -336,6 +337,7 @@ public class EnglishStrings
 "button:customHelp=Help",
 "button:customImport=Import Template",
 "button:customExport=Export Template",
+"button:AddPermissions=Add Permissions",
 
 "button:cancel=Cancel",
 "button:save=Save",
@@ -426,6 +428,7 @@ public class EnglishStrings
 "menu:PasteBulletins=Paste Bulletin(s)",
 "menu:DiscardBulletins=Discard Bulletin(s)",
 "menu:DeleteBulletins=Delete Bulletin(s)",
+"menu:AddPermissions=Add Permissions...",
 "menu:ResendBulletins=Resend Bulletin(s)",
 "menu:folders=Folders",
 "menu:CreateNewFolder=Create New Folder",
@@ -571,7 +574,12 @@ public class EnglishStrings
 "wintitle:notifyPrintCompleted=Reports",
 "field:notifyPrintCompletedcause=Printing Complete",
 "field:OrganizeReportFields=Add the fields you want to appear in your report, and then arrange them in the order you want them to be printed.",
-
+"field:AddPermissionsOverview=This allows you to add headquarters permissions to existing bulletins." +
+	"Each of the bulletins in the list below will be modified to add the selected headquarters. " +
+	"If a bulletin is sealed, a new version will be created.",
+"field:SkippingBulletinsNotOurs=NOTE: Bulletins authored by other accounts cannot be changed using this command," +
+	"so they are not included in the list above.",
+	
 "wintitle:IncludePrivateData=Include Private Data",
 "field:IncludePrivateData=#TotalBulletins# bulletins were selected for printing.  #AllPrivateBulletins# of them are all private.\n What would you like to include when printing?",
 "button:PublicAndPrivateData=Both Public and Private Data",
@@ -834,6 +842,7 @@ public class EnglishStrings
 "field:notifyReportFormatIsTooNewcause=This report format was created with a newer version of Martus, so it may not work correctly",
 "field:notifyReportFormatDifferentLanguagecause=This report format was created in a different language. As a result, some headings may not print properly, and some of the fields may not be available for sorting.",
 "field:notifyViewAttachmentNotAvailablecause=This computer can only view JPEG, GIF, and PNG image attachments",
+"field:notifyAddPermissionsZeroBulletinsOurscause=Must select at least one bulletin that was created by this account",
 
 "field:IncompatibleMtfVersion=The version of this translation is not compatible with this version of Martus.  It is recommended that you do not continue to use this translation version and go to (http://www.martus.org/downloads) for the appropriate version.",
 "field:IncompatibleMtfVersionTranslation=#MtfLanguage# Translation Version: #MtfVersionNumber#",
