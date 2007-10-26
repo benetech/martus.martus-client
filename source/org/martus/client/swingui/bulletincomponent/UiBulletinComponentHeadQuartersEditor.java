@@ -25,13 +25,9 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.bulletincomponent;
 
-import java.util.Vector;
-
 import org.martus.client.core.MartusApp;
-import org.martus.client.swingui.HeadQuarterEntry;
 import org.martus.client.swingui.HeadQuartersSelectionListener;
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.common.HQKey;
 import org.martus.common.HQKeys;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.swing.UiLabel;
@@ -43,40 +39,23 @@ public class UiBulletinComponentHeadQuartersEditor extends UiBulletinComponentHe
 	public UiBulletinComponentHeadQuartersEditor(HeadQuartersSelectionListener hqSelectionListener, UiMainWindow mainWindowToUse, Bulletin bulletinToUse, String tagQualifierToUse)
 	{
 		super(mainWindowToUse, bulletinToUse, tagQualifierToUse, mainWindowToUse.getEditingTextFieldColumns());
-		UiLabel hqLabel = new UiLabel(getLabel("Headquarters"));
 
-		HQKeys authorizedToReadKeys = bulletinToUse.getAuthorizedToReadKeys();
-		HQKeys allHQKeysConfigured = mainWindow.getApp().getAllHQKeysWithFallback();
-		int numberOfHQKeysConfigured = allHQKeysConfigured.size();
-		int numberOfHQKeysAuthorizedToRead = authorizedToReadKeys.size();
+		tableModel = new HeadQuartersTableModelEdit(getLocalization());
+		MartusApp app = mainWindow.getApp();
+
+		HQKeys bulletinAuthorizedHeadquartersKeys = bulletinToUse.getAuthorizedToReadKeys();
+		app.addHQLabelsWherePossible(bulletinAuthorizedHeadquartersKeys);
+		tableModel.addKeys(bulletinAuthorizedHeadquartersKeys);
+		tableModel.selectKeys(bulletinAuthorizedHeadquartersKeys);
 		
-		if(numberOfHQKeysConfigured == 0 && numberOfHQKeysAuthorizedToRead == 0 )
+		HQKeys appAvailableHeadquartersKeys = app.getAllHQKeysWithFallback();
+		tableModel.addKeys(appAvailableHeadquartersKeys);
+
+		UiLabel hqLabel = new UiLabel(getLabel("Headquarters"));
+		if(tableModel.getRowCount() == 0 )
 		{
 			addComponents(hqLabel, new UiLabel(getLocalization().getFieldLabel("NoHQsConfigured")));
 			return;
-		}
-		
-		tableModel = new HeadQuartersTableModelEdit(getLocalization());
-		Vector autorizedKeys = new Vector();
-		MartusApp app = mainWindow.getApp();
-		app.addHQLabelsWherePossible(authorizedToReadKeys);
-		for (int i = 0; i < authorizedToReadKeys.size(); ++i) 
-		{
-			HQKey hqKeyToAddAuthorized = authorizedToReadKeys.get(i);
-			HeadQuarterEntry headQuarterEntry = new HeadQuarterEntry(hqKeyToAddAuthorized);
-			headQuarterEntry.setSelected(true);
-			tableModel.addNewHeadQuarterEntry(headQuarterEntry);
-			autorizedKeys.add(hqKeyToAddAuthorized.getPublicKey());
-		}
-		
-		for(int j = 0; j < numberOfHQKeysConfigured; ++j)
-		{
-			HQKey hqKeyToCheck = allHQKeysConfigured.get(j);
-			if(!autorizedKeys.contains(hqKeyToCheck.getPublicKey()))
-			{
-				HeadQuarterEntry headQuarterEntry = new HeadQuarterEntry(hqKeyToCheck);
-				tableModel.addNewHeadQuarterEntry(headQuarterEntry);
-			}
 		}
 		
 		tableModel.setHQSelectionListener(hqSelectionListener);

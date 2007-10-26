@@ -55,6 +55,32 @@ public abstract class HeadQuartersTableModel extends UiTableModel
 		fireTableRowsInserted(rowAdded, rowAdded);
 	}
 	
+	public void addKeys(HQKeys keys)
+	{
+		for(int j = 0; j < keys.size(); ++j)
+		{
+			HQKey hqKeyToCheck = keys.get(j);
+			HeadQuarterEntry headQuarterEntry = new HeadQuarterEntry(hqKeyToCheck);
+			if(!contains(headQuarterEntry))
+				addNewHeadQuarterEntry(headQuarterEntry);
+		}
+	}
+
+	public void selectKeys(HQKeys keys)
+	{
+		for(int row = 0; row < getRowCount(); ++row)
+		{
+			if(keys.contains(getHQKey(row)))
+				selectRow(row);
+		}
+	}
+	
+	public void selectRow(int row)
+	{
+		HeadQuarterEntry entry = (HeadQuarterEntry)entries.get(row);
+		entry.setSelected(true);
+	}
+	
 	public void removeRow(int row)
 	{
 		entries.remove(row);
@@ -176,6 +202,11 @@ public abstract class HeadQuartersTableModel extends UiTableModel
 		if(column == COLUMN_SELECTED || column == COLUMN_DEFAULT)
 			return true;
 		return false;
+	}
+	
+	public boolean contains(HeadQuarterEntry entry)
+	{
+		return entries.contains(entry);
 	}
 	
 	Vector entries;
