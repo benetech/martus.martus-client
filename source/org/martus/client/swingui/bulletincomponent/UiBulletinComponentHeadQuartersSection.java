@@ -25,9 +25,9 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.bulletincomponent;
 
-import javax.swing.ListSelectionModel;
 
 import org.martus.client.swingui.HeadQuartersTableModel;
+import org.martus.client.swingui.UiHeadquartersTable;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.swing.UiLabel;
@@ -54,18 +54,9 @@ abstract public class UiBulletinComponentHeadQuartersSection extends UiBulletinC
 	
 	protected UiTable createHeadquartersTable(HeadQuartersTableModel hqModel) 
 	{
-		UiTable hqTable = new UiTable(hqModel);
-		hqTable.setRenderers(hqModel);
-		hqTable.createDefaultColumnsFromModel();
-		hqTable.setMaxGridWidth(40);
-		hqTable.useMaxWidth();
-		hqTable.setColumnSelectionAllowed(false);
-		hqTable.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
-		hqTable.setShowGrid(true);
-		hqTable.resizeTable();
-		return hqTable;
+		return new UiHeadquartersTable(hqModel);
 	}
-
+	
 	abstract public void copyDataToBulletin(Bulletin bulletinToCopyInto);
 
 	Bulletin bulletin;
