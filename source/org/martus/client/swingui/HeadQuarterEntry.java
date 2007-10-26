@@ -74,6 +74,20 @@ public class HeadQuarterEntry
 		return key;
 	}
 	
+	public int hashCode()
+	{
+		return key.hashCode();
+	}
+	
+	public boolean equals(Object rawOther)
+	{
+		if(! (rawOther instanceof HeadQuarterEntry))
+			return false;
+		
+		HeadQuarterEntry other = (HeadQuarterEntry)rawOther;
+		return key.equals(other.key);
+	}
+	
 	HQKey key;
 	boolean isSelected;
 }
