@@ -37,9 +37,9 @@ import javax.swing.border.LineBorder;
 import org.martus.clientside.UiLocalization;
 import org.martus.swing.Utilities;
 
-class ModalBusyDialog extends JDialog
+public class ModalBusyDialog extends JDialog
 {
-	ModalBusyDialog(UiMainWindow mainWindow, String dialogTag)
+	public ModalBusyDialog(UiMainWindow mainWindow, String dialogTag)
 	{
 		super(mainWindow.getCurrentActiveFrame());
 		UiLocalization localization = mainWindow.getLocalization();
