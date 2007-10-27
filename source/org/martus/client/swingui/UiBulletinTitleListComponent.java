@@ -33,9 +33,9 @@ import org.martus.swing.UiList;
 
 public class UiBulletinTitleListComponent extends UiList
 {
-	public UiBulletinTitleListComponent(UiMainWindow mainWindow, Vector bulletinUids)
+	public UiBulletinTitleListComponent(UiMainWindow mainWindow, Vector bulletins)
 	{
-		super(extractTitles(mainWindow, bulletinUids));
+		super(extractTitles(mainWindow, bulletins));
 	}
 
 	private static String[] extractTitles(UiMainWindow window, Vector bulletins)
