@@ -1168,6 +1168,13 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 			table.setCurrentBulletinIndex(position);
 	}
 
+	public void forceRebuildOfPreview()
+	{
+		preview.setCurrentBulletin(null);
+		table.currentFolderContentsHaveChanged();
+		table.selectFirstBulletin();
+	}
+	
 	private JComponent createTopStuff()
 	{
 		JPanel topStuff = new JPanel(false);

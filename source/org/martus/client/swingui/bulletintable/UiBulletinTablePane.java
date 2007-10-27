@@ -99,6 +99,11 @@ public class UiBulletinTablePane extends UiScrollPane
 		parent.bulletinSelectionHasChanged();
 	}
 
+	public void currentFolderContentsHaveChanged()
+	{
+		folderContentsHaveChanged(table.getFolder());
+	}
+
 	public void folderContentsHaveChanged(BulletinFolder folder)
 	{
 		if(folder.equals(table.getFolder()))
@@ -193,4 +198,5 @@ public class UiBulletinTablePane extends UiScrollPane
 	UiMainWindow parent;
 
 	private UiBulletinTable table;
+
 }
