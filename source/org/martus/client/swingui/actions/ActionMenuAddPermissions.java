@@ -98,6 +98,8 @@ public class ActionMenuAddPermissions extends UiMenuAction
 		progressDialog.pack();
 		KeyAdderThread thread = new KeyAdderThread(mainWindow, ourBulletins, selectedHqKeys);
 		mainWindow.doBackgroundWork(thread, progressDialog);
+		mainWindow.forceRebuildOfPreview();
+
 	}
 	
 	static class KeyAdderThread extends WorkerProgressThread
@@ -112,25 +114,31 @@ public class ActionMenuAddPermissions extends UiMenuAction
 		public void doTheWorkWithNO_SWING_CALLS() throws Exception
 		{
 			ProgressMeterInterface progressMeter = getProgressMeter();
-			MartusApp app = mainWindow.getApp();
 			for(int i = 0; i < bulletins.size(); ++i)
 			{
 				if(progressMeter.shouldExit())
 					break;
 				progressMeter.updateProgressMeter(i, bulletins.size());
 				Bulletin oldBulletin = (Bulletin)bulletins.get(i);
-				Bulletin newBulletin = app.createBulletin();
-				newBulletin.createDraftCopyOf(oldBulletin, app.getStore().getDatabase());
-				newBulletin.addAuthorizedToReadKeys(hqKeys);
-				BulletinFolder outbox = app.getFolderDraftOutbox();
-				if(oldBulletin.isSealed())
-				{
-					newBulletin.setSealed();
-					outbox = app.getFolderSealedOutbox();
-				}
-				Thread.sleep(500);
-//				app.saveBulletin(newBulletin, outbox);
+				createNewVersionWithHqs(oldBulletin);
 			}
+		}
+
+		private void createNewVersionWithHqs(Bulletin oldBulletin) throws Exception
+		{
+			MartusApp app = mainWindow.getApp();
+			Bulletin newBulletin = oldBulletin;
+			BulletinFolder outbox = app.getFolderDraftOutbox();
+			if(oldBulletin.isSealed())
+			{
+				newBulletin = app.createBulletin();
+				newBulletin.createDraftCopyOf(oldBulletin, app.getStore().getDatabase());
+				newBulletin.setSealed();
+				outbox = app.getFolderSealedOutbox();
+			}
+			newBulletin.addAuthorizedToReadKeys(hqKeys);
+			app.saveBulletin(newBulletin, outbox);
+			mainWindow.folderContentsHaveChanged(outbox);
 		}
 
 		UiMainWindow mainWindow;
