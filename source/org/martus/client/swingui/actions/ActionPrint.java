@@ -37,6 +37,7 @@ import javax.swing.JComponent;
 
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.dialogs.UiPrintBulletinDlg;
+import org.martus.common.MartusLogger;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.bulletin.BulletinHtmlGenerator;
 import org.martus.swing.HtmlViewer;
@@ -70,10 +71,18 @@ public class ActionPrint extends UiMenuAction
 
 	public void actionPerformed(ActionEvent ae)
 	{
-		Vector selectedBulletins = mainWindow.getSelectedBulletins("PrintZeroBulletins");
-		if(selectedBulletins == null)
-			return;
-		printBulletins(selectedBulletins);
+		try
+		{
+			Vector selectedBulletins = mainWindow.getSelectedBulletins("PrintZeroBulletins");
+			if(selectedBulletins == null)
+				return;
+			printBulletins(selectedBulletins);
+		} 
+		catch (Exception e)
+		{
+			MartusLogger.logException(e);
+			mainWindow.unexpectedErrorDlg();
+		}
 		mainWindow.requestFocus();
 	}
 

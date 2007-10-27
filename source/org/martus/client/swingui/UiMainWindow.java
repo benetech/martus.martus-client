@@ -2427,13 +2427,21 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 
 	public void doExportBulletins()
 	{
-		Vector bulletins = getSelectedBulletins("ExportZeroBulletins");
-		if(bulletins == null)
-			return;
-		String defaultFileName = localization.getFieldLabel("ExportedBulletins");
-		if(bulletins.size()==1)
-			defaultFileName = ((Bulletin)bulletins.get(0)).toFileName();
-		new UiExportBulletinsDlg(this, bulletins, defaultFileName);
+		try
+		{
+			Vector bulletins = getSelectedBulletins("ExportZeroBulletins");
+			if(bulletins == null)
+				return;
+			String defaultFileName = localization.getFieldLabel("ExportedBulletins");
+			if(bulletins.size()==1)
+				defaultFileName = ((Bulletin)bulletins.get(0)).toFileName();
+			new UiExportBulletinsDlg(this, bulletins, defaultFileName);
+		} 
+		catch (Exception e)
+		{
+			MartusLogger.logException(e);
+			unexpectedErrorDlg();
+		}
 	}
 	
 	public void doImportBulletins()
@@ -2442,7 +2450,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	}
 	
 	
-	public Vector getSelectedBulletins(String tagZeroBulletinsSelected)
+	public Vector getSelectedBulletins(String tagZeroBulletinsSelected) throws Exception
 	{
 		UniversalId[] uids = table.getSelectedBulletinUids();
 		if(uids.length == 0)
@@ -2453,18 +2461,34 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		return getBulletins(uids);
 	}
 	
-	public Vector getBulletins(UniversalId[] uids)
+	public Vector getBulletins(UniversalId[] uids) throws Exception
 	{
-		Vector bulletins = new Vector();
-		for (int i = 0; i < uids.length; i++)
-		{
-			UniversalId uid = uids[i];
-			Bulletin b = getStore().getBulletinRevision(uid);
-			bulletins.add(b);
-		}
-		return bulletins;
+		BulletinGetterThread thread = new BulletinGetterThread(uids);
+		doBackgroundWork(thread, "PreparingBulletins");
+		return thread.bulletins;
 	}
 	
+	class BulletinGetterThread extends WorkerThread
+	{
+		public BulletinGetterThread(UniversalId[] uidsToGet)
+		{
+			uids = uidsToGet;
+			bulletins = new Vector();
+		}
+		
+		public void doTheWorkWithNO_SWING_CALLS() throws Exception
+		{
+			for (int i = 0; i < uids.length; i++)
+			{
+				UniversalId uid = uids[i];
+				Bulletin b = getStore().getBulletinRevision(uid);
+				bulletins.add(b);
+			}
+		}
+	
+		UniversalId[] uids;
+		Vector bulletins;
+	}
 	
 	public boolean getBulletinsAlwaysPrivate()
 	{
