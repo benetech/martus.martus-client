@@ -25,31 +25,21 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.actions;
 
-import java.awt.Component;
-import java.awt.Container;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.Vector;
 
-import javax.swing.Box;
-import javax.swing.JDialog;
-
-import org.martus.client.swingui.UiBulletinTitleListComponent;
-import org.martus.client.swingui.UiHeadquartersTable;
+import org.martus.client.bulletinstore.BulletinFolder;
+import org.martus.client.core.MartusApp;
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.client.swingui.bulletincomponent.HeadQuartersTableModelEdit;
-import org.martus.clientside.UiLocalization;
+import org.martus.client.swingui.WorkerProgressThread;
+import org.martus.client.swingui.dialogs.AddPermissionsDialog;
+import org.martus.client.swingui.dialogs.UiProgressWithCancelDlg;
 import org.martus.common.HQKeys;
 import org.martus.common.MartusLogger;
+import org.martus.common.ProgressMeterInterface;
 import org.martus.common.HQKeys.HQsException;
 import org.martus.common.bulletin.Bulletin;
-import org.martus.swing.UiButton;
-import org.martus.swing.UiLabel;
-import org.martus.swing.UiScrollPane;
-import org.martus.swing.UiWrappedTextArea;
-import org.martus.swing.Utilities;
 
-import com.jhlabs.awt.GridLayoutPlus;
 
 public class ActionMenuAddPermissions extends UiMenuAction
 {
@@ -76,10 +66,18 @@ public class ActionMenuAddPermissions extends UiMenuAction
 
 	public void actionPerformed(ActionEvent ae)
 	{
-		addPermissionsToBulletins(mainWindow.getSelectedBulletins("UnexpectedError"));
+		try
+		{
+			addPermissionsToBulletins(mainWindow.getSelectedBulletins("UnexpectedError"));
+		} 
+		catch (Exception e)
+		{
+			MartusLogger.logException(e);
+			mainWindow.unexpectedErrorDlg();
+		}
 	}
 	
-	private void addPermissionsToBulletins(Vector selectedBulletins)
+	private void addPermissionsToBulletins(Vector selectedBulletins) throws Exception
 	{
 		Vector ourBulletins = extractOurBulletins(selectedBulletins, mainWindow.getApp().getAccountId());
 		if(ourBulletins.size() == 0)
@@ -87,28 +85,57 @@ public class ActionMenuAddPermissions extends UiMenuAction
 			mainWindow.notifyDlg("AddPermissionsZeroBulletinsOurs");
 			return;
 		}
-		try
-		{
-			HQKeys allHqKeys = mainWindow.getApp().getAllHQKeys();
-			AddPermissionsDialog dlg = new AddPermissionsDialog(mainWindow, selectedBulletins, ourBulletins, allHqKeys);
-			dlg.setVisible(true);
-			
-			HQKeys selectedHqKeys = dlg.getSelectedHqKeys();
-			if(selectedHqKeys == null)
-				return;
-			
-			addHqKeys(ourBulletins, selectedHqKeys);
-		} 
-		catch (HQsException e)
-		{
-			MartusLogger.logException(e);
-			mainWindow.unexpectedErrorDlg();
-		}
+
+		HQKeys allHqKeys = mainWindow.getApp().getAllHQKeys();
+		AddPermissionsDialog dlg = new AddPermissionsDialog(mainWindow, selectedBulletins, ourBulletins, allHqKeys);
+		dlg.setVisible(true);
+		
+		HQKeys selectedHqKeys = dlg.getSelectedHqKeys();
+		if(selectedHqKeys == null)
+			return;
+		
+		UiProgressWithCancelDlg progressDialog = new UiProgressWithCancelDlg(mainWindow, "AddingPermissionsToBulletins");
+		progressDialog.pack();
+		KeyAdderThread thread = new KeyAdderThread(mainWindow, ourBulletins, selectedHqKeys);
+		mainWindow.doBackgroundWork(thread, progressDialog);
 	}
 	
-	private void addHqKeys(Vector bulletins, HQKeys hqKeys)
+	static class KeyAdderThread extends WorkerProgressThread
 	{
-		System.out.println("addHqKeys: " + bulletins.size() + " bulletins, " + hqKeys.size() + " hq keys");
+		public KeyAdderThread(UiMainWindow mainWindowToUse, Vector bulletinsToModify, HQKeys keysToAdd)
+		{
+			mainWindow = mainWindowToUse;
+			bulletins = bulletinsToModify;
+			hqKeys = keysToAdd;
+		}
+		
+		public void doTheWorkWithNO_SWING_CALLS() throws Exception
+		{
+			ProgressMeterInterface progressMeter = getProgressMeter();
+			MartusApp app = mainWindow.getApp();
+			for(int i = 0; i < bulletins.size(); ++i)
+			{
+				if(progressMeter.shouldExit())
+					break;
+				progressMeter.updateProgressMeter(i, bulletins.size());
+				Bulletin oldBulletin = (Bulletin)bulletins.get(i);
+				Bulletin newBulletin = app.createBulletin();
+				newBulletin.createDraftCopyOf(oldBulletin, app.getStore().getDatabase());
+				newBulletin.addAuthorizedToReadKeys(hqKeys);
+				BulletinFolder outbox = app.getFolderDraftOutbox();
+				if(oldBulletin.isSealed())
+				{
+					newBulletin.setSealed();
+					outbox = app.getFolderSealedOutbox();
+				}
+				Thread.sleep(500);
+//				app.saveBulletin(newBulletin, outbox);
+			}
+		}
+
+		UiMainWindow mainWindow;
+		Vector bulletins;
+		HQKeys hqKeys;
 	}
 
 	private Vector extractOurBulletins(Vector allBulletins, String ourAccountId)
@@ -123,111 +150,5 @@ public class ActionMenuAddPermissions extends UiMenuAction
 		}
 		
 		return ourBulletins;
-	}
-	static class AddPermissionsDialog extends JDialog
-	{
-		public AddPermissionsDialog(UiMainWindow mainWindowToUse, Vector allBulletins, Vector ourBulletins, HQKeys hqKeys)
-		{
-			super(mainWindowToUse);
-			mainWindow = mainWindowToUse;
-			
-			setModal(true);
-			Container contentPane = getContentPane();
-			contentPane.setLayout(new GridLayoutPlus(0, 1, 2, 2, 2, 2));
-			UiLocalization localization = mainWindow.getLocalization();
-			setTitle(localization.getWindowTitle("AddPermissions"));
-
-			String overview = localization.getFieldLabel("AddPermissionsOverview");
-			contentPane.add(new UiWrappedTextArea(overview));
-
-			
-			UiBulletinTitleListComponent list = new UiBulletinTitleListComponent(mainWindow, ourBulletins);
-			contentPane.add(new UiScrollPane(list));
-			
-			// if any bulletins are not ours, tell user why they are not listed
-			if(ourBulletins.size() != allBulletins.size())
-			{
-				String skippingBulletinsNotOurs = localization.getFieldLabel("SkippingBulletinsNotOurs");
-				contentPane.add(new UiWrappedTextArea(skippingBulletinsNotOurs));
-			}
-			
-			contentPane.add(blankLine());
-			String chooseHeadquartersToAdd = localization.getFieldLabel("ChooseHeadquartersToAdd");
-			contentPane.add(new UiWrappedTextArea(chooseHeadquartersToAdd));
-			
-			model = new HeadQuartersTableModelEdit(localization);
-			model.addKeys(hqKeys);
-			UiHeadquartersTable hqTable = new UiHeadquartersTable(model);
-			hqTable.setMaxColumnWidthToHeaderWidth(0);
-			UiScrollPane hqScroller = new UiScrollPane(hqTable);
-			contentPane.add(hqScroller);
-			contentPane.add(blankLine());
-
-			Box buttonBox = Box.createHorizontalBox();
-			UiButton okButton = new UiButton(localization.getButtonLabel("AddPermissions"));
-			okButton.addActionListener(new OkButtonHandler());
-			UiButton cancelButton = new UiButton(localization.getCancelButtonLabel());
-			cancelButton.addActionListener(new CancelButtonHandler());
-			Component[] buttons = new Component[] {
-					Box.createHorizontalGlue(),
-					okButton,
-					cancelButton,
-			};
-			Utilities.addComponentsRespectingOrientation(buttonBox, buttons);
-			contentPane.add(buttonBox);
-			
-			Utilities.centerDlg(this);
-			setResizable(true);
-		}
-		
-		public HQKeys getSelectedHqKeys()
-		{
-			return selectedHqKeys;
-		}
-
-		private UiLabel blankLine()
-		{
-			return new UiLabel(" ");
-		}
-		
-		void doOk()
-		{
-			HQKeys selectedKeys = model.getAllSelectedHeadQuarterKeys();
-			if(selectedKeys.size() == 0)
-			{
-				mainWindow.notifyDlg("AddPermissionsZeroHeadquartersSelected");
-				return;
-			}
-			
-			selectedHqKeys = selectedKeys;
-			
-			dispose();
-		}
-		
-		void doCancel()
-		{
-			dispose();
-		}
-		
-		class OkButtonHandler implements ActionListener
-		{
-			public void actionPerformed(ActionEvent e)
-			{
-				doOk();
-			}
-		}
-		
-		class CancelButtonHandler implements ActionListener
-		{
-			public void actionPerformed(ActionEvent e)
-			{
-				doCancel();
-			}
-			
-		}
-		
-		UiMainWindow mainWindow;
-		HeadQuartersTableModelEdit model;
-		HQKeys selectedHqKeys;
 	}
 }
