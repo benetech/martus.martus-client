@@ -593,6 +593,12 @@ public class EnglishStrings
 "wintitle:PreparingBulletins=Preparing Bulletins...",
 "field:PreparingBulletins=Preparing Bulletins...",
 
+"wintitle:AddingPermissionsToBulletins=Add Permissions to Bulletins",
+"field:AddingPermissionsToBulletins=Adding permissions...",
+"wintitle:confirmAddingPermissionsToBulletinsCancel=Cancel",
+"field:confirmAddingPermissionsToBulletinsCancelcause=The operation will be stopped immediately.",
+"field:confirmAddingPermissionsToBulletinsCanceleffect=If you do this, the bulletins already processed will have the new headquarters keys, but other selected bulletins will not.",
+
 "field:VirtualUserNameDescription=(Enter using regular keyboard)",
 "field:VirtualPasswordDescription=Enter Password using mouse with on-screen keyboard below",
 "field:VirtualKeyboardKeys=ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890-+=!@#$%^&*()_,.[]{}<>\\/?|;:~",
