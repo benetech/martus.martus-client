@@ -67,6 +67,7 @@ import org.martus.client.swingui.actions.ActionMenuRetrieveHQDraftBulletins;
 import org.martus.client.swingui.actions.ActionMenuRetrieveHQSealedBulletins;
 import org.martus.client.swingui.actions.ActionMenuRetrieveMyDraftBulletins;
 import org.martus.client.swingui.actions.ActionMenuRetrieveMySealedBulletins;
+import org.martus.client.swingui.actions.ActionMenuSealSelectedBulletins;
 import org.martus.client.swingui.actions.ActionMenuSearch;
 import org.martus.client.swingui.actions.ActionMenuSelectAllBulletins;
 import org.martus.client.swingui.actions.ActionMenuSelectServer;
@@ -116,6 +117,7 @@ public class UiMenuBar extends JMenuBar
 		edit.add(actionMenuDiscardBulletins);
 		edit.addSeparator();
 		edit.add(actionMenuAddPermissions);
+		edit.add(actionMenuSealSelectedBulletins);
 
 		UiMenu folders = new UiMenu(localization.getMenuLabel("folders"));
 		FoldersMenuListener folderMenuListener = new FoldersMenuListener();
@@ -226,6 +228,7 @@ public class UiMenuBar extends JMenuBar
 			actionMenuPasteBulletins.setEnabled(actionMenuPasteBulletins.isEnabled());
 			actionMenuDiscardBulletins.setEnabled(actionMenuDiscardBulletins.isEnabled());
 			actionMenuAddPermissions.setEnabled(actionMenuAddPermissions.isEnabled());
+			actionMenuSealSelectedBulletins.setEnabled(actionMenuSealSelectedBulletins.isEnabled());
 		}
 
 		public void initalize()
@@ -238,6 +241,7 @@ public class UiMenuBar extends JMenuBar
 			actionMenuPasteBulletins.setEnabled(false);
 			actionMenuDiscardBulletins.setEnabled(false);
 			actionMenuAddPermissions.setEnabled(false);
+			actionMenuSealSelectedBulletins.setEnabled(false);
 		}
 
 		public void menuDeselected(MenuEvent e) {}
@@ -282,6 +286,7 @@ public class UiMenuBar extends JMenuBar
 		actionMenuFolderOrganize = new ActionMenuFoldersOrganize(mainWindow);
 		
 		actionMenuAddPermissions = new ActionMenuAddPermissions(mainWindow);
+		actionMenuSealSelectedBulletins = new ActionMenuSealSelectedBulletins(mainWindow);
 	}
 
 
@@ -299,4 +304,5 @@ public class UiMenuBar extends JMenuBar
 	AbstractAction actionMenuFolderDelete;
 	AbstractAction actionMenuFolderOrganize;
 	AbstractAction actionMenuAddPermissions;
+	AbstractAction actionMenuSealSelectedBulletins;
 }

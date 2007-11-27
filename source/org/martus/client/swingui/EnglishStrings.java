@@ -104,6 +104,8 @@ public class EnglishStrings
 "wintitle:confirmReportIncludePrivate=All Data Private",
 "wintitle:confirmSearchProgressCancel=Cancel Search",
 "wintitle:confirmReportSearchProgressCancel=Cancel Search",
+"wintitle:confirmSealSelectedBulletins=Seal Bulletins",
+"wintitle:confirmSealingSelectedBulletinsCancel=Sealing Bulletins",
 
 "wintitle:notifyDropErrorBulletinExists=Cannot Move Bulletin(s)",
 "wintitle:notifyDropErrorBulletinOlder=Cannot Move Bulletin(s)",
@@ -429,6 +431,7 @@ public class EnglishStrings
 "menu:DiscardBulletins=Discard Bulletin(s)",
 "menu:DeleteBulletins=Delete Bulletin(s)",
 "menu:AddPermissions=Add Permissions...",
+"menu:SealSelectedBulletins=Seal Bulletin(s)",
 "menu:ResendBulletins=Resend Bulletin(s)",
 "menu:folders=Folders",
 "menu:CreateNewFolder=Create New Folder",
@@ -593,6 +596,9 @@ public class EnglishStrings
 "wintitle:PreparingBulletins=Preparing Bulletins...",
 "field:PreparingBulletins=Preparing Bulletins...",
 
+"wintitle:SealingSelectedBulletins=Sealing Bulletins...",
+"field:SealingSelectedBulletins=Sealing Bulletins...",
+
 "wintitle:AddingPermissionsToBulletins=Add Permissions to Bulletins",
 "field:AddingPermissionsToBulletins=Adding permissions...",
 "wintitle:confirmAddingPermissionsToBulletinsCancel=Cancel",
@@ -732,9 +738,14 @@ public class EnglishStrings
 "field:confirmReportSearchProgressCancelcause=The search in progress will be stopped immediately.",
 "field:confirmReportSearchProgressCanceleffect=If you do this, the report will only include the bulletins that have been found so far.",
 
+"field:confirmSealingSelectedBulletinsCancelcause=The operation in progress will be stopped.",
+"field:confirmSealingSelectedBulletinsCanceleffect=If you do this, bulletins that have already been sealed will remain sealed, and bulletins that have not been processed yet will remain in their current state.",
 
 "field:confirmDateRageInvalidcause=The date range you entered is invalid.  The end date occurs before the begin date.",
 "field:confirmDateRageInvalideffect=Answering Yes will take you back to the date range to fix the problem.  Answering No will revert the date back to its original value.",
+
+"field:confirmSealSelectedBulletinscause=This will seal all the currently selected draft bulletins.",
+"field:confirmSealSelectedBulletinseffect=Any selected bulletins that are already sealed will remain unchanged.",
 
 "field:notifyDropErrorBulletinExistscause=One or more bulletins cannot be moved to that folder, because it already exists in that folder.",
 "field:notifyDropErrorBulletinOldercause=One or more bulletins cannot be moved to that folder, because a newer version of this bulletin already exists.",
