@@ -82,14 +82,24 @@ class ViewHandler implements ActionListener
 			Runtime runtimeViewer = Runtime.getRuntime();
 			String tempFileFullPathName = temp.getPath();
 			Process processView=runtimeViewer.exec("rundll32"+" "+"url.dll,FileProtocolHandler"+" "+tempFileFullPathName);
-			processView.waitFor();
+			int exitCode = processView.waitFor();
+			if(exitCode != 0)
+			{
+				System.out.println("Error viewing attachment: " + exitCode);
+				notifyUnableToView();
+			}
 		}
 		catch(Exception e)
 		{
-			mainWindow.notifyDlg("UnableToViewAttachment");
-			System.out.println("Unable to view file :" + e);
+			System.out.println("Unable to view attachment:" + e);
+			notifyUnableToView();
 		}
 		mainWindow.resetCursor();
+	}
+
+	private void notifyUnableToView()
+	{
+		mainWindow.notifyDlg("UnableToViewAttachment");
 	}
 	
 	static File extractAttachmentToTempFile(ReadableDatabase db, AttachmentProxy proxy, MartusCrypto security) throws IOException, InvalidBase64Exception, InvalidPacketException, SignatureVerificationException, WrongPacketTypeException, CryptoException
