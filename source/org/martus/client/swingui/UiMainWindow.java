@@ -827,7 +827,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 
 	public boolean canModifyCurrentFolder()
 	{
-		BulletinFolder folder = folders.getSelectedFolder();
+		BulletinFolder folder = getSelectedFolder();
 		return canModifyFolder(folder);
 	}
 
@@ -2416,7 +2416,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	public void doExportFolder()
 	{
 	
-		BulletinFolder selectedFolder = folders.getSelectedFolder();
+		BulletinFolder selectedFolder = getSelectedFolder();
 		int bulletinCount = selectedFolder.getBulletinCount();
 		if(bulletinCount == 0)
 		{
@@ -2430,6 +2430,11 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		}
 		String defaultFileName = MartusUtilities.createValidFileName(selectedFolder.getLocalizedName(localization));
 		new UiExportBulletinsDlg(this, bulletins, defaultFileName);
+	}
+
+	public BulletinFolder getSelectedFolder()
+	{
+		return folders.getSelectedFolder();
 	}
 
 	public void doExportBulletins()
