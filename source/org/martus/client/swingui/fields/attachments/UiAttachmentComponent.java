@@ -28,6 +28,7 @@ package org.martus.client.swingui.fields.attachments;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Container;
+import java.util.Vector;
 
 import javax.swing.BorderFactory;
 import javax.swing.JComponent;
@@ -50,6 +51,7 @@ abstract public class UiAttachmentComponent extends JPanel
 		mainWindow = mainWindowToUse;
 		model = new AttachmentTableModel(mainWindow);
 
+		attachmentPanels = new Vector();
 	}
 	
 	abstract AbstractAttachmentPanel createAttachmentPanel(int row);
@@ -62,6 +64,9 @@ abstract public class UiAttachmentComponent extends JPanel
 
 	public void updateTable()
 	{
+		Vector uidsThatWereInlined = getUidsThatWereInlined();
+		attachmentPanels.clear();
+
 		removeAll();
 		JPanel headerContainer = new JPanel(new BorderLayout());
 		headerContainer.setBorder(BorderFactory.createLineBorder(Color.BLACK));
@@ -69,11 +74,27 @@ abstract public class UiAttachmentComponent extends JPanel
 		add(headerContainer);
 		for(int row = 0; row < model.getRowCount(); ++row)
 		{
-			add(createAttachmentPanel(row));
+			AbstractAttachmentPanel attachmentPanel = createAttachmentPanel(row);
+			if(uidsThatWereInlined.contains(attachmentPanel.proxy.getUniversalId()))
+				attachmentPanel.showImageInline();
+			attachmentPanels.add(attachmentPanel);
+			add(attachmentPanel);
 		}
 		add(createAttachmentFooter());
 		
 		validateParent();
+	}
+
+	private Vector getUidsThatWereInlined()
+	{
+		Vector uidsThatWereInlined = new Vector();
+		for(int i = 0; i < attachmentPanels.size(); ++i)
+		{
+			AbstractAttachmentPanel panel = (AbstractAttachmentPanel) attachmentPanels.get(i);
+			if(panel.isImageInline)
+				uidsThatWereInlined.add(panel.proxy.getUniversalId());
+		}
+		return uidsThatWereInlined;
 	}
 
 	public void addAttachment(AttachmentProxy a)
@@ -120,4 +141,6 @@ abstract public class UiAttachmentComponent extends JPanel
 
 	protected UiMainWindow mainWindow;
 	protected AttachmentTableModel model;
+	
+	private Vector attachmentPanels;
 }
