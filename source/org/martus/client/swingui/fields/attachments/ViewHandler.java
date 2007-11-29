@@ -33,6 +33,7 @@ import java.io.IOException;
 import org.martus.client.bulletinstore.ClientBulletinStore;
 import org.martus.client.core.BulletinXmlExporter;
 import org.martus.client.swingui.UiMainWindow;
+import org.martus.common.MartusLogger;
 import org.martus.common.bulletin.AttachmentProxy;
 import org.martus.common.bulletin.BulletinLoader;
 import org.martus.common.crypto.MartusCrypto;
@@ -111,11 +112,13 @@ class ViewHandler implements ActionListener
 	{
 		Runtime runtimeViewer = Runtime.getRuntime();
 		String tempFileFullPathName = temp.getPath();
-		Process processView=runtimeViewer.exec("rundll32"+" "+"url.dll,FileProtocolHandler"+" "+tempFileFullPathName);
+		String launchCommand = "cmd /C " + '"' + tempFileFullPathName + '"';
+		Process processView=runtimeViewer.exec(launchCommand);
 		int exitCode = processView.waitFor();
 		if(exitCode != 0)
 		{
-			System.out.println("Error viewing attachment: " + exitCode);
+			MartusLogger.logError("Error viewing attachment: " + exitCode);
+			MartusLogger.logError(launchCommand);
 			notifyUnableToView();
 		}
 	}
