@@ -38,6 +38,7 @@ import org.martus.common.bulletin.BulletinLoader;
 import org.martus.common.crypto.MartusCrypto;
 import org.martus.common.crypto.MartusCrypto.CryptoException;
 import org.martus.common.database.ReadableDatabase;
+import org.martus.common.packet.UniversalId;
 import org.martus.common.packet.Packet.InvalidPacketException;
 import org.martus.common.packet.Packet.SignatureVerificationException;
 import org.martus.common.packet.Packet.WrongPacketTypeException;
@@ -65,8 +66,8 @@ class ViewHandler implements ActionListener
 		}
 		
 		AttachmentProxy proxy = panel.getAttachmentProxy();
-		String author = proxy.getUniversalId().getAccountId();
-		if(!author.equals(mainWindow.getApp().getAccountId()))
+		String proxyAuthor = getProxyAuthor(proxy);
+		if(proxyAuthor != null && !mainWindow.getApp().getAccountId().equals(proxyAuthor))
 		{
 			if(!mainWindow.confirmDlg("NotYourBulletinViewAttachmentAnyways"))
 				return;
@@ -74,20 +75,8 @@ class ViewHandler implements ActionListener
 		mainWindow.setWaitingCursor();
 		try
 		{
-			ClientBulletinStore store = mainWindow.getApp().getStore();
-			ReadableDatabase db = store.getDatabase();
-			MartusCrypto security = store.getSignatureVerifier();
-			File temp = extractAttachmentToTempFile(db, proxy, security);
-
-			Runtime runtimeViewer = Runtime.getRuntime();
-			String tempFileFullPathName = temp.getPath();
-			Process processView=runtimeViewer.exec("rundll32"+" "+"url.dll,FileProtocolHandler"+" "+tempFileFullPathName);
-			int exitCode = processView.waitFor();
-			if(exitCode != 0)
-			{
-				System.out.println("Error viewing attachment: " + exitCode);
-				notifyUnableToView();
-			}
+			File temp = getAttachmentAsFile(proxy);
+			launchExternalAttachmentViewer(temp);
 		}
 		catch(Exception e)
 		{
@@ -95,6 +84,40 @@ class ViewHandler implements ActionListener
 			notifyUnableToView();
 		}
 		mainWindow.resetCursor();
+	}
+
+	private String getProxyAuthor(AttachmentProxy proxy) 
+	{
+		UniversalId uid = proxy.getUniversalId();
+		if(uid == null)
+			return null;
+
+		return uid.getAccountId();
+	}
+
+	private File getAttachmentAsFile(AttachmentProxy proxy) throws IOException, InvalidBase64Exception, InvalidPacketException, SignatureVerificationException, WrongPacketTypeException, CryptoException 
+	{
+		if(proxy.getFile() != null)
+			return proxy.getFile();
+		
+		ClientBulletinStore store = mainWindow.getApp().getStore();
+		ReadableDatabase db = store.getDatabase();
+		MartusCrypto security = store.getSignatureVerifier();
+		File temp = extractAttachmentToTempFile(db, proxy, security);
+		return temp;
+	}
+
+	private void launchExternalAttachmentViewer(File temp) throws IOException, InterruptedException 
+	{
+		Runtime runtimeViewer = Runtime.getRuntime();
+		String tempFileFullPathName = temp.getPath();
+		Process processView=runtimeViewer.exec("rundll32"+" "+"url.dll,FileProtocolHandler"+" "+tempFileFullPathName);
+		int exitCode = processView.waitFor();
+		if(exitCode != 0)
+		{
+			System.out.println("Error viewing attachment: " + exitCode);
+			notifyUnableToView();
+		}
 	}
 
 	private void notifyUnableToView()
