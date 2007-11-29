@@ -46,7 +46,7 @@ public class EnglishStrings
 "wintitle:DuplicateLabelsInCustomTemplate=Warning Duplicate Labels Found",
 "wintitle:ImportProgress=Importing Bulletins",
 "wintitle:ExportProgress=Exporting Bulletins",
-"wintitle:AddPermissions=Add Permissions to Bulletins",
+"wintitle:AddPermissions=Update headquarters access to Bulletins",
 
 "wintitle:confirmsend=Confirm Save Bulletin",
 "wintitle:confirmretrieve=Confirm Retrieve Bulletins",
@@ -223,7 +223,7 @@ public class EnglishStrings
 "wintitle:notifyReportFormatIsTooNew=Reports",
 "wintitle:notifyReportFormatDifferentLanguage=Reports",
 "wintitle:notifyViewAttachmentNotAvailable=Unable to View Attachment",
-"wintitle:notifyAddPermissionsZeroBulletinsOurs=Add Permissions to Bulletins",
+"wintitle:notifyAddPermissionsZeroBulletinsOurs=Update headquarters access to Bulletins",
 
 "wintitle:notifyRetrieveCompleted=Retrieve Complete",
 "field:notifyRetrieveCompletedcause=Retrieving bulletins from the server is complete",
@@ -339,7 +339,7 @@ public class EnglishStrings
 "button:customHelp=Help",
 "button:customImport=Import Template",
 "button:customExport=Export Template",
-"button:AddPermissions=Add Permissions",
+"button:AddPermissions=Update Headquarters Access",
 
 "button:cancel=Cancel",
 "button:save=Save",
@@ -430,7 +430,7 @@ public class EnglishStrings
 "menu:PasteBulletins=Paste Bulletin(s)",
 "menu:DiscardBulletins=Discard Bulletin(s)",
 "menu:DeleteBulletins=Delete Bulletin(s)",
-"menu:AddPermissions=Add Permissions...",
+"menu:AddPermissions=Update Headquarters Access...",
 "menu:SealSelectedBulletins=Seal Bulletin(s)",
 "menu:ResendBulletins=Resend Bulletin(s)",
 "menu:folders=Folders",
@@ -577,8 +577,8 @@ public class EnglishStrings
 "wintitle:notifyPrintCompleted=Reports",
 "field:notifyPrintCompletedcause=Printing Complete",
 "field:OrganizeReportFields=Add the fields you want to appear in your report, and then arrange them in the order you want them to be printed.",
-"field:AddPermissionsOverview=This allows you to add headquarters permissions to existing bulletins." +
-	"Each of the bulletins in the list below will be modified to add the selected headquarters. " +
+"field:AddPermissionsOverview=This allows you to update headquarters access to existing bulletins. " +
+	"Each of the bulletins in the list below will be modified to add the selected headquarters accounts. " +
 	"If a bulletin is sealed, a new version will be created.",
 "field:SkippingBulletinsNotOurs=NOTE: Bulletins authored by other accounts cannot be changed using this command," +
 	"so they are not included in the list above.",
@@ -599,11 +599,11 @@ public class EnglishStrings
 "wintitle:SealingSelectedBulletins=Sealing Bulletins...",
 "field:SealingSelectedBulletins=Sealing Bulletins...",
 
-"wintitle:AddingPermissionsToBulletins=Add Permissions to Bulletins",
-"field:AddingPermissionsToBulletins=Adding permissions...",
+"wintitle:AddingPermissionsToBulletins=Update headquarters access to Bulletins",
+"field:AddingPermissionsToBulletins=Updating access...",
 "wintitle:confirmAddingPermissionsToBulletinsCancel=Cancel",
 "field:confirmAddingPermissionsToBulletinsCancelcause=The operation will be stopped immediately.",
-"field:confirmAddingPermissionsToBulletinsCanceleffect=If you do this, the bulletins already processed will have the new headquarters keys, but other selected bulletins will not.",
+"field:confirmAddingPermissionsToBulletinsCanceleffect=If you do this, the bulletins already processed will have the new headquarters access, but other selected bulletins will not.",
 
 "field:VirtualUserNameDescription=(Enter using regular keyboard)",
 "field:VirtualPasswordDescription=Enter Password using mouse with on-screen keyboard below",
