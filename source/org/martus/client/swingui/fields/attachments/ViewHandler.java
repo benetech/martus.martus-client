@@ -112,7 +112,12 @@ class ViewHandler implements ActionListener
 	{
 		Runtime runtimeViewer = Runtime.getRuntime();
 		String tempFileFullPathName = temp.getPath();
-		String launchCommand = "cmd /C " + '"' + tempFileFullPathName + '"';
+		String quotedPath = '"' + tempFileFullPathName + '"';
+
+		String launchCommand = "cmd /C " + quotedPath;
+		if(temp.getName().indexOf('.') < 0)
+			launchCommand = "start " + quotedPath;
+		
 		Process processView=runtimeViewer.exec(launchCommand);
 		int exitCode = processView.waitFor();
 		if(exitCode != 0)
