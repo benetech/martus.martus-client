@@ -224,6 +224,7 @@ public class EnglishStrings
 "wintitle:notifyReportFormatDifferentLanguage=Reports",
 "wintitle:notifyViewAttachmentNotAvailable=Unable to View Attachment",
 "wintitle:notifyAddPermissionsZeroBulletinsOurs=Update headquarters access to Bulletins",
+"wintitle:notifyAddPermissionsZeroHeadquartersSelected=No Headquarters Selected",
 
 "wintitle:notifyRetrieveCompleted=Retrieve Complete",
 "field:notifyRetrieveCompletedcause=Retrieving bulletins from the server is complete",
@@ -809,6 +810,7 @@ public class EnglishStrings
 "field:notifyErrorWritingFilecause=An error prevented the file from being written. Check to make sure the disk is not full or write protected.",
 "field:notifyErrorReadingFilecause=An error prevented the file from being read.",
 "field:notifyExportZeroBulletinscause=To export bulletins, select them first, and then perform the export operation.",
+"field:notifyAddPermissionsZeroHeadquartersSelectedcause=Must select at least one headquarters account",
 "field:notifyPrintZeroBulletinscause=To print one or more bulletins, select them first, and then perform the print operation.",
 
 "field:notifyUserRejectedServerCompliancecause=You have chosen not to use this server",
