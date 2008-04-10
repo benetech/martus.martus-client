@@ -580,7 +580,7 @@ public class EnglishStrings
 "field:AddPermissionsOverview=This allows you to update headquarters access to existing bulletins. " +
 	"Each of the bulletins in the list below will be modified to add the selected headquarters accounts. " +
 	"If a bulletin is sealed, a new version will be created.",
-"field:SkippingBulletinsNotOurs=NOTE: Bulletins authored by other accounts cannot be changed using this command," +
+"field:SkippingBulletinsNotOurs=NOTE: Bulletins authored by other accounts cannot be changed using this command, " +
 	"so they are not included in the list above.",
 "field:ChooseHeadquartersToAdd=Select the headquarters listed below that you want to add to all the bulletins listed above.",
 	
