@@ -1,7 +1,6 @@
 ﻿--------
 1. Introducción al programa Martus™
-Martus™ Software Manual de usuario versión 3.0
-
+Martus™ Software Manual de usuario Versión 3.2
 --------
 1a. ¿Qué es Martus™?
 El proyecto Martus, cuyo nombre se deriva de la palabra griega ‘testigo’, ofrece una manera eficiente y segura para almacenar y obtener información sobre violaciones a los derechos humanos. Con el programa Martus puede crear boletines para registrar violaciones a los derechos humanos, adjuntar documentos de sustento, especificar si la información ingresada es pública o privada y guardarla en un servidor seguro. Para saber más acerca de los problemas que el proyecto Martus aborda, así como los planes futuros para su desarrollo, visite el sitio web http://www.martus.org.
@@ -23,7 +22,7 @@ Use una contraseña que recuerde, pero que nadie más pueda adivinar. Preste ate
 
 Para mantener su contraseña segura no la escriba en ningún sitio donde pueda verse y asociarse al software de Martus. No se la envíe a nadie por correo electrónico ni la mencione por teléfono, pues estos medios de comunicación no son seguros.
 
-Para acceder a su cuenta necesita su llave además de su contraseña. Haga una copia de seguridad de su llave y almacénela separadamente de su contraseña. (Para más detalles consulte la sección ‘9b. ¿Cómo hacer una copia de seguridad de su llave?‘). Este paso es muy importante pues si su computadora falla o se lo roban, necesitará usar otro computadora en donde instalar su llave y así acceder a los datos privados que haya guardado, si y solo si, los boletines fueron almacenados en el servidor de Martus.
+Para acceder a su cuenta necesita su llave además de su contraseña. Haga copias de seguridad de su llave y almacénelas separadamente de su contraseña. (Para más detalles consulte la sección ‘9b. ¿Cómo hacer una copia de seguridad de su llave?‘). Este paso es muy importante pues si su computadora falla o se lo roban, necesitará usar otro computadora en donde instalar su llave y así acceder a los datos privados que haya guardado, si y solo si, los boletines fueron almacenados en el servidor de Martus.
 --------
 1e. ¿Cuáles son las limitaciones de seguridad de Martus?
 Martus usa tecnología criptográfica muy fuerte para cifrar sus boletines en su disco duro, de manera que otras personas no puedan leerlos. Sin embargo, ya que la seguridad involucra a las personas y éstas son humanas, la seguridad de Martus tiene límites. El programa está diseñado para ser muy seguro pero aún así queremos asegurarnos de que entienda sus limitaciones. Estas son algunas de las formas en que su información privada puede verse comprometida:
@@ -39,10 +38,10 @@ Martus usa tecnología criptográfica muy fuerte para cifrar sus boletines en su
 
 Martus ha sido revisado de forma extensiva para comprobar su seguridad y expertos en informática pueden revisar su diseño en busca de errores con solo pedirlo. Aún así es razonable suponer que la información privada podría ser asequible a terceras personas que inviertan el tiempo y los recursos necesarios para descifrarla y leerla. 
 
-Aunque estas limitaciones son atemorizantes, de todas formas la información en Martus está mucho más segura que la escrita en papeles o en la mayoría de programas de computadora existentes. Le explicamos estas limitaciones para asegurarnos que las entienda y que se de cuenta de lo importante que es tener presente la seguridad cuando use Martus. Hemos construido una cerradura muy poderosa para su información, pero aún así cualquier cerradura puede abrirse si alguien deja la llave a la vista, y hasta las cerraduras más poderosas pueden romperse con el suficiente esfuerzo.
+Aunque estas limitaciones son atemorizantes, de todas formas la información en Martus está mucho más segura que la escrita en papeles o en la mayoría de programas de computadora existentes (incluyendo aquellos programas utilizados por los bancos). Le explicamos estas limitaciones para asegurarnos que las entienda y que se de cuenta de lo importante que es tener presente la seguridad cuando use Martus. Hemos construido una cerradura muy poderosa para su información, pero aún así cualquier cerradura puede abrirse si alguien deja la llave a la vista, y hasta las cerraduras más poderosas pueden romperse con el suficiente esfuerzo.
 --------
 1f. ¿Por qué tengo que enviar mis boletines a un servidor?
-Un servidor Martus es una computadora especializada que acepta boletines cifrados, hace copias seguras de éstos y los replica en diversos lugares evitando que la información se pierda. (Benetech ofrece el programa de servidor a las organizaciones que mantienen servidores Martus, pero no provee con tales servicios directamente. Para obtener una lista de organizaciones que pueden mantener un servidor de Martus envíe un correo electrónico a info@martus.org). Los boletines que no haya enviado a un servidor sólo existen en su computadora. Si su computadora se perdiera, fuera robado o se estropeara, podría perder todos sus datos. El servidor actúa como un mecanismo de copia de seguridad. Con su llave, su nombre de usuario y su contraseña, puede instalar el programa Martus en otra computadora y acceder a todos sus boletines públicos y privados que haya enviado al servidor. Si tiene configuradas algunas cuentas de oficina central, podrá enviar boletines al servidor y estos serán accesibles a aquellas cuentas (tanto los datos públicos como los privados). Consulte las secciones ‘9c. ¿Cómo recuperar su llave de una copia de seguridad?’ y ‘9f. Compartiendo su información privada con colegas’. 
+Un servidor Martus es una computadora especializada que acepta boletines cifrados, hace copias seguras de éstos y los replica en diversos lugares evitando que la información se pierda. (Benetech ofrece el programa de servidor a las organizaciones que mantienen servidores Martus, pero Benetechno aloja aquellos servidores.. Para obtener una lista de organizaciones que pueden mantener un servidor de Martus, envíe un correo electrónico a info@martus.org). Los boletines que no haya enviado a un servidor sólo existen en su computadora. Si su computadora se perdiera, fuera robado o se estropeara, podría perder todos sus datos. El servidor actúa como un mecanismo de copia de seguridad. Con su llave, su nombre de usuario y su contraseña, puede instalar el programa Martus en otra computadora y acceder a todos sus boletines públicos y privados que haya enviado al servidor. Si tiene configuradas algunas cuentas de oficina central, podrá enviar boletines al servidor y estos serán accesibles a aquellas cuentas (tanto los datos públicos como los privados). Consulte las secciones ‘9c. ¿Cómo recuperar su llave de una copia de seguridad?’ y ‘9f. Compartiendo su información privada con colegas’. 
 
 Igualmente, la información pública en los boletines puede estar al alcance de investigadores, prensa y otras personas interesadas en temas de derechos humanos. Si almacena los boletines exclusivamente en su computadora, sólo usted tendrá acceso a la información. Si los envía a un servidor que esté conectado al Buscador Martus de Internet, otros podrán conocer los casos que documente, aunque sólo puedan acceder a las partes denominadas como públicas; las partes privadas nunca son visibles a los demás. 
 --------
@@ -54,16 +53,16 @@ Para informarse más sobre software open source o de código abierto, visite el 
 --------
 2. Inicio
 
-Puede instalar y ejecutar Martus en computadoras que usen plataformas Windows, Mac OS o Linux y que tengan las especificaciones listadas a continuación. Para mayor información sobre recomendaciones referentes a los sistemas operativos consulte las notas de los cambios en el archivo README_es.txt incluido con el programa Martus.
+Puede instalar y ejecutar Martus en computadoras que usen plataformas Windows, Mac OS o Linux y que tengan las especificaciones listadas a continuación. Para mayor información sobre recomendaciones referentes a los sistemas operativos, consulte la página de descarga del programa Martus en http://www.martus.org.
 
-Recomendamos correr Martus 3.0 en Windows 98/2000/XP y Mac OSX. Martus 3.0 no ha sido probado en otras versiones del sistema operativo de Windows/Mac.
+Recomendamos correr Martus 3.2 en Windows 2000/XP y Mac OSX, dado que no ha sido completamente probado en otras versiones del sistema operativo de Windows/Mac.
 
 Windows
 • Windows 95 SE, Windows 98, Windows NT 4.0, Windows Me, Windows 2000 o Windows XP (Sun Microsystems sólo ha probado el entorno Java en Windows 2000 Professional para las versiones que no son inglesas).
-• En Windows NT, Windows 2000 o Windows XP Professional necesita permisos administrativos para poder instalar Martus.
+• En Windows NT, Windows 2000, Windows XP Professional y Windows Vista, necesita permisos administrativos para poder instalar Martus.
 • Un procesador Pentium 166 MHz (le recomendamos 300 MHz o más rápido).
-• 50 MB de espacio en su disco duro.
-• 32 MB de memoria RAM (le recomendamos 64 MB o más).
+• 75 MB de espacio en su disco duro (le recomendamos 100 MB o más).
+• 64 MB de memoria RAM (le recomendamos 256 MB o más).
 • Una conexión a la Internet para enviar su información a un servidor de Martus. Si no tiene la capacidad para conectarse a la Internet consulte la sección ‘9g. ¿Cómo permitir que otras cuentas envíen sus boletines a un servidor?’.
 • Para enviar boletines al servidor Martus, su programa no debe estar bloqueado por un cortafuegos (firewall). Si tiene un cortafuegos, en programa o hardware, debe permitir que su computadora entre en contacto con los puertos 987 y 988, o los puertos 80 y 443, en la Internet. Si estos puertos están bloqueados, cuando intente seleccionar el servidor verá un mensaje que éste no está respondiendo.
 • Unidad lectora de CD (sólo para instalar Martus desde un CD).
@@ -71,8 +70,8 @@ Windows
 
 Mac OS
 • Mac OS versión 9.2  o mayor.
-• Entorno Java (JRE) versión 1.4.2 (de preferencia 1.4.2_12). Martus no es compatible con Java 1.5 (algunas veces llamado Java 5). Para descargar la versión 1.4.2, visite el sitio http://www.apple.com/downloads/macosx/apple.
-• 50 MB de espacio en su disco duro.
+• Entorno Java (JRE) versión 1.4.2 o mayor.
+• 75 MB de espacio en su disco duro (le recomendamos 100 MB o más).
 • Una conexión a la Internet para enviar su información a un servidor de Martus. Si no tiene la capacidad para conectarse a la Internet consulte la sección ‘9g. ¿Cómo permitir que otras cuentas envíen sus boletines a un servidor?’.
 • Para enviar boletines al servidor Martus, su programa no debe estar bloqueado por un cortafuegos (firewall). Si tiene un cortafuegos, en programa o hardware, debe permitir que su computadora entre en contacto con los puertos 987 y 988, o los puertos 80 y 443, en la Internet. Si estos puertos están bloqueados, cuando intente seleccionar el servidor verá un mensaje que éste no está respondiendo.
 • Unidad lectora de CD (sólo para instalar Martus desde un CD).
@@ -81,8 +80,8 @@ Mac OS
 Linux
 • Plataforma Intel Pentium con Linux kernel v. 2.4 y glibc v. 2.2 o más recientes.
 • Entorno Java 2 Standard Edition (J2SE) Java Runtime Environment (JRE) 1.4.2 (de preferencia la versión 1.4.2_12).
-• 75 MB de espacio en su disco duro.
-• 32 MB de memoria RAM (le recomendamos 64 MB o más).
+• 75 MB de espacio en su disco duro (le recomendamos 100 MB o más).
+• 64 MB de memoria RAM (le recomendamos 256 MB o más).
 • Una conexión a la Internet para enviar su información a un servidor de Martus. Si no tiene la capacidad para conectarse a la Internet consulte la sección ‘9g. ¿Cómo permitir que otras cuentas envíen sus boletines a un servidor?’.
 • Para enviar boletines al servidor Martus, su programa no debe estar bloqueado por un cortafuegos (firewall). Si tiene un cortafuegos, en programa o hardware, debe permitir que su computadora entre en contacto con los puertos 987 y 988, o los puertos 80 y 443, en la Internet. Si estos puertos están bloqueados, cuando intente seleccionar el servidor verá un mensaje que éste no está respondiendo.
 • Unidad lectora de CD (sólo para instalar Martus desde un CD).
@@ -125,6 +124,7 @@ Nota: Los discos CD-ROM pequeños sólo son para lectoras de CD-ROM con bandeja 
 5. Si desea, puede también copiar los archivos README de la carpeta principal del CD a su computadora. Estos archivos contienen una lista de los cambios entre las versiones de Martus.
 6. Si desea, cree un script para ejecutar Martus. Para ejecutar Martus, abra una ventana Terminal, vaya a la carpeta /Library/Java/Martus y digite: 
     Java -Xbootclasspath/p:/Library/Java/Extensions/bc-jce.jar -jar martus.jar
+7. Para crear un ícono de acceso directo a Martus en su escritorio, diríjase al disco duro local (Macintosh HD)/application/Martus. Presione y mantenga apretada la tecla Control, haga clic en el ícono de Martus. Seleccione “Hacer un alias”, finalmente arrastre el alias al escritorio.
 
 Para instalar Martus en Linux:
 Las instrucciones para instalar Martus en Linux están incluidas en el documento LinuxJavaInstall.txt que se encuentra en la carpeta Martus/Docs en el CD de instalación. Este mismo documento lo puede encontrar en la carpeta Martus/Docs en su disco duro una vez haya instalado Martus.
@@ -137,7 +137,7 @@ Este comando le indica qué versión de Java está utilizando actualmente y dón
 
  http://java.sun.com/j2se/1.4.2/download.html
 
-Nota: Para correr Martus, necesita instalar la versión actual de Java Runtime Engine (JRE) y no el amplio Kit de Java para Desarrolladores (JDK) (Java Developer´s Kit).
+Nota: Para correr Martus, necesita instalar la versión actual de Java Runtime Environment (JRE) y no el amplio Kit de Java para Desarrolladores (JDK) (Java Developer´s Kit).
 
 Para simplificar la instalación de Java del CD, hemos incluido una serie de comandos que deben ser útiles en casi todas las versiones de Linux. Para efectuar la instalación de Java, copie y ejecute los comandos incluidos en el archivo LinuxJavaInstall.txt. Para ejecutar todos los comandos del archivo automáticamente utilice el comando:
 
@@ -153,7 +153,7 @@ java -Xbootclasspath/p:<ruta-a-Java-Instalación-ejecutable-bibliotecas[0]>/bc-j
 Por ejemplo: 
 $ /opt/j2re1.4.2/bin/java -Xbootclasspath/p:/opt/j2re1.4.2/lib/ext/bc-jce.jar -jar ~/.Martus/martus.jar 
 
-Para obtener asistencia adicional instalando Linux, por favor, envíe un correo electrónico a help@martus.org.
+Si tiene problemas al usar Martus en Linux Ubuntu 6.10, por favor, lea la Pregunta Frecuente #30 para mayor información. Para obtener asistencia adicional instalando Linux, por favor, envíe un correo electrónico a help@martus.org.
 
 Documentación de Martus
 Cuando instale Martus, todas las versiones del manual de usuario y la guía de inicio rápido, actualmente disponibles en distintos idiomas, se instalarán en la carpeta Martus\Docs. Si utilizó el instalador de Windows, también existen enlaces a estos documentos yendo a Inicio>Programas>Martus (Start>Programs>Martus). Estos también están disponibles en http://www.martus.org/downloads, y puede visitar este sitio web para saber qué nuevas versiones están disponibles en distintos idiomas.       
@@ -167,7 +167,7 @@ Para desinstalar Martus en Windows, sin eliminar sus boletines de Martus o los d
 
 Para desinstalar Martus en Mac OS o Linux sin eliminar sus boletines o los datos de su cuenta, elimine el archivo martus.jar y los archivos bc-jce.jar.
 
-Si desea eliminar los boletines y su archivo de llave, pero desea mantener el programa Martus, escoja herramientas > Eliminar mis datos. Consulte la sección ‘7. Eliminar todos sus boletines y la información de su cuenta.’
+Si desea eliminar los boletines y su archivo de llave, pero desea mantener el programa Martus, escoja herramientas > Eliminar mis datos. Consulte la sección ‘7. Eliminar todos sus boletines y la información de su cuenta’
 
 Si necesita eliminar los boletines de Martus, los datos de su configuración y el programa Martus, escoja el menú ‘Herramientas’ > ‘Eliminar todos los datos y remover Martus’. Esta acción elimina toda la información de todas las cuentas de Martus en su computadora, no sólo la suya, y sólo debe ser usada en casos de emergencia. Consulte la sección ‘8. Eliminar toda la información en Martus, incluyendo el programa.’ 
 
@@ -182,6 +182,8 @@ Siga los siguientes pasos para actualizar su copia de Martus para Windows:
 1. Descargue la versión más reciente (ya sea la actualización o los archivos completos de la nueva versión) u obtenga el CD de instalación. 
 2. Ejecute el programa de instalación: haga doble clic sobre el archivo que descargó o inserte el CD en su unidad de CDROM. El programa de instalación le notificará que tiene instalada una versión anterior de Martus.
 3. Oprima ‘Si’ para actualizar su copia. La nueva versión de Martus va a ser instalada en la misma ubicación que la versión anterior. Toda su información, incluyendo su información de cuenta, contraseñas y boletines permanecerán intactos.
+
+Para actualizar su versión del programa Martus en Linux o Macintosh, siga las instrucciones en ‘2a. Instalación’ a fin de reemplazar el programa existente por la nueva actualización.
 --------
 2d. Actualizar el archivo de Martus
 Benetech continúa mejorando Martus. Visite el sitio http://www.martus.org para obtener la versión más reciente, y siga las instrucciones en la página Web para verificar la copia descargada usando el programa SHA-1 sum.
@@ -218,6 +220,8 @@ java  -cp  .  JarVerifier  /Library/Java/Martus/martus.jar
 
 El mensaje ‘Martus JAR verified.’ (Martus JAR verificado) sólo aparecerá en la pantalla si el archivo martus.jar es legítimo.
 
+Nota: Si ha instalado la versión Java 1.5 o una versión superior, puede que el JarVerifier (Martus JAR verificado) no funcione adecuadamente; Puede, además, aparecer un mensaje erróneo que indique que el archivo jar es inválido cuando no es así; Si tiene alguna pregunta, por favor envíe un mensaje de correo electrónico a help@martus.org.
+
 * En Linux:
 Coloque el archivo .jar file en la carpeta existente ~/.Martus/ y ejecute el programa verificador. Las siguientes líneas pueden ser copiadas a una ventana bash o sh (aunque quizá sea necesario autenticarse como usuario 'root' para poder ejecutar el comando mount):
 
@@ -231,11 +235,13 @@ El mensaje ‘Martus JAR verified.’ (Martus JAR verificado) sólo aparecerá e
 Si ve el mensaje ‘bash: java: No such file or directory’ (bash: java: No existe el archivo o carpeta) entonces es necesario agregar la carpeta 'bin' de Java a su variable de entorno PATH.  Consulte con el primer paso del procedimiento de instalación de Linux.
 
 Si ve el mensaje ‘Error loading class JarVerifier: Bad major version number’ (Error al cargar la clase JarVerifier: Versión mayor incorrecta) entonces necesita instalar una versión de Java más reciente y/o poner la versión más reciente de Java en la variable PATH de su entorno.  Consulte con el primer paso del procedimiento de instalación de Linux.
+
+Nota: Si ha instalado la versión Java 1.5 o una versión superior, puede que el JarVerifier (Martus JAR verificado) no funcione adecuadamente; Puede, además, aparecer un mensaje erróneo que indique que el archivo jar es inválido cuando no es así; Si tiene alguna pregunta, por favor envíe un mensaje de correo electrónico a help@martus.org.
 --------
 2e. Activar su cuenta
 Antes de poder usar Martus necesita crear su cuenta e incluir su información de contacto. Una computadora puede tener múltiples cuentas de Martus de diferentes usuarios. La primera cuenta de Martus está en la carpeta de Martus, las cuentas adicionales son colocadas en carpetas dentro de la carpeta de Martus.
 
-Al crear su cuenta, necesitará escoger un nombre de usuario y una contraseña. Use una contraseña que pueda recordar fácilmente. Si olvidara su nombre de usuario o su contraseña ya no podrá acceder a ninguno de sus boletines en Martus, a menos que haya realizado las copias de seguridad (descritas en la sección ´9b. ¿Cómo hacer una copia de seguridad de su llave?') para mantener su información segura. Adicionalmente, tome precauciones para que su contraseña se mantenga secreta. Su contraseña permite el acceso a todos los boletines creados en Martus, así como la creación de boletines nuevos. Nunca envíe su contraseña por correo electrónico, ni la diga por teléfono, pues estos métodos de comunicación pueden no ser seguros.
+Al crear su cuenta, necesitará escoger un nombre de usuario y una contraseña. Use una contraseña que pueda recordar fácilmente. Si olvidara su nombre de usuario o su contraseña, puede que no le sea posibleacceder a ninguno de sus boletines en Martus, a menos que haya realizado las copias de seguridad (descritas en la sección ´9b. ¿Cómo hacer una copia de seguridad de su llave?') para mantener su información segura. Adicionalmente, tome precauciones para que su contraseña se mantenga secreta. Su contraseña permite el acceso a todos los boletines creados en Martus, así como la creación de boletines nuevos. Nunca envíe su contraseña por correo electrónico, ni la diga por teléfono, pues estos métodos de comunicación pueden no ser seguros.
 
 1. Inicie Martus. Haga clic en ‘Aceptar’ en la ventana de diálogo Bienvenido a Martus. Se abre la ventana de acceso al programa Martus. 
 • Para empezar Martus en Windows, escoja Inicio > Martus > Martus o si tiene un enlace de acceso directo en el escritorio o en la carpeta de Martus, haga doble-clic sobre él. Alternativamente escoja Inicio > Ejecutar... y luego escriba, usando el teclado lo siguiente: 
@@ -253,7 +259,7 @@ $ /opt/j2re1.4.2/bin/java -Xbootclasspath/p:/opt/j2re1.4.2/lib/ext/bc-jce.jar -j
 3. Al inciar Martus, elija el idioma que desea utilizar. 
 4. Escriba un nombre de usuario que tenga entre 8 y 50 caracteres, incluyendo letras, números y puntuación. Le recomendamos no usar letras acentuadas o caracteres que no sean ASCII en el campo marcado ‘Nombre de usuario’. Escoja un nombre de usuario que le resulte fácil recordar y note si usa mayúsculas pues Martus distingue entre mayúsculas y minúsculas.
 5. 
-Haga clic en los caracteres que aparecen en el teclado de la pantalla para escribir una contraseña que tenga entre 8 y 50 caracteres.  (No hay cursor en el campo de contraseñas y no hace falta hacer clic encima).  Escoja una contraseña que pueda recordar, pero que sea difícil de adivinar por otra persona. Use una combinación de letras y números para hacer que su contraseña sea más segura y recuerde que Martus distingue entre mayúsculas y minúsculas.  Consulte la sección ‘2f. Escoger su contraseña’ para más información sobre cómo crear una contraseña segura y útil.  Si olvida su nombre de usuario o contraseña, no habrá manera de acceder a los boletines privados que haya creado o a cualquier información de Martus en su computadora a menos que haya creado una copia de seguridad múltiple de su  llave. Consulte la sección ´9b. ¿Cómo hacer una copia de seguridad de su llave?´ para más información.
+Haga clic en los caracteres que aparecen en el teclado de la pantalla para escribir una contraseña que tenga entre 8 y 50 caracteres.  (No hay cursor en el campo de contraseñas y no hace falta hacer clic encima).  Escoja una contraseña que pueda recordar, pero que sea difícil de adivinar por otra persona. Use una combinación de letras y números para hacer que su contraseña sea más segura y recuerde que Martus distingue entre mayúsculas y minúsculas.  Consulte la sección ‘2f. Escoger su contraseña’ para más información sobre cómo crear una contraseña segura y útil.  Si olvida su nombre de usuario o contraseña, no habrá manera de acceder a los boletines que haya creado o a cualquier información de Martus en su computadora a menos que haya creado una copia de seguridad múltiple de su  llave (o haya configurado una cuenta de oficina central que le permita recuperar sus boletines). Consulte la sección ´9b. ¿Cómo hacer una copia de seguridad de su llave?´ para más información.
 
 
 
@@ -265,7 +271,6 @@ Nota: Si prefiere escribir su contraseña usando el teclado de la computadora, o
 Si desea proveer su información de contacto escríbala en la siguiente pantalla. (Puede que pasen unos segundos antes de que aparezca la ventana en donde ingresar su información de contacto.) Si no escribe nada en los campos de Autor y Organización, Martus le pedirá esos detalles cada vez que inicie el programa.
 
     
-
 La información en los campos Autor y Organización aparecerán en todos los boletines creados con su cuenta. Los datos públicos del boletín (es decir, aquellos datos que no se han marcado específicamente como privados) pueden estar al alcance de investigadores o de la prensa y al público a través del Buscador Martus de Internet. La información de contacto ofrece la posibilidad de que alguien que quiera contactarlos pueda obtener más información acerca de sus boletines. (Si no desea que los datos en su boletín estén a disposición pública, puede escoger convertir todos los datos en privados.)
 
 En el campo ‘Autor’ escriba su nombre o el de su organización como el origen de los boletines que envíe. Escriba el nombre de su organización, así como la dirección de correo electrónico, dirección web, teléfono y dirección postal para aquellas personas que deseen contactarse con usted o su organización. La información de contacto puede devenir en pública, si elige enviarla a un servidor. El ingreso de toda esta información es opcional y si lo desea tiene la opción de usar un pseudónimo o sólo escriba la información de su organización si no quiere que su nombre sea público. Oprima ‘Aceptar’. 
@@ -277,7 +282,7 @@ Si no escribe nada en los campos de Autor y Organización, la ventana de diálog
 Nota: Al salir de Martus después de crear su cuenta, el programa le pedirá que haga una copia de seguridad del archivo de su  llave. Si su computadora fallara o es robado va a necesitar la copia de seguridad de su llave para tener acceso a los boletines privados que haya enviado a un servidor. Martus le pedirá que haga la copia de seguridad cada vez que inicie el programa hasta que complete la copia de seguridad. Para mayor información consulte la sección ‘9b. ¿Cómo hacer una copia de seguridad de su llave?’
 --------
 2f. Escoger su contraseña
-Para mantener sus datos seguros, necesita una contraseña que no se pueda descubrir o adivinar fácilmente. Use las instrucciones que aparecen a continuación para crear una contraseña segura y confidencial que pueda recordar. Usted debe ser el único que conozca su contraseña. Si usted la olvida, es posible que usted no podrá tener acceso a sus datos confidenciales que haya ingresado en Martus.
+Para mantener sus datos seguros, necesita una contraseña que no se pueda descubrir o adivinar fácilmente. Use las instrucciones que aparecen a continuación para crear una contraseña segura y confidencial que pueda recordar. Usted debe ser el único que conozca su contraseña. Si usted la olvida, es posible que no pueda tener acceso a los datos que haya ingresado en Martus (a menos que haya realizado una copia de seguridad múltiple de su cuenta de información, (vea ‘9b. ¿Cómo hacer una copia de seguridad de su llave?’) o haya configurado una cuenta de oficina central que le permita recuperar sus boletines).
 
 • No use su nombre de usuario.
 • No use una sola palabra que se pueda encontrar en un diccionario.
@@ -304,15 +309,14 @@ Antes de poder enviar o recuperar  boletines del servidor, es necesario identifi
 Para configurar un servidor:
 1. Seleccione ‘Servidor > Elija el servidor Martus’.
 2. Escriba su nombre de usuario o contraseña en los campos indicados al preguntársele.
-3. 
-Escriba la dirección IP del servidor.
+3. Escriba la dirección IP del servidor.
 4. Escriba el código público del servidor y haga clic en ‘Aceptar’. 
 
 
 
 5. Luego verá la declaración de conformidad del servidor seleccionado. Oprima Aceptar si es que la declaración es aceptable para su uso, oprima Cancelar si no esta de acuerdo con la declaración. 
 
-Nota: Las pautas de las declaraciones de conformidad de servidores Martus las puede ver en el sitio web http://www.martus.org, en la sección ‘Download Martus Server’ (Descargar el Servidor Martus). Las pautas son para verificar que los servidores de Martus estén seguros, servidores que no sigan las pautas puede que sean menos seguros. Si tiene preguntas acerca de un servidor Martus, consulte con la persona que autorizó el uso de Martus en su organización o envíe un mensaje a info@martus.org
+Nota: Las pautas de las declaraciones de conformidad de servidores Martus las puede ver en el sitio web http://www.martus.org, en la sección ‘Download Martus Server’ (Descargar el Servidor Martus). Las pautas son para verificar que los servidores de Martus estén seguros, servidores que no sigan las pautas puede que sean menos seguros. Si tiene preguntas acerca de un servidor Martus, consulte con la persona que autorizó el uso de Martus en su organización o envíe un mensaje a info@martus.org.
 
 6. Si es requerido, escriba la palabra mágica para obtener permiso para enviar boletines al servidor y oprima ‘Aceptar’. Si está usando una cuenta que ya tiene acceso al servidor actual no se le requerirá ingresar la palabra mágica nuevamente.
 
@@ -325,23 +329,27 @@ Martus almacena la información del servidor, de manera que no necesita volverla
 Para cambiar la descripción del servidor, vuelva a seleccionar ‘Servidor > Elija el servidor Martus’, y escriba la información del nuevo servidor.  Para remover una conexión existente a un servidor sin tener que seleccionar uno nuevo, elija la opción ‘Servidor > Remover el servidor Martus’.
 
 Nota: Cuando haya seleccionado un servidor, Martus intentará acceder al servidor cada vez que ejecute el programa. Puede que el servidor le informe sobre el estado de su cuenta o le muestre otra información importante.
+
 --------
 2h. Configurar sus preferencias del programa
 Es posible configurar en Martus el idioma del programa y el formato de fecha. Además puede indicar si por defecto todos los boletines creados son privados.
 
 Para cambiar el idioma del programa que usa, escoja ‘Opciones > Preferencias’. Seguidamente seleccione un idioma del menú desplegable y haga clic en Aceptar". Martus está disponible en varios idiomas.  Visite el sitio http://www.martus.org para ver si hay una versión más reciente, idiomas adicionales o para obtener información sobre cómo traducir el programa. El sitio web http://www.martus.org/downloads puede que tenga disponible ‘paquetes de idiomas’ con actualizaciones de las traducciones del programa Martus,  el manual de usuario, la guía rápida, el archivo Readme y la documentación del programa. 
-
-Para cambiar el formato de las fechas en las listas de los boletines, así como en los boletines que haya creado, seleccione el menú ‘Opciones > Preferencias’. Seguidamente seleccione el formato de fecha preferido del menú desplegable titulado ‘formato de fecha’ y haga clic en ‘Aceptar’. 
-
+Para cambiar el formato de las fechas en las listas de los boletines, así como en los boletines que haya creado, seleccione el menú ‘Opciones > Preferencias’. Seguidamente seleccione el formato de fecha preferido del menú desplegable titulado ‘formato de fecha’ y haga clic en ‘Aceptar’.  
 Para cambiar el tipo de calendario, seleccione el menú ‘Opciones > Preferencias’. Luego elija el tipo de calendario que prefiera del menú desplegable (por ejemplo, Gregoriano, Tailandés o Persa) y oprima Aceptar. Si incorporó boletines antes que esta opción estuviera disponible, Martus también puede convertir automáticamente las fechas de esos antiguos boletines para mostrarlos en el formato de fecha tailandés o persa usando las casillas respectivas en la pantalla Preferencias.
 
-Si no quiere que sus boletines tengan información pública, seleccione el menú ‘Opciones > Preferencias’, active la casilla ‘No permitir boletines públicos’ y oprima ‘Aceptar’. Todos los boletines creados en Martus van a ser privados mientras esta casilla éste activada y no podrá desactivar la casilla titulada ‘Mantener TODA la información privada’ en sus boletines.
+Si  quiere que todos sus boletines no contengan información pública, seleccione el menú ‘Opciones > Preferencias’, active la casilla ‘No permitir boletines públicos’ y oprima ‘Aceptar’. Todos los boletines creados en Martus van a ser privados mientras esta casilla éste activada y no podrá desactivar la casilla titulada ‘Mantener TODA la información privada’ en sus boletines.
+
+Si tiene una cuenta de oficina central y desea que Martus le avise cada vez que hayan boletines de su(s) oficina(s) regional(es) que pueda descargar del servidor, entonces diríjase a ‘Opciones > Preferencias’ y seleccione ‘Compruebe automáticamente si existen nuevos boletines de Oficina Regional’.  Cada hora, aproximadamente, aparecerá un mensaje en la barra de estado (ubicada en la parte inferior izquierda de la pantalla) indicando que Martus está comprobando la existencia de nuevos boletines de su(s) oficina(s) regional(es). De existir boletines que pueda descargar, la barra de estado mostrará otro mensaje y le indicará en qué momento puede dirijirse a la opción ‘Servidor’ y elegir bajar sus boletines sellados o borradores de su(s) oficina(s) regional(es); (Para mayor información, consulte ‘6i. ¿Cómo bajar boletines creados por oficinas regionales? ’).
+
 
 --------
 3. El área de trabajo de Martus
 Una vez que haya ingresado a Martus con su nombre de usuario y contraseña, verá el espacio de trabajo de Martus, las carpetas y los boletines que tenga guardados en Martus y la vista previa del boletín que esté seleccionado. 
-  
-El lado izquierdo le muestra las carpetas en donde los boletines están organizados. Inicialmente tendrá dos carpetas pero las carpetas adicionales serán creadas a medida que ejecute operaciones dentro del programa y cuando cree sus propias carpetas.
+
+
+
+ El lado izquierdo le muestra las carpetas en donde los boletines están organizados. Inicialmente tendrá dos carpetas pero las carpetas adicionales serán creadas a medida que ejecute operaciones dentro del programa y cuando cree sus propias carpetas.
 
 Una instalación de Martus puede tener cuentas múltiples. Por motivos de seguridad, el programa le requerirá volver a ingresar su nombre de usuario y contraseña antes de poder continuar si es que el programa ha estado inactivo por un periodo de tiempo prolongado. 
 
@@ -355,10 +363,10 @@ Oprima el botón ‘Detalles del boletín…’ para ver el número de identific
 4a. Rellenar los campos de un boletín
 Es posible escribir los datos directamente en los campos o puede copiar y pegar la información de boletines ya existentes u otros documentos. Para copiar y pegar use las combinaciones de teclado estándar de su sistema operativo (Ctrl+C para copiar en Windows o Linux, Command+C en Mac OS; Ctrl+V para pegar en Windows o Linux y Command+V en Mac OS). Alternativamente, en Windows o Linux puede hacer un clic con el botón derecho del mouse en el campo a rellenar y seleccione ‘Copiar’ o ‘Pegar’ del menú contextual, o en Mac OS oprima la tecla Ctrl mientras hace clic y seleccione Copiar o Pegar.
 
- 
 
 
-Detalles del Boletín – Consulte ‘6j. ¿Cómo ver versiones anteriores de un boletín?’ para obtener información acerca de la historia de las versiones del boletín.
+Detalles del Boletín – Consulte ‘Si desea que le avisen cada vez que hayan boletines de su(s) Oficina(s) Regional(es) que pueda descargar del servidor, diríjase a ‘Opciones > Preferencias’ y seleccione ‘Compruebe automáticamente si existen nuevos boletines de Oficina Regional’. Cada hora, aproximadamente, aparecerá un mensaje en la barra de estado (ubicada en la parte inferior izquierda de la pantalla) indicando que Martus está comprobando la existencia de nuevos boletines de su(s) Oficina(s) Regional(es). De encontrar boletines de sus Oficina(s) Regional(es) que descargar, la barra de estado mostrará otro mensaje y le indicará en qué momento puede dirijirse a la opción ‘Servidor’ y elegir bajar sus boletines de su(s) Oficina(s) Regional(es).
+6j. ¿Cómo ver versiones anteriores de un boletín?’ para obtener información acerca de la historia de las versiones del boletín.
  
 Mantener TODA la información privada – Active esta casilla para que toda la información del boletín sea privada. 
 
@@ -394,6 +402,7 @@ Resumen – Escriba un resumen del evento.
 
 Detalles - Escriba detalles adicionales relacionados con el evento.
 
+
 Adjuntos - Para adjuntar una foto u otro tipo de archivo en el boletín, oprima el botón ‘Agregar adjunto’ y seleccione el archivo que quiere adjuntar. Alternativamente puede arrastrar el archivo de su computadora a este campo. Los archivos adjuntados a la sección de información pública del boletín estarán al alcance de cualquiera que tenga acceso a los datos públicos del boletín. (Los boletines con archivos adjuntos de gran tamaño tardarán más en guardarse, enviarlos al servidor, bajarlos del servidor o moverlos al escritorio). Para ver un archivo adjunto tendrá que tener instalada la aplicación que apoye el formato del archivo adjunto.
 
 
@@ -402,26 +411,27 @@ Consejo: Si quiere añadir un archivo que sólo lo puedan ver los que tengan acc
 
 Privado - Ingrese cualquier información adicional que quiera incluir en el informe, pero que no deba hacerse pública. Las áreas privadas tienen un borde rojo. Para adjuntar un archivo que sólo pueda ser visto por aquellos con acceso a la información privada, oprima el botón ‘Agregar Adjunto’ o arrastre un archivo al campo  ‘Adjuntos’ en el área ‘Información privada’. 
 
- Nota: En Linux pueda ser que no sea posible arrastrar archivos adjuntos a Martus.
 
+ Nota: En Linux pueda ser que no sea posible arrastrar archivos adjuntos a Martus.
 
 Oficina Central –  Seleccione cualquier cuenta de oficina central que esté disponible para acceder a la información privada (y pública) del boletín. Para mayor información sobre configuración de cuentas de oficina central, consulte la sección ‘9f. Compartiendo su información privada con colegas’.
 
 
- 
+
+
 --------
 4b. Personalizar sus boletines
 Hay varios métodos para personalizar sus boletines en Martus.  
 
 Si constantemente ingresa el mismo tipo de información en el campo ‘Detalles’ le recomendamos usar la opción crear una plantilla. Las plantillas le ahorran tiempo ingresando información o formateando información repetitiva. Consulte la sección ‘10a. ¿Cómo usar una plantilla para el campo 'Detalles'?’ para mayor información.  
 
-La mayoría de usuarios de Martus consideran los campos estándares de los boletines como suficiente. Si necesita campos adicionales tienen la opción de personalizar los campos de los boletines de Martus para poder ingresar diversos tipos de información. Si tiene tipos de información que quiere ingresar en sus boletines sin tener que escribirla en el campo de Resumen o Detalles, le recomendamos el uso de los campos personalizados. Consulte la sección ‘10b. Personalizando los campos de sus boletines’  y ‘10c. Utilizar Plantillas Personalizadas’ para mayor información sobre esta característica.
+La mayoría de usuarios de Martus consideran los campos estándares de los boletines como suficiente. Si necesita campos adicionales tienen la opción de personalizar los campos de los boletines de Martus para poder ingresar diversos tipos de información. Si tiene tipos de información que quiere ingresar en sus boletines sin tener que escribirla en el campo de Resumen o Detalles, le recomendamos el uso de los campos personalizados. Consulte la sección ‘10b. Personalizando los campos de sus boletines’ y ‘10c. Utilizar Plantillas Personalizadas’ para mayor información sobre esta característica.
 
-
+Existen varias opciones que le permiten personalizar la forma cómo los boletines se visualizan en Martus (sea al momento de editar o en la vista previa). Por ejemplo, ocultando/mostrando los extensos campos de sus boletines. Pueden ver todas las opciones en la sección ‘10d. Personalizando la visualización de su boletín’.
 
 --------
 5. Guardar y modificar sus boletines
-Al crear un boletín, tiene la opción de sellarlo o guardarlo como un borrador. Una vez haya enviado un boletín sellado al servidor, la única manera de modificarlo es creando una nueva versión del boletín. Martus guarda de manera automática copias de seguridad de los borradores en el servidor Martus, pero puede seguir modificando un borrador hasta que lo envíe al servidor como boletín sellado.  
+Al crear un boletín, tiene la opción de sellarlo o guardarlo como un borrador. Una vez haya enviado un boletín sellado al servidor, la única manera de modificarlo es creando una nueva versión del boletín. Martus guarda de manera automática copias de seguridad de los borradores en el servidor Martus, pero puede seguir modificando un borrador hasta que lo envíe al servidor como boletín sellado.  En general, los borradores son menos seguros que los boletines sellados porque a diferencia de éstos últimos, los borradores pueden ser eliminados del servidor. Además, si alguien tiene acceso a su cuenta de Martus, ellos podrían remover o modificar el texto de su boletin previamente ingresado.
 --------
 5a. ¿Cómo guardar un boletín sellado?
 Si un boletín está completo y no va a seguir editándolo, guárdelo como un boletín sellado. Una vez oprima el botón ‘Guardar sellado’, el boletín va a ser sellado y no podrá volver a editarlo – ni usted ni ninguna persona que consiga accesso a su cuenta. La única manera de modificar la información de un boletín sellado es creando una nueva versión de un boletín. Si está conectado al Internet y ha configurado un servidor de Martus, el boletín sellado será enviado automáticamente al servidor. La ventana de confirmación le advertirá que va a sellar un boletín permanentemente. Oprima ‘Sí’ para guardar el boletín. 
@@ -448,7 +458,7 @@ Los borradores que escriba se mantienen en la computadora en que los creo a meno
 Si decide no completar un borrador, que nunca ha sido sellado, puede borrar el borrador del servidor. Para hacerlo, elimine primero la copia del borrador de su computadora, y seguidamente seleccione ‘Servidor > Eliminar mis borradores del servidor ‘. Seleccione el borrador que quiera eliminar y haga clic en ‘Eliminar’. (Primero necesita eliminar la copia en su computadora, ya que no se pueden eliminar borradores del servidor mientras tenga una copia en su computadora).
 --------
 5c. Crear una nueva versión de un boletín sellado
-Un boletín no puede ser modificado una vez sellado. Es posible modificar una nueva versión del boletín y enviarlo al servidor con correcciones o información adicional. El boletín original sellado siempre se mantendrá íntegro en el servidor y no puede ser eliminado o modificado. Las nuevas versiones de cada boletín están conectadas, de modo que la creación de una nueva versión de un boletín guarda una nueva copia pero no cambia el número total de boletines (por ejemplo en búsquedas).
+Un boletín no puede ser modificado una vez sellado. Sin embargo, es posible modificar una copia del boletín con correcciones o información adicional, grabarla como la última versión y enviarla al servidor. El boletín original sellado siempre se mantendrá íntegro en el servidor; Ni usted ni nadie más podrá eliminarlo o modificarlo. Las nuevas versiones de cada boletín están conectadas, de modo que la creación de una nueva versión de un boletín guarda una nueva copia pero no cambia el número total de boletines (por ejemplo en las búsquedas).
 
 Para modificar un boletín sellado y crear una nueva versión seleccione el boletín y oprima ‘Modificar’ o elija ‘Editar > Modificar boletín’. Oprima Sí para confirmar que desea hacer una nueva versión del boletín sellado. Una vez haya hecho los cambios necesarios oprima ‘Guardar sellado’ o si es que va ha hacer cambios adicionales antes de sellarlo oprima ‘Guardar borrador’.
 
@@ -519,6 +529,7 @@ Oficinas centrales pueden bajar boletines que las oficinas regionales han enviad
 Borradores de oficinas regionales
 La carpeta de Borradores de oficinas regionales  contiene los borradores de oficinas centrales que haya bajado del servidor. Estos borradores son incluidos en las búsquedas y puede copiarlos o moverlos a carpetas diferentes. Los boletines en esta carpeta se mantienen como borradores y su información se mantiene privada. Puede crear una nueva copia de un boletín de una oficina regional pero el boletín original se mantendrá en su estado y autor original.
 
+
 Boletines recuperados
 En circunstancias normales, todos los boletines van asociados con una carpeta, pero fallos en el suministro eléctrico, errores en el hardware o problemas con el programa  pueden provocar que los boletines pierdan su asociación con una carpeta. Al iniciar Martus, los boletines que no estén asociados con carpetas son identificados y de encontrar alguno, se moverán a la carpeta de ‘Boletines recuperados’. Puede dejarlos allí, moverlos a una carpeta diferente o desecharlos.  
 
@@ -526,6 +537,7 @@ Boletines dañados
 Si los datos en un boletín aparecen distorsionados o han desaparecido, Martus crea un archivo para ‘Boletines dañados’ con el boletín en su interior. Es posible recuperar parte de la información de un boletín dañado. 
 --------
 6c. ¿Cómo crear nuevas carpetas?
+
 Se puede crear carpetas adicionales para organizar boletines según su interés y proyectos. La carpeta de ‘Resultados de búsqueda’ también pude ser renombrada para guardar resultados de búsquedas. Martus volverá a crear una nueva carpeta ‘Resultados de búsqueda’ la próxima vez que lleve a cabo una búsqueda. 
 
 Nota: No se puede usar puntuación en los nombres de las carpetas pero si puede usar espacios o letras de otros alfabetos como el tailandés o ruso. 
@@ -537,7 +549,7 @@ Para renombrar una carpeta que haya creado, haga clic sobre el título de la car
 Nota: Para cambiar el orden de las carpetas en la pantalla, elija Carpetas>Organizar Carpetas, luego mueva las carpetas hacia arriba o hacia abajo a las posiciones deseadas.
 --------
 6d. ¿Cómo desechar y eliminar boletines?
-Es posible descartar un boletín de una carpeta, moviéndolo a la carpeta de ‘Boletines desechados’. Para eliminar todas las versiones de un boletín de su disco duro permanentemente, elimínelo de la carpeta de ‘Boletines desechados’. Es posible recuperarlo si el boletín está sellado y ya lo ha enviado al servidor, o se ha hecho una copia de seguridad de un borrador. (Martus hace copias de seguridad en el servidor automática de los borradores al guardarlos, siempre y cuando tenga una conexión activa al Internet.) 
+Es posible descartar un boletín de una carpeta, moviéndolo a la carpeta de ‘Boletines desechados’. Para eliminar todas las versiones de un boletín de su disco duro permanentemente, elimínelo de la carpeta de ‘Boletines desechados’. Es posible recuperarlo si el boletín está sellado y ya lo ha enviado al servidor, o se ha hecho una copia de seguridad de un borrador. (Martus automáticamente hace copias de seguridad en el servidor de los borradores cuando losguardar, siempre que cuente con una conexión activa al Internet).
 
 Para desechar un boletín de una carpeta, selecciónelo y elija ‘Editar > Desechar boletín(es)’ o haga clic con el botón derecho y seleccione ‘Desechar boletín(es)’. El boletín aparece en la carpeta de ‘Boletin(es) desechados’. (También puede arrastrar el boletín a la carpeta de ‘Boletin(es) desechado(s).’)
 
@@ -579,14 +591,14 @@ Ocasionalmente es necesario bajar boletines que ha enviado anteriormente al serv
 
 Nota: Es posible que la ventana de diálogo no aparezca inmediatamente, dependiendo de la velocidad de su conexión a Internet.
 
+Consejo: Puede ordenar su boletines en la pantalla de ‘Bajar mis boletines’ haciendo clic en la parte superior de cada columna. Ello le permitirá encontrar los boletines que necesita de manera más sencilla (muy útil sobre todo si cuenta con una amplio número de boletines). Por ejemplo, puede buscar por fecha (para encontrar los últimos boletines) o por tamaño (si desea descargar más tarde los boletines más pesados). La funcionalidad  para ordenar los boletines es solamente ascendente.
+
 2. En la ventana de diálogo, active las casillas de los boletines que quiere bajar. Oprima ‘Seleccionar todos’ para activar todas las casillas o ‘Deseleccionar todos’ para desactivarlas. 
 
 Nota: Por defecto, la ventana de diálogo sólo muestra aquellos boletines que no se encuentren en su computadora. Marque la opción ‘Mostrar todos los boletines en este servidor y en esta computadora’ para ver todos los boletines en el servidor junto con los que están en su computadora. No puede bajar boletines que ya se encuentren en su computadora.
 
 3. Active la casilla ‘Bajar todas las versiones del boletín’ para bajar todas las versiones de un boletín’ o active ‘Bajar la última versión del boletín’ para descargar solo la versión más reciente.
 4. Oprima ‘Vista previa’ para ver el boletín seleccionado antes de bajarlo.
-
-
 5. Oprima ‘Bajar’ y los boletines aparecerán en la carpeta de Boletines bajados.
 
 Nota: Martus descarga los boletines en un segundo plano para que pueda continuar trabajando con él. Cuando Martus ha descargado los boletines, los muestra en la carpeta de ‘Boletines bajados’. Para cancelar la descarga, abra otra vez la ventana de diálogo ‘Bajar mis boletines sellados’.
@@ -599,6 +611,8 @@ Los borradores se copian al servidor en caso de que los originales en su computa
 1. Seleccione ‘Servidor > Bajar mis borradores’. 
 
 Nota: Es posible que la ventana de diálogo no aparezca inmediatamente, dependiendo de la velocidad de su conexión a Internet.
+
+Consejo: Puede ordenar su boletines en la pantalla de ‘Bajar mis boletines’ haciendo clic en la parte superior de cada columna. Ello le permitirá encontrar los boletines que necesita de manera más sencilla (muy útil sobre todo si cuenta con un gran número de boletines). Por ejemplo, puede buscar por fecha (para encontrar los últimos boletines) o por tamaño (si desea descargar los boletines más pesados más tarde). La funcionalidad  para ordenar los boletines es solamente ascendente.
 
 2. En la ventana de diálogo active las casillas de los boletines que quiere bajar. Oprima ‘Seleccionar todos’ para activar las casillas de todos los boletines, oprima ‘Deseleccionar todos’ para desactivarlos. 
 
@@ -613,7 +627,12 @@ Nota: Martus descarga los boletines en un segundo plano para que pueda continuar
 6i. ¿Cómo bajar boletines creados por oficinas regionales?
 Si está usando una cuenta de oficina central, puede recuperar borradores y boletines sellados creados por miembros de su organización en oficinas regionales que hayan dado permiso a su cuenta para accederlos. (Para mayor información consulte la sección ‘9f. Compartiendo su información privada con colegas’). Para descargar esos boletines, seleccione ‘Servidor > Bajar boletines sellados de oficinas regionales’ o ‘Servidor > Bajar borradores de oficinas regionales’. 
 
+Consejo: Puede ordenar su boletines en la pantalla de ‘Bajar ’ haciendo clic en la parte superior de cada columna. Ello le permitirá encontrar los boletines que necesita de manera más sencilla (muy útil sobre todo si cuenta con un gran número de boletines). Por ejemplo, puede buscar por autor (si usted quiere recuperar solamente los boletines de una oficina regional particular), por fecha (para encontrar los últimos boletines) o por tamaño (si desea descargar los boletines más pesados más tarde). La funcionalidad  para ordenar los boletines es solamente ascendente.
+
+
 Cuando vea los boletines de oficinas regionales, una nota amarrilla y negra que dice ‘Boletín de oficina regional’.aparecerá en la parte superior del boletín.
+
+Si desea que le avisen cada vez que hayan boletines de su(s) Oficina(s) Regional(es) que pueda descargar del servidor, diríjase a ‘Opciones > Preferencias’ y seleccione ‘Compruebe automáticamente si existen nuevos boletines de Oficina Regional’. Cada hora, aproximadamente, aparecerá un mensaje en la barra de estado (ubicada en la parte inferior izquierda de la pantalla) indicando que Martus está comprobando la existencia de nuevos boletines de su(s) Oficina(s) Regional(es). De encontrar boletines de sus Oficina(s) Regional(es) que descargar, la barra de estado mostrará otro mensaje y le indicará en qué momento puede dirijirse a la opción ‘Servidor’ y elegir bajar sus boletines de su(s) Oficina(s) Regional(es).
 --------
 6j. ¿Cómo ver versiones anteriores de un boletín?
 Siempre puede ver todas las versiones de un boletín sellado pero sólo puede modificar una nueva versión del boletín.
@@ -647,28 +666,24 @@ Nota: Sí múltiples campos tienen el mismo título, haga clic en el signo más 
 3. Si desea añadir restricciones adicionales de búsqueda, pulse ‘Entrar’ (Enter) o haga clic en ‘Insertar fila’ para crear una nueva fila de búsqueda. Usted puede buscar otro campo o limitar su búsqueda a una cierta fecha o rango de fechas. 
 4. Si desea eliminar una búsqueda restringida, seleccione esa fila y oprima ‘Eliminar fila seleccionada’.
 
-
 Nota: Existen varias formas en la que los campos del boletín pueden compararse con los términos de búsqueda.
 
-----------------------------------------------------
+     Contiene  : Cualquier boletín en las cuales el campo especificado contenga los términos de búsqueda
+     =   :  Sólamente los boletines en los cuales el campo especificado empareja exactamente con los términos de
+          búsqueda
+     !=   :  Boletines en los cuales el campo especificado no empareja con los términos de búsqueda
+     >    :  Boletines en los cuales el valor del campo es mayor que el valor de búsqueda.
+     >=  :  Boletines en los cuales el valor del campo es mayor que o igual al valor de búsqueda.
+     <    :  Boletines en los cuales el valor del campo es menor que el valor de búsqueda.
+     <=  :  Boletines en los cuales el valor del campo es menor que o igual al valor de búsqueda.
 
-     " Opciones "  :  Resultados
 
-     " Contiene "  :  Cualquier boletín en las cuales el campo especificado contenga los términos de búsqueda.
-     " = "  :   Sólamente los boletines en los cuales el campo especificado empareja exactamente con los términos de búsqueda.
-     " != "  :  Boletines en los cuales el campo especificado no empareja con los términos de búsqueda.
-     " > "  :  Boletines en los cuales el valor del campo es mayor que el valor de búsqueda.
-     " >= "  :  Boletines en los cuales el valor del campo es mayor que o igual al valor de búsqueda.
-     " < "  :  Boletines en los cuales el valor del campo es menor que el valor de búsqueda.
-     " <= "  :  Boletines en los cuales el valor del campo es menor que o igual al valor de búsqueda.
-
-----------------------------------------------------
- 
-5. Oprima ‘Buscar’.
+5. Oprima ‘Buscar’. Una ventana de diálogo le mostrará la búsqueda en progreso y le permitirá cancelarla en cualquier momento, si así lo desea.
 6. Cuando la búsqueda se ha completado, la ventana de resultados le mostrará los boletines que se encontraron. Oprima ‘Aceptar’.
 7. La carpeta ‘Resultados de búsqueda’ contiene todos los boletines encontrados por su búsqueda. (La carpeta sólo contiene copias de los resultados, los originales se mantienen en su carpeta original.) Si su búsqueda resultó sin boletines, la carpeta ‘Resultados de búsqueda’ seguirá incluyendo los boletines de la búsqueda anterior.
 
-Nota: Por defecto, Martus busca todas las versiones del boletín. Si usted no ve sus términos/fechas de búsqueda en la versión final del boletín mostrado en la carpeta de ‘Resultados de búsqueda’, usted puede acceder a versiones previas al oprimir el botón de ‘Detalles del Boletín…’ en la parte superior del boletín. Para mayor información, consulte la sección ‘6j. ¿Cómo ver versiones anteriores de un boletín?’. Para buscar sólo las versiones más recientes de los boletines, seleccione la opción ‘Solo buscar la versión mas reciente de los boletines’, en la ventana de diálogo de Búsqueda. Esta ventana le recordará esta selección la próxima vez que ejecute una búsqueda.
+Nota: Por defecto, Martus busca todas las versiones del boletín. Si usted no ve sus términos/fechas de búsqueda en la versión final del boletín mostrado en la carpeta de ‘Resultados de búsqueda’, usted puede acceder a versiones previas al oprimir el botón de ‘Detalles del Boletín…’ en la parte superior del boletín. Para mayor información, consulte la sección ‘Si desea que le avisen cada vez que hayan boletines de su(s) Oficina(s) Regional(es) que pueda descargar del servidor, diríjase a ‘Opciones > Preferencias’ y seleccione ‘Compruebe automáticamente si existen nuevos boletines de Oficina Regional’. Cada hora, aproximadamente, aparecerá un mensaje en la barra de estado (ubicada en la parte inferior izquierda de la pantalla) indicando que Martus está comprobando la existencia de nuevos boletines de su(s) Oficina(s) Regional(es). De encontrar boletines de sus Oficina(s) Regional(es) que descargar, la barra de estado mostrará otro mensaje y le indicará en qué momento puede dirijirse a la opción ‘Servidor’ y elegir bajar sus boletines de su(s) Oficina(s) Regional(es).
+6j. ¿Cómo ver versiones anteriores de un boletín?’. Para buscar sólo las versiones más recientes de los boletines, seleccione la opción ‘Solo buscar la versión mas reciente de los boletines’, en la ventana de diálogo de Búsqueda. Esta ventana le recordará esta selección la próxima vez que ejecute una búsqueda.
 
 
 8. Para grabar sus criterios de búsqueda, haga clic en ‘Guardar esta búsqueda’ en la ventana de diálogo correspondiente. Luego, asígnele un nombre para reconocerlo más adelante. Martus grabará el archivo con la extensión .mss (especificación de búsqueda Martus) en la carpeta que usted elija. Para utilizar los criterios de búsqueda que ha grabado, oprima ‘Cargar búsqueda previa’ en la ventana de diálogo de Búsqueda, y después busque el archivo .mss que desea utilizar.
@@ -771,6 +786,8 @@ Para exportar boletines a XML:
 5. Escriba el nombre del archivo XML e indique donde se debe guardar. Todos los boletines seleccionados se incluirán en un sólo archivo XML.
 6. Oprima ‘Guardar’.
 7. Oprima ‘Aceptar’ una vez Martus indique ha completado la exportación. 
+
+Nota: Si desea exportar sólo los datos públicos, cualquier boletín cuyos datos son todos privados no serán tomados en cuenta en el archivo de exportación.
 --------
 6q. ¿Cómo importar boletin(es)?
 Puede importar los boletines de los archivos que se ajustan al formato XML, incluyendo los boletines que se han exportado de Martus. También puede importar los adjuntos tales como fotos, documentos en procesadores de texto u hojas de cálculo. Los adjuntos no tienen que estar en formato XML para ser importados.
@@ -784,7 +801,7 @@ Martus divulga su progreso mientras importa los boletines. Cuando ha terminado, 
 
 Nota: En esta versión, los boletines serán importados como borradores.
 
-Para investigar más sobre cómo crear archivos de importación Martus en XML de su información electrónica (por ejemplo, de las hojas de cálculo u otras bases de datos), por favor, vea los ejemplos en el código fuente de Martus (disponible en el CD de Martus 3.0 o en https://sourceforge.net/projects/martus) y envíe un correo electrónico a help@martus.org, para obtener ayuda adicional.
+Para investigar más sobre cómo crear archivos de importación Martus en XML de su información electrónica (por ejemplo, de las hojas de cálculo u otras bases de datos), por favor, vea los ejemplos en el código fuente de Martus (disponible en el CD de Martus o en https://sourceforge.net/projects/martus) y envíe un correo electrónico a help@martus.org, para obtener ayuda adicional.
 
 --------
 7. Eliminar todos sus boletines y la información de su cuenta
@@ -842,7 +859,7 @@ Martus ha sido diseñado teniendo en mente la seguridad como primer objetivo. Co
 9a. La seguridad de Martus y cómo funciona
 Todas las cuentas de Martus tienen una llave a la que sólo se puede acceder con la contraseña para esa cuenta. Cuando entra en Martus, su contraseña permite al programa abrir la llave y así puede crear nuevos boletines o acceder a los boletines que haya creado y almacenado previamente. 
 
-Su llave es de su propiedad exclusiva. Si la pierde, debido a un fallo en el disco duro o por accidente, nadie será capaz de ver sus boletines privados, los datos privados en los boletines públicos que haya enviado al servidor o cualquiera de los boletines en su disco duro, ya sean borradores o sellados. Sin embargo, si usted ha establecido una cuenta de oficina central, el propietario de la cuenta de la oficina central de su organización será capaz de acceder a  los datos privados que haya enviado al servidor.
+Su llave es de su propiedad exclusiva. Si la pierde, debido a un fallo en el disco duro o por accidente, nadie será capaz de ver sus boletines privados, los datos privados en los boletines públicos que haya enviado al servidor o cualquiera de los boletines en su disco duro, ya sean borradores o sellados. Sin embargo, si usted ha establecido una cuenta de oficina central, el propietario de la cuenta de la oficina central de su organización será capaz de acceder a  los datos privados que haya enviado al servidor. Adicionalmente, podrá ingresar a su cuenta de Martus, si ha realizado una copia de seguridad múltiple de la información de su cuenta (Consulte ‘9b. ¿Cómo hacer una copia de seguridad de su llave?’ para mayor información).
 --------
 9b. ¿Cómo hacer una copia de seguridad de su llave?
 Para asegurarse de que siempre dispondrá de su información es muy importante que tenga una copia de seguridad de su llave. Martus tiene dos métodos para hacer copias de seguridad de sus llaves y le recomendamos que use ambos métodos. El primero crea una copia de seguridad de su llave cifrada en un medio removible (como un disquete, CD o memoria USB) o a un disco en su red. El segundo método crea una copia de respaldo de su llave dividida en 5 partes separadas, las cuales no son cifradas con su contraseña a múltiples disquetes u otros medios removibles. Al iniciar el proceso para crear una copia de seguridad tendrá la oportunidad de seguir ambos métodos.
@@ -909,6 +926,7 @@ Se necesita mucho esfuerzo para proteger completamente una computadora conectada
 • Instale un programa anti-virus y manténgalo actualizado con una suscripción. Panda (www.pandasoftware.es), McAfee (http://www.mcafee.com/) y Symantec (http://www.symantec.com/) son compañías que ofrecen este tipo de programas y servicios. 
 • Si usa Microsoft Windows, visite regularmente e instale productos vitales de seguridad de Microsoft en http://windowsupdate.microsoft.com para preservar la integridad de su sistema operativo. 
 • Para obtener sugerencias más detalladas y extensas sobre cómo proteger su computadora, visite http://www.trendmicro.com/pc-cillin/vinfo/safe_computing/  y http://www.staysafeonline.info/sectips.adp/ (en inglés). Considere hacer efectivas todas las sugerencias que resulten prácticas para su organización. 
+• También le recomendamos que instale y actualice regularmente un programa de protección contra los spywares (también conocido como “malware” or “adware”).
 
 Para incrementar la seguridad de Martus en su computadora (en caso que su computadora caiga en las manos equivocadas), existe una precaución extra que usted puede tomar si trabaja en el ambiente Windows. El atributo elimina el archivo swap ("swap-file") de la memoria virtual de Windows (también conocido como "pagefile") cuando usted apaga su computadora. Este archivo contiene capturas temporales de ciertas porciones de datos que fueron utilizados por cualquier programa mientras estaba trabajando. Active esta característica y su pagefile se eliminará cuando apague su computadora. Esto puede añadir un poco más de tiempo al proceso de apagado.
 • Las instrucciones para activar esta funcionalidad en Windows 2000 y Windows XP Profesional son: Ir a Inicio/Panel de Control/Herramientas Administrativas/Directiva de Seguridad Local/Directivas Locales/Opciones de Seguridad (Start/Control Panel/Administrative Tools/Local Security Policy/Local Policy/Security Options), luego desplace la barra lateral hasta encontrar ‘Apagado: borrar el archivo de páginas de la memoria virtual’ o ‘Apagado: borrar el archivo de páginas de la memoria virtual cuando se apague el sistema’ ("Shutdown: Clear virtual memory pagefile" or "Clear virtual memory pagefile when system shuts down").
@@ -999,7 +1017,7 @@ Si ingresa frecuentemente la misma información en el campo de detalles (por eje
 Al crear cualquier nuevo boletín, el texto que ha ingresado en la ventana de Detalles predeterminados aparecerá en el campo detalles. Si no necesita el texto en el nuevo boletín, puede borrarlo como cualquier otro texto que normalmente ingresa. Para cancelar el texto en el campo detalles, oprima el botón ‘Revertir contenido’ en la ventana de contenido predeterminado para campo detalles.
 --------
 10b. Personalizando los campos de sus boletines
-La mayoría de usuarios usa los campos iniciales de Martus. Algunos necesitan campos para capturar información específica como el orígen de los datos del boletín, los nombres de los testigos, el país donde ocurrió el incidente, o un mapa con información sobre violaciones o victimas. Además, le puede ser más fácil tener estos campos personalizados si es que va a importar la información a otro programa para reportarla o analizarla. Tiene la opción de personalizar los campos, agregando o removiendo los campos que no necesite. Puede personalizar los campos de la parte superior de un boletín (el cual puede ser público o privado) y en la sección inferior de un boletín (que son siempre datos privados). Puede crear diferentes tipos de campos personalizados como casillas Sí/No, fechas, rango de fechas, listas desplegadas, mapa, idioma, mensajes (notas), una línea de texto, y múltiples líneas de texto. 
+La mayoría de usuarios usa los campos iniciales de Martus. Algunos necesitan campos para capturar información específica como el orígen de los datos del boletín, los nombres de los testigos, el país donde ocurrió el incidente, o un tabla con información sobre violaciones o victimas. Además, le puede ser más fácil tener estos campos personalizados si es que va a importar la información a otro programa para reportarla o analizarla. Tiene la opción de personalizar los campos, agregando o removiendo los campos que no necesite. Puede personalizar los campos de la parte superior de un boletín (el cual puede ser público o privado) y en la sección inferior de un boletín (que son siempre datos privados). Puede crear diferentes tipos de campos personalizados como casillas Sí/No, fechas, rango de fechas, listas desplegadas, tabla, idioma, mensajes (notas), una línea de texto, y múltiples líneas de texto. 
 
 Una vez que ha personalizado los campos de sus boletines, los nuevos campos aparecerán en todos los boletines nuevos. La personalización no afecta a los boletines que ha creado anteriormente o bajado del servidor.  
 
@@ -1013,8 +1031,12 @@ Para  crear o actualizar una plantilla personalizada:
 3. Reordene, agregue o remueva las campos en la ventana de diálogo para personalizar;
 La presentación de los boletines está dictada por un documento en XML. Al inicio de su documento necesita la etiqueta <CustomFields> y al final del documento necesita la etiqueta correspondiente, </CustomFields>. Cuando abra la ventana Personalizar campos, los campos necesarios ya estarán listados. Por defecto los campos estándar de los boletines son los primeros en la lista de campos pero los puede mover a la posición que le parezca. No esta permitido remover los campos ‘author’ (autor), 'entrydate' (fecha de introducción), 'language,' (idioma) y 'title' (título);
 - Corte y pegue los campos en el orden en que quiere que aparezcan;
-- Para agregar un campo, coloque el cursor en la posición deseada. Escriba el tipo de campo que desea usar: BOOLEAN (Verdadero/Falso), DATE (Fecha), DATERANGE (Rango de fechas), DROPDOWN (Lista Desplegable), GRID (Mapa), LANGUAGE (Idioma), MESSAGE (Mensaje), MULTILINE (Múltiples líneas), y STRING (Palabra). Cada campo necesita un nombre de identificación único, el cual puede ser cualquier palabra menos aquellas que ya están en uso, pueden ser en cualquier idioma y no pueden tener espacios, letras especiales o puntuación. Por ejemplo puede usar los nombres de identificación 'personalizado1' o 'NombreDeVictima' o 'SelecciónDelColordeOjos.'  Cada campo necesita un título que va a aparecer al lado del campo en el boletín. El título puede tener cualquier letra o símbolo en cualquier idioma con excepción de ciertos caracteres especiales (por ejemplo < o > que son utilizados por el sistema). Por ejemplo un título es 'Nombre de primer testigo.'  Consulte los ejemplos mas adelante. 
+- Para agregar un campo, coloque el cursor en la posición deseada. Escriba el tipo de campo que desea usar: BOOLEAN (Verdadero/Falso), DATE (Fecha), DATERANGE (Rango de fechas), DROPDOWN (Lista Desplegable), GRID (Tabla), LANGUAGE (Idioma), MESSAGE (Mensaje), MULTILINE (Múltiples líneas), SECTION (Sección) o STRING (Palabra). Cada campo necesita un nombre de identificación único, el cual puede ser cualquier palabra menos aquellas que ya están en uso, pueden ser en cualquier idioma y no pueden tener espacios, letras especiales o puntuación. Por ejemplo puede usar los nombres de identificación 'personalizado1' o 'NombreDeVictima' o 'SelecciónDelColordeOjos.'  Cada campo necesita un título que va a aparecer al lado del campo en el boletín. El título puede tener cualquier letra o símbolo en cualquier idioma con excepción de ciertos caracteres especiales (por ejemplo < o > que son utilizados por el sistema). Por ejemplo un título es 'Nombre de primer testigo.'  Consulte los ejemplos mas adelante. 
 - Para remover un campo, elimine el texto de definición de campo (tipo, nombre de identificación, título) del campo que desee eliminar. Los campos iniciales no pueden ser removidos, estos son los identificados con ‘author’ (autor), 'entrydate' (fecha de introducción), 'language,' (idioma) y 'title' (título).
+- Puede crear secciones en sus boletines usando el tipo de campo SECTION (Sección). Puede mostrar u ocultar las secciones e incluir tantos campos individuales como desee.
+- Puede colocar múltiples campos en una única fila en su boletín usando <KeepWithPrevious/> (conservarse con el campo anterior) en la definición del campo.
+- Puede solicitar que ciertos campos sean ingresados antes que el boletín se grabe usando <RequiredField/> (campo requerido) en la definición de campo. Para los campos de la tabla (GRID), no puede requerir el ingreso de datos en determinadas columnas.
+- Puede popularizar las listas desplegables (sea dentro o fuera de la tabla) con valores que han sido ingresados en otra tabla en otro lugar en su boletín, usando <DataSource> (fuente de datos) en vez de <Choices> (opciones) en la definición del campo.
 4. Oprima ‘Aceptar’.
 
 Consulte las siguientes instrucciones al personalizar campos:
@@ -1023,21 +1045,25 @@ Consulte las siguientes instrucciones al personalizar campos:
 • Un campo BOOLEAN muestra como una casilla de verificación cuando se edita y Si/No en la vista previa o cuando se imprime.
 • Tanto los campos de STRING y MULTILINE son campos de texto. Los campos de STRING se ampliarán para ajustarse al texto que usted ingrese, mientras los campos MULTILINE tienen una barra de deslizamiento de modo que el campo nunca exceda su altura original.
 • Utilice los campos MESSAGE para dar orientación de cómo ingresar datos, y de crear comentarios/notas que serán mostrados en cada boletín.
-• Al ingresar datos en un mapa oprima Entrar (Enter) para crear una nueva línea, oprima Tab para avanzar al siguiente campo, y doble clic para copiar y pegar  texto.
-• Un GRID (Mapa) puede contener columnas de varios tipos: BOOLEAN (Verdadero/Falso), DATE (Fecha), DATERANGE (Rango de fechas), DROPDOWN (Lista Desplegable) y STRING (Palabra).
+• Al ingresar datos en un Tabla oprima Entrar (Enter) para crear una nueva línea, oprima Tab para avanzar al siguiente campo, y doble clic para copiar y pegar  texto.
+• Un GRID (Tabla) puede contener columnas de varios tipos: BOOLEAN (Verdadero/Falso), DATE (Fecha), DATERANGE (Rango de fechas), DROPDOWN (Lista Desplegable) y STRING (Palabra).
 • Quizá sea necesario guiar a otros usuarios proveyéndolos de plantillas de personalización. Para minimizar la necesidad de mayores indicaciones use nombres de identificación y títulos que claramente identifiquen el contenido (como ‘Nombre de víctima’). Para mayor información sobre exportación de plantillas personalizadas, consulte la sección ‘10c. Utilizar Plantillas Personalizadas’.
 
-
-
 Aquí hay algunos ejemplos.  Estos campos se verán como los mostrados en la figura que aparece a continuación de ellos:
+
+<Field type='SECTION'>
+<Tag>OrigenDeSeccion</Tag>
+<Label>Sección del Origen</Label>
+</Field>
 
 <Field type='DROPDOWN'>
 <Tag>OrigenDeBoletin</Tag>
 <Label>Origen de la información de este boletín</Label>
+<RequiredField/>
 <Choices>
-<Choice>Medios-de-comunicación</Choice>
-<Choice>Reporte-legal</Choice>
-<Choice>Entrevista</Choice>
+<Choice>Medios de comunicación</Choice>
+<Choice>Reporte legal</Choice>
+<Choice>Entrevista personal</Choice>
 <Choice>Otro</Choice>
 </Choices>
 </Field>
@@ -1054,7 +1080,7 @@ Aquí hay algunos ejemplos.  Estos campos se verán como los mostrados en la fig
 
 <Field type='LANGUAGE'>
 <Tag>IdiomaDeEntrevistado</Tag>
-<Label>Idioma de entrevista</Label>
+<Label>Idioma de la entrevista</Label>
 </Field>
 
 <Field type='DATERANGE'>
@@ -1064,11 +1090,28 @@ Aquí hay algunos ejemplos.  Estos campos se verán como los mostrados en la fig
 
 <Field type='BOOLEAN'>
 <Tag>Anónimo</Tag>
-<Label>El entrevistado desea ser anónimo</Label>
+<Label>¿El entrevistado desea ser anónimo?</Label>
+</Field>
+
+<Field type='BOOLEAN'>
+<Tag>InfoAdicional</Tag>
+<Label>¿El entrevistado está dispuesto a entregar información adicional, si es necesario?</Label>
+<KeepWithPrevious/>
+</Field>
+
+<Field type='BOOLEAN'>
+<Tag>Testigo</Tag>
+<Label>¿El entrevistado está dispuesto a testificar?</Label>
+<KeepWithPrevious/>
+</Field>
+
+<Field type='SECTION'>
+<Tag>SeccionPersonas</Tag>
+<Label>Sección personas</Label>
 </Field>
 
 <Field type='GRID'>
-<Tag>MapaDeInformaciónDeVictima</Tag>
+<Tag>TablaDeInformaciónDeVictima</Tag>
 <Label>Información de la víctima</Label>
 <GridSpecDetails>
 <Column type='STRING'><Tag></Tag><Label>Nombre</Label></Column>
@@ -1085,9 +1128,8 @@ Aquí hay algunos ejemplos.  Estos campos se verán como los mostrados en la fig
 </GridSpecDetails>
 </Field>
 
-
 <Field type='MESSAGE'>
-<Tag>MensajeDeProfeción</Tag>
+<Tag>MensajeDeProfesión</Tag>
 <Label>Notas de historia de profesión</Label>
 <Message>Si tiene información sobre una persona que tuvo diferentes profesiones en un periódo de tiempo, ingrese varias filas con el mismo nombre y apellido y con el rango de fechas de cada profesión.</Message>
 </Field>
@@ -1096,12 +1138,23 @@ Aquí hay algunos ejemplos.  Estos campos se verán como los mostrados en la fig
 <Tag>HistoriaDeProfesión</Tag>
 <Label>Historia de Profesión</Label>
 <GridSpecDetails>
-<Column type='STRING'><Tag></Tag><Label>Nombre</Label></Column>
-<Column type='STRING'><Tag></Tag><Label>Apellido</Label></Column>
+<Column type='DROPDOWN'><Tag></Tag><Label>Nombre</Label>
+<DataSource>
+<GridFieldTag> TablaDeInformaciónDeVictima </GridFieldTag>
+<GridColumnLabel>Nombre</GridColumnLabel>
+</DataSource>
+</Column>
+<Column type='DROPDOWN'><Tag></Tag><Label>Apellido</Label>
+<DataSource>
+<GridFieldTag> TablaDeInformaciónDeVictima </GridFieldTag>
+<GridColumnLabel>Apellido</GridColumnLabel>
+</DataSource>
+</Column>
 <Column type='STRING'><Tag></Tag><Label>Profesión</Label></Column>
 <Column type='DATERANGE'><Tag></Tag><Label>Rango de fechas de profesión</Label></Column>
 </GridSpecDetails>
 </Field>
+
 
 
 
@@ -1119,7 +1172,6 @@ Para recuperar los campos predeterminados/estándar de los boletines:
 3. Oprima ‘Revertir a valores predeterminados’.
 4. Oprima ‘Sí’ para verificar que quiere revertir a los campos predeterminados.
 5. Oprima ‘Aceptar’ para salir de la ventana de campos personalizados.
-
 --------
 10c. Utilizar Plantillas Personalizadas
 Martus le proporciona a una cuenta de oficina central la capacidad de exportar plantillas personalizadas para sus usuarios de oficinas regionales o a los usuarios para exportar sus propias plantillas. Por tanto, los usuarios pueden importar configuraciones personalizadas de una gama de plantillas. Esto les permite utilizar diferentes formatos de boletín personalizado para diferentes tipos de grupos de datos.
@@ -1137,7 +1189,6 @@ Nota: Si usted está utilizando plantillas múltiples, le recomendamos utilizar 
 
 6. Si usted desea compartir la plantilla personalizada con usuarios de oficinas regionales que lo tienen configurado como una cuenta de oficina central, déles a ellos su archivo .mct.
 
-
 Instrucciones para usuarios de oficinas regionales que quieren acceder (importar) plantillas personalizadas 
 1. Seleccione 'Opciones > Personalizar campos';
 2. Oprima 'Aceptar' en la ventana de diálogo informativo;
@@ -1150,10 +1201,17 @@ Nota: Si usted intenta importar una plantilla creada por una cuenta que no es un
 6. Después de que importe una plantilla personalizada, el nuevo formato de campo aparecerá en todo nuevo boletín que usted cree. Para mayor información sobre restablecer el formato de campo predeterminado de Martus, consulte la sección ‘10b. Personalizando los campos de sus boletines’.
 
 
+--------
+10d. Personalizando la visualización de su boletín
+Existen varias alternativas para la visualización de sus boletines (por ejemplo, revise la captura de pantalla citada más abajo):
+
+- Para ocultar los campos y ahorrar espacio al momento de editar o ver el boletín, haga clic en el botón  + al costado del nombre del campo (por ejemplo, para campos mas extensos o para los mensajes de los campos). Para mostrar el campo nuevamente y visualizar su contenido, haga clic en el botón – al costado del nombre del campo.  Martus mostrará los campos de todos los boletines que emparejen de la misma manera, hasta que se desconecte de Martus. 
+- Para ocultar una sección entera al momento de editar o visualizar el boletín: haga clic en el botón + al costado de la sección Nombre. Para mostrar la sección nuevamente y visualizar su contenido, haga clic en el botón – al costado de la sección Nombre.  Martus mostrará los campos de todos los boletines que emparejen de la misma manera, hasta que se desconecte de Martus.
+- Puede elegir visualizar o editar los campos de una tabla en la ‘vista estándar’ de la tabla o en la ’vista amplia’ (útil si tiene columnas muy anchas o un gran número de columnas que lo llevarían a hacer scroll hacia la izquierda y hacia la derecha en la ‘vista estándar’ de la tabla). Se puede agregar “filas” al final de la tabla en una vista amplia presionando el botón ‘Agregar una fila a la tabla’. Martus mostrará los campos de todos los boletines que emparejen de la misma manera, hasta que se desconecte de Martus.
+
 
 --------
 11. Preguntas frecuentes
-Estas son las dificultades más comunes con las que es posible encontrarse usando Martus. 
 
 1. He guardado un boletín pero no dice ‘Sí’ en la columna ‘Enviado’.
 Verifique que tiene una conexión a la Internet y que tiene un servidor configurado para enviar los boletines a un servidor. Los boletines no son listados como enviados hasta que el envío al servidor se haya completado. Los boletines pueden demorar hasta una hora en enviarse si es que tienen archivos adjuntos grandes o tiene una conexión lenta. Mientras Martus envía un boletín verá una barra en la parte inferior de la pantalla indicando el progreso. Además cuando se conecta a un servidor puede que haya una demora antes de que la columna ‘Enviado’ sea actualizada.
@@ -1167,7 +1225,7 @@ Tiene que acceder a Martus con una computadora que contenga el archivo con su ll
 4. Los boletines de mi cuenta en la computadora de un colega son diferentes a los de la misma cuenta en mi propia computadora.
 Si tiene una misma cuenta en múltiples computadoras no podrá acceder a sus borradores o boletines sellados en todos ellos a menos que los suba a un servidor y los baje en cada uno. Si es que modifica un borrador en uno de las computadoras y lo sube al servidor, esta copia actualizada no estará en los otras computadoras con su cuenta a menos que lo baje en cada uno. Para bajar la versión más reciente de un borrador de un servidor a la computadora, tendrá que borrar la copia en su computadora y luego bajar la copia actualizada del servidor. Si quiere mantener una copia anterior de un borrador sin sobrescribirla con una copia más reciente de un servidor tendrá que jalar la copia intermedia de Martus a su escritorio antes de borrarlo para así bajar la copia actualizada. Si elimina un borrador de uno de las computadoras y del servidor, las otras computadoras con su cuenta todavía mantendrán su propia copia. Esas copias no se reenviarán al servidor a menos que las modifique.  
 
-5.  Hay cuentas de varios usuarios de Martus en la computadora, ¿Cómo identifico mi cuenta entre todas? 
+5. Hay cuentas de varios usuarios de Martus en la computadora, ¿Cómo identifico mi cuenta entre todas? 
 Inicie Martus e ingrese con su nombre de usuario y contraseña. Elija ‘Ayuda > Ver detalles de mi cuenta’, la ubicación de su llave y boletines de su cuenta esta listada bajo el título ‘Carpeta de cuenta’. La primera cuenta esta en la carpeta de Martus; cuentas adicionales van a estar en carpetas dentro de la carpeta de Martus.
 
 6. He guardado un boletín sellado pero ahora tengo que hacer cambios.
@@ -1221,8 +1279,8 @@ java -Xbootclasspath/p:<ruta-a-Java-Instalación-ejecutable-bibliotecas>/bc-jce.
 Por ejemplo: 
 $ /opt/j2re1.4.2/bin/java -Xbootclasspath/p:/opt/j2re1.4.2/lib/ext/bc-jce.jar -jar ~/.Martus/martus.jar 
 
-14. La ventana inicial de Martus demora en aparecer.
-La velocidad en que Martus se inicia depende de la capacidad de su sistema. Puede que haya una demora de unos segundos del momento en que inicie Martus al momento en que vea la ventana inicial.
+14.  La ventana inicial de Martus demora en aparecer.
+La velocidad en que Martus se inicia depende de la capacidad de su sistema. Puede que haya una demora de unos segundos desde el momento que hace doble clic en el icono de Martus y el momento en que el logo de Martus y la ventana inicial se visualizan.
 
 15. ¿Puedo personalizar la pantalla cambiando los colores y grabando los cambios en el aspecto de la pantalla?
 En esta versión de Martus no se pueden guardar todos los cambios en el aspecto de la pantalla aunque Martus recuerda ciertas configuraciones en una computadora en particular (tales como la lista de disposición de columnas de la vista previa del boletín). Sin embargo, si está usando Windows o Mac, Martus usa los colores de su sistema, de manera que si selecciona un esquema de color diferente para su sistema operativo, también afectará a Martus. Para cambiar los colores del sistema en Windows, haga clic con el botón de la derecha en su escritorio de Windows, seleccione Propiedades y elija la pestaña de Apariencia. Seguidamente seleccione el esquema de color que prefiera. 
@@ -1233,52 +1291,54 @@ También puede personalizar los campos de boletines que cree. Vea ‘10b. Person
 Esto puede que indique un problema con su tarjeta de vídeo o con el controlador de vídeo. Intente actualizando la tarjeta de video, que probablemente se encuentre disponible en la página web de la empresa que la desarrolló. Si no puede actualizar el controlador de su tarjeta de vídeo o continúa teniendo el problema, trate de configurar las propiedades de Martus para que use 256 colores (en lugar de 16 ó 32-bits) en Windows XP o usando 256 colores bajo el Panel de Control, Mostrar Configuraciones, para las versiones anteriores a Windows XP. Alternativamente, también puede arreglar el problema reduciendo la configuración de aceleración gráfica de su tarjeta de vídeo. Para obtener asistencia adicional, escriba a help@martus.org.
 
 17. Me parece observar un comportamiento extraño en Martus. ¿Cómo puedo averiguar qué está pasando?
-Con Windows en lugar de arrancar Martus haciendo doble clic en el ícono de Martus en su escritorio, seleccione Ejecutar del menú Inicio y escriba el siguiente texto para iniciar Martus:
+Con Windows, en lugar de arrancar Martus haciendo doble clic en el ícono de Martus en su escritorio, seleccione Ejecutar del menú Inicio y escriba el siguiente texto para iniciar Martus:
 
 C:\Martus\bin\java.exe -Xbootclasspath/p:C:\Martus\lib\ext\bc-jce.jar -jar C:\Martus\martus.jar
 
-Anote los mensajes de error que aparezcan según va trabajando con Martus y envíelos por correo electrónico a help@martus.org.
+Se abrirá un log en la consola que mostrará información adicional de cómo Martus se ejecuta. Esta información es muy útil para que podamos diagnosticar el problema. Anote los mensajes de error del log de la consola que aparezcan según va trabajando con Martus y envíelos por correo electrónico a help@martus.org. Si siempre desea ejecutar Martus con el log de la consola, haga clic en el ícono de Martus en su, seleccione ‘Propiedades’, seleccione la pestaña de ‘Acceso Directo’, elimine la “w” de “javaw.exe” en el comando de línea y haga clic en OK.
 
 Con Mac, abra el programa Terminal vaya a la carpeta /Library/Java/Martus e inicie Martus desde la línea de comandos y digite: Java -Xbootclasspath/p:/Library/Java/Extensions/bc-jce.jar -jar martus.jar. 
 Anote los mensajes de error que aparezcan según va trabajando con Martus y envíelos por correo electrónico a help@martus.org.
 
 Con Linux, arranque Martus desde la línea de procesador de comandos y digite:
 java -Xbootclasspath/p:<ruta-a-Java-Instalación-ejecutable-bibliotecas>/bc-jce.jar -jar <carpeta Martus>/martus.jar
-
+‘Escritorio’
 Por ejemplo:
 $ /opt/j2re1.4.2/bin/java -Xbootclasspath/p:/opt/j2re1.4.2/lib/ext/bc-jce.jar -jar ~/.Martus/martus.jar
  
 Anote los mensajes de error que aparezcan según va trabajando con Martus y envíelos por correo electrónico a help@martus.org.
 
-Si el registro log no nos permite identificar el problema, éste puede deberse a fuentes dañadas. Las fuentes dañadas pueden evitar que Martus se ejecute. 
-
-Para determinar si una fuente dañada está causando el problema, remueva las fuentes de su sistema operativo y reinstale sólo aquellas que necesita para hacer correr el sistema operativo; Si Martus funciona sólo con esas fuentes instaladas, reinstale las fuentes en grupos pequeños para determinar cuál es la causa del problema. 
+Si el registro log no nos permite identificar el problema, éste puede deberse a fuentes dañadas. Las fuentes dañadas pueden evitar que Martus se ejecute. Para determinar si una fuente dañada está causando el problema, ejecute Martus con el log de la consola (consulte más abajo), y revise si la palabra ‘font’ (fuente) finalmente aparece en el mensaje de la consola. Si es así, es muy probable que las fuentes dañadas sean la causa del problema. Para solucionarlo, en Windows, copie todo el contenido de C:\Windows\Fonts a un carpeta temporal, luego elimine todo el contenido que se encuentra en C:\Windows\Fonts. Ahora copie el contenido que ha guardado en la carpeta temporal en C:\Windows\Fonts. Este proceso reinstalará todas las fuentes y detectará si existe alguna fuente corrupta o dañada. Una vez que las fuentes dañadas hayan sido identificadas, elimínelas manualmente desde C:\Windows\Fonts.
 
 Para obtener asistencia adicional, envíe un mensaje a help@martus.org
 
-18.  ¿Hay un límite de tamaño de boletines o archivos adjuntos que se pueden enviar a un servidor? ¿Hay un límite en el número de boletines que puedo enviar a un servidor?
+18. ¿Hay un límite de tamaño de boletines o archivos adjuntos que se pueden enviar a un servidor? ¿Hay un límite en el número de boletines que puedo enviar a un servidor?
 No, actualmente no hay ningún límite en la cantidad de información, número de boletines o tamaño de los archivos adjuntos que puede enviar a un servidor de Martus. Es posible que algunos servidores impongan límites en el futuro.
 
-19.  ¿Puedo compartir mi información privada con colegas?
+19. ¿Puedo compartir mi información privada con colegas?
 Sí, puede compartir información privada usando una cuenta de oficina central. Cualquier cuenta de Martus puede convertirse en una cuenta de oficina central, dos cuentas pueden ser configuradas para ser oficinas centrales una de la otra y así acceder a la información privada. Para configurar una cuenta de oficina central siga las instrucciones en la sección ´9f. Compartiendo su información privada con colegas´
 
-20.  ¿Esta disponible el Manual de usuario en otros idiomas? 
+20. ¿Esta disponible el Manual de usuario en otros idiomas? 
 Sí, es posible que tenga el manual en idiomas múltiples en su computadora. Al instalar Martus, el manual en todos los idiomas y la guía de inicio rápido disponible es copiada a la carpeta Martus\Docs. Los manuales también están disponibles en el sitio Web http://www.martus.org/downloads, en donde puede ver si están disponibles versiones actualizadas del programa en nuevos idiomas. Adicionalmente puede haber paquetes de idiomas adicionales en la misma página del sitio web de Martus. Los paquetes de idiomas contienen versiones actualizadas del interfaz del programa, la guía de usuario, la tarjeta de referencia, el archivo Léame (Readme) y el archivo de ayuda del programa traducidos a diferentes idiomas.   
 
-21.  No puedo ver todo el texto en una lista desplegable en la versión árabe de Martus. ¿Cómo puedo corregir esto?
+21. No puedo ver todo el texto en una lista desplegable en la versión árabe de Martus. ¿Cómo puedo corregir esto?
 Al usar la versión árabe de Martus en Windows XP puede que los textos en las listas desplazada no se alineen correctamente. Para corregir esto tiene que hacer que Windows muestre los elementos de pantalla como ‘Estilo clásico de Windows.’ Desde el menu Inicio, escoja Configuración > Panel de control, luego haga doble clic en Pantalla. En las propiedades de la pantalla elija la pestaña ‘Apariencia’ y elija el estilo clasico de Windows.  
 
-22.  ¿Cómo puedo hacer que los acentos aparezcan correctamente cuando abro un boletín o un reporte de Martus en otra aplicación? 
+22. ¿Cómo puedo hacer que los acentos aparezcan correctamente cuando abro un boletín o un reporte de Martus en otra aplicación? 
 Los navegadores Web o los procesadores de texto pueden no mostrar los acentos correctamente en los boletines o en los reportes de archivos que ha grabado de Martus. Para asegurarse de que aparezcan los acentos, especifique la codificación de caracter UTF-8 (Unicode). Si no sabe cómo hacer esto en la aplicación, por favor, envíe un correo electrónico a help@martus.org para recibir ayuda.
 
-23.  Tengo problemas conectándome al servidor. ¿Qué puedo hacer?
-Si Martus le informa que el servidor no se encuentra disponible o que usted no puede conectarse, intente hacer “ping” al servidor. Para ello, abra una ventana de línea de comando en Windows (o una ventana terminal en Mac) y escriba:
+23. Tengo problemas conectándome al servidor. ¿Qué puedo hacer?
+Si Martus le informa que el servidor no se encuentra disponible o que usted no puede conectarse, intente hacer “ping” al servidor (que le dirá cómo es su conectividad para con este servidor). Para ello, abra una ventana de línea de comando en Windows (o una ventana terminal en Mac) y escriba:
 	ping dirección-ip-servidor
 (donde dirección-ip-servidor es la misma dirección que ingresó cuando configuró el servidor), y luego oprima Entrar.
 
-Envíe un mensaje con los resultados que aparezcan en su computadora a help@martus.org y serverinfo@martus.org.  Asegúrese de mencionar que usted no pudo conectarse al servidor a través de Martus y la hora en que lo intentó. Determinaremos la naturaleza del problema y trabajaremos con el administrador del servidor para resolverlo.
+Luego, intente rastrear (tracert) el servidor (que le dirá cuál es la ruta entre su computadora y el servidor). Para rastrear (tracert) el servidor, en la ventana de la línea de comando en Windows (o la Terminal en una Mac), tipee 
+	tracert server-ip-address
+y luego presione el boton de Retorno.
 
-24.  Veo cuadrados en vez de texto en los menús cuando ejecuto la versión nepalí de Martus. ¿Cómo puedo arreglar esto?
+Envíe un mensaje con los resultados del ping y el tracert que aparezcan en su computadora a help@martus.org y serverinfo@martus.org.  Asegúrese de mencionar que usted no pudo conectarse al servidor a través de Martus y la fecha y hora del día en que lo intentó (por favor, incluya también su zona horaria). Determinaremos la naturaleza del problema y trabajaremos con el administrador del servidor para resolverlo.
+
+24. Veo cuadrados en vez de texto en los menús cuando ejecuto la versión nepalí de Martus. ¿Cómo puedo arreglar esto?
 Para ejecutar Martus en nepalí para la versión 2.7.2 y anteriores en Windows, usted debe hacer una modificación menor al comando utilizado para iniciar Martus (de la pantalla de comandos y en cualquier abreviación o alias pantalla/Menú de Inicio que fueron creados cuando los instalaron).   
 Para ejecutar desde la línea de comandos, vaya al directorio de Martus y digite: 
 C:\Martus\bin\javaw.exe -Dswing.useSystemFontSettings=false -jar C:\Martus\martus.jar 
@@ -1286,14 +1346,14 @@ Para cambiar sus abreviaciones, déles un clic con el botón derecho sobre ellos
 C:\Martus\bin\javaw.exe -Dswing.useSystemFontSettings=false -jar C:\Martus\martus.jar 
 Para Martus 2.8 y versiones posteriores, esta modificación se realiza automáticamente, de modo que si están teniendo problemas con la visualización envíe un correo electrónico a help@martus.org.
 
-25.  Quiero actualizar mi copia de Martus. ¿Necesito remover la versión anterior?
+25. Quiero actualizar mi copia de Martus. ¿Necesito remover la versión anterior?
 No. Puede instalar Martus encima de una versión previa del programa. La instalación le notificara si existe una versión anterior. Oprima Si para actualizar Martus preservando todos sus datos, incluyendo boletines, información de cuenta, configuración de servidores y contraseñas. Para más información consulte la sección 
 ´2c. Actualizar su versión de Martus (Windows solamente)´
 
-26.  Martus corre lentamente en mi portátil a menos que esté conectada. 
+26. Martus corre lentamente en mi portátil a menos que esté conectada. 
 Algunas computadoras portátiles o sus tarjetas gráficas tienen configuraciones destinadas a preservar la vida de la batería cuando ésta no se encuentra conectada, y esas configuraciones pueden no proporcionar suficiente potencia para que Martus trabaje como se esperaba. Vea la documentacion respecto de cambios en las configuraciones de su portátil y su tarjeta gráfica. Para obtener asistencia adicional, envíe un correo electrónico a help@martus.org.
 
-27.  Cuando realizo una copia de seguridad de mi llave usando discos USB, Martus no las reconoce como diferentes. ¿Qué está sucediendo? 
+27. Cuando realizo una copia de seguridad de mi llave usando discos USB, Martus no las reconoce como diferentes. ¿Qué está sucediendo? 
 Cuando recién inserta una USB ("disco extraíble"), el sistema operativo le asigna una letra al disco; cada disco tiene una asignación de letra diferente. Martus, sin embargo, espera encontrar cada USB en el mismo disco. Entonces, antes de realizar una copia de seguridad de su llave a una disco USB, reasigne la letra de cada disco para que todas sean iguales. 
 
 Para reasignar la letra del disco en Windows: 
@@ -1306,11 +1366,11 @@ Para reasignar la letra del disco en Windows:
 
 Para obtener mas ayuda con Mac OS o Linux, por favor, envíe un mensaje a help@martus.org
 
-28.  Estoy teniendo problemas para ejecutar Martus en Mac
-El problema puede estar ocurriendo, quizás, porque Martus no es compatible con Java 1.5 (a veces llamado Java 5), el cual es automáticamente instalado en algunas nuevas versiones del sistema operativo de Mac. Para verificar cuál es la versión de Java que se está ejecutando en su computadora, abra una terminal y tipee:
+28. Estoy teniendo problemas para ejecutar Martus en Mac
+El problema puede estar ocurriendo, quizás, porque hasta la versión 3.1 de Martus, el programa no era compatible con Java 1.5 (a veces llamado Java 5), el cual es automáticamente instalado en algunas nuevas versiones del sistema operativo de Mac. Para verificar cuál es la versión de Java que se está ejecutando en su computadora, abra una terminal y tipee:
 	Java –version
 
-Si vee la versión 1.5, entonces deberá descargar Java Runtime Enviroment (JRE) versión 1.4.2 (preferiblemente 1.4.2_12) desde http://www.apple.com/downloads/macosx/apple.
+Si está ejecutando Martus 3.0 o una versión anterior y vee la versión de Java 1.5, entonces deberá descargar Java Runtime Enviroment (JRE) versión 1.4.2 (preferiblemente 1.4.2_12) desde http://www.apple.com/downloads/macosx/apple.
 
 Luego puede decirle a Martus que utilice la versión 1.4.2 de Java cuando lo ejecute, usando el siguiente comando:
 <path-to-Java-v1.4.2-Install-executable-libraries>/Commands/java 
@@ -1323,3 +1383,42 @@ Por ejemplo:
 
 Para obtener ayuda adicional ejecutando Martus en una Mac, por favor, envíe un mensaje a help@martus.org.
 
+29. Pierdo constantemente la configuración de mi oficina central. ¿Qué está sucediendo?
+En la versión 3.1 de Martus y otras versiones anteriores, sí la plantilla personalizada pesaba mas de 64K, el archivo de configuración de Martus se dañaba en algunas ocasiones. Esto ocasionaba la pérdida de los datos de configuración de su cuenta incluyendo las configuraciones de su(s) oficina(s) central(es). En Martus 3.2, hemos eliminado la restricción del tamaño de 64 K para las plantillas personalizadas, por lo que el problema ya no debe continuar. Sin embargo, si aún experimenta la pérdida de las configuraciones de su oficina central, por favor, envíe un mensaje de correo electrónico a help@martus.org con una explicación detallada de las tareas que, al mismo tiempo, estuvo realizando, incluyendo cualquier mensaje que la consola del log de Martus pudiera arrojar. (Consulte la Pregunta Frecuente #17 para mayor información de cómo ejecutar Martus desde una consola).
+
+30. ¿Cómo ejecuto Martus en la plataforma Linux Ubuntu 6.10?
+Para ejecutar Martus en Ubuntu:
+1. Descargue Martus 3.2 para Linux en un archivo comprimido (zip) desde www.martus.org.
+2. Siga las instrucciones de instalación para Martus en una plataforma Linux (vea '2a. Instalación').
+3. Inicie la aplicación desde el Terminal (Aplicaciones/Accesorios/Terminal). Tipee lo siguiente:
+
+
+$ cd Desktop
+$ unzip MartusClient-3.2.zip
+$ cd MartusClient-3.2
+$ sudo cp LibExt/* /usr/lib/j2se/1.4/jre/lib/ext/.
+$ cp -R Martus /usr/share/java
+$ cd ~
+
+4.  Cree un script para iniciar Martus.
+
+$ sudo echo "java -Xbootclasspath/p:/usr/lib/j2se/1.4/jre/lib/ext/bc-
+jce.jar -jar /usr/share/java/Martus/martus.jar" > /usr/local/bin/martus $ sudo chmod +x /usr/local/bin/martus
+
+5. Con el script de inicio instalado en /usr/local/bin, puede iniciar Martus simplemente con tipear 'martus' en una ventana del terminal.
+
+    $ martus
+
+Martus debe ejecutarse exitosamente en Ubuntu. Para mayor asistencia, por favor envie un mensaje de correo electrónico a help@martus.org.
+
+31. He creado una cuenta Martus para propósitos de prueba y entrenamiento y no creará boletines con datos reales. ¿Cómo aviso a los administradores del servidor sobre ello?
+Diríjase a Ayuda>Ver detalles de mi cuenta. Martus le mostrará una pantalla con información sobre su cuenta, incluyendo un código público de 20 dígitos compuesto de 5 números (cada de 4 dígitos). Por favor, envíe el código público a help@martus.org avisándonos sobre su cuenta de prueba.
+
+32. Estoy ejecutando Martus desde una consola pero parece que se ha colgado. ¿Qué está sucediendo?
+En Windows cuando hace clic en la consola del log, el proceso de ejecución de Martus puede quedar suspendido (vea la Pregunta Frecuente #17 para mayor información). Sí la ejecución de Martus quedó suspendida, entonces verá la palabra 'Seleccionar' (o “Select”)  al inicio del título de la consola o del título de la barra. Si desea 'Deseleccionar' la consola, haga clic en el cuerpo de la consola y el mensaje seleccionado al inicio del título de la ventana desaparecerá. Para evitar que esto suceda a futuro, haga clic en el título de la barra de la consola, seleccione Propiedades, seleccione la pestaña de Opciones, y de-seleccione 'Edición de modo rápido'.(“Quick Edit Mode”) Cuando presione OK, elija 'Modify shortcut that started this window' (Modifique el acceso directo que modifica esta ventana) y listo. 
+
+33. Estoy ejecutando Martus pero no puedo encontrar la ventana de Martus. ¿Cómo la encuentro? 
+Si tiene otros programas abiertos puede ser que Martus esté escondido detrás de alguno de ellos. Presione Alt+Tab y verá los distintos íconos de las distintas aplicaciones que se están ejecutando en ese momento, incluyendo Martus. Suelte las teclas Alt y Tab justo en el ícono de Martus. La ventana de Martus debe ahora aparecer en su pantalla.
+
+34. Estoy ejecutando Martus en árabe pero el título de la columna del texto se muestra justificado a la izquierda. ¿Cómo puedo solucionarlo?
+Cuando ejecute Martus en árabe en Windows XP, el texto del título de la columna puede que no se alinee correctamente. Configure Windows para mostrar los elementos de la interface en 'Windows Estilo Clásico' (“Windows classic style”) lo que centrará el título de la columna árabe. Diríjase al menú de Inicio, elija Configuración > Panel de Control, haga doble clic en 'Pantalla'. Luego, en la ventana 'Pantalla', haga clic en la pestaña 'Apariencia' y elija 'Windows Estilo Clásico' del menú de 'Ventanas y Botones'. 

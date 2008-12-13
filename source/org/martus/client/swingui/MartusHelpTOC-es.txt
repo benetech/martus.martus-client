@@ -59,4 +59,5 @@
 10a. ¿Cómo usar una plantilla para el campo 'Detalles'?
 10b. Personalizando los campos de sus boletines
 10c. Utilizar Plantillas Personalizadas
+10d. Personalizando la visualización de su boletín
 11. Preguntas frecuentes
