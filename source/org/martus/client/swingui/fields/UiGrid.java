@@ -155,9 +155,21 @@ abstract public class UiGrid extends UiField
 		// when the underlying model is changed
 		if(expandedFieldRows == null)
 			return;
-		showExpanded();
-		if(widget.getTopLevelAncestor() != null)
-			widget.getTopLevelAncestor().validate();
+
+		for(int row = 0; row < expandedFieldRows.size(); ++row)
+		{
+			UiField[] fields = (UiField[]) expandedFieldRows.get(row);
+			for(int column = FIRST_REAL_FIELD_COLUMN; column < model.getColumnCount(); ++column)
+			{
+				FieldSpec spec = model.getFieldSpecForCell(row, column);
+				if(spec.getType().isDropdown())
+				{
+					updateChoicesFromDataSourceIfNecessary((DropDownFieldSpec)spec);
+					UiChoice choice = (UiChoice)fields[column];
+					choice.updateChoices();
+				}
+			}
+		}
 	}
 	
 	void showExpanded()

@@ -51,5 +51,9 @@ abstract public class UiChoice extends UiField
 
 	abstract public void setChoices(ChoiceItem[] newChoices);
 	
+	public void updateChoices()
+	{
+	}
+
 	protected DropDownFieldSpec spec;
 }
