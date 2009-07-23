@@ -215,7 +215,7 @@ public class TestFieldChooserSpecBuilder extends TestCaseEnhanced
 		assertEquals("not one choice for multiline fields?", 1, multilineTypeChoices.size());
 		ChoiceItem multilineChoice = (ChoiceItem)multilineTypeChoices.iterator().next();
 		FieldSpec multilineChoiceSpec = multilineChoice.getSpec();
-		assertEquals("multiline doesn't have string search?", new FieldTypeNormal(), multilineChoiceSpec.getType());
+		assertEquals("multiline doesn't have string search?", new FieldTypeMultiline(), multilineChoiceSpec.getType());
 		
 		FieldSpec booleanType = createSampleBooleanSpec();
 		Set booleanTypeChoices = searchBuilder.getChoiceItemsForThisField(booleanType);
