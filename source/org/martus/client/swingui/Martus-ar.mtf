@@ -2,9 +2,9 @@
 # Language code:  ar
 # Language name:  Arabic
 # Translated by:  MID Foundation; Localize; Mounaim Elkhezzani 
-# Exported date:  Thu Apr 05 16:50:11 PDT 2007
-# Client version: 3.1-RC
-# Client build:   20070405.1810
+# Exported date:  Wed Nov 26 20:05:36 GMT 2008
+# Client version: 3.3
+# Client build:   20080826.1903
 #
 # This file MUST be saved in UTF-8 format!
 # Lines beginning with # are comments and are ignored by Martus
@@ -56,12 +56,17 @@
 #      what they refer to.
 #  9.  Leave field types in English in CreateCustomFieldsHelp3 examples
 #      (e.g. BOOLEAN, DATE)
-# 10.  Do not translate words used in XML for custom fields such as:
-#      <Field type='GRID'>, </Field>, <Tag>, </Tag>, <Label>, </Label>,
+# 10.  Do not translate words between angle brackets in the XML for custom fields, such as:
+#      <Field type='SECTION'>, <Field type='STRING'>, <Field type='BOOLEAN'>, <Field type='DATE'>,
+#      <Field type='DATERANGE'>, <Field type='DROPDOWN'>, <Field type='MULTILINE'>
+#      <Field type='LANGUAGE'>, <Field type='MESSAGE'>, <Field type='GRID'>, 
+#      </Field>, <Tag>, </Tag>, <Label>, </Label>,  <Message>, </Message>
+#      <Choices>, </Choices>, <Choice>, </Choice>, <DataSource>, </DataSource>
+#      <GridFieldTag>, </GridFieldTag>, <GridColumnLabel>, </GridColumnLabel>
 #      <GridSpecDetails>, </GridSpecDetails>, <Column>, </Column>,
-#      <Message>, </Message>, <Choices>, </Choices>, <Choice>, </Choice>,
 #      <Column type='STRING'>, <Column type='BOOLEAN'>, <Column type='DATE'>,
 #      <Column type='DATERANGE'>, <Column type='DROPDOWN'>
+#      <KeepWithPrevious/>, <RequiredField/>
 # 11.  Do not translate words that are surrounded by #'s, but you may move
 #      them around as grammatically appropriate.
 #      Example: #TotalNumberOfFilesInBackup#, #Titles#, #FieldLabel#, etc.
@@ -93,8 +98,14 @@
 #____________________________=Add
 -61cc-button:AddFieldToReport=إضافة
 
+#__________________________=Update Headquarters Access
+-5029-button:AddPermissions=تحديث الوصول إلى المقر الرئيسي
+
 #________________________=Show all bulletins on this server and on this computer.
 -e9a2-button:AllSummaries=عرض جميع النشرات على هذا الجهاز وعلى الخادم
+
+#______________________________=Append Row
+-2678-button:AppendEmptyGridRow=أضف الصف
 
 #________________=Back
 -b52b-button:Back=السابق
@@ -150,8 +161,8 @@
 #_________________________=Up
 -2038-button:FolderOrderUp=أعلى
 
-#___________________________________=Include Private Bulletins
--741f-button:IncludePrivateBulletins=ضمّن نشرات خاصة
+#___________________________________=Include Private Data
+-e6dc-button:IncludePrivateBulletins= ضمن بيانات خاصة
 
 #______________________________=Insert Row
 -9f53-button:InsertEmptyGridRow=أدرج صف
@@ -186,8 +197,8 @@
 #_________________________________=Include private information
 -6c53-button:PrintPublicAndPrivate=تضمين المعلومات الخاصة
 
-#_______________________=Send report to a file
--b154-button:PrintToDisk=إرسال التقرير إلى ملف
+#_______________________=Print to a file
+-8dde-button:PrintToDisk= إرسال إلى ملف
 
 #_______________________=Print To File
 -a5d9-button:PrintToFile=إرسال الطبع لملف
@@ -239,6 +250,12 @@
 
 #__________________________________=Reject
 -2b03-button:ServerComplianceReject=إلغاء
+
+#____________________________=Show Expanded
+-2dc6-button:ShowGridExpanded= اعرض بتوسيع 
+
+#__________________________=Show as Grid
+-172d-button:ShowGridNormal=اعرض كشبكة متقاطعة
 
 #__________________=Sign In
 -f849-button:SignIn=دخول 
@@ -300,6 +317,9 @@
 #________________=Help
 -c47a-button:help=تعليمات
 
+#__________________________=Hide
+-34d8-button:hideattachment=إخفاء
+
 #_______________________________=OK
 -9ce3-button:inputCustomFieldsok=موافق 
 
@@ -345,8 +365,8 @@
 #_________________=Print
 -5b22-button:print=طباعة 
 
-#____________________________=Remove Attachment
--6f6d-button:removeattachment=إزالة مرفق
+#____________________________=Remove
+-e963-button:removeattachment= إزالة 
 
 #____________________=Retrieve
 -eb55-button:retrieve=استرجاع 
@@ -354,8 +374,8 @@
 #________________=Save
 -efc0-button:save=حفظ
 
-#__________________________=Save Attachment
--f513-button:saveattachment=حفظ مرفق 
+#__________________________=Save...
+-96b4-button:saveattachment=حفظ 
 
 #_____________________=Save Draft
 -cc13-button:savedraft=حفظ مسودة 
@@ -369,8 +389,8 @@
 #______________________=Uncheck All
 -bc6d-button:uncheckall=ترك الكل 
 
-#__________________________=View Attachment
--b24c-button:viewattachment=استعراض مرفق
+#__________________________=View
+-69bd-button:viewattachment= عرض 
 
 #_______________=Yes
 -5397-button:yes=نعم 
@@ -386,6 +406,11 @@
 
 #______________________________=User Name: 
 -b58e-field:AccountInfoUserName=اسم المستخدم: 
+
+#_________________________________=This allows you to update headquarters access to existing bulletins. Each of the bulletins in the list below will be modified to add the selected headquarters accounts. If a bulletin is sealed, a new version will be created.
+-aa30-field:AddPermissionsOverview= يتيح لك هذا تحديث الوصول إلى المقر الرئيسي للنشرات الموجودة. وسوف يتم تعديل جميع النشرات الموجودة في القائمة أدناه لإضافة حسابات المقر الرئيسي المحدد. وإذا تم ختم نشرة، فسوف يتم إنشاء إصدار جديد.
+#_______________________________________=Updating access...
+-958f-field:AddingPermissionsToBulletins= تحديث الوصول 
 
 #________________________________=Unknown
 -bc78-field:AttachmentSizeUnknown=مجهول
@@ -409,7 +434,7 @@
 -ff3d-field:BackupKeyPairGeneralInfo=شفرتك ضرورية لقراءة معلومات نشرتك الخاصة أو لإنشاء نشرة جديدة. لضمان الوصول لبياناتك بشكل مستمر، من المهم جدا أن تحتفظ بنسخة احتياطية من شفرتك. \n\nMartusيوفر طريقتين للاحتفاظ بنسخة احتياطية من ملف شفرة دخولك، ويمكن استخدام أي منها ولكننا نوصي بشدة باستخدام كليهما.  تعتمد الطريقة الأولى على إنشاء نسخة احتياطية واحدة من ملف شفرة دخولك يتم تشفيرها بكلمة مرور ويتم تخزينها على وسائط تخزين متنقلة (مثل الأقراص المرنة والأقراص المضغوطة أو أجهزة UBS للتخزين) أو على قرص الشبكة. أما الطريقة الثانية فهي طريقة التجزيء السري وتعتمد على حفظ نسخة احتياطية من ملف شفرة دخولك  في #TotalNumberOfFilesInBackup#  في أجزاء مختلفة (غير مشفرة بكلمة مرورك) على أقراص مرنة متعددة (أو وسائل تخزين أخرى محمولة).  
 
 #________________________________________________=This method breaks up your key into #TotalNumberOfFilesInBackup# pieces, any #MinimumNumberOfFilesNeededForRecovery# of which will be required to reconstruct the key without requiring a password.  If you forget your login name or your password, this method is the only way you can restore your key.\n\nOnce the #TotalNumberOfFilesInBackup# files have been written to removable media disks, you should distribute them to #TotalNumberOfFilesInBackup# different people whom you will remember, but each of whom don't know who you have given the other files to.  Do not store any of the disks together.\n\nTo restore your key, first retrieve any #MinimumNumberOfFilesNeededForRecovery# of the original #TotalNumberOfFilesInBackup# disks, and then select 'Restore Account' and 'Restore account from multiple disks' when signing into Martus.\n
--9551-field:BackupKeyPairToSecretShareInformation=تُقسّم هذه الطريقة ملف شفرة دخولك إلى #TotalNumberOfFilesInBackup# من الأجزاء، أي #MinimumNumberOfFilesNeededForRecovery# والذي سيكون ضروريا لإعادة تركيب الشفرة بدون اللجوء إلى كلمة المرور. إذا نسيت اسم التسجيل الخاص بك أو كلمة المرور الخاصة بك، يكون هذا الإجراء الطريقة الوحيدة لاسترجاع شفرتك. \n\nبعد أن يتم كتابة #TotalNumberOfFilesInBackup# إلى أقراص التخزين المحمولة قم بتوزيعها على  #TotalNumberOfFilesInBackup# أشخاص مختلفين تتذكرهم لكن لا يعرف كل واحد هوية الأشخاص الآخرين الحاملين للأقراص. لا تقم بتخزين الأقراص مع بعضها في نفس المكان. \n\n لاسترجاع شفرتك قم أولا باسترداد أي  #MinimumNumberOfFilesNeededForRecovery# من القرص الأصلي لـ #TotalNumberOfFilesInBackup# ثم قم بتحديد 'استرجاع حساب' و 'استرجاع حساب من أقراص متعددة' عندما تسجل دخولك إلى Martus.\n
+-9551-field:BackupKeyPairToSecretShareInformation=تُقسّم هذه الطريقة ملف شفرة دخولك إلى #TotalNumberOfFilesInBackup# من الأجزاء، أي #MinimumNumberOfFilesNeededForRecovery# والذي سيكون ضروريا لإعادة تركيب الشفرة بدون اللجوء إلى كلمة المرور. إذا نسيت اسم التسجيل الخاص بك أو كلمة المرور الخاصة بك، يكون هذا الإجراء الطريقة الوحيدة لاسترجاع شفرتك. \n\nبعد أن يتم كتابة #TotalNumberOfFilesInBackup# إلى أقراص التخزين المحمولة قم بتوزيعها على  #TotalNumberOfFilesInBackup# أشخاص مختلفين تتذكرهم لكن لا يعرف كل واحد هوية الأشخاص الآخرين الحاملين للأقراص. لا تقم بتخزين الأقراص مع بعضها في نفس المكان. \n\n لاسترجاع شفرتك قم أولا باسترداد أي  #MinimumNumberOfFilesNeededForRecovery# من القرص الأصلي لـ #TotalNumberOfFilesInBackup# ثم قم بتحديد 'استرجاع حساب' و'استرجاع حساب من أقراص متعددة' عندما تسجل دخولك إلى Martus.\n
 
 #____________________________________________________=Please insert disk #
 -b877-field:BackupRecoverKeyPairInsertNextDiskMessage=الرجاء إدخال قرص
@@ -487,7 +512,7 @@
 -2da6-field:BulletinVersionNumber=الإصدار
 
 #______________________________=Martus Bulletin
--1ded-field:BulletinViewHeading= نشرة Martus
+-1ded-field:BulletinViewHeading= Martus نشرة  
 
 #__________________________=Sent
 -35f4-field:BulletinWasSent=تم الإرسال
@@ -504,6 +529,8 @@
 #_____________________________=Thai Solar (2548-05-31)
 -2be4-field:CalendarSystemThai=(2548-05-31) تايلاندي شمسي 
 
+#__________________________________=Select the headquarters listed below that you want to add to all the bulletins listed above.
+-23a1-field:ChooseHeadquartersToAdd= اختر المقر الرئيسي الموضح أدناه والذي تريد إضافته إلى جميع النشرات المدرجة أعلاه.
 #_____________________________=Use Ctrl-Click or Shift-Click to select the fields (columns) that will appear in this report. 
 -e4a8-field:ChooseReportFields= لانتقاء المجالات Ctrl-Clickأو  Shift-Click استخدم (الخانات) التي تظهر في هذا التقرير.
 
@@ -537,23 +564,26 @@
 #__________________________________=The layout of the bulletins is dictated by an XML document.  By default the standard bulletin fields occur at the top of the Custom Field declaration, but they can be moved if desired.  However, there are four required fields that cannot be removed:  'author', 'entrydate', 'language' and 'title'.\n\n
 -1ef6-field:CreateCustomFieldsHelp1= يتم إملاء نموذج تصميم النشرات عن طريق وثيقة .XML  تلقائيا تتواجد الحقول الأساسية للنشرة في أعلى رمز الحقل المعدّل و لكن يمكن تغيير وضعها حسب الرغبة.  ومع ذلك، لا يمكن تغيير الأربع الحقول الأساسية التالية: 'author' (الكاتب)، 'entrydate' (تاريخ الإنشاء)، 'language' (اللغة) و 'title' (العنوان). \n\n
 
-#__________________________________=For custom (non-standard) fields, you first select the type of field you want.  The possible choices are 'BOOLEAN', 'DATE', 'DATERANGE', 'DROPDOWN', 'GRID', 'LANGUAGE', 'MESSAGE', 'MULTILINE', and 'STRING'. \n\nFor each custom field you will need a unique identification tag.  This tag can be any word except those already used by the system (eg. 'author', 'summary', 'location', 'title' etc.), and cannot contain spaces or special characters.  Examples of choices are 'VictimsName', 'EyeColorChoice', etc.\n\nThen you need a label which is displayed next to your custom field.  An example might be 'Name of 1st Witness'.\n\nAdditional Comments\n1. XML is case-sensitive ('Witness' is not the same as 'witness') \n2. Quotes around type name can be single or double as long as they match (e.g. 'STRING" is not valid. It must be 'STRING' or "STRING")\n3. A Boolean field will be displayed as a checkbox when editing and Yes/No when previewed or printed.\n4.  Use "MESSAGE" fields to give guidance on how to enter data, and to create comments/notes that will be displayed in every bulletin.\n\nSee examples below:\n\n
--4ccc-field:CreateCustomFieldsHelp2=بالنسبة للحقول المخصصة (غير النمطية) قم أولا باختيار نوع  الحقل الذي تريده. تتمثل الاختيارات المتوفرة في'BOOLEAN'   (ضروري أو) و 'DATE' (التاريخ) و 'DATERANGE' (المدى التاريخي) و 'DROPDOWN' (قائمة منسدلة) و 'GRID' (شبكة) و 'LANGUAGE' (اللغة) و 'MESSAGE' (رسالة) و 'MULTILINE' (أسطر متعددة) و 'STRING (تسلسل حرفي). \n\n ستحتاج إلى رمز هوية فريد لكل حقل مخصص. قد يكون هذا الرمز أي كلمة باستثناء تلك الكلمات المستخدمة من قبل النظام (مثال: 'author' (مؤلف) و 'summary' (تلخيص) و 'location' (الموضع) و 'title' (عنوان) إلخ.) ولا يمكن أن تحتوي على أحرف فراغ أو على أحرف خاصة. من بين الخيارات ('اسمالضحية') أو ('خيارلونالعينين') إلخ. \n\nثم ستحتاج إلى اسم يتم عرضه بجانب حقلك الجديد مثل ('اسم الشاهد الأول'). \n\nملاحظات إضافية\n1. تكون الوثائق في صيغة XML حساسة لنوع الحروف اللاتينية المستخدمة (كلمة 'Witness' مختلفة عن كلمة 'witness' ) \n2. تكون علامات الاقتباس مفردة أو مزدوجة طالما كانتا متشابهتان (مثال: كلمة 'STRING" بهذه الصيغة غير صحيحة، يجب أن تكون 'STRING' أو "STRING" )\n3. يتم عرض الإثبات أو النفي في صيغة مربع اختيار عند التحرير وفي صيغة نعم/لا عند الاستعراض أو الطباعة. \n4. استخدم حقول "MESSAGE" (رسالة) لإعطاء التعليمات عن طريقة إدخال البيانات ولإنشاء تعليقات/ملاحظات يتم عرضها في كل نشرة. \n\nراجع المثال أدناه:\n\n   
+#__________________________________=For custom (non-standard) fields, you first select the type of field you want.  The possible choices are 'BOOLEAN', 'DATE', 'DATERANGE', 'DROPDOWN', 'GRID', 'LANGUAGE', 'MESSAGE', 'MULTILINE', 'STRING', and 'SECTION'. \n\nFor each custom field you will need a unique identification tag.  This tag can be any word except those already used by the system (eg. 'author', 'summary', 'location', 'title' etc.), and cannot contain spaces or special characters.  Examples of choices are 'VictimsName', 'EyeColorChoice', etc.\n\nThen you need a label which is displayed next to your custom field.  An example might be 'Name of 1st Witness'.\n\nYou can create sections (which you can hide/unhide) in your bulletins using a SECTION field type.  \n\nYou can put multiple fields on a single row in your bulletin by using <KeepWithPrevious/> in the field definition.\n\nYou can require certain fields to be entered before saving a bulletin by using <RequiredField/> in the field definition.\n\nYou can populate drop-down lists (either inside or outside of a grid) with values that have been entered in a grid elsewhere in your bulletin by using <DataSource> instead of <Choices> in the field definition.\n\nAdditional Comments\n1. XML is case-sensitive ('Witness' is not the same as 'witness') \n2. Quotes around type name can be single or double as long as they match (e.g. 'STRING" is not valid. It must be 'STRING' or "STRING")\n3. A Boolean field will be displayed as a checkbox when editing and Yes/No when previewed or printed.\n4.  Use "MESSAGE" fields to give guidance on how to enter data, and to create comments/notes that will be displayed in every bulletin.\n\nSee examples below:\n\n
+-f655-field:CreateCustomFieldsHelp2=بالنسبة للحقول المخصصة (غير النمطية) قم أولا باختيار نوع  الحقل الذي تريده. تتمثل الاختيارات المتوفرة في'BOOLEAN'   (ضروري) و 'DATE' (التاريخ)و 'DATERANGE' (المدى التاريخي) و 'DROPDOWN' (قائمة منسدلة) و 'GRID' (شبكة) و 'LANGUAGE' (اللغة)و'MESSAGE' (رسالة) و 'MULTILINE' (أسطر متعددة) و 'STRING ("تسلسل حرفي")وSECTION ("قسم"). \n\n ستحتاج إلى رمز هوية فريد لكل حقل مخصص. قد يكون هذا الرمز أي كلمة باستثناء تلك الكلمات المستخدمة من قبل النظام (مثال: 'author' (مؤلف) و 'summary' (تلخيص) و 'location' (الموضع) و 'title' (عنوان) إلخ.) ولا يمكن أن تحتوي على أحرف فراغ أو على أحرف خاصة. من بين الخيارات ('اسم الضحية') أو ('خيار لون العينين')إلخ . \n\nثم ستحتاج إلى اسم يتم عرضه بجانب حقلك الجديد مثل ('اسم الشاهد الأول'). \n\n يمكنك إنشاء أقسام (التي يمكنك إخفاؤها/كشفها) في نشراتك باستخدام نوع الحقل في القسم المعني. \n\n يمكنك وضع حقول متعددة في صف واحد في نشرتك باستخدام أمر  "<KeepWithPrevious/>"  في تعريف الحقل \n\n. بإمكانك اشتراط تدوين بعض الحقول قبل حفظها باستخدام أمر "<RequiredField/>"في تعريف الحقل \n\n. يمكنك ملء القوائم المنسدلة (سواء من داخل أو من خارج الشبكة) بقيم تم تدوينها في مكان آخر من الشبكة باستخدام أمر "<DataSource>" بدل أمر "<Choices>" في تعريف الحقل \n\n. ملاحظات إضافية\n1. تكون الوثائق في صيغة XML حساسة لنوع الحروف اللاتينية المستخدمة (كلمة 'Witness' مختلفة عن كلمة 'witness' ) \n2. تكون علامات الاقتباس مفردة أو مزدوجة طالما كانتا متشابهتين (مثال: كلمة 'STRING" بهذه الصيغة غير صحيحة، يجب أن تكون 'STRING' أو "STRING" )\n3. يتم عرض الإثبات أو النفي في صيغة مربع اختيار عند التحرير وفي صيغة نعم/لا عند الاستعراض أو الطباعة. \n4. استخدم حقول "MESSAGE" (رسالة) لإعطاء التعليمات عن طريقة إدخال البيانات ولإنشاء تعليقات/ملاحظات يتم عرضها في كل نشرة. \n\nراجع المثال أدناه:\n\n
 
-#__________________________________=\n<Field type='DROPDOWN'>\n<Tag>BulletinSource</Tag>\n<Label>Source of bulletin information</Label>\n<Choices>\n<Choice>Media/Press</Choice>\n<Choice>Legal Report</Choice>\n<Choice>Personal Interview</Choice>\n<Choice>Other</Choice>\n</Choices>\n</Field>\n\n<Field type='STRING'>\n<Tag>SpecifyOther</Tag>\n<Label>If "Other", please specify:</Label>\n</Field>\n\n<Field type='STRING'>\n<Tag>IntervieweeName</Tag>\n<Label>Interviewee Name</Label>\n</Field>\n\n<Field type='LANGUAGE'>\n<Tag>IntervieweeLanguage</Tag>\n<Label>Interviewee Speaks</Label>\n</Field>\n\n<Field type='DATERANGE'>\n<Tag>InterviewDates</Tag>\n<Label>Date(s) of interview(s)</Label>\n</Field>\n\n<Field type='BOOLEAN'>\n<Tag>Anonymous</Tag>\n<Label>Does interviewee wish to remain anonymous?</Label>\n</Field>\n\n<Field type='GRID'>\n<Tag>VictimInformationGrid</Tag>\n<Label>Victim Information</Label>\n<GridSpecDetails>\n<Column type='STRING'><Tag></Tag><Label>First Name</Label></Column>\n<Column type='STRING'><Tag></Tag><Label>Last Name</Label></Column>\n<Column type='BOOLEAN'><Tag></Tag><Label>Is Identified?</Label></Column>\n<Column type='DATE'><Tag></Tag><Label>Date of Birth</Label></Column>\n<Column type='DROPDOWN'><Tag></Tag><Label>Sex</Label>\n<Choices>\n<Choice>Male</Choice>\n<Choice>Female</Choice>\n<Choice>Unknown</Choice>\n</Choices></Column>\n<Column type='STRING'><Tag></Tag><Label>Ethnicity</Label></Column>\n</GridSpecDetails>\n</Field>\n\n<Field type='MESSAGE'>\n<Tag>MessageProfession</Tag>\n<Label>Profession History Table Note</Label>\n<Message>If you have information about a person who has had different professions over time, enter multiple rows with the same First and Last Names and show the date ranges for each profession on a separate row.</Message>\n</Field>\n\n<Field type='GRID'>\n<Tag>ProfessionHistoryGrid</Tag>\n<Label>Profession History</Label>\n<GridSpecDetails>\n<Column type='STRING'><Tag></Tag><Label>First Name</Label></Column>\n<Column type='STRING'><Tag></Tag><Label>Last Name</Label></Column>\n<Column type='STRING'><Tag></Tag><Label>Profession</Label></Column>\n<Column type='DATERANGE'><Tag></Tag><Label>Dates of Profession</Label></Column>\n</GridSpecDetails>\n</Field>\n
--4d55-field:CreateCustomFieldsHelp3=\n<Field type='DROPDOWN'>\n<Tag>مصدرالنشرة</Tag>\n<Label>مصدر معلومات النشرة</Label>\n<Choices>\n<Choice>وسائل الإعلام/صحف</Choice>\n<Choice>تقرير قانوني</Choice>\n<Choice>لقاء شخصي</Choice>\n<Choice>غير ذلك</Choice>\n</Choices>\n</Field>\n\n<Field type='STRING'>\n<Tag>غيرذلك</Tag>\n<Label>إذا كان "غير ذلك" الرجاء أن تذكر بوضوح:</Label>\n</Field>\n\n<Field type='STRING'>\n<Tag>اسمالمتحدث</Tag>\n<Label>اسم المتحدث</Label>\n</Field>\n\n<Field type='LANGUAGE'>\n<Tag>لغةالمتحدث</Tag>\n<Label>لغة المتحدث</Label>\n</Field>\n\n<Field type='DATERANGE'>\n<Tag>تواريخاللقاءات</Tag>\n<Label>تاريخ (تواريخ) اللقاء (اللقاءات)</Label>\n</Field>\n\n<Field type='BOOLEAN'>\n<Tag>مجهولا</Tag>\n<Label>هل يريد المتحدث أن يبقى مجهول الهوية؟</Label>\n</Field>\n\n<Field type='GRID'>\n<Tag>جدولبياناتالضحية</Tag>\n<Label>معلومات الضحية</Label>\n<GridSpecDetails>\n<Column type='STRING'><Tag></Tag><Label>الاسم</Label></Column>\n<Column type='STRING'><Tag></Tag><Label>اللقب العائلي</Label></Column>\n<Column type='BOOLEAN'><Tag></Tag><Label>هل معروف؟</Label></Column>\n<Column type='DATE'><Tag></Tag><Label>تاريخ الولادة</Label></Column>\n<Column type='DROPDOWN'><Tag></Tag><Label>الجنس</Label>\n<Choices>\n<Choice>ذكر</Choice>\n<Choice>أنثى</Choice>\n<Choice>غير معروف</Choice>\n</Choices></Column>\n<Column type='STRING'><Tag></Tag><Label>العرق</Label></Column>\n</GridSpecDetails>\n</Field>\n\n<Field type='MESSAGE'>\n<Tag>مهنةالرسالة</Tag>\n<Label>جدول التجربة العملية </Label>\n<Message> إذا كانت لديك معلومات حول شخص شغل وظائف مختلفة، أدخل صفوفا متعددة باستخدام نفس الاسم واللقب العائلي وأدخل المدى التاريخي لكل وظيفة في صف مختلف.</Message>\n</Field>\n\n<Field type='GRID'>\n<Tag>جدولالتجربةالعملية</Tag>\n<Label>التجربة العملية</Label>\n<GridSpecDetails>\n<Column type='STRING'><Tag></Tag><Label>الاسم </Label></Column>\n<Column type='STRING'><Tag></Tag><Label>اللقب العائلي</Label></Column>\n<Column type='STRING'><Tag></Tag><Label>المهنة</Label></Column>\n<Column type='DATERANGE'><Tag></Tag><Label>تواريخ الوظائف</Label></Column>\n</GridSpecDetails>\n</Field>\n
+#__________________________________=\n<Field type='SECTION'>\n<Tag>sourcesection</Tag>\n<Label>Source Section</Label>\n</Field>\n\n<Field type='DROPDOWN'>\n<Tag>BulletinSource</Tag>\n<Label>Source of bulletin information</Label>\n<RequiredField/>\n<Choices>\n<Choice>Media/Press</Choice>\n<Choice>Legal Report</Choice>\n<Choice>Personal Interview</Choice>\n<Choice>Other</Choice>\n</Choices>\n</Field>\n\n<Field type='STRING'>\n<Tag>SpecifyOther</Tag>\n<Label>If "Other", please specify:</Label>\n</Field>\n\n<Field type='STRING'>\n<Tag>IntervieweeName</Tag>\n<Label>Interviewee Name</Label>\n</Field>\n\n<Field type='LANGUAGE'>\n<Tag>IntervieweeLanguage</Tag>\n<Label>Interviewee Speaks</Label>\n</Field>\n\n<Field type='DATERANGE'>\n<Tag>InterviewDates</Tag>\n<Label>Date(s) of interview(s)</Label>\n</Field>\n\n<Field type='BOOLEAN'>\n<Tag>Anonymous</Tag>\n<Label>Does interviewee wish to remain anonymous?</Label>\n</Field>\n\n<Field type='BOOLEAN'>\n<Tag>AdditionalInfo</Tag>\n<Label>Is interviewee willing to give additional information if needed?</Label>\n<KeepWithPrevious/>\n</Field>\n\n<Field type='BOOLEAN'>\n<Tag>Testify</Tag>\n<Label>Is interviewee willing to testify?</Label>\n<KeepWithPrevious/>\n</Field>\n\n<Field type='SECTION'>\n<Tag>peoplesection</Tag>\n<Label>People Section</Label>\n</Field>\n\n<Field type='GRID'>\n<Tag>VictimInformationGrid</Tag>\n<Label>Victim Information</Label>\n<GridSpecDetails>\n<Column type='STRING'><Tag></Tag><Label>First Name</Label></Column>\n<Column type='STRING'><Tag></Tag><Label>Last Name</Label></Column>\n<Column type='BOOLEAN'><Tag></Tag><Label>Is Identified?</Label></Column>\n<Column type='DATE'><Tag></Tag><Label>Date of Birth</Label></Column>\n<Column type='DROPDOWN'><Tag></Tag><Label>Sex</Label>\n<Choices>\n<Choice>Male</Choice>\n<Choice>Female</Choice>\n<Choice>Unknown</Choice>\n</Choices></Column>\n<Column type='STRING'><Tag></Tag><Label>Ethnicity</Label></Column>\n</GridSpecDetails>\n</Field>\n\n<Field type='MESSAGE'>\n<Tag>MessageProfession</Tag>\n<Label>Profession History Table Note</Label>\n<Message>If you have information about a person who has had different professions over time, enter multiple rows with the same First and Last Names and show the date ranges for each profession on a separate row.</Message>\n</Field>\n\n<Field type='GRID'>\n<Tag>ProfessionHistoryGrid</Tag>\n<Label>Profession History</Label>\n<GridSpecDetails>\n<Column type='DROPDOWN'><Tag></Tag><Label>First Name</Label>\n<DataSource>\n<GridFieldTag>VictimInformationGrid</GridFieldTag>\n<GridColumnLabel>First Name</GridColumnLabel>\n</DataSource>\n</Column>\n<Column type='DROPDOWN'><Tag></Tag><Label>Last Name</Label>\n<DataSource>\n<GridFieldTag>VictimInformationGrid</GridFieldTag>\n<GridColumnLabel>Last Name</GridColumnLabel>\n</DataSource>\n</Column>\n<Column type='STRING'><Tag></Tag><Label>Profession</Label></Column>\n<Column type='DATERANGE'><Tag></Tag><Label>Dates of Profession</Label></Column>\n</GridSpecDetails>\n</Field>\n
+-10d1-field:CreateCustomFieldsHelp3=\n<Field type='SECTION'>\n<Tag>قسمالمصدر</Tag>\n<Label> قسم المصدر قسك </Label>\n</Field>\n\n<Field type='DROPDOWN'>\n<Tag>مصدرالنشرة</Tag>\n<Label>مصدر معلومات النشرة</Label>\n<RequiredField/>\n<Choices>\n<Choice>وسائل الإعلام/صحف</Choice>\n<Choice>تقرير قانوني</Choice>\n<Choice>لقاء شخصي</Choice>\n<Choice>غير ذلك</Choice>\n</Choices>\n</Field>\n\n<Field type='STRING'>\n<Tag>غيرذلك</Tag>\n<Label>إذا كان "غير ذلك" الرجاء أن تذكر بوضوح:</Label>\n</Field>\n\n<Field type='STRING'>\n<Tag>اسمالمتحدث</Tag>\n<Label>اسم المتحدث</Label>\n</Field>\n\n<Field type='LANGUAGE'>\n<Tag>لغةالمتحدث</Tag>\n<Label>لغة المتحدث</Label>\n</Field>\n\n<Field type='DATERANGE'>\n<Tag>تواريخاللقاءات</Tag>\n<Label> تاريخ/تواريخ اللقاء/اللقاءات </Label>\n</Field>\n\n<Field type='BOOLEAN'>\n<Tag>مجهول</Tag>\n<Label>هل يريد المتحدث أن يبقى مجهولا الهوية؟</Label>\n</Field>\n\n<Field type='BOOLEAN'>\n<Tag>معلوماتإضافية</Tag>\n<Label>هل يرغب المتحدث في تقديم معلومات إضافة إذا طلب منه ذلك؟?</Label>\n<KeepWithPrevious/>\n</Field>\n\n<Field type='BOOLEAN'>\n<Tag>الإشهاد</Tag>\n<Label>هل يرغب المتحدث في تقديم شهادته؟</Label>\n<KeepWithPrevious/>\n</Field>\n\n<Field type='SECTION'>\n<Tag>قسمالناس</Tag>\n<Label> قسم الناس </Label>\n</Field>\n\n <Field type='GRID'>\n<Tag>جدولمعلوماتالضحية</Tag>\n<Label>معلومات الضحية</Label>\n<GridSpecDetails>\n<Column type='STRING'><Tag></Tag><Label>الاسم</Label></Column>\n<Column type='STRING'><Tag></Tag><Label>اللقب العائلي</Label></Column>\n<Column type='BOOLEAN'><Tag></Tag><Label>هل معروف؟</Label></Column>\n<Column type='DATE'><Tag></Tag><Label>الولادةتاريخ </Label></Column>\n<Column type='DROPDOWN'><Tag></Tag><Label>الجنس</Label>\n<Choices>\n<Choice>ذكر</Choice>\n<Choice>أنثى</Choice>\n<Choice>غير معروف</Choice>\n</Choices></Column>\n<Column type='STRING'><Tag></Tag><Label>العرق</Label></Column>\n</GridSpecDetails>\n</Field>\n\n<Field type='MESSAGE'>\n<Tag>مهنةالرسالة</Tag>\n<Label>جدول التجربة العملية </Label>\n<Message> إذا كانت لديك معلومات حول شخص شغل وظائف مختلفة، أدخل صفوفا متعددة باستخدام نفس الاسم واللقب العائلي وأدخل المدى التاريخي لكل وظيفة في صف مختلف.</Message>\n</Field>\n\n<Field type='GRID'>\n<Tag>جدولالتجربةالعملية</Tag>\n<Label>التجربة العملية</Label>\n<GridSpecDetails>\n<Column type='DROPDOWN'><Tag></Tag><Label>الاسم</Label>\n<DataSource>\n<GridFieldTag>جدولمعلوماتالضحية</GridFieldTag>\n<GridColumnLabel>الاسم</GridColumnLabel>\n</DataSource>\n</Column>\n<Column type='DROPDOWN'><Tag></Tag><Label> اللقب العائلي </Label>\n<DataSource>\n<GridFieldTag>جدولمعلوماتالضحية</GridFieldTag>\n<GridColumnLabel>اللقب العائلي</GridColumnLabel>\n</DataSource>\n</Column>\n<Column type='STRING'><Tag></Tag><Label>المهنة</Label></Column>\n<Column type='DATERANGE'><Tag></Tag><Label>تواريخ الوظائف</Label></Column>\n</GridSpecDetails>\n</Field>\n
 
 #____________________________________=Please enter your new username and password.
 -aec2-field:CreateNewUserNamePassword=الرجاء القيام بإدخال اسم المستخدم وكلمة المرور 
 
-#_________________________________=Bottom/Private Section of Bulletin
--cf48-field:CustomXMLBottomSection=الجزء الأسفل/الخاص من النشرة
+#_________________________________=Bottom (always Private) Pane of Bulletin
+-f953-field:CustomXMLBottomSection=الجزء الأسفل (الخاص دائما) من النشرة
 
-#______________________________=Top Section of Bulletin
--cff1-field:CustomXMLTopSection=الجزء الأعلى من النشرة
+#______________________________=Top Pane of Bulletin
+-e596-field:CustomXMLTopSection=الجزء الأعلى من النشرة
 
 #_____________________________________=Customization Template Files
 -9210-field:CustomizationTemplateFiles=ملفات قوالب التحوير
+
+#_______________________=(Press the + button to show the hidden information)
+-045b-field:DataIsHidden=(اضغط على الزر + لعرض المعلومات الخفية)
 
 #________________________=Date delimiter
 -36d4-field:DateDelimiter=محدد التاريخ
@@ -639,8 +669,8 @@
 #__________________________________=LABEL
 -64b8-field:ErrorCustomFieldHeader4=عنوان
 
-#____________________________=There is an error in the custom field definitions. Each problem is identified with the following codes:\n   100 - Required standard field is missing\n   101 - Custom field does not have a correct tag.\n   102 - A previous Tag already exists with this name.\n   103 - Custom field does not have a label.\n   104 - Unrecognized Field Type.\n   105 - A label was found in a standard field.\n   106 - XML Parse Error.\n   107 - Tag contains illegal characters.\n   108 - Duplicate entry in Dropdown field.\n   109 - No Choices in Dropdown field.\n   110 - System/Standard field tag cannot be used for custom field.\n   111 - Standard Public field cannot be placed in bottom/Private section.\n   112 - Standard Private field cannot be placed in the top section.\n   200 - All fields empty.\n   201 - Unrecognized Headquarters created this template.\n   202 - Security validation error.\n   203 - File Error.\n   204 - Imported XML Missing Field.
--71f2-field:ErrorCustomFields=هناك خطأ في تعريفات الحقل المخصص. يتم تعريف كل خطأ من خلال الرموز التالية:\n 100 - حقل نمطي ضروري مفقود\n 101 - الحقل المخصص لا يتضمن الرمز الصحيح.\n 102 - يوجد رمز بنفس الاسم. \n 103 - لا يتضمن الحقل المخصص على تسمية. \n 104 - نوع حقل غير معروف.\n 105 - توجد تسمية في حقل نمطي.\n 106 - خطأ تجزئة XML.\n 107 - يحتوي الرمز على أحرف ممنوعة.\n 108 - إدخال مزدوج في حقل منسدل.\n 109 - لا يوجد خيار في حقل منسدل. \n 110 - عنوان حقل النظام/ القياس لا يمكن وضعه في مجال أسفل/خاص. \n 111 - الحقل القياسي الخاص لا يمكن وضعه في أعلى المجال. \n 112 - الحقل القياسي الخاص لا يمكن وضعه في أسفل المجال. \n 200 - جميع الحقول فارغة.\n 201 - مركز رئيسي غير معروف قام بإنشاء هذا القالب.\n 202 - خطأ تصحيح أمني.\n 203 - خطأ ملف.\n 204 - مجال XML  المستورد ناقص.
+#____________________________=There is an error in the custom field definitions. Each problem is identified with the following codes:\n   100 - Required standard field is missing\n   101 - Custom field does not have a correct tag\n   102 - A previous Tag already exists with this name\n   103 - Custom field does not have a label\n   104 - Unrecognized Field Type\n   105 - A label was found in a standard field\n   106 - XML Parse Error (e.g. mismatched quotation marks or bracket syntax)\n   107 - Tag contains illegal characters (e.g. spaces or punctuation)\n   108 - Duplicate entry in Dropdown field\n   109 - No Choices in Dropdown field\n   110 - System/Standard field tag cannot be used for custom field\n   111 - Standard field in top pane cannot be placed in bottom (always Private) pane\n   112 - Standard field in bottom (always Private) pane cannot be placed in the top pane\n   113 - Data Source Grid not found in same pane as resulting dropdown field\n   114 - Unknown Data Source Grid Column Label\n   115 - Dropdown cannot have both choices and data source\n   200 - All fields empty\n   201 - Unrecognized Headquarters created this template\n   202 - Security validation error\n   203 - File Error\n   204 - Imported XML Missing Field
+-f5b1-field:ErrorCustomFields=هناك خطأ في تعريفات الحقل المخصص. يتم تعريف كل خطأ من خلال الرموز التالية:\n 100 - حقل نمطي ضروري مفقود\n 101 - الحقل المخصص لا يتضمن الرمز الصحيح.\n 102 - يوجد رمز بنفس الاسم. \n 103 - لا يتضمن الحقل المخصص على تسمية. \n 104 - نوع حقل غير معروف.\n 105 - توجد تسمية في حقل نمطي.\n 106 - خطأ تجزئة XML.\n 107 - يحتوي الرمز على أحرف ممنوعة.\n 108 - إدخال مزدوج في حقل منسدل.\n 109 - لا يوجد خيار في حقل منسدل. \n 110 - عنوان حقل النظام/ القياس لا يمكن وضعه في مجال أسفل/خاص. \n 111 - الحقل القياسي الخاص لا يمكن وضعه في أعلى المجال. \n 112 - الحقل القياسي الخاص لا يمكن وضعه في أسفل المجال.\n 113 - لم يتم العثور على شبكة مصدر المعلومات في نفس الواجهة كحقل القائمة الانسدلالية الناتجة.\n 114 -علامة عمود شبكة مصدر المعلومات مجهول.\n 115 - القائمة الانسدلالية لا يمكن أن يكون لها خيارات ومصدر معلومات معا.\n 200 - جميع الحقول فارغة.\n 201 - مركز رئيسي غير معروف قام بإنشاء هذا القالب.\n 202 - خطأ تصحيح أمني.\n 203 - خطأ ملف.\n 204 - مجال XML  المستورد ناقص.
 
 #_________________________________________=A previous backup file exists.  You must save each file on its own removable media disk.
 -db93-field:ErrorPreviousBackupShareExists=يوجد ملف مجزأ سابق. يجب عليك حفظ كل ملف على قرص بمفرده. 
@@ -712,7 +742,7 @@
 -02b6-field:GetShareFileNameDescription=يجب أن يكون اسم هذا الملف فريدا و يسهل عليك معرفته ولكننا لا نوصي باستخدام اسم المستخدم الخاص بك. سيتم إنشاء كل ملف بهذا الاسم بالإضافة إلى رقم الترتيب.
 
 #__________________________=(not currently configured)
--462b-field:HQNotConfigured=((غير مُهيأ حاليا
+-462b-field:HQNotConfigured=( (غير مُهيأ حاليا
 
 #_________________________=Headquarters
 -6222-field:HQSummaryLabel=المركز الرئيسي
@@ -819,11 +849,14 @@
 #_______________________________=Add the fields you want to appear in your report, and then arrange them in the order you want them to be printed.
 -b511-field:OrganizeReportFields=ضف المجالات التي تريدها أن تظهر في تقريرك، ثم رتّبها بالنظام الذي تريد طبعا فيه.
 
-#__________________________________=You have the option to include or exclude the selected bulletin's private information in this print out or report file. If you choose to print private data, it will be visible to anyone who sees the print out or report file.
--2bd3-field:PrintPrivateDataMessage=بإمكانك تضمين أو استثناء المعلومات الخاصة للنشرة المحددة في طباعة هذا التقرير. إذا قررت طباعة البيانات الخاصة سيتمكن كل شخص يقرأ الوثيقة أو تقرير الطباعة من الاطلاع على البيانات الخاصة. 
+#_____________________________=Preparing Bulletins...
+-deac-field:PreparingBulletins= تجهيز النشرات 
 
-#_______________________________=You can print the bulletin contents to a printer, or send the formatted report to a file.
--f988-field:PrintToPrinterOrDisk=بإمكانك إرسال محتويات النشرة إلى الطابعة أو إرسال التقرير المنسق إلى ملف.
+#__________________________________=You have the option to include or exclude the selected bulletin's private information in this print out. If you choose to print private data, it will be visible to anyone who sees the print out.
+-2050-field:PrintPrivateDataMessage= بإمكانك تضمين أو استثناء المعلومات الخاصة للنشرة المحددة في هذا المطبوع. إذا قررت طباعة البيانات الخاصة سيتمكن كل شخص يقرأ المطبوع من الاطلاع على البيانات الخاصة.
+
+#_______________________________=You can print the bulletin contents to a printer or to a file.
+-48ad-field:PrintToPrinterOrDisk= بإمكانك إرسال محتويات النشرة إلى الطابعة أو إلى ملف.
 
 #_________________________________=Public Information Files
 -90f9-field:PublicInformationFiles=ملفات المعلومات العامة
@@ -885,6 +918,9 @@
 #__________________________________=Total Bulletins:
 -b840-field:ReportNumberOfBulletins=مجموع النشرات:
 
+#_______________________________=Progress: 
+-92b6-field:ReportSearchProgress= تقدم:
+
 #______________________________=Print Summary Counts Only
 -9ca4-field:ReportSummariesOnly=أطبع التقارير الموجزة فقط
 
@@ -921,6 +957,9 @@
 #________________________________=Scrub data before deleting
 -7a0b-field:ScrubDataBeforeDelete=كشط البيانات قبل الحذف
 
+#___________________________________=Sealing Bulletins...
+-f677-field:SealingSelectedBulletins= ختم النشرات 
+
 #_________________________=--Any Field--
 -bcaa-field:SearchAnyField=--أي حقل--
 
@@ -950,6 +989,9 @@
 
 #___________________________=contains
 -caeb-field:SearchOpContains=تحتوي على
+
+#_________________________=Progress: 
+-92b6-field:SearchProgress= تقدم:
 
 #_______________________________=You will be allowed to upload bulletins to this server.
 -0718-field:ServerAcceptsUploads=يسمح لك بإرسال النشرات لهذا الخادم.
@@ -981,6 +1023,9 @@
 #_________________________=To change a folder's position, select the folder name and use the #MoveFolderUp# / #MoveFolderDown# buttons.
 -4497-field:SetFolderOrder=لتغيير وضع الملف، قم بتحديد اسم الملف واستخدام أزرار  #MoveFolderUp# / #MoveFolderDown# .
 
+#___________________________________=NOTE: Bulletins authored by other accounts cannot be changed using this command, so they are not included in the list above.
+-250a-field:SkippingBulletinsNotOurs= ملاحظة: لا يمكن تغيير النشرات التي تمت كتابتها بواسطة حسابات أخرى باستخدام هذا الأمر، لذا لا يتم تضمينها في القائمة اعلاه.
+
 #___________________________________=Human Rights Bulletin System
 -fe5b-field:SplashProductDescription=نظام Martus لنشرات حقوق الإنسان 
 
@@ -1002,8 +1047,8 @@
 #__________________________=Unknown
 -bc78-field:UnknownDateSave=مجهول
 
-#___________________________=WARNING: This field requires a newer version of Martus to be viewed
--390c-field:UnknownFieldType=تحذير: يتطلب هذا الحقل إصدارا أحدث من برنامج Martus حتى يتم استعراضه
+#___________________________=WARNING: This field requires a newer release of Martus to be viewed
+-06ce-field:UnknownFieldType= تحذير: يتطلب هذا الحقل إصدارا أحدث من برنامج Martus حتى يتم استعراضه
 
 #___________________________=Untitled Bulletin
 -5ea8-field:UntitledBulletin=نشرة غير معنونة 
@@ -1033,7 +1078,7 @@
 -d6ef-field:VirtualPasswordDescription=قم بإدخال كلمة المرور باستخدام الفأرة و لوحة مفاتيح النافذة بالأسفل 
 
 #_____________________________________=(Enter using regular keyboard)
--6332-field:VirtualUserNameDescription=إدخال باستخدام لوحة المفاتيح العادية
+-6332-field:VirtualUserNameDescription=(إدخال باستخدام لوحة المفاتيح العادية)
 
 #____________________=No
 -816c-field:WasSentNo=لا
@@ -1043,6 +1088,24 @@
 
 #__________________________=Unknown
 -bc78-field:YearUnspecified=مجهول
+
+#____________________________________=Attachments
+-6771-field:_AttachmentsBottomSection= ملصقات 
+
+#_________________________________=Attachments
+-6771-field:_AttachmentsTopSection= ملصقات 
+
+#________________________________=
+-da39-field:_SectionBottomSection=
+
+#_____________________________=
+-da39-field:_SectionTopSection=
+
+#_________________________________________=Header
+-3134-field:_Section_BulletinSectionHeader= عنوان رئيسي 
+
+#_______________________________________________=Headquarters
+-6222-field:_Section_BulletinSectionHeadquarters= المقر الرئيسي 
 
 #_________________________=Last Saved
 -eb05-field:_lastSavedDate= الحفظ الأخير
@@ -1081,13 +1144,19 @@
 -1717-field:attachmentSizeForPrinting=كيلوبايت
 
 #______________________=Attachments
--6771-field:attachments=مرفقات
+-6771-field:attachments= ملصقات
 
 #_________________=Author
 -5fda-field:author=الكاتب
 
 #______________________=Authorizing...
 -5086-field:authorizing=... تفويض
+
+#_________________________________________________________=The operation will be stopped immediately.
+-6eee-field:confirmAddingPermissionsToBulletinsCancelcause= سوف يتم إيقاف العملية على الفور.
+
+#__________________________________________________________=If you do this, the bulletins already processed will have the new headquarters access, but other selected bulletins will not.
+-9054-field:confirmAddingPermissionsToBulletinsCanceleffect= عندما تقوم بذلك، فإن النشرات التي تمت معالجتها بالفعل سيكون لديها وصول إلى المقر الرئيسي الجديد ولا يتوفر ذلك للنشرات الأخرى المحددة.
 
 #_______________________________________________=Save your password encrypted key backup file to a single floppy disk or other removable media.  Then store this disk in a safe place. You will use this disk, with your username and password, to restore your data if your system files are ever damaged.  To restore this password-protected key in the future, select 'Restore Account' and 'Restore account from backup key file' when signing into Martus.
 -e692-field:confirmBackupKeyPairInformationcause=قم بحفظ ملف شفرة دخولك المُشفر بكلمة مرور إلى قرص مرن واحد أو أي وسيط متنقل. ثم قم بتخزين القرص في مكان آمن. سوف تستخدم هذا القرص مع كلمة مرورك واسم المستخدم لاستعادة بياناتك إذا حدث و تلفت ملفات النظام. لاستعادة هذا الملف المُشفر بكلمة مرور في المستقبل، اختر "استعادة حساب" و "استعادة حساب بملف شفرتي دخول احتياطي" عندما تدخل لحسابك في برنامج Martus.
@@ -1179,8 +1248,8 @@
 #___________________________________________=Clicking on Yes will exit Martus, and leave the unsent bulletins.  They will be sent the next time you run Martus and connect to a server.
 -7c7f-field:confirmDraftUploadRemindereffect=بالنقر على نعم سينغلق Martus و سوف تُترك النشرات التي لم ترسل. ولكن سيتم إرسال هذه النشرات إلى الخادم عندما تقوم بتشغيل Martus مرة أخرى. 
 
-#__________________________________________________=The bulletin you have chosen to modify contains information that this version of Martus cannot understand. It may have been created by a newer version of Martus, so you should ensure that you are running the latest version.
--1233-field:confirmEditBulletinWithUnknownTagscause=تحتوي النشرة التي تريد تعديلها على معلومات لا يستطيع هذا الإصدار من Martus فهمها. ربما قد تم إنشائها بإصدار أحدث من البرنامج، لذا ينبغي عليك التأكد من استخدام آخر إصدار.
+#__________________________________________________=The bulletin you have chosen to modify contains information that this version of Martus cannot understand. It may have been created by a newer release of Martus, so you should ensure that you are running the latest release.
+-9470-field:confirmEditBulletinWithUnknownTagscause= تحتوي النشرة التي تريد تعديلها على معلومات لا يستطيع هذا الإصدار Martus فهمها. ربما قد تم إنشائها بإصدار أحدث من البرنامج، لذا ينبغي عليك التأكد من استخدام آخر إصدار.
 
 #___________________________________________________=If you modify this bulletin, the unknown information will be lost.
 -d72b-field:confirmEditBulletinWithUnknownTagseffect=إذا قمت بتعديل هذه النشرة فستضيع المعلومات غير المعروفة.  
@@ -1203,8 +1272,8 @@
 #_________________________________________=Anyone who gets a copy of this file will be able to read all the private data.
 -9965-field:confirmExportPrivateDataeffect=سيتمكن أي شخص يحصل على نسخة من هذا الملف من الإطلاع على جميع البيانات الخاصة.
 
-#________________________________________=One or more of the bulletins you have chosen to export contain information that this version of Martus cannot understand. They may have been created by a newer version of Martus, so you should ensure that you are running the latest version.
--56f8-field:confirmExportUnknownTagscause=واحدة أو أكثر من النشرات التي تريد تصديرها تحتوي على معلومات يصعُب على هذا الإصدار من Martus فهمها. ربما قد تم إنشائها بإصدار أحدث من البرنامج، لذا ينبغي عليك التأكد من استخدام آخر إصدار.
+#________________________________________=One or more of the bulletins you have chosen to export contain information that this version of Martus cannot understand. They may have been created by a newer release of Martus, so you should ensure that you are running the latest release.
+-0cfe-field:confirmExportUnknownTagscause=واحدة أو أكثر من النشرات التي تريد تصديرها تحتوي على معلومات يصعُب على هذا الإصدار من Martus فهمها. ربما قد تم إنشائها بإصدار أحدث من البرنامج، لذا ينبغي عليك التأكد من استخدام آخر إصدار. 
 
 #_________________________________________=If you continue with the export, any unknown information will not be exported.
 -232e-field:confirmExportUnknownTagseffect=إذا واصلت التصدير فلن يتم تصدير أية معلومات غير معروفة.
@@ -1216,22 +1285,22 @@
 -167f-field:confirmKeyPairFileExistsOverWriteeffect=بنقرك على نعم سيتم حذف ملف شفرتي الدخول القديم و استبداله بالملف الذي استرجعته. 
 
 #_______________________________________________________=This account was created with an older release of Martus, which was unaware of multiple sealed bulletin versions. We need to update your system to recognize bulletins with versions.  The migration is automatic, fast, and safe. You cannot run this release of Martus unless you allow this migration.
--d89c-field:confirmNeedsBulletinVersioningMigrationcause=لقد تم إنشاء هذا الحساب في إصدار قديم من Martus حيث لم تكن له قدرة التعرف على نسخ متعددة من نشرة مختومة. نحتاج لتحديث نظامك حتى يتسنى له التعرف على النشرات ذوات النسخ المتعددة. يعتبر التهجير أتوماتيكيا و آمنا و سريعا. لن يمكنك تشغيل هذا الإصدار من Martus حتى تسمح بعملية التهجير. 
+-d89c-field:confirmNeedsBulletinVersioningMigrationcause= لقد تم إنشاء هذا الحساب بإصدار قديم من برنامج Martus والذي كان يستخدم مجموعة مختلفة من المجلدات. يتوجب تهجير هذه المجلدات إلى هيئة ملفات الإصدار الجديد. عملية التهجير هذه آلية و سريعة و آمنة. لن تتمكن من تشغيل هذا الإصدار من Martus حتى تسمح بهذا التهجير.
 
 #________________________________________________________=Answering Yes will allow the migration to proceed, answering No will exit Martus.
 -2a34-field:confirmNeedsBulletinVersioningMigrationeffect= إذا أجبت ب "نعم" سيتم السماح لعملية التهجير بالاستمرار، أما إذا أجبت ب "لا" سوف ينغلق برنامج Martus.
 
-#___________________________________________=This account was created with an older version of Martus, which used a different set of folders. The folders need to be migrated to the new format. The migration is automatic, fast, and safe. You cannot run this version of Martus unless you allow this migration.
--39ae-field:confirmNeedsFolderMigrationcause=لقد تم إنشاء هذا الحساب بإصدار قديم من برنامج Martus و الذي كان يستخدم مجموعة مختلفة من المجلدات. يتوجب تهجير هذه المجلدات إلى هيئة ملفات الإصدار الجديد. عملية التهجير هذه آلية و سريعة و آمنة. لن تتمكن من تشغيل هذا الإصدار من Martus حتى تسمح بهذا التهجير.
+#___________________________________________=This account was created with an older release of Martus, which used a different set of folders. The folders need to be migrated to the new format. The migration is automatic, fast, and safe. You cannot run this release of Martus unless you allow this migration.
+-3e24-field:confirmNeedsFolderMigrationcause=لقد تم إنشاء هذا الحساب بإصدار قديم من برنامج Martus والذي كان يستخدم مجموعة مختلفة من المجلدات. يتوجب تهجير هذه المجلدات إلى هيئة ملفات الإصدار الجديد. عملية التهجير هذه آلية و سريعة و آمنة. لن تتمكن من تشغيل هذا الإصدار من Martus حتى تسمح بهذا التهجير. 
 
 #____________________________________________=Answering Yes will allow the migration to proceed, answering No will exit Martus.
 -2a34-field:confirmNeedsFolderMigrationeffect=إذا أجبت ب "نعم" سوف تسمح لعملية التهجير بالاستمرار، أما إذا أجبت ب "لا" سوف ينغلق برنامج Martus.
 
-#_______________________________________________=Warning: It appears that you are trying to run an older version of Martus.  Running this version of Martus may result in reduced functionality, and some configuration settings created in the newer version will be ignored. We recommend that you upgrade your software.
--f251-field:confirmNewerConfigInfoFileFoundcause=تحذير: يبدو أنك تحاول تشغيل إصدار قديم من Martus. قد يتسبب تشغيل هذا الإصدار في إيقاف بعض الوظائف، كما أنه سيتم إغفال بعض أوضاع التهيئة التي تم إنشائها في الإصدار الجديد. لذا نوصي بتحديث البرنامج.
+#_______________________________________________=Warning: It appears that you are trying to run an older release of Martus.  Running this release of Martus may result in reduced functionality, and some configuration settings created in the newer version will be ignored. We recommend that you upgrade your software.
+-5cee-field:confirmNewerConfigInfoFileFoundcause= تحذير: يبدو أنك تحاول تشغيل إصدار قديم من Martus. قد يتسبب تشغيل هذا الإصدار في إيقاف بعض الوظائف، كما أنه سيتم إغفال بعض أوضاع التهيئة التي تم إنشائها في الإصدار الجديد. لذا نوصي بتحديث البرنامج.
 
-#________________________________________________=Answering Yes will continue to use this older version of Martus.  Answering No will exit Martus so you can upgrade to the latest version.
--3170-field:confirmNewerConfigInfoFileFoundeffect=إذا أجبت ب "نعم" فسوف تستمر في استخدام الإصدار القديم من Martus. أما إذا أجبت ب "لا" فسوف تخرج من البرنامج حتى يتسن لك تحديثه للإصدار الأحدث.
+#________________________________________________=Answering Yes will continue to use this older release of Martus.  Answering No will exit Martus so you can upgrade to the latest release.
+-5630-field:confirmNewerConfigInfoFileFoundeffect= إذا أجبت ب "نعم" فسوف تستمر في استخدام الإصدار القديم من Martus. أما إذا أجبت ب "لا" فسوف تخرج من البرنامج حتى يتسن لك تحديثه للإصدار الأحدث.
 
 #___________________________________________________________=Warning: the bulletin you are currently viewing is not yours.  Attachments can contain viruses, or malicious programs harmful to your computer.
 -8e42-field:confirmNotYourBulletinViewAttachmentAnywayscause=تحذير: النشرة التي تستعرضها الآن لا تخصك. قد تحتوي المرفقات على فيروسات أو برامج خبيثة تضر بجهازك. 
@@ -1248,8 +1317,8 @@
 #__________________________________________=One or more bulletins will not be printed because all the information is private, and you marked the "Print only public information" box.
 -50c0-field:confirmPrintAllPrivateDatacause=لن يتم طباعة نشرة أو أكثر بسبب خصوصية جميع المعلومات وقد قمت بتحديد مربع "طباعة المعلومات العامة فقط".
 
-#___________________________________________=Answering '#PrintBack#' will allow you to return to the previous dialog so you can mark the "Include private information" box.  Answering '#PrintContinue#' will print only the public sections of the bulletins and skip those bulletins which are all private.
--a0a4-field:confirmPrintAllPrivateDataeffect=إذا أجبت '#PrintBack#' سيتم إرجاعك إلى مربع الحوار السابق لتتمكن من تحديد مربع "تضمين المعلومات الخاصة". إذا أجبت '#PrintContinue#' سيتم طباعة الأقسام العامة للنشرة ولن يتم طباعة النشرات الخاصة.
+#___________________________________________=Answering '#PrintBack#' will allow you to return to the previous dialog so you can mark the "Include private information" box. Answering '#PrintContinue#' will print only the public information in the bulletins and skip those bulletins which are all private.
+-935c-field:confirmPrintAllPrivateDataeffect=إذا أجبت '#PrintBack#' سيتم إرجاعك إلى مربع الحوار السابق لتتمكن من تحديد مربع "تضمين المعلومات الخاصة". إذا أجبت '#PrintContinue#' سيتم طباعة الأقسام العامة للنشرة ولن يتم طباعة النشرات الخاصة.
 
 #_____________________________________=Since you have changed from the default print tray your print out may be incorrect, if you also changed the size of paper used.  You must first select the paper tray and then select the paper size in that order, for both to get set correctly.  If you only wanted to change the paper tray then disregard this message and select 'No'.
 -401e-field:confirmPrinterWarningcause=بما أنك قمت بتغيير إطار الطباعة التلقائي فقد لا تكون طباعتك صحيحة، و أيضا إذا قمت بتغيير حجم الورق المستخدم. يجب عليك الوقوف على   إطار الورق أولا ثم على حجم الورق بذلك الترتيب حتى يتم إعدادهما بطريقة صحيحة. إذا كنت تريد تغيير إطار الورق فحسب لا تعبأ بهذه الرسالة و اختر "لا".
@@ -1293,11 +1362,17 @@
 #____________________________________=Answering Yes will delete all data, uninstall Martus and exit the program.  Answering No will return you to Martus with nothing deleted.
 -b6a1-field:confirmRemoveMartuseffect=إذا أجبت ب"نعم" سوف تحذف جميع البيانات و ستتم إزالة Martus و الخروج من البرنامج. أما إذا أجبت ب"لا" فسوف تعود لبرنامج Martus دون حذف شيء.
 
-#___________________________________________=There are no bulletins that are public only. Include private bulletins?
--2562-field:confirmReportIncludePrivatecause=ليست هناك نشرات عامة فقط. هل ترغب في تضمين نشرات خاصة؟
+#___________________________________________=There are no bulletins with public data. Include private data?
+-9f83-field:confirmReportIncludePrivatecause= ليست هناك بيانات عامة فقط. هل ترغب في تضمين بيانات خاصة؟
 
-#____________________________________________=Press 'Include Private Bulletins' to continue with private bulletins included, or press 'Cancel' to exit and return to Martus.
--42df-field:confirmReportIncludePrivateeffect=اضغط على "ضمّن نشرات خاصة" لمواصلة البحث في النشرات الخاصة المُضمنة أو اضغط على "إلغاء" للخروج والعودة إلى مارتوس.
+#____________________________________________=Press 'Include Private Data' to continue with private data included, or press 'Cancel' to exit and return to Martus.
+-c1bb-field:confirmReportIncludePrivateeffect= اضغط على "ضمّن بيانات خاصة" لمواصلة البحث في البيانات الخاصة المُضمنة أو اضغط على "إلغاء" للخروج والعودة إلى مارتوس.
+
+#_________________________________________________=The search in progress will be stopped immediately.
+-c6a2-field:confirmReportSearchProgressCancelcause= سيتم توقيف البحث الجاري فورا 
+
+#__________________________________________________=If you do this, the report will only include the bulletins that have been found so far.
+-4aa4-field:confirmReportSearchProgressCanceleffect= إذا فعلت هذا لم يتضمن التقرير سوى نشرات التي تم العثور عليها إلى حد الآن
 
 #_______________________________________________________=Do you want to have your contact information sent to the current server?  This information may be sent to other servers, and will be viewable by anyone who has access to your public bulletin information.
 -4809-field:confirmRequestToSendContactInfoToServercause=هل تريد إرسال معلومات الاتصال بك إلى الخادم الحالي؟ قد يتم إرسال هذه المعلومات لخوادم أخرى، و ستكون عرضة لإطلاع أي شخص له صلاحية الوصول للمعلومات العامة بنشراتك.
@@ -1317,11 +1392,29 @@
 #_____________________________________________=Each older version will be replaced by the newer version from the server.
 -1d86-field:confirmRetrieveNewerVersionseffect= سيتم استبدال كل نشرة قديمة بأخرى حديثة من الخادم.
 
+#____________________________________________=This will seal all the currently selected draft bulletins.
+-a9f2-field:confirmSealSelectedBulletinscause= سوف يؤدي هذا إلى ختم جميع مسودات النشرات المحددة حاليًا.
+
+#_____________________________________________=Any selected bulletins that are already sealed will remain unchanged.
+-7326-field:confirmSealSelectedBulletinseffect= سوف تبقى أية نشرة محددة تم ختمها بالفعل كما هي بدون تغيير.
+
+#_____________________________________________________=The operation in progress will be stopped.
+-ff24-field:confirmSealingSelectedBulletinsCancelcause= سوف يتم إيقاف العملية الجارية.
+
+#______________________________________________________=If you do this, bulletins that have already been sealed will remain sealed, and bulletins that have not been processed yet will remain in their current state.
+-1b83-field:confirmSealingSelectedBulletinsCanceleffect= عندما تقوم بذلك، فسوف تبقى النشرات التي تم ختمها بالفعل مختومة كما هي إلا أن النشرات التي لم تتم معالجتها حتى الآن سوف تبقى على حالتها الحالية.
+
+#___________________________________________=The search in progress will be stopped immediately.
+-c6a2-field:confirmSearchProgressCancelcause= سيتم توقيف البحث الجاري فورا
+
+#____________________________________________=If you do this, the Search Results will only contain bulletins that have been found so far.
+-fcaa-field:confirmSearchProgressCanceleffect= إذا فعلت هذا لم يتضمن التقرير سوى نشرات التي تم العثور عليها إلى حد الآن 
+
 #_________________________________________=You have chosen to save a completed bulletin.
 -a3fe-field:confirmSendWithPublicDatacause=لقد اخترت حفظ نشرة تم استكمالها.
 
-#__________________________________________=This will permanently seal the bulletin and you will not be allowed to make any further modifications to it except by creating a new version of the bulletin.\n\nThe public information in this bulletin will be released for possible publication on the Martus Search Engine, and may be viewed by people outside your organization.\n\nIf there is information you do not want to be publicly available, either move that data to the private section of the bulletin or check the 'Keep ALL Information Private' box before saving the bulletin.
--2df3-field:confirmSendWithPublicDataeffect=سيتم بذلك ختم النشرة نهائيا و لن تستطيع القيام بأية تعديلات فيها بعد ذلك اللهم إلا قمت بإنشاء نسخة جديدة من تلك النشرة.\n\nسيتم طرح المعلومات العامة بهذه النشرة لكي تُنشر في ميكنة بحث Martus و بذلك قد يطلع عليها أناس من خارج المنظمة التي تعمل لحسابها.\n\nإذا كانت هناك معلومات لا تريد إتاحتها للعامة عليك أن تنقل هذه المعلومات إلى القطاع الخاص من النشرة أو أن تنقر مربع "اجعل جميع المعلومات خاصة" قبلما تقوم بحفظ النشرة. 
+#__________________________________________=This will permanently seal the bulletin and you will not be allowed to make any further modifications to it except by creating a new version of the bulletin.\n\nThe public information in this bulletin will be released for possible publication on the Martus Search Engine, and may be viewed by people outside your organization.\n\nIf there is information you do not want to be publicly available, either move that data to the bottom (always Private) pane of the bulletin or check the 'Keep ALL Information Private' box before saving the bulletin.
+-3544-field:confirmSendWithPublicDataeffect=سيتم بذلك ختم النشرة نهائيا و لن تستطيع القيام بأية تعديلات فيها بعد ذلك اللهم إلا قمت بإنشاء نسخة جديدة من تلك النشرة.\n\nسيتم طرح المعلومات العامة بهذه النشرة لكي تُنشر في ميكنة بحث Martus و بذلك قد يطلع عليها أناس من خارج المنظمة التي تعمل لحسابها.\n\nإذا كانت هناك معلومات لا تريد إتاحتها للعامة عليك أن تنقل هذه المعلومات إلى القطاع الخاص من النشرة أو أن تنقر مربع "اجعل جميع المعلومات خاصة" قبلما تقوم بحفظ النشرة. 
 
 #_____________________________________________=Martus software is unable to determine whether this server complies with the official guidelines for operating a secure and reliable Martus server.
 -ab16-field:confirmServerComplianceFailedcause=لا يستطيع برنامج Martus تحديد ما إذا كان هذا الخادم يتماشى مع الإرشادات الرسمية لتشغيل خادم Martus يتسم بالأمن و الكفاءة.
@@ -1377,8 +1470,8 @@
 #_________________________________________________=Clicking on Yes will delete all of your bulletins and continue to load Martus.  Clicking on No will exit Martus so you can try to recover or repair this file manually.
 -20ee-field:confirmWarnMissingAccountMapFileeffect=بالنقر على نعم سيتم حذف جميع نشراتك و سيستمر تحميل  Martus. بالنقر على لا سيتم غلق Martus حتى يتسنى لك استرجاع أو إصلاح هذا الملف يدويا. 
 
-#__________________________________________________________________=Warning: acctmap.txt.sig file is missing or is corrupt in your account's packets directory.  If you have just upgraded to a new version of Martus this warning is harmless and you should click on No.  Otherwise this may indicate someone has tried to tamper with your data or could be caused by a hardware error.
--e1b1-field:confirmWarnMissingOrCorruptAccountMapSignatureFilecause=تحذير: لقد ضاع أو تم إتلاف ملف acctmap.txt.sig الموجود في مجلد packets بحسابك. إذا كنت قد قمت بتحديث إصدار Martus بإصدار جديد فلا تعبأ بهذا التحذير و ينبغي عليك النقر على لا. و إلاّ فقد يُشير ذلك إلى أن شخصا حاول العبث ببياناتك أو أن هناك مشكلة بمكونات جهازك الصلبة. 
+#__________________________________________________________________=Warning: acctmap.txt.sig file is missing or is corrupt in your account's packets directory.  If you have just upgraded to a new release of Martus this warning is harmless and you should click on No.  Otherwise this may indicate someone has tried to tamper with your data or could be caused by a hardware error.
+-eefd-field:confirmWarnMissingOrCorruptAccountMapSignatureFilecause=تحذير: لقد ضاع أو تم إتلاف ملف acctmap.txt.sig الموجود في مجلد packets بحسابك. إذا كنت قد قمت بتحديث إصدار Martus بإصدار جديد فلا تعبأ بهذا التحذير و ينبغي عليك النقر على لا. و إلاّ فقد يُشير ذلك إلى أن شخصا حاول العبث ببياناتك أو أن هناك مشكلة بمكونات جهازك الصلبة. 
 
 #___________________________________________________________________=Clicking on Yes will try to generate a new acctmap.txt.sig file and continue to load Martus.  Clicking on No will exit Martus.
 -3ca4-field:confirmWarnMissingOrCorruptAccountMapSignatureFileeffect=بالنقر على نعم ستتم محاولة تكوين ملف acctmap.txt.sig و الاستمرار في تفعيل Martus. بالنقر على لا سينتهي عمل البرنامج. 
@@ -1500,12 +1593,20 @@
 #_____________________________________________=This date range has an end date that is earlier than the start date:
 -e4dc-field:messageErrorDateRangeInvertedcause=هذا المدى التاريخي له تاريخ نهاية يبدأ قبل تاريخ البداية:
 
+#______________________________________________=This field is required and cannot be left blank:
+-5ab0-field:messageErrorRequiredFieldBlankcause= يجب ملء هذا الحقل ولا يمكن تركه خاليا: 
+
 #_________________________________=The current server has sent this message:
 -fd76-field:messageServerNewscause=لقد أرسل الخادم الحالي هذه الرسالة: 
 
 #______________________________________=The Public Code does not match the one you entered.
 -040a-field:notifyAccountCodeWrongcause=لا يتفق الكود العام مع الذي أدخلته.
 
+#_____________________________________________________=Must select at least one bulletin that was created by this account
+-f7c7-field:notifyAddPermissionsZeroBulletinsOurscause= لابد من تحديد نشرة على الأقل تم إنشاؤها بواسطة هذا الحساب.
+
+#____________________________________________________________=Must select at least one headquarters account
+-deb1-field:notifyAddPermissionsZeroHeadquartersSelectedcause= لابد من تحديد حساب واحد للمقر الرئيسي على الأقل.
 #____________________________________=A copy of Martus is already running on this computer. You must close that copy before starting a new copy.
 -614e-field:notifyAlreadyRunningcause=تعمل نسخة من Martus بالفعل على هذا الجهاز. يجب أن تقوم بإغلاق تلك النسخة قبلما تقوم بتشغيل نسخة جديدة.
 
@@ -1518,8 +1619,8 @@
 #______________________________________________=Martus could not authenticate the server. The server may have been compromised.  Please verify your server configuration and contact the server operator.
 -f27c-field:notifyAuthenticateServerFailedcause=لم يستطع Martus التحقق من هوية الخادم. ربما تم اختراق هذا الخادم. الرجاء التحقق من تهيئة الخادم و اتصل بالقائم عليه.
 
-#________________________________________________=The bulletin version you are trying to view is currently not on your system.
--8579-field:notifyBulletinVersionNotInSystemcause= نسخة النشرة التي تريد استعراضها لا تتواجد حاليا على نظام جهازك.
+#________________________________________________=The bulletin version you are trying to view is currently not on your computer.
+-e4b7-field:notifyBulletinVersionNotInSystemcause= نسخة النشرة التي تريد استعراضها لا تتواجد حاليا على جهاز حاسوبك.
 
 #____________________________________=The selected server is not responding. Before you choose a server, you must be connected to the internet, and that server must be available.
 -38fd-field:notifyConfigNoServercause=الخادم المُختار لا يستجيب. قبلما تختار خادما، يجب عليك الاتصال بالانترنت وبذلك يصبح هذا الخادم متاحا.
@@ -1806,6 +1907,9 @@
 #______________________________________________=Verification of all disks passed.
 -7d7f-field:notifyVerifyKeyPairSharePassedcause=تم التحقق من صلاحية جميع الأقراص 
 
+#________________________________________________=This computer can only view JPEG, GIF, and PNG image attachments
+-3267-field:notifyViewAttachmentNotAvailablecause= يمكن لهذا الكمبيوتر عرض مرفقات الصور بتنسيقات JPEG، GIF، PNG فقط.
+
 #_____________________________________=Welcome!\n\nTo start using Martus, create an account. Choose any username you like and a password that contains at least 8 characters. Keep the following information in mind as you create your username and password:\n\n * We recommend using a password that has 15 characters.\n * Include some characters that aren't letters or numbers in your password.\n   (That is, use punctuation or other special characters.)\n * Use a password that other people won't be able to guess;\n   anyone who knows your username and password can view your private data,\n   and can create bulletins that everyone will believe were created by you.\n * Write down your username and password and store them in a safe place.\n * You'll need to enter your username and password whenever you start Martus.\n * Martus will also sometimes prompt you to re-enter your username\n   and password to prevent someone else from using your account\n   after you've logged in.\n\nIMPORTANT: You are the only one who has your username and password. If you lose either of them, you won't be able to retrieve your data. Your username and password are not stored or backed up anywhere, so they cannot be reset for you.
 -da34-field:notifyWelcomeToMartuscause=مرحبا! \n\n لكي تبدأ في استخدام Martus قم بإنشاء حساب. اختر اسم مستخدم و كلمة مرور تحتوي على 8 حروف على الأقل. ضع هذه المعلومات في اعتبارك عند تكوين اسم المستخدم و كلمة المرور: \n\n * نوصي باستخدام كلمة مرور تحتوي على 15 حرفا. \n * قم بإدخال علامات ليست بحروف و لا أرقام في كلمة مرورك. \n (أي استخدم علامات تنصيص أو أية علامات خاصة أخرى.) \n * استخدم كلمة مرور يصعب على الآخرين تخمينها، \n  يمكن لأي شخص يعرف اسم المستخدم الخاص بك و كلمة مرورك أن يطّلع على بياناتك الخاصة، \n  ويمكنه إنشاء نشرات يعتقد أي فرد أن من قام بإنشائها هو أنت. \n * اكتب اسم المستخدم الخاص بك و كلمة مرورك على ورقة و احفظها في مكان آمن. \n * ستحتاج إلى إدخال اسم المستخدم الخاص بك و كلمة مرورك كلما بدأت العمل في Martus. \n * سيطلب منك Martus أحيانا إعادة إدخال اسم المستخدم الخاص بك\n  وكلمة مرورك لمنع أي شخص آخر من استخدام حسابك\n  بعدما تدخل فيه. \n\nهام: يجب أن تكون أنت الشخص الوحيد الذي يعرف اسم المستخدم الخاص بك و كلمة مرورك. فإذا ما فقدت أيهما، لن تستطيع استرجاع بياناتك. لا يقوم Martus بتخزين اسم المستخدم الخاص بك و كلمة مرورك بأي مكان، لذا لن يمكن استعادتهما إليك.
 
@@ -1914,8 +2018,8 @@
 #________________=Title
 -768e-field:title=العنوان 
 
-#_____________________________=Arabic 3.1
--649d-field:translationVersion= العربية 3.1 
+#_____________________________=Arabic 3.3
+-649d-field:translationVersion= العربية 3.3
 
 #___________________=Username
 -84c2-field:username=اسم المستخدم 
@@ -2007,6 +2111,9 @@
 #________________=Bengali, Bangla
 -4b7b-language:bn= البنغالية، بانغلا 
 
+#_________________=Burmese
+-460c-language:bur=البورمية
+
 #________________=German
 -da91-language:de=الألمانية 
 
@@ -2020,7 +2127,7 @@
 -8df7-language:es=الأسبانية 
 
 #________________=Persian (Farsi, Dari)
--10c9-language:fa= الإيرانية (الفارسية، الدارية)
+-10c9-language:fa= الإيرانية (الفارسية، الدارية) 
 
 #________________=French
 -4438-language:fr=الفرنسية 
@@ -2145,6 +2252,9 @@
 #________________=Chinese
 -15dc-language:zh=الصينية
 
+#________________________=Update Headquarters Access...
+-fe87-menu:AddPermissions= تحديث الوصول إلى المقر الرئيسي 
+
 #_____________________________=Backup My Key
 -2852-menu:BackupMyKeyPairFile=نسخ احتياطي لملف شفرتي الدخول
 
@@ -2170,7 +2280,7 @@
 -8ae0-menu:DefaultDetailsFieldContent=محتوى حقل التفاصيل التلقائية 
 
 #_________________________=Delete Bulletin(s)
--9079-menu:DeleteBulletins=حذف نشرة(ات)
+-9079-menu:DeleteBulletins=حذف نشرة(ات) 
 
 #______________________=Delete Folder
 -2880-menu:DeleteFolder=حذف مجلد 
@@ -2179,7 +2289,7 @@
 -b43a-menu:DeleteMyServerDrafts=حذف مسوداتي من الخادم 
 
 #__________________________=Discard Bulletin(s)
--65eb-menu:DiscardBulletins=إلغاء نشرة(ات)
+-65eb-menu:DiscardBulletins=إلغاء نشرة(ات) 
 
 #_________________________=Export Bulletins
 -a86c-menu:ExportBulletins=تصدير نشرات 
@@ -2231,6 +2341,9 @@
 
 #___________________________________=Retrieve My Sealed Bulletins
 -68b9-menu:RetrieveMySealedBulletins=استرجاع نشراتي المختومة 
+
+#_______________________________=Seal Bulletin(s)
+-845f-menu:SealSelectedBulletins= ختم النشرة (النشرات) 
 
 #____________________________=Select All Bulletins
 -6279-menu:SelectAllBulletins=اختر جميع النشرات 
@@ -2287,7 +2400,7 @@
 -db24-menu:paste=لصق
 
 #_______________________=Print Bulletin(s)
--c705-menu:printBulletin=طباعة نشرة (نشرات)
+-c705-menu:printBulletin=طباعة نشرة (رات)
 
 #_____________________=Print
 -5b22-menu:printButton=طبع
@@ -2362,7 +2475,7 @@
 -befd-month:Thai4=أبريل
 
 #________________=May
--c94f-month:Thai5=ماي
+-c94f-month:Thai5=مايو
 
 #________________=Jun
 -6d90-month:Thai6=يونيو
@@ -2421,6 +2534,12 @@
 #_________________________=Account Information
 -0cbd-wintitle:AccountInfo=معلومات الحساب 
 
+#____________________________=Update headquarters access to Bulletins
+-5def-wintitle:AddPermissions= تحديث الوصول إلى المقر الرئيسي للنشرة 
+
+#__________________________________________=Update headquarters access to Bulletins
+-5def-wintitle:AddingPermissionsToBulletins= تحديث الوصول إلى المقر الرئيسي للنشرة 
+
 #______________________________________=Backup Key Information
 -f733-wintitle:BackupKeyPairGeneralInfo=نسخ احتياطي لمعلومات شفرة الدخول 
 
@@ -2449,7 +2568,7 @@
 -add5-wintitle:ConfigServer=تهيئة الخادم
 
 #__________________________=Headquarters Editor
--7fb9-wintitle:ConfigureHQs= محرر المركز الرئيسي 
+-7fb9-wintitle:ConfigureHQs= محرر المقر الرئيسي 
 
 #____________________________________=Help on Creating Custom Fields
 -ed1d-wintitle:CreateCustomFieldsHelp=تعليمات عن إنشاء حقول مُعدلة 
@@ -2493,6 +2612,9 @@
 #___________________________________=Key backup File Error
 -13ae-wintitle:ErrorRecoverShareDisk=حدثت مشكلة بملف شفرتي الدخول 
 
+#_____________________________________=Required Field Blank
+-1131-wintitle:ErrorRequiredFieldBlank= الحقل المطلوب فارغ 
+
 #________________________________________=Verification Error
 -5e89-wintitle:ErrorVerifyingKeyPairShare=حدثت مشكلة أثناء التحقُق 
 
@@ -2530,7 +2652,7 @@
 -2c20-wintitle:ImportProgress=استيراد النشرات
 
 #________________________________=Include Private Data
--e6dc-wintitle:IncludePrivateData=تضمين بيانات خاصة
+-e6dc-wintitle:IncludePrivateData= ضمن بيانات خاصة
 
 #____________________________________=Incompatible Translation Version
 -e91d-wintitle:IncompatibleMtfVersion=إصدار الترجمة غير مواءم
@@ -2556,6 +2678,9 @@
 #_____________________________________=Cannot Paste Bulletin(s)
 -c05f-wintitle:PasteErrorBulletinOlder=لا أستطيع لصق النشرة(ات)
 
+#________________________________=Preparing Bulletins...
+-deac-wintitle:PreparingBulletins= تجهيز النشرات 
+
 #__________________________=Print Options
 -183a-wintitle:PrintOptions=خيارات الطباعة
 
@@ -2579,6 +2704,9 @@
 
 #____________________________________=Reports
 -88bc-wintitle:ReportChooseSortFields=تقارير
+
+#__________________________________=Searching...
+-ba2b-wintitle:ReportSearchProgress= جاري البحث...
 
 #_____________________________=Resend Bulletins
 -273f-wintitle:ResendBulletins= إعادة إرسال نشرات 
@@ -2634,6 +2762,12 @@
 #______________________________=Saving Backup Disk
 -9204-wintitle:SaveShareKeyPair=جاري حفظ القرص الاحتياطي
 
+#______________________________________=Sealing Bulletins...
+-f677-wintitle:SealingSelectedBulletins= ختم النشرات 
+
+#____________________________=Searching...
+-ba2b-wintitle:SearchProgress= جاري البحث...
+
 #______________________________=Server Compliance Statement
 -20f8-wintitle:ServerCompliance=بيان توافق الخادم 
 
@@ -2655,6 +2789,9 @@
 #________________________________=Key Backup Needed
 -e570-wintitle:askToBackupKeyPair=يلزم وجود ملف احتياطي لشفرة الدخول 
 
+#_______________________________________________________=Cancel
+-77df-wintitle:confirmAddingPermissionsToBulletinsCancel= إلغاء 
+
 #_____________________________________________=Backing Up Your Key
 -52f3-wintitle:confirmBackupKeyPairInformation=حفظ شفرة الدخول احتياطيا
 
@@ -2671,7 +2808,7 @@
 -276b-wintitle:confirmCancelModifyBulletin=إلغاء تعديل النشرة 
 
 #___________________________________=Cancel Retrieve
--d984-wintitle:confirmCancelRetrieve=الغاء الاسترجاع
+-d984-wintitle:confirmCancelRetrieve=إلغاء الاسترجاع
 
 #______________________________________=Cancel Backup
 -bba5-wintitle:confirmCancelShareBackup=إلغاء النسخ الاحتياطي 
@@ -2724,8 +2861,8 @@
 #_________________________________________=Folder Migration Required
 -72d3-wintitle:confirmNeedsFolderMigration= يلزم تهجير مجلد
 
-#_____________________________________________=Version Warning
--86f7-wintitle:confirmNewerConfigInfoFileFound= تحذير الإصدار 
+#_____________________________________________=Release Warning
+-6fe1-wintitle:confirmNewerConfigInfoFileFound= تحذير الإصدار 
 
 #_________________________________________________________=View Attachment
 -b24c-wintitle:confirmNotYourBulletinViewAttachmentAnyways=استعرض مرفقا
@@ -2743,7 +2880,7 @@
 -1a10-wintitle:confirmQuickEraseOutboxNotEmpty=تذكير بالنشرات التي لم ترسل 
 
 #_________________________________________=Create New Account / Restore Old Account
--ab12-wintitle:confirmRecoverUsingKeyShare=إنشاء حساب جديد / استعادة حساب قديم
+-ab12-wintitle:confirmRecoverUsingKeyShare=إنشاء حساب جديد/استعادة حساب قديم
 
 #____________________________________________________=Restore Failed
 -b6bc-wintitle:confirmRecoveredKeyShareFailedTryAgain=فشلت الاستعادة 
@@ -2757,8 +2894,11 @@
 #_________________________________=Delete All Data and Remove Martus
 -6fef-wintitle:confirmRemoveMartus= حذف جميع البيانات و إزالة Martus
 
-#_________________________________________=All Bulletins Private
--e4e5-wintitle:confirmReportIncludePrivate=جميع النشرات خاصة
+#_________________________________________=All Data Private
+-61f8-wintitle:confirmReportIncludePrivate=جميع البيانات خاصة
+
+#_______________________________________________=Cancel Search
+-5109-wintitle:confirmReportSearchProgressCancel= إلغ البحث 
 
 #_____________________________________________________=Request to Send Contact Info to Server
 -4f40-wintitle:confirmRequestToSendContactInfoToServer=طلب إرسال معلومات الاتصال للخادم 
@@ -2768,6 +2908,15 @@
 
 #__________________________________________=Confirm Retrieving Newer Versions
 -80c8-wintitle:confirmRetrieveNewerVersions=تأكيد استرجاع نسخ أحدث
+
+#__________________________________________=Seal Bulletins
+-41f6-wintitle:confirmSealSelectedBulletins= ختم النشرات 
+
+#___________________________________________________=Sealing Bulletins
+-3ba3-wintitle:confirmSealingSelectedBulletinsCancel= ختم النشرات 
+
+#_________________________________________=Cancel Search
+-5109-wintitle:confirmSearchProgressCancel= إلغ البحث 
 
 #_______________________________________=Confirm Save With Public Data
 -1e77-wintitle:confirmSendWithPublicData= تأكيد الحفظ مع البيانات العامة 
@@ -2855,6 +3004,12 @@
 
 #____________________________________=Incorrect Public Code
 -f994-wintitle:notifyAccountCodeWrong=كود عام غير صحيح
+
+#___________________________________________________=Update headquarters access to Bulletins
+-5def-wintitle:notifyAddPermissionsZeroBulletinsOurs= تحديث الوصول إلى المقر الرئيسي للنشرة 
+
+#__________________________________________________________=No Headquarters Selected
+-9140-wintitle:notifyAddPermissionsZeroHeadquartersSelected= لم يتم تحديد أي مقر رئيسي 
 
 #__________________________________=Martus Already Running
 -cfce-wintitle:notifyAlreadyRunning=Martus يعمل بالفعل
@@ -3155,6 +3310,9 @@
 
 #____________________________________________=Verification Succeeded
 -9195-wintitle:notifyVerifyKeyPairSharePassed=تم التحقق بنجاح 
+
+#______________________________________________=Unable to View Attachment
+-4a17-wintitle:notifyViewAttachmentNotAvailable= يتعذر عرض المرفق 
 
 #___________________________________=Welcome To Martus
 -423f-wintitle:notifyWelcomeToMartus=مرحبا بك في Martus

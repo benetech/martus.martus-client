@@ -59,5 +59,4 @@
 10a. Using a template in the Details field
 10b. Customizing bulletin fields
 10c. Using Customization Templates
-10d. Customizing your bulletin display
 11. Frequently Asked Questions

@@ -59,4 +59,5 @@
 10a. Utilisation d'un modèle dans le champ Détails
 10b. Personnalisation des champs de communiqué
 10c. Utilisation des modèles de personnalisation
+10d. Personnalisation de l’affichage de votre communiqué
 11. Questions Fréquentes

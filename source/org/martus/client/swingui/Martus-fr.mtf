@@ -1,10 +1,10 @@
 ﻿# Martus Client Translation File
 # Language code:  fr
 # Language name:  French
-# Translated by:  MID Foundation, Caroline Garcia
-# Exported date:  Fri Sep 28 16:51:58 PDT 2007
-# Client version: pre-3.2
-# Client build:   20070928.1861
+# Translated by:  MID Foundation, Caroline Garcia 
+# Exported date:  Tue Dec 30 21:05:59 GMT 2008
+# Client version: 3.3
+# Client build:   20080826.1903
 #
 # This file MUST be saved in UTF-8 format!
 # Lines beginning with # are comments and are ignored by Martus
@@ -97,6 +97,9 @@
 
 #____________________________=Add
 -61cc-button:AddFieldToReport=Ajouter
+
+#__________________________=Update Headquarters Access
+-5029-button:AddPermissions=Mettre à jour l’accès du Siège
 
 #________________________=Show all bulletins on this server and on this computer.
 -e9a2-button:AllSummaries=Afficher tous les communiqués sur ce serveur et sur cet ordinateur.
@@ -314,6 +317,9 @@
 #________________=Help
 -c47a-button:help=Aide
 
+#__________________________=Hide
+-34d8-button:hideattachment=Masquer
+
 #_______________________________=OK
 -9ce3-button:inputCustomFieldsok=OK
 
@@ -359,8 +365,8 @@
 #_________________=Print
 -5b22-button:print=Imprimer
 
-#____________________________=Remove Attachment
--6f6d-button:removeattachment=Supprimer Pièce Jointe
+#____________________________=Remove
+-e963-button:removeattachment=Supprimer
 
 #____________________=Retrieve
 -eb55-button:retrieve=Extraire
@@ -368,8 +374,8 @@
 #________________=Save
 -efc0-button:save=Enregistrer
 
-#__________________________=Save Attachment
--f513-button:saveattachment=Enregistrer Pièce Jointe
+#__________________________=Save...
+-96b4-button:saveattachment=Enregistrer...
 
 #_____________________=Save Draft
 -cc13-button:savedraft=Enregistrer Brouillon
@@ -383,8 +389,8 @@
 #______________________=Uncheck All
 -bc6d-button:uncheckall=Tout Décocher 
 
-#__________________________=View Attachment
--b24c-button:viewattachment=Afficher Pièce Jointe
+#__________________________=View
+-69bd-button:viewattachment=Afficher
 
 #_______________=Yes
 -5397-button:yes=Oui
@@ -400,6 +406,12 @@
 
 #______________________________=User Name: 
 -b58e-field:AccountInfoUserName=Pseudo :
+
+#_________________________________=This allows you to update headquarters access to existing bulletins. Each of the bulletins in the list below will be modified to add the selected headquarters accounts. If a bulletin is sealed, a new version will be created.
+-aa30-field:AddPermissionsOverview=Ceci vous permet de mettre à jour l’accès du Siège aux communiqués existants. Chacun des communiqués de la liste ci-dessous sera modifié pour que les comptes Siège sélectionnés puissent être ajoutés. Si un communiqué est verrouillé, une nouvelle version sera créée.
+
+#_______________________________________=Updating access...
+-958f-field:AddingPermissionsToBulletins=Mise à jour de l’accès...
 
 #________________________________=Unknown
 -bc78-field:AttachmentSizeUnknown=Inconnu
@@ -517,6 +529,9 @@
 
 #_____________________________=Thai Solar (2548-05-31)
 -2be4-field:CalendarSystemThai=Solaire Thaï (2548-05-31)
+
+#__________________________________=Select the headquarters listed below that you want to add to all the bulletins listed above.
+-23a1-field:ChooseHeadquartersToAdd=Dans la liste ci-dessous, sélectionnez le Siège que vous voulez ajouter à tous les communiqués répertoriés ci-dessus.
 
 #_____________________________=Use Ctrl-Click or Shift-Click to select the fields (columns) that will appear in this report. 
 -e4a8-field:ChooseReportFields=Cliquez sur Ctrl ou Shift pour sélectionner les champs (colonnes) qui apparaîtront dans ce rapport.
@@ -836,6 +851,9 @@
 #_______________________________=Add the fields you want to appear in your report, and then arrange them in the order you want them to be printed.
 -b511-field:OrganizeReportFields=Ajoutez les champs que vous voulez voir apparaître dans votre rapport et arrangez-les dans l’ordre que vous souhaitez les imprimer.
 
+#_____________________________=Preparing Bulletins...
+-deac-field:PreparingBulletins=Préparation des communiqués...
+
 #__________________________________=You have the option to include or exclude the selected bulletin's private information in this print out. If you choose to print private data, it will be visible to anyone who sees the print out.
 -2050-field:PrintPrivateDataMessage=Vous pouvez choisir d'inclure ou d'exclure les informations confidentielles du communiqué sélectionné lors de son impression. Quiconque lisant la sortie d'imprimante pourra lire vos données privées.
 
@@ -941,6 +959,9 @@
 #________________________________=Scrub data before deleting
 -7a0b-field:ScrubDataBeforeDelete=Nettoyer les données avant suppression
 
+#___________________________________=Sealing Bulletins...
+-f677-field:SealingSelectedBulletins=Verrouillage des communiqués...
+
 #_________________________=--Any Field--
 -bcaa-field:SearchAnyField=-- Tous les Champs --
 
@@ -1003,6 +1024,9 @@
 
 #_________________________=To change a folder's position, select the folder name and use the #MoveFolderUp# / #MoveFolderDown# buttons.
 -4497-field:SetFolderOrder=Pour modifier l’emplacement d’un dossier, sélectionnez le nom du dossier et utlisez les boutons #MoveFolderUp# / #MoveFolderDown#.
+
+#___________________________________=NOTE: Bulletins authored by other accounts cannot be changed using this command, so they are not included in the list above.
+-250a-field:SkippingBulletinsNotOurs=REMARQUE : les communiqués créés par d’autres comptes ne peuvent pas être modifiés à l’aide de cette commande. Par conséquent, ils ne sont pas inclus dans la liste ci-dessus.
 
 #___________________________________=Human Rights Bulletin System
 -fe5b-field:SplashProductDescription=Système de Communiqués pour les Droits Humains
@@ -1129,6 +1153,12 @@
 
 #______________________=Authorizing...
 -5086-field:authorizing=Autorisation en cours...
+
+#_________________________________________________________=The operation will be stopped immediately.
+-6eee-field:confirmAddingPermissionsToBulletinsCancelcause=L’opération sera immédiatement interrompue.
+
+#__________________________________________________________=If you do this, the bulletins already processed will have the new headquarters access, but other selected bulletins will not.
+-9054-field:confirmAddingPermissionsToBulletinsCanceleffect=Si vous faites ceci, les communiqués déjà traités seront accessibles par le nouveau Siège, mais les autres non.
 
 #_______________________________________________=Save your password encrypted key backup file to a single floppy disk or other removable media.  Then store this disk in a safe place. You will use this disk, with your username and password, to restore your data if your system files are ever damaged.  To restore this password-protected key in the future, select 'Restore Account' and 'Restore account from backup key file' when signing into Martus.
 -e692-field:confirmBackupKeyPairInformationcause=Enregistrez votre fichier de sauvegarde de clé crypté par mot de passe sur une seule disquette ou tout autre support amovible. Puis conservez ce disque en lieu sûr. Vous en aurez besoin, avec votre pseudo et votre mot de passe, pour restaurer vos données si vos fichiers système sont endommagés. Par la suite, pour restaurer cette clé protégée par mot de passe, en ouvrant une session Martus, sélectionnez 'Restaurer le Compte' et 'Restaurer le compte depuis le fichier de sauvegarde de clé'.
@@ -1364,6 +1394,18 @@
 #_____________________________________________=Each older version will be replaced by the newer version from the server.
 -1d86-field:confirmRetrieveNewerVersionseffect=Toute version plus ancienne sera remplacée par la dernière version depuis le serveur.
 
+#____________________________________________=This will seal all the currently selected draft bulletins.
+-a9f2-field:confirmSealSelectedBulletinscause=Cela verrouillera tous les brouillons de communiqués sélectionnés.
+
+#_____________________________________________=Any selected bulletins that are already sealed will remain unchanged.
+-7326-field:confirmSealSelectedBulletinseffect=Tout communiqué déjà verrouillé ne subira aucune modification.
+
+#_____________________________________________________=The operation in progress will be stopped.
+-ff24-field:confirmSealingSelectedBulletinsCancelcause=L’opération en cours sera interrompue.
+
+#______________________________________________________=If you do this, bulletins that have already been sealed will remain sealed, and bulletins that have not been processed yet will remain in their current state.
+-1b83-field:confirmSealingSelectedBulletinsCanceleffect=Si vous faites ceci, les communiqués déjà verrouillés et les communiqués qui n’ont pas encore été traités ne subiront aucune modification.
+
 #___________________________________________=The search in progress will be stopped immediately.
 -c6a2-field:confirmSearchProgressCancelcause=La recherche en cours sera immédiatement interrompue.
 
@@ -1561,6 +1603,12 @@
 
 #______________________________________=The Public Code does not match the one you entered.
 -040a-field:notifyAccountCodeWrongcause=Le Code Public ne correspond pas à celui que vous avez saisi.
+
+#_____________________________________________________=Must select at least one bulletin that was created by this account
+-f7c7-field:notifyAddPermissionsZeroBulletinsOurscause=Vous devez sélectionner au moins un communiqué créé par ce compte
+
+#____________________________________________________________=Must select at least one headquarters account
+-deb1-field:notifyAddPermissionsZeroHeadquartersSelectedcause=Vous devez sélectionner au moins un compte Siège
 
 #____________________________________=A copy of Martus is already running on this computer. You must close that copy before starting a new copy.
 -614e-field:notifyAlreadyRunningcause=Une copie de Martus est en cours d'exécution sur cet ordinateur. Fermez cette copie avant d'en démarrer une autre.
@@ -1862,6 +1910,9 @@
 #______________________________________________=Verification of all disks passed.
 -7d7f-field:notifyVerifyKeyPairSharePassedcause=Vérification réussie de tous les disques.
 
+#________________________________________________=This computer can only view JPEG, GIF, and PNG image attachments
+-3267-field:notifyViewAttachmentNotAvailablecause=Cet ordinateur ne peut afficher que les images JPEG, GIF et PNG en pièce jointe
+
 #_____________________________________=Welcome!\n\nTo start using Martus, create an account. Choose any username you like and a password that contains at least 8 characters. Keep the following information in mind as you create your username and password:\n\n * We recommend using a password that has 15 characters.\n * Include some characters that aren't letters or numbers in your password.\n   (That is, use punctuation or other special characters.)\n * Use a password that other people won't be able to guess;\n   anyone who knows your username and password can view your private data,\n   and can create bulletins that everyone will believe were created by you.\n * Write down your username and password and store them in a safe place.\n * You'll need to enter your username and password whenever you start Martus.\n * Martus will also sometimes prompt you to re-enter your username\n   and password to prevent someone else from using your account\n   after you've logged in.\n\nIMPORTANT: You are the only one who has your username and password. If you lose either of them, you won't be able to retrieve your data. Your username and password are not stored or backed up anywhere, so they cannot be reset for you.
 -da34-field:notifyWelcomeToMartuscause=Bienvenue !\n\nLors de la première utilisation de Martus, créez un compte. Choisissez un pseudo quelconque et un mot de passe contenant au moins 8 caractères. Gardez les conseils suivants à l'esprit lorsque vous créez votre pseudo et votre mot de passe :\n\n * Nous vous recommandons d'utiliser un mot de passe de 15 caractères.\n * Ajoutez des caractères qui ne sont ni des lettres ni des chiffres à votre mot de passe (utilisez de la ponctuation ou d'autres caractères spéciaux).\n * Utilisez un mot de passe difficile à deviner ; quiconque connaissant votre pseudo et votre mot de passe peut accéder à vos données privées, et peut créer des communiqués dont vous serez l'auteur présumé.\n * Notez votre pseudo et votre mot de passe et mettez-les en lieu sûr.\n * Il vous faudra saisir votre pseudo et votre mot de passe à chaque ouverture de session Martus.\n * Parfois, Martus vous invitera aussi à ressaisir votre pseudo et votre mot de passe pour empêcher un intrus d'utiliser votre compte après avoir ouvert une session.\n\nIMPORTANT : Vous êtes le seul à posséder votre pseudo et votre mot de passe. Si vous perdez l'un ou l'autre, vous ne pourrez plus récupérer vos données. Votre pseudo et votre mot de passe ne sont stockés ou sauvegardés nulle part, ils ne peuvent donc pas être réinitialisés.
 
@@ -1929,7 +1980,7 @@
 -7c9e-field:preferencesAllPrivate=Empêcher la création de communiqués publics
 
 #_______________________________________________=Automatically check for new Field Desk bulletins
--982a-field:preferencesCheckFieldOfficeBulletins=Rechercher automatiquement les nouveaux communiqués de bureau de terrain
+-982a-field:preferencesCheckFieldOfficeBulletins=Vérifier automatiquement les nouveaux communiqués de bureau de terrain
 
 #______________________=Private
 -237d-field:privateinfo=Privé
@@ -1970,8 +2021,8 @@
 #________________=Title
 -768e-field:title=Titre
 
-#_____________________________=English
--649d-field:translationVersion=Français 3.2
+#_____________________________=French 3.3 
+-649d-field:translationVersion=Français 3.3
 
 #___________________=Username
 -84c2-field:username=Pseudo
@@ -2204,6 +2255,9 @@
 #________________=Chinese
 -15dc-language:zh=Chinois
 
+#________________________=Update Headquarters Access...
+-fe87-menu:AddPermissions=Mettre à jour l'accès du Siège...
+
 #_____________________________=Backup My Key
 -2852-menu:BackupMyKeyPairFile=Sauvegarder Ma Clé
 
@@ -2290,6 +2344,9 @@
 
 #___________________________________=Retrieve My Sealed Bulletins
 -68b9-menu:RetrieveMySealedBulletins=Extraire Mes Communiqués Verrouillés
+
+#_______________________________=Seal Bulletin(s)
+-845f-menu:SealSelectedBulletins=Verrouiller le(s) communiqué(s)
 
 #____________________________=Select All Bulletins
 -6279-menu:SelectAllBulletins=Sélectionner Tous les Communiqués
@@ -2480,6 +2537,12 @@
 #_________________________=Account Information
 -0cbd-wintitle:AccountInfo=Informations de Compte
 
+#____________________________=Update headquarters access to Bulletins
+-5def-wintitle:AddPermissions=Mettre à jour l’accès du Siège aux communiqués
+
+#__________________________________________=Update headquarters access to Bulletins
+-5def-wintitle:AddingPermissionsToBulletins=Mettre à jour l’accès du Siège aux communiqués
+
 #______________________________________=Backup Key Information
 -f733-wintitle:BackupKeyPairGeneralInfo=Informations de Sauvegarde de Clé
 
@@ -2618,6 +2681,9 @@
 #_____________________________________=Cannot Paste Bulletin(s)
 -c05f-wintitle:PasteErrorBulletinOlder=Impossible de Coller le(s) Communiqué(s)
 
+#________________________________=Preparing Bulletins...
+-deac-wintitle:PreparingBulletins=Préparation des communiqués...
+
 #__________________________=Print Options
 -183a-wintitle:PrintOptions=Imprimer Options
 
@@ -2699,6 +2765,9 @@
 #______________________________=Saving Backup Disk
 -9204-wintitle:SaveShareKeyPair=Enregistrement du Disque de Sauvegarde
 
+#______________________________________=Sealing Bulletins...
+-f677-wintitle:SealingSelectedBulletins=Verrouillage des communiqués...
+
 #____________________________=Searching...
 -ba2b-wintitle:SearchProgress=Recherche...
 
@@ -2722,6 +2791,9 @@
 
 #________________________________=Key Backup Needed
 -e570-wintitle:askToBackupKeyPair=La Clé doit être Sauvegardée
+
+#_______________________________________________________=Cancel
+-77df-wintitle:confirmAddingPermissionsToBulletinsCancel=Annuler
 
 #_____________________________________________=Backing Up Your Key
 -52f3-wintitle:confirmBackupKeyPairInformation=Sauvegarde de votre Clé
@@ -2840,6 +2912,12 @@
 #__________________________________________=Confirm Retrieving Newer Versions
 -80c8-wintitle:confirmRetrieveNewerVersions=Confirmer Récupération des Versions plus Récentes
 
+#__________________________________________=Seal Bulletins
+-41f6-wintitle:confirmSealSelectedBulletins=Verrouiller les communiqués
+
+#___________________________________________________=Sealing Bulletins
+-3ba3-wintitle:confirmSealingSelectedBulletinsCancel=Verrouillage des communiqués
+
 #_________________________________________=Cancel Search
 -5109-wintitle:confirmSearchProgressCancel=Annuler Recherche
 
@@ -2929,6 +3007,12 @@
 
 #____________________________________=Incorrect Public Code
 -f994-wintitle:notifyAccountCodeWrong=Code Public Incorrect
+
+#___________________________________________________=Update headquarters access to Bulletins
+-5def-wintitle:notifyAddPermissionsZeroBulletinsOurs=Mettre à jour l’accès du Siège aux communiqués
+
+#__________________________________________________________=No Headquarters Selected
+-9140-wintitle:notifyAddPermissionsZeroHeadquartersSelected=Aucun Siège sélectionné
 
 #__________________________________=Martus Already Running
 -cfce-wintitle:notifyAlreadyRunning=Martus Fonctionne Déjà
@@ -3230,6 +3314,9 @@
 #____________________________________________=Verification Succeeded
 -9195-wintitle:notifyVerifyKeyPairSharePassed=Vérification Réussie
 
+#______________________________________________=Unable to View Attachment
+-4a17-wintitle:notifyViewAttachmentNotAvailable=Impossible d’afficher la pièce jointe
+
 #___________________________________=Welcome To Martus
 -423f-wintitle:notifyWelcomeToMartus=Bienvenue sur Martus
 
@@ -3295,3 +3382,4 @@
 
 #_________________________________=Confirm Delete Folder
 -1a75-wintitle:warningdeletefolder=Confirmer Suppression de Dossier
+ 
