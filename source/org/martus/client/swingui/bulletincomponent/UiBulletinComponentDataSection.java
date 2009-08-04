@@ -363,11 +363,8 @@ abstract public class UiBulletinComponentDataSection extends UiBulletinComponent
 			if(dataSourceGrid == null)
 				return;
 			
-			String existingValue = field.getText();
 			UiChoice choiceField = (UiChoice)field;
-			ChoiceItem[] choices = getCurrentChoiceItems(spec);
-			choiceField.setChoices(choices);
-			field.setText(ensureValid(choices, existingValue));
+			choiceField.updateChoices();
 		}
 
 		private void updateDataDrivenDropdownsInsideGrid(GridFieldSpec gridSpecToBlankOut, UiGrid gridToBlankOut) 

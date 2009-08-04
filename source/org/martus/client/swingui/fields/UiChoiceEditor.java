@@ -134,10 +134,23 @@ public class UiChoiceEditor extends UiChoice implements ActionListener
 
 	public void updateChoices()
 	{
+		String existingValue = getText();
+
 		ChoiceItem[] choices = new ChoiceItem[spec.getCount()];
 		for(int i = 0; i < choices.length; ++i)
 			choices[i] = spec.getChoice(i);
 		setChoices(choices);
+
+		setText(ensureValid(choices, existingValue));
+	}
+	
+	private String ensureValid(ChoiceItem[] choices, String text) 
+	{
+		for(int i = 0; i < choices.length; ++i)
+			if(choices[i].getCode().equals(text))
+				return text;
+
+		return "";
 	}
 	
 	public void setChoices(ChoiceItem[] newChoices)
