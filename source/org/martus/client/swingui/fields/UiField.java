@@ -50,10 +50,16 @@ abstract public class UiField
 	{
 		if(spec.isRequiredField())
 		{
-			final String REGEXP_ONLY_SPACES = "\\s*";
-			if(getText().matches(REGEXP_ONLY_SPACES))
-				throw new RequiredFieldIsBlankException();
+			validateRequiredValue(spec.getLabel(), getText());
 		}
+	}
+
+	protected void validateRequiredValue(String fieldLabel, String value)
+			throws RequiredFieldIsBlankException
+	{
+		final String REGEXP_ONLY_SPACES = "\\s*";
+		if(value.matches(REGEXP_ONLY_SPACES))
+			throw new RequiredFieldIsBlankException(fieldLabel);
 	}
 	
 	public void setListener(ChangeListener listener)
@@ -93,15 +99,17 @@ abstract public class UiField
 	
 	public static class RequiredFieldIsBlankException extends DataInvalidException
 	{
-		public RequiredFieldIsBlankException()
-		{
-			this(null);
-		}
-		
 		public RequiredFieldIsBlankException(String label)
 		{
-			super(label);
+			fieldLabel = label;
 		}
+
+		public String getFieldLabel()
+		{
+			return fieldLabel;
+		}
+		
+		private String fieldLabel;
 	}
 	
 	FocusManager focusManager;

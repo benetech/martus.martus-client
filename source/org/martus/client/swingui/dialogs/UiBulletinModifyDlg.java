@@ -191,7 +191,7 @@ public class UiBulletinModifyDlg extends JFrame implements ActionListener, Windo
 		}
 		catch(UiField.RequiredFieldIsBlankException e)
 		{
-			observer.messageDlg(this, "ErrorRequiredFieldBlank", e.getlocalizedTag());
+			observer.messageDlg(this, "ErrorRequiredFieldBlank", e.getFieldLabel());
 		}
 		catch (Exception e) 
 		{

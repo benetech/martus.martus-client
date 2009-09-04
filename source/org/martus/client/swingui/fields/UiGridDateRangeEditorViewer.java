@@ -28,7 +28,6 @@ package org.martus.client.swingui.fields;
 import javax.swing.JComponent;
 
 import org.martus.clientside.UiLocalization;
-import org.martus.common.fieldspec.FieldSpec;
 
 public class UiGridDateRangeEditorViewer extends UiFlexiDateEditor
 {
@@ -65,11 +64,6 @@ public class UiGridDateRangeEditorViewer extends UiFlexiDateEditor
 				endDate[0], endDate[1], endDate[2],};
 	}
 	
-	public void validate(FieldSpec spec) throws DataInvalidException 
-	{
-		super.validate(spec);
-	}
-
 	public JComponent getComponent()
 	{
 		return flexiDateBox;

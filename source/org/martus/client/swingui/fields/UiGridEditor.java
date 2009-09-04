@@ -30,6 +30,7 @@ import java.util.Vector;
 
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.dialogs.UiDialogLauncher;
+import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.fieldspec.GridFieldSpec;
 
 public class UiGridEditor extends UiEditableGrid 
@@ -44,5 +45,31 @@ public class UiGridEditor extends UiEditableGrid
 		Vector buttons = super.createButtons();
 		buttons.insertElementAt(createShowExpandedButton(), 0);
 		return buttons;
+	}
+
+	public void validate(FieldSpec spec) throws DataInvalidException
+	{
+		GridFieldSpec gridSpec = (GridFieldSpec)spec;
+		for(int col = 0; col < gridSpec.getColumnCount(); ++col)
+		{
+			FieldSpec columnSpec = gridSpec.getFieldSpec(col);
+			validateColumn(gridSpec, col, columnSpec);
+		}
+	}
+
+	private void validateColumn(GridFieldSpec gridSpec, int col, FieldSpec columnSpec) throws RequiredFieldIsBlankException
+	{
+		String label = gridSpec.getLabel() + "." + gridSpec.getColumnLabel(col);
+		if(columnSpec.isRequiredField())
+			validateRequiredColumn(col, label);
+	}
+
+	private void validateRequiredColumn(int col, String label) throws RequiredFieldIsBlankException
+	{
+		for(int row = 0; row < getGridData().getRowCount(); ++row)
+		{
+			String value = getGridData().getValueAt(row, col);
+			validateRequiredValue(label, value);
+		}
 	}
 }

@@ -293,7 +293,7 @@ abstract public class UiBulletinComponentDataSection extends UiBulletinComponent
 			}
 			catch(UiField.RequiredFieldIsBlankException e)
 			{
-				throw new UiField.RequiredFieldIsBlankException(label);
+				throw e;
 			}
 		}
 		
