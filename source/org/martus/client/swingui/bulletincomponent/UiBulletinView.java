@@ -30,10 +30,10 @@ import java.io.IOException;
 
 import javax.swing.event.ChangeEvent;
 
+import org.martus.client.core.DataInvalidException;
 import org.martus.client.core.EncryptionChangeListener;
 import org.martus.client.core.LanguageChangeListener;
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.client.swingui.fields.UiField;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.crypto.MartusCrypto;
 
@@ -67,7 +67,7 @@ public class UiBulletinView extends UiBulletinComponent
 		// read-only view cannot update the bulletin
 	}		
 
-	public void validateData() throws UiField.DataInvalidException 
+	public void validateData() throws DataInvalidException 
 	{
 		// read-only view is always valid
 	}

@@ -36,6 +36,7 @@ import javax.swing.Scrollable;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
+import org.martus.client.core.DataInvalidException;
 import org.martus.client.core.EncryptionChangeListener;
 import org.martus.client.core.LanguageChangeListener;
 import org.martus.client.swingui.UiMainWindow;
@@ -56,7 +57,7 @@ abstract public class UiBulletinComponent extends JPanel implements Scrollable, 
 	abstract public UiBulletinComponentDataSection createBulletinComponentDataSection(String sectionName);
 	abstract public void copyDataToBulletin(Bulletin bulletin) throws
 			IOException, MartusCrypto.EncryptionException;
-	abstract public void validateData() throws UiField.DataInvalidException; 
+	abstract public void validateData() throws DataInvalidException; 
 	abstract public boolean isBulletinModified() throws
 			IOException, MartusCrypto.EncryptionException;
 	abstract UiBulletinComponentHeaderSection createHeaderSection();

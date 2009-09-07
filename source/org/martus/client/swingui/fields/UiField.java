@@ -31,7 +31,9 @@ import java.awt.event.FocusListener;
 import javax.swing.JComponent;
 import javax.swing.event.ChangeListener;
 
+import org.martus.client.core.DataInvalidException;
 import org.martus.client.core.LanguageChangeListener;
+import org.martus.client.core.RequiredFieldIsBlankException;
 import org.martus.common.fieldspec.FieldSpec;
 
 abstract public class UiField
@@ -80,38 +82,6 @@ abstract public class UiField
 	abstract public String getText();
 	abstract public void setText(String newText);
 
-	public static class DataInvalidException extends Exception
-	{
-		public DataInvalidException()
-		{
-			localizedTag = null;
-		}
-		public DataInvalidException(String tag)
-		{
-			localizedTag = tag;
-		}
-		public String getlocalizedTag()
-		{
-			return localizedTag;
-		}
-		String localizedTag;
-	}
-	
-	public static class RequiredFieldIsBlankException extends DataInvalidException
-	{
-		public RequiredFieldIsBlankException(String label)
-		{
-			fieldLabel = label;
-		}
-
-		public String getFieldLabel()
-		{
-			return fieldLabel;
-		}
-		
-		private String fieldLabel;
-	}
-	
 	FocusManager focusManager;
 }
 

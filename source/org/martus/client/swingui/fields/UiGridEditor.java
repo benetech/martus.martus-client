@@ -28,6 +28,8 @@ package org.martus.client.swingui.fields;
 import java.util.Map;
 import java.util.Vector;
 
+import org.martus.client.core.DataInvalidException;
+import org.martus.client.core.RequiredFieldIsBlankException;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.dialogs.UiDialogLauncher;
 import org.martus.common.fieldspec.FieldSpec;

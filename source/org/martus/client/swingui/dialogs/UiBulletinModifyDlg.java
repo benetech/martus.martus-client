@@ -48,13 +48,13 @@ import org.martus.client.bulletinstore.ClientBulletinStore.AddOlderVersionToFold
 import org.martus.client.core.EncryptionChangeListener;
 import org.martus.client.core.LanguageChangeListener;
 import org.martus.client.core.MartusApp;
+import org.martus.client.core.RequiredFieldIsBlankException;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.WindowObscurer;
 import org.martus.client.swingui.bulletincomponent.UiBulletinComponent;
 import org.martus.client.swingui.bulletincomponent.UiBulletinComponentEditorSection;
 import org.martus.client.swingui.bulletincomponent.UiBulletinEditor;
 import org.martus.client.swingui.fields.UiDateEditor;
-import org.martus.client.swingui.fields.UiField;
 import org.martus.client.swingui.fields.UiFlexiDateEditor;
 import org.martus.clientside.UiLocalization;
 import org.martus.common.bulletin.Bulletin;
@@ -189,7 +189,7 @@ public class UiBulletinModifyDlg extends JFrame implements ActionListener, Windo
 		{
 			observer.messageDlg(this,"ErrorAttachmentMissing", e.getlocalizedTag());
 		}
-		catch(UiField.RequiredFieldIsBlankException e)
+		catch(RequiredFieldIsBlankException e)
 		{
 			observer.messageDlg(this, "ErrorRequiredFieldBlank", e.getFieldLabel());
 		}

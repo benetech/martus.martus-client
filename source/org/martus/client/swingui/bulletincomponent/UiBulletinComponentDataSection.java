@@ -34,8 +34,10 @@ import javax.swing.JComponent;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 
+import org.martus.client.core.DataInvalidException;
 import org.martus.client.core.LanguageChangeListener;
 import org.martus.client.core.MartusApp;
+import org.martus.client.core.RequiredFieldIsBlankException;
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.fields.UiChoice;
@@ -44,7 +46,6 @@ import org.martus.client.swingui.fields.UiField;
 import org.martus.client.swingui.fields.UiFieldCreator;
 import org.martus.client.swingui.fields.UiFlexiDateEditor;
 import org.martus.client.swingui.fields.UiGrid;
-import org.martus.client.swingui.fields.UiField.DataInvalidException;
 import org.martus.client.swingui.grids.GridTableModel;
 import org.martus.common.bulletin.AttachmentProxy;
 import org.martus.common.bulletin.Bulletin;
@@ -291,7 +292,7 @@ abstract public class UiBulletinComponentDataSection extends UiBulletinComponent
 			{
 				throw new UiFlexiDateEditor.DateRangeInvertedException(label); 
 			}
-			catch(UiField.RequiredFieldIsBlankException e)
+			catch(RequiredFieldIsBlankException e)
 			{
 				throw e;
 			}

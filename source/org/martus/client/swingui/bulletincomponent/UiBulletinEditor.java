@@ -30,11 +30,11 @@ import java.io.IOException;
 
 import javax.swing.event.ChangeEvent;
 
+import org.martus.client.core.DataInvalidException;
 import org.martus.client.core.EncryptionChangeListener;
 import org.martus.client.core.LanguageChangeListener;
 import org.martus.client.swingui.HeadQuartersSelectionListener;
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.client.swingui.fields.UiField;
 import org.martus.common.HQKeys;
 import org.martus.common.bulletin.AttachmentProxy;
 import org.martus.common.bulletin.Bulletin;
@@ -54,7 +54,7 @@ public class UiBulletinEditor extends UiBulletinComponent implements HeadQuarter
 		return new UiBulletinComponentEditorSection(mainWindow, sectionName);
 	}
 
-	public void validateData() throws UiField.DataInvalidException 
+	public void validateData() throws DataInvalidException 
 	{
 		publicSection.validateData();
 		privateSection.validateData();

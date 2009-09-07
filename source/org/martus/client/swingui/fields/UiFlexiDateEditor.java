@@ -36,6 +36,7 @@ import javax.swing.ButtonGroup;
 import javax.swing.JComponent;
 import javax.swing.JPanel;
 
+import org.martus.client.core.DataInvalidException;
 import org.martus.clientside.UiLocalization;
 import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.fieldspec.StandardFieldSpecs;
@@ -191,7 +192,7 @@ public class UiFlexiDateEditor extends UiField
 		component.revalidate();		
 	}
 
-	public void validate(FieldSpec specToValidate) throws UiField.DataInvalidException 
+	public void validate(FieldSpec specToValidate) throws DataInvalidException 
 	{
 		
 		MultiCalendar begin = getBeginDate();
@@ -265,7 +266,7 @@ public class UiFlexiDateEditor extends UiField
 			flexiDateRB.setSelected(true);
 	}
 	
-	public static class DateRangeInvertedException extends UiField.DataInvalidException
+	public static class DateRangeInvertedException extends DataInvalidException
 	{
 		public DateRangeInvertedException()
 		{
