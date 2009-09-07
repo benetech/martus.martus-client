@@ -35,21 +35,22 @@ import org.martus.client.swingui.fields.UiFlexiDateEditor;
 import org.martus.client.swingui.fields.UiGridDateRangeEditorViewer;
 import org.martus.common.fieldspec.DataInvalidException;
 import org.martus.common.fieldspec.FieldSpec;
+import org.martus.common.fieldspec.GridFieldSpec;
 import org.martus.swing.UiComboBox;
 
 public class GridDateRangeCellEditor extends GridCellEditorAndRenderer
 {
-	GridDateRangeCellEditor(UiDialogLauncher dlgLauncherToUse)
+	GridDateRangeCellEditor(UiDialogLauncher dlgLauncherToUse, GridFieldSpec gridSpecToUse)
 	{
 		super(new UiGridDateRangeEditorViewer(dlgLauncherToUse.GetLocalization()));
 		dlgLauncher = dlgLauncherToUse;
+		gridSpec = gridSpecToUse;
 	}
 
 	public boolean stopCellEditing()
 	{
 		try
 		{
-			FieldSpec gridSpec = fieldSpecBeingEdited.getParent();
 			String label = gridSpec.getLabel() + ": " + fieldSpecBeingEdited.getLabel();
 			super.uiField.validate(fieldSpecBeingEdited, label);
 			return super.stopCellEditing();
@@ -90,4 +91,5 @@ public class GridDateRangeCellEditor extends GridCellEditorAndRenderer
 	String originalDate;
 	FieldSpec fieldSpecBeingEdited;
 	UiDialogLauncher dlgLauncher;
+	private GridFieldSpec gridSpec;
 }

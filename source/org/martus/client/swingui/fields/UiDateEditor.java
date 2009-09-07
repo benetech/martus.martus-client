@@ -67,7 +67,7 @@ public class UiDateEditor extends UiField
 
 	}
 	
-	public void validate(FieldSpec spec) throws DataInvalidException 
+	public void validate(FieldSpec spec, String fullLabel) throws DataInvalidException 
 	{
 		if(allowFutureDates)
 			return;

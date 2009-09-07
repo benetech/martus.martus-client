@@ -54,6 +54,7 @@ import org.martus.common.fieldspec.FieldTypeLanguage;
 import org.martus.common.fieldspec.FieldTypeMultiline;
 import org.martus.common.fieldspec.FieldTypeNormal;
 import org.martus.common.fieldspec.FieldTypePopUpTree;
+import org.martus.common.fieldspec.GridFieldSpec;
 import org.martus.swing.UiTableWithCellEditingProtection;
 import org.martus.util.language.LanguageOptions;
 
@@ -87,7 +88,7 @@ public class GridTable extends UiTableWithCellEditingProtection
 
 	public void setColumnWidthsFromHeadersAndData() 
 	{
-		GridTableModel model = (GridTableModel)getModel();
+		GridTableModel model = getGridTableModel();
 		setMaxColumnWidthToHeaderWidth(0);
 		for(int i = 1 ; i < model.getColumnCount(); ++i)
 		{
@@ -186,7 +187,7 @@ public class GridTable extends UiTableWithCellEditingProtection
 		UiLocalization localization = dlgLauncher.GetLocalization();
 		map.put(new FieldTypeBoolean(), new GridBooleanCellEditor());
 		map.put(new FieldTypeDate(), new GridDateCellEditor(localization));
-		map.put(new FieldTypeDateRange(), new GridDateRangeCellEditor(dlgLauncher));
+		map.put(new FieldTypeDateRange(), new GridDateRangeCellEditor(dlgLauncher, getGridFieldSpec()));
 		map.put(new FieldTypeDropdown(), new GridDropDownCellEditor(otherGridFields));
 		map.put(new FieldTypeLanguage(), new GridDropDownCellEditor(otherGridFields));
 		map.put(new FieldTypeNormal(), new GridNormalCellEditor(localization));
@@ -195,6 +196,16 @@ public class GridTable extends UiTableWithCellEditingProtection
 		map.put(new FieldTypeGrid(), new GridNormalCellEditor(localization));
 		map.put(new FieldTypePopUpTree(), new GridPopUpTreeCellEditor(localization));
 		return map;
+	}
+
+	private GridFieldSpec getGridFieldSpec()
+	{
+		return getGridTableModel().getGridFieldSpec();
+	}
+
+	private GridTableModel getGridTableModel()
+	{
+		return (GridTableModel)getModel();
 	}
 	
 	private HashMap createReadOnlyEditorsOrRenderers()
@@ -216,12 +227,12 @@ public class GridTable extends UiTableWithCellEditingProtection
 
 	FieldSpec getFieldSpecForColumn(int column)
 	{
-		return ((GridTableModel)getModel()).getFieldSpecForColumn(column);		
+		return (getGridTableModel()).getFieldSpecForColumn(column);		
 	}
 	
 	FieldSpec getFieldSpecForCell(int row, int column)
 	{
-		return ((GridTableModel)getModel()).getFieldSpecForCell(row, column);
+		return (getGridTableModel()).getFieldSpecForCell(row, column);
 	}
 	
 	public void changeSelection(int rowIndex, int columnIndex,
@@ -244,7 +255,7 @@ public class GridTable extends UiTableWithCellEditingProtection
 	
 	private Object getCellEditorOrRenderer(HashMap map, int row, int column)
 	{
-		GridTableModel model = (GridTableModel)getModel();
+		GridTableModel model = getGridTableModel();
 		return getEditorOrRendererForType(map, model.getCellType(row, column));
 	}
 

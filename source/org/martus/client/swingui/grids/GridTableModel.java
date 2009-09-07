@@ -149,7 +149,7 @@ public class GridTableModel extends AbstractTableModel
 		fireTableDataChanged();
 	}
 
-	private GridFieldSpec getGridFieldSpec()
+	public GridFieldSpec getGridFieldSpec()
 	{
 		return gridData.getSpec();
 	}
