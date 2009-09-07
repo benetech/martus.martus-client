@@ -25,8 +25,11 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.dialogs;
 
+import java.util.HashMap;
+
 import javax.swing.JFrame;
 
+import org.martus.client.swingui.grids.GridDateRangeCellEditor;
 import org.martus.clientside.UiLocalization;
 import org.martus.clientside.UiUtilities;
 
@@ -46,9 +49,20 @@ public class UiDialogLauncher
 		return UiUtilities.confirmDlg(localization, frame, baseTag);
 	}
 
+	public boolean showConfirmDlg(String baseTag, HashMap map)
+	{
+		return UiUtilities.confirmDlg(GetLocalization(), frame, baseTag, map);
+	}
+
 	public void ShowNotifyDialog(String baseTag)
 	{
 		UiUtilities.notifyDlg(localization, frame, baseTag);
+	}
+
+	public void messageDlg(GridDateRangeCellEditor gridDateRangeCellEditor,
+			String baseTag, String message, HashMap tokenReplacement)
+	{
+		UiUtilities.messageDlg(GetLocalization(), frame, baseTag, message, tokenReplacement);
 	}
 
 	public UiLocalization GetLocalization()

@@ -204,7 +204,7 @@ public class UiFlexiDateEditor extends UiField
 			if(begin.isDefinitelyAfter(end))
 			{
 				bgDateBox.requestFocus();
-				throw new DateRangeInvertedException();
+				throw new DateRangeInvertedException(fullLabel);
 			}
 		}
 		

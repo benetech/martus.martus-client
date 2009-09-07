@@ -290,7 +290,7 @@ abstract public class UiBulletinComponentDataSection extends UiBulletinComponent
 			}
 			catch(DateRangeInvertedException e)
 			{
-				throw new DateRangeInvertedException(label); 
+				throw e; 
 			}
 			catch(RequiredFieldIsBlankException e)
 			{

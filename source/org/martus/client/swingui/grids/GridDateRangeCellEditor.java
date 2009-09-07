@@ -26,6 +26,7 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.swingui.grids;
 
 import java.awt.Component;
+import java.util.HashMap;
 
 import javax.swing.JComponent;
 import javax.swing.JTable;
@@ -34,6 +35,7 @@ import org.martus.client.swingui.dialogs.UiDialogLauncher;
 import org.martus.client.swingui.fields.UiFlexiDateEditor;
 import org.martus.client.swingui.fields.UiGridDateRangeEditorViewer;
 import org.martus.common.fieldspec.DataInvalidException;
+import org.martus.common.fieldspec.DateRangeInvertedException;
 import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.fieldspec.GridFieldSpec;
 import org.martus.swing.UiComboBox;
@@ -52,17 +54,24 @@ public class GridDateRangeCellEditor extends GridCellEditorAndRenderer
 		try
 		{
 			String label = gridSpec.getLabel() + ": " + fieldSpecBeingEdited.getLabel();
-			super.uiField.validate(fieldSpecBeingEdited, label);
+			uiField.validate(fieldSpecBeingEdited, label);
+			return super.stopCellEditing();
+		}
+		catch(DateRangeInvertedException e)
+		{
+			HashMap map = new HashMap();
+			map.put("#FieldLabel#", e.getFieldLabel());
+			if(dlgLauncher.showConfirmDlg("DateRageInvalid", map))
+			{
+				return false;
+			}
+			
 			return super.stopCellEditing();
 		}
 		catch(DataInvalidException e)
 		{
-			if(!dlgLauncher.ShowConfirmDialog("DateRageInvalid"))
-			{
-				super.uiField.setText(originalDate);
-				return super.stopCellEditing();
-			}
-			return false;
+			dlgLauncher.ShowNotifyDialog("UnexpectedError");
+			return true;
 		}
 	}
 

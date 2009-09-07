@@ -184,7 +184,9 @@ public class UiBulletinModifyDlg extends JFrame implements ActionListener, Windo
 		}
 		catch(DateRangeInvertedException e)
 		{
-			observer.messageDlg(this,"ErrorDateRangeInverted", e.getlocalizedTag());
+			HashMap map = new HashMap();
+			map.put("#FieldLabel#", e.getFieldLabel());
+			observer.messageDlg(this, "ErrorDateRangeInverted", "", map);
 		}
 		catch(UiBulletinComponentEditorSection.AttachmentMissingException e)
 		{

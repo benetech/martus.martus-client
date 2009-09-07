@@ -742,8 +742,8 @@ public class EnglishStrings
 "field:confirmSealingSelectedBulletinsCancelcause=The operation in progress will be stopped.",
 "field:confirmSealingSelectedBulletinsCanceleffect=If you do this, bulletins that have already been sealed will remain sealed, and bulletins that have not been processed yet will remain in their current state.",
 
-"field:confirmDateRageInvalidcause=The date range you entered is invalid.  The end date occurs before the begin date.",
-"field:confirmDateRageInvalideffect=Answering Yes will take you back to the date range to fix the problem.  Answering No will revert the date back to its original value.",
+"field:confirmDateRageInvalidcause=The date range you entered is invalid because the end date occurs before the begin date.",
+"field:confirmDateRageInvalideffect=Answering Yes will take you back to the '#FieldLabel#' date range to fix the problem.  Answering No will swap the begin and end dates so they are in order.",
 
 "field:confirmSealSelectedBulletinscause=This will seal all the currently selected draft bulletins.",
 "field:confirmSealSelectedBulletinseffect=Any selected bulletins that are already sealed will remain unchanged.",
@@ -873,7 +873,7 @@ public class EnglishStrings
 
 "field:messageServerNewscause=The current server has sent this message:",
 "field:messageErrorDateInFuturecause=This date occurs in the future:",
-"field:messageErrorDateRangeInvertedcause=This date range has an end date that is earlier than the start date:",
+"field:messageErrorDateRangeInvertedcause=This date range has an end date that is earlier than the start date: #FieldLabel#",
 "field:messageErrorAttachmentMissingcause=The attachment could not be located.",
 "field:messageErrorRequiredFieldBlankcause=This field is required and cannot be left blank: #FieldLabel#",
 
