@@ -893,7 +893,7 @@ public class EnglishStrings
 	"\n" +
 	"You can put multiple fields on a single row in your bulletin by using <KeepWithPrevious/> in the field definition.\n" +
 	"\n" +
-	"You can require certain fields to be entered before saving a bulletin by using <RequiredField/> in the field definition.\n" +
+	"You can require certain fields or grid columns to be entered before saving a bulletin by using <RequiredField/> in the field definition.\n" +
 	"\n" +
 	"You can populate drop-down lists (either inside or outside of a grid) with values that have been entered in a grid elsewhere in your bulletin by using <DataSource> instead of <Choices> in the field definition.\n" +
 	"\n" +
@@ -992,16 +992,18 @@ public class EnglishStrings
 	"<Label>Profession History</Label>\n" +
 	"<GridSpecDetails>\n" +
 	"<Column type='DROPDOWN'><Tag></Tag><Label>First Name</Label>\n" +
-	"<DataSource>\n" +
-	"<GridFieldTag>VictimInformationGrid</GridFieldTag>\n" +
-	"<GridColumnLabel>First Name</GridColumnLabel>\n" +
-	"</DataSource>\n" +
+	" <DataSource>\n" +
+	" <GridFieldTag>VictimInformationGrid</GridFieldTag>\n" +
+	" <GridColumnLabel>First Name</GridColumnLabel>\n" +
+	" </DataSource>\n" +
+	" <RequiredField/>\n" +
 	"</Column>\n" +
 	"<Column type='DROPDOWN'><Tag></Tag><Label>Last Name</Label>\n" +
-	"<DataSource>\n" +
-	"<GridFieldTag>VictimInformationGrid</GridFieldTag>\n" +
-	"<GridColumnLabel>Last Name</GridColumnLabel>\n" +
-	"</DataSource>\n" +
+	" <DataSource>\n" +
+	" <GridFieldTag>VictimInformationGrid</GridFieldTag>\n" +
+	" <GridColumnLabel>Last Name</GridColumnLabel>\n" +
+	" </DataSource>\n" +
+	" <RequiredField/>\n" +
 	"</Column>\n" +
 	"<Column type='STRING'><Tag></Tag><Label>Profession</Label></Column>\n" +
 	"<Column type='DATERANGE'><Tag></Tag><Label>Dates of Profession</Label></Column>\n" +
