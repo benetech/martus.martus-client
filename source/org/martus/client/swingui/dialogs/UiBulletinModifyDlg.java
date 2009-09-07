@@ -55,11 +55,11 @@ import org.martus.client.swingui.bulletincomponent.UiBulletinComponent;
 import org.martus.client.swingui.bulletincomponent.UiBulletinComponentEditorSection;
 import org.martus.client.swingui.bulletincomponent.UiBulletinEditor;
 import org.martus.client.swingui.fields.UiDateEditor;
-import org.martus.client.swingui.fields.UiFlexiDateEditor;
 import org.martus.clientside.UiLocalization;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.crypto.MartusCrypto.CryptoException;
 import org.martus.common.crypto.MartusCrypto.EncryptionException;
+import org.martus.common.fieldspec.DateRangeInvertedException;
 import org.martus.common.fieldspec.RequiredFieldIsBlankException;
 import org.martus.swing.UiButton;
 import org.martus.swing.UiScrollPane;
@@ -182,7 +182,7 @@ public class UiBulletinModifyDlg extends JFrame implements ActionListener, Windo
 		{
 			observer.messageDlg(this,"ErrorDateInFuture", e.getlocalizedTag());
 		}
-		catch(UiFlexiDateEditor.DateRangeInvertedException e)
+		catch(DateRangeInvertedException e)
 		{
 			observer.messageDlg(this,"ErrorDateRangeInverted", e.getlocalizedTag());
 		}

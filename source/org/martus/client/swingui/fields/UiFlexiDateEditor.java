@@ -38,6 +38,7 @@ import javax.swing.JPanel;
 
 import org.martus.clientside.UiLocalization;
 import org.martus.common.fieldspec.DataInvalidException;
+import org.martus.common.fieldspec.DateRangeInvertedException;
 import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.fieldspec.StandardFieldSpecs;
 import org.martus.common.utilities.MartusFlexidate;
@@ -265,20 +266,6 @@ public class UiFlexiDateEditor extends UiField
 			
 		if (mfd.hasDateRange())
 			flexiDateRB.setSelected(true);
-	}
-	
-	public static class DateRangeInvertedException extends DataInvalidException
-	{
-		public DateRangeInvertedException()
-		{
-			super(null);
-		}
-		
-		public DateRangeInvertedException(String tag)
-		{
-			super(tag);
-		}
-
 	}
 	
 	JComponent 					component;
