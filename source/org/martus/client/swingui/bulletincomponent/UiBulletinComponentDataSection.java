@@ -282,7 +282,7 @@ abstract public class UiBulletinComponentDataSection extends UiBulletinComponent
 				label = fieldSpecs[fieldNum].getLabel();
 			try 
 			{
-				fields[fieldNum].validate(fieldSpecs[fieldNum]);
+				fields[fieldNum].validate(fieldSpecs[fieldNum], label);
 			} 
 			catch (UiDateEditor.DateFutureException e) 
 			{

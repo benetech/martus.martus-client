@@ -875,7 +875,7 @@ public class EnglishStrings
 "field:messageErrorDateInFuturecause=This date occurs in the future:",
 "field:messageErrorDateRangeInvertedcause=This date range has an end date that is earlier than the start date:",
 "field:messageErrorAttachmentMissingcause=The attachment could not be located.",
-"field:messageErrorRequiredFieldBlankcause=This field is required and cannot be left blank:",
+"field:messageErrorRequiredFieldBlankcause=This field is required and cannot be left blank: #FieldLabel#",
 
 "field:CreateCustomFieldsHelp1=The layout of the bulletins is dictated by an XML document.  By default the standard bulletin fields occur at the top of the Custom Field declaration, but they can be moved if desired.  However, there are four required fields that cannot be removed:  'author', 'entrydate', 'language' and 'title'.\n\n",
 "field:CreateCustomFieldsHelp2=For custom (non-standard) fields, you first select the type of field you want.  " +

@@ -36,6 +36,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.io.IOException;
+import java.util.HashMap;
 
 import javax.swing.Box;
 import javax.swing.JButton;
@@ -191,7 +192,9 @@ public class UiBulletinModifyDlg extends JFrame implements ActionListener, Windo
 		}
 		catch(RequiredFieldIsBlankException e)
 		{
-			observer.messageDlg(this, "ErrorRequiredFieldBlank", e.getFieldLabel());
+			HashMap map = new HashMap();
+			map.put("#FieldLabel#", e.getFieldLabel());
+			observer.messageDlg(this, "ErrorRequiredFieldBlank", "", map);
 		}
 		catch (Exception e) 
 		{

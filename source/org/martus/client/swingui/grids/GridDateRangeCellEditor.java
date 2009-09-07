@@ -49,7 +49,9 @@ public class GridDateRangeCellEditor extends GridCellEditorAndRenderer
 	{
 		try
 		{
-			super.uiField.validate(fieldSpecBeingEdited);
+			FieldSpec gridSpec = fieldSpecBeingEdited.getParent();
+			String label = gridSpec.getLabel() + ": " + fieldSpecBeingEdited.getLabel();
+			super.uiField.validate(fieldSpecBeingEdited, label);
 			return super.stopCellEditing();
 		}
 		catch(DataInvalidException e)

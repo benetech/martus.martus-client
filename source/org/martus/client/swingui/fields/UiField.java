@@ -34,7 +34,6 @@ import javax.swing.event.ChangeListener;
 import org.martus.client.core.LanguageChangeListener;
 import org.martus.common.fieldspec.DataInvalidException;
 import org.martus.common.fieldspec.FieldSpec;
-import org.martus.common.fieldspec.RequiredFieldIsBlankException;
 
 abstract public class UiField
 {
@@ -48,22 +47,11 @@ abstract public class UiField
 		focusManager.addFocusableComponents();
 	}
 	
-	public void validate(FieldSpec spec) throws DataInvalidException 
+	public void validate(FieldSpec spec, String labelToShow) throws DataInvalidException 
 	{
-		if(spec.isRequiredField())
-		{
-			validateRequiredValue(spec.getLabel(), getText());
-		}
+		spec.validate(labelToShow, getText());
 	}
 
-	protected void validateRequiredValue(String fieldLabel, String value)
-			throws RequiredFieldIsBlankException
-	{
-		final String REGEXP_ONLY_SPACES = "\\s*";
-		if(value.matches(REGEXP_ONLY_SPACES))
-			throw new RequiredFieldIsBlankException(fieldLabel);
-	}
-	
 	public void setListener(ChangeListener listener)
 	{
 	}
