@@ -48,7 +48,6 @@ import org.martus.client.bulletinstore.ClientBulletinStore.AddOlderVersionToFold
 import org.martus.client.core.EncryptionChangeListener;
 import org.martus.client.core.LanguageChangeListener;
 import org.martus.client.core.MartusApp;
-import org.martus.client.core.RequiredFieldIsBlankException;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.WindowObscurer;
 import org.martus.client.swingui.bulletincomponent.UiBulletinComponent;
@@ -60,6 +59,7 @@ import org.martus.clientside.UiLocalization;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.crypto.MartusCrypto.CryptoException;
 import org.martus.common.crypto.MartusCrypto.EncryptionException;
+import org.martus.common.fieldspec.RequiredFieldIsBlankException;
 import org.martus.swing.UiButton;
 import org.martus.swing.UiScrollPane;
 import org.martus.swing.Utilities;

@@ -28,8 +28,8 @@ package org.martus.client.swingui.fields;
 
 import javax.swing.JComponent;
 
-import org.martus.client.core.DataInvalidException;
 import org.martus.clientside.UiLocalization;
+import org.martus.common.fieldspec.DataInvalidException;
 import org.martus.common.fieldspec.FieldSpec;
 import org.martus.util.MultiCalendar;
 

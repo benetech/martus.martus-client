@@ -36,8 +36,8 @@ import javax.swing.ButtonGroup;
 import javax.swing.JComponent;
 import javax.swing.JPanel;
 
-import org.martus.client.core.DataInvalidException;
 import org.martus.clientside.UiLocalization;
+import org.martus.common.fieldspec.DataInvalidException;
 import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.fieldspec.StandardFieldSpecs;
 import org.martus.common.utilities.MartusFlexidate;

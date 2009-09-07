@@ -31,10 +31,10 @@ import java.awt.event.FocusListener;
 import javax.swing.JComponent;
 import javax.swing.event.ChangeListener;
 
-import org.martus.client.core.DataInvalidException;
 import org.martus.client.core.LanguageChangeListener;
-import org.martus.client.core.RequiredFieldIsBlankException;
+import org.martus.common.fieldspec.DataInvalidException;
 import org.martus.common.fieldspec.FieldSpec;
+import org.martus.common.fieldspec.RequiredFieldIsBlankException;
 
 abstract public class UiField
 {

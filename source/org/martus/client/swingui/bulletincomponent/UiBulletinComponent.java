@@ -36,13 +36,13 @@ import javax.swing.Scrollable;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
-import org.martus.client.core.DataInvalidException;
 import org.martus.client.core.EncryptionChangeListener;
 import org.martus.client.core.LanguageChangeListener;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.fields.UiField;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.crypto.MartusCrypto;
+import org.martus.common.fieldspec.DataInvalidException;
 import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.packet.FieldDataPacket;
 import org.martus.util.language.LanguageOptions;

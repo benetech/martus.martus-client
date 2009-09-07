@@ -30,10 +30,10 @@ import java.awt.Component;
 import javax.swing.JComponent;
 import javax.swing.JTable;
 
-import org.martus.client.core.DataInvalidException;
 import org.martus.client.swingui.dialogs.UiDialogLauncher;
 import org.martus.client.swingui.fields.UiFlexiDateEditor;
 import org.martus.client.swingui.fields.UiGridDateRangeEditorViewer;
+import org.martus.common.fieldspec.DataInvalidException;
 import org.martus.common.fieldspec.FieldSpec;
 import org.martus.swing.UiComboBox;
 

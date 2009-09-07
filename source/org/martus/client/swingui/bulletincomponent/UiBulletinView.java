@@ -30,12 +30,12 @@ import java.io.IOException;
 
 import javax.swing.event.ChangeEvent;
 
-import org.martus.client.core.DataInvalidException;
 import org.martus.client.core.EncryptionChangeListener;
 import org.martus.client.core.LanguageChangeListener;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.crypto.MartusCrypto;
+import org.martus.common.fieldspec.DataInvalidException;
 
 public class UiBulletinView extends UiBulletinComponent
 {
