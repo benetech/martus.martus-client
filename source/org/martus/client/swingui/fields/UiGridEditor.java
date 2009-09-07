@@ -53,21 +53,14 @@ public class UiGridEditor extends UiEditableGrid
 		super.validate(spec, fullLabel);
 		
 		GridFieldSpec gridSpec = (GridFieldSpec)spec;
-		for(int col = 0; col < gridSpec.getColumnCount(); ++col)
-			validateColumn(gridSpec, col);
-	}
-
-	private void validateColumn(GridFieldSpec gridSpec, int col) throws DataInvalidException
-	{
-		FieldSpec columnSpec = gridSpec.getFieldSpec(col);
-		String fullLabel = gridSpec.getLabel() + ": " + columnSpec.getLabel();
-
-		if(columnSpec.isRequiredField())
+		for(int row = 0; row < getGridData().getRowCount(); ++row)
 		{
-			for(int row = 0; row < getGridData().getRowCount(); ++row)
+			for(int col = 0; col < gridSpec.getColumnCount(); ++col)
 			{
+				FieldSpec columnSpec = gridSpec.getFieldSpec(col);
 				String value = getGridData().getValueAt(row, col);
-				columnSpec.validate(fullLabel, value);
+				String fullColumnLabel = gridSpec.getLabel() + ": " + columnSpec.getLabel();
+				columnSpec.validate(fullColumnLabel, value);
 			}
 		}
 	}
