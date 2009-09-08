@@ -27,12 +27,12 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.swingui.grids;
 
 import org.martus.client.swingui.fields.UiDateViewer;
-import org.martus.clientside.UiLocalization;
+import org.martus.common.MiniLocalization;
 import org.martus.common.utilities.DateUtilities;
 
 public class GridDateCellViewer extends GridCellEditorAndRenderer
 {
-	GridDateCellViewer(UiLocalization localizationToUse)
+	GridDateCellViewer(MiniLocalization localizationToUse)
 	{
 		super(new UiDateViewer(localizationToUse));
 		localization = localizationToUse;
@@ -44,5 +44,5 @@ public class GridDateCellViewer extends GridCellEditorAndRenderer
 		tmpViewer.setText(DateUtilities.getTodayInStoredFormat());
 		return tmpViewer.getComponent().getPreferredSize().width + INSETS;
 	}
-	UiLocalization localization;	
+	MiniLocalization localization;	
 }

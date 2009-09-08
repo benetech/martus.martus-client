@@ -28,14 +28,14 @@ package org.martus.client.swingui.fields;
 
 import javax.swing.JComponent;
 
-import org.martus.clientside.UiLocalization;
+import org.martus.common.MiniLocalization;
 import org.martus.common.fieldspec.DataInvalidException;
 import org.martus.common.fieldspec.FieldSpec;
 import org.martus.util.MultiCalendar;
 
 public class UiDateEditor extends UiField
 {
-	public UiDateEditor(UiLocalization localizationToUse, MultiCalendar highestAllowableDate)
+	public UiDateEditor(MiniLocalization localizationToUse, MultiCalendar highestAllowableDate)
 	{
 		super(localizationToUse);
 		allowFutureDates = false;

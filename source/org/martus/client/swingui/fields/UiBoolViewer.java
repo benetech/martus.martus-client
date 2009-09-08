@@ -32,16 +32,15 @@ import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.border.LineBorder;
 
-import org.martus.clientside.UiLocalization;
+import org.martus.common.MiniLocalization;
 import org.martus.common.fieldspec.FieldSpec;
 import org.martus.swing.UiLabel;
 
 public class UiBoolViewer extends UiViewerField
 {
-	public UiBoolViewer(UiLocalization localizationToUse)
+	public UiBoolViewer(MiniLocalization localizationToUse)
 	{
 		super(localizationToUse);
-		localization = localizationToUse;
 		widget = new UiLabel();
 		widget.setBorder(new LineBorder(Color.black));
 	}
@@ -60,14 +59,13 @@ public class UiBoolViewer extends UiViewerField
 	{
 		String text = "";
 		if(newText.equals(FieldSpec.TRUESTRING))
-			text = localization.getButtonLabel("yes");
+			text = getLocalization().getButtonLabel("yes");
 		else
-			text = localization.getButtonLabel("no");
+			text = getLocalization().getButtonLabel("no");
 
 		widget.setText(" " + text + " ");
 	}
 
-	UiLocalization localization;
 	JLabel widget;
 }
 

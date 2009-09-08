@@ -41,6 +41,7 @@ abstract public class UiField
 	public UiField(MiniLocalization localizationToUse)
 	{
 		focusManager = new FocusManager(this);
+		localization = localizationToUse;
 	}
 	
 	public void initalize()
@@ -51,6 +52,11 @@ abstract public class UiField
 	public void validate(FieldSpec spec, String labelToShow) throws DataInvalidException 
 	{
 		spec.validate(labelToShow, getText());
+	}
+	
+	public MiniLocalization getLocalization()
+	{
+		return localization;
 	}
 
 	public void setListener(ChangeListener listener)
@@ -72,5 +78,6 @@ abstract public class UiField
 	abstract public void setText(String newText);
 
 	FocusManager focusManager;
+	private MiniLocalization localization;
 }
 

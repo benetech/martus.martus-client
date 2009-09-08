@@ -54,7 +54,7 @@ import javax.swing.tree.TreePath;
 import javax.swing.tree.TreeSelectionModel;
 
 import org.martus.client.search.SearchFieldTreeNode;
-import org.martus.clientside.UiLocalization;
+import org.martus.common.MiniLocalization;
 import org.martus.common.fieldspec.MiniFieldSpec;
 import org.martus.common.fieldspec.PopUpTreeFieldSpec;
 import org.martus.common.fieldspec.SearchFieldTreeModel;
@@ -67,7 +67,7 @@ import org.martus.swing.Utilities;
 
 public class UiPopUpTreeEditor extends UiField implements ActionListener
 {
-	public UiPopUpTreeEditor(UiLocalization localizationToUse)
+	public UiPopUpTreeEditor(MiniLocalization localizationToUse)
 	{
 		super(localizationToUse);
 		localization = localizationToUse;
@@ -172,13 +172,13 @@ public class UiPopUpTreeEditor extends UiField implements ActionListener
 	
 	static class FieldTreeDialog extends JDialog implements TreeSelectionListener
 	{
-		static public FieldTreeDialog create(JComponent parent, PopUpTreeFieldSpec spec, UiLocalization localization)
+		static public FieldTreeDialog create(JComponent parent, PopUpTreeFieldSpec spec, MiniLocalization localization)
 		{
 			Container topLevel = parent.getTopLevelAncestor();
 			return new FieldTreeDialog((JDialog)topLevel, parent.getLocationOnScreen(), spec, localization);
 		}
 		
-		public FieldTreeDialog(JDialog owner, Point location, PopUpTreeFieldSpec specToUse, UiLocalization localization)
+		public FieldTreeDialog(JDialog owner, Point location, PopUpTreeFieldSpec specToUse, MiniLocalization localization)
 		{
 			super(owner);
 			spec = specToUse;
@@ -392,7 +392,7 @@ public class UiPopUpTreeEditor extends UiField implements ActionListener
 		}
 	}
 
-	UiLocalization localization;
+	MiniLocalization localization;
 	PopUpTreeFieldSpec spec;
 	JPanel panel;
 	UiLabel label;

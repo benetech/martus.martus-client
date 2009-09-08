@@ -137,9 +137,9 @@ public class TestLocalization extends TestCaseEnhanced
 	public void testValidLanguageCodes()
 	{
 		assertFalse("null should not be recognized", MtfAwareLocalization.isRecognizedLanguage(null));
-		assertTrue("English should be recognized", MtfAwareLocalization.isRecognizedLanguage(UiLocalization.ENGLISH));
-		assertTrue("Spanish should be recognized", MtfAwareLocalization.isRecognizedLanguage(UiLocalization.SPANISH));
-		assertTrue("Russian should be recognized", MtfAwareLocalization.isRecognizedLanguage(UiLocalization.RUSSIAN));
+		assertTrue("English should be recognized", MtfAwareLocalization.isRecognizedLanguage(MiniLocalization.ENGLISH));
+		assertTrue("Spanish should be recognized", MtfAwareLocalization.isRecognizedLanguage(MiniLocalization.SPANISH));
+		assertTrue("Russian should be recognized", MtfAwareLocalization.isRecognizedLanguage(MiniLocalization.RUSSIAN));
 		assertFalse("Unknown should not be recognized", MtfAwareLocalization.isRecognizedLanguage("XX"));
 	}
 	

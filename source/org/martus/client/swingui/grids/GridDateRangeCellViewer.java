@@ -26,11 +26,11 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.swingui.grids;
 
 import org.martus.client.swingui.fields.UiFlexiDateViewer;
-import org.martus.clientside.UiLocalization;
+import org.martus.common.MiniLocalization;
 
 public class GridDateRangeCellViewer extends GridCellEditorAndRenderer
 {
-	GridDateRangeCellViewer(UiLocalization localizationToUse)
+	GridDateRangeCellViewer(MiniLocalization localizationToUse)
 	{
 		super(new UiFlexiDateViewer(localizationToUse));
 		localization = localizationToUse;
@@ -42,5 +42,5 @@ public class GridDateRangeCellViewer extends GridCellEditorAndRenderer
 		tmpViewer.setText("20001010,20001010+5");
 		return tmpViewer.getComponent().getPreferredSize().width + INSETS;
 	}
-	UiLocalization localization;
+	MiniLocalization localization;
 }

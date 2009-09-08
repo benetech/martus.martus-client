@@ -31,12 +31,12 @@ import javax.swing.JTable;
 
 import org.martus.client.swingui.fields.UiField;
 import org.martus.client.swingui.fields.UiPopUpTreeEditor;
-import org.martus.clientside.UiLocalization;
+import org.martus.common.MiniLocalization;
 import org.martus.common.fieldspec.PopUpTreeFieldSpec;
 
 public class GridPopUpTreeCellEditor extends GridCellEditorAndRenderer
 {
-	GridPopUpTreeCellEditor(UiLocalization localization)
+	GridPopUpTreeCellEditor(MiniLocalization localization)
 	{
 		super(new UiPopUpTreeEditor(localization));
 	}

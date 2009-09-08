@@ -39,14 +39,14 @@ import javax.swing.border.EmptyBorder;
 
 import org.martus.client.swingui.UiConstants;
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.clientside.UiLocalization;
+import org.martus.common.MiniLocalization;
 import org.martus.swing.UiButton;
 import org.martus.swing.UiLabel;
 import org.martus.swing.Utilities;
 
 public class UiSplashDlg extends JDialog implements ActionListener
 {
-	public UiSplashDlg(Frame owner, UiLocalization localization, String text)
+	public UiSplashDlg(Frame owner, MiniLocalization localization, String text)
 	{
 		super(owner, owner.getTitle(), true);
 		String versionInfo = UiMainWindow.getDisplayVersionInfo(localization);

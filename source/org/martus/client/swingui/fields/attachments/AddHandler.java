@@ -31,7 +31,7 @@ import java.io.File;
 
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.tablemodels.AttachmentTableModel;
-import org.martus.clientside.UiLocalization;
+import org.martus.common.MiniLocalization;
 import org.martus.common.bulletin.AttachmentProxy;
 import org.martus.swing.UiFileChooser;
 
@@ -50,7 +50,7 @@ class AddHandler implements ActionListener
 		if(last == null)
 			last = UiFileChooser.getHomeDirectoryFile();
 		
-		UiLocalization localization = mainWindow.getLocalization();
+		MiniLocalization localization = mainWindow.getLocalization();
 		String buttonLabel = localization.getButtonLabel("addattachment");
 		UiFileChooser.FileDialogResults results = null;
 		while(true)

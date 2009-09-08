@@ -30,14 +30,14 @@ import javax.swing.table.AbstractTableModel;
 
 import org.martus.client.bulletinstore.BulletinFolder;
 import org.martus.client.bulletinstore.ClientBulletinStore;
-import org.martus.clientside.UiLocalization;
+import org.martus.common.MiniLocalization;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.bulletin.BulletinConstants;
 import org.martus.common.packet.UniversalId;
 
 public class BulletinTableModel extends AbstractTableModel
 {
-    public BulletinTableModel(UiLocalization localizationToUse)
+    public BulletinTableModel(MiniLocalization localizationToUse)
     {
 		localization = localizationToUse;
     }
@@ -156,6 +156,6 @@ public class BulletinTableModel extends AbstractTableModel
 	};
 
 
-	UiLocalization localization;
+	MiniLocalization localization;
 	BulletinFolder folder;
 }

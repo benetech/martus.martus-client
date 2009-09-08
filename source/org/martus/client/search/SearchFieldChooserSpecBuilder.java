@@ -25,7 +25,7 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.search;
 
-import org.martus.clientside.UiLocalization;
+import org.martus.common.MiniLocalization;
 import org.martus.common.fieldspec.ChoiceItem;
 import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.fieldspec.FieldType;
@@ -34,7 +34,7 @@ import org.martus.common.fieldspec.SearchableFieldChoiceItem;
 
 public class SearchFieldChooserSpecBuilder extends FieldChooserSpecBuilder
 {
-	public SearchFieldChooserSpecBuilder(UiLocalization localizationToUse)
+	public SearchFieldChooserSpecBuilder(MiniLocalization localizationToUse)
 	{
 		super(localizationToUse);
 	}

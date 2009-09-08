@@ -129,7 +129,7 @@ public class UiSortFieldsDlg extends JDialog implements ActionListener
 
 	private UiPopUpTreeEditor createSortChooser(UiMainWindow mainWindow, PopUpTreeFieldSpec spec)
 	{
-		UiLocalization localization = mainWindow.getLocalization();
+		MiniLocalization localization = mainWindow.getLocalization();
 		UiPopUpTreeEditor chooser = new UiPopUpTreeEditor(localization);
 		chooser.setSpec(spec);
 		return chooser;

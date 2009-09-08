@@ -32,14 +32,15 @@ import java.awt.event.ItemListener;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JComponent;
-import org.martus.clientside.UiLocalization;
+
+import org.martus.common.MiniLocalization;
 import org.martus.swing.UiComboBox;
 import org.martus.swing.Utilities;
 import org.martus.util.MultiCalendar;
 
 public class UiDateEditorComponent extends Box
 {
-	public UiDateEditorComponent(UiLocalization localizationToUse, boolean allowFutureDates)
+	public UiDateEditorComponent(MiniLocalization localizationToUse, boolean allowFutureDates)
 	{
 		super(BoxLayout.X_AXIS);
 		localization = localizationToUse;
@@ -288,7 +289,7 @@ public class UiDateEditorComponent extends Box
 	
 	
 	static final int EXTRA_WIDTH_SO_FIELDS_DISPLAY_WHEN_COLAPSED = 20;
-	UiLocalization localization;
+	MiniLocalization localization;
 	boolean allowFuture;
 	UiComboBox yearCombo;	
 	UiComboBox dayCombo;

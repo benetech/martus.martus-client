@@ -27,11 +27,11 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.swingui.bulletincomponent;
 
 import org.martus.client.swingui.HeadQuartersTableModel;
-import org.martus.clientside.UiLocalization;
+import org.martus.common.MiniLocalization;
 
 public class HeadQuartersTableModelEdit extends HeadQuartersTableModel 
 {
-	public HeadQuartersTableModelEdit(UiLocalization localizationToUse) 
+	public HeadQuartersTableModelEdit(MiniLocalization localizationToUse) 
 	{
 		super(localizationToUse);
 		COLUMN_SELECTED = columnCount++;

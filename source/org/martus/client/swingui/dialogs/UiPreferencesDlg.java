@@ -37,6 +37,7 @@ import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.fields.UiChoiceEditor;
 import org.martus.clientside.UiLocalization;
+import org.martus.common.MiniLocalization;
 import org.martus.common.fieldspec.ChoiceItem;
 import org.martus.common.fieldspec.DropDownFieldSpec;
 import org.martus.swing.UiButton;
@@ -142,7 +143,7 @@ public class UiPreferencesDlg extends JDialog implements ActionListener
 	
 	private String buildMdyLabel(String mdyOrder)
 	{
-		UiLocalization localization = owner.getLocalization();
+		MiniLocalization localization = owner.getLocalization();
 		Vector dateParts = new Vector(); 
 		for(int i = 0; i < mdyOrder.length(); ++i)
 		{

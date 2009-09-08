@@ -114,12 +114,12 @@ import org.martus.client.swingui.tablemodels.RetrieveTableModel;
 import org.martus.clientside.ClientSideNetworkGateway;
 import org.martus.clientside.CurrentUiState;
 import org.martus.clientside.MtfAwareLocalization;
-import org.martus.clientside.UiLocalization;
 import org.martus.clientside.UiUtilities;
 import org.martus.common.EnglishCommonStrings;
 import org.martus.common.HQKeys;
 import org.martus.common.MartusLogger;
 import org.martus.common.MartusUtilities;
+import org.martus.common.MiniLocalization;
 import org.martus.common.MartusUtilities.FileVerificationException;
 import org.martus.common.MartusUtilities.ServerErrorException;
 import org.martus.common.bulletin.Bulletin;
@@ -2522,7 +2522,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		return (table.getSelectedBulletinUids().length == 1);
 	}
 	
-	static public String getDisplayVersionInfo(UiLocalization localization)
+	static public String getDisplayVersionInfo(MiniLocalization localization)
 	{
 		String versionInfo = UiConstants.programName;
 		versionInfo += " " + localization.getFieldLabel("aboutDlgVersionInfo");

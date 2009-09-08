@@ -32,7 +32,7 @@ import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 
 import org.martus.client.swingui.grids.GridTableModel;
-import org.martus.clientside.UiLocalization;
+import org.martus.common.MiniLocalization;
 import org.martus.common.fieldspec.ChoiceItem;
 import org.martus.common.fieldspec.DropDownFieldSpec;
 import org.martus.common.fieldspec.FieldSpec;
@@ -43,7 +43,7 @@ import org.martus.common.fieldspec.PopUpTreeFieldSpec;
 public class FancySearchTableModel extends GridTableModel implements TableModelListener
 {
 
-	public FancySearchTableModel(GridFieldSpec fieldSpecToUse, UiLocalization localizationToUse)
+	public FancySearchTableModel(GridFieldSpec fieldSpecToUse, MiniLocalization localizationToUse)
 	{
 		super(fieldSpecToUse);
 		localization = localizationToUse;
@@ -104,7 +104,7 @@ public class FancySearchTableModel extends GridTableModel implements TableModelL
 		return opChoiceVector;
 	}
 
-	private static Vector getContainsChoices(UiLocalization localization)
+	private static Vector getContainsChoices(MiniLocalization localization)
 	{
 		Vector opChoiceVector = new Vector();
 		opChoiceVector.add(new ChoiceItem("", localization.getFieldLabel("SearchOpContains")));
@@ -113,12 +113,12 @@ public class FancySearchTableModel extends GridTableModel implements TableModelL
 	
 	public DropDownFieldSpec getCurrentOpColumnSpec(FieldType selectedFieldType)
 	{
-		UiLocalization uiLocalization = localization;
+		MiniLocalization uiLocalization = localization;
 
 		return getCurrentOpColumnSpec(selectedFieldType, uiLocalization);
 	}
 
-	public static DropDownFieldSpec getCurrentOpColumnSpec(FieldType selectedFieldType, UiLocalization localization)
+	public static DropDownFieldSpec getCurrentOpColumnSpec(FieldType selectedFieldType, MiniLocalization localization)
 	{
 		Vector opChoiceVector = new Vector();
 		if(selectedFieldType.isString() || selectedFieldType.isMultiline())
@@ -175,7 +175,7 @@ public class FancySearchTableModel extends GridTableModel implements TableModelL
 	public static int opColumn = 2;
 	public static int valueColumn = 3;
 	
-	UiLocalization localization;
+	MiniLocalization localization;
 
 }
 

@@ -36,7 +36,7 @@ import javax.swing.ButtonGroup;
 import javax.swing.JComponent;
 import javax.swing.JPanel;
 
-import org.martus.clientside.UiLocalization;
+import org.martus.common.MiniLocalization;
 import org.martus.common.fieldspec.DataInvalidException;
 import org.martus.common.fieldspec.DateRangeInvertedException;
 import org.martus.common.fieldspec.FieldSpec;
@@ -53,10 +53,9 @@ import com.jhlabs.awt.GridLayoutPlus;
 
 public class UiFlexiDateEditor extends UiField
 {
-	public UiFlexiDateEditor(UiLocalization localizationToUse, FieldSpec specToUse)
+	public UiFlexiDateEditor(MiniLocalization localizationToUse, FieldSpec specToUse)
 	{
 		super(localizationToUse);
-		localization = localizationToUse;
 		spec = specToUse;
 		init();
 	}	
@@ -69,10 +68,10 @@ public class UiFlexiDateEditor extends UiField
 			layout.setAlignment(Alignment.EAST);
 		component = new JPanel(layout);
 
-		exactDateRB = new UiRadioButton(localization.getFieldLabel("DateExact"), true);			
+		exactDateRB = new UiRadioButton(getLocalization().getFieldLabel("DateExact"), true);			
 		exactDateRB.addItemListener(new RadioItemListener());
 		
-		flexiDateRB = new UiRadioButton(localization.getFieldLabel("DateRange"));		
+		flexiDateRB = new UiRadioButton(getLocalization().getFieldLabel("DateRange"));		
 		flexiDateRB.addItemListener(new RadioItemListener());
 
 		ButtonGroup radioGroup = new ButtonGroup();
@@ -108,7 +107,7 @@ public class UiFlexiDateEditor extends UiField
 				
 	private void buildBeginDateBox()
 	{				
-		bgDateBox = new UiDateEditorComponent(localization, isCustomDate());								
+		bgDateBox = new UiDateEditorComponent(getLocalization(), isCustomDate());								
 	}
 	
 	private JComponent getBeginDateBox()
@@ -118,7 +117,7 @@ public class UiFlexiDateEditor extends UiField
 
 	private void buildEndDateBox()
 	{		
-		endDateBox = new UiDateEditorComponent(localization, isCustomDate());								
+		endDateBox = new UiDateEditorComponent(getLocalization(), isCustomDate());								
 	}
 		
 	private JComponent getEndDateBox()
@@ -261,7 +260,7 @@ public class UiFlexiDateEditor extends UiField
 		
 	public void setText(String newText)
 	{		
-		MartusFlexidate mfd = localization.createFlexidateFromStoredData(newText);
+		MartusFlexidate mfd = getLocalization().createFlexidateFromStoredData(newText);
 		bgDateBox.setDate(mfd.getBeginDate());
 		endDateBox.setDate(mfd.getEndDate());
 			
@@ -271,7 +270,6 @@ public class UiFlexiDateEditor extends UiField
 	
 	JComponent 					component;
 			
-	protected UiLocalization localization;	
 	private UiRadioButton 		exactDateRB;
 	private UiRadioButton 		flexiDateRB;
 	protected Box			 	flexiDateBox;

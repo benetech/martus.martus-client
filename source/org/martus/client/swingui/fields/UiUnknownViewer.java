@@ -30,11 +30,11 @@ import javax.swing.JComponent;
 import javax.swing.JLabel;
 
 import org.martus.client.swingui.UiWarningLabel;
-import org.martus.clientside.UiLocalization;
+import org.martus.common.MiniLocalization;
 
 public class UiUnknownViewer extends UiViewerField
 {
-	public UiUnknownViewer(UiLocalization localizationToUse)
+	public UiUnknownViewer(MiniLocalization localizationToUse)
 	{
 		super(localizationToUse);
 		component = new UiWarningLabel();

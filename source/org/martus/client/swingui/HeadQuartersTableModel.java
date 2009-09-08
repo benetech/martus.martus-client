@@ -30,14 +30,14 @@ import java.util.Iterator;
 import java.util.Vector;
 
 
-import org.martus.clientside.UiLocalization;
 import org.martus.common.HQKey;
 import org.martus.common.HQKeys;
+import org.martus.common.MiniLocalization;
 import org.martus.swing.UiTableModel;
 
 public abstract class HeadQuartersTableModel extends UiTableModel 
 {
-	public HeadQuartersTableModel(UiLocalization localizationToUse)
+	public HeadQuartersTableModel(MiniLocalization localizationToUse)
 	{
 		localization = localizationToUse;
 		entries = new Vector();
@@ -215,6 +215,6 @@ public abstract class HeadQuartersTableModel extends UiTableModel
 	public int COLUMN_PUBLIC_CODE = -1;
 	public int COLUMN_LABEL = -1;
 	public int columnCount;
-	UiLocalization localization;
+	MiniLocalization localization;
 	HeadQuartersSelectionListener selectionListener;
 }

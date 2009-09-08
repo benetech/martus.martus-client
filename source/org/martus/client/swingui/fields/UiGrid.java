@@ -50,7 +50,6 @@ import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.dialogs.UiDialogLauncher;
 import org.martus.client.swingui.grids.GridTable;
 import org.martus.client.swingui.grids.GridTableModel;
-import org.martus.clientside.UiLocalization;
 import org.martus.common.GridData;
 import org.martus.common.fieldspec.ChoiceItem;
 import org.martus.common.fieldspec.DropDownFieldSpec;
@@ -108,11 +107,6 @@ abstract public class UiGrid extends UiField
 	{
 		return model.getGridData().getSpec().getTag();
 	} 
-	
-	protected UiLocalization getLocalization()
-	{
-		return table.getDialogLauncher().GetLocalization();
-	}
 	
 	protected Vector createButtons()
 	{

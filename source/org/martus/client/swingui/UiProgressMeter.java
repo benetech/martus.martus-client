@@ -36,7 +36,7 @@ import javax.swing.JProgressBar;
 import javax.swing.border.BevelBorder;
 
 import org.martus.client.swingui.dialogs.UiProgressWithCancelDlg;
-import org.martus.clientside.UiLocalization;
+import org.martus.common.MiniLocalization;
 import org.martus.common.ProgressMeterInterface;
 import org.martus.swing.UiLabel;
 import org.martus.swing.UiLanguageDirection;
@@ -44,7 +44,7 @@ import org.martus.swing.Utilities;
 
 public class UiProgressMeter extends JPanel implements ProgressMeterInterface
 {
-	public UiProgressMeter(UiProgressWithCancelDlg dlg, UiLocalization localizationToUse)
+	public UiProgressMeter(UiProgressWithCancelDlg dlg, MiniLocalization localizationToUse)
 	{
 		super();
 		localization = localizationToUse;
@@ -98,5 +98,5 @@ public class UiProgressMeter extends JPanel implements ProgressMeterInterface
 	private JLabel statusMessage;
 	private JProgressBar progressMeter;
 	private UiProgressWithCancelDlg parentDlg;
-	private UiLocalization localization;
+	private MiniLocalization localization;
 }

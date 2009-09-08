@@ -29,15 +29,14 @@ package org.martus.client.swingui.fields;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
 
-import org.martus.clientside.UiLocalization;
+import org.martus.common.MiniLocalization;
 import org.martus.swing.UiLabel;
 
 public class UiDateViewer extends UiViewerField
 {
-	public UiDateViewer(UiLocalization localizationToUse)
+	public UiDateViewer(MiniLocalization localizationToUse)
 	{
 		super(localizationToUse);
-		localization = localizationToUse;
 		label = new UiLabel();
 	}
 
@@ -54,11 +53,10 @@ public class UiDateViewer extends UiViewerField
 	public void setText(String newText)
 	{
 		storedValue = newText;
-		String value = localization.convertStoredDateToDisplay(newText);
+		String value = getLocalization().convertStoredDateToDisplay(newText);
 		label.setText(SPACE + value + SPACE);
 	}
 
-	UiLocalization localization;
 	JLabel label;
 	String storedValue;
 	private static final String SPACE = "  ";

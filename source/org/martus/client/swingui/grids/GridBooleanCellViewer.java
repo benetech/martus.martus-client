@@ -27,11 +27,11 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.swingui.grids;
 
 import org.martus.client.swingui.fields.UiBoolViewer;
-import org.martus.clientside.UiLocalization;
+import org.martus.common.MiniLocalization;
 
 public class GridBooleanCellViewer extends GridCellEditorAndRenderer
 {
-	GridBooleanCellViewer(UiLocalization localization)
+	GridBooleanCellViewer(MiniLocalization localization)
 	{
 		super(new UiBoolViewer(localization));
 	}

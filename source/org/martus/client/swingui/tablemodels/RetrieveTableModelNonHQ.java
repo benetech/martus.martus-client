@@ -27,13 +27,13 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.swingui.tablemodels;
 
 import org.martus.client.core.MartusApp;
-import org.martus.clientside.UiLocalization;
+import org.martus.common.MiniLocalization;
 
 
 
 abstract public class RetrieveTableModelNonHQ extends RetrieveTableModel {
 
-	public RetrieveTableModelNonHQ(MartusApp appToUse, UiLocalization localizationToUse)
+	public RetrieveTableModelNonHQ(MartusApp appToUse, MiniLocalization localizationToUse)
 	{
 		super(appToUse, localizationToUse);
 		COLUMN_RETRIEVE_FLAG = columnCount++;

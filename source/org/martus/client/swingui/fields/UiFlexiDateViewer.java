@@ -29,13 +29,13 @@ package org.martus.client.swingui.fields;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
 
-import org.martus.clientside.UiLocalization;
+import org.martus.common.MiniLocalization;
 import org.martus.swing.UiLabel;
 
 
 public class UiFlexiDateViewer extends UiViewerField
 {
-	public UiFlexiDateViewer(UiLocalization localizationToUse)
+	public UiFlexiDateViewer(MiniLocalization localizationToUse)
 	{
 		super(localizationToUse);
 		localization = localizationToUse;
@@ -58,7 +58,7 @@ public class UiFlexiDateViewer extends UiViewerField
 		label.setText(SPACE + display + SPACE);
 	}	
 
-	UiLocalization localization;
+	MiniLocalization localization;
 	JLabel label;
 	private static String	SPACE = "  ";	
 }

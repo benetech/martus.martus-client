@@ -45,7 +45,7 @@ import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.dialogs.UiDialogLauncher;
 import org.martus.client.swingui.grids.GridCellEditorAndRenderer;
 import org.martus.client.swingui.grids.GridTableModel;
-import org.martus.clientside.UiLocalization;
+import org.martus.common.MiniLocalization;
 import org.martus.common.fieldspec.GridFieldSpec;
 import org.martus.swing.UiButton;
 import org.martus.swing.UiLabel;
@@ -86,7 +86,7 @@ public class UiEditableGrid extends UiGrid implements FocusListener
 
 	protected Vector createButtons() 
 	{
-		UiLocalization localization = table.getDialogLauncher().GetLocalization();
+		MiniLocalization localization = table.getDialogLauncher().GetLocalization();
 
 		Vector buttons = new Vector();
 		

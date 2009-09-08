@@ -29,14 +29,14 @@ package org.martus.client.swingui.tablemodels;
 import java.util.Vector;
 
 import org.martus.client.core.MartusApp;
-import org.martus.clientside.UiLocalization;
+import org.martus.common.MiniLocalization;
 import org.martus.common.MartusUtilities.ServerErrorException;
 
 
 
 public class RetrieveHQTableModel extends RetrieveTableModelHQ
 {
-	public RetrieveHQTableModel(MartusApp appToUse, UiLocalization localizationToUse)
+	public RetrieveHQTableModel(MartusApp appToUse, MiniLocalization localizationToUse)
 	{
 		super(appToUse, localizationToUse);
 	}

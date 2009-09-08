@@ -37,8 +37,8 @@ import org.martus.client.bulletinstore.ClientBulletinStore;
 import org.martus.client.core.MartusApp;
 import org.martus.client.swingui.RetrieveSummariesProgressMeter;
 import org.martus.clientside.ClientSideNetworkGateway;
-import org.martus.clientside.UiLocalization;
 import org.martus.common.BulletinSummary;
+import org.martus.common.MiniLocalization;
 import org.martus.common.MartusUtilities.ServerErrorException;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.crypto.MartusCrypto;
@@ -52,7 +52,7 @@ import org.martus.swing.UiTableModel;
 
 abstract public class RetrieveTableModel extends UiTableModel  
 {
-	public RetrieveTableModel(MartusApp appToUse, UiLocalization localizationToUse)
+	public RetrieveTableModel(MartusApp appToUse, MiniLocalization localizationToUse)
 	{
 		app = appToUse;
 		localization = localizationToUse;
@@ -166,7 +166,7 @@ abstract public class RetrieveTableModel extends UiTableModel
 		return null;
 	}
 	
-	UiLocalization getLocalization()
+	MiniLocalization getLocalization()
 	{
 		return localization;
 	}
@@ -650,7 +650,7 @@ abstract public class RetrieveTableModel extends UiTableModel
 	}
 
 	MartusApp app;
-	UiLocalization localization;
+	MiniLocalization localization;
 	int columnCount;
 	int currentSortColumn;
 	

@@ -25,14 +25,14 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.fields;
 
-import org.martus.clientside.UiLocalization;
+import org.martus.common.MiniLocalization;
 import org.martus.common.fieldspec.DropDownFieldSpec;
 import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.fieldspec.FieldType;
 
 public class FieldDataFormatter 
 {
-	public static String formatData(FieldSpec spec, String storedData, UiLocalization localization)
+	public static String formatData(FieldSpec spec, String storedData, MiniLocalization localization)
 	{
 		String formattedData = storedData;
 		FieldType type = spec.getType();
@@ -50,7 +50,7 @@ public class FieldDataFormatter
 		return formattedData;
 	}
 	
-	private static String formatBooleanValue(String storedData, UiLocalization localization)
+	private static String formatBooleanValue(String storedData, MiniLocalization localization)
 	{
 		if(storedData.equals(FieldSpec.TRUESTRING))
 			return localization.getButtonLabel("yes");

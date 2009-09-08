@@ -29,8 +29,8 @@ package org.martus.client.swingui.actions;
 import javax.swing.AbstractAction;
 
 import org.martus.client.core.MartusApp;
+import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.clientside.UiLocalization;
 import org.martus.common.bulletinstore.BulletinStore;
 
 abstract public class UiMartusAction extends AbstractAction
@@ -48,7 +48,7 @@ abstract public class UiMartusAction extends AbstractAction
 	{
 		return getApp().getStore();
 	}
-	protected UiLocalization getLocalization()
+	protected MartusLocalization getLocalization()
 	{
 		return mainWindow.getLocalization();
 	}
