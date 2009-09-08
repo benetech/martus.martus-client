@@ -37,6 +37,7 @@ public class UiDateEditor extends UiField
 {
 	public UiDateEditor(UiLocalization localizationToUse, MultiCalendar highestAllowableDate)
 	{
+		super(localizationToUse);
 		allowFutureDates = false;
 		if(highestAllowableDate == null)
 			allowFutureDates = true;

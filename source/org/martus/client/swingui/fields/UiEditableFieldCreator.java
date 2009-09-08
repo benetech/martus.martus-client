@@ -58,12 +58,12 @@ public class UiEditableFieldCreator extends UiFieldCreator
 
 	public UiField createMessageField(FieldSpec spec)
 	{
-		return new UiMessageField(spec, mainWindow.getEditingTextFieldColumns());
+		return new UiMessageField(spec, mainWindow.getEditingTextFieldColumns(), mainWindow.getLocalization());
 	}
 
 	public UiField createChoiceField(DropDownFieldSpec spec)
 	{
-		UiChoiceEditor dropDownField = new UiChoiceEditor(spec);
+		UiChoiceEditor dropDownField = new UiChoiceEditor(spec, mainWindow.getLocalization());
 		return dropDownField;
 	}
 	
@@ -83,7 +83,7 @@ public class UiEditableFieldCreator extends UiFieldCreator
 
 	public UiField createBoolField(FieldSpec spec)
 	{
-		return new UiBoolEditor();
+		return new UiBoolEditor(getLocalization());
 	}
 
 	public UiField createGridField(GridFieldSpec fieldSpec)

@@ -32,12 +32,13 @@ import javax.swing.JComponent;
 import javax.swing.event.ChangeListener;
 
 import org.martus.client.core.LanguageChangeListener;
+import org.martus.common.MiniLocalization;
 import org.martus.common.fieldspec.DataInvalidException;
 import org.martus.common.fieldspec.FieldSpec;
 
 abstract public class UiField
 {
-	public UiField()
+	public UiField(MiniLocalization localizationToUse)
 	{
 		focusManager = new FocusManager(this);
 	}

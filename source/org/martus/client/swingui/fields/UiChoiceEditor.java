@@ -36,6 +36,7 @@ import javax.swing.JComponent;
 import javax.swing.JList;
 
 import org.martus.client.core.LanguageChangeListener;
+import org.martus.common.MiniLocalization;
 import org.martus.common.fieldspec.ChoiceItem;
 import org.martus.common.fieldspec.DropDownFieldSpec;
 import org.martus.swing.UiComboBox;
@@ -44,14 +45,14 @@ import org.martus.util.language.LanguageOptions;
 
 public class UiChoiceEditor extends UiChoice implements ActionListener
 {
-	public UiChoiceEditor()
+	public UiChoiceEditor(MiniLocalization localizationToUse)
 	{
-		this(null);
+		this(null, localizationToUse);
 	}
 	
-	public UiChoiceEditor(DropDownFieldSpec dropDownSpec)
+	public UiChoiceEditor(DropDownFieldSpec dropDownSpec, MiniLocalization localizationToUse)
 	{
-		super(dropDownSpec);
+		super(dropDownSpec, localizationToUse);
 	}
 	
 	protected void initialize()

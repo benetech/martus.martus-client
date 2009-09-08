@@ -27,13 +27,14 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.swingui.grids;
 
 import org.martus.client.swingui.fields.UiBoolEditor;
+import org.martus.common.MiniLocalization;
 import org.martus.swing.UiCheckBox;
 
 public class GridBooleanCellEditor extends GridCellEditorAndRenderer
 {
-	GridBooleanCellEditor()
+	GridBooleanCellEditor(MiniLocalization localizationToUse)
 	{
-		super(new UiBoolEditor());
+		super(new UiBoolEditor(localizationToUse));
 	}
 
 	public void spaceWasPressed()

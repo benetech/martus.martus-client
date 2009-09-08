@@ -67,12 +67,12 @@ public class UiReadOnlyFieldCreator extends UiFieldCreator
 
 	public UiField createMessageField(FieldSpec spec)
 	{
-		return new UiMessageField(spec, mainWindow.getPreviewTextFieldColumns());
+		return new UiMessageField(spec, mainWindow.getPreviewTextFieldColumns(), mainWindow.getLocalization());
 	}
 
 	public UiField createChoiceField(DropDownFieldSpec spec)
 	{
-		return new UiChoiceViewer(spec);
+		return new UiChoiceViewer(spec, mainWindow.getLocalization());
 	}
 
 	public UiField createBoolField(FieldSpec spec)

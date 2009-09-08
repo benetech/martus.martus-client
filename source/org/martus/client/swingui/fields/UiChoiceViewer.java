@@ -29,15 +29,16 @@ package org.martus.client.swingui.fields;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
 
+import org.martus.common.MiniLocalization;
 import org.martus.common.fieldspec.ChoiceItem;
 import org.martus.common.fieldspec.FieldSpec;
 import org.martus.swing.UiLabel;
 
 public class UiChoiceViewer extends UiChoice
 {
-	public UiChoiceViewer(FieldSpec dropDownSpec)
+	public UiChoiceViewer(FieldSpec dropDownSpec, MiniLocalization localizationToUse)
 	{
-		super(dropDownSpec);
+		super(dropDownSpec, localizationToUse);
 	}
 	
 	protected void initialize()

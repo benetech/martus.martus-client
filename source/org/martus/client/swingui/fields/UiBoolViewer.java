@@ -40,6 +40,7 @@ public class UiBoolViewer extends UiViewerField
 {
 	public UiBoolViewer(UiLocalization localizationToUse)
 	{
+		super(localizationToUse);
 		localization = localizationToUse;
 		widget = new UiLabel();
 		widget.setBorder(new LineBorder(Color.black));

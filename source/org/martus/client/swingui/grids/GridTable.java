@@ -185,11 +185,11 @@ public class GridTable extends UiTableWithCellEditingProtection
 	{
 		HashMap map = new HashMap();
 		UiLocalization localization = dlgLauncher.GetLocalization();
-		map.put(new FieldTypeBoolean(), new GridBooleanCellEditor());
+		map.put(new FieldTypeBoolean(), new GridBooleanCellEditor(localization));
 		map.put(new FieldTypeDate(), new GridDateCellEditor(localization));
 		map.put(new FieldTypeDateRange(), new GridDateRangeCellEditor(dlgLauncher, getGridFieldSpec()));
-		map.put(new FieldTypeDropdown(), new GridDropDownCellEditor(otherGridFields));
-		map.put(new FieldTypeLanguage(), new GridDropDownCellEditor(otherGridFields));
+		map.put(new FieldTypeDropdown(), new GridDropDownCellEditor(otherGridFields, localization));
+		map.put(new FieldTypeLanguage(), new GridDropDownCellEditor(otherGridFields, localization));
 		map.put(new FieldTypeNormal(), new GridNormalCellEditor(localization));
 		map.put(new FieldTypeMultiline(), new GridNormalCellEditor(localization));
 		map.put(new FieldTypeAnyField(), new GridNormalCellEditor(localization));
@@ -215,8 +215,8 @@ public class GridTable extends UiTableWithCellEditingProtection
 		map.put(new FieldTypeBoolean(), new GridBooleanCellViewer(localization));
 		map.put(new FieldTypeDate(), new GridDateCellViewer(localization));
 		map.put(new FieldTypeDateRange(), new GridDateRangeCellViewer(localization));
-		map.put(new FieldTypeDropdown(), new GridDropDownCellViewer(otherGridFields));
-		map.put(new FieldTypeLanguage(), new GridDropDownCellViewer(otherGridFields));
+		map.put(new FieldTypeDropdown(), new GridDropDownCellViewer(otherGridFields, localization));
+		map.put(new FieldTypeLanguage(), new GridDropDownCellViewer(otherGridFields, localization));
 		map.put(new FieldTypeNormal(), new GridNormalCellEditor(localization));
 		map.put(new FieldTypeMultiline(), new GridNormalCellEditor(localization));
 		map.put(new FieldTypeAnyField(), new GridNormalCellEditor(localization));

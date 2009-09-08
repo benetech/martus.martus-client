@@ -29,14 +29,15 @@ import java.awt.event.ActionListener;
 import java.util.Map;
 
 import org.martus.client.swingui.fields.UiChoiceEditor;
+import org.martus.common.MiniLocalization;
 import org.martus.common.fieldspec.ChoiceItem;
 import org.martus.common.fieldspec.DropDownFieldSpec;
 
 public class GridDropDownCellEditor extends GridDropDownCellEditorOrRenderer
 {
-	GridDropDownCellEditor(Map otherGridFields)
+	GridDropDownCellEditor(Map otherGridFields, MiniLocalization localizationToUse)
 	{
-		super(new UiChoiceEditor(), otherGridFields);
+		super(new UiChoiceEditor(localizationToUse), otherGridFields);
 	}
 	
 	public void setFieldSpec(DropDownFieldSpec spec)

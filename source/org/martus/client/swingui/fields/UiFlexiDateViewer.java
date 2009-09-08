@@ -37,6 +37,7 @@ public class UiFlexiDateViewer extends UiViewerField
 {
 	public UiFlexiDateViewer(UiLocalization localizationToUse)
 	{
+		super(localizationToUse);
 		localization = localizationToUse;
 		label = new UiLabel();
 	}

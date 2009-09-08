@@ -74,6 +74,7 @@ abstract public class UiGrid extends UiField
 	
 	public UiGrid(UiMainWindow mainWindowToUse, GridTableModel modelToUse, UiDialogLauncher dlgLauncher, Map gridFields, boolean isEditable)
 	{
+		super(mainWindowToUse.getLocalization());
 		app = mainWindowToUse.getApp();
 		model = modelToUse;
 		otherGridFields = gridFields;

@@ -33,14 +33,16 @@ import javax.swing.border.LineBorder;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
+import org.martus.common.MiniLocalization;
 import org.martus.common.fieldspec.FieldSpec;
 import org.martus.swing.UiCheckBox;
 import org.martus.swing.UiTextField;
 
 public class UiBoolEditor extends UiField implements ChangeListener
 {
-	public UiBoolEditor()
+	public UiBoolEditor(MiniLocalization localizationToUse)
 	{
+		super(localizationToUse);
 		widget = new UiCheckBox("");
 		widget.addChangeListener(this);
 		UiTextField tmp = new UiTextField();

@@ -55,6 +55,7 @@ public class UiFlexiDateEditor extends UiField
 {
 	public UiFlexiDateEditor(UiLocalization localizationToUse, FieldSpec specToUse)
 	{
+		super(localizationToUse);
 		localization = localizationToUse;
 		spec = specToUse;
 		init();

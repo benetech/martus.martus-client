@@ -28,8 +28,15 @@ package org.martus.client.swingui.fields;
 
 import javax.swing.JComponent;
 
+import org.martus.common.MiniLocalization;
+
 abstract public class UiViewerField extends UiField
 {
+	public UiViewerField(MiniLocalization localizationToUse)
+	{
+		super(localizationToUse);
+	}
+
 	public JComponent[] getFocusableComponents()
 	{
 		return new JComponent[0];

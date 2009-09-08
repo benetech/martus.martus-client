@@ -69,6 +69,7 @@ public class UiPopUpTreeEditor extends UiField implements ActionListener
 {
 	public UiPopUpTreeEditor(UiLocalization localizationToUse)
 	{
+		super(localizationToUse);
 		localization = localizationToUse;
 		
 		listeners = new Vector();

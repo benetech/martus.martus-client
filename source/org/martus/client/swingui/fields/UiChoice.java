@@ -25,14 +25,16 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.fields;
 
+import org.martus.common.MiniLocalization;
 import org.martus.common.fieldspec.ChoiceItem;
 import org.martus.common.fieldspec.DropDownFieldSpec;
 import org.martus.common.fieldspec.FieldSpec;
 
 abstract public class UiChoice extends UiField
 {
-	public UiChoice(FieldSpec dropDownSpec)
+	public UiChoice(FieldSpec dropDownSpec, MiniLocalization localizationToUse)
 	{
+		super(localizationToUse);
 		spec = (DropDownFieldSpec)dropDownSpec;
 		initialize();
 	}

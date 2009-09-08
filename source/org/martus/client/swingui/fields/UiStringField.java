@@ -41,6 +41,7 @@ public abstract class UiStringField extends UiField
 {
 	public UiStringField(UiLocalization localizationToUse)
 	{
+		super(localizationToUse);
 		localization = localizationToUse;
 		mouseAdapter = new TextFieldMouseAdapter();
 	}

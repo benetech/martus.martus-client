@@ -36,6 +36,7 @@ public class UiDateViewer extends UiViewerField
 {
 	public UiDateViewer(UiLocalization localizationToUse)
 	{
+		super(localizationToUse);
 		localization = localizationToUse;
 		label = new UiLabel();
 	}
