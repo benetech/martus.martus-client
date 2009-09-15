@@ -60,7 +60,17 @@ public class UiGridEditor extends UiEditableGrid
 				FieldSpec columnSpec = gridSpec.getFieldSpec(col);
 				String value = getGridData().getValueAt(row, col);
 				String fullColumnLabel = gridSpec.getLabel() + ": " + columnSpec.getLabel();
-				columnSpec.validate(fullColumnLabel, value, getLocalization());
+				try
+				{
+					columnSpec.validate(fullColumnLabel, value, getLocalization());
+				}
+				catch(DataInvalidException e)
+				{
+					table.getSelectionModel().setSelectionInterval(row, row);
+					table.getColumnModel().getSelectionModel().setSelectionInterval(col, col);
+					table.requestFocusInWindow();
+					throw e;
+				}
 			}
 		}
 	}

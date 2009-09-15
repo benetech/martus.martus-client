@@ -195,7 +195,15 @@ public class UiFlexiDateEditor extends UiField
 
 	public void validate(FieldSpec specToValidate, String fullLabel) throws DataInvalidException 
 	{
-		super.validate(specToValidate, fullLabel);
+		try
+		{
+			super.validate(specToValidate, fullLabel);
+		}
+		catch(DataInvalidException e)
+		{
+			bgDateBox.requestFocus();
+			throw e;
+		}
 		
 		MultiCalendar begin = getBeginDate();
 		if(isFlexiDate())
