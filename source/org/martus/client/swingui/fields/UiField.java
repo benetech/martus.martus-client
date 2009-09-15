@@ -51,7 +51,7 @@ abstract public class UiField
 	
 	public void validate(FieldSpec spec, String labelToShow) throws DataInvalidException 
 	{
-		spec.validate(labelToShow, getText());
+		spec.validate(labelToShow, getText(), getLocalization());
 	}
 	
 	public MiniLocalization getLocalization()
