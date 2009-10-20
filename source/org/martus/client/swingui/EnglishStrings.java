@@ -240,6 +240,8 @@ public class EnglishStrings
 
 "wintitle:ErrorDateInFuture=Date Invalid",
 "wintitle:ErrorDateRangeInverted=Date Range Invalid",
+"wintitle:ErrorDateTooEarly=Date Too Early",
+"wintitle:ErrorDateTooLate=Date Too Late",
 "wintitle:setupsignin=Martus Setup Signin",
 "wintitle:setupcontact=Martus Setup Contact Information",
 "wintitle:BulletinTemplate=Details Field Default Content",
@@ -874,6 +876,8 @@ public class EnglishStrings
 "field:messageServerNewscause=The current server has sent this message:",
 "field:messageErrorDateInFuturecause=This date occurs in the future:",
 "field:messageErrorDateRangeInvertedcause=This date range has an end date that is earlier than the start date: #FieldLabel#",
+"field:messageErrorDateTooEarlycause=The date entered in '#FieldLabel#' cannot be earlier than #MinimumDate#",
+"field:messageErrorDateTooLatecause=The date entered in '#FieldLabel#' cannot be later than #MaximumDate#",
 "field:messageErrorAttachmentMissingcause=The attachment could not be located.",
 "field:messageErrorRequiredFieldBlankcause=This field is required and cannot be left blank: #FieldLabel#",
 
@@ -894,6 +898,9 @@ public class EnglishStrings
 	"You can put multiple fields on a single row in your bulletin by using <KeepWithPrevious/> in the field definition.\n" +
 	"\n" +
 	"You can require certain fields or grid columns to be entered before saving a bulletin by using <RequiredField/> in the field definition.\n" +
+	"\n" +
+	"You can restrict date fields or date grid columns by using <MinimumDate> and/or <MaximumDate> tags with dates in YYYY-MM-DD format. " +
+	"A blank date means 'today', although it may allow one day earlier or later, due to time zone issues." +
 	"\n" +
 	"You can populate drop-down lists (either inside or outside of a grid) with values that have been entered in a grid elsewhere in your bulletin by using <DataSource> instead of <Choices> in the field definition.\n" +
 	"\n" +
@@ -970,7 +977,7 @@ public class EnglishStrings
 	"<Column type='STRING'><Tag></Tag><Label>First Name</Label></Column>\n" +
 	"<Column type='STRING'><Tag></Tag><Label>Last Name</Label></Column>\n" +
 	"<Column type='BOOLEAN'><Tag></Tag><Label>Is Identified?</Label></Column>\n" +
-	"<Column type='DATE'><Tag></Tag><Label>Date of Birth</Label></Column>\n" +
+	"<Column type='DATE'><Tag></Tag><Label>Date of Birth</Label><MinimumDate>1910-01-01</MinimumDate><MaximumDate/></Column>\n" +
 	"<Column type='DROPDOWN'><Tag></Tag><Label>Sex</Label>\n" +
 		"<Choices>\n<Choice>Male</Choice>\n" +
 		"<Choice>Female</Choice>\n" +

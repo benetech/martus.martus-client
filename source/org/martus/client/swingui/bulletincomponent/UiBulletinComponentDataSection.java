@@ -49,6 +49,8 @@ import org.martus.common.bulletin.Bulletin;
 import org.martus.common.fieldspec.ChoiceItem;
 import org.martus.common.fieldspec.DataInvalidException;
 import org.martus.common.fieldspec.DateRangeInvertedException;
+import org.martus.common.fieldspec.DateTooEarlyException;
+import org.martus.common.fieldspec.DateTooLateException;
 import org.martus.common.fieldspec.DropDownFieldSpec;
 import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.fieldspec.FieldType;
@@ -289,6 +291,14 @@ abstract public class UiBulletinComponentDataSection extends UiBulletinComponent
 				throw new UiDateEditor.DateFutureException(label);
 			}
 			catch(DateRangeInvertedException e)
+			{
+				throw e; 
+			}
+			catch(DateTooEarlyException e)
+			{
+				throw e; 
+			}
+			catch(DateTooLateException e)
 			{
 				throw e; 
 			}

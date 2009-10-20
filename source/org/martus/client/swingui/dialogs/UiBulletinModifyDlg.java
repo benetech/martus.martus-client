@@ -60,6 +60,8 @@ import org.martus.common.bulletin.Bulletin;
 import org.martus.common.crypto.MartusCrypto.CryptoException;
 import org.martus.common.crypto.MartusCrypto.EncryptionException;
 import org.martus.common.fieldspec.DateRangeInvertedException;
+import org.martus.common.fieldspec.DateTooEarlyException;
+import org.martus.common.fieldspec.DateTooLateException;
 import org.martus.common.fieldspec.RequiredFieldIsBlankException;
 import org.martus.swing.UiButton;
 import org.martus.swing.UiScrollPane;
@@ -187,6 +189,20 @@ public class UiBulletinModifyDlg extends JFrame implements ActionListener, Windo
 			HashMap map = new HashMap();
 			map.put("#FieldLabel#", e.getFieldLabel());
 			observer.messageDlg(this, "ErrorDateRangeInverted", "", map);
+		}
+		catch(DateTooEarlyException e)
+		{
+			HashMap map = new HashMap();
+			map.put("#FieldLabel#", e.getFieldLabel());
+			map.put("#MinimumDate#", e.getMinimumDate());
+			observer.messageDlg(this, "ErrorDateTooEarly", "", map);
+		}
+		catch(DateTooLateException e)
+		{
+			HashMap map = new HashMap();
+			map.put("#FieldLabel#", e.getFieldLabel());
+			map.put("#MaximumDate#", e.getMaximumDate());
+			observer.messageDlg(this, "ErrorDateTooLate", "", map);
 		}
 		catch(UiBulletinComponentEditorSection.AttachmentMissingException e)
 		{
