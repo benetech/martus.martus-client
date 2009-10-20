@@ -74,7 +74,7 @@ public class GridDateRangeCellEditor extends GridCellEditorAndRenderer
 		{
 			HashMap map = new HashMap();
 			map.put("#FieldLabel#", e.getFieldLabel());
-			map.put("#MinimumDate#", e.getMinimumDate());
+			map.put("#MinimumDate#", dlgLauncher.GetLocalization().convertStoredDateToDisplay(e.getMinimumDate()));
 			dlgLauncher.messageDlg(this, "ErrorDateTooEarly", "", map);
 			return false;
 		}
@@ -82,7 +82,7 @@ public class GridDateRangeCellEditor extends GridCellEditorAndRenderer
 		{
 			HashMap map = new HashMap();
 			map.put("#FieldLabel#", e.getFieldLabel());
-			map.put("#MaximumDate#", e.getMaximumDate());
+			map.put("#MaximumDate#", dlgLauncher.GetLocalization().convertStoredDateToDisplay(e.getMaximumDate()));
 			dlgLauncher.messageDlg(this, "ErrorDateTooLate", "", map);
 			return false;
 		}

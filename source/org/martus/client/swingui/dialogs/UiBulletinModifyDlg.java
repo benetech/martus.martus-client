@@ -194,14 +194,14 @@ public class UiBulletinModifyDlg extends JFrame implements ActionListener, Windo
 		{
 			HashMap map = new HashMap();
 			map.put("#FieldLabel#", e.getFieldLabel());
-			map.put("#MinimumDate#", e.getMinimumDate());
+			map.put("#MinimumDate#", observer.getLocalization().convertStoredDateToDisplay(e.getMinimumDate()));
 			observer.messageDlg(this, "ErrorDateTooEarly", "", map);
 		}
 		catch(DateTooLateException e)
 		{
 			HashMap map = new HashMap();
 			map.put("#FieldLabel#", e.getFieldLabel());
-			map.put("#MaximumDate#", e.getMaximumDate());
+			map.put("#MaximumDate#", observer.getLocalization().convertStoredDateToDisplay(e.getMaximumDate()));
 			observer.messageDlg(this, "ErrorDateTooLate", "", map);
 		}
 		catch(UiBulletinComponentEditorSection.AttachmentMissingException e)
