@@ -1103,6 +1103,7 @@ public class EnglishStrings
 	"   113 - Data Source Grid not found in same pane as resulting dropdown field\n" +
 	"   114 - Unknown Data Source Grid Column Label\n" +
 	"   115 - Dropdown cannot have both choices and data source\n" +
+	"   116 - Invalid date must be in ISO format YYYY-MM-DD\n" +
 	"   200 - All fields empty\n" +
 	"   201 - Unrecognized Headquarters created this template\n" +
 	"   202 - Security validation error\n" +
