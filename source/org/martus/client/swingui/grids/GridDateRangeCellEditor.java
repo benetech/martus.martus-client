@@ -36,6 +36,8 @@ import org.martus.client.swingui.fields.UiFlexiDateEditor;
 import org.martus.client.swingui.fields.UiGridDateRangeEditorViewer;
 import org.martus.common.fieldspec.DataInvalidException;
 import org.martus.common.fieldspec.DateRangeInvertedException;
+import org.martus.common.fieldspec.DateTooEarlyException;
+import org.martus.common.fieldspec.DateTooLateException;
 import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.fieldspec.GridFieldSpec;
 import org.martus.swing.UiComboBox;
@@ -68,8 +70,25 @@ public class GridDateRangeCellEditor extends GridCellEditorAndRenderer
 			
 			return super.stopCellEditing();
 		}
+		catch(DateTooEarlyException e)
+		{
+			HashMap map = new HashMap();
+			map.put("#FieldLabel#", e.getFieldLabel());
+			map.put("#MinimumDate#", e.getMinimumDate());
+			dlgLauncher.messageDlg(this, "ErrorDateTooEarly", "", map);
+			return false;
+		}
+		catch(DateTooLateException e)
+		{
+			HashMap map = new HashMap();
+			map.put("#FieldLabel#", e.getFieldLabel());
+			map.put("#MaximumDate#", e.getMaximumDate());
+			dlgLauncher.messageDlg(this, "ErrorDateTooLate", "", map);
+			return false;
+		}
 		catch(DataInvalidException e)
 		{
+			e.printStackTrace();
 			dlgLauncher.ShowNotifyDialog("UnexpectedError");
 			return true;
 		}

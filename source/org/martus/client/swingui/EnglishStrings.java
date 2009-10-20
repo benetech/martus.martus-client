@@ -876,8 +876,8 @@ public class EnglishStrings
 "field:messageServerNewscause=The current server has sent this message:",
 "field:messageErrorDateInFuturecause=This date occurs in the future:",
 "field:messageErrorDateRangeInvertedcause=This date range has an end date that is earlier than the start date: #FieldLabel#",
-"field:messageErrorDateTooEarlycause=The date entered in '#FieldLabel#' cannot be earlier than #MinimumDate#",
-"field:messageErrorDateTooLatecause=The date entered in '#FieldLabel#' cannot be later than #MaximumDate#",
+"field:messageErrorDateTooEarlycause=Dates entered in '#FieldLabel#' cannot be earlier than #MinimumDate#",
+"field:messageErrorDateTooLatecause=Dates entered in '#FieldLabel#' cannot be later than #MaximumDate#",
 "field:messageErrorAttachmentMissingcause=The attachment could not be located.",
 "field:messageErrorRequiredFieldBlankcause=This field is required and cannot be left blank: #FieldLabel#",
 
@@ -899,7 +899,8 @@ public class EnglishStrings
 	"\n" +
 	"You can require certain fields or grid columns to be entered before saving a bulletin by using <RequiredField/> in the field definition.\n" +
 	"\n" +
-	"You can restrict date fields or date grid columns by using <MinimumDate> and/or <MaximumDate> tags with a date in YYYY-MM-DD format. " +
+	"You can restrict date fields, date grid columns, date range fields, and date range grid columns " +
+	"by using <MinimumDate> and/or <MaximumDate> tags with a date in YYYY-MM-DD format. " +
 	"NOTE: The year must always be a 'Gregorian' year like 2009, even if Martus is configured to use Thai or Persian dates." +
 	"A blank date means 'today', although it may allow one day earlier or later, due to time zone issues." +
 	"\n" +
@@ -1014,7 +1015,7 @@ public class EnglishStrings
 	" <RequiredField/>\n" +
 	"</Column>\n" +
 	"<Column type='STRING'><Tag></Tag><Label>Profession</Label></Column>\n" +
-	"<Column type='DATERANGE'><Tag></Tag><Label>Dates of Profession</Label></Column>\n" +
+	"<Column type='DATERANGE'><Tag></Tag><Label>Dates of Profession</Label><MaximumDate/></Column>\n" +
 	"</GridSpecDetails>\n" +
 	"</Field>\n",
 
