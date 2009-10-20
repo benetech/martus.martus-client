@@ -901,8 +901,8 @@ public class EnglishStrings
 	"\n" +
 	"You can restrict date fields, date grid columns, date range fields, and date range grid columns " +
 	"by using <MinimumDate> and/or <MaximumDate> tags with a date in YYYY-MM-DD format. " +
-	"NOTE: The year must always be a 'Gregorian' year like 2009, even if Martus is configured to use Thai or Persian dates." +
-	"A blank date means 'today', although it may allow one day earlier or later, due to time zone issues." +
+	"NOTE: The year must always be a 'Gregorian' year like 2009, even if Martus is configured to use Thai or Persian dates. " +
+	"A blank date means 'today', although it may allow one day earlier or later, due to time zone issues. \n" +
 	"\n" +
 	"You can populate drop-down lists (either inside or outside of a grid) with values that have been entered in a grid elsewhere in your bulletin by using <DataSource> instead of <Choices> in the field definition.\n" +
 	"\n" +
