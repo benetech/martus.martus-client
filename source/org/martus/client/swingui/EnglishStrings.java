@@ -899,7 +899,8 @@ public class EnglishStrings
 	"\n" +
 	"You can require certain fields or grid columns to be entered before saving a bulletin by using <RequiredField/> in the field definition.\n" +
 	"\n" +
-	"You can restrict date fields or date grid columns by using <MinimumDate> and/or <MaximumDate> tags with dates in YYYY-MM-DD format. " +
+	"You can restrict date fields or date grid columns by using <MinimumDate> and/or <MaximumDate> tags with a date in YYYY-MM-DD format. " +
+	"NOTE: The year must always be a 'Gregorian' year like 2009, even if Martus is configured to use Thai or Persian dates." +
 	"A blank date means 'today', although it may allow one day earlier or later, due to time zone issues." +
 	"\n" +
 	"You can populate drop-down lists (either inside or outside of a grid) with values that have been entered in a grid elsewhere in your bulletin by using <DataSource> instead of <Choices> in the field definition.\n" +
