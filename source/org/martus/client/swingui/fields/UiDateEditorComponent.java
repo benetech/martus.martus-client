@@ -34,6 +34,7 @@ import javax.swing.BoxLayout;
 import javax.swing.JComponent;
 
 import org.martus.common.MiniLocalization;
+import org.martus.common.fieldspec.AbstractDateOrientedFieldSpec;
 import org.martus.swing.UiComboBox;
 import org.martus.swing.Utilities;
 import org.martus.util.MultiCalendar;
@@ -42,9 +43,16 @@ public class UiDateEditorComponent extends Box
 {
 	public UiDateEditorComponent(MiniLocalization localizationToUse, boolean allowFutureDates)
 	{
+		this(localizationToUse, "1900-01-01", allowFutureDates ? tenYearsFromNow() : DATE_RESTRICTION_TODAY);
+	}
+	
+	public UiDateEditorComponent(MiniLocalization localizationToUse, String minDate, String maxDate)
+	{
 		super(BoxLayout.X_AXIS);
 		localization = localizationToUse;
-		allowFuture = allowFutureDates;
+
+		earliestAllowedDate = AbstractDateOrientedFieldSpec.getAsDate(minDate);
+		latestAllowedDate = AbstractDateOrientedFieldSpec.getAsDate(maxDate);
 		
 		yearCombo = createYearCombo();
 		monthCombo = new UiComboBox();
@@ -60,17 +68,10 @@ public class UiDateEditorComponent extends Box
 
 	private UiComboBox createYearCombo()	
 	{
-		MultiCalendar calToday = new MultiCalendar();
-		int thisYear = localization.getLocalizedYear(calToday);	
-		int maxYear = thisYear;
-		if(allowFuture)
-			maxYear += 10;
-		
-		MultiCalendar cal1900 = MultiCalendar.createFromGregorianYearMonthDay(1900, 1, 1);
-		int minYear = localization.getLocalizedYear(cal1900);
-
 		UiComboBox yCombo = new UiComboBox();
 
+		yCombo.addItem(new YearObject(localization.getFieldLabel("YearUnspecified")));
+		
 		if(THAI_AND_PERSIAN_TESTING)
 		{
 			System.out.println("WARNING: THAI_AND_PERSIAN Testing mode!!!");
@@ -78,7 +79,8 @@ public class UiDateEditorComponent extends Box
 			yCombo.addItem(Integer.toString(2549));
 		}
 		
-		yCombo.addItem(new YearObject(localization.getFieldLabel("YearUnspecified")));
+		int minYear = localization.getLocalizedYear(earliestAllowedDate);
+		int maxYear = localization.getLocalizedYear(latestAllowedDate);
 		
 		for(int year = minYear; year <= maxYear; ++year)
 			yCombo.addItem(new YearObject(year));
@@ -283,15 +285,28 @@ public class UiDateEditorComponent extends Box
 		getComponentsInOrder()[0].requestFocus();
 	}
 	
+	private static String tenYearsFromNow()
+	{
+		MultiCalendar today = AbstractDateOrientedFieldSpec.getAsDate("");
+		int year = today.getGregorianYear()+10;
+		int month = today.getGregorianMonth();
+		int day = today.getGregorianDay();
+		MultiCalendar tenYearsOut = MultiCalendar.createFromGregorianYearMonthDay(year, month, day);
+		return tenYearsOut.toIsoDateString();
+	}
+
 	// Enable the following to add a Persian year and a 
 	// Thai year to the Date Editor year dropdowns
 	static final boolean THAI_AND_PERSIAN_TESTING = false;
 	
-	
+	static final String NO_DATE_RESTRICTION = null;
+	static final String DATE_RESTRICTION_TODAY = "";
 	static final int EXTRA_WIDTH_SO_FIELDS_DISPLAY_WHEN_COLAPSED = 20;
-	MiniLocalization localization;
-	boolean allowFuture;
-	UiComboBox yearCombo;	
-	UiComboBox dayCombo;
-	UiComboBox monthCombo;
+
+	private MiniLocalization localization;
+	private MultiCalendar earliestAllowedDate;
+	private MultiCalendar latestAllowedDate;
+	private UiComboBox yearCombo;	
+	private UiComboBox dayCombo;
+	private UiComboBox monthCombo;
 }
