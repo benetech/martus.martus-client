@@ -1437,7 +1437,8 @@ public class ClientBulletinStore extends BulletinStore
 	
 	public boolean bulletinHasCurrentFieldSpecs(Bulletin b)
 	{
-		return Arrays.equals(b.getTopSectionFieldSpecs(), getTopSectionFieldSpecs());
+		return (Arrays.equals(b.getTopSectionFieldSpecs(), getTopSectionFieldSpecs()) &&
+				Arrays.equals(b.getBottomSectionFieldSpecs(), getBottomSectionFieldSpecs()) );
 	}
 
 	public Bulletin createEmptyBulletin()
