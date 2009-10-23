@@ -41,7 +41,7 @@ public class UiGridViewer extends UiGrid
 {
 	public UiGridViewer(UiMainWindow mainWindowToUse, GridFieldSpec fieldSpec, UiDialogLauncher dlgLauncher, Map otherGrids, int maxGridCharacters)
 	{
-		super(mainWindowToUse, fieldSpec, dlgLauncher, otherGrids, false);
+		super(mainWindowToUse, fieldSpec, dlgLauncher, otherGrids, new UiReadOnlyFieldCreator(mainWindowToUse));
 		table.setMaxGridWidth(maxGridCharacters);
 		table.resizeTable();
 		table.setEnabled(false);

@@ -66,22 +66,18 @@ import com.jhlabs.awt.GridLayoutPlus;
 
 abstract public class UiGrid extends UiField
 {
-	public UiGrid(UiMainWindow mainWindowToUse, GridFieldSpec fieldSpec, UiDialogLauncher dlgLauncher, Map gridFields, boolean isEditable)
+	public UiGrid(UiMainWindow mainWindowToUse, GridFieldSpec fieldSpec, UiDialogLauncher dlgLauncher, Map gridFields, UiFieldCreator fieldCreatorToUse)
 	{
-		this(mainWindowToUse, new GridTableModel(fieldSpec), dlgLauncher, gridFields, isEditable);
+		this(mainWindowToUse, new GridTableModel(fieldSpec), dlgLauncher, gridFields, fieldCreatorToUse);
 	}
 	
-	public UiGrid(UiMainWindow mainWindowToUse, GridTableModel modelToUse, UiDialogLauncher dlgLauncher, Map gridFields, boolean isEditable)
+	public UiGrid(UiMainWindow mainWindowToUse, GridTableModel modelToUse, UiDialogLauncher dlgLauncher, Map gridFields, UiFieldCreator fieldCreatorToUse)
 	{
 		super(mainWindowToUse.getLocalization());
 		app = mainWindowToUse.getApp();
 		model = modelToUse;
 		otherGridFields = gridFields;
-		
-		if(isEditable)
-			fieldCreator = new UiEditableFieldCreator(mainWindowToUse);
-		else
-			fieldCreator = new UiReadOnlyFieldCreator(mainWindowToUse);
+		fieldCreator = fieldCreatorToUse;
 		
 		table = createGridTable(dlgLauncher, gridFields);
 		table.setColumnSelectionAllowed(false);
