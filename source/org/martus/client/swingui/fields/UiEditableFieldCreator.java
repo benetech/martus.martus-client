@@ -28,6 +28,7 @@ package org.martus.client.swingui.fields;
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.dialogs.UiDialogLauncher;
+import org.martus.common.fieldspec.DateFieldSpec;
 import org.martus.common.fieldspec.DropDownFieldSpec;
 import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.fieldspec.GridFieldSpec;
@@ -67,7 +68,7 @@ public class UiEditableFieldCreator extends UiFieldCreator
 	
 	public UiField createDateField(FieldSpec spec)
 	{
-		return new UiDateEditor(spec, getLocalization());
+		return new UiDateEditor((DateFieldSpec) spec, getLocalization());
 	}
 	
 	public UiField createFlexiDateField(FieldSpec spec)
