@@ -54,13 +54,13 @@ public class SearchGridTable extends GridTable
 		super(model, dlgLauncherToUse, otherGridFieldsToUse, true);
 	}
 
-	protected void createEditableRenderers()
+	protected void createRenderers()
 	{
 		renderers = new HashMap();
 		createEditableEditorsOrRenderers(renderers);
 	}
 	
-	protected void createEditableEditors()
+	protected void createEditors()
 	{
 		editors = new HashMap();
 		createEditableEditorsOrRenderers(editors);
@@ -74,33 +74,6 @@ public class SearchGridTable extends GridTable
 		map.put(new FieldTypeDateRange(), new GridDateRangeCellEditor(dlgLauncher, getGridFieldSpec()));
 		map.put(new FieldTypeDropdown(), new GridDropDownCellEditor(otherGridFields, localization));
 		map.put(new FieldTypeLanguage(), new GridDropDownCellEditor(otherGridFields, localization));
-		map.put(new FieldTypeNormal(), new GridNormalCellEditor(localization));
-		map.put(new FieldTypeMultiline(), new GridNormalCellEditor(localization));
-		map.put(new FieldTypeAnyField(), new GridNormalCellEditor(localization));
-		map.put(new FieldTypeGrid(), new GridNormalCellEditor(localization));
-		map.put(new FieldTypePopUpTree(), new GridPopUpTreeCellEditor(localization));
-	}
-
-	protected void createReadOnlyRenderers()
-	{
-		renderers = new HashMap();
-		createReadOnlyEditorsOrRenderers(renderers);
-	}
-	
-	protected void createReadOnlyEditors()
-	{
-		editors = new HashMap();
-		createReadOnlyEditorsOrRenderers(editors);
-	}
-	
-	protected void createReadOnlyEditorsOrRenderers(HashMap map)
-	{
-		UiLocalization localization = dlgLauncher.GetLocalization();
-		map.put(new FieldTypeBoolean(), new GridBooleanCellViewer(localization));
-		map.put(new FieldTypeDate(), new GridDateCellViewer(localization));
-		map.put(new FieldTypeDateRange(), new GridDateRangeCellViewer(localization));
-		map.put(new FieldTypeDropdown(), new GridDropDownCellViewer(otherGridFields, localization));
-		map.put(new FieldTypeLanguage(), new GridDropDownCellViewer(otherGridFields, localization));
 		map.put(new FieldTypeNormal(), new GridNormalCellEditor(localization));
 		map.put(new FieldTypeMultiline(), new GridNormalCellEditor(localization));
 		map.put(new FieldTypeAnyField(), new GridNormalCellEditor(localization));

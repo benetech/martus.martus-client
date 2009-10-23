@@ -33,10 +33,6 @@ import javax.swing.table.TableCellEditor;
 import javax.swing.table.TableCellRenderer;
 
 import org.martus.client.swingui.dialogs.UiDialogLauncher;
-import org.martus.clientside.UiLocalization;
-import org.martus.common.fieldspec.FieldType;
-import org.martus.common.fieldspec.FieldTypeDate;
-import org.martus.common.fieldspec.FieldTypeDateRange;
 
 abstract public class GridFieldTable extends GridTable
 {
@@ -45,99 +41,6 @@ abstract public class GridFieldTable extends GridTable
 			boolean isTableEditable)
 	{
 		super(model, dlgLauncherToUse, otherGridFieldsToUse, isTableEditable);
-	}
-
-	protected void createEditableRenderers()
-	{
-		renderers = new GridCellEditorAndRenderer[getColumnCount()];
-		createEditableEditorsOrRenderers(renderers);
-	}
-	
-	protected void createEditableEditors()
-	{
-		editors = new GridCellEditorAndRenderer[getColumnCount()];
-		createEditableEditorsOrRenderers(editors);
-	}
-	
-	protected void createEditableEditorsOrRenderers(GridCellEditorAndRenderer[] array)
-	{
-		GridTableModel model = getGridTableModel();
-		
-		genericDateEditor = createEditor(new FieldTypeDate());
-		genericDateRangeEditor = createEditor(new FieldTypeDateRange());
-		
-		for(int tableColumn = 0; tableColumn < getColumnCount(); ++tableColumn)
-		{
-			int modelColumn = convertColumnIndexToModel(tableColumn);
-			FieldType type = model.getCellType(0, modelColumn);
-			array[tableColumn] = createEditor(type);
-		}
-	}
-	
-	private GridCellEditorAndRenderer createEditor(FieldType type)
-	{
-		UiLocalization localization = dlgLauncher.GetLocalization();
-		if(type.isBoolean())
-			return new GridBooleanCellEditor(localization);
-		if(type.isDate())
-			return new GridDateCellEditor(localization);
-		if(type.isDateRange())
-			return new GridDateRangeCellEditor(dlgLauncher, getGridFieldSpec());
-		if(type.isDropdown() || type.isLanguageDropdown())
-			return new GridDropDownCellEditor(otherGridFields, localization);
-		if(type.isPopUpTree())
-			return new GridPopUpTreeCellEditor(localization);
-		
-		if(type.isMultiline() || type.isAnyField() || type.isGrid())
-			return new GridNormalCellEditor(localization);
-			
-		return new GridNormalCellEditor(localization);
-	}
-
-	protected void createReadOnlyRenderers()
-	{
-		renderers = new GridCellEditorAndRenderer[getColumnCount()];
-		createReadOnlyEditorsOrRenderers(renderers);
-	}
-	
-	protected void createReadOnlyEditors()
-	{
-		editors = new GridCellEditorAndRenderer[getColumnCount()];
-		createReadOnlyEditorsOrRenderers(editors);
-	}
-	
-	protected void createReadOnlyEditorsOrRenderers(GridCellEditorAndRenderer[] array)
-	{
-		genericDateEditor = createViewer(new FieldTypeDate());
-		genericDateRangeEditor = createViewer(new FieldTypeDateRange());
-		
-		GridTableModel model = getGridTableModel();
-		for(int tableColumn = 0; tableColumn < getColumnCount(); ++tableColumn)
-		{
-			int modelColumn = convertColumnIndexToModel(tableColumn);
-			FieldType type = model.getCellType(0, modelColumn);
-			array[tableColumn] = createViewer(type);
-		}
-	}
-
-	private GridCellEditorAndRenderer createViewer(FieldType type)
-	{
-		UiLocalization localization = dlgLauncher.GetLocalization();
-		if(type.isBoolean())
-			return new GridBooleanCellViewer(localization);
-		if(type.isDate())
-			return new GridDateCellViewer(localization);
-		if(type.isDateRange())
-			return new GridDateRangeCellViewer(localization);
-		if(type.isDropdown() || type.isLanguageDropdown())
-			return new GridDropDownCellViewer(otherGridFields, localization);
-		if(type.isPopUpTree())
-			return new GridPopUpTreeCellEditor(localization);
-		
-		if(type.isMultiline() || type.isAnyField() || type.isGrid())
-			return new GridNormalCellEditor(localization);
-			
-		return new GridNormalCellEditor(localization);
 	}
 
 	public TableCellEditor getCellEditor(int row, int column)
@@ -163,6 +66,27 @@ abstract public class GridFieldTable extends GridTable
 	protected GridCellEditorAndRenderer getDateRangeEditor()
 	{
 		return genericDateRangeEditor;
+	}
+	
+	protected void setGenericDateEditor(GridCellEditorAndRenderer genericDateEditor)
+	{
+		this.genericDateEditor = genericDateEditor;
+	}
+	
+	protected void setGenericDateRangeEditor(
+			GridCellEditorAndRenderer genericDateRangeEditor)
+	{
+		this.genericDateRangeEditor = genericDateRangeEditor;
+	}
+	
+	public void initializeRenderers(GridCellEditorAndRenderer[] newRenderers)
+	{
+		renderers = newRenderers;
+	}
+	
+	public void initializeEditors(GridCellEditorAndRenderer[] newEditors)
+	{
+		editors = newEditors;
 	}
 
 	private GridCellEditorAndRenderer genericDateEditor;

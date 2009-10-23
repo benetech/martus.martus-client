@@ -57,25 +57,16 @@ public abstract class GridTable extends UiTableWithCellEditingProtection
 		// they get confused about focus when you click on a renderer but the 
 		// editor is supposed to end up getting the click because they occupy 
 		// the same screen location
-		if(isTableEditable)
-		{
-			createEditableRenderers();
-			createEditableEditors();
-		}
-		else
-		{
-			createReadOnlyRenderers();
-			createReadOnlyEditors();
-		}
+		createRenderers();
+		createEditors();
+
 		useMaxWidth();
 		setColumnWidthsFromHeadersAndData();
 		setAutoResizeMode(AUTO_RESIZE_OFF);
 	}
 
-	abstract protected void createEditableRenderers();
-	abstract protected void createReadOnlyRenderers();
-	abstract protected void createEditableEditors();
-	abstract protected void createReadOnlyEditors();
+	abstract protected void createRenderers();
+	abstract protected void createEditors();
 
 	public void setColumnWidthsFromHeadersAndData() 
 	{

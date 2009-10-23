@@ -28,6 +28,10 @@ package org.martus.client.swingui.grids;
 import java.util.Map;
 
 import org.martus.client.swingui.dialogs.UiDialogLauncher;
+import org.martus.clientside.UiLocalization;
+import org.martus.common.fieldspec.FieldType;
+import org.martus.common.fieldspec.FieldTypeDate;
+import org.martus.common.fieldspec.FieldTypeDateRange;
 
 public class ReadonlyGridFieldTable extends GridFieldTable
 {
@@ -35,6 +39,53 @@ public class ReadonlyGridFieldTable extends GridFieldTable
 			UiDialogLauncher dlgLauncherToUse, Map otherGridFieldsToUse)
 	{
 		super(model, dlgLauncherToUse, otherGridFieldsToUse, false);
+	}
+
+	protected void createRenderers()
+	{
+		initializeRenderers(createReadOnlyEditorsOrRenderers());
+	}
+	
+	protected void createEditors()
+	{
+		initializeEditors(createReadOnlyEditorsOrRenderers());
+	}
+	
+	protected GridCellEditorAndRenderer[] createReadOnlyEditorsOrRenderers()
+	{
+		GridCellEditorAndRenderer[] editors = new GridCellEditorAndRenderer[getColumnCount()];
+		setGenericDateEditor(createViewer(new FieldTypeDate()));
+		setGenericDateRangeEditor(createViewer(new FieldTypeDateRange()));
+		
+		GridTableModel model = getGridTableModel();
+		for(int tableColumn = 0; tableColumn < getColumnCount(); ++tableColumn)
+		{
+			int modelColumn = convertColumnIndexToModel(tableColumn);
+			FieldType type = model.getCellType(0, modelColumn);
+			editors[tableColumn] = createViewer(type);
+		}
+		
+		return editors;
+	}
+
+	private GridCellEditorAndRenderer createViewer(FieldType type)
+	{
+		UiLocalization localization = dlgLauncher.GetLocalization();
+		if(type.isBoolean())
+			return new GridBooleanCellViewer(localization);
+		if(type.isDate())
+			return new GridDateCellViewer(localization);
+		if(type.isDateRange())
+			return new GridDateRangeCellViewer(localization);
+		if(type.isDropdown() || type.isLanguageDropdown())
+			return new GridDropDownCellViewer(otherGridFields, localization);
+		if(type.isPopUpTree())
+			return new GridPopUpTreeCellEditor(localization);
+		
+		if(type.isMultiline() || type.isAnyField() || type.isGrid())
+			return new GridNormalCellEditor(localization);
+			
+		return new GridNormalCellEditor(localization);
 	}
 
 }
