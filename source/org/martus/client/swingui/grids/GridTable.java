@@ -47,7 +47,7 @@ import org.martus.util.language.LanguageOptions;
 public abstract class GridTable extends UiTableWithCellEditingProtection
 {
 	
-	public GridTable(GridTableModel model, UiDialogLauncher dlgLauncherToUse, Map otherGridFieldsToUse, boolean isTableEditable)
+	public GridTable(GridTableModel model, UiDialogLauncher dlgLauncherToUse, Map otherGridFieldsToUse)
 	{
 		super(model);
 		dlgLauncher = dlgLauncherToUse;

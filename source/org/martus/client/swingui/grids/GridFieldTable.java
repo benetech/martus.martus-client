@@ -40,7 +40,7 @@ abstract public class GridFieldTable extends GridTable
 			UiDialogLauncher dlgLauncherToUse, Map otherGridFieldsToUse,
 			boolean isTableEditable)
 	{
-		super(model, dlgLauncherToUse, otherGridFieldsToUse, isTableEditable);
+		super(model, dlgLauncherToUse, otherGridFieldsToUse);
 	}
 
 	public TableCellEditor getCellEditor(int row, int column)
