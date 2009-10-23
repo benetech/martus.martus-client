@@ -29,8 +29,6 @@ import java.util.Map;
 
 import org.martus.client.swingui.dialogs.UiDialogLauncher;
 import org.martus.clientside.UiLocalization;
-import org.martus.common.fieldspec.DateFieldSpec;
-import org.martus.common.fieldspec.DateRangeFieldSpec;
 import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.fieldspec.FieldType;
 import org.martus.common.fieldspec.FieldTypeDate;
