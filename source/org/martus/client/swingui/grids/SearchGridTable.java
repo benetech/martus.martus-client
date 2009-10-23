@@ -49,10 +49,9 @@ import org.martus.common.fieldspec.FieldTypePopUpTree;
 public class SearchGridTable extends GridTable
 {
 	public SearchGridTable(GridTableModel model,
-			UiDialogLauncher dlgLauncherToUse, Map otherGridFieldsToUse,
-			boolean isTableEditable)
+			UiDialogLauncher dlgLauncherToUse, Map otherGridFieldsToUse)
 	{
-		super(model, dlgLauncherToUse, otherGridFieldsToUse, isTableEditable);
+		super(model, dlgLauncherToUse, otherGridFieldsToUse, true);
 	}
 
 	protected void createEditableRenderers()

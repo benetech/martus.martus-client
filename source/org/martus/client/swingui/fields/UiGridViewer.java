@@ -32,8 +32,8 @@ import javax.swing.JComponent;
 
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.dialogs.UiDialogLauncher;
-import org.martus.client.swingui.grids.GridFieldTable;
 import org.martus.client.swingui.grids.GridTable;
+import org.martus.client.swingui.grids.ReadonlyGridFieldTable;
 import org.martus.common.fieldspec.GridFieldSpec;
 
 
@@ -48,9 +48,9 @@ public class UiGridViewer extends UiGrid
 	}
 
 	protected GridTable createGridTable(UiDialogLauncher dlgLauncher,
-			Map gridFields, boolean isEditable)
+			Map gridFields)
 	{
-		return new GridFieldTable(model, dlgLauncher, gridFields, isEditable);
+		return new ReadonlyGridFieldTable(model, dlgLauncher, gridFields);
 	}
 	
 	protected Vector createButtons()

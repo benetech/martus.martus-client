@@ -38,7 +38,7 @@ import org.martus.common.fieldspec.FieldType;
 import org.martus.common.fieldspec.FieldTypeDate;
 import org.martus.common.fieldspec.FieldTypeDateRange;
 
-public class GridFieldTable extends GridTable
+abstract public class GridFieldTable extends GridTable
 {
 	public GridFieldTable(GridTableModel model,
 			UiDialogLauncher dlgLauncherToUse, Map otherGridFieldsToUse,
@@ -108,6 +108,9 @@ public class GridFieldTable extends GridTable
 	
 	protected void createReadOnlyEditorsOrRenderers(GridCellEditorAndRenderer[] array)
 	{
+		genericDateEditor = createViewer(new FieldTypeDate());
+		genericDateRangeEditor = createViewer(new FieldTypeDateRange());
+		
 		GridTableModel model = getGridTableModel();
 		for(int tableColumn = 0; tableColumn < getColumnCount(); ++tableColumn)
 		{

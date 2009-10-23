@@ -63,9 +63,9 @@ public class FancySearchGridEditor extends UiEditableGrid
 		addListenerSoFieldChangeCanTriggerRepaintOfValueColumn();
 	}
 
-	protected GridTable createGridTable(UiDialogLauncher dlgLauncher, Map gridFields, boolean isEditable)
+	protected GridTable createGridTable(UiDialogLauncher dlgLauncher, Map gridFields)
 	{
-		return new SearchGridTable(model, dlgLauncher, gridFields, isEditable);
+		return new SearchGridTable(model, dlgLauncher, gridFields);
 	}
 	
 	private void setGridTableSize()
