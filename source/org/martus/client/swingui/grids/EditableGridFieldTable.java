@@ -29,6 +29,7 @@ import java.util.Map;
 
 import org.martus.client.swingui.dialogs.UiDialogLauncher;
 import org.martus.clientside.UiLocalization;
+import org.martus.common.fieldspec.DateFieldSpec;
 import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.fieldspec.FieldType;
 import org.martus.common.fieldspec.FieldTypeDate;
@@ -77,7 +78,7 @@ public class EditableGridFieldTable extends GridFieldTable
 		if(type.isBoolean())
 			return new GridBooleanCellEditor(localization);
 		if(type.isDate())
-			return new GridDateCellEditor(localization);
+			return new GridDateCellEditor((DateFieldSpec)cellFieldSpec, localization);
 		if(type.isDateRange())
 			return new GridDateRangeCellEditor(dlgLauncher, getGridFieldSpec());
 		if(type.isDropdown() || type.isLanguageDropdown())

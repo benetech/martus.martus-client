@@ -31,8 +31,6 @@ import org.martus.client.swingui.dialogs.UiDialogLauncher;
 import org.martus.common.fieldspec.DropDownFieldSpec;
 import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.fieldspec.GridFieldSpec;
-import org.martus.common.fieldspec.StandardFieldSpecs;
-import org.martus.util.MultiCalendar;
 
 public class UiEditableFieldCreator extends UiFieldCreator
 {
@@ -69,11 +67,7 @@ public class UiEditableFieldCreator extends UiFieldCreator
 	
 	public UiField createDateField(FieldSpec spec)
 	{
-		MultiCalendar maxDate = null;
-		if(StandardFieldSpecs.isStandardFieldTag(spec.getTag()))
-			maxDate = new MultiCalendar();
-
-		return new UiDateEditor(getLocalization(), maxDate);		
+		return new UiDateEditor(spec, getLocalization());
 	}
 	
 	public UiField createFlexiDateField(FieldSpec spec)

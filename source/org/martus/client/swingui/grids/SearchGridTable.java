@@ -34,6 +34,7 @@ import javax.swing.table.TableCellRenderer;
 
 import org.martus.client.swingui.dialogs.UiDialogLauncher;
 import org.martus.clientside.UiLocalization;
+import org.martus.common.fieldspec.DateFieldSpec;
 import org.martus.common.fieldspec.FieldType;
 import org.martus.common.fieldspec.FieldTypeAnyField;
 import org.martus.common.fieldspec.FieldTypeBoolean;
@@ -70,7 +71,7 @@ public class SearchGridTable extends GridTable
 	{
 		UiLocalization localization = dlgLauncher.GetLocalization();
 		map.put(new FieldTypeBoolean(), new GridBooleanCellEditor(localization));
-		map.put(new FieldTypeDate(), new GridDateCellEditor(localization));
+		map.put(new FieldTypeDate(), new GridDateCellEditor((DateFieldSpec)new FieldTypeDate().createEmptyFieldSpec(), localization));
 		map.put(new FieldTypeDateRange(), new GridDateRangeCellEditor(dlgLauncher, getGridFieldSpec()));
 		map.put(new FieldTypeDropdown(), new GridDropDownCellEditor(otherGridFields, localization));
 		map.put(new FieldTypeLanguage(), new GridDropDownCellEditor(otherGridFields, localization));

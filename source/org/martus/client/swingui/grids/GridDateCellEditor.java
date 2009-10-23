@@ -27,15 +27,17 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.swingui.grids;
 
 import javax.swing.JComponent;
+
 import org.martus.client.swingui.fields.UiDateEditor;
 import org.martus.common.MiniLocalization;
+import org.martus.common.fieldspec.DateFieldSpec;
 import org.martus.swing.UiComboBox;
 
 public class GridDateCellEditor extends GridCellEditorAndRenderer
 {
-	GridDateCellEditor(MiniLocalization localization)
+	GridDateCellEditor(DateFieldSpec cellFieldSpec, MiniLocalization localization)
 	{
-		super(new UiDateEditor(localization, null));
+		super(new UiDateEditor(cellFieldSpec, localization));
 	}
 	
 	public void spaceWasPressed()

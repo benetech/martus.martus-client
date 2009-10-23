@@ -31,20 +31,22 @@ import javax.swing.JComponent;
 import org.martus.common.MiniLocalization;
 import org.martus.common.fieldspec.DataInvalidException;
 import org.martus.common.fieldspec.FieldSpec;
+import org.martus.common.fieldspec.StandardFieldSpecs;
 import org.martus.util.MultiCalendar;
 
 public class UiDateEditor extends UiField
 {
-	public UiDateEditor(MiniLocalization localizationToUse, MultiCalendar highestAllowableDate)
+	public UiDateEditor(FieldSpec spec, MiniLocalization localizationToUse)
 	{
 		super(localizationToUse);
+
 		allowFutureDates = false;
-		if(highestAllowableDate == null)
+		if(!StandardFieldSpecs.isStandardFieldTag(spec.getTag()))
 			allowFutureDates = true;
 		
 		component = new UiDateEditorComponent(localizationToUse, allowFutureDates);
 	}
-	
+
 	public JComponent getComponent()
 	{
 		return component;
