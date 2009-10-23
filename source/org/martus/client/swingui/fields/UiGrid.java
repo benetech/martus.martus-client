@@ -83,7 +83,7 @@ abstract public class UiGrid extends UiField
 		else
 			fieldCreator = new UiReadOnlyFieldCreator(mainWindowToUse);
 		
-		table = new GridTable(model, dlgLauncher, gridFields, isEditable);
+		table = createGridTable(dlgLauncher, gridFields, isEditable);
 		table.setColumnSelectionAllowed(false);
 		table.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
 		table.setShowGrid(true);
@@ -97,6 +97,8 @@ abstract public class UiGrid extends UiField
 		setButtons(createButtons());
 		rebuildWidget();
 	}
+
+	abstract protected GridTable createGridTable(UiDialogLauncher dlgLauncher, Map gridFields, boolean isEditable);
 	
 	public void updateDataDrivenColumnWidth(int column, ChoiceItem[] choices)
 	{

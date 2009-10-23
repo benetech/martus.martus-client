@@ -30,6 +30,8 @@ import java.util.Vector;
 
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.dialogs.UiDialogLauncher;
+import org.martus.client.swingui.grids.GridFieldTable;
+import org.martus.client.swingui.grids.GridTable;
 import org.martus.common.fieldspec.DataInvalidException;
 import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.fieldspec.GridFieldSpec;
@@ -41,6 +43,11 @@ public class UiGridEditor extends UiEditableGrid
 		super(mainWindow, fieldSpec, dlgLauncher, gridFields, maxGridCharacters);
 	}
 
+	protected GridTable createGridTable(UiDialogLauncher dlgLauncher, Map gridFields, boolean isEditable)
+	{
+		return new GridFieldTable(model, dlgLauncher, gridFields, isEditable);
+	}
+	
 	protected Vector createButtons()
 	{
 		Vector buttons = super.createButtons();

@@ -28,37 +28,23 @@ package org.martus.client.swingui.grids;
 
 import java.util.Arrays;
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Vector;
 
 import javax.swing.JComponent;
-import javax.swing.table.TableCellEditor;
-import javax.swing.table.TableCellRenderer;
 
 import org.martus.client.swingui.dialogs.UiDialogLauncher;
-import org.martus.clientside.UiLocalization;
 import org.martus.common.fieldspec.ChoiceItem;
 import org.martus.common.fieldspec.DropDownFieldSpec;
 import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.fieldspec.FieldType;
-import org.martus.common.fieldspec.FieldTypeAnyField;
-import org.martus.common.fieldspec.FieldTypeBoolean;
-import org.martus.common.fieldspec.FieldTypeDate;
-import org.martus.common.fieldspec.FieldTypeDateRange;
-import org.martus.common.fieldspec.FieldTypeDropdown;
-import org.martus.common.fieldspec.FieldTypeGrid;
-import org.martus.common.fieldspec.FieldTypeLanguage;
-import org.martus.common.fieldspec.FieldTypeMultiline;
-import org.martus.common.fieldspec.FieldTypeNormal;
-import org.martus.common.fieldspec.FieldTypePopUpTree;
 import org.martus.common.fieldspec.GridFieldSpec;
 import org.martus.swing.UiTableWithCellEditingProtection;
 import org.martus.util.language.LanguageOptions;
 
-public class GridTable extends UiTableWithCellEditingProtection
+public abstract class GridTable extends UiTableWithCellEditingProtection
 {
 	
 	public GridTable(GridTableModel model, UiDialogLauncher dlgLauncherToUse, Map otherGridFieldsToUse, boolean isTableEditable)
@@ -73,18 +59,23 @@ public class GridTable extends UiTableWithCellEditingProtection
 		// the same screen location
 		if(isTableEditable)
 		{
-			renderers = createEditableEditorsOrRenderers();
-			editors = createEditableEditorsOrRenderers();
+			createEditableRenderers();
+			createEditableEditors();
 		}
 		else
 		{
-			renderers = createReadOnlyEditorsOrRenderers();
-			editors = createReadOnlyEditorsOrRenderers();
+			createReadOnlyRenderers();
+			createReadOnlyEditors();
 		}
 		useMaxWidth();
 		setColumnWidthsFromHeadersAndData();
 		setAutoResizeMode(AUTO_RESIZE_OFF);
 	}
+
+	abstract protected void createEditableRenderers();
+	abstract protected void createReadOnlyRenderers();
+	abstract protected void createEditableEditors();
+	abstract protected void createReadOnlyEditors();
 
 	public void setColumnWidthsFromHeadersAndData() 
 	{
@@ -124,7 +115,7 @@ public class GridTable extends UiTableWithCellEditingProtection
 
 	public int getDateColumnWidth(int column)
 	{
-		GridCellEditorAndRenderer gridDateCellEditor = ((GridCellEditorAndRenderer)getEditorOrRendererForType(editors, new FieldTypeDate()));
+		GridCellEditorAndRenderer gridDateCellEditor = getDateEditor();
 		int width = gridDateCellEditor.getMinimumCellWidth();
 		
 		int columnHeaderWidth = getColumnHeaderWidth(column);
@@ -133,15 +124,19 @@ public class GridTable extends UiTableWithCellEditingProtection
 		return width;
 	}
 	
+	abstract protected GridCellEditorAndRenderer getDateEditor();
+
 	private int getDateRangeColumnWidth(int column)
 	{
-		GridCellEditorAndRenderer gridDateRangeCellEditor = ((GridCellEditorAndRenderer)getEditorOrRendererForType(editors, new FieldTypeDateRange()));
+		GridCellEditorAndRenderer gridDateRangeCellEditor = getDateRangeEditor();
 		int width = gridDateRangeCellEditor.getMinimumCellWidth();
 		int columnHeaderWidth = getColumnHeaderWidth(column);
 		if(width < columnHeaderWidth)
 			width = columnHeaderWidth;
 		return width;
 	}
+
+	abstract protected GridCellEditorAndRenderer getDateRangeEditor();
 
 	private int getDropDownColumnWidth(int column, DropDownFieldSpec spec)
 	{
@@ -170,8 +165,8 @@ public class GridTable extends UiTableWithCellEditingProtection
 	public JComponent[] getFocusableComponents()
 	{
 		Vector components = new Vector();
-		Collection editorUiFields = editors.values();
-		Iterator iter = editorUiFields.iterator();
+		Collection editors = getAllEditors();
+		Iterator iter = editors.iterator();
 		while(iter.hasNext())
 		{
 			GridCellEditorAndRenderer editor = (GridCellEditorAndRenderer)iter.next();
@@ -181,50 +176,18 @@ public class GridTable extends UiTableWithCellEditingProtection
 		return (JComponent[])components.toArray(new JComponent[0]);
 	}
 
-	private HashMap createEditableEditorsOrRenderers()
-	{
-		HashMap map = new HashMap();
-		UiLocalization localization = dlgLauncher.GetLocalization();
-		map.put(new FieldTypeBoolean(), new GridBooleanCellEditor(localization));
-		map.put(new FieldTypeDate(), new GridDateCellEditor(localization));
-		map.put(new FieldTypeDateRange(), new GridDateRangeCellEditor(dlgLauncher, getGridFieldSpec()));
-		map.put(new FieldTypeDropdown(), new GridDropDownCellEditor(otherGridFields, localization));
-		map.put(new FieldTypeLanguage(), new GridDropDownCellEditor(otherGridFields, localization));
-		map.put(new FieldTypeNormal(), new GridNormalCellEditor(localization));
-		map.put(new FieldTypeMultiline(), new GridNormalCellEditor(localization));
-		map.put(new FieldTypeAnyField(), new GridNormalCellEditor(localization));
-		map.put(new FieldTypeGrid(), new GridNormalCellEditor(localization));
-		map.put(new FieldTypePopUpTree(), new GridPopUpTreeCellEditor(localization));
-		return map;
-	}
+	abstract protected Collection getAllEditors();
 
-	private GridFieldSpec getGridFieldSpec()
+	protected GridFieldSpec getGridFieldSpec()
 	{
 		return getGridTableModel().getGridFieldSpec();
 	}
 
-	private GridTableModel getGridTableModel()
+	protected GridTableModel getGridTableModel()
 	{
 		return (GridTableModel)getModel();
 	}
 	
-	private HashMap createReadOnlyEditorsOrRenderers()
-	{
-		HashMap map = new HashMap();
-		UiLocalization localization = dlgLauncher.GetLocalization();
-		map.put(new FieldTypeBoolean(), new GridBooleanCellViewer(localization));
-		map.put(new FieldTypeDate(), new GridDateCellViewer(localization));
-		map.put(new FieldTypeDateRange(), new GridDateRangeCellViewer(localization));
-		map.put(new FieldTypeDropdown(), new GridDropDownCellViewer(otherGridFields, localization));
-		map.put(new FieldTypeLanguage(), new GridDropDownCellViewer(otherGridFields, localization));
-		map.put(new FieldTypeNormal(), new GridNormalCellEditor(localization));
-		map.put(new FieldTypeMultiline(), new GridNormalCellEditor(localization));
-		map.put(new FieldTypeAnyField(), new GridNormalCellEditor(localization));
-		map.put(new FieldTypeGrid(), new GridNormalCellEditor(localization));
-		map.put(new FieldTypePopUpTree(), new GridPopUpTreeCellEditor(localization));
-		return map;
-	}
-
 	FieldSpec getFieldSpecForColumn(int column)
 	{
 		return (getGridTableModel()).getFieldSpecForColumn(column);		
@@ -243,35 +206,7 @@ public class GridTable extends UiTableWithCellEditingProtection
 		super.changeSelection(rowIndex, columnIndex, toggle, extend);
 	}
 
-	public TableCellEditor getCellEditor(int row, int column)
-	{
-		return (TableCellEditor)getCellEditorOrRenderer(editors, row, column);
-	}
-	
-	public TableCellRenderer getCellRenderer(int row, int column)
-	{
-		return (TableCellRenderer)getCellEditorOrRenderer(renderers, row, column);
-	}
-	
-	private Object getCellEditorOrRenderer(HashMap map, int row, int column)
-	{
-		GridTableModel model = getGridTableModel();
-		return getEditorOrRendererForType(map, model.getCellType(row, column));
-	}
-
-	private TableCellEditor getEditorOrRendererForType(HashMap map, FieldType type)
-	{
-		TableCellEditor editor = (TableCellEditor)map.get(type);
-		if(editor != null)
-			return editor;
-
-		System.out.println("GridTable.getCellEditorOrRenderer Unexpected type: " + type);
-		return (TableCellEditor)map.get(new FieldTypeNormal());
-	}
-
 	UiDialogLauncher dlgLauncher;
-	HashMap renderers;
-	HashMap editors;
 	Map otherGridFields;
 }
 

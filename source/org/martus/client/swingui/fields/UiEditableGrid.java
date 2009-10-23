@@ -53,7 +53,7 @@ import org.martus.swing.Utilities;
 
 
 
-public class UiEditableGrid extends UiGrid implements FocusListener
+public abstract class UiEditableGrid extends UiGrid implements FocusListener
 {
 	public UiEditableGrid(UiMainWindow mainWindowToUse, GridFieldSpec fieldSpec, UiDialogLauncher dlgLauncher, Map gridFields, int maxGridCharacters)
 	{
