@@ -29,6 +29,9 @@ import java.util.Map;
 
 import org.martus.client.swingui.dialogs.UiDialogLauncher;
 import org.martus.clientside.UiLocalization;
+import org.martus.common.fieldspec.DateFieldSpec;
+import org.martus.common.fieldspec.DateRangeFieldSpec;
+import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.fieldspec.FieldType;
 import org.martus.common.fieldspec.FieldTypeDate;
 import org.martus.common.fieldspec.FieldTypeDateRange;
@@ -56,21 +59,22 @@ public class EditableGridFieldTable extends GridFieldTable
 		GridCellEditorAndRenderer[] editors = new GridCellEditorAndRenderer[getColumnCount()];
 		GridTableModel model = getGridTableModel();
 		
-		setGenericDateEditor(createEditor(new FieldTypeDate()));
-		setGenericDateRangeEditor(createEditor(new FieldTypeDateRange()));
+		setGenericDateEditor(createEditor(new FieldTypeDate().createEmptyFieldSpec()));
+		setGenericDateRangeEditor(createEditor(new FieldTypeDateRange().createEmptyFieldSpec()));
 		
 		for(int tableColumn = 0; tableColumn < getColumnCount(); ++tableColumn)
 		{
 			int modelColumn = convertColumnIndexToModel(tableColumn);
-			FieldType type = model.getCellType(0, modelColumn);
-			editors[tableColumn] = createEditor(type);
+			FieldSpec cellFieldSpec = model.getFieldSpecForCell(0, modelColumn);
+			editors[tableColumn] = createEditor(cellFieldSpec);
 		}
 		
 		return editors;
 	}
 	
-	private GridCellEditorAndRenderer createEditor(FieldType type)
+	private GridCellEditorAndRenderer createEditor(FieldSpec cellFieldSpec)
 	{
+		FieldType type = cellFieldSpec.getType();
 		UiLocalization localization = dlgLauncher.GetLocalization();
 		if(type.isBoolean())
 			return new GridBooleanCellEditor(localization);
