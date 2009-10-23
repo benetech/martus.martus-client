@@ -41,11 +41,6 @@ import org.martus.util.MultiCalendar;
 
 public class UiDateEditorComponent extends Box
 {
-	public UiDateEditorComponent(MiniLocalization localizationToUse, boolean allowFutureDates)
-	{
-		this(localizationToUse, "1900-01-01", allowFutureDates ? tenYearsFromNow() : DATE_RESTRICTION_TODAY);
-	}
-	
 	public UiDateEditorComponent(MiniLocalization localizationToUse, String minDate, String maxDate)
 	{
 		super(BoxLayout.X_AXIS);
@@ -285,22 +280,10 @@ public class UiDateEditorComponent extends Box
 		getComponentsInOrder()[0].requestFocus();
 	}
 	
-	private static String tenYearsFromNow()
-	{
-		MultiCalendar today = AbstractDateOrientedFieldSpec.getAsDate("");
-		int year = today.getGregorianYear()+10;
-		int month = today.getGregorianMonth();
-		int day = today.getGregorianDay();
-		MultiCalendar tenYearsOut = MultiCalendar.createFromGregorianYearMonthDay(year, month, day);
-		return tenYearsOut.toIsoDateString();
-	}
-
 	// Enable the following to add a Persian year and a 
 	// Thai year to the Date Editor year dropdowns
 	static final boolean THAI_AND_PERSIAN_TESTING = false;
 	
-	static final String NO_DATE_RESTRICTION = null;
-	static final String DATE_RESTRICTION_TODAY = "";
 	static final int EXTRA_WIDTH_SO_FIELDS_DISPLAY_WHEN_COLAPSED = 20;
 
 	private MiniLocalization localization;

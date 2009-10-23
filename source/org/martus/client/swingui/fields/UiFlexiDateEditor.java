@@ -37,7 +37,9 @@ import javax.swing.JComponent;
 import javax.swing.JPanel;
 
 import org.martus.common.MiniLocalization;
+import org.martus.common.fieldspec.AbstractDateOrientedFieldSpec;
 import org.martus.common.fieldspec.DataInvalidException;
+import org.martus.common.fieldspec.DateRangeFieldSpec;
 import org.martus.common.fieldspec.DateRangeInvertedException;
 import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.fieldspec.StandardFieldSpecs;
@@ -53,7 +55,7 @@ import com.jhlabs.awt.GridLayoutPlus;
 
 public class UiFlexiDateEditor extends UiField
 {
-	public UiFlexiDateEditor(MiniLocalization localizationToUse, FieldSpec specToUse)
+	public UiFlexiDateEditor(MiniLocalization localizationToUse, DateRangeFieldSpec specToUse)
 	{
 		super(localizationToUse);
 		spec = specToUse;
@@ -107,7 +109,23 @@ public class UiFlexiDateEditor extends UiField
 				
 	private void buildBeginDateBox()
 	{				
-		bgDateBox = new UiDateEditorComponent(getLocalization(), isCustomDate());								
+		bgDateBox = new UiDateEditorComponent(getLocalization(), getEarliestAllowedDate(), getLatestAllowedDate());
+	}
+
+	private String getLatestAllowedDate()
+	{
+		if(spec == null)
+			return AbstractDateOrientedFieldSpec.tenYearsFromNow().toIsoDateString();
+		
+		return spec.getLatestAllowedDate();
+	}
+
+	private String getEarliestAllowedDate()
+	{
+		if(spec == null)
+			return AbstractDateOrientedFieldSpec.DEFAULT_EARLIEST_ALLOWED_DATE.toIsoDateString();
+		
+		return spec.getEarliestAllowedDate();
 	}
 	
 	private JComponent getBeginDateBox()
@@ -117,7 +135,7 @@ public class UiFlexiDateEditor extends UiField
 
 	private void buildEndDateBox()
 	{		
-		endDateBox = new UiDateEditorComponent(getLocalization(), isCustomDate());								
+		endDateBox = new UiDateEditorComponent(getLocalization(), getEarliestAllowedDate(), getLatestAllowedDate());								
 	}
 		
 	private JComponent getEndDateBox()
@@ -284,6 +302,6 @@ public class UiFlexiDateEditor extends UiField
 	private Box				 	exactDateBox;
 	UiDateEditorComponent bgDateBox;
 	UiDateEditorComponent endDateBox;
-	private FieldSpec			spec;
+	private DateRangeFieldSpec			spec;
 	
 }

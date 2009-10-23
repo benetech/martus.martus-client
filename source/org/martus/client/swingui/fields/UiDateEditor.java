@@ -29,11 +29,9 @@ package org.martus.client.swingui.fields;
 import javax.swing.JComponent;
 
 import org.martus.common.MiniLocalization;
-import org.martus.common.fieldspec.AbstractDateOrientedFieldSpec;
 import org.martus.common.fieldspec.DataInvalidException;
 import org.martus.common.fieldspec.DateFieldSpec;
 import org.martus.common.fieldspec.FieldSpec;
-import org.martus.common.fieldspec.StandardFieldSpecs;
 import org.martus.util.MultiCalendar;
 
 public class UiDateEditor extends UiField
@@ -42,30 +40,7 @@ public class UiDateEditor extends UiField
 	{
 		super(localizationToUse);
 
-		MultiCalendar minDate = AbstractDateOrientedFieldSpec.getAsDate(spec.getMinimumDate());
-		if(minDate == null)
-			minDate = MultiCalendar.createFromIsoDateString("1900-01-01");
-
-		MultiCalendar maxDate = AbstractDateOrientedFieldSpec.getAsDate(spec.getMaximumDate());
-		if(maxDate == null)
-		{
-			if(StandardFieldSpecs.isStandardFieldTag(spec.getTag()))
-				maxDate = AbstractDateOrientedFieldSpec.getAsDate("");
-			else
-				maxDate = tenYearsFromNow();
-		}
-		
-		component = new UiDateEditorComponent(localizationToUse, minDate.toIsoDateString(), maxDate.toIsoDateString());
-	}
-
-	public static MultiCalendar tenYearsFromNow()
-	{
-		MultiCalendar today = AbstractDateOrientedFieldSpec.getAsDate("");
-		int year = today.getGregorianYear()+10;
-		int month = today.getGregorianMonth();
-		int day = today.getGregorianDay();
-		MultiCalendar tenYearsOut = MultiCalendar.createFromGregorianYearMonthDay(year, month, day);
-		return tenYearsOut;
+		component = new UiDateEditorComponent(localizationToUse, spec.getEarliestAllowedDate(), spec.getLatestAllowedDate());
 	}
 
 	public JComponent getComponent()

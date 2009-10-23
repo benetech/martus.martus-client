@@ -28,12 +28,13 @@ package org.martus.client.swingui.fields;
 import javax.swing.JComponent;
 
 import org.martus.common.MiniLocalization;
+import org.martus.common.fieldspec.DateRangeFieldSpec;
 
 public class UiGridDateRangeEditorViewer extends UiFlexiDateEditor
 {
-	public UiGridDateRangeEditorViewer(MiniLocalization localizationToUse)
+	public UiGridDateRangeEditorViewer(DateRangeFieldSpec cellFieldSpec, MiniLocalization localizationToUse)
 	{
-		super(localizationToUse, null);
+		super(localizationToUse, cellFieldSpec);
 		removeExactDatePanel();
 	}
 	

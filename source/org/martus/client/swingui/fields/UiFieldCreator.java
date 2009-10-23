@@ -35,6 +35,7 @@ import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.fieldspec.ChoiceItem;
+import org.martus.common.fieldspec.DateRangeFieldSpec;
 import org.martus.common.fieldspec.DropDownFieldSpec;
 import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.fieldspec.FieldType;
@@ -55,7 +56,7 @@ abstract public class UiFieldCreator
 
 	abstract public UiField createChoiceField(DropDownFieldSpec spec);
 	abstract public UiField createDateField(FieldSpec spec);
-	abstract public UiField createFlexiDateField(FieldSpec spec);
+	abstract public UiField createFlexiDateField(DateRangeFieldSpec spec);
 	abstract public UiField createUnknownField(FieldSpec spec);
 	abstract public UiField createBoolField(FieldSpec spec);
 	abstract public UiField createGridField(GridFieldSpec fieldSpec);
@@ -96,7 +97,7 @@ abstract public class UiFieldCreator
 		if(type.isDate())
 			return createDateField(fieldSpec);
 		if(type.isDateRange())
-			return createFlexiDateField(fieldSpec);
+			return createFlexiDateField((DateRangeFieldSpec) fieldSpec);
 		if(type.isLanguageDropdown())
 			return createLanguageField();
 		if(type.isDropdown())

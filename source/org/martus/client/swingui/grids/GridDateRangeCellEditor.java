@@ -35,6 +35,7 @@ import org.martus.client.swingui.dialogs.UiDialogLauncher;
 import org.martus.client.swingui.fields.UiFlexiDateEditor;
 import org.martus.client.swingui.fields.UiGridDateRangeEditorViewer;
 import org.martus.common.fieldspec.DataInvalidException;
+import org.martus.common.fieldspec.DateRangeFieldSpec;
 import org.martus.common.fieldspec.DateRangeInvertedException;
 import org.martus.common.fieldspec.DateTooEarlyException;
 import org.martus.common.fieldspec.DateTooLateException;
@@ -44,9 +45,9 @@ import org.martus.swing.UiComboBox;
 
 public class GridDateRangeCellEditor extends GridCellEditorAndRenderer
 {
-	GridDateRangeCellEditor(UiDialogLauncher dlgLauncherToUse, GridFieldSpec gridSpecToUse)
+	GridDateRangeCellEditor(UiDialogLauncher dlgLauncherToUse, GridFieldSpec gridSpecToUse, DateRangeFieldSpec cellFieldSpec)
 	{
-		super(new UiGridDateRangeEditorViewer(dlgLauncherToUse.GetLocalization()));
+		super(new UiGridDateRangeEditorViewer(cellFieldSpec, dlgLauncherToUse.GetLocalization()));
 		dlgLauncher = dlgLauncherToUse;
 		gridSpec = gridSpecToUse;
 	}

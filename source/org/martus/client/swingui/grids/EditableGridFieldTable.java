@@ -30,6 +30,7 @@ import java.util.Map;
 import org.martus.client.swingui.dialogs.UiDialogLauncher;
 import org.martus.clientside.UiLocalization;
 import org.martus.common.fieldspec.DateFieldSpec;
+import org.martus.common.fieldspec.DateRangeFieldSpec;
 import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.fieldspec.FieldType;
 import org.martus.common.fieldspec.FieldTypeDate;
@@ -80,7 +81,7 @@ public class EditableGridFieldTable extends GridFieldTable
 		if(type.isDate())
 			return new GridDateCellEditor((DateFieldSpec)cellFieldSpec, localization);
 		if(type.isDateRange())
-			return new GridDateRangeCellEditor(dlgLauncher, getGridFieldSpec());
+			return new GridDateRangeCellEditor(dlgLauncher, getGridFieldSpec(), (DateRangeFieldSpec)cellFieldSpec);
 		if(type.isDropdown() || type.isLanguageDropdown())
 			return new GridDropDownCellEditor(otherGridFields, localization);
 		if(type.isPopUpTree())
