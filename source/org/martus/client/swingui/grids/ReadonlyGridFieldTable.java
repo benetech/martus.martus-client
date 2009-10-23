@@ -38,7 +38,7 @@ public class ReadonlyGridFieldTable extends GridFieldTable
 	public ReadonlyGridFieldTable(GridTableModel model,
 			UiDialogLauncher dlgLauncherToUse, Map otherGridFieldsToUse)
 	{
-		super(model, dlgLauncherToUse, otherGridFieldsToUse, false);
+		super(model, dlgLauncherToUse, otherGridFieldsToUse);
 	}
 
 	protected void createRenderers()

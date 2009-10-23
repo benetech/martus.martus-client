@@ -37,8 +37,7 @@ import org.martus.client.swingui.dialogs.UiDialogLauncher;
 abstract public class GridFieldTable extends GridTable
 {
 	public GridFieldTable(GridTableModel model,
-			UiDialogLauncher dlgLauncherToUse, Map otherGridFieldsToUse,
-			boolean isTableEditable)
+			UiDialogLauncher dlgLauncherToUse, Map otherGridFieldsToUse)
 	{
 		super(model, dlgLauncherToUse, otherGridFieldsToUse);
 	}

@@ -38,7 +38,7 @@ public class EditableGridFieldTable extends GridFieldTable
 	public EditableGridFieldTable(GridTableModel model,
 			UiDialogLauncher dlgLauncherToUse, Map otherGridFieldsToUse)
 	{
-		super(model, dlgLauncherToUse, otherGridFieldsToUse, true);
+		super(model, dlgLauncherToUse, otherGridFieldsToUse);
 	}
 
 	protected void createRenderers()
