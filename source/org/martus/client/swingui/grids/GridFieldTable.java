@@ -26,7 +26,7 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.swingui.grids;
 
 import java.util.Arrays;
-import java.util.List;
+import java.util.Collection;
 import java.util.Map;
 
 import javax.swing.table.TableCellEditor;
@@ -52,7 +52,7 @@ abstract public class GridFieldTable extends GridTable
 		return renderers[column];
 	}
 	
-	protected List getAllEditors()
+	protected Collection getAllEditors()
 	{
 		return Arrays.asList(editors);
 	}
