@@ -25,9 +25,11 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.search;
 
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
+import java.util.Vector;
 
 import org.martus.client.bulletinstore.ClientBulletinStore;
 import org.martus.common.MiniLocalization;
@@ -104,9 +106,9 @@ public class FieldChooserSpecBuilder
 		return new SearchableFieldChoiceItem(spec);
 	}
 
-	public Set convertToChoiceItems(Set specs)
+	public Vector convertToChoiceItems(Collection specs)
 	{
-		Set allChoices = new HashSet();
+		Vector allChoices = new Vector();
 		Iterator iter = specs.iterator();
 		while(iter.hasNext())
 		{

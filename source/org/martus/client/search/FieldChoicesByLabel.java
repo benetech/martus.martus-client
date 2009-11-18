@@ -27,10 +27,10 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.search;
 
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Iterator;
-import java.util.Set;
 import java.util.Vector;
 
 import javax.swing.tree.TreeNode;
@@ -54,7 +54,7 @@ public class FieldChoicesByLabel
 		allChoices.add(itemToAdd);
 	}
 	
-	public void addAll(Set itemsToAdd)
+	public void addAll(Collection itemsToAdd)
 	{
 		Iterator iter = itemsToAdd.iterator();
 		while(iter.hasNext())

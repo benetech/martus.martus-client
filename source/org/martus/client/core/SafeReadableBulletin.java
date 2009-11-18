@@ -30,7 +30,6 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Set;
 import java.util.Vector;
 
 import org.martus.client.search.FieldChooserSpecBuilder;
@@ -228,7 +227,7 @@ public class SafeReadableBulletin
 	{
 		FieldChooserSpecBuilder builder = new FieldChooserSpecBuilder(localization);
 		HashSet topLevelFieldSpecSet = new HashSet(Arrays.asList(topLevelFieldSpecs));
-		Set choices = builder.convertToChoiceItems(topLevelFieldSpecSet);
+		Vector choices = builder.convertToChoiceItems(topLevelFieldSpecSet);
 
 		Vector fields = new Vector();
 		Iterator iter = choices.iterator();
