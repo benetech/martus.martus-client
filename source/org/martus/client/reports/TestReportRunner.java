@@ -28,7 +28,8 @@ package org.martus.client.reports;
 
 import java.io.IOException;
 import java.io.StringWriter;
-import java.util.Vector;
+import java.util.Iterator;
+import java.util.Set;
 
 import org.apache.velocity.VelocityContext;
 import org.martus.client.bulletinstore.BulletinFolder;
@@ -125,11 +126,12 @@ public class TestReportRunner extends TestCaseEnhanced
 		ReportFormat rf = new ReportFormat();
 		rf.setDetailSection("$i. $bulletin.localId\n");
 		ReportOutput result = new ReportOutput();
-		Vector keys = store.scanForLeafKeys();
+		Set leafUids = store.getAllBulletinLeafUids();
 		SortableBulletinList list = new SortableBulletinList(app.getLocalization(), new MiniFieldSpec[0]);
-		for(int i = 0; i < keys.size(); ++i)
+		Iterator it = leafUids.iterator();
+		while(it.hasNext())
 		{
-			DatabaseKey key = (DatabaseKey)keys.get(i);
+			DatabaseKey key = DatabaseKey.createLegacyKey((UniversalId)it.next());
 			list.add(BulletinLoader.loadFromDatabase(store.getDatabase(), key, app.getSecurity()));
 		}
 		
@@ -457,13 +459,14 @@ public class TestReportRunner extends TestCaseEnhanced
 		BulletinStore store = app.getStore();
 		MartusCrypto security = app.getSecurity();
 		ReadableDatabase db = store.getDatabase();
-		Vector unsortedKeys = store.scanForLeafKeys();
+		Set leafUids = store.getAllBulletinLeafUids();
 		MiniLocalization localization = new MiniLocalization();
 		localization.setCurrentLanguageCode(MiniLocalization.ENGLISH);
 		SortableBulletinList list = new SortableBulletinList(localization, sortSpecs);
-		for(int i = 0; i < unsortedKeys.size(); ++i)
+		Iterator it = leafUids.iterator();
+		while(it.hasNext())
 		{
-			DatabaseKey key = (DatabaseKey)unsortedKeys.get(i);
+			DatabaseKey key = DatabaseKey.createLegacyKey((UniversalId)it.next());
 			Bulletin b = BulletinLoader.loadFromDatabase(db, key, security);
 			list.add(b);
 		}
