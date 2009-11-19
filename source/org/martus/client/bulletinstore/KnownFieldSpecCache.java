@@ -100,7 +100,7 @@ public class KnownFieldSpecCache extends BulletinStoreCache implements ReadableD
 		clear();
 	}
 
-	private void clear()
+	public void clear()
 	{
 		accountsToMapsOfLocalIdsToSetsOfSpecs.clear();
 	}
