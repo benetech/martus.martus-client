@@ -265,6 +265,7 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 		  "<Field type='MESSAGE'>\n" +
 		  "<Tag>"+messageTag+"</Tag>\n" +
 		  "<Label>"+messageLabel+"</Label>\n" +
+		  "<Message></Message>\n" +
 		  "</Field>\n" +
 		  "</PrivateFieldSpecs>\n\n";
 
