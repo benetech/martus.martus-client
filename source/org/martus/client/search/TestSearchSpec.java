@@ -39,9 +39,10 @@ public class TestSearchSpec extends TestCaseEnhanced
 	{
 		JSONObject json = new JSONObject();
 		json.put("test", "Hello");
-		SearchSpec spec = new SearchSpec(json, true);
+		SearchSpec spec = new SearchSpec(json, true, true);
 		SearchSpec got = new SearchSpec(spec.toJson());
 		assertEquals("Didn't copy searchString?", spec.getSearchGrid(), got.getSearchGrid());
 		assertEquals("Didn't copy finalOnly?", spec.getFinalOnly(), got.getFinalOnly());
+		assertEquals("Didn't copy sameRowsOnly?", spec.getSameRowsOnly(), got.getSameRowsOnly());
 	}
 }

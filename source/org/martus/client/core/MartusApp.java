@@ -110,10 +110,10 @@ import org.martus.common.packet.Packet.SignatureVerificationException;
 import org.martus.common.packet.Packet.WrongAccountException;
 import org.martus.common.packet.Packet.WrongPacketTypeException;
 import org.martus.jarverifier.JarVerifier;
-import org.martus.util.StreamableBase64;
 import org.martus.util.DirectoryUtils;
 import org.martus.util.Stopwatch;
 import org.martus.util.StreamCopier;
+import org.martus.util.StreamableBase64;
 import org.martus.util.UnicodeReader;
 import org.martus.util.UnicodeWriter;
 import org.martus.util.StreamableBase64.InvalidBase64Exception;
@@ -1161,12 +1161,12 @@ public class MartusApp
 		setLastUploadRemindedTime(new Date());
 	}
 
-	public SortableBulletinList search(SearchTreeNode searchNode, MiniFieldSpec[] specsForSorting, MiniFieldSpec[] extraSpecs, boolean searchFinalVersionsOnly, ProgressMeterInterface progressMeter)
+	public SortableBulletinList search(SearchTreeNode searchNode, MiniFieldSpec[] specsForSorting, MiniFieldSpec[] extraSpecs, boolean searchFinalVersionsOnly, boolean searchSameRowsOnly, ProgressMeterInterface progressMeter)
 	{
 		Stopwatch stopWatch = new Stopwatch();
 		stopWatch.start();
 		long revisionsSearched = 0;
-		BulletinSearcher matcher = new BulletinSearcher(searchNode);
+		BulletinSearcher matcher = new BulletinSearcher(searchNode, searchSameRowsOnly);
 		SortableBulletinList matchedBulletinUids = new SortableBulletinList(localization, specsForSorting, extraSpecs);
 
 		Set uids = store.getAllBulletinLeafUids();

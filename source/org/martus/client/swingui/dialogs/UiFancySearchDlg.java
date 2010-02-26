@@ -57,6 +57,8 @@ import org.martus.swing.Utilities;
 import org.martus.util.TokenReplacement;
 import org.martus.util.TokenReplacement.TokenInvalidException;
 
+import com.jhlabs.awt.GridLayoutPlus;
+
 public class UiFancySearchDlg extends JDialog
 {
 	public UiFancySearchDlg(UiMainWindow owner)
@@ -120,11 +122,14 @@ public class UiFancySearchDlg extends JDialog
 		
 		searchFinalBulletins = new UiCheckBox(getLocalization().getButtonLabel("SearchFinalBulletinsOnly"));
 		searchFinalBulletins.setSelected(false);
+		searchSameRowsOnly = new UiCheckBox(getLocalization().getButtonLabel("SearchSameRowsOnly"));
+		searchSameRowsOnly.setSelected(false);
 		
 		JPanel bottomPanel = new JPanel();
-		bottomPanel.setLayout(new BorderLayout());
-		bottomPanel.add(searchFinalBulletins, BorderLayout.NORTH);
-		bottomPanel.add(buttonBox, BorderLayout.CENTER);
+		bottomPanel.setLayout(new GridLayoutPlus(2, 1));
+		bottomPanel.add(searchFinalBulletins);
+		bottomPanel.add(searchSameRowsOnly);
+		bottomPanel.add(buttonBox);
 		
 
 		JPanel mainPanel = new JPanel();
@@ -188,9 +193,16 @@ public class UiFancySearchDlg extends JDialog
 			String title = getLocalization().getWindowTitle("FancySearchHelp");
 
 			StringBuffer rawHelpMessage = new StringBuffer(getLocalization().getFieldLabel("FancySearchHelpMsg1"));
+			rawHelpMessage.append("\n");
 			rawHelpMessage.append(getLocalization().getFieldLabel("FancySearchHelpMsg2"));
+			rawHelpMessage.append("\n");
 			if(notInEnglishSoExplainUsingEnglishAndOr())
+			{
 				rawHelpMessage.append(getLocalization().getFieldLabel("FancySearchHelpMsg3"));
+				rawHelpMessage.append("\n");
+			}
+			rawHelpMessage.append(getLocalization().getFieldLabel("FancySearchHelpMsg4"));
+			rawHelpMessage.append("\n");
 			
 			try
 			{
@@ -274,6 +286,16 @@ public class UiFancySearchDlg extends JDialog
 	public void setSearchFinalBulletinsOnly(boolean searchFinalOnly)
 	{
 		searchFinalBulletins.setSelected(searchFinalOnly);
+	}
+	
+	public boolean searchSameRowsOnly()
+	{
+		return searchSameRowsOnly.isSelected();
+	}
+	
+	public void setSearchSameRowsOnly(boolean sameRowsOnly)
+	{
+		searchSameRowsOnly.setSelected(sameRowsOnly);
 	}
 	
 	public JSONObject getSearchAsJson()
@@ -398,6 +420,7 @@ public class UiFancySearchDlg extends JDialog
 					SearchSpec spec = load(loadFrom);
 					dialog.setSearchAsJson(spec.getSearchGrid());
 					dialog.setSearchFinalBulletinsOnly(spec.getFinalOnly());
+					dialog.setSearchSameRowsOnly(spec.getSameRowsOnly());
 				} 
 				catch (Exception e)
 				{
@@ -441,7 +464,7 @@ public class UiFancySearchDlg extends JDialog
 	
 	SearchSpec getSearchSpec()
 	{
-		return new SearchSpec(getSearchAsJson(), searchFinalBulletinsOnly());
+		return new SearchSpec(getSearchAsJson(), searchFinalBulletinsOnly(), searchSameRowsOnly());
 	}
 	
 	public boolean getResults()
@@ -458,4 +481,5 @@ public class UiFancySearchDlg extends JDialog
 	UiMainWindow mainWindow;
 	FancySearchGridEditor grid;
 	UiCheckBox searchFinalBulletins;
+	UiCheckBox searchSameRowsOnly;
 }

@@ -390,6 +390,7 @@ public class EnglishStrings
 "button:UseNewCustomFields=Use New",
 "button:CloseHelp=Close Help",
 "button:SearchFinalBulletinsOnly=Only search most recent version of bulletins",
+"button:SearchSameRowsOnly=Match grid column specifications in the search screen to a single row of bulletin grid data. See the search Help screen for additional guidance on this advanced option.",
 "button:DeleteSelectedGridRow=Delete Selected Row",
 "button:InsertEmptyGridRow=Insert Row",
 "button:AppendEmptyGridRow=Append Row",
@@ -1167,6 +1168,18 @@ public class EnglishStrings
 "field:FancySearchHelpMsg3=" + 
 	"You can use the word #Or# or #And#, or you can use the English words \"#OrEnglish#\" and \"#AndEnglish#\" to search.\n\n" +  
 	"You need to put spaces before and after any #Or# / #And# keywords you use in your search.\n",
+"field:FancySearchHelpMsg4=" +
+	"If you want all of your grid search criteria to be met in a single bulletin grid row, " +
+	"please check the \"Match grid column specifications\" checkbox. " +
+	"For example, if you want to search for a specific victim name in a single row in your bulletins created after a certain date, " +
+	"select the checkbox and enter the following fields in the Search screen: " +
+	"\"Victim Information: First Name\" = x and \"Victim Information: Last Name\" = y and \"Date Created\" >= YYYY-Mon-DD. " +
+	"If you do not select the \"Match grid column specifications\" checkbox, " +
+	"Martus will find bulletins created after your specified date where any row has the first name you specified " +
+	"and any other row has the last name specified, but not necessarily in the same bulletin row " +
+	"(you could have a row with \"First Name\" = x and \"Last Name\" = b, " +
+	"and a different row with \"First Name\" = a and \"Last Name\" = y, " +
+	"and Martus will find that bulletin as matching the search because you did not specify that it had to match in a single row)\n",
 "field:SearchProgress=Progress: ",
 "field:ReportSearchProgress=Progress: ",
 "field:SearchFound=#NumberBulletinsFound# bulletins matched the search, and have been added to the Search Results folder.",

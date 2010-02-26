@@ -1346,7 +1346,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		
 		public void doTheWorkWithNO_SWING_CALLS()
 		{
-			searchResults = mainWindow.getApp().search(searchTree, sortSpecs, extraSpecs, mainWindow.uiState.searchFinalBulletinsOnly, getProgressMeter());
+			searchResults = mainWindow.getApp().search(searchTree, sortSpecs, extraSpecs, mainWindow.uiState.searchFinalBulletinsOnly(), mainWindow.uiState.searchSameRowsOnly(), getProgressMeter());
 		}
 		
 		public SortableBulletinList getResults()
@@ -1365,6 +1365,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	{
 		UiFancySearchDlg searchDlg = new UiFancySearchDlg(this);
 		searchDlg.setSearchFinalBulletinsOnly(uiState.searchFinalBulletinsOnly());
+		searchDlg.setSearchSameRowsOnly(uiState.searchSameRowsOnly());
 		String searchString = uiState.getSearchString();
 		JSONObject search = new JSONObject();
 		if(searchString.startsWith("{"))
@@ -1376,6 +1377,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		
 
 		uiState.setSearchFinalBulletinsOnly(searchDlg.searchFinalBulletinsOnly());
+		uiState.setSearchSameRowsOnly(searchDlg.searchSameRowsOnly());
 		uiState.setSearchString(searchDlg.getSearchAsJson().toString());
 		return searchDlg.getSearchTree();
 	}

@@ -27,6 +27,7 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.search;
 
 import java.io.File;
+import java.util.Arrays;
 
 import org.martus.client.core.SafeReadableBulletin;
 import org.martus.common.GridData;
@@ -192,6 +193,96 @@ public class TestBulletinSearcher extends TestCaseEnhanced
 		SafeReadableBulletin eb = new SafeReadableBulletin(emptyBulletin, localization);
 		assertEquals("didn't return empty field for empty grid?", "", eb.getPossiblyNestedField(firstColumn).getData());
 		
+	}
+
+	public void testGridGetMatchingRows() throws Exception
+	{
+		final String REPEATED_FIRST_NAME = "Adam";
+		final String REPEATED_LAST_NAME = "Blake";
+		final String NEVER_TOGETHER_FIRST_NAME = "Barbara";
+		final String NEVER_TOGETHER_LAST_NAME = "Anderson";
+		final String OTHER_DATA = "whatever";
+
+		GridFieldSpec gridSpec = new GridFieldSpec();
+		gridSpec.setTag("grid");
+		FieldSpec columnSpec1 = FieldSpec.createCustomField("", "first", new FieldTypeNormal());
+		FieldSpec columnSpec2 = FieldSpec.createCustomField("", "last", new FieldTypeNormal());
+		FieldSpec columnSpec3 = FieldSpec.createCustomField("", "other", new FieldTypeNormal());
+		gridSpec.addColumn(columnSpec1);
+		gridSpec.addColumn(columnSpec2);
+		gridSpec.addColumn(columnSpec3);
+		FieldSpec[] specs = {gridSpec};
+
+		MartusCrypto security = MockMartusSecurity.createClient();
+		Bulletin realBulletin = new Bulletin(security, specs, StandardFieldSpecs.getDefaultBottomSectionFieldSpecs());
+		GridData data = new GridData(gridSpec);
+		data.addEmptyRow();
+		data.addEmptyRow();
+		data.addEmptyRow();
+		data.setValueAt(REPEATED_FIRST_NAME, 0, 0);
+		data.setValueAt(NEVER_TOGETHER_LAST_NAME, 0, 1);
+		data.setValueAt(OTHER_DATA, 0, 2);
+		data.setValueAt(NEVER_TOGETHER_FIRST_NAME, 1, 0);
+		data.setValueAt(REPEATED_LAST_NAME, 1, 1);
+		data.setValueAt(OTHER_DATA, 1, 2);
+		data.setValueAt(REPEATED_FIRST_NAME, 2, 0);
+		data.setValueAt(REPEATED_LAST_NAME, 2, 1);
+		data.setValueAt(OTHER_DATA, 2, 2);
+		realBulletin.set(gridSpec.getTag(), data.getXmlRepresentation());
+		
+		SafeReadableBulletin b = new SafeReadableBulletin(realBulletin, localization);
+		FieldSpec firstColumnSpec = FieldSpec.createStandardField("grid." + columnSpec1.getLabel(), new FieldTypeNormal());
+		FieldSpec secondColumnSpec = FieldSpec.createStandardField("grid." + columnSpec2.getLabel(), new FieldTypeNormal());
+		FieldSpec thirdColumnSpec = FieldSpec.createStandardField("grid." + columnSpec3.getLabel(), new FieldTypeNormal());
+		MartusSearchableGridColumnField firstColumn = (MartusSearchableGridColumnField)b.getPossiblyNestedField(firstColumnSpec);
+		MartusSearchableGridColumnField secondColumn = (MartusSearchableGridColumnField)b.getPossiblyNestedField(secondColumnSpec);
+
+		{
+			Integer[] firstNameRows = firstColumn.getMatchingRows(MartusField.CONTAINS, REPEATED_FIRST_NAME, localization);
+			assertTrue("didn't match first and third rows?", Arrays.equals(firstNameRows, new Integer[] {new Integer(0), new Integer(2)}));
+			Integer[] lastNameRows = secondColumn.getMatchingRows(MartusField.CONTAINS, REPEATED_LAST_NAME, localization);
+			assertTrue("didn't match second and third rows?", Arrays.equals(lastNameRows, new Integer[] {new Integer(1), new Integer(2)}));
+		}
+		
+		SearchTreeNode firstNameNode = new SearchTreeNode(firstColumnSpec, "", REPEATED_FIRST_NAME);
+		BulletinSearcher firstNameSearcher = new BulletinSearcher(firstNameNode);
+		assertTrue("didn't find repeated first name?", firstNameSearcher.doesMatch(b, localization));
+		
+		SearchTreeNode lastNameNode = new SearchTreeNode(secondColumnSpec, "", REPEATED_LAST_NAME);
+		BulletinSearcher lastNameSearcher = new BulletinSearcher(lastNameNode);
+		assertTrue("didn't find repeated last name?", lastNameSearcher.doesMatch(b, localization));
+		
+		SearchTreeNode otherFirstNameNode = new SearchTreeNode(firstColumnSpec, "", NEVER_TOGETHER_FIRST_NAME);
+		SearchTreeNode otherLastNameNode = new SearchTreeNode(secondColumnSpec, "", NEVER_TOGETHER_LAST_NAME);
+		SearchTreeNode firstAndLastNormalNode = new SearchTreeNode(SearchTreeNode.AND, otherFirstNameNode, otherLastNameNode);
+		BulletinSearcher firstAndLastNormalSearcher = new BulletinSearcher(firstAndLastNormalNode);
+		assertTrue("normal didn't match names on different rows?", firstAndLastNormalSearcher.doesMatch(b, localization));
+		
+		SearchTreeNode badFirstAndLastSameRowNode = new SearchTreeNode(SearchTreeNode.AND, otherFirstNameNode, otherLastNameNode);
+		BulletinSearcher badFirstAndLastSameRowSearcher = new BulletinSearcher(badFirstAndLastSameRowNode, true);
+		assertFalse("same row match matched different rows?", badFirstAndLastSameRowSearcher.doesMatch(b, localization));
+
+		SearchTreeNode goodFirstAndLastSameRowNode = new SearchTreeNode(SearchTreeNode.AND, firstNameNode, lastNameNode);
+		BulletinSearcher goodFirstAndLastSameRowSearcher = new BulletinSearcher(goodFirstAndLastSameRowNode, true);
+		assertTrue("same row match didn't match?", goodFirstAndLastSameRowSearcher.doesMatch(b, localization));
+		
+		SearchTreeNode missingNameNode = new SearchTreeNode("nowhere");
+		SearchTreeNode foundOrNotNode = new SearchTreeNode(SearchTreeNode.OR, otherFirstNameNode, missingNameNode);
+		assertTrue("simple found OR not didn't work?", new BulletinSearcher(foundOrNotNode).doesMatch(b, localization));
+		assertTrue("samerow found OR not didn't work?", new BulletinSearcher(foundOrNotNode, true).doesMatch(b, localization));
+		SearchTreeNode notOrFoundNode = new SearchTreeNode(SearchTreeNode.OR, missingNameNode, otherFirstNameNode);
+		assertTrue("simple not OR found didn't work?", new BulletinSearcher(notOrFoundNode).doesMatch(b, localization));
+		assertTrue("samerow not OR found didn't work?", new BulletinSearcher(notOrFoundNode, true).doesMatch(b, localization));
+
+		SearchTreeNode delayedAndNode = new SearchTreeNode(SearchTreeNode.AND, foundOrNotNode, otherLastNameNode);
+		assertTrue("simple row1 OR no AND row2 didn't match?", new BulletinSearcher(delayedAndNode).doesMatch(b, localization));
+		assertFalse("samerow row1 OR no AND row2 matched?", new BulletinSearcher(delayedAndNode, true).doesMatch(b, localization));
+
+		SearchTreeNode otherDataNode = new SearchTreeNode(thirdColumnSpec, "", OTHER_DATA);
+		SearchTreeNode threeSameRowNode = new SearchTreeNode(SearchTreeNode.AND, goodFirstAndLastSameRowNode, otherDataNode);
+		assertTrue("samerow a AND b AND c didn't match?", new BulletinSearcher(threeSameRowNode, true).doesMatch(b, localization));
+		SearchTreeNode invertedThreeSameRowNode = new SearchTreeNode(SearchTreeNode.AND, otherDataNode, goodFirstAndLastSameRowNode);
+		assertTrue("samerow c AND a AND b didn't match?", new BulletinSearcher(invertedThreeSameRowNode, true).doesMatch(b, localization));
 	}
 	
 	

@@ -29,16 +29,18 @@ import org.json.JSONObject;
 
 public class SearchSpec
 {
-	public SearchSpec(JSONObject searchGridToUse, boolean finalOnlyToUse)
+	public SearchSpec(JSONObject searchGridToUse, boolean finalOnlyToUse, boolean sameRowsOnlyToUse)
 	{
 		searchGrid = searchGridToUse;
 		finalOnly = finalOnlyToUse;
+		sameRowsOnly = sameRowsOnlyToUse;
 	}
 	
 	public SearchSpec(JSONObject json)
 	{
 		searchGrid = json.getJSONObject(TAG_SEARCH_GRID);
 		finalOnly = json.getBoolean(TAG_FINAL_ONLY);
+		sameRowsOnly = json.optBoolean(TAG_SAME_ROWS_ONLY);
 	}
 	
 	public JSONObject getSearchGrid()
@@ -51,6 +53,11 @@ public class SearchSpec
 		return finalOnly;
 	}
 	
+	public boolean getSameRowsOnly()
+	{
+		return sameRowsOnly;
+	}
+	
 	public JSONObject toJson()
 	{
 		JSONObject json = new JSONObject();
@@ -58,6 +65,7 @@ public class SearchSpec
 		json.put(TAG_VERSION, VERSION);
 		json.put(TAG_SEARCH_GRID, getSearchGrid());
 		json.put(TAG_FINAL_ONLY, getFinalOnly());
+		json.put(TAG_SAME_ROWS_ONLY, getSameRowsOnly());
 		return json;
 	}
 	
@@ -65,10 +73,12 @@ public class SearchSpec
 	static final String TAG_VERSION = "Version";
 	static final String TAG_SEARCH_GRID = "SearchGrid";
 	static final String TAG_FINAL_ONLY = "FinalOnly";
+	static final String TAG_SAME_ROWS_ONLY = "SameRowsOnly";
 	
 	static final String JSON_TYPE = "SearchSpec";
-	static final int VERSION = 1;
+	static final int VERSION = 2;
 	
 	private JSONObject searchGrid;
 	private boolean finalOnly;
+	private boolean sameRowsOnly;
 }
