@@ -127,7 +127,7 @@ public class UiBulletinComponentHeaderSection extends UiBulletinComponentSection
 		return summaryText;
 	}
 	
-	void showBulletinDetails()
+	void showBulletinDetails() throws Exception
 	{
 		UiBulletinDetailsDialog dlg = new UiBulletinDetailsDialog(mainWindow, bulletin, tagQualifier);
 		dlg.setVisible(true);
@@ -135,9 +135,16 @@ public class UiBulletinComponentHeaderSection extends UiBulletinComponentSection
 
 	class DetailsListener implements ActionListener
 	{
-		public void actionPerformed(ActionEvent e)
+		public void actionPerformed(ActionEvent event)
 		{
-			showBulletinDetails();
+			try
+			{
+				showBulletinDetails();
+			}
+			catch(Exception e)
+			{
+				getMainWindow().notifyDlg("UnexpectedError");
+			}
 		}
 		
 	}

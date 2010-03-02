@@ -39,6 +39,8 @@ import org.martus.client.swingui.UiMainWindow;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.crypto.MartusCrypto;
 import org.martus.common.packet.BulletinHistory;
+import org.martus.common.packet.ExtendedHistoryEntry;
+import org.martus.common.packet.ExtendedHistoryList;
 import org.martus.common.packet.UniversalId;
 import org.martus.swing.UiButton;
 import org.martus.swing.UiLabel;
@@ -52,7 +54,7 @@ import org.martus.util.StreamableBase64.InvalidBase64Exception;
 
 public class UiBulletinDetailsDialog extends JDialog
 {
-	public UiBulletinDetailsDialog(UiMainWindow mainWindowToUse, Bulletin bulletinToShow, String tagQualifierToUse)
+	public UiBulletinDetailsDialog(UiMainWindow mainWindowToUse, Bulletin bulletinToShow, String tagQualifierToUse) throws Exception
 	{
 		super(mainWindowToUse.getCurrentActiveFrame(), true);
 		
@@ -67,6 +69,9 @@ public class UiBulletinDetailsDialog extends JDialog
 
 		UiScrollPane historyScroller = createHistoryTable();
 		panel.addComponents(new UiLabel(getLabel("History")), historyScroller);
+		
+		if(bulletin.getBulletinHeaderPacket().getExtendedHistory().size() > 0)
+			panel.addComponents(new UiLabel(getLabel("ExtendedHistory")), createExtendedHistoryComponent());
 		
 		JButton closeButton = new UiButton(getLocalization().getButtonLabel("close"));
 		closeButton.addActionListener(new CloseHandler());
@@ -83,6 +88,32 @@ public class UiBulletinDetailsDialog extends JDialog
 		
 	}
 	
+	private UiLabel createExtendedHistoryComponent() throws InvalidBase64Exception
+	{
+		StringBuffer extendedHistoryText = new StringBuffer();
+		extendedHistoryText.append("<html>");
+		ExtendedHistoryList extendedHistory = bulletin.getBulletinHeaderPacket().getExtendedHistory();
+		for(int clone = 0; clone < extendedHistory.size(); ++clone)
+		{
+			ExtendedHistoryEntry entry = extendedHistory.getHistory(clone);
+			String publicCode = MartusCrypto.computeFormattedPublicCode(entry.getClonedFromAccountId());
+			String label = getLocalization().getFieldLabel("PreviousAuthor");
+			label = label.replace("%s", publicCode);
+			extendedHistoryText.append(label);
+
+			BulletinHistory localHistory = entry.getClonedHistory();
+			extendedHistoryText.append("<ul>");
+			for(int revision = 0; revision < localHistory.size(); ++revision)
+			{
+				extendedHistoryText.append("<li>");
+				extendedHistoryText.append(localHistory.get(revision));
+				extendedHistoryText.append("</li>");
+			}
+			extendedHistoryText.append("</ul>");
+		}
+		return new UiLabel(extendedHistoryText.toString());
+	}
+
 	public void hidePreviewButton()
 	{
 		previewVersionButton.setVisible(false);

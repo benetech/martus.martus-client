@@ -36,7 +36,7 @@ public class UiBulletinComponentPreviewVersionHeaderSection extends UiBulletinCo
 		super(mainWindowToUse, tagQualifierToUse);
 	}
 
-	void showBulletinDetails()
+	void showBulletinDetails() throws Exception
 	{
 		UiBulletinDetailsDialog dlg = new UiBulletinDetailsDialog(mainWindow, bulletin, tagQualifier);
 		dlg.hidePreviewButton();

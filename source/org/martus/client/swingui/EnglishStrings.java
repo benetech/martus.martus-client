@@ -1222,6 +1222,8 @@ public class EnglishStrings
 "field:BulletinDetailsVersionId=ID",
 "field:BulletinDetailsVersionTitle=Title",
 "field:BulletinDetailsHistory=History",
+"field:BulletinDetailsExtendedHistory=Extended History",
+"field:PreviousAuthor=Previous Author: %s",
 "field:BulletinDetailsUnknownDate=(unknown)",
 "field:BulletinDetailsUnknownTitle=(unknown)",
 "field:BulletinDetailsInProgressDate=(in progress)",
