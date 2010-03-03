@@ -43,6 +43,8 @@ import org.martus.common.database.ReadableDatabase;
 import org.martus.common.field.MartusField;
 import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.packet.BulletinHistory;
+import org.martus.common.packet.ExtendedHistoryEntry;
+import org.martus.common.packet.ExtendedHistoryList;
 import org.martus.util.xml.XmlUtilities;
 
 public class BulletinXmlExporter
@@ -136,13 +138,36 @@ public class BulletinXmlExporter
 			dest.write(getXmlEncodedTagWithData(BulletinXmlExportImportConstants.ALL_PRIVATE, ""));
 		writeBulletinStatus(dest, b);			
 		writeBulletinHistory(dest, b);
+		writeBulletinExtendedHistory(dest, b);
 		dest.write(MartusXml.getTagEnd(BulletinXmlExportImportConstants.BULLETIN_META_DATA));
+	}
+
+	private void writeBulletinExtendedHistory(Writer dest, Bulletin b) throws IOException
+	{
+		ExtendedHistoryList history = b.getBulletinHeaderPacket().getExtendedHistory();
+		dest.write(MartusXml.getTagStartWithNewline(BulletinXmlExportImportConstants.EXTENDED_HISTORY));
+		for(int i=0; i < history.size(); ++i)
+		{
+			ExtendedHistoryEntry entry = history.getHistory(i);
+
+			dest.write(MartusXml.getTagStartWithNewline(BulletinXmlExportImportConstants.EXTENDED_HISTORY_ENTRY));
+			dest.write(MartusXml.getTagWithData(BulletinXmlExportImportConstants.EXTENDED_HISTORY_AUTHOR, entry.getClonedFromAccountId()));
+			writeBulletinHistory(dest, entry.getClonedHistory());
+			dest.write(MartusXml.getTagEnd(BulletinXmlExportImportConstants.EXTENDED_HISTORY_ENTRY));
+		}
+		dest.write(MartusXml.getTagEnd(BulletinXmlExportImportConstants.EXTENDED_HISTORY));
 	}
 
 	private void writeBulletinHistory(Writer dest, Bulletin b) throws IOException
 	{
 		dest.write(getXmlEncodedTagWithData(BulletinXmlExportImportConstants.BULLETIN_VERSION,Integer.toString(b.getVersion())));
 		BulletinHistory history = b.getHistory();
+		writeBulletinHistory(dest, history);
+	}
+
+	private void writeBulletinHistory(Writer dest, BulletinHistory history)
+			throws IOException
+	{
 		if(history.size() > 0)
 		{
 			dest.write(MartusXml.getTagStartWithNewline(BulletinXmlExportImportConstants.HISTORY));

@@ -45,6 +45,7 @@ import org.martus.common.bulletin.AttachmentProxy;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.bulletin.BulletinConstants;
 import org.martus.common.bulletin.BulletinXmlExportImportConstants;
+import org.martus.common.crypto.MockMartusSecurity;
 import org.martus.common.crypto.MartusCrypto.EncryptionException;
 import org.martus.common.database.ReadableDatabase;
 import org.martus.common.fieldspec.ChoiceItem;
@@ -58,6 +59,7 @@ import org.martus.common.fieldspec.GridFieldSpec;
 import org.martus.common.fieldspec.StandardFieldSpecs;
 import org.martus.common.fieldspec.TestCustomFieldSpecValidator;
 import org.martus.common.packet.BulletinHistory;
+import org.martus.common.packet.ExtendedHistoryList;
 import org.martus.common.packet.FieldDataPacket;
 import org.martus.common.utilities.MartusFlexidate;
 import org.martus.util.DirectoryUtils;
@@ -132,6 +134,7 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 		assertNotContains("<PrivateData>", result);
 		assertNotContains("<AttachmentList>", result);
 		assertNotContains("<History>", result);
+		assertContains("<ExtendedHistory>", result);
 	}
 	
 	public void testExportingFieldSpecs() throws Exception
@@ -343,6 +346,34 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 		String result = doExport(list, true, false);
 		
 		assertContains("<BulletinVersion>3</BulletinVersion>", result);
+		assertContains("<History>", result);
+		assertContains("<Ancestor>", result);
+		assertContains(localId1, result);
+		assertContains(localId2, result);
+	}
+	
+	public void testExportExtendedHistory() throws Exception
+	{
+		String localId1 = "pretend local id";
+		String localId2 = "another fake local id";
+
+		BulletinHistory fakeLocalHistory = new BulletinHistory();
+		fakeLocalHistory.add(localId1);
+		fakeLocalHistory.add(localId2);
+		ExtendedHistoryList history = new ExtendedHistoryList();
+		String otherAccountId = MockMartusSecurity.createOtherClient().getPublicKeyString();
+		history.add(otherAccountId, fakeLocalHistory);
+
+		Bulletin b = new Bulletin(store.getSignatureGenerator());
+		b.getBulletinHeaderPacket().setExtendedHistory(history);
+		
+		Vector list = new Vector();
+		list.add(b);
+		String result = doExport(list, true, false);
+		assertContains("<ExtendedHistory>", result);
+		assertContains("<ExtendedHistoryEntry>", result);
+		assertContains("<Author>", result);
+		assertContains("Missing extended history author?", otherAccountId, result);
 		assertContains("<History>", result);
 		assertContains("<Ancestor>", result);
 		assertContains(localId1, result);
