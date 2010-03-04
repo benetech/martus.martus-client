@@ -28,12 +28,15 @@ package org.martus.client.swingui.dialogs;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.HashMap;
+
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JDialog;
 import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
+
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.common.bulletin.Bulletin;
@@ -49,6 +52,7 @@ import org.martus.swing.UiScrollPane;
 import org.martus.swing.UiTable;
 import org.martus.swing.UiWrappedTextArea;
 import org.martus.swing.Utilities;
+import org.martus.util.TokenReplacement;
 import org.martus.util.StreamableBase64.InvalidBase64Exception;
 
 
@@ -88,7 +92,7 @@ public class UiBulletinDetailsDialog extends JDialog
 		
 	}
 	
-	private UiLabel createExtendedHistoryComponent() throws InvalidBase64Exception
+	private UiLabel createExtendedHistoryComponent() throws Exception
 	{
 		StringBuffer extendedHistoryText = new StringBuffer();
 		extendedHistoryText.append("<html>");
@@ -98,7 +102,10 @@ public class UiBulletinDetailsDialog extends JDialog
 			ExtendedHistoryEntry entry = extendedHistory.getHistory(clone);
 			String publicCode = MartusCrypto.computeFormattedPublicCode(entry.getClonedFromAccountId());
 			String label = getLocalization().getFieldLabel("PreviousAuthor");
-			label = label.replace("%s", publicCode);
+
+			HashMap tokenReplacement = new HashMap();
+			tokenReplacement.put("#AUTHOR#",publicCode);
+			label = TokenReplacement.replaceTokens(label, tokenReplacement);
 			extendedHistoryText.append(label);
 
 			BulletinHistory localHistory = entry.getClonedHistory();

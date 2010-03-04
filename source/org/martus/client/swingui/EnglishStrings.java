@@ -1223,7 +1223,7 @@ public class EnglishStrings
 "field:BulletinDetailsVersionTitle=Title",
 "field:BulletinDetailsHistory=History",
 "field:BulletinDetailsExtendedHistory=Extended History",
-"field:PreviousAuthor=Previous Author: %s",
+"field:PreviousAuthor=Previous Author: #AUTHOR#",
 "field:BulletinDetailsUnknownDate=(unknown)",
 "field:BulletinDetailsUnknownTitle=(unknown)",
 "field:BulletinDetailsInProgressDate=(in progress)",
