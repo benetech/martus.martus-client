@@ -70,8 +70,16 @@ class Martus
 		int foundFoldersUnsorted = options.indexOf("--folders-unsorted");
 		if(foundFoldersUnsorted >= 0)
 		{
+			System.out.println(options.get(foundFoldersUnsorted));
 			UiMainWindow.defaultFoldersUnsorted = true;
 			options.remove(foundFoldersUnsorted);
+		}
+		
+		int foundAlphaTester = options.indexOf("--alpha-tester");
+		{
+			System.out.println(options.get(foundAlphaTester));
+			UiMainWindow.isAlphaTester = true;
+			options.remove(foundAlphaTester);
 		}
 		
 		if(options.size() > 0)

@@ -216,7 +216,7 @@ public class TransferableBulletinList implements Transferable
 		return tb;
 	}
 
-	private static final String BULLETIN_FILE_EXTENSION = ".mba";
+	public static final String BULLETIN_FILE_EXTENSION = ".mba";
 	static DataFlavor bulletinListDataFlavor = new DataFlavor(TransferableBulletinList.class, "Martus Bulletins");
 	Vector files;
 	MartusCrypto sigVerifier;

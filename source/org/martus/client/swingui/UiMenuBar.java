@@ -48,6 +48,7 @@ import org.martus.client.swingui.actions.ActionMenuDiscardBulletins;
 import org.martus.client.swingui.actions.ActionMenuExit;
 import org.martus.client.swingui.actions.ActionMenuExportBulletins;
 import org.martus.client.swingui.actions.ActionMenuExportFolder;
+import org.martus.client.swingui.actions.ActionMenuExportMba;
 import org.martus.client.swingui.actions.ActionMenuExportMyPublicKey;
 import org.martus.client.swingui.actions.ActionMenuFolderCreate;
 import org.martus.client.swingui.actions.ActionMenuFolderDelete;
@@ -55,6 +56,7 @@ import org.martus.client.swingui.actions.ActionMenuFolderRename;
 import org.martus.client.swingui.actions.ActionMenuFoldersOrganize;
 import org.martus.client.swingui.actions.ActionMenuHelp;
 import org.martus.client.swingui.actions.ActionMenuImportBulletins;
+import org.martus.client.swingui.actions.ActionMenuImportMba;
 import org.martus.client.swingui.actions.ActionMenuModifyBulletin;
 import org.martus.client.swingui.actions.ActionMenuPasteBulletins;
 import org.martus.client.swingui.actions.ActionMenuPreferences;
@@ -96,6 +98,11 @@ public class UiMenuBar extends JMenuBar
 		file.add(new ActionMenuExportFolder(mainWindow));
 		file.add(new ActionMenuExportBulletins(mainWindow));
 		file.add(new ActionMenuImportBulletins(mainWindow));
+		if(UiMainWindow.isAlphaTester)
+		{
+			file.add(new ActionMenuExportMba(mainWindow));
+			file.add(new ActionMenuImportMba(mainWindow));
+		}
 		file.addSeparator();
 		file.add(new ActionMenuExit(mainWindow));
 
