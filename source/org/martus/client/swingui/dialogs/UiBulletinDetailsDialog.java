@@ -109,12 +109,16 @@ public class UiBulletinDetailsDialog extends JDialog
 			extendedHistoryText.append(label);
 
 			BulletinHistory localHistory = entry.getClonedHistory();
-			extendedHistoryText.append("<ul>");
+			extendedHistoryText.append("<br>");
 			for(int revision = 0; revision < localHistory.size(); ++revision)
 			{
-				extendedHistoryText.append("<li>");
-				extendedHistoryText.append(localHistory.get(revision));
-				extendedHistoryText.append("</li>");
+				extendedHistoryText.append("&nbsp;&nbsp;&nbsp;");
+				String idTemplate = getLocalization().getFieldLabel("PreviousBulletinId");
+				HashMap id = new HashMap();
+				id.put("#ID#", localHistory.get(revision));
+				String idRow = TokenReplacement.replaceTokens(idTemplate, id);
+				extendedHistoryText.append(idRow);
+				extendedHistoryText.append("<br>");
 			}
 			extendedHistoryText.append("</ul>");
 		}
