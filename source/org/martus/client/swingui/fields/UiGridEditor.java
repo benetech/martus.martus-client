@@ -63,12 +63,8 @@ public class UiGridEditor extends UiEditableGrid
 		GridFieldSpec gridSpec = (GridFieldSpec)spec;
 		GridData gridData = getGridData();
 		for(int row = 0; row < gridData.getRowCount(); ++row)
-		{
 			for(int col = 0; col < gridSpec.getColumnCount(); ++col)
-			{
 				validateCell(gridSpec, gridData, row, col);
-			}
-		}
 	}
 
 	private void validateCell(GridFieldSpec gridSpec, GridData gridData,
