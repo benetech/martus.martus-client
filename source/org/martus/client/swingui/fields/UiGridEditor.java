@@ -25,8 +25,11 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.fields;
 
+import java.io.IOException;
 import java.util.Map;
 import java.util.Vector;
+
+import javax.xml.parsers.ParserConfigurationException;
 
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.dialogs.UiDialogLauncher;
@@ -36,6 +39,7 @@ import org.martus.common.GridData;
 import org.martus.common.fieldspec.DataInvalidException;
 import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.fieldspec.GridFieldSpec;
+import org.xml.sax.SAXException;
 
 public class UiGridEditor extends UiEditableGrid 
 {
@@ -60,12 +64,32 @@ public class UiGridEditor extends UiEditableGrid
 	{
 		super.validate(spec, fullLabel);
 		
-		GridFieldSpec gridSpec = (GridFieldSpec)spec;
-		GridData gridData = getGridData();
-		for(int row = 0; row < gridData.getRowCount(); ++row)
-			for(int col = 0; col < gridSpec.getColumnCount(); ++col)
-				validateCell(gridSpec, gridData, row, col);
+		try
+		{
+			GridFieldSpec gridSpec = (GridFieldSpec)spec;
+			GridData gridData = getValidatableCopyOfData(gridSpec, getGridData());
+			for(int row = 0; row < gridData.getRowCount(); ++row)
+				for(int col = 0; col < gridSpec.getColumnCount(); ++col)
+					validateCell(gridSpec, gridData, row, col);
+		}
+		catch (DataInvalidException e)
+		{
+			throw(e);
+		}
+		catch (Exception e)
+		{
+			throw new DataInvalidException();
+		}
 	}
+	
+	private GridData getValidatableCopyOfData(GridFieldSpec gridSpec, GridData realGridData)
+			throws IOException, ParserConfigurationException, SAXException
+	{
+		GridData copyOfGridData = new GridData(gridSpec);
+		copyOfGridData.setFromXml(realGridData.getXmlRepresentation());
+		copyOfGridData.removeTrailingBlankRows();
+		return copyOfGridData;
+	}	
 
 	private void validateCell(GridFieldSpec gridSpec, GridData gridData,
 			int row, int col) throws DataInvalidException
