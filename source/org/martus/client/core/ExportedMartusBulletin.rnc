@@ -30,53 +30,54 @@ start = element MartusBulletins
 	element ExportMetaData
 	{
 		(
-			element PublicDataOnly { empty } | 
-			element PublicAndPrivateData { empty }
+			element PublicDataOnly { empty } | element PublicAndPrivateData { empty }
 		),
 		element NoAttachmentsExported { empty }?
 	},
-	element MartusBulletin
+	Bulletin*
+}
+
+Bulletin = 	element MartusBulletin
+{
+	element BulletinMetaData
 	{
-		element BulletinMetaData
+		element AuthorAccountId { text },
+		element BulletinLocalId { text },
+		element BulletinLastSavedDateTime { text },
+		element LocalizedBulletinLastSavedDateTime { text },
+		element AllPrivate { empty }?,
+		element BulletinStatus { "draft" | "sealed" },
+		element LocalizedBulletinStatus { text },
+		element BulletinVersion { xsd:integer },
+		History?,
+		element ExtendedHistory
 		{
-			element AuthorAccountId { text },
-			element BulletinLocalId { text },
-			element BulletinLastSavedDateTime { text },
-			element LocalizedBulletinLastSavedDateTime { text },
-			element AllPrivate { empty }?,
-			element BulletinStatus { "draft" | "sealed" },
-			element LocalizedBulletinStatus { text },
-			element BulletinVersion { xsd:integer },
-			History?,
-			element ExtendedHistory
+			element ExtendedHistoryEntry
 			{
-				element ExtendedHistoryEntry
-				{
-					element Author {text},
-					History
-				}*
-			}
-		},
-		element MainFieldSpecs
-		{
-			Field*
-		}?,
-		element PrivateFieldSpecs
-		{
-			Field*
-		}?,
-		FieldValues?,
-		element TopSectionAttachmentList
-		{
-			Attachment*
-		}?,
-		FieldValues?,
-		element BottomAttachmentList
-		{
-			Attachment*
-		}?
-		
-	}*
+				element Author {text},
+				History
+			}*
+		}
+	},
+	element MainFieldSpecs
+	{
+		Field*
+	}?,
+	element PrivateFieldSpecs
+	{
+		Field*
+	}?,
+	FieldValues?,
+	element TopSectionAttachmentList
+	{
+		Attachment*
+	}?,
+	FieldValues?,
+	element BottomAttachmentList
+	{
+		Attachment*
+	}?
+	
 }
 
 History = element History
