@@ -66,21 +66,27 @@ public class UiGridEditor extends UiEditableGrid
 		{
 			for(int col = 0; col < gridSpec.getColumnCount(); ++col)
 			{
-				FieldSpec columnSpec = gridSpec.getFieldSpec(col);
-				String value = gridData.getValueAt(row, col);
-				String fullColumnLabel = gridSpec.getLabel() + ": " + columnSpec.getLabel();
-				try
-				{
-					columnSpec.validate(fullColumnLabel, value, getLocalization());
-				}
-				catch(DataInvalidException e)
-				{
-					table.getSelectionModel().setSelectionInterval(row, row);
-					table.getColumnModel().getSelectionModel().setSelectionInterval(col, col);
-					table.requestFocusInWindow();
-					throw e;
-				}
+				validateCell(gridSpec, gridData, row, col);
 			}
+		}
+	}
+
+	private void validateCell(GridFieldSpec gridSpec, GridData gridData,
+			int row, int col) throws DataInvalidException
+	{
+		FieldSpec columnSpec = gridSpec.getFieldSpec(col);
+		String value = gridData.getValueAt(row, col);
+		String fullColumnLabel = gridSpec.getLabel() + ": " + columnSpec.getLabel();
+		try
+		{
+			columnSpec.validate(fullColumnLabel, value, getLocalization());
+		}
+		catch(DataInvalidException e)
+		{
+			table.getSelectionModel().setSelectionInterval(row, row);
+			table.getColumnModel().getSelectionModel().setSelectionInterval(col, col);
+			table.requestFocusInWindow();
+			throw e;
 		}
 	}
 }
