@@ -32,6 +32,7 @@ import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.dialogs.UiDialogLauncher;
 import org.martus.client.swingui.grids.EditableGridFieldTable;
 import org.martus.client.swingui.grids.GridTable;
+import org.martus.common.GridData;
 import org.martus.common.fieldspec.DataInvalidException;
 import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.fieldspec.GridFieldSpec;
@@ -60,12 +61,13 @@ public class UiGridEditor extends UiEditableGrid
 		super.validate(spec, fullLabel);
 		
 		GridFieldSpec gridSpec = (GridFieldSpec)spec;
-		for(int row = 0; row < getGridData().getRowCount(); ++row)
+		GridData gridData = getGridData();
+		for(int row = 0; row < gridData.getRowCount(); ++row)
 		{
 			for(int col = 0; col < gridSpec.getColumnCount(); ++col)
 			{
 				FieldSpec columnSpec = gridSpec.getFieldSpec(col);
-				String value = getGridData().getValueAt(row, col);
+				String value = gridData.getValueAt(row, col);
 				String fullColumnLabel = gridSpec.getLabel() + ": " + columnSpec.getLabel();
 				try
 				{
