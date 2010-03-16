@@ -101,7 +101,8 @@ public class BulletinXmlExporter
 	
 	private void writeXMLVersion(Writer dest) throws IOException
 	{
-		dest.write(getXmlEncodedTagWithData(BulletinXmlExportImportConstants.XML_EXPORT_VERSION,BulletinXmlExportImportConstants.XML_EXPORT_VERSION_NUMBER));
+		String version = new Integer(BulletinXmlExportImportConstants.XML_EXPORT_VERSION_NUMBER).toString();
+		dest.write(getXmlEncodedTagWithData(BulletinXmlExportImportConstants.XML_EXPORT_VERSION, version));
 	}
 	
 	private void writeExportMetaData(Writer dest, boolean includePrivateData, boolean includeAttachments) throws IOException

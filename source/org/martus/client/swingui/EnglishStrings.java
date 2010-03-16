@@ -106,6 +106,7 @@ public class EnglishStrings
 "wintitle:confirmReportSearchProgressCancel=Cancel Search",
 "wintitle:confirmSealSelectedBulletins=Seal Bulletins",
 "wintitle:confirmSealingSelectedBulletinsCancel=Sealing Bulletins",
+"wintitle:confirmXmlSchemaNewerImportAnyway=Import Bulletins",
 
 "wintitle:notifyDropErrorBulletinExists=Cannot Move Bulletin(s)",
 "wintitle:notifyDropErrorBulletinOlder=Cannot Move Bulletin(s)",
@@ -225,6 +226,8 @@ public class EnglishStrings
 "wintitle:notifyViewAttachmentNotAvailable=Unable to View Attachment",
 "wintitle:notifyAddPermissionsZeroBulletinsOurs=Update headquarters access to Bulletins",
 "wintitle:notifyAddPermissionsZeroHeadquartersSelected=No Headquarters Selected",
+"wintitle:notifyErrorImportingBulletinsTooOld=Import Bulletin(s)",
+"wintitle:notifyErrorImportingBulletinsTooNew=Import Bulletin(s)",
 
 "wintitle:notifyRetrieveCompleted=Retrieve Complete",
 "field:notifyRetrieveCompletedcause=Retrieving bulletins from the server is complete",
@@ -751,6 +754,9 @@ public class EnglishStrings
 "field:confirmSealSelectedBulletinscause=This will seal all the currently selected draft bulletins.",
 "field:confirmSealSelectedBulletinseffect=Any selected bulletins that are already sealed will remain unchanged.",
 
+"field:confirmXmlSchemaNewerImportAnywaycause=This XML file was created by a newer version of Martus.",
+"field:confirmXmlSchemaNewerImportAnywayeffect=If you continue with the import, some information in the bulletin(s) might not be imported.",
+
 "field:notifyDropErrorBulletinExistscause=One or more bulletins cannot be moved to that folder, because it already exists in that folder.",
 "field:notifyDropErrorBulletinOldercause=One or more bulletins cannot be moved to that folder, because a newer version of this bulletin already exists.",
 "field:notifyDropErrorscause=An unexpected error occurred while moving the bulletin(s). One or more files may be damaged.",
@@ -869,6 +875,9 @@ public class EnglishStrings
 "field:notifyReportFormatDifferentLanguagecause=This report format was created in a different language. As a result, some headings may not print properly, and some of the fields may not be available for sorting.",
 "field:notifyViewAttachmentNotAvailablecause=This computer can only view JPEG, GIF, and PNG image attachments",
 "field:notifyAddPermissionsZeroBulletinsOurscause=Must select at least one bulletin that was created by this account",
+
+"field:notifyErrorImportingBulletinsTooOldcause=This XML file was created by an older version of Martus and cannot be read by this version.",
+"field:notifyErrorImportingBulletinsTooNewcause=This XML file was created by a newer version of Martus and cannot be read by this version.  You must upgrade to the newer version of Martus to import this file.",
 
 "field:IncompatibleMtfVersion=The version of this translation is not compatible with this version of Martus.  It is recommended that you do not continue to use this translation version and go to (http://www.martus.org/downloads) for the appropriate version.",
 "field:IncompatibleMtfVersionTranslation=#MtfLanguage# Translation Version: #MtfVersionNumber#",

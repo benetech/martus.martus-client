@@ -33,7 +33,6 @@ import java.util.HashMap;
 import org.martus.client.bulletinstore.BulletinFolder;
 import org.martus.client.bulletinstore.ClientBulletinStore;
 import org.martus.client.swingui.dialogs.UiImportExportProgressMeterDlg;
-import org.martus.client.tools.XmlBulletinsImporter.FieldSpecVerificationException;
 import org.martus.common.bulletin.Bulletin;
 
 public class ImporterOfXmlFilesOfBulletins
@@ -64,7 +63,7 @@ public class ImporterOfXmlFilesOfBulletins
 	}
 	
 	
-	public void importFiles()  throws FieldSpecVerificationException, Exception
+	public void importFiles()  throws Exception
 	{
 		for(int i= 0; i < bulletinXmlFilesToImport.length; ++i)
 		{
@@ -77,11 +76,19 @@ public class ImporterOfXmlFilesOfBulletins
 		baseAttachmentsDirectory = baseAttachmentsDirectoryToUse;
 	}
 
-	private int importOneXmlFile(File bulletinXmlFileToImport) throws FieldSpecVerificationException, Exception
+	private int importOneXmlFile(File bulletinXmlFileToImport) throws Exception
 	{
 		FileInputStream xmlIn = new FileInputStream(bulletinXmlFileToImport);
 		XmlBulletinsImporter importer = new XmlBulletinsImporter(clientStore.getSignatureVerifier(), xmlIn, baseAttachmentsDirectory);
 		Bulletin[] bulletins = importer.getBulletins();
+		if(importer.isXmlVersionNewer())
+		{
+			if(consoleMonitor != null)
+				consoleMonitor.println("XML is a newer schema than this importer, so data may be lost");
+			if(progressMeter != null)
+				if(!progressMeter.confirmDialog("XmlSchemaNewerImportAnyway"))
+					return 0;
+		}
 		incompleteBulletinsMissingAttachments = importer.getMissingAttachmentsMap();
 		importFolder.prepareForBulkOperation();
 		int numberOfBulletinsImportedFromXmlFile = 0;

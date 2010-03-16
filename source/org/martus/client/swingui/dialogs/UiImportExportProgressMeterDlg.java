@@ -66,6 +66,11 @@ public class UiImportExportProgressMeterDlg extends UiProgressRetrieveDlg
 		currentBulletinTitle.setText(bulletinTitle);
 	}
 	
-	private UiTextField currentBulletinTitle;
+	public boolean confirmDialog(String baseTag)
+	{
+		return mainWindow.confirmDlg(baseTag);
+	}
 	
+	private UiTextField currentBulletinTitle;
+
 }

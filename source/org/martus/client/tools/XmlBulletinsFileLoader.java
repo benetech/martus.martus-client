@@ -23,6 +23,7 @@ Software Foundation, Inc., 59 Temple Place - Suite 330,
 Boston, MA 02111-1307, USA.
 
 */
+
 package org.martus.client.tools;
 
 import java.io.File;
@@ -45,6 +46,7 @@ import org.martus.common.fieldspec.FieldType;
 import org.martus.common.fieldspec.GridFieldSpec;
 import org.martus.common.utilities.MartusFlexidate;
 import org.martus.util.xml.SimpleXmlDefaultLoader;
+import org.martus.util.xml.SimpleXmlIntegerLoader;
 import org.xml.sax.SAXParseException;
 
 public class XmlBulletinsFileLoader extends SimpleXmlDefaultLoader
@@ -61,9 +63,28 @@ public class XmlBulletinsFileLoader extends SimpleXmlDefaultLoader
 		baseAttachmentsDirectory = baseAttachmentsDirectoryToUse;
 	}
 	
+	public int getLoadedVersion()
+	{
+		return dataVersion;
+	}
+
+	public boolean isXmlVersionOlder()
+	{
+		return dataVersion < BulletinXmlExportImportConstants.XML_EXPORT_VERSION_NUMBER;
+	}
+	
+	public boolean isXmlVersionNewer()
+	{
+		return dataVersion > BulletinXmlExportImportConstants.XML_EXPORT_VERSION_NUMBER;
+	}
+	
 	public SimpleXmlDefaultLoader startElement(String tag)
 		throws SAXParseException
 	{
+		if(tag.equals(BulletinXmlExportImportConstants.XML_EXPORT_VERSION))
+		{
+			return new SimpleXmlIntegerLoader(tag);
+		}
 		if(tag.equals(BulletinXmlExportImportConstants.MARTUS_BULLETIN))
 		{
 			currentBulletinLoader = new XmlBulletinLoader();
@@ -75,6 +96,11 @@ public class XmlBulletinsFileLoader extends SimpleXmlDefaultLoader
 	public void endElement(String tag, SimpleXmlDefaultLoader ended)
 		throws SAXParseException
 	{
+		if(tag.equals(BulletinXmlExportImportConstants.XML_EXPORT_VERSION))
+		{
+			SimpleXmlIntegerLoader loader = (SimpleXmlIntegerLoader)ended;
+			dataVersion = loader.getValue();
+		}
 		if(tag.equals(BulletinXmlExportImportConstants.MARTUS_BULLETIN))
 		{
 			mainFields = currentBulletinLoader.getMainFieldSpecs();
@@ -263,7 +289,9 @@ public class XmlBulletinsFileLoader extends SimpleXmlDefaultLoader
 			fieldSpecValidationErrors.add(validator);
 		}
 	}
-	
+
+	private int dataVersion;
+
 	public boolean allowSpaceOnlyCustomLabels;
 
 	private XmlBulletinLoader currentBulletinLoader;

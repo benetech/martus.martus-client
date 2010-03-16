@@ -102,10 +102,21 @@ public class ImportXmlBulletins
 			importer.importFiles();
 			clientStore.prepareToExitNormally();
 		}
+
 		catch(FieldSpecVerificationException e)
 		{
 			System.err.println(getValidationErrorMessage(e.getErrors()));
 			System.exit(6);
+		}
+		catch(XmlFileVersionTooOld e)
+		{
+			System.err.println("XML file version too old");
+			System.exit(8);
+		}
+		catch(XmlFileVersionTooNew e)
+		{
+			System.err.println("XML file version too new");
+			System.exit(9);
 		}
 		catch(Exception e)
 		{

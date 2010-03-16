@@ -33,6 +33,8 @@ import java.util.Vector;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.dialogs.UiImportExportProgressMeterDlg;
 import org.martus.client.tools.ImporterOfXmlFilesOfBulletins;
+import org.martus.client.tools.XmlFileVersionTooNew;
+import org.martus.client.tools.XmlFileVersionTooOld;
 import org.martus.client.tools.XmlBulletinsImporter.FieldSpecVerificationException;
 import org.martus.common.MartusLogger;
 
@@ -110,6 +112,16 @@ public class ImportBulletins
 				Vector errors = e.getErrors();
 				for(int i = 0; i < errors.size(); ++i)
 					MartusLogger.log(errors.get(i).toString());
+			}
+			catch(XmlFileVersionTooOld e)
+			{
+				e.printStackTrace();
+				mainWindow.notifyDlg("ErrorImportingBulletinsTooOld");
+			}
+			catch(XmlFileVersionTooNew e)
+			{
+				e.printStackTrace();
+				mainWindow.notifyDlg("ErrorImportingBulletinsTooNew");
 			}
 			catch (Exception e)
 			{

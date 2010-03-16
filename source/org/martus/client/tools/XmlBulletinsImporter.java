@@ -26,34 +26,42 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.tools;
 
 import java.io.File;
-import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Vector;
-import javax.xml.parsers.ParserConfigurationException;
+
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.crypto.MartusCrypto;
 import org.martus.common.fieldspec.FieldSpec;
 import org.martus.util.UnicodeReader;
-import org.xml.sax.SAXException;
 
 public class XmlBulletinsImporter
 {
-	public XmlBulletinsImporter(MartusCrypto security, InputStream xmlIn) throws IOException, ParserConfigurationException, SAXException, FieldSpecVerificationException
+	public XmlBulletinsImporter(MartusCrypto security, InputStream xmlIn) throws Exception
 	{
 		this(security, xmlIn, null);
 	}
 	
-	public XmlBulletinsImporter(MartusCrypto security, InputStream xmlIn, File baseAttachmentsDirectory) throws IOException, ParserConfigurationException, SAXException, FieldSpecVerificationException
+	public XmlBulletinsImporter(MartusCrypto security, InputStream xmlIn, File baseAttachmentsDirectory) throws Exception
 	{
 		UnicodeReader reader = new UnicodeReader(xmlIn);
+		bulletinsLoader = new XmlBulletinsFileLoader(security, baseAttachmentsDirectory);
 		try
 		{
-			bulletinsLoader = new XmlBulletinsFileLoader(security, baseAttachmentsDirectory);
 			bulletinsLoader.allowSpaceOnlyCustomLabels = true;
 			bulletinsLoader.parse(reader);
 			if(bulletinsLoader.didFieldSpecVerificationErrorOccur())
 				throw new FieldSpecVerificationException(bulletinsLoader.getErrors());
+		}
+		catch(Exception e)
+		{
+			if(bulletinsLoader.getLoadedVersion() == 0)
+				throw(e);
+			if(bulletinsLoader.isXmlVersionOlder())
+				throw new XmlFileVersionTooOld(e);
+			if(bulletinsLoader.isXmlVersionNewer())
+				throw new XmlFileVersionTooNew(e);
+			throw(e);
 		}
 		finally
 		{
@@ -77,6 +85,16 @@ public class XmlBulletinsImporter
 	public Bulletin[] getBulletins()
 	{
 		return bulletinsLoader.getBulletins();
+	}
+	
+	public boolean isXmlVersionOlder()
+	{
+		return bulletinsLoader.isXmlVersionOlder();
+	}
+	
+	public boolean isXmlVersionNewer()
+	{
+		return bulletinsLoader.isXmlVersionNewer();
 	}
 	
 	public HashMap getMissingAttachmentsMap()
