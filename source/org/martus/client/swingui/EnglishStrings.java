@@ -989,7 +989,7 @@ public class EnglishStrings
 	"<Column type='STRING'><Tag></Tag><Label>First Name</Label></Column>\n" +
 	"<Column type='STRING'><Tag></Tag><Label>Last Name</Label></Column>\n" +
 	"<Column type='BOOLEAN'><Tag></Tag><Label>Is Identified?</Label></Column>\n" +
-	"<Column type='DATE'><Tag></Tag><Label>Date of Birth</Label><MinimumDate>1910-01-01</MinimumDate><MaximumDate/></Column>\n" +
+	"<Column type='DATE'><Tag></Tag><Label>Date of Birth</Label><MinimumDate>1910-01-01</MinimumDate><MaximumDate></MaximumDate></Column>\n" +
 	"<Column type='DROPDOWN'><Tag></Tag><Label>Sex</Label><RequiredField></RequiredField>\n" +
 		"<Choices>\n<Choice>Male</Choice>\n" +
 		"<Choice>Female</Choice>\n" +
@@ -1023,7 +1023,7 @@ public class EnglishStrings
 	" </DataSource>\n" +
 	"</Column>\n" +
 	"<Column type='STRING'><Tag></Tag><Label>Profession</Label></Column>\n" +
-	"<Column type='DATERANGE'><Tag></Tag><Label>Dates of Profession</Label><MaximumDate/></Column>\n" +
+	"<Column type='DATERANGE'><Tag></Tag><Label>Dates of Profession</Label><MaximumDate></MaximumDate></Column>\n" +
 	"</GridSpecDetails>\n" +
 	"</Field>\n",
 
