@@ -907,7 +907,7 @@ public class EnglishStrings
 	"\n" +
 	"You can put multiple fields on a single row in your bulletin by using <KeepWithPrevious/> in the field definition.\n" +
 	"\n" +
-	"You can require certain fields or grid columns to be entered before saving a bulletin by using <RequiredField/> in the field definition.\n" +
+	"You can require certain fields or grid columns to be entered before saving a bulletin by using <RequiredField></RequiredField> in the field definition.\n" +
 	"\n" +
 	"You can restrict date fields, date grid columns, date range fields, and date range grid columns " +
 	"by using <MinimumDate> and/or <MaximumDate> tags with a date in YYYY-MM-DD format. " +
@@ -933,7 +933,7 @@ public class EnglishStrings
 	"<Field type='DROPDOWN'>\n" +
 	"<Tag>BulletinSource</Tag>\n" +
 	"<Label>Source of bulletin information</Label>\n" +
-	"<RequiredField/>\n" +
+	"<RequiredField></RequiredField>\n" +
 	"<Choices>\n<Choice>Media/Press</Choice>\n" +
 	"<Choice>Legal Report</Choice>\n" +
 	"<Choice>Personal Interview</Choice>\n" +
@@ -990,7 +990,7 @@ public class EnglishStrings
 	"<Column type='STRING'><Tag></Tag><Label>Last Name</Label></Column>\n" +
 	"<Column type='BOOLEAN'><Tag></Tag><Label>Is Identified?</Label></Column>\n" +
 	"<Column type='DATE'><Tag></Tag><Label>Date of Birth</Label><MinimumDate>1910-01-01</MinimumDate><MaximumDate/></Column>\n" +
-	"<Column type='DROPDOWN'><Tag></Tag><Label>Sex</Label><RequiredField/>\n" +
+	"<Column type='DROPDOWN'><Tag></Tag><Label>Sex</Label><RequiredField></RequiredField>\n" +
 		"<Choices>\n<Choice>Male</Choice>\n" +
 		"<Choice>Female</Choice>\n" +
 		"<Choice>Unknown</Choice>\n" +
