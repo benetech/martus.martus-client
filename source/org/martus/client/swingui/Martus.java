@@ -76,6 +76,7 @@ class Martus
 		}
 		
 		int foundAlphaTester = options.indexOf("--alpha-tester");
+		if(foundAlphaTester >= 0)
 		{
 			System.out.println(options.get(foundAlphaTester));
 			UiMainWindow.isAlphaTester = true;
