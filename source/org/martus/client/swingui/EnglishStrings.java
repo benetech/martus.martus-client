@@ -907,12 +907,12 @@ public class EnglishStrings
 	"\n" +
 	"You can put multiple fields on a single row in your bulletin by using <KeepWithPrevious/> in the field definition.\n" +
 	"\n" +
-	"You can require certain fields or grid columns to be entered before saving a bulletin by using <RequiredField></RequiredField> in the field definition.\n" +
+	"You can require certain fields or grid columns to be entered before saving a bulletin by using </RequiredField> in the field definition.\n" +
 	"\n" +
 	"You can restrict date fields, date grid columns, date range fields, and date range grid columns " +
 	"by using <MinimumDate> and/or <MaximumDate> tags with a date in YYYY-MM-DD format. " +
 	"NOTE: The year must always be a 'Gregorian' year like 2009, even if Martus is configured to use Thai or Persian dates. " +
-	"A blank date means 'today', although it may allow one day earlier or later, due to time zone issues. \n" +
+	"A blank date, shown as <MaximumDate/>, means 'today', although it may allow one day earlier or later, due to time zone issues. \n" +
 	"\n" +
 	"You can populate drop-down lists (either inside or outside of a grid) with values that have been entered in a grid elsewhere in your bulletin by using <DataSource> instead of <Choices> in the field definition.\n" +
 	"\n" +
@@ -933,7 +933,7 @@ public class EnglishStrings
 	"<Field type='DROPDOWN'>\n" +
 	"<Tag>BulletinSource</Tag>\n" +
 	"<Label>Source of bulletin information</Label>\n" +
-	"<RequiredField></RequiredField>\n" +
+	"<RequiredField/>\n" +
 	"<Choices>\n<Choice>Media/Press</Choice>\n" +
 	"<Choice>Legal Report</Choice>\n" +
 	"<Choice>Personal Interview</Choice>\n" +
@@ -989,8 +989,8 @@ public class EnglishStrings
 	"<Column type='STRING'><Tag></Tag><Label>First Name</Label></Column>\n" +
 	"<Column type='STRING'><Tag></Tag><Label>Last Name</Label></Column>\n" +
 	"<Column type='BOOLEAN'><Tag></Tag><Label>Is Identified?</Label></Column>\n" +
-	"<Column type='DATE'><Tag></Tag><Label>Date of Birth</Label><MinimumDate>1910-01-01</MinimumDate><MaximumDate></MaximumDate></Column>\n" +
-	"<Column type='DROPDOWN'><Tag></Tag><Label>Sex</Label><RequiredField></RequiredField>\n" +
+	"<Column type='DATE'><Tag></Tag><Label>Date of Birth</Label><MinimumDate>1910-01-01</MinimumDate><MaximumDate/></Column>\n" +
+	"<Column type='DROPDOWN'><Tag></Tag><Label>Sex</Label><RequiredField/>\n" +
 		"<Choices>\n<Choice>Male</Choice>\n" +
 		"<Choice>Female</Choice>\n" +
 		"<Choice>Unknown</Choice>\n" +
@@ -1023,7 +1023,7 @@ public class EnglishStrings
 	" </DataSource>\n" +
 	"</Column>\n" +
 	"<Column type='STRING'><Tag></Tag><Label>Profession</Label></Column>\n" +
-	"<Column type='DATERANGE'><Tag></Tag><Label>Dates of Profession</Label><MaximumDate></MaximumDate></Column>\n" +
+	"<Column type='DATERANGE'><Tag></Tag><Label>Dates of Profession</Label><MaximumDate/></Column>\n" +
 	"</GridSpecDetails>\n" +
 	"</Field>\n",
 
