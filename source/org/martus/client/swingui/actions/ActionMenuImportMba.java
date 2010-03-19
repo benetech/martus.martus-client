@@ -83,7 +83,9 @@ public class ActionMenuImportMba extends UiMenuAction
 		ClientBulletinStore store = mainWindow.getApp().getStore();
 		UniversalId uid = store.importBulletinZipFile(zip);
 		Bulletin bulletin = store.getBulletinRevision(uid);
-		to.add(bulletin);
+		if(!to.contains(bulletin))
+			to.add(bulletin);
+		store.saveFolders();
 	}
 
 	private File getFileToImport()
