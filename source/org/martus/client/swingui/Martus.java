@@ -104,7 +104,7 @@ class Martus
 			if(osName.startsWith("Windows"))
 			{
 				int comparedToWindow7 = osVersion.compareTo("6.1");
-				if(comparedToWindow7 < 0)
+				if(comparedToWindow7 >= 0)
 					useSystemLookAndFeel = false;
 			}
 			
