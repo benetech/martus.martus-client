@@ -106,7 +106,6 @@ public class BulletinSearcher
 		public MatchResults(boolean simpleDoesMatch)
 		{
 			doesMatch = simpleDoesMatch;
-			gridTagToMatchingRows = new HashMap();
 		}
 		
 		private MatchResults()
@@ -118,6 +117,7 @@ public class BulletinSearcher
 		{
 			this();
 			doesMatch = (matchingRows.length > 0);
+			gridTagToMatchingRows = new HashMap();
 			gridTagToMatchingRows.put(gridTag, matchingRows);
 		}
 		
@@ -125,6 +125,7 @@ public class BulletinSearcher
 		{
 			this();
 			doesMatch = simpleDoesMatch;
+			gridTagToMatchingRows = new HashMap();
 			gridTagToMatchingRows.putAll(matchingGridTagsAndRows);
 		}
 		
@@ -133,11 +134,52 @@ public class BulletinSearcher
 			return doesMatch;
 		}
 		
+		private Map getMatchingRows()
+		{
+			return gridTagToMatchingRows;
+		}
+
+		private boolean hasGridSearches()
+		{
+			return (gridTagToMatchingRows != null);
+		}
+
 		public static MatchResults and(MatchResults left, MatchResults right, boolean sameRowsMode)
 		{
-			if(!left.doesMatch || !right.doesMatch)
+			boolean isSimpleMatch = (left.doesMatch && right.doesMatch);
+
+			if(!isSimpleMatch)
 				return noMatches;
 
+			if(sameRowsMode && left.hasGridSearches() && right.hasGridSearches())
+			{
+				HashMap intersection = getIntersectingRows(left, right);
+				return new MatchResults(allGridsHaveMatchingRows(intersection), intersection);
+			}
+			
+			HashMap unionRows = getUnionRows(left, right);
+			if(left.hasGridSearches())
+				return new MatchResults(isSimpleMatch, unionRows);
+			
+			if(right.hasGridSearches())
+				return new MatchResults(isSimpleMatch, unionRows);
+			
+			return new MatchResults(isSimpleMatch, unionRows);
+		}
+
+		public static MatchResults or(MatchResults left, MatchResults right, boolean sameRowsMode)
+		{
+			boolean isSimpleMatch = (left.doesMatch || right.doesMatch);
+			if(!isSimpleMatch)
+				return noMatches;
+
+			HashMap union = getUnionRows(left, right);
+			return new MatchResults(isSimpleMatch, union);
+		}
+
+		private static HashMap getIntersectingRows(MatchResults left,
+				MatchResults right)
+		{
 			HashMap intersection = new HashMap();
 			Iterator it = left.gridTagToMatchingRows.keySet().iterator();
 			while(it.hasNext())
@@ -161,21 +203,28 @@ public class BulletinSearcher
 				
 				intersection.put(tag, mergedRows.toArray(new Integer[0]));
 			}
-			
-			boolean newDoesMatch = false;
-			if(sameRowsMode)
-				newDoesMatch = allGridsHaveMatchingRows(intersection);
-			else
-				newDoesMatch = (left.doesMatch && right.doesMatch);
-			return new MatchResults(newDoesMatch, intersection);
+			return intersection;
 		}
 		
-		public static MatchResults or(MatchResults left, MatchResults right, boolean sameRowsMode)
+		private static HashMap getUnionRows(MatchResults left,
+				MatchResults right)
 		{
-			if(!left.doesMatch && !right.doesMatch)
-				return noMatches;
-
 			HashMap union = new HashMap();
+			if(!left.hasGridSearches() && !right.hasGridSearches())
+			{
+				return union;
+			}
+			if(!left.hasGridSearches())
+			{
+				union.putAll(right.getMatchingRows());
+				return union;
+			}
+			if(!right.hasGridSearches())
+			{
+				union.putAll(left.getMatchingRows());
+				return union;
+			}
+			
 			Iterator it = left.gridTagToMatchingRows.keySet().iterator();
 			while(it.hasNext())
 			{
@@ -194,13 +243,7 @@ public class BulletinSearcher
 				if(mergedRows.size() > 0)
 					union.put(tag, mergedRows.toArray(new Integer[0]));
 			}
-			
-			boolean newDoesMatch = false;
-			if(sameRowsMode)
-				newDoesMatch = allGridsHaveMatchingRows(union);
-			else
-				newDoesMatch = (left.doesMatch || right.doesMatch);
-			return new MatchResults(newDoesMatch, union);
+			return union;
 		}
 		
 		private static boolean allGridsHaveMatchingRows(Map map)

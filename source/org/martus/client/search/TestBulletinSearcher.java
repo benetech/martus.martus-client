@@ -285,6 +285,114 @@ public class TestBulletinSearcher extends TestCaseEnhanced
 		assertTrue("samerow c AND a AND b didn't match?", new BulletinSearcher(invertedThreeSameRowNode, true).doesMatch(b, localization));
 	}
 	
+	public void testAndMixingNonGridAndSameRowGrid() throws Exception
+	{
+		final String FIRST_NAME = "whatever";
+
+		GridFieldSpec gridSpec = new GridFieldSpec();
+		gridSpec.setTag("grid");
+		FieldSpec columnSpec1 = FieldSpec.createCustomField("", "first", new FieldTypeNormal());
+		gridSpec.addColumn(columnSpec1);
+		FieldSpec[] specs = {gridSpec};
+
+		MartusCrypto security = MockMartusSecurity.createClient();
+		Bulletin realBulletin = new Bulletin(security, specs, StandardFieldSpecs.getDefaultBottomSectionFieldSpecs());
+		GridData data = new GridData(gridSpec);
+		data.addEmptyRow();
+		data.setValueAt(FIRST_NAME, 0, 0);
+		realBulletin.set(gridSpec.getTag(), data.getXmlRepresentation());
+		
+		SafeReadableBulletin b = new SafeReadableBulletin(realBulletin, localization);
+		FieldSpec firstColumnSpec = FieldSpec.createStandardField("grid." + columnSpec1.getLabel(), new FieldTypeNormal());
+		
+		SearchTreeNode firstNameMatchesNode = new SearchTreeNode(firstColumnSpec, "", FIRST_NAME);
+		SearchTreeNode firstNameDifferentNode = new SearchTreeNode(firstColumnSpec, "", "lsijfle");
+		SearchTreeNode otherFieldMatchesNode = new SearchTreeNode("");
+		SearchTreeNode otherFieldDifferentNode = new SearchTreeNode("sdfsfesef");
+
+		SearchTreeNode gridAndNonGridNode = new SearchTreeNode(SearchTreeNode.AND, firstNameMatchesNode, otherFieldMatchesNode);
+		BulletinSearcher gridAndNonGridSearcher = new BulletinSearcher(gridAndNonGridNode, true);
+		assertTrue("grid AND non grid didn't match?", gridAndNonGridSearcher.doesMatch(b, localization));
+
+		SearchTreeNode nonGridAndGridNode = new SearchTreeNode(SearchTreeNode.AND, otherFieldMatchesNode, firstNameMatchesNode);
+		BulletinSearcher nonGridAndGridSearcher = new BulletinSearcher(nonGridAndGridNode, true);
+		assertTrue("non grid AND grid didn't match?", nonGridAndGridSearcher.doesMatch(b, localization));
+
+		SearchTreeNode gridAndBadNonGridNode = new SearchTreeNode(SearchTreeNode.AND, firstNameMatchesNode, otherFieldDifferentNode);
+		BulletinSearcher gridAndBadNonGridSearcher = new BulletinSearcher(gridAndBadNonGridNode, true);
+		assertFalse("grid AND bad non grid matched?", gridAndBadNonGridSearcher.doesMatch(b, localization));
+
+		SearchTreeNode badNonGridAndGridNode = new SearchTreeNode(SearchTreeNode.AND, otherFieldDifferentNode, firstNameMatchesNode);
+		BulletinSearcher badNonGridAndGridSearcher = new BulletinSearcher(badNonGridAndGridNode, true);
+		assertFalse("bad non grid AND grid matched?", badNonGridAndGridSearcher.doesMatch(b, localization));
+
+		SearchTreeNode badGridAndNonGridNode = new SearchTreeNode(SearchTreeNode.AND, firstNameDifferentNode, otherFieldMatchesNode);
+		BulletinSearcher badGridAndNonGridSearcher = new BulletinSearcher(badGridAndNonGridNode, true);
+		assertFalse("bad grid AND non grid matched?", badGridAndNonGridSearcher.doesMatch(b, localization));
+
+		SearchTreeNode nonGridAndBadGridNode = new SearchTreeNode(SearchTreeNode.AND, otherFieldMatchesNode, firstNameDifferentNode);
+		BulletinSearcher nonGridAndBadGridSearcher = new BulletinSearcher(nonGridAndBadGridNode, true);
+		assertFalse("non grid AND bad grid matched?", nonGridAndBadGridSearcher.doesMatch(b, localization));
+
+		SearchTreeNode badNonGridAndBadGridNode = new SearchTreeNode(SearchTreeNode.AND, otherFieldDifferentNode, firstNameDifferentNode);
+		BulletinSearcher badNonGridAndBadGridSearcher = new BulletinSearcher(badNonGridAndBadGridNode, true);
+		assertFalse("bad non grid AND bad grid matched?", badNonGridAndBadGridSearcher.doesMatch(b, localization));
+	}
+	
+	public void testOrMixingNonGridAndSameRowGrid() throws Exception
+	{
+		final String FIRST_NAME = "whatever";
+
+		GridFieldSpec gridSpec = new GridFieldSpec();
+		gridSpec.setTag("grid");
+		FieldSpec columnSpec1 = FieldSpec.createCustomField("", "first", new FieldTypeNormal());
+		gridSpec.addColumn(columnSpec1);
+		FieldSpec[] specs = {gridSpec};
+
+		MartusCrypto security = MockMartusSecurity.createClient();
+		Bulletin realBulletin = new Bulletin(security, specs, StandardFieldSpecs.getDefaultBottomSectionFieldSpecs());
+		GridData data = new GridData(gridSpec);
+		data.addEmptyRow();
+		data.setValueAt(FIRST_NAME, 0, 0);
+		realBulletin.set(gridSpec.getTag(), data.getXmlRepresentation());
+		
+		SafeReadableBulletin b = new SafeReadableBulletin(realBulletin, localization);
+		FieldSpec firstColumnSpec = FieldSpec.createStandardField("grid." + columnSpec1.getLabel(), new FieldTypeNormal());
+		
+		SearchTreeNode firstNameMatchesNode = new SearchTreeNode(firstColumnSpec, "", FIRST_NAME);
+		SearchTreeNode firstNameDifferentNode = new SearchTreeNode(firstColumnSpec, "", "lsijfle");
+		SearchTreeNode otherFieldMatchesNode = new SearchTreeNode("");
+		SearchTreeNode otherFieldDifferentNode = new SearchTreeNode("sdfsfesef");
+
+		SearchTreeNode gridOrNonGridNode = new SearchTreeNode(SearchTreeNode.OR, firstNameMatchesNode, otherFieldMatchesNode);
+		BulletinSearcher gridOrNonGridSearcher = new BulletinSearcher(gridOrNonGridNode, true);
+		assertTrue("grid OR non grid didn't match?", gridOrNonGridSearcher.doesMatch(b, localization));
+
+		SearchTreeNode nonGridOrGridNode = new SearchTreeNode(SearchTreeNode.OR, otherFieldMatchesNode, firstNameMatchesNode);
+		BulletinSearcher nonGridOrGridSearcher = new BulletinSearcher(nonGridOrGridNode, true);
+		assertTrue("non grid OR grid didn't match?", nonGridOrGridSearcher.doesMatch(b, localization));
+
+		SearchTreeNode gridOrBadNonGridNode = new SearchTreeNode(SearchTreeNode.OR, firstNameMatchesNode, otherFieldDifferentNode);
+		BulletinSearcher gridOrBadNonGridSearcher = new BulletinSearcher(gridOrBadNonGridNode, true);
+		assertTrue("grid OR bad non grid didn't match?", gridOrBadNonGridSearcher.doesMatch(b, localization));
+
+		SearchTreeNode badNonGridOrGridNode = new SearchTreeNode(SearchTreeNode.OR, otherFieldDifferentNode, firstNameMatchesNode);
+		BulletinSearcher badNonGridOrGridSearcher = new BulletinSearcher(badNonGridOrGridNode, true);
+		assertTrue("bad non grid OR grid didn't match?", badNonGridOrGridSearcher.doesMatch(b, localization));
+
+		SearchTreeNode badGridOrNonGridNode = new SearchTreeNode(SearchTreeNode.OR, firstNameDifferentNode, otherFieldMatchesNode);
+		BulletinSearcher badGridOrNonGridSearcher = new BulletinSearcher(badGridOrNonGridNode, true);
+		assertTrue("bad grid OR non grid didn't match?", badGridOrNonGridSearcher.doesMatch(b, localization));
+
+		SearchTreeNode nonGridOrBadGridNode = new SearchTreeNode(SearchTreeNode.OR, otherFieldMatchesNode, firstNameDifferentNode);
+		BulletinSearcher nonGridOrBadGridSearcher = new BulletinSearcher(nonGridOrBadGridNode, true);
+		assertTrue("non grid OR bad grid didn't match?", nonGridOrBadGridSearcher.doesMatch(b, localization));
+
+		SearchTreeNode badNonGridOrBadGridNode = new SearchTreeNode(SearchTreeNode.OR, otherFieldDifferentNode, firstNameDifferentNode);
+		BulletinSearcher badNonGridOrBadGridSearcher = new BulletinSearcher(badNonGridOrBadGridNode, true);
+		assertFalse("bad non grid OR bad grid matched?", badNonGridOrBadGridSearcher.doesMatch(b, localization));
+	}
+	
 	
 	public void testDoesMatch() throws Exception
 	{
