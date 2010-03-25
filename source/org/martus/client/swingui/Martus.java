@@ -97,6 +97,7 @@ class Martus
 			if(Utilities.isMSWindows())
 				UIManager.put("Application.useSystemFontSettings", new Boolean(false));
 
+			boolean useSystemLookAndFeel = true;
 			String osName = System.getProperty("os.name");
 			String osVersion = System.getProperty("os.version");
 			System.out.println(osName + ": " + osVersion);
@@ -104,8 +105,11 @@ class Martus
 			{
 				int comparedToWindow7 = osVersion.compareTo("6.1");
 				if(comparedToWindow7 < 0)
-					UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+					useSystemLookAndFeel = false;
 			}
+			
+			if(useSystemLookAndFeel)
+				UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 		}
 		catch(Exception e)
 		{
