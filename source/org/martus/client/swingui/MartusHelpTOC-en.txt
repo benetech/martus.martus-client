@@ -26,6 +26,7 @@
 5d. Modifying a draft
 5e. Discarding a draft
 5f. Discarding a sealed bulletin
+5g. Sealing a group of draft bulletins at once
 6. Managing Bulletins
 6a. Default folders
 6b. Other folders created by Martus
