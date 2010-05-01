@@ -83,12 +83,25 @@ class Martus
 			options.remove(foundAlphaTester);
 		}
 		
+		UiMainWindow.timeoutInXSeconds = DEFAULT_TIMEOUT_SECONDS;
+		int foundTimeout = findOption(options, TIMEOUT_OPTION_TEXT);
+		if(foundTimeout >= 0)
+		{
+			String fullOption = (String)options.get(foundTimeout);
+			String requestedTimeoutMinutes = fullOption.substring(TIMEOUT_OPTION_TEXT.length());
+			System.out.println("Requested timeout in minutes: " + requestedTimeoutMinutes);
+			int timeoutMinutes = Integer.parseInt(requestedTimeoutMinutes);
+			UiMainWindow.timeoutInXSeconds = 60 * timeoutMinutes;
+			options.remove(foundTimeout);
+		}
+		
 		if(options.size() > 0)
 		{
 			System.out.println("Incorrect command line parameter");
 			System.out.println("The only valid options are:");
 			System.out.println("--testall");
 			System.out.println("--folders-unsorted");
+			System.out.println("--timeout-minutes=<nn>");
 			System.exit(1);
 		}
 		
@@ -124,4 +137,22 @@ class Martus
         	System.exit(0);
         }
     }
+
+	private static int findOption(Vector options, String optionText)
+	{
+		for(int i = 0; i < options.size(); ++i)
+		{
+			String option = (String) options.get(i);
+			if(option.startsWith(optionText))
+			{
+				return i;
+			}
+		}
+		
+		return -1;
+	}
+
+	private final static String TIMEOUT_OPTION_TEXT = "--timeout-minutes=";
+	private final static int DEFAULT_TIMEOUT_SECONDS = (10 * 60);
+
 }

@@ -183,13 +183,13 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		}
 		UiMainWindow.updateIcon(this);
 		
-		timeoutInXSeconds = TIMEOUT_SECONDS;
 		File timeoutDebug = new File(getApp().getMartusDataRootDirectory(), "timeout.1min");
 		if(timeoutDebug.exists())
 		{
 			timeoutInXSeconds = TESTING_TIMEOUT_60_SECONDS;
-			System.out.println(timeoutDebug.toString() + " detected; timeout after " + timeoutInXSeconds + " seconds");
+			System.out.println(timeoutDebug.toString() + " detected");
 		}
+		MartusLogger.log("Timeout set to " + timeoutInXSeconds + " seconds");
 		
 		timeBetweenFieldOfficeChecksSeconds = TIME_BETWEEN_FIELD_OFFICE_CHECKS_SECONDS;
 		File foCheckDebug = new File(getApp().getMartusDataRootDirectory(), "focheck.debug");
@@ -2728,10 +2728,9 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	boolean preparingToExitMartus;
 	private FileLock lockToPreventTwoInstances; 
 	private FileOutputStream lockStream;
-	int timeoutInXSeconds;
+	public static int timeoutInXSeconds;
 	public int timeBetweenFieldOfficeChecksSeconds;
 	public static final int MINIMUM_TEXT_FIELD_WIDTH = 30;
-	private static final int TIMEOUT_SECONDS = (10 * 60);
 	private static final int TESTING_TIMEOUT_60_SECONDS = 60;
 	private static final int TESTING_FOCHECK_SECONDS = 5 * 60;
 	private static final int MINIMUM_SCREEN_WIDTH = 700;
