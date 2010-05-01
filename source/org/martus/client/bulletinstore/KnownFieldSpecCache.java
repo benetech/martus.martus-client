@@ -70,12 +70,6 @@ public class KnownFieldSpecCache extends BulletinStoreCache implements ReadableD
 		security = securityToUse;
 	}
 	
-	synchronized public void restoreCacheFromSavedState()
-	{
-		// FIXME: Need to do this for real
-		initializeFromDatabase();
-	}
-	
 	synchronized public void initializeFromDatabase()
 	{
 		try
