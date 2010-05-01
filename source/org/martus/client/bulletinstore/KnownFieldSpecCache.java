@@ -75,8 +75,10 @@ public class KnownFieldSpecCache extends BulletinStoreCache implements ReadableD
 		try
 		{
 			saving = true;
+			visitedBulletinCount = 0;
 			createMap();
 			db.visitAllRecords(this);
+			logVisitedBulletinCount();
 		}
 		finally
 		{
@@ -404,7 +406,13 @@ public class KnownFieldSpecCache extends BulletinStoreCache implements ReadableD
 		if(!BulletinHeaderPacket.isValidLocalId(key.getLocalId()))
 			return;
 		addFieldSpecsFromBulletin(key);
-		
+		if((++visitedBulletinCount % 1000) == 0)
+			logVisitedBulletinCount();
+	}
+
+	private void logVisitedBulletinCount()
+	{
+		MartusLogger.log("Loaded specs for " + visitedBulletinCount + " bulletins");
 	}
 
 	private void addFieldSpecsFromBulletin(DatabaseKey bulletinHeaderKey)
@@ -506,6 +514,7 @@ public class KnownFieldSpecCache extends BulletinStoreCache implements ReadableD
 	private static final String TAG_SPEC_INDEXES_FOR_ALL_ACCOUNTS = "SpecIndexesForAllAccounts";
 
 	public boolean saving;
+	private int visitedBulletinCount;
 	ReadableDatabase db;
 	MartusCrypto security;
 	Map accountsToMapsOfLocalIdsToSetsOfSpecs;
