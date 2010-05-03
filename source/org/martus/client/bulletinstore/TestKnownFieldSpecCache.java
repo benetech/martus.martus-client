@@ -44,6 +44,7 @@ import org.martus.common.fieldspec.DropDownFieldSpec;
 import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.fieldspec.FieldTypeDateRange;
 import org.martus.common.fieldspec.FieldTypeMultiline;
+import org.martus.common.fieldspec.MessageFieldSpec;
 import org.martus.util.TestCaseEnhanced;
 
 public class TestKnownFieldSpecCache extends TestCaseEnhanced
@@ -165,6 +166,27 @@ public class TestKnownFieldSpecCache extends TestCaseEnhanced
 		cache.revisionWasSaved(b1);
 		cache.revisionWasSaved(b2);
 		assertEquals(2, cache.getAllKnownFieldSpecs().size());
+	}
+	
+	public void testReallyBigFieldSpec() throws Exception
+	{
+		StringBuffer reallyLongString = new StringBuffer();
+		String ten = "1234567890";
+		String hundred = ten+ten+ten+ten+ten+ten+ten+ten+ten+ten;
+		String fiveHundred = hundred+hundred+hundred+hundred+hundred;
+		String thousand = fiveHundred + fiveHundred;
+		for(int i = 0; i < 100; ++i)
+			reallyLongString.append(thousand);
+		
+		MessageFieldSpec spec1 = new MessageFieldSpec();
+		spec1.setLabel(reallyLongString.toString());
+		
+		Bulletin b = new Bulletin(security, new FieldSpec[] {spec1}, new FieldSpec[0]);
+		cache.revisionWasSaved(b);
+		ByteArrayOutputStream out = new ByteArrayOutputStream();
+		cache.saveToStream(out);
+		ByteArrayInputStream in = new ByteArrayInputStream(out.toByteArray());
+		cache.loadFromStream(in);
 	}
 
 	private Bulletin createSampleBulletin(MartusCrypto authorSecurity)

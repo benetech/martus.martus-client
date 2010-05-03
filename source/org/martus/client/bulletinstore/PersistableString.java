@@ -62,7 +62,16 @@ public class PersistableString extends PersistableObject
 	
 	public PersistableString(DataInputStream dataIn) throws IOException
 	{
-		value = dataIn.readUTF();
+		StringBuffer data = new StringBuffer();
+		while(true)
+		{
+			String chunk = dataIn.readUTF();
+			if(chunk.length() == 0)
+				break;
+			data.append(chunk);
+		}
+		
+		value = data.toString();
 	}
 	
 	public int getType()
@@ -91,7 +100,21 @@ public class PersistableString extends PersistableObject
 
 	void internalWriteTo(DataOutputStream dataOut) throws IOException 
 	{
-		dataOut.writeUTF(value);
+		final int CHUNK_SIZE = 30000;
+		int startIndex = 0;
+		while(true)
+		{
+			int remainingLength = value.length() - startIndex;
+			int chunkLength = Math.min(CHUNK_SIZE, remainingLength);
+			if(chunkLength <= 0)
+				break;
+
+			int endIndex = startIndex + chunkLength;
+			String chunk = value.substring(startIndex, endIndex);
+			dataOut.writeUTF(chunk);
+			startIndex += chunkLength;
+		}
+		dataOut.writeUTF("");
 	}
 
 	private String value;

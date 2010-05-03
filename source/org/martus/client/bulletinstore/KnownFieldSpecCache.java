@@ -509,7 +509,7 @@ public class KnownFieldSpecCache extends BulletinStoreCache implements ReadableD
 		return specsForOneAccount;
 	}
 	
-	private static final int FILE_VERSION = 3;
+	private static final int FILE_VERSION = 4;
 	private static final String TAG_ALL_SECTION_SPECS = "AllSectionSpecs";
 	private static final String TAG_SPEC_INDEXES_FOR_ALL_ACCOUNTS = "SpecIndexesForAllAccounts";
 
