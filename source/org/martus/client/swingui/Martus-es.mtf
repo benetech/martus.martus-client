@@ -1,8 +1,8 @@
 ﻿# Martus Client Translation File
 # Language code:  es
 # Language name:  Spanish
-# Translated by:  Benetech, Katitza Rodríguez Pereda, CPSR-Perú 
-# Exported date:  Fri Apr 09 16:21:01 PDT 2010
+# Translated by:  Benetech, Katitza Rodríguez Pereda, CPSR-Perú
+# Exported date:  Fri Jun 11 11:49:20 PDT 2010
 # Client version: 3.4
 # Client build:   20100326.1924
 #
@@ -1694,8 +1694,8 @@
 #_________________________________________________________=There was an error saving your template.
 -88ed-field:notifyErrorExportingCustomizationTemplatecause=Hubo un error guardando su plantilla. 
 
-#___________________________________________________=This XML file was created by a newer version of Martus and cannot be read by this version. You must upgrade to the newer version of Martus to import this file.
--7fdd-field:notifyErrorImportingBulletinsTooNewcause=Este archivo de XML fue creado por una versión de Martus más nueva y no puede ser leído por esta versión. Tiene que actualizar a la nueva versión de Martus para importar este archivo.
+#___________________________________________________=This XML file was created by a newer version of Martus and cannot be read by this version.  You must upgrade to the newer version of Martus to import this file.
+-c6cb-field:notifyErrorImportingBulletinsTooNewcause=Este archivo de XML fue creado por una versión de Martus más nueva y no puede ser leído por esta versión. Tiene que actualizar a la nueva versión de Martus para importar este archivo.
 
 #___________________________________________________=This XML file was created by an older version of Martus and cannot be read by this version.
 -7360-field:notifyErrorImportingBulletinsTooOldcause=Este archivo de XML fue creado por una versión más vieja de Martus y no puede ser leído por esta versión corriente.
@@ -2055,7 +2055,7 @@
 -768e-field:title=Título
 
 #_____________________________=Spanish 3.4
--b11d-field:translationVersion=Español 3.4
+-649d-field:translationVersion=Español 3.4
 
 #___________________=Username
 -84c2-field:username=Nombre de usuario
