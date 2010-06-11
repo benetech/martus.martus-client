@@ -1,8 +1,8 @@
 ﻿# Martus Client Translation File
 # Language code:  bu
-# Language name: Burmese <language:bu>
-# Translated by:  Solveware, Global Arena
-# Exported date:  Wed Mar 31 12:03:33 PDT 2010
+# Language name:  Burmese
+# Translated by:  Solveware, Global Arena 
+# Exported date:  Fri Jun 11 11:03:18 PDT 2010
 # Client version: 3.4
 # Client build:   20100326.1924
 #
@@ -722,7 +722,6 @@
 #______________________________=If you want all of your grid search criteria to be met in a single bulletin grid row, please check the "Match grid column specifications" checkbox. For example, if you want to search for a specific victim name in a single row in your bulletins created after a certain date, select the checkbox and enter the following fields in the Search screen: "Victim Information: First Name" = x and "Victim Information: Last Name" = y and "Date Created" >= YYYY-Mon-DD. If you do not select the "Match grid column specifications" checkbox, Martus will find bulletins created after your specified date where any row has the first name you specified and any other row has the last name specified, but not necessarily in the same bulletin row (you could have a row with "First Name" = x and "Last Name" = b, and a different row with "First Name" = a and "Last Name" = y, and Martus will find that bulletin as matching the search because you did not specify that it had to match in a single row)\n
 -97c7-field:FancySearchHelpMsg4= သင္၏ ရႀာေဖၾ ဂရစ္စံမဵားသည္ တစ္ခုတည္းေသာ စာေစာင္ဂရစ္ တန္းတၾင္ ဴပည့္စုံေစလုိလဵင္ “ဂရစ္ေကာ္လံ သတ္မႀတ္ခဵက္မဵား ယႀဥ္တၾဲပၝ”အကၾက္ကုိ ေရၾးပၝ။ ဥပမာအားဴဖင့္ သင့္အေနဴဖင့္ ရက္စဲၾတစ္ခု ဴပီးေနာက္ ဖန္တီးထားသည့္ သင့္စာေစာင္မႀ တန္းတစ္ခုတၾင္ ႎႀိပ္စက္ခံရသူတစ္ဦး၏ သီးဴခား အမည္ကုိ ရႀာေဖၾလုိပၝက ထုိအကၾက္ကုိ ေရၾးခဵယ္ဴပီး ရႀာေဖၾ မဵက္ႎႀာဴပင္တၾင္ ေအာက္ေဖာ္ဴပပၝ နယ္ပယ္ မဵားကုိ ထည့္သၾင္းပၝ။ "ဓားစာခံ၏ အခဵက္အလက္။ ကုိယ္ပုိင္အမည္"=x ႎႀင့္ ႎႀိပ္စက္ခံ ရသူ၏ "အခဵက္အလက္။ မဵိႂးရုိးအမည္=y ႎႀင့္ "ဖန္တီးသည့္ေနစၾဲ">=`ႎႀစ္-လ-ရက္။ အကယ္၍သင့္သည္ “ဂရစ္ေကာ္လံ သတ္မႀတ္ခဵက္မဵား ယႀဥ္တၾဲပၝ”အကၾက္ကုိ မေရၾးခဲ့ပၝက Martus သည္ မည္သည့္အတန္းတၾင္မဆုိ သင္အတိအကဵ ေဖာ္ဴပသည့္ ပထမအမည္ ပၝရႀိဴပီး အဴခားမည္သည့္ အတန္းတၾင္ သင္အတိအကဵ ေဖာ္ဴပသည့္ ေနာက္ဆုံးအမည္ ပၝရႀိသည့္ သင္သတ္မႀတ္သည့္ ရက္စဲၾဴပီးေနာက္ဖန္တီးသည့္ စာေစာင္မဵားကုိ ရႀာေဖၾလိမ့္မည္။ သိုႛရာတၾင္ တူညီေသာ စာေစာင္အတန္းတၾင္ ရႀာေဖၾမည္ မဟုတ္ေပ။ သင့္အေနဴဖင့္ ကုိယ္ပုိင္အမည္"=x ႎႀင့္ မဵိႂးရုိးအမည္=b ပၝရႀိေသာ တန္းတစ္ခုရရႀိႎုိင္ဴပီး ကုိယ္ပုိင္အမည္"=a ႎႀင့္ မဵိႂးရုိးအမည္=y ပၝရႀိေသာ ကၾဲဴပားဴခားနားသည့္ တန္းတစ္ခု ရရႀိႎုိင္သည္။ သင့္အေနဴဖင့္ အတန္း တစ္ခုတၾင္ ယႀဥ္တဲၾရမည္ဟု အတိအကဵ သတ္မႀတ္မထားေသာေဳကာင့္ Martus သည္ ထုိစာေစာင္အား ရႀာေဖၾမႁကုိ ကုိက္ညီမႁအဴဖစ္ ရႀာေဖၾလိမ့္မည္။)
 
-
 #___________________________=Yes/No
 -9f62-field:FieldTypeBOOLEAN=ဟုတ္ပၝသည္/မဟုတ္ပၝ
 
@@ -1250,6 +1249,7 @@
 
 #______________________________________=The date range you entered is invalid because the end date occurs before the begin date.
 -7ea3-field:confirmDateRageInvalidcause=ထည့္သၾင္းထားေသာ ေနႛစၾဲတာသည္ သံုးမရပၝ။ အဆံုးေနႛစၾဲသည္ အစေနႛစၾဲမတိုင္မီ ေပၞေပၝက္ေနသည္။
+
 #_______________________________________=Answering Yes will take you back to the '#FieldLabel#' date range to fix the problem.  Answering No will swap the begin and end dates so they are in order.
 -23bd-field:confirmDateRageInvalideffect=Yes (ဟုတ္ပၝသည္) ဟု ေဴဖဳကားလ႖င္ ဴပႍနာကို ေဴဖရႀင္းႎိုင္ရန္ ေနႛစၾဲ အတိုင္းအတာ #FieldLabel# ေနရာသိုႛ ဴပန္လည္ေရာက္ရႀိပၝမည္။ No (မဟုတ္ပၝ) ဟု ေဴဖဳကားလ႖င္ ေနႛစၾဲကို ၎၏ မူလ စံအတိုင္း ဴပန္ေဴပာင္းေပးပၝမည္။
 
@@ -1618,6 +1618,7 @@
 
 #________________________________________=Dates entered in '#FieldLabel#' cannot be earlier than #MinimumDate#
 -db1c-field:messageErrorDateTooEarlycause=#FieldLabel# တၾင္ထည့္သၾင္းေသာ ေနႛစၾဲမဵားသည္  #MinimumDate# ထက္ ပုိ မေစာႎုိင္ေပ။
+
 #_______________________________________=Dates entered in '#FieldLabel#' cannot be later than #MaximumDate#
 -615b-field:messageErrorDateTooLatecause=#FieldLabel# တၾင္ထည့္သၾင္းေသာ ေနႛစၾဲမဵားသည္  #MaximumDate# ထက္ ပုိ ေနာက္မကဵႎုိင္ေပ။
 
@@ -1693,8 +1694,8 @@
 #_________________________________________________________=There was an error saving your template.
 -88ed-field:notifyErrorExportingCustomizationTemplatecause=ပံုစံခၾင္အား သိမ္းဆည္းရာတၾင္ အခက္အခဲတစ္ခု ရႀိေနပၝသည္။
 
-#___________________________________________________=This XML file was created by a newer version of Martus and cannot be read by this version.  You must upgrade to the newer version of Martus to import this file.
--7fdd-field:notifyErrorImportingBulletinsTooNewcause=ဤ XML ဖုိင္ကုိ ပုိသစ္ေသာ Martus ဗားရႀင္းက ဖန္တီးဴပီး ဤဗားရႀင္းဴဖင့္ ဖတ္မရႎုိင္ပၝ။ ဤဖုိင္ကုိ တင္သၾင္းရန္ သင့္အေနဴဖင့္ ပုိသစ္ေသာ Martus ဗားရႀင္းကုိ အဆင့္ဴမႀင့္ရပၝမည္။
+#___________________________________________________=This XML file was created by a newer version of Martus and cannot be read by this version.  You must upgrade to the newer version of Martus to import this file.
+-c6cb-field:notifyErrorImportingBulletinsTooNewcause=ဤ XML ဖုိင္ကုိ ပုိသစ္ေသာ Martus ဗားရႀင္းက ဖန္တီးဴပီး ဤဗားရႀင္းဴဖင့္ ဖတ္မရႎုိင္ပၝ။ ဤဖုိင္ကုိ တင္သၾင္းရန္ သင့္အေနဴဖင့္ ပုိသစ္ေသာ Martus ဗားရႀင္းကုိ အဆင့္ဴမႀင့္ရပၝမည္။
 
 #___________________________________________________=This XML file was created by an older version of Martus and cannot be read by this version.
 -7360-field:notifyErrorImportingBulletinsTooOldcause=ဤ XML ဖုိင္ကုိ ပုိေဟာင္းေေသာ Martus ဗားရႀင္းက ဖန္တီးဴပီး ဤဗားရႀင္းဴဖင့္ ဖတ္မရႎုိင္ပၝ။
@@ -2053,8 +2054,8 @@
 #________________=Title
 -768e-field:title=ေခၝင္းစီး
 
-#_____________________________=Burmese 3.4 
--b11d-field:translationVersion=ဴမန္မာ 3.4
+#_____________________________=Burmese 3.4
+-649d-field:translationVersion=ဴမန္မာ 3.4 
 
 #___________________=Username
 -84c2-field:username=သံုးစၾဲသူအမည္
