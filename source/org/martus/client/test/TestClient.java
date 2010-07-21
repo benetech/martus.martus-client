@@ -88,6 +88,7 @@ public class TestClient
 		suite.addTest(new TestSuite(TestLocalization.class));
 		suite.addTest(new TestSuite(TestMartusApp_NoServer.class));
 		suite.addTest(new TestSuite(TestMartusFlexidate.class));
+		suite.addTest(new TestSuite(TestMartusJarVerification.class));
 		suite.addTest(new TestSuite(TestMartusUserNameAndPassword.class));
 		suite.addTest(new TestSuite(TestPageReportBuilder.class));
 		suite.addTest(new TestSuite(TestPartialBulletin.class));
