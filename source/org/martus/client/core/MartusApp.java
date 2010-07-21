@@ -141,7 +141,7 @@ public class MartusApp
 			if(cryptoToUse == null)
 				cryptoToUse = new MartusSecurity();
 
-			cryptoToUse.verifyJars();
+			MartusSecurity.verifyJars();
 
 			configInfo = new ConfigInfo();
 			currentUserName = "";
