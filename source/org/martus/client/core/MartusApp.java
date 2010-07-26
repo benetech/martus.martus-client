@@ -1973,6 +1973,6 @@ public class MartusApp
 	public static final String DOCUMENTS_DIRECTORY_NAME = "Docs";
 	public static final String USE_UNOFFICIAL_TRANSLATIONS_NAME = "use_unofficial_translations.txt";
 	private final int MAXFOLDERS = 50;
-	public int serverChunkSize = NetworkInterfaceConstants.MAX_CHUNK_SIZE;
+	public int serverChunkSize = NetworkInterfaceConstants.CLIENT_MAX_CHUNK_SIZE;
 }
 
