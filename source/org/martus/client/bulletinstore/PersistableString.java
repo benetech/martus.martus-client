@@ -26,40 +26,17 @@ Boston, MA 02111-1307, USA.
 
 package org.martus.client.bulletinstore;
 
-import java.io.ByteArrayOutputStream;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
-import java.io.UTFDataFormatException;
 
 public class PersistableString extends PersistableObject
 {
 	public PersistableString(String text)
 	{
 		value = text;
-		logUtfExceptionsForDebuggingPurposes();
 	}
 
-	/**
-	 * FIXME: This method should be deleted after the debugging is completed
-	 **/
-	private void logUtfExceptionsForDebuggingPurposes()
-	{
-		try
-		{
-			new DataOutputStream(new ByteArrayOutputStream()).writeUTF(value);
-		}
-		catch(UTFDataFormatException e)
-		{
-			System.out.println("UTF error in: ");
-			System.out.println(value);
-		}
-		catch(IOException e)
-		{
-			e.printStackTrace();
-		}
-	}
-	
 	public PersistableString(DataInputStream dataIn) throws IOException
 	{
 		StringBuffer data = new StringBuffer();
