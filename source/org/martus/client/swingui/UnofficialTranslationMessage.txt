@@ -10,3 +10,5 @@ ATTENTION : Cette traduction n'a pas été effectuée par l'équipe Martus et p
 
 คำเตือน:  การแปลนี้ไม่ได้ถูกสร้างโดยคณะทำงานของ Martus ฉะนั้นอย่าได้เชื่อถือ\nถ้าคุณต้องการใช้การแปลอย่างเป็นทางการ กรุณาออกจาก Martus ลบแฟ้ม #UseUnofficialTranslationFiles# ออกจากโฟลเดอร์ของ Martus และเปิด Martus ใหม่
 
+သတိေပးခဵက္ : ဤဘာသာဴပန္မႁသည္ Martus အဖၾဲႚမႀ တည္ေဆာက္ထားဴခင္း မဟုတ္ပၝ။ ထိုႛေဳကာင့္ ယံုဳကည္၍ မရႎိုင္ပၝ။ တရားဝင္ ဘာသာဴပန္မႁမဵားကိုသာ အသံုးဴပႂလိုပၝက Martus မႀ ထၾက္ပၝ။ #UseUnofficialTranslationFiles# စာတၾဲကို သင့္ Martus လမ္းညၿန္ထဲမႀ ဖယ္ရႀားလိုက္ပၝ။ ထိုႛေနာက္ Martus ကို ဴပန္လည္စတင္ပၝ။
+
