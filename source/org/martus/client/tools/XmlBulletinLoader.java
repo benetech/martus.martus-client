@@ -30,6 +30,7 @@ import java.util.Vector;
 
 import org.martus.common.FieldCollection;
 import org.martus.common.GridData;
+import org.martus.common.XmlCustomFieldsLoader;
 import org.martus.common.bulletin.BulletinXmlExportImportConstants;
 import org.martus.common.field.MartusField;
 import org.martus.common.fieldspec.FieldSpec;
@@ -55,9 +56,9 @@ public class XmlBulletinLoader extends SimpleXmlDefaultLoader
 		throws SAXParseException
 	{
 		if(tag.equals(BulletinXmlExportImportConstants.MAIN_FIELD_SPECS))
-			return new FieldCollection.XmlCustomFieldsLoader(tag);
+			return new XmlCustomFieldsLoader(tag);
 		else if(tag.equals(BulletinXmlExportImportConstants.PRIVATE_FIELD_SPECS))
-			return new FieldCollection.XmlCustomFieldsLoader(tag);
+			return new XmlCustomFieldsLoader(tag);
 		else if(tag.equals(BulletinXmlExportImportConstants.FIELD_VALUES))
 			return new FieldValuesSectionLoader(tag);
 		return super.startElement(tag);
@@ -87,7 +88,7 @@ public class XmlBulletinLoader extends SimpleXmlDefaultLoader
 
 	private FieldCollection getFieldSpecs(SimpleXmlDefaultLoader ended)
 	{
-		FieldCollection.XmlCustomFieldsLoader loader = (FieldCollection.XmlCustomFieldsLoader)ended;
+		XmlCustomFieldsLoader loader = (XmlCustomFieldsLoader)ended;
 		return new FieldCollection(loader.getFieldSpecs());
 	}
 	
