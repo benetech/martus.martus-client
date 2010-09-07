@@ -814,7 +814,7 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 		Bulletin[] resultingBulletins = importer.getBulletins();
 		Bulletin imported = resultingBulletins[0];
 
-		assertNotEquals("Should have created a bran new bulletin", exported.getLocalId(), imported.getLocalId());
+		assertNotEquals("Should have created a brand new bulletin", exported.getLocalId(), imported.getLocalId());
 		assertEquals(exported.getTopSectionFieldSpecs(), imported.getTopSectionFieldSpecs());
 		assertEquals(exported.getBottomSectionFieldSpecs(), imported.getBottomSectionFieldSpecs());
 		
