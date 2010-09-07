@@ -65,6 +65,7 @@ import org.martus.clientside.MtfAwareLocalization;
 import org.martus.clientside.PasswordHelper;
 import org.martus.common.BulletinSummary;
 import org.martus.common.FieldCollection;
+import org.martus.common.FieldSpecCollection;
 import org.martus.common.HQKey;
 import org.martus.common.HQKeys;
 import org.martus.common.LegacyCustomFields;
@@ -371,10 +372,10 @@ public class MartusApp
 			
 			FieldSpec[] specsTop = getCustomFieldSpecsTopSection(configInfo);
 			removeSpaceLikeCharactersFromTags(specsTop);
-			store.setTopSectionFieldSpecs(specsTop);
+			store.setTopSectionFieldSpecs(new FieldSpecCollection(specsTop));
 			FieldSpec[] specsBottom = getCustomFieldSpecsBottomSection(configInfo);
 			removeSpaceLikeCharactersFromTags(specsBottom);
-			store.setBottomSectionFieldSpecs(specsBottom);
+			store.setBottomSectionFieldSpecs(new FieldSpecCollection(specsBottom));
 			
 			convertLegacyHQToMultipleHQs();
 			
@@ -1373,7 +1374,7 @@ public class MartusApp
 	public FieldDataPacket retrieveFieldDataPacketFromServer(UniversalId bulletinId, String dataPacketLocalId) throws Exception
 	{
 		UniversalId packetUid = UniversalId.createFromAccountAndLocalId(bulletinId.getAccountId(), dataPacketLocalId);
-		FieldDataPacket fdp = new FieldDataPacket(packetUid, StandardFieldSpecs.getDefaultTopSetionFieldSpecs().asArray());
+		FieldDataPacket fdp = new FieldDataPacket(packetUid, StandardFieldSpecs.getDefaultTopSetionFieldSpecs());
 		populatePacketFromServer(fdp, bulletinId.getLocalId());
 		return fdp;
 	}

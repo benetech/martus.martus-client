@@ -46,6 +46,7 @@ import java.util.zip.ZipFile;
 
 import org.martus.client.core.MartusClientXml;
 import org.martus.client.swingui.bulletintable.BulletinTableModel;
+import org.martus.common.FieldSpecCollection;
 import org.martus.common.MartusLogger;
 import org.martus.common.MartusUtilities;
 import org.martus.common.MartusXml;
@@ -64,7 +65,6 @@ import org.martus.common.database.Database.RecordHiddenException;
 import org.martus.common.database.FileDatabase.MissingAccountMapException;
 import org.martus.common.database.FileDatabase.MissingAccountMapSignatureException;
 import org.martus.common.field.MartusField;
-import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.fieldspec.StandardFieldSpecs;
 import org.martus.common.packet.BulletinHeaderPacket;
 import org.martus.common.packet.BulletinHistory;
@@ -115,8 +115,8 @@ public class ClientBulletinStore extends BulletinStore
 		
 		initializeFolders();
 
-		topSectionFieldSpecs = StandardFieldSpecs.getDefaultTopSetionFieldSpecs().asArray();
-		bottomSectionFieldSpecs = StandardFieldSpecs.getDefaultBottomSectionFieldSpecs().asArray();
+		topSectionFieldSpecs = StandardFieldSpecs.getDefaultTopSetionFieldSpecs();
+		bottomSectionFieldSpecs = StandardFieldSpecs.getDefaultBottomSectionFieldSpecs();
 		
 		loadCache();
 		
@@ -964,12 +964,12 @@ public class ClientBulletinStore extends BulletinStore
 		return new File(AccountDir, "MartusFolders.dat");
 	}
 
-	public FieldSpec[] getBottomSectionFieldSpecs()
+	public FieldSpecCollection getBottomSectionFieldSpecs()
 	{
 		return bottomSectionFieldSpecs;
 	}
 
-	public FieldSpec[] getTopSectionFieldSpecs()
+	public FieldSpecCollection getTopSectionFieldSpecs()
 	{
 		return topSectionFieldSpecs;
 	}
@@ -1076,12 +1076,12 @@ public class ClientBulletinStore extends BulletinStore
 		createSystemFolders();
 	}
 	
-	public void setTopSectionFieldSpecs(FieldSpec[] newFieldSpecs)
+	public void setTopSectionFieldSpecs(FieldSpecCollection newFieldSpecs)
 	{
 		topSectionFieldSpecs = newFieldSpecs;
 	}
 	
-	public void setBottomSectionFieldSpecs(FieldSpec[] newFieldSpecs)
+	public void setBottomSectionFieldSpecs(FieldSpecCollection newFieldSpecs)
 	{
 		bottomSectionFieldSpecs = newFieldSpecs;
 	}
@@ -1437,8 +1437,8 @@ public class ClientBulletinStore extends BulletinStore
 	
 	public boolean bulletinHasCurrentFieldSpecs(Bulletin b)
 	{
-		return (Arrays.equals(b.getTopSectionFieldSpecs(), getTopSectionFieldSpecs()) &&
-				Arrays.equals(b.getBottomSectionFieldSpecs(), getBottomSectionFieldSpecs()) );
+		return (b.getTopSectionFieldSpecs().equals(getTopSectionFieldSpecs()) &&
+				b.getBottomSectionFieldSpecs().equals(getBottomSectionFieldSpecs()) );
 	}
 
 	public Bulletin createEmptyBulletin()
@@ -1446,7 +1446,7 @@ public class ClientBulletinStore extends BulletinStore
 		return createEmptyBulletin(getTopSectionFieldSpecs(), getBottomSectionFieldSpecs());
 	}
 	
-	public Bulletin createEmptyBulletin(FieldSpec[] topSectionSpecs, FieldSpec[] bottomSectionSpecs)
+	public Bulletin createEmptyBulletin(FieldSpecCollection topSectionSpecs, FieldSpecCollection bottomSectionSpecs)
 	{
 		Bulletin b = new Bulletin(getSignatureGenerator(), topSectionSpecs, bottomSectionSpecs);
 		return b;
@@ -1454,12 +1454,12 @@ public class ClientBulletinStore extends BulletinStore
 	
 	public Bulletin createEmptyClone(Bulletin original) throws Exception 
 	{
-		FieldSpec[] topSectionSpecs = original.getTopSectionFieldSpecs();
-		FieldSpec[] bottomSectionSpecs = original.getBottomSectionFieldSpecs();
+		FieldSpecCollection topSectionSpecs = original.getTopSectionFieldSpecs();
+		FieldSpecCollection bottomSectionSpecs = original.getBottomSectionFieldSpecs();
 		return createEmptyCloneWithFields(original, topSectionSpecs, bottomSectionSpecs);
 	}
 
-	public Bulletin createEmptyCloneWithFields(Bulletin original, FieldSpec[] publicSpecs, FieldSpec[] privateSpecs)
+	public Bulletin createEmptyCloneWithFields(Bulletin original, FieldSpecCollection publicSpecs, FieldSpecCollection privateSpecs)
 	{
 		UniversalId headerUid = original.getUniversalId();
 		UniversalId publicDataUid = original.getFieldDataPacket().getUniversalId();
@@ -1467,14 +1467,14 @@ public class ClientBulletinStore extends BulletinStore
 		return new Bulletin(getSignatureGenerator(), headerUid, publicDataUid, privateDataUid, publicSpecs, privateSpecs);
 	}
 
-	public Bulletin createNewDraft(Bulletin original, FieldSpec[] topSectionFieldSpecsToUse, FieldSpec[] bottomSectionFieldSpecsToUse) throws Exception 
+	public Bulletin createNewDraft(Bulletin original, FieldSpecCollection topSectionFieldSpecsToUse, FieldSpecCollection bottomSectionFieldSpecsToUse) throws Exception 
 	{
 		Bulletin newDraftBulletin = createEmptyBulletin(topSectionFieldSpecsToUse, bottomSectionFieldSpecsToUse);
 		newDraftBulletin.createDraftCopyOf(original, getDatabase());
 		return newDraftBulletin;
 	}
 	
-	public Bulletin createDraftClone(Bulletin original, FieldSpec[] topSectionFieldSpecsToUse, FieldSpec[] bottomSectionFieldSpecsToUse) throws Exception 
+	public Bulletin createDraftClone(Bulletin original, FieldSpecCollection topSectionFieldSpecsToUse, FieldSpecCollection bottomSectionFieldSpecsToUse) throws Exception 
 	{
 		Bulletin clone = createEmptyCloneWithFields(original, topSectionFieldSpecsToUse, bottomSectionFieldSpecsToUse);
 		clone.createDraftCopyOf(original, getDatabase());
@@ -1534,8 +1534,8 @@ public class ClientBulletinStore extends BulletinStore
 	private BulletinFolder folderSealedOutbox;
 	private boolean loadedLegacyFolders;
 
-	private FieldSpec[] topSectionFieldSpecs;
-	private FieldSpec[] bottomSectionFieldSpecs;
+	private FieldSpecCollection topSectionFieldSpecs;
+	private FieldSpecCollection bottomSectionFieldSpecs;
 	PartialBulletinCache bulletinDataCache;
 	KnownFieldSpecCache knownFieldSpecCache;
 }

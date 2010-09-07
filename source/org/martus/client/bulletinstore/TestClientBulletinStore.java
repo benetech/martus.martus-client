@@ -39,6 +39,7 @@ import org.martus.client.bulletinstore.ClientBulletinStore.AddOlderVersionToFold
 import org.martus.client.bulletinstore.ClientBulletinStore.BulletinAlreadyExistsException;
 import org.martus.client.core.MartusClientXml;
 import org.martus.client.test.MockBulletinStore;
+import org.martus.common.FieldSpecCollection;
 import org.martus.common.HQKey;
 import org.martus.common.HQKeys;
 import org.martus.common.MartusXml;
@@ -98,7 +99,7 @@ public class TestClientBulletinStore extends TestCaseEnhanced
     		FieldSpec title = FieldSpec.createFieldSpec(new FieldTypeNormal());
     		title.setTag(Bulletin.TAGTITLE);
     		
-    		customPublicSpecs = new FieldSpec[] {title};
+    		customPublicSpecs =  new FieldSpecCollection(new FieldSpec[] {title});
     	}
     	if(customPrivateSpecs == null)
     	{
@@ -107,7 +108,7 @@ public class TestClientBulletinStore extends TestCaseEnhanced
     		FieldSpec author = FieldSpec.createFieldSpec(new FieldTypeNormal());
     		author.setTag(Bulletin.TAGAUTHOR);
     		
-    		customPrivateSpecs = new FieldSpec[] {keyword, author};
+    		customPrivateSpecs = new FieldSpecCollection(new FieldSpec[] {keyword, author});
     		
     	
     	}
@@ -236,8 +237,8 @@ public class TestClientBulletinStore extends TestCaseEnhanced
 	    	assertEquals("no data?", original.get(Bulletin.TAGTITLE), clone.get(Bulletin.TAGTITLE));
 	    	assertEquals("Did not kept hq?", 1, clone.getAuthorizedToReadKeys().size());
 	    	assertTrue("not draft?", clone.isDraft());
-	    	assertEquals("wrong public field specs?", customPublicSpecs.length, clone.getTopSectionFieldSpecs().length);
-	    	assertEquals("wrong private field specs?", customPrivateSpecs.length, clone.getBottomSectionFieldSpecs().length);
+	    	assertEquals("wrong public field specs?", customPublicSpecs.size(), clone.getTopSectionFieldSpecs().size());
+	    	assertEquals("wrong private field specs?", customPrivateSpecs.size(), clone.getBottomSectionFieldSpecs().size());
 	    	BulletinHistory history = clone.getHistory();
 			assertEquals("no history?", 1, history.size());
 	    	assertEquals("wrong ancestor?", original.getLocalId(), history.get(0));
@@ -256,8 +257,8 @@ public class TestClientBulletinStore extends TestCaseEnhanced
 	    	assertEquals("no data?", original.get(Bulletin.TAGTITLE), clone.get(Bulletin.TAGTITLE));
 	    	assertEquals("did not keep hq?", 1, clone.getAuthorizedToReadKeys().size());
 	    	assertTrue("not draft?", clone.isDraft());
-	    	assertEquals("wrong public field specs?", customPublicSpecs.length, clone.getTopSectionFieldSpecs().length);
-	    	assertEquals("wrong private field specs?", customPrivateSpecs.length, clone.getBottomSectionFieldSpecs().length);
+	    	assertEquals("wrong public field specs?", customPublicSpecs.size(), clone.getTopSectionFieldSpecs().size());
+	    	assertEquals("wrong private field specs?", customPrivateSpecs.size(), clone.getBottomSectionFieldSpecs().size());
 	    	BulletinHistory history = clone.getHistory();
 			assertEquals("has history?", 0, history.size());
     	}
@@ -270,16 +271,16 @@ public class TestClientBulletinStore extends TestCaseEnhanced
     	originalBulletin.setDraft();
     	{
     		Bulletin newFieldSpecsBulletin = testStore.createDraftClone(originalBulletin, customPublicSpecs, customPrivateSpecs);
-	    	assertEquals("wrong public field specs for untouched original?", StandardFieldSpecs.getDefaultTopSetionFieldSpecs().asArray().length, originalBulletin.getTopSectionFieldSpecs().length);
-	    	assertEquals("wrong private field specs for untouched original?", StandardFieldSpecs.getDefaultBottomSectionFieldSpecs().asArray().length, originalBulletin.getBottomSectionFieldSpecs().length);
+	    	assertEquals("wrong public field specs for untouched original?", StandardFieldSpecs.getDefaultTopSetionFieldSpecs().asArray().length, originalBulletin.getTopSectionFieldSpecs().size());
+	    	assertEquals("wrong private field specs for untouched original?", StandardFieldSpecs.getDefaultBottomSectionFieldSpecs().asArray().length, originalBulletin.getBottomSectionFieldSpecs().size());
 	    	assertEquals("wrong account?", testStore.getAccountId(), newFieldSpecsBulletin.getAccount());
 	    	assertEquals("not same local id?", id, newFieldSpecsBulletin.getLocalId());
 	    	assertEquals("no public data?", PUBLIC_DATA, newFieldSpecsBulletin.get(Bulletin.TAGTITLE));
 	    	assertEquals("no private data?", PRIVATE_DATA, newFieldSpecsBulletin.get(Bulletin.TAGAUTHOR));
 	    	assertEquals("did not keep hq?", 1, newFieldSpecsBulletin.getAuthorizedToReadKeys().size());
 	    	assertTrue("not draft?", newFieldSpecsBulletin.isDraft());
-	    	assertEquals("wrong public field specs?", customPublicSpecs.length, newFieldSpecsBulletin.getTopSectionFieldSpecs().length);
-	    	assertEquals("wrong private field specs?", customPrivateSpecs.length, newFieldSpecsBulletin.getBottomSectionFieldSpecs().length);
+	    	assertEquals("wrong public field specs?", customPublicSpecs.size(), newFieldSpecsBulletin.getTopSectionFieldSpecs().size());
+	    	assertEquals("wrong private field specs?", customPrivateSpecs.size(), newFieldSpecsBulletin.getBottomSectionFieldSpecs().size());
 	    	BulletinHistory history = newFieldSpecsBulletin.getHistory();
 			assertEquals("has history?", 0, history.size());
     	}
@@ -298,8 +299,8 @@ public class TestClientBulletinStore extends TestCaseEnhanced
 	    	assertEquals("no data?", original.get(Bulletin.TAGTITLE), clone.get(Bulletin.TAGTITLE));
 	    	assertEquals("Did not keep hq?", 1, clone.getAuthorizedToReadKeys().size());
 	    	assertTrue("not draft?", clone.isDraft());
-	    	assertEquals("wrong public field specs?", customPublicSpecs.length, clone.getTopSectionFieldSpecs().length);
-	    	assertEquals("wrong private field specs?", customPrivateSpecs.length, clone.getBottomSectionFieldSpecs().length);
+	    	assertEquals("wrong public field specs?", customPublicSpecs.size(), clone.getTopSectionFieldSpecs().size());
+	    	assertEquals("wrong private field specs?", customPrivateSpecs.size(), clone.getBottomSectionFieldSpecs().size());
 	    	assertEquals("has history?", 0, clone.getHistory().size());
     	}
 	}
@@ -981,8 +982,8 @@ public class TestClientBulletinStore extends TestCaseEnhanced
 	
 	public void testAddBulletinToFolderRemovesAncestors() throws Exception
 	{
-		FieldSpec[] publicFields = StandardFieldSpecs.getDefaultTopSetionFieldSpecs().asArray();
-		FieldSpec[] privateFields = StandardFieldSpecs.getDefaultBottomSectionFieldSpecs().asArray();
+		FieldSpecCollection publicFields = StandardFieldSpecs.getDefaultTopSetionFieldSpecs();
+		FieldSpecCollection privateFields = StandardFieldSpecs.getDefaultBottomSectionFieldSpecs();
 		
 		BulletinFolder aFolder = testStore.createFolder("blah");
 
@@ -1029,8 +1030,8 @@ public class TestClientBulletinStore extends TestCaseEnhanced
 	
 	public void testAddOriginalBulletinToFolderWithNewerVersion() throws Exception
 	{
-		FieldSpec[] publicFields = StandardFieldSpecs.getDefaultTopSetionFieldSpecs().asArray();
-		FieldSpec[] privateFields = StandardFieldSpecs.getDefaultBottomSectionFieldSpecs().asArray();
+		FieldSpecCollection publicFields = StandardFieldSpecs.getDefaultTopSetionFieldSpecs();
+		FieldSpecCollection privateFields = StandardFieldSpecs.getDefaultBottomSectionFieldSpecs();
 		MockBulletinStore clientStore = new MockBulletinStore(security);
 		Bulletin original = clientStore.createEmptyBulletin();
 		original.setSealed();
@@ -1063,8 +1064,8 @@ public class TestClientBulletinStore extends TestCaseEnhanced
 	
 	public void testAddingBulletinVersionThenOriginalToVisibleAndInvisibleFolders() throws Exception
 	{
-		FieldSpec[] publicFields = StandardFieldSpecs.getDefaultTopSetionFieldSpecs().asArray();
-		FieldSpec[] privateFields = StandardFieldSpecs.getDefaultBottomSectionFieldSpecs().asArray();
+		FieldSpecCollection publicFields = StandardFieldSpecs.getDefaultTopSetionFieldSpecs();
+		FieldSpecCollection privateFields = StandardFieldSpecs.getDefaultBottomSectionFieldSpecs();
 		MockBulletinStore clientStore = new MockBulletinStore(security);
 		Bulletin original = clientStore.createEmptyBulletin();
 		original.setSealed();
@@ -1101,8 +1102,8 @@ public class TestClientBulletinStore extends TestCaseEnhanced
 
 	public void testAddingBulletinOriginalThenNewVersionToVisibleAndInvisibleFolders() throws Exception
 	{
-		FieldSpec[] publicFields = StandardFieldSpecs.getDefaultTopSetionFieldSpecs().asArray();
-		FieldSpec[] privateFields = StandardFieldSpecs.getDefaultBottomSectionFieldSpecs().asArray();
+		FieldSpecCollection publicFields = StandardFieldSpecs.getDefaultTopSetionFieldSpecs();
+		FieldSpecCollection privateFields = StandardFieldSpecs.getDefaultBottomSectionFieldSpecs();
 		MockBulletinStore clientStore = new MockBulletinStore(security);
 		Bulletin original = clientStore.createEmptyBulletin();
 		original.setSealed();
@@ -1834,8 +1835,8 @@ public class TestClientBulletinStore extends TestCaseEnhanced
 	static MockBulletinStore testStore;
 	static MockMartusSecurity security;
 	static MockDatabase db;
-	static FieldSpec[] customPublicSpecs;
-	static FieldSpec[] customPrivateSpecs;
+	static FieldSpecCollection customPublicSpecs;
+	static FieldSpecCollection customPrivateSpecs;
 
 	static File tempFile1;
 	static File tempFile2;

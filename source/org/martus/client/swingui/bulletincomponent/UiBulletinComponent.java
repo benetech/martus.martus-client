@@ -40,6 +40,7 @@ import org.martus.client.core.EncryptionChangeListener;
 import org.martus.client.core.LanguageChangeListener;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.fields.UiField;
+import org.martus.common.FieldSpecCollection;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.crypto.MartusCrypto;
 import org.martus.common.fieldspec.DataInvalidException;
@@ -97,7 +98,7 @@ abstract public class UiBulletinComponent extends JPanel implements Scrollable, 
 	}
 	
 	private UiBulletinComponentDataSection createDataSection(String section, 
-			FieldSpec[] fieldSpecs, int encryptionStatus)
+			FieldSpecCollection fieldSpecs, int encryptionStatus)
 	{
 		UiBulletinComponentDataSection target = createBulletinComponentDataSection(section);
 		if(encryptionStatus == SOMETIMES_ENCRYPTED)
@@ -105,7 +106,7 @@ abstract public class UiBulletinComponent extends JPanel implements Scrollable, 
 			allPrivateField = target.createAllPrivateField();
 			allPrivateField.setListener(this);
 		}
-		target.createLabelsAndFields(fieldSpecs, this);
+		target.createLabelsAndFields(fieldSpecs.asArray(), this);
 
 		return target;
 	}

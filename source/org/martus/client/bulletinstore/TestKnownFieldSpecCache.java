@@ -34,6 +34,7 @@ import java.util.Set;
 import java.util.zip.ZipFile;
 
 import org.martus.client.test.MockMartusApp;
+import org.martus.common.FieldSpecCollection;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.bulletin.BulletinZipUtilities;
 import org.martus.common.crypto.MartusCrypto;
@@ -74,8 +75,8 @@ public class TestKnownFieldSpecCache extends TestCaseEnhanced
 		app.saveBulletin(one, app.getFolderDraftOutbox());
 		Set specs = cache.getAllKnownFieldSpecs();
 		assertEquals("wrong number of specs?", 2, specs.size());
-		assertContains("public spec not found?", publicSpecs[0], specs);
-		assertContains("private spec not found?", privateSpecs[0], specs);
+		assertContains("public spec not found?", publicSpecs.asArray()[0], specs);
+		assertContains("private spec not found?", privateSpecs.asArray()[0], specs);
 	}
 
 	public void testSaveBulletin() throws Exception
@@ -83,10 +84,10 @@ public class TestKnownFieldSpecCache extends TestCaseEnhanced
 		Bulletin withCustom = createSampleBulletin(security);
 		app.saveBulletin(withCustom, app.getFolderDraftOutbox());
 		Set specsAfterSave = cache.getAllKnownFieldSpecs();
-		int newExpectedCount = publicSpecs.length + privateSpecs.length;
+		int newExpectedCount = publicSpecs.size() + privateSpecs.size();
 		assertEquals("didn't add new specs?", newExpectedCount, specsAfterSave.size());
-		assertContains("didn't add public?", publicSpecs[0], specsAfterSave);
-		assertContains("didn't add private?", privateSpecs[0], specsAfterSave);
+		assertContains("didn't add public?", publicSpecs.asArray()[0], specsAfterSave);
+		assertContains("didn't add private?", privateSpecs.asArray()[0], specsAfterSave);
 		
 		// two fieldspecs with same tag name
 	}
@@ -108,7 +109,7 @@ public class TestKnownFieldSpecCache extends TestCaseEnhanced
 
 	public void testDeleteAndImportBulletin() throws Exception
 	{
-		int expectedCountAfterSaveOrImport = publicSpecs.length + privateSpecs.length;
+		int expectedCountAfterSaveOrImport = publicSpecs.size() + privateSpecs.size();
 		Bulletin toImport = createSampleBulletin(security);
 		app.saveBulletin(toImport, app.getFolderDraftOutbox());
 		assertEquals("save didn't add specs?", expectedCountAfterSaveOrImport, cache.getAllKnownFieldSpecs().size());
@@ -159,8 +160,8 @@ public class TestKnownFieldSpecCache extends TestCaseEnhanced
 		DropDownFieldSpec spec1 = new DropDownFieldSpec(choices1);
 		DropDownFieldSpec spec2 = new DropDownFieldSpec(choices2);
 		
-		Bulletin b1 = new Bulletin(security, new FieldSpec[] {spec1}, new FieldSpec[0]);
-		Bulletin b2 = new Bulletin(security, new FieldSpec[] {spec2}, new FieldSpec[0]);
+		Bulletin b1 = new Bulletin(security, new FieldSpecCollection(new FieldSpec[] {spec1}), new FieldSpecCollection(0));
+		Bulletin b2 = new Bulletin(security, new FieldSpecCollection(new FieldSpec[] {spec2}), new FieldSpecCollection(0));
 		
 		assertEquals(0, cache.getAllKnownFieldSpecs().size());
 		cache.revisionWasSaved(b1);
@@ -181,7 +182,7 @@ public class TestKnownFieldSpecCache extends TestCaseEnhanced
 		MessageFieldSpec spec1 = new MessageFieldSpec();
 		spec1.setLabel(reallyLongString.toString());
 		
-		Bulletin b = new Bulletin(security, new FieldSpec[] {spec1}, new FieldSpec[0]);
+		Bulletin b = new Bulletin(security, new FieldSpecCollection(new FieldSpec[] {spec1}), new FieldSpecCollection(0));
 		cache.revisionWasSaved(b);
 		ByteArrayOutputStream out = new ByteArrayOutputStream();
 		cache.saveToStream(out);
@@ -192,8 +193,8 @@ public class TestKnownFieldSpecCache extends TestCaseEnhanced
 	private Bulletin createSampleBulletin(MartusCrypto authorSecurity)
 	{
 		Bulletin b = new Bulletin(authorSecurity, publicSpecs, privateSpecs);
-		b.set(publicSpecs[0].getTag(), "Just any text");
-		b.set(privateSpecs[0].getTag(), "Just any text");
+		b.set(publicSpecs.get(0).getTag(), "Just any text");
+		b.set(privateSpecs.get(0).getTag(), "Just any text");
 		return b;
 	}
 	
@@ -202,8 +203,8 @@ public class TestKnownFieldSpecCache extends TestCaseEnhanced
 			"author", "organization", "location",
 			"summary", "keywords", "publicinfo", "privateinfo",
 		};
-	FieldSpec[] publicSpecs = {FieldSpec.createCustomField("frodo", "Younger Baggins", new FieldTypeMultiline()),}; 
-	FieldSpec[] privateSpecs = {FieldSpec.createCustomField("bilbo", "Older Baggins", new FieldTypeDateRange()),};
+	FieldSpecCollection publicSpecs = new FieldSpecCollection(new FieldSpec[] {FieldSpec.createCustomField("frodo", "Younger Baggins", new FieldTypeMultiline()),}); 
+	FieldSpecCollection privateSpecs = new FieldSpecCollection(new FieldSpec[] {FieldSpec.createCustomField("bilbo", "Older Baggins", new FieldTypeDateRange()),});
 	
 	MockMartusSecurity security;
 	MockMartusApp app;

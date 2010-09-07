@@ -49,6 +49,7 @@ import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.clientside.MtfAwareLocalization;
 import org.martus.common.FieldCollection;
+import org.martus.common.FieldSpecCollection;
 import org.martus.common.HQKeys;
 import org.martus.common.FieldCollection.CustomFieldsParseException;
 import org.martus.common.crypto.MartusCrypto;
@@ -361,9 +362,9 @@ public class UiCustomFieldsDlg extends JDialog
 		return columnData;
 	}
 	
-	UiTextArea createXMLTextArea(FieldSpec[] fieldSpecs)
+	UiTextArea createXMLTextArea(FieldSpecCollection fieldSpecs)
 	{
-		FieldCollection collection = new FieldCollection(fieldSpecs);
+		FieldCollection collection = new FieldCollection(fieldSpecs.asArray());
 		String xmlRepresentationFieldSpecs = collection.toString();
 		return createXMLTextArea(xmlRepresentationFieldSpecs);
 	}

@@ -30,6 +30,7 @@ import java.io.File;
 import java.util.Arrays;
 
 import org.martus.client.core.SafeReadableBulletin;
+import org.martus.common.FieldSpecCollection;
 import org.martus.common.GridData;
 import org.martus.common.MiniLocalization;
 import org.martus.common.bulletin.AttachmentProxy;
@@ -165,10 +166,10 @@ public class TestBulletinSearcher extends TestCaseEnhanced
 		gridSpec.setTag("grid");
 		gridSpec.addColumn(FieldSpec.createCustomField("", ickyLabel, new FieldTypeNormal()));
 		gridSpec.addColumn(FieldSpec.createCustomField("", "Second column", new FieldTypeNormal()));
-		FieldSpec[] specs = {gridSpec};
+		FieldSpecCollection specs = new FieldSpecCollection(new FieldSpec[] {gridSpec});
 		
 		MartusCrypto security = MockMartusSecurity.createClient();
-		Bulletin realBulletin = new Bulletin(security, specs, StandardFieldSpecs.getDefaultBottomSectionFieldSpecs().asArray());
+		Bulletin realBulletin = new Bulletin(security, specs, StandardFieldSpecs.getDefaultBottomSectionFieldSpecs());
 		GridData data = new GridData(gridSpec);
 		data.addEmptyRow();
 		data.setValueAt("first row", 0, 0);
@@ -189,7 +190,7 @@ public class TestBulletinSearcher extends TestCaseEnhanced
 		MartusSearchableGridColumnField gridSecondColumn = (MartusSearchableGridColumnField)b.getPossiblyNestedField(secondColumn);
 		assertNotNull("didn't get second column?", gridSecondColumn);
 
-		Bulletin emptyBulletin = new Bulletin(security, specs, StandardFieldSpecs.getDefaultBottomSectionFieldSpecs().asArray());
+		Bulletin emptyBulletin = new Bulletin(security, specs, StandardFieldSpecs.getDefaultBottomSectionFieldSpecs());
 		SafeReadableBulletin eb = new SafeReadableBulletin(emptyBulletin, localization);
 		assertEquals("didn't return empty field for empty grid?", "", eb.getPossiblyNestedField(firstColumn).getData());
 		
@@ -211,10 +212,10 @@ public class TestBulletinSearcher extends TestCaseEnhanced
 		gridSpec.addColumn(columnSpec1);
 		gridSpec.addColumn(columnSpec2);
 		gridSpec.addColumn(columnSpec3);
-		FieldSpec[] specs = {gridSpec};
+		FieldSpecCollection specs = new FieldSpecCollection(new FieldSpec[] {gridSpec});
 
 		MartusCrypto security = MockMartusSecurity.createClient();
-		Bulletin realBulletin = new Bulletin(security, specs, StandardFieldSpecs.getDefaultBottomSectionFieldSpecs().asArray());
+		Bulletin realBulletin = new Bulletin(security, specs, StandardFieldSpecs.getDefaultBottomSectionFieldSpecs());
 		GridData data = new GridData(gridSpec);
 		data.addEmptyRow();
 		data.addEmptyRow();
@@ -293,10 +294,10 @@ public class TestBulletinSearcher extends TestCaseEnhanced
 		gridSpec.setTag("grid");
 		FieldSpec columnSpec1 = FieldSpec.createCustomField("", "first", new FieldTypeNormal());
 		gridSpec.addColumn(columnSpec1);
-		FieldSpec[] specs = {gridSpec};
+		FieldSpecCollection specs = new FieldSpecCollection(new FieldSpec[] {gridSpec});
 
 		MartusCrypto security = MockMartusSecurity.createClient();
-		Bulletin realBulletin = new Bulletin(security, specs, StandardFieldSpecs.getDefaultBottomSectionFieldSpecs().asArray());
+		Bulletin realBulletin = new Bulletin(security, specs, StandardFieldSpecs.getDefaultBottomSectionFieldSpecs());
 		GridData data = new GridData(gridSpec);
 		data.addEmptyRow();
 		data.setValueAt(FIRST_NAME, 0, 0);
@@ -347,10 +348,10 @@ public class TestBulletinSearcher extends TestCaseEnhanced
 		gridSpec.setTag("grid");
 		FieldSpec columnSpec1 = FieldSpec.createCustomField("", "first", new FieldTypeNormal());
 		gridSpec.addColumn(columnSpec1);
-		FieldSpec[] specs = {gridSpec};
+		FieldSpecCollection specs = new FieldSpecCollection(new FieldSpec[] {gridSpec});
 
 		MartusCrypto security = MockMartusSecurity.createClient();
-		Bulletin realBulletin = new Bulletin(security, specs, StandardFieldSpecs.getDefaultBottomSectionFieldSpecs().asArray());
+		Bulletin realBulletin = new Bulletin(security, specs, StandardFieldSpecs.getDefaultBottomSectionFieldSpecs());
 		GridData data = new GridData(gridSpec);
 		data.addEmptyRow();
 		data.setValueAt(FIRST_NAME, 0, 0);
@@ -536,7 +537,7 @@ public class TestBulletinSearcher extends TestCaseEnhanced
 			blankField,
 		};
 		
-		Bulletin b = new Bulletin(security, publicSpecs, StandardFieldSpecs.getDefaultBottomSectionFieldSpecs().asArray());
+		Bulletin b = new Bulletin(security, new FieldSpecCollection(publicSpecs), StandardFieldSpecs.getDefaultBottomSectionFieldSpecs());
 		b.set("true", FieldSpec.TRUESTRING);
 		b.set("false", FieldSpec.FALSESTRING);
 		b.set("bogus", "");

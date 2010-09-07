@@ -196,9 +196,9 @@ public class BulletinXmlExporter
 	private void writeBulletinFieldSpecs(Writer dest, Bulletin b, boolean includePrivateData) throws IOException
 	{
 		if(shouldIncludeTopSection(b, includePrivateData))
-			writeFieldSpecs(dest, b.getTopSectionFieldSpecs(), BulletinXmlExportImportConstants.MAIN_FIELD_SPECS);
+			writeFieldSpecs(dest, b.getTopSectionFieldSpecs().asArray(), BulletinXmlExportImportConstants.MAIN_FIELD_SPECS);
 		if(includePrivateData)
-			writeFieldSpecs(dest, b.getBottomSectionFieldSpecs(), BulletinXmlExportImportConstants.PRIVATE_FIELD_SPECS);
+			writeFieldSpecs(dest, b.getBottomSectionFieldSpecs().asArray(), BulletinXmlExportImportConstants.PRIVATE_FIELD_SPECS);
 	}
 
 	private boolean shouldIncludeTopSection(Bulletin b, boolean includePrivateData)
@@ -227,14 +227,14 @@ public class BulletinXmlExporter
 		dest.write(MartusXml.getTagStartWithNewline(BulletinXmlExportImportConstants.FIELD_VALUES));
 		if(shouldIncludeTopSection(b, includePrivateData))
 		{
-			writeFields(dest, b, b.getTopSectionFieldSpecs());
+			writeFields(dest, b, b.getTopSectionFieldSpecs().asArray());
 			if(includeAttachments)
 				writeAttachments(dest, attachmentsDirectory, b.getPublicAttachments(), BulletinXmlExportImportConstants.TOP_SECTION_ATTACHMENT_LIST);
 		}
 
 		if(includePrivateData)
 		{
-			writeFields(dest, b, b.getBottomSectionFieldSpecs());
+			writeFields(dest, b, b.getBottomSectionFieldSpecs().asArray());
 			if(includeAttachments)
 				writeAttachments(dest, attachmentsDirectory, b.getPrivateAttachments(), BulletinXmlExportImportConstants.BOTTOM_SECTION_ATTACHMENT_LIST);
 		}

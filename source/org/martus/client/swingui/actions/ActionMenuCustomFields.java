@@ -34,6 +34,7 @@ import org.martus.client.core.MartusApp.SaveConfigInfoException;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.dialogs.UiCustomFieldsDlg;
 import org.martus.common.FieldCollection;
+import org.martus.common.FieldSpecCollection;
 import org.martus.common.MartusConstants;
 import org.martus.common.FieldCollection.CustomFieldsParseException;
 import org.martus.common.fieldspec.BulletinFieldSpecs;
@@ -62,8 +63,8 @@ public class ActionMenuCustomFields extends UiMenuAction
 		if(newSpecs == null)
 			return;
 			
-		FieldSpec[] topSectionSpecs = newSpecs.getTopSectionSpecs();
-		FieldSpec[] bottomSectionSpecs = newSpecs.getBottomSectionSpecs();
+		FieldSpecCollection topSectionSpecs = newSpecs.getTopSectionSpecs();
+		FieldSpecCollection bottomSectionSpecs = newSpecs.getBottomSectionSpecs();
 		store.setTopSectionFieldSpecs(topSectionSpecs);
 		store.setBottomSectionFieldSpecs(bottomSectionSpecs);
 		app.getConfigInfo().setCustomFieldLegacySpecs(MartusConstants.deprecatedCustomFieldSpecs);
@@ -98,8 +99,8 @@ public class ActionMenuCustomFields extends UiMenuAction
 			{
 				if(mainWindow.confirmDlg("UndoCustomFields"))
 				{
-					existingSpecs.setTopSectionSpecs(StandardFieldSpecs.getDefaultTopSetionFieldSpecs().asArray());
-					existingSpecs.setBottomSectionSpecs(StandardFieldSpecs.getDefaultBottomSectionFieldSpecs().asArray());
+					existingSpecs.setTopSectionSpecs(StandardFieldSpecs.getDefaultTopSetionFieldSpecs());
+					existingSpecs.setBottomSectionSpecs(StandardFieldSpecs.getDefaultBottomSectionFieldSpecs());
 				}					
 			}
 			else

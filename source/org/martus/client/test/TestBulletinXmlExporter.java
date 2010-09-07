@@ -29,7 +29,6 @@ package org.martus.client.test;
 import java.io.File;
 import java.io.IOException;
 import java.io.StringWriter;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Vector;
 
@@ -38,6 +37,7 @@ import org.martus.client.core.BulletinXmlExporter;
 import org.martus.client.tools.XmlBulletinsImporter;
 import org.martus.common.FieldCollection;
 import org.martus.common.FieldCollectionForTesting;
+import org.martus.common.FieldSpecCollection;
 import org.martus.common.GridData;
 import org.martus.common.GridRow;
 import org.martus.common.MiniLocalization;
@@ -49,6 +49,7 @@ import org.martus.common.crypto.MockMartusSecurity;
 import org.martus.common.crypto.MartusCrypto.EncryptionException;
 import org.martus.common.database.ReadableDatabase;
 import org.martus.common.fieldspec.ChoiceItem;
+import org.martus.common.fieldspec.CustomDropDownFieldSpec;
 import org.martus.common.fieldspec.DropDownFieldSpec;
 import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.fieldspec.FieldTypeBoolean;
@@ -174,7 +175,7 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 		bottomSpecs = TestCustomFieldSpecValidator.addFieldSpec(bottomSpecs,booleanSpec);
 		bottomSpecs = TestCustomFieldSpecValidator.addFieldSpec(bottomSpecs, messageSpec);
 		
-		Bulletin b = new Bulletin(store.getSignatureGenerator(), topSpecs, bottomSpecs);
+		Bulletin b = new Bulletin(store.getSignatureGenerator(), new FieldSpecCollection(topSpecs), new FieldSpecCollection(bottomSpecs));
 		b.setAllPrivate(false);
 
 		final String sampleAuthor = "someone special";
@@ -243,7 +244,7 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 
 		BulletinXmlExporter exporter = new BulletinXmlExporter(null, new MiniLocalization(), null);
 		StringWriter writer = new StringWriter();
-		exporter.writeFieldSpecs(writer, b.getTopSectionFieldSpecs(), "MainFieldSpecs");
+		exporter.writeFieldSpecs(writer, b.getTopSectionFieldSpecs().asArray(), "MainFieldSpecs");
 		String result = writer.toString();
 		writer.close();
 		assertEquals(expectedTopFieldSpecs, result);
@@ -273,7 +274,7 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 		  "</PrivateFieldSpecs>\n\n";
 
 	writer = new StringWriter();
-	exporter.writeFieldSpecs(writer, b.getBottomSectionFieldSpecs(), "PrivateFieldSpecs");
+	exporter.writeFieldSpecs(writer, b.getBottomSectionFieldSpecs().asArray(), "PrivateFieldSpecs");
 	result = writer.toString();
 	writer.close();
 	assertEquals(expectedBottomFieldSpecs, result);
@@ -304,7 +305,7 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 		GridFieldSpec newSpec = (GridFieldSpec)FieldCollection.parseXml(xmlFieldType)[0]; 
 		FieldCollection fields = FieldCollectionForTesting.extendFields(StandardFieldSpecs.getDefaultTopSetionFieldSpecs().asArray(), newSpec);				
 		
-		Bulletin b = new Bulletin(store.getSignatureGenerator(), fields.getSpecs(), StandardFieldSpecs.getDefaultBottomSectionFieldSpecs().asArray());
+		Bulletin b = new Bulletin(store.getSignatureGenerator(), fields.getSpecs(), StandardFieldSpecs.getDefaultBottomSectionFieldSpecs());
 		b.setAllPrivate(false);
 		GridData gridData = new GridData(newSpec);
 		GridRow row = new GridRow(newSpec);
@@ -590,7 +591,7 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 		FieldSpec[] extraFieldSpecs = {newSpec1, newSpec2};
 		FieldCollection fields = FieldCollectionForTesting.extendFields(StandardFieldSpecs.getDefaultTopSetionFieldSpecs().asArray(), extraFieldSpecs);
 		
-		Bulletin b = new Bulletin(store.getSignatureGenerator(), fields.getSpecs(), StandardFieldSpecs.getDefaultBottomSectionFieldSpecs().asArray());
+		Bulletin b = new Bulletin(store.getSignatureGenerator(), fields.getSpecs(), StandardFieldSpecs.getDefaultBottomSectionFieldSpecs());
 		b.setAllPrivate(false);
 		
 		FieldDataPacket fdp = b.getFieldDataPacket();
@@ -647,7 +648,7 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 		FieldSpec[] extraFieldSpecs = {newSpec1, newSpec2};
 		FieldCollection fields = FieldCollectionForTesting.extendFields(StandardFieldSpecs.getDefaultTopSetionFieldSpecs().asArray(), extraFieldSpecs);
 		
-		Bulletin b = new Bulletin(store.getSignatureGenerator(), fields.getSpecs(), StandardFieldSpecs.getDefaultBottomSectionFieldSpecs().asArray());
+		Bulletin b = new Bulletin(store.getSignatureGenerator(), fields.getSpecs(), StandardFieldSpecs.getDefaultBottomSectionFieldSpecs());
 		b.setAllPrivate(false);				
 										
 		b.set(customTag1, "abc");
@@ -723,8 +724,8 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 		data.setValueAt(rawDateRangeString, 0, 0);
 		
 		FieldSpec[] publicSpecs = new FieldSpec[] {gridSpec};
-		FieldSpec[] privateSpecs = StandardFieldSpecs.getDefaultBottomSectionFieldSpecs().asArray();
-		Bulletin b = new Bulletin(store.getSignatureGenerator(), publicSpecs, privateSpecs);
+		FieldSpecCollection privateSpecs = StandardFieldSpecs.getDefaultBottomSectionFieldSpecs();
+		Bulletin b = new Bulletin(store.getSignatureGenerator(), new FieldSpecCollection(publicSpecs), privateSpecs);
 		b.set(gridSpec.getTag(), data.getXmlRepresentation());
 		
 		final String result = getExportedXml(b);
@@ -739,10 +740,11 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 		String choice1 = "choice A";
 		String choice2 = "choice B";
 
-		ChoiceItem[] choicesNoDups = {new ChoiceItem("no Dup", choice1), new ChoiceItem("second", choice2)};
+		ChoiceItem[] choicesNoDups = {new ChoiceItem("", ""), new ChoiceItem("no Dup", choice1), new ChoiceItem("second", choice2)};
 		String dropdownTag = "ddTag";
 		String dropdownLabel = "dropdown column label";
-		DropDownFieldSpec dropDownSpec = new DropDownFieldSpec(choicesNoDups);
+		DropDownFieldSpec dropDownSpec = new CustomDropDownFieldSpec();
+		dropDownSpec.setChoices(choicesNoDups);
 		dropDownSpec.setLabel(dropdownLabel);
 		dropDownSpec.setTag(dropdownTag);
 		
@@ -774,7 +776,7 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 		bottomSpecs = TestCustomFieldSpecValidator.addFieldSpec(bottomSpecs,booleanSpec);
 		bottomSpecs = TestCustomFieldSpecValidator.addFieldSpec(bottomSpecs, messageSpec);
 		
-		Bulletin exported = new Bulletin(store.getSignatureGenerator(), topSpecs, bottomSpecs);
+		Bulletin exported = new Bulletin(store.getSignatureGenerator(), new FieldSpecCollection(topSpecs), new FieldSpecCollection(bottomSpecs));
 		exported.setAllPrivate(false);
 
 		GridData gridData = new GridData(gridSpec);
@@ -813,8 +815,8 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 		Bulletin imported = resultingBulletins[0];
 
 		assertNotEquals("Should have created a bran new bulletin", exported.getLocalId(), imported.getLocalId());
-		Arrays.equals(exported.getTopSectionFieldSpecs(), imported.getTopSectionFieldSpecs());
-		Arrays.equals(exported.getBottomSectionFieldSpecs(), imported.getBottomSectionFieldSpecs());
+		assertEquals(exported.getTopSectionFieldSpecs(), imported.getTopSectionFieldSpecs());
+		assertEquals(exported.getBottomSectionFieldSpecs(), imported.getBottomSectionFieldSpecs());
 		
 		assertTrue("exported should be a sealed", exported.isSealed());
 		assertTrue("Import should always be a draft", imported.isDraft());

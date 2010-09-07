@@ -45,12 +45,14 @@ import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Vector;
+
 import javax.swing.JPopupMenu;
 import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.event.TableModelEvent;
 import javax.swing.table.JTableHeader;
+
 import org.martus.client.bulletinstore.BulletinFolder;
 import org.martus.client.bulletinstore.ClientBulletinStore;
 import org.martus.client.bulletinstore.ClientBulletinStore.AddOlderVersionToFolderFailedException;
@@ -63,8 +65,8 @@ import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.WorkerThread;
 import org.martus.client.swingui.foldertree.FolderNode;
 import org.martus.clientside.UiLocalization;
+import org.martus.common.FieldSpecCollection;
 import org.martus.common.bulletin.Bulletin;
-import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.packet.UniversalId;
 import org.martus.swing.UiNotifyDlg;
 import org.martus.swing.UiTable;
@@ -331,16 +333,16 @@ public class UiBulletinTable extends UiTable implements ListSelectionListener, D
 			return original;
 		if(confirmUpdateFieldsDlg("UseBulletinsDraftCustomFields"))
 			return original;
-		FieldSpec[] publicFieldSpecsToUse = store.getTopSectionFieldSpecs();
-		FieldSpec[] privateFieldSpecsToUse = store.getBottomSectionFieldSpecs();
+		FieldSpecCollection publicFieldSpecsToUse = store.getTopSectionFieldSpecs();
+		FieldSpecCollection privateFieldSpecsToUse = store.getBottomSectionFieldSpecs();
 		return store.createDraftClone(original, publicFieldSpecsToUse, privateFieldSpecsToUse);
 	}
 
 	private Bulletin createCloneAndUpdateFieldSpecsIfNecessary(Bulletin original) throws Exception
 	{
 		ClientBulletinStore store = mainWindow.getApp().getStore();
-		FieldSpec[] publicFieldSpecsToUse = store.getTopSectionFieldSpecs();
-		FieldSpec[] privateFieldSpecsToUse = store.getBottomSectionFieldSpecs();
+		FieldSpecCollection publicFieldSpecsToUse = store.getTopSectionFieldSpecs();
+		FieldSpecCollection privateFieldSpecsToUse = store.getBottomSectionFieldSpecs();
 		if(!store.bulletinHasCurrentFieldSpecs(original))
 		{
 			if(confirmUpdateFieldsDlg("UseBulletinsCustomFields"))

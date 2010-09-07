@@ -25,6 +25,7 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.core;
 
+import org.martus.common.FieldSpecCollection;
 import org.martus.common.GridData;
 import org.martus.common.MiniLocalization;
 import org.martus.common.bulletin.Bulletin;
@@ -109,7 +110,7 @@ public class TestPartialBulletin extends TestCaseEnhanced
 		gridSpec.setTag("grid");
 		gridSpec.setLabel("Grid");
 		gridSpec.addColumn(FieldSpec.createCustomField("", "Label", new FieldTypeNormal()));
-		Bulletin b = new Bulletin(security, new FieldSpec[] {gridSpec}, new FieldSpec[0]);
+		Bulletin b = new Bulletin(security, new FieldSpecCollection(new FieldSpec[] {gridSpec}), new FieldSpecCollection(0));
 		GridData gridData = new GridData(gridSpec);
 		gridData.addEmptyRow();
 		String sampleCellValue = "Data";

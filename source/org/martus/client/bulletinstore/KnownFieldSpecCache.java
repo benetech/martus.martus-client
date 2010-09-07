@@ -111,8 +111,8 @@ public class KnownFieldSpecCache extends BulletinStoreCache implements ReadableD
 	
 	synchronized public void revisionWasSaved(Bulletin b)
 	{
-		FieldSpecCollection publicSpecs = new FieldSpecCollection(b.getTopSectionFieldSpecs());
-		FieldSpecCollection privateSpecs = new FieldSpecCollection(b.getBottomSectionFieldSpecs());
+		FieldSpecCollection publicSpecs = b.getTopSectionFieldSpecs();
+		FieldSpecCollection privateSpecs = b.getBottomSectionFieldSpecs();
 		setSpecs(b.getUniversalId(), new FieldSpecCollection[] {publicSpecs, privateSpecs});
 	}
 
@@ -428,7 +428,7 @@ public class KnownFieldSpecCache extends BulletinStoreCache implements ReadableD
 			try
 			{
 				String packetLocalId = bhp.getFieldDataPacketId();
-				FieldSpec[] defaultSpecs = StandardFieldSpecs.getDefaultTopSetionFieldSpecs().asArray();
+				FieldSpecCollection defaultSpecs = StandardFieldSpecs.getDefaultTopSetionFieldSpecs();
 				FieldSpecCollection packetSpecs = loadFieldSpecsForPacket(accountId, packetLocalId, status, defaultSpecs);
 				publicAndPrivateSpecs.add(packetSpecs);
 			}
@@ -440,7 +440,7 @@ public class KnownFieldSpecCache extends BulletinStoreCache implements ReadableD
 			try
 			{
 				String packetLocalId = bhp.getPrivateFieldDataPacketId();
-				FieldSpec[] defaultSpecs = StandardFieldSpecs.getDefaultBottomSectionFieldSpecs().asArray();
+				FieldSpecCollection defaultSpecs = StandardFieldSpecs.getDefaultBottomSectionFieldSpecs();
 				FieldSpecCollection packetSpecs = loadFieldSpecsForPacket(accountId, packetLocalId, status, defaultSpecs);
 				publicAndPrivateSpecs.add(packetSpecs);
 			}
@@ -460,14 +460,14 @@ public class KnownFieldSpecCache extends BulletinStoreCache implements ReadableD
 		}
 	}
 
-	private FieldSpecCollection loadFieldSpecsForPacket(String accountId, String packetLocalId, String status, FieldSpec[] defaultSpecs) throws IOException, CryptoException, InvalidPacketException, WrongPacketTypeException, SignatureVerificationException, DecryptionException, NoKeyPairException
+	private FieldSpecCollection loadFieldSpecsForPacket(String accountId, String packetLocalId, String status, FieldSpecCollection defaultSpecs) throws IOException, CryptoException, InvalidPacketException, WrongPacketTypeException, SignatureVerificationException, DecryptionException, NoKeyPairException
 	{
 		UniversalId packetUid = UniversalId.createFromAccountAndLocalId(accountId, packetLocalId);
 		FieldDataPacket fdp = loadFieldDataPacket(packetUid, status, defaultSpecs);
-		return new FieldSpecCollection(fdp.getFieldSpecs());
+		return fdp.getFieldSpecs();
 	}
 
-	private FieldDataPacket loadFieldDataPacket(UniversalId publicPacketUid, String status, FieldSpec[] defaultSpecs) throws IOException, CryptoException, InvalidPacketException, WrongPacketTypeException, SignatureVerificationException, DecryptionException, NoKeyPairException
+	private FieldDataPacket loadFieldDataPacket(UniversalId publicPacketUid, String status, FieldSpecCollection defaultSpecs) throws IOException, CryptoException, InvalidPacketException, WrongPacketTypeException, SignatureVerificationException, DecryptionException, NoKeyPairException
 	{
 		DatabaseKey publicPacketKey = DatabaseKey.createKey(publicPacketUid, status);
 		FieldDataPacket publicData = new FieldDataPacket(publicPacketKey.getUniversalId(), defaultSpecs);

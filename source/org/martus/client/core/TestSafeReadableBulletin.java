@@ -28,6 +28,7 @@ package org.martus.client.core;
 
 import java.util.Vector;
 
+import org.martus.common.FieldSpecCollection;
 import org.martus.common.GridData;
 import org.martus.common.MiniLocalization;
 import org.martus.common.bulletin.Bulletin;
@@ -105,7 +106,7 @@ public class TestSafeReadableBulletin extends TestCaseEnhanced
 		FieldSpec[] customBottomSpecs = {
 			FieldSpec.createCustomField("tag", "Label", new FieldTypeNormal()),	
 		};
-		Bulletin b = new Bulletin(security, StandardFieldSpecs.getDefaultTopSetionFieldSpecs().asArray(), customBottomSpecs);
+		Bulletin b = new Bulletin(security, StandardFieldSpecs.getDefaultTopSetionFieldSpecs(), new FieldSpecCollection(customBottomSpecs));
 		b.set(tag, sampleData);
 		b.set(Bulletin.TAGAUTHOR, sampleAuthor);
 		
@@ -162,7 +163,7 @@ public class TestSafeReadableBulletin extends TestCaseEnhanced
 		FieldSpec columnSpec = FieldSpec.createCustomField("", "Grid.Column", new FieldTypeNormal());
 		gridSpec.addColumn(columnSpec);
 		FieldSpec[] section = new FieldSpec[] {gridSpec, };
-		Bulletin b = new Bulletin(security, section, StandardFieldSpecs.getDefaultBottomSectionFieldSpecs().asArray());
+		Bulletin b = new Bulletin(security, new FieldSpecCollection(section), StandardFieldSpecs.getDefaultBottomSectionFieldSpecs());
 		MartusGridField grid = (MartusGridField)b.getField("Tag");
 		GridData gridData = grid.getGridData();
 		gridData.addEmptyRow();

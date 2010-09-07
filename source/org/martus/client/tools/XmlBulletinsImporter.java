@@ -30,9 +30,9 @@ import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Vector;
 
+import org.martus.common.FieldSpecCollection;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.crypto.MartusCrypto;
-import org.martus.common.fieldspec.FieldSpec;
 import org.martus.util.UnicodeReader;
 
 public class XmlBulletinsImporter
@@ -103,12 +103,12 @@ public class XmlBulletinsImporter
 	}
 
 	//These are currently used in tests, I think its good to keep them for now
-	public FieldSpec[] getMainFieldSpecs()
+	public FieldSpecCollection getMainFieldSpecs()
 	{
 		return bulletinsLoader.mainFields.getSpecs();
 	}
 
-	public FieldSpec[] getPrivateFieldSpecs()
+	public FieldSpecCollection getPrivateFieldSpecs()
 	{
 		return bulletinsLoader.privateFields.getSpecs();
 	}

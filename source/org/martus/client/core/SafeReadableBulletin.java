@@ -27,12 +27,13 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.core;
 
 import java.util.Arrays;
-import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 import java.util.Vector;
 
 import org.martus.client.search.FieldChooserSpecBuilder;
+import org.martus.common.FieldSpecCollection;
 import org.martus.common.MiniLocalization;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.field.EmptyMartusFieldWithInfiniteSubFields;
@@ -223,10 +224,10 @@ public class SafeReadableBulletin
 		return getFieldsFromSpecs(realBulletin.getBottomSectionFieldSpecs());
 	}
 	
-	private Vector getFieldsFromSpecs(FieldSpec[] topLevelFieldSpecs) 
+	private Vector getFieldsFromSpecs(FieldSpecCollection topLevelFieldSpecs) 
 	{
 		FieldChooserSpecBuilder builder = new FieldChooserSpecBuilder(localization);
-		HashSet topLevelFieldSpecSet = new HashSet(Arrays.asList(topLevelFieldSpecs));
+		Set topLevelFieldSpecSet = topLevelFieldSpecs.asSet();
 		Vector choices = builder.convertToChoiceItems(topLevelFieldSpecSet);
 
 		Vector fields = new Vector();

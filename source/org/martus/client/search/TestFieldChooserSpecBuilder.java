@@ -36,6 +36,7 @@ import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.test.MockBulletinStore;
 import org.martus.client.test.MockMartusApp;
 import org.martus.common.EnglishCommonStrings;
+import org.martus.common.FieldSpecCollection;
 import org.martus.common.GridData;
 import org.martus.common.MiniLocalization;
 import org.martus.common.bulletin.Bulletin;
@@ -90,7 +91,7 @@ public class TestFieldChooserSpecBuilder extends TestCaseEnhanced
 		FieldSpec lowerCase = FieldSpec.createCustomField("lower", "lower", new FieldTypeNormal());
 		
 		ClientBulletinStore store = new MockBulletinStore();
-		Bulletin b = new Bulletin(store.getSignatureGenerator(), new FieldSpec[] {upperCase, lowerCase}, new FieldSpec[0]);
+		Bulletin b = new Bulletin(store.getSignatureGenerator(), new FieldSpecCollection(new FieldSpec[] {upperCase, lowerCase}), new FieldSpecCollection(0));
 		store.saveBulletinForTesting(b);
 		
 		Vector specs = new Vector(Arrays.asList(searchBuilder.createFieldSpecArray(store)));
@@ -125,7 +126,7 @@ public class TestFieldChooserSpecBuilder extends TestCaseEnhanced
 
 		final String value = "value";
 		ClientBulletinStore store = new MockBulletinStore();
-		Bulletin b = new Bulletin(store.getSignatureGenerator(), new FieldSpec[] {message}, new FieldSpec[0]);
+		Bulletin b = new Bulletin(store.getSignatureGenerator(), new FieldSpecCollection(new FieldSpec[] {message}), new FieldSpecCollection(0));
 		b.set(message.getTag(), value);
 		store.saveBulletinForTesting(b);
 		
@@ -138,7 +139,7 @@ public class TestFieldChooserSpecBuilder extends TestCaseEnhanced
 	{
 		FieldSpec aardvark = FieldSpec.createCustomField("a", "Aardvark", new FieldTypeNormal());
 		ClientBulletinStore store = new MockBulletinStore();
-		Bulletin b = new Bulletin(store.getSignatureGenerator(), new FieldSpec[] {aardvark}, new FieldSpec[0]);
+		Bulletin b = new Bulletin(store.getSignatureGenerator(), new FieldSpecCollection(new FieldSpec[] {aardvark}), new FieldSpecCollection(0));
 		b.set(aardvark.getTag(), "whatever");
 		store.saveBulletinForTesting(b);
 		
@@ -163,7 +164,7 @@ public class TestFieldChooserSpecBuilder extends TestCaseEnhanced
 		gridSpec.setLabel("Grid");
 		gridSpec.addColumn(FieldSpec.createCustomField("", "Label", new FieldTypeNormal()));
 		MartusCrypto security = getStore().getSignatureGenerator();
-		Bulletin b = new Bulletin(security, new FieldSpec[] {gridSpec}, new FieldSpec[0]);
+		Bulletin b = new Bulletin(security, new FieldSpecCollection(new FieldSpec[] {gridSpec}), new FieldSpecCollection(0));
 		GridData gridData = new GridData(gridSpec);
 		gridData.addEmptyRow();
 		gridData.setValueAt("Data", 0, 0);

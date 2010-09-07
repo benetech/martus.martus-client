@@ -25,6 +25,7 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.core;
 
+import org.martus.common.FieldSpecCollection;
 import org.martus.common.MiniLocalization;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.crypto.MockMartusSecurity;
@@ -120,7 +121,7 @@ public class TestSortableBulletinList extends TestCaseEnhanced
 			FieldSpec.createCustomField(tag, "Label", new FieldTypeNormal()),
 		};
 		Bulletin missingCustom = new Bulletin(security);
-		Bulletin hasFullCustom = new Bulletin(security, publicFields, StandardFieldSpecs.getDefaultBottomSectionFieldSpecs().asArray());
+		Bulletin hasFullCustom = new Bulletin(security, new FieldSpecCollection(publicFields), StandardFieldSpecs.getDefaultBottomSectionFieldSpecs());
 		hasFullCustom.set(tag, "blah blah blah");
 		
 		MiniFieldSpec[] tags = {new MiniFieldSpec(publicFields[0])};

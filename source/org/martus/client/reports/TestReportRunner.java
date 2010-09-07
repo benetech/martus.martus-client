@@ -35,6 +35,7 @@ import org.apache.velocity.VelocityContext;
 import org.martus.client.bulletinstore.BulletinFolder;
 import org.martus.client.core.SortableBulletinList;
 import org.martus.client.test.MockMartusApp;
+import org.martus.common.FieldSpecCollection;
 import org.martus.common.LegacyCustomFields;
 import org.martus.common.MiniLocalization;
 import org.martus.common.bulletin.Bulletin;
@@ -165,7 +166,7 @@ public class TestReportRunner extends TestCaseEnhanced
 		
 		MockMartusApp app = MockMartusApp.create();
 		app.getLocalization().setCurrentLanguageCode(MiniLocalization.ENGLISH);
-		Bulletin b = new Bulletin(app.getSecurity(), specs, new FieldSpec[0]);
+		Bulletin b = new Bulletin(app.getSecurity(), new FieldSpecCollection(specs), new FieldSpecCollection(0));
 		String sampleCustomData = "Robert Plant";
 		b.set("custom", sampleCustomData);
 		b.setAllPrivate(false);
@@ -381,13 +382,13 @@ public class TestReportRunner extends TestCaseEnhanced
 			FieldSpec.createStandardField(Bulletin.TAGAUTHOR, new FieldTypeNormal()),
 			FieldSpec.createCustomField("tag2", "Label 2", new FieldTypeDate()),
 		};
-		Bulletin b = new Bulletin(app.getSecurity(), topFields, StandardFieldSpecs.getDefaultBottomSectionFieldSpecs().asArray());
+		Bulletin b = new Bulletin(app.getSecurity(), new FieldSpecCollection(topFields), StandardFieldSpecs.getDefaultBottomSectionFieldSpecs());
 		b.set(topFields[0].getTag(), "First");
 		b.set(topFields[1].getTag(), "2005-04-07");
 		b.set(Bulletin.TAGPRIVATEINFO, "Secret");
 		app.saveBulletin(b, app.getFolderDraftOutbox());
 		
-		Bulletin b2 = new Bulletin(app.getSecurity(), topFields, StandardFieldSpecs.getDefaultBottomSectionFieldSpecs().asArray());
+		Bulletin b2 = new Bulletin(app.getSecurity(), new FieldSpecCollection(topFields), StandardFieldSpecs.getDefaultBottomSectionFieldSpecs());
 		b2.set(topFields[0].getTag(), "Second");
 		b2.set(topFields[1].getTag(), "2003-03-29");
 		b2.set(Bulletin.TAGPRIVATEINFO, "Another secret");
