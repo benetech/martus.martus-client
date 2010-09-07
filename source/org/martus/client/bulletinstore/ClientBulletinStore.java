@@ -115,8 +115,8 @@ public class ClientBulletinStore extends BulletinStore
 		
 		initializeFolders();
 
-		topSectionFieldSpecs = StandardFieldSpecs.getDefaultTopSectionFieldSpecs();
-		bottomSectionFieldSpecs = StandardFieldSpecs.getDefaultBottomSectionFieldSpecs();
+		topSectionFieldSpecs = StandardFieldSpecs.getDefaultTopSectionFieldSpecsAsArray();
+		bottomSectionFieldSpecs = StandardFieldSpecs.getDefaultBottomSectionFieldSpecsAsArray();
 		
 		loadCache();
 		
