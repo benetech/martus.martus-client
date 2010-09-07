@@ -120,7 +120,7 @@ public class TestSortableBulletinList extends TestCaseEnhanced
 			FieldSpec.createCustomField(tag, "Label", new FieldTypeNormal()),
 		};
 		Bulletin missingCustom = new Bulletin(security);
-		Bulletin hasFullCustom = new Bulletin(security, publicFields, StandardFieldSpecs.getDefaultBottomSectionFieldSpecsAsArray());
+		Bulletin hasFullCustom = new Bulletin(security, publicFields, StandardFieldSpecs.getDefaultBottomSectionFieldSpecs().asArray());
 		hasFullCustom.set(tag, "blah blah blah");
 		
 		MiniFieldSpec[] tags = {new MiniFieldSpec(publicFields[0])};

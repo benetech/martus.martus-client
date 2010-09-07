@@ -381,13 +381,13 @@ public class TestReportRunner extends TestCaseEnhanced
 			FieldSpec.createStandardField(Bulletin.TAGAUTHOR, new FieldTypeNormal()),
 			FieldSpec.createCustomField("tag2", "Label 2", new FieldTypeDate()),
 		};
-		Bulletin b = new Bulletin(app.getSecurity(), topFields, StandardFieldSpecs.getDefaultBottomSectionFieldSpecsAsArray());
+		Bulletin b = new Bulletin(app.getSecurity(), topFields, StandardFieldSpecs.getDefaultBottomSectionFieldSpecs().asArray());
 		b.set(topFields[0].getTag(), "First");
 		b.set(topFields[1].getTag(), "2005-04-07");
 		b.set(Bulletin.TAGPRIVATEINFO, "Secret");
 		app.saveBulletin(b, app.getFolderDraftOutbox());
 		
-		Bulletin b2 = new Bulletin(app.getSecurity(), topFields, StandardFieldSpecs.getDefaultBottomSectionFieldSpecsAsArray());
+		Bulletin b2 = new Bulletin(app.getSecurity(), topFields, StandardFieldSpecs.getDefaultBottomSectionFieldSpecs().asArray());
 		b2.set(topFields[0].getTag(), "Second");
 		b2.set(topFields[1].getTag(), "2003-03-29");
 		b2.set(Bulletin.TAGPRIVATEINFO, "Another secret");

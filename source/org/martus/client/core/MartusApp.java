@@ -466,7 +466,7 @@ public class MartusApp
 		if(xmlSpecs.length() > 0)
 			return FieldCollection.parseXml(xmlSpecs);
 			
-		FieldSpec[] specs = StandardFieldSpecs.getDefaultBottomSectionFieldSpecsAsArray();
+		FieldSpec[] specs = StandardFieldSpecs.getDefaultBottomSectionFieldSpecs().asArray();
 		return specs;
 	}
 
@@ -1373,7 +1373,7 @@ public class MartusApp
 	public FieldDataPacket retrieveFieldDataPacketFromServer(UniversalId bulletinId, String dataPacketLocalId) throws Exception
 	{
 		UniversalId packetUid = UniversalId.createFromAccountAndLocalId(bulletinId.getAccountId(), dataPacketLocalId);
-		FieldDataPacket fdp = new FieldDataPacket(packetUid, StandardFieldSpecs.getDefaultTopSectionFieldSpecsAsArray());
+		FieldDataPacket fdp = new FieldDataPacket(packetUid, StandardFieldSpecs.getDefaultTopSetionFieldSpecs().asArray());
 		populatePacketFromServer(fdp, bulletinId.getLocalId());
 		return fdp;
 	}

@@ -105,7 +105,7 @@ public class TestSafeReadableBulletin extends TestCaseEnhanced
 		FieldSpec[] customBottomSpecs = {
 			FieldSpec.createCustomField("tag", "Label", new FieldTypeNormal()),	
 		};
-		Bulletin b = new Bulletin(security, StandardFieldSpecs.getDefaultTopSectionFieldSpecsAsArray(), customBottomSpecs);
+		Bulletin b = new Bulletin(security, StandardFieldSpecs.getDefaultTopSetionFieldSpecs().asArray(), customBottomSpecs);
 		b.set(tag, sampleData);
 		b.set(Bulletin.TAGAUTHOR, sampleAuthor);
 		
@@ -162,7 +162,7 @@ public class TestSafeReadableBulletin extends TestCaseEnhanced
 		FieldSpec columnSpec = FieldSpec.createCustomField("", "Grid.Column", new FieldTypeNormal());
 		gridSpec.addColumn(columnSpec);
 		FieldSpec[] section = new FieldSpec[] {gridSpec, };
-		Bulletin b = new Bulletin(security, section, StandardFieldSpecs.getDefaultBottomSectionFieldSpecsAsArray());
+		Bulletin b = new Bulletin(security, section, StandardFieldSpecs.getDefaultBottomSectionFieldSpecs().asArray());
 		MartusGridField grid = (MartusGridField)b.getField("Tag");
 		GridData gridData = grid.getGridData();
 		gridData.addEmptyRow();

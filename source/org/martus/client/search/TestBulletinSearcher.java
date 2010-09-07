@@ -168,7 +168,7 @@ public class TestBulletinSearcher extends TestCaseEnhanced
 		FieldSpec[] specs = {gridSpec};
 		
 		MartusCrypto security = MockMartusSecurity.createClient();
-		Bulletin realBulletin = new Bulletin(security, specs, StandardFieldSpecs.getDefaultBottomSectionFieldSpecsAsArray());
+		Bulletin realBulletin = new Bulletin(security, specs, StandardFieldSpecs.getDefaultBottomSectionFieldSpecs().asArray());
 		GridData data = new GridData(gridSpec);
 		data.addEmptyRow();
 		data.setValueAt("first row", 0, 0);
@@ -189,7 +189,7 @@ public class TestBulletinSearcher extends TestCaseEnhanced
 		MartusSearchableGridColumnField gridSecondColumn = (MartusSearchableGridColumnField)b.getPossiblyNestedField(secondColumn);
 		assertNotNull("didn't get second column?", gridSecondColumn);
 
-		Bulletin emptyBulletin = new Bulletin(security, specs, StandardFieldSpecs.getDefaultBottomSectionFieldSpecsAsArray());
+		Bulletin emptyBulletin = new Bulletin(security, specs, StandardFieldSpecs.getDefaultBottomSectionFieldSpecs().asArray());
 		SafeReadableBulletin eb = new SafeReadableBulletin(emptyBulletin, localization);
 		assertEquals("didn't return empty field for empty grid?", "", eb.getPossiblyNestedField(firstColumn).getData());
 		
@@ -214,7 +214,7 @@ public class TestBulletinSearcher extends TestCaseEnhanced
 		FieldSpec[] specs = {gridSpec};
 
 		MartusCrypto security = MockMartusSecurity.createClient();
-		Bulletin realBulletin = new Bulletin(security, specs, StandardFieldSpecs.getDefaultBottomSectionFieldSpecsAsArray());
+		Bulletin realBulletin = new Bulletin(security, specs, StandardFieldSpecs.getDefaultBottomSectionFieldSpecs().asArray());
 		GridData data = new GridData(gridSpec);
 		data.addEmptyRow();
 		data.addEmptyRow();
@@ -296,7 +296,7 @@ public class TestBulletinSearcher extends TestCaseEnhanced
 		FieldSpec[] specs = {gridSpec};
 
 		MartusCrypto security = MockMartusSecurity.createClient();
-		Bulletin realBulletin = new Bulletin(security, specs, StandardFieldSpecs.getDefaultBottomSectionFieldSpecsAsArray());
+		Bulletin realBulletin = new Bulletin(security, specs, StandardFieldSpecs.getDefaultBottomSectionFieldSpecs().asArray());
 		GridData data = new GridData(gridSpec);
 		data.addEmptyRow();
 		data.setValueAt(FIRST_NAME, 0, 0);
@@ -350,7 +350,7 @@ public class TestBulletinSearcher extends TestCaseEnhanced
 		FieldSpec[] specs = {gridSpec};
 
 		MartusCrypto security = MockMartusSecurity.createClient();
-		Bulletin realBulletin = new Bulletin(security, specs, StandardFieldSpecs.getDefaultBottomSectionFieldSpecsAsArray());
+		Bulletin realBulletin = new Bulletin(security, specs, StandardFieldSpecs.getDefaultBottomSectionFieldSpecs().asArray());
 		GridData data = new GridData(gridSpec);
 		data.addEmptyRow();
 		data.setValueAt(FIRST_NAME, 0, 0);
@@ -536,7 +536,7 @@ public class TestBulletinSearcher extends TestCaseEnhanced
 			blankField,
 		};
 		
-		Bulletin b = new Bulletin(security, publicSpecs, StandardFieldSpecs.getDefaultBottomSectionFieldSpecsAsArray());
+		Bulletin b = new Bulletin(security, publicSpecs, StandardFieldSpecs.getDefaultBottomSectionFieldSpecs().asArray());
 		b.set("true", FieldSpec.TRUESTRING);
 		b.set("false", FieldSpec.FALSESTRING);
 		b.set("bogus", "");

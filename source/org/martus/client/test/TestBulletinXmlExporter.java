@@ -139,8 +139,8 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 	
 	public void testExportingFieldSpecs() throws Exception
 	{
-		FieldSpec[] topSpecs = StandardFieldSpecs.getDefaultTopSectionFieldSpecsAsArray();
-		FieldSpec[] bottomSpecs = StandardFieldSpecs.getDefaultBottomSectionFieldSpecsAsArray();
+		FieldSpec[] topSpecs = StandardFieldSpecs.getDefaultTopSetionFieldSpecs().asArray();
+		FieldSpec[] bottomSpecs = StandardFieldSpecs.getDefaultBottomSectionFieldSpecs().asArray();
 		String choice1 = "choice A";
 		String choice2 = "choice B";
 
@@ -302,9 +302,9 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 				"</GridSpecDetails>" +
 				"</Field></CustomFields>";
 		GridFieldSpec newSpec = (GridFieldSpec)FieldCollection.parseXml(xmlFieldType)[0]; 
-		FieldCollection fields = FieldCollectionForTesting.extendFields(StandardFieldSpecs.getDefaultTopSectionFieldSpecsAsArray(), newSpec);				
+		FieldCollection fields = FieldCollectionForTesting.extendFields(StandardFieldSpecs.getDefaultTopSetionFieldSpecs().asArray(), newSpec);				
 		
-		Bulletin b = new Bulletin(store.getSignatureGenerator(), fields.getSpecs(), StandardFieldSpecs.getDefaultBottomSectionFieldSpecsAsArray());
+		Bulletin b = new Bulletin(store.getSignatureGenerator(), fields.getSpecs(), StandardFieldSpecs.getDefaultBottomSectionFieldSpecs().asArray());
 		b.setAllPrivate(false);
 		GridData gridData = new GridData(newSpec);
 		GridRow row = new GridRow(newSpec);
@@ -588,9 +588,9 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 			"<Label>" + label2 + "</Label></Field></CustomFields>";
 		FieldSpec newSpec2 = FieldCollection.parseXml(xmlFieldType)[0]; 
 		FieldSpec[] extraFieldSpecs = {newSpec1, newSpec2};
-		FieldCollection fields = FieldCollectionForTesting.extendFields(StandardFieldSpecs.getDefaultTopSectionFieldSpecsAsArray(), extraFieldSpecs);
+		FieldCollection fields = FieldCollectionForTesting.extendFields(StandardFieldSpecs.getDefaultTopSetionFieldSpecs().asArray(), extraFieldSpecs);
 		
-		Bulletin b = new Bulletin(store.getSignatureGenerator(), fields.getSpecs(), StandardFieldSpecs.getDefaultBottomSectionFieldSpecsAsArray());
+		Bulletin b = new Bulletin(store.getSignatureGenerator(), fields.getSpecs(), StandardFieldSpecs.getDefaultBottomSectionFieldSpecs().asArray());
 		b.setAllPrivate(false);
 		
 		FieldDataPacket fdp = b.getFieldDataPacket();
@@ -645,9 +645,9 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 		FieldSpec newSpec2 = FieldCollection.parseXml(xmlFieldType)[0]; 
 
 		FieldSpec[] extraFieldSpecs = {newSpec1, newSpec2};
-		FieldCollection fields = FieldCollectionForTesting.extendFields(StandardFieldSpecs.getDefaultTopSectionFieldSpecsAsArray(), extraFieldSpecs);
+		FieldCollection fields = FieldCollectionForTesting.extendFields(StandardFieldSpecs.getDefaultTopSetionFieldSpecs().asArray(), extraFieldSpecs);
 		
-		Bulletin b = new Bulletin(store.getSignatureGenerator(), fields.getSpecs(), StandardFieldSpecs.getDefaultBottomSectionFieldSpecsAsArray());
+		Bulletin b = new Bulletin(store.getSignatureGenerator(), fields.getSpecs(), StandardFieldSpecs.getDefaultBottomSectionFieldSpecs().asArray());
 		b.setAllPrivate(false);				
 										
 		b.set(customTag1, "abc");
@@ -723,7 +723,7 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 		data.setValueAt(rawDateRangeString, 0, 0);
 		
 		FieldSpec[] publicSpecs = new FieldSpec[] {gridSpec};
-		FieldSpec[] privateSpecs = StandardFieldSpecs.getDefaultBottomSectionFieldSpecsAsArray();
+		FieldSpec[] privateSpecs = StandardFieldSpecs.getDefaultBottomSectionFieldSpecs().asArray();
 		Bulletin b = new Bulletin(store.getSignatureGenerator(), publicSpecs, privateSpecs);
 		b.set(gridSpec.getTag(), data.getXmlRepresentation());
 		
@@ -734,8 +734,8 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 	
 	public void testEndToEndExportAndThenImport() throws Exception
 	{
-		FieldSpec[] topSpecs = StandardFieldSpecs.getDefaultTopSectionFieldSpecsAsArray();
-		FieldSpec[] bottomSpecs = StandardFieldSpecs.getDefaultBottomSectionFieldSpecsAsArray();
+		FieldSpec[] topSpecs = StandardFieldSpecs.getDefaultTopSetionFieldSpecs().asArray();
+		FieldSpec[] bottomSpecs = StandardFieldSpecs.getDefaultBottomSectionFieldSpecs().asArray();
 		String choice1 = "choice A";
 		String choice2 = "choice B";
 

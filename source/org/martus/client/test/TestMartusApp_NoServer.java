@@ -498,7 +498,7 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		assertEquals(expected.toString(), fields.toString());
 
 		fields = new FieldCollection(MartusApp.getCustomFieldSpecsBottomSection(infoToConvert));
-		expected = new FieldCollection(StandardFieldSpecs.getDefaultBottomSectionFieldSpecsAsArray());
+		expected = new FieldCollection(StandardFieldSpecs.getDefaultBottomSectionFieldSpecs().asArray());
 		assertEquals(expected.toString(), fields.toString());
 	}
 	
