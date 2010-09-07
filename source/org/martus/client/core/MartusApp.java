@@ -370,7 +370,7 @@ public class MartusApp
 			plainTextContactOutputStream.close();
 			encryptedContactFileInputStream.close();
 			
-			FieldSpec[] specsTop = getCustomFieldSpecsTopSection(configInfo);
+			FieldSpec[] specsTop = getCustomFieldSpecsTopSection(configInfo).asArray();
 			removeSpaceLikeCharactersFromTags(specsTop);
 			store.setTopSectionFieldSpecs(new FieldSpecCollection(specsTop));
 			FieldSpec[] specsBottom = getCustomFieldSpecsBottomSection(configInfo);
@@ -450,7 +450,7 @@ public class MartusApp
 		}
 	}
 
-	public static FieldSpec[] getCustomFieldSpecsTopSection(ConfigInfo configInfo) throws CustomFieldsParseException
+	public static FieldSpecCollection getCustomFieldSpecsTopSection(ConfigInfo configInfo) throws CustomFieldsParseException
 	{
 		String xmlSpecs = configInfo.getCustomFieldTopSectionXml();
 		if(xmlSpecs.length() > 0)
@@ -458,14 +458,14 @@ public class MartusApp
 			
 		String legacySpecs = configInfo.getCustomFieldLegacySpecs();
 		FieldSpec[] specs = LegacyCustomFields.parseFieldSpecsFromString(legacySpecs);
-		return specs;
+		return new FieldSpecCollection(specs);
 	}
 
 	public static FieldSpec[] getCustomFieldSpecsBottomSection(ConfigInfo configInfo) throws CustomFieldsParseException
 	{
 		String xmlSpecs = configInfo.getCustomFieldBottomSectionXml();
 		if(xmlSpecs.length() > 0)
-			return FieldCollection.parseXml(xmlSpecs);
+			return FieldCollection.parseXml(xmlSpecs).asArray();
 			
 		FieldSpec[] specs = StandardFieldSpecs.getDefaultBottomSectionFieldSpecs().asArray();
 		return specs;

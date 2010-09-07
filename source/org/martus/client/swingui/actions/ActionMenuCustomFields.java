@@ -38,7 +38,6 @@ import org.martus.common.FieldSpecCollection;
 import org.martus.common.MartusConstants;
 import org.martus.common.FieldCollection.CustomFieldsParseException;
 import org.martus.common.fieldspec.BulletinFieldSpecs;
-import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.fieldspec.StandardFieldSpecs;
 
 public class ActionMenuCustomFields extends UiMenuAction
@@ -105,8 +104,8 @@ public class ActionMenuCustomFields extends UiMenuAction
 			}
 			else
 			{
-				FieldSpec[] newTopSectionSpecs = null;
-				FieldSpec[] newBottomSectionSpecs = null;
+				FieldSpecCollection newTopSectionSpecs = null;
+				FieldSpecCollection newBottomSectionSpecs = null;
 				try
 				{
 					newTopSectionSpecs = FieldCollection.parseXml(newTopSectionCustomFieldXml);

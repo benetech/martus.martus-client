@@ -302,7 +302,7 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 				"</Column>\n" +
 				"</GridSpecDetails>" +
 				"</Field></CustomFields>";
-		GridFieldSpec newSpec = (GridFieldSpec)FieldCollection.parseXml(xmlFieldType)[0]; 
+		GridFieldSpec newSpec = (GridFieldSpec)FieldCollection.parseXml(xmlFieldType).get(0); 
 		FieldCollection fields = FieldCollectionForTesting.extendFields(StandardFieldSpecs.getDefaultTopSetionFieldSpecs().asArray(), newSpec);				
 		
 		Bulletin b = new Bulletin(store.getSignatureGenerator(), fields.getSpecs(), StandardFieldSpecs.getDefaultBottomSectionFieldSpecs());
@@ -584,10 +584,10 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 		
 		String xmlFieldType = "<CustomFields><Field><Tag>"+customTag1+"</Tag>" +
 			"<Label>" + label1 + "</Label></Field></CustomFields>";
-		FieldSpec newSpec1 = FieldCollection.parseXml(xmlFieldType)[0]; 
+		FieldSpec newSpec1 = FieldCollection.parseXml(xmlFieldType).get(0); 
 		xmlFieldType = "<CustomFields><Field><Tag>"+customTag2+"</Tag>" +
 			"<Label>" + label2 + "</Label></Field></CustomFields>";
-		FieldSpec newSpec2 = FieldCollection.parseXml(xmlFieldType)[0]; 
+		FieldSpec newSpec2 = FieldCollection.parseXml(xmlFieldType).get(0); 
 		FieldSpec[] extraFieldSpecs = {newSpec1, newSpec2};
 		FieldCollection fields = FieldCollectionForTesting.extendFields(StandardFieldSpecs.getDefaultTopSetionFieldSpecs().asArray(), extraFieldSpecs);
 		
@@ -640,10 +640,10 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 		
 		String xmlFieldType = "<CustomFields><Field><Tag>"+customTag1+"</Tag>" +
 			"<Label>" + label1 + "</Label></Field></CustomFields>";
-		FieldSpec newSpec1 = FieldCollection.parseXml(xmlFieldType)[0]; 
+		FieldSpec newSpec1 = FieldCollection.parseXml(xmlFieldType).get(0); 
 		xmlFieldType = "<CustomFields><Field><Tag>"+customTag2+"</Tag>" +
 			"<Label>" + label2 + "</Label></Field></CustomFields>";
-		FieldSpec newSpec2 = FieldCollection.parseXml(xmlFieldType)[0]; 
+		FieldSpec newSpec2 = FieldCollection.parseXml(xmlFieldType).get(0); 
 
 		FieldSpec[] extraFieldSpecs = {newSpec1, newSpec2};
 		FieldCollection fields = FieldCollectionForTesting.extendFields(StandardFieldSpecs.getDefaultTopSetionFieldSpecs().asArray(), extraFieldSpecs);
