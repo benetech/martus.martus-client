@@ -140,8 +140,8 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 	
 	public void testExportingFieldSpecs() throws Exception
 	{
-		FieldSpec[] topSpecs = StandardFieldSpecs.getDefaultTopSetionFieldSpecs().asArray();
-		FieldSpec[] bottomSpecs = StandardFieldSpecs.getDefaultBottomSectionFieldSpecs().asArray();
+		FieldSpecCollection topSpecs = StandardFieldSpecs.getDefaultTopSetionFieldSpecs();
+		FieldSpecCollection bottomSpecs = StandardFieldSpecs.getDefaultBottomSectionFieldSpecs();
 		String choice1 = "choice A";
 		String choice2 = "choice B";
 
@@ -175,7 +175,7 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 		bottomSpecs = TestCustomFieldSpecValidator.addFieldSpec(bottomSpecs,booleanSpec);
 		bottomSpecs = TestCustomFieldSpecValidator.addFieldSpec(bottomSpecs, messageSpec);
 		
-		Bulletin b = new Bulletin(store.getSignatureGenerator(), new FieldSpecCollection(topSpecs), new FieldSpecCollection(bottomSpecs));
+		Bulletin b = new Bulletin(store.getSignatureGenerator(), topSpecs, bottomSpecs);
 		b.setAllPrivate(false);
 
 		final String sampleAuthor = "someone special";
@@ -735,8 +735,8 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 	
 	public void testEndToEndExportAndThenImport() throws Exception
 	{
-		FieldSpec[] topSpecs = StandardFieldSpecs.getDefaultTopSetionFieldSpecs().asArray();
-		FieldSpec[] bottomSpecs = StandardFieldSpecs.getDefaultBottomSectionFieldSpecs().asArray();
+		FieldSpecCollection topSpecs = StandardFieldSpecs.getDefaultTopSetionFieldSpecs();
+		FieldSpecCollection bottomSpecs = StandardFieldSpecs.getDefaultBottomSectionFieldSpecs();
 		String choice1 = "choice A";
 		String choice2 = "choice B";
 
@@ -776,7 +776,7 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 		bottomSpecs = TestCustomFieldSpecValidator.addFieldSpec(bottomSpecs,booleanSpec);
 		bottomSpecs = TestCustomFieldSpecValidator.addFieldSpec(bottomSpecs, messageSpec);
 		
-		Bulletin exported = new Bulletin(store.getSignatureGenerator(), new FieldSpecCollection(topSpecs), new FieldSpecCollection(bottomSpecs));
+		Bulletin exported = new Bulletin(store.getSignatureGenerator(), topSpecs, bottomSpecs);
 		exported.setAllPrivate(false);
 
 		GridData gridData = new GridData(gridSpec);
@@ -826,8 +826,8 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 		assertEquals("Import should start a version 1", 1, imported.getVersion());
 		assertEquals("export should have a history", 2, exported.getHistory().size());
 		assertEquals("Import should not have a history", 0, imported.getHistory().size());
-		verifyMatchingData(topSpecs, exported, imported);
-		verifyMatchingData(bottomSpecs, exported, imported);
+		verifyMatchingData(topSpecs.asArray(), exported, imported);
+		verifyMatchingData(bottomSpecs.asArray(), exported, imported);
 	}
 	
 	public void testBadAttachments()throws Exception
