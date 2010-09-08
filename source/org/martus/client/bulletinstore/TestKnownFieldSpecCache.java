@@ -160,8 +160,8 @@ public class TestKnownFieldSpecCache extends TestCaseEnhanced
 		DropDownFieldSpec spec1 = new DropDownFieldSpec(choices1);
 		DropDownFieldSpec spec2 = new DropDownFieldSpec(choices2);
 		
-		Bulletin b1 = new Bulletin(security, new FieldSpecCollection(new FieldSpec[] {spec1}), new FieldSpecCollection(0));
-		Bulletin b2 = new Bulletin(security, new FieldSpecCollection(new FieldSpec[] {spec2}), new FieldSpecCollection(0));
+		Bulletin b1 = new Bulletin(security, new FieldSpecCollection(new FieldSpec[] {spec1}), new FieldSpecCollection());
+		Bulletin b2 = new Bulletin(security, new FieldSpecCollection(new FieldSpec[] {spec2}), new FieldSpecCollection());
 		
 		assertEquals(0, cache.getAllKnownFieldSpecs().size());
 		cache.revisionWasSaved(b1);
@@ -182,7 +182,7 @@ public class TestKnownFieldSpecCache extends TestCaseEnhanced
 		MessageFieldSpec spec1 = new MessageFieldSpec();
 		spec1.setLabel(reallyLongString.toString());
 		
-		Bulletin b = new Bulletin(security, new FieldSpecCollection(new FieldSpec[] {spec1}), new FieldSpecCollection(0));
+		Bulletin b = new Bulletin(security, new FieldSpecCollection(new FieldSpec[] {spec1}), new FieldSpecCollection());
 		cache.revisionWasSaved(b);
 		ByteArrayOutputStream out = new ByteArrayOutputStream();
 		cache.saveToStream(out);

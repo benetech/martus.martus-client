@@ -166,7 +166,7 @@ public class TestReportRunner extends TestCaseEnhanced
 		
 		MockMartusApp app = MockMartusApp.create();
 		app.getLocalization().setCurrentLanguageCode(MiniLocalization.ENGLISH);
-		Bulletin b = new Bulletin(app.getSecurity(), new FieldSpecCollection(specs), new FieldSpecCollection(0));
+		Bulletin b = new Bulletin(app.getSecurity(), new FieldSpecCollection(specs), new FieldSpecCollection());
 		String sampleCustomData = "Robert Plant";
 		b.set("custom", sampleCustomData);
 		b.setAllPrivate(false);

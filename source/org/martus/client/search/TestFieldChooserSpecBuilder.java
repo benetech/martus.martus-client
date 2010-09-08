@@ -91,7 +91,7 @@ public class TestFieldChooserSpecBuilder extends TestCaseEnhanced
 		FieldSpec lowerCase = FieldSpec.createCustomField("lower", "lower", new FieldTypeNormal());
 		
 		ClientBulletinStore store = new MockBulletinStore();
-		Bulletin b = new Bulletin(store.getSignatureGenerator(), new FieldSpecCollection(new FieldSpec[] {upperCase, lowerCase}), new FieldSpecCollection(0));
+		Bulletin b = new Bulletin(store.getSignatureGenerator(), new FieldSpecCollection(new FieldSpec[] {upperCase, lowerCase}), new FieldSpecCollection());
 		store.saveBulletinForTesting(b);
 		
 		Vector specs = new Vector(Arrays.asList(searchBuilder.createFieldSpecArray(store)));
@@ -126,7 +126,7 @@ public class TestFieldChooserSpecBuilder extends TestCaseEnhanced
 
 		final String value = "value";
 		ClientBulletinStore store = new MockBulletinStore();
-		Bulletin b = new Bulletin(store.getSignatureGenerator(), new FieldSpecCollection(new FieldSpec[] {message}), new FieldSpecCollection(0));
+		Bulletin b = new Bulletin(store.getSignatureGenerator(), new FieldSpecCollection(new FieldSpec[] {message}), new FieldSpecCollection());
 		b.set(message.getTag(), value);
 		store.saveBulletinForTesting(b);
 		
@@ -139,7 +139,7 @@ public class TestFieldChooserSpecBuilder extends TestCaseEnhanced
 	{
 		FieldSpec aardvark = FieldSpec.createCustomField("a", "Aardvark", new FieldTypeNormal());
 		ClientBulletinStore store = new MockBulletinStore();
-		Bulletin b = new Bulletin(store.getSignatureGenerator(), new FieldSpecCollection(new FieldSpec[] {aardvark}), new FieldSpecCollection(0));
+		Bulletin b = new Bulletin(store.getSignatureGenerator(), new FieldSpecCollection(new FieldSpec[] {aardvark}), new FieldSpecCollection());
 		b.set(aardvark.getTag(), "whatever");
 		store.saveBulletinForTesting(b);
 		
@@ -164,7 +164,7 @@ public class TestFieldChooserSpecBuilder extends TestCaseEnhanced
 		gridSpec.setLabel("Grid");
 		gridSpec.addColumn(FieldSpec.createCustomField("", "Label", new FieldTypeNormal()));
 		MartusCrypto security = getStore().getSignatureGenerator();
-		Bulletin b = new Bulletin(security, new FieldSpecCollection(new FieldSpec[] {gridSpec}), new FieldSpecCollection(0));
+		Bulletin b = new Bulletin(security, new FieldSpecCollection(new FieldSpec[] {gridSpec}), new FieldSpecCollection());
 		GridData gridData = new GridData(gridSpec);
 		gridData.addEmptyRow();
 		gridData.setValueAt("Data", 0, 0);

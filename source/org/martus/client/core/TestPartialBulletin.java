@@ -110,7 +110,7 @@ public class TestPartialBulletin extends TestCaseEnhanced
 		gridSpec.setTag("grid");
 		gridSpec.setLabel("Grid");
 		gridSpec.addColumn(FieldSpec.createCustomField("", "Label", new FieldTypeNormal()));
-		Bulletin b = new Bulletin(security, new FieldSpecCollection(new FieldSpec[] {gridSpec}), new FieldSpecCollection(0));
+		Bulletin b = new Bulletin(security, new FieldSpecCollection(new FieldSpec[] {gridSpec}), new FieldSpecCollection());
 		GridData gridData = new GridData(gridSpec);
 		gridData.addEmptyRow();
 		String sampleCellValue = "Data";
