@@ -84,6 +84,12 @@ public class UiFieldContext
 		if(dataSource == null)
 			return spec.getAllChoices();
 		
+		return getDataDrivenChoices(spec, dataSource);
+	}
+
+	private ChoiceItem[] getDataDrivenChoices(DropDownFieldSpec spec,
+			UiGrid dataSource)
+	{
 		String gridColumnLabel = spec.getDataSourceGridColumn();
 		return dataSource.buildChoicesFromColumnValues(gridColumnLabel);
 	}
