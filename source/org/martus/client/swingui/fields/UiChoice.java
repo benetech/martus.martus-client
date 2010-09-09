@@ -51,7 +51,7 @@ abstract public class UiChoice extends UiField
 		spec = specToUse;
 	}
 
-	abstract public void setChoices(ChoiceItem[] newChoices);
+	abstract public void setWidgetChoices(ChoiceItem[] newChoices);
 	
 	public void updateChoicesFromSpec()
 	{

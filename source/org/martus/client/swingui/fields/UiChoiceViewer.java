@@ -67,8 +67,9 @@ public class UiChoiceViewer extends UiChoice
 		return new JComponent[0];
 	}
 
-	public void setChoices(ChoiceItem[] newChoices)
+	public void setWidgetChoices(ChoiceItem[] newChoices)
 	{
+		// TODO: This method probably should not call spec.setChoices
 		spec.setChoices(newChoices);
 	}
 

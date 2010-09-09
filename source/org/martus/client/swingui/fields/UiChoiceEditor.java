@@ -140,7 +140,7 @@ public class UiChoiceEditor extends UiChoice implements ActionListener
 		ChoiceItem[] choices = new ChoiceItem[spec.getCount()];
 		for(int i = 0; i < choices.length; ++i)
 			choices[i] = spec.getChoice(i);
-		setChoices(choices);
+		setWidgetChoices(choices);
 
 		setText(ensureValid(choices, existingValue));
 	}
@@ -154,7 +154,7 @@ public class UiChoiceEditor extends UiChoice implements ActionListener
 		return "";
 	}
 	
-	public void setChoices(ChoiceItem[] newChoices)
+	public void setWidgetChoices(ChoiceItem[] newChoices)
 	{
 		widget.removeAllItems();
 		for(int i = 0; i < newChoices.length; ++i)
