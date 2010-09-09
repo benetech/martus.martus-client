@@ -37,6 +37,7 @@ public class UiFieldContext
 	{
 		fieldSpecs = new FieldSpec[0];
 		gridFields = new HashMap();
+		fieldsByTag = new HashMap();
 	}
 
 	public void setSectionFieldSpecs(FieldSpec[] specs)
@@ -54,6 +55,16 @@ public class UiFieldContext
 		return fieldSpecs[index];
 	}
 	
+	public void registerField(String tag, UiField field)
+	{
+		fieldsByTag.put(tag, field);
+	}
+	
+	public UiField getField(String tag)
+	{
+		return (UiField)fieldsByTag.get(tag);
+	}
+
 	public void addGrid(String gridTag, UiGrid gridEditor)
 	{
 		gridFields.put(gridTag, gridEditor);
@@ -85,4 +96,5 @@ public class UiFieldContext
 
 	private FieldSpec[] fieldSpecs;
 	private HashMap gridFields;
+	private HashMap fieldsByTag;
 }

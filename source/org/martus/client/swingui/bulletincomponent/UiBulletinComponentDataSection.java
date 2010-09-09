@@ -344,7 +344,7 @@ abstract public class UiBulletinComponentDataSection extends UiBulletinComponent
 
 	}
 	
-	class GridChangeHandler implements TableModelListener
+	static class GridChangeHandler implements TableModelListener
 	{
 		public GridChangeHandler(UiGrid gridToMonitor, UiFieldContext contextToUse) 
 		{
@@ -363,7 +363,7 @@ abstract public class UiBulletinComponentDataSection extends UiBulletinComponent
 			{
 				FieldSpec spec = context.getFieldSpec(i);
 				FieldType type = spec.getType();
-				UiField field = fields[i];
+				UiField field = context.getField(spec.getTag());
 				
 				if(type.isGrid())
 					updateDataDrivenDropdownsInsideGrid((GridFieldSpec)spec, (UiGrid)field);
