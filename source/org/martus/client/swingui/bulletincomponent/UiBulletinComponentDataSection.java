@@ -86,7 +86,7 @@ abstract public class UiBulletinComponentDataSection extends UiBulletinComponent
 
 	public void createLabelsAndFields(FieldSpec[] specs, LanguageChangeListener listener)
 	{
-		fieldSpecs = specs;
+		context.setSectionFieldSpecs(specs);
 		languageChangeListener = listener;
 
 		fields = new UiField[specs.length];
@@ -172,7 +172,7 @@ abstract public class UiBulletinComponentDataSection extends UiBulletinComponent
 		{
 			String text = "";
 			if(fdp != null)
-				text = fdp.get(fieldSpecs[fieldNum].getTag());
+				text = fdp.get(context.getFieldSpec(fieldNum).getTag());
 			fields[fieldNum].setText(text);
 		}
 
@@ -276,7 +276,7 @@ abstract public class UiBulletinComponentDataSection extends UiBulletinComponent
 	{	
 		for(int fieldNum = 0; fieldNum < fields.length; ++fieldNum)
 		{						
-			bulletin.set(fieldSpecs[fieldNum].getTag(), fields[fieldNum].getText());													
+			bulletin.set(context.getFieldSpec(fieldNum).getTag(), fields[fieldNum].getText());													
 		}
 	}
 
@@ -285,13 +285,13 @@ abstract public class UiBulletinComponentDataSection extends UiBulletinComponent
 	{
 		for(int fieldNum = 0; fieldNum < fields.length; ++fieldNum)
 		{
-			String tag = fieldSpecs[fieldNum].getTag();
+			String tag = context.getFieldSpec(fieldNum).getTag();
 			String label = getLocalization().getFieldLabel(tag);
 			if(StandardFieldSpecs.isCustomFieldTag(tag))
-				label = fieldSpecs[fieldNum].getLabel();
+				label = context.getFieldSpec(fieldNum).getLabel();
 			try 
 			{
-				fields[fieldNum].validate(fieldSpecs[fieldNum], label);
+				fields[fieldNum].validate(context.getFieldSpec(fieldNum), label);
 			} 
 			catch (UiDateEditor.DateFutureException e) 
 			{
@@ -322,7 +322,7 @@ abstract public class UiBulletinComponentDataSection extends UiBulletinComponent
 	{
 		for(int fieldNum = 0; fieldNum < fields.length; ++fieldNum)
 		{			
-			String fieldTag = fieldSpecs[fieldNum].getTag();			
+			String fieldTag = context.getFieldSpec(fieldNum).getTag();			
 			String oldFieldText = original.get(fieldTag);
 			String newFieldText = newBulletin.get(fieldTag);
 
@@ -359,9 +359,9 @@ abstract public class UiBulletinComponentDataSection extends UiBulletinComponent
 
 		private void updateDataDrivenDropdowns() 
 		{
-			for(int i = 0; i < fieldSpecs.length; ++i)
+			for(int i = 0; i < context.getSectionFieldCount(); ++i)
 			{
-				FieldSpec spec = fieldSpecs[i];
+				FieldSpec spec = context.getFieldSpec(i);
 				FieldType type = spec.getType();
 				UiField field = fields[i];
 				
@@ -451,7 +451,6 @@ abstract public class UiBulletinComponentDataSection extends UiBulletinComponent
 
 	LanguageChangeListener languageChangeListener;
 	String sectionName;
-	FieldSpec[] fieldSpecs;
 	UiField[] fields;
 	UiFieldCreator fieldCreator;
 	private UiFieldContext context;

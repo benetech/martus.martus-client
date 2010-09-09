@@ -29,13 +29,29 @@ import java.util.HashMap;
 
 import org.martus.common.fieldspec.ChoiceItem;
 import org.martus.common.fieldspec.DropDownFieldSpec;
+import org.martus.common.fieldspec.FieldSpec;
 
 public class UiFieldContext
 {
 	public UiFieldContext()
 	{
+		fieldSpecs = new FieldSpec[0];
 		gridFields = new HashMap();
-		
+	}
+
+	public void setSectionFieldSpecs(FieldSpec[] specs)
+	{
+		fieldSpecs = specs;
+	}
+	
+	public int getSectionFieldCount()
+	{
+		return fieldSpecs.length;
+	}
+	
+	public FieldSpec getFieldSpec(int index)
+	{
+		return fieldSpecs[index];
 	}
 	
 	public void addGrid(String gridTag, UiGrid gridEditor)
@@ -67,8 +83,6 @@ public class UiFieldContext
 		return getGridField(gridTag);
 	}
 
-
-	
+	private FieldSpec[] fieldSpecs;
 	private HashMap gridFields;
-
 }
