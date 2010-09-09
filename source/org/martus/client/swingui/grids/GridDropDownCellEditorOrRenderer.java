@@ -58,7 +58,7 @@ abstract public class GridDropDownCellEditorOrRenderer extends GridCellEditorAnd
 	{
 		DropDownFieldSpec spec = getFieldSpecForCell(tableToUse, row, column);
 		setFieldSpec(spec);
-		setChoices(context.getCurrentGridValuesAsChoices(spec));
+		setChoices(context.getCurrentDropDownChoices(spec));
 		return super.getTableCellEditorComponent(tableToUse, codeString, isSelected, row, column);
 	}
 
@@ -66,7 +66,7 @@ abstract public class GridDropDownCellEditorOrRenderer extends GridCellEditorAnd
 	{
 		DropDownFieldSpec spec = getFieldSpecForCell(tableToUse, row, column);
 		setFieldSpec(spec);
-		setChoices(context.getCurrentGridValuesAsChoices(spec));
+		setChoices(context.getCurrentDropDownChoices(spec));
 		return super.getTableCellRendererComponent(tableToUse, codeString, isSelected, hasFocus, row, column);
 	}
 

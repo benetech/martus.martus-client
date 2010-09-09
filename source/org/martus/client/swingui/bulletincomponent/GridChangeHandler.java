@@ -104,7 +104,7 @@ public class GridChangeHandler implements TableModelListener
 			return;
 		
 		UiChoice choiceField = (UiChoice)field;
-		spec.setChoices(context.getCurrentGridValuesAsChoices(spec));
+		spec.setChoices(context.getCurrentDropDownChoices(spec));
 		choiceField.updateChoicesFromSpec();
 	}
 
@@ -124,7 +124,7 @@ public class GridChangeHandler implements TableModelListener
 				continue;
 			needsUpdate = true;
 			
-			ChoiceItem[] choices = context.getCurrentGridValuesAsChoices(dropdownSpec);
+			ChoiceItem[] choices = context.getCurrentDropDownChoices(dropdownSpec);
 			if(choices == null)
 				continue;
 			

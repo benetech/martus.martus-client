@@ -78,7 +78,7 @@ public class UiFieldContext
 		return (UiGrid)gridFieldsByTag.get(tag);
 	}
 	
-	public ChoiceItem[] getCurrentGridValuesAsChoices(DropDownFieldSpec spec)
+	public ChoiceItem[] getCurrentDropDownChoices(DropDownFieldSpec spec)
 	{
 		UiGrid dataSource = getGrid(spec);
 		if(dataSource == null)
