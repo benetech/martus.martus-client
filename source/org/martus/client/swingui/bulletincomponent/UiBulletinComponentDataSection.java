@@ -377,7 +377,7 @@ abstract public class UiBulletinComponentDataSection extends UiBulletinComponent
 			if(!isDataSourceThisGrid(spec))
 				return;
 			
-			UiGrid dataSourceGrid = fieldCreator.getGridField(spec.getDataSourceGridTag());
+			UiGrid dataSourceGrid = getContext().getGridField(spec.getDataSourceGridTag());
 			if(dataSourceGrid == null)
 				return;
 			
