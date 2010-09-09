@@ -55,9 +55,9 @@ public class UiFieldContext
 		return fieldSpecs[index];
 	}
 	
-	public void registerField(String tag, UiField field)
+	public void registerField(FieldSpec spec, UiField field)
 	{
-		fieldsByTag.put(tag, field);
+		fieldsByTag.put(spec.getTag(), field);
 	}
 	
 	public UiField getField(String tag)

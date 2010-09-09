@@ -93,7 +93,7 @@ abstract public class UiFieldCreator
 		else
 			field = createRegularField(fieldSpec);
 		field.getComponent().setBorder(new LineBorder(Color.black));
-		context.registerField(fieldSpec.getTag(), field);
+		context.registerField(fieldSpec, field);
 		return field;
 	}
 
