@@ -145,7 +145,7 @@ abstract public class UiBulletinComponentDataSection extends UiBulletinComponent
 		if(spec.getType().isGrid())
 		{
 			UiGrid grid = (UiGrid)field;
-			grid.getGridTableModel().addTableModelListener(new GridChangeHandler(grid));
+			grid.getGridTableModel().addTableModelListener(new GridChangeHandler(grid, context));
 		}
 		return field;
 	}
@@ -346,9 +346,10 @@ abstract public class UiBulletinComponentDataSection extends UiBulletinComponent
 	
 	class GridChangeHandler implements TableModelListener
 	{
-		public GridChangeHandler(UiGrid gridToMonitor) 
+		public GridChangeHandler(UiGrid gridToMonitor, UiFieldContext contextToUse) 
 		{
 			modifiedGrid = gridToMonitor;
+			context = contextToUse;
 		}
 
 		public void tableChanged(TableModelEvent event) 
@@ -377,7 +378,7 @@ abstract public class UiBulletinComponentDataSection extends UiBulletinComponent
 			if(!isDataSourceThisGrid(spec))
 				return;
 			
-			UiGrid dataSourceGrid = getContext().getGridField(spec.getDataSourceGridTag());
+			UiGrid dataSourceGrid = context.getGridField(spec.getDataSourceGridTag());
 			if(dataSourceGrid == null)
 				return;
 			
@@ -401,7 +402,7 @@ abstract public class UiBulletinComponentDataSection extends UiBulletinComponent
 					continue;
 				needsUpdate = true;
 				
-				ChoiceItem[] choices = getContext().getCurrentGridValuesAsChoices(dropdownSpec);
+				ChoiceItem[] choices = context.getCurrentGridValuesAsChoices(dropdownSpec);
 				if(choices == null)
 					continue;
 				
@@ -439,6 +440,7 @@ abstract public class UiBulletinComponentDataSection extends UiBulletinComponent
 			return "";
 		}
 
+		private UiFieldContext context;
 		UiGrid modifiedGrid;
 	}
 
