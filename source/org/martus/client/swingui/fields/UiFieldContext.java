@@ -36,7 +36,7 @@ public class UiFieldContext
 	public UiFieldContext()
 	{
 		fieldSpecs = new FieldSpec[0];
-		gridFields = new HashMap();
+		gridFieldsByTag = new HashMap();
 		fieldsByTag = new HashMap();
 	}
 
@@ -67,12 +67,12 @@ public class UiFieldContext
 
 	public void addGrid(String gridTag, UiGrid gridEditor)
 	{
-		gridFields.put(gridTag, gridEditor);
+		gridFieldsByTag.put(gridTag, gridEditor);
 	}
 
 	public UiGrid getGridField(String tag)
 	{
-		return (UiGrid)gridFields.get(tag);
+		return (UiGrid)gridFieldsByTag.get(tag);
 	}
 	
 	public ChoiceItem[] getCurrentGridValuesAsChoices(DropDownFieldSpec spec)
@@ -95,6 +95,6 @@ public class UiFieldContext
 	}
 
 	private FieldSpec[] fieldSpecs;
-	private HashMap gridFields;
+	private HashMap gridFieldsByTag;
 	private HashMap fieldsByTag;
 }
