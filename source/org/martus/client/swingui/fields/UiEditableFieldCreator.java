@@ -36,9 +36,9 @@ import org.martus.common.fieldspec.GridFieldSpec;
 
 public class UiEditableFieldCreator extends UiFieldCreator
 {
-	public UiEditableFieldCreator(UiMainWindow mainWindowToUse)
+	public UiEditableFieldCreator(UiMainWindow mainWindowToUse, UiFieldContext contextToUse)
 	{
-		super(mainWindowToUse);
+		super(mainWindowToUse, contextToUse);
 	}
 
 	public UiField createUnknownField(FieldSpec spec)

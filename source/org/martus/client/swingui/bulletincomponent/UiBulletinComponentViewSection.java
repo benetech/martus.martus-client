@@ -39,7 +39,7 @@ public class UiBulletinComponentViewSection extends UiBulletinComponentDataSecti
 	public UiBulletinComponentViewSection(UiMainWindow ownerToUse, String sectionName)
 	{
 		super(ownerToUse, sectionName);
-		setFieldCreator(new UiReadOnlyFieldCreator(ownerToUse));
+		setFieldCreator(new UiReadOnlyFieldCreator(ownerToUse, getContext()));
 	}
 
 	public JComponent createAttachmentTable()

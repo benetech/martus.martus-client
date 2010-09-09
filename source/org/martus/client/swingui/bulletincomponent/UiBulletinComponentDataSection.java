@@ -41,6 +41,7 @@ import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.fields.UiChoice;
 import org.martus.client.swingui.fields.UiDateEditor;
 import org.martus.client.swingui.fields.UiField;
+import org.martus.client.swingui.fields.UiFieldContext;
 import org.martus.client.swingui.fields.UiFieldCreator;
 import org.martus.client.swingui.fields.UiGrid;
 import org.martus.client.swingui.grids.GridTableModel;
@@ -70,6 +71,12 @@ abstract public class UiBulletinComponentDataSection extends UiBulletinComponent
 	{
 		super(mainWindowToUse, sectionNameToUse);
 		sectionName = sectionNameToUse;
+		context = new UiFieldContext();
+	}
+	
+	protected UiFieldContext getContext()
+	{
+		return context;
 	}
 	
 	void setFieldCreator(UiFieldCreator creatorToUse)
@@ -454,5 +461,6 @@ abstract public class UiBulletinComponentDataSection extends UiBulletinComponent
 	FieldSpec[] fieldSpecs;
 	UiField[] fields;
 	UiFieldCreator fieldCreator;
+	private UiFieldContext context;
 }
 

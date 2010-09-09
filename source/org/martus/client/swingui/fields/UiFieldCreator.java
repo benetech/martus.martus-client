@@ -42,10 +42,10 @@ import org.martus.common.fieldspec.GridFieldSpec;
 
 abstract public class UiFieldCreator
 {
-	public UiFieldCreator(UiMainWindow mainWindowToUse)
+	public UiFieldCreator(UiMainWindow mainWindowToUse, UiFieldContext contextToUse)
 	{
 		mainWindow = mainWindowToUse;
-		context = new UiFieldContext();
+		context = contextToUse;
 	}
 	
 	abstract public UiField createNormalField(FieldSpec spec);

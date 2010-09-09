@@ -35,10 +35,9 @@ import org.martus.common.fieldspec.GridFieldSpec;
 
 public class UiReadOnlyFieldCreator extends UiFieldCreator
 {
-	public UiReadOnlyFieldCreator(UiMainWindow mainWindowToUse)
+	public UiReadOnlyFieldCreator(UiMainWindow mainWindowToUse, UiFieldContext contextToUse)
 	{
-		super(mainWindowToUse);
-		// TODO Auto-generated constructor stub
+		super(mainWindowToUse, contextToUse);
 	}
 
 	public UiField createUnknownField(FieldSpec spec)
