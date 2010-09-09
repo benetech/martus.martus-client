@@ -34,7 +34,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.util.HashSet;
-import java.util.Map;
 import java.util.Vector;
 
 import javax.swing.BorderFactory;
@@ -233,7 +232,7 @@ abstract public class UiGrid extends UiField
 		if(dataSourceGridTag == null)
 			return;
 		
-		UiGrid dataSourceGrid = (UiGrid)otherGridFields.get(dataSourceGridTag);
+		UiGrid dataSourceGrid = context.getGridField(dataSourceGridTag);
 		if(dataSourceGrid == null)
 			return;
 
@@ -408,7 +407,6 @@ abstract public class UiGrid extends UiField
 	MartusApp app;
 	UiFieldCreator fieldCreator;
 	private UiFieldContext context;
-	Map otherGridFields;
 	JPanel widget;
 	Box buttonBox;
 	protected GridTable table;
