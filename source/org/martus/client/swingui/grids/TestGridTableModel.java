@@ -59,7 +59,7 @@ public class TestGridTableModel extends TestCaseEnhanced
 		choices.add(choice1);
 		choices.add(choice2);
 		
-		column2.setChoices(choices);
+		column2.setChoicesFromStringVector(choices);
 		column2.setLabel(label2);
 		gridSpec.addColumn(column1);
 		gridSpec.addColumn(column2);
