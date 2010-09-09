@@ -61,7 +61,7 @@ public class UiChoiceEditor extends UiChoice implements ActionListener
 		addActionListener(this);
 		widget.setRenderer(new UiChoiceListCellRenderer());
 		if(spec != null)
-			updateChoices();
+			updateChoicesFromSpec();
 	}
 
 	public void addActionListener(ActionListener listener)
@@ -72,7 +72,7 @@ public class UiChoiceEditor extends UiChoice implements ActionListener
 	public void setSpec(DropDownFieldSpec specToUse)
 	{
 		super.setSpec(specToUse);
-		updateChoices();
+		updateChoicesFromSpec();
 	}
 	
 	class UiChoiceListCellRenderer extends DefaultListCellRenderer
@@ -133,7 +133,7 @@ public class UiChoiceEditor extends UiChoice implements ActionListener
 		widget.setSelectedIndex(select);
 	}
 
-	public void updateChoices()
+	public void updateChoicesFromSpec()
 	{
 		String existingValue = getText();
 

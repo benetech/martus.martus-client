@@ -375,7 +375,7 @@ abstract public class UiBulletinComponentDataSection extends UiBulletinComponent
 				return;
 			
 			UiChoice choiceField = (UiChoice)field;
-			choiceField.updateChoices();
+			choiceField.updateChoicesFromSpec();
 		}
 
 		private void updateDataDrivenDropdownsInsideGrid(GridFieldSpec gridSpecToBlankOut, UiGrid gridToBlankOut) 

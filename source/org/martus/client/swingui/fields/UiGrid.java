@@ -159,7 +159,7 @@ abstract public class UiGrid extends UiField
 				{
 					updateChoicesFromDataSourceIfNecessary((DropDownFieldSpec)spec);
 					UiChoice choice = (UiChoice)fields[column];
-					choice.updateChoices();
+					choice.updateChoicesFromSpec();
 				}
 			}
 		}
