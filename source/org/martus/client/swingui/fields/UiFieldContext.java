@@ -27,6 +27,7 @@ package org.martus.client.swingui.fields;
 
 import java.util.HashMap;
 
+import org.martus.common.FieldSpecCollection;
 import org.martus.common.fieldspec.ChoiceItem;
 import org.martus.common.fieldspec.DropDownFieldSpec;
 import org.martus.common.fieldspec.FieldSpec;
@@ -35,24 +36,24 @@ public class UiFieldContext
 {
 	public UiFieldContext()
 	{
-		fieldSpecs = new FieldSpec[0];
+		fieldSpecs = new FieldSpecCollection();
 		gridFieldsByTag = new HashMap();
 		fieldsByTag = new HashMap();
 	}
 
-	public void setSectionFieldSpecs(FieldSpec[] specs)
+	public void setSectionFieldSpecs(FieldSpecCollection specs)
 	{
 		fieldSpecs = specs;
 	}
 	
 	public int getSectionFieldCount()
 	{
-		return fieldSpecs.length;
+		return fieldSpecs.size();
 	}
 	
 	public FieldSpec getFieldSpec(int index)
 	{
-		return fieldSpecs[index];
+		return fieldSpecs.get(index);
 	}
 	
 	public void registerField(FieldSpec spec, UiField field)
@@ -96,7 +97,7 @@ public class UiFieldContext
 		return getGridField(gridTag);
 	}
 
-	private FieldSpec[] fieldSpecs;
+	private FieldSpecCollection fieldSpecs;
 	private HashMap gridFieldsByTag;
 	private HashMap fieldsByTag;
 }

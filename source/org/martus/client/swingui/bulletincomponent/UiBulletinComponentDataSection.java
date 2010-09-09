@@ -41,6 +41,7 @@ import org.martus.client.swingui.fields.UiField;
 import org.martus.client.swingui.fields.UiFieldContext;
 import org.martus.client.swingui.fields.UiFieldCreator;
 import org.martus.client.swingui.fields.UiGrid;
+import org.martus.common.FieldSpecCollection;
 import org.martus.common.bulletin.AttachmentProxy;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.fieldspec.DataInvalidException;
@@ -76,16 +77,16 @@ abstract public class UiBulletinComponentDataSection extends UiBulletinComponent
 		fieldCreator = creatorToUse;
 	}
 
-	public void createLabelsAndFields(FieldSpec[] specs, LanguageChangeListener listener)
+	public void createLabelsAndFields(FieldSpecCollection specs, LanguageChangeListener listener)
 	{
 		context.setSectionFieldSpecs(specs);
 		languageChangeListener = listener;
 
-		fields = new UiField[specs.length];
+		fields = new UiField[specs.size()];
 		FieldRow fieldRow = null;
-		for(int fieldNum = 0; fieldNum < specs.length; ++fieldNum)
+		for(int fieldNum = 0; fieldNum < specs.size(); ++fieldNum)
 		{
-			FieldSpec spec = specs[fieldNum];
+			FieldSpec spec = specs.get(fieldNum);
 			fields[fieldNum] = createField(spec, listener);
 			
 			if(spec.getType().isSectionStart())

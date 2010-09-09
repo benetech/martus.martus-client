@@ -106,7 +106,7 @@ abstract public class UiBulletinComponent extends JPanel implements Scrollable, 
 			allPrivateField = target.createAllPrivateField();
 			allPrivateField.setListener(this);
 		}
-		target.createLabelsAndFields(fieldSpecs.asArray(), this);
+		target.createLabelsAndFields(fieldSpecs, this);
 
 		return target;
 	}
