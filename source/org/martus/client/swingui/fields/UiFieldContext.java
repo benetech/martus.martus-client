@@ -27,6 +27,9 @@ package org.martus.client.swingui.fields;
 
 import java.util.HashMap;
 
+import org.martus.common.fieldspec.ChoiceItem;
+import org.martus.common.fieldspec.DropDownFieldSpec;
+
 public class UiFieldContext
 {
 	public UiFieldContext()
@@ -44,6 +47,27 @@ public class UiFieldContext
 	{
 		return (UiGrid)gridFields.get(tag);
 	}
+	
+	public ChoiceItem[] getCurrentGridValuesAsChoices(DropDownFieldSpec spec)
+	{
+		UiGrid dataSource = getGrid(spec);
+		if(dataSource == null)
+			return spec.getAllChoices();
+		
+		String gridColumnLabel = spec.getDataSourceGridColumn();
+		return dataSource.buildChoicesFromColumnValues(gridColumnLabel);
+	}
+	
+	private UiGrid getGrid(DropDownFieldSpec spec)
+	{
+		String gridTag = spec.getDataSourceGridTag();
+		if(gridTag == null)
+			return null;
+		
+		return getGridField(gridTag);
+	}
+
+
 	
 	private HashMap gridFields;
 

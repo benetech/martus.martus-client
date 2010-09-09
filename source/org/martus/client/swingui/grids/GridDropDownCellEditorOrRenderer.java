@@ -32,7 +32,6 @@ import javax.swing.JTable;
 
 import org.martus.client.swingui.fields.UiField;
 import org.martus.client.swingui.fields.UiFieldContext;
-import org.martus.client.swingui.fields.UiGrid;
 import org.martus.common.fieldspec.ChoiceItem;
 import org.martus.common.fieldspec.DropDownFieldSpec;
 import org.martus.swing.UiComboBox;
@@ -59,7 +58,7 @@ abstract public class GridDropDownCellEditorOrRenderer extends GridCellEditorAnd
 	{
 		DropDownFieldSpec spec = getFieldSpecForCell(tableToUse, row, column);
 		setFieldSpec(spec);
-		setChoices(getCurrentGridValuesAsChoices(spec));
+		setChoices(context.getCurrentGridValuesAsChoices(spec));
 		return super.getTableCellEditorComponent(tableToUse, codeString, isSelected, row, column);
 	}
 
@@ -67,7 +66,7 @@ abstract public class GridDropDownCellEditorOrRenderer extends GridCellEditorAnd
 	{
 		DropDownFieldSpec spec = getFieldSpecForCell(tableToUse, row, column);
 		setFieldSpec(spec);
-		setChoices(getCurrentGridValuesAsChoices(spec));
+		setChoices(context.getCurrentGridValuesAsChoices(spec));
 		return super.getTableCellRendererComponent(tableToUse, codeString, isSelected, hasFocus, row, column);
 	}
 
@@ -75,25 +74,6 @@ abstract public class GridDropDownCellEditorOrRenderer extends GridCellEditorAnd
 	{
 		GridTable gridTable = (GridTable)tableToUse;
 		return (DropDownFieldSpec)gridTable.getFieldSpecForCell(row, column);
-	}
-
-	ChoiceItem[] getCurrentGridValuesAsChoices(DropDownFieldSpec spec)
-	{
-		UiGrid dataSource = getGrid(spec);
-		if(dataSource == null)
-			return spec.getAllChoices();
-		
-		String gridColumnLabel = spec.getDataSourceGridColumn();
-		return dataSource.buildChoicesFromColumnValues(gridColumnLabel);
-	}
-	
-	UiGrid getGrid(DropDownFieldSpec spec)
-	{
-		String gridTag = spec.getDataSourceGridTag();
-		if(gridTag == null)
-			return null;
-		
-		return context.getGridField(gridTag);
 	}
 
 	UiFieldContext context;
