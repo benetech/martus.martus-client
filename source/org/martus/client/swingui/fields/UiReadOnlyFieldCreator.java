@@ -86,7 +86,6 @@ public class UiReadOnlyFieldCreator extends UiFieldCreator
 		fieldSpec.setColumnZeroLabel(localization.getFieldLabel("ColumnGridRowNumber"));
 		UiDialogLauncher dlgLauncher = new UiDialogLauncher(mainWindow.getCurrentActiveFrame(), localization);
 		UiGridViewer gridViewer = new UiGridViewer(mainWindow, fieldSpec, dlgLauncher, getContext(), mainWindow.getPreviewTextFieldColumns());
-		registerGridField(fieldSpec.getTag(), gridViewer);
 		return gridViewer;
 	}
 

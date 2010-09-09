@@ -58,6 +58,8 @@ public class UiFieldContext
 	public void registerField(FieldSpec spec, UiField field)
 	{
 		fieldsByTag.put(spec.getTag(), field);
+		if(spec.getType().isGrid())
+			addGrid(spec.getTag(), (UiGrid)field);
 	}
 	
 	public UiField getField(String tag)
@@ -65,7 +67,7 @@ public class UiFieldContext
 		return (UiField)fieldsByTag.get(tag);
 	}
 
-	public void addGrid(String gridTag, UiGrid gridEditor)
+	private void addGrid(String gridTag, UiGrid gridEditor)
 	{
 		gridFieldsByTag.put(gridTag, gridEditor);
 	}

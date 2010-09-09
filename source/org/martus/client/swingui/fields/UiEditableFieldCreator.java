@@ -88,7 +88,6 @@ public class UiEditableFieldCreator extends UiFieldCreator
 		fieldSpec.setColumnZeroLabel(localization.getFieldLabel("ColumnGridRowNumber"));
 		UiDialogLauncher dlgLauncher = new UiDialogLauncher(mainWindow.getCurrentActiveFrame(), localization);
 		UiGrid gridEditor = new UiGridEditor(mainWindow, fieldSpec, dlgLauncher, getContext(), mainWindow.getEditingTextFieldColumns());
-		registerGridField(fieldSpec.getTag(), gridEditor);
 		return gridEditor;
 	}
 

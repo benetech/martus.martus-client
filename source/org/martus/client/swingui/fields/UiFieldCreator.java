@@ -64,11 +64,6 @@ abstract public class UiFieldCreator
 		return context;
 	}
 	
-	public void registerGridField(String gridTag, UiGrid grid)
-	{
-		context.addGrid(gridTag, grid);
-	}
-
 	public UiGrid getGridField(String tag)
 	{
 		return context.getGridField(tag);
