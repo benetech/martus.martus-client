@@ -81,10 +81,11 @@ public class UiFieldContext
 	public ChoiceItem[] getCurrentDropDownChoices(DropDownFieldSpec spec)
 	{
 		UiGrid dataSource = getGrid(spec);
-		if(dataSource == null)
-			return spec.getAllChoices();
+		if(dataSource != null)
+			return getDataDrivenChoices(spec, dataSource);
+
+		return spec.getAllChoices();
 		
-		return getDataDrivenChoices(spec, dataSource);
 	}
 
 	private ChoiceItem[] getDataDrivenChoices(DropDownFieldSpec spec,
