@@ -236,7 +236,7 @@ abstract public class UiGrid extends UiField
 		if(dataSourceGrid == null)
 			return;
 
-		ChoiceItem[] choices = dataSourceGrid.buildChoicesFromColumnValues(dropDownSpec.getDataSourceGridColumn());
+		ChoiceItem[] choices = context.getCurrentGridValuesAsChoices(dropDownSpec);
 		dropDownSpec.setChoices(choices);
 	}
 
