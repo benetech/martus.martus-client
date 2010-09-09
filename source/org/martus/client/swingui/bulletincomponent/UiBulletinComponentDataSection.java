@@ -401,7 +401,7 @@ abstract public class UiBulletinComponentDataSection extends UiBulletinComponent
 					continue;
 				needsUpdate = true;
 				
-				ChoiceItem[] choices = getCurrentChoiceItems(dropdownSpec);
+				ChoiceItem[] choices = getContext().getCurrentGridValuesAsChoices(dropdownSpec);
 				if(choices == null)
 					continue;
 				
@@ -437,15 +437,6 @@ abstract public class UiBulletinComponentDataSection extends UiBulletinComponent
 					return text;
 
 			return "";
-		}
-		
-		private ChoiceItem[] getCurrentChoiceItems(DropDownFieldSpec spec)
-		{
-			UiGrid dataSourceGrid = fieldCreator.getGridField(spec.getDataSourceGridTag());
-			if(dataSourceGrid == null)
-				return null;
-			
-			return dataSourceGrid.buildChoicesFromColumnValues(spec.getDataSourceGridColumn());
 		}
 
 		UiGrid modifiedGrid;
