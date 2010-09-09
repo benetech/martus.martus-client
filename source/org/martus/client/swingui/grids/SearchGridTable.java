@@ -27,12 +27,12 @@ package org.martus.client.swingui.grids;
 
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.Map;
 
 import javax.swing.table.TableCellEditor;
 import javax.swing.table.TableCellRenderer;
 
 import org.martus.client.swingui.dialogs.UiDialogLauncher;
+import org.martus.client.swingui.fields.UiFieldContext;
 import org.martus.clientside.UiLocalization;
 import org.martus.common.fieldspec.DateFieldSpec;
 import org.martus.common.fieldspec.DateRangeFieldSpec;
@@ -51,9 +51,9 @@ import org.martus.common.fieldspec.FieldTypePopUpTree;
 public class SearchGridTable extends GridTable
 {
 	public SearchGridTable(GridTableModel model,
-			UiDialogLauncher dlgLauncherToUse, Map otherGridFieldsToUse)
+			UiDialogLauncher dlgLauncherToUse, UiFieldContext context)
 	{
-		super(model, dlgLauncherToUse, otherGridFieldsToUse);
+		super(model, dlgLauncherToUse, context);
 	}
 
 	protected void createRenderers()
@@ -74,8 +74,8 @@ public class SearchGridTable extends GridTable
 		map.put(new FieldTypeBoolean(), new GridBooleanCellEditor(localization));
 		map.put(new FieldTypeDate(), new GridDateCellEditor((DateFieldSpec)new FieldTypeDate().createEmptyFieldSpec(), localization));
 		map.put(new FieldTypeDateRange(), new GridDateRangeCellEditor(dlgLauncher, getGridFieldSpec(), (DateRangeFieldSpec) new FieldTypeDateRange().createEmptyFieldSpec()));
-		map.put(new FieldTypeDropdown(), new GridDropDownCellEditor(otherGridFields, localization));
-		map.put(new FieldTypeLanguage(), new GridDropDownCellEditor(otherGridFields, localization));
+		map.put(new FieldTypeDropdown(), new GridDropDownCellEditor(context, localization));
+		map.put(new FieldTypeLanguage(), new GridDropDownCellEditor(context, localization));
 		map.put(new FieldTypeNormal(), new GridNormalCellEditor(localization));
 		map.put(new FieldTypeMultiline(), new GridNormalCellEditor(localization));
 		map.put(new FieldTypeAnyField(), new GridNormalCellEditor(localization));

@@ -25,9 +25,8 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.grids;
 
-import java.util.Map;
-
 import org.martus.client.swingui.dialogs.UiDialogLauncher;
+import org.martus.client.swingui.fields.UiFieldContext;
 import org.martus.clientside.UiLocalization;
 import org.martus.common.fieldspec.FieldType;
 import org.martus.common.fieldspec.FieldTypeDate;
@@ -36,9 +35,9 @@ import org.martus.common.fieldspec.FieldTypeDateRange;
 public class ReadonlyGridFieldTable extends GridFieldTable
 {
 	public ReadonlyGridFieldTable(GridTableModel model,
-			UiDialogLauncher dlgLauncherToUse, Map otherGridFieldsToUse)
+			UiDialogLauncher dlgLauncherToUse, UiFieldContext context)
 	{
-		super(model, dlgLauncherToUse, otherGridFieldsToUse);
+		super(model, dlgLauncherToUse, context);
 	}
 
 	protected void createRenderers()
@@ -78,7 +77,7 @@ public class ReadonlyGridFieldTable extends GridFieldTable
 		if(type.isDateRange())
 			return new GridDateRangeCellViewer(localization);
 		if(type.isDropdown() || type.isLanguageDropdown())
-			return new GridDropDownCellViewer(otherGridFields, localization);
+			return new GridDropDownCellViewer(context, localization);
 		if(type.isPopUpTree())
 			return new GridPopUpTreeCellEditor(localization);
 		

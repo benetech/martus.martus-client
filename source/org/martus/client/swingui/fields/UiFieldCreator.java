@@ -27,7 +27,6 @@ package org.martus.client.swingui.fields;
 
 import java.awt.Color;
 import java.util.Arrays;
-import java.util.HashMap;
 
 import javax.swing.border.LineBorder;
 
@@ -46,8 +45,7 @@ abstract public class UiFieldCreator
 	public UiFieldCreator(UiMainWindow mainWindowToUse)
 	{
 		mainWindow = mainWindowToUse;
-		gridFields = new HashMap();
-
+		context = new UiFieldContext();
 	}
 	
 	abstract public UiField createNormalField(FieldSpec spec);
@@ -60,10 +58,20 @@ abstract public class UiFieldCreator
 	abstract public UiField createUnknownField(FieldSpec spec);
 	abstract public UiField createBoolField(FieldSpec spec);
 	abstract public UiField createGridField(GridFieldSpec fieldSpec);
+
+	protected UiFieldContext getContext()
+	{
+		return context;
+	}
 	
+	public void registerGridField(String gridTag, UiGrid grid)
+	{
+		context.addGrid(gridTag, grid);
+	}
+
 	public UiGrid getGridField(String tag)
 	{
-		return (UiGrid)gridFields.get(tag);
+		return context.getGridField(tag);
 	}
 
 	public UiField createReadOnlyDateField()
@@ -125,5 +133,5 @@ abstract public class UiFieldCreator
 	}
 	
 	UiMainWindow mainWindow;
-	protected HashMap gridFields;
+	private UiFieldContext context;
 }

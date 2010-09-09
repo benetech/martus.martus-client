@@ -27,19 +27,19 @@ package org.martus.client.swingui.grids;
 
 import java.util.Arrays;
 import java.util.Collection;
-import java.util.Map;
 
 import javax.swing.table.TableCellEditor;
 import javax.swing.table.TableCellRenderer;
 
 import org.martus.client.swingui.dialogs.UiDialogLauncher;
+import org.martus.client.swingui.fields.UiFieldContext;
 
 abstract public class GridFieldTable extends GridTable
 {
 	public GridFieldTable(GridTableModel model,
-			UiDialogLauncher dlgLauncherToUse, Map otherGridFieldsToUse)
+			UiDialogLauncher dlgLauncherToUse, UiFieldContext context)
 	{
-		super(model, dlgLauncherToUse, otherGridFieldsToUse);
+		super(model, dlgLauncherToUse, context);
 	}
 
 	public TableCellEditor getCellEditor(int row, int column)

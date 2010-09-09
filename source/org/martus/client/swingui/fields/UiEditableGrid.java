@@ -31,8 +31,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.awt.event.KeyEvent;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Vector;
 
 import javax.swing.AbstractAction;
@@ -55,15 +53,15 @@ import org.martus.swing.Utilities;
 
 public abstract class UiEditableGrid extends UiGrid implements FocusListener
 {
-	public UiEditableGrid(UiMainWindow mainWindowToUse, GridFieldSpec fieldSpec, UiDialogLauncher dlgLauncher, Map gridFields, int maxGridCharacters)
+	public UiEditableGrid(UiMainWindow mainWindowToUse, GridFieldSpec fieldSpec, UiDialogLauncher dlgLauncher, UiFieldContext context, int maxGridCharacters)
 	{
-		super(mainWindowToUse, fieldSpec, dlgLauncher, gridFields, new UiEditableFieldCreator(mainWindowToUse));
+		super(mainWindowToUse, fieldSpec, dlgLauncher, context, new UiEditableFieldCreator(mainWindowToUse));
 		initialize(maxGridCharacters);
 	}
 	
 	protected UiEditableGrid(UiMainWindow mainWindowToUse, GridTableModel modelToUse, UiDialogLauncher dlgLauncher, int maxGridCharacters)
 	{
-		super(mainWindowToUse, modelToUse, dlgLauncher, new HashMap(), new UiEditableFieldCreator(mainWindowToUse));
+		super(mainWindowToUse, modelToUse, dlgLauncher, new UiFieldContext(), new UiEditableFieldCreator(mainWindowToUse));
 		initialize(maxGridCharacters);
 	}
 	

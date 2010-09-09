@@ -25,7 +25,6 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.fields;
 
-import java.util.Map;
 import java.util.Vector;
 
 import javax.swing.JComponent;
@@ -39,18 +38,17 @@ import org.martus.common.fieldspec.GridFieldSpec;
 
 public class UiGridViewer extends UiGrid
 {
-	public UiGridViewer(UiMainWindow mainWindowToUse, GridFieldSpec fieldSpec, UiDialogLauncher dlgLauncher, Map otherGrids, int maxGridCharacters)
+	public UiGridViewer(UiMainWindow mainWindowToUse, GridFieldSpec fieldSpec, UiDialogLauncher dlgLauncher, UiFieldContext context, int maxGridCharacters)
 	{
-		super(mainWindowToUse, fieldSpec, dlgLauncher, otherGrids, new UiReadOnlyFieldCreator(mainWindowToUse));
+		super(mainWindowToUse, fieldSpec, dlgLauncher, context, new UiReadOnlyFieldCreator(mainWindowToUse));
 		table.setMaxGridWidth(maxGridCharacters);
 		table.resizeTable();
 		table.setEnabled(false);
 	}
 
-	protected GridTable createGridTable(UiDialogLauncher dlgLauncher,
-			Map gridFields)
+	protected GridTable createGridTable(UiDialogLauncher dlgLauncher, UiFieldContext context)
 	{
-		return new ReadonlyGridFieldTable(model, dlgLauncher, gridFields);
+		return new ReadonlyGridFieldTable(model, dlgLauncher, context);
 	}
 	
 	protected Vector createButtons()

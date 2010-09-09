@@ -26,7 +26,6 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.swingui.fields;
 
 import java.io.IOException;
-import java.util.Map;
 import java.util.Vector;
 
 import javax.xml.parsers.ParserConfigurationException;
@@ -43,14 +42,14 @@ import org.xml.sax.SAXException;
 
 public class UiGridEditor extends UiEditableGrid 
 {
-	public UiGridEditor(UiMainWindow mainWindow, GridFieldSpec fieldSpec, UiDialogLauncher dlgLauncher, Map gridFields, int maxGridCharacters)
+	public UiGridEditor(UiMainWindow mainWindow, GridFieldSpec fieldSpec, UiDialogLauncher dlgLauncher, UiFieldContext context, int maxGridCharacters)
 	{
-		super(mainWindow, fieldSpec, dlgLauncher, gridFields, maxGridCharacters);
+		super(mainWindow, fieldSpec, dlgLauncher, context, maxGridCharacters);
 	}
 
-	protected GridTable createGridTable(UiDialogLauncher dlgLauncher, Map gridFields)
+	protected GridTable createGridTable(UiDialogLauncher dlgLauncher, UiFieldContext context)
 	{
-		return new EditableGridFieldTable(model, dlgLauncher, gridFields);
+		return new EditableGridFieldTable(model, dlgLauncher, context);
 	}
 	
 	protected Vector createButtons()

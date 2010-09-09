@@ -26,18 +26,18 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.swingui.grids;
 
 import java.awt.event.ActionListener;
-import java.util.Map;
 
 import org.martus.client.swingui.fields.UiChoiceEditor;
+import org.martus.client.swingui.fields.UiFieldContext;
 import org.martus.common.MiniLocalization;
 import org.martus.common.fieldspec.ChoiceItem;
 import org.martus.common.fieldspec.DropDownFieldSpec;
 
 public class GridDropDownCellEditor extends GridDropDownCellEditorOrRenderer
 {
-	GridDropDownCellEditor(Map otherGridFields, MiniLocalization localizationToUse)
+	GridDropDownCellEditor(UiFieldContext context, MiniLocalization localizationToUse)
 	{
-		super(new UiChoiceEditor(localizationToUse), otherGridFields);
+		super(new UiChoiceEditor(localizationToUse), context);
 	}
 	
 	public void setFieldSpec(DropDownFieldSpec spec)

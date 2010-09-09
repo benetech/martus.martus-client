@@ -29,7 +29,6 @@ package org.martus.client.search;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Map;
 
 import javax.swing.JTable;
 
@@ -37,6 +36,7 @@ import org.json.JSONObject;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.dialogs.UiDialogLauncher;
 import org.martus.client.swingui.fields.UiEditableGrid;
+import org.martus.client.swingui.fields.UiFieldContext;
 import org.martus.client.swingui.fields.UiPopUpTreeEditor;
 import org.martus.client.swingui.grids.GridPopUpTreeCellEditor;
 import org.martus.client.swingui.grids.GridTable;
@@ -63,9 +63,9 @@ public class FancySearchGridEditor extends UiEditableGrid
 		addListenerSoFieldChangeCanTriggerRepaintOfValueColumn();
 	}
 
-	protected GridTable createGridTable(UiDialogLauncher dlgLauncher, Map gridFields)
+	protected GridTable createGridTable(UiDialogLauncher dlgLauncher, UiFieldContext context)
 	{
-		return new SearchGridTable(model, dlgLauncher, gridFields);
+		return new SearchGridTable(model, dlgLauncher, context);
 	}
 	
 	private void setGridTableSize()

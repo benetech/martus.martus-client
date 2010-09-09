@@ -30,12 +30,12 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 import java.util.Vector;
 
 import javax.swing.JComponent;
 
 import org.martus.client.swingui.dialogs.UiDialogLauncher;
+import org.martus.client.swingui.fields.UiFieldContext;
 import org.martus.common.fieldspec.ChoiceItem;
 import org.martus.common.fieldspec.DropDownFieldSpec;
 import org.martus.common.fieldspec.FieldSpec;
@@ -47,11 +47,11 @@ import org.martus.util.language.LanguageOptions;
 public abstract class GridTable extends UiTableWithCellEditingProtection
 {
 	
-	public GridTable(GridTableModel model, UiDialogLauncher dlgLauncherToUse, Map otherGridFieldsToUse)
+	public GridTable(GridTableModel model, UiDialogLauncher dlgLauncherToUse, UiFieldContext contextToUse)
 	{
 		super(model);
 		dlgLauncher = dlgLauncherToUse;
-		otherGridFields = otherGridFieldsToUse;
+		context = contextToUse;
 		
 		// NOTE: We need to keep renderers and editors separate, because otherwise
 		// they get confused about focus when you click on a renderer but the 
@@ -198,6 +198,6 @@ public abstract class GridTable extends UiTableWithCellEditingProtection
 	}
 
 	UiDialogLauncher dlgLauncher;
-	Map otherGridFields;
+	protected UiFieldContext context;
 }
 

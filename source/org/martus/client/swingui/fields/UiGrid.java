@@ -66,20 +66,20 @@ import com.jhlabs.awt.GridLayoutPlus;
 
 abstract public class UiGrid extends UiField
 {
-	public UiGrid(UiMainWindow mainWindowToUse, GridFieldSpec fieldSpec, UiDialogLauncher dlgLauncher, Map gridFields, UiFieldCreator fieldCreatorToUse)
+	public UiGrid(UiMainWindow mainWindowToUse, GridFieldSpec fieldSpec, UiDialogLauncher dlgLauncher, UiFieldContext context, UiFieldCreator fieldCreatorToUse)
 	{
-		this(mainWindowToUse, new GridTableModel(fieldSpec), dlgLauncher, gridFields, fieldCreatorToUse);
+		this(mainWindowToUse, new GridTableModel(fieldSpec), dlgLauncher, context, fieldCreatorToUse);
 	}
 	
-	public UiGrid(UiMainWindow mainWindowToUse, GridTableModel modelToUse, UiDialogLauncher dlgLauncher, Map gridFields, UiFieldCreator fieldCreatorToUse)
+	public UiGrid(UiMainWindow mainWindowToUse, GridTableModel modelToUse, UiDialogLauncher dlgLauncher, UiFieldContext contextToUse, UiFieldCreator fieldCreatorToUse)
 	{
 		super(mainWindowToUse.getLocalization());
 		app = mainWindowToUse.getApp();
 		model = modelToUse;
-		otherGridFields = gridFields;
+		context = contextToUse;
 		fieldCreator = fieldCreatorToUse;
 		
-		table = createGridTable(dlgLauncher, gridFields);
+		table = createGridTable(dlgLauncher, context);
 		table.setColumnSelectionAllowed(false);
 		table.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
 		table.setShowGrid(true);
@@ -94,7 +94,7 @@ abstract public class UiGrid extends UiField
 		rebuildWidget();
 	}
 
-	abstract protected GridTable createGridTable(UiDialogLauncher dlgLauncher, Map gridFields);
+	abstract protected GridTable createGridTable(UiDialogLauncher dlgLauncher, UiFieldContext contextToUse);
 	
 	public void updateDataDrivenColumnWidth(int column, ChoiceItem[] choices)
 	{
@@ -407,6 +407,7 @@ abstract public class UiGrid extends UiField
 
 	MartusApp app;
 	UiFieldCreator fieldCreator;
+	private UiFieldContext context;
 	Map otherGridFields;
 	JPanel widget;
 	Box buttonBox;
