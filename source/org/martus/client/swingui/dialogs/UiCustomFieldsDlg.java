@@ -364,8 +364,7 @@ public class UiCustomFieldsDlg extends JDialog
 	
 	UiTextArea createXMLTextArea(FieldSpecCollection fieldSpecs)
 	{
-		FieldCollection collection = new FieldCollection(fieldSpecs.asArray());
-		String xmlRepresentationFieldSpecs = collection.toString();
+		String xmlRepresentationFieldSpecs = fieldSpecs.toXml();
 		return createXMLTextArea(xmlRepresentationFieldSpecs);
 	}
 
