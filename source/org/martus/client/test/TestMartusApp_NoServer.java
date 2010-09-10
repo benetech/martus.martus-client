@@ -507,8 +507,8 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 	{
 		ConfigInfo convertedInfo = new ConfigInfo();
 		String newFields = "new,label;another,show";
-		FieldSpec[] newSpecs = LegacyCustomFields.parseFieldSpecsFromString(newFields);
-		FieldCollection convertedFields = new FieldCollection(newSpecs);
+		FieldSpecCollection newSpecs = LegacyCustomFields.parseFieldSpecsFromString(newFields);
+		FieldCollection convertedFields = new FieldCollection(newSpecs.asArray());
 		convertedInfo.setCustomFieldBottomSectionXml(convertedFields.toString());
 		FieldCollection fields = new FieldCollection(MartusApp.getCustomFieldSpecsBottomSection(convertedInfo));
 
@@ -520,8 +520,8 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 	{
 		ConfigInfo convertedInfo = new ConfigInfo();
 		String newFields = "new,label;another,show";
-		FieldSpec[] newSpecs = LegacyCustomFields.parseFieldSpecsFromString(newFields);
-		FieldCollection convertedFields = new FieldCollection(newSpecs);
+		FieldSpecCollection newSpecs = LegacyCustomFields.parseFieldSpecsFromString(newFields);
+		FieldCollection convertedFields = new FieldCollection(newSpecs.asArray());
 		convertedInfo.setCustomFieldTopSectionXml(convertedFields.toString());
 		FieldCollection fields = new FieldCollection(MartusApp.getCustomFieldSpecsTopSection(convertedInfo));
 
@@ -893,7 +893,7 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 			FieldSpec.createCustomField(tagWithSpaceLikeCharacters, "Label", new FieldTypeNormal()),
 		};
 		
-		MartusApp.removeSpaceLikeCharactersFromTags(specs);
+		MartusApp.removeSpaceLikeCharactersFromTags(new FieldSpecCollection(specs));
 		assertEquals(Bulletin.TAGAUTHOR, specs[0].getTag());
 		assertEquals("abcdef", specs[1].getTag());
 	}

@@ -425,7 +425,7 @@ public class UiCustomFieldsDlg extends JDialog
 	{
 		try 
 		{
-			FieldSpec[] allSpecs = mergeSections();
+			FieldSpecCollection allSpecs = mergeSections();
 			return getDuplicatedLabels(allSpecs);
 		} 
 		catch (CustomFieldsParseException e) 
@@ -434,13 +434,13 @@ public class UiCustomFieldsDlg extends JDialog
 		return new Vector();
 	}
 
-	private Vector getDuplicatedLabels(FieldSpec[] allSpecs)
+	private Vector getDuplicatedLabels(FieldSpecCollection allSpecs)
 	{
 		Vector duplicateLabelsFound = new Vector();
 		HashSet foundLabels = new HashSet();
-		for (int i = 0; i < allSpecs.length; i++)
+		for (int i = 0; i < allSpecs.size(); i++)
 		{
-			FieldSpec thisSpec = allSpecs[i];
+			FieldSpec thisSpec = allSpecs.get(i);
 			String label = thisSpec.getLabel().trim();
 			if(label.length() == 0)
 				continue;
@@ -487,7 +487,7 @@ public class UiCustomFieldsDlg extends JDialog
 		return duplicatedGridLabels;
 	}
 
-	private FieldSpec[] mergeSections() throws CustomFieldsParseException
+	private FieldSpecCollection mergeSections() throws CustomFieldsParseException
 	{
 		FieldSpec[] topSection = FieldCollection.parseXml(topSectionXmlTextArea.getText()).asArray();
 		FieldSpec[] bottomSection = FieldCollection.parseXml(bottomSectionXmlTextArea.getText()).asArray();
@@ -496,7 +496,7 @@ public class UiCustomFieldsDlg extends JDialog
 		FieldSpec[] allSpecs = new FieldSpec[topLength + bottomLength];
 		System.arraycopy(topSection, 0, allSpecs, 0, topLength);
 		System.arraycopy(bottomSection, 0, allSpecs, topLength, bottomLength);
-		return allSpecs;
+		return new FieldSpecCollection(allSpecs);
 	}
 	
 	UiTextArea topSectionXmlTextArea;

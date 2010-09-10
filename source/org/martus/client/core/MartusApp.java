@@ -94,7 +94,6 @@ import org.martus.common.crypto.MartusCrypto.NoKeyPairException;
 import org.martus.common.database.FileDatabase.MissingAccountMapException;
 import org.martus.common.database.FileDatabase.MissingAccountMapSignatureException;
 import org.martus.common.fieldspec.ChoiceItem;
-import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.fieldspec.MiniFieldSpec;
 import org.martus.common.fieldspec.StandardFieldSpecs;
 import org.martus.common.network.NetworkInterface;
@@ -371,10 +370,10 @@ public class MartusApp
 			encryptedContactFileInputStream.close();
 			
 			FieldSpecCollection specsTop = getCustomFieldSpecsTopSection(configInfo);
-			removeSpaceLikeCharactersFromTags(specsTop.asArray());
+			removeSpaceLikeCharactersFromTags(specsTop);
 			store.setTopSectionFieldSpecs(specsTop);
 			FieldSpecCollection specsBottom = getCustomFieldSpecsBottomSection(configInfo);
-			removeSpaceLikeCharactersFromTags(specsBottom.asArray());
+			removeSpaceLikeCharactersFromTags(specsBottom);
 			store.setBottomSectionFieldSpecs(specsBottom);
 			
 			convertLegacyHQToMultipleHQs();
@@ -386,13 +385,13 @@ public class MartusApp
 		}
 	}
 	
-	public static void removeSpaceLikeCharactersFromTags(FieldSpec[] specs)
+	public static void removeSpaceLikeCharactersFromTags(FieldSpecCollection specs)
 	{
-		for(int i = 0; i < specs.length; ++i)
+		for(int i = 0; i < specs.size(); ++i)
 		{
-			String tag = specs[i].getTag();
+			String tag = specs.get(i).getTag();
 			String stripped = stripSpaceLikeCharacters(tag);
-			specs[i].setTag(stripped);
+			specs.get(i).setTag(stripped);
 		}
 	}
 	
@@ -457,8 +456,8 @@ public class MartusApp
 			return FieldCollection.parseXml(xmlSpecs);
 			
 		String legacySpecs = configInfo.getCustomFieldLegacySpecs();
-		FieldSpec[] specs = LegacyCustomFields.parseFieldSpecsFromString(legacySpecs);
-		return new FieldSpecCollection(specs);
+		FieldSpecCollection specs = LegacyCustomFields.parseFieldSpecsFromString(legacySpecs);
+		return specs;
 	}
 
 	public static FieldSpecCollection getCustomFieldSpecsBottomSection(ConfigInfo configInfo) throws CustomFieldsParseException
