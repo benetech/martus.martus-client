@@ -156,9 +156,8 @@ abstract public class UiGrid extends UiField
 				FieldSpec spec = model.getFieldSpecForCell(row, column);
 				if(spec.getType().isDropdown())
 				{
-					updateChoicesFromDataSourceIfNecessary((DropDownFieldSpec)spec);
 					UiChoice choice = (UiChoice)fields[column];
-					choice.updateChoicesFromSpec();
+					choice.setWidgetChoices(context.getCurrentDropDownChoices((DropDownFieldSpec) spec));
 				}
 			}
 		}

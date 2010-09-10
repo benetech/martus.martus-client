@@ -39,7 +39,6 @@ import org.martus.client.swingui.fields.UiChoiceEditor;
 import org.martus.clientside.UiLocalization;
 import org.martus.common.MiniLocalization;
 import org.martus.common.fieldspec.ChoiceItem;
-import org.martus.common.fieldspec.DropDownFieldSpec;
 import org.martus.swing.UiButton;
 import org.martus.swing.UiCheckBox;
 import org.martus.swing.UiLabel;
@@ -58,7 +57,8 @@ public class UiPreferencesDlg extends JDialog implements ActionListener
 		
 		setTitle(localization.getMenuLabel("Preferences"));
 
-		languageDropdown = new UiChoiceEditor(new DropDownFieldSpec(localization.getUiLanguages()), localization);
+		languageDropdown = new UiChoiceEditor(localization);
+		languageDropdown.setWidgetChoices(localization.getUiLanguages());
 		languageDropdown.setText(localization.getCurrentLanguageCode());
 		
 		ChoiceItem[] mdyChoices = new ChoiceItem[] {
@@ -66,8 +66,8 @@ public class UiPreferencesDlg extends JDialog implements ActionListener
 			new ChoiceItem("mdy", buildMdyLabel("mdy")),
 			new ChoiceItem("dmy", buildMdyLabel("dmy")),
 		};
-		DropDownFieldSpec mdyChoiceSpec = new DropDownFieldSpec(mdyChoices);
-		mdyDropdown = new UiChoiceEditor(mdyChoiceSpec, localization);
+		mdyDropdown = new UiChoiceEditor(localization);
+		mdyDropdown.setWidgetChoices(mdyChoices);
 		mdyDropdown.setText(localization.getMdyOrder());
 		
 		ChoiceItem[] delimiterChoices = new ChoiceItem[] {
@@ -75,13 +75,13 @@ public class UiPreferencesDlg extends JDialog implements ActionListener
 			new ChoiceItem("-", localization.getFieldLabel("DateDelimiterDash")),
 			new ChoiceItem(".", localization.getFieldLabel("DateDelimiterDot")),
 		};
-		DropDownFieldSpec delimiterChoiceSpec = new DropDownFieldSpec(delimiterChoices);
-		delimiterDropdown = new UiChoiceEditor(delimiterChoiceSpec, localization);
+		delimiterDropdown = new UiChoiceEditor(localization);
+		delimiterDropdown.setWidgetChoices(delimiterChoices);
 		delimiterDropdown.setText("" + localization.getDateDelimiter());
 		
 		ChoiceItem[] calendarChoices = localization.getAvailableCalendarSystems();
-		DropDownFieldSpec calendarChoiceSpec = new DropDownFieldSpec(calendarChoices);
-		calendarDropdown = new UiChoiceEditor(calendarChoiceSpec, localization);
+		calendarDropdown = new UiChoiceEditor(localization);
+		calendarDropdown.setWidgetChoices(calendarChoices);
 		calendarDropdown.setText(localization.getCurrentCalendarSystem());
 		
 		adjustThai = new UiCheckBox();

@@ -27,35 +27,14 @@ package org.martus.client.swingui.fields;
 
 import org.martus.common.MiniLocalization;
 import org.martus.common.fieldspec.ChoiceItem;
-import org.martus.common.fieldspec.DropDownFieldSpec;
-import org.martus.common.fieldspec.FieldSpec;
 
 abstract public class UiChoice extends UiField
 {
-	public UiChoice(FieldSpec dropDownSpec, MiniLocalization localizationToUse)
+	public UiChoice(MiniLocalization localizationToUse)
 	{
 		super(localizationToUse);
-		spec = (DropDownFieldSpec)dropDownSpec;
-		initialize();
 	}
 	
-	public DropDownFieldSpec getSpec()
-	{
-		return spec;
-	}
-	
-	abstract protected void initialize();
-
-	public void setSpec(DropDownFieldSpec specToUse)
-	{
-		spec = specToUse;
-	}
 
 	abstract public void setWidgetChoices(ChoiceItem[] newChoices);
-	
-	public void updateChoicesFromSpec()
-	{
-	}
-
-	protected DropDownFieldSpec spec;
 }

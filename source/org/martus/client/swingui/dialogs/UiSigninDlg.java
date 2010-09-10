@@ -35,7 +35,6 @@ import org.martus.client.swingui.fields.UiChoiceEditor;
 import org.martus.clientside.CurrentUiState;
 import org.martus.clientside.UiBasicSigninDlg;
 import org.martus.clientside.UiLocalization;
-import org.martus.common.fieldspec.DropDownFieldSpec;
 import org.martus.swing.UiLabel;
 
 public class UiSigninDlg extends UiBasicSigninDlg implements LanguageChangeListener
@@ -50,7 +49,8 @@ public class UiSigninDlg extends UiBasicSigninDlg implements LanguageChangeListe
 		if(currentMode == TIMED_OUT || currentMode == SECURITY_VALIDATE)
 			return new UiLabel();
 		
-		languageDropdown = new UiChoiceEditor(new DropDownFieldSpec(localization.getUiLanguages()), localization);
+		languageDropdown = new UiChoiceEditor(localization);
+		languageDropdown.setWidgetChoices(localization.getUiLanguages());
 		languageDropdown.setText(localization.getCurrentLanguageCode());
 		languageDropdown.setLanguageListener(this);
 		return languageDropdown.getComponent();

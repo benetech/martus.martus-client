@@ -44,7 +44,6 @@ abstract public class GridDropDownCellEditorOrRenderer extends GridCellEditorAnd
 		context = contextToUse;
 	}
 
-	abstract void setFieldSpec(DropDownFieldSpec spec);
 	abstract void setChoices(ChoiceItem[] choices);
 	
 	public void spaceWasPressed()
@@ -57,7 +56,6 @@ abstract public class GridDropDownCellEditorOrRenderer extends GridCellEditorAnd
 	public Component getTableCellEditorComponent(JTable tableToUse, Object codeString, boolean isSelected, int row, int column)
 	{
 		DropDownFieldSpec spec = getFieldSpecForCell(tableToUse, row, column);
-		setFieldSpec(spec);
 		setChoices(context.getCurrentDropDownChoices(spec));
 		return super.getTableCellEditorComponent(tableToUse, codeString, isSelected, row, column);
 	}
@@ -65,7 +63,6 @@ abstract public class GridDropDownCellEditorOrRenderer extends GridCellEditorAnd
 	public Component getTableCellRendererComponent(JTable tableToUse, Object codeString, boolean isSelected, boolean hasFocus, int row, int column)
 	{
 		DropDownFieldSpec spec = getFieldSpecForCell(tableToUse, row, column);
-		setFieldSpec(spec);
 		setChoices(context.getCurrentDropDownChoices(spec));
 		return super.getTableCellRendererComponent(tableToUse, codeString, isSelected, hasFocus, row, column);
 	}

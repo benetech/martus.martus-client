@@ -104,8 +104,7 @@ public class GridChangeHandler implements TableModelListener
 			return;
 		
 		UiChoice choiceField = (UiChoice)field;
-		spec.setChoices(context.getCurrentDropDownChoices(spec));
-		choiceField.updateChoicesFromSpec();
+		choiceField.setWidgetChoices(context.getCurrentDropDownChoices(spec));
 	}
 
 	private void updateDataDrivenDropdownsInsideGrid(GridFieldSpec gridSpecToBlankOut, UiGrid gridToBlankOut) 

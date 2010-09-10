@@ -83,6 +83,10 @@ public class UiFieldContext
 		UiGrid dataSource = getGrid(spec);
 		if(dataSource != null)
 			return getDataDrivenChoices(spec, dataSource);
+		
+		String reusableChoicesCode = spec.getReusableChoicesCode();
+		if(reusableChoicesCode != null)
+			return fieldSpecs.getReusableChoices(reusableChoicesCode).getChoices();
 
 		return spec.getAllChoices();
 		

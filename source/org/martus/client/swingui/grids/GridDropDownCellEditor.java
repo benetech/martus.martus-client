@@ -31,7 +31,6 @@ import org.martus.client.swingui.fields.UiChoiceEditor;
 import org.martus.client.swingui.fields.UiFieldContext;
 import org.martus.common.MiniLocalization;
 import org.martus.common.fieldspec.ChoiceItem;
-import org.martus.common.fieldspec.DropDownFieldSpec;
 
 public class GridDropDownCellEditor extends GridDropDownCellEditorOrRenderer
 {
@@ -40,11 +39,6 @@ public class GridDropDownCellEditor extends GridDropDownCellEditorOrRenderer
 		super(new UiChoiceEditor(localizationToUse), context);
 	}
 	
-	public void setFieldSpec(DropDownFieldSpec spec)
-	{
-		getChoiceEditor().setSpec(spec);
-	}
-
 	void setChoices(ChoiceItem[] choices)
 	{
 		getChoiceEditor().setWidgetChoices(choices);

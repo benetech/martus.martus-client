@@ -38,7 +38,6 @@ import javax.swing.JList;
 import org.martus.client.core.LanguageChangeListener;
 import org.martus.common.MiniLocalization;
 import org.martus.common.fieldspec.ChoiceItem;
-import org.martus.common.fieldspec.DropDownFieldSpec;
 import org.martus.swing.UiComboBox;
 import org.martus.swing.UiLanguageDirection;
 import org.martus.util.language.LanguageOptions;
@@ -47,32 +46,15 @@ public class UiChoiceEditor extends UiChoice implements ActionListener
 {
 	public UiChoiceEditor(MiniLocalization localizationToUse)
 	{
-		this(null, localizationToUse);
-	}
-	
-	public UiChoiceEditor(DropDownFieldSpec dropDownSpec, MiniLocalization localizationToUse)
-	{
-		super(dropDownSpec, localizationToUse);
-	}
-	
-	protected void initialize()
-	{
+		super(localizationToUse);
 		widget = new UiComboBox();
 		addActionListener(this);
 		widget.setRenderer(new UiChoiceListCellRenderer());
-		if(spec != null)
-			updateChoicesFromSpec();
 	}
-
+	
 	public void addActionListener(ActionListener listener)
 	{
 		widget.addActionListener(listener);
-	}
-	
-	public void setSpec(DropDownFieldSpec specToUse)
-	{
-		super.setSpec(specToUse);
-		updateChoicesFromSpec();
 	}
 	
 	class UiChoiceListCellRenderer extends DefaultListCellRenderer
@@ -126,25 +108,13 @@ public class UiChoiceEditor extends UiChoice implements ActionListener
 				return;
 			}
 		}
-		System.out.println("UiChoiceEditor.setText: Couldn't find " + newCode + " in " + spec.toString());
+		System.out.println("UiChoiceEditor.setText: Couldn't find " + newCode);
 		int select = -1;
 		if(widget.getItemCount() > 0)
 			select = 0;
 		widget.setSelectedIndex(select);
 	}
 
-	public void updateChoicesFromSpec()
-	{
-		String existingValue = getText();
-
-		ChoiceItem[] choices = new ChoiceItem[spec.getCount()];
-		for(int i = 0; i < choices.length; ++i)
-			choices[i] = spec.getChoice(i);
-		setWidgetChoices(choices);
-
-		setText(ensureValid(choices, existingValue));
-	}
-	
 	private String ensureValid(ChoiceItem[] choices, String text) 
 	{
 		for(int i = 0; i < choices.length; ++i)
@@ -156,9 +126,13 @@ public class UiChoiceEditor extends UiChoice implements ActionListener
 	
 	public void setWidgetChoices(ChoiceItem[] newChoices)
 	{
+		String existingValue = getText();
+
 		widget.removeAllItems();
 		for(int i = 0; i < newChoices.length; ++i)
 			widget.addItem(newChoices[i]);
+
+		setText(ensureValid(newChoices, existingValue));
 	}
 
 	public void actionPerformed(ActionEvent e) 
@@ -182,7 +156,7 @@ public class UiChoiceEditor extends UiChoice implements ActionListener
 		observer = listener;
 	}
 		
-	UiComboBox widget;
-	LanguageChangeListener observer;
+	private UiComboBox widget;
+	private LanguageChangeListener observer;
 }
 

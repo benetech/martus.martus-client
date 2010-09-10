@@ -63,7 +63,8 @@ public class UiEditableFieldCreator extends UiFieldCreator
 
 	public UiField createChoiceField(DropDownFieldSpec spec)
 	{
-		UiChoiceEditor dropDownField = new UiChoiceEditor(spec, mainWindow.getLocalization());
+		UiChoiceEditor dropDownField = new UiChoiceEditor(mainWindow.getLocalization());
+		dropDownField.setWidgetChoices(getContext().getCurrentDropDownChoices(spec));
 		return dropDownField;
 	}
 	

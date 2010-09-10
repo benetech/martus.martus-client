@@ -31,18 +31,13 @@ import javax.swing.JLabel;
 
 import org.martus.common.MiniLocalization;
 import org.martus.common.fieldspec.ChoiceItem;
-import org.martus.common.fieldspec.FieldSpec;
 import org.martus.swing.UiLabel;
 
 public class UiChoiceViewer extends UiChoice
 {
-	public UiChoiceViewer(FieldSpec dropDownSpec, MiniLocalization localizationToUse)
+	public UiChoiceViewer(MiniLocalization localizationToUse)
 	{
-		super(dropDownSpec, localizationToUse);
-	}
-	
-	protected void initialize()
-	{
+		super(localizationToUse);
 		widget = new UiLabel();
 	}
 	
@@ -53,8 +48,12 @@ public class UiChoiceViewer extends UiChoice
 
 	public void setText(String newText)
 	{
-		String value = spec.getDisplayString(newText);
-		widget.setText(" " + value + " ");
+		String displayText = "";
+		for(int index = 0; index < choices.length; ++index)
+			if(choices[index].getCode().equals(newText))
+				displayText = choices[index].toString();
+		
+		widget.setText(" " + displayText + " ");
 	}
 
 	public JComponent getComponent()
@@ -69,10 +68,10 @@ public class UiChoiceViewer extends UiChoice
 
 	public void setWidgetChoices(ChoiceItem[] newChoices)
 	{
-		// TODO: This method probably should not call spec.setChoices
-		spec.setChoices(newChoices);
+		choices = newChoices;
 	}
 
-	JLabel widget;
+	private JLabel widget;
+	private ChoiceItem[] choices;
 }
 
