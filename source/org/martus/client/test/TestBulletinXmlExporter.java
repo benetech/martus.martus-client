@@ -41,6 +41,7 @@ import org.martus.common.FieldSpecCollection;
 import org.martus.common.GridData;
 import org.martus.common.GridRow;
 import org.martus.common.MiniLocalization;
+import org.martus.common.ReusableChoices;
 import org.martus.common.bulletin.AttachmentProxy;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.bulletin.BulletinConstants;
@@ -244,7 +245,7 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 
 		BulletinXmlExporter exporter = new BulletinXmlExporter(null, new MiniLocalization(), null);
 		StringWriter writer = new StringWriter();
-		exporter.writeFieldSpecs(writer, b.getTopSectionFieldSpecs().asArray(), "MainFieldSpecs");
+		exporter.writeFieldSpecs(writer, b.getTopSectionFieldSpecs(), "MainFieldSpecs");
 		String result = writer.toString();
 		writer.close();
 		assertEquals(expectedTopFieldSpecs, result);
@@ -274,7 +275,7 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 		  "</PrivateFieldSpecs>\n\n";
 
 	writer = new StringWriter();
-	exporter.writeFieldSpecs(writer, b.getBottomSectionFieldSpecs().asArray(), "PrivateFieldSpecs");
+	exporter.writeFieldSpecs(writer, b.getBottomSectionFieldSpecs(), "PrivateFieldSpecs");
 	result = writer.toString();
 	writer.close();
 	assertEquals(expectedBottomFieldSpecs, result);
@@ -328,6 +329,29 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 				"</GridData>\n" +
 				"</Value>\n" +
 				"</Field>", result);
+	}
+	
+	public void testExportReusableChoices() throws Exception
+	{
+		FieldSpecCollection topSpecs = StandardFieldSpecs.getDefaultTopSetionFieldSpecs();
+		String choicesCode = "ChoicesCode";
+		String choicesLabel = "ChoicesLabel";
+		String choice1Code = "a";
+		String choice1Label = "A";
+		ReusableChoices reusableChoices = new ReusableChoices(choicesCode, choicesLabel);
+		reusableChoices.add(new ChoiceItem(choice1Code, choice1Label));
+		topSpecs.addReusableChoiceList(reusableChoices);
+
+		BulletinXmlExporter exporter = new BulletinXmlExporter(null, new MiniLocalization(), null);
+		StringWriter writer = new StringWriter();
+		exporter.writeFieldSpecs(writer, topSpecs, "MainFieldSpecs");
+		String result = writer.toString();
+		writer.close();
+		
+		assertContains("Didn't write choices code?", choicesCode, result);
+		assertContains("Didn't write choices label?", choicesLabel, result);
+		assertContains("Didn't write choice1 code?", choice1Code, result);
+		assertContains("Didn't write choice1 label?", choice1Label, result);
 	}
 	
 	public void testExportHistory() throws Exception
@@ -694,7 +718,7 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 		assertContains("didn't write good date range?", "Range:2005-05-01,2005-05-30", result);
 	}
 
-	private String getExportedXml(Bulletin b) throws IOException
+	private String getExportedXml(Bulletin b) throws Exception
 	{
 		Vector list = new Vector();
 		list.add(b);
@@ -891,7 +915,7 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 	}
 	
 	
-	String doExport(Vector list, boolean includePrivateData, boolean includeAttachments) throws IOException
+	String doExport(Vector list, boolean includePrivateData, boolean includeAttachments) throws Exception
 	{
 		StringWriter writer = new StringWriter();
 		MiniLocalization miniLocalization = new MiniLocalization();

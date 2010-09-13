@@ -121,7 +121,7 @@ public class TestClientBulletinStore extends TestCaseEnhanced
 		super.tearDown();
 	}
 
-    public void testBasics()
+    public void testBasics() throws Exception
     {
 		TRACE("testBasics");
 
@@ -305,7 +305,7 @@ public class TestClientBulletinStore extends TestCaseEnhanced
     	}
 	}
     
-    private Bulletin createSealedBulletin(MartusCrypto otherSecurity)
+    private Bulletin createSealedBulletin(MartusCrypto otherSecurity) throws Exception
 	{
 		HQKeys oldHq = new HQKeys(new HQKey(fakeHqKey));
     	

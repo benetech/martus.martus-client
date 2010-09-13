@@ -59,8 +59,7 @@ abstract public class UiBulletinComponent extends JPanel implements Scrollable, 
 	abstract public void copyDataToBulletin(Bulletin bulletin) throws
 			IOException, MartusCrypto.EncryptionException;
 	abstract public void validateData() throws DataInvalidException; 
-	abstract public boolean isBulletinModified() throws
-			IOException, MartusCrypto.EncryptionException;
+	abstract public boolean isBulletinModified() throws Exception;
 	abstract UiBulletinComponentHeaderSection createHeaderSection();
 	abstract UiBulletinComponentHeadQuartersSection createHeadQuartersSection();
 

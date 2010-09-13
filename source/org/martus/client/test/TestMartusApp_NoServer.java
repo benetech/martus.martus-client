@@ -804,7 +804,7 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		}
 	}
 
-	public void testGetClientId()
+	public void testGetClientId() throws Exception
 	{
 		TRACE_BEGIN("testGetClientId");
 		String securityAccount = mockSecurityForApp.getPublicKeyString();

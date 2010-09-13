@@ -813,7 +813,7 @@ public class MartusApp
 		return new RetrieveCommand(new JSONObject(jsonString));
 	}
 
-	public Bulletin createBulletin()
+	public Bulletin createBulletin() throws Exception
 	{
 		Bulletin b = store.createEmptyBulletin();
 		b.set(Bulletin.TAGAUTHOR, configInfo.getAuthor());

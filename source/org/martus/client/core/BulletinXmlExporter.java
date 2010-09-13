@@ -29,12 +29,16 @@ package org.martus.client.core;
 import java.io.File;
 import java.io.IOException;
 import java.io.Writer;
+import java.util.Iterator;
+import java.util.Set;
 import java.util.Vector;
 
 import org.martus.client.swingui.dialogs.UiImportExportProgressMeterDlg;
+import org.martus.common.FieldSpecCollection;
 import org.martus.common.MartusLogger;
 import org.martus.common.MartusXml;
 import org.martus.common.MiniLocalization;
+import org.martus.common.ReusableChoices;
 import org.martus.common.bulletin.AttachmentProxy;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.bulletin.BulletinLoader;
@@ -59,7 +63,7 @@ public class BulletinXmlExporter
 	}
 	
 	public void exportBulletins(Writer dest, Vector bulletins, boolean includePrivateData, boolean includeAttachments, File attachmentsDirectory)
-		throws IOException
+		throws Exception
 	{
 		dest.write(MartusXml.getTagStartWithNewline(BulletinXmlExportImportConstants.MARTUS_BULLETINS));
 		writeXMLVersion(dest);
@@ -193,12 +197,12 @@ public class BulletinXmlExporter
 		dest.write(getXmlEncodedTagWithData(BulletinXmlExportImportConstants.BULLETIN_STATUS_LOCALIZED, statusLocalized));
 	}
 	
-	private void writeBulletinFieldSpecs(Writer dest, Bulletin b, boolean includePrivateData) throws IOException
+	private void writeBulletinFieldSpecs(Writer dest, Bulletin b, boolean includePrivateData) throws Exception
 	{
 		if(shouldIncludeTopSection(b, includePrivateData))
-			writeFieldSpecs(dest, b.getTopSectionFieldSpecs().asArray(), BulletinXmlExportImportConstants.MAIN_FIELD_SPECS);
+			writeFieldSpecs(dest, b.getTopSectionFieldSpecs(), BulletinXmlExportImportConstants.MAIN_FIELD_SPECS);
 		if(includePrivateData)
-			writeFieldSpecs(dest, b.getBottomSectionFieldSpecs().asArray(), BulletinXmlExportImportConstants.PRIVATE_FIELD_SPECS);
+			writeFieldSpecs(dest, b.getBottomSectionFieldSpecs(), BulletinXmlExportImportConstants.PRIVATE_FIELD_SPECS);
 	}
 
 	private boolean shouldIncludeTopSection(Bulletin b, boolean includePrivateData)
@@ -206,18 +210,26 @@ public class BulletinXmlExporter
 		return includePrivateData || !b.isAllPrivate();
 	}
 
-	public void writeFieldSpecs(Writer dest, FieldSpec[] specs, String xmlTag) throws IOException
+	public void writeFieldSpecs(Writer dest, FieldSpecCollection specs, String xmlTag) throws Exception
 	{
 		dest.write(MartusXml.getTagStartWithNewline(xmlTag));
-		for(int i = 0; i < specs.length; i++)
+		for(int i = 0; i < specs.size(); i++)
 		{
-			dest.write(specs[i].toXml(BulletinXmlExportImportConstants.FIELD));
+			dest.write(specs.get(i).toXml(BulletinXmlExportImportConstants.FIELD));
+		}
+		Set reusableChoicesListNames = specs.getReusableChoiceNames();
+		Iterator iter = reusableChoicesListNames.iterator();
+		while(iter.hasNext())
+		{
+			String name = (String)iter.next();
+			ReusableChoices choices = specs.getReusableChoices(name);
+			dest.write(choices.toExportedXml());
 		}
 		dest.write(MartusXml.getTagEnd(xmlTag));
 		dest.write(BulletinXmlExportImportConstants.NEW_LINE);
 	}
 
-	private void exportOneBulletin(Writer dest, Bulletin b, boolean includePrivateData, boolean includeAttachments, File attachmentsDirectory) throws IOException
+	private void exportOneBulletin(Writer dest, Bulletin b, boolean includePrivateData, boolean includeAttachments, File attachmentsDirectory) throws Exception
 	{
 		dest.write(MartusXml.getTagStartWithNewline(BulletinXmlExportImportConstants.BULLETIN));
 

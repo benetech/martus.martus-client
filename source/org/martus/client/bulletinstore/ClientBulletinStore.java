@@ -329,9 +329,7 @@ public class ClientBulletinStore extends BulletinStore
 	}
 
 	public Bulletin loadFromDatabase(DatabaseKey key) throws
-		IOException,
-		Bulletin.DamagedBulletinException,
-		MartusCrypto.NoKeyPairException
+		Exception
 	{
 		Bulletin b = BulletinLoader.loadFromDatabase(getDatabase(), key, getSignatureVerifier());
 		bulletinDataCache.add(b);
@@ -1430,12 +1428,12 @@ public class ClientBulletinStore extends BulletinStore
 				b.getBottomSectionFieldSpecs().equals(getBottomSectionFieldSpecs()) );
 	}
 
-	public Bulletin createEmptyBulletin()
+	public Bulletin createEmptyBulletin() throws Exception
 	{
 		return createEmptyBulletin(getTopSectionFieldSpecs(), getBottomSectionFieldSpecs());
 	}
 	
-	public Bulletin createEmptyBulletin(FieldSpecCollection topSectionSpecs, FieldSpecCollection bottomSectionSpecs)
+	public Bulletin createEmptyBulletin(FieldSpecCollection topSectionSpecs, FieldSpecCollection bottomSectionSpecs) throws Exception
 	{
 		Bulletin b = new Bulletin(getSignatureGenerator(), topSectionSpecs, bottomSectionSpecs);
 		return b;
@@ -1448,7 +1446,7 @@ public class ClientBulletinStore extends BulletinStore
 		return createEmptyCloneWithFields(original, topSectionSpecs, bottomSectionSpecs);
 	}
 
-	public Bulletin createEmptyCloneWithFields(Bulletin original, FieldSpecCollection publicSpecs, FieldSpecCollection privateSpecs)
+	public Bulletin createEmptyCloneWithFields(Bulletin original, FieldSpecCollection publicSpecs, FieldSpecCollection privateSpecs) throws Exception
 	{
 		UniversalId headerUid = original.getUniversalId();
 		UniversalId publicDataUid = original.getFieldDataPacket().getUniversalId();

@@ -127,6 +127,12 @@ public class XmlBulletinsFileLoader extends SimpleXmlDefaultLoader
 				fieldSpecValidationErrors.add(CustomFieldError.errorSignature());
 				return;
 			}
+			catch(Exception e)
+			{
+				e.printStackTrace();
+				fieldSpecValidationErrors.add(CustomFieldError.errorParseXml());
+				return;
+			}
 
 			bulletins.add(createdBulletin);			
 		}
@@ -134,7 +140,7 @@ public class XmlBulletinsFileLoader extends SimpleXmlDefaultLoader
 			super.endElement(tag, ended);
 	}
 
-	private Bulletin createBulletin() throws EncryptionException, IOException
+	private Bulletin createBulletin() throws Exception
 	{
 		Bulletin bulletin = new Bulletin(security, mainFields.getSpecs(), privateFields.getSpecs());
 		for (Iterator iter = fieldTagValuesMap.entrySet().iterator(); iter.hasNext();)

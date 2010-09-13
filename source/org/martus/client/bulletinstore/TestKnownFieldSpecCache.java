@@ -204,6 +204,7 @@ public class TestKnownFieldSpecCache extends TestCaseEnhanced
 		choices.add(new ChoiceItem("c", "C"));
 		topSpecs.addReusableChoiceList(choices);
 		Bulletin b = new Bulletin(security, topSpecs, StandardFieldSpecs.getDefaultBottomSectionFieldSpecs());
+		assertEquals("Already have reusable choices?", 0, cache.getAllReusableChoiceLists().size());
 		cache.revisionWasSaved(b);
 		assertEquals("Didn't memorize reusable choices?", 1, cache.getAllReusableChoiceLists().size());
 		cache.revisionWasRemoved(b.getUniversalId());
@@ -219,7 +220,7 @@ public class TestKnownFieldSpecCache extends TestCaseEnhanced
 		assertEquals("Didn't clear reusable choices?", 0, cache.getAllReusableChoiceLists().size());
 	}
 
-	private Bulletin createSampleBulletin(MartusCrypto authorSecurity)
+	private Bulletin createSampleBulletin(MartusCrypto authorSecurity) throws Exception
 	{
 		Bulletin b = new Bulletin(authorSecurity, publicSpecs, privateSpecs);
 		b.set(publicSpecs.get(0).getTag(), "Just any text");

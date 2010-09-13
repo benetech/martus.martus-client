@@ -60,9 +60,7 @@ public class UiBulletinEditor extends UiBulletinComponent implements HeadQuarter
 		privateSection.validateData();
 	}
 	
-	public boolean isBulletinModified() throws
-			IOException,
-			MartusCrypto.EncryptionException
+	public boolean isBulletinModified() throws Exception
 	{		
 		
 		Bulletin currentStateOfBulletinBeingEdited = mainWindow.getApp().getStore().createEmptyBulletin();					

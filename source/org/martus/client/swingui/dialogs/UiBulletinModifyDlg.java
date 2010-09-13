@@ -56,7 +56,6 @@ import org.martus.client.swingui.bulletincomponent.UiBulletinEditor;
 import org.martus.client.swingui.fields.UiDateEditor;
 import org.martus.clientside.UiLocalization;
 import org.martus.common.bulletin.Bulletin;
-import org.martus.common.crypto.MartusCrypto.EncryptionException;
 import org.martus.common.fieldspec.DateRangeInvertedException;
 import org.martus.common.fieldspec.DateTooEarlyException;
 import org.martus.common.fieldspec.DateTooLateException;
@@ -337,7 +336,7 @@ public class UiBulletinModifyDlg extends JFrame implements ActionListener, Windo
 		view.updateEncryptedIndicator(isEncrypted);
 	}
 
-	private void closeWindowIfUserConfirms() throws EncryptionException, IOException
+	private void closeWindowIfUserConfirms() throws Exception
 	{	
 		boolean needConfirmation = view.isBulletinModified();
 		if(needConfirmation)

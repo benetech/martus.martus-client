@@ -70,7 +70,7 @@ public class TestTransferableBulletin extends TestCaseEnhanced
 		super.tearDown();
 	}
 
-	public void testBasics()
+	public void testBasics() throws Exception
 	{
 		Bulletin b1 = store.createEmptyBulletin();
 		Bulletin b2 = store.createEmptyBulletin();

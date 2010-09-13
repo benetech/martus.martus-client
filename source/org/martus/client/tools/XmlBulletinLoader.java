@@ -43,13 +43,21 @@ import org.xml.sax.SAXParseException;
 public class XmlBulletinLoader extends SimpleXmlDefaultLoader
 {
 	
-	public XmlBulletinLoader()
+	public XmlBulletinLoader() throws SAXParseException
 	{
 		super(BulletinXmlExportImportConstants.MARTUS_BULLETIN);
-		mainFieldSpecs = new FieldCollection(new FieldSpec[0]);
-		privateFieldSpecs = new FieldCollection(new FieldSpec[0]);
-		topSectionAttachments = new Vector();
-		bottomSectionAttachments = new Vector();
+		try
+		{
+			mainFieldSpecs = new FieldCollection(new FieldSpec[0]);
+			privateFieldSpecs = new FieldCollection(new FieldSpec[0]);
+			topSectionAttachments = new Vector();
+			bottomSectionAttachments = new Vector();
+		} 
+		catch (Exception e)
+		{
+			e.printStackTrace();
+			throw new SAXParseException("Unexpected Exception: " + e.getMessage(), null);
+		}
 	}
 	
 	public SimpleXmlDefaultLoader startElement(String tag)
@@ -86,10 +94,18 @@ public class XmlBulletinLoader extends SimpleXmlDefaultLoader
 			super.endElement(tag, ended);
 	}
 
-	private FieldCollection getFieldSpecs(SimpleXmlDefaultLoader ended)
+	private FieldCollection getFieldSpecs(SimpleXmlDefaultLoader ended) throws SAXParseException 
 	{
 		XmlCustomFieldsLoader loader = (XmlCustomFieldsLoader)ended;
-		return new FieldCollection(loader.getFieldSpecs());
+		try
+		{
+			return new FieldCollection(loader.getFieldSpecs());
+		} 
+		catch (Exception e)
+		{
+			e.printStackTrace();
+			throw new SAXParseException("Unexpected Exception: " + e.getMessage(), null);
+		}
 	}
 	
 	public HashMap getFieldTagValuesMap()
