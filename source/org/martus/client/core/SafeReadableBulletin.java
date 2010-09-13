@@ -228,7 +228,7 @@ public class SafeReadableBulletin
 	{
 		FieldChooserSpecBuilder builder = new FieldChooserSpecBuilder(localization);
 		Set topLevelFieldSpecSet = topLevelFieldSpecs.asSet();
-		Vector choices = builder.convertToChoiceItems(topLevelFieldSpecSet);
+		Vector choices = builder.convertToChoiceItems(topLevelFieldSpecSet, topLevelFieldSpecs.getAllReusableChoiceLists());
 
 		Vector fields = new Vector();
 		Iterator iter = choices.iterator();

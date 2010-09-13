@@ -179,15 +179,15 @@ public class TestFieldChooserSpecBuilder extends TestCaseEnhanced
 	public void testGetChoiceItemsForThisField() throws Exception
 	{
 		FieldSpec normal = StandardFieldSpecs.findStandardFieldSpec(BulletinConstants.TAGAUTHOR);
-		Set normalChoices = searchBuilder.getChoiceItemsForThisField(normal);
+		Set normalChoices = searchBuilder.getChoiceItemsForThisField(normal, getStore().getAllReusableChoiceLists());
 		assertEquals("more than one choice for a plain text field?", 1, normalChoices.size());
 		
 		FieldSpec dateRange = StandardFieldSpecs.findStandardFieldSpec(BulletinConstants.TAGEVENTDATE);
-		Set dateRangeChoices = searchBuilder.getChoiceItemsForThisField(dateRange);
+		Set dateRangeChoices = searchBuilder.getChoiceItemsForThisField(dateRange, getStore().getAllReusableChoiceLists());
 		assertEquals("not two choices for date range?", 2, dateRangeChoices.size());
 		
 		DropDownFieldSpec dropDownSpec = createSampleDropDownSpec("dropdown");
-		Set dropDownChoices = searchBuilder.getChoiceItemsForThisField(dropDownSpec);
+		Set dropDownChoices = searchBuilder.getChoiceItemsForThisField(dropDownSpec, getStore().getAllReusableChoiceLists());
 		assertEquals("not one choice for dropdown?", 1, dropDownChoices.size());
 		{
 			ChoiceItem createdChoice = (ChoiceItem)dropDownChoices.iterator().next();
@@ -196,7 +196,7 @@ public class TestFieldChooserSpecBuilder extends TestCaseEnhanced
 		}
 		
 		FieldSpec withLabel = FieldSpec.createCustomField("tag", "Label", new FieldTypeNormal());
-		Set withLabelChoices = searchBuilder.getChoiceItemsForThisField(withLabel);
+		Set withLabelChoices = searchBuilder.getChoiceItemsForThisField(withLabel, getStore().getAllReusableChoiceLists());
 		assertEquals("not one choice for normal with label?", 1, withLabelChoices.size());
 		{
 			ChoiceItem createdChoice = (ChoiceItem)withLabelChoices.iterator().next();
@@ -205,32 +205,32 @@ public class TestFieldChooserSpecBuilder extends TestCaseEnhanced
 		}
 		
 		FieldSpec messageType = createSampleMessageSpec();
-		Set messageTypeChoices = searchBuilder.getChoiceItemsForThisField(messageType);
+		Set messageTypeChoices = searchBuilder.getChoiceItemsForThisField(messageType, getStore().getAllReusableChoiceLists());
 		assertEquals("not one choice for message fields?", 1, messageTypeChoices.size());
 		ChoiceItem messageChoice = (ChoiceItem)messageTypeChoices.iterator().next();
 		FieldSpec messageChoiceSpec = messageChoice.getSpec();
 		assertEquals("message doesn't have string search?", new FieldTypeNormal(), messageChoiceSpec.getType());
 		
 		FieldSpec multilineType = createSampleMultilineSpec();
-		Set multilineTypeChoices = searchBuilder.getChoiceItemsForThisField(multilineType);
+		Set multilineTypeChoices = searchBuilder.getChoiceItemsForThisField(multilineType, getStore().getAllReusableChoiceLists());
 		assertEquals("not one choice for multiline fields?", 1, multilineTypeChoices.size());
 		ChoiceItem multilineChoice = (ChoiceItem)multilineTypeChoices.iterator().next();
 		FieldSpec multilineChoiceSpec = multilineChoice.getSpec();
 		assertEquals("multiline doesn't have string search?", new FieldTypeMultiline(), multilineChoiceSpec.getType());
 		
 		FieldSpec booleanType = createSampleBooleanSpec();
-		Set booleanTypeChoices = searchBuilder.getChoiceItemsForThisField(booleanType);
+		Set booleanTypeChoices = searchBuilder.getChoiceItemsForThisField(booleanType, getStore().getAllReusableChoiceLists());
 		assertEquals("not one choice for boolean fields?", 1, booleanTypeChoices.size());
 		ChoiceItem booleanChoice = (ChoiceItem)booleanTypeChoices.iterator().next();
 		FieldSpec booleanChoiceSpec = booleanChoice.getSpec();
 		assertEquals("boolean doesn't have checkbox?", new FieldTypeBoolean(), booleanChoiceSpec.getType());
 
 		FieldSpec unknownType = FieldSpec.createStandardField("tag", new FieldTypeUnknown());
-		Set unknownTypeChoices = searchBuilder.getChoiceItemsForThisField(unknownType);
+		Set unknownTypeChoices = searchBuilder.getChoiceItemsForThisField(unknownType, getStore().getAllReusableChoiceLists());
 		assertEquals("not zero choices for unknown type?", 0, unknownTypeChoices.size());
 		
 		FieldSpec blankLabel = FieldSpec.createCustomField("tag", "  ", new FieldTypeNormal());
-		Set blankLabelChoices = searchBuilder.getChoiceItemsForThisField(blankLabel);
+		Set blankLabelChoices = searchBuilder.getChoiceItemsForThisField(blankLabel, getStore().getAllReusableChoiceLists());
 		ChoiceItem blankLabelChoice = (ChoiceItem)blankLabelChoices.iterator().next();
 		assertEquals("didn't use tag for blank label", blankLabel.getTag(), blankLabelChoice.toString());
 	}
@@ -238,7 +238,7 @@ public class TestFieldChooserSpecBuilder extends TestCaseEnhanced
 	public void testGetChoiceItemsForThisFieldGrid() throws Exception
 	{
 		GridFieldSpec gridSpec = createSampleGridSpec();
-		Set gridTypeChoices = searchBuilder.getChoiceItemsForThisField(gridSpec);
+		Set gridTypeChoices = searchBuilder.getChoiceItemsForThisField(gridSpec, getStore().getAllReusableChoiceLists());
 		assertEquals("not one choice for each grid column?", gridSpec.getColumnCount(), gridTypeChoices.size());
 		
 		Iterator iter = gridTypeChoices.iterator();

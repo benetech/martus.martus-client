@@ -50,13 +50,13 @@ import org.martus.common.FieldSpecCollection;
 import org.martus.common.MartusLogger;
 import org.martus.common.MartusUtilities;
 import org.martus.common.MartusXml;
+import org.martus.common.PoolOfReusableChoicesLists;
 import org.martus.common.MartusUtilities.FileVerificationException;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.bulletin.BulletinLoader;
 import org.martus.common.bulletin.BulletinZipImporter;
 import org.martus.common.bulletinstore.BulletinStore;
 import org.martus.common.crypto.MartusCrypto;
-import org.martus.common.crypto.MartusCrypto.CryptoException;
 import org.martus.common.crypto.MartusCrypto.MartusSignatureException;
 import org.martus.common.database.ClientFileDatabase;
 import org.martus.common.database.Database;
@@ -70,11 +70,7 @@ import org.martus.common.packet.BulletinHeaderPacket;
 import org.martus.common.packet.BulletinHistory;
 import org.martus.common.packet.Packet;
 import org.martus.common.packet.UniversalId;
-import org.martus.common.packet.Packet.InvalidPacketException;
-import org.martus.common.packet.Packet.SignatureVerificationException;
-import org.martus.common.packet.Packet.WrongPacketTypeException;
 import org.martus.common.packet.UniversalId.NotUniversalIdException;
-import org.martus.util.StreamableBase64.InvalidBase64Exception;
 import org.martus.util.inputstreamwithseek.FileInputStreamWithSeek;
 import org.martus.util.inputstreamwithseek.InputStreamWithSeek;
 import org.martus.util.xml.SimpleXmlDefaultLoader;
@@ -342,7 +338,7 @@ public class ClientBulletinStore extends BulletinStore
 		return b;
 	}
 
-	public void saveBulletin(Bulletin b) throws IOException, CryptoException
+	public void saveBulletin(Bulletin b) throws Exception
 	{
 		bulletinDataCache.remove(b.getUniversalId());
 		saveBulletin(b, mustEncryptPublicData());
@@ -1318,14 +1314,7 @@ public class ClientBulletinStore extends BulletinStore
 	}
 
 	public void importZipFileBulletin(File zipFile, BulletinFolder toFolder, boolean forceSameUids) throws
-			InvalidPacketException,
-			SignatureVerificationException,
-			WrongPacketTypeException,
-			CryptoException,
-			InvalidBase64Exception, 
-			BulletinAlreadyExistsException, 
-			IOException, 
-			AddOlderVersionToFolderFailedException
+			Exception
 	{
 		ZipFile zip = new ZipFile(zipFile);
 		try
@@ -1352,12 +1341,7 @@ public class ClientBulletinStore extends BulletinStore
 	}
 
 	public UniversalId importZipFileToStoreWithNewUids(File inputFile) throws
-		InvalidPacketException,
-		SignatureVerificationException,
-		WrongPacketTypeException,
-		CryptoException,
-		IOException,
-		InvalidBase64Exception
+		Exception
 	{
 		final MartusCrypto security = getSignatureGenerator();
 		Bulletin imported = BulletinZipImporter.loadFromFileAsNewDraft(security, inputFile);
@@ -1378,6 +1362,11 @@ public class ClientBulletinStore extends BulletinStore
 	public Set getAllKnownFieldSpecs()
 	{
 		return knownFieldSpecCache.getAllKnownFieldSpecs();
+	}
+	
+	public PoolOfReusableChoicesLists getAllReusableChoiceLists()
+	{
+		return knownFieldSpecCache.getAllReusableChoiceLists();
 	}
 	
 	protected void loadCache()

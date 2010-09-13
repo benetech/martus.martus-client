@@ -38,19 +38,15 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.zip.ZipFile;
+
 import org.martus.client.bulletinstore.BulletinFolder;
 import org.martus.client.bulletinstore.ClientBulletinStore;
-import org.martus.client.bulletinstore.ClientBulletinStore.BulletinAlreadyExistsException;
 import org.martus.client.bulletinstore.ClientBulletinStore.AddOlderVersionToFolderFailedException;
+import org.martus.client.bulletinstore.ClientBulletinStore.BulletinAlreadyExistsException;
 import org.martus.client.core.TransferableBulletinList;
 import org.martus.common.bulletin.Bulletin;
-import org.martus.common.crypto.MartusCrypto.CryptoException;
 import org.martus.common.packet.BulletinHeaderPacket;
 import org.martus.common.packet.UniversalId;
-import org.martus.common.packet.Packet.InvalidPacketException;
-import org.martus.common.packet.Packet.SignatureVerificationException;
-import org.martus.common.packet.Packet.WrongPacketTypeException;
-import org.martus.util.StreamableBase64.InvalidBase64Exception;
 
 public abstract class UiBulletinDropAdapter implements DropTargetListener
 {
@@ -266,14 +262,7 @@ public abstract class UiBulletinDropAdapter implements DropTargetListener
 	}
 	
 	public void attemptDropFile(File file, BulletinFolder toFolder) throws
-		InvalidPacketException, 
-		SignatureVerificationException, 
-		WrongPacketTypeException, 
-		CryptoException, 
-		InvalidBase64Exception, 
-		BulletinAlreadyExistsException, 
-		IOException, 
-		AddOlderVersionToFolderFailedException
+		Exception
 	{
 		ClientBulletinStore store = toFolder.getStore();
 		

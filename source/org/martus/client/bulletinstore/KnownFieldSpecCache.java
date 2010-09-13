@@ -43,24 +43,18 @@ import java.util.Vector;
 
 import org.martus.common.FieldSpecCollection;
 import org.martus.common.MartusLogger;
+import org.martus.common.PoolOfReusableChoicesLists;
+import org.martus.common.ReusableChoices;
 import org.martus.common.bulletin.Bulletin;
+import org.martus.common.bulletin.BulletinLoader;
 import org.martus.common.bulletinstore.BulletinStoreCache;
 import org.martus.common.crypto.MartusCrypto;
-import org.martus.common.crypto.MartusCrypto.CryptoException;
-import org.martus.common.crypto.MartusCrypto.DecryptionException;
-import org.martus.common.crypto.MartusCrypto.NoKeyPairException;
 import org.martus.common.database.DatabaseKey;
 import org.martus.common.database.ReadableDatabase;
+import org.martus.common.fieldspec.ChoiceItem;
 import org.martus.common.fieldspec.FieldSpec;
-import org.martus.common.fieldspec.StandardFieldSpecs;
 import org.martus.common.packet.BulletinHeaderPacket;
-import org.martus.common.packet.FieldDataPacket;
-import org.martus.common.packet.Packet;
 import org.martus.common.packet.UniversalId;
-import org.martus.common.packet.Packet.InvalidPacketException;
-import org.martus.common.packet.Packet.SignatureVerificationException;
-import org.martus.common.packet.Packet.WrongPacketTypeException;
-import org.martus.util.inputstreamwithseek.InputStreamWithSeek;
 
 public class KnownFieldSpecCache extends BulletinStoreCache implements ReadableDatabase.PacketVisitor
 {
@@ -68,6 +62,7 @@ public class KnownFieldSpecCache extends BulletinStoreCache implements ReadableD
 	{
 		db = databaseToUse;
 		security = securityToUse;
+		reusableChoicesLists = new PoolOfReusableChoicesLists();
 	}
 	
 	synchronized public void initializeFromDatabase()
@@ -98,22 +93,22 @@ public class KnownFieldSpecCache extends BulletinStoreCache implements ReadableD
 
 	public void clear()
 	{
-		accountsToMapsOfLocalIdsToSetsOfSpecs.clear();
+		if(accountsToMapsOfLocalIdsToSetsOfSpecs != null)
+			accountsToMapsOfLocalIdsToSetsOfSpecs.clear();
+		reusableChoicesLists = new PoolOfReusableChoicesLists();
 	}
 
-	synchronized public void revisionWasSaved(UniversalId uid)
+	synchronized public void revisionWasSaved(UniversalId uid) throws Exception
 	{
 		DatabaseKey key = findKey(db, uid);
 		if(key == null)
 			return;
-		addFieldSpecsFromBulletin(key);
+		addDetailsToCache(key);
 	}
-	
+
 	synchronized public void revisionWasSaved(Bulletin b)
 	{
-		FieldSpecCollection publicSpecs = b.getTopSectionFieldSpecs();
-		FieldSpecCollection privateSpecs = b.getBottomSectionFieldSpecs();
-		setSpecs(b.getUniversalId(), new FieldSpecCollection[] {publicSpecs, privateSpecs});
+		addDetailsToCache(b);
 	}
 
 	synchronized public void revisionWasRemoved(UniversalId uid)
@@ -138,6 +133,11 @@ public class KnownFieldSpecCache extends BulletinStoreCache implements ReadableD
 		}
 			
 		return knownSpecs;
+	}
+	
+	synchronized public PoolOfReusableChoicesLists getAllReusableChoiceLists()
+	{
+		return reusableChoicesLists;
 	}
 	
 	synchronized public void saveToStream(OutputStream out) throws Exception
@@ -185,6 +185,12 @@ public class KnownFieldSpecCache extends BulletinStoreCache implements ReadableD
 	 *   TAG_SPEC_INDEXES_FOR_ALL_ACCOUNTS: Array, one entry for each Account:
 	 *   	Account: Array, one entry for each LocalId:
 	 *   		LocalId: Array of SpecCollection indexes: indexes
+	 *   TAG_REUSABLE_CHOICE_POOL: Array, one entry per ChoicesList
+	 *      Code: <String>
+	 *      Label: <String>
+	 *      Choices: Array, one entry for each choice
+	 *         Code: <String>
+	 *         Label: <String>
 	 */
 	
 	public PersistableMap createFieldSpecCacheMap()
@@ -195,9 +201,46 @@ public class KnownFieldSpecCache extends BulletinStoreCache implements ReadableD
 		PersistableMap map = new PersistableMap();
 		map.put(TAG_SPEC_INDEXES_FOR_ALL_ACCOUNTS, specIndexes);
 		map.put(TAG_ALL_SECTION_SPECS, createSpecCollectionVector(allSpecs));
+		map.put(TAG_REUSABLE_CHOICES_POOL, createReusableChoicesVector());
 		return map;
 	}
 	
+	private PersistableObject createReusableChoicesVector()
+	{
+		PersistableVector vector = new PersistableVector();
+		Iterator iter = reusableChoicesLists.getAvailableNames().iterator();
+		while(iter.hasNext())
+		{
+			String choicesListName = (String)iter.next();
+			ReusableChoices list = reusableChoicesLists.getChoices(choicesListName);
+			vector.add(createChoicesListMap(list));
+		}
+		return vector;
+	}
+
+	private PersistableObject createChoicesListMap(ReusableChoices list)
+	{
+		PersistableMap map = new PersistableMap();
+		map.put(TAG_CHOICES_LIST_CODE, new PersistableString(list.getCode()));
+		map.put(TAG_CHOICES_LIST_LABEL, new PersistableString(list.getLabel()));
+		map.put(TAG_CHOICES, createChoicesVector(list));
+		return map;
+	}
+
+	private PersistableObject createChoicesVector(ReusableChoices list)
+	{
+		PersistableVector vector = new PersistableVector();
+		for(int i = 0; i < list.size(); ++i)
+		{
+			ChoiceItem choiceItem = list.get(i);
+			PersistableMap choice = new PersistableMap();
+			choice.put(TAG_CHOICE_CODE, new PersistableString(choiceItem.getCode()));
+			choice.put(TAG_CHOICE_LABEL, new PersistableString(choiceItem.toString()));
+		}
+		
+		return vector;
+	}
+
 	PersistableVector createSpecCollectionVector(Map allSpecs)
 	{
 		MartusLogger.log("createSpecCollectionVector, allSpecs.size() = " + allSpecs.size());
@@ -298,6 +341,8 @@ public class KnownFieldSpecCache extends BulletinStoreCache implements ReadableD
 	synchronized public void loadFromStream(InputStream in) throws Exception
 	{
 		MartusLogger.log("Inside KnownFieldSpecCache.loadFromStream");
+		clear();
+		
 		DataInputStream dataIn = new DataInputStream(in);
 		try
 		{
@@ -367,6 +412,28 @@ public class KnownFieldSpecCache extends BulletinStoreCache implements ReadableD
 			}
 		}
 		
+		PersistableVector reusableChoicesVector = (PersistableVector)fieldSpecCacheMap.get(TAG_REUSABLE_CHOICES_POOL);
+		for(int listIndex = 0; listIndex < reusableChoicesVector.size(); ++listIndex)
+		{
+			PersistableMap choicesMap = (PersistableMap)reusableChoicesVector.get(listIndex);
+			String code = choicesMap.get(TAG_CHOICES_LIST_CODE).toString();
+			String label = choicesMap.get(TAG_CHOICES_LIST_LABEL).toString();
+			
+			ReusableChoices reusableChoices = new ReusableChoices(code, label);
+
+			PersistableVector choicesVector = (PersistableVector)choicesMap.get(TAG_CHOICES);
+			for(int choiceIndex = 0; choiceIndex < choicesVector.size(); ++choiceIndex)
+			{
+				PersistableMap choiceItemMap = (PersistableMap)choicesVector.get(choiceIndex);
+				String choiceItemCode = choiceItemMap.get(TAG_CHOICES_LIST_CODE).toString();
+				String choiceItemLabel = choiceItemMap.get(TAG_CHOICES_LIST_LABEL).toString();
+				ChoiceItem choiceItem = new ChoiceItem(choiceItemCode, choiceItemLabel);
+				reusableChoices.add(choiceItem);
+			}
+			
+			reusableChoicesLists.add(reusableChoices);
+		}
+		
 	}
 	
 	private FieldSpecCollection rebuildFieldSpecCollection(PersistableVector vector) throws Exception 
@@ -405,7 +472,15 @@ public class KnownFieldSpecCache extends BulletinStoreCache implements ReadableD
 	{
 		if(!BulletinHeaderPacket.isValidLocalId(key.getLocalId()))
 			return;
-		addFieldSpecsFromBulletin(key);
+		try
+		{
+			addDetailsToCache(key);
+		} 
+		catch (Exception e)
+		{
+			e.printStackTrace();
+			return;
+		}
 		if((++visitedBulletinCount % 1000) == 0)
 			logVisitedBulletinCount();
 	}
@@ -415,77 +490,24 @@ public class KnownFieldSpecCache extends BulletinStoreCache implements ReadableD
 		MartusLogger.log("Loaded specs for " + visitedBulletinCount + " bulletins");
 	}
 
-	private void addFieldSpecsFromBulletin(DatabaseKey bulletinHeaderKey)
+	private void addDetailsToCache(DatabaseKey key) throws Exception
 	{
-		try
-		{
-			BulletinHeaderPacket bhp = new BulletinHeaderPacket(BulletinHeaderPacket.createUniversalId(security));
-			loadPacket(bhp, bulletinHeaderKey);
-			String status = bhp.getStatus();
-			String accountId = bhp.getAccountId();
-			
-			Vector publicAndPrivateSpecs = new Vector();
-			try
-			{
-				String packetLocalId = bhp.getFieldDataPacketId();
-				FieldSpecCollection defaultSpecs = StandardFieldSpecs.getDefaultTopSetionFieldSpecs();
-				FieldSpecCollection packetSpecs = loadFieldSpecsForPacket(accountId, packetLocalId, status, defaultSpecs);
-				publicAndPrivateSpecs.add(packetSpecs);
-			}
-			catch(DecryptionException e)
-			{
-				// ignore because it's probably not our bulletin, and we certainly can't search it
-			}
-
-			try
-			{
-				String packetLocalId = bhp.getPrivateFieldDataPacketId();
-				FieldSpecCollection defaultSpecs = StandardFieldSpecs.getDefaultBottomSectionFieldSpecs();
-				FieldSpecCollection packetSpecs = loadFieldSpecsForPacket(accountId, packetLocalId, status, defaultSpecs);
-				publicAndPrivateSpecs.add(packetSpecs);
-			}
-			catch(DecryptionException e)
-			{
-				// ignore because it's probably not our bulletin, and we certainly can't search it
-			}
-
-			setSpecs(bhp.getUniversalId(), (FieldSpecCollection[])publicAndPrivateSpecs.toArray(new FieldSpecCollection[0]));
-		}
-		catch(Exception e)
-		{
-			System.out.println("WARNING: Unable to read " + bulletinHeaderKey.getLocalId() + ": " + e);
-			e.printStackTrace();
-			// we need to keep going anyway
-			// TODO: Alert the user that there was some problem
-		}
+		Bulletin b = BulletinLoader.loadFromDatabase(db, key, security);
+		addDetailsToCache(b);
 	}
 
-	private FieldSpecCollection loadFieldSpecsForPacket(String accountId, String packetLocalId, String status, FieldSpecCollection defaultSpecs) throws IOException, CryptoException, InvalidPacketException, WrongPacketTypeException, SignatureVerificationException, DecryptionException, NoKeyPairException
+	private void addDetailsToCache(Bulletin b)
 	{
-		UniversalId packetUid = UniversalId.createFromAccountAndLocalId(accountId, packetLocalId);
-		FieldDataPacket fdp = loadFieldDataPacket(packetUid, status, defaultSpecs);
-		return fdp.getFieldSpecs();
-	}
-
-	private FieldDataPacket loadFieldDataPacket(UniversalId publicPacketUid, String status, FieldSpecCollection defaultSpecs) throws IOException, CryptoException, InvalidPacketException, WrongPacketTypeException, SignatureVerificationException, DecryptionException, NoKeyPairException
-	{
-		DatabaseKey publicPacketKey = DatabaseKey.createKey(publicPacketUid, status);
-		FieldDataPacket publicData = new FieldDataPacket(publicPacketKey.getUniversalId(), defaultSpecs);
-		loadPacket(publicData, publicPacketKey);
-		return publicData;
-	}
-
-	private void loadPacket(Packet packet, DatabaseKey key) throws IOException, CryptoException, InvalidPacketException, WrongPacketTypeException, SignatureVerificationException, DecryptionException, NoKeyPairException
-	{
-		InputStreamWithSeek in = db.openInputStream(key, security);
-		try
-		{
-			packet.loadFromXml(in, security);
-		}
-		finally
-		{
-			in.close();
-		}
+		if(!b.isNonAttachmentDataValid())
+			return;
+		FieldSpecCollection publicSpecs = b.getTopSectionFieldSpecs();
+		FieldSpecCollection privateSpecs = b.getBottomSectionFieldSpecs();
+		setSpecs(b.getUniversalId(), new FieldSpecCollection[] {publicSpecs, privateSpecs});
+		
+		PoolOfReusableChoicesLists topReusableChoicesLists = b.getFieldDataPacket().getFieldSpecs().getAllReusableChoiceLists();
+		PoolOfReusableChoicesLists bottomReusableChoicesLists = b.getPrivateFieldDataPacket().getFieldSpecs().getAllReusableChoiceLists();
+		reusableChoicesLists.addAll(topReusableChoicesLists);
+		reusableChoicesLists.addAll(bottomReusableChoicesLists);
 	}
 
 	private void setSpecs(UniversalId bulletinUid, FieldSpecCollection[] specs)
@@ -509,13 +531,20 @@ public class KnownFieldSpecCache extends BulletinStoreCache implements ReadableD
 		return specsForOneAccount;
 	}
 	
-	private static final int FILE_VERSION = 4;
+	private static final int FILE_VERSION = 5;
 	private static final String TAG_ALL_SECTION_SPECS = "AllSectionSpecs";
 	private static final String TAG_SPEC_INDEXES_FOR_ALL_ACCOUNTS = "SpecIndexesForAllAccounts";
+	private static final String TAG_REUSABLE_CHOICES_POOL = "ReusableChoicesLists";
+	private static final String TAG_CHOICES_LIST_CODE = "Code";
+	private static final String TAG_CHOICES_LIST_LABEL = "Label";
+	private static final String TAG_CHOICES = "Choices";
+	private static final String TAG_CHOICE_CODE = "Code";
+	private static final String TAG_CHOICE_LABEL = "Label";
 
 	public boolean saving;
 	private int visitedBulletinCount;
 	ReadableDatabase db;
 	MartusCrypto security;
 	Map accountsToMapsOfLocalIdsToSetsOfSpecs;
+	private PoolOfReusableChoicesLists reusableChoicesLists;
 }

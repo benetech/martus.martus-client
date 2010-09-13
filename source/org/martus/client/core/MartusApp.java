@@ -86,7 +86,6 @@ import org.martus.common.MartusUtilities.ServerErrorException;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.crypto.MartusCrypto;
 import org.martus.common.crypto.MartusSecurity;
-import org.martus.common.crypto.MartusCrypto.CryptoException;
 import org.martus.common.crypto.MartusCrypto.DecryptionException;
 import org.martus.common.crypto.MartusCrypto.EncryptionException;
 import org.martus.common.crypto.MartusCrypto.MartusSignatureException;
@@ -1914,7 +1913,7 @@ public class MartusApp
 		return file;
 	}
 
-	public void saveBulletin(Bulletin bulletinToSave, BulletinFolder outboxToUse) throws CryptoException, IOException, AddOlderVersionToFolderFailedException
+	public void saveBulletin(Bulletin bulletinToSave, BulletinFolder outboxToUse) throws Exception
 	{
 		store.saveBulletin(bulletinToSave);
 		store.ensureBulletinIsInFolder(store.getFolderSaved(), bulletinToSave.getUniversalId());

@@ -33,6 +33,8 @@ import java.util.Vector;
 
 import org.martus.client.bulletinstore.ClientBulletinStore;
 import org.martus.common.MiniLocalization;
+import org.martus.common.PoolOfReusableChoicesLists;
+import org.martus.common.ReusableChoices;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.field.MartusDateRangeField;
 import org.martus.common.field.MartusGridField;
@@ -78,7 +80,7 @@ public class FieldChooserSpecBuilder
 	{
 		FieldChoicesByLabel allAvailableFields = new FieldChoicesByLabel();
 		allAvailableFields.add(createLastSavedDateChoice());
-		allAvailableFields.addAll(convertToChoiceItems(storeToUse.getAllKnownFieldSpecs()));
+		allAvailableFields.addAll(convertToChoiceItems(storeToUse.getAllKnownFieldSpecs(), storeToUse.getAllReusableChoiceLists()));
 		if(specsToInclude != null)
 		{
 			allAvailableFields.onlyKeep(specsToInclude);
@@ -106,25 +108,25 @@ public class FieldChooserSpecBuilder
 		return new SearchableFieldChoiceItem(spec);
 	}
 
-	public Vector convertToChoiceItems(Collection specs)
+	public Vector convertToChoiceItems(Collection specs, PoolOfReusableChoicesLists reusableChoiceLists)
 	{
 		Vector allChoices = new Vector();
 		Iterator iter = specs.iterator();
 		while(iter.hasNext())
 		{
 			FieldSpec spec = (FieldSpec)iter.next();
-			allChoices.addAll(getChoiceItemsForThisField(spec));
+			allChoices.addAll(getChoiceItemsForThisField(spec, reusableChoiceLists));
 		}
 			
 		return allChoices;
 	}
 
-	public Set getChoiceItemsForThisField(FieldSpec spec)
+	public Set getChoiceItemsForThisField(FieldSpec spec, PoolOfReusableChoicesLists reusableChoiceLists)
 	{
-		return getChoiceItemsForThisField(null, spec, spec.getTag(), "");
+		return getChoiceItemsForThisField(null, spec, spec.getTag(), "", reusableChoiceLists);
 	}
 	
-	public Set getChoiceItemsForThisField(FieldSpec parent, FieldSpec spec, String possiblySanitizedTag, String displayPrefix)
+	public Set getChoiceItemsForThisField(FieldSpec parent, FieldSpec spec, String possiblySanitizedTag, String displayPrefix, PoolOfReusableChoicesLists reusableChoiceLists)
 	{
 
 		Set choicesForThisField = new HashSet();
@@ -159,10 +161,17 @@ public class FieldChooserSpecBuilder
 		if(thisType.isDropdown())
 		{
 			DropDownFieldSpec originalSpec = (DropDownFieldSpec)spec;
+			String reusableChoicesCode = originalSpec.getReusableChoicesCode();
+
 			DropDownFieldSpec specWithBetterLabel = new DropDownFieldSpec(originalSpec.getAllChoices());
 			specWithBetterLabel.setParent(parent);
 			specWithBetterLabel.setTag(tag);
 			specWithBetterLabel.setLabel(displayString);
+			if(reusableChoicesCode != null)
+			{
+				ReusableChoices choices = reusableChoiceLists.getChoices(reusableChoicesCode);
+				specWithBetterLabel.setChoices(choices.getChoices());
+			}
 			choicesForThisField.add(new SearchableFieldChoiceItem(specWithBetterLabel));
 			return choicesForThisField;
 		}
@@ -176,7 +185,7 @@ public class FieldChooserSpecBuilder
 				final FieldSpec columnSpec = gridSpec.getFieldSpec(i);
 				String sanitizedTag = MartusGridField.sanitizeLabel(columnSpec.getLabel());
 				String columnDisplayPrefix = displayString + ": ";
-				choicesForThisField.addAll(getChoiceItemsForThisField(gridSpec, columnSpec, sanitizedTag, columnDisplayPrefix));
+				choicesForThisField.addAll(getChoiceItemsForThisField(gridSpec, columnSpec, sanitizedTag, columnDisplayPrefix, reusableChoiceLists));
 			}
 			return choicesForThisField;
 		}

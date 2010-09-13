@@ -35,6 +35,7 @@ import java.util.zip.ZipFile;
 
 import org.martus.client.test.MockMartusApp;
 import org.martus.common.FieldSpecCollection;
+import org.martus.common.ReusableChoices;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.bulletin.BulletinZipUtilities;
 import org.martus.common.crypto.MartusCrypto;
@@ -46,6 +47,7 @@ import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.fieldspec.FieldTypeDateRange;
 import org.martus.common.fieldspec.FieldTypeMultiline;
 import org.martus.common.fieldspec.MessageFieldSpec;
+import org.martus.common.fieldspec.StandardFieldSpecs;
 import org.martus.util.TestCaseEnhanced;
 
 public class TestKnownFieldSpecCache extends TestCaseEnhanced
@@ -95,8 +97,11 @@ public class TestKnownFieldSpecCache extends TestCaseEnhanced
 	public void testIgnoreUnauthorizedBulletins() throws Exception
 	{
 		MockMartusSecurity otherSecurity = MockMartusSecurity.createOtherClient();
+
 		MockMartusApp otherApp = MockMartusApp.create(otherSecurity);
 		Bulletin notOurs = createSampleBulletin(otherSecurity);
+		notOurs.setAllPrivate(true);
+		assertTrue("Not encrypting?", otherApp.getStore().mustEncryptPublicData());
 		otherApp.saveBulletin(notOurs, otherApp.getFolderDraftOutbox());
 		File zipFile = createTempFile();
 		BulletinZipUtilities.exportBulletinPacketsFromDatabaseToZipFile(otherApp.getStore().getDatabase(), notOurs.getDatabaseKey(), zipFile, otherSecurity);
@@ -188,6 +193,30 @@ public class TestKnownFieldSpecCache extends TestCaseEnhanced
 		cache.saveToStream(out);
 		ByteArrayInputStream in = new ByteArrayInputStream(out.toByteArray());
 		cache.loadFromStream(in);
+	}
+	
+	public void testCacheReusableChoiceLists() throws Exception
+	{
+		FieldSpecCollection topSpecs = StandardFieldSpecs.getDefaultTopSetionFieldSpecs();
+		ReusableChoices choices = new ReusableChoices("choices", "Choices:");
+		choices.add(new ChoiceItem("a", "A"));
+		choices.add(new ChoiceItem("b", "B"));
+		choices.add(new ChoiceItem("c", "C"));
+		topSpecs.addReusableChoiceList(choices);
+		Bulletin b = new Bulletin(security, topSpecs, StandardFieldSpecs.getDefaultBottomSectionFieldSpecs());
+		cache.revisionWasSaved(b);
+		assertEquals("Didn't memorize reusable choices?", 1, cache.getAllReusableChoiceLists().size());
+		cache.revisionWasRemoved(b.getUniversalId());
+		assertEquals("Removing bulletin removed choices?", 1, cache.getAllReusableChoiceLists().size());
+
+		ByteArrayOutputStream out = new ByteArrayOutputStream();
+		cache.saveToStream(out);
+		ByteArrayInputStream in = new ByteArrayInputStream(out.toByteArray());
+		cache.loadFromStream(in);
+		assertEquals("Didn't save and reload reusable choices?", 1, cache.getAllReusableChoiceLists().size());
+		
+		cache.clear();
+		assertEquals("Didn't clear reusable choices?", 0, cache.getAllReusableChoiceLists().size());
 	}
 
 	private Bulletin createSampleBulletin(MartusCrypto authorSecurity)

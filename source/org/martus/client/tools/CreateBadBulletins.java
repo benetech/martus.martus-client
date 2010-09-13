@@ -28,15 +28,13 @@ package org.martus.client.tools;
 
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.IOException;
+
 import org.martus.client.bulletinstore.ClientBulletinStore;
-import org.martus.client.bulletinstore.ClientBulletinStore.BulletinAlreadyExistsException;
 import org.martus.client.core.MartusApp;
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.bulletin.BulletinConstants;
 import org.martus.common.crypto.MartusCrypto;
-import org.martus.common.crypto.MartusCrypto.CryptoException;
 import org.martus.common.test.BulletinForTesting;
 import org.martus.util.UnicodeReader;
 
@@ -89,7 +87,7 @@ public class CreateBadBulletins
 	}
 
 	private ClientBulletinStore createAndSaveBulletin(MartusApp app, String title)
-		throws IOException, CryptoException, BulletinAlreadyExistsException
+		throws Exception
 	{
 		MartusCrypto security = app.getSecurity();
 		ClientBulletinStore store = app.getStore();
