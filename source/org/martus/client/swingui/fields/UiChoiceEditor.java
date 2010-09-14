@@ -127,7 +127,8 @@ public class UiChoiceEditor extends UiChoice implements ActionListener
 	
 	public void setChoices(ReusableChoices[] newChoices)
 	{
-		ChoiceItem[] choices = newChoices[0].getChoices();
+		int LAST = newChoices.length - 1;
+		ChoiceItem[] choices = newChoices[LAST].getChoices();
 		
 		String existingValue = getText();
 

@@ -49,7 +49,8 @@ public class UiChoiceViewer extends UiChoice
 
 	public void setText(String newText)
 	{
-		ChoiceItem[] choices = setsOfChoices[0].getChoices();
+		int LAST = setsOfChoices.length - 1;
+		ChoiceItem[] choices = setsOfChoices[LAST].getChoices();
 		
 		String displayText = "";
 		for(int index = 0; index < choices.length; ++index)
