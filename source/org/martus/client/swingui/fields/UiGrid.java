@@ -179,8 +179,6 @@ abstract public class UiGrid extends UiField
 			for(int column = FIRST_REAL_FIELD_COLUMN; column < model.getColumnCount(); ++column)
 			{
 				FieldSpec spec = model.getFieldSpecForCell(row, column);
-				if(spec.getType().isDropdown())
-					updateChoicesFromDataSourceIfNecessary((DropDownFieldSpec)spec);
 
 				UiField cellField = fieldCreator.createField(spec);
 				
@@ -223,20 +221,6 @@ abstract public class UiGrid extends UiField
 	private void insertBlankLineOfTwoColumns(JPanel fakeTable)
 	{
 		Utilities.addComponentsRespectingOrientation(fakeTable, new Component[] {new UiLabel(" "), new UiLabel(" ")});
-	}
-
-	private void updateChoicesFromDataSourceIfNecessary(DropDownFieldSpec dropDownSpec) 
-	{
-		String dataSourceGridTag = dropDownSpec.getDataSourceGridTag();
-		if(dataSourceGridTag == null)
-			return;
-		
-		UiGrid dataSourceGrid = context.getGridField(dataSourceGridTag);
-		if(dataSourceGrid == null)
-			return;
-
-		ChoiceItem[] choices = context.getCurrentDropDownChoices(dropDownSpec);
-		dropDownSpec.setChoices(choices);
 	}
 
 	void addButtonsBelowExpandedGrid(JPanel fakeTable) 
