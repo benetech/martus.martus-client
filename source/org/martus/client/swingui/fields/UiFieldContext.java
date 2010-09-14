@@ -88,16 +88,20 @@ public class UiFieldContext
 	
 	private ChoiceItem[] getSingleLevelCurrentDropDownChoices(DropDownFieldSpec spec)
 	{
-		UiGrid dataSource = getGrid(spec);
-		if(dataSource != null)
-			return getDataDrivenChoices(spec, dataSource);
+		ChoiceItem[] choices = spec.getAllChoices();
 		
 		String reusableChoicesCode = spec.getReusableChoicesCode();
-		if(reusableChoicesCode != null)
-			return fieldSpecs.getReusableChoices(reusableChoicesCode).getChoices();
+		UiGrid dataSource = getGrid(spec);
+		if(dataSource != null)
+		{
+			choices = getDataDrivenChoices(spec, dataSource);
+		}
+		else if(reusableChoicesCode != null)
+		{
+			choices = fieldSpecs.getReusableChoices(reusableChoicesCode).getChoices();
+		}
 
-		return spec.getAllChoices();
-		
+		return choices;
 	}
 
 	private ChoiceItem[] getDataDrivenChoices(DropDownFieldSpec spec,
