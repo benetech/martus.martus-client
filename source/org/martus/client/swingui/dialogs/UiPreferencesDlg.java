@@ -58,7 +58,7 @@ public class UiPreferencesDlg extends JDialog implements ActionListener
 		setTitle(localization.getMenuLabel("Preferences"));
 
 		languageDropdown = new UiChoiceEditor(localization);
-		languageDropdown.setWidgetChoices(localization.getUiLanguages());
+		languageDropdown.setChoices(localization.getUiLanguages());
 		languageDropdown.setText(localization.getCurrentLanguageCode());
 		
 		ChoiceItem[] mdyChoices = new ChoiceItem[] {
@@ -67,7 +67,7 @@ public class UiPreferencesDlg extends JDialog implements ActionListener
 			new ChoiceItem("dmy", buildMdyLabel("dmy")),
 		};
 		mdyDropdown = new UiChoiceEditor(localization);
-		mdyDropdown.setWidgetChoices(mdyChoices);
+		mdyDropdown.setChoices(mdyChoices);
 		mdyDropdown.setText(localization.getMdyOrder());
 		
 		ChoiceItem[] delimiterChoices = new ChoiceItem[] {
@@ -76,12 +76,12 @@ public class UiPreferencesDlg extends JDialog implements ActionListener
 			new ChoiceItem(".", localization.getFieldLabel("DateDelimiterDot")),
 		};
 		delimiterDropdown = new UiChoiceEditor(localization);
-		delimiterDropdown.setWidgetChoices(delimiterChoices);
+		delimiterDropdown.setChoices(delimiterChoices);
 		delimiterDropdown.setText("" + localization.getDateDelimiter());
 		
 		ChoiceItem[] calendarChoices = localization.getAvailableCalendarSystems();
 		calendarDropdown = new UiChoiceEditor(localization);
-		calendarDropdown.setWidgetChoices(calendarChoices);
+		calendarDropdown.setChoices(calendarChoices);
 		calendarDropdown.setText(localization.getCurrentCalendarSystem());
 		
 		adjustThai = new UiCheckBox();

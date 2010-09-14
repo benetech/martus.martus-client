@@ -50,7 +50,7 @@ public class UiSigninDlg extends UiBasicSigninDlg implements LanguageChangeListe
 			return new UiLabel();
 		
 		languageDropdown = new UiChoiceEditor(localization);
-		languageDropdown.setWidgetChoices(localization.getUiLanguages());
+		languageDropdown.setChoices(localization.getUiLanguages());
 		languageDropdown.setText(localization.getCurrentLanguageCode());
 		languageDropdown.setLanguageListener(this);
 		return languageDropdown.getComponent();

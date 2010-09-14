@@ -124,7 +124,7 @@ public class UiChoiceEditor extends UiChoice implements ActionListener
 		return "";
 	}
 	
-	public void setWidgetChoices(ChoiceItem[] newChoices)
+	public void setChoices(ChoiceItem[] newChoices)
 	{
 		String existingValue = getText();
 

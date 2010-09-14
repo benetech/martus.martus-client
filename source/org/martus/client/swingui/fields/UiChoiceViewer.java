@@ -66,7 +66,7 @@ public class UiChoiceViewer extends UiChoice
 		return new JComponent[0];
 	}
 
-	public void setWidgetChoices(ChoiceItem[] newChoices)
+	public void setChoices(ChoiceItem[] newChoices)
 	{
 		choices = newChoices;
 	}

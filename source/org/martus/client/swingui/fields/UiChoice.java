@@ -36,10 +36,10 @@ abstract public class UiChoice extends UiField
 		super(localizationToUse);
 	}
 	
-	public void setWidgetChoices(UiFieldContext context, DropDownFieldSpec spec)
+	public void setChoices(UiFieldContext context, DropDownFieldSpec spec)
 	{
-		setWidgetChoices(context.getCurrentDropDownChoices(spec));
+		setChoices(context.getCurrentDropDownChoices(spec));
 	}
 	
-	abstract public void setWidgetChoices(ChoiceItem[] newChoices);
+	abstract public void setChoices(ChoiceItem[] newChoices);
 }

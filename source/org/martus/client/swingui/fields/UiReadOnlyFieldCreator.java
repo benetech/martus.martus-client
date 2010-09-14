@@ -73,7 +73,7 @@ public class UiReadOnlyFieldCreator extends UiFieldCreator
 	public UiField createChoiceField(DropDownFieldSpec spec)
 	{
 		UiChoiceViewer viewer = new UiChoiceViewer(mainWindow.getLocalization());
-		viewer.setWidgetChoices(getContext(), spec);
+		viewer.setChoices(getContext(), spec);
 		return viewer;
 	}
 
