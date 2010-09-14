@@ -124,7 +124,7 @@ public class GridChangeHandler implements TableModelListener
 				continue;
 			needsUpdate = true;
 			
-			ReusableChoices[] choices = context.getCurrentDropdownChoicesAsReusables(dropdownSpec);
+			ReusableChoices[] choices = context.getCurrentDropdownChoices(dropdownSpec);
 			if(choices == null)
 				continue;
 			

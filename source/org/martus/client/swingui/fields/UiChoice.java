@@ -39,7 +39,7 @@ abstract public class UiChoice extends UiField
 	
 	public void setChoices(UiFieldContext context, DropDownFieldSpec spec)
 	{
-		setChoices(context.getCurrentDropdownChoicesAsReusables(spec));
+		setChoices(context.getCurrentDropdownChoices(spec));
 	}
 	
 	public void setChoices(ChoiceItem[] newChoices)

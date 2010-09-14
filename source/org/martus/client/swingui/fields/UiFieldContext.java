@@ -79,14 +79,14 @@ public class UiFieldContext
 		return (UiGrid)gridFieldsByTag.get(tag);
 	}
 
-	public ReusableChoices[] getCurrentDropdownChoicesAsReusables(DropDownFieldSpec spec)
+	public ReusableChoices[] getCurrentDropdownChoices(DropDownFieldSpec spec)
 	{
 		ReusableChoices onlyChoices = new ReusableChoices("", "");
-		onlyChoices.addAll(getCurrentDropDownChoices(spec));
+		onlyChoices.addAll(getSingleLevelCurrentDropDownChoices(spec));
 		return new ReusableChoices[] {onlyChoices};
 	}
 	
-	private ChoiceItem[] getCurrentDropDownChoices(DropDownFieldSpec spec)
+	private ChoiceItem[] getSingleLevelCurrentDropDownChoices(DropDownFieldSpec spec)
 	{
 		UiGrid dataSource = getGrid(spec);
 		if(dataSource != null)
