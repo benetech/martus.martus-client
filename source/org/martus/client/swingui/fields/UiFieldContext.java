@@ -86,7 +86,7 @@ public class UiFieldContext
 		return new ReusableChoices[] {onlyChoices};
 	}
 	
-	public ChoiceItem[] getCurrentDropDownChoices(DropDownFieldSpec spec)
+	private ChoiceItem[] getCurrentDropDownChoices(DropDownFieldSpec spec)
 	{
 		UiGrid dataSource = getGrid(spec);
 		if(dataSource != null)

@@ -50,6 +50,7 @@ import org.martus.client.swingui.dialogs.UiDialogLauncher;
 import org.martus.client.swingui.grids.GridTable;
 import org.martus.client.swingui.grids.GridTableModel;
 import org.martus.common.GridData;
+import org.martus.common.ReusableChoices;
 import org.martus.common.fieldspec.ChoiceItem;
 import org.martus.common.fieldspec.DropDownFieldSpec;
 import org.martus.common.fieldspec.FieldSpec;
@@ -95,7 +96,7 @@ abstract public class UiGrid extends UiField
 
 	abstract protected GridTable createGridTable(UiDialogLauncher dlgLauncher, UiFieldContext contextToUse);
 	
-	public void updateDataDrivenColumnWidth(int column, ChoiceItem[] choices)
+	public void updateDataDrivenColumnWidth(int column, ReusableChoices[] choices)
 	{
 		table.updateDataDrivenColumnWidth(column, choices);
 	}
