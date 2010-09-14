@@ -33,7 +33,6 @@ import javax.swing.JTable;
 import org.martus.client.swingui.fields.UiChoice;
 import org.martus.client.swingui.fields.UiField;
 import org.martus.client.swingui.fields.UiFieldContext;
-import org.martus.common.fieldspec.ChoiceItem;
 import org.martus.common.fieldspec.DropDownFieldSpec;
 import org.martus.swing.UiComboBox;
 
@@ -43,11 +42,6 @@ abstract public class GridDropDownCellEditorOrRenderer extends GridCellEditorAnd
 	{
 		super(field);
 		context = contextToUse;
-	}
-
-	private void setChoices(ChoiceItem[] choices)
-	{
-		getChoiceField().setWidgetChoices(choices);
 	}
 
 	public void spaceWasPressed()
@@ -60,14 +54,14 @@ abstract public class GridDropDownCellEditorOrRenderer extends GridCellEditorAnd
 	public Component getTableCellEditorComponent(JTable tableToUse, Object codeString, boolean isSelected, int row, int column)
 	{
 		DropDownFieldSpec spec = getFieldSpecForCell(tableToUse, row, column);
-		setChoices(context.getCurrentDropDownChoices(spec));
+		getChoiceField().setWidgetChoices(context, spec);
 		return super.getTableCellEditorComponent(tableToUse, codeString, isSelected, row, column);
 	}
 
 	public Component getTableCellRendererComponent(JTable tableToUse, Object codeString, boolean isSelected, boolean hasFocus, int row, int column)
 	{
 		DropDownFieldSpec spec = getFieldSpecForCell(tableToUse, row, column);
-		setChoices(context.getCurrentDropDownChoices(spec));
+		getChoiceField().setWidgetChoices(context, spec);
 		return super.getTableCellRendererComponent(tableToUse, codeString, isSelected, hasFocus, row, column);
 	}
 
