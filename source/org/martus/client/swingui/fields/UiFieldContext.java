@@ -28,6 +28,7 @@ package org.martus.client.swingui.fields;
 import java.util.HashMap;
 
 import org.martus.common.FieldSpecCollection;
+import org.martus.common.ReusableChoices;
 import org.martus.common.fieldspec.ChoiceItem;
 import org.martus.common.fieldspec.DropDownFieldSpec;
 import org.martus.common.fieldspec.FieldSpec;
@@ -76,6 +77,13 @@ public class UiFieldContext
 	public UiGrid getGridField(String tag)
 	{
 		return (UiGrid)gridFieldsByTag.get(tag);
+	}
+
+	public ReusableChoices[] getCurrentDropdownChoicesAsReusables(DropDownFieldSpec spec)
+	{
+		ReusableChoices onlyChoices = new ReusableChoices("", "");
+		onlyChoices.addAll(getCurrentDropDownChoices(spec));
+		return new ReusableChoices[] {onlyChoices};
 	}
 	
 	public ChoiceItem[] getCurrentDropDownChoices(DropDownFieldSpec spec)
