@@ -30,6 +30,7 @@ import javax.swing.JComponent;
 import javax.swing.JLabel;
 
 import org.martus.common.MiniLocalization;
+import org.martus.common.ReusableChoices;
 import org.martus.common.fieldspec.ChoiceItem;
 import org.martus.swing.UiLabel;
 
@@ -48,6 +49,8 @@ public class UiChoiceViewer extends UiChoice
 
 	public void setText(String newText)
 	{
+		ChoiceItem[] choices = setsOfChoices[0].getChoices();
+		
 		String displayText = "";
 		for(int index = 0; index < choices.length; ++index)
 			if(choices[index].getCode().equals(newText))
@@ -66,12 +69,12 @@ public class UiChoiceViewer extends UiChoice
 		return new JComponent[0];
 	}
 
-	public void setChoices(ChoiceItem[] newChoices)
+	public void setChoices(ReusableChoices[] newChoices)
 	{
-		choices = newChoices;
+		setsOfChoices = newChoices;
 	}
 
 	private JLabel widget;
-	private ChoiceItem[] choices;
+	private ReusableChoices[] setsOfChoices;
 }
 

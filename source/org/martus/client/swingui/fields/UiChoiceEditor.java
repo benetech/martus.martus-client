@@ -37,6 +37,7 @@ import javax.swing.JList;
 
 import org.martus.client.core.LanguageChangeListener;
 import org.martus.common.MiniLocalization;
+import org.martus.common.ReusableChoices;
 import org.martus.common.fieldspec.ChoiceItem;
 import org.martus.swing.UiComboBox;
 import org.martus.swing.UiLanguageDirection;
@@ -124,15 +125,17 @@ public class UiChoiceEditor extends UiChoice implements ActionListener
 		return "";
 	}
 	
-	public void setChoices(ChoiceItem[] newChoices)
+	public void setChoices(ReusableChoices[] newChoices)
 	{
+		ChoiceItem[] choices = newChoices[0].getChoices();
+		
 		String existingValue = getText();
 
 		widget.removeAllItems();
-		for(int i = 0; i < newChoices.length; ++i)
-			widget.addItem(newChoices[i]);
+		for(int i = 0; i < choices.length; ++i)
+			widget.addItem(choices[i]);
 
-		setText(ensureValid(newChoices, existingValue));
+		setText(ensureValid(choices, existingValue));
 	}
 
 	public void actionPerformed(ActionEvent e) 
