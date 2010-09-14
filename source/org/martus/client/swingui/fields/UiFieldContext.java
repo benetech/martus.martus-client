@@ -81,13 +81,6 @@ public class UiFieldContext
 
 	public ReusableChoices[] getCurrentDropdownChoices(DropDownFieldSpec spec)
 	{
-		ReusableChoices onlyChoices = new ReusableChoices("", "");
-		onlyChoices.addAll(getSingleLevelCurrentDropDownChoices(spec));
-		return new ReusableChoices[] {onlyChoices};
-	}
-	
-	private ChoiceItem[] getSingleLevelCurrentDropDownChoices(DropDownFieldSpec spec)
-	{
 		ChoiceItem[] choices = spec.getAllChoices();
 		
 		String reusableChoicesCode = spec.getReusableChoicesCode();
@@ -101,7 +94,9 @@ public class UiFieldContext
 			choices = fieldSpecs.getReusableChoices(reusableChoicesCode).getChoices();
 		}
 
-		return choices;
+		ReusableChoices onlyChoices = new ReusableChoices("", "");
+		onlyChoices.addAll(choices);
+		return new ReusableChoices[] {onlyChoices};
 	}
 
 	private ChoiceItem[] getDataDrivenChoices(DropDownFieldSpec spec,
