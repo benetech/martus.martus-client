@@ -30,6 +30,7 @@ import java.awt.Component;
 
 import javax.swing.JTable;
 
+import org.martus.client.swingui.fields.UiChoice;
 import org.martus.client.swingui.fields.UiField;
 import org.martus.client.swingui.fields.UiFieldContext;
 import org.martus.common.fieldspec.ChoiceItem;
@@ -71,6 +72,11 @@ abstract public class GridDropDownCellEditorOrRenderer extends GridCellEditorAnd
 	{
 		GridTable gridTable = (GridTable)tableToUse;
 		return (DropDownFieldSpec)gridTable.getFieldSpecForCell(row, column);
+	}
+	
+	protected UiChoice getChoiceField()
+	{
+		return (UiChoice)uiField;
 	}
 
 	UiFieldContext context;

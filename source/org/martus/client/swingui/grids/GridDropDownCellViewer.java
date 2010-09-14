@@ -26,7 +26,6 @@ Boston, MA 02111-1307, USA.
 
 package org.martus.client.swingui.grids;
 
-import org.martus.client.swingui.fields.UiChoice;
 import org.martus.client.swingui.fields.UiChoiceViewer;
 import org.martus.client.swingui.fields.UiFieldContext;
 import org.martus.common.MiniLocalization;
@@ -41,11 +40,6 @@ public class GridDropDownCellViewer extends GridDropDownCellEditorOrRenderer
 
 	void setChoices(ChoiceItem[] choices)
 	{
-		getChoiceViewer().setWidgetChoices(choices);
-	}
-
-	private UiChoice getChoiceViewer()
-	{
-		return (UiChoice)uiField;
+		getChoiceField().setWidgetChoices(choices);
 	}
 }

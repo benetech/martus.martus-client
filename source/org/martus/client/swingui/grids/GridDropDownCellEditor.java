@@ -41,12 +41,12 @@ public class GridDropDownCellEditor extends GridDropDownCellEditorOrRenderer
 	
 	void setChoices(ChoiceItem[] choices)
 	{
-		getChoiceEditor().setWidgetChoices(choices);
+		getChoiceField().setWidgetChoices(choices);
 	}
 
 	private UiChoiceEditor getChoiceEditor()
 	{
-		return (UiChoiceEditor)uiField;
+		return (UiChoiceEditor)getChoiceField();
 	}
 
 	public void addActionListener(ActionListener listener)
