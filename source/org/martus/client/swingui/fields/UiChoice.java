@@ -27,6 +27,7 @@ package org.martus.client.swingui.fields;
 
 import org.martus.common.MiniLocalization;
 import org.martus.common.fieldspec.ChoiceItem;
+import org.martus.common.fieldspec.DropDownFieldSpec;
 
 abstract public class UiChoice extends UiField
 {
@@ -35,6 +36,10 @@ abstract public class UiChoice extends UiField
 		super(localizationToUse);
 	}
 	
-
+	public void setWidgetChoices(UiFieldContext context, DropDownFieldSpec spec)
+	{
+		setWidgetChoices(context.getCurrentDropDownChoices(spec));
+	}
+	
 	abstract public void setWidgetChoices(ChoiceItem[] newChoices);
 }

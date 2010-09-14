@@ -45,7 +45,7 @@ abstract public class GridDropDownCellEditorOrRenderer extends GridCellEditorAnd
 		context = contextToUse;
 	}
 
-	protected void setChoices(ChoiceItem[] choices)
+	private void setChoices(ChoiceItem[] choices)
 	{
 		getChoiceField().setWidgetChoices(choices);
 	}
