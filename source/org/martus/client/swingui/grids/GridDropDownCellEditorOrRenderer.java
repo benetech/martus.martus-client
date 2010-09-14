@@ -45,8 +45,11 @@ abstract public class GridDropDownCellEditorOrRenderer extends GridCellEditorAnd
 		context = contextToUse;
 	}
 
-	abstract void setChoices(ChoiceItem[] choices);
-	
+	protected void setChoices(ChoiceItem[] choices)
+	{
+		getChoiceField().setWidgetChoices(choices);
+	}
+
 	public void spaceWasPressed()
 	{
         UiComboBox comboBox = (UiComboBox)getComponent();
