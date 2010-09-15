@@ -30,6 +30,7 @@ import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Vector;
 
 import javax.swing.Box;
 import javax.swing.DefaultListCellRenderer;
@@ -49,20 +50,29 @@ public class UiChoiceEditor extends UiChoice implements ActionListener
 	public UiChoiceEditor(MiniLocalization localizationToUse)
 	{
 		super(localizationToUse);
-		widget = new UiComboBox();
-		widget.setRenderer(new UiChoiceListCellRenderer());
 
 		container = Box.createHorizontalBox();
-		container.add(widget);
+		comboBoxes = new Vector();
 
 		addActionListener(this);
 	}
 	
 	public void addActionListener(ActionListener listener)
 	{
-		widget.addActionListener(listener);
+		for(int i = 0; i < getLevelCount(); ++i)
+			getComboBox(i).addActionListener(listener);
 	}
 	
+	private int getLevelCount()
+	{
+		return comboBoxes.size();
+	}
+
+	private UiComboBox getComboBox(int i)
+	{
+		return (UiComboBox) comboBoxes.get(i);
+	}
+
 	class UiChoiceListCellRenderer extends DefaultListCellRenderer
 	{
 		
@@ -92,6 +102,11 @@ public class UiChoiceEditor extends UiChoice implements ActionListener
 
 	public String getText()
 	{
+		int LAST = getLevelCount() - 1;
+		if(LAST < 0)
+			return "";
+		
+		UiComboBox widget = getComboBox(LAST);
 		if(widget == null)
 			System.out.println("UiChoiceEditor.getText null widget!");
 		ChoiceItem choice = (ChoiceItem)widget.getSelectedItem();
@@ -105,6 +120,20 @@ public class UiChoiceEditor extends UiChoice implements ActionListener
 
 	public void setText(String newCode)
 	{
+		if(getLevelCount() == 0)
+		{
+			if(newCode.length() > 0)
+				System.out.println("Attempted to setText " + newCode + " in a choice editor with no dropdowns");
+			return;
+		}
+		
+		int LAST = getLevelCount() - 1;
+		setText(LAST, newCode);
+	}
+	
+	private void setText(int level, String newCode)
+	{
+		UiComboBox widget = getComboBox(level);
 		for(int row = 0; row < widget.getItemCount(); ++row)
 		{
 			ChoiceItem choiceItem = (ChoiceItem)widget.getItemAt(row);
@@ -123,6 +152,7 @@ public class UiChoiceEditor extends UiChoice implements ActionListener
 
 	private String ensureValid(ChoiceItem[] choices, String text) 
 	{
+		// FIXME: Needs to be updated to handle nested dropdowns
 		for(int i = 0; i < choices.length; ++i)
 			if(choices[i].getCode().equals(text))
 				return text;
@@ -133,15 +163,25 @@ public class UiChoiceEditor extends UiChoice implements ActionListener
 	public void setChoices(ReusableChoices[] newChoices)
 	{
 		int LAST = newChoices.length - 1;
-		ChoiceItem[] choices = newChoices[LAST].getChoices();
+		ReusableChoices reusableChoices = newChoices[LAST];
+		ChoiceItem[] choices = reusableChoices.getChoices();
+		
 		
 		String existingValue = getText();
 
-		widget.removeAllItems();
+		comboBoxes.clear();
+		container.removeAll();
+		
+		UiComboBox combo = new UiComboBox();
+		combo.setRenderer(new UiChoiceListCellRenderer());
 		for(int i = 0; i < choices.length; ++i)
-			widget.addItem(choices[i]);
-
+		{
+			combo.addItem(choices[i]);
+		}
+		comboBoxes.add(combo);
+		container.add(combo);
 		setText(ensureValid(choices, existingValue));
+
 	}
 
 	public void actionPerformed(ActionEvent e) 
@@ -157,7 +197,7 @@ public class UiChoiceEditor extends UiChoice implements ActionListener
 
 	public JComponent[] getFocusableComponents()
 	{
-		return new JComponent[]{widget};
+		return (JComponent[])comboBoxes.toArray(new JComponent[0]);
 	}
 
 	public void setLanguageListener(LanguageChangeListener listener)
@@ -166,7 +206,7 @@ public class UiChoiceEditor extends UiChoice implements ActionListener
 	}
 	
 	private Box container;
-	private UiComboBox widget;
+	private Vector comboBoxes;
 	private LanguageChangeListener observer;
 }
 
