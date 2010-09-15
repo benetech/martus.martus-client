@@ -66,7 +66,7 @@ abstract public class GridDropDownCellEditorOrRenderer extends GridCellEditorAnd
 	private void updateWidgetChoices(JTable tableToUse, int row, int column)
 	{
 		DropDownFieldSpec spec = getFieldSpecForCell(tableToUse, row, column);
-		getChoiceField().setChoices(context, spec);
+		getChoiceField().setSpec(context, spec);
 	}
 
 	protected DropDownFieldSpec getFieldSpecForCell(JTable tableToUse, int row, int column)

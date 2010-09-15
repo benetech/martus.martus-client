@@ -158,7 +158,7 @@ abstract public class UiGrid extends UiField
 				if(spec.getType().isDropdown())
 				{
 					UiChoice choice = (UiChoice)fields[column];
-					choice.setChoices(context, (DropDownFieldSpec) spec);
+					choice.setSpec(context, (DropDownFieldSpec) spec);
 				}
 			}
 		}
