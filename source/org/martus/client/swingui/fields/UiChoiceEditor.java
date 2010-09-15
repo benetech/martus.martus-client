@@ -157,6 +157,8 @@ public class UiChoiceEditor extends UiChoice implements ActionListener
 	public void setChoices(ReusableChoices[] newChoices)
 	{
 		String existingValue = getText();
+		for(int i = 0; i < comboBoxes.size(); ++i)
+			((UiComboBox)comboBoxes.get(i)).removeActionListener(this);
 		comboBoxes.clear();
 		container.removeAll();
 
@@ -170,6 +172,7 @@ public class UiChoiceEditor extends UiChoice implements ActionListener
 			for(int i = 0; i < choices.length; ++i)
 			{
 				combo.addItem(choices[i]);
+				combo.addActionListener(this);
 			}
 			comboBoxes.add(combo);
 			container.add(combo);
@@ -181,6 +184,29 @@ public class UiChoiceEditor extends UiChoice implements ActionListener
 	{
 		if(observer != null)
 			observer.languageChanged(getText());
+		updateEditabilityOfComboBoxes();
+	}
+
+	private void updateEditabilityOfComboBoxes()
+	{
+		boolean shouldBeEnabled = true;
+
+		for(int i = 0; i < comboBoxes.size(); ++i)
+		{
+			UiComboBox combo = (UiComboBox) comboBoxes.get(i);
+			
+			if(i > 0)
+			{
+				UiComboBox previousCombo = (UiComboBox) comboBoxes.get(i-1);
+				ChoiceItem previousSelected = (ChoiceItem) previousCombo.getSelectedItem();
+				if(previousSelected.getCode().length() == 0)
+					shouldBeEnabled = false;
+			}
+			
+			if(!shouldBeEnabled)
+				combo.setSelectedIndex(-1);
+			combo.setEnabled(shouldBeEnabled);
+		}
 	}
 
 	public JComponent getComponent()
