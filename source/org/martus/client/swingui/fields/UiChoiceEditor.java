@@ -31,6 +31,7 @@ import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.Box;
 import javax.swing.DefaultListCellRenderer;
 import javax.swing.JComponent;
 import javax.swing.JList;
@@ -49,8 +50,12 @@ public class UiChoiceEditor extends UiChoice implements ActionListener
 	{
 		super(localizationToUse);
 		widget = new UiComboBox();
-		addActionListener(this);
 		widget.setRenderer(new UiChoiceListCellRenderer());
+
+		container = Box.createHorizontalBox();
+		container.add(widget);
+
+		addActionListener(this);
 	}
 	
 	public void addActionListener(ActionListener listener)
@@ -147,7 +152,7 @@ public class UiChoiceEditor extends UiChoice implements ActionListener
 
 	public JComponent getComponent()
 	{
-		return widget;
+		return container;
 	}
 
 	public JComponent[] getFocusableComponents()
@@ -159,7 +164,8 @@ public class UiChoiceEditor extends UiChoice implements ActionListener
 	{
 		observer = listener;
 	}
-		
+	
+	private Box container;
 	private UiComboBox widget;
 	private LanguageChangeListener observer;
 }
