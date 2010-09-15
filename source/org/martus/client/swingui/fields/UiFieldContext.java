@@ -83,20 +83,30 @@ public class UiFieldContext
 	{
 		ChoiceItem[] choices = spec.getAllChoices();
 		
-		String reusableChoicesCode = spec.getReusableChoicesCode();
+		String[] reusableChoicesCodes = spec.getReusableChoicesCodes();
 		UiGrid dataSource = getGrid(spec);
 		if(dataSource != null)
 		{
 			choices = getDataDrivenChoices(spec, dataSource);
 		}
-		else if(reusableChoicesCode != null)
+		else if(reusableChoicesCodes.length > 0)
 		{
-			choices = fieldSpecs.getReusableChoices(reusableChoicesCode).getChoices();
+			return getReusableChoicesLists(reusableChoicesCodes);
 		}
 
 		ReusableChoices onlyChoices = new ReusableChoices("", "");
 		onlyChoices.addAll(choices);
 		return new ReusableChoices[] {onlyChoices};
+	}
+
+	private ReusableChoices[] getReusableChoicesLists(String[] reusableChoicesCodes)
+	{
+		ReusableChoices[] reusableChoicesLists = new ReusableChoices[reusableChoicesCodes.length];
+		for(int i = 0; i < reusableChoicesLists.length; ++i)
+		{
+			reusableChoicesLists[i] = fieldSpecs.getReusableChoices(reusableChoicesCodes[i]);
+		}
+		return reusableChoicesLists;
 	}
 
 	private ChoiceItem[] getDataDrivenChoices(DropDownFieldSpec spec,

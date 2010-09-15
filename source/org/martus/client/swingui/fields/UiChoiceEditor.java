@@ -128,60 +128,53 @@ public class UiChoiceEditor extends UiChoice implements ActionListener
 		}
 		
 		int LAST = getLevelCount() - 1;
-		setText(LAST, newCode);
+		int level = LAST;
+		UiComboBox widget = getComboBox(level);
+		int rowToSelect = findItemByCode(widget, newCode);
+		if(rowToSelect < 0)
+		{
+			System.out.println("UiChoiceEditor.setText: Couldn't find " + newCode);
+			rowToSelect = findItemByCode(widget, "");
+		}
+		widget.setSelectedIndex(rowToSelect);
 	}
 	
-	private void setText(int level, String newCode)
+	int findItemByCode(UiComboBox widget, String code)
 	{
-		UiComboBox widget = getComboBox(level);
 		for(int row = 0; row < widget.getItemCount(); ++row)
 		{
 			ChoiceItem choiceItem = (ChoiceItem)widget.getItemAt(row);
-			if(choiceItem.getCode().equals(newCode))
+			if(choiceItem.getCode().equals(code))
 			{
 				widget.setSelectedIndex(row);
-				return;
+				return row;
 			}
 		}
-		System.out.println("UiChoiceEditor.setText: Couldn't find " + newCode);
-		int select = -1;
-		if(widget.getItemCount() > 0)
-			select = 0;
-		widget.setSelectedIndex(select);
+		
+		return -1;
 	}
 
-	private String ensureValid(ChoiceItem[] choices, String text) 
-	{
-		// FIXME: Needs to be updated to handle nested dropdowns
-		for(int i = 0; i < choices.length; ++i)
-			if(choices[i].getCode().equals(text))
-				return text;
-
-		return "";
-	}
-	
 	public void setChoices(ReusableChoices[] newChoices)
 	{
-		int LAST = newChoices.length - 1;
-		ReusableChoices reusableChoices = newChoices[LAST];
-		ChoiceItem[] choices = reusableChoices.getChoices();
-		
-		
 		String existingValue = getText();
-
 		comboBoxes.clear();
 		container.removeAll();
-		
-		UiComboBox combo = new UiComboBox();
-		combo.setRenderer(new UiChoiceListCellRenderer());
-		for(int i = 0; i < choices.length; ++i)
-		{
-			combo.addItem(choices[i]);
-		}
-		comboBoxes.add(combo);
-		container.add(combo);
-		setText(ensureValid(choices, existingValue));
 
+		for(int level = 0; level < newChoices.length; ++level)
+		{
+			ReusableChoices reusableChoices = newChoices[level];
+			ChoiceItem[] choices = reusableChoices.getChoices();
+	
+			UiComboBox combo = new UiComboBox();
+			combo.setRenderer(new UiChoiceListCellRenderer());
+			for(int i = 0; i < choices.length; ++i)
+			{
+				combo.addItem(choices[i]);
+			}
+			comboBoxes.add(combo);
+			container.add(combo);
+		}
+		setText(existingValue);
 	}
 
 	public void actionPerformed(ActionEvent e) 
