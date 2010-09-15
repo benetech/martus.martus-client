@@ -131,19 +131,45 @@ public class UiChoiceEditor extends UiChoice implements ActionListener
 				System.out.println("Attempted to setText " + newCode + " in a choice editor with no dropdowns");
 			return;
 		}
-		
-		int LAST = getLevelCount() - 1;
-		int level = LAST;
-		UiComboBox widget = getComboBox(level);
-		int rowToSelect = findItemByCode(widget, newCode);
-		if(rowToSelect < 0)
+
+		for(int level = 0; level < getLevelCount(); ++level)
 		{
-			System.out.println("UiChoiceEditor.setText: Couldn't find " + newCode);
-			rowToSelect = findItemByCode(widget, "");
+			UiComboBox widget = getComboBox(level);
+			int rowToSelect = -1;
+			
+			int LAST = getLevelCount() - 1;
+			if(level == LAST)
+			{
+				rowToSelect = findItemByCode(widget, newCode);
+			}
+			else
+			{
+				rowToSelect = findItemByPartialMatch(widget, newCode);
+			}
+			
+			if(rowToSelect < 0)
+			{
+				System.out.println("UiChoiceEditor.setText: Couldn't find " + newCode);
+				rowToSelect = findItemByCode(widget, "");
+			}
+System.out.println("setText + " + newCode + " level " + level + " selecting row " + rowToSelect);
+			widget.setSelectedIndex(rowToSelect);
 		}
-		widget.setSelectedIndex(rowToSelect);
 	}
 	
+	private int findItemByPartialMatch(UiComboBox widget, String code)
+	{
+		for(int row = 0; row < widget.getItemCount(); ++row)
+		{
+			ChoiceItem choiceItem = (ChoiceItem)widget.getItemAt(row);
+			String choiceItemCode = choiceItem.getCode();
+			if(choiceItemCode.length() > 0 && code.startsWith(choiceItemCode))
+				return row;
+		}
+		
+		return -1;
+	}
+
 	int findItemByCode(UiComboBox widget, String code)
 	{
 		for(int row = 0; row < widget.getItemCount(); ++row)
@@ -191,10 +217,10 @@ public class UiChoiceEditor extends UiChoice implements ActionListener
 	{
 		if(observer != null)
 			observer.languageChanged(getText());
-		updateEditabilityOfComboBoxes();
+		updateEditabilityOfComboBoxes(e.getSource());
 	}
 
-	private void updateEditabilityOfComboBoxes()
+	private void updateEditabilityOfComboBoxes(Object eventSource)
 	{
 		boolean shouldBeEnabled = true;
 
@@ -206,36 +232,60 @@ public class UiChoiceEditor extends UiChoice implements ActionListener
 			{
 				UiComboBox previousCombo = (UiComboBox) comboBoxes.get(level-1);
 				ChoiceItem previousSelected = (ChoiceItem) previousCombo.getSelectedItem();
+				String previousCode = "";
 				if(previousSelected == null)
 					previousSelected = (ChoiceItem) previousCombo.getItemAt(findItemByCode(previousCombo, ""));
-				String previousCode = previousSelected.getCode();
+				if(previousSelected != null)
+					previousCode = previousSelected.getCode();
+				
 				if(previousCode.length() > 0)
 				{
-					ChoiceItem wasSelected = (ChoiceItem) combo.getSelectedItem();
-					
-					combo.removeAllItems();
-					ReusableChoices choices = choiceLists[level];
-					for(int choiceIndex = 0; choiceIndex < choices.size(); ++choiceIndex)
-					{
-						ChoiceItem choice = choices.get(choiceIndex);
-						if(choice.getCode().startsWith(previousCode))
-							combo.addItem(choice);
-					}
-					
-					if(findItemByCode(combo, "") < 0)
-						combo.insertItemAt(new ChoiceItem("", ""), 0);
-					
-					if(wasSelected != null)
-						combo.setSelectedItem(wasSelected);
+					updateWidgetChoices(level, previousCode);
 				}
 				else
 				{
 					shouldBeEnabled = false;
 					combo.setSelectedIndex(-1);
 				}
-				combo.setEnabled(shouldBeEnabled);
 			}
+			combo.setEnabled(shouldBeEnabled);
 		}
+	}
+
+	private void updateWidgetChoices(int level, String previousCode)
+	{
+		UiComboBox combo = getComboBox(level);
+		ChoiceItem wasSelected = (ChoiceItem) combo.getSelectedItem();
+
+		ReusableChoices existingChoices = new ReusableChoices("", "");
+		for(int row = 0; row < combo.getItemCount(); ++row)
+		{
+			ChoiceItem choice = (ChoiceItem) combo.getItemAt(row);
+			existingChoices.add(choice);
+		}
+		ReusableChoices possibleChoices = choiceLists[level];
+		ReusableChoices newChoices = new ReusableChoices("", "");
+		for(int choiceIndex = 0; choiceIndex < possibleChoices.size(); ++choiceIndex)
+		{
+			ChoiceItem choice = possibleChoices.get(choiceIndex);
+			if(choice.getCode().startsWith(previousCode))
+				newChoices.add(choice);
+		}
+		
+		if(newChoices.findByCode("") == null)
+			newChoices.insertAtTop(new ChoiceItem("", ""));
+
+		if(newChoices.equals(existingChoices))
+			return;
+		
+		combo.removeAllItems();
+		for(int choiceIndex = 0; choiceIndex < newChoices.size(); ++choiceIndex)
+		{
+			combo.addItem(newChoices.get(choiceIndex));
+		}
+		
+System.out.println("Selecting " + wasSelected);
+		combo.setSelectedItem(wasSelected);
 	}
 
 	public JComponent getComponent()
