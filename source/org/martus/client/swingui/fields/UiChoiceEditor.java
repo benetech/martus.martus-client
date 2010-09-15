@@ -102,20 +102,25 @@ public class UiChoiceEditor extends UiChoice implements ActionListener
 
 	public String getText()
 	{
-		int LAST = getLevelCount() - 1;
-		if(LAST < 0)
-			return "";
-		
-		UiComboBox widget = getComboBox(LAST);
-		if(widget == null)
-			System.out.println("UiChoiceEditor.getText null widget!");
-		ChoiceItem choice = (ChoiceItem)widget.getSelectedItem();
-		if(choice == null)
+		String result = "";
+		for(int level = 0; level < getLevelCount(); ++level)
 		{
-			System.out.println("UiChoiceEditor.getText null choice!");
-			return "";
+			UiComboBox widget = getComboBox(level);
+			if(widget == null)
+				System.out.println("UiChoiceEditor.getText null widget!");
+			ChoiceItem choice = (ChoiceItem)widget.getSelectedItem();
+			if(choice == null)
+			{
+				System.out.println("UiChoiceEditor.getText null choice!");
+				break;
+			}
+			if(choice.getCode().length() == 0)
+				break;
+			result = choice.getCode();
 		}
-		return choice.getCode();
+
+		return result;
+		
 	}
 
 	public void setText(String newCode)
@@ -156,6 +161,8 @@ public class UiChoiceEditor extends UiChoice implements ActionListener
 
 	public void setChoices(ReusableChoices[] newChoices)
 	{
+		choiceLists = newChoices;
+		
 		String existingValue = getText();
 		for(int i = 0; i < comboBoxes.size(); ++i)
 			((UiComboBox)comboBoxes.get(i)).removeActionListener(this);
@@ -172,8 +179,8 @@ public class UiChoiceEditor extends UiChoice implements ActionListener
 			for(int i = 0; i < choices.length; ++i)
 			{
 				combo.addItem(choices[i]);
-				combo.addActionListener(this);
 			}
+			combo.addActionListener(this);
 			comboBoxes.add(combo);
 			container.add(combo);
 		}
@@ -191,21 +198,43 @@ public class UiChoiceEditor extends UiChoice implements ActionListener
 	{
 		boolean shouldBeEnabled = true;
 
-		for(int i = 0; i < comboBoxes.size(); ++i)
+		for(int level = 0; level < comboBoxes.size(); ++level)
 		{
-			UiComboBox combo = (UiComboBox) comboBoxes.get(i);
+			UiComboBox combo = (UiComboBox) comboBoxes.get(level);
 			
-			if(i > 0)
+			if(level > 0)
 			{
-				UiComboBox previousCombo = (UiComboBox) comboBoxes.get(i-1);
+				UiComboBox previousCombo = (UiComboBox) comboBoxes.get(level-1);
 				ChoiceItem previousSelected = (ChoiceItem) previousCombo.getSelectedItem();
-				if(previousSelected.getCode().length() == 0)
+				if(previousSelected == null)
+					previousSelected = (ChoiceItem) previousCombo.getItemAt(findItemByCode(previousCombo, ""));
+				String previousCode = previousSelected.getCode();
+				if(previousCode.length() > 0)
+				{
+					ChoiceItem wasSelected = (ChoiceItem) combo.getSelectedItem();
+					
+					combo.removeAllItems();
+					ReusableChoices choices = choiceLists[level];
+					for(int choiceIndex = 0; choiceIndex < choices.size(); ++choiceIndex)
+					{
+						ChoiceItem choice = choices.get(choiceIndex);
+						if(choice.getCode().startsWith(previousCode))
+							combo.addItem(choice);
+					}
+					
+					if(findItemByCode(combo, "") < 0)
+						combo.insertItemAt(new ChoiceItem("", ""), 0);
+					
+					if(wasSelected != null)
+						combo.setSelectedItem(wasSelected);
+				}
+				else
+				{
 					shouldBeEnabled = false;
+					combo.setSelectedIndex(-1);
+				}
+				combo.setEnabled(shouldBeEnabled);
 			}
-			
-			if(!shouldBeEnabled)
-				combo.setSelectedIndex(-1);
-			combo.setEnabled(shouldBeEnabled);
 		}
 	}
 
@@ -226,6 +255,7 @@ public class UiChoiceEditor extends UiChoice implements ActionListener
 	
 	private Box container;
 	private Vector comboBoxes;
+	private ReusableChoices[] choiceLists;
 	private LanguageChangeListener observer;
 }
 
