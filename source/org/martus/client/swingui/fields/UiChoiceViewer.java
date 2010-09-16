@@ -26,6 +26,9 @@ Boston, MA 02111-1307, USA.
 
 package org.martus.client.swingui.fields;
 
+import java.awt.Color;
+
+import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.JComponent;
 
@@ -50,17 +53,47 @@ public class UiChoiceViewer extends UiChoice
 	public void setText(String newText)
 	{
 		container.removeAll();
-		int LAST = setsOfChoices.length - 1;
-		ChoiceItem[] choices = setsOfChoices[LAST].getChoices();
-		
-		String displayText = "";
+		for(int level = 0; level < setsOfChoices.length; ++level)
+		{
+			String displayText = "";
+
+			ChoiceItem[] choices = setsOfChoices[level].getChoices();
+			int LAST = setsOfChoices.length - 1;
+			if(level == LAST)
+			{
+				displayText = findLabelByCode(choices, newText);
+			}
+			else
+			{
+				displayText = findLabelByPartialCode(choices, newText);
+			}
+			
+			UiLabel widget = new UiLabel();
+			widget.setText(" " + displayText + " ");
+			widget.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+			container.add(widget);
+		}
+	}
+
+	private String findLabelByCode(ChoiceItem[] choices, String code)
+	{
 		for(int index = 0; index < choices.length; ++index)
-			if(choices[index].getCode().equals(newText))
-				displayText = choices[index].toString();
+			if(code.equals(choices[index].getCode()))
+				return choices[index].toString();
 		
-		UiLabel widget = new UiLabel();
-		widget.setText(" " + displayText + " ");
-		container.add(widget);
+		return "";
+	}
+
+	private String findLabelByPartialCode(ChoiceItem[] choices, String code)
+	{
+		for(int index = 0; index < choices.length; ++index)
+		{
+			String thisCode = choices[index].getCode();
+			if(thisCode.length() > 0 && code.startsWith(thisCode))
+				return choices[index].toString();
+		}
+		
+		return "";
 	}
 
 	public JComponent getComponent()
