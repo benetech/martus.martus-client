@@ -143,6 +143,25 @@ public class TestKnownFieldSpecCache extends TestCaseEnhanced
 		assertEquals("Didn't load correct count?", sampleDataSpecTags.length, specs.size());
 	}
 	
+	public void testSaveAndLoadReusableChoices() throws Exception
+	{
+		FieldSpecCollection topSpecs = StandardFieldSpecs.getDefaultTopSetionFieldSpecs();
+		ReusableChoices reusableChoices = new ReusableChoices("choices", "A");
+		reusableChoices.add(new ChoiceItem("code1", "Label1"));
+		reusableChoices.add(new ChoiceItem("code2", "Label2"));
+		topSpecs.addReusableChoiceList(reusableChoices);
+		Bulletin b = new Bulletin(security, topSpecs, StandardFieldSpecs.getDefaultBottomSectionFieldSpecs());
+		cache.revisionWasSaved(b);
+		
+		ByteArrayOutputStream saved = new ByteArrayOutputStream();
+		cache.saveToStream(saved);
+		ByteArrayInputStream loadable = new ByteArrayInputStream(saved.toByteArray());
+		KnownFieldSpecCache reloadedCache = new KnownFieldSpecCache(new MockClientDatabase(), security);
+		reloadedCache.loadFromStream(loadable);
+		ReusableChoices reloadedChoices = reloadedCache.getAllReusableChoiceLists().getChoices(reusableChoices.getCode());
+		assertEquals(reusableChoices, reloadedChoices);
+	}
+	
 	public void testLoadFromBadData() throws Exception
 	{
 		byte[] badData = {1, 22, 15, 121, 1, 0};

@@ -236,6 +236,7 @@ public class KnownFieldSpecCache extends BulletinStoreCache implements ReadableD
 			PersistableMap choice = new PersistableMap();
 			choice.put(TAG_CHOICE_CODE, new PersistableString(choiceItem.getCode()));
 			choice.put(TAG_CHOICE_LABEL, new PersistableString(choiceItem.toString()));
+			vector.add(choice);
 		}
 		
 		return vector;
