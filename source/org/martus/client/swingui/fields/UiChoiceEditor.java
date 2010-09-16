@@ -152,7 +152,6 @@ public class UiChoiceEditor extends UiChoice implements ActionListener
 				System.out.println("UiChoiceEditor.setText: Couldn't find " + newCode);
 				rowToSelect = findItemByCode(widget, "");
 			}
-System.out.println("setText + " + newCode + " level " + level + " selecting row " + rowToSelect);
 			widget.setSelectedIndex(rowToSelect);
 		}
 	}
@@ -284,7 +283,6 @@ System.out.println("setText + " + newCode + " level " + level + " selecting row 
 			combo.addItem(newChoices.get(choiceIndex));
 		}
 		
-System.out.println("Selecting " + wasSelected);
 		combo.setSelectedItem(wasSelected);
 	}
 
