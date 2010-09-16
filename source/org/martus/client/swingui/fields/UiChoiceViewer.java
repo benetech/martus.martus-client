@@ -26,8 +26,8 @@ Boston, MA 02111-1307, USA.
 
 package org.martus.client.swingui.fields;
 
+import javax.swing.Box;
 import javax.swing.JComponent;
-import javax.swing.JLabel;
 
 import org.martus.common.MiniLocalization;
 import org.martus.common.ReusableChoices;
@@ -39,7 +39,7 @@ public class UiChoiceViewer extends UiChoice
 	public UiChoiceViewer(MiniLocalization localizationToUse)
 	{
 		super(localizationToUse);
-		widget = new UiLabel();
+		container = Box.createHorizontalBox();
 	}
 	
 	public String getText()
@@ -49,6 +49,7 @@ public class UiChoiceViewer extends UiChoice
 
 	public void setText(String newText)
 	{
+		container.removeAll();
 		int LAST = setsOfChoices.length - 1;
 		ChoiceItem[] choices = setsOfChoices[LAST].getChoices();
 		
@@ -57,12 +58,14 @@ public class UiChoiceViewer extends UiChoice
 			if(choices[index].getCode().equals(newText))
 				displayText = choices[index].toString();
 		
+		UiLabel widget = new UiLabel();
 		widget.setText(" " + displayText + " ");
+		container.add(widget);
 	}
 
 	public JComponent getComponent()
 	{
-		return widget;
+		return container;
 	}
 
 	public JComponent[] getFocusableComponents()
@@ -75,7 +78,6 @@ public class UiChoiceViewer extends UiChoice
 		setsOfChoices = newChoices;
 	}
 
-	private JLabel widget;
+	private Box container;
 	private ReusableChoices[] setsOfChoices;
 }
-
