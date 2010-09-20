@@ -53,23 +53,25 @@ public class UiChoiceViewer extends UiChoice
 	public void setText(String newText)
 	{
 		container.removeAll();
+		String[] displayText = new String[setsOfChoices.length];
 		for(int level = 0; level < setsOfChoices.length; ++level)
 		{
-			String displayText = "";
-
 			ChoiceItem[] choices = setsOfChoices[level].getChoices();
 			int LAST = setsOfChoices.length - 1;
 			if(level == LAST)
 			{
-				displayText = findLabelByCode(choices, newText);
+				displayText[level] = findLabelByCode(choices, newText);
 			}
 			else
 			{
-				displayText = findLabelByPartialCode(choices, newText);
+				displayText[level] = findLabelByPartialCode(choices, newText);
 			}
-			
+		}
+		
+		for(int level = 0; level < setsOfChoices.length; ++level)
+		{
 			UiLabel widget = new UiLabel();
-			widget.setText(" " + displayText + " ");
+			widget.setText(" " + displayText[level] + " ");
 			widget.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 			container.add(widget);
 		}
