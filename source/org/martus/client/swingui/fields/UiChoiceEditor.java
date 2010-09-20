@@ -80,9 +80,7 @@ public class UiChoiceEditor extends UiChoice implements ActionListener
 		{
 			String spaceSoValueWontBeHiddenIfEmpty = " ";
 			String choiceText = "";
-			if(choiceItem == null)
-				System.out.println("UiChoiceEditor.getRenderer null choiceItem");
-			else
+			if(choiceItem != null)
 				choiceText = choiceItem.toString();
 
 			String displayString = choiceText + spaceSoValueWontBeHiddenIfEmpty;
@@ -110,10 +108,7 @@ public class UiChoiceEditor extends UiChoice implements ActionListener
 				System.out.println("UiChoiceEditor.getText null widget!");
 			ChoiceItem choice = (ChoiceItem)widget.getSelectedItem();
 			if(choice == null)
-			{
-				System.out.println("UiChoiceEditor.getText null choice!");
 				break;
-			}
 			if(choice.getCode().length() == 0)
 				break;
 			result = choice.getCode();
@@ -147,7 +142,7 @@ public class UiChoiceEditor extends UiChoice implements ActionListener
 				rowToSelect = findItemByPartialMatch(widget, newCode);
 			}
 			
-			if(rowToSelect < 0)
+			if(rowToSelect < 0 && newCode.length() > 0)
 			{
 				System.out.println("UiChoiceEditor.setText: Couldn't find " + newCode);
 				rowToSelect = findItemByCode(widget, "");
