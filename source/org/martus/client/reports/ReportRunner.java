@@ -37,6 +37,7 @@ import org.apache.velocity.app.VelocityEngine;
 import org.martus.client.core.SafeReadableBulletin;
 import org.martus.client.core.SortableBulletinList;
 import org.martus.common.MiniLocalization;
+import org.martus.common.PoolOfReusableChoicesLists;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.bulletin.BulletinLoader;
 import org.martus.common.crypto.MartusCrypto;
@@ -60,13 +61,13 @@ public class ReportRunner
 		engine.init();
 	}
 	
-	public void runReport(ReportFormat rf, ReadableDatabase db, SortableBulletinList bulletins, ReportOutput destination, RunReportOptions options) throws Exception
+	public void runReport(ReportFormat rf, ReadableDatabase db, SortableBulletinList bulletins, ReportOutput destination, RunReportOptions options, PoolOfReusableChoicesLists reusableChoicesLists) throws Exception
 	{
 		UniversalId[] uids = bulletins.getSortedUniversalIds();
 		ReportOutput breakDestination = destination;
 		if(options.hideDetail)
 			breakDestination = new NullReportOutput();
-		SummaryBreakHandler breakHandler = new SummaryBreakHandler(rf, breakDestination, options, bulletins.getSortSpecs());
+		SummaryBreakHandler breakHandler = new SummaryBreakHandler(rf, breakDestination, options, bulletins.getSortSpecs(), reusableChoicesLists);
 
 		context = new VelocityContext();
 		context.put("localization", localization);
@@ -196,7 +197,7 @@ public class ReportRunner
 	
 	class SummaryBreakHandler
 	{
-		public SummaryBreakHandler(ReportFormat reportFormatToUse, ReportOutput destination, RunReportOptions options, MiniFieldSpec[] breakSpecsToUse)
+		public SummaryBreakHandler(ReportFormat reportFormatToUse, ReportOutput destination, RunReportOptions options, MiniFieldSpec[] breakSpecsToUse, PoolOfReusableChoicesLists reusableChoicesListsToUse)
 		{
 			output = destination;
 			
@@ -204,6 +205,7 @@ public class ReportRunner
 			breakSpecs = breakSpecsToUse;
 			if(!options.printBreaks)
 				breakSpecs = new MiniFieldSpec[0];
+			reusableChoicesLists = reusableChoicesListsToUse;
 			
 			previousBreakValues = new String[breakSpecs.length];
 			Arrays.fill(previousBreakValues, "");
@@ -294,7 +296,7 @@ public class ReportRunner
 				FieldSpec spec = miniSpec.getType().createEmptyFieldSpec();
 				spec.setTag(miniSpec.getTag());
 				spec.setLabel(miniSpec.getLabel());
-				MartusField field = new MartusField(spec);
+				MartusField field = new MartusField(spec, reusableChoicesLists);
 				field.setData(previousBreakValues[i]);
 				breakFields.add(field);
 			}
@@ -322,6 +324,7 @@ public class ReportRunner
 		int[] breakCounts;
 		String[] previousBreakValues;
 		SummaryCount summaryCounts;
+		private PoolOfReusableChoicesLists reusableChoicesLists;
 	}
 	
 	public void performMerge(String template, Writer result) throws Exception

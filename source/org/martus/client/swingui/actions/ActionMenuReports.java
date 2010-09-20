@@ -35,6 +35,7 @@ import javax.print.attribute.HashPrintRequestAttributeSet;
 import javax.swing.filechooser.FileFilter;
 
 import org.json.JSONObject;
+import org.martus.client.core.MartusApp;
 import org.martus.client.core.PartialBulletin;
 import org.martus.client.core.SortableBulletinList;
 import org.martus.client.reports.PageReportBuilder;
@@ -354,8 +355,9 @@ public class ActionMenuReports extends ActionPrint
 		
 		public void doTheWorkWithNO_SWING_CALLS() throws Exception
 		{
-			ReportRunner rr = new ReportRunner(mainWindow.getApp().getSecurity(), mainWindow.getLocalization());
-			rr.runReport(rf, mainWindow.getStore().getDatabase(), list, destination, options);
+			MartusApp app = mainWindow.getApp();
+			ReportRunner rr = new ReportRunner(app.getSecurity(), mainWindow.getLocalization());
+			rr.runReport(rf, mainWindow.getStore().getDatabase(), list, destination, options, app.getStore().getAllReusableChoiceLists());
 		}
 		
 		UiMainWindow mainWindow;

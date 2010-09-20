@@ -38,6 +38,7 @@ import org.martus.client.test.MockMartusApp;
 import org.martus.common.FieldSpecCollection;
 import org.martus.common.LegacyCustomFields;
 import org.martus.common.MiniLocalization;
+import org.martus.common.PoolOfReusableChoicesLists;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.bulletin.BulletinLoader;
 import org.martus.common.bulletin.Bulletin.DamagedBulletinException;
@@ -137,7 +138,7 @@ public class TestReportRunner extends TestCaseEnhanced
 		}
 		
 		RunReportOptions options = new RunReportOptions();
-		rr.runReport(rf, store.getDatabase(), list, result, options);
+		rr.runReport(rf, store.getDatabase(), list, result, options, PoolOfReusableChoicesLists.EMPTY_POOL);
 		result.close();
 		StringBuffer expected = new StringBuffer();
 		UniversalId[] uids = list.getSortedUniversalIds();
@@ -178,7 +179,7 @@ public class TestReportRunner extends TestCaseEnhanced
 		rf.setDetailSection("$bulletin.field('custom')");
 		ReportOutput result = new ReportOutput();
 		RunReportOptions options = new RunReportOptions();
-		rr.runReport(rf, app.getStore().getDatabase(), list, result, options);
+		rr.runReport(rf, app.getStore().getDatabase(), list, result, options, PoolOfReusableChoicesLists.EMPTY_POOL);
 		result.close();
 		
 		assertEquals(sampleCustomData, result.getPageText(0));
@@ -472,7 +473,7 @@ public class TestReportRunner extends TestCaseEnhanced
 			list.add(b);
 		}
 		ReportOutput result = new ReportOutput();
-		rr.runReport(rf, store.getDatabase(), list, result, options);
+		rr.runReport(rf, store.getDatabase(), list, result, options, PoolOfReusableChoicesLists.EMPTY_POOL);
 		result.close();
 		return result;
 	}

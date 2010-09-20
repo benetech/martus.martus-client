@@ -30,6 +30,7 @@ import java.util.Vector;
 
 import org.martus.common.FieldCollection;
 import org.martus.common.GridData;
+import org.martus.common.PoolOfReusableChoicesLists;
 import org.martus.common.XmlCustomFieldsLoader;
 import org.martus.common.bulletin.BulletinXmlExportImportConstants;
 import org.martus.common.field.MartusField;
@@ -330,7 +331,7 @@ public class XmlBulletinLoader extends SimpleXmlDefaultLoader
 		{
 			if(tag.equals(GridData.GRID_DATA_TAG))
 			{
-				GridData gridData = new GridData(getGridFieldSpec(tagForField));
+				GridData gridData = new GridData(getGridFieldSpec(tagForField), PoolOfReusableChoicesLists.EMPTY_POOL);
 				return new GridData.XmlGridDataLoader(gridData);
 			}
 			return super.startElement(tag);

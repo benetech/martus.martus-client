@@ -84,7 +84,7 @@ public class UiGridEditor extends UiEditableGrid
 	private GridData getValidatableCopyOfData(GridFieldSpec gridSpec, GridData realGridData)
 			throws IOException, ParserConfigurationException, SAXException
 	{
-		GridData copyOfGridData = new GridData(gridSpec);
+		GridData copyOfGridData = new GridData(gridSpec, getContext().getReusableChoicesLists());
 		copyOfGridData.setFromXml(realGridData.getXmlRepresentation());
 		copyOfGridData.removeTrailingBlankRows();
 		return copyOfGridData;

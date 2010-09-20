@@ -33,6 +33,7 @@ import javax.swing.event.TableModelListener;
 
 import org.martus.client.swingui.grids.GridTableModel;
 import org.martus.common.MiniLocalization;
+import org.martus.common.PoolOfReusableChoicesLists;
 import org.martus.common.fieldspec.ChoiceItem;
 import org.martus.common.fieldspec.DropDownFieldSpec;
 import org.martus.common.fieldspec.FieldSpec;
@@ -43,9 +44,9 @@ import org.martus.common.fieldspec.PopUpTreeFieldSpec;
 public class FancySearchTableModel extends GridTableModel implements TableModelListener
 {
 
-	public FancySearchTableModel(GridFieldSpec fieldSpecToUse, MiniLocalization localizationToUse)
+	public FancySearchTableModel(GridFieldSpec fieldSpecToUse, PoolOfReusableChoicesLists reusableChoicesList, MiniLocalization localizationToUse)
 	{
-		super(fieldSpecToUse);
+		super(fieldSpecToUse, reusableChoicesList);
 		localization = localizationToUse;
 		addTableModelListener(this);
 	}

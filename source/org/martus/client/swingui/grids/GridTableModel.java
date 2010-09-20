@@ -31,6 +31,7 @@ import javax.swing.table.AbstractTableModel;
 import javax.xml.parsers.ParserConfigurationException;
 
 import org.martus.common.GridData;
+import org.martus.common.PoolOfReusableChoicesLists;
 import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.fieldspec.FieldType;
 import org.martus.common.fieldspec.FieldTypeNormal;
@@ -40,9 +41,9 @@ import org.xml.sax.SAXException;
 
 public class GridTableModel extends AbstractTableModel
 {
-	public GridTableModel(GridFieldSpec fieldSpec)
+	public GridTableModel(GridFieldSpec fieldSpec, PoolOfReusableChoicesLists reusableChoicesList)
 	{
-		gridData = new GridData(fieldSpec);
+		gridData = new GridData(fieldSpec,reusableChoicesList);
 	}
 	
 	public int getColumnCount() 

@@ -35,6 +35,7 @@ import java.util.Vector;
 
 import org.martus.common.FieldCollection;
 import org.martus.common.GridData;
+import org.martus.common.PoolOfReusableChoicesLists;
 import org.martus.common.bulletin.AttachmentProxy;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.bulletin.BulletinXmlExportImportConstants;
@@ -226,7 +227,7 @@ public class XmlBulletinsFileLoader extends SimpleXmlDefaultLoader
 	private String convertGridDatesToInternalFormat(String fieldTag, String value)
 	{
 		GridFieldSpec gridSpec = currentBulletinLoader.getGridFieldSpec(fieldTag);
-		GridData grid = new GridData(gridSpec);
+		GridData grid = new GridData(gridSpec, PoolOfReusableChoicesLists.EMPTY_POOL);
 		try
 		{
 			grid.setFromXml(value);

@@ -30,6 +30,7 @@ import java.util.Vector;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 
+import org.martus.common.PoolOfReusableChoicesLists;
 import org.martus.common.fieldspec.CustomDropDownFieldSpec;
 import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.fieldspec.FieldTypeDropdown;
@@ -63,7 +64,7 @@ public class TestGridTableModel extends TestCaseEnhanced
 		column2.setLabel(label2);
 		gridSpec.addColumn(column1);
 		gridSpec.addColumn(column2);
-		GridTableModel model = new GridTableModel(gridSpec);
+		GridTableModel model = new GridTableModel(gridSpec, PoolOfReusableChoicesLists.EMPTY_POOL);
 		TestTableModelListener listener = new TestTableModelListener();
 		model.addTableModelListener(listener);
 		int columnsIncludingRowCount = 3;
@@ -104,7 +105,7 @@ public class TestGridTableModel extends TestCaseEnhanced
 		GridFieldSpec spec2 = new GridFieldSpec();
 		String ColumnZeroHeader = "column 0";
 		spec2.setColumnZeroLabel(ColumnZeroHeader);
-		GridTableModel model2 = new GridTableModel(spec2);
+		GridTableModel model2 = new GridTableModel(spec2, PoolOfReusableChoicesLists.EMPTY_POOL);
 		assertEquals(ColumnZeroHeader, model2.getColumnName(0));
 		
 		assertEquals(0, listener.deletedCalls());

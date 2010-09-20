@@ -41,6 +41,7 @@ import org.martus.common.FieldSpecCollection;
 import org.martus.common.GridData;
 import org.martus.common.GridRow;
 import org.martus.common.MiniLocalization;
+import org.martus.common.PoolOfReusableChoicesLists;
 import org.martus.common.ReusableChoices;
 import org.martus.common.bulletin.AttachmentProxy;
 import org.martus.common.bulletin.Bulletin;
@@ -89,6 +90,7 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 			attachmentDirectory = createTempDirectory();
 			store = app.getStore();
 		}
+		noReusableChoices = PoolOfReusableChoicesLists.EMPTY_POOL;
 	}
 	
 	public void tearDown() throws Exception
@@ -308,8 +310,8 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 		
 		Bulletin b = new Bulletin(store.getSignatureGenerator(), fields.getSpecs(), StandardFieldSpecs.getDefaultBottomSectionFieldSpecs());
 		b.setAllPrivate(false);
-		GridData gridData = new GridData(newSpec);
-		GridRow row = new GridRow(newSpec);
+		GridData gridData = new GridData(newSpec, noReusableChoices);
+		GridRow row = new GridRow(newSpec, noReusableChoices);
 		row.setCellText(0, "rowData1");
 		row.setCellText(1, "rowData2");
 		row.setCellText(2, "20060504");
@@ -742,7 +744,7 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 		FieldSpec dateRangeSpec = FieldSpec.createCustomField("range", "Date Range", new FieldTypeDateRange());
 		gridSpec.addColumn(dateRangeSpec);
 		
-		GridData data = new GridData(gridSpec);
+		GridData data = new GridData(gridSpec, noReusableChoices);
 		data.addEmptyRow();
 		String rawDateRangeString = createSampleDateRangeString();
 		data.setValueAt(rawDateRangeString, 0, 0);
@@ -803,8 +805,8 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 		Bulletin exported = new Bulletin(store.getSignatureGenerator(), topSpecs, bottomSpecs);
 		exported.setAllPrivate(false);
 
-		GridData gridData = new GridData(gridSpec);
-		GridRow row = new GridRow(gridSpec);
+		GridData gridData = new GridData(gridSpec, noReusableChoices);
+		GridRow row = new GridRow(gridSpec, noReusableChoices);
 		row.setCellText(0, choice1);
 		row.setCellText(1, "True");
 		row.setCellText(2, "20060504");
@@ -956,4 +958,5 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 	static MockMartusApp app;
 	static File attachmentDirectory;
 	int failingAttachments;
+	private PoolOfReusableChoicesLists noReusableChoices;
 }

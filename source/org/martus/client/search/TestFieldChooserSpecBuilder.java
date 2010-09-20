@@ -39,6 +39,7 @@ import org.martus.common.EnglishCommonStrings;
 import org.martus.common.FieldSpecCollection;
 import org.martus.common.GridData;
 import org.martus.common.MiniLocalization;
+import org.martus.common.PoolOfReusableChoicesLists;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.bulletin.BulletinConstants;
 import org.martus.common.crypto.MartusCrypto;
@@ -165,7 +166,7 @@ public class TestFieldChooserSpecBuilder extends TestCaseEnhanced
 		gridSpec.addColumn(FieldSpec.createCustomField("", "Label", new FieldTypeNormal()));
 		MartusCrypto security = getStore().getSignatureGenerator();
 		Bulletin b = new Bulletin(security, new FieldSpecCollection(new FieldSpec[] {gridSpec}), new FieldSpecCollection());
-		GridData gridData = new GridData(gridSpec);
+		GridData gridData = new GridData(gridSpec, PoolOfReusableChoicesLists.EMPTY_POOL);
 		gridData.addEmptyRow();
 		gridData.setValueAt("Data", 0, 0);
 		b.set(gridSpec.getTag(), gridData.getXmlRepresentation());

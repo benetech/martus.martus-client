@@ -50,7 +50,7 @@ public class FancySearchHelper
 	public FancySearchHelper(ClientBulletinStore storeToUse, UiDialogLauncher dlgLauncherToUse)
 	{
 		dlgLauncher = dlgLauncherToUse;
-		model = new FancySearchTableModel(getGridSpec(storeToUse), dlgLauncherToUse.GetLocalization());
+		model = new FancySearchTableModel(getGridSpec(storeToUse), storeToUse.getAllReusableChoiceLists(), dlgLauncherToUse.GetLocalization());
 	}
 	
 	UiLocalization getLocalization()

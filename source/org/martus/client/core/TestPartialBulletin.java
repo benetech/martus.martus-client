@@ -28,6 +28,7 @@ package org.martus.client.core;
 import org.martus.common.FieldSpecCollection;
 import org.martus.common.GridData;
 import org.martus.common.MiniLocalization;
+import org.martus.common.PoolOfReusableChoicesLists;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.crypto.MockMartusSecurity;
 import org.martus.common.field.MartusDateRangeField;
@@ -111,7 +112,7 @@ public class TestPartialBulletin extends TestCaseEnhanced
 		gridSpec.setLabel("Grid");
 		gridSpec.addColumn(FieldSpec.createCustomField("", "Label", new FieldTypeNormal()));
 		Bulletin b = new Bulletin(security, new FieldSpecCollection(new FieldSpec[] {gridSpec}), new FieldSpecCollection());
-		GridData gridData = new GridData(gridSpec);
+		GridData gridData = new GridData(gridSpec, PoolOfReusableChoicesLists.EMPTY_POOL);
 		gridData.addEmptyRow();
 		String sampleCellValue = "Data";
 		gridData.setValueAt(sampleCellValue, 0, 0);

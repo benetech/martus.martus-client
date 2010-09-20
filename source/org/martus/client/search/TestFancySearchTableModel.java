@@ -32,6 +32,7 @@ import org.martus.client.swingui.dialogs.UiDialogLauncher;
 import org.martus.client.test.MockMartusApp;
 import org.martus.clientside.UiLocalization;
 import org.martus.common.MiniLocalization;
+import org.martus.common.PoolOfReusableChoicesLists;
 import org.martus.common.fieldspec.DropDownFieldSpec;
 import org.martus.common.fieldspec.FieldTypeAnyField;
 import org.martus.common.fieldspec.FieldTypeBoolean;
@@ -63,7 +64,7 @@ public class TestFancySearchTableModel extends TestCaseEnhanced
 		UiDialogLauncher nullLauncher = new UiDialogLauncher(null, localization);
 		FancySearchHelper helper = new FancySearchHelper(store, nullLauncher);
 		GridFieldSpec gridSpec = helper.getGridSpec(store);
-		FancySearchTableModel model = new FancySearchTableModel(gridSpec, localization);
+		FancySearchTableModel model = new FancySearchTableModel(gridSpec, PoolOfReusableChoicesLists.EMPTY_POOL, localization);
 		model.addEmptyRow();
 		assertEquals(new FieldTypeNormal(), model.getColumnType(FancySearchTableModel.valueColumn));
 
@@ -88,7 +89,7 @@ public class TestFancySearchTableModel extends TestCaseEnhanced
 	{
 		MartusLocalization localization = new MartusLocalization(null, new String[0]);
 		GridFieldSpec gridSpec = new GridFieldSpec();
-		FancySearchTableModel model = new FancySearchTableModel(gridSpec, localization);
+		FancySearchTableModel model = new FancySearchTableModel(gridSpec, PoolOfReusableChoicesLists.EMPTY_POOL, localization);
 		DropDownFieldSpec normalSpec = model.getCurrentOpColumnSpec(new FieldTypeNormal());
 		assertEquals("not all ops available for normal?", 7, normalSpec.getCount());
 		DropDownFieldSpec multilineSpec = model.getCurrentOpColumnSpec(new FieldTypeMultiline());

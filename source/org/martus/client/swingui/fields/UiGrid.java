@@ -68,7 +68,7 @@ abstract public class UiGrid extends UiField
 {
 	public UiGrid(UiMainWindow mainWindowToUse, GridFieldSpec fieldSpec, UiDialogLauncher dlgLauncher, UiFieldContext context, UiFieldCreator fieldCreatorToUse)
 	{
-		this(mainWindowToUse, new GridTableModel(fieldSpec), dlgLauncher, context, fieldCreatorToUse);
+		this(mainWindowToUse, new GridTableModel(fieldSpec, context.getReusableChoicesLists()), dlgLauncher, context, fieldCreatorToUse);
 	}
 	
 	public UiGrid(UiMainWindow mainWindowToUse, GridTableModel modelToUse, UiDialogLauncher dlgLauncher, UiFieldContext contextToUse, UiFieldCreator fieldCreatorToUse)
@@ -99,6 +99,11 @@ abstract public class UiGrid extends UiField
 	public void updateDataDrivenColumnWidth(int column, ReusableChoices[] choices)
 	{
 		table.updateDataDrivenColumnWidth(column, choices);
+	}
+	
+	public UiFieldContext getContext()
+	{
+		return context;
 	}
 
 	String getGridTag()

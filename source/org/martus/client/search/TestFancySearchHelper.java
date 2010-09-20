@@ -38,6 +38,7 @@ import org.martus.client.swingui.dialogs.UiDialogLauncher;
 import org.martus.client.test.MockMartusApp;
 import org.martus.common.GridData;
 import org.martus.common.MiniLocalization;
+import org.martus.common.PoolOfReusableChoicesLists;
 import org.martus.common.field.MartusField;
 import org.martus.common.fieldspec.ChoiceItem;
 import org.martus.common.fieldspec.DropDownFieldSpec;
@@ -69,6 +70,7 @@ public class TestFancySearchHelper extends TestCaseEnhanced
 		localization.setCurrentLanguageCode(MiniLocalization.ENGLISH);
 		UiDialogLauncher nullLauncher = new UiDialogLauncher(null,localization);
 		helper = new FancySearchHelper(getStore(), nullLauncher);
+		noReusableChoices = PoolOfReusableChoicesLists.EMPTY_POOL;
 		
 	}
 	
@@ -118,7 +120,7 @@ public class TestFancySearchHelper extends TestCaseEnhanced
 		spec.addColumn(FieldSpec.createStandardField("op", new FieldTypeNormal()));
 		spec.addColumn(FieldSpec.createStandardField("value", new FieldTypeNormal()));
 		spec.addColumn(FieldSpec.createStandardField("andor", new FieldTypeNormal()));
-		GridData data = new GridData(spec);
+		GridData data = new GridData(spec, noReusableChoices);
 		addRow(data, new MiniFieldSpec(booleanSpec).toJson().toString(), "=", "1", "or");
 		
 		SearchTreeNode booleanEquals = helper.getSearchTree(data);
@@ -140,7 +142,7 @@ public class TestFancySearchHelper extends TestCaseEnhanced
 		spec.addColumn(FieldSpec.createStandardField("op", new FieldTypeNormal()));
 		spec.addColumn(FieldSpec.createStandardField("value", new FieldTypeNormal()));
 		spec.addColumn(helper.createAndOrColumnSpec());
-		GridData data = new GridData(spec);
+		GridData data = new GridData(spec, noReusableChoices);
 		
 		data.addEmptyRow();
 		SearchTreeNode emptyRoot = helper.getSearchTree(data);
@@ -173,7 +175,7 @@ public class TestFancySearchHelper extends TestCaseEnhanced
 		spec.addColumn(FieldSpec.createStandardField("op", new FieldTypeNormal()));
 		spec.addColumn(FieldSpec.createStandardField("value", new FieldTypeNormal()));
 		spec.addColumn(FieldSpec.createStandardField("andor", new FieldTypeNormal()));
-		GridData data = new GridData(spec);
+		GridData data = new GridData(spec, noReusableChoices);
 		addRow(data, new MiniFieldSpec(a).toJson().toString(), "=", "b", "or");
 		addRow(data, new MiniFieldSpec(c).toJson().toString(), "=", "d", "or");
 		
@@ -198,7 +200,7 @@ public class TestFancySearchHelper extends TestCaseEnhanced
 		assertEquals("didn't save second lookFor?", "d", row2.getString(FancySearchHelper.TAG_LOOK_FOR));
 		assertEquals("didn't save second andor?", "or", row2.getString(FancySearchHelper.TAG_AND_OR));
 		
-		GridData got = new GridData(data.getSpec());
+		GridData got = new GridData(data.getSpec(), noReusableChoices);
 		helper.setSearchFromJson(got, json);
 		assertEquals("didn't restore rows?", data.getRowCount(), got.getRowCount());
 		for(int row = 0; row < got.getRowCount(); ++row)
@@ -225,7 +227,7 @@ public class TestFancySearchHelper extends TestCaseEnhanced
 		spec.addColumn(FieldSpec.createStandardField("op", new FieldTypeNormal()));
 		spec.addColumn(FieldSpec.createStandardField("value", new FieldTypeNormal()));
 		spec.addColumn(FieldSpec.createStandardField("andor", new FieldTypeNormal()));
-		GridData data = new GridData(spec);
+		GridData data = new GridData(spec, noReusableChoices);
 		addRow(data, "", "", "whiz", "or");
 		addRow(data, fields[1].getCode(), "", "c1 and c2", "or");
 		addRow(data, fields[2].getCode(), ">", " f", "and");
@@ -299,4 +301,5 @@ public class TestFancySearchHelper extends TestCaseEnhanced
 	File tempDir;
 	MartusLocalization localization;
 	FancySearchHelper helper;
+	private PoolOfReusableChoicesLists noReusableChoices;
 }

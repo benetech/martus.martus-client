@@ -33,6 +33,7 @@ import org.martus.client.core.SafeReadableBulletin;
 import org.martus.common.FieldSpecCollection;
 import org.martus.common.GridData;
 import org.martus.common.MiniLocalization;
+import org.martus.common.PoolOfReusableChoicesLists;
 import org.martus.common.bulletin.AttachmentProxy;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.crypto.MartusCrypto;
@@ -62,7 +63,8 @@ public class TestBulletinSearcher extends TestCaseEnhanced
 	
 	public void setUp()
 	{
-		 localization = new MiniLocalization();
+		localization = new MiniLocalization();
+		noReusableChoices = PoolOfReusableChoicesLists.EMPTY_POOL;
 	}
 	
 	public void testDoesMatchSpecificField() throws Exception
@@ -170,7 +172,7 @@ public class TestBulletinSearcher extends TestCaseEnhanced
 		
 		MartusCrypto security = MockMartusSecurity.createClient();
 		Bulletin realBulletin = new Bulletin(security, specs, StandardFieldSpecs.getDefaultBottomSectionFieldSpecs());
-		GridData data = new GridData(gridSpec);
+		GridData data = new GridData(gridSpec, noReusableChoices);
 		data.addEmptyRow();
 		data.setValueAt("first row", 0, 0);
 		data.addEmptyRow();
@@ -216,7 +218,7 @@ public class TestBulletinSearcher extends TestCaseEnhanced
 
 		MartusCrypto security = MockMartusSecurity.createClient();
 		Bulletin realBulletin = new Bulletin(security, specs, StandardFieldSpecs.getDefaultBottomSectionFieldSpecs());
-		GridData data = new GridData(gridSpec);
+		GridData data = new GridData(gridSpec, noReusableChoices);
 		data.addEmptyRow();
 		data.addEmptyRow();
 		data.addEmptyRow();
@@ -298,7 +300,7 @@ public class TestBulletinSearcher extends TestCaseEnhanced
 
 		MartusCrypto security = MockMartusSecurity.createClient();
 		Bulletin realBulletin = new Bulletin(security, specs, StandardFieldSpecs.getDefaultBottomSectionFieldSpecs());
-		GridData data = new GridData(gridSpec);
+		GridData data = new GridData(gridSpec, noReusableChoices);
 		data.addEmptyRow();
 		data.setValueAt(FIRST_NAME, 0, 0);
 		realBulletin.set(gridSpec.getTag(), data.getXmlRepresentation());
@@ -352,7 +354,7 @@ public class TestBulletinSearcher extends TestCaseEnhanced
 
 		MartusCrypto security = MockMartusSecurity.createClient();
 		Bulletin realBulletin = new Bulletin(security, specs, StandardFieldSpecs.getDefaultBottomSectionFieldSpecs());
-		GridData data = new GridData(gridSpec);
+		GridData data = new GridData(gridSpec, noReusableChoices);
 		data.addEmptyRow();
 		data.setValueAt(FIRST_NAME, 0, 0);
 		realBulletin.set(gridSpec.getTag(), data.getXmlRepresentation());
@@ -573,4 +575,5 @@ public class TestBulletinSearcher extends TestCaseEnhanced
 	}
 	
 	MiniLocalization localization;
+	private PoolOfReusableChoicesLists noReusableChoices;
 }
