@@ -59,9 +59,9 @@ public abstract class UiEditableGrid extends UiGrid implements FocusListener
 		initialize(maxGridCharacters);
 	}
 	
-	protected UiEditableGrid(UiMainWindow mainWindowToUse, GridTableModel modelToUse, UiDialogLauncher dlgLauncher, int maxGridCharacters)
+	protected UiEditableGrid(UiMainWindow mainWindowToUse, UiFieldContext contextToUse, GridTableModel modelToUse, UiDialogLauncher dlgLauncher, int maxGridCharacters)
 	{
-		super(mainWindowToUse, modelToUse, dlgLauncher, new UiFieldContext(), new UiEditableFieldCreator(mainWindowToUse, new UiFieldContext()));
+		super(mainWindowToUse, modelToUse, dlgLauncher, contextToUse, new UiEditableFieldCreator(mainWindowToUse, new UiFieldContext()));
 		initialize(maxGridCharacters);
 	}
 	

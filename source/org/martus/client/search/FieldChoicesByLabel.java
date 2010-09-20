@@ -37,6 +37,7 @@ import javax.swing.tree.TreeNode;
 
 import org.martus.common.MiniLocalization;
 import org.martus.common.fieldspec.ChoiceItem;
+import org.martus.common.fieldspec.CustomDropDownFieldSpec;
 import org.martus.common.fieldspec.DropDownFieldSpec;
 import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.fieldspec.MiniFieldSpec;
@@ -145,17 +146,20 @@ public class FieldChoicesByLabel
 	
 	public static boolean areDropDownChoicesMergeable(SearchableFieldChoiceItem choice1, SearchableFieldChoiceItem choice2)
 	{
-		FieldSpec spec1 = choice1.getSpec();
-		FieldSpec spec2 = choice2.getSpec();
-		if(!spec1.getType().isDropdown())
+		FieldSpec rawSpec1 = choice1.getSpec();
+		FieldSpec rawSpec2 = choice2.getSpec();
+		if(!rawSpec1.getType().isDropdown())
 			return false;
-		if(!spec2.getType().isDropdown())
+		if(!rawSpec2.getType().isDropdown())
 			return false;
-		if(!spec1.getTag().equals(spec2.getTag()))
+		if(!rawSpec1.getTag().equals(rawSpec2.getTag()))
 			return false;
-		if(!spec1.getLabel().equals(spec2.getLabel()))
+		if(!rawSpec1.getLabel().equals(rawSpec2.getLabel()))
 			return false;
-		return true;
+		
+		DropDownFieldSpec spec1 = (DropDownFieldSpec)rawSpec1;
+		DropDownFieldSpec spec2 = (DropDownFieldSpec)rawSpec2;
+		return (spec1.getReusableChoicesCodes().equals(spec2.getReusableChoicesCodes()));
 	}
 	
 	public static SearchableFieldChoiceItem mergeDropDownChoices(SearchableFieldChoiceItem mergeInto, SearchableFieldChoiceItem mergeFrom)
@@ -174,10 +178,11 @@ public class FieldChoicesByLabel
 				choices.add(moreChoices[i]);
 		}
 		
-		DropDownFieldSpec resultSpec = new DropDownFieldSpec((ChoiceItem[])choices.toArray(new ChoiceItem[0]));
+		CustomDropDownFieldSpec resultSpec = new CustomDropDownFieldSpec();
 		resultSpec.setTag(mergeInto.getSpec().getSubFieldTag());
 		resultSpec.setLabel(mergeInto.getSpec().getLabel());
 		resultSpec.setParent(mergeInto.getSpec().getParent());
+		resultSpec.pullDynamicChoiceSettingsFrom(specFrom);
 		return new SearchableFieldChoiceItem(resultSpec);
 	}
 

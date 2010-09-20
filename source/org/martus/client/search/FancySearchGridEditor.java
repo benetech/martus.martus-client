@@ -33,6 +33,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JTable;
 
 import org.json.JSONObject;
+import org.martus.client.bulletinstore.ClientBulletinStore;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.dialogs.UiDialogLauncher;
 import org.martus.client.swingui.fields.UiEditableGrid;
@@ -41,21 +42,28 @@ import org.martus.client.swingui.fields.UiPopUpTreeEditor;
 import org.martus.client.swingui.grids.GridPopUpTreeCellEditor;
 import org.martus.client.swingui.grids.GridTable;
 import org.martus.client.swingui.grids.SearchGridTable;
+import org.martus.common.FieldSpecCollection;
 import org.martus.swing.Utilities;
 
 public class FancySearchGridEditor extends UiEditableGrid
 {
 	public static FancySearchGridEditor create(UiMainWindow mainWindowToUse, UiDialogLauncher dlgLauncher)
 	{
-		FancySearchHelper helper = new FancySearchHelper(mainWindowToUse.getStore(), dlgLauncher);
-		FancySearchGridEditor gridEditor = new FancySearchGridEditor(mainWindowToUse, helper);
+		ClientBulletinStore store = mainWindowToUse.getStore();
+		FancySearchHelper helper = new FancySearchHelper(store, dlgLauncher);
+		UiFieldContext contextToUse = new UiFieldContext();
+		FieldSpecCollection allSpecs = new FieldSpecCollection();
+		allSpecs.addAllSpecs(store.getAllKnownFieldSpecs());
+		allSpecs.addAllReusableChoicesLists(store.getAllReusableChoiceLists());
+		contextToUse.setSectionFieldSpecs(allSpecs);
+		FancySearchGridEditor gridEditor = new FancySearchGridEditor(mainWindowToUse, helper, contextToUse);
 		gridEditor.initalize();
 		return gridEditor;
 	}
 	
-	private FancySearchGridEditor(UiMainWindow mainWindowToUse, FancySearchHelper helperToUse)
+	private FancySearchGridEditor(UiMainWindow mainWindowToUse, FancySearchHelper helperToUse, UiFieldContext contextToUse)
 	{
-		super(mainWindowToUse, helperToUse.getModel(), helperToUse.getDialogLauncher(), NUMBER_OF_COLUMNS_FOR_GRID);
+		super(mainWindowToUse, contextToUse, helperToUse.getModel(), helperToUse.getDialogLauncher(), NUMBER_OF_COLUMNS_FOR_GRID);
 		helper = helperToUse;
 		getTable().setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
 		setSearchForColumnWideEnoughForDates();

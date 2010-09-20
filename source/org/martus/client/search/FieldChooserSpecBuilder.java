@@ -166,11 +166,8 @@ public class FieldChooserSpecBuilder
 			specWithBetterLabel.setParent(parent);
 			specWithBetterLabel.setTag(tag);
 			specWithBetterLabel.setLabel(displayString);
-
-			specWithBetterLabel.setChoices(originalSpec.getAllChoices());
-			String[] reusableChoicesCodes = originalSpec.getReusableChoicesCodes();
-			for(int i = 0; i < reusableChoicesCodes.length; ++i)
-				specWithBetterLabel.addReusableChoicesCode(reusableChoicesCodes[i]);
+			specWithBetterLabel.pullDynamicChoiceSettingsFrom(originalSpec);
+			
 			choicesForThisField.add(new SearchableFieldChoiceItem(specWithBetterLabel));
 			return choicesForThisField;
 		}
