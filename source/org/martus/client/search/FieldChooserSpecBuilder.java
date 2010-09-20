@@ -34,11 +34,11 @@ import java.util.Vector;
 import org.martus.client.bulletinstore.ClientBulletinStore;
 import org.martus.common.MiniLocalization;
 import org.martus.common.PoolOfReusableChoicesLists;
-import org.martus.common.ReusableChoices;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.field.MartusDateRangeField;
 import org.martus.common.field.MartusGridField;
 import org.martus.common.fieldspec.ChoiceItem;
+import org.martus.common.fieldspec.CustomDropDownFieldSpec;
 import org.martus.common.fieldspec.DropDownFieldSpec;
 import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.fieldspec.FieldType;
@@ -161,17 +161,16 @@ public class FieldChooserSpecBuilder
 		if(thisType.isDropdown())
 		{
 			DropDownFieldSpec originalSpec = (DropDownFieldSpec)spec;
-			String reusableChoicesCode = originalSpec.getReusableChoicesCode();
 
-			DropDownFieldSpec specWithBetterLabel = new DropDownFieldSpec(originalSpec.getAllChoices());
+			CustomDropDownFieldSpec specWithBetterLabel = new CustomDropDownFieldSpec();
 			specWithBetterLabel.setParent(parent);
 			specWithBetterLabel.setTag(tag);
 			specWithBetterLabel.setLabel(displayString);
-			if(reusableChoicesCode != null)
-			{
-				ReusableChoices choices = reusableChoiceLists.getChoices(reusableChoicesCode);
-				specWithBetterLabel.setChoices(choices.getChoices());
-			}
+
+			specWithBetterLabel.setChoices(originalSpec.getAllChoices());
+			String[] reusableChoicesCodes = originalSpec.getReusableChoicesCodes();
+			for(int i = 0; i < reusableChoicesCodes.length; ++i)
+				specWithBetterLabel.addReusableChoicesCode(reusableChoicesCodes[i]);
 			choicesForThisField.add(new SearchableFieldChoiceItem(specWithBetterLabel));
 			return choicesForThisField;
 		}
