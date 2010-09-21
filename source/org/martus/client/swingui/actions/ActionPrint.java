@@ -86,7 +86,7 @@ public class ActionPrint extends UiMenuAction
 		mainWindow.requestFocus();
 	}
 
-	void printBulletins(Vector currentSelectedBulletins)
+	void printBulletins(Vector currentSelectedBulletins) throws Exception
 	{
 		UiPrintBulletinDlg dlg = new UiPrintBulletinDlg(mainWindow, currentSelectedBulletins);
 		dlg.setVisible(true);		
@@ -153,6 +153,11 @@ public class ActionPrint extends UiMenuAction
 				}
 				writer.writeln("</html>");
 			}
+			catch(Exception e)
+			{
+				e.printStackTrace();
+				mainWindow.notifyDlg(mainWindow, "notifyUnexpectedError");
+			}
 			finally
 			{
 				writer.close();
@@ -167,7 +172,7 @@ public class ActionPrint extends UiMenuAction
 		
 	}
 	
-	private void printToPrinter(Vector currentSelectedBulletins, boolean includePrivateData)
+	private void printToPrinter(Vector currentSelectedBulletins, boolean includePrivateData) throws Exception
 	{
 		for(int i=0; i < currentSelectedBulletins.size(); ++i)
 		{
@@ -182,7 +187,7 @@ public class ActionPrint extends UiMenuAction
 		}
 	}
 
-	private JComponent createBulletinView(Bulletin bulletin, boolean includePrivateData)
+	private JComponent createBulletinView(Bulletin bulletin, boolean includePrivateData) throws Exception
 	{
 		int width = mainWindow.getPreviewWidth();		
 		String html = "<html>" + getBulletinHtml(bulletin, includePrivateData, width) + "</html>";
@@ -219,7 +224,7 @@ public class ActionPrint extends UiMenuAction
 			preferredSize.width = (int)printableImageWdith;
 	}
 
-	private String getBulletinHtml(Bulletin bulletin, boolean includePrivateData, int width)
+	private String getBulletinHtml(Bulletin bulletin, boolean includePrivateData, int width) throws Exception
 	{
 		getApp().addHQLabelsWherePossible(bulletin.getAuthorizedToReadKeys());
 		boolean yourBulletin = bulletin.getAccount().equals(getApp().getAccountId());	
