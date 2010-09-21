@@ -28,6 +28,7 @@ package org.martus.client.swingui.fields;
 import java.util.HashMap;
 
 import org.martus.common.FieldSpecCollection;
+import org.martus.common.ListOfReusableChoicesLists;
 import org.martus.common.PoolOfReusableChoicesLists;
 import org.martus.common.ReusableChoices;
 import org.martus.common.fieldspec.ChoiceItem;
@@ -80,7 +81,7 @@ public class UiFieldContext
 		return (UiGrid)gridFieldsByTag.get(tag);
 	}
 
-	public ReusableChoices[] getCurrentDropdownChoices(DropDownFieldSpec spec)
+	public ListOfReusableChoicesLists getCurrentDropdownChoices(DropDownFieldSpec spec)
 	{
 		ChoiceItem[] choices = spec.getAllChoices();
 		
@@ -97,15 +98,15 @@ public class UiFieldContext
 
 		ReusableChoices onlyChoices = new ReusableChoices("", "");
 		onlyChoices.addAll(choices);
-		return new ReusableChoices[] {onlyChoices};
+		return new ListOfReusableChoicesLists(onlyChoices);
 	}
 
-	private ReusableChoices[] getReusableChoicesLists(String[] reusableChoicesCodes)
+	private ListOfReusableChoicesLists getReusableChoicesLists(String[] reusableChoicesCodes)
 	{
-		ReusableChoices[] reusableChoicesLists = new ReusableChoices[reusableChoicesCodes.length];
-		for(int i = 0; i < reusableChoicesLists.length; ++i)
+		ListOfReusableChoicesLists reusableChoicesLists = new ListOfReusableChoicesLists();
+		for(int i = 0; i < reusableChoicesCodes.length; ++i)
 		{
-			reusableChoicesLists[i] = fieldSpecs.getReusableChoices(reusableChoicesCodes[i]);
+			reusableChoicesLists.add(fieldSpecs.getReusableChoices(reusableChoicesCodes[i]));
 		}
 		return reusableChoicesLists;
 	}

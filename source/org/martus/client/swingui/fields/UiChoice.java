@@ -25,6 +25,7 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.fields;
 
+import org.martus.common.ListOfReusableChoicesLists;
 import org.martus.common.MiniLocalization;
 import org.martus.common.ReusableChoices;
 import org.martus.common.fieldspec.ChoiceItem;
@@ -46,8 +47,8 @@ abstract public class UiChoice extends UiField
 	{
 		ReusableChoices choices = new ReusableChoices("", "");
 		choices.addAll(newChoices);
-		setChoices(new ReusableChoices[] {choices});
+		setChoices(new ListOfReusableChoicesLists(choices));
 	}
 
-	abstract public void setChoices(ReusableChoices[] newChoices);
+	abstract public void setChoices(ListOfReusableChoicesLists newChoices);
 }

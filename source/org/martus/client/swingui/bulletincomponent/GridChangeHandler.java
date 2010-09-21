@@ -59,7 +59,7 @@ import org.martus.client.swingui.fields.UiField;
 import org.martus.client.swingui.fields.UiFieldContext;
 import org.martus.client.swingui.fields.UiGrid;
 import org.martus.client.swingui.grids.GridTableModel;
-import org.martus.common.ReusableChoices;
+import org.martus.common.ListOfReusableChoicesLists;
 import org.martus.common.fieldspec.ChoiceItem;
 import org.martus.common.fieldspec.DropDownFieldSpec;
 import org.martus.common.fieldspec.FieldSpec;
@@ -124,7 +124,7 @@ public class GridChangeHandler implements TableModelListener
 				continue;
 			needsUpdate = true;
 			
-			ReusableChoices[] choices = context.getCurrentDropdownChoices(dropdownSpec);
+			ListOfReusableChoicesLists choices = context.getCurrentDropdownChoices(dropdownSpec);
 			if(choices == null)
 				continue;
 			
@@ -153,10 +153,10 @@ public class GridChangeHandler implements TableModelListener
 		return (dataSourceGridTag.equals(modifiedGridTag));
 	}
 	
-	private String ensureValid(ReusableChoices[] allChoices, String text) 
+	private String ensureValid(ListOfReusableChoicesLists allChoices, String text) 
 	{
-		int LAST = allChoices.length - 1;
-		ChoiceItem[] choices = allChoices[LAST].getChoices();
+		int LAST = allChoices.size() - 1;
+		ChoiceItem[] choices = allChoices.get(LAST).getChoices();
 
 		for(int i = 0; i < choices.length; ++i)
 			if(choices[i].getCode().equals(text))

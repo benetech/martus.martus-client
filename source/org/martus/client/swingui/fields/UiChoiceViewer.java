@@ -32,8 +32,8 @@ import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.JComponent;
 
+import org.martus.common.ListOfReusableChoicesLists;
 import org.martus.common.MiniLocalization;
-import org.martus.common.ReusableChoices;
 import org.martus.common.fieldspec.ChoiceItem;
 import org.martus.swing.UiLabel;
 
@@ -53,11 +53,11 @@ public class UiChoiceViewer extends UiChoice
 	public void setText(String newText)
 	{
 		container.removeAll();
-		String[] displayText = new String[setsOfChoices.length];
-		for(int level = 0; level < setsOfChoices.length; ++level)
+		String[] displayText = new String[reusableChoicesLists.size()];
+		for(int level = 0; level < reusableChoicesLists.size(); ++level)
 		{
-			ChoiceItem[] choices = setsOfChoices[level].getChoices();
-			int LAST = setsOfChoices.length - 1;
+			ChoiceItem[] choices = reusableChoicesLists.get(level).getChoices();
+			int LAST = reusableChoicesLists.size() - 1;
 			if(level == LAST)
 			{
 				displayText[level] = findLabelByCode(choices, newText);
@@ -68,7 +68,7 @@ public class UiChoiceViewer extends UiChoice
 			}
 		}
 		
-		for(int level = 0; level < setsOfChoices.length; ++level)
+		for(int level = 0; level < reusableChoicesLists.size(); ++level)
 		{
 			UiLabel widget = new UiLabel();
 			widget.setText(" " + displayText[level] + " ");
@@ -108,11 +108,11 @@ public class UiChoiceViewer extends UiChoice
 		return new JComponent[0];
 	}
 
-	public void setChoices(ReusableChoices[] newChoices)
+	public void setChoices(ListOfReusableChoicesLists newChoices)
 	{
-		setsOfChoices = newChoices;
+		reusableChoicesLists = newChoices;
 	}
 
 	private Box container;
-	private ReusableChoices[] setsOfChoices;
+	private ListOfReusableChoicesLists reusableChoicesLists;
 }

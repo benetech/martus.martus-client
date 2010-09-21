@@ -36,7 +36,7 @@ import javax.swing.JComponent;
 
 import org.martus.client.swingui.dialogs.UiDialogLauncher;
 import org.martus.client.swingui.fields.UiFieldContext;
-import org.martus.common.ReusableChoices;
+import org.martus.common.ListOfReusableChoicesLists;
 import org.martus.common.fieldspec.ChoiceItem;
 import org.martus.common.fieldspec.DropDownFieldSpec;
 import org.martus.common.fieldspec.FieldSpec;
@@ -94,10 +94,10 @@ public abstract class GridTable extends UiTableWithCellEditingProtection
 		}
 	}
 	
-	public void updateDataDrivenColumnWidth(int column, ReusableChoices[] allChoices)
+	public void updateDataDrivenColumnWidth(int column, ListOfReusableChoicesLists allChoices)
 	{
-		int LAST = allChoices.length - 1;
-		ChoiceItem[] choices = allChoices[LAST].getChoices();
+		int LAST = allChoices.size() - 1;
+		ChoiceItem[] choices = allChoices.get(LAST).getChoices();
 
 		int dropDownColumnWidth = getDropDownColumnWidth(column, choices);
 		setColumnMaxWidth(column, dropDownColumnWidth);

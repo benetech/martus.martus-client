@@ -38,6 +38,7 @@ import javax.swing.JComponent;
 import javax.swing.JList;
 
 import org.martus.client.core.LanguageChangeListener;
+import org.martus.common.ListOfReusableChoicesLists;
 import org.martus.common.MiniLocalization;
 import org.martus.common.ReusableChoices;
 import org.martus.common.fieldspec.ChoiceItem;
@@ -179,7 +180,7 @@ public class UiChoiceEditor extends UiChoice implements ActionListener
 		return -1;
 	}
 
-	public void setChoices(ReusableChoices[] newChoices)
+	public void setChoices(ListOfReusableChoicesLists newChoices)
 	{
 		choiceLists = newChoices;
 		
@@ -189,9 +190,9 @@ public class UiChoiceEditor extends UiChoice implements ActionListener
 		comboBoxes.clear();
 		container.removeAll();
 
-		for(int level = 0; level < newChoices.length; ++level)
+		for(int level = 0; level < newChoices.size(); ++level)
 		{
-			ReusableChoices reusableChoices = newChoices[level];
+			ReusableChoices reusableChoices = newChoices.get(level);
 			ChoiceItem[] choices = reusableChoices.getChoices();
 	
 			UiComboBox combo = new UiComboBox();
@@ -257,7 +258,7 @@ public class UiChoiceEditor extends UiChoice implements ActionListener
 			ChoiceItem choice = (ChoiceItem) combo.getItemAt(row);
 			existingChoices.add(choice);
 		}
-		ReusableChoices possibleChoices = choiceLists[level];
+		ReusableChoices possibleChoices = choiceLists.get(level);
 		ReusableChoices newChoices = new ReusableChoices("", "");
 		for(int choiceIndex = 0; choiceIndex < possibleChoices.size(); ++choiceIndex)
 		{
@@ -298,7 +299,7 @@ public class UiChoiceEditor extends UiChoice implements ActionListener
 	
 	private Box container;
 	private Vector comboBoxes;
-	private ReusableChoices[] choiceLists;
+	private ListOfReusableChoicesLists choiceLists;
 	private LanguageChangeListener observer;
 }
 
