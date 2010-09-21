@@ -53,6 +53,19 @@ public class UiChoiceViewer extends UiChoice
 	public void setText(String newText)
 	{
 		container.removeAll();
+		String[] displayText = getDisplayValuesAtAllLevels(newText);
+		
+		for(int level = 0; level < reusableChoicesLists.size(); ++level)
+		{
+			UiLabel widget = new UiLabel();
+			widget.setText(" " + displayText[level] + " ");
+			widget.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+			container.add(widget);
+		}
+	}
+
+	private String[] getDisplayValuesAtAllLevels(String newText)
+	{
 		String[] displayText = new String[reusableChoicesLists.size()];
 		for(int level = 0; level < reusableChoicesLists.size(); ++level)
 		{
@@ -67,14 +80,7 @@ public class UiChoiceViewer extends UiChoice
 				displayText[level] = findLabelByPartialCode(choices, newText);
 			}
 		}
-		
-		for(int level = 0; level < reusableChoicesLists.size(); ++level)
-		{
-			UiLabel widget = new UiLabel();
-			widget.setText(" " + displayText[level] + " ");
-			widget.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-			container.add(widget);
-		}
+		return displayText;
 	}
 
 	private String findLabelByCode(ChoiceItem[] choices, String code)
