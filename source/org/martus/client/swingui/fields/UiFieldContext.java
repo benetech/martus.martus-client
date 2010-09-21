@@ -103,12 +103,7 @@ public class UiFieldContext
 
 	private ListOfReusableChoicesLists getReusableChoicesLists(String[] reusableChoicesCodes)
 	{
-		ListOfReusableChoicesLists reusableChoicesLists = new ListOfReusableChoicesLists();
-		for(int i = 0; i < reusableChoicesCodes.length; ++i)
-		{
-			reusableChoicesLists.add(fieldSpecs.getReusableChoices(reusableChoicesCodes[i]));
-		}
-		return reusableChoicesLists;
+		return new ListOfReusableChoicesLists(getReusableChoicesLists(), reusableChoicesCodes);
 	}
 
 	private ChoiceItem[] getDataDrivenChoices(DropDownFieldSpec spec,
