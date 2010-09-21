@@ -34,7 +34,6 @@ import javax.swing.JComponent;
 
 import org.martus.common.ListOfReusableChoicesLists;
 import org.martus.common.MiniLocalization;
-import org.martus.common.fieldspec.ChoiceItem;
 import org.martus.swing.UiLabel;
 
 public class UiChoiceViewer extends UiChoice
@@ -53,7 +52,7 @@ public class UiChoiceViewer extends UiChoice
 	public void setText(String newText)
 	{
 		container.removeAll();
-		String[] displayText = getDisplayValuesAtAllLevels(newText);
+		String[] displayText = reusableChoicesLists.getDisplayValuesAtAllLevels(newText);
 		
 		for(int level = 0; level < reusableChoicesLists.size(); ++level)
 		{
@@ -62,46 +61,6 @@ public class UiChoiceViewer extends UiChoice
 			widget.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 			container.add(widget);
 		}
-	}
-
-	private String[] getDisplayValuesAtAllLevels(String newText)
-	{
-		String[] displayText = new String[reusableChoicesLists.size()];
-		for(int level = 0; level < reusableChoicesLists.size(); ++level)
-		{
-			ChoiceItem[] choices = reusableChoicesLists.get(level).getChoices();
-			int LAST = reusableChoicesLists.size() - 1;
-			if(level == LAST)
-			{
-				displayText[level] = findLabelByCode(choices, newText);
-			}
-			else
-			{
-				displayText[level] = findLabelByPartialCode(choices, newText);
-			}
-		}
-		return displayText;
-	}
-
-	private String findLabelByCode(ChoiceItem[] choices, String code)
-	{
-		for(int index = 0; index < choices.length; ++index)
-			if(code.equals(choices[index].getCode()))
-				return choices[index].toString();
-		
-		return "";
-	}
-
-	private String findLabelByPartialCode(ChoiceItem[] choices, String code)
-	{
-		for(int index = 0; index < choices.length; ++index)
-		{
-			String thisCode = choices[index].getCode();
-			if(thisCode.length() > 0 && code.startsWith(thisCode))
-				return choices[index].toString();
-		}
-		
-		return "";
 	}
 
 	public JComponent getComponent()
