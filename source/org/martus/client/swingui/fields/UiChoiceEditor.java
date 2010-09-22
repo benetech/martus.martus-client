@@ -249,37 +249,48 @@ public class UiChoiceEditor extends UiChoice implements ActionListener
 
 	private void updateWidgetChoices(int level, String previousCode)
 	{
-		UiComboBox combo = getComboBox(level);
-		ChoiceItem wasSelected = (ChoiceItem) combo.getSelectedItem();
-
-		ReusableChoices existingChoices = new ReusableChoices("", "");
-		for(int row = 0; row < combo.getItemCount(); ++row)
-		{
-			ChoiceItem choice = (ChoiceItem) combo.getItemAt(row);
-			existingChoices.add(choice);
-		}
-		ReusableChoices possibleChoices = choiceLists.get(level);
-		ReusableChoices newChoices = new ReusableChoices("", "");
-		for(int choiceIndex = 0; choiceIndex < possibleChoices.size(); ++choiceIndex)
-		{
-			ChoiceItem choice = possibleChoices.get(choiceIndex);
-			if(choice.getCode().startsWith(previousCode))
-				newChoices.add(choice);
-		}
-		
-		if(newChoices.findByCode("") == null)
-			newChoices.insertAtTop(new ChoiceItem("", ""));
-
-		if(newChoices.equals(existingChoices))
+		if(isUpdateInProgress)
 			return;
 		
-		combo.removeAllItems();
-		for(int choiceIndex = 0; choiceIndex < newChoices.size(); ++choiceIndex)
+		isUpdateInProgress = true;
+		try
 		{
-			combo.addItem(newChoices.get(choiceIndex));
+			UiComboBox combo = getComboBox(level);
+			ChoiceItem wasSelected = (ChoiceItem) combo.getSelectedItem();
+	
+			ReusableChoices existingChoices = new ReusableChoices("", "");
+			for(int row = 0; row < combo.getItemCount(); ++row)
+			{
+				ChoiceItem choice = (ChoiceItem) combo.getItemAt(row);
+				existingChoices.add(choice);
+			}
+			ReusableChoices possibleChoices = choiceLists.get(level);
+			ReusableChoices newChoices = new ReusableChoices("", "");
+			for(int choiceIndex = 0; choiceIndex < possibleChoices.size(); ++choiceIndex)
+			{
+				ChoiceItem choice = possibleChoices.get(choiceIndex);
+				if(choice.getCode().startsWith(previousCode))
+					newChoices.add(choice);
+			}
+			
+			if(newChoices.findByCode("") == null)
+				newChoices.insertAtTop(new ChoiceItem("", ""));
+	
+			if(newChoices.equals(existingChoices))
+				return;
+			
+			combo.removeAllItems();
+			for(int choiceIndex = 0; choiceIndex < newChoices.size(); ++choiceIndex)
+			{
+				combo.addItem(newChoices.get(choiceIndex));
+			}
+			
+			combo.setSelectedItem(wasSelected);
 		}
-		
-		combo.setSelectedItem(wasSelected);
+		finally
+		{
+			isUpdateInProgress = false;
+		}
 	}
 
 	public JComponent getComponent()
@@ -301,5 +312,6 @@ public class UiChoiceEditor extends UiChoice implements ActionListener
 	private Vector comboBoxes;
 	private ListOfReusableChoicesLists choiceLists;
 	private LanguageChangeListener observer;
+	private boolean isUpdateInProgress;
 }
 
