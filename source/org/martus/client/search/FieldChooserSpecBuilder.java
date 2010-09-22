@@ -164,10 +164,7 @@ public class FieldChooserSpecBuilder
 		{
 			DropDownFieldSpec originalSpec = (DropDownFieldSpec)spec;
 
-			CustomDropDownFieldSpec specWithBetterLabel = new CustomDropDownFieldSpec();
-			specWithBetterLabel.setParent(parent);
-			specWithBetterLabel.setTag(tag);
-			specWithBetterLabel.setLabel(displayString);
+			CustomDropDownFieldSpec specWithBetterLabel = (CustomDropDownFieldSpec) FieldSpec.createSubField(parent, tag, displayString, new FieldTypeDropdown());
 			specWithBetterLabel.pullDynamicChoiceSettingsFrom(originalSpec);
 			
 			choicesForThisField.add(new SearchableFieldChoiceItem(specWithBetterLabel));
@@ -212,8 +209,10 @@ public class FieldChooserSpecBuilder
 			ReusableChoices reusableChoices = reusableChoicesPool.getChoices(reusableChoicesListsCodes[level]);
 			String levelTag = reusableChoices.getCode();
 			String levelLabel = reusableChoices.getLabel();
-			FieldSpec subFieldSpec = FieldSpec.createSubField(spec, levelTag, levelLabel, new FieldTypeDropdown());
-			choices.addAll(getChoiceItemsForThisField(spec, subFieldSpec, levelTag, displayPrefix + ": ", reusableChoicesPool));
+			CustomDropDownFieldSpec subFieldSpec = (CustomDropDownFieldSpec) FieldSpec.createSubField(spec, levelTag, displayPrefix + ": " + levelLabel, new FieldTypeDropdown());
+			for(int someLevels = 0; someLevels <= level; ++someLevels)
+				subFieldSpec.addReusableChoicesCode(reusableChoicesListsCodes[someLevels]);
+			choices.add(new SearchableFieldChoiceItem(subFieldSpec));
 		}
 		return choices;
 	}
