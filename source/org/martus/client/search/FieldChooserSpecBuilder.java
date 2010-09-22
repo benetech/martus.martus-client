@@ -34,6 +34,7 @@ import java.util.Vector;
 import org.martus.client.bulletinstore.ClientBulletinStore;
 import org.martus.common.MiniLocalization;
 import org.martus.common.PoolOfReusableChoicesLists;
+import org.martus.common.ReusableChoices;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.field.MartusDateRangeField;
 import org.martus.common.field.MartusGridField;
@@ -44,6 +45,7 @@ import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.fieldspec.FieldType;
 import org.martus.common.fieldspec.FieldTypeDate;
 import org.martus.common.fieldspec.FieldTypeDateRange;
+import org.martus.common.fieldspec.FieldTypeDropdown;
 import org.martus.common.fieldspec.FieldTypeNormal;
 import org.martus.common.fieldspec.GridFieldSpec;
 import org.martus.common.fieldspec.MiniFieldSpec;
@@ -169,6 +171,8 @@ public class FieldChooserSpecBuilder
 			specWithBetterLabel.pullDynamicChoiceSettingsFrom(originalSpec);
 			
 			choicesForThisField.add(new SearchableFieldChoiceItem(specWithBetterLabel));
+			if(specWithBetterLabel.getReusableChoicesCodes().length > 1)
+				choicesForThisField.addAll(createPerLevelChoicesForNestedDropdown(specWithBetterLabel, displayString, reusableChoiceLists));
 			return choicesForThisField;
 		}
 
@@ -198,6 +202,22 @@ public class FieldChooserSpecBuilder
 		return choicesForThisField;
 	}
 	
+	private Vector createPerLevelChoicesForNestedDropdown(CustomDropDownFieldSpec spec, String displayPrefix, PoolOfReusableChoicesLists reusableChoicesPool)
+	{
+		Vector choices = new Vector();
+		
+		String[] reusableChoicesListsCodes = spec.getReusableChoicesCodes();
+		for(int level = 0; level < reusableChoicesListsCodes.length; ++level)
+		{
+			ReusableChoices reusableChoices = reusableChoicesPool.getChoices(reusableChoicesListsCodes[level]);
+			String levelTag = reusableChoices.getCode();
+			String levelLabel = reusableChoices.getLabel();
+			FieldSpec subFieldSpec = FieldSpec.createSubField(spec, levelTag, levelLabel, new FieldTypeDropdown());
+			choices.addAll(getChoiceItemsForThisField(spec, subFieldSpec, levelTag, displayPrefix + ": ", reusableChoicesPool));
+		}
+		return choices;
+	}
+
 	public boolean shouldOmitType(FieldType type)
 	{
 		return false;

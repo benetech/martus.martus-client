@@ -40,6 +40,7 @@ import org.martus.common.FieldSpecCollection;
 import org.martus.common.GridData;
 import org.martus.common.MiniLocalization;
 import org.martus.common.PoolOfReusableChoicesLists;
+import org.martus.common.ReusableChoices;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.bulletin.BulletinConstants;
 import org.martus.common.crypto.MartusCrypto;
@@ -234,6 +235,48 @@ public class TestFieldChooserSpecBuilder extends TestCaseEnhanced
 		Set blankLabelChoices = searchBuilder.getChoiceItemsForThisField(blankLabel, getStore().getAllReusableChoiceLists());
 		ChoiceItem blankLabelChoice = (ChoiceItem)blankLabelChoices.iterator().next();
 		assertEquals("didn't use tag for blank label", blankLabel.getTag(), blankLabelChoice.toString());
+	}
+	
+	public void testGetChoiceItemsForThisFieldNestedDropDown() throws Exception
+	{
+		PoolOfReusableChoicesLists poolOfReusableChoiceLists = getStore().getAllReusableChoiceLists();
+		ReusableChoices choicesA = new ReusableChoices("choicesA", "Choices A");
+		poolOfReusableChoiceLists.add(choicesA);
+		ReusableChoices choicesB = new ReusableChoices("choicesB", "Choices B");
+		poolOfReusableChoiceLists.add(choicesB);
+		
+		CustomDropDownFieldSpec nestedDropDownSpec = new CustomDropDownFieldSpec();
+		nestedDropDownSpec.setTag("nested");
+		nestedDropDownSpec.setLabel("Nested Dropdown");
+		nestedDropDownSpec.addReusableChoicesCode("choicesA");
+		nestedDropDownSpec.addReusableChoicesCode("choicesB");
+		Set nestedChoices = searchBuilder.getChoiceItemsForThisField(nestedDropDownSpec, poolOfReusableChoiceLists);
+		assertEquals("Didn't create extra choice per level?", 3, nestedChoices.size());
+		Iterator iter = nestedChoices.iterator();
+		while(iter.hasNext())
+		{
+			ChoiceItem choice = (ChoiceItem) iter.next();
+			FieldSpec subSpec = choice.getSpec();
+			if(subSpec == null)
+				fail("Null spec? " + choice.getCode());
+			
+			if(subSpec.getTag().equals(nestedDropDownSpec.getTag()))
+			{
+				assertEquals("Wrong label?", nestedDropDownSpec.getLabel(), subSpec.getLabel());
+			}
+			else if(subSpec.getTag().contains(choicesA.getCode()))
+			{
+				assertEquals("Wrong label?", nestedDropDownSpec.getLabel() + ": " + choicesA.getLabel(), subSpec.getLabel());
+			}
+			else if(subSpec.getTag().contains(choicesB.getCode()))
+			{
+				assertEquals("Wrong label?", nestedDropDownSpec.getLabel() + ": " + choicesB.getLabel(), subSpec.getLabel());
+			}
+			else
+			{
+				fail("Unexpected choice: " + choice);
+			}
+		}
 	}
 	
 	public void testGetChoiceItemsForThisFieldGrid() throws Exception
