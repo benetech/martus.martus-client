@@ -40,6 +40,7 @@ import org.martus.common.bulletin.Bulletin;
 import org.martus.common.crypto.MartusCrypto;
 import org.martus.common.fieldspec.DataInvalidException;
 import org.martus.common.fieldspec.FieldSpec;
+import org.martus.swing.UiTableWithCellEditingProtection;
 
 public class UiBulletinEditor extends UiBulletinComponent implements HeadQuartersSelectionListener
 {
@@ -62,6 +63,7 @@ public class UiBulletinEditor extends UiBulletinComponent implements HeadQuarter
 	
 	public boolean isBulletinModified() throws Exception
 	{		
+		UiTableWithCellEditingProtection.savePendingEdits();
 		
 		Bulletin currentStateOfBulletinBeingEdited = mainWindow.getApp().getStore().createEmptyBulletin();					
 		copyDataToBulletin(currentStateOfBulletinBeingEdited);
