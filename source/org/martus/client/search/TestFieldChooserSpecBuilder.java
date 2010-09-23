@@ -264,14 +264,14 @@ public class TestFieldChooserSpecBuilder extends TestCaseEnhanced
 			{
 				assertEquals("Wrong label?", nestedDropDownSpec.getLabel(), subSpec.getLabel());
 			}
-			else if(subSpec.getTag().contains(choicesA.getCode()))
+			else if(subSpec.getTag().indexOf(choicesA.getCode()) >= 0)
 			{
 				assertEquals("Wrong label?", nestedDropDownSpec.getLabel() + ": " + choicesA.getLabel(), subSpec.getLabel());
 				assertTrue("Not a dropdown?", subSpec.getType().isDropdown());
 				CustomDropDownFieldSpec subDropdownSpec = (CustomDropDownFieldSpec)subSpec;
 				assertEquals(1, subDropdownSpec.getReusableChoicesCodes().length);
 			}
-			else if(subSpec.getTag().contains(choicesB.getCode()))
+			else if(subSpec.getTag().indexOf(choicesB.getCode()) >= 0)
 			{
 				assertEquals("Wrong label?", nestedDropDownSpec.getLabel() + ": " + choicesB.getLabel(), subSpec.getLabel());
 				assertTrue("Not a dropdown?", subSpec.getType().isDropdown());
