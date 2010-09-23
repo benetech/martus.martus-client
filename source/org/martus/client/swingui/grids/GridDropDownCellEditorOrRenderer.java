@@ -47,17 +47,16 @@ abstract public class GridDropDownCellEditorOrRenderer extends GridCellEditorAnd
 
 	public void spaceWasPressed()
 	{
+		UiComboBox comboBox = null;
 		Component focused = FocusManager.getCurrentManager().getFocusOwner();
 		if(focused instanceof UiComboBox)
-		{
-	        UiComboBox comboBox = (UiComboBox)focused;
+	        comboBox = (UiComboBox)focused;
+		else if(getFocusableComponents().length > 0)
+			comboBox = (UiComboBox) getFocusableComponents()[0];
+			
+		if(comboBox != null)
 	        if(!comboBox.isPopupVisible())
 	        	comboBox.requestFocus();
-		}
-		else
-		{
-			System.out.println("Space pressed on unknown component: " + focused);
-		}
 	}
 
 	public Component getTableCellEditorComponent(JTable tableToUse, Object codeString, boolean isSelected, int row, int column)
