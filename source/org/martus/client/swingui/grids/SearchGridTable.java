@@ -83,7 +83,7 @@ public class SearchGridTable extends GridTable
 		map.put(new FieldTypePopUpTree(), new GridPopUpTreeCellEditor(localization));
 	}
 
-	protected Collection getAllEditors()
+	public Collection getAllEditors()
 	{
 		return editors.values();
 	}

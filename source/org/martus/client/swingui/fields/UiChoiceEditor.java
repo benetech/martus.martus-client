@@ -30,6 +30,7 @@ import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 import java.util.Vector;
 
 import javax.swing.Box;
@@ -38,6 +39,10 @@ import javax.swing.JComponent;
 import javax.swing.JList;
 
 import org.martus.client.core.LanguageChangeListener;
+import org.martus.client.swingui.fields.UiEditableGrid.EnterAction;
+import org.martus.client.swingui.fields.UiEditableGrid.ShiftTabAction;
+import org.martus.client.swingui.fields.UiEditableGrid.SpaceAction;
+import org.martus.client.swingui.fields.UiEditableGrid.TabAction;
 import org.martus.common.ListOfReusableChoicesLists;
 import org.martus.common.MiniLocalization;
 import org.martus.common.ReusableChoices;
@@ -207,6 +212,7 @@ public class UiChoiceEditor extends UiChoice implements ActionListener
 			container.add(combo);
 		}
 		setText(existingValue);
+		reBindKeysForFocusableComponents();
 	}
 
 	public void actionPerformed(ActionEvent e) 
@@ -309,10 +315,35 @@ public class UiChoiceEditor extends UiChoice implements ActionListener
 		observer = listener;
 	}
 	
+	public void setActions(EnterAction enterActionToUse, SpaceAction spaceActionToUse, TabAction tabActionToUse, ShiftTabAction shiftTabActionToUse)
+	{
+		enterAction = enterActionToUse;
+		spaceAction = spaceActionToUse;
+		tabAction = tabActionToUse;
+		shiftTabAction = shiftTabActionToUse;
+	}
+	
+	private void reBindKeysForFocusableComponents()
+	{
+		for(int i = 0; i < getFocusableComponents().length; ++i)
+		{
+			JComponent component = getFocusableComponents()[i];
+			UiEditableGrid.bindKeyToAction(component, KeyEvent.VK_ENTER, UiEditableGrid.NO_MODIFIERS, enterAction);
+			UiEditableGrid.bindKeyToAction(component, KeyEvent.VK_SPACE, UiEditableGrid.NO_MODIFIERS, spaceAction);
+			UiEditableGrid.bindKeyToAction(component, KeyEvent.VK_TAB, UiEditableGrid.NO_MODIFIERS, tabAction);
+			UiEditableGrid.bindKeyToAction(component, KeyEvent.VK_TAB, KeyEvent.SHIFT_DOWN_MASK, shiftTabAction);
+		}
+	}
+
 	private Box container;
 	private Vector comboBoxes;
 	private ListOfReusableChoicesLists choiceLists;
 	private LanguageChangeListener observer;
 	private boolean isUpdateInProgress;
+
+	private EnterAction enterAction;
+	private SpaceAction spaceAction;
+	private TabAction tabAction;
+	private ShiftTabAction shiftTabAction;
 }
 

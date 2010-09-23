@@ -30,6 +30,7 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
+
 import javax.swing.AbstractCellEditor;
 import javax.swing.JComponent;
 import javax.swing.JTable;
@@ -38,7 +39,12 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.table.TableCellEditor;
 import javax.swing.table.TableCellRenderer;
+
 import org.martus.client.swingui.fields.UiField;
+import org.martus.client.swingui.fields.UiEditableGrid.EnterAction;
+import org.martus.client.swingui.fields.UiEditableGrid.ShiftTabAction;
+import org.martus.client.swingui.fields.UiEditableGrid.SpaceAction;
+import org.martus.client.swingui.fields.UiEditableGrid.TabAction;
 
 public class GridCellEditorAndRenderer extends AbstractCellEditor implements TableCellRenderer, TableCellEditor, FocusListener
 {
@@ -99,6 +105,11 @@ public class GridCellEditorAndRenderer extends AbstractCellEditor implements Tab
 		component.setBorder(border);
 		
 		return component;
+	}
+	
+	public void setActions(EnterAction enterActionToUse, SpaceAction spaceActionToUse, TabAction tabActionToUse, ShiftTabAction shiftTabActionToUse)
+	{
+		getUiField().setActions(enterActionToUse, spaceActionToUse, tabActionToUse, shiftTabActionToUse);
 	}
 	
 	public void focusGained(FocusEvent arg0)

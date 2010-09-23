@@ -178,7 +178,7 @@ public abstract class GridTable extends UiTableWithCellEditingProtection
 		return (JComponent[])components.toArray(new JComponent[0]);
 	}
 
-	abstract protected Collection getAllEditors();
+	abstract public Collection getAllEditors();
 
 	protected GridFieldSpec getGridFieldSpec()
 	{

@@ -28,6 +28,7 @@ package org.martus.client.swingui.grids;
 
 import java.awt.Component;
 
+import javax.swing.FocusManager;
 import javax.swing.JTable;
 
 import org.martus.client.swingui.fields.UiChoice;
@@ -46,9 +47,17 @@ abstract public class GridDropDownCellEditorOrRenderer extends GridCellEditorAnd
 
 	public void spaceWasPressed()
 	{
-        UiComboBox comboBox = (UiComboBox)getComponent();
-        if(!comboBox.isPopupVisible())
-        	comboBox.requestFocus();
+		Component focused = FocusManager.getCurrentManager().getFocusOwner();
+		if(focused instanceof UiComboBox)
+		{
+	        UiComboBox comboBox = (UiComboBox)focused;
+	        if(!comboBox.isPopupVisible())
+	        	comboBox.requestFocus();
+		}
+		else
+		{
+			System.out.println("Space pressed on unknown component: " + focused);
+		}
 	}
 
 	public Component getTableCellEditorComponent(JTable tableToUse, Object codeString, boolean isSelected, int row, int column)

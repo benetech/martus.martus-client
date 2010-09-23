@@ -31,6 +31,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.awt.event.KeyEvent;
+import java.util.Iterator;
 import java.util.Vector;
 
 import javax.swing.AbstractAction;
@@ -196,6 +197,13 @@ public abstract class UiEditableGrid extends UiGrid implements FocusListener
 		{
 			bindKeysForComponent(subComponents[i]);
 		}
+		
+		Iterator iter = table.getAllEditors().iterator();
+		while(iter.hasNext())
+		{
+			GridCellEditorAndRenderer editor = (GridCellEditorAndRenderer) iter.next();
+			editor.setActions(new EnterAction(), new SpaceAction(), new TabAction(), new ShiftTabAction());
+		}
 	}
 	
 	void bindKeysForComponent(JComponent component)
@@ -206,8 +214,11 @@ public abstract class UiEditableGrid extends UiGrid implements FocusListener
 		bindKeyToAction(component, KeyEvent.VK_TAB, KeyEvent.SHIFT_DOWN_MASK, new ShiftTabAction());
 	}
 
-	private void bindKeyToAction(JComponent component, int key, int modifiers, ActionWithName action)
+	public static void bindKeyToAction(JComponent component, int key, int modifiers, ActionWithName action)
 	{
+		if(action == null)
+			return;
+		
 		component.getInputMap().put(KeyStroke.getKeyStroke(key, modifiers), action.getName());
 		component.getActionMap().put(action.getName(), action);
 	}
@@ -254,7 +265,7 @@ public abstract class UiEditableGrid extends UiGrid implements FocusListener
 	
 
 	
-	class EnterAction extends ActionWithName
+	public class EnterAction extends ActionWithName
 	{
 		public String getName()
 		{
@@ -270,7 +281,7 @@ public abstract class UiEditableGrid extends UiGrid implements FocusListener
 		}
 	}
 	
-	class SpaceAction extends ActionWithName
+	public class SpaceAction extends ActionWithName
 	{
 		String getName()
 		{
@@ -300,7 +311,7 @@ public abstract class UiEditableGrid extends UiGrid implements FocusListener
 		}
 	}
 
-	class TabAction extends ActionWithName
+	public class TabAction extends ActionWithName
 	{
 		String getName()
 		{
@@ -328,7 +339,7 @@ public abstract class UiEditableGrid extends UiGrid implements FocusListener
 		}
 	}
 
-	class ShiftTabAction extends ActionWithName
+	public class ShiftTabAction extends ActionWithName
 	{
 		String getName()
 		{
@@ -410,7 +421,7 @@ public abstract class UiEditableGrid extends UiGrid implements FocusListener
 		UiDialogLauncher dlgLauncher;
 	}
 	
-	final int NO_MODIFIERS = 0;
+	public final static int NO_MODIFIERS = 0;
 	
 	private UiButton insertRow;
 

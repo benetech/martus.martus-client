@@ -52,7 +52,7 @@ abstract public class GridFieldTable extends GridTable
 		return renderers[column];
 	}
 	
-	protected Collection getAllEditors()
+	public Collection getAllEditors()
 	{
 		return Arrays.asList(editors);
 	}
