@@ -135,8 +135,15 @@ public abstract class GridTable extends UiTableWithCellEditingProtection
 
 	private int getDropDownColumnWidth(int column, DropDownFieldSpec spec)
 	{
-		ChoiceItem[] choices = spec.getAllChoices();
-		return getDropDownColumnWidth(column, choices);
+		int width = 0;
+		ListOfReusableChoicesLists lists = context.getCurrentDropdownChoices(spec);
+		for(int level = 0; level < lists.size(); ++level)
+		{
+			ChoiceItem[] choices = lists.get(level).getChoices();
+			width += getDropDownColumnWidth(column, choices);
+		}
+		
+		return width;
 	}
 
 	private int getDropDownColumnWidth(int column, ChoiceItem[] choices) 
