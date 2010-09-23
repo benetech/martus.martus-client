@@ -471,7 +471,7 @@ public class TestBulletinSearcher extends TestCaseEnhanced
 		FieldSpec spec = FieldSpec.createStandardField("daterange", new FieldTypeDateRange());
 		MartusDateRangeField dateRange = new MartusDateRangeField(spec);
 		dateRange.setData("");
-		assertFalse("empty date range contains a string?", dateRange.contains("lsijflidj"));
+		assertFalse("empty date range contains a string?", dateRange.contains("lsijflidj", localization));
 	}
 
 	public void testLocalId() throws Exception
