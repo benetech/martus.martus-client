@@ -182,6 +182,8 @@ public class UiChoiceEditor extends UiChoice implements ActionListener
 
 	public void setChoices(ListOfReusableChoicesLists newChoices)
 	{
+		if(newChoices == null)
+			System.out.println("UiChoiceEditor.setChoices called with null choices");
 		choiceLists = newChoices;
 		
 		String existingValue = getText();
@@ -193,13 +195,12 @@ public class UiChoiceEditor extends UiChoice implements ActionListener
 		for(int level = 0; level < newChoices.size(); ++level)
 		{
 			ReusableChoices reusableChoices = newChoices.get(level);
-			ChoiceItem[] choices = reusableChoices.getChoices();
 	
 			UiComboBox combo = new UiComboBox();
 			combo.setRenderer(new UiChoiceListCellRenderer());
-			for(int i = 0; i < choices.length; ++i)
+			for(int i = 0; i < reusableChoices.size(); ++i)
 			{
-				combo.addItem(choices[i]);
+				combo.addItem(reusableChoices.get(i));
 			}
 			combo.addActionListener(this);
 			comboBoxes.add(combo);
