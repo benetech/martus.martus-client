@@ -25,8 +25,6 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.fields;
 
-import java.awt.Container;
-
 import org.martus.common.ListOfReusableChoicesLists;
 import org.martus.common.MiniLocalization;
 import org.martus.common.ReusableChoices;
@@ -43,15 +41,6 @@ abstract public class UiChoice extends UiField
 	public void setSpec(UiFieldContext context, DropDownFieldSpec spec)
 	{
 		setChoices(context.getCurrentDropdownChoices(spec));
-		
-		Container parent = getComponent().getTopLevelAncestor();
-		if(parent != null)
-		{
-			parent.invalidate();
-			parent.validate();
-			parent.repaint();
-		}
-		
 	}
 	
 	public void setChoices(ChoiceItem[] newChoices)

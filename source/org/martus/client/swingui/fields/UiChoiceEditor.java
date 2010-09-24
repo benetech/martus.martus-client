@@ -251,6 +251,7 @@ public class UiChoiceEditor extends UiChoice implements ActionListener
 			}
 			combo.setEnabled(shouldBeEnabled);
 		}
+		getComponent().repaint();
 	}
 
 	private void updateWidgetChoices(int level, String previousCode)
