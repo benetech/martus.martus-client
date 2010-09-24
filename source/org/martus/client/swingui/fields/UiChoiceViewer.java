@@ -60,7 +60,8 @@ public class UiChoiceViewer extends UiChoice
 			if(displayText[level].length() > 0)
 			{
 				widget.setText(" " + displayText[level] + " ");
-				widget.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+				if(reusableChoicesLists.size() > 1)
+					widget.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 				container.add(widget);
 			}
 		}
