@@ -150,7 +150,6 @@ public class UiChoiceEditor extends UiChoice implements ActionListener
 			
 			if(rowToSelect < 0 && newCode.length() > 0)
 			{
-				System.out.println("UiChoiceEditor.setText: Couldn't find " + newCode);
 				rowToSelect = findItemByCode(widget, "");
 			}
 			widget.setSelectedIndex(rowToSelect);
