@@ -62,6 +62,7 @@ abstract public class GridDropDownCellEditorOrRenderer extends GridCellEditorAnd
 
 	public Component getTableCellEditorComponent(JTable tableToUse, Object codeString, boolean isSelected, int row, int column)
 	{
+		UiTableWithCellEditingProtection.savePendingEdits();
 		updateWidgetChoices(tableToUse, row, column);
 		return super.getTableCellEditorComponent(tableToUse, codeString, isSelected, row, column);
 	}
@@ -74,7 +75,6 @@ abstract public class GridDropDownCellEditorOrRenderer extends GridCellEditorAnd
 
 	private void updateWidgetChoices(JTable tableToUse, int row, int column)
 	{
-		UiTableWithCellEditingProtection.savePendingEdits();
 		DropDownFieldSpec spec = getFieldSpecForCell(tableToUse, row, column);
 		getChoiceField().setSpec(context, spec);
 	}
