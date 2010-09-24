@@ -51,6 +51,8 @@ Boston, MA 02111-1307, USA.
 
 package org.martus.client.swingui.bulletincomponent;
 
+import java.awt.Container;
+
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 
@@ -106,6 +108,15 @@ public class GridChangeHandler implements TableModelListener
 		
 		UiChoice choiceField = (UiChoice)field;
 		choiceField.setSpec(context, spec);
+
+		// NOTE: Attempted fix for TT 4123, combos blank out 
+		// on Windows--may be Java6 optimization issue
+		Container parent = choiceField.getComponent().getTopLevelAncestor();
+		if(parent != null)
+		{
+			parent.repaint();
+		}
+
 	}
 
 	private void updateDataDrivenDropdownsInsideGrid(GridFieldSpec gridSpecToBlankOut, UiGrid gridToBlankOut) 
