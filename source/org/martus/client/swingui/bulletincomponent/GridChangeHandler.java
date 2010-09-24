@@ -116,6 +116,7 @@ public class GridChangeHandler implements TableModelListener
 		{
 			parent.invalidate();
 			parent.validate();
+			parent.repaint();
 		}
 
 	}
