@@ -111,12 +111,11 @@ public class GridChangeHandler implements TableModelListener
 
 		// NOTE: Attempted fix for TT 4123, combos blank out 
 		// on Windows--may be Java6 optimization issue
-		Container parent = choiceField.getComponent().getParent();
+		Container parent = choiceField.getComponent().getTopLevelAncestor();
 		if(parent != null)
 		{
 			parent.invalidate();
 			parent.validate();
-			parent.repaint();
 		}
 
 	}
