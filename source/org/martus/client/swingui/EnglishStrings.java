@@ -892,60 +892,82 @@ public class EnglishStrings
 "field:messageErrorRequiredFieldBlankcause=This field is required and cannot be left blank: #FieldLabel#",
 
 "field:CreateCustomFieldsHelp1=The layout of the bulletins is dictated by an XML document.  By default the standard bulletin fields occur at the top of the Custom Field declaration, but they can be moved if desired.  However, there are four required fields that cannot be removed:  'author', 'entrydate', 'language' and 'title'.\n\n",
-"field:CreateCustomFieldsHelp2=For custom (non-standard) fields, you first select the type of field you want.  " +
-	"The possible choices are 'BOOLEAN', 'DATE', 'DATERANGE', 'DROPDOWN', 'GRID', 'LANGUAGE', 'MESSAGE', 'MULTILINE', 'STRING', and 'SECTION'. \n" +
-	"\n" +
+"field:CreateCustomFieldsHelp2=For custom (non-standard) fields, " +
+	"you first select the type of field you want.  " +
+	"The possible choices are 'BOOLEAN', 'DATE', 'DATERANGE', 'DROPDOWN', " +
+	"'GRID', 'LANGUAGE', 'MESSAGE', 'MULTILINE', 'STRING', and 'SECTION'. " +
+	"\n\n" +
 	"For each custom field you will need a unique identification tag.  " +
-	"This tag can be any word except those already used by the system (eg. 'author', 'summary', 'location', 'title' etc.), " +
+	"This tag can be any word except those already used by the system " +
+	"(eg. 'author', 'summary', 'location', 'title' etc.), " +
 	"and cannot contain spaces or special characters.  " +
-	"Examples of choices are 'VictimsName', 'EyeColorChoice', etc.\n" +
-	"\n" +
+	"Examples of choices are 'VictimsName', 'EyeColorChoice', etc." +
+	"\n\n" +
 	"Then you need a label which is displayed next to your custom field.  " +
-	"An example might be 'Name of 1st Witness'.\n" +
-	"\n" +
-	"You can create sections (which you can hide/unhide) in your bulletins using a SECTION field type.  \n" +
-	"\n" +
-	"You can put multiple fields on a single row in your bulletin by using <KeepWithPrevious/> in the field definition.\n" +
-	"\n" +
-	"You can require certain fields or grid columns to be entered before saving a bulletin by using </RequiredField> in the field definition.\n" +
-	"\n" +
-	"You can restrict date fields, date grid columns, date range fields, and date range grid columns " +
-	"by using <MinimumDate> and/or <MaximumDate> tags with a date in YYYY-MM-DD format. " +
-	"NOTE: The year must always be a 'Gregorian' year like 2009, even if Martus is configured to use Thai or Persian dates. " +
-	"A blank date, shown as <MaximumDate/>, means 'today', although it may allow one day earlier or later, due to time zone issues. \n" +
-	"\n" +
-	"You can populate drop-down lists (either inside or outside of a grid) with values that have been entered in a grid elsewhere in your bulletin by using <DataSource> instead of <Choices> in the field definition.\n" +
-	"\n" +
+	"An example might be 'Name of 1st Witness'." +
+	"\n\n" +
+	"You can create sections (which you can hide/unhide) in your bulletins " +
+	"using a SECTION field type.  " +
+	"\n\n" +
+	"You can put multiple fields on a single row in your bulletin by using " +
+	"<KeepWithPrevious/> in the field definition." +
+	"\n\n" +
+	"You can require certain fields or grid columns to be entered before " +
+	"saving a bulletin by using </RequiredField> in the field definition." +
+	"\n\n" +
+	"You can restrict date fields, date grid columns, date range fields, " +
+	"and date range grid columns by using <MinimumDate> and/or <MaximumDate> " +
+	"tags with a date in YYYY-MM-DD format. " +
+	"NOTE: The year must always be a 'Gregorian' year like 2009, " +
+	"even if Martus is configured to use Thai or Persian dates. " +
+	"A blank date, shown as <MaximumDate/>, means 'today', " +
+	"although it may allow one day earlier or later, " +
+	"due to time zone issues. " +
+	"\n\n" +
+	"You can populate drop-down lists (either inside or outside of a grid) " +
+	"in 3 ways - " +
+	"1) by entering a list of <Choices> values in the field definition, " +
+	"2) with values that have been entered in a grid elsewhere " +
+	"in your bulletin by using <DataSource>, and " +
+	"3) by creating a list of \"Reusable Choices\" that can be referred to " +
+	"by more than one field.  " +
+	"See examples below for the correct XML definition syntax to use." +
+	"\n\n" +
 	"Additional Comments\n" +
 	"1. XML is case-sensitive ('Witness' is not the same as 'witness') \n" +
 	"2. Quotes around type name can be single or double as long as they match " +
 	"(e.g. 'STRING\" is not valid. It must be 'STRING' or \"STRING\")\n" +
-	"3. A Boolean field will be displayed as a checkbox when editing and Yes/No when previewed or printed.\n" +
-	"4.  Use \"MESSAGE\" fields to give guidance on how to enter data, and to create comments/notes that will be displayed in every bulletin.\n" +
-	"\n" +
-	"See examples below:\n\n",
+	"3. A Boolean field will be displayed as a checkbox when editing and " +
+	"Yes/No when previewed or printed.\n" +
+	"4.  Use \"MESSAGE\" fields to give guidance on how to enter data, " +
+	"and to create comments/notes that will be displayed in every bulletin.\n" +
+	"5.  Dropdowns using a \"Reusable Choices\" list can have multiple levels " +
+	"(e.g. for locations that might have State and City), " +
+	"different fields can use one or more of the levels, " +
+	"and the number of levels is not limited." +
+	"\n\n" +
+	"See examples below:" +
+	"\n\n",
 "field:CreateCustomFieldsHelp3=\n" +
 	"<Field type='SECTION'>\n" +
-	"<Tag>sourcesection</Tag>\n" +
-	"<Label>Source Section</Label>\n" +
+	"<Tag>summarysection</Tag>\n" +
+	"<Label>Summary Section</Label>\n" +
 	"</Field>\n" +
 	"\n" +
 	"<Field type='DROPDOWN'>\n" +
 	"<Tag>BulletinSource</Tag>\n" +
 	"<Label>Source of bulletin information</Label>\n" +
 	"<RequiredField/>\n" +
-	"<Choices>\n<Choice>Media/Press</Choice>\n" +
+	"<Choices>\n" +
+	"<Choice>Media/Press</Choice>\n" +
 	"<Choice>Legal Report</Choice>\n" +
 	"<Choice>Personal Interview</Choice>\n" +
-	"<Choice>Other</Choice>\n</Choices>\n" +
-	"</Field>\n" +
-	"\n" +
-	"<Field type='STRING'>\n" +
+	"<Choice>Other</Choice>\n" +
+	"</Choices>\n" +
+	"</Field>\n\n<Field type='STRING'>\n" +
 	"<Tag>SpecifyOther</Tag>\n" +
 	"<Label>If \"Other\", please specify:</Label>\n" +
-	"</Field>\n" +
-	"\n" +
-	"<Field type='STRING'>\n" +
+	"</Field>\n\n<Field type='STRING'>\n" +
 	"<Tag>IntervieweeName</Tag>\n" +
 	"<Label>Interviewee Name</Label>\n" +
 	"</Field>\n" +
@@ -963,9 +985,7 @@ public class EnglishStrings
 	"<Field type='BOOLEAN'>\n" +
 	"<Tag>Anonymous</Tag>\n" +
 	"<Label>Does interviewee wish to remain anonymous?</Label>\n" +
-	"</Field>\n" +
-	"\n" +
-	"<Field type='BOOLEAN'>\n" +
+	"</Field>\n\n<Field type='BOOLEAN'>\n" +
 	"<Tag>AdditionalInfo</Tag>\n" +
 	"<Label>Is interviewee willing to give additional information if needed?</Label>\n" +
 	"<KeepWithPrevious/>\n" +
@@ -976,6 +996,14 @@ public class EnglishStrings
 	"<Label>Is interviewee willing to testify?</Label>\n" +
 	"<KeepWithPrevious/>\n" +
 	"</Field>\n" +
+	"\n" +
+	"<Field type='DROPDOWN'>\n" +
+	"<Tag>EventLocation</Tag>\n" +
+	"<Label>Event Location</Label>\n" +
+	"  <UseReusableChoices code='StateChoices'></UseReusableChoices>\n" +
+	"  <UseReusableChoices code='CityChoices'></UseReusableChoices>\n" +
+	"</Field>\n" +
+	"\n" +
 	"\n" +
 	"<Field type='SECTION'>\n" +
 	"<Tag>peoplesection</Tag>\n" +
@@ -991,19 +1019,19 @@ public class EnglishStrings
 	"<Column type='BOOLEAN'><Tag></Tag><Label>Is Identified?</Label></Column>\n" +
 	"<Column type='DATE'><Tag></Tag><Label>Date of Birth</Label><MinimumDate>1910-01-01</MinimumDate><MaximumDate/></Column>\n" +
 	"<Column type='DROPDOWN'><Tag></Tag><Label>Sex</Label><RequiredField/>\n" +
-		"<Choices>\n<Choice>Male</Choice>\n" +
-		"<Choice>Female</Choice>\n" +
-		"<Choice>Unknown</Choice>\n" +
-		"</Choices>" +
-	"</Column>\n" +
+	"<Choices>\n<Choice>Male</Choice>\n" +
+	"<Choice>Female</Choice>\n" +
+	"<Choice>Unknown</Choice>\n" +
+	"</Choices></Column>\n" +
+	"<Column type='DROPDOWN'><Tag></Tag><Label>State of Birth</Label>\n" +
+	"  <UseReusableChoices code='StateChoices'></UseReusableChoices></Column>\n" +
 	"<Column type='STRING'><Tag></Tag><Label>Ethnicity</Label></Column>\n" +
-	"</GridSpecDetails>\n" +
-	"</Field>\n" +
-	"\n" +
-	"<Field type='MESSAGE'>\n" +
+	"</GridSpecDetails>\n</Field>\n\n<Field type='MESSAGE'>\n" +
 	"<Tag>MessageProfession</Tag>\n" +
 	"<Label>Profession History Table Note</Label>\n" +
-	"<Message>If you have information about a person who has had different professions over time, enter multiple rows with the same First and Last Names and show the date ranges for each profession on a separate row.</Message>\n" +
+	"<Message>If you have information about a person who has had different professions over time, " +
+	"enter multiple rows with the same First and Last Names and show the date ranges " +
+	"for each profession on a separate row.</Message>\n" +
 	"</Field>\n" +
 	"\n" +
 	"<Field type='GRID'>\n" +
@@ -1017,15 +1045,32 @@ public class EnglishStrings
 	" </DataSource>\n" +
 	"</Column>\n" +
 	"<Column type='DROPDOWN'><Tag></Tag><Label>Last Name</Label>\n" +
-	" <DataSource>\n" +
-	" <GridFieldTag>VictimInformationGrid</GridFieldTag>\n" +
+	" <DataSource>\n <GridFieldTag>VictimInformationGrid</GridFieldTag>\n" +
 	" <GridColumnLabel>Last Name</GridColumnLabel>\n" +
 	" </DataSource>\n" +
 	"</Column>\n" +
 	"<Column type='STRING'><Tag></Tag><Label>Profession</Label></Column>\n" +
 	"<Column type='DATERANGE'><Tag></Tag><Label>Dates of Profession</Label><MaximumDate/></Column>\n" +
 	"</GridSpecDetails>\n" +
-	"</Field>\n",
+	"</Field>\n" +
+	"\n" +
+	"\n" +
+	"<ReusableChoices code='StateChoices' label='State'>\n" +
+	"  <Choice code='' label='(Not Selected)'></Choice>\n" +
+	"  <Choice code='1' label='California'></Choice>\n" +
+	"  <Choice code='2' label='New York'></Choice>\n" +
+	"  <Choice code='3' label='Texas'></Choice>\n" +
+	"</ReusableChoices>\n" +
+	"\n" +
+	"<ReusableChoices code='CityChoices' label='City'>\n" +
+	"  <Choice code='' label='(Not Selected)'></Choice>\n" +
+	"  <Choice code='1.01' label='San Francisco'></Choice>\n" +
+	"  <Choice code='1.02' label='Los Angeles'></Choice>\n" +
+	"  <Choice code='2.01' label='New York City'></Choice>\n" +
+	"  <Choice code='2.02' label='Albany'></Choice>\n" +
+	"  <Choice code='3.01' label='Dallas'></Choice>\n" +
+	"  <Choice code='3.02' label='Austin'></Choice>\n" +
+	"</ReusableChoices>\n",
 
 "field:inputservermagicwordentry=If you want to request permission to upload to this server, enter the 'magic word' now:",
 "field:inputImportPublicCodeentry=Enter the Public Identification Code for this account:",
