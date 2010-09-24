@@ -27,6 +27,7 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.swingui.fields;
 
 import java.awt.Component;
+import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -251,7 +252,14 @@ public class UiChoiceEditor extends UiChoice implements ActionListener
 			}
 			combo.setEnabled(shouldBeEnabled);
 		}
-		getComponent().repaint();
+		
+		// NOTE: Attempted fix for TT 4123, combos blank out 
+		// on Windows--may be Java6 optimization issue
+		Container parent = getComponent().getTopLevelAncestor();
+		if(parent != null)
+		{
+			parent.repaint();
+		}
 	}
 
 	private void updateWidgetChoices(int level, String previousCode)
