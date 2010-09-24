@@ -50,6 +50,8 @@ import java.util.logging.Logger;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
+import javax.swing.JOptionPane;
+
 import org.json.JSONObject;
 import org.martus.client.bulletinstore.BulletinFolder;
 import org.martus.client.bulletinstore.ClientBulletinStore;
@@ -143,6 +145,7 @@ public class MartusApp
 // Temporarily disabled for new build process
 // ALSO UN-COMMENT OUT THE CATCHES BELOW!!!
 //			MartusJarVerification.verifyJars();
+			JOptionPane.showMessageDialog(null, "JAR IS NOT BEING VERIFIED");
 
 			configInfo = new ConfigInfo();
 			currentUserName = "";
