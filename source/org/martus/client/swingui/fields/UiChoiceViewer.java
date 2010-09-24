@@ -57,9 +57,12 @@ public class UiChoiceViewer extends UiChoice
 		for(int level = 0; level < reusableChoicesLists.size(); ++level)
 		{
 			UiLabel widget = new UiLabel();
-			widget.setText(" " + displayText[level] + " ");
-			widget.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-			container.add(widget);
+			if(displayText[level].length() > 0)
+			{
+				widget.setText(" " + displayText[level] + " ");
+				widget.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+				container.add(widget);
+			}
 		}
 	}
 
