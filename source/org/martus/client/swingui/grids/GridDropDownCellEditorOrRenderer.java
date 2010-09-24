@@ -36,6 +36,7 @@ import org.martus.client.swingui.fields.UiField;
 import org.martus.client.swingui.fields.UiFieldContext;
 import org.martus.common.fieldspec.DropDownFieldSpec;
 import org.martus.swing.UiComboBox;
+import org.martus.swing.UiTableWithCellEditingProtection;
 
 abstract public class GridDropDownCellEditorOrRenderer extends GridCellEditorAndRenderer
 {
@@ -73,6 +74,7 @@ abstract public class GridDropDownCellEditorOrRenderer extends GridCellEditorAnd
 
 	private void updateWidgetChoices(JTable tableToUse, int row, int column)
 	{
+		UiTableWithCellEditingProtection.savePendingEdits();
 		DropDownFieldSpec spec = getFieldSpecForCell(tableToUse, row, column);
 		getChoiceField().setSpec(context, spec);
 	}
