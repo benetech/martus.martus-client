@@ -1157,6 +1157,10 @@ public class EnglishStrings
 	"   114 - Unknown Data Source Grid Column Label\n" +
 	"   115 - Dropdown cannot have both choices and data source\n" +
 	"   116 - Invalid date must be in ISO format YYYY-MM-DD\n" +
+	"   117 - No reusable choices list defined for Dropdown\n" +
+	"   118 - Reusable dropdown definition missing code value.  Please verify that the definition looks like the following:\n" +
+	"         <UseReusableChoices code='FieldChoices'></UseReusableChoices>\n" +
+	"   119 - Reusable choice must have a code and label\n" +
 	"   200 - All fields empty\n" +
 	"   201 - Unrecognized Headquarters created this template\n" +
 	"   202 - Security validation error\n" +
