@@ -145,7 +145,6 @@ public class MartusApp
 // Temporarily disabled for new build process
 // ALSO UN-COMMENT OUT THE CATCHES BELOW!!!
 //			MartusJarVerification.verifyJars();
-			JOptionPane.showMessageDialog(null, "JAR IS NOT BEING VERIFIED");
 
 			configInfo = new ConfigInfo();
 			currentUserName = "";
