@@ -1161,6 +1161,7 @@ public class EnglishStrings
 	"   118 - Reusable dropdown definition missing code value.  Please verify that the definition looks like the following:\n" +
 	"         <UseReusableChoices code='FieldChoices'></UseReusableChoices>\n" +
 	"   119 - Reusable choice must have a code and label\n" +
+	"   120 - Dropdown data source cannot be a nested dropdown\n" +
 	"   200 - All fields empty\n" +
 	"   201 - Unrecognized Headquarters created this template\n" +
 	"   202 - Security validation error\n" +
