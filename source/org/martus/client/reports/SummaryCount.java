@@ -27,17 +27,20 @@ package org.martus.client.reports;
 
 import java.util.Vector;
 
+import org.martus.common.ReusableChoices;
+import org.martus.common.fieldspec.ChoiceItem;
+
 public class SummaryCount
 {
 	public SummaryCount(StringVector labelsToUse)
 	{
 		otherLabels = new StringVector(labelsToUse);
 		label = "";
-		value = "";
+		value = new ChoiceItem("", "");
 		children = new Vector();
 	}
 	
-	public SummaryCount(StringVector labelsToUse, String valueToUse)
+	public SummaryCount(StringVector labelsToUse, ChoiceItem valueToUse)
 	{
 		otherLabels = new StringVector(labelsToUse);
 		label = otherLabels.remove(0);
@@ -50,9 +53,14 @@ public class SummaryCount
 		return label;
 	}
 	
+	public String getCode()
+	{
+		return value.getCode();
+	}
+	
 	public String value()
 	{
-		return value;
+		return value.toString();
 	}
 	
 	public int count()
@@ -75,34 +83,34 @@ public class SummaryCount
 		return children;
 	}
 	
-	public void increment(StringVector values)
+	public void increment(ReusableChoices values)
 	{
 		if(values.size() > 0)
 		{
-			String thisValue = values.remove(0);
-			SummaryCount sc = findOrCreateChild(values, thisValue);
+			ChoiceItem thisValue = values.remove(0);
+			SummaryCount sc = findOrCreateChild(thisValue);
 			sc.increment(values);
 		}
 		++count;
 	}
 
-	private SummaryCount findOrCreateChild(StringVector values, String thisValue)
+	private SummaryCount findOrCreateChild(ChoiceItem thisChoice)
 	{
-		int scIndex = find(thisValue);
+		int scIndex = findByCode(thisChoice.getCode());
 		if(scIndex >= 0)
 			return getChild(scIndex);
 		
-		SummaryCount sc = new SummaryCount(otherLabels, thisValue);
+		SummaryCount sc = new SummaryCount(otherLabels, thisChoice);
 		children.add(sc);
 		return sc;
 	}
 	
-	int find(String valueToFind)
+	private int findByCode(String codeToFind)
 	{
 		for(int i = 0; i < getChildCount(); ++i)
 		{
 			SummaryCount sc = getChild(i);
-			if(sc.value().equals(valueToFind))
+			if(sc.getCode().equals(codeToFind))
 				return i;
 		}
 		
@@ -119,7 +127,7 @@ public class SummaryCount
 	}
 	
 	String label;
-	String value;
+	ChoiceItem value;
 	int count;
 	StringVector otherLabels;
 	Vector children;

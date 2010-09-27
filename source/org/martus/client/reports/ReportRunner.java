@@ -38,12 +38,16 @@ import org.martus.client.core.SafeReadableBulletin;
 import org.martus.client.core.SortableBulletinList;
 import org.martus.common.MiniLocalization;
 import org.martus.common.PoolOfReusableChoicesLists;
+import org.martus.common.ReusableChoices;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.bulletin.BulletinLoader;
 import org.martus.common.crypto.MartusCrypto;
 import org.martus.common.database.DatabaseKey;
 import org.martus.common.database.ReadableDatabase;
 import org.martus.common.field.MartusField;
+import org.martus.common.field.MartusSearchableGridColumnField;
+import org.martus.common.fieldspec.ChoiceItem;
+import org.martus.common.fieldspec.CustomDropDownFieldSpec;
 import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.fieldspec.MiniFieldSpec;
 import org.martus.common.fieldspec.StandardFieldSpecs;
@@ -67,7 +71,7 @@ public class ReportRunner
 		ReportOutput breakDestination = destination;
 		if(options.hideDetail)
 			breakDestination = new NullReportOutput();
-		SummaryBreakHandler breakHandler = new SummaryBreakHandler(rf, breakDestination, options, bulletins.getSortSpecs(), reusableChoicesLists);
+		SummaryBreakHandler breakHandler = new SummaryBreakHandler(rf, breakDestination, options, bulletins.getSortSpecs());
 
 		context = new VelocityContext();
 		context.put("localization", localization);
@@ -197,7 +201,7 @@ public class ReportRunner
 	
 	class SummaryBreakHandler
 	{
-		public SummaryBreakHandler(ReportFormat reportFormatToUse, ReportOutput destination, RunReportOptions options, MiniFieldSpec[] breakSpecsToUse, PoolOfReusableChoicesLists reusableChoicesListsToUse)
+		public SummaryBreakHandler(ReportFormat reportFormatToUse, ReportOutput destination, RunReportOptions options, MiniFieldSpec[] breakSpecsToUse)
 		{
 			output = destination;
 			
@@ -205,10 +209,10 @@ public class ReportRunner
 			breakSpecs = breakSpecsToUse;
 			if(!options.printBreaks)
 				breakSpecs = new MiniFieldSpec[0];
-			reusableChoicesLists = reusableChoicesListsToUse;
 			
-			previousBreakValues = new String[breakSpecs.length];
-			Arrays.fill(previousBreakValues, "");
+			previousBreakValues = new ReusableChoices("", "");
+			for(int i = 0; i < breakSpecs.length; ++i)
+				previousBreakValues.add(new ChoiceItem("", ""));
 			breakCounts = new int[breakSpecs.length];
 			Arrays.fill(breakCounts, 0);
 			
@@ -225,7 +229,7 @@ public class ReportRunner
 		{
 			if(upcomingBulletin != null)
 			{
-				StringVector values = new StringVector();
+				ReusableChoices values = new ReusableChoices("", "");
 				for(int i = 0; i < breakSpecs.length; ++i)
 				{
 					values.add(getBreakData(upcomingBulletin, i));
@@ -242,19 +246,19 @@ public class ReportRunner
 			{
 				if(breakCounts[0] > 0)
 					performBreak(level);
-				String current = getBreakData(upcomingBulletin, level);
-				previousBreakValues[level] = current;
+				ChoiceItem currentAsChoiceItem = getBreakData(upcomingBulletin, level);
+				previousBreakValues.set(level, currentAsChoiceItem);
 				breakCounts[level] = 0;
 			}
 		}
 
-		private int computeBreakLevel(SafeReadableBulletin upcomingBulletin)
+		private int computeBreakLevel(SafeReadableBulletin upcomingBulletin) throws Exception
 		{
 			int breakLevel = -1;
 			for(int level = 0; level < breakSpecs.length; ++level)
 			{
-				String current = getBreakData(upcomingBulletin, level);
-				if(current == null || !current.equals(previousBreakValues[level]))
+				ChoiceItem current = getBreakData(upcomingBulletin, level);
+				if(current == null || !current.equals(previousBreakValues.get(level)))
 				{
 					breakLevel = level;
 					break;
@@ -275,29 +279,42 @@ public class ReportRunner
 			return summaryCounts;
 		}
 
-		private String getBreakData(SafeReadableBulletin upcomingBulletin, int breakLevel)
+		private ChoiceItem getBreakData(SafeReadableBulletin upcomingBulletin, int breakLevel) throws Exception
 		{
 			if(upcomingBulletin == null)
 				return null;
 			
-			String current = "";
 			MartusField thisField = upcomingBulletin.getPossiblyNestedField(breakSpecs[breakLevel]);
-			if(thisField != null)
-				current = thisField.getData();
-			return current;
+			if(thisField == null)
+				return new ChoiceItem("", "");
+			
+			String currentCode = thisField.getData();
+			String currentValue = thisField.html(localization);
+			return new ChoiceItem(currentCode, currentValue);
 		}
 		
 		private void performBreak(int breakLevel) throws Exception
 		{
+			PoolOfReusableChoicesLists reusableChoicesForThisBreakOnly = new PoolOfReusableChoicesLists();
 			BreakFields breakFields = new BreakFields();
 			for(int i = 0; i < breakLevel + 1; ++i)
 			{
 				MiniFieldSpec miniSpec = breakSpecs[i];
 				FieldSpec spec = miniSpec.getType().createEmptyFieldSpec();
+				ChoiceItem previousValue = previousBreakValues.get(i);
+				if(spec.getType().isDropdown())
+				{
+					CustomDropDownFieldSpec dropdownSpec = (CustomDropDownFieldSpec) spec;
+					ChoiceItem choice = new ChoiceItem(previousValue.getCode(), previousValue.toString());
+					ReusableChoices choicesForThisBreak = new ReusableChoices("choices", "");
+					choicesForThisBreak.add(choice);
+					reusableChoicesForThisBreakOnly.add(choicesForThisBreak);
+					dropdownSpec.addReusableChoicesCode(choicesForThisBreak.getCode());
+				}
 				spec.setTag(miniSpec.getTag());
 				spec.setLabel(miniSpec.getLabel());
-				MartusField field = new MartusField(spec, reusableChoicesLists);
-				field.setData(previousBreakValues[i]);
+				MartusField field = MartusSearchableGridColumnField.createMartusField(spec, reusableChoicesForThisBreakOnly);
+				field.setData(previousValue.getCode());
 				breakFields.add(field);
 			}
 			context.put("BreakLevel", new Integer(breakLevel));
@@ -322,9 +339,8 @@ public class ReportRunner
 		ReportFormat rf;
 		MiniFieldSpec[] breakSpecs;
 		int[] breakCounts;
-		String[] previousBreakValues;
+		ReusableChoices previousBreakValues;
 		SummaryCount summaryCounts;
-		private PoolOfReusableChoicesLists reusableChoicesLists;
 	}
 	
 	public void performMerge(String template, Writer result) throws Exception

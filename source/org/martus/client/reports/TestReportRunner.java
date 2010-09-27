@@ -39,6 +39,7 @@ import org.martus.common.FieldSpecCollection;
 import org.martus.common.LegacyCustomFields;
 import org.martus.common.MiniLocalization;
 import org.martus.common.PoolOfReusableChoicesLists;
+import org.martus.common.ReusableChoices;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.bulletin.BulletinLoader;
 import org.martus.common.bulletin.Bulletin.DamagedBulletinException;
@@ -48,6 +49,8 @@ import org.martus.common.crypto.MockMartusSecurity;
 import org.martus.common.crypto.MartusCrypto.NoKeyPairException;
 import org.martus.common.database.DatabaseKey;
 import org.martus.common.database.ReadableDatabase;
+import org.martus.common.fieldspec.ChoiceItem;
+import org.martus.common.fieldspec.CustomDropDownFieldSpec;
 import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.fieldspec.FieldTypeBoolean;
 import org.martus.common.fieldspec.FieldTypeDate;
@@ -245,6 +248,60 @@ public class TestReportRunner extends TestCaseEnhanced
 		createAndSaveSampleBulletin(app, "a", "2", sampleDate);
 		createAndSaveSampleBulletin(app, "b", "2", sampleDate);
 		return app;
+	}
+	
+	public void testBreaksOnReusableDropdowns() throws Exception
+	{
+		verifySummaryBreaksOnReusableDropdowns(true);
+		verifySummaryBreaksOnReusableDropdowns(false);
+	}
+
+	private void verifySummaryBreaksOnReusableDropdowns(boolean withDetail)
+			throws Exception, IOException
+	{
+		ReusableChoices choices = new ReusableChoices("choicescode", "Choices Label");
+		String aLabel = "Fabulous A";
+		choices.add(new ChoiceItem("a", aLabel));
+		String bLabel = "Excellent B";
+		choices.add(new ChoiceItem("b", bLabel));
+		MockMartusApp app = MockMartusApp.create();
+		FieldSpecCollection defaultSpecs = app.getStore().getTopSectionFieldSpecs();
+		FieldSpecCollection specs = new FieldSpecCollection();
+		for(int i = 0; i < defaultSpecs.size(); ++i)
+			specs.add(defaultSpecs.get(i));
+		specs.addReusableChoiceList(choices);
+		CustomDropDownFieldSpec dropdown = new CustomDropDownFieldSpec();
+		dropdown.setTag("dd");
+		dropdown.setLabel("Dropdown");
+		dropdown.addReusableChoicesCode(choices.getCode());
+		specs.add(dropdown);
+		app.getStore().setTopSectionFieldSpecs(specs);
+		
+		Bulletin b1 = app.createBulletin();
+		b1.set(dropdown.getTag(), "a");
+		app.saveBulletin(b1, app.getStore().getFolderSaved());
+		Bulletin b2 = app.createBulletin();
+		b2.set(dropdown.getTag(), "b");
+		app.saveBulletin(b2, app.getStore().getFolderSaved());
+		
+		MiniLocalization localization = new MiniLocalization();
+		MiniFieldSpec[] sortSpecs = new MiniFieldSpec[] {new MiniFieldSpec(dropdown)};
+		localization.setCurrentLanguageCode("en");
+		ReportFormat report = new TabularReportBuilder(localization).createTabular(sortSpecs);
+		ReportOutput destination = new ReportOutput();
+		RunReportOptions options = new RunReportOptions();
+		options.hideDetail = withDetail;
+		options.printBreaks = true;
+		options.includePrivate = true;
+		ReportRunner runner = new ReportRunner(app.getSecurity(), new MiniLocalization());
+		SortableBulletinList bulletins = new SortableBulletinList(localization, sortSpecs);
+		bulletins.add(b1);
+		bulletins.add(b2);
+		runner.runReport(report, app.getStore().getDatabase(), bulletins, destination, options, specs.getAllReusableChoiceLists());
+		destination.close();
+		String result = destination.getPrintableDocument();
+		assertContains(withDetail + " Wrote code instead of label a?", aLabel, result);
+		assertContains(withDetail + " Wrote code instead of label b?", bLabel, result);
 	}
 
 	public void testSummaryTotals() throws Exception

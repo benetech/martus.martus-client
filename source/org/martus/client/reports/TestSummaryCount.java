@@ -25,6 +25,8 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.reports;
 
+import org.martus.common.ReusableChoices;
+import org.martus.common.fieldspec.ChoiceItem;
 import org.martus.util.TestCaseEnhanced;
 
 public class TestSummaryCount extends TestCaseEnhanced
@@ -49,9 +51,13 @@ public class TestSummaryCount extends TestCaseEnhanced
 				{"B", "3", "c"},
 		};
 		SummaryCount master = new SummaryCount(new StringVector(labels));
-		for(int i = 0; i < values.length; ++i)
+		for(int sampleDataIndex = 0; sampleDataIndex < values.length; ++sampleDataIndex)
 		{
-			master.increment(new StringVector(values[i]));
+			ReusableChoices choices = new ReusableChoices("", "");
+			String[] codeValues = values[sampleDataIndex];
+			for(int breakLevel = 0; breakLevel < codeValues.length; ++breakLevel)
+				choices.add(new ChoiceItem(codeValues[breakLevel], codeValues[breakLevel]));
+			master.increment(choices);
 		}
 		
 		assertEquals("top-level wrong count?", 5, master.count());
