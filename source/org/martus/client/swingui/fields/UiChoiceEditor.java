@@ -276,6 +276,7 @@ public class UiChoiceEditor extends UiChoice implements ActionListener
 			for(int choiceIndex = 0; choiceIndex < possibleChoices.size(); ++choiceIndex)
 			{
 				ChoiceItem choice = possibleChoices.get(choiceIndex);
+				if(choice.nestedCodeStartsWith(previousCode))
 				if(choice.getCode().startsWith(previousCode))
 					newChoices.add(choice);
 			}
