@@ -507,8 +507,8 @@ public class KnownFieldSpecCache extends BulletinStoreCache implements ReadableD
 		
 		PoolOfReusableChoicesLists topReusableChoicesLists = b.getFieldDataPacket().getFieldSpecs().getAllReusableChoiceLists();
 		PoolOfReusableChoicesLists bottomReusableChoicesLists = b.getPrivateFieldDataPacket().getFieldSpecs().getAllReusableChoiceLists();
-		reusableChoicesLists.addAll(topReusableChoicesLists);
-		reusableChoicesLists.addAll(bottomReusableChoicesLists);
+		reusableChoicesLists.mergeAll(topReusableChoicesLists);
+		reusableChoicesLists.mergeAll(bottomReusableChoicesLists);
 	}
 
 	private void setSpecs(UniversalId bulletinUid, FieldSpecCollection[] specs)
@@ -532,7 +532,7 @@ public class KnownFieldSpecCache extends BulletinStoreCache implements ReadableD
 		return specsForOneAccount;
 	}
 	
-	private static final int FILE_VERSION = 5;
+	private static final int FILE_VERSION = 6;
 	private static final String TAG_ALL_SECTION_SPECS = "AllSectionSpecs";
 	private static final String TAG_SPEC_INDEXES_FOR_ALL_ACCOUNTS = "SpecIndexesForAllAccounts";
 	private static final String TAG_REUSABLE_CHOICES_POOL = "ReusableChoicesLists";
