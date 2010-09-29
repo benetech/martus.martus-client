@@ -306,7 +306,7 @@ public class ReportRunner
 				{
 					CustomDropDownFieldSpec dropdownSpec = (CustomDropDownFieldSpec) spec;
 					ChoiceItem choice = new ChoiceItem(previousValue.getCode(), previousValue.toString());
-					ReusableChoices choicesForThisBreak = new ReusableChoices("choices", "");
+					ReusableChoices choicesForThisBreak = new ReusableChoices(CustomDropDownFieldSpec.INTERNAL_CHOICES_FOR_BREAK_CODE, "");
 					choicesForThisBreak.add(choice);
 					reusableChoicesForThisBreakOnly.add(choicesForThisBreak);
 					dropdownSpec.addReusableChoicesCode(choicesForThisBreak.getCode());
@@ -361,7 +361,7 @@ public class ReportRunner
 	public class BreakFields extends Vector
 	{
 	}
-	
+
 	VelocityEngine engine;
 	MiniLocalization localization;
 	MartusCrypto signatureVerifier;
