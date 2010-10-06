@@ -399,7 +399,10 @@ public class UiCustomFieldsDlg extends JDialog
 
 	boolean checkForDuplicateLabels() 
 	{
-		Vector duplicateLabelsFound = new CustomFieldsDuplicateLabelChecker().getDuplicatedLabels();
+		CustomFieldsDuplicateLabelChecker checker = new CustomFieldsDuplicateLabelChecker();
+		String topSectionXml = topSectionXmlTextArea.getText();
+		String bottomSectionXml = bottomSectionXmlTextArea.getText();
+		Vector duplicateLabelsFound = checker.getDuplicatedLabels(topSectionXml, bottomSectionXml);
 		if(duplicateLabelsFound.size() == 0)
 			return true;
 
@@ -423,13 +426,6 @@ public class UiCustomFieldsDlg extends JDialog
 
 	class CustomFieldsDuplicateLabelChecker
 	{
-		public Vector getDuplicatedLabels()
-		{
-			String topSectionXml = topSectionXmlTextArea.getText();
-			String bottomSectionXml = bottomSectionXmlTextArea.getText();
-			return getDuplicatedLabels(topSectionXml, bottomSectionXml);
-		}
-
 		public Vector getDuplicatedLabels(String topSectionXml, String bottomSectionXml)
 		{
 			try 
