@@ -399,7 +399,7 @@ public class UiCustomFieldsDlg extends JDialog
 
 	boolean checkForDuplicateLabels() 
 	{
-		Vector duplicateLabelsFound = getDuplicatedLabels();
+		Vector duplicateLabelsFound = new CustomFieldsDuplicateLabelChecker().getDuplicatedLabels();
 		if(duplicateLabelsFound.size() == 0)
 			return true;
 
@@ -421,82 +421,85 @@ public class UiCustomFieldsDlg extends JDialog
 		return false;
 	}
 
-	public Vector getDuplicatedLabels()
+	class CustomFieldsDuplicateLabelChecker
 	{
-		try 
+		public Vector getDuplicatedLabels()
 		{
-			FieldSpecCollection allSpecs = mergeSections();
-			return getDuplicatedLabels(allSpecs);
-		} 
-		catch (CustomFieldsParseException e) 
-		{
+			try 
+			{
+				FieldSpecCollection allSpecs = mergeSections();
+				return getDuplicatedLabels(allSpecs);
+			} 
+			catch (CustomFieldsParseException e) 
+			{
+			}
+			return new Vector();
 		}
-		return new Vector();
-	}
-
-	private Vector getDuplicatedLabels(FieldSpecCollection allSpecs)
-	{
-		Vector duplicateLabelsFound = new Vector();
-		HashSet foundLabels = new HashSet();
-		for (int i = 0; i < allSpecs.size(); i++)
+	
+		private Vector getDuplicatedLabels(FieldSpecCollection allSpecs)
 		{
-			FieldSpec thisSpec = allSpecs.get(i);
-			String label = thisSpec.getLabel().trim();
-			if(label.length() == 0)
-				continue;
-		
-			if(foundLabels.contains(label))
-				addToVectorIfNotAlreadyThere(duplicateLabelsFound, label);				
-			foundLabels.add(label);
+			Vector duplicateLabelsFound = new Vector();
+			HashSet foundLabels = new HashSet();
+			for (int i = 0; i < allSpecs.size(); i++)
+			{
+				FieldSpec thisSpec = allSpecs.get(i);
+				String label = thisSpec.getLabel().trim();
+				if(label.length() == 0)
+					continue;
 			
-			if(!thisSpec.getType().isGrid())
-				continue;
-
-			Vector duplicatedGridLabels = getDuplicatedGridLabels((GridFieldSpec)thisSpec);
-			addAllUniqueLabels(duplicateLabelsFound, duplicatedGridLabels);
+				if(foundLabels.contains(label))
+					addToVectorIfNotAlreadyThere(duplicateLabelsFound, label);				
+				foundLabels.add(label);
+				
+				if(!thisSpec.getType().isGrid())
+					continue;
+	
+				Vector duplicatedGridLabels = getDuplicatedGridLabels((GridFieldSpec)thisSpec);
+				addAllUniqueLabels(duplicateLabelsFound, duplicatedGridLabels);
+			}
+			return duplicateLabelsFound;
 		}
-		return duplicateLabelsFound;
-	}
-
-	private void addToVectorIfNotAlreadyThere(Vector vector, Object label)
-	{
-		if(!vector.contains(label))
-			vector.add(label);
-	}
-
-	private void addAllUniqueLabels(Vector duplicateLabelsFound, Vector duplicatedGridLabels)
-	{
-		for(int j=0;j<duplicatedGridLabels.size(); ++j)
+	
+		private void addToVectorIfNotAlreadyThere(Vector vector, Object label)
 		{
-			addToVectorIfNotAlreadyThere(duplicateLabelsFound, duplicatedGridLabels.get(j));
+			if(!vector.contains(label))
+				vector.add(label);
 		}
-	}
-
-	private Vector getDuplicatedGridLabels(GridFieldSpec grid)
-	{
-		Vector duplicatedGridLabels = new Vector();
-		Vector gridLabels = grid.getAllColumnLabels();
-		HashSet uniqueGridColumnLabels = new HashSet();
-		for(Iterator iter = gridLabels.iterator(); iter.hasNext();)
+	
+		private void addAllUniqueLabels(Vector duplicateLabelsFound, Vector duplicatedGridLabels)
 		{
-			String gridColumnLabel = ((String)iter.next()).trim();
-			if(uniqueGridColumnLabels.contains(gridColumnLabel))
-				addToVectorIfNotAlreadyThere(duplicatedGridLabels, gridColumnLabel);
-			uniqueGridColumnLabels.add(gridColumnLabel);
+			for(int j=0;j<duplicatedGridLabels.size(); ++j)
+			{
+				addToVectorIfNotAlreadyThere(duplicateLabelsFound, duplicatedGridLabels.get(j));
+			}
 		}
-		return duplicatedGridLabels;
-	}
-
-	private FieldSpecCollection mergeSections() throws CustomFieldsParseException
-	{
-		FieldSpec[] topSection = FieldCollection.parseXml(topSectionXmlTextArea.getText()).asArray();
-		FieldSpec[] bottomSection = FieldCollection.parseXml(bottomSectionXmlTextArea.getText()).asArray();
-		int topLength = topSection.length;
-		int bottomLength = bottomSection.length;
-		FieldSpec[] allSpecs = new FieldSpec[topLength + bottomLength];
-		System.arraycopy(topSection, 0, allSpecs, 0, topLength);
-		System.arraycopy(bottomSection, 0, allSpecs, topLength, bottomLength);
-		return new FieldSpecCollection(allSpecs);
+	
+		private Vector getDuplicatedGridLabels(GridFieldSpec grid)
+		{
+			Vector duplicatedGridLabels = new Vector();
+			Vector gridLabels = grid.getAllColumnLabels();
+			HashSet uniqueGridColumnLabels = new HashSet();
+			for(Iterator iter = gridLabels.iterator(); iter.hasNext();)
+			{
+				String gridColumnLabel = ((String)iter.next()).trim();
+				if(uniqueGridColumnLabels.contains(gridColumnLabel))
+					addToVectorIfNotAlreadyThere(duplicatedGridLabels, gridColumnLabel);
+				uniqueGridColumnLabels.add(gridColumnLabel);
+			}
+			return duplicatedGridLabels;
+		}
+	
+		private FieldSpecCollection mergeSections() throws CustomFieldsParseException
+		{
+			FieldSpec[] topSection = FieldCollection.parseXml(topSectionXmlTextArea.getText()).asArray();
+			FieldSpec[] bottomSection = FieldCollection.parseXml(bottomSectionXmlTextArea.getText()).asArray();
+			int topLength = topSection.length;
+			int bottomLength = bottomSection.length;
+			FieldSpec[] allSpecs = new FieldSpec[topLength + bottomLength];
+			System.arraycopy(topSection, 0, allSpecs, 0, topLength);
+			System.arraycopy(bottomSection, 0, allSpecs, topLength, bottomLength);
+			return new FieldSpecCollection(allSpecs);
+		}
 	}
 	
 	UiTextArea topSectionXmlTextArea;
