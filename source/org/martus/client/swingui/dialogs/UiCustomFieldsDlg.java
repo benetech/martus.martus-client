@@ -424,7 +424,7 @@ public class UiCustomFieldsDlg extends JDialog
 		return false;
 	}
 
-	class CustomFieldsDuplicateLabelChecker
+	static class CustomFieldsDuplicateLabelChecker
 	{
 		public Vector getDuplicatedLabels(String topSectionXml, String bottomSectionXml)
 		{
