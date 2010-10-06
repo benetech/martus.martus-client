@@ -493,6 +493,12 @@ public class UiCustomFieldsDlg extends JDialog
 		{
 			String topSectionXml = topSectionXmlTextArea.getText();
 			String bottomSectionXml = bottomSectionXmlTextArea.getText();
+			return mergeSections(topSectionXml, bottomSectionXml);
+		}
+
+		private FieldSpecCollection mergeSections(String topSectionXml,
+				String bottomSectionXml) throws CustomFieldsParseException
+		{
 			FieldSpec[] topSection = FieldCollection.parseXml(topSectionXml).asArray();
 			FieldSpec[] bottomSection = FieldCollection.parseXml(bottomSectionXml).asArray();
 			int topLength = topSection.length;
