@@ -167,11 +167,7 @@ public class FieldChooserSpecBuilder
 			CustomDropDownFieldSpec specWithBetterLabel = (CustomDropDownFieldSpec) FieldSpec.createSubField(parent, tag, displayString, new FieldTypeDropdown());
 			specWithBetterLabel.pullDynamicChoiceSettingsFrom(originalSpec);
 			
-			Set choicesForDropdown = new HashSet();
-			choicesForDropdown.add(new SearchableFieldChoiceItem(specWithBetterLabel));
-			if(specWithBetterLabel.getReusableChoicesCodes().length > 1)
-				choicesForDropdown.addAll(createPerLevelChoicesForNestedDropdown(specWithBetterLabel, displayString, reusableChoiceLists));
-			return choicesForDropdown;
+			return getChoicesForDropdownSpec(specWithBetterLabel, reusableChoiceLists, displayString);
 		}
 
 		// add one choice per column
@@ -198,6 +194,17 @@ public class FieldChooserSpecBuilder
 		ChoiceItem choiceItem = new SearchableFieldChoiceItem(thisSpec);
 		choicesForThisField.add(choiceItem);
 		return choicesForThisField;
+	}
+
+	private Set getChoicesForDropdownSpec(
+			CustomDropDownFieldSpec specWithBetterLabel,
+			PoolOfReusableChoicesLists reusableChoiceLists, String displayString)
+	{
+		Set choicesForDropdown = new HashSet();
+		choicesForDropdown.add(new SearchableFieldChoiceItem(specWithBetterLabel));
+		if(specWithBetterLabel.getReusableChoicesCodes().length > 1)
+			choicesForDropdown.addAll(createPerLevelChoicesForNestedDropdown(specWithBetterLabel, displayString, reusableChoiceLists));
+		return choicesForDropdown;
 	}
 	
 	private Vector createPerLevelChoicesForNestedDropdown(CustomDropDownFieldSpec spec, String displayPrefix, PoolOfReusableChoicesLists reusableChoicesPool)
