@@ -76,7 +76,7 @@ public class CustomFieldsDuplicateLabelChecker
 		return new Vector();
 	}
 
-	private Vector getDuplicatedLabels(FieldSpecCollection allSpecs)
+	public Vector getDuplicatedLabels(FieldSpecCollection allSpecs)
 	{
 		Vector duplicateLabelsFound = new Vector();
 		HashSet foundLabels = new HashSet();
