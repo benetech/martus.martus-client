@@ -33,6 +33,7 @@ import org.martus.client.bulletinstore.TestBulletinFolder;
 import org.martus.client.bulletinstore.TestClientBulletinStore;
 import org.martus.client.bulletinstore.TestKnownFieldSpecCache;
 import org.martus.client.core.TestConfigInfo;
+import org.martus.client.core.TestCustomFieldsDuplicateLabelChecker;
 import org.martus.client.core.TestPartialBulletin;
 import org.martus.client.core.TestSafeReadableBulletin;
 import org.martus.client.core.TestSortableBulletinList;
@@ -78,6 +79,7 @@ public class TestClient
 		suite.addTest(new TestSuite(TestChoiceItemSorterByLabelTagType.class));
 		suite.addTest(new TestSuite(TestClientBulletinStore.class));
 		suite.addTest(new TestSuite(TestConfigInfo.class));
+		suite.addTest(new TestSuite(TestCustomFieldsDuplicateLabelChecker.class));
 		suite.addTest(new TestSuite(TestFancySearchHelper.class));
 		suite.addTest(new TestSuite(TestFancySearchTableModel.class));
 		suite.addTest(new TestSuite(TestFieldChooserSpecBuilder.class));
