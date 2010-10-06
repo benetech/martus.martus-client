@@ -31,7 +31,6 @@ import java.awt.ComponentOrientation;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
-import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Vector;
 
@@ -44,20 +43,17 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.filechooser.FileFilter;
 
+import org.martus.client.core.CustomFieldsDuplicateLabelChecker;
 import org.martus.client.core.MartusApp;
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.clientside.MtfAwareLocalization;
-import org.martus.common.FieldCollection;
 import org.martus.common.FieldSpecCollection;
 import org.martus.common.HQKeys;
-import org.martus.common.FieldCollection.CustomFieldsParseException;
 import org.martus.common.crypto.MartusCrypto;
 import org.martus.common.fieldspec.BulletinFieldSpecs;
 import org.martus.common.fieldspec.CustomFieldError;
 import org.martus.common.fieldspec.CustomFieldTemplate;
-import org.martus.common.fieldspec.FieldSpec;
-import org.martus.common.fieldspec.GridFieldSpec;
 import org.martus.common.fieldspec.CustomFieldTemplate.FutureVersionException;
 import org.martus.swing.UiButton;
 import org.martus.swing.UiFileChooser;
@@ -424,88 +420,6 @@ public class UiCustomFieldsDlg extends JDialog
 		return false;
 	}
 
-	static class CustomFieldsDuplicateLabelChecker
-	{
-		public Vector getDuplicatedLabels(String topSectionXml, String bottomSectionXml)
-		{
-			try 
-			{
-				FieldSpecCollection allSpecs = mergeSections(topSectionXml, bottomSectionXml);
-				return getDuplicatedLabels(allSpecs);
-			} 
-			catch (CustomFieldsParseException e) 
-			{
-			}
-			return new Vector();
-		}
-	
-		private Vector getDuplicatedLabels(FieldSpecCollection allSpecs)
-		{
-			Vector duplicateLabelsFound = new Vector();
-			HashSet foundLabels = new HashSet();
-			for (int i = 0; i < allSpecs.size(); i++)
-			{
-				FieldSpec thisSpec = allSpecs.get(i);
-				String label = thisSpec.getLabel().trim();
-				if(label.length() == 0)
-					continue;
-			
-				if(foundLabels.contains(label))
-					addToVectorIfNotAlreadyThere(duplicateLabelsFound, label);				
-				foundLabels.add(label);
-				
-				if(!thisSpec.getType().isGrid())
-					continue;
-	
-				Vector duplicatedGridLabels = getDuplicatedGridLabels((GridFieldSpec)thisSpec);
-				addAllUniqueLabels(duplicateLabelsFound, duplicatedGridLabels);
-			}
-			return duplicateLabelsFound;
-		}
-	
-		private void addToVectorIfNotAlreadyThere(Vector vector, Object label)
-		{
-			if(!vector.contains(label))
-				vector.add(label);
-		}
-	
-		private void addAllUniqueLabels(Vector duplicateLabelsFound, Vector duplicatedGridLabels)
-		{
-			for(int j=0;j<duplicatedGridLabels.size(); ++j)
-			{
-				addToVectorIfNotAlreadyThere(duplicateLabelsFound, duplicatedGridLabels.get(j));
-			}
-		}
-	
-		private Vector getDuplicatedGridLabels(GridFieldSpec grid)
-		{
-			Vector duplicatedGridLabels = new Vector();
-			Vector gridLabels = grid.getAllColumnLabels();
-			HashSet uniqueGridColumnLabels = new HashSet();
-			for(Iterator iter = gridLabels.iterator(); iter.hasNext();)
-			{
-				String gridColumnLabel = ((String)iter.next()).trim();
-				if(uniqueGridColumnLabels.contains(gridColumnLabel))
-					addToVectorIfNotAlreadyThere(duplicatedGridLabels, gridColumnLabel);
-				uniqueGridColumnLabels.add(gridColumnLabel);
-			}
-			return duplicatedGridLabels;
-		}
-	
-		private FieldSpecCollection mergeSections(String topSectionXml,
-				String bottomSectionXml) throws CustomFieldsParseException
-		{
-			FieldSpec[] topSection = FieldCollection.parseXml(topSectionXml).asArray();
-			FieldSpec[] bottomSection = FieldCollection.parseXml(bottomSectionXml).asArray();
-			int topLength = topSection.length;
-			int bottomLength = bottomSection.length;
-			FieldSpec[] allSpecs = new FieldSpec[topLength + bottomLength];
-			System.arraycopy(topSection, 0, allSpecs, 0, topLength);
-			System.arraycopy(bottomSection, 0, allSpecs, topLength, bottomLength);
-			return new FieldSpecCollection(allSpecs);
-		}
-	}
-	
 	UiTextArea topSectionXmlTextArea;
 	UiTextArea bottomSectionXmlTextArea;
 	String topSectionXmlResult = null;
