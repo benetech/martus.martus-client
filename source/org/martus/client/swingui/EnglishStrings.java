@@ -1057,19 +1057,19 @@ public class EnglishStrings
 	"\n" +
 	"<ReusableChoices code='StateChoices' label='State'>\n" +
 	"  <Choice code='' label='(Not Selected)'></Choice>\n" +
-	"  <Choice code='1' label='California'></Choice>\n" +
-	"  <Choice code='2' label='New York'></Choice>\n" +
-	"  <Choice code='3' label='Texas'></Choice>\n" +
+	"  <Choice code='CA' label='California'></Choice>\n" +
+	"  <Choice code='NY' label='New York'></Choice>\n" +
+	"  <Choice code='TX' label='Texas'></Choice>\n" +
 	"</ReusableChoices>\n" +
 	"\n" +
 	"<ReusableChoices code='CityChoices' label='City'>\n" +
 	"  <Choice code='' label='(Not Selected)'></Choice>\n" +
-	"  <Choice code='1.01' label='San Francisco'></Choice>\n" +
-	"  <Choice code='1.02' label='Los Angeles'></Choice>\n" +
-	"  <Choice code='2.01' label='New York City'></Choice>\n" +
-	"  <Choice code='2.02' label='Albany'></Choice>\n" +
-	"  <Choice code='3.01' label='Dallas'></Choice>\n" +
-	"  <Choice code='3.02' label='Austin'></Choice>\n" +
+	"  <Choice code='CA.SF' label='San Francisco'></Choice>\n" +
+	"  <Choice code='CA.LA' label='Los Angeles'></Choice>\n" +
+	"  <Choice code='NY.NYC' label='New York City'></Choice>\n" +
+	"  <Choice code='NY.ALB' label='Albany'></Choice>\n" +
+	"  <Choice code='TX.DAL' label='Dallas'></Choice>\n" +
+	"  <Choice code='TX.AUS' label='Austin'></Choice>\n" +
 	"</ReusableChoices>\n",
 
 "field:inputservermagicwordentry=If you want to request permission to upload to this server, enter the 'magic word' now:",
