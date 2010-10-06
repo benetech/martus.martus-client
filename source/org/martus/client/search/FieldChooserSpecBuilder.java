@@ -162,15 +162,16 @@ public class FieldChooserSpecBuilder
 		// dropdowns MUST be a DropDownFieldSpec, not a plain FieldSpec
 		if(thisType.isDropdown())
 		{
+			Set choicesForDropdown = new HashSet();
 			DropDownFieldSpec originalSpec = (DropDownFieldSpec)spec;
 
 			CustomDropDownFieldSpec specWithBetterLabel = (CustomDropDownFieldSpec) FieldSpec.createSubField(parent, tag, displayString, new FieldTypeDropdown());
 			specWithBetterLabel.pullDynamicChoiceSettingsFrom(originalSpec);
 			
-			choicesForThisField.add(new SearchableFieldChoiceItem(specWithBetterLabel));
+			choicesForDropdown.add(new SearchableFieldChoiceItem(specWithBetterLabel));
 			if(specWithBetterLabel.getReusableChoicesCodes().length > 1)
-				choicesForThisField.addAll(createPerLevelChoicesForNestedDropdown(specWithBetterLabel, displayString, reusableChoiceLists));
-			return choicesForThisField;
+				choicesForDropdown.addAll(createPerLevelChoicesForNestedDropdown(specWithBetterLabel, displayString, reusableChoiceLists));
+			return choicesForDropdown;
 		}
 
 		// add one choice per column
