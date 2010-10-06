@@ -427,6 +427,12 @@ public class UiCustomFieldsDlg extends JDialog
 		{
 			String topSectionXml = topSectionXmlTextArea.getText();
 			String bottomSectionXml = bottomSectionXmlTextArea.getText();
+			return getDuplicatedLabels(topSectionXml, bottomSectionXml);
+		}
+
+		private Vector getDuplicatedLabels(String topSectionXml,
+				String bottomSectionXml)
+		{
 			try 
 			{
 				FieldSpecCollection allSpecs = mergeSections(topSectionXml, bottomSectionXml);
