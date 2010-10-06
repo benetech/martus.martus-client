@@ -427,7 +427,9 @@ public class UiCustomFieldsDlg extends JDialog
 		{
 			try 
 			{
-				FieldSpecCollection allSpecs = mergeSections();
+				String topSectionXml = topSectionXmlTextArea.getText();
+				String bottomSectionXml = bottomSectionXmlTextArea.getText();
+				FieldSpecCollection allSpecs = mergeSections(topSectionXml, bottomSectionXml);
 				return getDuplicatedLabels(allSpecs);
 			} 
 			catch (CustomFieldsParseException e) 
@@ -489,13 +491,6 @@ public class UiCustomFieldsDlg extends JDialog
 			return duplicatedGridLabels;
 		}
 	
-		private FieldSpecCollection mergeSections() throws CustomFieldsParseException
-		{
-			String topSectionXml = topSectionXmlTextArea.getText();
-			String bottomSectionXml = bottomSectionXmlTextArea.getText();
-			return mergeSections(topSectionXml, bottomSectionXml);
-		}
-
 		private FieldSpecCollection mergeSections(String topSectionXml,
 				String bottomSectionXml) throws CustomFieldsParseException
 		{
