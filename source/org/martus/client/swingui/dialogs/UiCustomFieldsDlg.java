@@ -430,8 +430,7 @@ public class UiCustomFieldsDlg extends JDialog
 			return getDuplicatedLabels(topSectionXml, bottomSectionXml);
 		}
 
-		private Vector getDuplicatedLabels(String topSectionXml,
-				String bottomSectionXml)
+		public Vector getDuplicatedLabels(String topSectionXml, String bottomSectionXml)
 		{
 			try 
 			{
