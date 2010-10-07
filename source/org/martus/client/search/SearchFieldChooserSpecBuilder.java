@@ -25,8 +25,13 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.search;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import org.martus.common.MiniLocalization;
+import org.martus.common.PoolOfReusableChoicesLists;
 import org.martus.common.fieldspec.ChoiceItem;
+import org.martus.common.fieldspec.CustomDropDownFieldSpec;
 import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.fieldspec.FieldType;
 import org.martus.common.fieldspec.FieldTypeAnyField;
@@ -53,5 +58,11 @@ public class SearchFieldChooserSpecBuilder extends FieldChooserSpecBuilder
 		return new SearchableFieldChoiceItem("", spec);
 	}
 
-
+	protected Set getChoicesForDropdownSpec(CustomDropDownFieldSpec specWithBetterLabel, PoolOfReusableChoicesLists reusableChoiceLists, String displayString)
+	{
+		if(specWithBetterLabel.getReusableChoicesCodes().length > 0)
+			return new HashSet();
+		
+		return super.getChoicesForDropdownSpec(specWithBetterLabel, reusableChoiceLists, displayString);
+	}
 }

@@ -196,9 +196,7 @@ public class FieldChooserSpecBuilder
 		return choicesForThisField;
 	}
 
-	private Set getChoicesForDropdownSpec(
-			CustomDropDownFieldSpec specWithBetterLabel,
-			PoolOfReusableChoicesLists reusableChoiceLists, String displayString)
+	protected Set getChoicesForDropdownSpec(CustomDropDownFieldSpec specWithBetterLabel, PoolOfReusableChoicesLists reusableChoiceLists, String displayString)
 	{
 		Set choicesForDropdown = new HashSet();
 		choicesForDropdown.add(new SearchableFieldChoiceItem(specWithBetterLabel));
