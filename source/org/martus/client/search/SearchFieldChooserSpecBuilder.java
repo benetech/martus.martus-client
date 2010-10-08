@@ -60,7 +60,7 @@ public class SearchFieldChooserSpecBuilder extends FieldChooserSpecBuilder
 
 	protected Set getChoicesForDropdownSpec(CustomDropDownFieldSpec specWithBetterLabel, PoolOfReusableChoicesLists reusableChoiceLists, String displayString)
 	{
-		if(specWithBetterLabel.getReusableChoicesCodes().length > 0)
+		if(specWithBetterLabel.getDataSourceGridTag() != null)
 			return new HashSet();
 		
 		return super.getChoicesForDropdownSpec(specWithBetterLabel, reusableChoiceLists, displayString);
