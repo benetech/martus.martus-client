@@ -80,6 +80,21 @@ public class TestFieldChoicesByLabel extends TestCaseEnhanced
 		fcbl.onlyKeep(keep);
 		return fcbl.getRawChoices();
 	}
+	
+//	public void testEliminateDuplicates() throws Exception
+//	{
+//		FieldSpec a = FieldSpec.createCustomField("tag", "Label", new FieldTypeNormal());
+//		FieldSpec b = FieldSpec.createCustomField(a.getTag(), a.getLabel(), new FieldTypeNormal());
+//		
+//		FieldChoicesByLabel choices = new FieldChoicesByLabel();
+//		choices.add(new SearchableFieldChoiceItem(a));
+//		choices.add(new SearchableFieldChoiceItem(b));
+//		choices.mergeSimilarDropdowns();
+//		MiniLocalization localization = new MiniLocalization();
+//		localization.setCurrentLanguageCode(MiniLocalization.ENGLISH);
+//		FieldSpec[] result = choices.asArray(localization);
+//		assertEquals("Didn't combine dupes?", 1, result.length);
+//	}
 
 	public void testMergeSimilarDropdowns() throws Exception
 	{
@@ -157,7 +172,10 @@ public class TestFieldChoicesByLabel extends TestCaseEnhanced
 		b.setParent(parent);
 		a.setLabel("Label");
 		b.setLabel("Label");
-		assertTrue("not mergeable?", FieldChoicesByLabel.areDropDownChoicesMergeable(choiceA, choiceB));
+		
+		boolean areMergeable = FieldChoicesByLabel.areDropDownChoicesMergeable(choiceA, choiceB);
+		assertTrue("not mergeable?", areMergeable);
+		
 		SearchableFieldChoiceItem merged = FieldChoicesByLabel.mergeDropDownChoices(choiceA, choiceB);
 		assertEquals("wrong search tag?", choiceA.getSearchTag(), merged.getSearchTag());
 		assertEquals("wrong display?", a.getLabel(), merged.toString());

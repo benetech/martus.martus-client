@@ -131,7 +131,11 @@ public class FieldChoicesByLabel
 			int mergeFrom = mergeInto + 1;
 			SearchableFieldChoiceItem into = ((SearchableFieldChoiceItem)allChoices.get(mergeInto));
 			SearchableFieldChoiceItem from = ((SearchableFieldChoiceItem)allChoices.get(mergeFrom));
-			if(areDropDownChoicesMergeable(into, from))
+			if(into.getSpec().equals(from.getSpec()))
+			{
+				allChoices.remove(mergeFrom);
+			}
+			else if(areDropDownChoicesMergeable(into, from))
 			{
 				SearchableFieldChoiceItem result = mergeDropDownChoices(into, from);
 				allChoices.set(mergeInto, result);
@@ -159,7 +163,7 @@ public class FieldChoicesByLabel
 		
 		DropDownFieldSpec spec1 = (DropDownFieldSpec)rawSpec1;
 		DropDownFieldSpec spec2 = (DropDownFieldSpec)rawSpec2;
-		return (spec1.getReusableChoicesCodes().equals(spec2.getReusableChoicesCodes()));
+		return Arrays.equals(spec1.getReusableChoicesCodes(), spec2.getReusableChoicesCodes());
 	}
 	
 	public static SearchableFieldChoiceItem mergeDropDownChoices(SearchableFieldChoiceItem mergeInto, SearchableFieldChoiceItem mergeFrom)
@@ -183,6 +187,8 @@ public class FieldChoicesByLabel
 		resultSpec.setLabel(mergeInto.getSpec().getLabel());
 		resultSpec.setParent(mergeInto.getSpec().getParent());
 		resultSpec.pullDynamicChoiceSettingsFrom(specFrom);
+		// NOTE: Must setChoices AFTER pulling dynamic choices
+		resultSpec.setChoices((ChoiceItem[]) choices.toArray(new ChoiceItem[0]));
 		return new SearchableFieldChoiceItem(resultSpec);
 	}
 

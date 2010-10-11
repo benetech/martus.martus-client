@@ -48,6 +48,7 @@ import org.martus.client.search.TestBulletinSearcher;
 import org.martus.client.search.TestChoiceItemSorterByLabelTagType;
 import org.martus.client.search.TestFancySearchHelper;
 import org.martus.client.search.TestFancySearchTableModel;
+import org.martus.client.search.TestFieldChoicesByLabel;
 import org.martus.client.search.TestFieldChooserSpecBuilder;
 import org.martus.client.search.TestSearchParser;
 import org.martus.client.search.TestSearchSpec;
@@ -82,6 +83,7 @@ public class TestClient
 		suite.addTest(new TestSuite(TestCustomFieldsDuplicateLabelChecker.class));
 		suite.addTest(new TestSuite(TestFancySearchHelper.class));
 		suite.addTest(new TestSuite(TestFancySearchTableModel.class));
+		suite.addTest(new TestSuite(TestFieldChoicesByLabel.class));
 		suite.addTest(new TestSuite(TestFieldChooserSpecBuilder.class));
 		suite.addTest(new TestSuite(TestFolderList.class));
 		suite.addTest(new TestSuite(TestGridTableModel.class));
