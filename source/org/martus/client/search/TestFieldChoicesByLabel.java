@@ -28,6 +28,7 @@ package org.martus.client.search;
 import java.util.Arrays;
 import java.util.HashSet;
 
+import org.martus.common.MiniLocalization;
 import org.martus.common.fieldspec.ChoiceItem;
 import org.martus.common.fieldspec.DropDownFieldSpec;
 import org.martus.common.fieldspec.FieldSpec;
@@ -81,20 +82,20 @@ public class TestFieldChoicesByLabel extends TestCaseEnhanced
 		return fcbl.getRawChoices();
 	}
 	
-//	public void testEliminateDuplicates() throws Exception
-//	{
-//		FieldSpec a = FieldSpec.createCustomField("tag", "Label", new FieldTypeNormal());
-//		FieldSpec b = FieldSpec.createCustomField(a.getTag(), a.getLabel(), new FieldTypeNormal());
-//		
-//		FieldChoicesByLabel choices = new FieldChoicesByLabel();
-//		choices.add(new SearchableFieldChoiceItem(a));
-//		choices.add(new SearchableFieldChoiceItem(b));
-//		choices.mergeSimilarDropdowns();
-//		MiniLocalization localization = new MiniLocalization();
-//		localization.setCurrentLanguageCode(MiniLocalization.ENGLISH);
-//		FieldSpec[] result = choices.asArray(localization);
-//		assertEquals("Didn't combine dupes?", 1, result.length);
-//	}
+	public void testEliminateDuplicates() throws Exception
+	{
+		FieldSpec a = FieldSpec.createCustomField("tag", "Label", new FieldTypeNormal());
+		FieldSpec b = FieldSpec.createCustomField(a.getTag(), a.getLabel(), new FieldTypeNormal());
+		
+		FieldChoicesByLabel choices = new FieldChoicesByLabel();
+		choices.add(new SearchableFieldChoiceItem(a));
+		choices.add(new SearchableFieldChoiceItem(b));
+		choices.mergeSimilarDropdowns();
+		MiniLocalization localization = new MiniLocalization();
+		localization.setCurrentLanguageCode(MiniLocalization.ENGLISH);
+		FieldSpec[] result = choices.asArray(localization);
+		assertEquals("Didn't combine dupes?", 1, result.length);
+	}
 
 	public void testMergeSimilarDropdowns() throws Exception
 	{
