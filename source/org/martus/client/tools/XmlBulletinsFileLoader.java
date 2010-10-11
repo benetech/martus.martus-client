@@ -131,7 +131,7 @@ public class XmlBulletinsFileLoader extends SimpleXmlDefaultLoader
 			catch(Exception e)
 			{
 				e.printStackTrace();
-				fieldSpecValidationErrors.add(CustomFieldError.errorParseXml());
+				fieldSpecValidationErrors.add(CustomFieldError.errorParseXml(e.getMessage()));
 				return;
 			}
 
