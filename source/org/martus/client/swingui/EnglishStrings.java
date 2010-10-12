@@ -933,6 +933,16 @@ public class EnglishStrings
 	"by more than one field.  " +
 	"See examples below for the correct XML definition syntax to use." +
 	"\n\n" +
+	"You can set a default value for text and dropdown list fields by using " +
+	"<DefaultValue>xxx</DefaultValue>. " +
+	"For dropdowns, you must use a value already in the list of choices you defined. " +
+	"For Reusable Choices dropdowns it can be a partial or complete code, with each level separated by dots " +
+	"(for a location dropdown that has both State and City levels, " +
+	"you could pick the default to be at either level, e.g. either CA or CA.LA, see example below). " +
+	"Default values can be set for both standard and custom fields, " +
+	"but are NOT allowed for BOOLEAN, DATE, DATERANGE, GRID, LANGUAGE, MESSAGE, and SECTION field types, " +
+	"and are not allowed for dropdowns where the values in the list are based on data entered in another field." +
+	"\n\n " +
 	"Additional Comments\n" +
 	"1. XML is case-sensitive ('Witness' is not the same as 'witness') \n" +
 	"2. Quotes around type name can be single or double as long as they match " +
@@ -954,10 +964,17 @@ public class EnglishStrings
 	"<Label>Summary Section</Label>\n" +
 	"</Field>\n" +
 	"\n" +
+	"<Field type='STRING'>\n" +
+	"<Tag>office</Tag>\n" +
+	"<Label>Regional office collecting the data</Label>\n" +
+	"<DefaultValue>California field office</DefaultValue>\n" +
+	"</Field>\n" +
+	"\n" +
 	"<Field type='DROPDOWN'>\n" +
 	"<Tag>BulletinSource</Tag>\n" +
 	"<Label>Source of bulletin information</Label>\n" +
 	"<RequiredField/>\n" +
+	"<DefaultValue>Media/Press</DefaultValue>\n" +
 	"<Choices>\n" +
 	"<Choice>Media/Press</Choice>\n" +
 	"<Choice>Legal Report</Choice>\n" +
@@ -1000,6 +1017,7 @@ public class EnglishStrings
 	"<Field type='DROPDOWN'>\n" +
 	"<Tag>EventLocation</Tag>\n" +
 	"<Label>Event Location</Label>\n" +
+	"<DefaultValue>CA</DefaultValue>\n" +
 	"  <UseReusableChoices code='StateChoices'></UseReusableChoices>\n" +
 	"  <UseReusableChoices code='CityChoices'></UseReusableChoices>\n" +
 	"</Field>\n" +
@@ -1052,6 +1070,12 @@ public class EnglishStrings
 	"<Column type='STRING'><Tag></Tag><Label>Profession</Label></Column>\n" +
 	"<Column type='DATERANGE'><Tag></Tag><Label>Dates of Profession</Label><MaximumDate/></Column>\n" +
 	"</GridSpecDetails>\n" +
+	"</Field>\n" +
+	"\n" +
+	"<Field type='MULTILINE'>\n" +
+	"<Tag>narrative</Tag>\n" + 
+	"<Label>Narrative description of events</Label>\n" + 
+	"<DefaultValue>What happened in detail is as follows:</DefaultValue>\n" + 
 	"</Field>\n" +
 	"\n" +
 	"\n" +
