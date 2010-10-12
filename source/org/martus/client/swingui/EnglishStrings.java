@@ -1186,6 +1186,7 @@ public class EnglishStrings
 	"         <UseReusableChoices code='FieldChoices'></UseReusableChoices>\n" +
 	"   119 - Reusable choice must have a code and label\n" +
 	"   120 - Dropdown data source cannot be a single or multiple level dropdown with reusable choices\n" +
+	"   121 - Default value is not valid for this field\n" +
 	"   200 - All fields empty\n" +
 	"   201 - Unrecognized Headquarters created this template\n" +
 	"   202 - Security validation error\n" +
