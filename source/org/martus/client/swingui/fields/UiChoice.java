@@ -42,10 +42,6 @@ abstract public class UiChoice extends UiField
 	{
 		ListOfReusableChoicesLists newChoices = context.getCurrentDropdownChoices(spec);
 		setChoices(newChoices);
-		if(spec.getDataSourceGridTag() != null)
-		{
-			spec.setChoices(newChoices.get(0).getChoices());
-		}
 	}
 	
 	public void setChoices(ChoiceItem[] newChoices)
