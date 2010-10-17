@@ -1,9 +1,10 @@
 ﻿# Martus Client Translation File
 # Language code:  km
 # Language name:  Khmer
-# Exported date:  Wed May 25 16:36:00 PDT 2005
-# Client version: 2.7
-# Client build:   20050415.1566
+# Translated by:  
+# Exported date:  Sun Oct 17 14:46:49 PDT 2010
+# Client version: pre-3.5
+# Client build:   20101014.1948
 #
 # This file MUST be saved in UTF-8 format!
 # Lines beginning with # are comments and are ignored by Martus
@@ -20,8 +21,11 @@
 #    added after the last release. Remove the english, insert/update the
 #    VALUE translation to match the new English text which is in the
 #    comment line directly above it, and remove the <>
-# If you name it Martus-km.mtf and put the file in
-#     c:\Martus, then Martus will automatically read it.
+# If you name it Martus-km.mtf, put the file in your
+#     Martus directory, and create a file (which can be empty)
+#     called use_unofficial_translations.txt in your Martus directory,
+#     then Martus will automatically read it.  You will receive a warning
+#     message when you use this file while testing.
 # In Martus, to choose a language, pick one from the drop-down list
 #    in the lower left-hand corner of the signin screen, or after you
 #    are logged in, go to Options/Preferences.
@@ -34,65 +38,83 @@
 #      (by using the enter key) in any mtf entry
 #      (from the field:xxx to the end of the translated text),
 #      since a continuous block of text is needed.
-#  3.  do NOT translate "#N#" or "#M#" (though move them as appropriate
-#      grammatically for the language to make "#N# of #M#" [eg "2 of 5"] make
-#      sense for creating/restoring multiple key backup files).
-#  4.  in field:VirtualKeyboardKeys, keep the english alphabet, but include any
+#  3.  in field:VirtualKeyboardKeys, keep the english alphabet, but include any
 #      non-english characters at the end of the english alphabet/numbers/special
 #      characters (e.g. attach entire Thai alphabet at the end of the line)
-#  5.  in field:SearchBulletinRules, make sure to translate the english "and"
-#      and "or" in the text to exactly match the keyword:and= and 
-#      keyword:or= translations.  Also, the translation of the first sentence
-#      should not exactly match the english version because Martus can handle
-#      both english "and"/"or" and the translations of those keywords for
-#      bulletin searching, since for some languages keyboards are not available
-#      to all users in those alphabets. So please translate the following for the
-#      first sentence: "When searching for bulletins you can add key words either
-#      in english or the-language-you-are-translating (or/or-translated,
-#      and/and-translated) between multiple search term words
-#      (e.g. prison or jail, prison and assault).
-#  6.  in CreateCustomFieldsHelp2/3 fields, you can translate tags into foreign
+#  4.  in CreateCustomFieldsHelp2/3 fields, you can translate tags into foreign
 #      characters (but without punctuation or spaces)
-#  7.  when there are file or directory names, do not translate them
+#  5.  when there are file or directory names, do not translate them
 #      (e.g.  "acctmap.txt" and "packets"
 #      in field:confirmWarnMissingAccountMapFilecause=Warning: acctmap.txt
 #      file in your account's packets directory...)
-#  8.  do not translate the words "Martus" or "Benetech"
-#  9.  do NOT translate "#S#" (used for search string entry)
-# 10.  do not translate "#L#" as is it used to populate lists of values on
-#      various dialogs.
-# 11.  do not translate "#Title#" (used for bulletin title entry)
-# 12.  do not translate "#TITLES#" (used for a list of the titles of previous
-#      versions of the bulletin.
-# 13.  do not translate "#A#" (used for bulletin details: Author Public Code)
-# 14.  do not translate "#I#" (used for bulletin details: Bulletin ID)
-# 15.  do not translate "#H#" (used for bulletin details: Headquarter entries)
-# 16.  do not translate "#NumberOfHQs#" in various dialogs
-# 17.  Leave standard field tags in English in CreateCustomFieldsHelp1 and
+#  6.  do not translate the words "Martus" or "Benetech"
+#  7.  Leave standard field tags in English in CreateCustomFieldsHelp1 and
 #      CreateCustomFieldsHelp2, but put translation in parentheses after
 #      english : e.g.  'author' (autor), so users know what they refer to
-# 18.  Leave field types in English in CreateCustomFieldsHelp2 (e.g. BOOLEAN,
+#  8.  Leave field types in English in CreateCustomFieldsHelp2 (e.g. BOOLEAN,
 #      DATE), but put translation in parentheses after english, so users know
 #      what they refer to.
-# 19.  Leave field types in English in CreateCustomFieldsHelp3 examples
+#  9.  Leave field types in English in CreateCustomFieldsHelp3 examples
 #      (e.g. BOOLEAN, DATE)
-# 20.  Do not translate words used in XML for custom fields such as:
-#      <Field type='GRID'>, </Field>, <Tag>, </Tag>, <Label>, </Label>,
-#      <GridSpecDetails>, </GridSpecDetails>, <Column>, </Column>
-# 21.  do not translate "#UseUnofficialTranslationFiles#" in
-#      field:warningUnofficialTranslation since it contains a file name
-# 22.  do not translate "#CurrentNewsItem#" (used for server news)
-# 23.  do not translate "#MaxNewsItems#" (used for server news)
-# 24.  If you want your language to appear right to left,
+# 10.  Do not translate words between angle brackets in the XML for custom fields, such as:
+#      <Field type='SECTION'>, <Field type='STRING'>, <Field type='BOOLEAN'>, <Field type='DATE'>,
+#      <Field type='DATERANGE'>, <Field type='DROPDOWN'>, <Field type='MULTILINE'>
+#      <Field type='LANGUAGE'>, <Field type='MESSAGE'>, <Field type='GRID'>, 
+#      </Field>, <Tag>, </Tag>, <Label>, </Label>,  <Message>, </Message>
+#      <Choices>, </Choices>, <Choice>, </Choice>, <DataSource>, </DataSource>
+#      <GridFieldTag>, </GridFieldTag>, <GridColumnLabel>, </GridColumnLabel>
+#      <GridSpecDetails>, </GridSpecDetails>, <Column>, </Column>,
+#      <Column type='STRING'>, <Column type='BOOLEAN'>, <Column type='DATE'>,
+#      <Column type='DATERANGE'>, <Column type='DROPDOWN'>
+#      <KeepWithPrevious/>, <RequiredField/>
+# 11.  Do not translate words that are surrounded by #'s, but you may move
+#      them around as grammatically appropriate.
+#      Example: #TotalNumberOfFilesInBackup#, #Titles#, #FieldLabel#, etc.
+#      as these words will be replaced when the program runs with
+#      a particular value.
+#      For Example. #TotalNumberOfFilesInBackup# = '5'
+#                   #Titles# = 'A list of bulletin titles'
+# 12.  Do not translate the numbers in the field:translationVersion string.
+# 13.  Do not translate the numbers in the field:ErrorCustomFields string.
+# 14.  For Thai and Persian months, please do the following:
+#          - for a Thai translation, Thai months should be the same as the translation
+#            of regular months, and Persian dates are the same as in English.
+#          - for a Persian translation, both Thai and Persian months
+#            should be the same as the translation of regular months
+#          - for an Arabic translation, Thai months should be the same as
+#            the translation of regular months, but do an Arabic translation
+#            (or transliteration) of Persian dates (not the same as in English).
+#          - for all other languages, Thai and Persian dates can be the same
+#            as the translation of regular months
+# 15       - We have file filters like 'Martus Report Format (.mrf)'
+#            and 'Martus Search Specification (.mss)'.
+#            The descriptive names should be translated, but the (.mrf) and (.mss)
+#            must not be translated.
+# 16.  If you want your language to appear right to left,
 #      Uncomment the next line (by removing the # in front of #!right-to-left)
 #!right-to-left
 #
 
+#____________________________=Add
+-61cc-button:AddFieldToReport=<Add>
+
+#__________________________=Update Headquarters Access
+-5029-button:AddPermissions=<Update Headquarters Access>
+
 #________________________=Show all bulletins on this server and on this computer.
 -e9a2-button:AllSummaries=បង្ហាញ​គ្រប់​សំណុំ​រឿង​ដែល​មាន​នៅ​លើ​ម៉ាស៊ីន​បម្រើ​នេះ និង​នៅ​លើ​កុំព្យូទ័រ​នេះ ។
 
+#______________________________=Append Row
+-2678-button:AppendEmptyGridRow=<Append Row>
+
+#________________=Back
+-b52b-button:Back=<Back>
+
 #___________________________=Bulletin Details...
 -d012-button:BulletinDetails=ព័ត៌មាន​លម្អិត​នៃ​សំណុំ​រឿង…
+
+#_____________________=Close Help
+-8624-button:CloseHelp=<Close Help>
 
 #___________________________=Add...
 -2cce-button:ConfigureHQsAdd=បន្ថែម...
@@ -106,8 +128,17 @@
 #____________________=Continue
 -2e02-button:Continue=បន្ត
 
+#____________________________=Create New Page Report
+-1d7a-button:CreatePageReport=<Create New Page Report>
+
+#_______________________________=Create New Tabular Report
+-34ee-button:CreateTabularReport=<Create New Tabular Report>
+
 #__________________=Delete
 -f6fd-button:Delete=លុប
+
+#_________________________________=Delete Selected Row
+-5e2f-button:DeleteSelectedGridRow=<Delete Selected Row>
 
 #______________________________=Delete
 -f6fd-button:DeleteServerDrafts=លុប
@@ -115,14 +146,71 @@
 #_________________________________=Show bulletins that are only on the server.
 -b795-button:DownloadableSummaries=បង្ហាញ​តែ​សំណុំ​រឿង​ណា​ដែល​មាន​នៅ​លើ​ម៉ាស៊ីន​បម្រើ​ប៉ុណ្ណោះ ។
 
+#______________________=Field Label
+-6492-button:FieldLabel=<Field Label>
+
+#____________________=Tag
+-9829-button:FieldTag=<Tag>
+
+#_____________________=Type
+-3deb-button:FieldType=<Type>
+
+#___________________________=Down
+-bf93-button:FolderOrderDown=<Down>
+
+#_________________________=Up
+-2038-button:FolderOrderUp=<Up>
+
+#___________________________________=Include Private Data
+-e6dc-button:IncludePrivateBulletins=<Include Private Data>
+
+#______________________________=Insert Row
+-9f53-button:InsertEmptyGridRow=<Insert Row>
+
 #_________________=Leave
 -7e35-button:Leave=ចេញ
+
+#______________________=Load Previous Search...
+-75f7-button:LoadSearch=<Load Previous Search...>
+
+#______________________________=Load
+-ddcb-button:LoadSearchOkButton=<Load>
+
+#_________________________________=Move Down
+-4158-button:MoveFieldDownInReport=<Move Down>
+
+#_______________________________=Move Up
+-c637-button:MoveFieldUpInReport=<Move Up>
 
 #_________________________=New Account
 -1d19-button:NewAccountTab=គណនី​ថ្មី
 
+#___________________________=Choose Field...
+-288f-button:PopUpTreeChoose=<Choose Field...>
+
 #___________________=Preview
 -f1fb-button:Preview=មើល​ជា​មុន
+
+#___________________________=Print only public information
+-a2a2-button:PrintOnlyPublic=<Print only public information>
+
+#_________________________________=Include private information
+-6c53-button:PrintPublicAndPrivate=<Include private information>
+
+#_______________________=Print to a file
+-8dde-button:PrintToDisk=<Print to a file>
+
+#_______________________=Print To File
+-a5d9-button:PrintToFile=<Print To File>
+
+#__________________________=Print To Printer
+-319b-button:PrintToPrinter=<Print To Printer>
+
+#________________________________=Both Public and Private Data
+-8685-button:PublicAndPrivateData=<Both Public and Private Data>
+
+#______________________=Public Data Only
+-4baa-button:PublicOnly=<Public Data Only>
 
 #__________________________________=Restore account from backup key file
 -f447-button:RecoverAccountByBackup=ស្តារ​គណនី​ឡើង​វិញ​ពី​ឯកសារ​កូន​សោ​បម្រុង
@@ -133,14 +221,32 @@
 #_____________________________=Restore Account
 -d7da-button:RecoverAccountTab=ស្តារ​គណនី​ឡើង​វិញ
 
+#_________________________________=Remove
+-e963-button:RemoveFieldFromReport=<Remove>
+
 #_________________________=Reset Contents
 -6f62-button:ResetContents=កំណត់​មាតិកាឡើង​វិញ
 
-#_______________________________=Retrieve all bulletin revisions
--6965-button:RetrieveAllVersions=<Retrieve all bulletin revisions>
+#_______________________________=Retrieve all bulletin versions
+-3daf-button:RetrieveAllVersions=<Retrieve all bulletin revisions>
 
-#______________________________________________=Retrieve latest bulletin revision only
--9c45-button:RetrieveLatestBulletinRevisionOnly=<Retrieve latest bulletin revision only>
+#______________________________________________=Retrieve latest bulletin version only
+-3449-button:RetrieveLatestBulletinRevisionOnly=<Retrieve latest bulletin revision only>
+
+#_____________________=Use Existing Report Format
+-b052-button:RunReport=<Use Existing Report Format>
+
+#______________________=Save This Search...
+-e372-button:SaveSearch=<Save This Search...>
+
+#____________________________________=Only search most recent version of bulletins
+-852f-button:SearchFinalBulletinsOnly=<Only search most recent version of bulletins>
+
+#______________________________=Match grid column specifications in the search screen to a single row of bulletin grid data. See the search Help screen for additional guidance on this advanced option.
+-c70c-button:SearchSameRowsOnly=<Match grid column specifications in the search screen to a single row of bulletin grid data. See the search Help screen for additional guidance on this advanced option.>
+
+#________________________=Select
+-8598-button:SelectReport=<Select>
 
 #__________________________________=Accept
 -bb54-button:ServerComplianceAccept=ព្រមទទួល
@@ -148,8 +254,20 @@
 #__________________________________=Reject
 -2b03-button:ServerComplianceReject=បដិសេធ
 
+#____________________________=Show Expanded
+-2dc6-button:ShowGridExpanded=<Show Expanded>
+
+#__________________________=Show as Grid
+-172d-button:ShowGridNormal=<Show as Grid>
+
 #__________________=Sign In
 -f849-button:SignIn=ចូល
+
+#______________________________=Use New
+-99f3-button:UseNewCustomFields=<Use New>
+
+#______________________________=Use Old
+-91ea-button:UseOldCustomFields=<Use Old>
 
 #_______________________________________=View Selected Version...
 -f943-button:ViewPreviousBulletinVersion=<View Selected Version...>
@@ -202,6 +320,9 @@
 #________________=Help
 -c47a-button:help=ជំនួយ
 
+#__________________________=Hide
+-34d8-button:hideattachment=<Hide>
+
 #_______________________________=OK
 -9ce3-button:inputCustomFieldsok=យល់ព្រម
 
@@ -247,8 +368,8 @@
 #_________________=Print
 -5b22-button:print=បោះពុម្ព
 
-#____________________________=Remove Attachment
--6f6d-button:removeattachment=យក​ឯកសារ​ភ្ជាប់​ចេញ
+#____________________________=Remove
+-e963-button:removeattachment=<យក​ឯកសារ​ភ្ជាប់​ចេញ>
 
 #____________________=Retrieve
 -eb55-button:retrieve=រក​បានមកវិញ
@@ -256,8 +377,8 @@
 #________________=Save
 -efc0-button:save=<Save>
 
-#__________________________=Save Attachment
--f513-button:saveattachment=រក្សាទុក​ឯកសារ​ភ្ជាប់
+#__________________________=Save...
+-96b4-button:saveattachment=<រក្សាទុក​ឯកសារ​ភ្ជាប់>
 
 #_____________________=Save Draft
 -cc13-button:savedraft=រក្សាទុក​សេចក្តីព្រាង
@@ -271,8 +392,8 @@
 #______________________=Uncheck All
 -bc6d-button:uncheckall=ដោះ​ធីក​ទាំងអស់
 
-#__________________________=View Attachment
--b24c-button:viewattachment=មើល​ឯកសារ​ភ្ជាប់
+#__________________________=View
+-69bd-button:viewattachment=<មើល​ឯកសារ​ភ្ជាប់>
 
 #_______________=Yes
 -5397-button:yes=យល់ព្រម
@@ -289,29 +410,50 @@
 #______________________________=User Name: 
 -b58e-field:AccountInfoUserName=ឈ្មោះ​អ្នកប្រើ ៖
 
+#_________________________________=This allows you to update headquarters access to existing bulletins. Each of the bulletins in the list below will be modified to add the selected headquarters accounts. If a bulletin is sealed, a new version will be created.
+-aa30-field:AddPermissionsOverview=<This allows you to update headquarters access to existing bulletins. Each of the bulletins in the list below will be modified to add the selected headquarters accounts. If a bulletin is sealed, a new version will be created.>
+
+#_______________________________________=Updating access...
+-958f-field:AddingPermissionsToBulletins=<Updating access...>
+
 #________________________________=Unknown
 -bc78-field:AttachmentSizeUnknown=មិនស្គាល់
 
 #_________________________=Author (required)
 -4a0b-field:AuthorRequired=អ្នក​និពន្ធ (ត្រូវការ)
 
-#___________________________________=Your key is required to read your private bulletin information or to create new bulletins.  To ensure that you'll always have access to your data, it is extremely important to keep a backup of your key.\n\nMartus offers two methods for backing up your key, either of which may be used, but we strongly recommend using both backup methods.  The first method creates a single, password encrypted key back up file onto removable media (e.g. floppy disk, cd, USB storage) or a network drive; the second method backs up the key in #M# separate pieces (not encrypted with your password) onto multiple floppy disks (or other removable media).\n
--4f48-field:BackupKeyPairGeneralInfo=<យើង​ត្រូវ​ការ​កូន​សោ​របស់​អ្នក​ដើម្បី​អាន​ព័ត៌មាន​បុគ្គល​នៃរបាយការណ៏​របស់​អ្នក ឬ​ដើម្បី​បង្កើត​របាយការណ៏​ថ្មី ។ ដើម្បី​អោយ​ប្រាកដ​ថា អ្នក​អាច​ចូល​ដំណើរការ​ទិន្នន័យ​របស់​អ្នក​ជានិច្ចនោះ ការ​រក្សា​ទុក​កូន​សោ​របស់​អ្នក​ជា​ព័ត៌មាន​បម្រុង គឺ​មាន​សារៈសំខាន់​ខ្លាំង​ណាស់ ។\n\nMartus ផ្តល់​វិធី​ពីរ​យ៉ាង​ដើម្បី​ចម្លង​កូន​សោ​របស់​អ្នក​ទុក, អ្នក​អាច​ប្រើ​វិធី​មួយ​ណា​ក៏​បាន, ប៉ុន្តែ យើង​ពិត​ជា​សុំស្នើរ​អោយ​អ្នក​ប្រើ​វិធី​ចម្លង​ទុក​ទាំង​ពីរ​យ៉ាង ។ វិធី​ទី​មួយ​គឺ​បង្កើត​ជា​ឯកសារ​បម្រុង​មួយ​ដោយ​បម្លែង​ឯកសារ​នោះ​ជា​រហស្សលិខ ហើយ​ផ្ទុក​វា​នៅ​លើ​ថាស​ចល័ត (ឧ. ក្បាល​អាន​ថាស​តូច, ស៊ីឌី ឬ​ឧបករណ៏​ផ្ទុក USB) ឬ​ផ្ទុក​នៅ​លើ​ថាស​នៃ​បណ្តាញ ។ វិធី​ទីពីរ​គឺ​ចម្លង​កូន​សោ​របស់​អ្នក​ជា #M# ចំណែក​ផ្សេងៗគ្នា (ដោយ​មិន​ចាំបាច់​បម្លែង​ជា​រហស្សលិខ​ឡើយ) ទៅ​ផ្ទុក​លើ​ក្បាល​អាន​ថាស​តូច (ឬ​ផ្ទុក​លើ​ថាស​ចល័ត​ផ្សេង​ទៀត) ។\n>
+#_____________________________=Preparing Report...
+-7651-field:BackgroundPrinting=<Preparing Report...>
 
-#________________________________________________=This method breaks up your key into #M# pieces, any #N# of which will be required to reconstruct the key without requiring a password.  If you forget your login name or your password, this method is the only way you can restore your key.\n\nOnce the #M# files have been written to removable media disks, you should distribute them to #M# different people whom you will remember, but each of whom don't know who you have given the other files to.  Do not store any of the disks together.\n\nTo restore your key, first retrieve any #N# of the original #M# disks, and then select 'Restore Account' and 'Restore account from multiple disks' when signing into Martus.\n
--c83c-field:BackupKeyPairToSecretShareInformation=<វិធី​នេះ​នឹង​បំបែក​កូន​សោ​របស់​អ្នក​ជា #M# ចំណែក ដែល​ក្នុង​នោះ​អ្នក​ត្រូវការ​តែ #N# ចំណែក​ប៉ុណ្ណោះ​ដើម្បី​បង្កើត​បាន​ជា​កូន​សោ​ឡើង​វិញ ដោយ​មិន​ចាំបាច់​ត្រូវ​ការ​ពាក្យ​សម្ងាត់ ។ បើ​អ្នក​ភ្លេច​ឈ្មោះ ឬ​ពាក្យ​សម្ងាត់​សំរាប់​ចូល នេះ​ជា​វិធី​តែ​មួយ​គត់​ដែល​អ្នក​អាច​ស្តារ​កូន​សោ​របស់​អ្នក​ឡើង​វិញ​បាន ។\n\nពេល​ដែល​ឯកសារ​ចំនួន #M# ត្រូវ​បាន​សរសេរ​ទៅ​លើ​ថាស​ចល័ត​រួច​ហើយ​នោះ អ្នក​គួរ​តែ​បែង​ចែក​ឯកសារ​ទាំង​នោះ​ទៅ​កាន់​មនុស្ស​ដែល​អ្នក​ស្គាល់ #M# នាក់​ផ្សេងៗ​គ្នា ប៉ុន្តែ​មនុស្ស​ទាំង​នោះ​ពុំ​ដឹង​ថា​អ្នក​បាន​ចែក​ឯកសារ​ទៅ​អោយ​អ្នក​ណា​ខ្លះ​ទេ ។ មិន​ត្រូវ​ទុក​ថាស​ទាំងអស់​នៅ​កន្លែង​តែ​មួយ​ទេ ។\n\nដើម្បី​ស្តារ​កូន​សោ​របស់​អ្នក​ឡើង​វិញ ជា​ដំបូង​អ្នក​ត្រូវ​រក​ថាស​ចំនួន #N# ក្នុង​ចំណោម​ថាស​ទាំង #M# ហើយ​បន្ទាប់​មក​ចូរ​ជ្រើស “ស្តារ​គណនី​ឡើង​វិញ” និង “ស្តារគណនីឡើងវិញពីថាសផ្សេងៗគ្នា” ពេល​ដែល​អ្នក​ចូល​ទៅ​ក្នុង Martus ។\n>
+#______________________________=Searching...
+-ba2b-field:BackgroundSearching=<Searching...>
+
+#____________________________=Sorting Bulletins...
+-5a5a-field:BackgroundSorting=<Sorting Bulletins...>
+
+#____________________________=Working...
+-049a-field:BackgroundWorking=<Working...>
+
+#___________________________________=Your key is required to read your private bulletin information or to create new bulletins.  To ensure that you'll always have access to your data, it is extremely important to keep a backup of your key.\n\nMartus offers two methods for backing up your key, either of which may be used, but we strongly recommend using both backup methods.  The first method creates a single, password encrypted key back up file onto removable media (e.g. floppy disk, cd, USB storage) or a network drive; the second method backs up the key in #TotalNumberOfFilesInBackup# separate pieces (not encrypted with your password) onto multiple floppy disks (or other removable media).\n
+-ff3d-field:BackupKeyPairGeneralInfo=<យើង​ត្រូវ​ការ​កូន​សោ​របស់​អ្នក​ដើម្បី​អាន​ព័ត៌មាន​បុគ្គល​នៃរបាយការណ៏​របស់​អ្នក ឬ​ដើម្បី​បង្កើត​របាយការណ៏​ថ្មី ។ ដើម្បី​អោយ​ប្រាកដ​ថា អ្នក​អាច​ចូល​ដំណើរការ​ទិន្នន័យ​របស់​អ្នក​ជានិច្ចនោះ ការ​រក្សា​ទុក​កូន​សោ​របស់​អ្នក​ជា​ព័ត៌មាន​បម្រុង គឺ​មាន​សារៈសំខាន់​ខ្លាំង​ណាស់ ។\n\nMartus ផ្តល់​វិធី​ពីរ​យ៉ាង​ដើម្បី​ចម្លង​កូន​សោ​របស់​អ្នក​ទុក, អ្នក​អាច​ប្រើ​វិធី​មួយ​ណា​ក៏​បាន, ប៉ុន្តែ យើង​ពិត​ជា​សុំស្នើរ​អោយ​អ្នក​ប្រើ​វិធី​ចម្លង​ទុក​ទាំង​ពីរ​យ៉ាង ។ វិធី​ទី​មួយ​គឺ​បង្កើត​ជា​ឯកសារ​បម្រុង​មួយ​ដោយ​បម្លែង​ឯកសារ​នោះ​ជា​រហស្សលិខ ហើយ​ផ្ទុក​វា​នៅ​លើ​ថាស​ចល័ត (ឧ. ក្បាល​អាន​ថាស​តូច, ស៊ីឌី ឬ​ឧបករណ៏​ផ្ទុក USB) ឬ​ផ្ទុក​នៅ​លើ​ថាស​នៃ​បណ្តាញ ។ វិធី​ទីពីរ​គឺ​ចម្លង​កូន​សោ​របស់​អ្នក​ជា #M# ចំណែក​ផ្សេងៗគ្នា (ដោយ​មិន​ចាំបាច់​បម្លែង​ជា​រហស្សលិខ​ឡើយ) ទៅ​ផ្ទុក​លើ​ក្បាល​អាន​ថាស​តូច (ឬ​ផ្ទុក​លើ​ថាស​ចល័ត​ផ្សេង​ទៀត) ។\n>
+
+#________________________________________________=This method breaks up your key into #TotalNumberOfFilesInBackup# pieces, any #MinimumNumberOfFilesNeededForRecovery# of which will be required to reconstruct the key without requiring a password.  If you forget your login name or your password, this method is the only way you can restore your key.\n\nOnce the #TotalNumberOfFilesInBackup# files have been written to removable media disks, you should distribute them to #TotalNumberOfFilesInBackup# different people whom you will remember, but each of whom don't know who you have given the other files to.  Do not store any of the disks together.\n\nTo restore your key, first retrieve any #MinimumNumberOfFilesNeededForRecovery# of the original #TotalNumberOfFilesInBackup# disks, and then select 'Restore Account' and 'Restore account from multiple disks' when signing into Martus.\n
+-9551-field:BackupKeyPairToSecretShareInformation=<វិធី​នេះ​នឹង​បំបែក​កូន​សោ​របស់​អ្នក​ជា #M# ចំណែក ដែល​ក្នុង​នោះ​អ្នក​ត្រូវការ​តែ #N# ចំណែក​ប៉ុណ្ណោះ​ដើម្បី​បង្កើត​បាន​ជា​កូន​សោ​ឡើង​វិញ ដោយ​មិន​ចាំបាច់​ត្រូវ​ការ​ពាក្យ​សម្ងាត់ ។ បើ​អ្នក​ភ្លេច​ឈ្មោះ ឬ​ពាក្យ​សម្ងាត់​សំរាប់​ចូល នេះ​ជា​វិធី​តែ​មួយ​គត់​ដែល​អ្នក​អាច​ស្តារ​កូន​សោ​របស់​អ្នក​ឡើង​វិញ​បាន ។\n\nពេល​ដែល​ឯកសារ​ចំនួន #M# ត្រូវ​បាន​សរសេរ​ទៅ​លើ​ថាស​ចល័ត​រួច​ហើយ​នោះ អ្នក​គួរ​តែ​បែង​ចែក​ឯកសារ​ទាំង​នោះ​ទៅ​កាន់​មនុស្ស​ដែល​អ្នក​ស្គាល់ #M# នាក់​ផ្សេងៗ​គ្នា ប៉ុន្តែ​មនុស្ស​ទាំង​នោះ​ពុំ​ដឹង​ថា​អ្នក​បាន​ចែក​ឯកសារ​ទៅ​អោយ​អ្នក​ណា​ខ្លះ​ទេ ។ មិន​ត្រូវ​ទុក​ថាស​ទាំងអស់​នៅ​កន្លែង​តែ​មួយ​ទេ ។\n\nដើម្បី​ស្តារ​កូន​សោ​របស់​អ្នក​ឡើង​វិញ ជា​ដំបូង​អ្នក​ត្រូវ​រក​ថាស​ចំនួន #N# ក្នុង​ចំណោម​ថាស​ទាំង #M# ហើយ​បន្ទាប់​មក​ចូរ​ជ្រើស “ស្តារ​គណនី​ឡើង​វិញ” និង “ស្តារគណនីឡើងវិញពីថាសផ្សេងៗគ្នា” ពេល​ដែល​អ្នក​ចូល​ទៅ​ក្នុង Martus ។\n>
 
 #____________________________________________________=Please insert disk #
 -b877-field:BackupRecoverKeyPairInsertNextDiskMessage=សូម​បញ្ចូល​ថាស #
 
-#_______________________________________________=Backup complete, please give each disk to someone you trust, so that if you forget your user name and/or password in the future you can recreate your account.  You will need #N# of these disks to recreate your account.
--30ee-field:BackupSecretShareCompleteInformation=ចម្លង​ទុក​ជា​ព័ត៌មាន​បម្រុង​បញ្ចប់​ទាំង​ស្រុង ចូរ​អោយ​ថាស​ទៅ​អ្នក​ណា​ដែល​អ្នក​ទុក​ចិត្ត ដូច្នេះ​បើ​អ្នក​ភ្លេច​ឈ្មោះ​អ្នកប្រើ ឬ​ពាក្យ​សម្ងាត់​របស់​អ្នក​នៅ​ពេល​ខាង​មុខ អ្នក​អាច​បង្កើត​គណនី​របស់​អ្នក​ឡើង​វិញ​បាន ។ អ្នក​នឹង​ត្រូវ​ការ​ថាស​ចំនូន #N# ក្នុង​ចំណោម​ថាស​ទាំងអស់​ដើម្បី​បង្កើត​គណនី​របស់​អ្នក​វិញ ។
+#_______________________________________________=Backup complete, please give each disk to someone you trust, so that if you forget your user name and/or password in the future you can recreate your account.  You will need #MinimumNumberOfFilesNeededForRecovery# of these disks to recreate your account.
+-fba9-field:BackupSecretShareCompleteInformation=<ចម្លង​ទុក​ជា​ព័ត៌មាន​បម្រុង​បញ្ចប់​ទាំង​ស្រុង ចូរ​អោយ​ថាស​ទៅ​អ្នក​ណា​ដែល​អ្នក​ទុក​ចិត្ត ដូច្នេះ​បើ​អ្នក​ភ្លេច​ឈ្មោះ​អ្នកប្រើ ឬ​ពាក្យ​សម្ងាត់​របស់​អ្នក​នៅ​ពេល​ខាង​មុខ អ្នក​អាច​បង្កើត​គណនី​របស់​អ្នក​ឡើង​វិញ​បាន ។ អ្នក​នឹង​ត្រូវ​ការ​ថាស​ចំនូន #N# ក្នុង​ចំណោម​ថាស​ទាំងអស់​ដើម្បី​បង្កើត​គណនី​របស់​អ្នក​វិញ ។>
 
 #__________________________________________=Author Public Code
 -01c7-field:BulletinDetailsAuthorPublicCode=<Author Public Code>
 
 #____________________________________=Bulletin ID
 -ae8f-field:BulletinDetailsBulletinId=<Bulletin ID>
+
+#_________________________________________=Extended History
+-191f-field:BulletinDetailsExtendedHistory=<Extended History>
 
 #_________________________________=History
 -90cc-field:BulletinDetailsHistory=<History>
@@ -343,8 +485,8 @@
 #__________________________________=Warning: Some information in this bulletin is not visible
 -eba1-field:BulletinHasUnknownStuff=ការព្រមាន ៖ ព័ត៌មាន​មួយ​ចំនួន​នៃ​របាយការណ៏​នេះ​មិន​បាន​បង្ហាញ​ទេ
 
-#______________________________________________=The selected Headquarters account(s) will be able to view the private information in this bulletin, or send this bulletin to a server, after you save it.\n\nTo add a new headquarters account use the Tools/Configure Headquarters menu option.
--de85-field:BulletinHeadQuartersHQInfoForModify=<The selected Headquarters account(s) will be able to view the private information in this bulletin, or send this bulletin to a server, after you save it.\n\nTo add a new headquarters account use the Tools/Configure Headquarters menu option.>
+#______________________________________________=The selected Headquarters account(s) will be able to view the private information in this bulletin, or send this bulletin to a server, after you save it.\n\nTo add a new Headquarters account use the Tools/Configure Headquarters menu option.
+-6702-field:BulletinHeadQuartersHQInfoForModify=<The selected Headquarters account(s) will be able to view the private information in this bulletin, or send this bulletin to a server, after you save it.\n\nTo add a new headquarters account use the Tools/Configure Headquarters menu option.>
 
 #____________________________________________=The following Headquarters account(s) can view the private information in this bulletin, and can send this bulletin to a server.
 -e728-field:BulletinHeadQuartersHQInfoForView=<The following Headquarters account(s) can view the private information in this bulletin, and can send this bulletin to a server.>
@@ -357,6 +499,9 @@
 
 #_____________________=Bulletin Id:
 -a081-field:BulletinId=លេខ​របាយការណ៏ ៖
+
+#______________________________=Bulletin Import Files
+-1106-field:BulletinImportFiles=<Bulletin Import Files>
 
 #____________________________=Last Saved
 -eb05-field:BulletinLastSaved=រក្សាទុក​ចុង​ក្រោយ
@@ -378,6 +523,24 @@
 
 #__________________________=Sent
 -35f4-field:BulletinWasSent=បានផ្ញើរ
+
+#_________________________=Calendar type
+-87e7-field:CalendarSystem=<Calendar type>
+
+#__________________________________=Default (2005-05-31)
+-784a-field:CalendarSystemGregorian=<Default (2005-05-31)>
+
+#________________________________=Persian (1384-03-10)
+-2f3e-field:CalendarSystemPersian=<Persian (1384-03-10)>
+
+#_____________________________=Thai Solar (2548-05-31)
+-2be4-field:CalendarSystemThai=<Thai Solar (2548-05-31)>
+
+#__________________________________=Select the headquarters listed below that you want to add to all the bulletins listed above.
+-23a1-field:ChooseHeadquartersToAdd=<Select the headquarters listed below that you want to add to all the bulletins listed above.>
+
+#_____________________________=Use Ctrl-Click or Shift-Click to select the fields (columns) that will appear in this report. 
+-e4a8-field:ChooseReportFields=<Use Ctrl-Click or Shift-Click to select the fields (columns) that will appear in this report. >
 
 #_____________________________________=Download Progress
 -8b0e-field:ChunkProgressStatusMessage=ដំណើរការ​ទាញយក
@@ -409,35 +572,68 @@
 #__________________________________=The layout of the bulletins is dictated by an XML document.  By default the standard bulletin fields occur at the top of the Custom Field declaration, but they can be moved if desired.  However, there are four required fields that cannot be removed:  'author', 'entrydate', 'language' and 'title'.\n\n
 -1ef6-field:CreateCustomFieldsHelp1=<ប្លង់​នៃ​របាយការណ៏​ត្រូវ​បាន​សរសេរ​ដោយ​ឯកសារ XML ។ នៅ​ខាង​ដើម​នៃ​ឯកសារ អ្នក​ត្រូវ​មាន​ស្លាក <ក្រឡា​ទទឹង​ផ្ទាល់​ខ្លួន> ហើយ​នៅ​ចុង​បញ្ចប់​នៃ​ឯកសារ​អ្នក​ត្រូវ​មាន​ស្លាក​បញ្ចប់​របស់​វា​ឈ្មោះ </ក្រឡា​ទទឹង​ផ្ទាល់​ខ្លួន> ។ តាម​លំនាំ​ដើម គ្រប់​ខ្នាត​គំរូ​ក្រឡាទទឹង​នៃ​របាយការណ៏​គឺ​ឋិត​នៅ​ខាង​លើ​ក្រឡា​ទទឹង​ដែល​បង្កើត​ថ្មី​ផ្ទាល់​ខ្លូន ប៉ុន្តែ​អ្នក​អាច​ប្តូរ​ទី​កន្លែង​វា​បាន​បើ​អ្នក​ចង់ ។ យ៉ាង​ណា​ក្តី មាន​ក្រឡា​ទទឹង​បួន​ដែល​មិន​អាច​យកចេញ​បាន​គឺ ៖ ‘author’ (អ្នក​និពន្ធ), ‘entrydate’ (កាលបរិច្ឆេទ​បញ្ចូល), ‘language’ (ភាសា) និង ‘title’ (ចំណង​ជើង) ។ ជាឧទាហរណ៏ សំរាប់ ‘author’ (អ្នក​និពន្ធ) អ្នក​នឹង​មាន\n<Field type=’String’><Tag>author</Tag><Label></Label></Field>\n\n>
 
-#__________________________________=For custom (non-standard) fields, you first select the type of field you want.  The possible choices are 'BOOLEAN', 'DATE', 'DATERANGE', 'DROPDOWN', 'GRID', 'LANGUAGE', 'MESSAGE', 'MULTILINE', and 'STRING'. \n\nFor each custom field you will need a unique identification tag.  This tag can be any word except those already used by the system (eg. 'author', 'summary', 'location', 'title' etc.), and cannot contain spaces or special characters.  Examples of choices are 'custom1', 'custom2', etc, or tags that are more descriptive like 'VictimsName'.\n\nThen you need a label which is displayed next to your custom field.  An example might be 'Name of 1st Witness'.\n\nAdditional Comments\n1. XML is case-sensitive ('Witness' is not the same as 'witness') \n2. Quotes around type name can be single or double as long as they match (e.g. 'STRING" is not valid. It must be 'STRING' or "STRING")\n3. A Boolean field will be displayed as a checkbox when editing and Yes/No when previewed or printed.\n4.  Use "MESSAGE" fields to give guidance on how to enter data, and to create comments/notes that will be displayed in every bulletin.\n\nSee examples below:\n\n
--da0a-field:CreateCustomFieldsHelp2=<ចំពោះ​ក្រឡា​ទទឹង​ផ្ទាល់​ខ្លួន (មិន​មែន​ជា​ខ្នាត​គំរូ) ជា​ដំបូង អ្នក​ត្រូវ​ជ្រើស​ប្រភេទ​ក្រឡា​ទទឹង​ដែល​អ្នក​ត្រូវ​ការ ។ ជម្រើស​ទាំងនោះ​រួម​មាន ‘BOOLEAN’ (តំលៃ​ពិត​ឬ​មិន​ពិត), ‘DATE’ (កាលបិរច្ឆេទ), ‘DATERANGE’ (ចន្លោះ​កាលបរិច្ឆេទ), ‘GRID’ (ក្រឡាចត្រង្គ), ‘LANGUAGE’ (ភាសា), ‘MULTILINE’ (ពហុបន្ទាត់) និង ‘STRING’ (តំលៃ​ជា​អក្សរ) ។ ប្រភេទ​នេះ​ត្រូវ​បាន​កំណត់​ដោយ <Field type=“ដាក់​ប្រភេទ​ក្រឡា​ទទឹង​ត្រង់​នេះ”> ។\n\nសម្រាប់​ក្រឡា​ទទឹង​ផ្ទាល់​ខ្លួន​និមួយៗ អ្នក​នឹង​ត្រូវ​ការ​ស្លាក​បញ្ជាក់​តែ​មួយ​គត់ ។ ស្លាក​នេះ​អាច​ជា​ពាក្យ​អ្វី​ក៏​បាន លើក​លែង​តែពាក្យ​មួយ​ចំនួន​ដែល​ត្រូវ​បាន​ប្រើ​ដោយ​ប្រព័ន្ធ (ដូចជា ៖ ‘author’ (អ្នក​និពន្ធ), ‘summary’ (សង្ខេប), ‘location’ (ទីកន្លែង), ‘title’ (ចំណងជើង) ។ល។) ហើយ​មិន​អាច​មាន​ដកឃ្លា ឬ​តួ​អក្សរ​ពិសេស​បាន​ទេ ។ ឧទាហរណ៏​នៃ​ជម្រើស​ទាំង​នោះ​រួម​មាន ៖ ‘custom1’ (ផ្ទាល់ខ្លួន១), ‘custom2’ (ផ្ទាល់ខ្លួន២), ។ល។ ឬ​ជា​ស្លាក​ដែល​មាន​លក្ខណៈ​អត្ថាធិប្បាយ​ដូច​ជា ‘VictimsName’ (ឈ្មោះជនរងគ្រោះ) ។ ស្លាក​ដែល​មាន​តែ​មួយ​នេះ​អាច​មាន​រាង <Tag>yourtag</Tag> ។\nបន្ទាប់​មក អ្នក​ត្រូវ​មាន​ស្លាក​ដែល​ត្រូវ​បង្ហាញ​នៅ​បន្ទាប់​ពី​ក្រឡា​ទទឹង​ផ្ទាល់​ខ្លួន ។ ជា​ឧទាហរណ៏​អាច​ជា “ឈ្មោះ​សាក្សី​ទី​មួយ” ។ ស្លាក​នេះ​ត្រូវ​ព័ទ្ធ​ជុំ​វិញ​ដោយ <Label>ដាក់​ស្លាក​របស់​អ្នក​ត្រង់​នេះ</Label>\nការ​ពិពណ៌នា​ពី​ក្រឡា​ទទឹង​និមួយៗ​ត្រូវ​បញ្ចប់​ដោយ </Field>\n\n>
+#__________________________________=For custom (non-standard) fields, you first select the type of field you want.  The possible choices are 'BOOLEAN', 'DATE', 'DATERANGE', 'DROPDOWN', 'GRID', 'LANGUAGE', 'MESSAGE', 'MULTILINE', 'STRING', and 'SECTION'. \n\nFor each custom field you will need a unique identification tag.  This tag can be any word except those already used by the system (eg. 'author', 'summary', 'location', 'title' etc.), and cannot contain spaces or special characters.  Examples of choices are 'VictimsName', 'EyeColorChoice', etc.\n\nThen you need a label which is displayed next to your custom field.  An example might be 'Name of 1st Witness'.\n\nYou can create sections (which you can hide/unhide) in your bulletins using a SECTION field type.  \n\nYou can put multiple fields on a single row in your bulletin by using <KeepWithPrevious/> in the field definition.\n\nYou can require certain fields or grid columns to be entered before saving a bulletin by using </RequiredField> in the field definition.\n\nYou can restrict date fields, date grid columns, date range fields, and date range grid columns by using <MinimumDate> and/or <MaximumDate> tags with a date in YYYY-MM-DD format. NOTE: The year must always be a 'Gregorian' year like 2009, even if Martus is configured to use Thai or Persian dates. A blank date, shown as <MaximumDate/>, means 'today', although it may allow one day earlier or later, due to time zone issues. \n\nYou can populate drop-down lists (either inside or outside of a grid) in 3 ways - 1) by entering a list of <Choices> values in the field definition, 2) with values that have been entered in a grid elsewhere in your bulletin by using <DataSource>, and 3) by creating a list of "Reusable Choices" that can be referred to by more than one field.  See examples below for the correct XML definition syntax to use.\n\nYou can set a default value for text and dropdown list fields by using <DefaultValue>xxx</DefaultValue>. For dropdowns, you must use a value already in the list of choices you defined. For Reusable Choices dropdowns it can be a partial or complete code, with each level separated by dots (for a location dropdown that has both State and City levels, you could pick the default to be at either level, e.g. either CA or CA.LA, see example below). Default values can be set for both standard and custom fields, but are NOT allowed for BOOLEAN, DATE, DATERANGE, GRID, LANGUAGE, MESSAGE, and SECTION field types, and are not allowed for dropdowns where the values in the list are based on data entered in another field.\n\n Additional Comments\n1. XML is case-sensitive ('Witness' is not the same as 'witness') \n2. Quotes around type name can be single or double as long as they match (e.g. 'STRING" is not valid. It must be 'STRING' or "STRING")\n3. A Boolean field will be displayed as a checkbox when editing and Yes/No when previewed or printed.\n4.  Use "MESSAGE" fields to give guidance on how to enter data, and to create comments/notes that will be displayed in every bulletin.\n5.  Dropdowns using a "Reusable Choices" list can have multiple levels (e.g. for locations that might have State and City), different fields can use one or more of the levels, and the number of levels is not limited.\n\nSee examples below:\n\n
+-ebb1-field:CreateCustomFieldsHelp2=<ចំពោះ​ក្រឡា​ទទឹង​ផ្ទាល់​ខ្លួន (មិន​មែន​ជា​ខ្នាត​គំរូ) ជា​ដំបូង អ្នក​ត្រូវ​ជ្រើស​ប្រភេទ​ក្រឡា​ទទឹង​ដែល​អ្នក​ត្រូវ​ការ ។ ជម្រើស​ទាំងនោះ​រួម​មាន ‘BOOLEAN’ (តំលៃ​ពិត​ឬ​មិន​ពិត), ‘DATE’ (កាលបិរច្ឆេទ), ‘DATERANGE’ (ចន្លោះ​កាលបរិច្ឆេទ), ‘GRID’ (ក្រឡាចត្រង្គ), ‘LANGUAGE’ (ភាសា), ‘MULTILINE’ (ពហុបន្ទាត់) និង ‘STRING’ (តំលៃ​ជា​អក្សរ) ។ ប្រភេទ​នេះ​ត្រូវ​បាន​កំណត់​ដោយ <Field type=“ដាក់​ប្រភេទ​ក្រឡា​ទទឹង​ត្រង់​នេះ”> ។\n\nសម្រាប់​ក្រឡា​ទទឹង​ផ្ទាល់​ខ្លួន​និមួយៗ អ្នក​នឹង​ត្រូវ​ការ​ស្លាក​បញ្ជាក់​តែ​មួយ​គត់ ។ ស្លាក​នេះ​អាច​ជា​ពាក្យ​អ្វី​ក៏​បាន លើក​លែង​តែពាក្យ​មួយ​ចំនួន​ដែល​ត្រូវ​បាន​ប្រើ​ដោយ​ប្រព័ន្ធ (ដូចជា ៖ ‘author’ (អ្នក​និពន្ធ), ‘summary’ (សង្ខេប), ‘location’ (ទីកន្លែង), ‘title’ (ចំណងជើង) ។ល។) ហើយ​មិន​អាច​មាន​ដកឃ្លា ឬ​តួ​អក្សរ​ពិសេស​បាន​ទេ ។ ឧទាហរណ៏​នៃ​ជម្រើស​ទាំង​នោះ​រួម​មាន ៖ ‘custom1’ (ផ្ទាល់ខ្លួន១), ‘custom2’ (ផ្ទាល់ខ្លួន២), ។ល។ ឬ​ជា​ស្លាក​ដែល​មាន​លក្ខណៈ​អត្ថាធិប្បាយ​ដូច​ជា ‘VictimsName’ (ឈ្មោះជនរងគ្រោះ) ។ ស្លាក​ដែល​មាន​តែ​មួយ​នេះ​អាច​មាន​រាង <Tag>yourtag</Tag> ។\nបន្ទាប់​មក អ្នក​ត្រូវ​មាន​ស្លាក​ដែល​ត្រូវ​បង្ហាញ​នៅ​បន្ទាប់​ពី​ក្រឡា​ទទឹង​ផ្ទាល់​ខ្លួន ។ ជា​ឧទាហរណ៏​អាច​ជា “ឈ្មោះ​សាក្សី​ទី​មួយ” ។ ស្លាក​នេះ​ត្រូវ​ព័ទ្ធ​ជុំ​វិញ​ដោយ <Label>ដាក់​ស្លាក​របស់​អ្នក​ត្រង់​នេះ</Label>\nការ​ពិពណ៌នា​ពី​ក្រឡា​ទទឹង​និមួយៗ​ត្រូវ​បញ្ចប់​ដោយ </Field>\n\n>
 
-#__________________________________=<Field type='STRING'>\n<Tag>custom1</Tag>\n<Label>Witness Name</Label>\n</Field>\n\n<Field type='LANGUAGE'>\n<Tag>new2</Tag>\n<Label>Witness Speaks</Label>\n</Field>\n\n<Field type='BOOLEAN'>\n<Tag>new3</Tag>\n<Label>Were guns used?</Label>\n</Field>\n\n<Field type='MESSAGE'>\n<Tag>customMessage</Tag>\n<Label>Guidance for Perpetrator Eye Color entry:</Label>\n<Message>If you are unsure of the perpetrator's eye color, please leave this field blank.</Message>\n</Field>\n\n<Field type='DROPDOWN'>\n<Tag>customDropDown</Tag>\n<Label>Perpetrator Eye Color</Label>\n<Choices>\n<Choice>Brown</Choice>\n<Choice>Blue</Choice>\n<Choice>Green</Choice>\n<Choice>Other</Choice>\n</Choices>\n</Field>\n\n<Field type='GRID'>\n<Tag>customgrid</Tag>\n<Label>Victim Information</Label>\n<GridSpecDetails>\n<Column><Label>Name of Victim</Label></Column>\n<Column><Label>Victim Age</Label></Column>\n<Column><Label>Victim Gender</Label></Column>\n<Column><Label>Victim Ethnicity</Label></Column>\n</GridSpecDetails>\n</Field>\n
--491b-field:CreateCustomFieldsHelp3=<យោបល់​បន្ថែម\n១. XML គឺ​តម្រូវ​តាម​អក្សរ​តូច​ឬ​ធំ\n២. សញ្ញា​ដែល​នៅ​ជុំវិញ “ឈ្មោះ​នៃ​ប្រភេទ” អាច​ជា​សញ្ញា ‘ ឬ “ (បើ​សិន​ជា​ដូច​គ្នា)\n៣. ក្រឡា​ទទឹង​ដែល​មាន​លក្ខណៈ Boolean នឹង​ត្រូវ​បង្ហាញ​ជា “ប្រអប់​ធីក” ពេល​បញ្ចូល​ទិន្នន័យ និង​ជា​ ពិត/មិនពិត នៅ​ពេល​បោះពុម្ព ។\n\nនេះ​ជា​ឧទាហរណ៏​ខ្លះៗ ៖\n\n<Field type=’STRING’>\n<Tag>custom1</Tag>\n<Label>ឈ្មោះ​សាក្សី</Label>\n</Field>\n\n<Field type=’LANGUAGE’>\n<Tag>new2</Tag>\n<Label>សាក្សី​និយាយ​ថា</Label>\n</Field>\n\n<Field type=’BOOLEAN’>\n<Tag>new3</Tag>\n<Label>ប្រើ​កាំភ្លើង​ឬទេ ?</Label>\n</Field>\n\n<Field type=’GRID’>\n<Tag>customgrid</Tag>\n<Label>ព័ត៌មាន​ជនរងគ្រោះ</Label>\n<GridSpecDetails>\n<Column><Label>ឈ្មោះ​ជនរងគ្រោះ</Label></Column>\n<Column><Label>អាយុ​ជនរងគ្រោះ</Label></Column>\n<Column><Label>ភេទ​ជនរងគ្រោះ</Label></Column>\n<Column><Label>និគមជន​នៃ​ជនរងគ្រោះ</Label></Column>\n</GridSpecDetails>\n</Field>\n>
+#__________________________________=\n<Field type='SECTION'>\n<Tag>summarysection</Tag>\n<Label>Summary Section</Label>\n</Field>\n\n<Field type='STRING'>\n<Tag>office</Tag>\n<Label>Regional office collecting the data</Label>\n<DefaultValue>California field office</DefaultValue>\n</Field>\n\n<Field type='DROPDOWN'>\n<Tag>BulletinSource</Tag>\n<Label>Source of bulletin information</Label>\n<RequiredField/>\n<DefaultValue>Media/Press</DefaultValue>\n<Choices>\n<Choice>Media/Press</Choice>\n<Choice>Legal Report</Choice>\n<Choice>Personal Interview</Choice>\n<Choice>Other</Choice>\n</Choices>\n</Field>\n\n<Field type='STRING'>\n<Tag>SpecifyOther</Tag>\n<Label>If "Other", please specify:</Label>\n</Field>\n\n<Field type='STRING'>\n<Tag>IntervieweeName</Tag>\n<Label>Interviewee Name</Label>\n</Field>\n\n<Field type='LANGUAGE'>\n<Tag>IntervieweeLanguage</Tag>\n<Label>Interviewee Speaks</Label>\n</Field>\n\n<Field type='DATERANGE'>\n<Tag>InterviewDates</Tag>\n<Label>Date(s) of interview(s)</Label>\n</Field>\n\n<Field type='BOOLEAN'>\n<Tag>Anonymous</Tag>\n<Label>Does interviewee wish to remain anonymous?</Label>\n</Field>\n\n<Field type='BOOLEAN'>\n<Tag>AdditionalInfo</Tag>\n<Label>Is interviewee willing to give additional information if needed?</Label>\n<KeepWithPrevious/>\n</Field>\n\n<Field type='BOOLEAN'>\n<Tag>Testify</Tag>\n<Label>Is interviewee willing to testify?</Label>\n<KeepWithPrevious/>\n</Field>\n\n<Field type='DROPDOWN'>\n<Tag>EventLocation</Tag>\n<Label>Event Location</Label>\n<DefaultValue>CA</DefaultValue>\n  <UseReusableChoices code='StateChoices'></UseReusableChoices>\n  <UseReusableChoices code='CityChoices'></UseReusableChoices>\n</Field>\n\n\n<Field type='SECTION'>\n<Tag>peoplesection</Tag>\n<Label>People Section</Label>\n</Field>\n\n<Field type='GRID'>\n<Tag>VictimInformationGrid</Tag>\n<Label>Victim Information</Label>\n<GridSpecDetails>\n<Column type='STRING'><Tag></Tag><Label>First Name</Label></Column>\n<Column type='STRING'><Tag></Tag><Label>Last Name</Label></Column>\n<Column type='BOOLEAN'><Tag></Tag><Label>Is Identified?</Label></Column>\n<Column type='DATE'><Tag></Tag><Label>Date of Birth</Label><MinimumDate>1910-01-01</MinimumDate><MaximumDate/></Column>\n<Column type='DROPDOWN'><Tag></Tag><Label>Sex</Label><RequiredField/>\n<Choices>\n<Choice>Male</Choice>\n<Choice>Female</Choice>\n<Choice>Unknown</Choice>\n</Choices></Column>\n<Column type='DROPDOWN'><Tag></Tag><Label>State of Birth</Label>\n  <UseReusableChoices code='StateChoices'></UseReusableChoices></Column>\n<Column type='STRING'><Tag></Tag><Label>Ethnicity</Label></Column>\n</GridSpecDetails>\n</Field>\n\n<Field type='MESSAGE'>\n<Tag>MessageProfession</Tag>\n<Label>Profession History Table Note</Label>\n<Message>If you have information about a person who has had different professions over time, enter multiple rows with the same First and Last Names and show the date ranges for each profession on a separate row.</Message>\n</Field>\n\n<Field type='GRID'>\n<Tag>ProfessionHistoryGrid</Tag>\n<Label>Profession History</Label>\n<GridSpecDetails>\n<Column type='DROPDOWN'><Tag></Tag><Label>First Name</Label>\n <DataSource>\n <GridFieldTag>VictimInformationGrid</GridFieldTag>\n <GridColumnLabel>First Name</GridColumnLabel>\n </DataSource>\n</Column>\n<Column type='DROPDOWN'><Tag></Tag><Label>Last Name</Label>\n <DataSource>\n <GridFieldTag>VictimInformationGrid</GridFieldTag>\n <GridColumnLabel>Last Name</GridColumnLabel>\n </DataSource>\n</Column>\n<Column type='STRING'><Tag></Tag><Label>Profession</Label></Column>\n<Column type='DATERANGE'><Tag></Tag><Label>Dates of Profession</Label><MaximumDate/></Column>\n</GridSpecDetails>\n</Field>\n\n<Field type='MULTILINE'>\n<Tag>narrative</Tag>\n<Label>Narrative description of events</Label>\n<DefaultValue>What happened in detail is as follows:</DefaultValue>\n</Field>\n\n\n<ReusableChoices code='StateChoices' label='State'>\n  <Choice code='' label='(Not Selected)'></Choice>\n  <Choice code='CA' label='California'></Choice>\n  <Choice code='NY' label='New York'></Choice>\n  <Choice code='TX' label='Texas'></Choice>\n</ReusableChoices>\n\n<ReusableChoices code='CityChoices' label='City'>\n  <Choice code='' label='(Not Selected)'></Choice>\n  <Choice code='CA.SF' label='San Francisco'></Choice>\n  <Choice code='CA.LA' label='Los Angeles'></Choice>\n  <Choice code='NY.NYC' label='New York City'></Choice>\n  <Choice code='NY.ALB' label='Albany'></Choice>\n  <Choice code='TX.DAL' label='Dallas'></Choice>\n  <Choice code='TX.AUS' label='Austin'></Choice>\n</ReusableChoices>\n
+-6bc3-field:CreateCustomFieldsHelp3=<យោបល់​បន្ថែម\n១. XML គឺ​តម្រូវ​តាម​អក្សរ​តូច​ឬ​ធំ\n២. សញ្ញា​ដែល​នៅ​ជុំវិញ “ឈ្មោះ​នៃ​ប្រភេទ” អាច​ជា​សញ្ញា ‘ ឬ “ (បើ​សិន​ជា​ដូច​គ្នា)\n៣. ក្រឡា​ទទឹង​ដែល​មាន​លក្ខណៈ Boolean នឹង​ត្រូវ​បង្ហាញ​ជា “ប្រអប់​ធីក” ពេល​បញ្ចូល​ទិន្នន័យ និង​ជា​ ពិត/មិនពិត នៅ​ពេល​បោះពុម្ព ។\n\nនេះ​ជា​ឧទាហរណ៏​ខ្លះៗ ៖\n\n<Field type=’STRING’>\n<Tag>custom1</Tag>\n<Label>ឈ្មោះ​សាក្សី</Label>\n</Field>\n\n<Field type=’LANGUAGE’>\n<Tag>new2</Tag>\n<Label>សាក្សី​និយាយ​ថា</Label>\n</Field>\n\n<Field type=’BOOLEAN’>\n<Tag>new3</Tag>\n<Label>ប្រើ​កាំភ្លើង​ឬទេ ?</Label>\n</Field>\n\n<Field type=’GRID’>\n<Tag>customgrid</Tag>\n<Label>ព័ត៌មាន​ជនរងគ្រោះ</Label>\n<GridSpecDetails>\n<Column><Label>ឈ្មោះ​ជនរងគ្រោះ</Label></Column>\n<Column><Label>អាយុ​ជនរងគ្រោះ</Label></Column>\n<Column><Label>ភេទ​ជនរងគ្រោះ</Label></Column>\n<Column><Label>និគមជន​នៃ​ជនរងគ្រោះ</Label></Column>\n</GridSpecDetails>\n</Field>\n>
 
 #____________________________________=Please enter your new username and password.
 -aec2-field:CreateNewUserNamePassword=សូម​បញ្ចូល​ឈ្មោះ​អ្នក​ប្រើ និង ពាក្យសម្ងាត់​ថ្មី​របស់​អ្នក ។
 
-#_______________________________________=MartusCustomization
--f3b2-field:CustomizationFileDefaultName=<MartusCustomization>
+#_________________________________=Bottom (always Private) Pane of Bulletin
+-f953-field:CustomXMLBottomSection=<Bottom (always Private) Pane of Bulletin>
+
+#______________________________=Top Pane of Bulletin
+-e596-field:CustomXMLTopSection=<Top Pane of Bulletin>
 
 #_____________________________________=Customization Template Files
 -9210-field:CustomizationTemplateFiles=<Customization Template Files>
 
+#_______________________=(Press the + button to show the hidden information)
+-045b-field:DataIsHidden=<(Press the + button to show the hidden information)>
+
+#________________________=Date delimiter
+-36d4-field:DateDelimiter=<Date delimiter>
+
+#____________________________=Dash (00-00-00)
+-997c-field:DateDelimiterDash=<Dash (00-00-00)>
+
+#___________________________=Dot (00.00.00)
+-66ea-field:DateDelimiterDot=<Dot (00.00.00)>
+
+#_____________________________=Slash (00/00/00)
+-404d-field:DateDelimiterSlash=<Slash (00/00/00)>
+
 #____________________=Exact Date
 -8a81-field:DateExact=កាលបរិច្ឆេទ​ពិត​ប្រាកដ
+
+#___________________________=Unknown
+-bc78-field:DateNotSpecified=<Unknown>
+
+#______________________=Day
+-987b-field:DatePartDay=<Day>
+
+#________________________=Month
+-082b-field:DatePartMonth=<Month>
+
+#_______________________=Year
+-879e-field:DatePartYear=<Year>
 
 #____________________=Date Range
 -6bb4-field:DateRange=ចន្លោះ​កាលបរិច្ឆេទ
 
-#________________________=Between
--1b22-field:DateRangeFrom=ចន្លោះ
+#_________________________________=#FieldLabel# (beginning)
+-007f-field:DateRangeTemplatebegin=<#FieldLabel# (beginning)>
 
-#______________________=and
--cffa-field:DateRangeTo=និង
+#_______________________________=#FieldLabel# (end)
+-fea7-field:DateRangeTemplateend=<#FieldLabel# (end)>
 
 #_____________________________=Default Details
 -4a82-field:DefaultDetailFiles=ព័ត៌មាន​លម្អិត​លំនាំ​ដើម
+
+#_____________________________________=bulletins.html
+-a4f1-field:DefaultPrintToDiskFileName=<bulletins.html>
 
 #_________________________________=This bulletin has been pasted into Martus from the file:
 -ce4c-field:DeleteBulletinFileMsg1=របាយការណ៏​នេះ​ត្រូវ​បានបិទភ្ជាប់​ទៅ Martus ពី​ឯកសារ ៖
@@ -457,6 +653,15 @@
 #______________________=Do not prompt
 -448d-field:DonotPrompt=កុំ​សួរ​បញ្ជាក់
 
+#__________________________=Labels
+-2228-field:DuplicateLabels=<Labels>
+
+#__________________________________________=The following labels appear more than once in your template.
+-3f09-field:DuplicateLabelsInCustomTemplate=<The following labels appear more than once in your template.>
+
+#__________________________________________________=Do you want to save this template with the duplicate labels?
+-79bc-field:DuplicateLabelsInCustomTemplateContinue=<Do you want to save this template with the duplicate labels?>
+
 #________________________________=Unable to back up the key file on this disk.
 -bda3-field:ErrorBackingupKeyPair=ពុំ​អាច​ចម្លង​ឯកសារ​កូនសោ​ជា​ព័ត៌មាន​បម្រុង​ទៅ​លើ​ថាស ។
 
@@ -472,8 +677,8 @@
 #__________________________________=LABEL
 -64b8-field:ErrorCustomFieldHeader4=ស្លាក
 
-#____________________________=There is an error in the custom field definitions. Each problem is identified with the following codes:\n   100 - Required standard field is missing\n   101 - Custom field does not have a correct tag.\n   102 - A previous Tag already exists with this name.\n   103 - Custom field does not have a label.\n   104 - Unrecognized Field Type.\n   105 - A label was found in a standard field.\n   106 - XML Parse Error.\n   107 - Tag contains illegal characters.\n   200 - All fields empty.\n   201 - Unrecognized headquarters created this template.\n   202 - Security validation error.\n   203 - File Error.
--f2cf-field:ErrorCustomFields=<មាន​កំហុស​នៅ​ក្នុង​និយមន័យ​ក្រឡា​ទទឹង​ផ្ទាល់​ខ្លួន ។ បញ្ហា​និមួយៗ​ត្រូវ​បាន​បញ្ជាក់​ដោយ​រហស្សលិខ​ដូច​ខាងក្រោម ៖\n   ១០០ - បាត់​ក្រឡា​ទទឹង​ខ្នាត​គំរូដែល​ត្រូវការ\n   ១០១ - ក្រឡា​ទទឹង​ផ្ទាល់ខ្លួនមិន​មាន​ស្លាក​ត្រឹមត្រូវ ។\n   ១០២ - មាន​ស្លាក​ដែល​មាន​ឈ្មោះ​នេះ​រួច​ហើយ ។\n   ១០៣ - ក្រឡា​ទទឹង​ផ្ទាល់ខ្លួនមិន​មាន​ស្លាក ។\n   ១០៤ - ពុំ​ស្គាល់​ប្រភេទ​ក្រឡា​ទទឹង ។\n   ១០៥ - ស្លាក​នេះ​ប្រើ​នៅ​ក្នុង​ក្រឡា​ទទឹង​ខ្នាត​គំរូ​រួច​ហើយ ។\n   ១០៦ - បិទភ្ជាប់ XML មាន​កំហុស ។\n   ១០៧ - ស្លាក​មាន​តួ​អក្សរ​មិន​ត្រឹមត្រូវ>
+#____________________________=There is an error in the custom field definitions. Each problem is identified with the following codes:\n   100 - Required standard field is missing\n   101 - Custom field does not have a correct tag\n   102 - A previous Tag already exists with this name\n   103 - Custom field does not have a label\n   104 - Unrecognized Field Type\n   105 - A label was found in a standard field\n   106 - XML Parse Error (e.g. mismatched quotation marks or bracket syntax)\n   107 - Tag contains illegal characters (e.g. spaces or punctuation)\n   108 - Duplicate entry in Dropdown field\n   109 - No Choices in Dropdown field\n   110 - System/Standard field tag cannot be used for custom field\n   111 - Standard field in top pane cannot be placed in bottom (always Private) pane\n   112 - Standard field in bottom (always Private) pane cannot be placed in the top pane\n   113 - Data Source Grid not found in same pane as resulting dropdown field\n   114 - Unknown Data Source Grid Column Label\n   115 - Dropdown cannot have both choices and data source\n   116 - Invalid date must be in ISO format YYYY-MM-DD\n   117 - No reusable choices list defined for Dropdown\n   118 - Reusable dropdown definition missing code value.  Please verify that the definition looks like the following:\n         <UseReusableChoices code='FieldChoices'></UseReusableChoices>\n   119 - Reusable choice must have a code and label\n   120 - Dropdown data source cannot be a single or multiple level dropdown with reusable choices\n   121 - Default value is not valid for this field\n   200 - All fields empty\n   201 - Unrecognized Headquarters created this template\n   202 - Security validation error\n   203 - File Error\n   204 - Imported XML Missing Field
+-1ca9-field:ErrorCustomFields=<មាន​កំហុស​នៅ​ក្នុង​និយមន័យ​ក្រឡា​ទទឹង​ផ្ទាល់​ខ្លួន ។ បញ្ហា​និមួយៗ​ត្រូវ​បាន​បញ្ជាក់​ដោយ​រហស្សលិខ​ដូច​ខាងក្រោម ៖\n   ១០០ - បាត់​ក្រឡា​ទទឹង​ខ្នាត​គំរូដែល​ត្រូវការ\n   ១០១ - ក្រឡា​ទទឹង​ផ្ទាល់ខ្លួនមិន​មាន​ស្លាក​ត្រឹមត្រូវ ។\n   ១០២ - មាន​ស្លាក​ដែល​មាន​ឈ្មោះ​នេះ​រួច​ហើយ ។\n   ១០៣ - ក្រឡា​ទទឹង​ផ្ទាល់ខ្លួនមិន​មាន​ស្លាក ។\n   ១០៤ - ពុំ​ស្គាល់​ប្រភេទ​ក្រឡា​ទទឹង ។\n   ១០៥ - ស្លាក​នេះ​ប្រើ​នៅ​ក្នុង​ក្រឡា​ទទឹង​ខ្នាត​គំរូ​រួច​ហើយ ។\n   ១០៦ - បិទភ្ជាប់ XML មាន​កំហុស ។\n   ១០៧ - ស្លាក​មាន​តួ​អក្សរ​មិន​ត្រឹមត្រូវ>
 
 #_________________________________________=A previous backup file exists.  You must save each file on its own removable media disk.
 -db93-field:ErrorPreviousBackupShareExists=មាន​ឯកសារ​ព័ត៌មាន​បម្រុង​មុន​រួច​ហើយ ។ អ្នក​ត្រូវ​តែ​រក្សា​ឯកសារ​និមួយៗ​នៅ​លើ​ថាស​ចល័ត​ខុសៗ​គ្នា ។
@@ -490,14 +695,59 @@
 #___________________________=Exit when complete
 -30e3-field:ExitWhenComplete=ចាកចេញ​ពេលបញ្ចប់​ទាំង​ស្រុង
 
-#________________________________=Information from the selected bulletins (listed below) will be exported to an XML file that you specify.\n\nPlease Note: This is a one way operation, you will not be able to import the XML file saved back into Martus.  This operation exists so you can bring Martus Bulletins into another application that does import XML files.
--7ae7-field:ExportBulletinDetails=ព័ត៌មាន​ដែល​បាន​ជ្រើស​ពី​របាយការណ៏​ខាង​ក្រោម​នឹង​ត្រូវ​បាន​នាំ​ចេញ​ជា​ឯកសារ XML ដូច​ដែល​អ្នក​បាន​បញ្ជាក់ ។\n\nចូរ​ចំណាំ ៖ នេះ​ជា​ប្រតិបត្តិការ​សំរាប់​តែ​នាំ​ចេញ អ្នក​នឹង​មិន​អាច​នាំ​ចូល​ឯកសារ XML និង​រក្សា​វា​ទុក​ក្នុង Martus  វិញ​បាន​ទេ ។ ប្រតិបត្តិការ​នេះ​គឺ​សំរាប់​អោយ​អ្នក​យក​របាយការណ៏ Martus ទៅ​កាន់​កម្មវិធី​ណា​ដែល​អាច​នាំ​ចូល​ឯកសារ XML ។
+#____________________________=Include attachments in export
+-1a48-field:ExportAttachments=<Include attachments in export>
+
+#________________________________=Information from the selected bulletins (listed below) will be exported to an XML file that you specify.  These files can then be used to import the Martus bulletin information into another application.\n\n  You could also use this XML file to import these bulletins back into Martus (as new unique bulletins) if desired.  Please email help@martus.org if you need assistance with this type of importing.
+-a8c0-field:ExportBulletinDetails=<ព័ត៌មាន​ដែល​បាន​ជ្រើស​ពី​របាយការណ៏​ខាង​ក្រោម​នឹង​ត្រូវ​បាន​នាំ​ចេញ​ជា​ឯកសារ XML ដូច​ដែល​អ្នក​បាន​បញ្ជាក់ ។\n\nចូរ​ចំណាំ ៖ នេះ​ជា​ប្រតិបត្តិការ​សំរាប់​តែ​នាំ​ចេញ អ្នក​នឹង​មិន​អាច​នាំ​ចូល​ឯកសារ XML និង​រក្សា​វា​ទុក​ក្នុង Martus  វិញ​បាន​ទេ ។ ប្រតិបត្តិការ​នេះ​គឺ​សំរាប់​អោយ​អ្នក​យក​របាយការណ៏ Martus ទៅ​កាន់​កម្មវិធី​ណា​ដែល​អាច​នាំ​ចូល​ឯកសារ XML ។>
 
 #____________________________=Include private data in export
 -4bb6-field:ExportPrivateData=រួមបញ្ចូល​ទិន្នន័យ​បុគ្គល​ក្នុង​ការ​នាំ​ចេញ
 
+#_________________________=Exporting
+-c373-field:ExportProgress=<Exporting>
+
 #____________________________=Exported Bulletins
 -0b4e-field:ExportedBulletins=នាំចេញ​របាយការណ៏
+
+#______________________________=---Overview---\n\nMartus searches all versions of every bulletin (both public and private, sealed and draft) in every folder, including the Discarded Bulletins folder.  When the search is completed, the Search Results folder lists copies of the bulletins found in your search.\n\nYou can search for words in any language.  Martus searches are not case-sensitive in English and other purely Latin character languages, so it doesn't matter whether a word is capitalized or not.\n\nSearches include attachment filenames, but not content of attachments.\n\nYou can search both standard and custom fields.\n\n
+-42b4-field:FancySearchHelpMsg1=<---Overview---\n\nMartus searches all versions of every bulletin (both public and private, sealed and draft) in every folder, including the Discarded Bulletins folder.  When the search is completed, the Search Results folder lists copies of the bulletins found in your search.\n\nYou can search for words in any language.  Martus searches are not case-sensitive in English and other purely Latin character languages, so it doesn't matter whether a word is capitalized or not.\n\nSearches include attachment filenames, but not content of attachments.\n\nYou can search both standard and custom fields.\n\n>
+
+#______________________________=---Search tips---\n\nMartus will find any text you enter whether it's a complete word or part of a larger word. For example, if you search for the word prison, you'll see bulletins that include the words prison, imprison, and imprisonment. Likewise, if you search for the word prison, Martus will find bulletins that include attachments with names such as photos-prison.jpg and prisoners-report.doc.\n\nTo search for an exact phrase, type it with quotation marks around the phrase  (e.g.  "Witness Testimony"). If you do not put quotation marks around the phrase, Martus will search for the words individually.\n\nUse the word "#Or#" to broaden your search, or the word "#And#" to narrow it.  You can use the #And# / #Or# dropdowns to specify different fields you want search across (e.g. you want to search for bulletins that have "Last Saved Date" in the last week and have a certain author).  If you want to search on multiple text values within a single bulletin field, you can use #Or# or #And# in-between words in the "Search For..." entry box.  For example, if you search "Any Field" for:\n   prison #Or# jail\nyou'll see a list of bulletins that contain either word anywhere in the bulletin. If you search for:\n   prison #And# assault \nyou'll see a list of bulletins that contain both words. The keyword "#And#" is implied, so if you search for:\n   prison assault \nMartus will find bulletins the same bulletins as if you searched for:\n   prison #And# assault\n\nWhen you use both "#And#" and "#Or#", your search terms are grouped from the beginning of your list (either across bulletin fields or within a particular field). For example, if you enter:\n   prison #Or# jail #And# trial \nin the "Search For..." entry box, Martus will search for any bulletins that contain either of the words prison or jail, and also contain the word trial. But if you enter:\n   prison #And# jail #Or# trial \nMartus will search for any bulletins that contain both the words prison and jail, or contain the word trial.\n
+-ec7d-field:FancySearchHelpMsg2=<---Search tips---\n\nMartus will find any text you enter whether it's a complete word or part of a larger word. For example, if you search for the word prison, you'll see bulletins that include the words prison, imprison, and imprisonment. Likewise, if you search for the word prison, Martus will find bulletins that include attachments with names such as photos-prison.jpg and prisoners-report.doc.\n\nTo search for an exact phrase, type it with quotation marks around the phrase  (e.g.  "Witness Testimony"). If you do not put quotation marks around the phrase, Martus will search for the words individually.\n\nUse the word "#Or#" to broaden your search, or the word "#And#" to narrow it.  You can use the #And# / #Or# dropdowns to specify different fields you want search across (e.g. you want to search for bulletins that have "Last Saved Date" in the last week and have a certain author).  If you want to search on multiple text values within a single bulletin field, you can use #Or# or #And# in-between words in the "Search For..." entry box.  For example, if you search "Any Field" for:\n   prison #Or# jail\nyou'll see a list of bulletins that contain either word anywhere in the bulletin. If you search for:\n   prison #And# assault \nyou'll see a list of bulletins that contain both words. The keyword "#And#" is implied, so if you search for:\n   prison assault \nMartus will find bulletins the same bulletins as if you searched for:\n   prison #And# assault\n\nWhen you use both "#And#" and "#Or#", your search terms are grouped from the beginning of your list (either across bulletin fields or within a particular field). For example, if you enter:\n   prison #Or# jail #And# trial \nin the "Search For..." entry box, Martus will search for any bulletins that contain either of the words prison or jail, and also contain the word trial. But if you enter:\n   prison #And# jail #Or# trial \nMartus will search for any bulletins that contain both the words prison and jail, or contain the word trial.\n>
+
+#______________________________=You can use the word #Or# or #And#, or you can use the English words "#OrEnglish#" and "#AndEnglish#" to search.\n\nYou need to put spaces before and after any #Or# / #And# keywords you use in your search.\n
+-1573-field:FancySearchHelpMsg3=<You can use the word #Or# or #And#, or you can use the English words "#OrEnglish#" and "#AndEnglish#" to search.\n\nYou need to put spaces before and after any #Or# / #And# keywords you use in your search.\n>
+
+#______________________________=If you want all of your grid search criteria to be met in a single bulletin grid row, please check the "Match grid column specifications" checkbox. For example, if you want to search for a specific victim name in a single row in your bulletins created after a certain date, select the checkbox and enter the following fields in the Search screen: "Victim Information: First Name" = x and "Victim Information: Last Name" = y and "Date Created" >= YYYY-Mon-DD. If you do not select the "Match grid column specifications" checkbox, Martus will find bulletins created after your specified date where any row has the first name you specified and any other row has the last name specified, but not necessarily in the same bulletin row (you could have a row with "First Name" = x and "Last Name" = b, and a different row with "First Name" = a and "Last Name" = y, and Martus will find that bulletin as matching the search because you did not specify that it had to match in a single row)\n
+-97c7-field:FancySearchHelpMsg4=<If you want all of your grid search criteria to be met in a single bulletin grid row, please check the "Match grid column specifications" checkbox. For example, if you want to search for a specific victim name in a single row in your bulletins created after a certain date, select the checkbox and enter the following fields in the Search screen: "Victim Information: First Name" = x and "Victim Information: Last Name" = y and "Date Created" >= YYYY-Mon-DD. If you do not select the "Match grid column specifications" checkbox, Martus will find bulletins created after your specified date where any row has the first name you specified and any other row has the last name specified, but not necessarily in the same bulletin row (you could have a row with "First Name" = x and "Last Name" = b, and a different row with "First Name" = a and "Last Name" = y, and Martus will find that bulletin as matching the search because you did not specify that it had to match in a single row)\n>
+
+#___________________________=Yes/No
+-9f62-field:FieldTypeBOOLEAN=<Yes/No>
+
+#________________________=Date
+-eb9a-field:FieldTypeDATE=<Date>
+
+#_____________________________=Date Range
+-6bb4-field:FieldTypeDATERANGE=<Date Range>
+
+#____________________________=Dropdown List
+-da4a-field:FieldTypeDROPDOWN=<Dropdown List>
+
+#________________________=Grid/Table
+-be86-field:FieldTypeGRID=<Grid/Table>
+
+#____________________________=Language
+-89b8-field:FieldTypeLANGUAGE=<Language>
+
+#___________________________=Message
+-68f4-field:FieldTypeMESSAGE=<Message>
+
+#_____________________________=Text with Scrollbar
+-c0c1-field:FieldTypeMULTILINE=<Text with Scrollbar>
+
+#__________________________=Text
+-c332-field:FieldTypeSTRING=<Text>
 
 #______________________________________=This file name should be unique and identifiable to you but we recommend not using your user name.  Each file will be generated with this name and its number sequence.
 -02b6-field:GetShareFileNameDescription=ឈ្មោះ​ឯកសារ​នេះ​គួរ​មាន​តែ​មួយ​គត់ ហើយ​អាច​បញ្ជាក់​បាន​ចំពោះ​អ្នក ប៉ុន្តែ​យើង​សុំស្នើរ​កុំ​ប្រើ​ឈ្មោះ​របស់​អ្នក ។ ឯកសារ​និមួយៗ​នឹង​ត្រូវ​បាន​រួម​បញ្ចូល​ជាមួយ​ឈ្មោះ​នេះ ហើយ​និង​លេខ​លំដាប់​របស់​វា ។
@@ -541,6 +791,33 @@
 #________________________________=One or more accounts already exist on this computer. To create an additional account with a new username and passphrase, click OK.
 -02f2-field:HowToCreateNewAccount=គណនី​មួយ ឬ​ច្រើន​មាន​នៅ​លើ​កុំព្យូទ័រ​នេះ​រួច​ហើយ ។ ដើម្បី​បង្កើត​គណនី​ថ្មី​រួម​ទាំង​ឈ្មោះ​អ្នកប្រើ និង​ឃ្លា​សម្ងាត់​បន្ថែម​ទៀត​នោះ ចូរចុច “យល់ព្រម” ។
 
+#_________________________________________=Import bulletins into which Folder?
+-5efa-field:ImportBulletinsIntoWhichFolder=<Import bulletins into which Folder?>
+
+#____________________________________=Bulletin
+-6ef0-field:ImportExportBulletinTitle=<Bulletin>
+
+#_________________________=Importing
+-90ab-field:ImportProgress=<Importing>
+
+#_____________________________=#TotalBulletins# bulletins were selected for printing.  #AllPrivateBulletins# of them are all private.\n What would you like to include when printing?
+-abb2-field:IncludePrivateData=<#TotalBulletins# bulletins were selected for printing.  #AllPrivateBulletins# of them are all private.\n What would you like to include when printing?>
+
+#_________________________________=The version of this translation is not compatible with this version of Martus.  It is recommended that you do not continue to use this translation version and go to (http://www.martus.org/downloads) for the appropriate version.
+-a747-field:IncompatibleMtfVersion=<The version of this translation is not compatible with this version of Martus.  It is recommended that you do not continue to use this translation version and go to (http://www.martus.org/downloads) for the appropriate version.>
+
+#________________________________________=Martus Software Version: #ProgramVersionNumber#
+-fcd7-field:IncompatibleMtfVersionProgram=<Martus Software Version: #ProgramVersionNumber#>
+
+#____________________________________________=#MtfLanguage# Translation Version: #MtfVersionNumber#
+-8dde-field:IncompatibleMtfVersionTranslation=<#MtfLanguage# Translation Version: #MtfVersionNumber#>
+
+#_______________________________________=Martus Report Format (.mrf)
+-62cd-field:MartusReportFormatFileFilter=<Martus Report Format (.mrf)>
+
+#_____________________________________=Martus Search Specification (.mss)
+-76c0-field:MartusSearchSpecFileFilter=<Martus Search Specification (.mss)>
+
 #_______________________=Warning: Portions may be missing or damaged
 -00a9-field:MayBeDamaged=ការព្រមាន ៖ ផ្នែក​មួយ​ចំនួន​អាច​បាត់បង់ ឬ​ខូចខាត
 
@@ -565,6 +842,9 @@
 #_____________________________________=The author has not given you permission to view the private portions of this bulletin.
 -ba2f-field:NotAuthorizedToViewPrivate=អ្នក​និពន្ធ​មិន​បាន​ផ្តល់​ការ​អនុញ្ញាតិ​អោយ​អ្នក​មើល​ផ្នែក​បុគ្គល​នៃ​របាយការណ៏​នេះ​ទេ ។
 
+#____________________=(none)
+-3c6b-field:NotSorted=<(none)>
+
 #____________________________=Details:
 -1daa-field:OnlineHelpMessage=ព័ត៌មាន​លម្អិត ៖
 
@@ -577,11 +857,23 @@
 #_______________________________=Organization (required)
 -2f27-field:OrganizationRequired=អង្គការ (ត្រូវការ)
 
-#___________________________=Include private data in print out.
--c6f6-field:PrintPrivateData=រួម​បញ្ចូល​ទិន្នន័យ​បុគ្គល​ពេល​បោះពុម្ព ។
+#_______________________________=Add the fields you want to appear in your report, and then arrange them in the order you want them to be printed.
+-b511-field:OrganizeReportFields=<Add the fields you want to appear in your report, and then arrange them in the order you want them to be printed.>
 
-#__________________________________=You have the option to include or exclude the selected bulletin's private information in this print out.\n\nTo only print public information, do not mark the checkbox below.\n\nIf you do mark the checkbox, anyone who sees the print out will be able to read your private data.
--e90d-field:PrintPrivateDataMessage=<អ្នក​មាន​ជម្រើស​ក្នុង​ការ​បញ្ចូល ឬ​ដក​ចេញ​ព័ត៌មាន​បុគ្គល​នៃ​របាយការណ៏​ដែល​អ្នក​បាន​ជ្រើស​ពី​ការ​បោះពុម្ព ។\n\nដើម្បី​បោះពុម្ព​តែ​ព័ត៌មាន​សាធារណៈ ចូរ​កុំ​គូស​ធីក​ប្រអប់​ខាងក្រោម ។\n\nបើ​អ្នក​ពិត​ជា​គូស​ធីក​ប្រអប់​ខាងក្រោម នោះ​គ្រប់​គ្នា​ដែល​ឃើញ​ការ​បោះពុម្ព​នេះ​នឹង​អាច​អាន​ទិន្នន័យ​បុគ្គល​របស់​អ្នក​បាន ។>
+#_____________________________=Preparing Bulletins...
+-deac-field:PreparingBulletins=<Preparing Bulletins...>
+
+#_________________________=Previous Author: #AUTHOR#
+-5b1c-field:PreviousAuthor=<Previous Author: #AUTHOR#>
+
+#_____________________________=Bulletin ID: #ID#
+-40be-field:PreviousBulletinId=<Bulletin ID: #ID#>
+
+#__________________________________=You have the option to include or exclude the selected bulletin's private information in this print out. If you choose to print private data, it will be visible to anyone who sees the print out.
+-2050-field:PrintPrivateDataMessage=<អ្នក​មាន​ជម្រើស​ក្នុង​ការ​បញ្ចូល ឬ​ដក​ចេញ​ព័ត៌មាន​បុគ្គល​នៃ​របាយការណ៏​ដែល​អ្នក​បាន​ជ្រើស​ពី​ការ​បោះពុម្ព ។\n\nដើម្បី​បោះពុម្ព​តែ​ព័ត៌មាន​សាធារណៈ ចូរ​កុំ​គូស​ធីក​ប្រអប់​ខាងក្រោម ។\n\nបើ​អ្នក​ពិត​ជា​គូស​ធីក​ប្រអប់​ខាងក្រោម នោះ​គ្រប់​គ្នា​ដែល​ឃើញ​ការ​បោះពុម្ព​នេះ​នឹង​អាច​អាន​ទិន្នន័យ​បុគ្គល​របស់​អ្នក​បាន ។>
+
+#_______________________________=You can print the bulletin contents to a printer or to a file.
+-48ad-field:PrintToPrinterOrDisk=<You can print the bulletin contents to a printer or to a file.>
 
 #_________________________________=Public Information Files
 -90f9-field:PublicInformationFiles=ឯកសារ​ព័ត៌មាន​សាធារណៈ
@@ -625,6 +917,30 @@
 #_____________________________=Are you sure you want to do this?
 -bfb8-field:RemoveServerLabel2=តើ​អ្នក​ពិត​ជា​ចង់​ធ្វើ​ដូច្នេះ​ឬ ?
 
+#_________________________________=Choose how the bulletins will be sorted in the report. The bulletins will be ordered by the first field chosen. When two bulletins have the same value in that field, they will be sorted by the next sort field, and so on.
+-551d-field:ReportChooseSortFields=<Choose how the bulletins will be sorted in the report. The bulletins will be ordered by the first field chosen. When two bulletins have the same value in that field, they will be sorted by the next sort field, and so on.>
+
+#___________________________=Print Bulletin Information
+-fb16-field:ReportDetailOnly=<Print Bulletin Information>
+
+#____________________________________=Print Bulletin Information and Summary Counts
+-cdea-field:ReportDetailWithSummaries=<Print Bulletin Information and Summary Counts>
+
+#___________________________=*Error retrieving field*
+-6d15-field:ReportFieldError=<*Error retrieving field*>
+
+#______________________=#NumberBulletinsFound# bulletins matched the search.
+-fc88-field:ReportFound=<#NumberBulletinsFound# bulletins matched the search.>
+
+#__________________________________=Total Bulletins:
+-b840-field:ReportNumberOfBulletins=<Total Bulletins:>
+
+#_______________________________=Progress: 
+-92b6-field:ReportSearchProgress=<Progress: >
+
+#______________________________=Print Summary Counts Only
+-9ca4-field:ReportSummariesOnly=<Print Summary Counts Only>
+
 #__________________________________________=Retrieving Field Desk Draft Bulletins
 -c881-field:RetrieveHQDraftBulletinProgress=រក​សេចក្តី​ព្រាង​របាយការណ៏​របស់​សាខា​បាន​មក​វិញ
 
@@ -658,17 +974,41 @@
 #________________________________=Scrub data before deleting
 -7a0b-field:ScrubDataBeforeDelete=លុប​ទិន្នន័យ​មុន​ពេល​លុប​របាយការណ៏
 
-#______________________________=When searching for bulletins you can add key words (or, and) between multiple search term words (e.g. prison or jail, prison and assault).  If you enter multiple search terms without keywords, Martus will search for the exact phrase you entered.  Do not use quotation marks in your search.  The 'starting on' and 'ending on' dates will further refine your search matching either the event date or the date entered.  If you leave the search text blank Martus will perform only a date search.
--ac8c-field:SearchBulletinRules=ពេល​ស្វែងរក​របាយការណ៏​អ្នក​អាច​បន្ថែម​ពាក្យ​គន្លឹះ​ជា​ភាសា​អង់គ្លេស​ឬ​ភាសា​ខ្មែរ (or/ឬ, and/និង) ចន្លោះ​ពាក្យ​ដែល​ត្រូវ​ស្វែងរក​និមួយៗ (ឧ. គុក or ពន្ធនាគារ, គុក and ការបំពាន) ។ បើ​អ្នក​បញ្ចូល​ពាក្យ​ច្រើន​ដោយ​មិន​ប្រើ​ពាក្យ​គន្លឹះ Martus នឹង​ស្វែងរក​ឃ្លា​ទាំងមូល​ដែល​អ្នក​បាន​វាយ​បញ្ចូល ។ ហាម​ប្រើ​សញ្ញា ‘ និង “ ក្នុង​ការ​ស្វែងរក​របស់​អ្នក ។ “កាលបរិច្ឆេទ​ចាប់​ផ្តើម​នៅ” និង “កាលបរិច្ឆេទ​បញ្ចប់​នៅ” នឹង​កំណត់​បន្ថែម​ទៀត​លើ​ការ​ស្វែងរក​របស់​អ្នក​តែ​ទៅ​លើ​កាលបរិច្ឆេទ​នៃ​ព្រឹត្តិការណ៏ ឬ​កាលបរិច្ឆេទ​បញ្ចូល ។ បើ​អ្នក​មិន​បញ្ចូល​ពាក្យ​សំរាប់​ស្វែងរក​ទេ Martus នឹង​ធ្វើ​ការ​ស្វែងរក​ដោយ​ផ្អែក​លើ​កាល​បរិច្ឆេទ​តែ​ប៉ុណ្ណោះ ។
+#___________________________________=Sealing Bulletins...
+-f677-field:SealingSelectedBulletins=<Sealing Bulletins...>
 
-#________________________=Ending on:
--2412-field:SearchEndDate=បញ្ចប់​នៅ ៖
+#_________________________=--Any Field--
+-bcaa-field:SearchAnyField=<--Any Field-->
+
+#____________________________________=Press Enter to create a new row in the search query.
+-8f11-field:SearchBulletinAddingRules=<Press Enter to create a new row in the search query.>
+
+#_____________________________=Click '#SearchHelpButton#' to get additional information on searching.
+-eb4b-field:SearchBulletinHelp=<Click '#SearchHelpButton#' to get additional information on searching.>
+
+#______________________________=For each row, select a field to search (or choose to match any field), select what kind of comparison to perform, and then enter a value to search for.\n\nNOTE: Bulletins that appear only in the Discarded folder will not be searched.
+-3fd2-field:SearchBulletinRules=<ពេល​ស្វែងរក​របាយការណ៏​អ្នក​អាច​បន្ថែម​ពាក្យ​គន្លឹះ​ជា​ភាសា​អង់គ្លេស​ឬ​ភាសា​ខ្មែរ (or/ឬ, and/និង) ចន្លោះ​ពាក្យ​ដែល​ត្រូវ​ស្វែងរក​និមួយៗ (ឧ. គុក or ពន្ធនាគារ, គុក and ការបំពាន) ។ បើ​អ្នក​បញ្ចូល​ពាក្យ​ច្រើន​ដោយ​មិន​ប្រើ​ពាក្យ​គន្លឹះ Martus នឹង​ស្វែងរក​ឃ្លា​ទាំងមូល​ដែល​អ្នក​បាន​វាយ​បញ្ចូល ។ ហាម​ប្រើ​សញ្ញា ‘ និង “ ក្នុង​ការ​ស្វែងរក​របស់​អ្នក ។ “កាលបរិច្ឆេទ​ចាប់​ផ្តើម​នៅ” និង “កាលបរិច្ឆេទ​បញ្ចប់​នៅ” នឹង​កំណត់​បន្ថែម​ទៀត​លើ​ការ​ស្វែងរក​របស់​អ្នក​តែ​ទៅ​លើ​កាលបរិច្ឆេទ​នៃ​ព្រឹត្តិការណ៏ ឬ​កាលបរិច្ឆេទ​បញ្ចូល ។ បើ​អ្នក​មិន​បញ្ចូល​ពាក្យ​សំរាប់​ស្វែងរក​ទេ Martus នឹង​ធ្វើ​ការ​ស្វែងរក​ដោយ​ផ្អែក​លើ​កាល​បរិច្ឆេទ​តែ​ប៉ុណ្ណោះ ។>
 
 #______________________=Search for:
 -0c73-field:SearchEntry=ស្វែងរក ៖
 
-#__________________________=Starting on:
--6fa2-field:SearchStartDate=ចាប់ផ្តើម​នៅ ៖
+#______________________=#NumberBulletinsFound# bulletins matched the search, and have been added to the Search Results folder.
+-998d-field:SearchFound=<#NumberBulletinsFound# bulletins matched the search, and have been added to the Search Results folder.>
+
+#________________________________=Field(s) to search
+-9acd-field:SearchGridHeaderField=<Field(s) to search>
+
+#_____________________________=Compare how?
+-693f-field:SearchGridHeaderOp=<Compare how?>
+
+#________________________________=Search for...
+-f864-field:SearchGridHeaderValue=<Search for...>
+
+#___________________________=contains
+-caeb-field:SearchOpContains=<contains>
+
+#_________________________=Progress: 
+-92b6-field:SearchProgress=<Progress: >
 
 #_______________________________=You will be allowed to upload bulletins to this server.
 -0718-field:ServerAcceptsUploads=អ្នក​នឹង​ត្រូវ​បាន​អនុញ្ញាត​អោយ​បញ្ចូន​របាយការណ៏​ទៅ​ម៉ាស៊ីន​បម្រើ​នេះ ។
@@ -697,11 +1037,23 @@
 #_________________________________=The following server has been selected:
 -d09b-field:ServerSelectionResults=ម៉ាស៊ីន​បម្រើ​ដូច​ខាងក្រោម​ត្រូវ​បាន​ជ្រើស ៖
 
+#_________________________=To change a folder's position, select the folder name and use the #MoveFolderUp# / #MoveFolderDown# buttons.
+-4497-field:SetFolderOrder=<To change a folder's position, select the folder name and use the #MoveFolderUp# / #MoveFolderDown# buttons.>
+
+#___________________________________=NOTE: Bulletins authored by other accounts cannot be changed using this command, so they are not included in the list above.
+-250a-field:SkippingBulletinsNotOurs=<NOTE: Bulletins authored by other accounts cannot be changed using this command, so they are not included in the list above.>
+
 #___________________________________=Human Rights Bulletin System
 -fe5b-field:SplashProductDescription=ប្រព័ន្ធ​របាយការណ៏​សិទ្ធិ​មនុស្ស
 
+#___________________________=Connecting to server
+-2a77-field:StatusConnecting=<Connecting to server>
+
 #______________________=Ready
 -20c7-field:StatusReady=រួចហើយ
+
+#___________________________=Retrieving...
+-5316-field:StatusRetrieving=<Retrieving...>
 
 #__________________________=Details
 -dc3d-field:TemplateDetails=ព័ត៌មាន​លំអិត
@@ -712,8 +1064,8 @@
 #__________________________=Unknown
 -bc78-field:UnknownDateSave=មិនស្គាល់
 
-#___________________________=WARNING: This field requires a newer version of Martus to be viewed
--390c-field:UnknownFieldType=ការ​ព្រមាន ៖ ក្រឡា​ទទឹង​មួយ​នេះ​តម្រូវ​អោយ​មាន​កំណែ​ថ្មី​នៃ Martus ទើប​អាច​មើល​បាន
+#___________________________=WARNING: This field requires a newer release of Martus to be viewed
+-06ce-field:UnknownFieldType=<ការ​ព្រមាន ៖ ក្រឡា​ទទឹង​មួយ​នេះ​តម្រូវ​អោយ​មាន​កំណែ​ថ្មី​នៃ Martus ទើប​អាច​មើល​បាន>
 
 #___________________________=Untitled Bulletin
 -5ea8-field:UntitledBulletin=របាយការណ៏​គ្មាន​ចំណង​ជើង
@@ -751,6 +1103,36 @@
 #_____________________=Yes
 -5397-field:WasSentYes=យល់ព្រម
 
+#__________________________=Unknown
+-bc78-field:YearUnspecified=<Unknown>
+
+#____________________________________=Attachments
+-6771-field:_AttachmentsBottomSection=<Attachments>
+
+#_________________________________=Attachments
+-6771-field:_AttachmentsTopSection=<Attachments>
+
+#________________________________=
+-da39-field:_SectionBottomSection=<>
+
+#_____________________________=
+-da39-field:_SectionTopSection=<>
+
+#_________________________________________=Header
+-3134-field:_Section_BulletinSectionHeader=<Header>
+
+#_______________________________________________=Headquarters
+-6222-field:_Section_BulletinSectionHeadquarters=<Headquarters>
+
+#_________________________=Last Saved
+-eb05-field:_lastSavedDate=<Last Saved>
+
+#______________________________=Last Saved
+-eb05-field:_lastSavedTimestamp=<Last Saved>
+
+#___________________=Sent
+-35f4-field:_wasSent=<Sent>
+
 #____________________________=Built on
 -5342-field:aboutDlgBuildDate=កាលបរិច្ឆេទ​បង្កើត
 
@@ -759,6 +1141,9 @@
 
 #_____________________________=Martus comes with ABSOLUTELY NO WARRANTY, and is made available under license terms in the file named license.txt in the Martus directory. This is free software, and you are welcome to redistribute it under certain conditions discussed in license.txt. 
 -8b41-field:aboutDlgDisclaimer=Martus គឺ​ពុំ​មាន​ការ​ធានា​រ៉ាប់រង​មក​ជាមួយ​ទេ ហើយ​ត្រូវ​បាន​បង្កើត​ឡើង​ក្រោម​កិច្ចព្រមព្រៀងអាជ្ញាប័ណ្ណ​ដែល​មាន​ចែង​នៅ​ក្នុង​ឯកសារ​ឈ្មោះ license.txt ក្នុង​ថត Martus ។ វា​ជា​កម្មវិធី​ឥត​គិត​ថ្លៃ ហើយ​អ្នក​ក៏​ត្រូវ​បាន​ស្វាគមន៏​ផង​ដែរ​ក្នុង​ការ​បែង​ចែក​វា​បន្ត​ក្រោម​លក្ខខណ្ឌ​ដូច​ដែល​បាន​ចែង​ក្នុង license.txt ។
+
+#______________________________=Language Pack Date
+-d7f5-field:aboutDlgMlpDateInfo=<Language Pack Date>
 
 #_________________________________________=Translation version
 -ba67-field:aboutDlgTranslationVersionInfo=<Translation version>
@@ -784,14 +1169,20 @@
 #______________________=Authorizing...
 -5086-field:authorizing=ធ្វើ​ជា​ម្ចាស់​កម្មសិទ្ធិ…
 
+#_________________________________________________________=The operation will be stopped immediately.
+-6eee-field:confirmAddingPermissionsToBulletinsCancelcause=<The operation will be stopped immediately.>
+
+#__________________________________________________________=If you do this, the bulletins already processed will have the new headquarters access, but other selected bulletins will not.
+-9054-field:confirmAddingPermissionsToBulletinsCanceleffect=<If you do this, the bulletins already processed will have the new headquarters access, but other selected bulletins will not.>
+
 #_______________________________________________=Save your password encrypted key backup file to a single floppy disk or other removable media.  Then store this disk in a safe place. You will use this disk, with your username and password, to restore your data if your system files are ever damaged.  To restore this password-protected key in the future, select 'Restore Account' and 'Restore account from backup key file' when signing into Martus.
 -e692-field:confirmBackupKeyPairInformationcause=រក្សា​ឯកសារ​កូនសោ​បម្រុង​ដែល​ត្រូវ​បាន​បម្លែង​ជា​រហស្សលិខ​ដោយ​ពាក្យ​សម្ងាត់​របស់​អ្នក​ទៅ​ក្នុង​ក្បាល​អាន​ថាស​តូច​មួយ ឬថាស​ចល័តមួយ​ផ្សេង​ទៀត ។ បន្ទាប់​មក​ត្រូ​វ​រក្សា​ថាស​នេះ​នៅ​កន្លែង​មាន​សុវត្ថិភាព ។ អ្នក​នឹង​ប្រើ​ថាស​នេះ​រួម​ជាមួយ​ឈ្មោះ​អ្នក​ប្រើ និង ពាក្យ​សម្ងាត់​របស់​អ្នក​ដើម្បី​ស្តារ​ទិន្នន័យ​របស់​អ្នក​ឡើង​វិញ ក្នុង​ករណី​ដែល​ប្រព័ន្ធ​ឯកសារ​របស់​អ្នក​ខូចខាត ។ ដើម្បី​ស្តារ​កូនសោ​ដែល​ត្រូវ​បាន​បង្ការ​ដោយ​ពាក្យ​សម្ងាត់​នេះ​ឡើង​វិញ​នៅ​ពេល​ខាង​មុខ ជ្រើស​យក “ស្តារ​គណនី​ឡើង​វិញ” និង “ស្តារ​គណនី​ឡើង​វិញ​ពី​ឯកសារ​កូន​សោ​បម្រុង” ពេល​ចូល​ក្នុង Martus ។
 
 #________________________________________________=Choosing Yes will begin the backup process.
 -0b47-field:confirmBackupKeyPairInformationeffect=ជ្រើស “យល់ព្រម” នឹង​ចាប់ផ្តើម​ដំណើរការ​ចម្លង​ព័ត៌មាន​បម្រុង ។
 
-#_______________________________________________=We recommend that you now create #M# separate key backup files of which any #N# can be used to reconstruct your key without a user name or password being required.
--a4d8-field:confirmBackupKeyPairSecretSharecause=ពេល​នេះ​យើង​សុំ​ស្នើរ​អោយ​អ្នក​បង្កើត​ឯកសារ​កូនសោ​បម្រុង #M# ខុសៗ​គ្នា ដែល​ក្នុង​នោះ​អ្នក​ត្រូវ​ការ​តែ #N# ប៉ុណ្ណោះ​ដើម្បី​បង្កើត​កូនសោ​របស់​អ្នក​ម្តង​ទៀត​ដោយ​មិន​ចាំ​បាច់​ត្រូវ​ការ​ឈ្មោះ​អ្នក​ប្រើ និង ពាក្យ​សម្ងាត់ ។
+#_______________________________________________=We recommend that you now create #TotalNumberOfFilesInBackup# separate key backup files of which any #MinimumNumberOfFilesNeededForRecovery# can be used to reconstruct your key without a user name or password being required.
+-9f7f-field:confirmBackupKeyPairSecretSharecause=<ពេល​នេះ​យើង​សុំ​ស្នើរ​អោយ​អ្នក​បង្កើត​ឯកសារ​កូនសោ​បម្រុង #M# ខុសៗ​គ្នា ដែល​ក្នុង​នោះ​អ្នក​ត្រូវ​ការ​តែ #N# ប៉ុណ្ណោះ​ដើម្បី​បង្កើត​កូនសោ​របស់​អ្នក​ម្តង​ទៀត​ដោយ​មិន​ចាំ​បាច់​ត្រូវ​ការ​ឈ្មោះ​អ្នក​ប្រើ និង ពាក្យ​សម្ងាត់ ។>
 
 #________________________________________________=By choosing Yes, you will be prompted to save pieces of your key onto removable disks.
 -efaa-field:confirmBackupKeyPairSecretShareeffect=ដោយ​ជ្រើស​យក “យល់ព្រម” អ្នក​នឹង​ត្រូវ​បាន​សួរ​បញ្ជាក់​ពី​ការ​រក្សា​ផ្នែក​និមួយៗ​នៃ​កូនសោ​របស់​អ្នក​ទៅ​ក្នុង​ថាស​ចល័ត​ខុសៗ​គ្នា ។
@@ -814,6 +1205,12 @@
 #____________________________________________=Any changes you have made to this bulletin will be discarded.
 -3819-field:confirmCancelModifyBulletineffect=រាល់​ការ​ផ្លាស់ប្តូរ​ដែល​អ្នក​បាន​ធ្វើ​លើ​របាយការណ៏​នេះ​នឹង​ត្រូវ​បាន​បោះបង់ ។
 
+#_____________________________________=Bulletins are currently being retrieved from the server.
+-126a-field:confirmCancelRetrievecause=<Bulletins are currently being retrieved from the server.>
+
+#______________________________________=This operation will cancel the current retrieval, so some of the requested bulletins may not be retrieved.
+-babb-field:confirmCancelRetrieveeffect=<This operation will cancel the current retrieval, so some of the requested bulletins may not be retrieved.>
+
 #________________________________________=Do you wish to cancel this backup?
 -7b46-field:confirmCancelShareBackupcause=តើ​អ្នក​ចង់​បោះបង់​ការ​ចម្លង​ព័ត៌មាន​បម្រុង​នេះ​ឬ ?
 
@@ -832,8 +1229,8 @@
 #_________________________________________=By choosing Yes, you will exit this verification step.
 -5b61-field:confirmCancelShareVerifyeffect=ដោយ​ជ្រើស​យក “យល់ព្រម” អ្នក​នឹង​ចេញ​ពី​ជំហាន​ផ្ទៀងផ្ទាត់ ។
 
-#_________________________________________=You have chosen to remove all selected Headquarters accounts.  Any existing saved bulletins will still be visible by the old Headquarters.  If you want to disallow Headquarters viewing access to previously created Draft bulletins they must be re-saved after revoking the Headquarters.  Any sealed bulletins CANNOT be reset to be non-viewable by the Headquarters, except by creating a new version of the bulletin.
--d335-field:confirmClearHQInformationcause=<អ្នក​បាន​ជ្រើស​ដើម្បី​យក​គណនី​ស្នាក់ការ​កណ្តាល​ចេញ ។ រាល់​របាយការណ៏​ដែល​បាន​រក្សា​ទុក​ពី​មុន​នឹង​នៅ​តែ​អាច​មើល​ឃើញ​ដោយ​ស្នាក់ការ​កណ្តាល​ចាស់ ។ បើ​អ្នក​មិន​ចង់​អោយ​ស្នាក់ការ​កណ្តាល​ទាំង​នោះ​មើល​ឃើញ​រាល់​សេចក្តី​ព្រាង​របាយការណ៏​ដែល​បាន​បង្កើត​ពី​មុន​ទេ អ្នក​ត្រូវ​តែ​រក្សា​ទុក​របាយការណ៏​ទាំង​នោះ​ឡើង​វិញ​បន្ទាប់​ពី​ការ​ដក​ហូត​ស្នាក់ការ​កណ្តាល​វិញ ។ រាល់​របាយការណ៏​បិទ​គឺ​មិន​អាច​កំណត់​មិន​អោយ​មើល​ឡើង​វិញ​ដោយ​ស្នាក់ការ​កណ្តាល​ទាំង​នោះ​បាន​ឡើយ ។>
+#_________________________________________=You have chosen to remove all selected Headquarters accounts.  Any existing saved bulletins will still be visible by the old Headquarters.  If you want to disallow Headquarters viewing access to previously created Draft bulletins they must be re-saved after revoking the Headquarters.  New versions of sealed bulletins will not be able to be viewed by Headquarters, but any old versions of sealed bulletins that already are on a Headquarters' computer CANNOT be reset to be non-viewable by the Headquarters.
+-9959-field:confirmClearHQInformationcause=<អ្នក​បាន​ជ្រើស​ដើម្បី​យក​គណនី​ស្នាក់ការ​កណ្តាល​ចេញ ។ រាល់​របាយការណ៏​ដែល​បាន​រក្សា​ទុក​ពី​មុន​នឹង​នៅ​តែ​អាច​មើល​ឃើញ​ដោយ​ស្នាក់ការ​កណ្តាល​ចាស់ ។ បើ​អ្នក​មិន​ចង់​អោយ​ស្នាក់ការ​កណ្តាល​ទាំង​នោះ​មើល​ឃើញ​រាល់​សេចក្តី​ព្រាង​របាយការណ៏​ដែល​បាន​បង្កើត​ពី​មុន​ទេ អ្នក​ត្រូវ​តែ​រក្សា​ទុក​របាយការណ៏​ទាំង​នោះ​ឡើង​វិញ​បន្ទាប់​ពី​ការ​ដក​ហូត​ស្នាក់ការ​កណ្តាល​វិញ ។ រាល់​របាយការណ៏​បិទ​គឺ​មិន​អាច​កំណត់​មិន​អោយ​មើល​ឡើង​វិញ​ដោយ​ស្នាក់ការ​កណ្តាល​ទាំង​នោះ​បាន​ឡើយ ។>
 
 #__________________________________________=By clicking on Yes, any draft or sealed bulletins saved in the future will no longer be accessible by your Headquarters.
 -4a87-field:confirmClearHQInformationeffect=ដោយ​ចុច​លើ “យល់ព្រម” រាល់​សេចក្តី​ព្រាង ឬ​របាយការណ៏​បិទ​ដែល​ត្រូវ​បាន​រក្សា​ទុក​នៅ​ពេល​ខាង​មុខ​នឹង​មិន​អាច​ចូល​ដំណើរ​ការ​បាន​ដោយ​ស្នាក់ការ​កណ្តាល​របស់​អ្នក​បាន​ឡើយ ។
@@ -850,6 +1247,12 @@
 #____________________________________________=Clicking on Yes will create a new version of this bulletin that initially contains all the same information.
 -198c-field:confirmCloneMySealedAsDrafteffect=<ចុច​លើ “យល់ព្រម” នឹង​បង្កើត​របាយការណ៏​ថ្មី​មួយ​ដែល​មាន​ព័ត៌មាន​ចម្លង​ដូច​គ្នា​ទាំងអស់ រីឯ​របាយការណ៏​ដើម​នឹង​នៅ​ដដែល​គ្មាន​ការ​ផ្លាស់ប្តូរ ។>
 
+#______________________________________=The date range you entered is invalid because the end date occurs before the begin date.
+-7ea3-field:confirmDateRageInvalidcause=<The date range you entered is invalid because the end date occurs before the begin date.>
+
+#_______________________________________=Answering Yes will take you back to the '#FieldLabel#' date range to fix the problem.  Answering No will swap the begin and end dates so they are in order.
+-23bd-field:confirmDateRageInvalideffect=<Answering Yes will take you back to the '#FieldLabel#' date range to fix the problem.  Answering No will swap the begin and end dates so they are in order.>
+
 #___________________________________=You are about to delete your Martus data from this computer.
 -ee9a-field:confirmDeleteMyDatacause=អ្នក​រៀប​នឹង​លុប​ទិន្នន័យ Martus របស់​អ្នក​ពី​កុំព្យូទ័រ​នេះ ។
 
@@ -862,8 +1265,8 @@
 #___________________________________________=Clicking on Yes will exit Martus, and leave the unsent bulletins.  They will be sent the next time you run Martus and connect to a server.
 -7c7f-field:confirmDraftUploadRemindereffect=ចុច​លើ “យល់ព្រម” នឹង​ចេញ​ពី Martus ដោយ​ទុក​របាយការណ៏​ដែល​មិន​ទាន់​បាន​ផ្ញើរ​អោយ​នៅ​ដដែល ។ ពួកវា​នឹង​ត្រូវ​បាន​ផ្ញើរ​លើក​ក្រោយ​ពេល​ដែល​អ្នក​ដំណើរ​ការ Martus ហើយ​ភ្ជាប់​ទៅ​ម៉ាស៊ីន​បម្រើ ។
 
-#__________________________________________________=The bulletin you have chosen to modify contains information that this version of Martus cannot understand. It may have been created by a newer version of Martus, so you should ensure that you are running the latest version.
--1233-field:confirmEditBulletinWithUnknownTagscause=របាយការណ៏​ដែល​អ្នក​បាន​ជ្រើស​ដើម្បី​កែប្រែ មាន​ព័ត៌មាន​ដែល​កំណែ Martus នេះ​មិនស្គាល់ ។ វា​ប្រហែល​ជា​ត្រូវ​បាន​បង្កើត​ដោយ​កំណែ Martus ដែល​ថ្មី​ជាង ដូច្នេះអ្នក​គួរ​តែ​ធ្វើ​អោយ​ប្រាកដ​ថា អ្នក​កំពុង​តែ​ដំណើរ​ការ​កំណែ​ចុង​ក្រោយ​បង្អស់ ។
+#__________________________________________________=The bulletin you have chosen to modify contains information that this version of Martus cannot understand. It may have been created by a newer release of Martus, so you should ensure that you are running the latest release.
+-9470-field:confirmEditBulletinWithUnknownTagscause=<របាយការណ៏​ដែល​អ្នក​បាន​ជ្រើស​ដើម្បី​កែប្រែ មាន​ព័ត៌មាន​ដែល​កំណែ Martus នេះ​មិនស្គាល់ ។ វា​ប្រហែល​ជា​ត្រូវ​បាន​បង្កើត​ដោយ​កំណែ Martus ដែល​ថ្មី​ជាង ដូច្នេះអ្នក​គួរ​តែ​ធ្វើ​អោយ​ប្រាកដ​ថា អ្នក​កំពុង​តែ​ដំណើរ​ការ​កំណែ​ចុង​ក្រោយ​បង្អស់ ។>
 
 #___________________________________________________=If you modify this bulletin, the unknown information will be lost.
 -d72b-field:confirmEditBulletinWithUnknownTagseffect=បើ​អ្នក​កែប្រែ​របាយការណ៏​នេះ ព័ត៌មាន​មិន​ស្គាល់​នឹង​ត្រូវ​បាត់​បង់ ។
@@ -886,8 +1289,8 @@
 #_________________________________________=Anyone who gets a copy of this file will be able to read all the private data.
 -9965-field:confirmExportPrivateDataeffect=នរណា​ដែល​ទទួល​បាន​ច្បាប់​ចម្លង​នេះ​នឹង​អាច​អាន​ទិន្នន័យ​បុគ្គល​ទាំង​អស់ ។
 
-#________________________________________=One or more of the bulletins you have chosen to export contain information that this version of Martus cannot understand. They may have been created by a newer version of Martus, so you should ensure that you are running the latest version.
--56f8-field:confirmExportUnknownTagscause=របាយការណ៏​មួយ​ឬ​ច្រើន​ដែល​អ្នក​បាន​ជ្រើស​សំរាប់​នាំ​ចេញ​មាន​ព័ត៌មាន​ដែល​កំណែ Martus នេះ​មិន​អាច​យល់​បាន ។ ពួក​វា​ប្រហែល​ជា​ត្រូវ​បាន​បង្កើត​ឡើង​ដោយ​កំណែ​នៃ Martus ដែល​ថ្មី​ជាង ដូច្នេះអ្នក​គួរ​តែ​ធ្វើ​អោយ​ប្រាកដ​ថា អ្នក​កំពុង​តែ​ដំណើរ​ការ​កំណែ​ចុង​ក្រោយ​បង្អស់ ។
+#________________________________________=One or more of the bulletins you have chosen to export contain information that this version of Martus cannot understand. They may have been created by a newer release of Martus, so you should ensure that you are running the latest release.
+-0cfe-field:confirmExportUnknownTagscause=<របាយការណ៏​មួយ​ឬ​ច្រើន​ដែល​អ្នក​បាន​ជ្រើស​សំរាប់​នាំ​ចេញ​មាន​ព័ត៌មាន​ដែល​កំណែ Martus នេះ​មិន​អាច​យល់​បាន ។ ពួក​វា​ប្រហែល​ជា​ត្រូវ​បាន​បង្កើត​ឡើង​ដោយ​កំណែ​នៃ Martus ដែល​ថ្មី​ជាង ដូច្នេះអ្នក​គួរ​តែ​ធ្វើ​អោយ​ប្រាកដ​ថា អ្នក​កំពុង​តែ​ដំណើរ​ការ​កំណែ​ចុង​ក្រោយ​បង្អស់ ។>
 
 #_________________________________________=If you continue with the export, any unknown information will not be exported.
 -232e-field:confirmExportUnknownTagseffect=បើ​អ្នក​បន្ត​ការ​នាំ​ចេញ​នេះ​ទៀត រាល់​ព័ត៌មាន​ដែល​មិនស្គាល់​នឹង​មិន​ត្រូវ​បាន​នាំ​ចេញ​ទេ ។
@@ -904,17 +1307,17 @@
 #________________________________________________________=Answering Yes will allow the migration to proceed, answering No will exit Martus.
 -2a34-field:confirmNeedsBulletinVersioningMigrationeffect=<Answering Yes will allow the migration to proceed, answering No will exit Martus.>
 
-#___________________________________________=This account was created with an older version of Martus, which used a different set of folders. The folders need to be migrated to the new format. The migration is automatic, fast, and safe. You cannot run this version of Martus unless you allow this migration.
--39ae-field:confirmNeedsFolderMigrationcause=គណនី​នេះ​ត្រូវ​បាន​បង្កើត​ឡើង​ដោយ​កំណែ​ចាស់​នៃ Martus ដែល​បាន​ប្រើ​សំណុំ​ថត​ផ្សេង ។ ថត​ទាំង​នេះ​តម្រូវ​អោយ​មាន​ការ​ផ្លាស់​ប្តូរ​ទ្រង់ទ្រាយ​ថ្មី ។ ការ​ផ្លាស់ប្តូរ​គឺ​ធ្វើ​ឡើង​ដោយ​ស្វ័យប្រវត្តិ, លឿន និង​មាន​សុវត្ថិភាព ។ អ្នក​មិន​អាច​ដំណើរការ​កំណែ Martus នេះ​បាន​ទេ លុះ​ត្រា​តែ​អ្នក​អនុញ្ញាតិ​អោយ​មាន​ការ​ផ្លាស់ប្តូរ​នេះ​សិន ។
+#___________________________________________=This account was created with an older release of Martus, which used a different set of folders. The folders need to be migrated to the new format. The migration is automatic, fast, and safe. You cannot run this release of Martus unless you allow this migration.
+-3e24-field:confirmNeedsFolderMigrationcause=<គណនី​នេះ​ត្រូវ​បាន​បង្កើត​ឡើង​ដោយ​កំណែ​ចាស់​នៃ Martus ដែល​បាន​ប្រើ​សំណុំ​ថត​ផ្សេង ។ ថត​ទាំង​នេះ​តម្រូវ​អោយ​មាន​ការ​ផ្លាស់​ប្តូរ​ទ្រង់ទ្រាយ​ថ្មី ។ ការ​ផ្លាស់ប្តូរ​គឺ​ធ្វើ​ឡើង​ដោយ​ស្វ័យប្រវត្តិ, លឿន និង​មាន​សុវត្ថិភាព ។ អ្នក​មិន​អាច​ដំណើរការ​កំណែ Martus នេះ​បាន​ទេ លុះ​ត្រា​តែ​អ្នក​អនុញ្ញាតិ​អោយ​មាន​ការ​ផ្លាស់ប្តូរ​នេះ​សិន ។>
 
 #____________________________________________=Answering Yes will allow the migration to proceed, answering No will exit Martus.
 -2a34-field:confirmNeedsFolderMigrationeffect=<ការឆ្លើយ “យល់ព្រម” នឹង​អនុញ្ញាតិ​អោយ​មាន​ដំណើរការ​ផ្លាស់ប្តូរ ។>
 
-#_______________________________________________=Warning: It appears that you are trying to run an older version of Martus.  Running this version of Martus may result in reduced functionality, and some configuration settings created in the newer version will be ignored. We recommend that you upgrade your software.
--f251-field:confirmNewerConfigInfoFileFoundcause=ការ​ព្រមាន ៖ វា​ហាក់​ដូច​ជា​អ្នក​កំពុង​ព្យាយាម​ដំណើរ​ការ​កំណែ​ចាស់​នៃ Martus ។ ដំណើរការ​កំណែ​នៃ Martus នេះ​អាច​បណ្តាល​អោយ​មាន​ការ​កាត់​បន្ថយ​មុខងារ​ខ្លះ ហើយ​ការ​កំណត់​រចនា​សម្ព័ន្ធ​មួយ​ចំនួន​ដែល​បាន​ធ្វើ​នៅ​ក្នុង​កំណែ​ថ្មី​នឹង​មិន​ត្រូវ​បាន​អើពើ ។ យើង​សុំ​ស្នើរ​អោយ​អ្នក​អភិវឌ្ឍ​កម្មវិធី​របស់​អ្នក ។
+#_______________________________________________=Warning: It appears that you are trying to run an older release of Martus.  Running this release of Martus may result in reduced functionality, and some configuration settings created in the newer version will be ignored. We recommend that you upgrade your software.
+-5cee-field:confirmNewerConfigInfoFileFoundcause=<ការ​ព្រមាន ៖ វា​ហាក់​ដូច​ជា​អ្នក​កំពុង​ព្យាយាម​ដំណើរ​ការ​កំណែ​ចាស់​នៃ Martus ។ ដំណើរការ​កំណែ​នៃ Martus នេះ​អាច​បណ្តាល​អោយ​មាន​ការ​កាត់​បន្ថយ​មុខងារ​ខ្លះ ហើយ​ការ​កំណត់​រចនា​សម្ព័ន្ធ​មួយ​ចំនួន​ដែល​បាន​ធ្វើ​នៅ​ក្នុង​កំណែ​ថ្មី​នឹង​មិន​ត្រូវ​បាន​អើពើ ។ យើង​សុំ​ស្នើរ​អោយ​អ្នក​អភិវឌ្ឍ​កម្មវិធី​របស់​អ្នក ។>
 
-#________________________________________________=Answering Yes will continue to use this older version of Martus.  Answering No will exit Martus so you can upgrade to the latest version.
--3170-field:confirmNewerConfigInfoFileFoundeffect=ការ​ឆ្លើយ “យល់ព្រម” នឹង​បន្ត​ប្រើ​កំណែ​ចាស់​នៃ Martus នេះ ។ ការ​ឆ្លើយ “ទេ” នឹង​ចេញ​ពី Martus ដូច្នេះ​អ្នក​អាច​អភិវឌ្ឍ​ទៅ​កំណែ​ចុង​ក្រោយ​បង្អស់ ។
+#________________________________________________=Answering Yes will continue to use this older release of Martus.  Answering No will exit Martus so you can upgrade to the latest release.
+-5630-field:confirmNewerConfigInfoFileFoundeffect=<ការ​ឆ្លើយ “យល់ព្រម” នឹង​បន្ត​ប្រើ​កំណែ​ចាស់​នៃ Martus នេះ ។ ការ​ឆ្លើយ “ទេ” នឹង​ចេញ​ពី Martus ដូច្នេះ​អ្នក​អាច​អភិវឌ្ឍ​ទៅ​កំណែ​ចុង​ក្រោយ​បង្អស់ ។>
 
 #___________________________________________________________=Warning: the bulletin you are currently viewing is not yours.  Attachments can contain viruses, or malicious programs harmful to your computer.
 -8e42-field:confirmNotYourBulletinViewAttachmentAnywayscause=ការ​ព្រមាន ៖ របាយការណ៏​ដែល​អ្នក​កំពុង​មើល​នេះ​ពុំ​មែន​ជា​របស់​អ្នក​ទេ ។ ឯកសារ​ភ្ជាប់​អាច​មាន​មេរោគ ឬ មាន​កម្មវិធី​មិន​ល្អ ដែល​អាច​ប៉ះពាល់​អាក្រក់​ដល់​កុំព្យូទ័រ​របស់​អ្នក ។
@@ -927,6 +1330,12 @@
 
 #_____________________________________________=The existing file will be deleted and replaced with the new information.
 -0863-field:confirmOverWriteExistingFileeffect=ឯកសារ​ដែល​មាន​ស្រាប់​នឹង​ត្រូវ​បាន​លុប ហើយ​ជំនួស​វិញ​ដោយ​ព័ត៌មាន​ថ្មី ។
+
+#__________________________________________=One or more bulletins will not be printed because all the information is private, and you marked the "Print only public information" box.
+-50c0-field:confirmPrintAllPrivateDatacause=<One or more bulletins will not be printed because all the information is private, and you marked the "Print only public information" box.>
+
+#___________________________________________=Answering '#PrintBack#' will allow you to return to the previous dialog so you can mark the "Include private information" box. Answering '#PrintContinue#' will print only the public information in the bulletins and skip those bulletins which are all private.
+-935c-field:confirmPrintAllPrivateDataeffect=<Answering '#PrintBack#' will allow you to return to the previous dialog so you can mark the "Include private information" box. Answering '#PrintContinue#' will print only the public information in the bulletins and skip those bulletins which are all private.>
 
 #_____________________________________=Since you have changed from the default print tray your print out may be incorrect, if you also changed the size of paper used.  You must first select the paper tray and then select the paper size in that order, for both to get set correctly.  If you only wanted to change the paper tray then disregard this message and select 'No'.
 -401e-field:confirmPrinterWarningcause=ចាប់​តាំង​ពី​ពេល​ដែល​អ្នក​បាន​ផ្លាស់ប្តូរ​លំនាំដើម​នៃ​ទម្រង់​បោះពុម្ព ការ​បោះពុម្ព​របស់​អ្នក​ហាក់​ដូចជា​មិន​ត្រឹមត្រូវ បើ​អ្នក​បាន​ផ្លាស់ប្តូរ​ទំហំ​ក្រដាស​ដែល​ត្រូវ​ប្រើ​ផង​ដែរ ។ ជា​លំដាប់​ដំបូង​អ្នក​ត្រូវ​ជ្រើស​ទម្រង់​ក្រដាស ហើយ​បន្ទាប់​មក​ត្រូវ​ជ្រើស​ទំហំ​ក្រដាស​ ទើប​ធ្វើ​អោយ​ការជ្រើស​ទាំង​ពីរ​មាន​ភាព​ត្រឹមត្រូវ ។ បើ​អ្នក​គ្រាន់​តែ​ចង់​ផ្លាស់ប្តូរ​ទម្រង់​ក្រដាស​នោះ ចូរ​កុំ​អើពើ​នឹង​សារ​នេះ ហើយ​ជ្រើស​យក “ទេ” ។
@@ -970,6 +1379,18 @@
 #____________________________________=Answering Yes will delete all data, uninstall Martus and exit the program.  Answering No will return you to Martus with nothing deleted.
 -b6a1-field:confirmRemoveMartuseffect=ការ​ឆ្លើយ “យល់ព្រម” នឹង​លុប​ទិន្នន័យ​ទាំងអស់, ដក Martus និង​ចេញ​ពី​កម្មវិធី ។ ការឆ្លើយ “ទេ” នឹង​នាំ​អ្នក​ទៅ​កាន់ Martus វិញ​ដោយ​ពុំ​មាន​លុប​អ្វី​ទាំងអស់ ។
 
+#___________________________________________=There are no bulletins with public data. Include private data?
+-9f83-field:confirmReportIncludePrivatecause=<There are no bulletins with public data. Include private data?>
+
+#____________________________________________=Press 'Include Private Data' to continue with private data included, or press 'Cancel' to exit and return to Martus.
+-c1bb-field:confirmReportIncludePrivateeffect=<Press 'Include Private Data' to continue with private data included, or press 'Cancel' to exit and return to Martus.>
+
+#_________________________________________________=The search in progress will be stopped immediately.
+-c6a2-field:confirmReportSearchProgressCancelcause=<The search in progress will be stopped immediately.>
+
+#__________________________________________________=If you do this, the report will only include the bulletins that have been found so far.
+-4aa4-field:confirmReportSearchProgressCanceleffect=<If you do this, the report will only include the bulletins that have been found so far.>
+
 #_______________________________________________________=Do you want to have your contact information sent to the current server?  This information may be sent to other servers, and will be viewable by anyone who has access to your public bulletin information.
 -4809-field:confirmRequestToSendContactInfoToServercause=តើ​អ្នក​ចង់​អោយ​មាន​ការ​ផ្ញើរ​ព័ត៌មាន​ទំនាក់​ទំនង​របស់​អ្នក​ទៅ​ម៉ាស៊ីន​បម្រើ​បច្ចុប្បន្ន​ឬ​ទេ ? ព័ត៌មាន​នេះ​អាច​ត្រូវ​បាន​ផ្ញើរ​ទៅ​ម៉ាស៊ីន​បម្រើ​ផ្សេង​ទៀត​ផង​ដែរ ហើយ​នឹង​អាច​មើល​ឃើញ​ដោយ​អ្នកណា​ដែល​អាច​ចូល​ដំណើរ​ការ​ព័ត៌មាន​របាយការណ៏​សាធារណៈ​របស់​អ្នក​បាន ។
 
@@ -982,17 +1403,35 @@
 #___________________________________________=After you review the contents, you can accept them, modify them, or press cancel to keep the existing default details.
 -bbcf-field:confirmResetDefaultDetailseffect=បន្ទាប់​ពី​ពិនិត្យ​មាតិកា​ទាំងនោះ​ឡើង​វិញ​ហើយ អ្នក​អាច​ទទួល​យក​វា, កែប្រែ​វា ឬចុច “បោះបង់” ដើម្បី​រក្សា​ព័ត៌មាន​លម្អិត​លំនាំ​ដើម​ដែល​មាន​ស្រាប់​អោយ​នៅ​ដដែល ។
 
-#____________________________________________=The following bulletin(s) selected for retrieval are newer versions of bulletins already on this computer:\n\n#TITLES#
--c5e3-field:confirmRetrieveNewerVersionscause=<The following bulletin(s) selected for retrieval are newer versions of bulletins already on this computer:\n\n#TITLES#>
+#____________________________________________=The following bulletin(s) selected for retrieval are newer versions of bulletins already on this computer:\n\n#Titles#
+-050c-field:confirmRetrieveNewerVersionscause=<The following bulletin(s) selected for retrieval are newer versions of bulletins already on this computer:\n\n#TITLES#>
 
 #_____________________________________________=Each older version will be replaced by the newer version from the server.
 -1d86-field:confirmRetrieveNewerVersionseffect=<Each older version will be replaced by the newer version from the server.>
 
+#____________________________________________=This will seal all the currently selected draft bulletins.
+-a9f2-field:confirmSealSelectedBulletinscause=<This will seal all the currently selected draft bulletins.>
+
+#_____________________________________________=Any selected bulletins that are already sealed will remain unchanged.
+-7326-field:confirmSealSelectedBulletinseffect=<Any selected bulletins that are already sealed will remain unchanged.>
+
+#_____________________________________________________=The operation in progress will be stopped.
+-ff24-field:confirmSealingSelectedBulletinsCancelcause=<The operation in progress will be stopped.>
+
+#______________________________________________________=If you do this, bulletins that have already been sealed will remain sealed, and bulletins that have not been processed yet will remain in their current state.
+-1b83-field:confirmSealingSelectedBulletinsCanceleffect=<If you do this, bulletins that have already been sealed will remain sealed, and bulletins that have not been processed yet will remain in their current state.>
+
+#___________________________________________=The search in progress will be stopped immediately.
+-c6a2-field:confirmSearchProgressCancelcause=<The search in progress will be stopped immediately.>
+
+#____________________________________________=If you do this, the Search Results will only contain bulletins that have been found so far.
+-fcaa-field:confirmSearchProgressCanceleffect=<If you do this, the Search Results will only contain bulletins that have been found so far.>
+
 #_________________________________________=You have chosen to save a completed bulletin.
 -a3fe-field:confirmSendWithPublicDatacause=អ្នក​បាន​ជ្រើស​យក​ការ​រក្សា​របាយការណ៏​ទាំង​ស្រុង ។
 
-#__________________________________________=This will permanently seal the bulletin and you will not be allowed to make any further modifications to it except by creating a new version of the bulletin.\n\nThe public information in this bulletin will be released for possible publication on the Martus Search Engine, and may be viewed by people outside your organization.\n\nIf there is information you do not want to be publicly available, either move that data to the private section of the bulletin or check the 'Keep ALL Information Private' box before saving the bulletin.
--2df3-field:confirmSendWithPublicDataeffect=<យ៉ាង​នេះ​នឹង​បិទ​របាយការណ៏​ជា​អចិន្ត្រៃយ៏ ហើយ​អ្នក​នឹង​មិន​ត្រូវ​បាន​អនុញ្ញាតិ​អោយ​ធ្វើ​ការ​កែប្រែ​បន្ថែម​លើ​វា​ទេ លើក​លែង​តែ​អ្នក​បង្កើត​ច្បាប់​ចម្លង​ថ្មី​នៃ​របាយការណ៏​នេះ ។\n\nព័ត៌មាន​សាធារណៈ​ក្នុង​របាយការណ៏​នេះ​នឹង​ត្រូវ​ចេញ​ផ្សាយ​ក្នុង​ការ​បោះពុម្ព​លើ​ម៉ាស៊ីន​ស្វែង​រក​នៃ Martus និង​អាច​មើល​បាន​ដោយ​មនុស្ស​ដែល​នៅ​ក្រៅ​អង្គការ​របស់​អ្នក ។\n\nបើ​មាន​ព័ត៌មាន​ណា​ដែល​អ្នក​មិន​ចង់​អោយ​មើល​ឃើញ​ជា​សាធារណៈ​ អ្នក​អាច​ផ្លាស់ទី​ទិន្នន័យ​នោះ​ទៅ​ផ្នែក​បុគ្គល​នៃ​របាយការណ៏ ឬ​គូសធីក​ប្រអប់ “រក្សា​ព័ត៌មាន​ទាំងអស់​ជា​បុគ្គល” មុន​ពេល​រក្សា​វា​ទុក ។>
+#__________________________________________=This will permanently seal the bulletin and you will not be allowed to make any further modifications to it except by creating a new version of the bulletin.\n\nThe public information in this bulletin will be released for possible publication on the Martus Search Engine, and may be viewed by people outside your organization.\n\nIf there is information you do not want to be publicly available, either move that data to the bottom (always Private) pane of the bulletin or check the 'Keep ALL Information Private' box before saving the bulletin.
+-3544-field:confirmSendWithPublicDataeffect=<យ៉ាង​នេះ​នឹង​បិទ​របាយការណ៏​ជា​អចិន្ត្រៃយ៏ ហើយ​អ្នក​នឹង​មិន​ត្រូវ​បាន​អនុញ្ញាតិ​អោយ​ធ្វើ​ការ​កែប្រែ​បន្ថែម​លើ​វា​ទេ លើក​លែង​តែ​អ្នក​បង្កើត​ច្បាប់​ចម្លង​ថ្មី​នៃ​របាយការណ៏​នេះ ។\n\nព័ត៌មាន​សាធារណៈ​ក្នុង​របាយការណ៏​នេះ​នឹង​ត្រូវ​ចេញ​ផ្សាយ​ក្នុង​ការ​បោះពុម្ព​លើ​ម៉ាស៊ីន​ស្វែង​រក​នៃ Martus និង​អាច​មើល​បាន​ដោយ​មនុស្ស​ដែល​នៅ​ក្រៅ​អង្គការ​របស់​អ្នក ។\n\nបើ​មាន​ព័ត៌មាន​ណា​ដែល​អ្នក​មិន​ចង់​អោយ​មើល​ឃើញ​ជា​សាធារណៈ​ អ្នក​អាច​ផ្លាស់ទី​ទិន្នន័យ​នោះ​ទៅ​ផ្នែក​បុគ្គល​នៃ​របាយការណ៏ ឬ​គូសធីក​ប្រអប់ “រក្សា​ព័ត៌មាន​ទាំងអស់​ជា​បុគ្គល” មុន​ពេល​រក្សា​វា​ទុក ។>
 
 #_____________________________________________=Martus software is unable to determine whether this server complies with the official guidelines for operating a secure and reliable Martus server.
 -ab16-field:confirmServerComplianceFailedcause=កម្មវិធី Martus មិន​អាច​កំណត់​ថា​តើ​ម៉ាស៊ីន​បម្រើ​នេះ​អនុវត្ត​ទៅ​តាម​គោលការណ៏​ណែនាំ​ផ្លូវ​ការ​របស់ Martus ស្តី​ពី​ការ​ប្រត្តិបត្តិ​ប្រកប​ដោយ​សុវត្ថិភាព​និង​ជា​ម៉ាស៊ីន​បម្រើ Martus គួរ​អោយ​​ទុក​ចិត្ត​បាន​ឬ​អត់​នោះ​ទេ ។
@@ -1033,8 +1472,14 @@
 #_______________________________________________=The bulletin you are about to create is based on a previous bulletin whose custom fields are different from your current custom fields.  Do you wish to use the original bulletin's custom fields?
 -a6ca-field:confirmUseBulletinsCustomFieldscause=<របាយការណ៏​ដែល​អ្នក​រៀប​នឹង​បង្កើត​គឺ​អាស្រ័យ​លើ​របាយការណ៏​មុន​ដែល​ក្រឡា​ទទឹង​ផ្ទាល់​ខ្លួន​របស់​វា​ខុស​ពី​ក្រឡា​ទទឹង​ផ្ទាល់​ខ្លួន​បច្ចុប្បន្ន​របស់​អ្នក ។ តើ​អ្នក​ចង់​ប្រើ​ក្រឡា​ទទឹង​ផ្ទាល់​ខ្លួន​នៃ​របាយការណ៏​ដើម​ឬ ?>
 
-#________________________________________________=Answering Yes will use the old custom fields and all bulletin data.  Answering No will use your current custom fields and copy all similar fields to the new bulletin but you may lose some of the original bulletin's data.
--0ed4-field:confirmUseBulletinsCustomFieldseffect=<ការ​ឆ្លើយ “យល់ព្រម” នឹង​ប្រើ​គ្រប់​ក្រឡា​ទទឹង​ផ្ទាល់​ខ្លួន​និង​ទិន្នន័យ​នៃ​របាយការណ៏​ចាស់ ។ ការ​ឆ្លើយ “ទេ” នឹង​ប្រើ​ក្រឡា​ទទឹង​បច្ចុប្បន្ន​របស់​អ្នក ហើយ​ចម្លង​ក្រឡា​ទទឹង​ដែល​ស្រដៀង​គ្នា​ទៅ​របាយការណ៏​ថ្មី ប៉ុន្តែ​អ្នក​នឹង​បាត់​នូវ​ទិន្នន័យ​នៃ​របាយការណ៏​ដើម​ខ្លះ ។>
+#________________________________________________=Answering '#UseOldCustomFields#' will use the old custom fields and all bulletin data.  Answering '#UseNewCustomFields#' will use your current custom fields and copy all similar fields to the new bulletin but you may lose some of the original bulletin's data.
+-4ce8-field:confirmUseBulletinsCustomFieldseffect=<ការ​ឆ្លើយ “យល់ព្រម” នឹង​ប្រើ​គ្រប់​ក្រឡា​ទទឹង​ផ្ទាល់​ខ្លួន​និង​ទិន្នន័យ​នៃ​របាយការណ៏​ចាស់ ។ ការ​ឆ្លើយ “ទេ” នឹង​ប្រើ​ក្រឡា​ទទឹង​បច្ចុប្បន្ន​របស់​អ្នក ហើយ​ចម្លង​ក្រឡា​ទទឹង​ដែល​ស្រដៀង​គ្នា​ទៅ​របាយការណ៏​ថ្មី ប៉ុន្តែ​អ្នក​នឹង​បាត់​នូវ​ទិន្នន័យ​នៃ​របាយការណ៏​ដើម​ខ្លះ ។>
+
+#____________________________________________________=The draft bulletin you are about to modify has custom fields which are different from your current custom fields.  Do you wish to use the original bulletin's custom fields?
+-ac9d-field:confirmUseBulletinsDraftCustomFieldscause=<The draft bulletin you are about to modify has custom fields which are different from your current custom fields.  Do you wish to use the original bulletin's custom fields?>
+
+#_____________________________________________________=Answering '#UseOldCustomFields#' will use the old custom fields and all bulletin data.  Answering '#UseNewCustomFields#' will use your current custom fields and copy all similar fields to this new draft bulletin but you may lose some of the original bulletin's data.
+-e63e-field:confirmUseBulletinsDraftCustomFieldseffect=<Answering '#UseOldCustomFields#' will use the old custom fields and all bulletin data.  Answering '#UseNewCustomFields#' will use your current custom fields and copy all similar fields to this new draft bulletin but you may lose some of the original bulletin's data.>
 
 #________________________________________________=Warning: acctmap.txt file in your account's packets directory is missing or is corrupt.  This may indicate someone has tried to tamper with your data or could be caused by a hardware error.
 -61cb-field:confirmWarnMissingAccountMapFilecause=ការ​ព្រមាន ៖ ឯកសារ acctmap.txt ក្នុង​ថត packets នៃ​គណនី​របស់​អ្នក​គឺ​បាត់​ឬ​ខូច ។ យ៉ាង​នេះ​អាច​បង្ហាញ​ថា នរណា​ម្នាក់​បាន​ព្យាយាម​រុះរើ​ទិន្នន័យ​របស់​អ្នក ឬ​អាច​បណ្តាល​មក​ពី​កំហុស​ផ្នែក​រឹង ។
@@ -1042,14 +1487,14 @@
 #_________________________________________________=Clicking on Yes will delete all of your bulletins and continue to load Martus.  Clicking on No will exit Martus so you can try to recover or repair this file manually.
 -20ee-field:confirmWarnMissingAccountMapFileeffect=ចុចលើ “យល់ព្រម” នឹង​លុប​របាយការណ៏​ទាំងអស់​របស់​អ្នក​ហើយ​បន្ត​ផ្ទុក Martus ។ ចុចលើ “ទេ” នឹង​ចេញ​ពី Martus ដូច្នេះ​អ្នក​អាច​សាកល្បង​យក​មក​វិញ​ឬ​ជួសជុល​ឯកសារ​នេះ​ដោយ​ដៃ ។
 
-#__________________________________________________________________=Warning: acctmap.txt.sig file is missing or is corrupt in your account's packets directory.  If you have just upgraded to a new version of Martus this warning is harmless and you should click on No.  Otherwise this may indicate someone has tried to tamper with your data or could be caused by a hardware error.
--e1b1-field:confirmWarnMissingOrCorruptAccountMapSignatureFilecause=ការ​ព្រមាន ៖ ឯកសារ acctmap.txt.sig ក្នុង​ថត packets នៃ​គណនី​របស់​អ្នក​គឺ​បាត់​ឬ​ខូច ។ បើ​អ្នក​ទើប​តែ​ធ្វើ​អោយ​កំណែ​ថ្មី​នៃ Martus ទាន់​សម័យ នោះ​ការ​ព្រមាន​នេះ​មិន​មាន​ផល​ប៉ះ​ពាល់​អ្វី​ទេ ហើយ​អ្នក​គួរ​ចុច​លើ “ទេ” ។ មិន​អញ្ចឹង​ទេ វា​អាច​បង្ហាញ​ថា​នរណា​ម្នាក់​បាន​ព្យាយាម​រុះរើ​ទិន្នន័យ​របស់​អ្នក ឬ​អាច​បណ្តាល​មក​ពី​កំហុស​ផ្នែក​រឹង ។
+#__________________________________________________________________=Warning: acctmap.txt.sig file is missing or is corrupt in your account's packets directory.  If you have just upgraded to a new release of Martus this warning is harmless and you should click on No.  Otherwise this may indicate someone has tried to tamper with your data or could be caused by a hardware error.
+-eefd-field:confirmWarnMissingOrCorruptAccountMapSignatureFilecause=<ការ​ព្រមាន ៖ ឯកសារ acctmap.txt.sig ក្នុង​ថត packets នៃ​គណនី​របស់​អ្នក​គឺ​បាត់​ឬ​ខូច ។ បើ​អ្នក​ទើប​តែ​ធ្វើ​អោយ​កំណែ​ថ្មី​នៃ Martus ទាន់​សម័យ នោះ​ការ​ព្រមាន​នេះ​មិន​មាន​ផល​ប៉ះ​ពាល់​អ្វី​ទេ ហើយ​អ្នក​គួរ​ចុច​លើ “ទេ” ។ មិន​អញ្ចឹង​ទេ វា​អាច​បង្ហាញ​ថា​នរណា​ម្នាក់​បាន​ព្យាយាម​រុះរើ​ទិន្នន័យ​របស់​អ្នក ឬ​អាច​បណ្តាល​មក​ពី​កំហុស​ផ្នែក​រឹង ។>
 
 #___________________________________________________________________=Clicking on Yes will try to generate a new acctmap.txt.sig file and continue to load Martus.  Clicking on No will exit Martus.
 -3ca4-field:confirmWarnMissingOrCorruptAccountMapSignatureFileeffect=ចុចលើ “យល់ព្រម” នឹង​សាកល្បងបង្កើត​ឯកសារ acctmap.txt.sig ថ្មី​វិញ ហើយ​បន្ត​ផ្ទុក​ Martus ។ ចុចលើ “ទេ” នឹង​ចេញ​ពី Martus ។
 
-#__________________________________________________________=Are you sure the directory you chose to save your backup files to is removable?  You cannot save all #M# files to the same location without inserting a new disk for each backup file.
--75ec-field:confirmWarningPathChosenMayNotBeRemoveablecause=តើ​អ្នក​ប្រាកដ​ទេ​ថា​ថត​ដែល​អ្នក​បាន​ជ្រើស​ដើម្បី​រក្សា​ទុក​ឯកសារ​បម្រុង​ទាំងអស់​គឺ​ចល័ត​បាន ? អ្នក​មិន​អាច​រក្សា​ទុក​ឯកសារ​ទាំង #M# ទៅ​ក្នុង​កន្លែង​ដដែល​ដោយ​មិន​បញ្ចូល​ថាស​ថ្មី​សំរាប់​ឯកសារ​បម្រុង​និមួយៗ​បាន​ទេ ។
+#__________________________________________________________=Are you sure the directory you chose to save your backup files to is removable?  You cannot save all #TotalNumberOfFilesInBackup# files to the same location without inserting a new disk for each backup file.
+-2aad-field:confirmWarningPathChosenMayNotBeRemoveablecause=<តើ​អ្នក​ប្រាកដ​ទេ​ថា​ថត​ដែល​អ្នក​បាន​ជ្រើស​ដើម្បី​រក្សា​ទុក​ឯកសារ​បម្រុង​ទាំងអស់​គឺ​ចល័ត​បាន ? អ្នក​មិន​អាច​រក្សា​ទុក​ឯកសារ​ទាំង #M# ទៅ​ក្នុង​កន្លែង​ដដែល​ដោយ​មិន​បញ្ចូល​ថាស​ថ្មី​សំរាប់​ឯកសារ​បម្រុង​និមួយៗ​បាន​ទេ ។>
 
 #___________________________________________________________=Choosing Yes will begin the backup process as instructed.
 -7744-field:confirmWarningPathChosenMayNotBeRemoveableeffect=ជ្រើស​យក “យល់ព្រម” នឹង​ចាប់​ផ្តើម​ដំណើរ​ការ​ចម្លង​ព័ត៌មាន​បម្រុង​ដូច​ដែល​បាន​ណែនាំ ។
@@ -1059,6 +1504,12 @@
 
 #_____________________________________________________=If this is a Headquarters computer, it is especially important to use the on-screen keyboard, because an attacker could gain access to all the private data that you are authorized to view.
 -4379-field:confirmWarningSwitchToNormalKeyboardeffect=បើ​នេះ​គឺ​ជា​កុំព្យូទ័រ​របស់​ស្នាក់ការ​កណ្តាល វា​មាន​សារៈសំខាន់​ខ្លាំង​ណាស់​ក្នុង​ការ​ប្រើ​ក្តារ​ចុច​លើ​អេក្រង់​វិញ ព្រោះ​អ្នក​វាយ​លុក​អាច​លួច​ចូល​ដំណើរ​ការ​រាល់​ទិន្នន័យ​បុគ្គល​ទាំង​អស់​ដែល​អ្នក​មាន​សិទ្ធិ​មើល ។
+
+#_________________________________________________=This XML file was created by a newer version of Martus.
+-4241-field:confirmXmlSchemaNewerImportAnywaycause=<This XML file was created by a newer version of Martus.>
+
+#__________________________________________________=If you continue with the import, some information in the bulletin(s) might not be imported.
+-aa32-field:confirmXmlSchemaNewerImportAnywayeffect=<If you continue with the import, some information in the bulletin(s) might not be imported.>
 
 #_________________________________________________=A single encrypted backup file of your key has yet to be created.
 -71c0-field:confirmbackupIncompleteEncryptedNeeded=ឯកសារ​បម្រុង​ដែល​បាន​បម្លែង​ជា​រហស្សលិខ​តែ​មួយ​នៃ​កូនសោ​របស់​អ្នក​មិន​ទាន់​បាន​បង្កើត​នៅ​ឡើយ​ទេ ។
@@ -1078,11 +1529,11 @@
 #_______________________________________________=Selecting Yes will guide you through the backup procedure, selecting No will skip this important step.
 -8571-field:confirmgeneralBackupKeyPairMsgeffect=ជ្រើស​យក “យល់ព្រម” នឹង​ណែនាំ​អ្នក​ពី​បែបបទ​ចម្លង​ព័ត៌មាន​បម្រុង, ជ្រើស​យក “ទេ” នឹង​រំលង​ជំហាន​ដ៏​សំខាន់​នេះ ។
 
-#_________________________________________=The text "#S#" was not found.  Do you wish to search from the beginning?
--cf53-field:confirmhelpStringNotFoundcause=អត្ថបទ “#S#” មិន​ត្រូវ​បាន​រក​ឃើញ​ទេ ។ តើ​អ្នក​ចង់​ស្វែងរក​ពី​ដំបូង​មក​ទេ ?
+#_________________________________________=The text "#SearchString#" was not found.  Do you wish to search from the beginning?
+-25f6-field:confirmhelpStringNotFoundcause=<អត្ថបទ “#S#” មិន​ត្រូវ​បាន​រក​ឃើញ​ទេ ។ តើ​អ្នក​ចង់​ស្វែងរក​ពី​ដំបូង​មក​ទេ ?>
 
-#__________________________________________=Clicking on Yes will search for "#S#" from the beginning.
--f445-field:confirmhelpStringNotFoundeffect=ចុច​លើ “យល់ព្រម” នឹង​ស្វែងរក “#S#” ពី​ដំបូង​មក​វិញ ។
+#__________________________________________=Clicking on Yes will search for "#SearchString#" from the beginning.
+-0981-field:confirmhelpStringNotFoundeffect=<ចុច​លើ “យល់ព្រម” នឹង​ស្វែងរក “#S#” ពី​ដំបូង​មក​វិញ ។>
 
 #_____________________=Confirming...
 -a4f3-field:confirming=ការ​អះអាង…
@@ -1153,20 +1604,38 @@
 #___________________=Location
 -d219-field:location=ទីតាំង
 
+#___________________=Date format sequence
+-eed8-field:mdyOrder=<Date format sequence>
+
 #_____________________________________________=The attachment could not be located.
 -65b1-field:messageErrorAttachmentMissingcause=ពុំ​អាច​រក​ទីតាំង​ឯកសារ​ភ្ជាប់​បាន​ទេ ។
 
 #________________________________________=This date occurs in the future:
 -438b-field:messageErrorDateInFuturecause=កាល​បរិច្ឆេទ​នេះ​កើត​ឡើង​ក្នុង​ពេល​អនាគត ៖
 
-#_____________________________________________=This date range has an end date that is earlier than the start date:
--e4dc-field:messageErrorDateRangeInvertedcause=ចន្លោះ​នៃ​កាលបរិច្ឆេទ​នេះ​មាន​កាលបរិច្ឆេទ​បញ្ចប់​មុន​កាលបរិច្ឆេទ​ចាប់ផ្តើម ៖
+#_____________________________________________=This date range has an end date that is earlier than the start date: #FieldLabel#
+-4952-field:messageErrorDateRangeInvertedcause=<ចន្លោះ​នៃ​កាលបរិច្ឆេទ​នេះ​មាន​កាលបរិច្ឆេទ​បញ្ចប់​មុន​កាលបរិច្ឆេទ​ចាប់ផ្តើម ៖>
+
+#________________________________________=Dates entered in '#FieldLabel#' cannot be earlier than #MinimumDate#
+-db1c-field:messageErrorDateTooEarlycause=<Dates entered in '#FieldLabel#' cannot be earlier than #MinimumDate#>
+
+#_______________________________________=Dates entered in '#FieldLabel#' cannot be later than #MaximumDate#
+-615b-field:messageErrorDateTooLatecause=<Dates entered in '#FieldLabel#' cannot be later than #MaximumDate#>
+
+#______________________________________________=This field is required and cannot be left blank: #FieldLabel#
+-dd0a-field:messageErrorRequiredFieldBlankcause=<This field is required and cannot be left blank: #FieldLabel#>
 
 #_________________________________=The current server has sent this message:
 -fd76-field:messageServerNewscause=ម៉ាស៊ីន​បម្រើ​បច្ចុប្បន្ន​បាន​បញ្ចូន​សារ​មួយ​នេះ ៖
 
 #______________________________________=The Public Code does not match the one you entered.
 -040a-field:notifyAccountCodeWrongcause=រហស្សលិខ​សាធារណៈ​មិន​ដូច​អ្វី​ដែល​អ្នក​បាន​បញ្ចូល​ទេ ។
+
+#_____________________________________________________=Must select at least one bulletin that was created by this account
+-f7c7-field:notifyAddPermissionsZeroBulletinsOurscause=<Must select at least one bulletin that was created by this account>
+
+#____________________________________________________________=Must select at least one headquarters account
+-deb1-field:notifyAddPermissionsZeroHeadquartersSelectedcause=<Must select at least one headquarters account>
 
 #____________________________________=A copy of Martus is already running on this computer. You must close that copy before starting a new copy.
 -614e-field:notifyAlreadyRunningcause=ច្បាប់​ចម្លង​នៃ Martus កំពុង​តែ​ដំណើរ​ការ​លើ​កុំព្យូទ័រ​នេះ​រួច​ហើយ ។ អ្នក​ត្រូវ​តែ​បិទ​ច្បាប់​ចម្លង​នោះ​សិន​មុន​ពេល​ចាប់​ផ្តើម​ច្បាប់​ថ្មី ។
@@ -1180,8 +1649,8 @@
 #______________________________________________=Martus could not authenticate the server. The server may have been compromised.  Please verify your server configuration and contact the server operator.
 -f27c-field:notifyAuthenticateServerFailedcause=Martus មិន​អាច​ផ្ទៀងផ្ទាត់​ម៉ាស៊ីន​បម្រើ​បាន​ទេ ។ ម៉ាស៊ីន​បម្រើ​ប្រហែល​ជា​បាន​ខូច ។ ចូរ​ផ្ទៀងផ្ទាត់​ការ​កំណត់​រចនា​សម្ព័ន្ធ​ម៉ាស៊ីន​បម្រើ​របស់​អ្នក និង​ទំនាក់​ទំនង​អ្នក​បញ្ជា​ម៉ាស៊ីន​បម្រើ ។
 
-#________________________________________________=The bulletin version you are trying to view is currently not on your system.
--8579-field:notifyBulletinVersionNotInSystemcause=<The bulletin version you are trying to view is currently not on your system.>
+#________________________________________________=The bulletin version you are trying to view is currently not on your computer.
+-e4b7-field:notifyBulletinVersionNotInSystemcause=<The bulletin version you are trying to view is currently not on your system.>
 
 #____________________________________=The selected server is not responding. Before you choose a server, you must be connected to the internet, and that server must be available.
 -38fd-field:notifyConfigNoServercause=ម៉ាស៊ីន​បម្រើ​ដែល​បាន​ជ្រើស​គ្មាន​ការ​ឆ្លើយ​តប​ទេ ។ មុន​ពេល​អ្នក​ជ្រើស​យក​ម៉ាស៊ីន​បម្រើ, អ្នក​ត្រូវ​តែ​ភ្ជាប់​ទៅ​អ៊ិនធើណែត​ជាមុន​សិន ហើយ​ម៉ាស៊ីន​បម្រើ​ត្រូវ​តែ​មាន​ផង​ដែរ ។
@@ -1192,8 +1661,11 @@
 #_________________________________________=An error occurred while trying to create your account.
 -c8e7-field:notifyCreateAccountFailedcause=មាន​កំហុស​មួយ​បាន​កើត​ឡើង​ខណៈ​ពេល​ដែល​កំពុង​ព្យាយាម​បង្កើត​គណនី​របស់​អ្នក ។
 
-#_____________________________________________________=An error occurred during upload, and the damaged bulletin has been moved to the Damaged Bulletins folder.
--ed3b-field:notifyDamagedBulletinMovedToDiscardedcause=<មាន​កំហុស​មួយ​បាន​កើត​ឡើង​កំឡុង​ពេល​បញ្ចូន​ទៅ ហើយ​របាយការណ៏​ដែល​ខូច​ត្រូវ​បាន​ផ្លាស់ទី​ទៅ​ថត “របាយការណ៏​ដែល​ខូច​ខាត” ។>
+#____________________________________________=Martus needs to keep a list of all the fields in all the bulletins in your system.\n\nThis list does not exist, so it will be created now. This may take a few seconds per bulletin on a slower computer.
+-8773-field:notifyCreatingFieldSpecCachecause=<Martus needs to keep a list of all the fields in all the bulletins in your system.\n\nThis list does not exist, so it will be created now. This may take a few seconds per bulletin on a slower computer.>
+
+#_____________________________________________________=An error occurred during upload, and the damaged bulletin:'#BulletinTitle#' has been moved to the Damaged Bulletins folder.
+-3229-field:notifyDamagedBulletinMovedToDiscardedcause=<មាន​កំហុស​មួយ​បាន​កើត​ឡើង​កំឡុង​ពេល​បញ្ចូន​ទៅ ហើយ​របាយការណ៏​ដែល​ខូច​ត្រូវ​បាន​ផ្លាស់ទី​ទៅ​ថត “របាយការណ៏​ដែល​ខូច​ខាត” ។>
 
 #______________________________________________=Error: Unable to delete all of those draft bulletins from the server. Some of them may have been deleted.
 -916e-field:notifyDeleteServerDraftsFailedcause=កំហុស ៖ ពុំ​អាច​លុប​សេចក្តី​ព្រាង​របាយការណ៏​ទាំង​នោះ​ពី​ម៉ាស៊ីន​បម្រើ​បាន​ទេ ។
@@ -1216,8 +1688,23 @@
 #____________________________________________=An unexpected error occurred in generating the key backup files.
 -d237-field:notifyErrorBackingUpKeySharecause=កំហុស​មិន​បាន​គិត​ទុក​មួយ​បាន​កើត​ឡើង​ក្នុង​ពេល​បង្កើត​ឯកសារ​កូនសោ​បម្រុង ។
 
+#_____________________________________=An error has occurred, which may have prevented Martus from saving some configuration information. You may see a warning next time you log in.
+-117c-field:notifyErrorDuringExitcause=<An error has occurred, which may have prevented Martus from saving some configuration information. You may see a warning next time you log in.>
+
 #_________________________________________________________=There was an error saving your template.
 -88ed-field:notifyErrorExportingCustomizationTemplatecause=<There was an error saving your template.>
+
+#___________________________________________________=This XML file was created by a newer version of Martus and cannot be read by this version.  You must upgrade to the newer version of Martus to import this file.
+-c6cb-field:notifyErrorImportingBulletinsTooNewcause=<This XML file was created by a newer version of Martus and cannot be read by this version.  You must upgrade to the newer version of Martus to import this file.>
+
+#___________________________________________________=This XML file was created by an older version of Martus and cannot be read by this version.
+-7360-field:notifyErrorImportingBulletinsTooOldcause=<This XML file was created by an older version of Martus and cannot be read by this version.>
+
+#_____________________________________________=There was an error importing bulletins into Martus.  Not all bulletins were imported.
+-539b-field:notifyErrorImportingBulletinscause=<There was an error importing bulletins into Martus.  Not all bulletins were imported.>
+
+#_______________________________________________________________=The customization template you are trying to import was created by a newer version of Martus.  You need to upgrade to the latest version of Martus before you can import this template.
+-39dd-field:notifyErrorImportingCustomizationTemplateFuturecause=<The customization template you are trying to import was created by a newer version of Martus.  You need to upgrade to the latest version of Martus before you can import this template.>
 
 #_________________________________________________________=There was an error importing this template.
 -4a9a-field:notifyErrorImportingCustomizationTemplatecause=<There was an error importing this template.>
@@ -1249,8 +1736,11 @@
 #___________________________________________=You will have to select a server for any bulletins to be backed up to that server, or to retrieve bulletins from that server.
 -83c4-field:notifyExistingServerRemovedcause=អ្នក​នឹង​ត្រូវ​តែ​ជ្រើស​ម៉ាស៊ីន​បម្រើ​មួយ​ទើប​អ្នក​អាច​ចម្លង​របាយការណ៏​នានា​ទុក​ជា​ព័ត៌មាន​បម្រុង​លើ​ម៉ាស៊ីន​បម្រើ​នោះ និង​អាច​រក​របាយការណ៏​បាន​មក​វិញ​ពី​ម៉ាស៊ីន​បម្រើ​នោះ ។
 
-#____________________________________=Export completed successfully
--65b9-field:notifyExportCompletecause=ការ​នាំចេញ​បាន​បញ្ចប់​ទាំង​ស្រុង​ដោយ​ជោគជ័យ
+#______________________________________________________=Exported #BulletinsExported# of #TotalBulletinsToExport# bulletins.  Unfortunately #AttachmentsNotExported# attachments were not exported due to errors.
+-2a40-field:notifyExportCompleteMissingAttachmentscause=<Exported #BulletinsExported# of #TotalBulletinsToExport# bulletins.  Unfortunately #AttachmentsNotExported# attachments were not exported due to errors.>
+
+#____________________________________=Successfully exported #BulletinsExported# of #TotalBulletinsToExport# bulletins.
+-439b-field:notifyExportCompletecause=<ការ​នាំចេញ​បាន​បញ្ចប់​ទាំង​ស្រុង​ដោយ​ជោគជ័យ>
 
 #_______________________________________=The folder you are trying to export does not contain any bulletins.  Select a folder which has bulletins before exporting the folder.
 -c5f5-field:notifyExportFolderEmptycause=ថត​ដែល​អ្នក​កំពុង​ព្យាយាម​នាំ​ចេញ​ពុំ​មាន​ផ្ទុក​របាយការណ៏​ទេ ។ ជ្រើស​ថត​ណា​ដែល​មាន​របាយការណ៏​មុន​ពេល​នាំ​ថត​នោះ​ចេញ ។
@@ -1282,6 +1772,15 @@
 #_______________________________________________=The Headquarters label you entered is already assigned to another Headquarters account.  Please use a different label.
 -91ca-field:notifyHeadquarterLabelDuplicatecause=<The Headquarters label you entered is already assigned to another Headquarters account.  Please use a different label.>
 
+#________________________________________________=Not all bulletins were imported.  The following bulletins had problems during import.\n\n#ImportBulletinsNotImported#
+-9768-field:notifyImportBulletinsNotImportedcause=<Not all bulletins were imported.  The following bulletins had problems during import.\n\n#ImportBulletinsNotImported#>
+
+#____________________________________=Import complete.  Imported #BulletinsSuccessfullyImported# of #TotalBulletinsToImport# bulletins into folder: #ImportFolder#
+-0e20-field:notifyImportCompletecause=<Import complete.  Imported #BulletinsSuccessfullyImported# of #TotalBulletinsToImport# bulletins into folder: #ImportFolder#>
+
+#______________________________________________=Not all attachments were imported.  The following bulletins had problems importing these attachments.\n\n#ImportMissingAttachments#
+-4e91-field:notifyImportMissingAttachmentscause=<Not all attachments were imported.  The following bulletins had problems importing these attachments.\n\n#ImportMissingAttachments#>
+
 #___________________________________________________________=Successfully imported customization template.
 -c78c-field:notifyImportingCustomizationTemplateSuccesscause=<Successfully imported customization template.>
 
@@ -1291,8 +1790,20 @@
 #_______________________________________=You must have a server name or IP address.
 -984b-field:notifyInvalidServerNamecause=អ្នក​ត្រូវ​តែ​មាន​ឈ្មោះ ឬ​លេខ​អាសយដ្ឋាន​របស់​ម៉ាស៊ីន​បម្រើ ។
 
+#_______________________________________=No row selected.
+-7b20-field:notifyNoGridRowSelectedcause=<No row selected.>
+
 #___________________________________=Please select a Headquarters first.
 -1d19-field:notifyNoHQsSelectedcause=<Please select a Headquarters first.>
+
+#___________________________________________=No folder specified.  You must enter a folder you wish the files to be imported into.  This folder can already exist in the system, or can be a new folder.
+-05f7-field:notifyNoImportFileSpecifiedcause=<No folder specified.  You must enter a folder you wish the files to be imported into.  This folder can already exist in the system, or can be a new folder.>
+
+#____________________________________________=You must select at least one field to be included in the report.
+-9390-field:notifyNoReportFieldsSelectedcause=<You must select at least one field to be included in the report.>
+
+#__________________________________________=This is not a valid Report Format file
+-500f-field:notifyNotValidReportFormatcause=<This is not a valid Report Format file>
 
 #________________________________________=Operation completed.
 -1a65-field:notifyOperationCompletedcause=ប្រតិបត្តិការត្រូវ​បាន​បញ្ចប់ ។
@@ -1318,8 +1829,14 @@
 #____________________________________________=You may only preview one bulletin at a time.  Please only select one bulletin to preview.
 -fbee-field:notifyPreviewOneBulletinOnlycause=អ្នក​ប្រហែល​ជា​អាច​មើល​របាយការណ៏​ជា​មុន​បាន​ម្តង​មួយ​ប៉ុណ្ណោះ ។ ចូរ​ជ្រើស​របាយការណ៏​តែ​មួយ​គត់​មក​មើល​ជា​មុន ។
 
-#_________________________________________=This bulletin will not be printed because all the information is private.  If you wish to print the private data, please mark the "Include private data in print out" checkbox.
--459d-field:notifyPrintAllPrivateDatacause=របាយការណ៏​នេះ​នឹង​មិន​ត្រូវ​បាន​បោះពុម្ព​ទេ ព្រោះ​ព័ត៌មាន​ទាំង​អស់​គឺ​ជា​បុគ្គល ។ បើ​អ្នក​ចង់​បោះពុម្ព​ទិន្នន័យ​បុគ្គល ចូរ​គូស​ធីក​ប្រអប់ “រួម​បញ្ចូល​ទិន្នន័យ​បុគ្គល​ពេល​បោះពុម្ព” ។
+#____________________________________=Printing Complete
+-ab0a-field:notifyPrintCompletedcause=<Printing Complete>
+
+#_________________________________________=Successfully saved Report
+-45d7-field:notifyPrintToDiskCompletecause=<Successfully saved Report>
+
+#________________________________________=To print one or more bulletins, select them first, and then perform the print operation.
+-3298-field:notifyPrintZeroBulletinscause=<To print one or more bulletins, select them first, and then perform the print operation.>
 
 #_________________________________________=The file does not contain valid public information.
 -f5b5-field:notifyPublicInfoFileErrorcause=ឯកសារ​ពុំ​មាន​ព័ត៌មាន​សាធារណៈ​ត្រឹមត្រូវ​ទេ ។
@@ -1336,11 +1853,20 @@
 #_______________________________________________=To restore your key, first you must find the backup file you saved previously.  Using the 'Restore Key from Backup File' dialog box find the file on your computer's hard drive, a network drive, or removable media disk then click the Open button.  Martus will then ask you for your user name and password and restore your key so you can log in normally and access your account.
 -4a6f-field:notifyRecoveryProcessBackupFilecause=<ដើម្បី​ស្តារ​កូនសោ​របស់​អ្នក​ឡើង​វិញ ដំបូង​អ្នក​ត្រូវ​រក​ឯកសារ​បម្រុង​ដែល​អ្នក​បាន​រក្សា​ទុក​ពី​មុន​មក ។ ដោយ​ប្រើ​ប្រអប់ “ស្តារ​កូនសោ​ឡើង​វិញ​ពី​ឯកសារ​បម្រុង” រក​ឯកសារ​ក្នុង​ថាស​រឹង​កុំព្យូទ័រ​របស់​អ្នក, ក្នុង​ក្បាល​អាន​បណ្តាញ ឬ ក្នុង​ថាស​ចល័ត និង​បន្ទាប់​មក​ចុច​ប៊ូតុង “បើក” ។ បន្ទាប់​មក Martus នឹង​សួរ​រក​ឈ្មោះ​អ្នក​ប្រើ និង​ពាក្យ​សម្ងាត់​របស់​អ្នក ហើយ​ស្តារ​កូនសោ​របស់​អ្នក​វិញ ដូច្នេះ​អ្នក​អាច​ចូល​បាន​ធម្មតា និង​ដំណើរ​ការ​គណនី​របស់​អ្នក​បាន ។>
 
-#_____________________________________________=You will now have to provide #N# out of the #M# files you previously saved when you backed up your key.
--d5c2-field:notifyRecoveryProcessKeySharecause=ឥឡូវ​នេះ​អ្នក​នឹង​ត្រូវ​តែ​មាន​ឯកសារ #N# ក្នុង​ចំណោម​ឯកសារ​កូនសោ​បម្រុង​ទាំង #M# ដែល​អ្នក​បាន​ចម្លង​វា​ទុក​ពី​មុន​មក ។
+#_____________________________________________=You will now have to provide #MinimumNumberOfFilesNeededForRecovery# out of the #TotalNumberOfFilesInBackup# files you previously saved when you backed up your key.
+-f571-field:notifyRecoveryProcessKeySharecause=<ឥឡូវ​នេះ​អ្នក​នឹង​ត្រូវ​តែ​មាន​ឯកសារ #N# ក្នុង​ចំណោម​ឯកសារ​កូនសោ​បម្រុង​ទាំង #M# ដែល​អ្នក​បាន​ចម្លង​វា​ទុក​ពី​មុន​មក ។>
 
 #______________________________________=Please remember your username and password. It cannot be recovered.
 -e9e0-field:notifyRememberPasswordcause=ចូរ​ចង​ចាំ​ឈ្មោះ​អ្នក​ប្រើ​និង​ពាក្យ​សម្ងាត់​របស់​អ្នក ។ វា​មិន​អាច​យក​បាន​វិញ​ទេ ។
+
+#___________________________________________________=This report format was created in a different language. As a result, some headings may not print properly, and some of the fields may not be available for sorting.
+-eb95-field:notifyReportFormatDifferentLanguagecause=<This report format was created in a different language. As a result, some headings may not print properly, and some of the fields may not be available for sorting.>
+
+#_______________________________________=This report format was created with an earlier version of Martus, so it may not work correctly
+-ed82-field:notifyReportFormatIsOldcause=<This report format was created with an earlier version of Martus, so it may not work correctly>
+
+#__________________________________________=This report format was created with a newer version of Martus, so it may not work correctly
+-305e-field:notifyReportFormatIsTooNewcause=<This report format was created with a newer version of Martus, so it may not work correctly>
 
 #____________________________________________________=One or more bulletins were unable to be resent because you are not authorized to upload them.
 -d248-field:notifyResendErrorNotAuthorizedToSendcause=របាយការណ៏​មួយ​ឬ​ច្រើន​មិន​អាច​ផ្ញើរ​ម្តង​ទៀត​បាន​ទេ ព្រោះ​អ្នក​មិន​មាន​សិទ្ធិ​បញ្ចូន​ពួក​វា ។
@@ -1350,6 +1876,24 @@
 
 #______________________________________=Bulletin download cancelled.  Some bulletins may have already been downloaded.
 -87b3-field:notifyRetrieveCanceledcause=ទាញ​យក​របាយការណ៏​ត្រូវ​បាន​បោះបង់ ។ របាយការណ៏​មួយ​ចំនួន​ប្រហែល​ជា​ត្រូវ​បាន​ទាញ​យក​មក​រួច​ហើយ ។
+
+#_______________________________________=Retrieving bulletins from the server is complete
+-1ade-field:notifyRetrieveCompletedcause=<Retrieving bulletins from the server is complete>
+
+#___________________________________=An error has occurred while retrieving a bulletin.
+-6201-field:notifyRetrieveErrorcause=<An error has occurred while retrieving a bulletin.>
+
+#__________________________________________________=A retrieve was in progress when you upgraded to a newer version of Martus. That retrieve will be canceled, so you should re-select any bulletins that had not yet been retrieved.
+-28ae-field:notifyRetrieveFileDataVersionErrorcause=<A retrieve was in progress when you upgraded to a newer version of Martus. That retrieve will be canceled, so you should re-select any bulletins that had not yet been retrieved.>
+
+#_______________________________________=An error has prevented Martus from continuing the retrieve that was in progress. You should re-select any bulletins that had not yet been retrieved.
+-8149-field:notifyRetrieveFileErrorcause=<An error has prevented Martus from continuing the retrieve that was in progress. You should re-select any bulletins that had not yet been retrieved.>
+
+#________________________________________=A retrieve is already in progress. You cannot start another retrieve until that one has finished.
+-3e55-field:notifyRetrieveInProgresscause=<A retrieve is already in progress. You cannot start another retrieve until that one has finished.>
+
+#____________________________________________________=Preview not yet available for this bulletin. Please wait until the information has been retrieved from the server, and then try again.
+-8fd7-field:notifyRetrievePreviewNotAvailableYetcause=<Preview not yet available for this bulletin. Please wait until the information has been retrieved from the server, and then try again.>
 
 #________________________________________________=Errors occurred while retrieving bulletin summaries.  Some of the bulletins on the server will not be shown.
 -6f6f-field:notifyRetrievedOnlySomeSummariescause=កំហុស​បាន​កើត​ឡើង​ខណៈ​ពេល​រក​របាយការណ៏​សង្ខេប​មក​វិញ ។
@@ -1362,9 +1906,6 @@
 
 #__________________________________=Sorry, no bulletins were found.
 -5bd8-field:notifySearchFailedcause=សុំទោស, រក​របាយការណ៏​មិន​ឃើញ​ទេ ។
-
-#_________________________________=#N# bulletins matched the search, and have been added to the Search Results folder.\n Note that both current and earlier versions of each bulletin were searched.
--6569-field:notifySearchFoundcause=<ចំនួន​របាយការណ៏​ដែល​រក​ឃើញ = >
 
 #_____________________________________=The Server Public Code does not match the one you entered.
 -efe3-field:notifyServerCodeWrongcause=រហស្សលិខ​សាធារណៈ​របស់​ម៉ាស៊ីន​បម្រើ​មិន​ដូច​អ្វី​ដែល​អ្នក​បាន​បញ្ចូល​ទេ ។
@@ -1387,6 +1928,9 @@
 #_____________________________________=An unexpected error has occurred. Please report this problem to help@martus.org.
 -3cb4-field:notifyUnexpectedErrorcause=កំហុស​មិន​បាន​គិត​ទុក​មួយ​បាន​កើត​ឡើង ។ សូម​រាយការណ៏​ពី​បញ្ហា​នេះ​ទៅ​កាន់ help@martus.org ។
 
+#_________________________________________________________=An error occurred during upload, and the bulletin:'#BulletinTitle#' has not been sent to the server.  You may try and resend the bulletin later.
+-4325-field:notifyUploadFailedBulletinNotSentToServercause=<An error occurred during upload, and the bulletin:'#BulletinTitle#' has not been sent to the server.  You may try and resend the bulletin later.>
+
 #_______________________________________=The user name you chose already exists on this system, please choose a different user name.
 -bbb0-field:notifyUserAlreadyExistscause=ឈ្មោះ​អ្នក​ប្រើ​ដែល​អ្នក​បាន​ជ្រើស មាន​នៅ​លើ​ប្រព័ន្ធ​នេះ​រួច​ហើយ, សូម​ជ្រើស​ឈ្មោះ​អ្នក​ប្រើ​ផ្សេង​ទៀត ។
 
@@ -1398,6 +1942,9 @@
 
 #______________________________________________=Verification of all disks passed.
 -7d7f-field:notifyVerifyKeyPairSharePassedcause=ការ​ផ្ទៀងផ្ទាត់​ថាស​ទាំង​អស់​បាន​បញ្ចប់​រួច​រាល់ ។
+
+#________________________________________________=This computer can only view JPEG, GIF, and PNG image attachments
+-3267-field:notifyViewAttachmentNotAvailablecause=<This computer can only view JPEG, GIF, and PNG image attachments>
 
 #_____________________________________=Welcome!\n\nTo start using Martus, create an account. Choose any username you like and a password that contains at least 8 characters. Keep the following information in mind as you create your username and password:\n\n * We recommend using a password that has 15 characters.\n * Include some characters that aren't letters or numbers in your password.\n   (That is, use punctuation or other special characters.)\n * Use a password that other people won't be able to guess;\n   anyone who knows your username and password can view your private data,\n   and can create bulletins that everyone will believe were created by you.\n * Write down your username and password and store them in a safe place.\n * You'll need to enter your username and password whenever you start Martus.\n * Martus will also sometimes prompt you to re-enter your username\n   and password to prevent someone else from using your account\n   after you've logged in.\n\nIMPORTANT: You are the only one who has your username and password. If you lose either of them, you won't be able to retrieve your data. Your username and password are not stored or backed up anywhere, so they cannot be reset for you.
 -da34-field:notifyWelcomeToMartuscause=ស្វាគមន៏ !\n\nដើម្បី​ចាប់ផ្តើម​ប្រើ Martus, ត្រូវ​បង្កើត​គណនី ។ ជ្រើស​ឈ្មោះ​អ្នក​ប្រើ​ណា​ដែល​អ្នក​ចូល​ចិត្ត និង​ពាក្យ​សម្ងាត់​ដែល​ត្រូវ​មាន​យ៉ាងតិច​៨​តួ​អក្សរ ។ ចូរ​ចង​ចាំ​ព័ត៌មាន​ដូច​ខាង​ក្រោម​ពេល​ដែល​អ្នក​បង្កើត​ឈ្មោះ​អ្នក​ប្រើ​និង​ពាក្យ​សម្ងាត់​របស់​អ្នក ៖\n\n * យើង​សុំ​ស្នើរអោយ​ប្រើ​ពាក្យ​សម្ងាត់​១៥​តួ​អក្សរ ។\n * បញ្ចូល​តួ​អក្សរ​មួយ​ចំនួន​ដែល​មិន​មែន​ជា​អក្សរ ឬ​លេខ​នៅ​ក្នុង​ពាក្យ​សម្ងាត់​របស់​អ្នក ។\n   (នោះ​គឺ​ការ​ប្រើ​វណ្ណយុត្ត ឬ​ក៏​តួ​អក្សរ​ពិសេស​ផ្សេង​ទៀត ។)\n * ប្រើ​ពាក្យ​សម្ងាត់​ណា​ដែល​អ្នក​ផ្សេង​មិន​អាច​ទាយ​ត្រូវ ។\n   អ្នក​ណា​ដែល​ដឹង​ឈ្មោះ​អ្នក​ប្រើ​និង​ពាក្យ​សម្ងាត់​របស់​អ្នក​គឺ​អាច​មើល​ទិន្នន័យ​បុគ្គល​របស់​អ្នក,\n   និង​អាច​បង្កើត​របាយការណ៏​ដែល​គ្រប់​គ្នា​នឹង​ជឿ​ថា​ត្រូវ​បាន​បង្កើត​ដោយ​អ្នក ។\n * សរសេរ​ឈ្មោះ​អ្នក​ប្រើ​និង​ពាក្យ​សម្ងាត់​របស់​អ្នក​ហើយ​ទុក​វា​នៅ​កន្លែង​មាន​សុវត្ថិភាព ។\n * អ្នក​នឹង​តម្រូវ​អោយ​បញ្ចូល​ឈ្មោះ​អ្នកប្រើ​និង​ពាក្យ​សម្ងាត់​របស់​អ្នក​នៅ​ពេល​ណា​ដែល​អ្នក​ចាប់ផ្តើម Martus ។\n * ជួន​កាល Martus នឹង​សួរ​បញ្ជាក់​អោយ​អ្នក​បញ្ចូល​ឈ្មោះ​អ្នក​ប្រើ\n   និង​ពាក្យ​សម្ងាត់​របស់​អ្នក​ម្តង​ទៀត​ដើម្បី​បង្ការ​កុំ​អោយ​អ្នក​ផ្សេង​ប្រើ​គណនី​របស់​អ្នក\n   បន្ទាប់​ពី​អ្នក​បាន​ចូល Martus ។\n\nសំខាន់ ៖ អ្នក​គឺ​ជា​មនុស្ស​តែ​ម្នាក់​គត់​ដែល​មាន​ឈ្មោះ​អ្នក​ប្រើ​និង​ពាក្យ​សម្ងាត់​របស់​អ្នក ។ បើ​អ្នក​បាត់​មួយ​ក្នុង​ចំណោម​ពួកវា, អ្នក​នឹង​មិន​អាច​រក​ទិន្នន័យ​របស់​អ្នក​បាន​មក​វិញ​ឡើយ ។ ឈ្មោះ​អ្នក​ប្រើ​និង​ពាក្យ​សម្ងាត់​របស់​អ្នក​មិន​ត្រូវ​បាន​រក្សា​ទុក​ឬ​ចម្លង​ទុក​នៅ​ទី​ផ្សេង​ឡើយ, ដូច្នេះ​ពួក​វា​មិន​អាច​ត្រូវបាន​កំណត់​ឡើង​វិញ​សំរាប់​អ្នក​ឡើយ ។
@@ -1456,8 +2003,17 @@
 #________________=Phone Number
 -ab25-field:phone=លេខ​ទូរស័ព្ទ
 
+#___________________________________=Automatically adjust legacy Persian dates
+-4d0e-field:preferencesAdjustPersian=<Automatically adjust legacy Persian dates>
+
+#________________________________=Automatically adjust legacy Thai dates
+-4d22-field:preferencesAdjustThai=<Automatically adjust legacy Thai dates>
+
 #________________________________=Prevent creating public bulletins
 -7c9e-field:preferencesAllPrivate=បង្ការ​ការ​បង្កើត​របាយការណ៏​សាធារណៈ
+
+#_______________________________________________=Automatically check for new Field Desk bulletins
+-982a-field:preferencesCheckFieldOfficeBulletins=<Automatically check for new Field Desk bulletins>
 
 #______________________=Private
 -237d-field:privateinfo=បុគ្គល
@@ -1480,20 +2036,26 @@
 #_________________=Status
 -bae7-field:status=ស្ថានភាព
 
+#___________________________________________________=Checking for new Field Desk bulletins...
+-68ab-field:statusCheckingForNewFieldOfficeBulletins=<Checking for new Field Desk bulletins...>
+
+#________________________________________=New Field Desk bulletins found on server
+-a71e-field:statusNewFieldOfficeBulletins=<New Field Desk bulletins found on server>
+
 #__________________=Summary
 -12b7-field:summary=សង្ខេប
 
-#____________________=For security reasons, you must sign into Martus again.
--a575-field:timedout1=ដើម្បី​ហេតុផល​សន្តិសុខ, អ្នក​ត្រូវ​ចូល​ទៅ​ក្នុង Martus ម្តង​ទៀត ។
+#____________________=Martus is still running in the background, but has locked the screen for security.  You must sign in to Martus again to continue working.
+-a252-field:timedout1=<ដើម្បី​ហេតុផល​សន្តិសុខ, អ្នក​ត្រូវ​ចូល​ទៅ​ក្នុង Martus ម្តង​ទៀត ។>
 
-#____________________=Any unsaved bulletins will be lost unless you sign in and save them.
--24c5-field:timedout2=រាល់​របាយការណ៏​ដែល​ពុំ​ទាន់​បាន​រក្សា​ទុក​នឹង​ត្រូវ​បាត់​បង់​បើ​អ្នក​មិន​បាន​ចូល​ហើយ​រក្សា​ទុក​ពួក​វា ។
+#____________________=Any unsaved bulletins will be lost unless you sign in to Martus again and save them.
+-3f66-field:timedout2=<រាល់​របាយការណ៏​ដែល​ពុំ​ទាន់​បាន​រក្សា​ទុក​នឹង​ត្រូវ​បាត់​បង់​បើ​អ្នក​មិន​បាន​ចូល​ហើយ​រក្សា​ទុក​ពួក​វា ។>
 
 #________________=Title
 -768e-field:title=ចំណង​ជើង
 
-#_____________________________=Khmer 2.7
--1d90-field:translationVersion=<Khmer 2.7>
+#_____________________________=Khmer 2.0.1
+-649d-field:translationVersion=ខ្មែរ 2.0.1
 
 #___________________=Username
 -84c2-field:username=ឈ្មោះ​អ្នក​ប្រើ
@@ -1585,6 +2147,9 @@
 #________________=Bengali, Bangla
 -4b7b-language:bn=បេន្កាលី
 
+#_________________=Burmese
+-460c-language:bur=<Burmese>
+
 #________________=German
 -da91-language:de=អាល្លឺម៉ង់
 
@@ -1638,6 +2203,9 @@
 
 #________________=Korean
 -dec6-language:ko=កូរ៉េ
+
+#________________=Kurdish
+-a06e-language:ku=<Kurdish>
 
 #________________=Kirghiz
 -1848-language:ky=គៀរហ្គីស្តង់
@@ -1720,6 +2288,9 @@
 #________________=Chinese
 -15dc-language:zh=ចិន
 
+#________________________=Update Headquarters Access...
+-fe87-menu:AddPermissions=<Update Headquarters Access...>
+
 #_____________________________=Backup My Key
 -2852-menu:BackupMyKeyPairFile=ចម្លង​កូនសោ​បម្រុង​របស់​ខ្ញុំ
 
@@ -1765,6 +2336,12 @@
 #___________________________=Export My Public Account Id
 -2b8a-menu:ExportMyPublicKey=នាំ​លេខ​គណនី​សាធារណៈ​របស់​ខ្ញុំ​ចេញ
 
+#_________________________=Import Bulletins
+-4094-menu:ImportBulletins=<Import Bulletins>
+
+#_________________________=Organize Folders
+-1ee2-menu:OrganizeFolders=<Organize Folders>
+
 #________________________=Paste Bulletin(s)
 -178b-menu:PasteBulletins=បិទ​ភ្ជាប់​របាយការណ៏
 
@@ -1783,6 +2360,9 @@
 #______________________=Rename Folder
 -5e31-menu:RenameFolder=ប្តូរ​ឈ្មោះ​ថត
 
+#_________________=Reports
+-88bc-menu:Reports=<Reports>
+
 #_________________________=Resend Bulletin(s)
 -21a8-menu:ResendBulletins=ផ្ញើរ​របាយការណ៏​ម្តង​ទៀត
 
@@ -1797,6 +2377,9 @@
 
 #___________________________________=Retrieve My Sealed Bulletins
 -68b9-menu:RetrieveMySealedBulletins=រក​របាយការណ៏​បិទ​របស់ខ្ញុំ​បាន​មក​វិញ
+
+#_______________________________=Seal Bulletin(s)
+-845f-menu:SealSelectedBulletins=<Seal Bulletin(s)>
 
 #____________________________=Select All Bulletins
 -6279-menu:SelectAllBulletins=ជ្រើសរបាយការណ៏​ទាំងអស់
@@ -1852,8 +2435,11 @@
 #_______________=Paste
 -db24-menu:paste=បិទភ្ជាប់
 
-#_______________________=Print Bulletin
--ed97-menu:printBulletin=បោះពុម្ព​របាយការណ៏
+#_______________________=Print Bulletin(s)
+-c705-menu:printBulletin=<បោះពុម្ព​របាយការណ៏>
+
+#_____________________=Print
+-5b22-menu:printButton=<Print>
 
 #________________=Search
 -bce0-menu:search=ស្វែងរក
@@ -1866,6 +2452,78 @@
 
 #_______________=Tools
 -4fa8-menu:tools=ឧបករណ៍
+
+#___________________=Farvardin
+-fef9-month:Persian1=<Farvardin>
+
+#____________________=Dey
+-494f-month:Persian10=<Dey>
+
+#____________________=Bahman
+-6c49-month:Persian11=<Bahman>
+
+#____________________=Esfand
+-7179-month:Persian12=<Esfand>
+
+#___________________=Ordibehesht
+-4241-month:Persian2=<Ordibehesht>
+
+#___________________=Khordad
+-02bc-month:Persian3=<Khordad>
+
+#___________________=Tir
+-5b96-month:Persian4=<Tir>
+
+#___________________=Mordad
+-e86f-month:Persian5=<Mordad>
+
+#___________________=Shahrivar
+-4a9e-month:Persian6=<Shahrivar>
+
+#___________________=Mehr
+-dfc8-month:Persian7=<Mehr>
+
+#___________________=Aban
+-1d23-month:Persian8=<Aban>
+
+#___________________=Azar
+-1e15-month:Persian9=<Azar>
+
+#________________=Jan
+-efed-month:Thai1=<Jan>
+
+#_________________=Oct
+-5132-month:Thai10=<Oct>
+
+#_________________=Nov
+-bb9b-month:Thai11=<Nov>
+
+#_________________=Dec
+-997f-month:Thai12=<Dec>
+
+#________________=Feb
+-dc84-month:Thai2=<Feb>
+
+#________________=Mar
+-c4ba-month:Thai3=<Mar>
+
+#________________=Apr
+-befd-month:Thai4=<Apr>
+
+#________________=May
+-c94f-month:Thai5=<May>
+
+#________________=Jun
+-6d90-month:Thai6=<Jun>
+
+#________________=Jul
+-b737-month:Thai7=<Jul>
+
+#________________=Aug
+-7562-month:Thai8=<Aug>
+
+#________________=Sep
+-fdd2-month:Thai9=<Sep>
 
 #______________=Apr
 -befd-month:apr=មេសា
@@ -1912,6 +2570,12 @@
 #_________________________=Account Information
 -0cbd-wintitle:AccountInfo=ព័ត៌មាន​គណនី
 
+#____________________________=Update headquarters access to Bulletins
+-5def-wintitle:AddPermissions=<Update headquarters access to Bulletins>
+
+#__________________________________________=Update headquarters access to Bulletins
+-5def-wintitle:AddingPermissionsToBulletins=<Update headquarters access to Bulletins>
+
 #______________________________________=Backup Key Information
 -f733-wintitle:BackupKeyPairGeneralInfo=ព័ត៌មាន​កូនសោ​បម្រុង
 
@@ -1929,6 +2593,12 @@
 
 #______________________________=Details Field Default Content
 -a39b-wintitle:BulletinTemplate=<Details Field Default Content>
+
+#________________________________=Create Report
+-446e-wintitle:ChooseReportFields=<Create Report>
+
+#_______________________________=Run Report...
+-56fb-wintitle:ChooseReportToRun=<Run Report...>
 
 #__________________________=Server Configuration
 -add5-wintitle:ConfigServer=ការ​កំណត់​រចនា​សម្ព័ន្ធ​ម៉ាស៊ីន​បម្រើ
@@ -1951,6 +2621,9 @@
 #_________________________________________________=Retrieving Bulletin Summaries
 -2a45-wintitle:DeleteServerDraftsBulletinSummaries=រក​របាយការណ៏​សង្ខេប​បាន​មក​វិញ
 
+#_____________________________________________=Warning Duplicate Labels Found
+-8e46-wintitle:DuplicateLabelsInCustomTemplate=<Warning Duplicate Labels Found>
+
 #____________________________________=Attachment Missing
 -11e1-wintitle:ErrorAttachmentMissing=ឯកសារ​ភ្ជាប់​បាន​បាត់
 
@@ -1966,6 +2639,12 @@
 #____________________________________=Date Range Invalid
 -1228-wintitle:ErrorDateRangeInverted=ចន្លោះ​នៃ​កាលបរិច្ឆេទ​មិន​ត្រឹមត្រូវ
 
+#_______________________________=Date Too Early
+-63d3-wintitle:ErrorDateTooEarly=<Date Too Early>
+
+#______________________________=Date Too Late
+-7b75-wintitle:ErrorDateTooLate=<Date Too Late>
+
 #____________________________________________=Previous File Exists
 -a449-wintitle:ErrorPreviousBackupShareExists=ឯកសារ​មុន​មាន​រួច​ហើយ
 
@@ -1974,6 +2653,9 @@
 
 #___________________________________=Key backup File Error
 -13ae-wintitle:ErrorRecoverShareDisk=ឯកសារ​កូនសោ​បម្រុង​មាន​កំហុស
+
+#_____________________________________=Required Field Blank
+-1131-wintitle:ErrorRequiredFieldBlank=<Required Field Blank>
 
 #________________________________________=Verification Error
 -5e89-wintitle:ErrorVerifyingKeyPairShare=ការ​ផ្ទៀងផ្ទាត់​មាន​កំហុស
@@ -1987,11 +2669,20 @@
 #_______________________________________________=Export Customization Template
 -5318-wintitle:ExportCustomizationTemplateSaveAs=<Export Customization Template>
 
+#____________________________=Exporting Bulletins
+-1c8c-wintitle:ExportProgress=<Exporting Bulletins>
+
+#_____________________________=Search Help
+-53b6-wintitle:FancySearchHelp=<Search Help>
+
 #__________________=Help on Martus
 -b414-wintitle:Help=ជំនួយ​លើ Martus
 
 #________________________________=Help on Bulletin Details Field Default Content
 -96cb-wintitle:HelpDefaultDetails=ជំនួយ​លើ​មាតិកា​លម្អិត​លំនាំ​ដើម​នៃ​ក្រឡា​ទទឹង
+
+#_____________________________=Import Bulletins
+-4094-wintitle:ImportBulletins=<Import Bulletins>
 
 #_____________________________________________=Import Customization Template
 -0188-wintitle:ImportCustomizationTemplateOpen=<Import Customization Template>
@@ -1999,8 +2690,20 @@
 #_______________________________=Import Headquarters Public Account Id File
 -9300-wintitle:ImportHQPublicKey=នាំ​ឯកសារ​លេខ​គណនី​សាធារណៈ​ស្នាក់ការ​កណ្តាល​ចូល
 
+#____________________________=Importing Bulletins
+-2c20-wintitle:ImportProgress=<Importing Bulletins>
+
+#________________________________=Include Private Data
+-e6dc-wintitle:IncludePrivateData=<Include Private Data>
+
+#____________________________________=Incompatible Translation Version
+-e91d-wintitle:IncompatibleMtfVersion=<Incompatible Translation Version>
+
 #________________________________=Load Default Details Field Content
 -4e2f-wintitle:LoadDefaultDetails=ផ្ទុក​មាតិកា​លម្អិត​លំនាំ​ដើម​នៃ​ក្រឡា​ទទឹង
+
+#_____________________________=Load Saved Search
+-7e7a-wintitle:LoadSavedSearch=<Load Saved Search>
 
 #__________________________=Martus SignIn
 -0615-wintitle:MartusSignIn=ចូល Martus
@@ -2011,11 +2714,23 @@
 #__________________________________=Validate User
 -6030-wintitle:MartusSignInValidate=ធ្វើ​អោយ​អ្នក​ប្រើ​មាន​សុពលភាព
 
+#__________________________________=Organize Report Fields
+-1e3e-wintitle:OrganizeReportFields=<Organize Report Fields>
+
 #_____________________________________=Cannot Paste Bulletin(s)
 -c05f-wintitle:PasteErrorBulletinOlder=<Cannot Paste Bulletin(s)>
 
-#______________________________=Confirm Print Private Data
--5b7b-wintitle:PrintPrivateData=អះអាង​បោះពុម្ព​ទិន្នន័យ​បុគ្គល
+#________________________________=Preparing Bulletins...
+-deac-wintitle:PreparingBulletins=<Preparing Bulletins...>
+
+#__________________________=Print Options
+-183a-wintitle:PrintOptions=<Print Options>
+
+#__________________________=Print Preview
+-68e2-wintitle:PrintPreview=<Print Preview>
+
+#______________________________=Print to which file
+-7cfe-wintitle:PrintToWhichFile=<Print to which file>
 
 #____________________________=Restore Key from Backup File
 -08b0-wintitle:RecoverKeyPair=ស្តារ​កូនសោ​ឡើង​វិញ​ពី​ឯកសារ​បម្រុង
@@ -2028,6 +2743,12 @@
 
 #__________________________=Remove Server
 -49c2-wintitle:RemoveServer=ម៉ាស៊ីន​បម្រើ​ពី​ចម្ងាយ
+
+#____________________________________=Reports
+-88bc-wintitle:ReportChooseSortFields=<Reports>
+
+#__________________________________=Searching...
+-ba2b-wintitle:ReportSearchProgress=<Searching...>
 
 #_____________________________=Resend Bulletins
 -273f-wintitle:ResendBulletins=ផ្ញើរ​របាយការណ៏​ម្តង​ទៀត
@@ -2068,11 +2789,26 @@
 #_______________________________________=Retrieve My Sealed Bulletins
 -68b9-wintitle:RetrieveMySealedBulletins=រក​របាយការណ៏​បិទ​បាន​មក​វិញ
 
+#_______________________________=Reports
+-88bc-wintitle:RunOrCreateReport=<Reports>
+
 #_______________________________________=of
 -de04-wintitle:SaveRecoverShareKeyPairOf=នៃ
 
+#__________________________=Save Report Format As...
+-8c3d-wintitle:SaveReportAs=<Save Report Format As...>
+
+#________________________=Save Search
+-1340-wintitle:SaveSearch=<Save Search>
+
 #______________________________=Saving Backup Disk
 -9204-wintitle:SaveShareKeyPair=រក្សា​ថាស​បម្រុង​ទុក
+
+#______________________________________=Sealing Bulletins...
+-f677-wintitle:SealingSelectedBulletins=<Sealing Bulletins...>
+
+#____________________________=Searching...
+-ba2b-wintitle:SearchProgress=<Searching...>
 
 #______________________________=Server Compliance Statement
 -20f8-wintitle:ServerCompliance=ការ​ថ្លែង​រៀបរាប់​ពី​ការ​ប្រព្រឹត្ត​តាម​របស់​ម៉ាស៊ីន​បម្រើ
@@ -2083,6 +2819,9 @@
 #____________________________________=Server Configuration Results
 -788c-wintitle:ServerSelectionResults=លទ្ធផល​ពី​ការ​កំណត់​រចនា​សម្ព័ន្ធ​ម៉ាស៊ីន​បម្រើ
 
+#____________________________=Folder Order
+-8c2d-wintitle:SetFolderOrder=<Folder Order>
+
 #___________________________________=Verifying Disk
 -6387-wintitle:VerifyingKeyPairShare=ផ្ទៀងផ្ទាត់​ថាស
 
@@ -2091,6 +2830,9 @@
 
 #________________________________=Key Backup Needed
 -e570-wintitle:askToBackupKeyPair=តម្រូវ​អោយ​ចម្លង​កូនសោ​បម្រុង
+
+#_______________________________________________________=Cancel
+-77df-wintitle:confirmAddingPermissionsToBulletinsCancel=<Cancel>
 
 #_____________________________________________=Backing Up Your Key
 -52f3-wintitle:confirmBackupKeyPairInformation=ចម្លង​កូនសោ​បម្រុង​របស់​អ្នក
@@ -2106,6 +2848,9 @@
 
 #_________________________________________=Cancel Modify Bulletin
 -276b-wintitle:confirmCancelModifyBulletin=បោះបង់​ការកែប្រែ​របាយការណ៏
+
+#___________________________________=Cancel Retrieve
+-d984-wintitle:confirmCancelRetrieve=<Cancel Retrieve>
 
 #______________________________________=Cancel Backup
 -bba5-wintitle:confirmCancelShareBackup=បោះបង់​ការ​ចម្លង​ព័ត៌មាន​បម្រុង
@@ -2124,6 +2869,9 @@
 
 #_________________________________________=Confirm Create New Version of Sealed Bulletin
 -1260-wintitle:confirmCloneMySealedAsDraft=<អះអាង​ការ​បង្កើត​ច្បាប់​ចម្លង​របាយការណ៏​បិទ>
+
+#____________________________________=Date Range Invalid
+-1228-wintitle:confirmDateRageInvalid=<Date Range Invalid>
 
 #_________________________________=Delete My Data
 -07c3-wintitle:confirmDeleteMyData=លុប​ទិន្នន័យ​របស់​ខ្ញុំ
@@ -2155,14 +2903,17 @@
 #_________________________________________=Folder Migration Required
 -72d3-wintitle:confirmNeedsFolderMigration=តម្រូវ​អោយ​មាន​ការ​ផ្លាស់ប្តូរ​ថត
 
-#_____________________________________________=Version Warning
--86f7-wintitle:confirmNewerConfigInfoFileFound=ការ​ព្រមាន​លើ​កំណែ
+#_____________________________________________=Release Warning
+-6fe1-wintitle:confirmNewerConfigInfoFileFound=<ការ​ព្រមាន​លើ​កំណែ>
 
 #_________________________________________________________=View Attachment
 -b24c-wintitle:confirmNotYourBulletinViewAttachmentAnyways=មើល​ឯកសារ​ភ្ជាប់
 
 #__________________________________________=Confirm Replace Existing File
 -e2b2-wintitle:confirmOverWriteExistingFile=បញ្ជាក់​ការ​ជំនួស​ឯកសារ​ដែល​មាន​ស្រាប់
+
+#________________________________________=Print All Private Data
+-180b-wintitle:confirmPrintAllPrivateData=<Print All Private Data>
 
 #___________________________________=Print Configuration Warning
 -30d9-wintitle:confirmPrinterWarning=ការ​ព្រមាន​ពី​ការ​បោះពុម្ព​ការ​កំណត់​រចនា​សម្ព័ន្ធ
@@ -2185,6 +2936,12 @@
 #_________________________________=Delete All Data and Remove Martus
 -6fef-wintitle:confirmRemoveMartus=លុប​ទិន្នន័យ​ទាំង​អស់ ហើយ​យក Martus ចេញ
 
+#_________________________________________=All Data Private
+-61f8-wintitle:confirmReportIncludePrivate=<All Data Private>
+
+#_______________________________________________=Cancel Search
+-5109-wintitle:confirmReportSearchProgressCancel=<Cancel Search>
+
 #_____________________________________________________=Request to Send Contact Info to Server
 -4f40-wintitle:confirmRequestToSendContactInfoToServer=ស្នើ​សុំ​បញ្ចូន​ព័ត៌មាន​ទំនាក់​ទំនង​ទៅ​ម៉ាស៊ីន​បម្រើ
 
@@ -2193,6 +2950,15 @@
 
 #__________________________________________=Confirm Retrieving Newer Versions
 -80c8-wintitle:confirmRetrieveNewerVersions=<Confirm Retrieving Newer Versions>
+
+#__________________________________________=Seal Bulletins
+-41f6-wintitle:confirmSealSelectedBulletins=<Seal Bulletins>
+
+#___________________________________________________=Sealing Bulletins
+-3ba3-wintitle:confirmSealingSelectedBulletinsCancel=<Sealing Bulletins>
+
+#_________________________________________=Cancel Search
+-5109-wintitle:confirmSearchProgressCancel=<Cancel Search>
 
 #_______________________________________=Confirm Save With Public Data
 -1e77-wintitle:confirmSendWithPublicData=អះអាង​ការ​រក្សា​ទុក​ទិន្នន័យ​សាធារណៈ
@@ -2218,6 +2984,9 @@
 #_____________________________________________=Custom Fields Selection
 -0b6f-wintitle:confirmUseBulletinsCustomFields=ជម្រើស​ប្តូរ​ក្រឡា​ទទឹង​តាម​បំណង
 
+#__________________________________________________=Custom Fields Selection
+-0b6f-wintitle:confirmUseBulletinsDraftCustomFields=<Custom Fields Selection>
+
 #______________________________________________=Accountmap File Missing Or Corrupt
 -e8e7-wintitle:confirmWarnMissingAccountMapFile=ឯកសារ Accountmap បាត់​ឬ​ខូច
 
@@ -2229,6 +2998,9 @@
 
 #__________________________________________________=Security Warning
 -a8f2-wintitle:confirmWarningSwitchToNormalKeyboard=ការ​ព្រមាន​សុវត្ថិភាព
+
+#_______________________________________________=Import Bulletins
+-4094-wintitle:confirmXmlSchemaNewerImportAnyway=<Import Bulletins>
 
 #_________________________________=Confirm Delete Folder
 -1a75-wintitle:confirmdeletefolder=បញ្ជាក់​ការ​លុប​ថត
@@ -2254,8 +3026,8 @@
 #____________________________________=Export My Public Account Id
 -2b8a-wintitle:inputExportMyPublicKey=នាំ​ចេញ​លេខ​គណនី​សាធារណៈ​របស់​ខ្ញុំ
 
-#_____________________________=HQ Label
--bd52-wintitle:inputGetHQLabel=ស្លាក​ស្នាក់ការ​កណ្តាល
+#_____________________________=Headquarters Label
+-5c50-wintitle:inputGetHQLabel=<ស្លាក​ស្នាក់ការ​កណ្តាល>
 
 #___________________________________=Default Backup File Name
 -ac3c-wintitle:inputGetShareFileName=ឈ្មោះ​ឯកសារ​បម្រុង​លំនាំ​ដើម
@@ -2277,6 +3049,12 @@
 
 #____________________________________=Incorrect Public Code
 -f994-wintitle:notifyAccountCodeWrong=រហស្សលិខ​សាធារណៈ​មិន​ត្រឹមត្រូវ
+
+#___________________________________________________=Update headquarters access to Bulletins
+-5def-wintitle:notifyAddPermissionsZeroBulletinsOurs=<Update headquarters access to Bulletins>
+
+#__________________________________________________________=No Headquarters Selected
+-9140-wintitle:notifyAddPermissionsZeroHeadquartersSelected=<No Headquarters Selected>
 
 #__________________________________=Martus Already Running
 -cfce-wintitle:notifyAlreadyRunning=Martus កំពុង​តែ​ដំណើរ​ការ​ហើយ
@@ -2302,6 +3080,9 @@
 #_______________________________________=Error Creating New Account
 -1141-wintitle:notifyCreateAccountFailed=មាន​កំហុស​ក្នុង​ការ​បង្កើត​គណនី​ថ្មី
 
+#__________________________________________=Missing List of Fields
+-3ac5-wintitle:notifyCreatingFieldSpecCache=<Missing List of Fields>
+
 #___________________________________________________=Moved Damaged Bulletin
 -61c0-wintitle:notifyDamagedBulletinMovedToDiscarded=ផ្លាស់ទី​របាយការណ៏​ដែល​ខូច
 
@@ -2326,11 +3107,26 @@
 #__________________________________________=Error Backing Up Key
 -ee40-wintitle:notifyErrorBackingUpKeyShare=កំហុស​ក្នុង​ការ​ចម្លង​កូនសោ​បម្រុង
 
+#___________________________________=Error During Exit
+-e05d-wintitle:notifyErrorDuringExit=<Error During Exit>
+
 #_______________________________________________________=Error Exporting Template
 -f4cc-wintitle:notifyErrorExportingCustomizationTemplate=<Error Exporting Template>
 
+#___________________________________________=Error Importing Bulletins
+-aeb8-wintitle:notifyErrorImportingBulletins=<Error Importing Bulletins>
+
+#_________________________________________________=Import Bulletin(s)
+-7849-wintitle:notifyErrorImportingBulletinsTooNew=<Import Bulletin(s)>
+
+#_________________________________________________=Import Bulletin(s)
+-7849-wintitle:notifyErrorImportingBulletinsTooOld=<Import Bulletin(s)>
+
 #_______________________________________________________=Error Importing Template
 -4f1a-wintitle:notifyErrorImportingCustomizationTemplate=<Error Importing Template>
+
+#_____________________________________________________________=Error Importing Template
+-4f1a-wintitle:notifyErrorImportingCustomizationTemplateFuture=<Error Importing Template>
 
 #____________________________________=Error Reading File
 -73ad-wintitle:notifyErrorReadingFile=កំហុស​ក្នុង​ការ​អាន​ឯកសារ
@@ -2362,6 +3158,9 @@
 #__________________________________=Export Bulletins
 -a86c-wintitle:notifyExportComplete=នាំ​របាយការណ៏​ចេញ
 
+#____________________________________________________=Export Bulletins
+-a86c-wintitle:notifyExportCompleteMissingAttachments=<Export Bulletins>
+
 #_____________________________________=Error Exporting Folder
 -d6d7-wintitle:notifyExportFolderEmpty=កំហុស​ក្នុង​ការ​នាំ​ថត​ចេញ
 
@@ -2392,6 +3191,15 @@
 #_____________________________________________=Headquarter Label Invalid
 -106b-wintitle:notifyHeadquarterLabelDuplicate=<Headquarter Label Invalid>
 
+#______________________________________________=Warning Bulletins Not Imported
+-59d8-wintitle:notifyImportBulletinsNotImported=<Warning Bulletins Not Imported>
+
+#__________________________________=Import Complete
+-a5cb-wintitle:notifyImportComplete=<Import Complete>
+
+#____________________________________________=Warning Missing Attachments
+-79ef-wintitle:notifyImportMissingAttachments=<Warning Missing Attachments>
+
 #_________________________________________________________=Importing Template Succeeded
 -ac8c-wintitle:notifyImportingCustomizationTemplateSuccess=<Importing Template Succeeded>
 
@@ -2401,8 +3209,20 @@
 #_____________________________________=Invalid Server Name or IP Address
 -3376-wintitle:notifyInvalidServerName=ឈ្មោះ ឬ​លេខ​អាសយដ្ឋាន​ម៉ាស៊ីន​បម្រើ​មិន​ត្រឹមត្រូវ
 
-#_________________________________=No HQ's Selected
--0c30-wintitle:notifyNoHQsSelected=<No HQ's Selected>
+#_____________________________________=No Row Selected
+-28fe-wintitle:notifyNoGridRowSelected=<No Row Selected>
+
+#_________________________________=No Headquarters Selected
+-9140-wintitle:notifyNoHQsSelected=<No HQ's Selected>
+
+#_________________________________________=No Folder Specified
+-4b6e-wintitle:notifyNoImportFileSpecified=<No Folder Specified>
+
+#__________________________________________=Create Report
+-446e-wintitle:notifyNoReportFieldsSelected=<Create Report>
+
+#________________________________________=Reports
+-88bc-wintitle:notifyNotValidReportFormat=<Reports>
 
 #______________________________________=Finished
 -355b-wintitle:notifyOperationCompleted=បញ្ចប់
@@ -2425,8 +3245,14 @@
 #__________________________________________=Preview One Bulletin Only
 -5b0a-wintitle:notifyPreviewOneBulletinOnly=មើល​របាយការណ៏​ជា​មុន​តែ​មួយ​គត់
 
-#_______________________________________=Print All Private Data
--180b-wintitle:notifyPrintAllPrivateData=បោះពុម្ព​រាល់​ទិន្នន័យ​បុគ្គល
+#__________________________________=Reports
+-88bc-wintitle:notifyPrintCompleted=<Reports>
+
+#_______________________________________=Print To Report File
+-c1b2-wintitle:notifyPrintToDiskComplete=<Print To Report File>
+
+#______________________________________=No Bulletins Selected
+-c1d6-wintitle:notifyPrintZeroBulletins=<No Bulletins Selected>
 
 #_______________________________________=Error Importing Public Information
 -913d-wintitle:notifyPublicInfoFileError=កំហុស​ក្នុង​ការ​នាំចូល​ព័ត៌មាន​សាធារណៈ
@@ -2449,6 +3275,15 @@
 #____________________________________=Remember Your Password
 -2bc6-wintitle:notifyRememberPassword=ចងចាំ​ពាក្យ​សម្ងាត់​របស់​អ្នក
 
+#_________________________________________________=Reports
+-88bc-wintitle:notifyReportFormatDifferentLanguage=<Reports>
+
+#_____________________________________=Reports
+-88bc-wintitle:notifyReportFormatIsOld=<Reports>
+
+#________________________________________=Reports
+-88bc-wintitle:notifyReportFormatIsTooNew=<Reports>
+
 #_______________________________=Error Sending Bulletin
 -eaab-wintitle:notifyResendError=កំហុស​ក្នុង​ការ​បញ្ចូន​របាយការណ៏
 
@@ -2457,6 +3292,24 @@
 
 #____________________________________=Bulletin Download Canceled
 -f8d3-wintitle:notifyRetrieveCanceled=បោះបង់​ការ​ទាញ​យក​របាយការណ៏
+
+#_____________________________________=Retrieve Complete
+-653b-wintitle:notifyRetrieveCompleted=<Retrieve Complete>
+
+#_________________________________=Retrieve Error
+-8ed0-wintitle:notifyRetrieveError=<Retrieve Error>
+
+#________________________________________________=Warning
+-e9c4-wintitle:notifyRetrieveFileDataVersionError=<Warning>
+
+#_____________________________________=Error
+-7f2f-wintitle:notifyRetrieveFileError=<Error>
+
+#______________________________________=Retrieve In Progress
+-6983-wintitle:notifyRetrieveInProgress=<Retrieve In Progress>
+
+#__________________________________________________=Unable To Preview
+-061a-wintitle:notifyRetrievePreviewNotAvailableYet=<Unable To Preview>
 
 #______________________________________________=Error During Retrieve
 -f2d7-wintitle:notifyRetrievedOnlySomeSummaries=កំហុស​កំឡុង​ពេល​រក​បាន​មក​វិញ
@@ -2494,6 +3347,9 @@
 #___________________________________=Unexpected Error
 -d17c-wintitle:notifyUnexpectedError=កំហុស​មិន​បាន​គិត​ទុក
 
+#_______________________________________________________=Unable to Send Bulletin To Server
+-2c28-wintitle:notifyUploadFailedBulletinNotSentToServer=<Unable to Send Bulletin To Server>
+
 #_____________________________________=User Already Exists
 -eecc-wintitle:notifyUserAlreadyExists=អ្នក​ប្រើប្រាស់​មាន​រួច​ហើយ
 
@@ -2505,6 +3361,9 @@
 
 #____________________________________________=Verification Succeeded
 -9195-wintitle:notifyVerifyKeyPairSharePassed=ការ​ផ្ទៀងផ្ទាត់​បញ្ចប់​ទាំង​ស្រុង
+
+#______________________________________________=Unable to View Attachment
+-4a17-wintitle:notifyViewAttachmentNotAvailable=<Unable to View Attachment>
 
 #___________________________________=Welcome To Martus
 -423f-wintitle:notifyWelcomeToMartus=ស្វាគមន៏​មក​កាន់ Martus
