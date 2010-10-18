@@ -934,7 +934,7 @@ public class EnglishStrings
 	"See examples below for the correct XML definition syntax to use." +
 	"\n\n" +
 	"You can set a default value for text and dropdown list fields by using " +
-	"<DefaultValue>xxx</DefaultValue>. " +
+	"<DefaultValue>ddd</DefaultValue>. " +
 	"For dropdowns, you must use a value already in the list of choices you defined. " +
 	"For Reusable Choices dropdowns it can be a partial or complete code, with each level separated by dots " +
 	"(for a location dropdown that has both State and City levels, " +
@@ -983,7 +983,7 @@ public class EnglishStrings
 	"</Choices>\n" +
 	"</Field>\n\n<Field type='STRING'>\n" +
 	"<Tag>SpecifyOther</Tag>\n" +
-	"<Label>If \"Other\", please specify:</Label>\n" +
+	"<Label>If Source = \"Other\", please specify:</Label>\n" +
 	"</Field>\n\n<Field type='STRING'>\n" +
 	"<Tag>IntervieweeName</Tag>\n" +
 	"<Label>Interviewee Name</Label>\n" +
