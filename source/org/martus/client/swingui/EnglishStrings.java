@@ -1167,7 +1167,7 @@ public class EnglishStrings
 	"   100 - Required standard field is missing\n" +
 	"   101 - Custom field does not have a correct tag\n" +
 	"   102 - A previous Tag already exists with this name\n" +
-	"   103 - Custom field does not have a label\n" +
+	"   103 - Label cannot be blank\n" +
 	"   104 - Unrecognized Field Type\n" +
 	"   105 - A label was found in a standard field\n" +
 	"   106 - XML Parse Error (e.g. mismatched quotation marks or bracket syntax)\n" +
