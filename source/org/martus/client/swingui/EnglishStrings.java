@@ -1080,14 +1080,12 @@ public class EnglishStrings
 	"\n" +
 	"\n" +
 	"<ReusableChoices code='StateChoices' label='State'>\n" +
-	"  <Choice code='' label='(Not Selected)'></Choice>\n" +
 	"  <Choice code='CA' label='California'></Choice>\n" +
 	"  <Choice code='NY' label='New York'></Choice>\n" +
 	"  <Choice code='TX' label='Texas'></Choice>\n" +
 	"</ReusableChoices>\n" +
 	"\n" +
 	"<ReusableChoices code='CityChoices' label='City'>\n" +
-	"  <Choice code='' label='(Not Selected)'></Choice>\n" +
 	"  <Choice code='CA.SF' label='San Francisco'></Choice>\n" +
 	"  <Choice code='CA.LA' label='Los Angeles'></Choice>\n" +
 	"  <Choice code='NY.NYC' label='New York City'></Choice>\n" +
