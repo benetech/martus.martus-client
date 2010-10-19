@@ -1188,6 +1188,7 @@ public class EnglishStrings
 	"   120 - Dropdown data source cannot be a single or multiple level dropdown with reusable choices\n" +
 	"   121 - Default value is not valid for this field\n" +
 	"   122 - Reusable choices lists cannot have the same Label\n" +
+	"   123 - Lower-level reusable choice code has no matching higher-level code\n" +
 	"   200 - All fields empty\n" +
 	"   201 - Unrecognized Headquarters created this template\n" +
 	"   202 - Security validation error\n" +
