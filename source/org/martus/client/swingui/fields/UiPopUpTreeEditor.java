@@ -101,6 +101,9 @@ public class UiPopUpTreeEditor extends UiField implements ActionListener
 
 	public String getText()
 	{
+		if(selectedItem == null)
+			return "";
+		
 		String text = new MiniFieldSpec(selectedItem.getSpec()).toJson().toString();
 		return text;
 	}
