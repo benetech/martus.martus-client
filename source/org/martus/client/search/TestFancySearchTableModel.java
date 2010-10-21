@@ -27,13 +27,19 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.search;
 
 import org.martus.client.bulletinstore.ClientBulletinStore;
+import org.martus.client.swingui.EnglishStrings;
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.dialogs.UiDialogLauncher;
 import org.martus.client.test.MockMartusApp;
 import org.martus.clientside.UiLocalization;
+import org.martus.common.EnglishCommonStrings;
 import org.martus.common.MiniLocalization;
 import org.martus.common.PoolOfReusableChoicesLists;
+import org.martus.common.bulletin.Bulletin;
+import org.martus.common.field.MartusField;
+import org.martus.common.field.MartusSearchableGridColumnField;
 import org.martus.common.fieldspec.DropDownFieldSpec;
+import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.fieldspec.FieldTypeAnyField;
 import org.martus.common.fieldspec.FieldTypeBoolean;
 import org.martus.common.fieldspec.FieldTypeDate;
@@ -42,8 +48,10 @@ import org.martus.common.fieldspec.FieldTypeGrid;
 import org.martus.common.fieldspec.FieldTypeMultiline;
 import org.martus.common.fieldspec.FieldTypeNormal;
 import org.martus.common.fieldspec.GridFieldSpec;
+import org.martus.common.fieldspec.MiniFieldSpec;
 import org.martus.common.fieldspec.PopUpTreeFieldSpec;
 import org.martus.common.fieldspec.SearchableFieldChoiceItem;
+import org.martus.common.fieldspec.StandardFieldSpecs;
 import org.martus.util.TestCaseEnhanced;
 
 public class TestFancySearchTableModel extends TestCaseEnhanced
@@ -59,7 +67,8 @@ public class TestFancySearchTableModel extends TestCaseEnhanced
 		ClientBulletinStore store = app.getStore();
 		store.createFieldSpecCacheFromDatabase();
 		app.loadSampleData();
-		UiLocalization localization = new MartusLocalization(null, new String[0]);
+		UiLocalization localization = new MartusLocalization(null, EnglishStrings.strings);
+		localization.addEnglishTranslations(EnglishCommonStrings.strings);
 		localization.setCurrentLanguageCode(MiniLocalization.ENGLISH);
 		UiDialogLauncher nullLauncher = new UiDialogLauncher(null, localization);
 		FancySearchHelper helper = new FancySearchHelper(store, nullLauncher);
@@ -70,19 +79,41 @@ public class TestFancySearchTableModel extends TestCaseEnhanced
 
 		PopUpTreeFieldSpec fieldsSpec = (PopUpTreeFieldSpec)model.getFieldSpecForColumn(FancySearchHelper.COLUMN_FIELD);
 		
-		SearchableFieldChoiceItem beginDateItem = FancySearchHelper.findSearchTag(fieldsSpec, "eventdate.begin");
+		MiniFieldSpec miniEventBeginSpec = createMiniFieldSpec(Bulletin.TAGEVENTDATE, "begin", localization);
+		SearchableFieldChoiceItem beginDateItem = FancySearchHelper.findSearchTag(fieldsSpec, miniEventBeginSpec);
 		model.setValueAt(beginDateItem.getCode(), 0, FancySearchTableModel.fieldColumn);
 		assertEquals(new FieldTypeDate(), model.getCellType(0, FancySearchTableModel.valueColumn));
 		
-		SearchableFieldChoiceItem authorItem = FancySearchHelper.findSearchTag(fieldsSpec, "author");
+		MiniFieldSpec miniAuthorSpec = createMiniFieldSpec(Bulletin.TAGAUTHOR, localization);
+		SearchableFieldChoiceItem authorItem = FancySearchHelper.findSearchTag(fieldsSpec, miniAuthorSpec);
 		model.setValueAt(authorItem.getCode(), 0, FancySearchTableModel.fieldColumn);
 		assertEquals(new FieldTypeNormal(), model.getCellType(0, FancySearchTableModel.valueColumn));
 		
-		SearchableFieldChoiceItem languageItem = FancySearchHelper.findSearchTag(fieldsSpec, "language");
+		MiniFieldSpec miniLanguageSpec = createMiniFieldSpec(Bulletin.TAGLANGUAGE, localization);
+		SearchableFieldChoiceItem languageItem = FancySearchHelper.findSearchTag(fieldsSpec, miniLanguageSpec);
 		model.setValueAt(languageItem.getCode(), 0, FancySearchTableModel.fieldColumn);
 		assertEquals(new FieldTypeDropdown(), model.getCellType(0, FancySearchTableModel.valueColumn));
 		app.deleteAllFiles();
 		
+	}
+
+	public static MiniFieldSpec createMiniFieldSpec(String standardFieldTag, String subTag, MiniLocalization localization) throws Exception
+	{
+		FieldSpec fieldSpec = StandardFieldSpecs.findStandardFieldSpec(standardFieldTag);
+		MartusField field = MartusSearchableGridColumnField.createMartusField(fieldSpec, new PoolOfReusableChoicesLists());
+		MartusField subField = field.getSubField(subTag, localization);
+		FieldSpec subSpec = subField.getFieldSpec();
+		String fieldLabel = localization.getFieldLabel(standardFieldTag);
+		subSpec.setLabel(FieldChooserSpecBuilder.buildDateRangeSubfieldString(fieldLabel, subTag, localization));
+		MiniFieldSpec miniEventBeginSpec = new MiniFieldSpec(subSpec);
+		return miniEventBeginSpec;
+	}
+	
+	public static MiniFieldSpec createMiniFieldSpec(String standardFieldTag, MiniLocalization localization)
+	{
+		FieldSpec fieldSpec = StandardFieldSpecs.findStandardFieldSpec(standardFieldTag);
+		MiniFieldSpec miniEventBeginSpec = new MiniFieldSpec(fieldSpec);
+		return miniEventBeginSpec;
 	}
 	
 	public void testGetCurrentOpColumnSpec() throws Exception

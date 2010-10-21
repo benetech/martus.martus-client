@@ -45,11 +45,14 @@ import org.martus.common.bulletin.Bulletin;
 import org.martus.common.bulletin.BulletinConstants;
 import org.martus.common.crypto.MartusCrypto;
 import org.martus.common.field.MartusDateRangeField;
+import org.martus.common.field.MartusField;
+import org.martus.common.field.MartusSearchableGridColumnField;
 import org.martus.common.fieldspec.ChoiceItem;
 import org.martus.common.fieldspec.CustomDropDownFieldSpec;
 import org.martus.common.fieldspec.DropDownFieldSpec;
 import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.fieldspec.FieldTypeBoolean;
+import org.martus.common.fieldspec.FieldTypeDate;
 import org.martus.common.fieldspec.FieldTypeDropdown;
 import org.martus.common.fieldspec.FieldTypeMessage;
 import org.martus.common.fieldspec.FieldTypeMultiline;
@@ -72,11 +75,12 @@ public class TestFieldChooserSpecBuilder extends TestCaseEnhanced
 
 	public void setUp() throws Exception
 	{
+		localization = new MartusLocalization(tempDir, new String[0]);
+		localization.setCurrentLanguageCode(MiniLocalization.ENGLISH);
+		
 		app = MockMartusApp.create();
 		getStore().createFieldSpecCacheFromDatabase();
 		tempDir = createTempDirectory();
-		localization = new MartusLocalization(tempDir, new String[0]);
-		localization.setCurrentLanguageCode(MiniLocalization.ENGLISH);
 		searchBuilder = new SearchFieldChooserSpecBuilder(localization);
 		sortBuilder = new SortFieldChooserSpecBuilder(localization);
 	}
@@ -114,12 +118,25 @@ public class TestFieldChooserSpecBuilder extends TestCaseEnhanced
 		SearchableFieldChoiceItem allFieldsItem = firstNode.getChoiceItem();
 		assertEquals("ALL FIELDS not first?", "", allFieldsItem.getSearchTag());
 		
-		assertNotNull("no last-saved date?", FancySearchHelper.findSearchTag(spec, Bulletin.PSEUDOFIELD_LAST_SAVED_DATE));
-		assertNotNull("no author?", FancySearchHelper.findSearchTag(spec, BulletinConstants.TAGAUTHOR));
-		assertNotNull("no private?", FancySearchHelper.findSearchTag(spec, BulletinConstants.TAGPRIVATEINFO));
-		assertNotNull("no eventdate.begin?", FancySearchHelper.findSearchTag(spec, BulletinConstants.TAGEVENTDATE + "." + MartusDateRangeField.SUBFIELD_BEGIN));
-		assertNotNull("no eventdate.end?", FancySearchHelper.findSearchTag(spec, BulletinConstants.TAGEVENTDATE + "." + MartusDateRangeField.SUBFIELD_END));
-		assertNull("has raw eventdate?", FancySearchHelper.findSearchTag(spec, BulletinConstants.TAGEVENTDATE));
+		assertNotNull("no author?", FancySearchHelper.findSearchTag(spec, getStandardMiniSpec(BulletinConstants.TAGAUTHOR)));
+		assertNotNull("no private?", FancySearchHelper.findSearchTag(spec, getStandardMiniSpec(BulletinConstants.TAGPRIVATEINFO)));
+		assertNotNull("no eventdate.begin?", FancySearchHelper.findSearchTag(spec, getStandardMiniSpec(BulletinConstants.TAGEVENTDATE, MartusDateRangeField.SUBFIELD_BEGIN)));
+		assertNotNull("no eventdate.end?", FancySearchHelper.findSearchTag(spec, getStandardMiniSpec(BulletinConstants.TAGEVENTDATE, MartusDateRangeField.SUBFIELD_END)));
+		assertNull("has raw eventdate?", FancySearchHelper.findSearchTag(spec, getStandardMiniSpec(BulletinConstants.TAGEVENTDATE)));
+
+		FieldSpec lastSavedSpec = FieldSpec.createCustomField(Bulletin.PSEUDOFIELD_LAST_SAVED_DATE, "Last Saved", new FieldTypeDate());
+		MiniFieldSpec miniLastSavedSpec = new MiniFieldSpec(lastSavedSpec);
+		assertNotNull("no last-saved date?", FancySearchHelper.findSearchTag(spec, miniLastSavedSpec));
+	}
+
+	public MiniFieldSpec getStandardMiniSpec(String standardTag)
+	{
+		return TestFancySearchTableModel.createMiniFieldSpec(standardTag, localization);
+	}
+	
+	public MiniFieldSpec getStandardMiniSpec(String standardTag, String subTag) throws Exception
+	{
+		return TestFancySearchTableModel.createMiniFieldSpec(standardTag, subTag, localization);
 	}
 	
 	public void testAllFieldTypesSearchable() throws Exception
@@ -133,7 +150,7 @@ public class TestFieldChooserSpecBuilder extends TestCaseEnhanced
 		store.saveBulletinForTesting(b);
 		
 		PopUpTreeFieldSpec spec = searchBuilder.createSpec(store);
-		SearchableFieldChoiceItem item = spec.findSearchTag( message.getTag());
+		SearchableFieldChoiceItem item = spec.findSearchTag(new MiniFieldSpec(message));
 		assertEquals("wrong label?", message.getLabel(), item.toString());
 	}
 	
@@ -156,7 +173,8 @@ public class TestFieldChooserSpecBuilder extends TestCaseEnhanced
 		getStore().saveBulletin(b);
 		
 		PopUpTreeFieldSpec spec = sortBuilder.createSpec(getStore());
-		assertNull("multiline is sortable?", spec.findSearchTag(Bulletin.TAGPUBLICINFO));
+		MiniFieldSpec miniSpec = TestFancySearchTableModel.createMiniFieldSpec(Bulletin.TAGPUBLICINFO, localization);
+		assertNull("multiline is sortable?", spec.findSearchTag(miniSpec));
 	}
 
 	public void testGridNotSortable() throws Exception
@@ -164,7 +182,7 @@ public class TestFieldChooserSpecBuilder extends TestCaseEnhanced
 		GridFieldSpec gridSpec = new GridFieldSpec();
 		gridSpec.setTag("grid");
 		gridSpec.setLabel("Grid");
-		gridSpec.addColumn(FieldSpec.createCustomField("", "Label", new FieldTypeNormal()));
+		gridSpec.addColumn(FieldSpec.createCustomField("", "LastName", new FieldTypeNormal()));
 		MartusCrypto security = getStore().getSignatureGenerator();
 		Bulletin b = new Bulletin(security, new FieldSpecCollection(new FieldSpec[] {gridSpec}), new FieldSpecCollection());
 		GridData gridData = new GridData(gridSpec, PoolOfReusableChoicesLists.EMPTY_POOL);
@@ -174,8 +192,11 @@ public class TestFieldChooserSpecBuilder extends TestCaseEnhanced
 		getStore().saveBulletin(b);
 		
 		PopUpTreeFieldSpec spec = sortBuilder.createSpec(getStore());
-		assertNull("grid is sortable?", spec.findSearchTag(gridSpec.getTag()));
-		assertNull("grid column is sortable?", spec.findSearchTag(gridSpec.getTag() + ".Label"));
+		assertNull("grid is sortable?", spec.findSearchTag(new MiniFieldSpec(gridSpec)));
+		
+		MartusField gridField = MartusSearchableGridColumnField.createMartusField(gridSpec, b.getTopSectionFieldSpecs().getAllReusableChoiceLists());
+		MartusField lastNameField = gridField.getSubField("LastName", localization); 
+		assertNull("grid column is sortable?", spec.findSearchTag(new MiniFieldSpec(lastNameField.getFieldSpec())));
 	}
 
 	public void testGetChoiceItemsForThisField() throws Exception
@@ -211,7 +232,7 @@ public class TestFieldChooserSpecBuilder extends TestCaseEnhanced
 		assertEquals("not one choice for message fields?", 1, messageTypeChoices.size());
 		ChoiceItem messageChoice = (ChoiceItem)messageTypeChoices.iterator().next();
 		FieldSpec messageChoiceSpec = messageChoice.getSpec();
-		assertEquals("message doesn't have string search?", new FieldTypeNormal(), messageChoiceSpec.getType());
+		assertEquals("message doesn't have string search?", new FieldTypeMessage(), messageChoiceSpec.getType());
 		
 		FieldSpec multilineType = createSampleMultilineSpec();
 		Set multilineTypeChoices = searchBuilder.getChoiceItemsForThisField(multilineType, getStore().getAllReusableChoiceLists());
@@ -390,7 +411,7 @@ public class TestFieldChooserSpecBuilder extends TestCaseEnhanced
 	{
 		return app.getStore();
 	}
-	
+
 	MockMartusApp app;
 	File tempDir;
 	MartusLocalization localization;

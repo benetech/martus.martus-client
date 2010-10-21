@@ -117,6 +117,7 @@ public class FieldChoicesByLabel
 			addSimilarNodes(node, choices, index + 1, localization);
 			index += node.getChildCount();
 			node = pullUpIfOnlyOneChild(node);
+			differentiateChildNodes(node);
 			root.add(node);
 		}
 
@@ -204,6 +205,43 @@ public class FieldChoicesByLabel
 		return node;
 	}
 	
+	private void differentiateChildNodes(SearchFieldTreeNode parent)
+	{
+		SearchFieldTreeNode[] needDifferentiation = getIndexesOfReusableDropdownChildren(parent);
+		for(int i = 0; i < needDifferentiation.length; ++i)
+		{
+			SearchFieldTreeNode child = needDifferentiation[i];
+			SearchableFieldChoiceItem choice = child.getChoiceItem();
+			FieldSpec spec = choice.getSpec();
+			String reusableListLabels = "";
+			for(int level = 0; level < spec.getReusableChoicesCodes().length; ++level)
+			{
+				if(level > 0)
+					reusableListLabels += ", ";
+				reusableListLabels += spec.getReusableChoicesCodes()[level];
+			}
+			child.setLabel(child.toString() + " (" + reusableListLabels + ")");
+		}
+	}
+
+	private SearchFieldTreeNode[] getIndexesOfReusableDropdownChildren(SearchFieldTreeNode parent)
+	{
+		Vector reusableDropdownNodes = new Vector();
+		for(int i = 0; i < parent.getChildCount(); ++i)
+		{
+			SearchFieldTreeNode child = (SearchFieldTreeNode)parent.getChildAt(i);
+			if(!child.isSearchableFieldChoiceItemNode())
+				continue;
+			SearchableFieldChoiceItem choice = child.getChoiceItem();
+			FieldSpec spec = choice.getSpec();
+			if(spec.getReusableChoicesCodes().length == 0)
+				continue;
+			reusableDropdownNodes.add(child);
+		}
+		
+		return (SearchFieldTreeNode[]) reusableDropdownNodes.toArray(new SearchFieldTreeNode[0]);
+	}
+
 	private void addSimilarNodes(SearchFieldTreeNode parent, SearchableFieldChoiceItem[] choices, int startAt, MiniLocalization localization)
 	{
 		String label = parent.toString();

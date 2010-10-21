@@ -53,6 +53,7 @@ import javax.swing.tree.TreeModel;
 import javax.swing.tree.TreePath;
 import javax.swing.tree.TreeSelectionModel;
 
+import org.json.JSONObject;
 import org.martus.client.search.SearchFieldTreeNode;
 import org.martus.common.MiniLocalization;
 import org.martus.common.fieldspec.MiniFieldSpec;
@@ -100,12 +101,21 @@ public class UiPopUpTreeEditor extends UiField implements ActionListener
 
 	public String getText()
 	{
-		return selectedItem.getCode();
+		String text = new MiniFieldSpec(selectedItem.getSpec()).toJson().toString();
+		return text;
 	}
 
 	public void setText(String newText)
 	{
-		selectedItem = spec.findCode(newText);
+		try
+		{
+			MiniFieldSpec miniSpec = new MiniFieldSpec(new JSONObject(newText));
+			selectedItem = spec.findSearchTag(miniSpec);
+		}
+		catch(Exception e)
+		{
+			selectedItem = null;
+		}
 		if(selectedItem == null)
 			System.out.println("UiPopUpTreeEditor couldn't setText: " + newText);
 		else
@@ -118,7 +128,7 @@ public class UiPopUpTreeEditor extends UiField implements ActionListener
 		if(specToSelect == null)
 			return;
 		
-		SearchableFieldChoiceItem item = spec.findSearchTag(specToSelect.getTag());
+		SearchableFieldChoiceItem item = spec.findSearchTag(specToSelect);
 		if(item == null)
 			return;
 		

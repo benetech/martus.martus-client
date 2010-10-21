@@ -28,8 +28,11 @@ package org.martus.client.search;
 import java.util.Arrays;
 import java.util.HashSet;
 
+import javax.swing.tree.TreeNode;
+
 import org.martus.common.MiniLocalization;
 import org.martus.common.fieldspec.ChoiceItem;
+import org.martus.common.fieldspec.CustomDropDownFieldSpec;
 import org.martus.common.fieldspec.DropDownFieldSpec;
 import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.fieldspec.FieldType;
@@ -44,6 +47,14 @@ public class TestFieldChoicesByLabel extends TestCaseEnhanced
 	public TestFieldChoicesByLabel(String name)
 	{
 		super(name);
+	}
+	
+	protected void setUp() throws Exception
+	{
+		super.setUp();
+
+		localization = new MiniLocalization();
+		localization.setCurrentLanguageCode(MiniLocalization.ENGLISH);
 	}
 	
 	public void testOnlyKeep()
@@ -91,8 +102,6 @@ public class TestFieldChoicesByLabel extends TestCaseEnhanced
 		choices.add(new SearchableFieldChoiceItem(a));
 		choices.add(new SearchableFieldChoiceItem(b));
 		choices.mergeSimilarDropdowns();
-		MiniLocalization localization = new MiniLocalization();
-		localization.setCurrentLanguageCode(MiniLocalization.ENGLISH);
 		FieldSpec[] result = choices.asArray(localization);
 		assertEquals("Didn't combine dupes?", 1, result.length);
 	}
@@ -189,4 +198,31 @@ public class TestFieldChoicesByLabel extends TestCaseEnhanced
 			assertContains("Missing b[" + i + "]?", b.getChoice(i), Arrays.asList(mergedSpec.getAllChoices()));
 		assertEquals("wrong order?", b.getChoice(1), mergedSpec.getChoice(2));
 	}
+	
+	public void testAnnotateSimilarDropdownsWithDifferentReusableChoices() throws Exception
+	{
+		CustomDropDownFieldSpec dropdown1 = new CustomDropDownFieldSpec();
+		dropdown1.setTag("dd");
+		dropdown1.setLabel("Label");
+		dropdown1.addReusableChoicesCode("reusable");
+		
+		CustomDropDownFieldSpec dropdown2 = new CustomDropDownFieldSpec();
+		dropdown2.setTag(dropdown1.getTag());
+		dropdown2.setLabel(dropdown1.getLabel());
+		dropdown2.addReusableChoicesCode("different");
+		
+		FieldChoicesByLabel choices = new FieldChoicesByLabel();
+		choices.add(new SearchableFieldChoiceItem(dropdown1));
+		choices.add(new SearchableFieldChoiceItem(dropdown2));
+		
+		TreeNode root = choices.asTree(localization);
+		assertEquals(1, root.getChildCount());
+		SearchFieldTreeNode parent = (SearchFieldTreeNode) root.getChildAt(0);
+		assertEquals(2, parent.getChildCount());
+		SearchFieldTreeNode child1 = (SearchFieldTreeNode) parent.getChildAt(0);
+		SearchFieldTreeNode child2 = (SearchFieldTreeNode) parent.getChildAt(1);
+		assertNotEquals("Didn't differentiate?", child1.toString(), child2.toString());
+	}
+
+	MiniLocalization localization;
 }

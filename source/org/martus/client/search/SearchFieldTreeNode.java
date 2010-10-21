@@ -46,6 +46,11 @@ public class SearchFieldTreeNode extends DefaultMutableTreeNode
 		localization = localizationToUse;
 	}
 	
+	public void setLabel(String string)
+	{
+		overriddenLabel = string;
+	}
+
 	public boolean isSelectable()
 	{
 		return (getChildCount() == 0);
@@ -66,13 +71,25 @@ public class SearchFieldTreeNode extends DefaultMutableTreeNode
 	
 	public String toString()
 	{
-		if(getParent() == null || getParent().getParent() == null)
+		if(overriddenLabel != null)
+			return overriddenLabel;
+
+		if(!isSearchableFieldChoiceItemNode())
 			return getUserObject().toString();
 		
 		SearchableFieldChoiceItem choice = getChoiceItem();
+		boolean isTheAnyFieldChoice = choice.getCode().length() == 0;
+		if(isTheAnyFieldChoice)
+			return choice.toString();
+		
 		String type = localization.getFieldLabel("FieldType" + choice.getType().getTypeName());
 		return choice.getSpec().getTag()+ ": " + type;
 			
+	}
+
+	public boolean isSearchableFieldChoiceItemNode()
+	{
+		return (getUserObject() instanceof SearchableFieldChoiceItem);
 	}
 	
 	public String getSortValue()
@@ -101,5 +118,7 @@ public class SearchFieldTreeNode extends DefaultMutableTreeNode
 		
 	}
 	
-	MiniLocalization localization;
+	private MiniLocalization localization;
+	private String overriddenLabel;
+
 }

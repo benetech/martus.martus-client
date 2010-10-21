@@ -242,6 +242,9 @@ public class FieldChooserSpecBuilder
 		if(thisType.isMultiline())
 			return true;
 		
+		if(thisType.isMessage())
+			return true;
+		
 		return false;
 	}
 	
@@ -249,10 +252,9 @@ public class FieldChooserSpecBuilder
 	{
 		String baseDisplayString = spec.getLabel();
 		Set itemIfAny = new HashSet();
-		String displayTemplate = getLocalization().getFieldLabel("DateRangeTemplate" + subfield);
 		try
 		{
-			String fullDisplayString = TokenReplacement.replaceToken(displayTemplate, "#FieldLabel#", baseDisplayString);
+			String fullDisplayString = buildDateRangeSubfieldString(baseDisplayString, subfield, getLocalization());
 			FieldSpec dateSpec = FieldSpec.createSubField(spec, subfield, fullDisplayString, new FieldTypeDate());
 			itemIfAny.add(new SearchableFieldChoiceItem(dateSpec));
 		}
@@ -263,6 +265,13 @@ public class FieldChooserSpecBuilder
 		}
 		
 		return itemIfAny;
+	}
+
+	public static String buildDateRangeSubfieldString(String baseDisplayString, String subfield, MiniLocalization localization) throws TokenInvalidException
+	{
+		String displayTemplate = localization.getFieldLabel("DateRangeTemplate" + subfield);
+		String fullDisplayString = TokenReplacement.replaceToken(displayTemplate, "#FieldLabel#", baseDisplayString);
+		return fullDisplayString;
 	}
 	
 	MiniLocalization getLocalization()

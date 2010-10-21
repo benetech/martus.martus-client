@@ -254,9 +254,9 @@ public class FancySearchHelper
 		return choice.getSpec();
 	}
 	
-	public static SearchableFieldChoiceItem findSearchTag(PopUpTreeFieldSpec specOfFieldColumn, String tagToFind)
+	public static SearchableFieldChoiceItem findSearchTag(PopUpTreeFieldSpec specOfFieldColumn, MiniFieldSpec specToFind)
 	{
-		return specOfFieldColumn.findSearchTag(tagToFind);
+		return specOfFieldColumn.findSearchTag(specToFind);
 	}
 
 	public static final int COLUMN_ROW_NUMBER = 0;
