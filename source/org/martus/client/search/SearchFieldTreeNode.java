@@ -30,6 +30,7 @@ import java.util.Collections;
 import javax.swing.tree.DefaultMutableTreeNode;
 
 import org.martus.common.MiniLocalization;
+import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.fieldspec.SearchableFieldChoiceItem;
 
 public class SearchFieldTreeNode extends DefaultMutableTreeNode
@@ -74,16 +75,15 @@ public class SearchFieldTreeNode extends DefaultMutableTreeNode
 		if(overriddenLabel != null)
 			return overriddenLabel;
 
-		if(!isSearchableFieldChoiceItemNode())
+		if(getParent() == null || !isSearchableFieldChoiceItemNode())
 			return getUserObject().toString();
 		
 		SearchableFieldChoiceItem choice = getChoiceItem();
-		boolean isTheAnyFieldChoice = choice.getCode().length() == 0;
-		if(isTheAnyFieldChoice)
+		FieldSpec spec = choice.getSpec();
+		if(spec.getParent() == null)
 			return choice.toString();
-		
 		String type = localization.getFieldLabel("FieldType" + choice.getType().getTypeName());
-		return choice.getSpec().getTag()+ ": " + type;
+		return spec.getLabel()+ ": " + type;
 			
 	}
 
