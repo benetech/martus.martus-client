@@ -75,16 +75,22 @@ public class SearchFieldTreeNode extends DefaultMutableTreeNode
 		if(overriddenLabel != null)
 			return overriddenLabel;
 
-		if(getParent() == null || !isSearchableFieldChoiceItemNode())
+		if(!isSearchableFieldChoiceItemNode())
 			return getUserObject().toString();
 		
 		SearchableFieldChoiceItem choice = getChoiceItem();
 		FieldSpec spec = choice.getSpec();
-		if(spec.getParent() == null)
+		if(!isChildNodeToDistingishSimilarFields())
 			return choice.toString();
+		
 		String type = localization.getFieldLabel("FieldType" + choice.getType().getTypeName());
-		return spec.getLabel()+ ": " + type;
+		return spec.getTag()+ ": " + type;
 			
+	}
+
+	private boolean isChildNodeToDistingishSimilarFields()
+	{
+		return getParent() != null && getParent().getParent() != null;
 	}
 
 	public boolean isSearchableFieldChoiceItemNode()
