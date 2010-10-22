@@ -83,9 +83,13 @@ public class UiSortFieldsDlg extends JDialog implements ActionListener
 		for(int i = 0; i < sortChooser.length; ++i)
 		{
 			MiniFieldSpec selectedSpec = null;
+			String codeString = "";
 			if(i < sortMiniSpecs.size())
+			{
 				selectedSpec = (MiniFieldSpec)sortMiniSpecs.get(i);
-			sortChooser[i].select(selectedSpec.getCodeString());
+				codeString = selectedSpec.getCodeString();
+			}
+			sortChooser[i].select(codeString);
 		}
 		
 		detailOnlyChoice = createChoiceItem("ReportDetailOnly", localization);
