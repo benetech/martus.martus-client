@@ -103,11 +103,16 @@ public class FieldChooserSpecBuilder
 	
 	private ChoiceItem createLastSavedDateChoice()
 	{
+		return createLastSavedDateChoice(getLocalization());
+	}
+
+	public static SearchableFieldChoiceItem createLastSavedDateChoice(MiniLocalization localization)
+	{
 		String tag = Bulletin.PSEUDOFIELD_LAST_SAVED_DATE;
-		String label = getLocalization().getFieldLabel(Bulletin.TAGLASTSAVED);
+		String label = localization.getFieldLabel(Bulletin.TAGLASTSAVED);
 		FieldType type = new FieldTypeDate();
 		FieldSpec spec = FieldSpec.createCustomField(tag, label, type);
-		return new SearchableFieldChoiceItem(spec);
+		return new SearchableFieldChoiceItem(tag, spec);
 	}
 
 	public Vector convertToChoiceItems(Collection specs, PoolOfReusableChoicesLists reusableChoiceLists)

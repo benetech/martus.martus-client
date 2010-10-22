@@ -80,17 +80,17 @@ public class TestFancySearchTableModel extends TestCaseEnhanced
 		PopUpTreeFieldSpec fieldsSpec = (PopUpTreeFieldSpec)model.getFieldSpecForColumn(FancySearchHelper.COLUMN_FIELD);
 		
 		MiniFieldSpec miniEventBeginSpec = createMiniFieldSpec(Bulletin.TAGEVENTDATE, "begin", localization);
-		SearchableFieldChoiceItem beginDateItem = FancySearchHelper.findSearchTag(fieldsSpec, miniEventBeginSpec);
+		SearchableFieldChoiceItem beginDateItem = FancySearchHelper.findSearchTag(fieldsSpec, miniEventBeginSpec.getCodeString());
 		model.setValueAt(beginDateItem.getCode(), 0, FancySearchTableModel.fieldColumn);
 		assertEquals(new FieldTypeDate(), model.getCellType(0, FancySearchTableModel.valueColumn));
 		
 		MiniFieldSpec miniAuthorSpec = createMiniFieldSpec(Bulletin.TAGAUTHOR, localization);
-		SearchableFieldChoiceItem authorItem = FancySearchHelper.findSearchTag(fieldsSpec, miniAuthorSpec);
+		SearchableFieldChoiceItem authorItem = FancySearchHelper.findSearchTag(fieldsSpec, miniAuthorSpec.getCodeString());
 		model.setValueAt(authorItem.getCode(), 0, FancySearchTableModel.fieldColumn);
 		assertEquals(new FieldTypeNormal(), model.getCellType(0, FancySearchTableModel.valueColumn));
 		
 		MiniFieldSpec miniLanguageSpec = createMiniFieldSpec(Bulletin.TAGLANGUAGE, localization);
-		SearchableFieldChoiceItem languageItem = FancySearchHelper.findSearchTag(fieldsSpec, miniLanguageSpec);
+		SearchableFieldChoiceItem languageItem = FancySearchHelper.findSearchTag(fieldsSpec, miniLanguageSpec.getCodeString());
 		model.setValueAt(languageItem.getCode(), 0, FancySearchTableModel.fieldColumn);
 		assertEquals(new FieldTypeDropdown(), model.getCellType(0, FancySearchTableModel.valueColumn));
 		app.deleteAllFiles();

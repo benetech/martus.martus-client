@@ -190,7 +190,7 @@ public class FieldChoicesByLabel
 		resultSpec.pullDynamicChoiceSettingsFrom(specFrom);
 		// NOTE: Must setChoices AFTER pulling dynamic choices
 		resultSpec.setChoices((ChoiceItem[]) choices.toArray(new ChoiceItem[0]));
-		return new SearchableFieldChoiceItem(resultSpec);
+		return new SearchableFieldChoiceItem(mergeInto.getSpecialCode(), resultSpec);
 	}
 
 	private SearchableFieldChoiceItem[] getChoicesAsArray()

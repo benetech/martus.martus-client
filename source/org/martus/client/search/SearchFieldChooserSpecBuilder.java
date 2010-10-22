@@ -51,11 +51,17 @@ public class SearchFieldChooserSpecBuilder extends FieldChooserSpecBuilder
 	
 	private ChoiceItem createAnyFieldChoice()
 	{
+		return createAnyFieldChoice(getLocalization());
+	}
+
+	public static SearchableFieldChoiceItem createAnyFieldChoice(MiniLocalization localization)
+	{
 		String tag = "";
-		String label = getLocalization().getFieldLabel("SearchAnyField");
+		String label = localization.getFieldLabel("SearchAnyField");
 		FieldType type = new FieldTypeAnyField();
 		FieldSpec spec = FieldSpec.createCustomField(tag, label, type);
-		return new SearchableFieldChoiceItem("", spec);
+		SearchableFieldChoiceItem allFieldsSearchableChoiceItem = new SearchableFieldChoiceItem(tag, spec);
+		return allFieldsSearchableChoiceItem;
 	}
 
 	protected Set getChoicesForDropdownSpec(CustomDropDownFieldSpec specWithBetterLabel, PoolOfReusableChoicesLists reusableChoiceLists, String displayString)
