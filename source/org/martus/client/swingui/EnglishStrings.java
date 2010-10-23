@@ -1169,7 +1169,7 @@ public class EnglishStrings
 	"   104 - Unrecognized Field Type\n" +
 	"   105 - A label was found in a standard field\n" +
 	"   106 - XML Parse Error (e.g. mismatched quotation marks or bracket syntax)\n" +
-	"   107 - Tag contains illegal characters (e.g. spaces or punctuation)\n" +
+	"   107 - Tag or Code contains illegal characters (e.g. spaces or punctuation)\n" +
 	"   108 - Duplicate entry in Dropdown field\n" +
 	"   109 - No Choices in Dropdown field\n" +
 	"   110 - System/Standard field tag cannot be used for custom field\n" +
