@@ -180,8 +180,9 @@ public class SafeReadableBulletin
 	{
 		MartusField field = getPossiblyNestedField(nestedFieldMiniSpec.getTag());
 		
-		// TODO: The following line is a necessary hack which should be improved
-		field.setLabel(nestedFieldMiniSpec.getLabel());
+		// TODO: The following call to setLabel is a necessary hack which should be improved
+		if(field != null)
+			field.setLabel(nestedFieldMiniSpec.getLabel());
 		
 		return field;
 	}
