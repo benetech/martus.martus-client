@@ -75,9 +75,9 @@ public class ReportRunner
 
 		context = new VelocityContext();
 		context.put("localization", localization);
-		class Specs extends Vector
+		class ReportRunnerMiniSpecsToInclude extends Vector
 		{
-			public Specs(MiniFieldSpec[] specs)
+			public ReportRunnerMiniSpecsToInclude(MiniFieldSpec[] specs)
 			{
 				super(Arrays.asList(specs));
 			}
@@ -89,7 +89,7 @@ public class ReportRunner
 				return result;
 			}
 		}
-		context.put("specsToInclude", new Specs(rf.getSpecsToInclude()));
+		context.put("specsToInclude", new ReportRunnerMiniSpecsToInclude(rf.getSpecsToInclude()));
 		
 		StringWriter pageBreak = new StringWriter();
 		performMerge(rf.getFakePageBreakSection(), pageBreak);
