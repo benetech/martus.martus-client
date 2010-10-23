@@ -51,7 +51,6 @@ Boston, MA 02111-1307, USA.
 
 package org.martus.client.reports;
 
-import java.util.Arrays;
 import java.util.Vector;
 
 import org.martus.common.fieldspec.MiniFieldSpec;
@@ -60,7 +59,10 @@ public class ReportRunnerMiniSpecsToInclude extends Vector
 {
 	public ReportRunnerMiniSpecsToInclude(MiniFieldSpec[] specs)
 	{
-		super(Arrays.asList(specs));
+		for(int i = 0; i < specs.length; ++i)
+		{
+			add(specs[i].cloneInReportStyle());
+		}
 	}
 	
 	public boolean contains(Object o)
