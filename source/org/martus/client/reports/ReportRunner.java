@@ -65,21 +65,6 @@ public class ReportRunner
 		engine.init();
 	}
 	
-	public static class ReportRunnerMiniSpecsToInclude extends Vector
-	{
-		public ReportRunnerMiniSpecsToInclude(MiniFieldSpec[] specs)
-		{
-			super(Arrays.asList(specs));
-		}
-		
-		public boolean contains(Object o)
-		{
-			MiniFieldSpec spec = (MiniFieldSpec)o;
-			boolean result = super.contains(spec);
-			return result;
-		}
-	}
-
 	public void runReport(ReportFormat rf, ReadableDatabase db, SortableBulletinList bulletins, ReportOutput destination, RunReportOptions options, PoolOfReusableChoicesLists reusableChoicesLists) throws Exception
 	{
 		UniversalId[] uids = bulletins.getSortedUniversalIds();
