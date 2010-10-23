@@ -394,7 +394,9 @@ public class ActionMenuReports extends ActionPrint
 			UIReportFieldDlg dlg;
 			if(reportType.isPage())
 			{
-				dlg = new UiReportFieldChooserDlg(mainWindow, new FieldChooserSpecBuilder(mainWindow.getLocalization()).createFieldSpecArray(mainWindow.getStore()));
+				FieldChooserSpecBuilder fieldChooserSpecBuilder = new FieldChooserSpecBuilder(mainWindow.getLocalization());
+				FieldSpec[] availableFieldSpecs = fieldChooserSpecBuilder.createFieldSpecArray(mainWindow.getStore());
+				dlg = new UiReportFieldChooserDlg(mainWindow, availableFieldSpecs);
 			}
 			else if(reportType.isTabular())
 			{
