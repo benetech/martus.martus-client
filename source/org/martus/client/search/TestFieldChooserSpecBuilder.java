@@ -275,7 +275,7 @@ public class TestFieldChooserSpecBuilder extends TestCaseEnhanced
 		nestedDropDownSpec.addReusableChoicesCode("choicesA");
 		nestedDropDownSpec.addReusableChoicesCode("choicesB");
 		Set nestedChoices = searchBuilder.getChoiceItemsForThisField(nestedDropDownSpec, poolOfReusableChoiceLists);
-		assertEquals("Didn't create extra choice per level?", 3, nestedChoices.size());
+		assertEquals("Didn't omit master but create child choices?", 2, nestedChoices.size());
 		Iterator iter = nestedChoices.iterator();
 		while(iter.hasNext())
 		{

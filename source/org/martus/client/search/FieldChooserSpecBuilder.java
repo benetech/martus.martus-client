@@ -204,9 +204,12 @@ public class FieldChooserSpecBuilder
 	protected Set getChoicesForDropdownSpec(CustomDropDownFieldSpec specWithBetterLabel, PoolOfReusableChoicesLists reusableChoiceLists, String displayString)
 	{
 		Set choicesForDropdown = new HashSet();
-		choicesForDropdown.add(new SearchableFieldChoiceItem(specWithBetterLabel));
+		SearchableFieldChoiceItem masterDropdownSpecChoice = new SearchableFieldChoiceItem(specWithBetterLabel);
 		if(specWithBetterLabel.getReusableChoicesCodes().length > 1)
 			choicesForDropdown.addAll(createPerLevelChoicesForNestedDropdown(specWithBetterLabel, displayString, reusableChoiceLists));
+		else
+			choicesForDropdown.add(masterDropdownSpecChoice);
+
 		return choicesForDropdown;
 	}
 	
