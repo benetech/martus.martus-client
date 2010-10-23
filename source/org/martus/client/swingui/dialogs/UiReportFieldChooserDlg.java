@@ -29,9 +29,10 @@ import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
 import javax.swing.Box;
 import javax.swing.JPanel;
-import org.martus.client.search.FieldChooserSpecBuilder;
+
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.common.fieldspec.FieldSpec;
@@ -41,11 +42,6 @@ import org.martus.swing.Utilities;
 
 public class UiReportFieldChooserDlg extends UIReportFieldDlg
 {
-	public UiReportFieldChooserDlg(UiMainWindow mainWindow)
-	{
-		this(mainWindow, new FieldChooserSpecBuilder(mainWindow.getLocalization()).createFieldSpecArray(mainWindow.getStore()));
-	}
-	
 	public UiReportFieldChooserDlg(UiMainWindow mainWindow, FieldSpec[] specsToUse)
 	{
 		super(mainWindow);

@@ -47,6 +47,7 @@ import org.martus.client.reports.ReportRunner;
 import org.martus.client.reports.RunReportOptions;
 import org.martus.client.reports.TabularReportBuilder;
 import org.martus.client.reports.ReportAnswers.ReportType;
+import org.martus.client.search.FieldChooserSpecBuilder;
 import org.martus.client.search.SearchTreeNode;
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
@@ -392,11 +393,17 @@ public class ActionMenuReports extends ActionPrint
 		{
 			UIReportFieldDlg dlg;
 			if(reportType.isPage())
-				dlg = new UiReportFieldChooserDlg(mainWindow);
+			{
+				dlg = new UiReportFieldChooserDlg(mainWindow, new FieldChooserSpecBuilder(mainWindow.getLocalization()).createFieldSpecArray(mainWindow.getStore()));
+			}
 			else if(reportType.isTabular())
+			{
 				dlg = new UiReportFieldOrganizerDlg(mainWindow);
+			}
 			else
+			{
 				return null;
+			}
 			dlg.setVisible(true);
 			FieldSpec[] selectedSpecs = dlg.getSelectedSpecs();
 			if(selectedSpecs == null)
