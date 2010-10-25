@@ -202,6 +202,7 @@ public class UiFancySearchDlg extends JDialog
 				rawHelpMessage.append("\n");
 			}
 			rawHelpMessage.append(getLocalization().getFieldLabel("FancySearchHelpMsg4"));
+			rawHelpMessage.append(getLocalization().getFieldLabel("FancySearchHelpMsg5"));
 			rawHelpMessage.append("\n");
 			
 			try

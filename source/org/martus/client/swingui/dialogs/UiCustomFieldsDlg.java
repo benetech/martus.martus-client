@@ -293,6 +293,7 @@ public class UiCustomFieldsDlg extends JDialog
 			MartusLocalization localization = mainWindow.getLocalization();
 			String message = localization.getFieldLabel("CreateCustomFieldsHelp1");
 			message += localization.getFieldLabel("CreateCustomFieldsHelp2");
+			message += localization.getFieldLabel("CreateCustomFieldsHelp2b");
 			String examples = localization.getFieldLabel("CreateCustomFieldsHelp3");
 			UiTextArea xmlExamples = createXMLTextArea(examples);
 			xmlExamples.setCaretPosition(0);

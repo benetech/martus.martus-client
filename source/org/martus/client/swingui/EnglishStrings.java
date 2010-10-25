@@ -891,7 +891,11 @@ public class EnglishStrings
 "field:messageErrorAttachmentMissingcause=The attachment could not be located.",
 "field:messageErrorRequiredFieldBlankcause=This field is required and cannot be left blank: #FieldLabel#",
 
-"field:CreateCustomFieldsHelp1=The layout of the bulletins is dictated by an XML document.  By default the standard bulletin fields occur at the top of the Custom Field declaration, but they can be moved if desired.  However, there are four required fields that cannot be removed:  'author', 'entrydate', 'language' and 'title'.\n\n",
+"field:CreateCustomFieldsHelp1=The layout of the bulletins is dictated by an XML document.  " +
+	"The document must begin with <CustomFields> and end with </CustomFields>. " +
+	"By default the standard bulletin fields occur at the top of the Custom Field declaration, " +
+	"but they can be moved if desired.  However, there are four required fields that cannot be removed:  " +
+	"'author', 'entrydate', 'language' and 'title'.\n\n",
 "field:CreateCustomFieldsHelp2=For custom (non-standard) fields, " +
 	"you first select the type of field you want.  " +
 	"The possible choices are 'BOOLEAN', 'DATE', 'DATERANGE', 'DROPDOWN', " +
@@ -915,7 +919,7 @@ public class EnglishStrings
 	"You can require certain fields or grid columns to be entered before " +
 	"saving a bulletin by using </RequiredField> in the field definition." +
 	"\n\n" +
-	"You can restrict date fields, date grid columns, date range fields, " +
+	"You can restrict standard or custom date fields, date grid columns, date range fields, " +
 	"and date range grid columns by using <MinimumDate> and/or <MaximumDate> " +
 	"tags with a date in YYYY-MM-DD format. " +
 	"NOTE: The year must always be a 'Gregorian' year like 2009, " +
@@ -925,10 +929,10 @@ public class EnglishStrings
 	"due to time zone issues. " +
 	"\n\n" +
 	"You can populate drop-down lists (either inside or outside of a grid) " +
-	"in 3 ways - " +
+	"in three ways - " +
 	"1) by entering a list of <Choices> values in the field definition, " +
 	"2) with values that have been entered in a grid elsewhere " +
-	"in your bulletin by using <DataSource>, and " +
+	"in your bulletin by using <DataSource> (sometimes called “data-driven dropdowns”), and " +
 	"3) by creating a list of \"Reusable Choices\" that can be referred to " +
 	"by more than one field.  " +
 	"See examples below for the correct XML definition syntax to use." +
@@ -942,21 +946,108 @@ public class EnglishStrings
 	"Default values can be set for both standard and custom fields, " +
 	"but are NOT allowed for BOOLEAN, DATE, DATERANGE, GRID, LANGUAGE, MESSAGE, and SECTION field types, " +
 	"and are not allowed for dropdowns where the values in the list are based on data entered in another field." +
+	"(i.e. data-driven dropdowns).  " +
+	"Please note that default values are only applied when a new bulletin is created, " +
+	"not when a new version of a bulletin is created, " +
+	"so that the value of the field in the previous version is not overwritten.  " +
+	"This means that default values entered in a bulletin using an earlier customization will be kept " +
+	"even if you create a new version of the bulletin with an updated customization that has a new default value" +
 	"\n\n " +
-	"Additional Comments\n" +
-	"1. XML is case-sensitive ('Witness' is not the same as 'witness') \n" +
+	"Additional Comments" +
+	"\n\n" +
+	"1. XML is case-sensitive ('Witness' is not the same as 'witness')" +
+	"\n\n" + 
 	"2. Quotes around type name can be single or double as long as they match " +
-	"(e.g. 'STRING\" is not valid. It must be 'STRING' or \"STRING\")\n" +
-	"3. A Boolean field will be displayed as a checkbox when editing and " +
-	"Yes/No when previewed or printed.\n" +
-	"4.  Use \"MESSAGE\" fields to give guidance on how to enter data, " +
-	"and to create comments/notes that will be displayed in every bulletin.\n" +
+	"(e.g. 'STRING\" is not valid. It must be 'STRING' or \"STRING\")" +
+	"\n\n" +
+	"3. A Boolean field will be displayed as a checkbox when editing and Yes/No when previewed or printed." +
+	"\n\n" +
+	"4.  Use \"MESSAGE\" fields to give guidance on how to enter data, and to create comments/notes " +
+	"that will be displayed in every bulletin." +
+	"\n\n" +
 	"5.  Dropdowns using a \"Reusable Choices\" list can have multiple levels " +
-	"(e.g. for locations that might have State and City), " +
-	"different fields can use one or more of the levels, " +
+	"(e.g. for locations that might have State and City), different fields can use one or more of the levels, " +
 	"and the number of levels is not limited." +
 	"\n\n" +
-	"See examples below:" +
+	"6. Both STRING and MULTILINE fields are text fields.  " +
+	"STRING fields will expand to fit the size of the text you enter, " +
+	"while MULTILINE fields have a scrollbar so that the field doesn’t exceed its original height." +
+	"\n\n" +
+	"7.  A GRID can contain columns of various types:  BOOLEAN, DATE, DATERANGE, DROPDOWN, and STRING. " +
+	"When you're entering data into a grid, press Enter to create a new line, press Tab to advance to the next cell, " +
+	"and double-click to copy and paste text." +
+	"\n\n" +
+	"8.  You can update your customization if the information you are collecting over time changes, " +
+	"for example by adding new fields.  If you are changing fields in a customization, " +
+	"you should think about how you will want to search/report on bulletins created with the old customization " +
+	"as well as new bulletins you create with the new customization, " +
+	"and try to make the changes so that you can search/report on all bulletins at the same time.  " +
+	"Changing field types may cause your searching/reporting to be more complex, " +
+	"so we always recommend that you test out creating bulletins with a new customization and searching/reporting " +
+	"on both old and new bulletins before officially updating the customization for your project.  " +
+	"When you change customizations, Martus will do its best to update the old formatted data to the new customization " +
+	"if you create a new version of a bulletin with the old customization.  " +
+	"If you add completely new fields but don’t change any of the old fields, " +
+	"the new version of the bulletin will have all the old fields filled in as they were in the previous version, " +
+	"and the new fields will be blank and you can fill them in.  If you delete fields, " +
+	"the new version of the bulletin will not contain those fields, but you can go back to see the deleted fields " +
+	"in the previous version if it was a sealed bulletin instead of a draft " +
+	"(by hitting the Bulletin Details button in the Header section of the bulletin), " +
+	"and copy any info from the old version into a different field in the new one if desired.  " +
+	"You have to be very careful if you make changes to the customization definitions of old fields.  " +
+	"If you keep the same tag and label, but change the type of field, " +
+	"Martus may be able to transfer the old data into the new field type, but not in all cases.  " +
+	"For example, if you change field type from DROPDOWN to STRING, the data will be transferred over, " +
+	"but if you change from STRING to BOOLEAN, the data will be lost. If you change from a DATE to DATERANGE, " +
+	"your data will be transferred, but if you change from DATERANGE to DATE, you will lose the end date from your earlier data. " +
+	"DROPDOWN and GRID fields are subject to additional rules regarding the modification of dropdown options/values and grid columns. " +
+	"If you add options/values to a dropdown list, the old data will be transferred over. " +
+	"But if you modify or delete an option/value, all bulletins for which that option was selected will lose that data. " +
+	"If you want to add columns to a grid, please make sure to do so at the end of the old grid definition and not in the middle, " +
+	"or the old data will not be transferred to the new version of the bulletin. " +
+	"If you change fields and lose old data in the new version as a result, " +
+	"please note that you can go back to see the deleted data in the previous version " +
+	"if it was a sealed bulletin instead of a draft (by hitting the Bulletin Details button in the Header section of the bulletin), " +
+	"and copy any info from the old version into a different field in the new one if desired. " +
+	"In this release, if you want to change the number of levels in a “reusable choices” dropdown field when updating a customization, " +
+	"you should also change the field tag and/or label so that they are more easily distinguished from each other in searching and reporting.  " +
+	"If you do not, the search/report results may be confusing since fields with the same label/tag will be treated differently " +
+	"due to them having a different number of levels." +
+	"\n\n" +
+	"See examples below and if you need additional help with customization, " +
+	"please email help@martus.org." +
+	"\n\n",
+"field:CreateCustomFieldsHelp2b= Notes on \"Reusable Choices\" dropdown fields:" +
+	"\n\n " +
+	"1. Dropdowns using a \"Reusable Choices\" list can have multiple levels (e.g. for locations that might have State and City), " +
+	"different fields can use one or more of the levels (e.g. if you have defined State and City levels, " +
+	"you could have a field that just uses the State level, and another field that uses both levels), " +
+	"and you do not need to define all levels for all entries " +
+	"(e.g. you could have defined Neighborhood values as a lower level for some larger Cities, " +
+	"but not all Cities need to have Neighborhoods defined).  " +
+	"The number of levels is not limited by Martus, but please note that if you have large amounts of data in your definitions lists, " +
+	"or a large number of levels, performance of certain Martus bulletin operations may be affected." +
+	"\n\n " +
+	"2. In this release, we recommend that if you want to change the number of levels in a \"Reusable Choices\" dropdown field " +
+	"when updating a customization, you also change the field tag and/or label so that they are more easily distinguished " +
+	"from each other in searching and reporting.  If you do not, the search/report results may be confusing since fields " +
+	"with the same label/tag will be treated differently due to them having a different number of levels." +
+	"\n\n " +
+	"3. \"Reusable Choices\" codes have the same restrictions that field tags do; they can be in any language, " +
+	"but cannot contain spaces, special characters, or punctuation." +
+	"\n\n " +
+	"4. Please make sure to not use the same codes in Reusable Choices lists if you edit your customizations " +
+	"unless you are just fixing typos in the labels, because using the same code for different labels can cause confusion " +
+	"when searching or reporting on those fields. Ideally you should use codes that are not numeric, " +
+	"but are letters that are a meaningful abbreviation of the label so there is no confusion over what they stand for " +
+	"if you update the customization at a later date (e.g. use 2 or 3 letter abbreviations for locations instead of numbers).  " +
+	"See the \"Search\" Help screen for more information about how code and label choices can affect searching on these fields." +
+	"\n\n " +
+	"5. You cannot use a multiple level / reusable choice dropdown as a data source for another dropdown inside or outside of grids. " +
+	"If you try to do this you will see an error message." +
+	"\n\n " +
+	"6. Please note that when you save customization XML with a Reusable Choices list for dropdown fields, " +
+	"Martus will move those choice definitions to the bottom of the XML when you reload it." +
 	"\n\n",
 "field:CreateCustomFieldsHelp3=\n" +
 	"<Field type='SECTION'>\n" +
@@ -1261,7 +1352,66 @@ public class EnglishStrings
 	"and any other row has the last name specified, but not necessarily in the same bulletin row " +
 	"(you could have a row with \"First Name\" = x and \"Last Name\" = b, " +
 	"and a different row with \"First Name\" = a and \"Last Name\" = y, " +
-	"and Martus will find that bulletin as matching the search because you did not specify that it had to match in a single row)\n",
+	"and Martus will find that bulletin as matching the search because you did not specify that it had to match in a single row)" +
+	"\n\n",
+"field:FancySearchHelpMsg5= Additional Search Notes:\n" +
+	"\n " +
+	"1. Because Martus searches all rows of any grid (table) fields for your criteria, " +
+	"it may find bulletins where one grid row matches your criteria but other rows do not.  " +
+	"For example you could have a bulletin with a grid that has a location field in it and you have multiple rows of data " +
+	"in the grid with locations A, B, and C.  If you search for bulletins where location != C (does not equal C), " +
+	"Martus will find that bulletin because there are 2 rows in the bulletin grid where the location is not C, " +
+	"even though there is one row where the locations IS C.\n" +
+	"\n " +
+	"2. " +
+	"In this release, Martus will not include data-driven dropdown fields in the Search screen. " +
+	"See the \"Customize Fields\" Help screen for more information about these fields.\n" +
+	"\n " +
+	"3. " +
+	"In this release, if you are searching on a multi-level dropdown, all searches are exact matches, " +
+	"not partial or \"starts with\" matches.  " +
+	"This means that you have to pick the exact level at which you want to be searching.  " +
+	"For example, an \"Event Location\" field that has three levels (State/City/Neighborhood) " +
+	"will have three entries in the search field list:  Event Location: State, Event Location: City, and Event Location: Neighborhood.  " +
+	"So if you want to find any bulletins that have an Event Location anywhere in California (regardless of the City), " +
+	"you have to pick the \"Event Location: State\" field to search on and pick California off the dropdown list choices. " +
+	"If you pick Event Location: City to search on and then pick California but leave the City level blank, " +
+	"Martus will only find entries where there was no City data entered  (City was blank), " +
+	"as opposed to ANY location with California regardless of what data was entered at the City level.\n" +
+	"\n " +
+	"4. If you do not see your search terms/dates in the final version of the bulletin displayed in the Search Results folder, " +
+	"your criteria may have been matched in an earlier version of the bulletin.  " +
+	"You can access previous versions by clicking the \"Bulletin Details...\" button at the top of the bulletin.  " +
+	"To search only the most recent versions of bulletins, select Only Search Most Recent Versions of Bulletins " +
+	"in the Search dialog box.\n" +
+	"\n " +
+	"5. If you have fields in different bulletins or from different customizations that are exactly the same, " +
+	"Martus will combine them in any Search and Report field lists.  " +
+	"And while Martus warns you about duplicate labels where you are creating a new bulletin customization, " +
+	"it is possible that over time, you may have bulletins with different customizations that ended up with the same labels " +
+	"(e.g. maybe you changed a text field to a dropdown field but kept the same label).  " +
+	"In these cases, Martus will display both fields in the search screen, " +
+	"and try to help you figure out the difference between the fields by displaying what the field type and " +
+	"tag are in the field selection lists.  Also, if you have fields with the same tag but different labels and/or field types, " +
+	"Martus may use the tag and field type to try and determine when different fields were meant to be the same.  " +
+	"So we encourage you to make your field tags and labels in a customization clearly related to each other to avoid any confusion. " +
+	"Please see the \"Customize Fields\" Help screen for more guidelines on creating fields for searching.\n" +
+	"\n " +
+	"6. You may sometimes see duplicate entries in dropdown list search criteria values in the search screen.  " +
+	"If you pick a Reusable Choices dropdown field to search on, the values that are displayed as the criteria " +
+	"dropdown list options are the labels for each list entry, but the codes you defined determine how many entries " +
+	"there will be in the search dropdown list (see the \"Customize Fields\" Help screen for more information about " +
+	"creating custom dropdown fields). So if you have different reusable choices codes with the same label in " +
+	"different bulletin customizations in your account, the labels will show up twice in search dropdown lists " +
+	"(i.e. if you used label1 for both code1 and code2, you will see 2 entries in the search dropdown that looks " +
+	"like \"label1\" and your search will be on bulletins that have that label, " +
+	"regardless of which code the customization had for the label).  " +
+	"And if you have the same reusable choices code with different labels in different bulletin customizations in your account, " +
+	"the search dropdown list for that code will show both values separated by a semicolon " +
+	"(i.e. if you used code1 for both label1 and label2, you will see an entry in the search dropdown that looks " +
+	"like \"label1; label2\" and your search will be on bulletins that have either of those labels).\n" +
+	"\n" +
+	"For additional help with searching, email help@martus.org.",
 "field:SearchProgress=Progress: ",
 "field:ReportSearchProgress=Progress: ",
 "field:SearchFound=#NumberBulletinsFound# bulletins matched the search, and have been added to the Search Results folder.",
