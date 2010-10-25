@@ -274,8 +274,8 @@ public class ReportRunner
 			if(thisField == null)
 				return new ChoiceItem("", "");
 			
-			String currentCode = thisField.getData();
-			String currentValue = thisField.html(localization);
+			String currentCode = thisField.getDataForSubtotals();
+			String currentValue = thisField.htmlForSubtotals(localization);
 			return new ChoiceItem(currentCode, currentValue);
 		}
 		
