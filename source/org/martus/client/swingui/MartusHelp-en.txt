@@ -719,7 +719,11 @@ Note: Because Martus searches all rows of any grid (table) fields for your crite
 
 Note:  In this release, Martus will not include data-driven dropdown fields in the Search screen. See “10b. Customizing bulletin fields” for more information about these fields.
 
-Note:  If you pick a Reusable Choices dropdown field to search on, the values that are displayed as the search screen dropdown list options are the labels for the field, but the codes you defined determine how many entries there will be in the search dropdown list (see “10b. Customizing bulletin fields” for more information about creating custom dropdown fields). So if you have different reusable choices codes with the same label in different bulletin customizations in your account, the labels will show up twice in search dropdown lists (i.e. if you used label1 for both code1 and code2, you will see 2 entries in the search dropdown that looks like "label1" and your search will be on bulletins that have that label, regardless of which code the customization had for the label).  And if you have the same reusable choices code with different labels in different bulletin customizations in your account, the search dropdown list for that code will show both values separated by a semicolon (i.e. if you used code1 for both label1 and label2, you will see an entry in the search dropdown that looks like "label1; label2" and your search will be on bulletins that have either of those labels).
+Note:  In this release, if you are searching on a multi-level dropdown, all searches are exact matches, not partial or “starts with” matches.  This means that you have to pick the exact level at which you want to be searching.  For example, an “Event Location” field that has three levels (State/City/Neighborhood) will have three entries in the search field list:  Event Location: State, Event Location: City, and Event Location: Neighborhood.  So if you want to find any bulletins that have an Event Location anywhere in California (regardless of the City), you have to pick the “Event Location: State” field to search on and pick California off the dropdown list choices. If you pick Event Location: City to search on and then pick California but leave the City level blank , Martus will only find entries where there was no City data entered  (City was blank), as opposed to ANY location with California regardless of what data was entered at the City level.
+
+Note: If you have fields in your bulletins with the same tag but different labels and/or field types, Martus may use the tag and field type to try and determine when different fields were meant to be the same when it searches.  So we encourage you to make your field tags and labels in a customization clearly related to each other to avoid any confusion.  See section “10b. Customizing bulletin fields” for more information about configuring custom fields.
+
+For some additional help with searching, see section “11. Frequently Asked Questions” (FAQ), #46 and #47, or email help@martus.org. 
 
 To save your search criteria, click Save This Search in the Search dialog box. Then, give the search criteria a name you’ll recognize later. Martus saves it with the .mss (Martus Search Specification) extension in the folder you choose. To use search criteria you’ve saved, click Load Previous Search in the Search dialog box, and then navigate to the .mss file you want to use. 
 
@@ -1071,7 +1075,7 @@ To create or update a customization format:
 1. Choose Options > Customize Fields.
 2. Read the informational dialog box. If you want to proceed, click Yes.
 3. Rearrange, add, or remove field tags in the Customize Fields dialog box.
-The layout of the fields in a bulletin is dictated by an XML document. The document must begin with <CustomFields> and end with </CustomFields>. When you open the Customize Fields dialog box, these tags are already in place. By default, the standard bulletin fields occur at the top of the Custom Field declaration, but you can move them if you wish. However, you cannot remove the 'author,' 'entrydate,' 'language,' and 'title' fields.
+The layout of the fields in a bulletin is dictated by an XML document. The document must begin with <CustomFields> and end with </CustomFields>. When you open the Customize Fields dialog box, these tags are already in place. By default, the standard bulletin fields occur at the top of the Custom Field declaration, but you can move them if you wish. However, you cannot remove the 'author', 'entrydate', 'language', and 'title' fields.
 - To re-order fields, cut and paste them into the order you want them to appear.
 - To add a field, click an insertion point where you want the field to appear. Enter the type of field you want to use: BOOLEAN, DATE, DATERANGE, DROPDOWN, GRID, LANGUAGE, MESSAGE, MULTILINE, SECTION or STRING. Each field must have a unique tag, which can be any single word except those already used by the system, in any language, and cannot contain spaces, special characters, or punctuation. For example, you could use 'VictimsName' or 'EyeColorChoice'.  Each field should be given a label, which is what will appear next to the field in the bulletin; it can contain any characters in any language except certain special characters (e.g., < and > which are used by the system). For example, you might use 'Name of 1st Witness.'  See the examples below. 
 - To remove a field, delete the field definition text (type, tag, label) for the field you want to remove. You cannot remove certain required fields, including the author, title, language, and entry date.
@@ -1089,13 +1093,19 @@ Keep the following in mind when you're customizing fields:
 • A BOOLEAN field will appear as a checkbox when you are editing a bulletin, and will be displayed as Yes/No in bulletin previews and when printed.
 • Both STRING and MULTILINE fields are text fields.  STRING fields will expand to fit the size of the text you enter, while MULTILINE fields have a scrollbar so that the field doesn’t exceed its original height.
 • Use MESSAGE fields to give guidance on how to enter data, and to create comments/notes that will be displayed in every bulletin.
-• When you're entering data into a grid, press Enter to create a new line, press Tab to advance to the next cell, and double-click to copy and paste text.  Please make sure to hit Tab or Enter after each cell you enter in a grid (or select another cell in the grid) before saving the bulletin so that all the values you entered are saved.
+• When you're entering data into a grid, press Enter to create a new line, press Tab to advance to the next cell, and double-click to copy and paste text.  
 • A GRID can contain columns of various types:  BOOLEAN, DATE, DATERANGE, DROPDOWN, and STRING.
 • You may need to provide guidance to other users by giving them a customization template. To minimize the need for further instruction, use labels that clearly identify the content (such as "Name of Victim").  For more information on exporting customization templates, see section “10c. Using Customization Templates.”
-• Dropdowns using a "Reusable Choices" list can have multiple levels (e.g. for locations that might have State and City), different fields can use one or more of the levels, and the number of levels is not limited. Please note that if you have large amounts of data in your definitions lists, or a large number of levels, performance of certain Martus bulletin operations may be affected.  
-• Please make sure to not use the same codes in Reusable Choices lists if you edit your customizations unless you are just fixing typos in the labels, because using the same code for different labels can cause confusion when searching or reporting on those fields. Ideally you should use codes that are not numeric, but are letters that are a meaningful abbreviation of the label so there is no confusion over what they stand for if you update the customization at a later date (e.g. use 2 or 3 letter abbreviations for locations instead of numbers).  If you pick a reusable field to search on, the values that are displayed as the search screen dropdown list options are the labels for the field, but the codes you define determine how many entries there will be in the search dropdown list. So if you assign different codes the same label in reusable choices lists when modifying a customizations (or creating a new one), the labels will show up twice in search dropdown lists (i.e. if you used label1 for both code1 and code2, you will see 2 entries in the search dropdown that looks like "label1" and your search will be on bulletins that have that label, regardless of which code the customization had for the label).  And if you assign the same code different labels in reusable choices lists when modifying a customizations (or creating a new one), the search dropdown list for that code will show both values separated by a semicolon (i.e. if you used code1 for both label1 and label2, you will see an entry in the search dropdown that looks like "label1; label2" and your search will be on bulletins that have either of those labels).
-• You cannot use a multiple level / reusable choice dropdown as a data source for another dropdown inside or outside of grids. If you try to do this you will see an error message.
-• Please note that when you save customization XML with a Reusable Choices list for dropdown fields, Martus will move those choice definitions to the bottom of the XML when you reload it.
+• Please make sure to change your field tags if you change the field label or field type when you edit your customizations, because using the same tag for different labels can cause confusion when searching or reporting on those fields. The only case in which you can keep the same tag when changing a label is if you really want the different labels to be counted as exactly the same (e.g. you are just fixing typos in the labels).
+• Please note that default values are only applied when a new bulletin is created, not when a new version of a bulletin is created, so that the value of the field in the previous version is not overwritten.  This means that default values entered in a bulletin using an earlier customization will be kept even if you create a new version of the bulletin with an updated customization that has a new default value. 
+• Dropdowns using a "Reusable Choices" list can have multiple levels (e.g. for locations that might have State and City), different fields can use one or more of the levels (e.g. if you have defined State and City levels, you could have a field that just uses the State level, and another field that uses both levels), and you do not need to define all levels for all entries (e.g. you could have defined Neighborhood values as a lower level for some larger Cities, but not all Cities need to have Neighborhoods defined).  The number of levels is not limited by Martus, but please note that if you have large amounts of data in your definitions lists, or a large number of levels, performance of certain Martus bulletin operations may be affected.  
+• In this release, we recommend that if you want to change the number of levels in a “Reusable Choices” dropdown field when updating a customization, you also change the field tag and/or label so that they are more easily distinguished from each other in searching and reporting.  If you do not, the search/report results may be confusing since fields with the same label/tag will be treated differently due to them having a different number of levels.
+• “Reusable Choices” codes have the same restrictions that field tags do; they can be in any language, but cannot contain spaces, special characters, or punctuation.
+• Please make sure to not use the same codes in “Reusable Choices” lists if you edit your customizations unless you are just fixing typos in the labels, because using the same code for different labels can cause confusion when searching or reporting on those fields. Ideally you should use codes that are not numeric, but are letters that are a meaningful abbreviation of the label so there is no confusion over what they stand for if you update the customization at a later date (e.g. use 2 or 3 letter abbreviations for locations instead of numbers).  See section “11. Frequently Asked Questions” (FAQ), #46 for more information about how code and label choices can affect searching on these fields.
+• You cannot use a multiple level / “Reusable Choices” dropdown as a data source for another dropdown inside or outside of grids. If you try to do this you will see an error message.
+• Please note that when you save customization XML with a “Reusable Choices” list for dropdown fields, Martus will move those choice definitions to the bottom of the XML when you reload it.
+
+
 
 Here are some examples; these fields would look like the ones in the figure that follows:
 
@@ -1154,6 +1164,7 @@ Here are some examples; these fields would look like the ones in the figure that
 <KeepWithPrevious/>
 </Field>
 
+
 <Field type='BOOLEAN'>
 <Tag>Testify</Tag>
 <Label>Is interviewee willing to testify?</Label>
@@ -1172,7 +1183,6 @@ Here are some examples; these fields would look like the ones in the figure that
 <Tag>PeopleSection</Tag>
 <Label>People Section</Label>
 </Field>
-
 
 <Field type='GRID'>
 <Tag>VictimInformationGrid</Tag>
@@ -1203,6 +1213,7 @@ Here are some examples; these fields would look like the ones in the figure that
 <Message>If you have information about a person who has had different professions over time, enter multiple rows with the same First and Last Names and show the date ranges for each profession on a separate row.</Message>
 </Field>
 
+
 <Field type='GRID'>
 <Tag>ProfessionHistoryGrid</Tag>
 <Label>Profession History</Label>
@@ -1230,7 +1241,6 @@ Here are some examples; these fields would look like the ones in the figure that
 <DefaultValue>What happened in detail is as follows:</DefaultValue> 
 </Field>
 
-
 <ReusableChoices code='StateChoices' label='State'>
   <Choice code='' label='(Not Selected)'></Choice>
   <Choice code='CA' label='California'></Choice>
@@ -1256,6 +1266,10 @@ Here are some examples; these fields would look like the ones in the figure that
 
 
 
+
+
+
+
 Note: If you receive an error after you click OK, you must correct the problem before you can proceed. The error message should identify the problem, but if you are not sure what caused the error check the following:
 - Ensure that the author, language, entrydate, and title fields are present.
 - Remove any labels you created for standard field tags.
@@ -1263,6 +1277,7 @@ Note: If you receive an error after you click OK, you must correct the problem b
 - Ensure that each custom field you created has a corresponding label.
 - Make sure that all text in brackets and quotes has both a start and end bracket/quote.
 - Ensure that the top and bottom panes in the customization screen both start with <CustomFields> and end with </CustomFields>.
+
 
 Note:  You can update your customization if the information you are collecting over time changes, for example by adding new fields.  If you are changing fields in a customization, you should think about how you will want to search/report on bulletins created with the old customization as well as new bulletins you create with the new customization, and try to make the changes so that you can search/report on all bulletins at the same time.  Changing field types may cause your searching/reporting to be more complex, so we always recommend that you test out creating bulletins with a new customization and searching/reporting on both old and new bulletins before officially updating the customization for your project.   For more details on this, see section “11. Frequently Asked Questions” (FAQ) #36.
 
@@ -1289,21 +1304,24 @@ Note: If you are using multiple templates, we recommend choosing descriptive fil
 
 6. If you want to share the customization template with field users who have you configured as a Headquarters account, give them your .mct file.
 
-
 Instructions for field users who want to access (import) customization templates
 1. Choose Options > Customize Fields.
 2. Click OK in the informational dialog box.
 3. Click Import Template.
-4. Select the file exported by you or your Headquarters account.
+4. 
+Select the file exported by you or your Headquarters account.
+
+
 
 Note:  If you try to import a template created by an account that is not one of your Headquarters accounts (or your current account), Martus will not allow you to load the template. 
 
 5. Click OK in the confirmation dialog box.
 6. After you import a customization template, the new field format will appear in every new bulletin you create.  See “10b. Customizing bulletin fields” for information on restoring the default/standard Martus field format.  
 
+   
 
 
-
+   
 --------
 10d. Customizing your bulletin display
 There are various alternate display options for bulletins (see examples in screenshot below):
@@ -1385,21 +1403,16 @@ C:\Martus\bin\java.exe -Xms256m -Xmx256m -Xbootclasspath/p:C:\Martus\lib\ext\bc-
 Martus always installs a shortcut in your Martus directory, which you can use to start Martus. Or, use one of the following methods, depending on your operating system:
 
 In Windows, open a DOS prompt, change to the Martus directory, and type 
-
 C:\Martus\bin\javaw.exe -Xbootclasspath/p:C:\Martus\lib\ext\bc-jce.jar -jar C:\Martus\martus.jar 
-
 to start Martus. 
 
 In Mac OS, go to the /Library/Java/Martus folder, and start Martus from the command line by typing: 
-
  Java -Xbootclasspath/p:/Library/Java/Extensions/bc-jce.jar -jar martus.jar
 
 In Linux, start Martus from the command-shell line, by typing
-
 java -Xbootclasspath/p:<path-to-Java-Install-executable-libraries>/bc-jce.jar -jar <martus directory>/martus.jar
 
 For example: 
-
 $ /opt/j2re1.4.2/bin/java -Xbootclasspath/p:/opt/j2re1.4.2/lib/ext/bc-jce.jar -jar ~/.Martus/martus.jar 
 
 14. The Martus Welcome dialog box is slow to appear.
@@ -1415,32 +1428,23 @@ This may indicate a problem with your video driver. Try installing an updated vi
 
 17. I’m seeing unexpected behavior in Martus. How can I find out what’s going on?
 In Windows, instead of starting Martus by double-clicking the Martus icon on your desktop, choose Run from the Start menu and type the following text to launch Martus: 
-
 C:\Martus\bin\java.exe -Xbootclasspath/p:C:\Martus\lib\ext\bc-jce.jar -jar C:\Martus\martus.jar 
-
 This will open a "console log" that displays additional information as Martus runs. This information is helpful to us in diagnosing problems. If you would like to always run with the console log, right-click on the Martus icon on your desktop, select Properties, select the Shortcut tab, delete the "w" from “javaw.exe” in the Target command line, and click OK. Note the console log messages you receive as you work in Martus, and e-mail those to help@martus.org.  To copy and paste the console messages into an email, please do the following:  
 • Right-click in the blue window title at the top of the console log window. From the menu which appears, select "Edit." (The "Edit" option is listed just below "Close" in the menu, so be careful not to accidentally close the console log window which will also cause Martus to exit.)
 • From the subsequent menu, choose "Select all" - this will highlight all of the console log text in white.
 • Then, hit "Enter" on the keyboard. This will copy the console log contents to the 'clipboard' of your computer.
 • Paste this, using Ctrl-V or right-clicking and choosing "Paste", either directly into an email or into a file using a text editor that you attach to an email to help@martus.org.
 
-In Mac, open a Terminal application window, go to the /Library/Java/Martus folder, and start Martus from the command line by typing:  
-
-Java -Xbootclasspath/p:/Library/Java/Extensions/bc-jce.jar -jar martus.jar
-
+In Mac, open a Terminal application window, go to the /Library/Java/Martus folder, and start Martus from the command line by typing:  Java -Xbootclasspath/p:/Library/Java/Extensions/bc-jce.jar -jar martus.jar
 Then note the error messages you receive as you work in Martus, and e-mail those to help@martus.org. To  copy and paste the messages into an email please do the following:  
 • Use the mouse to highlight all the text in the Terminal window.
 • Either right-click and select "Copy", hit Command+C (also known as Apple key+C) or go to the Terminal menu bar and select Edit > Copy
 • Paste this, either by right-clicking and choosing "Paste", hit Command+V (also known as Apple key+V) or go to the Terminal menu bar and select Edit > Paste. You can paste either directly into an email or into a file using a text editor that you attach to an email to help@martus.org.
 
 In Linux, start Martus from the command-shell line, by typing
-
 java -Xbootclasspath/p:<path-to-Java-Install-executable-libraries>/bc-jce.jar -jar <martus directory>/martus.jar
-
 For example: 
-
 $ /opt/j2re1.4.2/bin/java -Xbootclasspath/p:/opt/j2re1.4.2/lib/ext/bc-jce.jar -jar ~/.Martus/martus.jar
-
 Then note the error messages you receive as you work in Martus, and e-mail those to help@martus.org. 
 
 If the log doesn’t help us identify the problem, the issue may be caused by damaged fonts. Damaged fonts may prevent Martus from starting. To determine whether a damaged font is causing the problem, run Martus with the console log (see above), and check to see whether the word "font" appears in the console messages at all. If so, it is likely that damaged fonts are causing the problem. To fix this problem in Windows, copy all of the contents of C:\Windows\Fonts to a temporary location, then delete all of the contents from C:\Windows\Fonts. Then, copy all of the contents back into that folder from the temporary location. This process will reinstall all of the fonts and, in the process, detect any corrupt/damaged fonts. Once the damaged fonts have been identified, manually delete them from C:\Windows\Fonts. 
@@ -1557,7 +1561,26 @@ Starting in version 3.4, there is a test version of import/export functionality 
 “ --alpha-tester” option to the end of your Martus command line.  You can do this by right-clicking on the Martus desktop shortcut, choosing Properties, selecting the Shortcut tab, and adding the “ --alpha-tester” (without quotes) at the end of the text in the Target box.  Once you have changed your Martus command, you will be able to find the import/export MBA file functionality under the File menu, by picking the “<menu:ExportMBA>” and “<menu:ImportMBA>” options.  Bulletins will automatically import to the folder you are in when you pick the option off the menu.
 
 36. I want to update my customization for a new version of some bulletins that already have data entered but am worried that changes might mess something up.  What should I do to avoid any problems?
-When you change customizations, Martus will do its best to update the old formatted data to the new customization if you create a new version of a bulletin with the old customization.  If you add completely new fields but don’t change any of the old fields, the new version of the bulletin will have all the old fields filled in as they were in the previous version, and the new fields will be blank and you can fill them in.  If you delete fields, the new version of the bulletin will not contain those fields, but you can go back to see the deleted fields in the previous version if it was a sealed bulletin instead of a draft (by hitting the Bulletin Details button in the Header section of the bulletin), and copy any info from the old version into a different field in the new one if desired.  You have to be very careful if you make changes to the customization definitions of old fields.  If you change the type of field Martus may be able to transfer the old data into the new field type, but not in all cases.  For example, if you change field type from DROPDOWN to STRING, the data will be transferred over, but if you change from STRING to BOOLEAN, the data will be lost. If you change from a DATE to DATERANGE, your data will be transferred, but if you change from DATERANGE to DATE, you will lose the end date from your earlier data.  DROPDOWN and GRID fields are subject to additional rules regarding the modification of dropdown options/values and grid columns. If you add options/values to a dropdown list, the old data will be transferred over. But if you modify or delete an option/value, all bulletins for which that option was selected will lose that data. If you want to add columns to a grid, please make sure to do so at the end of the old grid definition and not in the middle, or the old data will not be transferred to the new version of the bulletin. If you change fields and lose old data in the new version as a result, please note that you can go back to see the deleted data in the previous version if it was a sealed bulletin instead of a draft (by hitting the Bulletin Details button in the Header section of the bulletin), and copy any info from the old version into a different field in the new one if desired. If you are making changes to your customization, please make sure to test the transferring of data using a test bulletin.  
+When you change customizations, Martus will do its best to update the old formatted data to the new customization if you create a new version of a bulletin with the old customization.  If you add completely new fields but don’t change any of the old fields, the new version of the bulletin will have all the old fields filled in as they were in the previous version, and the new fields will be blank and you can fill them in.  If you delete fields, the new version of the bulletin will not contain those fields, but you can go back to see the deleted fields in the previous version if it was a sealed bulletin instead of a draft (by hitting the Bulletin Details button in the Header section of the bulletin), and copy any info from the old version into a different field in the new one if desired.  
+
+You have to be very careful if you make changes to the customization definitions of old fields.  If you keep the same tag and label, but change the type of field, Martus may be able to transfer the old data into the new field type, but not in all cases.  For example, 
+• if you change field type from DROPDOWN to STRING, the data will be transferred over, but 
+• if you change from STRING to BOOLEAN, the data will be lost. 
+• If you change from a DATE to DATERANGE, your data will be transferred, but 
+• if you change from DATERANGE to DATE, you will lose the end date from your earlier data. 
+
+DROPDOWN and GRID fields are subject to additional rules regarding the modification of dropdown options/values and grid columns. If you 
+• add options/values to a dropdown list, the old data will be transferred over. But 
+• if you modify or delete an option/value, all bulletins for which that option was selected will lose that data. 
+• If you want to add columns to a grid, please make sure to do so at the end of the old grid definition and not in the middle, or the old data will not be transferred to the new version of the bulletin. 
+
+If you change fields and lose old data in the new version as a result, please note that you can go back to see the deleted data in the previous version if it was a sealed bulletin instead of a draft (by hitting the Bulletin Details button in the Header section of the bulletin), and copy any info from the old version into a different field in the new one if desired. 
+
+In this release, if you want to change the number of levels in a “Reusable Choices” dropdown field when updating a customization, you should also change the field tag and/or label so that they are more easily distinguished from each other in searching and reporting.  If you do not, the search/report results may be confusing since fields with the same label/tag will be treated differently due to them having a different number of levels. 
+
+If you update the default value for a field, please note that the new default value will only be applied when a new bulletin is created, not when a new version of a bulletin is created, so that whatever the value of the field in the previous version was will remain the same and not be overwritten.  
+
+In general if you are making changes to your customization, please make sure to test the transferring of data using a test bulletin.  
 
 37. It seems like one of the cells I entered in a grid wasn’t saved.  How could this happen?
 In versions earlier than Martus 3.5, when you're entering text data into a grid, please make sure to hit Tab (or Enter to create a new row) or select another cell in the grid after each cell you enter before saving the bulletin so that all the values you entered will be saved. 
@@ -1568,7 +1591,7 @@ When attachments are stored in Martus bulletins they are encrypted, so that nobo
 39. I want to change the number of minutes Martus waits before timing out for security – how can I do this?    
 You can change the Martus time-out length when there is no activity to be however long you want, instead of always timing out at the default of 10 minutes.  In addition to providing extra security if you are working in a public place or on a shared computer and want to shorten the timeout to only a few minutes, you can also improve the performance of long operations (such as retrieval of bulletins from the server) by setting the timeout to a longer amount of time if you are working in a secure location.  Different time-out lengths are allowed by setting a parameter in the command line used to run Martus.  The parameter is "--timeout-minutes=X" where X can be any number of minutes.  For example, to set the timeout length for Martus running on your computer in Windows to always be 5 minutes for a higher level of security, change the command line in the desktop shortcut (right-click, and  choose Properties) to the following: 
 
-       C:\Martus\bin\java.exe -Xbootclasspath/p:C:\Martus\lib\ext\bc-jce.jar -jar C:\Martus\martus.jar --timeout-minutes=5
+        C:\Martus\bin\java.exe -Xbootclasspath/p:C:\Martus\lib\ext\bc-jce.jar -jar C:\Martus\martus.jar --timeout-minutes=5
 
 For instructions on how to change the Martus command line for Mac or Linux, see section 2a of the User Guide or email help@martus.org. 
 
@@ -1613,6 +1636,7 @@ c) Make sure that Khmer fonts are installed so that Martus can access them, by d
 • C:\Windows\Fonts (can also be done through the Control Panel),
 • C:\Program Files\Java\jre6\lib\fonts\fallback (or equivalent based on where you installed Java6, C:\where-you-installed-java\jre6\lib\fonts\fallback).  If the “fallback” directory does not exist, create it to put the font file in it. 
 • C:\Martus\lib\fonts.  
+
 When you start Martus, in the log in screen you will see a small language dropdown in the lower left-hand corner. This should now contain Khmer as an option. When you select it, Martus should begin displaying the Khmer translation. Please note that in the currently available Khmer translation of Martus some newer functionality will not be translated.  Phrases which have been translated will display in Khmer. Phrases that have not been translated will display in English with brackets (i.e. <…> ) around them. Translations that are in Khmer but not up-to-date with the current English Martus text will be marked with brackets around them as well, and if you see these in any screens you are using, we recommend switching to English so that you have the latest guidelines on how to use the software.  This is especially important in help screens (e.g. customization, search) where new functionality may have been added and the old instructions may be misleading or incomplete.
 
 If you notice that Khmer is not displaying correctly in the window title bars at the top of each screen, you should exit Martus, do the following steps, and then restart Martus.
@@ -1640,6 +1664,7 @@ a) If you don't already have it, download and install the “Rupali.ttf” file 
 b) Contact help@martus.org to get a Bengali/Bangla specific Java font support file to use in Martus called font.properties.bangla.  
 i. Use the Windows explorer to open up the directory ‘C:\Martus\lib’ and rename “font.properties” to “font.properties.original”.  
 ii. Move the “font.properties.bangla” you received from help@martus.org to ‘C:\Martus\lib’, create a copy, and rename it to “font.properties”
+
 Start Martus as usual.  While there is not yet a Bengali/Bangla translation of Martus, you should now be able to type or copy/paste Bengali/Bangla text into Martus fields.  
 
 43. When I choose to run Martus in my language I get a warning message that the translation is not up-to-date with the current release of Martus.  What should I do?
@@ -1647,7 +1672,7 @@ If there is a translation of an older version of Martus in your language that yo
 
 44. I want to run Martus using Java6, how can I do this?
 The current version of Martus comes with Java4.  While Martus has not been fully tested with Java6, you can run Martus with Java6 (also sometimes called Java 1.6), if you need to (E.g. to display certain fonts, or to help if you are receiving import errors with very large files).  Instructions to do this in Windows are as follows (if you are using Mac, please email help@martus.org):  
-a) Before starting Martus, download Java 6 (available here: http://www.java.com/en/) and direct the Martus software to use Java 6 *instead* of Java 4 by doing the following:
+a) Before starting Martus, download Java 6 (available here: http://www.java.com/en/) and direct the Martus software to use Java 6 instead of Java 4 by doing the following:
 b) Right-click on the Martus icon on your desktop, select Properties, and select the Shortcut tab.
 Replace what is in the Target command line with the below:
      "C:\Program Files\Java\jre6\bin\java.exe" -Xbootclasspath/p:C:\Martus\lib\ext\bc-jce.jar -jar C:\Martus\martus.jar
@@ -1660,4 +1685,8 @@ a) By default, Martus searches all versions of every bulletin. If you do not see
 b) By default, Martus searches all rows of any grid (table) fields for your criteria and doesn’t require that the terms are all on the same row.  If you want to specify that all grid column specifications in the Search screen be matched to a single row of bulletin grid data, check the “Match grid column specifications” checkbox in the Search screen.  
 c) Because Martus searches all rows of any grid (table) fields for your criteria, it may find bulletins where one grid row matches your criteria but other rows do not.  For example you could have a bulletin with a grid that has a location field in it and you have multiple rows of data in the grid with locations A, B, and C.  If you search for bulletins where location != C (does not equal C), Martus will find that bulletin because there are 2 rows in the bulletin grid where the location is not C, even though there is one row where the locations IS C.
 For more information about finding bulletins in Martus see section “6m. Searching for specific bulletins”, and if you have questions, please email info@martus.org.  
+46. I am seeing duplicate entries in my dropdown list search criteria values in the search screen.  What could be causing this?
+If you pick a Reusable Choices dropdown field to search on, the values that are displayed as the criteria dropdown list options are the labels for each list entry, but the codes you defined determine how many entries there will be in the search dropdown list (see section “10b. Customizing bulletin fields” for more information about creating custom dropdown fields). So if you have different reusable choices codes with the same label in different bulletin customizations in your account, the labels will show up twice in search dropdown lists (i.e. if you used label1 for both code1 and code2, you will see 2 entries in the search dropdown that looks like "label1" and your search will be on bulletins that have that label, regardless of which code the customization had for the label).  And if you have the same reusable choices code with different labels in different bulletin customizations in your account, the search dropdown list for that code will show both values separated by a semicolon (i.e. if you used code1 for both label1 and label2, you will see an entry in the search dropdown that looks like "label1; label2" and your search will be on bulletins that have either of those labels).
 
+47. I am seeing fields that look the same to me in Search and Report screen field lists.  How can I tell what the difference is between them?
+If you have fields in different bulletins or from different customizations that are exactly the same, Martus will combine them in any Search and Report field lists.  And while Martus warns you about duplicate labels where you are creating a new bulletin customization, it is possible that over time, you may have bulletins with different customizations that ended up with the same labels (e.g. maybe you changed a text field to a dropdown field but kept the same label).  In these cases, Martus will try to help you figure out the difference between the fields by displaying what the field type and tag are in the field selection lists.  Also, if you have fields with the same tag but different labels and/or field types, Martus may use the tag and field type to try and determine when different fields were meant to be the same.  So we encourage you to make your field tags and labels in a customization clearly related to each other to avoid any confusion.  See section “10b. Customizing bulletin fields” for more information about configuring custom fields.
