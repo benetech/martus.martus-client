@@ -932,7 +932,7 @@ public class EnglishStrings
 	"in three ways - " +
 	"1) by entering a list of <Choices> values in the field definition, " +
 	"2) with values that have been entered in a grid elsewhere " +
-	"in your bulletin by using <DataSource> (sometimes called “data-driven dropdowns”), and " +
+	"in your bulletin by using <DataSource> (sometimes called \"data-driven dropdowns\"), and " +
 	"3) by creating a list of \"Reusable Choices\" that can be referred to " +
 	"by more than one field.  " +
 	"See examples below for the correct XML definition syntax to use." +
@@ -971,7 +971,7 @@ public class EnglishStrings
 	"\n\n" +
 	"6. Both STRING and MULTILINE fields are text fields.  " +
 	"STRING fields will expand to fit the size of the text you enter, " +
-	"while MULTILINE fields have a scrollbar so that the field doesn’t exceed its original height." +
+	"while MULTILINE fields have a scrollbar so that the field doesn't exceed its original height." +
 	"\n\n" +
 	"7.  A GRID can contain columns of various types:  BOOLEAN, DATE, DATERANGE, DROPDOWN, and STRING. " +
 	"When you're entering data into a grid, press Enter to create a new line, press Tab to advance to the next cell, " +
@@ -987,7 +987,7 @@ public class EnglishStrings
 	"on both old and new bulletins before officially updating the customization for your project.  " +
 	"When you change customizations, Martus will do its best to update the old formatted data to the new customization " +
 	"if you create a new version of a bulletin with the old customization.  " +
-	"If you add completely new fields but don’t change any of the old fields, " +
+	"If you add completely new fields but don't change any of the old fields, " +
 	"the new version of the bulletin will have all the old fields filled in as they were in the previous version, " +
 	"and the new fields will be blank and you can fill them in.  If you delete fields, " +
 	"the new version of the bulletin will not contain those fields, but you can go back to see the deleted fields " +
@@ -1009,7 +1009,7 @@ public class EnglishStrings
 	"please note that you can go back to see the deleted data in the previous version " +
 	"if it was a sealed bulletin instead of a draft (by hitting the Bulletin Details button in the Header section of the bulletin), " +
 	"and copy any info from the old version into a different field in the new one if desired. " +
-	"In this release, if you want to change the number of levels in a “reusable choices” dropdown field when updating a customization, " +
+	"In this release, if you want to change the number of levels in a \"Reusable Choices\" dropdown field when updating a customization, " +
 	"you should also change the field tag and/or label so that they are more easily distinguished from each other in searching and reporting.  " +
 	"If you do not, the search/report results may be confusing since fields with the same label/tag will be treated differently " +
 	"due to them having a different number of levels." +
@@ -1270,13 +1270,13 @@ public class EnglishStrings
 	"   114 - Unknown Data Source Grid Column Label\n" +
 	"   115 - Dropdown cannot have both choices and data source\n" +
 	"   116 - Invalid date must be in ISO format YYYY-MM-DD\n" +
-	"   117 - No reusable choices list defined for Dropdown\n" +
+	"   117 - No Reusable Choices list defined for Dropdown\n" +
 	"   118 - Reusable dropdown definition missing code value.  Please verify that the definition looks like the following:\n" +
 	"         <UseReusableChoices code='FieldChoices'></UseReusableChoices>\n" +
 	"   119 - Reusable choice must have a code and label\n" +
-	"   120 - Dropdown data source cannot be a single or multiple level dropdown with reusable choices\n" +
+	"   120 - Dropdown data source cannot be a single or multiple level dropdown with Reusable Choices\n" +
 	"   121 - Default value is not valid for this field\n" +
-	"   122 - Reusable choices lists cannot have the same Label\n" +
+	"   122 - Reusable Choices lists cannot have the same Label\n" +
 	"   123 - Lower-level reusable choice code has no matching higher-level code\n" +
 	"   200 - All fields empty\n" +
 	"   201 - Unrecognized Headquarters created this template\n" +
@@ -1401,12 +1401,12 @@ public class EnglishStrings
 	"If you pick a Reusable Choices dropdown field to search on, the values that are displayed as the criteria " +
 	"dropdown list options are the labels for each list entry, but the codes you defined determine how many entries " +
 	"there will be in the search dropdown list (see the \"Customize Fields\" Help screen for more information about " +
-	"creating custom dropdown fields). So if you have different reusable choices codes with the same label in " +
+	"creating custom dropdown fields). So if you have different Reusable Choices codes with the same label in " +
 	"different bulletin customizations in your account, the labels will show up twice in search dropdown lists " +
 	"(i.e. if you used label1 for both code1 and code2, you will see 2 entries in the search dropdown that looks " +
 	"like \"label1\" and your search will be on bulletins that have that label, " +
 	"regardless of which code the customization had for the label).  " +
-	"And if you have the same reusable choices code with different labels in different bulletin customizations in your account, " +
+	"And if you have the same Reusable Choices code with different labels in different bulletin customizations in your account, " +
 	"the search dropdown list for that code will show both values separated by a semicolon " +
 	"(i.e. if you used code1 for both label1 and label2, you will see an entry in the search dropdown that looks " +
 	"like \"label1; label2\" and your search will be on bulletins that have either of those labels).\n" +
