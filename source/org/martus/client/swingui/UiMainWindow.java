@@ -60,7 +60,6 @@ import javax.swing.ImageIcon;
 import javax.swing.JComponent;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JSplitPane;
 import javax.swing.SwingUtilities;
@@ -154,7 +153,9 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	public UiMainWindow()
 	{
 		super();
-		JOptionPane.showMessageDialog(null, "JAR IS NOT BEING VERIFIED");
+		
+//		Un-comment the line below when the MartusApp constructor is not calling MartusJarVerification.verifyJars()
+//		JOptionPane.showMessageDialog(null, "JAR IS NOT BEING VERIFIED");
 		
 		// This block of code is to create a test version of Martus that 
 		// will expire after a specific date. 

@@ -140,9 +140,7 @@ public class MartusApp
 			if(cryptoToUse == null)
 				cryptoToUse = new MartusSecurity();
 
-// Temporarily disabled for new build process
-// ALSO UN-COMMENT OUT THE CATCHES BELOW!!!
-//			MartusJarVerification.verifyJars();
+			MartusJarVerification.verifyJars();
 
 			configInfo = new ConfigInfo();
 			currentUserName = "";
@@ -160,14 +158,14 @@ public class MartusApp
 		{
 			throw new MartusAppInitializationException("ErrorCryptoInitialization");
 		}
-//		catch (MartusCrypto.InvalidJarException e)
-//		{
-//			throw new MartusAppInitializationException("Invalid jar file: " + e.getMessage());
-//		}
-//		catch (IOException e)
-//		{
-//			throw new MartusAppInitializationException("Error verifying jars: " + e.getMessage());
-//		}
+		catch (MartusCrypto.InvalidJarException e)
+		{
+			throw new MartusAppInitializationException("Invalid jar file: " + e.getMessage());
+		}
+		catch (IOException e)
+		{
+			throw new MartusAppInitializationException("Error verifying jars: " + e.getMessage());
+		}
 		catch (Exception e)
 		{
 			throw new MartusAppInitializationException("Error verifying jars: " + e.getMessage());
