@@ -1270,6 +1270,7 @@ Here are some examples; these fields would look like the ones in the figure that
 
 
 
+
 Note: If you receive an error after you click OK, you must correct the problem before you can proceed. The error message should identify the problem, but if you are not sure what caused the error check the following:
 - Ensure that the author, language, entrydate, and title fields are present.
 - Remove any labels you created for standard field tags.
@@ -1597,10 +1598,10 @@ For instructions on how to change the Martus command line for Mac or Linux, see 
 
 40. I want to use Martus in Burmese but the fonts don’t seem to be displaying correctly.  How can I get Burmese text to show up in Martus?
 Some additional steps are needed to have Burmese display correctly in Martus, The instructions for Windows are below, if you are using another operating system, please contact help@martus.org for help. Please do the following
-a) If you don't already have it, download and install the “MyaZedi.ttf” file on your system.  For Windows this is done by downloading and copying MyaZedi.ttf into both C:\Windows\Fonts (can also be done through the Control Panel) and C:\Martus\lib\fonts.  Please note that Martus has been tested with this font, but other fonts may be possible as well (if you want to use another font, please contact help@martus.org for help).
-b) Contact help@martus.org to get a Burmese specific Java font support file to use in Martus called font.properties.burmese.  
+a) If you don't already have it, download and install the “MyaZedi.ttf” file on your system.  In Martus 3.5 or later, you can find MyaZedi.ttf in your Martus\lib\fonts directory.  If you are using a version of Martus earlier than 3.5, you can search for MyaZedi.ttf online and download it. For Windows, copy MyaZedi.ttf into both C:\Windows\Fonts (can also be done through the Control Panel) and C:\Martus\lib\fonts (if using a version of Martus earlier than 3.5).  Please note that Martus has been tested with this font, but other fonts may be possible as well (if you want to use another font, or are using a Mac, please contact help@martus.org for help).
+b) You will then need a Burmese specific Java font support file to use in Martus called font.properties.burmese.  In Martus 3.5 or later, this file will be in your Martus\lib directory.  If you are using a version of Martus earlier than 3.5, you can contact help@martus.org to get the file, and copy it to the Martus\lib directory.
 i. Use the Windows explorer to open up the directory ‘C:\Martus\lib’ and rename “font.properties” to “font.properties.original”.  
-ii. Move the “font.properties.burmese” you received from help@martus.org to ‘C:\Martus\lib’, create a copy, and rename it to “font.properties”
+ii. Create a copy of the “font.properties.burmese” , and rename it to “font.properties”
 c) Depending on your setup, you may also need to do the following to get the Window titles to display correctly in Burmese
 ➢ For Windows XP/7/Me
 i) Right click on your desktop and choose properties
@@ -1632,11 +1633,11 @@ Replace what is in the Target command line with the below:
      "C:\Program Files\Java\jre6\bin\java.exe" -Xbootclasspath/p:C:\Martus\lib\ext\bc-jce.jar -jar C:\Martus\martus.jar
      or the equivalent based on where you installed Java6: 
      "C:\where-you-installed-java\jre6\bin\java.exe" -Xbootclasspath/p:C:\Martus\lib\ext\bc-jce.jar -jar C:\Martus\martus.jar
-c) Make sure that Khmer fonts are installed so that Martus can access them, by downloading and copying KhmerOS.ttf to the following locations:  
+c) Make sure that Khmer fonts are installed so that Martus can access them. In Martus 3.5 or later, you can find a Khmer font file (KhmerOS.ttf which has been tested with Martus) in your Martus\lib\fonts directory.  If you are using a version of Martus earlier than 3.5, you can search for KhmerOS.ttf online and download it.  
+d) Copy KhmerOS.ttf (or your preferred font file) to the following locations:  
 • C:\Windows\Fonts (can also be done through the Control Panel),
 • C:\Program Files\Java\jre6\lib\fonts\fallback (or equivalent based on where you installed Java6, C:\where-you-installed-java\jre6\lib\fonts\fallback).  If the “fallback” directory does not exist, create it to put the font file in it. 
-• C:\Martus\lib\fonts.  
-
+  
 When you start Martus, in the log in screen you will see a small language dropdown in the lower left-hand corner. This should now contain Khmer as an option. When you select it, Martus should begin displaying the Khmer translation. Please note that in the currently available Khmer translation of Martus some newer functionality will not be translated.  Phrases which have been translated will display in Khmer. Phrases that have not been translated will display in English with brackets (i.e. <…> ) around them. Translations that are in Khmer but not up-to-date with the current English Martus text will be marked with brackets around them as well, and if you see these in any screens you are using, we recommend switching to English so that you have the latest guidelines on how to use the software.  This is especially important in help screens (e.g. customization, search) where new functionality may have been added and the old instructions may be misleading or incomplete.
 
 If you notice that Khmer is not displaying correctly in the window title bars at the top of each screen, you should exit Martus, do the following steps, and then restart Martus.
@@ -1659,11 +1660,11 @@ If you notice that Khmer is not displaying correctly in the window title bars at
 		iv. Change the font to “KhmerOS.ttf”
 
 42. I want to enter Bengali/Bangla text in Martus, but the fonts don’t seem to be displaying correctly.  How can I get Bengali/Bangla text to show up in Martus?
-Some additional steps are needed to have Bengali/Bangla display correctly in Martus, The instructions for Windows are below, if you are using another operating system, please contact help@martus.org  for help. Please do the following
-a) If you don't already have it, download and install the “Rupali.ttf” file on your system.  For Windows this is done by downloading and copying Rupali.ttf into both C:\Windows\Fonts (can also be done through the Control Panel) and C:\Martus\lib\fonts.  Please note that Martus has been tested with this font, but other fonts may be possible as well (if you want to use another font, please contact help@martus.org for help).
-b) Contact help@martus.org to get a Bengali/Bangla specific Java font support file to use in Martus called font.properties.bangla.  
+Some additional steps are needed to have Bengali/Bangla display correctly in Martus, The instructions for Windows are below, if you are using another operating system, please contact help@martus.org  for help. Please do the following:
+a) If you don't already have it, download and install the “Rupali.ttf” file on your system.  In Martus 3.5 or later, you can find Rupali.ttf in your Martus\lib\fonts directory.  If you are using a version of Martus earlier than 3.5, you can search for Rupali.ttf online and download it. For Windows, copy Rupali.ttf into both C:\Windows\Fonts (can also be done through the Control Panel) and C:\Martus\lib\fonts (if using a version of Martus earlier than 3.5).  Please note that Martus has been tested with this font, but other fonts may be possible as well (if you want to use another font, or are using a Mac, please contact help@martus.org for help). 
+b) You will then need a Bengali/Bangla specific Java font support file to use in Martus called font.properties.bangla.  In Martus 3.5 or later, this file will be in your Martus\lib directory.  If you are using a version of Martus earlier than 3.5, you can contact help@martus.org to get the file, and copy it to the Martus\lib directory.
 i. Use the Windows explorer to open up the directory ‘C:\Martus\lib’ and rename “font.properties” to “font.properties.original”.  
-ii. Move the “font.properties.bangla” you received from help@martus.org to ‘C:\Martus\lib’, create a copy, and rename it to “font.properties”
+ii. Create a copy of the “font.properties.bangla” file and rename it to “font.properties”
 
 Start Martus as usual.  While there is not yet a Bengali/Bangla translation of Martus, you should now be able to type or copy/paste Bengali/Bangla text into Martus fields.  
 
@@ -1690,3 +1691,4 @@ If you pick a Reusable Choices dropdown field to search on, the values that are 
 
 47. I am seeing fields that look the same to me in Search and Report screen field lists.  How can I tell what the difference is between them?
 If you have fields in different bulletins or from different customizations that are exactly the same, Martus will combine them in any Search and Report field lists.  And while Martus warns you about duplicate labels where you are creating a new bulletin customization, it is possible that over time, you may have bulletins with different customizations that ended up with the same labels (e.g. maybe you changed a text field to a dropdown field but kept the same label).  In these cases, Martus will try to help you figure out the difference between the fields by displaying what the field type and tag are in the field selection lists.  Also, if you have fields with the same tag but different labels and/or field types, Martus may use the tag and field type to try and determine when different fields were meant to be the same.  So we encourage you to make your field tags and labels in a customization clearly related to each other to avoid any confusion.  See section “10b. Customizing bulletin fields” for more information about configuring custom fields.
+
