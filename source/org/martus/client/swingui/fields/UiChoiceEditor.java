@@ -126,47 +126,38 @@ public class UiChoiceEditor extends UiChoice implements ActionListener
 
 	public void setText(String newCode)
 	{
-		if(getLevelCount() == 0)
+		if (getLevelCount() == 0)
 		{
-			if(newCode.length() > 0)
+			if (newCode.length() > 0)
 				System.out.println("Attempted to setText " + newCode + " in a choice editor with no dropdowns");
 			return;
 		}
 
-		for(int level = 0; level < getLevelCount(); ++level)
+		for (int level = 0; level < getLevelCount(); ++level)
 		{
 			UiComboBox widget = getComboBox(level);
 			int rowToSelect = -1;
-			
-			int LAST = getLevelCount() - 1;
-			if(level == LAST)
-			{
-				rowToSelect = findItemByCode(widget, newCode);
-			}
-			else
-			{
-				rowToSelect = findItemByPartialMatch(widget, newCode);
-			}
-			
-			if(rowToSelect < 0 && newCode.length() > 0)
-			{
+
+			String codeAtThisLevel = truncateCodeToLevel(newCode, level);
+			rowToSelect = findItemByCode(widget, codeAtThisLevel);
+			if (rowToSelect < 0 && codeAtThisLevel.length() > 0)
 				rowToSelect = findItemByCode(widget, "");
-			}
+
 			widget.setSelectedIndex(rowToSelect);
 		}
 	}
-	
-	private int findItemByPartialMatch(UiComboBox widget, String code)
+
+	private String truncateCodeToLevel(String newCode, int levelToTruncateTo)
 	{
-		for(int row = 0; row < widget.getItemCount(); ++row)
-		{
-			ChoiceItem choiceItem = (ChoiceItem)widget.getItemAt(row);
-			String choiceItemCode = choiceItem.getCode();
-			if(choiceItemCode.length() > 0 && code.startsWith(choiceItemCode))
-				return row;
-		}
-		
-		return -1;
+		++levelToTruncateTo;
+		int stopAt = -1;
+		for (int level = 0; level < levelToTruncateTo; ++level)
+			stopAt = newCode.indexOf('.', stopAt + 1);
+
+		if (stopAt >= 0)
+			return newCode.substring(0, stopAt);
+
+		return newCode;
 	}
 
 	int findItemByCode(UiComboBox widget, String code)
