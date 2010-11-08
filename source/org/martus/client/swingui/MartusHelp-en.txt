@@ -601,7 +601,7 @@ You can e-mail .mba files to other people, or copy them to a floppy disk. Draft 
 
 Note: Because e-mail is not secure, anything you e-mail may be intercepted by someone else.
 
-Note: In Linux, you may not be able to drag bulletins between Martus and your desktop.  See section “11. Frequently Asked Questions” (FAQ) #35 (“ Is there another way to get encrypted bulletin files out of Martus than dragging to the Desktop?)” for instructions on how to do this in Linux.
+Note: In Linux, you may not be able to drag bulletins between Martus and your desktop.  See section “11. Frequently Asked Questions” (FAQ) #35 (“Is there another way to get encrypted bulletin files out of Martus than dragging to the Desktop?)” for instructions on how to do this in Linux.
 --------
 6g. Retrieving sealed bulletins
 Occasionally, you may need to download bulletins that you have sent to the server. You can download any bulletin you have sent that is not currently on your computer. (Martus does not permit you to retrieve bulletins that you already have.) You can choose to retrieve only the latest version of a bulletin or all versions.  Users with small disk drives or slow internet connections may choose to retrieve only the most recent version, especially for large bulletins.
@@ -1614,22 +1614,22 @@ i. Use the Windows explorer to open up the directory ‘C:\Martus\lib’ and ren
 ii. Create a copy of the “font.properties.burmese” , and rename it to “font.properties”
 c) Depending on your setup, you may also need to do the following to get the Window titles to display correctly in Burmese
 ➢ For Windows XP/7/Me
-i) Right click on your desktop and choose properties
-ii) Choose the Appearance Tab
-iii) Click the Advanced button
-iv) Under “Item” choose “Active Title Bar”
-v) Change the font to “MyaZedi.ttf”
+		i) Right click on your desktop and choose properties
+		ii) Choose the Appearance Tab
+		iii) Click the Advanced button
+		iv) Under “Item” choose “Active Title Bar”
+		v) Change the font to “MyaZedi.ttf”
 ➢ For Windows Vista
-i) Right click on your desktop and choose personalize
-ii) Choose the Window Color and Appearance Tab
-iii) Click the Advanced button
-iv) Under “Item” choose “Active Title Bar”
-v) Change the font to “MyaZedi.ttf”
+		i) Right click on your desktop and choose personalize
+		ii) Choose the Window Color and Appearance Tab
+		iii) Click the Advanced button
+		iv) Under “Item” choose “Active Title Bar”
+		v) Change the font to “MyaZedi.ttf”
 ➢ For Windows 98/2000
-i) Right click on your desktop and choose properties
-ii) Choose the Appearance Tab
-iii) Under “Item” choose “Active Title Bar”
-iv) Change the font to “MyaZedi.ttf”
+		i) Right click on your desktop and choose properties
+		ii) Choose the Appearance Tab
+		iii) Under “Item” choose “Active Title Bar”
+		iv) Change the font to “MyaZedi.ttf”
 
 Start Martus as usual.  Pick Burmese from the language dropdown on the signin screen in Martus. If you get a message saying that the translation is out of date with the current version of Martus, check to see if there is a Martus language pack (Martus-bur.mlp) available at http://www.martus.org/downloads/#burmese, and if there is, please download it and copy into your C:\Martus directory, and run Martus again.  
 
@@ -1690,12 +1690,14 @@ Replace what is in the Target command line with the below:
      or equivalent based on where you installed Java6: 
      "C:\where-you-installed-java\jre6\bin\java.exe" -Xbootclasspath/p:C:\Martus\lib\ext\bc-jce.jar -jar C:\Martus\martus.jar
 On Windows, you can tell that you are successfully running Martus using Java6 if you see large dots in the password fields instead of the asterisks you normally see when running Martus using Java4.
+
 45. Martus is finding either more or fewer bulletins than I expected.  What could be causing this?
 There are several reasons that Martus might not be finding a bulletin that you expect, or may be finding bulletins that you didn’t expect.  
 a) By default, Martus searches all versions of every bulletin. If you do not see your search terms/dates in the final version of the bulletin displayed in the Search Results folder, your criteria may have been matched in an earlier version of the bulletin.  You can access previous versions by clicking the “Bulletin Details…” button at the top of the bulletin.  To search only the most recent versions of bulletins, select Only Search Most Recent Versions of Bulletins in the Search dialog box. 
 b) By default, Martus searches all rows of any grid (table) fields for your criteria and doesn’t require that the terms are all on the same row.  If you want to specify that all grid column specifications in the Search screen be matched to a single row of bulletin grid data, check the “Match grid column specifications” checkbox in the Search screen.  
 c) Because Martus searches all rows of any grid (table) fields for your criteria, it may find bulletins where one grid row matches your criteria but other rows do not.  For example you could have a bulletin with a grid that has a location field in it and you have multiple rows of data in the grid with locations A, B, and C.  If you search for bulletins where location != C (does not equal C), Martus will find that bulletin because there are 2 rows in the bulletin grid where the location is not C, even though there is one row where the locations IS C.
 For more information about finding bulletins in Martus see section “6m. Searching for specific bulletins”, and if you have questions, please email info@martus.org.  
+
 46. I am seeing duplicate entries in my dropdown list search criteria values in the search screen.  What could be causing this?
 If you pick a Reusable Choices dropdown field to search on, the values that are displayed as the criteria dropdown list options are the labels for each list entry, but the codes you defined determine how many entries there will be in the search dropdown list (see section “10b. Customizing bulletin fields” for more information about creating custom dropdown fields). So if you have different reusable choices codes with the same label in different bulletin customizations in your account, the labels will show up twice in search dropdown lists (i.e. if you used label1 for both code1 and code2, you will see 2 entries in the search dropdown that looks like "label1" and if you want your search to be on bulletins that have that label, regardless of which code the customization had for the label, you will need to do a “or” search on both labels).  And if you have the same reusable choices code with different labels in different bulletin customizations in your account, the search dropdown list for that code will show both values separated by a semicolon (i.e. if you used code1 for both label1 and label2, you will see an entry in the search dropdown that looks like "label1; label2" and your search will be on bulletins that have either of those labels).
 
