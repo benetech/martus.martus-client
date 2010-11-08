@@ -42,6 +42,7 @@ import org.martus.common.crypto.MartusCrypto;
 import org.martus.common.crypto.MockMartusSecurity;
 import org.martus.common.database.MockClientDatabase;
 import org.martus.common.fieldspec.ChoiceItem;
+import org.martus.common.fieldspec.CustomDropDownFieldSpec;
 import org.martus.common.fieldspec.DropDownFieldSpec;
 import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.fieldspec.FieldTypeDateRange;
@@ -191,6 +192,37 @@ public class TestKnownFieldSpecCache extends TestCaseEnhanced
 		cache.revisionWasSaved(b1);
 		cache.revisionWasSaved(b2);
 		assertEquals(2, cache.getAllKnownFieldSpecs().size());
+	}
+	
+	public void testConcatenationOfSimilarReusableChoices() throws Exception
+	{
+		String label1 = "antler";
+		ChoiceItem[] choices1 = {new ChoiceItem("a", label1), new ChoiceItem("b", "b"),};
+		ChoiceItem[] choices2 = {new ChoiceItem("a", "ant"), new ChoiceItem("b", "bob"),};
+		ChoiceItem[] choices3 = {new ChoiceItem("a", label1), new ChoiceItem("b", "bobby"),};
+		
+		Bulletin b1 = createBulletinWithReusableChoices(choices1);
+		cache.revisionWasSaved(b1);
+		assertEquals("Original choice item was modified?", label1, choices1[0].getLabel());
+		Bulletin b2 = createBulletinWithReusableChoices(choices2);
+		cache.revisionWasSaved(b2);
+		Bulletin b3 = createBulletinWithReusableChoices(choices3);
+		cache.revisionWasSaved(b3);
+		
+	}
+
+	private Bulletin createBulletinWithReusableChoices(ChoiceItem[] choices1) throws Exception
+	{
+		CustomDropDownFieldSpec spec = new CustomDropDownFieldSpec();
+		spec.setTag("tag");
+		spec.setLabel("label");
+		spec.addReusableChoicesCode("code");
+		
+		ReusableChoices reusableChoices1 = new ReusableChoices("code", "label");
+		reusableChoices1.addAll(choices1);
+		FieldSpecCollection topSpecs1 = new FieldSpecCollection(new FieldSpec[] {spec});
+		topSpecs1.addReusableChoiceList(reusableChoices1);
+		return new Bulletin(security, topSpecs1, new FieldSpecCollection());
 	}
 	
 	public void testReallyBigFieldSpec() throws Exception
