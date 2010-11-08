@@ -198,8 +198,8 @@ public class TestKnownFieldSpecCache extends TestCaseEnhanced
 	{
 		String label1 = "antler";
 		ChoiceItem[] choices1 = {new ChoiceItem("a", label1), new ChoiceItem("b", "b"),};
-		ChoiceItem[] choices2 = {new ChoiceItem("a", "ant"), new ChoiceItem("b", "bob"),};
-		ChoiceItem[] choices3 = {new ChoiceItem("a", label1), new ChoiceItem("b", "bobby"),};
+		ChoiceItem[] choices2 = {new ChoiceItem("a", "ant"), new ChoiceItem("b", "bobby"),};
+		ChoiceItem[] choices3 = {new ChoiceItem("a", label1), new ChoiceItem("b", "bob"),};
 
 		String listName = "choices";
 		Bulletin b1 = createBulletinWithReusableChoices(choices1, listName);
@@ -212,11 +212,11 @@ public class TestKnownFieldSpecCache extends TestCaseEnhanced
 		cache.revisionWasSaved(b3);
 		assertEquals("Original choice item was modified?", label1, choices1[0].getLabel());
 
-// Work in progress. Uncomment as soon as the other work is committed
-//		ReusableChoices allChoices = cache.getAllReusableChoiceLists().getChoices("choices");
-//		String labelA = allChoices.findByCode("a").getLabel();
-//		assertEquals("antler twice?", labelA.indexOf(label1), labelA.lastIndexOf(label1));
-//		assertContains("ant;", labelA);
+		ReusableChoices allChoices = cache.getAllReusableChoiceLists().getChoices("choices");
+		String labelA = allChoices.findByCode("a").getLabel();
+		assertEquals("antler twice?", labelA.indexOf(label1), labelA.lastIndexOf(label1));
+		String labelB = allChoices.findByCode("b").getLabel() + "; ";
+		assertContains("bob;", labelB);
 	}
 
 	private Bulletin createBulletinWithReusableChoices(ChoiceItem[] choices1, String listName) throws Exception
