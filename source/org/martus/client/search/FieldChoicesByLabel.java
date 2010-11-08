@@ -105,6 +105,7 @@ public class FieldChoicesByLabel
 	{
 		Collections.sort(allChoices, new ChoiceItemSorterByLabelTagType(localization));
 		mergeSimilarDropdowns();
+		sortAllChoicesWithinDropdowns();
 
 		SearchFieldTreeNode root = new SearchFieldTreeNode("", localization);
 		SearchableFieldChoiceItem[] choices = getChoicesAsArray();
@@ -191,6 +192,20 @@ public class FieldChoicesByLabel
 		// NOTE: Must setChoices AFTER pulling dynamic choices
 		resultSpec.setChoices((ChoiceItem[]) choices.toArray(new ChoiceItem[0]));
 		return new SearchableFieldChoiceItem(mergeInto.getSpecialCode(), resultSpec);
+	}
+	
+	private void sortAllChoicesWithinDropdowns()
+	{
+		for(int i = 0; i < allChoices.size(); ++i)
+		{
+			SearchableFieldChoiceItem choiceItem = (SearchableFieldChoiceItem) allChoices.get(i);
+			FieldSpec spec = choiceItem.getSpec();
+			if(!spec.getType().isDropdown())
+				continue;
+			
+			DropDownFieldSpec dropdownSpec = (DropDownFieldSpec) spec;
+			dropdownSpec.sortChoicesByLabel();
+		}
 	}
 
 	private SearchableFieldChoiceItem[] getChoicesAsArray()

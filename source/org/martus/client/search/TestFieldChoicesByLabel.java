@@ -199,6 +199,33 @@ public class TestFieldChoicesByLabel extends TestCaseEnhanced
 		assertEquals("wrong order?", b.getChoice(1), mergedSpec.getChoice(2));
 	}
 	
+	public void testSortMergedChoicesInAsTree() throws Exception
+	{
+		CustomDropDownFieldSpec dropdown1 = new CustomDropDownFieldSpec();
+		dropdown1.setTag("dd");
+		dropdown1.setLabel("Label");
+		dropdown1.setChoices(new ChoiceItem[] {new ChoiceItem("code1", "Zzzzz")});
+		
+		CustomDropDownFieldSpec dropdown2 = new CustomDropDownFieldSpec();
+		dropdown2.setTag("dd");
+		dropdown2.setLabel("Label");
+		dropdown2.setChoices(new ChoiceItem[] {new ChoiceItem("code2", "Aaaaa")});
+		
+		FieldChoicesByLabel fieldChoicesByLabel = new FieldChoicesByLabel();
+		fieldChoicesByLabel.add(new SearchableFieldChoiceItem(dropdown1));
+		fieldChoicesByLabel.add(new SearchableFieldChoiceItem(dropdown2));
+		
+		TreeNode root = fieldChoicesByLabel.asTree(localization);
+		assertEquals(1, root.getChildCount());
+		SearchFieldTreeNode onlyChild = (SearchFieldTreeNode) root.getChildAt(0);
+		SearchableFieldChoiceItem nodeChoice = onlyChild.getChoiceItem();
+		DropDownFieldSpec mergedDropdownSpec = (DropDownFieldSpec)nodeChoice.getSpec();
+		ChoiceItem[] mergedChoices = mergedDropdownSpec.getAllChoices();
+		assertEquals(2, mergedChoices.length);
+		assertEquals(dropdown2.getChoice(0).getLabel(), mergedChoices[0].getLabel());
+		assertEquals(dropdown1.getChoice(0).getLabel(), mergedChoices[1].getLabel());
+	}
+	
 	public void testAnnotateSimilarDropdownsWithDifferentReusableChoices() throws Exception
 	{
 		CustomDropDownFieldSpec dropdown1 = new CustomDropDownFieldSpec();
