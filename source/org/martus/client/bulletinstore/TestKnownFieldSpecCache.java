@@ -200,25 +200,33 @@ public class TestKnownFieldSpecCache extends TestCaseEnhanced
 		ChoiceItem[] choices1 = {new ChoiceItem("a", label1), new ChoiceItem("b", "b"),};
 		ChoiceItem[] choices2 = {new ChoiceItem("a", "ant"), new ChoiceItem("b", "bob"),};
 		ChoiceItem[] choices3 = {new ChoiceItem("a", label1), new ChoiceItem("b", "bobby"),};
-		
-		Bulletin b1 = createBulletinWithReusableChoices(choices1);
+
+		String listName = "choices";
+		Bulletin b1 = createBulletinWithReusableChoices(choices1, listName);
 		cache.revisionWasSaved(b1);
 		assertEquals("Original choice item was modified?", label1, choices1[0].getLabel());
-		Bulletin b2 = createBulletinWithReusableChoices(choices2);
+		Bulletin b2 = createBulletinWithReusableChoices(choices2, listName);
 		cache.revisionWasSaved(b2);
-		Bulletin b3 = createBulletinWithReusableChoices(choices3);
+		assertEquals("Original choice item was modified?", label1, choices1[0].getLabel());
+		Bulletin b3 = createBulletinWithReusableChoices(choices3, listName);
 		cache.revisionWasSaved(b3);
-		
+		assertEquals("Original choice item was modified?", label1, choices1[0].getLabel());
+
+// Work in progress. Uncomment as soon as the other work is committed
+//		ReusableChoices allChoices = cache.getAllReusableChoiceLists().getChoices("choices");
+//		String labelA = allChoices.findByCode("a").getLabel();
+//		assertEquals("antler twice?", labelA.indexOf(label1), labelA.lastIndexOf(label1));
+//		assertContains("ant;", labelA);
 	}
 
-	private Bulletin createBulletinWithReusableChoices(ChoiceItem[] choices1) throws Exception
+	private Bulletin createBulletinWithReusableChoices(ChoiceItem[] choices1, String listName) throws Exception
 	{
 		CustomDropDownFieldSpec spec = new CustomDropDownFieldSpec();
 		spec.setTag("tag");
 		spec.setLabel("label");
 		spec.addReusableChoicesCode("code");
 		
-		ReusableChoices reusableChoices1 = new ReusableChoices("code", "label");
+		ReusableChoices reusableChoices1 = new ReusableChoices(listName, "label");
 		reusableChoices1.addAll(choices1);
 		FieldSpecCollection topSpecs1 = new FieldSpecCollection(new FieldSpec[] {spec});
 		topSpecs1.addReusableChoiceList(reusableChoices1);
