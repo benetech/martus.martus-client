@@ -188,7 +188,9 @@ abstract public class UiGrid extends UiField
 
 				UiField cellField = fieldCreator.createField(spec);
 				
-				cellField.getComponent().addFocusListener(new ExpandedGridFieldFocusHandler());
+				for(int component = 0; component < cellField.getFocusableComponents().length; ++component)
+					cellField.getFocusableComponents()[component].addFocusListener(new ExpandedGridFieldFocusHandler());
+				
 				String value = (String)model.getValueAt(row, column);
 				cellField.setText(value);
 				JComponent cellComponent = cellField.getComponent();
