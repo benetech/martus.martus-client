@@ -50,12 +50,19 @@ public class ExportTranslationFile
 		}
 	
 		String languageCode = args[0].toLowerCase();
-		if(languageCode.length() != 2 ||
-			!Character.isLetter(languageCode.charAt(0)) ||
-			!Character.isLetter(languageCode.charAt(1)))
+		if(languageCode.length() < 2 || languageCode.length() > 3)
 		{
-			System.out.println("Invalid language code. Must be two letters (e.g. 'es')");
+			System.out.println("Invalid language code. Must be two or three letters (e.g. 'es' or 'bur')");
 			System.exit(2);
+		}
+
+		for(int i = 0; i < languageCode.length(); ++i)
+		{
+			if(!Character.isLetter(languageCode.charAt(i)))
+			{
+				System.out.println("Invalid language code. Can only contain letters.");
+				System.exit(2);
+			}
 		}
 	
 		System.out.println("Exporting translations for: " + languageCode);
