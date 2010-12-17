@@ -601,8 +601,7 @@ public class TestLocalization extends TestCaseEnhanced
 		String result = writer.toString();
 		assertEquals("no leading ByteOrderMark?", 0xFEFF, result.charAt(0));
 		assertEquals("no leading comment?", 1, result.indexOf("#"));
-		String versionNumber = UiConstants.versionLabel;
-		String expectedTranslationVersion = "field:translationVersion=English "+ versionNumber;
+		String expectedTranslationVersion = "field:translationVersion=";
 		assertContains("Translation Version # not exported?", expectedTranslationVersion, result);
 	}
 
