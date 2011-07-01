@@ -488,13 +488,16 @@ public class TestBulletinSearcher extends TestCaseEnhanced
 		MartusCrypto security = MockMartusSecurity.createClient();
 		Bulletin b = new Bulletin(security);
 		b.getBulletinHeaderPacket().updateLastSavedTime();
-		FieldSpec spec = FieldSpec.createStandardField("_lastSavedDate", new FieldTypeDate());
+		FieldSpec spec = SearchFieldChooserSpecBuilder.createLastSavedDateChoice(localization).getSpec();
 		
 		String rawLastSaved = b.getLastSavedDate();
 		verifyOperatorComparison("testDateMatchesLastSaved", b, spec, "=", rawLastSaved, true);
 
 		String formattedLastSaved = localization.convertStoredDateToDisplay(rawLastSaved);
 		verifyOperatorComparison("testDateMatchesLastSaved", b, spec, "", formattedLastSaved, true);
+		
+		String differentDate = "2008-07-13";
+		verifyOperatorComparison("testDateMatchesLastSaved", b, spec, "=", differentDate, false);
 	}
 		
 	public void testFlexiDateMatches() throws Exception

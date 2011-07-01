@@ -128,7 +128,7 @@ public class TestFieldChooserSpecBuilder extends TestCaseEnhanced
 		assertNotNull("no any-field?", FancySearchHelper.findSearchTag(spec, anyField.getCode()));
 
 		SearchableFieldChoiceItem lastSaved = FieldChooserSpecBuilder.createLastSavedDateChoice(localization);
-		assertEquals("Wrong code for last saved entry?", Bulletin.PSEUDOFIELD_LAST_SAVED_DATE, lastSaved.getCode());
+		assertEquals("Wrong code for last saved entry?", new MiniFieldSpec(lastSaved.getSpec()).toJson().toString(), lastSaved.getCode());
 		assertNotNull("no last-saved date?", FancySearchHelper.findSearchTag(spec, lastSaved.getCode()));
 	}
 

@@ -112,7 +112,7 @@ public class FieldChooserSpecBuilder
 		String label = localization.getFieldLabel(Bulletin.TAGLASTSAVED);
 		FieldType type = new FieldTypeDate();
 		FieldSpec spec = FieldSpec.createCustomField(tag, label, type);
-		return new SearchableFieldChoiceItem(tag, spec);
+		return new SearchableFieldChoiceItem(spec);
 	}
 
 	public Vector convertToChoiceItems(Collection specs, PoolOfReusableChoicesLists reusableChoiceLists)
