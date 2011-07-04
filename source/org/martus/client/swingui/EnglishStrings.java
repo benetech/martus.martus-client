@@ -226,6 +226,7 @@ public class EnglishStrings
 "wintitle:notifyViewAttachmentNotAvailable=Unable to View Attachment",
 "wintitle:notifyAddPermissionsZeroBulletinsOurs=Update headquarters access to Bulletins",
 "wintitle:notifyAddPermissionsZeroHeadquartersSelected=No Headquarters Selected",
+"wintitle:notifySealSelectedZeroBulletinsOurs=Seal Bulletins",
 "wintitle:notifyErrorImportingBulletinsTooOld=Import Bulletin(s)",
 "wintitle:notifyErrorImportingBulletinsTooNew=Import Bulletin(s)",
 
@@ -875,6 +876,7 @@ public class EnglishStrings
 "field:notifyReportFormatDifferentLanguagecause=This report format was created in a different language. As a result, some headings may not print properly, and some of the fields may not be available for sorting.",
 "field:notifyViewAttachmentNotAvailablecause=This computer can only view JPEG, GIF, and PNG image attachments",
 "field:notifyAddPermissionsZeroBulletinsOurscause=Must select at least one bulletin that was created by this account",
+"field:notifySealSelectedZeroBulletinsOurscause=Must select at least one bulletin that was created by this account",
 
 "field:notifyErrorImportingBulletinsTooOldcause=This XML file was created by an older version of Martus and cannot be read by this version.",
 "field:notifyErrorImportingBulletinsTooNewcause=This XML file was created by a newer version of Martus and cannot be read by this version.  You must upgrade to the newer version of Martus to import this file.",

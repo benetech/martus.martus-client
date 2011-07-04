@@ -75,11 +75,33 @@ public class ActionMenuSealSelectedBulletins extends UiMenuAction
 
 	private void sealSelectedBulletins(Vector selectedBulletins) throws Exception
 	{
+		Vector ourBulletins = extractOurBulletins(selectedBulletins, mainWindow.getApp().getAccountId());
+		if(ourBulletins.size() == 0)
+		{
+			mainWindow.notifyDlg("SealSelectedZeroBulletinsOurs");
+			return;
+		}
+
 		UiProgressWithCancelDlg progressDialog = new UiProgressWithCancelDlg(mainWindow, "SealingSelectedBulletins");
 		progressDialog.pack();
-		BulletinSealerThread thread = new BulletinSealerThread(mainWindow, selectedBulletins);
+		BulletinSealerThread thread = new BulletinSealerThread(mainWindow, ourBulletins);
 		mainWindow.doBackgroundWork(thread, progressDialog);
 		mainWindow.forceRebuildOfPreview();
+	}
+
+	// TODO: This method is duplicated from ActionMenuAddPermissions
+	private Vector extractOurBulletins(Vector allBulletins, String ourAccountId)
+	{
+		Vector ourBulletins = new Vector();
+		
+		for(int i = 0; i < allBulletins.size(); ++i)
+		{
+			Bulletin b = (Bulletin)allBulletins.get(i);
+			if(b.getAccount().equals(ourAccountId))
+				ourBulletins.add(b);
+		}
+		
+		return ourBulletins;
 	}
 
 	static class BulletinSealerThread extends WorkerProgressThread

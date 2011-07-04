@@ -146,6 +146,7 @@ public class ActionMenuAddPermissions extends UiMenuAction
 		HQKeys hqKeys;
 	}
 
+	// TODO: This method is duplicated in ActionMenuSealSelectedBulletins
 	private Vector extractOurBulletins(Vector allBulletins, String ourAccountId)
 	{
 		Vector ourBulletins = new Vector();
