@@ -60,6 +60,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JComponent;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JSplitPane;
 import javax.swing.SwingUtilities;
@@ -70,12 +71,12 @@ import org.martus.client.bulletinstore.ClientBulletinStore;
 import org.martus.client.core.BackgroundUploader;
 import org.martus.client.core.ConfigInfo;
 import org.martus.client.core.MartusApp;
-import org.martus.client.core.RetrieveCommand;
-import org.martus.client.core.SortableBulletinList;
-import org.martus.client.core.TransferableBulletinList;
 import org.martus.client.core.MartusApp.LoadConfigInfoException;
 import org.martus.client.core.MartusApp.MartusAppInitializationException;
 import org.martus.client.core.MartusApp.SaveConfigInfoException;
+import org.martus.client.core.RetrieveCommand;
+import org.martus.client.core.SortableBulletinList;
+import org.martus.client.core.TransferableBulletinList;
 import org.martus.client.search.SearchTreeNode;
 import org.martus.client.swingui.bulletincomponent.UiBulletinPreviewPane;
 import org.martus.client.swingui.bulletintable.UiBulletinTablePane;
@@ -119,9 +120,9 @@ import org.martus.common.EnglishCommonStrings;
 import org.martus.common.HQKeys;
 import org.martus.common.MartusLogger;
 import org.martus.common.MartusUtilities;
-import org.martus.common.MiniLocalization;
 import org.martus.common.MartusUtilities.FileVerificationException;
 import org.martus.common.MartusUtilities.ServerErrorException;
+import org.martus.common.MiniLocalization;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.crypto.MartusCrypto;
 import org.martus.common.database.FileDatabase.MissingAccountMapException;
@@ -141,10 +142,10 @@ import org.martus.swing.UiPopupMenu;
 import org.martus.swing.Utilities;
 import org.martus.swing.Utilities.Delay;
 import org.martus.util.FileVerifier;
-import org.martus.util.TokenReplacement;
-import org.martus.util.UnicodeReader;
 import org.martus.util.StreamableBase64.InvalidBase64Exception;
+import org.martus.util.TokenReplacement;
 import org.martus.util.TokenReplacement.TokenInvalidException;
+import org.martus.util.UnicodeReader;
 import org.martus.util.language.LanguageOptions;
 import org.martus.util.xml.XmlUtilities;
 
@@ -155,7 +156,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		super();
 		
 //		Un-comment the line below when the MartusApp constructor is not calling MartusJarVerification.verifyJars()
-//		JOptionPane.showMessageDialog(null, "JAR IS NOT BEING VERIFIED");
+		JOptionPane.showMessageDialog(null, "JAR IS NOT BEING VERIFIED");
 		
 		// This block of code is to create a test version of Martus that 
 		// will expire after a specific date. 

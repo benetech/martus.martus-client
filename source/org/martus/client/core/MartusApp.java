@@ -64,32 +64,32 @@ import org.martus.clientside.ClientSideNetworkHandlerUsingXmlRpcForNonSSL;
 import org.martus.clientside.MtfAwareLocalization;
 import org.martus.clientside.PasswordHelper;
 import org.martus.common.BulletinSummary;
-import org.martus.common.FieldCollection;
-import org.martus.common.FieldSpecCollection;
-import org.martus.common.HQKey;
-import org.martus.common.HQKeys;
-import org.martus.common.LegacyCustomFields;
-import org.martus.common.MartusUtilities;
-import org.martus.common.MiniLocalization;
-import org.martus.common.ProgressMeterInterface;
-import org.martus.common.Version;
 import org.martus.common.BulletinSummary.WrongValueCount;
 import org.martus.common.Exceptions.ServerCallFailedException;
 import org.martus.common.Exceptions.ServerNotAvailableException;
+import org.martus.common.FieldCollection;
 import org.martus.common.FieldCollection.CustomFieldsParseException;
+import org.martus.common.FieldSpecCollection;
+import org.martus.common.HQKey;
+import org.martus.common.HQKeys;
 import org.martus.common.HQKeys.HQsException;
+import org.martus.common.LegacyCustomFields;
+import org.martus.common.MartusUtilities;
 import org.martus.common.MartusUtilities.BulletinNotFoundException;
 import org.martus.common.MartusUtilities.FileVerificationException;
 import org.martus.common.MartusUtilities.NotYourBulletinErrorException;
 import org.martus.common.MartusUtilities.PublicInformationInvalidException;
 import org.martus.common.MartusUtilities.ServerErrorException;
+import org.martus.common.MiniLocalization;
+import org.martus.common.ProgressMeterInterface;
+import org.martus.common.Version;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.crypto.MartusCrypto;
-import org.martus.common.crypto.MartusSecurity;
 import org.martus.common.crypto.MartusCrypto.DecryptionException;
 import org.martus.common.crypto.MartusCrypto.EncryptionException;
 import org.martus.common.crypto.MartusCrypto.MartusSignatureException;
 import org.martus.common.crypto.MartusCrypto.NoKeyPairException;
+import org.martus.common.crypto.MartusSecurity;
 import org.martus.common.database.FileDatabase.MissingAccountMapException;
 import org.martus.common.database.FileDatabase.MissingAccountMapSignatureException;
 import org.martus.common.fieldspec.ChoiceItem;
@@ -103,19 +103,19 @@ import org.martus.common.packet.BulletinHeaderPacket;
 import org.martus.common.packet.BulletinHistory;
 import org.martus.common.packet.FieldDataPacket;
 import org.martus.common.packet.Packet;
-import org.martus.common.packet.UniversalId;
 import org.martus.common.packet.Packet.InvalidPacketException;
 import org.martus.common.packet.Packet.SignatureVerificationException;
 import org.martus.common.packet.Packet.WrongAccountException;
 import org.martus.common.packet.Packet.WrongPacketTypeException;
+import org.martus.common.packet.UniversalId;
 import org.martus.jarverifier.JarVerifier;
 import org.martus.util.DirectoryUtils;
 import org.martus.util.Stopwatch;
 import org.martus.util.StreamCopier;
 import org.martus.util.StreamableBase64;
+import org.martus.util.StreamableBase64.InvalidBase64Exception;
 import org.martus.util.UnicodeReader;
 import org.martus.util.UnicodeWriter;
-import org.martus.util.StreamableBase64.InvalidBase64Exception;
 import org.martus.util.inputstreamwithseek.ByteArrayInputStreamWithSeek;
 import org.martus.util.inputstreamwithseek.FileInputStreamWithSeek;
 import org.martus.util.inputstreamwithseek.InputStreamWithSeek;
@@ -141,7 +141,7 @@ public class MartusApp
 				cryptoToUse = new MartusSecurity();
 
 			// Comment out the following line to disable jar verification for new/temporary build process
-			MartusJarVerification.verifyJars();
+//			MartusJarVerification.verifyJars();
 
 			configInfo = new ConfigInfo();
 			currentUserName = "";
@@ -159,14 +159,14 @@ public class MartusApp
 		{
 			throw new MartusAppInitializationException("ErrorCryptoInitialization");
 		}
-		catch (MartusCrypto.InvalidJarException e)
-		{
-			throw new MartusAppInitializationException("Invalid jar file: " + e.getMessage());
-		}
-		catch (IOException e)
-		{
-			throw new MartusAppInitializationException("Error verifying jars: " + e.getMessage());
-		}
+//		catch (MartusCrypto.InvalidJarException e)
+//		{
+//			throw new MartusAppInitializationException("Invalid jar file: " + e.getMessage());
+//		}
+//		catch (IOException e)
+//		{
+//			throw new MartusAppInitializationException("Error verifying jars: " + e.getMessage());
+//		}
 		catch (Exception e)
 		{
 			throw new MartusAppInitializationException("Error verifying jars: " + e.getMessage());
