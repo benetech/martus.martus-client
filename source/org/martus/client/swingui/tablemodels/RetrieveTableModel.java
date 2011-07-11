@@ -357,15 +357,26 @@ abstract public class RetrieveTableModel extends UiTableModel
 	{
 		String accountId = currentSummary.getAccountId();
 		String localId = currentSummary.getLocalId();
+		long lastSaved = currentSummary.getDateTimeSaved();
+		
 		UniversalId uid = UniversalId.createFromAccountAndLocalId(accountId, localId);
 		DatabaseKey key = DatabaseKey.createLegacyKey(uid);
 		if(store.doesBulletinRevisionExist(key))
-			return false;
+		{
+			Bulletin existing = store.getBulletinRevision(uid);
+			long alreadyHaveLastSaved = existing.getLastSavedTime();
+			return shouldDownloadDraftWithDifferentTimestamp(lastSaved, alreadyHaveLastSaved);
+		}
 		
 		if(store.hasNewerRevision(uid))
 			return false;
 		
 		return true;
+	}
+
+	protected boolean shouldDownloadDraftWithDifferentTimestamp(long timestampOnServer, long timestampLocal)
+	{
+		return false;
 	}
 
 	protected void buildDownloadableSummariesList()

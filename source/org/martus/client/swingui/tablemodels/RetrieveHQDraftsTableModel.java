@@ -29,8 +29,8 @@ package org.martus.client.swingui.tablemodels;
 import java.util.Vector;
 
 import org.martus.client.core.MartusApp;
-import org.martus.common.MiniLocalization;
 import org.martus.common.MartusUtilities.ServerErrorException;
+import org.martus.common.MiniLocalization;
 
 
 
@@ -51,4 +51,12 @@ public class RetrieveHQDraftsTableModel extends RetrieveTableModelHQ
 		}
 	}
 
+	@Override
+	protected boolean shouldDownloadDraftWithDifferentTimestamp(long timestampOnServer, long timestampLocal)
+	{
+		if(timestampOnServer == MiniLocalization.DATE_UNKNOWN)
+			return false;
+		
+		return (timestampOnServer != timestampLocal);
+	}
 }
