@@ -925,7 +925,7 @@ public class EnglishStrings
 	"and date range grid columns by using <MinimumDate> and/or <MaximumDate> " +
 	"tags with a date in YYYY-MM-DD format. " +
 	"NOTE: The year must always be a 'Gregorian' year like 2009, " +
-	"even if Martus is configured to use Thai or Persian dates. " +
+	"even if Martus is configured to use Thai or Afghan or Persian dates." +
 	"A blank date, shown as <MaximumDate/>, means 'today', " +
 	"although it may allow one day earlier or later, " +
 	"due to time zone issues. " +
@@ -944,7 +944,7 @@ public class EnglishStrings
 	"For dropdowns, you must use a value already in the list of choices you defined. " +
 	"For Reusable Choices dropdowns it can be a partial or complete code, with each level separated by dots " +
 	"(for a location dropdown that has both State and City levels, " +
-	"you could pick the default to be at either level, e.g. either CA or CA.LA, see example below). " +
+	"you could pick the default to be at either level, e.g. either R1 or R1.C1, see example below). " +
 	"Default values can be set for both standard and custom fields, " +
 	"but are NOT allowed for BOOLEAN, DATE, DATERANGE, GRID, LANGUAGE, MESSAGE, and SECTION field types, " +
 	"and are not allowed for dropdowns where the values in the list are based on data entered in another field." +
@@ -968,7 +968,7 @@ public class EnglishStrings
 	"that will be displayed in every bulletin." +
 	"\n\n" +
 	"5.  Dropdowns using a \"Reusable Choices\" list can have multiple levels " +
-	"(e.g. for locations that might have State and City), different fields can use one or more of the levels, " +
+	"(e.g. for locations that might have Region and City), different fields can use one or more of the levels, " +
 	"and the number of levels is not limited." +
 	"\n\n" +
 	"6. Both STRING and MULTILINE fields are text fields.  " +
@@ -1110,10 +1110,10 @@ public class EnglishStrings
 	"<Field type='DROPDOWN'>\n" +
 	"<Tag>EventLocation</Tag>\n" +
 	"<Label>Event Location</Label>\n" +
-	"<DefaultValue>CA</DefaultValue>\n" +
-	"  <UseReusableChoices code='StateChoices'></UseReusableChoices>\n" +
+	"<DefaultValue>R1</DefaultValue>\n" +
+	"  <UseReusableChoices code='RegionChoices'></UseReusableChoices>\n" +
 	"  <UseReusableChoices code='CityChoices'></UseReusableChoices>\n" +
-	"</Field>\n" +
+	"</Field>" +
 	"\n" +
 	"\n" +
 	"<Field type='SECTION'>\n" +
@@ -1134,8 +1134,8 @@ public class EnglishStrings
 	"<Choice>Female</Choice>\n" +
 	"<Choice>Unknown</Choice>\n" +
 	"</Choices></Column>\n" +
-	"<Column type='DROPDOWN'><Tag></Tag><Label>State of Birth</Label>\n" +
-	"  <UseReusableChoices code='StateChoices'></UseReusableChoices></Column>\n" +
+	"<Column type='DROPDOWN'><Tag></Tag><Label>Region of Birth</Label>\n" +
+	"  <UseReusableChoices code='RegionChoices'></UseReusableChoices></Column>\n" +
 	"<Column type='STRING'><Tag></Tag><Label>Ethnicity</Label></Column>\n" +
 	"</GridSpecDetails>\n</Field>\n\n<Field type='MESSAGE'>\n" +
 	"<Tag>MessageProfession</Tag>\n" +
@@ -1172,20 +1172,20 @@ public class EnglishStrings
 	"</Field>\n" +
 	"\n" +
 	"\n" +
-	"<ReusableChoices code='StateChoices' label='State'>\n" +
-	"  <Choice code='CA' label='California'></Choice>\n" +
-	"  <Choice code='NY' label='New York'></Choice>\n" +
-	"  <Choice code='TX' label='Texas'></Choice>\n" +
+	"<ReusableChoices code='RegionChoices' label='Region'>\n" +
+	"  <Choice code='R1' label='Region 1'></Choice>\n" +
+	"  <Choice code='R2' label='Region 2'></Choice>\n" +
+	"  <Choice code='R3' label='Region 3'></Choice>\n" +
 	"</ReusableChoices>\n" +
 	"\n" +
 	"<ReusableChoices code='CityChoices' label='City'>\n" +
-	"  <Choice code='CA.SF' label='San Francisco'></Choice>\n" +
-	"  <Choice code='CA.LA' label='Los Angeles'></Choice>\n" +
-	"  <Choice code='NY.NYC' label='New York City'></Choice>\n" +
-	"  <Choice code='NY.ALB' label='Albany'></Choice>\n" +
-	"  <Choice code='TX.DAL' label='Dallas'></Choice>\n" +
-	"  <Choice code='TX.AUS' label='Austin'></Choice>\n" +
-	"</ReusableChoices>\n",
+	"  <Choice code='R1.C1' label='City 1'></Choice>\n" +
+	"  <Choice code='R1.C2' label='City 2'></Choice>\n" +
+	"  <Choice code='R2.C3' label='City 3'></Choice>\n" +
+	"  <Choice code='R2.C4' label='City 4'></Choice>\n" +
+	"  <Choice code='R3.C5' label='City 5'></Choice>\n" +
+	"  <Choice code='R3.C6' label='City 6'></Choice>\n" +
+	"</ReusableChoices>",
 
 "field:inputservermagicwordentry=If you want to request permission to upload to this server, enter the 'magic word' now:",
 "field:inputImportPublicCodeentry=Enter the Public Identification Code for this account:",
