@@ -2655,9 +2655,6 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		if(imageURL == null)
 			return null;
 		ImageIcon imageicon = new ImageIcon(imageURL);
-		if(imageicon == null)
-			return null;
-		
 		return imageicon.getImage();
 	}
 	

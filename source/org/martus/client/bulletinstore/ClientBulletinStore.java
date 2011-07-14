@@ -898,9 +898,6 @@ public class ClientBulletinStore extends BulletinStore
 			in.close();
 
 			String folderXml = new String(out.toByteArray(), "UTF-8");
-			if(folderXml == null)
-				return;
-				
 			internalLoadFolders(folderXml);
 			if(needsLegacyFolderConversion())
 			{
