@@ -26,6 +26,7 @@ Boston, MA 02111-1307, USA.
 
 package org.martus.client.search;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Vector;
@@ -41,6 +42,7 @@ import org.martus.common.MiniLocalization;
 import org.martus.common.PoolOfReusableChoicesLists;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.field.MartusField;
+import org.martus.common.field.MartusSearchableGridColumnField;
 import org.martus.common.fieldspec.ChoiceItem;
 import org.martus.common.fieldspec.DropDownFieldSpec;
 import org.martus.common.fieldspec.FieldSpec;
@@ -108,11 +110,17 @@ public class FancySearchTableModel extends GridTableModel implements TableModelL
 		return selectedFieldSpec;
 	}
 
-	private boolean canUseMemorizedPossibleValues(FieldSpec selectedFieldSpec)
+	public boolean canUseMemorizedPossibleValues(FieldSpec selectedFieldSpec)
 	{
 		if(selectedFieldSpec.getType().isString())
 			return true;
 		
+		if(selectedFieldSpec.getType().isDropdown())
+		{
+			DropDownFieldSpec spec = (DropDownFieldSpec) selectedFieldSpec;
+			if(spec.getDataSourceGridTag() != null)
+				return true;
+		}
 		return false;
 	}
 	
@@ -144,13 +152,36 @@ public class FancySearchTableModel extends GridTableModel implements TableModelL
 			MartusField field = bulletin.getPossiblyNestedField(miniSpec);
 			if(field != null)
 			{
-				String value = field.getData();
-				choices.add(new ChoiceItem("\"" + value + "\"", value));
+				if(field.isGridColumnField())
+				{
+					choices.addAll(getGridColumnChoices((MartusSearchableGridColumnField)field));
+				}
+				else
+				{
+					String value = field.getData();
+					choices.add(createChoiceItem(value));
+				}
 			}
 		}
 		return choices;
 	}
+
+	private ChoiceItem createChoiceItem(String value)
+	{
+		return new ChoiceItem("\"" + value + "\"", value);
+	}
 	
+	private Collection getGridColumnChoices(MartusSearchableGridColumnField field)
+	{
+		HashSet choices = new HashSet();
+		for(int row = 0; row < field.getRowCount(); ++row)
+		{
+			String value = field.getData(row);
+			choices.add(createChoiceItem(value));
+		}
+		return choices;
+	}
+
 	private static Vector getCompareChoices()
 	{
 		Vector opChoiceVector = new Vector();

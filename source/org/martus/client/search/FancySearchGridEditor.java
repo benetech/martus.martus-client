@@ -111,7 +111,7 @@ public class FancySearchGridEditor extends UiEditableGrid
 
 			int row = getTable().getSelectedRow();
 			FieldSpec spec = helper.getModel().getSelectedFieldSpec(row);
-			if(!spec.getType().isString())
+			if(!helper.getModel().canUseMemorizedPossibleValues(spec))
 			{
 				dlgLauncher.ShowNotifyDialog("NonStringFieldRowSelected");
 				return;
@@ -121,7 +121,7 @@ public class FancySearchGridEditor extends UiEditableGrid
 			thread.start();
 			progressDlg.setVisible(true);
 			if(thread.errorOccured)
-				throw new RuntimeException();
+				throw new RuntimeException(thread.exception);
 			helper.getModel().fireTableDataChanged();
 		}		
 		UiDialogLauncher dlgLauncher;
@@ -169,6 +169,7 @@ public class FancySearchGridEditor extends UiEditableGrid
 			catch (Exception e)
 			{
 				errorOccured = true;
+				exception = e;
 			}
 			finally
 			{
@@ -178,6 +179,7 @@ public class FancySearchGridEditor extends UiEditableGrid
 
 		private UiProgressWithCancelDlg progressMeter;
 		boolean errorOccured;
+		Exception exception;
 		private int row;
 	}
 
