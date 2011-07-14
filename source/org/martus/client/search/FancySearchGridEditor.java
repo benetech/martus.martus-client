@@ -84,7 +84,6 @@ public class FancySearchGridEditor extends UiEditableGrid
 	
 	class SelectionChangeHandler implements ListSelectionListener
 	{
-		@Override
 		public void valueChanged(ListSelectionEvent e)
 		{
 			updateLoadValuesButtonStatus();
