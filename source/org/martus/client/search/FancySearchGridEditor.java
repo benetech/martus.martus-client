@@ -34,6 +34,8 @@ import java.util.Vector;
 
 import javax.swing.JPanel;
 import javax.swing.JTable;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
 import org.json.JSONObject;
 import org.martus.client.bulletinstore.ClientBulletinStore;
@@ -74,9 +76,33 @@ public class FancySearchGridEditor extends UiEditableGrid
 		mainWindow = mainWindowToUse;
 		helper = helperToUse;
 		getTable().setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
+		getTable().addRowSelectionListener(new SelectionChangeHandler());
 		setSearchForColumnWideEnoughForDates();
 		setGridTableSize();
 		addListenerSoFieldChangeCanTriggerRepaintOfValueColumn();
+	}
+	
+	class SelectionChangeHandler implements ListSelectionListener
+	{
+		@Override
+		public void valueChanged(ListSelectionEvent e)
+		{
+			updateLoadValuesButtonStatus();
+		}
+
+	}
+
+	protected void updateLoadValuesButtonStatus()
+	{
+		int row = getTable().getSelectedRow();
+		if(row < 0 || row >= getTable().getRowCount())
+			return;
+		
+		FieldSpec spec = helper.getModel().getSelectedFieldSpec(row);
+		boolean canLoadValues = helper.getModel().canUseMemorizedPossibleValues(spec);
+		if(helper.getModel().hasMemorizedPossibleValues(spec))
+			canLoadValues = false;
+		loadValuesButton.setEnabled(canLoadValues);
 	}
 
 	protected GridTable createGridTable(UiDialogLauncher dlgLauncher, UiFieldContext context)
@@ -88,9 +114,9 @@ public class FancySearchGridEditor extends UiEditableGrid
 	protected Vector createButtons()
 	{
 		Vector buttons = super.createButtons();
-		UiButton loadValues = new UiButton(getLocalization().getButtonLabel("LoadFieldValuesFromAllBulletins"));
-		loadValues.addActionListener(new LoadValuesListener(table.getDialogLauncher()));
-		buttons.add(loadValues);
+		loadValuesButton = new UiButton(getLocalization().getButtonLabel("LoadFieldValuesFromAllBulletins"));
+		loadValuesButton.addActionListener(new LoadValuesListener(table.getDialogLauncher()));
+		buttons.add(loadValuesButton);
 		return buttons;
 	}
 	
@@ -173,6 +199,7 @@ public class FancySearchGridEditor extends UiEditableGrid
 			}
 			finally
 			{
+				updateLoadValuesButtonStatus();
 				progressMeter.finished();
 			}
 		}
@@ -231,6 +258,7 @@ public class FancySearchGridEditor extends UiEditableGrid
 		public void actionPerformed(ActionEvent e)
 		{
 			stopCellEditing();
+			updateLoadValuesButtonStatus();
 		}
 	}
 
@@ -238,4 +266,5 @@ public class FancySearchGridEditor extends UiEditableGrid
 
 	UiMainWindow mainWindow;
 	FancySearchHelper helper;
+	UiButton loadValuesButton;
 }

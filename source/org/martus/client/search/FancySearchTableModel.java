@@ -109,6 +109,12 @@ public class FancySearchTableModel extends GridTableModel implements TableModelL
 		}
 		return selectedFieldSpec;
 	}
+	
+	public boolean hasMemorizedPossibleValues(FieldSpec selectedFieldSpec)
+	{
+		MiniFieldSpec miniSpec = new MiniFieldSpec(selectedFieldSpec);
+		return memorizedFieldValues.containsKey(miniSpec);
+	}
 
 	public boolean canUseMemorizedPossibleValues(FieldSpec selectedFieldSpec)
 	{

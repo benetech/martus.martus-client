@@ -33,6 +33,7 @@ import java.util.List;
 import java.util.Vector;
 
 import javax.swing.JComponent;
+import javax.swing.event.ListSelectionListener;
 
 import org.martus.client.swingui.dialogs.UiDialogLauncher;
 import org.martus.client.swingui.fields.UiFieldContext;
@@ -69,6 +70,11 @@ public abstract class GridTable extends UiTableWithCellEditingProtection
 	abstract protected void createRenderers();
 	abstract protected void createEditors();
 
+	public void addRowSelectionListener(ListSelectionListener listener)
+	{
+		getSelectionModel().addListSelectionListener(listener);
+	}
+	
 	public void setColumnWidthsFromHeadersAndData() 
 	{
 		GridTableModel model = getGridTableModel();
