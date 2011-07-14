@@ -933,7 +933,7 @@ public class EnglishStrings
 	"and date range grid columns by using <MinimumDate> and/or <MaximumDate> " +
 	"tags with a date in YYYY-MM-DD format. " +
 	"NOTE: The year must always be a 'Gregorian' year like 2009, " +
-	"even if Martus is configured to use Thai or Afghan or Persian dates." +
+	"even if Martus is configured to use Thai or Afghan or Persian dates. " +
 	"A blank date, shown as <MaximumDate/>, means 'today', " +
 	"although it may allow one day earlier or later, " +
 	"due to time zone issues. " +
@@ -951,7 +951,7 @@ public class EnglishStrings
 	"<DefaultValue>ddd</DefaultValue>. " +
 	"For dropdowns, you must use a value already in the list of choices you defined. " +
 	"For Reusable Choices dropdowns it can be a partial or complete code, with each level separated by dots " +
-	"(for a location dropdown that has both State and City levels, " +
+	"(for a location dropdown that has both Region and City levels, " +
 	"you could pick the default to be at either level, e.g. either R1 or R1.C1, see example below). " +
 	"Default values can be set for both standard and custom fields, " +
 	"but are NOT allowed for BOOLEAN, DATE, DATERANGE, GRID, LANGUAGE, MESSAGE, and SECTION field types, " +
@@ -1029,9 +1029,9 @@ public class EnglishStrings
 	"\n\n",
 "field:CreateCustomFieldsHelp2b= Notes on \"Reusable Choices\" dropdown fields:" +
 	"\n\n " +
-	"1. Dropdowns using a \"Reusable Choices\" list can have multiple levels (e.g. for locations that might have State and City), " +
-	"different fields can use one or more of the levels (e.g. if you have defined State and City levels, " +
-	"you could have a field that just uses the State level, and another field that uses both levels), " +
+	"1. Dropdowns using a \"Reusable Choices\" list can have multiple levels (e.g. for locations that might have Region and City), " +
+	"different fields can use one or more of the levels (e.g. if you have defined Region and City levels, " +
+	"you could have a field that just uses the Region level, and another field that uses both levels), " +
 	"and you do not need to define all levels for all entries " +
 	"(e.g. you could have defined Neighborhood values as a lower level for some larger Cities, " +
 	"but not all Cities need to have Neighborhoods defined).  " +
@@ -1068,7 +1068,7 @@ public class EnglishStrings
 	"<Field type='STRING'>\n" +
 	"<Tag>office</Tag>\n" +
 	"<Label>Regional office collecting the data</Label>\n" +
-	"<DefaultValue>California field office</DefaultValue>\n" +
+	"<DefaultValue>Region 3 field office</DefaultValue>\n" +
 	"</Field>\n" +
 	"\n" +
 	"<Field type='DROPDOWN'>\n" +
