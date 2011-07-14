@@ -49,6 +49,7 @@ import org.martus.common.ReusableChoices;
 import org.martus.common.fieldspec.ChoiceItem;
 import org.martus.swing.UiComboBox;
 import org.martus.swing.UiLanguageDirection;
+import org.martus.swing.Utilities;
 import org.martus.util.language.LanguageOptions;
 
 public class UiChoiceEditor extends UiChoice implements ActionListener
@@ -199,8 +200,9 @@ public class UiChoiceEditor extends UiChoice implements ActionListener
 			}
 			combo.addActionListener(this);
 			comboBoxes.add(combo);
-			container.add(combo);
 		}
+		Utilities.addComponentsRespectingOrientation(container, (Component[])comboBoxes.toArray(new Component[0]));
+		
 		setText(existingValue);
 		reBindKeysForFocusableComponents();
 	}

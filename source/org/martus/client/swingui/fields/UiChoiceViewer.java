@@ -27,6 +27,7 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.swingui.fields;
 
 import java.awt.Color;
+import java.awt.Component;
 
 import javax.swing.BorderFactory;
 import javax.swing.Box;
@@ -35,6 +36,7 @@ import javax.swing.JComponent;
 import org.martus.common.ListOfReusableChoicesLists;
 import org.martus.common.MiniLocalization;
 import org.martus.swing.UiLabel;
+import org.martus.swing.Utilities;
 
 public class UiChoiceViewer extends UiChoice
 {
@@ -54,6 +56,7 @@ public class UiChoiceViewer extends UiChoice
 		container.removeAll();
 		String[] displayText = reusableChoicesLists.getDisplayValuesAtAllLevels(newText);
 		
+		Component[] widgets = new Component[reusableChoicesLists.size()];
 		for(int level = 0; level < reusableChoicesLists.size(); ++level)
 		{
 			UiLabel widget = new UiLabel();
@@ -62,9 +65,10 @@ public class UiChoiceViewer extends UiChoice
 				widget.setText(" " + displayText[level] + " ");
 				if(reusableChoicesLists.size() > 1)
 					widget.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-				container.add(widget);
+				widgets[level] = widget;
 			}
 		}
+		Utilities.addComponentsRespectingOrientation(container, widgets);
 	}
 
 	public JComponent getComponent()
