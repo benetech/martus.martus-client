@@ -95,7 +95,7 @@ public class FancySearchTableModel extends GridTableModel implements TableModelL
 		if(selectedFieldSpec.getType().isLanguageDropdown())
 			selectedFieldSpec = new DropDownFieldSpec(localization.getLanguageNameChoices());
 
-		if(selectedFieldSpec.getType().isString())
+		if(canUseMemorizedPossibleValues(selectedFieldSpec))
 		{
 			MiniFieldSpec miniSpec = new MiniFieldSpec(selectedFieldSpec);
 			HashSet choices = (HashSet) memorizedFieldValues.get(miniSpec);
@@ -106,6 +106,14 @@ public class FancySearchTableModel extends GridTableModel implements TableModelL
 			}
 		}
 		return selectedFieldSpec;
+	}
+
+	private boolean canUseMemorizedPossibleValues(FieldSpec selectedFieldSpec)
+	{
+		if(selectedFieldSpec.getType().isString())
+			return true;
+		
+		return false;
 	}
 	
 	protected void memorizeFieldValuesFromAllBulletinRevisions(UiProgressWithCancelDlg progressMeter, int rowOfField)
