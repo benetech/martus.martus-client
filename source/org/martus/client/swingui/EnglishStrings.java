@@ -107,6 +107,7 @@ public class EnglishStrings
 "wintitle:confirmSealSelectedBulletins=Seal Bulletins",
 "wintitle:confirmSealingSelectedBulletinsCancel=Sealing Bulletins",
 "wintitle:confirmXmlSchemaNewerImportAnyway=Import Bulletins",
+"wintitle:confirmLoadingFieldValuesFromAllBulletinsCancel=Loading Values",
 
 "wintitle:notifyDropErrorBulletinExists=Cannot Move Bulletin(s)",
 "wintitle:notifyDropErrorBulletinOlder=Cannot Move Bulletin(s)",
@@ -172,6 +173,7 @@ public class EnglishStrings
 "wintitle:notifyExportZeroBulletins=No Bulletins Selected",
 "wintitle:notifyPrintZeroBulletins=No Bulletins Selected",
 "wintitle:notifyNoGridRowSelected=No Row Selected",
+"wintitle:notifyNonStringFieldRowSelected=Load Values",
 "wintitle:notifyNoImportFileSpecified=No Folder Specified",
 
 "wintitle:notifyUserRejectedServerCompliance=Server Compliance Statement",
@@ -322,6 +324,7 @@ public class EnglishStrings
 "wintitle:SaveSearch=Save Search",
 "wintitle:SearchProgress=Searching...",
 "wintitle:ReportSearchProgress=Searching...",
+"wintitle:LoadingFieldValuesFromAllBulletins=Loading Values...",
 
 "button:help=Help",
 "button:create=Create",
@@ -409,6 +412,7 @@ public class EnglishStrings
 "button:SaveSearch=Save This Search...",
 "button:LoadSearch=Load Previous Search...",
 "button:LoadSearchOkButton=Load",
+"button:LoadFieldValuesFromAllBulletins=Load Values",
 
 "button:AddFieldToReport=Add",
 "button:RemoveFieldFromReport=Remove",
@@ -758,6 +762,9 @@ public class EnglishStrings
 "field:confirmXmlSchemaNewerImportAnywaycause=This XML file was created by a newer version of Martus.",
 "field:confirmXmlSchemaNewerImportAnywayeffect=If you continue with the import, some information in the bulletin(s) might not be imported.",
 
+"field:confirmLoadingFieldValuesFromAllBulletinsCancelcause=This will stop loading all the values for this field.",
+"field:confirmLoadingFieldValuesFromAllBulletinsCanceleffect=The field will be still/again be searchable as text.",
+
 "field:notifyDropErrorBulletinExistscause=One or more bulletins cannot be moved to that folder, because it already exists in that folder.",
 "field:notifyDropErrorBulletinOldercause=One or more bulletins cannot be moved to that folder, because a newer version of this bulletin already exists.",
 "field:notifyDropErrorscause=An unexpected error occurred while moving the bulletin(s). One or more files may be damaged.",
@@ -864,6 +871,7 @@ public class EnglishStrings
 "field:notifyRetrieveFileDataVersionErrorcause=A retrieve was in progress when you upgraded to a newer version of Martus. That retrieve will be canceled, so you should re-select any bulletins that had not yet been retrieved.",
 "field:notifyRetrieveFileErrorcause=An error has prevented Martus from continuing the retrieve that was in progress. You should re-select any bulletins that had not yet been retrieved.",
 "field:notifyNoGridRowSelectedcause=No row selected.",
+"field:notifyNonStringFieldRowSelectedcause=Load Values is only available for String fields",
 "field:notifyImportCompletecause=Import complete.  Imported #BulletinsSuccessfullyImported# of #TotalBulletinsToImport# bulletins into folder: #ImportFolder#",
 "field:notifyErrorImportingBulletinscause=There was an error importing bulletins into Martus.  Not all bulletins were imported.",
 "field:notifyNoImportFileSpecifiedcause=No folder specified.  You must enter a folder you wish the files to be imported into.  This folder can already exist in the system, or can be a new folder.",
@@ -1470,6 +1478,9 @@ public class EnglishStrings
 "field:ExportProgress=Exporting",
 "field:ImportExportBulletinTitle=Bulletin",
 "field:DataIsHidden=(Press the + button to show the hidden information)",
+
+"field:LoadingFieldValuesFromAllBulletins=Processing bulletin",
+"field:LoadingFieldValuesFromAllBulletinsExplanation=This will create a list of all the values for this field in all the bulletins",
 
 "field:_Section_BulletinSectionHeader=Header",
 "field:_Section_BulletinSectionHeadquarters=Headquarters",

@@ -26,16 +26,20 @@ Boston, MA 02111-1307, USA.
 
 package org.martus.client.search;
 
+import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Vector;
 
+import javax.swing.JPanel;
 import javax.swing.JTable;
 
 import org.json.JSONObject;
 import org.martus.client.bulletinstore.ClientBulletinStore;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.dialogs.UiDialogLauncher;
+import org.martus.client.swingui.dialogs.UiProgressWithCancelDlg;
 import org.martus.client.swingui.fields.UiEditableGrid;
 import org.martus.client.swingui.fields.UiFieldContext;
 import org.martus.client.swingui.fields.UiPopUpTreeEditor;
@@ -43,6 +47,9 @@ import org.martus.client.swingui.grids.GridPopUpTreeCellEditor;
 import org.martus.client.swingui.grids.GridTable;
 import org.martus.client.swingui.grids.SearchGridTable;
 import org.martus.common.FieldSpecCollection;
+import org.martus.common.fieldspec.FieldSpec;
+import org.martus.swing.UiButton;
+import org.martus.swing.UiTextArea;
 import org.martus.swing.Utilities;
 
 public class FancySearchGridEditor extends UiEditableGrid
@@ -64,6 +71,7 @@ public class FancySearchGridEditor extends UiEditableGrid
 	private FancySearchGridEditor(UiMainWindow mainWindowToUse, FancySearchHelper helperToUse, UiFieldContext contextToUse)
 	{
 		super(mainWindowToUse, contextToUse, helperToUse.getModel(), helperToUse.getDialogLauncher(), NUMBER_OF_COLUMNS_FOR_GRID);
+		mainWindow = mainWindowToUse;
 		helper = helperToUse;
 		getTable().setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
 		setSearchForColumnWideEnoughForDates();
@@ -75,6 +83,104 @@ public class FancySearchGridEditor extends UiEditableGrid
 	{
 		return new SearchGridTable(model, dlgLauncher, context);
 	}
+	
+	@Override
+	protected Vector createButtons()
+	{
+		Vector buttons = super.createButtons();
+		UiButton loadValues = new UiButton(getLocalization().getButtonLabel("LoadFieldValuesFromAllBulletins"));
+		loadValues.addActionListener(new LoadValuesListener(table.getDialogLauncher()));
+		buttons.add(loadValues);
+		return buttons;
+	}
+	
+	class LoadValuesListener implements ActionListener
+	{
+		LoadValuesListener(UiDialogLauncher dlgLauncherToUse)
+		{
+			dlgLauncher = dlgLauncherToUse;
+		}
+
+		public void actionPerformed(ActionEvent e)
+		{
+			if(!isRowSelected())
+			{
+				dlgLauncher.ShowNotifyDialog("NoGridRowSelected");
+				return;
+			}
+
+			int row = getTable().getSelectedRow();
+			FieldSpec spec = helper.getModel().getSelectedFieldSpec(row);
+			if(!spec.getType().isString())
+			{
+				dlgLauncher.ShowNotifyDialog("NonStringFieldRowSelected");
+				return;
+			}
+			UiProgressWithCancelDlg progressDlg = new LoadValuesProgressDlg(mainWindow);
+			LoadValuesThread thread = new LoadValuesThread(progressDlg, row);
+			thread.start();
+			progressDlg.setVisible(true);
+			if(thread.errorOccured)
+				throw new RuntimeException();
+			helper.getModel().fireTableDataChanged();
+		}		
+		UiDialogLauncher dlgLauncher;
+	}
+	
+	class LoadValuesProgressDlg extends UiProgressWithCancelDlg
+	{
+		public LoadValuesProgressDlg(UiMainWindow mainWindowToUse)
+		{
+			super(mainWindowToUse, "LoadingFieldValuesFromAllBulletins");
+
+			getContentPane().setLayout(new BorderLayout());
+			UiTextArea explanation = new UiTextArea(4, 50);
+			explanation.setEditable(false);
+			explanation.setText(getLocalization().getFieldLabel("LoadingFieldValuesFromAllBulletinsExplanation"));
+			
+			JPanel cancelPanel = new JPanel();
+			cancelPanel.add(cancel);
+			
+			JPanel meterPanel = new JPanel();
+			meterPanel.add(progressMeter);
+			
+			getContentPane().add(explanation, BorderLayout.NORTH);
+			getContentPane().add(meterPanel, BorderLayout.CENTER);
+			getContentPane().add(cancelPanel, BorderLayout.SOUTH);
+			Utilities.centerDlg(this);
+		}
+		
+	}
+	
+	class LoadValuesThread extends Thread
+	{
+		public LoadValuesThread(UiProgressWithCancelDlg progressRetrieveDlgToUse, int rowToUse)
+		{
+			progressMeter = progressRetrieveDlgToUse;
+			row = rowToUse;
+		}
+
+		public void run()
+		{
+			try
+			{
+				helper.getModel().memorizeFieldValuesFromAllBulletinRevisions(progressMeter, row);
+			}
+			catch (Exception e)
+			{
+				errorOccured = true;
+			}
+			finally
+			{
+				progressMeter.finished();
+			}
+		}
+
+		private UiProgressWithCancelDlg progressMeter;
+		boolean errorOccured;
+		private int row;
+	}
+
 	
 	private void setGridTableSize()
 	{
@@ -128,5 +234,6 @@ public class FancySearchGridEditor extends UiEditableGrid
 
 	private static final int NUMBER_OF_COLUMNS_FOR_GRID = 80;
 
+	UiMainWindow mainWindow;
 	FancySearchHelper helper;
 }
