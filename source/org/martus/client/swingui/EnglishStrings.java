@@ -1499,6 +1499,7 @@ public class EnglishStrings
 "field:CalendarSystemGregorian=Default (2005-05-31)",
 "field:CalendarSystemThai=Thai Solar (2548-05-31)",
 "field:CalendarSystemPersian=Persian (1384-03-10)",
+"field:CalendarSystemAfghan=Afghan (1384-03-10)",
 
 "field:FieldTypeSTRING=Text",
 "field:FieldTypeBOOLEAN=Yes/No",
@@ -1565,6 +1566,19 @@ public class EnglishStrings
 "month:Persian10=Dey",
 "month:Persian11=Bahman",
 "month:Persian12=Esfand",
+
+"month:Afghan1=hamal",
+"month:Afghan2=sawr",
+"month:Afghan3=dʒawzɒ",
+"month:Afghan4=saratɒn",
+"month:Afghan5=asad",
+"month:Afghan6=sonbola",
+"month:Afghan7=mizɒn",
+"month:Afghan8='aqrab",
+"month:Afghan9=qaws",
+"month:Afghan10=dʒadi",
+"month:Afghan12=dalvæ",
+"month:Afghan11=hut",
 
 "keyword:and=and",
 "keyword:or=or",
