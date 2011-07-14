@@ -65,8 +65,8 @@ public class UiChoiceViewer extends UiChoice
 				widget.setText(" " + displayText[level] + " ");
 				if(reusableChoicesLists.size() > 1)
 					widget.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-				widgets[level] = widget;
 			}
+			widgets[level] = widget;
 		}
 		Utilities.addComponentsRespectingOrientation(container, widgets);
 	}
