@@ -51,7 +51,6 @@ public class RetrieveHQDraftsTableModel extends RetrieveTableModelHQ
 		}
 	}
 
-	@Override
 	protected boolean shouldDownloadDraftWithDifferentTimestamp(long timestampOnServer, long timestampLocal)
 	{
 		if(timestampOnServer == MiniLocalization.DATE_UNKNOWN)

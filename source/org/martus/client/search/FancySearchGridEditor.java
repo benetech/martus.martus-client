@@ -109,7 +109,6 @@ public class FancySearchGridEditor extends UiEditableGrid
 		return new SearchGridTable(model, dlgLauncher, context);
 	}
 	
-	@Override
 	protected Vector createButtons()
 	{
 		Vector buttons = super.createButtons();
