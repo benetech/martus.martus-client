@@ -39,6 +39,7 @@ import org.martus.client.bulletinstore.ClientBulletinStore.AddOlderVersionToFold
 import org.martus.client.bulletinstore.ClientBulletinStore.BulletinAlreadyExistsException;
 import org.martus.client.core.MartusClientXml;
 import org.martus.client.test.MockBulletinStore;
+import org.martus.common.BulletinSummary;
 import org.martus.common.FieldSpecCollection;
 import org.martus.common.HQKey;
 import org.martus.common.HQKeys;
@@ -902,28 +903,28 @@ public class TestClientBulletinStore extends TestCaseEnhanced
 
 		Bulletin sentAndOnServer = createAndSaveBulletin();
 		testStore.setIsOnServer(sentAndOnServer);
-		onServer.add(sentAndOnServer.getUniversalId());
+		onServer.add(BulletinSummary.createFromBulletin(sentAndOnServer));
 		
 		Bulletin unknownButOnServer = createAndSaveBulletin();
-		onServer.add(unknownButOnServer.getUniversalId());
+		onServer.add(BulletinSummary.createFromBulletin(unknownButOnServer));
 
 		Bulletin unsentButOnServer = createAndSaveBulletin();
 		testStore.setIsNotOnServer(unsentButOnServer);
-		onServer.add(unsentButOnServer.getUniversalId());
+		onServer.add(BulletinSummary.createFromBulletin(unsentButOnServer));
 		
 		BulletinFolder draftOutbox = testStore.getFolderDraftOutbox();
 		Bulletin draftInOutboxSentAndOnServer = createAndSaveBulletin();
 		testStore.setIsOnServer(draftInOutboxSentAndOnServer);
-		onServer.add(draftInOutboxSentAndOnServer.getUniversalId());
+		onServer.add(BulletinSummary.createFromBulletin(draftInOutboxSentAndOnServer));
 		testStore.ensureBulletinIsInFolder(draftOutbox, draftInOutboxSentAndOnServer.getUniversalId());
 		
 		Bulletin draftInOutboxUnknownButOnServer = createAndSaveBulletin();
-		onServer.add(draftInOutboxUnknownButOnServer.getUniversalId());
+		onServer.add(BulletinSummary.createFromBulletin(draftInOutboxUnknownButOnServer));
 		testStore.ensureBulletinIsInFolder(draftOutbox, draftInOutboxUnknownButOnServer.getUniversalId());
 
 		Bulletin draftInOutboxUnsentButOnServer = createAndSaveBulletin();
 		testStore.setIsNotOnServer(draftInOutboxUnsentButOnServer);
-		onServer.add(draftInOutboxUnsentButOnServer.getUniversalId());
+		onServer.add(BulletinSummary.createFromBulletin(draftInOutboxUnsentButOnServer));
 		testStore.ensureBulletinIsInFolder(draftOutbox, draftInOutboxUnsentButOnServer.getUniversalId());
 
 		testStore.getFoldersFile().delete();

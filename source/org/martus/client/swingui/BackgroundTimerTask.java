@@ -42,6 +42,8 @@ import org.martus.client.core.BackgroundRetriever;
 import org.martus.client.core.BackgroundUploader;
 import org.martus.client.core.MartusApp;
 import org.martus.clientside.ClientSideNetworkGateway;
+import org.martus.common.BulletinSummary;
+import org.martus.common.BulletinSummary.WrongValueCount;
 import org.martus.common.MartusLogger;
 import org.martus.common.ProgressMeterInterface;
 import org.martus.common.Exceptions.ServerCallFailedException;
@@ -213,11 +215,12 @@ class BackgroundTimerTask extends TimerTask
 		{
 			mainWindow.setStatusMessageTag("statusCheckingForNewFieldOfficeBulletins");
 			long keepStatusUntil = System.currentTimeMillis() + 1000;
-			Set fieldOfficeUidsOnServer = getFieldOfficeUidsOnServer();
-			Iterator iter = fieldOfficeUidsOnServer.iterator();
+			Set fieldOfficeSummariesOnServer = getFieldOfficeSummariesOnServer();
+			Iterator iter = fieldOfficeSummariesOnServer.iterator();
 			while(iter.hasNext())
 			{
-				UniversalId uid = (UniversalId)iter.next();
+				BulletinSummary summary = (BulletinSummary)iter.next();
+				UniversalId uid = summary.getUniversalId();
 				DatabaseKey key = DatabaseKey.createLegacyKey(uid);
 				if(!getStore().doesBulletinRevisionExist(key))
 				{
@@ -256,13 +259,13 @@ class BackgroundTimerTask extends TimerTask
 		mainWindow.setStatusMessageTag(UiMainWindow.STATUS_CONNECTING);
 		System.out.println("Entering BackgroundUploadTimerTask.getUpdatedListOfBulletinsOnServer");
 		String myAccountId = getApp().getAccountId();
-		HashSet uidsOnServer = new HashSet(1000);
+		HashSet summariesOnServer = new HashSet(1000);
 		try
 		{
-			uidsOnServer.addAll(getUidsFromServer(myAccountId));
+			summariesOnServer.addAll(getBulletinSummariesFromServer(myAccountId));
 			
-			uidsOnServer.addAll(getFieldOfficeUidsOnServer());
-			getStore().updateOnServerLists(uidsOnServer);
+			summariesOnServer.addAll(getFieldOfficeSummariesOnServer());
+			getStore().updateOnServerLists(summariesOnServer);
 
 			class CurrentFolderRefresher implements Runnable
 			{
@@ -283,9 +286,9 @@ class BackgroundTimerTask extends TimerTask
 		mainWindow.setStatusMessageTag(UiMainWindow.STATUS_READY);
 	}
 
-	Set getFieldOfficeUidsOnServer() throws MartusSignatureException 
+	Set getFieldOfficeSummariesOnServer() throws Exception 
 	{
-		HashSet uidsOnServer = new HashSet(1000);
+		HashSet summariesOnServer = new HashSet(1000);
 		ClientSideNetworkGateway gateway = getApp().getCurrentNetworkInterfaceGateway();
 		MartusCrypto security = getApp().getSecurity();
 		NetworkResponse myFieldOfficesResponse = gateway.getFieldOfficeAccountIds(security, getApp().getAccountId());
@@ -296,55 +299,53 @@ class BackgroundTimerTask extends TimerTask
 			for(int i = 0; i < fieldOfficeAccounts.size(); ++i)
 			{
 				String fieldOfficeAccountId = (String)fieldOfficeAccounts.get(i);
-				uidsOnServer.addAll(getUidsFromServer(fieldOfficeAccountId));
+				summariesOnServer.addAll(getBulletinSummariesFromServer(fieldOfficeAccountId));
 			}
 		}
 		
-		return uidsOnServer;
+		return summariesOnServer;
 	}
 	
-	private Vector getUidsFromServer(String accountId) throws MartusSignatureException
+	private Vector getBulletinSummariesFromServer(String accountId) throws Exception
 	{
-		Vector uidsOnServer = new Vector();
-		Vector sealedUids = tryToGetSealedUidsFromServer(accountId);
-		uidsOnServer.addAll(sealedUids);
+		Vector summariesOnServer = new Vector();
+		Vector sealedSummaries = tryToGetSealedBulletinSummariesFromServer(accountId);
+		summariesOnServer.addAll(sealedSummaries);
 
-		Vector draftUids = tryToGetDraftUidsFromServer(accountId);
-		uidsOnServer.addAll(draftUids);
-		System.out.println("Adding uids from server: " + uidsOnServer.size());
-		return uidsOnServer;
+		Vector draftSummaries = tryToGetDraftBulletinSummariesFromServer(accountId);
+		summariesOnServer.addAll(draftSummaries);
+		System.out.println("Adding summaries from server: " + summariesOnServer.size());
+		return summariesOnServer;
 	}
 
-	private Vector tryToGetDraftUidsFromServer(String accountId) throws MartusSignatureException
+	private Vector tryToGetDraftBulletinSummariesFromServer(String accountId) throws Exception
 	{
 		ClientSideNetworkGateway gateway = getApp().getCurrentNetworkInterfaceGateway();
 		MartusCrypto security = getApp().getSecurity();
-		NetworkResponse myDraftResponse = gateway.getDraftBulletinIds(security, accountId, new Vector());
+		NetworkResponse myDraftResponse = gateway.getDraftBulletinIds(security, accountId, BulletinSummary.getNormalRetrieveTags());
 		if(NetworkInterfaceConstants.OK.equals(myDraftResponse.getResultCode()))
-			return buildUidVector(accountId, myDraftResponse.getResultVector());
+			return buildBulletinSummaryVector(accountId, myDraftResponse.getResultVector());
 		return new Vector();
 	}
 
-	private Vector tryToGetSealedUidsFromServer(String accountId) throws MartusSignatureException
+	private Vector tryToGetSealedBulletinSummariesFromServer(String accountId) throws Exception
 	{
 		ClientSideNetworkGateway gateway = getApp().getCurrentNetworkInterfaceGateway();
 		MartusCrypto security = getApp().getSecurity();
 		NetworkResponse mySealedResponse = gateway.getSealedBulletinIds(security, accountId, new Vector());
 		if(NetworkInterfaceConstants.OK.equals(mySealedResponse.getResultCode()))
-			return buildUidVector(accountId, mySealedResponse.getResultVector());
+			return buildBulletinSummaryVector(accountId, mySealedResponse.getResultVector());
 		return new Vector();
 	}
 
-	private Vector buildUidVector(String accountId, Vector localIds)
+	private Vector buildBulletinSummaryVector(String accountId, Vector summaryStrings) throws WrongValueCount
 	{
 		Vector result = new Vector();
-		for(int i=0; i < localIds.size(); ++i)
+		for(int i=0; i < summaryStrings.size(); ++i)
 		{
-			String localId = (String)localIds.get(i);
-			int delimiterAt = localId.indexOf('=');
-			if(delimiterAt >= 0)
-				localId = localId.substring(0, delimiterAt);
-			result.add(UniversalId.createFromAccountAndLocalId(accountId, localId));
+			String summaryString = (String)summaryStrings.get(i);
+			BulletinSummary summary = getApp().createSummaryFromString(accountId, summaryString);
+			result.add(summary);
 		}
 		
 		return result;

@@ -46,6 +46,7 @@ import java.util.zip.ZipFile;
 
 import org.martus.client.core.MartusClientXml;
 import org.martus.client.swingui.bulletintable.BulletinTableModel;
+import org.martus.common.BulletinSummary;
 import org.martus.common.FieldSpecCollection;
 import org.martus.common.MartusLogger;
 import org.martus.common.MartusUtilities;
@@ -765,30 +766,34 @@ public class ClientBulletinStore extends BulletinStore
 		getFolderNotOnServer().removeAll();
 	}
 	
-	public void updateOnServerLists(Set uidsOnServer)
+	public void updateOnServerLists(Set summariesOnServer)
 	{
-		HashSet uids = new HashSet(1000);
-		uids.addAll(getUidsOfAllBulletinRevisions());
-		internalUpdateOnServerLists(uidsOnServer, uids);
+		HashSet uidsOnThisComputer = new HashSet(1000);
+		uidsOnThisComputer.addAll(getUidsOfAllBulletinRevisions());
+		internalUpdateOnServerLists(summariesOnServer, uidsOnThisComputer);
 		saveFolders();
 	}
 	
 	//	 synchronized because updateOnServerLists is called from background thread
-	private synchronized void internalUpdateOnServerLists(Set uidsOnServer, HashSet uidsInStore)
+	private synchronized void internalUpdateOnServerLists(Set summariesOnServer, HashSet uidsInStore)
 	{
+		HashSet uidsNotOnServer = new HashSet(uidsInStore);
 		BulletinFolder draftOutbox = getFolderDraftOutbox();
-		for(Iterator iter = uidsInStore.iterator(); iter.hasNext();)
+		for(Iterator iter = summariesOnServer.iterator(); iter.hasNext(); )
 		{
-			UniversalId uid = (UniversalId) iter.next();
-			if(uidsOnServer.contains(uid))
+			BulletinSummary summary = (BulletinSummary) iter.next();
+			UniversalId uid = summary.getUniversalId();
+			uidsNotOnServer.remove(uid);
+			if(uidsInStore.contains(uid))
 			{
 				if(!draftOutbox.contains(uid))
-				{
 					setIsOnServer(uid);
-				}
 			}
-			else
-				setIsNotOnServer(uid);
+		}
+		for(Iterator iter = uidsNotOnServer.iterator(); iter.hasNext(); )
+		{
+			UniversalId uid = (UniversalId)iter.next();
+			setIsNotOnServer(uid);
 		}
 	}
 
