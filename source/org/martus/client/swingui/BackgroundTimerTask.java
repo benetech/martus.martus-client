@@ -306,11 +306,11 @@ class BackgroundTimerTask extends TimerTask
 	private Vector getUidsFromServer(String accountId) throws MartusSignatureException
 	{
 		Vector uidsOnServer = new Vector();
-		Vector mySealedUids = tryToGetSealedUidsFromServer(accountId);
-		uidsOnServer.addAll(mySealedUids);
+		Vector sealedUids = tryToGetSealedUidsFromServer(accountId);
+		uidsOnServer.addAll(sealedUids);
 
-		Vector myDraftUids = tryToGetDraftUidsFromServer(accountId);
-		uidsOnServer.addAll(myDraftUids);
+		Vector draftUids = tryToGetDraftUidsFromServer(accountId);
+		uidsOnServer.addAll(draftUids);
 		System.out.println("Adding uids from server: " + uidsOnServer.size());
 		return uidsOnServer;
 	}
