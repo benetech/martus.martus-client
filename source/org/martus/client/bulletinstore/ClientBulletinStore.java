@@ -1328,9 +1328,12 @@ public class ClientBulletinStore extends BulletinStore
 				importZipFileToStoreWithSameUids(zipFile);
 			}
 			else
+			{
 				uid = importZipFileToStoreWithNewUids(zipFile);
+			}
 
-			addBulletinToFolder(toFolder, uid);
+			if(!toFolder.contains(uid))
+				addBulletinToFolder(toFolder, uid);
 		}
 		finally
 		{
