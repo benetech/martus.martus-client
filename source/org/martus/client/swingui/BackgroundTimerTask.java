@@ -44,13 +44,12 @@ import org.martus.client.core.MartusApp;
 import org.martus.clientside.ClientSideNetworkGateway;
 import org.martus.common.BulletinSummary;
 import org.martus.common.BulletinSummary.WrongValueCount;
-import org.martus.common.MartusLogger;
-import org.martus.common.ProgressMeterInterface;
 import org.martus.common.Exceptions.ServerCallFailedException;
 import org.martus.common.Exceptions.ServerNotAvailableException;
+import org.martus.common.MartusLogger;
+import org.martus.common.ProgressMeterInterface;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.crypto.MartusCrypto;
-import org.martus.common.crypto.MartusCrypto.MartusSignatureException;
 import org.martus.common.database.DatabaseKey;
 import org.martus.common.network.NetworkInterfaceConstants;
 import org.martus.common.network.NetworkResponse;
@@ -223,6 +222,14 @@ class BackgroundTimerTask extends TimerTask
 				UniversalId uid = summary.getUniversalId();
 				DatabaseKey key = DatabaseKey.createLegacyKey(uid);
 				if(!getStore().doesBulletinRevisionExist(key))
+				{
+					foundNew = true;
+					break;
+				}
+				long serverLastModified = summary.getDateTimeSaved();
+				Bulletin localBulletin = getStore().getBulletinRevision(uid);
+				long localLastModified = localBulletin.getLastSavedTime();
+				if(serverLastModified != localLastModified)
 				{
 					foundNew = true;
 					break;
