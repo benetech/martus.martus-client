@@ -232,6 +232,11 @@ public class UiPopUpFieldChooserEditor extends UiField implements ActionListener
 			if(!isSelectionValid())
 				return;
 			selectedNode = getSelectionIfAny();
+			saveAndExit();
+		}
+
+		private void saveAndExit()
+		{
 			dispose();
 		}
 		
