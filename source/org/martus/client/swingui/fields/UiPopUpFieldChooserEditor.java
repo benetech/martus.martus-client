@@ -129,7 +129,7 @@ public class UiPopUpFieldChooserEditor extends UiField implements ActionListener
 
 	private void doPopUp()
 	{
-		FieldTreeDialog dlg = FieldTreeDialog.create(panel, spec, localization);
+		FieldTreeDialog dlg = createFieldChooserDialog();
 		dlg.selectCode(getText());
 		dlg.setVisible(true);
 		DefaultMutableTreeNode selectedNode = dlg.getSelectedNode();
@@ -139,6 +139,12 @@ public class UiPopUpFieldChooserEditor extends UiField implements ActionListener
 		selectedItem = (SearchableFieldChoiceItem)selectedNode.getUserObject();
 		label.setText(selectedNode.toString());
 		notifyListeners();
+	}
+
+	private FieldTreeDialog createFieldChooserDialog()
+	{
+		FieldTreeDialog dlg = FieldTreeDialog.create(panel, spec, localization);
+		return dlg;
 	}
 	
 	void notifyListeners()
