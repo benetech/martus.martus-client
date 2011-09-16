@@ -57,6 +57,9 @@ public class SearchFieldTreeDialog extends FieldTreeDialog
 			return true;
 
 		DropDownFieldSpec ddSpec = (DropDownFieldSpec)selectedSpec;
+		if(!ddSpec.hasDataSource())
+			return true;
+		
 		foundValues = FancySearchGridEditor.loadFieldValuesWithProgressDialog(mainWindow, ddSpec);
 		return true;
 	}
