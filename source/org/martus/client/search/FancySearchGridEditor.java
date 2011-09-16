@@ -144,8 +144,10 @@ public class FancySearchGridEditor extends UiEditableGrid
 			LoadValuesThread thread = new LoadValuesThread(progressDlg, row);
 			thread.start();
 			progressDlg.setVisible(true);
+			// NOTE: by the time we get here, the thread has terminated
 			if(thread.errorOccured)
 				throw new RuntimeException(thread.exception);
+			updateLoadValuesButtonStatus();
 			helper.getModel().fireTableDataChanged();
 		}		
 		UiDialogLauncher dlgLauncher;
@@ -197,7 +199,6 @@ public class FancySearchGridEditor extends UiEditableGrid
 			}
 			finally
 			{
-				updateLoadValuesButtonStatus();
 				progressMeter.finished();
 			}
 		}
