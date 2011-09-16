@@ -80,7 +80,7 @@ public class SearchGridTable extends GridTable
 		map.put(new FieldTypeMultiline(), new GridNormalCellEditor(localization));
 		map.put(new FieldTypeAnyField(), new GridNormalCellEditor(localization));
 		map.put(new FieldTypeGrid(), new GridNormalCellEditor(localization));
-		map.put(new FieldTypePopUpTree(), new GridPopUpTreeCellEditor(localization));
+		map.put(new FieldTypePopUpTree(), new SearchGridPopUpTreeCellEditor(localization));
 	}
 
 	public Collection getAllEditors()

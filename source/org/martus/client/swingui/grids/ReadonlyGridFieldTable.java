@@ -27,6 +27,7 @@ package org.martus.client.swingui.grids;
 
 import org.martus.client.swingui.dialogs.UiDialogLauncher;
 import org.martus.client.swingui.fields.UiFieldContext;
+import org.martus.client.swingui.fields.UiPopUpFieldChooserEditor;
 import org.martus.clientside.UiLocalization;
 import org.martus.common.fieldspec.FieldType;
 import org.martus.common.fieldspec.FieldTypeDate;
@@ -79,7 +80,7 @@ public class ReadonlyGridFieldTable extends GridFieldTable
 		if(type.isDropdown() || type.isLanguageDropdown())
 			return new GridDropDownCellViewer(context, localization);
 		if(type.isPopUpTree())
-			return new GridPopUpTreeCellEditor(localization);
+			return new GridPopUpTreeCellEditor(new UiPopUpFieldChooserEditor(localization));
 		
 		if(type.isMultiline() || type.isAnyField() || type.isGrid())
 			return new GridNormalCellEditor(localization);
