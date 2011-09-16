@@ -104,19 +104,19 @@ public class FieldTreeDialog extends JDialog implements TreeSelectionListener
 		return selectedNode;
 	}
 	
-	void saveAndExitIfValidSelection()
+	protected void saveAndExitIfValidSelection()
 	{
-		if(!isSelectionValid())
+		if(!canSaveAndExit())
 			return;
 		selectedNode = getSelectionIfAny();
-		saveAndExit();
-	}
-
-	private void saveAndExit()
-	{
 		dispose();
 	}
-	
+
+	protected boolean canSaveAndExit()
+	{
+		return isSelectionValid();
+	}
+
 	SearchFieldTreeNode getSelectionIfAny()
 	{
 		TreePath selectedPath = tree.getSelectionPath();
@@ -137,7 +137,7 @@ public class FieldTreeDialog extends JDialog implements TreeSelectionListener
 	
 	public void valueChanged(TreeSelectionEvent e)
 	{
-		okAction.setEnabled(isSelectionValid());
+		okAction.setEnabled(canSaveAndExit());
 		updateScrollerPosition();
 	}
 
