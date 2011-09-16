@@ -27,33 +27,20 @@ package org.martus.client.swingui.fields;
 
 import java.awt.BorderLayout;
 import java.awt.Component;
-import java.awt.Container;
 import java.awt.Graphics;
-import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.util.Vector;
 
-import javax.swing.AbstractAction;
-import javax.swing.Box;
 import javax.swing.Icon;
 import javax.swing.JComponent;
-import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.JTree;
-import javax.swing.event.TreeSelectionEvent;
-import javax.swing.event.TreeSelectionListener;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeCellRenderer;
 import javax.swing.tree.TreeModel;
 import javax.swing.tree.TreePath;
-import javax.swing.tree.TreeSelectionModel;
 
-import org.martus.client.search.SearchFieldTreeNode;
 import org.martus.common.MiniLocalization;
 import org.martus.common.fieldspec.MiniFieldSpec;
 import org.martus.common.fieldspec.PopUpTreeFieldSpec;
@@ -61,8 +48,6 @@ import org.martus.common.fieldspec.SearchFieldTreeModel;
 import org.martus.common.fieldspec.SearchableFieldChoiceItem;
 import org.martus.swing.UiButton;
 import org.martus.swing.UiLabel;
-import org.martus.swing.UiScrollPane;
-import org.martus.swing.Utilities;
 
 
 public class UiPopUpFieldChooserEditor extends UiField implements ActionListener
@@ -169,180 +154,6 @@ public class UiPopUpFieldChooserEditor extends UiField implements ActionListener
 	public void addActionListener(ActionListener listenerToAdd)
 	{
 		listeners.add(listenerToAdd);
-	}
-	
-	static class FieldTreeDialog extends JDialog implements TreeSelectionListener
-	{
-		static public FieldTreeDialog create(JComponent parent, PopUpTreeFieldSpec spec, MiniLocalization localization)
-		{
-			Container topLevel = parent.getTopLevelAncestor();
-			return new FieldTreeDialog((JDialog)topLevel, parent.getLocationOnScreen(), spec, localization);
-		}
-		
-		public FieldTreeDialog(JDialog owner, Point location, PopUpTreeFieldSpec specToUse, MiniLocalization localization)
-		{
-			super(owner);
-			spec = specToUse;
-			
-			setTitle(localization.getButtonLabel("PopUpTreeChoose"));
-			setLocation(location);
-			
-			okAction = new OkAction(localization.getButtonLabel("ok"));
-
-			tree = new SearchFieldTree(spec.getModel());
-			tree.setRootVisible(false);
-			tree.getSelectionModel().setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);
-			tree.addMouseListener(new MouseHandler());
-			tree.addKeyListener(new KeyHandler());
-			tree.addTreeSelectionListener(this);
-			tree.setShowsRootHandles(true);
-			tree.setCellRenderer(new BlankLeafRenderer());
-			
-			okButton = new UiButton(okAction);
-			cancelButton = new UiButton(localization.getButtonLabel("cancel"));
-			cancelButton.addActionListener(new CancelButtonHandler());
-			Box buttonBox = Box.createHorizontalBox();
-			buttonBox.add(Box.createHorizontalGlue());
-			buttonBox.add(okButton);
-			buttonBox.add(cancelButton);
-			
-			setModal(true);
-			Container contentPane = getContentPane();
-			contentPane.setLayout(new BorderLayout());
-			contentPane.add(new UiScrollPane(tree), BorderLayout.CENTER);
-			contentPane.add(buttonBox, BorderLayout.AFTER_LAST_LINE);
-			pack();
-			Utilities.fitInScreen(this);
-
-			getRootPane().setDefaultButton(okButton);
-		}
-		
-		public void selectCode(String code)
-		{
-			tree.selectNodeContainingItem(spec.findCode(code));
-		}
-		
-		public DefaultMutableTreeNode getSelectedNode()
-		{
-			return selectedNode;
-		}
-		
-		void saveAndExitIfValidSelection()
-		{
-			if(!isSelectionValid())
-				return;
-			selectedNode = getSelectionIfAny();
-			saveAndExit();
-		}
-
-		private void saveAndExit()
-		{
-			dispose();
-		}
-		
-		SearchFieldTreeNode getSelectionIfAny()
-		{
-			TreePath selectedPath = tree.getSelectionPath();
-			if(selectedPath == null)
-				return null;
-			SearchFieldTreeNode node = (SearchFieldTreeNode)selectedPath.getLastPathComponent();
-			if(node == null)
-				return null;
-			if(!node.isSelectable())
-				return null;
-			return node;
-		}
-		
-		boolean isSelectionValid()
-		{
-			return (getSelectionIfAny() != null);
-		}
-		
-		public void valueChanged(TreeSelectionEvent e)
-		{
-			okAction.setEnabled(isSelectionValid());
-			updateScrollerPosition();
-		}
-
-		//Java Bug, remove once we upgrade to Java 1.5 (Fixed post Java 1.4.2)
-		private void updateScrollerPosition()
-		{
-			int rows[] = tree.getSelectionRows();
-			if(rows != null && rows.length>0)
-				tree.scrollRowToVisible(rows[0]);
-		}
-		
-		class OkAction extends AbstractAction
-		{
-			public OkAction(String label)
-			{
-				super(label);
-			}
-
-			public void actionPerformed(ActionEvent e)
-			{
-				saveAndExitIfValidSelection();
-			}
-			
-		}
-		
-		class CancelButtonHandler implements ActionListener
-		{
-			public void actionPerformed(ActionEvent e)
-			{
-				dispose();
-			}
-			
-		}
-		
-		class MouseHandler implements MouseListener
-		{
-			public void mouseClicked(MouseEvent e)
-			{
-			}
-
-			public void mouseEntered(MouseEvent e)
-			{
-			}
-
-			public void mouseExited(MouseEvent e)
-			{
-			}
-			
-			public void mousePressed(MouseEvent e)
-			{
-			}
-			
-			public void mouseReleased(MouseEvent e)
-			{
-				if(e.getClickCount() != 2)
-					return;
-				
-				JTree clickedTree = (JTree)e.getSource();
-				TreePath path = clickedTree.getPathForLocation(e.getX(), e.getY());
-				if(path == null)
-					return;
-				
-				saveAndExitIfValidSelection();
-			}
-		}
-		
-		class KeyHandler extends KeyAdapter
-		{
-			public void keyTyped(KeyEvent e)
-			{
-				if(e.getKeyChar() == KeyEvent.VK_ESCAPE)
-					dispose();
-			}
-		}
-
-		OkAction okAction;
-		UiButton okButton;
-		UiButton cancelButton;
-		
-		PopUpTreeFieldSpec spec;
-		SearchFieldTree tree;
-		DefaultMutableTreeNode selectedNode;
 	}
 	
 	static class BlankLeafRenderer extends DefaultTreeCellRenderer
