@@ -63,7 +63,7 @@ class FieldTreeDialog extends JDialog implements TreeSelectionListener
 		return new FieldTreeDialog((JDialog)topLevel, parent.getLocationOnScreen(), spec, localization);
 	}
 	
-	public FieldTreeDialog(JDialog owner, Point location, PopUpTreeFieldSpec specToUse, MiniLocalization localization)
+	private FieldTreeDialog(JDialog owner, Point location, PopUpTreeFieldSpec specToUse, MiniLocalization localization)
 	{
 		super(owner);
 		spec = specToUse;
