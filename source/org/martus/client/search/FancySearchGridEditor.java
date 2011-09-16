@@ -143,22 +143,29 @@ public class FancySearchGridEditor extends UiEditableGrid
 				dlgLauncher.ShowNotifyDialog("NonStringFieldRowSelected");
 				return;
 			}
-			UiProgressWithCancelDlg progressDlg = new LoadValuesProgressDlg(mainWindow);
-			LoadValuesThread thread = new LoadValuesThread(progressDlg, spec);
-			thread.start();
-			progressDlg.setVisible(true);
-			// NOTE: by the time we get here, the thread has terminated
-			if(thread.errorOccured)
-				throw new RuntimeException(thread.exception);
-			HashSet loadedValues = thread.getLoadedValues();
+			HashSet loadedValues = loadFieldValuesWithProgressDialog(mainWindow, spec);
 			helper.getModel().setAvailableFieldValues(spec, loadedValues);
 			helper.getModel().fireTableDataChanged();
 			updateLoadValuesButtonStatus();
-		}		
+		}
+
 		UiDialogLauncher dlgLauncher;
 	}
 	
-	class LoadValuesProgressDlg extends UiProgressWithCancelDlg
+	static HashSet loadFieldValuesWithProgressDialog(UiMainWindow mainWindow, FieldSpec spec)
+	{
+		UiProgressWithCancelDlg progressDlg = new LoadValuesProgressDlg(mainWindow);
+		LoadValuesThread thread = new LoadValuesThread(mainWindow, progressDlg, spec);
+		thread.start();
+		progressDlg.setVisible(true);
+		// NOTE: by the time we get here, the thread has terminated
+		if(thread.errorOccured)
+			throw new RuntimeException(thread.exception);
+		HashSet loadedValues = thread.getLoadedValues();
+		return loadedValues;
+	}		
+	
+	static class LoadValuesProgressDlg extends UiProgressWithCancelDlg
 	{
 		public LoadValuesProgressDlg(UiMainWindow mainWindowToUse)
 		{
@@ -167,7 +174,7 @@ public class FancySearchGridEditor extends UiEditableGrid
 			getContentPane().setLayout(new BorderLayout());
 			UiTextArea explanation = new UiTextArea(4, 50);
 			explanation.setEditable(false);
-			explanation.setText(getLocalization().getFieldLabel("LoadingFieldValuesFromAllBulletinsExplanation"));
+			explanation.setText(mainWindowToUse.getLocalization().getFieldLabel("LoadingFieldValuesFromAllBulletinsExplanation"));
 			
 			JPanel cancelPanel = new JPanel();
 			cancelPanel.add(cancel);
@@ -183,10 +190,11 @@ public class FancySearchGridEditor extends UiEditableGrid
 		
 	}
 	
-	class LoadValuesThread extends Thread
+	static class LoadValuesThread extends Thread
 	{
-		public LoadValuesThread(UiProgressWithCancelDlg progressRetrieveDlgToUse, FieldSpec specToUse)
+		public LoadValuesThread(UiMainWindow mainWindowToUse, UiProgressWithCancelDlg progressRetrieveDlgToUse, FieldSpec specToUse)
 		{
+			mainWindow = mainWindowToUse;
 			progressMeter = progressRetrieveDlgToUse;
 			spec = specToUse;
 		}
@@ -195,7 +203,7 @@ public class FancySearchGridEditor extends UiEditableGrid
 		{
 			try
 			{
-				FieldValuesLoader loader = new FieldValuesLoader(getStore(), getLocalization());
+				FieldValuesLoader loader = new FieldValuesLoader(getStore(), mainWindow.getLocalization());
 				loadedValues = loader.loadFieldValuesFromAllBulletinRevisions(progressMeter, spec);
 			}
 			catch (Exception e)
@@ -219,6 +227,7 @@ public class FancySearchGridEditor extends UiEditableGrid
 			return mainWindow.getApp().getStore();
 		}
 
+		private UiMainWindow mainWindow;
 		private UiProgressWithCancelDlg progressMeter;
 		boolean errorOccured;
 		Exception exception;
