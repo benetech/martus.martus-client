@@ -141,7 +141,7 @@ public class FancySearchGridEditor extends UiEditableGrid
 				return;
 			}
 			UiProgressWithCancelDlg progressDlg = new LoadValuesProgressDlg(mainWindow);
-			LoadValuesThread thread = new LoadValuesThread(progressDlg, row);
+			LoadValuesThread thread = new LoadValuesThread(progressDlg, spec);
 			thread.start();
 			progressDlg.setVisible(true);
 			// NOTE: by the time we get here, the thread has terminated
@@ -180,17 +180,17 @@ public class FancySearchGridEditor extends UiEditableGrid
 	
 	class LoadValuesThread extends Thread
 	{
-		public LoadValuesThread(UiProgressWithCancelDlg progressRetrieveDlgToUse, int rowToUse)
+		public LoadValuesThread(UiProgressWithCancelDlg progressRetrieveDlgToUse, FieldSpec specToUse)
 		{
 			progressMeter = progressRetrieveDlgToUse;
-			row = rowToUse;
+			spec = specToUse;
 		}
 
 		public void run()
 		{
 			try
 			{
-				helper.getModel().memorizeFieldValuesFromAllBulletinRevisions(progressMeter, row);
+				helper.getModel().memorizeFieldValuesFromAllBulletinRevisions(progressMeter, spec);
 			}
 			catch (Exception e)
 			{
@@ -206,7 +206,7 @@ public class FancySearchGridEditor extends UiEditableGrid
 		private UiProgressWithCancelDlg progressMeter;
 		boolean errorOccured;
 		Exception exception;
-		private int row;
+		private FieldSpec spec;
 	}
 
 	

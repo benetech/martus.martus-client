@@ -130,9 +130,8 @@ public class FancySearchTableModel extends GridTableModel implements TableModelL
 		return false;
 	}
 	
-	protected void memorizeFieldValuesFromAllBulletinRevisions(UiProgressWithCancelDlg progressMeter, int rowOfField)
+	protected void memorizeFieldValuesFromAllBulletinRevisions(UiProgressWithCancelDlg progressMeter, FieldSpec fieldSpec)
 	{
-		FieldSpec fieldSpec = getSelectedFieldSpec(rowOfField);
 		MiniFieldSpec miniSpec = new MiniFieldSpec(fieldSpec);
 		HashSet choices = (HashSet)memorizedFieldValues.get(miniSpec);
 		if(choices == null)
