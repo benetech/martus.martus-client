@@ -26,24 +26,46 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.swingui.fields;
 
 import java.awt.Point;
+import java.util.HashSet;
 
 import javax.swing.JDialog;
 
-import org.martus.common.MiniLocalization;
+import org.martus.client.search.FancySearchGridEditor;
+import org.martus.client.swingui.UiMainWindow;
+import org.martus.common.fieldspec.DropDownFieldSpec;
+import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.fieldspec.PopUpTreeFieldSpec;
 
 public class SearchFieldTreeDialog extends FieldTreeDialog
 {
-	public SearchFieldTreeDialog(JDialog owner, Point location, PopUpTreeFieldSpec specToUse, MiniLocalization localization)
+	public SearchFieldTreeDialog(UiMainWindow mainWindowToUse, JDialog owner, Point location, PopUpTreeFieldSpec specToUse)
 	{
-		super(owner, location, specToUse, localization);
+		super(owner, location, specToUse, mainWindowToUse.getLocalization());
+		mainWindow = mainWindowToUse;
+		foundValues = new HashSet();
 	}
 	
-	protected boolean canSaveAndExit()
+	protected boolean canSaveAndExit(FieldSpec selectedSpec)
 	{
-		if(!super.canSaveAndExit())
+		if(!super.canSaveAndExit(selectedSpec))
 			return false;
 		
+		if(selectedSpec == null)
+			return true;
+		
+		if(!selectedSpec.getType().isDropdown())
+			return true;
+
+		DropDownFieldSpec ddSpec = (DropDownFieldSpec)selectedSpec;
+		foundValues = FancySearchGridEditor.loadFieldValuesWithProgressDialog(mainWindow, ddSpec);
 		return true;
 	}
+	
+	public HashSet getFoundValues()
+	{
+		return foundValues;
+	}
+	
+	private UiMainWindow mainWindow;
+	private HashSet foundValues;
 }

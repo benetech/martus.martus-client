@@ -26,20 +26,34 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.swingui.fields;
 
 import java.awt.Container;
+import java.util.HashSet;
 
 import javax.swing.JDialog;
 
-import org.martus.common.MiniLocalization;
+import org.martus.client.search.FancySearchTableModel;
+import org.martus.client.swingui.UiMainWindow;
 
 public class UiPopUpSearchFieldChooserEditor extends UiPopUpFieldChooserEditor
 {
-	public UiPopUpSearchFieldChooserEditor(MiniLocalization localizationToUse)
+	public UiPopUpSearchFieldChooserEditor(UiMainWindow mainWindowToUse, FancySearchTableModel modelToUse)
 	{
-		super(localizationToUse);
+		super(mainWindowToUse);
+		model = modelToUse;
 	}
 
 	protected FieldTreeDialog createFieldChooserDialog(Container topLevel)
 	{
-		return new SearchFieldTreeDialog((JDialog)topLevel, panel.getLocationOnScreen(), spec, localization);
+		dialog = new SearchFieldTreeDialog(getMainWindow(), (JDialog)topLevel, panel.getLocationOnScreen(), spec);
+		return dialog;
 	}
+	
+	void notifyListeners()
+	{
+		HashSet foundValues = dialog.getFoundValues();
+		model.setAvailableFieldValues(dialog.getSelectedSpec(), foundValues);
+		super.notifyListeners();
+	}
+	
+	SearchFieldTreeDialog dialog;
+	private FancySearchTableModel model;
 }

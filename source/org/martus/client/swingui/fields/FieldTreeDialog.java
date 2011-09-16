@@ -49,7 +49,9 @@ import org.martus.client.search.SearchFieldTreeNode;
 import org.martus.client.swingui.fields.UiPopUpFieldChooserEditor.BlankLeafRenderer;
 import org.martus.client.swingui.fields.UiPopUpFieldChooserEditor.SearchFieldTree;
 import org.martus.common.MiniLocalization;
+import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.fieldspec.PopUpTreeFieldSpec;
+import org.martus.common.fieldspec.SearchableFieldChoiceItem;
 import org.martus.swing.UiButton;
 import org.martus.swing.UiScrollPane;
 import org.martus.swing.Utilities;
@@ -94,6 +96,11 @@ public class FieldTreeDialog extends JDialog implements TreeSelectionListener
 		getRootPane().setDefaultButton(okButton);
 	}
 	
+	public PopUpTreeFieldSpec getSpec()
+	{
+		return spec;
+	}
+	
 	public void selectCode(String code)
 	{
 		tree.selectNodeContainingItem(spec.findCode(code));
@@ -104,15 +111,34 @@ public class FieldTreeDialog extends JDialog implements TreeSelectionListener
 		return selectedNode;
 	}
 	
+	public FieldSpec getSelectedSpec()
+	{
+		if(getSelectionIfAny() == null)
+			return null;
+		
+		SearchableFieldChoiceItem selectedChoiceItem = (SearchableFieldChoiceItem)getSelectionIfAny().getUserObject();
+		if(selectedChoiceItem == null)
+			return null;
+		
+		return selectedChoiceItem.getSpec();
+	}
+	
 	protected void saveAndExitIfValidSelection()
 	{
-		if(!canSaveAndExit())
+		if(!isValidSelection())
+			return;
+		if(!canSaveAndExit(getSelectedSpec()))
 			return;
 		selectedNode = getSelectionIfAny();
 		dispose();
 	}
 
-	protected boolean canSaveAndExit()
+	protected boolean canSaveAndExit(FieldSpec selectedSpec)
+	{
+		return true;
+	}
+
+	protected boolean isValidSelection()
 	{
 		return isSelectionValid();
 	}
@@ -137,7 +163,7 @@ public class FieldTreeDialog extends JDialog implements TreeSelectionListener
 	
 	public void valueChanged(TreeSelectionEvent e)
 	{
-		okAction.setEnabled(canSaveAndExit());
+		okAction.setEnabled(isValidSelection());
 		updateScrollerPosition();
 	}
 

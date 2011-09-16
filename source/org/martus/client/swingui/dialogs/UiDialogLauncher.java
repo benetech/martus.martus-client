@@ -29,12 +29,20 @@ import java.util.HashMap;
 
 import javax.swing.JFrame;
 
+import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.grids.GridDateRangeCellEditor;
 import org.martus.clientside.UiLocalization;
 import org.martus.clientside.UiUtilities;
 
 public class UiDialogLauncher
 {
+	public UiDialogLauncher(UiMainWindow mainWindowToUse, JFrame frameToUse)
+	{
+		super();
+		mainWindow = mainWindowToUse;
+		frame = frameToUse;
+	}
+	
 	public UiDialogLauncher(JFrame frameToUse, UiLocalization localizationToUse)
 	{
 		super();
@@ -42,11 +50,16 @@ public class UiDialogLauncher
 		localization = localizationToUse;
 	}
 	
+	public UiMainWindow getMainWindow()
+	{
+		return mainWindow;
+	}
+
 	public boolean ShowConfirmDialog(String baseTag)
 	{
 		if(frame == null)
 			return true;
-		return UiUtilities.confirmDlg(localization, frame, baseTag);
+		return UiUtilities.confirmDlg(GetLocalization(), frame, baseTag);
 	}
 
 	public boolean showConfirmDlg(String baseTag, HashMap map)
@@ -56,7 +69,7 @@ public class UiDialogLauncher
 
 	public void ShowNotifyDialog(String baseTag)
 	{
-		UiUtilities.notifyDlg(localization, frame, baseTag);
+		UiUtilities.notifyDlg(GetLocalization(), frame, baseTag);
 	}
 
 	public void messageDlg(GridDateRangeCellEditor gridDateRangeCellEditor,
@@ -67,9 +80,12 @@ public class UiDialogLauncher
 
 	public UiLocalization GetLocalization()
 	{
-		return localization;
+		if(localization != null)
+			return localization;
+		return getMainWindow().getLocalization();
 	}
 	
-	UiLocalization localization;
-	JFrame frame;
+	private UiMainWindow mainWindow;
+	private JFrame frame;
+	private UiLocalization localization;
 }

@@ -93,7 +93,7 @@ public class UiFancySearchDlg extends JDialog
 
 		UiButton cancel = new UiButton(getLocalization().getButtonLabel("cancel"));
 		cancel.addActionListener(new CancelButtonHandler());
-		UiDialogLauncher dlgLauncher = new UiDialogLauncher(mainWindow.getCurrentActiveFrame(), getLocalization());
+		UiDialogLauncher dlgLauncher = new UiDialogLauncher(mainWindow, mainWindow.getCurrentActiveFrame());
 		grid = FancySearchGridEditor.create(mainWindow, dlgLauncher);
 		clearGridIfAnyProblems();
 

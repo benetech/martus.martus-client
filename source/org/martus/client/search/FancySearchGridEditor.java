@@ -84,6 +84,11 @@ public class FancySearchGridEditor extends UiEditableGrid
 		updateLoadValuesButtonStatus();
 	}
 	
+	public UiMainWindow getMainWindow()
+	{
+		return mainWindow;
+	}
+	
 	class SelectionChangeHandler implements ListSelectionListener
 	{
 		public void valueChanged(ListSelectionEvent e)
@@ -109,9 +114,14 @@ public class FancySearchGridEditor extends UiEditableGrid
 
 	protected GridTable createGridTable(UiDialogLauncher dlgLauncher, UiFieldContext context)
 	{
-		return new SearchGridTable(model, dlgLauncher, context);
+		return new SearchGridTable(getMainWindow(), getFancySearchTableModel(), dlgLauncher, context);
 	}
 	
+	private FancySearchTableModel getFancySearchTableModel()
+	{
+		return (FancySearchTableModel) getGridTableModel();
+	}
+
 	protected Vector createButtons()
 	{
 		Vector buttons = super.createButtons();
@@ -152,7 +162,7 @@ public class FancySearchGridEditor extends UiEditableGrid
 		UiDialogLauncher dlgLauncher;
 	}
 	
-	static HashSet loadFieldValuesWithProgressDialog(UiMainWindow mainWindow, FieldSpec spec)
+	public static HashSet loadFieldValuesWithProgressDialog(UiMainWindow mainWindow, FieldSpec spec)
 	{
 		UiProgressWithCancelDlg progressDlg = new LoadValuesProgressDlg(mainWindow);
 		LoadValuesThread thread = new LoadValuesThread(mainWindow, progressDlg, spec);

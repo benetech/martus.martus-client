@@ -110,7 +110,10 @@ public class FancySearchTableModel extends GridTableModel implements TableModelL
 	public void setAvailableFieldValues(FieldSpec spec, HashSet values)
 	{
 		MiniFieldSpec miniSpec = new MiniFieldSpec(spec);
-		memorizedFieldValues.put(miniSpec, values);
+		if(values != null && values.size() > 0)
+			memorizedFieldValues.put(miniSpec, values);
+		else
+			memorizedFieldValues.remove(miniSpec);
 	}
 
 	public boolean canUseMemorizedPossibleValues(FieldSpec selectedFieldSpec)

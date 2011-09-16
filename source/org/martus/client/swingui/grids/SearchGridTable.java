@@ -31,6 +31,8 @@ import java.util.HashMap;
 import javax.swing.table.TableCellEditor;
 import javax.swing.table.TableCellRenderer;
 
+import org.martus.client.search.FancySearchTableModel;
+import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.dialogs.UiDialogLauncher;
 import org.martus.client.swingui.fields.UiFieldContext;
 import org.martus.clientside.UiLocalization;
@@ -50,10 +52,14 @@ import org.martus.common.fieldspec.FieldTypePopUpTree;
 
 public class SearchGridTable extends GridTable
 {
-	public SearchGridTable(GridTableModel model,
-			UiDialogLauncher dlgLauncherToUse, UiFieldContext context)
+	public SearchGridTable(UiMainWindow mainWindowToUse, FancySearchTableModel model, UiDialogLauncher dlgLauncherToUse, UiFieldContext context)
 	{
 		super(model, dlgLauncherToUse, context);
+	}
+	
+	public FancySearchTableModel getFancySearchTableModel()
+	{
+		return (FancySearchTableModel) getGridTableModel();
 	}
 
 	protected void createRenderers()
@@ -80,9 +86,9 @@ public class SearchGridTable extends GridTable
 		map.put(new FieldTypeMultiline(), new GridNormalCellEditor(localization));
 		map.put(new FieldTypeAnyField(), new GridNormalCellEditor(localization));
 		map.put(new FieldTypeGrid(), new GridNormalCellEditor(localization));
-		map.put(new FieldTypePopUpTree(), new SearchGridPopUpTreeCellEditor(localization));
+		map.put(new FieldTypePopUpTree(), new SearchGridPopUpTreeCellEditor(dlgLauncher.getMainWindow(), getFancySearchTableModel()));
 	}
-
+	
 	public Collection getAllEditors()
 	{
 		return editors.values();

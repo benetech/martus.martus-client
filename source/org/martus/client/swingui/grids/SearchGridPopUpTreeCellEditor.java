@@ -25,13 +25,14 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.grids;
 
+import org.martus.client.search.FancySearchTableModel;
+import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.fields.UiPopUpSearchFieldChooserEditor;
-import org.martus.common.MiniLocalization;
 
 public class SearchGridPopUpTreeCellEditor extends GridPopUpTreeCellEditor
 {
-	SearchGridPopUpTreeCellEditor(MiniLocalization localization)
+	SearchGridPopUpTreeCellEditor(UiMainWindow mainWindowToUse, FancySearchTableModel modelToUse)
 	{
-		super(new UiPopUpSearchFieldChooserEditor(localization));
+		super(new UiPopUpSearchFieldChooserEditor(mainWindowToUse, modelToUse));
 	}
 }

@@ -68,7 +68,7 @@ public class TestFancySearchHelper extends TestCaseEnhanced
 		tempDir = createTempDirectory();
 		localization = new MartusLocalization(tempDir, new String[0]);
 		localization.setCurrentLanguageCode(MiniLocalization.ENGLISH);
-		UiDialogLauncher nullLauncher = new UiDialogLauncher(null,localization);
+		UiDialogLauncher nullLauncher = new UiDialogLauncher(null, localization);
 		helper = new FancySearchHelper(getStore(), nullLauncher);
 		noReusableChoices = PoolOfReusableChoicesLists.EMPTY_POOL;
 		

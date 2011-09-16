@@ -43,7 +43,7 @@ import javax.swing.tree.DefaultTreeCellRenderer;
 import javax.swing.tree.TreeModel;
 import javax.swing.tree.TreePath;
 
-import org.martus.common.MiniLocalization;
+import org.martus.client.swingui.UiMainWindow;
 import org.martus.common.fieldspec.MiniFieldSpec;
 import org.martus.common.fieldspec.PopUpTreeFieldSpec;
 import org.martus.common.fieldspec.SearchFieldTreeModel;
@@ -54,20 +54,25 @@ import org.martus.swing.UiLabel;
 
 public class UiPopUpFieldChooserEditor extends UiField implements ActionListener
 {
-	public UiPopUpFieldChooserEditor(MiniLocalization localizationToUse)
+	public UiPopUpFieldChooserEditor(UiMainWindow mainWindowToUse)
 	{
-		super(localizationToUse);
-		localization = localizationToUse;
+		super(mainWindowToUse.getLocalization());
+		mainWindow = mainWindowToUse;
 		
 		listeners = new Vector();
 		
 		panel = new JPanel(new BorderLayout());
 		label = new UiLabel();
-		button = new UiButton(localization.getButtonLabel("PopUpTreeChoose"));
+		button = new UiButton(mainWindow.getLocalization().getButtonLabel("PopUpTreeChoose"));
 		button.addActionListener(this);
 		
 		panel.add(label, BorderLayout.CENTER);
 		panel.add(button, BorderLayout.AFTER_LINE_ENDS);
+	}
+	
+	public UiMainWindow getMainWindow()
+	{
+		return mainWindow;
 	}
 
 	public JComponent getComponent()
@@ -146,7 +151,7 @@ public class UiPopUpFieldChooserEditor extends UiField implements ActionListener
 
 	protected FieldTreeDialog createFieldChooserDialog(Container topLevel)
 	{
-		return new FieldTreeDialog((JDialog)topLevel, panel.getLocationOnScreen(), spec, localization);
+		return new FieldTreeDialog((JDialog)topLevel, panel.getLocationOnScreen(), spec, mainWindow.getLocalization());
 	}
 	
 	void notifyListeners()
@@ -217,7 +222,7 @@ public class UiPopUpFieldChooserEditor extends UiField implements ActionListener
 		}
 	}
 
-	MiniLocalization localization;
+	UiMainWindow mainWindow;
 	PopUpTreeFieldSpec spec;
 	JPanel panel;
 	UiLabel label;
