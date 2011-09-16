@@ -30,7 +30,7 @@ import java.awt.Component;
 import javax.swing.JTable;
 
 import org.martus.client.swingui.fields.UiField;
-import org.martus.client.swingui.fields.UiPopUpTreeEditor;
+import org.martus.client.swingui.fields.UiPopUpFieldChooserEditor;
 import org.martus.common.MiniLocalization;
 import org.martus.common.fieldspec.PopUpTreeFieldSpec;
 
@@ -38,7 +38,7 @@ public class GridPopUpTreeCellEditor extends GridCellEditorAndRenderer
 {
 	GridPopUpTreeCellEditor(MiniLocalization localization)
 	{
-		super(new UiPopUpTreeEditor(localization));
+		super(new UiPopUpFieldChooserEditor(localization));
 	}
 	
 	GridPopUpTreeCellEditor(UiField field)
@@ -46,9 +46,9 @@ public class GridPopUpTreeCellEditor extends GridCellEditorAndRenderer
 		super(field);
 	}
 	
-	public UiPopUpTreeEditor getPopUpTreeEditor()
+	public UiPopUpFieldChooserEditor getPopUpTreeEditor()
 	{
-		return (UiPopUpTreeEditor)uiField;
+		return (UiPopUpFieldChooserEditor)uiField;
 	}
 	
 	public void setFieldSpec(JTable tableToUse, int row, int column)
@@ -72,7 +72,7 @@ public class GridPopUpTreeCellEditor extends GridCellEditorAndRenderer
 	
 	public void spaceWasPressed()
 	{
-		((UiPopUpTreeEditor)getUiField()).simulateButtonPress();
+		((UiPopUpFieldChooserEditor)getUiField()).simulateButtonPress();
 	}
 	
 

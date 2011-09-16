@@ -65,9 +65,9 @@ import org.martus.swing.UiScrollPane;
 import org.martus.swing.Utilities;
 
 
-public class UiPopUpTreeEditor extends UiField implements ActionListener
+public class UiPopUpFieldChooserEditor extends UiField implements ActionListener
 {
-	public UiPopUpTreeEditor(MiniLocalization localizationToUse)
+	public UiPopUpFieldChooserEditor(MiniLocalization localizationToUse)
 	{
 		super(localizationToUse);
 		localization = localizationToUse;

@@ -45,7 +45,7 @@ import org.martus.client.swingui.dialogs.UiDialogLauncher;
 import org.martus.client.swingui.dialogs.UiProgressWithCancelDlg;
 import org.martus.client.swingui.fields.UiEditableGrid;
 import org.martus.client.swingui.fields.UiFieldContext;
-import org.martus.client.swingui.fields.UiPopUpTreeEditor;
+import org.martus.client.swingui.fields.UiPopUpFieldChooserEditor;
 import org.martus.client.swingui.grids.GridPopUpTreeCellEditor;
 import org.martus.client.swingui.grids.GridTable;
 import org.martus.client.swingui.grids.SearchGridTable;
@@ -265,7 +265,7 @@ public class FancySearchGridEditor extends UiEditableGrid
 
 	private void addListenerSoFieldChangeCanTriggerRepaintOfValueColumn()
 	{
-		UiPopUpTreeEditor fieldChoiceEditor = getFieldColumnEditor().getPopUpTreeEditor();
+		UiPopUpFieldChooserEditor fieldChoiceEditor = getFieldColumnEditor().getPopUpTreeEditor();
 		fieldChoiceEditor.addActionListener(new PopUpActionHandler());
 	}
 

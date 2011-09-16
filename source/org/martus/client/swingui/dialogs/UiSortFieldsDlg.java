@@ -37,7 +37,7 @@ import javax.swing.JDialog;
 
 import org.martus.client.search.SortFieldChooserSpecBuilder;
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.client.swingui.fields.UiPopUpTreeEditor;
+import org.martus.client.swingui.fields.UiPopUpFieldChooserEditor;
 import org.martus.clientside.UiLocalization;
 import org.martus.common.MiniLocalization;
 import org.martus.common.fieldspec.ChoiceItem;
@@ -73,7 +73,7 @@ public class UiSortFieldsDlg extends JDialog implements ActionListener
 
 		UiVBox multiSortBox = new UiVBox();
 		
-		sortChooser = new UiPopUpTreeEditor[MAX_SORT_LEVELS];
+		sortChooser = new UiPopUpFieldChooserEditor[MAX_SORT_LEVELS];
 		for(int i = 0; i < sortChooser.length; ++i)
 		{
 			sortChooser[i] = createSortChooser(mainWindow, spec);
@@ -131,10 +131,10 @@ public class UiSortFieldsDlg extends JDialog implements ActionListener
 		return new ChoiceItem(tag, localization.getFieldLabel(tag));
 	}
 
-	private UiPopUpTreeEditor createSortChooser(UiMainWindow mainWindow, PopUpTreeFieldSpec spec)
+	private UiPopUpFieldChooserEditor createSortChooser(UiMainWindow mainWindow, PopUpTreeFieldSpec spec)
 	{
 		MiniLocalization localization = mainWindow.getLocalization();
-		UiPopUpTreeEditor chooser = new UiPopUpTreeEditor(localization);
+		UiPopUpFieldChooserEditor chooser = new UiPopUpFieldChooserEditor(localization);
 		chooser.setSpec(spec);
 		return chooser;
 	}
@@ -184,7 +184,7 @@ public class UiSortFieldsDlg extends JDialog implements ActionListener
 		return hitOk;
 	}
 
-	UiPopUpTreeEditor[] sortChooser;
+	UiPopUpFieldChooserEditor[] sortChooser;
 	boolean hitOk;
 	UiButton okButton;
 	UiComboBox breakChoice;
