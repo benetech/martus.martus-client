@@ -38,4 +38,12 @@ public class SearchFieldTreeDialog extends FieldTreeDialog
 	{
 		super(owner, location, specToUse, localization);
 	}
+	
+	protected boolean canSaveAndExit()
+	{
+		if(!super.canSaveAndExit())
+			return false;
+		
+		return true;
+	}
 }
