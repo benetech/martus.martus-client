@@ -131,7 +131,8 @@ public class UiPopUpFieldChooserEditor extends UiField implements ActionListener
 
 	private void doPopUp()
 	{
-		FieldTreeDialog dlg = createFieldChooserDialog();
+		Container topLevel = panel.getTopLevelAncestor();
+		FieldTreeDialog dlg = createFieldChooserDialog(topLevel);
 		dlg.selectCode(getText());
 		dlg.setVisible(true);
 		DefaultMutableTreeNode selectedNode = dlg.getSelectedNode();
@@ -143,9 +144,8 @@ public class UiPopUpFieldChooserEditor extends UiField implements ActionListener
 		notifyListeners();
 	}
 
-	private FieldTreeDialog createFieldChooserDialog()
+	private FieldTreeDialog createFieldChooserDialog(Container topLevel)
 	{
-		Container topLevel = panel.getTopLevelAncestor();
 		return new FieldTreeDialog((JDialog)topLevel, panel.getLocationOnScreen(), spec, localization);
 	}
 	
