@@ -26,7 +26,7 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.swingui.fields;
 
 import java.awt.Container;
-import java.util.HashSet;
+import java.util.Vector;
 
 import javax.swing.JDialog;
 
@@ -49,7 +49,7 @@ public class UiPopUpSearchFieldChooserEditor extends UiPopUpFieldChooserEditor
 	
 	void notifyListeners()
 	{
-		HashSet foundValues = dialog.getFoundValues();
+		Vector foundValues = dialog.getFoundValues();
 		model.setAvailableFieldValues(dialog.getSelectedSpec(), foundValues);
 		super.notifyListeners();
 	}

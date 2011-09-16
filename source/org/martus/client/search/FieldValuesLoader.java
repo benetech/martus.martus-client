@@ -74,7 +74,8 @@ class FieldValuesLoader
 			{
 				if(field.isGridColumnField())
 				{
-					choices.addAll(getGridColumnChoices((MartusSearchableGridColumnField)field));
+					Collection gridColumnChoices = getGridColumnChoices((MartusSearchableGridColumnField)field);
+					choices.addAll(gridColumnChoices);
 				}
 				else
 				{

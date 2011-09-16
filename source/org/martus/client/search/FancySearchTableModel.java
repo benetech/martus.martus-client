@@ -27,7 +27,6 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.search;
 
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Vector;
 
 import javax.swing.event.TableModelEvent;
@@ -91,10 +90,11 @@ public class FancySearchTableModel extends GridTableModel implements TableModelL
 		if(canUseMemorizedPossibleValues(selectedFieldSpec))
 		{
 			MiniFieldSpec miniSpec = new MiniFieldSpec(selectedFieldSpec);
-			HashSet choices = (HashSet) memorizedFieldValues.get(miniSpec);
+			Vector choices = (Vector) memorizedFieldValues.get(miniSpec);
 			if(choices != null)
 			{
-				DropDownFieldSpec spec = new DropDownFieldSpec((ChoiceItem[])choices.toArray(new ChoiceItem[0]));
+				ChoiceItem[] choiceItems = (ChoiceItem[])choices.toArray(new ChoiceItem[0]);
+				DropDownFieldSpec spec = new DropDownFieldSpec(choiceItems);
 				return spec;
 			}
 		}
@@ -107,7 +107,7 @@ public class FancySearchTableModel extends GridTableModel implements TableModelL
 		return memorizedFieldValues.containsKey(miniSpec);
 	}
 	
-	public void setAvailableFieldValues(FieldSpec spec, HashSet values)
+	public void setAvailableFieldValues(FieldSpec spec, Vector values)
 	{
 		MiniFieldSpec miniSpec = new MiniFieldSpec(spec);
 		if(values != null && values.size() > 0)

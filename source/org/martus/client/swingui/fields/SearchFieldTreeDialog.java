@@ -26,7 +26,7 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.swingui.fields;
 
 import java.awt.Point;
-import java.util.HashSet;
+import java.util.Vector;
 
 import javax.swing.JDialog;
 
@@ -42,11 +42,12 @@ public class SearchFieldTreeDialog extends FieldTreeDialog
 	{
 		super(owner, location, specToUse, mainWindowToUse.getLocalization());
 		mainWindow = mainWindowToUse;
-		foundValues = new HashSet();
+		foundValues = new Vector();
 	}
 	
 	protected boolean canSaveAndExit(FieldSpec selectedSpec)
 	{
+		foundValues = new Vector();
 		if(!super.canSaveAndExit(selectedSpec))
 			return false;
 		
@@ -64,11 +65,11 @@ public class SearchFieldTreeDialog extends FieldTreeDialog
 		return true;
 	}
 	
-	public HashSet getFoundValues()
+	public Vector getFoundValues()
 	{
 		return foundValues;
 	}
 	
 	private UiMainWindow mainWindow;
-	private HashSet foundValues;
+	private Vector foundValues;
 }

@@ -30,6 +30,7 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Vector;
 
@@ -50,6 +51,7 @@ import org.martus.client.swingui.grids.GridPopUpTreeCellEditor;
 import org.martus.client.swingui.grids.GridTable;
 import org.martus.client.swingui.grids.SearchGridTable;
 import org.martus.common.FieldSpecCollection;
+import org.martus.common.fieldspec.ChoiceItem;
 import org.martus.common.fieldspec.FieldSpec;
 import org.martus.swing.UiButton;
 import org.martus.swing.UiTextArea;
@@ -153,7 +155,7 @@ public class FancySearchGridEditor extends UiEditableGrid
 				dlgLauncher.ShowNotifyDialog("NonStringFieldRowSelected");
 				return;
 			}
-			HashSet loadedValues = loadFieldValuesWithProgressDialog(mainWindow, spec);
+			Vector loadedValues = loadFieldValuesWithProgressDialog(mainWindow, spec);
 			helper.getModel().setAvailableFieldValues(spec, loadedValues);
 			helper.getModel().fireTableDataChanged();
 			updateLoadValuesButtonStatus();
@@ -162,7 +164,7 @@ public class FancySearchGridEditor extends UiEditableGrid
 		UiDialogLauncher dlgLauncher;
 	}
 	
-	public static HashSet loadFieldValuesWithProgressDialog(UiMainWindow mainWindow, FieldSpec spec)
+	public static Vector loadFieldValuesWithProgressDialog(UiMainWindow mainWindow, FieldSpec spec)
 	{
 		UiProgressWithCancelDlg progressDlg = new LoadValuesProgressDlg(mainWindow);
 		LoadValuesThread thread = new LoadValuesThread(mainWindow, progressDlg, spec);
@@ -172,7 +174,28 @@ public class FancySearchGridEditor extends UiEditableGrid
 		if(thread.errorOccured)
 			throw new RuntimeException(thread.exception);
 		HashSet loadedValues = thread.getLoadedValues();
-		return loadedValues;
+		Vector sortedValues = new Vector(loadedValues);
+		Collections.sort(sortedValues, new SaneCollator(mainWindow.getLocalization().getCurrentLanguageCode()));
+		boolean needToInsertBlank = true;
+		if(sortedValues.size() > 0)
+		{
+			ChoiceItem firstChoice = (ChoiceItem) sortedValues.get(0);
+			String code = firstChoice.getCode();
+			// NOTE: I saw "" as an empty code that otherwise seems to work
+			final String UNKNOWN_ALTERNATIVE_EMPTY_CODE = "\"\"";
+			boolean isCodeEmpty = code.equals("");
+			boolean isCodeAlternateEmpty = code.equals(UNKNOWN_ALTERNATIVE_EMPTY_CODE);
+			if(isCodeEmpty || isCodeAlternateEmpty)
+				needToInsertBlank = false;
+			else
+				needToInsertBlank = true;
+		}
+		if(needToInsertBlank)
+		{
+			ChoiceItem blank = new ChoiceItem("", "");
+			sortedValues.insertElementAt(blank, 0);
+		}
+		return sortedValues;
 	}		
 	
 	static class LoadValuesProgressDlg extends UiProgressWithCancelDlg
