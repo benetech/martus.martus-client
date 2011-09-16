@@ -146,8 +146,7 @@ public class UiPopUpFieldChooserEditor extends UiField implements ActionListener
 	private FieldTreeDialog createFieldChooserDialog()
 	{
 		Container topLevel = panel.getTopLevelAncestor();
-		FieldTreeDialog dlg = new FieldTreeDialog((JDialog)topLevel, panel.getLocationOnScreen(), spec, localization);
-		return dlg;
+		return new FieldTreeDialog((JDialog)topLevel, panel.getLocationOnScreen(), spec, localization);
 	}
 	
 	void notifyListeners()
