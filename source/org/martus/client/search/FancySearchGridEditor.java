@@ -30,6 +30,7 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.HashSet;
 import java.util.Vector;
 
 import javax.swing.JPanel;
@@ -80,6 +81,7 @@ public class FancySearchGridEditor extends UiEditableGrid
 		setSearchForColumnWideEnoughForDates();
 		setGridTableSize();
 		addListenerSoFieldChangeCanTriggerRepaintOfValueColumn();
+		updateLoadValuesButtonStatus();
 	}
 	
 	class SelectionChangeHandler implements ListSelectionListener
@@ -93,14 +95,15 @@ public class FancySearchGridEditor extends UiEditableGrid
 
 	protected void updateLoadValuesButtonStatus()
 	{
+		boolean canLoadValues = false;
 		int row = getTable().getSelectedRow();
-		if(row < 0 || row >= getTable().getRowCount())
-			return;
-		
-		FieldSpec spec = helper.getModel().getSelectedFieldSpec(row);
-		boolean canLoadValues = helper.getModel().canUseMemorizedPossibleValues(spec);
-		if(helper.getModel().hasMemorizedPossibleValues(spec))
-			canLoadValues = false;
+		if(row >= 0 && row < getTable().getRowCount())
+		{
+			FieldSpec spec = helper.getModel().getSelectedFieldSpec(row);
+			canLoadValues = helper.getModel().canUseMemorizedPossibleValues(spec);
+			if(helper.getModel().hasMemorizedPossibleValues(spec))
+				canLoadValues = false;
+		}
 		loadValuesButton.setEnabled(canLoadValues);
 	}
 
@@ -147,8 +150,10 @@ public class FancySearchGridEditor extends UiEditableGrid
 			// NOTE: by the time we get here, the thread has terminated
 			if(thread.errorOccured)
 				throw new RuntimeException(thread.exception);
-			updateLoadValuesButtonStatus();
+			HashSet loadedValues = thread.getLoadedValues();
+			helper.getModel().setAvailableFieldValues(spec, loadedValues);
 			helper.getModel().fireTableDataChanged();
+			updateLoadValuesButtonStatus();
 		}		
 		UiDialogLauncher dlgLauncher;
 	}
@@ -190,7 +195,8 @@ public class FancySearchGridEditor extends UiEditableGrid
 		{
 			try
 			{
-				helper.getModel().memorizeFieldValuesFromAllBulletinRevisions(progressMeter, spec);
+				FieldValuesLoader loader = new FieldValuesLoader(getStore(), getLocalization());
+				loadedValues = loader.loadFieldValuesFromAllBulletinRevisions(progressMeter, spec);
 			}
 			catch (Exception e)
 			{
@@ -202,11 +208,22 @@ public class FancySearchGridEditor extends UiEditableGrid
 				progressMeter.finished();
 			}
 		}
+		
+		public HashSet getLoadedValues()
+		{
+			return loadedValues;
+		}
+
+		private ClientBulletinStore getStore()
+		{
+			return mainWindow.getApp().getStore();
+		}
 
 		private UiProgressWithCancelDlg progressMeter;
 		boolean errorOccured;
 		Exception exception;
 		private FieldSpec spec;
+		private HashSet loadedValues;
 	}
 
 	

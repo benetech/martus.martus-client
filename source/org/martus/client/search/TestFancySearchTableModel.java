@@ -73,7 +73,7 @@ public class TestFancySearchTableModel extends TestCaseEnhanced
 		UiDialogLauncher nullLauncher = new UiDialogLauncher(null, localization);
 		FancySearchHelper helper = new FancySearchHelper(store, nullLauncher);
 		GridFieldSpec gridSpec = helper.getGridSpec(store);
-		FancySearchTableModel model = new FancySearchTableModel(store, gridSpec, PoolOfReusableChoicesLists.EMPTY_POOL, localization);
+		FancySearchTableModel model = new FancySearchTableModel(gridSpec, PoolOfReusableChoicesLists.EMPTY_POOL, localization);
 		model.addEmptyRow();
 		assertEquals(new FieldTypeNormal(), model.getColumnType(FancySearchTableModel.valueColumn));
 
@@ -118,10 +118,9 @@ public class TestFancySearchTableModel extends TestCaseEnhanced
 	
 	public void testGetCurrentOpColumnSpec() throws Exception
 	{
-		MockMartusApp app = MockMartusApp.create();
 		MartusLocalization localization = new MartusLocalization(null, new String[0]);
 		GridFieldSpec gridSpec = new GridFieldSpec();
-		FancySearchTableModel model = new FancySearchTableModel(app.getStore(), gridSpec, PoolOfReusableChoicesLists.EMPTY_POOL, localization);
+		FancySearchTableModel model = new FancySearchTableModel(gridSpec, PoolOfReusableChoicesLists.EMPTY_POOL, localization);
 		DropDownFieldSpec normalSpec = model.getCurrentOpColumnSpec(new FieldTypeNormal());
 		assertEquals("not all ops available for normal?", 7, normalSpec.getCount());
 		DropDownFieldSpec multilineSpec = model.getCurrentOpColumnSpec(new FieldTypeMultiline());

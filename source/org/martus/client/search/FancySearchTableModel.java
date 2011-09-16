@@ -26,7 +26,6 @@ Boston, MA 02111-1307, USA.
 
 package org.martus.client.search;
 
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Vector;
@@ -34,15 +33,9 @@ import java.util.Vector;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 
-import org.martus.client.bulletinstore.ClientBulletinStore;
-import org.martus.client.core.SafeReadableBulletin;
-import org.martus.client.swingui.dialogs.UiProgressWithCancelDlg;
 import org.martus.client.swingui.grids.GridTableModel;
 import org.martus.common.MiniLocalization;
 import org.martus.common.PoolOfReusableChoicesLists;
-import org.martus.common.bulletin.Bulletin;
-import org.martus.common.field.MartusField;
-import org.martus.common.field.MartusSearchableGridColumnField;
 import org.martus.common.fieldspec.ChoiceItem;
 import org.martus.common.fieldspec.DropDownFieldSpec;
 import org.martus.common.fieldspec.FieldSpec;
@@ -50,15 +43,13 @@ import org.martus.common.fieldspec.FieldType;
 import org.martus.common.fieldspec.GridFieldSpec;
 import org.martus.common.fieldspec.MiniFieldSpec;
 import org.martus.common.fieldspec.PopUpTreeFieldSpec;
-import org.martus.common.packet.UniversalId;
 
 public class FancySearchTableModel extends GridTableModel implements TableModelListener
 {
 
-	public FancySearchTableModel(ClientBulletinStore storeToUse, GridFieldSpec fieldSpecToUse, PoolOfReusableChoicesLists reusableChoicesList, MiniLocalization localizationToUse)
+	public FancySearchTableModel(GridFieldSpec fieldSpecToUse, PoolOfReusableChoicesLists reusableChoicesList, MiniLocalization localizationToUse)
 	{
 		super(fieldSpecToUse, reusableChoicesList);
-		store = storeToUse;
 		localization = localizationToUse;
 		addTableModelListener(this);
 		memorizedFieldValues = new HashMap();
@@ -115,6 +106,12 @@ public class FancySearchTableModel extends GridTableModel implements TableModelL
 		MiniFieldSpec miniSpec = new MiniFieldSpec(selectedFieldSpec);
 		return memorizedFieldValues.containsKey(miniSpec);
 	}
+	
+	public void setAvailableFieldValues(FieldSpec spec, HashSet values)
+	{
+		MiniFieldSpec miniSpec = new MiniFieldSpec(spec);
+		memorizedFieldValues.put(miniSpec, values);
+	}
 
 	public boolean canUseMemorizedPossibleValues(FieldSpec selectedFieldSpec)
 	{
@@ -130,63 +127,6 @@ public class FancySearchTableModel extends GridTableModel implements TableModelL
 		return false;
 	}
 	
-	protected void memorizeFieldValuesFromAllBulletinRevisions(UiProgressWithCancelDlg progressMeter, FieldSpec fieldSpec)
-	{
-		MiniFieldSpec miniSpec = new MiniFieldSpec(fieldSpec);
-		HashSet choices = (HashSet)memorizedFieldValues.get(miniSpec);
-		if(choices == null)
-		{
-			choices = getFieldValueFromAllBulletinRevisions(progressMeter, miniSpec);
-			memorizedFieldValues.put(miniSpec, choices);
-		}
-		progressMeter.finished();
-	}
-
-	private HashSet getFieldValueFromAllBulletinRevisions(UiProgressWithCancelDlg progressMeter, MiniFieldSpec miniSpec)
-	{
-		HashSet choices = new HashSet();
-		Vector allUids = store.getUidsOfAllBulletinRevisions();
-		for(int i = 0; i < allUids.size(); ++i)
-		{
-			progressMeter.updateProgressMeter(i, allUids.size());
-			if(progressMeter.shouldExit())
-				return null;
-
-			Bulletin revision = store.getBulletinRevision((UniversalId) allUids.get(i));
-			SafeReadableBulletin bulletin = new SafeReadableBulletin(revision, localization);
-			MartusField field = bulletin.getPossiblyNestedField(miniSpec);
-			if(field != null)
-			{
-				if(field.isGridColumnField())
-				{
-					choices.addAll(getGridColumnChoices((MartusSearchableGridColumnField)field));
-				}
-				else
-				{
-					String value = field.getData();
-					choices.add(createChoiceItem(value));
-				}
-			}
-		}
-		return choices;
-	}
-
-	private ChoiceItem createChoiceItem(String value)
-	{
-		return new ChoiceItem("\"" + value + "\"", value);
-	}
-	
-	private Collection getGridColumnChoices(MartusSearchableGridColumnField field)
-	{
-		HashSet choices = new HashSet();
-		for(int row = 0; row < field.getRowCount(); ++row)
-		{
-			String value = field.getData(row);
-			choices.add(createChoiceItem(value));
-		}
-		return choices;
-	}
-
 	private static Vector getCompareChoices()
 	{
 		Vector opChoiceVector = new Vector();
@@ -277,7 +217,6 @@ public class FancySearchTableModel extends GridTableModel implements TableModelL
 	public static int valueColumn = 3;
 	
 	private MiniLocalization localization;
-	private ClientBulletinStore store;
 	private HashMap memorizedFieldValues;
 }
 
