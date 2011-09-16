@@ -55,15 +55,9 @@ import org.martus.swing.UiButton;
 import org.martus.swing.UiScrollPane;
 import org.martus.swing.Utilities;
 
-class FieldTreeDialog extends JDialog implements TreeSelectionListener
+public class FieldTreeDialog extends JDialog implements TreeSelectionListener
 {
-	static public FieldTreeDialog create(JComponent parent, PopUpTreeFieldSpec spec, MiniLocalization localization)
-	{
-		Container topLevel = parent.getTopLevelAncestor();
-		return new FieldTreeDialog((JDialog)topLevel, parent.getLocationOnScreen(), spec, localization);
-	}
-	
-	private FieldTreeDialog(JDialog owner, Point location, PopUpTreeFieldSpec specToUse, MiniLocalization localization)
+	public FieldTreeDialog(JDialog owner, Point location, PopUpTreeFieldSpec specToUse, MiniLocalization localization)
 	{
 		super(owner);
 		spec = specToUse;

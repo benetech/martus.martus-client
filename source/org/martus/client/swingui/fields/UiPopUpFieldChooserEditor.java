@@ -27,6 +27,7 @@ package org.martus.client.swingui.fields;
 
 import java.awt.BorderLayout;
 import java.awt.Component;
+import java.awt.Container;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -34,6 +35,7 @@ import java.util.Vector;
 
 import javax.swing.Icon;
 import javax.swing.JComponent;
+import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.JTree;
 import javax.swing.tree.DefaultMutableTreeNode;
@@ -143,7 +145,8 @@ public class UiPopUpFieldChooserEditor extends UiField implements ActionListener
 
 	private FieldTreeDialog createFieldChooserDialog()
 	{
-		FieldTreeDialog dlg = FieldTreeDialog.create(panel, spec, localization);
+		Container topLevel = panel.getTopLevelAncestor();
+		FieldTreeDialog dlg = new FieldTreeDialog((JDialog)topLevel, panel.getLocationOnScreen(), spec, localization);
 		return dlg;
 	}
 	
