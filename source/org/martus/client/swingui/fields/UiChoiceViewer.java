@@ -36,6 +36,7 @@ import javax.swing.JComponent;
 import org.martus.common.ListOfReusableChoicesLists;
 import org.martus.common.MiniLocalization;
 import org.martus.swing.UiLabel;
+import org.martus.swing.UiLanguageDirection;
 import org.martus.swing.Utilities;
 
 public class UiChoiceViewer extends UiChoice
@@ -56,10 +57,12 @@ public class UiChoiceViewer extends UiChoice
 		container.removeAll();
 		String[] displayText = reusableChoicesLists.getDisplayValuesAtAllLevels(newText);
 		
-		Component[] widgets = new Component[reusableChoicesLists.size()];
+		Component[] widgets = new Component[reusableChoicesLists.size() + 1];
 		for(int level = 0; level < reusableChoicesLists.size(); ++level)
 		{
 			UiLabel widget = new UiLabel();
+			widget.setComponentOrientation(UiLanguageDirection.getComponentOrientation());
+			widget.setHorizontalAlignment(UiLanguageDirection.getHorizontalAlignment());
 			if(displayText[level].length() > 0)
 			{
 				widget.setText(" " + displayText[level] + " ");
@@ -68,6 +71,9 @@ public class UiChoiceViewer extends UiChoice
 			}
 			widgets[level] = widget;
 		}
+		widgets[reusableChoicesLists.size()] = Box.createHorizontalGlue();
+
+		container.setComponentOrientation(UiLanguageDirection.getComponentOrientation());
 		Utilities.addComponentsRespectingOrientation(container, widgets);
 	}
 
