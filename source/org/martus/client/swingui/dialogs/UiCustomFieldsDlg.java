@@ -34,6 +34,7 @@ import java.io.File;
 import java.util.Iterator;
 import java.util.Vector;
 
+import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -298,6 +299,7 @@ public class UiCustomFieldsDlg extends JDialog
 			UiTextArea xmlExamples = createXMLTextArea(examples);
 			xmlExamples.setCaretPosition(0);
 			xmlExamples.setBackground(new JFrame().getBackground());
+			xmlExamples.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
 			
 			xmlExamples.setEditable(false);
 			UiScrollPane pane = createScrollPane(xmlExamples);

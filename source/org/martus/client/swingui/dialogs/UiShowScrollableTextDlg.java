@@ -34,6 +34,7 @@ import java.awt.event.ActionListener;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -84,6 +85,7 @@ public class UiShowScrollableTextDlg extends JDialog implements ActionListener
 			}
 			
 			details = new UiWrappedTextArea(TokenReplacement.replaceTokens(text, tokenReplacement), 85);
+			details.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
 			Rectangle rect = details.getVisibleRect();
 			details.setEditable(false);
 			UiScrollPane detailScrollPane = new UiScrollPane(details, UiScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
