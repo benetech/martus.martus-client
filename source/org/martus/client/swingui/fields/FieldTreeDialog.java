@@ -26,6 +26,7 @@ Boston, MA 02111-1307, USA.
 package org.martus.client.swingui.fields;
 
 import java.awt.BorderLayout;
+import java.awt.Component;
 import java.awt.Container;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
@@ -80,10 +81,7 @@ public class FieldTreeDialog extends JDialog implements TreeSelectionListener
 		okButton = new UiButton(okAction);
 		cancelButton = new UiButton(localization.getButtonLabel("cancel"));
 		cancelButton.addActionListener(new CancelButtonHandler());
-		Box buttonBox = Box.createHorizontalBox();
-		buttonBox.add(Box.createHorizontalGlue());
-		buttonBox.add(okButton);
-		buttonBox.add(cancelButton);
+		createButtonBox(localization);
 		
 		setModal(true);
 		Container contentPane = getContentPane();
@@ -94,6 +92,18 @@ public class FieldTreeDialog extends JDialog implements TreeSelectionListener
 		Utilities.fitInScreen(this);
 
 		getRootPane().setDefaultButton(okButton);
+	}
+
+	private void createButtonBox(MiniLocalization localization)
+	{
+		buttonBox = Box.createHorizontalBox();
+		Component[] components = getButtonBoxComponents(localization);
+		Utilities.addComponentsRespectingOrientation(buttonBox, components);
+	}
+
+	protected Component[] getButtonBoxComponents(MiniLocalization localization)
+	{
+		return new Component[] {Box.createHorizontalGlue(), okButton, cancelButton};
 	}
 	
 	public PopUpTreeFieldSpec getSpec()
@@ -242,6 +252,7 @@ public class FieldTreeDialog extends JDialog implements TreeSelectionListener
 	OkAction okAction;
 	UiButton okButton;
 	UiButton cancelButton;
+	private Box buttonBox;
 	
 	PopUpTreeFieldSpec spec;
 	SearchFieldTree tree;

@@ -25,16 +25,21 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.fields;
 
+import java.awt.Component;
 import java.awt.Point;
+import java.util.Arrays;
 import java.util.Vector;
 
 import javax.swing.JDialog;
+import javax.swing.event.TreeSelectionEvent;
 
 import org.martus.client.search.FancySearchGridEditor;
 import org.martus.client.swingui.UiMainWindow;
+import org.martus.common.MiniLocalization;
 import org.martus.common.fieldspec.DropDownFieldSpec;
 import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.fieldspec.PopUpTreeFieldSpec;
+import org.martus.swing.UiCheckBox;
 
 public class SearchFieldTreeDialog extends FieldTreeDialog
 {
@@ -60,9 +65,19 @@ public class SearchFieldTreeDialog extends FieldTreeDialog
 		DropDownFieldSpec ddSpec = (DropDownFieldSpec)selectedSpec;
 		if(!ddSpec.hasDataSource())
 			return true;
-		
-		foundValues = FancySearchGridEditor.loadFieldValuesWithProgressDialog(mainWindow, ddSpec);
-		return true;
+
+		if(!loadValuesCheckBox.isSelected())
+			return true;
+
+		try
+		{
+			foundValues = FancySearchGridEditor.loadFieldValuesWithProgressDialog(mainWindow, ddSpec);
+			return true;
+		}
+		catch (Exception e)
+		{
+			return false;
+		}
 	}
 	
 	public Vector getFoundValues()
@@ -70,6 +85,42 @@ public class SearchFieldTreeDialog extends FieldTreeDialog
 		return foundValues;
 	}
 	
+	public void valueChanged(TreeSelectionEvent e)
+	{
+		super.valueChanged(e);
+		FieldSpec selectedSpec = getSelectedSpec();
+		
+		boolean isDropDown = selectedSpec.getType().isDropdown();
+		boolean canLoad = canUseMemorizedPossibleValues(selectedSpec);
+		boolean mustLoadValues = canLoad && isDropDown;
+		loadValuesCheckBox.setSelected(mustLoadValues);
+		loadValuesCheckBox.setEnabled(canLoad && !mustLoadValues);
+	}
+	
+	protected Component[] getButtonBoxComponents(MiniLocalization localization)
+	{
+		if(loadValuesCheckBox == null)
+			loadValuesCheckBox = new UiCheckBox(localization.getButtonLabel("LoadFieldValuesFromAllBulletins"));
+		Vector components = new Vector(Arrays.asList(super.getButtonBoxComponents(localization)));
+		components.insertElementAt(loadValuesCheckBox, 0);
+		return (Component[]) components.toArray(new Component[0]);
+	}
+	
+	public static boolean canUseMemorizedPossibleValues(FieldSpec selectedFieldSpec)
+	{
+		if(selectedFieldSpec.getType().isString())
+			return true;
+		
+		if(selectedFieldSpec.getType().isDropdown())
+		{
+			DropDownFieldSpec spec = (DropDownFieldSpec) selectedFieldSpec;
+			if(spec.getDataSourceGridTag() != null)
+				return true;
+		}
+		return false;
+	}
+
 	private UiMainWindow mainWindow;
 	private Vector foundValues;
+	private UiCheckBox loadValuesCheckBox;
 }

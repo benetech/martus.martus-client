@@ -44,6 +44,7 @@ import org.martus.client.bulletinstore.ClientBulletinStore;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.dialogs.UiDialogLauncher;
 import org.martus.client.swingui.dialogs.UiProgressWithCancelDlg;
+import org.martus.client.swingui.fields.SearchFieldTreeDialog;
 import org.martus.client.swingui.fields.UiEditableGrid;
 import org.martus.client.swingui.fields.UiFieldContext;
 import org.martus.client.swingui.fields.UiPopUpFieldChooserEditor;
@@ -107,7 +108,7 @@ public class FancySearchGridEditor extends UiEditableGrid
 		if(row >= 0 && row < getTable().getRowCount())
 		{
 			FieldSpec spec = helper.getModel().getSelectedFieldSpec(row);
-			canLoadValues = helper.getModel().canUseMemorizedPossibleValues(spec);
+			canLoadValues = SearchFieldTreeDialog.canUseMemorizedPossibleValues(spec);
 			if(helper.getModel().hasMemorizedPossibleValues(spec))
 				canLoadValues = false;
 		}
@@ -150,7 +151,7 @@ public class FancySearchGridEditor extends UiEditableGrid
 
 			int row = getTable().getSelectedRow();
 			FieldSpec spec = helper.getModel().getSelectedFieldSpec(row);
-			if(!helper.getModel().canUseMemorizedPossibleValues(spec))
+			if(!SearchFieldTreeDialog.canUseMemorizedPossibleValues(spec))
 			{
 				dlgLauncher.ShowNotifyDialog("NonStringFieldRowSelected");
 				return;

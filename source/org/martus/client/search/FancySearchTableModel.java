@@ -32,6 +32,7 @@ import java.util.Vector;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 
+import org.martus.client.swingui.fields.SearchFieldTreeDialog;
 import org.martus.client.swingui.grids.GridTableModel;
 import org.martus.common.MiniLocalization;
 import org.martus.common.PoolOfReusableChoicesLists;
@@ -87,7 +88,7 @@ public class FancySearchTableModel extends GridTableModel implements TableModelL
 		if(selectedFieldSpec.getType().isLanguageDropdown())
 			selectedFieldSpec = new DropDownFieldSpec(localization.getLanguageNameChoices());
 
-		if(canUseMemorizedPossibleValues(selectedFieldSpec))
+		if(SearchFieldTreeDialog.canUseMemorizedPossibleValues(selectedFieldSpec))
 		{
 			MiniFieldSpec miniSpec = new MiniFieldSpec(selectedFieldSpec);
 			Vector choices = (Vector) memorizedFieldValues.get(miniSpec);
@@ -116,20 +117,6 @@ public class FancySearchTableModel extends GridTableModel implements TableModelL
 			memorizedFieldValues.remove(miniSpec);
 	}
 
-	public boolean canUseMemorizedPossibleValues(FieldSpec selectedFieldSpec)
-	{
-		if(selectedFieldSpec.getType().isString())
-			return true;
-		
-		if(selectedFieldSpec.getType().isDropdown())
-		{
-			DropDownFieldSpec spec = (DropDownFieldSpec) selectedFieldSpec;
-			if(spec.getDataSourceGridTag() != null)
-				return true;
-		}
-		return false;
-	}
-	
 	private static Vector getCompareChoices()
 	{
 		Vector opChoiceVector = new Vector();
