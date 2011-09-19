@@ -26,25 +26,16 @@ Boston, MA 02111-1307, USA.
 
 package org.martus.client.search;
 
-import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Vector;
 
-import javax.swing.JPanel;
 import javax.swing.JTable;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
 
 import org.json.JSONObject;
 import org.martus.client.bulletinstore.ClientBulletinStore;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.dialogs.UiDialogLauncher;
-import org.martus.client.swingui.dialogs.UiProgressWithCancelDlg;
-import org.martus.client.swingui.fields.SearchFieldTreeDialog;
 import org.martus.client.swingui.fields.UiEditableGrid;
 import org.martus.client.swingui.fields.UiFieldContext;
 import org.martus.client.swingui.fields.UiPopUpFieldChooserEditor;
@@ -52,10 +43,6 @@ import org.martus.client.swingui.grids.GridPopUpTreeCellEditor;
 import org.martus.client.swingui.grids.GridTable;
 import org.martus.client.swingui.grids.SearchGridTable;
 import org.martus.common.FieldSpecCollection;
-import org.martus.common.fieldspec.ChoiceItem;
-import org.martus.common.fieldspec.FieldSpec;
-import org.martus.swing.UiButton;
-import org.martus.swing.UiTextArea;
 import org.martus.swing.Utilities;
 
 public class FancySearchGridEditor extends UiEditableGrid
@@ -80,11 +67,9 @@ public class FancySearchGridEditor extends UiEditableGrid
 		mainWindow = mainWindowToUse;
 		helper = helperToUse;
 		getTable().setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
-		getTable().addRowSelectionListener(new SelectionChangeHandler());
 		setSearchForColumnWideEnoughForDates();
 		setGridTableSize();
 		addListenerSoFieldChangeCanTriggerRepaintOfValueColumn();
-		updateLoadValuesButtonStatus();
 	}
 	
 	public UiMainWindow getMainWindow()
@@ -92,29 +77,6 @@ public class FancySearchGridEditor extends UiEditableGrid
 		return mainWindow;
 	}
 	
-	class SelectionChangeHandler implements ListSelectionListener
-	{
-		public void valueChanged(ListSelectionEvent e)
-		{
-			updateLoadValuesButtonStatus();
-		}
-
-	}
-
-	protected void updateLoadValuesButtonStatus()
-	{
-		boolean canLoadValues = false;
-		int row = getTable().getSelectedRow();
-		if(row >= 0 && row < getTable().getRowCount())
-		{
-			FieldSpec spec = helper.getModel().getSelectedFieldSpec(row);
-			canLoadValues = SearchFieldTreeDialog.canUseMemorizedPossibleValues(spec);
-			if(helper.getModel().hasMemorizedPossibleValues(spec))
-				canLoadValues = false;
-		}
-		loadValuesButton.setEnabled(canLoadValues);
-	}
-
 	protected GridTable createGridTable(UiDialogLauncher dlgLauncher, UiFieldContext context)
 	{
 		return new SearchGridTable(getMainWindow(), getFancySearchTableModel(), dlgLauncher, context);
@@ -123,150 +85,6 @@ public class FancySearchGridEditor extends UiEditableGrid
 	private FancySearchTableModel getFancySearchTableModel()
 	{
 		return (FancySearchTableModel) getGridTableModel();
-	}
-
-	protected Vector createButtons()
-	{
-		Vector buttons = super.createButtons();
-		loadValuesButton = new UiButton(getLocalization().getButtonLabel("LoadFieldValuesFromAllBulletins"));
-		loadValuesButton.addActionListener(new LoadValuesListener(table.getDialogLauncher()));
-		buttons.add(loadValuesButton);
-		return buttons;
-	}
-	
-	class LoadValuesListener implements ActionListener
-	{
-		LoadValuesListener(UiDialogLauncher dlgLauncherToUse)
-		{
-			dlgLauncher = dlgLauncherToUse;
-		}
-
-		public void actionPerformed(ActionEvent e)
-		{
-			if(!isRowSelected())
-			{
-				dlgLauncher.ShowNotifyDialog("NoGridRowSelected");
-				return;
-			}
-
-			int row = getTable().getSelectedRow();
-			FieldSpec spec = helper.getModel().getSelectedFieldSpec(row);
-			if(!SearchFieldTreeDialog.canUseMemorizedPossibleValues(spec))
-			{
-				dlgLauncher.ShowNotifyDialog("NonStringFieldRowSelected");
-				return;
-			}
-			Vector loadedValues = loadFieldValuesWithProgressDialog(mainWindow, spec);
-			helper.getModel().setAvailableFieldValues(spec, loadedValues);
-			helper.getModel().fireTableDataChanged();
-			updateLoadValuesButtonStatus();
-		}
-
-		UiDialogLauncher dlgLauncher;
-	}
-	
-	public static Vector loadFieldValuesWithProgressDialog(UiMainWindow mainWindow, FieldSpec spec)
-	{
-		UiProgressWithCancelDlg progressDlg = new LoadValuesProgressDlg(mainWindow);
-		LoadValuesThread thread = new LoadValuesThread(mainWindow, progressDlg, spec);
-		thread.start();
-		progressDlg.setVisible(true);
-		// NOTE: by the time we get here, the thread has terminated
-		if(thread.errorOccured)
-			throw new RuntimeException(thread.exception);
-		HashSet loadedValues = thread.getLoadedValues();
-		Vector sortedValues = new Vector(loadedValues);
-		Collections.sort(sortedValues, new SaneCollator(mainWindow.getLocalization().getCurrentLanguageCode()));
-		boolean needToInsertBlank = true;
-		if(sortedValues.size() > 0)
-		{
-			ChoiceItem firstChoice = (ChoiceItem) sortedValues.get(0);
-			String code = firstChoice.getCode();
-			// NOTE: I saw "" as an empty code that otherwise seems to work
-			final String UNKNOWN_ALTERNATIVE_EMPTY_CODE = "\"\"";
-			boolean isCodeEmpty = code.equals("");
-			boolean isCodeAlternateEmpty = code.equals(UNKNOWN_ALTERNATIVE_EMPTY_CODE);
-			if(isCodeEmpty || isCodeAlternateEmpty)
-				needToInsertBlank = false;
-			else
-				needToInsertBlank = true;
-		}
-		if(needToInsertBlank)
-		{
-			ChoiceItem blank = new ChoiceItem("", "");
-			sortedValues.insertElementAt(blank, 0);
-		}
-		return sortedValues;
-	}		
-	
-	static class LoadValuesProgressDlg extends UiProgressWithCancelDlg
-	{
-		public LoadValuesProgressDlg(UiMainWindow mainWindowToUse)
-		{
-			super(mainWindowToUse, "LoadingFieldValuesFromAllBulletins");
-
-			getContentPane().setLayout(new BorderLayout());
-			UiTextArea explanation = new UiTextArea(4, 50);
-			explanation.setEditable(false);
-			explanation.setText(mainWindowToUse.getLocalization().getFieldLabel("LoadingFieldValuesFromAllBulletinsExplanation"));
-			
-			JPanel cancelPanel = new JPanel();
-			cancelPanel.add(cancel);
-			
-			JPanel meterPanel = new JPanel();
-			meterPanel.add(progressMeter);
-			
-			getContentPane().add(explanation, BorderLayout.NORTH);
-			getContentPane().add(meterPanel, BorderLayout.CENTER);
-			getContentPane().add(cancelPanel, BorderLayout.SOUTH);
-			Utilities.centerDlg(this);
-		}
-		
-	}
-	
-	static class LoadValuesThread extends Thread
-	{
-		public LoadValuesThread(UiMainWindow mainWindowToUse, UiProgressWithCancelDlg progressRetrieveDlgToUse, FieldSpec specToUse)
-		{
-			mainWindow = mainWindowToUse;
-			progressMeter = progressRetrieveDlgToUse;
-			spec = specToUse;
-		}
-
-		public void run()
-		{
-			try
-			{
-				FieldValuesLoader loader = new FieldValuesLoader(getStore(), mainWindow.getLocalization());
-				loadedValues = loader.loadFieldValuesFromAllBulletinRevisions(progressMeter, spec);
-			}
-			catch (Exception e)
-			{
-				errorOccured = true;
-				exception = e;
-			}
-			finally
-			{
-				progressMeter.finished();
-			}
-		}
-		
-		public HashSet getLoadedValues()
-		{
-			return loadedValues;
-		}
-
-		private ClientBulletinStore getStore()
-		{
-			return mainWindow.getApp().getStore();
-		}
-
-		private UiMainWindow mainWindow;
-		private UiProgressWithCancelDlg progressMeter;
-		boolean errorOccured;
-		Exception exception;
-		private FieldSpec spec;
-		private HashSet loadedValues;
 	}
 
 	
@@ -317,7 +135,6 @@ public class FancySearchGridEditor extends UiEditableGrid
 		public void actionPerformed(ActionEvent e)
 		{
 			stopCellEditing();
-			updateLoadValuesButtonStatus();
 		}
 	}
 
@@ -325,5 +142,4 @@ public class FancySearchGridEditor extends UiEditableGrid
 
 	UiMainWindow mainWindow;
 	FancySearchHelper helper;
-	UiButton loadValuesButton;
 }

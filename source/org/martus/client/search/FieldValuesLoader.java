@@ -41,7 +41,7 @@ import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.fieldspec.MiniFieldSpec;
 import org.martus.common.packet.UniversalId;
 
-class FieldValuesLoader
+public class FieldValuesLoader
 {
 	public FieldValuesLoader(ClientBulletinStore storeToUse, MiniLocalization localizationToUse)
 	{
@@ -49,7 +49,7 @@ class FieldValuesLoader
 		localization = localizationToUse;
 	}
 	
-	protected HashSet loadFieldValuesFromAllBulletinRevisions(UiProgressWithCancelDlg progressMeter, FieldSpec fieldSpec)
+	public HashSet loadFieldValuesFromAllBulletinRevisions(UiProgressWithCancelDlg progressMeter, FieldSpec fieldSpec)
 	{
 		MiniFieldSpec miniSpec = new MiniFieldSpec(fieldSpec);
 		HashSet choices = getFieldValueFromAllBulletinRevisions(progressMeter, miniSpec);
