@@ -69,19 +69,19 @@ public class SearchFieldTreeDialog extends FieldTreeDialog
 		if(selectedSpec == null)
 			return true;
 		
-		if(!selectedSpec.getType().isDropdown())
-			return true;
-
-		DropDownFieldSpec ddSpec = (DropDownFieldSpec)selectedSpec;
-		if(!ddSpec.hasDataSource())
-			return true;
-
 		if(!loadValuesCheckBox.isSelected())
 			return true;
 
+		if(selectedSpec.getType().isDropdown())
+		{
+			DropDownFieldSpec ddSpec = (DropDownFieldSpec)selectedSpec;
+			if(!ddSpec.hasDataSource())
+				return true;
+		}
+
 		try
 		{
-			foundValues = loadFieldValuesWithProgressDialog(mainWindow, ddSpec);
+			foundValues = loadFieldValuesWithProgressDialog(mainWindow, selectedSpec);
 			return true;
 		}
 		catch (Exception e)
