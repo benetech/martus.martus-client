@@ -561,7 +561,7 @@ public class EnglishStrings
 "field:BulletinWasSent=Sent",
 "field:" + Bulletin.PSEUDOFIELD_WAS_SENT + "=Sent",
 "field:preferencesAdjustThai=Automatically adjust legacy Thai dates",
-"field:preferencesAdjustPersian=Automatically adjust legacy Persian dates",
+"field:preferencesAdjustPersian=Automatically adjust legacy Afghan/Persian dates",
 "field:preferencesAllPrivate=Prevent creating public bulletins",
 "field:preferencesCheckFieldOfficeBulletins=Automatically check for new Field Desk bulletins",
 "field:HeadQuartersSelected=Selected?",
