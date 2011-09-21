@@ -412,7 +412,7 @@ public class EnglishStrings
 "button:SaveSearch=Save This Search...",
 "button:LoadSearch=Load Previous Search...",
 "button:LoadSearchOkButton=Load",
-"button:LoadFieldValuesFromAllBulletins=Scan for all possible values",
+"button:LoadFieldValuesFromAllBulletins=Load all possible values for selected field",
 
 "button:AddFieldToReport=Add",
 "button:RemoveFieldFromReport=Remove",
