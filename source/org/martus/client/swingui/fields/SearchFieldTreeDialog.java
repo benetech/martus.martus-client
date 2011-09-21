@@ -40,6 +40,7 @@ import javax.swing.event.TreeSelectionEvent;
 import org.martus.client.bulletinstore.ClientBulletinStore;
 import org.martus.client.search.FieldValuesLoader;
 import org.martus.client.search.SaneCollator;
+import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.dialogs.UiProgressWithCancelDlg;
 import org.martus.common.MiniLocalization;
@@ -50,6 +51,7 @@ import org.martus.common.fieldspec.PopUpTreeFieldSpec;
 import org.martus.swing.UiCheckBox;
 import org.martus.swing.UiTextArea;
 import org.martus.swing.Utilities;
+import org.martus.util.TokenReplacement;
 
 public class SearchFieldTreeDialog extends FieldTreeDialog
 {
@@ -130,9 +132,9 @@ public class SearchFieldTreeDialog extends FieldTreeDialog
 		return false;
 	}
 	
-	public static Vector loadFieldValuesWithProgressDialog(UiMainWindow mainWindow, FieldSpec spec)
+	public static Vector loadFieldValuesWithProgressDialog(UiMainWindow mainWindow, FieldSpec spec) throws Exception
 	{
-		UiProgressWithCancelDlg progressDlg = new LoadValuesProgressDlg(mainWindow);
+		UiProgressWithCancelDlg progressDlg = new LoadValuesProgressDlg(mainWindow, spec.getLabel());
 		LoadValuesThread thread = new LoadValuesThread(mainWindow, progressDlg, spec);
 		thread.start();
 		progressDlg.setVisible(true);
@@ -166,14 +168,17 @@ public class SearchFieldTreeDialog extends FieldTreeDialog
 	
 	static class LoadValuesProgressDlg extends UiProgressWithCancelDlg
 	{
-		public LoadValuesProgressDlg(UiMainWindow mainWindowToUse)
+		public LoadValuesProgressDlg(UiMainWindow mainWindowToUse, String fieldName) throws Exception
 		{
 			super(mainWindowToUse, "LoadingFieldValuesFromAllBulletins");
 
 			getContentPane().setLayout(new BorderLayout());
 			UiTextArea explanation = new UiTextArea(4, 50);
 			explanation.setEditable(false);
-			explanation.setText(mainWindowToUse.getLocalization().getFieldLabel("LoadingFieldValuesFromAllBulletinsExplanation"));
+			MartusLocalization localization = mainWindowToUse.getLocalization();
+			String template = localization.getFieldLabel("LoadingFieldValuesFromAllBulletinsExplanation");
+			String fullDisplayString = TokenReplacement.replaceToken(template, "#FieldName#", fieldName);
+			explanation.setText(fullDisplayString);
 			
 			JPanel cancelPanel = new JPanel();
 			cancelPanel.add(cancel);

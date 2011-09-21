@@ -106,19 +106,26 @@ public class FancySearchGridEditor extends UiEditableGrid
 			super(getLocalization().getButtonLabel("LoadFieldValuesFromAllBulletins"));
 		}
 		
-		public void actionPerformed(ActionEvent e)
+		public void actionPerformed(ActionEvent event)
 		{
-			int row = getTable().getSelectedRow();
-			if(row < 0 || row >= getTable().getRowCount())
-				return;
-			
-			FieldSpec fieldSpec = getFancySearchTableModel().getSelectedFieldSpec(row);
-			if(!SearchFieldTreeDialog.canUseMemorizedPossibleValues(fieldSpec))
-				return;
-			
-			Vector choices = SearchFieldTreeDialog.loadFieldValuesWithProgressDialog(getMainWindow(), fieldSpec);
-			getFancySearchTableModel().setAvailableFieldValues(fieldSpec, choices);
-			getTable().repaint();
+			try
+			{
+				int row = getTable().getSelectedRow();
+				if(row < 0 || row >= getTable().getRowCount())
+					return;
+				
+				FieldSpec fieldSpec = getFancySearchTableModel().getSelectedFieldSpec(row);
+				if(!SearchFieldTreeDialog.canUseMemorizedPossibleValues(fieldSpec))
+					return;
+				
+				Vector choices = SearchFieldTreeDialog.loadFieldValuesWithProgressDialog(getMainWindow(), fieldSpec);
+				getFancySearchTableModel().setAvailableFieldValues(fieldSpec, choices);
+				getTable().repaint();
+			} 
+			catch (Exception e)
+			{
+				e.printStackTrace();
+			}
 		}
 	}
 

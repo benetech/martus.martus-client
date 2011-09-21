@@ -1480,7 +1480,7 @@ public class EnglishStrings
 "field:DataIsHidden=(Press the + button to show the hidden information)",
 
 "field:LoadingFieldValuesFromAllBulletins=Processing bulletin",
-"field:LoadingFieldValuesFromAllBulletinsExplanation=This will create a list of all the values for this field in all the bulletins",
+"field:LoadingFieldValuesFromAllBulletinsExplanation=Scanning all bulletins to create a list of all the values in #FieldName#",
 
 "field:_Section_BulletinSectionHeader=Header",
 "field:_Section_BulletinSectionHeadquarters=Headquarters",
