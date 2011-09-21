@@ -55,6 +55,33 @@ public class FancySearchTableModel extends GridTableModel implements TableModelL
 		memorizedFieldValues = new HashMap();
 	}
 	
+	public void updateAllDataDrivenDropdownChoices()
+	{
+		for(int row = 0; row < getRowCount(); ++row)
+		{
+			if(isFieldDataDrivenDropdown(row))
+				setMinimalAvailableChoices(row);
+		}
+	}
+
+	private boolean isFieldDataDrivenDropdown(int row)
+	{
+		FieldSpec fieldSpec = getSelectedFieldSpec(row);
+		return DropDownFieldSpec.isDataDrivenDropdown(fieldSpec);
+	}
+
+	private void setMinimalAvailableChoices(int row)
+	{
+		FieldSpec fieldSpec = getFieldSpecForCell(row, valueColumn);
+		if(!DropDownFieldSpec.isDropDown(fieldSpec))
+			return;
+		
+		String value = getValueAt(row, valueColumn).toString();
+		Vector choices = new Vector();
+		choices.add(new ChoiceItem(value, value));
+		setAvailableFieldValues(fieldSpec, choices);
+	}
+
 	public FieldSpec getFieldSpecForCell(int row, int column)
 	{
 		if(column == valueColumn)
@@ -102,11 +129,11 @@ public class FancySearchTableModel extends GridTableModel implements TableModelL
 		return selectedFieldSpec;
 	}
 	
-	public void setAvailableFieldValues(FieldSpec spec, Vector values)
+	public void setAvailableFieldValues(FieldSpec spec, Vector choices)
 	{
 		MiniFieldSpec miniSpec = new MiniFieldSpec(spec);
-		if(values != null && values.size() > 0)
-			memorizedFieldValues.put(miniSpec, values);
+		if(choices != null && choices.size() > 0)
+			memorizedFieldValues.put(miniSpec, choices);
 		else
 			memorizedFieldValues.remove(miniSpec);
 	}

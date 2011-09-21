@@ -112,6 +112,7 @@ public class FancySearchGridEditor extends UiEditableGrid
 	public void setFromJson(JSONObject json)
 	{
 		helper.setSearchFromJson(getGridData(), json);
+		getFancySearchTableModel().updateAllDataDrivenDropdownChoices();
 	}
 	
 	public JSONObject getSearchAsJson() throws Exception
