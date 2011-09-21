@@ -29,13 +29,16 @@ package org.martus.client.search;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Vector;
 
+import javax.swing.AbstractAction;
 import javax.swing.JTable;
 
 import org.json.JSONObject;
 import org.martus.client.bulletinstore.ClientBulletinStore;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.dialogs.UiDialogLauncher;
+import org.martus.client.swingui.fields.SearchFieldTreeDialog;
 import org.martus.client.swingui.fields.UiEditableGrid;
 import org.martus.client.swingui.fields.UiFieldContext;
 import org.martus.client.swingui.fields.UiPopUpFieldChooserEditor;
@@ -43,6 +46,8 @@ import org.martus.client.swingui.grids.GridPopUpTreeCellEditor;
 import org.martus.client.swingui.grids.GridTable;
 import org.martus.client.swingui.grids.SearchGridTable;
 import org.martus.common.FieldSpecCollection;
+import org.martus.common.fieldspec.FieldSpec;
+import org.martus.swing.UiButton;
 import org.martus.swing.Utilities;
 
 public class FancySearchGridEditor extends UiEditableGrid
@@ -82,7 +87,42 @@ public class FancySearchGridEditor extends UiEditableGrid
 		return new SearchGridTable(getMainWindow(), getFancySearchTableModel(), dlgLauncher, context);
 	}
 	
-	private FancySearchTableModel getFancySearchTableModel()
+	protected Vector createButtons()
+	{
+		Vector buttons = super.createButtons();
+		buttons.add(createLoadValuesButton());
+		return buttons;
+	}
+	
+	private UiButton createLoadValuesButton()
+	{
+		return new UiButton(new LoadValuesAction());
+	}
+	
+	class LoadValuesAction extends AbstractAction
+	{
+		LoadValuesAction()
+		{
+			super(getLocalization().getButtonLabel("LoadFieldValuesFromAllBulletins"));
+		}
+		
+		public void actionPerformed(ActionEvent e)
+		{
+			int row = getTable().getSelectedRow();
+			if(row < 0 || row >= getTable().getRowCount())
+				return;
+			
+			FieldSpec fieldSpec = getFancySearchTableModel().getSelectedFieldSpec(row);
+			if(!SearchFieldTreeDialog.canUseMemorizedPossibleValues(fieldSpec))
+				return;
+			
+			Vector choices = SearchFieldTreeDialog.loadFieldValuesWithProgressDialog(getMainWindow(), fieldSpec);
+			getFancySearchTableModel().setAvailableFieldValues(fieldSpec, choices);
+			getTable().repaint();
+		}
+	}
+
+	protected FancySearchTableModel getFancySearchTableModel()
 	{
 		return (FancySearchTableModel) getGridTableModel();
 	}

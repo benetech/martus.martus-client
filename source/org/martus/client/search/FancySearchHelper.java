@@ -133,7 +133,8 @@ public class FancySearchHelper
 				gridData.addEmptyRow();
 				gridData.setValueAt(miniSpecAsJsonString, i, 0);
 				gridData.setValueAt(row.getString(TAG_COMPARE_HOW), i, 1);
-				gridData.setValueAt(row.getString(TAG_LOOK_FOR), i, 2);
+				String lookFor = row.getString(TAG_LOOK_FOR);
+				gridData.setValueAt(lookFor, i, 2);
 				gridData.setValueAt(row.getString(TAG_AND_OR), i, 3);
 			}
 		}
