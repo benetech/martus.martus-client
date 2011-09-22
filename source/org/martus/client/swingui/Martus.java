@@ -55,6 +55,7 @@ class Martus
 		
 		System.out.println(UiConstants.programName);
 		System.out.println(UiConstants.versionLabel + " " + VersionBuildDate.getVersionBuildDate());
+		System.out.println("Java version: " + System.getProperty("java.version"));
 
 		Vector options = new Vector(Arrays.asList(args));
 		int foundTestAll = options.indexOf("--testall");
