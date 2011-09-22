@@ -207,8 +207,7 @@ public class SearchFieldTreeDialog extends FieldTreeDialog
 		{
 			try
 			{
-				FieldValuesLoader loader = new FieldValuesLoader(getStore(), mainWindow.getLocalization());
-				loadedValues = loader.loadFieldValuesFromAllBulletinRevisions(progressMeter, spec);
+				doWork();
 			}
 			catch (Exception e)
 			{
@@ -220,8 +219,14 @@ public class SearchFieldTreeDialog extends FieldTreeDialog
 				progressMeter.finished();
 			}
 		}
+
+		private synchronized void doWork()
+		{
+			FieldValuesLoader loader = new FieldValuesLoader(getStore(), mainWindow.getLocalization());
+			loadedValues = loader.loadFieldValuesFromAllBulletinRevisions(progressMeter, spec);
+		}
 		
-		public HashSet getLoadedValues()
+		public synchronized HashSet getLoadedValues()
 		{
 			return loadedValues;
 		}
