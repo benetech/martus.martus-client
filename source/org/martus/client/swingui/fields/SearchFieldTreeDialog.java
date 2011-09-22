@@ -101,6 +101,8 @@ public class SearchFieldTreeDialog extends FieldTreeDialog
 	{
 		super.valueChanged(e);
 		FieldSpec selectedSpec = getSelectedSpec();
+		if(selectedSpec == null)
+			return;
 		
 		boolean isDropDown = selectedSpec.getType().isDropdown();
 		boolean canLoad = canUseMemorizedPossibleValues(selectedSpec);
@@ -142,6 +144,8 @@ public class SearchFieldTreeDialog extends FieldTreeDialog
 		if(thread.errorOccured)
 			throw new RuntimeException(thread.exception);
 		HashSet loadedValues = thread.getLoadedValues();
+		if(loadedValues == null)
+			return new Vector();
 		Vector sortedValues = new Vector(loadedValues);
 		Collections.sort(sortedValues, new SaneCollator(mainWindow.getLocalization().getCurrentLanguageCode()));
 		boolean needToInsertBlank = true;
