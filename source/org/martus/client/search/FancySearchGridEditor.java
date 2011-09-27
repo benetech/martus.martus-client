@@ -89,6 +89,7 @@ public class FancySearchGridEditor extends UiEditableGrid
 			FieldSpec spec = helper.getModel().getSelectedFieldSpec(row);
 			canLoadValues = SearchFieldTreeDialog.canUseMemorizedPossibleValues(spec);
 		}
+		System.out.println("updateLoadValuesButtonStatus: " + canLoadValues);
 		loadValuesButton.setEnabled(canLoadValues);
 	}
 
