@@ -208,6 +208,7 @@ public class FancySearchGridEditor extends UiEditableGrid
 		public void actionPerformed(ActionEvent e)
 		{
 			stopCellEditing();
+			updateLoadValuesButtonStatus();
 		}
 	}
 
