@@ -33,6 +33,8 @@ import java.util.Vector;
 
 import javax.swing.AbstractAction;
 import javax.swing.JTable;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
 import org.json.JSONObject;
 import org.martus.client.bulletinstore.ClientBulletinStore;
@@ -75,6 +77,27 @@ public class FancySearchGridEditor extends UiEditableGrid
 		setSearchForColumnWideEnoughForDates();
 		setGridTableSize();
 		addListenerSoFieldChangeCanTriggerRepaintOfValueColumn();
+		getTable().addRowSelectionListener(new ListSelectionHandler());
+	}
+	
+	protected void updateLoadValuesButtonStatus()
+	{
+		boolean canLoadValues = false;
+		int row = getTable().getSelectedRow();
+		if(row >= 0 && row < getTable().getRowCount())
+		{
+			FieldSpec spec = helper.getModel().getSelectedFieldSpec(row);
+			canLoadValues = SearchFieldTreeDialog.canUseMemorizedPossibleValues(spec);
+		}
+		loadValuesButton.setEnabled(canLoadValues);
+	}
+
+	class ListSelectionHandler implements ListSelectionListener
+	{
+		public void valueChanged(ListSelectionEvent e)
+		{
+			updateLoadValuesButtonStatus();
+		}
 	}
 	
 	public UiMainWindow getMainWindow()
@@ -90,7 +113,8 @@ public class FancySearchGridEditor extends UiEditableGrid
 	protected Vector createButtons()
 	{
 		Vector buttons = super.createButtons();
-		buttons.add(createLoadValuesButton());
+		loadValuesButton = createLoadValuesButton();
+		buttons.add(loadValuesButton);
 		return buttons;
 	}
 	
@@ -190,4 +214,5 @@ public class FancySearchGridEditor extends UiEditableGrid
 
 	UiMainWindow mainWindow;
 	FancySearchHelper helper;
+	private UiButton loadValuesButton;
 }
