@@ -1,6 +1,6 @@
 ﻿--------
 1. Introduction to the Martus™ Software
-Martus™ Software User Guide Version 3.5
+Martus™ Software User Guide Version 3.6
 --------
 1a. What is Martus™?
 Named after the Greek word for witness, the Martus Project provides an efficient and secure way to store and retrieve information about human rights abuses. Using the Martus application, you can create bulletins that record human rights abuses, attach supporting documents, specify whether the information should be public or private, and store the information on a secure server. To learn more about the problems the Martus Project addresses and future plans for the project, visit http://www.martus.org.
@@ -71,8 +71,8 @@ Windows
 • Screen resolution of 800x600 or greater
 
 Mac OS
-• Mac OS 9.2 or higher
-• Java Runtime Environment (JRE) version 1.4.2 or above
+• Mac OS 9.2 or higher (10.6.4 or later recommended)
+• Java Runtime Environment (JRE) version 1.4.2 (sometimes called Java4) or above (Java6/version 1.6.0_22 or later is best if possible, Java5/version 1.5.0_22(rev-b07) or a later 1.5 version if Java6 is not possible) Note: Java 1.5 and Java 1.6 earlier than the specific versions mentioned above will not work with Martus Language Pack (MLP) files.
 • 75 MB hard disk space available (100 MB or more recommended)
 • Internet connection, to back up data to the Martus server.  If you do not have an internet connection, see section “9g. Enabling other accounts to send your bulletins to a server.”
 • To send bulletins to a Martus Server, your Martus software must not be blocked by a firewall. If you have a software or hardware firewall, it must allow your computer to contact ports 987 and 988, or ports 80 and 443, on the Internet. If these ports are blocked when you try to select the server, you will see a message that the server is not responding.
@@ -116,7 +116,29 @@ Note: Even if you already have Java installed, Martus installs its own Java 2 ru
 See “2c. Upgrading to a new version of Martus (Windows only)” for information about upgrading from an old version of Martus to the current release.
 
 To install Martus for Mac OS:
-1. Insert the Martus CD into your CD-ROM drive (or download the Martus zip file) from http://www.martus.org and double-click it. 
+There are two ways to install Martus on a Mac – either automatically by using a DMG file, or manually by using a ZIP or ISO file.
+
+Note: These instructions may vary depending on which version of Mac OS X you are running. If these instructions are not applicable to what you see on your computer, please email us at help@martus.org. 
+
+Manual installation using a DMG file (either new or upgrade):
+Note: Before you install: If an earlier version of Martus has been installed on this computer, you must first delete all of the Martus-related jar files from the /Library/Java/Extensions folder. This is very important, and Martus may not work correctly if you skip this step. You may be prompted to enter your computer administrator username/password to delete these files. The Martus-related jars are: - InfiniteMonkey.jar - bc-jce.jar - bcprov-jdk14-135.jar - icu4j_3_2_calendar.jar - js.jar - junit.jar - layouts.jar - persiancalendar.jar - velocity-1.4-rc1.jar - velocity-dep-1.4-rc1.jar - xmlrpc-1.2-b1.jar.  After deleting these files, the Extensions folder may be empty. We also recommend that you delete any shortcuts you may have created to the old Martus version, to avoid confusion. 
+1. Download the Martus DMG file from the Martus website and double-click it as you would for any DMG file. 
+2. Double-click on the Martus icon to view the contents. 
+3. We recommend that you copy the Martus application (Martus.app) to your Applications folder. 
+4. The MartusDocumentation folder contains files with helpful information about Martus, including User Guides, Quick Start Guides, and README files that describe the features in each version, all in various languages. We also suggest that you copy this folder to your computer where you can have easy access to it. 
+
+Note: If you are using a Martus Language Pack (e.g. Martus-en.mlp), please copy the mlp file to your Martus data folder. For instructions on how to access your Martus data folder, see the section below named "Viewing the Martus Data Folder". 
+
+Note: If needed, Burmese, Khmer, and Bangla/Bengali fonts are provided in the Fonts folder. If you need any of these, you can install it by double-clicking on the .ttf file and choosing "Install". If you have issues running or entering text in Burmese, Khmer, or Bangla/Bengali, please see FAQs 40 - 42 in the Martus User Guide, or email help@martus.org. 
+
+To run Martus installed from a DMG file, double-click the Martus application. 
+
+To display additional information as Martus runs that will be helpful in diagnosing any problems in Mac OSX, you can run the "Console" application. Launch it in one of two ways: 
+a) Inside your Applications folder, find the Utilities folder, and double-click on Console. 
+b) Command-Space to bring up the search, enter "console", and when it finds the Console app, launch it. As long as the console is running, any troubleshooting or logging information from Martus will appear there. You only have to run console once, and then you can run (and stop) Martus as many times as you want. 
+
+Manual installation using a ZIP or ISO file:
+1. Insert the Martus CD into your CD-ROM drive (or download the Martus compressed/zip file from http://www.martus.org) and double-click it. 
 2. Open the LibExt folder on the CD.
 3. Copy all the files within the LibExt folder to the /Library/Java/Extensions folder on your hard disk.
 4. Copy the Martus folder from the CD into the /Library/Java folder on your hard disk. This will result in a folder called /Library/Java/Martus.
@@ -132,12 +154,29 @@ Note: These instructions may vary depending on which version of the Mac OS you a
 12. This will open up a new sub-window called Run Shell Script - there should be a text box that has one word, “cat”, in it.
 13. Delete “cat” and type the following, with carriage returns (hit Enter) between lines:
 
-     cd /Library/Java/Martus
+    cd /Library/Java/Martus
 
-     java -Xbootclasspath/p:/Library/Java/Extensions/bc-jce.jar -jar martus.jar
+    java -Xbootclasspath/p:/Library/Java/Extensions/bc-jce.jar -jar martus.jar
  
 14. Click the button called Run. This should launch Martus, which will confirm for you that you have done the Automator step of the process correctly.
 15. Before you exit the Automator, go to File > Save As. In the subsequent dialog, name the file Martus. Under “Where”, select Desktop. Finally, under “File Format”, be sure to select Application. Do not select Workflow. This will create an icon on your desktop called Martus which you can double-click to run the program. Please email help@martus.org if you need help with any of these steps.
+
+Note: In Mac OS, the Martus data folder is named .Martus and is located in your Home folder. This folder contains your Martus account and bulletin info, as well as other files created while using Martus, such as report/search templates, HQ information .mpi files, etc. The Martus data folder is also where you would place any language pack files. Normally the Martus data folder is hidden, so is not viewable using the Finder application. In order to access these files, you will need to set your computer preferences to "show" this hidden folder. To do so, follow these steps: 
+  
+1. Go to Finder > Applications > Utilities, and open the Terminal application. (You can also hit Command-Space to bring up the search, enter "terminal", and when it finds the Terminal app, launch it.)
+2. Type 
+  
+    defaults write com.apple.finder AppleShowAllFiles TRUE 
+  
+and hit Enter/Return. 
+  
+3. Restart the Finder by holding the Option key, and click and hold the Finder icon. When the context menu shows, select Relaunch. (Alternately, you can type the following in the Terminal:
+  
+   killall Finder 
+ 
+and hit Enter.) 
+  
+4. When the Finder restarts, you will be able to view the ".Martus" folder within your home directory and access files saved there. 
 
 To install Martus for Linux:
 Installation instructions for Linux are included in the LinuxJavaInstall.txt file found in the Martus/Docs directory on the installation CD. You'll find the same file in the Martus/Docs directory on your hard disk after you install Martus.
@@ -176,7 +215,7 @@ To uninstall Martus in Windows without deleting your Martus bulletins or account
 3. Select Martus from the list of applications.
 4. Click Add/Remove, and then follow the on-screen instructions.
 
-To uninstall Martus in Mac OS or Linux without deleting your Martus bulletins or account data, delete the martus.jar and the bc-jce.jar files.
+To uninstall Martus in Mac OS or Linux without deleting your Martus bulletins or account data, delete the martus.jar and the bc-jce.jar files.  If you installed Martus with a DMG file on a Mac, you can uninstall Martus without deleting your Martus bulletins or account data, by simply deleting the Martus application. 
 
 If you want to delete bulletins and your key file, but keep the Martus application, choose Tools > Delete My Data. For more information, see “7. Deleting Your Bulletins and Account Information.”
 
@@ -257,7 +296,7 @@ When you set up your account, you create a username and password. Use a password
  
 1. Start Martus. Click OK in the Martus Welcome dialog box. The Martus Sign-in dialog box opens. 
 • To start Martus in Windows, choose Start > Programs > Martus > Martus, double-click the Martus shortcut on the desktop or in the Martus directory, or choose Start > Run and then type the following text: 
-     C:\Martus\bin\javaw.exe -Xbootclasspath/p:C:\Martus\lib\ext\bc-jce.jar -jar C:\Martus\martus.jar 
+    C:\Martus\bin\javaw.exe -Xbootclasspath/p:C:\Martus\lib\ext\bc-jce.jar -jar C:\Martus\martus.jar 
 • To start Martus in Mac OS, open a Terminal window, go to the /Library/Java/Martus folder and type:   Java -Xbootclasspath/p:/Library/Java/Extensions/bc-jce.jar -jar martus.jar 
 • To start Martus in Linux, run a script you’ve created or type:
 
@@ -279,7 +318,7 @@ Note: If you prefer to type your password using the computer’s keyboard, click
 7. Enter the same username and password to verify them, and then click OK. 
 8. If you want to provide contact information, enter it now. (It may take a few seconds for the Martus Setup Contact Information dialog box to appear.) If you do not enter anything for Author and Organization, Martus will prompt you for the information every time you start the application.
 
-     
+    
 
 The Author and Organization information appear in every bulletin you create. Public bulletin data (that is, data that has not specifically been labeled private) may be available to researchers, the press, and the public through the Martus Search Engine. This contact information provides a way for someone to follow up with you or your organization for more information about your bulletins. (If you do not want to make your bulletin data available publicly, you can choose to make all of your data private.)
 
@@ -348,11 +387,13 @@ To change the language used in the Martus user interface, choose Options > Prefe
 
 To change the date format used in lists of bulletins and in bulletins you create, choose Options > Preferences. Then choose the format you prefer from the Date Format dropdown menu and click OK. 
 
-To change the calendar type, choose Options > Preferences. Then choose the calendar type you prefer (e.g., Gregorian, Thai or Persian) from the Calendar Type dropdown menu and click OK.   If you had entered bulletins before this option was available, Martus can also automatically convert dates in those old bulletins to display in Thai or Persian date format using the respective checkboxes in the Preferences screen.
+To change the calendar type, choose Options > Preferences. Then choose the calendar type you prefer (e.g., Gregorian, Thai or Afghan/Persian) from the Calendar Type dropdown menu and click OK.   If you had entered bulletins before this option was available, Martus can also automatically convert dates in those old bulletins to display in Thai or Afghan/Persian date format using the respective checkboxes in the Preferences screen.
 
 If you never want to make bulletin data public, choose Options > Preferences. Then, check Prevent Creating Public Bulletins, and click OK. Until you uncheck this option, every bulletin you create in Martus is private, and you will not be able to uncheck the Keep ALL Information Private option in new bulletins.
 
 If you are a Headquarters account and want to be notified if there are field bulletins to retrieve, go to Options > Preferences, and select "Automatically check for new Field Desk bulletins." Approximately hourly, a message will appear in the status bar (lower left corner of the screen) saying that Martus is checking for new field desk bulletins.  The status bar will display another message if there are field bulletins to be retrieved, at which point you can go to the Server menu to load the Retrieve screen (see “6i. Retrieving bulletins created by field desks.”)  Please note that selecting this option can cause slower server performance, especially if you have a slow internet connection, so it should only be selected if your field desk accounts are actively creating bulletins.
+
+
 
 Please see the section “11. Frequently Asked Questions” (FAQ) for other settings for running Martus (e.g. the number of minutes before Martus times out for security) that are not available in the Preferences screen.
 
@@ -419,7 +460,7 @@ Attachments - To attach a photo or other file to the bulletin, click Add Attachm
 
 Tip:  If you want to attach a file that will only be seen by those who have access to private information, click Add Attachment in the Private Information area or drag a file into the Attachments field in the Private Information area. 
 
-Note:  You can  use the “View” button to display the attachment.  If the attachment is an image (e.g. photo or scanned document) of certain file types (i.e. jpg, png, gif), the image will be displayed inline inside the bulletin (see image below).  Other types of files will be loaded outside of Martus into whatever program you have set on your computer to load that type of file.
+Note:  You can use the “View” button to display the attachment.  If the attachment is an image (e.g. photo or scanned document) of certain file types (i.e. jpg, png, gif), the image will be displayed inline inside the bulletin (see image below).  Other types of files will be loaded outside of Martus into whatever program you have set on your computer to load that type of file.
 
 
 
@@ -597,7 +638,7 @@ You can rearrange bulletins within a folder, to list them by status, date of eve
 6f. Placing bulletins on the desktop
 You can drag (or copy/paste) a bulletin to the desktop (or other location on your computer), or drag a bulletin from the desktop back into Martus. Dragging a bulletin to the desktop enables you to keep a backup copy of a bulletin you’re working on outside of Martus (especially useful for saving intermediate versions of drafts). Martus names exported bulletins with the extension .mba (for Martus Bulletin Archive).  These files contain only the latest version of each bulletin.  
 
-You can e-mail .mba files to other people, or copy them to a floppy disk. Draft bulletins remain fully encrypted, including the parts labeled public, so they cannot be viewed by any other user except a designated Headquarters account. When you e-mail or copy sealed bulletins, anyone may read the public parts of the bulletin using Martus software, but the private sections remain encrypted.  Because you cannot view another user’s private or draft data unless your account is one of their Headquarters accounts, their imported bulletins are labeled with a warning message saying “The author has not given you permission to view the private portions of this bulletin.”  Data in .mba files can only be viewed in Martus; you cannot open them in applications such as Microsoft Word. To use the data in applications other than Martus, export bulletins as XML files (see “6p. Exporting bulletin data”), or create an html report file (see “6n. Printing bulletins ”)
+You can e-mail .mba files to other people, or copy them to a floppy disk. Draft bulletins remain fully encrypted, including the parts labeled public, so they cannot be viewed by any other user except a designated Headquarters account. When you e-mail or copy sealed bulletins, anyone may read the public parts of the bulletin using Martus software, but the private sections remain encrypted.  Because you cannot view another user’s private or draft data unless your account is one of their Headquarters accounts, their imported bulletins are labeled with a warning message saying “The author has not given you permission to view the private portions of this bulletin.”  Data in .mba files can only be viewed in Martus; you cannot open them in applications such as Microsoft Word. To use the data in applications other than Martus, export bulletins as XML files (see “6p. Exporting bulletin data”), or create an html report file (see “6n. Printing bulletins ”).
 
 Note: Because e-mail is not secure, anything you e-mail may be intercepted by someone else.
 
@@ -642,6 +683,8 @@ Note: By default, the Retrieve Draft Bulletins dialog box displays only bulletin
 5. Click Retrieve. The bulletins appear in the Retrieved Draft Bulletins folder. 
 
 Note: Martus retrieves bulletins in the background, so that you can continue to work in Martus. When Martus has retrieved the bulletins, it displays them in the Retrieved Draft Bulletins folder. To cancel the bulletin retrieval, open the Retrieve My Draft Bulletins dialog box again.
+
+Note: To update an older version of a draft with a newer version from the server, you must delete the draft from the computer and retrieve it from the server.  If you want to keep a backup copy of the original draft, you can drag the bulletin to your desktop before deleting it.
 --------
 6i. Retrieving bulletins created by field desks
 If you are using a Headquarters account, you can retrieve draft or sealed bulletins created by field desk workers who have given your account permission to access their data. (See “9f. Sharing your private data with colleagues.”) To download those bulletins, choose Server > Retrieve Field Desk Sealed Bulletins or Server > Retrieve Field Desk Draft Bulletins. 
@@ -682,11 +725,13 @@ Occasionally, data may be lost or garbled in a bulletin stored on your computer.
 You can search for bulletins on your computer that contain specific words or phrases, or that contain specified dates.  You can also choose to search all fields, limit your search to certain fields, or search for different words or phrases in different fields.  You can search both standard and custom fields.  Note that searching any field includes attachment filenames, but not the content of attachments. Martus searches all versions of every bulletin (both public and private, sealed and draft) in every folder, unless the bulletin only exists in the Discarded Bulletins folder.
 
 1. Click Search.
-2. In the Search dialog box, select the field to search, indicate how the bulletin field should compare to the search terms, and enter the word(s) or date(s) you are searching for. You can search for words in any language. If you are searching for terms in a table/grid, select which column in the grid to search.
+2. In the Search dialog box, select the field to search, indicate how the bulletin field should compare to the search terms, and enter the word(s) or date(s) you are searching for. You can search for words in any language. If you are searching for terms in a table/grid, select which column in the grid to search. When selecting text fields, you can ask Martus to scan and load all the values that have been entered for those fields in your bulletins on the local computer by selecting the “Load all possible values for selected field” checkbox in the field selection screen.  For other field types the checkbox will be “grayed out” (i.e. not selectable).
+
+There is also a “Load all possible values for selected field” button in the main Search screen, if users want to load field values without going into the field selection screen (for example, after loading a previously saved search, or if they did not select the checkbox in the field selection screen).  For “data-driven dropdown” (dropdown lists created by data entered in bulletin grids), the values that were entered in bulletins are automatically loaded when the field is chosen in the Search screen. See section “10b. Customizing bulletin fields” for more about data-driven dropdown fields.
 
 
 
-Note: If multiple fields have the same label, click the plus sign next to the label name to choose the appropriate field. Martus displays the tag name and field type (e.g., “text”) for each field with that label. If you have multiple dropdown fields with the same label, Martus will merge all the values into one list in the Search screen. Any customized field labels that contain only spaces will be replaced with that field's tag in the search field list.
+Note: If multiple fields have the same label in the field selection screen, click the plus sign next to the label name to choose the appropriate field. Martus displays the tag name and field type (e.g., “text”) for each field with that label. If you have multiple dropdown fields with the same label, Martus will merge all the values into one list in the Search screen. Any customized field labels that contain only spaces will be replaced with that field's tag in the search field list.
 
 3. If you would like to add additional search constraints, press Enter or click Insert Row to create a new search row.  You can search another field or limit your search to a certain date or date range.
 4. If you would like to delete a search constraint, select that row and click Delete Selected Row.
@@ -716,8 +761,6 @@ Note:  By default, Martus searches all versions of every bulletin. If you do not
 Note:  By default, Martus searches all rows of any grid (table) fields for your criteria and doesn’t require that the terms are all on the same row.  See section “10b. Customizing bulletin fields” for more information about grid fields. If you want to specify that all grid column specifications in the Search screen be matched to a single row of bulletin grid data, check the “Match grid column specifications” checkbox in the Search screen.  For example, if you want to search for a specific victim name in a single grid row in your bulletins created after a certain date, select the checkbox and enter the following fields in the Search screen: "Victim Information: First Name" = x and "Victim Information: Last Name" = y and "Date Created" >= YYYY-Mon-DD. If you do not select the "Match grid column   specifications" checkbox, Martus will find bulletins created after your specified date where any row has the first name you specified and any other row has the last name specified, but not necessarily in the same bulletin row (you could have a row with "First Name" = x and "Last Name" = b, and a different row with "First Name" = a and "Last Name" = y, and Martus will find that bulletin as matching the search because you did not specify that it had to match in a single row).  
 
 Note: Because Martus searches all rows of any grid (table) fields for your criteria, it may find bulletins where one grid row matches your criteria but other rows do not.  For example you could have a bulletin with a grid that has a location field in it and you have multiple rows of data in the grid with locations A, B, and C.  If you search for bulletins where location != C (does not equal C), Martus will find that bulletin because there are 2 rows in the bulletin grid where the location is not C, even though there is one row where the locations IS C. 
-
-Note:  In this release, Martus will not include data-driven dropdown fields in the Search screen. See “10b. Customizing bulletin fields” for more information about these fields.
 
 Note:  In this release, if you are searching on a multi-level dropdown, all searches are exact matches, not partial or “starts with” matches.  This means that you have to pick the exact level at which you want to be searching.  For example, an “Event Location” field that has three levels (State/City/Neighborhood) will have three entries in the search field list:  Event Location: State, Event Location: City, and Event Location: Neighborhood.  So if you want to find any bulletins that have an Event Location anywhere in California (regardless of the City), you have to pick the “Event Location: State” field to search on and pick California off the dropdown list choices. If you pick Event Location: City to search on and then pick California but leave the City level blank , Martus will only find entries where there was no City data entered  (City was blank), as opposed to ANY location with California regardless of what data was entered at the City level.
 
@@ -811,7 +854,7 @@ a. Sampling bias (e.g. all bulletins entered being more from one particular regi
 b. Duplicate reporting (i.e. more than one bulletin may exist about the same incident, or the same person may be mentioned using different names, or there may be multiple people with the same name).
 c. Data quality issues (e.g. typos that might lead to a search not finding bulletins, fields being left blank where values were expected). Some of these issues can be addressed in a project customization, by requiring certain fields to be entered before a bulletin or grid row can be saved, or using dropdown fields to avoid typos and guarantee consistency in searching.
 d. Possible inconsistency in how data is entered in Martus by different people. For more on this topic, see the “Inter-rater Reliability” and “Controlled Vocabulary” sections on http://www.hrdag.org/resources/core_concepts.shtml.
-4. Martus reports especially should not attempt to count the number of violations, victims or perpetrators, beyond counting the number of bulletins that match search criteria. Before counting violations or victims/perpetrators, important data processing needs to take place before such counting can be considered scientifically defensible. This includes addressing the possibility of duplicate reporting (more than one bulletin may exist about the same incident); representing the complexity of human rights violations (an individual who was the victim of a given act may later become the perpetrator of a different act, or vice versa); and maintaining consistency in meaning and counting (ensuring, for example, making sure that all the data entered in bulletins used  consistent definitions for violations.)
+4. Martus reports especially should not attempt to count the number of violations, victims or perpetrators, beyond counting the number of bulletins that match search criteria. Before counting violations or victims/perpetrators, important data processing needs to take place before such counting can be considered scientifically defensible. This includes addressing the possibility of duplicate reporting (more than one bulletin may exist about the same incident); representing the complexity of human rights violations (an individual who was the victim of a given act may later become the perpetrator of a different act, or vice versa); and maintaining consistency in meaning and counting (ensuring, for example, making sure that all the data entered in bulletins used consistent definitions for violations.)
 5. If you would like to perform descriptive or qualitative analysis of the information entered into Martus, Benetech can help you to use a tool to export data using customized scripts for your project. The exported data may be able to be reviewed using Benetech’s analytical tools, but please keep in mind that quantitative or inferential statistical analysis cannot be performed until additional steps have been taken in processing the data, and without enough volume and different sources of data, statistical analysis may not give meaningful or reliable results.
 --------
 6p. Exporting bulletin data
@@ -998,7 +1041,7 @@ Instructions for Headquarters users
 To share the HQ public account ID and public code with people in the field:
 1. Create a Martus account. (See “2e. Setting up your account.”)
 2. In Martus, choose Tools > Export My Public Account ID, and name the file. Martus saves the file with a .mpi (Martus Public Information) extension in your account directory in the Martus folder on your hard drive, and confirms that it has been saved. 
-3. Give the .mpi file to people whose bulletins you want to access.
+3. Give the .mpi file to people whose bulletins you want to access.  If you can’t find your .mpi file, see FAQ #48.
 4. Choose Help > View My Account Details.
 5. Write down the public code.
 6. Through a different, secure communications channel, give the same people the public code from the HQ account. It is important that the public code be communicated in a way that it cannot be altered, but it need not be secret.
@@ -1094,7 +1137,7 @@ e) You can put multiple fields on a single row in your bulletin by using <KeepWi
 f) You can require certain fields or grid columns to be entered before saving a bulletin by using <RequiredField/> in the field definition.
 g) You can restrict date fields, date grid columns, date range fields, and date range grid columns by using <MinimumDate> and/or <MaximumDate> tags with a date in YYYY-MM-DD format. A blank date (shown as <MaximumDate></MaximumDate> or <MaximumDate/>)  means 'today', although it may allow one day earlier or later, due to time zone issues.  Please note that you can require date validation of standard fields as well as custom fields. Date field Year dropdown choices will reflect the hard-coded date ranges specified in the customization. Note: The year format in the customization must always be a 'Gregorian' year like 2009, even if Martus is configured to use Thai or Persian dates.
 h) You can populate drop-down lists (either inside or outside of a grid) in 3 ways - 1) by entering a list of <Choices> values in the field definition, 2) with values that have been entered in a grid elsewhere in your bulletin by using <DataSource> (sometimes called “data-driven dropdowns”), and 3) by creating lists of "Reusable Choices" that can be referred to by more than one field.  See examples below for the correct XML definition syntax to use. Please note that in this release, Martus will not include data-driven dropdown fields in the Search screen.
-i) You can set a default value for text and dropdown list fields by using  <DefaultValue>ddd</DefaultValue>, where “ddd” is the value you choose. For dropdowns, you must use a value already in the list of choices you defined. For Reusable Choices dropdowns it can be a partial or complete code, with each level separated by dots (for a location dropdown that has both State and City levels, you could pick the default to be at either level, e.g. either CA or CA.LA, see example below). Default values can be set for both standard and custom fields, but are NOT allowed for BOOLEAN, DATE, DATERANGE, GRID, LANGUAGE, MESSAGE, and SECTION field types, and are not allowed for dropdowns where the values in the list are based on data entered in another field (i.e. data-driven dropdowns).  
+i) You can set a default value for text and dropdown list fields by using  <DefaultValue>ddd</DefaultValue>, where “ddd” is the value you choose. For dropdowns, you must use a value already in the list of choices you defined. For Reusable Choices dropdowns it can be a partial or complete code, with each level separated by dots (for a location dropdown that has both Region and City levels, you could pick the default to be at either level, e.g. either R1 or R1.C1, see example below). Default values can be set for both standard and custom fields, but are NOT allowed for BOOLEAN, DATE, DATERANGE, GRID, LANGUAGE, MESSAGE, and SECTION field types, and are not allowed for dropdowns where the values in the list are based on data entered in another field (i.e. data-driven dropdowns).  
 4. Click OK.
 
 Keep the following in mind when you're customizing fields:
@@ -1127,7 +1170,7 @@ Here are some examples; these fields would look like the ones in the figure that
 <Field type='STRING'> 
 <Tag>office</Tag> 
 <Label>Regional office collecting the data</Label> 
-<DefaultValue>California field office</DefaultValue> 
+<DefaultValue>Region 3 field office</DefaultValue> 
 </Field> 
 
 <Field type='DROPDOWN'>
@@ -1184,9 +1227,9 @@ Here are some examples; these fields would look like the ones in the figure that
 <Field type='DROPDOWN'>
 <Tag>EventLocation</Tag>
 <Label>Event Location</Label>
-  <UseReusableChoices code='StateChoices'></UseReusableChoices>
+  <UseReusableChoices code='RegionChoices'></UseReusableChoices>
   <UseReusableChoices code='CityChoices'></UseReusableChoices>
-  <DefaultValue>CA</DefaultValue> 
+  <DefaultValue>R1</DefaultValue> 
 </Field>
 
 <Field type='SECTION'>
@@ -1211,8 +1254,8 @@ Here are some examples; these fields would look like the ones in the figure that
   <Choice>Unknown</Choice>
 </Choices>
 </Column>
-<Column type='DROPDOWN'><Tag></Tag><Label>State of Birth</Label>
-  <UseReusableChoices code='StateChoices'></UseReusableChoices></Column>
+<Column type='DROPDOWN'><Tag></Tag><Label>Region of Birth</Label>
+  <UseReusableChoices code='RegionChoices'></UseReusableChoices></Column>
 <Column type='STRING'><Tag></Tag><Label>Ethnicity</Label></Column>
 </GridSpecDetails>
 </Field>
@@ -1251,23 +1294,20 @@ Here are some examples; these fields would look like the ones in the figure that
 <DefaultValue>What happened in detail is as follows:</DefaultValue> 
 </Field>
 
-<ReusableChoices code='StateChoices' label='State'>
-  <Choice code='' label='(Not Selected)'></Choice>
-  <Choice code='CA' label='California'></Choice>
-  <Choice code='NY' label='New York'></Choice>
-  <Choice code='TX' label='Texas'></Choice>
+<ReusableChoices code='RegionChoices' label='State'>
+  <Choice code='R1' label='Region 1'></Choice>
+  <Choice code='R2' label='Region 2'></Choice>
+  <Choice code='R3' label='Region 3'></Choice>
 </ReusableChoices>
 
 <ReusableChoices code='CityChoices' label='City'>
-  <Choice code='' label='(Not Selected)'></Choice>
-  <Choice code='CA.SF' label='San Francisco'></Choice>
-  <Choice code='CA.LA' label='Los Angeles'></Choice>
-  <Choice code='NY.NYC' label='New York City'></Choice>
-  <Choice code='NY.ALB' label='Albany'></Choice>
-  <Choice code='TX.DAL' label='Dallas'></Choice>
-  <Choice code='TX.AUS' label='Austin'></Choice>
+  <Choice code='R1.C1' label='City 1'></Choice>
+  <Choice code='R1.C2' label='City 2'></Choice>
+  <Choice code='R2.C3' label='City 3'></Choice>
+  <Choice code='R2.C4' label='City 4'></Choice>
+  <Choice code='R3.C5' label='City 5'></Choice>
+  <Choice code='R3.C6' label='City 6'></Choice>
 </ReusableChoices>
-
 
 
 
@@ -1337,8 +1377,8 @@ Note:  If you try to import a template created by an account that is not one of 
 10d. Customizing your bulletin display
 There are various alternate display options for bulletins (see examples in screenshot below):
 
-- To hide fields to save space (e.g. for long text fields, or Message fields) while editing or viewing a bulletin:  click on the  +  button next to the field label.  To unhide the field again to see its contents, click on the  –  button next to the field label.  Martus will display all bulletins with matching fields the same way, until you exit Martus.
-- To hide entire sections while editing or viewing a bulletin:  click on the  +  button next to the section label.  To unhide the section again to see its contents, click on the  –  button next to the section label.  Martus will display all bulletins with matching sections the same way, until you exit Martus.
+- To hide fields to save space (e.g. for long text fields, or Message fields) while editing or viewing a bulletin:  click on the  -  button next to the field label.  To unhide the field again to see its contents, click on the  +  button next to the field label.  Martus will display all bulletins with matching fields the same way, until you exit Martus.
+- To hide entire sections while editing or viewing a bulletin:  click on the  -  button next to the section label.  To unhide the section again to see its contents, click on the  +  button next to the section label.  Martus will display all bulletins with matching sections the same way, until you exit Martus.
 - You can choose whether to display or edit Grid fields in the standard table view, or “expanded view” (useful if you have very wide columns or a large number of columns, that would cause you to have to scroll back and forth in the regular Grid view.) You can add “rows” to the bottom of your grid in expanded view by hitting the “Append Row” button. Martus will display all bulletins with matching grid fields the same way, until you exit Martus.
 
 
@@ -1402,7 +1442,7 @@ C:\Martus\bin\java.exe -Xms256m -Xmx256m -Xbootclasspath/p:C:\Martus\lib\ext\bc-
 
 This will allow Martus to get more memory, and will also turn on logging so that if there is a problem we can tell what it might be. The values of the memory switches (256) are defaults. The best value is dependent on your computer's setup, so you may be able to optimize this setting. For a more specific recommendation, send information about your computer (how much memory or RAM is installed, how much swap or page file space is available, etc.) to help@martus.org. In Windows, you can find this information by choosing Start > Programs > Accessories > System Tools > System Information. If the pagefile is small, you may want to try to increase it.
 
-d) There is an additional way to speed up Martus loading and navigation when an account has a large number of bulletins.  You can  tell Martus not to sort the bulletins in your folders in Martus when you initially load them (since sorting can take time with a lot of bulletins.)  You can always click on a column header in the bulletin preview list to sort the folder if desired, but including this option will save time on startup and on entering new folders in Martus.  To set Martus to run with this option, change the command line in the desktop shortcut (right-click, and choose Properties) to the following:
+d) There is an additional way to speed up Martus loading and navigation when an account has a large number of bulletins.  You can tell Martus not to sort the bulletins in your folders in Martus when you initially load them (since sorting can take time with a lot of bulletins.)  You can always click on a column header in the bulletin preview list to sort the folder if desired, but including this option will save time on startup and on entering new folders in Martus.  To set Martus to run with this option, change the command line in the desktop shortcut (right-click, and choose Properties) to the following:
 
 C:\Martus\bin\java.exe -Xbootclasspath/p:C:\Martus\lib\ext\bc-jce.jar -jar C:\Martus\martus.jar --folders-unsorted
 
@@ -1435,7 +1475,7 @@ In this version of Martus, you cannot save all changes to the screen layout thou
 You can customize the fields in bulletins you create, as well. See “10b. Customizing bulletin fields” for more information.
 
 16. When I start Martus, the screens are all gray with no text visible.  
-This may indicate a problem with your video driver. Try installing an updated video driver, which may be available from the manufacturer’s website. If you can not get access to an updated driver or you still see this problem, try setting Martus properties to use 256 color (instead of 16 or 32 bit color) in Windows XP, or using 256 color under Control Panel Display Settings for Windows operating systems older than Windows XP. Alternatively, you may be able to fix the problem by reducing the graphics acceleration setting in your video driver.  For additional assistance, email help@martus.org .
+This may indicate a problem with your video driver. Try installing an updated video driver, which may be available from the manufacturer’s website. If you cannot get access to an updated driver or you still see this problem, try setting Martus properties to use 256 color (instead of 16 or 32 bit color) in Windows XP, or using 256 color under Control Panel Display Settings for Windows operating systems older than Windows XP. Alternatively, you may be able to fix the problem by reducing the graphics acceleration setting in your video driver.  For additional assistance, email help@martus.org .
 
 17. I’m seeing unexpected behavior in Martus. How can I find out what’s going on?
 In Windows, instead of starting Martus by double-clicking the Martus icon on your desktop, choose Run from the Start menu and type the following text to launch Martus: 
@@ -1479,7 +1519,7 @@ Web browsers or word-processing applications may not display accents correctly i
 
 23. I’m having problems connecting to the server. What should I do?
 If Martus reports that the server isn’t available or that you can’t connect, first try to “ping” the server (which tells you what your connectivity is like to this server). To ping the server, open a command prompt window in Windows (or a Terminal window in Mac) and type
-         ping server-ip-address 
+       ping server-ip-address 
 (where server-ip-address is the same address you entered when you set up the server), and then press Return. 
 
 Then, try to “tracert” the server (which will tell you what the route is between your computer and the server.) To tracert the server, in the command prompt window in Windows (or the Terminal window in Mac), type 
@@ -1519,13 +1559,13 @@ The problem may be occurring because until Martus 3.1, the software was not comp
 	java -version
 
 If you are running Martus 3.0 or earlier and see Java version 1.5, you should download Java Runtime Environment (JRE) version 1.4.2 (preferably 1.4.2_12) from http://www.apple.com/downloads/macosx/apple .  You can then tell Martus to use the 1.4.2 version of Java by using the following command when you run Martus:
-          <path-to-Java-v1.4.2-Install-executable-libraries>/Commands/java 
+         <path-to-Java-v1.4.2-Install-executable-libraries>/Commands/java 
 -Xbootclasspath/p:/Library/Java/Extensions/bc-jce.jar -jar martus.jar
 (all on one line with a space after /java )
 For example:
-          /System/Library/Frameworks/JavaVM.framework/Versions/1.4.2/Commands/java
+         /System/Library/Frameworks/JavaVM.framework/Versions/1.4.2/Commands/java
 -Xbootclasspath/p:/Library/Java/Extensions/bc-jce.jar -jar martus.jar
-        
+       
 For assistance running Martus on a Mac, please email help@martus.org.
 
 29. I keep losing my Headquarters configurations. What’s going on?
@@ -1577,7 +1617,7 @@ When you change customizations, Martus will do its best to update the old format
 You have to be very careful if you make changes to the customization definitions of old fields.  If you keep the same tag and label, but change the type of field, Martus may be able to transfer the old data into the new field type, but not in all cases.  For example, 
 • if you change field type from DROPDOWN to STRING, the data will be transferred over, but 
 • if you change from STRING to BOOLEAN, the data will be lost. 
-• If you change from a DATE to DATERANGE, your data will be transferred, but 
+• if you change from a DATE to DATERANGE, your data will be transferred, but 
 • if you change from DATERANGE to DATE, you will lose the end date from your earlier data. 
 
 DROPDOWN and GRID fields are subject to additional rules regarding the modification of dropdown options/values and grid columns. If you 
@@ -1602,7 +1642,7 @@ When attachments are stored in Martus bulletins they are encrypted, so that nobo
 39. I want to change the number of minutes Martus waits before timing out for security – how can I do this?    
 You can change the Martus time-out length when there is no activity to be however long you want, instead of always timing out at the default of 10 minutes.  In addition to providing extra security if you are working in a public place or on a shared computer and want to shorten the timeout to only a few minutes, you can also improve the performance of long operations (such as retrieval of bulletins from the server) by setting the timeout to a longer amount of time if you are working in a secure location.  Different time-out lengths are allowed by setting a parameter in the command line used to run Martus.  The parameter is "--timeout-minutes=X" where X can be any number of minutes.  For example, to set the timeout length for Martus running on your computer in Windows to always be 5 minutes for a higher level of security, change the command line in the desktop shortcut (right-click, and  choose Properties) to the following: 
 
-        C:\Martus\bin\java.exe -Xbootclasspath/p:C:\Martus\lib\ext\bc-jce.jar -jar C:\Martus\martus.jar --timeout-minutes=5
+      C:\Martus\bin\java.exe -Xbootclasspath/p:C:\Martus\lib\ext\bc-jce.jar -jar C:\Martus\martus.jar --timeout-minutes=5
 
 For instructions on how to change the Martus command line for Mac or Linux, see section 2a of the User Guide or email help@martus.org. 
 
@@ -1614,22 +1654,22 @@ i. Use the Windows explorer to open up the directory ‘C:\Martus\lib’ and ren
 ii. Create a copy of the “font.properties.burmese” , and rename it to “font.properties”
 c) Depending on your setup, you may also need to do the following to get the Window titles to display correctly in Burmese
 ➢ For Windows XP/7/Me
-		i) Right click on your desktop and choose properties
-		ii) Choose the Appearance Tab
-		iii) Click the Advanced button
-		iv) Under “Item” choose “Active Title Bar”
-		v) Change the font to “MyaZedi.ttf”
+i) Right click on your desktop and choose properties
+ii) Choose the Appearance Tab
+iii) Click the Advanced button
+iv) Under “Item” choose “Active Title Bar”
+v) Change the font to “MyaZedi.ttf”
 ➢ For Windows Vista
-		i) Right click on your desktop and choose personalize
-		ii) Choose the Window Color and Appearance Tab
-		iii) Click the Advanced button
-		iv) Under “Item” choose “Active Title Bar”
-		v) Change the font to “MyaZedi.ttf”
+i) Right click on your desktop and choose personalize
+ii) Choose the Window Color and Appearance Tab
+iii) Click the Advanced button
+iv) Under “Item” choose “Active Title Bar”
+v) Change the font to “MyaZedi.ttf”
 ➢ For Windows 98/2000
-		i) Right click on your desktop and choose properties
-		ii) Choose the Appearance Tab
-		iii) Under “Item” choose “Active Title Bar”
-		iv) Change the font to “MyaZedi.ttf”
+i) Right click on your desktop and choose properties
+ii) Choose the Appearance Tab
+iii) Under “Item” choose “Active Title Bar”
+iv) Change the font to “MyaZedi.ttf”
 
 Start Martus as usual.  Pick Burmese from the language dropdown on the signin screen in Martus. If you get a message saying that the translation is out of date with the current version of Martus, check to see if there is a Martus language pack (Martus-bur.mlp) available at http://www.martus.org/downloads/#burmese, and if there is, please download it and copy into your C:\Martus directory, and run Martus again.  
 
@@ -1640,9 +1680,9 @@ In this version of Martus, Khmer fonts will not show up correctly with the versi
 a) Before starting Martus, download Java 6 (available here: http://www.java.com/en/) and direct the Martus software to use Java 6 instead of Java 4 by doing the following:
 b) Right-click on the Martus icon on your desktop, select Properties, and select the Shortcut tab.
 Replace what is in the Target command line with the below:
-     "C:\Program Files\Java\jre6\bin\java.exe" -Xbootclasspath/p:C:\Martus\lib\ext\bc-jce.jar -jar C:\Martus\martus.jar
-     or the equivalent based on where you installed Java6: 
-     "C:\where-you-installed-java\jre6\bin\java.exe" -Xbootclasspath/p:C:\Martus\lib\ext\bc-jce.jar -jar C:\Martus\martus.jar
+    "C:\Program Files\Java\jre6\bin\java.exe" -Xbootclasspath/p:C:\Martus\lib\ext\bc-jce.jar -jar C:\Martus\martus.jar
+    or the equivalent based on where you installed Java6: 
+    "C:\where-you-installed-java\jre6\bin\java.exe" -Xbootclasspath/p:C:\Martus\lib\ext\bc-jce.jar -jar C:\Martus\martus.jar
 c) Make sure that Khmer fonts are installed so that Martus can access them. In Martus 3.5 or later, you can find a Khmer font file (KhmerOS.ttf which has been tested with Martus) in your Martus\lib\fonts directory.  If you are using a version of Martus earlier than 3.5, you can search for KhmerOS.ttf online and download it.  
 d) Copy KhmerOS.ttf (or your preferred font file) to the following locations:  
 • C:\Windows\Fonts (can also be done through the Control Panel),
@@ -1669,6 +1709,7 @@ If you notice that Khmer is not displaying correctly in the window title bars at
 		iii. Under “Item” choose “Active Title Bar”
 		iv. Change the font to “KhmerOS.ttf”
 
+Please note that, with this version of Martus, there are some server functions that may not work correctly when running Martus with Java6 in Windows.  Please email help@martus.org if you need assistance.
 42. I want to enter Bengali/Bangla text in Martus, but the fonts don’t seem to be displaying correctly.  How can I get Bengali/Bangla text to show up in Martus?
 Some additional steps are needed to have Bengali/Bangla display correctly in Martus, The instructions for Windows are below, if you are using another operating system, please contact help@martus.org  for help. Please do the following:
 a) If you don't already have it, download and install the “Rupali.ttf” file on your system.  In Martus 3.5 or later, you can find Rupali.ttf in your Martus\lib\fonts directory.  If you are using a version of Martus earlier than 3.5, you can search for Rupali.ttf online and download it. For Windows, copy Rupali.ttf into both C:\Windows\Fonts (can also be done through the Control Panel) and C:\Martus\lib\fonts (if using a version of Martus earlier than 3.5).  Please note that Martus has been tested with this font, but other fonts may be possible as well (if you want to use another font, or are using a Mac, please contact help@martus.org for help). 
@@ -1686,21 +1727,45 @@ The current version of Martus comes with Java4.  While Martus has not been fully
 a) Before starting Martus, download Java 6 (available here: http://www.java.com/en/) and direct the Martus software to use Java 6 instead of Java 4 by doing the following:
 b) Right-click on the Martus icon on your desktop, select Properties, and select the Shortcut tab.
 Replace what is in the Target command line with the below:
-     "C:\Program Files\Java\jre6\bin\java.exe" -Xbootclasspath/p:C:\Martus\lib\ext\bc-jce.jar -jar C:\Martus\martus.jar
-     or equivalent based on where you installed Java6: 
-     "C:\where-you-installed-java\jre6\bin\java.exe" -Xbootclasspath/p:C:\Martus\lib\ext\bc-jce.jar -jar C:\Martus\martus.jar
+    "C:\Program Files\Java\jre6\bin\java.exe" -Xbootclasspath/p:C:\Martus\lib\ext\bc-jce.jar -jar C:\Martus\martus.jar
+    or equivalent based on where you installed Java6: 
+    "C:\where-you-installed-java\jre6\bin\java.exe" -Xbootclasspath/p:C:\Martus\lib\ext\bc-jce.jar -jar C:\Martus\martus.jar
 On Windows, you can tell that you are successfully running Martus using Java6 if you see large dots in the password fields instead of the asterisks you normally see when running Martus using Java4.
-
+Please note that, with this version of Martus, there are some server functions that may not work correctly when running Martus with Java6 in Windows.  Please email help@martus.org if you need assistance.
 45. Martus is finding either more or fewer bulletins than I expected.  What could be causing this?
 There are several reasons that Martus might not be finding a bulletin that you expect, or may be finding bulletins that you didn’t expect.  
 a) By default, Martus searches all versions of every bulletin. If you do not see your search terms/dates in the final version of the bulletin displayed in the Search Results folder, your criteria may have been matched in an earlier version of the bulletin.  You can access previous versions by clicking the “Bulletin Details…” button at the top of the bulletin.  To search only the most recent versions of bulletins, select Only Search Most Recent Versions of Bulletins in the Search dialog box. 
 b) By default, Martus searches all rows of any grid (table) fields for your criteria and doesn’t require that the terms are all on the same row.  If you want to specify that all grid column specifications in the Search screen be matched to a single row of bulletin grid data, check the “Match grid column specifications” checkbox in the Search screen.  
 c) Because Martus searches all rows of any grid (table) fields for your criteria, it may find bulletins where one grid row matches your criteria but other rows do not.  For example you could have a bulletin with a grid that has a location field in it and you have multiple rows of data in the grid with locations A, B, and C.  If you search for bulletins where location != C (does not equal C), Martus will find that bulletin because there are 2 rows in the bulletin grid where the location is not C, even though there is one row where the locations IS C.
 For more information about finding bulletins in Martus see section “6m. Searching for specific bulletins”, and if you have questions, please email info@martus.org.  
-
 46. I am seeing duplicate entries in my dropdown list search criteria values in the search screen.  What could be causing this?
 If you pick a Reusable Choices dropdown field to search on, the values that are displayed as the criteria dropdown list options are the labels for each list entry, but the codes you defined determine how many entries there will be in the search dropdown list (see section “10b. Customizing bulletin fields” for more information about creating custom dropdown fields). So if you have different reusable choices codes with the same label in different bulletin customizations in your account, the labels will show up twice in search dropdown lists (i.e. if you used label1 for both code1 and code2, you will see 2 entries in the search dropdown that looks like "label1" and if you want your search to be on bulletins that have that label, regardless of which code the customization had for the label, you will need to do a “or” search on both labels).  And if you have the same reusable choices code with different labels in different bulletin customizations in your account, the search dropdown list for that code will show both values separated by a semicolon (i.e. if you used code1 for both label1 and label2, you will see an entry in the search dropdown that looks like "label1; label2" and your search will be on bulletins that have either of those labels).
 
 47. I am seeing fields that look the same to me in Search and Report screen field lists.  How can I tell what the difference is between them?
 If you have fields in different bulletins or from different customizations that are exactly the same, Martus will combine them in any Search and Report field lists.  And while Martus warns you about duplicate labels where you are creating a new bulletin customization, it is possible that over time, you may have bulletins with different customizations that ended up with the same labels (e.g. maybe you changed a text field to a dropdown field but kept the same label).  In these cases, Martus will try to help you figure out the difference between the fields by displaying what the field type and tag are in the field selection lists.  Also, if you have fields with the same tag but different labels and/or field types, Martus may use the tag and field type to try and determine when different fields were meant to be the same.  So we encourage you to make your field tags and labels in a customization clearly related to each other to avoid any confusion.  See section “10b. Customizing bulletin fields” for more information about configuring custom fields.
+48. Why can’t I find my Martus files on my Mac?
+In Mac OS, the Martus data directory (and some other program directories) are hidden by default. These directories are not viewable using the Finder application, and are prefaced with a "." (e.g. ".Martus"). Martus saves some files, such as the Headquarters information .mpi file, directly to the Martus directory. In order to access these files, you will need to set your computer preferences to "show" these hidden folders. To do so, follow these steps: 
+a)  Go to Finder > Applications > Utilities, and open the Terminal application. (You can also hit Command-Space to bring up the search, enter "terminal", and when it finds the Terminal app, launch it.)
+b)  Type 
+  
+    defaults write com.apple.finder AppleShowAllFiles TRUE 
+  
+  and hit Enter. 
+c) Restart the Finder by holding the Option key, and click and hold the Finder icon. When the context menu shows, select Relaunch. (Alternately you can type 
+  
+   killall Finder 
+ 
+  and hit Enter/Return.) 
+  
+d) When the Finder restarts, you will be able to view the ".Martus" folder within your home directory and access files saved there. 
+
+49. I am running Martus in Farsi/Dari, but some of the letters don’t seem to be displaying correctly.  How can I fix this?
+In this version of Martus, some Farsi/Dari letters will not show up correctly with the version of Java that comes with the Martus install on Windows (Java4),  However, you can run Martus with a newer version of Java (Java6 also sometimes called Java 1.6), and Farsi/Dari text will display correctly.  Instructions to do this in Windows are as follows (if you are using Mac, please email help@martus.org):  
+a) Before starting Martus, download Java 6 (available here: http://www.java.com/en/) and direct the Martus software to use Java 6 instead of Java 4 by doing the following:
+b) Right-click on the Martus icon on your desktop, select Properties, and select the Shortcut tab.
+Replace what is in the Target command line with the below:
+    "C:\Program Files\Java\jre6\bin\java.exe" -Xbootclasspath/p:C:\Martus\lib\ext\bc-jce.jar -jar C:\Martus\martus.jar
+    or the equivalent based on where you installed Java6: 
+    "C:\where-you-installed-java\jre6\bin\java.exe" -Xbootclasspath/p:C:\Martus\lib\ext\bc-jce.jar -jar C:\Martus\martus.jar
+Please note that, with this version of Martus, there are some server functions that may not work correctly when running Martus with Java6 in Windows.  Please email help@martus.org if you need assistance.
 
