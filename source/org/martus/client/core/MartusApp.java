@@ -141,7 +141,8 @@ public class MartusApp
 				cryptoToUse = new MartusSecurity();
 
 			// Comment out the following line to disable jar verification for new/temporary build process
-//			MartusJarVerification.verifyJars();
+			// and when commenting it out, also uncomment the notiifcation in UiMainWindow
+			MartusJarVerification.verifyJars();
 
 			configInfo = new ConfigInfo();
 			currentUserName = "";
