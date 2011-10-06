@@ -1374,10 +1374,6 @@ public class EnglishStrings
 	"even though there is one row where the locations IS C.\n" +
 	"\n " +
 	"2. " +
-	"In this release, Martus will not include data-driven dropdown fields in the Search screen. " +
-	"See the \"Customize Fields\" Help screen for more information about these fields.\n" +
-	"\n " +
-	"3. " +
 	"In this release, if you are searching on a multi-level dropdown, all searches are exact matches, " +
 	"not partial or \"starts with\" matches.  " +
 	"This means that you have to pick the exact level at which you want to be searching.  " +
@@ -1389,13 +1385,15 @@ public class EnglishStrings
 	"Martus will only find entries where there was no City data entered  (City was blank), " +
 	"as opposed to ANY location with California regardless of what data was entered at the City level.\n" +
 	"\n " +
-	"4. If you do not see your search terms/dates in the final version of the bulletin displayed in the Search Results folder, " +
+	"3. " +
+	"If you do not see your search terms/dates in the final version of the bulletin displayed in the Search Results folder, " +
 	"your criteria may have been matched in an earlier version of the bulletin.  " +
 	"You can access previous versions by clicking the \"Bulletin Details...\" button at the top of the bulletin.  " +
 	"To search only the most recent versions of bulletins, select Only Search Most Recent Versions of Bulletins " +
 	"in the Search dialog box.\n" +
 	"\n " +
-	"5. If you have fields in different bulletins or from different customizations that are exactly the same, " +
+	"4. " +
+	"If you have fields in different bulletins or from different customizations that are exactly the same, " +
 	"Martus will combine them in any Search and Report field lists.  " +
 	"And while Martus warns you about duplicate labels where you are creating a new bulletin customization, " +
 	"it is possible that over time, you may have bulletins with different customizations that ended up with the same labels " +
@@ -1407,7 +1405,8 @@ public class EnglishStrings
 	"So we encourage you to make your field tags and labels in a customization clearly related to each other to avoid any confusion. " +
 	"Please see the \"Customize Fields\" Help screen for more guidelines on creating fields for searching.\n" +
 	"\n " +
-	"6. You may sometimes see duplicate entries in dropdown list search criteria values in the search screen.  " +
+	"5. " +
+	"You may sometimes see duplicate entries in dropdown list search criteria values in the search screen.  " +
 	"If you pick a Reusable Choices dropdown field to search on, the values that are displayed as the criteria " +
 	"dropdown list options are the labels for each list entry, but the codes you defined determine how many entries " +
 	"there will be in the search dropdown list (see the \"Customize Fields\" Help screen for more information about " +
