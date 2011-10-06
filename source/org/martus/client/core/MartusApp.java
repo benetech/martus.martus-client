@@ -142,7 +142,7 @@ public class MartusApp
 
 			// Comment out the following line to disable jar verification for new/temporary build process
 			// and when commenting it out, also uncomment the notiifcation in UiMainWindow
-			MartusJarVerification.verifyJars();
+//			MartusJarVerification.verifyJars();
 
 			configInfo = new ConfigInfo();
 			currentUserName = "";
