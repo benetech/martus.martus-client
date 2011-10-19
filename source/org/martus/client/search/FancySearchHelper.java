@@ -128,9 +128,9 @@ public class FancySearchHelper
 			JSONObject row = rows.getJSONObject(i);
 			JSONObject jsonMiniSpec = row.getJSONObject(TAG_FIELD_TO_SEARCH);
 			String miniSpecAsJsonString = convertSearchFieldFromJsonToGridValue(jsonMiniSpec);
+			gridData.addEmptyRow();
 			if(doesFieldExist(gridData, miniSpecAsJsonString))
 			{
-				gridData.addEmptyRow();
 				gridData.setValueAt(miniSpecAsJsonString, i, 0);
 				gridData.setValueAt(row.getString(TAG_COMPARE_HOW), i, 1);
 				String lookFor = row.getString(TAG_LOOK_FOR);
