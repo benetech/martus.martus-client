@@ -169,10 +169,16 @@ class Martus
 
 	public static void addThirdPartyJarsToClasspath() throws Exception
 	{
+		File martusJarDirectory = getMartusJarDirectory();
+		if(martusJarDirectory == null)
+		{
+			System.out.println("Not adding thirdparty jars to classpath since not running from a jar");
+			return;
+		}
+		
 		String jarSubdirectoryName = "ThirdParty";
-		File appCodeDirectory = getAppCodeDirectory();
-		System.out.println("Running Martus from " + appCodeDirectory);
-		File thirdPartyDirectory = new File(appCodeDirectory, jarSubdirectoryName);
+		System.out.println("Running Martus from " + martusJarDirectory);
+		File thirdPartyDirectory = new File(martusJarDirectory, jarSubdirectoryName);
 		RuntimeJarLoader.addJarsInSubdirectoryToClasspath(thirdPartyDirectory, getThirdPartyJarNames());
 	}
 	
@@ -191,9 +197,9 @@ class Martus
 		};
 	}
 
-	public static File getAppCodeDirectory() throws URISyntaxException
+	public static File getMartusJarDirectory() throws URISyntaxException
 	{
-		final URL url = Martus.class.getResource("/");
+		final URL url = Martus.class.getResource("Martus.class");
 		String uriScheme = url.toURI().getSchemeSpecificPart();
 		String jarPathString = stripPrefix(uriScheme);
 		
@@ -207,8 +213,7 @@ class Martus
 			return directory;
 		}
 
-		File appCodeDirectory = new File(jarPathString);
-		return appCodeDirectory;
+		return null;
 	}
 
 	private static String stripPrefix(String uri)
