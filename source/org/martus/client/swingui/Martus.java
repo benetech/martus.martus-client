@@ -170,11 +170,10 @@ class Martus
 	public static void addThirdPartyJarsToClasspath() throws Exception
 	{
 		String jarSubdirectoryName = "ThirdParty";
-		File miradiDirectory = getAppCodeDirectory();
-		File thirdPartyDirectory = new File(miradiDirectory, jarSubdirectoryName);
+		File appCodeDirectory = getAppCodeDirectory();
+		System.out.println("Running Martus from " + appCodeDirectory);
+		File thirdPartyDirectory = new File(appCodeDirectory, jarSubdirectoryName);
 		RuntimeJarLoader.addJarsInSubdirectoryToClasspath(thirdPartyDirectory, getThirdPartyJarNames());
-		System.err.println("Miradi code running from: " + miradiDirectory.getAbsolutePath());
-		System.err.println("Added jars to classpath: " + thirdPartyDirectory.getAbsolutePath());
 	}
 	
 	private static String[] getThirdPartyJarNames()
@@ -194,22 +193,22 @@ class Martus
 
 	public static File getAppCodeDirectory() throws URISyntaxException
 	{
-		final URL resourceUrl = Martus.class.getResource("/org");
-		String imagesURIString = resourceUrl.toURI().getSchemeSpecificPart();
-		String imagesPathString = stripPrefix(imagesURIString);
+		final URL url = Martus.class.getResource("/");
+		String uriScheme = url.toURI().getSchemeSpecificPart();
+		String jarPathString = stripPrefix(uriScheme);
 		
-		int bangAt = imagesPathString.indexOf('!');
-		if(bangAt < 0)
+		int bangAt = jarPathString.indexOf('!');
+		boolean isInsideJar = bangAt >= 0;
+		if(isInsideJar)
 		{
-			File imagesDirectory = new File(imagesPathString);
-			final File directory = imagesDirectory.getParentFile();
+			String jarURIString = jarPathString.substring(0, bangAt);
+			File jarFile = new File(jarURIString);
+			final File directory = jarFile.getParentFile();
 			return directory;
 		}
-		
-		String jarURIString = imagesPathString.substring(0, bangAt);
-		File jarFile = new File(jarURIString);
-		final File directory = jarFile.getParentFile();
-		return directory;
+
+		File appCodeDirectory = new File(jarPathString);
+		return appCodeDirectory;
 	}
 
 	private static String stripPrefix(String uri)
