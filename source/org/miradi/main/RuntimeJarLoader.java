@@ -48,11 +48,16 @@ public class RuntimeJarLoader
 				continue;
 			
 			File jarFile = new File(directory, jarName);
-			if(!jarFile.exists())
+			if(jarFile.exists())
+			{
+				ClassPathHacker.addFile(jarFile);
+				System.out.println("Added jar to classpath: " + jarName);
+			}
+			else
+			{
 				System.err.println("WARNING: Cannot find: " + jarFile);
+			}
 
-			ClassPathHacker.addFile(jarFile);
-			System.out.println("Added jar to classpath: " + jarName);
 		}
 	}
 
