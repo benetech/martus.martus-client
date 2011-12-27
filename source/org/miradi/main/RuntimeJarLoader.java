@@ -52,6 +52,7 @@ public class RuntimeJarLoader
 				System.err.println("WARNING: Cannot find: " + jarFile);
 
 			ClassPathHacker.addFile(jarFile);
+			System.out.println("Added jar to classpath: " + jarName);
 		}
 	}
 
