@@ -145,7 +145,7 @@ public class MartusJarVerification
 		return gotBytes;
 	}
 
-	static URL getJarURL(Class c) throws MartusCrypto.InvalidJarException, MalformedURLException
+	private static URL getJarURL(Class c) throws MartusCrypto.InvalidJarException, MalformedURLException
 	{
 		String name = c.getName();
 		int lastDot = name.lastIndexOf('.');
