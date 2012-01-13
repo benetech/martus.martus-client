@@ -213,9 +213,12 @@ public class MartusApp
 	private static JarEntry getSignatureFileJarEntry() throws IOException
 	{
 		URL jarUrl = getJarURL();
+		System.out.println("Checking sig of " + jarUrl);
 		JarURLConnection jarConnection = (JarURLConnection)jarUrl.openConnection();
 		JarFile jf = jarConnection.getJarFile();
-		return jf.getJarEntry("META-INF/SSMTSJAR.SF");
+		JarEntry jarEntry = jf.getJarEntry("META-INF/SSMTSJAR.SF");
+		System.out.println("Found sig entry: " + jarEntry);
+		return jarEntry;
 	}
 
 	static public void setInitialUiDefaultsFromFileIfPresent(MtfAwareLocalization localization, File defaultUiFile)
