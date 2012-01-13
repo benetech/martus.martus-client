@@ -60,6 +60,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JComponent;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JSplitPane;
 import javax.swing.SwingUtilities;
@@ -153,9 +154,18 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 	public UiMainWindow()
 	{
 		super();
-		
-//		Un-comment the line below when the MartusApp constructor is not calling MartusJarVerification.verifyJars()
-//		JOptionPane.showMessageDialog(null, "JAR IS NOT BEING VERIFIED");
+
+		try
+		{
+			warnIfThisJarNotSigned();
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+			JOptionPane.showMessageDialog(null, "Error attempting to verify jar");
+			throw new RuntimeException(e);
+		}
+
 		
 		// This block of code is to create a test version of Martus that 
 		// will expire after a specific date. 
@@ -208,6 +218,20 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		setGlassPane(new WindowObscurer());
 	}
 	
+	private void warnIfThisJarNotSigned() throws Exception
+	{
+		if(!MartusApp.isRunningFromJar())
+		{
+			System.out.println("Skipping jar verification because we are not running from a jar");
+			return;
+		}
+
+		if(!MartusApp.isJarSigned())
+		{
+			JOptionPane.showMessageDialog(null, "This Martus Jar is not signed, so cannot be verified");
+		}
+	}
+
 	public static String[] getAllEnglishStrings()
 	{
 		String[] clientStrings = EnglishStrings.strings;

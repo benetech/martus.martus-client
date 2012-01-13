@@ -38,6 +38,9 @@ import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.UnsupportedEncodingException;
+import java.net.JarURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.Date;
 import java.util.Enumeration;
 import java.util.HashMap;
@@ -140,9 +143,7 @@ public class MartusApp
 			if(cryptoToUse == null)
 				cryptoToUse = new MartusSecurity();
 
-			// Comment out the following line to disable jar verification for new/temporary build process
-			// and when commenting it out, also uncomment the notiifcation in UiMainWindow
-			MartusJarVerification.verifyJars();
+			verifyJarsIfPossible();
 
 			configInfo = new ConfigInfo();
 			currentUserName = "";
@@ -174,6 +175,47 @@ public class MartusApp
 		}
 
 		UpdateDocsIfNecessaryFromMLPFiles();
+	}
+
+	public static boolean isRunningFromJar() throws MalformedURLException
+	{
+		return getJarURL() != null;
+	}
+
+	public static boolean isJarSigned() throws IOException
+	{
+		return getSignatureFileJarEntry() != null;
+	}
+
+	private void verifyJarsIfPossible() throws Exception
+	{
+		if(isRunningFromJar() && isJarSigned())
+			MartusJarVerification.verifyJars();
+	}
+	
+	private static URL getJarURL() throws MalformedURLException
+	{
+		Class c = MartusApp.class;
+		String name = c.getName();
+		int lastDot = name.lastIndexOf('.');
+		String classFileName = name.substring(lastDot + 1) + ".class";
+		URL url = c.getResource(classFileName);
+		String wholePath = url.toString();
+		int bangAt = wholePath.indexOf('!');
+		if(bangAt < 0)
+			return null;
+		
+		String jarPart = wholePath.substring(0, bangAt+2);
+		URL jarURL = new URL(jarPart);
+		return jarURL;
+	}
+	
+	private static JarEntry getSignatureFileJarEntry() throws IOException
+	{
+		URL jarUrl = getJarURL();
+		JarURLConnection jarConnection = (JarURLConnection)jarUrl.openConnection();
+		JarFile jf = jarConnection.getJarFile();
+		return jf.getJarEntry("META-INF/SSMTSJAR.SF");
 	}
 
 	static public void setInitialUiDefaultsFromFileIfPresent(MtfAwareLocalization localization, File defaultUiFile)
