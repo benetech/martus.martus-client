@@ -145,7 +145,7 @@ public class MartusJarVerification
 		return gotBytes;
 	}
 
-	private static URL getJarURL(Class c) throws MartusCrypto.InvalidJarException, MalformedURLException
+	public static URL getJarURL(Class c) throws MartusCrypto.InvalidJarException, MalformedURLException
 	{
 		String name = c.getName();
 		int lastDot = name.lastIndexOf('.');
@@ -163,6 +163,6 @@ public class MartusJarVerification
 
 	private static final String MARTUS_SIGNATURE_FILE_EXTENSION = ".SIG";
 	private static final String SIGNATURE_FILE_EXTENSION = ".SF";
-	private static final String BCPROV_JAR_FILE_NAME = "bcprov-jdk14-135.jar";
+	public static final String BCPROV_JAR_FILE_NAME = "bcprov-jdk14-135.jar";
 
 }

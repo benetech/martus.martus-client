@@ -55,6 +55,7 @@ import java.util.Stack;
 import java.util.TimerTask;
 import java.util.Vector;
 
+import javax.crypto.Cipher;
 import javax.swing.AbstractAction;
 import javax.swing.ImageIcon;
 import javax.swing.JComponent;
@@ -65,6 +66,7 @@ import javax.swing.JPanel;
 import javax.swing.JSplitPane;
 import javax.swing.SwingUtilities;
 
+import org.bouncycastle.crypto.engines.RSAEngine;
 import org.json.JSONObject;
 import org.martus.client.bulletinstore.BulletinFolder;
 import org.martus.client.bulletinstore.ClientBulletinStore;
@@ -74,6 +76,7 @@ import org.martus.client.core.MartusApp;
 import org.martus.client.core.MartusApp.LoadConfigInfoException;
 import org.martus.client.core.MartusApp.MartusAppInitializationException;
 import org.martus.client.core.MartusApp.SaveConfigInfoException;
+import org.martus.client.core.MartusJarVerification;
 import org.martus.client.core.RetrieveCommand;
 import org.martus.client.core.SortableBulletinList;
 import org.martus.client.core.TransferableBulletinList;
@@ -166,6 +169,17 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 			throw new RuntimeException(e);
 		}
 
+		try
+		{
+			warnIfCryptoJarsNotLoaded();
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+			JOptionPane.showMessageDialog(null, "Unknown error attempting to locate crypto jars");
+			throw new RuntimeException(e);
+		}
+
 		
 		// This block of code is to create a test version of Martus that 
 		// will expire after a specific date. 
@@ -218,6 +232,33 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		setGlassPane(new WindowObscurer());
 	}
 	
+	private void warnIfCryptoJarsNotLoaded() throws Exception
+	{
+		URL jceJarURL = MartusJarVerification.getJarURL(Cipher.class);
+		if(jceJarURL.toString().indexOf("bc-jce") < 0)
+		{
+			String hintsToSolve = "Xbootclasspath might be incorrect; bc-jce.jar might be missing from Martus/lib/ext";
+			JOptionPane.showMessageDialog(null, "Didn't load bc-jce.jar\n\n" + hintsToSolve);
+		}
+		
+		try
+		{
+			URL bcprovJarURL = MartusJarVerification.getJarURL(RSAEngine.class);
+			String bcprovJarName = MartusJarVerification.BCPROV_JAR_FILE_NAME;
+			if(bcprovJarURL.toString().indexOf(bcprovJarName) < 0)
+			{
+				String hintsToSolve = "Make sure " + bcprovJarName + " is the only bcprov file in Martus/lib/ext";
+				JOptionPane.showMessageDialog(null, "Didn't load " + bcprovJarName + "\n\n" + hintsToSolve);
+			}
+		} 
+		catch (MartusCrypto.InvalidJarException e)
+		{
+			String hintsToSolve = "Xbootclasspath might be incorrect; " + MartusJarVerification.BCPROV_JAR_FILE_NAME + " might be missing from Martus/lib/ext";
+			JOptionPane.showMessageDialog(null, "Didn't load bc-jce.jar\n\n" + hintsToSolve);
+		}
+
+	}
+
 	private void warnIfThisJarNotSigned() throws Exception
 	{
 		if(!MartusApp.isRunningFromJar())
