@@ -189,7 +189,7 @@ public class MartusApp
 
 	private void verifyJarsIfPossible() throws Exception
 	{
-		if(isRunningFromJar() && isJarSigned())
+		if(isRunningFromJar())
 			MartusJarVerification.verifyJars();
 	}
 	
