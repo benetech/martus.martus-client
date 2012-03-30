@@ -138,10 +138,6 @@ class Martus
 					JOptionPane.showMessageDialog(null, "Martus requires Windows ME or later", "ERROR", JOptionPane.ERROR_MESSAGE);
 					System.exit(1);
 				}
-				
-				int comparedToWindow7 = osVersion.compareTo("6.1");
-				if(comparedToWindow7 >= 0)
-					useSystemLookAndFeel = false;
 			}
 			
 			if(useSystemLookAndFeel)
