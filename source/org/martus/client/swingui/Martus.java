@@ -131,6 +131,14 @@ class Martus
 			System.out.println(osName + ": " + osVersion);
 			if(osName.startsWith("Windows"))
 			{
+				boolean isWin2KOrLater = osVersion.compareTo("5") >= 0;
+				boolean isWinME = osVersion.compareTo("4.90") == 0;
+				if(isWin2KOrLater || isWinME)
+				{
+					JOptionPane.showMessageDialog(null, "Martus requires Windows ME or later", "ERROR", JOptionPane.ERROR_MESSAGE);
+					System.exit(1);
+				}
+				
 				int comparedToWindow7 = osVersion.compareTo("6.1");
 				if(comparedToWindow7 >= 0)
 					useSystemLookAndFeel = false;
