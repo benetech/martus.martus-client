@@ -42,7 +42,7 @@ import org.martus.swing.UiOptionPane;
 import org.martus.swing.Utilities;
 import org.miradi.main.RuntimeJarLoader;
 
-class Martus
+public class Martus
 {
     public static void main (String args[])
 	{
@@ -60,6 +60,7 @@ class Martus
 		System.out.println(UiConstants.programName);
 		System.out.println(UiConstants.versionLabel + " " + VersionBuildDate.getVersionBuildDate());
 		System.out.println("Java version: " + System.getProperty("java.version"));
+		System.out.println(getMemoryStatistics());
 
 		try
 		{
@@ -158,6 +159,21 @@ class Martus
         }
     }
 
+	public static String getMemoryStatistics()
+	{
+		Runtime runtime = Runtime.getRuntime();
+		String memoryStatistics = "\nMemory Statistics:\n" +
+						"  Free: " + megs(runtime.freeMemory()) + "\n" + 
+						"  Used: " + megs(runtime.totalMemory()) + "\n" +
+						"  Max:  " + megs(runtime.maxMemory());
+		return memoryStatistics;
+	}
+	
+	private static String megs(long bytes)
+	{
+		return "" + bytes/1024L/1024L + " megs";
+	}
+	
 	private static int findOption(Vector options, String optionText)
 	{
 		for(int i = 0; i < options.size(); ++i)

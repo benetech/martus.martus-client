@@ -128,6 +128,7 @@ import org.martus.common.MartusUtilities.ServerErrorException;
 import org.martus.common.MiniLocalization;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.crypto.MartusCrypto;
+import org.martus.common.crypto.MartusSecurity;
 import org.martus.common.database.FileDatabase.MissingAccountMapException;
 import org.martus.common.database.FileDatabase.MissingAccountMapSignatureException;
 import org.martus.common.fieldspec.MiniFieldSpec;
@@ -410,6 +411,17 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 
 		if(!sessionSignIn())
 			return false;
+		
+		try
+		{
+			String accountId = getApp().getSecurity().getPublicKeyString();
+			MartusLogger.log("Public code: " + MartusSecurity.getFormattedPublicCode(accountId));
+		} 
+		catch (InvalidBase64Exception e)
+		{
+			MartusLogger.logException(e);
+			// NOTE: This was just informational output, so keep going
+		}
 		
 		timeoutChecker = new java.util.Timer(true);
 		TimeoutTimerTask timeoutTimerTask = new TimeoutTimerTask();
@@ -2430,6 +2442,8 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 			notifyDlg("ErrorDuringExit");
 		}
 
+		MartusLogger.log(Martus.getMemoryStatistics());
+
 		exitWithoutSavingState();
 	}
 
@@ -2622,6 +2636,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 				if(!hasTimedOut())
 					return;
 				
+				MartusLogger.log(Martus.getMemoryStatistics());
 				MartusLogger.logBeginProcess("Save before timeout");
 				try
 				{
