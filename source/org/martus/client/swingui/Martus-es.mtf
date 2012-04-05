@@ -2089,8 +2089,8 @@
 #________________=Title
 -768e-field:title=Título
 
-#_____________________________=Spanish 3.6.1
-field:translationVersion=Español 3.6.1
+#_____________________________=Spanish 4.0.0
+field:translationVersion=Español 4.0.0
 
 #___________________=Username
 -84c2-field:username=Nombre de usuario
