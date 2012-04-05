@@ -163,8 +163,9 @@ public class Martus
 	{
 		Runtime runtime = Runtime.getRuntime();
 		String memoryStatistics = "\nMemory Statistics:\n" +
-						"  Using: " + megs(runtime.freeMemory()) + " of " + megs(runtime.totalMemory()) + "\n" +
-						"  Max:  " + megs(runtime.maxMemory());
+						"  Available in heap: " + megs(runtime.freeMemory()) + "\n" + 
+						"  Current heap size: " + megs(runtime.totalMemory()) + "\n" +
+						"  Maximum heap size: " + megs(runtime.maxMemory());
 		return memoryStatistics;
 	}
 	
