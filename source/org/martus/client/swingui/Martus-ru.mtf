@@ -2021,8 +2021,8 @@
 #________________=Title
 -768e-field:title=Заголовок
 
-#_____________________________=English
--649d-field:translationVersion=Русский pre-3.3 3.3
+#_____________________________=Russian 3.3
+-649d-field:translationVersion=Русский 3.3
 
 #___________________=Username
 -84c2-field:username=Имя пользователя
