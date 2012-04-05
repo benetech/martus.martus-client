@@ -415,7 +415,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		try
 		{
 			String accountId = getApp().getSecurity().getPublicKeyString();
-			MartusLogger.log("Public code: " + MartusSecurity.getFormattedPublicCode(accountId));
+			MartusLogger.log("Public code: " + MartusSecurity.getFormattedPublicCode(accountId) + "\n");
 		} 
 		catch (InvalidBase64Exception e)
 		{
