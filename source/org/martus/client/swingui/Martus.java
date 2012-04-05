@@ -163,8 +163,7 @@ public class Martus
 	{
 		Runtime runtime = Runtime.getRuntime();
 		String memoryStatistics = "\nMemory Statistics:\n" +
-						"  Free: " + megs(runtime.freeMemory()) + "\n" + 
-						"  Used: " + megs(runtime.totalMemory()) + "\n" +
+						"  Using: " + megs(runtime.freeMemory()) + " of " + megs(runtime.totalMemory()) + "\n" +
 						"  Max:  " + megs(runtime.maxMemory());
 		return memoryStatistics;
 	}
