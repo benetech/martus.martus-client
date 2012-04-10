@@ -81,6 +81,7 @@ class ViewHandler implements ActionListener
 		}
 		catch(Exception e)
 		{
+			MartusLogger.logException(e);
 			System.out.println("Unable to view attachment:" + e);
 			notifyUnableToView();
 		}
