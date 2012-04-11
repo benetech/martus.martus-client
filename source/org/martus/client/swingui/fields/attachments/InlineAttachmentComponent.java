@@ -32,6 +32,7 @@ import java.io.File;
 import java.io.IOException;
 
 import javax.swing.BorderFactory;
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
 
 import org.martus.client.bulletinstore.ClientBulletinStore;
@@ -80,6 +81,10 @@ class InlineAttachmentComponent extends UiLabel
 	
 	public boolean isValid()
 	{
-		return (getIcon().getIconHeight() > 0);
+		Icon icon = getIcon();
+		if(icon == null)
+			return false;
+		
+		return (icon.getIconHeight() > 0);
 	}
 }
