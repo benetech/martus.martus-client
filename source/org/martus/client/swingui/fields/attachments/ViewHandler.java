@@ -60,7 +60,7 @@ class ViewHandler implements ActionListener
 		if(panel.isImageInline)
 			return;
 		
-		if(!Utilities.isMSWindows())
+		if(!Utilities.isMSWindows() && !Utilities.isMacintosh())
 		{
 			mainWindow.notifyDlg("ViewAttachmentNotAvailable");
 			return;
@@ -115,7 +115,7 @@ class ViewHandler implements ActionListener
 		String tempFileFullPathName = temp.getPath();
 		String quotedPath = '"' + tempFileFullPathName + '"';
 
-		String launchCommand = "cmd /C " + quotedPath;
+		String launchCommand = getLaunchCommandForThisOperatingSystem() + quotedPath;
 		if(temp.getName().indexOf('.') < 0)
 			launchCommand = "start " + quotedPath;
 		
@@ -127,6 +127,17 @@ class ViewHandler implements ActionListener
 			MartusLogger.logError(launchCommand);
 			notifyUnableToView();
 		}
+	}
+
+	private String getLaunchCommandForThisOperatingSystem()
+	{
+		if(Utilities.isMSWindows())
+			return "cmd /C ";
+		
+		else if(Utilities.isMacintosh())
+			return "open ";
+		
+		throw new RuntimeException("Launch not supported on this operating system");
 	}
 
 	private void notifyUnableToView()
