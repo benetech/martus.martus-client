@@ -29,6 +29,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 
 import org.martus.client.bulletinstore.ClientBulletinStore;
 import org.martus.client.core.BulletinXmlExporter;
@@ -39,10 +40,10 @@ import org.martus.common.bulletin.BulletinLoader;
 import org.martus.common.crypto.MartusCrypto;
 import org.martus.common.crypto.MartusCrypto.CryptoException;
 import org.martus.common.database.ReadableDatabase;
-import org.martus.common.packet.UniversalId;
 import org.martus.common.packet.Packet.InvalidPacketException;
 import org.martus.common.packet.Packet.SignatureVerificationException;
 import org.martus.common.packet.Packet.WrongPacketTypeException;
+import org.martus.common.packet.UniversalId;
 import org.martus.swing.Utilities;
 import org.martus.util.StreamableBase64.InvalidBase64Exception;
 
@@ -125,8 +126,23 @@ class ViewHandler implements ActionListener
 		{
 			MartusLogger.logError("Error viewing attachment: " + exitCode);
 			MartusLogger.logError(launchCommand);
+			dumpOutputToConsole("stdout", processView.getInputStream());
+			dumpOutputToConsole("stderr", processView.getErrorStream());
 			notifyUnableToView();
 		}
+	}
+
+	private void dumpOutputToConsole(String streamName, InputStream capturedOutput) throws IOException
+	{
+		System.out.println("Captured output from " + streamName + ":");
+		while(capturedOutput.available() > 0)
+		{
+			int got = capturedOutput.read();
+			if(got < 0)
+				break;
+			System.out.print((char)got);
+		}
+		System.out.println();
 	}
 
 	private String getLaunchCommandForThisOperatingSystem()
