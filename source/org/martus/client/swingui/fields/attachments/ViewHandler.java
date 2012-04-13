@@ -112,20 +112,22 @@ class ViewHandler implements ActionListener
 
 	private void launchExternalAttachmentViewer(File temp) throws IOException, InterruptedException 
 	{
-		Runtime runtimeViewer = Runtime.getRuntime();
-		String tempFileFullPathName = temp.getPath();
-		String quotedPath = '"' + tempFileFullPathName + '"';
+		Runtime runtime = Runtime.getRuntime();
 
-		String launchCommand = getLaunchCommandForThisOperatingSystem() + quotedPath;
-		if(temp.getName().indexOf('.') < 0)
-			launchCommand = "start " + quotedPath;
+		String[] launchCommand = getLaunchCommandForThisOperatingSystem(temp.getPath());
 		
-		Process processView=runtimeViewer.exec(launchCommand);
+		Process processView=runtime.exec(launchCommand);
 		int exitCode = processView.waitFor();
 		if(exitCode != 0)
 		{
 			MartusLogger.logError("Error viewing attachment: " + exitCode);
-			MartusLogger.logError(launchCommand);
+			String launchCommandAsString = "";
+			for (String part : launchCommand)
+			{
+				launchCommandAsString += part;
+				launchCommandAsString += ' ';
+			}
+			MartusLogger.logError(launchCommandAsString);
 			dumpOutputToConsole("stdout", processView.getInputStream());
 			dumpOutputToConsole("stderr", processView.getErrorStream());
 			notifyUnableToView();
@@ -134,6 +136,9 @@ class ViewHandler implements ActionListener
 
 	private void dumpOutputToConsole(String streamName, InputStream capturedOutput) throws IOException
 	{
+		if(capturedOutput.available() <= 0)
+			return;
+		
 		System.out.println("Captured output from " + streamName + ":");
 		while(capturedOutput.available() > 0)
 		{
@@ -145,13 +150,13 @@ class ViewHandler implements ActionListener
 		System.out.println();
 	}
 
-	private String getLaunchCommandForThisOperatingSystem()
+	private String[] getLaunchCommandForThisOperatingSystem(String fileToLaunch)
 	{
 		if(Utilities.isMSWindows())
-			return "cmd /C ";
+			return new String[] {"cmd", "/C", fileToLaunch};
 		
 		else if(Utilities.isMacintosh())
-			return "open ";
+			return new String[] {"open", fileToLaunch};
 		
 		throw new RuntimeException("Launch not supported on this operating system");
 	}
