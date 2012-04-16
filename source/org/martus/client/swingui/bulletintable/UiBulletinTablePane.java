@@ -112,9 +112,8 @@ public class UiBulletinTablePane extends UiScrollPane
 			table.setFolder(folder);
 			table.selectBulletins(selected);
 			parent.bulletinSelectionHasChanged();
-			// the following is required (for unknown reasons)
-			// to get the table to redraw (later) if it is currently
-			// under a window. Yuck! kbs.
+
+			invalidate();
 			repaint();
 		}
 	}
