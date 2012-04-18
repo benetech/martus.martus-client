@@ -144,6 +144,9 @@ public class UiFolderTreePane extends UiScrollPane
 		FolderTreeNode node = model.findFolderByInternalName(f.getName());
 		if(node != null)
 			model.nodeChanged(node);
+		
+		invalidate();
+		repaint();
 	}
 
 	class FolderTreeMouseAdapter extends MouseAdapter
