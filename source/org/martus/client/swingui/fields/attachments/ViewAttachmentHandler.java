@@ -153,12 +153,17 @@ class ViewAttachmentHandler implements ActionListener
 	private String[] getLaunchCommandForThisOperatingSystem(String fileToLaunch)
 	{
 		if(Utilities.isMSWindows())
-			return new String[] {"cmd", "/C", fileToLaunch};
+			return new String[] {"cmd", "/C", addQuotes(fileToLaunch)};
 		
 		else if(Utilities.isMacintosh())
-			return new String[] {"open", fileToLaunch};
+			return new String[] {"open", addQuotes(fileToLaunch)};
 		
 		throw new RuntimeException("Launch not supported on this operating system");
+	}
+
+	private String addQuotes(String fileToLaunch)
+	{
+		return "\"" + fileToLaunch + "\"";
 	}
 
 	private void notifyUnableToView()
