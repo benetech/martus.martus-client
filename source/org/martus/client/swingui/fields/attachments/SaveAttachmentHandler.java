@@ -36,9 +36,9 @@ import org.martus.common.bulletin.BulletinLoader;
 import org.martus.common.database.ReadableDatabase;
 import org.martus.swing.UiFileChooser;
 
-class SaveHandler implements ActionListener
+class SaveAttachmentHandler implements ActionListener
 {
-	public SaveHandler(UiMainWindow mainWindowToUse, AttachmentProxy proxyToUse)
+	public SaveAttachmentHandler(UiMainWindow mainWindowToUse, AttachmentProxy proxyToUse)
 	{
 		mainWindow = mainWindowToUse;
 		proxy = proxyToUse;

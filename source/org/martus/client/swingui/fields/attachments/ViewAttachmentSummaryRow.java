@@ -47,9 +47,9 @@ class ViewAttachmentSummaryRow extends AbstractAttachmentRow
 		saveRemovePanel.showCard(saveButton.getText());
 		if(isAttachmentAvailable(proxy))
 		{
-			viewButton.addActionListener(new ViewHandler(mainWindowToUse, panel));
-			hideButton.addActionListener(new HideHandler(panel));
-			saveButton.addActionListener(new SaveHandler(mainWindowToUse, proxy));
+			viewButton.addActionListener(new ViewAttachmentHandler(mainWindowToUse, panel));
+			hideButton.addActionListener(new HideAttachmentHandler(panel));
+			saveButton.addActionListener(new SaveAttachmentHandler(mainWindowToUse, proxy));
 		}
 		else
 		{

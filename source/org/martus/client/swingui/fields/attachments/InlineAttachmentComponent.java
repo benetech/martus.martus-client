@@ -75,7 +75,7 @@ class InlineAttachmentComponent extends UiLabel
 		
 		ReadableDatabase db = store.getDatabase();
 		MartusCrypto security = store.getSignatureVerifier();
-		File tempFile = ViewHandler.extractAttachmentToTempFile(db, proxy, security);
+		File tempFile = ViewAttachmentHandler.extractAttachmentToTempFile(db, proxy, security);
 		return tempFile;
 	}
 	

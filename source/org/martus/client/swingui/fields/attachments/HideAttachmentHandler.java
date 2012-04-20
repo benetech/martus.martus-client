@@ -29,9 +29,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 
-class HideHandler implements ActionListener
+class HideAttachmentHandler implements ActionListener
 {
-	public HideHandler(AbstractAttachmentPanel panelToUse)
+	public HideAttachmentHandler(AbstractAttachmentPanel panelToUse)
 	{
 		panel = panelToUse;
 	}

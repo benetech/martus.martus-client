@@ -47,9 +47,9 @@ import org.martus.common.packet.UniversalId;
 import org.martus.swing.Utilities;
 import org.martus.util.StreamableBase64.InvalidBase64Exception;
 
-class ViewHandler implements ActionListener
+class ViewAttachmentHandler implements ActionListener
 {
-	public ViewHandler(UiMainWindow mainWindowToUse, AbstractAttachmentPanel panelToUse)
+	public ViewAttachmentHandler(UiMainWindow mainWindowToUse, AbstractAttachmentPanel panelToUse)
 	{
 		mainWindow = mainWindowToUse;
 		panel = panelToUse;

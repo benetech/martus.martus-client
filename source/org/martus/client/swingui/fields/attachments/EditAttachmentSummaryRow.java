@@ -38,9 +38,9 @@ public class EditAttachmentSummaryRow extends AbstractAttachmentRow
 		AttachmentProxy proxy = panel.getAttachmentProxy();
 
 		viewHidePanel.showCard(viewButton.getText());
-		viewButton.addActionListener(new ViewHandler(mainWindowToUse, panel));
+		viewButton.addActionListener(new ViewAttachmentHandler(mainWindowToUse, panel));
 
-		hideButton.addActionListener(new HideHandler(panel));
+		hideButton.addActionListener(new HideAttachmentHandler(panel));
 
 		saveRemovePanel.showCard(removeButton.getText());
 		removeButton.addActionListener(new RemoveHandler(mainWindowToUse, editor, proxy));
