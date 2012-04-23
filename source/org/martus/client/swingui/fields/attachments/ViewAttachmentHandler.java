@@ -174,6 +174,8 @@ class ViewAttachmentHandler implements ActionListener
 	static File extractAttachmentToTempFile(ReadableDatabase db, AttachmentProxy proxy, MartusCrypto security) throws IOException, InvalidBase64Exception, InvalidPacketException, SignatureVerificationException, WrongPacketTypeException, CryptoException
 	{
 		String fileName = proxy.getLabel();
+		fileName = fileName.replaceAll("&", "_");
+		fileName = fileName.replaceAll("\\^", "_");
 		File temp = File.createTempFile(BulletinXmlExporter.extractFileNameOnly(fileName), BulletinXmlExporter.extractExtentionOnly(fileName));
 		temp.deleteOnExit();
 	
