@@ -156,7 +156,7 @@ class ViewAttachmentHandler implements ActionListener
 			return new String[] {"cmd", "/C", addQuotes(fileToLaunch)};
 		
 		else if(Utilities.isMacintosh())
-			return new String[] {"open", addQuotes(fileToLaunch)};
+			return new String[] {"open", fileToLaunch};
 		
 		throw new RuntimeException("Launch not supported on this operating system");
 	}
