@@ -200,7 +200,8 @@ public class Martus
 		String jarSubdirectoryName = "ThirdParty";
 		System.out.println("Running Martus from " + martusJarDirectory);
 		File thirdPartyDirectory = new File(martusJarDirectory, jarSubdirectoryName);
-		RuntimeJarLoader.addJarsInSubdirectoryToClasspath(thirdPartyDirectory, getThirdPartyJarNames());
+		if(thirdPartyDirectory.exists())
+			RuntimeJarLoader.addJarsInSubdirectoryToClasspath(thirdPartyDirectory, getThirdPartyJarNames());
 	}
 	
 	private static String[] getThirdPartyJarNames()
