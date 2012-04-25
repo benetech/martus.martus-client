@@ -153,17 +153,12 @@ class ViewAttachmentHandler implements ActionListener
 	private String[] getLaunchCommandForThisOperatingSystem(String fileToLaunch)
 	{
 		if(Utilities.isMSWindows())
-			return new String[] {"cmd", "/C", addQuotes(fileToLaunch)};
+			return new String[] {"cmd", "/C", AttachmentProxy.escapeFilenameForWindows(fileToLaunch)};
 		
 		else if(Utilities.isMacintosh())
 			return new String[] {"open", fileToLaunch};
 		
 		throw new RuntimeException("Launch not supported on this operating system");
-	}
-
-	private String addQuotes(String fileToLaunch)
-	{
-		return "\"" + fileToLaunch + "\"";
 	}
 
 	private void notifyUnableToView()
@@ -175,14 +170,6 @@ class ViewAttachmentHandler implements ActionListener
 	{
 		String fileName = proxy.getLabel();
 		
-		//NOTE: These characters cause Windows 7 to fail:
-		fileName = fileName.replaceAll("&", "_");
-		fileName = fileName.replaceAll("\\^", "_");
-
-		//NOTE: These characters apparently cause Windows XP to fail:
-		fileName = fileName.replaceAll("\\=", "_");
-		fileName = fileName.replaceAll("\\(", "_");
-
 		File temp = File.createTempFile(BulletinXmlExporter.extractFileNameOnly(fileName), BulletinXmlExporter.extractExtentionOnly(fileName));
 		temp.deleteOnExit();
 	
