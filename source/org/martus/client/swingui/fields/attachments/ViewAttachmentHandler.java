@@ -61,7 +61,7 @@ class ViewAttachmentHandler implements ActionListener
 		if(panel.isImageInline)
 			return;
 		
-		if(!Utilities.isMSWindows() && !Utilities.isMacintosh())
+		if(!Utilities.isMSWindows() && !Utilities.isMacintosh() && !UiMainWindow.isAlphaTester)
 		{
 			mainWindow.notifyDlg("ViewAttachmentNotAvailable");
 			return;
@@ -157,6 +157,9 @@ class ViewAttachmentHandler implements ActionListener
 		
 		else if(Utilities.isMacintosh())
 			return new String[] {"open", fileToLaunch};
+
+		else if(UiMainWindow.isAlphaTester) 
+			return new String[] {"firefox", fileToLaunch};
 		
 		throw new RuntimeException("Launch not supported on this operating system");
 	}
