@@ -207,8 +207,8 @@ public class Martus
 	private static String[] getThirdPartyJarNames()
 	{
 		return new String[] {
+			"bcprov-jdk14-135.jar",
 			"icu4j-3.4.4.jar",
-			"infinitemonkey-1.0.jar",
 			"js-2006-03-08.jar",
 			"junit-3.8.2.jar",
 			"layouts-2006-08-10.jar",
