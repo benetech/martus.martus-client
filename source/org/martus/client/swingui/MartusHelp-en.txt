@@ -193,40 +193,67 @@ and hit Enter.)
 4. When the Finder restarts, you will be able to view the ".Martus" folder within your home directory and access files saved there. 
 
 To install Martus for Linux:
- The following must be done from a terminal command prompt.
+The following instructions will install Martus within your user account only. No other Linux users on this machine will have access to Martus. If you want to install Martus publicly, so that any user on this computer can run it, please see section “11. Frequently Asked Questions” (FAQ) #30. 
+
+Most of the following must be done from a terminal command prompt.
 
 1. See if you already have Sun Java version 1.6.0 by typing:
 
   java  -version
 	
-This commands returns which version of Java you are currently running.  
+This commands returns which version of Java you are currently running.  Java must be installed and in your PATH for this to work.
 
 If you do not have version 1.6.0 of Java installed, then you must install Sun’s official Java, and not one of the similar languages such as “IcedTea” or OpenJDK. If possible, we recommend using the standard software installation tools from your operating system, such as yum/rpm or apt/deb. If Sun's JRE is not available that way, you can download it directly from   
    http://java.com/
 
 
-Note: To run Martus, you need to install the current version of Java Runtime Environment (JRE), not the larger Java Developer’s Kit (JDK). 
+Note: To run Martus, you only need to install the current version of Java Runtime Environment (JRE), not the larger Java Developer’s Kit (JDK). 
 
-2. Choose a directory to hold the Martus program files. This may be the same as the Martus data directory (~/.Martus/) or may be different. For example, you might install the Martus application in a /usr/local/bin/Martus or /opt/Martus directory Separating the program from the data may increase security, but will make it harder to entirely erase Martus if you needed to do so.
-3. If installing from the CD:
+2. Choose and create a directory to hold the Martus program files (i.e. a “Martus program directory”). This may be the same as the Martus data directory (~/.Martus/) or may be different. For example, you might install the Martus application within your Desktop directory, making it easy to find.  Separating the program from the data may increase security, but will make it harder to entirely erase Martus if you needed to do so.  You would make the directory by typing the following at the prompt in the location you choose:
+     
+     mkdir -p <Martus Program Directory>
+     
+     For example, if you wanted to install the Martus 4.0 into its data directory, you would type:
+      mkdir -p ~/.Martus
+     
+3. If installing from the CD/ISO:
 a. Copy martus.jar from the root directory on the installation CD into the Martus program directory.
 b. Copy the LibExt directory from the CD into Martus program directory, and rename it as ThirdParty.
+c. If desired you can also copy the Documents directory which contains user documentation including the README files that contain a list of changes between versions of Martus.
+d. Change to the directory that contains the actual application, by typing the following:
+
+cd <Martus Program Directory>
+
+For example, if you installed Martus into its data directory, you would type:
+
+cd ~/.Martus
+
 4. If installing from the zip file:
-a. Extract martus.jar into the Martus program directory.
-b. Extract the ThirdParty directory into the Martus program directory
-5. To run the Martus program, assuming Java is in your path, type the following (which may be saved as a script) 
+Change to the directory you created to install Martus into, extract the zip file contents there, and change to the directory that contains the actual application, by typing the following:
+
+cd <Martus Program Directory>
+unzip <Path to Zip File>
+cd <Martus Version Directory>
+
+For example, if you wanted to install the Martus 4.0 into its data directory, and the zip file was in ~/Downloads and named MartusClient- 4.0.zip, you would type:
+
+cd ~/.Martus
+unzip ~/Downloads/MartusClient- 4.0.zip
+
+5. Test the installation by running Martus, by typing:
+
+java -Xbootclasspath/p:`pwd`/ThirdParty/bc-jce.jar -jar `pwd`/martus.jar 
     
-java -Xbootclasspath/p:<Martus program directory>/ThirdParty/bc-jce.jar -jar <Martus program directory>/martus.jar
+You do not have to type out the name of the directory you are in, since `pwd` does that for you. 
 
-For example, if you put the programs in the data directory, the command would be: 
-$ java -Xbootclasspath/p:~/.Martus/ThirdParty/bc-jce.jar -jar ~/.Martus/martus.jar 
+6. You can create a shortcut script as follows:
 
-Or if you separate the programs and data, you might use something like:
-$ java -Xbootclasspath/p:/opt/Martus/ThirdParty/bc-jce.jar -jar /opt/Martus/martus.jar
+    echo java -Xbootclasspath/p:`pwd`/ThirdParty/bc-jce.jar -jar `pwd`/martus.jar >martus
+    chmod +x martus
 
-You may also wish to create a launcher or desktop shortcut associated with this script.
+7. You can copy this script elsewhere, or you can set up a launcher or shortcut to it, to make it easy to start Martus.
 
-If you are having trouble running Martus on Linux Ubuntu , please see section “11. Frequently Asked Questions” (FAQ) #30 for help. For additional assistance installing in Linux, please email help@martus.org. 
+For additional assistance installing in Linux, please email help@martus.org. 
 
 Martus Documentation
 When you install Martus, all the language versions of the user guide and quick start guide that are currently available are installed in your Martus\Docs directory.  If you used the Windows installer, links to these documents are also available by going to Start > Programs > Martus.  They are also available at https://www.martus.org/downloads , and you can visit this site to see whether new language versions are available.
@@ -1192,7 +1219,6 @@ Here are some examples; these fields would look like the ones in the figure that
 <Label>Is interviewee willing to give additional information if needed?</Label>
 <KeepWithPrevious/>
 </Field>
-
 <Field type='BOOLEAN'>
 <Tag>Testify</Tag>
 <Label>Is interviewee willing to testify?</Label>
@@ -1583,31 +1609,23 @@ For assistance running Martus on a Mac, please email help@martus.org.
 29. I keep losing my Headquarters configurations. What’s going on?
  In Martus 3.1 and earlier, if a customization template was greater than 64k in size, the configuration file in Martus would occasionally become damaged. This would cause Martus to lose configuration data, including Headquarters configurations. In Martus 3.2 we have removed the 64K size restriction for customizations, and you should no longer experience this problem. If you are still experiencing the loss of your Headquarters configurations, please email help@martus.org with a detailed explanation of what tasks you were performing within Martus at the time, along with any messages that are in the Martus console log (See section “11. Frequently Asked Questions” (FAQ) #17 for instructions on how to run Martus with the console log.) 
 
-30. How do I run Martus on the Linux Ubuntu platform?
-To run Martus on Ubuntu:
-1. Download Martus for Linux in a single compressed (zip) file from www.martus.org.
-2. Follow the installation instructions for Martus on a Linux platform (see "2a. Installing")
-3. Start the Terminal application (likely in Applications/Accessories/Terminal depending on the version of Ubuntu). Type the following:
+30. How do I install Martus on Linux so that multiple users on the computer can access it?
+The normal Linux installation instructions in section “2a. Installing” only allow Martus to be used by the user who installed it. You can also install Martus on a Linux computer such that any user on that computer will be able to run it. If you do this, any user should be able to run Martus by simply typing "martus" on the command line, from any directory. Each user can also create a launcher or alias to the /usr/bin/martus script. If you install Martus to be available to all users, the program can be more secure (against tampering), but it will be much more difficult to erase quickly, and the "wipeout" feature will not delete the application.
 
-$ cd Desktop
-$ unzip MartusClient-4.0.zip
-$ cd MartusClient-4.0
-$ sudo cp ThirdParty/* <Martus program directory>/ThirdParty/.
-$ cp -R Martus /usr/share/java
-$ cd ~
+Note that each user's data will still be stored separately, within the user's home directory: ~/.Martus/
 
-where <Martus program directory> is where you installed Martus in section "2a. Installing".
+The installation steps will be the same as in the Linux portion of section “2a. Installing”, but:
 
-4. Create a Martus start script
+a. You will need root privileges. We recommend using the sudo command, but you could instead directly sign in as a root user.
+b.  When choosing the <Martus Program Directory>, choose a world readable directory such as /usr/share/java/martus
+c.  If using sudo, then commands that write data (mkdir, unzip, echo, chmod)  must be preceeded by "sudo". For example:
+       sudo mkdir -p /usr/share/java/martus
 
-$ sudo echo "java -Xbootclasspath/p: <Martus program directory>/ThirdParty/bc-
-jce.jar -jar /usr/share/java/Martus/martus.jar" > /usr/local/bin/martus $ sudo chmod +x /usr/local/bin/martus
+d. After creating the script as described in section “2a. Installing”, copy it to /usr/bin, like this (assuming you are using sudo):
 
-5. With the startup script installed in /usr/local/bin, you can start Martus simply by typing “martus” in a terminal window.
+sudo cp martus /usr/bin
 
-$ martus
-
-This should successfully run Martus on the Ubuntu platform. For further assistance, please email help@martus.org. 
+For further assistance running Martus in Linux, please email help@martus.org. 
 
 31. I created a Martus account solely for the purpose of testing and training and will not be creating bulletins with real data using this account. How do I let server administrators know about it?
 Go to Help > View My Account Details. Martus will bring up a screen displaying various account information, including a twenty-digit public code composed of 5 4-digit numbers. Please send this public code information to help@martus.org, letting us know that it is a test account.  
@@ -1750,6 +1768,7 @@ e) If you notice that Khmer is not displaying correctly in the window title bars
 		iv. Change the font to “KhmerOS.ttf”
 
 Note:  In versions of Martus before 4.0, there were some server functions that would not work correctly when running Martus with certain versions of Java6 in Windows.  If you are using Martus 4.0 or later, this will not be an issue because the correct version of Java6 is included, but if you are using an earlier version of Martus with Java6, you need to make sure that your version of Java6 is later than 1.6.0_30. Please email help@martus.org if you need assistance.
+
 42. I want to enter Bengali/Bangla text in Martus, but the fonts don’t seem to be displaying correctly.  How can I get Bengali/Bangla text to show up in Martus?
 In Martus 4.0, Bengali/Bangla fonts should display correctly in Windows without any extra steps required. If  you are running Martus 4.0 in Bengali/Bangla on Mac and the fonts are not displaying correctly, you can find the Rupali font inside the Fonts folder of the Martus DMG (or zip file) – double-click on it to install.  If you are having issues with Bengali/Bangla font display in Martus 4.0, please email help@martus.org.
 
@@ -1775,17 +1794,20 @@ Replace what is in the Target command line with the below:
 On Windows, you can tell that you are successfully running Martus using Java6 if you see large dots in the password fields instead of the asterisks you would see when running earlier versions of Martus using Java4.
 Note:  In versions of Martus before 4.0, there were some server functions that would not work correctly when running Martus with certain versions of Java6 in Windows.  If you are using Martus 4.0 or later, this will not be an issue because the correct version of Java6 is included, but if you are using an earlier version of Martus with Java6, you need to make sure that your version of Java6 is later than 1.6.0_30. Please email help@martus.org if you need assistance.
 On Mac, if you have multiple versions of Java installed, you will need to launch the Java Preferences dialogue to change the version of Java that is used. To locate it, hit Command-Space to bring up the "Spotlight" search, and type Java Preferences. Once it is open, you will see two sets of configurations, one for Java applet plugins and another for Java applications. If you wish to change the version of Java Martus uses by default, select the new version using the dialogue instructions, then close out of the Java Preferences screen.  For additional assistance, please email help@martus.org.
+
 45. Martus is finding either more or fewer bulletins than I expected.  What could be causing this?
 There are several reasons that Martus might not be finding a bulletin that you expect, or may be finding bulletins that you didn’t expect.  
 a) By default, Martus searches all versions of every bulletin. If you do not see your search terms/dates in the final version of the bulletin displayed in the Search Results folder, your criteria may have been matched in an earlier version of the bulletin.  You can access previous versions by clicking the “Bulletin Details…” button at the top of the bulletin.  To search only the most recent versions of bulletins, select Only Search Most Recent Versions of Bulletins in the Search dialog box. 
 b) By default, Martus searches all rows of any grid (table) fields for your criteria and doesn’t require that the terms are all on the same row.  If you want to specify that all grid column specifications in the Search screen be matched to a single row of bulletin grid data, check the “Match grid column specifications” checkbox in the Search screen.  
 c) Because Martus searches all rows of any grid (table) fields for your criteria, it may find bulletins where one grid row matches your criteria but other rows do not.  For example you could have a bulletin with a grid that has a location field in it and you have multiple rows of data in the grid with locations A, B, and C.  If you search for bulletins where location != C (does not equal C), Martus will find that bulletin because there are 2 rows in the bulletin grid where the location is not C, even though there is one row where the locations IS C.
 For more information about finding bulletins in Martus see section “6m. Searching for specific bulletins”, and if you have questions, please email info@martus.org.  
+
 46. I am seeing duplicate entries in my dropdown list search criteria values in the search screen.  What could be causing this?
 If you pick a Reusable Choices dropdown field to search on, the values that are displayed as the criteria dropdown list options are the labels for each list entry, but the codes you defined determine how many entries there will be in the search dropdown list (see section “10b. Customizing bulletin fields” for more information about creating custom dropdown fields). So if you have different reusable choices codes with the same label in different bulletin customizations in your account, the labels will show up twice in search dropdown lists (i.e. if you used label1 for both code1 and code2, you will see 2 entries in the search dropdown that looks like "label1" and if you want your search to be on bulletins that have that label, regardless of which code the customization had for the label, you will need to do a “or” search on both labels).  And if you have the same reusable choices code with different labels in different bulletin customizations in your account, the search dropdown list for that code will show both values separated by a semicolon (i.e. if you used code1 for both label1 and label2, you will see an entry in the search dropdown that looks like "label1; label2" and your search will be on bulletins that have either of those labels).
 
 47. I am seeing fields that look the same to me in Search and Report screen field lists.  How can I tell what the difference is between them?
 If you have fields in different bulletins or from different customizations that are exactly the same, Martus will combine them in any Search and Report field lists.  And while Martus warns you about duplicate labels where you are creating a new bulletin customization, it is possible that over time, you may have bulletins with different customizations that ended up with the same labels (e.g. maybe you changed a text field to a dropdown field but kept the same label).  In these cases, Martus will try to help you figure out the difference between the fields by displaying what the field type and tag are in the field selection lists.  Also, if you have fields with the same tag but different labels and/or field types, Martus may use the tag and field type to try and determine when different fields were meant to be the same.  So we encourage you to make your field tags and labels in a customization clearly related to each other to avoid any confusion.  See section “10b. Customizing bulletin fields” for more information about configuring custom fields.
+
 48. Why can’t I find my Martus files on my Mac?
 In Mac OS, the Martus data directory (and some other program directories) are hidden by default. These directories are not viewable using the Finder application, and are prefaced with a "." (e.g. ".Martus"). Martus saves some files, such as the Headquarters information .mpi file, directly to the Martus directory. In order to access these files, you will need to set your computer preferences to "show" these hidden folders. To do so, follow these steps: 
 a)  Go to Finder > Applications > Utilities, and open the Terminal application. (You can also hit Command-Space to bring up the search, enter "terminal", and when it finds the Terminal app, launch it.)
