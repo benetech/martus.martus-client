@@ -632,7 +632,8 @@ public class MartusApp
 		{
 			e.printStackTrace();
 		}
-		return EnglishStrings.class.getResource(relativePath);
+		URL relativeURL = EnglishStrings.class.getResource(relativePath);
+		return relativeURL;
 		
 	}
 	
