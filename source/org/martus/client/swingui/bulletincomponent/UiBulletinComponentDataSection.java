@@ -337,6 +337,21 @@ abstract public class UiBulletinComponentDataSection extends UiBulletinComponent
 
 	}
 	
+	public UiField[] getFields()
+	{
+		return fields;
+	}
+
+	public void updateSpellChecker(String bulletinLanguageCode)
+	{
+		for(int i = 0; i < fields.length; ++i)
+		{
+			UiField field = fields[i];
+			field.updateSpellChecker(bulletinLanguageCode);
+		}
+	}
+
+
 	abstract public JComponent createAttachmentTable();
 	abstract public void addAttachment(AttachmentProxy a);
 	abstract public void clearAttachments();
@@ -344,7 +359,7 @@ abstract public class UiBulletinComponentDataSection extends UiBulletinComponent
 
 	LanguageChangeListener languageChangeListener;
 	String sectionName;
-	UiField[] fields;
+	private UiField[] fields;
 	UiFieldCreator fieldCreator;
 	private UiFieldContext context;
 }

@@ -24,46 +24,31 @@ Boston, MA 02111-1307, USA.
 
 */
 
-package org.martus.client.swingui.fields;
+package org.martus.client.swingui;
 
-import javax.swing.JComponent;
-import javax.swing.text.JTextComponent;
-import org.martus.clientside.UiLocalization;
-import org.martus.swing.UiTextArea;
+import java.net.MalformedURLException;
+import java.net.URL;
 
-public abstract class UiNormalTextField extends UiStringField
+
+import com.inet.jortho.SpellChecker;
+import com.inet.jortho.SpellCheckerOptions;
+
+public class SpellCheckerManager
 {
-	public UiNormalTextField(UiLocalization localizationToUse)
+	public static void initializeSpellChecker(UiMainWindow mainWindowToUse) throws MalformedURLException
 	{
-		super(localizationToUse);
+		SpellCheckerOptions options = SpellChecker.getOptions();
+		options.setCaseSensitive(true);
+		options.setIgnoreAllCapsWords(true);
+		options.setIgnoreCapitalization(true);
+		options.setIgnoreWordsWithNumbers(true);
+		options.setSuggestionsLimitMenu(15);
+		
+		String english = MartusLocalization.ENGLISH;
+		String relativePathToDictionary = "/";
+		URL dictionaryFolderURL = mainWindowToUse.getApp().getLanguageBasedResourceURL(english, relativePathToDictionary);
+		SpellChecker.registerDictionaries(dictionaryFolderURL, english, english);
+		SpellChecker.setUserDictionaryProvider(new MartusUserDictionary(mainWindowToUse));
 	}
 	
-	@Override
-	protected JTextComponent getTextComponent()
-	{
-		return widget;
-	}
-
-	public JComponent getComponent()
-	{
-		return widget;
-	}
-
-	public JTextComponent getEditor()
-	{
-		return widget;
-	}
-
-	public String getText()
-	{
-		return widget.getText();
-	}
-
-	public void setText(String newText)
-	{
-		widget.setText(newText);
-	}
-
-	UiTextArea widget;
 }
-

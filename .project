@@ -18,4 +18,11 @@
 	<natures>
 		<nature>org.eclipse.jdt.core.javanature</nature>
 	</natures>
+	<linkedResources>
+		<link>
+			<name>dictionaries</name>
+			<type>2</type>
+			<location>/home/kevins/work/hg/martus/martus/martus-thirdparty/client/jortho/bin/dictionaries</location>
+		</link>
+	</linkedResources>
 </projectDescription>

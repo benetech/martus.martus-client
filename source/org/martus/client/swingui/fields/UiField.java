@@ -81,6 +81,11 @@ abstract public class UiField
 		focusManager.addFocusListener(listener);
 	}
 	
+	public void updateSpellChecker(String bulletinLanguageCode)
+	{
+		// TODO Auto-generated method stub
+	}
+
 	abstract public JComponent getComponent();
 	abstract public JComponent[] getFocusableComponents();
 	abstract public String getText();

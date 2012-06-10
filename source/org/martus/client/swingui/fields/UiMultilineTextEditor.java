@@ -91,6 +91,11 @@ public class UiMultilineTextEditor extends UiStringField
 		editor.setText(newText);
 		editor.updateUI(); //Resets view position to top of scroll pane
 	}
+	
+	protected JTextComponent getTextComponent() 
+	{
+		return editor;
+	};
 
 	UiScrollPane widget;
 	UiTextArea editor;

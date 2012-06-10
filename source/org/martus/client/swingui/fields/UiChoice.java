@@ -28,6 +28,7 @@ package org.martus.client.swingui.fields;
 import org.martus.common.ListOfReusableChoicesLists;
 import org.martus.common.MiniLocalization;
 import org.martus.common.ReusableChoices;
+import org.martus.common.bulletin.BulletinConstants;
 import org.martus.common.fieldspec.ChoiceItem;
 import org.martus.common.fieldspec.DropDownFieldSpec;
 
@@ -38,8 +39,10 @@ abstract public class UiChoice extends UiField
 		super(localizationToUse);
 	}
 	
-	public void setSpec(UiFieldContext context, DropDownFieldSpec spec)
+	public void setSpec(UiFieldContext context, DropDownFieldSpec specToUse)
 	{
+		spec = specToUse;
+		
 		ListOfReusableChoicesLists newChoices = context.getCurrentDropdownChoices(spec);
 		setChoices(newChoices);
 	}
@@ -52,4 +55,11 @@ abstract public class UiChoice extends UiField
 	}
 
 	abstract public void setChoices(ListOfReusableChoicesLists newChoices);
+	
+	public boolean isLanguageDropdown()
+	{
+		return spec.getTag().equals(BulletinConstants.TAGLANGUAGE);
+	}
+	
+	private DropDownFieldSpec spec;
 }

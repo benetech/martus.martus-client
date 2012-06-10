@@ -85,12 +85,6 @@ public class UiBulletinView extends UiBulletinComponent
 		// read-only view cannot change state
 	}
 	
-	// LanguageChangeListener Interface
-	public void languageChanged(String newLanguage)
-	{
-		// read-only view cannot change state
-	}
-	
 	UiBulletinComponentHeaderSection createHeaderSection()
 	{
 		return new UiBulletinComponentHeaderSection(mainWindow, "View");

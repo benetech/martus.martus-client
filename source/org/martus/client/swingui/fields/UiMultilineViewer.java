@@ -43,6 +43,12 @@ public class UiMultilineViewer extends UiStringField
 		text.setEditable(false);
 		supportContextMenu();
 	}
+	
+	@Override
+	protected JTextComponent getTextComponent()
+	{
+		return text;
+	}
 
 	public JComponent getComponent()
 	{

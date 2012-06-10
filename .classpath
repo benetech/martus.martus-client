@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="source"/>
+	<classpathentry kind="src" path="dictionaries"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="src" path="/martus-utils"/>
 	<classpathentry kind="src" path="/martus-swing"/>
@@ -12,5 +13,6 @@
 	<classpathentry combineaccessrules="false" kind="src" path="/martus-clientside"/>
 	<classpathentry kind="lib" path="/martus-thirdparty/client/jhlabs/bin/layouts.jar" sourcepath="/martus-thirdparty/client/jhlabs/src/layouts.zip"/>
 	<classpathentry kind="lib" path="/martus-thirdparty/libext/BouncyCastle/bin/bcprov-jdk14-135.jar" sourcepath="/martus-thirdparty/libext/BouncyCastle/source/bcprov-jdk14-135.zip"/>
+	<classpathentry kind="lib" path="/martus-thirdparty/client/jortho/bin/jortho.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

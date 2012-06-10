@@ -39,6 +39,12 @@ abstract public class UiSingleLineTextField extends UiStringField
 		super(localizationToUse);
 	}
 	
+	@Override
+	protected JTextComponent getTextComponent()
+	{
+		return widget;
+	}
+	
 	public JComponent getComponent()
 	{
 		return widget;

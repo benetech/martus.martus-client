@@ -204,6 +204,8 @@ public class UiBulletinEditor extends UiBulletinComponent implements HeadQuarter
 	{
 		if(languageListener != null)
 			languageListener.languageChanged(newLanguageCode);
+		
+		super.languageChanged(newLanguageCode);
 	}
 
 	// HeadQuartersSelectionListener Interface

@@ -42,7 +42,9 @@ import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.fields.UiField;
 import org.martus.common.FieldSpecCollection;
 import org.martus.common.bulletin.Bulletin;
+import org.martus.common.bulletin.BulletinConstants;
 import org.martus.common.crypto.MartusCrypto;
+import org.martus.common.field.MartusField;
 import org.martus.common.fieldspec.DataInvalidException;
 import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.packet.FieldDataPacket;
@@ -67,7 +69,11 @@ abstract public class UiBulletinComponent extends JPanel implements Scrollable, 
 	abstract public void stateChanged(ChangeEvent event);
 
 	// LanguageChangeListener interface
-	abstract public void languageChanged(String newLanguage);
+	public void languageChanged(String newBulletinLanguageCode)
+	{
+		publicSection.updateSpellChecker(newBulletinLanguageCode);
+		privateSection.updateSpellChecker(newBulletinLanguageCode);
+	}
 
 
 
@@ -194,6 +200,8 @@ abstract public class UiBulletinComponent extends JPanel implements Scrollable, 
 			
 		}
 
+		MartusField languageField = bulletinToShow.getField(BulletinConstants.TAGLANGUAGE);
+		languageChanged(languageField.getData());
 		repaint();
 	}
 

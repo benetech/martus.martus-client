@@ -46,6 +46,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.channels.FileLock;
 import java.text.ParseException;
@@ -445,6 +446,17 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		reloadPendingRetrieveQueue();
 		
 		requestContactInfo();
+		
+		try
+		{
+			SpellCheckerManager.initializeSpellChecker(this);
+		} 
+		catch (MalformedURLException e)
+		{
+			MartusLogger.logException(e);
+			notifyDlg("ErrorInitializingSpellChecker");
+			System.exit(1);
+		}
 		
 		MartusLogger.log("Ready to show main window");
 		addWindowListener(new WindowEventHandler());

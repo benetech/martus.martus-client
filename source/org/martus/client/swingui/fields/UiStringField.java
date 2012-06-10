@@ -34,8 +34,11 @@ import javax.swing.AbstractAction;
 import javax.swing.Action;
 import javax.swing.text.JTextComponent;
 
+import org.martus.client.swingui.MartusLocalization;
 import org.martus.clientside.UiLocalization;
 import org.martus.swing.UiPopupMenu;
+
+import com.inet.jortho.SpellChecker;
 
 public abstract class UiStringField extends UiField
 {
@@ -78,6 +81,8 @@ public abstract class UiStringField extends UiField
 
 		menu.show(getEditor(), e.getX(), e.getY());
 	}
+	
+	abstract protected JTextComponent getTextComponent();
 
 	public void cut()
 	{
@@ -193,6 +198,26 @@ public abstract class UiStringField extends UiField
 
 	}
 
+	@Override
+	public void updateSpellChecker(String bulletinLanguageCode)
+	{
+		boolean isImplicitlyEnglish = bulletinLanguageCode.equals("?");
+		boolean isExplicitlyEnglish = bulletinLanguageCode.equals(MartusLocalization.ENGLISH);
+		boolean shouldSpellCheck = isImplicitlyEnglish || isExplicitlyEnglish;
+		if(shouldSpellCheck)
+		{
+			boolean hasPopup = false;
+			boolean hasShortcut = false;
+			boolean hasAutospell = true;
+			// NOTE: JOrtho will only show squigglies for editable fields 
+			SpellChecker.register(getTextComponent(), hasPopup, hasShortcut, hasAutospell);
+		} 
+		else
+		{
+			SpellChecker.unregister(getTextComponent());
+		}
+	}
+	
 	UiLocalization localization;
 	Action actionCut;
 	Action actionCopy;

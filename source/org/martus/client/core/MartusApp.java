@@ -616,6 +616,26 @@ public class MartusApp
 		return getHelp(currentLanguageCode, getHelpTOCFilename(currentLanguageCode));
 	}
 	
+	public URL getLanguageBasedResourceURL(String currentLanguageCode, String relativePath)
+	{
+		try 
+		{
+			File mlpFile = localization.getMlpkFile(currentLanguageCode);
+			if(mlpFile.exists() && 
+			   JarVerifier.verify(mlpFile,false) == JarVerifier.JAR_VERIFIED_TRUE)
+			{
+				URL url = new URL("jar:file:/" + mlpFile.getAbsolutePath() + "!" + relativePath);
+				return url;
+			}
+		} 
+		catch (Exception e) 
+		{
+			e.printStackTrace();
+		}
+		return EnglishStrings.class.getResource(relativePath);
+		
+	}
+	
 	private InputStream getHelp(String currentLanguageCode, String helpFileName)
 	{
 		if(!localization.isOfficialTranslation(currentLanguageCode))
