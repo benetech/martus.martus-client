@@ -13,6 +13,6 @@
 	<classpathentry combineaccessrules="false" kind="src" path="/martus-clientside"/>
 	<classpathentry kind="lib" path="/martus-thirdparty/client/jhlabs/bin/layouts.jar" sourcepath="/martus-thirdparty/client/jhlabs/src/layouts.zip"/>
 	<classpathentry kind="lib" path="/martus-thirdparty/libext/BouncyCastle/bin/bcprov-jdk14-135.jar" sourcepath="/martus-thirdparty/libext/BouncyCastle/source/bcprov-jdk14-135.zip"/>
-	<classpathentry kind="lib" path="/martus-thirdparty/client/jortho/bin/jortho.jar"/>
+	<classpathentry kind="lib" path="/martus-thirdparty/client/jortho/bin/jortho-0.5.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
