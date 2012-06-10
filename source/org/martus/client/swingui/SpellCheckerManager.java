@@ -29,6 +29,8 @@ package org.martus.client.swingui;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+import org.martus.common.MartusLogger;
+
 
 import com.inet.jortho.SpellChecker;
 import com.inet.jortho.SpellCheckerOptions;
@@ -47,6 +49,7 @@ public class SpellCheckerManager
 		String english = MartusLocalization.ENGLISH;
 		String relativePathToDictionary = "/";
 		URL dictionaryFolderURL = mainWindowToUse.getApp().getLanguageBasedResourceURL(english, relativePathToDictionary);
+		MartusLogger.log("Looking for dictionary: " + dictionaryFolderURL);
 		SpellChecker.registerDictionaries(dictionaryFolderURL, english, english);
 		SpellChecker.setUserDictionaryProvider(new MartusUserDictionary(mainWindowToUse));
 	}
