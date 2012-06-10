@@ -633,7 +633,11 @@ public class MartusApp
 			e.printStackTrace();
 		}
 		URL relativeURL = EnglishStrings.class.getResource(relativePath);
-		return relativeURL;
+		if(relativeURL != null)
+			return relativeURL;
+		
+		String absolutePathInRoot = "/" + relativePath;
+		return EnglishStrings.class.getResource(absolutePathInRoot);
 		
 	}
 	
