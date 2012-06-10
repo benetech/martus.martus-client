@@ -47,7 +47,7 @@ public class SpellCheckerManager
 		options.setSuggestionsLimitMenu(15);
 		
 		String english = MartusLocalization.ENGLISH;
-		String relativePathToDictionary = "/";
+		String relativePathToDictionary = "";
 		URL dictionaryFolderURL = mainWindowToUse.getApp().getLanguageBasedResourceURL(english, relativePathToDictionary);
 		MartusLogger.log("SpellCheckerManager: Looking for dictionary: " + dictionaryFolderURL);
 		SpellChecker.registerDictionaries(dictionaryFolderURL, english, english);
