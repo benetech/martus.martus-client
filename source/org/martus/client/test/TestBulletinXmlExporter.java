@@ -47,6 +47,7 @@ import org.martus.common.bulletin.AttachmentProxy;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.bulletin.BulletinConstants;
 import org.martus.common.bulletin.BulletinXmlExportImportConstants;
+import org.martus.common.crypto.MartusCrypto.CryptoException;
 import org.martus.common.crypto.MockMartusSecurity;
 import org.martus.common.crypto.MartusCrypto.EncryptionException;
 import org.martus.common.database.ReadableDatabase;
@@ -64,9 +65,13 @@ import org.martus.common.fieldspec.TestCustomFieldSpecValidator;
 import org.martus.common.packet.BulletinHistory;
 import org.martus.common.packet.ExtendedHistoryList;
 import org.martus.common.packet.FieldDataPacket;
+import org.martus.common.packet.Packet.InvalidPacketException;
+import org.martus.common.packet.Packet.SignatureVerificationException;
+import org.martus.common.packet.Packet.WrongPacketTypeException;
 import org.martus.common.utilities.MartusFlexidate;
 import org.martus.util.DirectoryUtils;
 import org.martus.util.MultiCalendar;
+import org.martus.util.StreamableBase64.InvalidBase64Exception;
 import org.martus.util.TestCaseEnhanced;
 import org.martus.util.UnicodeReader;
 import org.martus.util.UnicodeWriter;
@@ -358,17 +363,7 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 	
 	public void testExportHistory() throws Exception
 	{
-		ReadableDatabase database = app.getStore().getDatabase();
-
-		Bulletin version1 = new Bulletin(store.getSignatureGenerator());
-		version1.setStatus(Bulletin.STATUSSEALED);
-		
-		Bulletin version2 = new Bulletin(store.getSignatureGenerator());
-		version2.createDraftCopyOf(version1, database);
-		version2.setStatus(Bulletin.STATUSSEALED);
-
-		Bulletin version3 = new Bulletin(store.getSignatureGenerator());
-		version3.createDraftCopyOf(version2, database);
+		Bulletin version3 = createVersion3Bulletin();
 		
 		Vector list = new Vector();
 		list.add(version3);
@@ -379,6 +374,29 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 		assertContains("<Ancestor>", result);
 		assertContains(version3.getHistory().get(0), result);
 		assertContains(version3.getHistory().get(0), result);
+	}
+
+	private Bulletin createVersion3Bulletin() throws Exception,
+			CryptoException, InvalidPacketException,
+			SignatureVerificationException, WrongPacketTypeException,
+			IOException, InvalidBase64Exception
+	{
+		ReadableDatabase database = app.getStore().getDatabase();
+
+		Bulletin version1 = new Bulletin(store.getSignatureGenerator());
+		version1.getField(Bulletin.TAGTITLE).setData("Version 1");
+		version1.setStatus(Bulletin.STATUSSEALED);
+		
+		Bulletin version2 = new Bulletin(store.getSignatureGenerator());
+		version2.createDraftCopyOf(version1, database);
+		version2.getField(Bulletin.TAGTITLE).setData("Version 2");
+		version2.setStatus(Bulletin.STATUSSEALED);
+
+		Bulletin version3 = new Bulletin(store.getSignatureGenerator());
+		version3.createDraftCopyOf(version2, database);
+		version3.getField(Bulletin.TAGTITLE).setData("Version 3");
+
+		return version3;
 	}
 	
 	public void testExportExtendedHistory() throws Exception
