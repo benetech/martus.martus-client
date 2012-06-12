@@ -70,6 +70,7 @@ public class UiExportBulletinsDlg extends JDialog implements ActionListener
 		
 		includePrivate = new UiCheckBox(localization.getFieldLabel("ExportPrivateData"));
 		includeAttachments = new UiCheckBox(localization.getFieldLabel("ExportAttachments"));
+		includeAllVersions = new UiCheckBox(localization.getFieldLabel("ExportAllVersions"));
 		ok = new UiButton(localization.getButtonLabel("Continue"));
 		ok.addActionListener(this);
 		
@@ -92,6 +93,8 @@ public class UiExportBulletinsDlg extends JDialog implements ActionListener
 		upperStuff.add(includePrivate);
 		upperStuff.addSpace();
 		upperStuff.add(includeAttachments);
+		upperStuff.addSpace();
+		upperStuff.add(includeAllVersions);
 		upperStuff.addSpace();
 		
 		UiVBox vBoxAll = new UiVBox();
@@ -135,10 +138,15 @@ public class UiExportBulletinsDlg extends JDialog implements ActionListener
 		return includeAttachments.isSelected();
 	}
 	
+	boolean userWantsToExportAllVersions()
+	{
+		return includeAllVersions.isSelected();
+	}
+	
 	public void doExport(File destFile)
 	{
 		ExportBulletins exporter = new ExportBulletins(mainWindow);
-		exporter.doExport(destFile, bulletins, userWantsToExportPrivate(), userWantsToExportAttachments());
+		exporter.doExport(destFile, bulletins, userWantsToExportPrivate(), userWantsToExportAttachments(), userWantsToExportAllVersions());
 	}
 	
 	public void actionPerformed(ActionEvent ae)
@@ -180,6 +188,7 @@ public class UiExportBulletinsDlg extends JDialog implements ActionListener
 	Vector bulletins;
 	JCheckBox includePrivate;
 	JCheckBox includeAttachments;
+	JCheckBox includeAllVersions;
 	JButton ok;
 	JButton cancel;
 	String defaultFileName;

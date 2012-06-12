@@ -43,12 +43,13 @@ public class ExportBulletins
 		mainWindow = mainWindowToUse;
 	}
 
-	public void doExport(File destFile, Vector bulletinsToUse, boolean userWantsToExportPrivateToUse, boolean userWantsToExportAttachmentsToUse)
+	public void doExport(File destFile, Vector bulletinsToUse, boolean userWantsToExportPrivateToUse, boolean userWantsToExportAttachmentsToUse, boolean userWantsToExportAllVersionsToUse)
 	{
 		destinationFile = destFile;
 		bulletinsToExport = bulletinsToUse;
 		userWantsToExportPrivate = userWantsToExportPrivateToUse;
 		userWantsToExportAttachments = userWantsToExportAttachmentsToUse;
+		userWantsToExportAllVersions = userWantsToExportAllVersionsToUse;
 		UiImportExportProgressMeterDlg progressDlg = new UiImportExportProgressMeterDlg(mainWindow, "ExportProgress");
 		ExporterThread exporterThread = new ExporterThread(progressDlg);
 		exporterThread.start();
@@ -88,7 +89,7 @@ public class ExportBulletins
 			try
 			{
 				UnicodeWriter writer = new UnicodeWriter(destinationFile);
-				exporter.exportBulletins(writer, bulletinsToExport, userWantsToExportPrivate, userWantsToExportAttachments, false, destinationFile.getParentFile());
+				exporter.exportBulletins(writer, bulletinsToExport, userWantsToExportPrivate, userWantsToExportAttachments, userWantsToExportAllVersions, destinationFile.getParentFile());
 				writer.close();
 			}
 			catch (Exception e)
@@ -137,7 +138,7 @@ public class ExportBulletins
 	Vector bulletinsToExport;
 	boolean userWantsToExportPrivate;
 	boolean userWantsToExportAttachments;
-	
+	boolean userWantsToExportAllVersions;
 }
 
 
