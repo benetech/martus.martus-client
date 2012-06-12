@@ -377,8 +377,8 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 		assertContains("<BulletinVersion>3</BulletinVersion>", result);
 		assertContains("<History>", result);
 		assertContains("<Ancestor>", result);
-		assertContains(version1.getLocalId(), result);
-		assertContains(version2.getLocalId(), result);
+		assertContains(version3.getHistory().get(0), result);
+		assertContains(version3.getHistory().get(0), result);
 	}
 	
 	public void testExportExtendedHistory() throws Exception
