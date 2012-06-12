@@ -116,7 +116,7 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 		store.saveBulletin(b);
 		Vector list = new Vector();
 		list.add(b);
-		String result = doExport(list, false, false);
+		String result = doExport(list, false, false, false);
 		assertContains("<MartusBulletinExportFormatVersion>3</MartusBulletinExportFormatVersion>", result);
 		assertContains("<MartusBulletins>", result);
 		assertContains("<MartusBulletin>", result);
@@ -325,7 +325,7 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 		
 		Vector list = new Vector();
 		list.add(b);
-		String result = doExport(list, false, false);
+		String result = doExport(list, false, false, false);
 		assertContains("<Field tag='MyGridTag'>\n" +
 				"<Value><GridData columns='3'>\n" +
 				"<Row>\n" +
@@ -367,13 +367,26 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 		
 		Vector list = new Vector();
 		list.add(version3);
-		String result = doExport(list, true, false);
+		String result = doExport(list, true, false, false);
 		
 		assertContains("<BulletinVersion>3</BulletinVersion>", result);
 		assertContains("<History>", result);
 		assertContains("<Ancestor>", result);
 		assertContains(version3.getHistory().get(0), result);
 		assertContains(version3.getHistory().get(0), result);
+	}
+
+	public void testExportAllVersions() throws Exception
+	{
+		Bulletin version3 = createVersion3Bulletin();
+		
+		Vector list = new Vector();
+		list.add(version3);
+		String result = doExport(list, true, false, true);
+		
+		assertContains(VERSION_3_TITLE, result);
+		assertContains(VERSION_2_TITLE, result);
+		assertContains(VERSION_1_TITLE, result);
 	}
 
 	private Bulletin createVersion3Bulletin() throws Exception,
@@ -384,17 +397,20 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 		ReadableDatabase database = app.getStore().getDatabase();
 
 		Bulletin version1 = new Bulletin(store.getSignatureGenerator());
-		version1.getField(Bulletin.TAGTITLE).setData("Version 1");
+		version1.getField(Bulletin.TAGTITLE).setData(VERSION_1_TITLE);
 		version1.setStatus(Bulletin.STATUSSEALED);
+		app.getStore().saveBulletin(version1);
 		
 		Bulletin version2 = new Bulletin(store.getSignatureGenerator());
 		version2.createDraftCopyOf(version1, database);
-		version2.getField(Bulletin.TAGTITLE).setData("Version 2");
+		version2.getField(Bulletin.TAGTITLE).setData(VERSION_2_TITLE);
 		version2.setStatus(Bulletin.STATUSSEALED);
+		app.getStore().saveBulletin(version2);
 
 		Bulletin version3 = new Bulletin(store.getSignatureGenerator());
 		version3.createDraftCopyOf(version2, database);
-		version3.getField(Bulletin.TAGTITLE).setData("Version 3");
+		version3.getField(Bulletin.TAGTITLE).setData(VERSION_3_TITLE);
+		app.getStore().saveBulletin(version3);
 
 		return version3;
 	}
@@ -416,7 +432,7 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 		
 		Vector list = new Vector();
 		list.add(b);
-		String result = doExport(list, true, false);
+		String result = doExport(list, true, false, false);
 		assertContains("<ExtendedHistory>", result);
 		assertContains("<ExtendedHistoryEntry>", result);
 		assertContains("<Author>", result);
@@ -439,7 +455,7 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 		Vector list = new Vector();
 		list.add(b);
 		
-		String result = doExport(list, false, false);
+		String result = doExport(list, false, false, false);
 		assertContains("<NoAttachmentsExported></NoAttachmentsExported>", result);
 		assertNotContains(BulletinXmlExportImportConstants.TOP_SECTION_ATTACHMENT_LIST, result);
 		assertNotContains(BulletinXmlExportImportConstants.BOTTOM_SECTION_ATTACHMENT_LIST, result);
@@ -448,7 +464,7 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 		assertFalse("Attachment 1 exists?", exportedAttachmentFile1.exists());
 		assertFalse("Attachment 2 exists?", exportedAttachmentFile2.exists());
 		
-		result = doExport(list, false, true);
+		result = doExport(list, false, true, false);
 		assertNotContains("<NoAttachmentsExported></NoAttachmentsExported>", result);
 		assertContains(BulletinXmlExportImportConstants.TOP_SECTION_ATTACHMENT_LIST, result);
 		assertNotContains(BulletinXmlExportImportConstants.BOTTOM_SECTION_ATTACHMENT_LIST, result);
@@ -476,12 +492,12 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 		Vector list = new Vector();
 		list.add(b);
 
-		String publicOnly = doExport(list, false, true);
+		String publicOnly = doExport(list, false, true, false);
 		assertNotContains(sampleAttachmentFile1.getName(), publicOnly);
 		assertNotContains(BulletinXmlExportImportConstants.TOP_SECTION_ATTACHMENT_LIST, publicOnly);
 		assertNotContains(BulletinXmlExportImportConstants.BOTTOM_SECTION_ATTACHMENT_LIST, publicOnly);
 
-		String publicAndPrivate = doExport(list, true, true);
+		String publicAndPrivate = doExport(list, true, true, false);
 		assertNotContains(BulletinXmlExportImportConstants.TOP_SECTION_ATTACHMENT_LIST, publicAndPrivate);
 		assertContains(BulletinXmlExportImportConstants.BOTTOM_SECTION_ATTACHMENT_LIST, publicAndPrivate);
 		assertContains(sampleAttachmentFile1.getName(), publicAndPrivate);
@@ -500,7 +516,7 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 		Vector list = new Vector();
 		list.add(b);
 
-		String publicAndPrivate = doExport(list, true, true);
+		String publicAndPrivate = doExport(list, true, true, false);
 		assertNotContains(BulletinXmlExportImportConstants.TOP_SECTION_ATTACHMENT_LIST, publicAndPrivate);
 		assertContains(BulletinXmlExportImportConstants.BOTTOM_SECTION_ATTACHMENT_LIST, publicAndPrivate);
 		assertContains(sampleAttachmentFile1.getName(), publicAndPrivate);
@@ -535,7 +551,7 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 		Vector list = new Vector();
 		list.add(b1);
 		list.add(b2);
-		String result = doExport(list, true, true);
+		String result = doExport(list, true, true, false);
 
 		assertContains(sampleTitle1, result);
 		assertContains("<Field tag='title'", result);
@@ -575,12 +591,12 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 
 		Vector list = new Vector();
 		list.add(b);
-		String publicOnly = doExport(list, false, false);
+		String publicOnly = doExport(list, false, false, false);
 		assertContains("<NoAttachmentsExported></NoAttachmentsExported>", publicOnly);
 		assertContains(samplePublic, publicOnly);
 		assertNotContains(samplePrivate, publicOnly);
 
-		String publicAndPrivate = doExport(list, true, false);
+		String publicAndPrivate = doExport(list, true, false, false);
 		assertContains("<PublicAndPrivateData></PublicAndPrivateData>", publicAndPrivate);
 		
 		assertContains("<FieldValues>", publicAndPrivate);
@@ -600,7 +616,7 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 
 		Vector list = new Vector();
 		list.add(b);
-		String publicOnly = doExport(list, false, false);
+		String publicOnly = doExport(list, false, false, false);
 
 		assertNotContains(b.getAccount(), publicOnly);
 		assertNotContains(b.getLocalId(), publicOnly);
@@ -611,7 +627,7 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 		assertNotContains("<MainFieldSpecs>", publicOnly);
 		assertNotContains("<PrivateFieldSpecs>", publicOnly);
 
-		String publicAndPrivate = doExport(list, true, false);
+		String publicAndPrivate = doExport(list, true, false, false);
 		assertContains(b.getAccount(), publicAndPrivate);
 		assertContains(b.getLocalId(), publicAndPrivate);
 		assertContains("<AllPrivate></AllPrivate>", publicAndPrivate);
@@ -655,7 +671,7 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 		Vector list = new Vector();
 		list.add(b);
 
-		String result = doExport(list, false, false);
+		String result = doExport(list, false, false, false);
 
 		assertContains(samplePublic, result);
 		assertContains("<FieldValues>", result);
@@ -668,7 +684,7 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 		list = new Vector();
 		list.add(b);
 
-		result = doExport(list, false, false);
+		result = doExport(list, false, false, false);
 
 		assertContains(samplePublic, result);
 		assertContains("<FieldValues>", result);
@@ -703,7 +719,7 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 		Vector list = new Vector();
 		list.add(b);
 
-		String result = doExport(list, false, false);
+		String result = doExport(list, false, false, false);
 		
 		assertContains("<FieldValues>", result);
 		assertContains("<Tag>A</Tag>", result);
@@ -744,7 +760,7 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 	{
 		Vector list = new Vector();
 		list.add(b);
-		final String result = doExport(list, true, false);
+		final String result = doExport(list, true, false, false);
 		return result;
 	}
 
@@ -854,7 +870,7 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 		
 		Vector list = new Vector();
 		list.add(exported);
-		String result = doExport(list, true, false);
+		String result = doExport(list, true, false, false);
 		StringInputStreamWithSeek stream = new StringInputStreamWithSeek(result);
 		XmlBulletinsImporter importer = new XmlBulletinsImporter(store.getSignatureGenerator(), stream);
 		Bulletin[] resultingBulletins = importer.getBulletins();
@@ -894,7 +910,7 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 
 		Vector list = new Vector();
 		list.add(b1);
-		String result = doExport(list, true, true);
+		String result = doExport(list, true, true, false);
 
 		assertEquals("Has failing attachments?",0, failingAttachments);
 		File missingAttachment1 = new File(attachmentDirectory, sampleAttachmentFile1.getName());
@@ -937,14 +953,14 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 	}
 	
 	
-	String doExport(Vector list, boolean includePrivateData, boolean includeAttachments) throws Exception
+	String doExport(Vector list, boolean includePrivateData, boolean includeAttachments, boolean includeAllVersions) throws Exception
 	{
 		StringWriter writer = new StringWriter();
 		MiniLocalization miniLocalization = new MiniLocalization();
 		miniLocalization.addEnglishTranslations(new String[]{"status:draft="+draftTranslation, "status:sealed="+sealedTranslation});
 		miniLocalization.setCurrentLanguageCode(MiniLocalization.ENGLISH);
 		BulletinXmlExporter exporter = new BulletinXmlExporter(app, miniLocalization, null);
-		exporter.exportBulletins(writer, list, includePrivateData, includeAttachments, attachmentDirectory);
+		exporter.exportBulletins(writer, list, includePrivateData, includeAttachments, includeAllVersions, attachmentDirectory);
 		failingAttachments = exporter.getNumberOfFailingAttachments();
 		String result = writer.toString();
 		return result;
@@ -971,6 +987,11 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 		b.addPrivateAttachment(ap);
 		return sampleAttachmentFile;
 	}
+	
+	private static final String VERSION_1_TITLE = "Version 1";
+	private static final String VERSION_2_TITLE = "Version 2";
+	private static final String VERSION_3_TITLE = "Version 3";
+
 
 	static final String draftTranslation = "Draft";
 	static final String sealedTranslation = "Sealed";

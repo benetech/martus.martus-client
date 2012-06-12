@@ -88,7 +88,7 @@ public class ExportBulletins
 			try
 			{
 				UnicodeWriter writer = new UnicodeWriter(destinationFile);
-				exporter.exportBulletins(writer, bulletinsToExport, userWantsToExportPrivate, userWantsToExportAttachments, destinationFile.getParentFile());
+				exporter.exportBulletins(writer, bulletinsToExport, userWantsToExportPrivate, userWantsToExportAttachments, false, destinationFile.getParentFile());
 				writer.close();
 			}
 			catch (Exception e)

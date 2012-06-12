@@ -49,6 +49,7 @@ import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.packet.BulletinHistory;
 import org.martus.common.packet.ExtendedHistoryEntry;
 import org.martus.common.packet.ExtendedHistoryList;
+import org.martus.common.packet.UniversalId;
 import org.martus.util.xml.XmlUtilities;
 
 public class BulletinXmlExporter
@@ -62,7 +63,7 @@ public class BulletinXmlExporter
 		bulletinsExported = 0;
 	}
 	
-	public void exportBulletins(Writer dest, Vector bulletins, boolean includePrivateData, boolean includeAttachments, File attachmentsDirectory)
+	public void exportBulletins(Writer dest, Vector bulletins, boolean includePrivateData, boolean includeAttachments, boolean includeAllVersions, File attachmentsDirectory)
 		throws Exception
 	{
 		dest.write(MartusXml.getTagStartWithNewline(BulletinXmlExportImportConstants.MARTUS_BULLETINS));
@@ -87,12 +88,27 @@ public class BulletinXmlExporter
 			else
 			{
 				exportOneBulletin(dest, b, includePrivateData, includeAttachments, attachmentsDirectory);
+				if(includeAllVersions)
+					exportOlderVersionsOf(dest, b, includePrivateData, includeAttachments, attachmentsDirectory);
+				
 				++bulletinsExported;
 			}
 		}
 		dest.write(MartusXml.getTagEnd(BulletinXmlExportImportConstants.MARTUS_BULLETINS));
 	}
 	
+	private void exportOlderVersionsOf(Writer dest, Bulletin latest, boolean includePrivateData, boolean includeAttachments, File attachmentsDirectory) throws Exception
+	{
+		BulletinHistory history = latest.getHistory();
+		for(int i = 0; i < history.size(); ++i)
+		{
+			String localId = history.get(i);
+			UniversalId uid = UniversalId.createFromAccountAndLocalId(latest.getAccount(), localId);
+			Bulletin older = app.getStore().getBulletinRevision(uid);
+			exportOneBulletin(dest, older, includePrivateData, includeAttachments, attachmentsDirectory);
+		}
+	}
+
 	public int getNumberOfBulletinsExported()
 	{
 		return bulletinsExported;
