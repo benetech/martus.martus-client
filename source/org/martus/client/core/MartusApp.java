@@ -616,15 +616,16 @@ public class MartusApp
 		return getHelp(currentLanguageCode, getHelpTOCFilename(currentLanguageCode));
 	}
 	
-	public URL getLanguageBasedResourceURL(String currentLanguageCode, String relativePath)
+	public URL getUrlOfDirectoryContainingDictionaries(String currentLanguageCode)
 	{
+		String dictionaryName = "dictionary_" + currentLanguageCode + ".ortho";
 		try 
 		{
 			File mlpFile = localization.getMlpkFile(currentLanguageCode);
 			if(mlpFile.exists() && 
 			   JarVerifier.verify(mlpFile,false) == JarVerifier.JAR_VERIFIED_TRUE)
 			{
-				URL url = new URL("jar:file:/" + mlpFile.getAbsolutePath() + "!" + relativePath);
+				URL url = new URL("jar:file:/" + mlpFile.getAbsolutePath() + "!" + "dictionaries/" + dictionaryName);
 				return url;
 			}
 		} 
@@ -632,12 +633,12 @@ public class MartusApp
 		{
 			e.printStackTrace();
 		}
-		URL relativeURL = EnglishStrings.class.getResource(relativePath);
-		if(relativeURL != null)
-			return relativeURL;
 		
-		String absolutePathInRoot = "/" + relativePath;
-		return EnglishStrings.class.getResource(absolutePathInRoot);
+		String dictionaryDirectory = "";
+		URL relativeURL = EnglishStrings.class.getResource(dictionaryDirectory + dictionaryName);
+		if(relativeURL == null)
+			dictionaryDirectory = "/";
+		return EnglishStrings.class.getResource(dictionaryDirectory);
 		
 	}
 	
