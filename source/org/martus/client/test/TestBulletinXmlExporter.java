@@ -657,7 +657,7 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 		
 	}
 
-	public void testExportCustomFiledSignalCharacterOfTagAndLabel() throws Exception
+	public void testExportCustomFieldSingleCharacterOfTagAndLabel() throws Exception
 	{
 		String customTag1 = "A";
 		String customTag2 = "custom";
