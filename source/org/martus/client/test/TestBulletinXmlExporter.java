@@ -358,25 +358,27 @@ public class TestBulletinXmlExporter extends TestCaseEnhanced
 	
 	public void testExportHistory() throws Exception
 	{
-		String localId1 = "pretend local id";
-		String localId2 = "another fake local id";
+		ReadableDatabase database = app.getStore().getDatabase();
 
-		BulletinHistory fakeHistory = new BulletinHistory();
-		fakeHistory.add(localId1);
-		fakeHistory.add(localId2);
+		Bulletin version1 = new Bulletin(store.getSignatureGenerator());
+		version1.setStatus(Bulletin.STATUSSEALED);
 		
-		Bulletin b = new Bulletin(store.getSignatureGenerator());
-		b.setHistory(fakeHistory);
+		Bulletin version2 = new Bulletin(store.getSignatureGenerator());
+		version2.createDraftCopyOf(version1, database);
+		version2.setStatus(Bulletin.STATUSSEALED);
+
+		Bulletin version3 = new Bulletin(store.getSignatureGenerator());
+		version3.createDraftCopyOf(version2, database);
 		
 		Vector list = new Vector();
-		list.add(b);
+		list.add(version3);
 		String result = doExport(list, true, false);
 		
 		assertContains("<BulletinVersion>3</BulletinVersion>", result);
 		assertContains("<History>", result);
 		assertContains("<Ancestor>", result);
-		assertContains(localId1, result);
-		assertContains(localId2, result);
+		assertContains(version1.getLocalId(), result);
+		assertContains(version2.getLocalId(), result);
 	}
 	
 	public void testExportExtendedHistory() throws Exception
