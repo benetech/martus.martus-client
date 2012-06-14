@@ -83,7 +83,7 @@ abstract public class UiField
 	
 	public void updateSpellChecker(String bulletinLanguageCode)
 	{
-		// TODO Auto-generated method stub
+		// NOTE: Default behavior is no spell checking
 	}
 
 	abstract public JComponent getComponent();
