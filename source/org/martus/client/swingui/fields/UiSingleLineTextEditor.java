@@ -42,10 +42,7 @@ public class UiSingleLineTextEditor extends UiSingleLineTextField
 		widget = new UiTextField();
 		widget.addKeyListener(new myKeyListener());
 		
-		// we would like to suppor the context menu, but whenever you do a right-click 
-		// to try to paste into the editor, the editor loses focus (to the context menu), 
-		// and then the paste fails because editing has already stopped! Ugh.
-		//supportContextMenu();
+		supportContextMenu();
 	}
 
 	public JComponent[] getFocusableComponents()
