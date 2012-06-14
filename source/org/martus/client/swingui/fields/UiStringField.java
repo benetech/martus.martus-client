@@ -57,18 +57,18 @@ public abstract class UiStringField extends UiField
 		actionDelete = new ActionDelete();
 		actionSelectAll = new ActionSelectAll();
 
-		menu = new UiPopupMenu();
+		getEditor().addMouseListener(mouseAdapter);
+	}
+
+	public void contextMenu(MouseEvent e)
+	{
+		UiPopupMenu menu = new UiPopupMenu();
 		menu.add(actionCut);
 		menu.add(actionCopy);
 		menu.add(actionPaste);
 		menu.add(actionDelete);
 		menu.add(actionSelectAll);
 
-		getEditor().addMouseListener(mouseAdapter);
-	}
-
-	public void contextMenu(MouseEvent e)
-	{
 		JTextComponent editor = getEditor();
 		boolean editable = editor.isEditable();
 		boolean selected = (editor.getSelectionStart() != editor.getSelectionEnd());
@@ -211,10 +211,12 @@ public abstract class UiStringField extends UiField
 			boolean hasAutospell = true;
 			// NOTE: JOrtho will only show squigglies for editable fields 
 			SpellChecker.register(getTextComponent(), hasPopup, hasShortcut, hasAutospell);
+			isSpellCheckActive = true;
 		} 
 		else
 		{
 			SpellChecker.unregister(getTextComponent());
+			isSpellCheckActive = false;
 		}
 	}
 	
@@ -224,7 +226,7 @@ public abstract class UiStringField extends UiField
 	Action actionPaste;
 	Action actionDelete;
 	Action actionSelectAll;
-	UiPopupMenu menu;
 	MouseAdapter mouseAdapter;
+	private boolean isSpellCheckActive;
 }
 
