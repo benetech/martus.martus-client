@@ -55,11 +55,14 @@ class GridNormalCellEditor extends GridCellEditorAndRenderer
 	{
 		setColors(column);
 		Component tableCellEditorComponent = super.getTableCellEditorComponent(table, value, isSelected, row, column);
-		UiField languageField = fieldContext.getField(BulletinConstants.TAGLANGUAGE);
-		if(languageField != null)
+		if(isBulletinFieldEditorOrRenderer())
 		{
-			String languageCode = languageField.getText();
-			getUiField().updateSpellChecker(languageCode);
+			UiField languageField = fieldContext.getField(BulletinConstants.TAGLANGUAGE);
+			if(languageField != null)
+			{
+				String languageCode = languageField.getText();
+				getUiField().updateSpellChecker(languageCode);
+			}
 		}
 		return tableCellEditorComponent;
 	}
@@ -67,7 +70,17 @@ class GridNormalCellEditor extends GridCellEditorAndRenderer
 	public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column)
 	{
 		setColors(column);
-		return super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+		Component tableCellRendererComponent = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+		if(isBulletinFieldEditorOrRenderer())
+		{
+			UiField languageField = fieldContext.getField(BulletinConstants.TAGLANGUAGE);
+			if(languageField != null)
+			{
+				String languageCode = languageField.getText();
+				getUiField().updateSpellChecker(languageCode);
+			}
+		}
+		return tableCellRendererComponent;
 	}
 
 	public void setFieldContext(UiFieldContext contextToUse)
@@ -80,7 +93,7 @@ class GridNormalCellEditor extends GridCellEditorAndRenderer
 		return fieldContext;
 	}
 	
-	public boolean isBulletinFieldEditor()
+	public boolean isBulletinFieldEditorOrRenderer()
 	{
 		return (getFieldContext() != null);
 	}
