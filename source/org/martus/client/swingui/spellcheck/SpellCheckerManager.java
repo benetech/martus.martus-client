@@ -24,11 +24,13 @@ Boston, MA 02111-1307, USA.
 
 */
 
-package org.martus.client.swingui;
+package org.martus.client.swingui.spellcheck;
 
 import java.net.MalformedURLException;
 import java.net.URL;
 
+import org.martus.client.swingui.MartusLocalization;
+import org.martus.client.swingui.UiMainWindow;
 import org.martus.common.MartusLogger;
 
 

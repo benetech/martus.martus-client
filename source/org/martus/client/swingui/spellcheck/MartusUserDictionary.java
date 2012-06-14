@@ -23,11 +23,13 @@ Software Foundation, Inc., 59 Temple Place - Suite 330,
 Boston, MA 02111-1307, USA.
 
 */
-package org.martus.client.swingui;
+package org.martus.client.swingui.spellcheck;
 
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Locale;
+
+import org.martus.client.swingui.UiMainWindow;
 
 import com.inet.jortho.UserDictionaryProvider;
 
