@@ -32,8 +32,11 @@ import java.awt.Component;
 import javax.swing.JComponent;
 import javax.swing.JTable;
 
+import org.martus.client.swingui.fields.UiField;
+import org.martus.client.swingui.fields.UiFieldContext;
 import org.martus.client.swingui.fields.UiSingleLineTextEditor;
 import org.martus.clientside.UiLocalization;
+import org.martus.common.bulletin.BulletinConstants;
 
 class GridNormalCellEditor extends GridCellEditorAndRenderer
 {
@@ -51,13 +54,35 @@ class GridNormalCellEditor extends GridCellEditorAndRenderer
 	public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row, int column)
 	{
 		setColors(column);
-		return super.getTableCellEditorComponent(table, value, isSelected, row, column);
+		Component tableCellEditorComponent = super.getTableCellEditorComponent(table, value, isSelected, row, column);
+		UiField languageField = fieldContext.getField(BulletinConstants.TAGLANGUAGE);
+		if(languageField != null)
+		{
+			String languageCode = languageField.getText();
+			getUiField().updateSpellChecker(languageCode);
+		}
+		return tableCellEditorComponent;
 	}
 	
 	public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column)
 	{
 		setColors(column);
 		return super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+	}
+
+	public void setFieldContext(UiFieldContext contextToUse)
+	{
+		fieldContext = contextToUse;
+	}
+
+	public UiFieldContext getFieldContext()
+	{
+		return fieldContext;
+	}
+	
+	public boolean isBulletinFieldEditor()
+	{
+		return (getFieldContext() != null);
 	}
 
 	private void setColors(int column)
@@ -80,4 +105,7 @@ class GridNormalCellEditor extends GridCellEditorAndRenderer
 	Color normalForeground;
 	Color normalBackground;
 	// end code that should go away
+	
+	private UiFieldContext fieldContext;
+	
 }

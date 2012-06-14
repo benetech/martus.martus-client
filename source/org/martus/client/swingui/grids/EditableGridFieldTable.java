@@ -86,10 +86,15 @@ public class EditableGridFieldTable extends GridFieldTable
 		if(type.isPopUpTree())
 			throw new RuntimeException("EditableGridFieldTable does not support popup tree field types");
 		
+		GridNormalCellEditor editor = new GridNormalCellEditor(localization);
+		editor.setFieldContext(getFieldContext());
+		
 		if(type.isMultiline() || type.isAnyField() || type.isGrid())
-			return new GridNormalCellEditor(localization);
+		{
+			return editor;
+		}
 			
-		return new GridNormalCellEditor(localization);
+		return editor;
 	}
 
 }

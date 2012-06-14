@@ -213,6 +213,11 @@ public abstract class GridTable extends UiTableWithCellEditingProtection
 			columnIndex = 1;
 		super.changeSelection(rowIndex, columnIndex, toggle, extend);
 	}
+	
+	public UiFieldContext getFieldContext()
+	{
+		return context;
+	}
 
 	UiDialogLauncher dlgLauncher;
 	protected UiFieldContext context;
