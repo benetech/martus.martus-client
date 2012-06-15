@@ -353,6 +353,8 @@ public class MartusApp
 
 	public void saveConfigInfo() throws SaveConfigInfoException
 	{
+		File file = getConfigInfoFile();
+
 		try
 		{
 			ByteArrayOutputStream encryptedConfigOutputStream = new ByteArrayOutputStream();
@@ -360,7 +362,7 @@ public class MartusApp
 			byte[] encryptedConfigInfo = encryptedConfigOutputStream.toByteArray();
 
 			ByteArrayInputStream encryptedConfigInputStream = new ByteArrayInputStream(encryptedConfigInfo);
-			FileOutputStream configFileOutputStream = new FileOutputStream(getConfigInfoFile());
+			FileOutputStream configFileOutputStream = new FileOutputStream(file);
 			getSecurity().encrypt(encryptedConfigInputStream, configFileOutputStream);
 
 			configFileOutputStream.close();
@@ -368,7 +370,7 @@ public class MartusApp
 			encryptedConfigOutputStream.close();
 
 
-			FileInputStream in = new FileInputStream(getConfigInfoFile());
+			FileInputStream in = new FileInputStream(file);
 			byte[] signature = getSecurity().createSignatureOfStream(in);
 			in.close();
 
