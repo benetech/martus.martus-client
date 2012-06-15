@@ -407,18 +407,7 @@ public class MartusApp
 
 		try
 		{
-			String accountId = getSecurity().getPublicKeyString();
-			if(!isSignatureFileValid(dataFile, sigFile, accountId))
-				throw new LoadConfigInfoException();
-
-			InputStreamWithSeek encryptedContactFileInputStream = new FileInputStreamWithSeek(dataFile);
-			ByteArrayOutputStream plainTextContactOutputStream = new ByteArrayOutputStream();
-			getSecurity().decrypt(encryptedContactFileInputStream, plainTextContactOutputStream);
-
-			byte[] plainTextConfigInfo = plainTextContactOutputStream.toByteArray();
-
-			plainTextContactOutputStream.close();
-			encryptedContactFileInputStream.close();
+			byte[] plainTextConfigInfo = verifyAndReadSignedFile(dataFile, sigFile);
 			ByteArrayInputStream plainTextConfigInputStream = new ByteArrayInputStream(plainTextConfigInfo);
 			configInfo = ConfigInfo.load(plainTextConfigInputStream);
 			plainTextConfigInputStream.close();
@@ -437,6 +426,23 @@ public class MartusApp
 		{
 			throw new LoadConfigInfoException(e);
 		}
+	}
+
+	private byte[] verifyAndReadSignedFile(File dataFile, File sigFile) throws Exception
+	{
+		String accountId = getSecurity().getPublicKeyString();
+		if(!isSignatureFileValid(dataFile, sigFile, accountId))
+			throw new SignatureVerificationException();
+
+		InputStreamWithSeek encryptedContactFileInputStream = new FileInputStreamWithSeek(dataFile);
+		ByteArrayOutputStream plainTextContactOutputStream = new ByteArrayOutputStream();
+		getSecurity().decrypt(encryptedContactFileInputStream, plainTextContactOutputStream);
+
+		byte[] plainTextConfigInfo = plainTextContactOutputStream.toByteArray();
+
+		plainTextContactOutputStream.close();
+		encryptedContactFileInputStream.close();
+		return plainTextConfigInfo;
 	}
 	
 	public void writeSignedUserDictionary(String string) throws Exception
