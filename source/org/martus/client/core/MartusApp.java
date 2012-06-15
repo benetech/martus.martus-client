@@ -360,24 +360,7 @@ public class MartusApp
 		{
 			ByteArrayOutputStream encryptedConfigOutputStream = new ByteArrayOutputStream();
 			configInfo.save(encryptedConfigOutputStream);
-			byte[] encryptedConfigInfo = encryptedConfigOutputStream.toByteArray();
-
-			ByteArrayInputStream encryptedConfigInputStream = new ByteArrayInputStream(encryptedConfigInfo);
-			FileOutputStream configFileOutputStream = new FileOutputStream(file);
-			getSecurity().encrypt(encryptedConfigInputStream, configFileOutputStream);
-
-			configFileOutputStream.close();
-			encryptedConfigInputStream.close();
-			encryptedConfigOutputStream.close();
-
-
-			FileInputStream in = new FileInputStream(file);
-			byte[] signature = getSecurity().createSignatureOfStream(in);
-			in.close();
-
-			FileOutputStream out = new FileOutputStream(signatureFile);
-			out.write(signature);
-			out.close();
+			writeFileAndSignatureFile(file, signatureFile, encryptedConfigOutputStream);
 		}
 		catch (Exception e)
 		{
@@ -385,6 +368,29 @@ public class MartusApp
 			throw new SaveConfigInfoException();
 		}
 
+	}
+
+	private void writeFileAndSignatureFile(File file, File signatureFile,
+			ByteArrayOutputStream encryptedOutputStream) throws Exception
+	{
+		byte[] encryptedInfo = encryptedOutputStream.toByteArray();
+
+		ByteArrayInputStream encryptedInputStream = new ByteArrayInputStream(encryptedInfo);
+		FileOutputStream fileOutputStream = new FileOutputStream(file);
+		getSecurity().encrypt(encryptedInputStream, fileOutputStream);
+
+		fileOutputStream.close();
+		encryptedInputStream.close();
+		encryptedOutputStream.close();
+
+
+		FileInputStream in = new FileInputStream(file);
+		byte[] signature = getSecurity().createSignatureOfStream(in);
+		in.close();
+
+		FileOutputStream out = new FileOutputStream(signatureFile);
+		out.write(signature);
+		out.close();
 	}
 
 	public void loadConfigInfo() throws LoadConfigInfoException
