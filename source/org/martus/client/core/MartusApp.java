@@ -118,6 +118,8 @@ import org.martus.util.StreamCopier;
 import org.martus.util.StreamableBase64;
 import org.martus.util.StreamableBase64.InvalidBase64Exception;
 import org.martus.util.UnicodeReader;
+import org.martus.util.UnicodeStringReader;
+import org.martus.util.UnicodeStringWriter;
 import org.martus.util.UnicodeWriter;
 import org.martus.util.inputstreamwithseek.ByteArrayInputStreamWithSeek;
 import org.martus.util.inputstreamwithseek.FileInputStreamWithSeek;
@@ -360,7 +362,8 @@ public class MartusApp
 		{
 			ByteArrayOutputStream encryptedConfigOutputStream = new ByteArrayOutputStream();
 			configInfo.save(encryptedConfigOutputStream);
-			writeFileAndSignatureFile(file, signatureFile, encryptedConfigOutputStream);
+			byte[] encryptedInfo = encryptedConfigOutputStream.toByteArray();
+			writeFileAndSignatureFile(file, signatureFile, encryptedInfo);
 		}
 		catch (Exception e)
 		{
@@ -370,19 +373,15 @@ public class MartusApp
 
 	}
 
-	private void writeFileAndSignatureFile(File file, File signatureFile,
-			ByteArrayOutputStream encryptedOutputStream) throws Exception
+	public void writeFileAndSignatureFile(File file, File signatureFile,
+			byte[] encryptedInfo) throws Exception
 	{
-		byte[] encryptedInfo = encryptedOutputStream.toByteArray();
-
 		ByteArrayInputStream encryptedInputStream = new ByteArrayInputStream(encryptedInfo);
 		FileOutputStream fileOutputStream = new FileOutputStream(file);
 		getSecurity().encrypt(encryptedInputStream, fileOutputStream);
 
 		fileOutputStream.close();
 		encryptedInputStream.close();
-		encryptedOutputStream.close();
-
 
 		FileInputStream in = new FileInputStream(file);
 		byte[] signature = getSecurity().createSignatureOfStream(in);
@@ -440,6 +439,15 @@ public class MartusApp
 		}
 	}
 	
+	public void writeSignedUserDictionary(String string) throws Exception
+	{
+		ByteArrayInputStream plainTextIn = new ByteArrayInputStream(string.getBytes("UTF-8"));
+		ByteArrayOutputStream encryptedOut = new ByteArrayOutputStream();
+		getSecurity().encrypt(plainTextIn, encryptedOut);
+		
+		writeFileAndSignatureFile(getDictionaryFile(), getDictionarySignatureFile(), encryptedOut.toByteArray());
+	}
+
 	public static void removeSpaceLikeCharactersFromTags(FieldSpecCollection specs)
 	{
 		for(int i = 0; i < specs.size(); ++i)
@@ -583,6 +591,26 @@ public class MartusApp
 	public File getConfigInfoSignatureFileForAccount(File accountDirectory)
 	{
 		return new File(accountDirectory, "MartusConfig.sig");
+	}
+
+	public File getDictionaryFile()
+	{
+		return getDictionaryFileForAccount(getCurrentAccountDirectory());
+	}
+	
+	public File getDictionaryFileForAccount(File accountDirectory)
+	{
+		return new File(accountDirectory, "Dictionary.dat");
+	}
+
+	public File getDictionarySignatureFile()
+	{
+		return getDictionarySignatureFileForAccount(getCurrentAccountDirectory());
+	}
+
+	public File getDictionarySignatureFileForAccount(File accountDirectory)
+	{
+		return new File(accountDirectory, "Dictionary.sig");
 	}
 
 	public File getUploadInfoFile()

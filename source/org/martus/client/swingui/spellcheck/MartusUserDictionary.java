@@ -25,63 +25,95 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.spellcheck;
 
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Locale;
 
+import org.martus.client.core.MartusApp;
 import org.martus.client.swingui.UiMainWindow;
 
 import com.inet.jortho.UserDictionaryProvider;
 
-public class MartusUserDictionary implements UserDictionaryProvider, Iterator<String>
+public class MartusUserDictionary implements UserDictionaryProvider
 {
 	public MartusUserDictionary(UiMainWindow mainWindowToUse)
 	{
 		mainWindow = mainWindowToUse;
 		
-		original = new HashSet<String>().iterator();
+		original = new HashSet<String>();
 		
-		HashSet<String> extraWords = new HashSet<String>();
-		extraWords.add("Martus");
-		extraWords.add("Miradi");
-		extraWords.add("Benetech");
-		extras = extraWords.iterator();
+		extras = new HashSet<String>();
+		extras.add("Martus");
+		extras.add("Miradi");
+		extras.add("Benetech");
 	}
 	
 	@Override
 	public Iterator<String> getWords(Locale locale)
 	{
-		return this;
+		return new WordIterator(original, extras);
 	}
 	
-	public boolean hasNext()
+	static class WordIterator implements Iterator<String>
 	{
-		boolean result = original.hasNext();
-		if(result)
-			return result;
+		public WordIterator(Collection<String> original, Collection<String> extras)
+		{
+			originalIterator = original.iterator();
+			extrasIterator = extras.iterator();
+		}
 		
-		return extras.hasNext();
-	}
+		public boolean hasNext()
+		{
+			boolean result = originalIterator.hasNext();
+			if(result)
+				return result;
+			
+			return extrasIterator.hasNext();
+		}
 
-	public String next()
-	{
-		if(original.hasNext())
-			return original.next();
+		public String next()
+		{
+			if(originalIterator.hasNext())
+				return originalIterator.next();
 
-		return extras.next();
-	}
+			return extrasIterator.next();
+		}
 
-	public void remove()
-	{
-		original.remove();
+		public void remove()
+		{
+			originalIterator.remove();
+		}
+
+		private Iterator<String> originalIterator;
+		private Iterator<String> extrasIterator;
 	}
 	
 
 	@Override
 	public void addWord(String newWord)
 	{
-		// FIXME: Needs to be implemented
-		throw new RuntimeException("Not Implemented Yet!");
+		original.add(newWord);
+		saveDictionary();
+	}
+
+	private void saveDictionary()
+	{
+		StringBuffer buffer = new StringBuffer();
+		for (String word : original)
+		{
+			buffer.append(word);
+			buffer.append('\n');
+		}
+		
+		try
+		{
+			getApp().writeSignedUserDictionary(buffer.toString());
+		} 
+		catch (Exception e)
+		{
+			mainWindow.notifyDlg("ErrorSavingDictionary");
+		}
 	}
 
 	@Override
@@ -91,7 +123,12 @@ public class MartusUserDictionary implements UserDictionaryProvider, Iterator<St
 		throw new RuntimeException("Not Implemented Yet!");
 	}
 	
+	public MartusApp getApp()
+	{
+		return mainWindow.getApp();
+	}
+	
 	private UiMainWindow mainWindow;
-	private Iterator<String> original;
-	private Iterator<String> extras;
+	private HashSet<String> original;
+	private HashSet<String> extras;
 }
