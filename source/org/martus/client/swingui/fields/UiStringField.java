@@ -26,15 +26,13 @@ Boston, MA 02111-1307, USA.
 
 package org.martus.client.swingui.fields;
 
-import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-import javax.swing.AbstractAction;
-import javax.swing.Action;
 import javax.swing.text.JTextComponent;
 
 import org.martus.client.swingui.MartusLocalization;
+import org.martus.client.swingui.spellcheck.UiStringFieldContextMenuListener;
 import org.martus.clientside.UiLocalization;
 import org.martus.swing.UiPopupMenu;
 
@@ -51,68 +49,17 @@ public abstract class UiStringField extends UiField
 
 	public void supportContextMenu()
 	{
-		actionCut = new ActionCut();
-		actionCopy = new ActionCopy();
-		actionPaste = new ActionPaste();
-		actionDelete = new ActionDelete();
-		actionSelectAll = new ActionSelectAll();
-
 		getEditor().addMouseListener(mouseAdapter);
 	}
 
 	public void contextMenu(MouseEvent e)
 	{
 		UiPopupMenu menu = new UiPopupMenu();
-		menu.add(actionCut);
-		menu.add(actionCopy);
-		menu.add(actionPaste);
-		menu.add(actionDelete);
-		menu.add(actionSelectAll);
-
-		JTextComponent editor = getEditor();
-		boolean editable = editor.isEditable();
-		boolean selected = (editor.getSelectionStart() != editor.getSelectionEnd());
-
-		actionCut.setEnabled(editable && selected);
-		actionCopy.setEnabled(selected);
-		actionPaste.setEnabled(editable);
-		actionDelete.setEnabled(editable && selected);
-		actionSelectAll.setEnabled(true);
-
+		menu.addPopupMenuListener(new UiStringFieldContextMenuListener(menu, getEditor(), localization));
 		menu.show(getEditor(), e.getX(), e.getY());
 	}
 	
 	abstract protected JTextComponent getTextComponent();
-
-	public void cut()
-	{
-		getEditor().cut();
-	}
-
-	public void copy()
-	{
-		getEditor().copy();
-	}
-
-	public void paste()
-	{
-		getEditor().paste();
-	}
-
-	public void delete()
-	{
-		getEditor().replaceSelection("");
-	}
-
-	public void selectAll()
-	{
-		getEditor().selectAll();
-	}
-	
-	String getMenuLabel(String tag)
-	{
-		return localization.getMenuLabel(tag);
-	}
 
 	abstract public JTextComponent getEditor();
 
@@ -124,78 +71,6 @@ public abstract class UiStringField extends UiField
 			if(e.isMetaDown())
 				contextMenu(e);
 		}
-	}
-
-	class ActionCut extends AbstractAction
-	{
-		public ActionCut()
-		{
-			super(getMenuLabel("cut"), null);
-		}
-
-		public void actionPerformed(ActionEvent ae)
-		{
-			cut();
-		}
-
-
-	}
-
-	class ActionCopy extends AbstractAction
-	{
-		public ActionCopy()
-		{
-			super(getMenuLabel("copy"), null);
-		}
-
-		public void actionPerformed(ActionEvent ae)
-		{
-			copy();
-		}
-
-
-	}
-
-	class ActionPaste extends AbstractAction
-	{
-		public ActionPaste()
-		{
-			super(getMenuLabel("paste"), null);
-		}
-
-		public void actionPerformed(ActionEvent ae)
-		{
-			paste();
-		}
-
-	}
-
-	class ActionDelete extends AbstractAction
-	{
-		public ActionDelete()
-		{
-			super(getMenuLabel("delete"), null);
-		}
-
-		public void actionPerformed(ActionEvent ae)
-		{
-			delete();
-		}
-
-	}
-
-	class ActionSelectAll extends AbstractAction
-	{
-		public ActionSelectAll()
-		{
-			super(getMenuLabel("selectall"), null);
-		}
-
-		public void actionPerformed(ActionEvent ae)
-		{
-			selectAll();
-		}
-
 	}
 
 	@Override
@@ -211,22 +86,14 @@ public abstract class UiStringField extends UiField
 			boolean hasAutospell = true;
 			// NOTE: JOrtho will only show squigglies for editable fields 
 			SpellChecker.register(getTextComponent(), hasPopup, hasShortcut, hasAutospell);
-			isSpellCheckActive = true;
 		} 
 		else
 		{
 			SpellChecker.unregister(getTextComponent());
-			isSpellCheckActive = false;
 		}
 	}
 	
 	UiLocalization localization;
-	Action actionCut;
-	Action actionCopy;
-	Action actionPaste;
-	Action actionDelete;
-	Action actionSelectAll;
 	MouseAdapter mouseAdapter;
-	private boolean isSpellCheckActive;
 }
 

@@ -479,6 +479,8 @@ public class EnglishStrings
 "menu:delete=Delete",
 "menu:selectall=Select All",
 "menu:RemoveServer=Remove Martus Server",
+"menu:MoreSpellingSuggestions=More Suggestions",
+"menu:AddToDictionary=Add '#NewWord#' to User Dictionary",
 
 "field:translationVersion=English",
 "field:aboutDlgVersionInfo=software version",
