@@ -416,12 +416,12 @@ public class MartusApp
 			getSecurity().decrypt(encryptedContactFileInputStream, plainTextContactOutputStream);
 
 			byte[] plainTextConfigInfo = plainTextContactOutputStream.toByteArray();
-			ByteArrayInputStream plainTextConfigInputStream = new ByteArrayInputStream(plainTextConfigInfo);
-			configInfo = ConfigInfo.load(plainTextConfigInputStream);
 
-			plainTextConfigInputStream.close();
 			plainTextContactOutputStream.close();
 			encryptedContactFileInputStream.close();
+			ByteArrayInputStream plainTextConfigInputStream = new ByteArrayInputStream(plainTextConfigInfo);
+			configInfo = ConfigInfo.load(plainTextConfigInputStream);
+			plainTextConfigInputStream.close();
 			
 			FieldSpecCollection specsTop = getCustomFieldSpecsTopSection(configInfo);
 			removeSpaceLikeCharactersFromTags(specsTop);
