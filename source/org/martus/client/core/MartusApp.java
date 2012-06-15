@@ -363,7 +363,7 @@ public class MartusApp
 			ByteArrayOutputStream encryptedConfigOutputStream = new ByteArrayOutputStream();
 			configInfo.save(encryptedConfigOutputStream);
 			byte[] encryptedInfo = encryptedConfigOutputStream.toByteArray();
-			writeFileAndSignatureFile(file, signatureFile, encryptedInfo);
+			encryptAndWriteFileAndSignatureFile(file, signatureFile, encryptedInfo);
 		}
 		catch (Exception e)
 		{
@@ -373,10 +373,10 @@ public class MartusApp
 
 	}
 
-	public void writeFileAndSignatureFile(File file, File signatureFile,
-			byte[] encryptedInfo) throws Exception
+	public void encryptAndWriteFileAndSignatureFile(File file, File signatureFile,
+			byte[] plainText) throws Exception
 	{
-		ByteArrayInputStream encryptedInputStream = new ByteArrayInputStream(encryptedInfo);
+		ByteArrayInputStream encryptedInputStream = new ByteArrayInputStream(plainText);
 		FileOutputStream fileOutputStream = new FileOutputStream(file);
 		getSecurity().encrypt(encryptedInputStream, fileOutputStream);
 
@@ -447,11 +447,19 @@ public class MartusApp
 	
 	public void writeSignedUserDictionary(String string) throws Exception
 	{
-		ByteArrayInputStream plainTextIn = new ByteArrayInputStream(string.getBytes("UTF-8"));
-		ByteArrayOutputStream encryptedOut = new ByteArrayOutputStream();
-		getSecurity().encrypt(plainTextIn, encryptedOut);
+		encryptAndWriteFileAndSignatureFile(getDictionaryFile(), getDictionarySignatureFile(), string.getBytes("UTF-8"));
+	}
+	
+	public String readSignedUserDictionary() throws Exception
+	{
+		File dictionaryFile = getDictionaryFile();
+		File dictionarySignatureFile = getDictionarySignatureFile();
 		
-		writeFileAndSignatureFile(getDictionaryFile(), getDictionarySignatureFile(), encryptedOut.toByteArray());
+		if(!dictionaryFile.exists())
+			return "";
+		
+		byte[] plainText = verifyAndReadSignedFile(dictionaryFile, dictionarySignatureFile);
+		return new String(plainText, "UTF-8");
 	}
 
 	public static void removeSpaceLikeCharactersFromTags(FieldSpecCollection specs)

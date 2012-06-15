@@ -32,6 +32,8 @@ import java.util.Locale;
 
 import org.martus.client.core.MartusApp;
 import org.martus.client.swingui.UiMainWindow;
+import org.martus.common.MartusLogger;
+import org.martus.util.UnicodeStringReader;
 
 import com.inet.jortho.UserDictionaryProvider;
 
@@ -47,6 +49,8 @@ public class MartusUserDictionary implements UserDictionaryProvider
 		extras.add("Martus");
 		extras.add("Miradi");
 		extras.add("Benetech");
+		
+		loadDictionary();
 	}
 	
 	@Override
@@ -95,6 +99,27 @@ public class MartusUserDictionary implements UserDictionaryProvider
 	{
 		original.add(newWord);
 		saveDictionary();
+	}
+	
+	private void loadDictionary()
+	{
+		try
+		{
+			String allWords = getApp().readSignedUserDictionary();
+			UnicodeStringReader reader = new UnicodeStringReader(allWords);
+			while(reader.ready())
+			{
+				String word = reader.readLine();
+				original.add(word);
+			}
+			
+			MartusLogger.log("User dictionary loaded word count: " + original.size());
+		} 
+		catch (Exception e)
+		{
+			MartusLogger.logException(e);
+			mainWindow.notifyDlg("ErrorLoadingDictionary");
+		}
 	}
 
 	private void saveDictionary()

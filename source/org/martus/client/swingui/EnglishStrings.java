@@ -232,6 +232,7 @@ public class EnglishStrings
 "wintitle:notifyErrorImportingBulletinsTooOld=Import Bulletin(s)",
 "wintitle:notifyErrorImportingBulletinsTooNew=Import Bulletin(s)",
 "wintitle:notifyErrorSavingDictionary=Error",
+"wintitle:notifyErrorLoadingDictionary=Error",
 
 "wintitle:notifyRetrieveCompleted=Retrieve Complete",
 "field:notifyRetrieveCompletedcause=Retrieving bulletins from the server is complete",
@@ -892,6 +893,7 @@ public class EnglishStrings
 "field:notifyErrorImportingBulletinsTooOldcause=This XML file was created by an older version of Martus and cannot be read by this version.",
 "field:notifyErrorImportingBulletinsTooNewcause=This XML file was created by a newer version of Martus and cannot be read by this version.  You must upgrade to the newer version of Martus to import this file.",
 "field:notifyErrorSavingDictionarycause=Unknown error saving user dictionary",
+"field:notifyErrorLoadingDictionarycause=Unknown error loading user dictionary for spell checking",
 
 "field:IncompatibleMtfVersion=The version of this translation is not compatible with this version of Martus.  It is recommended that you do not continue to use this translation version and go to (http://www.martus.org/downloads) for the appropriate version.",
 "field:IncompatibleMtfVersionTranslation=#MtfLanguage# Translation Version: #MtfVersionNumber#",
