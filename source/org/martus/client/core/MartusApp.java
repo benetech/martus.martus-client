@@ -354,6 +354,7 @@ public class MartusApp
 	public void saveConfigInfo() throws SaveConfigInfoException
 	{
 		File file = getConfigInfoFile();
+		File signatureFile = getConfigInfoSignatureFile();
 
 		try
 		{
@@ -374,7 +375,7 @@ public class MartusApp
 			byte[] signature = getSecurity().createSignatureOfStream(in);
 			in.close();
 
-			FileOutputStream out = new FileOutputStream(getConfigInfoSignatureFile());
+			FileOutputStream out = new FileOutputStream(signatureFile);
 			out.write(signature);
 			out.close();
 		}
