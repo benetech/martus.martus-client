@@ -434,15 +434,15 @@ public class MartusApp
 		if(!isSignatureFileValid(dataFile, sigFile, accountId))
 			throw new SignatureVerificationException();
 
-		InputStreamWithSeek encryptedContactFileInputStream = new FileInputStreamWithSeek(dataFile);
-		ByteArrayOutputStream plainTextContactOutputStream = new ByteArrayOutputStream();
-		getSecurity().decrypt(encryptedContactFileInputStream, plainTextContactOutputStream);
+		InputStreamWithSeek encryptedInputStream = new FileInputStreamWithSeek(dataFile);
+		ByteArrayOutputStream plainTextStream = new ByteArrayOutputStream();
+		getSecurity().decrypt(encryptedInputStream, plainTextStream);
 
-		byte[] plainTextConfigInfo = plainTextContactOutputStream.toByteArray();
+		byte[] plainText = plainTextStream.toByteArray();
 
-		plainTextContactOutputStream.close();
-		encryptedContactFileInputStream.close();
-		return plainTextConfigInfo;
+		plainTextStream.close();
+		encryptedInputStream.close();
+		return plainText;
 	}
 	
 	public void writeSignedUserDictionary(String string) throws Exception
