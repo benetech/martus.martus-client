@@ -33,6 +33,7 @@ import java.util.Vector;
 import org.martus.client.core.BulletinXmlExporter;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.dialogs.UiImportExportProgressMeterDlg;
+import org.martus.common.MartusLogger;
 import org.martus.util.UnicodeWriter;
 
 public class ExportBulletins
@@ -94,6 +95,7 @@ public class ExportBulletins
 			}
 			catch (Exception e)
 			{
+				MartusLogger.logException(e);
 				errorOccured = true;
 			}
 			finally
