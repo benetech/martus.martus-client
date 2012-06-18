@@ -104,6 +104,11 @@ public class BulletinXmlExporter
 		{
 			String localId = history.get(i);
 			UniversalId uid = UniversalId.createFromAccountAndLocalId(latest.getAccount(), localId);
+			if(!app.getStore().doesBulletinRevisionExist(uid))
+			{
+				MartusLogger.log("Not exporting " + uid + " because it is not available.");
+				continue;
+			}
 			Bulletin older = app.getStore().getBulletinRevision(uid);
 			exportOneBulletin(dest, older, includePrivateData, includeAttachments, attachmentsDirectory);
 		}
