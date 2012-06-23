@@ -148,6 +148,7 @@ import org.martus.swing.UiPopupMenu;
 import org.martus.swing.Utilities;
 import org.martus.swing.Utilities.Delay;
 import org.martus.util.FileVerifier;
+import org.martus.util.MultiCalendar;
 import org.martus.util.StreamableBase64.InvalidBase64Exception;
 import org.martus.util.TokenReplacement;
 import org.martus.util.TokenReplacement.TokenInvalidException;
@@ -182,23 +183,34 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 			JOptionPane.showMessageDialog(null, "Unknown error attempting to locate crypto jars");
 			throw new RuntimeException(e);
 		}
-
 		
-		// This block of code is to create a test version of Martus that 
-		// will expire after a specific date. 
-//		new UiNotifyDlg(this, "Martus - Test Version", 
-//				new String[] {"THIS IS A TEST VERSION OF MARTUS",
-//				"Please contact info@martus.org with any questions"}, 
-//				new String[] {"OK"});
-//		
-//		MultiCalendar today = new MultiCalendar();
-//		MultiCalendar expires = MultiCalendar.createFromGregorianYearMonthDay(2007, 6, 30);
-//		if(today.after(expires))
-//			throw new RuntimeException();
-		// End test version block of code
-		
+		int secondsToWait = 0;
 		cursorStack = new Stack();
 		UiModelessBusyDlg splashScreen = new UiModelessBusyDlg(new ImageIcon(UiAboutDlg.class.getResource("MartusLogo.gif")));
+
+		// Pop up a nag screen if this is an unofficial private release
+		try
+		{
+			MultiCalendar today = new MultiCalendar();
+			MultiCalendar startTimer = MultiCalendar.createFromGregorianYearMonthDay(2012, 6, 20);
+			secondsToWait = 2 * MultiCalendar.daysBetween(startTimer, today);
+			
+			new UiNotifyDlg(this, "Martus - Test Version", 
+					new String[] {"THIS IS AN UNOFFICIAL TEST VERSION OF MARTUS",
+					"\nAs more time passes, it will take longer and longer to start up.\n" +
+					"Today it will take " + secondsToWait + " seconds.\n\n" +
+					"Please contact info@martus.org with any questions"}, 
+					new String[] {"OK"});
+			
+			MartusLogger.log("Test version sleeping " + secondsToWait + " seconds...");
+			Thread.sleep(secondsToWait * 1000L);
+			MartusLogger.log("Awake");
+		} 
+		catch (InterruptedException e)
+		{
+			MartusLogger.logException(e);
+		}
+		
 		setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 		setCurrentActiveFrame(this);
 		try
