@@ -32,6 +32,7 @@ import java.awt.event.MouseEvent;
 import javax.swing.text.JTextComponent;
 
 import org.martus.client.swingui.MartusLocalization;
+import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.spellcheck.UiStringFieldContextMenuListener;
 import org.martus.clientside.UiLocalization;
 import org.martus.swing.UiPopupMenu;
@@ -76,6 +77,9 @@ public abstract class UiStringField extends UiField
 	@Override
 	public void updateSpellChecker(String bulletinLanguageCode)
 	{
+		if(!UiMainWindow.isAlphaTester)
+			return;
+		
 		boolean isImplicitlyEnglish = bulletinLanguageCode.equals("?");
 		boolean isExplicitlyEnglish = bulletinLanguageCode.equals(MartusLocalization.ENGLISH);
 		boolean shouldSpellCheck = isImplicitlyEnglish || isExplicitlyEnglish;
