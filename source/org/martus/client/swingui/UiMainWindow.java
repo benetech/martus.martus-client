@@ -197,8 +197,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 			
 			new UiNotifyDlg(this, "Martus - Test Version", 
 					new String[] {"THIS IS AN UNOFFICIAL TEST VERSION OF MARTUS",
-					"\nAs more time passes, it will take longer and longer to start up.\n" +
-					"Today it will take " + secondsToWait + " seconds.\n\n" +
+					"\nAs more time passes, it will take longer and longer to start up.\n\n" +
 					"Please contact info@martus.org with any questions"}, 
 					new String[] {"OK"});
 			
