@@ -28,10 +28,10 @@ package org.martus.client.swingui.actions;
 
 import javax.swing.AbstractAction;
 
+import org.martus.client.bulletinstore.ClientBulletinStore;
 import org.martus.client.core.MartusApp;
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.common.bulletinstore.BulletinStore;
 
 abstract public class UiMartusAction extends AbstractAction
 {
@@ -46,7 +46,7 @@ abstract public class UiMartusAction extends AbstractAction
 		return mainWindow.getApp();
 	}
 	
-	protected BulletinStore getStore()
+	protected ClientBulletinStore getStore()
 	{
 		return getApp().getStore();
 	}
