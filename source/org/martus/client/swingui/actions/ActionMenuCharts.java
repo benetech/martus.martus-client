@@ -84,7 +84,11 @@ public class ActionMenuCharts extends UiMenuAction
 			if(pressed == null || pressed.equals(cancelButtonLabel))
 				return;
 			
-			ChartAnswers answers = null;
+			ChartAnswers answers = new ChartAnswers();
+			FieldSpec selectedSpec = FieldSpec.createStandardField(BulletinConstants.TAGENTRYDATE, new FieldTypeDate());
+			MiniFieldSpec fieldToCount = new MiniFieldSpec(selectedSpec);
+			answers.setFieldToCount(fieldToCount);
+			
 //			if(pressed.equals(runButtonLabel))
 //			{
 //				answers = chooseAndLoad();
@@ -114,18 +118,17 @@ public class ActionMenuCharts extends UiMenuAction
 			if(searchTree == null)
 				return;
 			
-			FieldSpec selectedSpec = FieldSpec.createStandardField(BulletinConstants.TAGENTRYDATE, new FieldTypeDate());
-			MiniFieldSpec[] fieldToCount = {new MiniFieldSpec(selectedSpec)};
-
-			SortableBulletinList sortableList = getMainWindow().doSearch(searchTree, fieldToCount, new MiniFieldSpec[]{}, "ReportSearchProgress");
+			MiniFieldSpec fieldToCount = answers.getFieldToCount();
+			MiniFieldSpec[] extraSpecs = new MiniFieldSpec[] { fieldToCount };
+			SortableBulletinList sortableList = getMainWindow().doSearch(searchTree, extraSpecs, new MiniFieldSpec[]{}, "ReportSearchProgress");
 			if(sortableList == null)
 				return;
 
-			HashMap<String, Integer> counts = extractBulletinCounts(selectedSpec, sortableList);
+			HashMap<String, Integer> counts = extractBulletinCounts(fieldToCount, sortableList);
 
-			String selectedFieldLabel = selectedSpec.getLabel();
+			String selectedFieldLabel = fieldToCount.getLabel();
 			if(selectedFieldLabel.equals(""))
-				selectedFieldLabel = getLocalization().getFieldLabel(selectedSpec.getTag());
+				selectedFieldLabel = getLocalization().getFieldLabel(fieldToCount.getTag());
 
 			// TODO: Use or delete these
 //			ChartRenderingInfo info = new ChartRenderingInfo();
@@ -165,8 +168,7 @@ public class ActionMenuCharts extends UiMenuAction
 		}
 	}
 
-	private HashMap<String, Integer> extractBulletinCounts(
-			FieldSpec selectedSpec, SortableBulletinList sortableList)
+	private HashMap<String, Integer> extractBulletinCounts(MiniFieldSpec selectedSpec, SortableBulletinList sortableList)
 	{
 		HashMap<String, Integer> counts = new HashMap<String, Integer>();
 		

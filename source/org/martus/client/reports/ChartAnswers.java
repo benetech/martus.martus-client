@@ -25,7 +25,20 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.reports;
 
+import org.martus.common.fieldspec.MiniFieldSpec;
+
 public class ChartAnswers
 {
 
+	public MiniFieldSpec getFieldToCount()
+	{
+		return fieldToCount;
+	}
+
+	public void setFieldToCount(MiniFieldSpec miniSpec)
+	{
+		fieldToCount = miniSpec;
+	}
+
+	private MiniFieldSpec fieldToCount;
 }
