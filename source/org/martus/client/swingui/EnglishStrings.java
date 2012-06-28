@@ -611,6 +611,7 @@ public class EnglishStrings
 
 "wintitle:RunOrCreateChart=Charts",
 "button:RunChart=Display an existing chart",
+"button:CreateChart=Create a new chart template",
 "field:ChartTitle=Bulletin Counts by #SelectedField#",
 "field:ChartCreatedOn=Chart produced #Date#",
 "field:ChartSeriesTitle=Martus Bulletin Counts",

@@ -85,10 +85,10 @@ public class ActionMenuCharts extends UiMenuAction
 		{
 			MartusLocalization localization = mainWindow.getLocalization();
 			
-			String runButtonLabel = localization.getButtonLabel("RunChart");
-//			String createChartButtonLabel = localization.getButtonLabel("CreateChart");
+//			String runButtonLabel = localization.getButtonLabel("RunChart");
+			String createChartButtonLabel = localization.getButtonLabel("CreateChart");
 			String cancelButtonLabel = localization.getButtonLabel("cancel");
-			String[] buttonLabels = {runButtonLabel, /*createChartButtonLabel,*/ cancelButtonLabel, };
+			String[] buttonLabels = {/*runButtonLabel,*/ createChartButtonLabel, cancelButtonLabel, };
 			String title = mainWindow.getLocalization().getWindowTitle("RunOrCreateChart");
 			UiPushbuttonsDlg runOrCreate = new UiPushbuttonsDlg(mainWindow, title, buttonLabels);
 			runOrCreate.setVisible(true);
@@ -96,38 +96,18 @@ public class ActionMenuCharts extends UiMenuAction
 			if(pressed == null || pressed.equals(cancelButtonLabel))
 				return;
 			
-			FieldChooserSpecBuilder specBuilder = new FieldChooserSpecBuilder(getLocalization());
-			PopUpTreeFieldSpec treeSpec = specBuilder.createSpec(getStore());
-			removeGridFields(treeSpec);
-			FieldSpec dateEnteredSpec = StandardFieldSpecs.findStandardFieldSpec(BulletinConstants.TAGENTRYDATE);
-			SearchableFieldChoiceItem initialChoice = new SearchableFieldChoiceItem(dateEnteredSpec);
-			String initialCode = initialChoice.getCode();
-			
-			JDialog testDialog = new JDialog();
-			testDialog.setSize(200,200);
-			DefaultMutableTreeNode selectedNode = UiPopUpFieldChooserEditor.askUserForField(testDialog, new Point(0,0), treeSpec, initialCode, localization);
-			if(selectedNode == null)
-				return;
-			
-			SearchableFieldChoiceItem selectedItem = (SearchableFieldChoiceItem)selectedNode.getUserObject();
-//			String label = selectedNode.toString();
-
-			FieldSpec selectedSpec = selectedItem.getSpec();
-			MiniFieldSpec fieldToCount = new MiniFieldSpec(selectedSpec);
-			ChartAnswers answers = new ChartAnswers(fieldToCount, getLocalization());
-			answers.setSubtitle("User-entered subtitle here");
-			
+			ChartAnswers answers = null;
 //			if(pressed.equals(runButtonLabel))
 //			{
 //				answers = chooseAndLoad();
 //			}
 //			if(pressed.equals(createChartButtonLabel))
 //			{
-//				answers = createAndSave();
+				answers = createAndSave();
 //			}
-//
-//			if(answers == null)
-//				return;
+
+			if(answers == null)
+				return;
 			
 			runChart(answers);
 		}
@@ -136,6 +116,31 @@ public class ActionMenuCharts extends UiMenuAction
 			e.printStackTrace();
 			mainWindow.notifyDlgBeep("UnexpectedError");
 		}
+	}
+	
+	private ChartAnswers createAndSave()
+	{
+		FieldChooserSpecBuilder specBuilder = new FieldChooserSpecBuilder(getLocalization());
+		PopUpTreeFieldSpec treeSpec = specBuilder.createSpec(getStore());
+		removeGridFields(treeSpec);
+		FieldSpec dateEnteredSpec = StandardFieldSpecs.findStandardFieldSpec(BulletinConstants.TAGENTRYDATE);
+		SearchableFieldChoiceItem initialChoice = new SearchableFieldChoiceItem(dateEnteredSpec);
+		String initialCode = initialChoice.getCode();
+		
+		JDialog testDialog = new JDialog();
+		testDialog.setSize(200,200);
+		DefaultMutableTreeNode selectedNode = UiPopUpFieldChooserEditor.askUserForField(testDialog, new Point(0,0), treeSpec, initialCode, getLocalization());
+		if(selectedNode == null)
+			return null;
+		
+		SearchableFieldChoiceItem selectedItem = (SearchableFieldChoiceItem)selectedNode.getUserObject();
+
+		FieldSpec selectedSpec = selectedItem.getSpec();
+		MiniFieldSpec fieldToCount = new MiniFieldSpec(selectedSpec);
+		ChartAnswers answers = new ChartAnswers(fieldToCount, getLocalization());
+		answers.setSubtitle("User-entered subtitle here");
+		
+		return answers;
 	}
 
 	private void removeGridFields(PopUpTreeFieldSpec treeSpec)
