@@ -2236,6 +2236,8 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		getContentPane().removeAll();
 		getContentPane().setComponentOrientation(UiLanguageDirection.getComponentOrientation());
 		updateTitle();
+		
+		MartusLogger.logBeginProcess("Initializing views");
 
 		preview = new UiBulletinPreviewPane(this);
 		table = new UiBulletinTablePane(this);
@@ -2274,8 +2276,13 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 
 		getContentPane().add(folderSplitter);
 		statusBar = new UiStatusBar(getLocalization());		
-		checkServerStatus();	
 		getContentPane().add(statusBar, BorderLayout.SOUTH ); 
+		
+		MartusLogger.logEndProcess("Initializing views");
+
+		MartusLogger.logBeginProcess("Checking server status");
+		checkServerStatus();	
+		MartusLogger.logEndProcess("Checking server status");
 	}
 
 	private void updateTitle() {
