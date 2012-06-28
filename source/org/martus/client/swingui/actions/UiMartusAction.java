@@ -40,17 +40,26 @@ abstract public class UiMartusAction extends AbstractAction
 		super(label);
 		mainWindow = mainWindowToUse;
 	}
+	
 	protected MartusApp getApp()
 	{
 		return mainWindow.getApp();
 	}
+	
 	protected BulletinStore getStore()
 	{
 		return getApp().getStore();
 	}
+	
 	protected MartusLocalization getLocalization()
 	{
 		return mainWindow.getLocalization();
 	}
+	
+	protected UiMainWindow getMainWindow()
+	{
+		return mainWindow;
+	}
+	
 	UiMainWindow mainWindow;
 }
