@@ -121,18 +121,7 @@ public class ActionMenuCharts extends UiMenuAction
 			if(sortableList == null)
 				return;
 
-			HashMap<String, Integer> counts = new HashMap<String, Integer>();
-			
-			PartialBulletin[] partialBulletins = sortableList.getUnsortedPartialBulletins();
-			for (PartialBulletin partialBulletin : partialBulletins)
-			{
-				String data = partialBulletin.getData(selectedSpec.getTag());
-				Integer oldCount = counts.get(data);
-				if(oldCount == null)
-					oldCount = 0;
-				int newCount = oldCount + 1;
-				counts.put(data, newCount);
-			}
+			HashMap<String, Integer> counts = extractBulletinCounts(selectedSpec, sortableList);
 
 			String selectedFieldLabel = selectedSpec.getLabel();
 			if(selectedFieldLabel.equals(""))
@@ -174,6 +163,24 @@ public class ActionMenuCharts extends UiMenuAction
 		{
 			MartusLogger.logException(e);
 		}
+	}
+
+	private HashMap<String, Integer> extractBulletinCounts(
+			FieldSpec selectedSpec, SortableBulletinList sortableList)
+	{
+		HashMap<String, Integer> counts = new HashMap<String, Integer>();
+		
+		PartialBulletin[] partialBulletins = sortableList.getUnsortedPartialBulletins();
+		for (PartialBulletin partialBulletin : partialBulletins)
+		{
+			String data = partialBulletin.getData(selectedSpec.getTag());
+			Integer oldCount = counts.get(data);
+			if(oldCount == null)
+				oldCount = 0;
+			int newCount = oldCount + 1;
+			counts.put(data, newCount);
+		}
+		return counts;
 	}
 
 	// FIXME: Not implemented yet
@@ -240,7 +247,7 @@ public class ActionMenuCharts extends UiMenuAction
 		boolean showLegend = true;
 		boolean showTooltips = true;
 		boolean showUrls = false;
-		JFreeChart barChart = ChartFactory.createBarChart3D(
+		JFreeChart barChart = ChartFactory.createBarChart(
 			chartTitle, selectedFieldLabel, yAxisTitle, 
 			dataset, PlotOrientation.VERTICAL,
 			showLegend, showTooltips, showUrls);
