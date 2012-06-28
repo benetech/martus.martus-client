@@ -609,6 +609,15 @@ public class EnglishStrings
 "button:PrintToPrinter=Print To Printer",
 "button:PrintToFile=Print To File",
 
+"wintitle:RunOrCreateChart=Charts",
+"button:RunChart=Display an existing chart",
+"field:ChartTitle=Bulletin Counts by #SelectedField#",
+"field:ChartSeriesTitle=Martus Bulletin Counts",
+"field:ChartYAxisTitle=Count",
+"field:DefaultPrintChartToDiskFileName=chart.jpeg",
+"wintitle:notifyChartCompleted=Charts",
+"field:notifyChartCompletedcause=Printing complete",
+
 "wintitle:PreparingBulletins=Preparing Bulletins...",
 "field:PreparingBulletins=Preparing Bulletins...",
 

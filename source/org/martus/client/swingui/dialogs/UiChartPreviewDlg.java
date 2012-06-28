@@ -1,8 +1,8 @@
 /*
 
 The Martus(tm) free, social justice documentation and
-monitoring software. Copyright (C) 2006-2007, Beneficent
-Technology, Inc. (The Benetech Initiative).
+monitoring software. Copyright (C) 2012, Beneficent
+Technology, Inc. (Benetech).
 
 Martus is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
@@ -25,26 +25,31 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.dialogs;
 
+import java.awt.image.BufferedImage;
+
+import javax.swing.ImageIcon;
 import javax.swing.JComponent;
+import javax.swing.JLabel;
 import javax.swing.border.EmptyBorder;
 
-import org.martus.client.reports.ReportOutput;
+import org.jfree.chart.JFreeChart;
 import org.martus.client.swingui.UiMainWindow;
-import org.martus.client.swingui.actions.ActionPrint;
 import org.martus.swing.UiScrollPane;
 
-public class UiPrintPreviewDlg extends UiPreviewDlg
+public class UiChartPreviewDlg extends UiPreviewDlg
 {
-	public UiPrintPreviewDlg(UiMainWindow mainWindowToUse, ReportOutput output)
+	public UiChartPreviewDlg(UiMainWindow mainWindowToUse, JFreeChart chart)
 	{
 		super(mainWindowToUse);
-		initialize(createScrollablePreview(output));	
+		initialize(createScrollablePreview(chart));	
 	}
 	
-	private JComponent createScrollablePreview(ReportOutput output)
+	private JComponent createScrollablePreview(JFreeChart chart)
 	{
-		JComponent previewText = ActionPrint.getHtmlViewableComponent(output.getPrintableDocument());
-		JComponent scrollablePreview = new UiScrollPane(previewText);
+		BufferedImage image = chart.createBufferedImage(800, 600);
+		ImageIcon imageIcon = new ImageIcon(image);
+		JLabel label = new JLabel(imageIcon);
+		JComponent scrollablePreview = new UiScrollPane(label);
 		scrollablePreview.setBorder(new EmptyBorder(5,5,5,5));
 		return scrollablePreview;
 	}

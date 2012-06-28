@@ -57,7 +57,7 @@ import org.martus.client.swingui.dialogs.UiIncludePrivateDataDlg;
 import org.martus.client.swingui.dialogs.UiPrintPreviewDlg;
 import org.martus.client.swingui.dialogs.UiReportFieldChooserDlg;
 import org.martus.client.swingui.dialogs.UiReportFieldOrganizerDlg;
-import org.martus.client.swingui.dialogs.UiRunOrCreateReportDlg;
+import org.martus.client.swingui.dialogs.UiPushbuttonsDlg;
 import org.martus.client.swingui.dialogs.UiSortFieldsDlg;
 import org.martus.clientside.FileDialogHelpers;
 import org.martus.clientside.FormatFilter;
@@ -93,7 +93,8 @@ public class ActionMenuReports extends ActionPrint
 			String createPageReportButtonLabel = localization.getButtonLabel("CreatePageReport");
 			String cancelButtonLabel = localization.getButtonLabel("cancel");
 			String[] buttonLabels = {runButtonLabel, createTabularReportButtonLabel, createPageReportButtonLabel, cancelButtonLabel, };
-			UiRunOrCreateReportDlg runOrCreate = new UiRunOrCreateReportDlg(mainWindow, buttonLabels);
+			String title = mainWindow.getLocalization().getWindowTitle("RunOrCreateReport");
+			UiPushbuttonsDlg runOrCreate = new UiPushbuttonsDlg(mainWindow, title, buttonLabels);
 			runOrCreate.setVisible(true);
 			String pressed = runOrCreate.getPressedButtonLabel();
 			if(pressed == null || pressed.equals(cancelButtonLabel))

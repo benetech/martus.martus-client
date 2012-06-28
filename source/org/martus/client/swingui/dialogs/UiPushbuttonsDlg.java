@@ -34,13 +34,13 @@ import org.martus.swing.UiButton;
 import org.martus.swing.UiVBox;
 import org.martus.swing.Utilities;
 
-public class UiRunOrCreateReportDlg extends JDialog implements ActionListener
+public class UiPushbuttonsDlg extends JDialog implements ActionListener
 {
-	public UiRunOrCreateReportDlg(UiMainWindow mainWindow, String[] buttonLabels)
+	public UiPushbuttonsDlg(UiMainWindow mainWindow, String title, String[] buttonLabels)
 	{
 		super(mainWindow);
 		setModal(true);
-		setTitle(mainWindow.getLocalization().getWindowTitle("RunOrCreateReport"));
+		setTitle(title);
 		Container panel = getContentPane();
 		UiVBox buttonBox = new UiVBox();
 		for(int i = 0; i < buttonLabels.length; ++i)

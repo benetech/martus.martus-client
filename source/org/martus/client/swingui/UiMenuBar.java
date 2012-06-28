@@ -36,6 +36,7 @@ import org.martus.client.swingui.actions.ActionMenuAccountDetails;
 import org.martus.client.swingui.actions.ActionMenuAddPermissions;
 import org.martus.client.swingui.actions.ActionMenuBackupMyKeyPair;
 import org.martus.client.swingui.actions.ActionMenuChangeUserNamePassword;
+import org.martus.client.swingui.actions.ActionMenuCharts;
 import org.martus.client.swingui.actions.ActionMenuConfigureHQs;
 import org.martus.client.swingui.actions.ActionMenuContactInfo;
 import org.martus.client.swingui.actions.ActionMenuCopyBulletins;
@@ -94,6 +95,10 @@ public class UiMenuBar extends JMenuBar
 		file.add(new ActionMenuCreateNewBulletin(mainWindow));
 		file.add(actionMenuPrint);
 		file.add(new ActionMenuReports(mainWindow));
+		if(UiMainWindow.isAlphaTester)
+		{
+			file.add(new ActionMenuCharts(mainWindow));
+		}
 		file.addSeparator();
 		file.add(new ActionMenuExportFolder(mainWindow));
 		file.add(new ActionMenuExportBulletins(mainWindow));
