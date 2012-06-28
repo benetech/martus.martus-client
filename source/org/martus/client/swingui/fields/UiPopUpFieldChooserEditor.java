@@ -29,6 +29,7 @@ import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Container;
 import java.awt.Graphics;
+import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Vector;
@@ -43,6 +44,7 @@ import javax.swing.tree.DefaultTreeCellRenderer;
 import javax.swing.tree.TreeModel;
 import javax.swing.tree.TreePath;
 
+import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.common.fieldspec.MiniFieldSpec;
 import org.martus.common.fieldspec.PopUpTreeFieldSpec;
@@ -137,10 +139,9 @@ public class UiPopUpFieldChooserEditor extends UiField implements ActionListener
 	private void doPopUp()
 	{
 		Container topLevel = panel.getTopLevelAncestor();
-		FieldTreeDialog dlg = createFieldChooserDialog(topLevel);
-		dlg.selectCode(getText());
-		dlg.setVisible(true);
-		DefaultMutableTreeNode selectedNode = dlg.getSelectedNode();
+		Point locationOnScreen = panel.getLocationOnScreen();
+		String initialCode = getText();
+		DefaultMutableTreeNode selectedNode = askUserForField(topLevel, locationOnScreen, spec, initialCode, mainWindow.getLocalization());
 		if(selectedNode == null)
 			return;
 		
@@ -149,9 +150,18 @@ public class UiPopUpFieldChooserEditor extends UiField implements ActionListener
 		notifyListeners();
 	}
 
-	protected FieldTreeDialog createFieldChooserDialog(Container topLevel)
+	public static DefaultMutableTreeNode askUserForField(Container topLevel, Point location, PopUpTreeFieldSpec treeSpec, String initialCode, MartusLocalization localization)
 	{
-		return new FieldTreeDialog((JDialog)topLevel, panel.getLocationOnScreen(), spec, mainWindow.getLocalization());
+		FieldTreeDialog dlg = createFieldChooserDialog(topLevel, location, treeSpec, localization);
+		dlg.selectCode(initialCode);
+		dlg.setVisible(true);
+		DefaultMutableTreeNode selectedNode = dlg.getSelectedNode();
+		return selectedNode;
+	}
+
+	private static FieldTreeDialog createFieldChooserDialog(Container topLevel, Point locationOnScreen, PopUpTreeFieldSpec treeSpec, MartusLocalization localization)
+	{
+		return new FieldTreeDialog((JDialog)topLevel, locationOnScreen, treeSpec, localization);
 	}
 	
 	void notifyListeners()
