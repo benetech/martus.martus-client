@@ -29,8 +29,10 @@ import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.io.File;
 import java.io.IOException;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Vector;
 
 import javax.swing.JDialog;
 import javax.swing.tree.DefaultMutableTreeNode;
@@ -47,6 +49,7 @@ import org.martus.client.core.PartialBulletin;
 import org.martus.client.core.SortableBulletinList;
 import org.martus.client.reports.ChartAnswers;
 import org.martus.client.search.FieldChooserSpecBuilder;
+import org.martus.client.search.SaneCollator;
 import org.martus.client.search.SearchFieldTreeNode;
 import org.martus.client.search.SearchTreeNode;
 import org.martus.client.swingui.MartusLocalization;
@@ -277,7 +280,9 @@ public class ActionMenuCharts extends UiMenuAction
 		String yAxisTitle = getLocalization().getFieldLabel("ChartYAxisTitle");
 
 		DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-		for (String value : counts.keySet())
+		Vector<String> keys = new Vector<String>(counts.keySet());
+		Collections.sort(keys, new SaneCollator(getLocalization().getCurrentLanguageCode()));
+		for (String value : keys)
 		{
 			dataset.addValue(counts.get(value), seriesTitle, value);
 		}
