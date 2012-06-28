@@ -84,10 +84,9 @@ public class ActionMenuCharts extends UiMenuAction
 			if(pressed == null || pressed.equals(cancelButtonLabel))
 				return;
 			
-			ChartAnswers answers = new ChartAnswers();
 			FieldSpec selectedSpec = FieldSpec.createStandardField(BulletinConstants.TAGENTRYDATE, new FieldTypeDate());
 			MiniFieldSpec fieldToCount = new MiniFieldSpec(selectedSpec);
-			answers.setFieldToCount(fieldToCount);
+			ChartAnswers answers = new ChartAnswers(fieldToCount, getLocalization());
 			
 //			if(pressed.equals(runButtonLabel))
 //			{
