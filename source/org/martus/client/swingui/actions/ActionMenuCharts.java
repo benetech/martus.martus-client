@@ -25,7 +25,6 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.actions;
 
-import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.io.File;
 import java.io.IOException;
@@ -33,9 +32,6 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Vector;
-
-import javax.swing.JDialog;
-import javax.swing.tree.DefaultMutableTreeNode;
 
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartUtilities;
@@ -51,24 +47,16 @@ import org.jfree.data.category.DefaultCategoryDataset;
 import org.martus.client.core.PartialBulletin;
 import org.martus.client.core.SortableBulletinList;
 import org.martus.client.reports.ChartAnswers;
-import org.martus.client.search.FieldChooserSpecBuilder;
 import org.martus.client.search.SaneCollator;
-import org.martus.client.search.SearchFieldTreeNode;
 import org.martus.client.search.SearchTreeNode;
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.dialogs.UiChartPreviewDlg;
 import org.martus.client.swingui.dialogs.UiPushbuttonsDlg;
-import org.martus.client.swingui.fields.UiPopUpFieldChooserEditor;
 import org.martus.common.MartusLogger;
-import org.martus.common.bulletin.BulletinConstants;
-import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.fieldspec.MiniFieldSpec;
-import org.martus.common.fieldspec.PopUpTreeFieldSpec;
-import org.martus.common.fieldspec.SearchFieldTreeModel;
-import org.martus.common.fieldspec.SearchableFieldChoiceItem;
-import org.martus.common.fieldspec.StandardFieldSpecs;
 import org.martus.swing.UiFileChooser;
+import org.martus.swing.Utilities;
 import org.martus.util.TokenReplacement;
 
 public class ActionMenuCharts extends UiMenuAction
@@ -120,41 +108,13 @@ public class ActionMenuCharts extends UiMenuAction
 	
 	private ChartAnswers createAndSave()
 	{
-		FieldChooserSpecBuilder specBuilder = new FieldChooserSpecBuilder(getLocalization());
-		PopUpTreeFieldSpec treeSpec = specBuilder.createSpec(getStore());
-		removeGridFields(treeSpec);
-		FieldSpec dateEnteredSpec = StandardFieldSpecs.findStandardFieldSpec(BulletinConstants.TAGENTRYDATE);
-		SearchableFieldChoiceItem initialChoice = new SearchableFieldChoiceItem(dateEnteredSpec);
-		String initialCode = initialChoice.getCode();
-		
-		JDialog testDialog = new JDialog();
-		testDialog.setSize(200,200);
-		DefaultMutableTreeNode selectedNode = UiPopUpFieldChooserEditor.askUserForField(testDialog, new Point(0,0), treeSpec, initialCode, getLocalization());
-		if(selectedNode == null)
+		CreateChartDialog dialog = new CreateChartDialog(getMainWindow());
+		Utilities.centerDlg(dialog);
+		dialog.setVisible(true);
+		if(!dialog.getResult())
 			return null;
 		
-		SearchableFieldChoiceItem selectedItem = (SearchableFieldChoiceItem)selectedNode.getUserObject();
-
-		FieldSpec selectedSpec = selectedItem.getSpec();
-		MiniFieldSpec fieldToCount = new MiniFieldSpec(selectedSpec);
-		ChartAnswers answers = new ChartAnswers(fieldToCount, getLocalization());
-		answers.setSubtitle("User-entered subtitle here");
-		
-		return answers;
-	}
-
-	private void removeGridFields(PopUpTreeFieldSpec treeSpec)
-	{
-		SearchFieldTreeModel model = treeSpec.getTreeModel();
-		SearchFieldTreeNode rootNode = (SearchFieldTreeNode) model.getRoot();
-		for(int i = rootNode.getChildCount() - 1; i >= 0; --i)
-		{
-			SearchFieldTreeNode fieldNode = (SearchFieldTreeNode) rootNode.getChildAt(i);
-			SearchableFieldChoiceItem fieldChoiceItem = fieldNode.getChoiceItem();
-			FieldSpec spec = fieldChoiceItem.getSpec();
-			if(spec.getParent() != null)
-				rootNode.remove(i);
-		}
+		return dialog.getAnswers();
 	}
 
 	private void runChart(ChartAnswers answers)
