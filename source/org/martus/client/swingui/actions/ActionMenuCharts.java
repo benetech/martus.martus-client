@@ -47,6 +47,7 @@ import org.martus.client.core.PartialBulletin;
 import org.martus.client.core.SortableBulletinList;
 import org.martus.client.reports.ChartAnswers;
 import org.martus.client.search.FieldChooserSpecBuilder;
+import org.martus.client.search.SearchFieldTreeNode;
 import org.martus.client.search.SearchTreeNode;
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
@@ -58,6 +59,7 @@ import org.martus.common.bulletin.BulletinConstants;
 import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.fieldspec.MiniFieldSpec;
 import org.martus.common.fieldspec.PopUpTreeFieldSpec;
+import org.martus.common.fieldspec.SearchFieldTreeModel;
 import org.martus.common.fieldspec.SearchableFieldChoiceItem;
 import org.martus.common.fieldspec.StandardFieldSpecs;
 import org.martus.swing.UiFileChooser;
@@ -90,6 +92,7 @@ public class ActionMenuCharts extends UiMenuAction
 			
 			FieldChooserSpecBuilder specBuilder = new FieldChooserSpecBuilder(getLocalization());
 			PopUpTreeFieldSpec treeSpec = specBuilder.createSpec(getStore());
+			removeGridFields(treeSpec);
 			FieldSpec dateEnteredSpec = StandardFieldSpecs.findStandardFieldSpec(BulletinConstants.TAGENTRYDATE);
 			SearchableFieldChoiceItem initialChoice = new SearchableFieldChoiceItem(dateEnteredSpec);
 			String initialCode = initialChoice.getCode();
@@ -126,6 +129,20 @@ public class ActionMenuCharts extends UiMenuAction
 		{
 			e.printStackTrace();
 			mainWindow.notifyDlgBeep("UnexpectedError");
+		}
+	}
+
+	private void removeGridFields(PopUpTreeFieldSpec treeSpec)
+	{
+		SearchFieldTreeModel model = treeSpec.getTreeModel();
+		SearchFieldTreeNode rootNode = (SearchFieldTreeNode) model.getRoot();
+		for(int i = rootNode.getChildCount() - 1; i >= 0; --i)
+		{
+			SearchFieldTreeNode fieldNode = (SearchFieldTreeNode) rootNode.getChildAt(i);
+			SearchableFieldChoiceItem fieldChoiceItem = fieldNode.getChoiceItem();
+			FieldSpec spec = fieldChoiceItem.getSpec();
+			if(spec.getParent() != null)
+				rootNode.remove(i);
 		}
 	}
 
