@@ -40,6 +40,10 @@ import javax.swing.tree.DefaultMutableTreeNode;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartUtilities;
 import org.jfree.chart.JFreeChart;
+import org.jfree.chart.axis.CategoryAxis;
+import org.jfree.chart.axis.NumberAxis;
+import org.jfree.chart.axis.TickUnitSource;
+import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.title.DateTitle;
 import org.jfree.chart.title.ShortTextTitle;
@@ -185,7 +189,7 @@ public class ActionMenuCharts extends UiMenuAction
 			chart.addSubtitle(new ShortTextTitle(chartCreatedOnLabel));
 			
 			chart.removeSubtitle(new DateTitle());
-
+			
 			UiChartPreviewDlg preview = new UiChartPreviewDlg(getMainWindow(), chart);
 			preview.setVisible(true);		
 			if(preview.wasCancelButtonPressed())
@@ -294,6 +298,12 @@ public class ActionMenuCharts extends UiMenuAction
 			chartTitle, selectedFieldLabel, yAxisTitle, 
 			dataset, PlotOrientation.VERTICAL,
 			showLegend, showTooltips, showUrls);
+		
+		CategoryPlot plot = (CategoryPlot) barChart.getPlot();
+		NumberAxis rangeAxis = (NumberAxis) plot.getRangeAxis();
+		TickUnitSource units = NumberAxis.createIntegerTickUnits();
+		rangeAxis.setStandardTickUnits(units);
+		
 		return barChart;
 	}
 
