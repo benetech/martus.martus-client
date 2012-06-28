@@ -28,20 +28,16 @@ package org.martus.client.swingui.actions;
 import java.awt.event.ActionEvent;
 import java.io.File;
 import java.io.IOException;
-import java.text.DateFormat;
+import java.util.Date;
 import java.util.HashMap;
 
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartUtilities;
 import org.jfree.chart.JFreeChart;
-import org.jfree.chart.block.Arrangement;
-import org.jfree.chart.block.Block;
-import org.jfree.chart.block.BlockContainer;
-import org.jfree.chart.block.FlowArrangement;
 import org.jfree.chart.plot.PlotOrientation;
-import org.jfree.chart.title.CompositeTitle;
 import org.jfree.chart.title.DateTitle;
 import org.jfree.chart.title.ShortTextTitle;
+import org.jfree.chart.title.TextTitle;
 import org.jfree.data.category.DefaultCategoryDataset;
 import org.martus.client.core.PartialBulletin;
 import org.martus.client.core.SortableBulletinList;
@@ -87,6 +83,7 @@ public class ActionMenuCharts extends UiMenuAction
 			FieldSpec selectedSpec = FieldSpec.createStandardField(BulletinConstants.TAGENTRYDATE, new FieldTypeDate());
 			MiniFieldSpec fieldToCount = new MiniFieldSpec(selectedSpec);
 			ChartAnswers answers = new ChartAnswers(fieldToCount, getLocalization());
+			answers.setSubtitle("User-entered subtitle here");
 			
 //			if(pressed.equals(runButtonLabel))
 //			{
@@ -137,14 +134,14 @@ public class ActionMenuCharts extends UiMenuAction
 			
 			JFreeChart chart = createBarChart(counts, selectedFieldLabel);
 
-			Arrangement arrangement = new FlowArrangement(); 
-			BlockContainer container = new BlockContainer(arrangement);
-			Block labelBlock = new ShortTextTitle("Chart created on");
-			container.add(labelBlock);
-			Block dateBlock = new DateTitle(DateFormat.LONG);
-			container.add(dateBlock);
-			CompositeTitle labeledDate = new CompositeTitle(container);
-			chart.addSubtitle(labeledDate);
+			chart.addSubtitle(new TextTitle(answers.getSubtitle()));
+			
+			String today = getLocalization().formatDateTime(new Date().getTime());
+			String chartCreatedOnLabel = getLocalization().getFieldLabel("ChartCreatedOn");
+			chartCreatedOnLabel = TokenReplacement.replaceToken(chartCreatedOnLabel, "#Date#", today);
+			chart.addSubtitle(new ShortTextTitle(chartCreatedOnLabel));
+			
+			chart.removeSubtitle(new DateTitle());
 
 			UiChartPreviewDlg preview = new UiChartPreviewDlg(getMainWindow(), chart);
 			preview.setVisible(true);		

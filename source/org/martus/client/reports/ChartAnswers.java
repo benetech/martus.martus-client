@@ -35,6 +35,7 @@ public class ChartAnswers
 	{
 		version = EXPECTED_VERSION;
 		fieldToCount = miniSpecOfFieldToCount;
+		subtitle = "";
 		languageCode = localizationToUse.getCurrentLanguageCode();
 	}
 	
@@ -47,6 +48,7 @@ public class ChartAnswers
 //		specs = new MiniFieldSpec[jsonSpecs.length()];
 //		for(int i = 0; i < specs.length; ++i)
 //			specs[i] = new MiniFieldSpec(jsonSpecs.getJSONObject(i));
+		subtitle = json.getString(TAG_SUBTITLE);
 		fieldToCount = new MiniFieldSpec(json.getJSONObject(TAG_SPEC_OF_FIELD_TO_COUNT));
 	}
 	
@@ -58,6 +60,16 @@ public class ChartAnswers
 	private Object getLanguageCode()
 	{
 		return languageCode;
+	}
+	
+	public String getSubtitle()
+	{
+		return subtitle;
+	}
+	
+	public void setSubtitle(String newSubtitle)
+	{
+		subtitle = newSubtitle;
 	}
 
 	public MiniFieldSpec getFieldToCount()
@@ -76,14 +88,16 @@ public class ChartAnswers
 //		for(int i = 0; i < specs.length; ++i)
 //			jsonSpecs.put(specs[i].toJson());
 //		json.put(TAG_SPECS, jsonSpecs);
+		json.put(TAG_SUBTITLE, getSubtitle());
 		json.put(TAG_SPEC_OF_FIELD_TO_COUNT, fieldToCount.toJson());
 		return json;
 	}
 	
 	public final static String TAG_JSON_TYPE = "JsonType";
+	public final static String TAG_VERSION = "Version";
 	public final static String TAG_LANGUAGE = "Language";
 	public final static String TAG_CHART_TYPE = "ChartType";
-	public final static String TAG_VERSION = "Version";
+	public final static String TAG_SUBTITLE = "Subtitle";
 	public final static String TAG_SPEC_OF_FIELD_TO_COUNT = "SpecOfFieldToCount";
 	
 	public final static String JSON_TYPE_CHART_ANSWERS = "ChartAnswers";
@@ -93,4 +107,5 @@ public class ChartAnswers
 	private int version;
 	private String languageCode;
 	private MiniFieldSpec fieldToCount;
+	private String subtitle;
 }
