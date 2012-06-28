@@ -218,11 +218,12 @@ public class ActionMenuCharts extends UiMenuAction
 		for (PartialBulletin partialBulletin : partialBulletins)
 		{
 			String data = partialBulletin.getData(selectedSpec.getTag());
-			Integer oldCount = counts.get(data);
+			String value = selectedSpec.getType().convertStoredToSearchable(data, getLocalization());
+			Integer oldCount = counts.get(value);
 			if(oldCount == null)
 				oldCount = 0;
 			int newCount = oldCount + 1;
-			counts.put(data, newCount);
+			counts.put(value, newCount);
 		}
 		return counts;
 	}
