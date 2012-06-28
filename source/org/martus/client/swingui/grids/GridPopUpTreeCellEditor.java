@@ -67,8 +67,4 @@ public class GridPopUpTreeCellEditor extends GridCellEditorAndRenderer
 	{
 		((UiPopUpFieldChooserEditor)getUiField()).simulateButtonPress();
 	}
-	
-
-	PopUpTreeFieldSpec spec;
-
 }
