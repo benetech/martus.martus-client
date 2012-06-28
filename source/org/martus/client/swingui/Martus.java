@@ -209,6 +209,8 @@ public class Martus
 		return new String[] {
 			"bcprov-jdk14-135.jar",
 			"icu4j-3.4.4.jar",
+			"jcommon-1.0.17.jar",
+			"jfreechart-1.0.14.jar",
 			"js-2006-03-08.jar",
 			"jortho-0.5.jar",
 			"junit-3.8.2.jar",
