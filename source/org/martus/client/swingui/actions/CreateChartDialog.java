@@ -31,6 +31,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.Box;
 import javax.swing.JDialog;
+import javax.swing.JPanel;
 import javax.swing.text.JTextComponent;
 
 import org.martus.client.bulletinstore.ClientBulletinStore;
@@ -49,9 +50,10 @@ import org.martus.common.fieldspec.SearchableFieldChoiceItem;
 import org.martus.common.fieldspec.StandardFieldSpecs;
 import org.martus.swing.UiButton;
 import org.martus.swing.UiLabel;
-import org.martus.swing.UiParagraphPanel;
 import org.martus.swing.UiTextField;
 import org.martus.swing.Utilities;
+
+import com.jhlabs.awt.GridLayoutPlus;
 
 public class CreateChartDialog extends JDialog
 {
@@ -62,13 +64,15 @@ public class CreateChartDialog extends JDialog
 		setTitle(getLocalization().getWindowTitle("CreateChart"));
 		setModal(true);
 		
-		UiParagraphPanel panel = new UiParagraphPanel();
+		JPanel panel = new JPanel(new GridLayoutPlus(0, 2));
 		getContentPane().add(panel);
 		
-		panel.addComponents(createLabel("ChartFieldToCount"), createFieldChooserButton());
+		Component[] fieldRow = new Component[] {createLabel("ChartFieldToCount"), createFieldChooserButton()};
+		Utilities.addComponentsRespectingOrientation(panel, fieldRow);
 		
 		subtitleComponent = new UiTextField(40);
-		panel.addComponents(createLabel("ChartSubtitle"), subtitleComponent);
+		Component[] subtitleRow = new Component[] {createLabel("ChartSubtitle"), subtitleComponent};
+		Utilities.addComponentsRespectingOrientation(panel, subtitleRow);
 		
 		ok = new UiButton(getLocalization().getButtonLabel("ok"));
 		ok.addActionListener(new OkHandler());
@@ -78,7 +82,7 @@ public class CreateChartDialog extends JDialog
 		Box buttonBox = Box.createHorizontalBox();
 		Utilities.addComponentsRespectingOrientation(buttonBox, new Component[] {ok, cancel});
 		
-		panel.addComponents(new UiLabel(" "), buttonBox);
+		Utilities.addComponentsRespectingOrientation(panel, new Component[] {new UiLabel(" "), buttonBox});
 		
 		pack();
 	}
