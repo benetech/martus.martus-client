@@ -86,7 +86,7 @@ public class CreateChartDialog extends JDialog
 		UiButton cancel = new UiButton(getLocalization().getButtonLabel("cancel"));
 		cancel.addActionListener(new CancelHandler());
 		Box buttonBox = Box.createHorizontalBox();
-		Utilities.addComponentsRespectingOrientation(buttonBox, new Component[] {ok, cancel});
+		Utilities.addComponentsRespectingOrientation(buttonBox, new Component[] {Box.createHorizontalGlue(), ok, cancel});
 		
 		Utilities.addComponentsRespectingOrientation(panel, new Component[] {new UiLabel(" "), buttonBox});
 		
@@ -181,7 +181,8 @@ public class CreateChartDialog extends JDialog
 			SearchFieldTreeNode fieldNode = (SearchFieldTreeNode) rootNode.getChildAt(i);
 			SearchableFieldChoiceItem fieldChoiceItem = fieldNode.getChoiceItem();
 			FieldSpec spec = fieldChoiceItem.getSpec();
-			if(spec.getParent() != null)
+			FieldSpec parentSpec = spec.getParent();
+			if(parentSpec != null && parentSpec.getType().isGrid())
 				rootNode.remove(i);
 		}
 	}
