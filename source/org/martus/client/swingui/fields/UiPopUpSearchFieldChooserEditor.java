@@ -49,6 +49,9 @@ public class UiPopUpSearchFieldChooserEditor extends UiPopUpFieldChooserEditor
 	
 	void notifyListeners()
 	{
+		if(dialog == null)
+			return;
+		
 		Vector foundValues = dialog.getFoundValues();
 		model.setAvailableFieldValues(dialog.getSelectedSpec(), foundValues);
 		super.notifyListeners();
