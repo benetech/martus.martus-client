@@ -34,6 +34,7 @@ public class ChartAnswers
 	public ChartAnswers(MiniFieldSpec miniSpecOfFieldToCount, MiniLocalization localizationToUse)
 	{
 		version = EXPECTED_VERSION;
+		chartType = CHART_TYPE_BAR;
 		fieldToCount = miniSpecOfFieldToCount;
 		subtitle = "";
 		languageCode = localizationToUse.getCurrentLanguageCode();
@@ -43,6 +44,7 @@ public class ChartAnswers
 	{
 		version = json.getInt(TAG_VERSION);
 		languageCode = json.optString(TAG_LANGUAGE, MiniLocalization.LANGUAGE_OTHER);
+		chartType = json.optString(TAG_CHART_TYPE);
 //		type = ReportType.createFromString(json.getString(TAG_TYPE));
 //		JSONArray jsonSpecs = json.getJSONArray(TAG_SPECS);
 //		specs = new MiniFieldSpec[jsonSpecs.length()];
@@ -60,6 +62,49 @@ public class ChartAnswers
 	private Object getLanguageCode()
 	{
 		return languageCode;
+	}
+	
+	public void setChartType(String chartTypeCode)
+	{
+		if(isBarChart(chartTypeCode) || is3DBarChart(chartTypeCode) || isPieChart(chartTypeCode))
+			chartType = chartTypeCode;
+		else
+			throw new RuntimeException("Unknown chart type: " + chartTypeCode);
+	}
+
+	public String getChartType()
+	{
+		return chartType;
+	}
+	
+	public boolean isBarChart()
+	{
+		return isBarChart(getChartType());
+	}
+
+	private boolean isBarChart(String thisChartType)
+	{
+		return CHART_TYPE_BAR.equals(thisChartType);
+	}
+	
+	public boolean is3DBarChart()
+	{
+		return is3DBarChart(getChartType());
+	}
+
+	private boolean is3DBarChart(String thisChartType)
+	{
+		return CHART_TYPE_3DBAR.equals(thisChartType);
+	}
+	
+	public boolean isPieChart()
+	{
+		return isPieChart(getChartType());
+	}
+
+	private boolean isPieChart(String thisChartType)
+	{
+		return CHART_TYPE_PIE.equals(thisChartType);
 	}
 	
 	public String getSubtitle()
@@ -83,6 +128,7 @@ public class ChartAnswers
 		json.put(TAG_JSON_TYPE, JSON_TYPE_CHART_ANSWERS);
 		json.put(TAG_VERSION, EXPECTED_VERSION);
 		json.put(TAG_LANGUAGE, getLanguageCode());
+		json.put(TAG_CHART_TYPE, chartType);
 //		json.put(TAG_TYPE, type.toString());
 //		JSONArray jsonSpecs = new JSONArray();
 //		for(int i = 0; i < specs.length; ++i)
@@ -102,10 +148,14 @@ public class ChartAnswers
 	
 	public final static String JSON_TYPE_CHART_ANSWERS = "ChartAnswers";
 	private final static int EXPECTED_VERSION = 1;
+	public final static String CHART_TYPE_BAR = "Bar";
+	public final static String CHART_TYPE_3DBAR = "3DBar";
+	public final static String CHART_TYPE_PIE = "Pie";
 
 
 	private int version;
 	private String languageCode;
+	private String chartType;
 	private MiniFieldSpec fieldToCount;
 	private String subtitle;
 }

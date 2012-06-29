@@ -37,6 +37,7 @@ import java.io.IOException;
 import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Vector;
 
 import javax.print.attribute.HashPrintRequestAttributeSet;
@@ -54,6 +55,7 @@ import org.jfree.chart.title.DateTitle;
 import org.jfree.chart.title.ShortTextTitle;
 import org.jfree.chart.title.TextTitle;
 import org.jfree.data.category.DefaultCategoryDataset;
+import org.jfree.data.general.DefaultPieDataset;
 import org.martus.client.core.PartialBulletin;
 import org.martus.client.core.SortableBulletinList;
 import org.martus.client.reports.ChartAnswers;
@@ -67,6 +69,7 @@ import org.martus.swing.PrintUtilities;
 import org.martus.swing.UiFileChooser;
 import org.martus.swing.Utilities;
 import org.martus.util.TokenReplacement;
+import org.martus.util.TokenReplacement.TokenInvalidException;
 
 public class ActionMenuCharts extends UiMenuAction
 {
@@ -143,9 +146,6 @@ public class ActionMenuCharts extends UiMenuAction
 
 			HashMap<String, Integer> counts = extractBulletinCounts(fieldToCount, sortableList);
 
-			String selectedFieldLabel = fieldToCount.getLabel();
-			if(selectedFieldLabel.equals(""))
-				selectedFieldLabel = getLocalization().getFieldLabel(fieldToCount.getTag());
 
 			// TODO: Use or delete these
 //			ChartRenderingInfo info = new ChartRenderingInfo();
@@ -153,14 +153,7 @@ public class ActionMenuCharts extends UiMenuAction
 			
 //			JFreeChart bar3dChart = create3DBarChart(counts, labelText);
 			
-			JFreeChart chart = createBarChart(counts, selectedFieldLabel);
-
-			chart.addSubtitle(new TextTitle(answers.getSubtitle()));
-			
-			String today = getLocalization().formatDateTime(new Date().getTime());
-			String chartCreatedOnLabel = getLocalization().getFieldLabel("ChartCreatedOn");
-			chartCreatedOnLabel = TokenReplacement.replaceToken(chartCreatedOnLabel, "#Date#", today);
-			chart.addSubtitle(new ShortTextTitle(chartCreatedOnLabel));
+			JFreeChart chart = createChart(answers, fieldToCount, counts);
 			
 			chart.removeSubtitle(new DateTitle());
 			
@@ -185,6 +178,37 @@ public class ActionMenuCharts extends UiMenuAction
 		}
 	}
 
+	private JFreeChart createChart(ChartAnswers answers,
+			MiniFieldSpec fieldToCount, HashMap<String, Integer> counts)
+			throws Exception, TokenInvalidException
+	{
+		String selectedFieldLabel = fieldToCount.getLabel();
+		if(selectedFieldLabel.equals(""))
+			selectedFieldLabel = getLocalization().getFieldLabel(fieldToCount.getTag());
+		
+		JFreeChart chart = createRawChart(answers, counts, selectedFieldLabel);
+		chart.addSubtitle(new TextTitle(answers.getSubtitle()));
+		
+		String today = getLocalization().formatDateTime(new Date().getTime());
+		String chartCreatedOnLabel = getLocalization().getFieldLabel("ChartCreatedOn");
+		chartCreatedOnLabel = TokenReplacement.replaceToken(chartCreatedOnLabel, "#Date#", today);
+		chart.addSubtitle(new ShortTextTitle(chartCreatedOnLabel));
+		return chart;
+	}
+
+	private JFreeChart createRawChart(ChartAnswers answers,
+			HashMap<String, Integer> counts, String selectedFieldLabel) throws Exception
+	{
+		if(answers.isBarChart())
+			return createBarChart(counts, selectedFieldLabel);
+		if(answers.is3DBarChart())
+			return create3DBarChart(counts, selectedFieldLabel);
+		if(answers.isPieChart())
+			return createPieChart(counts, selectedFieldLabel);
+		
+		throw new RuntimeException("Unsupported chart type: " + answers.getChartType());
+	}
+
 	private HashMap<String, Integer> extractBulletinCounts(MiniFieldSpec selectedSpec, SortableBulletinList sortableList)
 	{
 		HashMap<String, Integer> counts = new HashMap<String, Integer>();
@@ -202,19 +226,6 @@ public class ActionMenuCharts extends UiMenuAction
 		}
 		return counts;
 	}
-
-	// FIXME: Not implemented yet
-//	private boolean printToPrinter(JFreeChart chart)
-//	{
-//		PrinterJob printJob = PrinterJob.getPrinterJob();
-//		printJob.setPrintable(chart);
-//		HashPrintRequestAttributeSet attributes = new HashPrintRequestAttributeSet();
-//		if(!printJob.printDialog(attributes))
-//			return false;
-//		
-//		printJob.print(attributes);
-//		return true;
-//	}
 
 	private boolean printToDisk(JFreeChart chart) throws IOException
 	{
@@ -301,11 +312,54 @@ public class ActionMenuCharts extends UiMenuAction
 
 	private JFreeChart createBarChart(HashMap<String, Integer> counts, String selectedFieldLabel) throws Exception
 	{
+		DefaultCategoryDataset dataset = createBarChartDataset(counts);
+
+		boolean showLegend = true;
+		boolean showTooltips = true;
+		boolean showUrls = false;
+		JFreeChart barChart = ChartFactory.createBarChart(
+			getXAxisTitle(selectedFieldLabel), selectedFieldLabel, getYAxisTitle(), 
+			dataset, PlotOrientation.VERTICAL,
+			showLegend, showTooltips, showUrls);
+		
+		configureBarChartPlot(barChart);
+		
+		return barChart;
+	}
+
+	private JFreeChart create3DBarChart(HashMap<String, Integer> counts, String selectedFieldLabel) throws Exception
+	{
+		DefaultCategoryDataset dataset = createBarChartDataset(counts);
+
+		boolean showLegend = true;
+		boolean showTooltips = true;
+		boolean showUrls = false;
+		JFreeChart barChart = ChartFactory.createBarChart3D(
+			getXAxisTitle(selectedFieldLabel), selectedFieldLabel, getYAxisTitle(), 
+			dataset, PlotOrientation.VERTICAL,
+			showLegend, showTooltips, showUrls);
+		
+		configureBarChartPlot(barChart);
+		
+		return barChart;
+	}
+
+	private String getXAxisTitle(String selectedFieldLabel)	throws TokenInvalidException
+	{
 		String chartTitle = getLocalization().getFieldLabel("ChartTitle");
 		chartTitle = TokenReplacement.replaceToken(chartTitle, "#SelectedField#", selectedFieldLabel);
-		String seriesTitle = getLocalization().getFieldLabel("ChartSeriesTitle");
-		String yAxisTitle = getLocalization().getFieldLabel("ChartYAxisTitle");
+		return chartTitle;
+	}
 
+	private String getYAxisTitle()
+	{
+		return getLocalization().getFieldLabel("ChartYAxisTitle");
+	}
+
+	private DefaultCategoryDataset createBarChartDataset(
+			HashMap<String, Integer> counts)
+	{
+		String seriesTitle = getLocalization().getFieldLabel("ChartSeriesTitle");
 		DefaultCategoryDataset dataset = new DefaultCategoryDataset();
 		Vector<String> keys = new Vector<String>(counts.keySet());
 		Collections.sort(keys, new SaneCollator(getLocalization().getCurrentLanguageCode()));
@@ -313,21 +367,41 @@ public class ActionMenuCharts extends UiMenuAction
 		{
 			dataset.addValue(counts.get(value), seriesTitle, value);
 		}
+		return dataset;
+	}
 
-		boolean showLegend = true;
-		boolean showTooltips = true;
-		boolean showUrls = false;
-		JFreeChart barChart = ChartFactory.createBarChart(
-			chartTitle, selectedFieldLabel, yAxisTitle, 
-			dataset, PlotOrientation.VERTICAL,
-			showLegend, showTooltips, showUrls);
-		
+	private void configureBarChartPlot(JFreeChart barChart)
+	{
 		CategoryPlot plot = (CategoryPlot) barChart.getPlot();
 		NumberAxis rangeAxis = (NumberAxis) plot.getRangeAxis();
 		TickUnitSource units = NumberAxis.createIntegerTickUnits();
 		rangeAxis.setStandardTickUnits(units);
+	}
+
+	private JFreeChart createPieChart(HashMap<String, Integer> counts, String labelText) throws IOException
+	{
+		DefaultPieDataset pieDataset = createPieDataset(counts);
 		
-		return barChart;
+		JFreeChart pieChart = ChartFactory.createPieChart
+		        ("Bulletin Counts by " + labelText,   // Title
+		         pieDataset,           // Dataset
+		         true,                 // Show legend
+		         true,					// tooltips
+		         new Locale(getLocalization().getCurrentLanguageCode())
+		        );
+		return pieChart;
+	}
+
+	private DefaultPieDataset createPieDataset(HashMap<String, Integer> counts)
+	{
+		DefaultPieDataset pieDataset = new DefaultPieDataset();
+		Vector<String> keys = new Vector<String>(counts.keySet());
+		Collections.sort(keys, new SaneCollator(getLocalization().getCurrentLanguageCode()));
+		for (String value : keys)
+		{
+			pieDataset.setValue(value, counts.get(value));
+		}
+		return pieDataset;
 	}
 
 	// FIXME: Enable or delete these not-yet-used methods
@@ -356,46 +430,5 @@ public class ActionMenuCharts extends UiMenuAction
 //		return chart;
 //	}
 //
-//	private JFreeChart create3DBarChart(HashMap<String, Integer> counts,
-//			String labelText) throws IOException
-//	{
-//		DefaultCategoryDataset categoryDataset = new DefaultCategoryDataset();
-//		for (String value : counts.keySet())
-//		{
-//			categoryDataset.addValue(counts.get(value), value, "");
-//		}
-//
-//		JFreeChart barChart = ChartFactory.createBarChart3D
-//		                     ("Bulletin Counts by " + labelText, // Title
-//		                      labelText,              // X-Axis label
-//		                      "Count",                 // Y-Axis label
-//		                      categoryDataset,         // Dataset
-//		                      PlotOrientation.VERTICAL,
-//		                      true,                     // Show legend
-//		                      true,		// tooltips?
-//		                      false		// ?????
-//		                     );
-//		return barChart;
-//	}
-//
-//	private JFreeChart createPieChart(HashMap<String, Integer> counts,
-//			String labelText) throws IOException
-//	{
-//		DefaultPieDataset pieDataset = new DefaultPieDataset();
-//		for (String value : counts.keySet())
-//		{
-//			pieDataset.setValue(value, counts.get(value));
-//		}
-//
-//		JFreeChart pieChart = ChartFactory.createPieChart
-//		        ("Bulletin Counts by " + labelText,   // Title
-//		         pieDataset,           // Dataset
-//		         true,                 // Show legend
-//		         true,					// tooltips
-//		         new Locale(getLocalization().getCurrentLanguageCode())
-//		        );
-//		return pieChart;
-//	}
-	
 	private final static String JPEG_EXTENSION = ".jpeg";
 }

@@ -42,6 +42,7 @@ import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.fields.UiPopUpFieldChooserEditor;
 import org.martus.common.bulletin.BulletinConstants;
+import org.martus.common.fieldspec.ChoiceItem;
 import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.fieldspec.MiniFieldSpec;
 import org.martus.common.fieldspec.PopUpTreeFieldSpec;
@@ -49,6 +50,7 @@ import org.martus.common.fieldspec.SearchFieldTreeModel;
 import org.martus.common.fieldspec.SearchableFieldChoiceItem;
 import org.martus.common.fieldspec.StandardFieldSpecs;
 import org.martus.swing.UiButton;
+import org.martus.swing.UiComboBox;
 import org.martus.swing.UiLabel;
 import org.martus.swing.UiTextField;
 import org.martus.swing.Utilities;
@@ -66,6 +68,10 @@ public class CreateChartDialog extends JDialog
 		
 		JPanel panel = new JPanel(new GridLayoutPlus(0, 2));
 		getContentPane().add(panel);
+		
+		chartTypeComponent = createChartTypeComponent();
+		Component[] typeRow = new Component[] {createLabel("ChartType"), chartTypeComponent};
+		Utilities.addComponentsRespectingOrientation(panel, typeRow);
 		
 		Component[] fieldRow = new Component[] {createLabel("ChartFieldToCount"), createFieldChooserButton()};
 		Utilities.addComponentsRespectingOrientation(panel, fieldRow);
@@ -87,6 +93,27 @@ public class CreateChartDialog extends JDialog
 		pack();
 	}
 	
+	private UiComboBox createChartTypeComponent()
+	{
+		ChoiceItem[] choices = new ChoiceItem[] {
+			createChartTypeChoiceItem(ChartAnswers.CHART_TYPE_BAR),
+			createChartTypeChoiceItem(ChartAnswers.CHART_TYPE_3DBAR),
+			createChartTypeChoiceItem(ChartAnswers.CHART_TYPE_PIE),
+		};
+		chartTypeComponent = new UiComboBox(choices);
+		return chartTypeComponent;
+	}
+
+	private ChoiceItem createChartTypeChoiceItem(String chartType)
+	{
+		return new ChoiceItem(chartType, getChartTypeLabel(chartType));
+	}
+
+	private String getChartTypeLabel(String chartType)
+	{
+		return getLocalization().getFieldLabel("ChartType" + chartType);
+	}
+
 	public boolean getResult()
 	{
 		return result;
@@ -163,11 +190,18 @@ public class CreateChartDialog extends JDialog
 	{
 		MiniFieldSpec fieldToCount = chooser.getSelectedMiniFieldSpec();
 		ChartAnswers answers = new ChartAnswers(fieldToCount, getLocalization());
+		answers.setChartType(getChartTypeCode());
 		answers.setSubtitle(subtitleComponent.getText());
 		
 		return answers;
 	}
 	
+	private String getChartTypeCode()
+	{
+		ChoiceItem selected = (ChoiceItem) chartTypeComponent.getSelectedItem();
+		return selected.getCode();
+	}
+
 	private Component createLabel(String fieldName)
 	{
 		return new UiLabel(getLabel(fieldName));
@@ -189,6 +223,7 @@ public class CreateChartDialog extends JDialog
 	}
 
 	private UiMainWindow mainWindow;
+	private UiComboBox chartTypeComponent;
 	private UiPopUpFieldChooserEditor chooser;
 	private JTextComponent subtitleComponent;
 	private UiButton ok;
