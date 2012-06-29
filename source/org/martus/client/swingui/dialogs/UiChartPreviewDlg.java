@@ -46,11 +46,17 @@ public class UiChartPreviewDlg extends UiPreviewDlg
 	
 	private JComponent createScrollablePreview(JFreeChart chart)
 	{
-		BufferedImage image = chart.createBufferedImage(800, 600);
-		ImageIcon imageIcon = new ImageIcon(image);
-		JLabel label = new JLabel(imageIcon);
+		JLabel label = createChartComponent(chart);
 		JComponent scrollablePreview = new UiScrollPane(label);
 		scrollablePreview.setBorder(new EmptyBorder(5,5,5,5));
 		return scrollablePreview;
+	}
+
+	public static JLabel createChartComponent(JFreeChart chart)
+	{
+		BufferedImage image = chart.createBufferedImage(800, 600);
+		ImageIcon imageIcon = new ImageIcon(image);
+		JLabel label = new JLabel(imageIcon);
+		return label;
 	}
 }

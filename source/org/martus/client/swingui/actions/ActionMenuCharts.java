@@ -25,13 +25,23 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.actions;
 
+import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.event.ActionEvent;
+import java.awt.print.PageFormat;
+import java.awt.print.Printable;
+import java.awt.print.PrinterException;
+import java.awt.print.PrinterJob;
 import java.io.File;
 import java.io.IOException;
 import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Vector;
+
+import javax.print.attribute.HashPrintRequestAttributeSet;
+import javax.swing.JComponent;
+import javax.swing.JLabel;
 
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartUtilities;
@@ -55,6 +65,7 @@ import org.martus.client.swingui.dialogs.UiChartPreviewDlg;
 import org.martus.client.swingui.dialogs.UiPushbuttonsDlg;
 import org.martus.common.MartusLogger;
 import org.martus.common.fieldspec.MiniFieldSpec;
+import org.martus.swing.PrintUtilities;
 import org.martus.swing.UiFileChooser;
 import org.martus.swing.Utilities;
 import org.martus.util.TokenReplacement;
@@ -163,8 +174,8 @@ public class ActionMenuCharts extends UiMenuAction
 			boolean didPrint = false;
 			if(sendToDisk)
 				didPrint = printToDisk(chart);
-//			else
-//				didPrint = printToPrinter(chart);
+			else
+				didPrint = printToPrinter(chart);
 				
 			if(didPrint)
 				mainWindow.notifyDlg("ChartCompleted");
@@ -241,6 +252,54 @@ public class ActionMenuCharts extends UiMenuAction
 		return destination;
 	}
 	
+	private boolean printToPrinter(JFreeChart chart) throws PrinterException
+	{
+		PrinterJob printJob = PrinterJob.getPrinterJob();
+		printJob.setPrintable(new PrintableChart(chart));
+		HashPrintRequestAttributeSet attributes = new HashPrintRequestAttributeSet();
+		if(!printJob.printDialog(attributes))
+			return false;
+		
+		printJob.print(attributes);
+		return true;
+	}
+	
+	class PrintableChart implements Printable
+	{
+		public PrintableChart(JFreeChart chartToWrap)
+		{
+			chart = chartToWrap;
+		}
+
+		@Override
+		public int print(Graphics graphics, PageFormat pageFormat, int pageIndex) throws PrinterException
+		{
+			if(pageIndex != 0)
+				return Printable.NO_SUCH_PAGE;
+			
+			JComponent viewer = createPrintableComponent();
+
+			// for faster printing, turn off double buffering
+			PrintUtilities.disableDoubleBuffering(viewer);
+			Graphics2D g2 = PrintUtilities.getTranslatedGraphics(graphics, pageFormat, 0, viewer);
+			viewer.paint(g2); // repaint the page for printing
+			PrintUtilities.enableDoubleBuffering(viewer);
+
+			return Printable.PAGE_EXISTS;
+		}
+		
+		private JComponent createPrintableComponent()
+		{
+			JLabel viewer = UiChartPreviewDlg.createChartComponent(chart);
+			ActionPrint.setReasonableSize(viewer);
+			return viewer;
+		}
+		
+
+		
+		private JFreeChart chart;
+	}
+
 	private JFreeChart createBarChart(HashMap<String, Integer> counts, String selectedFieldLabel) throws Exception
 	{
 		String chartTitle = getLocalization().getFieldLabel("ChartTitle");
