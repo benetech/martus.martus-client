@@ -31,6 +31,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.Box;
 import javax.swing.JDialog;
+import javax.swing.text.JTextComponent;
 
 import org.martus.client.bulletinstore.ClientBulletinStore;
 import org.martus.client.reports.ChartAnswers;
@@ -49,6 +50,7 @@ import org.martus.common.fieldspec.StandardFieldSpecs;
 import org.martus.swing.UiButton;
 import org.martus.swing.UiLabel;
 import org.martus.swing.UiParagraphPanel;
+import org.martus.swing.UiTextField;
 import org.martus.swing.Utilities;
 
 public class CreateChartDialog extends JDialog
@@ -64,6 +66,9 @@ public class CreateChartDialog extends JDialog
 		getContentPane().add(panel);
 		
 		panel.addComponents(createLabel("ChartFieldToCount"), createFieldChooserButton());
+		
+		subtitleComponent = new UiTextField(40);
+		panel.addComponents(createLabel("ChartSubtitle"), subtitleComponent);
 		
 		ok = new UiButton(getLocalization().getButtonLabel("ok"));
 		ok.addActionListener(new OkHandler());
@@ -154,7 +159,7 @@ public class CreateChartDialog extends JDialog
 	{
 		MiniFieldSpec fieldToCount = chooser.getSelectedMiniFieldSpec();
 		ChartAnswers answers = new ChartAnswers(fieldToCount, getLocalization());
-		answers.setSubtitle("User-entered subtitle here");
+		answers.setSubtitle(subtitleComponent.getText());
 		
 		return answers;
 	}
@@ -181,6 +186,7 @@ public class CreateChartDialog extends JDialog
 
 	private UiMainWindow mainWindow;
 	private UiPopUpFieldChooserEditor chooser;
+	private JTextComponent subtitleComponent;
 	private UiButton ok;
 	
 	private boolean result;
