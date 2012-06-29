@@ -59,10 +59,8 @@ import org.martus.client.core.SortableBulletinList;
 import org.martus.client.reports.ChartAnswers;
 import org.martus.client.search.SaneCollator;
 import org.martus.client.search.SearchTreeNode;
-import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.dialogs.UiChartPreviewDlg;
-import org.martus.client.swingui.dialogs.UiPushbuttonsDlg;
 import org.martus.common.MartusLogger;
 import org.martus.common.fieldspec.MiniFieldSpec;
 import org.martus.swing.PrintUtilities;
@@ -82,28 +80,29 @@ public class ActionMenuCharts extends UiMenuAction
 	{
 		try
 		{
-			MartusLocalization localization = mainWindow.getLocalization();
-			
-//			String runButtonLabel = localization.getButtonLabel("RunChart");
-			String createChartButtonLabel = localization.getButtonLabel("CreateChart");
-			String cancelButtonLabel = localization.getButtonLabel("cancel");
-			String[] buttonLabels = {/*runButtonLabel,*/ createChartButtonLabel, cancelButtonLabel, };
-			String title = mainWindow.getLocalization().getWindowTitle("RunOrCreateChart");
-			UiPushbuttonsDlg runOrCreate = new UiPushbuttonsDlg(mainWindow, title, buttonLabels);
-			runOrCreate.setVisible(true);
-			String pressed = runOrCreate.getPressedButtonLabel();
-			if(pressed == null || pressed.equals(cancelButtonLabel))
-				return;
-			
+			// Re-enable the following when we allow saving chart templates
+//			MartusLocalization localization = mainWindow.getLocalization();
+//			
+////			String runButtonLabel = localization.getButtonLabel("RunChart");
+//			String createChartButtonLabel = localization.getButtonLabel("CreateChart");
+//			String cancelButtonLabel = localization.getButtonLabel("cancel");
+//			String[] buttonLabels = {/*runButtonLabel,*/ createChartButtonLabel, cancelButtonLabel, };
+//			String title = mainWindow.getLocalization().getWindowTitle("RunOrCreateChart");
+//			UiPushbuttonsDlg runOrCreate = new UiPushbuttonsDlg(mainWindow, title, buttonLabels);
+//			runOrCreate.setVisible(true);
+//			String pressed = runOrCreate.getPressedButtonLabel();
+//			if(pressed == null || pressed.equals(cancelButtonLabel))
+//				return;
+//			
 			ChartAnswers answers = null;
-//			if(pressed.equals(runButtonLabel))
-//			{
-//				answers = chooseAndLoad();
-//			}
-//			if(pressed.equals(createChartButtonLabel))
-//			{
+////			if(pressed.equals(runButtonLabel))
+////			{
+////				answers = chooseAndLoad();
+////			}
+////			if(pressed.equals(createChartButtonLabel))
+////			{
 				answers = createAndSave();
-//			}
+////			}
 
 			if(answers == null)
 				return;
