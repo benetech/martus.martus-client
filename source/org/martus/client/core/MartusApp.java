@@ -118,8 +118,6 @@ import org.martus.util.StreamCopier;
 import org.martus.util.StreamableBase64;
 import org.martus.util.StreamableBase64.InvalidBase64Exception;
 import org.martus.util.UnicodeReader;
-import org.martus.util.UnicodeStringReader;
-import org.martus.util.UnicodeStringWriter;
 import org.martus.util.UnicodeWriter;
 import org.martus.util.inputstreamwithseek.ByteArrayInputStreamWithSeek;
 import org.martus.util.inputstreamwithseek.FileInputStreamWithSeek;
