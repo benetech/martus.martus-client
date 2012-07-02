@@ -47,6 +47,8 @@ import javax.swing.JLabel;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartUtilities;
 import org.jfree.chart.JFreeChart;
+import org.jfree.chart.axis.CategoryAxis;
+import org.jfree.chart.axis.CategoryLabelPositions;
 import org.jfree.chart.axis.NumberAxis;
 import org.jfree.chart.axis.TickUnitSource;
 import org.jfree.chart.plot.CategoryPlot;
@@ -376,6 +378,10 @@ public class ActionMenuCharts extends UiMenuAction
 		NumberAxis rangeAxis = (NumberAxis) plot.getRangeAxis();
 		TickUnitSource units = NumberAxis.createIntegerTickUnits();
 		rangeAxis.setStandardTickUnits(units);
+		
+		CategoryAxis domainAxis = plot.getDomainAxis();
+		CategoryLabelPositions newPositions = CategoryLabelPositions.createUpRotationLabelPositions(Math.PI / 2.0);
+		domainAxis.setCategoryLabelPositions(newPositions);
 	}
 
 	private JFreeChart createPieChart(HashMap<String, Integer> counts, String labelText) throws IOException
