@@ -61,6 +61,7 @@ import org.jfree.data.general.DefaultPieDataset;
 import org.martus.client.core.PartialBulletin;
 import org.martus.client.core.SortableBulletinList;
 import org.martus.client.reports.ChartAnswers;
+import org.martus.client.reports.MartusChartTheme;
 import org.martus.client.search.SaneCollator;
 import org.martus.client.search.SearchTreeNode;
 import org.martus.client.swingui.UiMainWindow;
@@ -189,7 +190,10 @@ public class ActionMenuCharts extends UiMenuAction
 			selectedFieldLabel = getLocalization().getFieldLabel(fieldToCount.getTag());
 		
 		JFreeChart chart = createRawChart(answers, counts, selectedFieldLabel);
-		chart.addSubtitle(new TextTitle(answers.getSubtitle()));
+		new MartusChartTheme().apply(chart);
+
+		TextTitle subtitle = new TextTitle(answers.getSubtitle());
+		chart.addSubtitle(subtitle);
 		
 		String today = getLocalization().formatDateTime(new Date().getTime());
 		String chartCreatedOnLabel = getLocalization().getFieldLabel("ChartCreatedOn");
