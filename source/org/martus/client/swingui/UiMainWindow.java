@@ -2678,6 +2678,8 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 					e.printStackTrace();
 				}
 				MartusLogger.logEndProcess("Save before timeout");
+				System.gc();
+				MartusLogger.log(Martus.getMemoryStatistics());
 
 				SwingUtilities.invokeAndWait(new ThreadedSignin());
 			} 
