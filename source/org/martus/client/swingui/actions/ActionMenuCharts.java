@@ -384,16 +384,16 @@ public class ActionMenuCharts extends UiMenuAction
 		domainAxis.setCategoryLabelPositions(newPositions);
 	}
 
-	private JFreeChart createPieChart(HashMap<String, Integer> counts, String labelText) throws IOException
+	private JFreeChart createPieChart(HashMap<String, Integer> counts, String selectedFieldLabel) throws Exception
 	{
 		DefaultPieDataset pieDataset = createPieDataset(counts);
 		
-		JFreeChart pieChart = ChartFactory.createPieChart
-		        ("Bulletin Counts by " + labelText,   // Title
-		         pieDataset,           // Dataset
-		         true,                 // Show legend
-		         true,					// tooltips
-		         new Locale(getLocalization().getCurrentLanguageCode())
+		JFreeChart pieChart = ChartFactory.createPieChart(
+		        getXAxisTitle(selectedFieldLabel),   // Title
+		        pieDataset,           // Dataset
+		        true,                 // Show legend
+		        true,					// tooltips
+		        new Locale(getLocalization().getCurrentLanguageCode())
 		        );
 		return pieChart;
 	}
