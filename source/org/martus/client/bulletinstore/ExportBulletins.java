@@ -60,7 +60,7 @@ public class ExportBulletins
 
 		String tag = "ExportComplete";
 		if(exporterThread.didUnrecoverableErrorOccur())
-			tag = "ErrorImportingBulletins";
+			tag = "ErrorExportingBulletins";
 		else if(numberOfMissingAttachment > 0)
 			tag = "ExportCompleteMissingAttachments";
 		mainWindow.notifyDlg(tag, getTokenReplacementImporter(bulletinsExported, bulletinsToExport.size(), numberOfMissingAttachment));
