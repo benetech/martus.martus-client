@@ -25,6 +25,7 @@ Boston, MA 02111-1307, USA.
 */
 package org.martus.client.swingui.actions;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.event.ActionEvent;
@@ -51,13 +52,18 @@ import org.jfree.chart.axis.CategoryAxis;
 import org.jfree.chart.axis.CategoryLabelPositions;
 import org.jfree.chart.axis.NumberAxis;
 import org.jfree.chart.axis.TickUnitSource;
+import org.jfree.chart.block.LineBorder;
 import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.title.DateTitle;
+import org.jfree.chart.title.LegendTitle;
 import org.jfree.chart.title.ShortTextTitle;
 import org.jfree.chart.title.TextTitle;
 import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.data.general.DefaultPieDataset;
+import org.jfree.ui.HorizontalAlignment;
+import org.jfree.ui.RectangleEdge;
+import org.jfree.ui.RectangleInsets;
 import org.martus.client.core.PartialBulletin;
 import org.martus.client.core.SortableBulletinList;
 import org.martus.client.reports.ChartAnswers;
@@ -195,11 +201,28 @@ public class ActionMenuCharts extends UiMenuAction
 		TextTitle subtitle = new TextTitle(answers.getSubtitle());
 		chart.addSubtitle(subtitle);
 		
+		chart.addSubtitle(new TextTitle(getLocalization().getFieldLabel("ChartSelectedBulletinsDisclaimer"), 
+				TextTitle.DEFAULT_FONT, TextTitle.DEFAULT_TEXT_PAINT, RectangleEdge.BOTTOM, 
+				HorizontalAlignment.RIGHT, TextTitle.DEFAULT_VERTICAL_ALIGNMENT, 
+				TextTitle.DEFAULT_PADDING));
+		chart.addSubtitle(createLegend(chart));
+		
 		String today = getLocalization().formatDateTime(new Date().getTime());
 		String chartCreatedOnLabel = getLocalization().getFieldLabel("ChartCreatedOn");
 		chartCreatedOnLabel = TokenReplacement.replaceToken(chartCreatedOnLabel, "#Date#", today);
 		chart.addSubtitle(new ShortTextTitle(chartCreatedOnLabel));
 		return chart;
+	}
+
+	private LegendTitle createLegend(JFreeChart chart)
+	{
+        LegendTitle legend = new LegendTitle(chart.getPlot());
+        legend.setMargin(new RectangleInsets(1.0, 1.0, 1.0, 1.0));
+        legend.setFrame(new LineBorder());
+        legend.setBackgroundPaint(Color.white);
+        legend.setPosition(RectangleEdge.BOTTOM);
+        legend.addChangeListener(chart);
+        return legend;
 	}
 
 	private JFreeChart createRawChart(ChartAnswers answers,
@@ -320,7 +343,7 @@ public class ActionMenuCharts extends UiMenuAction
 	{
 		DefaultCategoryDataset dataset = createBarChartDataset(counts);
 
-		boolean showLegend = true;
+		boolean showLegend = false;
 		boolean showTooltips = true;
 		boolean showUrls = false;
 		JFreeChart barChart = ChartFactory.createBarChart(
@@ -337,7 +360,7 @@ public class ActionMenuCharts extends UiMenuAction
 	{
 		DefaultCategoryDataset dataset = createBarChartDataset(counts);
 
-		boolean showLegend = true;
+		boolean showLegend = false;
 		boolean showTooltips = true;
 		boolean showUrls = false;
 		JFreeChart barChart = ChartFactory.createBarChart3D(
@@ -395,7 +418,7 @@ public class ActionMenuCharts extends UiMenuAction
 		JFreeChart pieChart = ChartFactory.createPieChart(
 		        getXAxisTitle(selectedFieldLabel),   // Title
 		        pieDataset,           // Dataset
-		        true,                 // Show legend
+		        false,                 // Show legend
 		        true,					// tooltips
 		        new Locale(getLocalization().getCurrentLanguageCode())
 		        );
