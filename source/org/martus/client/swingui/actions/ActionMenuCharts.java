@@ -35,10 +35,13 @@ import java.awt.print.PrinterException;
 import java.awt.print.PrinterJob;
 import java.io.File;
 import java.io.IOException;
+import java.text.AttributedString;
+import java.text.NumberFormat;
 import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map;
 import java.util.Vector;
 
 import javax.print.attribute.HashPrintRequestAttributeSet;
@@ -53,7 +56,10 @@ import org.jfree.chart.axis.CategoryLabelPositions;
 import org.jfree.chart.axis.NumberAxis;
 import org.jfree.chart.axis.TickUnitSource;
 import org.jfree.chart.block.LineBorder;
+import org.jfree.chart.labels.AbstractPieItemLabelGenerator;
+import org.jfree.chart.labels.PieSectionLabelGenerator;
 import org.jfree.chart.plot.CategoryPlot;
+import org.jfree.chart.plot.PiePlot;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.title.DateTitle;
 import org.jfree.chart.title.LegendTitle;
@@ -61,6 +67,7 @@ import org.jfree.chart.title.ShortTextTitle;
 import org.jfree.chart.title.TextTitle;
 import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.data.general.DefaultPieDataset;
+import org.jfree.data.general.PieDataset;
 import org.jfree.ui.HorizontalAlignment;
 import org.jfree.ui.RectangleEdge;
 import org.jfree.ui.RectangleInsets;
@@ -70,6 +77,7 @@ import org.martus.client.reports.ChartAnswers;
 import org.martus.client.reports.MartusChartTheme;
 import org.martus.client.search.SaneCollator;
 import org.martus.client.search.SearchTreeNode;
+import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.dialogs.UiChartPreviewDlg;
 import org.martus.common.MartusLogger;
@@ -184,6 +192,7 @@ public class ActionMenuCharts extends UiMenuAction
 		catch(Exception e)
 		{
 			MartusLogger.logException(e);
+			getMainWindow().notifyDlg("ChartUnknownError");
 		}
 	}
 
@@ -200,11 +209,6 @@ public class ActionMenuCharts extends UiMenuAction
 
 		TextTitle subtitle = new TextTitle(answers.getSubtitle());
 		chart.addSubtitle(subtitle);
-		
-		chart.addSubtitle(new TextTitle(getLocalization().getFieldLabel("ChartSelectedBulletinsDisclaimer"), 
-				TextTitle.DEFAULT_FONT, TextTitle.DEFAULT_TEXT_PAINT, RectangleEdge.BOTTOM, 
-				HorizontalAlignment.RIGHT, TextTitle.DEFAULT_VERTICAL_ALIGNMENT, 
-				TextTitle.DEFAULT_PADDING));
 		chart.addSubtitle(createLegend(chart));
 		
 		String today = getLocalization().formatDateTime(new Date().getTime());
@@ -347,7 +351,7 @@ public class ActionMenuCharts extends UiMenuAction
 		boolean showTooltips = true;
 		boolean showUrls = false;
 		JFreeChart barChart = ChartFactory.createBarChart(
-			getXAxisTitle(selectedFieldLabel), selectedFieldLabel, getYAxisTitle(), 
+			getChartTitle(selectedFieldLabel), selectedFieldLabel, getYAxisTitle(), 
 			dataset, PlotOrientation.VERTICAL,
 			showLegend, showTooltips, showUrls);
 		
@@ -364,20 +368,13 @@ public class ActionMenuCharts extends UiMenuAction
 		boolean showTooltips = true;
 		boolean showUrls = false;
 		JFreeChart barChart = ChartFactory.createBarChart3D(
-			getXAxisTitle(selectedFieldLabel), selectedFieldLabel, getYAxisTitle(), 
+			getChartTitle(selectedFieldLabel), selectedFieldLabel, getYAxisTitle(), 
 			dataset, PlotOrientation.VERTICAL,
 			showLegend, showTooltips, showUrls);
 		
 		configureBarChartPlot(barChart);
 		
 		return barChart;
-	}
-
-	private String getXAxisTitle(String selectedFieldLabel)	throws TokenInvalidException
-	{
-		String chartTitle = getLocalization().getFieldLabel("ChartTitle");
-		chartTitle = TokenReplacement.replaceToken(chartTitle, "#SelectedField#", selectedFieldLabel);
-		return chartTitle;
 	}
 
 	private String getYAxisTitle()
@@ -409,6 +406,11 @@ public class ActionMenuCharts extends UiMenuAction
 		CategoryAxis domainAxis = plot.getDomainAxis();
 		CategoryLabelPositions newPositions = CategoryLabelPositions.createUpRotationLabelPositions(Math.PI / 2.0);
 		domainAxis.setCategoryLabelPositions(newPositions);
+
+		barChart.addSubtitle(new TextTitle(getLocalization().getFieldLabel("ChartSelectedBulletinsDisclaimerBar"), 
+				TextTitle.DEFAULT_FONT, TextTitle.DEFAULT_TEXT_PAINT, RectangleEdge.BOTTOM, 
+				TextTitle.DEFAULT_HORIZONTAL_ALIGNMENT, TextTitle.DEFAULT_VERTICAL_ALIGNMENT, 
+				TextTitle.DEFAULT_PADDING));
 	}
 
 	private JFreeChart createPieChart(HashMap<String, Integer> counts, String selectedFieldLabel) throws Exception
@@ -416,13 +418,71 @@ public class ActionMenuCharts extends UiMenuAction
 		DefaultPieDataset pieDataset = createPieDataset(counts);
 		
 		JFreeChart pieChart = ChartFactory.createPieChart(
-		        getXAxisTitle(selectedFieldLabel),   // Title
+		        getChartTitle(selectedFieldLabel),   // Title
 		        pieDataset,           // Dataset
 		        false,                 // Show legend
 		        true,					// tooltips
 		        new Locale(getLocalization().getCurrentLanguageCode())
 		        );
+		
+		pieChart.addSubtitle(new TextTitle(getLocalization().getFieldLabel("ChartSelectedBulletinsDisclaimerPie"), 
+				TextTitle.DEFAULT_FONT, TextTitle.DEFAULT_TEXT_PAINT, RectangleEdge.BOTTOM, 
+				TextTitle.DEFAULT_HORIZONTAL_ALIGNMENT, TextTitle.DEFAULT_VERTICAL_ALIGNMENT, 
+				TextTitle.DEFAULT_PADDING));
+
+		PiePlot piePlot = (PiePlot) pieChart.getPlot();
+		piePlot.setLabelGenerator(new MartusPieSectionLabelGenerator(getLocalization()));
 		return pieChart;
+	}
+	
+	public static class MartusPieSectionLabelGenerator extends AbstractPieItemLabelGenerator implements PieSectionLabelGenerator
+	{
+		public MartusPieSectionLabelGenerator(MartusLocalization localizationToUse)
+		{
+			super(getFormat(localizationToUse), NumberFormat.getNumberInstance(), NumberFormat.getPercentInstance());
+		}
+
+		public static String getFormat(MartusLocalization localization)
+		{
+			String template = localization.getFieldLabel("ChartPieSliceLabel");
+			Map tokenReplacement = new HashMap();
+			tokenReplacement.put("#DataValue#", "{0}");
+			tokenReplacement.put("#Count#", "{1}");
+			tokenReplacement.put("#Percent#", "{2}");
+			try
+			{
+				String result = TokenReplacement.replaceTokens(template, tokenReplacement);
+				return result;
+			} 
+			catch (TokenInvalidException e)
+			{
+				MartusLogger.logException(e);
+				throw new RuntimeException(e);
+			}
+			
+		}
+		
+		@Override
+		public String generateSectionLabel(PieDataset dataset, Comparable key)
+		{
+			return super.generateSectionLabel(dataset, key);
+		}
+
+		@Override
+		public AttributedString generateAttributedSectionLabel(
+				PieDataset dataset, Comparable key)
+		{
+			// NOTE: Not required; safe to return null
+			return null;
+		}
+		
+	}
+
+	private String getChartTitle(String selectedFieldLabel) throws TokenInvalidException
+	{
+		String title = getLocalization().getFieldLabel("ChartTitle");
+		title = TokenReplacement.replaceToken(title, "#SelectedField#", selectedFieldLabel);
+		return title;
 	}
 
 	private DefaultPieDataset createPieDataset(HashMap<String, Integer> counts)
