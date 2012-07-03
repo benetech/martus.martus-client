@@ -38,17 +38,16 @@ import org.martus.client.bulletinstore.ClientBulletinStore;
 import org.martus.client.reports.ChartAnswers;
 import org.martus.client.search.FieldChooserSpecBuilder;
 import org.martus.client.search.SearchFieldTreeNode;
+import org.martus.client.search.SortFieldChooserSpecBuilder;
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.fields.UiPopUpFieldChooserEditor;
-import org.martus.common.bulletin.BulletinConstants;
 import org.martus.common.fieldspec.ChoiceItem;
 import org.martus.common.fieldspec.FieldSpec;
 import org.martus.common.fieldspec.MiniFieldSpec;
 import org.martus.common.fieldspec.PopUpTreeFieldSpec;
 import org.martus.common.fieldspec.SearchFieldTreeModel;
 import org.martus.common.fieldspec.SearchableFieldChoiceItem;
-import org.martus.common.fieldspec.StandardFieldSpecs;
 import org.martus.swing.UiButton;
 import org.martus.swing.UiComboBox;
 import org.martus.swing.UiLabel;
@@ -82,6 +81,7 @@ public class CreateChartDialog extends JDialog
 		
 		ok = new UiButton(getLocalization().getButtonLabel("ok"));
 		ok.addActionListener(new OkHandler());
+		ok.setEnabled(false);
 
 		UiButton cancel = new UiButton(getLocalization().getButtonLabel("cancel"));
 		cancel.addActionListener(new CancelHandler());
@@ -122,17 +122,36 @@ public class CreateChartDialog extends JDialog
 	private Component createFieldChooserButton()
 	{
 		chooser = new UiPopUpFieldChooserEditor(getMainWindow());
-		FieldChooserSpecBuilder specBuilder = new FieldChooserSpecBuilder(getLocalization());
+		FieldChooserSpecBuilder specBuilder = new SortFieldChooserSpecBuilder(getLocalization());
 		PopUpTreeFieldSpec treeSpec = specBuilder.createSpec(getStore());
 		removeGridFields(treeSpec);
 		chooser.setSpec(treeSpec);
-
-		FieldSpec dateEnteredSpec = StandardFieldSpecs.findStandardFieldSpec(BulletinConstants.TAGENTRYDATE);
-		SearchableFieldChoiceItem initialChoice = new SearchableFieldChoiceItem(dateEnteredSpec);
-		String initialCode = initialChoice.getCode();
-		chooser.setText(initialCode);
+		chooser.setText("");
+		
+		chooser.addActionListener(new FieldChooserActionHandler());
 
 		return chooser.getComponent();
+	}
+	
+	class FieldChooserActionHandler implements ActionListener
+	{
+		@Override
+		public void actionPerformed(ActionEvent e)
+		{
+			boolean isFieldSelected = isFieldSelected();
+			setOkEnabled(isFieldSelected);
+		}
+
+	}
+	
+	public boolean isFieldSelected()
+	{
+		return chooser.getText().length() > 0;
+	}
+
+	public void setOkEnabled(boolean isFieldSelected)
+	{
+		ok.setEnabled(isFieldSelected);
 	}
 	
 	class OkHandler implements ActionListener
@@ -189,12 +208,17 @@ public class CreateChartDialog extends JDialog
 
 	public ChartAnswers getAnswers()
 	{
-		MiniFieldSpec fieldToCount = chooser.getSelectedMiniFieldSpec();
+		MiniFieldSpec fieldToCount = getCurrentSelectedFieldToCount();
 		ChartAnswers answers = new ChartAnswers(fieldToCount, getLocalization());
 		answers.setChartType(getChartTypeCode());
 		answers.setSubtitle(subtitleComponent.getText());
 		
 		return answers;
+	}
+
+	private MiniFieldSpec getCurrentSelectedFieldToCount()
+	{
+		return chooser.getSelectedMiniFieldSpec();
 	}
 	
 	private String getChartTypeCode()
