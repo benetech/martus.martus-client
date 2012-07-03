@@ -624,7 +624,7 @@ public class EnglishStrings
 "field:ChartCreatedOn=Chart produced #Date#",
 "field:ChartSeriesTitle=Martus Bulletin Counts",
 "field:ChartYAxisTitle=Martus Bulletin Count",
-"field:ChartPieSliceLabel=#Count# bulletins = #Percent# % of Martus bulletins",
+"field:ChartPieSliceLabel=#Count# bulletins = #Percent# of Martus bulletins",
 "field:ChartSelectedBulletinsDisclaimerBar=Note: Chart shows number of Martus bulletins matching search criteria.",
 "field:ChartSelectedBulletinsDisclaimerPie=Note: Chart shows % of Martus bulletins matching search criteria.",
 "field:DefaultPrintChartToDiskFileName=chart.jpeg",
