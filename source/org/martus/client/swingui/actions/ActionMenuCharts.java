@@ -68,7 +68,6 @@ import org.jfree.chart.title.TextTitle;
 import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.data.general.DefaultPieDataset;
 import org.jfree.data.general.PieDataset;
-import org.jfree.ui.HorizontalAlignment;
 import org.jfree.ui.RectangleEdge;
 import org.jfree.ui.RectangleInsets;
 import org.martus.client.core.PartialBulletin;
@@ -382,8 +381,7 @@ public class ActionMenuCharts extends UiMenuAction
 		return getLocalization().getFieldLabel("ChartYAxisTitle");
 	}
 
-	private DefaultCategoryDataset createBarChartDataset(
-			HashMap<String, Integer> counts)
+	private DefaultCategoryDataset createBarChartDataset(HashMap<String, Integer> counts)
 	{
 		String seriesTitle = getLocalization().getFieldLabel("ChartSeriesTitle");
 		DefaultCategoryDataset dataset = new DefaultCategoryDataset();
