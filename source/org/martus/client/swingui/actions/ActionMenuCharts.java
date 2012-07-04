@@ -70,7 +70,6 @@ import org.jfree.data.general.DefaultPieDataset;
 import org.jfree.data.general.PieDataset;
 import org.jfree.ui.RectangleEdge;
 import org.jfree.ui.RectangleInsets;
-import org.martus.client.core.PartialBulletin;
 import org.martus.client.core.SortableBulletinList;
 import org.martus.client.reports.ChartAnswers;
 import org.martus.client.reports.MartusChartTheme;
@@ -80,7 +79,10 @@ import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.dialogs.UiChartPreviewDlg;
 import org.martus.common.MartusLogger;
+import org.martus.common.bulletin.Bulletin;
+import org.martus.common.field.MartusField;
 import org.martus.common.fieldspec.MiniFieldSpec;
+import org.martus.common.packet.UniversalId;
 import org.martus.swing.PrintUtilities;
 import org.martus.swing.UiFileChooser;
 import org.martus.swing.Utilities;
@@ -245,10 +247,12 @@ public class ActionMenuCharts extends UiMenuAction
 	{
 		HashMap<String, Integer> counts = new HashMap<String, Integer>();
 		
-		PartialBulletin[] partialBulletins = sortableList.getUnsortedPartialBulletins();
-		for (PartialBulletin partialBulletin : partialBulletins)
+		UniversalId[] uids = sortableList.getUniversalIds();
+		for (UniversalId uid : uids)
 		{
-			String data = partialBulletin.getData(selectedSpec.getTag());
+			Bulletin b = getStore().getBulletinRevision(uid);
+			MartusField field = b.getField(selectedSpec);
+			String data = field.getData();
 			String value = selectedSpec.getType().convertStoredToSearchable(data, getLocalization());
 			Integer oldCount = counts.get(value);
 			if(oldCount == null)
