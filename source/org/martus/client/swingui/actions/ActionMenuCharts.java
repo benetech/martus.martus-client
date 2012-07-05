@@ -37,6 +37,7 @@ import java.io.File;
 import java.io.IOException;
 import java.text.AttributedString;
 import java.text.NumberFormat;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
@@ -70,6 +71,7 @@ import org.jfree.data.general.DefaultPieDataset;
 import org.jfree.data.general.PieDataset;
 import org.jfree.ui.RectangleEdge;
 import org.jfree.ui.RectangleInsets;
+import org.martus.client.core.SafeReadableBulletin;
 import org.martus.client.core.SortableBulletinList;
 import org.martus.client.reports.ChartAnswers;
 import org.martus.client.reports.MartusChartTheme;
@@ -81,6 +83,7 @@ import org.martus.client.swingui.dialogs.UiChartPreviewDlg;
 import org.martus.common.MartusLogger;
 import org.martus.common.bulletin.Bulletin;
 import org.martus.common.field.MartusField;
+import org.martus.common.fieldspec.DropDownFieldSpec;
 import org.martus.common.fieldspec.MiniFieldSpec;
 import org.martus.common.packet.UniversalId;
 import org.martus.swing.PrintUtilities;
@@ -251,9 +254,34 @@ public class ActionMenuCharts extends UiMenuAction
 		for (UniversalId uid : uids)
 		{
 			Bulletin b = getStore().getBulletinRevision(uid);
-			MartusField field = b.getField(selectedSpec);
-			String data = field.getData();
-			String value = selectedSpec.getType().convertStoredToSearchable(data, getLocalization());
+			SafeReadableBulletin srb = new SafeReadableBulletin(b, getLocalization());
+			MartusField selectedField = srb.getPossiblyNestedField(selectedSpec);
+			MartusField topLevelField = srb.getPossiblyNestedField(selectedSpec.getTopLevelTag());
+			MartusField fieldToCount = selectedField;
+			
+			int relevantLevel = 0;
+			if(selectedField.getType().isDropdown())
+			{
+				DropDownFieldSpec dropDownFieldSpec = (DropDownFieldSpec)selectedField.getFieldSpec();
+				if(dropDownFieldSpec.hasReusableCodes())
+				{
+					String thisLevelCode = dropDownFieldSpec.getReusableChoicesCodes()[0];
+					String[] allLevelCodes = selectedSpec.getReusableChoicesCodes();
+					relevantLevel = new Vector(Arrays.asList(allLevelCodes)).indexOf(thisLevelCode);
+					
+					fieldToCount = topLevelField;
+				}
+			}
+			
+			String[] data = fieldToCount.getHumanReadableData(getLocalization());
+			String value = "";
+			for (int level = 0; level < data.length && level <= relevantLevel; ++level)
+			{
+				String dataForLevel = data[level];
+				if(level > 0)
+					value += " / ";
+				value += dataForLevel.trim();
+			}
 			Integer oldCount = counts.get(value);
 			if(oldCount == null)
 				oldCount = 0;
