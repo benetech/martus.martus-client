@@ -432,6 +432,7 @@ public class EnglishStrings
 "menu:printBulletin=Print Bulletin(s)",
 "menu:printButton=Print",
 "menu:Reports=Reports",
+"menu:Charts=Charts",
 "menu:ExportBulletins=Export Bulletins",
 "menu:ImportBulletins=Import Bulletins",
 "menu:ExportFolder=Export Folder",
