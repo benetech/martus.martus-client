@@ -275,13 +275,19 @@ public class ActionMenuCharts extends UiMenuAction
 			
 			String[] data = fieldToCount.getHumanReadableData(getLocalization());
 			String value = "";
+			boolean hasAnyData = false;
 			for (int level = 0; level < data.length && level <= relevantLevel; ++level)
 			{
-				String dataForLevel = data[level];
+				String dataForLevel = data[level].trim();
+				if(dataForLevel.length() > 0)
+					hasAnyData = true;
 				if(level > 0)
 					value += " / ";
-				value += dataForLevel.trim();
+				value += dataForLevel;
 			}
+			if(!hasAnyData)
+				value = "";
+			
 			Integer oldCount = counts.get(value);
 			if(oldCount == null)
 				oldCount = 0;
