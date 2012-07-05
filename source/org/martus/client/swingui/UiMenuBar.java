@@ -100,11 +100,7 @@ public class UiMenuBar extends JMenuBar
 		file.add(new ActionMenuExportFolder(mainWindow));
 		file.add(new ActionMenuExportBulletins(mainWindow));
 		
-		// NOTE: Disabled temporarily for pre-4.1 builds for CCJ
-		if(UiMainWindow.isAlphaTester)
-		{
-			file.add(new ActionMenuImportBulletins(mainWindow));
-		}
+		file.add(new ActionMenuImportBulletins(mainWindow));
 		if(UiMainWindow.isAlphaTester)
 		{
 			file.add(new ActionMenuExportMba(mainWindow));

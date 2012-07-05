@@ -90,8 +90,11 @@ public class UiExportBulletinsDlg extends JDialog implements ActionListener
 		upperStuff.addSpace();
 		upperStuff.addCentered(tocMsgAreaScrollPane);
 		upperStuff.addSpace();
-		upperStuff.add(includePrivate);
-		upperStuff.addSpace();
+		if(UiMainWindow.isAlphaTester)
+		{
+			upperStuff.add(includePrivate);
+			upperStuff.addSpace();
+		}
 		upperStuff.add(includeAttachments);
 		upperStuff.addSpace();
 		upperStuff.add(includeAllVersions);
