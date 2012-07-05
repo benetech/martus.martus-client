@@ -95,10 +95,7 @@ public class UiMenuBar extends JMenuBar
 		file.add(new ActionMenuCreateNewBulletin(mainWindow));
 		file.add(actionMenuPrint);
 		file.add(new ActionMenuReports(mainWindow));
-		if(UiMainWindow.isAlphaTester)
-		{
-			file.add(new ActionMenuCharts(mainWindow));
-		}
+		file.add(new ActionMenuCharts(mainWindow));
 		file.addSeparator();
 		file.add(new ActionMenuExportFolder(mainWindow));
 		file.add(new ActionMenuExportBulletins(mainWindow));
