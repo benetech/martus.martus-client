@@ -619,6 +619,7 @@ public class EnglishStrings
 "field:ChartTypeBar=Bar Chart",
 "field:ChartType3DBar=3D Bar Chart",
 "field:ChartTypePie=Pie Chart",
+"field:ChartItemLabelBlank=(blank)",
 "field:ChartFieldToCount=Field to count",
 "field:ChartSubtitle=Subtitle (optional)",
 "field:ChartTitle=Martus Bulletins by #SelectedField#",

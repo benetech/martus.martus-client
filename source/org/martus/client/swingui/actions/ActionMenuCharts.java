@@ -421,7 +421,10 @@ public class ActionMenuCharts extends UiMenuAction
 		Collections.sort(keys, new SaneCollator(getLocalization().getCurrentLanguageCode()));
 		for (String value : keys)
 		{
-			dataset.addValue(counts.get(value), seriesTitle, value);
+			Integer count = counts.get(value);
+			if(value.length() == 0)
+				value = getLocalization().getFieldLabel("ChartItemLabelBlank");
+			dataset.addValue(count, seriesTitle, value);
 		}
 		return dataset;
 	}
@@ -522,7 +525,10 @@ public class ActionMenuCharts extends UiMenuAction
 		Collections.sort(keys, new SaneCollator(getLocalization().getCurrentLanguageCode()));
 		for (String value : keys)
 		{
-			pieDataset.setValue(value, counts.get(value));
+			Integer count = counts.get(value);
+			if(value.length() == 0)
+				value = getLocalization().getFieldLabel("ChartItemLabelBlank");
+			pieDataset.setValue(value, count);
 		}
 		return pieDataset;
 	}
