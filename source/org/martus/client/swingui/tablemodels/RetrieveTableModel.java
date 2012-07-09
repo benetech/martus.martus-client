@@ -38,6 +38,7 @@ import org.martus.client.core.MartusApp;
 import org.martus.client.swingui.RetrieveSummariesProgressMeter;
 import org.martus.clientside.ClientSideNetworkGateway;
 import org.martus.common.BulletinSummary;
+import org.martus.common.MartusLogger;
 import org.martus.common.MiniLocalization;
 import org.martus.common.MartusUtilities.ServerErrorException;
 import org.martus.common.bulletin.Bulletin;
@@ -393,6 +394,7 @@ abstract public class RetrieveTableModel extends UiTableModel
 
 	public void populateMissingSummaryDataFromServer(RetrieveTableModel tableModelToUse)
 	{
+		MartusLogger.logBeginProcess("Retrieve missing summary data from server");
 		RetrieveThread worker = new RetrieveThread(tableModelToUse);
 		worker.start();
 
@@ -400,6 +402,8 @@ abstract public class RetrieveTableModel extends UiTableModel
 			waitForThreadToTerminate(worker);
 		else
 			progressHandler.started();
+
+		MartusLogger.logEndProcess("Retrieve missing summary data from server");
 	}
 
 	public void waitForThreadToTerminate(RetrieveThread worker)
