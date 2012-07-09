@@ -77,9 +77,6 @@ public abstract class UiStringField extends UiField
 	@Override
 	public void updateSpellChecker(String bulletinLanguageCode)
 	{
-		if(!UiMainWindow.isAlphaTester)
-			return;
-		
 		boolean isImplicitlyEnglish = bulletinLanguageCode.equals("?");
 		boolean isExplicitlyEnglish = bulletinLanguageCode.equals(MartusLocalization.ENGLISH);
 		boolean shouldSpellCheck = isImplicitlyEnglish || isExplicitlyEnglish;
