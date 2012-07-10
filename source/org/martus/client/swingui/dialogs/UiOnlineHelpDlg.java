@@ -126,7 +126,7 @@ public class UiOnlineHelpDlg extends JDialog
 		Dimension msgAreaSize = msgAreaScrollPane.getPreferredSize();
 		msgAreaSize.setSize(msgAreaSize.getWidth(), close.getPreferredSize().getHeight());
 		hBox.setPreferredSize(msgAreaSize);
-		Component buttons[] = {/*searchField, searchButton,*/ Box.createHorizontalGlue(), close};  
+		Component buttons[] = {searchField, searchButton, Box.createHorizontalGlue(), close};  
 		Utilities.addComponentsRespectingOrientation(hBox, buttons);
 		helpPanel.add(hBox);
 		
@@ -136,6 +136,7 @@ public class UiOnlineHelpDlg extends JDialog
 
 		Utilities.centerDlg(this);
 		setResizable(true);
+		setVisible(true);
 	}
 
 	public String getFileContents(InputStream fileStream)
