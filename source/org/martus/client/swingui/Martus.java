@@ -60,7 +60,7 @@ public class Martus
 		System.out.println(UiConstants.programName);
 		System.out.println(UiConstants.versionLabel + " " + VersionBuildDate.getVersionBuildDate());
 		System.out.println("Java version: " + System.getProperty("java.version"));
-		System.out.println(getMemoryStatistics());
+		System.out.println(MartusLogger.getMemoryStatistics());
 
 		try
 		{
@@ -159,21 +159,6 @@ public class Martus
         }
     }
 
-	public static String getMemoryStatistics()
-	{
-		Runtime runtime = Runtime.getRuntime();
-		String memoryStatistics = "\nMemory Statistics:\n" +
-						"  Available in heap: " + megs(runtime.freeMemory()) + "\n" + 
-						"  Current heap size: " + megs(runtime.totalMemory()) + "\n" +
-						"  Maximum heap size: " + megs(runtime.maxMemory());
-		return memoryStatistics;
-	}
-	
-	private static String megs(long bytes)
-	{
-		return "" + bytes/1024L/1024L + " megs";
-	}
-	
 	private static int findOption(Vector options, String optionText)
 	{
 		for(int i = 0; i < options.size(); ++i)
