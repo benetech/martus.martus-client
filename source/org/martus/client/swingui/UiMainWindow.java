@@ -1570,6 +1570,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 		{
 			if(helpStream != null)
 				helpStream.close();
+			
 			if(helpStreamTOC != null)
 				helpStreamTOC.close();
 		} 
@@ -2475,7 +2476,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 			notifyDlg("ErrorDuringExit");
 		}
 
-		MartusLogger.log(Martus.getMemoryStatistics());
+		MartusLogger.logMemoryStatistics();
 
 		exitWithoutSavingState();
 	}
@@ -2669,7 +2670,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 				if(!hasTimedOut())
 					return;
 				
-				MartusLogger.log(Martus.getMemoryStatistics());
+				MartusLogger.log(MartusLogger.getMemoryStatistics());
 				MartusLogger.logBeginProcess("Save before timeout");
 				try
 				{
@@ -2681,7 +2682,7 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 				}
 				MartusLogger.logEndProcess("Save before timeout");
 				System.gc();
-				MartusLogger.log(Martus.getMemoryStatistics());
+				MartusLogger.log(MartusLogger.getMemoryStatistics());
 
 				SwingUtilities.invokeAndWait(new ThreadedSignin());
 			} 
