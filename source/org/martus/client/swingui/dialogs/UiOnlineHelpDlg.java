@@ -84,8 +84,7 @@ public class UiOnlineHelpDlg extends JDialog
 		fileContents = getFileContents(fileStream);
 		if(fileContents == null)
 		{
-			dispose();
-			return;
+			fileContents = "";
 		}
 		lowercaseMessage = fileContents.toLowerCase();
 
@@ -136,7 +135,6 @@ public class UiOnlineHelpDlg extends JDialog
 
 		Utilities.centerDlg(this);
 		setResizable(true);
-		setVisible(true);
 	}
 
 	public String getFileContents(InputStream fileStream)

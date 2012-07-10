@@ -1565,7 +1565,9 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 			helpStreamTOC = app.getHelpTOC(MtfAwareLocalization.ENGLISH);
 		}
 
-		new UiOnlineHelpDlg(this, "Help", helpStream, "OnlineHelpMessage", helpStreamTOC, "OnlineHelpTOCMessage");
+		UiOnlineHelpDlg dlg = new UiOnlineHelpDlg(this, "Help", helpStream, "OnlineHelpMessage", helpStreamTOC, "OnlineHelpTOCMessage");
+		dlg.setVisible(true);
+		
 		try 
 		{
 			if(helpStream != null)
