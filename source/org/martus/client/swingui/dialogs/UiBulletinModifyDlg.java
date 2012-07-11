@@ -303,7 +303,7 @@ public class UiBulletinModifyDlg extends JFrame implements ActionListener, Windo
 		indicateEncrypted(newState);
 	}
 
-	public void languageChanged(String newLanguage) 
+	public void bulletinLanguageHasChanged(String newLanguage) 
 	{
 		//TODO add this back when its working correctly
 /*		if(observer.getLocalization().doesLanguageRequirePadding(newLanguage))

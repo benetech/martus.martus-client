@@ -210,7 +210,7 @@ public class UiChoiceEditor extends UiChoice implements ActionListener
 	public void actionPerformed(ActionEvent e) 
 	{
 		if(observer != null)
-			observer.languageChanged(getText());
+			observer.bulletinLanguageHasChanged(getText());
 		updateEditabilityOfComboBoxes(e.getSource());
 	}
 

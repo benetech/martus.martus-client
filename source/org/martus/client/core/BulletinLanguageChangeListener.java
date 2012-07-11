@@ -30,6 +30,6 @@ import java.util.EventListener;
 
 public interface BulletinLanguageChangeListener extends EventListener
 {
-	void languageChanged(String newLanguageCode);
+	void bulletinLanguageHasChanged(String newLanguageCode);
 
 }

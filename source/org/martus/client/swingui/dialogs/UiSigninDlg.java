@@ -57,7 +57,7 @@ public class UiSigninDlg extends UiBasicSigninDlg implements BulletinLanguageCha
 	}
 
 	// LanguageChangeListener Interface
-	public void languageChanged(String languageCode)
+	public void bulletinLanguageHasChanged(String languageCode)
 	{
 		UiMainWindow.displayDefaultUnofficialTranslationMessageIfNecessary(owner, localization, languageCode);
 		UiMainWindow.displayIncompatibleMtfVersionWarningMessageIfNecessary(owner, localization, languageCode);

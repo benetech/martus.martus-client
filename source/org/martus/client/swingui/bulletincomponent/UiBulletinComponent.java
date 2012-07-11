@@ -69,7 +69,7 @@ abstract public class UiBulletinComponent extends JPanel implements Scrollable, 
 	abstract public void stateChanged(ChangeEvent event);
 
 	// LanguageChangeListener interface
-	public void languageChanged(String newBulletinLanguageCode)
+	public void bulletinLanguageHasChanged(String newBulletinLanguageCode)
 	{
 		publicSection.updateSpellChecker(newBulletinLanguageCode);
 		privateSection.updateSpellChecker(newBulletinLanguageCode);
@@ -201,7 +201,7 @@ abstract public class UiBulletinComponent extends JPanel implements Scrollable, 
 		}
 
 		MartusField languageField = bulletinToShow.getField(BulletinConstants.TAGLANGUAGE);
-		languageChanged(languageField.getData());
+		bulletinLanguageHasChanged(languageField.getData());
 		repaint();
 	}
 

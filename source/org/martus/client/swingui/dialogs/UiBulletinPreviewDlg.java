@@ -106,7 +106,7 @@ public class UiBulletinPreviewDlg extends JDialog implements ActionListener, Bul
 		dispose();
 	}
 
-	public void languageChanged(String newLanguageCode) 
+	public void bulletinLanguageHasChanged(String newLanguageCode) 
 	{
 		//read-only nothing to do
 	}
