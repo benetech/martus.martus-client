@@ -46,7 +46,7 @@ import javax.swing.JViewport;
 import org.martus.client.bulletinstore.BulletinFolder;
 import org.martus.client.bulletinstore.ClientBulletinStore;
 import org.martus.client.core.EncryptionChangeListener;
-import org.martus.client.core.LanguageChangeListener;
+import org.martus.client.core.BulletinLanguageChangeListener;
 import org.martus.client.core.MartusApp;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.WindowObscurer;
@@ -64,7 +64,7 @@ import org.martus.swing.UiButton;
 import org.martus.swing.UiScrollPane;
 import org.martus.swing.Utilities;
 
-public class UiBulletinModifyDlg extends JFrame implements ActionListener, WindowListener, EncryptionChangeListener, LanguageChangeListener
+public class UiBulletinModifyDlg extends JFrame implements ActionListener, WindowListener, EncryptionChangeListener, BulletinLanguageChangeListener
 {
 	public UiBulletinModifyDlg(Bulletin b, UiMainWindow observerToUse) throws IOException
 	{

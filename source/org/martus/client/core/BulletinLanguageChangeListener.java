@@ -28,7 +28,7 @@ package org.martus.client.core;
 
 import java.util.EventListener;
 
-public interface LanguageChangeListener extends EventListener
+public interface BulletinLanguageChangeListener extends EventListener
 {
 	void languageChanged(String newLanguageCode);
 

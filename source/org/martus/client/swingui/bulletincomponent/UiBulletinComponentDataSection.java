@@ -32,7 +32,7 @@ import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.JComponent;
 
-import org.martus.client.core.LanguageChangeListener;
+import org.martus.client.core.BulletinLanguageChangeListener;
 import org.martus.client.core.MartusApp;
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
@@ -77,7 +77,7 @@ abstract public class UiBulletinComponentDataSection extends UiBulletinComponent
 		fieldCreator = creatorToUse;
 	}
 
-	public void createLabelsAndFields(FieldSpecCollection specs, LanguageChangeListener listener)
+	public void createLabelsAndFields(FieldSpecCollection specs, BulletinLanguageChangeListener listener)
 	{
 		context.setSectionFieldSpecs(specs);
 		languageChangeListener = listener;
@@ -131,7 +131,7 @@ abstract public class UiBulletinComponentDataSection extends UiBulletinComponent
 		}
 	}
 
-	UiField createField(FieldSpec spec, LanguageChangeListener listener)
+	UiField createField(FieldSpec spec, BulletinLanguageChangeListener listener)
 	{
 		UiField field = fieldCreator.createField(spec);
 		field.initalize();
@@ -357,7 +357,7 @@ abstract public class UiBulletinComponentDataSection extends UiBulletinComponent
 	abstract public void clearAttachments();
 	abstract public void validateAttachments() throws DataInvalidException;
 
-	LanguageChangeListener languageChangeListener;
+	BulletinLanguageChangeListener languageChangeListener;
 	String sectionName;
 	private UiField[] fields;
 	UiFieldCreator fieldCreator;

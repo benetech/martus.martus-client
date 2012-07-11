@@ -29,7 +29,7 @@ package org.martus.client.swingui.dialogs;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 
-import org.martus.client.core.LanguageChangeListener;
+import org.martus.client.core.BulletinLanguageChangeListener;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.fields.UiChoiceEditor;
 import org.martus.clientside.CurrentUiState;
@@ -37,7 +37,7 @@ import org.martus.clientside.UiBasicSigninDlg;
 import org.martus.clientside.UiLocalization;
 import org.martus.swing.UiLabel;
 
-public class UiSigninDlg extends UiBasicSigninDlg implements LanguageChangeListener
+public class UiSigninDlg extends UiBasicSigninDlg implements BulletinLanguageChangeListener
 {
 	public UiSigninDlg(UiLocalization localizationToUse, CurrentUiState uiStateToUse, JFrame owner, int mode, String username, char[] password)
 	{

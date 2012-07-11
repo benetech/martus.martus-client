@@ -39,7 +39,7 @@ import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.JViewport;
 
-import org.martus.client.core.LanguageChangeListener;
+import org.martus.client.core.BulletinLanguageChangeListener;
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.bulletincomponent.UiBulletinComponentViewSection;
@@ -51,7 +51,7 @@ import org.martus.swing.UiButton;
 import org.martus.swing.UiScrollPane;
 import org.martus.swing.Utilities;
 
-public class UiBulletinPreviewDlg extends JDialog implements ActionListener, LanguageChangeListener
+public class UiBulletinPreviewDlg extends JDialog implements ActionListener, BulletinLanguageChangeListener
 {
 
 	public UiBulletinPreviewDlg(UiMainWindow owner, MartusLocalization localizationToUse, String windowTitleTag)

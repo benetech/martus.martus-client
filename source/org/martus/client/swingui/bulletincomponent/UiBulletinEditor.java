@@ -31,7 +31,7 @@ import java.io.IOException;
 import javax.swing.event.ChangeEvent;
 
 import org.martus.client.core.EncryptionChangeListener;
-import org.martus.client.core.LanguageChangeListener;
+import org.martus.client.core.BulletinLanguageChangeListener;
 import org.martus.client.swingui.HeadQuartersSelectionListener;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.common.HQKeys;
@@ -175,7 +175,7 @@ public class UiBulletinEditor extends UiBulletinComponent implements HeadQuarter
 		encryptionListener = listener;
 	}
 	
-	public void setLanguageChangeListener(LanguageChangeListener listener)
+	public void setLanguageChangeListener(BulletinLanguageChangeListener listener)
 	{
 		languageListener = listener;
 	}
@@ -228,5 +228,5 @@ public class UiBulletinEditor extends UiBulletinComponent implements HeadQuarter
 
 	boolean wasEncrypted;
 	EncryptionChangeListener encryptionListener;
-	LanguageChangeListener languageListener;
+	BulletinLanguageChangeListener languageListener;
 }

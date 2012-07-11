@@ -37,7 +37,7 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 import org.martus.client.core.EncryptionChangeListener;
-import org.martus.client.core.LanguageChangeListener;
+import org.martus.client.core.BulletinLanguageChangeListener;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.client.swingui.fields.UiField;
 import org.martus.common.FieldSpecCollection;
@@ -53,10 +53,10 @@ import org.martus.util.language.LanguageOptions;
 import com.jhlabs.awt.Alignment;
 import com.jhlabs.awt.GridLayoutPlus;
 
-abstract public class UiBulletinComponent extends JPanel implements Scrollable, ChangeListener, LanguageChangeListener 
+abstract public class UiBulletinComponent extends JPanel implements Scrollable, ChangeListener, BulletinLanguageChangeListener 
 {
 	abstract public void setEncryptionChangeListener(EncryptionChangeListener listener);
-	abstract public void setLanguageChangeListener(LanguageChangeListener listener);
+	abstract public void setLanguageChangeListener(BulletinLanguageChangeListener listener);
 	abstract public UiBulletinComponentDataSection createBulletinComponentDataSection(String sectionName);
 	abstract public void copyDataToBulletin(Bulletin bulletin) throws
 			IOException, MartusCrypto.EncryptionException;
