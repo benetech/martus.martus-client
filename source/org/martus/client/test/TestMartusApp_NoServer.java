@@ -34,7 +34,6 @@ import java.io.FileFilter;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.RandomAccessFile;
 import java.util.Arrays;
 import java.util.Vector;
@@ -44,11 +43,11 @@ import org.martus.client.bulletinstore.ClientBulletinStore;
 import org.martus.client.bulletinstore.ClientBulletinStore.AddOlderVersionToFolderFailedException;
 import org.martus.client.core.ConfigInfo;
 import org.martus.client.core.MartusApp;
-import org.martus.client.core.RetrieveCommand;
-import org.martus.client.core.SortableBulletinList;
 import org.martus.client.core.MartusApp.AccountAlreadyExistsException;
 import org.martus.client.core.MartusApp.CannotCreateAccountFileException;
 import org.martus.client.core.MartusApp.SaveConfigInfoException;
+import org.martus.client.core.RetrieveCommand;
+import org.martus.client.core.SortableBulletinList;
 import org.martus.client.search.SearchParser;
 import org.martus.client.search.SearchTreeNode;
 import org.martus.client.swingui.EnglishStrings;
@@ -83,6 +82,7 @@ import org.martus.swing.Utilities;
 import org.martus.util.DirectoryUtils;
 import org.martus.util.TestCaseEnhanced;
 import org.martus.util.UnicodeReader;
+import org.martus.util.UnicodeStringReader;
 import org.martus.util.UnicodeWriter;
 import org.martus.util.language.LanguageOptions;
 
@@ -289,9 +289,9 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		TRACE_BEGIN("testGetHelp");
 		File translationDirectory = appWithAccount.martusDataRootDirectory;
 		String languageCode = "xx";
-		InputStream helpMain = appWithAccount.getHelpMain(languageCode);
+		String helpMain = appWithAccount.getHelpMain(languageCode);
 		assertNull("Language pack doesn't exists help should return null", helpMain);
-		InputStream helpTOC = appWithAccount.getHelpTOC(languageCode);
+		String helpTOC = appWithAccount.getHelpTOC(languageCode);
 		assertNull("Language pack doesn't exists help toc should return null", helpTOC);
 
 		File mlpkTranslation = new File(translationDirectory, UiLocalization.getMlpkFilename(languageCode));
@@ -306,17 +306,15 @@ public class TestMartusApp_NoServer extends TestCaseEnhanced
 		copyResourceFileToLocalFile(mlpkTranslation, "Martus-xx.mlp");
 		mlpkTranslation.deleteOnExit();
 		helpMain = appWithAccount.getHelpMain(languageCode);
-		UnicodeReader reader = new UnicodeReader(helpMain);
-		reader.read();//unused char.
-		String line1InFile = reader.readLine(); 
-		reader.close();
+		UnicodeStringReader helpReader = new UnicodeStringReader(helpMain);
+		helpReader.skipBOM();
+		String line1InFile = helpReader.readLine();
 		String helpTextInFile = "Temp Help File for testing";
 		
 		helpTOC = appWithAccount.getHelpTOC(languageCode);
-		reader = new UnicodeReader(helpTOC);
-		reader.read();//unused char.
-		String line1InTOCFile = reader.readLine();
-		reader.close();
+		UnicodeStringReader tocReader = new UnicodeStringReader(helpTOC);
+		tocReader.skipBOM();
+		String line1InTOCFile = tocReader.readLine();
 		String helpTextInTOCFile = "chapter 1";
 
 		mlpkTranslation.delete();

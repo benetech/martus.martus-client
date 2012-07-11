@@ -655,12 +655,12 @@ public class MartusApp
 		return  getCurrentAccountDirectoryName() + "MartusUploadLog.txt";
 	}
 
-	public InputStream getHelpMain(String currentLanguageCode)
+	public String getHelpMain(String currentLanguageCode)
 	{
 		return getHelp(currentLanguageCode, getHelpFilename(currentLanguageCode));
 	}
 	
-	public InputStream getHelpTOC(String currentLanguageCode)
+	public String getHelpTOC(String currentLanguageCode)
 	{
 		return getHelp(currentLanguageCode, getHelpTOCFilename(currentLanguageCode));
 	}
@@ -691,28 +691,43 @@ public class MartusApp
 		
 	}
 	
-	private InputStream getHelp(String currentLanguageCode, String helpFileName)
+	private String getHelp(String currentLanguageCode, String helpFileName)
 	{
 		if(!localization.isOfficialTranslation(currentLanguageCode))
 			return null;
 
 		try 
 		{
-			File mlpFile = localization.getMlpkFile(currentLanguageCode);
-			if(mlpFile.exists() && 
-			   JarVerifier.verify(mlpFile,false) == JarVerifier.JAR_VERIFIED_TRUE)
-			{
-				ZipFile zip = new ZipFile(mlpFile);
-				ZipEntry zipEntry = zip.getEntry(helpFileName);
-				ZipEntryInputStreamWithSeekThatClosesZipFile stream = new ZipEntryInputStreamWithSeekThatClosesZipFile(zip, zipEntry);
-				return stream;
-			}
+			InputStream in = openTranslatedHelp(currentLanguageCode, helpFileName);
+			if(in == null)
+				in = EnglishStrings.class.getResourceAsStream(helpFileName);
+			
+			UnicodeReader reader = new UnicodeReader(in);
+			String text = reader.readAll();
+			reader.close();
+			in.close();
+			
+			return text;
 		} 
 		catch (Exception e) 
 		{
 			e.printStackTrace();
+			return null;
 		}
-		return EnglishStrings.class.getResourceAsStream(helpFileName);
+	}
+
+	private InputStream openTranslatedHelp(String currentLanguageCode, String helpFileName) throws Exception
+	{
+		File mlpFile = localization.getMlpkFile(currentLanguageCode);
+		if(mlpFile.exists() && 
+		   JarVerifier.verify(mlpFile,false) == JarVerifier.JAR_VERIFIED_TRUE)
+		{
+			ZipFile zip = new ZipFile(mlpFile);
+			ZipEntry zipEntry = zip.getEntry(helpFileName);
+			return new ZipEntryInputStreamWithSeekThatClosesZipFile(zip, zipEntry);
+		}
+		
+		return null;
 	}
 	
 	public String getHelpFilename(String languageCode)

@@ -62,15 +62,18 @@ import org.martus.swing.UiWrappedTextArea;
 import org.martus.swing.Utilities;
 import org.martus.util.UnicodeReader;
 import org.martus.util.UnicodeReader.BOMNotFoundException;
+import org.martus.util.UnicodeStringReader;
 
 
 
 public class UiOnlineHelpDlg extends JDialog
 {
-	public UiOnlineHelpDlg(UiMainWindow owner, String baseTag, InputStream fileStream, String tagMessage, InputStream fileStreamToc, String tagTOCMessage)
+	public UiOnlineHelpDlg(UiMainWindow owner, String baseTag, String help, String tagMessage, String tableOfContents, String tagTOCMessage)
 	{
 		super(owner, "", true);
 		mainWindow = owner;
+		fileContents = help;
+		
 		previouslyFoundIndex = -1;
 		tocList = null;
 		UiLocalization localization = owner.getLocalization();
@@ -81,11 +84,6 @@ public class UiOnlineHelpDlg extends JDialog
 
 		helpPanel.setLayout(new BoxLayout(helpPanel, BoxLayout.Y_AXIS));
 
-		fileContents = getFileContents(fileStream);
-		if(fileContents == null)
-		{
-			fileContents = "";
-		}
 		lowercaseMessage = fileContents.toLowerCase();
 
 		msgArea = new UiWrappedTextArea(fileContents);
@@ -97,7 +95,7 @@ public class UiOnlineHelpDlg extends JDialog
 		msgAreaScrollPane = new UiScrollPane(msgArea, UiScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
 				UiScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 
-		Vector messageTOC = getFileVectorContents(fileStreamToc);
+		Vector messageTOC = getVectorContents(tableOfContents);
 		if(messageTOC != null)
 		{
 			tocList = new UiList(messageTOC);
@@ -160,17 +158,12 @@ public class UiOnlineHelpDlg extends JDialog
 		}
 	}
 
-	public Vector getFileVectorContents(InputStream fileStream)
+	public Vector getVectorContents(String originalContents)
 	{
 		Vector message = new Vector();
-		if(fileStream == null)
-		{
-			System.out.println("UiOnlineHelpDlg: getFileVectorContents null stream");
-			return null;
-		}
 		try
 		{
-			UnicodeReader reader = new UnicodeReader(fileStream);
+			UnicodeReader reader = new UnicodeStringReader(originalContents);
 			reader.skipBOM();
 			while(true)
 			{
