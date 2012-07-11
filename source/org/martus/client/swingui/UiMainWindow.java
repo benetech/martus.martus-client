@@ -2059,12 +2059,10 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 
 	private Vector displaySummariesDialog(RetrieveTableModel model, String dlgTitleTag, String summariesProgressTag, UiServerSummariesDlg summariesDlg) throws ServerErrorException
 	{
-		MartusLogger.logBeginProcess("Initializing Retrieve dialog");
 		RetrieveSummariesProgressMeter progressHandler = new RetrieveSummariesProgressMeter();
 		setWaitingCursor();	
 		boolean retrievedSummaries = retrieveSummaries(model, dlgTitleTag, progressHandler);
 		resetCursor();
-		MartusLogger.logEndProcess("Initializing Retrieve dialog");
 
 		if(!retrievedSummaries)
 			return null;
