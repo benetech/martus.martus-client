@@ -148,7 +148,6 @@ import org.martus.swing.UiPopupMenu;
 import org.martus.swing.Utilities;
 import org.martus.swing.Utilities.Delay;
 import org.martus.util.FileVerifier;
-import org.martus.util.MultiCalendar;
 import org.martus.util.StreamableBase64.InvalidBase64Exception;
 import org.martus.util.TokenReplacement;
 import org.martus.util.TokenReplacement.TokenInvalidException;
@@ -184,31 +183,31 @@ public class UiMainWindow extends JFrame implements ClipboardOwner
 			throw new RuntimeException(e);
 		}
 		
-		int secondsToWait = 0;
 		cursorStack = new Stack();
 		UiModelessBusyDlg splashScreen = new UiModelessBusyDlg(new ImageIcon(UiAboutDlg.class.getResource("MartusLogo.gif")));
 
 		// Pop up a nag screen if this is an unofficial private release
-		try
-		{
-			MultiCalendar today = new MultiCalendar();
-			MultiCalendar startTimer = MultiCalendar.createFromGregorianYearMonthDay(2012, 6, 20);
-			secondsToWait = 2 * MultiCalendar.daysBetween(startTimer, today);
-			
-			new UiNotifyDlg(this, "Martus - Test Version", 
-					new String[] {"THIS IS AN UNOFFICIAL TEST VERSION OF MARTUS",
-					"\nAs more time passes, it will take longer and longer to start up.\n\n" +
-					"Please contact info@martus.org with any questions"}, 
-					new String[] {"OK"});
-			
-			MartusLogger.log("Test version sleeping " + secondsToWait + " seconds...");
-			Thread.sleep(secondsToWait * 1000L);
-			MartusLogger.log("Awake");
-		} 
-		catch (InterruptedException e)
-		{
-			MartusLogger.logException(e);
-		}
+//		int secondsToWait = 0;
+//		try
+//		{
+//			MultiCalendar today = new MultiCalendar();
+//			MultiCalendar startTimer = MultiCalendar.createFromGregorianYearMonthDay(2012, 6, 20);
+//			secondsToWait = 2 * MultiCalendar.daysBetween(startTimer, today);
+//			
+//			new UiNotifyDlg(this, "Martus - Test Version", 
+//					new String[] {"THIS IS AN UNOFFICIAL TEST VERSION OF MARTUS",
+//					"\nAs more time passes, it will take longer and longer to start up.\n\n" +
+//					"Please contact info@martus.org with any questions"}, 
+//					new String[] {"OK"});
+//			
+//			MartusLogger.log("Test version sleeping " + secondsToWait + " seconds...");
+//			Thread.sleep(secondsToWait * 1000L);
+//			MartusLogger.log("Awake");
+//		} 
+//		catch (InterruptedException e)
+//		{
+//			MartusLogger.logException(e);
+//		}
 		
 		setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 		setCurrentActiveFrame(this);
