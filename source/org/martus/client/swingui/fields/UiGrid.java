@@ -189,6 +189,7 @@ abstract public class UiGrid extends UiField
 				FieldSpec spec = model.getFieldSpecForCell(row, column);
 
 				UiField cellField = fieldCreator.createField(spec);
+				cellField.updateSpellChecker(getContext().getCurrentBulletinLanguage());
 				
 				for(int component = 0; component < cellField.getFocusableComponents().length; ++component)
 					cellField.getFocusableComponents()[component].addFocusListener(new ExpandedGridFieldFocusHandler());

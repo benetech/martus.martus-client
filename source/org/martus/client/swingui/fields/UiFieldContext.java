@@ -127,7 +127,18 @@ public class UiFieldContext
 		return fieldSpecs.getAllReusableChoiceLists();
 	}
 
+	public void setCurrentBulletinLanguage(String bulletinLanguageCode)
+	{
+		currentBulletinLanguage = bulletinLanguageCode;
+	}
+	
+	public String getCurrentBulletinLanguage()
+	{
+		return currentBulletinLanguage;
+	}
+
 	private FieldSpecCollection fieldSpecs;
 	private HashMap gridFieldsByTag;
 	private HashMap fieldsByTag;
+	private String currentBulletinLanguage;
 }

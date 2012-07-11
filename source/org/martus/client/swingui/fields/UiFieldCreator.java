@@ -53,6 +53,7 @@ abstract public class UiFieldCreator
 	abstract public UiField createMessageField(FieldSpec spec);
 
 	abstract public UiField createChoiceField(DropDownFieldSpec spec);
+	abstract public UiField createLanguageField(DropDownFieldSpec spec);
 	abstract public UiField createDateField(FieldSpec spec);
 	abstract public UiField createFlexiDateField(DateRangeFieldSpec spec);
 	abstract public UiField createUnknownField(FieldSpec spec);
@@ -103,7 +104,7 @@ abstract public class UiFieldCreator
 		if(type.isDateRange())
 			return createFlexiDateField((DateRangeFieldSpec) fieldSpec);
 		if(type.isLanguageDropdown())
-			return createLanguageField();
+			return createLanguageField(fieldSpec);
 		if(type.isDropdown())
 			return createChoiceField((DropDownFieldSpec)fieldSpec);
 		if(type.isString())
@@ -118,13 +119,14 @@ abstract public class UiFieldCreator
 		return createUnknownField(fieldSpec);
 	}
 
-	private UiField createLanguageField()
+	private UiField createLanguageField(FieldSpec spec)
 	{
 		UiField field;
 		ChoiceItem[] languageNameChoices = getLocalization().getLanguageNameChoices();
 		Arrays.sort(languageNameChoices, new ChoiceItem.ChoiceItemSorterByLabel());
-		DropDownFieldSpec spec = new DropDownFieldSpec(languageNameChoices);
-		field = createChoiceField(spec);
+		DropDownFieldSpec dropdownSpec = new DropDownFieldSpec(languageNameChoices);
+		dropdownSpec.setTag(spec.getTag());
+		field = createLanguageField(dropdownSpec);
 		return field;
 	}
 	

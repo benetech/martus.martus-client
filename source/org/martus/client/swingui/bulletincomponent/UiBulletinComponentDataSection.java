@@ -344,6 +344,7 @@ abstract public class UiBulletinComponentDataSection extends UiBulletinComponent
 
 	public void updateSpellChecker(String bulletinLanguageCode)
 	{
+		context.setCurrentBulletinLanguage(bulletinLanguageCode);
 		for(int i = 0; i < fields.length; ++i)
 		{
 			UiField field = fields[i];

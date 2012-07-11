@@ -67,7 +67,7 @@ abstract public class UiField
 	{
 	}
 	
-	public void setLanguageListener(BulletinLanguageChangeListener listener)
+	public void setBulletinLanguageListener(BulletinLanguageChangeListener listener)
 	{
 	}
 	

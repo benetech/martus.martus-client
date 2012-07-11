@@ -82,7 +82,7 @@ public class UiBulletinComponentEditorSection extends UiBulletinComponentDataSec
 		UiField newField = super.createField(spec, listener);
 		
 		if(spec.getType().isLanguageDropdown())
-			newField.setLanguageListener(listener);
+			newField.setBulletinLanguageListener(listener);
 		return newField;
 	}
 
