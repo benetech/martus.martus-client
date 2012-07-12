@@ -39,7 +39,7 @@ public abstract class UiNormalTextField extends UiStringField
 	}
 	
 	@Override
-	protected JTextComponent getTextComponent()
+	public JTextComponent getTextComponent()
 	{
 		return widget;
 	}

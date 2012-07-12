@@ -40,7 +40,7 @@ abstract public class UiSingleLineTextField extends UiStringField
 	}
 	
 	@Override
-	protected JTextComponent getTextComponent()
+	public JTextComponent getTextComponent()
 	{
 		return widget;
 	}
