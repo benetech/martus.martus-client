@@ -116,6 +116,8 @@ public class UiGridEditor extends UiEditableGrid
 		
 		if(expandedFieldRows != null)
 			updateSpellCheckerForExpandedFields(bulletinLanguageCode);
+		else
+			getTable().updateSpellChecker(bulletinLanguageCode);
 	}
 
 	private void updateSpellCheckerForExpandedFields(String bulletinLanguageCode)

@@ -189,7 +189,6 @@ abstract public class UiGrid extends UiField
 				FieldSpec spec = model.getFieldSpecForCell(row, column);
 
 				UiField cellField = fieldCreator.createField(spec);
-				cellField.updateSpellChecker(getContext().getCurrentBulletinLanguage());
 				
 				for(int component = 0; component < cellField.getFocusableComponents().length; ++component)
 					cellField.getFocusableComponents()[component].addFocusListener(new ExpandedGridFieldFocusHandler());
@@ -227,6 +226,8 @@ abstract public class UiGrid extends UiField
 		Box box = Box.createHorizontalBox();
 		Utilities.addComponentsRespectingOrientation(box, new Component[] {showCollapsedButton, Box.createHorizontalGlue()});
 		widget.add(box, BorderLayout.BEFORE_FIRST_LINE);
+		
+		updateSpellChecker(getContext().getCurrentBulletinLanguage());
 	}
 
 	private void insertBlankLineOfTwoColumns(JPanel fakeTable)
@@ -273,6 +274,8 @@ abstract public class UiGrid extends UiField
 		UiScrollPane tableScroller = new UiScrollPane(table);
 		tableScroller.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
 		widget.add(tableScroller, BorderLayout.CENTER);
+		
+		updateSpellChecker(getContext().getCurrentBulletinLanguage());
 	}
 	
 	void copyExpandedFieldsToTableModel()

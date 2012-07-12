@@ -42,6 +42,7 @@ public class UiFieldContext
 		fieldSpecs = new FieldSpecCollection();
 		gridFieldsByTag = new HashMap();
 		fieldsByTag = new HashMap();
+		currentBulletinLanguage = "";
 	}
 
 	public void setSectionFieldSpecs(FieldSpecCollection specs)

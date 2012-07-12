@@ -219,6 +219,10 @@ public abstract class GridTable extends UiTableWithCellEditingProtection
 		return context;
 	}
 
+	public void updateSpellChecker(String bulletinLanguageCode)
+	{
+	}
+
 	UiDialogLauncher dlgLauncher;
 	protected UiFieldContext context;
 }
