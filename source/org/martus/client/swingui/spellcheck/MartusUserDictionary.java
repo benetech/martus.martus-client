@@ -48,7 +48,6 @@ public class MartusUserDictionary implements UserDictionaryProvider
 		
 		extras = new HashSet<String>();
 		extras.add("Martus");
-		extras.add("Miradi");
 		extras.add("Benetech");
 		
 		loadDictionary();
