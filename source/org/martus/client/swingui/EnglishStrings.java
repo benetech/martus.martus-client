@@ -235,6 +235,8 @@ public class EnglishStrings
 "wintitle:notifyErrorImportingBulletinsTooNew=Import Bulletin(s)",
 "wintitle:notifyErrorSavingDictionary=Error",
 "wintitle:notifyErrorLoadingDictionary=Error",
+"wintitle:notifyErrorUpdatingDictionary=Error",
+"wintitle:ConfigureSpellCheck=Configure Spell Checking",
 
 "wintitle:notifyRetrieveCompleted=Retrieve Complete",
 "field:notifyRetrieveCompletedcause=Retrieving bulletins from the server is complete",
@@ -466,6 +468,7 @@ public class EnglishStrings
 "menu:Preferences=Preferences",
 "menu:contactinfo=Contact Information",
 "menu:DefaultDetailsFieldContent=Default Details Field Content",
+"menu:ConfigureSpellCheck=Spell Checking",
 "menu:changeUserNamePassword=Change User Name or Password",
 "menu:tools=Tools",
 "menu:QuickEraseDeleteMyDataOnly=Delete My Data",
@@ -923,6 +926,8 @@ public class EnglishStrings
 "field:notifyErrorImportingBulletinsTooNewcause=This XML file was created by a newer version of Martus and cannot be read by this version.  You must upgrade to the newer version of Martus to import this file.",
 "field:notifyErrorSavingDictionarycause=Unknown error saving user dictionary",
 "field:notifyErrorLoadingDictionarycause=Unknown error loading user dictionary for spell checking",
+"field:notifyErrorUpdatingDictionarycause=Unable to update the dictionary. Be sure the word list is in the correct format.",
+"field:SpellCheckUserDictionaryInstructions=The following words have been added to the user dictionary. \nYou can delete or edit them here, or you can add more words. \nEach word must be on a line by itself.",
 
 "field:IncompatibleMtfVersion=The version of this translation is not compatible with this version of Martus.  It is recommended that you do not continue to use this translation version and go to (http://www.martus.org/downloads) for the appropriate version.",
 "field:IncompatibleMtfVersionTranslation=#MtfLanguage# Translation Version: #MtfVersionNumber#",

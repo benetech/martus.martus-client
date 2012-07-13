@@ -38,6 +38,7 @@ import org.martus.client.swingui.actions.ActionMenuBackupMyKeyPair;
 import org.martus.client.swingui.actions.ActionMenuChangeUserNamePassword;
 import org.martus.client.swingui.actions.ActionMenuCharts;
 import org.martus.client.swingui.actions.ActionMenuConfigureHQs;
+import org.martus.client.swingui.actions.ActionMenuConfigureSpellCheck;
 import org.martus.client.swingui.actions.ActionMenuContactInfo;
 import org.martus.client.swingui.actions.ActionMenuCopyBulletins;
 import org.martus.client.swingui.actions.ActionMenuCreateNewBulletin;
@@ -162,6 +163,7 @@ public class UiMenuBar extends JMenuBar
 		options.add(new ActionMenuPreferences(mainWindow));
 		options.add(new ActionMenuContactInfo(mainWindow));
 		options.add(new ActionMenuChangeUserNamePassword(mainWindow));
+		options.add(new ActionMenuConfigureSpellCheck(mainWindow));
 		options.addSeparator();
 		options.add(new ActionMenuDefaultDetailsFieldContent(mainWindow));
 		options.add(new ActionMenuCustomFields(mainWindow));

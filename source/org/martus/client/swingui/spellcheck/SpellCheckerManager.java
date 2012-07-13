@@ -28,19 +28,25 @@ package org.martus.client.swingui.spellcheck;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Iterator;
+import java.util.Locale;
+import java.util.Vector;
 
 import org.martus.client.swingui.MartusLocalization;
 import org.martus.client.swingui.UiMainWindow;
 import org.martus.common.MartusLogger;
-
+import org.martus.common.MiniLocalization;
 
 import com.inet.jortho.SpellChecker;
 import com.inet.jortho.SpellCheckerOptions;
+import com.inet.jortho.UserDictionaryProvider;
 
 public class SpellCheckerManager
 {
 	public static void initializeSpellChecker(UiMainWindow mainWindowToUse) throws MalformedURLException
 	{
+		mainWindow = mainWindowToUse;
+		
 		SpellCheckerOptions options = SpellChecker.getOptions();
 		options.setCaseSensitive(true);
 		options.setIgnoreAllCapsWords(true);
@@ -48,11 +54,53 @@ public class SpellCheckerManager
 		options.setIgnoreWordsWithNumbers(true);
 		options.setSuggestionsLimitMenu(15);
 		
+		userDictionaryProvider = new MartusUserDictionary(mainWindow);
+		updateUserDictionaryProvider();
+
+		registerOfficialDictionary(mainWindow);
+	}
+
+	private static void registerOfficialDictionary(UiMainWindow mainWindowToUse)
+	{
 		String english = MartusLocalization.ENGLISH;
 		URL dictionaryFolderURL = mainWindowToUse.getApp().getUrlOfDirectoryContainingDictionaries(english);
 		MartusLogger.log("SpellCheckerManager: Looking for dictionary: " + dictionaryFolderURL);
 		SpellChecker.registerDictionaries(dictionaryFolderURL, english, english);
-		SpellChecker.setUserDictionaryProvider(new MartusUserDictionary(mainWindowToUse));
+	}
+
+	public static void setUserWords(String wordList)
+	{
+		getUserDictionary().setUserWords(wordList);
+		updateUserDictionaryProvider();
+		registerOfficialDictionary(mainWindow);
 	}
 	
+	public static Vector<String> getUserDictionaryWords()
+	{
+		Vector<String> wordList = new Vector<String>();
+		
+		Iterator<String> iter = getUserDictionary().getWords(new Locale(MiniLocalization.ENGLISH));
+		while(iter != null && iter.hasNext())
+		{
+			String word = iter.next().trim();
+			if(word.length() == 0)
+				continue;
+			wordList.add(word);
+		}
+		
+		return wordList;
+	}
+
+	private static void updateUserDictionaryProvider()
+	{
+		SpellChecker.setUserDictionaryProvider(userDictionaryProvider);
+	}
+	
+	private static UserDictionaryProvider getUserDictionary()
+	{
+		return userDictionaryProvider;
+	}
+	
+	private static UiMainWindow mainWindow;
+	private static MartusUserDictionary userDictionaryProvider;
 }
