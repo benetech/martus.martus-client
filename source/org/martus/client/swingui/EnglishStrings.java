@@ -26,6 +26,7 @@ Boston, MA 02111-1307, USA.
 
 package org.martus.client.swingui;
 
+
 import org.martus.common.bulletin.Bulletin;
 
 public class EnglishStrings
@@ -615,6 +616,7 @@ public class EnglishStrings
 "button:RunChart=Display an existing chart",
 "button:CreateChart=Create a new chart template",
 "wintitle:CreateChart=Charts",
+"field:ChartPrivateFieldsNotice=Please note that any Martus bulletin data in charts will not be encrypted, \nand anyone who gets a copy of the chart output will be able to read all the data. \nUse caution when selecting a private field.",
 "field:ChartType=Type of Chart",
 "field:ChartTypeBar=Bar Chart",
 "field:ChartType3DBar=3D Bar Chart",
